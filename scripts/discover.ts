@@ -12,7 +12,7 @@
 //
 // usage: node scripts/discover.ts [--days 3]
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { dataPath, readJson, writeJson, key, fetchText, fetchJson, today, daysAgo, githubHeaders } from './lib/util.ts';
@@ -78,7 +78,16 @@ const KNOWN_ORGS =
   /openai|anthropic|google|deepmind|meta|facebook|microsoft|nvidia|apple|amazon|alibaba|qwen|deepseek|moonshot|zhipu|z-ai|thudm|tencent|bytedance|salesforce|scale|epoch|metr|vals|lmarena|andon|aisi|allenai|ai2|huggingface|stanford|berkeley|princeton|mit|cmu|harvard|oxford|cambridge|tsinghua|peking|ucl|eth/i;
 
 function names(text: string): string[] {
-  return [...new Set((text.match(NAME) ?? []).filter((n) => !BARE.test(n) && n.length >= 5 && /[A-Z]/.test(n)))];
+  // the keyword must end the word ("HackBench", "SWE-bench"), so "Example" and "Evaluating" do not count
+  const tail = /(Bench|BENCH|bench|Eval|EVAL|Evals|Arena|Gym|Exam|Leaderboard)(?![a-z])/;
+  return [...new Set((text.match(NAME) ?? []).filter((n) => !BARE.test(n) && tail.test(n) && n.length >= 5 && /[A-Z]/.test(n)))];
+}
+
+/** A paper's benchmark name: the part before the colon when it is short, else a Bench-style name, else the title. */
+function paperName(title: string): string {
+  const head = title.split(':')[0].trim();
+  if (head !== title && head.length <= 40 && head.split(/\s+/).length <= 4) return head;
+  return names(title)[0] ?? title;
 }
 
 function stageA(title: string, abstract: string, hasArtifact: boolean): number {
@@ -117,7 +126,11 @@ function upsert(c: Partial<Candidate> & { key: string; name: string; title: stri
     byKey.get(key(c.name)) ??
     ({ key: c.key, name: c.name, title: c.title, url: c.url, first: TODAY, last: TODAY, feeds: [], curated: [], registries: [], stageA: 0, general: false, niche: false, score: 0, decision: 'watch' } as Candidate);
   cur.last = TODAY;
-  for (const f of ['org', 'repo', 'arxiv', 'upvotes', 'stars'] as const) if (c[f] !== undefined && c[f] !== null) (cur as Record<string, unknown>)[f] = c[f];
+  if (c.org) cur.org = c.org;
+  if (c.repo) cur.repo = c.repo;
+  if (c.arxiv) cur.arxiv = c.arxiv;
+  if (c.upvotes !== undefined) cur.upvotes = c.upvotes;
+  if (c.stars !== undefined) cur.stars = c.stars;
   cur.stageA = Math.max(cur.stageA, c.stageA ?? 0);
   cur.general ||= !!c.general;
   cur.niche ||= !!c.niche;
@@ -143,7 +156,7 @@ async function hfDailyPapers() {
       const abs = it.summary ?? p.summary ?? '';
       const a = stageA(title, abs, !!p.githubRepo);
       if (a < 5) continue;
-      const nm = names(title)[0] ?? title.split(':')[0];
+      const nm = paperName(title);
       n++;
       upsert(
         {
@@ -185,7 +198,7 @@ async function arxiv() {
     n++;
     const repo = (abs.match(/https?:\/\/github\.com\/[\w.-]+\/[\w.-]+/) ?? [])[0]?.replace(/[.)]+$/, '');
     upsert(
-      { key: id, name: names(title)[0] ?? title.split(':')[0], title, url: `https://arxiv.org/abs/${id}`, arxiv: id, repo, stageA: a, general: GENERAL.test(`${title} ${abs}`), niche: NICHE.test(`${title} ${abs}`) },
+      { key: id, name: paperName(title), title, url: `https://arxiv.org/abs/${id}`, arxiv: id, repo, stageA: a, general: GENERAL.test(`${title} ${abs}`), niche: NICHE.test(`${title} ${abs}`) },
       { feed: 'arxiv' },
     );
   }
@@ -202,21 +215,23 @@ async function ainews() {
     if (date < FROM) continue;
     const link = (it.match(/<link>([^<]+)<\/link>/) ?? [])[1] ?? 'https://latent.space/news';
     const html = (it.match(/<content:encoded><!\[CDATA\[([\s\S]*?)\]\]><\/content:encoded>/) ?? it.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/) ?? [])[1] ?? '';
-    for (const li of html.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)) {
+    // each bullet runs from its <li> to the next <li> or </li>, so nested lists do not swallow bullets
+    for (const li of html.matchAll(/<li[^>]*>([\s\S]*?)(?=<li[\s>]|<\/li>)/g)) {
       const body = li[1];
-      const strong = [...body.matchAll(/<strong>([\s\S]*?)<\/strong>/g)].map((s) => s[1].replace(/<[^>]+>/g, ''));
+      // a launch bullet opens with the bold name: "<b>BallotBench</b>: Nine agents..." or "<b>HackBench (Meta).</b> ..."
+      const lead = body.match(/^\s*(?:<p>)?\s*<(strong|b)>([^<]{3,60})<\/\1>/);
+      if (!lead) continue;
+      const bold = lead[2].replace(/\s*\([^)]*\)\s*/g, ' ').replace(/[.:\s]+$/, '').trim();
+      const nm = /(Bench|bench|Eval|Evals|Arena|Gym|Exam|Leaderboard)(?![a-z])/.test(bold) && !BARE.test(bold) && bold.length <= 40 ? bold : names(bold)[0];
+      if (!nm) continue;
       const plain = body.replace(/<[^>]+>/g, ' ');
-      // a launch reads like "**NameBench**: what it does" or "introduces NameBench"
-      const launch = /\b(introduc|launch|releas|new (?:eval|benchmark)|announc|open-sourc)/i.test(plain);
-      const found = names(strong.join(' ') || (launch ? plain : ''));
-      for (const nm of found.slice(0, 2)) {
-        const href = (body.match(/href="(https?:\/\/[^"]+)"/) ?? [])[1] ?? link;
-        n++;
-        upsert(
-          { key: key(nm), name: nm, title: nm, url: href, stageA: 5, general: true },
-          { curated: { source: 'AINews', url: link } },
-        );
-      }
+      const before = html.slice(Math.max(0, (li.index ?? 0) - 2000), li.index ?? 0);
+      const launch = /\b(introduc|launch|releas|new\b|announc|open-sourc|unveil|debut)/i.test(plain);
+      const evalsHeading = /<(?:strong|b)>[^<]*\b(evals?|benchmarks?)\b[^<]*<\/(?:strong|b)>[^<]{0,4}(?:<\/p>)?\s*<ul/i.test(before);
+      if (!launch && !evalsHeading) continue;
+      const href = (body.match(/href="(https?:\/\/[^"]+)"/) ?? [])[1]?.replace(/[?&]utm_[^"]*$/, '').replace(/&amp;/g, '&') ?? link;
+      n++;
+      upsert({ key: key(nm), name: nm, title: nm, url: href, stageA: 5, general: true }, { curated: { source: 'AINews', url: link } });
     }
   }
   log(`  AINews: ${n} named evals`);
@@ -229,7 +244,7 @@ async function epochHub() {
   if (!res.ok) return log(`  Epoch failed: ${res.status}`);
   writeFileSync(zip, Buffer.from(await res.arrayBuffer()));
   const csv = execFileSync('unzip', ['-p', zip, 'benchmark_metadata.csv']).toString();
-  const rows = csv.split('\n').slice(1).map((l) => l.split(',')[0]).filter(Boolean);
+  const rows = csv.split('\n').slice(1).map((l: string) => l.split(',')[0]).filter(Boolean);
   const prev = new Set(seen.epoch ?? []);
   let n = 0;
   for (const name of rows) {
@@ -318,4 +333,3 @@ const out: Store = { updated: TODAY, items, mentions: mentions.sort((a, b) => b.
 writeJson(storePath, out);
 const cat = items.filter((c) => c.decision === 'catalogue').length;
 log(`Wrote ${items.length} candidates (${cat} to catalogue, ${items.length - cat} on the watch list) and ${out.mentions!.length} mentions of known benchmarks.`);
-void readFileSync;

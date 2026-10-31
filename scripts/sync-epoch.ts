@@ -3,7 +3,7 @@
 //
 // usage: node scripts/sync-epoch.ts [--zip path/to/benchmark_data.zip]
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { dataPath, readJson, writeJson, key, slug, parseCsv, today } from './lib/util.ts';
@@ -12,6 +12,8 @@ const ZIP_URL = 'https://epoch.ai/data/benchmark_data.zip';
 
 // Epoch benchmark name -> [csv file, score column] where its metadata leaves them blank
 const FILE_GUESS: Record<string, [string, string]> = {
+  'SWE-Bench verified': ['swe_bench_verified.csv', 'Best score (across scorers)'],
+  'Lech Mazur Writing': ['lech_mazur_writing_external.csv', 'Mean score'],
   HLE: ['hle_external.csv', 'Accuracy'],
   DeepSWE: ['deepswe_external.csv', 'Pass@1'],
   CursorBench: ['cursorbench_external.csv', 'Score'],
@@ -74,11 +76,16 @@ if (!zip) {
   writeFileSync(zip, Buffer.from(await res.arrayBuffer()));
 }
 const file = (name: string): Record<string, string>[] | null => {
-  try {
-    return parseCsv(execFileSync('unzip', ['-p', zip, name], { maxBuffer: 1 << 28 }).toString());
-  } catch {
-    return null;
+  // the index files sit in a subfolder in newer exports
+  for (const path of [name, `epoch_capabilities_index/${name}`]) {
+    try {
+      const text = execFileSync('unzip', ['-p', zip, path], { maxBuffer: 1 << 28, stdio: ['ignore', 'pipe', 'ignore'] }).toString();
+      if (text.trim()) return parseCsv(text);
+    } catch {
+      // try the next path
+    }
   }
+  return null;
 };
 
 interface Lab {
@@ -186,8 +193,7 @@ for (const m of [...bmeta, ...Object.keys(FILE_GUESS).filter((n) => !bmeta.some(
     const raws = data.map((r) => Number(r[col])).filter((v) => Number.isFinite(v));
     if (raws.length && Math.max(...raws) * scale > 1.5) scale /= 100;
   }
-  const tb1 = ename === 'Terminal Bench' ? benchFor('Terminal-Bench 1.0') : undefined;
-  if (tb1 && tb1.name === 'Terminal-Bench 1.0') tb1.name = 'Terminal-Bench';
+  const tb1 = ename === 'Terminal Bench' ? (benchByKey.get(key('Terminal-Bench')) ?? benchFor('Terminal-Bench')) : undefined;
   for (const r of data) {
     if (r['AA model slug'] || Object.values(r).some((v) => /artificial ?analysis/i.test(v))) {
       skip('Artificial Analysis rows');
@@ -231,7 +237,12 @@ for (const r of file('edi_scores.csv') ?? []) {
   if (b) b.edi = Math.round(Number(r.edi) * 100) / 100;
 }
 const num = (x: string) => (x === '' ? null : Math.round(Number(x) * 100) / 100);
-const eci = (file('eci_scores.csv') ?? []).map((r) => ({ model: modelFor(r.Model).id, eci: num(r.eci), low: num(r.eci_ci_low), high: num(r.eci_ci_high) }));
+type Eci = { model: string; eci: number | null; low: number | null; high: number | null };
+const eciRows = file('eci_scores.csv');
+// keep the last index scores when an export leaves them out
+const eci: Eci[] = eciRows
+  ? eciRows.map((r) => ({ model: modelFor(r.Model).id, eci: num(r.eci), low: num(r.eci_ci_low), high: num(r.eci_ci_high) }))
+  : readJson<{ eci: Eci[] }>(dataPath('scores', 'epoch.json')).eci;
 
 // ---- write ------------------------------------------------------------------------------------------
 rows.sort((a, b) => a[0].localeCompare(b[0]) || (a[5] ?? '').localeCompare(b[5] ?? '') || a[1].localeCompare(b[1]));
@@ -250,4 +261,3 @@ writeJson(dataPath('models.json'), models.sort((a, b) => (a.released ?? '9999').
 writeJson(dataPath('benchmarks.json'), benchmarks.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
 writeJson(dataPath('labs.json'), labs);
 console.log(`Wrote ${rows.length} Epoch scores and ${eci.length} index scores. Skipped: ${JSON.stringify(skipped)}`);
-void readFileSync;
