@@ -6,25 +6,28 @@ import { labById } from '../lib/data.ts';
 import { labColor, onLabColor } from '../lib/palette.ts';
 
 interface Props {
-  shares: { lab: string; share: number }[];
+  shares: { lab: string; share: number; count?: number }[];
+  /** What a block measures, for its tooltip. */
+  what?: string;
 }
-const { shares } = Astro.props;
+const { shares, what = 'Share of time at number one' } = Astro.props;
 const shown = shares.filter((s) => s.share >= 0.005);
 const pct = (v: number) => `${Math.round(v * 100)}%`;
+const label = (s: { share: number; count?: number }) => (s.count !== undefined ? String(s.count) : pct(s.share));
 ---
 
 <figure class="cs">
-  <div class="bar" role="img" aria-label={shown.map((s) => `${labById.get(s.lab)?.name ?? 'Other labs'} ${pct(s.share)}`).join(', ')}>
+  <div class="bar" role="img" aria-label={shown.map((s) => `${labById.get(s.lab)?.name ?? 'Other labs'} ${label(s)}`).join(', ')}>
     {
       shown.map((s) => (
         <span
           class="blk"
           style={`flex:${s.share};background:${labColor(s.lab)};color:${onLabColor(s.lab)}`}
-          data-tv={pct(s.share)}
+          data-tv={label(s)}
           data-tn={labById.get(s.lab)?.name ?? 'Other labs'}
-          data-ts="Share of time at number one"
+          data-ts={what}
         >
-          {s.share >= 0.06 && <span class="in num">{pct(s.share)}</span>}
+          {s.share >= 0.06 && <span class="in num">{label(s)}</span>}
         </span>
       ))
     }
@@ -41,7 +44,7 @@ const pct = (v: number) => `${Math.round(v * 100)}%`;
             <LabMark lab={s.lab} size={14} />
           )}
           {labById.get(s.lab)?.name ?? 'Other labs'}
-          <span class="muted num">{pct(s.share)}</span>
+          <span class="muted num">{label(s)}</span>
         </span>
       ))
     }

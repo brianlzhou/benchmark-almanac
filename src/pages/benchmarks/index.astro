@@ -1,8 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
+import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import { allSummaries, benchmarks, modelById } from '../../lib/data.ts';
-import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID } from '../../lib/taxonomy.ts';
+import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf } from '../../lib/taxonomy.ts';
+import { score as fmt, monthYear } from '../../lib/format.ts';
+import { familyOf } from '../../lib/reigns.ts';
 
 // scoring methods, grouped the way people ask: fixed answers, graders, arenas, real events
 const METHOD_GROUP: Record<string, string> = {
@@ -13,25 +16,60 @@ const METHOD_GROUP: Record<string, string> = {
   'head-to-head': 'arena',
   outcome: 'events',
 };
-import { score as fmt, monthYear } from '../../lib/format.ts';
-
-const rows = allSummaries().sort((a, b) => b.cites.length - a.cites.length || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
-const count = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
 const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+
+const all = allSummaries();
+// one row per test: a versioned family shows its newest version and links the earlier ones
+const newest = (id: string) => familyOf(id).at(-1);
+const rows = all
+  .filter((s) => !s.b.family || newest(s.b.id) === s.b.id)
+  .sort((a, b) => b.cites.length - a.cites.length || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
+const count = (f: (s: (typeof all)[number]) => boolean) => all.filter(f).length;
+const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
+const methodCount = (g: string) => inRows((s) => METHOD_GROUP[s.b.scoring ?? ''] === g);
 const areaCounts = AREAS.map((a) => ({
   a,
-  n: count((s) => s.area === a.id),
+  n: inRows((s) => s.area === a.id),
   cats: a.categories.filter((c) => rows.some((s) => s.b.category === c)),
 })).filter((x) => x.n);
-const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] === g);
+
+// the area filter nests three deep: area, category, kind
+const areaOptions: Option[] = [{ value: '', label: 'All areas' }];
+for (const { a, n, cats } of areaCounts) {
+  areaOptions.push({ value: `a:${a.id}`, label: a.name, depth: 0, count: n });
+  for (const c of cats) {
+    areaOptions.push({ value: `c:${c}`, label: CATEGORY_NAMES[c] ?? c, depth: 1, count: inRows((s) => s.b.category === c) });
+    for (const sc of SUBCATEGORIES[c] ?? []) {
+      const k = inRows((s) => s.b.subcategory === sc.id);
+      if (k) areaOptions.push({ value: `s:${sc.id}`, label: sc.name, depth: 2, count: k });
+    }
+  }
+}
+const levelOptions: Option[] = [{ value: '', label: 'Any level' }, ...LEVELS.map((l) => ({ value: l.id, label: l.name, count: inRows((s) => s.b.level === l.id) }))];
+const statusOptions: Option[] = [
+  { value: '', label: 'Any status' },
+  { value: 'in-use', label: 'In use', count: inRows((s) => s.status === 'in use') },
+  { value: 'fading', label: 'Fading', count: inRows((s) => s.status === 'fading') },
+  { value: 'dropped', label: 'Dropped', count: inRows((s) => s.status === 'dropped') },
+  { value: 'not-in-cards', label: 'Not in model cards', count: inRows((s) => s.status === 'not in cards') },
+];
+const codeOptions: Option[] = [
+  { value: '', label: 'With or without code' },
+  { value: 'yes', label: 'Public code', count: inRows((s) => !!s.b.links?.repo) },
+];
+const earlier = (id: string) =>
+  familyOf(id)
+    .slice(0, -1)
+    .map((v) => all.find((s) => s.b.id === v)!.b)
+    .reverse();
 ---
 
-<Base title="Benchmarks" description="Every benchmark in the almanac: what it tests, its code, its status in lab model cards, and its best score.">
+<Base title="Benchmarks" description="Every benchmark in the almanac: what it tests, who made it, its status in lab model cards, and its best score.">
   <div class="page wide">
     <header class="head">
       <h1>Benchmarks</h1>
       <p class="lede">
-        {benchmarks.length} benchmarks from lab model cards, Epoch AI's hub and public collections. Each has a page with its leaderboard, its scores over time, and the cards that report it. Arenas, where people vote between answers, <a href="/arenas/">work differently</a> and are marked as such.
+        {benchmarks.length} benchmarks from lab model cards, benchmark makers, Epoch AI's hub and public collections. Each has a page with its leaderboard, its scores over time, and the cards that report it. Arenas, where people vote between answers, <a href="/arenas/">work differently</a> and are marked as such.
       </p>
       <div class="facts">
         <span><b>{count((s) => s.status === 'in use')}</b> in use</span>
@@ -45,7 +83,7 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
       {
         areaCounts.map(({ a, n, cats }) => (
           <div class="area" style={`--a:var(--area-${a.id})`}>
-            <a class="ah" href={`?area=${a.id}`} data-area-link={a.id}>
+            <a class="ah" href={`?area=a:${a.id}`} data-area-link={`a:${a.id}`}>
               <span class="sw" />
               <span class="an">{a.name}</span>
               <span class="ac num">{n}</span>
@@ -69,26 +107,11 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
         <label title="Predictions scored against what happens"><input type="radio" name="method" value="events" data-key="method" />Real events <span class="n">{methodCount('events')}</span></label>
       </div>
       <div class="break" />
-      <input class="field grow" type="search" placeholder="Search benchmarks, labs or makers" aria-label="Search benchmarks" data-q />
-      <select class="field" aria-label="Area" data-area>
-        <option value="">All areas</option>
-        {AREAS.map((a) => <option value={a.id}>{a.name}</option>)}
-      </select>
-      <select class="field" aria-label="Level" data-level>
-        <option value="">Any level</option>
-        {LEVELS.map((l) => <option value={l.id}>{l.name}</option>)}
-      </select>
-      <select class="field" aria-label="Status" data-status>
-        <option value="">Any status</option>
-        <option value="in-use">In use</option>
-        <option value="fading">Fading</option>
-        <option value="dropped">Dropped</option>
-        <option value="not-in-cards">Not in model cards</option>
-      </select>
-      <select class="field" aria-label="Code" data-code>
-        <option value="">With or without code</option>
-        <option value="yes">Public code</option>
-      </select>
+      <input class="field grow" type="search" placeholder="Search benchmarks, makers or models" aria-label="Search benchmarks" data-q />
+      <Dropdown filterKey="area" label="Area" options={areaOptions} search wide />
+      <Dropdown filterKey="level" label="Level" options={levelOptions} />
+      <Dropdown filterKey="status" label="Status" options={statusOptions} />
+      <Dropdown filterKey="code" label="Code" options={codeOptions} />
       <span class="count muted" data-count>{rows.length} benchmarks</span>
     </div>
 
@@ -97,12 +120,12 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
         <thead>
           <tr>
             <th>Benchmark</th>
+            <th>Made by</th>
             <th>Kind</th>
             <th>Level</th>
             <th>Status</th>
-            <th class="r">Best score</th>
+            <th>Best score</th>
             <th class="r">Cards</th>
-            <th class="r">Models</th>
             <th>Released</th>
           </tr>
         </thead>
@@ -110,20 +133,34 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
           {
             rows.map((s) => {
               const top = s.best ? modelById.get(s.best.model) : undefined;
+              const prev = s.b.family ? earlier(s.b.id) : [];
+              const sub = s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory) : undefined;
               return (
                 <tr
-                  data-area={s.area}
+                  data-area={`a:${areaOf(s.b.category)} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
                   data-level={s.b.level ?? ''}
                   data-method={METHOD_GROUP[s.b.scoring ?? ''] ?? ''}
                   data-status={s.status.replace(/ /g, '-')}
                   data-code={s.b.links?.repo ? 'yes' : ''}
-                  data-text={[...(s.b.aliases ?? []), s.b.org].filter(Boolean).join(' ').toLowerCase() || undefined}
+                  data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.name)].join(' ').toLowerCase() || undefined}
                 >
                   <td class="nm">
                     <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
                     {s.b.description && <span class="desc">{s.b.description}</span>}
+                    {prev.length > 0 && (
+                      <span class="vers">
+                        Earlier versions:{' '}
+                        {prev.map((p, i) => (
+                          <>
+                            <a href={`/benchmarks/${p.id}/`}>{p.version ?? p.name}</a>
+                            {i < prev.length - 1 ? ', ' : ''}
+                          </>
+                        ))}
+                      </span>
+                    )}
                   </td>
-                  <td class="muted kind">{(s.b.subcategory && SUB_BY_ID.get(s.b.subcategory)?.name) ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other'}</td>
+                  <td class="org">{s.b.org}</td>
+                  <td class="muted kind">{sub?.name ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other'}</td>
                   <td class="muted nowrap">{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
                   <td class="nowrap">
                     <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
@@ -131,16 +168,16 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
                       <span class="sl">{STATUS[s.status]}</span>
                     </span>
                   </td>
-                  <td class="r nowrap">
+                  <td class="best-c">
                     {s.best && top && (
-                      <span class="best" title={top.name}>
+                      <span class="best">
                         <LabMark lab={top.lab} size={14} />
-                        {fmt(s.best.value, s.b.unit ?? '%')}
+                        <span class="bm">{top.name}</span>
+                        <b class="num">{fmt(s.best.value, s.b.unit ?? '%')}</b>
                       </span>
                     )}
                   </td>
                   <td class="r">{s.cites.length || ''}</td>
-                  <td class="r muted">{s.board.length || ''}</td>
                   <td class="muted num nowrap">{monthYear(s.b.released)}</td>
                 </tr>
               );
@@ -158,7 +195,7 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
   for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-area-link]')) {
     a.addEventListener('click', (e) => {
       e.preventDefault();
-      const sel = document.querySelector<HTMLSelectElement>('[data-area]');
+      const sel = document.querySelector<HTMLSelectElement>('select[data-area]');
       if (!sel) return;
       sel.value = sel.value === a.dataset.areaLink ? '' : a.dataset.areaLink!;
       sel.dispatchEvent(new Event('change'));
@@ -186,35 +223,6 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
     font-size: 14px;
     font-weight: 500;
   }
-  .cats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px 12px;
-    margin-top: 8px;
-    padding-left: 20px;
-  }
-  .cats a {
-    font-size: 13px;
-    color: var(--ink-3);
-    text-decoration: none;
-  }
-  .cats a:hover {
-    color: var(--ink);
-    text-decoration: underline;
-  }
-  .methods .n {
-    color: var(--ink-4);
-    font-weight: 400;
-    margin-left: 4px;
-  }
-  .break {
-    flex-basis: 100%;
-    height: 0;
-  }
-  .kind {
-    min-width: 140px;
-    font-size: 13.5px;
-  }
   .sw {
     width: 10px;
     height: 10px;
@@ -231,6 +239,23 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
   }
   .ac {
     color: var(--ink-3);
+    font-weight: 400;
+  }
+  .cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    margin-top: 8px;
+    padding-left: 20px;
+  }
+  .cats a {
+    font-size: 13px;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+  .cats a:hover {
+    color: var(--ink);
+    text-decoration: underline;
   }
   .filters {
     display: flex;
@@ -239,14 +264,26 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
     align-items: center;
     margin-bottom: 20px;
   }
+  .methods .n {
+    color: var(--ink-4);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+  .break {
+    flex-basis: 100%;
+    height: 0;
+  }
   .grow {
-    flex: 1 1 260px;
+    flex: 1 1 240px;
   }
   .count {
     font-size: 13px;
     margin-left: auto;
   }
-  .nm a {
+  .nm {
+    min-width: 260px;
+  }
+  .nm > a {
     font-weight: 500;
   }
   .desc {
@@ -255,16 +292,51 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
     color: var(--ink-3);
     font-size: 13px;
     line-height: 1.4;
-    max-width: 62ch;
+    max-width: 58ch;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  .vers {
+    display: block;
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .vers a {
+    color: var(--ink-2);
+  }
+  .org {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    min-width: 120px;
+    max-width: 200px;
+  }
+  .kind {
+    min-width: 130px;
+    font-size: 13.5px;
+  }
+  .best-c {
+    min-width: 200px;
+  }
   .best {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 7px;
+    font-size: 13.5px;
+  }
+  .bm {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+  .best b {
+    font-weight: 500;
+    margin-left: auto;
   }
   .nowrap {
     white-space: nowrap;
@@ -281,17 +353,25 @@ const methodCount = (g: string) => count((s) => METHOD_GROUP[s.b.scoring ?? ''] 
     .bt td:nth-child(2),
     .bt th:nth-child(3),
     .bt td:nth-child(3),
+    .bt th:nth-child(4),
+    .bt td:nth-child(4),
     .bt th:nth-child(7),
     .bt td:nth-child(7),
     .bt th:nth-child(8),
     .bt td:nth-child(8) {
       display: none;
     }
+    .sl {
+      display: none;
+    }
     .methods {
       flex-wrap: wrap;
     }
-    .sl {
-      display: none;
+    .nm {
+      min-width: 0;
+    }
+    .best-c {
+      min-width: 140px;
     }
   }
 </style>

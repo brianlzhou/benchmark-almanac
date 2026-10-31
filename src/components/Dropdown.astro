@@ -1,0 +1,198 @@
+---
+// The one dropdown the site uses. A hidden native select keeps the value, so filter scripts read and set
+// it as before. On top sits a button and a listbox with nested options, counts, a check on the choice, a
+// search box for long lists, and full keyboard support (src/scripts/dropdown.ts).
+
+export interface Option {
+  value: string;
+  label: string;
+  /** Nesting level: 0 for top-level options, 1 and 2 for children. */
+  depth?: number;
+  count?: number;
+}
+
+interface Props {
+  /** The filter key: the select gets data-<key>, matching the table rows' data-<key>. */
+  filterKey: string;
+  label: string;
+  options: Option[];
+  search?: boolean;
+  wide?: boolean;
+}
+const { filterKey, label, options, search = false, wide = false } = Astro.props;
+const first = options[0];
+const id = `dd-${filterKey}`;
+---
+
+<div class:list={['dd', { wide }]} data-dd>
+  <select class="dd-native" aria-hidden="true" tabindex="-1" {...{ [`data-${filterKey}`]: '' }}>
+    {options.map((o) => <option value={o.value}>{o.label}</option>)}
+  </select>
+  <button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="false" aria-controls={`${id}-list`} aria-label={label}>
+    <span class="dd-v">{first?.label}</span>
+    <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>
+  </button>
+  <div class="dd-p" hidden>
+    {search && <input class="dd-s" type="search" placeholder={`Search ${label.toLowerCase()}`} aria-label={`Search ${label.toLowerCase()}`} autocomplete="off" />}
+    <ul class="dd-l" role="listbox" id={`${id}-list`} aria-label={label} tabindex="-1">
+      {
+        options.map((o, i) => (
+          <li role="option" id={`${id}-${i}`} data-value={o.value} data-depth={o.depth ?? 0} aria-selected={i === 0 ? 'true' : 'false'}>
+            <svg class="ck" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M3 7.5l2.5 2.5L11 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="ol">{o.label}</span>
+            {o.count !== undefined && <span class="oc num">{o.count}</span>}
+          </li>
+        ))
+      }
+    </ul>
+    {search && <p class="dd-none" hidden>Nothing matches.</p>}
+  </div>
+</div>
+
+<script>
+  import '../scripts/dropdown.ts';
+</script>
+
+<style>
+  .dd {
+    position: relative;
+    display: inline-block;
+  }
+  .dd-native {
+    display: none;
+  }
+  .dd-b {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font: 400 14px/1 var(--sans);
+    color: var(--ink);
+    background: var(--panel);
+    border: 0;
+    border-radius: 9px;
+    padding: 11px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    max-width: 260px;
+  }
+  .dd-b:hover {
+    background: var(--line);
+  }
+  .dd-b[aria-expanded='true'] {
+    background: var(--line);
+  }
+  .dd-v {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dd-b svg {
+    color: var(--ink-3);
+    flex: none;
+    transition: rotate 140ms ease;
+  }
+  .dd-b[aria-expanded='true'] svg {
+    rotate: 180deg;
+  }
+  .dd-p {
+    position: absolute;
+    z-index: 40;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 100%;
+    width: max-content;
+    max-width: min(360px, calc(100vw - 32px));
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px rgb(0 0 0 / 0.06);
+    padding: 6px;
+  }
+  .wide .dd-p {
+    width: 340px;
+  }
+  .dd-p.right {
+    left: auto;
+    right: 0;
+  }
+  .dd-s {
+    width: 100%;
+    font: 400 14px/1 var(--sans);
+    color: var(--ink);
+    background: var(--panel);
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+  }
+  .dd-s:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: -2px;
+  }
+  .dd-l {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 340px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .dd-l:focus {
+    outline: none;
+  }
+  .dd-l li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px 8px calc(10px + var(--indent, 0px));
+    border-radius: 7px;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .dd-l li[data-depth='1'] {
+    --indent: 16px;
+    color: var(--ink-2);
+  }
+  .dd-l li[data-depth='2'] {
+    --indent: 32px;
+    color: var(--ink-3);
+    font-size: 13.5px;
+  }
+  .dd-l li[data-depth='0'] .ol {
+    font-weight: 500;
+  }
+  .dd-l li.active {
+    background: var(--hover);
+    color: var(--ink);
+  }
+  .dd-l li[hidden] {
+    display: none;
+  }
+  .ck {
+    flex: none;
+    visibility: hidden;
+    color: var(--ink);
+  }
+  .dd-l li[aria-selected='true'] .ck {
+    visibility: visible;
+  }
+  .ol {
+    flex: 1;
+    min-width: 0;
+  }
+  .oc {
+    color: var(--ink-4);
+    font-size: 12.5px;
+  }
+  .dd-none {
+    padding: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    .dd-b {
+      max-width: 100%;
+    }
+  }
+</style>

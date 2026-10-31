@@ -34,4 +34,24 @@ export function yearTicks(min: number, max: number, maxTicks = 8): number[] {
   return out;
 }
 
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/**
+ * Ticks for a time axis given in fractional years. Spans of two years or more get year ticks. Shorter
+ * spans get month ticks every 1, 2, 3 or 6 months, with the year on January and on the first tick.
+ */
+export function timeTicks(min: number, max: number, maxTicks = 8): { date: string; label: string }[] {
+  if (max - min >= 2) return yearTicks(min, max, maxTicks).map((y) => ({ date: `${y}-01-01`, label: String(y) }));
+  const m0 = Math.ceil(min * 12 - 1e-9);
+  const m1 = Math.floor(max * 12);
+  const step = [1, 2, 3, 6].find((s) => (m1 - m0) / s + 1 <= maxTicks) ?? 12;
+  const out: { date: string; label: string }[] = [];
+  for (let m = Math.ceil(m0 / step) * step; m <= m1; m += step) {
+    const y = Math.floor(m / 12);
+    const mo = m - y * 12;
+    out.push({ date: `${y}-${String(mo + 1).padStart(2, '0')}-01`, label: mo === 0 || !out.length ? `${MON[mo]} ${y}` : MON[mo] });
+  }
+  return out;
+}
+
 export const round = (v: number, p = 1) => Math.round(v * 10 ** p) / 10 ** p;

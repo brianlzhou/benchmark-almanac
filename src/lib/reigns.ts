@@ -44,8 +44,15 @@ function build(points: { date: string; value: number; model: string }[], better:
   const pts = points.filter((p) => p.date && p.date <= AS_OF).sort((a, b) => a.date.localeCompare(b.date));
   if (pts.length < 3) return null;
   const sign = better === 'lower' ? -1 : 1;
-  const reigns: Reign[] = [];
+  // Of the scores dated the same day, only the best can lead. The others would be reigns of zero days.
+  const bestOfDay = new Map<string, (typeof pts)[number]>();
   for (const p of pts) {
+    const q = bestOfDay.get(p.date);
+    if (!q || sign * p.value > sign * q.value) bestOfDay.set(p.date, p);
+  }
+  const top = [...bestOfDay.values()];
+  const reigns: Reign[] = [];
+  for (const p of top) {
     const cur = reigns.at(-1);
     const best = cur?.steps.at(-1)?.value;
     if (best !== undefined && sign * p.value <= sign * best) continue;
