@@ -1,3 +1,5 @@
+import taxonomyJson from '../../data/taxonomy.json';
+
 // Fine categories group into eight areas. Areas drive navigation and the stacked charts, so there are
 // never more of them than the categorical palette has hues.
 
@@ -98,3 +100,36 @@ export function areaOf(category: string | undefined): string {
 }
 
 export const AREA_BY_ID = new Map(AREAS.map((a) => [a.id, a]));
+
+// ---- finer categories, levels, scoring methods and formats (data/taxonomy.json) --------------------
+
+export interface Level {
+  id: string;
+  name: string;
+  who: string;
+  examples: string[];
+}
+export interface Method {
+  id: string;
+  name: string;
+  how: string;
+}
+export interface Named {
+  id: string;
+  name: string;
+  note?: string;
+}
+
+const tax = taxonomyJson as { levels: Level[]; scoring: Method[]; formats: Named[]; subcategories: Record<string, Named[]> };
+export const LEVELS = tax.levels;
+export const SCORING = tax.scoring;
+export const FORMATS = tax.formats;
+export const SUBCATEGORIES = tax.subcategories;
+export const LEVEL_BY_ID = new Map(LEVELS.map((l) => [l.id, l]));
+export const SCORING_BY_ID = new Map(SCORING.map((s) => [s.id, s]));
+export const FORMAT_BY_ID = new Map(FORMATS.map((f) => [f.id, f]));
+export const SUB_BY_ID = new Map(Object.values(SUBCATEGORIES).flat().map((s) => [s.id, s]));
+export const levelIndex = (id: string | undefined) => (id ? LEVELS.findIndex((l) => l.id === id) : -1);
+
+/** Arenas and matches rank models against each other. Everything else scores against a fixed standard. */
+export const RANKED_BY_PEOPLE_OR_MATCHES = new Set(['preference', 'head-to-head']);

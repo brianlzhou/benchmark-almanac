@@ -1,34 +1,324 @@
 ---
+import SortHead from '../components/SortHead.astro';
+// Every arena and match league: the same areas, search and filters as the benchmarks table, for the tests
+// that rank models against each other instead of against an answer key. An arena is a benchmark scored by
+// votes (people pick the better of two answers) or by matches (models play each other), the rule behind
+// the benchmarks page's "Arenas" chip, so the two pages count the same records.
+import AreaMark from '../components/AreaMark.astro';
 import Base from '../layouts/Base.astro';
+import LabMark from '../components/LabMark.astro';
 import MiniBoard from '../components/MiniBoard.astro';
-import { allSummaries } from '../lib/data.ts';
-import { CATEGORY_NAMES, SCORING_BY_ID, SUB_BY_ID } from '../lib/taxonomy.ts';
+import Dropdown, { type Option } from '../components/Dropdown.astro';
+import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions } from '../lib/data.ts';
+import { AREAS, CATEGORY_NAMES, LEVELS, SUB_BY_ID, SUBCATEGORIES, RANKED_BY_PEOPLE_OR_MATCHES } from '../lib/taxonomy.ts';
+import { score as fmt, monthYear, humanDate } from '../lib/format.ts';
+import { familyOf, nextVersion } from '../lib/reigns.ts';
 
-const all = allSummaries();
-const arenas = all.filter((s) => s.b.scoring === 'preference' || s.b.scoring === 'head-to-head');
-const fixed = all.filter((s) => s.b.scoring === 'verified').length;
-const graded = all.filter((s) => s.b.scoring === 'model-judged' || s.b.scoring === 'expert-graded').length;
-const boards = arenas.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
-const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+// where the newest score came from, for the Last added column's tooltip
+const ADDED_FROM: Record<string, string> = { leaderboard: 'its leaderboard', epoch: 'Epoch AI', card: 'a model card' };
+
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
+// the order a sort by status puts them in
+const STATUS_RANK: Record<string, number> = { 'in use': 0, fading: 1, dropped: 2, 'system cards': 3, 'not in cards': 4 };
+const RANKED: Record<string, { key: string; label: string; tip: string }> = {
+  preference: { key: 'votes', label: 'Votes', tip: 'People see two answers to one prompt and pick the better one' },
+  'head-to-head': { key: 'matches', label: 'Matches', tip: 'Models play each other in games or contests' },
+};
+// what the test set's access field says, in words that fit votes and games alike
+const ACCESS: Record<string, string> = { public: 'public', 'public+private-holdout': 'public', private: 'private', unknown: 'unknown' };
+
+const all = allSummaries().filter((s) => RANKED_BY_PEOPLE_OR_MATCHES.has(s.b.scoring ?? ''));
+const byId = new Map(all.map((s) => [s.b.id, s]));
+// one row per arena: a versioned family shows its newest version and links the earlier ones. Few arenas
+// appear in launch posts, so the ones that rate the most models come first, then the most cited
+const newest = (id: string) => familyOf(id).filter((v) => byId.has(v)).at(-1);
+const rows = all
+  .filter((s) => !s.b.family || newest(s.b.id) === s.b.id)
+  .sort(
+    (a, b) =>
+      b.board.length - a.board.length ||
+      b.cites.length + b.docCites.length - (a.cites.length + a.docCites.length) ||
+      a.b.name.localeCompare(b.b.name),
+  );
+const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
+const rankedCount = (k: string) => inRows((s) => RANKED[s.b.scoring!].key === k);
+const withBoard = inRows((s) => s.board.length >= 3);
+const areaCounts = AREAS.map((a) => ({
+  a,
+  n: inRows((s) => s.area === a.id),
+  cats: a.categories.map((c) => ({ c, n: inRows((s) => s.b.category === c) })).filter((x) => x.n),
+})).filter((x) => x.n);
+
+// the area filter nests three deep: area, category, kind
+const areaOptions: Option[] = [{ value: '', label: 'All areas' }];
+for (const { a, n, cats } of areaCounts) {
+  areaOptions.push({ value: `a:${a.id}`, label: a.name, depth: 0, count: n });
+  for (const { c, n: k } of cats) {
+    areaOptions.push({ value: `c:${c}`, label: CATEGORY_NAMES[c] ?? c, depth: 1, count: k });
+    for (const sc of SUBCATEGORIES[c] ?? []) {
+      const j = inRows((s) => s.b.subcategory === sc.id);
+      if (j) areaOptions.push({ value: `s:${sc.id}`, label: sc.name, depth: 2, count: j });
+    }
+  }
+}
+const levelOptions: Option[] = [
+  { value: '', label: 'Any level' },
+  ...LEVELS.map((l) => ({ value: l.id, label: l.name, count: inRows((s) => s.b.level === l.id) })).filter((o) => o.count),
+];
+const statusOptions: Option[] = [
+  { value: '', label: 'Any status' },
+  { value: 'in-use', label: 'In use', count: inRows((s) => s.status === 'in use') },
+  { value: 'fading', label: 'Fading', count: inRows((s) => s.status === 'fading') },
+  { value: 'dropped', label: 'Dropped', count: inRows((s) => s.status === 'dropped') },
+  { value: 'system-cards', label: 'Only in system cards', count: inRows((s) => s.status === 'system cards') },
+  { value: 'not-in-cards', label: 'Not in model cards', count: inRows((s) => s.status === 'not in cards') },
+].filter((o) => o.value === '' || o.count);
+const dataOptions: Option[] = [
+  { value: '', label: 'Any data access' },
+  { value: 'public', label: 'Public prompts or games', count: inRows((s) => ACCESS[s.b.access ?? 'unknown'] === 'public') },
+  { value: 'private', label: 'Kept private', count: inRows((s) => ACCESS[s.b.access ?? 'unknown'] === 'private') },
+  { value: 'unknown', label: 'Not stated', count: inRows((s) => ACCESS[s.b.access ?? 'unknown'] === 'unknown') },
+];
+const codeOptions: Option[] = [
+  { value: '', label: 'With or without code' },
+  { value: 'yes', label: 'Public code', count: inRows((s) => !!s.b.links?.repo) },
+];
+// a family's earlier versions, newest first, so reading down goes back in time
+const earlier = (id: string) =>
+  familyOf(id)
+    .filter((v) => byId.has(v))
+    .slice(0, -1)
+    .map((v) => byId.get(v)!)
+    .reverse();
+const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
+// The longest text of each column that cannot wrap, over every row and earlier version. A hidden row
+// holds it under the header, so the table has its final column widths from the first paint (see filter.ts).
+const everyRow = rows.flatMap((s) => [s, ...(s.b.family ? earlier(s.b.id) : [])]);
+const longest = (xs: (string | undefined)[]) => xs.reduce<string>((a, x) => (x && x.length > a.length ? x : a), '');
+const probe = {
+  ranked: longest(everyRow.map((s) => RANKED[s.b.scoring!]?.label)),
+  status: Object.keys(STATUS).filter((k) => everyRow.some((s) => s.status === k)).sort((a, b) => STATUS[b].length - STATUS[a].length)[0] ?? 'in use',
+  released: longest(everyRow.map((s) => monthYear(s.b.released))),
+  added: longest(everyRow.map((s) => monthYear(s.lastAdded?.date))),
+};
+const kindOf = (s: (typeof all)[number]) => (s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
+const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
 ---
 
-<Base title="Arenas" description="How arena rankings, where people vote between two answers, differ from benchmarks with fixed answers.">
-  <div class="page">
+<Base title="Arenas" description="Every arena and match league we track, who runs it, how it's judged, and which model leads it.">
+  <div class="page ax">
     <header class="head">
-      <h1>Arenas rank what people prefer</h1>
+      <h1>Arenas</h1>
       <p class="lede">
-        In an arena, people see two answers to the same prompt and pick the better one, and the votes become ratings. A benchmark with fixed answers asks a different question: did the model get it right? The almanac keeps the two apart.
+        We track {rows.length} arenas and match leagues. In some, people vote between two answers. In others, models play each other in games and contests. Ratings move as new models join, so compare a rating only with others from the same arena. Tests with fixed answers are on the <a href="/benchmarks/">Benchmarks page</a>.
       </p>
       <div class="facts">
-        <span><b>{arenas.length}</b> arenas and match leagues</span>
-        <span><b>{fixed}</b> benchmarks checked automatically</span>
-        <span><b>{graded}</b> graded by a model or by people</span>
+        <span><b>{rankedCount('votes')}</b> ranked by votes</span>
+        <span><b>{rankedCount('matches')}</b> ranked by matches</span>
+        <span><b>{inRows((s) => s.status === 'in use')}</b> in use</span>
+        <span><b>{withBoard}</b> with a leaderboard here</span>
+        <span>Scores refreshed <b>{humanDate(AS_OF)}</b></span>
       </div>
     </header>
 
+    <section class="catalog" data-filter="arenas">
+      <nav class="areas" aria-label="Areas and categories">
+        {
+          areaCounts.map(({ a, n, cats }) => (
+            <div class="area" style={`--a:var(--area-${a.id});--w:${(n / Math.max(...areaCounts.map((x) => x.n))).toFixed(3)}`}>
+              <a class="ah" href={`?area=a:${a.id}`} data-area-link={`a:${a.id}`}>
+                <AreaMark area={a.id} size={11} />
+                <span class="an">{a.name}</span>
+                <span class="ac num">{n}</span>
+              </a>
+              <span class="abar" aria-hidden="true" />
+              <div class="cats">
+                {cats.map(({ c, n: k }) => (
+                  <a href={`?area=c:${c}`} data-area-link={`c:${c}`}>
+                    <span class="cl">{CATEGORY_NAMES[c] ?? c}</span>
+                    <span class="cn num">{k}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </nav>
+
+      <div class="filters">
+        <div class="seg methods" role="radiogroup" aria-label="How it is ranked">
+          <label><input type="radio" name="ranked" value="" data-key="ranked" checked />All</label>
+          <label title={RANKED.preference.tip}><input type="radio" name="ranked" value="votes" data-key="ranked" />Ranked by votes <span class="n">{rankedCount('votes')}</span></label>
+          <label title={RANKED['head-to-head'].tip}><input type="radio" name="ranked" value="matches" data-key="ranked" />Ranked by matches <span class="n">{rankedCount('matches')}</span></label>
+        </div>
+      </div>
+      <div class="frow">
+        <input class="field grow" type="search" placeholder="Search arenas, makers or models" aria-label="Search arenas" data-q />
+        <button type="button" class="fbtn" aria-expanded="false" aria-controls="fpanel" data-fbtn>
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 3.5h11M3.5 7h7M5.5 10.5h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+          Filters<span class="fn" data-fn></span>
+        </button>
+        <div class="fpanel" id="fpanel">
+          <Dropdown filterKey="area" label="Area" options={areaOptions} search wide />
+          <Dropdown filterKey="level" label="Level" options={levelOptions} />
+          <Dropdown filterKey="status" label="Status" options={statusOptions} />
+          <Dropdown filterKey="added" label="Last added" options={addedOptions(rows)} />
+          <Dropdown filterKey="data" label="Data" options={dataOptions} />
+          <Dropdown filterKey="code" label="Code" options={codeOptions} />
+        </div>
+        <span class="count muted" data-count>{rows.length} arenas</span>
+      </div>
+
+      <div class="table-wrap wide">
+        <table class="t at" data-rows data-sort>
+          <thead>
+            <tr>
+              <SortHead>Arena</SortHead>
+              <SortHead>Run by</SortHead>
+              <SortHead>Kind</SortHead>
+              <SortHead>Ranked by</SortHead>
+              <SortHead data-first="asc">Status</SortHead>
+              <SortHead>Leader</SortHead>
+              <SortHead class="r two" title="Models with a score here">Models<br />rated</SortHead>
+              <SortHead>Released</SortHead>
+              <SortHead title="When a model last got a score here, from any source">Last<br />added</SortHead>
+            </tr>
+            <tr data-probe aria-hidden="true">
+              <td class="nm" />
+              <td class="org" />
+              <td class="muted kind" />
+              <td class="muted nowrap">{probe.ranked}</td>
+              <td class="nowrap">
+                <span class:list={['tag', `status-${probe.status.replace(/ /g, '-')}`]}>
+                  <span class="dot" />
+                  <span class="sl">{STATUS[probe.status]}</span>
+                </span>
+              </td>
+              <td class="best-c" />
+              <td class="r num" />
+              <td class="muted num nowrap">{probe.released}</td>
+              <td class="muted num nowrap">{probe.added}</td>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((s) => {
+                const top = s.best ? modelById.get(s.best.model) : undefined;
+                const prev = s.b.family ? earlier(s.b.id) : [];
+                const kind = kindOf(s);
+                const group = prev.length ? s.b.family : undefined;
+                const ranked = RANKED[s.b.scoring!];
+                return (
+                  <>
+                    <tr
+                      class:list={{ fam: !!group }}
+                      data-group={group}
+                      data-area={`a:${s.area} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
+                      data-level={s.b.level ?? ''}
+                      data-ranked={ranked.key}
+                      data-status={s.status.replace(/ /g, '-')}
+                      data-added={addedWindows(s)}
+                      data-data={ACCESS[s.b.access ?? 'unknown']}
+                      data-code={s.b.links?.repo ? 'yes' : ''}
+                      data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name)].join(' ').toLowerCase() || undefined}
+                    >
+                      <td class="nm">
+                        <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                        {group && s.b.version && !s.b.name.includes(s.b.version) && <span class="vtag">{vlabel(s.b.version)}</span>}
+                        {s.b.description && <span class="desc">{s.b.description}</span>}
+                        {group && (
+                          <button type="button" class="vt" data-toggle={group} aria-expanded="false" aria-controls={prev.map((p) => `v-${p.b.id}`).join(' ')}>
+                            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            {prev.length} earlier {prev.length === 1 ? 'version' : 'versions'}
+                            <span class="vlist">{prev.map((p) => vlabel(p.b.version ?? p.b.name)).join(', ')}</span>
+                          </button>
+                        )}
+                      </td>
+                      <td class="org">{s.b.org}</td>
+                      <td class="muted kind">{kind}</td>
+                      <td class="muted nowrap" title={ranked.tip}>{ranked.label}</td>
+                      <td class="nowrap" data-v={String(STATUS_RANK[s.status] ?? 9)}>
+                        <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                          <span class="dot" />
+                          <span class="sl">{STATUS[s.status]}</span>
+                        </span>
+                      </td>
+                      <td class="best-c" data-v={s.best ? String(s.best.value) : undefined}>
+                        {s.best && top && (
+                          <span class="best">
+                            <LabMark lab={top.lab} size={14} />
+                            <span class="bm">{top.name}</span>
+                            <b class="num">{fmt(s.best.value, s.b.unit ?? '%')}</b>
+                          </span>
+                        )}
+                      </td>
+                      <td class="r num">{s.board.length || ''}</td>
+                      <td class="muted num nowrap">{monthYear(s.b.released)}</td>
+                      <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
+                    </tr>
+                    {prev.map((p, i) => {
+                      const ptop = p.best ? modelById.get(p.best.model) : undefined;
+                      const next = nextVersion(p.b.id);
+                      const pkind = kindOf(p);
+                      const pranked = RANKED[p.b.scoring!];
+                      return (
+                        <tr class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} hidden>
+                          <td class="nm">
+                            <span class="tree" aria-hidden="true" />
+                            <a href={`/benchmarks/${p.b.id}/`}>{p.b.name}</a>
+                            {p.b.version && !p.b.name.includes(p.b.version) && <span class="vtag">{vlabel(p.b.version)}</span>}
+                            {next && <span class="desc">Replaced in {monthYear(next.date)}</span>}
+                          </td>
+                          <td class="org">{p.b.org !== s.b.org ? p.b.org : ''}</td>
+                          <td class="muted kind">{pkind !== kind ? pkind : ''}</td>
+                          <td class="muted nowrap">{pranked.key !== ranked.key ? pranked.label : ''}</td>
+                          <td class="nowrap">
+                            <span class:list={['tag', `status-${p.status.replace(/ /g, '-')}`]}>
+                              <span class="dot" />
+                              <span class="sl">{STATUS[p.status]}</span>
+                            </span>
+                          </td>
+                          <td class="best-c">
+                            {p.best && ptop && (
+                              <span class="best">
+                                <LabMark lab={ptop.lab} size={14} />
+                                <span class="bm">{ptop.name}</span>
+                                <b class="num">{fmt(p.best.value, p.b.unit ?? '%')}</b>
+                              </span>
+                            )}
+                          </td>
+                          <td class="r num">{p.board.length || ''}</td>
+                          <td class="muted num nowrap">{monthYear(p.b.released)}</td>
+                          <td class:list={['muted', 'num', 'nowrap', { stale: !!p.lastAdded && monthsBetween(p.lastAdded.date, AS_OF) >= 12 }]} data-v={p.lastAdded?.date} title={p.lastAdded ? `${modelById.get(p.lastAdded.model)?.name ?? p.lastAdded.model}, from ${ADDED_FROM[p.lastAdded.source]}` : undefined}>{monthYear(p.lastAdded?.date)}</td>
+                        </tr>
+                      );
+                    })}
+                  </>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {
+      boards.length > 0 && (
+        <section id="boards">
+          <div class="sh">
+            <h2>Arena leaderboards</h2>
+            <p>Top five in each of the {Math.min(9, boards.length)} arenas with the most rated models.</p>
+          </div>
+          <div class="grid3">
+            {boards.slice(0, 9).map((s) => <MiniBoard s={s} />)}
+          </div>
+        </section>
+      )
+    }
+
     <section>
       <div class="sh">
-        <h2>Two kinds of measurement</h2>
+        <h2>How an arena differs from a benchmark</h2>
       </div>
       <div class="table-wrap">
         <table class="t cmp">
@@ -39,12 +329,12 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
             <tr>
               <td>What decides a score</td>
               <td>An answer key, unit tests, or a check of the final state</td>
-              <td>Votes between two answers, turned into Elo-style ratings</td>
+              <td>Votes between two answers, or wins and losses in matches, turned into Elo-style ratings</td>
             </tr>
             <tr>
               <td>What it captures</td>
               <td>Whether the model gets a defined task right</td>
-              <td>Taste, helpfulness and style, the things an answer key misses</td>
+              <td>Taste, helpfulness, style and strategy</td>
             </tr>
             <tr>
               <td>What can go wrong</td>
@@ -60,92 +350,458 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
         </table>
       </div>
     </section>
-
-    {
-      boards.length > 0 && (
-        <section>
-          <div class="sh">
-            <h2>Arena leaderboards</h2>
-            <p>The top five in each arena with scores in the almanac.</p>
-          </div>
-          <div class="grid3">
-            {boards.slice(0, 9).map((s) => <MiniBoard s={s} />)}
-          </div>
-        </section>
-      )
-    }
-
-    {
-      arenas.length > 0 && (
-        <section>
-          <div class="sh">
-            <h2>Every arena</h2>
-          </div>
-          <div class="table-wrap">
-            <table class="t">
-              <thead>
-                <tr><th>Arena</th><th>Kind</th><th>Scored</th><th>Status</th></tr>
-              </thead>
-              <tbody>
-                {arenas.map((s) => (
-                  <tr>
-                    <td class="nm">
-                      <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
-                      {s.b.description && <span class="desc">{s.b.description}</span>}
-                    </td>
-                    <td class="muted">{(s.b.subcategory && SUB_BY_ID.get(s.b.subcategory)?.name) ?? CATEGORY_NAMES[s.b.category ?? 'other']}</td>
-                    <td class="muted nowrap">{SCORING_BY_ID.get(s.b.scoring!)?.name}</td>
-                    <td class="nowrap">
-                      <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
-                        <span class="dot" />
-                        {STATUS[s.status]}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )
-    }
   </div>
 </Base>
 
-<style>
-  .cmp td:first-child {
-    color: var(--ink-3);
-    width: 22%;
+<script>
+  import { wireFilter } from '../scripts/filter.ts';
+  import { wirePeek } from '../scripts/peek.ts';
+  wireFilter('arenas');
+  const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
+  if (peekTable) wirePeek(peekTable);
+  // the area and category links set the area filter in place, and a second click clears it
+  const sel = document.querySelector<HTMLSelectElement>('.ax select[data-area]');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.ax [data-area-link]')];
+  const mark = () => {
+    for (const a of links) {
+      if (sel && a.dataset.areaLink === sel.value) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    }
+  };
+  for (const a of links) {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!sel) return;
+      sel.value = sel.value === a.dataset.areaLink ? '' : a.dataset.areaLink!;
+      sel.dispatchEvent(new Event('change'));
+    });
   }
-  .cmp td {
-    vertical-align: top;
-  }
-  .grid3 {
+  sel?.addEventListener('change', mark);
+  mark();
+
+  // phones: the filters fold behind one button that counts the ones in use
+  const box = document.querySelector<HTMLElement>('.ax .catalog');
+  const fbtn = document.querySelector<HTMLButtonElement>('[data-fbtn]');
+  const fn = document.querySelector<HTMLElement>('[data-fn]');
+  const selects = [...(box?.querySelectorAll<HTMLSelectElement>('.fpanel select') ?? [])];
+  const countOn = () => {
+    const n = selects.filter((x) => x.value).length;
+    if (fn) fn.textContent = n ? ` (${n})` : '';
+  };
+  for (const x of selects) x.addEventListener('change', countOn);
+  countOn();
+  fbtn?.addEventListener('click', () => {
+    const open = fbtn.getAttribute('aria-expanded') !== 'true';
+    fbtn.setAttribute('aria-expanded', String(open));
+    box?.classList.toggle('fopen', open);
+  });
+  // the column names stick under the filter row, so the row's height sets where
+  const frow = box?.querySelector<HTMLElement>('.frow');
+  if (box && frow) new ResizeObserver(() => box.style.setProperty('--frow-h', `${frow.offsetHeight}px`)).observe(frow);
+</script>
+
+<style is:global>
+  /* page styles under .ax, the same system as the benchmarks table (.bx) */
+  /* the area index, set as type like the Benchmarks page: mark, name, count, a bar sized by count, then categories */
+  .ax .areas {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 56px 48px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px 32px;
+    margin: 0 0 32px;
   }
-  .nm a {
+  .ax .area {
+    padding: 8px 0 4px;
+  }
+  .ax .ah {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    text-decoration: none;
+  }
+  .ax .ah .amark {
+    align-self: center;
+  }
+  .ax .an {
+    flex: 1;
+    min-width: 0;
+    font: 400 18px/1.2 var(--serif);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ax .ac {
+    color: var(--ink-3);
+    font: 400 12.5px var(--mono);
+  }
+  .ax .abar {
+    display: block;
+    height: 2px;
+    margin-top: 6px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--a) calc(var(--w) * 100%), var(--grid) calc(var(--w) * 100%));
+  }
+  .ax .cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    margin-top: 8px;
+  }
+  .ax .cats a {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 13px;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+  .ax .cn {
+    margin-left: 4px;
+    color: var(--ink-4);
+  }
+  .ax .cats a:hover .cl,
+  .ax .ah:hover .an {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  /* the chosen area or category reads as selected */
+  .ax .cats a[aria-current] .cl,
+  .ax .ah[aria-current] .an {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+  .ax .area:has(.ah[aria-current]) .abar {
+    height: 4px;
+  }
+  .ax .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  /* the filter row stays under the header while the table scrolls, its background reaching both window edges */
+  .ax .frow {
+    position: sticky;
+    top: var(--bar-h);
+    z-index: 6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 12px calc(-1 * var(--gutter)) 8px;
+    padding: 8px var(--gutter);
+    background: var(--bg);
+    /* the table can be wider than the page, so the bar's background reaches both edges of the window. A
+       border image paints it there without clipping the bar's dropdowns (a clip-path did) or widening the page. */
+    border-image: linear-gradient(var(--bg), var(--bg)) fill 0 / 0 / 0 100vmax;
+  }
+  .ax .fpanel {
+    display: contents;
+  }
+  .ax .fbtn {
+    display: none;
+  }
+  /* the column names stay in view under the filter row. clip, not auto: a scroll box would hold them in place */
+  .ax .catalog .table-wrap {
+    overflow-x: clip;
+  }
+  .ax .at thead th {
+    position: sticky;
+    top: calc(var(--bar-h) + var(--frow-h, 60px));
+    z-index: 5;
+    padding-top: 6px;
+    background: var(--bg);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .ax .methods .n {
+    color: var(--ink-4);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+  .ax .break {
+    flex-basis: 100%;
+    height: 0;
+  }
+  .ax .grow {
+    flex: 1 1 240px;
+  }
+  .ax .count {
+    font-size: 13px;
+    margin-left: auto;
+  }
+  .ax .nm {
+    min-width: 200px;
+  }
+  .ax .nm > a {
     font-weight: 500;
   }
-  .desc {
+  .ax .desc {
     display: block;
     margin-top: 3px;
     color: var(--ink-3);
     font-size: 13px;
-    max-width: 60ch;
+    line-height: 1.4;
+    max-width: 58ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-  .nowrap {
+  .ax .vtag {
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: var(--panel);
+    color: var(--ink-3);
+    font: 500 11.5px/1 var(--mono);
+    vertical-align: 1px;
+  }
+  /* the disclosure for a family's earlier versions */
+  .ax .vt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0 0 -4px;
+    padding: 3px 8px 3px 4px;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--ink-2);
+    font: 500 12.5px/1.2 var(--sans);
+    cursor: pointer;
+    transition: background-color 140ms ease;
+  }
+  .ax .vt:hover {
+    background: var(--panel);
+  }
+  .ax .vt:focus-visible {
+    outline: 2px solid var(--ink-3);
+    outline-offset: 1px;
+  }
+  .ax .vt svg {
+    flex: none;
+    color: var(--ink-3);
+    transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .ax .vt[aria-expanded='true'] svg {
+    transform: rotate(90deg);
+  }
+  .ax .vlist {
+    color: var(--ink-4);
+    font-weight: 400;
+  }
+  .ax .vt[aria-expanded='true'] .vlist {
+    display: none;
+  }
+  /* earlier versions sit under their family, joined by a tree line */
+  .ax .at tr.ver td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-top-color: transparent;
+    font-size: 13.5px;
+  }
+  .ax .at tr.ver .nm {
+    position: relative;
+    padding-left: 30px;
+  }
+  .ax .at tr.ver .nm > a {
+    font-weight: 400;
+  }
+  .ax .tree {
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    border-left: 1px solid var(--ink-4);
+  }
+  .ax .tree::after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    width: 12px;
+    border-top: 1px solid var(--ink-4);
+  }
+  .ax tr.last .tree {
+    bottom: 50%;
+  }
+  .ax tr.ver .desc {
+    margin-top: 1px;
+    font-size: 12.5px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ax .vt svg {
+      transition: none;
+    }
+  }
+  .ax .org {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    min-width: 120px;
+    max-width: 200px;
+  }
+  .ax .kind {
+    min-width: 104px;
+    font-size: 13.5px;
+  }
+  .ax .best-c {
+    min-width: 176px;
+  }
+  .ax .best {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+  }
+  .ax .bm {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 124px;
+  }
+  .ax .best b {
+    font-weight: 500;
+    margin-left: auto;
+  }
+  .ax .nowrap {
     white-space: nowrap;
   }
-  @media (max-width: 1000px) {
-    .grid3 {
+  .ax .at th.two {
+    white-space: normal;
+    line-height: 1.25;
+    vertical-align: bottom;
+  }
+  .ax .at td {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+  .ax .cmp td:first-child {
+    color: var(--ink-3);
+    width: 22%;
+  }
+  .ax .cmp td {
+    vertical-align: top;
+  }
+  .ax .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 56px 48px;
+  }
+  /* narrower windows drop the least needed columns first, so the table never scrolls sideways */
+  @media (max-width: 1340px) {
+    .ax .at th:nth-child(3),
+    .ax .at td:nth-child(3) {
+      display: none;
+    }
+  }
+  @media (max-width: 1180px) {
+    .ax .at th:nth-child(8),
+    .ax .at td:nth-child(8) {
+      display: none;
+    }
+  }
+  @media (max-width: 1080px) {
+    .ax .at th:nth-child(4),
+    .ax .at td:nth-child(4) {
+      display: none;
+    }
+    .ax .grid3 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+  @media (max-width: 900px) {
+    .ax .areas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ax .at th:nth-child(2),
+    .ax .at td:nth-child(2),
+    .ax .at th:nth-child(4),
+    .ax .at td:nth-child(4),
+    .ax .at th:nth-child(7),
+    .ax .at td:nth-child(7),
+    .ax .at th:nth-child(9),
+    .ax .at td:nth-child(9) {
+      display: none;
+    }
+    .ax .methods {
+      flex-wrap: wrap;
+    }
+    .ax .nm {
+      min-width: 0;
+    }
+    .ax .best-c {
+      min-width: 140px;
+    }
+  }
+  /* phones: the model name moves under the mark and score, and the version list folds away */
+  @media (max-width: 640px) {
+    .ax .best {
+      flex-wrap: wrap;
+      row-gap: 2px;
+    }
+    .ax .bm {
+      order: 3;
+      flex-basis: 100%;
+      max-width: 120px;
+      font-size: 12.5px;
+      color: var(--ink-2);
+    }
+    .ax .vlist {
+      display: none;
+    }
+    .ax .at th,
+    .ax .at td {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    .ax .nm .desc {
+      width: 0;
+      min-width: 100%;
+    }
+    .ax .nm > a {
+      overflow-wrap: anywhere;
+    }
+  }
   @media (max-width: 720px) {
-    .grid3 {
+    .ax .grid3 {
       grid-template-columns: 1fr;
+    }
+    .ax .fbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 13px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--ink);
+      font: 500 14px/1 var(--sans);
+      cursor: pointer;
+    }
+    .ax .fpanel {
+      display: none;
+    }
+    .ax .fopen .fpanel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-basis: 100%;
+    }
+    .ax .count {
+      flex-basis: 100%;
+      margin-left: 0;
+    }
+    .ax .methods {
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .ax .at td .tag {
+      white-space: normal;
     }
   }
 </style>

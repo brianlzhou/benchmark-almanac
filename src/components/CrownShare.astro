@@ -33,7 +33,13 @@ const pct = (v: number) => `${Math.round(v * 100)}%`;
     {
       shown.map((s) => (
         <span class="tag">
-          <LabMark lab={s.lab} size={14} />
+          {s.lab === 'other' || !labById.has(s.lab) ? (
+            <svg width="12" height="12" aria-hidden="true">
+              <rect width="12" height="12" rx="3" fill={labColor(s.lab)} />
+            </svg>
+          ) : (
+            <LabMark lab={s.lab} size={14} />
+          )}
           {labById.get(s.lab)?.name ?? 'Other labs'}
           <span class="muted num">{pct(s.share)}</span>
         </span>

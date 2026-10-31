@@ -13,3 +13,9 @@ export function labColor(lab: string | undefined): string {
 }
 
 export const COLORED_LABS = [...LAB_SLOTS, 'xai'];
+
+/** Text colour for a label set inside a lab-coloured fill: white or near-black, whichever reads better. */
+export function onLabColor(lab: string | undefined): string {
+  const id = lab === 'xai' || LAB_SLOTS.includes(lab as (typeof LAB_SLOTS)[number]) ? lab : 'other';
+  return `var(--on-lab-${id})`;
+}

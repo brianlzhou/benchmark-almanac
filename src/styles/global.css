@@ -1,5 +1,5 @@
 /* Benchmark Almanac
-   Pure white page and a true-neutral dark theme. Text stays in zinc neutrals. Color belongs to data.
+   Pure white page and a true-neutral dark theme. Text stays in zinc neutrals. Colour belongs to data.
    Spacing separates sections. Hairlines appear only between table rows and on chart grids. */
 
 :root {
@@ -15,11 +15,8 @@
   --panel-2: #fafafa;
   --hover: #f6f6f7;
   --focus: #2a78d6;
-  /* what covers the faded part of a chart: the page at 62%, so a color keeps about a third of its strength */
-  --fade: #ffffff;
-  --fade-o: 0.62;
 
-  /* lab colors: the validated categorical palette, light steps */
+  /* lab colours: the validated categorical palette, light steps */
   --lab-openai: #2a78d6;
   --lab-anthropic: #eb6834;
   --lab-google: #1baf7a;
@@ -41,17 +38,14 @@
   --on-lab-xai: #ffffff;
   --on-lab-other: #0b0b0c;
 
-  /* area colors: their own bright set, placed between the lab hues, with a shape for each area
-     (AreaMark.astro), so a color never has to say alone whether it means a lab or an area. Checked with the categorical palette validator on 2026-11-01:
-     adjacent pairs (the stacked charts' order) pass the color-blind and normal-vision floors in both themes,
-     and every area also carries a shape (AreaMark.astro), so color is never the only cue. */
-  --area-knowledge: #0e94ce;
-  --area-reasoning: #7f2ec7;
-  --area-code: #10a99a;
-  --area-agents: #518608;
-  --area-work: #ea8a18;
-  --area-multimodal: #d450b5;
-  --area-safety: #a81032;
+  /* area colours for the stacked charts: same hues, a separate job, always with a legend */
+  --area-knowledge: #2a78d6;
+  --area-reasoning: #6250d6;
+  --area-code: #eb6834;
+  --area-agents: #1baf7a;
+  --area-work: #eda100;
+  --area-multimodal: #e87ba4;
+  --area-safety: #e34948;
   --area-other: #c4c4cb;
 
   --status-good: #0ca30c;
@@ -62,20 +56,10 @@
   --sans: var(--font-sans), system-ui, sans-serif;
   --mono: var(--font-mono), ui-monospace, monospace;
 
-  /* one content width for every page, the nav and the footer, so all left edges line up */
-  --page: 1240px;
-  --page-wide: 1600px;
+  --page: 1120px;
+  --wide: 1240px;
   --gutter: 48px;
   --radius: 10px;
-  /* a spring with a small overshoot, for marks that pop when a row is pointed at (about 420 ms) */
-  --spring: linear(0, 0.012, 0.048 2.6%, 0.192 5.6%, 0.75 14.5%, 0.95 18.6%, 1.04 22.4%, 1.062 25.6%, 1.054 29.6%, 1.02 36.4%, 0.998 45%, 0.994 55%, 1);
-  /* the sticky header's height, so sticky rows below it know where to stop */
-  --bar-h: 64px;
-}
-@media (max-width: 1010px) {
-  :root {
-    --bar-h: 56px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -86,14 +70,11 @@
     --ink-2: #c4c4cb;
     --ink-3: #93939c;
     --ink-4: #62626b;
-    --line: #2e2e33;
-    --grid: #232327;
-    --panel: #1d1d21;
-    --panel-2: #17171a;
-    --hover: #1d1d21;
-    /* on a dark page a dark cover turns orange brown and red maroon, so faded parts take a mid gray instead */
-    --fade: #3a3a40;
-    --fade-o: 0.7;
+    --line: #26262a;
+    --grid: #1d1d20;
+    --panel: #18181b;
+    --panel-2: #141416;
+    --hover: #18181b;
     --lab-openai: #3987e5;
     --lab-anthropic: #d95926;
     --lab-google: #199e70;
@@ -114,13 +95,13 @@
     --on-lab-zai: #0b0b0c;
     --on-lab-xai: #0b0b0c;
     --on-lab-other: #ffffff;
-    --area-knowledge: #0f8cbc;
-    --area-reasoning: #8822e7;
-    --area-code: #02ab97;
-    --area-agents: #4b7018;
-    --area-work: #c87c33;
-    --area-multimodal: #bb2da8;
-    --area-safety: #ee5665;
+    --area-knowledge: #3987e5;
+    --area-reasoning: #9085e9;
+    --area-code: #d95926;
+    --area-agents: #199e70;
+    --area-work: #c98500;
+    --area-multimodal: #d55181;
+    --area-safety: #e66767;
     --area-other: #4a4a52;
   }
 }
@@ -131,14 +112,11 @@
   --ink-2: #c4c4cb;
   --ink-3: #93939c;
   --ink-4: #62626b;
-  --line: #2e2e33;
-  --grid: #232327;
-  --panel: #1d1d21;
-  --panel-2: #17171a;
-  --hover: #1d1d21;
-  /* on a dark page a dark cover turns orange brown and red maroon, so faded parts take a mid gray instead */
-  --fade: #3a3a40;
-  --fade-o: 0.7;
+  --line: #26262a;
+  --grid: #1d1d20;
+  --panel: #18181b;
+  --panel-2: #141416;
+  --hover: #18181b;
   --lab-openai: #3987e5;
   --lab-anthropic: #d95926;
   --lab-google: #199e70;
@@ -159,13 +137,13 @@
   --on-lab-zai: #0b0b0c;
   --on-lab-xai: #0b0b0c;
   --on-lab-other: #ffffff;
-  --area-knowledge: #0f8cbc;
-  --area-reasoning: #8822e7;
-  --area-code: #02ab97;
-  --area-agents: #4b7018;
-  --area-work: #c87c33;
-  --area-multimodal: #bb2da8;
-  --area-safety: #ee5665;
+  --area-knowledge: #3987e5;
+  --area-reasoning: #9085e9;
+  --area-code: #d95926;
+  --area-agents: #199e70;
+  --area-work: #c98500;
+  --area-multimodal: #d55181;
+  --area-safety: #e66767;
   --area-other: #4a4a52;
 }
 
@@ -247,10 +225,11 @@ p {
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
+.page.wide {
+  max-width: calc(var(--wide) + 2 * var(--gutter));
+}
 main {
   padding-bottom: 120px;
-  /* a wide table reaches 100vw, which a classic scrollbar makes a few pixels too wide */
-  overflow-x: clip;
 }
 section + section {
   margin-top: 104px;
@@ -265,24 +244,16 @@ section + section {
 }
 
 /* page head: a serif title, then one plain sentence, then quiet facts */
-/* titles stay modest, so the data under them starts on the first screen */
 .head {
-  padding: 48px 0 36px;
+  padding: 72px 0 40px;
 }
 .head h1 {
-  font-size: clamp(34px, 4.2vw, 50px);
-  line-height: 1.06;
-  max-width: 22ch;
+  font-size: clamp(38px, 5.4vw, 60px);
+  line-height: 1.04;
+  max-width: 18ch;
 }
 .head h1.long {
   max-width: 24ch;
-}
-/* an area page or a benchmark carries its area's mark before the title */
-.head h1.with-amark .amark {
-  width: 0.34em;
-  height: 0.34em;
-  margin: 0 0.3em 0.12em 0;
-  vertical-align: middle;
 }
 .head .lede {
   margin-top: 18px;
@@ -462,160 +433,16 @@ select.field {
 .switch:has(input[value='b']:checked) .when-b {
   display: block;
 }
-/* the lab claims switch: on shows .when-a (every score), off shows .when-b (independent runs only) */
-.switch:has(input[data-claims]:not(:checked)) .when-a {
-  display: none;
-}
-.switch:has(input[data-claims]:not(:checked)) .when-b {
-  display: block;
-}
-.claims {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  gap: 10px;
-  font-size: 13.5px;
-  color: var(--ink-2);
-  white-space: nowrap;
-  cursor: pointer;
-  user-select: none;
-}
-.claims input {
-  appearance: none;
-  position: relative;
-  flex: none;
-  width: 34px;
-  height: 20px;
-  margin: 0;
-  border-radius: 999px;
-  background: var(--line);
-  cursor: pointer;
-  transition: background-color 160ms ease;
-}
-.claims input::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--bg);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
-  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
-}
-.claims input:checked {
-  background: var(--ink);
-}
-.claims input:checked::before {
-  transform: translateX(14px);
-}
-.claims input:focus-visible {
-  outline: 2px solid var(--ink-3);
-  outline-offset: 2px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .claims input,
-  .claims input::before {
-    transition: none;
-  }
-}
 
 /* ---- tables ----------------------------------------------------------------------------------- */
-/* sortable headers (src/scripts/sort.ts): the header text is a button, with a small arrow pair after it */
-th .sort {
-  all: unset;
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 5px;
-  cursor: pointer;
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
-}
-th .sort:hover {
-  color: var(--ink);
-}
-th .sort:focus-visible {
-  outline: 2px solid var(--ink-3);
-  outline-offset: 2px;
-  border-radius: 3px;
-}
-th .sort svg {
-  flex: none;
-  margin-bottom: 3px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-th .sort path {
-  opacity: 0.3;
-}
-th[aria-sort='ascending'] .sort .up,
-th[aria-sort='descending'] .sort .dn {
-  opacity: 1;
-}
-th[aria-sort='ascending'] .sort .dn,
-th[aria-sort='descending'] .sort .up {
-  opacity: 0;
-}
-th[aria-sort='ascending'],
-th[aria-sort='descending'] {
-  color: var(--ink);
-}
-/* long tables lay out one page of rows at first; src/scripts/filter.ts shows the rest as the reader scrolls */
-.js [data-later] {
-  display: none;
-}
-/* A hidden row after the header row holds each no-wrap column's longest cell (see freezeColumns in filter.ts). It sets the
-   column widths from the first paint and takes no height. */
-.t tr[data-probe] {
-  visibility: collapse;
-}
-.t tr[data-probe] td,
-.t tr[data-probe] td * {
-  height: 0;
-  padding-block: 0;
-  margin-block: 0;
-  border-block-width: 0;
-  line-height: 0;
-}
-.more-rows {
-  display: block;
-  margin: 18px auto 0;
-  padding: 9px 16px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--bg);
-  color: var(--ink-2);
-  font: 500 13.5px var(--sans);
-  cursor: pointer;
-}
-.more-rows:hover {
-  background: var(--panel);
-}
-.more-rows[hidden] {
-  display: none;
-}
 .table-wrap {
   overflow-x: auto;
   margin: 0 calc(-1 * var(--gutter));
   padding: 0 var(--gutter);
 }
-/* A big table may use more of a wide screen than the page around it: up to --page-wide, reaching out the
-   same distance on both sides. */
-.table-wrap.wide {
-  --w: min(calc(var(--page-wide) + 2 * var(--gutter)), 100vw);
-  margin-left: calc((100% - var(--w)) / 2);
-  margin-right: calc((100% - var(--w)) / 2);
-}
 table.t {
   width: 100%;
-  /* separate borders, so a hovered row's first and last cells can round their corners */
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
   font-size: 14.5px;
 }
 .t th {
@@ -638,49 +465,8 @@ table.t {
 .t td:last-child {
   padding-right: 4px;
 }
-/* Hovered rows: a rounded wash that reaches 8px past the text on both sides, with the hairlines above and
-   below it hidden. It fades in and out over 140ms. The corners and hairlines change only after the fade
-   out ends, so a fading row never shows a square corner or a curved hairline. */
-.t td {
-  transition:
-    background-color 140ms ease,
-    box-shadow 140ms ease,
-    border-radius 0s linear 140ms,
-    border-top-color 0s linear 140ms;
-}
-.t td:first-child {
-  box-shadow: -8px 0 0 transparent;
-}
-.t td:last-child {
-  box-shadow: 8px 0 0 transparent;
-}
 .t tbody tr:hover td {
   background: var(--hover);
-  border-top-color: transparent;
-  transition:
-    background-color 140ms ease,
-    box-shadow 140ms ease;
-}
-.t tbody tr:hover + tr td {
-  border-top-color: transparent;
-  transition-delay: 0s;
-}
-.t tbody tr:hover td:first-child {
-  border-radius: 8px 0 0 8px;
-  box-shadow: -8px 0 0 var(--hover);
-}
-.t tbody tr:hover td:last-child {
-  border-radius: 0 8px 8px 0;
-  box-shadow: 8px 0 0 var(--hover);
-}
-.t tbody tr:hover td:only-child {
-  border-radius: 8px;
-  box-shadow: -8px 0 0 var(--hover), 8px 0 0 var(--hover);
-}
-@media (prefers-reduced-motion: reduce) {
-  .t td {
-    transition: none;
-  }
 }
 .t .r {
   text-align: right;
@@ -699,46 +485,14 @@ table.t {
   text-decoration: underline;
 }
 
-/* Lab marks in a table keep their color. Pointing at a row gives the mark a small spring (about 420 ms).
-   Reduced motion leaves it still. */
-.t tbody .mark {
-  transition: transform 420ms var(--spring);
-}
-.t tbody tr:hover .mark {
-  transform: scale(1.14);
-}
-.t tbody .mask {
-  background: var(--lc, var(--ink));
-}
-@media (prefers-reduced-motion: reduce) {
-  .t tbody .mark {
-    transition: none;
-  }
-  .t tbody tr:hover .mark {
-    transform: none;
-  }
-}
-
 /* ---- tags ------------------------------------------------------------------------------------- */
-/* The label sets the tag's baseline, so a tag lines up with the text beside it. The dot, which has no text,
-   would otherwise set it, and the label would sit low. In a table a tag is the same size as the row. */
 .tag {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 6px;
   font-size: 13px;
   color: var(--ink-2);
   white-space: nowrap;
-}
-.tag > .dot {
-  align-self: center;
-}
-.t td .tag {
-  font-size: inherit;
-}
-/* a date that has gone quiet: no new model in a year */
-.t td.stale {
-  color: var(--ink-4);
 }
 .dot {
   width: 7px;
@@ -758,9 +512,6 @@ table.t {
 }
 .status-not-in-cards {
   color: var(--ink-4);
-}
-.status-system-cards {
-  color: var(--ink-3);
 }
 
 /* ---- tooltips (one shared element, filled by src/scripts/tips.ts) ------------------------------ */
@@ -801,223 +552,6 @@ table.t {
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) #tip {
     box-shadow: 0 8px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.08);
-  }
-}
-
-/* ---- hover cards on the Benchmarks and Arenas tables (src/scripts/peek.ts) ---------------------- */
-.rows-open tbody tr {
-  cursor: pointer;
-}
-.peek {
-  position: fixed;
-  z-index: 45;
-  width: 444px;
-  max-width: calc(100vw - 24px);
-  padding: 16px 16px 12px;
-  border-radius: 14px;
-  background: var(--bg);
-  box-shadow: 0 14px 40px rgb(0 0 0 / 0.14), 0 0 0 1px rgb(0 0 0 / 0.06);
-  font-size: 13px;
-  color: var(--ink-2);
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  translate: 0 4px;
-  transition: opacity 140ms ease, translate 140ms ease, visibility 0s linear 140ms;
-}
-.peek.on {
-  opacity: 1;
-  visibility: visible;
-  translate: 0 0;
-  transition: opacity 140ms ease, translate 140ms ease, visibility 0s;
-}
-/* once open, the card glides after the pointer and from row to row */
-.peek.on.glide {
-  transition: opacity 140ms ease, translate 140ms ease, visibility 0s, left 260ms cubic-bezier(0.22, 1, 0.36, 1), top 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (prefers-reduced-motion: reduce) {
-  .peek.on.glide {
-    transition: opacity 140ms ease, visibility 0s;
-  }
-}
-:root[data-theme='dark'] .peek {
-  box-shadow: 0 14px 40px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.09);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .peek {
-    box-shadow: 0 14px 40px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.09);
-  }
-}
-.pk-h {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-.pk-t {
-  min-width: 0;
-}
-.pk-t > b {
-  display: block;
-  font: 400 21px/1.15 var(--serif);
-  color: var(--ink);
-}
-.pk-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 12px;
-  margin-top: 4px;
-  font-size: 12.5px;
-  color: var(--ink-3);
-}
-.peek .tag {
-  flex: none;
-  margin-top: 3px;
-}
-.pk-d {
-  display: -webkit-box;
-  margin: 8px 0 0;
-  overflow: hidden;
-  line-height: 1.45;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-.pk-charts {
-  display: grid;
-  gap: 16px;
-  margin-top: 14px;
-}
-.pk-charts.two {
-  grid-template-columns: 1fr 1fr;
-}
-.pk-charts figure {
-  margin: 0;
-}
-.pk-charts figcaption {
-  margin-bottom: 4px;
-  font-size: 11.5px;
-  color: var(--ink-3);
-}
-.pk-charts svg {
-  display: block;
-  overflow: visible;
-}
-.pk-grid {
-  stroke: var(--grid);
-}
-.pk-yr {
-  stroke: var(--line);
-  stroke-dasharray: 2 3;
-}
-.pk-ax {
-  font: 10px var(--mono);
-  fill: var(--ink-3);
-}
-.pk-dot {
-  fill: var(--ink-4);
-  opacity: 0.5;
-}
-.pk-line {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1.5;
-  stroke-linejoin: round;
-}
-.pk-rec {
-  fill: var(--ink);
-  stroke: var(--bg);
-  stroke-width: 1.5;
-}
-.pk-none {
-  margin: 14px 0 0;
-  padding: 18px;
-  border-radius: 10px;
-  background: var(--panel);
-  color: var(--ink-3);
-  text-align: center;
-}
-.pk-top {
-  display: grid;
-  gap: 7px;
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pk-top li {
-  display: grid;
-  grid-template-columns: 14px minmax(0, 1fr) 92px 56px;
-  align-items: center;
-  gap: 8px;
-  color: var(--ink);
-}
-.pk-nm {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.pk-bar {
-  height: 6px;
-  border-radius: 3px;
-  background: var(--panel);
-  overflow: hidden;
-}
-.pk-bar i {
-  display: block;
-  height: 100%;
-  border-radius: 3px;
-  background: var(--ink-3);
-}
-.pk-top b {
-  font-weight: 500;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-.pk-mk {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-}
-.pk-mask {
-  background: var(--ink);
-  -webkit-mask: var(--m) center / contain no-repeat;
-  mask: var(--m) center / contain no-repeat;
-}
-.pk-init {
-  display: inline-grid;
-  place-items: center;
-  border-radius: 4px;
-  background: var(--panel);
-  font-size: 9px;
-  font-weight: 600;
-  color: var(--ink-2);
-}
-.pk-f {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line);
-  font-size: 12px;
-  color: var(--ink-3);
-}
-.pk-go {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--ink);
-  font-weight: 500;
-  white-space: nowrap;
-}
-.peek:hover .pk-go {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .peek,
-  .peek.on {
-    translate: none;
   }
 }
 

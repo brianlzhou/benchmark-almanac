@@ -12,70 +12,70 @@ const leftOut = (reviewed as { rejected?: unknown[] }).rejected?.length ?? 0;
 const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automated).length;
 ---
 
-<Base title="How this works" description="Where the almanac's data comes from, how it names models, and the rules behind its labels.">
+<Base title="How this works" description="Where our data comes from, and the rules we use to name models and label benchmarks.">
   <div class="page prose">
     <header class="head">
       <h1>How this works</h1>
-      <p class="lede">The almanac joins three kinds of data under one naming scheme. Everything is built from files in the repository, so every number traces back to a source.</p>
+      <p class="lede">We collect scores from lab model cards, official leaderboards and independent runs, and match each one to a single name for its model. The site is built from data files in our GitHub repository.</p>
     </header>
 
-    <section id="catalogued">
-      <h2>What gets catalogued</h2>
+    <section id="cataloged">
+      <h2>What gets cataloged</h2>
       <p>
-        A benchmark here is a named test of AI models that anyone can run again: language models, agents, vision and audio models, robot policies and world models. The almanac adds one when it passes <b>at least one</b> of four tests.
+        We count a named test of AI models as a benchmark if anyone can run it again. It can be for language models, agents, vision and audio models, robot policies or world models. We add one to the catalog if it passes <b>at least one</b> of four tests.
       </p>
       <Criteria />
       <p>
         <b>What stays out:</b> {STAYS_OUT}
       </p>
       <p>
-        Every find that was checked and left out is listed on the <a href="/new/">New page</a> with its reason: {leftOut.toLocaleString('en-US')} so far. A find that fails today can pass later, when a lab reports it or people start to use it. To suggest one, use the <a href="/submit/">submission form</a>.
+        We've checked and left out {leftOut.toLocaleString('en-US')} finds so far, and the <a href="/new/">New page</a> lists each one with our reason. A find that fails now can pass later, once a lab reports it or people start using it. To suggest one, use the <a href="/submit/">submission form</a>.
       </p>
     </section>
 
     <section id="data">
       <h2>The data</h2>
       <p>
-        <b>Lab model cards.</b> {cards.length} launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {fullDate(AS_OF)}. For each post the almanac records the benchmarks in its headline results and the model's score, as the post writes them. Whether a benchmark is in use, fading or dropped follows these posts.
-        {systemCards.length > 0 && ` The almanac also reads ${systemCards.length} system cards, model cards and technical reports published with the releases. They record every evaluation the document reports, including safety and frontier-risk tests, and each result notes the section it sits in.`}
-        Labs choose their own settings, so card scores compare less cleanly than independent runs. Pages say which kind of score they show.
+        <b>Lab model cards.</b> {cards.length} launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {fullDate(AS_OF)}. For each post we record the benchmarks in its headline results and the model's score on each, as the post gives it. Whether we call a benchmark in use, fading or dropped depends only on these posts.
+        {systemCards.length > 0 && ` We also read ${systemCards.length} system cards, model cards and technical reports that came out with the releases. From these we record every evaluation each document reports, safety and frontier-risk tests included, along with the section each result appears in.`}
+        Labs pick their own settings, so card scores don't compare as cleanly as independent runs. We say on each page which kind of score it shows.
       </p>
       <p>
-        <b>Official leaderboards.</b> Many benchmarks publish their own leaderboard, and it is usually the first place new models appear. Small importers in <code>scripts/leaderboards/</code> read each one from its published data file and map its model names onto the almanac's models. When a benchmark's own board covers five or more models, its page leads with it.
+        <b>Official leaderboards.</b> Many benchmarks keep their own leaderboard, and new models usually show up there first. We import each board from the data file it publishes, using the scripts in <code>scripts/leaderboards/</code>, and match its model names to ours. If a benchmark's own board has five or more models, we lead with it on that benchmark's page.
       </p>
       <p>
-        <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {fullDate(EPOCH_SOURCE.retrieved)}. Some are Epoch's own runs and some it collects from public leaderboards. The Epoch Capabilities Index, which ranks models across many benchmarks on one scale, comes from Epoch too. Rows Epoch collected from Artificial Analysis are left out, because Artificial Analysis's terms do not allow reuse in other ranking products.
+        <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {fullDate(EPOCH_SOURCE.retrieved)}. Epoch runs some of these itself and collects the rest from public leaderboards. We also use its Epoch Capabilities Index, which puts models on one scale across many benchmarks. We leave out the rows Epoch collected from Artificial Analysis, because Artificial Analysis's terms do not allow reuse in other ranking products.
       </p>
       <p>
-        <b>The catalogue.</b> {benchmarks.length.toLocaleString('en-US')} benchmarks with what each tests, who made it, and links to its code, paper, data and leaderboard. Each GitHub link was checked against the GitHub API. Entries started from lab cards, Epoch's hub and public collections, and research agents filled in the facts from primary sources.
+        <b>The catalog.</b> {benchmarks.length.toLocaleString('en-US')} benchmarks, each with what it tests, who made it, and links to its code, paper, data and leaderboard. We checked every GitHub link against the GitHub API. The list began with benchmarks from lab cards, Epoch's hub and public collections, and research agents filled in the details from primary sources.
       </p>
     </section>
 
     <section id="names">
       <h2>One name per model</h2>
       <p>
-        Every score points at one record in <code>data/models.json</code>, whatever the source called the model. A record holds the model's name as its lab writes it, the lab, the release date, open or closed weights, and the other spellings it goes by. When a lab shipped several versions under one name, each is its own record with a snapshot label, such as GPT-4o (May 2024). Reasoning effort and harness are settings of a score, not separate models. A model's rank on a benchmark uses its best setting.
+        We match every score to one record in <code>data/models.json</code>, whatever the source called the model. Each record has the model's name as its lab writes it, its lab and release date, whether its weights are open, and the other spellings it goes by. If a lab shipped several versions under one name, each version gets its own record and a snapshot label, such as GPT-4o (May 2024). Reasoning effort and harness are stored as settings on a score, so GPT-5 at high effort is still GPT-5. We rank a model on a benchmark by its best setting.
       </p>
-      <p>The same holds for {labs.length} labs and for benchmarks: one record each, with aliases, so "GPQA-D" in one card and "GPQA Diamond" in another count as one benchmark. Versions stay apart: ARC-AGI-2 is not ARC-AGI.</p>
+      <p>We do the same for the {labs.length} labs and for benchmarks. Each has one record with its aliases, so "GPQA-D" in one card and "GPQA Diamond" in another count as one benchmark. Versions don't merge, so ARC-AGI-2 has a record of its own.</p>
     </section>
 
     <section id="labels">
       <h2>The labels</h2>
       <dl>
         <dt>In use</dt>
-        <dd>Two or more model cards reported it in the last six months, or it first appeared in the last six months.</dd>
+        <dd>At least two model cards reported it in the last six months, or the first card to report it is less than six months old.</dd>
         <dt>Fading</dt>
         <dd>Not in use, but a card reported it in the last year.</dd>
         <dt>Dropped</dt>
         <dd>No card has reported it for a year.</dd>
         <dt>Saturated</dt>
-        <dd>The best score has passed {SATURATED}%. For a dropped benchmark, the almanac says it was dropped after it saturated when the best score had passed {SATURATED}% by the last card that reported it.</dd>
+        <dd>The best score has passed {SATURATED}%. If a dropped benchmark's best score had already passed {SATURATED}% when the last card reported it, we say labs dropped it after it saturated.</dd>
       </dl>
     </section>
 
     <section id="levels">
       <h2>Levels and scoring</h2>
-      <p>Each benchmark has a level: who among people could solve its tasks. It says how hard the tasks are for a person, not how models score.</p>
+      <p>Each benchmark gets a level for who could solve its tasks. Model scores play no part in it.</p>
       <dl>
         {LEVELS.map((l) => (
           <>
@@ -84,7 +84,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
           </>
         ))}
       </dl>
-      <p class="gap">Each benchmark also says how a score is decided. Arenas, where people vote between two answers, rank models against each other. The rest score them against a fixed standard.</p>
+      <p class="gap">We also record how each benchmark is scored. Votes and matches rank models against each other, and every other method scores them against a fixed standard.</p>
       <dl>
         {SCORING.map((m) => (
           <>
@@ -98,34 +98,34 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
     <section id="versions">
       <h2>Versions</h2>
       <p>
-        A benchmark released in versions, such as Terminal-Bench 1.0 to 4.0 or PostTrainBench 1.0 to 1.2, keeps one record per version, linked as a family. Scores never mix across versions: a card that reports "PostTrainBench v1.1" counts toward 1.1. The benchmarks list shows each family once, at its newest version, and each version's page links the others.
+        When a benchmark comes out in versions, such as Terminal-Bench 1.0 to 4.0 or PostTrainBench 1.0 to 1.2, we keep one record per version and link them as a family. We never mix scores across versions. A card that reports "PostTrainBench v1.1" counts toward 1.1 only. The benchmarks list shows each family once, at its newest version, and each version's page links to the others.
       </p>
     </section>
 
     <section id="leaders">
       <h2>Who held number one</h2>
       <p>
-        A model takes the top spot on a benchmark on the day its score beats every earlier score, and keeps it until a later model beats it. Ties leave the holder in place. Scores are placed at each model's release date, but never before the benchmark itself came out. Lab claims are placed at the date of the card that made them. Charts start in January 2023.
+        A model takes number one on a benchmark on the day its score beats every earlier score, and holds it until a later model beats it. If two models tie, the earlier one keeps the spot. We date a score to its model's release, or a lab claim to the card that made it. No score is dated before the benchmark came out. Our charts start in January 2023.
       </p>
       <p>
-        The clock that counts time at number one stops at the first of two moments: the best score passes {SATURATED}%, or six weeks pass with no newer model tested. After that, nobody can take the lead in a way that means much, or nobody knows who would. A new version does not stop the old one’s clock. While people still test the old version, its race goes on, and whoever takes it past {SATURATED}% gets the close-out: ARC-AGI-2 came out long before anyone closed out ARC-AGI-1. The share of time at number one counts only this contested time. The model that first takes a benchmark past {SATURATED}% earns a close-out instead, counted on its own.
+        We stop counting time at number one once the best score passes {SATURATED}%, since a lead means little after that. We also stop if more than 45 days go by with no newer model tested, because then nobody knows who would lead. In that case the count ends on the date of the newest model tested. The first model to take a benchmark past {SATURATED}% gets a close-out, which we count separately. A new version doesn't end the count for the old one. As long as people still test the old version its race goes on, and ARC-AGI-1 wasn't closed out until long after ARC-AGI-2 came out. Shares of time at number one include only these contested days.
       </p>
     </section>
 
     <section id="finding">
       <h2>Finding new benchmarks</h2>
       <p>
-        A job runs every morning. It reads {readDaily} of the sources on the <a href="/sources/">Sources page</a>: paper feeds, newsletters, evaluation registers, leaderboards and lab blogs. It scores each find in two stages. First: is it a benchmark at all? Second: does it pass one of the four tests above? Finds that score 8 or more go to the <a href="/new/">review queue</a>. The rest wait 14 days for more evidence. A find already left out is skipped. The job never scrapes X, whose terms forbid it.
+        Every morning we automatically read {readDaily} of the sources on our <a href="/sources/">Sources page</a>. We score each find in two stages, first on whether it is a benchmark at all, then on the evidence that it passes one of the four tests above. Finds that score 8 or more go to the <a href="/new/">review queue</a>. Finds that score 5 to 7 go on a watch list and drop off after 14 days with no new mention. We skip anything we've already left out, and we never scrape X, because its terms forbid it.
       </p>
       <p>
-        Research agents then check each find against its own paper, repository or leaderboard before it joins the catalogue, and look for newer versions of benchmarks already here.
+        Before a find joins the catalog, a person or a research agent checks it against its own paper, repository or leaderboard. The agents also look for newer versions of benchmarks we already have.
       </p>
     </section>
 
     <section id="credits">
       <h2>Credits</h2>
       <p>
-        Scores and the capability index: Epoch AI, under CC BY 4.0. Paper abstracts: arXiv metadata, under CC0, and other papers under the license each one names. Lab marks: <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a>, under the MIT License, and the labs’ own websites and GitHub or Hugging Face organizations. The marks are trademarks of their owners. Type: Newsreader and Geist, under the SIL Open Font License. The page designs take cues from the benchmark pages of Epoch AI, Artificial Analysis, Arena and Design Arena.
+        Scores and the capability index: Epoch AI, under CC BY 4.0. Paper abstracts: arXiv metadata, under CC0, and other papers under the license each one names. Lab marks: <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a>, under the MIT License, and the labs’ own websites and GitHub or Hugging Face organizations. The marks are trademarks of their owners. Type: Newsreader and Geist, under the SIL Open Font License. Our page designs borrow from the benchmark pages of Epoch AI, Artificial Analysis, Arena and Design Arena.
       </p>
     </section>
   </div>

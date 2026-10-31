@@ -45,6 +45,14 @@ export interface Benchmark {
   name: string;
   aliases?: string[];
   category?: string;
+  /** A finer category from data/taxonomy.json. */
+  subcategory?: string;
+  /** Who could solve the tasks: everyday, school, university, competition, expert or frontier. */
+  level?: string | null;
+  /** How a score is decided: verified, model-judged, expert-graded, preference, head-to-head or outcome. */
+  scoring?: string;
+  /** What the model produces: multiple-choice, short-answer, proof, code, agent-task, open-ended or prediction. */
+  format?: string;
   description?: string;
   org?: string;
   released?: string;

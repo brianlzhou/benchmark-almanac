@@ -9,6 +9,7 @@ import { leaderRows } from '../../lib/leaders.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, LEVELS, SUBCATEGORIES, SCORING_BY_ID, LEVEL_BY_ID, areaOf } from '../../lib/taxonomy.ts';
 import { labColor } from '../../lib/palette.ts';
 import { score as fmt } from '../../lib/format.ts';
+import { AS_OF, monthsBetween } from '../../lib/data.ts';
 
 export function getStaticPaths() {
   return [...new Set(benchmarks.map((b) => b.category ?? 'other'))].map((category) => ({ params: { category } }));
@@ -22,10 +23,10 @@ const all = benchmarks.filter((b) => (b.category ?? 'other') === cat).map((b) =>
 all.sort((a, b) => b.cites.length + b.nScores - (a.cites.length + a.nScores) || a.b.name.localeCompare(b.b.name));
 const ids = all.map((s) => s.b.id);
 
-const ind = leaderRows(ids, 'epoch');
+const ind = leaderRows(ids, 'best');
 const claims = leaderRows(ids, 'card');
-const both = ind.length > 0 && claims.length > 0;
-const main = ind.length ? ind : claims;
+const both = ind.length > 0 && claims.length > 0 && ind.some((r) => r.source === 'epoch');
+const main = ind;
 const shares = labShares(main);
 const top = shares[0];
 const lower = name.charAt(0).toLowerCase() + name.slice(1);
@@ -34,6 +35,8 @@ const headline =
     ? `${labById.get(top.lab)?.name ?? 'Other labs'} held the top ${lower} score ${Math.round(top.share * 100)}% of the time`
     : `Who held number one in ${lower}`;
 
+const span = monthsBetween('2023-01', AS_OF);
+const monthsHeld = top ? Math.round(top.share * span) : 0;
 const levels = LEVELS.map((l) => ({ l, xs: all.filter((s) => s.b.level === l.id) })).filter((x) => x.xs.length);
 const unrated = all.filter((s) => !s.b.level);
 const subs = (SUBCATEGORIES[cat] ?? []).map((sc) => ({ sc, xs: all.filter((s) => s.b.subcategory === sc.id) })).filter((x) => x.xs.length);
@@ -64,12 +67,13 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
             <div class="sh">
               <h2>{headline}</h2>
               <p>
-                Each row is a benchmark, easiest level at the top. The shape rises with the best score so far, and its colour shows which lab's model held the top spot. Hover a stretch for the model and its score.
+                {top && shares.length > 1 && `That is about ${monthsHeld} of the ${span} months since January 2023, averaged over the benchmarks below. `}
+                Each row is a benchmark, easiest level at the top. The shape rises with the best score so far, and its colour shows which lab's model held the top spot.
               </p>
             </div>
             {both && (
               <div class="seg" role="radiogroup" aria-label="Scores">
-                <label><input type="radio" name={`src-${cat}`} value="a" checked />Independent runs</label>
+                <label><input type="radio" name={`src-${cat}`} value="a" checked />Independent where possible</label>
                 <label><input type="radio" name={`src-${cat}`} value="b" />Lab claims</label>
               </div>
             )}
@@ -80,7 +84,11 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
               <h3>Share of time at number one</h3>
               <CrownShare shares={shares} />
             </div>
-            <p class="src">{ind.length ? 'Scores from Epoch AI, placed at each model’s release date.' : 'Scores labs report in their model cards, placed at each card’s date.'}</p>
+            <p class="src">
+              {main.some((r) => r.source === 'card')
+                ? 'Independent runs from Epoch AI where it has scored four or more models, placed at each model’s release date. Other rows use the scores labs report in their model cards, placed at each card’s date.'
+                : 'Scores from Epoch AI, placed at each model’s release date.'}
+            </p>
           </div>
           {both && (
             <div class="when-b">
@@ -114,7 +122,10 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
                     const lead = s.best ? modelById.get(s.best.model) : undefined;
                     return (
                       <li>
-                        <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                        <a href={`/benchmarks/${s.b.id}/`}>
+                          {s.b.name}
+                          {s.b.format === 'proof' && <span class="fmt">proofs</span>}
+                        </a>
                         {s.best && pctUnit ? (
                           <span class="bar" data-tv={fmt(s.best.value, '%')} data-tn={lead?.name} data-ts="Best score">
                             <span style={`width:${Math.max(1, s.best.value)}%;background:${labColor(lead?.lab)}`} />
@@ -230,6 +241,11 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
   .rung li a:hover {
     text-decoration: underline;
     text-decoration-color: var(--ink-4);
+  }
+  .fmt {
+    margin-left: 6px;
+    font-size: 11.5px;
+    color: var(--ink-3);
   }
   .bar {
     display: block;

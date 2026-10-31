@@ -12,7 +12,8 @@ so pages ship almost no JavaScript.
 | --- | --- |
 | `data/labs.json` | One record per lab, with the spellings other sources use. |
 | `data/models.json` | One record per model, as its lab names it. A lab that shipped several versions under one name gets one record per snapshot (`GPT-4o`, `version: "May 2024"`). |
-| `data/benchmarks.json` | One record per benchmark: what it tests, who made it, links, access, status notes, and aliases. Versions stay separate (`ARC-AGI-2` is not `ARC-AGI`). |
+| `data/benchmarks.json` | One record per benchmark: what it tests, who made it, links, access, status notes, and aliases. Versions stay separate (`ARC-AGI-2` is not `ARC-AGI`). Each also has a finer category, a level, a scoring method and an answer format. |
+| `data/taxonomy.json` | The allowed values for those four fields: subcategories under each category, six levels from everyday to research frontier, six scoring methods (from checked automatically to arenas and real events), and seven answer formats. |
 | `data/cards.json` | Lab model cards: the benchmarks in each card's headline table and the score the card reports. |
 | `data/scores/epoch.json` | Scores and the Epoch Capabilities Index from [Epoch AI](https://epoch.ai/benchmarks), CC BY 4.0. |
 | `data/github.json` | Stars, license, last push and archived state for each benchmark repo. |

@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import ReignChart from '../components/ReignChart.astro';
 import CrownShare from '../components/CrownShare.astro';
-import { benchmarks, labById } from '../lib/data.ts';
+import { benchmarks, labById, modelById, benchById, epochScores, AS_OF, monthsBetween } from '../lib/data.ts';
+import LabMark from '../components/LabMark.astro';
+import { monthYear } from '../lib/format.ts';
 import { eciReigns, labShares, reignDays } from '../lib/reigns.ts';
 import { leaderRows } from '../lib/leaders.ts';
 import { AREAS, CATEGORY_NAMES } from '../lib/taxonomy.ts';
@@ -17,15 +19,24 @@ const changes = eci ? eci.reigns.filter((g) => g.start >= '2023-01-01').length :
 const cats = AREAS.flatMap((a) => a.categories.map((c) => ({ a, c })))
   .map(({ a, c }) => {
     const ids = benchmarks.filter((b) => b.category === c).map((b) => b.id);
-    const ind = leaderRows(ids, 'epoch');
-    const rows = ind.length ? ind : leaderRows(ids, 'card');
-    return { a, c, rows, src: ind.length ? 'epoch' : 'card', shares: labShares(rows) };
+    const rows = leaderRows(ids, 'best');
+    return { a, c, rows, src: rows.every((r) => r.source === 'card') ? 'card' : 'epoch', shares: labShares(rows, '2023-01-01') };
   })
   .filter((x) => x.rows.length);
-const allRows = cats.filter((x) => x.src === 'epoch').flatMap((x) => x.rows);
-const overall = labShares(allRows);
+const allRows = cats.flatMap((x) => x.rows.filter((r) => r.source === 'epoch'));
+const overall = labShares(allRows, '2023-01-01');
 const lead = overall[0];
 const pct = (v: number) => `${Math.round(v * 100)}%`;
+// the longest runs at number one since 2023, on benchmarks with independent runs
+// only benchmarks someone still scores: a run on a test nobody runs any more is not a run
+const lastScore = new Map<string, string>();
+for (const x of epochScores) if (x.date && x.date > (lastScore.get(x.benchmark) ?? '')) lastScore.set(x.benchmark, x.date);
+const active = (b: string) => monthsBetween(lastScore.get(b) ?? '2000-01', AS_OF) <= 12;
+const runs = allRows
+  .filter((r) => active(r.benchmark))
+  .flatMap((r) => r.reigns.filter((g) => g.end > '2023-01-01').map((g) => ({ g, b: r.benchmark, months: reignDays({ start: g.start < '2023-01-01' ? '2023-01-01' : g.start, end: g.end }) / 30.4 })))
+  .sort((a, b) => b.months - a.months)
+  .slice(0, 8);
 const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) => reignDays(b) - reignDays(a))[0];
 ---
 
@@ -44,7 +55,7 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
           <div class="sh">
             <h2>The top spot on the capability index changed hands {changes} times since 2023</h2>
             <p>
-              The Epoch Capabilities Index puts many benchmarks on one scale. {labById.get(eciNow.lab ?? '')?.name}’s {eciRows[0].reigns.length ? '' : ''}model holds it now.
+              The Epoch Capabilities Index puts many benchmarks on one scale. {modelById.get(eciNow.model)?.name}, from {labById.get(eciNow.lab ?? '')?.name}, holds it now.
               {longest && ` The longest run at the top was ${Math.round(reignDays(longest) / 30.4)} months.`}
             </p>
           </div>
@@ -63,6 +74,31 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
             <p>Across the {allRows.length} benchmarks with independent runs below, the share of days each lab’s model had the best score.</p>
           </div>
           <CrownShare shares={overall} />
+        </section>
+      )
+    }
+
+    {
+      runs.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>The longest runs at the top</h2>
+            <p>The longest stretches one model held the best independent score on a benchmark that models were still tested on in the last year, counted from January 2023.</p>
+          </div>
+          <ol class="runs">
+            {runs.map(({ g, b, months }) => (
+              <li>
+                <span class="rm num">{Math.round(months)}<small> months</small></span>
+                <span class="rw">
+                  <LabMark lab={g.lab} size={16} />
+                  <b>{modelById.get(g.model)?.name}</b> on <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>
+                </span>
+                <span class="rd muted">
+                  {monthYear(g.start < '2023-01-01' ? '2023-01-01' : g.start)} to {g.end >= AS_OF ? 'now' : monthYear(g.end)}
+                </span>
+              </li>
+            ))}
+          </ol>
         </section>
       )
     }
@@ -87,10 +123,7 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
               <span class="cl muted">
                 {labById.get(shares[0]?.lab ?? '')?.name ?? 'Other labs'} {pct(shares[0]?.share ?? 0)}
               </span>
-              <span class="cm muted">
-                {rows.length} {rows.length === 1 ? 'benchmark' : 'benchmarks'}
-                {src === 'card' ? ', lab claims' : ''}
-              </span>
+              <span class="cm muted">{`${rows.length} ${rows.length === 1 ? 'benchmark' : 'benchmarks'}${src === 'card' ? ', lab claims' : ''}`}</span>
             </a>
           ))
         }
@@ -100,6 +133,43 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
 </Base>
 
 <style>
+  .runs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .runs li {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: baseline;
+  }
+  .rm {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .rm small {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-3);
+    letter-spacing: 0;
+  }
+  .rw {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .rw b {
+    font-weight: 500;
+  }
+  .rd {
+    font-size: 13px;
+    white-space: nowrap;
+  }
   .cats {
     display: grid;
   }
@@ -133,6 +203,12 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
   .cm {
     font-size: 13px;
     white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .runs li {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
   }
   @media (max-width: 900px) {
     .cat {

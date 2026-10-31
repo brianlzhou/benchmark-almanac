@@ -12,6 +12,7 @@ import ReignChart from '../components/ReignChart.astro';
 import { mostReportedRows } from '../lib/leaders.ts';
 import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED, LEADERBOARDS, benchById } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
+import { SITE_NAME, SITE_DESCRIPTION, CATALOG_ID } from '../lib/site.ts';
 import discoveredJson from '../../data/discovered.json';
 import githubJson from '../../data/github.json';
 
@@ -64,17 +65,31 @@ const fresh = byAdded.length
   ? byAdded
   : benchmarks.filter((b) => b.released && b.released >= monthAgo.slice(0, 7) && b.access !== 'private').sort((a, b) => b.released!.localeCompare(a.released!));
 const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter((d) => d.decision === 'catalog').slice(0, 6);
-// schema.org WebSite: the site's name and address for search engines
+// schema.org: the site, and the catalog every benchmark page's Dataset names as its home (CATALOG_ID)
+const home = new URL('/', Astro.site).href;
 const website = {
   '@type': 'WebSite',
-  name: 'Benchmark Almanac',
-  url: new URL('/', Astro.site).href,
-  description: 'A catalog of AI benchmarks, with the labs that report each one and how its scores have changed.',
+  '@id': `${home}#website`,
+  name: SITE_NAME,
+  alternateName: new URL(home).hostname,
+  url: home,
+  description: SITE_DESCRIPTION,
   inLanguage: 'en',
+};
+const catalog = {
+  '@type': 'DataCatalog',
+  '@id': `${home}${CATALOG_ID}`,
+  name: SITE_NAME,
+  url: home,
+  description: SITE_DESCRIPTION,
+  inLanguage: 'en',
+  isPartOf: { '@id': `${home}#website` },
+  keywords: ['AI benchmarks', 'LLM leaderboards', 'model cards', 'AI evaluation'],
+  dateModified: AS_OF,
 };
 ---
 
-<Base jsonLd={website}>
+<Base jsonLd={[website, catalog]} film="pace">
   <div class="page">
     <header class="hero">
       <HeroArt />
@@ -166,14 +181,7 @@ const website = {
     </section>
 
     <section>
-      <div class="sh-row">
-        <div class="sh">
-          <h2>Model cards moved from knowledge tests to agents</h2>
-          <p>What labs headline in their launch posts, by area, every half year.</p>
-        </div>
-        <a class="more" href="/cards/">All model cards</a>
-      </div>
-      <AreaShare />
+      <AreaShare heading more={{ href: '/cards/', label: 'All model cards' }} />
     </section>
 
     <section>
