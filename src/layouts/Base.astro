@@ -1,0 +1,163 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import { AS_OF } from '../lib/data.ts';
+import { fullDate } from '../lib/format.ts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  wide?: boolean;
+}
+const { title, description = 'A reference for AI benchmarks: what each one tests, which model cards report it, and how scores have moved.' } = Astro.props;
+const fullTitle = title ? `${title} | Benchmark Almanac` : 'Benchmark Almanac';
+const path = Astro.url.pathname;
+const NAV = [
+  { href: '/benchmarks/', label: 'Benchmarks' },
+  { href: '/models/', label: 'Models' },
+  { href: '/labs/', label: 'Labs' },
+  { href: '/cards/', label: 'Model cards' },
+  { href: '/new/', label: 'New' },
+  { href: '/sources/', label: 'Sources' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)" />
+    <Font cssVariable="--font-serif" preload={[{ weight: '400', style: 'normal' }]} />
+    <Font cssVariable="--font-sans" preload={[{ weight: '400' }, { weight: '500' }]} />
+    <Font cssVariable="--font-mono" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="bar">
+      <div class="page wide bar-in">
+        <a class="word" href="/" aria-label="Benchmark Almanac, home">Benchmark Almanac</a>
+        <nav aria-label="Main">
+          {
+            NAV.map((n) => (
+              <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>
+                {n.label}
+              </a>
+            ))
+          }
+        </nav>
+        <button class="theme" type="button" aria-label="Switch light or dark theme" data-theme-toggle>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path></svg>
+        </button>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="page wide foot">
+      <p>
+        Data as of {fullDate(AS_OF)}. Scores from lab model cards and from <a href="https://epoch.ai/benchmarks">Epoch AI's Benchmarking Hub</a> (CC BY 4.0).
+      </p>
+      <p><a href="/about/">How this works</a></p>
+    </footer>
+    <div id="tip" role="tooltip"></div>
+    <script>
+      import '../scripts/tips.ts';
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        root.dataset.theme = dark ? 'light' : 'dark';
+        try {
+          localStorage.setItem('theme', root.dataset.theme);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg);
+  }
+  .bar-in {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    height: 64px;
+  }
+  .word {
+    font: 400 21px/1 var(--serif);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+    min-width: 0;
+  }
+  nav a {
+    font-size: 14px;
+    color: var(--ink-3);
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  nav a:hover {
+    color: var(--ink);
+  }
+  nav a[aria-current='page'] {
+    color: var(--ink);
+    background: var(--panel);
+  }
+  .theme {
+    border: 0;
+    background: none;
+    color: var(--ink-3);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .theme:hover {
+    color: var(--ink);
+    background: var(--panel);
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    padding-bottom: 48px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    .bar-in {
+      gap: 14px;
+      height: 56px;
+    }
+    .word {
+      font-size: 18px;
+    }
+    nav a {
+      padding: 7px 7px;
+    }
+  }
+</style>

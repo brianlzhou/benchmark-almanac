@@ -1,0 +1,225 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabMark from '../../components/LabMark.astro';
+import { allSummaries, benchmarks, modelById } from '../../lib/data.ts';
+import { AREAS, CATEGORY_NAMES } from '../../lib/taxonomy.ts';
+import { score as fmt, monthYear } from '../../lib/format.ts';
+
+const rows = allSummaries().sort((a, b) => b.cites.length - a.cites.length || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
+const count = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+const areaCounts = AREAS.map((a) => ({ a, n: count((s) => s.area === a.id) })).filter((x) => x.n);
+---
+
+<Base title="Benchmarks" description="Every benchmark in the almanac: what it tests, its code, its status in lab model cards, and its best score.">
+  <div class="page wide">
+    <header class="head">
+      <h1>Benchmarks</h1>
+      <p class="lede">
+        {benchmarks.length} benchmarks from lab model cards, Epoch AI's hub and public collections. Each has a page with its leaderboard, its scores over time, and the cards that report it.
+      </p>
+      <div class="facts">
+        <span><b>{count((s) => s.status === 'in use')}</b> in use</span>
+        <span><b>{count((s) => s.status === 'fading')}</b> fading</span>
+        <span><b>{count((s) => s.status === 'dropped')}</b> dropped</span>
+        <span><b>{count((s) => !!s.b.links?.repo)}</b> with public code</span>
+      </div>
+    </header>
+
+    <nav class="areas" aria-label="Areas">
+      {
+        areaCounts.map(({ a, n }) => (
+          <a href={`?area=${a.id}`} data-area-link={a.id} style={`--a:var(--area-${a.id})`}>
+            <span class="sw" />
+            <span class="an">{a.name}</span>
+            <span class="ac num">{n}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="filters" data-filter="benchmarks">
+      <input class="field grow" type="search" placeholder="Search benchmarks, labs or makers" aria-label="Search benchmarks" data-q />
+      <select class="field" aria-label="Area" data-area>
+        <option value="">All areas</option>
+        {AREAS.map((a) => <option value={a.id}>{a.name}</option>)}
+      </select>
+      <select class="field" aria-label="Status" data-status>
+        <option value="">Any status</option>
+        <option value="in-use">In use</option>
+        <option value="fading">Fading</option>
+        <option value="dropped">Dropped</option>
+        <option value="not-in-cards">Not in model cards</option>
+      </select>
+      <select class="field" aria-label="Code" data-code>
+        <option value="">With or without code</option>
+        <option value="yes">Public code</option>
+      </select>
+      <span class="count muted" data-count>{rows.length} benchmarks</span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="t bt" data-rows>
+        <thead>
+          <tr>
+            <th>Benchmark</th>
+            <th>Area</th>
+            <th>Status</th>
+            <th class="r">Best score</th>
+            <th class="r">Cards</th>
+            <th class="r">Models</th>
+            <th>Released</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((s) => {
+              const top = s.best ? modelById.get(s.best.model) : undefined;
+              return (
+                <tr
+                  data-area={s.area}
+                  data-status={s.status.replace(/ /g, '-')}
+                  data-code={s.b.links?.repo ? 'yes' : ''}
+                  data-text={`${s.b.name} ${(s.b.aliases ?? []).join(' ')} ${s.b.org ?? ''} ${s.b.description ?? ''}`.toLowerCase()}
+                >
+                  <td class="nm">
+                    <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                    {s.b.description && <span class="desc">{s.b.description}</span>}
+                  </td>
+                  <td class="muted nowrap">{CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other'}</td>
+                  <td class="nowrap">
+                    <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                      <span class="dot" />
+                      <span class="sl">{STATUS[s.status]}</span>
+                    </span>
+                  </td>
+                  <td class="r nowrap">
+                    {s.best && top && (
+                      <span class="best" title={top.name}>
+                        <LabMark lab={top.lab} size={14} />
+                        {fmt(s.best.value, s.b.unit ?? '%')}
+                      </span>
+                    )}
+                  </td>
+                  <td class="r">{s.cites.length || ''}</td>
+                  <td class="r muted">{s.board.length || ''}</td>
+                  <td class="muted num nowrap">{monthYear(s.b.released)}</td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { wireFilter } from '../../scripts/filter.ts';
+  wireFilter('benchmarks');
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-area-link]')) {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sel = document.querySelector<HTMLSelectElement>('[data-area]');
+      if (!sel) return;
+      sel.value = sel.value === a.dataset.areaLink ? '' : a.dataset.areaLink!;
+      sel.dispatchEvent(new Event('change'));
+    });
+  }
+</script>
+
+<style>
+  .areas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin: 8px 0 28px;
+  }
+  .areas a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--panel);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .areas a:hover {
+    background: var(--line);
+  }
+  .sw {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--a);
+    flex: none;
+  }
+  .an {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ac {
+    color: var(--ink-3);
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .grow {
+    flex: 1 1 260px;
+  }
+  .count {
+    font-size: 13px;
+    margin-left: auto;
+  }
+  .nm a {
+    font-weight: 500;
+  }
+  .desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--ink-3);
+    font-size: 13px;
+    line-height: 1.4;
+    max-width: 62ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .best {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .bt td {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+  @media (max-width: 900px) {
+    .areas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .bt th:nth-child(2),
+    .bt td:nth-child(2),
+    .bt th:nth-child(6),
+    .bt td:nth-child(6),
+    .bt th:nth-child(7),
+    .bt td:nth-child(7) {
+      display: none;
+    }
+    .sl {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabMark from '../../components/LabMark.astro';
+import { labs, featuredModels, cards, eciByModel, modelById } from '../../lib/data.ts';
+import { monthYear } from '../../lib/format.ts';
+import { labColor } from '../../lib/palette.ts';
+
+const rows = labs
+  .map((l) => {
+    const ms = featuredModels.filter((m) => m.lab === l.id);
+    const best = ms.filter((m) => eciByModel.has(m.id)).sort((a, b) => eciByModel.get(b.id)!.eci - eciByModel.get(a.id)!.eci)[0];
+    const latest = ms.filter((m) => m.released).sort((a, b) => b.released!.localeCompare(a.released!))[0];
+    return { l, ms, best, latest, nCards: cards.filter((c) => c.lab === l.id).length };
+  })
+  .filter((r) => r.ms.length)
+  .sort((a, b) => (b.best ? eciByModel.get(b.best.id)!.eci : 0) - (a.best ? eciByModel.get(a.best.id)!.eci : 0) || b.ms.length - a.ms.length);
+const lead = rows.filter((r) => r.nCards > 0);
+const rest = rows.filter((r) => r.nCards === 0);
+---
+
+<Base title="Labs" description="The labs behind the models, their best model on the Epoch Capabilities Index, and the model cards they publish.">
+  <div class="page">
+    <header class="head">
+      <h1>Labs</h1>
+      <p class="lede">
+        The {lead.length} labs whose model cards the almanac reads, then everyone else with a scored model. Each lab page shows its models over time and what its cards chose to measure.
+      </p>
+    </header>
+
+    <div class="grid">
+      {
+        lead.map(({ l, ms, best, latest, nCards }) => (
+          <a class="lab" href={`/labs/${l.id}/`} style={`--c:${labColor(l.id)}`}>
+            <div class="top">
+              <LabMark lab={l.id} size={28} />
+              <h2>{l.name}</h2>
+            </div>
+            <dl>
+              <div>
+                <dt>Best model</dt>
+                <dd>{best ? `${best.name}, ${eciByModel.get(best.id)!.eci.toFixed(1)}` : 'Not on the index'}</dd>
+              </div>
+              <div>
+                <dt>Latest</dt>
+                <dd>{latest ? `${latest.name}, ${monthYear(latest.released)}` : ''}</dd>
+              </div>
+              <div>
+                <dt>In the almanac</dt>
+                <dd>
+                  {ms.length} models, {nCards} model cards
+                </dd>
+              </div>
+            </dl>
+          </a>
+        ))
+      }
+    </div>
+
+    <section>
+      <div class="sh">
+        <h2>Other labs with scored models</h2>
+      </div>
+      <ul class="rest">
+        {
+          rest.map(({ l, ms }) => (
+            <li>
+              <a href={`/labs/${l.id}/`}>
+                <LabMark lab={l.id} size={16} />
+                {l.name}
+              </a>
+              <span class="muted num">{ms.length}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 16px;
+  }
+  .lab {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: inset 0 0 0 1px var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 140ms ease;
+  }
+  .lab:hover {
+    box-shadow: inset 0 0 0 1px var(--ink-4), 0 10px 30px rgb(0 0 0 / 0.06);
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  h2 {
+    font-size: 26px;
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  dl div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+    font-size: 14px;
+  }
+  dt {
+    color: var(--ink-3);
+  }
+  dd {
+    margin: 0;
+  }
+  .rest {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 3 220px;
+    column-gap: 40px;
+  }
+  .rest li {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    break-inside: avoid;
+    font-size: 14.5px;
+  }
+  .rest a {
+    display: inline-flex;
+    gap: 9px;
+    align-items: center;
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+// Rise and retirement. One lane per benchmark, ordered by when labs started reporting it. A ruled band
+// runs from the first model card that reports it to the last. Each tick is one such card. A diamond marks
+// the month the best score passed 85%. Status sits by the name, so retired tests read at a glance.
+import { benchSummary, AS_OF, SATURATED } from '../lib/data.ts';
+import { yearFrac, monthYear } from '../lib/format.ts';
+import { yearTicks } from '../lib/scale.ts';
+import { AREA_BY_ID } from '../lib/taxonomy.ts';
+
+interface Props {
+  ids: string[];
+}
+const { ids } = Astro.props;
+const rows = ids.map((id) => benchSummary(id)).filter((s) => s.first);
+rows.sort((a, b) => a.first!.localeCompare(b.first!));
+const t0 = 2023.1;
+const t1 = yearFrac(AS_OF) + 0.08;
+const pos = (d: string) => Math.max(0, Math.min(100, ((yearFrac(d) - t0) / (t1 - t0)) * 100));
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped' };
+---
+
+<div class="lc">
+  {
+    rows.map((s) => {
+      const a = pos(s.first!);
+      const z = pos(s.last!);
+      const sat = s.saturatedAt && s.saturatedAt >= '2023-02' ? pos(s.saturatedAt) : undefined;
+      return (
+        <a class="row" href={`/benchmarks/${s.b.id}/`} style={`--a:var(--area-${s.area})`}>
+          <span class="who">
+            <span class:list={['dot', `status-${s.status.replace(/ /g, '-')}`]} title={STATUS[s.status]} />
+            <span class="nm">{s.b.name}</span>
+          </span>
+          <span class="lane" data-tn={s.b.name} data-ts={`${STATUS[s.status]}. ${s.cites.length} model cards, ${monthYear(s.first)} to ${monthYear(s.last)}${s.saturatedAt ? `. Passed ${SATURATED}% in ${monthYear(s.saturatedAt)}` : ''}. ${AREA_BY_ID.get(s.area)?.name}`}>
+            <span class="band" style={`left:${a}%;width:${Math.max(0.4, z - a)}%`} />
+            {s.cites.map((c) => (
+              <i style={`left:${pos(c.card.date)}%`} />
+            ))}
+            {sat !== undefined && <b class="sat" style={`left:${sat}%`} />}
+          </span>
+        </a>
+      );
+    })
+  }
+  <div class="row axis" aria-hidden="true">
+    <span class="who" />
+    <span class="lane">
+      {
+        yearTicks(t0, t1).map((y) => (
+          <span class="yr" style={`left:${pos(`${y}-01-01`)}%`}>
+            {y}
+          </span>
+        ))
+      }
+    </span>
+  </div>
+</div>
+<div class="lc-key">
+  <span class="tag"><span class="dot status-in-use" />In use: two or more cards in the last six months</span>
+  <span class="tag"><span class="dot status-fading" />Fading</span>
+  <span class="tag"><span class="dot status-dropped" />Dropped: no card for a year</span>
+  <span class="tag"><svg width="12" height="12" aria-hidden="true"><path d="M6 1 11 6 6 11 1 6z" fill="var(--ink)" /></svg>Best score passed {SATURATED}%</span>
+</div>
+
+<style>
+  .lc {
+    display: grid;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 16px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 6px;
+  }
+  a.row:hover {
+    background: var(--hover);
+  }
+  .who {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    min-width: 0;
+    padding-left: 4px;
+  }
+  .nm {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lane {
+    position: relative;
+    height: 22px;
+  }
+  .band {
+    position: absolute;
+    top: 7px;
+    height: 8px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--a) 22%, transparent);
+  }
+  .lane i {
+    position: absolute;
+    top: 5px;
+    width: 2px;
+    height: 12px;
+    margin-left: -1px;
+    border-radius: 1px;
+    background: var(--a);
+  }
+  .sat {
+    position: absolute;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    rotate: 45deg;
+    background: var(--ink);
+    box-shadow: 0 0 0 2px var(--bg);
+  }
+  .axis .lane {
+    height: 24px;
+  }
+  .yr {
+    position: absolute;
+    top: 8px;
+    translate: -50% 0;
+    font: 400 12px/1 var(--mono);
+    color: var(--ink-3);
+  }
+  .lc-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    margin-top: 16px;
+  }
+  @media (max-width: 720px) {
+    .row {
+      grid-template-columns: 120px 1fr;
+      gap: 8px;
+    }
+    .who {
+      font-size: 12px;
+    }
+  }
+</style>

@@ -1,0 +1,233 @@
+---
+import Base from '../../layouts/Base.astro';
+import ModelCard from '../../components/ModelCard.astro';
+import LabMark from '../../components/LabMark.astro';
+import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
+import { featuredModels, modelSummary, models, eciByModel, cards } from '../../lib/data.ts';
+import { AREAS, areaOf } from '../../lib/taxonomy.ts';
+import { modelLine } from '../../lib/findings.ts';
+import { monthYear, fullDate, score as fmt } from '../../lib/format.ts';
+import { labColor } from '../../lib/palette.ts';
+
+export function getStaticPaths() {
+  return featuredModels.map((m) => ({ params: { id: m.id } }));
+}
+
+const { id } = Astro.params;
+const ms = modelSummary(id!);
+const m = ms.m;
+const color = labColor(m.lab);
+const byArea = AREAS.map((a) => ({
+  a,
+  rows: ms.results.filter((r) => areaOf(r.benchmark.category) === a.id).sort((x, y) => x.rank / x.of - y.rank / y.of || y.of - x.of),
+})).filter((g) => g.rows.length);
+const firsts = ms.results.filter((r) => r.rank === 1 && r.of >= 5).length;
+const top3 = ms.results.filter((r) => r.rank <= 3 && r.of >= 5).length;
+
+// the lab's models on the index, this one in front
+const labPts: Pt[] = ms.eci
+  ? models
+      .filter((x) => eciByModel.has(x.id) && x.released)
+      .map((x) => ({ date: x.released!, value: eciByModel.get(x.id)!.eci, model: x.id, source: 'epoch' as const }))
+  : [];
+const labIds = models.filter((x) => x.lab === m.lab).map((x) => x.id);
+const myCards = cards.filter((c) => c.model === m.id);
+---
+
+<Base title={m.name} description={modelLine(ms)}>
+  <div class="page">
+    <header class="head split">
+      <div>
+        <h1>{m.name}{m.version && <span class="ver"> {m.version}</span>}</h1>
+        <p class="lede">{modelLine(ms)}.</p>
+        <div class="facts">
+          {ms.lab && <a class="lab" href={`/labs/${ms.lab.id}/`}><LabMark lab={ms.lab.id} size={16} />{ms.lab.name}</a>}
+          {m.released && <span>Released <b>{fullDate(m.released)}</b></span>}
+          {m.family && <span>Family <b>{m.family}</b></span>}
+          {m.card && <a href={m.card}>The lab's model card</a>}
+        </div>
+        <div class="stats mini">
+          <div class="stat">
+            <div class="v">{ms.results.length}</div>
+            <div class="l">Benchmarks with a score</div>
+          </div>
+          <div class="stat">
+            <div class="v">{firsts}</div>
+            <div class="l">Ranked first, out of five or more models</div>
+          </div>
+          <div class="stat">
+            <div class="v">{top3}</div>
+            <div class="l">In the top three</div>
+          </div>
+        </div>
+      </div>
+      <ModelCard id={m.id} hero />
+    </header>
+
+    {
+      byArea.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Where it ranks</h2>
+            <p>Its best score on each benchmark and its place among every model with a score. The rank counts each model once, at its best setting.</p>
+          </div>
+          {byArea.map(({ a, rows }) => (
+            <div class="area">
+              <h3>{a.name}</h3>
+              <div class="table-wrap">
+                <table class="t ranks">
+                  <thead>
+                    <tr><th>Benchmark</th><th class="r">Score</th><th class="bar-h" /><th class="r">Rank</th><th>Source</th></tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((r) => {
+                      const unit = r.benchmark.unit ?? '%';
+                      return (
+                        <tr>
+                          <td><a href={`/benchmarks/${r.benchmark.id}/`}>{r.benchmark.name}</a></td>
+                          <td class="r">{fmt(r.score.value, unit)}</td>
+                          <td class="bar-c">
+                            {unit === '%' && <span class="mini-bar"><span style={`width:${Math.max(1, r.score.value)}%;background:${color}`} /></span>}
+                          </td>
+                          <td class="r nowrap">{r.rank === 1 ? <b>#1</b> : `#${r.rank}`} <span class="muted">of {r.of}</span></td>
+                          <td class="muted nowrap">{r.score.source === 'epoch' ? 'Epoch AI' : 'Model card'}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      labPts.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{ms.lab?.name ?? 'The lab'}'s models over time</h2>
+            <p>Epoch Capabilities Index by release date. {ms.lab?.name}'s models are in colour, every other lab's in grey.</p>
+          </div>
+          <TimeScatter points={labPts} unit="index" label={`${ms.lab?.name} models on the Epoch Capabilities Index`} highlight={labIds} labelIds={[m.id, ...labIds.filter((x) => x !== m.id)]} legend={false} height={400} />
+        </section>
+      )
+    }
+
+    {
+      myCards.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{myCards.length === 1 ? 'Its model card' : 'Its model cards'}</h2>
+            <p>The benchmarks the lab chose for its headline table.</p>
+          </div>
+          {myCards.map((c) => (
+            <article class="card-doc">
+              <div class="cd-h">
+                <a href={c.url ?? '#'}>{c.title ?? `${m.name} model card`}</a>
+                <span class="muted num">{fullDate(c.date)}</span>
+              </div>
+              <ul class="chips">
+                {c.results.map((r) => (
+                  <li>
+                    <a href={`/benchmarks/${r.benchmark}/`}>{r.as_written ?? r.benchmark}</a>
+                    {r.score !== null && <span class="muted num"> {r.score}</span>}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 56px;
+    align-items: start;
+  }
+  .ver {
+    color: var(--ink-3);
+  }
+  .lab {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .mini {
+    margin-top: 40px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .area + .area {
+    margin-top: 48px;
+  }
+  .area h3 {
+    font-size: 21px;
+    margin-bottom: 14px;
+  }
+  .ranks td:first-child {
+    width: 40%;
+  }
+  .bar-c {
+    width: 28%;
+  }
+  .mini-bar {
+    display: block;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--panel);
+  }
+  .mini-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .card-doc + .card-doc {
+    margin-top: 32px;
+  }
+  .cd-h {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-weight: 500;
+  }
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chips li {
+    background: var(--panel);
+    border-radius: 7px;
+    padding: 6px 10px;
+    font-size: 13.5px;
+  }
+  .chips a {
+    text-decoration: none;
+  }
+  @media (max-width: 900px) {
+    .split {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .bar-h,
+    .bar-c {
+      display: none;
+    }
+  }
+</style>

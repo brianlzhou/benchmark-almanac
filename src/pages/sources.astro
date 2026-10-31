@@ -1,0 +1,232 @@
+---
+import Base from '../layouts/Base.astro';
+import sourcesJson from '../../data/sources.json';
+import { resources } from '../lib/data.ts';
+import { hostname } from '../lib/format.ts';
+
+interface Source {
+  id: string;
+  name: string;
+  by: string;
+  url: string;
+  kind: string;
+  cadence: string;
+  signal: 'high' | 'medium' | 'low';
+  why: string;
+  feed: string | null;
+  automated: boolean;
+}
+const sources = sourcesJson as Source[];
+const GROUPS: { kind: string; title: string; note: string }[] = [
+  { kind: 'newsletter', title: 'Newsletters', note: 'People who read everything and name the benchmarks worth knowing.' },
+  { kind: 'paper-feed', title: 'Paper feeds', note: 'Where most benchmarks first appear. High volume, so they need a filter.' },
+  { kind: 'registry', title: 'Registries and hubs', note: 'Curated lists. When a benchmark lands here, someone has already judged it worth running.' },
+  { kind: 'leaderboard', title: 'Leaderboards', note: 'Groups that build and run their own benchmarks.' },
+  { kind: 'lab', title: 'Labs', note: 'The strongest signal: a benchmark in a frontier lab’s headline table.' },
+  { kind: 'code', title: 'Code and lists', note: 'Toolkits that add support for new benchmarks, and lists people keep by hand.' },
+  { kind: 'social', title: 'Social', note: '' },
+];
+const SIGNAL: Record<string, string> = { high: 'Strong signal', medium: 'Some signal', low: 'Weak signal' };
+const KINDS: Record<string, string> = {
+  harness: 'Harnesses',
+  registry: 'Registries',
+  leaderboard: 'Leaderboards',
+  'rl-env-hub': 'Environment hubs',
+  'awesome-list': 'Lists',
+  tooling: 'Tools',
+  guide: 'Guides',
+  paper: 'Papers',
+  standard: 'Standards',
+};
+const reading = resources.filter((r) => ['guide', 'paper', 'standard'].includes(r.kind));
+const tools = resources.filter((r) => ['harness', 'registry', 'leaderboard', 'rl-env-hub', 'awesome-list', 'tooling'].includes(r.kind));
+---
+
+<Base title="Sources" description="Where new AI benchmarks first appear, which feeds the almanac watches automatically, and what to read to build good ones.">
+  <div class="page">
+    <header class="head">
+      <h1>Where new benchmarks appear</h1>
+      <p class="lede">
+        The {sources.length} sources worth watching, and how much each one tells you. A job reads the {sources.filter((s) => s.automated).length} marked sources every morning, scores what it finds, and adds the best to the <a href="/new/">review queue</a>.
+      </p>
+    </header>
+
+    {
+      GROUPS.map((g) => {
+        const xs = sources.filter((s) => s.kind === g.kind);
+        if (!xs.length) return null;
+        return (
+          <section class="grp">
+            <div class="sh">
+              <h2>{g.title}</h2>
+              {g.note && <p>{g.note}</p>}
+            </div>
+            <ul class="src">
+              {xs.map((s) => (
+                <li>
+                  <div class="nm">
+                    <a href={s.url}>{s.name}</a>
+                    <span class="by">{s.by}</span>
+                  </div>
+                  <p class="why">{s.why}</p>
+                  <div class="meta">
+                    <span class:list={['sig', s.signal]}>
+                      <i />
+                      <i />
+                      <i />
+                      {SIGNAL[s.signal]}
+                    </span>
+                    <span>{s.cadence}</span>
+                    {s.automated && <span class="auto">Read daily by the discovery job</span>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })
+    }
+
+    <section>
+      <div class="sh">
+        <h2>Harnesses, registries and lists</h2>
+        <p>Where benchmarks live once they exist: the tools that run them and the collections that keep them.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="t">
+          <thead>
+            <tr><th>Name</th><th>Kind</th><th>What it is</th></tr>
+          </thead>
+          <tbody>
+            {
+              tools.map((r) => (
+                <tr>
+                  <td class="nowrap">{r.links?.repo || r.links?.leaderboard || r.links?.paper ? <a href={r.links?.repo ?? r.links?.leaderboard ?? r.links?.paper}>{r.name}</a> : r.name}</td>
+                  <td class="muted nowrap">{KINDS[r.kind] ?? r.kind}</td>
+                  <td class="muted">{r.description}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>How to build a good benchmark</h2>
+        <p>Guides, checklists and papers on what makes an evaluation trustworthy.</p>
+      </div>
+      <ul class="reading">
+        {
+          reading.map((r) => {
+            const href = r.links?.paper ?? r.links?.repo ?? r.links?.leaderboard;
+            return (
+              <li>
+                {href ? <a href={href}>{r.name}</a> : <span>{r.name}</span>}
+                {r.org && <span class="by">{r.org}</span>}
+                {r.description && <p class="why">{r.description}</p>}
+                {href && <span class="host">{hostname(href)}</span>}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .grp + .grp {
+    margin-top: 80px;
+  }
+  .src {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 48px;
+  }
+  .nm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+  }
+  .nm a {
+    font: 400 21px/1.2 var(--serif);
+    text-decoration: none;
+  }
+  .nm a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  .by {
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+  .why {
+    margin-top: 6px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .sig {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .sig i {
+    width: 5px;
+    height: 12px;
+    border-radius: 1.5px;
+    background: var(--line);
+  }
+  .sig i:last-of-type {
+    margin-right: 6px;
+  }
+  .sig.high i,
+  .sig.medium i:nth-child(-n + 2),
+  .sig.low i:first-child {
+    background: var(--ink-2);
+  }
+  .auto {
+    color: var(--status-good);
+  }
+  .reading {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 48px;
+  }
+  .reading li > a,
+  .reading li > span:first-child {
+    font-weight: 500;
+    margin-right: 8px;
+  }
+  .host {
+    display: block;
+    margin-top: 4px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .src,
+    .reading {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,263 @@
+---
+import Base from '../../layouts/Base.astro';
+import LabMark from '../../components/LabMark.astro';
+import ModelCard from '../../components/ModelCard.astro';
+import ModelName from '../../components/ModelName.astro';
+import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
+import AreaShare from '../../components/AreaShare.astro';
+import { labs, featuredModels, models, cards, eciByModel, benchById, benchSummary } from '../../lib/data.ts';
+import { monthYear, fullDate, yearFrac } from '../../lib/format.ts';
+import { labColor } from '../../lib/palette.ts';
+import { yearTicks } from '../../lib/scale.ts';
+
+export function getStaticPaths() {
+  return labs.filter((l) => featuredModels.some((m) => m.lab === l.id)).map((l) => ({ params: { id: l.id } }));
+}
+
+const { id } = Astro.params;
+const lab = labs.find((l) => l.id === id)!;
+const ms = featuredModels.filter((m) => m.lab === id).sort((a, b) => (b.released ?? '').localeCompare(a.released ?? ''));
+const cs = cards.filter((c) => c.lab === id);
+const ranked = ms.filter((m) => eciByModel.has(m.id)).sort((a, b) => eciByModel.get(b.id)!.eci - eciByModel.get(a.id)!.eci);
+const pts: Pt[] = models
+  .filter((m) => eciByModel.has(m.id) && m.released)
+  .map((m) => ({ date: m.released!, value: eciByModel.get(m.id)!.eci, model: m.id, source: 'epoch' as const }));
+const mine = ms.map((m) => m.id);
+
+// the benchmarks this lab's cards report, as rows of ticks over its cards
+const counts = new Map<string, number>();
+for (const c of cs) for (const r of c.results) counts.set(r.benchmark, (counts.get(r.benchmark) ?? 0) + 1);
+const rows = [...counts.entries()]
+  .filter(([, n]) => n >= 2)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 28)
+  .map(([b]) => ({ b: benchById.get(b)!, on: new Set(cs.filter((c) => c.results.some((r) => r.benchmark === b)).map((c) => c.id)) }))
+  .sort((a, b) => {
+    const first = (x: typeof a) => cs.find((c) => x.on.has(c.id))!.date;
+    return first(a).localeCompare(first(b));
+  });
+const t0 = cs.length ? yearFrac(cs[0].date) - 0.1 : 2023;
+const t1 = cs.length ? yearFrac(cs.at(-1)!.date) + 0.1 : 2027;
+const pos = (d: string) => `${(((yearFrac(d) - t0) / (t1 - t0)) * 100).toFixed(2)}%`;
+const color = labColor(id);
+---
+
+<Base title={lab.name} description={`${lab.name}: its models, their scores, and what its model cards measure.`}>
+  <div class="page">
+    <header class="head">
+      <h1 class="with-mark"><LabMark lab={lab.id} size={44} />{lab.name}</h1>
+      <div class="facts">
+        <span><b>{ms.length}</b> models</span>
+        <span><b>{cs.length}</b> model cards read</span>
+        {ranked[0] && <span>Best on the index: <a href={`/models/${ranked[0].id}/`}>{ranked[0].name}</a>, <b>{eciByModel.get(ranked[0].id)!.eci.toFixed(1)}</b></span>}
+        {lab.url && <a href={lab.url}>{lab.url.replace(/^https?:\/\/(www\.)?/, '')}</a>}
+      </div>
+    </header>
+
+    {
+      ranked.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{lab.name}'s models against the field</h2>
+            <p>Epoch Capabilities Index by release date. This lab's models are in colour, everyone else's in grey.</p>
+          </div>
+          <TimeScatter points={pts} unit="index" label={`${lab.name} on the Epoch Capabilities Index`} highlight={mine} labelIds={ranked.slice(0, 8).map((m) => m.id)} legend={false} height={420} />
+        </section>
+      )
+    }
+
+    {
+      ranked.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Its strongest models</h2>
+          </div>
+          <div class="cards">
+            {ranked.slice(0, 6).map((m) => <ModelCard id={m.id} />)}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      rows.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>What its model cards measure</h2>
+            <p>Each column is one of {lab.name}'s model cards, oldest on the left. A tick means the card's headline table reports that benchmark. The rows run in the order the lab started using them.</p>
+          </div>
+          <div class="matrix" style={`--c:${color}`}>
+            {rows.map(({ b, on }) => (
+              <a class="mrow" href={`/benchmarks/${b.id}/`}>
+                <span class="mname">{b.name}</span>
+                <span class="mlane">
+                  {cs.map((c) => (
+                    <i class:list={{ on: on.has(c.id) }} style={`left:${pos(c.date)}`} />
+                  ))}
+                </span>
+              </a>
+            ))}
+            <div class="mrow axis" aria-hidden="true">
+              <span class="mname" />
+              <span class="mlane">
+                {yearTicks(t0, t1).map((y) => (
+                  <span class="yr" style={`left:${pos(`${y}-01-01`)}`}>
+                    {y}
+                  </span>
+                ))}
+              </span>
+            </div>
+          </div>
+          {cs.length >= 4 && (
+            <div class="share">
+              <AreaShare lab={id} height={300} />
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    {
+      cs.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Model cards</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="t">
+              <thead>
+                <tr><th>Date</th><th>Model</th><th>Document</th><th class="r">Benchmarks</th></tr>
+              </thead>
+              <tbody>
+                {cs.slice().reverse().map((c) => (
+                  <tr>
+                    <td class="muted num nowrap">{fullDate(c.date)}</td>
+                    <td><ModelName id={c.model} /></td>
+                    <td>{c.url ? <a href={c.url}>{c.title ?? 'Model card'}</a> : c.title}</td>
+                    <td class="r">{c.results.length}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+
+    <section>
+      <div class="sh">
+        <h2>Every {lab.name} model</h2>
+      </div>
+      <ul class="all">
+        {
+          ms.map((m) => (
+            <li>
+              <ModelName id={m.id} />
+              <span class="muted num">{monthYear(m.released)}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .with-mark {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .matrix {
+    display: grid;
+  }
+  .mrow {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 16px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 6px;
+  }
+  a.mrow:hover {
+    background: var(--hover);
+  }
+  .mname {
+    font-size: 13.5px;
+    padding-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mlane {
+    position: relative;
+    height: 22px;
+    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat;
+  }
+  .mlane i {
+    position: absolute;
+    top: 9px;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    border-radius: 50%;
+    background: var(--ink-4);
+    opacity: 0.6;
+  }
+  .mlane i.on {
+    top: 4px;
+    width: 6px;
+    height: 14px;
+    margin-left: -3px;
+    border-radius: 2px;
+    background: var(--c);
+    opacity: 1;
+  }
+  .axis .mlane {
+    background: none;
+    height: 24px;
+  }
+  .yr {
+    position: absolute;
+    top: 8px;
+    translate: -50% 0;
+    font: 400 12px/1 var(--mono);
+    color: var(--ink-3);
+  }
+  .share {
+    margin-top: 56px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .all {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2 300px;
+    column-gap: 48px;
+  }
+  .all li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    break-inside: avoid;
+    font-size: 14.5px;
+  }
+  @media (max-width: 720px) {
+    .mrow {
+      grid-template-columns: 110px 1fr;
+      gap: 8px;
+    }
+    .mname {
+      font-size: 12px;
+    }
+  }
+</style>

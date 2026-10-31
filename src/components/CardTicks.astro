@@ -1,0 +1,136 @@
+---
+// One row per lab. Each tick is a model card that lab published. Tall ticks in the lab's colour report
+// the benchmark. Short grey ticks are cards that left it out, so the gap after a lab stops shows.
+import LabMark from './LabMark.astro';
+import { cards, labById, AS_OF } from '../lib/data.ts';
+import { labColor } from '../lib/palette.ts';
+import { yearFrac, fullDate } from '../lib/format.ts';
+import { yearTicks } from '../lib/scale.ts';
+
+interface Props {
+  citing: Set<string>;
+  labs: string[];
+}
+const { citing, labs } = Astro.props;
+const t0 = 2023.1;
+const t1 = yearFrac(AS_OF) + 0.08;
+const pos = (d: string) => `${(((yearFrac(d) - t0) / (t1 - t0)) * 100).toFixed(2)}%`;
+const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab) }));
+---
+
+<div class="ct">
+  {
+    rows.map(({ lab, cards: cs }) => (
+      <div class="row">
+        <div class="who">
+          <LabMark lab={lab} size={16} />
+          <span>{labById.get(lab)?.name ?? lab}</span>
+        </div>
+        <div class="lane">
+          {cs.map((c) => {
+            const on = citing.has(c.id);
+            return (
+              <a
+                href={`/cards/#${c.id}`}
+                class:list={['tick', { on }]}
+                style={`left:${pos(c.date)};${on ? `--c:${labColor(lab)}` : ''}`}
+                data-tn={c.title ?? c.model}
+                data-ts={`${fullDate(c.date)}. ${on ? 'Reports it' : 'Leaves it out'}`}
+                aria-label={`${c.title ?? c.model}, ${fullDate(c.date)}, ${on ? 'reports it' : 'leaves it out'}`}
+              />
+            );
+          })}
+        </div>
+      </div>
+    ))
+  }
+  <div class="row axis" aria-hidden="true">
+    <div class="who" />
+    <div class="lane">
+      {
+        yearTicks(t0, t1).map((y) => (
+          <span class="yr" style={`left:${pos(`${y}-01-01`)}`}>
+            {y}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .ct {
+    display: grid;
+    gap: 6px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .who {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .lane {
+    position: relative;
+    height: 28px;
+    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat;
+  }
+  .tick {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 24px;
+    margin-left: -4.5px;
+    translate: 0 -50%;
+  }
+  .tick::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 7px;
+    width: 1px;
+    height: 10px;
+    background: var(--ink-4);
+  }
+  .tick.on::after {
+    left: 2.5px;
+    top: 0;
+    width: 4px;
+    height: 24px;
+    border-radius: 2px;
+    background: var(--c);
+  }
+  .tick:hover::after {
+    background: var(--ink);
+  }
+  .axis .lane {
+    height: 18px;
+    background: none;
+  }
+  .yr {
+    position: absolute;
+    translate: -50% 0;
+    font: 400 12px/1 var(--mono);
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    .axis .who {
+      display: none;
+    }
+    .row + .row {
+      margin-top: 8px;
+    }
+  }
+</style>

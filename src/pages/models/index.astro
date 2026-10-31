@@ -1,0 +1,137 @@
+---
+import Base from '../../layouts/Base.astro';
+import ModelCard from '../../components/ModelCard.astro';
+import ModelName from '../../components/ModelName.astro';
+import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
+import { featuredModels, eciByModel, eciOrder, modelById, modelSummary, labById, labs, EPOCH_SOURCE } from '../../lib/data.ts';
+import { monthYear } from '../../lib/format.ts';
+
+const eciPts: Pt[] = eciOrder
+  .map((id) => ({ id, m: modelById.get(id)!, e: eciByModel.get(id)! }))
+  .filter((x) => x.m.released)
+  .map((x) => ({ date: x.m.released!, value: x.e.eci, model: x.id, source: 'epoch' as const, low: x.e.low, high: x.e.high }));
+const byDate = eciPts.slice().sort((a, b) => a.date.localeCompare(b.date));
+const frontier: { date: string; value: number; model: string }[] = [];
+for (const p of byDate) if (!frontier.length || p.value > frontier.at(-1)!.value) frontier.push(p);
+
+const top = eciOrder.slice(0, 24);
+const rows = featuredModels
+  .map((m) => ({ m, s: modelSummary(m.id) }))
+  .sort((a, b) => (b.s.eci?.eci ?? -1) - (a.s.eci?.eci ?? -1) || (b.m.released ?? '').localeCompare(a.m.released ?? ''));
+const labOptions = labs.filter((l) => rows.some((r) => r.m.lab === l.id)).sort((a, b) => a.name.localeCompare(b.name));
+const open = featuredModels.filter((m) => m.weights === 'open').length;
+---
+
+<Base title="Models" description="Every model in the almanac under one naming scheme, ranked by the Epoch Capabilities Index.">
+  <div class="page">
+    <header class="head">
+      <h1>Models</h1>
+      <p class="lede">
+        Every model with scores here, under one naming scheme: the lab, the model as the lab names it, and the snapshot when a lab shipped several under one name.
+        Models are ranked by Epoch AI's Capabilities Index, which puts results from many benchmarks on one scale.
+      </p>
+      <div class="facts">
+        <span><b>{featuredModels.length}</b> models</span>
+        <span><b>{eciByModel.size}</b> with an index score</span>
+        <span><b>{open}</b> with open weights</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="sh">
+        <h2>The frontier keeps moving</h2>
+        <p>Epoch Capabilities Index by release date. Bars show the 90% interval. The line follows the best score so far.</p>
+      </div>
+      <TimeScatter points={eciPts} frontier={frontier} unit="index" label="Epoch Capabilities Index over time" legend={false} height={460} />
+      <p class="src">Source: <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a>, {EPOCH_SOURCE.license}.</p>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>The 24 highest-ranked models</h2>
+        <p>Each card shows the model's index score, where that sits among all {eciByModel.size} scored models, and three headline benchmarks with its rank on each.</p>
+      </div>
+      <div class="grid">
+        {top.map((id) => <ModelCard id={id} />)}
+      </div>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>Every model</h2>
+      </div>
+      <div class="filters" data-filter="models">
+        <input class="field grow" type="search" placeholder="Search models" aria-label="Search models" data-q />
+        <select class="field" aria-label="Lab" data-lab>
+          <option value="">All labs</option>
+          {labOptions.map((l) => <option value={l.id}>{l.name}</option>)}
+        </select>
+        <select class="field" aria-label="Weights" data-weights>
+          <option value="">Open and closed</option>
+          <option value="open">Open weights</option>
+          <option value="closed">Closed weights</option>
+        </select>
+        <span class="count muted" data-count>{rows.length} models</span>
+      </div>
+      <div class="table-wrap">
+        <table class="t" data-rows>
+          <thead>
+            <tr><th>Model</th><th>Lab</th><th>Released</th><th>Weights</th><th class="r">Index</th><th class="r">Benchmarks</th></tr>
+          </thead>
+          <tbody>
+            {rows.map(({ m, s }) => (
+              <tr data-lab={m.lab ?? ''} data-weights={m.weights ?? ''} data-text={`${m.name} ${m.version ?? ''} ${(m.aliases ?? []).join(' ')} ${labById.get(m.lab ?? '')?.name ?? ''}`.toLowerCase()}>
+                <td><ModelName id={m.id} /></td>
+                <td class="muted">{labById.get(m.lab ?? '')?.name}</td>
+                <td class="muted num nowrap">{monthYear(m.released)}</td>
+                <td class="muted">{m.weights === 'open' ? 'Open' : m.weights === 'closed' ? 'Closed' : ''}</td>
+                <td class="r">{s.eci ? s.eci.eci.toFixed(1) : ''}</td>
+                <td class="r muted">{s.results.length}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { wireFilter } from '../../scripts/filter.ts';
+  wireFilter('models');
+</script>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .src {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .grow {
+    flex: 1 1 220px;
+  }
+  .count {
+    font-size: 13px;
+    margin-left: auto;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

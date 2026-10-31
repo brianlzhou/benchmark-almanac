@@ -1,0 +1,292 @@
+---
+import Base from '../../layouts/Base.astro';
+import ScoreChart from '../../components/ScoreChart.astro';
+import BarBoard from '../../components/BarBoard.astro';
+import CardTicks from '../../components/CardTicks.astro';
+import ModelName from '../../components/ModelName.astro';
+import LabMark from '../../components/LabMark.astro';
+import { benchmarks, benchSummary, benchById, labById, AS_OF, modelById } from '../../lib/data.ts';
+import { AREA_BY_ID, CATEGORY_NAMES } from '../../lib/taxonomy.ts';
+import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
+import { monthYear, fullDate, score as fmt, count, repoName, hostname } from '../../lib/format.ts';
+import githubJson from '../../../data/github.json';
+
+export function getStaticPaths() {
+  return benchmarks.map((b) => ({ params: { id: b.id } }));
+}
+
+setAsOf(AS_OF);
+const { id } = Astro.params;
+const s = benchSummary(id!);
+const b = s.b;
+const unit = b.unit ?? '%';
+const area = AREA_BY_ID.get(s.area)!;
+const gh = (githubJson as Record<string, { stars?: number; archived?: boolean; license?: string | null; pushed?: string }>)[
+  b.links?.repo ? repoName(b.links.repo) : ''
+];
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in model cards' };
+const WHY: Record<string, string> = { saturated: 'after it saturated', replaced: 'for a newer version', other: 'before it saturated' };
+const ACCESS: Record<string, string> = {
+  public: 'All tasks public',
+  'public+private-holdout': 'Public tasks plus a private test set',
+  private: 'Tasks kept private',
+};
+const succ = b.successor ? benchById.get(b.successor) : undefined;
+const pred = benchmarks.filter((x) => x.successor === b.id);
+const both = s.epochBoard.length > 0 && s.cardBoard.length > 0;
+const links = [
+  b.links?.repo && { href: b.links.repo, label: gh?.stars !== undefined ? `${repoName(b.links.repo)}` : 'Code', note: gh?.stars !== undefined ? `${gh.stars.toLocaleString('en-US')} stars` : undefined },
+  b.links?.paper && { href: b.links.paper, label: 'Paper' },
+  b.links?.dataset && { href: b.links.dataset, label: 'Dataset' },
+  b.links?.leaderboard && { href: b.links.leaderboard, label: 'Leaderboard' },
+  b.links?.site && { href: b.links.site, label: hostname(b.links.site) },
+].filter(Boolean) as { href: string; label: string; note?: string }[];
+---
+
+<Base title={b.name} description={b.description ?? `${b.name}: scores, leaderboard, and which model cards report it.`}>
+  <div class="page">
+    <header class="head">
+      <h1>{b.name}</h1>
+      {b.description && <p class="lede">{b.description}</p>}
+      {b.note && <p class="lede note">{b.note}</p>}
+      <div class="facts">
+        {b.org && <span>Made by <b>{b.org}</b></span>}
+        {b.released && <span>Released <b>{monthYear(b.released)}</b></span>}
+        <span><a href={`/benchmarks/?area=${area.id}`}>{CATEGORY_NAMES[b.category ?? 'other'] ?? area.name}</a></span>
+        {b.access && ACCESS[b.access] && <span>{ACCESS[b.access]}</span>}
+      </div>
+      {
+        links.length > 0 && (
+          <div class="links">
+            {links.map((l) => (
+              <a href={l.href} rel="noopener">
+                {l.label}
+                {l.note && <span class="muted"> {l.note}</span>}
+                <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                  <path d="M3 1h6v6M9 1 1 9" fill="none" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="v">{s.best ? fmt(s.best.value, unit) : 'None'}</div>
+        <div class="l">{s.best ? <>Best score, by <a href={`/models/${s.best.model}/`}>{modelById.get(s.best.model)?.name}</a></> : 'No scores yet'}</div>
+      </div>
+      <div class="stat">
+        <div class="v">{s.board.length}</div>
+        <div class="l">{s.board.length === 1 ? 'Model scored' : 'Models scored'}{s.boardSource === 'epoch' ? ' in Epoch AI data' : s.boardSource === 'card' ? ' in lab cards' : ''}</div>
+      </div>
+      <div class="stat">
+        <div class="v">{s.cites.length}</div>
+        <div class="l">{s.cites.length === 1 ? 'Model card reports it' : 'Model cards report it'}{s.labs.length > 0 && `, from ${count(s.labs.length, 'lab')}`}</div>
+      </div>
+      <div class="stat">
+        <div class="v"><span class:list={['tag big', `status-${s.status.replace(/ /g, '-')}`]}><span class="dot" />{STATUS[s.status]}</span></div>
+        <div class="l">{s.why ? `Dropped ${WHY[s.why]}` : s.last ? `Last reported ${monthYear(s.last)}` : 'Tracked by Epoch AI'}</div>
+      </div>
+    </div>
+
+    {
+      s.board.length > 0 && (
+        <section class="views">
+          <div class="sh-row">
+            <div class="sh">
+              <h2>{leaderLine(s)}</h2>
+              <p>
+                {s.boardSource === 'epoch'
+                  ? 'Best score per model in Epoch AI data. Each model keeps its best setting and harness.'
+                  : 'Best score per model as labs report them in their own cards. Labs pick their own settings, so these compare less cleanly than independent runs.'}
+              </p>
+            </div>
+            <div class="seg" role="radiogroup" aria-label="View">
+              <label><input type="radio" name="v-board" value="graph" checked />Bars</label>
+              <label><input type="radio" name="v-board" value="table" />Table</label>
+            </div>
+          </div>
+          <div class="view-graph">
+            <BarBoard scores={s.board} unit={unit} limit={20} better={b.better} />
+          </div>
+          <div class="view-table table-wrap">
+            <table class="t">
+              <thead>
+                <tr><th>#</th><th>Model</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
+              </thead>
+              <tbody>
+                {s.board.map((x, i) => (
+                  <tr>
+                    <td class="rank">{i + 1}</td>
+                    <td><ModelName id={x.model} /></td>
+                    <td class="r">{fmt(x.value, unit)}</td>
+                    <td class="muted">{[x.setting, x.harness].filter((v) => v && v !== 'unknown').join(', ')}</td>
+                    <td class="muted num">{monthYear(x.date)}</td>
+                    <td class="muted">{x.source === 'epoch' ? 'Epoch AI' : 'Model card'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {both && (
+            <p class="also">
+              {s.boardSource === 'epoch' ? `Labs also report scores for ${count(s.cardBoard.length, 'model')} in their cards. ` : `Epoch AI also has scores for ${count(s.epochBoard.length, 'model')}. `}
+              Both appear in the chart below.
+            </p>
+          )}
+        </section>
+      )
+    }
+
+    {
+      s.nScores > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{s.saturatedAt ? `The best score passed ${85}% in ${monthYear(s.saturatedAt)}` : 'Scores over time'}</h2>
+            <p>Each dot is one model's score, placed at the model's release date. The line follows the best score so far.</p>
+          </div>
+          <ScoreChart s={s} />
+        </section>
+      )
+    }
+
+    <section>
+      <div class="sh">
+        <h2>{lifeLine(s)}</h2>
+        <p>
+          {s.cites.length > 0
+            ? 'Each tick is a model card. Tall coloured ticks report this benchmark. Short grey ticks are cards from the same lab that leave it out.'
+            : 'The almanac tracks the headline tables of 158 model cards from 12 labs. None of them list this benchmark.'}
+        </p>
+      </div>
+      {s.cites.length > 0 && <CardTicks citing={new Set(s.cites.map((c) => c.card.id))} labs={s.labs} />}
+      {
+        s.cites.length > 0 && (
+          <div class="table-wrap cites">
+            <table class="t">
+              <thead>
+                <tr><th>Date</th><th>Model card</th><th class="r">Score</th><th>As the card writes it</th></tr>
+              </thead>
+              <tbody>
+                {s.cites.slice().reverse().map((c) => (
+                  <tr>
+                    <td class="muted num nowrap">{fullDate(c.card.date)}</td>
+                    <td><a class="card-l" href={c.card.url ?? `/cards/#${c.card.id}`}><LabMark lab={c.card.lab} size={15} />{modelById.get(c.card.model)?.name}</a></td>
+                    <td class="r">{c.score !== null ? c.score : ''}</td>
+                    <td class="muted">{c.asWritten}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+    </section>
+
+    {
+      (succ || pred.length > 0) && (
+        <section>
+          <div class="sh">
+            <h2>Versions</h2>
+          </div>
+          <div class="ver">
+            {pred.map((p) => (
+              <a href={`/benchmarks/${p.id}/`}>
+                <span class="muted">Replaces</span> {p.name}
+              </a>
+            ))}
+            {succ && (
+              <a href={`/benchmarks/${succ.id}/`}>
+                <span class="muted">Replaced by</span> {succ.name}
+              </a>
+            )}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .note {
+    font-size: 16px;
+    color: var(--ink-3);
+    margin-top: 10px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    text-decoration: none;
+    background: var(--panel);
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  .links a:hover {
+    background: var(--line);
+  }
+  .links svg {
+    color: var(--ink-3);
+  }
+  .big {
+    font-size: 26px;
+    color: var(--ink);
+    gap: 12px;
+  }
+  .big .dot {
+    width: 11px;
+    height: 11px;
+  }
+  .status-in-use .dot {
+    color: var(--status-good);
+  }
+  .status-fading .dot {
+    color: var(--status-warn);
+  }
+  .status-dropped .dot,
+  .status-not-in-cards .dot {
+    color: var(--ink-4);
+  }
+  .tag.big {
+    color: var(--ink);
+  }
+  .stats {
+    margin-bottom: 96px;
+  }
+  .also {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  .cites {
+    margin-top: 36px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .card-l {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ver {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .ver a {
+    text-decoration: none;
+    background: var(--panel);
+    padding: 10px 14px;
+    border-radius: 8px;
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+// A lab's mark. Brand-colour marks load as cached images. Mono marks are masks filled with the text
+// colour, so they follow the theme. Labs without a mark get their initial.
+import { labById } from '../lib/data.ts';
+import { COLOR_MARKS, MONO_MARKS } from '../lib/marks.ts';
+
+interface Props {
+  lab?: string;
+  size?: number;
+  class?: string;
+}
+const { lab, size = 18, class: cls = '' } = Astro.props;
+const name = lab ? (labById.get(lab)?.name ?? lab) : '';
+const kind = lab && COLOR_MARKS.has(lab) ? 'color' : lab && MONO_MARKS.has(lab) ? 'mono' : 'none';
+---
+
+{kind === 'color' && <img class:list={['mark', cls]} src={`/labs/${lab}-color.svg`} width={size} height={size} alt="" title={name} decoding="async" />}
+{kind === 'mono' && <span class:list={['mark mask', cls]} style={`--s:${size}px;--m:url(/labs/${lab}.svg)`} title={name} aria-hidden="true" />}
+{
+  kind === 'none' && (
+    <span class:list={['mark initial', cls]} style={`--s:${size}px`} title={name} aria-hidden="true">
+      {name.slice(0, 1)}
+    </span>
+  )
+}
+
+<style>
+  .mark {
+    display: inline-block;
+    flex: none;
+  }
+  .mask {
+    width: var(--s);
+    height: var(--s);
+    background: var(--ink);
+    -webkit-mask: var(--m) center / contain no-repeat;
+    mask: var(--m) center / contain no-repeat;
+  }
+  .initial {
+    display: inline-grid;
+    place-items: center;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--ink-3);
+    font: 600 calc(var(--s) * 0.55) / 1 var(--sans);
+  }
+</style>

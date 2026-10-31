@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+import discoveredJson from '../../data/discovered.json';
+import { benchById } from '../lib/data.ts';
+import { fullDate, hostname } from '../lib/format.ts';
+
+interface Candidate {
+  key: string;
+  name: string;
+  title: string;
+  url: string;
+  first: string;
+  last: string;
+  org?: string;
+  repo?: string;
+  upvotes?: number;
+  stars?: number;
+  feeds: string[];
+  curated: { source: string; url: string }[];
+  registries: { source: string; url?: string }[];
+  score: number;
+  decision: 'catalogue' | 'watch';
+}
+const d = discoveredJson as unknown as { updated: string | null; items: Candidate[]; mentions?: { benchmark: string; source: string; url: string; date: string }[] };
+const top = d.items.filter((c) => c.decision === 'catalogue');
+const watch = d.items.filter((c) => c.decision === 'watch');
+const FEED: Record<string, string> = { hf: 'Hugging Face papers', arxiv: 'arXiv' };
+const where = (c: Candidate) => [...c.curated.map((s) => s.source), ...c.registries.map((s) => s.source), ...c.feeds.map((f) => FEED[f] ?? f)];
+const mentions = (d.mentions ?? []).filter((m) => benchById.has(m.benchmark));
+---
+
+<Base title="New benchmarks" description="Benchmarks the discovery job found this week, scored and waiting for review.">
+  <div class="page">
+    <header class="head">
+      <h1>New benchmarks</h1>
+      <p class="lede">
+        A job reads paper feeds, newsletters and registries every morning. It scores each find on whether it is a benchmark at all, whether its code or data is out, who made it, and how many sources mention it.
+        Anything that scores 8 or more is ready to catalogue. Lower scores wait here for 14 days in case more sources pick them up.
+      </p>
+      <div class="facts">
+        <span><b>{top.length}</b> ready to catalogue</span>
+        <span><b>{watch.length}</b> on the watch list</span>
+        {d.updated && <span>Checked {fullDate(d.updated)}</span>}
+        <a href="/sources/">The sources it reads</a>
+      </div>
+    </header>
+
+    {
+      top.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Ready to catalogue</h2>
+          </div>
+          <ol class="cands">
+            {top.map((c) => (
+              <li>
+                <span class="score num" title="Discovery score">{c.score}</span>
+                <div>
+                  <a class="cn" href={c.url}>{c.name}</a>
+                  {c.title !== c.name && <p class="ct">{c.title}</p>}
+                  <p class="cm">
+                    {[c.org, where(c).join(', '), c.upvotes ? `${c.upvotes} upvotes` : '', c.stars ? `${c.stars} stars` : ''].filter(Boolean).join('. ')}
+                    {c.repo && (
+                      <>
+                        {'. '}
+                        <a href={c.repo}>{hostname(c.repo) === 'github.com' ? c.repo.replace(/^https?:\/\/github\.com\//, '') : 'Code'}</a>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )
+    }
+
+    {
+      mentions.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Catalogued benchmarks in the news</h2>
+          </div>
+          <ul class="ment">
+            {mentions.map((m) => (
+              <li>
+                <a href={`/benchmarks/${m.benchmark}/`}>{benchById.get(m.benchmark)?.name}</a>
+                <span class="muted">
+                  {' '}
+                  in <a href={m.url}>{m.source}</a>, {fullDate(m.date)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      watch.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Watch list</h2>
+            <p>Each needs one more signal, such as a second source, released code, or a mention in a newsletter.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="t">
+              <thead>
+                <tr><th class="r">Score</th><th>Name</th><th>Found in</th><th>First seen</th></tr>
+              </thead>
+              <tbody>
+                {watch.map((c) => (
+                  <tr>
+                    <td class="r muted">{c.score}</td>
+                    <td><a href={c.url}>{c.name}</a>{c.org && <span class="muted"> {c.org}</span>}</td>
+                    <td class="muted">{where(c).join(', ')}</td>
+                    <td class="muted num nowrap">{fullDate(c.first)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .cands {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 26px;
+  }
+  .cands li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .score {
+    display: grid;
+    place-items: center;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--panel);
+    font-weight: 600;
+  }
+  .cn {
+    font: 400 22px/1.2 var(--serif);
+    text-decoration: none;
+  }
+  .cn:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  .ct {
+    margin-top: 4px;
+    color: var(--ink-2);
+    font-size: 14.5px;
+  }
+  .cm {
+    margin-top: 4px;
+    color: var(--ink-3);
+    font-size: 13.5px;
+  }
+  .ment {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+</style>

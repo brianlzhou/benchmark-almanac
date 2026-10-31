@@ -1,0 +1,100 @@
+// Fine categories group into eight areas. Areas drive navigation and the stacked charts, so there are
+// never more of them than the categorical palette has hues.
+
+export interface Area {
+  id: string;
+  name: string;
+  question: string;
+  categories: string[];
+}
+
+export const AREAS: Area[] = [
+  {
+    id: 'knowledge',
+    name: 'Knowledge and language',
+    question: 'What does the model know, and how well does it read and write?',
+    categories: ['knowledge-qa', 'factuality-hallucination', 'multilingual', 'long-context', 'instruction-following-chat', 'writing-creative-taste'],
+  },
+  {
+    id: 'reasoning',
+    name: 'Math and science',
+    question: 'Can it solve problems that experts find hard?',
+    categories: ['math', 'science-reasoning', 'forecasting'],
+  },
+  {
+    id: 'code',
+    name: 'Coding',
+    question: 'Can it write and fix real software?',
+    categories: ['coding', 'ai-rnd-rsi'],
+  },
+  {
+    id: 'agents',
+    name: 'Agents and tools',
+    question: 'Can it act on its own in a terminal, a browser or a game?',
+    categories: ['agentic-terminal', 'computer-use-browser', 'tool-use', 'games-long-horizon'],
+  },
+  {
+    id: 'work',
+    name: 'Professional work',
+    question: 'Can it do the work people are paid for?',
+    categories: ['economic-work', 'domain-legal-finance-medical', 'engineering-design'],
+  },
+  {
+    id: 'multimodal',
+    name: 'Vision, audio and the physical world',
+    question: 'Can it see, hear and act in the world?',
+    categories: ['multimodal-vision', 'audio-video', 'robotics-embodied', 'world-models'],
+  },
+  {
+    id: 'safety',
+    name: 'Safety and security',
+    question: 'What harm could it do, and does it refuse?',
+    categories: ['safety-alignment', 'cyber', 'bio-chem'],
+  },
+  {
+    id: 'other',
+    name: 'Other',
+    question: 'Tests that fit nowhere else.',
+    categories: ['other'],
+  },
+];
+
+export const CATEGORY_NAMES: Record<string, string> = {
+  'knowledge-qa': 'Knowledge',
+  'factuality-hallucination': 'Factuality',
+  multilingual: 'Multilingual',
+  'long-context': 'Long context',
+  'instruction-following-chat': 'Instructions and chat',
+  'writing-creative-taste': 'Writing and taste',
+  math: 'Math',
+  'science-reasoning': 'Science and reasoning',
+  forecasting: 'Forecasting',
+  coding: 'Coding',
+  'ai-rnd-rsi': 'AI research',
+  'agentic-terminal': 'Terminal agents',
+  'computer-use-browser': 'Computer and browser use',
+  'tool-use': 'Tool use',
+  'games-long-horizon': 'Games and long tasks',
+  'economic-work': 'Economic work',
+  'domain-legal-finance-medical': 'Law, finance and medicine',
+  'engineering-design': 'Engineering and CAD',
+  'multimodal-vision': 'Vision',
+  'audio-video': 'Audio and video',
+  'robotics-embodied': 'Robotics',
+  'world-models': 'World models',
+  'safety-alignment': 'Safety and alignment',
+  cyber: 'Cybersecurity',
+  'bio-chem': 'Biology and chemistry',
+  other: 'Other',
+  'meta-collection': 'Collections',
+  methodology: 'Methodology',
+};
+
+const AREA_OF = new Map<string, string>();
+for (const a of AREAS) for (const c of a.categories) AREA_OF.set(c, a.id);
+
+export function areaOf(category: string | undefined): string {
+  return (category && AREA_OF.get(category)) || 'other';
+}
+
+export const AREA_BY_ID = new Map(AREAS.map((a) => [a.id, a]));

@@ -1,0 +1,54 @@
+---
+// A model as people write it: the lab's mark, the name, and the snapshot or setting in quieter type.
+import LabMark from './LabMark.astro';
+import { modelById } from '../lib/data.ts';
+import { featuredIds } from '../lib/routes.ts';
+
+interface Props {
+  id: string;
+  setting?: string | null;
+  link?: boolean;
+  size?: number;
+  lab?: boolean;
+}
+const { id, setting, link = true, size = 16, lab: showLab = false } = Astro.props;
+const m = modelById.get(id);
+const href = link && featuredIds.has(id) ? `/models/${id}/` : undefined;
+const extra = [m?.version, setting && setting !== 'unknown' ? setting : null].filter(Boolean).join(', ');
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag class="mn" href={href}>
+  <LabMark lab={m?.lab} size={size} />
+  <span class="mn-t">
+    <span class="mn-n">{m?.name ?? id}</span>{extra && <span class="mn-x"> {extra}</span>}
+    {showLab && m?.lab && <span class="mn-l">{m.lab}</span>}
+  </span>
+</Tag>
+
+<style>
+  .mn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  a.mn:hover .mn-n {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  .mn-t {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mn-n {
+    font-weight: 500;
+  }
+  .mn-x {
+    color: var(--ink-3);
+  }
+</style>

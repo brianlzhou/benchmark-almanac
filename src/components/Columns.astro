@@ -1,0 +1,104 @@
+---
+// The top of a leaderboard as columns, after Artificial Analysis and Design Arena: columns in each lab's
+// colour grow from one baseline, the value sits on the cap, and the lab's mark and the model's name sit
+// under the baseline. Desktop only; phones get BarBoard.
+import type { Score } from '../lib/types.ts';
+import LabMark from './LabMark.astro';
+import { modelById } from '../lib/data.ts';
+import { labColor } from '../lib/palette.ts';
+import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
+import { niceMax } from '../lib/scale.ts';
+import { featuredIds } from '../lib/routes.ts';
+
+interface Props {
+  scores: Score[];
+  unit?: string;
+  limit?: number;
+  height?: number;
+}
+const { scores, unit = '%', limit = 15, height = 260 } = Astro.props;
+const rows = scores.slice(0, limit);
+const max = unit === '%' ? 100 : niceMax(Math.max(...rows.map((s) => s.value), 1e-9));
+const h = (v: number) => Math.max(2, (v / max) * height);
+---
+
+<div class="cols" style={`--h:${height}px`}>
+  {
+    rows.map((s) => {
+      const m = modelById.get(s.model);
+      const href = featuredIds.has(s.model) ? `/models/${s.model}/` : undefined;
+      return (
+        <a
+          class="col"
+          href={href}
+          data-tv={fmt(s.value, unit)}
+          data-tn={`${m?.name ?? s.model}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`}
+          data-ts={`${s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${s.date ? `, ${monthYear(s.date)}` : ''}`}
+        >
+          <span class="plot">
+            <span class="v num">{scoreBare(s.value, unit)}</span>
+            <span class="bar" style={`height:${h(s.value)}px;background:${labColor(m?.lab)}`} />
+          </span>
+          <LabMark lab={m?.lab} size={18} class="lm" />
+          <span class="n">{m?.name ?? s.model}</span>
+        </a>
+      );
+    })
+  }
+</div>
+
+<style>
+  .cols {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+  }
+  .col {
+    flex: 0 1 66px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    padding: 0 2px 4px;
+  }
+  .col:hover {
+    background: var(--hover);
+  }
+  .plot {
+    height: calc(var(--h) + 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    background: linear-gradient(var(--line), var(--line)) bottom / 100% 1px no-repeat;
+  }
+  .v {
+    font-size: 12.5px;
+    color: var(--ink-2);
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+  .bar {
+    width: 38px;
+    border-radius: 4px 4px 0 0;
+  }
+  .col :global(.lm) {
+    margin-top: 12px;
+  }
+  .n {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--ink-2);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+  }
+</style>

@@ -1,0 +1,136 @@
+---
+// A ranked leaderboard as horizontal bars: rank, the lab's mark and the model, a bar in the lab's colour
+// from a zero baseline, and the value at its tip. Bars are 14 px with air between rows.
+import type { Score } from '../lib/types.ts';
+import ModelName from './ModelName.astro';
+import { modelById } from '../lib/data.ts';
+import { labColor } from '../lib/palette.ts';
+import { score as fmt, monthYear } from '../lib/format.ts';
+import { niceMax } from '../lib/scale.ts';
+
+interface Props {
+  scores: Score[];
+  unit?: string;
+  limit?: number;
+  highlight?: string;
+  better?: 'higher' | 'lower';
+}
+const { scores, unit = '%', limit = 15, highlight, better = 'higher' } = Astro.props;
+const rows = scores.slice(0, limit);
+// keep the highlighted model visible even when it ranks below the cut
+const hi = highlight ? scores.findIndex((s) => s.model === highlight) : -1;
+const extra = hi >= limit ? scores[hi] : undefined;
+const max = unit === '%' && better !== 'lower' ? 100 : niceMax(Math.max(...scores.map((s) => s.value), 1e-9));
+const w = (v: number) => `${Math.max(0.6, (v / max) * 100)}%`;
+const src = (s: Score) => (s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
+---
+
+<ol class="bb">
+  {
+    rows.map((s, i) => (
+      <li class:list={{ hi: s.model === highlight }}>
+        <span class="rk num">{i + 1}</span>
+        <span class="who">
+          <ModelName id={s.model} setting={s.setting} />
+        </span>
+        <span class="track" data-tv={fmt(s.value, unit)} data-tn={modelById.get(s.model)?.name} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}>
+          <span class="fill" style={`width:${w(s.value)};background:${labColor(modelById.get(s.model)?.lab)}`} />
+          <span class="val num">{fmt(s.value, unit)}</span>
+        </span>
+      </li>
+    ))
+  }
+  {
+    extra && (
+      <>
+        <li class="gap" aria-hidden="true">
+          <span />
+        </li>
+        <li class="hi">
+          <span class="rk num">{hi + 1}</span>
+          <span class="who">
+            <ModelName id={extra.model} setting={extra.setting} />
+          </span>
+          <span class="track">
+            <span class="fill" style={`width:${w(extra.value)};background:${labColor(modelById.get(extra.model)?.lab)}`} />
+            <span class="val num">{fmt(extra.value, unit)}</span>
+          </span>
+        </li>
+      </>
+    )
+  }
+</ol>
+
+<style>
+  .bb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto minmax(160px, 300px) 1fr;
+    column-gap: 16px;
+  }
+  li {
+    display: contents;
+  }
+  li > * {
+    padding: 7px 0;
+  }
+  .rk {
+    color: var(--ink-3);
+    font-size: 13px;
+    text-align: right;
+    min-width: 2ch;
+    align-self: center;
+  }
+  .who {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    font-size: 14.5px;
+  }
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .fill {
+    height: 14px;
+    border-radius: 0 4px 4px 0;
+    flex: none;
+    max-width: calc(100% - 64px);
+  }
+  .val {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .hi .who,
+  .hi .val {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .hi .rk {
+    color: var(--ink);
+  }
+  .gap span {
+    grid-column: 1 / -1;
+    height: 10px;
+    border-left: 1px dashed var(--ink-4);
+    margin-left: 1ch;
+  }
+  @media (max-width: 720px) {
+    .bb {
+      grid-template-columns: auto 1fr;
+    }
+    .track {
+      grid-column: 2;
+      padding-top: 0;
+      padding-bottom: 12px;
+    }
+    .who {
+      padding-bottom: 4px;
+    }
+  }
+</style>

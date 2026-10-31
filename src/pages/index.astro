@@ -1,0 +1,162 @@
+---
+import Base from '../layouts/Base.astro';
+import ModelCard from '../components/ModelCard.astro';
+import MiniBoard from '../components/MiniBoard.astro';
+import AreaShare from '../components/AreaShare.astro';
+import Lifecycle from '../components/Lifecycle.astro';
+import { allSummaries, benchmarks, cards, labs, eciOrder, featuredModels, AS_OF, monthsBetween, SATURATED } from '../lib/data.ts';
+import { fullDate, monthYear } from '../lib/format.ts';
+import discoveredJson from '../../data/discovered.json';
+
+const all = allSummaries();
+const cardLabs = new Set(cards.map((c) => c.lab));
+const inUse = all.filter((s) => s.status === 'in use').length;
+const dropped = all.filter((s) => s.status === 'dropped');
+const droppedSat = dropped.filter((s) => s.why === 'saturated').length;
+const withRepo = benchmarks.filter((b) => b.links?.repo).length;
+
+// leaderboards to watch: labs headline them now and nobody has passed 85%
+const watch = all
+  .filter((s) => s.status === 'in use' && s.board.length >= 5 && (s.b.unit ?? '%') === '%' && (s.best?.value ?? 100) < SATURATED && s.b.better !== 'lower')
+  .map((s) => ({ s, recent: s.cites.filter((c) => monthsBetween(c.card.date, AS_OF) < 6).length }))
+  .sort((a, b) => b.recent - a.recent || b.s.board.length - a.s.board.length)
+  .slice(0, 6)
+  .map((x) => x.s);
+
+// rise and retirement: the 36 benchmarks the most cards report
+const life = all
+  .filter((s) => s.cites.length >= 4)
+  .sort((a, b) => b.cites.length - a.cites.length)
+  .slice(0, 36)
+  .map((s) => s.b.id);
+
+const discovered = (discoveredJson as { items: { title: string; url: string; date: string; source: string; why?: string }[] }).items.slice(0, 6);
+---
+
+<Base>
+  <div class="page">
+    <header class="head">
+      <h1 class="long">What AI labs measure, and when they stop</h1>
+      <p class="lede">
+        An almanac of {benchmarks.length} AI benchmarks: what each one tests, where its code lives, which of {cards.length} model cards from {cardLabs.size} labs report it, and how the best score has moved since 2023.
+      </p>
+      <div class="facts">
+        <span><b>{inUse}</b> in use</span>
+        <span><b>{dropped.length}</b> dropped, <b>{droppedSat}</b> of them after saturating</span>
+        <span><b>{withRepo}</b> with public code</span>
+        <span><b>{featuredModels.length}</b> models from <b>{labs.length}</b> labs</span>
+        <span>Updated {fullDate(AS_OF)}</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>The models at the top</h2>
+          <p>Ranked by Epoch AI's Capabilities Index, which places results from many benchmarks on one scale.</p>
+        </div>
+        <a class="more" href="/models/">All models</a>
+      </div>
+      <div class="grid3">
+        {eciOrder.slice(0, 6).map((id) => <ModelCard id={id} />)}
+      </div>
+    </section>
+
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Leaderboards to watch</h2>
+          <p>Benchmarks that several labs reported in the last six months, where no model has reached {SATURATED}% yet.</p>
+        </div>
+        <a class="more" href="/benchmarks/?status=in-use">All benchmarks in use</a>
+      </div>
+      <div class="grid3 boards">
+        {watch.map((s) => <MiniBoard s={s} />)}
+      </div>
+    </section>
+
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Model cards moved from knowledge tests to agents</h2>
+          <p>Share of the benchmarks in model card headline tables, by area, every half year.</p>
+        </div>
+        <a class="more" href="/cards/">All model cards</a>
+      </div>
+      <AreaShare />
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>Labs drop a benchmark once it saturates</h2>
+        <p>
+          The {life.length} benchmarks that the most model cards report, ordered by when labs started using them. Each tick is a card. {droppedSat} of the {dropped.length} dropped benchmarks went after the best score passed {SATURATED}%.
+        </p>
+      </div>
+      <Lifecycle ids={life} />
+    </section>
+
+    {
+      discovered.length > 0 && (
+        <section>
+          <div class="sh-row">
+            <div class="sh">
+              <h2>New this month</h2>
+              <p>Benchmarks the discovery job found in paper feeds, newsletters and code hosts, waiting for review.</p>
+            </div>
+            <a class="more" href="/new/">Everything new</a>
+          </div>
+          <ul class="new">
+            {discovered.map((d) => (
+              <li>
+                <a href={d.url}>{d.title}</a>
+                <span class="muted">
+                  {d.source}, {monthYear(d.date)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .boards {
+    gap: 56px 48px;
+  }
+  .more {
+    font-size: 14px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .new {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .new li {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 1000px) {
+    .grid3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 720px) {
+    .grid3 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
