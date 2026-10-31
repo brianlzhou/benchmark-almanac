@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import discoveredJson from '../../data/discovered.json';
 import { benchById } from '../lib/data.ts';
-import { fullDate, hostname } from '../lib/format.ts';
+import { fullDate } from '../lib/format.ts';
 
 interface Candidate {
   key: string;
@@ -27,6 +27,7 @@ const watch = d.items.filter((c) => c.decision === 'watch');
 const FEED: Record<string, string> = { hf: 'Hugging Face papers', arxiv: 'arXiv' };
 const where = (c: Candidate) => [...c.curated.map((s) => s.source), ...c.registries.map((s) => s.source), ...c.feeds.map((f) => FEED[f] ?? f)];
 const mentions = (d.mentions ?? []).filter((m) => benchById.has(m.benchmark));
+const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upvotes} upvotes` : '', c.stars ? `${c.stars} stars` : ''].filter(Boolean).join('. ');
 ---
 
 <Base title="New benchmarks" description="Benchmarks the discovery job found this week, scored and waiting for review.">
@@ -59,13 +60,8 @@ const mentions = (d.mentions ?? []).filter((m) => benchById.has(m.benchmark));
                   <a class="cn" href={c.url}>{c.name}</a>
                   {c.title !== c.name && <p class="ct">{c.title}</p>}
                   <p class="cm">
-                    {[c.org, where(c).join(', '), c.upvotes ? `${c.upvotes} upvotes` : '', c.stars ? `${c.stars} stars` : ''].filter(Boolean).join('. ')}
-                    {c.repo && (
-                      <>
-                        {'. '}
-                        <a href={c.repo}>{hostname(c.repo) === 'github.com' ? c.repo.replace(/^https?:\/\/github\.com\//, '') : 'Code'}</a>
-                      </>
-                    )}
+                    {meta(c)}
+                    {c.repo && <a class="repo" href={c.repo}>{c.repo.replace(/^https?:\/\/(www\.)?(github\.com\/)?/, '')}</a>}
                   </p>
                 </div>
               </li>
@@ -165,6 +161,10 @@ const mentions = (d.mentions ?? []).filter((m) => benchById.has(m.benchmark));
     margin-top: 4px;
     color: var(--ink-3);
     font-size: 13.5px;
+  }
+  .repo {
+    display: block;
+    margin-top: 2px;
   }
   .ment {
     list-style: none;

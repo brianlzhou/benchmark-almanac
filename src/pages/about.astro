@@ -1,7 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
-import { cards, benchmarks, models, labs, EPOCH_SOURCE, SATURATED, AS_OF } from '../lib/data.ts';
+import { cards, systemCards, benchmarks, labs, EPOCH_SOURCE, SATURATED, AS_OF } from '../lib/data.ts';
+import { LEVELS, SCORING } from '../lib/taxonomy.ts';
 import { fullDate } from '../lib/format.ts';
+import reviewed from '../../data/reviewed.json';
+import sources from '../../data/sources.json';
+import Criteria from '../components/Criteria.astro';
+import { STAYS_OUT } from '../lib/criteria.ts';
+
+const leftOut = (reviewed as { rejected?: unknown[] }).rejected?.length ?? 0;
+const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automated).length;
 ---
 
 <Base title="How this works" description="Where the almanac's data comes from, how it names models, and the rules behind its labels.">
@@ -11,20 +19,39 @@ import { fullDate } from '../lib/format.ts';
       <p class="lede">The almanac joins three kinds of data under one naming scheme. Everything is built from files in the repository, so every number traces back to a source.</p>
     </header>
 
-    <section>
+    <section id="catalogued">
+      <h2>What gets catalogued</h2>
+      <p>
+        A benchmark here is a named test of AI models that anyone can run again: language models, agents, vision and audio models, robot policies and world models. The almanac adds one when it passes <b>at least one</b> of four tests.
+      </p>
+      <Criteria />
+      <p>
+        <b>What stays out:</b> {STAYS_OUT}
+      </p>
+      <p>
+        Every find that was checked and left out is listed on the <a href="/new/">New page</a> with its reason: {leftOut.toLocaleString('en-US')} so far. A find that fails today can pass later, when a lab reports it or people start to use it. To suggest one, use the <a href="/submit/">submission form</a>.
+      </p>
+    </section>
+
+    <section id="data">
       <h2>The data</h2>
       <p>
-        <b>Lab model cards.</b> {cards.length} model cards, system cards and launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {fullDate(AS_OF)}. For each card the almanac records the benchmarks in its headline table and the flagship model's score, as the card writes them. Labs choose their own settings, so card scores compare less cleanly than independent runs. Pages say which kind of score they show.
+        <b>Lab model cards.</b> {cards.length} launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {fullDate(AS_OF)}. For each post the almanac records the benchmarks in its headline results and the model's score, as the post writes them. Whether a benchmark is in use, fading or dropped follows these posts.
+        {systemCards.length > 0 && ` The almanac also reads ${systemCards.length} system cards, model cards and technical reports published with the releases. They record every evaluation the document reports, including safety and frontier-risk tests, and each result notes the section it sits in.`}
+        Labs choose their own settings, so card scores compare less cleanly than independent runs. Pages say which kind of score they show.
+      </p>
+      <p>
+        <b>Official leaderboards.</b> Many benchmarks publish their own leaderboard, and it is usually the first place new models appear. Small importers in <code>scripts/leaderboards/</code> read each one from its published data file and map its model names onto the almanac's models. When a benchmark's own board covers five or more models, its page leads with it.
       </p>
       <p>
         <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {fullDate(EPOCH_SOURCE.retrieved)}. Some are Epoch's own runs and some it collects from public leaderboards. The Epoch Capabilities Index, which ranks models across many benchmarks on one scale, comes from Epoch too. Rows Epoch collected from Artificial Analysis are left out, because Artificial Analysis's terms do not allow reuse in other ranking products.
       </p>
       <p>
-        <b>The catalogue.</b> {benchmarks.length} benchmarks with what each tests, who made it, and links to its code, paper, data and leaderboard. Each GitHub link was checked against the GitHub API. Entries started from lab cards, Epoch's hub and public collections, and research agents filled in the facts from primary sources.
+        <b>The catalogue.</b> {benchmarks.length.toLocaleString('en-US')} benchmarks with what each tests, who made it, and links to its code, paper, data and leaderboard. Each GitHub link was checked against the GitHub API. Entries started from lab cards, Epoch's hub and public collections, and research agents filled in the facts from primary sources.
       </p>
     </section>
 
-    <section>
+    <section id="names">
       <h2>One name per model</h2>
       <p>
         Every score points at one record in <code>data/models.json</code>, whatever the source called the model. A record holds the model's name as its lab writes it, the lab, the release date, open or closed weights, and the other spellings it goes by. When a lab shipped several versions under one name, each is its own record with a snapshot label, such as GPT-4o (May 2024). Reasoning effort and harness are settings of a score, not separate models. A model's rank on a benchmark uses its best setting.
@@ -32,7 +59,7 @@ import { fullDate } from '../lib/format.ts';
       <p>The same holds for {labs.length} labs and for benchmarks: one record each, with aliases, so "GPQA-D" in one card and "GPQA Diamond" in another count as one benchmark. Versions stay apart: ARC-AGI-2 is not ARC-AGI.</p>
     </section>
 
-    <section>
+    <section id="labels">
       <h2>The labels</h2>
       <dl>
         <dt>In use</dt>
@@ -46,17 +73,59 @@ import { fullDate } from '../lib/format.ts';
       </dl>
     </section>
 
-    <section>
-      <h2>Finding new benchmarks</h2>
+    <section id="levels">
+      <h2>Levels and scoring</h2>
+      <p>Each benchmark has a level: who among people could solve its tasks. It says how hard the tasks are for a person, not how models score.</p>
+      <dl>
+        {LEVELS.map((l) => (
+          <>
+            <dt>{l.name}</dt>
+            <dd>{l.who}.</dd>
+          </>
+        ))}
+      </dl>
+      <p class="gap">Each benchmark also says how a score is decided. Arenas, where people vote between two answers, rank models against each other. The rest score them against a fixed standard.</p>
+      <dl>
+        {SCORING.map((m) => (
+          <>
+            <dt>{m.name}</dt>
+            <dd>{m.how}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <section id="versions">
+      <h2>Versions</h2>
       <p>
-        A job runs every morning. It reads Hugging Face Daily Papers, arXiv, the AINews newsletter, Epoch's benchmark list, the Inspect Evals register and Hugging Face's official benchmark datasets. It scores each find in two stages. First: is it a benchmark at all? Second: is it worth cataloguing? That depends on released code or data, the authors, early traction, and how many sources mention it. Finds that score 8 or more go to the <a href="/new/">review queue</a>. The rest wait 14 days for more evidence. It never scrapes X, whose terms forbid it.
+        A benchmark released in versions, such as Terminal-Bench 1.0 to 4.0 or PostTrainBench 1.0 to 1.2, keeps one record per version, linked as a family. Scores never mix across versions: a card that reports "PostTrainBench v1.1" counts toward 1.1. The benchmarks list shows each family once, at its newest version, and each version's page links the others.
       </p>
     </section>
 
-    <section>
+    <section id="leaders">
+      <h2>Who held number one</h2>
+      <p>
+        A model takes the top spot on a benchmark on the day its score beats every earlier score, and keeps it until a later model beats it. Ties leave the holder in place. Scores are placed at each model's release date, but never before the benchmark itself came out. Lab claims are placed at the date of the card that made them. Charts start in January 2023.
+      </p>
+      <p>
+        The clock that counts time at number one stops at the first of two moments: the best score passes {SATURATED}%, or six weeks pass with no newer model tested. After that, nobody can take the lead in a way that means much, or nobody knows who would. A new version does not stop the old one’s clock. While people still test the old version, its race goes on, and whoever takes it past {SATURATED}% gets the close-out: ARC-AGI-2 came out long before anyone closed out ARC-AGI-1. The share of time at number one counts only this contested time. The model that first takes a benchmark past {SATURATED}% earns a close-out instead, counted on its own.
+      </p>
+    </section>
+
+    <section id="finding">
+      <h2>Finding new benchmarks</h2>
+      <p>
+        A job runs every morning. It reads {readDaily} of the sources on the <a href="/sources/">Sources page</a>: paper feeds, newsletters, evaluation registers, leaderboards and lab blogs. It scores each find in two stages. First: is it a benchmark at all? Second: does it pass one of the four tests above? Finds that score 8 or more go to the <a href="/new/">review queue</a>. The rest wait 14 days for more evidence. A find already left out is skipped. The job never scrapes X, whose terms forbid it.
+      </p>
+      <p>
+        Research agents then check each find against its own paper, repository or leaderboard before it joins the catalogue, and look for newer versions of benchmarks already here.
+      </p>
+    </section>
+
+    <section id="credits">
       <h2>Credits</h2>
       <p>
-        Scores and the capability index: Epoch AI, under CC BY 4.0. Lab marks: <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a>, under the MIT License. The marks are trademarks of their owners. Type: Newsreader and Geist, under the SIL Open Font License. The page designs take cues from the benchmark pages of Epoch AI, Artificial Analysis, Arena and Design Arena.
+        Scores and the capability index: Epoch AI, under CC BY 4.0. Paper abstracts: arXiv metadata, under CC0, and other papers under the license each one names. Lab marks: <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a>, under the MIT License, and the labs’ own websites and GitHub or Hugging Face organizations. The marks are trademarks of their owners. Type: Newsreader and Geist, under the SIL Open Font License. The page designs take cues from the benchmark pages of Epoch AI, Artificial Analysis, Arena and Design Arena.
       </p>
     </section>
   </div>
@@ -83,10 +152,16 @@ import { fullDate } from '../lib/format.ts';
     color: var(--ink);
     font-weight: 500;
   }
+  .gap {
+    margin-top: 28px;
+  }
+  section[id] {
+    scroll-margin-top: 90px;
+  }
   dl {
-    margin: 0;
+    margin: 16px 0 0;
     display: grid;
-    grid-template-columns: 120px 1fr;
+    grid-template-columns: 170px 1fr;
     gap: 12px 24px;
   }
   dt {

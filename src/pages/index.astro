@@ -4,16 +4,22 @@ import ModelCard from '../components/ModelCard.astro';
 import MiniBoard from '../components/MiniBoard.astro';
 import AreaShare from '../components/AreaShare.astro';
 import Lifecycle from '../components/Lifecycle.astro';
-import { allSummaries, benchmarks, cards, labs, eciOrder, featuredModels, AS_OF, monthsBetween, SATURATED } from '../lib/data.ts';
-import { fullDate, monthYear } from '../lib/format.ts';
+import HeroArt from '../components/HeroArt.astro';
+import AreaMark from '../components/AreaMark.astro';
+import SearchBox from '../components/SearchBox.astro';
+import { AREAS, areaOf } from '../lib/taxonomy.ts';
+import ReignChart from '../components/ReignChart.astro';
+import { mostReportedRows } from '../lib/leaders.ts';
+import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED, LEADERBOARDS, benchById } from '../lib/data.ts';
+import { humanDate } from '../lib/format.ts';
 import discoveredJson from '../../data/discovered.json';
+import githubJson from '../../data/github.json';
 
 const all = allSummaries();
-const cardLabs = new Set(cards.map((c) => c.lab));
-const inUse = all.filter((s) => s.status === 'in use').length;
-const dropped = all.filter((s) => s.status === 'dropped');
-const droppedSat = dropped.filter((s) => s.why === 'saturated').length;
-const withRepo = benchmarks.filter((b) => b.links?.repo).length;
+// the saturation claim counts established benchmarks only: five or more model cards
+const est = all.filter((s) => s.cites.length >= 5);
+const estDropped = est.filter((s) => s.status === 'dropped');
+const estSat = estDropped.filter((s) => s.why === 'saturated').length;
 
 // leaderboards to watch: labs headline them now and nobody has passed 85%
 const watch = all
@@ -30,22 +36,78 @@ const life = all
   .slice(0, 36)
   .map((s) => s.b.id);
 
-const discovered = (discoveredJson as { items: { title: string; url: string; date: string; source: string; why?: string }[] }).items.slice(0, 6);
+interface Find {
+  name: string;
+  title: string;
+  url: string;
+  first: string;
+  org?: string;
+  decision: string;
+}
+// who held number one on the tests the most model releases reported over the last year
+const crown = mostReportedRows(AS_OF);
+const crownRows = crown.all;
+const crownIndep = crown.independent;
+const topTest = crown.tests.length ? (benchById.get(crown.tests[0].fam)?.name ?? crown.tests[0].fam) : '';
+const n = (v: number) => v.toLocaleString('en-US');
+// the hero's area chips: how many benchmarks each area holds
+const areaCounts = AREAS.filter((a) => a.id !== 'other').map((a) => ({ id: a.id, name: a.name, n: benchmarks.filter((b) => areaOf(b.category) === a.id).length }));
+// the hero's pill: benchmarks added in the last 30 days, else the newest releases
+const monthAgo = new Date(Date.parse(AS_OF) - 30 * 864e5).toISOString().slice(0, 10);
+// newest additions first, then the ones labs already report, so the pill names benchmarks people know
+const citesOf = new Map<string, number>();
+for (const c of cards) for (const r of c.results) citesOf.set(r.benchmark, (citesOf.get(r.benchmark) ?? 0) + 1);
+const byAdded = benchmarks
+  .filter((b) => b.added && b.added >= monthAgo && b.access !== 'private')
+  .sort((a, b) => b.added!.localeCompare(a.added!) || (citesOf.get(b.id) ?? 0) - (citesOf.get(a.id) ?? 0) || (b.released ?? '').localeCompare(a.released ?? ''));
+const fresh = byAdded.length
+  ? byAdded
+  : benchmarks.filter((b) => b.released && b.released >= monthAgo.slice(0, 7) && b.access !== 'private').sort((a, b) => b.released!.localeCompare(a.released!));
+const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter((d) => d.decision === 'catalog').slice(0, 6);
+// schema.org WebSite: the site's name and address for search engines
+const website = {
+  '@type': 'WebSite',
+  name: 'Benchmark Almanac',
+  url: new URL('/', Astro.site).href,
+  description: 'A catalog of AI benchmarks, with the labs that report each one and how its scores have changed.',
+  inLanguage: 'en',
+};
 ---
 
-<Base>
+<Base jsonLd={website}>
   <div class="page">
-    <header class="head">
-      <h1 class="long">What AI labs measure, and when they stop</h1>
-      <p class="lede">
-        An almanac of {benchmarks.length} AI benchmarks: what each one tests, where its code lives, which of {cards.length} model cards from {cardLabs.size} labs report it, and how the best score has moved since 2023.
-      </p>
-      <div class="facts">
-        <span><b>{inUse}</b> in use</span>
-        <span><b>{dropped.length}</b> dropped, <b>{droppedSat}</b> of them after saturating</span>
-        <span><b>{withRepo}</b> with public code</span>
-        <span><b>{featuredModels.length}</b> models from <b>{labs.length}</b> labs</span>
-        <span>Updated {fullDate(AS_OF)}</span>
+    <header class="hero">
+      <HeroArt />
+      <div class="hero-in">
+        {
+          fresh.length > 0 && (
+            <a class="pill" href="/new/">
+              <span class="pill-k">New</span>
+              <span class="pill-t">
+                {fresh.slice(0, 2).map((b) => b.name).join(', ')}
+                {fresh.length > 2 && ` and ${(fresh.length - 2).toLocaleString('en-US')} more`}
+              </span>
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M5 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </a>
+          )
+        }
+        <h1>Benchmark Almanac</h1>
+        <p class="hero-lede">
+          We track {n(benchmarks.length)} benchmarks from {n(Object.keys(LEADERBOARDS).length)} public leaderboards, {n(cards.length)} launch posts, {n(systemCards.length)} system cards, and {n(Object.keys(githubJson).length)} open-source GitHub repositories.
+        </p>
+        <SearchBox id="search-list" main preload label="Search benchmarks" />
+        <nav class="chips" aria-label="Benchmarks by area">
+          {
+            areaCounts.map((a) => (
+              <a class="chip" href={`/benchmarks/?area=a:${a.id}`} data-area={a.id}>
+                <AreaMark area={a.id} size={10} />
+                {a.name}
+                <span class="n num">{a.n}</span>
+              </a>
+            ))
+          }
+        </nav>
+        <p class="art-key">Click on any of the benchmarks to open them!</p>
       </div>
     </header>
 
@@ -53,7 +115,7 @@ const discovered = (discoveredJson as { items: { title: string; url: string; dat
       <div class="sh-row">
         <div class="sh">
           <h2>The models at the top</h2>
-          <p>Ranked by Epoch AI's Capabilities Index, which places results from many benchmarks on one scale.</p>
+          <p>Ranked by Epoch AI's Capabilities Index, one score built from many benchmarks.</p>
         </div>
         <a class="more" href="/models/">All models</a>
       </div>
@@ -62,11 +124,39 @@ const discovered = (discoveredJson as { items: { title: string; url: string; dat
       </div>
     </section>
 
+    {
+      crownRows.length > 0 && (
+        <section class="switch">
+          <div class="sh-row">
+            <div class="sh">
+              <h2>Who held number one</h2>
+              <p>
+                The {crown.tests.length} tests the most model releases reported since {humanDate(crown.since)}, most reported first. {topTest} comes first, with {n(crown.tests[0].n)} releases. Each version labs reported in that year gets its own row. Taller means a higher score.
+              </p>
+            </div>
+            <div class="crown-tools">
+              <label class="claims">
+                <input type="checkbox" data-claims checked />
+                Include lab claims
+              </label>
+              <a class="more" href="/leaders/">Every category</a>
+            </div>
+          </div>
+          <div class="when-a">
+            <ReignChart rows={crownRows} levels={false} />
+          </div>
+          <div class="when-b">
+            <ReignChart rows={crownIndep} levels={false} />
+          </div>
+        </section>
+      )
+    }
+
     <section>
       <div class="sh-row">
         <div class="sh">
           <h2>Leaderboards to watch</h2>
-          <p>Benchmarks that several labs reported in the last six months, where no model has reached {SATURATED}% yet.</p>
+          <p>No model has reached {SATURATED}% on these yet, and labs have reported them in launch posts over the last six months.</p>
         </div>
         <a class="more" href="/benchmarks/?status=in-use">All benchmarks in use</a>
       </div>
@@ -79,7 +169,7 @@ const discovered = (discoveredJson as { items: { title: string; url: string; dat
       <div class="sh-row">
         <div class="sh">
           <h2>Model cards moved from knowledge tests to agents</h2>
-          <p>Share of the benchmarks in model card headline tables, by area, every half year.</p>
+          <p>What labs headline in their launch posts, by area, every half year.</p>
         </div>
         <a class="more" href="/cards/">All model cards</a>
       </div>
@@ -88,9 +178,10 @@ const discovered = (discoveredJson as { items: { title: string; url: string; dat
 
     <section>
       <div class="sh">
-        <h2>Labs drop a benchmark once it saturates</h2>
+        <h2>{estSat * 2 > estDropped.length ? 'Labs mostly drop a benchmark after it saturates' : 'Saturation is one reason labs drop a benchmark'}</h2>
         <p>
-          The {life.length} benchmarks that the most model cards report, ordered by when labs started using them. Each tick is a card. {droppedSat} of the {dropped.length} dropped benchmarks went after the best score passed {SATURATED}%.
+          {estDropped.length} benchmarks appeared in five or more launch posts and then went a year without one. Labs dropped {estSat} of them after the best score passed {SATURATED}%.
+          Below are the {life.length} benchmarks launch posts list most often, in the order labs took them up. Each tick is a post.
         </p>
       </div>
       <Lifecycle ids={life} />
@@ -101,18 +192,16 @@ const discovered = (discoveredJson as { items: { title: string; url: string; dat
         <section>
           <div class="sh-row">
             <div class="sh">
-              <h2>New this month</h2>
-              <p>Benchmarks the discovery job found in paper feeds, newsletters and code hosts, waiting for review.</p>
+              <h2>Found this week</h2>
+              <p>New benchmarks our discovery job found in paper feeds, newsletters and registries. They're queued for the catalog.</p>
             </div>
             <a class="more" href="/new/">Everything new</a>
           </div>
           <ul class="new">
             {discovered.map((d) => (
               <li>
-                <a href={d.url}>{d.title}</a>
-                <span class="muted">
-                  {d.source}, {monthYear(d.date)}
-                </span>
+                <a href={d.url}>{d.name}</a>
+                <span class="muted">{[d.org, `found ${humanDate(d.first)}`].filter(Boolean).join(', ')}</span>
               </li>
             ))}
           </ul>
@@ -123,6 +212,161 @@ const discovered = (discoveredJson as { items: { title: string; url: string; dat
 </Base>
 
 <style>
+  /* hero: a centered title over a drawing of the data, a search box and the eight areas */
+  /* the drawing bleeds to the window edges, so main clips it sideways (clip, not hidden, keeps sticky and dropdowns working) */
+  :global(main) {
+    overflow-x: clip;
+  }
+  /* z-index 2 keeps the search suggestions over the sections below: their masked lab marks make layers of their own */
+  .hero {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    padding: 56px 0 150px;
+    text-align: center;
+  }
+  .hero-in {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero :global(.hero-art) {
+    height: 58%;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    padding: 5px 12px 5px 5px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel-2);
+    color: var(--ink-2);
+    font-size: 13.5px;
+    text-decoration: none;
+    transition: background-color 140ms ease, border-color 140ms ease;
+  }
+  .pill:hover {
+    background: var(--hover);
+    border-color: var(--ink-4);
+  }
+  .pill-k {
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .pill-t {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .hero h1 {
+    margin-top: 28px;
+    max-width: 20ch;
+    font-size: clamp(42px, 6.6vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+  .hero h1 em {
+    font-style: italic;
+  }
+  .crown-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 22px;
+  }
+  .hero-lede {
+    margin-top: 22px;
+    max-width: 60ch;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 860px;
+    margin-top: 22px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 13px 7px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14px;
+    text-decoration: none;
+    transition: border-color 140ms ease, background-color 140ms ease;
+  }
+  .chip:hover,
+  .chip:focus-visible {
+    border-color: var(--ink-4);
+  }
+  .chip .n {
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+  /* pointing at an area brings its lines forward in the drawing */
+  .hero:has(.chip:hover, .chip:focus-visible) :global(.hero-art path) {
+    stroke-opacity: 0.08;
+  }
+  .hero:has(.chip[data-area='knowledge']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='knowledge']),
+  .hero:has(.chip[data-area='reasoning']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='reasoning']),
+  .hero:has(.chip[data-area='code']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='code']),
+  .hero:has(.chip[data-area='agents']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='agents']),
+  .hero:has(.chip[data-area='work']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='work']),
+  .hero:has(.chip[data-area='multimodal']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='multimodal']),
+  .hero:has(.chip[data-area='safety']:is(:hover, :focus-visible)) :global(.hero-art path[data-a='safety']) {
+    stroke-opacity: 0.85;
+  }
+  .hero-facts {
+    justify-content: center;
+    margin-top: 26px;
+  }
+  .art-key {
+    position: absolute;
+    bottom: -100px;
+    right: 0;
+    max-width: 34ch;
+    color: var(--ink-3);
+    font-size: 12px;
+    line-height: 1.45;
+    text-align: right;
+  }
+  @media (max-width: 720px) {
+    .hero {
+      padding: 32px 0 96px;
+    }
+    .hero h1 br {
+      display: none;
+    }
+    .hero-lede {
+      font-size: 16.5px;
+    }
+    .chip {
+      font-size: 13.5px;
+      padding: 6px 11px 6px 9px;
+    }
+    .art-key {
+      position: static;
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
   .grid3 {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

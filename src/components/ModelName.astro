@@ -9,9 +9,8 @@ interface Props {
   setting?: string | null;
   link?: boolean;
   size?: number;
-  lab?: boolean;
 }
-const { id, setting, link = true, size = 16, lab: showLab = false } = Astro.props;
+const { id, setting, link = true, size = 16 } = Astro.props;
 const m = modelById.get(id);
 const href = link && featuredIds.has(id) ? `/models/${id}/` : undefined;
 const extra = [m?.version, setting && setting !== 'unknown' ? setting : null].filter(Boolean).join(', ');
@@ -22,7 +21,6 @@ const Tag = href ? 'a' : 'span';
   <LabMark lab={m?.lab} size={size} />
   <span class="mn-t">
     <span class="mn-n">{m?.name ?? id}</span>{extra && <span class="mn-x"> {extra}</span>}
-    {showLab && m?.lab && <span class="mn-l">{m.lab}</span>}
   </span>
 </Tag>
 

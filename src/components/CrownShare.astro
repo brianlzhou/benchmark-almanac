@@ -1,0 +1,73 @@
+---
+// Share of time at number one, as one bar split by lab (the FT's proportional stacked bar). Each block's
+// share is printed inside it when it fits. The key below repeats the names in block order.
+import LabMark from './LabMark.astro';
+import { labById } from '../lib/data.ts';
+import { labColor, onLabColor } from '../lib/palette.ts';
+
+interface Props {
+  shares: { lab: string; share: number }[];
+}
+const { shares } = Astro.props;
+const shown = shares.filter((s) => s.share >= 0.005);
+const pct = (v: number) => `${Math.round(v * 100)}%`;
+---
+
+<figure class="cs">
+  <div class="bar" role="img" aria-label={shown.map((s) => `${labById.get(s.lab)?.name ?? 'Other labs'} ${pct(s.share)}`).join(', ')}>
+    {
+      shown.map((s) => (
+        <span
+          class="blk"
+          style={`flex:${s.share};background:${labColor(s.lab)};color:${onLabColor(s.lab)}`}
+          data-tv={pct(s.share)}
+          data-tn={labById.get(s.lab)?.name ?? 'Other labs'}
+          data-ts="Share of time at number one"
+        >
+          {s.share >= 0.06 && <span class="in num">{pct(s.share)}</span>}
+        </span>
+      ))
+    }
+  </div>
+  <div class="key">
+    {
+      shown.map((s) => (
+        <span class="tag">
+          <LabMark lab={s.lab} size={14} />
+          {labById.get(s.lab)?.name ?? 'Other labs'}
+          <span class="muted num">{pct(s.share)}</span>
+        </span>
+      ))
+    }
+  </div>
+</figure>
+
+<style>
+  .cs {
+    margin: 0;
+  }
+  .bar {
+    display: flex;
+    gap: 2px;
+    height: 28px;
+  }
+  .blk {
+    min-width: 2px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .in {
+    padding-left: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    margin-top: 14px;
+  }
+</style>

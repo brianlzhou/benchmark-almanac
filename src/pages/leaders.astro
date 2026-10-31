@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import ReignChart from '../components/ReignChart.astro';
+import CrownShare from '../components/CrownShare.astro';
+import { benchmarks, labById } from '../lib/data.ts';
+import { eciReigns, labShares, reignDays } from '../lib/reigns.ts';
+import { leaderRows } from '../lib/leaders.ts';
+import { AREAS, CATEGORY_NAMES } from '../lib/taxonomy.ts';
+import { labColor } from '../lib/palette.ts';
+
+const eci = eciReigns();
+const eciRows = eci ? [{ ...eci, reigns: eci.reigns.filter((g) => g.end >= '2023-01-01') }] : [];
+const eciNow = eci?.reigns.at(-1);
+const changes = eci ? eci.reigns.filter((g) => g.start >= '2023-01-01').length : 0;
+
+// every category's chart, from independent runs where they exist
+const cats = AREAS.flatMap((a) => a.categories.map((c) => ({ a, c })))
+  .map(({ a, c }) => {
+    const ids = benchmarks.filter((b) => b.category === c).map((b) => b.id);
+    const ind = leaderRows(ids, 'epoch');
+    const rows = ind.length ? ind : leaderRows(ids, 'card');
+    return { a, c, rows, src: ind.length ? 'epoch' : 'card', shares: labShares(rows) };
+  })
+  .filter((x) => x.rows.length);
+const allRows = cats.filter((x) => x.src === 'epoch').flatMap((x) => x.rows);
+const overall = labShares(allRows);
+const lead = overall[0];
+const pct = (v: number) => `${Math.round(v * 100)}%`;
+const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) => reignDays(b) - reignDays(a))[0];
+---
+
+<Base title="Leaders" description="Which model held the top score on each benchmark at each point in time, and which lab it came from.">
+  <div class="page">
+    <header class="head">
+      <h1>Who held number one</h1>
+      <p class="lede">
+        For every benchmark with enough scores, the model with the best score at each moment since 2023, and the lab that made it. A model takes the top spot on the day it beats every earlier score, and keeps it until something beats it.
+      </p>
+    </header>
+
+    {
+      eciRows.length > 0 && eciNow && (
+        <section>
+          <div class="sh">
+            <h2>The top spot on the capability index changed hands {changes} times since 2023</h2>
+            <p>
+              The Epoch Capabilities Index puts many benchmarks on one scale. {labById.get(eciNow.lab ?? '')?.name}’s {eciRows[0].reigns.length ? '' : ''}model holds it now.
+              {longest && ` The longest run at the top was ${Math.round(reignDays(longest) / 30.4)} months.`}
+            </p>
+          </div>
+          <ReignChart rows={eciRows} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} from="2023-01-01" />
+        </section>
+      )
+    }
+
+    {
+      lead && (
+        <section>
+          <div class="sh">
+            <h2>
+              {labById.get(lead.lab)?.name} held number one {pct(lead.share)} of the time
+            </h2>
+            <p>Across the {allRows.length} benchmarks with independent runs below, the share of days each lab’s model had the best score.</p>
+          </div>
+          <CrownShare shares={overall} />
+        </section>
+      )
+    }
+
+    <section>
+      <div class="sh">
+        <h2>By category</h2>
+        <p>Each bar splits a category’s time at number one by lab. Open a category for its benchmarks, row by row.</p>
+      </div>
+      <div class="cats">
+        {
+          cats.map(({ c, rows, src, shares }) => (
+            <a class="cat" href={`/categories/${c}/`}>
+              <span class="cn">{CATEGORY_NAMES[c] ?? c}</span>
+              <span class="mini" aria-hidden="true">
+                {shares
+                  .filter((s) => s.share >= 0.01)
+                  .map((s) => (
+                    <i style={`flex:${s.share};background:${labColor(s.lab)}`} data-tn={labById.get(s.lab)?.name ?? 'Other labs'} data-tv={pct(s.share)} />
+                  ))}
+              </span>
+              <span class="cl muted">
+                {labById.get(shares[0]?.lab ?? '')?.name ?? 'Other labs'} {pct(shares[0]?.share ?? 0)}
+              </span>
+              <span class="cm muted">
+                {rows.length} {rows.length === 1 ? 'benchmark' : 'benchmarks'}
+                {src === 'card' ? ', lab claims' : ''}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .cats {
+    display: grid;
+  }
+  .cat {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr) 170px 150px;
+    gap: 18px;
+    align-items: center;
+    padding: 11px 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .cat:hover {
+    background: var(--hover);
+  }
+  .cn {
+    font-weight: 500;
+    font-size: 14.5px;
+  }
+  .mini {
+    display: flex;
+    gap: 2px;
+    height: 12px;
+  }
+  .mini i {
+    border-radius: 3px;
+    min-width: 2px;
+  }
+  .cl,
+  .cm {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  @media (max-width: 900px) {
+    .cat {
+      grid-template-columns: 1fr auto;
+      gap: 6px 12px;
+    }
+    .mini {
+      grid-column: 1 / -1;
+      order: 3;
+    }
+    .cm {
+      display: none;
+    }
+  }
+</style>

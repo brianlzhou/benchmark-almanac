@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import MiniBoard from '../components/MiniBoard.astro';
+import { allSummaries } from '../lib/data.ts';
+import { CATEGORY_NAMES, SCORING_BY_ID, SUB_BY_ID } from '../lib/taxonomy.ts';
+
+const all = allSummaries();
+const arenas = all.filter((s) => s.b.scoring === 'preference' || s.b.scoring === 'head-to-head');
+const fixed = all.filter((s) => s.b.scoring === 'verified').length;
+const graded = all.filter((s) => s.b.scoring === 'model-judged' || s.b.scoring === 'expert-graded').length;
+const boards = arenas.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+---
+
+<Base title="Arenas" description="How arena rankings, where people vote between two answers, differ from benchmarks with fixed answers.">
+  <div class="page">
+    <header class="head">
+      <h1>Arenas rank what people prefer</h1>
+      <p class="lede">
+        In an arena, people see two answers to the same prompt and pick the better one, and the votes become ratings. A benchmark with fixed answers asks a different question: did the model get it right? The almanac keeps the two apart.
+      </p>
+      <div class="facts">
+        <span><b>{arenas.length}</b> arenas and match leagues</span>
+        <span><b>{fixed}</b> benchmarks checked automatically</span>
+        <span><b>{graded}</b> graded by a model or by people</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="sh">
+        <h2>Two kinds of measurement</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="t cmp">
+          <thead>
+            <tr><th /><th>Fixed answers</th><th>Arenas</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>What decides a score</td>
+              <td>An answer key, unit tests, or a check of the final state</td>
+              <td>Votes between two answers, turned into Elo-style ratings</td>
+            </tr>
+            <tr>
+              <td>What it captures</td>
+              <td>Whether the model gets a defined task right</td>
+              <td>Taste, helpfulness and style, the things an answer key misses</td>
+            </tr>
+            <tr>
+              <td>What can go wrong</td>
+              <td>Leaked test sets, and saturation once the best score nears the ceiling</td>
+              <td>Length and formatting win votes, and ratings shift as new models arrive</td>
+            </tr>
+            <tr>
+              <td>How scores compare</td>
+              <td>On an absolute scale, so 2023 and 2026 scores compare directly</td>
+              <td>Relative to the other models in the pool at the time</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {
+      boards.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Arena leaderboards</h2>
+            <p>The top five in each arena with scores in the almanac.</p>
+          </div>
+          <div class="grid3">
+            {boards.slice(0, 9).map((s) => <MiniBoard s={s} />)}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      arenas.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Every arena</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="t">
+              <thead>
+                <tr><th>Arena</th><th>Kind</th><th>Scored</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                {arenas.map((s) => (
+                  <tr>
+                    <td class="nm">
+                      <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                      {s.b.description && <span class="desc">{s.b.description}</span>}
+                    </td>
+                    <td class="muted">{(s.b.subcategory && SUB_BY_ID.get(s.b.subcategory)?.name) ?? CATEGORY_NAMES[s.b.category ?? 'other']}</td>
+                    <td class="muted nowrap">{SCORING_BY_ID.get(s.b.scoring!)?.name}</td>
+                    <td class="nowrap">
+                      <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                        <span class="dot" />
+                        {STATUS[s.status]}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .cmp td:first-child {
+    color: var(--ink-3);
+    width: 22%;
+  }
+  .cmp td {
+    vertical-align: top;
+  }
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 56px 48px;
+  }
+  .nm a {
+    font-weight: 500;
+  }
+  .desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--ink-3);
+    font-size: 13px;
+    max-width: 60ch;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 1000px) {
+    .grid3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 720px) {
+    .grid3 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

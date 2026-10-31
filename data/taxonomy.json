@@ -1,0 +1,186 @@
+{
+  "levels": [
+    { "id": "everyday", "name": "Everyday", "who": "Most adults, without training", "examples": ["HellaSwag", "PIQA", "OSWorld", "LIBERO"] },
+    { "id": "school", "name": "School", "who": "Students, from grade school to high school", "examples": ["GSM8K", "ARC-Challenge", "RACE", "HumanEval"] },
+    { "id": "university", "name": "University", "who": "Undergraduates and entry-level professionals", "examples": ["MMLU", "MMLU-Pro", "MATH Level 5"] },
+    { "id": "competition", "name": "Competition", "who": "The strongest students, in olympiad-style contests", "examples": ["AIME", "HMMT", "USAMO", "Codeforces"] },
+    { "id": "expert", "name": "Expert", "who": "Specialists with years of training, often over hours of work", "examples": ["GPQA Diamond", "Humanity's Last Exam", "SWE-bench Pro", "GDPval"] },
+    { "id": "frontier", "name": "Research frontier", "who": "Researchers, on open problems or tasks that take days", "examples": ["FrontierMath Tier 4", "FrontierMath Erdős", "PaperBench", "RE-Bench"] }
+  ],
+  "scoring": [
+    { "id": "verified", "name": "Checked automatically", "how": "A program decides: an answer key, unit tests, or a check of the final state." },
+    { "id": "model-judged", "name": "Graded by a model", "how": "A language model scores each response, usually against a rubric." },
+    { "id": "expert-graded", "name": "Graded by people", "how": "Human experts grade or compare the outputs." },
+    { "id": "preference", "name": "Ranked by votes", "how": "People pick the better of two answers, and the votes become ratings. This is the arena style." },
+    { "id": "head-to-head", "name": "Ranked by matches", "how": "Models play against each other, and the results become ratings." },
+    { "id": "outcome", "name": "Settled by events", "how": "Predictions are scored against what later happens." }
+  ],
+  "formats": [
+    { "id": "multiple-choice", "name": "Multiple choice" },
+    { "id": "short-answer", "name": "Short answer", "note": "A number, word or short string matched to a key." },
+    { "id": "proof", "name": "Written proof" },
+    { "id": "code", "name": "Code", "note": "A program or patch run against tests." },
+    { "id": "agent-task", "name": "Agent task", "note": "Many steps of actions in a terminal, browser, desktop, app, game or robot." },
+    { "id": "open-ended", "name": "Open-ended", "note": "Free-form text, documents, designs or media judged as a whole." },
+    { "id": "prediction", "name": "Prediction", "note": "Probabilities for events that have not happened yet." }
+  ],
+  "subcategories": {
+    "math": [
+      { "id": "math-word-problems", "name": "Word problems" },
+      { "id": "math-competition", "name": "Competition problems with answers" },
+      { "id": "math-proofs", "name": "Written proofs" },
+      { "id": "math-formal", "name": "Formal proofs" },
+      { "id": "math-research", "name": "Research mathematics" }
+    ],
+    "science-reasoning": [
+      { "id": "science-questions", "name": "Science questions" },
+      { "id": "science-olympiad", "name": "Science olympiads" },
+      { "id": "science-research", "name": "Research science" },
+      { "id": "science-lab", "name": "Lab and data work" },
+      { "id": "science-puzzles", "name": "Abstract puzzles and logic" }
+    ],
+    "forecasting": [
+      { "id": "forecasting-events", "name": "Real-world events" },
+      { "id": "forecasting-simulation", "name": "Social simulation" }
+    ],
+    "knowledge-qa": [
+      { "id": "knowledge-exams", "name": "Exam questions" },
+      { "id": "knowledge-expert", "name": "Expert-written questions" },
+      { "id": "knowledge-commonsense", "name": "Commonsense" },
+      { "id": "knowledge-reading", "name": "Reading comprehension" },
+      { "id": "knowledge-trivia", "name": "Trivia and open questions" },
+      { "id": "knowledge-search", "name": "Questions that need search" },
+      { "id": "knowledge-reasoning", "name": "Language reasoning" }
+    ],
+    "factuality-hallucination": [
+      { "id": "factuality-short", "name": "Short factual questions" },
+      { "id": "factuality-grounding", "name": "Faithful to sources" },
+      { "id": "factuality-long", "name": "Long-form factuality" },
+      { "id": "factuality-hallucination", "name": "Hallucination rates" }
+    ],
+    "multilingual": [
+      { "id": "multilingual-knowledge", "name": "Knowledge in many languages" },
+      { "id": "multilingual-translation", "name": "Translation" },
+      { "id": "multilingual-reasoning", "name": "Reasoning in many languages" },
+      { "id": "multilingual-reading", "name": "Reading in many languages" },
+      { "id": "multilingual-chat", "name": "Chat and instructions in many languages" }
+    ],
+    "long-context": [
+      { "id": "long-retrieval", "name": "Finding facts in long inputs" },
+      { "id": "long-reasoning", "name": "Reasoning over long documents" },
+      { "id": "long-learning", "name": "Learning from the context" }
+    ],
+    "instruction-following-chat": [
+      { "id": "chat-instructions", "name": "Following precise instructions" },
+      { "id": "chat-multi-turn", "name": "Multi-turn conversation" },
+      { "id": "chat-quality", "name": "Overall chat quality" }
+    ],
+    "writing-creative-taste": [
+      { "id": "writing-creative", "name": "Creative writing" },
+      { "id": "writing-taste", "name": "Taste and style" }
+    ],
+    "coding": [
+      { "id": "coding-functions", "name": "Function-level problems" },
+      { "id": "coding-competitive", "name": "Competitive programming" },
+      { "id": "coding-repositories", "name": "Fixing real repositories" },
+      { "id": "coding-projects", "name": "Building whole projects" },
+      { "id": "coding-frontend", "name": "Web and app front ends" },
+      { "id": "coding-performance", "name": "Speed and optimization" },
+      { "id": "coding-data", "name": "Data science and SQL" },
+      { "id": "coding-scientific", "name": "Scientific code" }
+    ],
+    "ai-rnd-rsi": [
+      { "id": "rnd-ml-engineering", "name": "Machine learning engineering" },
+      { "id": "rnd-research", "name": "AI research tasks" },
+      { "id": "rnd-kernels", "name": "GPU kernels" },
+      { "id": "rnd-time-horizon", "name": "Task length" },
+      { "id": "rnd-lab-internal", "name": "Labs' internal R&D tests" }
+    ],
+    "agentic-terminal": [
+      { "id": "terminal-tasks", "name": "Terminal tasks" },
+      { "id": "terminal-long", "name": "Long terminal sessions" }
+    ],
+    "computer-use-browser": [
+      { "id": "computer-desktop", "name": "Desktop apps" },
+      { "id": "computer-mobile", "name": "Phones" },
+      { "id": "computer-web", "name": "Web browsing" },
+      { "id": "computer-grounding", "name": "Finding things on screen" }
+    ],
+    "tool-use": [
+      { "id": "tools-function-calling", "name": "Function calling" },
+      { "id": "tools-customer-service", "name": "Customer service" },
+      { "id": "tools-apps", "name": "Apps and MCP servers" },
+      { "id": "tools-deep-research", "name": "Deep research" },
+      { "id": "tools-assistants", "name": "General assistants" }
+    ],
+    "games-long-horizon": [
+      { "id": "games-puzzles", "name": "Puzzles and chess" },
+      { "id": "games-video-games", "name": "Video games" },
+      { "id": "games-business", "name": "Business simulations" },
+      { "id": "games-multi-agent", "name": "Multi-agent games" }
+    ],
+    "economic-work": [
+      { "id": "work-occupations", "name": "Tasks from real jobs" },
+      { "id": "work-office", "name": "Documents and spreadsheets" },
+      { "id": "work-company", "name": "Simulated companies" },
+      { "id": "work-indices", "name": "Composite work indices" }
+    ],
+    "domain-legal-finance-medical": [
+      { "id": "domain-law", "name": "Law" },
+      { "id": "domain-finance", "name": "Finance" },
+      { "id": "domain-medicine", "name": "Medicine" },
+      { "id": "domain-other", "name": "Other professions" }
+    ],
+    "engineering-design": [
+      { "id": "engineering-cad", "name": "CAD models" },
+      { "id": "engineering-electronics", "name": "Electronics" }
+    ],
+    "multimodal-vision": [
+      { "id": "vision-general", "name": "General visual questions" },
+      { "id": "vision-documents", "name": "Documents, charts and text in images" },
+      { "id": "vision-math", "name": "Visual math and diagrams" },
+      { "id": "vision-spatial", "name": "Spatial reasoning and counting" },
+      { "id": "vision-detection", "name": "Detection and captioning" }
+    ],
+    "audio-video": [
+      { "id": "video-understanding", "name": "Video understanding" },
+      { "id": "video-long", "name": "Long videos" },
+      { "id": "video-captioning", "name": "Video captioning" },
+      { "id": "audio-speech", "name": "Speech recognition and translation" },
+      { "id": "audio-understanding", "name": "Audio understanding and voice" },
+      { "id": "video-generation", "name": "Video generation" }
+    ],
+    "robotics-embodied": [
+      { "id": "robotics-simulation", "name": "Simulated robots" },
+      { "id": "robotics-real", "name": "Real robots" },
+      { "id": "robotics-reasoning", "name": "Embodied reasoning" }
+    ],
+    "world-models": [
+      { "id": "world-video", "name": "Video world models" },
+      { "id": "world-interactive", "name": "Interactive world models" },
+      { "id": "world-physics", "name": "Physical prediction" }
+    ],
+    "safety-alignment": [
+      { "id": "safety-misuse", "name": "Refusing harmful requests" },
+      { "id": "safety-jailbreaks", "name": "Jailbreaks and prompt injection" },
+      { "id": "safety-alignment", "name": "Deception and alignment" },
+      { "id": "safety-bias", "name": "Bias, fairness and politics" },
+      { "id": "safety-wellbeing", "name": "Wellbeing and sycophancy" },
+      { "id": "safety-dangerous", "name": "Dangerous capabilities" }
+    ],
+    "cyber": [
+      { "id": "cyber-ctf", "name": "Capture-the-flag challenges" },
+      { "id": "cyber-vulnerabilities", "name": "Finding and exploiting real bugs" },
+      { "id": "cyber-secure-code", "name": "Secure code and review" }
+    ],
+    "bio-chem": [
+      { "id": "bio-protocols", "name": "Lab protocols" },
+      { "id": "bio-life-sciences", "name": "Genomics and life sciences" },
+      { "id": "bio-hazards", "name": "Hazardous knowledge" }
+    ],
+    "other": [
+      { "id": "other-indices", "name": "Composite indices" },
+      { "id": "other-misc", "name": "Other" }
+    ]
+  }
+}

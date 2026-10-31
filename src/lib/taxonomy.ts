@@ -41,7 +41,7 @@ export const AREAS: Area[] = [
   },
   {
     id: 'multimodal',
-    name: 'Vision, audio and the physical world',
+    name: 'Vision, audio and robotics',
     question: 'Can it see, hear and act in the world?',
     categories: ['multimodal-vision', 'audio-video', 'robotics-embodied', 'world-models'],
   },

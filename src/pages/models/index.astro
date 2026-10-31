@@ -80,7 +80,7 @@ const open = featuredModels.filter((m) => m.weights === 'open').length;
           </thead>
           <tbody>
             {rows.map(({ m, s }) => (
-              <tr data-lab={m.lab ?? ''} data-weights={m.weights ?? ''} data-text={`${m.name} ${m.version ?? ''} ${(m.aliases ?? []).join(' ')} ${labById.get(m.lab ?? '')?.name ?? ''}`.toLowerCase()}>
+              <tr data-lab={m.lab ?? ''} data-weights={m.weights ?? ''} data-text={(m.aliases ?? []).join(' ').toLowerCase() || undefined}>
                 <td><ModelName id={m.id} /></td>
                 <td class="muted">{labById.get(m.lab ?? '')?.name}</td>
                 <td class="muted num nowrap">{monthYear(m.released)}</td>

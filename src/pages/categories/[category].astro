@@ -1,0 +1,275 @@
+---
+import Base from '../../layouts/Base.astro';
+import ReignChart from '../../components/ReignChart.astro';
+import CrownShare from '../../components/CrownShare.astro';
+import LabMark from '../../components/LabMark.astro';
+import { benchmarks, benchSummary, labById, modelById } from '../../lib/data.ts';
+import { labShares } from '../../lib/reigns.ts';
+import { leaderRows } from '../../lib/leaders.ts';
+import { AREA_BY_ID, CATEGORY_NAMES, LEVELS, SUBCATEGORIES, SCORING_BY_ID, LEVEL_BY_ID, areaOf } from '../../lib/taxonomy.ts';
+import { labColor } from '../../lib/palette.ts';
+import { score as fmt } from '../../lib/format.ts';
+
+export function getStaticPaths() {
+  return [...new Set(benchmarks.map((b) => b.category ?? 'other'))].map((category) => ({ params: { category } }));
+}
+
+const { category } = Astro.params;
+const cat = category!;
+const name = CATEGORY_NAMES[cat] ?? cat;
+const area = AREA_BY_ID.get(areaOf(cat))!;
+const all = benchmarks.filter((b) => (b.category ?? 'other') === cat).map((b) => benchSummary(b.id));
+all.sort((a, b) => b.cites.length + b.nScores - (a.cites.length + a.nScores) || a.b.name.localeCompare(b.b.name));
+const ids = all.map((s) => s.b.id);
+
+const ind = leaderRows(ids, 'epoch');
+const claims = leaderRows(ids, 'card');
+const both = ind.length > 0 && claims.length > 0;
+const main = ind.length ? ind : claims;
+const shares = labShares(main);
+const top = shares[0];
+const lower = name.charAt(0).toLowerCase() + name.slice(1);
+const headline =
+  top && shares.length > 1
+    ? `${labById.get(top.lab)?.name ?? 'Other labs'} held the top ${lower} score ${Math.round(top.share * 100)}% of the time`
+    : `Who held number one in ${lower}`;
+
+const levels = LEVELS.map((l) => ({ l, xs: all.filter((s) => s.b.level === l.id) })).filter((x) => x.xs.length);
+const unrated = all.filter((s) => !s.b.level);
+const subs = (SUBCATEGORIES[cat] ?? []).map((sc) => ({ sc, xs: all.filter((s) => s.b.subcategory === sc.id) })).filter((x) => x.xs.length);
+const unsorted = all.filter((s) => !s.b.subcategory || !(SUBCATEGORIES[cat] ?? []).some((sc) => sc.id === s.b.subcategory));
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} to ${levels.at(-1)!.l.name.toLowerCase()} level` : 'How hard the tests are';
+---
+
+<Base title={name} description={`${name} benchmarks: who held the top score over time, how hard each one is, and what kind it is.`}>
+  <div class="page">
+    <header class="head">
+      <h1>{name}</h1>
+      <p class="lede">
+        {all.length} benchmarks in <a href={`/benchmarks/?area=${area.id}`}>{area.name.toLowerCase()}</a>.
+        {levels.length > 1 && ` They run from ${levels[0].l.name.toLowerCase()} level to ${levels.at(-1)!.l.name.toLowerCase()} level.`}
+      </p>
+      <div class="facts">
+        <span><b>{all.filter((s) => s.status === 'in use').length}</b> in use</span>
+        <span><b>{all.filter((s) => (s.best?.value ?? 0) >= 85 && (s.b.unit ?? '%') === '%').length}</b> past 85%</span>
+        <span><b>{all.filter((s) => s.b.links?.repo).length}</b> with public code</span>
+      </div>
+    </header>
+
+    {
+      main.length > 0 && (
+        <section class="switch">
+          <div class="sh-row">
+            <div class="sh">
+              <h2>{headline}</h2>
+              <p>
+                Each row is a benchmark, easiest level at the top. The shape rises with the best score so far, and its colour shows which lab's model held the top spot. Hover a stretch for the model and its score.
+              </p>
+            </div>
+            {both && (
+              <div class="seg" role="radiogroup" aria-label="Scores">
+                <label><input type="radio" name={`src-${cat}`} value="a" checked />Independent runs</label>
+                <label><input type="radio" name={`src-${cat}`} value="b" />Lab claims</label>
+              </div>
+            )}
+          </div>
+          <div class="when-a">
+            <ReignChart rows={main} />
+            <div class="share">
+              <h3>Share of time at number one</h3>
+              <CrownShare shares={shares} />
+            </div>
+            <p class="src">{ind.length ? 'Scores from Epoch AI, placed at each model’s release date.' : 'Scores labs report in their model cards, placed at each card’s date.'}</p>
+          </div>
+          {both && (
+            <div class="when-b">
+              <ReignChart rows={claims} />
+              <div class="share">
+                <h3>Share of time at number one, as labs claim it</h3>
+                <CrownShare shares={labShares(claims)} />
+              </div>
+              <p class="src">Scores labs report in their own model cards, placed at each card’s date. Labs pick their own settings, so a claim can beat an independent run of the same model.</p>
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    {
+      levels.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{ladderTitle}</h2>
+            <p>Benchmarks by who could solve their tasks: from things most adults can do, to open research problems. The bar under each name is its best score.</p>
+          </div>
+          <div class="ladder" style={`--n:${levels.length}`}>
+            {levels.map(({ l, xs }) => (
+              <div class="rung">
+                <h3>{l.name}</h3>
+                <p class="who">{l.who}</p>
+                <ul>
+                  {xs.map((s) => {
+                    const pctUnit = (s.b.unit ?? '%') === '%' && s.b.better !== 'lower';
+                    const lead = s.best ? modelById.get(s.best.model) : undefined;
+                    return (
+                      <li>
+                        <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                        {s.best && pctUnit ? (
+                          <span class="bar" data-tv={fmt(s.best.value, '%')} data-tn={lead?.name} data-ts="Best score">
+                            <span style={`width:${Math.max(1, s.best.value)}%;background:${labColor(lead?.lab)}`} />
+                          </span>
+                        ) : (
+                          <span class="bar empty" />
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+          {unrated.length > 0 && <p class="src">{unrated.length} more have no level, because it does not apply: arenas, safety evaluations and composite indices.</p>}
+        </section>
+      )
+    }
+
+    <section>
+      <div class="sh">
+        <h2>By kind</h2>
+      </div>
+      {
+        [...subs, ...(unsorted.length ? [{ sc: { id: 'unsorted', name: 'Not yet sorted' }, xs: unsorted }] : [])].map(({ sc, xs }) => (
+          <div class="kind">
+            <h3>{sc.name}</h3>
+            <div class="table-wrap">
+              <table class="t">
+                <thead>
+                  <tr><th>Benchmark</th><th>Level</th><th>Scored</th><th class="r">Best score</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  {xs.map((s) => {
+                    const lead = s.best ? modelById.get(s.best.model) : undefined;
+                    return (
+                      <tr>
+                        <td class="nm">
+                          <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                          {s.b.description && <span class="desc">{s.b.description}</span>}
+                        </td>
+                        <td class="muted nowrap">{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
+                        <td class="muted nowrap">{s.b.scoring ? SCORING_BY_ID.get(s.b.scoring)?.name : ''}</td>
+                        <td class="r nowrap">
+                          {s.best && lead && (
+                            <span class="best">
+                              <LabMark lab={lead.lab} size={14} />
+                              {fmt(s.best.value, s.b.unit ?? '%')}
+                            </span>
+                          )}
+                        </td>
+                        <td class="nowrap">
+                          <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                            <span class="dot" />
+                            {STATUS[s.status]}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+  </div>
+</Base>
+
+<style>
+  .share {
+    margin-top: 40px;
+  }
+  .share h3,
+  .kind h3,
+  .rung h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .src {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .ladder {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 28px;
+  }
+  .rung h3 {
+    margin-bottom: 4px;
+  }
+  .who {
+    font-size: 12.5px;
+    color: var(--ink-3);
+    min-height: 3.4em;
+    line-height: 1.4;
+  }
+  .rung ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: grid;
+    gap: 12px;
+  }
+  .rung li a {
+    display: block;
+    font-size: 13.5px;
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .rung li a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  .bar {
+    display: block;
+    height: 4px;
+    margin-top: 5px;
+    border-radius: 2px;
+    background: var(--panel);
+  }
+  .bar span {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+  }
+  .bar.empty {
+    background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
+  }
+  .kind + .kind {
+    margin-top: 44px;
+  }
+  .nm a {
+    font-weight: 500;
+  }
+  .desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--ink-3);
+    font-size: 13px;
+    max-width: 58ch;
+  }
+  .best {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 900px) {
+    .ladder {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

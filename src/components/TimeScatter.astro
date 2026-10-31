@@ -188,14 +188,24 @@ function layout(w: number, h: number, nLabels: number) {
               const c = on ? labColor(p.lab) : 'var(--ink-4)';
               const cx = x(p.t);
               const cy = Y(p.value);
+              // the desktop render carries the tooltip; phones use the table view instead
+              const tip =
+                key === 'wide'
+                  ? {
+                      'data-tv': vFmt(p.value),
+                      'data-tn': `${name(p.model)}${p.setting && p.setting !== 'unknown' ? ` (${p.setting})` : ''}`,
+                      'data-ts': `${monthYear(p.date)}. ${p.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${p.harness ? `, ${p.harness}` : ''}${p.low != null && p.high != null ? `. 90% interval ${vFmt(p.low)} to ${vFmt(p.high)}` : ''}`,
+                    }
+                  : {};
               return (
-                <g class:list={{ dim: !on }}>
+                <g class:list={{ dim: !on, pt: key === 'wide' }} {...tip}>
                   {p.low != null && p.high != null && <line x1={cx} x2={cx} y1={Y(p.low)} y2={Y(p.high)} stroke={c} class="ci" />}
                   {p.source === 'epoch' ? (
-                    <circle cx={cx} cy={cy} r={on && hl ? 5 : 4} fill={c} class="pt" />
+                    <circle cx={cx} cy={cy} r={on && hl ? 5 : 4} fill={c} />
                   ) : (
-                    <circle cx={cx} cy={cy} r="3.6" fill="var(--bg)" stroke={c} stroke-width="1.7" class="pt" />
+                    <circle cx={cx} cy={cy} r="3.6" fill="var(--bg)" stroke={c} stroke-width="1.7" />
                   )}
+                  {key === 'wide' && <circle cx={cx} cy={cy} r="9" class="hit" />}
                 </g>
               );
             })}
@@ -203,17 +213,6 @@ function layout(w: number, h: number, nLabels: number) {
               <text x={l.x - 9} y={l.y + 4} class="lab" text-anchor="end">
                 {name(l.model)}
               </text>
-            ))}
-            {pts.map((p) => (
-              <circle
-                cx={x(p.t)}
-                cy={Y(p.value)}
-                r="9"
-                class="hit"
-                data-tv={vFmt(p.value)}
-                data-tn={`${name(p.model)}${p.setting && p.setting !== 'unknown' ? ` (${p.setting})` : ''}`}
-                data-ts={`${monthYear(p.date)}. ${p.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${p.harness ? `, ${p.harness}` : ''}${p.low != null && p.high != null ? `. 90% interval ${vFmt(p.low)} to ${vFmt(p.high)}` : ''}`}
-              />
             ))}
           </svg>
         );
@@ -278,9 +277,12 @@ function layout(w: number, h: number, nLabels: number) {
   .hit {
     fill: transparent;
   }
-  .hit:hover {
+  .pt:hover .hit {
     stroke: var(--ink);
     stroke-width: 1.2;
+  }
+  .lab {
+    pointer-events: none;
   }
   .empty {
     color: var(--ink-3);

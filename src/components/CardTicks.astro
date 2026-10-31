@@ -2,7 +2,7 @@
 // One row per lab. Each tick is a model card that lab published. Tall ticks in the lab's colour report
 // the benchmark. Short grey ticks are cards that left it out, so the gap after a lab stops shows.
 import LabMark from './LabMark.astro';
-import { cards, labById, AS_OF } from '../lib/data.ts';
+import { cards, labById, modelById, AS_OF } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { yearFrac, fullDate } from '../lib/format.ts';
 import { yearTicks } from '../lib/scale.ts';
@@ -34,9 +34,9 @@ const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab)
                 href={`/cards/#${c.id}`}
                 class:list={['tick', { on }]}
                 style={`left:${pos(c.date)};${on ? `--c:${labColor(lab)}` : ''}`}
-                data-tn={c.title ?? c.model}
+                data-tn={`${modelById.get(c.model)?.name ?? c.model} model card`}
                 data-ts={`${fullDate(c.date)}. ${on ? 'Reports it' : 'Leaves it out'}`}
-                aria-label={`${c.title ?? c.model}, ${fullDate(c.date)}, ${on ? 'reports it' : 'leaves it out'}`}
+                aria-label={`${modelById.get(c.model)?.name ?? c.model} model card, ${fullDate(c.date)}, ${on ? 'reports it' : 'leaves it out'}`}
               />
             );
           })}
