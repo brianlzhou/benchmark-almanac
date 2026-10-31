@@ -1,0 +1,76 @@
+// Checks data/ before a build or a merge: every reference resolves, ids are unique, fields hold allowed
+// values, and short texts follow the house style. Exits 1 on any error.
+//
+// usage: node scripts/check-data.ts
+import { dataPath, readJson } from './lib/util.ts';
+
+type Rec = Record<string, unknown> & { id: string; name: string };
+const labs = readJson<Rec[]>(dataPath('labs.json'));
+const models = readJson<Rec[]>(dataPath('models.json'));
+const benchmarks = readJson<Rec[]>(dataPath('benchmarks.json'));
+const cards = readJson<(Rec & { lab: string; model: string; date: string; results: { benchmark: string }[] })[]>(dataPath('cards.json'));
+const epoch = readJson<{ rows: [string, string, ...unknown[]][]; eci: { model: string }[] }>(dataPath('scores', 'epoch.json'));
+const sources = readJson<Rec[]>(dataPath('sources.json'));
+
+const errors: string[] = [];
+const warn: string[] = [];
+const fail = (m: string) => errors.push(m);
+
+const CATEGORIES = new Set(
+  'coding agentic-terminal computer-use-browser tool-use math science-reasoning knowledge-qa factuality-hallucination long-context multimodal-vision audio-video instruction-following-chat writing-creative-taste multilingual safety-alignment cyber bio-chem ai-rnd-rsi economic-work domain-legal-finance-medical engineering-design games-long-horizon forecasting robotics-embodied world-models other'.split(
+    ' ',
+  ),
+);
+const ACCESS = new Set(['public', 'public+private-holdout', 'private', 'unknown']);
+const UNITS = new Set(['%', 'elo', 'rating', 'usd', 'minutes', 'score', 'index', 'brier', 'speedup']);
+
+function unique(kind: string, xs: Rec[]) {
+  const seen = new Set<string>();
+  for (const x of xs) {
+    if (!x.id || !/^[a-z0-9][a-z0-9-]*$/.test(x.id)) fail(`${kind}: bad id "${x.id}"`);
+    if (seen.has(x.id)) fail(`${kind}: duplicate id ${x.id}`);
+    seen.add(x.id);
+    if (!x.name) fail(`${kind} ${x.id}: no name`);
+  }
+  return seen;
+}
+const labIds = unique('lab', labs);
+const modelIds = unique('model', models);
+const benchIds = unique('benchmark', benchmarks);
+unique('source', sources);
+
+for (const m of models) if (m.lab && !labIds.has(m.lab as string)) fail(`model ${m.id}: unknown lab ${m.lab}`);
+for (const b of benchmarks) {
+  if (b.category && !CATEGORIES.has(b.category as string)) fail(`benchmark ${b.id}: unknown category ${b.category}`);
+  if (b.access && !ACCESS.has(b.access as string)) fail(`benchmark ${b.id}: unknown access ${b.access}`);
+  if (b.unit && !UNITS.has(b.unit as string)) fail(`benchmark ${b.id}: unknown unit ${b.unit}`);
+  if (b.successor && !benchIds.has(b.successor as string)) fail(`benchmark ${b.id}: unknown successor ${b.successor}`);
+  if (!b.description) warn.push(`benchmark ${b.id}: no description`);
+  for (const f of ['description', 'note'] as const) {
+    const t = b[f] as string | undefined;
+    if (!t) continue;
+    if (/;/.test(t)) fail(`benchmark ${b.id}: ${f} has a semicolon`);
+    if (/\s[—–]\s|\s--\s/.test(t)) fail(`benchmark ${b.id}: ${f} uses a dash as punctuation`);
+    if (/·/.test(t)) fail(`benchmark ${b.id}: ${f} has a middle dot`);
+  }
+  const links = (b.links ?? {}) as Record<string, string>;
+  for (const [k, v] of Object.entries(links)) if (!/^https:\/\//.test(v)) fail(`benchmark ${b.id}: ${k} link is not https: ${v}`);
+}
+for (const c of cards) {
+  if (!labIds.has(c.lab)) fail(`card ${c.id}: unknown lab ${c.lab}`);
+  if (!modelIds.has(c.model)) fail(`card ${c.id}: unknown model ${c.model}`);
+  if (!/^\d{4}-\d\d-\d\d$/.test(c.date)) fail(`card ${c.id}: bad date ${c.date}`);
+  for (const r of c.results) if (!benchIds.has(r.benchmark)) fail(`card ${c.id}: unknown benchmark ${r.benchmark}`);
+}
+for (const r of epoch.rows) {
+  if (!benchIds.has(r[0])) fail(`epoch row: unknown benchmark ${r[0]}`);
+  if (!modelIds.has(r[1])) fail(`epoch row: unknown model ${r[1]}`);
+}
+for (const e of epoch.eci) if (!modelIds.has(e.model)) fail(`eci: unknown model ${e.model}`);
+
+if (warn.length) console.log(`${warn.length} warnings, for example:\n  ${warn.slice(0, 5).join('\n  ')}`);
+if (errors.length) {
+  console.error(`${errors.length} errors:\n  ${errors.slice(0, 50).join('\n  ')}`);
+  process.exit(1);
+}
+console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} cards, ${epoch.rows.length} Epoch scores.`);
