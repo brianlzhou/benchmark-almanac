@@ -10,6 +10,7 @@ const models = readJson<Rec[]>(dataPath('models.json'));
 const benchmarks = readJson<Rec[]>(dataPath('benchmarks.json'));
 const cards = readJson<(Rec & { lab: string; model: string; date: string; results: { benchmark: string }[] })[]>(dataPath('cards.json'));
 const epoch = readJson<{ rows: [string, string, ...unknown[]][]; eci: { model: string }[] }>(dataPath('scores', 'epoch.json'));
+const boards = readJson<{ rows: [string, string, ...unknown[]][] }>(dataPath('scores', 'leaderboards.json'));
 const sources = readJson<Rec[]>(dataPath('sources.json'));
 
 const taxonomy = readJson<{ levels: { id: string }[]; scoring: { id: string }[]; formats: { id: string }[]; subcategories: Record<string, { id: string }[]> }>(dataPath('taxonomy.json'));
@@ -66,6 +67,12 @@ for (const b of benchmarks) {
   const links = (b.links ?? {}) as Record<string, string>;
   for (const [k, v] of Object.entries(links)) if (!/^https?:\/\//.test(v)) fail(`benchmark ${b.id}: ${k} link is not a web address: ${v}`);
 }
+const families = new Map<string, number>();
+for (const b of benchmarks) if (b.family) families.set(b.family as string, (families.get(b.family as string) ?? 0) + 1);
+for (const [f, n] of families) if (n < 2) fail(`family ${f} has only one benchmark`);
+for (const b of benchmarks) if (b.family && !b.released) fail(`benchmark ${b.id}: a family member needs a release date`);
+for (const b of benchmarks) if (b.family && !b.version) fail(`benchmark ${b.id}: a family member needs a version label`);
+
 for (const c of cards) {
   if (!labIds.has(c.lab)) fail(`card ${c.id}: unknown lab ${c.lab}`);
   if (!modelIds.has(c.model)) fail(`card ${c.id}: unknown model ${c.model}`);
@@ -77,10 +84,14 @@ for (const r of epoch.rows) {
   if (!modelIds.has(r[1])) fail(`epoch row: unknown model ${r[1]}`);
 }
 for (const e of epoch.eci) if (!modelIds.has(e.model)) fail(`eci: unknown model ${e.model}`);
+for (const r of boards.rows) {
+  if (!benchIds.has(r[0])) fail(`leaderboard row: unknown benchmark ${r[0]}`);
+  if (!modelIds.has(r[1])) fail(`leaderboard row: unknown model ${r[1]}`);
+}
 
 if (warn.length) console.log(`${warn.length} warnings, for example:\n  ${warn.slice(0, 5).join('\n  ')}`);
 if (errors.length) {
   console.error(`${errors.length} errors:\n  ${errors.slice(0, 50).join('\n  ')}`);
   process.exit(1);
 }
-console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} cards, ${epoch.rows.length} Epoch scores.`);
+console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores.`);

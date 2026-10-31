@@ -63,16 +63,19 @@ export function makeResolver(extra: Record<string, string> = {}) {
       }
     }
     name = name.replace(/[-_ ]?(20\d\d-?\d\d-?\d\d)$/, ''); // date stamp
-    const tries = [name];
+    const tries: { t: string; setting?: string }[] = [{ t: name, setting }];
     const eff = name.match(EFFORT_RE);
-    if (eff && !setting) {
-      tries.push(name.slice(0, eff.index).replace(/[-_ ]+$/, ''));
+    if (eff && !setting) tries.push({ t: name.slice(0, eff.index).replace(/[-_ ]+$/, ''), setting: eff[1].toLowerCase() });
+    // release tags people append: "-preview", "-latest", "-exp-02-05"
+    for (const x of [...tries]) {
+      const bare = x.t.replace(/[-_ ](preview|latest|exp|experimental)([-_ ]?[\d-]+)?$/i, '');
+      if (bare !== x.t) tries.push({ t: bare, setting: x.setting });
     }
-    for (const t of tries) {
-      const hit = extraKeys.get(key(t));
-      if (hit) return { id: hit, setting: setting ?? (t !== name ? eff![1].toLowerCase() : undefined) };
-      const list = byKey.get(key(t));
-      if (list?.length) return { id: pick(list, date).id, setting: setting ?? (t !== name ? eff![1].toLowerCase() : undefined) };
+    for (const x of tries) {
+      const hit = extraKeys.get(key(x.t));
+      if (hit) return { id: hit, setting: x.setting };
+      const list = byKey.get(key(x.t));
+      if (list?.length) return { id: pick(list, date).id, setting: x.setting };
     }
     return null;
   };

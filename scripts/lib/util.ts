@@ -19,6 +19,7 @@ export function key(name: string): string {
   return name
     .toLowerCase()
     .replace(/&/g, 'and')
+    .replace(/\+/g, 'plus')
     .replace(/τ/g, 'tau')
     .replace(/²/g, '2')
     .replace(/’/g, "'")
