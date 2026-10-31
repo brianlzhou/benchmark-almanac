@@ -152,7 +152,7 @@ const earlier = (id: string) =>
                         Earlier versions:{' '}
                         {prev.map((p, i) => (
                           <>
-                            <a href={`/benchmarks/${p.id}/`}>{p.version ?? p.name}</a>
+                            <a href={`/benchmarks/${p.id}/`}>{p.version ? (/^\d+$/.test(p.version) ? `v${p.version}` : p.version) : p.name}</a>
                             {i < prev.length - 1 ? ', ' : ''}
                           </>
                         ))}

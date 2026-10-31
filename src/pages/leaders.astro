@@ -2,10 +2,12 @@
 import Base from '../layouts/Base.astro';
 import ReignChart from '../components/ReignChart.astro';
 import CrownShare from '../components/CrownShare.astro';
-import { benchmarks, labById, modelById, benchById, epochScores, AS_OF, monthsBetween } from '../lib/data.ts';
+import { benchmarks, labById, modelById, benchById, AS_OF } from '../lib/data.ts';
 import LabMark from '../components/LabMark.astro';
 import { monthYear } from '../lib/format.ts';
-import { eciReigns, labShares, reignDays } from '../lib/reigns.ts';
+import { eciReigns, labShares, reignDays, contestedDays, clockStops, closeOuts, closeOutShares } from '../lib/reigns.ts';
+import ModelName from '../components/ModelName.astro';
+import { score as fmt } from '../lib/format.ts';
 import { leaderRows } from '../lib/leaders.ts';
 import { AREAS, CATEGORY_NAMES } from '../lib/taxonomy.ts';
 import { labColor } from '../lib/palette.ts';
@@ -27,16 +29,22 @@ const allRows = cats.flatMap((x) => x.rows.filter((r) => r.source === 'epoch'));
 const overall = labShares(allRows, '2023-01-01');
 const lead = overall[0];
 const pct = (v: number) => `${Math.round(v * 100)}%`;
-// the longest runs at number one since 2023, on benchmarks with independent runs
-// only benchmarks someone still scores: a run on a test nobody runs any more is not a run
-const lastScore = new Map<string, string>();
-for (const x of epochScores) if (x.date && x.date > (lastScore.get(x.benchmark) ?? '')) lastScore.set(x.benchmark, x.date);
-const active = (b: string) => monthsBetween(lastScore.get(b) ?? '2000-01', AS_OF) <= 12;
+// the longest contested runs at number one since 2023: each ends where it ended, or where the clock stopped
 const runs = allRows
-  .filter((r) => active(r.benchmark))
-  .flatMap((r) => r.reigns.filter((g) => g.end > '2023-01-01').map((g) => ({ g, b: r.benchmark, months: reignDays({ start: g.start < '2023-01-01' ? '2023-01-01' : g.start, end: g.end }) / 30.4 })))
+  .flatMap((r) =>
+    r.reigns.map((g) => {
+      const stop = clockStops(r);
+      return { g, b: r.benchmark, months: contestedDays(g, r) / 30.4, start: g.start < '2023-01-01' ? '2023-01-01' : g.start, end: g.end < stop ? g.end : stop };
+    }),
+  )
+  .filter((x) => x.months > 0)
   .sort((a, b) => b.months - a.months)
   .slice(0, 8);
+
+// close-outs: the model that took each benchmark past 85%
+const closeRows = cats.flatMap((x) => x.rows);
+const closed = closeOuts(closeRows);
+const closedBy = closeOutShares(closeRows);
 const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) => reignDays(b) - reignDays(a))[0];
 ---
 
@@ -69,9 +77,11 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
         <section>
           <div class="sh">
             <h2>
-              {labById.get(lead.lab)?.name} held number one {pct(lead.share)} of the time
+              {labById.get(lead.lab)?.name} held number one {pct(lead.share)} of the contested time
             </h2>
-            <p>Across the {allRows.length} benchmarks with independent runs below, the share of days each lab’s model had the best score.</p>
+            <p>
+              Across the {allRows.length} benchmarks with independent runs, the share of days each lab’s model had the best score. A benchmark’s clock stops when its best score passes 85%, when a new version replaces it, or after the newest model tested. A saturated test or one nobody runs any more no longer counts.
+            </p>
           </div>
           <CrownShare shares={overall} />
         </section>
@@ -83,10 +93,10 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
         <section>
           <div class="sh">
             <h2>The longest runs at the top</h2>
-            <p>The longest stretches one model held the best independent score on a benchmark that models were still tested on in the last year, counted from January 2023.</p>
+            <p>The longest stretches one model held the best independent score, counted from January 2023 and only while the benchmark was contested.</p>
           </div>
           <ol class="runs">
-            {runs.map(({ g, b, months }) => (
+            {runs.map(({ g, b, months, start, end }) => (
               <li>
                 <span class="rm num">{Math.round(months)}<small> months</small></span>
                 <span class="rw">
@@ -94,11 +104,44 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
                   <b>{modelById.get(g.model)?.name}</b> on <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>
                 </span>
                 <span class="rd muted">
-                  {monthYear(g.start < '2023-01-01' ? '2023-01-01' : g.start)} to {g.end >= AS_OF ? 'now' : monthYear(g.end)}
+                  {monthYear(start)} to {end >= AS_OF ? 'now' : monthYear(end)}
                 </span>
               </li>
             ))}
           </ol>
+        </section>
+      )
+    }
+
+    {
+      closed.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>
+              {labById.get(closedBy[0].lab)?.name ?? 'Other labs'} closed out {closedBy[0].count} of {closed.length} benchmarks
+            </h2>
+            <p>
+              A close-out goes to the model that first took a benchmark past 85%. It is counted apart from time at number one, so a lab gets credit for finishing a test without holding it forever.
+            </p>
+          </div>
+          <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
+          <div class="table-wrap closed">
+            <table class="t">
+              <thead>
+                <tr><th>Date</th><th>Benchmark</th><th>Closed out by</th><th class="r">Score</th></tr>
+              </thead>
+              <tbody>
+                {closed.map((c) => (
+                  <tr>
+                    <td class="muted num nowrap">{monthYear(c.date)}</td>
+                    <td><a href={`/benchmarks/${c.benchmark}/`}>{benchById.get(c.benchmark)?.name}</a>{c.source === 'card' && <span class="muted"> lab claim</span>}</td>
+                    <td><ModelName id={c.model} /></td>
+                    <td class="r">{fmt(c.value, '%')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       )
     }
@@ -133,6 +176,12 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
 </Base>
 
 <style>
+  .closed {
+    margin-top: 32px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
   .runs {
     list-style: none;
     padding: 0;

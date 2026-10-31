@@ -12,7 +12,7 @@ export interface Pt {
   date: string;
   value: number;
   model: string;
-  source: 'epoch' | 'card';
+  source: 'leaderboard' | 'epoch' | 'card';
   setting?: string | null;
   harness?: string | null;
   low?: number | null;
@@ -34,7 +34,7 @@ interface Props {
   better?: 'higher' | 'lower';
   legend?: boolean;
   height?: number;
-  sourceNote?: { epoch: string; card: string };
+  sourceNote?: { leaderboard: string; epoch: string; card: string };
 }
 const {
   points,
@@ -47,7 +47,7 @@ const {
   labelIds,
   legend = true,
   height = 440,
-  sourceNote = { epoch: 'Run by Epoch AI or collected from public leaderboards', card: 'Reported by the lab in its model card' },
+  sourceNote = { leaderboard: 'On the benchmark’s own leaderboard', epoch: 'Run or collected by Epoch AI', card: 'Reported by the lab in its model card' },
 } = Astro.props;
 
 const log = unit === 'minutes';
@@ -91,6 +91,7 @@ const yFmt = (v: number) => (unit === '%' ? `${v}%` : unit === 'index' ? String(
 const vFmt = (v: number) => (unit === 'index' ? v.toFixed(1) : fmt(v, unit));
 
 const hasCard = pts.some((p) => p.source === 'card');
+const hasBoard = pts.some((p) => p.source === 'leaderboard');
 const hasEpoch = pts.some((p) => p.source === 'epoch');
 const name = (id: string) => modelById.get(id)?.name ?? id;
 
@@ -129,6 +130,14 @@ function layout(w: number, h: number, nLabels: number) {
     <figure class="sc">
       {legend && (
         <div class="key">
+          {hasBoard && (
+            <span class="tag">
+              <svg width="12" height="12" aria-hidden="true">
+                <rect x="2" y="2" width="8" height="8" rx="1.5" fill="var(--ink-3)" />
+              </svg>
+              {sourceNote.leaderboard}
+            </span>
+          )}
           {hasEpoch && (
             <span class="tag">
               <svg width="12" height="12" aria-hidden="true">
@@ -168,10 +177,15 @@ function layout(w: number, h: number, nLabels: number) {
               </g>
             ))}
             {yearTicks(t0, t1, ticks).map((yr) => (
-              <text x={x(yr)} y={h - 10} class="tick" text-anchor="middle">
-                {yr}
-              </text>
+              <g>
+                <line x1={x(yr)} x2={x(yr)} y1={pad.t} y2={h - pad.b} class="vgrid" />
+                <line x1={x(yr)} x2={x(yr)} y1={h - pad.b} y2={h - pad.b + 5} class="axis" />
+                <text x={x(yr)} y={h - 10} class="tick" text-anchor="middle">
+                  {yr}
+                </text>
+              </g>
             ))}
+            <line x1={pad.l} x2={w - pad.r} y1={h - pad.b} y2={h - pad.b} class="axis" />
             {refs
               .filter((r) => r.v >= y0 && r.v <= y1)
               .map((r) => (
@@ -194,13 +208,15 @@ function layout(w: number, h: number, nLabels: number) {
                   ? {
                       'data-tv': vFmt(p.value),
                       'data-tn': `${name(p.model)}${p.setting && p.setting !== 'unknown' ? ` (${p.setting})` : ''}`,
-                      'data-ts': `${monthYear(p.date)}. ${p.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${p.harness ? `, ${p.harness}` : ''}${p.low != null && p.high != null ? `. 90% interval ${vFmt(p.low)} to ${vFmt(p.high)}` : ''}`,
+                      'data-ts': `${monthYear(p.date)}. ${p.source === 'leaderboard' ? 'Official leaderboard' : p.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${p.harness ? `, ${p.harness}` : ''}${p.low != null && p.high != null ? `. 90% interval ${vFmt(p.low)} to ${vFmt(p.high)}` : ''}`,
                     }
                   : {};
               return (
                 <g class:list={{ dim: !on, pt: key === 'wide' }} {...tip}>
                   {p.low != null && p.high != null && <line x1={cx} x2={cx} y1={Y(p.low)} y2={Y(p.high)} stroke={c} class="ci" />}
-                  {p.source === 'epoch' ? (
+                  {p.source === 'leaderboard' ? (
+                    <rect x={cx - 4} y={cy - 4} width="8" height="8" rx="1.5" fill={c} />
+                  ) : p.source === 'epoch' ? (
                     <circle cx={cx} cy={cy} r={on && hl ? 5 : 4} fill={c} />
                   ) : (
                     <circle cx={cx} cy={cy} r="3.6" fill="var(--bg)" stroke={c} stroke-width="1.7" />
@@ -238,6 +254,15 @@ function layout(w: number, h: number, nLabels: number) {
   }
   .grid {
     stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .vgrid {
+    stroke: var(--grid);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+  .axis {
+    stroke: var(--ink-4);
     stroke-width: 1;
   }
   .tick {

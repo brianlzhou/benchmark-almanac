@@ -2,7 +2,7 @@
 // A benchmark's scores over time: every score from Epoch AI and from lab cards, the best score so far,
 // and the reference lines that matter for that benchmark.
 import type { BenchSummary } from '../lib/data.ts';
-import { epochScores, cardScores, SATURATED } from '../lib/data.ts';
+import { epochScores, cardScores, leaderboardScores, SATURATED } from '../lib/data.ts';
 import TimeScatter, { type Pt } from './TimeScatter.astro';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const { s } = Astro.props;
 const b = s.b;
 const unit = b.unit ?? '%';
-const points: Pt[] = [...epochScores.filter((x) => x.benchmark === b.id), ...cardScores.filter((x) => x.benchmark === b.id && x.unit === unit)]
+const points: Pt[] = [...leaderboardScores.filter((x) => x.benchmark === b.id), ...epochScores.filter((x) => x.benchmark === b.id), ...cardScores.filter((x) => x.benchmark === b.id && x.unit === unit)]
   .filter((x) => x.date)
   .map((x) => ({ date: x.date!, value: x.value, model: x.model, source: x.source, setting: x.setting, harness: x.harness }));
 

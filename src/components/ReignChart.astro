@@ -2,13 +2,15 @@
 // Who held number one. One row per benchmark on a shared time axis. The filled step shape rises with the
 // best score so far, so its height shows how good the leader was, and each stretch takes the colour of
 // the lab whose model held the top spot. The model's name and lab mark sit under the stretch it held.
+// Once the clock stops (the benchmark passed 85%, a new version replaced it, or no newer model was
+// tested) the rest of the row fades, and a mark says which of the three happened.
 import type { ReignRow } from '../lib/reigns.ts';
-import { reignDays } from '../lib/reigns.ts';
+import { reignDays, clockStop } from '../lib/reigns.ts';
 import LabMark from './LabMark.astro';
 import { benchById, modelById, labById, AS_OF } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { yearFrac, monthYear, score as fmt } from '../lib/format.ts';
-import { yearTicks } from '../lib/scale.ts';
+import { timeTicks, yearLines } from '../lib/scale.ts';
 import { LEVEL_BY_ID } from '../lib/taxonomy.ts';
 import { featuredIds } from '../lib/routes.ts';
 
@@ -31,6 +33,22 @@ const months = (g: { start: string; end: string }) => Math.max(1, Math.round(rei
 const name = (id: string) => modelById.get(id)?.name ?? id;
 const labs = [...new Set(rows.flatMap((r) => r.reigns.map((g) => g.lab ?? 'other')))];
 const mixed = new Set(rows.map((r) => r.source)).size > 1;
+const ticks = timeTicks(t0, t1, 10);
+const gridAt = ticks.map((t) => pct(t.date));
+const grid = `--yl:${yearLines(gridAt)};--yc:${yearLines(gridAt, 'var(--bg)')}`;
+// "Terminal-Bench 4.0" after "Terminal-Bench 3.0" reads as "4.0"
+const shorten = (next: string, cur: string) => {
+  const a = next.split(' ');
+  const b = cur.split(' ');
+  let i = 0;
+  while (i < a.length - 1 && a[i] === b[i]) i++;
+  const rest = a.slice(i).join(' ');
+  const pre = next.match(/^(.*?)[- ]?(\d[\w.]*)$/);
+  const prc = cur.match(/^(.*?)[- ]?(\d[\w.]*)$/);
+  if (pre && prc && pre[1] === prc[1]) return pre[2];
+  if (pre && pre[1] === cur) return pre[2];
+  return rest;
+};
 
 function shape(r: ReignRow) {
   const [d0, d1] = r.domain;
@@ -85,6 +103,26 @@ function shape(r: ReignRow) {
         const now = r.reigns.at(-1)!;
         const unit = r.unit;
         const first = r.reigns[0].start;
+        const stop = clockStop(r);
+        const xs = stop ? Math.max(0, X(stop.date)) : 1000;
+        const nextName = r.replacedBy ? (benchById.get(r.replacedBy.benchmark)?.name ?? '') : '';
+        // "OSWorld 2.0 (Aug 2026)" after "OSWorld 2.0" would shorten to "(Aug 2026)"; the version label reads better
+        const cut = shorten(nextName, b?.name ?? '');
+        const shortNext = /^[^\p{L}\p{N}]/u.test(cut) ? (benchById.get(r.replacedBy?.benchmark ?? '')?.version ?? nextName) : cut;
+        const stopText = !stop
+          ? ''
+          : stop.why === 'closed'
+            ? `Passed 85% in ${monthYear(stop.date)}`
+            : stop.why === 'replaced'
+              ? `Replaced by ${shortNext}, ${monthYear(stop.date)}`
+              : `Not tested since ${monthYear(stop.date)}`;
+        const stopTip = !stop
+          ? undefined
+          : stop.why === 'closed'
+            ? { tv: fmt(r.closedOut!.value, unit), tn: `Closed out by ${name(r.closedOut!.model)}`, ts: `${monthYear(stop.date)}. Time after this does not count toward the share at number one.` }
+            : stop.why === 'replaced'
+              ? { tv: nextName, tn: 'Replaced by a new version', ts: `${monthYear(stop.date)}. Time after this does not count.` }
+              : { tv: monthYear(stop.date), tn: 'No newer model tested', ts: 'Later models have no score here, so time after this does not count.' };
         return (
           <>
           {heading && (
@@ -97,13 +135,17 @@ function shape(r: ReignRow) {
             <div class="who">
               {href ? <a href={href}>{nm}</a> : <span>{nm}</span>}
               <span class="sub">
-                {r.source === 'card' && mixed && <span>Lab claims</span>}
-                <span>
-                  {r.reigns.length} {r.reigns.length === 1 ? 'leader' : 'leaders'}
-                </span>
+                {r.source === 'card' && mixed && !given && <span>Lab claims</span>}
+                {stopText ? (
+                  <span>{stopText}</span>
+                ) : (
+                  <span>
+                    {r.reigns.length} {r.reigns.length === 1 ? 'leader' : 'leaders'}
+                  </span>
+                )}
               </span>
             </div>
-            <div class="plot">
+            <div class="plot" style={grid}>
               <svg class="strip" viewBox={`0 0 1000 ${H}`} preserveAspectRatio="none" aria-label={`${nm}: number one over time`} role="img">
                 <rect class="track" x={Math.max(0, X(first))} y="0" width={1000 - Math.max(0, X(first))} height={H} />
                 {parts.map((p) => (
@@ -116,7 +158,11 @@ function shape(r: ReignRow) {
                     data-ts={`Number one from ${monthYear(p.g.start)}${p.last ? ' to now' : ` to ${monthYear(p.g.end)}`}, ${months(p.g)} ${months(p.g) === 1 ? 'month' : 'months'}`}
                   />
                 ))}
+                {stop && xs < 1000 && <rect class="after" x={xs} y="0" width={1000 - xs} height={H} />}
               </svg>
+              {stop && stopTip && (
+                <span class:list={['stop', stop.why]} style={`left:${pct(stop.date)}`} data-tv={stopTip.tv} data-tn={stopTip.tn} data-ts={stopTip.ts} />
+              )}
               <div class="labels" aria-hidden="true">
                 {parts
                   .filter((p) => p.fits)
@@ -144,9 +190,9 @@ function shape(r: ReignRow) {
       <div class="who" />
       <div class="plot">
         {
-          yearTicks(t0, t1, 10).map((y) => (
-            <span class="yr" style={`left:${pct(`${y}-01-01`)}`}>
-              {y}
+          ticks.map((t) => (
+            <span class="yr" style={`left:${pct(t.date)}`}>
+              {t.label}
             </span>
           ))
         }
@@ -211,14 +257,38 @@ function shape(r: ReignRow) {
   }
   .sub {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 0 10px;
     margin-top: 2px;
     font-size: 12px;
     color: var(--ink-3);
   }
+  .sub > span {
+    white-space: nowrap;
+  }
   .plot {
     position: relative;
     padding-bottom: 22px;
+    isolation: isolate;
+  }
+  /* year gridlines: grey on the empty page, and a white cut through the coloured shapes */
+  .plot::before,
+  .plot::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 40px;
+    pointer-events: none;
+  }
+  .plot::before {
+    background: var(--yl);
+    z-index: -1;
+  }
+  .plot::after {
+    background: var(--yc);
+    opacity: 0.7;
   }
   .strip {
     display: block;
@@ -236,6 +306,37 @@ function shape(r: ReignRow) {
   }
   .seg:hover {
     filter: brightness(1.08);
+  }
+  .after {
+    fill: var(--bg);
+    opacity: 0.62;
+    pointer-events: none;
+  }
+  .stop {
+    position: absolute;
+    top: 0;
+    height: 40px;
+    width: 14px;
+    margin-left: -7px;
+  }
+  .stop::before {
+    content: '';
+    position: absolute;
+    left: 6.5px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed var(--ink-3);
+  }
+  .stop.closed::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    rotate: 45deg;
+    background: var(--ink);
+    box-shadow: 0 0 0 2px var(--bg);
   }
   .labels {
     position: absolute;
@@ -277,14 +378,28 @@ function shape(r: ReignRow) {
     font-weight: 500;
   }
   .axis .plot {
-    height: 18px;
+    height: 22px;
     padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .axis .plot::before,
+  .axis .plot::after {
+    display: none;
   }
   .yr {
     position: absolute;
+    top: 7px;
     translate: -50% 0;
     font: 400 12px/1 var(--mono);
     color: var(--ink-3);
+  }
+  .yr::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    height: 5px;
+    border-left: 1px solid var(--ink-4);
   }
   @media (max-width: 900px) {
     .row {

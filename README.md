@@ -15,6 +15,7 @@ so pages ship almost no JavaScript.
 | `data/benchmarks.json` | One record per benchmark: what it tests, who made it, links, access, status notes, and aliases. Versions stay separate (`ARC-AGI-2` is not `ARC-AGI`). Each also has a finer category, a level, a scoring method and an answer format. |
 | `data/taxonomy.json` | The allowed values for those four fields: subcategories under each category, six levels from everyday to research frontier, six scoring methods (from checked automatically to arenas and real events), and seven answer formats. |
 | `data/cards.json` | Lab model cards: the benchmarks in each card's headline table and the score the card reports. |
+| `data/scores/leaderboards.json` | Scores from each benchmark's own leaderboard, read by the importers in `scripts/leaderboards/`. |
 | `data/scores/epoch.json` | Scores and the Epoch Capabilities Index from [Epoch AI](https://epoch.ai/benchmarks), CC BY 4.0. |
 | `data/github.json` | Stars, license, last push and archived state for each benchmark repo. |
 | `data/sources.json` | Where new benchmarks appear, and how much each source tells you. |
@@ -31,6 +32,7 @@ Node 22.18 or later runs these TypeScript files directly. None has dependencies.
 | Command | What it does |
 | --- | --- |
 | `node scripts/discover.ts` | Reads Hugging Face Daily Papers, arXiv, AINews, Epoch AI, the Inspect Evals register and Hugging Face's official benchmark datasets. Scores each find and writes `data/discovered.json`. |
+| `node scripts/sync-leaderboards.ts` | Runs every importer in `scripts/leaderboards/` and rewrites `data/scores/leaderboards.json`. A board that fails keeps its last rows. `--only <id> --dry` tests one importer. |
 | `node scripts/sync-epoch.ts` | Downloads Epoch AI's data and rewrites `data/scores/epoch.json`. New models and benchmarks join the registries. |
 | `node scripts/sync-github.ts` | Refreshes `data/github.json`. Set `GITHUB_TOKEN` first. |
 | `node scripts/check-data.ts` | Checks references, allowed values and copy style in `data/`. |
@@ -40,8 +42,15 @@ and abstract. Stage B adds evidence across sources: released code or data, a kno
 early upvotes or stars, more than one feed, a newsletter mention, or a registry listing. Items scoring 8
 or more are ready to catalogue. Items scoring 5 to 7 stay on a watch list for 14 days.
 
-Two GitHub Actions keep the data current. `discover.yml` runs every morning, and `sync.yml` runs every
-Monday. Each keeps one pull request open with its changes.
+Two GitHub Actions keep the data current. `discover.yml` and `sync.yml` both run every day. Each keeps one
+pull request open with its changes.
+
+To add a leaderboard, copy `scripts/leaderboards/aider-polyglot.ts`, point it at the board's published data
+file, and run it with `--only <benchmark-id> --dry`. Names the shared resolver in `scripts/lib/models.ts`
+cannot place go in the importer's `aliases` map.
+
+Versions of one benchmark are separate records linked by `family` and labelled by `version`, so scores never
+mix across versions.
 
 ## Development
 

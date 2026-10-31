@@ -3,12 +3,13 @@ import Base from '../../layouts/Base.astro';
 import ReignChart from '../../components/ReignChart.astro';
 import CrownShare from '../../components/CrownShare.astro';
 import LabMark from '../../components/LabMark.astro';
-import { benchmarks, benchSummary, labById, modelById } from '../../lib/data.ts';
-import { labShares } from '../../lib/reigns.ts';
+import { benchmarks, benchSummary, labById, modelById, benchById } from '../../lib/data.ts';
+import { labShares, closeOuts, closeOutShares } from '../../lib/reigns.ts';
+import ModelName from '../../components/ModelName.astro';
 import { leaderRows } from '../../lib/leaders.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, LEVELS, SUBCATEGORIES, SCORING_BY_ID, LEVEL_BY_ID, areaOf } from '../../lib/taxonomy.ts';
 import { labColor } from '../../lib/palette.ts';
-import { score as fmt } from '../../lib/format.ts';
+import { score as fmt, monthYear } from '../../lib/format.ts';
 import { AS_OF, monthsBetween } from '../../lib/data.ts';
 
 export function getStaticPaths() {
@@ -32,10 +33,12 @@ const top = shares[0];
 const lower = name.charAt(0).toLowerCase() + name.slice(1);
 const headline =
   top && shares.length > 1
-    ? `${labById.get(top.lab)?.name ?? 'Other labs'} held the top ${lower} score ${Math.round(top.share * 100)}% of the time`
+    ? `${labById.get(top.lab)?.name ?? 'Other labs'} held the top ${lower} score ${Math.round(top.share * 100)}% of the contested time`
     : `Who held number one in ${lower}`;
 
 const span = monthsBetween('2023-01', AS_OF);
+const closed = closeOuts(main);
+const closedBy = closeOutShares(main);
 const monthsHeld = top ? Math.round(top.share * span) : 0;
 const levels = LEVELS.map((l) => ({ l, xs: all.filter((s) => s.b.level === l.id) })).filter((x) => x.xs.length);
 const unrated = all.filter((s) => !s.b.level);
@@ -68,7 +71,7 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
               <h2>{headline}</h2>
               <p>
                 {top && shares.length > 1 && `That is about ${monthsHeld} of the ${span} months since January 2023, averaged over the benchmarks below. `}
-                Each row is a benchmark, easiest level at the top. The shape rises with the best score so far, and its colour shows which lab's model held the top spot.
+                Each row is a benchmark, easiest level at the top. The shape rises with the best score so far, and its colour shows which lab's model held the top spot. The clock stops, and the row fades, once the best score passes 85%, a new version replaces the benchmark, or no newer model has been tested.
               </p>
             </div>
             {both && (
@@ -81,9 +84,26 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
           <div class="when-a">
             <ReignChart rows={main} />
             <div class="share">
-              <h3>Share of time at number one</h3>
+              <h3>Share of contested time at number one</h3>
               <CrownShare shares={shares} />
             </div>
+            {closed.length > 0 && (
+              <div class="share">
+                <h3>
+                  Closed out: {closed.length} {closed.length === 1 ? 'benchmark' : 'benchmarks'} passed 85%
+                </h3>
+                <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
+                <ul class="closed">
+                  {closed.map((c) => (
+                    <li>
+                      <span class="muted num">{monthYear(c.date)}</span>
+                      <a href={`/benchmarks/${c.benchmark}/`}>{benchById.get(c.benchmark)?.name}</a>
+                      <ModelName id={c.model} size={14} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <p class="src">
               {main.some((r) => r.source === 'card')
                 ? 'Independent runs from Epoch AI where it has scored four or more models, placed at each model’s release date. Other rows use the scores labs report in their model cards, placed at each card’s date.'
@@ -205,6 +225,23 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
   .rung h3 {
     font-size: 20px;
     margin-bottom: 12px;
+  }
+  .closed {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .closed li {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+  }
+  .closed a {
+    text-decoration: none;
   }
   .src {
     margin-top: 14px;

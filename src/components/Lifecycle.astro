@@ -4,7 +4,7 @@
 // the month the best score passed 85%. Status sits by the name, so retired tests read at a glance.
 import { benchSummary, AS_OF, SATURATED } from '../lib/data.ts';
 import { yearFrac, monthYear } from '../lib/format.ts';
-import { yearTicks } from '../lib/scale.ts';
+import { yearTicks, yearLines } from '../lib/scale.ts';
 import { AREA_BY_ID } from '../lib/taxonomy.ts';
 
 interface Props {
@@ -16,6 +16,8 @@ rows.sort((a, b) => a.first!.localeCompare(b.first!));
 const t0 = 2023.1;
 const t1 = yearFrac(AS_OF) + 0.08;
 const pos = (d: string) => Math.max(0, Math.min(100, ((yearFrac(d) - t0) / (t1 - t0)) * 100));
+const years = yearTicks(t0, t1);
+const grid = `--yl:${yearLines(years.map((y) => `${pos(`${y}-01-01`)}%`))}`;
 const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped' };
 ---
 
@@ -31,7 +33,7 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
             <span class:list={['dot', `status-${s.status.replace(/ /g, '-')}`]} title={STATUS[s.status]} />
             <span class="nm">{s.b.name}</span>
           </span>
-          <span class="lane" data-tn={s.b.name} data-ts={`${STATUS[s.status]}. ${s.cites.length} model cards, ${monthYear(s.first)} to ${monthYear(s.last)}${s.saturatedAt ? `. Passed ${SATURATED}% in ${monthYear(s.saturatedAt)}` : ''}. ${AREA_BY_ID.get(s.area)?.name}`}>
+          <span class="lane" style={grid} data-tn={s.b.name} data-ts={`${STATUS[s.status]}. ${s.cites.length} model cards, ${monthYear(s.first)} to ${monthYear(s.last)}${s.saturatedAt ? `. Passed ${SATURATED}% in ${monthYear(s.saturatedAt)}` : ''}. ${AREA_BY_ID.get(s.area)?.name}`}>
             <span class="band" style={`left:${a}%;width:${Math.max(0.4, z - a)}%`} />
             {s.cites.map((c) => (
               <i style={`left:${pos(c.card.date)}%`} />
@@ -46,7 +48,7 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
     <span class="who" />
     <span class="lane">
       {
-        yearTicks(t0, t1).map((y) => (
+        years.map((y) => (
           <span class="yr" style={`left:${pos(`${y}-01-01`)}%`}>
             {y}
           </span>
@@ -94,6 +96,7 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
   .lane {
     position: relative;
     height: 22px;
+    background: var(--yl);
   }
   .band {
     position: absolute;
@@ -123,6 +126,16 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
   }
   .axis .lane {
     height: 24px;
+    background: none;
+    border-top: 1px solid var(--line);
+  }
+  .yr::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    height: 5px;
+    border-left: 1px solid var(--ink-4);
   }
   .yr {
     position: absolute;

@@ -210,6 +210,10 @@ export interface BenchSummary {
   best?: Score;
   saturatedAt?: string;
   nScores: number;
+  /** The newest score from any source: when a model was last added. An old date means the board has gone quiet. */
+  lastAdded?: { date: string; model: string; source: Score['source'] };
+  /** When the almanac last read this benchmark's scores: its leaderboard, Epoch AI, or the newest model card. */
+  refreshed?: string;
 }
 
 export const SATURATED = 85;
@@ -283,6 +287,15 @@ export function benchSummary(id: string): BenchSummary {
     else why = 'other';
   }
 
+  let lastAdded: BenchSummary['lastAdded'];
+  for (const x of [...(lbByBench.get(id) ?? []), ...(epochByBench.get(id) ?? []), ...(cardScoresByBench.get(id) ?? [])])
+    if (x.date && x.date <= AS_OF && (!lastAdded || x.date > lastAdded.date)) lastAdded = { date: x.date, model: x.model, source: x.source };
+  for (const c of [...cites, ...docCites]) if (!lastAdded || c.card.date > lastAdded.date) lastAdded = { date: c.card.date, model: c.card.model, source: 'card' };
+  const refreshed = [
+    ...(lbByBench.get(id)?.length && LEADERBOARDS[id]?.retrieved ? [LEADERBOARDS[id].retrieved] : []),
+    ...(epochByBench.get(id)?.length ? [epoch.retrieved] : []),
+  ].sort().at(-1);
+
   const s: BenchSummary = {
     b,
     area: areaOf(b.category),
@@ -303,12 +316,33 @@ export function benchSummary(id: string): BenchSummary {
     best: board[0],
     saturatedAt,
     nScores: new Set([...leaderboardBoard, ...epochBoard, ...cardBoard].map((x) => x.model)).size,
+    lastAdded,
+    refreshed,
   };
   summaries.set(id, s);
   return s;
 }
 
 export const allSummaries = () => benchmarks.map((b) => benchSummary(b.id));
+
+/** The table filter for how recently a model got a score: every window it falls in, "quiet" after a year, "none" with no scores. */
+export function addedWindows(s: BenchSummary): string {
+  if (!s.lastAdded) return 'none';
+  const m = monthsBetween(s.lastAdded.date, AS_OF);
+  return m < 3 ? '3m 6m 12m' : m < 6 ? '6m 12m' : m < 12 ? '12m' : 'quiet';
+}
+/** The options for that filter, with counts over the given rows. */
+export function addedOptions(rows: BenchSummary[]) {
+  const n = (w: string) => rows.filter((s) => addedWindows(s).split(' ').includes(w)).length;
+  return [
+    { value: '', label: 'Last model: any time' },
+    { value: '3m', label: 'New model within 3 months', count: n('3m') },
+    { value: '6m', label: 'New model within 6 months', count: n('6m') },
+    { value: '12m', label: 'New model within a year', count: n('12m') },
+    { value: 'quiet', label: 'Quiet for a year or more', count: n('quiet') },
+    { value: 'none', label: 'No scores yet', count: n('none') },
+  ].filter((o) => o.value === '' || o.count);
+}
 
 // ---- model summaries ------------------------------------------------------------------------------
 export interface ModelResult {

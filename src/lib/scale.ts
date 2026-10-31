@@ -55,3 +55,8 @@ export function timeTicks(min: number, max: number, maxTicks = 8): { date: strin
 }
 
 export const round = (v: number, p = 1) => Math.round(v * 10 ** p) / 10 ** p;
+
+/** Year gridlines for an HTML chart: a CSS background with one hairline per year at the given positions. */
+export function yearLines(positions: string[], color = 'var(--grid)'): string {
+  return positions.map((p) => `linear-gradient(${color}, ${color}) ${p} 0 / 1px 100% no-repeat`).join(', ');
+}

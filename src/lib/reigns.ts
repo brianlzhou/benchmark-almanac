@@ -2,14 +2,15 @@
 // (its release date for independent runs, the card's date for lab claims). It keeps the spot until a
 // later model beats it. Ties leave the incumbent in place.
 //
-// The clock that counts time at number one stops at the first of two moments:
+// The clock that counts time at number one stops at the first of three moments:
 //   - the best score passes 85%: the benchmark is saturated, and nobody can take the lead in a way that
 //     means much. The model that took it past 85% gets a close-out instead, counted on its own.
+//   - the next version comes out (Terminal-Bench 2.0 retires 1.0).
 //   - the newest model tested: after that, nobody knows who would lead.
-import { epochScores, cardScores, benchById, modelById, eciByModel, models, AS_OF, SATURATED } from './data.ts';
+import { epochScores, cardScores, leaderboardScores, benchById, benchmarks, modelById, eciByModel, models, AS_OF, SATURATED } from './data.ts';
 import type { Score } from './types.ts';
 
-export type Source = 'epoch' | 'card';
+export type Source = 'leaderboard' | 'epoch' | 'card';
 
 export interface Reign {
   model: string;
@@ -38,6 +39,8 @@ export interface ReignRow {
   lastTested: string;
   /** The score that first passed 85%, for percentage benchmarks where higher is better. */
   closedOut?: CloseOut;
+  /** The next version of the same test, and the day it came out. */
+  replacedBy?: { benchmark: string; date: string };
 }
 
 function build(points: { date: string; value: number; model: string }[], better: 'higher' | 'lower', unit: string): Omit<ReignRow, 'benchmark' | 'source'> | null {
@@ -80,7 +83,9 @@ export function reignRow(benchmark: string, source: Source): ReignRow | null {
   let row: ReignRow | null = null;
   if (b) {
     const unit = b.unit ?? '%';
-    const scores: Score[] = (source === 'epoch' ? epochScores : cardScores).filter((s) => s.benchmark === benchmark && s.unit === unit);
+    const scores: Score[] = (source === 'leaderboard' ? leaderboardScores : source === 'epoch' ? epochScores : cardScores).filter(
+      (s) => s.benchmark === benchmark && s.unit === unit,
+    );
     // Epoch places scores at each model's release date, so a model older than the benchmark would seem to
     // lead before the benchmark existed. Nobody held a top spot until the benchmark came out.
     const opened = b.released ? `${b.released.slice(0, 7)}-01` : '';
@@ -89,10 +94,29 @@ export function reignRow(benchmark: string, source: Source): ReignRow | null {
       b.better === 'lower' ? 'lower' : 'higher',
       unit,
     );
-    row = built ? { benchmark, source, ...built } : null;
+    row = built ? { benchmark, source, ...built, replacedBy: nextVersion(benchmark) } : null;
   }
   cache.set(k, row);
   return row;
+}
+
+/** The version that retired this one, if the benchmark belongs to a family. */
+export function nextVersion(benchmark: string): { benchmark: string; date: string } | undefined {
+  const b = benchById.get(benchmark);
+  if (!b?.family || !b.released) return undefined;
+  const fam = benchmarks.filter((x) => x.family === b.family && x.released).sort((x, y) => x.released!.localeCompare(y.released!));
+  const next = fam[fam.findIndex((x) => x.id === b.id) + 1];
+  return next ? { benchmark: next.id, date: `${next.released!.slice(0, 7)}-01` } : undefined;
+}
+
+/** All versions of a benchmark's family, oldest first. */
+export function familyOf(benchmark: string): string[] {
+  const b = benchById.get(benchmark);
+  if (!b?.family) return [benchmark];
+  return benchmarks
+    .filter((x) => x.family === b.family)
+    .sort((x, y) => (x.released ?? '').localeCompare(y.released ?? ''))
+    .map((x) => x.id);
 }
 
 /** Number one on the Epoch Capabilities Index, by release date. The index has no ceiling, so it never closes out. */
@@ -104,16 +128,25 @@ export function eciReigns(): ReignRow | null {
 
 const days = (a: string, b: string) => (Date.parse(b) - Date.parse(a)) / 86_400_000;
 
-/** When the clock stops: the close-out or the newest score, whichever comes first. */
-export function clockStops(r: ReignRow): string {
-  const end = r.closedOut && r.closedOut.date < r.lastTested ? r.closedOut.date : r.lastTested;
-  return end < AS_OF ? end : AS_OF;
+export type StopReason = 'closed' | 'replaced' | 'untested';
+
+/** The moment the clock stopped and why, or null while the benchmark is still contested. */
+export function clockStop(r: ReignRow): { date: string; why: StopReason } | null {
+  const cands: { date: string; why: StopReason }[] = [];
+  if (r.closedOut) cands.push({ date: r.closedOut.date, why: 'closed' });
+  if (r.replacedBy) cands.push({ date: r.replacedBy.date, why: 'replaced' });
+  // a benchmark nobody has tested for six weeks: the leader is only the leader of what was tested
+  if (days(r.lastTested, AS_OF) > 45) cands.push({ date: r.lastTested, why: 'untested' });
+  const live = cands.filter((c) => c.date < AS_OF).sort((a, b) => a.date.localeCompare(b.date));
+  // testing usually stops a little before the next version ships: call that a replacement
+  const rep = live.find((c) => c.why === 'replaced');
+  if (live[0]?.why === 'untested' && rep && days(live[0].date, rep.date) <= 120) return rep;
+  return live[0] ?? null;
 }
 
-/** Why the clock stopped, if it stopped before today. */
-export function stopReason(r: ReignRow): 'closed' | 'untested' | null {
-  if (r.closedOut && r.closedOut.date <= r.lastTested) return 'closed';
-  return days(r.lastTested, AS_OF) > 45 ? 'untested' : null;
+/** When the clock stops: today, unless it stopped earlier. */
+export function clockStops(r: ReignRow): string {
+  return clockStop(r)?.date ?? AS_OF;
 }
 
 /** Contested days of a reign: from its start, or `since`, to its end or the moment the clock stopped. */

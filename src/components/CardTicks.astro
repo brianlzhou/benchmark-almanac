@@ -5,7 +5,7 @@ import LabMark from './LabMark.astro';
 import { cards, labById, modelById, AS_OF } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { yearFrac, fullDate } from '../lib/format.ts';
-import { yearTicks } from '../lib/scale.ts';
+import { yearTicks, yearLines } from '../lib/scale.ts';
 
 interface Props {
   citing: Set<string>;
@@ -16,6 +16,8 @@ const t0 = 2023.1;
 const t1 = yearFrac(AS_OF) + 0.08;
 const pos = (d: string) => `${(((yearFrac(d) - t0) / (t1 - t0)) * 100).toFixed(2)}%`;
 const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab) }));
+const years = yearTicks(t0, t1);
+const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
 ---
 
 <div class="ct">
@@ -26,7 +28,7 @@ const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab)
           <LabMark lab={lab} size={16} />
           <span>{labById.get(lab)?.name ?? lab}</span>
         </div>
-        <div class="lane">
+        <div class="lane" style={grid}>
           {cs.map((c) => {
             const on = citing.has(c.id);
             return (
@@ -48,7 +50,7 @@ const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab)
     <div class="who" />
     <div class="lane">
       {
-        yearTicks(t0, t1).map((y) => (
+        years.map((y) => (
           <span class="yr" style={`left:${pos(`${y}-01-01`)}`}>
             {y}
           </span>
@@ -81,7 +83,7 @@ const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab)
   .lane {
     position: relative;
     height: 28px;
-    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat;
+    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat, var(--yl);
   }
   .tick {
     position: absolute;
@@ -112,14 +114,24 @@ const rows = labs.map((lab) => ({ lab, cards: cards.filter((c) => c.lab === lab)
     background: var(--ink);
   }
   .axis .lane {
-    height: 18px;
+    height: 22px;
     background: none;
+    border-top: 1px solid var(--line);
   }
   .yr {
     position: absolute;
+    top: 7px;
     translate: -50% 0;
     font: 400 12px/1 var(--mono);
     color: var(--ink-3);
+  }
+  .yr::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -8px;
+    height: 5px;
+    border-left: 1px solid var(--ink-4);
   }
   @media (max-width: 720px) {
     .row {

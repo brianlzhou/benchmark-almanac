@@ -22,7 +22,7 @@ const hi = highlight ? scores.findIndex((s) => s.model === highlight) : -1;
 const extra = hi >= limit ? scores[hi] : undefined;
 const max = unit === '%' && better !== 'lower' ? 100 : niceMax(Math.max(...scores.map((s) => s.value), 1e-9));
 const w = (v: number) => `${Math.max(0.6, (v / max) * 100)}%`;
-const src = (s: Score) => (s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
+const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
 ---
 
 <ol class="bb">

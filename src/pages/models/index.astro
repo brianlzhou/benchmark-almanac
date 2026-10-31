@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import ModelName from '../../components/ModelName.astro';
 import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
+import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import { featuredModels, eciByModel, eciOrder, modelById, modelSummary, labById, labs, EPOCH_SOURCE } from '../../lib/data.ts';
 import { monthYear } from '../../lib/format.ts';
 
@@ -20,6 +21,12 @@ const rows = featuredModels
   .sort((a, b) => (b.s.eci?.eci ?? -1) - (a.s.eci?.eci ?? -1) || (b.m.released ?? '').localeCompare(a.m.released ?? ''));
 const labOptions = labs.filter((l) => rows.some((r) => r.m.lab === l.id)).sort((a, b) => a.name.localeCompare(b.name));
 const open = featuredModels.filter((m) => m.weights === 'open').length;
+const labDropdown: Option[] = [{ value: '', label: 'All labs' }, ...labOptions.map((l) => ({ value: l.id, label: l.name, count: rows.filter((r) => r.m.lab === l.id).length }))];
+const weightOptions: Option[] = [
+  { value: '', label: 'Open and closed' },
+  { value: 'open', label: 'Open weights', count: rows.filter((r) => r.m.weights === 'open').length },
+  { value: 'closed', label: 'Closed weights', count: rows.filter((r) => r.m.weights === 'closed').length },
+];
 ---
 
 <Base title="Models" description="Every model in the almanac under one naming scheme, ranked by the Epoch Capabilities Index.">
@@ -62,15 +69,8 @@ const open = featuredModels.filter((m) => m.weights === 'open').length;
       </div>
       <div class="filters" data-filter="models">
         <input class="field grow" type="search" placeholder="Search models" aria-label="Search models" data-q />
-        <select class="field" aria-label="Lab" data-lab>
-          <option value="">All labs</option>
-          {labOptions.map((l) => <option value={l.id}>{l.name}</option>)}
-        </select>
-        <select class="field" aria-label="Weights" data-weights>
-          <option value="">Open and closed</option>
-          <option value="open">Open weights</option>
-          <option value="closed">Closed weights</option>
-        </select>
+        <Dropdown filterKey="lab" label="Lab" options={labDropdown} search />
+        <Dropdown filterKey="weights" label="Weights" options={weightOptions} />
         <span class="count muted" data-count>{rows.length} models</span>
       </div>
       <div class="table-wrap">

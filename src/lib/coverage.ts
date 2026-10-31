@@ -1,6 +1,6 @@
 // Which strong models a leaderboard is missing. A board whose newest score is months old still names a
 // leader, but only among the models someone tested. The pages say so.
-import { benchSummary, eciOrder, modelById } from './data.ts';
+import { benchSummary, eciOrder, modelById, AS_OF } from './data.ts';
 
 export interface Untested {
   /** Release date of the newest model on the board. */
@@ -22,6 +22,8 @@ export function untested(id: string, top = 20): Untested | null {
   const last = s.board.map((x) => modelById.get(x.model)?.released ?? x.date ?? '').sort().at(-1) ?? '';
   const missing = eciOrder.slice(0, top).filter((m) => !onBoard.has(m));
   const newer = missing.filter((m) => (modelById.get(m)?.released ?? '') > last);
-  if (newer.length < 2) return null;
+  // a board updated in the last six weeks is current enough: models released since may simply be queued
+  const stale = (Date.parse(AS_OF) - Date.parse(last)) / 86_400_000 > 45;
+  if (newer.length < 2 || !stale) return null;
   return { last, missing, newer, claimed: s.boardSource === 'epoch' ? missing.filter((m) => claims.has(m)) : [], top };
 }

@@ -27,6 +27,7 @@ const lo = rated ? ratingFloor(rows.map((s) => s.value)) : 0;
 const h = (v: number) => Math.max(2, ((v - lo) / (max - lo)) * height);
 const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
 const many = rows.length > 12;
+const what = rows.some((s) => !s.model) ? 'entries' : 'models';
 ---
 
 <div class="cols-box" data-cols>
@@ -34,7 +35,7 @@ const many = rows.length > 12;
     (many || lo > 0) && (
       <div class="cols-bar">
         <p class="cols-n num" aria-live="polite">
-          <span data-cols-range>{many ? `${rows.length} models. Scroll sideways for the rest.` : ''}</span>
+          <span data-cols-range>{many ? `${rows.length} ${what}. Scroll sideways for the rest.` : ''}</span>
           {lo > 0 && <span class="base">Bars start at {lo.toLocaleString('en-US')}.</span>}
         </p>
         {many && (
@@ -50,26 +51,28 @@ const many = rows.length > 12;
       </div>
     )
   }
-  <div class="cols-scroll" data-cols-scroll tabindex={many ? 0 : undefined} aria-label={many ? `Leaderboard, ${rows.length} models. Scroll sideways for more.` : undefined}>
+  <div class="cols-scroll" data-cols-scroll tabindex={many ? 0 : undefined} aria-label={many ? `Leaderboard, ${rows.length} ${what}. Scroll sideways for more.` : undefined}>
     <ol class="cols" style={`--h:${height}px`}>
       {
         rows.map((s, i) => {
           const m = modelById.get(s.model);
           const href = featuredIds.has(s.model) ? `/models/${s.model}/` : undefined;
+          // an entry not in the model list keeps the board's own name, in gray
+          const label = m?.name ?? s.name ?? s.model;
           return (
-            <li class="col">
+            <li class:list={['col', { unlisted: !m }]}>
               <a
                 href={href}
                 data-tv={fmt(s.value, unit)}
-                data-tn={`${i + 1}. ${m?.name ?? s.model}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`}
+                data-tn={`${i + 1}. ${label}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`}
                 data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}
               >
                 <span class="plot">
                   <span class="v num">{scoreBare(s.value, unit)}</span>
                   <span class="bar" style={`height:${h(s.value)}px;background:${labColor(m?.lab)}`} />
                 </span>
-                <LabMark lab={m?.lab} size={18} class="lm" />
-                <span class="n">{m?.name ?? s.model}</span>
+                <LabMark lab={m?.lab} size={18} class="lm" label={m ? undefined : label} />
+                <span class="n">{label}</span>
               </a>
             </li>
           );
@@ -272,5 +275,8 @@ const many = rows.length > 12;
     -webkit-box-orient: vertical;
     overflow: hidden;
     overflow-wrap: anywhere;
+  }
+  .unlisted .n {
+    color: var(--ink-3);
   }
 </style>

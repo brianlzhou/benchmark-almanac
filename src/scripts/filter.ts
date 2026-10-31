@@ -22,6 +22,7 @@ export function wireFilter(name: string) {
   for (const s of selects) {
     const v = params.get(keyOf(s));
     if (v && [...s.options].some((o) => o.value === v)) s.value = v;
+    s.dispatchEvent(new Event('sync'));
   }
   if (q && params.get('q')) q.value = params.get('q')!;
   for (const k of radioKeys) {

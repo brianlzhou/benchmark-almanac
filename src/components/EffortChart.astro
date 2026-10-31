@@ -1,0 +1,435 @@
+---
+// Every run on a leaderboard, not only each model's best. Two forms:
+// - cost: score against cost per task on a log scale. Each line joins one model's runs at its effort
+//   levels, cheapest first, and a step line traces the cost frontier: the best score at each price.
+//   Models with a run on the frontier keep their lab's colour. The rest go grey.
+// - ladder: when the board reports no cost, one row per model with a dot for each effort level, from
+//   the lowest effort (light) to the highest (full colour).
+// The cost form renders twice, at a desktop and a phone width, so text keeps its size on both.
+import type { EffortView, Run } from '../lib/effort.ts';
+import { effortRank, usd, tokenCount } from '../lib/effort.ts';
+import { modelById, labById } from '../lib/data.ts';
+import { labColor } from '../lib/palette.ts';
+import { linear, niceTicks, niceMax, yearLines } from '../lib/scale.ts';
+import { score as fmt } from '../lib/format.ts';
+import LabMark from './LabMark.astro';
+
+interface Props {
+  view: EffortView;
+  label: string;
+}
+const { view, label } = Astro.props;
+const { unit } = view;
+const name = (id: string) => modelById.get(id)?.name ?? id;
+const runName = (r: Run) => `${name(r.model)}${r.setting ? `, ${r.setting}` : ''}`;
+const vFmt = (v: number) => fmt(v, unit);
+const runNote = (r: Run) =>
+  [r.cost !== null ? `${usd(r.cost)} per task` : '', r.tokens !== null ? `${tokenCount(r.tokens)} output tokens per task` : '', r.harness ?? '']
+    .filter(Boolean)
+    .join('. ');
+
+// ---------- cost form ----------
+const onFront = new Set(view.frontier.map((r) => `${r.model}|${r.harness ?? ''}`));
+const colourOf = (key: string, lab?: string) => (onFront.has(key) ? labColor(lab) : 'var(--ink-4)');
+const costs = view.runs.map((r) => r.cost!).filter((c) => c > 0);
+const lo = costs.length ? 10 ** Math.floor(Math.log10(Math.min(...costs))) : 1;
+const hi = costs.length ? 10 ** Math.ceil(Math.log10(Math.max(...costs))) : 10;
+const decades = Math.round(Math.log10(hi / lo));
+const xTicks: number[] = [];
+for (let d = 0; d <= decades; d++) for (const m of decades <= 2 ? [1, 2, 5] : [1]) if (lo * 10 ** d * m <= hi) xTicks.push(lo * 10 ** d * m);
+const vals = view.runs.map((r) => r.value);
+const yMax = unit === '%' ? (Math.max(...vals) > 70 ? 100 : niceMax(Math.max(...vals))) : niceMax(Math.max(...vals));
+const yTicks = unit === '%' && yMax === 100 ? [0, 20, 40, 60, 80, 100] : niceTicks(0, yMax, 5);
+const pad = { l: 46, r: 16, t: 18, b: 52 };
+const sizes = [
+  { key: 'wide', w: 1120, h: 460, labels: 7, font: 12.5 },
+  { key: 'narrow', w: 380, h: 330, labels: 2, font: 11 },
+];
+const frontLabs = [...new Set(view.series.filter((s) => onFront.has(s.key)).map((s) => s.lab ?? 'other'))];
+// grey series first, so coloured ones sit on top
+const drawOrder = [...view.series].sort((a, b) => Number(onFront.has(a.key)) - Number(onFront.has(b.key)));
+
+function layout(w: number, h: number, nLabels: number, font: number) {
+  const lx = linear([Math.log10(lo), Math.log10(hi)], [pad.l, w - pad.r]);
+  const X = (c: number) => lx(Math.log10(c));
+  const Y = linear([0, yMax], [h - pad.b, pad.t]);
+  let d = '';
+  view.frontier.forEach((r, i) => {
+    d += i === 0 ? `M${X(r.cost!).toFixed(1)},${Y(r.value).toFixed(1)}` : `H${X(r.cost!).toFixed(1)}V${Y(r.value).toFixed(1)}`;
+  });
+  if (view.frontier.length) d += `H${w - pad.r}`;
+  // labels sit above and left of frontier runs, where no run can be; the best run is labelled first
+  const placed: { text: string; x: number; y: number; anchor: 'start' | 'end'; x0: number; x1: number }[] = [];
+  for (const r of [...view.frontier].reverse()) {
+    if (placed.length >= nLabels) break;
+    const text = runName(r);
+    const tw = text.length * font * 0.55;
+    const px = X(r.cost!);
+    const py = Y(r.value) - 9;
+    const end = px - 8 - tw > pad.l;
+    const x0 = end ? px - 8 - tw : px + 8;
+    const x1 = end ? px - 8 : px + 8 + tw;
+    if (placed.some((p) => Math.abs(p.y - py) < font + 3 && x0 < p.x1 && x1 > p.x0)) continue;
+    placed.push({ text, x: end ? px - 8 : px + 8, y: py, anchor: end ? 'end' : 'start', x0, x1 });
+  }
+  return { X, Y, d, placed };
+}
+
+// ---------- ladder form ----------
+const ladder = view.mode === 'ladder' ? view.series.slice(0, 12) : [];
+const lv = ladder.flatMap((s) => s.runs.map((r) => r.value));
+const lt = lv.length ? niceTicks(Math.min(...lv), Math.max(...lv), 5) : [0, 100];
+const step = lt.length > 1 ? lt[1] - lt[0] : 10;
+const l0 = Math.max(unit === '%' ? 0 : -Infinity, lt[0] > Math.min(...lv) - step / 4 ? lt[0] - step : lt[0]);
+const l1 = Math.min(unit === '%' ? 100 : Infinity, lt.at(-1)! < Math.max(...lv) + step / 4 ? lt.at(-1)! + step : lt.at(-1)!);
+const lTicks = niceTicks(l0, l1, 5).filter((v) => v >= l0 && v <= l1);
+const pctX = (v: number) => `${(((v - l0) / (l1 - l0 || 1)) * 100).toFixed(2)}%`;
+const ladderGrid = yearLines(lTicks.map(pctX));
+const tint = (lab: string | undefined, i: number, n: number) =>
+  n <= 1 ? labColor(lab) : `color-mix(in oklab, ${labColor(lab)} ${Math.round(35 + (65 * i) / (n - 1))}%, var(--bg))`;
+---
+
+{
+  view.mode === 'cost' ? (
+    <figure class="ef">
+      <div class="key">
+        {frontLabs.map((l) => (
+          <span class="tag">
+            <svg width="12" height="12" aria-hidden="true">
+              <rect width="12" height="12" rx="3" fill={labColor(l)} />
+            </svg>
+            {labById.get(l)?.name ?? 'Other labs'}
+          </span>
+        ))}
+        <span class="tag">
+          <svg width="22" height="12" aria-hidden="true">
+            <path d="M1 10H8V3H21" fill="none" stroke="var(--ink-2)" stroke-width="1.6" />
+          </svg>
+          Cost frontier
+        </span>
+        <span class="tag">
+          <svg width="26" height="12" aria-hidden="true">
+            <path d="M4 9L13 5L22 3" fill="none" stroke="var(--ink-4)" stroke-width="1.4" />
+            <circle cx="4" cy="9" r="2.6" fill="var(--ink-4)" />
+            <circle cx="13" cy="5" r="2.6" fill="var(--ink-4)" />
+            <circle cx="22" cy="3" r="2.6" fill="var(--ink-4)" />
+          </svg>
+          One model at each effort level
+        </span>
+      </div>
+      {sizes.map(({ key, w, h, labels, font }) => {
+        const { X, Y, d, placed } = layout(w, h, labels, font);
+        return (
+          <svg class={`only-${key}`} viewBox={`0 0 ${w} ${h}`} role="img" aria-label={label} style={`--f:${font}px`}>
+            {yTicks.map((v) => (
+              <g>
+                <line x1={pad.l} x2={w - pad.r} y1={Y(v)} y2={Y(v)} class="grid" />
+                <text x={pad.l - 8} y={Y(v) + 4} class="tick" text-anchor="end">
+                  {unit === '%' ? `${v}%` : vFmt(v)}
+                </text>
+              </g>
+            ))}
+            {xTicks.map((c, i) => {
+              const major = Math.abs(Math.log10(c) - Math.round(Math.log10(c))) < 1e-9;
+              const show = key === 'wide' || major;
+              return (
+                <g>
+                  <line x1={X(c)} x2={X(c)} y1={pad.t} y2={h - pad.b} class:list={['vgrid', { minor: !major }]} />
+                  <line x1={X(c)} x2={X(c)} y1={h - pad.b} y2={h - pad.b + 5} class="axis" />
+                  {show && (
+                    <text x={X(c)} y={h - pad.b + 20} class="tick" text-anchor={i === 0 ? 'start' : 'middle'}>
+                      {usd(c)}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+            <line x1={pad.l} x2={w - pad.r} y1={h - pad.b} y2={h - pad.b} class="axis" />
+            <text x={(pad.l + w - pad.r) / 2} y={h - 6} class="axt" text-anchor="middle">
+              Cost per task, log scale
+            </text>
+            {drawOrder.map((s) => {
+              const c = colourOf(s.key, s.lab);
+              const on = onFront.has(s.key);
+              return (
+                <g class:list={{ dim: !on }}>
+                  {s.runs.length > 1 && (
+                    <polyline points={s.runs.map((r) => `${X(r.cost!).toFixed(1)},${Y(r.value).toFixed(1)}`).join(' ')} stroke={c} class:list={['ln', { on }]} />
+                  )}
+                  {s.runs.map((r) => {
+                    const tip =
+                      key === 'wide'
+                        ? { 'data-tv': vFmt(r.value), 'data-tn': runName(r), 'data-ts': runNote(r) }
+                        : {};
+                    return (
+                      <g class:list={{ pt: key === 'wide' }} {...tip}>
+                        <circle cx={X(r.cost!)} cy={Y(r.value)} r={on ? 4.5 : 3.5} fill={c} class:list={{ ring: on }} />
+                        {key === 'wide' && <circle cx={X(r.cost!)} cy={Y(r.value)} r="9" class="hit" />}
+                      </g>
+                    );
+                  })}
+                </g>
+              );
+            })}
+            {d && <path d={d} class="front" />}
+            {placed.map((p) => (
+              <text x={p.x} y={p.y} class="lab" text-anchor={p.anchor}>
+                {p.text}
+              </text>
+            ))}
+          </svg>
+        );
+      })}
+    </figure>
+  ) : (
+    <figure class="ef ladder">
+      <div class="key">
+        <span class="tag">
+          <svg width="44" height="12" aria-hidden="true">
+            <line x1="5" x2="39" y1="6" y2="6" stroke="var(--ink-4)" stroke-width="2" />
+            <circle cx="5" cy="6" r="4" fill="color-mix(in oklab, var(--ink-2) 35%, var(--bg))" />
+            <circle cx="22" cy="6" r="4" fill="color-mix(in oklab, var(--ink-2) 67%, var(--bg))" />
+            <circle cx="39" cy="6" r="4" fill="var(--ink-2)" />
+          </svg>
+          Lowest effort to highest, light to dark
+        </span>
+      </div>
+      <div class="rows">
+        {ladder.map((s) => {
+          const xs = s.runs.map((r) => r.value);
+          const best = Math.max(...xs);
+          // effort labels: keep one only when it has room beside the last kept label
+          let lastPos = -100;
+          const shown = s.runs.map((r) => {
+            const p = ((r.value - l0) / (l1 - l0 || 1)) * 100;
+            const ok = Math.abs(p - lastPos) >= 7 && !!r.setting;
+            if (ok) lastPos = p;
+            return ok;
+          });
+          return (
+            <div class="row">
+              <div class="who">
+                <LabMark lab={s.lab} size={14} />
+                <span class="nm">{name(s.model)}</span>
+                {s.harness && <span class="hn">{s.harness}</span>}
+              </div>
+              <div class="plot" style={`--yl:${ladderGrid}`}>
+                <span class="bar" style={`left:${pctX(Math.min(...xs))};width:calc(${pctX(Math.max(...xs))} - ${pctX(Math.min(...xs))});background:${labColor(s.lab)}`} />
+                {s.runs.map((r, i) => (
+                  <>
+                    <span
+                      class="dot"
+                      tabindex="0"
+                      style={`left:${pctX(r.value)};background:${tint(s.lab, i, s.runs.length)}`}
+                      data-tv={vFmt(r.value)}
+                      data-tn={runName(r)}
+                      data-ts={runNote(r) || undefined}
+                    />
+                    {shown[i] && (
+                      <span class="eff" style={`left:${pctX(r.value)}`}>
+                        {r.setting!.length > 12 ? `${r.setting!.slice(0, 11)}…` : r.setting}
+                      </span>
+                    )}
+                  </>
+                ))}
+              </div>
+              <b class="num best">{vFmt(best)}</b>
+            </div>
+          );
+        })}
+        <div class="row axis" aria-hidden="true">
+          <div class="who" />
+          <div class="plot ticks">
+            {lTicks.map((v) => (
+              <span class="tk" style={`left:${pctX(v)}`}>
+                {unit === '%' ? `${v}%` : vFmt(v)}
+              </span>
+            ))}
+          </div>
+          <span />
+        </div>
+      </div>
+    </figure>
+  )
+}
+
+<style>
+  .ef {
+    margin: 0;
+  }
+  .key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    margin-bottom: 14px;
+  }
+  svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .key svg {
+    width: auto;
+  }
+  .grid {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .vgrid {
+    stroke: var(--grid);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+  .vgrid.minor {
+    opacity: 0.35;
+  }
+  .axis {
+    stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+  .tick {
+    font: 400 var(--f) / 1 var(--mono);
+    fill: var(--ink-3);
+  }
+  .axt {
+    font: 400 var(--f) / 1 var(--sans);
+    fill: var(--ink-3);
+  }
+  .ln {
+    fill: none;
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .ln.on {
+    stroke-width: 2;
+  }
+  .dim {
+    opacity: 0.4;
+  }
+  .ring {
+    stroke: var(--bg);
+    stroke-width: 2;
+  }
+  .front {
+    fill: none;
+    stroke: var(--ink-2);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+  .lab {
+    font: 500 var(--f) / 1 var(--sans);
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+  .hit {
+    fill: transparent;
+  }
+  .pt:hover .hit {
+    stroke: var(--ink);
+    stroke-width: 1.2;
+  }
+
+  /* ladder */
+  .rows {
+    display: grid;
+    gap: 2px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(150px, 260px) 1fr 64px;
+    align-items: center;
+    gap: 16px;
+  }
+  .who {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    font-size: 14px;
+  }
+  .nm {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hn {
+    color: var(--ink-3);
+    font-size: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .plot {
+    position: relative;
+    height: 40px;
+    background: var(--yl);
+  }
+  .bar {
+    position: absolute;
+    top: 25px;
+    height: 2px;
+    opacity: 0.45;
+    border-radius: 1px;
+  }
+  .dot {
+    position: absolute;
+    top: 21px;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--bg);
+    cursor: default;
+  }
+  .dot:hover,
+  .dot:focus-visible {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .eff {
+    position: absolute;
+    top: 4px;
+    transform: translateX(-50%);
+    font: 400 10.5px/1 var(--mono);
+    color: var(--ink-3);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .best {
+    font-weight: 500;
+    text-align: right;
+    font-size: 14px;
+  }
+  .axis .plot {
+    height: 22px;
+    background: none;
+    border-top: 1px solid var(--ink-4);
+  }
+  .tk {
+    position: absolute;
+    top: 6px;
+    transform: translateX(-50%);
+    font: 400 11.5px/1 var(--mono);
+    color: var(--ink-3);
+  }
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: 110px 1fr;
+      gap: 10px;
+    }
+    .best,
+    .hn,
+    .axis > span:last-child {
+      display: none;
+    }
+    .eff {
+      display: none;
+    }
+  }
+</style>

@@ -53,6 +53,10 @@ export interface Benchmark {
   scoring?: string;
   /** What the model produces: multiple-choice, short-answer, proof, code, agent-task, open-ended or prediction. */
   format?: string;
+  /** Versions of one test share a family (Terminal-Bench 1.0 to 4.0). A new version retires the one before. */
+  family?: string;
+  /** The version label within the family ("2.0", "v1.2", "2026"). */
+  version?: string;
   description?: string;
   org?: string;
   released?: string;
@@ -108,6 +112,7 @@ export interface Score {
   setting?: string | null;
   harness?: string | null;
   date?: string | null;
-  source: 'epoch' | 'card';
+  /** Who measured it: the benchmark's own leaderboard, Epoch AI, or the lab in its model card. */
+  source: 'leaderboard' | 'epoch' | 'card';
   card?: string;
 }

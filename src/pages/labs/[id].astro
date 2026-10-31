@@ -8,7 +8,7 @@ import AreaShare from '../../components/AreaShare.astro';
 import { labs, featuredModels, models, cards, eciByModel, benchById } from '../../lib/data.ts';
 import { monthYear, fullDate, yearFrac } from '../../lib/format.ts';
 import { labColor } from '../../lib/palette.ts';
-import { yearTicks } from '../../lib/scale.ts';
+import { yearTicks, yearLines } from '../../lib/scale.ts';
 
 export function getStaticPaths() {
   return labs.filter((l) => featuredModels.some((m) => m.lab === l.id)).map((l) => ({ params: { id: l.id } }));
@@ -40,6 +40,8 @@ const t0 = cs.length ? yearFrac(cs[0].date) - 0.1 : 2023;
 const t1 = cs.length ? yearFrac(cs.at(-1)!.date) + 0.1 : 2027;
 const pos = (d: string) => `${(((yearFrac(d) - t0) / (t1 - t0)) * 100).toFixed(2)}%`;
 const color = labColor(id);
+const years = yearTicks(t0, t1);
+const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
 ---
 
 <Base title={lab.name} description={`${lab.name}: its models, their scores, and what its model cards measure.`}>
@@ -90,7 +92,7 @@ const color = labColor(id);
             {rows.map(({ b, on }) => (
               <a class="mrow" href={`/benchmarks/${b.id}/`}>
                 <span class="mname">{b.name}</span>
-                <span class="mlane">
+                <span class="mlane" style={grid}>
                   {cs.map((c) => (
                     <i class:list={{ on: on.has(c.id) }} style={`left:${pos(c.date)}`} />
                   ))}
@@ -100,7 +102,7 @@ const color = labColor(id);
             <div class="mrow axis" aria-hidden="true">
               <span class="mname" />
               <span class="mlane">
-                {yearTicks(t0, t1).map((y) => (
+                {years.map((y) => (
                   <span class="yr" style={`left:${pos(`${y}-01-01`)}`}>
                     {y}
                   </span>
@@ -198,7 +200,7 @@ const color = labColor(id);
   .mlane {
     position: relative;
     height: 22px;
-    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat;
+    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat, var(--yl);
   }
   .mlane i {
     position: absolute;
@@ -222,6 +224,15 @@ const color = labColor(id);
   .axis .mlane {
     background: none;
     height: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .yr::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    height: 5px;
+    border-left: 1px solid var(--ink-4);
   }
   .yr {
     position: absolute;
