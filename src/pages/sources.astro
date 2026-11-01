@@ -15,6 +15,8 @@ interface Source {
   why: string;
   feed: string | null;
   automated: boolean;
+  /** What the job cannot read for this source, and why. */
+  manual?: string;
 }
 const sources = sourcesJson as Source[];
 const GROUPS: { kind: string; title: string; note: string }[] = [
@@ -77,8 +79,9 @@ const tools = resources.filter((r) => ['harness', 'registry', 'leaderboard', 'rl
                       {SIGNAL[s.signal]}
                     </span>
                     <span>{s.cadence}</span>
-                    {s.automated && <span class="auto">Read daily by the discovery job</span>}
+                    {s.automated ? <span class="auto">Read daily by the discovery job</span> : <span class="hand">Checked by hand</span>}
                   </div>
+                  {s.manual && <p class="manual">{s.manual}</p>}
                 </li>
               ))}
             </ul>
@@ -200,6 +203,14 @@ const tools = resources.filter((r) => ['harness', 'registry', 'leaderboard', 'rl
   }
   .auto {
     color: var(--status-good);
+  }
+  .hand {
+    color: var(--ink-2);
+  }
+  .manual {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ink-3);
   }
   .reading {
     list-style: none;

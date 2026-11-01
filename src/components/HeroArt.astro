@@ -1,0 +1,108 @@
+---
+// The drawing behind the home page title: one thin line per benchmark, its best score from 2023 to today.
+// Lines climb from the left and flatten near the top as benchmarks saturate. Colour is the benchmark's area,
+// so hovering an area chip in the hero can bring its lines forward. Drawn once at build time.
+import { benchmarks, AS_OF } from '../lib/data.ts';
+import { leaderRows } from '../lib/leaders.ts';
+import { areaOf } from '../lib/taxonomy.ts';
+
+const W = 1440;
+const H = 420;
+const FROM = Date.parse('2023-01-01');
+const TO = Date.parse(AS_OF);
+const x = (d: string) => Math.max(0, Math.min(W, ((Date.parse(d) - FROM) / (TO - FROM)) * W));
+const y = (v: number) => H - 8 - (Math.max(0, Math.min(100, v)) / 100) * (H - 24);
+
+const rows = leaderRows(
+  benchmarks.map((b) => b.id),
+  'best',
+  5000,
+);
+const bench = new Map(benchmarks.map((b) => [b.id, b]));
+const lines = rows
+  .map((r) => {
+    const steps = r.reigns.flatMap((g) => g.steps).sort((a, b) => a.date.localeCompare(b.date));
+    if (steps.length < 2) return null;
+    const end = r.replacedBy?.date && r.replacedBy.date < r.lastTested ? r.replacedBy.date : r.lastTested;
+    let d = '';
+    let px = x(steps[0].date);
+    let py = y(steps[0].value);
+    d += `M${px.toFixed(0)} ${py.toFixed(0)}`;
+    for (const s of steps.slice(1)) {
+      const nx = x(s.date);
+      const ny = y(s.value);
+      if (nx - px >= 1) d += `H${nx.toFixed(0)}`;
+      if (Math.abs(ny - py) >= 0.5) d += `V${ny.toFixed(0)}`;
+      px = nx;
+      py = ny;
+    }
+    const ex = x(end);
+    if (ex - px >= 1) d += `H${ex.toFixed(0)}`;
+    return { d, area: areaOf(bench.get(r.benchmark)?.category) };
+  })
+  .filter((l): l is { d: string; area: string } => !!l);
+---
+
+<svg class="hero-art" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="hero-fade-y" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.35" stop-color="#fff" stop-opacity="0.85"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="1"></stop>
+    </linearGradient>
+    <linearGradient id="hero-fade-x" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+      <stop offset="0.12" stop-color="#fff" stop-opacity="1"></stop>
+      <stop offset="0.88" stop-color="#fff" stop-opacity="1"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </linearGradient>
+    <mask id="hero-fade-xm" maskContentUnits="userSpaceOnUse">
+      <rect width={W} height={H} fill="url(#hero-fade-x)"></rect>
+    </mask>
+    <mask id="hero-fade" maskContentUnits="userSpaceOnUse">
+      <rect width={W} height={H} fill="url(#hero-fade-y)" mask="url(#hero-fade-xm)"></rect>
+    </mask>
+  </defs>
+  <g mask="url(#hero-fade)" fill="none" stroke-width="1.25" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+    {lines.map((l) => <path d={l.d} data-a={l.area} vector-effect="non-scaling-stroke" />)}
+  </g>
+</svg>
+
+<style>
+  .hero-art {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: max(100vw, 1100px);
+    max-width: 1680px;
+    height: 100%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-art path {
+    stroke: var(--ink-4);
+    stroke-opacity: 0.32;
+    transition:
+      stroke-opacity 140ms ease,
+      stroke 140ms ease;
+  }
+  .hero-art path[data-a='knowledge'] { stroke: var(--area-knowledge); }
+  .hero-art path[data-a='reasoning'] { stroke: var(--area-reasoning); }
+  .hero-art path[data-a='code'] { stroke: var(--area-code); }
+  .hero-art path[data-a='agents'] { stroke: var(--area-agents); }
+  .hero-art path[data-a='work'] { stroke: var(--area-work); }
+  .hero-art path[data-a='multimodal'] { stroke: var(--area-multimodal); }
+  .hero-art path[data-a='safety'] { stroke: var(--area-safety); }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-art g {
+      animation: hero-rise 1200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+</style>

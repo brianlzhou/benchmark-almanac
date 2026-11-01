@@ -1,8 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import discoveredJson from '../../data/discovered.json';
-import { benchById } from '../lib/data.ts';
-import { fullDate } from '../lib/format.ts';
+import reviewedJson from '../../data/reviewed.json';
+import { benchmarks, benchById } from '../lib/data.ts';
+import { fullDate, monthYear } from '../lib/format.ts';
+import { CATEGORY_NAMES } from '../lib/taxonomy.ts';
 
 interface Candidate {
   key: string;
@@ -21,36 +23,112 @@ interface Candidate {
   score: number;
   decision: 'catalogue' | 'watch';
 }
-const d = discoveredJson as unknown as { updated: string | null; items: Candidate[]; mentions?: { benchmark: string; source: string; url: string; date: string }[] };
-const top = d.items.filter((c) => c.decision === 'catalogue');
-const watch = d.items.filter((c) => c.decision === 'watch');
+interface Reviewed {
+  added: { id: string; date: string; via?: string }[];
+  rejected: { name: string; url?: string | null; reason: string; date: string }[];
+}
+const d = discoveredJson as unknown as { updated: string | null; items: Candidate[] };
+const rv = reviewedJson as Reviewed;
+
+// the same name key the data scripts use, so a candidate that is now catalogued or left out drops off the queue
+const key = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/\+/g, 'plus')
+    .replace(/(\d)\.0\b/g, '$1')
+    .replace(/\b(benchmark|the)\b/g, '')
+    .replace(/[^a-z0-9]/g, '');
+const known = new Set(benchmarks.flatMap((b) => [b.name, ...(b.aliases ?? [])].map(key)));
+const leftOut = new Set(rv.rejected.map((r) => key(r.name)));
+const open = d.items.filter((c) => !known.has(key(c.name)) && !leftOut.has(key(c.name)));
+const top = open.filter((c) => c.decision === 'catalogue');
+const watch = open.filter((c) => c.decision === 'watch');
 const FEED: Record<string, string> = { hf: 'Hugging Face papers', arxiv: 'arXiv' };
 const where = (c: Candidate) => [...c.curated.map((s) => s.source), ...c.registries.map((s) => s.source), ...c.feeds.map((f) => FEED[f] ?? f)];
-const mentions = (d.mentions ?? []).filter((m) => benchById.has(m.benchmark));
 const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upvotes} upvotes` : '', c.stars ? `${c.stars} stars` : ''].filter(Boolean).join('. ');
+
+// added to the almanac, newest first. A record in a family with an older member is a new version.
+const added = rv.added
+  .map((a) => ({ a, b: benchById.get(a.id) }))
+  .filter((x): x is { a: Reviewed['added'][number]; b: NonNullable<typeof x.b> } => !!x.b)
+  .sort((p, q) => q.a.date.localeCompare(p.a.date) || (q.b.released ?? '').localeCompare(p.b.released ?? '') || p.b.name.localeCompare(q.b.name));
+const olderOf = (id: string) => benchmarks.find((b) => b.successor === id);
+const newVersions = added.filter((x) => olderOf(x.b.id)).length;
+const rejected = [...rv.rejected].sort((p, q) => q.date.localeCompare(p.date) || p.name.localeCompare(q.name));
+const lastReview = added[0]?.a.date ?? rejected[0]?.date;
 ---
 
-<Base title="New benchmarks" description="Benchmarks the discovery job found this week, scored and waiting for review.">
+<Base title="New benchmarks" description="Benchmarks added to the almanac, the ones the discovery job found and is weighing, and the ones checked and left out.">
   <div class="page">
     <header class="head">
       <h1>New benchmarks</h1>
       <p class="lede">
-        A job reads paper feeds, newsletters and registries every morning. It scores each find on whether it is a benchmark at all, whether its code or data is out, who made it, and how many sources mention it.
-        Anything that scores 8 or more is ready to catalogue. Lower scores wait here for 14 days in case more sources pick them up.
+        A job reads paper feeds, newsletters, registries and leaderboards every morning and scores each find on whether it is a benchmark at all, whether its code or data is out, who made it, and how many sources mention it.
+        A person or an agent then checks each find at its source and either adds it to the almanac or leaves it out, with the reason.
       </p>
       <div class="facts">
-        <span><b>{top.length}</b> ready to catalogue</span>
-        <span><b>{watch.length}</b> on the watch list</span>
+        <span><b>{added.length}</b> added{lastReview && ` since ${fullDate(added.at(-1)?.a.date ?? lastReview)}`}</span>
+        {newVersions > 0 && <span><b>{newVersions}</b> of them new versions</span>}
+        <span><b>{top.length + watch.length}</b> waiting</span>
+        <span><b>{rejected.length}</b> left out</span>
         {d.updated && <span>Checked {fullDate(d.updated)}</span>}
         <a href="/sources/">The sources it reads</a>
       </div>
     </header>
 
     {
+      added.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Added to the almanac</h2>
+            <p>Each was checked at its maker's own page. A new version also shows the record it replaces.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="t added">
+              <thead>
+                <tr>
+                  <th>Benchmark</th>
+                  <th>Area</th>
+                  <th>Made by</th>
+                  <th class="nowrap">Released</th>
+                  <th class="nowrap">Added</th>
+                </tr>
+              </thead>
+              <tbody>
+                {added.map(({ a, b }) => {
+                  const old = olderOf(b.id);
+                  return (
+                    <tr>
+                      <td class="an">
+                        <a href={`/benchmarks/${b.id}/`}>{b.name}</a>
+                        {old && (
+                          <span class="ver">
+                            new version of <a href={`/benchmarks/${old.id}/`}>{old.name}</a>
+                          </span>
+                        )}
+                        {b.description && <p class="desc">{b.description}</p>}
+                      </td>
+                      <td class="muted">{CATEGORY_NAMES[b.category ?? ''] ?? ''}</td>
+                      <td class="muted">{b.org}</td>
+                      <td class="muted num nowrap">{monthYear(b.released)}</td>
+                      <td class="muted num nowrap">{fullDate(a.date)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+
+    {
       top.length > 0 && (
         <section>
           <div class="sh">
             <h2>Ready to catalogue</h2>
+            <p>Finds that scored 8 or more. Each waits for a check at its source.</p>
           </div>
           <ol class="cands">
             {top.map((c) => (
@@ -72,32 +150,11 @@ const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upv
     }
 
     {
-      mentions.length > 0 && (
-        <section>
-          <div class="sh">
-            <h2>Catalogued benchmarks in the news</h2>
-          </div>
-          <ul class="ment">
-            {mentions.map((m) => (
-              <li>
-                <a href={`/benchmarks/${m.benchmark}/`}>{benchById.get(m.benchmark)?.name}</a>
-                <span class="muted">
-                  {' '}
-                  in <a href={m.url}>{m.source}</a>, {fullDate(m.date)}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    {
       watch.length > 0 && (
         <section>
           <div class="sh">
             <h2>Watch list</h2>
-            <p>Each needs one more signal, such as a second source, released code, or a mention in a newsletter.</p>
+            <p>Each needs one more signal, such as a second source, released code, or a mention in a newsletter. Lower scores wait here for 14 days.</p>
           </div>
           <div class="table-wrap">
             <table class="t">
@@ -116,6 +173,37 @@ const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upv
               </tbody>
             </table>
           </div>
+        </section>
+      )
+    }
+
+    {
+      rejected.length > 0 && (
+        <section>
+          <details class="left">
+            <summary>
+              <span class="sh">
+                <h2>Checked and left out</h2>
+                <p>{rejected.length} finds that are not benchmarks, are too narrow, or have no users yet. Each line gives the reason.</p>
+              </span>
+            </summary>
+            <div class="table-wrap">
+              <table class="t">
+                <thead>
+                  <tr><th>Name</th><th>Why it was left out</th><th class="nowrap">Checked</th></tr>
+                </thead>
+                <tbody>
+                  {rejected.map((r) => (
+                    <tr>
+                      <td class="rn">{r.url ? <a href={r.url}>{r.name}</a> : r.name}</td>
+                      <td class="muted">{r.reason}</td>
+                      <td class="muted num nowrap">{fullDate(r.date)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
         </section>
       )
     }
@@ -166,14 +254,76 @@ const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upv
     display: block;
     margin-top: 2px;
   }
-  .ment {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 10px;
-  }
   .nowrap {
     white-space: nowrap;
+  }
+  .an {
+    min-width: 260px;
+  }
+  .an > a {
+    font-weight: 500;
+  }
+  .ver {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink-2);
+    font-size: 12.5px;
+  }
+  .ver a {
+    color: inherit;
+  }
+  .desc {
+    margin-top: 4px;
+    max-width: 62ch;
+    color: var(--ink-3);
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  .rn {
+    min-width: 180px;
+  }
+  .left summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .left summary::-webkit-details-marker {
+    display: none;
+  }
+  .left summary h2::after {
+    content: '';
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-left: 14px;
+    border-right: 1.5px solid var(--ink-3);
+    border-bottom: 1.5px solid var(--ink-3);
+    transform: translateY(-5px) rotate(45deg);
+    transition: transform 140ms ease;
+  }
+  .left[open] summary h2::after {
+    transform: translateY(-1px) rotate(225deg);
+  }
+  .left summary .sh {
+    display: block;
+  }
+  @media (max-width: 900px) {
+    .added th:nth-child(2),
+    .added td:nth-child(2),
+    .added th:nth-child(3),
+    .added td:nth-child(3) {
+      display: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .added th:nth-child(4),
+    .added td:nth-child(4) {
+      display: none;
+    }
+    .an {
+      min-width: 0;
+    }
   }
 </style>
