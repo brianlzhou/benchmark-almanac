@@ -1,4 +1,4 @@
-// Shared parts of the discovery job: the run window, the names already catalogued, Stage A and Stage B,
+// Shared parts of the discovery job: the run window, the names already cataloged, Stage A and Stage B,
 // the review store, and the reader handle that each source runs with.
 import { existsSync } from 'node:fs';
 import { dataPath, readJson, key, today, daysAgo } from '../util.ts';
@@ -30,14 +30,17 @@ export interface Candidate {
   general: boolean;
   niche: boolean;
   score: number;
-  decision: 'catalogue' | 'watch';
+  decision: 'catalog' | 'watch';
+  /** A cataloged benchmark with the same name that is a different test (Ai2's StateBench, Microsoft's STATE-Bench). */
+  sameNameAs?: string;
 }
 export interface Store {
   updated: string | null;
   items: Candidate[];
   seen?: Record<string, string[]>;
 }
-export type Find = Partial<Candidate> & { key: string; name: string; title: string; url: string };
+/** `introduced` marks a find whose source introduces it: the paper's abstract or the launch post names it as its own. */
+export type Find = Partial<Candidate> & { key: string; name: string; title: string; url: string; introduced?: boolean };
 export interface How {
   feed?: string;
   curated?: Source;
@@ -45,9 +48,84 @@ export interface How {
 }
 
 // ---- the registry, for telling new from known ----------------------------------------------------
-const registry = readJson<{ id: string; name: string; aliases?: string[] }[]>(dataPath('benchmarks.json'));
+const registry = readJson<{ id: string; name: string; org?: string; aliases?: string[]; links?: Record<string, string> }[]>(dataPath('benchmarks.json'));
+const registryById = new Map(registry.map((b) => [b.id, b]));
 const known = new Map<string, string>();
-for (const b of registry) for (const n of [b.name, ...(b.aliases ?? [])]) if (key(n).length >= 3) known.set(key(n), b.id);
+// arXiv id -> registry id, so a find listed under its paper title still meets the benchmark it introduced
+const knownPapers = new Map<string, string>();
+/** The arXiv id in an arXiv or Hugging Face papers link. */
+export const arxivId = (url?: string) => url?.match(/(?:arxiv\.org\/(?:abs|pdf|html)|huggingface\.co\/papers)\/(\d{4}\.\d{4,5})/)?.[1];
+// every record with a name, for names two records share (Ai2's StateBench, Microsoft's STATE-Bench)
+const knownAll = new Map<string, string[]>();
+for (const b of registry) {
+  for (const n of [b.name, ...(b.aliases ?? [])])
+    if (key(n).length >= 3) {
+      known.set(key(n), b.id);
+      if (!knownAll.get(key(n))?.includes(b.id)) knownAll.set(key(n), [...(knownAll.get(key(n)) ?? []), b.id]);
+    }
+  const paper = arxivId(b.links?.paper);
+  if (paper && !knownPapers.has(paper)) knownPapers.set(paper, b.id);
+}
+// finds someone already checked and left out (data/reviewed.json, shown on the New page) do not come back to the queue.
+// A left-out name often carries a gloss, "BedBench (Where Do Vision Language Models Fail at 3D Reasoning?)", or lists
+// several names, "Ada-LEval, CIBench (OpenCompass)": each name and a paper title in the parentheses count on their own.
+const reviewedPath = dataPath('reviewed.json');
+if (existsSync(reviewedPath)) {
+  const reviewed = readJson<{ rejected?: { name: string; url?: string }[] }>(reviewedPath);
+  for (const r of reviewed.rejected ?? []) {
+    const m = r.name.match(/^(.*?)\s*\((.+)\)\s*$/);
+    const outer = m ? m[1] : r.name;
+    const names = [r.name, outer, ...(outer.includes(',') ? outer.split(/\s*,\s*/) : [])];
+    // a short gloss is usually an organization ("OpenCompass"), which must not block that name; a long one is a title
+    if (m && m[2].split(/\s+/).length >= 4) names.push(m[2]);
+    for (const n of names) if (key(n).length >= 3 && !known.has(key(n))) known.set(key(n), `left-out:${key(r.name)}`);
+    const paper = arxivId(r.url);
+    if (paper && !knownPapers.has(paper)) knownPapers.set(paper, `left-out:${key(r.name)}`);
+  }
+}
+const repoKey = (u?: string) => u?.match(/github\.com\/([\w.-]+\/[\w.-]+)/i)?.[1].toLowerCase().replace(/\.git$/, '');
+// one maker, several spellings in the catalog's org field
+const ORG_SPELLINGS: [RegExp, string][] = [
+  [/allen ?institute for ai|allenai/gi, 'ai2'],
+  [/google deepmind|deepmind/gi, 'google'],
+  [/meta ai|facebook ai research|facebook/gi, 'meta'],
+];
+const orgKey = (s?: string) => key(ORG_SPELLINGS.reduce((t, [re, v]) => t.replace(re, v), s ?? '')).replace(/^(the|team)/, '');
+/**
+ * Whether a find that introduces its own benchmark is a different test from the cataloged record with the same
+ * name: its paper, repository or organization differs. Ai2's StateBench (2026) is not Microsoft's STATE-Bench.
+ * A find that only mentions a name never counts, since mentions carry no paper or maker of their own.
+ */
+function otherWithSameName(c: { introduced?: boolean; arxiv?: string; repo?: string; org?: string }, id: string): boolean {
+  const b = registryById.get(id);
+  if (!b || !c.introduced) return false;
+  if (c.arxiv && c.arxiv !== arxivId(b.links?.paper)) return true;
+  const mine = repoKey(c.repo);
+  const theirs = repoKey(b.links?.repo);
+  if (mine && theirs && mine !== theirs) return true;
+  const [o1, o2] = [orgKey(c.org), orgKey(b.org)];
+  return !!(o1 && o2 && !o1.includes(o2) && !o2.includes(o1));
+}
+type Lookup = { name: string; url?: string; arxiv?: string; repo?: string; org?: string; introduced?: boolean; sameNameAs?: string };
+/** Every record (or left-out mark) a find's name matches. */
+function namedIds(name: string): string[] {
+  const id = knownId(name);
+  if (!id) return [];
+  const all = spellings(name).flatMap((sp) => knownAll.get(key(sp)) ?? []);
+  return [...new Set([id, ...all])];
+}
+/** The registry id (or left-out mark) for a find, by the paper behind it or by its name. */
+export function knownFind(c: Lookup): string | undefined {
+  const paper = knownPapers.get(c.arxiv ?? arxivId(c.url) ?? '');
+  if (paper) return paper;
+  // known when any record with the name is this test: a left-out mark, or a record it does not differ from
+  return namedIds(c.name).find((id) => id.startsWith('left-out:') || (c.sameNameAs !== id && !otherWithSameName(c, id)));
+}
+/** The cataloged record a find shares its name with, when the find is a different test. */
+export function sameNameAs(c: Lookup): string | undefined {
+  if (knownFind(c)) return undefined;
+  return namedIds(c.name).find((id) => !id.startsWith('left-out:'));
+}
 
 /** Spellings to try against the registry: "PostTrain Bench v1.1" is PostTrainBench 1.1, "LOCA-Bench 256K" is LOCA-Bench. */
 export function spellings(name: string): string[] {
@@ -59,7 +137,7 @@ export function spellings(name: string): string[] {
   const original = minor.replace(/[\s-]*(?:1|1\.0)$/, '');
   return [...new Set([name, noV, noSetting, minor, original].filter((s) => key(s).length >= 3))];
 }
-/** The registry id for a name, if the almanac already catalogues it. */
+/** The registry id for a name, if the almanac already catalogs it. */
 export function knownId(name: string): string | undefined {
   for (const s of spellings(name)) {
     const id = known.get(key(s));
@@ -76,7 +154,7 @@ const INTRO =
   /\b(we|this (?:paper|work)) (?:also )?(?:introduce|present|propose|release|construct|build|curate|develop|create)s?\b[^.]{0,160}?\b(benchmark|evaluation suite|test ?bed|leaderboard|arena|eval(?:uation)? (?:set|framework|harness)|dataset)/i;
 const METHOD = /\b(we propose a (?:novel )?(?:method|framework|approach|model|algorithm)|achiev\w+ state[- ]of[- ]the[- ]art|outperform\w*)\b/i;
 const STUDY = /\b(we benchmark \d+|benchmarking study|empirical (?:benchmark )?study)\b/i;
-export const GENERAL = /\b(LLMs?|language models?|agents?|agentic|VLMs?|MLLMs?|multimodal|foundation models?|coding|computer[- ]use|reasoning models?|frontier models?)\b/i;
+export const GENERAL = /\b(LLMs?|language models?|agents?|agentic|VLMs?|MLLMs?|multimodal|foundation models?|coding|computer[- ]use|reasoning models?|frontier models?|AI[- ](?:systems?|models?|agents?))\b/i;
 export const NICHE = /\b(crowd counting|defect detection|pathology|fusion|hardware|FPGA|GPU kernel speed|segmentation of|remote sensing|shampoo|traffic sign)\b/i;
 export const KNOWN_ORGS =
   /openai|anthropic|google|deepmind|meta|facebook|microsoft|nvidia|apple|amazon|alibaba|qwen|deepseek|moonshot|zhipu|z-ai|thudm|tencent|bytedance|salesforce|scale|epoch|metr|vals|lmarena|andon|aisi|allenai|ai2|huggingface|stanford|berkeley|princeton|mit|cmu|harvard|oxford|cambridge|tsinghua|peking|ucl|eth/i;
@@ -103,11 +181,56 @@ export function phraseNames(text: string): string[] {
   return [...out];
 }
 
-/** A paper's benchmark name: the part before the colon when it is short, else a Bench-style name, else the title. */
-export function paperName(title: string): string {
+// "we construct StateBench, a 4-tier long-horizon state-tracking benchmark": the name right after the verb,
+// with a benchmark word later in the same sentence
+const INTRO_NAME =
+  /\b(?:[Ww]e|[Tt]his (?:paper|work))\s+(?:also\s+)?(?:introduce|present|propose|release|construct|build|curate|develop|create)s?\s+(?:the\s+|our\s+)?([A-Z][\w.+-]{2,30}(?:[ ][A-Z0-9][\w.+-]*){0,2})\s*(?:[,(:—–]|\s-\s)[^.]{0,120}?\b(?:benchmark|evaluation suite|test ?bed|leaderboard|arena|dataset|eval)/g;
+/** The benchmark an abstract introduces by name, if it names one. */
+export function introName(abstract: string): string | undefined {
+  for (const m of abstract.matchAll(INTRO_NAME)) if (!BARE.test(m[1])) return m[1];
+  return undefined;
+}
+
+/**
+ * A paper's benchmark name: the part before the colon when it is short, else a Bench-style name in the title,
+ * else the name its abstract introduces, else the title.
+ */
+export function paperName(title: string, abstract = ''): string {
   const head = title.split(':')[0].trim();
   if (head !== title && head.length <= 40 && head.split(/\s+/).length <= 4) return head;
-  return names(title)[0] ?? title;
+  return names(title)[0] ?? introName(abstract) ?? title;
+}
+
+// ---- launch posts ----------------------------------------------------------------------------------
+const VERB = String.raw`(?:[Ii]ntroduc|[Rr]eleas|[Ll]aunch|[Aa]nnounc|[Uu]nveil|[Oo]pen[- ][Ss]ourc|[Dd]ebut)\w*`;
+const LAUNCH_NAME = String.raw`([A-Z][\w.+-]{1,30}(?:[ ][A-Z0-9][\w.+-]*){0,2}|[a-z][a-z0-9]*(?:-[a-z0-9]+)*-(?:bench|eval)s?)`;
+const LAUNCH = new RegExp(String.raw`\b${VERB}\s+(?:the\s+|our\s+)?${LAUNCH_NAME}(?![\w.+-])(?:\s+v?\d[\w.]*)?`, 'g');
+// what follows a name that does not say benchmark itself: "GDPx, an agentic capability benchmark", "LifeVal, new benchmark"
+const APPOSITIVE = /^\s*(?:,|:|—|–|\(|is)?\s*(?:(?:a|an|our|the)\s+)?(?:new\s+)?(?:(?!which\b|that\b|who\b|and\b|but\b|to\b|on\b|in\b)[\w-]+\s+){0,4}?(?:benchmark|eval|evaluation|leaderboard)s?\b/i;
+const NEW_NAME = /\b(?:our|a|the|their|its)\s+new\s+([A-Z][\w.+-]{1,30})\s+(?:benchmark|eval|evaluation|leaderboard|suite)\b/g;
+const benchLike = (n: string) => names(n).length > 0 || /-(?:bench|eval)s?$/.test(n);
+const NOT_LAUNCHES = /^(?:AI|LLMs?|GPT|Claude|Gemini|Today|Our|This|The|New|We)$/;
+
+/**
+ * The benchmarks a launch post or an announcement introduces: "Today we're releasing GDPx, a benchmark for...",
+ * "We're releasing StateBench so researchers can...", "OpenAI unveils LifeVal, new benchmark...". A post title
+ * like "GDPx: Measuring Frontier Model Capabilities" counts when the text calls the name a benchmark.
+ */
+export function launchNames(text: string, title = ''): string[] {
+  const out = new Set<string>();
+  const head = title.split(/\s*[:—–|]\s*/)[0].trim();
+  if (head && head !== title.trim() && head.length <= 40 && head.split(/\s+/).length <= 4) {
+    const esc = head.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (benchLike(head) || new RegExp(String.raw`\b${esc}\b\s*(?:is|,)\s+(?:a|an|our)\s+(?:new\s+)?(?:[\w-]+\s+){0,4}?(?:benchmark|eval|evaluation|leaderboard)`, 'i').test(text))
+      out.add(head);
+  }
+  for (const m of text.matchAll(LAUNCH)) {
+    const n = m[1].trim();
+    if (NOT_LAUNCHES.test(n) || BARE.test(n)) continue;
+    if (benchLike(n) || APPOSITIVE.test(text.slice((m.index ?? 0) + m[0].length, (m.index ?? 0) + m[0].length + 90))) out.add(n);
+  }
+  for (const m of text.matchAll(NEW_NAME)) if (!NOT_LAUNCHES.test(m[1])) out.add(m[1]);
+  return [...out];
 }
 
 export function stageA(title: string, abstract: string, hasArtifact: boolean): number {
@@ -164,15 +287,19 @@ for (const c of store.items) {
   if (!byKey.has(key(c.name))) byKey.set(key(c.name), c);
 }
 
-/** Adds a find to the queue, or more evidence to a find already there. Names already catalogued are skipped. */
+/** Adds a find to the queue, or more evidence to a find already there. Names already cataloged are skipped. */
 function upsert(c: Find, how: How): { known: string } | { candidate: Candidate } {
-  const k = knownId(c.name);
+  const k = knownFind(c);
   if (k) return { known: k };
+  const twin = sameNameAs(c);
   const cur =
     byKey.get(c.key) ??
     byKey.get(key(c.name)) ??
     ({ key: c.key, name: c.name, title: c.title, url: c.url, first: TODAY, last: TODAY, feeds: [], curated: [], registries: [], stageA: 0, general: false, niche: false, score: 0, decision: 'watch' } as Candidate);
   cur.last = TODAY;
+  // a find first listed under its paper title takes the name a later source gives it
+  if (cur.name === cur.title && c.name !== c.title && c.name !== cur.name) cur.name = c.name;
+  if (twin) cur.sameNameAs = twin;
   if (c.org) cur.org = c.org;
   if (c.repo) cur.repo = c.repo;
   if (c.arxiv) cur.arxiv = c.arxiv;
@@ -198,6 +325,8 @@ export interface FetchOptions {
   /** Milliseconds for one attempt. */
   timeout?: number;
   tries?: number;
+  /** Milliseconds before the first retry. Later retries wait longer. */
+  wait?: number;
 }
 
 /** What one source reported in this run. */
@@ -236,7 +365,7 @@ export function makeReader(id: string, signal: AbortSignal) {
       } catch (e) {
         last = e;
         if ((e as { fatal?: boolean }).fatal || signal.aborted) break;
-        await new Promise((r) => setTimeout(r, 1500 * (i + 1)));
+        await new Promise((r) => setTimeout(r, (o.wait ?? 1500) * (i + 1)));
       }
     }
     throw last ?? new Error(`stopped before ${url}`);
@@ -303,8 +432,6 @@ export const isoDate = (s: string | undefined | null): string => {
   const d = new Date(s ?? '');
   return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
 };
-export const inWindow = (date: string) => date >= FROM && date <= TODAY;
 /** "agent_bash_reliability" to "Agent Bash Reliability". */
 export const humanize = (slug: string) => slug.replace(/[_]+/g, ' ').replace(/\b[a-z]/g, (ch) => ch.toUpperCase());
-export const arxivId = (url: string) => url.match(/arxiv\.org\/(?:abs|pdf)\/(\d{4}\.\d{4,5})/)?.[1];
 export const githubRepo = (url: string) => url.match(/^https?:\/\/github\.com\/[\w.-]+\/[\w.-]+/)?.[0].replace(/\.git$/, '');
