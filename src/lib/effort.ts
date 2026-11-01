@@ -26,7 +26,10 @@ export interface EffortView {
   mode: 'cost' | 'ladder';
   unit: string;
   series: Series[];
+  /** The runs the chart draws: in cost mode, those with a cost. */
   runs: Run[];
+  /** Every run on the board, for the table. */
+  all: Run[];
   /** Cost mode: the runs no other run beats on both score and cost, cheapest first. */
   frontier: Run[];
   /** Cost mode: the best run, and the cheapest run within `near` points of it. */
@@ -97,6 +100,7 @@ export function effortView(benchmark: string): EffortView | null {
       unit,
       series: series.filter((s) => s.runs.length),
       runs: costed,
+      all: runs,
       frontier,
       top,
       cheap: cheap && cheap !== top && cheap.cost! * 2 <= top.cost! ? cheap : undefined,
@@ -113,7 +117,7 @@ export function effortView(benchmark: string): EffortView | null {
     .map((s) => sign * (s.runs.at(-1)!.value - s.runs[0].value))
     .sort((a, c) => a - c);
   const gain = gains.length ? gains[Math.floor(gains.length / 2)] : undefined;
-  return { mode, unit, series: multi, runs, frontier: [], near: 0, gain };
+  return { mode, unit, series: multi, runs, all: runs, frontier: [], near: 0, gain };
 }
 
 /** "$0.44", "$4.43", "$17", "$1,240" */

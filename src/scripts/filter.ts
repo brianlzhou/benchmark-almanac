@@ -1,13 +1,21 @@
 // Filters a table in place. Controls carry data-q (text), and any other data-<key> select matches the
 // row attribute of the same name. The URL keeps the filters, so a filtered view can be shared.
+//
+// Rows can nest one level: a row with data-group="k" owns the rows with data-parent="k" that follow it,
+// and a button with data-toggle="k" opens and closes them. The filters test only the parent rows. A child
+// shows when its parent shows and is open, or when the search text matches the child itself.
 
 export function wireFilter(name: string) {
   const box = document.querySelector<HTMLElement>(`[data-filter="${name}"]`);
   const table = box?.parentElement?.querySelector<HTMLTableElement>('[data-rows]');
   if (!box || !table) return;
-  const rows = [...table.tBodies[0].rows];
+  const all = [...table.tBodies[0].rows];
+  const rows = all.filter((r) => !r.dataset.parent);
+  const kids = all.filter((r) => r.dataset.parent);
+  const parentOf = new Map(kids.map((k) => [k, rows.find((r) => r.dataset.group === k.dataset.parent)]));
+  const toggles = new Map([...table.querySelectorAll<HTMLButtonElement>('[data-toggle]')].map((b) => [b.dataset.toggle!, b]));
   // what a search matches: the row's visible text plus any hidden aliases
-  const haystack = new Map(rows.map((r) => [r, `${r.textContent ?? ''} ${r.dataset.text ?? ''}`.toLowerCase()]));
+  const haystack = new Map(all.map((r) => [r, `${r.textContent ?? ''} ${r.dataset.text ?? ''}`.toLowerCase()]));
   const q = box.querySelector<HTMLInputElement>('[data-q]');
   const selects = [...box.querySelectorAll<HTMLSelectElement>('select')];
   // radio groups carry data-key, the row attribute they match
@@ -48,7 +56,12 @@ export function wireFilter(name: string) {
       r.hidden = !ok;
       if (ok) shown++;
     }
-    if (count) count.textContent = `${shown.toLocaleString('en-US')} ${noun}`;
+    for (const k of kids) {
+      const p = parentOf.get(k);
+      const open = toggles.get(k.dataset.parent!)?.getAttribute('aria-expanded') === 'true';
+      k.hidden = !p || p.hidden || !(open || (!!text && haystack.get(k)!.includes(text)));
+    }
+    if (count) count.textContent = `${shown.toLocaleString("en-US")} ${shown === 1 ? noun.replace(/s$/, "") : noun}`;
     const p = new URLSearchParams();
     if (text) p.set('q', text);
     for (const s of selects) if (s.value) p.set(keyOf(s), s.value);
@@ -56,6 +69,11 @@ export function wireFilter(name: string) {
     const qs = p.toString();
     history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
   }
+  for (const b of toggles.values())
+    b.addEventListener('click', () => {
+      b.setAttribute('aria-expanded', String(b.getAttribute('aria-expanded') !== 'true'));
+      apply();
+    });
   q?.addEventListener('input', apply);
   for (const s of selects) s.addEventListener('change', apply);
   for (const r of radios) r.addEventListener('change', apply);

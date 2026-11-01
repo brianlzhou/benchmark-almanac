@@ -10,7 +10,9 @@ import { ROOT, dataPath, readJson, today } from './lib/util.ts';
 import { makeResolver } from './lib/models.ts';
 import type { Leaderboard } from './leaderboards/types.ts';
 
-type Row = [string, string, string | null, string | null, number, string | null];
+// benchmark, model, setting, harness, score, date, cost (US dollars per task), tokens (output tokens per task)
+type Row = [string, string, string | null, string | null, number, string | null, number | null, number | null];
+const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'cost', 'tokens'];
 interface Store {
   retrieved: string | null;
   boards: Record<string, { url: string; feed: string; terms: string; retrieved: string; rows: number; unmatched: string[] }>;
@@ -28,7 +30,7 @@ const dry = process.argv.includes('--dry');
 const outPath = dataPath('scores', 'leaderboards.json');
 const store: Store = existsSync(outPath)
   ? readJson<Store>(outPath)
-  : { retrieved: null, boards: {}, columns: ['benchmark', 'model', 'setting', 'harness', 'score', 'date'], rows: [] };
+  : { retrieved: null, boards: {}, columns: COLUMNS, rows: [] };
 const benchmarks = new Set(readJson<{ id: string }[]>(dataPath('benchmarks.json')).map((b) => b.id));
 const released = new Map(readJson<{ id: string; released?: string }[]>(dataPath('models.json')).map((m) => [m.id, m.released]));
 
@@ -57,7 +59,9 @@ for (const f of files) {
       }
       // place the score at the model's release, like Epoch, so charts over time line up
       const date = released.get(hit.id) ?? r.date ?? null;
-      rows.push([board.benchmark, hit.id, r.setting ?? hit.setting ?? null, r.harness ?? null, Math.round(r.score * 100) / 100, date]);
+      const cost = typeof r.cost === 'number' && r.cost > 0 ? Number(r.cost.toPrecision(4)) : null;
+      const tokens = typeof r.tokens === 'number' && r.tokens > 0 ? Math.round(r.tokens) : null;
+      rows.push([board.benchmark, hit.id, r.setting ?? hit.setting ?? null, r.harness ?? null, Math.round(r.score * 100) / 100, date, cost, tokens]);
     }
     console.log(`  ${board.benchmark}: ${raw.length} rows, ${rows.length} matched${unmatched.size ? `, unmatched: ${[...unmatched].slice(0, 12).join(' | ')}` : ''}`);
     if (dry) {
@@ -75,6 +79,9 @@ for (const f of files) {
 
 if (!dry) {
   store.retrieved = today();
+  store.columns = COLUMNS;
+  // rows kept from a board that failed may predate the cost and tokens columns
+  store.rows = store.rows.map((r) => [...r.slice(0, 6), r[6] ?? null, r[7] ?? null] as Row);
   store.rows.sort((a, b) => a[0].localeCompare(b[0]) || (a[5] ?? '').localeCompare(b[5] ?? '') || a[1].localeCompare(b[1]));
   const boards = Object.fromEntries(Object.entries(store.boards).sort(([a], [b]) => a.localeCompare(b)));
   writeFileSync(

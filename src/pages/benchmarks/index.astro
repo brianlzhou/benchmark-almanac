@@ -5,7 +5,7 @@ import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import { allSummaries, benchmarks, modelById } from '../../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf } from '../../lib/taxonomy.ts';
 import { score as fmt, monthYear } from '../../lib/format.ts';
-import { familyOf } from '../../lib/reigns.ts';
+import { familyOf, nextVersion } from '../../lib/reigns.ts';
 
 // scoring methods, grouped the way people ask: fixed answers, graders, arenas, real events
 const METHOD_GROUP: Record<string, string> = {
@@ -57,11 +57,14 @@ const codeOptions: Option[] = [
   { value: '', label: 'With or without code' },
   { value: 'yes', label: 'Public code', count: inRows((s) => !!s.b.links?.repo) },
 ];
+const byId = new Map(all.map((s) => [s.b.id, s]));
+// a family's earlier versions, newest first, so reading down goes back in time
 const earlier = (id: string) =>
   familyOf(id)
     .slice(0, -1)
-    .map((v) => all.find((s) => s.b.id === v)!.b)
+    .map((v) => byId.get(v)!)
     .reverse();
+const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
 ---
 
 <Base title="Benchmarks" description="Every benchmark in the almanac: what it tests, who made it, its status in lab model cards, and its best score.">
@@ -135,51 +138,89 @@ const earlier = (id: string) =>
               const top = s.best ? modelById.get(s.best.model) : undefined;
               const prev = s.b.family ? earlier(s.b.id) : [];
               const sub = s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory) : undefined;
+              const kind = sub?.name ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
+              const group = prev.length ? s.b.family : undefined;
               return (
-                <tr
-                  data-area={`a:${areaOf(s.b.category)} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
-                  data-level={s.b.level ?? ''}
-                  data-method={METHOD_GROUP[s.b.scoring ?? ''] ?? ''}
-                  data-status={s.status.replace(/ /g, '-')}
-                  data-code={s.b.links?.repo ? 'yes' : ''}
-                  data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.name)].join(' ').toLowerCase() || undefined}
-                >
-                  <td class="nm">
-                    <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
-                    {s.b.description && <span class="desc">{s.b.description}</span>}
-                    {prev.length > 0 && (
-                      <span class="vers">
-                        Earlier versions:{' '}
-                        {prev.map((p, i) => (
-                          <>
-                            <a href={`/benchmarks/${p.id}/`}>{p.version ? (/^\d+$/.test(p.version) ? `v${p.version}` : p.version) : p.name}</a>
-                            {i < prev.length - 1 ? ', ' : ''}
-                          </>
-                        ))}
+                <>
+                  <tr
+                    class:list={{ fam: !!group }}
+                    data-group={group}
+                    data-area={`a:${areaOf(s.b.category)} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
+                    data-level={s.b.level ?? ''}
+                    data-method={METHOD_GROUP[s.b.scoring ?? ''] ?? ''}
+                    data-status={s.status.replace(/ /g, '-')}
+                    data-code={s.b.links?.repo ? 'yes' : ''}
+                    data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name)].join(' ').toLowerCase() || undefined}
+                  >
+                    <td class="nm">
+                      <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                      {group && s.b.version && !s.b.name.includes(s.b.version) && <span class="vtag">{vlabel(s.b.version)}</span>}
+                      {s.b.description && <span class="desc">{s.b.description}</span>}
+                      {group && (
+                        <button type="button" class="vt" data-toggle={group} aria-expanded="false" aria-controls={prev.map((p) => `v-${p.b.id}`).join(' ')}>
+                          <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                          {prev.length} earlier {prev.length === 1 ? 'version' : 'versions'}
+                          <span class="vlist">{prev.map((p) => vlabel(p.b.version ?? p.b.name)).join(', ')}</span>
+                        </button>
+                      )}
+                    </td>
+                    <td class="org">{s.b.org}</td>
+                    <td class="muted kind">{kind}</td>
+                    <td class="muted nowrap">{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
+                    <td class="nowrap">
+                      <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                        <span class="dot" />
+                        <span class="sl">{STATUS[s.status]}</span>
                       </span>
-                    )}
-                  </td>
-                  <td class="org">{s.b.org}</td>
-                  <td class="muted kind">{sub?.name ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other'}</td>
-                  <td class="muted nowrap">{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
-                  <td class="nowrap">
-                    <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
-                      <span class="dot" />
-                      <span class="sl">{STATUS[s.status]}</span>
-                    </span>
-                  </td>
-                  <td class="best-c">
-                    {s.best && top && (
-                      <span class="best">
-                        <LabMark lab={top.lab} size={14} />
-                        <span class="bm">{top.name}</span>
-                        <b class="num">{fmt(s.best.value, s.b.unit ?? '%')}</b>
-                      </span>
-                    )}
-                  </td>
-                  <td class="r">{s.cites.length || ''}</td>
-                  <td class="muted num nowrap">{monthYear(s.b.released)}</td>
-                </tr>
+                    </td>
+                    <td class="best-c">
+                      {s.best && top && (
+                        <span class="best">
+                          <LabMark lab={top.lab} size={14} />
+                          <span class="bm">{top.name}</span>
+                          <b class="num">{fmt(s.best.value, s.b.unit ?? '%')}</b>
+                        </span>
+                      )}
+                    </td>
+                    <td class="r">{s.cites.length || ''}</td>
+                    <td class="muted num nowrap">{monthYear(s.b.released)}</td>
+                  </tr>
+                  {prev.map((p, i) => {
+                    const ptop = p.best ? modelById.get(p.best.model) : undefined;
+                    const next = nextVersion(p.b.id);
+                    const pkind = (p.b.subcategory ? SUB_BY_ID.get(p.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[p.b.category ?? 'other'] ?? 'Other';
+                    return (
+                      <tr class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} hidden>
+                        <td class="nm">
+                          <span class="tree" aria-hidden="true" />
+                          <a href={`/benchmarks/${p.b.id}/`}>{p.b.name}</a>
+                          {p.b.version && !p.b.name.includes(p.b.version) && <span class="vtag">{vlabel(p.b.version)}</span>}
+                          {next && <span class="desc">Replaced in {monthYear(next.date)}</span>}
+                        </td>
+                        <td class="org">{p.b.org !== s.b.org ? p.b.org : ''}</td>
+                        <td class="muted kind">{pkind !== kind ? pkind : ''}</td>
+                        <td class="muted nowrap">{p.b.level && p.b.level !== s.b.level ? LEVEL_BY_ID.get(p.b.level)?.name : ''}</td>
+                        <td class="nowrap">
+                          <span class:list={['tag', `status-${p.status.replace(/ /g, '-')}`]}>
+                            <span class="dot" />
+                            <span class="sl">{STATUS[p.status]}</span>
+                          </span>
+                        </td>
+                        <td class="best-c">
+                          {p.best && ptop && (
+                            <span class="best">
+                              <LabMark lab={ptop.lab} size={14} />
+                              <span class="bm">{ptop.name}</span>
+                              <b class="num">{fmt(p.best.value, p.b.unit ?? '%')}</b>
+                            </span>
+                          )}
+                        </td>
+                        <td class="r">{p.cites.length || ''}</td>
+                        <td class="muted num nowrap">{monthYear(p.b.released)}</td>
+                      </tr>
+                    );
+                  })}
+                </>
               );
             })
           }
@@ -298,14 +339,92 @@ const earlier = (id: string) =>
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .vers {
-    display: block;
-    margin-top: 3px;
-    font-size: 12.5px;
+  .vtag {
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: var(--panel);
     color: var(--ink-3);
+    font: 500 11.5px/1 var(--mono);
+    vertical-align: 1px;
   }
-  .vers a {
+  /* the disclosure for a family's earlier versions */
+  .vt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0 0 -4px;
+    padding: 3px 8px 3px 4px;
+    border: 0;
+    border-radius: 6px;
+    background: none;
     color: var(--ink-2);
+    font: 500 12.5px/1.2 var(--sans);
+    cursor: pointer;
+  }
+  .vt:hover {
+    background: var(--panel);
+  }
+  .vt:focus-visible {
+    outline: 2px solid var(--ink-3);
+    outline-offset: 1px;
+  }
+  .vt svg {
+    flex: none;
+    color: var(--ink-3);
+    transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .vt[aria-expanded='true'] svg {
+    transform: rotate(90deg);
+  }
+  .vlist {
+    color: var(--ink-4);
+    font-weight: 400;
+  }
+  .vt[aria-expanded='true'] .vlist {
+    display: none;
+  }
+  /* earlier versions sit under their family, joined by a tree line */
+  .bt tr.ver td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-top-color: transparent;
+    font-size: 13.5px;
+  }
+  .bt tr.ver .nm {
+    position: relative;
+    padding-left: 30px;
+  }
+  .bt tr.ver .nm > a {
+    font-weight: 400;
+  }
+  .tree {
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    border-left: 1px solid var(--ink-4);
+  }
+  .tree::after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    width: 12px;
+    border-top: 1px solid var(--ink-4);
+  }
+  tr.last .tree {
+    bottom: 50%;
+  }
+  tr.ver .desc {
+    margin-top: 1px;
+    font-size: 12.5px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vt svg {
+      transition: none;
+    }
   }
   .org {
     font-size: 13.5px;

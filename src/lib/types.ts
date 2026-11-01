@@ -112,6 +112,10 @@ export interface Score {
   setting?: string | null;
   harness?: string | null;
   date?: string | null;
+  /** Average US dollars per task, as the leaderboard prices it. Compare within one benchmark only. */
+  cost?: number | null;
+  /** Average output tokens per task, when the leaderboard reports it. */
+  tokens?: number | null;
   /** Who measured it: the benchmark's own leaderboard, Epoch AI, or the lab in its model card. */
   source: 'leaderboard' | 'epoch' | 'card';
   card?: string;

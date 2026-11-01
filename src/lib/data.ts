@@ -244,14 +244,25 @@ export function benchSummary(id: string): BenchSummary {
   const leaderboardBoard = bestPerModel(lbByBench.get(id) ?? [], b);
   const epochBoard = bestPerModel(epochByBench.get(id) ?? [], b);
   const cardBoard = bestPerModel(cardScoresByBench.get(id) ?? [], b);
+  // An independent board leads, unless it stopped six or more months before the newest score from another
+  // source. A board that ends at o4-mini should not headline a benchmark labs still report today.
+  const newest = (xs: Score[]) => xs.reduce((m, x) => (x.date && x.date > m ? x.date : m), '');
+  const latest = [leaderboardBoard, epochBoard, cardBoard].map(newest).reduce((a, x) => (x > a ? x : a), '');
+  const fresh = (xs: Score[]) => !latest || !newest(xs) || monthsBetween(newest(xs), latest) < 6;
   const boardSource: BenchSummary['boardSource'] =
-    leaderboardBoard.length >= 5 || (leaderboardBoard.length > 0 && epochBoard.length < 5 && cardBoard.length === 0)
+    (leaderboardBoard.length >= 5 && fresh(leaderboardBoard)) || (leaderboardBoard.length > 0 && epochBoard.length < 5 && cardBoard.length === 0)
       ? 'leaderboard'
-      : epochBoard.length >= 5 || (epochBoard.length > 0 && cardBoard.length === 0)
+      : (epochBoard.length >= 5 && fresh(epochBoard)) || (epochBoard.length > 0 && cardBoard.length === 0)
         ? 'epoch'
-        : cardBoard.length
+        : cardBoard.length >= 5 || (cardBoard.length > 0 && leaderboardBoard.length < 5 && epochBoard.length < 5)
           ? 'card'
-          : null;
+          : leaderboardBoard.length >= 5
+            ? 'leaderboard'
+            : epochBoard.length
+              ? 'epoch'
+              : cardBoard.length
+                ? 'card'
+                : null;
   const board = boardSource === 'leaderboard' ? leaderboardBoard : boardSource === 'epoch' ? epochBoard : boardSource === 'card' ? cardBoard : [];
 
   // frontier: only for percent scores, where card and Epoch numbers share a scale
