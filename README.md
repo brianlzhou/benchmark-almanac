@@ -71,5 +71,6 @@ for the same reason. Each source that the job does not read says why in its `man
 ## Credits
 
 Scores and the capability index: Epoch AI, CC BY 4.0. Lab marks: [LobeHub Icons](https://github.com/lobehub/lobe-icons),
-MIT (see `src/assets/labs/LICENSE`). The marks are trademarks of their owners. Type: Newsreader and
+MIT, and the labs' own websites and GitHub or Hugging Face organizations (each file's source is in
+`public/labs/LICENSE`). The marks are trademarks of their owners. Type: Newsreader and
 Geist, SIL Open Font License.

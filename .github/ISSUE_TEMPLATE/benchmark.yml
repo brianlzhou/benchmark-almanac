@@ -1,0 +1,145 @@
+# The benchmark submission form, linked from /submit/ and the site footer. Each answer arrives as a
+# "### Label" section of the issue body. scripts/submission.ts reads these labels, so if you rename one,
+# rename it there too.
+name: Submit a benchmark
+description: Suggest a benchmark for Benchmark Almanac.
+title: 'Benchmark: '
+labels: [submission]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sending a benchmark. The almanac adds one when it passes **at least one** of four tests: a major lab reports it, an independent leaderboard runs it, an established evaluation group made it, or people use it. The almanac's Submit page explains each test.
+
+        An automatic check replies within a minute. A person reviews every submission.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The benchmark's name, as its makers write it.
+      placeholder: SWE-bench Verified
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: If there is more than one version, which one is this?
+      placeholder: '2.0'
+  - type: textarea
+    id: tests
+    attributes:
+      label: What it tests
+      description: One or two sentences about the tasks and how a model is judged on them.
+      placeholder: 500 real GitHub issues from 12 Python repositories. A model's patch passes when the repository's own tests pass.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Knowledge and language
+        - Math and science
+        - Coding
+        - Agents and tools
+        - Professional work
+        - Vision, audio and robotics
+        - Safety and security
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: paper
+    attributes:
+      label: Paper or report
+      description: arXiv, OpenReview, a technical report or a launch post.
+      placeholder: https://arxiv.org/abs/2310.06770
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Code
+      placeholder: https://github.com/org/repo
+  - type: input
+    id: data
+    attributes:
+      label: Data
+      description: Where the test set lives, if it is public.
+      placeholder: https://huggingface.co/datasets/org/name
+  - type: dropdown
+    id: access
+    attributes:
+      label: Test set
+      options:
+        - Public
+        - Held out
+        - Partly held out
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: The license of the code and the data.
+      placeholder: MIT code, CC BY 4.0 data
+  - type: input
+    id: leaderboard
+    attributes:
+      label: Leaderboard
+      placeholder: https://example.org/leaderboard
+  - type: input
+    id: scores
+    attributes:
+      label: Scores file
+      description: A file of scores the almanac can read, such as a CSV, JSON or a Hugging Face dataset. A date on each score lets the almanac chart who held number one.
+  - type: input
+    id: scoring
+    attributes:
+      label: Scoring
+      description: The metric and its unit.
+      placeholder: Percent of tasks resolved, pass@1
+  - type: input
+    id: released
+    attributes:
+      label: Released
+      description: Year and month.
+      placeholder: 2025-07
+  - type: input
+    id: makers
+    attributes:
+      label: Made by
+      description: The organizations or people behind it.
+  - type: checkboxes
+    id: passes
+    attributes:
+      label: Which tests does it pass?
+      options:
+        - label: A major lab reports it
+        - label: An independent leaderboard runs it
+        - label: An established evaluation group made it
+        - label: People use it
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Links that show it passes those tests. For example the model card that reports it, the leaderboard that runs it, or the papers that use it.
+    validations:
+      required: true
+  - type: input
+    id: replaces
+    attributes:
+      label: Replaces
+      description: If it is a new version of a benchmark, which one, and what changed in the tasks or the scoring?
+  - type: dropdown
+    id: role
+    attributes:
+      label: Your connection to it
+      options:
+        - I made it
+        - I help maintain it
+        - I use it
+        - None
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else

@@ -1,0 +1,28 @@
+# The correction form, linked from /submit/. It goes to the same review as submissions.
+name: Correct a record
+description: Report a wrong score, date, name or link on Benchmark Almanac.
+title: 'Correction: '
+labels: [correction]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The almanac page with the mistake.
+      placeholder: https://…/benchmarks/swe-bench-verified/
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong
+      description: What the page says, and what it should say.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link that shows the right value.
+    validations:
+      required: true

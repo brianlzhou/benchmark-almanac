@@ -1,0 +1,46 @@
+name: Check a submission
+
+# When someone opens or edits a benchmark submission (.github/ISSUE_TEMPLATE/benchmark.yml), check it against
+# the registry and reply within a minute: already here, left out before, or new, and what is missing. The
+# issue text is untrusted, so the job reads it only as data from the event file, never inside a shell line.
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: submission-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: contains(github.event.issue.labels.*.name, 'submission') || startsWith(github.event.issue.title, 'Benchmark:')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/submission.ts --event "$RUNNER_TEMP/reply.md" "$RUNNER_TEMP/status.txt"
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+      - name: Reply and label
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          N: ${{ github.event.issue.number }}
+        run: |
+          status="$(cat "$RUNNER_TEMP/status.txt")"
+          for l in submission already-catalogued left-out-before needs-review; do
+            gh label create "$l" --force --color ededed >/dev/null
+          done
+          gh issue edit "$N" --add-label submission --remove-label already-catalogued,left-out-before,needs-review || true
+          gh issue edit "$N" --add-label "$status"
+          # one reply per submission: an edit updates it instead of adding another
+          gh issue comment "$N" --edit-last --create-if-none --body-file "$RUNNER_TEMP/reply.md"
