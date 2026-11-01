@@ -1,0 +1,54 @@
+---
+// The four tests a benchmark needs to pass one of, as numbered cards. Used on the About and Submit pages.
+import { CRITERIA } from '../lib/criteria.ts';
+---
+
+<ol class="bar">
+  {
+    CRITERIA.map((x) => (
+      <li>
+        <b>{x.t}</b>
+        <span>{x.d}</span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .bar {
+    list-style: none;
+    counter-reset: bar;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 24px 0 26px;
+    padding: 0;
+  }
+  .bar li {
+    counter-increment: bar;
+    display: grid;
+    gap: 6px;
+    align-content: start;
+    padding: 18px 20px 20px;
+    border-radius: 12px;
+    background: var(--panel);
+  }
+  .bar li::before {
+    content: counter(bar);
+    font: 400 30px/1 var(--serif);
+    color: var(--ink-3);
+  }
+  .bar b {
+    font-size: 16px;
+  }
+  .bar span {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  @media (max-width: 640px) {
+    .bar {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

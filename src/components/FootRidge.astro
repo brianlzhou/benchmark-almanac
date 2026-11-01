@@ -1,6 +1,6 @@
 ---
 // The landscape across the top of the footer, edge to edge: benchmarks released each month since 2019,
-// stacked by area and drawn as an even grid of dots in each area's color. The footer's Areas column, just below, is its key.
+// stacked by area and stippled in each area's colour. The footer's Areas column, just below, is its key.
 // The outlines are static SVGs used as masks (src/lib/ridge.ts), so they stretch to the screen while the dots
 // inside stay round. The top area is drawn first, and each area below covers it, so no seam shows between bands.
 import { LAYERS } from '../lib/ridge.ts';
@@ -15,13 +15,13 @@ import { LAYERS } from '../lib/ridge.ts';
       </div>
     ))
   }
-  <p class="page ridge-key">Benchmarks released each month since 2019, colored by area.</p>
+  <p class="page ridge-key">Benchmarks released each month since 2019, coloured by area.</p>
 </div>
 
 <style>
   .ridge {
     position: relative;
-    height: 168px;
+    height: 120px;
   }
   .band,
   .r {
@@ -34,36 +34,27 @@ import { LAYERS } from '../lib/ridge.ts';
     mask-position: 0 0;
     mask-size: 100% 100%;
   }
-  /* a faint wash under the dots, so each band reads as one shape */
   .fill {
-    background: color-mix(in srgb, var(--c) 9%, var(--bg));
+    background: color-mix(in srgb, var(--c) 15%, var(--bg));
   }
-  /* the dots: the band's outline intersected with an even grid of round dots, 6px apart, in the area's color */
+  /* the dots: the band's outline intersected with a repeating tile of dots at their own size */
   .dots {
     mask-image: var(--shape), url('/ridge/dots.svg');
     mask-repeat: no-repeat, repeat;
     mask-position: 0 0, 0 0;
-    mask-size: 100% 100%, 6px 6px;
+    mask-size: 100% 100%, 28px 28px;
     mask-composite: intersect;
-    background: var(--c);
+    background: color-mix(in srgb, var(--c) 85%, var(--ink));
+    opacity: 0.7;
   }
-  /* the caption stays out of the way until someone hovers over the landscape */
   .ridge-key {
     position: absolute;
     inset: 10px 0 auto;
     margin: 0 auto;
     font-size: 12px;
     color: var(--ink-3);
-    opacity: 0;
-    transition: opacity 160ms ease;
-  }
-  .ridge:hover .ridge-key {
-    opacity: 1;
   }
   @media (max-width: 720px) {
-    .ridge {
-      height: 112px;
-    }
     .ridge-key {
       display: none;
     }

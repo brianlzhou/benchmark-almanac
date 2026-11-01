@@ -1,0 +1,104 @@
+---
+// The abstract of a benchmark's own paper, folded under the page's own description. Closed, it is one quiet
+// line. Open, it shows the authors' text as a quotation, with the paper, its host and its license under it.
+// Abstracts come from scripts/abstracts.ts, which keeps only open licenses.
+import abstractsJson from '../../data/abstracts.json';
+import type { PaperAbstract } from '../lib/types.ts';
+
+interface Props {
+  id: string;
+}
+const a = (abstractsJson as Record<string, PaperAbstract>)[Astro.props.id];
+const license = a?.license === 'CC0 1.0' ? 'CC0' : a?.license;
+---
+
+{
+  a && (
+    <details class="aw">
+      <summary>
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+          <path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        In the authors’ words
+      </summary>
+      <figure>
+        <blockquote cite={a.url}>
+          <p>{a.text}</p>
+        </blockquote>
+        <figcaption>
+          Abstract of <a href={a.url}>{a.title}</a> ({a.ref}, {license})
+        </figcaption>
+      </figure>
+    </details>
+  )
+}
+
+<style>
+  .aw {
+    margin-top: 14px;
+    max-width: 72ch;
+  }
+  .aw summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: -6px;
+    padding: 4px 9px 4px 6px;
+    border-radius: 7px;
+    color: var(--ink-2);
+    font-size: 14px;
+    font-weight: 500;
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 140ms ease;
+  }
+  .aw summary::-webkit-details-marker {
+    display: none;
+  }
+  .aw summary:hover {
+    background: var(--panel);
+  }
+  .aw summary svg {
+    flex: none;
+    color: var(--ink-3);
+    transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .aw[open] summary svg {
+    transform: rotate(90deg);
+  }
+  /* the quotation lines up with the summary text, after the chevron */
+  .aw figure {
+    margin: 10px 0 4px;
+    padding-left: 18px;
+  }
+  .aw blockquote {
+    margin: 0;
+    font: 400 17px/1.6 var(--serif);
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+  }
+  .aw figcaption {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+  .aw figcaption a {
+    color: var(--ink-2);
+  }
+  @media (max-width: 720px) {
+    .aw figure {
+      padding-left: 0;
+    }
+    .aw blockquote {
+      font-size: 16px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .aw summary svg {
+      transition: none;
+    }
+  }
+</style>

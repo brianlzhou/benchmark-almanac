@@ -1,0 +1,168 @@
+---
+// How to suggest a benchmark: the four tests, what a good submission includes, and what happens to it. The
+// form itself is a GitHub issue form (.github/ISSUE_TEMPLATE/benchmark.yml). A workflow answers each one
+// within a minute (.github/workflows/submission.yml), and `node scripts/submission.ts --list` reads them all.
+import Base from '../layouts/Base.astro';
+import Criteria from '../components/Criteria.astro';
+import { STAYS_OUT, SUBMIT_FORM, SUBMISSIONS, REPO } from '../lib/criteria.ts';
+import { benchmarks } from '../lib/data.ts';
+
+const INCLUDE = [
+  { t: 'The name', d: 'And the version, when there is more than one.' },
+  { t: 'What it tests', d: 'One or two sentences about the tasks and how a model is judged on them. Leave the motivation for the paper.' },
+  { t: 'The paper or report', d: 'arXiv, OpenReview, a technical report or a launch post.' },
+  { t: 'The code and the data', d: 'Links, with their licenses. Say whether the test set is public, held out or partly held out.' },
+  { t: 'The scores', d: 'A leaderboard, if there is one. A file we can read, such as a CSV, JSON or a Hugging Face dataset, with the date of each score, lets the almanac chart who held number one.' },
+  { t: 'The evidence', d: 'Links that show which of the four tests it passes: the model card that reports it, the leaderboard that runs it, or the papers that use it.' },
+  { t: 'What it replaces', d: 'If it is a new version of a benchmark already here, which one, and what changed in the tasks or the scoring.' },
+];
+---
+
+<Base title="Submit a benchmark" description="Suggest a benchmark for Benchmark Almanac: what gets catalogued, what to include, and what happens next.">
+  <div class="page prose">
+    <header class="head">
+      <h1>Submit a benchmark</h1>
+      <p class="lede">
+        Made a benchmark, or found one that the almanac is missing? Send it in. An automatic check answers every submission within a minute, and a person reviews each one.
+      </p>
+      <div class="cta">
+        <a class="go" href={SUBMIT_FORM}>
+          Open the form on GitHub
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+        <a class="past" href={SUBMISSIONS}>See past submissions</a>
+      </div>
+      <p class="note">The form needs a free GitHub account. Everything you write there is public.</p>
+    </header>
+
+    <section id="tests">
+      <h2>What gets catalogued</h2>
+      <p>
+        The almanac has {benchmarks.length.toLocaleString('en-US')} benchmarks. It adds a new one when it passes <b>at least one</b> of four tests.
+      </p>
+      <Criteria />
+      <p><b>What stays out:</b> {STAYS_OUT}</p>
+    </section>
+
+    <section id="include">
+      <h2>What to include</h2>
+      <p>The form asks for each of these. Only the name, what it tests, a link and the evidence are required, but each item makes the review faster.</p>
+      <dl>
+        {
+          INCLUDE.map((x) => (
+            <>
+              <dt>{x.t}</dt>
+              <dd>{x.d}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section id="next">
+      <h2>What happens next</h2>
+      <ol class="steps">
+        <li>
+          <b>Within a minute,</b> an automatic check replies on your submission. It says whether the almanac already has the benchmark, or left it out before and why, and which items are missing.
+        </li>
+        <li>
+          <b>Within a few days,</b> a person reviews it against the four tests. A benchmark that passes gets a record, and appears on the <a href="/new/">New page</a> with the next daily update.
+        </li>
+        <li>
+          <b>If it doesn’t pass yet,</b> the reply says which test it missed. Add new evidence to the same submission at any time, for example when a lab reports it.
+        </li>
+      </ol>
+      <p>
+        Something wrong in a record that is already here? Use the <a href={`${REPO}/issues/new?template=correction.yml`}>correction form</a>, with a link to the page and to a source for the right value.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .prose section {
+    max-width: 68ch;
+  }
+  .prose section + section {
+    margin-top: 64px;
+  }
+  .prose h2 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  .prose p + p {
+    margin-top: 14px;
+  }
+  .prose p {
+    color: var(--ink-2);
+  }
+  .prose b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  section[id] {
+    scroll-margin-top: 90px;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 22px;
+    margin-top: 28px;
+  }
+  .go {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .go:hover {
+    background: color-mix(in srgb, var(--ink) 86%, var(--bg));
+  }
+  .past {
+    color: var(--ink-2);
+    font-size: 15px;
+  }
+  .note {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  dl {
+    margin: 22px 0 0;
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 14px 24px;
+  }
+  dt {
+    font-weight: 500;
+  }
+  dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .steps {
+    display: grid;
+    gap: 14px;
+    margin: 0 0 22px;
+    padding-left: 22px;
+    color: var(--ink-2);
+  }
+  .steps li::marker {
+    color: var(--ink-3);
+  }
+  @media (max-width: 640px) {
+    dl {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
+    dd + dt {
+      margin-top: 12px;
+    }
+  }
+</style>
