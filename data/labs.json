@@ -425,5 +425,510 @@
     "aliases": [
       "Reflection"
     ]
+  },
+  {
+    "id": "black-forest-labs",
+    "name": "Black Forest Labs",
+    "country": "DE",
+    "url": "https://bfl.ai",
+    "aliases": [
+      "BFL"
+    ]
+  },
+  {
+    "id": "reve",
+    "name": "Reve",
+    "url": "https://reve.com"
+  },
+  {
+    "id": "luma-ai",
+    "name": "Luma AI",
+    "country": "US",
+    "url": "https://lumalabs.ai",
+    "aliases": [
+      "Luma"
+    ]
+  },
+  {
+    "id": "recraft",
+    "name": "Recraft",
+    "url": "https://www.recraft.ai"
+  },
+  {
+    "id": "ideogram",
+    "name": "Ideogram",
+    "url": "https://ideogram.ai"
+  },
+  {
+    "id": "krea",
+    "name": "Krea",
+    "url": "https://www.krea.ai"
+  },
+  {
+    "id": "runway",
+    "name": "Runway",
+    "country": "US",
+    "url": "https://runwayml.com",
+    "aliases": [
+      "RunwayML"
+    ]
+  },
+  {
+    "id": "aorizon",
+    "name": "Aorizon"
+  },
+  {
+    "id": "shengshu",
+    "name": "Shengshu Technology",
+    "country": "CN",
+    "url": "https://www.vidu.com",
+    "aliases": [
+      "Shengshu",
+      "Vidu"
+    ]
+  },
+  {
+    "id": "hidream",
+    "name": "HiDream.ai",
+    "country": "CN",
+    "url": "https://hidream.ai",
+    "aliases": [
+      "HiDream"
+    ]
+  },
+  {
+    "id": "kandinsky",
+    "name": "Kandinsky (Sber AI)",
+    "country": "RU",
+    "aliases": [
+      "Kandinsky",
+      "Sber AI"
+    ]
+  },
+  {
+    "id": "pika",
+    "name": "Pika",
+    "country": "US",
+    "url": "https://pika.art",
+    "aliases": [
+      "Pika Labs"
+    ]
+  },
+  {
+    "id": "leonardo-ai",
+    "name": "Leonardo.Ai",
+    "country": "AU",
+    "url": "https://leonardo.ai",
+    "aliases": [
+      "Leonardo AI"
+    ]
+  },
+  {
+    "id": "genmo",
+    "name": "Genmo",
+    "country": "US",
+    "url": "https://www.genmo.ai"
+  },
+  {
+    "id": "lightricks",
+    "name": "Lightricks",
+    "country": "IL",
+    "url": "https://www.lightricks.com"
+  },
+  {
+    "id": "pixverse",
+    "name": "PixVerse",
+    "url": "https://pixverse.ai"
+  },
+  {
+    "id": "baidu",
+    "name": "Baidu",
+    "country": "CN",
+    "url": "https://ernie.baidu.com/blog/",
+    "aliases": [
+      "Baidu",
+      "Baidu ERNIE",
+      "ERNIE Team, Baidu",
+      "Baidu Inc."
+    ]
+  },
+  {
+    "id": "meituan",
+    "name": "Meituan",
+    "country": "CN",
+    "url": "https://longcat.ai/",
+    "aliases": [
+      "Meituan",
+      "Meituan LongCat",
+      "LongCat Team",
+      "Meituan LongCat Team"
+    ]
+  },
+  {
+    "id": "kuaishou",
+    "name": "Kuaishou",
+    "country": "CN",
+    "url": "https://www.kuaishou.com/",
+    "aliases": [
+      "Kuaishou",
+      "Kwai",
+      "Kuaishou Technology",
+      "Kwaipilot",
+      "Kwai Klear",
+      "Kwai Keye"
+    ]
+  },
+  {
+    "id": "iflytek",
+    "name": "iFlytek",
+    "country": "CN",
+    "url": "https://www.iflytek.com/en/",
+    "aliases": [
+      "iFlytek",
+      "iFLYTEK",
+      "科大讯飞",
+      "iFlytek Spark",
+      "SparkLLM",
+      "讯飞星火"
+    ]
+  },
+  {
+    "id": "sensetime",
+    "name": "SenseTime",
+    "country": "CN",
+    "url": "https://www.sensetime.com/en",
+    "aliases": [
+      "SenseTime",
+      "商汤科技",
+      "SenseNova",
+      "日日新"
+    ]
+  },
+  {
+    "id": "lg-ai-research",
+    "name": "LG AI Research",
+    "country": "KR",
+    "url": "https://www.lgresearch.ai/",
+    "aliases": [
+      "LG AI Research",
+      "LG",
+      "LGAI-EXAONE",
+      "EXAONE"
+    ]
+  },
+  {
+    "id": "sarvam",
+    "name": "Sarvam AI",
+    "country": "IN",
+    "url": "https://www.sarvam.ai",
+    "aliases": [
+      "Sarvam AI",
+      "Sarvam",
+      "sarvamai"
+    ]
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "country": "US",
+    "url": "https://machinelearning.apple.com/",
+    "aliases": [
+      "Apple",
+      "Apple Machine Learning Research",
+      "Apple Intelligence",
+      "Apple Foundation Models"
+    ]
+  },
+  {
+    "id": "liquid-ai",
+    "name": "Liquid AI",
+    "country": "US",
+    "url": "https://www.liquid.ai/",
+    "aliases": [
+      "Liquid AI",
+      "LiquidAI",
+      "Liquid"
+    ]
+  },
+  {
+    "id": "swiss-ai",
+    "name": "Swiss AI Initiative",
+    "country": "CH",
+    "url": "https://www.swiss-ai.org/",
+    "aliases": [
+      "Swiss AI",
+      "Swiss AI Initiative",
+      "Project Apertus",
+      "EPFL, ETH Zurich and CSCS"
+    ]
+  },
+  {
+    "id": "fireworks",
+    "name": "Fireworks AI",
+    "country": "US",
+    "url": "https://fireworks.ai",
+    "aliases": [
+      "Fireworks",
+      "Fireworks AI",
+      "Fireworks Research"
+    ]
+  },
+  {
+    "id": "cmu",
+    "name": "Carnegie Mellon University",
+    "country": "US",
+    "url": "https://www.cmu.edu",
+    "aliases": [
+      "CMU",
+      "Carnegie Mellon University",
+      "CMU-AIRe"
+    ]
+  },
+  {
+    "id": "uw-madison",
+    "name": "University of Wisconsin-Madison",
+    "country": "US",
+    "url": "https://www.wisc.edu",
+    "aliases": [
+      "UW-Madison",
+      "University of Wisconsin-Madison"
+    ]
+  },
+  {
+    "id": "ai21",
+    "name": "AI21 Labs",
+    "country": "IL",
+    "url": "https://www.ai21.com",
+    "aliases": [
+      "AI21",
+      "AI21 Labs",
+      "ai21labs"
+    ]
+  },
+  {
+    "id": "alibaba-aidc",
+    "name": "Alibaba International Digital Commerce (AIDC-AI)",
+    "country": "CN",
+    "url": "https://huggingface.co/ATH-MaaS",
+    "aliases": [
+      "AIDC-AI",
+      "Alibaba AIDC",
+      "ATH-MaaS"
+    ]
+  },
+  {
+    "id": "skywork",
+    "name": "Skywork AI (Kunlun Tech)",
+    "country": "CN",
+    "url": "https://huggingface.co/Skywork",
+    "aliases": [
+      "Skywork",
+      "Skywork AI",
+      "Kunlun Tech"
+    ]
+  },
+  {
+    "id": "openbmb",
+    "name": "OpenBMB (ModelBest)",
+    "country": "CN",
+    "url": "https://github.com/OpenBMB",
+    "aliases": [
+      "OpenBMB",
+      "ModelBest"
+    ]
+  },
+  {
+    "id": "baai",
+    "name": "Beijing Academy of Artificial Intelligence",
+    "country": "CN",
+    "url": "https://www.baai.ac.cn/en",
+    "aliases": [
+      "BAAI",
+      "Beijing Academy of Artificial Intelligence"
+    ]
+  },
+  {
+    "id": "hust",
+    "name": "Huazhong University of Science and Technology",
+    "country": "CN",
+    "url": "https://english.hust.edu.cn",
+    "aliases": [
+      "HUST"
+    ]
+  },
+  {
+    "id": "nyu",
+    "name": "New York University",
+    "country": "US",
+    "url": "https://www.nyu.edu",
+    "aliases": [
+      "NYU",
+      "New York University"
+    ]
+  },
+  {
+    "id": "mbzuai",
+    "name": "Mohamed bin Zayed University of Artificial Intelligence",
+    "country": "AE",
+    "url": "https://mbzuai.ac.ae",
+    "aliases": [
+      "MBZUAI",
+      "MBZUAI IFM",
+      "Institute of Foundation Models"
+    ]
+  },
+  {
+    "id": "rednote",
+    "name": "rednote hi lab (Xiaohongshu)",
+    "country": "CN",
+    "url": "https://huggingface.co/rednote-hilab",
+    "aliases": [
+      "rednote",
+      "Xiaohongshu",
+      "rednote-hilab",
+      "dots-studio"
+    ]
+  },
+  {
+    "id": "alibaba",
+    "name": "Alibaba Group",
+    "country": "CN",
+    "url": "https://www.alibabagroup.com",
+    "aliases": [
+      "Alibaba",
+      "Alibaba DAMO Academy",
+      "Tongyi Lab"
+    ]
+  },
+  {
+    "id": "nexusflow",
+    "name": "Nexusflow",
+    "country": "US",
+    "url": "https://nexusflow.ai",
+    "aliases": [
+      "Nexusflow",
+      "NexusFlow"
+    ]
+  },
+  {
+    "id": "snowflake",
+    "name": "Snowflake",
+    "country": "US",
+    "url": "https://www.snowflake.com",
+    "aliases": [
+      "Snowflake",
+      "Snowflake AI Research"
+    ]
+  },
+  {
+    "id": "uc-berkeley",
+    "name": "UC Berkeley",
+    "country": "US",
+    "url": "https://www.berkeley.edu",
+    "aliases": [
+      "UC Berkeley",
+      "Berkeley",
+      "berkeley-nest"
+    ]
+  },
+  {
+    "id": "kyutai",
+    "name": "Kyutai",
+    "country": "FR",
+    "url": "https://kyutai.org",
+    "aliases": [
+      "Kyutai"
+    ]
+  },
+  {
+    "id": "fixie",
+    "name": "Fixie.ai (Ultravox)",
+    "country": "US",
+    "url": "https://www.ultravox.ai",
+    "aliases": [
+      "Fixie",
+      "Fixie.ai",
+      "Ultravox"
+    ]
+  },
+  {
+    "id": "princeton",
+    "name": "Princeton University",
+    "country": "US",
+    "url": "https://www.princeton.edu",
+    "aliases": [
+      "Princeton",
+      "Princeton NLP"
+    ]
+  },
+  {
+    "id": "stanford",
+    "name": "Stanford University",
+    "country": "US",
+    "url": "https://www.stanford.edu",
+    "aliases": [
+      "Stanford"
+    ]
+  },
+  {
+    "id": "hku",
+    "name": "The University of Hong Kong (XLANG Lab)",
+    "country": "HK",
+    "url": "https://xlang.ai",
+    "aliases": [
+      "HKU",
+      "XLANG Lab",
+      "xlangai"
+    ]
+  },
+  {
+    "id": "h-company",
+    "name": "H Company",
+    "country": "FR",
+    "url": "https://www.hcompany.ai",
+    "aliases": [
+      "H Company",
+      "Hcompany"
+    ]
+  },
+  {
+    "id": "adept",
+    "name": "Adept AI",
+    "country": "US",
+    "url": "https://www.adept.ai",
+    "aliases": [
+      "Adept",
+      "Adept AI"
+    ]
+  },
+  {
+    "id": "tiger-lab",
+    "name": "TIGER-Lab (University of Waterloo)",
+    "country": "CA",
+    "url": "https://tiger-ai-lab.github.io",
+    "aliases": [
+      "TIGER-Lab",
+      "TIGER Lab"
+    ]
+  },
+  {
+    "id": "writer",
+    "name": "Writer",
+    "country": "US",
+    "url": "https://writer.com",
+    "aliases": [
+      "Writer",
+      "WRITER"
+    ]
+  },
+  {
+    "id": "infly",
+    "name": "INF Technology (infly)",
+    "country": "CN",
+    "url": "https://huggingface.co/infly",
+    "aliases": [
+      "infly",
+      "INF Technology"
+    ]
   }
 ]
