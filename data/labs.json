@@ -1,0 +1,429 @@
+[
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "country": "US",
+    "url": "https://openai.com",
+    "aliases": [
+      "OpenAI"
+    ]
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "country": "US",
+    "url": "https://www.anthropic.com",
+    "aliases": [
+      "Anthropic"
+    ]
+  },
+  {
+    "id": "google",
+    "name": "Google DeepMind",
+    "country": "US",
+    "url": "https://deepmind.google",
+    "aliases": [
+      "Google DeepMind",
+      "Google",
+      "DeepMind",
+      "Google Brain",
+      "Google Research"
+    ]
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "country": "US",
+    "url": "https://x.ai",
+    "aliases": [
+      "xAI"
+    ]
+  },
+  {
+    "id": "meta",
+    "name": "Meta",
+    "country": "US",
+    "url": "https://ai.meta.com",
+    "aliases": [
+      "Meta AI",
+      "Meta",
+      "Facebook AI Research",
+      "Facebook",
+      "Meta Superintelligence Labs"
+    ]
+  },
+  {
+    "id": "deepseek",
+    "name": "DeepSeek",
+    "country": "CN",
+    "url": "https://www.deepseek.com",
+    "aliases": [
+      "DeepSeek"
+    ]
+  },
+  {
+    "id": "qwen",
+    "name": "Qwen",
+    "country": "CN",
+    "url": "https://qwen.ai",
+    "aliases": [
+      "Alibaba",
+      "Qwen",
+      "Alibaba Qwen"
+    ]
+  },
+  {
+    "id": "moonshot",
+    "name": "Moonshot AI",
+    "country": "CN",
+    "url": "https://www.moonshot.ai",
+    "aliases": [
+      "Moonshot",
+      "Moonshot AI"
+    ]
+  },
+  {
+    "id": "zai",
+    "name": "Z.ai",
+    "country": "CN",
+    "url": "https://z.ai",
+    "aliases": [
+      "Z.ai (Zhipu AI)",
+      "Zhipu",
+      "Zhipu AI",
+      "Z.ai"
+    ]
+  },
+  {
+    "id": "minimax",
+    "name": "MiniMax",
+    "country": "CN",
+    "url": "https://www.minimax.io",
+    "aliases": [
+      "MiniMax"
+    ]
+  },
+  {
+    "id": "mistral",
+    "name": "Mistral AI",
+    "country": "FR",
+    "url": "https://mistral.ai",
+    "aliases": [
+      "Mistral AI",
+      "Mistral"
+    ]
+  },
+  {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "country": "US",
+    "url": "https://www.microsoft.com/ai",
+    "aliases": [
+      "Microsoft",
+      "Microsoft Research",
+      "Microsoft AI"
+    ]
+  },
+  {
+    "id": "nvidia",
+    "name": "NVIDIA",
+    "country": "US",
+    "url": "https://www.nvidia.com",
+    "aliases": [
+      "Nvidia",
+      "NVIDIA"
+    ]
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon",
+    "country": "US",
+    "url": "https://www.amazon.science",
+    "aliases": [
+      "Amazon",
+      "Amazon AGI"
+    ]
+  },
+  {
+    "id": "cohere",
+    "name": "Cohere",
+    "country": "CA",
+    "url": "https://cohere.com",
+    "aliases": [
+      "Cohere",
+      "Cohere Labs (formerly Cohere for AI)",
+      "Cohere for AI"
+    ]
+  },
+  {
+    "id": "ai2",
+    "name": "Ai2",
+    "country": "US",
+    "url": "https://allenai.org",
+    "aliases": [
+      "Allen Institute for AI",
+      "AI2",
+      "Ai2"
+    ]
+  },
+  {
+    "id": "bytedance",
+    "name": "ByteDance Seed",
+    "country": "CN",
+    "url": "https://seed.bytedance.com",
+    "aliases": [
+      "ByteDance",
+      "ByteDance Seed"
+    ]
+  },
+  {
+    "id": "tencent",
+    "name": "Tencent",
+    "country": "CN",
+    "url": "https://hunyuan.tencent.com",
+    "aliases": [
+      "Tencent"
+    ]
+  },
+  {
+    "id": "thinking-machines",
+    "name": "Thinking Machines",
+    "country": "US",
+    "url": "https://thinkingmachines.ai",
+    "aliases": [
+      "Thinking Machines",
+      "Thinking Machines Lab"
+    ]
+  },
+  {
+    "id": "tii",
+    "name": "Technology Innovation Institute",
+    "country": "AE",
+    "url": "https://www.tii.ae",
+    "aliases": [
+      "Technology Innovation Institute"
+    ]
+  },
+  {
+    "id": "01-ai",
+    "name": "01.AI",
+    "country": "CN",
+    "url": "https://www.01.ai",
+    "aliases": [
+      "01.AI"
+    ]
+  },
+  {
+    "id": "baichuan",
+    "name": "Baichuan",
+    "country": "CN",
+    "url": "https://www.baichuan-ai.com",
+    "aliases": [
+      "Baichuan"
+    ]
+  },
+  {
+    "id": "stepfun",
+    "name": "StepFun",
+    "country": "CN",
+    "url": "https://www.stepfun.com",
+    "aliases": [
+      "StepFun"
+    ]
+  },
+  {
+    "id": "reka",
+    "name": "Reka",
+    "country": "US",
+    "url": "https://reka.ai",
+    "aliases": [
+      "Reka",
+      "Reka AI"
+    ]
+  },
+  {
+    "id": "ibm",
+    "name": "IBM",
+    "country": "US",
+    "url": "https://www.ibm.com/granite",
+    "aliases": [
+      "IBM"
+    ]
+  },
+  {
+    "id": "prime-intellect",
+    "name": "Prime Intellect",
+    "country": "US",
+    "url": "https://www.primeintellect.ai",
+    "aliases": [
+      "Prime Intellect"
+    ]
+  },
+  {
+    "id": "ant-group",
+    "name": "Ant Group",
+    "aliases": [
+      "Ant Group"
+    ]
+  },
+  {
+    "id": "arcee-ai",
+    "name": "Arcee AI",
+    "aliases": [
+      "Arcee AI"
+    ]
+  },
+  {
+    "id": "cerebras-systems",
+    "name": "Cerebras Systems",
+    "aliases": [
+      "Cerebras Systems"
+    ]
+  },
+  {
+    "id": "cognition",
+    "name": "Cognition",
+    "aliases": [
+      "Cognition"
+    ]
+  },
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "aliases": [
+      "Cursor"
+    ]
+  },
+  {
+    "id": "databricks",
+    "name": "Databricks",
+    "aliases": [
+      "Databricks"
+    ]
+  },
+  {
+    "id": "deep-cogito",
+    "name": "Deep Cogito",
+    "aliases": [
+      "Deep Cogito"
+    ]
+  },
+  {
+    "id": "eleutherai",
+    "name": "EleutherAI",
+    "aliases": [
+      "EleutherAI"
+    ]
+  },
+  {
+    "id": "hugging-face",
+    "name": "Hugging Face",
+    "aliases": [
+      "Hugging Face"
+    ]
+  },
+  {
+    "id": "inception-labs",
+    "name": "Inception Labs",
+    "aliases": [
+      "Inception Labs"
+    ]
+  },
+  {
+    "id": "inflection-ai",
+    "name": "Inflection AI",
+    "aliases": [
+      "Inflection AI"
+    ]
+  },
+  {
+    "id": "lmsys",
+    "name": "LMSYS",
+    "aliases": [
+      "LMSYS",
+      "LMSYS Org",
+      "Large Model Systems Organization"
+    ],
+    "url": "https://lmsys.org"
+  },
+  {
+    "id": "mosaicml",
+    "name": "MosaicML",
+    "aliases": [
+      "MosaicML"
+    ]
+  },
+  {
+    "id": "nous-research",
+    "name": "Nous Research",
+    "aliases": [
+      "Nous Research"
+    ]
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity",
+    "aliases": [
+      "Perplexity"
+    ]
+  },
+  {
+    "id": "poolside",
+    "name": "Poolside",
+    "aliases": [
+      "Poolside"
+    ]
+  },
+  {
+    "id": "salesforce",
+    "name": "Salesforce",
+    "aliases": [
+      "Salesforce",
+      "Salesforce AI Research",
+      "Salesforce Research"
+    ],
+    "url": "https://www.salesforce.com/research/"
+  },
+  {
+    "id": "shanghai-ai-lab",
+    "name": "Shanghai AI Lab",
+    "aliases": [
+      "Shanghai AI Lab"
+    ]
+  },
+  {
+    "id": "stability-ai",
+    "name": "Stability AI",
+    "aliases": [
+      "Stability AI"
+    ]
+  },
+  {
+    "id": "tsinghua-university",
+    "name": "Tsinghua University",
+    "aliases": [
+      "Tsinghua University"
+    ]
+  },
+  {
+    "id": "upstage",
+    "name": "Upstage",
+    "aliases": [
+      "Upstage"
+    ]
+  },
+  {
+    "id": "xiaomi-corp",
+    "name": "Xiaomi Corp",
+    "aliases": [
+      "Xiaomi Corp"
+    ]
+  },
+  {
+    "id": "reflection",
+    "name": "Reflection",
+    "aliases": [
+      "Reflection"
+    ]
+  }
+]
