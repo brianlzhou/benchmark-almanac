@@ -31,7 +31,7 @@ Node 22.18 or later runs these TypeScript files directly. None has dependencies.
 
 | Command | What it does |
 | --- | --- |
-| `node scripts/discover.ts` | Reads Hugging Face Daily Papers, arXiv, AINews, Epoch AI, the Inspect Evals register and Hugging Face's official benchmark datasets. Scores each find and writes `data/discovered.json`. |
+| `node scripts/discover.ts` | Reads every source in `data/sources.json` marked `automated`: paper feeds, newsletters, registries, leaderboards, lab model cards and lists. Scores each find and writes `data/discovered.json`. `--only <id> --dry` tests one reader. |
 | `node scripts/sync-leaderboards.ts` | Runs every importer in `scripts/leaderboards/` and rewrites `data/scores/leaderboards.json`. A board that fails keeps its last rows. `--only <id> --dry` tests one importer. |
 | `node scripts/sync-epoch.ts` | Downloads Epoch AI's data and rewrites `data/scores/epoch.json`. New models and benchmarks join the registries. |
 | `node scripts/sync-github.ts` | Refreshes `data/github.json`. Set `GITHUB_TOKEN` first. |
@@ -62,9 +62,11 @@ npm run build     # static site in dist/
 
 ## Terms
 
-The discovery job reads only official feeds and APIs. It never scrapes X, whose terms forbid it.
-Artificial Analysis's terms do not allow its data in other ranking products, so the almanac links to
-Artificial Analysis and imports none of its numbers, including rows that Epoch AI collected from it.
+The discovery job reads only official feeds and APIs, and only where a source's terms and robots.txt
+allow it. It never scrapes X, whose terms forbid it. Artificial Analysis's terms do not allow its data in
+other ranking products, so the almanac links to Artificial Analysis and imports none of its numbers,
+including rows that Epoch AI collected from it. Scale's SEAL pages and some lab sites are checked by hand
+for the same reason. Each source that the job does not read says why in its `manual` field.
 
 ## Credits
 
