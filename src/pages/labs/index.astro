@@ -27,7 +27,7 @@ const rest = rows.filter((r) => r.nCards === 0);
       </p>
     </header>
 
-    <div class="grid">
+    <section class="grid" aria-label="Labs whose model cards the almanac reads">
       {
         lead.map(({ l, ms, best, latest, nCards }) => (
           <a class="lab" href={`/labs/${l.id}/`} style={`--c:${labColor(l.id)}`}>
@@ -54,7 +54,7 @@ const rest = rows.filter((r) => r.nCards === 0);
           </a>
         ))
       }
-    </div>
+    </section>
 
     <section>
       <div class="sh">

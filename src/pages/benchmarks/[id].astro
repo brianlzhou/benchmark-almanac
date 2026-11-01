@@ -43,11 +43,17 @@ const boardChart = LEADERBOARDS[b.id]?.chart;
 const boardChartRuns = boardChart
   ? [...leaderboardScores, ...unlistedScores]
       .filter((r) => r.benchmark === b.id)
-      .map((r) => ({ r, x: boardChart.x.key === 'score' ? r.value : r.metrics?.[boardChart.x.key], y: boardChart.y.key === 'score' ? r.value : r.metrics?.[boardChart.y.key] }))
-      .filter((p): p is { r: (typeof p)['r']; x: number; y: number } => p.x !== undefined && p.y !== undefined)
+      .map((r) => {
+        const at = (k: string) => (k === 'score' ? r.value : k === 'cost' ? (r.cost ?? undefined) : k === 'tokens' ? (r.tokens ?? undefined) : r.metrics?.[k]);
+        return { r, x: at(boardChart.x.key), y: at(boardChart.y.key) };
+      })
+      .filter((p): p is { r: (typeof p)['r']; x: number; y: number } => p.x !== undefined && p.y !== undefined && Number.isFinite(p.x) && Number.isFinite(p.y))
       .sort((p, q) => (boardChart.y.better === 'lower' ? p.y - q.y : q.y - p.y) || p.x - q.x)
   : [];
-const chartNum = (v: number, unit?: string) => (unit === '%' ? `${Math.round(v * 10) / 10}%` : unit ? `${Math.round(v * 100) / 100} ${unit}` : String(Math.round(v * 100) / 100));
+const chartNum = (v: number, unit?: string) => {
+  const n = Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : String(Math.round(v * 100) / 100);
+  return unit === '%' ? `${Math.round(v * 10) / 10}%` : unit === '$' || unit === 'usd' ? `$${n}` : unit ? `${n} ${unit}` : n;
+};
 const openIssues = unresolved(issues).length;
 const unit = b.unit ?? '%';
 const area = AREA_BY_ID.get(s.area)!;

@@ -442,7 +442,9 @@ select.field {
 }
 table.t {
   width: 100%;
-  border-collapse: collapse;
+  /* separate borders, so a hovered row's first and last cells can round their corners */
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14.5px;
 }
 .t th {
@@ -465,8 +467,49 @@ table.t {
 .t td:last-child {
   padding-right: 4px;
 }
+/* Hovered rows: a rounded wash that reaches 8px past the text on both sides, with the hairlines above and
+   below it hidden. It fades in and out over 140ms. The corners and hairlines change only after the fade
+   out ends, so a fading row never shows a square corner or a curved hairline. */
+.t td {
+  transition:
+    background-color 140ms ease,
+    box-shadow 140ms ease,
+    border-radius 0s linear 140ms,
+    border-top-color 0s linear 140ms;
+}
+.t td:first-child {
+  box-shadow: -8px 0 0 transparent;
+}
+.t td:last-child {
+  box-shadow: 8px 0 0 transparent;
+}
 .t tbody tr:hover td {
   background: var(--hover);
+  border-top-color: transparent;
+  transition:
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+.t tbody tr:hover + tr td {
+  border-top-color: transparent;
+  transition-delay: 0s;
+}
+.t tbody tr:hover td:first-child {
+  border-radius: 8px 0 0 8px;
+  box-shadow: -8px 0 0 var(--hover);
+}
+.t tbody tr:hover td:last-child {
+  border-radius: 0 8px 8px 0;
+  box-shadow: 8px 0 0 var(--hover);
+}
+.t tbody tr:hover td:only-child {
+  border-radius: 8px;
+  box-shadow: -8px 0 0 var(--hover), 8px 0 0 var(--hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .t td {
+    transition: none;
+  }
 }
 .t .r {
   text-align: right;

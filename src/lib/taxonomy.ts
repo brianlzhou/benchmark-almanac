@@ -133,3 +133,22 @@ export const levelIndex = (id: string | undefined) => (id ? LEVELS.findIndex((l)
 
 /** Arenas and matches rank models against each other. Everything else scores against a fixed standard. */
 export const RANKED_BY_PEOPLE_OR_MATCHES = new Set(['preference', 'head-to-head']);
+
+/** Where a result sits in a system card, in the order the documents usually run. */
+export const SECTION_NAMES: Record<string, string> = {
+  capabilities: 'Capabilities',
+  health: 'Health',
+  hallucination: 'Hallucination',
+  safety: 'Safety',
+  robustness: 'Robustness',
+  bias: 'Bias',
+  alignment: 'Alignment',
+  monitorability: 'Monitorability',
+  'bio-chem': 'Bio and chem risk',
+  cyber: 'Cyber risk',
+  'ai-rnd': 'AI R&D risk',
+  autonomy: 'Autonomy',
+  persuasion: 'Persuasion',
+  other: 'Other',
+};
+export const SECTION_ORDER = Object.keys(SECTION_NAMES);
