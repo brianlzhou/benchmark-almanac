@@ -111,7 +111,9 @@ export function wireSort(table: HTMLTableElement, onSort?: () => void) {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'sort';
-    b.append(...th.childNodes);
+    const label = document.createElement('span');
+    label.append(...th.childNodes);
+    b.append(label);
     const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     icon.setAttribute('width', '8');
     icon.setAttribute('height', '10');

@@ -1,0 +1,130 @@
+---
+// The landscape across the top of the footer: two stippled ridges drawn from the catalogue. The back ridge
+// is every benchmark released each month since 2019, the front ridge the ones labs have reported in a
+// launch post or system card. Drawn once at build time.
+import { benchmarks, allSummaries, AS_OF } from '../lib/data.ts';
+
+const W = 1440;
+const H = 132;
+const start = 2019;
+const [ey, em] = AS_OF.split('-').map(Number);
+const months: string[] = [];
+for (let y = start; y <= ey; y++) for (let m = 1; m <= 12; m++) if (y < ey || m <= em) months.push(`${y}-${String(m).padStart(2, '0')}`);
+const reported = new Set(allSummaries.filter((s) => s.cites.length + s.docCites.length > 0).map((s) => s.b.id));
+const count = (keep: (id: string) => boolean) => {
+  const n = new Map(months.map((m) => [m, 0]));
+  for (const b of benchmarks) if (b.released && b.released.length >= 7 && n.has(b.released.slice(0, 7)) && keep(b.id)) n.set(b.released.slice(0, 7), n.get(b.released.slice(0, 7))! + 1);
+  const raw = months.map((m) => n.get(m)!);
+  // a soft hill, not a bar chart: each month averages with its neighbours
+  const K = [1, 2, 3, 4, 3, 2, 1];
+  return raw.map((_, i) => {
+    let s = 0;
+    let w = 0;
+    K.forEach((k, j) => {
+      const v = raw[i + j - 3];
+      if (v !== undefined) {
+        s += v * k;
+        w += k;
+      }
+    });
+    return s / w;
+  });
+};
+const all = count(() => true);
+const labs = count((id) => reported.has(id));
+const top = Math.max(...all);
+const x = (i: number) => (i / (months.length - 1)) * W;
+const y = (v: number) => H - 6 - (v / top) * (H - 24);
+// a smooth outline through the monthly points
+const area = (vs: number[]) => {
+  const p = vs.map((v, i) => [x(i), y(v)] as const);
+  let d = `M0 ${H}L${p[0][0].toFixed(1)} ${p[0][1].toFixed(1)}`;
+  for (let i = 1; i < p.length; i++) {
+    const [x0, y0] = p[i - 1];
+    const [x1, y1] = p[i];
+    const m = (x0 + x1) / 2;
+    d += `C${m.toFixed(1)} ${y0.toFixed(1)} ${m.toFixed(1)} ${y1.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+  }
+  return `${d}L${W} ${H}Z`;
+};
+// dots scattered by a fixed rule, so the texture looks hand-stippled but builds the same every time
+const dots = (n: number, size: number, seed: number) => {
+  let s = seed;
+  const r = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  return Array.from({ length: n }, () => [r() * size, r() * size, 0.45 + r() * 0.6] as const);
+};
+const back = dots(26, 28, 7);
+const front = dots(40, 28, 11);
+---
+
+<div class="ridge" aria-hidden="true">
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" focusable="false">
+    <defs>
+      <pattern id="stip-back" width="28" height="28" patternUnits="userSpaceOnUse">
+        {back.map(([cx, cy, r]) => <circle cx={cx.toFixed(1)} cy={cy.toFixed(1)} r={r.toFixed(2)} />)}
+      </pattern>
+      <pattern id="stip-front" width="28" height="28" patternUnits="userSpaceOnUse">
+        {front.map(([cx, cy, r]) => <circle cx={cx.toFixed(1)} cy={cy.toFixed(1)} r={r.toFixed(2)} />)}
+      </pattern>
+      <linearGradient id="ridge-x" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+        <stop offset="0.06" stop-color="#fff" stop-opacity="1"></stop>
+        <stop offset="0.94" stop-color="#fff" stop-opacity="1"></stop>
+        <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+      </linearGradient>
+      <mask id="ridge-fade" maskContentUnits="userSpaceOnUse">
+        <rect width={W} height={H} fill="url(#ridge-x)"></rect>
+      </mask>
+    </defs>
+    <g mask="url(#ridge-fade)">
+      <path class="r-back" d={area(all)} />
+      <path class="r-back-dots" d={area(all)} fill="url(#stip-back)" />
+      <path class="r-front" d={area(labs)} />
+      <path class="r-front-dots" d={area(labs)} fill="url(#stip-front)" />
+    </g>
+  </svg>
+  <p class="ridge-key">Benchmarks released each month since 2019. The darker ridge: the ones labs report.</p>
+</div>
+
+<style>
+  .ridge {
+    position: relative;
+    width: max(100%, 900px);
+    max-width: 1680px;
+    margin: 0 auto;
+    left: 50%;
+    translate: -50% 0;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: 120px;
+  }
+  .r-back {
+    fill: var(--panel);
+  }
+  #stip-back circle {
+    fill: var(--ink-4);
+    opacity: 0.55;
+  }
+  .r-front {
+    fill: color-mix(in srgb, var(--area-agents) 14%, var(--bg));
+  }
+  #stip-front circle {
+    fill: color-mix(in srgb, var(--area-agents) 70%, var(--ink));
+    opacity: 0.6;
+  }
+  .ridge-key {
+    position: absolute;
+    right: max(16px, calc((100% - 1200px) / 2));
+    top: 6px;
+    margin: 0;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    .ridge-key {
+      display: none;
+    }
+  }
+</style>
