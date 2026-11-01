@@ -36,6 +36,24 @@ export async function matharenaRows(comp: string): Promise<LeaderboardRow[]> {
     if (acc[1] !== 'no') continue;
     const pct = text(acc[2]).match(/^(-?[\d.]+)%/);
     if (!pct) continue;
+    // "Cost in USD for one model run on one problem" and "Average number of output tokens per answer"
+    const cell = (kind: string) => {
+      const c = tr.match(new RegExp(`metric-bar-cell--${kind}"[^>]*>([\\s\\S]*?)<\\/td>`));
+      const v = c && text(c[1]).replace(/[$,]/g, '').match(/^[\d.]+/);
+      return v ? Number(v[0]) : undefined;
+    };
+    // "Cost in USD for one model run on one problem" and "Average number of output tokens per answer"
+    const cell = (kind: string) => {
+      const c = tr.match(new RegExp(`metric-bar-cell--${kind}"[^>]*>([\\s\\S]*?)<\\/td>`));
+      const v = c && text(c[1]).replace(/[$,]/g, '').match(/^[\d.]+/);
+      return v ? Number(v[0]) : undefined;
+    };
+    // "Cost in USD for one model run on one problem" and "Average number of output tokens per answer"
+    const cell = (kind: string) => {
+      const c = tr.match(new RegExp(`metric-bar-cell--${kind}"[^>]*>([\\s\\S]*?)<\\/td>`));
+      const v = c && text(c[1]).replace(/[$,]/g, '').match(/^[\d.]+/);
+      return v ? Number(v[0]) : undefined;
+    };
     let model = text(name[1]);
     let setting: string | undefined;
     // "Kimi K3 (Think)": MathArena's label for thinking mode
