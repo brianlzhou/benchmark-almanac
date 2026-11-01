@@ -42,7 +42,7 @@ const epoch = epochJson as unknown as {
 export const EPOCH_SOURCE = { name: epoch.source, url: epoch.url, license: epoch.license, retrieved: epoch.retrieved };
 
 type Board = { url: string; feed: string; terms: string; retrieved: string; rows: number; unmatched: string[] };
-const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
+const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[] };
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
 
@@ -106,24 +106,6 @@ export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, settin
   source: 'leaderboard',
 }));
 
-/**
- * Entries on official leaderboards that are not in data/models.json, under the board's own name. Pages show them
- * on their benchmark's board. They never count toward leaders, reigns or lab credit.
- */
-export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, setting, harness, value, date, cost, tokens]) => ({
-  benchmark,
-  model: '',
-  name,
-  value,
-  unit: benchById.get(benchmark)?.unit ?? '%',
-  setting,
-  harness,
-  date: date ?? null,
-  cost: cost ?? null,
-  tokens: tokens ?? null,
-  source: 'leaderboard',
-}));
-
 export const epochScores: Score[] = epoch.rows.map(([benchmark, model, setting, harness, value, date]) => ({
   benchmark,
   model,
@@ -166,7 +148,6 @@ function groupBy<T>(xs: T[], k: (x: T) => string): Map<string, T[]> {
 
 const epochByBench = groupBy(epochScores, (s) => s.benchmark);
 const lbByBench = groupBy(leaderboardScores, (s) => s.benchmark);
-const unlistedByBench = groupBy(unlistedScores, (s) => s.benchmark);
 const cardScoresByBench = groupBy(cardScores, (s) => s.benchmark);
 const citesByBench = groupBy(
   cards.flatMap((c) => c.results.map((r) => ({ card: c, result: r }))),
@@ -188,10 +169,8 @@ export function bestPerModel(scores: Score[], b: Benchmark): Score[] {
   const top = new Map<string, Score>();
   const sign = better(b);
   for (const s of scores) {
-    // an unlisted entry has no model id, so its board name keys it
-    const k = s.model || `~${s.name}`;
-    const cur = top.get(k);
-    if (!cur || sign * s.value > sign * cur.value) top.set(k, s);
+    const cur = top.get(s.model);
+    if (!cur || sign * s.value > sign * cur.value) top.set(s.model, s);
   }
   return [...top.values()].sort((x, y) => sign * (y.value - x.value) || (x.date ?? '').localeCompare(y.date ?? ''));
 }
@@ -228,21 +207,9 @@ export interface BenchSummary {
   /** The board pages lead with: the official leaderboard's, then Epoch's, when either covers five or more models. */
   board: Score[];
   boardSource: 'leaderboard' | 'epoch' | 'card' | null;
-  /** Entries on the official leaderboard that are not in the model list, best per name. Shown, never credited. */
-  unlisted: Score[];
-  /**
-   * What the benchmark page's board draws: `board`, plus the unlisted entries when it is the official leaderboard,
-   * or the unlisted entries alone when no other source has a score.
-   */
-  shown: Score[];
-  shownSource: 'leaderboard' | 'epoch' | 'card' | null;
   best?: Score;
   saturatedAt?: string;
   nScores: number;
-  /** The newest score from any source: when a model was last added. An old date means the board has gone quiet. */
-  lastAdded?: { date: string; model: string; source: Score['source'] };
-  /** When the almanac last read this benchmark's scores: its leaderboard, Epoch AI, or the newest model card. */
-  refreshed?: string;
 }
 
 export const SATURATED = 85;
@@ -273,29 +240,15 @@ export function benchSummary(id: string): BenchSummary {
   const leaderboardBoard = bestPerModel(lbByBench.get(id) ?? [], b);
   const epochBoard = bestPerModel(epochByBench.get(id) ?? [], b);
   const cardBoard = bestPerModel(cardScoresByBench.get(id) ?? [], b);
-  // An independent board leads, unless it stopped six or more months before the newest score from another
-  // source. A board that ends at o4-mini should not headline a benchmark labs still report today.
-  const newest = (xs: Score[]) => xs.reduce((m, x) => (x.date && x.date > m ? x.date : m), '');
-  const latest = [leaderboardBoard, epochBoard, cardBoard].map(newest).reduce((a, x) => (x > a ? x : a), '');
-  const fresh = (xs: Score[]) => !latest || !newest(xs) || monthsBetween(newest(xs), latest) < 6;
   const boardSource: BenchSummary['boardSource'] =
-    (leaderboardBoard.length >= 5 && fresh(leaderboardBoard)) || (leaderboardBoard.length > 0 && epochBoard.length < 5 && cardBoard.length === 0)
+    leaderboardBoard.length >= 5 || (leaderboardBoard.length > 0 && epochBoard.length < 5 && cardBoard.length === 0)
       ? 'leaderboard'
-      : (epochBoard.length >= 5 && fresh(epochBoard)) || (epochBoard.length > 0 && cardBoard.length === 0)
+      : epochBoard.length >= 5 || (epochBoard.length > 0 && cardBoard.length === 0)
         ? 'epoch'
-        : cardBoard.length >= 5 || (cardBoard.length > 0 && leaderboardBoard.length < 5 && epochBoard.length < 5)
+        : cardBoard.length
           ? 'card'
-          : leaderboardBoard.length >= 5
-            ? 'leaderboard'
-            : epochBoard.length
-              ? 'epoch'
-              : cardBoard.length
-                ? 'card'
-                : null;
+          : null;
   const board = boardSource === 'leaderboard' ? leaderboardBoard : boardSource === 'epoch' ? epochBoard : boardSource === 'card' ? cardBoard : [];
-  const unlisted = bestPerModel(unlistedByBench.get(id) ?? [], b);
-  const shownSource = boardSource ?? (unlisted.length ? 'leaderboard' : null);
-  const shown = shownSource === 'leaderboard' && unlisted.length ? bestPerModel([...board, ...unlisted], b) : board;
 
   // frontier: only for percent scores, where card and Epoch numbers share a scale
   const pct = (b.unit ?? '%') === '%';
@@ -330,15 +283,6 @@ export function benchSummary(id: string): BenchSummary {
     else why = 'other';
   }
 
-  let lastAdded: BenchSummary['lastAdded'];
-  for (const x of [...(lbByBench.get(id) ?? []), ...(epochByBench.get(id) ?? []), ...(cardScoresByBench.get(id) ?? [])])
-    if (x.date && x.date <= AS_OF && (!lastAdded || x.date > lastAdded.date)) lastAdded = { date: x.date, model: x.model, source: x.source };
-  for (const c of [...cites, ...docCites]) if (!lastAdded || c.card.date > lastAdded.date) lastAdded = { date: c.card.date, model: c.card.model, source: 'card' };
-  const refreshed = [
-    ...(lbByBench.get(id)?.length && LEADERBOARDS[id]?.retrieved ? [LEADERBOARDS[id].retrieved] : []),
-    ...(epochByBench.get(id)?.length ? [epoch.retrieved] : []),
-  ].sort().at(-1);
-
   const s: BenchSummary = {
     b,
     area: areaOf(b.category),
@@ -356,39 +300,15 @@ export function benchSummary(id: string): BenchSummary {
     cardBoard,
     board,
     boardSource,
-    unlisted,
-    shown,
-    shownSource,
     best: board[0],
     saturatedAt,
     nScores: new Set([...leaderboardBoard, ...epochBoard, ...cardBoard].map((x) => x.model)).size,
-    lastAdded,
-    refreshed,
   };
   summaries.set(id, s);
   return s;
 }
 
 export const allSummaries = () => benchmarks.map((b) => benchSummary(b.id));
-
-/** The table filter for how recently a model got a score: every window it falls in, "quiet" after a year, "none" with no scores. */
-export function addedWindows(s: BenchSummary): string {
-  if (!s.lastAdded) return 'none';
-  const m = monthsBetween(s.lastAdded.date, AS_OF);
-  return m < 3 ? '3m 6m 12m' : m < 6 ? '6m 12m' : m < 12 ? '12m' : 'quiet';
-}
-/** The options for that filter, with counts over the given rows. */
-export function addedOptions(rows: BenchSummary[]) {
-  const n = (w: string) => rows.filter((s) => addedWindows(s).split(' ').includes(w)).length;
-  return [
-    { value: '', label: 'Last model: any time' },
-    { value: '3m', label: 'New model within 3 months', count: n('3m') },
-    { value: '6m', label: 'New model within 6 months', count: n('6m') },
-    { value: '12m', label: 'New model within a year', count: n('12m') },
-    { value: 'quiet', label: 'Quiet for a year or more', count: n('quiet') },
-    { value: 'none', label: 'No scores yet', count: n('none') },
-  ].filter((o) => o.value === '' || o.count);
-}
 
 // ---- model summaries ------------------------------------------------------------------------------
 export interface ModelResult {
