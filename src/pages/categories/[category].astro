@@ -44,7 +44,7 @@ const levels = LEVELS.map((l) => ({ l, xs: all.filter((s) => s.b.level === l.id)
 const unrated = all.filter((s) => !s.b.level);
 const subs = (SUBCATEGORIES[cat] ?? []).map((sc) => ({ sc, xs: all.filter((s) => s.b.subcategory === sc.id) })).filter((x) => x.xs.length);
 const unsorted = all.filter((s) => !s.b.subcategory || !(SUBCATEGORIES[cat] ?? []).some((sc) => sc.id === s.b.subcategory));
-const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
 const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} to ${levels.at(-1)!.l.name.toLowerCase()} level` : 'How hard the tests are';
 ---
 

@@ -9,6 +9,7 @@ const labs = readJson<Rec[]>(dataPath('labs.json'));
 const models = readJson<Rec[]>(dataPath('models.json'));
 const benchmarks = readJson<Rec[]>(dataPath('benchmarks.json'));
 const cards = readJson<(Rec & { lab: string; model: string; date: string; results: { benchmark: string }[] })[]>(dataPath('cards.json'));
+const systemCards = readJson<{ id: string; lab: string; model: string; date: string; doc: string; release?: string | null; results: { benchmark: string; section: string }[] }[]>(dataPath('system-cards.json'));
 const epoch = readJson<{ rows: [string, string, ...unknown[]][]; eci: { model: string }[] }>(dataPath('scores', 'epoch.json'));
 const boards = readJson<{ rows: [string, string, ...unknown[]][] }>(dataPath('scores', 'leaderboards.json'));
 const sources = readJson<Rec[]>(dataPath('sources.json'));
@@ -79,6 +80,27 @@ for (const c of cards) {
   if (!/^\d{4}-\d\d-\d\d$/.test(c.date)) fail(`card ${c.id}: bad date ${c.date}`);
   for (const r of c.results) if (!benchIds.has(r.benchmark)) fail(`card ${c.id}: unknown benchmark ${r.benchmark}`);
 }
+// system cards, model cards and technical reports published with a release
+const SECTIONS = new Set(['capabilities', 'safety', 'robustness', 'health', 'hallucination', 'alignment', 'monitorability', 'bio-chem', 'cyber', 'ai-rnd', 'autonomy', 'persuasion', 'bias', 'other']);
+const DOCS = new Set(['system card', 'system card addendum', 'model card', 'technical report']);
+const cardIds = new Set(cards.map((c) => (c as Rec).id as string));
+const docIds = new Set<string>();
+for (const d of systemCards) {
+  if (docIds.has(d.id)) fail(`system card ${d.id}: duplicate id`);
+  docIds.add(d.id);
+  if (!labIds.has(d.lab)) fail(`system card ${d.id}: unknown lab ${d.lab}`);
+  if (!modelIds.has(d.model)) fail(`system card ${d.id}: unknown model ${d.model}`);
+  if (!/^\d{4}-\d\d-\d\d$/.test(d.date)) fail(`system card ${d.id}: bad date ${d.date}`);
+  if (d.release && !cardIds.has(d.release)) fail(`system card ${d.id}: unknown launch post ${d.release}`);
+  if (!DOCS.has(d.doc)) fail(`system card ${d.id}: unknown document type ${d.doc}`);
+  const seen = new Set<string>();
+  for (const r of d.results) {
+    if (!benchIds.has(r.benchmark)) fail(`system card ${d.id}: unknown benchmark ${r.benchmark}`);
+    if (seen.has(r.benchmark)) fail(`system card ${d.id}: two results for ${r.benchmark}`);
+    seen.add(r.benchmark);
+    if (!SECTIONS.has(r.section)) fail(`system card ${d.id}: unknown section ${r.section}`);
+  }
+}
 for (const r of epoch.rows) {
   if (!benchIds.has(r[0])) fail(`epoch row: unknown benchmark ${r[0]}`);
   if (!modelIds.has(r[1])) fail(`epoch row: unknown model ${r[1]}`);
@@ -94,4 +116,4 @@ if (errors.length) {
   console.error(`${errors.length} errors:\n  ${errors.slice(0, 50).join('\n  ')}`);
   process.exit(1);
 }
-console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores.`);
+console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} launch posts, ${systemCards.length} system cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores.`);

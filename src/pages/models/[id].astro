@@ -3,8 +3,8 @@ import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import LabMark from '../../components/LabMark.astro';
 import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
-import { featuredModels, modelSummary, models, eciByModel, cards } from '../../lib/data.ts';
-import { AREAS, areaOf } from '../../lib/taxonomy.ts';
+import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById } from '../../lib/data.ts';
+import { AREAS, areaOf, SECTION_NAMES, SECTION_ORDER } from '../../lib/taxonomy.ts';
 import { modelLine } from '../../lib/findings.ts';
 import { fullDate, score as fmt } from '../../lib/format.ts';
 import { labColor } from '../../lib/palette.ts';
@@ -32,6 +32,16 @@ const labPts: Pt[] = ms.eci
   : [];
 const labIds = models.filter((x) => x.lab === m.lab).map((x) => x.id);
 const myCards = cards.filter((c) => c.model === m.id);
+// its system cards, with results grouped by the section they sit in
+const myDocs = systemCards
+  .filter((d) => d.model === m.id)
+  .map((d) => {
+    const groups = new Map<string, typeof d.results>();
+    for (const r of d.results) groups.set(r.section ?? 'other', [...(groups.get(r.section ?? 'other') ?? []), r]);
+    const ordered = [...groups.entries()].sort(([a], [b]) => (SECTION_ORDER.indexOf(a) + 99) % 99 - ((SECTION_ORDER.indexOf(b) + 99) % 99));
+    const inLaunch = new Set(myCards.filter((c) => c.id === d.release).flatMap((c) => c.results.map((r) => r.benchmark)));
+    return { d, groups: ordered, extra: d.results.filter((r) => !inLaunch.has(r.benchmark)).length };
+  });
 ---
 
 <Base title={m.name} description={modelLine(ms)}>
@@ -119,8 +129,8 @@ const myCards = cards.filter((c) => c.model === m.id);
       myCards.length > 0 && (
         <section>
           <div class="sh">
-            <h2>{myCards.length === 1 ? 'Its model card' : 'Its model cards'}</h2>
-            <p>The benchmarks the lab chose for its headline table.</p>
+            <h2>{myCards.length === 1 ? 'Its launch post' : 'Its launch posts'}</h2>
+            <p>The benchmarks the lab chose for its headline results.</p>
           </div>
           {myCards.map((c) => (
             <article class="card-doc">
@@ -136,6 +146,41 @@ const myCards = cards.filter((c) => c.model === m.id);
                   </li>
                 ))}
               </ul>
+            </article>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      myDocs.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{myDocs.length === 1 ? 'Its system card' : 'Its system cards'}</h2>
+            <p>
+              Every result in the longer documents the lab published with it.
+              {myDocs[0].extra > 0 && ` ${myDocs[0].extra} of them are not in the launch post.`}
+            </p>
+          </div>
+          {myDocs.map(({ d, groups }) => (
+            <article class="card-doc">
+              <div class="cd-h">
+                <a href={d.url ?? '#'}>{d.title ?? `${m.name} ${d.doc ?? 'system card'}`}</a>
+                <span class="muted num">{fullDate(d.date)}</span>
+              </div>
+              {groups.map(([sec, rs]) => (
+                <div class="sec">
+                  <h3>{SECTION_NAMES[sec] ?? sec}</h3>
+                  <ul class="chips">
+                    {rs.map((r) => (
+                      <li>
+                        <a href={`/benchmarks/${r.benchmark}/`}>{benchById.get(r.benchmark)?.name ?? r.benchmark}</a>
+                        {r.score !== null && <span class="muted num"> {r.score}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </article>
           ))}
         </section>
@@ -202,6 +247,17 @@ const myCards = cards.filter((c) => c.model === m.id);
     justify-content: space-between;
     flex-wrap: wrap;
     font-weight: 500;
+  }
+  .sec {
+    margin-top: 18px;
+  }
+  .sec h3 {
+    font: 500 12.5px/1.2 var(--sans);
+    color: var(--ink-3);
+    margin: 0;
+  }
+  .sec .chips {
+    margin-top: 8px;
   }
   .chips {
     list-style: none;

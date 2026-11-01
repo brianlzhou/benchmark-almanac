@@ -7,26 +7,15 @@ import CardTicks from '../../components/CardTicks.astro';
 import ReignChart from '../../components/ReignChart.astro';
 import { reignRow } from '../../lib/reigns.ts';
 import { leaderRows } from '../../lib/leaders.ts';
-import { effortView, usd, costUnit } from '../../lib/effort.ts';
+import { effortView, usd } from '../../lib/effort.ts';
 import EffortChart from '../../components/EffortChart.astro';
 import { untested } from '../../lib/coverage.ts';
-import { host, unreadWhy } from '../../lib/unread.ts';
 import ModelName from '../../components/ModelName.astro';
 import LabMark from '../../components/LabMark.astro';
-import AuthorsWords from '../../components/AuthorsWords.astro';
-import KnownIssues from '../../components/KnownIssues.astro';
-import BoardChart from '../../components/BoardChart.astro';
-import { issuesByBenchmark, unresolved } from '../../lib/audits.ts';
-import Crumbs from '../../components/Crumbs.astro';
-import AreaMark from '../../components/AreaMark.astro';
-import Spark from '../../components/Spark.astro';
-import LinkIcon from '../../components/LinkIcon.astro';
-import { makerParts } from '../../lib/makers.ts';
-import { familyOf } from '../../lib/reigns.ts';
-import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores } from '../../lib/data.ts';
+import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS } from '../../lib/data.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
-import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
+import { monthYear, fullDate, score as fmt, count, repoName, hostname } from '../../lib/format.ts';
 import githubJson from '../../../data/github.json';
 
 export function getStaticPaths() {
@@ -37,24 +26,6 @@ setAsOf(AS_OF);
 const { id } = Astro.params;
 const s = benchSummary(id!);
 const b = s.b;
-const issues = issuesByBenchmark.get(b.id) ?? [];
-// a chart the official leaderboard draws from more than its headline score (scripts/leaderboards/types.ts)
-const boardChart = LEADERBOARDS[b.id]?.chart;
-const boardChartRuns = boardChart
-  ? [...leaderboardScores, ...unlistedScores]
-      .filter((r) => r.benchmark === b.id)
-      .map((r) => {
-        const at = (k: string) => (k === 'score' ? r.value : k === 'cost' ? (r.cost ?? undefined) : k === 'tokens' ? (r.tokens ?? undefined) : r.metrics?.[k]);
-        return { r, x: at(boardChart.x.key), y: at(boardChart.y.key) };
-      })
-      .filter((p): p is { r: (typeof p)['r']; x: number; y: number } => p.x !== undefined && p.y !== undefined && Number.isFinite(p.x) && Number.isFinite(p.y))
-      .sort((p, q) => (boardChart.y.better === 'lower' ? p.y - q.y : q.y - p.y) || p.x - q.x)
-  : [];
-const chartNum = (v: number, unit?: string) => {
-  const n = Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : String(Math.round(v * 100) / 100);
-  return unit === '%' ? `${Math.round(v * 10) / 10}%` : unit === '$' || unit === 'usd' ? `$${n}` : unit ? `${n} ${unit}` : n;
-};
-const openIssues = unresolved(issues).length;
 const unit = b.unit ?? '%';
 const area = AREA_BY_ID.get(s.area)!;
 const gh = (githubJson as Record<string, { stars?: number; archived?: boolean; license?: string | null; pushed?: string }>)[
@@ -62,6 +33,11 @@ const gh = (githubJson as Record<string, { stars?: number; archived?: boolean; l
 ];
 const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'Only in system cards', 'not in cards': 'Not in model cards' };
 const WHY: Record<string, string> = { saturated: 'after it saturated', replaced: 'for a newer version', other: 'before it saturated' };
+const ACCESS: Record<string, string> = {
+  public: 'All tasks public',
+  'public+private-holdout': 'Public tasks plus a private test set',
+  private: 'Tasks kept private',
+};
 const succ = b.successor ? benchById.get(b.successor) : undefined;
 const gap = untested(b.id);
 const official = LEADERBOARDS[b.id];
@@ -71,7 +47,7 @@ const SHOW = 4;
 // every run on the official board, by effort level and cost
 const effort = effortView(b.id);
 const runLabel = (r: { model: string; setting: string | null }) => `${modelById.get(r.model)?.name ?? r.model}${r.setting ? ` at ${r.setting}` : ''}`;
-const costRatio = (k: number) => (Math.round(k) <= 2 ? 'about half the cost' : `${Math.round(k)} times cheaper`);
+const costRatio = (k: number) => (Math.round(k) <= 2 ? 'about half the cost' : `${Math.round(k)} times less`);
 const effortRuns = effort ? [...effort.all].sort((x, y) => y.value - x.value) : [];
 // The reign chart starts in 2023, or at the release month for a benchmark that came out later
 const opened = b.released ? `${b.released.slice(0, 7)}-01` : '';
@@ -79,101 +55,30 @@ const reignFrom = opened > '2023-01-01' ? opened : '2023-01-01';
 const reignRows = (['leaderboard', 'epoch', 'card'] as const)
   .map((src) => reignRow(b.id, src))
   .filter((r): r is NonNullable<typeof r> => r !== null && r.reigns.some((g) => g.end > reignFrom));
-const ROW_NAME: Record<string, string> = { leaderboard: 'Own leaderboard', epoch: 'Epoch AI runs', card: 'Lab claims' };
-const ROW_TEXT: Record<string, string> = { leaderboard: 'the benchmark’s own leaderboard', epoch: 'Epoch AI’s runs', card: 'what labs claim in their cards' };
+const ROW_NAME = { leaderboard: 'Own leaderboard', epoch: 'Epoch AI runs', card: 'Lab claims' } as const;
+const ROW_TEXT = { leaderboard: 'its own leaderboard', epoch: 'Epoch AI’s runs', card: 'the scores labs claim in their cards' } as const;
 const reignNames = Object.fromEntries(reignRows.map((r) => [`${b.id}|${r.source}`, { name: ROW_NAME[r.source] }]));
 const holders = reignRows[0] ? new Set(reignRows[0].reigns.filter((g) => g.end > reignFrom).map((g) => g.model)).size : 0;
 const listText = (xs: string[]) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
 // all versions of the family, each handing over to the next
-const familyRows = family.length > 1 ? leaderRows(family.map((x) => x.id), 'all', family.length) : [];
+const familyRows = family.length > 1 ? leaderRows(family.map((x) => x.id), 'best', family.length) : [];
 const familyStart = familyRows.map((r) => r.reigns[0].start).sort()[0] ?? '';
 const familyFrom = familyStart > '2023-01-01' ? `${familyStart.slice(0, 7)}-01` : '2023-01-01';
 const pred = benchmarks.filter((x) => x.successor === b.id);
 const both = [s.leaderboardBoard, s.epochBoard, s.cardBoard].filter((x) => x.length).length > 1;
-// the masthead: who leads now and since when, from the same source as the board below
-const top = s.best ? modelById.get(s.best.model) : undefined;
-const nowRow = s.boardSource ? reignRow(b.id, s.boardSource) : null;
-const nowReign = nowRow?.reigns.at(-1);
-const since = nowReign && s.best && nowReign.model === s.best.model ? nowReign.start : undefined;
-// an entry the board ranks above every model we track (a fine-tune, agent system or product): named, never credited
-const sign = b.better === 'lower' ? -1 : 1;
-const topOther = s.shownSource === 'leaderboard' ? s.unlisted[0] : undefined;
-const otherAhead = topOther && (!s.best || sign * topOther.value > sign * s.best.value) ? topOther : undefined;
-const shownWhat = s.unlisted.length && s.shownSource === 'leaderboard' ? 'entries' : 'models';
-const cat = b.category ?? 'other';
-const catName = CATEGORY_NAMES[cat] ?? area.name;
-// more in this category: one row per test (a family's newest version), in use first, then the most reported
-const STATUS_ORDER: Record<string, number> = { 'in use': 0, fading: 1, 'system cards': 2, dropped: 3, 'not in cards': 4 };
-const siblingsAll = allSummaries().filter((x) => (x.b.category ?? 'other') === cat && x.b.id !== b.id && (!b.family || x.b.family !== b.family) && (!x.b.family || familyOf(x.b.id).at(-1) === x.b.id));
-const siblings = siblingsAll
-  .slice()
-  .sort((x, y) => (STATUS_ORDER[x.status] ?? 9) - (STATUS_ORDER[y.status] ?? 9) || y.cites.length - x.cites.length || y.nScores - x.nScores || x.b.name.localeCompare(y.b.name))
-  .slice(0, 6);
-type LinkKind = 'github' | 'code' | 'paper' | 'dataset' | 'leaderboard' | 'site';
 const links = [
-  b.links?.repo && {
-    kind: /github\.com/.test(b.links.repo) ? 'github' : 'code',
-    href: b.links.repo,
-    label: /github\.com/.test(b.links.repo) ? repoName(b.links.repo) : 'Code',
-    note: gh?.stars !== undefined ? `${gh.stars.toLocaleString('en-US')} stars` : hostname(b.links.repo).replace(/^github\.com$/, ''),
-  },
-  b.links?.paper && { kind: 'paper', href: b.links.paper, label: 'Paper', note: hostname(b.links.paper) },
-  b.links?.dataset && { kind: 'dataset', href: b.links.dataset, label: 'Dataset', note: hostname(b.links.dataset) },
-  b.links?.leaderboard && { kind: 'leaderboard', href: b.links.leaderboard, label: 'Leaderboard', note: hostname(b.links.leaderboard) },
-  b.links?.site && { kind: 'site', href: b.links.site, label: hostname(b.links.site) },
-].filter(Boolean) as { kind: LinkKind; href: string; label: string; note?: string }[];
-// The strongest model with any score here, by its rank on the capability index (ECI). A benchmark that
-// frontier models stopped running shows an older model here, well down the index.
-const eciRank = new Map(eciOrder.map((m, i) => [m, i + 1]));
-const strongest = [...new Set([...s.board, ...s.leaderboardBoard, ...s.epochBoard, ...s.cardBoard].map((x) => x.model))]
-  .filter((m) => eciRank.has(m))
-  .sort((x, y) => eciRank.get(x)! - eciRank.get(y)!)[0];
-const strongestRank = strongest ? eciRank.get(strongest)! : 0;
-const TASKS: Record<string, string> = { public: 'All public', 'public+private-holdout': 'Public, plus a private test set', private: 'Kept private' };
-const level = b.level ? LEVEL_BY_ID.get(b.level) : undefined;
-const scoring = b.scoring ? SCORING_BY_ID.get(b.scoring) : undefined;
-const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
+  b.links?.repo && { href: b.links.repo, label: gh?.stars !== undefined ? `${repoName(b.links.repo)}` : 'Code', note: gh?.stars !== undefined ? `${gh.stars.toLocaleString('en-US')} stars` : undefined },
+  b.links?.paper && { href: b.links.paper, label: 'Paper' },
+  b.links?.dataset && { href: b.links.dataset, label: 'Dataset' },
+  b.links?.leaderboard && { href: b.links.leaderboard, label: 'Leaderboard' },
+  b.links?.site && { href: b.links.site, label: hostname(b.links.site) },
+].filter(Boolean) as { href: string; label: string; note?: string }[];
 ---
 
 <Base title={b.name} description={b.description ?? `${b.name}: scores, leaderboard, and which model cards report it.`}>
   <div class="page">
-    <header class="head" style={`--a: var(--area-${s.area})`}>
-      <Crumbs
-        items={[
-          { href: '/benchmarks/', label: 'Benchmarks' },
-          // Coding is both an area and its main category: one step, to the category page
-          ...(catName === area.name ? [] : [{ href: `/benchmarks/?area=a:${s.area}`, label: area.name }]),
-          { href: `/categories/${cat}/`, label: catName },
-        ]}
-      />
-      <h1 class="with-amark"><AreaMark area={s.area} size={20} />{b.name}</h1>
-      <div class="mast">
-        {otherAhead && (
-          <span class="mast-lead">
-            <ModelName id="" name={otherAhead.name} size={18} />
-            <b class="num">{fmt(otherAhead.value, unit)}</b>
-            <span class="muted">tops its leaderboard</span>
-          </span>
-        )}
-        {s.best && top && (
-          <span class="mast-lead">
-            <ModelName id={s.best.model} size={18} />
-            <b class="num">{fmt(s.best.value, unit)}</b>
-            {otherAhead ? <span class="muted">leads the models we track</span> : since && <span class="muted">leads since {longMonthYear(since)}</span>}
-          </span>
-        )}
-        {s.frontier.length >= 2 && <Spark points={s.frontier} unit={unit} better={b.better} color={`var(--area-${s.area})`} label={`Best score on ${b.name} over time`} />}
-        <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
-          <span class="dot" />
-          <span class="sl">{STATUS[s.status]}</span>
-        </span>
-        {issues.length > 0 && (
-          <a class="tag ki-flag" href="#issues">
-            <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><path d="M6.5 1.5l5.2 9.5H1.3z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" /><path d="M6.5 5.2v2.6M6.5 9.4v.1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg>
-            <span class="sl">{issues.length === 1 ? '1 known issue' : `${issues.length} known issues`}{openIssues === 0 ? ', fixed' : ''}</span>
-          </a>
-        )}
-      </div>
+    <header class="head">
+      <h1>{b.name}</h1>
       {
         family.length > 1 && (
           <nav class="seg versions" aria-label="Versions">
@@ -186,127 +91,79 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
           </nav>
         )
       }
-      <div class="intro">
-        <div class="prose">
-          {b.description && <p class="lede">{proseDates(b.description)}</p>}
-          {b.note && <p class="lede note">{proseDates(b.note)}</p>}
-        </div>
-        <div class="info">
-          <dl class="kv">
-            {b.org && (
+      {b.description && <p class="lede">{b.description}</p>}
+      {b.note && <p class="lede note">{b.note}</p>}
+      <div class="facts">
+        {b.org && <span>Made by <b>{b.org}</b></span>}
+        {b.released && <span>Released <b>{monthYear(b.released)}</b></span>}
+        <span><a href={`/categories/${b.category ?? 'other'}/`}>{CATEGORY_NAMES[b.category ?? 'other'] ?? area.name}</a>{b.subcategory && SUB_BY_ID.get(b.subcategory) && <>, {SUB_BY_ID.get(b.subcategory)!.name.toLowerCase()}</>}</span>
+        {b.access && ACCESS[b.access] && <span>{ACCESS[b.access]}</span>}
+      </div>
+      {
+        (b.level || b.scoring || b.format) && (
+          <dl class="how">
+            {b.level && LEVEL_BY_ID.get(b.level) && (
               <div>
-                <dt>Made by</dt>
+                <dt>Level</dt>
                 <dd>
-                  {/* separator and name on one line: a line break between them renders as a space before the comma */}
-                  {makerParts(b.org).map((p) => (
-                    <>{p.sep}{p.lab && labPages.has(p.lab) ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}</>
-                  ))}
+                  <b>{LEVEL_BY_ID.get(b.level)!.name}</b>
+                  <span>{LEVEL_BY_ID.get(b.level)!.who}</span>
                 </dd>
               </div>
             )}
-            {b.released && (
-              <div>
-                <dt>Released</dt>
-                <dd>{longMonthYear(b.released)}</dd>
-              </div>
-            )}
-            {b.subcategory && SUB_BY_ID.get(b.subcategory) && (
-              <div>
-                <dt>Kind</dt>
-                <dd>{SUB_BY_ID.get(b.subcategory)!.name}</dd>
-              </div>
-            )}
-            {level && (
-              <div>
-                <dt>Level</dt>
-                <dd><span class="hint" tabindex="0" data-tn={level.name} data-ts={level.who}>{level.name}</span></dd>
-              </div>
-            )}
-            {scoring && (
+            {b.scoring && SCORING_BY_ID.get(b.scoring) && (
               <div>
                 <dt>Scored</dt>
-                <dd><span class="hint" tabindex="0" data-tn={scoring.name} data-ts={scoring.how}>{scoring.name}</span></dd>
+                <dd>
+                  <b>{SCORING_BY_ID.get(b.scoring)!.name}</b>
+                  <span>{SCORING_BY_ID.get(b.scoring)!.how}</span>
+                </dd>
               </div>
             )}
-            {format && (
+            {b.format && FORMAT_BY_ID.get(b.format) && (
               <div>
                 <dt>Answers</dt>
-                <dd>{format.note ? <span class="hint" tabindex="0" data-tn={format.name} data-ts={format.note}>{format.name}</span> : format.name}</dd>
-              </div>
-            )}
-            {b.access && TASKS[b.access] && (
-              <div>
-                <dt>Tasks</dt>
-                <dd>{TASKS[b.access]}</dd>
+                <dd>
+                  <b>{FORMAT_BY_ID.get(b.format)!.name}</b>
+                  {FORMAT_BY_ID.get(b.format)!.note && <span>{FORMAT_BY_ID.get(b.format)!.note}</span>}
+                </dd>
               </div>
             )}
           </dl>
-          {
-            (strongest || s.last || s.docCites.length > 0 || s.lastAdded || s.refreshed) && (
-              <dl class="kv">
-                {strongest && (
-                  <div>
-                    <dt>Strongest model tested</dt>
-                    <dd class="st">
-                      <ModelName id={strongest} size={15} />
-                      <span class="muted">#{strongestRank} on the capability index</span>
-                    </dd>
-                  </div>
-                )}
-                {(s.last || s.docCites.length > 0) && (
-                  <div>
-                    <dt>{s.last ? 'Last in a launch post' : 'Last in a system card'}</dt>
-                    <dd>
-                      {longMonthYear(s.last ?? s.docCites.at(-1)!.card.date)}{s.why && <span class="muted">, dropped {WHY[s.why]}</span>}
-                    </dd>
-                  </div>
-                )}
-                {s.lastAdded && (
-                  <div>
-                    <dt>Last model added</dt>
-                    <dd title={modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}>{longMonthYear(s.lastAdded.date)}</dd>
-                  </div>
-                )}
-                {s.refreshed && (
-                  <div>
-                    <dt>Scores refreshed</dt>
-                    <dd>{humanDate(s.refreshed)}</dd>
-                  </div>
-                )}
-              </dl>
-            )
-          }
-          {
-            links.length > 0 && (
-              <ul class="links">
-                {links.map((l) => (
-                  <li>
-                    <a href={l.href} rel="noopener">
-                      <LinkIcon kind={l.kind} />
-                      <span class="ll">{l.label}</span>
-                      {l.note && <span class="muted">{l.note}</span>}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )
-          }
-        </div>
-        <div class="quote">
-          <AuthorsWords id={b.id} />
-        </div>
-      </div>
+        )
+      }
+      {
+        links.length > 0 && (
+          <div class="links">
+            {links.map((l) => (
+              <a href={l.href} rel="noopener">
+                {l.label}
+                {l.note && <span class="muted"> {l.note}</span>}
+                <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                  <path d="M3 1h6v6M9 1 1 9" fill="none" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        )
+      }
     </header>
 
-    <KnownIssues id={b.id} name={b.name} />
-
     {
-      (s.shown.length > 0 || s.cites.length > 0 || s.docCites.length > 0) && (
+      (s.board.length > 0 || s.cites.length > 0 || s.docCites.length > 0) && (
         <div class="stats">
-          {s.shown.length > 0 && (
+          {s.best && (
             <div class="stat">
-              <div class="v">{s.shown.length.toLocaleString('en-US')}</div>
-              <div class="l">{shownWhat === 'entries' ? `Entries on its own leaderboard, ${count(s.board.length, 'model')} we track` : `${s.shown.length === 1 ? 'Model scored' : 'Models scored'} ${SRC[s.shownSource ?? 'card']}`}</div>
+              <div class="v">{fmt(s.best.value, unit)}</div>
+              <div class="l">
+                Best score, by <a href={`/models/${s.best.model}/`}>{modelById.get(s.best.model)?.name}</a>
+              </div>
+            </div>
+          )}
+          {s.board.length > 0 && (
+            <div class="stat">
+              <div class="v">{s.board.length}</div>
+              <div class="l">{`${s.board.length === 1 ? 'Model scored' : 'Models scored'} ${SRC[s.boardSource ?? 'card']}`}</div>
             </div>
           )}
           {s.cites.length > 0 && (
@@ -321,46 +178,42 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               <div class="l">{`${s.docCites.length === 1 ? 'System card reports it' : 'System cards report it'}, from ${count(s.docLabs.length, 'lab')}`}</div>
             </div>
           )}
+          <div class="stat">
+            <div class="v">
+              <span class:list={['tag big', `status-${s.status.replace(/ /g, '-')}`]}>
+                <span class="dot" />
+                {STATUS[s.status]}
+              </span>
+            </div>
+            <div class="l">
+              {s.why
+                ? `Dropped ${WHY[s.why]}`
+                : s.last
+                  ? `Last in a launch post ${monthYear(s.last)}`
+                  : s.docCites.length
+                    ? `Last in a system card ${monthYear(s.docCites.at(-1)!.card.date)}`
+                    : b.epoch
+                      ? 'Tracked by Epoch AI'
+                      : 'Not in a model card yet'}
+            </div>
+          </div>
         </div>
       )
     }
 
     {
-      s.shown.length === 0 && (
-        <section class="none">
-          <div class="sh">
-            <h2>No scores here yet</h2>
-            <p>
-              {b.links?.leaderboard
-                ? (unreadWhy(b.links.leaderboard) ?? `We have no scores for ${b.name} yet.`)
-                : `No lab, leaderboard or Epoch AI run has reported a score for ${b.name} yet.`}
-            </p>
-          </div>
-          {b.links?.leaderboard && (
-            <a class="live" href={b.links.leaderboard}>
-              See the live leaderboard on {host(b.links.leaderboard)}
-              <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </a>
-          )}
-        </section>
-      )
-    }
-
-    {
-      s.shown.length > 0 && (
+      s.board.length > 0 && (
         <section class="views">
           <div class="sh-row">
             <div class="sh">
-              <h2>{otherAhead ? `${otherAhead.name} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : leaderLine(s, gap?.last)}</h2>
+              <h2>{leaderLine(s, gap?.last)}</h2>
               <p>
-                {s.shownSource === 'leaderboard' ? (
+                {s.boardSource === 'leaderboard' ? (
                   <>
-                    Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from the benchmark's <a href={official?.url}>own leaderboard</a>, read on {humanDate(official?.retrieved)}. Where a model ran with several settings or harnesses, we keep its best.{effort && ' Every run is in the next chart.'}
-                    {shownWhat === 'entries' && ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`}
-                    {otherAhead && s.best && ` The best model we track is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
+                    Best score per model on the benchmark's <a href={official?.url}>own leaderboard</a>, read {fullDate(official?.retrieved)}. Each model keeps its best setting and harness.{effort && ' The next chart shows every setting.'}
                   </>
                 ) : s.boardSource === 'epoch' ? (
-                  'Best score per model in Epoch AI’s data. Where a model ran with several settings or harnesses, we keep its best.'
+                  'Best score per model in Epoch AI data. Each model keeps its best setting and harness.'
                 ) : (
                   'Best score per model as labs report them in their own cards. Labs pick their own settings, so these compare less cleanly than independent runs.'
                 )}
@@ -374,7 +227,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
           {gap && (
             <div class="gap">
               <p>
-                The newest model with a score here came out in {longMonthYear(gap.last)}, and nobody has {s.boardSource === 'card' ? 'reported' : 'tested'} a newer one. Among the {gap.top} highest-ranked models on the capability index, these have no score yet:
+                Newer models have not been {s.boardSource === 'card' ? 'reported here' : 'tested here'}. The newest model with a score came out in {monthYear(gap.last)}. Not yet {s.boardSource === 'card' ? 'reported' : 'tested'}, among the {gap.top} highest-ranked models on the capability index:
               </p>
               <ul>
                 {gap.newer.slice(0, SHOW).map((m) => (
@@ -384,29 +237,29 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 ))}
                 {gap.missing.length > SHOW && <li class="more-n">and {gap.missing.length - SHOW} more</li>}
               </ul>
-              {gap.claimed.length > 0 && <p class="claimed">{gap.claimed.length === 1 ? 'One of them reports a score in its own model card' : `${gap.claimed.length} of them report scores in their own model cards`}. We plot lab claims in the charts below.</p>}
+              {gap.claimed.length > 0 && <p class="claimed">{gap.claimed.length === 1 ? 'One of them reports' : `${gap.claimed.length} of them report`} a score in its own model card. Those claims appear in the chart below.</p>}
             </div>
           )}
           <div class="view-graph">
             {b.better === 'lower' ? (
-              <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
+              <BarBoard scores={s.board} unit={unit} limit={15} better={b.better} />
             ) : (
               <>
-                <div class="only-wide"><Columns scores={s.shown} unit={unit} /></div>
-                <div class="only-narrow"><BarBoard scores={s.shown} unit={unit} limit={10} all /></div>
+                <div class="only-wide"><Columns scores={s.board} unit={unit} limit={15} /></div>
+                <div class="only-narrow"><BarBoard scores={s.board} unit={unit} limit={10} /></div>
               </>
             )}
           </div>
           <div class="view-table table-wrap">
-            <table class="t" data-sort>
+            <table class="t">
               <thead>
-                <tr><th>#</th><th>{shownWhat === 'entries' ? 'Entry' : 'Model'}</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
+                <tr><th>#</th><th>Model</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
               </thead>
               <tbody>
-                {s.shown.map((x, i) => (
+                {s.board.map((x, i) => (
                   <tr>
                     <td class="rank">{i + 1}</td>
-                    <td><ModelName id={x.model} name={x.name} /></td>
+                    <td><ModelName id={x.model} /></td>
                     <td class="r">{fmt(x.value, unit)}</td>
                     <td class="muted">{[x.setting, x.harness].filter((v) => v && v !== 'unknown').join(', ')}</td>
                     <td class="muted num">{monthYear(x.date)}</td>
@@ -419,57 +272,15 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
           {both && (
             <p class="also">
               {[
-                s.shownSource !== 'leaderboard' && s.leaderboardBoard.length + s.unlisted.length
-                  ? `The benchmark's own leaderboard has ${s.unlisted.length ? `${count(s.leaderboardBoard.length + s.unlisted.length, 'entry', 'entries')}, ${s.leaderboardBoard.length} of them models we track` : count(s.leaderboardBoard.length, 'model')}.`
-                  : '',
+                s.boardSource !== 'leaderboard' && s.leaderboardBoard.length ? `The benchmark's own leaderboard has ${count(s.leaderboardBoard.length, 'model')}.` : '',
                 s.boardSource !== 'epoch' && s.epochBoard.length ? `Epoch AI has scores for ${count(s.epochBoard.length, 'model')}.` : '',
                 s.boardSource !== 'card' && s.cardBoard.length ? `Labs report scores for ${count(s.cardBoard.length, 'model')} in their cards.` : '',
               ]
                 .filter(Boolean)
                 .join(' ')}{' '}
-              We plot every source in the charts below.
+              Both appear in the chart below.
             </p>
           )}
-        </section>
-      )
-    }
-
-    {
-      boardChart && boardChartRuns.length >= 4 && (
-        <section class="views">
-          <div class="sh-row">
-            <div class="sh">
-              <h2>{boardChart.title}</h2>
-              <p>
-                {boardChart.note && `${boardChart.note} `}
-                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a>.
-              </p>
-            </div>
-            <div class="seg" role="radiogroup" aria-label="View">
-              <label><input type="radio" name="v-board" value="graph" checked />Chart</label>
-              <label><input type="radio" name="v-board" value="table" />Table</label>
-            </div>
-          </div>
-          <div class="view-graph">
-            <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} />
-          </div>
-          <div class="view-table table-wrap">
-            <table class="t" data-sort>
-              <thead>
-                <tr><th>Model</th><th>Setting</th><th class="r">{boardChart.y.label}</th><th class="r">{boardChart.x.label}</th></tr>
-              </thead>
-              <tbody>
-                {boardChartRuns.map(({ r, x, y }) => (
-                  <tr>
-                    <td>{r.model ? <ModelName id={r.model} /> : <span class="muted">{r.name}</span>}</td>
-                    <td class="muted">{[r.setting, r.harness].filter(Boolean).join(', ')}</td>
-                    <td class="r" data-v={String(y)}>{chartNum(y, boardChart.y.unit)}</td>
-                    <td class="r muted" data-v={String(x)}>{chartNum(x, boardChart.x.unit)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </section>
       )
     }
@@ -482,8 +293,8 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               <h2>
                 {effort.mode === 'cost' && effort.top
                   ? effort.top.value >= Math.max(...effortRuns.map((r) => r.value))
-                    ? `The best score, ${fmt(effort.top.value, unit)}, costs ${usd(effort.top.cost!)} ${costUnit(effort.costPer)}`
-                    : `Of runs with a cost, the best scores ${fmt(effort.top.value, unit)} for ${usd(effort.top.cost!)} ${costUnit(effort.costPer)}`
+                    ? `The best score, ${fmt(effort.top.value, unit)}, costs ${usd(effort.top.cost!)} a task`
+                    : `Of runs with a cost, the best scores ${fmt(effort.top.value, unit)} for ${usd(effort.top.cost!)} a task`
                   : effort.gain !== undefined && effort.gain >= 1
                     ? `More effort adds a median ${Math.round(effort.gain)} ${unit === '%' ? 'points' : unit}`
                     : 'Scores at each effort level'}
@@ -491,12 +302,12 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               <p>
                 {effort.mode === 'cost' ? (
                   <>
-                    Runs on the cost frontier score higher than any run that's cheaper.
-                    {effort.cheap && effort.top && ` ${runLabel(effort.cheap)} comes within ${(effort.top.value - effort.cheap.value).toFixed(1).replace(/\.0$/, '')}${unit === '%' ? ' points' : ''} of the best for ${usd(effort.cheap.cost!)} ${costUnit(effort.costPer)}, ${costRatio(effort.top.cost! / effort.cheap.cost!)}.`}
-                    {' '}The costs are the leaderboard's own estimates, so compare them only within this benchmark.
+                    Each line joins one model's runs at its effort levels, from cheapest to most expensive. The step line is the cost frontier: no run scores higher for less money.
+                    {effort.cheap && effort.top && ` ${runLabel(effort.cheap)} comes within ${(effort.top.value - effort.cheap.value).toFixed(1).replace(/\.0$/, '')}${unit === '%' ? ' points' : ''} of it for ${usd(effort.cheap.cost!)} a task, ${costRatio(effort.top.cost! / effort.cheap.cost!)}.`}
+                    {' '}Costs are the board's own estimates, so they compare only within this benchmark.
                   </>
                 ) : (
-                  `Models the leaderboard ran at two or more effort levels. We don’t have enough cost data here to say what the extra effort costs.`
+                  `Each row is one model at every effort level the board ran, from the lowest effort (light) to the highest (dark). The board does not report cost, so this shows what more effort buys, not what it costs.`
                 )}
               </p>
             </div>
@@ -506,12 +317,12 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
             </div>
           </div>
           <div class="view-graph">
-            <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? (effort.costPer === 'run' ? ' and cost of the full run' : ' and cost per task') : ''}`} />
+            <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? ' and cost per task' : ''}`} />
           </div>
           <div class="view-table table-wrap">
-            <table class="t" data-sort>
+            <table class="t">
               <thead>
-                <tr><th>Model</th><th>Effort</th><th>Harness</th><th class="r">Score</th><th class="r">{effort.costPer === 'run' ? 'Cost of the full run' : 'Cost per task'}</th><th class="r">Output tokens</th></tr>
+                <tr><th>Model</th><th>Effort</th><th>Harness</th><th class="r">Score</th><th class="r">Cost per task</th><th class="r">Output tokens</th></tr>
               </thead>
               <tbody>
                 {effortRuns.map((r) => (
@@ -537,12 +348,12 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
           <div class="sh">
             <h2>
               {holders > 1
-                ? `${holders} models have held number one since ${reignFrom === opened ? `its release in ${longMonthYear(opened)}` : '2023'}`
+                ? `${holders} models have held number one since ${reignFrom === opened ? `its release in ${monthYear(opened)}` : '2023'}`
                 : 'Number one over time'}
             </h2>
             <p>
-              Lab claims count from the day the card came out, independent runs from the model’s release.
-              {reignRows.length > 1 && ` We draw one row each for ${listText(reignRows.map((r) => ROW_TEXT[r.source]))}.`}
+              Each stretch is a model that had the best score, in its lab’s colour. The height is the score.
+              {reignRows.length > 1 && ` From top to bottom, the rows use ${listText(reignRows.map((r) => ROW_TEXT[r.source]))}.`}
             </p>
           </div>
           <ReignChart rows={reignRows} names={reignNames} from={reignFrom} />
@@ -554,8 +365,8 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
       s.nScores > 0 && (
         <section>
           <div class="sh">
-            <h2>{s.saturatedAt ? `The best score passed ${85}% in ${longMonthYear(s.saturatedAt)}` : 'Scores over time'}</h2>
-            <p>All the scores we have, one dot each, so a model tested at several settings appears more than once.</p>
+            <h2>{s.saturatedAt ? `The best score passed ${85}% in ${monthYear(s.saturatedAt)}` : 'Scores over time'}</h2>
+            <p>Each dot is one model's score, placed at the model's release date. The line follows the best score so far.</p>
           </div>
           <ScoreChart s={s} />
         </section>
@@ -567,15 +378,15 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
         <h2>{lifeLine(s)}</h2>
         <p>
           {s.cites.length > 0
-            ? 'Launch posts from every lab that has listed it, one tick per post. Tall colored ticks include it, and short gray ones leave it out.'
-            : `We read the headline results of ${cards.length} launch posts from ${new Set(cards.map((c) => c.lab)).size} labs, and none of them list this benchmark.${s.docCites.length ? ' Some system cards do, below.' : ''}`}
+            ? 'Each tick is a launch post. Tall coloured ticks list this benchmark. Short grey ticks are launch posts from the same lab that leave it out.'
+            : `The almanac tracks the headline results of ${cards.length} launch posts from ${new Set(cards.map((c) => c.lab)).size} labs. None of them list this benchmark.${s.docCites.length ? ' System cards do, below.' : ''}`}
         </p>
       </div>
       {s.cites.length > 0 && <CardTicks citing={new Set(s.cites.map((c) => c.card.id))} labs={s.labs} />}
       {
         s.cites.length > 0 && (
           <div class="table-wrap cites">
-            <table class="t" data-sort>
+            <table class="t">
               <thead>
                 <tr><th>Date</th><th>Launch post</th><th class="r">Score</th><th>As the post writes it</th></tr>
               </thead>
@@ -584,7 +395,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                   <tr>
                     <td class="muted num nowrap">{fullDate(c.card.date)}</td>
                     <td><a class="card-l" href={c.card.url ?? `/cards/#${c.card.id}`}><LabMark lab={c.card.lab} size={15} />{modelById.get(c.card.model)?.name}</a></td>
-                    <td class="r">{c.score !== null ? shortNum(c.score) : ''}</td>
+                    <td class="r">{c.score !== null ? c.score : ''}</td>
                     <td class="muted">{c.asWritten}</td>
                   </tr>
                 ))}
@@ -605,11 +416,11 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 : `${s.docCites.length} system cards report it, from ${count(s.docLabs.length, 'lab')}`}
             </h2>
             <p>
-              Besides launch posts, we read the system cards, model cards and technical reports labs publish with a release. They report far more, including safety and frontier-risk tests.
+              System cards, model cards and technical reports are the long documents a lab publishes with a release. They report far more than the launch post, including safety and frontier-risk tests.
             </p>
           </div>
           <div class="table-wrap cites">
-            <table class="t" data-sort>
+            <table class="t">
               <thead>
                 <tr><th>Date</th><th>Document</th><th class="r">Score</th><th>As the document writes it</th><th>Section</th></tr>
               </thead>
@@ -617,14 +428,14 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 {s.docCites.slice().reverse().map((c) => (
                   <tr>
                     <td class="muted num nowrap">{fullDate(c.card.date)}</td>
-                    <td class="docc">
+                    <td>
                       <a class="card-l" href={c.card.url ?? `/cards/#${c.card.id}`}>
                         <LabMark lab={c.card.lab} size={15} />
                         {modelById.get(c.card.model)?.name}
+                        <span class="muted doc">{c.card.doc ?? 'system card'}</span>
                       </a>
-                      <span class="muted doc">{c.card.doc ?? 'system card'}</span>
                     </td>
-                    <td class="r">{c.score !== null ? shortNum(c.score) : ''}</td>
+                    <td class="r">{c.score !== null ? c.score : ''}</td>
                     <td class="muted">{c.asWritten}</td>
                     <td class="muted nowrap">{c.section ? (SECTION_NAMES[c.section] ?? c.section) : ''}</td>
                   </tr>
@@ -643,13 +454,12 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
             <h2>Versions</h2>
             {familyRows.length > 1 && (
               <p>
-                We switch the top row to each new version when it comes out. Open it for one row per version. An
-                old version stays in play while people still test it, so whoever first takes it past 85% gets
-                credit for closing it out.
+                Each version keeps its own number one until the next version comes out. After that, its clock stops,
+                so an old leader does not hold the top spot forever.
               </p>
             )}
           </div>
-          {familyRows.length > 1 && <ReignChart rows={familyRows} from={familyFrom} open />}
+          {familyRows.length > 1 && <ReignChart rows={familyRows} from={familyFrom} />}
           <div class="ver">
             {pred.map((p) => (
               <a href={`/benchmarks/${p.id}/`}>
@@ -665,60 +475,10 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
         </section>
       )
     }
-
-    {
-      siblings.length > 0 && (
-        <section class="sibs">
-          <div class="sh-row">
-            <div class="sh">
-              <h2>More in {catName}</h2>
-            </div>
-            <a class="more" href={`/categories/${cat}/`}>All {siblingsAll.length + 1} in {catName}</a>
-          </div>
-          <ul class="sib-list">
-            {siblings.map((x) => {
-              const xt = x.best ? modelById.get(x.best.model) : undefined;
-              return (
-                <li>
-                  <a class="sib-n" href={`/benchmarks/${x.b.id}/`}>{x.b.name}</a>
-                  <span class:list={['tag', `status-${x.status.replace(/ /g, '-')}`]}>
-                    <span class="dot" />
-                    <span class="sl">{STATUS[x.status]}</span>
-                  </span>
-                  {x.b.description && <span class="sib-d">{x.b.description}</span>}
-                  {x.best && xt && (
-                    <span class="sib-b">
-                      <LabMark lab={xt.lab} size={14} />
-                      <span>{xt.name}</span>
-                      <b class="mono">{fmt(x.best.value, x.b.unit ?? '%')}</b>
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      )
-    }
   </div>
 </Base>
 
 <style>
-  .live {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 18px;
-    padding: 10px 16px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    color: var(--ink);
-    font-weight: 500;
-    text-decoration: none;
-  }
-  .live:hover {
-    background: var(--panel);
-  }
   .versions {
     margin-top: 18px;
     flex-wrap: wrap;
@@ -738,200 +498,57 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
     color: var(--ink-3);
     margin-top: 10px;
   }
-  /* the top of the page: what the test is on the left, the facts about it on the right */
-  .intro {
+  .how {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 'prose info' 'quote info';
-    gap: 0 72px;
-    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 32px;
+    margin: 28px 0 0;
+    max-width: 980px;
   }
-  .prose {
-    grid-area: prose;
+  .how dt {
+    font-size: 12.5px;
+    color: var(--ink-3);
   }
-  .info {
-    grid-area: info;
-  }
-  .quote {
-    grid-area: quote;
-  }
-  .info {
-    display: grid;
-    gap: 24px;
-    margin-top: 24px;
+  .how dd {
+    margin: 4px 0 0;
     font-size: 14px;
+    line-height: 1.45;
   }
-  .kv {
-    display: grid;
-    gap: 9px;
-    margin: 0;
+  .how dd b {
+    display: block;
+    font-weight: 500;
   }
-  .kv > div {
-    display: grid;
-    grid-template-columns: 148px minmax(0, 1fr);
-    gap: 14px;
-    align-items: baseline;
-  }
-  .kv dt {
+  .how dd span {
+    color: var(--ink-3);
     font-size: 13px;
-    color: var(--ink-3);
   }
-  .kv dd {
-    margin: 0;
-    line-height: 1.4;
-    color: var(--ink);
+  @media (max-width: 720px) {
+    .how {
+      grid-template-columns: 1fr;
+    }
   }
-  .kv .muted {
-    color: var(--ink-3);
-  }
-  /* a value with an explanation in its tooltip */
-  .hint {
-    text-decoration: underline dotted var(--ink-4);
-    text-underline-offset: 4px;
-    cursor: help;
-  }
-  .st {
+  .links {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 2px 8px;
-  }
-  /* outside links, one per line, each with an icon for what it is */
-  .links {
-    display: grid;
-    gap: 9px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    gap: 8px;
+    margin-top: 22px;
   }
   .links a {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    max-width: 100%;
-    color: var(--ink);
-    font-weight: 500;
-    text-decoration: none;
-  }
-  .links .ll {
-    overflow-wrap: anywhere;
-    text-decoration: underline;
-    text-decoration-color: var(--line);
-    text-underline-offset: 4px;
-  }
-  .links a:hover .ll {
-    text-decoration-color: currentColor;
-  }
-  .links .muted {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-3);
-  }
-  .links :global(.li-icon) {
-    flex: none;
-    color: var(--ink-2);
-  }
-  /* narrow screens: the facts come before the authors' words, which can run long */
-  @media (max-width: 960px) {
-    .intro {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: none;
-      grid-template-areas: 'prose' 'info' 'quote';
-    }
-    .info {
-      margin-top: 32px;
-    }
-  }
-  @media (max-width: 420px) {
-    .kv > div {
-      grid-template-columns: 124px minmax(0, 1fr);
-      gap: 10px;
-    }
-  }
-  /* the masthead: who leads, the best score over time, and status */
-  .mast {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 22px;
-    margin-top: 16px;
-    font-size: 15px;
-  }
-  .mast-lead {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 4px 10px;
-  }
-  .mast-lead b {
-    font-weight: 500;
-    font-size: 15px;
-  }
-  .mast .muted {
-    font-size: 14px;
-  }
-  .mast .tag {
-    font-size: 14px;
-    color: var(--ink-2);
-  }
-  .mk {
-    color: var(--ink);
-    font-weight: 500;
-    text-decoration: none;
-  }
-  .mk:hover {
-    text-decoration: underline;
-  }
-  /* more in this category: a typeset list, two columns on a wide screen */
-  .sib-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 48px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .sib-list li {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 4px 16px;
-    padding: 16px 0;
-    border-top: 1px solid var(--grid);
-  }
-  .sib-n {
-    font: 400 20px/1.2 var(--serif);
-    text-decoration: none;
-  }
-  .sib-n:hover {
-    text-decoration: underline;
-  }
-  .sib-d {
-    grid-column: 1 / -1;
-    color: var(--ink-3);
-    font-size: 13.5px;
-    line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .sib-b {
-    grid-column: 1 / -1;
-    display: inline-flex;
-    align-items: center;
     gap: 7px;
-    font-size: 13.5px;
-    color: var(--ink-2);
+    font-size: 14px;
+    text-decoration: none;
+    background: var(--panel);
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 140ms ease;
   }
-  .sib-b b {
-    font-weight: 500;
-    color: var(--ink);
+  .links a:hover {
+    background: var(--line);
   }
-  @media (max-width: 720px) {
-    .sib-list {
-      grid-template-columns: minmax(0, 1fr);
-    }
+  .links svg {
+    color: var(--ink-3);
   }
   .big {
     font-size: 26px;
@@ -997,13 +614,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
     align-items: center;
     gap: 8px;
   }
-  /* the document cell: the model on one line, the kind of document under it */
-  .docc {
-    white-space: nowrap;
-  }
   .doc {
-    display: block;
-    margin: 2px 0 0 23px;
     font-size: 12.5px;
   }
   .ver {
@@ -1011,32 +622,10 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
     gap: 12px;
     flex-wrap: wrap;
   }
-  .ver {
-    gap: 8px 28px;
-  }
   .ver a {
-    font-size: 15px;
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: var(--line);
-    text-underline-offset: 4px;
-  }
-  .ver a:hover {
-    text-decoration-color: currentColor;
-  }
-  .ver .muted {
-    font-weight: 400;
-  }
-  .ki-flag {
-    color: var(--status-warn);
     text-decoration: none;
-    align-items: center;
-  }
-  .ki-flag .sl {
-    color: var(--ink-2);
-  }
-  .ki-flag:hover .sl {
-    text-decoration: underline;
-    text-decoration-color: var(--ink-4);
+    background: var(--panel);
+    padding: 10px 14px;
+    border-radius: 8px;
   }
 </style>

@@ -556,6 +556,9 @@ table.t {
 .status-not-in-cards {
   color: var(--ink-4);
 }
+.status-system-cards {
+  color: var(--ink-3);
+}
 
 /* ---- tooltips (one shared element, filled by src/scripts/tips.ts) ------------------------------ */
 #tip {

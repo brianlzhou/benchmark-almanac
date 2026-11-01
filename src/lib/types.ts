@@ -89,6 +89,8 @@ export interface CardResult {
   score: number | null;
   unit: string | null;
   as_written?: string;
+  /** System cards: where in the document the result sits (capabilities, safety, bio-chem, cyber...). */
+  section?: string;
 }
 
 export interface Card {
@@ -98,9 +100,15 @@ export interface Card {
   date: string;
   title?: string;
   url?: string;
-  tier: Tier;
+  tier?: Tier;
   notes?: string | null;
   results: CardResult[];
+  /** A launch post (data/cards.json) or a longer document published with the release (data/system-cards.json). */
+  kind?: 'launch' | 'system-card';
+  /** System cards: "system card", "system card addendum", "model card" or "technical report". */
+  doc?: string;
+  /** System cards: the id of the launch post this document goes with. */
+  release?: string;
 }
 
 /** One score of one model on one benchmark, from either source. */

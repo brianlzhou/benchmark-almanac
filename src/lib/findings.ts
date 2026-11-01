@@ -18,14 +18,16 @@ export function lifeLine(s: BenchSummary): string {
   switch (s.status) {
     case 'in use': {
       const recent = new Set(s.cites.filter((c) => monthsAgo(c.card.date) < 6).map((c) => c.card.lab)).size;
-      return recent > 1 ? `${recent} labs reported it in the last six months` : recent === 1 ? 'One lab reported it in the last six months' : 'New this year';
+      return recent > 1 ? `${recent} labs put it in a launch post in the last six months` : recent === 1 ? 'One lab put it in a launch post in the last six months' : 'New this year';
     }
     case 'fading':
-      return `Fewer labs report it now. The last card was in ${monthYear(s.last)}`;
+      return `Fewer labs headline it now. The last launch post was in ${monthYear(s.last)}`;
     case 'dropped':
-      if (s.why === 'saturated') return `Labs dropped it once the best score passed ${SATURATED}%`;
+      if (s.why === 'saturated') return `Labs dropped it from launch posts once the best score passed ${SATURATED}%`;
       if (s.why === 'replaced' && s.b.successor) return `Labs moved on to ${benchById.get(s.b.successor)?.name}`;
-      return `No lab has reported it since ${monthYear(s.last)}`;
+      return `No launch post has listed it since ${monthYear(s.last)}`;
+    case 'system cards':
+      return 'Labs report it in system cards, not in launch posts';
     default:
       return 'No lab model card reports it yet';
   }

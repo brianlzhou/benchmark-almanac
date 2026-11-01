@@ -16,14 +16,14 @@ const METHOD_GROUP: Record<string, string> = {
   'head-to-head': 'arena',
   outcome: 'events',
 };
-const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'not in cards': 'Not in cards' };
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
 
 const all = allSummaries();
 // one row per test: a versioned family shows its newest version and links the earlier ones
 const newest = (id: string) => familyOf(id).at(-1);
 const rows = all
   .filter((s) => !s.b.family || newest(s.b.id) === s.b.id)
-  .sort((a, b) => b.cites.length - a.cites.length || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
+  .sort((a, b) => b.cites.length - a.cites.length || b.docCites.length - a.docCites.length || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
 const count = (f: (s: (typeof all)[number]) => boolean) => all.filter(f).length;
 const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
 const methodCount = (g: string) => inRows((s) => METHOD_GROUP[s.b.scoring ?? ''] === g);
@@ -51,6 +51,7 @@ const statusOptions: Option[] = [
   { value: 'in-use', label: 'In use', count: inRows((s) => s.status === 'in use') },
   { value: 'fading', label: 'Fading', count: inRows((s) => s.status === 'fading') },
   { value: 'dropped', label: 'Dropped', count: inRows((s) => s.status === 'dropped') },
+  { value: 'system-cards', label: 'Only in system cards', count: inRows((s) => s.status === 'system cards') },
   { value: 'not-in-cards', label: 'Not in model cards', count: inRows((s) => s.status === 'not in cards') },
 ];
 const codeOptions: Option[] = [
@@ -128,7 +129,8 @@ const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
             <th>Level</th>
             <th>Status</th>
             <th>Best score</th>
-            <th class="r">Cards</th>
+            <th class="r" title="Launch posts that list it in their headline results">Launch posts</th>
+            <th class="r" title="System cards, model cards and technical reports that report it">System cards</th>
             <th>Released</th>
           </tr>
         </thead>
@@ -183,6 +185,7 @@ const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
                       )}
                     </td>
                     <td class="r">{s.cites.length || ''}</td>
+                    <td class="r muted">{s.docCites.length || ''}</td>
                     <td class="muted num nowrap">{monthYear(s.b.released)}</td>
                   </tr>
                   {prev.map((p, i) => {
@@ -216,6 +219,7 @@ const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
                           )}
                         </td>
                         <td class="r">{p.cites.length || ''}</td>
+                        <td class="r muted">{p.docCites.length || ''}</td>
                         <td class="muted num nowrap">{monthYear(p.b.released)}</td>
                       </tr>
                     );
@@ -478,7 +482,9 @@ const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
     .bt th:nth-child(7),
     .bt td:nth-child(7),
     .bt th:nth-child(8),
-    .bt td:nth-child(8) {
+    .bt td:nth-child(8),
+    .bt th:nth-child(9),
+    .bt td:nth-child(9) {
       display: none;
     }
     .sl {
