@@ -109,7 +109,7 @@ export function check(s: Submission) {
   const record = id ? registry.find((b) => b.id === id) : undefined;
   const rejected = !record ? (rejectedByKey.get(`name:${key(name)}`) ?? links.map((k) => rejectedByKey.get(k)).find(Boolean)) : undefined;
   const missing = HELPFUL.filter(([f]) => !s[f]).map(([, what]) => what);
-  return { record, rejected, missing, status: record ? 'already-catalogued' : rejected ? 'left-out-before' : 'needs-review' };
+  return { record, rejected, missing, status: record ? 'already-cataloged' : rejected ? 'left-out-before' : 'needs-review' };
 }
 
 function reply(s: Submission, c: ReturnType<typeof check>): string {

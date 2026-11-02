@@ -20,7 +20,7 @@ import { existsSync } from 'node:fs';
 import { dataPath, readJson, writeJson, fetchText, fetchJson, today } from './lib/util.ts';
 import { text as htmlText } from './lib/html.ts';
 
-export interface Abstract {
+interface Abstract {
   text: string;
   title: string;
   url: string;
@@ -53,7 +53,7 @@ const only = arg('--only')?.split(',');
 // Reviewed on 2026-11-01 against every paper link in data/benchmarks.json.
 // Papers that introduce the benchmark without naming it in their title or abstract.
 const OWN = new Set(
-  'adversarial-squad ai2d anthropic-model-written-evals anthropic-red-team community-alignment-personalization-meta cyber-key-skills-v1-google deepmind-dangerous-capability-evaluations deepmind-mathematics devbench dynabench-squad functional-math gdm-situational-awareness gdm-stealth gram-gauging-realistic-agentic-misbehavior gray-swan-ipi-arena-benchmark gsm1k gsm8k-platinum lakera-b3-backbone-breaker-benchmark livemathbench metr-time-horizon-1-1 metr-time-horizon-suite mrcr-v1 mrcr-v2 mt-prompt-injection-test-suite openai-monitorability-evals political-science-llm-benchmark sgp-bench stealth-and-situational-awareness-evaluations sycophancy-eval-answer sycophancyeval vals-finance-agent-v1 vals-finance-agent-v2 vals-finance-agent-v2-1 xbench-profession-marketing xbench-profession-recruitment xbench-scienceqa'.split(' '),
+  'adversarial-squad ai2d anthropic-model-written-evals anthropic-red-team community-alignment-personalization-meta cyber-key-skills-v1-google deepmind-dangerous-capability-evaluations deepmind-mathematics devbench dynabench-squad functional-math gdm-situational-awareness gdm-stealth gram-gauging-realistic-agentic-misbehavior gray-swan-ipi-arena-benchmark gsm1k gsm8k-platinum lakera-b3-backbone-breaker-benchmark livemathbench multirc metr-time-horizon-1-1 metr-time-horizon-suite mrcr-v1 mrcr-v2 mt-prompt-injection-test-suite openai-monitorability-evals political-science-llm-benchmark sgp-bench stealth-and-situational-awareness-evaluations sycophancy-eval-answer sycophancyeval vals-finance-agent-v1 vals-finance-agent-v2 vals-finance-agent-v2-1 xbench-profession-marketing xbench-profession-recruitment xbench-scienceqa'.split(' '),
 );
 // Papers that name the benchmark but are about a model, a method or a platform, with the benchmark a side note.
 const NOT_OWN = new Set(
@@ -83,7 +83,7 @@ function locate(url: string): Where {
   const doi =
     url.match(/doi\.org\/(10\.\d{4,9}\/[^\s?#]+)/)?.[1] ??
     url.match(/dl\.acm\.org\/doi\/(?:abs\/|full\/|pdf\/)?(10\.\d{4,9}\/[^\s?#]+)/)?.[1] ??
-    url.match(/(?:bio|med)rxiv\.org\/content\/(10\.\d{4,9}\/[\d.]+?)(?:v\d+)?(?:[./?#]|$)/)?.[1];
+    url.match(/(?:bio|med)rxiv\.org\/content\/(10\.\d{4,9}\/[\d.]*\d)(?:v\d+)?/)?.[1];
   if (doi) return { source: 'crossref', key: doi, ref: `doi:${doi}`, url: `https://doi.org/${doi}` };
   return { skip: 'host terms do not allow reuse or are unclear' };
 }
@@ -114,7 +114,7 @@ async function readArxiv(ids: string[]): Promise<Map<string, Paper>> {
       const id = e.match(/<id>https?:\/\/arxiv\.org\/abs\/(.+?)(?:v\d+)?<\/id>/)?.[1];
       const title = e.match(/<title>([\s\S]*?)<\/title>/)?.[1];
       const summary = e.match(/<summary>([\s\S]*?)<\/summary>/)?.[1];
-      if (id && title && summary && title.trim() !== 'Error') out.set(id, { title: clean(title), abstract: clean(summary), license: 'CC0 1.0' });
+      if (id && title && summary && title.trim() !== 'Error') out.set(id, { title: clean(plain(title)), abstract: clean(plain(summary)), license: 'CC0 1.0' });
     }
   };
   for (let i = 0; i < ids.length; i += 100) read(await ask(ids.slice(i, i + 100)));
@@ -127,10 +127,10 @@ async function readArxiv(ids: string[]): Promise<Map<string, Paper>> {
 async function readAcl(id: string): Promise<Paper | string> {
   await sleep(1000);
   const html = await fetchText(`https://aclanthology.org/${id}/`);
-  const title = html.match(/<h2 id=["']?title["']?>([\s\S]*?)<\/h2>/)?.[1];
-  const abstract = html.match(/acl-abstract["']?>[\s\S]*?<span>([\s\S]*?)<\/span>/)?.[1];
+  const title = html.match(/<meta content="([^"]*)" name=["']?citation_title["']?>/)?.[1] ?? html.match(/<meta name=["']?citation_title["']? content="([^"]*)"/)?.[1];
+  const abstract = html.match(/acl-abstract["']?>[\s\S]*?<span>([\s\S]*?)<\/span>\s*<\/div>/)?.[1];
   if (!title || !abstract) return 'no abstract at the source';
-  return { title: clean(htmlText(title)), abstract: clean(htmlText(abstract)), license: 'CC BY 4.0' };
+  return { title: clean(plain(title)), abstract: clean(plain(abstract)), license: 'CC BY 4.0' };
 }
 
 /** A Creative Commons license that allows any reuse with credit: CC0 or CC BY, by URL. */
@@ -148,7 +148,7 @@ async function readCrossref(doi: string): Promise<Paper | string> {
   const license = lic && openLicense(lic.URL);
   if (!license) return 'license does not allow reuse';
   if (!w.abstract || !w.title?.[0]) return 'no abstract at the source';
-  return { title: clean(htmlText(w.title[0])), abstract: clean(htmlText(w.abstract.replace(/<jats:title>[\s\S]*?<\/jats:title>/g, ' '))), license };
+  return { title: clean(plain(w.title[0])), abstract: clean(plain(w.abstract.replace(/<jats:title>[\s\S]*?<\/jats:title>/g, ' '))), license };
 }
 
 let openreviewToken: Promise<string | undefined> | undefined;
@@ -180,30 +180,40 @@ const SYMBOLS: Record<string, string> = {
   alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', epsilon: 'ε', varepsilon: 'ε', eta: 'η', theta: 'θ', kappa: 'κ', lambda: 'λ',
   mu: 'μ', pi: 'π', rho: 'ρ', sigma: 'σ', tau: 'τ', phi: 'φ', chi: 'χ', psi: 'ψ', omega: 'ω', Delta: 'Δ', Sigma: 'Σ', Omega: 'Ω',
   degree: '°', circ: '°', checkmark: '✓', dagger: '†', star: '*', ast: '*', mid: '|', vert: '|', prime: '′', S: '§',
+  ie: 'i.e.', eg: 'e.g.', etal: 'et al.', etc: 'etc.', LaTeX: 'LaTeX', TeX: 'TeX',
 };
 const SUP: Record<string, string> = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '+': '⁺', '-': '⁻', n: 'ⁿ' };
 const SUB: Record<string, string> = { '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄', '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉' };
-const script = (s: string, map: Record<string, string>, mark: string) => ([...s].every((c) => map[c]) ? [...s].map((c) => map[c]).join('') : mark === '_' ? s : `${mark}${s}`);
+// a superscript or subscript in Unicode when every character has one, else written out ("10th", "x^k")
+const script = (s: string, map: Record<string, string>, mark: string) =>
+  [...s].every((c) => map[c]) ? [...s].map((c) => map[c]).join('') : mark === '_' || /^[a-z]+$/i.test(s) ? s : `${mark}${s}`;
 
-/** Plain text from an abstract: XML entities decoded, simple LaTeX turned into the characters it prints. */
-export function clean(s: string): string {
-  let t = htmlText(s);
-  t = t.replace(/\\href\{[^{}]*\}\{([^{}]*)\}/g, '$1').replace(/\\url\{([^{}]*)\}/g, '$1');
+/** Text from markup: inline tags dropped, paragraph tags turned into spaces, entities decoded. */
+const plain = (s: string) => htmlText(s.replace(/<\/?(?:jats:)?(?:p|br|div|li)\b[^>]*>/g, ' ').replace(/<[^>]+>/g, ''));
+
+/** Abstract text with simple LaTeX turned into the characters it prints, and spaces collapsed. */
+function clean(s: string): string {
+  let t = s.replace(/\\href\{[^{}]*\}\{([^{}]*)\}/g, '$1').replace(/\\(?:href|url)\{([^{}]*)\}/g, '$1');
+  t = t.replace(/\\textsuperscript\{([^{}]*)\}/g, (_, x: string) => script(x, SUP, '^')).replace(/\\textsubscript\{([^{}]*)\}/g, (_, x: string) => script(x, SUB, '_'));
+  t = t.replace(/\\[dt]?frac\{([^{}]*)\}\{([^{}]*)\}/g, '$1/$2').replace(/~?\\(?:cite[pt]?|ref|label)\{[^{}]*\}/g, '');
   for (let i = 0; i < 3; i++)
     t = t
       .replace(/\\(?:textbf|textit|textrm|textsf|texttt|textsc|textnormal|emph|underline|text|mathrm|mathbf|mathit|mathsf|mathtt|mathcal|mathbb|mathscr|boldsymbol|bm|operatorname|mbox|hbox)\s*\{([^{}]*)\}/g, '$1')
       .replace(/\{\\(?:bf|it|em|tt|sc|rm|sf)\s+([^{}]*)\}/g, '$1');
-  // inline math: commands to characters, scripts to Unicode where they exist, then drop the dollars
-  t = t.replace(/(?<!\\)\$([^$]{1,200}?)(?<!\\)\$/g, (_, m: string) =>
-    m
-      .replace(/\\([a-zA-Z]+)\s*/g, (c, name: string) => SYMBOLS[name] ?? (/^(left|right|big|Big|bigg|displaystyle|mathrm|quad|qquad|,)$/.test(name) ? '' : name))
-      .replace(/\^\{([^{}]*)\}|\^(\S)/g, (_, a: string | undefined, b: string | undefined) => script(a ?? b ?? '', SUP, '^'))
-      .replace(/_\{([^{}]*)\}|_(\w)/g, (_, a: string | undefined, b: string | undefined) => script(a ?? b ?? '', SUB, '_'))
-      .replace(/\\[,;:! ]/g, ' ')
-      .replace(/[{}]/g, ''),
+  // inline math: commands to characters, scripts to Unicode where they exist, then drop the dollars.
+  // Two prices in one sentence ("from $1 to $5") are not math.
+  t = t.replace(/(?<!\\)\$([^$]{1,200}?)(?<!\\)\$/g, (all, m: string) =>
+    / [a-z]{2,} /.test(` ${m} `) && !/[\\^_={}]/.test(m)
+      ? all
+      : m
+          .replace(/\\([a-zA-Z]+)/g, (_, name: string) => SYMBOLS[name] ?? (/^(left|right|big|Big|bigg|displaystyle|mathrm|quad|qquad)$/.test(name) ? '' : name))
+          .replace(/\^\{([^{}]*)\}|\^(\S)/g, (_, a: string | undefined, b: string | undefined) => script(a ?? b ?? '', SUP, '^'))
+          .replace(/_\{([^{}]*)\}|_(\w)/g, (_, a: string | undefined, b: string | undefined) => script(a ?? b ?? '', SUB, '_'))
+          .replace(/\\[,;:! ]/g, ' ')
+          .replace(/[{}]/g, ''),
   );
   t = t
-    .replace(/\\([a-zA-Z]+)(?![a-zA-Z])\s?/g, (c, name: string) => SYMBOLS[name] ?? c)
+    .replace(/\\([a-zA-Z]+)(?![a-zA-Z])/g, (c, name: string) => SYMBOLS[name] ?? c)
     .replace(/\\([%&_#$])/g, '$1')
     .replace(/\\\\/g, ' ')
     .replace(/\\[,;:! ]/g, ' ')
@@ -211,8 +221,9 @@ export function clean(s: string): string {
     .replace(/''/g, '”')
     .replace(/---/g, '—')
     .replace(/(?<=\S)--(?=\S)|(?<=\s)--(?=\s)/g, '–')
-    .replace(/([A-Za-z.,)])~(?=[A-Za-z0-9(])/g, '$1 ')
-    .replace(/(?<!\\)[{}]/g, '');
+    .replace(/([A-Za-z.,)])~(?=[A-Za-z0-9(])|(\d)~(?=[A-Za-z(])/g, '$1$2 ')
+    .replace(/(?<!\\)[{}]/g, '')
+    .replace(/\\([{}])/g, '$1');
   return t.replace(/\s+/g, ' ').trim();
 }
 
@@ -246,7 +257,7 @@ function bases(name: string): string[] {
   for (let k = toks.length - 1; k >= 1; k--) out.add(toks.slice(0, k).join(' '));
   return [...out].filter((x) => words(x).replace(/ /g, '').length >= 3 && !/^ (the|an?|ai|llm|gpt) $/.test(words(x)) && /[a-z][A-Z]|[A-Z]{2}|\d|[-+]/.test(x));
 }
-/** An acronym of the title's capitalised words, so "MMLU" meets "Measuring Massive Multitask Language Understanding". */
+/** An acronym of the title's capitalized words, so "MMLU" meets "Measuring Massive Multitask Language Understanding". */
 const acronym = (title: string) =>
   title
     .split(/[\s:,-]+/)
@@ -271,15 +282,15 @@ function own(b: Bench, p: Paper): boolean {
   if (NOT_OWN.has(b.id)) return false;
   const T = hay(p.title);
   const A = hay(p.abstract);
-  const all = [b.name, ...(b.aliases ?? [])];
-  if (all.some((n) => names(T, n))) return true;
-  const short = all.flatMap(bases);
-  if ([...all, ...short].some((n) => n === n.toUpperCase() && /^[A-Z0-9]{4,}$/.test(n) && acronym(p.title).includes(n.toLowerCase()))) return true;
+  const spellings = [b.name, ...(b.aliases ?? [])];
+  if (spellings.some((n) => names(T, n))) return true;
+  const short = spellings.flatMap(bases);
+  if ([...spellings, ...short].some((n) => n === n.toUpperCase() && /^[A-Z0-9]{4,}$/.test(n) && acronym(p.title).includes(n.toLowerCase()))) return true;
   const head = words(p.title.split(':')[0]);
   const isModel = (s: string) => modelNames.some((m) => words(s).includes(` ${m} `));
   if (REPORT.test(p.title) || isModel(head)) return false;
   const coined = short.filter((n) => !isModel(n));
-  return coined.some((n) => names(T, n)) || all.some((n) => names(A, n)) || coined.some((n) => names(A, n));
+  return coined.some((n) => names(T, n)) || spellings.some((n) => names(A, n)) || coined.some((n) => names(A, n));
 }
 
 // ---- run -------------------------------------------------------------------------------------------
@@ -295,15 +306,18 @@ const todo: { b: Bench; at: Extract<Where, { source: string }> }[] = [];
 for (const b of benchmarks) {
   const paper = b.links?.paper;
   if (!paper) continue;
+  if (only && !only.includes(b.id)) {
+    if (current[b.id]) out[b.id] = current[b.id];
+    continue;
+  }
   const at = locate(paper);
   if ('skip' in at) {
     leftOut(b.id, at.skip);
     continue;
   }
   const have = current[b.id];
-  const fresh = have && have.ref === at.ref && !NOT_OWN.has(b.id);
-  if (fresh && (!all || (only && !only.includes(b.id)))) out[b.id] = have;
-  else if (!only || only.includes(b.id)) todo.push({ b, at });
+  if (have && have.ref === at.ref && !NOT_OWN.has(b.id) && !all) out[b.id] = have;
+  else todo.push({ b, at });
 }
 
 const papers = new Map<string, Paper | string>();

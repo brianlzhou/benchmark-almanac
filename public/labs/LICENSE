@@ -1,0 +1,219 @@
+The lab marks in this folder come from LobeHub Icons (@lobehub/icons-static-svg 1.101.0),
+https://github.com/lobehub/lobe-icons, under the MIT License:
+
+MIT License
+
+Copyright (c) 2023 LobeHub
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+The marks themselves are trademarks of their owners and are used here only to
+identify each lab.
+
+Marks from other sources
+
+The marks below were added later. Each entry gives the file, the lab, the source and the license or
+terms. Files were only normalized (square viewBox, sizing attributes removed, ids prefixed). Raster
+favicons and the Tsinghua emblem were scaled to 128 px and embedded as PNG.
+
+databricks-color.svg (Databricks)
+  Source: LobeHub Icons 1.101.0, icons/dbrx-color.svg (the Databricks symbol, filed under DBRX),
+  https://github.com/lobehub/lobe-icons
+  License: MIT License (above). Trademark of Databricks, Inc., used to identify the lab.
+
+shanghai-ai-lab-color.svg (Shanghai AI Lab)
+  Source: LobeHub Icons 1.101.0, icons/internlm-color.svg (InternLM, Shanghai AI Lab's model family),
+  https://github.com/lobehub/lobe-icons
+  License: MIT License (above). Trademark of Shanghai AI Laboratory, used to identify the lab.
+
+cognition.svg (Cognition)
+  Source: header logomark on https://cognition.ai/ (served from https://cognition.com/)
+  Terms: Trademark of Cognition, used to identify the lab.
+
+eleutherai.svg (EleutherAI)
+  Source: symbol from https://www.eleuther.ai/assets/eleutherai-logo.svg
+  Terms: Trademark of EleutherAI, used to identify the lab.
+
+lmsys-color.svg (LMSYS Org)
+  Source: favicon https://www.lmsys.org/icon.png
+  Terms: Trademark of LMSYS Org, used to identify the lab.
+
+mosaicml-color.svg (MosaicML)
+  Source: mosaicml.com favicon, archived 2023-02-25,
+  https://web.archive.org/web/20230225174512/https://assets-global.website-files.com/61e6fd1bd5174813bfe40bba/6206bbc38e07d4ea6c71c9c2_favicon.svg
+  Terms: Trademark of Databricks, Inc. (formerly MosaicML), used to identify the lab.
+
+prime-intellect.svg (Prime Intellect)
+  Source: symbol from https://www.primeintellect.ai/backgrounds/refactor/logo.svg
+  Terms: Trademark of Prime Intellect, used to identify the lab.
+
+reflection.svg (Reflection AI)
+  Source: circle glyph of the header logo on https://reflection.ai/
+  Terms: Trademark of Reflection AI, used to identify the lab.
+
+salesforce-color.svg (Salesforce)
+  Source: https://images.ctfassets.net/ct4bxoykjwgb/4d9QNKh54Xnpy6bT3mgffN/0da717aa8debd3941435a18bce842d80/logo-salesforce-no-type.svg
+  (linked from https://www.salesforce.com/)
+  Terms: Trademark of Salesforce, Inc., used to identify the lab.
+
+thinking-machines-color.svg (Thinking Machines Lab)
+  Source: favicon https://thinkingmachines.ai/images/android-chrome-512x512.png
+  Terms: Trademark of Thinking Machines Lab, used to identify the lab.
+
+tsinghua-university.svg (Tsinghua University)
+  Source: ink (black) emblem, page 6 of the Visual Identity System Guidelines,
+  https://vi.tsinghua.edu.cn/download/VisualIdentity-cn.pdf
+  Terms: Trademark of Tsinghua University, used to identify the lab.
+
+Marks added on 2026-11-01
+
+Other marks added that day come from LobeHub Icons 1.101.0 under their own names. Raster sources were
+cropped to the symbol, scaled to at most 128 px and embedded as PNG.
+
+shengshu-color.svg (Shengshu Technology)
+  Source: LobeHub Icons 1.101.0, icons/vidu-color.svg (Vidu, Shengshu's video model),
+  https://github.com/lobehub/lobe-icons
+  License: MIT License (above). Trademark of Shengshu Technology, used to identify the lab.
+
+aorizon.svg (Aorizon)
+  Source: LobeHub Icons 1.101.0, icons/happyhorse.svg (HappyHorse, Aorizon's video model),
+  https://github.com/lobehub/lobe-icons
+  License: MIT License (above). Trademark of its owner, used to identify the lab.
+
+rednote.svg (rednote hi lab)
+  Source: LobeHub Icons 1.101.0, icons/dotsstudio.svg (dots, rednote hi lab's model family),
+  https://github.com/lobehub/lobe-icons
+  License: MIT License (above). Trademark of Xiaohongshu, used to identify the lab.
+
+adept.svg (Adept AI)
+  Source: favicon of www.adept.ai, archived 2024-05-31,
+  https://web.archive.org/web/20240531062656im_/https://www.adept.ai/images/favicon.svg?v=2
+  Drawn in one color: the disc with the A cut out.
+  Terms: Trademark of Adept AI Labs, used to identify the lab.
+
+alibaba-aidc-color.svg (Alibaba AIDC-AI)
+  Source: avatar of the ATH-MaaS Hugging Face organization, which publishes the Ovis and
+  Marco models, https://huggingface.co/ATH-MaaS
+  Terms: Trademark of Alibaba Group, used to identify the lab.
+
+cmu-color.svg (Carnegie Mellon University)
+  Source: favicon https://www.cmu.edu/themes/custom/cmu_base/favicon.ico (48 px)
+  Terms: Trademark of Carnegie Mellon University, used to identify the lab.
+
+fixie-color.svg (Fixie.ai (Ultravox))
+  Source: favicon https://framerusercontent.com/images/hzAEdihxJ11mv3l4trNh2WprE.svg
+  (linked from https://www.ultravox.ai/)
+  Terms: Trademark of Fixie.ai, used to identify the lab.
+
+genmo-color.svg (Genmo)
+  Source: symbol of https://www.genmo.ai/media/social/genmo-logo.png
+  Terms: Trademark of Genmo, used to identify the lab.
+
+h-company.svg (H Company)
+  Source: header logomark (disc and H) on https://www.hcompany.ai/
+  Terms: Trademark of H Company, used to identify the lab.
+
+hidream-color.svg (HiDream.ai)
+  Source: avatar of the HiDream-ai GitHub organization, https://github.com/HiDream-ai
+  (the same mark is its Hugging Face avatar)
+  Terms: Trademark of HiDream.ai, used to identify the lab.
+
+hku.svg (XLANG Lab, The University of Hong Kong)
+  Source: https://xlang.ai/icons/logo.svg, drawn in one color as in the site's
+  white-on-black favicon
+  Terms: Trademark of XLANG Lab, used to identify the lab.
+
+infly-color.svg (INF Technology)
+  Source: avatar of the infly Hugging Face organization, https://huggingface.co/infly
+  (the same mark is https://www.inftech.ai/favicon.ico)
+  Terms: Trademark of INF Technology, used to identify the lab.
+
+kandinsky.svg (Kandinsky Lab)
+  Source: favicon https://kandinskylab.ai/favicon.svg, both letters in one color
+  Terms: Trademark of its owner, used to identify the lab.
+
+kyutai-color.svg (Kyutai)
+  Source: favicon https://kyutai.org/favicon.ico (256 px)
+  Terms: Trademark of Kyutai, used to identify the lab.
+
+leonardo-ai-color.svg (Leonardo.Ai)
+  Source: icon https://docs.leonardo.ai/icon-512.png
+  Terms: Trademark of Leonardo.Ai, used to identify the lab.
+
+mbzuai-color.svg (Mohamed bin Zayed University of Artificial Intelligence)
+  Source: avatar of the verified MBZUAI Hugging Face
+  organization, https://huggingface.co/MBZUAI (white background made transparent)
+  Terms: Trademark of MBZUAI, used to identify the lab.
+
+nexusflow-color.svg (Nexusflow)
+  Source: avatar of the NexusflowAI GitHub organization, https://github.com/NexusflowAI
+  Terms: Trademark of Nexusflow, used to identify the lab.
+
+nyu-color.svg (New York University)
+  Source: torch box of the header logo on https://www.nyu.edu/, without the letters,
+  in NYU violet (#57068c)
+  Terms: Trademark of New York University, used to identify the lab.
+
+openbmb-color.svg (OpenBMB)
+  Source: favicon https://openbmb.cn/favicon.svg
+  Terms: Trademark of OpenBMB, used to identify the lab.
+
+princeton-color.svg (Princeton University)
+  Source: favicon https://www.princeton.edu/favicon.ico (48 px)
+  Terms: Trademark of The Trustees of Princeton University, used to identify the lab.
+
+sarvam.svg (Sarvam AI)
+  Source: favicon https://www.sarvam.ai/favicon.svg
+  Terms: Trademark of Sarvam AI, used to identify the lab.
+
+stanford-color.svg (Stanford University)
+  Source: icon https://www.stanford.edu/icon1.png (192 px)
+  Terms: Trademark of Stanford University, used to identify the lab.
+
+swiss-ai-color.svg (Swiss AI Initiative)
+  Source: avatar of the swiss-ai GitHub organization, https://github.com/swiss-ai
+  (the same mark is its Hugging Face avatar)
+  Terms: Trademark of the Swiss AI Initiative, used to identify the lab.
+
+tiger-lab-color.svg (TIGER-Lab)
+  Source: head of the TIGER-AI-Lab GitHub avatar, https://github.com/TIGER-AI-Lab,
+  cropped round (the same image is the TIGER-Lab Hugging Face avatar)
+  Terms: Trademark of TIGER-Lab, used to identify the lab.
+
+uc-berkeley-color.svg (UC Berkeley)
+  Source: favicon https://www.berkeley.edu/favicon.svg
+  Terms: Trademark of The Regents of the University of California, used to identify the lab.
+
+uw-madison-color.svg (University of Wisconsin-Madison)
+  Source: crest of the header logo on https://www.wisc.edu/, without the wordmark
+  Terms: Trademark of the Board of Regents of the University of Wisconsin System, used to identify the lab.
+
+writer.svg (Writer)
+  Source: icon https://writer.com/wp-content/uploads/2021/08/writer-w-logo-1.png (used as a silhouette)
+  Terms: Trademark of Writer, Inc., used to identify the lab.
+
+physical-intelligence.svg (Physical Intelligence)
+  Source: avatar of the Physical-Intelligence GitHub organization, https://github.com/Physical-Intelligence
+  (the same pi is https://www.pi.website/icon.png), used as a silhouette
+  Terms: Trademark of Physical Intelligence, used to identify the lab.
+
+toyota-research-institute.svg (Toyota Research Institute)
+  Source: avatar of the verified TRI-ML Hugging Face organization, https://huggingface.co/TRI-ML
+  (the same symbol is the https://www.tri.global/ favicon), red, black and gray parts drawn in one color
+  Terms: Trademark of Toyota Research Institute, used to identify the lab.

@@ -2,6 +2,7 @@
 // values, and short texts follow the house style. Exits 1 on any error.
 //
 // usage: node scripts/check-data.ts
+import { existsSync } from 'node:fs';
 import { dataPath, readJson } from './lib/util.ts';
 
 type Rec = Record<string, unknown> & { id: string; name: string };
@@ -30,6 +31,9 @@ const CATEGORIES = new Set(
 );
 const ACCESS = new Set(['public', 'public+private-holdout', 'private', 'unknown']);
 const UNITS = new Set(['%', 'elo', 'rating', 'usd', 'minutes', 'score', 'index', 'brier', 'speedup']);
+// the almanac's own prose uses American spelling. Quoted text (titles, names, as_written) keeps its own.
+const BRITISH =
+  /\b(?:(?:behavio|colo|favo|humo|rigo|neighbo|hono|flavo|endeavo)ur\w*|catalogu\w*|licence[sd]?|grey\w*|judgements?|whilst|amongst|learnt|artefacts?|centred|(?:labe|mode|cance|trave|leve|signa|tota|fue)ll(?:ed|ing)|(?:organ|normal|penal|priorit|general|harmon|optim|recogn|summar|special|util|standard|categor|minim|maxim|emphas|real|character|visual|token|final|initial|serial|local|custom|author|memor|formal|stabil|sanit|critic)is(?:e|es|ed|ing|ation|ations))\b/i;
 
 function unique(kind: string, xs: Rec[]) {
   const seen = new Set<string>();
@@ -52,6 +56,9 @@ for (const b of benchmarks) {
   if (b.access && !ACCESS.has(b.access as string)) fail(`benchmark ${b.id}: unknown access ${b.access}`);
   if (b.unit && !UNITS.has(b.unit as string)) fail(`benchmark ${b.id}: unknown unit ${b.unit}`);
   if (b.successor && !benchIds.has(b.successor as string)) fail(`benchmark ${b.id}: unknown successor ${b.successor}`);
+  const rf = b.refreshes as { date?: string; label?: string }[] | undefined;
+  if (rf && (!Array.isArray(rf) || rf.some((r, i) => !/^\d{4}-\d{2}-\d{2}$/.test(r.date ?? '') || !r.label || (i > 0 && r.date! <= rf[i - 1].date!))))
+    fail(`benchmark ${b.id}: refreshes need dated labels in order`);
   if (b.level && !LEVELS.has(b.level as string)) fail(`benchmark ${b.id}: unknown level ${b.level}`);
   if (b.scoring && !SCORING.has(b.scoring as string)) fail(`benchmark ${b.id}: unknown scoring ${b.scoring}`);
   if (b.format && !FORMATS.has(b.format as string)) fail(`benchmark ${b.id}: unknown format ${b.format}`);
@@ -64,6 +71,8 @@ for (const b of benchmarks) {
     if (/;/.test(t)) fail(`benchmark ${b.id}: ${f} has a semicolon`);
     if (/\s[—–]\s|\s--\s/.test(t)) fail(`benchmark ${b.id}: ${f} uses a dash as punctuation`);
     if (/·/.test(t)) fail(`benchmark ${b.id}: ${f} has a middle dot`);
+    const uk = t.match(BRITISH);
+    if (uk) fail(`benchmark ${b.id}: ${f} uses British spelling "${uk[0]}"`);
   }
   const links = (b.links ?? {}) as Record<string, string>;
   for (const [k, v] of Object.entries(links)) if (!/^https?:\/\//.test(v)) fail(`benchmark ${b.id}: ${k} link is not a web address: ${v}`);
@@ -111,9 +120,26 @@ for (const r of boards.rows) {
   if (!modelIds.has(r[1])) fail(`leaderboard row: unknown model ${r[1]}`);
 }
 
+// paper abstracts written by scripts/abstracts.ts: only for known benchmarks, and only under an open license
+const abstractsPath = dataPath('abstracts.json');
+const abstracts = existsSync(abstractsPath)
+  ? readJson<Record<string, { text?: string; title?: string; url?: string; source?: string; ref?: string; license?: string; fetched?: string }>>(abstractsPath)
+  : {};
+const ABSTRACT_SOURCES = new Set(['arxiv', 'acl', 'crossref', 'openreview']);
+for (const [id, a] of Object.entries(abstracts)) {
+  if (!benchIds.has(id)) fail(`abstract ${id}: unknown benchmark`);
+  if (!a.text?.trim()) fail(`abstract ${id}: no text`);
+  if (!a.title?.trim() || !a.ref) fail(`abstract ${id}: no paper title or reference`);
+  if (!a.license) fail(`abstract ${id}: no license`);
+  else if (!/^(CC0 1\.0|CC BY \d\.\d)$/.test(a.license)) fail(`abstract ${id}: license ${a.license} does not allow reuse`);
+  if (!ABSTRACT_SOURCES.has(a.source ?? '')) fail(`abstract ${id}: unknown source ${a.source}`);
+  if (!/^https?:\/\//.test(a.url ?? '')) fail(`abstract ${id}: url is not a web address`);
+  if (!/^\d{4}-\d\d-\d\d$/.test(a.fetched ?? '')) fail(`abstract ${id}: bad fetch date ${a.fetched}`);
+}
+
 if (warn.length) console.log(`${warn.length} warnings, for example:\n  ${warn.slice(0, 5).join('\n  ')}`);
 if (errors.length) {
   console.error(`${errors.length} errors:\n  ${errors.slice(0, 50).join('\n  ')}`);
   process.exit(1);
 }
-console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} launch posts, ${systemCards.length} system cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores.`);
+console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} launch posts, ${systemCards.length} system cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores, ${Object.keys(abstracts).length} paper abstracts.`);
