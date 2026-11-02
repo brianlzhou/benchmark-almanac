@@ -1,21 +1,26 @@
 ---
-// A lab's mark. Brand-colour marks load as cached images. Mono marks are masks filled with the text
-// colour, so they follow the theme. Labs without a mark get their initial.
+// A lab's mark. Brand-color marks load as cached images. Mono marks are masks filled with the text
+// color, so they follow the theme. Labs without a mark get their initial.
 import { labById } from '../lib/data.ts';
 import { COLOR_MARKS, MONO_MARKS } from '../lib/marks.ts';
+import { labColor } from '../lib/palette.ts';
 
 interface Props {
   lab?: string;
   size?: number;
   class?: string;
+  /** With no lab: the name whose initial the mark shows, for a board entry that is not in the model list. */
+  label?: string;
 }
-const { lab, size = 18, class: cls = '' } = Astro.props;
-const name = lab ? (labById.get(lab)?.name ?? lab) : '';
+const { lab, size = 18, class: cls = '', label } = Astro.props;
+const name = lab ? (labById.get(lab)?.name ?? lab) : (label ?? '');
 const kind = lab && COLOR_MARKS.has(lab) ? 'color' : lab && MONO_MARKS.has(lab) ? 'mono' : 'none';
+// the lab's color rides along, so a table row can tint a one-color mark when it is pointed at
+const lc = `--lc:${labColor(lab)}`;
 ---
 
 {kind === 'color' && <img class:list={['mark', cls]} src={`/labs/${lab}-color.svg`} width={size} height={size} alt="" title={name} decoding="async" />}
-{kind === 'mono' && <span class:list={['mark mask', cls]} style={`--s:${size}px;--m:url(/labs/${lab}.svg)`} title={name} aria-hidden="true" />}
+{kind === 'mono' && <span class:list={['mark mask', cls]} style={`--s:${size}px;--m:url(/labs/${lab}.svg);${lc}`} title={name} aria-hidden="true" />}
 {
   kind === 'none' && (
     <span class:list={['mark initial', cls]} style={`--s:${size}px`} title={name} aria-hidden="true">

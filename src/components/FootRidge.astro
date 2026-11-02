@@ -1,6 +1,6 @@
 ---
 // The landscape across the top of the footer, edge to edge: benchmarks released each month since 2019,
-// stacked by area and stippled in each area's color. The footer's Areas column, just below, is its key.
+// stacked by area and drawn as an even grid of dots in each area's color. The footer's Areas column, just below, is its key.
 // The outlines are static SVGs used as masks (src/lib/ridge.ts), so they stretch to the screen while the dots
 // inside stay round. The top area is drawn first, and each area below covers it, so no seam shows between bands.
 import { LAYERS } from '../lib/ridge.ts';
@@ -34,18 +34,18 @@ import { LAYERS } from '../lib/ridge.ts';
     mask-position: 0 0;
     mask-size: 100% 100%;
   }
+  /* a faint wash under the dots, so each band reads as one shape */
   .fill {
-    background: color-mix(in srgb, var(--c) 24%, var(--bg));
+    background: color-mix(in srgb, var(--c) 9%, var(--bg));
   }
-  /* the dots: the band's outline intersected with a repeating tile of dots at their own size */
+  /* the dots: the band's outline intersected with an even grid of round dots, 6px apart, in the area's color */
   .dots {
     mask-image: var(--shape), url('/ridge/dots.svg');
     mask-repeat: no-repeat, repeat;
     mask-position: 0 0, 0 0;
-    mask-size: 100% 100%, 28px 28px;
+    mask-size: 100% 100%, 6px 6px;
     mask-composite: intersect;
-    background: color-mix(in srgb, var(--c) 88%, var(--ink));
-    opacity: 0.85;
+    background: var(--c);
   }
   .ridge-key {
     position: absolute;

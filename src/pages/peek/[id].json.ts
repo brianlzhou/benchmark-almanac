@@ -38,7 +38,7 @@ export function GET({ params }: { params: { id: string } }) {
   const all = dated.map((x) => {
     const f = sign * x.value > top;
     if (f) top = sign * x.value;
-    return [day(x.date!), +x.value.toFixed(2), f ? 1 : 0] as [number, number, number];
+    return [day(x.date!), +x.value.toFixed(2), f ? 1 : 0, modelById.get(x.model)?.lab ?? ''] as [number, number, number, string];
   });
   // a busy board keeps every record and an even sample of the rest, so the file stays small
   const step = Math.max(1, Math.ceil(all.filter((p) => !p[2]).length / 160));
@@ -47,14 +47,14 @@ export function GET({ params }: { params: { id: string } }) {
 
   // score against cost, when the leaderboard prices five or more runs
   const priced = s.leaderboardBoard.filter((x) => x.cost && x.cost > 0 && x.unit === unit);
-  let cost: [number, number, number][] | undefined;
+  let cost: [number, number, number, string][] | undefined;
   if (priced.length >= 5) {
     const byCost = [...priced].sort((x, y) => x.cost! - y.cost! || sign * (y.value - x.value));
     let run = -Infinity;
     cost = byCost.map((x) => {
       const f = sign * x.value > run;
       if (f) run = sign * x.value;
-      return [x.cost!, +x.value.toFixed(2), f ? 1 : 0];
+      return [x.cost!, +x.value.toFixed(2), f ? 1 : 0, modelById.get(x.model)?.lab ?? ''];
     });
   }
 

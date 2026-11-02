@@ -1,5 +1,6 @@
 ---
-// A model as people write it: the lab's mark, the name, and the snapshot or setting in quieter type.
+// A model as people write it: the lab's mark, the name, and the snapshot or setting in quieter type. An entry
+// that is not in the model list (`name` with no known id) shows its board name in gray, with its initial for a mark.
 import LabMark from './LabMark.astro';
 import { modelById } from '../lib/data.ts';
 import { featuredIds } from '../lib/routes.ts';
@@ -9,18 +10,21 @@ interface Props {
   setting?: string | null;
   link?: boolean;
   size?: number;
+  /** The board's own name, for an entry with no model id. */
+  name?: string;
 }
-const { id, setting, link = true, size = 16 } = Astro.props;
+const { id, setting, link = true, size = 16, name } = Astro.props;
 const m = modelById.get(id);
+const unlisted = !m && !!name;
 const href = link && featuredIds.has(id) ? `/models/${id}/` : undefined;
 const extra = [m?.version, setting && setting !== 'unknown' ? setting : null].filter(Boolean).join(', ');
 const Tag = href ? 'a' : 'span';
 ---
 
-<Tag class="mn" href={href}>
-  <LabMark lab={m?.lab} size={size} />
+<Tag class:list={['mn', { unlisted }]} href={href} title={unlisted ? `${name}: not in our model list` : undefined}>
+  <LabMark lab={m?.lab} size={size} label={unlisted ? name : undefined} />
   <span class="mn-t">
-    <span class="mn-n">{m?.name ?? id}</span>{extra && <span class="mn-x"> {extra}</span>}
+    <span class="mn-n">{m?.name ?? name ?? id}</span>{extra && <span class="mn-x"> {extra}</span>}
   </span>
 </Tag>
 
@@ -47,6 +51,10 @@ const Tag = href ? 'a' : 'span';
     font-weight: 500;
   }
   .mn-x {
+    color: var(--ink-3);
+  }
+  .unlisted .mn-n {
+    font-weight: 400;
     color: var(--ink-3);
   }
 </style>

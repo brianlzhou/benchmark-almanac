@@ -7,6 +7,8 @@
 // to the next row swaps it at once. It sits beside the pointer, never under it, so moving down the table
 // keeps reaching rows, and moving across the row reaches the card. Touch screens get the row click only.
 
+import { labColor } from '../lib/palette.ts';
+
 type Mark = '' | 'c' | 'm';
 interface Peek {
   n: string;
@@ -18,10 +20,11 @@ interface Peek {
   u: string;
   lo: 0 | 1;
   t1: number;
-  p: [number, number, 0 | 1][];
+  /** day, value, set a new best, lab */
+  p: [number, number, 0 | 1, string?][];
   top: [string, string, Mark, string, number][];
   from: string;
-  c?: [number, number, 0 | 1][];
+  c?: [number, number, 0 | 1, string?][];
   last: string;
 }
 
@@ -47,7 +50,7 @@ const usd = (v: number) => (v >= 100 ? `$${Math.round(v)}` : v >= 1 ? `$${v.toFi
 
 function mark(lab: string, kind: Mark) {
   if (kind === 'c') return `<img class="pk-mk" src="/labs/${lab}-color.svg" width="14" height="14" alt="">`;
-  if (kind === 'm') return `<span class="pk-mk pk-mask" style="--m:url(/labs/${lab}.svg)"></span>`;
+  if (kind === 'm') return `<span class="pk-mk pk-mask" style="--m:url(/labs/${lab}.svg);background:${labColor(lab)}"></span>`;
   return `<span class="pk-mk pk-init">${esc((lab || '?').slice(0, 1).toUpperCase())}</span>`;
 }
 
@@ -82,14 +85,14 @@ function timeChart(d: Peek, w: number, h: number) {
     s += `<line class="pk-yr" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${T}" y2="${h - B}"/><text class="pk-ax" x="${x.toFixed(1)}" y="${h - 4}" text-anchor="middle">${y}</text>`;
     lastX = x;
   }
-  for (const p of d.p) if (!p[2]) s += `<circle class="pk-dot" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2"/>`;
+  for (const p of d.p) if (!p[2]) s += `<circle class="pk-dot" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2.2" style="fill:${labColor(p[3])}"/>`;
   const rec = d.p.filter((p) => p[2]);
   if (rec.length) {
     let path = `M${X(rec[0][0]).toFixed(1)} ${Y(rec[0][1]).toFixed(1)}`;
     for (const p of rec.slice(1)) path += `H${X(p[0]).toFixed(1)}V${Y(p[1]).toFixed(1)}`;
     path += `H${X(d.t1).toFixed(1)}`;
     s += `<path class="pk-line" d="${path}"/>`;
-    for (const p of rec) s += `<circle class="pk-rec" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2.6"/>`;
+    for (const p of rec) s += `<circle class="pk-rec" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="3.2" style="fill:${labColor(p[3])}"/>`;
   }
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">${s}</svg>`;
 }
@@ -111,13 +114,13 @@ function costChart(d: Peek, w: number, h: number) {
   const ticks = d.u === '%' ? [0, 50, 100] : [lo, (lo + hi) / 2, hi];
   for (const v of ticks) s += `<line class="pk-grid" x1="${L}" x2="${w - R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text class="pk-ax" x="${L - 6}" y="${(Y(v) + 3).toFixed(1)}" text-anchor="end">${esc(pctOr(d.u, v))}</text>`;
   s += `<text class="pk-ax" x="${L}" y="${h - 4}">${usd(10 ** c0)}</text><text class="pk-ax" x="${w - R}" y="${h - 4}" text-anchor="end">${usd(10 ** c1)}</text>`;
-  for (const p of c) if (!p[2]) s += `<circle class="pk-dot" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2"/>`;
+  for (const p of c) if (!p[2]) s += `<circle class="pk-dot" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2.2" style="fill:${labColor(p[3])}"/>`;
   const f = c.filter((p) => p[2]);
   if (f.length) {
     let path = `M${X(f[0][0]).toFixed(1)} ${Y(f[0][1]).toFixed(1)}`;
     for (const p of f.slice(1)) path += `H${X(p[0]).toFixed(1)}V${Y(p[1]).toFixed(1)}`;
     s += `<path class="pk-line" d="${path}"/>`;
-    for (const p of f) s += `<circle class="pk-rec" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2.6"/>`;
+    for (const p of f) s += `<circle class="pk-rec" cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="3.2" style="fill:${labColor(p[3])}"/>`;
   }
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">${s}</svg>`;
 }
@@ -140,7 +143,7 @@ function render(d: Peek) {
     body += `<ol class="pk-top">${d.top
       .map((t) => {
         const w = d.lo ? 1 - (t[4] - lo) / (hi - lo || 1) : (t[4] - lo) / (hi - lo || 1);
-        return `<li>${mark(t[1], t[2])}<span class="pk-nm">${esc(t[0])}</span><span class="pk-bar"><i style="width:${Math.max(2, Math.min(100, w * 100)).toFixed(1)}%"></i></span><b>${esc(t[3])}</b></li>`;
+        return `<li>${mark(t[1], t[2])}<span class="pk-nm">${esc(t[0])}</span><span class="pk-bar"><i style="width:${Math.max(2, Math.min(100, w * 100)).toFixed(1)}%;background:${labColor(t[1])}"></i></span><b>${esc(t[3])}</b></li>`;
       })
       .join('')}</ol>`;
   }
@@ -195,17 +198,34 @@ export function wirePeek(table: HTMLTableElement) {
   let hideT = 0;
   let px = 0;
   let token = 0;
+  let cur = { left: 0, side: 1 };
+  let frame = 0;
   const close = () => {
     clearTimeout(showT);
-    el.classList.remove('on');
+    el.classList.remove('on', 'glide');
     row = null;
   };
-  const place = (tr: HTMLTableRowElement) => {
+  // The card sits beside the pointer and glides after it (CSS eases left and top). Moving toward the card
+  // never pushes it away, so the pointer can still reach it and click.
+  const place = (tr: HTMLTableRowElement, fresh: boolean) => {
     const r = tr.getBoundingClientRect();
     const w = el.offsetWidth;
     const h = el.offsetHeight;
-    let left = px + 24;
-    if (left + w > innerWidth - 12) left = Math.max(12, px - 24 - w);
+    const right = px + 24;
+    const leftOf = px - 24 - w;
+    let side = right + w <= innerWidth - 12 ? 1 : -1;
+    let left = side > 0 ? right : Math.max(12, leftOf);
+    if (!fresh && side === cur.side) {
+      // heading toward the card: hold it still until the pointer arrives
+      if (side > 0 && left > cur.left) left = cur.left;
+      if (side < 0 && left < cur.left) left = cur.left;
+    }
+    // near the window's edge the card keeps the side it opened on, so it never jumps across the pointer
+    if (!fresh && side !== cur.side) {
+      side = cur.side;
+      left = side > 0 ? Math.min(right, cur.left) : Math.max(12, leftOf, cur.left);
+    }
+    cur = { left, side };
     const top = Math.min(Math.max(12, r.top - 10), innerHeight - h - 12);
     el.style.left = `${Math.round(left)}px`;
     el.style.top = `${Math.round(Math.max(12, top))}px`;
@@ -214,10 +234,13 @@ export function wirePeek(table: HTMLTableElement) {
     const mine = ++token;
     const d = await load(idOf(a));
     if (mine !== token || row !== tr || !d) return;
+    const was = el.classList.contains('on');
     el.innerHTML = render(d);
     href = a.href;
-    place(tr);
+    place(tr, !was);
     el.classList.add('on');
+    // glide only between positions, never from wherever the last card closed
+    if (!was) requestAnimationFrame(() => el.classList.add('glide'));
   };
 
   body.addEventListener('pointerover', (e) => {
@@ -232,6 +255,12 @@ export function wirePeek(table: HTMLTableElement) {
     px = e.clientX;
     void load(idOf(a));
     showT = window.setTimeout(() => void open(tr, a), el.classList.contains('on') ? 70 : 380);
+  });
+  body.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse' || !row || !el.classList.contains('on')) return;
+    px = e.clientX;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => row && place(row, false));
   });
   body.addEventListener('pointerleave', () => {
     clearTimeout(showT);

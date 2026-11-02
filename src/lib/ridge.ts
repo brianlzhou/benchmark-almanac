@@ -74,11 +74,8 @@ export function ridgePaths() {
   return cache;
 }
 
-/** A 28px tile of dots scattered by a fixed rule, so the texture looks hand-stippled but builds the same every time. */
-export function dotTile(n: number, seed: number) {
-  const size = 28;
-  let s = seed;
-  const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
-  const dots = Array.from({ length: n }, () => `<circle cx="${(r() * size).toFixed(1)}" cy="${(r() * size).toFixed(1)}" r="${(0.45 + r() * 0.6).toFixed(2)}"/>`);
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${dots.join('')}</svg>`;
+/** One dot in a square tile. Repeated, it makes an even halftone grid, like a dot-matrix print. */
+export function dotTile(size: number, radius: number) {
+  const c = size / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${c}" cy="${c}" r="${radius}"/></svg>`;
 }
