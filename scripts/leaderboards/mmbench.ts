@@ -3,7 +3,8 @@
 // benchmark. MMBench_TEST_EN.Overall (CircularEval accuracy, 0 to 100) is the score. The META time is the
 // row date, so the resolver picks the snapshot current then; "GPT-4o (0513, detail-high)" becomes GPT-4o
 // dated 2024-05-13 with the image detail level as the setting. The file is a snapshot (2025-09-17) whose
-// newest rows date from early 2025. MMBench v1.1 is in the same file but on its test split, while the
+// newest rows date from early 2025. Rows that OpenCompass did not run itself (META Verified "No") are shown
+// on the board too and are kept. MMBench v1.1 is in the same file but on its test split, while the
 // almanac's v1.1 record is the dev split, so it is not read.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -20,7 +21,7 @@ const board: Leaderboard = {
   benchmark: 'mmbench',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${FEED} (MMBench_TEST_EN.Overall)`,
-  terms: "OpenCompass's published leaderboard data file, which states no licence; the VLMEvalKit and MMBench repositories are Apache-2.0.",
+  terms: "OpenCompass's published leaderboard data file, which states no license; the VLMEvalKit and MMBench repositories are Apache-2.0.",
   aliases: {
     'Claude3.5-Sonnet-20241022': 'claude-3-5-sonnet-october-2024',
     'Qwen2-VL-72B': 'qwen2-vl-72b-instruct',

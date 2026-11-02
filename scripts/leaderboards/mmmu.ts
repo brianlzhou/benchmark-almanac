@@ -8,7 +8,7 @@ import { fetchJson } from '../lib/util.ts';
 
 export const MMMU_FEED = 'https://mmmu-benchmark.github.io/leaderboard_data.json';
 export const MMMU_TERMS =
-  'Static JSON on the MMMU GitHub Pages site, which states no licence or terms; the MMMU repository is Apache-2.0.';
+  'Static JSON on the MMMU GitHub Pages site, which states no license or terms; the MMMU repository is Apache-2.0.';
 
 interface Row {
   info: { name: string; date?: string; type: string };

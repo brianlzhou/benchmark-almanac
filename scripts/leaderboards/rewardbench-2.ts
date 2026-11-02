@@ -18,8 +18,11 @@ const board: Leaderboard = {
   benchmark: 'rewardbench-2',
   url: 'https://huggingface.co/spaces/allenai/reward-bench',
   feed: `${LIST} (eval-set/*.json, mean of six domains)`,
-  terms: 'Hugging Face dataset allenai/reward-bench-2-results, which carries no licence tag, read as the Apache-2.0 leaderboard Space reads it.',
-  aliases: {},
+  terms: 'Hugging Face dataset allenai/reward-bench-2-results, which carries no license tag, read as the Apache-2.0 leaderboard Space reads it.',
+  aliases: {
+    // the GA model (the dataset keeps its preview runs in separate *-preview-* files)
+    'google/gemini-2.5-flash': 'gemini-2-5-flash-jun-2025',
+  },
   async fetch() {
     const { siblings } = await fetchJson<{ siblings: { rfilename: string }[] }>(LIST);
     const paths = siblings
@@ -33,7 +36,13 @@ const board: Leaderboard = {
         if (!r?.model) continue;
         const values = DOMAINS.map((d) => r[d]).filter((v): v is number => typeof v === 'number' && Number.isFinite(v));
         if (!values.length) continue;
-        rows.push({ model: r.model, score: (100 * values.reduce((a, b) => a + b, 0)) / values.length });
+        // "openai/gpt-4o-2024-08-06": the date stamp picks the snapshot
+        const stamp = r.model.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
+        rows.push({
+          model: r.model,
+          score: (100 * values.reduce((a, b) => a + b, 0)) / values.length,
+          date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined,
+        });
       }
     }
     if (!rows.length) throw new Error('no RewardBench 2 results read');

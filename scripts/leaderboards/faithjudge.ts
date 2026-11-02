@@ -13,7 +13,7 @@ const board: Leaderboard = {
   benchmark: 'faithjudge',
   url: 'https://github.com/vectara/FaithJudge#leaderboard',
   feed: `${FEED} (leaderboard table, Overall Hallucination Rate)`,
-  terms: 'README table in the vectara/FaithJudge repository, which has no licence file; scores are cited to the FaithJudge authors.',
+  terms: 'README table in the vectara/FaithJudge repository, which has no license file; scores are cited to the FaithJudge authors.',
   aliases: {
     'r1-0528': 'deepseek-r1-may-2025',
     'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025',
@@ -21,6 +21,19 @@ const board: Leaderboard = {
     'gemini-2.5-flash': 'gemini-2-5-flash-jun-2025',
     'gemini-2.0-flash-001': 'gemini-2-0-flash-feb-2025',
     'gpt-3.5-turbo-0125': 'gpt-3-5-turbo-jan-2024',
+    // instruct releases of models the registry lists once
+    'Mistral-Small-24B-Instruct-2501': 'mistral-small-3',
+    'Ministral-8B-Instruct-2410': 'ministral-8b',
+    'Llama-3.1-8B-Instruct': 'llama-3-1-8b',
+    'Llama-3.2-3B-Instruct': 'llama-3-2-3b',
+    'Llama-3.2-1B-Instruct': 'llama-3-2-1b',
+    'Qwen2.5-32B-Instruct': 'qwen2-5-32b',
+    'Qwen2.5-14B-Instruct': 'qwen2-5-14b',
+    'Qwen2.5-7B-Instruct': 'qwen2-5-7b',
+    'Qwen2.5-3B-Instruct': 'qwen2-5-3b',
+    'Qwen2.5-1.5B-Instruct': 'qwen2-5-1-5b',
+    'Qwen2.5-0.5B-Instruct': 'qwen2-5-0-5b',
+    'Phi-4-mini-instruct': 'phi-4-mini',
   },
   async fetch() {
     const md = await fetchText(FEED);
