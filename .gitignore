@@ -10,8 +10,12 @@ dist/
 # screenshots. Kept beside the code, never published.
 private/
 
-# OS and editor files
-.DS_Store
-*.log
+# Environment files, which can hold tokens
 .env
 .env.*
+
+# Logs, OS and editor files
+*.log
+.DS_Store
+.vscode/
+.idea/

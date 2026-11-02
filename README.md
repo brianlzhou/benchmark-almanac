@@ -3,8 +3,8 @@
 A reference for AI benchmarks: what each one tests, where its code lives, which lab model cards report
 it, and how the best score has moved. It also tracks when labs stop reporting a benchmark, and why.
 
-The site is static. Every page is built from the files in `data/`, and charts are drawn at build time,
-so pages ship almost no JavaScript.
+The site is static. Every page is built from the files in `data/`, and charts are drawn as SVG at build
+time. Search, table filters, sorting and hover cards use about 40 KB of JavaScript in all.
 
 ## Data
 
@@ -25,9 +25,13 @@ so pages ship almost no JavaScript.
 Every score names a model id and a benchmark id from these files. Reasoning effort and harness are
 settings of a score, not separate models. The build fails if any reference does not resolve.
 
+Scripts write `data/scores/`, `data/github.json`, `data/abstracts.json`, `data/discovered.json` and
+`public/meaning/`, so change those files only by running the scripts. `sync-epoch.ts` also adds new Epoch AI
+models and benchmarks to `data/models.json` and `data/benchmarks.json`.
+
 ## Scripts
 
-Node 22.18 or later runs these TypeScript files directly. None has dependencies.
+These TypeScript files run directly with Node 22.23.4 or later. Only `embed.ts` needs a package installed.
 
 | Command | What it does |
 | --- | --- |
@@ -36,14 +40,13 @@ Node 22.18 or later runs these TypeScript files directly. None has dependencies.
 | `node scripts/sync-epoch.ts` | Downloads Epoch AI's data and rewrites `data/scores/epoch.json`. New models and benchmarks join the registries. |
 | `node scripts/sync-github.ts` | Refreshes `data/github.json`. Set `GITHUB_TOKEN` first. |
 | `node scripts/check-data.ts` | Checks references, allowed values and copy style in `data/`. |
+| `node scripts/embed.ts` | Rebuilds `public/meaning/`, the vectors behind search by meaning, for benchmarks whose text changed. Run `npm i --no-save @huggingface/transformers@4.3.1` first. The model downloads once into `.cache/`. |
+| `node scripts/submission.ts --list` | Prints the open benchmark submissions as JSON lines, with the same check the submission workflow runs. It needs the GitHub CLI, signed in. |
 
 The discovery score has two stages. Stage A asks whether an item is a benchmark at all, from its title
 and abstract. Stage B adds evidence across sources: released code or data, a known author organization,
 early upvotes or stars, more than one feed, a newsletter mention, or a registry listing. Items scoring 8
 or more are ready to catalogue. Items scoring 5 to 7 stay on a watch list for 14 days.
-
-Two GitHub Actions keep the data current. `discover.yml` and `sync.yml` both run every day. Each keeps one
-pull request open with its changes.
 
 To add a leaderboard, copy `scripts/leaderboards/aider-polyglot.ts`, point it at the board's published data
 file, and run it with `--only <benchmark-id> --dry`. Names the shared resolver in `scripts/lib/models.ts`

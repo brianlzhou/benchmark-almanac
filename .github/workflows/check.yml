@@ -15,5 +15,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: node scripts/check-data.ts
+      # the data check, then astro check for type errors
+      - run: npm run check
+      - run: npm test
       - run: npm run build

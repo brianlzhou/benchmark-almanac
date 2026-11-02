@@ -1,0 +1,59 @@
+name: Sync scores
+
+# Every day, refresh official leaderboards, Epoch AI scores, GitHub repo facts and the paper abstracts of new
+# benchmarks. Changes go to one rolling pull request, so new models and benchmarks get a look before they
+# appear on the site.
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    # an explicit bash shell runs with pipefail, so a script that fails before `| tee` fails its step
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/sync-epoch.ts | tee sync.log
+      - run: node scripts/sync-leaderboards.ts | tee -a sync.log
+      - run: node scripts/sync-github.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # only benchmarks with no abstract yet: a few arXiv requests, three seconds apart
+      - run: node scripts/abstracts.ts | tee -a sync.log
+        env:
+          # optional: with an OpenReview account, papers that are only on OpenReview get their abstracts too
+          OPENREVIEW_USERNAME: ${{ secrets.OPENREVIEW_USERNAME }}
+          OPENREVIEW_PASSWORD: ${{ secrets.OPENREVIEW_PASSWORD }}
+      - run: node scripts/check-data.ts
+      - run: npm run build
+      - name: Update the sync pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- data; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C bot/sync
+          git add data
+          git commit -m "Sync leaderboards, Epoch AI scores, GitHub repo facts and paper abstracts ($(date -u +%F))"
+          git push --force origin bot/sync
+          gh pr view bot/sync --json state -q .state 2>/dev/null | grep -q OPEN || \
+            gh pr create --head bot/sync --title "Score sync" --body-file sync.log
