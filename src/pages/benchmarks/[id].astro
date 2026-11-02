@@ -15,6 +15,7 @@ import ModelName from '../../components/ModelName.astro';
 import LabMark from '../../components/LabMark.astro';
 import AuthorsWords from '../../components/AuthorsWords.astro';
 import KnownIssues from '../../components/KnownIssues.astro';
+import BoardChart from '../../components/BoardChart.astro';
 import { issuesByBenchmark, unresolved } from '../../lib/audits.ts';
 import Crumbs from '../../components/Crumbs.astro';
 import AreaMark from '../../components/AreaMark.astro';
@@ -22,7 +23,7 @@ import Spark from '../../components/Spark.astro';
 import LinkIcon from '../../components/LinkIcon.astro';
 import { makerParts } from '../../lib/makers.ts';
 import { familyOf } from '../../lib/reigns.ts';
-import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages } from '../../lib/data.ts';
+import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores } from '../../lib/data.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
@@ -37,6 +38,16 @@ const { id } = Astro.params;
 const s = benchSummary(id!);
 const b = s.b;
 const issues = issuesByBenchmark.get(b.id) ?? [];
+// a chart the official leaderboard draws from more than its headline score (scripts/leaderboards/types.ts)
+const boardChart = LEADERBOARDS[b.id]?.chart;
+const boardChartRuns = boardChart
+  ? [...leaderboardScores, ...unlistedScores]
+      .filter((r) => r.benchmark === b.id)
+      .map((r) => ({ r, x: boardChart.x.key === 'score' ? r.value : r.metrics?.[boardChart.x.key], y: boardChart.y.key === 'score' ? r.value : r.metrics?.[boardChart.y.key] }))
+      .filter((p): p is { r: (typeof p)['r']; x: number; y: number } => p.x !== undefined && p.y !== undefined)
+      .sort((p, q) => (boardChart.y.better === 'lower' ? p.y - q.y : q.y - p.y) || p.x - q.x)
+  : [];
+const chartNum = (v: number, unit?: string) => (unit === '%' ? `${Math.round(v * 10) / 10}%` : unit ? `${Math.round(v * 100) / 100} ${unit}` : String(Math.round(v * 100) / 100));
 const openIssues = unresolved(issues).length;
 const unit = b.unit ?? '%';
 const area = AREA_BY_ID.get(s.area)!;
@@ -413,6 +424,46 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               We plot every source in the charts below.
             </p>
           )}
+        </section>
+      )
+    }
+
+    {
+      boardChart && boardChartRuns.length >= 4 && (
+        <section class="views">
+          <div class="sh-row">
+            <div class="sh">
+              <h2>{boardChart.title}</h2>
+              <p>
+                {boardChart.note && `${boardChart.note} `}
+                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a>.
+              </p>
+            </div>
+            <div class="seg" role="radiogroup" aria-label="View">
+              <label><input type="radio" name="v-board" value="graph" checked />Chart</label>
+              <label><input type="radio" name="v-board" value="table" />Table</label>
+            </div>
+          </div>
+          <div class="view-graph">
+            <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} />
+          </div>
+          <div class="view-table table-wrap">
+            <table class="t" data-sort>
+              <thead>
+                <tr><th>Model</th><th>Setting</th><th class="r">{boardChart.y.label}</th><th class="r">{boardChart.x.label}</th></tr>
+              </thead>
+              <tbody>
+                {boardChartRuns.map(({ r, x, y }) => (
+                  <tr>
+                    <td>{r.model ? <ModelName id={r.model} /> : <span class="muted">{r.name}</span>}</td>
+                    <td class="muted">{[r.setting, r.harness].filter(Boolean).join(', ')}</td>
+                    <td class="r" data-v={String(y)}>{chartNum(y, boardChart.y.unit)}</td>
+                    <td class="r muted" data-v={String(x)}>{chartNum(x, boardChart.x.unit)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       )
     }

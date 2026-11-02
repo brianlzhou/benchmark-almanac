@@ -9,7 +9,7 @@ export function getStaticPaths() {
 export function GET({ params }: { params: { shape: string } }) {
   const svg =
     params.shape === 'dots'
-      ? dotTile(40, 11)
+      ? dotTile(6, 1.6)
       : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${ridgePaths().get(params.shape)}"/></svg>`;
   return new Response(svg, { headers: { 'content-type': 'image/svg+xml' } });
 }

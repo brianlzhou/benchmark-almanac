@@ -67,7 +67,7 @@ const MORE = [
   { href: '/new/', label: 'New this month' },
   { href: '/audits/', label: 'Audits' },
   { href: '/sources/', label: 'Sources' },
-  { href: '/submit/', label: 'Submit' },
+  { href: '/contribute/', label: 'Contribute' },
 ];
 // the same links in one list, for the footer
 const NAV_LINKS = NAV.flatMap((g) => g.links);
@@ -181,7 +181,7 @@ const foldOn = FOLDS.some((n) => current(n.href));
           <div>
             <h2>Explore</h2>
             <ul>
-              {[...NAV_LINKS.slice(0, 5), { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }]
+              {[...NAV_LINKS.slice(0, 5), { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
                 .filter((n, i, xs) => xs.findIndex((y) => y.href === n.href) === i)
                 .map((n) => (
                   <li><a href={n.href}>{n.label}</a></li>

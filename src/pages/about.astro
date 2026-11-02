@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { cards, systemCards, benchmarks, labs, EPOCH_SOURCE, SATURATED, AS_OF } from '../lib/data.ts';
+import { benchmarkCount } from '../lib/counts.ts';
 import { LEVELS, SCORING } from '../lib/taxonomy.ts';
 import { fullDate } from '../lib/format.ts';
 import reviewed from '../../data/reviewed.json';
@@ -16,7 +17,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
   <div class="page prose">
     <header class="head">
       <h1>How this works</h1>
-      <p class="lede">We collect scores from lab model cards, official leaderboards and independent runs, and match each one to a single name for its model. The site is built from data files in our GitHub repository.</p>
+      <p class="lede">We collect scores from lab model cards, official leaderboards and independent runs, and match each one to a single name for its model. We build the site from data files in our GitHub repository.</p>
     </header>
 
     <section id="cataloged">
@@ -47,7 +48,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
         <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {fullDate(EPOCH_SOURCE.retrieved)}. Epoch runs some of these itself and collects the rest from public leaderboards. We also use its Epoch Capabilities Index, which puts models on one scale across many benchmarks. We leave out the rows Epoch collected from Artificial Analysis, because Artificial Analysis's terms do not allow reuse in other ranking products.
       </p>
       <p>
-        <b>The catalog.</b> {benchmarks.length.toLocaleString('en-US')} benchmarks, each with what it tests, who made it, and links to its code, paper, data and leaderboard. We checked every GitHub link against the GitHub API. The list began with benchmarks from lab cards, Epoch's hub and public collections, and research agents filled in the details from primary sources.
+        <b>The catalog.</b> {benchmarkCount.toLocaleString('en-US')} benchmarks ({benchmarks.length.toLocaleString('en-US')} counting each version), each with what it tests, who made it, and links to its code, paper, data and leaderboard. We checked every GitHub link against the GitHub API. The list began with benchmarks from lab cards, Epoch's hub and public collections, and research agents filled in the details from primary sources.
       </p>
     </section>
 

@@ -5,7 +5,7 @@
 import Base from '../layouts/Base.astro';
 import Criteria from '../components/Criteria.astro';
 import { STAYS_OUT, SUBMIT_FORM, SUBMISSIONS, REPO } from '../lib/criteria.ts';
-import { benchmarks } from '../lib/data.ts';
+import { benchmarkCount } from '../lib/counts.ts';
 
 const INCLUDE = [
   { t: 'The name', d: 'And the version, when there is more than one.' },
@@ -38,7 +38,7 @@ const INCLUDE = [
     <section id="tests">
       <h2>What gets cataloged</h2>
       <p>
-        We list {benchmarks.length.toLocaleString('en-US')} benchmarks so far. A new one gets in if it passes <b>at least one</b> of four tests.
+        We list {benchmarkCount.toLocaleString('en-US')} benchmarks so far. A new one gets in if it passes <b>at least one</b> of four tests.
       </p>
       <Criteria />
       <p><b>What stays out:</b> {STAYS_OUT}</p>

@@ -88,7 +88,12 @@ export function wireAll() {
 export function wake() {
   wireAll();
   void load();
-  probeGpu(() => boxes.forEach((b) => b.refresh()));
+  probeGpu(() => {
+    // someone who turned it on before gets it back at the first sign of a search. The browser kept the model,
+    // so it loads from this device in a few seconds, with no download
+    if (meaning.state === 'off' && Meaning.remembered()) void meaning.start();
+    boxes.forEach((b) => b.refresh());
+  });
 }
 /** Fetch the index while the page is idle, before anyone asks. */
 export function preload() {
@@ -176,7 +181,7 @@ function wire(form: HTMLFormElement): Box {
         out.push({
           href: '#',
           name: 'Loading search by meaning',
-          detail: meaning.total ? `${mb(meaning.loaded)} of ${mb(meaning.total)} MB, once` : 'Starting',
+          detail: Meaning.remembered() ? 'From this device, no download' : meaning.total ? `${mb(meaning.loaded)} of ${mb(meaning.total)} MB, once` : 'Starting',
           kind: 'Meaning',
           cls: 'sr-load',
           act: () => {},
