@@ -12,18 +12,18 @@ const INCLUDE = [
   { t: 'What it tests', d: 'One or two sentences about the tasks and how a model is judged on them. Leave the motivation for the paper.' },
   { t: 'The paper or report', d: 'arXiv, OpenReview, a technical report or a launch post.' },
   { t: 'The code and the data', d: 'Links, with their licenses. Say whether the test set is public, held out or partly held out.' },
-  { t: 'The scores', d: 'A leaderboard, if there is one. A file we can read, such as a CSV, JSON or a Hugging Face dataset, with the date of each score, lets the almanac chart who held number one.' },
-  { t: 'The evidence', d: 'Links that show which of the four tests it passes: the model card that reports it, the leaderboard that runs it, or the papers that use it.' },
-  { t: 'What it replaces', d: 'If it is a new version of a benchmark already here, which one, and what changed in the tasks or the scoring.' },
+  { t: 'The scores', d: 'A leaderboard, if there is one, and a file of scores we can read, such as a CSV, JSON or a Hugging Face dataset. If each score has a date, we can chart who held number one.' },
+  { t: 'The evidence', d: 'Links that show which of the four tests it passes, such as a model card that reports it, a leaderboard that runs it, or papers that use it.' },
+  { t: 'What it replaces', d: 'If it’s a new version of a benchmark we already list, say which one and what changed in the tasks or the scoring.' },
 ];
 ---
 
-<Base title="Submit a benchmark" description="Suggest a benchmark for Benchmark Almanac: what gets catalogued, what to include, and what happens next.">
+<Base title="Submit a benchmark" description="How to suggest a benchmark for Benchmark Almanac, and what we do with each submission.">
   <div class="page prose">
     <header class="head">
       <h1>Submit a benchmark</h1>
       <p class="lede">
-        Made a benchmark, or found one that the almanac is missing? Send it in. An automatic check answers every submission within a minute, and a person reviews each one.
+        If you made a benchmark or found one we're missing, send it in. You'll get an automatic reply within a minute, and we review every submission by hand.
       </p>
       <div class="cta">
         <a class="go" href={SUBMIT_FORM}>
@@ -36,9 +36,9 @@ const INCLUDE = [
     </header>
 
     <section id="tests">
-      <h2>What gets catalogued</h2>
+      <h2>What gets cataloged</h2>
       <p>
-        The almanac has {benchmarks.length.toLocaleString('en-US')} benchmarks. It adds a new one when it passes <b>at least one</b> of four tests.
+        We list {benchmarks.length.toLocaleString('en-US')} benchmarks so far. A new one gets in if it passes <b>at least one</b> of four tests.
       </p>
       <Criteria />
       <p><b>What stays out:</b> {STAYS_OUT}</p>
@@ -46,7 +46,7 @@ const INCLUDE = [
 
     <section id="include">
       <h2>What to include</h2>
-      <p>The form asks for each of these. Only the name, what it tests, a link and the evidence are required, but each item makes the review faster.</p>
+      <p>The form asks for all of these. You only have to give the name, what it tests, its area, a paper or report, and the evidence, but the rest makes our review faster.</p>
       <dl>
         {
           INCLUDE.map((x) => (
@@ -63,17 +63,17 @@ const INCLUDE = [
       <h2>What happens next</h2>
       <ol class="steps">
         <li>
-          <b>Within a minute,</b> an automatic check replies on your submission. It says whether the almanac already has the benchmark, or left it out before and why, and which items are missing.
+          <b>Within a minute,</b> you get an automatic reply on your submission. It tells you whether we already have the benchmark or left it out before, with the reason. It also lists any items that are missing.
         </li>
         <li>
-          <b>Within a few days,</b> a person reviews it against the four tests. A benchmark that passes gets a record, and appears on the <a href="/new/">New page</a> with the next daily update.
+          <b>Within a few days,</b> we review it against the four tests. If it passes, we add a record for it, and it shows up on the <a href="/new/">New page</a> after the next daily update.
         </li>
         <li>
-          <b>If it doesn’t pass yet,</b> the reply says which test it missed. Add new evidence to the same submission at any time, for example when a lab reports it.
+          <b>If it doesn’t pass yet,</b> we say which test it missed. You can add evidence to the same submission at any time, for example once a lab reports it.
         </li>
       </ol>
       <p>
-        Something wrong in a record that is already here? Use the <a href={`${REPO}/issues/new?template=correction.yml`}>correction form</a>, with a link to the page and to a source for the right value.
+        To report a mistake in one of our records, use the <a href={`${REPO}/issues/new?template=correction.yml`}>correction form</a>. Include a link to the page and a source for the right value.
       </p>
     </section>
   </div>

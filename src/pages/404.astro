@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import SearchBox from '../components/SearchBox.astro';
+---
+
+<Base title="Page not found" description="We couldn't find that page.">
+  <div class="page">
+    <header class="head">
+      <h1>We couldn't find that page.</h1>
+      <p class="lede">Search for it below, or browse the <a href="/benchmarks/">Benchmarks table</a>.</p>
+      <SearchBox id="lost-list" main label="Search benchmarks" />
+    </header>
+  </div>
+</Base>

@@ -9,9 +9,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for sending a benchmark. The almanac adds one when it passes **at least one** of four tests: a major lab reports it, an independent leaderboard runs it, an established evaluation group made it, or people use it. The almanac's Submit page explains each test.
+        Thanks for sending a benchmark. We add one if it passes **at least one** of four tests: a major lab reports it, an independent leaderboard runs it, an established evaluation group made it, or people use it. Our Submit page explains each test.
 
-        An automatic check replies within a minute. A person reviews every submission.
+        You'll get an automatic reply within a minute, and we review every submission by hand.
   - type: input
     id: name
     attributes:
@@ -91,7 +91,7 @@ body:
     id: scores
     attributes:
       label: Scores file
-      description: A file of scores the almanac can read, such as a CSV, JSON or a Hugging Face dataset. A date on each score lets the almanac chart who held number one.
+      description: A file of scores we can read, such as a CSV, JSON or a Hugging Face dataset. If each score has a date, we can chart who held number one.
   - type: input
     id: scoring
     attributes:
@@ -122,7 +122,7 @@ body:
     id: evidence
     attributes:
       label: Evidence
-      description: Links that show it passes those tests. For example the model card that reports it, the leaderboard that runs it, or the papers that use it.
+      description: Links that show it passes those tests, for example a model card that reports it, a leaderboard that runs it, or papers that use it.
     validations:
       required: true
   - type: input

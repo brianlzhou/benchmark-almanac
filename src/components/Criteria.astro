@@ -1,5 +1,5 @@
 ---
-// The four tests a benchmark needs to pass one of, as numbered cards. Used on the About and Submit pages.
+// The four tests a benchmark needs to pass one of, as a numbered list set as type. Used on the About and Submit pages.
 import { CRITERIA } from '../lib/criteria.ts';
 ---
 
@@ -20,22 +20,22 @@ import { CRITERIA } from '../lib/criteria.ts';
     counter-reset: bar;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 4px 40px;
     margin: 24px 0 26px;
     padding: 0;
   }
   .bar li {
     counter-increment: bar;
     display: grid;
-    gap: 6px;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 4px 0;
     align-content: start;
-    padding: 18px 20px 20px;
-    border-radius: 12px;
-    background: var(--panel);
+    padding: 16px 0 18px;
   }
   .bar li::before {
     content: counter(bar);
-    font: 400 30px/1 var(--serif);
+    grid-row: span 2;
+    font: 400 28px/1 var(--serif);
     color: var(--ink-3);
   }
   .bar b {

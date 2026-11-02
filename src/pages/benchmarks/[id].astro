@@ -22,7 +22,7 @@ import Spark from '../../components/Spark.astro';
 import LinkIcon from '../../components/LinkIcon.astro';
 import { makerParts } from '../../lib/makers.ts';
 import { familyOf } from '../../lib/reigns.ts';
-import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder } from '../../lib/data.ts';
+import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages } from '../../lib/data.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
@@ -182,7 +182,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 <dd>
                   {/* separator and name on one line: a line break between them renders as a space before the comma */}
                   {makerParts(b.org).map((p) => (
-                    <>{p.sep}{p.lab ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}</>
+                    <>{p.sep}{p.lab && labPages.has(p.lab) ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}</>
                   ))}
                 </dd>
               </div>

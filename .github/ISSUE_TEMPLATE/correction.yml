@@ -8,7 +8,7 @@ body:
     id: page
     attributes:
       label: Page
-      description: The almanac page with the mistake.
+      description: The page with the mistake.
       placeholder: https://…/benchmarks/swe-bench-verified/
     validations:
       required: true

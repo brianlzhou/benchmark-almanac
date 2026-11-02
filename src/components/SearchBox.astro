@@ -1,0 +1,272 @@
+---
+// A search box: the big one a page leads with (home, 404) or the compact one in the header. Both work
+// through src/scripts/search.ts. Without JavaScript the form still searches the benchmarks table.
+interface Props {
+  /** the suggestion list's id, unique on the page */
+  id: string;
+  size?: 'big' | 'compact';
+  /** the page's own box: the header box hides while this one is on screen */
+  main?: boolean;
+  /** fetch the index when the page is idle, before anyone asks */
+  preload?: boolean;
+  placeholder?: string;
+  /** names the search landmark when a page has two boxes */
+  label?: string;
+}
+const { id, size = 'big', main = false, preload = false, placeholder = 'Search benchmarks, makers, models and labs', label } = Astro.props;
+const icon = size === 'big' ? 18 : 15;
+---
+
+<form
+  class:list={['search', size]}
+  role="search"
+  aria-label={label}
+  action="/benchmarks/"
+  data-search
+  data-search-main={main ? '' : undefined}
+  data-search-preload={preload ? '' : undefined}
+>
+  <svg class="search-i" width={icon} height={icon} viewBox="0 0 18 18" aria-hidden="true"><circle cx="8" cy="8" r="5.75" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+  <input
+    name="q"
+    type="search"
+    autocomplete="off"
+    spellcheck="false"
+    enterkeyhint="search"
+    placeholder={placeholder}
+    aria-label="Search benchmarks, makers, models and labs"
+    role="combobox"
+    aria-autocomplete="list"
+    aria-controls={id}
+    aria-expanded="false"
+  />
+  <kbd aria-hidden="true">/</kbd>
+  <ul id={id} role="listbox" aria-label="Suggestions"></ul>
+</form>
+
+<style>
+  .search {
+    position: relative;
+  }
+  .search input {
+    width: 100%;
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+  }
+  .search input::placeholder {
+    color: var(--ink-3);
+  }
+  .search input::-webkit-search-cancel-button {
+    display: none;
+  }
+  .search input:focus {
+    outline: none;
+  }
+  .search-i {
+    position: absolute;
+    color: var(--ink-3);
+    pointer-events: none;
+  }
+  .search kbd {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-weight: 500;
+  }
+
+  /* the big box a page leads with */
+  .big {
+    width: min(680px, 100%);
+    margin-top: 34px;
+  }
+  .big input {
+    height: 60px;
+    padding: 0 52px 0 50px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--bg);
+    font-size: 16.5px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 12px 32px -18px rgb(0 0 0 / 0.22);
+  }
+  .big input:focus {
+    border-color: var(--ink-4);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 16%, transparent), 0 12px 32px -18px rgb(0 0 0 / 0.22);
+  }
+  .big .search-i {
+    left: 18px;
+    top: 21px;
+  }
+  .big kbd {
+    right: 16px;
+    top: 18px;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  /* the header box: a quiet gray field that turns white when it has focus */
+  .compact input {
+    height: 36px;
+    padding: 0 34px 0 33px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: var(--panel);
+    font-size: 14px;
+  }
+  .compact input:hover {
+    border-color: var(--line);
+  }
+  .compact input:focus {
+    border-color: var(--ink-4);
+    background: var(--bg);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 16%, transparent);
+  }
+  .compact .search-i {
+    left: 11px;
+    top: 10.5px;
+  }
+  .compact kbd {
+    right: 8px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background: var(--bg);
+    font-size: 11px;
+  }
+  .compact input:is(:focus, :not(:placeholder-shown)) ~ kbd {
+    display: none;
+  }
+  /* phones zoom into a field with text under 16px */
+  @media (pointer: coarse) {
+    .compact input {
+      font-size: 16px;
+    }
+  }
+
+  /* the suggestions */
+  .search [role='listbox'] {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    max-height: min(70vh, 520px);
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    text-align: left;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--bg);
+    box-shadow: 0 18px 40px -16px rgb(0 0 0 / 0.24);
+  }
+  /* the header field is narrow, so its list reaches left from the field's right edge */
+  .compact [role='listbox'] {
+    left: auto;
+    width: max(100%, min(560px, 100vw - 32px));
+  }
+  .search.open [role='listbox'] {
+    display: block;
+  }
+  .search :global([role='option'] a) {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .search :global([role='option'] a:hover),
+  .search :global([role='option'][aria-selected='true'] a) {
+    background: var(--hover);
+  }
+  .search :global(.sr-n) {
+    font-weight: 500;
+  }
+  .search :global(.sr-d) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--ink-3);
+    font-size: 13.5px;
+  }
+  .search :global(.sr-k) {
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+  .search :global(.sr-all) {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid var(--line);
+  }
+  .search :global(:is(.sr-all, .sr-add) .sr-n) {
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+  /* search by meaning: the offer, the download in progress, and the matches it finds */
+  .search :global(.sr-m .sr-k),
+  .search :global(.sr-offer .sr-k),
+  .search :global(.sr-load .sr-k) {
+    color: var(--ink-2);
+  }
+  .search :global(.sr-offer),
+  .search :global(.sr-load) {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid var(--line);
+  }
+  .search :global(.sr-offer .sr-n::before) {
+    content: '✦ ';
+    color: var(--ink-3);
+  }
+  .search :global(.sr-load a) {
+    background: linear-gradient(to right, var(--hover) var(--p, 0%), transparent var(--p, 0%));
+  }
+  .search :global(.sr-offer + .sr-all),
+  .search :global(.sr-load + .sr-all) {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  /* a narrow list puts the detail under the name, so names get the full width */
+  @media (max-width: 560px) {
+    .search :global([role='option'] a) {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2px 12px;
+    }
+    .search :global(.sr-d) {
+      grid-row: 2;
+    }
+    .search :global(.sr-k) {
+      grid-row: 1;
+      grid-column: 2;
+    }
+    .search :global(.sr-d:empty) {
+      display: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .big input {
+      height: 54px;
+      padding-right: 16px;
+      font-size: 16px;
+    }
+    .big .search-i {
+      top: 18px;
+    }
+    .big kbd {
+      display: none;
+    }
+  }
+</style>

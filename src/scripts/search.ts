@@ -1,38 +1,19 @@
-// The home page search box. It loads /search.json the first time someone focuses it, then suggests
-// benchmarks, models, labs, categories and pages as they type. A name match ranks first, then other
-// spellings, then the words a row can also be found by (a benchmark's maker or description, a model's lab).
-// The first suggestion is highlighted, so Enter opens it. The last row always offers the benchmarks table
-// filtered by the text. "/" focuses the box from anywhere on the page.
+// Every search box on the page: the one in the header and a page's own big box (the home hero, the 404).
+// search-boot.ts imports this file when someone shows they want to search, so pages that never search
+// skip it. It loads /search.json once, shares it between the boxes, and suggests benchmarks, models, labs,
+// categories and pages as people type (search-rank.ts ranks them). The first suggestion is highlighted, so
+// Enter opens it. Under the suggestions, one row offers the benchmarks table filtered by the text and the
+// last one opens a GitHub form to suggest a benchmark we don't list.
 //
 // A query that reads like a sentence ("a benchmark where models play chess") also offers search by meaning
 // (see meaning.ts). Once the reader turns it on, meaning matches join the list under any name matches.
 import { Meaning, MEANING_MB, meaningPossible, probeGpu } from './meaning.ts';
+import { type Entry, type Hit, type Kind, type Memo, type Row, QUERY_STOP, STRONG, addWords, norm, rank, toEntry } from './search-rank.ts';
+import { SUBMIT_FORM } from '../lib/criteria.ts';
 
-type Kind = 'b' | 'm' | 'l' | 'c' | 'p';
-type Row = [string, string, Kind, string, string, number, string];
 const KIND: Record<Kind, string> = { b: 'Benchmark', m: 'Model', l: 'Lab', c: 'Category', p: 'Page' };
 const SHOW = 8;
-/** A name or other-spelling match scores this or more. Below it, the match is only on other words. */
-const STRONG = 36;
-/** Words too common in queries to say anything about which benchmark is meant. */
-const QUERY_STOP = new Set(
-  'the and for with from that this into what when where which who are was can how does find want looking show benchmark benchmarks eval evals evaluation evaluations test tests model models evaluate evaluates evaluating measure measures like about any some'.split(
-    ' ',
-  ),
-);
 
-interface Entry {
-  r: Row;
-  name: string;
-  compact: string;
-  alts: string[];
-  /** name and other spellings, with a leading space so a word start is " word" */
-  names: string;
-  /** everything the row can be found by */
-  all: string;
-  /** the same without spaces: one cheap check rules most rows out before they are scored */
-  flat: string;
-}
 interface Item {
   href: string;
   name: string;
@@ -41,164 +22,93 @@ interface Item {
   cls?: string;
   /** a row that does something on the page instead of opening a link */
   act?: () => void;
+  /** never highlighted first, so Enter can't land on it by accident */
+  skip?: boolean;
+  /** opens another site, in a new tab like every outside link here */
+  away?: boolean;
+}
+interface Box {
+  form: HTMLFormElement;
+  /** the description words arrived: forget kept rows and redo the current query */
+  reset(): void;
+  refresh(): void;
+  meaningChanged(): void;
 }
 
-const form = document.querySelector<HTMLFormElement>('[data-search]');
-if (form) {
+// ---- the index, one copy for every box ----
+let entries: Entry[] | null = null;
+let byUrl = new Map<string, Entry>();
+let loading: Promise<void> | null = null;
+const boxes: Box[] = [];
+
+const idle = (f: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(f, { timeout: 3000 }) : setTimeout(f, 300));
+// The names come first. Description words follow in a second file, so words like "chess" also find benchmarks.
+const load = () =>
+  (loading ??= fetch('/search.json')
+    .then((r) => r.json())
+    .then(({ v, rows }: { v: string; rows: Row[] }) => {
+      entries = rows.map(toEntry);
+      byUrl = new Map(entries.map((e) => [e.r[1], e]));
+      idle(() => void loadWords(v));
+    })
+    .catch(() => {
+      entries = [];
+    }));
+const loadWords = (v: string) =>
+  fetch('/search-words.json')
+    .then((r) => r.json())
+    .then((w: { v: string; words: string[] }) => {
+      if (w.v !== v || !entries || w.words.length !== entries.length) return;
+      entries.forEach((e, i) => {
+        if (w.words[i]) addWords(e, w.words[i]);
+      });
+      df = null;
+      for (const b of boxes) b.reset();
+    })
+    .catch(() => {});
+
+// ---- search by meaning, one model for every box ----
+const meaning = new Meaning(() => {
+  for (const b of boxes) b.meaningChanged();
+});
+// how rare each word is among benchmarks, so a rare query word found in a benchmark's own text can lift it
+let df: Map<string, number> | null = null;
+const docFreq = () => {
+  if (df) return df;
+  df = new Map();
+  for (const e of entries ?? []) if (e.r[2] === 'b') for (const w of new Set(e.all.split(' '))) if (w) df.set(w, (df.get(w) ?? 0) + 1);
+  return df;
+};
+
+/** Wire each search box that is not wired yet. */
+export function wireAll() {
+  for (const f of document.querySelectorAll<HTMLFormElement>('[data-search]')) if (!boxes.some((b) => b.form === f)) boxes.push(wire(f));
+}
+/** Someone is about to search: fetch the index, and ask once whether this device can search by meaning. */
+export function wake() {
+  wireAll();
+  void load();
+  probeGpu(() => boxes.forEach((b) => b.refresh()));
+}
+/** Fetch the index while the page is idle, before anyone asks. */
+export function preload() {
+  wireAll();
+  void load();
+}
+
+function wire(form: HTMLFormElement): Box {
   const input = form.querySelector<HTMLInputElement>('input')!;
   const list = form.querySelector<HTMLUListElement>('[role="listbox"]')!;
-  let entries: Entry[] | null = null;
-  let byUrl = new Map<string, Entry>();
-  let loading: Promise<void> | null = null;
-  let scored: { r: Row; s: number }[] = [];
+  const memo: Memo = { kept: null, keptFor: [] };
+  let scored: Hit[] = [];
   let meaningHits: Row[] = [];
   let meaningFor = '';
   let items: Item[] = [];
   let active = -1;
   let timer = 0;
-  // the rows the last query of three or more letters could match, and that query
-  let kept: Entry[] | null = null;
-  let keptFor: string[] = [];
 
-  const norm = (s: string) =>
-    s
-      .toLowerCase()
-      .normalize('NFKD')
-      .replace(/[̀-ͯ]/g, '')
-      .replace(/[^a-z0-9]+/g, ' ')
-      .trim();
-
-  // The index loads at the first sign of intent (pointer over the box, a tap, "/", focus) or when the page
-  // is idle on a connection that has not asked to save data. Description words follow in a second file.
-  const load = () =>
-    (loading ??= fetch('/search.json')
-      .then((r) => r.json())
-      .then(({ v, rows }: { v: string; rows: Row[] }) => {
-        entries = rows.map((r) => {
-          const name = norm(r[0]);
-          const alts = r[4] ? r[4].split(' | ').map(norm).filter(Boolean) : [];
-          const names = ` ${[name, ...alts].join(' ')}`;
-          const all = `${names} ${norm(r[3])} ${r[6]} `;
-          return { r, name, compact: name.replace(/ /g, ''), alts, names, all, flat: all.replace(/ /g, '') };
-        });
-        byUrl = new Map(entries.map((e) => [e.r[1], e]));
-        idle(() => void loadWords(v));
-      })
-      .catch(() => {
-        entries = [];
-      }));
-  const loadWords = (v: string) =>
-    fetch('/search-words.json')
-      .then((r) => r.json())
-      .then((w: { v: string; words: string[] }) => {
-        if (w.v !== v || !entries || w.words.length !== entries.length) return;
-        entries.forEach((e, i) => {
-          if (!w.words[i]) return;
-          e.all += `${w.words[i]} `;
-          e.flat += w.words[i].replace(/ /g, '');
-        });
-        df = null;
-        kept = null;
-        if (text()) void update();
-      })
-      .catch(() => {});
-  const idle = (f: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(f, { timeout: 3000 }) : setTimeout(f, 300));
-  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-  if (!conn?.saveData && !/2g/.test(conn?.effectiveType ?? '')) {
-    if (document.readyState === 'complete') idle(() => void load());
-    else addEventListener('load', () => idle(() => void load()), { once: true });
-  }
-  for (const ev of ['pointerenter', 'touchstart', 'focusin'])
-    form.addEventListener(
-      ev,
-      () => {
-        void load();
-        probeGpu(() => refresh());
-      },
-      { once: true, passive: true },
-    );
-
-  // the query in every form the checks need, made once per keystroke rather than once per row
-  interface Query {
-    q: string;
-    /** " q": the query at a word start */
-    sq: string;
-    /** the query without spaces */
-    cq: string;
-    toks: string[];
-    /** each word with a leading space */
-    stoks: string[];
-    /** the words that say what is meant: no "a", "where" or "benchmark", so a sentence can still match */
-    ctoks: string[];
-    sctoks: string[];
-  }
-
-  function score(e: Entry, x: Query, short: boolean): number {
-    const { name, alts } = e;
-    const { q, toks, stoks } = x;
-    if (name === q) return 100;
-    if (alts.includes(q)) return 92;
-    if (name.startsWith(q)) return 80;
-    if (name.includes(x.sq)) return 66;
-    if (alts.some((a) => a.startsWith(q))) return 62;
-    if (name.includes(q)) return 52;
-    if (x.cq.length >= 3 && e.compact.includes(x.cq)) return 48;
-    if (alts.some((a) => a.includes(q))) return 42;
-    if (stoks.every((t) => e.names.includes(t))) return STRONG;
-    // one or two letters say nothing about a description
-    if (short) return -1;
-    if (x.sctoks.every((t) => e.all.includes(t))) return 22;
-    if (x.ctoks.every((t) => t.length >= 3 && e.all.includes(t))) return 10;
-    return -1;
-  }
-
-  function rank(q: string): { r: Row; s: number }[] {
-    if (!entries || !q) return [];
-    const toks = q.split(' ');
-    const content = toks.filter((t) => t.length >= 3 && !QUERY_STOP.has(t));
-    const ctoks = content.length ? content : toks;
-    const x: Query = { q, sq: ` ${q}`, cq: q.replace(/ /g, ''), toks, stoks: toks.map((t) => ` ${t}`), ctoks, sctoks: ctoks.map((t) => ` ${t}`) };
-    // Every kind of match needs each meaningful word somewhere in the row's text, so one cheap check rules
-    // out most rows. A one- or two-letter query only looks at names. When every word the last query needed
-    // is part of a word this one needs (the usual case while typing), only the rows it kept can match.
-    const short = q.length < 3;
-    let pool: Entry[];
-    if (short) pool = entries.filter((e) => toks.every((t) => e.names.includes(t)));
-    else {
-      const narrower = kept && keptFor.every((t) => ctoks.some((c) => c.includes(t)));
-      pool = (narrower ? kept! : entries).filter((e) => ctoks.every((t) => e.flat.includes(t)));
-      kept = pool;
-      keptFor = ctoks;
-    }
-    // the best 20, best first, kept in place: a one-letter query matches thousands of rows, so no full sort
-    const top: { r: Row; s: number; k: number }[] = [];
-    for (const e of pool) {
-      const s = score(e, x, short);
-      if (s < 0) continue;
-      // within one kind of match: the one reported most often, then the shorter name, is more likely the one meant
-      const k = s + Math.min(12, e.r[5] ?? 0) / 2 - e.name.length / 40;
-      if (top.length === 20 && k <= top[19].k) continue;
-      let i = top.length;
-      while (i > 0 && top[i - 1].k < k) i--;
-      top.splice(i, 0, { r: e.r, s, k });
-      if (top.length > 20) top.pop();
-    }
-    return top;
-  }
-
-  // ---- search by meaning ----
-  const meaning = new Meaning(() => {
-    refresh();
-    if (meaning.state === 'ready' && sentenceLike()) void runMeaning(true);
-  });
-  // how rare each word is among benchmarks, so a rare query word found in a benchmark's own text can lift it
-  let df: Map<string, number> | null = null;
-  const docFreq = () => {
-    if (df) return df;
-    df = new Map();
-    for (const e of entries ?? []) if (e.r[2] === 'b') for (const w of new Set(e.all.split(' '))) if (w) df.set(w, (df.get(w) ?? 0) + 1);
-    return df;
-  };
+  const text = () => input.value.trim();
+  const live = () => document.activeElement === input || form.classList.contains('open');
   const strong = () => scored.filter((x) => x.s >= STRONG);
   // several words that are not simply a name ("claude opus 5"), or a word that matches no name: worth
   // reading for meaning
@@ -239,7 +149,6 @@ if (form) {
   }
 
   // ---- the list ----
-  const text = () => input.value.trim();
   const tableHref = () => `/benchmarks/?q=${encodeURIComponent(text())}`;
   const mb = (b: number) => Math.round(b / 1e6).toLocaleString('en-US');
 
@@ -283,12 +192,14 @@ if (form) {
         });
     }
     out.push({ href: tableHref(), name: out.length ? `Search the table for “${text()}”` : `No direct match. Search the table for “${text()}”`, detail: '', kind: 'Table', cls: 'sr-all' });
+    // a benchmark we don't list yet: the submission form, with the text as its title
+    out.push({ href: `${SUBMIT_FORM}&title=${encodeURIComponent(text())}`, name: `Not listed? Suggest “${text()}”`, detail: '', kind: 'GitHub', cls: 'sr-add', skip: true, away: true });
     return out;
   }
 
   function option(i: number, it: Item) {
     const li = document.createElement('li');
-    li.id = `sr-${i}`;
+    li.id = `${list.id}-${i}`;
     li.setAttribute('role', 'option');
     li.setAttribute('aria-selected', String(i === active));
     if (it.cls) li.className = it.cls;
@@ -321,19 +232,23 @@ if (form) {
   function render() {
     list.replaceChildren(...items.map((it, i) => option(i, it)));
     const open = items.length > 0;
-    form!.classList.toggle('open', open);
+    form.classList.toggle('open', open);
     input.setAttribute('aria-expanded', String(open));
-    if (active >= 0) input.setAttribute('aria-activedescendant', `sr-${active}`);
+    if (active >= 0) input.setAttribute('aria-activedescendant', `${list.id}-${active}`);
     else input.removeAttribute('aria-activedescendant');
   }
 
+  // Enter goes to the first real result. The offer to download search by meaning (210 MB) and the link
+  // that suggests a new benchmark are never preselected, so they run only when the reader picks them.
+  const firstPick = () => items.findIndex((it) => !it.act && !it.skip);
+
   /** Rebuild the rows, keeping the highlight on the same row where it still exists. */
   function refresh() {
-    if (document.activeElement !== input && !form!.classList.contains('open')) return;
+    if (!live()) return;
     const keep = items[active]?.href;
     items = compose();
     const i = keep ? items.findIndex((it) => it.href === keep && it.href !== '#') : -1;
-    active = i >= 0 ? i : items.length ? 0 : -1;
+    active = i >= 0 ? i : firstPick();
     render();
   }
 
@@ -341,10 +256,10 @@ if (form) {
     const q = norm(input.value);
     if (!entries) await load();
     if (norm(input.value) !== q) return; // a newer keystroke is already being handled
-    scored = rank(q);
+    scored = rank(entries!, q, memo);
     if (meaningFor !== q) meaningHits = [];
     items = compose();
-    active = items.length ? 0 : -1;
+    active = firstPick();
     render();
     if (sentenceLike()) {
       if (meaning.state === 'ready') void runMeaning();
@@ -373,7 +288,7 @@ if (form) {
       e.preventDefault();
       active = (active + (e.key === 'ArrowDown' ? 1 : -1) + n) % n;
       render();
-      document.getElementById(`sr-${active}`)?.scrollIntoView({ block: 'nearest' });
+      document.getElementById(`${list.id}-${active}`)?.scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'Escape') {
       close();
     }
@@ -383,16 +298,31 @@ if (form) {
     if (!text()) return;
     const it = items[active];
     if (it?.act) it.act();
+    else if (it?.away) window.open(it.href, '_blank', 'noopener');
     else location.href = it ? it.href : tableHref();
   });
   document.addEventListener('click', (e) => {
     if (!form.contains(e.target as Node)) close();
   });
-  document.addEventListener('keydown', (e) => {
-    const t = e.target as HTMLElement;
-    if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && !t.isContentEditable) {
-      e.preventDefault();
-      input.focus();
-    }
-  });
+  // focus or typing may have come before this file loaded
+  if (document.activeElement === input) {
+    void load();
+    if (text()) void update();
+  }
+
+  return {
+    form,
+    reset() {
+      memo.kept = null;
+      if (text() && live()) void update();
+    },
+    refresh,
+    meaningChanged() {
+      if (!live()) return;
+      refresh();
+      if (meaning.state === 'ready' && sentenceLike()) void runMeaning(true);
+    },
+  };
 }
+
+wireAll();

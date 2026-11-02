@@ -1,5 +1,5 @@
 // The landscape across the top of the footer: benchmarks released each month since 2019, stacked by area, so
-// the colours show which kinds of test each year brought. The outline's height is the month's total to the
+// the colors show which kinds of test each year brought. The outline's height is the month's total to the
 // power 0.45, so the quiet early years still show as terrain. Within it, each area's band is its share of
 // that month. Each outline is a static SVG (src/pages/ridge/[shape].svg.ts) that the footer uses as a CSS
 // mask, so the shapes stretch to any screen width while the stipple inside them keeps round dots.
@@ -21,7 +21,7 @@ function monthsSince() {
   return out;
 }
 
-// a soft hill, not a bar chart: each month averages with its neighbours
+// a soft hill, not a bar chart: each month averages with its neighbors
 function smooth(raw: number[]) {
   const K = [1, 2, 3, 4, 3, 2, 1];
   return raw.map((_, i) => {

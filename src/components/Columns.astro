@@ -8,7 +8,7 @@ import LabMark from './LabMark.astro';
 import { modelById } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
-import { niceMax, niceTicks } from '../lib/scale.ts';
+import { niceMax, ratingFloor } from '../lib/scale.ts';
 import { featuredIds } from '../lib/routes.ts';
 
 interface Props {
@@ -19,17 +19,11 @@ interface Props {
 const { scores, unit = '%', height = 260 } = Astro.props;
 const rows = scores;
 const top = Math.max(...rows.map((s) => s.value), 1e-9);
-const max = unit === '%' ? 100 : niceMax(top);
+const rated = unit === 'elo' || unit === 'rating';
+// a percentage keeps its full 0 to 100 scale. A rating's top bar fills the height, since only gaps mean anything
+const max = unit === '%' ? 100 : rated ? top : niceMax(top);
 // a rating has no true zero, so its bars start a little below the lowest rating on the board
-let lo = 0;
-if (unit === 'elo' || unit === 'rating') {
-  const least = Math.min(...rows.map((s) => s.value));
-  const t = niceTicks(least, top, 5);
-  const step = t.length > 1 ? t[1] - t[0] : Math.max(1, least * 0.05);
-  lo = Math.floor(least / step) * step;
-  if (lo >= least) lo -= step;
-  lo = Math.max(0, lo);
-}
+const lo = rated ? ratingFloor(rows.map((s) => s.value)) : 0;
 const h = (v: number) => Math.max(2, ((v - lo) / (max - lo)) * height);
 const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
 const many = rows.length > 12;
@@ -39,9 +33,9 @@ const many = rows.length > 12;
   {
     (many || lo > 0) && (
       <div class="cols-bar">
-        <p class="cols-n num" aria-live="polite" data-cols-n>
-          {many ? `All ${rows.length} models` : ''}
-          {lo > 0 && <span class="base">{many ? '. ' : ''}Bars start at {lo.toLocaleString('en-US')}, not zero.</span>}
+        <p class="cols-n num" aria-live="polite">
+          <span data-cols-range>{many ? `${rows.length} models. Scroll sideways for the rest.` : ''}</span>
+          {lo > 0 && <span class="base">Bars start at {lo.toLocaleString('en-US')}.</span>}
         </p>
         {many && (
           <div class="cols-arrows">
@@ -90,10 +84,9 @@ const many = rows.length > 12;
   for (const box of document.querySelectorAll<HTMLElement>('[data-cols]')) {
     const sc = box.querySelector<HTMLElement>('[data-cols-scroll]')!;
     const cols = sc.querySelectorAll<HTMLElement>('.col');
-    const n = box.querySelector<HTMLElement>('[data-cols-n]');
+    const n = box.querySelector<HTMLElement>('[data-cols-range]');
     const prev = box.querySelector<HTMLButtonElement>('[data-cols-go="-1"]');
     const next = box.querySelector<HTMLButtonElement>('[data-cols-go="1"]');
-    const base = n?.querySelector('.base')?.outerHTML ?? '';
     if (!prev || !next || !n) continue;
     let frame = 0;
     const update = () => {
@@ -124,7 +117,7 @@ const many = rows.length > 12;
       box.classList.toggle('at-end', atEnd);
       prev.disabled = atStart;
       next.disabled = atEnd;
-      n.innerHTML = over ? `Ranks ${first + 1} to ${last + 1} of ${cols.length}${base ? '. ' + base.replace('>. ', '>') : ''}` : `All ${cols.length} models${base ? '. ' + base.replace('>. ', '>') : ''}`;
+      n.textContent = over ? `Ranks ${first + 1} to ${last + 1} of ${cols.length}.` : '';
     };
     const queue = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -226,9 +219,11 @@ const many = rows.length > 12;
     min-width: 0;
     scroll-snap-align: start;
   }
-  /* a short board shares the width, as before */
-  .cols-box:not(.scrolls) .col {
-    flex: 0 1 66px;
+  .cols-box:not(.scrolls) .cols-bar:not(:has(.base)) {
+    display: none;
+  }
+  [data-cols-range]:not(:empty) + .base {
+    margin-left: 0.4em;
   }
   .col > a {
     height: 100%;
