@@ -82,7 +82,7 @@ export function jsonAfter<T>(s: string, marker: string): T {
 
 /**
  * A JavaScript array or object literal from a page script, read as data, never run: comments, trailing
- * commas and unquoted keys are normalised, then JSON.parse reads it. Single-quoted strings are not supported.
+ * commas and unquoted keys are normalized, then JSON.parse reads it. Single-quoted strings are not supported.
  */
 export function jsLiteral<T>(s: string, from: number): T {
   let out = '';
@@ -101,7 +101,9 @@ export function jsLiteral<T>(s: string, from: number): T {
       continue;
     }
     if (c === '/' && s[i + 1] === '*') {
-      i = s.indexOf('*/', i + 2) + 1;
+      const end = s.indexOf('*/', i + 2);
+      if (end < 0) throw new Error('unterminated comment');
+      i = end + 1;
       continue;
     }
     if (c === '"') quoted = true;

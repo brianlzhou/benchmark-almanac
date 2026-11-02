@@ -4,9 +4,10 @@
 //
 // Each benchmark is embedded from its name, other names, description, note, maker and category, with the
 // model's document prompt. Vectors are cut to the first DIM dimensions (the model is trained so that a
-// prefix of its vector still works), normalised, and stored as int8 with one float32 scale per vector:
+// prefix of its vector still works), normalized, and stored as int8 with one float32 scale per vector:
 //   public/meaning/vectors.bin   N float32 scales, then N x DIM int8 values, rows in the order of index.json
-//   public/meaning/index.json    model, dim, prompts, ids, and a hash of each benchmark's text
+//   public/meaning/index.json    model, dim, query prompt and ids: what the browser reads
+//   public/meaning/hashes.json   a hash of each benchmark's text, so a rerun can skip unchanged ones
 // A rerun embeds only benchmarks whose text changed, and drops ones no longer in data/benchmarks.json.
 //
 // The site itself has no dependency on the model library. Install it without saving, then run:
@@ -26,8 +27,10 @@ export const DIM = 256;
 export const QUERY_PROMPT = 'task: search result | query: ';
 const args = process.argv.slice(2);
 const ALL = args.includes('--all');
-const DTYPE = args[args.indexOf('--dtype') + 1] && args.includes('--dtype') ? args[args.indexOf('--dtype') + 1] : 'fp32';
-const RAW = args.includes('--raw') ? args[args.indexOf('--raw') + 1] : '';
+const opt = (name: string) => (args.includes(name) ? args[args.indexOf(name) + 1] : '');
+const DTYPE = opt('--dtype') || 'fp32';
+// --raw FILE also writes the full 768-dimension float vectors, for testing other cut-offs
+const RAW = opt('--raw');
 const OUT = join(ROOT, 'public', 'meaning');
 
 interface Bench {
@@ -47,7 +50,6 @@ interface Index {
   built: string;
   query: string;
   ids: string[];
-  hashes: string[];
 }
 
 // category names live in the site's taxonomy module, which Node cannot import (it imports JSON bare)
@@ -75,14 +77,16 @@ export function docText(b: Bench): string {
 const docPrompt = (b: Bench) => `title: ${b.name} | text: ${docText(b)}`;
 const hash = (s: string) => createHash('sha256').update(`${MODEL}|${DTYPE}|${s}`).digest('hex').slice(0, 10);
 
+// a variable name, so the type checker does not look for a package the site does not install
+const LIB: string = '@huggingface/transformers';
 async function loadLib() {
   try {
-    return await import('@huggingface/transformers');
+    return await import(LIB);
   } catch {
     const dir = process.env.TRANSFORMERS_DIR;
     if (!dir) throw new Error('Install the model library first: npm i --no-save @huggingface/transformers@4.3.1 (or set TRANSFORMERS_DIR)');
     const req = createRequire(join(dir, 'package.json'));
-    return await import(pathToFileURL(req.resolve('@huggingface/transformers')).href);
+    return await import(pathToFileURL(req.resolve(LIB)).href);
   }
 }
 
@@ -90,10 +94,11 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const benchmarks = readJson<Bench[]>(dataPath('benchmarks.json'));
   const old: Index | null = !ALL && existsSync(join(OUT, 'index.json')) ? readJson<Index>(join(OUT, 'index.json')) : null;
   const oldVec = old && old.dim === DIM && old.model === MODEL ? readFileSync(join(OUT, 'vectors.bin')) : null;
-  const oldRow = new Map<string, { hash: string; i: number }>((old?.ids ?? []).map((id, i) => [id, { hash: old!.hashes[i], i }]));
+  const oldHash = old && existsSync(join(OUT, 'hashes.json')) ? readJson<Record<string, string>>(join(OUT, 'hashes.json')) : {};
+  const oldRow = new Map<string, { hash: string; i: number }>((old?.ids ?? []).map((id, i) => [id, { hash: oldHash[id] ?? '', i }]));
   const texts = benchmarks.map(docPrompt);
   const hashes = texts.map(hash);
-  const todo = benchmarks.map((b, i) => i).filter((i) => RAW || !oldVec || oldRow.get(benchmarks[i].id)?.hash !== hashes[i]);
+  const todo = benchmarks.map((_, i) => i).filter((i) => RAW || !oldVec || oldRow.get(benchmarks[i].id)?.hash !== hashes[i]);
   console.log(`${benchmarks.length} benchmarks, ${todo.length} to embed with ${MODEL} (${DTYPE})`);
 
   const N = benchmarks.length;
@@ -135,7 +140,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       rows.forEach((i, j) => {
         const v = full.subarray(j * D, (j + 1) * D);
         if (raw) raw.set(v, i * 768);
-        // first DIM dimensions, normalised, then int8 with this vector's own scale
+        // first DIM dimensions, normalized, then int8 with this vector's own scale
         let norm = 0;
         for (let d = 0; d < DIM; d++) norm += v[d] * v[d];
         norm = Math.sqrt(norm) || 1;
@@ -154,7 +159,8 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 
   mkdirSync(OUT, { recursive: true });
   writeFileSync(join(OUT, 'vectors.bin'), Buffer.concat([Buffer.from(scales.buffer), Buffer.from(q.buffer)]));
-  const index: Index = { model: MODEL, dtype: DTYPE, dim: DIM, built: new Date().toISOString().slice(0, 10), query: QUERY_PROMPT, ids: benchmarks.map((b) => b.id), hashes };
+  const index: Index = { model: MODEL, dtype: DTYPE, dim: DIM, built: new Date().toISOString().slice(0, 10), query: QUERY_PROMPT, ids: benchmarks.map((b) => b.id) };
   writeFileSync(join(OUT, 'index.json'), JSON.stringify(index));
+  writeFileSync(join(OUT, 'hashes.json'), JSON.stringify(Object.fromEntries(benchmarks.map((b, i) => [b.id, hashes[i]]))));
   console.log(`wrote public/meaning: ${N} vectors of ${DIM} dimensions, ${((N * (DIM + 4)) / 1024).toFixed(0)} KB`);
 }

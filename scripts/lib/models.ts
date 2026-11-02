@@ -11,7 +11,7 @@ interface Model {
   epoch?: string;
 }
 
-const EFFORT = ['max', 'xhigh', 'high', 'medium', 'low', 'minimal', 'none', 'thinking', 'non-thinking', 'nothinking', 'reasoning', 'adaptive'];
+const EFFORT = ['max', 'xhigh', 'high', 'medium', 'low', 'minimal', 'none', 'thinking', 'non-thinking', 'nothinking', 'non-reasoning', 'reasoning', 'adaptive'];
 const EFFORT_RE = new RegExp(`(?:[\\s_-]|\\b)(${EFFORT.join('|')})(?:[\\s_-]?(?:reasoning|effort|mode))?$`, 'i');
 // brand words people drop: "Opus 5.5" for "Claude Opus 5.5"
 const DROPPABLE = /^(claude|meta|google|openai|anthropic|xai|mistral|alibaba)[\s-]+/i;
@@ -39,17 +39,27 @@ export function makeResolver(extra: Record<string, string> = {}) {
       if (DROPPABLE.test(n)) add(n.replace(DROPPABLE, ''), m);
     }
   }
-  const extraKeys = new Map(Object.entries(extra).map(([n, id]) => [key(n), id]));
+  // an importer's own aliases. One that points at a model we do not have is dropped, so it cannot write rows
+  // for a nonexistent id. A name with no ASCII letters or digits ("π₀.₅") keys to "" and is never looked up.
+  const ids = new Set(models.map((m) => m.id));
+  const extraKeys = new Map<string, string>();
+  for (const [n, id] of Object.entries(extra)) {
+    if (!ids.has(id)) console.log(`    alias "${n}" points at unknown model ${id}, skipped`);
+    else if (key(n)) extraKeys.set(key(n), id);
+  }
 
-  // several snapshots share a base name ("GPT-4o"): take the newest released by the run date
+  // several snapshots share a base name ("GPT-4o"): take the newest released by the date. With no snapshot
+  // out by then, the date is earlier than every release we know, so the earliest snapshot is the closest.
   const pick = (list: Model[], date?: string): Model => {
     const dated = list.filter((m) => m.released).sort((a, b) => a.released!.localeCompare(b.released!));
     if (!dated.length) return list[0];
-    const before = date ? dated.filter((m) => m.released! <= date) : dated;
-    return (before.length ? before : dated).at(-1)!;
+    if (!date) return dated.at(-1)!;
+    const before = dated.filter((m) => m.released! <= date);
+    return before.length ? before.at(-1)! : dated[0];
   };
 
   return function resolve(raw: string, date?: string): Resolved | null {
+    if (!key(raw)) return null;
     const direct = extraKeys.get(key(raw));
     if (direct) return { id: direct };
     let name = raw.trim().replace(/^[\w.-]+\//, ''); // vendor prefix: "anthropic/claude-..."
@@ -58,12 +68,21 @@ export function makeResolver(extra: Record<string, string> = {}) {
     if (paren) {
       const inner = paren[1].trim();
       if (EFFORT.some((e) => inner.toLowerCase().startsWith(e)) || /reasoning|effort|thinking/i.test(inner)) {
-        setting = inner.replace(/\s*(reasoning|effort)$/i, '').toLowerCase();
+        // "High reasoning" -> "high", but "Non-Reasoning" and "No reasoning" keep the whole label
+        setting = (/^(non|no)\b/i.test(inner) ? inner : inner.replace(/\s+(reasoning|effort)$/i, '')).toLowerCase();
         name = name.slice(0, paren.index).trim();
       }
     }
-    name = name.replace(/[-_ ]?(20\d\d-?\d\d-?\d\d)$/, ''); // date stamp
-    const tries: { t: string; setting?: string }[] = [{ t: name, setting }];
+    // a date stamp ("gpt-4o-2024-05-13") names the snapshot: the full name may be an alias, and otherwise the
+    // stamp, not the run date, picks among snapshots that share the base name
+    const stamp = name.match(/[-_ ]?(20\d\d)-?(\d\d)-?(\d\d)$/);
+    const tries: { t: string; setting?: string }[] = [];
+    if (stamp) {
+      tries.push({ t: name, setting });
+      name = name.slice(0, stamp.index);
+      date = `${stamp[1]}-${stamp[2]}-${stamp[3]}`;
+    }
+    tries.push({ t: name, setting });
     const eff = name.match(EFFORT_RE);
     if (eff && !setting) tries.push({ t: name.slice(0, eff.index).replace(/[-_ ]+$/, ''), setting: eff[1].toLowerCase() });
     // release tags people append: "-preview", "-latest", "-exp-02-05"
