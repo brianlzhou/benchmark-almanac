@@ -1,58 +1,50 @@
-// GAIA (Meta, Hugging Face and AutoGPT). The gaia-benchmark/leaderboard Space loads the public
-// gaia-benchmark/results_public dataset (config "2023", split "test"), sorts submissions by score (a fraction
-// of the 300 withheld test questions answered exactly, 0 to 1) and shows the top 100. The importer reads the
-// same rows through the Hugging Face dataset viewer API and keeps the same top 100 (0 to 100). Each row is an
-// agent ("Agent name") built on a "Model family". The model family is the model and the agent name is the
-// harness, so a family that names several models ("Claude Sonnet 3.5, GPT-4o") stays unmatched. The
-// submission date is the row date. Other importers read Hugging Face datasets through hfDatasetRows.
+// GAIA (2023 set). The Hugging Face Space gaia-benchmark/leaderboard reads the public dataset
+// gaia-benchmark/results_public (config 2023) and ranks the test split by "Average score (%)", the share of
+// the 301 test questions answered exactly. The dataset files are Parquet, so this reads the test split
+// through the Hugging Face dataset viewer API, 100 rows a request. Every row is an agent submission: "model"
+// is the agent's name and "model_family" is free text naming the model or models behind it. Only rows whose
+// model_family names one registry model are kept, with the agent name as the harness; rows that list
+// several models or a bare family ("Claude", "GPT") do not resolve and are left out. The date is the
+// submission date the dataset records.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
-const VIEWER = 'https://datasets-server.huggingface.co';
-
-/** Every row of one split of a public Hugging Face dataset, read 100 at a time through the dataset viewer. */
-export async function hfDatasetRows<T>(dataset: string, config: string, split: string): Promise<T[]> {
-  const q = `dataset=${encodeURIComponent(dataset)}&config=${encodeURIComponent(config)}&split=${encodeURIComponent(split)}`;
-  const out: T[] = [];
-  for (let offset = 0; ; offset += 100) {
-    const page = await fetchJson<{ rows: { row: T }[]; num_rows_total: number }>(`${VIEWER}/rows?${q}&offset=${offset}&length=100`);
-    out.push(...page.rows.map((r) => r.row));
-    if (!page.rows.length || offset + 100 >= page.num_rows_total) break;
-  }
-  return out;
-}
-
-export const hfViewerFeed = (dataset: string, config: string, split: string) =>
-  `${VIEWER}/rows?dataset=${dataset}&config=${config}&split=${split}`;
+const DATASET = 'gaia-benchmark/results_public';
+const ROWS = (offset: number) =>
+  `https://datasets-server.huggingface.co/rows?dataset=${DATASET}&config=2023&split=test&offset=${offset}&length=100`;
 
 interface Row {
-  model: string;
-  model_family?: string;
-  score?: number;
-  date?: string;
+  model: string | null;
+  model_family: string | null;
+  score: number | null;
+  date: string | null;
 }
 
 const board: Leaderboard = {
   benchmark: 'gaia',
   url: 'https://huggingface.co/spaces/gaia-benchmark/leaderboard',
-  feed: `${hfViewerFeed('gaia-benchmark/results_public', '2023', 'test')} (score, top 100)`,
-  terms: 'Public Hugging Face dataset gaia-benchmark/results_public, which the Apache-2.0 leaderboard Space reads; the dataset states no license.',
-  aliases: {},
-  async fetch() {
-    const all = await hfDatasetRows<Row>('gaia-benchmark/results_public', '2023', 'test');
-    const top = all.filter((r) => typeof r.score === 'number').sort((a, b) => b.score! - a.score!).slice(0, 100);
-    const rows: LeaderboardRow[] = [];
-    for (const r of top) {
-      const family = r.model_family?.trim();
-      if (!family) continue;
-      rows.push({
-        model: family,
-        score: r.score! * 100,
-        harness: r.model.trim() || undefined,
-        date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date : undefined,
-      });
+  feed: `https://huggingface.co/datasets/${DATASET} (config 2023, split test, via the dataset viewer API)`,
+  terms: 'Public, ungated Hugging Face dataset that the GAIA Space reads to draw its board; the dataset states no license, and Hugging Face terms allow reading it.',
+  aliases: {
+    // Gemini 3.1 Pro Preview spelled backwards; the resolver would place it on Gemini 1.0 Pro
+    'gemini-pro-preview-3-1': 'gemini-3-1-pro',
+  },
+  async fetch(): Promise<LeaderboardRow[]> {
+    const all: Row[] = [];
+    for (let offset = 0; offset < 20_000; offset += 100) {
+      const page = await fetchJson<{ rows: { row: Row }[]; num_rows_total: number }>(ROWS(offset));
+      all.push(...page.rows.map((r) => r.row));
+      if (!page.rows.length || all.length >= page.num_rows_total) break;
     }
-    return rows;
+    if (all.length < 100) throw new Error(`only ${all.length} GAIA test rows`);
+    return all
+      .filter((r) => r.model_family && /[a-z]/i.test(r.model_family) && typeof r.score === 'number')
+      .map((r) => ({
+        model: r.model_family!.trim(),
+        score: r.score! * 100,
+        harness: r.model?.trim() || undefined,
+        date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date! : undefined,
+      }));
   },
 };
 export default board;
