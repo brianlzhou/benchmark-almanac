@@ -42,7 +42,7 @@ const epoch = epochJson as unknown as {
 export const EPOCH_SOURCE = { name: epoch.source, url: epoch.url, license: epoch.license, retrieved: epoch.retrieved };
 
 type Board = { url: string; feed: string; terms: string; retrieved: string; rows: number; unmatched: string[] };
-const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[] };
+const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
 
@@ -106,6 +106,24 @@ export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, settin
   source: 'leaderboard',
 }));
 
+/**
+ * Entries on official leaderboards that are not in data/models.json, under the board's own name. Pages show them
+ * on their benchmark's board. They never count toward leaders, reigns or lab credit.
+ */
+export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, setting, harness, value, date, cost, tokens]) => ({
+  benchmark,
+  model: '',
+  name,
+  value,
+  unit: benchById.get(benchmark)?.unit ?? '%',
+  setting,
+  harness,
+  date: date ?? null,
+  cost: cost ?? null,
+  tokens: tokens ?? null,
+  source: 'leaderboard',
+}));
+
 export const epochScores: Score[] = epoch.rows.map(([benchmark, model, setting, harness, value, date]) => ({
   benchmark,
   model,
@@ -148,6 +166,7 @@ function groupBy<T>(xs: T[], k: (x: T) => string): Map<string, T[]> {
 
 const epochByBench = groupBy(epochScores, (s) => s.benchmark);
 const lbByBench = groupBy(leaderboardScores, (s) => s.benchmark);
+const unlistedByBench = groupBy(unlistedScores, (s) => s.benchmark);
 const cardScoresByBench = groupBy(cardScores, (s) => s.benchmark);
 const citesByBench = groupBy(
   cards.flatMap((c) => c.results.map((r) => ({ card: c, result: r }))),
@@ -169,8 +188,10 @@ export function bestPerModel(scores: Score[], b: Benchmark): Score[] {
   const top = new Map<string, Score>();
   const sign = better(b);
   for (const s of scores) {
-    const cur = top.get(s.model);
-    if (!cur || sign * s.value > sign * cur.value) top.set(s.model, s);
+    // an unlisted entry has no model id, so its board name keys it
+    const k = s.model || `~${s.name}`;
+    const cur = top.get(k);
+    if (!cur || sign * s.value > sign * cur.value) top.set(k, s);
   }
   return [...top.values()].sort((x, y) => sign * (y.value - x.value) || (x.date ?? '').localeCompare(y.date ?? ''));
 }
@@ -207,6 +228,14 @@ export interface BenchSummary {
   /** The board pages lead with: the official leaderboard's, then Epoch's, when either covers five or more models. */
   board: Score[];
   boardSource: 'leaderboard' | 'epoch' | 'card' | null;
+  /** Entries on the official leaderboard that are not in the model list, best per name. Shown, never credited. */
+  unlisted: Score[];
+  /**
+   * What the benchmark page's board draws: `board`, plus the unlisted entries when it is the official leaderboard,
+   * or the unlisted entries alone when no other source has a score.
+   */
+  shown: Score[];
+  shownSource: 'leaderboard' | 'epoch' | 'card' | null;
   best?: Score;
   saturatedAt?: string;
   nScores: number;
@@ -264,6 +293,9 @@ export function benchSummary(id: string): BenchSummary {
                 ? 'card'
                 : null;
   const board = boardSource === 'leaderboard' ? leaderboardBoard : boardSource === 'epoch' ? epochBoard : boardSource === 'card' ? cardBoard : [];
+  const unlisted = bestPerModel(unlistedByBench.get(id) ?? [], b);
+  const shownSource = boardSource ?? (unlisted.length ? 'leaderboard' : null);
+  const shown = shownSource === 'leaderboard' && unlisted.length ? bestPerModel([...board, ...unlisted], b) : board;
 
   // frontier: only for percent scores, where card and Epoch numbers share a scale
   const pct = (b.unit ?? '%') === '%';
@@ -324,6 +356,9 @@ export function benchSummary(id: string): BenchSummary {
     cardBoard,
     board,
     boardSource,
+    unlisted,
+    shown,
+    shownSource,
     best: board[0],
     saturatedAt,
     nScores: new Set([...leaderboardBoard, ...epochBoard, ...cardBoard].map((x) => x.model)).size,

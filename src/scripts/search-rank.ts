@@ -2,7 +2,9 @@
 //
 // A name match ranks first, then other spellings, then the words a row can also be found by (a benchmark's
 // maker or description, a model's lab). When no name matches, a second pass allows one typo per word
-// ("swe bench verifed"), and those rows rank above the weaker word matches.
+// ("swe bench verifed"), and those rows rank above the weaker word matches. Rows that match equally well rank
+// by weight: for benchmarks, the launch posts that cite them (shown on each row), so "aime" lists the
+// most-cited AIME first. Weight never lifts a row above a better kind of match.
 
 export type Kind = 'b' | 'm' | 'l' | 'c' | 'p';
 /** [name, url, kind, detail, other spellings, weight, more words]. See src/lib/search-index.ts. */
@@ -118,8 +120,13 @@ export function rank(entries: Entry[], q: string, memo: Memo): Hit[] {
     const s = score(e, x, short);
     if (s >= 0) top.add(e, s);
   }
-  // nothing matched a name: try again allowing one typo per word
-  if (!short && x.cq.length >= 4 && !top.rows.some((t) => t.s >= STRONG)) for (const [e, s] of typos(entries, toks)) top.add(e, s);
+  // nothing matched a name: try again allowing one typo per word. A row found both ways keeps the typo score.
+  if (!short && x.cq.length >= 4 && !top.rows.some((t) => t.s >= STRONG)) {
+    const found = typos(entries, toks);
+    const seen = new Set(found.map(([e]) => e.r));
+    top.rows = top.rows.filter((t) => !seen.has(t.r));
+    for (const [e, s] of found) top.add(e, s);
+  }
   return top.rows;
 }
 
@@ -128,13 +135,8 @@ class Top {
   rows: (Hit & { k: number })[] = [];
   add(e: Entry, s: number) {
     const top = this.rows;
-    // within one kind of match: the one reported most often, then the shorter name, is more likely the one meant
-    const k = s + Math.min(12, e.r[5] ?? 0) / 2 - e.name.length / 40;
-    const at = top.findIndex((t) => t.r === e.r);
-    if (at >= 0) {
-      if (top[at].k >= k) return;
-      top.splice(at, 1);
-    }
+    // the kind of match decides first. Within one kind: the higher weight, then the shorter name
+    const k = s * 1e9 + (e.r[5] ?? 0) - e.name.length / 1000;
     if (top.length === 20 && k <= top[19].k) return;
     let i = top.length;
     while (i > 0 && top[i - 1].k < k) i--;
@@ -187,8 +189,8 @@ function vocab(entries: Entry[]) {
 export function typos(entries: Entry[], toks: string[]): [Entry, number][] {
   const content = toks.filter((t) => !QUERY_STOP.has(t));
   const words = content.length ? content : toks;
-  // with no long word, this pass would find only what the first one already did
-  if (!words.some((t) => t.length >= 4)) return [];
+  // with no long word, this pass would find only what the first one already did. No name has 12 words.
+  if (!words.some((t) => t.length >= 4) || words.length > 12) return [];
   const v = vocab(entries);
   // how many query words, in order, each row has matched so far
   const got = new Uint8Array(entries.length);
