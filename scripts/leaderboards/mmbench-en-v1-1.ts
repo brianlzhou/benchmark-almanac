@@ -14,6 +14,8 @@ export const OPENVLM_FEED = 'http://opencompass.openxlab.space/assets/OpenVLM.js
 export const OPENVLM_TERMS =
   "OpenCompass's published leaderboard data file, which states no license; the VLMEvalKit and MMBench repositories are Apache-2.0. rank.opencompass.org.cn robots.txt disallows only /assets/ and model-detail pages on that host.";
 export const OPENVLM_ALIASES: Record<string, string> = {
+  // the plain name is the May 2024 release (-001); the September update is listed as Gemini-1.5-Flash-002
+  'Gemini-1.5-Flash': 'gemini-1-5-flash-may-2024',
   'Claude3.5-Sonnet-20241022': 'claude-3-5-sonnet-october-2024',
   'Qwen2-VL-72B': 'qwen2-vl-72b-instruct',
   'Qwen2-VL-7B': 'qwen2-vl-7b-instruct',
@@ -41,9 +43,19 @@ export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
     // "GPT-4o (0513, detail-high)": snapshot month and day, and the image detail level
     const snap = model.match(/\s*\((\d\d)(\d\d), (detail-\w+)\)$/);
     if (snap && date) {
+      const evalDate = date;
       date = `${date.slice(0, 4)}-${snap[1]}-${snap[2]}`;
+      // the snapshot predates the evaluation: "(1106)" run in 2024 is the November 2023 snapshot
+      if (date > evalDate) date = `${Number(date.slice(0, 4)) - 1}${date.slice(4)}`;
       setting = snap[3];
       model = model.slice(0, snap.index).trim();
+    }
+    // GPT-4V from April 2024 on is GPT-4 Turbo with vision (gpt-4-turbo-2024-04-09)
+    if (model === 'GPT-4v' && date && date >= '2024-04-09') model = 'GPT-4 Turbo';
+    // "-CoT" rows are the same model prompted for chain of thought
+    if (/-CoT$/.test(model)) {
+      model = model.replace(/-CoT$/, '');
+      setting = setting ? `${setting}, cot` : 'cot';
     }
     rows.push({ model, score, setting, date });
   }
