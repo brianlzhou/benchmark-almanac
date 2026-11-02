@@ -87,12 +87,12 @@ const kindOf = (s: (typeof all)[number]) => (s.b.subcategory ? SUB_BY_ID.get(s.b
 const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
 ---
 
-<Base title="Arenas" description="Every arena and match league in the almanac: what it ranks, who runs it, how it is judged, and which model leads it.">
+<Base title="Arenas" description="Every arena and match league we track, who runs it, how it's judged, and which model leads it.">
   <div class="page ax">
     <header class="head">
       <h1>Arenas</h1>
       <p class="lede">
-        {rows.length} arenas and match leagues rank models against each other instead of against an answer key. People vote between two answers, or models play each other in games and contests. Ratings move as new models join, so a score compares only within its own pool. Tests with fixed answers are on the <a href="/benchmarks/">benchmarks page</a>.
+        These {rows.length} arenas and match leagues rank models against each other. People vote between two answers, or models play each other in games and contests. Ratings shift as new models join, so compare a score only with others from the same pool. Tests with fixed answers are on the <a href="/benchmarks/">benchmarks page</a>.
       </p>
       <div class="facts">
         <span><b>{rankedCount('votes')}</b> ranked by votes</span>
@@ -151,7 +151,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
               <th>Ranked by</th>
               <th>Status</th>
               <th>Leader</th>
-              <th class="r two" title="Models with a score in the almanac">Models<br />rated</th>
+              <th class="r two" title="Models with a score here">Models<br />rated</th>
               <th>Released</th>
             </tr>
           </thead>
@@ -259,7 +259,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
         <section id="boards">
           <div class="sh">
             <h2>Arena leaderboards</h2>
-            <p>The top five in the {Math.min(9, boards.length)} arenas that rate the most models in the almanac.</p>
+            <p>Top five in each of the {Math.min(9, boards.length)} arenas with the most rated models.</p>
           </div>
           <div class="grid3">
             {boards.slice(0, 9).map((s) => <MiniBoard s={s} />)}
@@ -286,7 +286,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
             <tr>
               <td>What it captures</td>
               <td>Whether the model gets a defined task right</td>
-              <td>Taste, helpfulness, style and strategy, the things an answer key misses</td>
+              <td>Taste, helpfulness, style and strategy</td>
             </tr>
             <tr>
               <td>What can go wrong</td>

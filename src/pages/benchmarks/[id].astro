@@ -180,11 +180,9 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               <div>
                 <dt>Made by</dt>
                 <dd>
+                  {/* separator and name on one line: a line break between them renders as a space before the comma */}
                   {makerParts(b.org).map((p) => (
-                    <>
-                      {p.sep}
-                      {p.lab ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}
-                    </>
+                    <>{p.sep}{p.lab ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}</>
                   ))}
                 </dd>
               </div>

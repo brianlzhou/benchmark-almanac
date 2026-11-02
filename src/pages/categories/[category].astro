@@ -48,7 +48,7 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
 const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} to ${levels.at(-1)!.l.name.toLowerCase()} level` : 'How hard the tests are';
 ---
 
-<Base title={name} description={`${name} benchmarks: who held the top score over time, how hard each one is, and what kind it is.`}>
+<Base title={name} description={`${name} benchmarks by difficulty and kind, and who held the top score on each over time.`}>
   <div class="page">
     <header class="head">
       <h1>{name}</h1>

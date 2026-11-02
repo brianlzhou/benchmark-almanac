@@ -21,13 +21,13 @@ export function lifeLine(s: BenchSummary): string {
       return recent > 1 ? `${recent} labs put it in a launch post in the last six months` : recent === 1 ? 'One lab put it in a launch post in the last six months' : 'New this year';
     }
     case 'fading':
-      return `Fewer labs headline it now. The last launch post was in ${monthYear(s.last)}`;
+      return `Labs headline it less often now, last in ${monthYear(s.last)}`;
     case 'dropped':
       if (s.why === 'saturated') return `Labs dropped it from launch posts once the best score passed ${SATURATED}%`;
       if (s.why === 'replaced' && s.b.successor) return `Labs moved on to ${benchById.get(s.b.successor)?.name}`;
       return `No launch post has listed it since ${monthYear(s.last)}`;
     case 'system cards':
-      return 'Labs report it in system cards, not in launch posts';
+      return 'Labs report it only in system cards';
     default:
       return 'No lab model card reports it yet';
   }

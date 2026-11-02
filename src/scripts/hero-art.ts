@@ -70,7 +70,7 @@ if (hero && svg && pick) {
     return best;
   };
 
-  // the title, search box, chips and links keep their own pointer behaviour
+  // the title, search box, chips and links keep their own pointer behavior
   const busy = (t: EventTarget | null) => !!(t as Element | null)?.closest?.('a, button, input, label, form, .chips, h1, .hero-lede, .pill, .art-key');
 
   const show = (l: Line | null, e?: PointerEvent) => {

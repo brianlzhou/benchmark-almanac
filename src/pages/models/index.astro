@@ -29,13 +29,13 @@ const weightOptions: Option[] = [
 ];
 ---
 
-<Base title="Models" description="Every model in the almanac under one naming scheme, ranked by the Epoch Capabilities Index.">
+<Base title="Models" description="Every model with scores here, ranked by the Epoch Capabilities Index.">
   <div class="page">
     <header class="head">
       <h1>Models</h1>
       <p class="lede">
-        Every model with scores here, under one naming scheme: the lab, the model as the lab names it, and the snapshot when a lab shipped several under one name.
-        Models are ranked by Epoch AI's Capabilities Index, which puts results from many benchmarks on one scale.
+        Every model with scores here. We use each lab's own name for its model, plus a snapshot label when a lab shipped several versions under one name.
+        We rank them by Epoch AI's Capabilities Index.
       </p>
       <div class="facts">
         <span><b>{featuredModels.length}</b> models</span>
@@ -47,7 +47,7 @@ const weightOptions: Option[] = [
     <section>
       <div class="sh">
         <h2>The frontier keeps moving</h2>
-        <p>Epoch Capabilities Index by release date. Bars show the 90% interval. The line follows the best score so far.</p>
+        <p>Epoch Capabilities Index by release date. The thin vertical bars are 90% intervals, and the step line is the best score so far.</p>
       </div>
       <TimeScatter points={eciPts} frontier={frontier} unit="index" label="Epoch Capabilities Index over time" legend={false} height={460} />
       <p class="src">Source: <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a>, {EPOCH_SOURCE.license}.</p>
@@ -56,7 +56,7 @@ const weightOptions: Option[] = [
     <section>
       <div class="sh">
         <h2>The 24 highest-ranked models</h2>
-        <p>Each card shows the model's index score, where that sits among all {eciByModel.size} scored models, and three headline benchmarks with its rank on each.</p>
+        <p>The dot on each strip is the model's place among all {eciByModel.size} index scores. For the three benchmarks, we favor ones labs headlined in the last year that are still under 85%.</p>
       </div>
       <div class="grid">
         {top.map((id) => <ModelCard id={id} />)}

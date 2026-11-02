@@ -1,61 +1,237 @@
 ---
-// The top of a leaderboard as columns, after Artificial Analysis and Design Arena: columns in each lab's
-// colour grow from one baseline, the value sits on the cap, and the lab's mark and the model's name sit
-// under the baseline. Desktop only; phones get BarBoard.
+// A leaderboard as columns, after Artificial Analysis and Design Arena: columns in each lab's color grow
+// from one baseline, the value sits on the cap, and the lab's mark and the model's name sit under the
+// baseline. Every model on the board is drawn. A board wider than the page scrolls sideways, with
+// arrows and a count of the ranks in view. Desktop only; phones get BarBoard.
 import type { Score } from '../lib/types.ts';
 import LabMark from './LabMark.astro';
 import { modelById } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
-import { niceMax } from '../lib/scale.ts';
+import { niceMax, niceTicks } from '../lib/scale.ts';
 import { featuredIds } from '../lib/routes.ts';
 
 interface Props {
   scores: Score[];
   unit?: string;
-  limit?: number;
   height?: number;
 }
-const { scores, unit = '%', limit = 15, height = 260 } = Astro.props;
-const rows = scores.slice(0, limit);
-const max = unit === '%' ? 100 : niceMax(Math.max(...rows.map((s) => s.value), 1e-9));
-const h = (v: number) => Math.max(2, (v / max) * height);
+const { scores, unit = '%', height = 260 } = Astro.props;
+const rows = scores;
+const top = Math.max(...rows.map((s) => s.value), 1e-9);
+const max = unit === '%' ? 100 : niceMax(top);
+// a rating has no true zero, so its bars start a little below the lowest rating on the board
+let lo = 0;
+if (unit === 'elo' || unit === 'rating') {
+  const least = Math.min(...rows.map((s) => s.value));
+  const t = niceTicks(least, top, 5);
+  const step = t.length > 1 ? t[1] - t[0] : Math.max(1, least * 0.05);
+  lo = Math.floor(least / step) * step;
+  if (lo >= least) lo -= step;
+  lo = Math.max(0, lo);
+}
+const h = (v: number) => Math.max(2, ((v - lo) / (max - lo)) * height);
+const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
+const many = rows.length > 12;
 ---
 
-<div class="cols" style={`--h:${height}px`}>
+<div class="cols-box" data-cols>
   {
-    rows.map((s) => {
-      const m = modelById.get(s.model);
-      const href = featuredIds.has(s.model) ? `/models/${s.model}/` : undefined;
-      return (
-        <a
-          class="col"
-          href={href}
-          data-tv={fmt(s.value, unit)}
-          data-tn={`${m?.name ?? s.model}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`}
-          data-ts={`${s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${s.date ? `, ${monthYear(s.date)}` : ''}`}
-        >
-          <span class="plot">
-            <span class="v num">{scoreBare(s.value, unit)}</span>
-            <span class="bar" style={`height:${h(s.value)}px;background:${labColor(m?.lab)}`} />
-          </span>
-          <LabMark lab={m?.lab} size={18} class="lm" />
-          <span class="n">{m?.name ?? s.model}</span>
-        </a>
-      );
-    })
+    (many || lo > 0) && (
+      <div class="cols-bar">
+        <p class="cols-n num" aria-live="polite" data-cols-n>
+          {many ? `All ${rows.length} models` : ''}
+          {lo > 0 && <span class="base">{many ? '. ' : ''}Bars start at {lo.toLocaleString('en-US')}, not zero.</span>}
+        </p>
+        {many && (
+          <div class="cols-arrows">
+            <button type="button" class="arw" data-cols-go="-1" aria-label="Earlier ranks" disabled>
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3 4.5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+            <button type="button" class="arw" data-cols-go="1" aria-label="Later ranks">
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5.5 3 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+          </div>
+        )}
+      </div>
+    )
   }
+  <div class="cols-scroll" data-cols-scroll tabindex={many ? 0 : undefined} aria-label={many ? `Leaderboard, ${rows.length} models. Scroll sideways for more.` : undefined}>
+    <ol class="cols" style={`--h:${height}px`}>
+      {
+        rows.map((s, i) => {
+          const m = modelById.get(s.model);
+          const href = featuredIds.has(s.model) ? `/models/${s.model}/` : undefined;
+          return (
+            <li class="col">
+              <a
+                href={href}
+                data-tv={fmt(s.value, unit)}
+                data-tn={`${i + 1}. ${m?.name ?? s.model}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`}
+                data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}
+              >
+                <span class="plot">
+                  <span class="v num">{scoreBare(s.value, unit)}</span>
+                  <span class="bar" style={`height:${h(s.value)}px;background:${labColor(m?.lab)}`} />
+                </span>
+                <LabMark lab={m?.lab} size={18} class="lm" />
+                <span class="n">{m?.name ?? s.model}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
 </div>
 
+<script>
+  // the count of ranks in view, the arrows, and the fades at each scrolled edge
+  for (const box of document.querySelectorAll<HTMLElement>('[data-cols]')) {
+    const sc = box.querySelector<HTMLElement>('[data-cols-scroll]')!;
+    const cols = sc.querySelectorAll<HTMLElement>('.col');
+    const n = box.querySelector<HTMLElement>('[data-cols-n]');
+    const prev = box.querySelector<HTMLButtonElement>('[data-cols-go="-1"]');
+    const next = box.querySelector<HTMLButtonElement>('[data-cols-go="1"]');
+    const base = n?.querySelector('.base')?.outerHTML ?? '';
+    if (!prev || !next || !n) continue;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const over = sc.scrollWidth > sc.clientWidth + 2;
+      box.classList.toggle('scrolls', over);
+      const start = sc.scrollLeft;
+      const end = start + sc.clientWidth;
+      let first = 0;
+      let last = cols.length - 1;
+      for (let i = 0; i < cols.length; i++) {
+        const c = cols[i];
+        if (c.offsetLeft + c.offsetWidth / 2 >= start) {
+          first = i;
+          break;
+        }
+      }
+      for (let i = first; i < cols.length; i++) {
+        const c = cols[i];
+        if (c.offsetLeft + c.offsetWidth / 2 > end) {
+          last = i - 1;
+          break;
+        }
+      }
+      const atStart = start <= 2;
+      const atEnd = end >= sc.scrollWidth - 2;
+      box.classList.toggle('at-start', atStart);
+      box.classList.toggle('at-end', atEnd);
+      prev.disabled = atStart;
+      next.disabled = atEnd;
+      n.innerHTML = over ? `Ranks ${first + 1} to ${last + 1} of ${cols.length}${base ? '. ' + base.replace('>. ', '>') : ''}` : `All ${cols.length} models${base ? '. ' + base.replace('>. ', '>') : ''}`;
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    sc.addEventListener('scroll', queue, { passive: true });
+    new ResizeObserver(queue).observe(sc);
+    for (const b of [prev, next])
+      b.addEventListener('click', () => {
+        const dir = Number(b.dataset.colsGo);
+        sc.scrollBy({ left: dir * Math.max(200, sc.clientWidth - 140), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+    update();
+  }
+</script>
+
 <style>
+  .cols-box {
+    position: relative;
+  }
+  .cols-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: -8px 0 10px;
+    min-height: 32px;
+  }
+  .cols-n {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .cols-arrows {
+    display: flex;
+    gap: 6px;
+  }
+  .cols-box:not(.scrolls) .cols-arrows {
+    visibility: hidden;
+  }
+  .arw {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition:
+      background-color 140ms ease,
+      color 140ms ease,
+      opacity 140ms ease;
+  }
+  .arw:hover:not(:disabled) {
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .arw:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .cols-scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-4) transparent;
+    padding-bottom: 6px;
+    border-radius: 8px;
+  }
+  .cols-scroll:focus-visible {
+    outline: 2px solid var(--ink-3);
+    outline-offset: 4px;
+  }
+  /* fade the edge that has more columns beyond it */
+  .scrolls .cols-scroll {
+    mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+  }
+  .scrolls.at-start .cols-scroll {
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
+  .scrolls.at-end .cols-scroll {
+    mask-image: linear-gradient(to right, transparent, #000 40px);
+  }
+  .scrolls.at-start.at-end .cols-scroll {
+    mask-image: none;
+  }
   .cols {
     display: flex;
     align-items: stretch;
     gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
   .col {
-    flex: 0 1 66px;
+    flex: 0 0 66px;
     min-width: 0;
+    scroll-snap-align: start;
+  }
+  /* a short board shares the width, as before */
+  .cols-box:not(.scrolls) .col {
+    flex: 0 1 66px;
+  }
+  .col > a {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,7 +241,7 @@ const h = (v: number) => Math.max(2, (v / max) * height);
     padding: 0 2px 4px;
     transition: background-color 140ms ease;
   }
-  .col:hover {
+  .col > a:hover {
     background: var(--hover);
   }
   .plot {

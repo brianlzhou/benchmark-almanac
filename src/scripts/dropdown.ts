@@ -1,4 +1,4 @@
-// Behaviour for Dropdown.astro. The hidden select holds the value: choosing an option sets it and fires
+// Behavior for Dropdown.astro. The hidden select holds the value: choosing an option sets it and fires
 // "change", so filter scripts work unchanged. A select changed from outside (a restored URL, a tile click)
 // fires "change" or "sync", and the button follows.
 

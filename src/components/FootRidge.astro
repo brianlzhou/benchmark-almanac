@@ -21,7 +21,7 @@ import { LAYERS } from '../lib/ridge.ts';
 <style>
   .ridge {
     position: relative;
-    height: 120px;
+    height: 168px;
   }
   .band,
   .r {
@@ -35,7 +35,7 @@ import { LAYERS } from '../lib/ridge.ts';
     mask-size: 100% 100%;
   }
   .fill {
-    background: color-mix(in srgb, var(--c) 15%, var(--bg));
+    background: color-mix(in srgb, var(--c) 24%, var(--bg));
   }
   /* the dots: the band's outline intersected with a repeating tile of dots at their own size */
   .dots {
@@ -44,8 +44,8 @@ import { LAYERS } from '../lib/ridge.ts';
     mask-position: 0 0, 0 0;
     mask-size: 100% 100%, 28px 28px;
     mask-composite: intersect;
-    background: color-mix(in srgb, var(--c) 85%, var(--ink));
-    opacity: 0.7;
+    background: color-mix(in srgb, var(--c) 88%, var(--ink));
+    opacity: 0.85;
   }
   .ridge-key {
     position: absolute;
@@ -55,6 +55,9 @@ import { LAYERS } from '../lib/ridge.ts';
     color: var(--ink-3);
   }
   @media (max-width: 720px) {
+    .ridge {
+      height: 112px;
+    }
     .ridge-key {
       display: none;
     }

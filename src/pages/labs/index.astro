@@ -23,11 +23,11 @@ const rest = rows.filter((r) => r.nCards === 0);
     <header class="head">
       <h1>Labs</h1>
       <p class="lede">
-        The {lead.length} labs whose model cards the almanac reads, then everyone else with a scored model. Each lab page shows its models over time and what its cards chose to measure.
+        We read model cards from the {lead.length} labs listed first. Below them is every other lab with a scored model. Open a lab to see its models over time and what its cards measure.
       </p>
     </header>
 
-    <section class="grid" aria-label="Labs whose model cards the almanac reads">
+    <section class="grid" aria-label="Labs whose model cards we read">
       {
         lead.map(({ l, ms, best, latest, nCards }) => (
           <a class="lab" href={`/labs/${l.id}/`} style={`--c:${labColor(l.id)}`}>
@@ -45,9 +45,9 @@ const rest = rows.filter((r) => r.nCards === 0);
                 <dd>{latest ? `${latest.name}, ${monthYear(latest.released)}` : ''}</dd>
               </div>
               <div>
-                <dt>In the almanac</dt>
+                <dt>Tracked</dt>
                 <dd>
-                  {ms.length} models, {nCards} model cards
+                  {ms.length} {ms.length === 1 ? 'model' : 'models'}, {nCards} {nCards === 1 ? 'model card' : 'model cards'}
                 </dd>
               </div>
             </dl>

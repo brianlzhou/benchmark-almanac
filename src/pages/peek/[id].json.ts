@@ -24,9 +24,11 @@ export function GET({ params }: { params: { id: string } }) {
   const unit = b.unit ?? '%';
   const sign = b.better === 'lower' ? -1 : 1;
 
-  // each model's best dated score from any source, in date order, marking the ones that set a new best
+  // each model's best dated score, in date order, marking the ones that set a new best. Percentages pool
+  // every source. A rating or a count stays with the board's own source, since each source has its own scale.
+  const pool = unit === '%' ? [...s.leaderboardBoard, ...s.epochBoard, ...s.cardBoard] : s.board;
   const best = new Map<string, Score>();
-  for (const x of [...s.leaderboardBoard, ...s.epochBoard, ...s.cardBoard]) {
+  for (const x of pool) {
     if (!x.date || x.date > AS_OF || x.unit !== unit) continue;
     const y = best.get(x.model);
     if (!y || sign * x.value > sign * y.value) best.set(x.model, x);

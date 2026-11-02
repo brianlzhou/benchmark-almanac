@@ -23,6 +23,17 @@ export function niceMax(max: number): number {
   return t.at(-1)! < max ? t.at(-1)! + (t[1] - t[0]) : t.at(-1)!;
 }
 
+/** Where bars for a rating start: a round number a little below the lowest rating. A rating has no true zero. */
+export function ratingFloor(values: number[]): number {
+  const least = Math.min(...values);
+  const top = Math.max(...values);
+  const t = niceTicks(least, top, 5);
+  const step = t.length > 1 ? t[1] - t[0] : Math.max(1, least * 0.05);
+  let lo = Math.floor(least / step) * step;
+  if (lo >= least) lo -= step;
+  return Math.max(0, lo);
+}
+
 /** Year ticks for a time axis given as decimal years. */
 export function yearTicks(min: number, max: number, maxTicks = 8): number[] {
   const first = Math.ceil(min);

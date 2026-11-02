@@ -1,13 +1,13 @@
 // The landscape across the top of the footer: benchmarks released each month since 2019, stacked by area, so
-// the colours show which kinds of test each year brought. The outline's height is the square root of the
-// month's total, so the quiet early years still show as terrain. Within it, each area's band is its share of
+// the colours show which kinds of test each year brought. The outline's height is the month's total to the
+// power 0.45, so the quiet early years still show as terrain. Within it, each area's band is its share of
 // that month. Each outline is a static SVG (src/pages/ridge/[shape].svg.ts) that the footer uses as a CSS
 // mask, so the shapes stretch to any screen width while the stipple inside them keeps round dots.
 import { benchmarks, AS_OF } from './data.ts';
 import { AREAS, areaOf } from './taxonomy.ts';
 
 export const W = 1440;
-export const H = 132;
+export const H = 180;
 const START = 2019;
 
 /** Bottom to top, in the palette's order. */
@@ -53,7 +53,7 @@ export function ridgePaths() {
   const bands = LAYERS.map((id) => smooth(raw.get(id)!));
   const total = months.map((_, i) => bands.reduce((s, b) => s + b[i], 0));
   const top = Math.max(...total);
-  const height = total.map((t) => Math.sqrt(t / top) * (H - 24));
+  const height = total.map((t) => Math.pow(t / top, 0.45) * (H - 30));
   const x = (i: number) => (i / (months.length - 1)) * W;
   const f = (n: number) => n.toFixed(1);
   const outline = (ys: number[]) => {

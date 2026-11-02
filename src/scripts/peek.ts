@@ -43,7 +43,7 @@ const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 const yearOf = (d: number) => new Date(T0 + d * DAY).getUTCFullYear();
 const dayOfYear = (y: number) => Math.round((Date.UTC(y, 0, 1) - T0) / DAY);
 const pctOr = (u: string, v: number) => (u === '%' ? `${+v.toFixed(1)}%` : String(+v.toFixed(v >= 100 ? 0 : 2)));
-const usd = (v: number) => (v >= 100 ? `$${Math.round(v)}` : v >= 1 ? `$${v.toFixed(2).replace(/\.00$/, '')}` : `$${v.toPrecision(2)}`);
+const usd = (v: number) => (v >= 100 ? `$${Math.round(v)}` : v >= 1 ? `$${v.toFixed(2).replace(/\.00$/, '')}` : `$${+v.toPrecision(2)}`);
 
 function mark(lab: string, kind: Mark) {
   if (kind === 'c') return `<img class="pk-mk" src="/labs/${lab}-color.svg" width="14" height="14" alt="">`;
@@ -134,8 +134,9 @@ function render(d: Peek) {
     body += '</div>';
   } else body += '<p class="pk-none">No dated scores here yet.</p>';
   if (d.top.length) {
-    const vals = d.top.map((t) => t[4]);
-    const [lo, hi] = d.u === '%' ? [0, 100] : [Math.min(0, ...vals), Math.max(...vals)];
+    // percentages fill from zero; a rating or a count fills across the board's own range, or every bar looks full
+    const vals = [...d.top.map((t) => t[4]), ...d.p.map((p) => p[1])];
+    const [lo, hi] = d.u === '%' ? [0, 100] : [Math.min(...vals), Math.max(...vals)];
     body += `<ol class="pk-top">${d.top
       .map((t) => {
         const w = d.lo ? 1 - (t[4] - lo) / (hi - lo || 1) : (t[4] - lo) / (hi - lo || 1);

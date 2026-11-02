@@ -53,7 +53,7 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
     <header class="head">
       <h1>Who held number one</h1>
       <p class="lede">
-        For every benchmark with enough scores, the model with the best score at each moment since 2023, and the lab that made it. A model takes the top spot on the day it beats every earlier score, and keeps it until something beats it.
+        For each benchmark with enough scores, we track which model had the best score at every point since 2023, and which lab made it. A model takes the top spot on the day its score beats every earlier one. It holds the spot until another model beats it. Ties leave the holder in place.
       </p>
     </header>
 
@@ -61,10 +61,10 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
       eciRows.length > 0 && eciNow && (
         <section>
           <div class="sh">
-            <h2>The top spot on the capability index changed hands {changes} times since 2023</h2>
+            <h2>The top spot on the capability index has changed hands {changes === 1 ? 'once' : `${changes} times`} since 2023</h2>
             <p>
-              The Epoch Capabilities Index puts many benchmarks on one scale. {modelById.get(eciNow.model)?.name}, from {labById.get(eciNow.lab ?? '')?.name}, holds it now.
-              {longest && ` The longest run at the top was ${Math.round(reignDays(longest) / 30.4)} months.`}
+              {modelById.get(eciNow.model)?.name}, from {labById.get(eciNow.lab ?? '')?.name}, holds it now.
+              {longest && ` The longest run at the top since 2023 lasted ${Math.round(reignDays(longest) / 30.4)} months.`}
             </p>
           </div>
           <ReignChart rows={eciRows} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} from="2023-01-01" />
