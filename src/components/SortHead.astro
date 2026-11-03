@@ -1,0 +1,14 @@
+---
+// A header cell that src/scripts/sort.ts can sort by. The sort button is in the page from the start, so the
+// header has its final width at the first paint. sort.ts wires this button instead of adding its own.
+import type { HTMLAttributes } from 'astro/types';
+type Props = HTMLAttributes<'th'>;
+const attrs = Astro.props;
+---
+
+<th {...attrs}>
+  <button type="button" class="sort">
+    <span><slot /></span>
+    <svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg>
+  </button>
+</th>

@@ -3,16 +3,22 @@
 // that rank models against each other instead of against an answer key. An arena is a benchmark scored by
 // votes (people pick the better of two answers) or by matches (models play each other), the rule behind
 // the benchmarks page's "Arenas" chip, so the two pages count the same records.
+import AreaMark from '../components/AreaMark.astro';
 import Base from '../layouts/Base.astro';
 import LabMark from '../components/LabMark.astro';
 import MiniBoard from '../components/MiniBoard.astro';
 import Dropdown, { type Option } from '../components/Dropdown.astro';
-import { allSummaries, modelById } from '../lib/data.ts';
+import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions } from '../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, SUB_BY_ID, SUBCATEGORIES, RANKED_BY_PEOPLE_OR_MATCHES } from '../lib/taxonomy.ts';
-import { score as fmt, monthYear } from '../lib/format.ts';
+import { score as fmt, monthYear, fullDate } from '../lib/format.ts';
 import { familyOf, nextVersion } from '../lib/reigns.ts';
 
+// where the newest score came from, for the Last added column's tooltip
+const ADDED_FROM: Record<string, string> = { leaderboard: 'its leaderboard', epoch: 'Epoch AI', card: 'a model card' };
+
 const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
+// the order a sort by status puts them in
+const STATUS_RANK: Record<string, number> = { 'in use': 0, fading: 1, dropped: 2, 'system cards': 3, 'not in cards': 4 };
 const RANKED: Record<string, { key: string; label: string; tip: string }> = {
   preference: { key: 'votes', label: 'Votes', tip: 'People see two answers to one prompt and pick the better one' },
   'head-to-head': { key: 'matches', label: 'Matches', tip: 'Models play each other in games or contests' },
@@ -22,14 +28,15 @@ const ACCESS: Record<string, string> = { public: 'public', 'public+private-holdo
 
 const all = allSummaries().filter((s) => RANKED_BY_PEOPLE_OR_MATCHES.has(s.b.scoring ?? ''));
 const byId = new Map(all.map((s) => [s.b.id, s]));
-// one row per arena: a versioned family shows its newest version and links the earlier ones
+// one row per arena: a versioned family shows its newest version and links the earlier ones. Few arenas
+// appear in launch posts, so the ones that rate the most models come first, then the most cited
 const newest = (id: string) => familyOf(id).filter((v) => byId.has(v)).at(-1);
 const rows = all
   .filter((s) => !s.b.family || newest(s.b.id) === s.b.id)
   .sort(
     (a, b) =>
-      b.cites.length + b.docCites.length - (a.cites.length + a.docCites.length) ||
       b.board.length - a.board.length ||
+      b.cites.length + b.docCites.length - (a.cites.length + a.docCites.length) ||
       a.b.name.localeCompare(b.b.name),
   );
 const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
@@ -83,6 +90,16 @@ const earlier = (id: string) =>
     .map((v) => byId.get(v)!)
     .reverse();
 const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
+// The longest text of each column that cannot wrap, over every row and earlier version. A hidden footer row
+// holds it, so the table has its final column widths from the first paint (see freezeColumns in filter.ts).
+const everyRow = rows.flatMap((s) => [s, ...(s.b.family ? earlier(s.b.id) : [])]);
+const longest = (xs: (string | undefined)[]) => xs.reduce<string>((a, x) => (x && x.length > a.length ? x : a), '');
+const probe = {
+  ranked: longest(everyRow.map((s) => RANKED[s.b.scoring!]?.label)),
+  status: Object.keys(STATUS).filter((k) => everyRow.some((s) => s.status === k)).sort((a, b) => STATUS[b].length - STATUS[a].length)[0] ?? 'in use',
+  released: longest(everyRow.map((s) => monthYear(s.b.released))),
+  added: longest(everyRow.map((s) => monthYear(s.lastAdded?.date))),
+};
 const kindOf = (s: (typeof all)[number]) => (s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
 const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
 ---
@@ -92,30 +109,32 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     <header class="head">
       <h1>Arenas</h1>
       <p class="lede">
-        These {rows.length} arenas and match leagues rank models against each other. People vote between two answers, or models play each other in games and contests. Ratings shift as new models join, so compare a score only with others from the same pool. Tests with fixed answers are on the <a href="/benchmarks/">benchmarks page</a>.
+        We track {rows.length} arenas and match leagues. In some, people vote between two answers. In others, models play each other in games and contests. Ratings move as new models join, so compare a rating only with others from the same arena. Tests with fixed answers are on the <a href="/benchmarks/">Benchmarks page</a>.
       </p>
       <div class="facts">
         <span><b>{rankedCount('votes')}</b> ranked by votes</span>
         <span><b>{rankedCount('matches')}</b> ranked by matches</span>
         <span><b>{inRows((s) => s.status === 'in use')}</b> in use</span>
         <span><b>{withBoard}</b> with a leaderboard here</span>
+        <span>Scores refreshed <b>{fullDate(AS_OF)}</b></span>
       </div>
     </header>
 
-    <section class="catalogue">
+    <section class="catalog" data-filter="arenas">
       <nav class="areas" aria-label="Areas and categories">
         {
           areaCounts.map(({ a, n, cats }) => (
-            <div class="area" style={`--a:var(--area-${a.id})`}>
+            <div class="area" style={`--a:var(--area-${a.id});--w:${(n / Math.max(...areaCounts.map((x) => x.n))).toFixed(3)}`}>
               <a class="ah" href={`?area=a:${a.id}`} data-area-link={`a:${a.id}`}>
-                <span class="sw" />
+                <AreaMark area={a.id} size={11} />
                 <span class="an">{a.name}</span>
                 <span class="ac num">{n}</span>
               </a>
+              <span class="abar" aria-hidden="true" />
               <div class="cats">
                 {cats.map(({ c, n: k }) => (
                   <a href={`?area=c:${c}`} data-area-link={`c:${c}`}>
-                    {CATEGORY_NAMES[c] ?? c}
+                    <span class="cl">{CATEGORY_NAMES[c] ?? c}</span>
                     <span class="cn num">{k}</span>
                   </a>
                 ))}
@@ -125,34 +144,43 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
         }
       </nav>
 
-      <div class="filters" data-filter="arenas">
+      <div class="filters">
         <div class="seg methods" role="radiogroup" aria-label="How it is ranked">
           <label><input type="radio" name="ranked" value="" data-key="ranked" checked />All</label>
           <label title={RANKED.preference.tip}><input type="radio" name="ranked" value="votes" data-key="ranked" />Ranked by votes <span class="n">{rankedCount('votes')}</span></label>
           <label title={RANKED['head-to-head'].tip}><input type="radio" name="ranked" value="matches" data-key="ranked" />Ranked by matches <span class="n">{rankedCount('matches')}</span></label>
         </div>
-        <div class="break" />
+      </div>
+      <div class="frow">
         <input class="field grow" type="search" placeholder="Search arenas, makers or models" aria-label="Search arenas" data-q />
-        <Dropdown filterKey="area" label="Area" options={areaOptions} search wide />
-        <Dropdown filterKey="level" label="Level" options={levelOptions} />
-        <Dropdown filterKey="status" label="Status" options={statusOptions} />
-        <Dropdown filterKey="data" label="Data" options={dataOptions} />
-        <Dropdown filterKey="code" label="Code" options={codeOptions} />
+        <button type="button" class="fbtn" aria-expanded="false" aria-controls="fpanel" data-fbtn>
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 3.5h11M3.5 7h7M5.5 10.5h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+          Filters<span class="fn" data-fn></span>
+        </button>
+        <div class="fpanel" id="fpanel">
+          <Dropdown filterKey="area" label="Area" options={areaOptions} search wide />
+          <Dropdown filterKey="level" label="Level" options={levelOptions} />
+          <Dropdown filterKey="status" label="Status" options={statusOptions} />
+          <Dropdown filterKey="added" label="Last added" options={addedOptions(rows)} />
+          <Dropdown filterKey="data" label="Data" options={dataOptions} />
+          <Dropdown filterKey="code" label="Code" options={codeOptions} />
+        </div>
         <span class="count muted" data-count>{rows.length} arenas</span>
       </div>
 
-      <div class="table-wrap">
-        <table class="t at" data-rows>
+      <div class="table-wrap wide">
+        <table class="t at" data-rows data-sort>
           <thead>
             <tr>
               <th>Arena</th>
               <th>Run by</th>
               <th>Kind</th>
               <th>Ranked by</th>
-              <th>Status</th>
+              <th data-first="asc">Status</th>
               <th>Leader</th>
               <th class="r two" title="Models with a score here">Models<br />rated</th>
               <th>Released</th>
+              <th title="When a model last got a score here, from any source">Last<br />added</th>
             </tr>
           </thead>
           <tbody>
@@ -172,6 +200,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                       data-level={s.b.level ?? ''}
                       data-ranked={ranked.key}
                       data-status={s.status.replace(/ /g, '-')}
+                      data-added={addedWindows(s)}
                       data-data={ACCESS[s.b.access ?? 'unknown']}
                       data-code={s.b.links?.repo ? 'yes' : ''}
                       data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name)].join(' ').toLowerCase() || undefined}
@@ -191,13 +220,13 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                       <td class="org">{s.b.org}</td>
                       <td class="muted kind">{kind}</td>
                       <td class="muted nowrap" title={ranked.tip}>{ranked.label}</td>
-                      <td class="nowrap">
+                      <td class="nowrap" data-v={String(STATUS_RANK[s.status] ?? 9)}>
                         <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
                           <span class="dot" />
                           <span class="sl">{STATUS[s.status]}</span>
                         </span>
                       </td>
-                      <td class="best-c">
+                      <td class="best-c" data-v={s.best ? String(s.best.value) : undefined}>
                         {s.best && top && (
                           <span class="best">
                             <LabMark lab={top.lab} size={14} />
@@ -208,6 +237,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                       </td>
                       <td class="r num">{s.board.length || ''}</td>
                       <td class="muted num nowrap">{monthYear(s.b.released)}</td>
+                      <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
                     </tr>
                     {prev.map((p, i) => {
                       const ptop = p.best ? modelById.get(p.best.model) : undefined;
@@ -242,6 +272,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                           </td>
                           <td class="r num">{p.board.length || ''}</td>
                           <td class="muted num nowrap">{monthYear(p.b.released)}</td>
+                          <td class:list={['muted', 'num', 'nowrap', { stale: !!p.lastAdded && monthsBetween(p.lastAdded.date, AS_OF) >= 12 }]} data-v={p.lastAdded?.date} title={p.lastAdded ? `${modelById.get(p.lastAdded.model)?.name ?? p.lastAdded.model}, from ${ADDED_FROM[p.lastAdded.source]}` : undefined}>{monthYear(p.lastAdded?.date)}</td>
                         </tr>
                       );
                     })}
@@ -250,6 +281,24 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
               })
             }
           </tbody>
+          <tfoot aria-hidden="true">
+            <tr data-probe>
+              <td class="nm" />
+              <td class="org" />
+              <td class="muted kind" />
+              <td class="muted nowrap">{probe.ranked}</td>
+              <td class="nowrap">
+                <span class:list={['tag', `status-${probe.status.replace(/ /g, '-')}`]}>
+                  <span class="dot" />
+                  <span class="sl">{STATUS[probe.status]}</span>
+                </span>
+              </td>
+              <td class="best-c" />
+              <td class="r num" />
+              <td class="muted num nowrap">{probe.released}</td>
+              <td class="muted num nowrap">{probe.added}</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </section>
@@ -307,7 +356,10 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
 
 <script>
   import { wireFilter } from '../scripts/filter.ts';
+  import { wirePeek } from '../scripts/peek.ts';
   wireFilter('arenas');
+  const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
+  if (peekTable) wirePeek(peekTable);
   // the area and category links set the area filter in place, and a second click clears it
   const sel = document.querySelector<HTMLSelectElement>('.ax select[data-area]');
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.ax [data-area-link]')];
@@ -327,56 +379,77 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
   }
   sel?.addEventListener('change', mark);
   mark();
+
+  // phones: the filters fold behind one button that counts the ones in use
+  const box = document.querySelector<HTMLElement>('.ax .catalog');
+  const fbtn = document.querySelector<HTMLButtonElement>('[data-fbtn]');
+  const fn = document.querySelector<HTMLElement>('[data-fn]');
+  const selects = [...(box?.querySelectorAll<HTMLSelectElement>('.fpanel select') ?? [])];
+  const countOn = () => {
+    const n = selects.filter((x) => x.value).length;
+    if (fn) fn.textContent = n ? ` (${n})` : '';
+  };
+  for (const x of selects) x.addEventListener('change', countOn);
+  countOn();
+  fbtn?.addEventListener('click', () => {
+    const open = fbtn.getAttribute('aria-expanded') !== 'true';
+    fbtn.setAttribute('aria-expanded', String(open));
+    box?.classList.toggle('fopen', open);
+  });
+  // the column names stick under the filter row, so the row's height sets where
+  const frow = box?.querySelector<HTMLElement>('.frow');
+  if (box && frow) new ResizeObserver(() => box.style.setProperty('--frow-h', `${frow.offsetHeight}px`)).observe(frow);
 </script>
 
 <style is:global>
   /* page styles under .ax, the same system as the benchmarks table (.bx) */
+  /* the area index, set as type like the Benchmarks page: mark, name, count, a bar sized by count, then categories */
   .ax .areas {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
-    margin: 0 0 28px;
+    gap: 10px 32px;
+    margin: 0 0 32px;
   }
   .ax .area {
-    padding: 12px 14px 14px;
-    border-radius: 10px;
-    background: var(--panel);
+    padding: 8px 0 4px;
   }
   .ax .ah {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: baseline;
+    gap: 9px;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 6px;
   }
-  .ax .sw {
-    width: 10px;
-    height: 10px;
-    border-radius: 3px;
-    background: var(--a);
-    flex: none;
+  .ax .ah .amark {
+    align-self: center;
   }
   .ax .an {
     flex: 1;
     min-width: 0;
+    font: 400 18px/1.2 var(--serif);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .ax .ac {
     color: var(--ink-3);
-    font-weight: 400;
+    font: 400 12.5px var(--mono);
+  }
+  .ax .abar {
+    display: block;
+    height: 2px;
+    margin-top: 6px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--a) calc(var(--w) * 100%), var(--grid) calc(var(--w) * 100%));
   }
   .ax .cats {
     display: flex;
     flex-wrap: wrap;
     gap: 2px 12px;
     margin-top: 8px;
-    padding-left: 20px;
   }
   .ax .cats a {
+    display: inline-flex;
+    align-items: baseline;
     font-size: 13px;
     color: var(--ink-3);
     text-decoration: none;
@@ -385,29 +458,61 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     margin-left: 4px;
     color: var(--ink-4);
   }
-  .ax .cats a:hover,
+  .ax .cats a:hover .cl,
   .ax .ah:hover .an {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-color: var(--ink-4);
   }
   /* the chosen area or category reads as selected */
-  .ax .cats a[aria-current],
+  .ax .cats a[aria-current] .cl,
   .ax .ah[aria-current] .an {
     color: var(--ink);
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 3px;
   }
-  .ax .area:has(.ah[aria-current]) {
-    box-shadow: inset 0 0 0 1px var(--a);
+  .ax .area:has(.ah[aria-current]) .abar {
+    height: 4px;
   }
   .ax .filters {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     align-items: center;
-    margin-bottom: 20px;
+  }
+  /* the filter row stays under the header while the table scrolls, its background reaching both window edges */
+  .ax .frow {
+    position: sticky;
+    top: var(--bar-h);
+    z-index: 6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 12px calc(-1 * var(--gutter)) 8px;
+    padding: 8px var(--gutter);
+    background: var(--bg);
+    box-shadow: 0 0 0 100vmax var(--bg);
+    clip-path: inset(0 -100vmax);
+  }
+  .ax .fpanel {
+    display: contents;
+  }
+  .ax .fbtn {
+    display: none;
+  }
+  /* the column names stay in view under the filter row. clip, not auto: a scroll box would hold them in place */
+  .ax .catalog .table-wrap {
+    overflow-x: clip;
+  }
+  .ax .at thead th {
+    position: sticky;
+    top: calc(var(--bar-h) + var(--frow-h, 60px));
+    z-index: 5;
+    padding-top: 6px;
+    background: var(--bg);
+    box-shadow: 0 1px 0 var(--line);
   }
   .ax .methods .n {
     color: var(--ink-4);
@@ -426,7 +531,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     margin-left: auto;
   }
   .ax .nm {
-    min-width: 220px;
+    min-width: 200px;
   }
   .ax .nm > a {
     font-weight: 500;
@@ -556,7 +661,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 140px;
+    max-width: 124px;
   }
   .ax .best b {
     font-weight: 500;
@@ -587,15 +692,21 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     gap: 56px 48px;
   }
   /* narrower windows drop the least needed columns first, so the table never scrolls sideways */
-  @media (max-width: 1240px) {
+  @media (max-width: 1340px) {
     .ax .at th:nth-child(3),
     .ax .at td:nth-child(3) {
       display: none;
     }
   }
-  @media (max-width: 1080px) {
+  @media (max-width: 1180px) {
     .ax .at th:nth-child(8),
     .ax .at td:nth-child(8) {
+      display: none;
+    }
+  }
+  @media (max-width: 1080px) {
+    .ax .at th:nth-child(4),
+    .ax .at td:nth-child(4) {
       display: none;
     }
     .ax .grid3 {
@@ -611,10 +722,9 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     .ax .at th:nth-child(4),
     .ax .at td:nth-child(4),
     .ax .at th:nth-child(7),
-    .ax .at td:nth-child(7) {
-      display: none;
-    }
-    .ax .sl {
+    .ax .at td:nth-child(7),
+    .ax .at th:nth-child(9),
+    .ax .at td:nth-child(9) {
       display: none;
     }
     .ax .methods {
@@ -660,10 +770,38 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     .ax .grid3 {
       grid-template-columns: 1fr;
     }
-  }
-  @media (max-width: 480px) {
-    .ax .areas {
-      grid-template-columns: 1fr;
+    .ax .fbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 13px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--ink);
+      font: 500 14px/1 var(--sans);
+      cursor: pointer;
+    }
+    .ax .fpanel {
+      display: none;
+    }
+    .ax .fopen .fpanel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-basis: 100%;
+    }
+    .ax .count {
+      flex-basis: 100%;
+      margin-left: 0;
+    }
+    .ax .methods {
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .ax .at td .tag {
+      white-space: normal;
     }
   }
 </style>

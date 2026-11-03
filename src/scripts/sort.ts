@@ -108,20 +108,24 @@ export function wireSort(table: HTMLTableElement, onSort?: () => void) {
 
   cols.forEach((th, i) => {
     if (th.dataset.nosort !== undefined || !keys[i]) return;
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'sort';
-    const label = document.createElement('span');
-    label.append(...th.childNodes);
-    b.append(label);
-    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    icon.setAttribute('width', '8');
-    icon.setAttribute('height', '10');
-    icon.setAttribute('viewBox', '0 0 8 10');
-    icon.setAttribute('aria-hidden', 'true');
-    icon.innerHTML = '<path class="up" d="M1 4l3-3 3 3"/><path class="dn" d="M1 6l3 3 3-3"/>';
-    b.append(icon);
-    th.replaceChildren(b);
+    // a header from SortHead.astro has its button already, which keeps the column from widening on load
+    let b = th.querySelector<HTMLButtonElement>(':scope > button.sort');
+    if (!b) {
+      b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sort';
+      const label = document.createElement('span');
+      label.append(...th.childNodes);
+      b.append(label);
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('width', '8');
+      icon.setAttribute('height', '10');
+      icon.setAttribute('viewBox', '0 0 8 10');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = '<path class="up" d="M1 4l3-3 3 3"/><path class="dn" d="M1 6l3 3 3-3"/>';
+      b.append(icon);
+      th.replaceChildren(b);
+    }
     th.setAttribute('aria-sort', 'none');
     b.addEventListener('click', () => {
       const first = firstDir(i);
