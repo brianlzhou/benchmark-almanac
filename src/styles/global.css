@@ -569,7 +569,7 @@ th[aria-sort='descending'] {
 .js [data-later] {
   display: none;
 }
-/* A footer row that holds each no-wrap column's longest cell (see freezeColumns in filter.ts). It sets the
+/* A hidden row after the header row holds each no-wrap column's longest cell (see freezeColumns in filter.ts). It sets the
    column widths from the first paint and takes no height. */
 .t tr[data-probe] {
   visibility: collapse;

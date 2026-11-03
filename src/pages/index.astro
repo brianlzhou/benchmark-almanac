@@ -13,7 +13,7 @@ import ReignChart from '../components/ReignChart.astro';
 import { eciReigns } from '../lib/reigns.ts';
 import { leaderRows } from '../lib/leaders.ts';
 import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED } from '../lib/data.ts';
-import { fullDate } from '../lib/format.ts';
+import { humanDate } from '../lib/format.ts';
 import discoveredJson from '../../data/discovered.json';
 
 const all = allSummaries();
@@ -191,7 +191,7 @@ const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter
             {discovered.map((d) => (
               <li>
                 <a href={d.url}>{d.name}</a>
-                <span class="muted">{[d.org, `found ${fullDate(d.first)}`].filter(Boolean).join(', ')}</span>
+                <span class="muted">{[d.org, `found ${humanDate(d.first)}`].filter(Boolean).join(', ')}</span>
               </li>
             ))}
           </ul>

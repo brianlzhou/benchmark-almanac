@@ -1,4 +1,5 @@
 ---
+import SortHead from '../components/SortHead.astro';
 // Every arena and match league: the same areas, search and filters as the benchmarks table, for the tests
 // that rank models against each other instead of against an answer key. An arena is a benchmark scored by
 // votes (people pick the better of two answers) or by matches (models play each other), the rule behind
@@ -10,7 +11,7 @@ import MiniBoard from '../components/MiniBoard.astro';
 import Dropdown, { type Option } from '../components/Dropdown.astro';
 import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions } from '../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, SUB_BY_ID, SUBCATEGORIES, RANKED_BY_PEOPLE_OR_MATCHES } from '../lib/taxonomy.ts';
-import { score as fmt, monthYear, fullDate } from '../lib/format.ts';
+import { score as fmt, monthYear, humanDate } from '../lib/format.ts';
 import { familyOf, nextVersion } from '../lib/reigns.ts';
 
 // where the newest score came from, for the Last added column's tooltip
@@ -90,8 +91,8 @@ const earlier = (id: string) =>
     .map((v) => byId.get(v)!)
     .reverse();
 const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
-// The longest text of each column that cannot wrap, over every row and earlier version. A hidden footer row
-// holds it, so the table has its final column widths from the first paint (see freezeColumns in filter.ts).
+// The longest text of each column that cannot wrap, over every row and earlier version. A hidden row
+// holds it under the header, so the table has its final column widths from the first paint (see filter.ts).
 const everyRow = rows.flatMap((s) => [s, ...(s.b.family ? earlier(s.b.id) : [])]);
 const longest = (xs: (string | undefined)[]) => xs.reduce<string>((a, x) => (x && x.length > a.length ? x : a), '');
 const probe = {
@@ -116,7 +117,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
         <span><b>{rankedCount('matches')}</b> ranked by matches</span>
         <span><b>{inRows((s) => s.status === 'in use')}</b> in use</span>
         <span><b>{withBoard}</b> with a leaderboard here</span>
-        <span>Scores refreshed <b>{fullDate(AS_OF)}</b></span>
+        <span>Scores refreshed <b>{humanDate(AS_OF)}</b></span>
       </div>
     </header>
 
@@ -172,15 +173,31 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
         <table class="t at" data-rows data-sort>
           <thead>
             <tr>
-              <th>Arena</th>
-              <th>Run by</th>
-              <th>Kind</th>
-              <th>Ranked by</th>
-              <th data-first="asc">Status</th>
-              <th>Leader</th>
-              <th class="r two" title="Models with a score here">Models<br />rated</th>
-              <th>Released</th>
-              <th title="When a model last got a score here, from any source">Last<br />added</th>
+              <SortHead>Arena</SortHead>
+              <SortHead>Run by</SortHead>
+              <SortHead>Kind</SortHead>
+              <SortHead>Ranked by</SortHead>
+              <SortHead data-first="asc">Status</SortHead>
+              <SortHead>Leader</SortHead>
+              <SortHead class="r two" title="Models with a score here">Models<br />rated</SortHead>
+              <SortHead>Released</SortHead>
+              <SortHead title="When a model last got a score here, from any source">Last<br />added</SortHead>
+            </tr>
+            <tr data-probe aria-hidden="true">
+              <td class="nm" />
+              <td class="org" />
+              <td class="muted kind" />
+              <td class="muted nowrap">{probe.ranked}</td>
+              <td class="nowrap">
+                <span class:list={['tag', `status-${probe.status.replace(/ /g, '-')}`]}>
+                  <span class="dot" />
+                  <span class="sl">{STATUS[probe.status]}</span>
+                </span>
+              </td>
+              <td class="best-c" />
+              <td class="r num" />
+              <td class="muted num nowrap">{probe.released}</td>
+              <td class="muted num nowrap">{probe.added}</td>
             </tr>
           </thead>
           <tbody>
@@ -281,24 +298,6 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
               })
             }
           </tbody>
-          <tfoot aria-hidden="true">
-            <tr data-probe>
-              <td class="nm" />
-              <td class="org" />
-              <td class="muted kind" />
-              <td class="muted nowrap">{probe.ranked}</td>
-              <td class="nowrap">
-                <span class:list={['tag', `status-${probe.status.replace(/ /g, '-')}`]}>
-                  <span class="dot" />
-                  <span class="sl">{STATUS[probe.status]}</span>
-                </span>
-              </td>
-              <td class="best-c" />
-              <td class="r num" />
-              <td class="muted num nowrap">{probe.released}</td>
-              <td class="muted num nowrap">{probe.added}</td>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </section>
@@ -493,8 +492,9 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     margin: 12px calc(-1 * var(--gutter)) 8px;
     padding: 8px var(--gutter);
     background: var(--bg);
-    box-shadow: 0 0 0 100vmax var(--bg);
-    clip-path: inset(0 -100vmax);
+    /* the table can be wider than the page, so the bar's background reaches both edges of the window. A
+       border image paints it there without clipping the bar's dropdowns (a clip-path did) or widening the page. */
+    border-image: linear-gradient(var(--bg), var(--bg)) fill 0 / 0 / 0 100vmax;
   }
   .ax .fpanel {
     display: contents;

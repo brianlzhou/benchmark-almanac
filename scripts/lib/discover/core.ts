@@ -164,7 +164,9 @@ const NOT_BENCHMARKS = new Set(['lmarena', 'designarena', 'evalevalcoalition', '
 /** Single-token benchmark names: "HackBench", "SWE-bench". The keyword must end the word, so "Example" does not count. */
 export function names(text: string): string[] {
   const tail = /(Bench|BENCH|bench|Eval|EVAL|Evals|Arena|Gym|Exam|Leaderboard)(?![a-z])/;
-  return [...new Set((text.match(NAME) ?? []).filter((n) => !BARE.test(n) && tail.test(n) && n.length >= 5 && /[A-Z]/.test(n) && !NOT_BENCHMARKS.has(key(n))))];
+  // a word that starts a compound ("Eval-to-deployment gap") is not a name, but "Arena-Hard" is
+  const compound = /^(?:Bench|Eval|Evals|Arena|Gym|Exam|Leaderboard)-[a-z]/;
+  return [...new Set((text.match(NAME) ?? []).filter((n) => !BARE.test(n) && tail.test(n) && !compound.test(n) && n.length >= 5 && /[A-Z]/.test(n) && !NOT_BENCHMARKS.has(key(n))))];
 }
 
 const LEAD = /^(?:the|a|an|our|new|this|that|its|their|his|her|my|your|every|each|any|some|first|latest|recent|public|private|frontier|hard|harder|own|in-house|internal)$/i;
@@ -192,13 +194,17 @@ export function introName(abstract: string): string | undefined {
 }
 
 /**
- * A paper's benchmark name: the part before the colon when it is short, else a Bench-style name in the title,
- * else the name its abstract introduces, else the title.
+ * A paper's benchmark name: a Bench-style name its abstract introduces when the title's head is not one, else the
+ * part before the colon when it is short, else a Bench-style name in the title, else the name the abstract
+ * introduces, else the title. "GeoFaham: Multi-Agent Geospatial Analytics" introduces GeoFaham-Bench, and
+ * "One Assistant, Many Memories: Benchmarking..." introduces GroupAssistBench.
  */
 export function paperName(title: string, abstract = ''): string {
   const head = title.split(':')[0].trim();
+  const intro = introName(abstract);
+  if (intro && benchLike(intro) && !benchLike(head)) return intro;
   if (head !== title && head.length <= 40 && head.split(/\s+/).length <= 4) return head;
-  return names(title)[0] ?? introName(abstract) ?? title;
+  return names(title)[0] ?? intro ?? title;
 }
 
 // ---- launch posts ----------------------------------------------------------------------------------
@@ -299,6 +305,8 @@ function upsert(c: Find, how: How): { known: string } | { candidate: Candidate }
   cur.last = TODAY;
   // a find first listed under its paper title takes the name a later source gives it
   if (cur.name === cur.title && c.name !== c.title && c.name !== cur.name) cur.name = c.name;
+  // and a paper first listed under its system's name ("GeoFaham") takes the benchmark's name ("GeoFaham-Bench")
+  else if (c.key === cur.key && c.name !== c.title && benchLike(c.name) && !benchLike(cur.name)) cur.name = c.name;
   if (twin) cur.sameNameAs = twin;
   if (c.org) cur.org = c.org;
   if (c.repo) cur.repo = c.repo;

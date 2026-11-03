@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { cards, systemCards, benchmarks, labs, EPOCH_SOURCE, SATURATED, AS_OF } from '../lib/data.ts';
 import { benchmarkCount } from '../lib/counts.ts';
 import { LEVELS, SCORING } from '../lib/taxonomy.ts';
-import { fullDate } from '../lib/format.ts';
+import { humanDate } from '../lib/format.ts';
 import reviewed from '../../data/reviewed.json';
 import sources from '../../data/sources.json';
 import Criteria from '../components/Criteria.astro';
@@ -37,7 +37,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
     <section id="data">
       <h2>The data</h2>
       <p>
-        <b>Lab model cards.</b> {cards.length} launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {fullDate(AS_OF)}. For each post we record the benchmarks in its headline results and the model's score on each, as the post gives it. Whether we call a benchmark in use, fading or dropped depends only on these posts.
+        <b>Lab model cards.</b> {cards.length} launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {humanDate(AS_OF)}. For each post we record the benchmarks in its headline results and the model's score on each, as the post gives it. Whether we call a benchmark in use, fading or dropped depends only on these posts.
         {systemCards.length > 0 && ` We also read ${systemCards.length} system cards, model cards and technical reports that came out with the releases. From these we record every evaluation each document reports, safety and frontier-risk tests included, along with the section each result appears in.`}
         Labs pick their own settings, so card scores don't compare as cleanly as independent runs. We say on each page which kind of score it shows.
       </p>
@@ -45,7 +45,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
         <b>Official leaderboards.</b> Many benchmarks keep their own leaderboard, and new models usually show up there first. We import each board from the data file it publishes, using the scripts in <code>scripts/leaderboards/</code>, and match its model names to ours. If a benchmark's own board has five or more models, we lead with it on that benchmark's page.
       </p>
       <p>
-        <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {fullDate(EPOCH_SOURCE.retrieved)}. Epoch runs some of these itself and collects the rest from public leaderboards. We also use its Epoch Capabilities Index, which puts models on one scale across many benchmarks. We leave out the rows Epoch collected from Artificial Analysis, because Artificial Analysis's terms do not allow reuse in other ranking products.
+        <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {humanDate(EPOCH_SOURCE.retrieved)}. Epoch runs some of these itself and collects the rest from public leaderboards. We also use its Epoch Capabilities Index, which puts models on one scale across many benchmarks. We leave out the rows Epoch collected from Artificial Analysis, because Artificial Analysis's terms do not allow reuse in other ranking products.
       </p>
       <p>
         <b>The catalog.</b> {benchmarkCount.toLocaleString('en-US')} benchmarks ({benchmarks.length.toLocaleString('en-US')} counting each version), each with what it tests, who made it, and links to its code, paper, data and leaderboard. We checked every GitHub link against the GitHub API. The list began with benchmarks from lab cards, Epoch's hub and public collections, and research agents filled in the details from primary sources.

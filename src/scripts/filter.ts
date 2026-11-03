@@ -24,9 +24,9 @@ function freezeColumns(table: HTMLTableElement) {
   if (!ths.length) return;
   // A cell marked nowrap cannot wrap, so its column must fit the widest one, which may sit in a row that is
   // not shown yet. A probe row holds a copy of each such column's longest cell while the widths are measured.
-  // A page can render that row itself in the table's footer (tr[data-probe]): then the first paint already
-  // has the final widths, and measuring them moves nothing.
-  const own = table.tFoot?.querySelector('tr[data-probe]');
+  // A page can render that row itself, after the header row (tr[data-probe]). Then the first paint already has
+  // the final widths, and measuring them moves nothing.
+  const own = table.querySelector('tr[data-probe]');
   const longest: (HTMLTableCellElement | undefined)[] = [];
   const len: number[] = [];
   for (const r of own ? [] : (table.tBodies[0]?.rows ?? [])) {

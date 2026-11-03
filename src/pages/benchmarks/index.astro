@@ -1,11 +1,12 @@
 ---
+import SortHead from '../../components/SortHead.astro';
 import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
 import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import AreaMark from '../../components/AreaMark.astro';
 import { allSummaries, benchmarks, modelById, monthsBetween, AS_OF, addedWindows, addedOptions } from '../../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf, levelIndex } from '../../lib/taxonomy.ts';
-import { score as fmt, monthYear, fullDate } from '../../lib/format.ts';
+import { score as fmt, monthYear, humanDate } from '../../lib/format.ts';
 import { familyOf, nextVersion } from '../../lib/reigns.ts';
 
 // where the newest score came from, for the Last added column's tooltip
@@ -71,8 +72,8 @@ const earlier = (id: string) =>
     .map((v) => byId.get(v)!)
     .reverse();
 const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
-// The longest text of each column that cannot wrap, over every row and earlier version. A hidden footer row
-// holds it, so the table has its final column widths from the first paint (see freezeColumns in filter.ts).
+// The longest text of each column that cannot wrap, over every row and earlier version. A hidden row
+// holds it under the header, so the table has its final column widths from the first paint (see filter.ts).
 const everyRow = rows.flatMap((s) => [s, ...(s.b.family ? earlier(s.b.id) : [])]);
 const longest = (xs: (string | undefined)[]) => xs.reduce<string>((a, x) => (x && x.length > a.length ? x : a), '');
 const probe = {
@@ -96,7 +97,7 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
         <span><b>{inRows((s) => s.status === 'fading')}</b> fading</span>
         <span><b>{inRows((s) => s.status === 'dropped')}</b> dropped</span>
         <span><b>{inRows((s) => !!s.b.links?.repo).toLocaleString('en-US')}</b> with public code</span>
-        <span>Scores refreshed <b>{fullDate(AS_OF)}</b></span>
+        <span>Scores refreshed <b>{humanDate(AS_OF)}</b></span>
       </div>
     </header>
 
@@ -157,16 +158,33 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
       <table class="t bt" data-rows data-sort>
         <thead>
           <tr>
-            <th>Benchmark</th>
-            <th>Made by</th>
-            <th>Kind</th>
-            <th data-first="asc">Level</th>
-            <th data-first="asc">Status</th>
-            <th>Best score</th>
-            <th class="r two" title="Launch posts that list it in their headline results">Launch<br />posts</th>
-            <th class="r two" title="System cards, model cards and technical reports that report it">System<br />cards</th>
-            <th>Released</th>
-            <th title="When a model last got a score here, from any source">Last<br />added</th>
+            <SortHead>Benchmark</SortHead>
+            <SortHead>Made by</SortHead>
+            <SortHead>Kind</SortHead>
+            <SortHead data-first="asc">Level</SortHead>
+            <SortHead data-first="asc">Status</SortHead>
+            <SortHead>Best score</SortHead>
+            <SortHead class="r two" title="Launch posts that list it in their headline results">Launch<br />posts</SortHead>
+            <SortHead class="r two" title="System cards, model cards and technical reports that report it">System<br />cards</SortHead>
+            <SortHead>Released</SortHead>
+            <SortHead title="When a model last got a score here, from any source">Last<br />added</SortHead>
+          </tr>
+          <tr data-probe aria-hidden="true">
+            <td class="nm" />
+            <td class="org" />
+            <td class="muted kind" />
+            <td class="muted nowrap">{probe.level}</td>
+            <td class="nowrap">
+              <span class:list={['tag', `status-${probe.status.replace(/ /g, '-')}`]}>
+                <span class="dot" />
+                <span class="sl">{STATUS[probe.status]}</span>
+              </span>
+            </td>
+            <td class="best-c" />
+            <td class="r" />
+            <td class="r muted" />
+            <td class="muted num nowrap">{probe.released}</td>
+            <td class="muted num nowrap">{probe.added}</td>
           </tr>
         </thead>
         <tbody>
@@ -268,25 +286,6 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
             })
           }
         </tbody>
-        <tfoot aria-hidden="true">
-          <tr data-probe>
-            <td class="nm" />
-            <td class="org" />
-            <td class="muted kind" />
-            <td class="muted nowrap">{probe.level}</td>
-            <td class="nowrap">
-              <span class:list={['tag', `status-${probe.status.replace(/ /g, '-')}`]}>
-                <span class="dot" />
-                <span class="sl">{STATUS[probe.status]}</span>
-              </span>
-            </td>
-            <td class="best-c" />
-            <td class="r" />
-            <td class="r muted" />
-            <td class="muted num nowrap">{probe.released}</td>
-            <td class="muted num nowrap">{probe.added}</td>
-          </tr>
-        </tfoot>
       </table>
     </div>
     </div>
@@ -431,9 +430,9 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
     margin: 12px calc(-1 * var(--gutter)) 8px;
     padding: 8px var(--gutter);
     background: var(--bg);
-    /* the table can be wider than the page, so the bar's background reaches both edges of the window */
-    box-shadow: 0 0 0 100vmax var(--bg);
-    clip-path: inset(0 -100vmax);
+    /* the table can be wider than the page, so the bar's background reaches both edges of the window. A
+       border image paints it there without clipping the bar's dropdowns (a clip-path did) or widening the page. */
+    border-image: linear-gradient(var(--bg), var(--bg)) fill 0 / 0 / 0 100vmax;
   }
   .bx .fpanel {
     display: contents;
