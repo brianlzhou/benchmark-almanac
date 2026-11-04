@@ -1,0 +1,52 @@
+name: Discover benchmarks and models
+
+# Every morning, after AINews and Hugging Face Daily Papers publish, read the feeds and refresh the review
+# queues in data/discovered.json (benchmarks), data/discovered-audits.json (possible audits of cataloged
+# benchmarks) and data/discovered-models.json (models). Changes go to one rolling pull request.
+on:
+  schedule:
+    - cron: '30 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: discover
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # each source has its own time limit inside the script, so a full run takes under five minutes
+      - run: node scripts/discover.ts --days 3
+        timeout-minutes: 10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # optional: with an OpenReview account, the job also reads the NeurIPS Evaluations and Datasets track
+          OPENREVIEW_USERNAME: ${{ secrets.OPENREVIEW_USERNAME }}
+          OPENREVIEW_PASSWORD: ${{ secrets.OPENREVIEW_PASSWORD }}
+      # new models from Hugging Face, AINews, Bluesky and new leaderboard names, about a minute
+      - run: node scripts/discover-models.ts --days 3
+        timeout-minutes: 6
+      - name: Update the discovery pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet -- data/discovered.json data/discovered-models.json data/discovered-audits.json; then
+            echo "The queue did not change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C bot/discover
+          git add data/discovered.json data/discovered-models.json data/discovered-audits.json
+          git commit -m "Refresh the discovery queues ($(date -u +%F))"
+          git push --force origin bot/discover
+          gh pr view bot/discover --json state -q .state 2>/dev/null | grep -q OPEN || \
+            gh pr create --head bot/discover --title "New benchmarks and models to review" \
+              --body "The daily discovery jobs refreshed data/discovered.json and data/discovered-models.json. Merge it to publish the queues on /new/. To catalog a find, add it to the registries in another pull request."

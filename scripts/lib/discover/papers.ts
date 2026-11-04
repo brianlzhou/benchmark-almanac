@@ -1,4 +1,5 @@
 // Paper feeds: Hugging Face Daily Papers, the arXiv API, and the NeurIPS Evaluations and Datasets track on OpenReview.
+import { noteAudit } from './audits.ts';
 import { key, daysAgo } from '../util.ts';
 import { DAYS, FROM, TODAY, GENERAL, NICHE, stageA, paperName, isoDate, githubRepo, type Reader } from './core.ts';
 import { decode } from './text.ts';
@@ -12,12 +13,16 @@ export async function hfDailyPapers(r: Reader) {
       const p = it.paper;
       const title = it.title ?? p.title;
       const abs = it.summary ?? p.summary ?? '';
+      // a paper that audits a cataloged benchmark goes to its own queue, whatever its Stage A score
+      noteAudit({ key: `https://arxiv.org/abs/${p.id}`, title, text: abs, url: `https://arxiv.org/abs/${p.id}`, source: 'Hugging Face papers', date: daysAgo(d) });
       const a = stageA(title, abs, !!p.githubRepo);
       if (a < 5) continue;
+      const name = paperName(title, abs);
       r.add(
         {
           key: p.id,
-          name: paperName(title),
+          name,
+          introduced: name !== title,
           title,
           url: `https://huggingface.co/papers/${p.id}`,
           arxiv: p.id,
@@ -39,7 +44,7 @@ export async function arxiv(r: Reader) {
   // the arXiv API terms ask for one query a day and no more than one request every three seconds
   const q = `(ti:benchmark OR abs:benchmark) AND (cat:cs.CL OR cat:cs.AI OR cat:cs.LG OR cat:cs.SE) AND submittedDate:[${FROM.replace(/-/g, '')}0000 TO ${TODAY.replace(/-/g, '')}2359]`;
   const url = `https://export.arxiv.org/api/query?search_query=${encodeURIComponent(q)}&sortBy=submittedDate&sortOrder=descending&max_results=500`;
-  const xml = await r.text(url, { timeout: 90_000 });
+  const xml = await r.text(url, { timeout: 60_000, tries: 4, wait: 5000 });
   const text = (s: string) => decode(s.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
   for (const m of xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)) {
     const e = m[1];
@@ -48,11 +53,12 @@ export async function arxiv(r: Reader) {
     const abs = text((e.match(/<summary>([\s\S]*?)<\/summary>/) ?? [])[1] ?? '');
     if (!id || !title) continue;
     r.read();
+    noteAudit({ key: `https://arxiv.org/abs/${id}`, title, text: abs, url: `https://arxiv.org/abs/${id}`, source: 'arXiv', date: (e.match(/<published>(\d{4}-\d\d-\d\d)/) ?? [])[1] });
     const a = stageA(title, abs, /github\.com|huggingface\.co\/datasets/.test(e));
     if (a < 5) continue;
     const repo = githubRepo((abs.match(/https?:\/\/github\.com\/[\w.-]+\/[\w.-]+/) ?? [])[0]?.replace(/[.)]+$/, '') ?? '');
     r.add(
-      { key: id, name: paperName(title), title, url: `https://arxiv.org/abs/${id}`, arxiv: id, repo, stageA: a, general: GENERAL.test(`${title} ${abs}`), niche: NICHE.test(`${title} ${abs}`) },
+      { key: id, name: paperName(title, abs), introduced: paperName(title, abs) !== title, title, url: `https://arxiv.org/abs/${id}`, arxiv: id, repo, stageA: a, general: GENERAL.test(`${title} ${abs}`), niche: NICHE.test(`${title} ${abs}`) },
       { feed: 'arxiv' },
     );
   }
@@ -98,8 +104,8 @@ export async function openreview(r: Reader) {
     if (!title || a < 5) continue;
     const repo = githubRepo((abs.match(/https?:\/\/github\.com\/[\w.-]+\/[\w.-]+/) ?? [])[0]?.replace(/[.)]+$/, '') ?? '');
     r.add(
-      { key: key(paperName(title)) || n.id, name: paperName(title), title, url: `https://openreview.net/forum?id=${n.id}`, repo, stageA: a, general: GENERAL.test(`${title} ${abs}`), niche: NICHE.test(`${title} ${abs}`) },
-      { feed: 'openreview' },
+      { key: key(paperName(title, abs)) || n.id, name: paperName(title, abs), introduced: paperName(title, abs) !== title, title, url: `https://openreview.net/forum?id=${n.id}`, repo, stageA: a, general: GENERAL.test(`${title} ${abs}`), niche: NICHE.test(`${title} ${abs}`) },
+      { feed: 'NeurIPS Evaluations and Datasets track' },
     );
   }
   r.remember('openreview', ids);
