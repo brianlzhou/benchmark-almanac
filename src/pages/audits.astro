@@ -1,0 +1,256 @@
+---
+import Base from '../layouts/Base.astro';
+import { audits, PROBLEMS, STATUSES, unresolved, type Problem } from '../lib/audits.ts';
+import { benchById } from '../lib/data.ts';
+import { humanDate, fullDate } from '../lib/format.ts';
+
+const findings = audits.flatMap((audit) => audit.findings.map((finding) => ({ audit, finding })));
+const open = unresolved(findings).length;
+const benchCount = new Set(findings.map((f) => f.finding.benchmark)).size;
+// problem kinds in the order of how often audits find them
+const counts = new Map<Problem, number>();
+for (const { finding } of findings) for (const p of finding.problems) counts.set(p, (counts.get(p) ?? 0) + 1);
+const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.localeCompare(PROBLEMS[b[0]].name));
+---
+
+<Base title="Benchmark audits" description="Published reviews that found problems in benchmarks: broken graders, leaked answers, wrong labels and contamination, with each finding linked to its source.">
+  <div class="page">
+    <header class="head">
+      <h1>Audits</h1>
+      <p class="lede">
+        Sometimes people check a benchmark and find problems in it. A grader rejects right answers, the answers leak online, or some reference answers are wrong. We list each published audit here, and on the page of every benchmark it covers.
+      </p>
+      <div class="facts">
+        <span><b>{audits.length}</b> audits</span>
+        <span><b>{findings.length}</b> findings on <b>{benchCount}</b> benchmarks</span>
+        <span><b>{open}</b> not fixed in the benchmark itself</span>
+        <a href="#rules">What we include</a>
+      </div>
+    </header>
+
+    <section>
+      <div class="sh">
+        <h2>What the audits found</h2>
+        <p>Pick a kind of problem to see only those findings.</p>
+      </div>
+      <div class="ak" role="group" aria-label="Kind of problem">
+        <button type="button" class="ak-b" aria-pressed="true" data-kind="">All <span class="num">{findings.length}</span></button>
+        {kinds.map(([p, n]) => (
+          <button type="button" class="ak-b hint" aria-pressed="false" data-kind={p} data-tn={PROBLEMS[p].name} data-ts={PROBLEMS[p].what}>
+            {PROBLEMS[p].name} <span class="num">{n}</span>
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <ol class="al">
+        {audits.map((audit) => (
+          <li class="al-a" data-kinds={audit.findings.flatMap((f) => f.problems).join(' ')}>
+            <div class="al-when num">{fullDate(audit.date)}</div>
+            <div class="al-body">
+              <h3>
+                <a href={audit.url}>{audit.title}</a>
+              </h3>
+              <p class="al-by">
+                {audit.author}
+                {audit.source === 'paper' ? ', a paper' : ', a write-up'}
+                {audit.people && audit.people.length <= 3 && !audit.author.includes('et al.') && <span class="muted">, by {audit.people.join(', ')}</span>}
+              </p>
+              <ul class="al-f">
+                {audit.findings.map((f) => {
+                  const b = benchById.get(f.benchmark);
+                  const st = STATUSES[f.status];
+                  return (
+                    <li data-kinds={f.problems.join(' ')}>
+                      <div class="al-top">
+                        <a class="al-b" href={`/benchmarks/${f.benchmark}/#issues`}>{b?.name ?? f.benchmark}</a>
+                        <span class="al-kinds">{f.problems.map((p) => <span class="ki-kind">{PROBLEMS[p].name}</span>)}</span>
+                        <span class:list={['ki-st', st.tone]}>
+                          <span class="dot" />
+                          {st.name}
+                        </span>
+                      </div>
+                      <p class="al-sum">{f.summary}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="rules">
+      <div class="sh">
+        <h2>What we include</h2>
+      </div>
+      <ol class="rules">
+        <li><b>A primary source.</b> The author must publish the method, in a paper, a write-up or a repository with the fixes. A post or a newsletter line alone is not enough. We add it once the author publishes the method.</li>
+        <li><b>Credit and the auditor's own numbers.</b> We name who found each problem and quote the numbers as printed.</li>
+        <li><b>The maker's response.</b> When the maker replies or fixes the benchmark, we link that too.</li>
+        <li><b>Leaderboards stay as reported.</b> Re-scored results often use a different harness or only the public tasks. So we keep them in the finding's text, not on the leaderboards.</li>
+      </ol>
+      <p class="upd muted">Updated {humanDate(audits[0]?.date)}. To suggest an audit, <a href="/submit/">send a correction</a>.</p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  // one kind at a time: a finding shows when it has the kind, and an audit when any of its findings does
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('.ak-b')];
+  for (const b of buttons)
+    b.addEventListener('click', () => {
+      const kind = b.dataset.kind ?? '';
+      for (const x of buttons) x.setAttribute('aria-pressed', String(x === b));
+      for (const el of document.querySelectorAll<HTMLElement>('.al-a, .al-f > li')) el.hidden = !!kind && !(el.dataset.kinds ?? '').split(' ').includes(kind);
+    });
+</script>
+
+<style>
+  .ak {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ak-b {
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .ak-b .num {
+    margin-left: 4px;
+    color: var(--ink-3);
+  }
+  .ak-b[aria-pressed='true'] {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .ak-b[aria-pressed='true'] .num {
+    color: inherit;
+    opacity: 0.7;
+  }
+  .al {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 40px;
+  }
+  .al-a {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 24px;
+  }
+  .al-when {
+    padding-top: 4px;
+    color: var(--ink-3);
+    font-size: 14px;
+  }
+  .al-body h3 {
+    font: 400 24px/1.25 var(--serif);
+    text-wrap: balance;
+  }
+  .al-body h3 a {
+    text-decoration: none;
+  }
+  .al-body h3 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  .al-by {
+    margin-top: 4px;
+    color: var(--ink-2);
+    font-size: 14.5px;
+  }
+  .al-f {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    max-width: 80ch;
+  }
+  .al-f > li {
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--status-warn);
+    border-radius: 10px;
+  }
+  .al-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+  }
+  .al-b {
+    font-weight: 600;
+  }
+  .al-kinds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ki-kind {
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink-2);
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+  .ki-st {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .ki-st.good .dot {
+    background: var(--status-good);
+  }
+  .ki-st.warn .dot {
+    background: var(--status-warn);
+  }
+  .ki-st.bad .dot {
+    background: var(--status-bad);
+  }
+  .al-sum {
+    margin-top: 8px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .rules {
+    margin: 0;
+    padding-left: 22px;
+    display: grid;
+    gap: 10px;
+    max-width: 68ch;
+    line-height: 1.55;
+  }
+  .rules b {
+    font-weight: 600;
+  }
+  .upd {
+    margin-top: 18px;
+    font-size: 14px;
+  }
+  @media (max-width: 720px) {
+    .al-a {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 6px;
+    }
+    .ki-st {
+      margin-left: 0;
+    }
+  }
+</style>

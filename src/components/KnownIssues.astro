@@ -1,0 +1,188 @@
+---
+// Problems that published audits found in a benchmark, from data/audits.json: one entry per finding, with the
+// kind of problem, whether anyone fixed it, the auditor's numbers, and links to the audit and the fix. We
+// summarize and attribute each finding. Scores elsewhere on the page stay as their sources report them.
+import { issuesByBenchmark, PROBLEMS, STATUSES } from '../lib/audits.ts';
+import { benchById } from '../lib/data.ts';
+import { humanDate } from '../lib/format.ts';
+
+interface Props {
+  id: string;
+  name: string;
+}
+const { id, name } = Astro.props;
+const issues = issuesByBenchmark.get(id) ?? [];
+---
+
+{
+  issues.length > 0 && (
+    <section class="ki" id="issues" aria-labelledby="ki-h">
+      <div class="sh">
+        <h2 id="ki-h">Known issues</h2>
+        <p>
+          {issues.length === 1 ? 'A published audit found a problem' : `${issues.length} published audits found problems`} in {name}. We summarize each finding in our words and link its source.
+          The scores on this page don't include any fixes. <a href="/audits/">See all audits</a>
+        </p>
+      </div>
+      <ol class="ki-list">
+        {issues.map(({ audit, finding: f }) => {
+          const st = STATUSES[f.status];
+          const see = f.see ? benchById.get(f.see) : undefined;
+          return (
+            <li class="ki-item">
+              <div class="ki-top">
+                <span class="ki-kinds">
+                  {f.problems.map((p) => (
+                    <span class="ki-kind hint" tabindex="0" data-tn={PROBLEMS[p].name} data-ts={PROBLEMS[p].what}>
+                      {PROBLEMS[p].name}
+                    </span>
+                  ))}
+                </span>
+                <span class:list={['ki-st', st.tone]}>
+                  <span class="dot" />
+                  {st.name}
+                </span>
+              </div>
+              <p class="ki-sum">{f.summary}</p>
+              {f.numbers && <p class="ki-num">{f.numbers}</p>}
+              {f.quote && (
+                <blockquote class="ki-q" cite={audit.url}>
+                  <p>{f.quote}</p>
+                </blockquote>
+              )}
+              {f.response && (
+                <p class="ki-resp">
+                  <b>Response.</b> {f.response.text} <a href={f.response.url}>Source</a>
+                </p>
+              )}
+              <p class="ki-src">
+                <a href={audit.url}>{audit.title}</a>
+                <span class="muted">
+                  {' '}
+                  by {audit.author}, {humanDate(audit.date)}
+                </span>
+              </p>
+              {(see || (f.fixes?.length ?? 0) > 0) && (
+                <ul class="ki-fix">
+                  {see && (
+                    <li>
+                      <a href={`/benchmarks/${see.id}/`}>{see.name}</a> <span class="muted">in the almanac</span>
+                    </li>
+                  )}
+                  {f.fixes?.map((x) => (
+                    <li>
+                      <a href={x.url}>{x.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  )
+}
+
+<style>
+  .ki {
+    margin-bottom: 64px;
+  }
+  .ki-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+    max-width: 80ch;
+  }
+  .ki-item {
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--status-warn);
+    border-radius: 10px;
+    background: var(--bg);
+    min-width: 0;
+  }
+  .ki-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .ki-kinds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ki-kind {
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink-2);
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+  .ki-st {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .ki-st.good .dot {
+    background: var(--status-good);
+  }
+  .ki-st.warn .dot {
+    background: var(--status-warn);
+  }
+  .ki-st.bad .dot {
+    background: var(--status-bad);
+  }
+  .ki-sum {
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+  .ki-num {
+    margin-top: 6px;
+    color: var(--ink-2);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .ki-q {
+    margin: 10px 0 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--line);
+    font: italic 400 15px/1.5 var(--serif);
+    color: var(--ink-3);
+    overflow-wrap: anywhere;
+  }
+  .ki-resp {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .ki-resp b {
+    font-weight: 600;
+  }
+  .ki-src {
+    margin-top: 12px;
+    font-size: 13.5px;
+    overflow-wrap: anywhere;
+  }
+  .ki-fix {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    font-size: 13.5px;
+  }
+  .ki-fix li::before {
+    content: '→ ';
+    color: var(--ink-4);
+  }
+</style>
