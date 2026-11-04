@@ -154,6 +154,9 @@ const INTRO =
   /\b(we|this (?:paper|work)) (?:also )?(?:introduce|present|propose|release|construct|build|curate|develop|create)s?\b[^.]{0,160}?\b(benchmark|evaluation suite|test ?bed|leaderboard|arena|eval(?:uation)? (?:set|framework|harness)|dataset)/i;
 const METHOD = /\b(we propose a (?:novel )?(?:method|framework|approach|model|algorithm)|achiev\w+ state[- ]of[- ]the[- ]art|outperform\w*)\b/i;
 const STUDY = /\b(we benchmark \d+|benchmarking study|empirical (?:benchmark )?study)\b/i;
+// a new benchmark usually reports a model sweep: "We evaluate 18 closed- and open-weight models"
+const SWEEP =
+  /\b(?:evaluat|test|assess|compar)\w*\s+(?:\d{1,3}|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\w+teen|twenty)\s+(?:[\w-]+\s+){0,4}?(?:models|LLMs|VLMs|MLLMs|agents|systems)\b/i;
 export const GENERAL = /\b(LLMs?|language models?|agents?|agentic|VLMs?|MLLMs?|multimodal|foundation models?|coding|computer[- ]use|reasoning models?|frontier models?|AI[- ](?:systems?|models?|agents?))\b/i;
 export const NICHE = /\b(crowd counting|defect detection|pathology|fusion|hardware|FPGA|GPU kernel speed|segmentation of|remote sensing|shampoo|traffic sign)\b/i;
 export const KNOWN_ORGS =
@@ -187,9 +190,14 @@ export function phraseNames(text: string): string[] {
 // with a benchmark word later in the same sentence
 const INTRO_NAME =
   /\b(?:[Ww]e|[Tt]his (?:paper|work))\s+(?:also\s+)?(?:introduce|present|propose|release|construct|build|curate|develop|create)s?\s+(?:the\s+|our\s+)?([A-Z][\w.+-]{2,30}(?:[ ][A-Z0-9][\w.+-]*){0,2})\s*(?:[,(:—–]|\s-\s)[^.]{0,120}?\b(?:benchmark|evaluation suite|test ?bed|leaderboard|arena|dataset|eval)/g;
+// "we introduce the Collaborative Intelligence Benchmark, which measures...": a capitalized name that ends in a
+// benchmark word, right after the verb
+const INTRO_PHRASE =
+  /\b(?:[Ww]e|[Tt]his (?:paper|work))\s+(?:also\s+)?(?:introduce|present|propose|release|construct|build|curate|develop|create)s?\s+(?:the\s+|our\s+)?((?:[A-Z][\w'’.+-]*\s+){1,4}(?:Benchmark|Bench|Eval|Arena|Leaderboard|Gym|Exam))\b/g;
 /** The benchmark an abstract introduces by name, if it names one. */
 export function introName(abstract: string): string | undefined {
   for (const m of abstract.matchAll(INTRO_NAME)) if (!BARE.test(m[1])) return m[1];
+  for (const m of abstract.matchAll(INTRO_PHRASE)) if (phraseNames(m[1]).includes(m[1])) return m[1];
   return undefined;
 }
 
@@ -214,7 +222,7 @@ const LAUNCH = new RegExp(String.raw`\b${VERB}\s+(?:the\s+|our\s+)?${LAUNCH_NAME
 // what follows a name that does not say benchmark itself: "GDPx, an agentic capability benchmark", "LifeVal, new benchmark"
 const APPOSITIVE = /^\s*(?:,|:|—|–|\(|is)?\s*(?:(?:a|an|our|the)\s+)?(?:new\s+)?(?:(?!which\b|that\b|who\b|and\b|but\b|to\b|on\b|in\b)[\w-]+\s+){0,4}?(?:benchmark|eval|evaluation|leaderboard)s?\b/i;
 const NEW_NAME = /\b(?:our|a|the|their|its)\s+new\s+([A-Z][\w.+-]{1,30})\s+(?:benchmark|eval|evaluation|leaderboard|suite)\b/g;
-const benchLike = (n: string) => names(n).length > 0 || /-(?:bench|eval)s?$/.test(n);
+const benchLike = (n: string) => names(n).length > 0 || /-(?:bench|eval)s?$/.test(n) || phraseNames(n).includes(n);
 const NOT_LAUNCHES = /^(?:AI|LLMs?|GPT|Claude|Gemini|Today|Our|This|The|New|We)$/;
 
 /**
@@ -247,7 +255,10 @@ export function stageA(title: string, abstract: string, hasArtifact: boolean): n
   const intro = abstract.match(INTRO);
   if (intro) {
     s += 3;
-    if (names(intro[0]).length) s += 1;
+    // the abstract names what it introduces. "the Collaborative Intelligence Benchmark" counts like "StateBench".
+    if (names(intro[0]).length || introName(abstract)) s += 1;
+    // and tests a set of models on it (added 2026-11-04, after the scan missed that benchmark at 3 points)
+    if (SWEEP.test(abstract)) s += 1;
   }
   if (hasArtifact) s += 1;
   if (METHOD.test(abstract) && !intro && !TITLE.test(title) && !titleNames.length) s -= 2;

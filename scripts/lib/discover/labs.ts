@@ -27,14 +27,34 @@ function addAll(r: Reader, found: string[], how: { source: string; url: string }
 }
 
 /**
+ * A card without its training sections. Their tables list training sets and RL environments, not evaluations:
+ * the Nemotron 3.5 Bolt card (2026-11-07) lists SWE-Gym and "Vendor Terminal Bench-like Tasks" there.
+ */
+export function withoutTraining(card: string): string {
+  const out: string[] = [];
+  let skip = 0;
+  for (const line of card.split('\n')) {
+    const h = line.match(/^(#{1,6})\s+(.*)/);
+    if (h) {
+      if (skip && h[1].length <= skip) skip = 0;
+      if (!skip && /\b(training|pre-?training|post-?training)\b/i.test(h[2]) && !/\b(evaluat\w*|benchmarks?|results?|testing)\b/i.test(h[2])) skip = h[1].length;
+    }
+    if (!skip) out.push(line);
+  }
+  return out.join('\n');
+}
+
+/**
  * Benchmark names in a model card's tables. A cell that holds a benchmark-style word is taken whole, so
  * "BigBench Extra Hard" stays one name. Settings in brackets and footnote marks are dropped.
  */
 export function cardNames(card: string): string[] {
   const cells: string[] = [];
-  for (const line of card.split('\n')) {
+  for (const line of withoutTraining(card).split('\n')) {
     if (/^\s*\|/.test(line)) cells.push(...line.split('|'));
-    for (const m of line.matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)) cells.push(m[1]);
+    // a cell can hold a label and the name: "<div class="benchmark-capability">Agentic coding</div><div
+    // class="benchmark-name">SWE-bench Pro</div>" (the Qwen3.8 cards, 2026-11-07). Only the name is the benchmark.
+    for (const m of line.matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)) cells.push(m[1].match(/<(\w+)\b[^>]*\bclass="[^"]*\bbenchmark-name\b[^"]*"[^>]*>([\s\S]*?)<\/\1>/i)?.[2] ?? m[1]);
   }
   const out = new Set<string>();
   for (const raw of cells) {
@@ -49,6 +69,9 @@ export function cardNames(card: string): string[] {
     // A new version of a cataloged benchmark comes with its own launch post, which other readers find.
     const base = cell.replace(/[\s-]+v?\d+(?:\.\d+)*$/i, '');
     if (base !== cell && !knownId(cell) && knownId(base)) cell = base;
+    // a metric after the name: "Claw-Eval Avg", "SkillsBench Avg5", "Claw-Eval Pass"
+    const metric = cell.replace(/\s+(?:avg|mean|pass|overall|acc|score)(?:@?\d+)?$/i, '');
+    if (metric !== cell && !knownId(cell) && knownId(metric)) cell = metric;
     if (!cell || /^[\d.,%\s/±-]+$/.test(cell)) continue;
     const tokens = [...names(cell), ...phraseNames(cell)];
     if (!tokens.length) continue;
