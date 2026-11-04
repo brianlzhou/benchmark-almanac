@@ -32,6 +32,8 @@ export interface ModelFind {
   created?: string;
   /** Billions of parameters, from Hugging Face's safetensors count. */
   params?: number;
+  /** Hugging Face likes, a sign that people use the model. */
+  likes?: number;
   weights?: 'open';
   license?: string;
   sources: ModelSource[];
@@ -62,6 +64,8 @@ export const modelKey = (name: string) => key(name.replace(/^[\w.-]+\//, ''));
 // repackaged copies: quantized files, merges, uncensored edits, adapters, and app bundles
 const REPACK = /(GGUF|AWQ|GPTQ|EXL[23]|NVFP4|MXFP\d|FP8|FP4|INT[48]|W4A16|W8A8|BF16|bnb|MLX|ONNX|abliterat|obliterat|uncensor|heretic|LoRA|comfy|quantized|[-_]merge[sd]?\b|eagle|draft|DFlash|speculat|-Base$|-base$|-Base-)/i;
 export const isRepack = (repo: string) => REPACK.test(repo.split('/').pop() ?? repo);
+// research artifacts that labs publish beside their models: training checkpoints, stages, exports and robot task fine-tunes
+const ARTIFACT = /checkpoint|[-_]stage\d|[-_]export|supplemental|[-_]s\d+$|LIBERO|RoboCasa|RoboTwin|LeRobot|ablation/i;
 
 /** Another account's model a repo builds on, from Hugging Face's base_model tags. A lab's own base does not count. */
 export function derivedFrom(tags: string[] | undefined, author: string): string | undefined {
@@ -183,7 +187,7 @@ const EXPAND = ['createdAt', 'pipeline_tag', 'tags', 'safetensors', 'cardData', 
 /** A Hugging Face repo as a find, or nothing when it is a copy, another account's fine-tune or an untracked task. */
 function hfFind(m: HfModel): Found | undefined {
   const [author, repo] = m.id.split('/');
-  if (!repo || isRepack(m.id) || derivedFrom(m.tags, author) || otherFamily(repo, author) || UNTRACKED.has(m.pipeline_tag ?? '')) return undefined;
+  if (!repo || isRepack(m.id) || ARTIFACT.test(repo) || derivedFrom(m.tags, author) || otherFamily(repo, author) || UNTRACKED.has(m.pipeline_tag ?? '')) return undefined;
   const total = m.safetensors?.total;
   const license = m.cardData?.license_name ?? m.cardData?.license;
   return {
@@ -192,12 +196,16 @@ function hfFind(m: HfModel): Found | undefined {
     org: author,
     created: m.createdAt?.slice(0, 10),
     params: total ? Math.round(total / 1e8) / 10 : undefined,
+    likes: m.likes,
     weights: 'open',
     license: typeof license === 'string' ? license : undefined,
   };
 }
 
-/** New repos from the Hugging Face accounts of the labs we catalog. */
+/**
+ * New repos from the Hugging Face accounts of the labs we catalog, once 25 people have liked one. Big labs also
+ * publish many research artifacts, and likes tell a release from those within a day or two.
+ */
 export async function hfLabs(x: ModelReader) {
   for (const org of x.hfAccounts) {
     const list = await x.r.json<HfModel[]>(`https://huggingface.co/api/models?author=${encodeURIComponent(org)}&sort=createdAt&direction=-1&limit=20&${EXPAND}`).catch((e: Error) => {
@@ -207,6 +215,7 @@ export async function hfLabs(x: ModelReader) {
     x.r.read();
     for (const m of list) {
       if ((m.createdAt ?? '').slice(0, 10) < x.from) break;
+      if ((m.likes ?? 0) < 25) continue;
       const f = hfFind(m);
       if (f) x.add(f, { source: `Hugging Face (${org})`, kind: 'hf-lab', url: f.url });
     }
@@ -319,17 +328,19 @@ export function boardNames(x: ModelReader, others: [string, string, ...unknown[]
 }
 
 // ---- score -------------------------------------------------------------------------------------------
-const WEIGHT: Record<Kind, number> = { 'hf-lab': 4, 'hf-trending': 2, ainews: 3, bluesky: 3, boards: 3 };
+const WEIGHT: Record<Kind, number> = { 'hf-lab': 3, 'hf-trending': 2, ainews: 3, bluesky: 3, boards: 3 };
 
 /**
- * Evidence that a find is a new model worth cataloging. A release from a lab's own account scores 4, a news or
- * maker's post 3, two boards 3, a trending repo 2. A known lab, a second kind of source and a size of 7B or more add more.
+ * Evidence that a find is a new model worth cataloging. A release from a lab's own account, a news item, a maker's
+ * post and two boards score 3 each, and a trending repo 2. A known lab, a second kind of source and 500 likes add 2
+ * each, and a size of 7B or more adds 1.
  */
 export function modelScore(f: ModelFind): number {
   const kinds = new Set(f.sources.map((s) => s.kind));
   let s = [...kinds].reduce((n, k) => n + WEIGHT[k], 0);
   if (f.lab) s += 2;
   if (kinds.size >= 2) s += 2;
+  if ((f.likes ?? 0) >= 500) s += 2;
   if ((f.params ?? 0) >= 7) s += 1;
   return s;
 }

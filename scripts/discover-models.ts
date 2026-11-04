@@ -69,7 +69,8 @@ function add(f: Found, s: ModelSource) {
   cur.last = TODAY;
   // a Hugging Face repo is the model's own page, so it wins over a news or post link
   if (s.kind.startsWith('hf') && !cur.url.includes('huggingface.co')) cur.url = f.url;
-  for (const field of ['org', 'created', 'params', 'weights', 'license'] as const) if (f[field] !== undefined && cur[field] === undefined) (cur as Record<string, unknown>)[field] = f[field];
+  for (const field of ['org', 'created', 'params', 'weights', 'license'] as const) if (f[field] !== undefined && cur[field] === undefined) (cur as unknown as Record<string, unknown>)[field] = f[field];
+  if (f.likes !== undefined) cur.likes = Math.max(cur.likes ?? 0, f.likes);
   cur.lab ??= labOf(f.org);
   const same = cur.sources.find((x) => x.kind === s.kind);
   if (same) Object.assign(same, s);
