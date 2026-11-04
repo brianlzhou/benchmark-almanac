@@ -7,7 +7,7 @@ import CardTicks from '../../components/CardTicks.astro';
 import ReignChart from '../../components/ReignChart.astro';
 import { reignRow } from '../../lib/reigns.ts';
 import { leaderRows } from '../../lib/leaders.ts';
-import { effortView, usd, costUnit } from '../../lib/effort.ts';
+import { effortView, usd } from '../../lib/effort.ts';
 import EffortChart from '../../components/EffortChart.astro';
 import { untested } from '../../lib/coverage.ts';
 import { host, unreadWhy } from '../../lib/unread.ts';
@@ -15,7 +15,6 @@ import ModelName from '../../components/ModelName.astro';
 import LabMark from '../../components/LabMark.astro';
 import AuthorsWords from '../../components/AuthorsWords.astro';
 import KnownIssues from '../../components/KnownIssues.astro';
-import BoardChart from '../../components/BoardChart.astro';
 import { issuesByBenchmark, unresolved } from '../../lib/audits.ts';
 import Crumbs from '../../components/Crumbs.astro';
 import AreaMark from '../../components/AreaMark.astro';
@@ -23,7 +22,7 @@ import Spark from '../../components/Spark.astro';
 import LinkIcon from '../../components/LinkIcon.astro';
 import { makerParts } from '../../lib/makers.ts';
 import { familyOf } from '../../lib/reigns.ts';
-import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores } from '../../lib/data.ts';
+import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder } from '../../lib/data.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
@@ -38,22 +37,6 @@ const { id } = Astro.params;
 const s = benchSummary(id!);
 const b = s.b;
 const issues = issuesByBenchmark.get(b.id) ?? [];
-// a chart the official leaderboard draws from more than its headline score (scripts/leaderboards/types.ts)
-const boardChart = LEADERBOARDS[b.id]?.chart;
-const boardChartRuns = boardChart
-  ? [...leaderboardScores, ...unlistedScores]
-      .filter((r) => r.benchmark === b.id)
-      .map((r) => {
-        const at = (k: string) => (k === 'score' ? r.value : k === 'cost' ? (r.cost ?? undefined) : k === 'tokens' ? (r.tokens ?? undefined) : r.metrics?.[k]);
-        return { r, x: at(boardChart.x.key), y: at(boardChart.y.key) };
-      })
-      .filter((p): p is { r: (typeof p)['r']; x: number; y: number } => p.x !== undefined && p.y !== undefined && Number.isFinite(p.x) && Number.isFinite(p.y))
-      .sort((p, q) => (boardChart.y.better === 'lower' ? p.y - q.y : q.y - p.y) || p.x - q.x)
-  : [];
-const chartNum = (v: number, unit?: string) => {
-  const n = Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : String(Math.round(v * 100) / 100);
-  return unit === '%' ? `${Math.round(v * 10) / 10}%` : unit === '$' || unit === 'usd' ? `$${n}` : unit ? `${n} ${unit}` : n;
-};
 const openIssues = unresolved(issues).length;
 const unit = b.unit ?? '%';
 const area = AREA_BY_ID.get(s.area)!;
@@ -199,7 +182,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 <dd>
                   {/* separator and name on one line: a line break between them renders as a space before the comma */}
                   {makerParts(b.org).map((p) => (
-                    <>{p.sep}{p.lab && labPages.has(p.lab) ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}</>
+                    <>{p.sep}{p.lab ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`/benchmarks/?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`Benchmarks made by ${p.text}`}>{p.text}</a>}</>
                   ))}
                 </dd>
               </div>
@@ -435,46 +418,6 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
     }
 
     {
-      boardChart && boardChartRuns.length >= 4 && (
-        <section class="views">
-          <div class="sh-row">
-            <div class="sh">
-              <h2>{boardChart.title}</h2>
-              <p>
-                {boardChart.note && `${boardChart.note} `}
-                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a>.
-              </p>
-            </div>
-            <div class="seg" role="radiogroup" aria-label="View">
-              <label><input type="radio" name="v-board" value="graph" checked />Chart</label>
-              <label><input type="radio" name="v-board" value="table" />Table</label>
-            </div>
-          </div>
-          <div class="view-graph">
-            <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} />
-          </div>
-          <div class="view-table table-wrap">
-            <table class="t" data-sort>
-              <thead>
-                <tr><th>Model</th><th>Setting</th><th class="r">{boardChart.y.label}</th><th class="r">{boardChart.x.label}</th></tr>
-              </thead>
-              <tbody>
-                {boardChartRuns.map(({ r, x, y }) => (
-                  <tr>
-                    <td>{r.model ? <ModelName id={r.model} /> : <span class="muted">{r.name}</span>}</td>
-                    <td class="muted">{[r.setting, r.harness].filter(Boolean).join(', ')}</td>
-                    <td class="r" data-v={String(y)}>{chartNum(y, boardChart.y.unit)}</td>
-                    <td class="r muted" data-v={String(x)}>{chartNum(x, boardChart.x.unit)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )
-    }
-
-    {
       effort && (
         <section class="views">
           <div class="sh-row">
@@ -482,8 +425,8 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               <h2>
                 {effort.mode === 'cost' && effort.top
                   ? effort.top.value >= Math.max(...effortRuns.map((r) => r.value))
-                    ? `The best score, ${fmt(effort.top.value, unit)}, costs ${usd(effort.top.cost!)} ${costUnit(effort.costPer)}`
-                    : `Of runs with a cost, the best scores ${fmt(effort.top.value, unit)} for ${usd(effort.top.cost!)} ${costUnit(effort.costPer)}`
+                    ? `The best score, ${fmt(effort.top.value, unit)}, costs ${usd(effort.top.cost!)} a task`
+                    : `Of runs with a cost, the best scores ${fmt(effort.top.value, unit)} for ${usd(effort.top.cost!)} a task`
                   : effort.gain !== undefined && effort.gain >= 1
                     ? `More effort adds a median ${Math.round(effort.gain)} ${unit === '%' ? 'points' : unit}`
                     : 'Scores at each effort level'}
@@ -492,7 +435,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 {effort.mode === 'cost' ? (
                   <>
                     Runs on the cost frontier score higher than any run that's cheaper.
-                    {effort.cheap && effort.top && ` ${runLabel(effort.cheap)} comes within ${(effort.top.value - effort.cheap.value).toFixed(1).replace(/\.0$/, '')}${unit === '%' ? ' points' : ''} of the best for ${usd(effort.cheap.cost!)} ${costUnit(effort.costPer)}, ${costRatio(effort.top.cost! / effort.cheap.cost!)}.`}
+                    {effort.cheap && effort.top && ` ${runLabel(effort.cheap)} comes within ${(effort.top.value - effort.cheap.value).toFixed(1).replace(/\.0$/, '')}${unit === '%' ? ' points' : ''} of the best for ${usd(effort.cheap.cost!)} a task, ${costRatio(effort.top.cost! / effort.cheap.cost!)}.`}
                     {' '}The costs are the leaderboard's own estimates, so compare them only within this benchmark.
                   </>
                 ) : (
@@ -506,12 +449,12 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
             </div>
           </div>
           <div class="view-graph">
-            <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? (effort.costPer === 'run' ? ' and cost of the full run' : ' and cost per task') : ''}`} />
+            <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? ' and cost per task' : ''}`} />
           </div>
           <div class="view-table table-wrap">
             <table class="t" data-sort>
               <thead>
-                <tr><th>Model</th><th>Effort</th><th>Harness</th><th class="r">Score</th><th class="r">{effort.costPer === 'run' ? 'Cost of the full run' : 'Cost per task'}</th><th class="r">Output tokens</th></tr>
+                <tr><th>Model</th><th>Effort</th><th>Harness</th><th class="r">Score</th><th class="r">Cost per task</th><th class="r">Output tokens</th></tr>
               </thead>
               <tbody>
                 {effortRuns.map((r) => (
