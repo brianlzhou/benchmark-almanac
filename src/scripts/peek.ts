@@ -25,6 +25,8 @@ interface Peek {
   top: [string, string, Mark, string, number][];
   from: string;
   c?: [number, number, 0 | 1, string?][];
+  /** 1 when the board prices whole runs, not tasks. */
+  cr?: 1;
   last: string;
 }
 
@@ -133,7 +135,7 @@ function render(d: Peek) {
   let body = '';
   if (d.p.length) {
     body += `<div class="pk-charts${two ? ' two' : ''}"><figure><figcaption>Best score over time</figcaption>${timeChart(d, cw, 118)}</figure>`;
-    if (two) body += `<figure><figcaption>Score against cost per task</figcaption>${costChart(d, cw, 118)}</figure>`;
+    if (two) body += `<figure><figcaption>Score against cost ${d.cr ? 'of the full run' : 'per task'}</figcaption>${costChart(d, cw, 118)}</figure>`;
     body += '</div>';
   } else body += '<p class="pk-none">No dated scores here yet.</p>';
   if (d.top.length) {

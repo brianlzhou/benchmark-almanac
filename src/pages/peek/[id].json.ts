@@ -1,7 +1,7 @@
 // What the hover card on the Benchmarks and Arenas tables shows for one benchmark (src/scripts/peek.ts): its
 // scores over time with the best-so-far line, the top five, and score against cost when the board prices runs.
 // One small file per benchmark, fetched when the pointer rests on its row, so the tables carry none of it.
-import { benchmarks, benchSummary, modelById, AS_OF } from '../../lib/data.ts';
+import { benchmarks, benchSummary, modelById, AS_OF, LEADERBOARDS } from '../../lib/data.ts';
 import { COLOR_MARKS, MONO_MARKS } from '../../lib/marks.ts';
 import { LEVEL_BY_ID } from '../../lib/taxonomy.ts';
 import { score as fmt, monthYear } from '../../lib/format.ts';
@@ -75,6 +75,8 @@ export function GET({ params }: { params: { id: string } }) {
     }),
     from: s.boardSource ? FROM[s.boardSource] : '',
     c: cost,
+    // what a cost covers: one task, or the full run of the test set (ARC-AGI-3)
+    cr: LEADERBOARDS[s.b.id]?.costPer === 'run' ? 1 : undefined,
     last: s.lastAdded ? monthYear(s.lastAdded.date) : '',
   };
   return new Response(JSON.stringify(body), { headers: { 'content-type': 'application/json' } });
