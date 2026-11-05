@@ -10,9 +10,10 @@
 // or service.
 import { key } from '../util.ts';
 import { names, type Reader } from './core.ts';
-import { stripTags } from './text.ts';
+import { stripTags, parseFeed } from './text.ts';
+import { BLOGS } from './labs.ts';
 
-export type Kind = 'hf-lab' | 'hf-trending' | 'ainews' | 'bluesky' | 'boards';
+export type Kind = 'hf-lab' | 'hf-trending' | 'ainews' | 'bluesky' | 'boards' | 'lab-post';
 export interface ModelSource {
   source: string;
   kind: Kind;
@@ -300,6 +301,94 @@ export async function blueskyModels(x: ModelReader) {
   }
 }
 
+// ---- labs' own sites -----------------------------------------------------------------------------------
+/**
+ * Labs that launch models on their own sites before Hugging Face, AINews or Bluesky carry them: Thinking Machines'
+ * Inkling 2 Small, Cognition's SWE-2 Flash and Ricursive's Ripple-65B Preview all did in one week of November 2026.
+ * Each list is a feed, a sitemap or a news index page. Every site's robots.txt allows these paths. Thinking
+ * Machines' terms allow automated reading at a human pace, Cognition's say nothing on it, Ricursive publishes none,
+ * and Reflection signals use=reference. Google, Google DeepMind, Mistral and Ai2 come from the benchmark scan's
+ * feed list (labs.ts).
+ */
+interface LabSite {
+  lab: string;
+  list: string;
+  kind: 'feed' | 'sitemap' | 'index';
+  /** Which URLs in a sitemap or index are posts. */
+  path?: RegExp;
+}
+export const LAB_SITES: LabSite[] = [
+  { lab: 'Thinking Machines', list: 'https://thinkingmachines.ai/news/', kind: 'index', path: /^\/news\/[\w-]+\/$/ },
+  { lab: 'Thinking Machines', list: 'https://thinkingmachines.ai/index.xml', kind: 'feed' },
+  { lab: 'Cognition', list: 'https://cognition.com/sitemap.xml', kind: 'sitemap', path: /\/blog\/[\w-]+$/ },
+  { lab: 'Ricursive Intelligence', list: 'https://www.ricursive.com/sitemap.xml', kind: 'sitemap', path: /ricursive\.com\/(?!careers\b)[\w-]+(?:\/[\w-]+)?$/ },
+  { lab: 'Reflection', list: 'https://reflection.ai/sitemap.xml', kind: 'sitemap', path: /\/(?:blog|newsroom)\/[\w-]+$/ },
+  ...BLOGS.map((b) => ({ lab: b.lab, list: b.feed, kind: 'feed' as const })),
+];
+
+interface LabPost {
+  url: string;
+  title?: string;
+  date?: string;
+}
+/** The posts a list names, with a title and a date when it gives them. */
+export function postsOf(site: LabSite, text: string): LabPost[] {
+  if (site.kind === 'feed') return parseFeed(text).map((p) => ({ url: p.link, title: p.title, date: p.date }));
+  if (site.kind === 'sitemap')
+    return [...text.matchAll(/<url>([\s\S]*?)<\/url>/g)]
+      .map((m) => ({ url: m[1].match(/<loc>\s*([^<\s]+)\s*<\/loc>/)?.[1] ?? '', date: m[1].match(/<lastmod>(\d{4}-\d\d-\d\d)/)?.[1] }))
+      .filter((p) => p.url && (!site.path || site.path.test(p.url)));
+  const base = new URL(site.list);
+  return [...text.matchAll(/<a\b[^>]*href="([^"#?]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+    .filter((m) => !site.path || site.path.test(m[1]))
+    .map((m) => ({
+      url: new URL(m[1], base).href,
+      title: stripTags(m[2].match(/<h[1-4]\b[^>]*>([\s\S]*?)<\/h[1-4]>/i)?.[1] ?? m[2]).trim() || undefined,
+      date: m[2].match(/<time\b[^>]*datetime="(\d{4}-\d\d-\d\d)/)?.[1],
+    }));
+}
+
+const LAUNCH_TITLE = /^(?:introducing|announcing|meet|releasing|launching|presenting)\s+(?:the\s+|our\s+)?(.+)$/i;
+/**
+ * The model a launch post names: "Introducing Inkling 2 Small", "Inkling: Our Open-Weights Model", or failing that
+ * the first model its opening paragraphs say they release. The page must talk about a model, and the name must
+ * carry a version or size unless the title itself says model.
+ */
+export function launchedModel(title: string, lead: string): string | undefined {
+  if (!MODEL_WORD.test(lead)) return undefined;
+  const t = title.replace(/\s*[|–—]\s*[^|–—]*$/, '').trim();
+  const intro = t.match(LAUNCH_TITLE)?.[1];
+  const colon = t.match(/^([^:]{2,40}):\s*(.+)$/);
+  let name = intro?.replace(/[:,]\s.*$/, '').trim() ?? (colon && MODEL_WORD.test(colon[2]) ? colon[1].trim() : undefined);
+  if (name && !/\d/.test(name) && !MODEL_WORD.test(t)) name = undefined;
+  if (name && (name.length > 40 || NOT_NAME.test(name) || LABEL.test(name) || names(name).length)) name = undefined;
+  return name ?? (VERB.test(t) || intro ? modelMentions(lead.slice(0, 2000))[0]?.name : undefined);
+}
+
+/** New launch posts on labs' own sites. A post counts once its URL is new since the last run. */
+export async function labSites(x: ModelReader) {
+  for (const site of LAB_SITES) {
+    const text = await x.r.text(site.list).catch((e: Error) => (x.r.note(`${site.lab}: ${e.message}`), ''));
+    if (!text) continue;
+    const posts = postsOf(site, text);
+    x.r.read(posts.length);
+    const k = `site:${site.list}`;
+    const prev = x.seen[k] ? new Set(x.seen[k]) : null;
+    // the first run takes posts dated inside the window; an undated list starts as a baseline
+    const fresh = posts.filter((p) => (prev ? !prev.has(p.url) : !!p.date && p.date >= x.from)).slice(0, 6);
+    for (const p of fresh) {
+      await new Promise((r) => setTimeout(r, 1000));
+      const html = await x.r.text(p.url).catch(() => '');
+      if (!html) continue;
+      const title = stripTags(html.match(/<meta\s+property="og:title"\s+content="([^"]+)"/i)?.[1] ?? html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? p.title ?? '');
+      const main = html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] ?? html.match(/<article\b[\s\S]*?<\/article>/i)?.[0] ?? html;
+      const name = launchedModel(title || p.title || '', stripTags(main).slice(0, 4000));
+      if (name) x.add({ name, url: p.url, org: site.lab, created: p.date }, { source: `${site.lab} site`, kind: 'lab-post', url: p.url });
+    }
+    x.seen[k] = posts.map((p) => p.url);
+  }
+}
+
 // ---- leaderboards ------------------------------------------------------------------------------------
 /**
  * Board names with no model record (leaderboards.json `others`). A name new since the last run that two or more
@@ -328,7 +417,8 @@ export function boardNames(x: ModelReader, others: [string, string, ...unknown[]
 }
 
 // ---- score -------------------------------------------------------------------------------------------
-const WEIGHT: Record<Kind, number> = { 'hf-lab': 3, 'hf-trending': 2, ainews: 3, bluesky: 3, boards: 3 };
+// a lab's own launch post is the strongest single sign: with the lab known it reaches the top list on its own
+const WEIGHT: Record<Kind, number> = { 'hf-lab': 3, 'hf-trending': 2, ainews: 3, bluesky: 3, boards: 3, 'lab-post': 5 };
 
 /**
  * Evidence that a find is a new model worth cataloging. A release from a lab's own account, a news item, a maker's

@@ -14,7 +14,7 @@ import { readJson, writeJson, dataPath, daysAgo } from './lib/util.ts';
 import { FROM, TODAY, makeReader } from './lib/discover/core.ts';
 import { HF_ORGS } from './lib/discover/labs.ts';
 import { makeResolver } from './lib/models.ts';
-import { hfLabs, hfTrending, ainewsModels, blueskyModels, boardNames, modelKey, modelScore, type ModelFind, type ModelReader, type Found, type ModelSource } from './lib/discover/models.ts';
+import { hfLabs, hfTrending, ainewsModels, blueskyModels, labSites, boardNames, modelKey, modelScore, type ModelFind, type ModelReader, type Found, type ModelSource } from './lib/discover/models.ts';
 
 interface Store {
   updated: string | null;
@@ -40,7 +40,8 @@ const SIZE = /[-_ ]\d+(?:\.\d+)?[BMT][-_ ]A\d+(?:\.\d+)?B(?=$|[-_ ])/gi;
 const TAG = /[-_ ](?:Instruct|Chat|it|hf|HF)$/;
 const known = (name: string) => {
   const bare = name.replace(TAG, '');
-  return [name, bare, bare.replace(SIZE, ''), name.replace(/[-_]/g, ' ')].some((n) => n && resolve(n));
+  // a launch post often names a first version without its number: "Introducing Beam" is Beam 1.0
+  return [name, bare, bare.replace(SIZE, ''), name.replace(/[-_]/g, ' '), `${bare} 1.0`].some((n) => n && resolve(n));
 };
 const labs = readJson<{ id: string; name: string; aliases?: string[] }[]>(dataPath('labs.json'));
 const labByName = new Map(labs.flatMap((l) => [l.name, l.id, ...(l.aliases ?? [])].map((n) => [modelKey(n), l.id] as const)));
@@ -82,6 +83,7 @@ function add(f: Found, s: ModelSource) {
 const READERS: Record<string, { run: (x: ModelReader) => Promise<void> | void; seconds: number }> = {
   'hf-labs': { run: hfLabs, seconds: 120 },
   'hf-trending': { run: hfTrending, seconds: 60 },
+  'lab-sites': { run: labSites, seconds: 150 },
   ainews: { run: ainewsModels, seconds: 60 },
   bluesky: { run: blueskyModels, seconds: 90 },
   // last, so a name a board lists can add evidence to a find from the other readers

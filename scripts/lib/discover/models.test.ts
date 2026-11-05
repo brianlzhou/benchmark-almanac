@@ -1,7 +1,26 @@
 // Tests for the model discovery helpers: run with `npm test`.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { modelMentions, modelNames, isRepack, derivedFrom, otherFamily, modelKey, modelScore, type ModelFind } from './models.ts';
+import { modelMentions, modelNames, isRepack, derivedFrom, otherFamily, modelKey, modelScore, launchedModel, postsOf, type ModelFind } from './models.ts';
+
+test("a lab's launch post names its model", () => {
+  const lead = 'Today we are introducing our second model generation with Inkling 2 Small. It is a Mixture-of-Experts model with 594B total parameters.';
+  assert.equal(launchedModel('Introducing Inkling 2 Small', lead), 'Inkling 2 Small');
+  assert.equal(launchedModel('Inkling: Our Open-Weights Model', 'Inkling is our first open-weights model.'), 'Inkling');
+  assert.equal(launchedModel('Introducing SWE-2 Flash | Cognition', 'SWE-2 Flash is a coding model.'), 'SWE-2 Flash');
+  // a product or a research post is not a model launch
+  assert.equal(launchedModel('One Year of Tinker: Turning Your Expertise into Custom Models', 'Tinker turned one this month.'), undefined);
+  assert.equal(launchedModel('Announcing Safety Research Grants', 'We fund research on model safety.'), undefined);
+});
+
+test('a news index page gives each post with its title and date', () => {
+  const html =
+    '<ol><li><a class="post-item-link" href="/news/inkling-2-small/"><div><h2 class="post-title">Introducing Inkling 2 Small</h2></div><time datetime="2026-11-05">Nov 5, 2026</time></a></li>' +
+    '<li><a href="/join/">Join us</a></li></ol>';
+  assert.deepEqual(postsOf({ lab: 'Thinking Machines', list: 'https://thinkingmachines.ai/news/', kind: 'index', path: /^\/news\/[\w-]+\/$/ }, html), [
+    { url: 'https://thinkingmachines.ai/news/inkling-2-small/', title: 'Introducing Inkling 2 Small', date: '2026-11-05' },
+  ]);
+});
 
 test('a launch sentence gives the model name and its maker', () => {
   assert.deepEqual(modelMentions('Google DeepMind introduced Genie 4, its most realistic world model yet.'), [{ name: 'Genie 4', org: 'Google DeepMind' }]);
