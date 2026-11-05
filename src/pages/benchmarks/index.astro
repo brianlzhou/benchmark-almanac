@@ -8,6 +8,9 @@ import { allSummaries, benchmarks, modelById, monthsBetween, AS_OF, addedWindows
 import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf, levelIndex } from '../../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../../lib/format.ts';
 import { familyOf, nextVersion } from '../../lib/reigns.ts';
+import { issuesByBenchmark, unresolved, PROBLEMS } from '../../lib/audits.ts';
+import reviewedJson from '../../../data/reviewed.json';
+import { familySize } from '../../lib/counts.ts';
 
 // where the newest score came from, for the Last added column's tooltip
 const ADDED_FROM: Record<string, string> = { leaderboard: 'its leaderboard', epoch: 'Epoch AI', card: 'a model card' };
@@ -31,7 +34,8 @@ const newest = (id: string) => familyOf(id).at(-1);
 const rows = all
   .filter((s) => !s.b.family || newest(s.b.id) === s.b.id)
   .sort((a, b) => b.cites.length - a.cites.length || b.docCites.length - a.docCites.length || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
-const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
+// a row stands for its whole family, and every version counts (src/lib/counts.ts)
+const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).reduce((n, s) => n + familySize(s.b), 0);
 const methodCount = (g: string) => inRows((s) => METHOD_GROUP[s.b.scoring ?? ''] === g);
 const areaCounts = AREAS.map((a) => ({
   a,
@@ -83,6 +87,9 @@ const probe = {
   added: longest(everyRow.map((s) => monthYear(s.lastAdded?.date))),
 };
 const maxArea = Math.max(...areaCounts.map((x) => x.n));
+// the newest addition to the catalog, as "November 4th"
+const lastAddedDate = (reviewedJson as { added: { date: string }[] }).added.reduce((m, a) => (a.date > m ? a.date : m), '');
+const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '') : '';
 ---
 
 <Base title="Benchmarks" description="Every benchmark we catalog, with what it tests, who made it, whether labs report it, and its best score.">
@@ -90,13 +97,13 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
     <header class="head">
       <h1>Benchmarks</h1>
       <p class="lede">
-        We track {rows.length.toLocaleString('en-US')} benchmarks, or {benchmarks.length.toLocaleString('en-US')} if you count each version. Open one to see its leaderboard, score history and the model cards that report it. Arenas, where people vote between answers, also have <a href="/arenas/">their own page</a>.
+        We track {benchmarks.length.toLocaleString('en-US')} benchmarks{lastAdded && `, with the last one added on ${lastAdded}`}. Arenas, where models are scored with Elo rankings or by human voting, can be found <a href="/arenas/">here</a>. Have a benchmark that you want us to track? Let us know <a href="/submit/">here</a>.
       </p>
       <div class="facts">
-        <span><b>{inRows((s) => s.status === 'in use')}</b> in use</span>
-        <span><b>{inRows((s) => s.status === 'fading')}</b> fading</span>
-        <span><b>{inRows((s) => s.status === 'dropped')}</b> dropped</span>
-        <span><b>{inRows((s) => !!s.b.links?.repo).toLocaleString('en-US')}</b> with public code</span>
+        <button type="button" class="fact" data-fact="status=in-use" aria-pressed="false"><b>{inRows((s) => s.status === 'in use')}</b> in use</button>
+        <button type="button" class="fact" data-fact="status=fading" aria-pressed="false"><b>{inRows((s) => s.status === 'fading')}</b> fading</button>
+        <button type="button" class="fact" data-fact="status=dropped" aria-pressed="false"><b>{inRows((s) => s.status === 'dropped')}</b> dropped</button>
+        <button type="button" class="fact" data-fact="code=yes" aria-pressed="false"><b>{inRows((s) => !!s.b.links?.repo).toLocaleString('en-US')}</b> with public code</button>
         <span>Scores refreshed <b>{humanDate(AS_OF)}</b></span>
       </div>
     </header>
@@ -151,7 +158,7 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
           <Dropdown filterKey="added" label="Last added" options={addedOptions(rows)} />
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
         </div>
-        <span class="count muted" data-count title={`${benchmarks.length.toLocaleString('en-US')} counting each version`}>{rows.length.toLocaleString('en-US')} benchmarks</span>
+        <span class="count muted" data-count>{benchmarks.length.toLocaleString('en-US')} benchmarks</span>
       </div>
 
     <div class="table-wrap wide">
@@ -201,6 +208,7 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
                     class:list={{ fam: !!group }}
                     data-later={i >= 150 ? '' : undefined}
                     data-group={group}
+                    data-n={familySize(s.b) > 1 ? familySize(s.b) : undefined}
                     data-area={`a:${areaOf(s.b.category)} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
                     data-level={s.b.level ?? ''}
                     data-method={METHOD_GROUP[s.b.scoring ?? ''] ?? ''}
@@ -212,6 +220,22 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
                     <td class="nm">
                       <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
                       {group && s.b.version && !s.b.name.includes(s.b.version) && <span class="vtag">{vlabel(s.b.version)}</span>}
+                      {issuesByBenchmark.has(s.b.id) && (() => {
+                        const iss = issuesByBenchmark.get(s.b.id)!;
+                        const open = unresolved(iss).length;
+                        const kinds = [...new Set(iss.flatMap((i) => i.finding.problems))].map((p) => PROBLEMS[p].name.toLowerCase());
+                        return (
+                          <a
+                            class:list={['ki-mark', 'hint', { fixed: open === 0 }]}
+                            href={`/benchmarks/${s.b.id}/#issues`}
+                            aria-label={`${iss.length} known ${iss.length === 1 ? 'issue' : 'issues'}`}
+                            data-tn={iss.length === 1 ? 'A known issue' : `${iss.length} known issues`}
+                            data-ts={`${iss.length === 1 ? 'An audit' : 'Audits'} found: ${kinds.join(', ')}. ${open === 0 ? 'Fixed since then.' : 'Not fixed in the benchmark itself.'}`}
+                          >
+                            <svg width="12" height="12" viewBox="0 0 13 13" aria-hidden="true"><path d="M6.5 1.5l5.2 9.5H1.3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /><path d="M6.5 5.2v2.6M6.5 9.4v.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
+                          </a>
+                        );
+                      })()}
                       {s.b.description && <span class="desc">{s.b.description}</span>}
                       {group && (
                         <button type="button" class="vt" data-toggle={group} aria-expanded="false" aria-controls={prev.map((p) => `v-${p.b.id}`).join(' ')}>
@@ -295,7 +319,9 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
 <script>
   import { wireFilter } from '../../scripts/filter.ts';
   import { wirePeek } from '../../scripts/peek.ts';
+  import { wireFacts } from '../../scripts/facts.ts';
   wireFilter('benchmarks');
+  wireFacts(document.querySelector<HTMLElement>('[data-filter="benchmarks"]'));
   const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
   if (peekTable) wirePeek(peekTable);
   // the area index sets the Area filter, marks the chosen area, and shows that area's categories
@@ -736,5 +762,14 @@ const maxArea = Math.max(...areaCounts.map((x) => x.n));
     .bx .best-c {
       min-width: 140px;
     }
+  }
+  .ki-mark {
+    display: inline-flex;
+    margin-left: 7px;
+    vertical-align: -1px;
+    color: var(--status-warn);
+  }
+  .ki-mark.fixed {
+    color: var(--ink-4);
   }
 </style>

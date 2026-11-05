@@ -53,8 +53,7 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
                 <a href={audit.url}>{audit.title}</a>
               </h3>
               <p class="al-by">
-                {`${audit.author}, ${audit.source === 'paper' ? 'a paper' : 'a write-up'}`}
-                {audit.people && audit.people.length <= 3 && !audit.author.includes('et al.') && <span class="muted">{`, by ${audit.people.join(', ')}`}</span>}
+                {`${audit.author}, ${audit.source === 'paper' ? 'a paper' : 'a write-up'}`}{audit.people && audit.people.length <= 3 && !audit.author.includes('et al.') && <span class="muted">{`, by ${audit.people.join(', ')}`}</span>}
               </p>
               <ul class="al-f">
                 {audit.findings.map((f) => {

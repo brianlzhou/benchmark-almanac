@@ -3,6 +3,7 @@
 import { key } from '../util.ts';
 import { BARE, FROM, names, phraseNames, knownId, launchNames, arxivId, githubRepo, type Reader } from './core.ts';
 import { parseFeed, benchmarkMentions, stripTags } from './text.ts';
+import { noteAudit } from './audits.ts';
 
 /**
  * The benchmark a bold AINews lead names: the whole lead when it holds a benchmark-style name ("SWE-bench
@@ -29,6 +30,13 @@ export async function ainews(r: Reader) {
       const body = li[1];
       // a launch bullet opens with the bold name: "<b>BallotBench</b>: Nine agents..." or "<b>HackBench (Meta).</b> ..."
       const lead = body.match(/^\s*(?:<p>)?\s*<(strong|b)>([^<]{3,60})<\/\1>/);
+      // any bullet can report an audit of a cataloged benchmark ("Benchmark audits: Prime Intellect found ...")
+      {
+        const text = stripTags(body);
+        const first = text.replace(/^[^:]{0,60}:\s*/, '').split(/(?<=[.!?])\s/)[0].slice(0, 160);
+        const src = (body.match(/href="(https?:\/\/[^"]+)"/) ?? [])[1]?.replace(/[?&]utm_[^"]*$/, '').replace(/&amp;/g, '&');
+        noteAudit({ key: src && !/x\.com|twitter\.com/.test(src) ? src : `${link}#${key(first)}`, title: lead ? `${lead[2].replace(/[.:\s]+$/, '')}: ${first}` : first, text, url: src && !/x\.com|twitter\.com/.test(src) ? src : link, source: 'AINews', date });
+      }
       if (!lead) continue;
       const bold = lead[2].replace(/\s*\([^)]*\)\s*/g, ' ').replace(/[.:\s]+$/, '').trim();
       const plain = body.replace(/<[^>]+>/g, ' ');
@@ -96,3 +104,19 @@ export const semianalysis = (r: Reader) =>
   newsletter(r, { source: 'SemiAnalysis', feed: 'https://newsletter.semianalysis.com/feed', own: /semianalysis\.com/, launches: 'SemiAnalysis', mentions: false });
 
 export const interconnects = (r: Reader) => newsletter(r, { source: 'Interconnects', feed: 'https://www.interconnects.ai/feed', own: /interconnects\.ai/ });
+
+// Prime Intellect publishes audits of public evaluations on its blog (AutomationBench, OfficeQA Pro v2 and
+// HLE-Diamond on 2026-11-03). The blog has no feed, so its sitemap, which robots.txt allows and which dates each
+// post, gives the new posts. Its terms have no clause about automated reading. Posts go only to the audit queue.
+export async function primeBlog(r: Reader) {
+  const xml = await r.text('https://www.primeintellect.ai/sitemap.xml');
+  const posts = [...xml.matchAll(/<url>\s*<loc>(https:\/\/www\.primeintellect\.ai\/blog\/[^<]+)<\/loc>\s*<lastmod>(\d{4}-\d\d-\d\d)/g)].map((m) => ({ url: m[1], date: m[2] })).filter((p) => p.date >= FROM);
+  for (const p of posts.slice(0, 10)) {
+    const html = await r.text(p.url).catch(() => '');
+    if (!html) continue;
+    r.read();
+    const title = stripTags((html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i) ?? html.match(/<title>([\s\S]*?)<\/title>/i) ?? [])[1] ?? p.url);
+    const main = html.match(/<main\b[\s\S]*?<\/main>/i)?.[0] ?? html.match(/<article\b[\s\S]*?<\/article>/i)?.[0] ?? html;
+    noteAudit({ title, text: stripTags(main).slice(0, 12000), url: p.url, source: 'Prime Intellect', date: p.date });
+  }
+}

@@ -142,7 +142,8 @@ export function wireFilter(name: string) {
           return !v || (r.dataset[k] ?? '').split(' ').includes(v);
         });
       if (ok) {
-        shown++;
+        // a row that folds a family counts each of its versions (data-n)
+        shown += Number(r.dataset.n ?? 1);
         matched.push(r);
       }
     }
