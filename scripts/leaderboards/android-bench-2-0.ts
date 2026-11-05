@@ -2,8 +2,10 @@
 // HTML tables: "Long-horizon task results" (Android Bench 2.0, 30 tasks) headed "Model - Agent | Pass rate
 // (%) | CI range (%) | Completion rate (%) | ...", and "1.0 task results" (Android Bench 1.0) headed
 // "Model | Score (%) | ...". This importer reads the first: pass rate is the score and the agent (Claude
-// Code, Codex and others) the harness; the effort in brackets becomes the setting. The cost column is per
-// full run of the suite, not per task, so it is not kept. androidbench.ts reads the 1.0 table through
+// Code, Codex and others) the harness. The effort in brackets becomes the setting. "Avg cost ($)" is per
+// full run of the 30 tasks, so it is kept as cost with costPer 'run'. The CI range is kept as metrics.ciLow
+// and ciHigh, the completion rate as metrics.completion (%), and "Avg latency (h)", the hours one full run
+// takes, as metrics.runHours (the key androidbench.ts uses). androidbench.ts reads the 1.0 table through
 // androidBenchTable.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -32,17 +34,38 @@ const board: Leaderboard = {
   feed: `${ANDROID_PAGE} (server-rendered HTML table "Long-horizon task results", Pass rate)`,
   terms: ANDROID_TERMS,
   aliases: {},
+  costPer: 'run',
   async fetch() {
     const { head, rows: body } = await androidBenchTable(/^Model - Agent/, /^Pass rate/);
-    const iScore = head.findIndex((h) => /^Pass rate/.test(h));
+    const col = (re: RegExp) => head.findIndex((h) => re.test(h));
+    const iScore = col(/^Pass rate/);
+    const [iCi, iCompletion, iTime, iCost] = [/C[Il] range/, /^Completion rate/, /^Avg latency \(h\)/, /^Avg cost/].map(col);
     const rows: LeaderboardRow[] = [];
     for (const r of body) {
-      // the cell holds the model name, then the agent, then an icon name ("chevron_right")
-      const parts = r[0].html.split(/<\/?(?:span|div|p|br)[^>]*>/i).map(text).filter((s) => s && !/^chevron_right$/.test(s));
+      // the cell marks its parts by class: model name (with a reasoning-effort span inside) and agent
+      const cell = r[0].html;
+      const effort = text(cell.match(/class="android-bench-score-reasoning-effort">([\s\S]*?)<\/span>/)?.[1] ?? '');
+      const name = text((cell.match(/class="android-bench-score-model-name">([\s\S]*?)<\/span>\s*<br/)?.[1] ?? '').replace(/<span[\s\S]*$/, ''));
+      const agent = text(cell.match(/class="android-bench-score-agent">([\s\S]*?)<\/span>/)?.[1] ?? '');
       const score = num(r[iScore]?.text);
-      if (!parts.length || score === undefined) continue;
-      const { model, setting } = splitEffort(parts[0]);
-      rows.push({ model, setting, score, harness: parts[1] });
+      if (!name || score === undefined) continue;
+      const setting = effort.replace(/[()]/g, '').trim().toLowerCase();
+      const metrics: Record<string, number> = {};
+      // "24.0 — 56.0"
+      const ci = iCi >= 0 ? r[iCi]?.text.match(/([\d.]+)\s*[—–-]\s*([\d.]+)/) : null;
+      if (ci) Object.assign(metrics, { ciLow: Number(ci[1]), ciHigh: Number(ci[2]) });
+      const completion = iCompletion >= 0 ? num(r[iCompletion]?.text) : undefined;
+      if (completion !== undefined) metrics.completion = completion;
+      const hours = iTime >= 0 ? num(r[iTime]?.text) : undefined;
+      if (hours !== undefined) metrics.runHours = hours;
+      rows.push({
+        model: name,
+        setting: setting && setting !== 'default' ? setting : undefined,
+        score,
+        harness: agent || undefined,
+        cost: iCost >= 0 ? num(r[iCost]?.text) : undefined,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
+      });
     }
     return rows;
   },

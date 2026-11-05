@@ -2,7 +2,10 @@
 // generated JS file (window.SCORES_DATA* = {...JSON...}), and config.js holds the agent names, scaffolds
 // and reasoning efforts. The headline is the site's "Average" column: aggregatedScores[agent].avg when the
 // file has one (mean over seeds), otherwise the benchmark-weighted average over the four base models,
-// exactly as data.js computes it. Baselines (base models, official instruct models) are left out.
+// exactly as data.js computes it. Baselines (base models, official instruct models) are left out. Metrics:
+// the standard deviation of the average over seeds (aggregatedScores[agent].std, `sd`) and the average time
+// the agent spent, in hours (timeData[agent].hours, `runHours`), which the site's "Performance vs. runtime"
+// Pareto chart plots against the score.
 //
 // Scores from different results versions use different benchmark sets and weights, so each version is its
 // own benchmark id: v1 here, v1.1 in posttrainbench-1-1.ts, v1.2 in posttrainbench-1-2.ts.
@@ -18,7 +21,8 @@ interface ScoresData {
   resultsVersion?: string;
   benchmarkWeights: Record<string, number>;
   modelBenchmarkData: Record<string, Record<string, Record<string, Cell>>>;
-  aggregatedScores?: Record<string, { avg: number }>;
+  aggregatedScores?: Record<string, { avg: number; std?: number }>;
+  timeData?: Record<string, { hours?: number }>;
 }
 interface AgentInfo {
   name?: string;
@@ -83,6 +87,12 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
     url: version === 'v1.2' ? SITE : `${SITE}?version=${version}`,
     feed,
     terms: 'Generated data file on the PostTrainBench site; the benchmark repository (aisa-group/PostTrainBench) is MIT-licensed.',
+    chart: {
+      title: 'Performance vs. runtime',
+      note: 'Each point is one agent: the average time it spent post-training (of a 10-hour budget) against its average benchmark performance, with the Pareto frontier.',
+      x: { key: 'runHours', label: 'Average time spent', unit: 'h', better: 'lower' },
+      y: { key: 'score', label: 'Average benchmark performance', unit: '%', better: 'higher' },
+    },
     aliases: {
       // config.js: "External result from Intology's Locus system, powered by Opus 5"
       Locus: 'claude-opus-5',
@@ -109,11 +119,17 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
         // "Opus 4.6 (1M)" is Opus 4.6 with a 1M context window, so the window is a setting
         const ctx = a.name.match(/\s*\((\d+[KM])\)$/);
         const setting = [a.reasoningEffort?.toLowerCase(), ctx ? `${ctx[1]} context` : undefined].filter(Boolean).join(', ');
+        const metrics: Record<string, number> = {};
+        const sd = data.aggregatedScores?.[key]?.std;
+        const hours = data.timeData?.[key]?.hours;
+        if (typeof sd === 'number') metrics.sd = sd;
+        if (typeof hours === 'number') metrics.runHours = hours;
         rows.push({
           model: ctx ? a.name.slice(0, ctx.index) : a.name,
           score,
           setting: setting || undefined,
           harness: a.isExternal ? `${a.name} (${a.chartSourceLabel ?? 'external'})` : a.scaffold,
+          metrics: Object.keys(metrics).length ? metrics : undefined,
         });
       }
       return rows;

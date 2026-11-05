@@ -2,7 +2,8 @@
 // it: per model the production score of its open-play run, milestones, automation milestones, lab-task
 // success rate, the most complex item made and the submission date. The page ranks by Production Score,
 // which is the score here (an open-ended count, higher is better). The six rows are the March 2025 paper's
-// runs and carry their submission dates.
+// runs and carry their submission dates. Milestones, automation milestones and the lab-task success rate
+// (0 to 100) are kept as metrics.milestones, metrics.automation and metrics.labSuccess.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -24,9 +25,18 @@ const board: Leaderboard = {
     'Deepseek-v3': 'deepseek-v3',
   },
   async fetch(): Promise<LeaderboardRow[]> {
-    const data = await fetchJson<{ name: string; productionScore?: number; submissionDate?: string }[]>(FEED);
+    const data = await fetchJson<
+      { name: string; productionScore?: number; milestones?: number; automationMilestones?: number; labTasksSuccessRate?: number; submissionDate?: string }[]
+    >(FEED);
     const rows: LeaderboardRow[] = [];
-    for (const e of data) if (e.name && typeof e.productionScore === 'number') rows.push({ model: e.name, score: e.productionScore, date: e.submissionDate });
+    for (const e of data) {
+      if (!e.name || typeof e.productionScore !== 'number') continue;
+      const metrics: Record<string, number> = {};
+      if (typeof e.milestones === 'number') metrics.milestones = e.milestones;
+      if (typeof e.automationMilestones === 'number') metrics.automation = e.automationMilestones;
+      if (typeof e.labTasksSuccessRate === 'number') metrics.labSuccess = e.labTasksSuccessRate;
+      rows.push({ model: e.name, score: e.productionScore, date: e.submissionDate, ...(Object.keys(metrics).length ? { metrics } : {}) });
+    }
     if (!rows.length) throw new Error('no FLE rows');
     return rows;
   },

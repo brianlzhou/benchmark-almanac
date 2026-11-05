@@ -5,7 +5,8 @@
 // The task set has releases (v2026.06.24, v2026.08.08, v2.1) and the same model scores very differently
 // across them, so each release is its own benchmark id; the site's "all releases" view mixes them. Only
 // the full task set is read (the default; "offline" is a subset). Step budgets other than the default 500
-// are kept with the budget in `setting`. Agent rows ("Sai w/ Claude Opus 5") split at " w/ ".
+// are kept with the budget in `setting`. Agent rows ("Sai w/ Claude Opus 5") split at " w/ ". The board's
+// other metric, "Partial Score" (partialScore, 0 to 100, partial credit per task), is kept as metrics.partial.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { splitAgent } from './osworld-verified.ts';
@@ -22,12 +23,18 @@ interface Result {
   datasetScope?: string;
   scope?: string;
   binaryAccuracy?: number;
+  partialScore?: number | null;
+  outputTokensPerTask?: number | null;
+  /** Cost of the whole run: the page divides it by the task count, unless costPerTaskUsd is set. */
+  estimatedCostUsd?: number | null;
+  costPerTaskUsd?: number | null;
   modelType?: string;
 }
 interface Data {
   defaultResultReleaseVersion?: string;
   defaultResultDatasetScope?: string;
   defaultStepBudget?: number;
+  datasetSize?: number;
   results: Result[];
 }
 
@@ -60,6 +67,9 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
           score: r.binaryAccuracy,
           setting: [r.reasoning?.toLowerCase(), steps].filter(Boolean).join(', ') || undefined,
           harness: harness ?? (r.toolSetting || undefined),
+          cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / (data.datasetSize || 108) : undefined),
+          tokens: r.outputTokensPerTask ?? undefined,
+          metrics: typeof r.partialScore === 'number' ? { partial: r.partialScore } : undefined,
         });
       }
       return rows;

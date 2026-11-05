@@ -5,7 +5,8 @@
 // the latest release, loads its module as text and reads each model's top-level numbers as data, never
 // running it. claw-eval takes avg_score × 100 (the "Avg" that model cards cite), claw-eval-pass-3.ts takes
 // pass_all_3_rate (Pass^3, the board's default sort) and claw-eval-mm.ts takes the multimodal avg_score.
-// The release date is the row date.
+// The release date is the row date. claw-eval rows also carry the table's other columns in `metrics`: Pass^3
+// ("pass3") and Pass@3 ("passAt3"), and the score's parts, completion, robustness and safety, all in %.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -52,20 +53,40 @@ export async function clawModels(): Promise<{ date: string; general: ClawModel[]
   return { date: latest[2], general: read(region(general)), multimodal: read(region(multi)) };
 }
 
-/** One row per model from the named board, scored by `field` times `scale`. */
-export async function clawRows(board: 'general' | 'multimodal', field: string, scale: number): Promise<LeaderboardRow[]> {
+/** The table's other columns for the overall view, in %: Pass^3, Pass@3 and the score's three parts. */
+const EXTRAS: [key: string, field: string, scale: number][] = [
+  ['pass3', 'pass_all_3_rate', 1],
+  ['passAt3', 'pass_at_3_rate', 1],
+  ['completion', 'avg_completion', 100],
+  ['robustness', 'avg_robustness', 100],
+  ['safety', 'avg_safety', 100],
+];
+
+/** One row per model from the named board, scored by `field` times `scale`; `extras` adds the EXTRAS metrics. */
+export async function clawRows(board: 'general' | 'multimodal', field: string, scale: number, extras = false): Promise<LeaderboardRow[]> {
   const data = await clawModels();
   const rows: LeaderboardRow[] = [];
   for (const m of data[board]) {
     const v = m.fields[field];
-    if (typeof v === 'number') rows.push({ model: m.name, score: Number((v * scale).toFixed(2)), date: data.date });
+    if (typeof v !== 'number') continue;
+    const metrics: Record<string, number> = {};
+    if (extras) {
+      for (const [k, f, x] of EXTRAS) {
+        const e = m.fields[f];
+        if (typeof e === 'number') metrics[k] = Number((e * x).toFixed(2));
+      }
+    }
+    rows.push({ model: m.name, score: Number((v * scale).toFixed(2)), date: data.date, ...(Object.keys(metrics).length ? { metrics } : {}) });
   }
   if (!rows.length) throw new Error(`no ${field} values on the ${board} board`);
   return rows;
 }
 
 /** Claw-Eval display names the shared resolver cannot place. */
-export const CLAW_ALIASES: Record<string, string> = {};
+export const CLAW_ALIASES: Record<string, string> = {
+  // the board's chart gives this model the id qwen3.5-397b-a17b, the open-weight release
+  'Qwen3.5 397A17B': 'qwen3-5-397b-a17b',
+};
 
 const board: Leaderboard = {
   benchmark: 'claw-eval',
@@ -73,6 +94,6 @@ const board: Leaderboard = {
   feed: `${CLAW_FEED} (benchmarkData avg_score)`,
   terms: CLAW_TERMS,
   aliases: CLAW_ALIASES,
-  fetch: () => clawRows('general', 'avg_score', 100),
+  fetch: () => clawRows('general', 'avg_score', 100, true),
 };
 export default board;

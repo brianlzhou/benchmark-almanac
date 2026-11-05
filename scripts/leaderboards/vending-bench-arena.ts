@@ -3,7 +3,8 @@
 // drawn from the shared runs data module, c.runs["arena-..."]: per model, final_value, the mean money balance
 // in USD at the end of the simulated year across that round's runs. This file follows the page's node chunk
 // that names the arena runs to the data module it imports, and reads every run the page shows (a 2v2 test run
-// in the module that the page does not show is skipped). A balance depends on the round's opponents, so each
+// in the module that the page does not show is skipped). Newer builds hold the runs as runs:JSON.parse(`...`),
+// read as JSON text; older ones as a minified object literal. A balance depends on the round's opponents, so each
 // row carries them as its setting ("vs GPT-6 Astra, Gemini 4 Argon"), and a model gets one row per round.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -37,9 +38,6 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${BASE}chunks/<hash>.js (runs["arena-..."] in the data module the page imports)`,
   terms: 'Public static asset of andonlabs.com; the site publishes no terms of use or robots.txt, so the scores are cited to Andon Labs.',
-  aliases: {
-    'Claude Fable 5 (Max reasoning)': 'claude-fable-5',
-  },
   async fetch() {
     const html = await fetchText(PAGE);
     const nodes = [...new Set([...html.matchAll(/_app\/immutable\/(nodes\/[\w.-]+\.js)/g)].map((m) => m[1]))];
@@ -47,19 +45,31 @@ const board: Leaderboard = {
     let module = '';
     for (const n of nodes) {
       const js = await fetchText(BASE + n);
-      const found = [...js.matchAll(/\.runs\["(arena-[^"]+)"\]/g)].map((m) => m[1]);
+      // keys are quoted with " or with backticks, depending on the build
+      const found = [...js.matchAll(/\.runs\[["`](arena-[^"`]+)["`]\]/g)].map((m) => m[1]);
       if (!found.length) continue;
       keys = [...new Set(found)];
-      // the runs object comes from `import{m as c}from"../chunks/<hash>.js"`
-      const alias = js.match(/(\w+)\.runs\["arena-/)?.[1];
-      module = js.match(new RegExp(`import\\{[^}]*\\bm as ${alias}\\b[^}]*\\}from"\\.\\./(chunks/[\\w.-]+\\.js)"`))?.[1] ?? '';
+      // the runs object comes from `import{m as c}from"../chunks/<hash>.js"` (or `t as l`)
+      const alias = js.match(/(\w+)\.runs\[["`]arena-/)?.[1];
+      module = js.match(new RegExp(`import\\{[^}]*\\b\\w+ as ${alias}\\b[^}]*\\}from"\\.\\./(chunks/[\\w.-]+\\.js)"`))?.[1] ?? '';
       break;
     }
     if (!keys.length || !module) throw new Error('arena runs or data module not found');
     const data = await fetchText(BASE + module);
-    const at = data.search(/\w=\{vb2:\{/);
-    if (at < 0) throw new Error('runs object not found');
-    const runs = JSON.parse(toJson(objectAt(data, at))) as Record<string, Record<string, { final_value?: number }>>;
+    type Runs = Record<string, Record<string, { final_value?: number }>>;
+    let runs: Runs;
+    // newer builds: runs:JSON.parse(`{"vb2":{...}}`), JSON in a template literal (undo its escapes, never run it)
+    const marker = 'runs:JSON.parse(`';
+    const jp = data.indexOf(marker);
+    if (jp >= 0) {
+      const body = data.slice(jp + marker.length, data.indexOf('`)', jp));
+      runs = JSON.parse(body.replace(/\\([\\`$])/g, '$1')) as Runs;
+    } else {
+      // older builds: a minified object literal, x={vb2:{...}}
+      const at = data.search(/\w=\{vb2:\{/);
+      if (at < 0) throw new Error('runs object not found');
+      runs = JSON.parse(toJson(objectAt(data, at))) as Runs;
+    }
     const rows: LeaderboardRow[] = [];
     for (const key of keys) {
       const run = runs[key];

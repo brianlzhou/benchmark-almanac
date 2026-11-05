@@ -1,64 +1,55 @@
 // Humanity's Last Exam: lastexam.ai points to Scale's leaderboard (made with CAIS) for current results.
 // The page ships its rows as a JSON "entries" array inside the Next.js flight data in its script tags.
+// Each row keeps the board's "±" (confidenceInterval_upper) as metrics.ciLow and ciHigh, and its Calibration
+// Error column (calibrationError, in percent) as metrics.calibration.
 import type { Leaderboard } from './types.ts';
-import { fetchText } from '../lib/util.ts';
+import { SCALE_TERMS, type ScaleEntry, effortBeforeDate, fetchScaleEntries, scaleFeed, scaleUrl } from '../lib/scale.ts';
 
-const PAGE = 'https://labs.scale.com/leaderboard/humanitys_last_exam';
-
-interface Entry {
-  model: string;
-  version?: string;
-  rank: number;
-  score: number;
-  createdAt?: string;
-  deprecated?: boolean;
-}
-
-/** Joins the self.__next_f.push([1,"..."]) string chunks back into the flight text. */
-function flight(html: string): string {
-  let out = '';
-  for (const m of html.matchAll(/self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)/g)) out += JSON.parse(m[1]) as string;
-  return out;
-}
-
-/** Reads the JSON array that starts at text[i] by bracket matching (strings respected). */
-function arrayAt(text: string, i: number): unknown[] {
-  let depth = 0;
-  let str = false;
-  for (let j = i; j < text.length; j++) {
-    const c = text[j];
-    if (str) {
-      if (c === '\\') j++;
-      else if (c === '"') str = false;
-    } else if (c === '"') str = true;
-    else if (c === '[' || c === '{') depth++;
-    else if (c === ']' || c === '}') {
-      if (--depth === 0) return JSON.parse(text.slice(i, j + 1)) as unknown[];
-    }
-  }
-  throw new Error('unterminated array');
-}
+const PAGE = scaleUrl('humanitys_last_exam');
 
 const board: Leaderboard = {
   benchmark: 'humanitys-last-exam',
   url: PAGE,
-  feed: `${PAGE} (the "entries" JSON in the page's Next.js flight data)`,
-  terms: "Scale's website terms (2021) license site use for your own purposes and do not mention automated access; robots.txt allows /leaderboard/.",
+  feed: scaleFeed(PAGE),
+  terms: SCALE_TERMS,
   aliases: {
-    'GPT 6 Astra': 'gpt-6-astra',
+    // effort words are split off before these are looked up ("-thinking-max" -> max)
+    'claude-opus-4-6-thinking': 'claude-opus-4-6',
+    'claude-opus-4-5-20251101': 'claude-opus-4-5',
+    'claude-opus-4-1-20250805': 'claude-opus-4-1',
+    'claude-sonnet-4-5-20250929': 'claude-sonnet-4-5',
+    // the importer moves "(high)" out of "o3 (high) (April 2025)" into the setting
+    'o3 (April 2025)': 'o3',
+    'o4-mini (April 2025)': 'o4-mini',
+    'o1 (December 2024)': 'o1',
+    'Gemini 2.5 Pro Experimental (March 2025)': 'gemini-2-5-pro-mar-2025',
+    'Gemini 2.5 Pro Preview (May 06 2025)': 'gemini-2-5-pro-may-2025',
+    'Gemini 2.5 Flash (April 2025)': 'gemini-2-5-flash-apr-2025',
+    'Gemini 2.5 Flash Preview (May 2025)': 'gemini-2-5-flash-may-2025',
+    'Gemini 2.0 Flash Thinking (January 2025)': 'gemini-2-0-flash-thinking-jan-2025',
+    'Gemini-1.5-Pro-002': 'gemini-1-5-pro-sept-2024',
+    'GPT-4o (November 2024)': 'gpt-4o-nov-2024',
+    'glm-4p5': 'glm-4-5',
+    'glm-4p5-air': 'glm-4-5-air',
+    'Nova Pro': 'amazon-nova-pro',
+    'Nova Lite': 'amazon-nova-lite',
   },
   async fetch() {
-    const text = flight(await fetchText(PAGE));
-    const at = text.indexOf('"entries":[');
-    if (at < 0) throw new Error('no entries array on the page');
-    const entries = arrayAt(text, at + '"entries":'.length) as Entry[];
+    const entries = await fetchScaleEntries(PAGE);
     return entries
       .filter((e) => !e.deprecated)
-      .map((e) => ({
-        model: e.model.replace(/\s+/g, ' ').trim(),
-        score: Number(e.score),
-        date: e.createdAt?.slice(0, 10),
-      }));
+      .map((e) => {
+        const { model, setting } = effortBeforeDate(e.model);
+        const score = Number(e.score);
+        const x = e as ScaleEntry & { confidenceInterval_upper?: number; calibrationError?: number };
+        const half = Number(x.confidenceInterval_upper);
+        const calibration = Number(x.calibrationError);
+        const metrics = {
+          ...(half > 0 ? { ciLow: score - half, ciHigh: score + half } : {}),
+          ...(x.calibrationError != null && Number.isFinite(calibration) ? { calibration } : {}),
+        };
+        return { model, score, setting, date: e.createdAt?.slice(0, 10), ...(Object.keys(metrics).length ? { metrics } : {}) };
+      });
   },
 };
 export default board;

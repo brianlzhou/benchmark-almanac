@@ -21,12 +21,23 @@ export interface TableSpec {
   date?: RegExp;
   /** Header of a per-task cost column in US dollars. */
   cost?: RegExp;
+  /** Header of an output-tokens-per-task column; "12.3k" reads as 12,300. */
+  tokens?: RegExp;
+  /** Other number columns to keep in `metrics`, by key; "k" and "M" suffixes are expanded. */
+  metrics?: Record<string, RegExp>;
   /** Rows whose model cell matches this are not models (human baselines, random, oracle). */
   skip?: RegExp;
   /** Which header row to read when a table has two (0 by default). */
   headRow?: number;
   /** Turns the model cell into the board name (for example to drop badges). */
   name?: (cell: Cell) => string;
+}
+
+/** A count such as "119.5k", "1.2M" or "4,210". */
+function count(s: string | undefined): number | undefined {
+  const v = num(s);
+  const unit = s?.match(/\d\s*([kKmM])\b/)?.[1]?.toLowerCase();
+  return v === undefined ? undefined : unit === 'k' ? v * 1e3 : unit === 'm' ? v * 1e6 : v;
 }
 
 /** Rows of the first table in `html` whose header row has both the model and the score column. */
@@ -36,7 +47,8 @@ export function readTable(html: string, spec: TableSpec): LeaderboardRow[] {
   if (!t) throw new Error(`no table with columns ${spec.model} and ${spec.score}`);
   const head = t[h].map((c) => c.text);
   const col = (re?: RegExp) => (re ? head.findIndex((x) => re.test(x)) : -1);
-  const [iModel, iScore, iHarness, iSetting, iDate, iCost] = [spec.model, spec.score, spec.harness, spec.setting, spec.date, spec.cost].map(col);
+  const [iModel, iScore, iHarness, iSetting, iDate, iCost, iTokens] = [spec.model, spec.score, spec.harness, spec.setting, spec.date, spec.cost, spec.tokens].map(col);
+  const metricCols = Object.entries(spec.metrics ?? {}).map(([k, re]) => [k, col(re)] as const).filter(([, i]) => i >= 0);
   const rows: LeaderboardRow[] = [];
   for (const r of t.slice(h + 1)) {
     // a row shorter than the header is a group label or a note, not a model
@@ -45,6 +57,11 @@ export function readTable(html: string, spec: TableSpec): LeaderboardRow[] {
     const score = num(r[iScore]?.text);
     if (!model || score === undefined || spec.skip?.test(model)) continue;
     const date = iDate >= 0 ? r[iDate]?.text.match(/\d{4}-\d\d(-\d\d)?/)?.[0] : undefined;
+    const metrics: Record<string, number> = {};
+    for (const [k, i] of metricCols) {
+      const v = count(r[i]?.text);
+      if (v !== undefined) metrics[k] = v;
+    }
     rows.push({
       model,
       score: score * (spec.scale ?? 1),
@@ -52,6 +69,8 @@ export function readTable(html: string, spec: TableSpec): LeaderboardRow[] {
       setting: iSetting >= 0 ? r[iSetting]?.text.replace(/^[-–]$/, '') || undefined : undefined,
       date: date && date.length === 7 ? `${date}-01` : date,
       cost: iCost >= 0 ? num(r[iCost]?.text) : undefined,
+      ...(iTokens >= 0 && count(r[iTokens]?.text) !== undefined ? { tokens: count(r[iTokens]?.text) } : {}),
+      ...(Object.keys(metrics).length ? { metrics } : {}),
     });
   }
   if (!rows.length) throw new Error('the table has no model rows');
@@ -70,7 +89,10 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (leaderboard table)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the VisuLogic repository is MIT and the scores are cited to the authors.',
-  aliases: {},
+  aliases: {
+    'OpenAI o3': 'o3',
+    'Kwai Keye-VL-8B-preview': 'keye-vl-8b-preview',
+  },
   fetch: () =>
     tableRows(URL, {
       model: /^Model$/i,

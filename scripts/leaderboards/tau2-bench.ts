@@ -4,6 +4,9 @@
 // three), and its "τ³-Banking" tab ranks banking_knowledge pass^1. Custom-scaffold submissions are hidden
 // by default on the site and are left out here.
 //
+// The site's table also shows Overall pass^2 to pass^4, kept here in `metrics` ("pass2".."pass4", %), and each
+// domain's "Avg Cost" per task; a row's cost is the mean of the three domains' costs when all three have one.
+//
 // Versions do not mix. "legacy_submissions" ran τ²-bench 0.x on the original tasks; "submissions" ran
 // release 1.0.x (τ³-bench), whose airline and retail tasks were fixed. So:
 //   tau2-bench    legacy submissions, Overall pass^1 (the site shows them with "Show legacy")
@@ -16,6 +19,11 @@ const BASE = 'https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submiss
 
 interface Domain {
   pass_1?: number | null;
+  pass_2?: number | null;
+  pass_3?: number | null;
+  pass_4?: number | null;
+  /** US dollars per task, the site's "Avg Cost". */
+  cost?: number | null;
 }
 interface Submission {
   model_name: string;
@@ -37,6 +45,23 @@ export async function loadTau(kind: 'submissions' | 'legacy_submissions'): Promi
 export function overall(s: Submission): number | null {
   const v = ['retail', 'airline', 'telecom'].map((d) => s.results[d]?.pass_1);
   return v.every((x) => typeof x === 'number') ? (v as number[]).reduce((a, b) => a + b, 0) / 3 : null;
+}
+
+/**
+ * The site's Overall pass^2 to pass^4 (each the mean over retail, airline and telecom), and the mean cost per task
+ * when all three domains report one. Fields are left out when the submission lacks them.
+ */
+export function overallExtras(s: Submission): Pick<LeaderboardRow, 'cost' | 'metrics'> {
+  const domains = ['retail', 'airline', 'telecom'].map((d) => s.results[d]);
+  const mean = (v: (number | null | undefined)[]) =>
+    v.every((x) => typeof x === 'number') ? (v as number[]).reduce((a, b) => a + b, 0) / v.length : undefined;
+  const metrics: Record<string, number> = {};
+  for (const k of [2, 3, 4] as const) {
+    const m = mean(domains.map((d) => d?.[`pass_${k}`]));
+    if (m !== undefined) metrics[`pass${k}`] = m;
+  }
+  const cost = mean(domains.map((d) => d?.cost));
+  return { cost: cost && cost > 0 ? cost : undefined, metrics: Object.keys(metrics).length ? metrics : undefined };
 }
 
 export function row(s: Submission, score: number): LeaderboardRow {
@@ -67,7 +92,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const s of await loadTau('legacy_submissions')) {
       const score = overall(s);
-      if (score !== null) rows.push(row(s, score));
+      if (score !== null) rows.push({ ...row(s, score), ...overallExtras(s) });
     }
     return rows;
   },

@@ -2,13 +2,21 @@
 // places, and both are read here as data, never run: a public Strapi API at admin.xbench-ai.com (base URL
 // and query strings named in the site bundle), and literal arrays inside the bundle for the older boards.
 // ScienceQA reads /api/scienceqas with the page's own query (ranked rows only): per model the score (mean
-// accuracy, 0 to 100, the ranking), best of N, reasoning effort and evaluation date. Other xbench importers
-// use xbenchApi and xbenchArray from this file.
+// accuracy, 0 to 100, the ranking), best of N, reasoning effort and evaluation date. "BoN (N=5)" is kept as
+// metrics.bestOf5 and "Time cost (s)" (timeCost) as metrics.latency. Other xbench importers use xbenchApi
+// and xbenchArray from this file.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson, fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 
 export const XBENCH_API = 'https://admin.xbench-ai.com/api/';
+
+/** xbench names the shared resolver cannot place. */
+export const XBENCH_ALIASES: Record<string, string> = {
+  // ByteDance's Seed 2.1 Pro (the registry lists the 2.0 Pro as Doubao-Seed-2.0-pro)
+  'Doubao Seed 2.1 Pro': 'seed-2-1-pro',
+};
+
 export const XBENCH_TERMS =
   'Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.';
 
@@ -32,6 +40,8 @@ export async function xbenchArray<T>(start: RegExp): Promise<T[]> {
 
 interface Entry {
   score?: number;
+  BoN?: number | null;
+  timeCost?: number | null;
   reasoning_effort?: string;
   evaluationDate?: string;
   model?: { name?: string };
@@ -44,7 +54,7 @@ const board: Leaderboard = {
   url: 'https://xbench.org/agi/scienceqa',
   feed: XBENCH_API + PATH,
   terms: XBENCH_TERMS,
-  aliases: {},
+  aliases: XBENCH_ALIASES,
   async fetch() {
     const { data } = await xbenchApi<{ data: Entry[] }>(PATH);
     const rows: LeaderboardRow[] = [];
@@ -52,7 +62,10 @@ const board: Leaderboard = {
       const model = e.model?.name?.trim();
       if (!model || typeof e.score !== 'number') continue;
       const effort = e.reasoning_effort && e.reasoning_effort !== 'default' ? e.reasoning_effort : undefined;
-      rows.push({ model, score: e.score, setting: effort, date: e.evaluationDate });
+      const metrics: Record<string, number> = {};
+      if (typeof e.BoN === 'number') metrics.bestOf5 = e.BoN;
+      if (typeof e.timeCost === 'number' && e.timeCost > 0) metrics.latency = e.timeCost;
+      rows.push({ model, score: e.score, setting: effort, date: e.evaluationDate, metrics: Object.keys(metrics).length ? metrics : undefined });
     }
     return rows;
   },

@@ -2,7 +2,8 @@
 // "## Results" in the UniPat-AI/EvoCodeBench README: per model, with the terminus-2 scaffold, the Dataset
 // score (passed rounds over all rounds, averaged per task, 0 to 100, the ranking), the Case score and
 // counts. Dataset score is the score. The Reasoning column ("effort `xhigh`", "thinking on¹") becomes the
-// setting, and terminus-2 is the harness.
+// setting, and terminus-2 is the harness. Avg rounds (agent-tool interactions per reached round) is kept as
+// metrics.turns.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -31,7 +32,9 @@ const board: Leaderboard = {
       // "effort `xhigh`" -> "xhigh"; "thinking on¹" -> "thinking"; "thinking `adaptive`" -> "adaptive"
       const reasoning = cells[1].replace(/[`¹²³]/g, '').trim();
       const setting = reasoning.match(/^(?:effort|thinking)\s+(\w+)$/)?.[1]?.replace(/^on$/, 'thinking') ?? (reasoning || undefined);
-      rows.push({ model: cells[0], score, setting, harness: 'terminus-2' });
+      // columns: Agent | Reasoning | Dataset score | Case score | Avg rounds | Perfect tasks
+      const turns = num(cells[4]);
+      rows.push({ model: cells[0], score, setting, harness: 'terminus-2', metrics: turns !== undefined ? { turns } : undefined });
     }
     return rows;
   },

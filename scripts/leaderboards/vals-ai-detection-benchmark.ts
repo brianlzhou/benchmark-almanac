@@ -3,7 +3,9 @@
 // serialized form where every value is a [type, value] pair. tasks.overall holds, per system id
 // ("anthropic/claude-opus-5-5", "detector/pangram"), the balanced accuracy (0 to 100) and the cost per
 // document. Balanced accuracy is the score. Commercial detectors ("detector/...") have no model records and
-// stay unmatched.
+// stay unmatched. Each row also carries the run's mean seconds per document ("latency"), the 95% interval
+// from its standard error (±1.96, "ciLow" and "ciHigh", as vals-index.ts computes it) and its accuracy on the
+// human-written and AI-rewritten splits (tasks.human and tasks.ai, as "human" and "ai").
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { VALS_TERMS } from './vals-index.ts';
@@ -24,7 +26,11 @@ function unpack(v: unknown): unknown {
 interface Run {
   accuracy?: number;
   cost_per_test?: number;
+  latency?: number | null;
+  stderr?: number | null;
 }
+
+const fin = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 
 const board: Leaderboard = {
   benchmark: 'vals-ai-detection-benchmark',
@@ -36,12 +42,18 @@ const board: Leaderboard = {
     const raw = [...html.matchAll(/props="(\{&quot;benchmarkView&quot;[^"]*)"/g)][0]?.[1];
     if (!raw) throw new Error('benchmarkView props not found');
     const props = unpack(JSON.parse(`[0,${raw.replace(/&(quot|amp|lt|gt|#39);/g, (_, e: string) => DECODE[e])}]`)) as {
-      benchmarkView: { tasks: { overall: Record<string, Run> } };
+      benchmarkView: { tasks: { overall: Record<string, Run>; human?: Record<string, Run>; ai?: Record<string, Run> } };
     };
+    const { human = {}, ai = {} } = props.benchmarkView.tasks;
     const rows: LeaderboardRow[] = [];
     for (const [id, run] of Object.entries(props.benchmarkView.tasks.overall)) {
       if (typeof run.accuracy !== 'number') continue;
-      rows.push({ model: id, score: run.accuracy, cost: run.cost_per_test });
+      const metrics: Record<string, number> = {};
+      if (fin(run.latency) && run.latency > 0) metrics.latency = run.latency;
+      if (fin(run.stderr) && run.stderr > 0) Object.assign(metrics, { ciLow: run.accuracy - 1.96 * run.stderr, ciHigh: run.accuracy + 1.96 * run.stderr });
+      if (fin(human[id]?.accuracy)) metrics.human = human[id].accuracy!;
+      if (fin(ai[id]?.accuracy)) metrics.ai = ai[id].accuracy!;
+      rows.push({ model: id, score: run.accuracy, cost: run.cost_per_test, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no AI detection rows');
     return rows;

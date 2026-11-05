@@ -3,7 +3,8 @@
 // 2025-12-15) holds the original board: per model and effort, pass@1 averaged over four runs
 // (passAtOne.avg, 0 to 1, the default sort), pass@4, pass^4 and perRunCost, the cost of one run over all
 // tasks. A per-server table in the same payload gives each run's task count and output tokens. Cost and
-// output tokens per task are those run totals divided by the task count.
+// output tokens per task are those run totals divided by the task count. The table's Pass@4 and Pass^4 are
+// kept as metrics.passAt4 and metrics.pass4 (percentages), and its "Avg Time" per task as metrics.time (seconds).
 //
 // The home page now defaults to an "MCPMark Verified" tab, a revised task set with its own, much higher
 // scores. The almanac has no record for that version, so it is not read.
@@ -17,6 +18,9 @@ interface Overall {
   name: string;
   actualModelName?: string;
   passAtOne?: { avg?: number };
+  passAtFour?: number;
+  passHatFour?: number;
+  avgExecutionTime?: number;
   perRunCost?: number;
 }
 interface Server {
@@ -39,7 +43,6 @@ const board: Leaderboard = {
   terms: 'Data embedded in the public mcpmark.ai page (robots.txt allows all paths, no terms page); the MCPMark repository is Apache-2.0.',
   aliases: {
     'qwen-3-coder-plus': 'qwen3-coder-480b-a35b',
-    'qwen-3-max': 'qwen3-max-preview',
     'kimi-k2-0711': 'kimi-k2-jul-2025',
     'kimi-k2-0905': 'kimi-k2-sep-2025',
     // deepseek-chat on this board is DeepSeek-V3.1 in non-thinking mode (actualModelName deepseek-v3.1-non-think)
@@ -61,12 +64,20 @@ const board: Leaderboard = {
       const score = r.passAtOne?.avg;
       if (typeof score !== 'number') continue;
       const n = tasks.get(r.name);
+      // "deepseek-v3-2-thinking", "deepseek-v3-2-chat": one model in two modes (the registry lists
+      // "DeepSeek-V3.2 (Thinking)" as a plain alias, which would swallow the mode)
+      const mode = r.name.match(/^(deepseek-.+)-(thinking|chat)$/);
+      const metrics: Record<string, number> = {};
+      if (typeof r.passAtFour === 'number') metrics.passAt4 = r.passAtFour * 100;
+      if (typeof r.passHatFour === 'number') metrics.pass4 = r.passHatFour * 100;
+      if (r.avgExecutionTime) metrics.time = r.avgExecutionTime;
       rows.push({
-        model: r.name,
+        model: mode ? mode[1] : r.name,
         score: score * 100,
         cost: n && r.perRunCost ? r.perRunCost / n : undefined,
         tokens: n && output.get(r.name) ? output.get(r.name)! / n : undefined,
-        setting: r.name === 'deepseek-chat' ? 'non-thinking' : undefined,
+        setting: mode ? (mode[2] === 'chat' ? 'non-thinking' : 'thinking') : r.name === 'deepseek-chat' ? 'non-thinking' : undefined,
+        metrics: Object.keys(metrics).length ? metrics : undefined,
       });
     }
     return rows;

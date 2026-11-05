@@ -2,8 +2,9 @@
 // board from /data/leaderboard.js, a generated `window.TCB_DATA = {...}` object (from the column-tax/
 // tax-calc-bench repository) with one entry per tax-year edition. The board ranks by "Correct returns
 // (strict)" by default, so the score is `strict`, the percent of returns computed exactly right. Runs with
-// web search get the setting "web search"; `cost` is US dollars per return. taxcalcbench-2.ts reads the
-// Tax Year 2025 "v2" edition through tcbRows.
+// web search get the setting "web search"; `cost` is US dollars per return, and `time` (the "Time per
+// return" column, seconds) is kept in metrics as "runtime". The v1 edition reports neither. taxcalcbench-2.ts
+// reads the Tax Year 2025 "v2" edition through tcbRows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAfter } from '../lib/html.ts';
@@ -17,6 +18,7 @@ interface Row {
   webSearch: boolean;
   strict: number | null;
   cost: number | null;
+  time?: number | null;
 }
 
 /** Board names the shared resolver cannot place (shared with taxcalcbench-2.ts). */
@@ -34,7 +36,13 @@ export async function tcbRows(edition: string): Promise<LeaderboardRow[]> {
   if (!year) throw new Error(`no ${edition} edition in TaxCalcBench data`);
   return year.rows
     .filter((r) => typeof r.strict === 'number')
-    .map((r) => ({ model: r.base, score: r.strict!, setting: r.webSearch ? 'web search' : undefined, cost: r.cost ?? undefined }));
+    .map((r) => ({
+      model: r.base,
+      score: r.strict!,
+      setting: r.webSearch ? 'web search' : undefined,
+      cost: r.cost ?? undefined,
+      ...(typeof r.time === 'number' ? { metrics: { runtime: r.time } } : {}),
+    }));
 }
 
 const board: Leaderboard = {
@@ -42,7 +50,12 @@ const board: Leaderboard = {
   url: TCB_PAGE,
   feed: `${TCB_FEED} (edition v1, strict)`,
   terms: TCB_TERMS,
-  aliases: TCB_ALIASES,
+  aliases: {
+    ...TCB_ALIASES,
+    // the v1 runs name their snapshots: gemini-2.5-pro-preview-05-06 and gemini-2.5-flash-preview-05-20
+    'Gemini 2.5 Pro': 'gemini-2-5-pro-may-2025',
+    'Gemini 2.5 Flash': 'gemini-2-5-flash-may-2025',
+  },
   fetch: () => tcbRows('v1'),
 };
 export default board;

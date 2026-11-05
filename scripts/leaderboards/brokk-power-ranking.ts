@@ -5,7 +5,11 @@
 // formula, Power = 100 × (I^1 × S^0.5 × V^0.5)^(1/2), each part a fraction of the best model's; the client
 // code computes I = exp(bt - best bt), S = fastest minutes / minutes and V = value / best value, with the
 // subscription value where one exists and the API value otherwise (the default view). This importer repeats
-// that formula; it reproduces the rendered board. The effort after the slash is the setting.
+// that formula; it reproduces the rendered board. The effort after the slash is the setting. The
+// multi-agent "gpt-6-astra-mj" configuration (GPT-6 Astra with Luna and Sol sub-agents) stays unmatched.
+// Each row also keeps adjUsd, the size-adjusted US dollars per task at API list prices (200 / apiValue), as
+// the cost, and in metrics the Bradley-Terry strength bt ("intelligence") and the minutes per task in seconds
+// ("latency"): the axes of the page's "Intelligence vs speed" chart.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAfter, nextFlight } from '../lib/html.ts';
@@ -17,6 +21,7 @@ interface Row {
   config: string;
   bt: number | null;
   minutes?: number | null;
+  adjUsd?: number | null;
   apiValue?: number | null;
   subValue?: number | null;
 }
@@ -28,8 +33,16 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (Next.js flight data "table", Power formula from the page)`,
   terms: 'Server-rendered page on slopcop.com; robots.txt allows all paths except /api/, /device/ and /v1/, and the site publishes no terms of use.',
+  chart: {
+    title: 'Intelligence vs speed',
+    note: 'Working minutes per task for a task of typical size, against the Bradley-Terry strength from pairwise judging (0 is the average model).',
+    x: { key: 'latency', label: 'Working time per task', unit: 's', better: 'lower' },
+    y: { key: 'intelligence', label: 'Intelligence (strength)', better: 'higher' },
+  },
   aliases: {
-    'deepseek-flash-4.1-dsh': 'deepseek-v4-1-flash',
+    // display names in the page bundle: "opus" is "Opus 5", "deepseek-flash-dsh" is "DeepSeek Flash 4.1 DSH"
+    opus: 'claude-opus-5',
+    'deepseek-flash-dsh': 'deepseek-v4-1-flash',
   },
   async fetch() {
     const table = jsonAfter<Row[]>(nextFlight(await fetchText(URL)), '"table":');
@@ -45,7 +58,13 @@ const board: Leaderboard = {
     for (const e of rows) {
       const log = WEIGHTS.intelligence * (e.bt - bestBt) + WEIGHTS.speed * Math.log(fastest / e.minutes) + WEIGHTS.value * Math.log(e.value / bestValue);
       const [model, setting] = e.config.split('/');
-      out.push({ model, setting, score: Number((100 * Math.exp(log / total)).toFixed(1)) });
+      out.push({
+        model,
+        setting,
+        score: Number((100 * Math.exp(log / total)).toFixed(1)),
+        cost: ok(e.adjUsd) ? e.adjUsd : undefined,
+        metrics: { intelligence: e.bt, latency: Math.round(e.minutes * 60) },
+      });
     }
     return out;
   },

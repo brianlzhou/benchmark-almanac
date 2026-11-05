@@ -5,12 +5,18 @@
 //
 // The site shows the best effort per agent and model by default, with an "all efforts" toggle. Every
 // effort is kept here, with the effort in `setting`, so the almanac can pick.
+//
+// With `extras` (on for 4.0), each row also carries what the row's metrics give: cost per trial (total_cost_usd
+// over n_trials; a zero total means unknown), output tokens per trial, pass@2 to pass@5 ("passAt2".."passAt5", %),
+// the 95% confidence half-width ("ci95", points) and the mean trial time ("time", seconds). The board's Pareto
+// view plots accuracy against total run time; with a fixed trial count that is the same frontier as mean time.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
-const FEED = 'https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read';
+export const HARBOR_FEED = 'https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read';
+const FEED = HARBOR_FEED;
 
-type Link = string | { label?: string; url?: string };
+export type Link = string | { label?: string; url?: string };
 interface Row {
   status?: string;
   metadata: {
@@ -21,10 +27,40 @@ interface Row {
     date?: string;
     release_date?: string;
   };
-  metrics: { accuracy?: number };
+  metrics: {
+    accuracy?: number;
+    n_trials?: number;
+    total_cost_usd?: number;
+    output_tokens?: number;
+    avg_trial_duration_sec?: number;
+    accuracy_ci95_half_width?: number;
+    pass_at_2?: number;
+    pass_at_3?: number;
+    pass_at_4?: number;
+    pass_at_5?: number;
+  };
 }
 
-const label = (l?: Link) => (typeof l === 'string' ? l : l?.label)?.trim();
+const num = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
+
+/** Cost, tokens and other numbers from a row's metrics, per trial where the feed gives totals. */
+function extrasOf(m: Row['metrics']): Pick<LeaderboardRow, 'cost' | 'tokens' | 'metrics'> {
+  const n = num(m.n_trials) && m.n_trials > 0 ? m.n_trials : undefined;
+  const metrics: Record<string, number> = {};
+  for (const k of [2, 3, 4, 5] as const) {
+    const v = m[`pass_at_${k}`];
+    if (num(v)) metrics[`passAt${k}`] = Math.round(v * 1e4) / 100;
+  }
+  if (num(m.accuracy_ci95_half_width)) metrics.ci95 = m.accuracy_ci95_half_width;
+  if (num(m.avg_trial_duration_sec) && m.avg_trial_duration_sec > 0) metrics.time = m.avg_trial_duration_sec;
+  return {
+    cost: n && num(m.total_cost_usd) && m.total_cost_usd > 0 ? m.total_cost_usd / n : undefined,
+    tokens: n && num(m.output_tokens) && m.output_tokens > 0 ? m.output_tokens / n : undefined,
+    metrics: Object.keys(metrics).length ? metrics : undefined,
+  };
+}
+
+export const label = (l?: Link) => (typeof l === 'string' ? l : l?.label)?.trim();
 
 /** One board in the registry: package "terminal-bench/terminal-bench", leaderboard name "4-0-0". */
 export function makeTerminalBench(opts: {
@@ -33,6 +69,8 @@ export function makeTerminalBench(opts: {
   pkg: string;
   name: string;
   aliases?: Record<string, string>;
+  /** Also read cost, output tokens, pass@k, the confidence interval and trial time, and declare the Pareto chart. */
+  extras?: boolean;
 }): Leaderboard {
   return {
     benchmark: opts.benchmark,
@@ -41,6 +79,16 @@ export function makeTerminalBench(opts: {
     terms:
       'Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.',
     aliases: opts.aliases,
+    ...(opts.extras
+      ? {
+          chart: {
+            title: 'Pareto: accuracy against time',
+            note: 'Each point is one agent, model and effort. The board plots total run time; this plots the mean time per trial, the same frontier at a fixed trial count.',
+            x: { key: 'time', label: 'Mean time per trial', unit: 's', better: 'lower', log: true },
+            y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
+          },
+        }
+      : {}),
     async fetch() {
       const body = JSON.stringify({ package: opts.pkg, name: opts.name });
       const res = JSON.parse(
@@ -58,6 +106,7 @@ export function makeTerminalBench(opts: {
           setting: r.metadata.reasoning_effort?.toLowerCase() || undefined,
           harness: label(r.metadata.agent_display),
           date: r.metadata.date ?? r.metadata.release_date,
+          ...(opts.extras ? extrasOf(r.metrics) : {}),
         });
       }
       return out;
@@ -70,4 +119,5 @@ export default makeTerminalBench({
   version: '4.0',
   pkg: 'terminal-bench/terminal-bench',
   name: '4-0-0',
+  extras: true,
 });

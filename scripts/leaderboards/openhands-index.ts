@@ -3,7 +3,9 @@
 // "Average Cost", ...) ranks models run with the OpenHands Software Agent SDK by Average Score, the mean of
 // the five category scores (Issue Resolution, Greenfield, Frontend, Testing, Information Gathering), which is
 // the score here (0 to 100). Average Cost is US dollars per task and Date the run date. Every row uses the
-// OpenHands agent, so that is the harness; the separate "Alternative Agents" table is not read.
+// OpenHands agent, so that is the harness; the separate "Alternative Agents" table is not read. Average
+// Runtime ("459s", seconds per problem) is kept in metrics as "runtime", the x-axis of the board's
+// Runtime/Performance chart.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { text, num } from '../lib/html.ts';
@@ -22,6 +24,13 @@ const board: Leaderboard = {
   aliases: {
     'DeepSeek-V3.2-Reasoner': 'deepseek-v3-2',
     'Minimax-2.7': 'minimax-m2-7',
+    'Qwen3-Coder-480B': 'qwen3-coder-480b-a35b',
+  },
+  chart: {
+    title: 'OpenHands Index Overall Runtime/Performance',
+    note: 'Average score against average runtime per problem on a log scale, with the efficiency frontier of models that are faster or score higher than any other.',
+    x: { key: 'runtime', label: 'Average runtime per problem', unit: 's', better: 'lower', log: true },
+    y: { key: 'score', label: 'Average score', unit: '%', better: 'higher' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const cfg = await fetchJson<Config>(`${SITE}/config`);
@@ -30,15 +39,17 @@ const board: Leaderboard = {
       .find((v) => v?.headers?.[0] === 'Language Model' && v.headers.includes('Average Score'));
     if (!table?.headers || !table.data) throw new Error('overall table not found in the Gradio config');
     const h = table.headers;
-    const [iScore, iCost, iDate] = [h.indexOf('Average Score'), h.indexOf('Average Cost'), h.indexOf('Date')];
+    const [iScore, iCost, iDate, iTime] = [h.indexOf('Average Score'), h.indexOf('Average Cost'), h.indexOf('Date'), h.indexOf('Average Runtime')];
     return table.data.map((r) => {
       const date = text(r[iDate] ?? '');
+      const runtime = iTime >= 0 ? text(r[iTime] ?? '').match(/^(\d+(?:\.\d+)?)s$/)?.[1] : undefined;
       return {
         model: text(r[0] ?? ''),
         score: num(text(r[iScore] ?? '')) ?? NaN,
         harness: 'OpenHands',
         date: /^\d{4}-\d\d-\d\d$/.test(date) ? date : undefined,
         cost: iCost >= 0 ? num(text(r[iCost] ?? '')) : undefined,
+        ...(runtime ? { metrics: { runtime: Number(runtime) } } : {}),
       };
     });
   },

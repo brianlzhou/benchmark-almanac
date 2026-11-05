@@ -2,7 +2,8 @@
 // data/model_results_for_leaderboard.json (per model: time and space, each with prediction, generation and
 // ranking metrics). The page opens on Time Prediction and ranks models by all@1 ("Models are ranked
 // according to all@1"), so the score is time.prediction["all@1"], the share of problems where the model
-// predicts the right time complexity for every complexity class. The other tabs are not read.
+// predicts the right time complexity for every complexity class. The tab's other two columns, pass@1 and
+// best@1, are kept in metrics as "passAt1" and "bestAt1". The other tabs are not read.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -17,7 +18,6 @@ const board: Leaderboard = {
   feed: `${FEED} (time.prediction all@1)`,
   terms: 'Static JSON on GitHub Pages that the leaderboard loads; robots.txt allows it and the BigOBench repository is CC BY-NC 4.0.',
   aliases: {
-    'Codestral 22B': 'codestral',
     'Qwen2.5-Coder 32B': 'qwen2-5-coder-32b-instruct',
     'DeepSeekV3 671B': 'deepseek-v3',
     'DeepSeekV3-0324 671B': 'deepseek-v3-mar-2025',
@@ -30,7 +30,13 @@ const board: Leaderboard = {
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<Record<string, Result>>(FEED);
-    return Object.entries(data).map(([model, r]) => ({ model, score: r.time?.prediction?.['all@1'] ?? NaN }));
+    return Object.entries(data).map(([model, r]) => {
+      const p = r.time?.prediction ?? {};
+      const metrics: Record<string, number> = {};
+      if (Number.isFinite(p['pass@1'])) metrics.passAt1 = p['pass@1'];
+      if (Number.isFinite(p['best@1'])) metrics.bestAt1 = p['best@1'];
+      return { model, score: p['all@1'] ?? NaN, ...(Object.keys(metrics).length ? { metrics } : {}) };
+    });
   },
 };
 export default board;

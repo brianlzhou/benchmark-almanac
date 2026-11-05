@@ -1,6 +1,7 @@
 // Virology Capabilities Test (SecureBio). securebio.org/virologytest/ is a static page with the VCT results
 // table: per model the accuracy on the 322 multiple-select questions (0 to 100) and the expert percentile.
-// Accuracy is the score; the expert-virologist baseline row is skipped. The table dates from the April
+// Accuracy is the score; the expert-virologist baseline row is skipped. The expert percentile (the share of
+// expert virologists the model outscores) is kept as metrics.expertPercentile. The table dates from the April
 // 2025 paper, so rows carry that date for snapshot matching. SecureBio's Biology Benchmark Dashboard shows
 // newer runs, but only as Plotly charts rescaled from expert level to perfect, not as raw accuracy, so it is
 // not read.
@@ -29,7 +30,8 @@ const board: Leaderboard = {
       const model = r[0]?.text;
       const score = num(r[1]?.text);
       if (!model || score === undefined || /expert/i.test(model)) continue;
-      rows.push({ model, score, date: PAPER_DATE });
+      const pct = head[2] === 'Expert Percentile' ? num(r[2]?.text) : undefined;
+      rows.push({ model, score, date: PAPER_DATE, metrics: pct === undefined ? undefined : { expertPercentile: pct } });
     }
     return rows;
   },

@@ -3,7 +3,8 @@
 // OR-Bench-Hard-1K, toxic acceptance (%) on OR-Bench-Toxic, and their average. The record tracks the
 // over-refusal rate (lower is better), the number lab reports cite as the OR-Bench false refusal rate, so
 // that column is the score. The runs date from mid-2024 (Space updated 2024-07-04); "-latest" API names get
-// the snapshot that was current then.
+// the snapshot that was current then. Toxic acceptance (%) on OR-Bench-Toxic (lower is better) is kept as
+// `toxicAcceptance`.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -31,12 +32,14 @@ const board: Leaderboard = {
     const head = t?.[0]?.map((c) => c.text.toLowerCase()) ?? [];
     const iModel = head.indexOf('model');
     const iOver = head.findIndex((h) => h.startsWith('over refusal'));
+    const iToxic = head.findIndex((h) => h.startsWith('toxic acceptance'));
     if (iModel < 0 || iOver < 0) throw new Error(`unexpected OR-Bench header: ${head.join(' | ')}`);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       const model = r[iModel]?.text;
       const score = num(r[iOver]?.text);
-      if (model && score !== undefined) rows.push({ model, score });
+      const toxic = iToxic < 0 ? undefined : num(r[iToxic]?.text);
+      if (model && score !== undefined) rows.push({ model, score, ...(toxic !== undefined ? { metrics: { toxicAcceptance: toxic } } : {}) });
     }
     return rows;
   },

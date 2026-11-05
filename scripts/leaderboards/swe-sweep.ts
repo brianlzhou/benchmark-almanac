@@ -1,7 +1,9 @@
 // SWE-sweep on swesweep.com. The page is static HTML with one leaderboard table: Rank | Model | Agent |
 // Bugs resolved | Total USD | USD / repo | Turns / repo | Tokens / repo. Bugs resolved (share of the 4.1k
 // bugs fixed, 0 to 100) is the score, and USD / repo is the cost of one task (each task is one repository).
-// The model cell holds the name ("Sol 5.6 (xhigh)") and the maker in separate spans; the effort in
+// Tokens / repo (output tokens, as the Pareto chart's tooltip names them) is kept as tokens, and Turns / repo
+// as metrics.steps; the Pareto tab plots bugs resolved against turns as well as cost and tokens.
+// The model cell holds the name ("Sol 5.6 (xhigh)") and the maker in separate spans, and the effort in
 // parentheses becomes the setting. The board names OpenAI and Anthropic models by their short names
 // ("Astra 6", "Opus 5.5"), which the aliases place. The reader lives in visulogic.ts.
 import type { Leaderboard } from './types.ts';
@@ -24,12 +26,20 @@ const board: Leaderboard = {
     'Opus 5': 'claude-opus-5',
     'Fable 5.1': 'claude-fable-5-1',
   },
+  chart: {
+    title: 'Pareto: bugs resolved against turns',
+    note: 'The Pareto tab with turns on the x axis: each point is one model, and the line marks the best result for a given number of turns per repository.',
+    x: { key: 'steps', label: 'Turns per repository', better: 'lower' },
+    y: { key: 'score', label: 'Bugs resolved', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const rows = await tableRows(URL, {
       model: /^Model$/i,
       score: /^Bugs resolved/i,
       harness: /^Agent$/i,
       cost: /^USD \/ repo$/i,
+      tokens: /^Tokens \/ repo$/i,
+      metrics: { steps: /^Turns \/ repo$/i },
       name: (c) => text(c.html.match(/class="model-name"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? c.text),
     });
     return rows.map((r) => {

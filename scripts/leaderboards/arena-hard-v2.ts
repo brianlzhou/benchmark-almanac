@@ -3,7 +3,8 @@
 // (0 to 100) against the o3-mini baseline on the 500 hard prompts. The other two tables (GPT-4.1 judge, and
 // creative writing) are not read. The README's tables were last changed on 2025-05-01, so that date goes to
 // the resolver to pick the snapshots current then. Name suffixes such as "-high" (reasoning effort) and
-// "-thinking-16k" (thinking budget) become the setting.
+// "-thinking-16k" (thinking budget) become the setting. The table's "CI (%)" column, "(-0.8 / +0.9)", is
+// kept as the interval's bounds in metrics.ciLow and metrics.ciHigh.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -16,7 +17,7 @@ const board: Leaderboard = {
   feed: `${FEED} (first table: hard prompts, style control, Gemini-2.5 judge)`,
   terms: 'README of the lmarena/arena-hard-auto repository, which is Apache-2.0.',
   aliases: {
-    // the README lists "gemini-2.5" beside "gemini-2.5-flash", so it is Pro; on 2025-05-01 that was the 03-25 release
+    // the README lists "gemini-2.5" beside "gemini-2.5-flash", so it is Pro, which on 2025-05-01 was the 03-25 release
     'gemini-2.5': 'gemini-2-5-pro-mar-2025',
     'gemini-2.5-flash': 'gemini-2-5-flash-apr-2025',
     'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024',
@@ -33,7 +34,7 @@ const board: Leaderboard = {
     if (!block) throw new Error('console table not found');
     const rows: LeaderboardRow[] = [];
     for (const line of block.split('\n')) {
-      const m = line.match(/^\s*\d+\s+(\S+)\s+([\d.]+)\s+\(/);
+      const m = line.match(/^\s*\d+\s+(\S+)\s+([\d.]+)\s+\(\s*([-+]?[\d.]+)\s*\/\s*([-+]?[\d.]+)\s*\)/);
       if (!m) continue;
       let model = m[1];
       let setting: string | undefined;
@@ -46,7 +47,10 @@ const board: Leaderboard = {
         setting = effort[2];
         model = effort[1];
       }
-      rows.push({ model, setting, score: Number(m[2]), date: AS_OF });
+      const score = Number(m[2]);
+      // the interval's ends, from the offsets "(-0.8 / +0.9)", rounded as the table rounds
+      const metrics = { ciLow: Number((score + Number(m[3])).toFixed(1)), ciHigh: Number((score + Number(m[4])).toFixed(1)) };
+      rows.push({ model, setting, score, date: AS_OF, metrics });
     }
     if (!rows.length) throw new Error('no rows in the official table');
     return rows;

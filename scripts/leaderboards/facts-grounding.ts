@@ -1,49 +1,22 @@
-// FACTS Grounding on Kaggle Benchmarks (run by Google DeepMind), read through Kaggle's documented public
-// leaderboard endpoint (kaggle.com/docs/benchmarks), as simpleqa-verified.ts does. The board's tasks are
-// "Score" (the headline, a fraction shown as a percentage), "Public Score" and "Private Score". Kaggle now
-// runs FACTS Grounding v2 (new judges), so its numbers sit below the v1 scores in older model cards. The
-// FACTS suite board (google/facts) averages four tasks and is not this benchmark.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
-
-const FEED = 'https://www.kaggle.com/api/v1/benchmarks/google/facts-grounding/leaderboard';
-
-interface Value {
-  value?: number;
-}
-interface Row {
-  modelVersionName?: string;
-  modelVersionSlug?: string;
-  modelVersionConfigName?: string;
-  agentName?: string;
-  harnessName?: string;
-  taskResults: { benchmarkTaskName?: string; result?: { numericResult?: Value; numericResultNullable?: Value; evaluationDate?: string } }[];
-}
+// FACTS Grounding (the January 2025 version) on Kaggle Benchmarks (Google DeepMind). Kaggle keeps each board
+// version at versions/<n>. Version 1 (runs from 2025-05 to 2025-08) still uses the original judges and matches
+// the lab cards (Gemini 2.5 Pro 87.8). Versions 2 and 3 use the new judges and belong to FACTS Grounding v2.
+// The "Score" task, a fraction, is the score (0 to 100). The board's "Public Score" and "Private Score" (the
+// public and held-out halves) are kept as metrics.public and metrics.private (0 to 100). Read through the
+// helper in kaggle-game-arena.ts.
+import type { Leaderboard } from './types.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'facts-grounding',
-  url: 'https://www.kaggle.com/benchmarks/google/facts-grounding',
-  feed: FEED,
-  terms: "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
-  aliases: {
-    'Gemini 3.1 Pro Preview': 'gemini-3-1-pro',
-  },
-  async fetch() {
-    const { rows } = await fetchJson<{ rows: Row[] }>(FEED);
-    const out: LeaderboardRow[] = [];
-    for (const r of rows) {
-      const res = r.taskResults.find((t) => t.benchmarkTaskName === 'Score')?.result;
-      const value = res?.numericResultNullable?.value ?? res?.numericResult?.value;
-      if (value == null) continue;
-      out.push({
-        model: r.modelVersionName?.trim() || r.modelVersionSlug || '',
-        score: value * 100,
-        setting: r.modelVersionConfigName || undefined,
-        harness: [r.agentName, r.harnessName].filter(Boolean).join(', ') || undefined,
-        date: res?.evaluationDate?.slice(0, 10),
-      });
-    }
-    return out;
-  },
+  url: 'https://www.kaggle.com/benchmarks/google/facts-grounding/versions/1',
+  feed: kaggleFeed('google', 'facts-grounding/versions/1'),
+  terms: KAGGLE_TERMS,
+  aliases: {},
+  fetch: () =>
+    kaggleRows('google', 'facts-grounding/versions/1', 'Score', 100, {
+      public: { task: 'Public Score', scale: 100 },
+      private: { task: 'Private Score', scale: 100 },
+    }),
 };
 export default board;
