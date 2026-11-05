@@ -2,7 +2,7 @@
 // the xbench Strapi API (see xbench-scienceqa.ts) with the page's own query: per tested agent product the
 // overall score (0 to 100, the ranking), mean latency and evaluation date. The board tests agent products
 // (AutoClaw, Manus, Genspark, ChatGPT Agent, MiniMax Agent); every row is passed on and the resolver keeps
-// the ones with a model record.
+// the ones with a model record. avgLatency, the board's "Avg Latency (s)" column, is kept as metrics.latency.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { XBENCH_API, XBENCH_TERMS, xbenchApi } from './xbench-scienceqa.ts';
 
@@ -11,6 +11,8 @@ const PATH = 'task-ifs?sort=overallScore:desc&pagination[limit]=100&populate=com
 interface Entry {
   product?: string;
   overallScore?: number;
+  /** seconds per task, the board's "Avg Latency (s)" */
+  avgLatency?: number;
   evaluationDate?: string;
 }
 
@@ -25,7 +27,8 @@ const board: Leaderboard = {
     for (const e of data) {
       const model = e.product?.trim();
       if (!model || typeof e.overallScore !== 'number') continue;
-      rows.push({ model, score: e.overallScore, date: e.evaluationDate });
+      const metrics = typeof e.avgLatency === 'number' ? { latency: e.avgLatency } : undefined;
+      rows.push({ model, score: e.overallScore, date: e.evaluationDate, metrics });
     }
     return rows;
   },

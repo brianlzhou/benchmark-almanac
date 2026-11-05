@@ -7,7 +7,7 @@ import CardTicks from '../../components/CardTicks.astro';
 import ReignChart from '../../components/ReignChart.astro';
 import { reignRow } from '../../lib/reigns.ts';
 import { leaderRows } from '../../lib/leaders.ts';
-import { effortView, usd } from '../../lib/effort.ts';
+import { effortView, usd, costUnit } from '../../lib/effort.ts';
 import EffortChart from '../../components/EffortChart.astro';
 import { untested } from '../../lib/coverage.ts';
 import { host, unreadWhy } from '../../lib/unread.ts';
@@ -476,8 +476,8 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
               <h2>
                 {effort.mode === 'cost' && effort.top
                   ? effort.top.value >= Math.max(...effortRuns.map((r) => r.value))
-                    ? `The best score, ${fmt(effort.top.value, unit)}, costs ${usd(effort.top.cost!)} a task`
-                    : `Of runs with a cost, the best scores ${fmt(effort.top.value, unit)} for ${usd(effort.top.cost!)} a task`
+                    ? `The best score, ${fmt(effort.top.value, unit)}, costs ${usd(effort.top.cost!)} ${costUnit(effort.costPer)}`
+                    : `Of runs with a cost, the best scores ${fmt(effort.top.value, unit)} for ${usd(effort.top.cost!)} ${costUnit(effort.costPer)}`
                   : effort.gain !== undefined && effort.gain >= 1
                     ? `More effort adds a median ${Math.round(effort.gain)} ${unit === '%' ? 'points' : unit}`
                     : 'Scores at each effort level'}
@@ -486,7 +486,7 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
                 {effort.mode === 'cost' ? (
                   <>
                     Runs on the cost frontier score higher than any run that's cheaper.
-                    {effort.cheap && effort.top && ` ${runLabel(effort.cheap)} comes within ${(effort.top.value - effort.cheap.value).toFixed(1).replace(/\.0$/, '')}${unit === '%' ? ' points' : ''} of the best for ${usd(effort.cheap.cost!)} a task, ${costRatio(effort.top.cost! / effort.cheap.cost!)}.`}
+                    {effort.cheap && effort.top && ` ${runLabel(effort.cheap)} comes within ${(effort.top.value - effort.cheap.value).toFixed(1).replace(/\.0$/, '')}${unit === '%' ? ' points' : ''} of the best for ${usd(effort.cheap.cost!)} ${costUnit(effort.costPer)}, ${costRatio(effort.top.cost! / effort.cheap.cost!)}.`}
                     {' '}The costs are the leaderboard's own estimates, so compare them only within this benchmark.
                   </>
                 ) : (
@@ -500,12 +500,12 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
             </div>
           </div>
           <div class="view-graph">
-            <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? ' and cost per task' : ''}`} />
+            <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? (effort.costPer === 'run' ? ' and cost of the full run' : ' and cost per task') : ''}`} />
           </div>
           <div class="view-table table-wrap">
             <table class="t" data-sort>
               <thead>
-                <tr><th>Model</th><th>Effort</th><th>Harness</th><th class="r">Score</th><th class="r">Cost per task</th><th class="r">Output tokens</th></tr>
+                <tr><th>Model</th><th>Effort</th><th>Harness</th><th class="r">Score</th><th class="r">{effort.costPer === 'run' ? 'Cost of the full run' : 'Cost per task'}</th><th class="r">Output tokens</th></tr>
               </thead>
               <tbody>
                 {effortRuns.map((r) => (

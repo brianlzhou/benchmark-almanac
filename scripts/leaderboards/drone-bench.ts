@@ -24,7 +24,6 @@ const board: Leaderboard = {
     'gemini-3.1': 'gemini-3-1-pro',
     // the page's slug is gpt-6-astra (released 2026-09-03)
     'gpt-6': 'gpt-6-astra',
-    'fable-5-1': 'claude-fable-5-1',
   },
   async fetch() {
     const html = await fetchText(PAGE);
@@ -43,8 +42,9 @@ const board: Leaderboard = {
     }
     if (!js) throw new Error('Drone-Bench chart data not found');
     const rows: LeaderboardRow[] = [];
-    for (const m of js.matchAll(/\{label:"([^"]+)",provider:"[^"]*",releaseDate:"[\d-]+",[^{}]*?heroScorePct:([\d.]+)/g)) {
-      rows.push({ model: m[1], score: Number(Number(m[2]).toFixed(2)) });
+    // strings are double-quoted or, since September 2026, template literals
+    for (const m of js.matchAll(/\{label:(["`])([^"`]+)\1,provider:["`][^"`]*["`],releaseDate:["`][\d-]+["`],[^{}]*?heroScorePct:([\d.]+)/g)) {
+      rows.push({ model: m[2], score: Number(Number(m[3]).toFixed(2)) });
     }
     if (rows.length < 10) throw new Error(`only ${rows.length} Drone-Bench rows`);
     return rows;
