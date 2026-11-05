@@ -6,7 +6,8 @@
 //
 // The headline score is pass^1, the average success over the three runs, the board's default and the paper's
 // Table 3. Each row also carries pass^3 (the share of tasks solved in all three runs) and the mean decision
-// latency in seconds, which the board's Pareto chart plots against each other. Jev ran the 30 web tasks only.
+// latency in seconds, which the board's Pareto chart plots against each other. Jev ran the 30 web tasks only,
+// so, like the board's overall view, this leaves it out.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -42,6 +43,8 @@ const board: Leaderboard = {
     const date = js.match(/\bvm="(\d{4}-\d{2}-\d{2})"/)?.[1];
     const rows: LeaderboardRow[] = [];
     for (const c of Object.values(configs)) {
+      // the board leaves out of its overall view a system that ran only the web tasks (Jev, with text input)
+      if (c.entry.scope === 'web-only') continue;
       const runs = Object.values(c.tasks).filter((t) => t.length === 3 && t.every((x) => x === 0 || x === 1)) as number[][];
       if (!runs.length || runs.length < Object.keys(c.tasks).length) continue;
       const pass1 = (100 * runs.reduce((n, t) => n + (t[0] + t[1] + t[2]) / 3, 0)) / runs.length;
@@ -51,7 +54,6 @@ const board: Leaderboard = {
         model: c.entry.name,
         score: pass1,
         setting: effort,
-        harness: c.entry.scope === 'web-only' ? 'web tasks only, text input' : undefined,
         date,
         metrics: { pass3, ...(c.entry.latencyMean ? { latency: c.entry.latencyMean } : {}) },
       });
