@@ -1,4 +1,4 @@
-// Helpers shared by the data scripts. No dependencies: Node 22.18+ runs these files directly.
+// Helpers shared by the data scripts. No dependencies: Node 22.23.4 or later runs these files directly.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -77,14 +77,15 @@ export function parseCsv(text: string): Record<string, string>[] {
   return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ''])));
 }
 
-export async function fetchText(url: string, init: RequestInit = {}, tries = 3): Promise<string> {
+/** `timeoutMs` bounds one attempt: 60 seconds by default, longer for a big file (PolicyBench's is 139 MB). */
+export async function fetchText(url: string, init: RequestInit = {}, tries = 3, timeoutMs = 60_000): Promise<string> {
   let last: unknown;
   for (let i = 0; i < tries; i++) {
     try {
       const res = await fetch(url, {
         ...init,
         headers: { 'user-agent': 'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)', ...(init.headers ?? {}) },
-        signal: AbortSignal.timeout(60_000),
+        signal: AbortSignal.timeout(timeoutMs),
       });
       if (res.status === 429 || res.status >= 500) throw new Error(`${res.status} ${url}`);
       if (!res.ok) throw Object.assign(new Error(`${res.status} ${url}`), { fatal: true });

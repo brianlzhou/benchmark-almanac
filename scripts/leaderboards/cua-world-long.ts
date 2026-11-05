@@ -1,8 +1,8 @@
 // CUA-World-Long (Gym-Anything). The project page cmu-l3.github.io/gym-anything/ has one static table,
 // "Leaderboard: CUA-World-Long": rank, model, method (step budget or test-time auditing), Avg Score (checklist
 // points) and Pass Rate. The board ranks by Pass Rate, the record's headline, so that is the score; the
-// method goes in as the harness, since one model appears with several budgets. Detail rows under each entry
-// (one cell) are skipped.
+// method goes in as the harness, since one model appears with several budgets. Avg Score (mean checklist
+// points, 0 to 100) is kept in metrics as "avgScore". Detail rows under each entry (one cell) are skipped.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -23,13 +23,21 @@ const board: Leaderboard = {
     const iModel = head.indexOf('model');
     const iMethod = head.indexOf('method');
     const iPass = head.indexOf('pass rate');
+    const iAvg = head.indexOf('avg score');
     if (!t || iModel < 0 || iPass < 0) throw new Error(`unexpected CUA-World-Long header: ${head.join(' | ')}`);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       if (r.length < head.length) continue;
       const model = r[iModel].text.replace(/[▼▲]/g, '').trim();
       const score = num(r[iPass].text);
-      if (model && score !== undefined) rows.push({ model, score, harness: iMethod >= 0 ? r[iMethod].text || undefined : undefined });
+      const avg = iAvg >= 0 ? num(r[iAvg].text) : undefined;
+      if (model && score !== undefined)
+        rows.push({
+          model,
+          score,
+          harness: iMethod >= 0 ? r[iMethod].text.replace(/^\+\s*/, '') || undefined : undefined,
+          ...(avg !== undefined ? { metrics: { avgScore: avg } } : {}),
+        });
     }
     return rows;
   },
