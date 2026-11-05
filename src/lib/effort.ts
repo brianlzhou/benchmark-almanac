@@ -2,7 +2,7 @@
 // (low, medium, high, xhigh, max), and some report the cost of each run. The main board keeps each
 // model's best run; this module keeps every run, grouped into one series per model and harness.
 import type { Score } from './types.ts';
-import { leaderboardScores, benchById, modelById } from './data.ts';
+import { leaderboardScores, benchById, modelById, LEADERBOARDS } from './data.ts';
 
 export interface Run {
   model: string;
@@ -24,6 +24,8 @@ export interface Series {
 
 export interface EffortView {
   mode: 'cost' | 'ladder';
+  /** What a cost covers: one task, or the whole run of the test set (ARC-AGI-3). */
+  costPer: 'task' | 'run';
   unit: string;
   series: Series[];
   /** The runs the chart draws: in cost mode, those with a cost. */
@@ -97,6 +99,7 @@ export function effortView(benchmark: string): EffortView | null {
     const cheap = costed.filter((r) => r.value >= top.value - near).sort((a, c) => a.cost! - c.cost!)[0];
     return {
       mode,
+      costPer: LEADERBOARDS[benchmark]?.costPer ?? 'task',
       unit,
       series: series.filter((s) => s.runs.length),
       runs: costed,
@@ -117,8 +120,11 @@ export function effortView(benchmark: string): EffortView | null {
     .map((s) => sign * (s.runs.at(-1)!.value - s.runs[0].value))
     .sort((a, c) => a - c);
   const gain = gains.length ? gains[Math.floor(gains.length / 2)] : undefined;
-  return { mode, unit, series: multi, runs, all: runs, frontier: [], near: 0, gain };
+  return { mode, costPer: LEADERBOARDS[benchmark]?.costPer ?? 'task', unit, series: multi, runs, all: runs, frontier: [], near: 0, gain };
 }
+
+/** How a page says what one cost covers: "a task", or "for the full run" when the board prices whole runs. */
+export const costUnit = (per: 'task' | 'run') => (per === 'run' ? 'for the full run' : 'a task');
 
 /** "$0.44", "$4.43", "$17", "$1,240" */
 export function usd(v: number): string {

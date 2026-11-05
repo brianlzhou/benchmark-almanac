@@ -50,8 +50,11 @@ export function modelName(m: Model | undefined): string {
 
 const UNIT_SUFFIX: Record<string, string> = { elo: '', rating: '', usd: '', minutes: ' min', speedup: '×', score: '', brier: '' };
 
+/** One decimal place, or two just under 100, so 99.95 never reads as a perfect 100. */
+const pct = (v: number) => (v >= 99.95 && v < 100 ? v.toFixed(2) : v >= 10 || v === 0 ? v.toFixed(1) : v.toFixed(2));
+
 export function score(value: number, unit = '%'): string {
-  if (unit === '%') return `${value >= 10 || value === 0 ? value.toFixed(1) : value.toFixed(2)}%`.replace('.0%', '%');
+  if (unit === '%') return `${pct(value)}%`.replace('.0%', '%');
   if (unit === 'usd') return `$${Math.round(value).toLocaleString('en-US')}`;
   if (unit === 'minutes') return value >= 120 ? `${(value / 60).toFixed(1)} h` : `${value < 10 ? value.toFixed(1) : Math.round(value)} min`;
   if (unit === 'elo' || unit === 'rating') return Math.round(value).toLocaleString('en-US');
@@ -61,7 +64,7 @@ export function score(value: number, unit = '%'): string {
 
 /** Score without its unit sign, for dense columns. */
 export function scoreBare(value: number, unit = '%'): string {
-  return unit === '%' ? (value >= 10 || value === 0 ? value.toFixed(1) : value.toFixed(2)) : score(value, unit);
+  return unit === '%' ? pct(value) : score(value, unit);
 }
 
 export function count(n: number, one: string, many = `${one}s`): string {

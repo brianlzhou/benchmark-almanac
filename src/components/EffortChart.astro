@@ -2,9 +2,9 @@
 // Every run on a leaderboard, not only each model's best. Two forms:
 // - cost: score against cost per task on a log scale. Each line joins one model's runs at its effort
 //   levels, cheapest first, and a step line traces the cost frontier: the best score at each price.
-//   Models with a run on the frontier keep their lab's colour. The rest go grey.
+//   Models with a run on the frontier keep their lab's color. The rest go gray.
 // - ladder: when the board reports no cost, one row per model with a dot for each effort level, from
-//   the lowest effort (light) to the highest (full colour).
+//   the lowest effort (light) to the highest (full color).
 // The cost form renders twice, at a desktop and a phone width, so text keeps its size on both.
 import type { EffortView, Run } from '../lib/effort.ts';
 import { usd, tokenCount } from '../lib/effort.ts';
@@ -24,13 +24,13 @@ const name = (id: string) => modelById.get(id)?.name ?? id;
 const runName = (r: Run) => `${name(r.model)}${r.setting ? `, ${r.setting}` : ''}`;
 const vFmt = (v: number) => fmt(v, unit);
 const runNote = (r: Run) =>
-  [r.cost !== null ? `${usd(r.cost)} per task` : '', r.tokens !== null ? `${tokenCount(r.tokens)} output tokens per task` : '', r.harness ?? '']
+  [r.cost !== null ? `${usd(r.cost)} ${view.costPer === 'run' ? 'for the full run' : 'per task'}` : '', r.tokens !== null ? `${tokenCount(r.tokens)} output tokens per task` : '', r.harness ?? '']
     .filter(Boolean)
     .join('. ');
 
 // ---------- cost form ----------
 const onFront = new Set(view.frontier.map((r) => `${r.model}|${r.harness ?? ''}`));
-const colourOf = (key: string, lab?: string) => (onFront.has(key) ? labColor(lab) : 'var(--ink-4)');
+const colorOf = (key: string, lab?: string) => (onFront.has(key) ? labColor(lab) : 'var(--ink-4)');
 const costs = view.runs.map((r) => r.cost!).filter((c) => c > 0);
 const lo = costs.length ? 10 ** Math.floor(Math.log10(Math.min(...costs))) : 1;
 const hi = costs.length ? 10 ** Math.ceil(Math.log10(Math.max(...costs))) : 10;
@@ -46,7 +46,7 @@ const sizes = [
   { key: 'narrow', w: 380, h: 330, labels: 2, font: 11 },
 ];
 const frontLabs = [...new Set(view.series.filter((s) => onFront.has(s.key)).map((s) => s.lab ?? 'other'))];
-// grey series first, so coloured ones sit on top
+// gray series first, so colored ones sit on top
 const drawOrder = [...view.series].sort((a, b) => Number(onFront.has(a.key)) - Number(onFront.has(b.key)));
 
 function layout(w: number, h: number, nLabels: number, font: number) {
@@ -58,7 +58,7 @@ function layout(w: number, h: number, nLabels: number, font: number) {
     d += i === 0 ? `M${X(r.cost!).toFixed(1)},${Y(r.value).toFixed(1)}` : `H${X(r.cost!).toFixed(1)}V${Y(r.value).toFixed(1)}`;
   });
   if (view.frontier.length) d += `H${w - pad.r}`;
-  // labels sit above and left of frontier runs, where no run can be; the best run is labelled first
+  // labels sit above and left of frontier runs, where no run can be; the best run is labeled first
   const placed: { text: string; x: number; y: number; anchor: 'start' | 'end'; x0: number; x1: number }[] = [];
   for (const r of [...view.frontier].reverse()) {
     if (placed.length >= nLabels) break;
@@ -146,10 +146,10 @@ const tint = (lab: string | undefined, i: number, n: number) =>
             })}
             <line x1={pad.l} x2={w - pad.r} y1={h - pad.b} y2={h - pad.b} class="axis" />
             <text x={(pad.l + w - pad.r) / 2} y={h - 6} class="axt" text-anchor="middle">
-              Cost per task, log scale
+              {view.costPer === 'run' ? 'Cost of the full run, log scale' : 'Cost per task, log scale'}
             </text>
             {drawOrder.map((s) => {
-              const c = colourOf(s.key, s.lab);
+              const c = colorOf(s.key, s.lab);
               const on = onFront.has(s.key);
               return (
                 <g class:list={{ dim: !on }}>
