@@ -143,7 +143,7 @@ const sizes = [
           {yTicks.map((t) => (
             <g>
               <line class="grid" x1={z.pad.l} x2={z.w - z.pad.r} y1={z.Y(t)} y2={z.Y(t)} />
-              <text class="tick" x={z.pad.l - 8} y={z.Y(t) + 4} text-anchor="end">{fmtAxis(t, chart.y).replace(/ \S+$/, '')}</text>
+              <text class="tick" x={z.pad.l - 8} y={z.Y(t) + 4} text-anchor="end">{fmtAxis(t, chart.y)}</text>
             </g>
           ))}
           {xTicks.map((t) => (
