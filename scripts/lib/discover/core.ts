@@ -108,9 +108,19 @@ const orgKey = (s?: string) => key(ORG_SPELLINGS.reduce((t, [re, v]) => t.replac
  * name: its paper, repository or organization differs. Ai2's StateBench (2026) is not Microsoft's STATE-Bench.
  * A find that only mentions a name never counts, since mentions carry no paper or maker of their own.
  */
-function otherWithSameName(c: { introduced?: boolean; arxiv?: string; repo?: string; org?: string }, id: string): boolean {
+function otherWithSameName(c: { introduced?: boolean; arxiv?: string; repo?: string; org?: string; url?: string }, id: string): boolean {
   const b = registryById.get(id);
   if (!b || !c.introduced) return false;
+  // a find that links the record's own site is the record
+  const host = (u?: string | null) => {
+    try {
+      return u ? new URL(u).hostname.replace(/^www\./, '') : '';
+    } catch {
+      return '';
+    }
+  };
+  const mineHost = host(c.url);
+  if (mineHost && !/^(?:arxiv\.org|github\.com|huggingface\.co|x\.com|bsky\.app)$/.test(mineHost) && Object.values(b.links ?? {}).some((u) => host(u) === mineHost)) return false;
   // a different paper counts only when the record has one. A record with no paper may simply be meeting its own
   // paper for the first time (FrontierPhysics' leaderboard came two months before its arXiv paper)
   if (c.arxiv && b.links?.paper && c.arxiv !== arxivId(b.links.paper)) return true;
@@ -118,6 +128,9 @@ function otherWithSameName(c: { introduced?: boolean; arxiv?: string; repo?: str
   const theirs = repoKey(b.links?.repo);
   if (mine && theirs && mine !== theirs) return true;
   const [o1, o2] = [orgKey(c.org), orgKey(b.org)];
+  // "Julius AI" and "Julius Research" are one maker: the names share their first word
+  const first = (s?: string) => key((s ?? '').split(/[\s,(]+/).find((w) => w.length > 2 && !/^the$/i.test(w)) ?? '');
+  if (first(c.org) && first(c.org) === first(b.org)) return false;
   return !!(o1 && o2 && !o1.includes(o2) && !o2.includes(o1));
 }
 type Lookup = { name: string; url?: string; arxiv?: string; repo?: string; org?: string; introduced?: boolean; sameNameAs?: string };
