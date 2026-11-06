@@ -1,0 +1,98 @@
+---
+// Search and link-preview tags for every page: canonical URL, Open Graph, X (Twitter) card and structured
+// data. Apps that play video in a link bubble (iMessage, Telegram, Discord) loop the page's film, silent.
+// The others (X, Slack, LinkedIn, WhatsApp) show its poster. scripts/og-film.ts makes both in public/og/.
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+export type Film = 'rise' | 'index' | 'reigns';
+type Json = Record<string, unknown>;
+
+interface Props {
+  /** The page's own name, for og:title. Absent on the home page. */
+  title?: string;
+  /** The <title>, with the site name. */
+  fullTitle: string;
+  description: string;
+  film?: Film;
+  /** Trail above the title (Crumbs.astro). The page itself is added as the last step. */
+  crumbs?: { href: string; label: string }[];
+  jsonLd?: Json | Json[];
+  noindex?: boolean;
+}
+
+const SITE_NAME = 'Benchmark Almanac';
+const FILM_ALT: Record<Film, string> = {
+  rise: 'Each benchmark’s best score since 2023, one line per benchmark, colored by area',
+  index: 'Models on Epoch AI’s Capabilities Index by release date, colored by lab, with the best so far as a line',
+  reigns: 'Which lab held the top score on the capability index and the main math benchmarks since 2023',
+};
+const SIZE = { width: '1200', height: '630' };
+
+const { title, fullTitle, description, film = 'rise', crumbs, jsonLd, noindex = false } = Astro.props;
+const site = Astro.site!;
+// Every page is a folder, so its URL ends in a slash (vercel.json trailingSlash).
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const url = new URL(path, site).href;
+const abs = (href: string) => new URL(href, site).href;
+
+// A short content hash on the image URLs, so apps that cache previews by image URL fetch a new poster.
+// The film keeps its plain URL, the form Ashton's working iMessage preview uses.
+const file = (name: string) => join(process.cwd(), 'public', 'og', name);
+const version = (name: string) => (existsSync(file(name)) ? createHash('sha1').update(readFileSync(file(name))).digest('hex').slice(0, 10) : '');
+const posterV = version(`${film}.png`);
+const hasVideo = existsSync(file(`${film}.mp4`));
+const poster = posterV ? abs(`/og/${film}.png?v=${posterV}`) : '';
+const video = hasVideo ? abs(`/og/${film}.mp4`) : '';
+const ogTitle = title ?? SITE_NAME;
+
+const graph: Json[] = [...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+if (crumbs?.length)
+  graph.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: [...crumbs, { href: path, label: ogTitle }].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: abs(c.href) })),
+  });
+// keeps "</script>" inside a string from closing the tag
+const ld = graph.length ? JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c') : '';
+---
+
+{noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="max-image-preview:large" />}
+{!noindex && <link rel="canonical" href={url} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+{
+  poster && (
+    <>
+      <meta property="og:image" content={poster} />
+      <meta property="og:image:secure_url" content={poster} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content={SIZE.width} />
+      <meta property="og:image:height" content={SIZE.height} />
+      <meta property="og:image:alt" content={FILM_ALT[film]} />
+    </>
+  )
+}
+{
+  video && (
+    <>
+      <meta property="og:video" content={video} />
+      <meta property="og:video:secure_url" content={video} />
+      <meta property="og:video:type" content="video/mp4" />
+      <meta property="og:video:width" content={SIZE.width} />
+      <meta property="og:video:height" content={SIZE.height} />
+    </>
+  )
+}
+<meta name="twitter:card" content={poster ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={description} />
+{poster && <meta name="twitter:image" content={poster} />}
+{poster && <meta name="twitter:image:alt" content={FILM_ALT[film]} />}
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+{ld && <script type="application/ld+json" set:html={ld} />}

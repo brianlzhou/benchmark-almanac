@@ -133,19 +133,39 @@ const TASKS: Record<string, string> = { public: 'All public', 'public+private-ho
 const level = b.level ? LEVEL_BY_ID.get(b.level) : undefined;
 const scoring = b.scoring ? SCORING_BY_ID.get(b.scoring) : undefined;
 const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
+const trail = [
+  { href: '/benchmarks/', label: 'Benchmarks' },
+  // Coding is both an area and its main category: one step, to the category page
+  ...(catName === area.name ? [] : [{ href: `/benchmarks/?area=a:${s.area}`, label: area.name }]),
+  { href: `/categories/${cat}/`, label: catName },
+];
+// search results and link previews lead with who is ahead, in the words of the leaderboard heading below, then
+// what the benchmark tests
+const metaLead = otherAhead ? `${otherAhead.name} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : s.best ? leaderLine(s, gap?.last) : '';
+const metaDescription = `${metaLead ? `${metaLead}. ` : ''}${b.description ?? `${b.name}: scores, leaderboard, and which model cards report it.`}`;
+// schema.org Dataset, for Google Dataset Search: the benchmark's tasks, who made them, and where they live
+const dataset = {
+  '@type': 'Dataset',
+  name: b.name,
+  description: metaDescription,
+  url: new URL(`/benchmarks/${b.id}/`, Astro.site).href,
+  ...(b.org ? { creator: b.org.split(/\s*\+\s*/).map((name) => ({ '@type': 'Organization', name })) } : {}),
+  ...(b.released ? { datePublished: b.released } : {}),
+  ...(b.links?.paper ? { citation: b.links.paper } : {}),
+  ...(() => {
+    const same = [b.links?.site, b.links?.repo, b.links?.dataset, b.links?.leaderboard].filter((u): u is string => !!u);
+    return same.length ? { sameAs: same } : {};
+  })(),
+  keywords: [...new Set(['AI benchmark', area.name, catName])],
+  variableMeasured: { '@type': 'PropertyValue', name: 'Score', unitText: unit },
+  includedInDataCatalog: { '@type': 'DataCatalog', name: 'Benchmark Almanac', url: new URL('/', Astro.site).href },
+};
 ---
 
-<Base title={b.name} description={b.description ?? `${b.name}: scores, leaderboard, and which model cards report it.`}>
+<Base title={b.name} description={metaDescription} crumbs={trail} jsonLd={dataset}>
   <div class="page">
     <header class="head" style={`--a: var(--area-${s.area})`}>
-      <Crumbs
-        items={[
-          { href: '/benchmarks/', label: 'Benchmarks' },
-          // Coding is both an area and its main category: one step, to the category page
-          ...(catName === area.name ? [] : [{ href: `/benchmarks/?area=a:${s.area}`, label: area.name }]),
-          { href: `/categories/${cat}/`, label: catName },
-        ]}
-      />
+      <Crumbs items={trail} />
       <h1 class="with-amark"><AreaMark area={s.area} size={20} />{b.name}</h1>
       <div class="mast">
         {otherAhead && (

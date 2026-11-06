@@ -5,13 +5,15 @@ import ModelCard from '../../components/ModelCard.astro';
 import ModelName from '../../components/ModelName.astro';
 import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
 import AreaShare from '../../components/AreaShare.astro';
-import { labs, featuredModels, models, cards, eciByModel, benchById } from '../../lib/data.ts';
+import Crumbs from '../../components/Crumbs.astro';
+import Spark from '../../components/Spark.astro';
+import { labs, featuredModels, labPages, models, cards, eciByModel, benchById } from '../../lib/data.ts';
 import { monthYear, fullDate, yearFrac } from '../../lib/format.ts';
 import { labColor } from '../../lib/palette.ts';
 import { yearTicks, yearLines } from '../../lib/scale.ts';
 
 export function getStaticPaths() {
-  return labs.filter((l) => featuredModels.some((m) => m.lab === l.id)).map((l) => ({ params: { id: l.id } }));
+  return labs.filter((l) => labPages.has(l.id)).map((l) => ({ params: { id: l.id } }));
 }
 
 const { id } = Astro.params;
@@ -23,6 +25,12 @@ const pts: Pt[] = models
   .filter((m) => eciByModel.has(m.id) && m.released)
   .map((m) => ({ date: m.released!, value: eciByModel.get(m.id)!.eci, model: m.id, source: 'epoch' as const }));
 const mine = ms.map((m) => m.id);
+// the lab's best index score over time: each release that beat its own earlier best
+const bestRun: { date: string; value: number }[] = [];
+for (const m of [...ranked].sort((a, b) => (a.released ?? '').localeCompare(b.released ?? ''))) {
+  const v = eciByModel.get(m.id)!.eci;
+  if (m.released && (!bestRun.length || v > bestRun.at(-1)!.value)) bestRun.push({ date: m.released, value: v });
+}
 
 // the benchmarks this lab's cards report, as rows of ticks over its cards
 const counts = new Map<string, number>();
@@ -44,14 +52,24 @@ const years = yearTicks(t0, t1);
 const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
 ---
 
-<Base title={lab.name} description={`${lab.name}: its models, their scores, and what its model cards measure.`}>
+<Base title={lab.name} description={`${lab.name}: its models, their scores, and what its model cards measure.`} film="index" crumbs={[{ href: '/labs/', label: 'Labs' }]}>
   <div class="page">
-    <header class="head">
+    <header class="head" style={`--lc:${color}`}>
+      <Crumbs items={[{ href: '/labs/', label: 'Labs' }]} />
       <h1 class="with-mark"><LabMark lab={lab.id} size={44} />{lab.name}</h1>
+      {
+        ranked[0] && (
+          <div class="mast">
+            <span>Best on the Capabilities Index</span>
+            <a href={`/models/${ranked[0].id}/`}>{ranked[0].name}</a>
+            <b class="num">{eciByModel.get(ranked[0].id)!.eci.toFixed(1)}</b>
+            {bestRun.length >= 2 && <Spark points={bestRun} unit="index" color={color} label={`${lab.name}'s best index score over time`} />}
+          </div>
+        )
+      }
       <div class="facts">
         <span><b>{ms.length}</b> models</span>
         <span><b>{cs.length}</b> model cards read</span>
-        {ranked[0] && <span>Best on the index: <a href={`/models/${ranked[0].id}/`}>{ranked[0].name}</a>, <b>{eciByModel.get(ranked[0].id)!.eci.toFixed(1)}</b></span>}
         {lab.url && <a href={lab.url}>{lab.url.replace(/^https?:\/\/(www\.)?/, '')}</a>}
       </div>
     </header>
@@ -61,7 +79,7 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
         <section>
           <div class="sh">
             <h2>{lab.name}'s models against the field</h2>
-            <p>Epoch Capabilities Index by release date. This lab's models are in colour, everyone else's in grey.</p>
+            <p>Every model on the Epoch Capabilities Index by release date, with {lab.name}'s in color.</p>
           </div>
           <TimeScatter points={pts} unit="index" label={`${lab.name} on the Epoch Capabilities Index`} highlight={mine} labelIds={ranked.slice(0, 8).map((m) => m.id)} legend={false} height={420} />
         </section>
@@ -86,7 +104,7 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
         <section>
           <div class="sh">
             <h2>What its model cards measure</h2>
-            <p>Each column is one of {lab.name}'s model cards, oldest on the left. A tick means the card's headline table reports that benchmark. The rows run in the order the lab started using them.</p>
+            <p>Tall ticks are {lab.name} model cards that list the benchmark in their headline table. Gray dots are cards that leave it out. Rows are the benchmarks the lab listed most, at least twice each, in the order it started using them.</p>
           </div>
           <div class="matrix" style={`--c:${color}`}>
             {rows.map(({ b, on }) => (
@@ -126,7 +144,7 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
             <h2>Model cards</h2>
           </div>
           <div class="table-wrap">
-            <table class="t">
+            <table class="t" data-sort>
               <thead>
                 <tr><th>Date</th><th>Model</th><th>Document</th><th class="r">Benchmarks</th></tr>
               </thead>
@@ -169,6 +187,34 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
     display: flex;
     align-items: center;
     gap: 18px;
+  }
+  /* a lab's page carries its color: a one-color mark takes it, and so does the line of its best scores */
+  .with-mark :global(.mask) {
+    background: var(--lc);
+  }
+  .mast {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--ink-3);
+  }
+  .mast a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .mast a:hover {
+    text-decoration: underline;
+  }
+  .mast b {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .mast :global(.spark) {
+    margin-left: 10px;
   }
   .cards {
     display: grid;

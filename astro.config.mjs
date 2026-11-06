@@ -1,18 +1,32 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+
+/** Under `astro dev` only, the pages scripts/og-film.ts films the link-preview videos from. */
+const ogFilm = {
+  name: 'og-film',
+  hooks: {
+    /** @param {{ command: string, injectRoute: (route: { pattern: string, entrypoint: string }) => void }} options */
+    'astro:config:setup': ({ command, injectRoute }) => {
+      if (command === 'dev') injectRoute({ pattern: '/og-film/[scene]', entrypoint: './src/og-film/Film.astro' });
+    },
+  },
+};
 
 export default defineConfig({
-  site: process.env.SITE_URL || undefined,
+  // Canonical URLs, the sitemap and link previews need absolute URLs. SITE_URL overrides the production host.
+  site: process.env.SITE_URL || 'https://benchmarks.brianzhou.org',
   compressHTML: true,
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
   build: { inlineStylesheets: 'auto' },
+  integrations: [sitemap(), ogFilm],
   fonts: [
     {
       provider: fontProviders.google(),
       name: 'Newsreader',
       cssVariable: '--font-serif',
       weights: ['400'],
-      styles: ['normal'],
+      styles: ['normal', 'italic'],
       subsets: ['latin'],
       fallbacks: ['Georgia', 'serif'],
     },
