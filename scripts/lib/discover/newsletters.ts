@@ -56,6 +56,27 @@ export async function ainews(r: Reader) {
 }
 
 /**
+ * The benchmark a launch post names only by its site: Dwarkesh Patel's "The benchmark where AIs have to lie to win"
+ * calls it a benchmark in the title and links clocktowerbench.com, which gives the name Clocktower Bench.
+ */
+export function launchSite(html: string, title: string): { name: string; url: string } | undefined {
+  if (!/\b(?:benchmark|eval|evals|leaderboard)\b/i.test(title)) return;
+  for (const m of html.matchAll(/href="(https?:\/\/[^"]+)"/g)) {
+    let host = '';
+    try {
+      host = new URL(m[1].replace(/&amp;/g, '&')).hostname;
+    } catch {
+      continue;
+    }
+    const [label, tld] = host.split('.').slice(-2);
+    const parts = label?.match(/^([a-z0-9-]{3,}?)-?(bench|evals?|arena)$/);
+    if (!parts || !tld) continue;
+    const words = parts[1].split('-').map((w) => w[0].toUpperCase() + w.slice(1));
+    return { name: `${words.join(' ')} ${parts[2][0].toUpperCase()}${parts[2].slice(1)}`, url: `https://${label}.${tld}/` };
+  }
+}
+
+/**
  * Reads a newsletter's feed and adds each benchmark its recent posts name, credited to the newsletter. A publisher
  * that launches its own benchmarks (`launches`, the org it names) also gets the benchmark a post introduces, and
  * `mentions: false` skips the other names, for a publisher that writes mostly about other things.
@@ -64,10 +85,15 @@ async function newsletter(r: Reader, o: { source: string; feed: string; own: Reg
   const items = parseFeed(await r.text(o.feed)).filter((it) => it.date >= FROM && (!o.posts || o.posts.test(it.title)));
   r.read(items.length);
   for (const it of items) {
-    if (o.launches)
+    if (o.launches) {
       // the opening of a launch post says what it launches: "GDPx is a benchmark that covers..."
-      for (const nm of launchNames(stripTags(it.html).slice(0, 4000), it.title))
+      const found = launchNames(stripTags(it.html).slice(0, 4000), it.title);
+      for (const nm of found)
         r.add({ key: key(nm), name: nm, title: it.title, url: it.link, org: o.launches, introduced: true, stageA: 6, general: true }, { curated: { source: o.source, url: it.link } });
+      // or names it only by the site it links
+      const site = found.length ? undefined : launchSite(it.html, it.title);
+      if (site) r.add({ key: key(site.name), name: site.name, title: it.title, url: site.url, org: o.launches, introduced: true, stageA: 6, general: true }, { curated: { source: o.source, url: it.link } });
+    }
     if (o.mentions === false) continue;
     for (const m of benchmarkMentions(it.html, { own: o.own, evalSection: o.evalSection })) {
       const url = m.url ?? it.link;
@@ -102,6 +128,11 @@ export const epochSubstack = (r: Reader) =>
 // datacenters, so only launches count. Read through the Substack feed, which carries each post in full.
 export const semianalysis = (r: Reader) =>
   newsletter(r, { source: 'SemiAnalysis', feed: 'https://newsletter.semianalysis.com/feed', own: /semianalysis\.com/, launches: 'SemiAnalysis', mentions: false });
+
+// Dwarkesh Patel launched Clocktower Bench in a post and video essay on 2026-11-05. Most posts are podcast
+// episodes that mention many benchmarks in passing, so only launches count. Read through the Substack feed.
+export const dwarkesh = (r: Reader) =>
+  newsletter(r, { source: 'Dwarkesh Podcast', feed: 'https://www.dwarkesh.com/feed', own: /dwarkesh\.com/, launches: 'Dwarkesh Patel', mentions: false });
 
 export const interconnects = (r: Reader) => newsletter(r, { source: 'Interconnects', feed: 'https://www.interconnects.ai/feed', own: /interconnects\.ai/ });
 
