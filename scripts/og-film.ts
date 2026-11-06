@@ -36,9 +36,27 @@ declare global {
 
 if (spawnSync('ffmpeg', ['-version']).status !== 0) throw new Error('ffmpeg is not on PATH. Install it (brew install ffmpeg) and run this again.');
 
-async function playwright(): Promise<typeof import('playwright-core')> {
+// playwright-core is not a dependency of the site, so the few calls this script makes are typed here
+interface Page {
+  goto(url: string, options?: { timeout?: number }): Promise<unknown>;
+  waitForFunction(fn: () => boolean, arg: null, options: { timeout: number }): Promise<unknown>;
+  evaluate<R, A = undefined>(fn: (arg: A) => R | Promise<R>, arg?: A): Promise<R>;
+  screenshot(options: { path: string }): Promise<unknown>;
+  setContent(html: string): Promise<void>;
+  on(event: 'pageerror', listener: (error: Error) => void): void;
+}
+interface Browser {
+  newContext(options: object): Promise<{ newPage(): Promise<Page> }>;
+  newPage(options: object): Promise<Page>;
+  close(): Promise<void>;
+}
+type Playwright = { chromium: { launch(options: object): Promise<Browser> } };
+
+async function playwright(): Promise<Playwright> {
+  // a name in a variable, so type checking does not look for a package the site does not install
+  const name = 'playwright-core';
   try {
-    return await import('playwright-core');
+    return await import(name);
   } catch {
     const dir = process.env.PLAYWRIGHT_CORE;
     if (!dir) throw new Error('playwright-core is not installed. Set PLAYWRIGHT_CORE to a playwright-core folder.');

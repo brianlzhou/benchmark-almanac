@@ -12,8 +12,6 @@ type Json = Record<string, unknown>;
 interface Props {
   /** The page's own name, for og:title. Absent on the home page. */
   title?: string;
-  /** The <title>, with the site name. */
-  fullTitle: string;
   description: string;
   film?: Film;
   /** Trail above the title (Crumbs.astro). The page itself is added as the last step. */
@@ -30,7 +28,7 @@ const FILM_ALT: Record<Film, string> = {
 };
 const SIZE = { width: '1200', height: '630' };
 
-const { title, fullTitle, description, film = 'rise', crumbs, jsonLd, noindex = false } = Astro.props;
+const { title, description, film = 'rise', crumbs, jsonLd, noindex = false } = Astro.props;
 const site = Astro.site!;
 // Every page is a folder, so its URL ends in a slash (vercel.json trailingSlash).
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
