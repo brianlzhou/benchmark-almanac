@@ -9,7 +9,11 @@ import { fetchText } from '../lib/util.ts';
 import { ghRaw, mdTables } from './big-bench-extra-hard.ts';
 
 const REPO = 'prinz-ai/prinzbench';
-const FEED = ghRaw(REPO, 'README.md');
+// On 2026-11-03 the author replaced the README with an unrelated AI timeline (commit 93e07b6), so the board is
+// read from the last README that has the table: commit b14e152, the 2026-07-18 update. Point it back at main if
+// the table returns.
+const PINNED = 'b14e1521f3f03fc2a78d7ac8f81527111d6a1f80';
+const FEED = ghRaw(REPO, 'README.md', PINNED);
 
 const board: Leaderboard = {
   benchmark: 'prinzbench',
@@ -24,6 +28,7 @@ const board: Leaderboard = {
     'opus-4.5': 'claude-opus-4-5',
     'sonnet-4.6': 'claude-sonnet-4-6',
     'sonnet-4.5': 'claude-sonnet-4-5',
+    'meta-muse-spark': 'muse-spark',
   },
   async fetch() {
     const t = mdTables(await fetchText(FEED)).find((x) => x.head.some((h) => /^prinzbench \(full\) score/.test(h)));
@@ -40,7 +45,8 @@ const board: Leaderboard = {
         setting = level[1];
         model = model.slice(0, level.index).trim();
       }
-      const thinking = model.match(/^(.+)-thinking$/);
+      // "kimi-k2-thinking" is a model of its own, not Kimi K2 in a thinking mode
+      const thinking = model === 'kimi-k2-thinking' ? null : model.match(/^(.+)-thinking$/);
       if (thinking) {
         model = thinking[1];
         setting = setting ? `thinking ${setting}` : 'thinking';

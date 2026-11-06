@@ -38,6 +38,18 @@ export interface Store {
   updated: string | null;
   items: Candidate[];
   seen?: Record<string, string[]>;
+  /** Papers that introduce a benchmark the almanac already catalogs without a paper link. */
+  papers?: PaperFind[];
+}
+export interface PaperFind {
+  /** The cataloged record the paper introduces. */
+  benchmark: string;
+  arxiv: string;
+  title: string;
+  url: string;
+  source: string;
+  first: string;
+  last: string;
 }
 /** `introduced` marks a find whose source introduces it: the paper's abstract or the launch post names it as its own. */
 export type Find = Partial<Candidate> & { key: string; name: string; title: string; url: string; introduced?: boolean };
@@ -99,7 +111,9 @@ const orgKey = (s?: string) => key(ORG_SPELLINGS.reduce((t, [re, v]) => t.replac
 function otherWithSameName(c: { introduced?: boolean; arxiv?: string; repo?: string; org?: string }, id: string): boolean {
   const b = registryById.get(id);
   if (!b || !c.introduced) return false;
-  if (c.arxiv && c.arxiv !== arxivId(b.links?.paper)) return true;
+  // a different paper counts only when the record has one. A record with no paper may simply be meeting its own
+  // paper for the first time (FrontierPhysics' leaderboard came two months before its arXiv paper)
+  if (c.arxiv && b.links?.paper && c.arxiv !== arxivId(b.links.paper)) return true;
   const mine = repoKey(c.repo);
   const theirs = repoKey(b.links?.repo);
   if (mine && theirs && mine !== theirs) return true;
@@ -335,6 +349,26 @@ function upsert(c: Find, how: How): { known: string } | { candidate: Candidate }
   return { candidate: cur };
 }
 
+// ---- papers for cataloged benchmarks -----------------------------------------------------------------
+// A benchmark often joins the catalog through its leaderboard or launch post and gets its paper later. When a
+// reader meets a paper that introduces a cataloged name, and the record has no paper link, the paper waits on the
+// New page for a person to check and link it.
+const paperFinds = new Map((store.papers ?? []).map((p) => [p.arxiv, p]));
+function notePaper(id: string, c: Find, source: string) {
+  const ax = c.arxiv ?? arxivId(c.url);
+  const b = registryById.get(id);
+  if (!c.introduced || !ax || !b || b.links?.paper || knownPapers.has(ax)) return;
+  const cur = paperFinds.get(ax) ?? { benchmark: id, arxiv: ax, title: c.title, url: `https://arxiv.org/abs/${ax}`, source, first: TODAY, last: TODAY };
+  cur.last = TODAY;
+  paperFinds.set(ax, cur);
+}
+/** The papers still waiting: their record has no paper link yet, and a reader saw them in the last 30 days. */
+export function papersForCatalog(): PaperFind[] {
+  return [...paperFinds.values()]
+    .filter((p) => registryById.has(p.benchmark) && !registryById.get(p.benchmark)!.links?.paper && p.last >= daysAgo(30))
+    .sort((a, b) => b.last.localeCompare(a.last));
+}
+
 // ---- readers ---------------------------------------------------------------------------------------
 const UA = 'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)';
 export interface FetchOptions {
@@ -409,8 +443,10 @@ export function makeReader(id: string, signal: AbortSignal) {
     add(c: Find, how: How) {
       if (!open) return;
       const r = upsert(c, how);
-      if ('known' in r) knownIds.add(r.known);
-      else cands.add(r.candidate);
+      if ('known' in r) {
+        knownIds.add(r.known);
+        notePaper(r.known, c, id);
+      } else cands.add(r.candidate);
       tally.candidates = cands.size;
       tally.known = knownIds.size;
     },

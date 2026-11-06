@@ -8,7 +8,7 @@ import { key } from '../util.ts';
 import { FROM, names, phraseNames, launchNames, knownId, arxivId, githubRepo, type Reader } from './core.ts';
 import { parseFeed, stripTags } from './text.ts';
 
-const BLOGS = [
+export const BLOGS = [
   // Google's terms allow automated access that follows robots.txt, and both robots files allow these paths
   { lab: 'Google DeepMind', feed: 'https://deepmind.google/blog/rss.xml' },
   { lab: 'Google', feed: 'https://blog.google/innovation-and-ai/models-and-research/gemini-models/rss/' },
