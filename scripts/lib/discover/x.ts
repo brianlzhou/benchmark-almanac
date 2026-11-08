@@ -97,6 +97,8 @@ export async function xGrok(r: Reader) {
   const launches = xLaunches(stdout);
   r.read(launches.length);
   for (const l of launches) {
+    // the almanac never uses Artificial Analysis data, so its own benchmarks are not candidates
+    if (/artificial\s*analysis|artificialanalysis\.ai/i.test(`${l.org ?? ''} ${l.links.join(' ')}`)) continue;
     // a link counts only when it answers, so a link Grok guessed never reaches the queue
     const live: string[] = [];
     for (const u of l.links.slice(0, 5)) {

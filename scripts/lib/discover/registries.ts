@@ -3,8 +3,8 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { key, githubHeaders } from '../util.ts';
-import { FROM, GENERAL, NICHE, known, names, hubStageA, humanize, type Reader } from './core.ts';
+import { key, githubHeaders, readJson, dataPath, daysAgo } from '../util.ts';
+import { FROM, GENERAL, NICHE, knownId, names, hubStageA, humanize, arxivId, githubRepo, type Reader } from './core.ts';
 
 export async function epochHub(r: Reader) {
   const zipBytes = await r.bytes('https://epoch.ai/data/benchmark_data.zip', { timeout: 100_000 });
@@ -83,7 +83,7 @@ export async function harbor(r: Reader) {
 }
 
 // Prime Intellect's Environments Hub. Anyone can publish, and most entries are training environments, so
-// a find here counts as one feed: it needs a second source or a known maker to reach the catalogue list.
+// a find here counts as one feed: it needs a second source or a known maker to reach the catalog list.
 // This is the public listing call its official CLI makes (`prime env list`), with no account.
 export async function primeHub(r: Reader) {
   type E = { name: string; description: string | null; owner: { name: string; type: string } | null; created_at: string; tags: string[] | null; stars: number; visibility: string };
@@ -105,7 +105,7 @@ export async function primeHub(r: Reader) {
     const nm = hubName(e.name, desc);
     r.add(
       { key: key(nm), name: nm, title: desc.slice(0, 160) || nm, url, repo: url, org: e.owner!.name, stars: e.stars, stageA: a, general: GENERAL.test(`${desc} ${tags}`) || /agent|coding|tool/i.test(tags), niche: NICHE.test(desc) },
-      { feed: 'prime' },
+      { feed: 'Prime Intellect hub' },
     );
   }
 }
@@ -132,7 +132,7 @@ export async function everyEvalEver(r: Reader) {
     if (AGGREGATORS.test(f)) continue;
     // "hal-gaia" is GAIA run on the HAL leaderboard, "helm_mmlu" is MMLU in HELM
     const base = f.replace(/^(hal|helm)[-_]/i, '');
-    const nm = known.has(key(base)) ? base : f;
+    const nm = knownId(base) ? base : f;
     const url = `https://huggingface.co/datasets/${REPO}/tree/main/data/${f}`;
     r.add({ key: key(nm), name: nm, title: `${f} in Every Eval Ever`, url, stageA: 5, general: true }, { registry: { source: 'Every Eval Ever', url } });
   }
@@ -202,7 +202,7 @@ export async function awesomeAiLeaderboard(r: Reader) {
   r.remember('awesomeAiLeaderboard', ids);
 }
 
-// Awesome-CUA keeps dated, reviewed records of computer-use benchmarks in data/catalog.jsonl.
+// Awesome-CUA keeps dated records of computer-use benchmarks in data/catalog.jsonl.
 export async function awesomeCua(r: Reader) {
   type Rec = { id: string; kind: string; name: string; url: string; summary: string | null; scope: string; review_status: string; evidence: { retrieved_at?: string }[]; links: { rel: string; url: string }[] };
   const text = await r.text('https://api.github.com/repos/reacher-z/Awesome-CUA/contents/data/catalog.jsonl', { headers: { ...githubHeaders(), accept: 'application/vnd.github.raw' }, timeout: 90_000 });
@@ -216,13 +216,130 @@ export async function awesomeCua(r: Reader) {
   // on the first run, the date the scanner first recorded an entry sets the baseline
   const firstSeen = (x: Rec) => x.evidence.map((e) => e.retrieved_at ?? '').filter(Boolean).sort()[0] ?? '';
   const added = new Set(await r.fresh('awesomeCua', ids, async () => recs.filter((x) => firstSeen(x).slice(0, 10) < FROM).map((x) => x.id)));
+  // Since 2026-11-06 the list curates old benchmarks and small personal repositories too: it added 127 in a day,
+  // most with no stars. So an entry counts as one feed, not a registry listing, and it reaches the catalog list only
+  // with stars or a second source. Its records carry no publication date, so the repository's creation date stands
+  // in: an entry whose repository is more than 30 days old is not a launch and is skipped.
+  const token = Boolean(process.env.GITHUB_TOKEN || process.env.GH_TOKEN);
+  let lookups = token ? 300 : 40;
+  let old = 0;
   for (const x of recs) {
     if (!added.has(x.id)) continue;
-    const repo = x.links.find((l) => l.url.includes('github.com'))?.url;
+    const repo = githubRepo(x.links.find((l) => l.url.includes('github.com'))?.url ?? x.url);
+    const created =
+      repo && lookups-- > 0
+        ? await r
+            .json<{ created_at?: string }>(repo.replace('https://github.com/', 'https://api.github.com/repos/'), { headers: githubHeaders() })
+            .then((d) => d.created_at?.slice(0, 10))
+            .catch(() => undefined)
+        : undefined;
+    if (created && created < daysAgo(30)) {
+      old++;
+      continue;
+    }
+    r.add({ key: key(x.name), name: x.name, title: x.summary ?? x.name, url: x.url, repo, stageA: 5, general: true }, { feed: 'Awesome-CUA' });
+  }
+  if (old) r.note(`skipped ${old} older benchmark(s) the list newly curated`);
+  r.remember('awesomeCua', ids);
+}
+
+// BenchmarkList (benchmarklist.com) catalogs about 2,600 benchmarks and publishes them as one JSON file in its
+// public data API. Its robots.txt allows every path for general agents and signals "use=reference, ai-train=no".
+// This reader is reference use: it takes each new entry's name and its own links (paper, repository, site) and
+// checks nothing else. It copies no BenchmarkList text or scores, and it identifies itself as benchmark-almanac.
+// One request a day. A find counts as one feed, so it needs a second source or a known maker to reach the catalog
+// list. Entries whose only link is an arXiv paper are skipped (the arXiv reader sees those papers), and so are
+// entries from Artificial Analysis, whose data the almanac never uses.
+const BENCHMARKLIST = 'https://benchmarklist.com/api/v1/benchmarks.json';
+interface BlEntry {
+  id: string;
+  name: string;
+  source?: string | null;
+  description?: string | null;
+  links?: Record<string, string>;
+  urls?: { page?: string };
+}
+export async function benchmarkList(r: Reader) {
+  const { benchmarks } = await r.json<{ benchmarks: BlEntry[] }>(BENCHMARKLIST, { timeout: 90_000 });
+  r.read(benchmarks.length);
+  const ids = benchmarks.map((x) => x.id);
+  // the first run records what is there today: those entries were compared with the catalog by hand on 2026-11-05
+  const added = new Set(await r.fresh('benchmarkList', ids));
+  for (const x of benchmarks) {
+    if (!added.has(x.id) || /artificial[_\s-]?analysis/i.test(x.source ?? '')) continue;
+    const links = Object.values(x.links ?? {}).filter((u) => /^https?:\/\//.test(u));
+    if (!links.length || links.every((u) => /arxiv\.org/.test(u))) continue;
+    const l = x.links ?? {};
+    const repo = githubRepo(l.repository ?? links.find((u) => u.includes('github.com')) ?? '');
+    const url = l.repository ?? l.leaderboard ?? l.homepage ?? l.blog ?? l.paper ?? l.dataset ?? links[0];
+    const text = `${x.name} ${x.description ?? ''}`;
     r.add(
-      { key: key(x.name), name: x.name, title: x.summary ?? x.name, url: x.url, repo, stageA: 5, general: true },
-      { registry: { source: 'Awesome-CUA', url: 'https://github.com/reacher-z/Awesome-CUA' } },
+      { key: key(x.name), name: x.name, title: x.name, url, arxiv: arxivId(l.paper), repo, stageA: hubStageA(x.name, x.description ?? ''), general: GENERAL.test(text), niche: NICHE.test(text) },
+      { feed: 'BenchmarkList' },
     );
   }
-  r.remember('awesomeCua', ids);
+  r.remember('benchmarkList', ids);
+}
+
+/** Name patterns for models released in the last 18 months, with their labs, from data/models.json. */
+let recent: { lab: string; re: RegExp }[] | undefined;
+function recentModels() {
+  if (recent) return recent;
+  const cut = daysAgo(550);
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  recent = readJson<{ name: string; lab: string; released?: string }[]>(dataPath('models.json'))
+    .filter((m) => (m.released ?? '') >= cut)
+    .map((m) => {
+      // results tables often drop the brand: "Opus 5.5" for Claude Opus 5.5
+      const short = m.name.replace(/^(?:Claude|OpenAI|Google|Meta|xAI)\s+/, '');
+      const alts = short !== m.name && short.length >= 6 && /\d/.test(short) ? [m.name, short] : [m.name];
+      return { lab: m.lab, re: new RegExp(String.raw`(?<![\w.-])(?:${alts.map(esc).join('|')})(?![\w-]|\.\d)`, 'i') };
+    });
+  return recent;
+}
+
+/** How many current models, and from how many labs, the tables in a dataset card name. */
+export function resultsModels(card: string): { models: number; labs: number } {
+  const tables = card
+    .split('\n')
+    .filter((l) => /^\s*\|/.test(l))
+    .join('\n');
+  const hits = recentModels().filter((m) => m.re.test(tables));
+  return { models: hits.length, labs: new Set(hits.map((m) => m.lab)).size };
+}
+
+// New Hugging Face datasets tagged "benchmark" whose card reports results for current models. About 60 datasets a
+// day get the tag, most of them uploads with no results. A card table that names at least three current models
+// from at least two labs marks a benchmark someone has run. Added 2026-11-05, after the scan missed ShadowBench,
+// which Perpetual Research announced only on X and released as a dataset with its results. Over the three weeks
+// before, this found about two datasets a day, from lab releases to personal projects, so a find counts as one
+// feed: it goes to the watch list until a second source names it or the org is a known one.
+export async function hfBenchmarkResults(r: Reader) {
+  type D = { id: string; createdAt?: string };
+  const list = (await r.json<D[]>('https://huggingface.co/api/datasets?filter=benchmark&sort=createdAt&direction=-1&limit=1000')).filter((d) => (d.createdAt ?? '').slice(0, 10) >= FROM);
+  const ids = list.map((d) => d.id);
+  // every dataset in the window is new on the first run, since the window itself bounds the work
+  const fresh = await r.fresh('hfBenchmarkResults', ids, async () => []);
+  for (const id of fresh) {
+    // model outputs from a benchmark ("tale_suite_trajectories", "PAT-leaderboard-results") are not a new benchmark
+    if (/[-_](?:trajector(?:y|ies)|traces?|outputs?|responses|generations|predictions|completions|logs?|results)$/i.test(id)) continue;
+    const card = await r.text(`https://huggingface.co/datasets/${id}/raw/main/README.md`).catch(() => '');
+    r.read();
+    if (!card) continue;
+    const { models, labs } = resultsModels(card);
+    if (models < 3 || labs < 2) continue;
+    const pretty = card.match(/^pretty_name:\s*["']?([^"'\n]+)/m)?.[1]?.trim();
+    const heading = card.match(/^#\s+([^\n#]{3,40})$/m)?.[1]?.trim();
+    let nm = (pretty?.replace(/\$/g, '') || undefined) ?? (heading && key(heading) === key(id.split('/')[1]) ? heading : undefined) ?? id.split('/')[1];
+    // "LegalBench-ID (Indonesian Sovereign Legal Reasoning Benchmark)", "N1M19 (test_1018): VLM agents finding..."
+    nm = nm.replace(/\s*\([^)]*\)/g, '').trim();
+    if (nm.length > 40) nm = nm.split(/\s*[:—–]\s+/)[0];
+    const url = `https://huggingface.co/datasets/${id}`;
+    const text = card.replace(/^---[\s\S]*?---/, '').slice(0, 3000);
+    r.add(
+      { key: key(nm), name: nm, title: id, url, org: id.split('/')[0], stageA: 6, general: GENERAL.test(text), niche: NICHE.test(text) },
+      { feed: 'Hugging Face datasets with results' },
+    );
+  }
+  r.remember('hfBenchmarkResults', ids);
 }
