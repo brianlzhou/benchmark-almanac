@@ -20,6 +20,9 @@ export async function evalplusRows(task: 'humaneval+' | 'mbpp+'): Promise<Leader
     const score = e['pass@1']?.[task];
     if (typeof score !== 'number') continue;
     let model = name.replace(/^databricks\//, '').trim();
+    // The linked c4ai-command-r-plus checkpoint is April 2024, not the registry's August snapshot.
+    // Keep the historical label unlisted. The source gives no exact evaluation date.
+    const historicalCommand = model === 'Command-R+';
     let date: string | undefined;
     const when = model.match(/\s*\((\w+)\.? (\d{4})\)$/);
     const month = when ? MONTHS.indexOf(when[1].slice(0, 3).toLowerCase()) : -1;
@@ -27,14 +30,31 @@ export async function evalplusRows(task: 'humaneval+' | 'mbpp+'): Promise<Leader
       date = new Date(Date.UTC(Number(when[2]), month + 1, 0)).toISOString().slice(0, 10);
       model = model.slice(0, when.index).trim();
     }
-    rows.push({ model, score, date });
+    rows.push({ model: historicalCommand ? 'Command-R+ (April 2024)' : model, score, date });
   }
   if (!rows.length) throw new Error(`no ${task} scores in results.json`);
   return rows;
 }
 
 /** EvalPlus names the shared resolver cannot place. */
-export const EVALPLUS_ALIASES: Record<string, string> = {};
+export const EVALPLUS_ALIASES: Record<string, string> = {
+  // the board dates it November 2024, before the December 2024 release it links
+  'DeepSeek-V3': 'deepseek-v3',
+  'Claude Sonnet 3.5': 'claude-3-5-sonnet',
+  'Gemini 1.5 Pro 002': 'gemini-1-5-pro-sept-2024',
+  'Gemini 1.5 Flash 002': 'gemini-1-5-flash-sep-2024',
+  'Gemini Pro 1.0': 'gemini-1-0-pro',
+  'GPT-3.5': 'gpt-3-5-turbo-mar-2023',
+  'Llama3-70B-instruct': 'llama-3-70b',
+  'Llama3-8B-instruct': 'llama-3-8b',
+  'Llama3.1-8B-instruct': 'llama-3-1-8b',
+  'dbrx-instruct': 'dbrx',
+  'Mixtral-8x22B-Instruct-v0.1': 'mixtral-8x22b',
+  'Mixtral-8x7B-Instruct-v0.1': 'mixtral-8x7b',
+  'DeepSeek-Coder-V2-Instruct': 'deepseek-coder-v2-236b',
+  'claude-instant-1': 'claude-instant',
+  'phi-2-2.7B': 'phi-2',
+};
 
 const board: Leaderboard = {
   benchmark: 'humaneval-plus',

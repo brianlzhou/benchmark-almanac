@@ -1,10 +1,6 @@
-// Lakera B3 (Backbone Breaker Benchmark). b3.lakera.ai is a Vite app whose leaderboard rows are a literal
-// array in its hashed bundle (/assets/index-<hash>.js): per evaluation the model name, OpenRouter slug,
-// vulnerabilityScore (mean attack success rate over all 30 threat snapshots, 0 to 1, lower is better),
-// reasoningEnabled and evaluationTimestamp. This file reads the HTML for the bundle path, cuts the array that
-// holds vulnerabilityScore, and reads only those fields. The score is the board's headline, Vulnerability,
-// as a percent (lower is better). Evaluations with reasoning on get the setting "thinking". Rows carry the
-// evaluation date.
+// Lakera B3: the board reports vulnerability, the mean successful-attack fraction across 30 threat snapshots.
+// The catalog and lab report attack resistance, its complement: 100 * (1 - vulnerabilityScore).
+// Retain vulnerability percentage as a metric. This corrects the old reversal without changing the catalog direction.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -38,8 +34,9 @@ const board: Leaderboard = {
     const re = /modelName:"([^"]+)",modelSlug:"[^"]+",vulnerabilityScore:([\d.e-]+),stderr:[\d.e-]+,reasoningEnabled:!([01]),evaluationTimestamp:(\d+)/g;
     for (const m of block.matchAll(re)) {
       rows.push({
-        model: m[1],
-        score: Number((Number(m[2]) * 100).toFixed(2)),
+        model: /^(GPT-4o|Gemini 1.5 Pro|Gemini 2.5 Pro|DeepSeek R1|DeepSeek V3)$/i.test(m[1]) ? `${m[1]} (snapshot unspecified)` : m[1],
+        score: Number(((1 - Number(m[2])) * 100).toFixed(2)),
+        metrics: { vulnerability: Number((Number(m[2]) * 100).toFixed(2)) },
         setting: m[3] === '0' ? 'thinking' : undefined,
         date: new Date(Number(m[4]) * 1000).toISOString().slice(0, 10),
       });

@@ -2,10 +2,13 @@
 // plain tables. This page's main results table gives per model the reasoning effort, the mean rubric score
 // (0 to 1) with its 95% interval, best of 3, pass@3, perfect runs and tasks won. Mean, the table's sort
 // order and the report's headline, is the score, as a percent. The effort cell ("max, via OpenRouter",
-// "max, task denied") gives the setting. Other micro1 importers use micro1Rows from this file.
+// "max, task denied") gives the setting. The 95% CI (metrics.ciLow, ciHigh), Best of 3 (bestOf3) and Pass@3
+// (passAt3) are kept as percents, read through micro1Rows' optional metric columns. Other micro1 importers use micro1Rows (results tables) or
+// micro1Data (the leaderboard card data inline on every report page) from this file. RealmPathology opts
+// in to the separate Reasoning tokens (k) table, converted to reasoningTokens without setting output tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { num, tables } from '../lib/html.ts';
+import { jsLiteral, num, tables } from '../lib/html.ts';
 
 export const MICRO1_TERMS =
   'Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).';
@@ -18,14 +21,29 @@ export const MICRO1_ALIASES: Record<string, string> = {
 /**
  * Rows from the first table on a micro1 report page whose header has a "Model" column and the score column
  * `scoreHead`. Scores below 1 are read as fractions and given as percents. An "Effort" column, when present,
- * gives the setting ("default" gives none).
+ * gives the setting ("default" gives none). `metricHeads` (optional) maps other column headers to metrics
+ * keys, scaled like the score; a key "ci" reads a "0.742 to 0.817" or "[0.469, 0.548]" cell as ciLow and ciHigh.
  */
-export async function micro1Rows(page: string, scoreHead: string): Promise<LeaderboardRow[]> {
-  const t = tables(await fetchText(page)).find((rows) => rows[0]?.[0]?.text === 'Model' && rows[0].some((c) => c.text === scoreHead));
+export async function micro1Rows(page: string, scoreHead: string, metricHeads?: Record<string, string>, reasoningTokens = false): Promise<LeaderboardRow[]> {
+  const all = tables(await fetchText(page));
+  const t = all.find((rows) => rows[0]?.[0]?.text === 'Model' && rows[0].some((c) => c.text === scoreHead));
   if (!t) throw new Error(`no results table with a ${scoreHead} column on ${page}`);
   const head = t[0].map((c) => c.text);
   const iScore = head.indexOf(scoreHead);
   const iEffort = head.indexOf('Effort');
+  const clean = (s: string) => s.replace(/[\s*†‡]+$/u, '').trim();
+  const usage = new Map<string, number>();
+  if (reasoningTokens) for (const table of all) {
+    const modelAt = table[0]?.findIndex((c) => c.text === 'Model') ?? -1;
+    const tokensAt = table[0]?.findIndex((c) => /^Reasoning tokens(?: \(k\))?$/i.test(c.text)) ?? -1;
+    if (modelAt < 0 || tokensAt < 0) continue;
+    const multiplier = /\(k\)/i.test(table[0][tokensAt].text) ? 1000 : 1;
+    for (const row of table.slice(1)) {
+      const name = clean(row[modelAt]?.text ?? '');
+      const value = num(row[tokensAt]?.text);
+      if (name && value !== undefined) usage.set(name, value * multiplier);
+    }
+  }
   const rows: LeaderboardRow[] = [];
   for (const r of t.slice(1)) {
     // footnote marks after the name: "Gemini 4 Argon*", "Muse Spark 1.3 †"
@@ -33,9 +51,20 @@ export async function micro1Rows(page: string, scoreHead: string): Promise<Leade
     const cell = r[iScore]?.text ?? '';
     let score = num(cell);
     if (!model || score === undefined) continue;
-    if (!cell.includes('%') && score <= 1) score = Number((score * 100).toFixed(2));
+    const scale = !cell.includes('%') && score <= 1 ? 100 : 1;
+    if (scale !== 1) score = Number((score * scale).toFixed(2));
     const effort = iEffort >= 0 ? r[iEffort]?.text.split(',')[0].trim().toLowerCase() : undefined;
-    rows.push({ model, score, setting: effort && effort !== 'default' ? effort : undefined });
+    const metrics: Record<string, number> = {};
+    if (usage.has(model)) metrics.reasoningTokens = usage.get(model)!;
+    for (const [h, key] of Object.entries(metricHeads ?? {})) {
+      const c = r[head.indexOf(h)]?.text ?? '';
+      const f = (x: string) => Number((Number(x) * (c.includes('%') ? 1 : scale)).toFixed(2));
+      // "0.742 to 0.817", "0.742–0.817" or "[0.469, 0.548]"
+      const ci = c.match(/(-?[\d.]+)\s*(?:to|–|-|,)\s*(-?[\d.]+)/);
+      if (key === 'ci' && ci) Object.assign(metrics, { ciLow: f(ci[1]), ciHigh: f(ci[2]) });
+      else if (key !== 'ci' && num(c) !== undefined) metrics[key] = f(String(num(c)));
+    }
+    rows.push({ model, score, setting: effort && effort !== 'default' ? effort : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
   }
   if (!rows.length) throw new Error(`no rows in the results table on ${page}`);
   return rows;
@@ -76,6 +105,6 @@ const board: Leaderboard = {
   feed: `${PAGE} (static HTML results table, Mean)`,
   terms: MICRO1_TERMS,
   aliases: MICRO1_ALIASES,
-  fetch: () => micro1Rows(PAGE, 'Mean'),
+  fetch: () => micro1Rows(PAGE, 'Mean', { '95% CI': 'ci', 'Best of 3': 'bestOf3', 'Pass@3': 'passAt3' }, true),
 };
 export default board;

@@ -1,8 +1,10 @@
 // BIG-Bench Extra Hard (Google DeepMind). The makers keep the board as a markdown table in leaderboard.md in
 // the google-deepmind/bbeh repository. The page sorts by "BBEH", the harmonic mean over the 23 tasks, and
-// also lists "BBEH (Micro Avg)". Lab reports quote the micro average (Gemma 3 12B: 16.3 in both the Gemma 3
-// report and this table), so the micro average is the score, which keeps the board comparable with the lab
-// claims on the same page. The "Random" baseline row is dropped. Other importers that read README or markdown
+// also lists "BBEH (Micro Avg)". The BBEH harmonic mean is the score, as the benchmark record defines.
+// Micro averages from lab reports are a different metric and require separate catalog treatment.
+// The "Random" baseline row is dropped. Rows from the original paper (arXiv
+// 2502.19187, 2025-02-26) carry that date so the resolver picks the snapshots current then. The page's sort
+// secondary columns, "BBEH (Micro Avg)" and "BBEH Mini (Micro Avg)", go in metrics as "micro" and "mini". Other importers that read README or markdown
 // tables on GitHub use mdTables and ghRaw from this file.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -32,7 +34,7 @@ export function mdCell(s: string): string {
 
 /** Every pipe table in a markdown document, with the nearest heading above it. */
 export function mdTables(md: string): MdTable[] {
-  const lines = md.split('\n')
+  const lines = md.split('\n');
   const out: MdTable[] = [];
   let heading = '';
   const split = (l: string) => {
@@ -62,23 +64,36 @@ const FEED = ghRaw(REPO, 'leaderboard.md');
 const board: Leaderboard = {
   benchmark: 'big-bench-extra-hard',
   url: `https://github.com/${REPO}/blob/main/leaderboard.md`,
-  feed: `${FEED} (BBEH (Micro Avg))`,
+  feed: `${FEED} (BBEH harmonic mean)`,
   terms: 'Markdown file in the google-deepmind/bbeh GitHub repository, which is Apache-2.0.',
   aliases: {
-    GPT4o: 'gpt-4o',
+    'Llama 3.1 8b Instruct': 'llama-3-1-8b',
     'Distill R1 Qwen 32b': 'deepseek-r1-distill-qwen-32b',
     'Gemma2 27b IT': 'gemma-2-27b',
   },
   async fetch() {
     const t = mdTables(await fetchText(FEED)).find((x) => x.head.includes('BBEH (Micro Avg)'));
-    if (!t) throw new Error('BBEH table not found')
-    const iScore = t.head.indexOf('BBEH (Micro Avg)');
+    if (!t) throw new Error('BBEH table not found');
+    const iScore = t.head.indexOf('BBEH');
+    if (iScore < 0) throw new Error('BBEH harmonic mean column not found');
+    const iBy = t.head.indexOf('Contributed by');
     const rows: LeaderboardRow[] = [];
     for (const r of t.rows) {
       const model = r[0];
-      const score = Number(r[iScore]);
+      const score = r[iScore]?.trim() ? Number(r[iScore]) : NaN;
       if (!model || /^random$/i.test(model) || !Number.isFinite(score)) continue;
-      rows.push({ model, score });
+      const metrics: Record<string, number> = {};
+      for (const [k, col] of [['micro', 'BBEH (Micro Avg)'], ['mini', 'BBEH Mini (Micro Avg)']] as const) {
+        const i = t.head.indexOf(col);
+        const v = i >= 0 && r[i]?.trim() ? Number(r[i]) : NaN;
+        if (Number.isFinite(v)) metrics[k] = v;
+      }
+      rows.push({
+        model,
+        score,
+        date: /original paper/i.test(r[iBy] ?? '') ? '2025-02-26' : undefined,
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     return rows;
   },

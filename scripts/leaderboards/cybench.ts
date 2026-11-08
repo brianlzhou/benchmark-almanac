@@ -1,8 +1,8 @@
 // Cybench (40 professional CTF tasks). cybench.github.io parses data/leaderboard.csv with PapaParse: per
 // model the task count (Count), End-to-End % Solved (the headline, 0 to 100) and subtask columns. The board
 // mixes its own runs with results that footnotes (superscript marks) attribute to the HAL leaderboard and
-// lab system cards, and some rows cover only 35 to 39 of the 40 tasks; those rows keep the task count as
-// the setting so they are not read as full-set scores. The marks are dropped from model names.
+// lab system cards. Only runs on all 40 tasks become rows. Smaller evaluations are excluded.
+// The marks are dropped from model names.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -33,7 +33,8 @@ const board: Leaderboard = {
       const model = r.Model?.replace(/[¹²³⁰-⁹†*]+/g, '').trim();
       if (!model || !r['End-to-End % Solved'] || !Number.isFinite(score)) continue;
       const count = Number(r.Count);
-      rows.push({ model, score, setting: count && count !== 40 ? `${count} of 40 tasks` : undefined });
+      if (count !== 40) continue;
+      rows.push({ model, score });
     }
     return rows;
   },
