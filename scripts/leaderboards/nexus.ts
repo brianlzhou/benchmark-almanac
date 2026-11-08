@@ -2,6 +2,8 @@
 // (Apache-2.0) and hard-codes the board: RESULTS maps each of nine tasks to per-model accuracy (0 to 1). The
 // board's first table, "All Tasks", is the plain mean over the nine tasks (pandas mean), with the last model
 // (Gorilla open-function-v1, which lacks one task) left out; this file computes the same mean. The results
+// The page defines `all_tasks_avg = pd.DataFrame(results).mean(axis=1)`.
+// Task scores are secondary metrics on complete overall rows. Results
 // date from the NexusRaven-V2 release (December 2023). "GPT3.5" names no snapshot, so it is left unmatched.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -39,6 +41,13 @@ const board: Leaderboard = {
     for (const model of order.slice(0, -1)) {
       const v = per.get(model)!;
       rows.push({ model, score: Number(((v.reduce((a, b) => a + b, 0) / v.length) * 100).toFixed(2)) });
+    }
+    // Preserve task scores only on the published complete-model overall rows.
+    for (const [, task, inner] of tasks) {
+      for (const m of inner.matchAll(/"([^"]+)":\s*([\d.]+)/g)) {
+        const row = rows.find(r => r.model === m[1]);
+        if (row) (row.metrics ??= {})[task.toLowerCase()] = Number(m[2]) * 100;
+      }
     }
     return rows;
   },

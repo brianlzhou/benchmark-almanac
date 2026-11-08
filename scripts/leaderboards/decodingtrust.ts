@@ -25,8 +25,8 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const r of parseCsv(await fetchText(FEED))) {
       const score = num(r.Average);
-      if (!r.Model || score === undefined || /^(Claude|MPT|Vicuna|Falcon|RedPajama|Alpaca)$/.test(r.Model)) continue;
-      rows.push({ model: r.Model, score });
+      if (!r.Model || score === undefined) continue;
+      rows.push({ model: /^(Claude|MPT|Vicuna|Falcon|RedPajama|Alpaca)$/.test(r.Model) ? `${r.Model} (snapshot unspecified)` : r.Model, score });
     }
     return rows;
   },

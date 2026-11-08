@@ -5,6 +5,7 @@
 // one model can appear in both; the human baselines are skipped.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
+import { mdTables } from './big-bench-extra-hard.ts';
 import { num, text } from '../lib/html.ts';
 
 const PAGE = 'https://gameworld-project.github.io/';
@@ -12,10 +13,10 @@ const PAGE = 'https://gameworld-project.github.io/';
 const board: Leaderboard = {
   benchmark: 'gameworld',
   url: PAGE,
-  feed: `${PAGE} (article.leaderboard panels, Overall PG)`,
+  feed: `${PAGE} (original Overall PG panels and main README fine-control PG)`,
   terms: 'Static project page on GitHub Pages (no robots.txt); the page invites new results and states no terms.',
   aliases: {
-    'Gemini-3-Flash-Preview': 'gemini-3-flash',
+    'OpenAI-Computer-Use': 'computer-use-preview-2025-03-11',
   },
   async fetch() {
     const html = await fetchText(PAGE);
@@ -30,6 +31,18 @@ const board: Leaderboard = {
       }
     }
     if (rows.length < 10) throw new Error(`only ${rows.length} GameWorld rows`);
+    const readme = await fetchText('https://raw.githubusercontent.com/gameworld-project/gameworld/main/README.md');
+    const t=mdTables(readme).find(t=>t.head.includes('CUA PG'));
+    if(!t)throw new Error('Missing fine-control table');
+    for(const r of t.rows) {
+      const model=r[0].split(/\s*\[/)[0].trim();
+      for(const [sr,pg,harness] of [[2,3,'Computer-use interface'],[4,5,'Generalist interface']] as const){
+        const score=num(r[pg]);if(score===undefined)continue;
+        const metrics:Record<string,number>={};const success=num(r[sr]),runs=num(r[1]);
+        if(success!==undefined)metrics['success rate (%)']=success;if(runs!==undefined)metrics['runs per task']=runs;
+        rows.push({model,score,harness,setting:'Fine-Control Protocol; 400-step limit',metrics});
+      }
+    }
     return rows;
   },
 };

@@ -2,7 +2,7 @@
 // renders /assets/data/cybergym.json: the page keeps level1 rows with trials === 1 that are not hidden,
 // sorts them by score_10 (success rate, 0 to 1) and shows that as the Success Rate. Rows scheduled with a
 // future visible_after are not shown yet, so they are skipped. Each row names an agent and a model; the
-// agent is the harness. "Multi-model (...)" systems have no single model to credit and are skipped.
+// agent is the harness. Multi-model systems keep their published system name as unlisted entries.
 // Earlier variants listed as subRows inherit the parent's agent. The "dynamic" and "test-time mem."
 // features (setups the page can filter out) become the setting. Many rows are agent systems submitted by
 // their makers, and some scores come from lab model cards (the source column).
@@ -33,6 +33,8 @@ const board: Leaderboard = {
   aliases: {
     'Claude Sonnet 3.7': 'claude-3-7-sonnet',
     'Gemini 2.5 Flash Preview': 'gemini-2-5-flash-apr-2025',
+    // the only OpenHands LM 32B in the registry (v0.1)
+    'OpenHands-LM-32B': 'openhands-lm-32b-v0-1',
   },
   async fetch() {
     const { level1 } = await fetchJson<{ level1: Row[] }>(FEED);
@@ -40,7 +42,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     const add = (r: Row, agent?: string, features?: Row['features']) => {
       const model = unescape(r.model);
-      if (!model || /^Multi-model\b/i.test(model) || typeof r.score_10 !== 'number') return;
+      if (!model || typeof r.score_10 !== 'number') return;
       const feats = (Array.isArray(features) ? features : features ? [features] : [])
         .map((f) => f.split(' (')[0].trim())
         .filter((f) => f === 'dynamic' || f === 'test-time mem.');

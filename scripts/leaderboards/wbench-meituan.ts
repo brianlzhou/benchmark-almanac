@@ -13,8 +13,8 @@ const URL = 'https://meituan-longcat.github.io/WBench/';
 const board: Leaderboard = {
   benchmark: 'wbench-meituan',
   url: `${URL}#leaderboard`,
-  feed: `${URL} (table#table-navi, Average)`,
-  terms: 'Static GitHub Pages site of the WBench project; robots.txt allows all and the WBench repository is MIT-licensed.',
+  feed: `${URL} (default Navi table, Average)`,
+  terms: 'Static GitHub Pages site of the WBench project, which has no robots.txt; the WBench repository is MIT-licensed.',
   aliases: {
     'HY-Video 1.5': 'hunyuan-video-1-5',
     'Seedance 1.5': 'seedance-v1-5-pro',
@@ -24,19 +24,23 @@ const board: Leaderboard = {
   },
   async fetch() {
     const html = await fetchText(URL);
-    const start = html.indexOf('<table id="table-navi"');
+    const rows: LeaderboardRow[] = [];
+    for(const split of ["navi"]){
+    const start = html.indexOf('<table id="table-'+split+'"');
     if (start < 0) throw new Error('WBench Navi table not found');
     const [t] = tables(html.slice(start));
     const head = t[0].map((c) => c.text);
     const iModel = head.findIndex((h) => /^Model/.test(h));
     const iAvg = head.findIndex((h) => /^Average/.test(h));
     if (iModel < 0 || iAvg < 0) throw new Error(`unexpected WBench columns: ${head.join(' | ')}`);
-    const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       const model = text(r[iModel]?.html.split(/<br/i)[0] ?? '');
       const score = num(r[iAvg]?.text);
       if (!model || score === undefined) continue;
-      rows.push({ model, score });
+      const tags=[...r[iModel].html.matchAll(/class="model-tag"[^>]*>([\s\S]*?)<\/span>/g)].map(m=>text(m[1]));
+      const metrics=Object.fromEntries(head.flatMap((h,i)=>{const v=num(r[i]?.text);return i>iAvg&&v!==undefined?[[h.replace(/ ↕/g,''),v]]:[];}));
+      rows.push({ model, score, setting:tags.join('; ') || undefined,metrics });
+    }
     }
     return rows;
   },

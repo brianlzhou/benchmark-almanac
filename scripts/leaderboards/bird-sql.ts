@@ -1,9 +1,8 @@
 // BIRD-SQL. bird-bench.github.io is a static page whose first table is the main leaderboard: per entry the
 // submission date, the model or system (name, then affiliation), code link, size, whether oracle knowledge
 // (the evidence hints) was given, and execution accuracy on Dev and on the hidden Test set. Test (%) is the
-// ranking and the score; the Dev column mixes the original and the 2025-11-06 dev sets. Only rows run with
-// oracle knowledge are read: that is the standard setting, and the same models appear again lower down
-// without it. Most entries are text-to-SQL systems built on a model ("CHASE-SQL + Gemini"), which the
+// ranking and the score; the Dev column mixes the original and the 2025-11-06 dev sets. Rows without oracle knowledge are retained with an explicit setting.
+// The reported Dev score remains a metric because the board mixes dev-set versions. Most entries are text-to-SQL systems built on a model ("CHASE-SQL + Gemini"), which the
 // resolver leaves unmatched; the plain-model baselines (GPT-5.5, Claude Opus 4.6, DeepSeek-R1, T5...) match.
 // The date badge is the submission date.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -29,6 +28,8 @@ const board: Leaderboard = {
   terms: 'Static GitHub Pages site of the BIRD project; there is no robots.txt and the site publishes no terms of use.',
   aliases: {
     'Claude 4.5 Sonnet': 'claude-sonnet-4-5',
+    // Cohere's entry links CohereLabs/c4ai-command-a-03-2025
+    'Command A': 'cohere-command-a',
   },
   async fetch() {
     const t = tables(await fetchText(URL)).find((rows) => {
@@ -44,8 +45,12 @@ const board: Leaderboard = {
       const model = text(r[iModel]?.html.split(/<br|<span/i)[0] ?? '');
       const score = num(r[iTest]?.text);
       if (!model || score === undefined || /human performance/i.test(model)) continue;
-      if (!/✔/.test(r[iOracle]?.text ?? '')) continue;
-      rows.push({ model, score, date: badgeDate(r[0]?.text ?? '') });
+      const oracle = /✔/.test(r[iOracle]?.text ?? '');
+      const dev = num(r[head.indexOf('Dev (%)')]?.text);
+      rows.push({ model, score, date: badgeDate(r[0]?.text ?? ''),
+        setting: oracle ? undefined : 'without oracle knowledge',
+        metrics: dev === undefined ? undefined : { developmentReported: dev },
+      });
     }
     return rows;
   },

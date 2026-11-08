@@ -1,7 +1,7 @@
 // MDPBench (multilingual document parsing). The Delores-Lin/MDPBench-leaderboard Space is a static page that
 // renders leaderboard.json from its repository: per model or pipeline the "overall" score, the page-level
 // mean of text, formula and table task scores (×100), which is the score, plus digital, photo and
-// per-language splits. Rows are general VLMs, specialized OCR models and pipeline tools; the tools match no
+// per-language splits. Rows are general VLMs, specialized OCR models and pipeline tools, and the tools match no
 // model record. The file's "updated" date is the row date, so the resolver picks the snapshots current then.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -19,11 +19,16 @@ const board: Leaderboard = {
     'InternVL3_5-8B': 'internvl3-5-8b',
   },
   async fetch() {
-    const data = await fetchJson<{ benchmark?: { updated?: string }; models: { name?: string; overall?: number }[] }>(FEED);
+    const data = await fetchJson<{ benchmark?: { updated?: string }; models: { name?: string; overall?: number; digital?: number; photo?: number; latin?: number; non_latin?: number; private?: number; languages?: Record<string,number> }[] }>(FEED);
     const date = /^\d{4}-\d\d-\d\d$/.test(data.benchmark?.updated ?? '') ? data.benchmark!.updated : undefined;
     const rows: LeaderboardRow[] = [];
     for (const m of data.models) {
-      if (m.name && typeof m.overall === 'number') rows.push({ model: m.name.trim(), score: m.overall, date });
+      if (m.name && typeof m.overall === 'number') {
+        const metrics: Record<string,number> = {};
+        for (const key of ['digital','photo','latin','non_latin','private'] as const) if (typeof m[key] === 'number') metrics[key] = m[key];
+        for (const [lang,n] of Object.entries(m.languages ?? {})) if (Number.isFinite(n)) metrics[`language_${lang}`] = n;
+        rows.push({model:m.name.trim(),score:m.overall,date,metrics});
+      }
     }
     return rows;
   },

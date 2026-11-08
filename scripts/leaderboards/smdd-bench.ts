@@ -3,8 +3,10 @@
 // importer fetches the page's chunks and reads the one that holds the runs, as data, never run. The main
 // board is the full 502-task runs: per run the model id, display name (with reasoning effort),
 // overall_rate (tasks whose molecule passes every criterion, 0 to 1, the score as 0 to 100) and
-// cost_per_task. A 200-task diversity study in the same chunk is not read.
+// cost_per_task, plus avg_runtime_seconds (the table's "Avg time/task", kept as metrics.latency). A 200-task
+// diversity study in the same chunk is not read.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
+import {jsLiteral} from '../lib/html.ts';
 import { fetchText } from '../lib/util.ts';
 
 const PAGE = 'https://smddbench.com/';
@@ -31,15 +33,14 @@ const board: Leaderboard = {
     }
     if (!source) throw new Error('no runs module in the SMDD-Bench chunks');
     const rows: LeaderboardRow[] = [];
-    const record = /display_name:"([^"]+)",model_id:"([^"]+)",tasks_total:(\d+),tasks_passed:\d+,overall_rate:([\d.e-]+)[\s\S]*?cost_per_task:([\d.e-]+)/g;
-    for (const m of source.matchAll(record)) {
-      const [, display, modelId, total, rate, cost] = m;
-      if (Number(total) !== TASKS) continue;
-      // "azure_ai/claude-sonnet-4-6", "together_ai/Qwen/Qwen3.5-397B-A17B": the last path part is the model
-      const model = modelId.split('/').at(-1)!.replace(/-preview$/i, '');
-      const effort = display.match(/_(minimal|low|medium|high|xhigh|max)_/)?.[1];
-      const thinking = /-thinking_/.test(display) ? 'thinking' : undefined;
-      rows.push({ model, score: Number(rate) * 100, setting: effort ?? thinking, cost: Number(cost) });
+    for(const m of source.matchAll(/runs:(\[\{run_id:)/g)){
+      const part=source.slice(m.index!+5).replace(/:\.(\d)/g,':0.$1').replace(/([{,])(\d+):/g,'$1"$2":');
+      for(const r of jsLiteral<any[]>(part,0)){
+        if(r.tasks_total !== TASKS) continue;
+        const model=r.model_id.split('/').at(-1).replace(/-preview$/i,'');const effort=r.display_name.match(/_(minimal|low|medium|high|xhigh|max)_/)?.[1]??(/-thinking_/.test(r.display_name)?'thinking':undefined);
+        const metrics:Record<string,number>={latency:r.avg_runtime_seconds,tasks:r.tasks_total};for(const k of ['avg_successful','avg_unique_successful','avg_pct_novel_successful','avg_pairwise_tanimoto'])if(typeof r[k]==='number')metrics[k]=r[k];
+        rows.push({model,score:r.overall_rate*100,setting:effort,cost:r.cost_per_task,metrics});
+      }
     }
     return rows;
   },

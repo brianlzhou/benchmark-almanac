@@ -4,9 +4,17 @@
 export interface LeaderboardRow {
   /** The model as the board names it. The sync script maps it to data/models.json. */
   model: string;
-  /** The board's headline score, in the benchmark's unit (percentages as 0 to 100). */
+  /**
+   * The board's headline score on the whole benchmark, in the benchmark's unit (percentages as 0 to 100). Never
+   * a score on one task, language, split, context length or metric: the site keeps each model's best row
+   * (bestPerModel in src/lib/data.ts), so a sub-task row would become the model's score. Sub-scores go in
+   * `metrics`.
+   */
   score: number;
-  /** Reasoning effort or other setting, when the board names one. */
+  /**
+   * A way of running the whole benchmark, when the board names one: reasoning effort, tools, a step or time
+   * limit, shot count, a prompt or attack mode applied to the whole set.
+   */
   setting?: string;
   /** Agent, scaffold or harness, when the board names one. */
   harness?: string;
@@ -19,6 +27,32 @@ export interface LeaderboardRow {
   cost?: number;
   /** Average output tokens for one task, when the board reports it. */
   tokens?: number;
+  /**
+   * Other numbers the board reports for the run, by a short key: "latency" in seconds, "pass3" as a percentage.
+   * A board's `chart` names the ones it plots.
+   */
+  metrics?: Record<string, number>;
+}
+/** One axis of a board's own chart: the headline score ("score") or a key in each row's `metrics`. */
+export interface ChartAxis {
+  key: string;
+  label: string;
+  /** "%", "s" (seconds), "$" or a word. */
+  unit?: string;
+  better?: 'higher' | 'lower';
+  log?: boolean;
+}
+/**
+ * A chart the board draws that a single score cannot show, such as score against latency with its Pareto
+ * frontier. The benchmark page redraws it from the rows' metrics, credited to the board.
+ */
+export interface BoardChart {
+  /** The board's own title for the chart. */
+  title: string;
+  x: ChartAxis;
+  y: ChartAxis;
+  /** One sentence on what the chart shows, in the board's terms. */
+  note?: string;
 }
 
 export interface Leaderboard {
@@ -32,5 +66,12 @@ export interface Leaderboard {
   terms: string;
   /** Names on this board that the shared resolver cannot place: board name -> model id. */
   aliases?: Record<string, string>;
+  /** A chart the board draws from more than its headline score. */
+  chart?: BoardChart;
+  /**
+   * What a row's `cost` covers: one task (the default) or the whole run of the test set, as ARC-AGI-3 reports.
+   * Pages label the cost axis to match.
+   */
+  costPer?: 'task' | 'run';
   fetch(): Promise<LeaderboardRow[]>;
 }

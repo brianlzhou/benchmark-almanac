@@ -5,6 +5,8 @@
 // human and random baselines and entries without an Avg are dropped.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
+import { mdTables } from './big-bench-extra-hard.ts';
 
 const PAGE = 'https://scienceqa.github.io/leaderboard.html';
 const FEED = 'https://scienceqa.github.io/javascript/leaderboard-data.js';
@@ -18,11 +20,16 @@ interface Entry {
 const board: Leaderboard = {
   benchmark: 'scienceqa',
   url: PAGE,
-  feed: `${FEED} (Avg)`,
+  feed: `${FEED} (Avg over all questions)`,
   terms: 'Static file on the project GitHub Pages site (no robots.txt); the ScienceQA repository is MIT-licensed.',
   aliases: {
     'LLaMA1-13B': 'llama-13b',
     'LLaMA1-7B': 'llama-7b',
+    'LLaVA-1.5 (Vicuna-13B)': 'llava-v1-5-13b',
+    'LLaVA-1.5 (Vicuna-7B)': 'llava-v1-5-7b',
+    'Qwen-VL-Chat (Qwen-7B)': 'qwen-vl-chat',
+    'InstructBLIP (Vicuna-13B)': 'instructblip-vicuna-13b',
+    'InstructBLIP (Vicuna-7B)': 'instructblip-vicuna-7b',
   },
   async fetch() {
     const src = await fetchText(FEED);

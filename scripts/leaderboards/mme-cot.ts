@@ -20,8 +20,6 @@ const board: Leaderboard = {
     'Qwen2-VL-72B': 'qwen2-vl-72b-instruct',
     'LLaVA-OV-72B': 'llava-onevision-72b',
     'LLaVA-OV-7B': 'llava-onevision-7b',
-    // plain "gpt-4o" in the API pointed to the 2024-08-06 snapshot when the paper ran
-    'GPT-4o': 'gpt-4o-aug-2024',
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const t = tables(await fetchText(PAGE)).find((rows) => rows[0]?.some((c) => /CoT Quality/.test(c.text)));
@@ -32,7 +30,13 @@ const board: Leaderboard = {
     for (const r of t.slice(2)) {
       const model = (r[1]?.text ?? '').replace(/[\u{1F947}-\u{1F949}]/gu, '').trim();
       const score = num(r[2]?.text);
-      if (model && score !== undefined) rows.push({ model, score, date: PAPER_DATE });
+      if (model && score !== undefined) {
+        const metrics: Record<string, number> = {};
+        for (const [i, key] of ['precision', 'recall', 'robustness', 'stability', 'efficacy', 'efficiency', 'relevanceRate', 'reflectionQuality'].entries()) {
+          const value = num(r[i + 3]?.text); if (value !== undefined) metrics[key] = value;
+        }
+        rows.push({ model: model === 'GPT-4o' ? 'GPT-4o (snapshot unspecified)' : model, score, date: PAPER_DATE, metrics });
+      }
     }
     return rows;
   },

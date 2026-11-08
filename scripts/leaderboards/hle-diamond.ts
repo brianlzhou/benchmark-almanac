@@ -4,7 +4,8 @@
 // chunk (app/blog/hle-diamond/page-<hash>.js: b = JSON.parse('{"model": [overall, reasoning, knowledge]}')).
 // The "See reasoning max" view is the Model | Accuracy table passed to ResultsView in the page's flight data.
 // Both are imported, with setting "high" and "max"; the with-tools table is a different setting and is not
-// read. Every score is overall accuracy on the 1,000 questions.
+// read. Every score is overall accuracy on the 1,000 questions. The same chunk publishes average output
+// tokens (including reasoning) for high effort and max effort, with measured request counts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { nextFlight, jsonAfter, num } from '../lib/html.ts';
@@ -28,10 +29,20 @@ const board: Leaderboard = {
     if (!high) throw new Error('reasoning-high scores not found in the page chunk');
     for (const [model, v] of Object.entries(JSON.parse(high[1]) as Record<string, number[]>)) rows.push({ model, score: v[0], setting: 'high' });
 
-    const max = jsonAfter<{ headers: string[]; rows: string[][] }>(nextFlight(html), '{"headers":["Model","Accuracy"]');
-    for (const [model, acc] of max.rows) {
+    const max = jsonAfter<string[][]>(nextFlight(html), '{"headers":["Model","Accuracy"],"rows":');
+    for (const [model, acc] of max) {
       const score = num(acc);
       if (score !== undefined) rows.push({ model, score, setting: 'max' });
+    }
+    const read = (name: string) => {
+      const m=chunk.match(new RegExp(`\\b${name}=JSON\\.parse\\('([^']+)'\\)`));
+      if(!m)throw new Error(`Token object ${name} missing`);
+      return JSON.parse(m[1]);
+    };
+    const highTokens=read('j') as Record<string,{mean?:number;count?:number}>;
+    const maxTokens=read('k') as Record<string,{overall?:{mean?:number;count?:number}}>;
+    for(const r of rows){const v=r.setting==='high'?highTokens[r.model]:maxTokens[r.model]?.overall;
+      if(typeof v?.mean==='number'){r.tokens=v.mean;r.metrics={...(r.metrics??{}),...(typeof v.count==='number'?{tokenRequests:v.count}:{})};}
     }
     return rows;
   },

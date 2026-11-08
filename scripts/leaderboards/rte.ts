@@ -1,7 +1,8 @@
 // RTE on the GLUE board. gluebenchmark.com is a React app that reads its leaderboard from the public Firebase
 // Realtime Database behind it (mtl-sentence-representations). The page takes the newest dated snapshot under
 // leaderboard/glue (one row per team, with that team's best submission) and hides rows whose overall score is
-// under 70. This file reads the same snapshot through Firebase REST. The score is the RTE column, accuracy on
+// under 70. This file retains all named RTE submissions, even below that overall-score threshold,
+// while excluding the human reference. Anonymous submissions remain unlisted. It reads the newest snapshot through Firebase REST. The score is the RTE column, accuracy on
 // the GLUE RTE test set. Rows carry the submission date.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -28,20 +29,18 @@ const board: Leaderboard = {
     T5: 't5-11b',
   },
   async fetch() {
-    const [snap, tasks] = await Promise.all([
-      fetchJson<Record<string, Row[]>>(FEED),
-      fetchJson<Record<string, { identifier: string }>>(`${DB}/tasks.json`),
-    ]);
+    const snap = await fetchJson<Record<string, Row[]>>(FEED);
+    await new Promise(resolve => setTimeout(resolve, 1100));
+    const tasks = await fetchJson<Record<string, { identifier: string }>>(`${DB}/tasks.json`);
     const rte = Object.entries(tasks).find(([, t]) => t.identifier === 'RTE')?.[0];
     const list = Object.values(snap)[0];
     if (!rte || !Array.isArray(list) || list.length < 50) throw new Error('GLUE snapshot or RTE task not found');
     const rows: LeaderboardRow[] = [];
     for (const r of list) {
-      if (typeof r.maxScore === 'number' && r.maxScore * 100 < 70) continue;
       const s = r.maxScoreSubmission;
       const acc = s?.tasks?.[rte]?.accuracy;
       const model = s?.editable?.name?.trim();
-      if (!s || !model || typeof acc !== 'number') continue;
+      if (!s || !model || typeof acc !== 'number' || /^human(?: performance)?$/i.test(model)) continue;
       rows.push({ model, score: Number((acc * 100).toFixed(2)), date: new Date(s.createdOn).toISOString().slice(0, 10) });
     }
     return rows;

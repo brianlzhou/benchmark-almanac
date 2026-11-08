@@ -4,7 +4,7 @@
 // per return the cost of one task. The Helpdesk ticket benchmark on the same site renders only in the
 // browser and is not read here. The reader lives in visulogic.ts.
 // Minutes per package is kept as metrics.latency in seconds: the page's "Performance, cost & time" chart
-// plots accuracy against it. Tokens per return count input too (millions per return), so they are not kept.
+// plots accuracy against it. Tokens per return count input too (millions per return), so they are kept as total-token metrics, separate from output tokens.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -35,6 +35,14 @@ const board: Leaderboard = {
     for (const r of rows) {
       const m = minutes.get(`${r.model}|${r.setting ?? ''}`);
       if (m !== undefined) r.metrics = { latency: Math.round(m * 60) };
+    }
+    for(const cells of (t??[]).slice(1)){
+      const row=rows.find(r=>r.model===cells[iModel]?.text&&(r.setting??'')===cells[iEffort]?.text);if(!row)continue;
+      const metrics=row.metrics??={};
+      for(const label of ['Recall','Precision']){const value=num(cells[head.indexOf(label)]?.text);if(value!==undefined)metrics[label.toLowerCase()]=value;}
+      const usage=cells[head.findIndex(h=>/^Tokens per return/.test(h))]?.text.match(/^([\d.]+)\s*([kKmM]?)$/);
+      if(usage)metrics.totalTokensPerReturn=Number(usage[1])*({k:1000,m:1000000}[usage[2].toLowerCase()]??1);
+      const price=cells[head.findIndex(h=>/^Cost per return/.test(h))]?.text;const value=num(price);if(value!==undefined)row.cost=value*(price?.includes('¢')?0.01:1);
     }
     return rows;
   },

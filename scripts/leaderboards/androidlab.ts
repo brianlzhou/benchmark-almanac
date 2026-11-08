@@ -17,8 +17,6 @@ const board: Leaderboard = {
   terms: 'Public Google Sheet published by the AndroidLab authors; docs.google.com robots.txt allows /spreadsheet paths, and the CSV export is the sheet\'s own download.',
   aliases: {
     'GPT-4o-2024-11-20': 'gpt-4o-nov-2024',
-    // the AndroidLab paper (October 2024) ran Gemini 1.5 Pro 002
-    'Gemini-1.5-Pro': 'gemini-1-5-pro-sept-2024',
   },
   async fetch() {
     const csv = await fetchText(FEED);
@@ -30,7 +28,7 @@ const board: Leaderboard = {
       const model = r.Model?.trim();
       const score = num(r[key('Success Rate')]);
       if (!model || score === undefined) continue;
-      rows.push({ model, score, setting: r[key('Screen')]?.trim().toLowerCase() || undefined });
+      rows.push({ model: model === 'Gemini-1.5-Pro' ? `${model} (snapshot unspecified)` : model, score, setting: r[key('Screen')]?.trim().toLowerCase() || undefined });
     }
     return rows;
   },

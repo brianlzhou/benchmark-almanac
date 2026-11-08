@@ -2,7 +2,7 @@
 // each row carries data-overall (the Overall score, 0 to 100, the ranking) and data-arch (Audio-LLM, Omni,
 // Cascaded, Vision+Audio+LLM, S2S / Full-Duplex). Overall is the score. Cascaded pipelines ("Whisper-v3-large
 // + GPT-4o") join a speech recognizer to a text model, so there is no one model to credit and they are
-// skipped. A trailing "(thinking)" becomes the setting through the shared resolver.
+// retained as unlisted pipeline configurations. A trailing "(thinking)" becomes the setting through the shared resolver.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -26,12 +26,12 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const m of table.matchAll(/<tr\b([^>]*\bdata-overall="([\d.]+)"[^>]*)>([\s\S]*?)<\/tr>/g)) {
       const arch = m[1].match(/data-arch="([^"]+)"/)?.[1];
-      const name = m[3].match(/class="model-name"[^>]*>([\s\S]*?)<\/a>/)?.[1];
-      if (!name || arch === 'cascaded' || /\s\+\s/.test(text(name))) continue;
+      const name = m[3].match(/class="model-name"[^>]*>([\s\S]*?)<\/(?:a|span)>/)?.[1];
+      if (!name) continue;
       const model = text(name);
       // the Qwen3-Omni Thinking and Instruct releases share one registry record
       const mode = model.match(/^Qwen3-Omni-.*-(Thinking|Instruct)$/)?.[1];
-      rows.push({ model, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
+      rows.push({ model, harness: arch === 'cascaded' ? model : undefined, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
     }
     if (!rows.length) throw new Error('no rows in the VoiceBench table');
     return rows;

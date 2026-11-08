@@ -3,9 +3,10 @@
 // system and task category" has one row per system (model and agent harness) and a cell per task category
 // plus an Average cell; each cell's aria-label carries the value to one decimal ("Grok 4.6 (Grok Build),
 // average: 59.1%"). The average, the mean rubric score across the five categories, is the score.
+// Individual published task examples are excluded from benchmark scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { num } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 const PAGE = 'https://epoch.ai/benchmarks/epoch-automation-reports';
 
