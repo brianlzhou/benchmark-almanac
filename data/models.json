@@ -3291,7 +3291,18 @@
     "id": "gemini-robotics-er-1-5-preview",
     "name": "gemini-robotics-er-1.5-preview",
     "released": "2025-09-26",
-    "epoch": "gemini-robotics-er-1.5-preview"
+    "epoch": "gemini-robotics-er-1.5-preview",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://deepmind.google/blog/gemini-robotics-15-brings-ai-agents-into-the-physical-world/",
+    "aliases": [
+      "GR-ER 1.5",
+      "Gemini Robotics ER 1.5",
+      "Gemini Robotics-ER 1.5",
+      "Gemini Robotics-ER 1.5 Preview"
+    ]
   },
   {
     "id": "claude-sonnet-4-5",
@@ -4851,7 +4862,7 @@
     "name": "Kimi K3.1 Pro",
     "lab": "moonshot",
     "released": "2026-10-23",
-    "weights": "closed",
+    "weights": "open",
     "epoch": "Kimi K3.1 Pro"
   },
   {
@@ -13780,6 +13791,369 @@
       "Voxtral Mini Transcribe Realtime 2602",
       "voxtral-mini-transcribe-realtime-2602",
       "Voxtral-Mini-4B-Realtime-2602"
+    ]
+  },
+  {
+    "id": "pi0",
+    "name": "π0",
+    "lab": "physical-intelligence",
+    "family": "π",
+    "released": "2024-10-31",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://www.physicalintelligence.company/blog/pi0",
+    "aliases": [
+      "pi0",
+      "pi_0",
+      "π₀",
+      "pi-zero"
+    ]
+  },
+  {
+    "id": "pi0-fast",
+    "name": "π0-FAST",
+    "lab": "physical-intelligence",
+    "family": "π",
+    "released": "2025-01-16",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://www.physicalintelligence.company/research/fast",
+    "aliases": [
+      "pi0-FAST",
+      "pi0_fast",
+      "π₀-FAST",
+      "pi0 FAST"
+    ]
+  },
+  {
+    "id": "pi0-5",
+    "name": "π0.5",
+    "lab": "physical-intelligence",
+    "family": "π",
+    "released": "2025-04-22",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://www.physicalintelligence.company/blog/pi05",
+    "aliases": [
+      "pi0.5",
+      "pi05",
+      "π₀.₅",
+      "pi_0.5"
+    ]
+  },
+  {
+    "id": "pi0-6",
+    "name": "π0.6",
+    "lab": "physical-intelligence",
+    "family": "π",
+    "released": "2025-11-17",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://website.pi-asset.com/pi06star/PI06_model_card.pdf",
+    "aliases": [
+      "pi0.6",
+      "pi06",
+      "π₀.₆"
+    ]
+  },
+  {
+    "id": "pi-star-0-6",
+    "name": "π*0.6",
+    "lab": "physical-intelligence",
+    "family": "π",
+    "released": "2025-11-17",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.physicalintelligence.company/blog/pistar06",
+    "aliases": [
+      "pi*0.6",
+      "pistar06",
+      "pi-star-0.6",
+      "π*₀.₆"
+    ]
+  },
+  {
+    "id": "pi0-7",
+    "name": "π0.7",
+    "lab": "physical-intelligence",
+    "family": "π",
+    "released": "2026-04-16",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.physicalintelligence.company/blog/pi07",
+    "aliases": [
+      "pi0.7",
+      "pi07",
+      "π₀.₇"
+    ]
+  },
+  {
+    "id": "gr00t-n1",
+    "name": "GR00T N1",
+    "lab": "nvidia",
+    "family": "GR00T",
+    "released": "2025-03-18",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/nvidia/GR00T-N1-2B",
+    "aliases": [
+      "GR00T-N1-2B",
+      "GR00T N1 2B",
+      "Isaac GR00T N1",
+      "GR00T-N1"
+    ]
+  },
+  {
+    "id": "gr00t-n1-5",
+    "name": "GR00T N1.5",
+    "lab": "nvidia",
+    "family": "GR00T",
+    "released": "2025-06-11",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://research.nvidia.com/labs/gear/gr00t-n1_5/",
+    "aliases": [
+      "GR00T-N1.5-3B",
+      "GR00T N1.5 3B",
+      "Isaac GR00T N1.5",
+      "GR00T-N1.5"
+    ]
+  },
+  {
+    "id": "gr00t-n1-6",
+    "name": "GR00T N1.6",
+    "lab": "nvidia",
+    "family": "GR00T",
+    "released": "2025-12-15",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://research.nvidia.com/labs/gear/gr00t-n1_6/",
+    "aliases": [
+      "GR00T-N1.6-3B",
+      "GR00T N1.6 3B",
+      "Isaac GR00T N1.6",
+      "GR00T-N1.6"
+    ]
+  },
+  {
+    "id": "gr00t-n1-7",
+    "name": "GR00T N1.7",
+    "lab": "nvidia",
+    "family": "GR00T",
+    "released": "2026-04-18",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/nvidia/GR00T-N1.7-3B",
+    "aliases": [
+      "GR00T-N1.7-3B",
+      "GR00T N1.7 3B",
+      "Isaac GR00T N1.7",
+      "GR00T-N1.7"
+    ]
+  },
+  {
+    "id": "gemini-robotics",
+    "name": "Gemini Robotics",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "released": "2025-03-12",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/"
+  },
+  {
+    "id": "gemini-robotics-er",
+    "name": "Gemini Robotics-ER",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "released": "2025-03-12",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/",
+    "aliases": [
+      "Gemini Robotics ER",
+      "GR-ER"
+    ]
+  },
+  {
+    "id": "gemini-robotics-on-device",
+    "name": "Gemini Robotics On-Device",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "released": "2025-06-24",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://deepmind.google/blog/gemini-robotics-on-device-brings-ai-to-local-robotic-devices/"
+  },
+  {
+    "id": "gemini-robotics-1-5",
+    "name": "Gemini Robotics 1.5",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "released": "2025-09-25",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://deepmind.google/blog/gemini-robotics-15-brings-ai-agents-into-the-physical-world/"
+  },
+  {
+    "id": "gemini-robotics-2",
+    "name": "Gemini Robotics 2",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "released": "2026-07-30",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/"
+  },
+  {
+    "id": "gemini-robotics-on-device-2",
+    "name": "Gemini Robotics On-Device 2",
+    "lab": "google",
+    "family": "Gemini Robotics",
+    "released": "2026-07-30",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/"
+  },
+  {
+    "id": "openvla",
+    "name": "OpenVLA",
+    "lab": "stanford",
+    "family": "OpenVLA",
+    "released": "2024-06-13",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://openvla.github.io/",
+    "aliases": [
+      "OpenVLA-7B",
+      "openvla-7b",
+      "OpenVLA 7B"
+    ]
+  },
+  {
+    "id": "openvla-oft",
+    "name": "OpenVLA-OFT",
+    "lab": "stanford",
+    "family": "OpenVLA",
+    "released": "2025-02-27",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://openvla-oft.github.io/",
+    "aliases": [
+      "OpenVLA OFT",
+      "OpenVLA-OFT+"
+    ]
+  },
+  {
+    "id": "octo",
+    "name": "Octo",
+    "lab": "uc-berkeley",
+    "family": "Octo",
+    "released": "2024-05-20",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://octo-models.github.io/",
+    "aliases": [
+      "Octo-Base",
+      "Octo-Small",
+      "octo-base",
+      "octo-small"
+    ]
+  },
+  {
+    "id": "foundry-qwen3vla-2-1b",
+    "name": "Foundry-Qwen3VLA-2.1B",
+    "lab": "toyota-research-institute",
+    "family": "VLA Foundry",
+    "released": "2026-04-21",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/TRI-ML/Foundry-Qwen3VLA-2.1B",
+    "aliases": [
+      "Foundry Qwen3VLA 2.1B",
+      "TRI-ML/Foundry-Qwen3VLA-2.1B"
+    ]
+  },
+  {
+    "id": "foundry-vla-1-7b",
+    "name": "Foundry-VLA-1.7B",
+    "lab": "toyota-research-institute",
+    "family": "VLA Foundry",
+    "released": "2026-04-21",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/TRI-ML/Foundry-VLA-1.7B-full",
+    "aliases": [
+      "Foundry-VLA-1.7B-full",
+      "TRI-ML/Foundry-VLA-1.7B-full"
+    ]
+  },
+  {
+    "id": "swe-2-flash",
+    "name": "SWE-2 Flash",
+    "lab": "cognition",
+    "released": "2026-11-04",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://cognition.com/blog/swe-2-flash",
+    "aliases": [
+      "SWE 2 Flash",
+      "SWE-2.0 Flash"
+    ]
+  },
+  {
+    "id": "ripple-65b-preview",
+    "name": "Ripple-65B Preview",
+    "lab": "ricursive",
+    "family": "Ripple",
+    "released": "2026-11-04",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://www.ricursive.com/ripple",
+    "aliases": [
+      "Ripple-65B-Preview",
+      "Ripple 65B Preview",
+      "ricursiveai/ripple-65b-preview"
+    ]
+  },
+  {
+    "id": "tencent-hy4",
+    "name": "Tencent Hy4",
+    "lab": "tencent",
+    "family": "Hy4",
+    "released": "2026-11-04",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/",
+    "aliases": [
+      "Hy4"
+    ]
+  },
+  {
+    "id": "longcat-2-5",
+    "name": "LongCat-2.5",
+    "lab": "meituan",
+    "family": "LongCat",
+    "released": "2026-11-02",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://longcat.ai/blog/longcat-2.5/",
+    "aliases": [
+      "LongCat 2.5"
+    ]
+  },
+  {
+    "id": "inkling-2-small",
+    "name": "Inkling 2 Small",
+    "lab": "thinking-machines",
+    "family": "Inkling",
+    "released": "2026-11-05",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://thinkingmachines.ai/news/inkling-2-small/",
+    "aliases": [
+      "Inkling-2-Small",
+      "Inkling 2-Small"
     ]
   }
 ]

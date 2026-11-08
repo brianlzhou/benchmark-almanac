@@ -9843,7 +9843,7 @@
     "title": "Qwen2.5 Technical Report (arXiv 2412.15115)",
     "url": "https://arxiv.org/abs/2412.15115",
     "release": "qwen-qwen2-5-72b-instruct-2024-09-19",
-    "notes": "26-page Qwen2.5 report, with Qwen2.5-Turbo numbers from Tables 7, 11, 12, 16, 17 and the passkey text. Qwen2.5-Turbo is mapped to the Qwen-Turbo entry in models.json (dated 2024-11-01), which a reviewer should confirm.",
+    "notes": "26-page Qwen2.5 report, with Qwen2.5-Turbo numbers from Tables 7, 11, 12, 16, 17 and the passkey text. Qwen2.5-Turbo is mapped to the Qwen-Turbo model record (dated 2024-11-01). The match is not confirmed.",
     "results": [
       {
         "benchmark": "mmlu-pro",
@@ -14068,6 +14068,34 @@
     ]
   },
   {
+    "id": "google-gemini-robotics-er-technical-report-2025-03-25",
+    "lab": "google",
+    "model": "gemini-robotics-er",
+    "date": "2025-03-25",
+    "kind": "technical-report",
+    "doc": "technical report",
+    "title": "Gemini Robotics: Bringing AI into the Physical World",
+    "url": "https://arxiv.org/abs/2503.20020v1",
+    "release": null,
+    "notes": "The report also covers the Gemini Robotics VLA, whose generalization benchmark results appear only in figures. ERQA rows in Table 1 belong to Gemini 2.0 models, not Gemini Robotics-ER. Paco-LVIS (71.3) and Pixmo-Point (49.5) are not cataloged.",
+    "results": [
+      {
+        "benchmark": "where2place",
+        "score": 45.0,
+        "unit": "%",
+        "as_written": "Where2Place, 2D pointing accuracy (Table 3)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "sunrgbd",
+        "score": 48.3,
+        "unit": "score",
+        "as_written": "SUN-RGBD 3D object detection AP@15 (Table 4)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "google-gemma-3-12b-technical-report-2025-03-25",
     "lab": "google",
     "model": "gemma-3-12b",
@@ -16465,7 +16493,7 @@
     "title": "Gemini 2.0 Flash-Lite Model Card",
     "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-0-Flash-Lite-Model-Card.pdf",
     "release": "google-gemini-2-0-flash-lite-2025-02-05",
-    "notes": "7 pages, published 2025-04-10. The results column is labelled Gemini 2.0 Flash-Lite (Public Preview), matching the launch post values. The safety delta table (p.5) is recorded, and the card has no FSF numbers.",
+    "notes": "7 pages, published 2025-04-10. The results column is labeled Gemini 2.0 Flash-Lite (Public Preview), matching the launch post values. The safety delta table (p.5) is recorded, and the card has no FSF numbers.",
     "results": [
       {
         "benchmark": "mmlu-pro",
@@ -16639,7 +16667,7 @@
     "title": "Gemini 2.0 Flash Model Card",
     "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-0-Flash-Model-Card.pdf",
     "release": "google-gemini-2-0-flash-feb-2025-2025-02-05",
-    "notes": "7 pages. The results column is labelled Gemini 2.0 Flash (GA), so the card describes the February 2025 GA model, not the December experimental release. No FSF section. Assurance results are qualitative and skipped.",
+    "notes": "7 pages. The results column is labeled Gemini 2.0 Flash (GA), so the card describes the February 2025 GA model, not the December experimental release. No FSF section. Assurance results are qualitative and skipped.",
     "results": [
       {
         "benchmark": "mmlu-pro",
@@ -20733,7 +20761,7 @@
       },
       {
         "benchmark": "strongreject",
-        "score": 2.24,
+        "score": null,
         "unit": "%",
         "as_written": "StrongREJECT best score (jailbreak success rate, lower is better), extended thinking 2.24%. Top 3 average extended 1.17%, best score standard 18.21%, top 3 average standard 7.14% (Table 2.7.A)",
         "section": "robustness"
@@ -21082,7 +21110,7 @@
       },
       {
         "benchmark": "strongreject",
-        "score": 2.24,
+        "score": null,
         "unit": "%",
         "as_written": "StrongREJECT best score (jailbreak success rate, lower is better), extended thinking 2.24%. Top 3 average extended 1.38%, best score standard 6.71%, top 3 average standard 2.66% (Table 2.7.A)",
         "section": "robustness"
@@ -21331,6 +21359,27 @@
         "unit": "%",
         "as_written": "Cybench, 22/39 challenges solved, pass@30 (7.4.7)",
         "section": "cyber"
+      }
+    ]
+  },
+  {
+    "id": "physical-intelligence-pi0-5-knowledge-insulation-2025-05-28",
+    "lab": "physical-intelligence",
+    "model": "pi0-5",
+    "date": "2025-05-28",
+    "kind": "technical-report",
+    "doc": "technical report",
+    "title": "Knowledge Insulating Vision-Language-Action Models: Train Fast, Run Fast, Generalize Better",
+    "url": "https://www.physicalintelligence.company/download/pi05_KI.pdf",
+    "release": "physical-intelligence-pi0-5-2025-09-08",
+    "notes": "The recipe behind π0.5 + KI, also arXiv 2505.23705. The DROID real-robot score (0.55 for π0.5 + KI) and in-house tasks are not recorded. Table 1 copies the π0 and π0-FAST LIBERO rows from openpi.",
+    "results": [
+      {
+        "benchmark": "libero",
+        "score": null,
+        "unit": "%",
+        "as_written": "LIBERO Spatial 98.0, Object 97.8, Goal 95.6, 10 (Long) 85.8, LIBERO-90 96.0, fine-tuned from the generalist model, no average printed (Table 1)",
+        "section": "capabilities"
       }
     ]
   },
@@ -26849,7 +26898,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 43.0,
+        "score": 57.0,
         "unit": "%",
         "as_written": "MASK, dishonesty rate 0.43, Grok 4 API (Table 2)",
         "section": "alignment"
@@ -27745,7 +27794,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 71.9,
+        "score": 28.1,
         "unit": "%",
         "as_written": "MASK, dishonesty rate 71.9 (Table 2)",
         "section": "alignment"
@@ -28501,7 +28550,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 47.0,
+        "score": 53.0,
         "unit": "%",
         "as_written": "MASK, dishonesty rate 0.47, 0.63 non-reasoning (Table 2)",
         "section": "alignment"
@@ -29013,6 +29062,132 @@
     ]
   },
   {
+    "id": "google-gemini-robotics-er-1-5-technical-report-2025-09-25",
+    "lab": "google",
+    "model": "gemini-robotics-er-1-5-preview",
+    "date": "2025-09-25",
+    "kind": "technical-report",
+    "doc": "technical report",
+    "title": "Gemini Robotics 1.5: Pushing the Frontier of Generalist Robots with Advanced Embodied Reasoning, Thinking, and Motion Transfer",
+    "url": "https://storage.googleapis.com/deepmind-media/gemini-robotics/Gemini-Robotics-1-5-Tech-Report.pdf",
+    "release": null,
+    "notes": "Also arXiv 2510.03342. Gemini Robotics-ER 1.5 results come from Tables 19 and 20, with thinking on. The Gemini Robotics 1.5 VLA results appear only in figures. Cosmos-Reason1 (72.2) is not cataloged.",
+    "results": [
+      {
+        "benchmark": "point-bench",
+        "score": 71.6,
+        "unit": "%",
+        "as_written": "Point-Bench (Table 19, thinking on). Thinking off 73.3",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 48.5,
+        "unit": "%",
+        "as_written": "RefSpatial (Table 19, thinking on). Thinking off 41.8",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "robospatial-home",
+        "score": null,
+        "unit": "%",
+        "as_written": "RoboSpatial-Pointing 31.1 and RoboSpatial-VQA 79.3 reported separately, no combined score (Table 19, thinking on)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "where2place",
+        "score": 59.0,
+        "unit": "%",
+        "as_written": "Where2Place (Table 19, thinking on). Thinking off 48.0",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "blink",
+        "score": 57.8,
+        "unit": "%",
+        "as_written": "BLINK (Table 19, thinking on). Thinking off 65.2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cvbench",
+        "score": 84.3,
+        "unit": "%",
+        "as_written": "CV-Bench (Table 19, thinking on). Thinking off 83.6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 54.8,
+        "unit": "%",
+        "as_written": "ERQA (Table 19, thinking on). Thinking off 47.0",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 78.4,
+        "unit": "%",
+        "as_written": "EmbSpatial (Table 19, thinking on). Thinking off 73.4",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mindcube",
+        "score": 54.7,
+        "unit": "%",
+        "as_written": "MindCube (Table 19, thinking on). Thinking off 47.7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "sat-spatial-aptitude",
+        "score": 76.7,
+        "unit": "%",
+        "as_written": "SAT (Table 19, thinking on). Thinking off 62.0",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mvpbench",
+        "score": 72.5,
+        "unit": "%",
+        "as_written": "Min Video Pairs (Table 19, thinking on). Thinking off 67.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "openeqa",
+        "score": 55.0,
+        "unit": "score",
+        "as_written": "OpenEQA (Table 19, thinking on). Thinking off 50.5",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vsi-bench",
+        "score": 45.8,
+        "unit": "%",
+        "as_written": "VSI-Bench (Table 19, thinking on). Thinking off 39.9",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 80.7,
+        "unit": "%",
+        "as_written": "MMMU (Table 20, thinking on). Thinking off 79.3",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 83.3,
+        "unit": "%",
+        "as_written": "GPQA (Table 20, thinking on). Thinking off 81.3",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aider-polyglot",
+        "score": 57.3,
+        "unit": "%",
+        "as_written": "Aider Polyglot (Table 20, thinking on). Thinking off 44.4",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "cohere-command-a-translate-technical-report-2025-09-26",
     "lab": "cohere",
     "model": "command-a-translate",
@@ -29181,6 +29356,41 @@
     ]
   },
   {
+    "id": "nvidia-gr00t-n1-5-benchmark-examples-2025-09-26",
+    "lab": "nvidia",
+    "model": "gr00t-n1-5",
+    "date": "2025-09-26",
+    "kind": "model-card",
+    "doc": "model card",
+    "title": "Isaac GR00T N1.5 benchmark examples (GitHub, n1d5 branch)",
+    "url": "https://github.com/NVIDIA/Isaac-GR00T/tree/n1d5/examples",
+    "release": "nvidia-gr00t-n1-5-2025-06-11",
+    "notes": "Example READMEs added from 2025-09-18 to 2025-09-26 for released N1.5 post-trained checkpoints. The SimplerEnv README says the runs had minimal hyperparameter tuning and are mainly for demonstration.",
+    "results": [
+      {
+        "benchmark": "libero",
+        "score": null,
+        "unit": "%",
+        "as_written": "LIBERO Spatial 92%, Goal 86%, Object 92%, Long 76%, Libero-90 89.3%, one post-trained checkpoint per suite, no average printed (examples/Libero README)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "simplerenv",
+        "score": 63,
+        "unit": "%",
+        "as_written": "SimplerEnv Bridge (WidowX) average 63% over 7 tasks with 300 trials each. Fractal (Google robot) average 41% (examples/SimplerEnv README)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "robocasa-gr1-tabletop",
+        "score": 48,
+        "unit": "%",
+        "as_written": "RoboCasa GR1 tabletop tasks, average success 0.48 over 24 tasks, stored here as 48% (examples/RoboCasa README)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "moonshot-kimi-dev-72b-technical-report-2025-09-27",
     "lab": "moonshot",
     "model": "kimi-dev-72b",
@@ -29210,7 +29420,7 @@
     "title": "System Card: Claude Sonnet 4.5",
     "url": "https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf",
     "release": "anthropic-claude-sonnet-4-5-2025-09-29",
-    "notes": "149 pages with changelog revisions on October 10 and December 3, 2025, and no capability benchmark section. Numbers in safeguards, honesty, agentic safety, cyber, reward hacking, alignment and RSP sections. I skipped qualitative ambiguous context, child safety and triage passages, white-box interpretability and steering studies, and welfare.",
+    "notes": "149 pages with changelog revisions on October 10 and December 3, 2025, and no capability benchmark section. Numbers in safeguards, honesty, agentic safety, cyber, reward hacking, alignment and RSP sections. We skipped qualitative ambiguous context, child safety and triage passages, white-box interpretability and steering studies, and welfare.",
     "results": [
       {
         "benchmark": "single-turn-harmful-request-evaluations-anthropic",
@@ -31540,7 +31750,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 49.0,
+        "score": 51.0,
         "unit": "%",
         "as_written": "MASK, dishonesty rate 0.49, Grok 4.1 Thinking (Table 3)",
         "section": "alignment"
@@ -31619,7 +31829,7 @@
     "title": "Frontier Safety Framework Report - Gemini 3 Pro",
     "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf",
     "release": "google-gemini-3-pro-2025-11-18",
-    "notes": "26 pages, published November 2025 (PDF title says v2), recorded as doc system card because the brief has no FSF report type. Numbers come from Figures 1 to 3, the FSF summary table and the CoT addendum. RE-Bench, stealth and situational awareness charts print no values, and external testing results are qualitative.",
+    "notes": "26 pages, published November 2025 (PDF title says v2), recorded as a system card because the catalog has no type for frontier safety framework reports. Numbers come from Figures 1 to 3, the FSF summary table and the CoT addendum. RE-Bench, stealth and situational awareness charts print no values, and external testing results are qualitative.",
     "results": [
       {
         "benchmark": "securebio-vmqa-single-choice",
@@ -31912,7 +32122,7 @@
     "title": "System Card: Claude Opus 4.5",
     "url": "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf",
     "release": "anthropic-claude-opus-4-5-2025-11-24",
-    "notes": "153 pages, with changelog revisions on Nov 24, Nov 25 and Dec 5, 2025. Numbers in capabilities, safeguards, honesty, agentic safety, alignment and RSP sections. I skipped qualitative sections (ambiguous context, child safety, expert and CAISI red teaming), interpretability and steering studies, the encoded reasoning check on a fine-tuned base model, and welfare.",
+    "notes": "153 pages, with changelog revisions on Nov 24, Nov 25 and Dec 5, 2025. Numbers in capabilities, safeguards, honesty, agentic safety, alignment and RSP sections. We skipped qualitative sections (ambiguous context, child safety, expert and CAISI red teaming), interpretability and steering studies, the encoded reasoning check on a fine-tuned base model, and welfare.",
     "results": [
       {
         "benchmark": "swe-bench-verified",
@@ -32511,7 +32721,7 @@
       },
       {
         "benchmark": "agentharm",
-        "score": 94.2,
+        "score": null,
         "unit": "%",
         "as_written": "AgentHarm-Chat, harmful tasks safely refused (Table 14)",
         "section": "safety"
@@ -37563,7 +37773,7 @@
     "title": "System Card: Claude Opus 4.6",
     "url": "https://assets.claude.com/6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd.pdf",
     "release": "anthropic-claude-opus-4-6-2026-02-05",
-    "notes": "213 pages with changelog revisions on Feb 6, 10 and 17 and March 6, 2026, and this record uses the revised values (HLE with tools 53.0, BrowseComp 83.73, multi-agent BrowseComp 86.57). Numbers come from the capabilities, safeguards, honesty, agentic safety, alignment and RSP sections, and I skipped qualitative sections (ambiguous context, eating disorders, Apollo, Andon Labs, expert and CAISI red teaming, internal acceleration metrics), the under-elicited Subversion Strategy run with no number, steering studies other than agentic misalignment, the encoded reasoning check and welfare.",
+    "notes": "213 pages with changelog revisions on Feb 6, 10 and 17 and March 6, 2026, and this record uses the revised values (HLE with tools 53.0, BrowseComp 83.73, multi-agent BrowseComp 86.57). Numbers come from the capabilities, safeguards, honesty, agentic safety, alignment and RSP sections, and we skipped qualitative sections (ambiguous context, eating disorders, Apollo, Andon Labs, expert and CAISI red teaming, internal acceleration metrics), the under-elicited Subversion Strategy run with no number, steering studies other than agentic misalignment, the encoded reasoning check and welfare.",
     "results": [
       {
         "benchmark": "swe-bench-verified",
@@ -39232,7 +39442,7 @@
       },
       {
         "benchmark": "omnidocbench-1-5",
-        "score": 0.099,
+        "score": null,
         "unit": "score",
         "as_written": "OmniDocBench 1.5, normalized edit distance, lower is better (Table 8)",
         "section": "capabilities"
@@ -42474,7 +42684,7 @@
       },
       {
         "benchmark": "omnidocbench-1-5",
-        "score": 0.106,
+        "score": null,
         "unit": "score",
         "as_written": "OmniDocBench 1.5, normalized edit distance, lower is better (Table 2)",
         "section": "capabilities"
@@ -43050,7 +43260,7 @@
     "title": "System Card: Claude Mythos Preview",
     "url": "https://assets.claude.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5.pdf",
     "release": "anthropic-claude-mythos-preview-2026-04-07",
-    "notes": "245 pages dated April 7, 2026 (changelog revisions on April 8 and 14 adjusted AECI values and Opus 4.6 comparison scores), with numbers from the RSP CB and AI R&D, cyber, alignment, honesty, safeguards, agentic safety and capability sections, many read from chart labels. I skipped qualitative expert red teaming, Andon Labs, external cyber ranges, the sandbagging review, the encoded reasoning check, training monitoring rates, white-box case studies, impressions and welfare, and the card itself omits MMMU-Pro for contamination.",
+    "notes": "245 pages dated April 7, 2026 (changelog revisions on April 8 and 14 adjusted AECI values and Opus 4.6 comparison scores), with numbers from the RSP CB and AI R&D, cyber, alignment, honesty, safeguards, agentic safety and capability sections, many read from chart labels. We skipped qualitative expert red teaming, Andon Labs, external cyber ranges, the sandbagging review, the encoded reasoning check, training monitoring rates, white-box case studies, impressions and welfare, and the card itself omits MMMU-Pro for contamination.",
     "results": [
       {
         "benchmark": "asl-4-virology-uplift-trial-anthropic",
@@ -51467,7 +51677,7 @@
     "title": "Muse Spark 1.1 Evaluation Report",
     "url": "https://research.meta.ai/static/muse-spark-1-1-evaluation-report",
     "release": "meta-muse-spark-1-1-2026-07-09",
-    "notes": "112 pages with preparedness, robustness, behavior and general capability sections. Figure 44 capability table is an embedded image that I read visually. Evaluation-awareness tables, interviews and the principle-conflict breakdown were not recorded.",
+    "notes": "112 pages with preparedness, robustness, behavior and general capability sections. Figure 44 capability table is an embedded image that we read visually. Evaluation-awareness tables, interviews and the principle-conflict breakdown were not recorded.",
     "results": [
       {
         "benchmark": "humanitys-last-exam",
@@ -53112,7 +53322,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 0.67,
+        "score": null,
         "unit": "%",
         "as_written": "MASK-Rectified, dishonesty rate (lower is better), high (12.2)",
         "section": "alignment"
@@ -54480,7 +54690,7 @@
       },
       {
         "benchmark": "omnidocbench-1-5",
-        "score": 0.149,
+        "score": null,
         "unit": "score",
         "as_written": "OmniDocBench 1.5, edit distance (lower is better), thinking, max resolution (Table 6)",
         "section": "capabilities"
@@ -54661,7 +54871,7 @@
       },
       {
         "benchmark": "omnidocbench-1-5",
-        "score": 0.131,
+        "score": null,
         "unit": "score",
         "as_written": "OmniDocBench 1.5, edit distance (lower is better), thinking, max resolution (Table 6)",
         "section": "capabilities"
@@ -55009,7 +55219,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "omnidocbench",
+        "benchmark": "omnidocbench-1-5",
         "score": 91.1,
         "unit": "%",
         "as_written": "OmniDocBench (Table 2)",
@@ -55905,14 +56115,14 @@
       },
       {
         "benchmark": "factuality-heavy-prompts-openai",
-        "score": 0.47,
+        "score": null,
         "unit": "score",
         "as_written": "Factuality Heavy, relative hallucination rate vs GPT-5.3 Instant, % responses with factual error, 0.47x, printed chart label (Figure 2, 6)",
         "section": "hallucination"
       },
       {
         "benchmark": "openai-user-flagged-hallucination-eval",
-        "score": 0.49,
+        "score": null,
         "unit": "score",
         "as_written": "User Flagged Failures, relative hallucination rate vs GPT-5.3 Instant, % responses with factual error, 0.49x, printed chart label (Figure 2, 6)",
         "section": "hallucination"
@@ -56072,14 +56282,14 @@
       },
       {
         "benchmark": "factuality-heavy-prompts-openai",
-        "score": 0.27,
+        "score": null,
         "unit": "score",
         "as_written": "Factuality Heavy, relative hallucination rate vs GPT-5.3 Instant, % responses with factual error, 0.27x, printed chart label (Figure 2, 6)",
         "section": "hallucination"
       },
       {
         "benchmark": "openai-user-flagged-hallucination-eval",
-        "score": 0.31,
+        "score": null,
         "unit": "score",
         "as_written": "User Flagged Failures, relative hallucination rate vs GPT-5.3 Instant, % responses with factual error, 0.31x, printed chart label (Figure 2, 6)",
         "section": "hallucination"
@@ -56414,7 +56624,7 @@
       },
       {
         "benchmark": "strongreject",
-        "score": 3.9,
+        "score": null,
         "unit": "%",
         "as_written": "StrongReject, compliance (lower is better), high (9.1 table)",
         "section": "robustness"
@@ -56470,7 +56680,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 1.9,
+        "score": null,
         "unit": "%",
         "as_written": "MASK-Rectified, dishonesty rate (lower is better), high (12.1)",
         "section": "alignment"
@@ -56493,7 +56703,7 @@
     "title": "Frontier Safety Framework Report - Gemini 3.7 Flash",
     "url": "https://storage.googleapis.com/deepmind-media/gemini/gemini_3-7_flash_fsf_report.pdf",
     "release": "google-gemini-3-7-flash-2026-08-13",
-    "notes": "41 pages, published August 2026. Frontier safety report that accompanies the model card, recorded as doc system card because the brief has no FSF report type. The cyber CCL was assessed with unnamed proxy evaluations, so it has no result, and the key skills run on the mitigated model (100% milestone refusals) is not recorded. Per-challenge stealth and situational awareness charts print no numbers.",
+    "notes": "41 pages, published August 2026. Frontier safety report that accompanies the model card, recorded as a system card because the catalog has no type for frontier safety framework reports. The cyber CCL was assessed with unnamed proxy evaluations, so it has no result, and the key skills run on the mitigated model (100% milestone refusals) is not recorded. Per-challenge stealth and situational awareness charts print no numbers.",
     "results": [
       {
         "benchmark": "cbrn-red-teaming-google",
@@ -58290,7 +58500,7 @@
       },
       {
         "benchmark": "strongreject",
-        "score": 2.0,
+        "score": null,
         "unit": "%",
         "as_written": "StrongReject, compliance (lower is better), high (8.1 table)",
         "section": "robustness"
@@ -58346,7 +58556,7 @@
       },
       {
         "benchmark": "mask",
-        "score": 0.0,
+        "score": null,
         "unit": "%",
         "as_written": "MASK-Rectified, dishonesty rate (lower is better), high (11.1)",
         "section": "alignment"
@@ -64397,7 +64607,7 @@
       },
       {
         "benchmark": "omnidocbench-1-5",
-        "score": 0.42,
+        "score": null,
         "unit": "score",
         "as_written": "OmniDocBench 1.5 edit distance, lower is better, reasoning, 0.47 non-reasoning (Table 8)",
         "section": "capabilities"

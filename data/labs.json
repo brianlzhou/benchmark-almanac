@@ -930,5 +930,39 @@
       "infly",
       "INF Technology"
     ]
+  },
+  {
+    "id": "physical-intelligence",
+    "name": "Physical Intelligence",
+    "country": "US",
+    "url": "https://www.physicalintelligence.company",
+    "aliases": [
+      "Physical Intelligence",
+      "Physical-Intelligence",
+      "physicalintelligence"
+    ]
+  },
+  {
+    "id": "toyota-research-institute",
+    "name": "Toyota Research Institute",
+    "country": "US",
+    "url": "https://www.tri.global",
+    "aliases": [
+      "Toyota Research Institute",
+      "TRI",
+      "TRI-ML",
+      "ToyotaResearchInstitute"
+    ]
+  },
+  {
+    "id": "ricursive",
+    "name": "Ricursive Intelligence",
+    "country": "US",
+    "url": "https://www.ricursive.com",
+    "aliases": [
+      "Ricursive",
+      "Ricursive Intelligence",
+      "ricursiveAI"
+    ]
   }
 ]
