@@ -70,7 +70,7 @@
     {
       "id": "verified",
       "name": "Checked automatically",
-      "how": "A program decides: an answer key, unit tests, or a check of the final state."
+      "how": "A program checks the result against an answer key, unit tests or the expected final state."
     },
     {
       "id": "model-judged",
@@ -85,7 +85,7 @@
     {
       "id": "preference",
       "name": "Ranked by votes",
-      "how": "People pick the better of two answers, and the votes become ratings. This is the arena style."
+      "how": "People pick the better of two answers, as in an arena, and the votes are turned into ratings."
     },
     {
       "id": "head-to-head",
@@ -120,7 +120,7 @@
     {
       "id": "agent-task",
       "name": "Agent task",
-      "note": "Many steps of actions in a terminal, browser, desktop, app, game or robot."
+      "note": "Many steps in a terminal, browser, desktop, app, game or robot."
     },
     {
       "id": "open-ended",
@@ -486,6 +486,10 @@
       {
         "id": "vision-detection",
         "name": "Detection and captioning"
+      },
+      {
+        "id": "image-generation",
+        "name": "Image generation and editing"
       }
     ],
     "audio-video": [

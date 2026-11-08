@@ -460,7 +460,7 @@
         "as_written": "Chinese Tool-Use Benchmark (ReAct), Tool Selection Acc."
       },
       {
-        "benchmark": "code-interpreter-benchmark",
+        "benchmark": "code-interpreter-benchmark-math",
         "score": 58.4,
         "unit": "%",
         "as_written": "Code Interpreter benchmark, Accuracy of Code Execution Results (Math)"
@@ -1240,7 +1240,7 @@
         "as_written": "Tool-Use Benchmark (Tool Selection Acc.)"
       },
       {
-        "benchmark": "code-interpreter-benchmark",
+        "benchmark": "code-interpreter-benchmark-math",
         "score": 73.1,
         "unit": "%",
         "as_written": "Code Interpreter Benchmark (Accuracy of Code Execution Results, Math)"
@@ -6005,7 +6005,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 8.03,
+        "score": 80.3,
         "unit": "score/10",
         "as_written": "WritingBench"
       },
@@ -6332,7 +6332,7 @@
   {
     "id": "deepseek-deepseek-r1-0528-2025-05-28",
     "lab": "deepseek",
-    "model": "deepseek-r1",
+    "model": "deepseek-r1-may-2025",
     "date": "2025-05-28",
     "title": "DeepSeek-R1-0528 model card",
     "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528",
@@ -7228,7 +7228,7 @@
         "as_written": "MMLU Questions across academic disciplines"
       },
       {
-        "benchmark": "tau-bench",
+        "benchmark": "tau-bench-retail",
         "score": 67.8,
         "unit": "%",
         "as_written": "Tau-Bench Retail Function calling"
@@ -8080,7 +8080,7 @@
         "as_written": "Best of τ²-Bench / τ²-Bench-Telecom (AA)"
       },
       {
-        "benchmark": "finsearchcomp",
+        "benchmark": "finsearchcomp-global",
         "score": 65.5,
         "unit": "%",
         "as_written": "FinSearchComp-global"
@@ -12178,7 +12178,7 @@
         "as_written": "Apex (Pass@1)"
       },
       {
-        "benchmark": "matharena-apex-imo-usamo",
+        "benchmark": "matharena-apex-shortlist",
         "score": 90.2,
         "unit": "%",
         "as_written": "Apex Shortlist (Pass@1)"
@@ -13469,7 +13469,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 53.6,
+        "score": null,
         "unit": "%",
         "as_written": "Program Bench"
       },
@@ -13571,7 +13571,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 63.7,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -13919,7 +13919,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 77.8,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -14609,7 +14609,7 @@
       },
       {
         "benchmark": "onemillion-bench",
-        "score": 52.5,
+        "score": null,
         "unit": "%",
         "as_written": "$OneMillion-Bench (expert score)"
       },
@@ -14771,7 +14771,7 @@
       },
       {
         "benchmark": "parametric-cad-bench",
-        "score": 91.5,
+        "score": null,
         "unit": "%",
         "as_written": "Parametric CAD Bench"
       },
@@ -15298,7 +15298,7 @@
         "as_written": "NL2Repo"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 19.0,
         "unit": "%",
         "as_written": "ProgramBench (Almost Solved)"
@@ -15386,12 +15386,6 @@
         "score": 52.6,
         "unit": "%",
         "as_written": "Agentic scientific research Terminal-Bench-Science 0.1"
-      },
-      {
-        "benchmark": "terminal-bench-4-0",
-        "score": 60.9,
-        "unit": "%",
-        "as_written": "Agentic coding Terminal-Bench 4.0 (Mythos 5.1)"
       },
       {
         "benchmark": "gdpval-aa-v2",
@@ -15802,7 +15796,7 @@
         "as_written": "DeepSWE v1.1 (Resolved)"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 20.3,
         "unit": "%",
         "as_written": "ProgramBench (Almost@1)"
@@ -16583,7 +16577,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 29.1,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -17062,7 +17056,7 @@
         "as_written": "RoadmapBench"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 80.5,
         "unit": "%",
         "as_written": "ProgramBench (Pass Rate)"
@@ -17884,7 +17878,7 @@
         "as_written": "BenchCAD w/ tools (w/o tools 72.8)"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 31.5,
         "unit": "%",
         "as_written": "Program Bench (binary score, >=95% counts as solved)"
@@ -18257,7 +18251,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 8.65,
+        "score": 86.5,
         "unit": "score/10",
         "as_written": "WritingBench (critic-score, maximum 10)"
       }
@@ -18316,7 +18310,7 @@
         "as_written": "NL2Repo-Bench"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 50.3,
         "unit": "%",
         "as_written": "ProgramBench (resolved / almost resolved / average pass rate) 0/1/50.3"
@@ -19373,7 +19367,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 26.5,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -20806,7 +20800,7 @@
         "as_written": "Mean of LongFact-Objects 92.9 / LongFact-Concepts 92.8"
       },
       {
-        "benchmark": "factscore",
+        "benchmark": "factscore-precision",
         "score": 71.2,
         "unit": "%",
         "as_written": "FactScore"
@@ -22133,7 +22127,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 8.56,
+        "score": 85.6,
         "unit": "score/10",
         "as_written": "WritingBench"
       }
@@ -22973,7 +22967,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 17.5,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -31204,7 +31198,7 @@
         "as_written": "CritPt"
       },
       {
-        "benchmark": "matharena-apex-imo-usamo",
+        "benchmark": "matharena-apex-shortlist",
         "score": 88.36,
         "unit": "%",
         "as_written": "APEX shortlist"
@@ -32896,7 +32890,7 @@
         "as_written": "IMOAnswerBench (no tools); with tools 92.3"
       },
       {
-        "benchmark": "matharena-apex-imo-usamo",
+        "benchmark": "matharena-apex-shortlist",
         "score": 74.9,
         "unit": "%",
         "as_written": "Apex-Shortlist (no tools); with tools 84.8"
@@ -34817,7 +34811,7 @@
       },
       {
         "benchmark": "orak",
-        "score": 22.9,
+        "score": null,
         "unit": "score",
         "as_written": "Orak (reasoning off)"
       },
@@ -35657,7 +35651,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.51,
+        "score": 75.1,
         "unit": "score/10",
         "as_written": "Writing Bench"
       },
@@ -40121,7 +40115,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 59.0,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -40223,7 +40217,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 50.0,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench"
       },
@@ -43012,7 +43006,7 @@
         "as_written": "MMLU"
       },
       {
-        "benchmark": "tau-bench",
+        "benchmark": "tau-bench-retail",
         "score": 54.8,
         "unit": "%",
         "as_written": "Tau-Bench Retail (function calling)"
@@ -46252,7 +46246,7 @@
     "notes": "Scores come from the value labels on the 12-panel bar chart in the press release. The release gives no thinking mode, effort, harness or attempt count, and no parameter count or license. Tencent says the weights and system cards will follow in the coming days. Claims made only in the text, such as a WorkBuddy average of 83.18, are not recorded.",
     "results": [
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 30.0,
         "unit": "%",
         "as_written": "ProgramBench (almost solved) *"
@@ -46324,7 +46318,7 @@
         "as_written": "Terminal Bench v4.0"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 25.5,
         "unit": "%",
         "as_written": "Program Bench (Almost Resolved)"

@@ -11635,7 +11635,7 @@
       },
       {
         "benchmark": "aime-2025",
-        "score": 11.3,
+        "score": null,
         "unit": "score",
         "as_written": "AIME 2025 average score 11.3/15, USAMO index 256.7 (Table 13)",
         "section": "capabilities"
@@ -19312,7 +19312,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.02,
+        "score": 70.2,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 19). Non-thinking 6.54 (Table 20)",
         "section": "capabilities"
@@ -19486,7 +19486,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.8,
+        "score": 78.0,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 15). Non-thinking 7.24 (Table 16)",
         "section": "capabilities"
@@ -19674,7 +19674,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 8.03,
+        "score": 80.3,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 11). Non-thinking 7.70 (Table 12)",
         "section": "capabilities"
@@ -19855,7 +19855,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.7,
+        "score": 77.0,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 15). Non-thinking 7.22 (Table 16)",
         "section": "capabilities"
@@ -20036,7 +20036,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.9,
+        "score": 79.0,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 13). Non-thinking 7.54 (Table 14)",
         "section": "capabilities"
@@ -20252,7 +20252,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.35,
+        "score": 73.5,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 17). Non-thinking 6.85 (Table 18)",
         "section": "capabilities"
@@ -20440,7 +20440,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.59,
+        "score": 75.9,
         "unit": "score",
         "as_written": "WritingBench, thinking mode (Table 17). Non-thinking 7.15 (Table 18)",
         "section": "capabilities"
@@ -23708,7 +23708,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "longbench",
+        "benchmark": "longbench-english",
         "score": 48.1,
         "unit": "%",
         "as_written": "LongBench v1, English subsets, 128K, Non-reasoning only (Table 4). Total Avg. 48.12 (Table 11)",
@@ -24352,7 +24352,7 @@
       },
       {
         "benchmark": "vectara-hallucination-leaderboard-hhem",
-        "score": 98.9,
+        "score": 1.1,
         "unit": "%",
         "as_written": "HHEM v2.1 (1-Hallu.), hallucination rate 1.1% (Table 3)",
         "section": "hallucination"
@@ -25544,7 +25544,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 3,
         "unit": "%",
         "as_written": "MLE-Bench-30, bronze pass@1, gpt-5-thinking-mini launch candidate (Figure 23)",
@@ -26004,7 +26004,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 8,
         "unit": "%",
         "as_written": "MLE-Bench-30, bronze pass@1, no browsing launch candidate (Figure 23)",
@@ -28095,7 +28095,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 8.56,
+        "score": 85.6,
         "unit": "score",
         "as_written": "WritingBench, 10-point scale (Table 1)",
         "section": "capabilities"
@@ -32084,7 +32084,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 17,
         "unit": "%",
         "as_written": "MLE-Bench-30 (30-competition subset), bronze pass@1, printed chart label (Figure 12, 5.1.3.3)",
@@ -34614,7 +34614,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 16,
         "unit": "%",
         "as_written": "MLE-Bench-30, 30-competition subset, bronze pass@1, no browsing, printed chart label (Figure 14)",
@@ -35153,7 +35153,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 10,
         "unit": "%",
         "as_written": "MLE-Bench-30 (30-competition subset), bronze pass@1, printed chart label (Figure 10, 5.1.3.2)",
@@ -36302,7 +36302,7 @@
       },
       {
         "benchmark": "writingbench",
-        "score": 7.51,
+        "score": 75.1,
         "unit": "score",
         "as_written": "Writing Bench, score out of 10 (Table 6)",
         "section": "capabilities"
@@ -38078,7 +38078,7 @@
       },
       {
         "benchmark": "simpleqa-verified",
-        "score": 16.2,
+        "score": null,
         "unit": "%",
         "as_written": "Simple-QA-Verified net score (correct minus incorrect), extended thinking, value printed on chart; correct rate 37.7, net 7.8 with thinking plus effort, net 3.6 without thinking (Figure 4.2.B)",
         "section": "hallucination"
@@ -39140,7 +39140,7 @@
         "section": "hallucination"
       },
       {
-        "benchmark": "factscore",
+        "benchmark": "factscore-precision",
         "score": 71.2,
         "unit": "%",
         "as_written": "FactScore (Table 3)",
@@ -41746,7 +41746,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 23.33,
         "unit": "%",
         "as_written": "MLE-Bench (30-competition subset), pass@1, printed chart label (Figure 16, 5.1.3.2)",
@@ -44369,7 +44369,7 @@
       },
       {
         "benchmark": "simpleqa-verified",
-        "score": 28.6,
+        "score": 44.9,
         "unit": "%",
         "as_written": "Simple-QA-Verified net score (correct minus incorrect), closed book, printed on chart. Correct 44.9, unsure 38.7, incorrect 16.3 (6.3.3.1, Figures 6.3.3.1.A and B)",
         "section": "hallucination"
@@ -45501,7 +45501,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 36.67,
         "unit": "%",
         "as_written": "MLE-Bench-30 (30-competition subset), bronze or better, pass@1, printed chart label (Figure 19, 9.1.3.2)",
@@ -47301,7 +47301,7 @@
       },
       {
         "benchmark": "simpleqa-verified",
-        "score": 27.0,
+        "score": null,
         "unit": "%",
         "as_written": "SimpleQA Verified net score 0.27 (correct minus incorrect), closed book, printed on chart (6.3.3.1, Figure 6.3.3.1.B)",
         "section": "hallucination"
@@ -47552,7 +47552,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 79.0,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 of 200 tasks, one episode of up to 1M tokens, near-final snapshot. Text gives 79 to 88% across 1 to 5 episodes (8.5, Figure 8.5.A)",
@@ -48683,7 +48683,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "matharena-apex-imo-usamo",
+        "benchmark": "matharena-apex-shortlist",
         "score": 74.9,
         "unit": "%",
         "as_written": "Apex-Shortlist (no tools), 84.8 with tools (Table 10)",
@@ -48892,7 +48892,7 @@
         "section": "bio-chem"
       },
       {
-        "benchmark": "biotier-securebio",
+        "benchmark": "biotier-securebio-refuse",
         "score": 98.0,
         "unit": "%",
         "as_written": "Refusals: BioTIER refusal rate, deployed system (Table 2, Figure 9)",
@@ -48983,7 +48983,7 @@
         "section": "ai-rnd"
       },
       {
-        "benchmark": "mle-bench",
+        "benchmark": "mle-bench-30",
         "score": 15.8,
         "unit": "%",
         "as_written": "MLE-Bench any medal rate, 30-task subset, 24 hours (Table 1, Table 11)",
@@ -49718,7 +49718,7 @@
         "section": "cyber"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 50.3,
         "unit": "%",
         "as_written": "ProgramBench, resolved 0 / almost resolved 1 / average pass rate 50.3 (Table 5)",
@@ -51394,7 +51394,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": null,
         "unit": "%",
         "as_written": "ProgramBench, hidden test pass rate on 166 of 200 tasks across 5 episodes, given only as a range 76 to 86%, no single value (8.8)",
@@ -51869,7 +51869,7 @@
         "section": "bio-chem"
       },
       {
-        "benchmark": "biotier-securebio",
+        "benchmark": "biotier-securebio-refuse",
         "score": 97.7,
         "unit": "%",
         "as_written": "Refusals: BioTIER v1 refusal rate (Table 2, Figure 6)",
@@ -53125,7 +53125,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 57.2,
         "unit": "%",
         "as_written": "ProgramBench, tests-passed rate, high (2.8)",
@@ -53168,7 +53168,7 @@
       },
       {
         "benchmark": "parametric-cad-bench",
-        "score": 88.1,
+        "score": null,
         "unit": "%",
         "as_written": "CAD-Bench (Parametric CAD Bench), reward, high (3.3)",
         "section": "capabilities"
@@ -54319,7 +54319,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 93.0,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 of 200 tasks after five 1M-token episodes, single agent (83% after the first episode) (8.9.1)",
@@ -55010,7 +55010,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 77.8,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench (Table 2)",
         "section": "capabilities"
@@ -55185,7 +55185,7 @@
       },
       {
         "benchmark": "harvey-lab-legal-agent-benchmark",
-        "score": 94.6,
+        "score": null,
         "unit": "%",
         "as_written": "Harvey Lab-AA, criterion pass rate, cited from Artificial Analysis (Table 2)",
         "section": "capabilities"
@@ -56498,7 +56498,7 @@
       },
       {
         "benchmark": "parametric-cad-bench",
-        "score": 88.4,
+        "score": null,
         "unit": "%",
         "as_written": "CADBench (Parametric CAD Bench), reward, xhigh, Grok Build harness, run by gNucleus (4.5). High = 87.8%",
         "section": "capabilities"
@@ -57251,13 +57251,13 @@
       },
       {
         "benchmark": "critpt",
-        "score": 88.4,
+        "score": null,
         "unit": "%",
         "as_written": "CritPT-Corrected (internal corrected version), Pass@1 at max effort with tools, 16 attempts per problem, printed on chart (Figure 8.9.A)",
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 87.6,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 tasks, single agent, mini-swe-agent harness, no time limit (8.11.1)",
@@ -57984,7 +57984,7 @@
       },
       {
         "benchmark": "sre-bench",
-        "score": 99.2,
+        "score": 88.0,
         "unit": "%",
         "as_written": "SRE-Bench, pass@4 (pass@1 88.0%, printed chart label) (10.1.2.3, Figure 50)",
         "section": "cyber"
@@ -58081,7 +58081,7 @@
         "section": "safety"
       },
       {
-        "benchmark": "biotier-securebio",
+        "benchmark": "biotier-securebio-refuse",
         "score": 82.9,
         "unit": "%",
         "as_written": "SecureBio BioTIER, safeguarded configuration refused requests designated for refusal (benign allowed 95.3%) (10.2.4.2)",
@@ -58157,7 +58157,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 20.3,
         "unit": "%",
         "as_written": "ProgramBench (Almost@1) (Table 3). Figure 10 text: 30.04 multi-agent and 20.39 single-agent at 8h on a 172-task high-confidence subset",
@@ -59009,7 +59009,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 91.2,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 of 200 tasks, single agent, mini-swe-agent harness, no time limit (8.10.1)",
@@ -60107,7 +60107,7 @@
       },
       {
         "benchmark": "programbench",
-        "score": 26.5,
+        "score": null,
         "unit": "%",
         "as_written": "ProgramBench (Table 3)",
         "section": "capabilities"
@@ -60630,7 +60630,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 79.7,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 tasks, single agent, mini-swe-agent harness (8.10.1)",
@@ -61475,7 +61475,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-tests-passed",
         "score": 82.0,
         "unit": "%",
         "as_written": "ProgramBench, hidden test pass rate on 166 of 200 tasks, mini-swe-agent without time limit (8.7.1)",
@@ -62124,7 +62124,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 59.0,
         "unit": "%",
         "as_written": "ProgramBench, rollouts passing at least 95% of tests, mini-swe-agent, Muse Wonder Full (max) (capabilities table image, page 3)",
@@ -62243,7 +62243,7 @@
         "section": "bio-chem"
       },
       {
-        "benchmark": "biotier-securebio",
+        "benchmark": "biotier-securebio-refuse",
         "score": 98.7,
         "unit": "%",
         "as_written": "BioTIER English refusal rate (CBRN Safety Evaluations table, section 4). Multilingual 98.7, adversarial 98.2",
@@ -62369,7 +62369,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench",
+        "benchmark": "programbench-almost",
         "score": 50.0,
         "unit": "%",
         "as_written": "ProgramBench, rollouts passing at least 95% of tests, mini-swe-agent, Muse Wonder (max) (capabilities table image, page 3)",
@@ -63515,7 +63515,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "matharena-apex-imo-usamo",
+        "benchmark": "matharena-apex-shortlist",
         "score": 88.36,
         "unit": "%",
         "as_written": "Apex-Shortlist, no tools, mean of 16 (Table 10)",
@@ -64004,7 +64004,7 @@
         "section": "bio-chem"
       },
       {
-        "benchmark": "biotier-securebio",
+        "benchmark": "biotier-securebio-refuse",
         "score": 97.4,
         "unit": "%",
         "as_written": "BioTIER v1 (English) refusal rate, Muse Spark 1.3 (API) with system mitigations (Table 2, Figure 5). Multilingual 96.9, adversarial 95.3",
@@ -64432,7 +64432,7 @@
       },
       {
         "benchmark": "eq-bench-3",
-        "score": 38.15,
+        "score": null,
         "unit": "score",
         "as_written": "EQ-Bench v3, rubric score, released Q4_K_M imatrix checkpoint (Table 5). BF16 39.4 (Table 3)",
         "section": "capabilities"

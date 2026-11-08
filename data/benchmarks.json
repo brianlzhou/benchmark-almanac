@@ -97,7 +97,8 @@
     },
     "access": "public+private-holdout",
     "note": "Prize-based phases. 1X scores submissions on a held-out set and warns that nearest-neighbor retrieval gets good validation scores. The Evaluation (policy-ranking) challenge was announced but not released. Paper is the winning team's report. Competition spaces on HF.",
-    "unit": "%",
+    "unit": "score",
+    "better": "lower",
     "confidence": "verified"
   },
   {
@@ -151,11 +152,37 @@
     "added": "2026-11-01"
   },
   {
+    "id": "3dcodearena",
+    "name": "3DCodeArena",
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate 3D assets through code. Human preference votes determine the published Bradley-Terry Elo rating.",
+    "org": "Google DeepMind + Google Research + University of Southern California",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/gaoypeng/3dcodebench",
+      "leaderboard": "https://www.3dcodebench.com/leaderboard",
+      "paper": "https://arxiv.org/abs/2606.01057",
+      "site": "https://www.3dcodebench.com/",
+      "dataset": "https://huggingface.co/datasets/YipengGao/3DCodeBench"
+    },
+    "access": "public",
+    "note": "The board measures human preference. The separate 3DCodeBench record retains percentage-valued lab results.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.3dcodebench.com/leaderboard",
+      "https://arxiv.org/html/2606.01057"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "3dcodebench",
     "name": "3DCodeBench",
-    "aliases": [
-      "3DCodeArena"
-    ],
     "category": "engineering-design",
     "subcategory": "engineering-cad",
     "scoring": "preference",
@@ -165,7 +192,6 @@
     "released": "2026-05",
     "links": {
       "repo": "https://github.com/gaoypeng/3dcodebench",
-      "leaderboard": "https://www.3dcodebench.com/leaderboard",
       "paper": "https://arxiv.org/abs/2606.01057",
       "site": "https://www.3dcodebench.com/",
       "dataset": "https://huggingface.co/datasets/YipengGao/3DCodeBench"
@@ -252,7 +278,7 @@
     "level": "university",
     "scoring": "verified",
     "format": "short-answer",
-    "description": "Models find satisfying assignments for 800 3-SAT formulas across difficulty levels. A checker verifies each assignment.",
+    "description": "Models find satisfying assignments for 960 3-SAT formulas across difficulty levels. A checker verifies each assignment.",
     "org": "Microsoft Research (Eureka ML Insights)",
     "released": "2025-03",
     "links": {
@@ -261,7 +287,7 @@
       "dataset": "https://huggingface.co/datasets/microsoft/sat"
     },
     "access": "unknown",
-    "note": "Microsoft released the dataset on Hugging Face as microsoft/sat in June 2025, and the Eureka nphard_sat config loads it.",
+    "note": "Microsoft released the dataset on Hugging Face as microsoft/sat in June 2025. The early paper listed 800 formulas, and current author logs use 960.",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
@@ -937,7 +963,7 @@
     },
     "access": "unknown",
     "note": "ABC Bench has three task families reported separately: Fragment Design, Liquid-Handling Robot and Screening Evasion.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -966,7 +992,7 @@
     },
     "access": "unknown",
     "note": "Part of SecureBio ABC Bench with Fragment Design and Screening Evasion.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -1333,6 +1359,56 @@
     "evidence": [
       "https://research.meta.ai/static/muse-spark-1-3-evaluation-report"
     ]
+  },
+  {
+    "id": "adepts-bench-desktop",
+    "name": "ADeptS-Bench Desktop",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents choose safe interface actions on the Desktop test set. The published safety score combines task success and attack resistance.",
+    "org": "Chen et al.",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.26204"
+    },
+    "access": "public",
+    "note": "One track of ADeptS-Bench. The ADeptS-Bench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/facebookresearch/adepts/main/README.md",
+      "https://arxiv.org/html/2608.26204"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "adepts-bench-mobile",
+    "name": "ADeptS-Bench Mobile",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents choose safe interface actions on the Mobile test set. The published safety score combines task success and attack resistance.",
+    "org": "Chen et al.",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.26204"
+    },
+    "access": "public",
+    "note": "One track of ADeptS-Bench. The ADeptS-Bench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/facebookresearch/adepts/main/README.md",
+      "https://arxiv.org/html/2608.26204"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "constitution-adherence-anthropic",
@@ -1955,7 +2031,7 @@
     },
     "access": "public",
     "successor": "agentbench-fc",
-    "unit": "%",
+    "unit": "score",
     "confidence": "verified",
     "evidence": [
       "https://github.com/THUDM/AgentBench"
@@ -4598,6 +4674,87 @@
     ]
   },
   {
+    "id": "anli-r1",
+    "name": "ANLI R1",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models label premise and hypothesis pairs from the first adversarial test round as entailment, neutral, or contradiction. The score is test accuracy.",
+    "org": "Facebook AI Research (Nie et al.)",
+    "released": "2019-10",
+    "links": {
+      "repo": "https://github.com/facebookresearch/anli",
+      "paper": "https://arxiv.org/abs/1910.14599",
+      "dataset": "https://huggingface.co/datasets/facebook/anli"
+    },
+    "access": "public",
+    "note": "One track of ANLI. The ANLI record keeps lab scores that combine tracks. Importers use test accuracy only and exclude development scores.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
+      "https://arxiv.org/html/1910.14599"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "anli-r2",
+    "name": "ANLI R2",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models label premise and hypothesis pairs from the second adversarial test round as entailment, neutral, or contradiction. The score is test accuracy.",
+    "org": "Facebook AI Research (Nie et al.)",
+    "released": "2019-10",
+    "links": {
+      "repo": "https://github.com/facebookresearch/anli",
+      "paper": "https://arxiv.org/abs/1910.14599",
+      "dataset": "https://huggingface.co/datasets/facebook/anli"
+    },
+    "access": "public",
+    "note": "One track of ANLI. The ANLI record keeps lab scores that combine tracks. Importers use test accuracy only and exclude development scores.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
+      "https://arxiv.org/html/1910.14599"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "anli-r3",
+    "name": "ANLI R3",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models label premise and hypothesis pairs from the third adversarial test round as entailment, neutral, or contradiction. The score is test accuracy.",
+    "org": "Facebook AI Research (Nie et al.)",
+    "released": "2019-10",
+    "links": {
+      "repo": "https://github.com/facebookresearch/anli",
+      "paper": "https://arxiv.org/abs/1910.14599",
+      "dataset": "https://huggingface.co/datasets/facebook/anli"
+    },
+    "access": "public",
+    "note": "One track of ANLI. The ANLI record keeps lab scores that combine tracks. Importers use test accuracy only and exclude development scores.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
+      "https://arxiv.org/html/1910.14599"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "answer-factuality-perplexity",
     "name": "Answer Factuality (Perplexity)",
     "aliases": [
@@ -5616,6 +5773,7 @@
     "access": "private",
     "note": "Labs report it as a covert action rate over 26 out-of-distribution evaluations with more than 180 environments. Apollo and OpenAI described them in a 2025-09 anti-scheming paper. Lower is better.",
     "unit": "%",
+    "better": "lower",
     "confidence": "likely",
     "evidence": [
       "https://arxiv.org/abs/2509.15541",
@@ -5752,6 +5910,60 @@
       "https://github.com/StonyBrookNLP/appworld"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "appworld-test-challenge",
+    "name": "AppWorld Test-Challenge",
+    "category": "tool-use",
+    "subcategory": "tools-apps",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents complete 417 app tasks that require Amazon or Gmail APIs held out from training. The score is the percentage passing every task test.",
+    "org": "Stony Brook University and Allen Institute for AI",
+    "released": "2024-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2407.18901",
+      "repo": "https://github.com/StonyBrookNLP/appworld",
+      "site": "https://appworld.dev"
+    },
+    "access": "public+private-holdout",
+    "note": "One track of AppWorld. The AppWorld record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json",
+      "https://arxiv.org/html/2407.18901"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "appworld-test-normal",
+    "name": "AppWorld Test-Normal",
+    "category": "tool-use",
+    "subcategory": "tools-apps",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents complete 168 everyday app tasks from familiar applications by calling APIs through code. The score is the percentage passing every task test.",
+    "org": "Stony Brook University and Allen Institute for AI",
+    "released": "2024-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2407.18901",
+      "repo": "https://github.com/StonyBrookNLP/appworld",
+      "site": "https://appworld.dev"
+    },
+    "access": "public+private-holdout",
+    "note": "One track of AppWorld. The AppWorld record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json",
+      "https://arxiv.org/html/2407.18901"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "aqua",
@@ -8797,7 +9009,7 @@
     },
     "access": "public",
     "note": "The benchmark has 100 conversations and 2,000 validated questions and was accepted at ICLR 2026. Labs report one length split, for example Beam128K.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -9537,6 +9749,32 @@
     "added": "2026-11-05"
   },
   {
+    "id": "biobasicsbench",
+    "name": "BioBasicsBench",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "format": "agent-task",
+    "description": "Agents interpret raw experimental data in 100 wet-lab tasks, identify errors, and recognize when evidence cannot support a conclusion. Expert-written rubrics award partial credit for measurements, reasoning, and uncertainty. Scores report the mean percentage of available credit.",
+    "org": "OpenAI and Ligo Biosciences",
+    "released": "2026-11",
+    "links": {
+      "site": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science/"
+    },
+    "access": "private",
+    "note": "OpenAI reports only its own models and releases no task set or grading code. News reports do not identify whether humans or models grade responses. Ligo publishes no benchmark post on its research index.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://www.rdworldonline.com/openai-unveils-biobasicsbench-a-benchmark-to-gauge-how-well-ai-agents-read-raw-experimental-data-across-100-routine-wet-lab-tasks/",
+      "https://hum.vibes.dev/s/openai-biobasicsbench-100-wet-lab-tasks-with-ligo/",
+      "https://www.ligo.bio/",
+      "https://research.ligo.bio/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "biobench-bytedance",
     "name": "BIOBench (ByteDance Seed)",
     "aliases": [
@@ -10056,6 +10294,33 @@
     ]
   },
   {
+    "id": "biosimbench",
+    "name": "BioSimBench",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models predict which genes change after drugs, gene knockdowns, and immune signals across four prediction tracks containing 60, 60, 60, and 27 cases. The overall score averages perturbation-specific F1 across those tracks on a zero-to-one scale.",
+    "org": "CellType",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.celltype.com/biosimbench",
+      "leaderboard": "https://www.celltype.com/biosimbench#leaderboard"
+    },
+    "access": "private",
+    "note": "CellType keeps test answers private and offers hosted evaluations. Models receive separate scores on 296 research-agent episodes, which do not enter the prediction average. CellType terms prohibit automated access and systematic data collection without permission.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.celltype.com/biosimbench",
+      "https://www.celltype.com/assets/app-DImJ6zeG.js",
+      "https://www.celltype.com/terms"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "biotier-securebio",
     "name": "BioTIER",
     "category": "safety-alignment",
@@ -10074,6 +10339,48 @@
     "evidence": [
       "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf"
     ]
+  },
+  {
+    "id": "biotier-securebio-permit",
+    "name": "BioTIER Permit",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models receive 144 benign biology prompts. The score measures the percentage correctly answered.",
+    "org": "SecureBio",
+    "released": "2026-09",
+    "access": "private",
+    "note": "One track of BioTIER. The BioTIER record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://securebio.org/benchmarks/details/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "biotier-securebio-refuse",
+    "name": "BioTIER Refuse",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models receive 398 dangerous biology prompts. The score measures the percentage correctly refused.",
+    "org": "SecureBio",
+    "released": "2026-09",
+    "access": "private",
+    "note": "One track of BioTIER. The BioTIER record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://securebio.org/benchmarks/details/"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "biotool-wet-lab-actions-openai",
@@ -11969,7 +12276,7 @@
     },
     "access": "public",
     "note": "ABC-to-D scores are out of 5 and near saturation. Few current models report the standard split. Others use easier splits.",
-    "unit": "%",
+    "unit": "score",
     "confidence": "verified"
   },
   {
@@ -12319,7 +12626,7 @@
     "level": "expert",
     "scoring": "head-to-head",
     "format": "agent-task",
-    "description": "Code agents write programs that play board and card games in repeated tournaments. Between rounds they refine their code through self-reflection and by studying rivals' code, and scores separate first-round skill from improvement.",
+    "description": "Code agents write programs that play board and card games in repeated tournaments. Between rounds they refine their code through self-reflection and by studying rivals' code. Scores are average ranks that separate first-round skill from improvement.",
     "org": "AGI-Eval (Meituan)",
     "released": "2025-10",
     "links": {
@@ -12331,7 +12638,7 @@
     "access": "public",
     "note": "Games include Gomoku and Texas Hold'em. The live board keeps adding agent competitions.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2510.26852",
@@ -12798,6 +13105,36 @@
     ]
   },
   {
+    "id": "cekura-bench",
+    "name": "Cekura Bench",
+    "aliases": [
+      "Cekura Benchmarks"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models complete separately scored speech recognition, speech generation, voice-agent, real-call, turn-taking and voice-quality benchmarks. Cekura publishes no combined score.",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/cekura-ai/cekura-bench",
+      "site": "https://benchmarks.cekura.ai/",
+      "leaderboard": "https://benchmarks.cekura.ai/"
+    },
+    "access": "public+private-holdout",
+    "note": "Cekura runs the benchmarks while selling voice-agent testing services. Cekura publishes results under CC BY 4.0 but withholds licensed recordings and some judge prompts. Cekura dates the site launch to July 8, 2026, before the November scan.",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/",
+      "https://benchmarks.cekura.ai/about",
+      "https://benchmarks.cekura.ai/governance",
+      "https://raw.githubusercontent.com/cekura-ai/cekura-bench/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "cello",
     "name": "CELLO",
     "aliases": [
@@ -12961,6 +13298,58 @@
       "https://arxiv.org/abs/2504.15716"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "cflue-application",
+    "name": "CFLUE Application",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models complete Chinese financial language tasks. The score is the published average of the application task metrics.",
+    "org": "Alibaba Cloud (Qwen DianJin) and Soochow University",
+    "released": "2024-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2405.10542",
+      "repo": "https://github.com/aliyun/cflue"
+    },
+    "access": "public",
+    "note": "One track of CFLUE. The CFLUE record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/aliyun/cflue/master/README.md",
+      "https://arxiv.org/html/2405.10542"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "cflue-knowledge",
+    "name": "CFLUE Knowledge",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models answer Chinese financial qualification questions. The score is answer accuracy across the knowledge test.",
+    "org": "Alibaba Cloud (Qwen DianJin) and Soochow University",
+    "released": "2024-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2405.10542",
+      "repo": "https://github.com/aliyun/cflue"
+    },
+    "access": "public",
+    "note": "One track of CFLUE. The CFLUE record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/aliyun/cflue/master/README.md",
+      "https://arxiv.org/html/2405.10542"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "cg-bench",
@@ -15482,6 +15871,54 @@
     ]
   },
   {
+    "id": "code-interpreter-benchmark-general",
+    "name": "Code Interpreter Benchmark General",
+    "category": "tool-use",
+    "subcategory": "tools-function-calling",
+    "level": "school",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models use a Python interpreter for general tasks. The score is the percentage of generated programs that execute.",
+    "org": "Qwen",
+    "released": "2023-09",
+    "links": {
+      "repo": "https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark/code_interpreter"
+    },
+    "access": "public",
+    "note": "One track of Code Interpreter Benchmark. The Code Interpreter Benchmark record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/QwenLM/Qwen-Agent/main/benchmark/code_interpreter/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "code-interpreter-benchmark-math",
+    "name": "Code Interpreter Benchmark Math",
+    "category": "tool-use",
+    "subcategory": "tools-function-calling",
+    "level": "school",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models use a Python interpreter to solve math problems. The score is execution accuracy on the Math task set.",
+    "org": "Qwen",
+    "released": "2023-09",
+    "links": {
+      "repo": "https://github.com/QwenLM/Qwen-Agent/tree/main/benchmark/code_interpreter"
+    },
+    "access": "public",
+    "note": "One track of Code Interpreter Benchmark. The Code Interpreter Benchmark record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/QwenLM/Qwen-Agent/main/benchmark/code_interpreter/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "vals-code-migration",
     "name": "Code Migration",
     "aliases": [
@@ -17193,7 +17630,7 @@
     "level": "everyday",
     "scoring": "head-to-head",
     "format": "agent-task",
-    "description": "Multi-player conquest game with private non-binding negotiation and secret asymmetric objectives. LM agents scored by win rate against humans and other agents.",
+    "description": "Multi-player conquest game with private non-binding negotiation and secret asymmetric objectives. LM agents and humans are ranked by Plackett-Luce player strength from their game results.",
     "org": "UC Berkeley",
     "released": "2026-04",
     "links": {
@@ -17204,7 +17641,7 @@
     },
     "access": "public",
     "note": "Includes an 82-game human study with matched AI-only games from the same starting positions.",
-    "unit": "%",
+    "unit": "score",
     "confidence": "verified"
   },
   {
@@ -19702,7 +20139,7 @@
     "level": "expert",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agents attack two simulated company networks, Nova and Lighthouse, on their own with no human help. The score counts the attack objectives completed on each range.",
+    "description": "Agents attack the Nova and Lighthouse networks without human help. The score averages the percentage of objectives completed on each range, weighting both equally.",
     "org": "Vals AI",
     "released": "2026-10",
     "links": {
@@ -19710,8 +20147,8 @@
       "leaderboard": "https://www.vals.ai/benchmarks/cyber_offense"
     },
     "access": "private",
-    "note": "Nova has 21 objectives and Lighthouse 31. Seven models as of 2026-10-23, including OpenAI's restricted GPT-6 Sol Daybreak. Runs use the Pi agent harness with Kali tools.",
-    "unit": "score",
+    "note": "Nova has 21 objectives and Lighthouse has 31. Runs use the Pi agent harness with Kali tools.",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -20465,6 +20902,168 @@
     "added": "2026-11-01"
   },
   {
+    "id": "dataprep-bench-finance",
+    "name": "DataPrep-Bench Finance",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models prepare training data for the finance domain. The score is the published downstream average after backbone training.",
+    "org": "Peking University",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.20465",
+      "repo": "https://github.com/OpenDCAI/Data-Preparation-Bench",
+      "site": "https://datapreparationbench.github.io/"
+    },
+    "access": "public",
+    "note": "One track of DataPrep-Bench. The DataPrep-Bench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://datapreparationbench.github.io/",
+      "https://arxiv.org/html/2607.20465"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "dataprep-bench-general",
+    "name": "DataPrep-Bench General",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models prepare training data for the general domain. The score is the published downstream average after backbone training.",
+    "org": "Peking University",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.20465",
+      "repo": "https://github.com/OpenDCAI/Data-Preparation-Bench",
+      "site": "https://datapreparationbench.github.io/"
+    },
+    "access": "public",
+    "note": "One track of DataPrep-Bench. The DataPrep-Bench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://datapreparationbench.github.io/",
+      "https://arxiv.org/html/2607.20465"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "dataprep-bench-law",
+    "name": "DataPrep-Bench Law",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models prepare training data for the law domain. The score is the published downstream average after backbone training.",
+    "org": "Peking University",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.20465",
+      "repo": "https://github.com/OpenDCAI/Data-Preparation-Bench",
+      "site": "https://datapreparationbench.github.io/"
+    },
+    "access": "public",
+    "note": "One track of DataPrep-Bench. The DataPrep-Bench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://datapreparationbench.github.io/",
+      "https://arxiv.org/html/2607.20465"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "dataprep-bench-math",
+    "name": "DataPrep-Bench Math",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models prepare training data for the math domain. The score is the published downstream average after backbone training.",
+    "org": "Peking University",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.20465",
+      "repo": "https://github.com/OpenDCAI/Data-Preparation-Bench",
+      "site": "https://datapreparationbench.github.io/"
+    },
+    "access": "public",
+    "note": "One track of DataPrep-Bench. The DataPrep-Bench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://datapreparationbench.github.io/",
+      "https://arxiv.org/html/2607.20465"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "dataprep-bench-medical",
+    "name": "DataPrep-Bench Medical",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models prepare training data for the medical domain. The score is the published downstream average after backbone training.",
+    "org": "Peking University",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.20465",
+      "repo": "https://github.com/OpenDCAI/Data-Preparation-Bench",
+      "site": "https://datapreparationbench.github.io/"
+    },
+    "access": "public",
+    "note": "One track of DataPrep-Bench. The DataPrep-Bench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://datapreparationbench.github.io/",
+      "https://arxiv.org/html/2607.20465"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "dataprep-bench-science",
+    "name": "DataPrep-Bench Science",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models prepare training data for the science domain. The score is the published downstream average after backbone training.",
+    "org": "Peking University",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.20465",
+      "repo": "https://github.com/OpenDCAI/Data-Preparation-Bench",
+      "site": "https://datapreparationbench.github.io/"
+    },
+    "access": "public",
+    "note": "One track of DataPrep-Bench. The DataPrep-Bench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://datapreparationbench.github.io/",
+      "https://arxiv.org/html/2607.20465"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "daxbench-2",
     "name": "DAXBench v2",
     "aliases": [
@@ -20820,6 +21419,40 @@
       "https://arxiv.org/abs/2510.15501",
       "https://github.com/Aries-iai/DeceptionBench"
     ]
+  },
+  {
+    "id": "decide",
+    "name": "DECIDE",
+    "aliases": [
+      "Decision Evaluation in Calls: Intent, Dialogue and Emotion"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models select decisions from short voice-call clips and conversation history across 4,867 questions, 1,081 clips, and 32 tasks. Human reference labels determine accuracy. The default board ranks by DECIDE Balance Score, which combines accuracy, cost, and latency on a zero-to-100 scale.",
+    "org": "Tazo Labs and Bolna",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/tazolabs/DECIDE",
+      "site": "https://benchmark.tazolabs.com/",
+      "dataset": "https://huggingface.co/datasets/tazolabs/DECIDE-samples",
+      "leaderboard": "https://benchmark.tazolabs.com/leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "Tazo keeps the full benchmark private and publishes 20 labeled sample questions. Models can receive audio directly or use speech recognition before answering. Tazo reports optimized serving latency for its model and client-observed latency for others. Run costs include speech recognition when used.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmark.tazolabs.com/",
+      "https://benchmark.tazolabs.com/leaderboard",
+      "https://benchmark.tazolabs.com/data/leaderboard.json",
+      "https://benchmark.tazolabs.com/leaderboard-model.js",
+      "https://raw.githubusercontent.com/tazolabs/DECIDE/main/README.md"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "decision-index",
@@ -23018,6 +23651,110 @@
     "added": "2026-11-01"
   },
   {
+    "id": "devbench-acceptance-testing",
+    "name": "DevBench Acceptance Testing",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models generate acceptance tests for repositories. The score is the published oracle-test percentage.",
+    "org": "OpenCompass (Shanghai AI Laboratory) and collaborators",
+    "released": "2024-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.08604",
+      "repo": "https://github.com/open-compass/DevEval"
+    },
+    "access": "public",
+    "note": "One track of DevBench. The DevBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/open-compass/DevEval/main/README.md",
+      "https://arxiv.org/html/2403.08604"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "devbench-environment-setup",
+    "name": "DevBench Environment Setup",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models prepare repository environments. The score is the percentage that pass the example usage test.",
+    "org": "OpenCompass (Shanghai AI Laboratory) and collaborators",
+    "released": "2024-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.08604",
+      "repo": "https://github.com/open-compass/DevEval"
+    },
+    "access": "public",
+    "note": "One track of DevBench. The DevBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/open-compass/DevEval/main/README.md",
+      "https://arxiv.org/html/2403.08604"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "devbench-implementation",
+    "name": "DevBench Implementation",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models implement repository code. The score is the acceptance-test pass rate, with unit-test pass rate as an auxiliary metric.",
+    "org": "OpenCompass (Shanghai AI Laboratory) and collaborators",
+    "released": "2024-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.08604",
+      "repo": "https://github.com/open-compass/DevEval"
+    },
+    "access": "public",
+    "note": "One track of DevBench. The DevBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/open-compass/DevEval/main/README.md",
+      "https://arxiv.org/html/2403.08604"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "devbench-unit-testing",
+    "name": "DevBench Unit Testing",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models generate unit tests for repositories. The score is the published oracle-test percentage.",
+    "org": "OpenCompass (Shanghai AI Laboratory) and collaborators",
+    "released": "2024-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2403.08604",
+      "repo": "https://github.com/open-compass/DevEval"
+    },
+    "access": "public",
+    "note": "One track of DevBench. The DevBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/open-compass/DevEval/main/README.md",
+      "https://arxiv.org/html/2403.08604"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "dfbench",
     "name": "dfbench",
     "aliases": [
@@ -23218,7 +23955,7 @@
     "level": "expert",
     "scoring": "model-judged",
     "format": "open-ended",
-    "description": "Models translate 200 expert texts between Chinese and English at discourse level, averaging over 1,700 tokens each. Metric-S, a reference-free judge, scores accuracy, fluency and appropriateness.",
+    "description": "Models translate 200 expert texts between Chinese and English at discourse level, averaging over 1,700 tokens each. Metric-S, a reference-free judge, scores accuracy, fluency and appropriateness, and the overall score is their sum.",
     "org": "ByteDance Seed and collaborators (Zhao et al.)",
     "released": "2025-11",
     "links": {
@@ -23226,7 +23963,7 @@
     },
     "access": "unknown",
     "note": "Texts come from 7 expert domains.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -23824,6 +24561,110 @@
       "https://github.com/worldbench/drivebench"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "drivebench-behavior",
+    "name": "DriveBench Behavior",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "format": "open-ended",
+    "description": "Models answer driving behavior questions. The score is the published GPT evaluation score for this task family.",
+    "org": "UC Irvine, Shanghai AI Laboratory, NUS, NTU and HKU",
+    "released": "2025-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/2501.04003",
+      "repo": "https://github.com/worldbench/drivebench",
+      "dataset": "https://huggingface.co/datasets/worldbench/DriveBench"
+    },
+    "access": "public",
+    "note": "One track of DriveBench. The DriveBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
+      "https://arxiv.org/html/2501.04003"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "drivebench-perception",
+    "name": "DriveBench Perception",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "format": "open-ended",
+    "description": "Models answer driving perception questions. The score is the published GPT evaluation score for this task family.",
+    "org": "UC Irvine, Shanghai AI Laboratory, NUS, NTU and HKU",
+    "released": "2025-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/2501.04003",
+      "repo": "https://github.com/worldbench/drivebench",
+      "dataset": "https://huggingface.co/datasets/worldbench/DriveBench"
+    },
+    "access": "public",
+    "note": "One track of DriveBench. The DriveBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
+      "https://arxiv.org/html/2501.04003"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "drivebench-planning",
+    "name": "DriveBench Planning",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "format": "open-ended",
+    "description": "Models answer driving planning questions. The score is the published GPT evaluation score for this task family.",
+    "org": "UC Irvine, Shanghai AI Laboratory, NUS, NTU and HKU",
+    "released": "2025-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/2501.04003",
+      "repo": "https://github.com/worldbench/drivebench",
+      "dataset": "https://huggingface.co/datasets/worldbench/DriveBench"
+    },
+    "access": "public",
+    "note": "One track of DriveBench. The DriveBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
+      "https://arxiv.org/html/2501.04003"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "drivebench-prediction",
+    "name": "DriveBench Prediction",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "format": "open-ended",
+    "description": "Models answer driving prediction questions. The score is the published GPT evaluation score for this task family.",
+    "org": "UC Irvine, Shanghai AI Laboratory, NUS, NTU and HKU",
+    "released": "2025-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/2501.04003",
+      "repo": "https://github.com/worldbench/drivebench",
+      "dataset": "https://huggingface.co/datasets/worldbench/DriveBench"
+    },
+    "access": "public",
+    "note": "One track of DriveBench. The DriveBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/worldbench/drivebench/HEAD/README.md",
+      "https://arxiv.org/html/2501.04003"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "drone-bench",
@@ -24957,12 +25798,6 @@
   {
     "id": "embodiedbench",
     "name": "EmbodiedBench",
-    "aliases": [
-      "EB-ALFRED",
-      "EB-Habitat",
-      "EB-Navigation",
-      "EB-Manipulation"
-    ],
     "category": "robotics-embodied",
     "subcategory": "robotics-simulation",
     "level": "everyday",
@@ -24988,6 +25823,122 @@
       "https://huggingface.co/papers/2502.09560"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "embodiedbench-eb-alfred",
+    "name": "EmbodiedBench EB-ALFRED",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents follow household instructions through high-level actions in AI2-THOR. The score is the published average task success percentage across EB-ALFRED capability groups.",
+    "org": "University of Illinois Urbana-Champaign + others",
+    "released": "2025-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.09560",
+      "repo": "https://github.com/EmbodiedBench/EmbodiedBench",
+      "site": "https://embodiedbench.github.io/",
+      "dataset": "https://huggingface.co/EmbodiedBench"
+    },
+    "access": "public",
+    "note": "One track of EmbodiedBench. The EmbodiedBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://embodiedbench.github.io/",
+      "https://arxiv.org/html/2502.09560",
+      "https://embodiedbench.github.io/website/data/eb_alfred_total_benchmark.json"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "embodiedbench-eb-habitat",
+    "name": "EmbodiedBench EB-Habitat",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents follow instructions to find and rearrange objects through high-level skills in Habitat 2.0. The score is the published average task success percentage.",
+    "org": "University of Illinois Urbana-Champaign + others",
+    "released": "2025-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.09560",
+      "repo": "https://github.com/EmbodiedBench/EmbodiedBench",
+      "site": "https://embodiedbench.github.io/",
+      "dataset": "https://huggingface.co/EmbodiedBench"
+    },
+    "access": "public",
+    "note": "One track of EmbodiedBench. The EmbodiedBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://embodiedbench.github.io/",
+      "https://arxiv.org/html/2502.09560",
+      "https://embodiedbench.github.io/website/data/eb_habitat_total_benchmark.json"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "embodiedbench-eb-manipulation",
+    "name": "EmbodiedBench EB-Manipulation",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents use visual observations to control a robot arm for object manipulation in simulation. The score is the published average task success percentage.",
+    "org": "University of Illinois Urbana-Champaign + others",
+    "released": "2025-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.09560",
+      "repo": "https://github.com/EmbodiedBench/EmbodiedBench",
+      "site": "https://embodiedbench.github.io/",
+      "dataset": "https://huggingface.co/EmbodiedBench"
+    },
+    "access": "public",
+    "note": "One track of EmbodiedBench. The EmbodiedBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://embodiedbench.github.io/",
+      "https://arxiv.org/html/2502.09560",
+      "https://embodiedbench.github.io/website/data/eb_manipulation_total_benchmark.json"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "embodiedbench-eb-navigation",
+    "name": "EmbodiedBench EB-Navigation",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents use visual observations and low-level movement actions to reach target objects in AI2-THOR. The score is the published average task success percentage.",
+    "org": "University of Illinois Urbana-Champaign + others",
+    "released": "2025-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.09560",
+      "repo": "https://github.com/EmbodiedBench/EmbodiedBench",
+      "site": "https://embodiedbench.github.io/",
+      "dataset": "https://huggingface.co/EmbodiedBench"
+    },
+    "access": "public",
+    "note": "One track of EmbodiedBench. The EmbodiedBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://embodiedbench.github.io/",
+      "https://arxiv.org/html/2502.09560",
+      "https://embodiedbench.github.io/website/data/eb_navigation_total_benchmark.json"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "embodiedclbench",
@@ -25997,6 +26948,87 @@
     "added": "2026-11-01"
   },
   {
+    "id": "evoarena-personamem-evo",
+    "name": "EvoArena PersonaMem-Evo",
+    "category": "long-context",
+    "subcategory": "long-learning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents solve questions about changing user preferences. The score is the published accuracy across versioned tasks.",
+    "org": "MIT",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.13681",
+      "repo": "https://github.com/Aiden0526/EvoArena",
+      "site": "https://aiden0526.github.io/EvoArena/"
+    },
+    "access": "public",
+    "note": "One track of EvoArena. The EvoArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://aiden0526.github.io/EvoArena/",
+      "https://arxiv.org/html/2606.13681"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "evoarena-swe-chain-evo",
+    "name": "EvoArena SWE-Chain-Evo",
+    "category": "long-context",
+    "subcategory": "long-learning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents solve software tasks that change across versions. The score is the published accuracy across versioned tasks.",
+    "org": "MIT",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.13681",
+      "repo": "https://github.com/Aiden0526/EvoArena",
+      "site": "https://aiden0526.github.io/EvoArena/"
+    },
+    "access": "public",
+    "note": "One track of EvoArena. The EvoArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://aiden0526.github.io/EvoArena/",
+      "https://arxiv.org/html/2606.13681"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "evoarena-terminal-bench-evo",
+    "name": "EvoArena Terminal-Bench-Evo",
+    "category": "long-context",
+    "subcategory": "long-learning",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents solve terminal tasks that change across versions. The score is the published accuracy across versioned tasks.",
+    "org": "MIT",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.13681",
+      "repo": "https://github.com/Aiden0526/EvoArena",
+      "site": "https://aiden0526.github.io/EvoArena/"
+    },
+    "access": "public",
+    "note": "One track of EvoArena. The EvoArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://aiden0526.github.io/EvoArena/",
+      "https://arxiv.org/html/2606.13681"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "evocode-bench",
     "name": "EvoCode-Bench",
     "aliases": [
@@ -26946,7 +27978,7 @@
     "level": "everyday",
     "scoring": "model-judged",
     "format": "open-ended",
-    "description": "Models write biographies of people, and each output is split into atomic facts. The score is the share of facts that a knowledge source supports.",
+    "description": "Models write biographies of people, and each output is split into atomic facts checked against a knowledge source. Labs report the hallucination rate, the share of facts it does not support.",
     "org": "Sewon Min et al. (University of Washington and collaborators)",
     "released": "2023-05",
     "links": {
@@ -26954,7 +27986,7 @@
       "paper": "https://arxiv.org/abs/2305.14251"
     },
     "access": "public",
-    "note": "OpenAI and xAI cards report a hallucination rate on FActScore prompts, where lower is better, not the original score.",
+    "note": "OpenAI and xAI report this rate on FActScore prompts. The paper's own score, the share of supported facts, is the FActScore precision record.",
     "unit": "%",
     "better": "lower",
     "confidence": "verified",
@@ -26962,6 +27994,35 @@
       "https://arxiv.org/abs/2305.14251",
       "https://github.com/shmsw25/FActScore"
     ]
+  },
+  {
+    "id": "factscore-precision",
+    "name": "FActScore precision",
+    "aliases": [
+      "FActScore (original)"
+    ],
+    "category": "factuality-hallucination",
+    "subcategory": "factuality-long",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models write biographies of people, and each output is split into atomic facts. The score is the share of facts that a knowledge source supports, as the paper defines FActScore.",
+    "org": "Sewon Min et al. (University of Washington and collaborators)",
+    "released": "2023-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.14251",
+      "repo": "https://github.com/shmsw25/FActScore"
+    },
+    "access": "public",
+    "note": "Labs that report a hallucination rate on FActScore prompts, where lower is better, are on the FActScore record.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.14251",
+      "https://github.com/shmsw25/FActScore"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "factuality-heavy-prompts-openai",
@@ -27630,8 +28691,7 @@
     "id": "finsearchcomp",
     "name": "FinSearchComp",
     "aliases": [
-      "FinSearchComp-T3",
-      "FinSearchComp-global"
+      "FinSearchComp-T3"
     ],
     "category": "domain-legal-finance-medical",
     "subcategory": "domain-finance",
@@ -27655,14 +28715,60 @@
     ]
   },
   {
+    "id": "finsearchcomp-global",
+    "name": "FinSearchComp Global",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents search for financial information about global assets across three task types. The score is the published average accuracy for the Global subset.",
+    "org": "ByteDance Seed",
+    "released": "2025-09",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/ByteSeedXpert/FinSearchComp",
+      "paper": "https://arxiv.org/abs/2509.13160"
+    },
+    "access": "public",
+    "note": "One track of FinSearchComp. The FinSearchComp record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://randomtutu.github.io/FinSearchComp/",
+      "https://arxiv.org/html/2509.13160"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "finsearchcomp-greater-china",
+    "name": "FinSearchComp Greater China",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents search for financial information about Greater China assets across three task types. The score is the published average accuracy for the Greater China subset.",
+    "org": "ByteDance Seed",
+    "released": "2025-09",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/ByteSeedXpert/FinSearchComp",
+      "paper": "https://arxiv.org/abs/2509.13160"
+    },
+    "access": "public",
+    "note": "One track of FinSearchComp. The FinSearchComp record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://randomtutu.github.io/FinSearchComp/",
+      "https://arxiv.org/html/2509.13160"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "finstepbench",
     "name": "FinStepBench",
-    "aliases": [
-      "FinStepBench-LiveSearch",
-      "FinStepBench-CorporateValuation",
-      "FinStepBench-DeepResearch",
-      "FinStepBench-FinanceDR"
-    ],
     "category": "domain-legal-finance-medical",
     "subcategory": "domain-finance",
     "level": "expert",
@@ -27683,6 +28789,88 @@
       "https://www.stepfun.com/step-5-preview"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "finstepbench-corporatevaluation",
+    "name": "FinStepBench CorporateValuation",
+    "aliases": [
+      "FinStepBench-CorporateValuation"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models value companies using financial evidence and calculations. The score is the published CorporateValuation percentage.",
+    "org": "StepFun",
+    "released": "2026-09",
+    "links": {
+      "site": "https://www.stepfun.com/step-5-preview"
+    },
+    "access": "private",
+    "note": "One track of FinStepBench. The FinStepBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.stepfun.com/step-5-preview"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "finstepbench-deepresearch",
+    "name": "FinStepBench DeepResearch",
+    "aliases": [
+      "FinStepBench-DeepResearch",
+      "FinStepBench-FinanceDR"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models write finance research reports. The score is the published DeepResearch percentage.",
+    "org": "StepFun",
+    "released": "2026-09",
+    "links": {
+      "site": "https://www.stepfun.com/step-5-preview"
+    },
+    "access": "private",
+    "note": "One track of FinStepBench. The FinStepBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.stepfun.com/step-5-preview"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "finstepbench-livesearch",
+    "name": "FinStepBench LiveSearch",
+    "aliases": [
+      "FinStepBench-LiveSearch"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models retrieve and verify live financial facts. The score is the published LiveSearch percentage.",
+    "org": "StepFun",
+    "released": "2026-09",
+    "links": {
+      "site": "https://www.stepfun.com/step-5-preview"
+    },
+    "access": "private",
+    "note": "One track of FinStepBench. The FinStepBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.stepfun.com/step-5-preview"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "firefox-147-exploit-evaluation-anthropic",
@@ -27812,7 +29000,7 @@
     "format": "proof",
     "family": "first-proof",
     "version": "Batch 3",
-    "description": "The editors run five AI systems once each on ten unpublished research problems with proofs of up to 12 pages. About 30 referees score correctness, exposition and attribution, with negative marks for wrong answers.",
+    "description": "The editors run five AI systems once each on ten unpublished research problems with proofs of up to 12 pages. About 30 referees score correctness, exposition and attribution. The score is average correctness, from negative 1 to 1.",
     "org": "First Proof Foundation",
     "released": "2026-10",
     "links": {
@@ -28458,6 +29646,39 @@
     "confidence": "verified"
   },
   {
+    "id": "frontier3dbench",
+    "name": "Frontier3DBench",
+    "aliases": [
+      "Frontier3D"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents create editable Blender objects and scenes or executable Unreal Engine worlds across 145 tasks and nine task families. Model judgments and native project checks assess appearance, geometry, requirements, and interactions. The overall score weights object, scene, and world scores by 30%, 30%, and 40%.",
+    "org": "Einsia AI (Navers lab)",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://lab.einsia.ai/frontier3dbench/Frontier3DBench.pdf",
+      "repo": "https://github.com/Einsia/Frontier3D",
+      "site": "https://lab.einsia.ai/frontier3dbench",
+      "leaderboard": "https://lab.einsia.ai/frontier3dbench#leaderboard"
+    },
+    "access": "public",
+    "note": "Agents run through the harness named for each model at the published reasoning effort. GPT-6 Astra judges visual evidence with model identity hidden. Task assets retain individual licenses. The site publishes cost comparisons only as a raster chart and in its paper.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://lab.einsia.ai/frontier3dbench",
+      "https://lab.einsia.ai/frontier3dbench/evaluation/",
+      "https://raw.githubusercontent.com/Einsia/Frontier3D/main/README.md",
+      "https://api.github.com/repos/Einsia/Frontier3D"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "frontiercad",
     "name": "FrontierCAD",
     "aliases": [
@@ -28487,6 +29708,58 @@
       "https://normal.ai/research"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "frontiercad-assemblies",
+    "name": "FrontierCAD Assemblies",
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents place supplied CAD parts into 16 assemblies. The score is the published mean assembly geometry score.",
+    "org": "Normal Research",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://normal.ai/research/frontiercad",
+      "site": "https://normal.ai/research/frontiercad",
+      "leaderboard": "https://normal.ai/research/frontiercad"
+    },
+    "access": "private",
+    "note": "One track of FrontierCAD. The FrontierCAD record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://normal.ai/research/frontiercad"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "frontiercad-parts",
+    "name": "FrontierCAD Parts",
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents build 39 CAD parts from engineering drawings. The score is the published mean geometry score.",
+    "org": "Normal Research",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://normal.ai/research/frontiercad",
+      "site": "https://normal.ai/research/frontiercad",
+      "leaderboard": "https://normal.ai/research/frontiercad"
+    },
+    "access": "private",
+    "note": "One track of FrontierCAD. The FrontierCAD record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://normal.ai/research/frontiercad"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "frontierchallenge",
@@ -29146,7 +30419,7 @@
     "format": "code",
     "family": "frontierswe",
     "version": "v1",
-    "description": "Agents work up to 20 hours on 17 ultra-long engineering, performance and research tasks in their own harnesses. Models are ranked by average task rank and dominance.",
+    "description": "Agents work up to 20 hours on 17 ultra-long engineering, performance and research tasks in their own harnesses. The board ranks models by average task rank. The score here is dominance, the win rate against a random baseline, which labs report.",
     "org": "Proximal",
     "released": "2026-04",
     "links": {
@@ -29158,7 +30431,7 @@
     "access": "public",
     "note": "The maker preserves the v1 board as published. FrontierSWE v2 replaced it on 2026-09-02 with 34 tasks, a new harness and mean@5 scores.",
     "successor": "frontierswe",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -30879,6 +32152,36 @@
     "confidence": "verified"
   },
   {
+    "id": "gdpworks",
+    "name": "GDPWorks",
+    "category": "economic-work",
+    "subcategory": "work-occupations",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents complete 83 professional tasks across 36 occupations, using source files to produce work such as documents, spreadsheets, and code. The Joules-to-GDP framework compares outputs with expert deliverables through a blinded model judge. Task success measures the share of wins and ties against the expert.",
+    "org": "Snorkel AI and Hazy Research (Scaling Intelligence)",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.30858",
+      "repo": "https://github.com/HazyResearch/joules_to_gdp",
+      "dataset": "https://huggingface.co/datasets/ScalingIntelligence/joules-to-gdp"
+    },
+    "access": "public",
+    "note": "Snorkel contributes 83 tasks distinct from the 220 GDPval tasks in the same dataset. Researchers report paper results on GDPval, not a separate GDPWorks leaderboard. Snorkel licenses its original tasks and expert deliverables under CC BY 4.0, excluding third-party material.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/ScalingIntelligence/joules-to-gdp",
+      "https://huggingface.co/datasets/ScalingIntelligence/joules-to-gdp/raw/main/README.md",
+      "https://github.com/HazyResearch/joules_to_gdp",
+      "https://arxiv.org/html/2610.30858v1",
+      "https://arxiv.org/abs/2610.30858"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "gdpx",
     "name": "GDPx",
     "aliases": [
@@ -31282,7 +32585,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agent placed at unknown Mapillary street-level location looks, walks, pins candidates and guesses coordinates. Distance-based GeoGuessr-style reward.",
+    "description": "Agent placed at unknown Mapillary street-level location looks, walks, pins candidates and guesses coordinates. Scored by a distance-based GeoGuessr-style reward from 0 to 1.",
     "org": "FineEnvs (Hugging Face community)",
     "released": "2026-09",
     "links": {
@@ -31291,7 +32594,7 @@
     },
     "access": "public",
     "note": "Frozen 200-task eval split committed so resets are byte-identical. The article ('How to turn a game into an RL environment') trains a 4B VLM with TRL and keeps the dead ends in.",
-    "unit": "%",
+    "unit": "score",
     "confidence": "verified"
   },
   {
@@ -34598,6 +35901,33 @@
     ]
   },
   {
+    "id": "hle-verified-text-full",
+    "name": "HLE-Verified (text-only Full)",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-expert",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer the text-only questions of Humanity's Last Exam after expert verification and revision. The Full set keeps the questions experts marked uncertain, and the score is pass@1 accuracy.",
+    "org": "SKYLENAGE AI",
+    "released": "2026-02",
+    "links": {
+      "repo": "https://github.com/SKYLENAGE-AI/HLE-Verified",
+      "paper": "https://arxiv.org/abs/2602.13964",
+      "dataset": "https://huggingface.co/datasets/skylenage-ai/HLE-Verified"
+    },
+    "access": "public",
+    "note": "The paper and its leaderboard chart evaluate this set. The HLE-Verified record covers the 1,811 items with uncertain questions removed. The chart is an image, so its scores are transcribed.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/html/2602.13964",
+      "https://github.com/SKYLENAGE-AI/HLE-Verified"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "hle-vl",
     "name": "HLE-VL",
     "aliases": [
@@ -35175,7 +36505,7 @@
       "leaderboard": "https://securebio.org/benchmarks/"
     },
     "access": "private",
-    "note": "Shown as HPCT v2 beside HPCT on the SecureBio dashboard. Not public. Revised version so scores are not comparable with HPCT v1.",
+    "note": "Shown as HPCT v2 beside HPCT on the SecureBio dashboard until November 2026. Not public. Revised version so scores are not comparable with HPCT v1. The dashboard now shows only one chart, labeled HPCT, so these scores are the last ones published for v2.",
     "unit": "%",
     "better": "higher",
     "confidence": "likely",
@@ -35653,6 +36983,35 @@
       "https://arxiv.org/abs/2509.05209v2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "hw-bench",
+    "name": "HW-Bench",
+    "category": "engineering-design",
+    "subcategory": "engineering-electronics",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents complete six hardware engineering tasks for a 2.45 GHz antenna using native design and simulation tools. Code checks and calibrated model judges grade outputs against engineer-written criteria. The headline pass rate measures runs that satisfy every critical criterion, averaged across tasks.",
+    "org": "Arena Physica",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://www.hw-bench.com/research/antenna-deep-dive",
+      "site": "https://hw-bench.com/",
+      "leaderboard": "https://hw-bench.com/"
+    },
+    "access": "private",
+    "note": "Agents run five times per task in the Atlas harness at high reasoning effort. Each task starts from an engineer reference rather than the previous agent output. Arena prohibits automated extraction without written permission. The board dates its initial results to October 29, 2026.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://hw-bench.com/",
+      "https://hw-bench.com/methodology",
+      "https://www.hw-bench.com/research/antenna-deep-dive",
+      "https://hw-bench.com/terms"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "hy-backend-tencent",
@@ -38385,6 +39744,34 @@
     "added": "2026-11-01"
   },
   {
+    "id": "ipi-bench",
+    "name": "IPI Bench",
+    "aliases": [
+      "Indirect Prompt Injection Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents complete workplace workflows while attackers add misleading records to an emulated company with 11 services. The benchmark pairs six workflow types with harmful injected objectives across 34 tasks. The headline here measures single-query attack success as a percentage, where lower is better.",
+    "org": "General Analysis",
+    "released": "2026-10",
+    "links": {
+      "site": "https://ipibench.generalanalysis.com",
+      "leaderboard": "https://ipibench.generalanalysis.com"
+    },
+    "access": "private",
+    "note": "Models run at medium reasoning effort without added defenses. Judges assess task-specific rubrics, and reviewers check every claimed attack success. The report separately gives independent and iterative attack budgets. Clean-workflow cost and total tokens describe runs without attacks. The report dates itself to October 2026.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://ipibench.generalanalysis.com"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "irokobench",
     "name": "IrokoBench",
     "aliases": [
@@ -39216,7 +40603,8 @@
     },
     "access": "public",
     "note": "This is the hardest of the three original KernelBench levels, which cover single operators, fusions, and full models.",
-    "unit": "score",
+    "unit": "speedup",
+    "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2502.10517",
@@ -39709,6 +41097,56 @@
       "https://arxiv.org/abs/2504.18425v1"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "kimi-asr-internal-moonshot-subset1",
+    "name": "Kimi-ASR Internal Testset Subset 1",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models transcribe speech from Moonshot internal subset 1. The score is the published word error rate.",
+    "org": "Moonshot AI",
+    "released": "2025-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2504.18425"
+    },
+    "access": "private",
+    "note": "One track of Kimi-ASR Internal Testset. The Kimi-ASR Internal Testset record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/MoonshotAI/Kimi-Audio-Evalkit/HEAD/LEADERBOARD.md",
+      "https://arxiv.org/html/2504.18425"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "kimi-asr-internal-moonshot-subset2",
+    "name": "Kimi-ASR Internal Testset Subset 2",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models transcribe speech from Moonshot internal subset 2. The score is the published word error rate.",
+    "org": "Moonshot AI",
+    "released": "2025-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2504.18425"
+    },
+    "access": "private",
+    "note": "One track of Kimi-ASR Internal Testset. The Kimi-ASR Internal Testset record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/MoonshotAI/Kimi-Audio-Evalkit/HEAD/LEADERBOARD.md",
+      "https://arxiv.org/html/2504.18425"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "kimi-audio-speech-conversation-moonshot",
@@ -41001,7 +42439,7 @@
     "subcategory": "safety-jailbreaks",
     "scoring": "verified",
     "format": "open-ended",
-    "description": "Crowdsourced prompt-injection attacks hit backbone LLMs inside 10 agent threat snapshots at three defense levels. Scored by attack resistance.",
+    "description": "Crowdsourced prompt-injection attacks hit backbone LLMs inside agent threat snapshots at three defense levels. The score is attack resistance, 100 minus the board's vulnerability percentage.",
     "org": "Lakera + ETH Zurich + UK AISI + Oxford",
     "released": "2025-10",
     "links": {
@@ -41011,8 +42449,9 @@
       "paper": "https://arxiv.org/abs/2510.22620"
     },
     "access": "public+private-holdout",
-    "note": "ICLR 2026. Public HF set is a 'weak' 210-attack subset of 194,331 attacks. Runner lives in Inspect Evals (src/inspect_evals/b3).",
+    "note": "A lab result may use another attack subset than the board.",
     "unit": "%",
+    "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://mistral.ai/news/mistral-large-4-oss/",
@@ -42654,7 +44093,7 @@
     "level": "everyday",
     "scoring": "model-judged",
     "format": "open-ended",
-    "description": "Models answer Chinese-language prompts that probe safety across six areas: legality, ethics, factuality, privacy, adversarial robustness and reasoning safety. A judge model compares pairs of answers, and the pairwise results become Elo ratings. The question bank is updated in dated editions to add new threats.",
+    "description": "Models answer Chinese-language prompts that probe safety across areas such as legality, ethics, factuality and privacy. The paper's first edition turned a judge's pairwise comparisons into Elo ratings. The leaderboard's March 2026 edition gives each model an overall score from 0 to 100. The question bank is updated in dated editions.",
     "org": "Intoken (隐拓智安) and academic coauthors",
     "released": "2025-11",
     "links": {
@@ -42665,7 +44104,7 @@
     },
     "access": "private",
     "note": "The questions are not published, only the harness and results. The paper's first edition (v251030) scored 18 models. The leaderboard now shows a March 2026 edition. 29 GitHub stars and 4 HF paper upvotes, so traction rests on the maintained leaderboard.",
-    "unit": "elo",
+    "unit": "score",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -43785,6 +45224,58 @@
     ]
   },
   {
+    "id": "longbench-chinese",
+    "name": "LongBench Chinese",
+    "category": "long-context",
+    "subcategory": "long-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer questions and complete other long-context tasks in the original Chinese headline table. The score is its published average on a percentage scale.",
+    "org": "THUDM (Tsinghua University)",
+    "released": "2023-08",
+    "links": {
+      "repo": "https://github.com/THUDM/LongBench",
+      "paper": "https://arxiv.org/abs/2308.14508"
+    },
+    "access": "public",
+    "note": "One track of LongBench. The LongBench record keeps lab scores that combine tracks. Authors include the same code completion tasks in both language tables. Importers read the published averages without recomputing them.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/THUDM/LongBench/main/LongBench/README.md",
+      "https://arxiv.org/html/2308.14508"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "longbench-english",
+    "name": "LongBench English",
+    "category": "long-context",
+    "subcategory": "long-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer questions and complete other long-context tasks in the original English headline table. The score is its published average on a percentage scale.",
+    "org": "THUDM (Tsinghua University)",
+    "released": "2023-08",
+    "links": {
+      "repo": "https://github.com/THUDM/LongBench",
+      "paper": "https://arxiv.org/abs/2308.14508"
+    },
+    "access": "public",
+    "note": "One track of LongBench. The LongBench record keeps lab scores that combine tracks. Authors include the same code completion tasks in both language tables. Importers read the published averages without recomputing them.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/THUDM/LongBench/main/LongBench/README.md",
+      "https://arxiv.org/html/2308.14508"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "longbench-v2",
     "name": "LongBench v2",
     "category": "long-context",
@@ -44714,7 +46205,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agents play 134 text adventure games with over half a million scenarios. Annotations score power-seeking, disutility and ethical violations next to game reward.",
+    "description": "Agents play 134 text adventure games with over half a million scenarios. The score is normalized game reward. Annotations also score power-seeking, disutility and ethical violations.",
     "org": "UC Berkeley and Center for AI Safety",
     "released": "2023-04",
     "links": {
@@ -44725,7 +46216,7 @@
     "access": "public",
     "note": "ICML 2023 oral. Scene labels come from language models.",
     "unit": "score",
-    "better": "lower",
+    "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2304.03279"
@@ -45619,7 +47110,6 @@
     "name": "MathArena (Apex, IMO, USAMO)",
     "aliases": [
       "Apex",
-      "Apex Shortlist",
       "MathArena Apex"
     ],
     "category": "math",
@@ -45646,6 +47136,37 @@
       "https://matharena.ai/apex/",
       "https://matharena.ai/competitions"
     ]
+  },
+  {
+    "id": "matharena-apex-shortlist",
+    "name": "MathArena Apex Shortlist",
+    "aliases": [
+      "Apex Shortlist",
+      "Apex-Shortlist"
+    ],
+    "category": "math",
+    "subcategory": "math-competition",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models solve 47 hard final-answer problems that MathArena selected from 2025 competitions, where the best models scored about 50% at selection. Scored by accuracy over repeated attempts.",
+    "org": "ETH Zurich SRI Lab",
+    "released": "2025-08",
+    "links": {
+      "repo": "https://github.com/eth-sri/matharena",
+      "leaderboard": "https://matharena.ai",
+      "dataset": "https://huggingface.co/datasets/MathArena/apex-shortlist"
+    },
+    "access": "public",
+    "note": "MathArena picked the Apex Shortlist and the 12-problem Apex set together in August 2025.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/MathArena/apex-shortlist",
+      "https://raw.githubusercontent.com/eth-sri/matharena/main/README.md"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "mathbench-opencompass",
@@ -46429,6 +47950,62 @@
       "https://github.com/flageval-baai/MeasureBench"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "measurebench-real-world",
+    "name": "MeasureBench Real-world",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models read values and units from real instrument images. The score is the published overall measurement accuracy.",
+    "org": "BAAI FlagEval team",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26865",
+      "repo": "https://github.com/flageval-baai/MeasureBench",
+      "site": "https://flageval-baai.github.io/MeasureBenchPage/",
+      "dataset": "https://huggingface.co/datasets/FlagEval/MeasureBench"
+    },
+    "access": "public",
+    "note": "One track of MeasureBench. The MeasureBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://flageval-baai.github.io/MeasureBenchPage/",
+      "https://arxiv.org/html/2510.26865"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "measurebench-synthetic",
+    "name": "MeasureBench Synthetic",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models read values and units from generated instrument images. The score is the published overall measurement accuracy.",
+    "org": "BAAI FlagEval team",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26865",
+      "repo": "https://github.com/flageval-baai/MeasureBench",
+      "site": "https://flageval-baai.github.io/MeasureBenchPage/",
+      "dataset": "https://huggingface.co/datasets/FlagEval/MeasureBench"
+    },
+    "access": "public",
+    "note": "One track of MeasureBench. The MeasureBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://flageval-baai.github.io/MeasureBenchPage/",
+      "https://arxiv.org/html/2510.26865"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "medagentbench",
@@ -47924,7 +49501,8 @@
     },
     "access": "public+private-holdout",
     "note": "METR flagged high detected cheating for GPT-5.6 Sol, so it treated the result as non-robust.",
-    "unit": "%",
+    "unit": "minutes",
+    "better": "higher",
     "confidence": "verified"
   },
   {
@@ -49564,6 +51142,35 @@
     "evidence": [
       "https://github.com/openai/mle-bench"
     ]
+  },
+  {
+    "id": "mle-bench-30",
+    "name": "MLE-bench 30",
+    "aliases": [
+      "MLE-Bench-30",
+      "MLE-bench (30-competition subset)"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents train models for 30 of MLE-bench's Kaggle-style competitions. The score is the share of runs that earn a bronze medal or better.",
+    "org": "OpenAI",
+    "released": "2025-08",
+    "links": {
+      "repo": "https://github.com/openai/mle-bench",
+      "paper": "https://arxiv.org/abs/2410.07095"
+    },
+    "access": "public",
+    "note": "OpenAI's system cards report this subset, and Meta reports a 30-task subset in its preparedness reports. It has no public leaderboard.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://github.com/openai/mle-bench"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "mlgym-bench-meta",
@@ -51581,6 +53188,240 @@
     "added": "2026-11-01"
   },
   {
+    "id": "mol-instructions-chemical-entity-recognition",
+    "name": "Mol-Instructions Chemical Entity Recognition",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models identify chemical entities in biomedical text. The score is test-set F1.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-chemical-disease-interaction",
+    "name": "Mol-Instructions Chemical-disease Interaction Extraction",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models extract chemical and disease interactions from text. The score is test-set F1.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-chemical-protein-interaction",
+    "name": "Mol-Instructions Chemical-protein Interaction Extraction",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models extract chemical and protein interactions from text. The score is test-set F1.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-molecule-design",
+    "name": "Mol-Instructions Description-guided Molecule Design",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models generate molecules from descriptions. The score is exact-match accuracy on the molecule design test set.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-forward-reaction",
+    "name": "Mol-Instructions Forward Reaction Prediction",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models predict reaction products from reactants. The score is exact-match accuracy on the forward reaction test set.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-multiple-choice",
+    "name": "Mol-Instructions Multi-choice",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer biomedical multiple-choice questions. The score is test-set accuracy.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-reagent-prediction",
+    "name": "Mol-Instructions Reagent Prediction",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models predict reaction reagents. The score is exact-match accuracy on the reagent prediction test set.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-retrosynthesis",
+    "name": "Mol-Instructions Retrosynthesis",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models predict reactants for target products. The score is exact-match accuracy on the retrosynthesis test set.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "mol-instructions-true-false",
+    "name": "Mol-Instructions True or False",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer biomedical true or false questions. The score is test-set accuracy.",
+    "org": "Zhejiang University (ZJUNLP)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.08018",
+      "repo": "https://github.com/zjunlp/Mol-Instructions"
+    },
+    "access": "public",
+    "note": "One track of Mol-Instructions. The Mol-Instructions record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/zjunlp/Mol-Instructions/main/README.md",
+      "https://arxiv.org/html/2306.08018"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "molecular-biology-capabilities-test-securebio",
     "name": "Molecular Biology Capabilities Test",
     "aliases": [
@@ -51709,6 +53550,173 @@
       "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "moneda-bench-advicebench",
+    "name": "Moneda AdviceBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models answer personal finance requests and paired education questions. Moneda’s default board scores paired pass rate on 50 EU personal requests with education twins.",
+    "org": "Moneda",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/MonedaIO/benchmarks",
+      "site": "https://benchmarks.finance/method/",
+      "leaderboard": "https://benchmarks.finance/"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of Moneda Bench. The suite publishes no combined score. Moneda has not published combined results for US requests or discretion requests. Moneda reports personal directive rate separately. Moneda’s scores do not certify legal compliance.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.finance/benchmarks/moneda-advicebench/",
+      "https://benchmarks.finance/api/scores.json",
+      "https://benchmarks.finance/method/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "moneda-bench",
+    "name": "Moneda Bench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models answer finance questions across seven separate benchmarks. AdviceBench, CiteBench, FilingsBench, GroundBench and PortfolioBench have their own records. KnowledgeBench and MarketBench have no published results yet. Moneda publishes no combined score.",
+    "org": "Moneda",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/MonedaIO/benchmarks",
+      "site": "https://benchmarks.finance/method/",
+      "leaderboard": "https://benchmarks.finance/"
+    },
+    "access": "public+private-holdout",
+    "note": "Moneda publishes samples while retaining private test sets. Public samples include 44 filing questions, 16 portfolio tasks, 11 companies for citation checks, and 23 advice items. Moneda also scores its own Numa 1 system. Moneda first listed the suite on November 1, 2026.",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.finance/",
+      "https://benchmarks.finance/method/",
+      "https://benchmarks.finance/changelog/",
+      "https://raw.githubusercontent.com/MonedaIO/benchmarks/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "moneda-bench-citebench",
+    "name": "Moneda CiteBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models write company research notes with linked sources. Moneda scores the weighted share of linked claims that the cited pages support across 100 notes.",
+    "org": "Moneda",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/MonedaIO/benchmarks",
+      "site": "https://benchmarks.finance/method/",
+      "leaderboard": "https://benchmarks.finance/"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of Moneda Bench. The suite publishes no combined score. Moneda labels current results experimental because human validation is incomplete. Moneda’s API marks these rows as ranked despite that caveat. Moneda’s model audit estimates are not benchmark scores.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.finance/benchmarks/moneda-citebench/",
+      "https://benchmarks.finance/api/scores.json",
+      "https://benchmarks.finance/method/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "moneda-bench-filingsbench",
+    "name": "Moneda FilingsBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models answer questions about SEC filings without receiving documents. Moneda scores accuracy on the private questions using filing data and judges for segment questions.",
+    "org": "Moneda",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/MonedaIO/benchmarks",
+      "site": "https://benchmarks.finance/method/",
+      "leaderboard": "https://benchmarks.finance/"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of Moneda Bench. The suite publishes no combined score. Moneda’s first run covers 361 private questions, including 13 segment questions assessed by two judges. Moneda has not completed the segment judges’ human audit.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.finance/benchmarks/moneda-filingsbench/",
+      "https://benchmarks.finance/api/scores.json",
+      "https://benchmarks.finance/method/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "moneda-bench-groundbench",
+    "name": "Moneda GroundBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models answer live questions about market figures. Moneda’s default board reports the share of correct answers against reference data, with incorrect answers reported separately.",
+    "org": "Moneda",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/MonedaIO/benchmarks",
+      "site": "https://benchmarks.finance/method/",
+      "leaderboard": "https://benchmarks.finance/"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of Moneda Bench. The suite publishes no combined score. Moneda labels the current run experimental and unranked. Moneda reports that 116 of 132 answer keys rely on one reference source. Moneda runs each question three times.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.finance/benchmarks/moneda-groundbench/",
+      "https://benchmarks.finance/api/scores.json",
+      "https://benchmarks.finance/method/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "moneda-bench-portfoliobench",
+    "name": "Moneda PortfolioBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models solve hypothetical portfolio tasks involving rebalancing, risk, position sizing, and constraints. Moneda’s default board scores accuracy on 150 tasks with fixed answers.",
+    "org": "Moneda",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/MonedaIO/benchmarks",
+      "site": "https://benchmarks.finance/method/",
+      "leaderboard": "https://benchmarks.finance/"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of Moneda Bench. The suite publishes no combined score. Moneda has not scored the planned forecasts or mandate funds. Moneda’s current score covers portfolio tasks only and does not measure investment performance.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.finance/benchmarks/moneda-portfoliobench/",
+      "https://benchmarks.finance/api/scores.json",
+      "https://benchmarks.finance/method/"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "money-talks-google",
@@ -54848,6 +56856,114 @@
     "added": "2026-11-01"
   },
   {
+    "id": "odysseyarena-ai-trading",
+    "name": "OdysseyArena AI Trading",
+    "category": "games-long-horizon",
+    "subcategory": "games-puzzles",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents trade under hidden market dynamics. The score is average return relative to initial capital over four trials.",
+    "org": "OdysseyArena authors",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.05843",
+      "repo": "https://github.com/xufangzhi/Odyssey-Arena",
+      "site": "https://yayayacc.github.io/Odyssey-Home/"
+    },
+    "access": "public",
+    "note": "One track of OdysseyArena. The OdysseyArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://yayayacc.github.io/Odyssey-Home/",
+      "https://arxiv.org/html/2602.05843"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "odysseyarena-energy-dispatch",
+    "name": "OdysseyArena Energy Dispatch",
+    "category": "games-long-horizon",
+    "subcategory": "games-puzzles",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents manage energy dispatch under hidden rules. The score is average task success over four trials.",
+    "org": "OdysseyArena authors",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.05843",
+      "repo": "https://github.com/xufangzhi/Odyssey-Arena",
+      "site": "https://yayayacc.github.io/Odyssey-Home/"
+    },
+    "access": "public",
+    "note": "One track of OdysseyArena. The OdysseyArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://yayayacc.github.io/Odyssey-Home/",
+      "https://arxiv.org/html/2602.05843"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "odysseyarena-repo-system",
+    "name": "OdysseyArena Repo System",
+    "category": "games-long-horizon",
+    "subcategory": "games-puzzles",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents operate repositories with changing hidden rules. The score is average task success over four trials.",
+    "org": "OdysseyArena authors",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.05843",
+      "repo": "https://github.com/xufangzhi/Odyssey-Arena",
+      "site": "https://yayayacc.github.io/Odyssey-Home/"
+    },
+    "access": "public",
+    "note": "One track of OdysseyArena. The OdysseyArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://yayayacc.github.io/Odyssey-Home/",
+      "https://arxiv.org/html/2602.05843"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "odysseyarena-turn-on-lights",
+    "name": "OdysseyArena Turn on Lights",
+    "category": "games-long-horizon",
+    "subcategory": "games-puzzles",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents learn hidden switches and turn on lights. The score is average task success over four trials.",
+    "org": "OdysseyArena authors",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.05843",
+      "repo": "https://github.com/xufangzhi/Odyssey-Arena",
+      "site": "https://yayayacc.github.io/Odyssey-Home/"
+    },
+    "access": "public",
+    "note": "One track of OdysseyArena. The OdysseyArena record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://yayayacc.github.io/Odyssey-Home/",
+      "https://arxiv.org/html/2602.05843"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "officeqa",
     "name": "OfficeQA",
     "category": "economic-work",
@@ -55228,6 +57344,62 @@
       "https://github.com/YinsongYan/Omni-InteractScope"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "omni-interactscope-explicit-request",
+    "name": "Omni-InteractScope Explicit Request",
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer explicit requests during audio and video streams. The score is the published average across tasks T1 through T7.",
+    "org": "Alibaba Group (Qwen, Alibaba Token Hub) + Hong Kong Polytechnic University",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.35439",
+      "repo": "https://github.com/YinsongYan/Omni-InteractScope",
+      "site": "https://yinsongyan.github.io/Omni-InteractScope/",
+      "dataset": "https://huggingface.co/datasets/Darden7/Omni-InteractScope"
+    },
+    "access": "public",
+    "note": "One track of Omni-InteractScope. The Omni-InteractScope record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://yinsongyan.github.io/Omni-InteractScope/",
+      "https://arxiv.org/html/2610.35439"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "omni-interactscope-proactive",
+    "name": "Omni-InteractScope Proactive",
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models provide timely proactive assistance during audio and video streams. The score is the published T8 assistance recall.",
+    "org": "Alibaba Group (Qwen, Alibaba Token Hub) + Hong Kong Polytechnic University",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.35439",
+      "repo": "https://github.com/YinsongYan/Omni-InteractScope",
+      "site": "https://yinsongyan.github.io/Omni-InteractScope/",
+      "dataset": "https://huggingface.co/datasets/Darden7/Omni-InteractScope"
+    },
+    "access": "public",
+    "note": "One track of Omni-InteractScope. The Omni-InteractScope record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://yinsongyan.github.io/Omni-InteractScope/",
+      "https://arxiv.org/html/2610.35439"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "omni-math",
@@ -56216,6 +58388,131 @@
     "added": "2026-11-01"
   },
   {
+    "id": "openaudiobench-alpacaeval",
+    "name": "OpenAudioBench AlpacaEval",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models respond to spoken AlpacaEval instructions. The score is the published judge quality score.",
+    "org": "Baichuan",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://github.com/baichuan-inc/Baichuan-Omni-1.5",
+      "dataset": "https://huggingface.co/datasets/baichuan-inc/OpenAudioBench"
+    },
+    "access": "public",
+    "note": "One track of OpenAudioBench. The OpenAudioBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/baichuan-inc/Baichuan-Omni-1.5/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openaudiobench-llama-questions",
+    "name": "OpenAudioBench Llama Questions",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer spoken Llama Questions. The score is the published accuracy.",
+    "org": "Baichuan",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://github.com/baichuan-inc/Baichuan-Omni-1.5",
+      "dataset": "https://huggingface.co/datasets/baichuan-inc/OpenAudioBench"
+    },
+    "access": "public",
+    "note": "One track of OpenAudioBench. The OpenAudioBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/baichuan-inc/Baichuan-Omni-1.5/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openaudiobench-reasoning-qa",
+    "name": "OpenAudioBench Reasoning QA",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer spoken reasoning questions. The score is the published accuracy.",
+    "org": "Baichuan",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://github.com/baichuan-inc/Baichuan-Omni-1.5",
+      "dataset": "https://huggingface.co/datasets/baichuan-inc/OpenAudioBench"
+    },
+    "access": "public",
+    "note": "One track of OpenAudioBench. The OpenAudioBench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/baichuan-inc/Baichuan-Omni-1.5/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openaudiobench-triviaqa",
+    "name": "OpenAudioBench TriviaQA",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer spoken TriviaQA questions. The score is the published judge quality score.",
+    "org": "Baichuan",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://github.com/baichuan-inc/Baichuan-Omni-1.5",
+      "dataset": "https://huggingface.co/datasets/baichuan-inc/OpenAudioBench"
+    },
+    "access": "public",
+    "note": "One track of OpenAudioBench. The OpenAudioBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/baichuan-inc/Baichuan-Omni-1.5/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openaudiobench-web-questions",
+    "name": "OpenAudioBench Web Questions",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer spoken Web Questions. The score is the published judge quality score.",
+    "org": "Baichuan",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://github.com/baichuan-inc/Baichuan-Omni-1.5",
+      "dataset": "https://huggingface.co/datasets/baichuan-inc/OpenAudioBench"
+    },
+    "access": "public",
+    "note": "One track of OpenAudioBench. The OpenAudioBench record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/baichuan-inc/Baichuan-Omni-1.5/main/README.md"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "openbookqa",
     "name": "OpenBookQA",
     "aliases": [
@@ -56455,6 +58752,290 @@
     "added": "2026-11-01"
   },
   {
+    "id": "openrsi-index-ace-playbook-repair",
+    "name": "OpenRSI Index ACE Playbook Inspection and Repair",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents repair a reasoning playbook under a fixed budget. The score is held-out Formula exact-answer accuracy as a fraction.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-isaaclab-peginsert-reward-search",
+    "name": "OpenRSI Index Isaac Lab PegInsert Reward Search",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents design robot training rewards under a fixed budget. The score is held-out peg-insertion success as a fraction.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-kev-decision-architecture",
+    "name": "OpenRSI Index Kev Decision Architecture",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents improve a decision model under a fixed budget. The score is the published exponential of negative macro log loss.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-long-short-cot-adaptation",
+    "name": "OpenRSI Index Learnability-Aware Long/Short CoT Adaptation",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents adapt mathematical reasoning examples under a fixed training budget. The score is accuracy across five math benchmarks.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-marin-scaling-ladder",
+    "name": "OpenRSI Index Marin Scaling Ladder",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents design one optimizer for six model sizes. The score is the published complete six-rung reward relative to AdamH.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks. Published measurements include a result that failed staging guards.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/",
+      "https://index.openrsi.foundation/tasks/marin-scaling-ladder",
+      "https://index.openrsi.foundation/tasks/gpic-leaderboard",
+      "https://index.openrsi.foundation/tasks/qwen-122b-rl-merge",
+      "https://index.openrsi.foundation/tasks/isaaclab-peginsert-reward-search",
+      "https://index.openrsi.foundation/tasks/kev-decision-architecture",
+      "https://index.openrsi.foundation/tasks/molmo2-pointing-refined",
+      "https://index.openrsi.foundation/tasks/ace-playbook-repair",
+      "https://index.openrsi.foundation/tasks/molmoweb-interaction-context",
+      "https://index.openrsi.foundation/tasks/reasonir-difficulty-curriculum",
+      "https://index.openrsi.foundation/tasks/learnability-cot",
+      "https://index.openrsi.foundation/tasks/minference-sparse-prefill",
+      "https://index.openrsi.foundation/tasks/sglang-omni-tts-runtime"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-minference-sparse-prefill",
+    "name": "OpenRSI Index MInference 32-Head Sparse Prefill Kernel",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents optimize a sparse-attention prefill operator under a fixed budget. The score is speedup against the paired reference run.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-molmo2-video-pointing",
+    "name": "OpenRSI Index Molmo2 Video-Pointing Inference Strategy",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents tune video inputs and inference for a frozen Molmo2 model. The score is held-out spatiotemporal pointing soft F1.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-molmoweb-context-allocation",
+    "name": "OpenRSI Index MolmoWeb Interaction Context Allocation",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents select interaction context for a frozen browser model. The score is macro-averaged browser-action prediction quality.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-reasonir-curriculum",
+    "name": "OpenRSI Index ReasonIR Difficulty Curriculum",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents adjust retrieval training data schedules. The score measures reasoning retrieval with a penalty for general retrieval regression.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "openrsi-index-sglang-omni-tts-runtime",
+    "name": "OpenRSI Index SGLang Omni TTS Runtime",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents improve speech serving while preserving quality. The score is the official speedup reward for the archived continuation protocol.",
+    "org": "OpenRSI Foundation (UW-led, academic and industry partners)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/OpenRSI-Foundation/OpenRSI-Index",
+      "site": "https://index.openrsi.foundation/index.html",
+      "dataset": "https://huggingface.co/datasets/OpenRSI-Foundation/OpenRSI-Index-Logs"
+    },
+    "access": "public",
+    "note": "One track of OpenRSI Index. The OpenRSI Index record keeps lab scores that combine tracks. The archived continuation result was not rerun under current protocol v5.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://index.openrsi.foundation/",
+      "https://index.openrsi.foundation/tasks/marin-scaling-ladder",
+      "https://index.openrsi.foundation/tasks/gpic-leaderboard",
+      "https://index.openrsi.foundation/tasks/qwen-122b-rl-merge",
+      "https://index.openrsi.foundation/tasks/isaaclab-peginsert-reward-search",
+      "https://index.openrsi.foundation/tasks/kev-decision-architecture",
+      "https://index.openrsi.foundation/tasks/molmo2-pointing-refined",
+      "https://index.openrsi.foundation/tasks/ace-playbook-repair",
+      "https://index.openrsi.foundation/tasks/molmoweb-interaction-context",
+      "https://index.openrsi.foundation/tasks/reasonir-difficulty-curriculum",
+      "https://index.openrsi.foundation/tasks/learnability-cot",
+      "https://index.openrsi.foundation/tasks/minference-sparse-prefill",
+      "https://index.openrsi.foundation/tasks/sglang-omni-tts-runtime"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "openscore-string-quartets",
     "name": "OpenScore String Quartets",
     "aliases": [
@@ -56678,7 +59259,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "LLM agents play 12 popular video games across most genres through an MCP interface. Scores come from in-game progress or outcomes per title.",
+    "description": "LLM agents play 12 popular video games across most genres through an MCP interface. Each game scores in-game progress or outcomes, and the board ranks models by their average rank across the games.",
     "org": "KRAFTON AI with Seoul National University, NVIDIA and UW-Madison",
     "released": "2025-06",
     "links": {
@@ -56689,7 +59270,7 @@
     "access": "public",
     "note": "The name is the Korean word for game. The repo also releases gameplay data for fine-tuning.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://github.com/krafton-ai/Orak",
@@ -57665,7 +60246,7 @@
       "leaderboard": "https://cadbench.ai/"
     },
     "access": "private",
-    "note": "Not the same as anniedoris/CADBench. A submission-portal repo exists at github.com/gNucleus-AI/cad-bench-submission.",
+    "note": "Not the same as anniedoris/CADBench. A submission-portal repo exists at github.com/gNucleus-AI/cad-bench-submission. The board shows version 3. Lab results from before it keep their citations without a plotted score.",
     "unit": "%",
     "confidence": "likely"
   },
@@ -59882,8 +62463,7 @@
     "id": "programbench",
     "name": "ProgramBench",
     "aliases": [
-      "Multi-agent ProgramBench",
-      "ProgramBench (Almost Solved)"
+      "Multi-agent ProgramBench"
     ],
     "category": "coding",
     "subcategory": "coding-projects",
@@ -59907,6 +62487,70 @@
     "evidence": [
       "https://programbench.com"
     ]
+  },
+  {
+    "id": "programbench-almost",
+    "name": "ProgramBench almost solved",
+    "aliases": [
+      "ProgramBench (Almost Solved)",
+      "ProgramBench Almost@1"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Agents rebuild 200 programs from only their compiled binaries and docs. The score is the share of tasks whose rebuilt program passes at least 95% of the hidden behavioral tests.",
+    "org": "Meta Superintelligence Labs, Stanford University and Harvard University",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/facebookresearch/ProgramBench",
+      "dataset": "https://huggingface.co/programbench",
+      "leaderboard": "https://programbench.com",
+      "paper": "https://arxiv.org/abs/2605.03546",
+      "site": "https://programbench.com"
+    },
+    "access": "public",
+    "note": "The board shows this as its Almost column and ranks by fully resolved tasks, which the ProgramBench record holds. Many labs report this number.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://programbench.com"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "programbench-tests-passed",
+    "name": "ProgramBench tests passed",
+    "aliases": [
+      "ProgramBench (Pass Rate)",
+      "ProgramBench hidden test pass rate"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Agents rebuild 200 programs from only their compiled binaries and docs. The score is the share of hidden behavioral tests the rebuilt program passes, averaged over tasks.",
+    "org": "Meta Superintelligence Labs, Stanford University and Harvard University",
+    "released": "2026-05",
+    "links": {
+      "repo": "https://github.com/facebookresearch/ProgramBench",
+      "dataset": "https://huggingface.co/programbench",
+      "leaderboard": "https://programbench.com",
+      "paper": "https://arxiv.org/abs/2605.03546",
+      "site": "https://programbench.com"
+    },
+    "access": "public",
+    "note": "The board calls this an unofficial metric and ranks by fully resolved tasks, which the ProgramBench record holds. Labs report this number. Anthropic runs 166 of the 200 tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://programbench.com"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "progress-classification-google",
@@ -59959,7 +62603,7 @@
     "access": "public",
     "note": "The paper tests 14 VLMs. The same repository holds the ProgressLM-3B model and its 45K training set, so the stars (about 141) are shared. 12 Hugging Face upvotes. The scoring rule should be checked before importing scores.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "likely",
     "evidence": [
       "https://arxiv.org/abs/2601.15224",
@@ -60436,7 +63080,7 @@
     "level": "frontier",
     "scoring": "verified",
     "format": "short-answer",
-    "description": "Deep mutational scanning benchmarks. The model ranks mutations by predicted effect on protein function. Anthropic reports a hard subset.",
+    "description": "Deep mutational scanning benchmarks. The model ranks mutations by predicted effect on protein function, scored by Spearman rank correlation with lab measurements. Anthropic reports a hard subset, as the correlation times 100.",
     "org": "OATML (Oxford) + Marks Lab (Harvard)",
     "released": "2023-12",
     "links": {
@@ -60447,7 +63091,7 @@
     },
     "access": "public",
     "note": "The repo has releases PG_v1.0 to PG_v1.3 (April 2025) that add assays, so check which version a score used. Anthropic system cards report a ProteinGym Hard subset.",
-    "unit": "%",
+    "unit": "score",
     "confidence": "verified",
     "evidence": [
       "https://github.com/OATML-Markslab/ProteinGym",
@@ -60865,6 +63509,59 @@
     "added": "2026-11-01"
   },
   {
+    "id": "q-bench-image-pair-perception",
+    "name": "Q-Bench Image-Pair Perception",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models answer multiple-choice questions comparing low-level attributes across image pairs. The score is overall answer accuracy in the A1-Pair table.",
+    "org": "Nanyang Technological University and collaborators",
+    "released": "2023-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2309.14181",
+      "repo": "https://github.com/Q-Future/Q-Bench"
+    },
+    "access": "public",
+    "note": "One track of Q-Bench. The Q-Bench record keeps lab scores that combine tracks. Authors introduced image-pair perception in Q-Bench+ in February 2024. This track record retains the parent release month as requested.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/Q-Future/Q-Bench/master/README.md",
+      "https://arxiv.org/html/2309.14181",
+      "https://arxiv.org/html/2402.07116"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "q-bench-single-image-perception",
+    "name": "Q-Bench Single-Image Perception",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models answer multiple-choice questions about low-level attributes of individual images. The score is overall answer accuracy in the A1-Single table.",
+    "org": "Nanyang Technological University and collaborators",
+    "released": "2023-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2309.14181",
+      "repo": "https://github.com/Q-Future/Q-Bench"
+    },
+    "access": "public",
+    "note": "One track of Q-Bench. The Q-Bench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/Q-Future/Q-Bench/master/README.md",
+      "https://arxiv.org/html/2309.14181"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "q-bench-video",
     "name": "Q-Bench-Video",
     "aliases": [
@@ -61061,7 +63758,7 @@
       "leaderboard": "https://www.qodo.ai/ai-code-review-benchmark/"
     },
     "access": "private",
-    "note": "125 tasks on the Fireworks board, which lists 35 models.",
+    "note": "Qodo publishes F1 for seven code review systems. The page does not name their backbone model snapshots.",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
@@ -61999,7 +64696,8 @@
       "paper": "https://arxiv.org/abs/2411.15114"
     },
     "access": "public",
-    "unit": "%",
+    "unit": "score",
+    "better": "higher",
     "confidence": "verified"
   },
   {
@@ -62483,7 +65181,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "short-answer",
-    "description": "Models segment the object in a video that an implicit query describes, where finding it needs world knowledge and reasoning. Scored by J&F.",
+    "description": "Models segment and track objects in videos from explicit referring queries and implicit reasoning queries. The score is overall J&F on ReVOS.",
     "org": "University of Technology Sydney and Alibaba (Yan et al., VISA)",
     "released": "2024-07",
     "links": {
@@ -62891,6 +65589,64 @@
       "https://huggingface.co/datasets/JingkunAn/RefSpatial-Expand-Bench"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "refspatial-expand-bench-location",
+    "name": "RefSpatial-Expand-Bench Location",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models solve spatial location questions in the RefSpatial expansion set. The score is the published overall accuracy.",
+    "org": "BAAI (RoboRefer)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2506.04308",
+      "repo": "https://github.com/Zhoues/RoboRefer",
+      "site": "https://zhoues.github.io/RoboRefer/",
+      "dataset": "https://huggingface.co/datasets/JingkunAn/RefSpatial-Expand-Bench"
+    },
+    "access": "public",
+    "note": "One track of RefSpatial-Expand-Bench. The RefSpatial-Expand-Bench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/JingkunAn/RefSpatial-Expand-Bench/resolve/main/README.md",
+      "https://zhoues.github.io/RoboRefer/",
+      "https://arxiv.org/html/2506.04308"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "refspatial-expand-bench-placement",
+    "name": "RefSpatial-Expand-Bench Placement",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models solve spatial placement questions in the RefSpatial expansion set. The score is the published overall accuracy.",
+    "org": "BAAI (RoboRefer)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2506.04308",
+      "repo": "https://github.com/Zhoues/RoboRefer",
+      "site": "https://zhoues.github.io/RoboRefer/",
+      "dataset": "https://huggingface.co/datasets/JingkunAn/RefSpatial-Expand-Bench"
+    },
+    "access": "public",
+    "note": "One track of RefSpatial-Expand-Bench. The RefSpatial-Expand-Bench record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/JingkunAn/RefSpatial-Expand-Bench/resolve/main/README.md",
+      "https://zhoues.github.io/RoboRefer/",
+      "https://arxiv.org/html/2506.04308"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "refusal-to-assist-with-ai-safety-rnd-anthropic",
@@ -65382,6 +68138,78 @@
     "added": "2026-11-01"
   },
   {
+    "id": "vals-safe-teen-health-advice",
+    "name": "SAFE-Teen Health advice",
+    "category": "safety-alignment",
+    "subcategory": "safety-wellbeing",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models respond to simulated teens in health advice scenarios. The score is the published conversation failure rate.",
+    "org": "Vals AI",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://www.vals.ai/benchmarks/mental-health"
+    },
+    "access": "private",
+    "note": "One track of SAFE-Teen. The SAFE-Teen record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.vals.ai/benchmarks/mental-health"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "vals-safe-teen-relationship-boundaries",
+    "name": "SAFE-Teen Relationship boundaries",
+    "category": "safety-alignment",
+    "subcategory": "safety-wellbeing",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models respond to simulated teens in relationship boundary scenarios. The score is the published conversation failure rate.",
+    "org": "Vals AI",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://www.vals.ai/benchmarks/mental-health"
+    },
+    "access": "private",
+    "note": "One track of SAFE-Teen. The SAFE-Teen record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.vals.ai/benchmarks/mental-health"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "vals-safe-teen-urgent-safety",
+    "name": "SAFE-Teen Urgent safety",
+    "category": "safety-alignment",
+    "subcategory": "safety-wellbeing",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models respond to simulated teens in urgent safety scenarios. The score is the published conversation failure rate.",
+    "org": "Vals AI",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://www.vals.ai/benchmarks/mental-health"
+    },
+    "access": "private",
+    "note": "One track of SAFE-Teen. The SAFE-Teen record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.vals.ai/benchmarks/mental-health"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "safelibero",
     "name": "SafeLIBERO",
     "aliases": [
@@ -66000,6 +68828,41 @@
       "runs": "external",
       "in_eci": false
     }
+  },
+  {
+    "id": "sciences-last-exam",
+    "name": "Science's Last Exam",
+    "aliases": [
+      "SLE",
+      "Science’s Last Exam"
+    ],
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents conduct scientific research through tools, code, desktop software, laboratory recordings, and withheld references across 113 tasks in nine disciplines. The official composite equally averages six assessment scores on a zero-to-100 scale. Checks combine reference comparisons, executable tests, and literature audits.",
+    "org": "AItonomy Foundation and the SLE team",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/Gen-Verse/Science-Last-Exam",
+      "site": "https://sciences-last-exam.org/",
+      "dataset": "https://huggingface.co/datasets/Gen-Verse/Science-Last-Exam",
+      "leaderboard": "https://sciences-last-exam.org/leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "AItonomy requires separate approval for hidden reference data. The composite includes the current zero scores for end-to-end research but excludes wet-lab execution, which has no released tasks. The board averages cost and time over four capabilities only. Models lacking an assessment receive no composite.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://sciences-last-exam.org/",
+      "https://sciences-last-exam.org/docs",
+      "https://sciences-last-exam.org/docs-scoring",
+      "https://sciences-last-exam.org/leaderboard",
+      "https://raw.githubusercontent.com/Gen-Verse/Science-Last-Exam/main/README.md"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "scienceagentbench",
@@ -69368,6 +72231,62 @@
     "added": "2026-11-01"
   },
   {
+    "id": "spatialworld-digital",
+    "name": "SpatialWorld Digital",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents complete entertainment tasks in digital environments. The score is the published digital task success rate.",
+    "org": "Tsinghua University",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.09669",
+      "repo": "https://github.com/Hongcheng-Gao/SpatialWorld",
+      "site": "https://spatial-world.github.io"
+    },
+    "access": "public",
+    "note": "One track of SpatialWorld. The SpatialWorld record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://spatial-world.github.io/",
+      "https://spatial-world.github.io",
+      "https://arxiv.org/html/2606.09669"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "spatialworld-physical",
+    "name": "SpatialWorld Physical",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents complete tasks in physical environments. The score is the published overall success rate across physical task categories.",
+    "org": "Tsinghua University",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.09669",
+      "repo": "https://github.com/Hongcheng-Gao/SpatialWorld",
+      "site": "https://spatial-world.github.io"
+    },
+    "access": "public",
+    "note": "One track of SpatialWorld. The SpatialWorld record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://spatial-world.github.io/",
+      "https://spatial-world.github.io",
+      "https://arxiv.org/html/2606.09669"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "speaker-identification-openai",
     "name": "Speaker identification",
     "category": "safety-alignment",
@@ -70456,7 +73375,7 @@
     "level": "expert",
     "scoring": "outcome",
     "format": "agent-task",
-    "description": "Agents get daily prices, fundamentals and news over months and decide to buy, sell or hold. Scoring uses cumulative return, maximum drawdown and related metrics.",
+    "description": "Agents trade stocks over a fixed evaluation window. StockBench ranks models by the mean of final return, maximum drawdown and Sortino ratio. The score is the board's rank, so a lower score is better.",
     "org": "StockBench authors",
     "released": "2025-10",
     "links": {
@@ -70467,8 +73386,8 @@
     },
     "access": "public",
     "note": "Built to be contamination-free by using recent market windows. 58 HF paper upvotes and about 180 GitHub stars.",
-    "unit": "%",
-    "better": "higher",
+    "unit": "score",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/papers/2510.02209"
@@ -70498,6 +73417,89 @@
     "evidence": [
       "https://arxiv.org/abs/1604.01696"
     ]
+  },
+  {
+    "id": "stratabench-land-v1",
+    "name": "StrataBench Land v1",
+    "aliases": [
+      "StrataBench",
+      "Stratabench"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-law",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models classify land instruments, extract lease terms, and distinguish petroleum terms in three separate benchmarks. Classify and Extract have their own records. Define publishes three measures without one headline score.",
+    "org": "Collide AI",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/tree/main/code/",
+      "dataset": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1",
+      "leaderboard": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1#baseline-results"
+    },
+    "access": "public+private-holdout",
+    "note": "Collide explicitly forbids averaging its three tasks into one score. Models receive separate Extract results for natural and schema prompts. Collide licenses data under CC BY-NC 4.0 with additional permission to run benchmarks and publish attributed scores.",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1",
+      "https://huggingface.co/api/datasets/Collide-ai/stratabench-land-v1"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "stratabench-land-v1-classify",
+    "name": "StrataBench Land v1 Classify",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-law",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models identify the legal act performed by each of 66 synthetic land instruments. Collide scores label accuracy under open and closed prompt protocols.",
+    "org": "Collide AI",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/tree/main/code/",
+      "dataset": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1",
+      "leaderboard": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1#baseline-results"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of StrataBench Land v1. The suite publishes no combined score. Collide has not published Classify baseline scores. Collide reports 11 sampled parent types while grading against 23 allowed labels.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/README.md",
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/LICENSE"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "stratabench-land-v1-extract",
+    "name": "StrataBench Land v1 Extract",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-law",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models extract ten shared lease fields from 628 synthetic instruments. Collide divides correct field decisions by correct, omitted, and wrong decisions, excluding unscored fields.",
+    "org": "Collide AI",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/tree/main/code/",
+      "dataset": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1",
+      "leaderboard": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1#baseline-results"
+    },
+    "access": "public+private-holdout",
+    "note": "One benchmark of StrataBench Land v1. The suite publishes no combined score. Collide reports natural and schema prompts on the same ten fields. Collide keeps the schema protocol’s additional four fields outside the headline score.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/README.md",
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/LICENSE"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "strategyqa",
@@ -73328,6 +76330,58 @@
     ]
   },
   {
+    "id": "tau-bench-airline",
+    "name": "tau-bench Airline",
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents help simulated airline customers through tools while following airline policies on the original tasks. The score is pass^1 as a percentage.",
+    "org": "Sierra",
+    "released": "2024-06",
+    "links": {
+      "repo": "https://github.com/sierra-research/tau-bench",
+      "paper": "https://arxiv.org/abs/2406.12045"
+    },
+    "access": "public",
+    "note": "One track of tau-bench. The tau-bench record keeps lab scores that combine tracks. Authors mark these original tasks as outdated and point to later benchmarks with revised tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/sierra-research/tau-bench/HEAD/README.md",
+      "https://arxiv.org/html/2406.12045"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "tau-bench-retail",
+    "name": "tau-bench Retail",
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents help simulated retail customers through tools while following store policies on the original tasks. The score is pass^1 as a percentage.",
+    "org": "Sierra",
+    "released": "2024-06",
+    "links": {
+      "repo": "https://github.com/sierra-research/tau-bench",
+      "paper": "https://arxiv.org/abs/2406.12045"
+    },
+    "access": "public",
+    "note": "One track of tau-bench. The tau-bench record keeps lab scores that combine tracks. Authors mark these original tasks as outdated and point to later benchmarks with revised tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/sierra-research/tau-bench/HEAD/README.md",
+      "https://arxiv.org/html/2406.12045"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "tau2-bench",
     "name": "tau2-bench",
     "category": "tool-use",
@@ -74309,6 +77363,64 @@
     "added": "2026-11-01"
   },
   {
+    "id": "textedit-opencompass-real",
+    "name": "TextEdit Real",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models edit text in real images in the full TextEdit test set. The score is the published judged average.",
+    "org": "OpenCompass (Shanghai AI Laboratory)",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.09877",
+      "repo": "https://github.com/open-compass/TextEdit",
+      "dataset": "https://huggingface.co/datasets/opencompass/TextEdit",
+      "leaderboard": "https://github.com/open-compass/TextEdit"
+    },
+    "access": "public",
+    "note": "One track of TextEdit. The TextEdit record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/open-compass/TextEdit/main/README.md",
+      "https://github.com/open-compass/TextEdit",
+      "https://arxiv.org/html/2603.09877"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "textedit-opencompass-virtual",
+    "name": "TextEdit Virtual",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models edit text in virtual images in the full TextEdit test set. The score is the published judged average.",
+    "org": "OpenCompass (Shanghai AI Laboratory)",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.09877",
+      "repo": "https://github.com/open-compass/TextEdit",
+      "dataset": "https://huggingface.co/datasets/opencompass/TextEdit",
+      "leaderboard": "https://github.com/open-compass/TextEdit"
+    },
+    "access": "public",
+    "note": "One track of TextEdit. The TextEdit record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/open-compass/TextEdit/main/README.md",
+      "https://github.com/open-compass/TextEdit",
+      "https://arxiv.org/html/2603.09877"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "textquests",
     "name": "TextQuests",
     "category": "games-long-horizon",
@@ -74316,7 +77428,7 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agents play 25 classic interactive fiction games. Measures game progress and harmful actions per 100 steps.",
+    "description": "Agents play 25 classic interactive fiction games. The score is harmful actions per 100 steps, where lower is better. The board also reports game progress.",
     "org": "Phan et al. (CAIS)",
     "released": "2025-07",
     "links": {
@@ -76270,6 +79382,84 @@
     "added": "2026-11-01"
   },
   {
+    "id": "ui-vision-action-prediction",
+    "name": "UI-Vision Action Prediction",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models predict the next desktop interface action. The score is the published step success rate.",
+    "org": "ServiceNow Research and collaborators",
+    "released": "2025-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.15661",
+      "dataset": "https://huggingface.co/datasets/ServiceNow/ui-vision"
+    },
+    "access": "public",
+    "note": "One track of UI-Vision. The UI-Vision record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/uivision/UI-Vision/main/README.md",
+      "https://arxiv.org/html/2503.15661"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "ui-vision-element-grounding",
+    "name": "UI-Vision Element Grounding",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models locate interface elements from instructions. The score is the published overall grounding accuracy.",
+    "org": "ServiceNow Research and collaborators",
+    "released": "2025-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.15661",
+      "dataset": "https://huggingface.co/datasets/ServiceNow/ui-vision"
+    },
+    "access": "public",
+    "note": "One track of UI-Vision. The UI-Vision record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/uivision/UI-Vision/main/README.md",
+      "https://arxiv.org/html/2503.15661"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "ui-vision-layout-grounding",
+    "name": "UI-Vision Layout Grounding",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models identify interface layout regions. The score is the published intersection over union percentage.",
+    "org": "ServiceNow Research and collaborators",
+    "released": "2025-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.15661",
+      "dataset": "https://huggingface.co/datasets/ServiceNow/ui-vision"
+    },
+    "access": "public",
+    "note": "One track of UI-Vision. The UI-Vision record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/uivision/UI-Vision/main/README.md",
+      "https://arxiv.org/html/2503.15661"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "uk-aisi-alignment-and-monitorability-evaluations",
     "name": "UK AISI alignment and monitorability evaluations",
     "category": "safety-alignment",
@@ -78070,7 +81260,7 @@
     "note": "Labs often report one minus the hallucination rate so that higher is better. The judge moved from HHEM-1.0 to HHEM-2.x in 2024-08. Vectara replaced the 1,000 article set in 2025-11.",
     "successor": "vectara-hallucination-leaderboard-2",
     "unit": "%",
-    "better": "higher",
+    "better": "lower",
     "confidence": "likely",
     "evidence": [
       "https://arxiv.org/abs/2507.20534",
@@ -78827,7 +82017,7 @@
     },
     "access": "public",
     "note": "Accepted to the NeurIPS 2025 Datasets and Benchmarks track. Benign queries look harmless but become harmful when read with the video.",
-    "unit": "%",
+    "unit": "score",
     "better": "lower",
     "confidence": "verified",
     "evidence": [
@@ -80351,6 +83541,58 @@
     "added": "2026-11-01"
   },
   {
+    "id": "visual-spatial-reasoning-random",
+    "name": "VSR Random Split",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models judge whether image captions correctly describe spatial relations on the randomly partitioned test set. The score is accuracy over 2,195 test examples.",
+    "org": "University of Cambridge (Liu et al.)",
+    "released": "2022-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2205.00363",
+      "repo": "https://github.com/cambridgeltl/visual-spatial-reasoning"
+    },
+    "access": "public",
+    "note": "One track of VSR. The VSR record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/cambridgeltl/visual-spatial-reasoning/master/README.md",
+      "https://arxiv.org/html/2205.00363"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "visual-spatial-reasoning-zero-shot",
+    "name": "VSR Zero-Shot Split",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models judge spatial captions on a test set whose object concepts do not appear in training. The score is accuracy over 616 test examples.",
+    "org": "University of Cambridge (Liu et al.)",
+    "released": "2022-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2205.00363",
+      "repo": "https://github.com/cambridgeltl/visual-spatial-reasoning"
+    },
+    "access": "public",
+    "note": "One track of VSR. The VSR record keeps lab scores that combine tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/cambridgeltl/visual-spatial-reasoning/master/README.md",
+      "https://arxiv.org/html/2205.00363"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "vulnerability-finding-evaluations-anthropic",
     "name": "Vulnerability finding evaluations (Anthropic)",
     "aliases": [
@@ -80866,6 +84108,36 @@
     ]
   },
   {
+    "id": "webharbor",
+    "name": "WebHarbor",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents navigate local copies of 153 websites to search, sign in, book services, and change stored state. The suite contains 3,518 tasks, including 306 verified test tasks and 2,288 training tasks. The test score measures the percentage of tasks passed by scripted verifiers.",
+    "org": "AIMING Lab",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.03634",
+      "repo": "https://github.com/aiming-lab/WebHarbor",
+      "site": "https://aiming-lab.github.io/WebHarbor/",
+      "dataset": "https://huggingface.co/datasets/ChilleD/WebHarbor",
+      "leaderboard": "https://aiming-lab.github.io/WebHarbor/#results"
+    },
+    "access": "public",
+    "note": "AIMING Lab released the first 15 environments in May 2026 and the full suite in November 2026. Agents use either a GUI harness or OpenCode on the same test set. Independent judge scores and verifier agreement remain diagnostics. Live-web transfer results measure other benchmarks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://aiming-lab.github.io/WebHarbor/",
+      "https://raw.githubusercontent.com/aiming-lab/WebHarbor/main/README.md",
+      "https://aiming-lab.github.io/WebHarbor/assets/charts.js?v=202611030900"
+    ],
+    "added": "2026-11-08"
+  },
+  {
     "id": "weblinx",
     "name": "WebLINX",
     "category": "computer-use-browser",
@@ -81226,10 +84498,6 @@
   {
     "id": "wenetspeech",
     "name": "WenetSpeech",
-    "aliases": [
-      "WenetSpeech test-meeting",
-      "WenetSpeech test-net"
-    ],
     "category": "audio-video",
     "subcategory": "audio-speech",
     "level": "everyday",
@@ -81251,6 +84519,56 @@
       "https://arxiv.org/pdf/2110.03370v1"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "wenetspeech-test-meeting",
+    "name": "WenetSpeech Test_Meeting",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models transcribe spontaneous Mandarin speech from real meetings in the Test_Meeting set. The baseline score is mixture error rate, counting Mandarin characters and English words.",
+    "org": "Northwestern Polytechnical University (ASLP@NPU), Mobvoi and others",
+    "released": "2021-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2110.03370"
+    },
+    "access": "public",
+    "note": "One track of WenetSpeech. The WenetSpeech record keeps lab scores that combine tracks. Authors call the baseline metric mixture error rate. Lab cards may instead name character or word error rate.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/wenet-e2e/WenetSpeech/main/README.md",
+      "https://arxiv.org/html/2110.03370"
+    ],
+    "added": "2026-11-08"
+  },
+  {
+    "id": "wenetspeech-test-net",
+    "name": "WenetSpeech Test_Net",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models transcribe Mandarin internet speech from the Test_Net set. The baseline score is mixture error rate, counting Mandarin characters and English words.",
+    "org": "Northwestern Polytechnical University (ASLP@NPU), Mobvoi and others",
+    "released": "2021-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2110.03370"
+    },
+    "access": "public",
+    "note": "One track of WenetSpeech. The WenetSpeech record keeps lab scores that combine tracks. Authors call the baseline metric mixture error rate. Lab cards may instead name character or word error rate.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/wenet-e2e/WenetSpeech/main/README.md",
+      "https://arxiv.org/html/2110.03370"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "millionaire-bench-de",
@@ -82869,7 +86187,7 @@
       "paper": "https://arxiv.org/abs/2503.05244"
     },
     "access": "public",
-    "note": "The first release had 1,239 queries, and a later update cut it to 1,000, so older scores differ.",
+    "note": "The board multiplies its 10-point critic score by 10, and labs that print the 10-point score are recorded times 10. The board changed its queries, criteria and critic from April 2025, so scores from different times may not compare.",
     "unit": "score",
     "confidence": "verified",
     "evidence": [
@@ -82993,8 +86311,8 @@
       "leaderboard": "https://offpolicyinc.github.io/xbench/"
     },
     "access": "public",
-    "note": "Every label is public by post id so numbers can be audited. The raw corpus stays private.",
-    "unit": "%",
+    "note": "Every label is public by post id so numbers can be audited. The raw corpus stays private. The score is net firsthand sentiment in percentage points, from negative 100 to positive 100.",
+    "unit": "score",
     "confidence": "verified"
   },
   {
@@ -83648,6 +86966,33 @@
       "http://youcook2.eecs.umich.edu/",
       "https://arxiv.org/abs/1703.09788"
     ]
+  },
+  {
+    "id": "youcook2-dense-description",
+    "name": "YouCook2 Dense Video Description",
+    "category": "audio-video",
+    "subcategory": "video-captioning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models locate cooking steps and describe each step. The score is CIDEr for the complete dense video description task.",
+    "org": "University of Michigan",
+    "released": "2017-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/1703.09788",
+      "site": "http://youcook2.eecs.umich.edu/"
+    },
+    "access": "public",
+    "note": "One track of YouCook2. The YouCook2 record keeps lab scores that combine tracks.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/LuoweiZhou/YouCook2-Leaderboard/master/README.md",
+      "http://youcook2.eecs.umich.edu/",
+      "https://arxiv.org/html/1703.09788"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "yupp-vibe-score",
