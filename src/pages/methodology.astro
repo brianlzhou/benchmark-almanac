@@ -1,0 +1,252 @@
+---
+import Base from '../layouts/Base.astro';
+import PairScatter, { type PairPt } from '../components/PairScatter.astro';
+import { cards, systemCards, benchmarks, benchById, modelById, leaderboardScores, epochScores, LEADERBOARDS, eciByModel, EPOCH_SOURCE } from '../lib/data.ts';
+import { SR_FIT, SR_RULES, srHeldOut, srVsEci, srBenchmarks, selfReported } from '../lib/self-reported.ts';
+import { claimPairs, claimStats, SAME_WITHIN } from '../lib/claims.ts';
+import { humanDate } from '../lib/format.ts';
+
+const boards = Object.keys(LEADERBOARDS).length;
+const held = srHeldOut();
+const claims = claimStats(claimPairs);
+const withChanges = benchmarks.filter((b) => b.changes?.length);
+const changeCount = withChanges.reduce((n, b) => n + (b.changes?.length ?? 0), 0);
+const n = (v: number) => v.toLocaleString('en-US');
+
+// Self-Reported Index against the ECI, naming the models furthest from the line
+const gapOf = (x: (typeof srVsEci)[number]) => x.sr - x.eci;
+const far = [...srVsEci].sort((a, b) => Math.abs(gapOf(b)) - Math.abs(gapOf(a))).slice(0, 6).map((x) => x.model);
+const vsPts: PairPt[] = srVsEci.map((x) => ({
+  x: x.eci,
+  y: x.sr,
+  model: x.model,
+  tv: `${x.sr.toFixed(1)} self-reported, ${x.eci.toFixed(1)} ECI`,
+  tn: modelById.get(x.model)?.name ?? x.model,
+  ts: `${gapOf(x) >= 0 ? '+' : '−'}${Math.abs(gapOf(x)).toFixed(1)} points. Fit to ${selfReported.get(x.model)?.n} lab-reported scores`,
+}));
+const topBenches = srBenchmarks.slice(0, 16);
+---
+
+<Base title="How we compare scores" description="Where each score comes from, when two scores compare, how the Self-Reported Index is computed, and how we put lab claims next to leaderboards.">
+  <div class="page prose">
+    <header class="head">
+      <h1>How we compare scores</h1>
+      <p class="lede">
+        We run no evaluations ourselves. Every score comes from a lab, a leaderboard or Epoch AI, and each ran the benchmark its own way. This page says how we keep those numbers apart, when we put them side by side, and how we build the one index that rests on labs' own numbers.
+      </p>
+    </header>
+
+    <section id="sources">
+      <h2>Three kinds of score</h2>
+      <dl>
+        <dt>Lab reports</dt>
+        <dd>{n(cards.length)} launch posts and {n(systemCards.length)} system cards, model cards and technical reports. Labs choose which benchmarks to show, the settings, the harness and often the task subset. These are self-reported numbers.</dd>
+        <dt>Leaderboards</dt>
+        <dd>{n(boards)} boards that benchmarks' makers publish, with {n(leaderboardScores.length)} scores for models we track. Some boards run every model themselves, and others accept submissions, sometimes from the labs.</dd>
+        <dt>Epoch AI</dt>
+        <dd>{n(epochScores.length)} scores from <a href={EPOCH_SOURCE.url}>Epoch AI</a>, retrieved {humanDate(EPOCH_SOURCE.retrieved)}. Epoch runs some benchmarks itself and collects the rest. Its Epoch Capabilities Index (ECI) covers {n(eciByModel.size)} models.</dd>
+      </dl>
+      <p class="gap">Every chart and table says which kind it shows. Filled dots are leaderboard or Epoch scores, and rings are numbers a lab reports about its own model.</p>
+    </section>
+
+    <section id="one-score">
+      <h2>One score per model on each board</h2>
+      <p>
+        A model tested at several effort levels or in several harnesses keeps one place on a board, at its best setting. The setting and harness stay on the score as labels, so GPT-5 at high effort is still GPT-5. Charts of every run show each setting as its own dot.
+      </p>
+      <p>
+        Leaderboard entries that aren't in our model list, such as fine-tunes and agent products, appear on their benchmark's board under the board's own name. They never count toward leaders or a lab's credit.
+      </p>
+    </section>
+
+    <section id="lead">
+      <h2>Which board a page leads with</h2>
+      <p>
+        A benchmark page leads with the benchmark's own leaderboard when it has five or more models and its newest score is within six months of the newest score from any source. Otherwise it leads with Epoch AI's scores on the same terms, and then with lab reports. A board that stopped at last year's models shouldn't headline a benchmark labs still report.
+      </p>
+    </section>
+
+    <section id="compare">
+      <h2>When two scores compare</h2>
+      <p>Two scores on one benchmark compare only if the runs match on all of these. Where we can tell they don't, we say so on the score or in the benchmark's notes.</p>
+      <dl>
+        <dt>Version</dt>
+        <dd>Each version is its own record, linked to the others as a family. We never mix ARC-AGI-1 and ARC-AGI-2 scores.</dd>
+        <dt>Unit</dt>
+        <dd>We fold a lab's unit as written ("Elo", "ANLS %") into the benchmark's unit and leave out any score in another unit. Charts that combine sources do so only for percentages.</dd>
+        <dt>Tasks</dt>
+        <dd>Labs sometimes run a subset, such as 477 of SWE-bench Verified's 500 tasks. The lab's own label for the result, which we keep, usually says so.</dd>
+        <dt>Harness and effort</dt>
+        <dd>Labs often use their own agent harness and their highest effort setting, while a leaderboard runs one harness for every model. Leaderboard rows carry both as labels.</dd>
+        <dt>Attempts</dt>
+        <dd>pass@1 counts the first try. pass@k counts a success in any of k tries and runs higher.</dd>
+        <dt>Grader</dt>
+        <dd>A benchmark graded by a model can change its judge, and scores move with it.</dd>
+        <dt>Date</dt>
+        <dd>Benchmarks fix questions, regrade and change their rules. We log those changes on each benchmark's page.</dd>
+      </dl>
+    </section>
+
+    <section id="changes">
+      <h2>Changes to benchmarks</h2>
+      <p>
+        {withChanges.length > 0
+          ? `${withChanges.length} benchmark pages list ${changeCount} dated changes by their maintainers.`
+          : 'Benchmark pages list dated changes by their maintainers.'}{' '}
+        We log seven kinds: scores recomputed, a new grader, tasks removed or fixed, a new official harness, a new headline metric, corrected questions, and new leaderboard rules. Each entry links to the maintainers' own source, such as a commit, a changelog, a paper revision or their announcement. New versions aren't changes, because each has its own record.
+      </p>
+    </section>
+
+    <section id="claims">
+      <h2>Lab claims next to leaderboards</h2>
+      <p>
+        The <a href="/claims/">claims page</a> pairs each lab's best number for its model with the same model's best row on the benchmark's own leaderboard. Where the benchmark has no leaderboard, it uses Epoch AI's score, but only for benchmarks Epoch runs itself, since the scores Epoch collects are often the lab's own. We have {n(claims.pairs)} pairs across {claims.benchmarks} benchmarks.
+      </p>
+      <p>
+        Numbers within {SAME_WITHIN} points count as the same, and {claims.same} of the {claims.pct} pairs in percent match. A match usually means one side copied the other. Of the rest, the lab's number is better in {claims.labHigher} and worse in {claims.labLower}. Most gaps come from setup, not error. Where we've checked a large gap, the table says what differs.
+      </p>
+    </section>
+
+    <section id="self-reported">
+      <h2>The Self-Reported Index</h2>
+      <p>
+        The ECI comes from Epoch AI's data, which includes its own runs, and it covers {n(eciByModel.size)} models. Labs publish numbers for many more, often months before anyone else tests them. The Self-Reported Index puts {n(SR_FIT.models)} models on one scale using only those numbers: {n(SR_FIT.scores)} scores on {SR_FIT.benchmarks} benchmarks, from {n(SR_FIT.docs)} lab documents.
+      </p>
+      <p>
+        <b>Read it as a claim.</b> Labs pick the benchmarks they show and how they run them, and they rarely publish a weak result. The index ranks what labs say about their models. The ECI is the better guide wherever a model has both.
+      </p>
+      <h3>What goes in</h3>
+      <p>
+        Scores in percent on capability benchmarks, from launch posts and from the capability sections of system cards. Safety, alignment, cyber, bio-chem and robotics results stay out, along with lower-is-better scores. Where a lab reports a benchmark more than once, at several settings or in several documents, the best number counts, as it does everywhere on this site. A benchmark joins once {SR_RULES.minModels} models report it. A model gets a score once it reports {SR_RULES.minBenchmarks} of those benchmarks, at least {SR_RULES.minText} of them outside vision.
+      </p>
+      <h3>How it's fit</h3>
+      <p>
+        We use the same kind of model as the ECI, from item response theory. Each model has a capability, and each benchmark a difficulty and a slope. The expected score is a logistic curve in the gap between the two. Scores count from chance, so 25% on a four-choice test is zero, using Epoch AI's chance levels where it lists them. We fit every capability, difficulty and slope at once by least squares, with a light penalty that fixes the scale. The fit has no randomness, so the same data gives the same index.
+      </p>
+      <p>
+        Then we stretch and shift the result to the ECI's scale, matching the average and spread of the {SR_FIT.overlap} models that have both. A model at 150 on one sits near 150 on the other.
+      </p>
+      <h3>How well it holds up</h3>
+      <p>
+        Across those {SR_FIT.overlap} models it agrees with the ECI at r = {SR_FIT.pearson.toFixed(3)}, and the rank correlation is {SR_FIT.spearman.toFixed(3)}. The typical model sits {SR_FIT.medianGap.toFixed(1)} points from its ECI. In a five-fold check, where we hid a fifth of the scores and predicted them from the rest, the fit missed by {held.rmse.toFixed(1)} points (root mean square) against {held.baseline.toFixed(1)} for guessing each benchmark's average.
+      </p>
+      <p>
+        The 90% intervals come from how tightly a model's own scores pin it down. Benchmarks near a model's level tell the most, and saturated ones tell almost nothing, so a model whose scores all sit near 100% gets a wide interval. The intervals don't cover differences in how labs ran their tests.
+      </p>
+      <h3>Where it's weak</h3>
+      <p>
+        It's least reliable for older and smaller models, whose labs reported mostly easy benchmarks, and for models with only five or six scores. Two labs can report the same benchmark under different settings, such as with and without tools, and the index treats both as the same test. When labs stop reporting a saturated benchmark, the newest models lose the easy points of comparison.
+      </p>
+    </section>
+
+    <section class="wide-fig">
+      <h2>The two indexes side by side</h2>
+      <p>Each dot is a model with both scores. Dots above the dashed line score higher on their labs' own numbers than on the ECI. We name the six furthest from the line.</p>
+      <PairScatter points={vsPts} xLabel="Epoch Capabilities Index" yLabel="Self-Reported Index" label="Self-Reported Index against the Epoch Capabilities Index" unit="index" labelIds={far} />
+    </section>
+
+    <section>
+      <h2>The benchmarks it leans on</h2>
+      <p>The {topBenches.length} benchmarks the most models report, with the difficulty the fit gives each on the index scale. A model at a benchmark's difficulty is expected to get half the room above chance.</p>
+      <div class="table-wrap">
+        <table class="t" data-sort>
+          <thead>
+            <tr><th>Benchmark</th><th class="r">Models</th><th class="r">Difficulty</th></tr>
+          </thead>
+          <tbody>
+            {topBenches.map((x) => (
+              <tr>
+                <td><a href={`/benchmarks/${x.id}/`}>{benchById.get(x.id)?.name ?? x.id}</a></td>
+                <td class="r">{x.models}</td>
+                <td class="r num">{x.difficulty.toFixed(1)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="left-out">
+      <h2>What we leave out</h2>
+      <p>
+        We use no data from Artificial Analysis, whose terms bar reuse in other ranking products. A lab that quotes an Artificial Analysis number in its own launch post keeps it, credited to the lab. We don't read sites whose terms forbid automated reading, and we never get around a block. The <a href="/sources/">Sources page</a> lists what we read.
+      </p>
+    </section>
+
+    <section id="corrections">
+      <h2>Corrections</h2>
+      <p>
+        If a score, a pairing or a change entry is wrong, open an issue on <a href="https://github.com/brianlzhou/benchmark-almanac/issues">GitHub</a> with the source, and we'll fix the data file it came from. The code for everything on this page is in <code>src/lib/self-reported.ts</code>, <code>src/lib/irt.ts</code> and <code>src/lib/claims.ts</code>.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .prose section {
+    max-width: 68ch;
+  }
+  .prose section.wide-fig {
+    max-width: 760px;
+  }
+  .prose section + section {
+    margin-top: 64px;
+  }
+  .prose h2 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  .prose h3 {
+    font: 500 17px/1.3 var(--sans);
+    margin: 28px 0 8px;
+  }
+  .prose p + p {
+    margin-top: 14px;
+  }
+  .prose p {
+    color: var(--ink-2);
+  }
+  .prose b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .prose .table-wrap,
+  .prose figure {
+    margin-top: 20px;
+  }
+  .gap {
+    margin-top: 28px;
+  }
+  section[id] {
+    scroll-margin-top: 90px;
+  }
+  dl {
+    margin: 16px 0 0;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 12px 24px;
+  }
+  dt {
+    font-weight: 500;
+  }
+  dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--panel);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  @media (max-width: 640px) {
+    dl {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    dd {
+      margin-bottom: 10px;
+    }
+  }
+</style>

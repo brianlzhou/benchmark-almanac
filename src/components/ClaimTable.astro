@@ -1,0 +1,108 @@
+---
+// Lab claims beside leaderboard scores, one row per model and benchmark: the lab's best number with its label
+// in the lab's document, the board's best number with its setting and harness, the gap between them, and our
+// note on why they differ where we have checked. The styles are global under .ct, so the claims page's thousand
+// rows don't each carry Astro's scoping attributes.
+import ModelName from './ModelName.astro';
+import { benchById, LEADERBOARDS } from '../lib/data.ts';
+import { claimNote, gapText, type ClaimPair } from '../lib/claims.ts';
+import { score as fmt, fullDate } from '../lib/format.ts';
+
+interface Props {
+  pairs: ClaimPair[];
+  /** Hide the model column (on a model's page) or the benchmark column (on a benchmark's page). */
+  model?: boolean;
+  benchmark?: boolean;
+  /** Attributes for the filter script on the claims page. */
+  filter?: boolean;
+}
+const { pairs, model = true, benchmark = true, filter = false } = Astro.props;
+
+const where = (p: ClaimPair) =>
+  [p.board.source === 'epoch' ? 'Epoch AI run' : 'Leaderboard', p.board.setting && p.board.setting !== 'unknown' ? p.board.setting : null, p.board.harness].filter(Boolean).join(', ');
+const r2 = (v: number) => String(Math.round(v * 100) / 100);
+const hasNotes = pairs.some((p) => claimNote(p));
+---
+
+<div class="table-wrap">
+  <table class="t ct" data-sort data-rows={filter ? '' : undefined}>
+    <thead>
+      <tr>
+        {model && <th>Model</th>}
+        {benchmark && <th>Benchmark</th>}
+        <th class="r">Lab says</th>
+        <th class="r">Board says</th>
+        <th class="r">Gap</th>
+        {hasNotes && <th>What differs</th>}
+      </tr>
+    </thead>
+    <tbody>
+      {pairs.map((p) => {
+        const note = claimNote(p);
+        const b = benchById.get(p.benchmark);
+        const boardUrl = p.board.source === 'leaderboard' ? LEADERBOARDS[p.benchmark]?.url : 'https://epoch.ai/benchmarks';
+        return (
+          <tr
+            data-lab={filter ? (p.claim.card.lab ?? '') : undefined}
+            data-gap={filter ? (p.same ? 'same' : p.gap > 0 ? 'higher' : 'lower') : undefined}
+            data-text={filter ? (b?.aliases ?? []).join(' ').toLowerCase() || undefined : undefined}
+          >
+            {model && <td><ModelName id={p.model} /></td>}
+            {benchmark && <td><a href={`/benchmarks/${p.benchmark}/`}>{b?.name ?? p.benchmark}</a></td>}
+            <td class="r" data-v={r2(p.claim.value)}>
+              <a href={p.claim.card.url ?? `/cards/#${p.claim.card.id}`} title={`${p.claim.card.title ?? 'Lab document'}, ${fullDate(p.claim.card.date)}`}>{fmt(p.claim.value, p.unit)}</a>
+              {p.claim.asWritten && <small>{p.claim.asWritten}</small>}
+            </td>
+            <td class="r" data-v={r2(p.board.value)}>
+              {boardUrl ? <a href={boardUrl}>{fmt(p.board.value, p.unit)}</a> : fmt(p.board.value, p.unit)}
+              <small>{where(p)}</small>
+            </td>
+            <td class={`r g ${p.same ? 'same' : p.gap > 0 ? 'up' : 'down'}`} data-v={r2(p.gap)}>{gapText(p)}</td>
+            {hasNotes && <td class="why">{note?.reason}</td>}
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+
+<style is:global>
+  .ct td.r a {
+    color: var(--ink);
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+  }
+  .ct td.r a:hover {
+    text-decoration: underline;
+  }
+  .ct td.r small {
+    display: block;
+    max-width: 22em;
+    margin-left: auto;
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--ink-3);
+    white-space: normal;
+  }
+  .ct .g {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .ct .up {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .ct .down {
+    color: var(--ink-2);
+  }
+  .ct .same {
+    color: var(--ink-3);
+  }
+  .ct .why {
+    font-size: 13px;
+    line-height: 1.4;
+    min-width: 14em;
+    color: var(--ink-2);
+  }
+</style>

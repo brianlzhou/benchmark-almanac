@@ -1,11 +1,13 @@
 ---
 // A model's card: who made it and when, its Epoch Capabilities Index with a strip that places it among
-// every scored model, and three headline results with their ranks. Hairline frame, no fills.
+// every scored model, its Self-Reported Index from the lab's own numbers, and three headline results with
+// their ranks. A model with no ECI score leads with the Self-Reported Index. Hairline frame, no fills.
 import LabMark from './LabMark.astro';
 import { modelSummary, headlineResults, eciValues, labById } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { monthYear, score as fmt } from '../lib/format.ts';
 import { featuredIds } from '../lib/routes.ts';
+import { selfReported } from '../lib/self-reported.ts';
 
 interface Props {
   id: string;
@@ -17,6 +19,8 @@ const m = ms.m;
 const lab = m.lab ? labById.get(m.lab) : undefined;
 const color = labColor(m.lab);
 const heads = headlineResults(id, 3);
+const sr = selfReported.get(id);
+const srTitle = sr ? `Fit to ${sr.n} scores the lab reported. 90% interval ${sr.low.toFixed(1)} to ${sr.high.toFixed(1)}.` : undefined;
 const lo = eciValues[0] ?? 0;
 const hi = eciValues.at(-1) ?? 1;
 const at = (v: number) => `${Math.min(100, Math.max(0, ((v - lo) / (hi - lo)) * 100)).toFixed(2)}%`;
@@ -53,9 +57,28 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
           <b class="me" style={`left:${at(ms.eci.eci)}`} />
         </div>
       </div>
+    ) : sr ? (
+      <div class="eci">
+        <div class="eci-row">
+          <span class="eci-v">{sr.value.toFixed(1)}</span>
+          <span class="eci-r num">
+            #{sr.rank} <span class="muted">of {selfReported.size}</span>
+          </span>
+        </div>
+        <div class="eci-l" title={srTitle}>Self-Reported Index, from the lab's own numbers. No Epoch Capabilities Index score yet.</div>
+      </div>
     ) : (
       <div class="eci none">
         <div class="eci-l">No Epoch Capabilities Index score yet</div>
+      </div>
+    )
+  }
+  {
+    ms.eci && sr && (
+      <div class="sr" title={srTitle}>
+        <span class="sr-l">Self-Reported Index</span>
+        <span class="sr-v num">{sr.value.toFixed(1)}</span>
+        <span class="sr-r num">#{sr.rank} <span class="muted">of {selfReported.size}</span></span>
       </div>
     )
   }
@@ -152,6 +175,26 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
   }
   .none .eci-l {
     margin-top: 0;
+  }
+  /* the Self-Reported Index under the ECI: one quiet line, since it rests on numbers labs chose to show */
+  .sr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: 10px;
+    align-items: baseline;
+    margin-top: -6px;
+    font-size: 13px;
+  }
+  .sr-l {
+    color: var(--ink-3);
+  }
+  .sr-v {
+    font-weight: 500;
+  }
+  .sr-r {
+    min-width: 4.4em;
+    text-align: right;
+    color: var(--ink-2);
   }
   .rug {
     position: relative;

@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import PairScatter, { type PairPt } from '../components/PairScatter.astro';
+import ClaimTable from '../components/ClaimTable.astro';
+import Dropdown, { type Option } from '../components/Dropdown.astro';
+import LabMark from '../components/LabMark.astro';
+import { benchById, labById, modelById } from '../lib/data.ts';
+import { claimPairs, claimStats, claimGroups, labOfPair, gapText, SAME_WITHIN } from '../lib/claims.ts';
+import { score as fmt } from '../lib/format.ts';
+
+const all = claimStats(claimPairs);
+const differ = all.labHigher + all.labLower;
+const pts = (n: number) => `${n < 10 ? n.toFixed(1) : Math.round(n)} ${n === 1 ? 'point' : 'points'}`;
+const pct = claimPairs.filter((p) => p.unit === '%');
+const scatter: PairPt[] = pct.map((p) => ({
+  x: p.claim.value,
+  y: p.board.value,
+  model: p.model,
+  tv: `${fmt(p.claim.value)} against ${fmt(p.board.value)}`,
+  tn: `${modelById.get(p.model)?.name ?? p.model} on ${benchById.get(p.benchmark)?.name ?? p.benchmark}`,
+  ts: `${gapText(p)}. ${p.board.source === 'epoch' ? 'Epoch AI run' : 'Leaderboard'}${p.board.harness ? `, ${p.board.harness}` : ''}`,
+}));
+const byBench = claimGroups((p) => p.benchmark, 4);
+const byLab = claimGroups(labOfPair, 5);
+const labOptions: Option[] = [
+  { value: '', label: 'All labs' },
+  ...[...new Set(claimPairs.map((p) => p.claim.card.lab))]
+    .map((id) => ({ value: id, label: labById.get(id)?.name ?? id, count: claimPairs.filter((p) => p.claim.card.lab === id).length }))
+    .sort((a, b) => a.label.localeCompare(b.label)),
+];
+const gapOptions: Option[] = [
+  { value: '', label: 'Any gap' },
+  { value: 'higher', label: 'Lab number higher', count: claimPairs.filter((p) => !p.same && p.gap > 0).length },
+  { value: 'lower', label: 'Lab number lower', count: claimPairs.filter((p) => !p.same && p.gap < 0).length },
+  { value: 'same', label: 'Same number', count: claimPairs.filter((p) => p.same).length },
+];
+const signed = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)}`;
+---
+
+<Base title="Lab claims next to leaderboards" description={`${all.pairs.toLocaleString('en-US')} scores labs reported for their own models, each beside the same model's score on the benchmark's own leaderboard, with the gap and what differs between the runs.`}>
+  <div class="page">
+    <header class="head">
+      <h1>Lab claims next to leaderboards</h1>
+      <p class="lede">
+        When a lab reports a score for its own model, the benchmark's own leaderboard often lists the same model. We set the two numbers side by side. Most gaps come from how the runs differ: the harness, the effort level, tools, the number of attempts or the task subset. A gap alone doesn't show that a lab overstated anything.
+      </p>
+      <div class="facts">
+        <span><b>{all.pairs.toLocaleString('en-US')}</b> pairs</span>
+        <span><b>{all.benchmarks}</b> benchmarks</span>
+        <span><b>{all.models}</b> models</span>
+        <span><b>{all.same}</b> give the same number</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="sh">
+        <h2>{all.labHigher} of {differ} gaps favor the lab, by {pts(all.medianGap)} at the median</h2>
+        <p>
+          Each dot is one model on one benchmark scored in percent, with the lab's number across and the leaderboard's up. Dots on the dashed line agree. Dots below it are where the lab's number is higher. The {all.same} pairs on the line usually mean one side copied the other, often a leaderboard that lists the lab's own number.
+        </p>
+      </div>
+      <PairScatter points={scatter} xLabel="The lab's number" yLabel="The leaderboard's number" label="Lab claims against leaderboard scores" band={5} height={680} />
+      <p class="key muted">The gray band is within 5 points either way. Colors follow each model's lab, and gray is any lab outside the eight we color.</p>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>By benchmark</h2>
+        <p>Benchmarks with four or more pairs. A benchmark whose labs run their own harness, such as SWE-bench Verified, shows large gaps for that reason alone.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="t" data-sort>
+          <thead>
+            <tr><th>Benchmark</th><th class="r">Pairs</th><th class="r">Same</th><th class="r">Lab higher</th><th class="r">Lab lower</th><th class="r">Median gap</th></tr>
+          </thead>
+          <tbody>
+            {byBench.map((g) => (
+              <tr>
+                <td><a href={`/benchmarks/${g.key}/`}>{benchById.get(g.key)?.name ?? g.key}</a></td>
+                <td class="r">{g.stats.pct}</td>
+                <td class="r muted">{g.stats.same}</td>
+                <td class="r">{g.stats.labHigher}</td>
+                <td class="r">{g.stats.labLower}</td>
+                <td class="r num" data-v={g.stats.medianGap}>{g.stats.labHigher + g.stats.labLower ? signed(g.stats.medianGap) : ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>By lab</h2>
+        <p>Labs with five or more pairs. Labs that report at their highest effort setting, or with their own agent harness, show larger gaps. The median gap counts only the pairs that differ.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="t" data-sort>
+          <thead>
+            <tr><th>Lab</th><th class="r">Pairs</th><th class="r">Same</th><th class="r">Lab higher</th><th class="r">Lab lower</th><th class="r">Median gap</th></tr>
+          </thead>
+          <tbody>
+            {byLab.map((g) => (
+              <tr>
+                <td><a class="lab" href={`/labs/${g.key}/`}><LabMark lab={g.key} size={15} />{labById.get(g.key)?.name ?? g.key}</a></td>
+                <td class="r">{g.stats.pct}</td>
+                <td class="r muted">{g.stats.same}</td>
+                <td class="r">{g.stats.labHigher}</td>
+                <td class="r">{g.stats.labLower}</td>
+                <td class="r num" data-v={g.stats.medianGap}>{g.stats.labHigher + g.stats.labLower ? signed(g.stats.medianGap) : ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>Every pair</h2>
+        <p>
+          The lab's best number for the model, against the leaderboard's best row for it, so both sides are at their best setting. Where a benchmark has no leaderboard, the right side is Epoch AI's own run. Numbers within {SAME_WITHIN} points count as the same, and dollars and ratings within half a unit, since labs often print them whole. A positive gap means the lab's number is better, for lower-is-better tests too. <a href="/methodology/#claims">How we pair them</a>.
+        </p>
+      </div>
+      <div class="filters" data-filter="claims">
+        <input class="field grow" type="search" placeholder="Search models and benchmarks" aria-label="Search models and benchmarks" data-q />
+        <Dropdown filterKey="lab" label="Lab" options={labOptions} search />
+        <Dropdown filterKey="gap" label="Gap" options={gapOptions} />
+        <span class="count muted" data-count>{claimPairs.length.toLocaleString('en-US')} pairs</span>
+      </div>
+      <ClaimTable pairs={claimPairs} filter />
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { wireFilter } from '../scripts/filter.ts';
+  wireFilter('claims');
+</script>
+
+<style>
+  .key {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .lab {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .grow {
+    flex: 1 1 220px;
+  }
+  .count {
+    font-size: 13px;
+    margin-left: auto;
+  }
+</style>

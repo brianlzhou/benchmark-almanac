@@ -6,6 +6,7 @@ import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
 import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import { featuredModels, eciByModel, eciOrder, modelById, modelSummary, labById, labs, EPOCH_SOURCE } from '../../lib/data.ts';
 import { monthYear } from '../../lib/format.ts';
+import { selfReported, SR_FIT } from '../../lib/self-reported.ts';
 
 const eciPts: Pt[] = eciOrder
   .map((id) => ({ id, m: modelById.get(id)!, e: eciByModel.get(id)! }))
@@ -14,6 +15,13 @@ const eciPts: Pt[] = eciOrder
 const byDate = eciPts.slice().sort((a, b) => a.date.localeCompare(b.date));
 const frontier: { date: string; value: number; model: string }[] = [];
 for (const p of byDate) if (!frontier.length || p.value > frontier.at(-1)!.value) frontier.push(p);
+
+const srPts: Pt[] = [...selfReported.entries()]
+  .filter(([id]) => modelById.get(id)?.released)
+  .map(([id, s]) => ({ date: modelById.get(id)!.released!, value: s.value, model: id, source: 'card' as const, low: s.low, high: s.high }));
+const srFrontier: { date: string; value: number; model: string }[] = [];
+for (const p of srPts.slice().sort((a, b) => a.date.localeCompare(b.date))) if (!srFrontier.length || p.value > srFrontier.at(-1)!.value) srFrontier.push(p);
+const srOnly = [...selfReported.keys()].filter((id) => !eciByModel.has(id)).length;
 
 const top = eciOrder.slice(0, 24);
 const rows = featuredModels
@@ -29,17 +37,17 @@ const weightOptions: Option[] = [
 ];
 ---
 
-<Base title="Models" description="Every model with scores here, ranked by the Epoch Capabilities Index.">
+<Base title="Models" description="Every model with scores here, ranked by the Epoch Capabilities Index, with a Self-Reported Index from each lab's own numbers." film="index">
   <div class="page">
     <header class="head">
       <h1>Models</h1>
       <p class="lede">
-        Every model with scores here. We use each lab's own name for its model, plus a snapshot label when a lab shipped several versions under one name.
-        We rank them by Epoch AI's Capabilities Index.
+        We list every model we have scores for and rank them by Epoch AI's Capabilities Index. We use each lab's own name for a model, and add a snapshot label when a lab shipped several versions under one name.
       </p>
       <div class="facts">
         <span><b>{featuredModels.length}</b> models</span>
-        <span><b>{eciByModel.size}</b> with an index score</span>
+        <span><b>{eciByModel.size}</b> with an ECI score</span>
+        <span><b>{selfReported.size}</b> with a Self-Reported Index</span>
         <span><b>{open}</b> with open weights</span>
       </div>
     </header>
@@ -51,6 +59,16 @@ const weightOptions: Option[] = [
       </div>
       <TimeScatter points={eciPts} frontier={frontier} unit="index" label="Epoch Capabilities Index over time" legend={false} height={460} />
       <p class="src">Source: <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a>, {EPOCH_SOURCE.license}.</p>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>The labs' own numbers place {srOnly} more models</h2>
+        <p>
+          The Self-Reported Index puts each model on the ECI's scale using only the scores its lab published, so it covers new releases before independent runs arrive. Labs choose what to report and how to run it, so treat it as a claim. It agrees with the ECI at r = {SR_FIT.pearson.toFixed(2)} across the {SR_FIT.overlap} models that have both. Rings mark numbers labs report about themselves, and the bars are 90% intervals. <a href="/methodology/#self-reported">How we compute it</a>.
+        </p>
+      </div>
+      <TimeScatter points={srPts} frontier={srFrontier} unit="index" label="Self-Reported Index over time" legend={false} height={460} />
     </section>
 
     <section>
@@ -74,9 +92,9 @@ const weightOptions: Option[] = [
         <span class="count muted" data-count>{rows.length} models</span>
       </div>
       <div class="table-wrap">
-        <table class="t" data-rows>
+        <table class="t mt" data-rows data-sort>
           <thead>
-            <tr><th>Model</th><th>Lab</th><th>Released</th><th>Weights</th><th class="r">Index</th><th class="r">Benchmarks</th></tr>
+            <tr><th>Model</th><th>Lab</th><th>Released</th><th>Weights</th><th class="r">ECI</th><th class="r">Self-reported</th><th class="r">Benchmarks</th></tr>
           </thead>
           <tbody>
             {rows.map(({ m, s }) => (
@@ -86,6 +104,7 @@ const weightOptions: Option[] = [
                 <td class="muted num nowrap">{monthYear(m.released)}</td>
                 <td class="muted">{m.weights === 'open' ? 'Open' : m.weights === 'closed' ? 'Closed' : ''}</td>
                 <td class="r">{s.eci ? s.eci.eci.toFixed(1) : ''}</td>
+                <td class="r muted">{selfReported.get(m.id)?.value.toFixed(1) ?? ''}</td>
                 <td class="r muted">{s.results.length}</td>
               </tr>
             ))}
@@ -132,6 +151,21 @@ const weightOptions: Option[] = [
   @media (max-width: 720px) {
     .grid {
       grid-template-columns: 1fr;
+    }
+  }
+  /* the model name carries its lab's mark, so the Lab column goes first on narrow windows */
+  @media (max-width: 900px) {
+    .mt th:nth-child(2),
+    .mt td:nth-child(2) {
+      display: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .mt th:nth-child(4),
+    .mt td:nth-child(4),
+    .mt th:nth-child(6),
+    .mt td:nth-child(6) {
+      display: none;
     }
   }
 </style>

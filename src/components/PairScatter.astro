@@ -1,0 +1,164 @@
+---
+// Two measures of the same thing, one dot per pair: a lab's number against a leaderboard's, or the
+// Self-Reported Index against the Epoch Capabilities Index. Both axes share one scale, and the diagonal marks
+// where the two agree, so a dot's distance from it is the gap. Dots take their lab's color. It renders at a
+// desktop and a phone width, like TimeScatter, and the desktop render carries the tooltips.
+import { modelById } from '../lib/data.ts';
+import { labColor } from '../lib/palette.ts';
+import { linear, niceTicks } from '../lib/scale.ts';
+
+export interface PairPt {
+  x: number;
+  y: number;
+  model: string;
+  /** Tooltip lines: the value line, the name line and the detail line. */
+  tv: string;
+  tn: string;
+  ts: string;
+}
+
+interface Props {
+  points: PairPt[];
+  xLabel: string;
+  yLabel: string;
+  label: string;
+  /** One range for both axes; computed from the data when left out. */
+  domain?: [number, number];
+  unit?: '%' | 'index';
+  /** A band either side of the diagonal, in axis units, drawn as a light fill. */
+  band?: number;
+  /** Models to name beside their dot on the desktop render. */
+  labelIds?: string[];
+  height?: number;
+}
+const { points, xLabel, yLabel, label, domain, unit = '%', band = 0, labelIds = [], height = 520 } = Astro.props;
+
+let [lo, hi] = domain ?? [0, 100];
+if (!domain) {
+  const vs = points.flatMap((p) => [p.x, p.y]);
+  const t = niceTicks(Math.min(...vs), Math.max(...vs), 6);
+  const step = t.length > 1 ? t[1] - t[0] : 1;
+  lo = t[0] > Math.min(...vs) ? t[0] - step : t[0];
+  hi = t.at(-1)! < Math.max(...vs) ? t.at(-1)! + step : t.at(-1)!;
+}
+const ticks = unit === '%' && lo === 0 && hi === 100 ? [0, 20, 40, 60, 80, 100] : niceTicks(lo, hi, 6);
+const tickText = (v: number) => (unit === '%' ? `${v}%` : String(v));
+const sizes = [
+  { key: 'wide', w: 760, h: height, font: 12.5, labels: true },
+  { key: 'narrow', w: 380, h: 380, font: 11, labels: false },
+];
+const pad = { l: 52, r: 16, t: 14, b: 44 };
+const name = (id: string) => modelById.get(id)?.name ?? id;
+// gray dots for labs without a color go first, so colored ones sit on top
+const colored = (lab: string | undefined) => Number(labColor(lab) !== 'var(--lab-other)');
+const pts = points.map((p) => ({ ...p, lab: modelById.get(p.model)?.lab })).sort((a, b) => colored(a.lab) - colored(b.lab));
+---
+
+<figure class="ps">
+  {
+    sizes.map(({ key, w, h, font, labels }) => {
+      const side = Math.min(w - pad.l - pad.r, h - pad.t - pad.b);
+      const lx = linear([lo, hi], [pad.l, pad.l + side]);
+      const ly = linear([lo, hi], [pad.t + side, pad.t]);
+      // one decimal is finer than a pixel, and a thousand dots stay light
+      const x = (v: number) => Math.round(lx(v) * 10) / 10;
+      const y = (v: number) => Math.round(ly(v) * 10) / 10;
+      const W = pad.l + side + pad.r;
+      const H = pad.t + side + pad.b;
+      const placed: { x: number; y: number }[] = [];
+      const named = labels
+        ? pts
+            .filter((p) => labelIds.includes(p.model))
+            .filter((p) => {
+              const at = { x: x(p.x), y: y(p.y) };
+              if (placed.some((q) => Math.abs(q.y - at.y) < 15 && Math.abs(q.x - at.x) < 140)) return false;
+              placed.push(at);
+              return true;
+            })
+        : [];
+      return (
+        <svg class={`only-${key}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} style={`--f:${font}px;max-width:${W}px`}>
+          {ticks.map((v) => (
+            <g>
+              <line x1={x(lo)} x2={x(hi)} y1={y(v)} y2={y(v)} class="grid" />
+              <line x1={x(v)} x2={x(v)} y1={y(lo)} y2={y(hi)} class="grid" />
+              <text x={x(lo) - 8} y={y(v) + 4} class="tick" text-anchor="end">{tickText(v)}</text>
+              <text x={x(v)} y={y(lo) + 18} class="tick" text-anchor="middle">{tickText(v)}</text>
+            </g>
+          ))}
+          {band > 0 && <path class="band" d={`M${x(lo)},${y(lo + band)}L${x(hi - band)},${y(hi)}L${x(hi)},${y(hi)}L${x(hi)},${y(hi - band)}L${x(lo + band)},${y(lo)}L${x(lo)},${y(lo)}Z`} />}
+          <line x1={x(lo)} y1={y(lo)} x2={x(hi)} y2={y(hi)} class="diag" />
+          <text x={x(lo) + side / 2} y={H - 4} class="axl" text-anchor="middle">{xLabel}</text>
+          <text transform={`translate(13 ${pad.t + side / 2}) rotate(-90)`} class="axl" text-anchor="middle">{yLabel}</text>
+          {pts.map((p) => {
+            const c = labColor(p.lab);
+            const tip = key === 'wide' ? { 'data-tv': p.tv, 'data-tn': p.tn, 'data-ts': p.ts } : {};
+            return (
+              <g class:list={{ pt: key === 'wide' }} {...tip}>
+                <circle cx={x(p.x)} cy={y(p.y)} r="4" fill={c} class="dot" />
+                {key === 'wide' && <circle cx={x(p.x)} cy={y(p.y)} r="8" class="hit" />}
+              </g>
+            );
+          })}
+          {named.map((p) => (
+            <text x={x(p.x) + 9} y={y(p.y) + 4} class="lab">{name(p.model)}</text>
+          ))}
+        </svg>
+      );
+    })
+  }
+</figure>
+
+<style is:global>
+  .ps {
+    margin: 0;
+  }
+  .ps svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .ps .grid {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .ps .tick {
+    font: 400 var(--f) / 1 var(--mono);
+    fill: var(--ink-3);
+  }
+  .ps .axl {
+    font: 500 var(--f) / 1 var(--sans);
+    fill: var(--ink-2);
+  }
+  .ps .diag {
+    stroke: var(--ink-3);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 4;
+  }
+  .ps .band {
+    fill: var(--panel);
+    opacity: 0.8;
+  }
+  .ps .dot {
+    stroke: var(--bg);
+    stroke-width: 1.5;
+    opacity: 0.85;
+  }
+  .ps .hit {
+    fill: transparent;
+  }
+  .ps .pt:hover .hit {
+    stroke: var(--ink);
+    stroke-width: 1.2;
+  }
+  .ps .lab {
+    font: 500 var(--f) / 1 var(--sans);
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+</style>
