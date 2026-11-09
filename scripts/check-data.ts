@@ -31,6 +31,7 @@ const CATEGORIES = new Set(
 );
 const ACCESS = new Set(['public', 'public+private-holdout', 'private', 'unknown']);
 const UNITS = new Set(['%', 'elo', 'rating', 'usd', 'minutes', 'score', 'index', 'brier', 'speedup']);
+const CHANGE_KINDS = new Set(['regrade', 'grader', 'subset', 'harness', 'scoring', 'questions', 'policy']);
 // the almanac's own prose uses American spelling. Quoted text (titles, names, as_written) keeps its own.
 const BRITISH =
   /\b(?:(?:behavio|colo|favo|humo|rigo|neighbo|hono|flavo|endeavo)ur\w*|catalogu\w*|licence[sd]?|grey\w*|judgements?|whilst|amongst|learnt|artefacts?|centred|(?:labe|mode|cance|trave|leve|signa|tota|fue)ll(?:ed|ing)|(?:organ|normal|penal|priorit|general|harmon|optim|recogn|summar|special|util|standard|categor|minim|maxim|emphas|real|character|visual|token|final|initial|serial|local|custom|author|memor|formal|stabil|sanit|critic)is(?:e|es|ed|ing|ation|ations))\b/i;
@@ -59,6 +60,24 @@ for (const b of benchmarks) {
   const rf = b.refreshes as { date?: string; label?: string }[] | undefined;
   if (rf && (!Array.isArray(rf) || rf.some((r, i) => !/^\d{4}-\d{2}-\d{2}$/.test(r.date ?? '') || !r.label || (i > 0 && r.date! <= rf[i - 1].date!))))
     fail(`benchmark ${b.id}: refreshes need dated labels in order`);
+  const ch = b.changes as { date?: string; kind?: string; text?: string; url?: string }[] | undefined;
+  if (ch !== undefined) {
+    if (!Array.isArray(ch)) fail(`benchmark ${b.id}: changes must be a list`);
+    else
+      ch.forEach((c, i) => {
+        const at = `benchmark ${b.id}: change ${i + 1}`;
+        if (!/^\d{4}-\d{2}(-\d{2})?$/.test(c.date ?? '')) fail(`${at} needs a date (YYYY-MM-DD or YYYY-MM)`);
+        if (i > 0 && (c.date ?? '') < (ch[i - 1].date ?? '')) fail(`${at} is out of date order`);
+        if (!CHANGE_KINDS.has(c.kind ?? '')) fail(`${at} has unknown kind ${c.kind}`);
+        if (!c.text) fail(`${at} has no text`);
+        if (!/^https?:\/\//.test(c.url ?? '')) fail(`${at} needs a source link`);
+        const tx = c.text ?? '';
+        if (/;/.test(tx)) fail(`${at} has a semicolon`);
+        if (/\s[—–]\s|\s--\s/.test(tx)) fail(`${at} uses a dash as punctuation`);
+        const uk = tx.match(BRITISH);
+        if (uk) fail(`${at} uses British spelling "${uk[0]}"`);
+      });
+  }
   if (b.level && !LEVELS.has(b.level as string)) fail(`benchmark ${b.id}: unknown level ${b.level}`);
   if (b.scoring && !SCORING.has(b.scoring as string)) fail(`benchmark ${b.id}: unknown scoring ${b.scoring}`);
   if (b.format && !FORMATS.has(b.format as string)) fail(`benchmark ${b.id}: unknown format ${b.format}`);
@@ -82,6 +101,24 @@ for (const b of benchmarks) if (b.family) families.set(b.family as string, (fami
 for (const [f, n] of families) if (n < 2) fail(`family ${f} has only one benchmark`);
 for (const b of benchmarks) if (b.family && !b.released) fail(`benchmark ${b.id}: a family member needs a release date`);
 for (const b of benchmarks) if (b.family && !b.version) fail(`benchmark ${b.id}: a family member needs a version label`);
+
+// notes on why a lab claim and a leaderboard differ (data/claim-notes.json)
+if (existsSync(dataPath('claim-notes.json'))) {
+  const notes = readJson<{ model?: string; benchmark?: string; cause?: string; reason?: string; evidence?: string[] }[]>(dataPath('claim-notes.json'));
+  const seenNote = new Set<string>();
+  for (const n of notes) {
+    const at = `claim note ${n.model}|${n.benchmark}`;
+    if (!modelIds.has(n.model ?? '')) fail(`${at}: unknown model`);
+    if (!benchIds.has(n.benchmark ?? '')) fail(`${at}: unknown benchmark`);
+    if (seenNote.has(`${n.model}|${n.benchmark}`)) fail(`${at}: duplicate`);
+    seenNote.add(`${n.model}|${n.benchmark}`);
+    if (!['setup', 'metric'].includes(n.cause ?? '')) fail(`${at}: cause must be setup or metric`);
+    if (!n.reason || /;/.test(n.reason) || /\s[—–]\s|\s--\s/.test(n.reason)) fail(`${at}: reason missing or off style`);
+    const uk = (n.reason ?? '').match(BRITISH);
+    if (uk) fail(`${at}: British spelling "${uk[0]}"`);
+    if (!Array.isArray(n.evidence) || !n.evidence.length || n.evidence.some((u) => !/^https?:\/\//.test(u))) fail(`${at}: needs evidence links`);
+  }
+}
 
 for (const c of cards) {
   if (!labIds.has(c.lab)) fail(`card ${c.id}: unknown lab ${c.lab}`);
@@ -137,9 +174,33 @@ for (const [id, a] of Object.entries(abstracts)) {
   if (!/^\d{4}-\d\d-\d\d$/.test(a.fetched ?? '')) fail(`abstract ${id}: bad fetch date ${a.fetched}`);
 }
 
+// audits (data/audits.json): published reviews that found problems in benchmarks, shown as "Known issues"
+const AUDIT_PROBLEMS = new Set(['broken-grader', 'leaked-answers', 'wrong-labels', 'contamination', 'reward-hacking', 'ignored-input', 'harness-differences', 'underspecified-tasks', 'content-filter']);
+const AUDIT_STATUSES = new Set(['fixed-by-maker', 'fixed-in-fork', 'new-version', 'open', 'disputed']);
+const audits = readJson<{ id: string; title?: string; author?: string; date?: string; url?: string; source?: string; findings?: { benchmark: string; problems?: string[]; summary?: string; status?: string; see?: string; fixes?: { label?: string; url?: string }[]; response?: { text?: string; url?: string } }[] }[]>(dataPath('audits.json'));
+const auditIds = new Set<string>();
+for (const a of audits) {
+  if (auditIds.has(a.id)) fail(`audit ${a.id}: duplicate id`);
+  auditIds.add(a.id);
+  if (!a.title?.trim() || !a.author?.trim()) fail(`audit ${a.id}: no title or author`);
+  if (!/^\d{4}-\d\d-\d\d$/.test(a.date ?? '')) fail(`audit ${a.id}: bad date ${a.date}`);
+  if (!/^https:\/\//.test(a.url ?? '')) fail(`audit ${a.id}: the source must be an https address`);
+  if (a.source !== 'write-up' && a.source !== 'paper') fail(`audit ${a.id}: unknown source kind ${a.source}`);
+  if (!a.findings?.length) fail(`audit ${a.id}: no findings`);
+  for (const f of a.findings ?? []) {
+    const at = `audit ${a.id}, ${f.benchmark}`;
+    if (!benchIds.has(f.benchmark)) fail(`${at}: unknown benchmark`);
+    if (f.see && !benchIds.has(f.see)) fail(`${at}: unknown benchmark in see: ${f.see}`);
+    if (!f.problems?.length || f.problems.some((p) => !AUDIT_PROBLEMS.has(p))) fail(`${at}: unknown or missing problem kind ${f.problems}`);
+    if (!AUDIT_STATUSES.has(f.status ?? '')) fail(`${at}: unknown status ${f.status}`);
+    if (!f.summary?.trim()) fail(`${at}: no summary`);
+    for (const x of [...(f.fixes ?? []), ...(f.response ? [f.response] : [])]) if (!/^https:\/\//.test(x.url ?? '')) fail(`${at}: a link is not an https address`);
+  }
+}
+
 if (warn.length) console.log(`${warn.length} warnings, for example:\n  ${warn.slice(0, 5).join('\n  ')}`);
 if (errors.length) {
   console.error(`${errors.length} errors:\n  ${errors.slice(0, 50).join('\n  ')}`);
   process.exit(1);
 }
-console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} launch posts, ${systemCards.length} system cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores, ${Object.keys(abstracts).length} paper abstracts.`);
+console.log(`data/ is consistent: ${labs.length} labs, ${models.length} models, ${benchmarks.length} benchmarks, ${cards.length} launch posts, ${systemCards.length} system cards, ${epoch.rows.length} Epoch scores, ${boards.rows.length} leaderboard scores, ${Object.keys(abstracts).length} paper abstracts, ${audits.length} audits.`);
