@@ -149,11 +149,17 @@ export function formOf(labels: string[], title: string): Kind | undefined {
 export function plain(s: string | undefined, max = 200): string | undefined {
   if (!s) return undefined;
   const t = s
-    .replace(/[\u0000-\u001f\u007f​-‏ -‮⁦-⁩]/g, ' ')
+    .replace(/[\u0000-\u001f\u007f\u200b-\u200f\u2028-\u202e\u2066-\u2069]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
   if (!t || t.length > max) return undefined;
   return t;
+}
+
+/** A name: letters, digits, spaces and the punctuation names use. No backticks, quotes, $, braces or angle brackets. */
+export function nameText(s: string | undefined, max = 120): string | undefined {
+  const t = plain(s, max);
+  return t && /^[\p{L}\p{N}\p{M} .,:'’&+\-–()\/!?_#%²]+$/u.test(t) ? t : undefined;
 }
 
 /** Prose in the house style: sentences, no semicolons, no dashes as punctuation, no middle dots. */
@@ -333,6 +339,15 @@ const FIX_LABEL: Record<string, string> = { 'fixed-by-maker': "The maker's fix",
 
 const noPr = (kind: Kind | 'unknown', comment: string): Outcome => ({ kind, action: 'comment', changes: [], todo: [], files: {}, comment });
 
+/** Inserts `item` before the first element it sorts ahead of, keeping a sorted list sorted. */
+export function insertSorted<T>(list: T[], item: T, ahead: (a: T, b: T) => boolean): T[] {
+  const i = list.findIndex((x) => ahead(item, x));
+  return i < 0 ? [...list, item] : [...list.slice(0, i), item, ...list.slice(i)];
+}
+// benchmarks.json is sorted by lowercase name, audits newest first, reviewed.json's added list newest first
+const byName = (a: Benchmark, b: Benchmark) => a.name.toLowerCase() < b.name.toLowerCase();
+const newestFirst = (a: { date: string; id: string }, b: { date: string; id: string }) => a.date > b.date || (a.date === b.date && a.id > b.id);
+
 function uniqueId(base: string, taken: Set<string>): string {
   const b = base.slice(0, 80).replace(/-+$/, '') || 'benchmark';
   if (!taken.has(b)) return b;
@@ -340,9 +355,9 @@ function uniqueId(base: string, taken: Set<string>): string {
 }
 
 function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: string): Outcome {
-  const base = plain(f.get('Name'), 120);
-  if (!base) return noPr('benchmark', 'The bot could not read a name of 120 characters or fewer, so it opened no pull request. A maintainer will add this benchmark by hand.');
-  const version = plain(f.get('Version'), 30);
+  const base = nameText(f.get('Name'), 120);
+  if (!base) return noPr('benchmark', 'The bot could not read the name as plain text of 120 characters or fewer, so it opened no pull request. A maintainer will add this benchmark by hand.');
+  const version = nameText(f.get('Version'), 30);
   const name = version && !base.toLowerCase().includes(version.toLowerCase()) ? `${base} ${version}` : base;
   const known = findBenchmark(name, data).record ?? findBenchmark(base, data).record;
   if (known && (!version || known.name.toLowerCase().includes(version.toLowerCase())))
@@ -357,7 +372,7 @@ function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: 
   const description = prose(f.get('What it tests'), 600);
   if (description) rec.description = description;
   else todo.push('Write a description. The form gave none the bot could use.');
-  const org = plain(f.get('Made by'), 160);
+  const org = nameText(f.get('Made by'), 160);
   if (org) rec.org = org;
   const released = month(f.get('Released'));
   if (released) rec.released = released;
@@ -394,7 +409,7 @@ function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: 
   const license = plain(f.get('License'), 120);
   if (license) todo.push(`The form gives the license ${shown(license)}.`);
 
-  const benchmarks = [...data.benchmarks, rec];
+  const benchmarks = insertSorted(data.benchmarks, rec, byName);
   const changes = [`data/benchmarks.json: new record ${shown(id)}, ${shown(name)}.`];
   // a new version of a cataloged benchmark joins its family when the old one has one
   const replaces = plain(f.get('Replaces'), 300);
@@ -411,7 +426,7 @@ function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: 
     } else todo.push(`The form says it replaces ${shown(replaces)}. Set the family and the successor by hand.`);
   }
   for (const k of Object.keys(rec)) if (k !== 'id' && k !== 'name' && k !== 'added') changes.push(`  ${k}: ${shown(rec[k])}`);
-  const reviewed: Reviewed = { ...data.reviewed, added: [...data.reviewed.added, { id, date: today, via: `Submitted through the benchmark form, issue #${issue.number}.` }] };
+  const reviewed: Reviewed = { ...data.reviewed, added: insertSorted(data.reviewed.added, { id, date: today, via: `Submitted through the benchmark form, issue #${issue.number}.` }, newestFirst) };
   changes.push(`data/reviewed.json: ${shown(id)} listed as added on ${today}.`);
   return {
     kind: 'benchmark',
@@ -449,7 +464,7 @@ function critiqueForm(issue: Issue, f: Map<string, string>, data: Data, today: s
   const fix = https(f.get('Fix'));
   if (fix) finding.fixes = [{ label: FIX_LABEL[status] ?? 'The fix', url: fix }];
 
-  const audits = structuredClone(data.audits);
+  let audits = structuredClone(data.audits);
   const same = audits.find((a) => sameLink(a.url, url));
   const changes: string[] = [];
   if (same) {
@@ -461,14 +476,14 @@ function critiqueForm(issue: Issue, f: Map<string, string>, data: Data, today: s
     // "https://example.org/audit (Example Lab, 2026-11-03)"
     const cite = sourceText.match(/\(([^,()]{2,80}),\s*(\d{4}-\d{2}-\d{2})\)/);
     const host = new URL(url).hostname.replace(/^www\./, '');
-    const owner = host === 'github.com' ? new URL(url).pathname.split('/')[1] : undefined;
+    const owner = host === 'github.com' ? new URL(url).pathname.split('/')[1] || undefined : undefined;
     const author = plain(cite?.[1], 80) ?? owner ?? host;
     const date = cite?.[2] ?? today;
     const fromTitle = plain(issue.title.replace(/^Critique:\s*/i, ''), 160);
     const title = fromTitle && fromTitle.length > 3 ? fromTitle : `${m.record.name} critique`;
     const paper = /(^|\.)(arxiv\.org|openreview\.net|aclanthology\.org|doi\.org)$/.test(host);
     const id = uniqueId(`${slug(author)}-${date}`, new Set(audits.map((a) => a.id)));
-    audits.push({ id, title, author, date, url, source: paper ? 'paper' : 'write-up', findings: [finding] });
+    audits = insertSorted(audits, { id, title, author, date, url, source: paper ? 'paper' : 'write-up', findings: [finding] }, newestFirst);
     changes.push(`data/audits.json: new audit ${shown(id)}, ${shown(title)} by ${shown(author)}, ${date}, with a finding on ${shown(m.record.id)}.`);
     todo.push("Check the audit's title, author and date against the source. The bot took them from the issue title and the Sources line.");
   }
@@ -482,11 +497,11 @@ function critiqueForm(issue: Issue, f: Map<string, string>, data: Data, today: s
 /** Fields a "field: value" line can set, by record kind, and how each value is checked. */
 const SETTABLE: Record<'benchmarks' | 'models' | 'labs', Record<string, (v: string) => string | undefined>> = {
   benchmarks: {
-    name: (v) => plain(v, 120),
-    org: (v) => plain(v, 160),
-    'made by': (v) => plain(v, 160),
+    name: (v) => nameText(v, 120),
+    org: (v) => nameText(v, 160),
+    'made by': (v) => nameText(v, 160),
     released: month,
-    version: (v) => plain(v, 30),
+    version: (v) => nameText(v, 30),
     description: (v) => prose(v, 600),
     paper: https,
     repo: https,
@@ -496,8 +511,8 @@ const SETTABLE: Record<'benchmarks' | 'models' | 'labs', Record<string, (v: stri
     leaderboard: https,
     site: https,
   },
-  models: { name: (v) => plain(v, 120), released: (v) => (/^\d{4}-\d{2}-\d{2}$/.test(v.trim()) ? v.trim() : month(v)) },
-  labs: { name: (v) => plain(v, 120) },
+  models: { name: (v) => nameText(v, 120), released: (v) => (/^\d{4}-\d{2}-\d{2}$/.test(v.trim()) ? v.trim() : month(v)) },
+  labs: { name: (v) => nameText(v, 120) },
 };
 const FIELD_NAME: Record<string, string> = { 'made by': 'org', code: 'repo', data: 'dataset' };
 const LINK_KINDS = new Set(['paper', 'repo', 'dataset', 'leaderboard', 'site']);
