@@ -1,0 +1,44 @@
+# The bug form: something on the site that looks or works wrong. For a wrong value, use correction.yml.
+name: Report a site bug
+description: Something on the site looks broken or doesn't work.
+title: 'Bug: '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a wrong score, date, name or link, use **Correct a record** or **Add or fix a score** instead.
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The page where it happens.
+      placeholder: https://…/benchmarks/swe-bench-verified/
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you saw, and what you expected to see.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: Safari 26 on an iPhone, Chrome 157 on a Mac at 1280 px wide
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      options:
+        - Light
+        - Dark
+        - Both
+        - I don't know
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Drag an image here, if you have one.

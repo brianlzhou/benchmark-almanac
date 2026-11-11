@@ -1,1 +1,13 @@
+# The issue chooser. The forms in this folder cover benchmarks, scores, corrections, critiques, makers, bugs
+# and ideas. A blank issue stays open for anything else.
 blank_issues_enabled: true
+contact_links:
+  - name: How the almanac decides what to include
+    url: https://benchmarks.brianzhou.org/submit/
+    about: The four tests a benchmark must pass, and what happens after you submit one.
+  - name: How scores and indexes are computed
+    url: https://benchmarks.brianzhou.org/methodology/
+    about: Read this before reporting a number that looks different from its source.
+  - name: Report a security problem
+    url: https://github.com/brianlzhou/benchmark-almanac/security/advisories/new
+    about: Report it privately, not in a public issue.

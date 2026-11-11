@@ -6,6 +6,9 @@ dist/
 # Local caches
 .cache/
 
+# Vercel CLI link and prebuilt output
+.vercel/
+
 # Private working material: raw scrapes, bookmark exports, research notes,
 # screenshots. Kept beside the code, never published.
 private/
@@ -19,3 +22,9 @@ private/
 .DS_Store
 .vscode/
 .idea/
+
+# Local coding-agent settings and state
+.claude/
+
+# Local coding-agent settings and state
+.claude/

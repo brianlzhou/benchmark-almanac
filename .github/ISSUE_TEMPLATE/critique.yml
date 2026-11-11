@@ -1,0 +1,89 @@
+# The critique form: a published problem with a benchmark. A reviewer turns each one into a finding in
+# data/audits.json, which the benchmark's page shows under "Known issues". The problem kinds and statuses
+# below match PROBLEMS and STATUSES in src/lib/audits.ts. If you change one there, change it here too.
+name: Log a known critique
+description: Point us to a published problem with a benchmark, such as a broken grader, leaked answers or contamination.
+title: 'Critique: '
+labels: [critique]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A benchmark page lists the problems that published audits found in it. We summarize each finding and credit it to its source, so we need a source we can link: a paper, a write-up, a GitHub issue or the maker's own notes.
+
+        If you found the problem yourself and haven't published it, link the repository, issue or notebook that shows it.
+  - type: input
+    id: benchmark
+    attributes:
+      label: Benchmark
+      description: The benchmark's name and version, or a link to its page on the almanac.
+      placeholder: OfficeQA Pro v2
+    validations:
+      required: true
+  - type: checkboxes
+    id: problems
+    attributes:
+      label: Kind of problem
+      description: Tick every one that applies.
+      options:
+        - label: Broken grader. The grader rejects right answers or accepts wrong ones.
+        - label: Leaked answers. Models can find the answers, for example on the web or in logs.
+        - label: Wrong labels. Some reference answers are wrong.
+        - label: Contamination. Models saw the test, or something close to it, in training.
+        - label: Reward hacking. Models pass by gaming the setup instead of solving the task.
+        - label: Input that does not matter. Models score the same without a part of the input.
+        - label: Harness differences. Scores change with the harness or settings, not the model.
+        - label: Unclear tasks. Tasks leave out details a correct answer depends on.
+        - label: Trips content filters. A prompt sets off a provider's safety filter.
+        - label: Something else, described below.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What the problem is
+      description: Two or three sentences. Say how many tasks it affects, if the source says.
+      placeholder: The regex grader rejects answers with thousands separators, so about 9% of correct answers are scored wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Links to the audit, paper or issue, with who wrote it and when.
+      placeholder: https://example.org/audit (Example Lab, 2026-11-03)
+    validations:
+      required: true
+  - type: textarea
+    id: numbers
+    attributes:
+      label: Numbers
+      description: Any scores the source reports before and after fixing the problem.
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      description: Has anyone fixed it?
+      options:
+        - Still open
+        - Fixed by the maker
+        - Replaced by a new version
+        - Fixed in a copy
+        - Disputed
+        - I don't know
+  - type: input
+    id: fix
+    attributes:
+      label: Fix
+      description: A link to the fix, the new version or the maker's reply, if there is one.
+  - type: dropdown
+    id: role
+    attributes:
+      label: Your connection to it
+      options:
+        - I found the problem
+        - I made or maintain the benchmark
+        - I read about it
+        - None
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else

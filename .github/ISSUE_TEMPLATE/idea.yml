@@ -1,0 +1,25 @@
+# The idea form: a page, chart, filter or data source the site could add.
+name: Suggest an idea
+description: A page, chart, filter or data source you'd like the almanac to have.
+title: 'Idea: '
+labels: [idea]
+body:
+  - type: textarea
+    id: want
+    attributes:
+      label: What you'd like
+      description: What you want to see or do, and on which page.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: The question it would help you answer.
+    validations:
+      required: true
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: Links to a page that does something like it, or a sketch.

@@ -1,0 +1,75 @@
+# The score form: a result we're missing or have wrong. Lab results go to data/cards.json (launch posts) or
+# data/system-cards.json (system cards, model cards and technical reports). Leaderboard results come from the
+# importers, so a missing leaderboard row usually means an importer needs a fix.
+name: Add or fix a score
+description: Tell us about a score a lab or leaderboard published that we're missing or have wrong.
+title: 'Score: '
+labels: [score]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We record scores as their source reports them, with the source's own settings. We need a link to the page or document where the number appears.
+
+        To report a wrong date, name or link instead, use **Correct a record**.
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: The model as its lab names it, with the version or date if there is one.
+      placeholder: Claude Opus 5.5
+    validations:
+      required: true
+  - type: input
+    id: benchmark
+    attributes:
+      label: Benchmark
+      description: The benchmark and its version.
+      placeholder: Terminal-Bench 2.1
+    validations:
+      required: true
+  - type: input
+    id: score
+    attributes:
+      label: Score
+      description: The number and its unit, as the source writes it.
+      placeholder: 74.3%
+    validations:
+      required: true
+  - type: input
+    id: setting
+    attributes:
+      label: Setting
+      description: Reasoning effort, harness, attempts, tools or anything else the source says about the run.
+      placeholder: max effort, Terminus 2 harness, average of 5 runs
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Where it was published
+      options:
+        - The lab's launch post
+        - A system card, model card or technical report
+        - The benchmark's own leaderboard
+        - A paper
+        - Somewhere else
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link to the page or document. For a PDF, give the page or table number below.
+    validations:
+      required: true
+  - type: dropdown
+    id: change
+    attributes:
+      label: Missing or wrong?
+      options:
+        - We don't have it
+        - We have a different number
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
+      description: The table or page number, or what our page shows now.

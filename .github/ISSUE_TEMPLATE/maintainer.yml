@@ -1,0 +1,69 @@
+# The form for a benchmark's makers and maintainers: a results feed the importers can read, and changes to the
+# benchmark's own text. A reviewer adds a feed as an importer in scripts/leaderboards/ and text changes to
+# data/benchmarks.json.
+name: I make or maintain a benchmark
+description: Give us a results file or API to read, or fix how your benchmark is described.
+title: 'Maintainer: '
+labels: [maintainer]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out. We read every leaderboard from its makers' own published data, and we would rather read a file you choose than parse your web page. A CSV, a JSON file, a Hugging Face dataset or an API all work, as long as its terms allow automated reading.
+
+        You can also correct how the almanac describes your benchmark: what it tests, who made it, its links, its versions and its status.
+  - type: input
+    id: benchmark
+    attributes:
+      label: Benchmark
+      description: The benchmark's name and version, or a link to its page on the almanac.
+      placeholder: SWE-bench Verified
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Your connection to it
+      options:
+        - I made it
+        - I help maintain it
+        - I work at the group that runs its leaderboard
+    validations:
+      required: true
+  - type: input
+    id: proof
+    attributes:
+      label: Where we can confirm that
+      description: A page that names you as a maker or maintainer, such as the paper, the repository or the leaderboard. Opening this issue from the project's own GitHub account also works.
+  - type: checkboxes
+    id: wants
+    attributes:
+      label: What you'd like
+      options:
+        - label: Read our results from a file or API
+        - label: Fix or rewrite the description
+        - label: Update links
+        - label: Add a new version, or mark a successor
+        - label: Mark it as retired or no longer maintained
+        - label: Change which score counts as the headline
+  - type: input
+    id: feed
+    attributes:
+      label: Results file or API
+      description: The URL we should read. Say which column or field holds the headline score, and its unit.
+      placeholder: https://example.org/leaderboard.json (field "accuracy", percent)
+  - type: input
+    id: terms
+    attributes:
+      label: Terms for reading it
+      description: The license or terms that cover the results, so we can credit you correctly.
+      placeholder: CC BY 4.0
+  - type: textarea
+    id: text
+    attributes:
+      label: Text changes
+      description: What the page says now, and what it should say. Links help.
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else
