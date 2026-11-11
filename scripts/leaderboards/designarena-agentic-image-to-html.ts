@@ -1,0 +1,16 @@
+// Design Arena: HTML pages an agent builds from an image. People vote between two anonymous results, and the score is the board's Elo.
+// Read through scripts/lib/boards/designarena.ts, which explains the feed, the effort settings and the terms.
+import type { Leaderboard } from './types.ts';
+import { DA_ALIASES, DA_TERMS, daFeed, daRows, type DaBoard } from '../lib/boards/designarena.ts';
+
+const BOARD: DaBoard = { arenaType: 'agents', category: 'agon_html', inputModality: 'image' };
+
+const board: Leaderboard = {
+  benchmark: 'designarena-agentic-image-to-html',
+  url: 'https://www.designarena.ai/leaderboard?section=website&board=agentic-image-to-html',
+  feed: daFeed(BOARD),
+  terms: DA_TERMS,
+  aliases: DA_ALIASES,
+  fetch: () => daRows(BOARD),
+};
+export default board;

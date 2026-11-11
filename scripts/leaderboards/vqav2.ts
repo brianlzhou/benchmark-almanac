@@ -1,9 +1,8 @@
 // VQAv2. visualqa.org runs its leaderboard as the VQA Challenge 2021 on EvalAI (challenge 830), whose
 // public API serves the test-standard board as JSON: per submission the team, the method name, the
 // submission time and four accuracies (yes/no, number, other, overall). Overall (VQA accuracy, 0 to 100)
-// is the board's sort column and the score. Most of the 500+ entries are anonymous student or test teams,
-// so only submissions by a model's own makers are kept (the TEAMS table below), named for the model; the
-// submission time is the run date.
+// is the board's sort column and the score. Preserve every public submission. Recognized makers keep
+// their established model names; other entries retain team/method identities without guessing a model.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -11,6 +10,8 @@ const PAGE = 'https://eval.ai/web/challenges/challenge-page/830/leaderboard/2278
 const FEED = 'https://eval.ai/api/jobs/challenge_phase_split/2278/leaderboard/?page_size=500';
 
 interface Entry {
+  id?: number;
+  submission__id?: number;
   submission__participant_team__team_name: string;
   submission__method_name?: string | null;
   submission__submitted_at?: string;
@@ -40,18 +41,30 @@ const board: Leaderboard = {
   async fetch() {
     const rows: LeaderboardRow[] = [];
     let next: string | null = FEED;
-    for (let page = 0; next && page < 5; page++) {
+    const visited = new Set<string>();
+    for (let page = 0; next && page < 100; page++) {
+      if (visited.has(next) || !next.startsWith('https://eval.ai/api/jobs/challenge_phase_split/2278/leaderboard/')) throw new Error('Unexpected VQA pagination URL');
+      visited.add(next);
+      if (page) await new Promise(resolve => setTimeout(resolve, 1000));
       const data: { next: string | null; results: Entry[] } = await fetchJson(next);
       for (const e of data.results) {
-        const t = TEAMS[e.submission__participant_team__team_name.trim()];
-        const model = typeof t === 'function' ? t((e.submission__method_name ?? '').trim()) : t;
+        const team = e.submission__participant_team__team_name.trim();
+        const method = (e.submission__method_name ?? '').trim();
+        const t = TEAMS[team];
+        const known = typeof t === 'function' ? t(method) : t;
+        const model = known || `${team || 'Unnamed team'} / ${method || 'Unnamed method'}`;
         const score = e.result?.[3];
-        if (!model || typeof score !== 'number') continue;
-        rows.push({ model, score, date: e.submission__submitted_at?.slice(0, 10) });
+        if (!Number.isFinite(score)) continue;
+        const metrics: Record<string, number> = {};
+        ['yesNo', 'number', 'other'].forEach((key, i) => { if (Number.isFinite(e.result[i])) metrics[key] = e.result[i]; });
+        rows.push({ model, score, date: e.submission__submitted_at?.slice(0, 10),
+          setting: known ? undefined : `EvalAI submission ${e.submission__id ?? e.id ?? `${page}-${rows.length}`}`,
+          metrics });
       }
       next = data.next;
     }
-    if (!rows.length) throw new Error('no maker submissions found on the VQA board');
+    if (next) throw new Error('VQA pagination limit exceeded');
+    if (!rows.length) throw new Error('No public submissions found on the VQA board');
     return rows;
   },
 };

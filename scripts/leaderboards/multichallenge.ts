@@ -1,17 +1,23 @@
-// MultiChallenge: Scale's board, read from the "large" tab (MultiChallenge (Large Language Models)), the tab the
-// page opens on. The "small" tab lists small models. The score is the share of conversations passed, in percent.
+// MultiChallenge: both model-size tabs use the same conversations and percentage passed.
+// Read both tabs so the small-model roster is retained alongside the large-model roster.
 import type { Leaderboard } from './types.ts';
-import { SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, scaleEntries, scaleFlight, scaleRows, scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('multichallenge');
-const TAB = 'large';
 
 const board: Leaderboard = {
   benchmark: 'multichallenge',
   url: PAGE,
-  feed: scaleFeed(PAGE, TAB),
-  terms: SCALE_TERMS,
-  aliases: {},
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE, TAB)),
+  feed: `${PAGE} (large and small model tabs in Next.js flight data)`,
+  terms: `${SCALE_TERMS} The almanac credits and links Scale's source.`,
+  aliases: {
+    ...SCALE_ALIASES,
+    'gpt-5.1-2025-11-13-instant': 'gpt-5-1-instant',
+    'gemini-2-0-flash': 'gemini-2-0-flash-feb-2025',
+  },
+  async fetch() {
+    const flight = await scaleFlight(PAGE);
+    return scaleRows([...scaleEntries(flight, 'large'), ...scaleEntries(flight, 'small')]);
+  },
 };
 export default board;

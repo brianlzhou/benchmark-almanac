@@ -20,7 +20,6 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (module "all", all:full)`,
   terms: 'Static data script on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',
-  aliases: {},
   async fetch() {
     const data = jsonAfter<Data>(await fetchText(FEED), 'window.PBX_BLOG_LEADERBOARD =');
     const all = data.modules.find((m) => m.id === 'all');
@@ -30,7 +29,12 @@ const board: Leaderboard = {
       const score = m.metrics['all:full']?.score;
       if (typeof score !== 'number') continue;
       const harness = m.name.match(/\s*\(([^)]+)\)$/);
-      rows.push({ model: harness ? m.name.slice(0, harness.index).trim() : m.name, score, harness: harness?.[1] });
+      const metrics: Record<string, number> = {};
+      for (const module of data.modules) {
+        const result = module.models.find(x => x.name === m.name);
+        for (const [key, value] of Object.entries(result?.metrics ?? {})) if (typeof value.score === 'number') metrics[`${module.id}:${key}`] = value.score;
+      }
+      rows.push({ metrics, model: harness ? m.name.slice(0, harness.index).trim() : m.name, score, harness: harness?.[1] });
     }
     return rows;
   },

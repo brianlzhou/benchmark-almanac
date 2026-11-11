@@ -37,7 +37,7 @@ const board: Leaderboard = {
   benchmark: 'math-vision-mathvision',
   url: PAGE,
   feed: `${PAGE} (static HTML, main leaderboard table, ALL)`,
-  terms: 'Static GitHub Pages site that states no licence or terms; the MATH-V repository is MIT.',
+  terms: 'Static GitHub Pages site that states no license or terms; the MATH-V repository is MIT.',
   aliases: {
     'Gemini 3.0 Flash': 'gemini-3-flash',
     'OpenAI o1': 'o1',
@@ -69,7 +69,12 @@ const board: Leaderboard = {
       const parsed = split(name);
       if (!parsed || score === undefined) continue;
       const date = /^\d{4}-\d\d-\d\d$/.test(r[3]?.text ?? '') ? r[3].text : undefined;
-      rows.push({ ...parsed, score, date });
+      const metrics: Record<string, number> = {};
+      for (let i = 5; i < head.length; i++) {
+        const value = num(r[i]?.text);
+        if (value !== undefined) metrics[head[i]] = value;
+      }
+      rows.push({ ...parsed, score, date, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

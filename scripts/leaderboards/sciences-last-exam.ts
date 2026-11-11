@@ -5,7 +5,7 @@
 // Discover the current content script from the live page rather than pinning its hashed filename.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { jsonAfter } from '../lib/html.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const PAGE = 'https://sciences-last-exam.org/leaderboard';
 interface Result { score: number | null; cost: number | null; time: number | null }
@@ -30,7 +30,10 @@ const board: Leaderboard = {
     const path = page.match(/<script\b[^>]*src="(assets\/data\.[^"]+\.js)"/)?.[1];
     if (!path) throw new Error('SLE content script missing');
     await new Promise(resolve => setTimeout(resolve,1100));
-    const d = jsonAfter<Data>(await fetchText(new URL(path,PAGE).href), 'leaderboard:');
+    const source = await fetchText(new URL(path,PAGE).href);
+    const marker = source.indexOf('leaderboard:');
+    if (marker < 0) throw new Error('SLE leaderboard data missing');
+    const d = jsLiteral<Data>(source, source.indexOf('{', marker));
     const out: LeaderboardRow[] = [];
     for (const m of d.models) {
       const r = d.results.all[m.id];

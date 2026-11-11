@@ -13,6 +13,8 @@ const BASE = 'https://artifactsbenchmark.github.io/';
 interface Perf {
   AVG?: number | null;
   model?: string;
+  IFLEN?: number | null;
+  [key: string]: string | number | null | undefined;
 }
 
 /** The JSON text inside a single-quoted JavaScript string literal that starts at `from`. */
@@ -36,7 +38,15 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${BASE}static/js/main.<hash>.js (data of the "latest" tab)`,
   terms: 'Static GitHub Pages site with no robots.txt and no terms; the ArtifactsBenchmark repository is public and the scores are cited to Tencent Hunyuan.',
-  aliases: {},
+  aliases: {
+    'Claude Sonnet 4 (20250514)': 'claude-sonnet-4',
+    'Claude 3.7 Sonnet (20250219)': 'claude-3-7-sonnet',
+    'Claude 3.5 Sonnet (20241022)': 'claude-3-5-sonnet-october-2024',
+    'Qwen3-235B-A22B-Instruct-2507': 'qwen3-235b-a22b-instruct-jul-2025',
+    'Qwen3-Coder-480B-A35B-Instruct': 'qwen3-coder-480b-a35b',
+    // plain Kimi-K2-Instruct is the July 2025 release (the September update is named 0905)
+    'Kimi K2 Instruct': 'kimi-k2-jul-2025',
+  },
   async fetch() {
     const page = await fetchText(PAGE);
     const src = page.match(/src="\.?\/?(static\/js\/main\.[\w]+\.js)"/)?.[1];
@@ -52,7 +62,10 @@ const board: Leaderboard = {
       const model = p.model?.trim();
       if (!model || typeof p.AVG !== 'number' || p.AVG <= 0) continue;
       if (/\*$/.test(model)) continue;
-      rows.push({ model, score: p.AVG });
+      const metrics = Object.fromEntries(Object.entries(p).filter(([key, value]) =>
+        !['AVG', 'IFLEN', 'model'].includes(key) && typeof value === 'number')) as Record<string, number>;
+      // IFLEN is the board's average generated inference length, in tokens.
+      rows.push({ model, score: p.AVG, tokens: typeof p.IFLEN === 'number' ? p.IFLEN : undefined, metrics });
     }
     if (!rows.length) throw new Error('no rows in the ArtifactsBench latest tab');
     return rows;

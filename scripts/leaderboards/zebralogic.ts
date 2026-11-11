@@ -14,6 +14,13 @@ interface Run {
   'Total Puzzles': number;
 }
 
+/**
+ * Runs the resolver would place on a different release: Gemini experimental builds the registry does not
+ * record, plain Gemini 1.5 names that do not say which snapshot ran, and the April 2024 Command R+ (the
+ * registry has only the August 2024 one).
+ */
+const UNLISTED = new Set(['gemini-1.5-pro-exp-0827', 'gemini-1.5-pro-exp-0801', 'gemini-1.5-flash-exp-0827', 'gemini-1.5-pro', 'gemini-1.5-flash', 'command-r-plus']);
+
 const board: Leaderboard = {
   benchmark: 'zebralogic',
   url: 'https://huggingface.co/spaces/allenai/ZebraLogic',
@@ -53,16 +60,22 @@ const board: Leaderboard = {
       const score = Number(r['Puzzle Acc']);
       if (r['Total Puzzles'] !== 1000 || !r.Model || !Number.isFinite(score)) continue;
       let model = r.Model.trim();
+      const unlisted = UNLISTED.has(model);
+      let setting: string | undefined;
       let harness: string | undefined;
       const at = model.match(/@([\w-]+)$/);
       if (at) {
         harness = at[1];
         model = model.slice(0, at.index);
       }
-      // "o1-mini-2024-09-12-v2": a rerun of the same model, kept only once (the first run listed)
-      if (/-v\d$/.test(model) && /\d{4}-\d\d-\d\d-v\d$/.test(model)) continue;
+      // Retain repeat evaluations as separate configurations.
+      const rerun = model.match(/-(v\d+)$/);
+      if (rerun && /\d{4}-\d\d-\d\d-v\d+$/.test(model)) {
+        setting = `rerun ${rerun[1]}`; model = model.slice(0, rerun.index);
+      }
+      if (unlisted) model += " (unlisted snapshot)";
       const effort = model.match(/^(o\d-mini)-\d{4}-\d\d-\d\d-(low|medium|high)$/);
-      rows.push({ model: effort ? effort[1] : model, setting: effort?.[2], harness, score });
+      rows.push({ model: effort ? effort[1] : model, setting: effort?.[2] ?? setting, harness, score });
     }
     if (!rows.length) throw new Error('no full runs in the summary');
     return rows;

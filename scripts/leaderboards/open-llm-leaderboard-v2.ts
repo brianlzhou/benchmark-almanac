@@ -1,8 +1,7 @@
 // Open LLM Leaderboard v2 (Hugging Face, archived in 2025), read from its public results dataset
 // open-llm-leaderboard/contents through the Hugging Face dataset viewer's /rows API. The score is "Average ⬆️",
 // the normalized mean of the six tasks, and the six task scores go in metrics. CO2 is not a cost, so it is not read.
-// The dataset holds about 4,600 entries, most of them community fine-tunes and merges. This reads only the board's
-// "Official Providers" entries plus the model makers listed below, the view a reader of the almanac compares.
+// Read every unflagged entry, including community fine-tunes and merges. Keep untracked models under their source names.
 // The viewer's /filter endpoint fails on this dataset, so the importer pages through /rows and filters itself.
 // Flagged entries are skipped, as the board hides them. Precision is the setting when it is not 16-bit.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -15,7 +14,7 @@ const TASKS = ['IFEval', 'BBH', 'MATH Lvl 5', 'GPQA', 'MUSR', 'MMLU-PRO'];
 const board: Leaderboard = {
   benchmark: 'open-llm-leaderboard-v2',
   url: 'https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard',
-  feed: `${FEED} ("Official Providers" entries and listed makers)`,
+  feed: `${FEED} (all unflagged entries)`,
   terms: 'Public results dataset published by the board on Hugging Face, read through the dataset viewer API.',
   aliases: {},
   async fetch() {
@@ -39,7 +38,6 @@ const board: Leaderboard = {
       for (const { row: r } of page.rows) {
         if (!r.fullname || typeof r['Average ⬆️'] !== 'number' || r.Flagged) continue;
         const owner = String(r.fullname).split('/')[0];
-        if (!r['Official Providers'] && !MAKERS.has(owner)) continue;
         const metrics: Record<string, number> = {};
         for (const k of TASKS) if (typeof r[k] === 'number') metrics[k] = r[k];
         const precision = /^b?float16$/.test(r.Precision ?? '') ? undefined : r.Precision || undefined;

@@ -13,7 +13,7 @@ import { VALS_ALIASES, VALS_TERMS, valsPage } from './vals-index.ts';
 const PAGE = valsPage('rsi_index');
 const TASKS = 4;
 const ROW =
-  /<span class="block truncate"[^>]*>([^<]+)<\/span>\s*<span class="foreground-secondary block text-2xs"[^>]*>([^<]*)<\/span>[\s\S]*?<span class="[^"]*w-44[^"]*"[^>]*>[^<]*<\/span>\s*<span class="[^"]*w-12[^"]*"[^>]*>([^<]*)<\/span>\s*<span class="[^"]*w-16[^"]*"[^>]*>([^<]*)<\/span>/g;
+  /<span class="block [^"]*truncate"[^>]*>([^<]+)<\/span>\s*<span class="foreground-secondary block text-2xs"[^>]*>([^<]*)<\/span>[\s\S]*?<span class="[^"]*w-44[^"]*"[^>]*>[^<]*<\/span>\s*<span class="[^"]*w-12[^"]*"[^>]*>([^<]*)<\/span>\s*<span class="[^"]*w-16[^"]*"[^>]*>([^<]*)<\/span>/g;
 
 const board: Leaderboard = {
   benchmark: 'vals-rsi-index',
@@ -50,8 +50,9 @@ const board: Leaderboard = {
       }
       rows.push({
         model,
-        score: run.scores.reduce((a, b) => a + b, 0) / TASKS,
+        score: Math.round((run.scores.reduce((a, b) => a + b, 0) / TASKS) * 10000) / 10000,
         setting,
+        metrics: Object.fromEntries(run.scores.map((score, i) => [`task${i+1}`, score])),
         harness: run.harness || undefined,
         cost: run.costs.length === TASKS ? run.costs.reduce((a, b) => a + b, 0) / TASKS : undefined,
       });

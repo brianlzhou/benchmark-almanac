@@ -1,7 +1,7 @@
 // RecreationBench (Qwen, RecreationWorld). recreation-bench.cc renders its leaderboard in the browser from
 // data/leaderboard.json: per model the reasoning effort, the estimated cost per task and, over the five
 // platforms, the programmatic score (prog), the VLM judge score (vlm) and their mean (average, 0 to 1). The
-// page ranks by that average, which is the score here (times 100); effort is the setting and the estimated
+// page ranks by that average, which is the score here (times 100). Effort is the setting and the estimated
 // cost per task is kept. Only rows the file marks primary are read (the page's default view).
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -22,6 +22,12 @@ const board: Leaderboard = {
   feed: `${FEED} (overall.average)`,
   terms: 'JSON file the recreation-bench.cc page loads; the site publishes no robots.txt and no terms, and the results come from the RecreationWorld paper repository.',
   aliases: {},
+  chart: {
+    title: 'Cost and benchmark performance',
+    note: 'The board compares its overall average score with estimated API cost per task, assuming 90% cache reads.',
+    x: { key: 'cost', label: 'Mean cost per task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Overall average score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const { models } = await fetchJson<{ models: Model[] }>(FEED);
     const rows: LeaderboardRow[] = [];

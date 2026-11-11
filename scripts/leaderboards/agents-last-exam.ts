@@ -1,59 +1,40 @@
-// Agents' Last Exam v1.1 (122 tasks). agents-last-exam.org/leaderboard loads /api/demo/leaderboard/v1.1:
-// one row per harness, model and reasoning variant across both platforms (the page's "all" view), with
-// passRate (0 to 1, the default sort and the score), avgScore (partial credit), run count and total
-// output tokens. Output tokens per task are the total over the run count. The page writes harness keys
-// such as ale_claw as display names ("ALE-Claw"); the same names are used here. Cost is not published
-// (totalCostUsd is null).
+// Agents' Last Exam v1.0: the legacy page still loads /api/demo/leaderboard.
+// full/overall is the whole 152-task headline cohort. Other splits stay in metrics.
+// Preserve all published API configurations, including historical variants the UI hides.
+// Costs and output tokens are totals divided by runs, not by the task-set size.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
-
-const FEED = 'https://agents-last-exam.org/api/demo/leaderboard/v1.1';
-
+const PAGE = 'https://agents-last-exam.org/leaderboard/v1';
+const FEED = 'https://agents-last-exam.org/api/demo/leaderboard';
 interface Row {
-  harness: string;
-  model: string;
-  harnessVariant?: string;
-  runs?: number;
-  passRate?: number;
-  totalOutputTokens?: number | null;
-  totalCostUsd?: number | null;
+  split: string; model: string; harness: string; harnessVariant?: string | null;
+  passRate: number; avgScore?: number; runs: number; tasks: number; splitTasks: number;
+  totalDurationS?: number | null; totalInputTokens?: number | null;
+  totalOutputTokens?: number | null; totalCostUsd?: number | null;
 }
-
-// the page's own display names for harness keys; other keys are title-cased, as the page does
-const HARNESS: Record<string, string> = {
-  ale_claw: 'ALE-Claw',
-  grok_build: 'Grok Build',
-  kimi_code: 'Kimi Code',
-  openclaw: 'OpenClaw',
-  openclaw_cli: 'OpenClaw',
-  zcode: 'ZCode',
-};
-const harnessName = (k: string) => HARNESS[k] ?? k.split('_').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-
 const board: Leaderboard = {
-  benchmark: 'agents-last-exam',
-  url: 'https://agents-last-exam.org/leaderboard',
-  feed: FEED,
-  terms: 'Public JSON endpoint the leaderboard page loads (robots.txt does not restrict it); the site states the dataset is CC BY 4.0 and the code Apache-2.0.',
-  aliases: {
-    'kimi-3.1-pro': 'kimi-k3-1-pro',
-    'muse-wonder-1.0': 'muse-wonder',
-    'minimax-m3-1-flash': 'minimax-m3-1-flash',
-  },
-  async fetch() {
+  benchmark: 'agents-last-exam', url: PAGE, feed: `${FEED} (full/overall)`,
+  terms: 'The authors publish this JSON for the archived v1.0 page. Code is Apache-2.0 and data CC BY 4.0; the almanac credits and links the source.',
+  aliases: { 'anthropic-claude-fable-5': 'claude-fable-5', 'qwen-qwen3-7-max': 'qwen3-7-max' },
+  async fetch(): Promise<LeaderboardRow[]> {
     const { rows } = await fetchJson<{ rows: Row[] }>(FEED);
+    const key = (r: Row) => `${r.model}|${r.harness}|${r.harnessVariant ?? ''}`;
     const out: LeaderboardRow[] = [];
     for (const r of rows) {
-      if (typeof r.passRate !== 'number') continue;
-      out.push({
-        model: r.model,
-        score: r.passRate * 100,
-        setting: r.harnessVariant?.replace(/^(?:thinking|reasoning)-/, '').split('_')[0] || undefined,
-        harness: harnessName(r.harness),
-        tokens: r.totalOutputTokens && r.runs ? r.totalOutputTokens / r.runs : undefined,
-        cost: r.totalCostUsd && r.runs ? r.totalCostUsd / r.runs : undefined,
-      });
+      if (r.split !== 'full/overall' || !Number.isFinite(r.passRate)) continue;
+      const metrics: Record<string, number> = { runs: r.runs, tasks: r.tasks, splitTasks: r.splitTasks };
+      if (Number.isFinite(r.avgScore)) metrics.partial = r.avgScore! * 100;
+      if (r.runs > 0 && typeof r.totalDurationS === 'number') metrics.latency = r.totalDurationS / r.runs;
+      if (r.runs > 0 && typeof r.totalInputTokens === 'number') metrics.inputTokens = r.totalInputTokens / r.runs;
+      for (const split of rows.filter(s => key(s) === key(r) && s.split !== r.split && s.split !== 'full')) {
+        if (Number.isFinite(split.passRate)) metrics[`${split.split}PassRate`] = split.passRate * 100;
+      }
+      out.push({ model: r.model, score: r.passRate * 100, harness: r.harness,
+        setting: r.harnessVariant?.replace(/^(thinking|reasoning)-/, '') || undefined,
+        cost: r.runs > 0 && typeof r.totalCostUsd === 'number' ? r.totalCostUsd / r.runs : undefined,
+        tokens: r.runs > 0 && typeof r.totalOutputTokens === 'number' ? r.totalOutputTokens / r.runs : undefined, metrics });
     }
+    if (!out.length) throw new Error('ALE v1.0 full/overall rows missing');
     return out;
   },
 };

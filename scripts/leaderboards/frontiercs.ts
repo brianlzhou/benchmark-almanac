@@ -5,6 +5,9 @@
 // program per problem, the paper's setting; score is Score@1, the mean problem score of one attempt) and
 // "Version 1.0 agents" (Harbor agent runs of up to 5 hours keeping the best submission; score is Score, with
 // the agent as the harness). Both are 0 to 100 problem-score means. The Human experts row is skipped.
+// The tabs' other columns go in `metrics`: Avg@5, Score@5 and Elo on the single-attempt tab ("avg5", "score5",
+// "elo"), and Avg steps and Avg tool calls on the agents tab ("steps", "toolCalls"). Avg tokens does not
+// separate output tokens, so it is preserved as metrics.totalTokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, text, num, type Cell } from '../lib/html.ts';
@@ -15,6 +18,19 @@ function nameAndHarness(cell: Cell): { model: string; harness?: string } {
   const inner = cell.html.match(/<span>([\s\S]*?)<\/span>\s*<\/span>/)?.[1] ?? cell.html;
   const [name, small] = inner.split(/<small>/);
   return { model: text(name), harness: small ? text(small) || undefined : undefined };
+}
+
+/** The named columns of one table row as metrics (metrics key -> column header), when they hold numbers. */
+function extras(table: Cell[][], row: Cell[], cols: Record<string, string>): Pick<LeaderboardRow, 'metrics'> {
+  const head = table[0].map((c) => c.text);
+  const metrics: Record<string, number> = {};
+  for (const [k, h] of Object.entries(cols)) {
+    const raw = row[head.indexOf(h)]?.text;
+    const suffix = raw?.match(/^([\d.]+)([KM])$/i);
+    const v = suffix ? Number(suffix[1]) * (suffix[2].toUpperCase() === 'M' ? 1e6 : 1e3) : num(raw);
+    if (head.includes(h) && v !== undefined) metrics[k] = v;
+  }
+  return Object.keys(metrics).length ? { metrics } : {};
 }
 
 const board: Leaderboard = {
@@ -37,13 +53,15 @@ const board: Leaderboard = {
     for (const r of single.slice(1)) {
       const { model } = nameAndHarness(r[1]);
       const score = num(r[iS]?.text);
-      if (!/human/i.test(model) && score !== undefined) rows.push({ model, score });
+      if (/human/i.test(model) || score === undefined) continue;
+      rows.push({ model, score, ...extras(single, r, { avg5: 'Avg@5', score5: 'Score@5', elo: 'Elo' }) });
     }
     const iA = head(agents).indexOf('Score');
     for (const r of agents.slice(1)) {
       const { model, harness } = nameAndHarness(r[1]);
       const score = num(r[iA]?.text);
-      if (score !== undefined) rows.push({ model, score, harness: harness ?? 'Harbor agent' });
+      // one row (Kimi K2.6) names no agent; every row on this tab ran through Harbor
+      if (score !== undefined) rows.push({ model, score, harness: harness ?? 'Harbor agent', ...extras(agents, r, { steps: 'Avg steps', toolCalls: 'Avg tool calls', totalTokens: 'Avg tokens' }) });
     }
     return rows;
   },

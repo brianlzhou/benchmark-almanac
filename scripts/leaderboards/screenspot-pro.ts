@@ -9,7 +9,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = 'https://gui-agent.github.io/grounding-leaderboard/results/screenspot_pro.json';
 
 interface Entry {
-  results?: { overall?: { avg?: number } };
+  results?: { overall?: Record<string, number>; group?: Record<string, Record<string, number>> };
 }
 
 const board: Leaderboard = {
@@ -24,10 +24,18 @@ const board: Leaderboard = {
     for (const [name, e] of Object.entries(data)) {
       const avg = e.results?.overall?.avg;
       if (typeof avg !== 'number') continue;
+      const metrics: Record<string, number> = {};
+      for (const [key, value] of Object.entries(e.results?.overall ?? {})) {
+        if (key !== 'avg' && Number.isFinite(value)) metrics[key] = value * 100;
+      }
+      for (const [group, values] of Object.entries(e.results?.group ?? {})) {
+        if (Number.isFinite(values.avg)) metrics[group] = values.avg * 100;
+      }
       // "GPT5-high (resized)": the reasoning effort as a suffix
       const gpt5 = name.match(/^GPT5-(\w+) \((resized)\)$/);
-      if (gpt5) rows.push({ model: 'GPT-5', setting: gpt5[1], harness: 'resized screenshots', score: avg * 100 });
-      else rows.push({ model: name.trim(), score: avg * 100 });
+      if (gpt5) rows.push({ model: 'GPT-5', setting: gpt5[1], harness: 'resized screenshots', score: avg * 100, metrics });
+      // Preserve the undated baseline without assigning it to a particular GPT-4o snapshot.
+      else rows.push({ model: name === 'GPT-4o' ? 'GPT-4o (snapshot unspecified)' : name.trim(), score: avg * 100, metrics });
     }
     if (!rows.length) throw new Error('no entries in screenspot_pro.json');
     return rows;

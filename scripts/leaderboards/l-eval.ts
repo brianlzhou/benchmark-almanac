@@ -24,16 +24,19 @@ const board: Leaderboard = {
     'llama2-7b-chat': 'llama-2-7b',
     'chatglm2-6b-8k': 'chatglm2-6b',
   },
-  async fetch(): Promise<LeaderboardRow[]> {
+  fetch: () => fetchLEvalRows(),
+};
+export async function fetchLEvalRows(feed = FEED, metric = 'Avg'): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = [];
-    for (const r of parseCsv(await fetchText(FEED))) {
-      const score = num(r.Avg);
+    for (const r of parseCsv(await fetchText(feed))) {
+      const score = num(r[metric]);
       if (!r.Model || score === undefined) continue;
+      const metrics: Record<string, number> = {};
+      for (const [k,v] of Object.entries(r)) if (!['Model',metric,'PE','IDD','Length'].includes(k) && /^\d+(?:\.\d+)?$/.test(v.trim())) metrics[k] = Number(v);
       const ret = r.Model.match(/^(\w+)-(.+?)\s*\(Ret\.\)$/);
-      rows.push(ret ? { model: ret[2], score, harness: `${ret[1]} retrieval` } : { model: r.Model.trim(), score });
+      rows.push(ret ? { model: ret[2], score, metrics, harness: `${ret[1]} retrieval` } : { model: r.Model.trim(), score, metrics });
     }
     if (!rows.length) throw new Error('no L-Eval rows');
     return rows;
-  },
-};
+}
 export default board;

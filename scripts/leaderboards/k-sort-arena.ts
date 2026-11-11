@@ -2,6 +2,7 @@
 // the Space repository: per model the rank, "Score (μ/σ)" written as "30.86 (33.2/0.782)", votes and
 // organization. The leading number is the ranking score, the conservative rating μ − 3σ, and is the
 // score here. The Space's video leaderboard file is not in the repository, so only the image board is read.
+// The μ and σ in parentheses are kept as `mu` and `sigma`.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -24,8 +25,15 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const e of data.sorted_score_list) {
       const model = Object.entries(e).find(([k]) => /Model/.test(k))?.[1];
-      const score = num(String(Object.entries(e).find(([k]) => /Score/.test(k))?.[1] ?? ''));
-      if (typeof model === 'string' && score !== undefined) rows.push({ model, score });
+      const cell = String(Object.entries(e).find(([k]) => /Score/.test(k))?.[1] ?? '');
+      const score = num(cell);
+      if (typeof model !== 'string' || score === undefined) continue;
+      // "30.86 (33.2/0.782)": the rating, then μ/σ
+      const ms = cell.match(/\(\s*(-?[\d.]+)\s*\/\s*([\d.]+)\s*\)/);
+      const metrics: Record<string, number> = ms ? { mu: Number(ms[1]), sigma: Number(ms[2]) } : {};
+      const votes = num(String(Object.entries(e).find(([k]) => /Votes/.test(k))?.[1] ?? ''));
+      if (votes !== undefined) metrics.votes = votes;
+      rows.push({ model, score, metrics });
     }
     if (!rows.length) throw new Error('no K-Sort Arena rows');
     return rows;

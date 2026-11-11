@@ -1,36 +1,12 @@
-// Vision2Web on vision2web-bench.github.io. The page renders data/leaderboard.json, which holds one board
-// per season ("S4-2026": Oct to Dec 2026, each with its own judge and agent versions). Seasons are rerun
-// with new judges and agents, so their scores do not compare, and this importer reads only the newest
-// season (latest last_updated), the one the page opens on. Each entry is named "<model> + <agent>" and
-// "overall" (0 to 100) is the headline.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
-
-const FEED = 'https://vision2web-bench.github.io/data/leaderboard.json';
-
-interface Season {
-  last_updated?: string;
-  models: { name: string; date?: string; overall?: number | null }[];
-}
-
+// Vision2Web S4-2026: fixed judge and agent cohort. Other seasons have separate benchmark records.
+// Pinning the season prevents a future refresh from mixing scores from different judges.
+import type { Leaderboard } from './types.ts';
+import { VISION2WEB_FEED, VISION2WEB_TERMS, vision2webSeason } from '../lib/boards/vision2web-cov5.ts';
 const board: Leaderboard = {
   benchmark: 'vision2web',
   url: 'https://vision2web-bench.github.io/',
-  feed: `${FEED} (newest season)`,
-  terms: 'Static JSON on a GitHub Pages site with no robots.txt and no terms; the scores are cited to the Vision2Web authors.',
-  aliases: {},
-  async fetch() {
-    const { seasons } = await fetchJson<{ seasons: Record<string, Season> }>(FEED);
-    const [name, season] = Object.entries(seasons).sort((a, b) => (b[1].last_updated ?? '').localeCompare(a[1].last_updated ?? ''))[0] ?? [];
-    if (!season) throw new Error('no seasons in the Vision2Web data');
-    const rows: LeaderboardRow[] = [];
-    for (const m of season.models) {
-      if (typeof m.overall !== 'number') continue;
-      const [model, ...agent] = m.name.split(' + ');
-      rows.push({ model: model.trim(), score: m.overall, harness: agent.join(' + ').trim() || undefined, date: m.date });
-    }
-    if (!rows.length) throw new Error(`no rows in Vision2Web season ${name}`);
-    return rows;
-  },
+  feed: `${VISION2WEB_FEED} (S4-2026)`,
+  terms: VISION2WEB_TERMS,
+  fetch: () => vision2webSeason('S4-2026'),
 };
 export default board;

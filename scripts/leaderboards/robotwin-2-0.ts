@@ -32,6 +32,7 @@ const board: Leaderboard = {
         model: e.name.normalize('NFKC').replace(/π/g, 'pi'),
         score: Math.round(((e.easy_mean + e.hard_mean) / 2) * 100) / 100,
         setting: e.setting,
+        metrics: {cleanToClean: e.easy_mean, cleanToRandom: e.hard_mean},
         date: d ? `20${d[1]}-${d[2]}-${d[3]}` : undefined,
       });
     }

@@ -35,7 +35,9 @@ const board: Leaderboard = {
       }
       const score = num(r[5]?.text);
       if (!name || score === undefined || /human/i.test(name)) continue;
-      rows.push({ model: name, score, harness, date: `${m[2]}-${m[3]}-01` });
+      const metrics: Record<string, number> = {};
+      for (const [i,k] of [[6,'hardAccuracy'],[7,'satScore'],[8,'hardSatScore']] as const) { const v = num(r[i]?.text); if (v !== undefined) metrics[k] = v; }
+      rows.push({ model: name, score, harness, date: `${m[2]}-${m[3]}-01`, metrics });
     }
     return rows;
   },

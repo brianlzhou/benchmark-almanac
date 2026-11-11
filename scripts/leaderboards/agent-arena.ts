@@ -1,8 +1,10 @@
 // Arena's Agent Arena, read through Arena's Hugging Face dataset: its "agent" subset, overall category, latest split.
 // The helper lives in lmarena-elo.ts. The agent subset has columns the helper does not read, so this file reads
-// the same rows again and adds them: the median cost per task (cost_per_task_p50, US dollars) as `cost`, the
-// median output tokens per task (output_tokens_per_task_p50) as `tokens`, the score's 95% interval
+// the same rows again and adds them: median cost and output tokens stay in explicitly named metrics,
+// because the shared cost and tokens fields mean averages. Also preserve the score's 95% interval
 // (score_ci_lower, score_ci_upper as metrics.ciLow, ciHigh) and the session count (metrics.sessions).
+// The dataset stores the score as a share (0.2014). Arena and the labs print it as a percentage (20.14%), so the
+// score and its interval are multiplied by 100 here, and the record's unit is %.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRows } from './lmarena-elo.ts';
@@ -16,6 +18,8 @@ interface AgentRow {
   category: string;
   cost_per_task_p50?: number | null;
   output_tokens_per_task_p50?: number | null;
+  observation_count?: number | null;
+  leaderboard_publish_date?: string;
 }
 
 const fin = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
@@ -41,17 +45,37 @@ const board: Leaderboard = {
   async fetch() {
     const rows = await arenaRows('agent');
     const raw = await agentRows().catch(() => [] as AgentRow[]);
+    const signals=new Map<string,Map<string,AgentRow>>();
+    for(const name of ['bash_reliability','praise_complaint','steerability','task_outcome_explicit','tool_hallucination']){
+      await new Promise(r=>setTimeout(r,2100));
+      const url='https://datasets-server.huggingface.co/rows?dataset=lmarena-ai%2Fleaderboard-dataset&config=agent_'+name+'&split=latest&offset=0&length=100';
+      const data=await fetchJson<{rows:{row:AgentRow}[];num_rows_total:number}>(url);
+      if(data.num_rows_total>100)throw new Error('Agent signal needs pagination: '+name);
+      signals.set(name,new Map(data.rows.map(r=>[r.row.model_name,r.row])));
+    }
     // the two reads list the same rows in the same order; a row takes the extras only when its score matches
+    const pct = (v: number) => Math.round(v * 1e6) / 1e4;
     return rows.map((r, i): LeaderboardRow => {
       const a = raw[i];
-      if (!a || a.score !== r.score) return r;
+      const base = { ...r, score: pct(r.score) };
+      if (!a || a.score !== r.score) return base;
       const metrics: Record<string, number> = { ...r.metrics };
-      if (fin(a.score_ci_lower) && fin(a.score_ci_upper)) Object.assign(metrics, { ciLow: a.score_ci_lower, ciHigh: a.score_ci_upper });
+      if (fin(a.score_ci_lower) && fin(a.score_ci_upper)) Object.assign(metrics, { ciLow: pct(a.score_ci_lower), ciHigh: pct(a.score_ci_upper) });
       if (fin(a.session_count)) metrics.sessions = a.session_count;
+      if (fin(a.observation_count)) metrics.observations = a.observation_count;
+      if (fin(a.cost_per_task_p50)) metrics.costPerTaskMedianUsd = a.cost_per_task_p50;
+      if (fin(a.output_tokens_per_task_p50)) metrics.outputTokensPerTaskMedian = a.output_tokens_per_task_p50;
+      for(const [name,table] of signals){
+        const signal=table.get(a.model_name);
+        // Never join a historical signal snapshot to a newer aggregate.
+        if(!signal||signal.leaderboard_publish_date!==a.leaderboard_publish_date)continue;
+        if(fin(signal.score))metrics[name]=pct(signal.score);
+        if(fin(signal.score_ci_lower))metrics[name+'_ciLow']=pct(signal.score_ci_lower);
+        if(fin(signal.score_ci_upper))metrics[name+'_ciHigh']=pct(signal.score_ci_upper);
+        if(fin(signal.observation_count))metrics[name+'_observations']=signal.observation_count;
+      }
       return {
-        ...r,
-        cost: fin(a.cost_per_task_p50) && a.cost_per_task_p50 > 0 ? a.cost_per_task_p50 : undefined,
-        tokens: fin(a.output_tokens_per_task_p50) && a.output_tokens_per_task_p50 > 0 ? a.output_tokens_per_task_p50 : undefined,
+        ...base,
         ...(Object.keys(metrics).length ? { metrics } : {}),
       };
     });

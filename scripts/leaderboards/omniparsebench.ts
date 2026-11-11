@@ -29,7 +29,12 @@ const board: Leaderboard = {
       const score = /\d/.test(c[iHead]) ? num(c[iHead]) : undefined;
       const perK = iCost >= 0 && /\d/.test(c[iCost]) ? num(c[iCost]) : undefined;
       if (!c[iName] || score === undefined) continue;
-      rows.push({ model: c[iName].replace(/\s*\*$/, ''), score, cost: perK !== undefined ? perK / 1000 : undefined });
+      const metrics: Record<string,number> = {};
+      for (const key of ['text','tables','layout','refusals']) {
+        const value=c[head.indexOf(key)];const n=value && /\d/.test(value)?num(value):undefined;
+        if(n!==undefined)metrics[key]=n;
+      }
+      rows.push({ metrics, model: c[iName].replace(/\s*[†‡*]+$/, '').trim(), score, cost: perK !== undefined ? perK / 1000 : undefined });
     }
     return rows;
   },

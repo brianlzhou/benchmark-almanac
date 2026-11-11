@@ -22,10 +22,13 @@ const board: Leaderboard = {
       const model = text(m[1]);
       const harness = text(m[2]);
       if (seen.has(`${model}|${harness}`)) continue;
-      seen.add(`${model}|${harness}`)
-      rows.push({ model, harness, score: Number(m[3]) });
+      seen.add(`${model}|${harness}`);
+      rows.push({ model, harness, score: Number(m[3]),
+        ...(model === 'Claude Fable 5' && /fallback to Claude Opus 4\.8 on refusals/.test(html)
+          ? { setting: 'Claude Opus 4.8 fallback on refusals' } : {}),
+      });
     }
-    if (!rows.length) throw new Error('no overall scores in the JobBench heatmap headers')
+    if (!rows.length) throw new Error('no overall scores in the JobBench heatmap headers');
     return rows;
   },
 };

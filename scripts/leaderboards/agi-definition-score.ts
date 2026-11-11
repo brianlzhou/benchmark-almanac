@@ -9,17 +9,13 @@ import { jsLiteral } from '../lib/html.ts';
 import { CAIS_PAGE, CAIS_TERMS } from './cais-text-capabilities-index.ts';
 
 const DOMAINS = ['K', 'RW', 'M', 'R', 'WM', 'MS', 'MR', 'V', 'A', 'S'];
-const MODELS: Record<string, string> = { gpt4Data: 'GPT-4', gpt5Data: 'GPT-5' };
+const MODELS: Record<string, string> = { gpt4Data: 'GPT-4 (snapshot unspecified)', gpt5Data: 'GPT-5' };
 
 const board: Leaderboard = {
   benchmark: 'agi-definition-score',
   url: `${CAIS_PAGE}#automation`,
   feed: `${CAIS_PAGE} (page JS chunk, AGI radar gpt4Data and gpt5Data, sum of ten domains)`,
   terms: CAIS_TERMS,
-  aliases: {
-    // the paper scores the original GPT-4 (March 2023)
-    'GPT-4': 'gpt-4-mar-2023',
-  },
   async fetch() {
     const html = await fetchText(CAIS_PAGE);
     const chunks = [...new Set([...html.matchAll(/\/_next\/static\/chunks\/[\w-]+\.js/g)].map((m) => m[0]))];

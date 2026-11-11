@@ -4,7 +4,7 @@
 // MultiLang language tabs and Windows are other task sets. The score is resolved / total x 100, as the page
 // computes it. Names read "Agent + Model (effort)": the last "+" part is the model, the rest the harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson, fetchText } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 
 const SITE = 'https://swe-bench-live.github.io';
 
@@ -28,7 +28,9 @@ const board: Leaderboard = {
     'GPT5-Thinking': 'gpt-5',
     'DeepSeek V3': 'deepseek-v3-mar-2025',
   },
-  async fetch(): Promise<LeaderboardRow[]> {
+  fetch: () => fetchLiveRows(),
+};
+export async function fetchLiveRows(set = 'lite'): Promise<LeaderboardRow[]> {
     // the page names its data file in leaderboard.js; fall back to the known name
     const js = await fetchText(`${SITE}/leaderboard.js`).catch(() => '');
     const file = js.match(/fetch\(`([\w.-]+\.jsonl)/)?.[1] ?? 'reports-0605.jsonl';
@@ -39,7 +41,7 @@ const board: Leaderboard = {
       .map((l) => JSON.parse(l) as Report);
     const rows: LeaderboardRow[] = [];
     for (const r of reports) {
-      if (r.set !== 'lite' || !r.total) continue;
+      if (r.set !== set || !r.total) continue;
       const solved = Array.isArray(r.resolved) ? r.resolved.length : Number(r.resolved);
       const parts = r.name.split(/\s+\+\s+/);
       const last = parts.pop()!.trim();
@@ -47,12 +49,12 @@ const board: Leaderboard = {
       rows.push({
         model: last.replace(/\s*\([^)]*\)\s*$/, ''),
         score: (solved / r.total) * 100,
+        metrics: {resolved: solved, tasks: r.total},
         setting: effort?.toLowerCase(),
         harness: parts.join(' + ') || undefined,
         date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date : undefined,
       });
     }
     return rows;
-  },
-};
+}
 export default board;
