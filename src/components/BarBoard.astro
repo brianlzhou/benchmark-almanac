@@ -1,12 +1,12 @@
 ---
-// A ranked leaderboard as horizontal bars: rank, the lab's mark and the model, a bar in the lab's colour
+// A ranked leaderboard as horizontal bars: rank, the lab's mark and the model, a bar in the lab's color
 // from a zero baseline, and the value at its tip. Bars are 14 px with air between rows.
 import type { Score } from '../lib/types.ts';
 import ModelName from './ModelName.astro';
-import { modelById } from '../lib/data.ts';
+import { modelById, sourceLabel } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { score as fmt, monthYear } from '../lib/format.ts';
-import { niceMax } from '../lib/scale.ts';
+import { niceMax, ratingFloor } from '../lib/scale.ts';
 
 interface Props {
   scores: Score[];
@@ -14,26 +14,35 @@ interface Props {
   limit?: number;
   highlight?: string;
   better?: 'higher' | 'lower';
+  /** Draw every row, with the ones past the limit behind a "Show all" button. */
+  all?: boolean;
 }
-const { scores, unit = '%', limit = 15, highlight, better = 'higher' } = Astro.props;
-const rows = scores.slice(0, limit);
+const { scores, unit = '%', limit = 15, highlight, better = 'higher', all = false } = Astro.props;
+const rows = all ? scores : scores.slice(0, limit);
+const more = all && scores.length > limit + 2;
 // keep the highlighted model visible even when it ranks below the cut
 const hi = highlight ? scores.findIndex((s) => s.model === highlight) : -1;
-const extra = hi >= limit ? scores[hi] : undefined;
-const max = unit === '%' && better !== 'lower' ? 100 : niceMax(Math.max(...scores.map((s) => s.value), 1e-9));
-const w = (v: number) => `${Math.max(0.6, (v / max) * 100)}%`;
-const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
+const what = scores.some((s) => !s.model) ? 'entries' : 'models';
+const extra = hi >= limit && !all ? scores[hi] : undefined;
+const rated = (unit === 'elo' || unit === 'rating') && better !== 'lower';
+const top = Math.max(...scores.map((s) => s.value), 1e-9);
+const max = unit === '%' && better !== 'lower' ? 100 : rated ? top : niceMax(top);
+// a rating has no true zero, so its bars start a little below the lowest rating on the board
+const lo = rated ? ratingFloor(scores.map((s) => s.value)) : 0;
+const w = (v: number) => `${Math.max(0.6, ((v - lo) / (max - lo)) * 100)}%`;
+const src = (s: Score) => sourceLabel(s);
 ---
 
-<ol class="bb">
+{lo > 0 && <p class="bb-base">Bars start at {lo.toLocaleString('en-US')}.</p>}
+<ol class="bb" data-bb>
   {
     rows.map((s, i) => (
-      <li class:list={{ hi: s.model === highlight }}>
+      <li class:list={{ hi: !!s.model && s.model === highlight, later: more && i >= limit }}>
         <span class="rk num">{i + 1}</span>
         <span class="who">
-          <ModelName id={s.model} setting={s.setting} />
+          <ModelName id={s.model} setting={s.setting} name={s.name} />
         </span>
-        <span class="track" data-tv={fmt(s.value, unit)} data-tn={modelById.get(s.model)?.name} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}>
+        <span class="track" data-tv={fmt(s.value, unit)} data-tn={modelById.get(s.model)?.name ?? s.name} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}>
           <span class="fill" style={`width:${w(s.value)};background:${labColor(modelById.get(s.model)?.lab)}`} />
           <span class="val num">{fmt(s.value, unit)}</span>
         </span>
@@ -60,8 +69,50 @@ const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' :
     )
   }
 </ol>
+{
+  more && (
+    <button type="button" class="bb-more" data-bb-more aria-expanded="false">
+      Show all {scores.length} {what}
+    </button>
+  )
+}
+
+<script>
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-bb-more]')) {
+    const list = b.previousElementSibling as HTMLElement;
+    const label = b.textContent!.trim();
+    b.addEventListener('click', () => {
+      const open = list.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+      b.textContent = open ? 'Show fewer' : label;
+      if (!open) list.scrollIntoView({ block: 'nearest' });
+    });
+  }
+</script>
 
 <style>
+  .bb-base {
+    margin: -8px 0 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .bb:not(.open) .later {
+    display: none;
+  }
+  .bb-more {
+    margin-top: 12px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font: 500 13.5px/1 var(--sans);
+    cursor: pointer;
+  }
+  .bb-more:hover {
+    background: var(--panel);
+    color: var(--ink);
+  }
   .bb {
     list-style: none;
     margin: 0;

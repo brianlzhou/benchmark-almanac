@@ -6,10 +6,13 @@ import LabMark from '../../components/LabMark.astro';
 import { benchmarks, benchSummary, labById, modelById, benchById } from '../../lib/data.ts';
 import { labShares, closeOuts, closeOutShares } from '../../lib/reigns.ts';
 import ModelName from '../../components/ModelName.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import AreaMark from '../../components/AreaMark.astro';
+import { isNewest, familySize } from '../../lib/counts.ts';
 import { leaderRows } from '../../lib/leaders.ts';
-import { AREA_BY_ID, CATEGORY_NAMES, LEVELS, SUBCATEGORIES, SCORING_BY_ID, LEVEL_BY_ID, areaOf } from '../../lib/taxonomy.ts';
+import { AREA_BY_ID, CATEGORY_NAMES, LEVELS, SUBCATEGORIES, SCORING_BY_ID, LEVEL_BY_ID, areaOf, levelIndex } from '../../lib/taxonomy.ts';
 import { labColor } from '../../lib/palette.ts';
-import { score as fmt, monthYear } from '../../lib/format.ts';
+import { score as fmt, monthYear, lowerLabel } from '../../lib/format.ts';
 import { AS_OF, monthsBetween } from '../../lib/data.ts';
 
 export function getStaticPaths() {
@@ -23,12 +26,26 @@ const area = AREA_BY_ID.get(areaOf(cat))!;
 const all = benchmarks.filter((b) => (b.category ?? 'other') === cat).map((b) => benchSummary(b.id));
 all.sort((a, b) => b.cites.length + b.nScores - (a.cites.length + a.nScores) || a.b.name.localeCompare(b.b.name));
 const ids = all.map((s) => s.b.id);
+// counts fold a benchmark's versions into one, like the Benchmarks table
+const tests = all.filter((s) => isNewest(s.b));
+// every version counts (src/lib/counts.ts). A count that links to the Benchmarks table counts the way the table
+// does: each matching row with all of its versions.
+const asRows = (f: (s: (typeof tests)[number]) => boolean) => tests.filter(f).reduce((n, s) => n + familySize(s.b), 0);
 
-const ind = leaderRows(ids, 'best');
-const claims = leaderRows(ids, 'card');
-const both = ind.length > 0 && claims.length > 0 && ind.some((r) => r.source === 'epoch');
-const main = ind;
-const shares = labShares(main);
+// three ways, as on /leaders/: each benchmark from the one source its page leads with (the default, so these
+// charts agree with the benchmark pages), every independent run, and every score with claims included
+const POOL_VIEWS = [
+  { src: 'headline' as const, label: 'One source per benchmark', share: 'Share of contested time at number one', note: 'Each benchmark counts from the one source its own page leads with: its official leaderboard when that is current, else Epoch AI’s own runs, else labs’ own numbers. We date independent runs by the model’s release and lab reports by when they came out.' },
+  { src: 'independent' as const, label: 'All independent runs', share: 'Share of contested time at number one, independent runs only', note: 'Every independent run: each benchmark’s own leaderboard, Epoch AI’s runs and boards Epoch AI copied, dated by the model’s release. We leave out benchmarks that only labs report.' },
+  { src: 'all' as const, label: 'Include claimed scores', share: 'Share of contested time at number one, claimed scores included', note: 'Every score, including labs’ own numbers and claims Epoch AI collected from reports and papers. Labs pick their own settings, so a claim can beat an independent run of the same model.' },
+].map((v) => {
+  const rows = leaderRows(ids, v.src);
+  return { ...v, rows, shares: labShares(rows), closed: closeOuts(rows), closedBy: closeOutShares(rows) };
+});
+const poolList = POOL_VIEWS.filter((v, k) => k === 0 || v.rows.length > 0);
+const main = POOL_VIEWS[0].rows;
+const switchable = main.length > 0 && poolList.length > 1;
+const shares = POOL_VIEWS[0].shares;
 const top = shares[0];
 const lower = name.charAt(0).toLowerCase() + name.slice(1);
 const headline =
@@ -37,89 +54,96 @@ const headline =
     : `Who held number one in ${lower}`;
 
 const span = monthsBetween('2023-01', AS_OF);
-const closed = closeOuts(main);
-const closedBy = closeOutShares(main);
 const monthsHeld = top ? Math.round(top.share * span) : 0;
 const levels = LEVELS.map((l) => ({ l, xs: all.filter((s) => s.b.level === l.id) })).filter((x) => x.xs.length);
 const unrated = all.filter((s) => !s.b.level);
 const subs = (SUBCATEGORIES[cat] ?? []).map((sc) => ({ sc, xs: all.filter((s) => s.b.subcategory === sc.id) })).filter((x) => x.xs.length);
 const unsorted = all.filter((s) => !s.b.subcategory || !(SUBCATEGORIES[cat] ?? []).some((sc) => sc.id === s.b.subcategory));
 const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
-const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} to ${levels.at(-1)!.l.name.toLowerCase()} level` : 'How hard the tests are';
+const ladderTitle = levels.length > 1 ? `From ${lowerLabel(levels[0].l.name)} to ${lowerLabel(levels.at(-1)!.l.name)} level` : 'How hard the tests are';
+const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmarks/?area=a:${area.id}`, label: area.name }];
 ---
 
-<Base title={name} description={`${name} benchmarks by difficulty and kind, and who held the top score on each over time.`}>
+<Base title={name} description={`${name} benchmarks by difficulty and kind, and who held the top score on each over time.`} crumbs={trail}>
   <div class="page">
     <header class="head">
-      <h1>{name}</h1>
+      <Crumbs items={trail} />
+      <h1 class="with-amark"><AreaMark area={area.id} size={20} />{name}</h1>
       <p class="lede">
-        {all.length} benchmarks in <a href={`/benchmarks/?area=${area.id}`}>{area.name.toLowerCase()}</a>.
-        {levels.length > 1 && ` They run from ${levels[0].l.name.toLowerCase()} level to ${levels.at(-1)!.l.name.toLowerCase()} level.`}
+        We track <a href={`/benchmarks/?area=c:${cat}`}>{all.length} {all.length === 1 ? 'benchmark' : 'benchmarks'}</a> in {lowerLabel(name)}.
+        {levels.length > 1 && ` They run from ${lowerLabel(levels[0].l.name)} level to ${lowerLabel(levels.at(-1)!.l.name)} level.`}
       </p>
       <div class="facts">
-        <span><b>{all.filter((s) => s.status === 'in use').length}</b> in use</span>
+        <a href={`/benchmarks/?area=c:${cat}&status=in-use`}><b>{asRows((s) => s.status === 'in use')}</b> in use</a>
         <span><b>{all.filter((s) => (s.best?.value ?? 0) >= 85 && (s.b.unit ?? '%') === '%').length}</b> past 85%</span>
-        <span><b>{all.filter((s) => s.b.links?.repo).length}</b> with public code</span>
+        <a href={`/benchmarks/?area=c:${cat}&code=yes`}><b>{asRows((s) => !!s.b.links?.repo)}</b> with public code</a>
       </div>
     </header>
 
     {
       main.length > 0 && (
-        <section class="switch">
+        <section class:list={[switchable && 'pools']}>
           <div class="sh-row">
             <div class="sh">
               <h2>{headline}</h2>
               <p>
-                {top && shares.length > 1 && `That is about ${monthsHeld} of the ${span} months since January 2023, averaged over the benchmarks below. `}
-                Each row is a benchmark, easiest level at the top. The shape rises with the best score so far, and its colour shows which lab's model held the top spot. The clock stops, and the row fades, once the best score passes 85%, a new version replaces the benchmark, or no newer model has been tested.
+                {top && shares.length > 1 && `That's about ${monthsHeld} of the ${span} months since January 2023, averaged over the benchmarks below. `}
+                The easiest benchmarks are at the top. Versions of one test share a row, with a dark tick at each new version. We stop the clock, and fade the rest of the row, when the best score passes 85%, or at the newest score if 45 days go by without another.
               </p>
             </div>
-            {both && (
-              <div class="seg" role="radiogroup" aria-label="Scores">
-                <label><input type="radio" name={`src-${cat}`} value="a" checked />Independent where possible</label>
-                <label><input type="radio" name={`src-${cat}`} value="b" />Lab claims</label>
+            {switchable && (
+              <div class="seg" role="radiogroup" aria-label="Scores from">
+                {poolList.map((v, k) => (
+                  <label>
+                    <input type="radio" name="pool" value={v.src} checked={k === 0} />
+                    {v.label}
+                  </label>
+                ))}
+                <script is:inline>
+                  // before the charts below paint: a link with ?pool= picks that pool, so nothing jumps
+                  (function () {
+                    var box = document.currentScript.parentElement;
+                    var q = new URLSearchParams(location.search).get('pool');
+                    var pick = (q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
+                    if (pick) pick.checked = true;
+                    box.addEventListener('change', function (e) {
+                      var u = new URL(location.href);
+                      if (e.target.value === 'headline') u.searchParams.delete('pool');
+                      else u.searchParams.set('pool', e.target.value);
+                      history.replaceState(history.state, '', u);
+                    });
+                  })();
+                </script>
               </div>
             )}
           </div>
-          <div class="when-a">
-            <ReignChart rows={main} />
-            <div class="share">
-              <h3>Share of contested time at number one</h3>
-              <CrownShare shares={shares} />
-            </div>
-            {closed.length > 0 && (
+          {poolList.map((v) => (
+            <div class={`pool-${v.src}`}>
+              <ReignChart rows={v.rows} />
               <div class="share">
-                <h3>
-                  Closed out: {closed.length} {closed.length === 1 ? 'benchmark' : 'benchmarks'} passed 85%
-                </h3>
-                <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
-                <ul class="closed">
-                  {closed.map((c) => (
-                    <li>
-                      <span class="muted num">{monthYear(c.date)}</span>
-                      <a href={`/benchmarks/${c.benchmark}/`}>{benchById.get(c.benchmark)?.name}</a>
-                      <ModelName id={c.model} size={14} />
-                    </li>
-                  ))}
-                </ul>
+                <h3>{v.share}</h3>
+                <CrownShare shares={v.shares} />
               </div>
-            )}
-            <p class="src">
-              {main.some((r) => r.source === 'card')
-                ? 'Independent runs from Epoch AI where it has scored four or more models, placed at each model’s release date. Other rows use the scores labs report in their model cards, placed at each card’s date.'
-                : 'Scores from Epoch AI, placed at each model’s release date.'}
-            </p>
-          </div>
-          {both && (
-            <div class="when-b">
-              <ReignChart rows={claims} />
-              <div class="share">
-                <h3>Share of time at number one, as labs claim it</h3>
-                <CrownShare shares={labShares(claims)} />
-              </div>
-              <p class="src">Scores labs report in their own model cards, placed at each card’s date. Labs pick their own settings, so a claim can beat an independent run of the same model.</p>
+              {v.closed.length > 0 && (
+                <div class="share">
+                  <h3>
+                    Closed out: {v.closed.length} {v.closed.length === 1 ? 'benchmark' : 'benchmarks'} passed 85%
+                  </h3>
+                  <CrownShare shares={v.closedBy} what="Benchmarks closed out since 2023" />
+                  <ul class="closed">
+                    {v.closed.map((c) => (
+                      <li>
+                        <span class="muted num">{monthYear(c.date)}</span>
+                        <a href={`/benchmarks/${c.benchmark}/`}>{benchById.get(c.benchmark)?.name}</a>
+                        <ModelName id={c.model} size={14} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <p class="src">{v.note}</p>
             </div>
-          )}
+          ))}
         </section>
       )
     }
@@ -129,7 +153,7 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
         <section>
           <div class="sh">
             <h2>{ladderTitle}</h2>
-            <p>Benchmarks by who could solve their tasks: from things most adults can do, to open research problems. The bar under each name is its best score.</p>
+            <p>Grouped by who could solve the tasks, from things most adults can do to open research problems. The bar under each name is its best score.</p>
           </div>
           <div class="ladder" style={`--n:${levels.length}`}>
             {levels.map(({ l, xs }) => (
@@ -160,7 +184,7 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
               </div>
             ))}
           </div>
-          {unrated.length > 0 && <p class="src">{unrated.length} more have no level, because it does not apply: arenas, safety evaluations and composite indices.</p>}
+          {unrated.length > 0 && <p class="src">Another {unrated.length} {unrated.length === 1 ? 'has' : 'have'} no level. Levels don’t apply to arenas, safety evaluations or composite indices.</p>}
         </section>
       )
     }
@@ -174,9 +198,9 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
           <div class="kind">
             <h3>{sc.name}</h3>
             <div class="table-wrap">
-              <table class="t">
+              <table class="t" data-sort>
                 <thead>
-                  <tr><th>Benchmark</th><th>Level</th><th>Scored</th><th class="r">Best score</th><th>Status</th></tr>
+                  <tr><th>Benchmark</th><th data-first="asc">Level</th><th>Scored</th><th class="r">Best score</th><th>Status</th></tr>
                 </thead>
                 <tbody>
                   {xs.map((s) => {
@@ -187,9 +211,9 @@ const ladderTitle = levels.length > 1 ? `From ${levels[0].l.name.toLowerCase()} 
                           <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
                           {s.b.description && <span class="desc">{s.b.description}</span>}
                         </td>
-                        <td class="muted nowrap">{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
+                        <td class="muted nowrap" data-v={s.b.level ? String(levelIndex(s.b.level)) : undefined}>{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
                         <td class="muted nowrap">{s.b.scoring ? SCORING_BY_ID.get(s.b.scoring)?.name : ''}</td>
-                        <td class="r nowrap">
+                        <td class="r nowrap" data-v={s.best && (s.b.unit ?? '%') === '%' ? String(s.best.value) : undefined}>
                           {s.best && lead && (
                             <span class="best">
                               <LabMark lab={lead.lab} size={14} />

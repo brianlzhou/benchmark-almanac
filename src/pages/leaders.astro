@@ -8,7 +8,7 @@ import { monthYear } from '../lib/format.ts';
 import { eciReigns, labShares, reignDays, contestedDays, clockStops, closeOuts, closeOutShares } from '../lib/reigns.ts';
 import ModelName from '../components/ModelName.astro';
 import { score as fmt } from '../lib/format.ts';
-import { leaderRows } from '../lib/leaders.ts';
+import { leaderRows, currentRuns } from '../lib/leaders.ts';
 import { AREAS, CATEGORY_NAMES } from '../lib/taxonomy.ts';
 import { labColor } from '../lib/palette.ts';
 
@@ -17,43 +17,81 @@ const eciRows = eci ? [{ ...eci, reigns: eci.reigns.filter((g) => g.end >= '2023
 const eciNow = eci?.reigns.at(-1);
 const changes = eci ? eci.reigns.filter((g) => g.start >= '2023-01-01').length : 0;
 
-// every category's chart, from independent runs where they exist
-const cats = AREAS.flatMap((a) => a.categories.map((c) => ({ a, c })))
-  .map(({ a, c }) => {
-    const ids = benchmarks.filter((b) => b.category === c).map((b) => b.id);
-    const rows = leaderRows(ids, 'best');
-    return { a, c, rows, src: rows.every((r) => r.source === 'card') ? 'card' : 'epoch', shares: labShares(rows, '2023-01-01') };
-  })
-  .filter((x) => x.rows.length);
-const allRows = cats.flatMap((x) => x.rows.filter((r) => r.source === 'epoch'));
-const overall = labShares(allRows, '2023-01-01');
-const lead = overall[0];
+// every category's chart, three ways: each benchmark from the one source its page leads with (the default, so
+// this page and the benchmark pages agree), every independent run, and every score with claims included
+type PoolSource = 'headline' | 'independent' | 'all';
+const POOL_TEXT: Record<PoolSource, { label: string; within: string; short: string }> = {
+  headline: { label: 'One source per benchmark', within: 'each from the one source its page leads with', short: 'One source per benchmark' },
+  independent: { label: 'All independent runs', within: 'independent runs only', short: 'Independent runs only' },
+  all: { label: 'Include claimed scores', within: 'claimed scores included', short: 'Claimed scores included' },
+};
+function view(source: PoolSource) {
+  const cats = AREAS.flatMap((a) => a.categories.map((c) => ({ a, c })))
+    .map(({ a, c }) => {
+      const ids = benchmarks.filter((b) => b.category === c).map((b) => b.id);
+      const rows = leaderRows(ids, source);
+      return { a, c, rows, shares: labShares(rows, '2023-01-01') };
+    })
+    .filter((x) => x.rows.length);
+  const allRows = cats.flatMap((x) => x.rows);
+  const overall = labShares(allRows, '2023-01-01');
+  // the longest contested runs at number one since 2023: each ends where it ended, or where the clock stopped
+  const runs = allRows
+    .flatMap((r) =>
+      r.reigns.map((g) => {
+        const stop = clockStops(r);
+        return { g, b: r.benchmark, months: contestedDays(g, r) / 30.4, start: g.start < '2023-01-01' ? '2023-01-01' : g.start, end: g.end < stop ? g.end : stop };
+      }),
+    )
+    .filter((x) => x.months > 0)
+    .sort((a, b) => b.months - a.months)
+    .slice(0, 8);
+  // close-outs: the model that took each benchmark past 85%
+  const closed = closeOuts(allRows);
+  // runs still going today on the tests labs report most: the default view of the runs section
+  const now = currentRuns(AS_OF, source);
+  return { source, cats, allRows, overall, lead: overall[0], runs, now: { ...now, runs: now.runs.slice(0, 8) }, closed, closedBy: closeOutShares(allRows) };
+}
+const views = [view('headline'), view('independent'), view('all')];
 const pct = (v: number) => `${Math.round(v * 100)}%`;
-// the longest contested runs at number one since 2023: each ends where it ended, or where the clock stopped
-const runs = allRows
-  .flatMap((r) =>
-    r.reigns.map((g) => {
-      const stop = clockStops(r);
-      return { g, b: r.benchmark, months: contestedDays(g, r) / 30.4, start: g.start < '2023-01-01' ? '2023-01-01' : g.start, end: g.end < stop ? g.end : stop };
-    }),
-  )
-  .filter((x) => x.months > 0)
-  .sort((a, b) => b.months - a.months)
-  .slice(0, 8);
-
-// close-outs: the model that took each benchmark past 85%
-const closeRows = cats.flatMap((x) => x.rows);
-const closed = closeOuts(closeRows);
-const closedBy = closeOutShares(closeRows);
+const span = (months: number) => (months < 1 ? 'under a month' : `${Math.round(months)} ${Math.round(months) === 1 ? 'month' : 'months'}`);
 const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) => reignDays(b) - reignDays(a))[0];
 ---
 
-<Base title="Leaders" description="Which model held the top score on each benchmark at each point in time, and which lab it came from.">
-  <div class="page">
+<Base title="Leaders" description="Which model held the top score on each benchmark at each point in time, and which lab it came from." film="reigns">
+  <div class="page pools">
     <header class="head">
       <h1>Who held number one</h1>
       <p class="lede">
-        For each benchmark with enough scores, we track which model had the best score at every point since 2023, and which lab made it. A model takes the top spot on the day its score beats every earlier one. It holds the spot until another model beats it. Ties leave the holder in place.
+        We track which model had the best score on each benchmark at every point since 2023. A model takes the top spot on the day its score beats every earlier one, and keeps it until another model beats it. A tie leaves the holder in place.
+      </p>
+      <div class="pool-switch">
+        <div class="seg" role="radiogroup" aria-label="Scores from">
+          {views.map((v, k) => (
+            <label>
+              <input type="radio" name="pool" value={v.source} checked={k === 0} />
+              {POOL_TEXT[v.source].label}
+            </label>
+          ))}
+        </div>
+        <script is:inline>
+          // before the page below paints: a link with ?pool= picks that pool, so nothing jumps
+          (function () {
+            var box = document.currentScript.parentElement;
+            var q = new URLSearchParams(location.search).get('pool');
+            var pick = (q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
+            if (pick) pick.checked = true;
+            box.addEventListener('change', function (e) {
+              var u = new URL(location.href);
+              if (e.target.value === 'headline') u.searchParams.delete('pool');
+              else u.searchParams.set('pool', e.target.value);
+              history.replaceState(history.state, '', u);
+            });
+          })();
+        </script>
+      </div>
+      <p class="pool-note">
+        By default each benchmark counts from one source, the one its own page leads with: its official leaderboard when that is current, else Epoch AI’s own runs, else labs’ own numbers. Scores Epoch AI collected from labs’ reports count only as claims.
       </p>
     </header>
 
@@ -64,7 +102,7 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
             <h2>The top spot on the capability index has changed hands {changes === 1 ? 'once' : `${changes} times`} since 2023</h2>
             <p>
               {modelById.get(eciNow.model)?.name}, from {labById.get(eciNow.lab ?? '')?.name}, holds it now.
-              {longest && ` The longest run at the top since 2023 lasted ${Math.round(reignDays(longest) / 30.4)} months.`}
+              {longest && ` The longest run at the top since 2023 was ${Math.round(reignDays(longest) / 30.4)} ${Math.round(reignDays(longest) / 30.4) === 1 ? 'month' : 'months'}.`}
             </p>
           </div>
           <ReignChart rows={eciRows} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} from="2023-01-01" />
@@ -73,114 +111,180 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
     }
 
     {
-      lead && (
-        <section>
-          <div class="sh">
-            <h2>
-              {labById.get(lead.lab)?.name} held number one {pct(lead.share)} of the contested time
-            </h2>
-            <p>
-              Across the {allRows.length} benchmarks with independent runs, the share of days each lab’s model had the best score. A benchmark’s clock stops when its best score passes 85%, when a new version replaces it, or after the newest model tested. A saturated test or one nobody runs any more no longer counts.
-            </p>
-          </div>
-          <CrownShare shares={overall} />
-        </section>
-      )
-    }
+      views.map((v) => {
+        const { lead, overall, allRows, runs, now, closed, closedBy, cats } = v;
+        const nowTop = now.runs[0];
+        const everTop = runs[0];
+        return (
+          <div class={`pool-${v.source}`}><div class="view">
+          {
+            lead && (
+              <section>
+                <div class="sh">
+                  <h2>
+                    {labById.get(lead.lab)?.name} held number one {pct(lead.share)} of the contested time
+                  </h2>
+                  <p>
+                    Each lab’s share of the days its models held number one, across {allRows.length} benchmarks with enough scores, {POOL_TEXT[v.source].within}. We count only contested time. A benchmark’s clock stops when its best score passes 85%, or at its newest score once 45 days go by without another. A new version doesn’t stop the old one’s clock while people still test it.
+                  </p>
+                </div>
+                <CrownShare shares={overall} />
+              </section>
+            )
+          }
 
-    {
-      runs.length > 0 && (
-        <section>
-          <div class="sh">
-            <h2>The longest runs at the top</h2>
-            <p>The longest stretches one model held the best independent score, counted from January 2023 and only while the benchmark was contested.</p>
-          </div>
-          <ol class="runs">
-            {runs.map(({ g, b, months, start, end }) => (
-              <li>
-                <span class="rm num">{Math.round(months)}<small> months</small></span>
-                <span class="rw">
-                  <LabMark lab={g.lab} size={16} />
-                  <b>{modelById.get(g.model)?.name}</b> on <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>
-                </span>
-                <span class="rd muted">
-                  {monthYear(start)} to {end >= AS_OF ? 'now' : monthYear(end)}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )
-    }
-
-    {
-      closed.length > 0 && (
-        <section>
-          <div class="sh">
-            <h2>
-              {labById.get(closedBy[0].lab)?.name ?? 'Other labs'} closed out {closedBy[0].count} of {closed.length} benchmarks
-            </h2>
-            <p>
-              A close-out goes to the model that first took a benchmark past 85%. It is counted apart from time at number one, so a lab gets credit for finishing a test without holding it forever.
-            </p>
-          </div>
-          <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
-          <div class="table-wrap closed">
-            <table class="t">
-              <thead>
-                <tr><th>Date</th><th>Benchmark</th><th>Closed out by</th><th class="r">Score</th></tr>
-              </thead>
-              <tbody>
-                {closed.map((c) => (
-                  <tr>
-                    <td class="muted num nowrap">{monthYear(c.date)}</td>
-                    <td><a href={`/benchmarks/${c.benchmark}/`}>{benchById.get(c.benchmark)?.name}</a>{c.source === 'card' && <span class="muted"> lab claim</span>}</td>
-                    <td><ModelName id={c.model} /></td>
-                    <td class="r">{fmt(c.value, '%')}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )
-    }
-
-    <section>
-      <div class="sh">
-        <h2>By category</h2>
-        <p>Each bar splits a category’s time at number one by lab. Open a category for its benchmarks, row by row.</p>
-      </div>
-      <div class="cats">
-        {
-          cats.map(({ c, rows, src, shares }) => (
-            <a class="cat" href={`/categories/${c}/`}>
-              <span class="cn">{CATEGORY_NAMES[c] ?? c}</span>
-              <span class="mini" aria-hidden="true">
-                {shares
-                  .filter((s) => s.share >= 0.01)
-                  .map((s) => (
-                    <i style={`flex:${s.share};background:${labColor(s.lab)}`} data-tn={labById.get(s.lab)?.name ?? 'Other labs'} data-tv={pct(s.share)} />
+          {
+            (runs.length > 0 || now.runs.length > 0) && (
+              <section class="rn">
+                <div class="sh-row">
+                  <div class="sh rn-now">
+                    <h2>{nowTop ? `${modelById.get(nowTop.g.model)?.name} has held number one on ${benchById.get(nowTop.b)?.name} for ${span(nowTop.months)}, the longest run going today` : 'No popular test has a run going today'}</h2>
+                    <p>
+                      Runs still going on the {now.tests} tests the most model releases reported in the last year, {POOL_TEXT[v.source].within}. Each one counts from the day the model took the top spot. We leave out versions nobody has tested in six weeks.
+                    </p>
+                  </div>
+                  <div class="sh rn-ever">
+                    <h2>{everTop ? `${modelById.get(everTop.g.model)?.name} on ${benchById.get(everTop.b)?.name} had the longest run since 2023, ${span(everTop.months)}` : 'The longest runs at the top'}</h2>
+                    <p>{POOL_TEXT[v.source].short}, counted from January 2023 and only while the benchmark was contested.</p>
+                  </div>
+                  <div class="seg" role="radiogroup" aria-label="Which runs">
+                    <label><input type="radio" name={`runs-${v.source}`} value="now" checked />Popular now</label>
+                    <label><input type="radio" name={`runs-${v.source}`} value="ever" />All time</label>
+                  </div>
+                </div>
+                <ol class="runs rn-now">
+                  {now.runs.map(({ g, b, months, start }) => (
+                    <li>
+                      <span class="rm num">{months < 1 ? '<1' : Math.round(months)}<small>{months < 1.5 ? ' month' : ' months'}</small></span>
+                      <span class="rw">
+                        <LabMark lab={g.lab} size={16} />
+                        <b>{modelById.get(g.model)?.name}</b> on <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>
+                      </span>
+                      <span class="rd muted">{monthYear(start)} to now</span>
+                    </li>
                   ))}
-              </span>
-              <span class="cl muted">
-                {labById.get(shares[0]?.lab ?? '')?.name ?? 'Other labs'} {pct(shares[0]?.share ?? 0)}
-              </span>
-              <span class="cm muted">{`${rows.length} ${rows.length === 1 ? 'benchmark' : 'benchmarks'}${src === 'card' ? ', lab claims' : ''}`}</span>
-            </a>
-          ))
-        }
-      </div>
-    </section>
+                </ol>
+                <ol class="runs rn-ever">
+                  {runs.map(({ g, b, months, start, end }) => (
+                    <li>
+                      <span class="rm num">{Math.round(months)}<small>{Math.round(months) === 1 ? ' month' : ' months'}</small></span>
+                      <span class="rw">
+                        <LabMark lab={g.lab} size={16} />
+                        <b>{modelById.get(g.model)?.name}</b> on <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>
+                      </span>
+                      <span class="rd muted">
+                        {monthYear(start)} to {end >= AS_OF ? 'now' : monthYear(end)}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )
+          }
+
+          {
+            closed.length > 0 && (
+              <section>
+                <div class="sh">
+                  <h2>
+                    {labById.get(closedBy[0].lab)?.name ?? 'Other labs'} closed out {closedBy[0].count} of {closed.length} benchmarks
+                  </h2>
+                  <p>
+                    A close-out goes to the model that first took a benchmark past 85%. We count these separately from time at number one.
+                  </p>
+                </div>
+                <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
+                <div class="table-wrap closed">
+                  <table class="t" data-sort>
+                    <thead>
+                      <tr><th>Date</th><th>Benchmark</th><th>Closed out by</th><th class="r">Score</th></tr>
+                    </thead>
+                    <tbody>
+                      {closed.map((c) => (
+                        <tr>
+                          <td class="muted num nowrap">{monthYear(c.date)}</td>
+                          <td><a href={`/benchmarks/${c.benchmark}/`}>{benchById.get(c.benchmark)?.name}</a></td>
+                          <td><ModelName id={c.model} /></td>
+                          <td class="r">{fmt(c.value, '%')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )
+          }
+
+          <section>
+            <div class="sh">
+              <h2>By category</h2>
+              <p>Time at number one in each category, split by lab. Click one to see its benchmarks.</p>
+            </div>
+            <div class="cats">
+              {
+                cats.map(({ c, rows, shares }) => (
+                  <a class="cat" href={`/categories/${c}/`}>
+                    <span class="cn">{CATEGORY_NAMES[c] ?? c}</span>
+                    <span class="mini" aria-hidden="true">
+                      {shares
+                        .filter((s) => s.share >= 0.01)
+                        .map((s) => (
+                          <i style={`flex:${s.share};background:${labColor(s.lab)}`} data-tn={labById.get(s.lab)?.name ?? 'Other labs'} data-tv={pct(s.share)} />
+                        ))}
+                    </span>
+                    <span class="cl muted">
+                      {labById.get(shares[0]?.lab ?? '')?.name ?? 'Other labs'} {pct(shares[0]?.share ?? 0)}
+                    </span>
+                    <span class="cm muted">{`${rows.length} ${rows.length === 1 ? 'benchmark' : 'benchmarks'}`}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+          </div></div>
+        );
+      })
+    }
   </div>
 </Base>
 
 <style>
+  .pool-note {
+    margin: 12px 0 0;
+    max-width: 68ch;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  /* each score view holds a run of sections: it sits apart from the section before it */
+  .view {
+    margin-top: 104px;
+  }
+  @media (max-width: 720px) {
+    .view {
+      margin-top: 72px;
+    }
+  }
   .closed {
     margin-top: 32px;
   }
   .nowrap {
     white-space: nowrap;
+  }
+  /* Popular now / All time: radios inside the section pick which list and header show */
+  .rn .rn-ever {
+    display: none;
+  }
+  .rn:has(input[value='ever']:checked) .rn-now {
+    display: none;
+  }
+  .rn:has(input[value='ever']:checked) .rn-ever {
+    display: block;
+  }
+  .rn:has(input[value='ever']:checked) ol.rn-ever {
+    display: grid;
+  }
+  .rn .seg {
+    flex: none;
   }
   .runs {
     list-style: none;

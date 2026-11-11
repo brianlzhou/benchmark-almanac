@@ -3,12 +3,16 @@ import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import LabMark from '../../components/LabMark.astro';
 import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
-import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById } from '../../lib/data.ts';
+import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById, sourceLabel } from '../../lib/data.ts';
 import { AREAS, areaOf, SECTION_NAMES, SECTION_ORDER } from '../../lib/taxonomy.ts';
 import { modelLine } from '../../lib/findings.ts';
 import { fullDate, score as fmt, shortNum, humanDate } from '../../lib/format.ts';
 import { labColor } from '../../lib/palette.ts';
 import Crumbs from '../../components/Crumbs.astro';
+import ClaimTable from '../../components/ClaimTable.astro';
+import { selfReported } from '../../lib/self-reported.ts';
+import { claimsForModel } from '../../lib/claims.ts';
+import { rivalOf } from '../../lib/compare-data.ts';
 
 export function getStaticPaths() {
   return featuredModels.map((m) => ({ params: { id: m.id } }));
@@ -43,6 +47,18 @@ const myDocs = systemCards
     const inLaunch = new Set(myCards.filter((c) => c.id === d.release).flatMap((c) => c.results.map((r) => r.benchmark)));
     return { d, groups: ordered, extra: d.results.filter((r) => !inLaunch.has(r.benchmark)).length };
   });
+const sr = selfReported.get(m.id);
+const srGap = sr && ms.eci ? sr.value - ms.eci.eci : undefined;
+const srHead = !sr
+  ? ''
+  : srGap === undefined
+    ? `Its lab's numbers put it at ${sr.value.toFixed(1)}, number ${sr.rank} of ${selfReported.size}`
+    : Math.abs(srGap) < 1
+      ? `Its lab's numbers put it at ${sr.value.toFixed(1)}, in line with its ECI`
+      : `Its lab's numbers put it at ${sr.value.toFixed(1)}, ${Math.abs(srGap).toFixed(1)} points ${srGap > 0 ? 'above' : 'below'} its ECI`;
+const myClaims = claimsForModel(m.id);
+// the Compare link pairs it with a model from another lab, from the same months, that shares the most benchmarks
+const rival = rivalOf(m.id);
 const trail = [{ href: '/models/', label: 'Models' }, ...(ms.lab ? [{ href: `/labs/${ms.lab.id}/`, label: ms.lab.name }] : [])];
 // The page's headline finding, then what the page holds. Without a finding, modelLine gives only the name.
 const finding = modelLine(ms);
@@ -61,6 +77,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
           {m.released && <span>Released <b>{humanDate(m.released)}</b></span>}
           {m.family && <span>Family <b>{m.family}</b></span>}
           {m.card && <a href={m.card}>The lab's model card</a>}
+          {rival && <a href={`/compare/?m=${m.id},${rival}`}>Compare with others</a>}
         </div>
         <div class="stats mini">
           <div class="stat">
@@ -106,7 +123,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
                             {unit === '%' && <span class="mini-bar"><span style={`width:${Math.max(1, r.score.value)}%;background:${color}`} /></span>}
                           </td>
                           <td class="r nowrap">{r.rank === 1 ? <b>#1</b> : `#${r.rank}`} <span class="muted">of {r.of}</span></td>
-                          <td class="muted nowrap">{r.score.source === 'leaderboard' ? 'Official leaderboard' : r.score.source === 'epoch' ? 'Epoch AI' : 'Model card'}</td>
+                          <td class="muted nowrap">{sourceLabel(r.score)}</td>
                         </tr>
                       );
                     })}
@@ -115,6 +132,39 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
               </div>
             </div>
           ))}
+        </section>
+      )
+    }
+
+    {
+      sr && (
+        <section>
+          <div class="sh">
+            <h2>{srHead}</h2>
+            <p>
+              The Self-Reported Index fits one score to the {sr.n} capability results {ms.lab?.name ?? 'the lab'} reported for this model, on the scale of the Epoch Capabilities Index. Labs choose which benchmarks to show and how to run them, so read it as the lab's claim, not an independent measurement. The 90% interval runs from {sr.low.toFixed(1)} to {sr.high.toFixed(1)}. <a href="/methodology/#self-reported">How we compute it</a>.
+            </p>
+          </div>
+          <ul class="chips">
+            {sr.scores.map((x) => (
+              <li>
+                <a href={`/benchmarks/${x.benchmark}/`}>{benchById.get(x.benchmark)?.name ?? x.benchmark}</a>
+                <span class="sc">{shortNum(x.value)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      myClaims.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{myClaims.length === 1 ? "Its lab's number next to a leaderboard" : `Its lab's numbers next to ${myClaims.length} leaderboards`}</h2>
+            <p>Where the benchmark's own leaderboard, or Epoch AI's run, also has this model. Gaps mostly come from different harnesses, effort levels and task subsets. <a href="/claims/">Every pair</a>.</p>
+          </div>
+          <ClaimTable pairs={myClaims} model={false} />
         </section>
       )
     }

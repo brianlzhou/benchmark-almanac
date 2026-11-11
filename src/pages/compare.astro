@@ -1,34 +1,30 @@
 ---
 // Compare: two to four models on every benchmark all of them have a score on. The data comes from
 // compare-data.ts, the math and markup from compare.ts, so the server render and the page script draw the same
-// thing. The server draws the default picks. A link with ?m= draws its own picks once their files load.
+// thing. The server draws the default picks. A link with its own picks, sort, filters or view draws them once
+// their files load.
 import Base from '../layouts/Base.astro';
 import { compareIndex, compareFile, defaultPicks } from '../lib/compare-data.ts';
-import { compute, headline, sub, chips, winsList, table, legend, MAX_PICKS, type ModelFile } from '../lib/compare.ts';
+import { compute, headline, sub, chips, winsList, table, filterRow, legend, DEFAULT_STATE, MAX_PICKS, type ModelFile, type State } from '../lib/compare.ts';
 
 const idx = compareIndex();
 const ids = defaultPicks();
 const files = ids.map((id) => compareFile(id)).filter((f): f is ModelFile => !!f);
 const picks = files.map((f) => ({ id: f.id, name: f.name, lab: f.lab }));
-const res = compute(files, 'all', 'labs');
+const st: State = { m: ids, ...DEFAULT_STATE };
+const res = compute(files, st);
 const names = picks.map((p) => p.name);
-const SORT_HOW = {
-  labs: 'Benchmarks the most labs report in their launch posts and system cards come first.',
-  cited: 'Benchmarks that more of these models’ own launch posts and system cards report come first.',
-  gap: 'The widest spread between the best and worst model comes first. Percentages count in points, and other units as a share of the test’s whole range.',
-  name: 'A to Z.',
-};
 ---
 
 <Base
   title="Compare models"
   description="Pick two to four AI models and see every benchmark all of them have a score on, side by side, with the leader of each test and the gaps between them."
 >
-  <div class="page cmp-root" data-cmp data-default={JSON.stringify(ids)} data-sort-how={JSON.stringify(SORT_HOW)}>
+  <div class="page cmp-root" data-cmp data-default={JSON.stringify(ids)}>
     <script is:inline>
-      // Before the first paint: a link with its own picks hides the default view until its files load, so the
-      // default never flashes in its place. The page script removes the mark once it has drawn.
-      if (/[?&](m|src|sort)=/.test(location.search)) document.currentScript.parentElement.classList.add('cmp-wait');
+      // Before the first paint: a link with its own picks, sort, filters or view hides the default view until its
+      // files load, so the default never flashes in its place. The page script removes the mark once it has drawn.
+      if (/[?&](m|src|sort|cited|labs|area|view)=/.test(location.search)) document.currentScript.parentElement.classList.add('cmp-wait');
     </script>
     <header class="head">
       <h1>Compare models</h1>
@@ -58,55 +54,72 @@ const SORT_HOW = {
           />
           <ul id="cmp-list" class="cmp-list" role="listbox" aria-label="Matching models" hidden data-list></ul>
         </div>
-        <p class="cmp-hint" data-hint>Up to {MAX_PICKS} of the {idx.models.length.toLocaleString('en-US')} models with scores here.</p>
+        <p class="cmp-hint">Up to {MAX_PICKS} of the {idx.models.length.toLocaleString('en-US')} models with scores here.</p>
       </div>
-      <div class="cmp-switches">
-        <div class="cmp-sw">
-          <h2 class="cmp-label" id="cmp-src">Scores from</h2>
-          <div class="seg cmp-seg" role="radiogroup" aria-labelledby="cmp-src">
-            <label><input type="radio" name="cmp-src" value="ind" disabled />Independent runs</label>
-            <label><input type="radio" name="cmp-src" value="lab" disabled />Labs' own numbers</label>
-            <label><input type="radio" name="cmp-src" value="all" checked disabled />Both</label>
-          </div>
-        </div>
-        <div class="cmp-sw">
-          <h2 class="cmp-label" id="cmp-sort">Sort by</h2>
-          <div class="seg cmp-seg" role="radiogroup" aria-labelledby="cmp-sort">
-            <label><input type="radio" name="cmp-sort" value="labs" checked disabled />Most reported</label>
-            <label><input type="radio" name="cmp-sort" value="cited" disabled />Cited by these models</label>
-            <label><input type="radio" name="cmp-sort" value="gap" disabled />Biggest gap</label>
-            <label><input type="radio" name="cmp-sort" value="name" disabled />Name</label>
-          </div>
+      <div class="cmp-sw">
+        <h2 class="cmp-label" id="cmp-src">Scores from</h2>
+        <div class="seg cmp-seg" role="radiogroup" aria-labelledby="cmp-src">
+          <label><input type="radio" name="cmp-src" value="ind" disabled />Independent runs</label>
+          <label><input type="radio" name="cmp-src" value="lab" disabled />Labs' own numbers</label>
+          <label><input type="radio" name="cmp-src" value="all" checked disabled />Both</label>
         </div>
       </div>
-      <p class="cmp-how" data-sort-text>{SORT_HOW.labs}</p>
     </section>
 
     <section class="cmp-out" aria-live="polite" data-wait data-out>
-      <div class="sh">
-        <h2 data-head>{headline(res, names)}</h2>
-        <p data-sub>{sub(res)}</p>
+      <div class="sh-row">
+        <div class="sh">
+          <h2 data-head>{headline(res, names, st)}</h2>
+          <p data-sub>{sub(res, st)}</p>
+        </div>
+        <div class="seg cmp-view" role="radiogroup" aria-label="Show as" data-viewsw>
+          <label><input type="radio" name="cmp-view" value="table" checked disabled />Table</label>
+          <label><input type="radio" name="cmp-view" value="bars" disabled />Bars</label>
+        </div>
       </div>
       <div data-wins set:html={winsList(res, picks, idx.labs)} />
-      <div class="cmp-table" data-table set:html={table(res, picks, idx.labs)} />
-      <p class="cmp-legend" data-legend set:html={legend(res)} />
+      <div class="cmp-tools" data-tools>
+        <div class="cmp-filters" data-filters set:html={filterRow(res, st).replace(/<input /g, '<input disabled ')} />
+      </div>
+      <div class="cmp-empty" data-empty hidden>
+        <p>No shared benchmark matches these filters.</p>
+        <button type="button" class="cmp-small" data-reset>Clear the filters</button>
+      </div>
+      <div class="cmp-results" data-results set:html={table(res, picks, idx.labs, st, new Set())} />
+      <p class="cmp-legend" data-legend set:html={legend(res, 'table')} />
       <div class="cmp-share">
         <button type="button" class="cmp-small" data-copy disabled>Copy link to this comparison</button>
         <span class="cmp-status" role="status" data-status></span>
       </div>
     </section>
+
+    <div class="cmp-pop" id="cmp-pop-gap" popover>
+      <p><b>The gap</b> is the spread between the best and the worst of the picked models on a benchmark.</p>
+      <p>For a percentage it is in points: 74.3 against 68.1 is a gap of 6.2. Other tests keep their own unit, such as Elo points.</p>
+      <p>A small gap means the models score about the same on that test. A big gap means the test tells them apart. To sort tests in different units together, a gap counts as points for a percentage and as a share of the test’s whole range otherwise.</p>
+    </div>
+    <div class="cmp-pop" id="cmp-pop-labs" popover>
+      <p><b>Labs</b> is how many labs report the benchmark in their launch posts and system cards, across the whole almanac, not only the labs of these models.</p>
+      <p>A high count means a widely used test. A low one means a niche or new test.</p>
+    </div>
+    <div class="cmp-pop" id="cmp-pop-cited" popover>
+      <p><b>Cited by</b> is how many of the picked models’ own launch posts and system cards report the benchmark.</p>
+      <p>At 0, every score in the row comes from independent runs, such as the benchmark’s own leaderboard or Epoch AI.</p>
+    </div>
   </div>
 </Base>
 
 <script>
-  import { compute, headline, sub, chips, winsList, table, legend, readState, writeState, esc, labMark, MAX_PICKS, type ModelIndex, type ModelFile, type State, type Source, type SortKey, type Pick } from '../lib/compare.ts';
+  import { compute, headline, sub, chips, winsList, table, barsView, detail, filterRow, legend, readState, writeState, esc, labMark, MAX_PICKS, DEFAULT_STATE, type ModelIndex, type ModelFile, type State, type Source, type Cited, type SortCol, type View, type ModelPick, type Result } from '../lib/compare.ts';
 
   const root = document.querySelector<HTMLElement>('[data-cmp]')!;
   const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const defaults: string[] = JSON.parse(root.dataset.default ?? '[]');
-  const SORT_HOW: Record<SortKey, string> = JSON.parse(root.dataset.sortHow ?? '{}');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const EASE = 'cubic-bezier(.2,.8,.2,1)';
+  /** Rows that move or draw in, at most. */
+  const ANIM_CAP = 120;
 
   const shown = () => root.classList.remove('cmp-wait');
 
@@ -115,6 +128,38 @@ const SORT_HOW = {
     if (!r.ok) throw new Error(String(r.status));
     return r.json() as Promise<T>;
   }
+
+  // ---- the info popovers: placed under the button that opened them ----------------------------------
+  let invoker: HTMLElement | null = null;
+  document.addEventListener(
+    'click',
+    (e) => {
+      const b = (e.target as HTMLElement).closest?.<HTMLElement>('[popovertarget^="cmp-pop-"]');
+      if (b) invoker = b;
+    },
+    true,
+  );
+  for (const pop of root.querySelectorAll<HTMLElement>('.cmp-pop')) {
+    pop.addEventListener('beforetoggle', (e) => {
+      if ((e as ToggleEvent).newState !== 'open' || !invoker) return;
+      const r = invoker.getBoundingClientRect();
+      // the body's width leaves out the scrollbar's gutter, which the root's width can include
+      const vw = Math.min(document.documentElement.clientWidth, document.body.clientWidth);
+      const w = Math.min(340, vw - 24);
+      pop.style.width = `${w}px`;
+      pop.style.top = `${Math.round(r.bottom + 8)}px`;
+      pop.style.left = `${Math.round(Math.max(12, Math.min(vw - w - 12, r.left + r.width / 2 - w / 2)))}px`;
+    });
+    pop.addEventListener('toggle', (e) => invoker?.setAttribute('aria-expanded', String((e as ToggleEvent).newState === 'open')));
+  }
+  // a popover's place is fixed to the screen, so it closes when the page scrolls away from its button
+  window.addEventListener(
+    'scroll',
+    () => {
+      for (const pop of root.querySelectorAll<HTMLElement>('.cmp-pop:popover-open')) pop.hidePopover();
+    },
+    { passive: true },
+  );
 
   async function main() {
     let idx: ModelIndex;
@@ -126,10 +171,14 @@ const SORT_HOW = {
       return;
     }
     const byId = new Map(idx.models.map((m) => [m[0], m]));
-    const fallback: State = { m: defaults.filter((id) => byId.has(id)), src: 'all', sort: 'labs' };
+    const fallback: State = { m: defaults.filter((id) => byId.has(id)), ...DEFAULT_STATE };
     let st = readState(location.search, fallback, (id) => byId.has(id));
     const cache = new Map<string, ModelFile>();
+    const open = new Set<string>();
+    let res: Result | null = null;
+    let picks: ModelPick[] = [];
     let showAll = false;
+    let drawn = false;
     let seq = 0;
 
     async function load(ids: string[]): Promise<boolean> {
@@ -145,7 +194,7 @@ const SORT_HOW = {
       }
     }
 
-    const pickOf = (id: string): Pick => {
+    const pickOf = (id: string): ModelPick => {
       const m = byId.get(id)!;
       return { id, name: m[1], lab: m[2] };
     };
@@ -158,47 +207,67 @@ const SORT_HOW = {
       q.disabled = full;
       q.placeholder = full ? 'Remove a model to add another' : st.m.length ? 'Add another model' : 'Add a model';
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-src"]')) r.checked = r.value === st.src;
-      for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-sort"]')) r.checked = r.value === st.sort;
-      $('[data-sort-text]').textContent = SORT_HOW[st.sort] ?? '';
+      for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-view"]')) r.checked = r.value === st.view;
     }
 
     function renderOut(glide = false) {
       const files = st.m.map((id) => cache.get(id)).filter((f): f is ModelFile => !!f);
       if (files.length !== st.m.length) return;
-      const picks = files.map((f) => ({ id: f.id, name: f.name, lab: f.lab }));
-      const res = compute(files, st.src, st.sort);
-      const box = $('[data-table]');
+      picks = files.map((f) => ({ id: f.id, name: f.name, lab: f.lab }));
+      res = compute(files, st);
+      const box = $('[data-results]');
       const before = glide && !reduce.matches ? positions(box) : null;
-      $('[data-head]').textContent = headline(res, picks.map((p) => p.name));
-      $('[data-sub]').textContent = sub(res);
+      for (const id of [...open]) if (!res.rows.some((r) => r.id === id)) open.delete(id);
+      $('[data-head]').textContent = headline(res, picks.map((p) => p.name), st);
+      $('[data-sub]').textContent = sub(res, st);
       $('[data-wins]').innerHTML = winsList(res, picks, idx.labs);
-      box.innerHTML = table(res, picks, idx.labs, showAll);
-      $('[data-legend]').innerHTML = legend(res);
+      const has = res.shared > 0 && picks.length >= 2;
+      $('[data-tools]').hidden = !has;
+      $('[data-viewsw]').hidden = !has;
+      $('[data-filters]').innerHTML = has ? filterRow(res, st) : '';
+      $('[data-empty]').hidden = !(has && !res.rows.length);
+      const firstBars = st.view === 'bars' && !drawn;
+      box.innerHTML = st.view === 'bars' ? barsView(res, picks, idx.labs, st, showAll) : table(res, picks, idx.labs, st, open, showAll);
+      $('[data-legend]').innerHTML = legend(res, st.view);
       $('[data-out]').removeAttribute('aria-busy');
-      if (before) play(box, before);
+      if (firstBars) {
+        drawn = true;
+        if (!reduce.matches) drawIn(box);
+      } else if (before) play(box, before);
       else if (glide) fade(box);
       history.replaceState(null, '', writeState(st));
     }
 
-    // a sort change: each row glides from where it was, and rows new to the view fade in. Capped at 120 rows.
+    // a sort change: each row glides from where it was, and rows new to the view fade in
+    const keyOf = (el: HTMLElement) => el.dataset.id ?? `d:${el.dataset.det}`;
+    const movers = (box: HTMLElement) => box.querySelectorAll<HTMLElement>('tbody > tr:not([hidden]), .cmp-blist > li:not([hidden])');
     function positions(box: HTMLElement): Map<string, number> {
       const out = new Map<string, number>();
-      const rows = box.querySelectorAll<HTMLElement>('tbody tr:not([hidden])');
-      for (let i = 0; i < rows.length && i < 120; i++) out.set(rows[i].dataset.id!, rows[i].getBoundingClientRect().top);
+      const els = movers(box);
+      for (let i = 0; i < els.length && i < ANIM_CAP; i++) out.set(keyOf(els[i]), els[i].getBoundingClientRect().top);
       return out;
     }
     function play(box: HTMLElement, before: Map<string, number>) {
-      const rows = box.querySelectorAll<HTMLElement>('tbody tr:not([hidden])');
-      for (let i = 0; i < rows.length && i < 120; i++) {
-        const tr = rows[i];
-        const was = before.get(tr.dataset.id!);
-        const dy = was === undefined ? 0 : was - tr.getBoundingClientRect().top;
-        if (was === undefined) tr.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
-        else if (Math.abs(dy) > 0.5) tr.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: 360, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      const els = movers(box);
+      for (let i = 0; i < els.length && i < ANIM_CAP; i++) {
+        const el = els[i];
+        const was = before.get(keyOf(el));
+        const dy = was === undefined ? 0 : was - el.getBoundingClientRect().top;
+        if (was === undefined) el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
+        else if (Math.abs(dy) > 0.5) el.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: 360, easing: EASE });
       }
     }
     function fade(box: HTMLElement) {
       box.animate([{ opacity: 0.4 }, { opacity: 1 }], { duration: 140, easing: 'ease-out' });
+    }
+    // the Bars view draws in once, the first time it opens. Groups past the eighth start together.
+    function drawIn(box: HTMLElement) {
+      const groups = box.querySelectorAll<HTMLElement>('.cmp-blist > li:not([hidden])');
+      for (let k = 0; k < groups.length && k < ANIM_CAP; k++) {
+        const fills = groups[k].querySelectorAll<HTMLElement>('.cmp-bf');
+        for (let i = 0; i < fills.length && i < 4; i++)
+          fills[i].animate([{ transform: 'scaleX(0)' }, { transform: 'none' }], { duration: 900, delay: Math.min(k, 8) * 28, easing: EASE, fill: 'backwards' });
+      }
     }
 
     async function update(glide = false) {
@@ -219,15 +288,55 @@ const SORT_HOW = {
     if (own) await update();
     else {
       renderPicks();
-      // the default view is already drawn. Its files load quietly for the first change.
-      load(st.m);
+      // the default view is already drawn. Its files load quietly, and the page keeps the result for row clicks.
+      if (await load(st.m)) {
+        const files = st.m.map((id) => cache.get(id)!);
+        picks = files.map((f) => ({ id: f.id, name: f.name, lab: f.lab }));
+        res = compute(files, st);
+      }
     }
     shown();
 
-    // ---- picks, source, sort -----------------------------------------------------------------------
+    // ---- a row's bars --------------------------------------------------------------------------------
+    function toggle(id: string) {
+      const box = $('[data-results]');
+      const tr = box.querySelector<HTMLElement>(`tr.cmp-row[data-id="${CSS.escape(id)}"]`);
+      const row = res?.rows.find((r) => r.id === id);
+      if (!tr || !row || !res) return;
+      const btn = tr.querySelector<HTMLButtonElement>('[data-dis]')!;
+      if (open.has(id)) {
+        open.delete(id);
+        tr.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        tr.nextElementSibling?.matches('.cmp-det') && tr.nextElementSibling.remove();
+        return;
+      }
+      open.add(id);
+      tr.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      const det = document.createElement('tr');
+      det.className = 'cmp-det';
+      det.dataset.det = id;
+      det.id = `cmp-d-${id}`;
+      det.innerHTML = `<td colspan="${picks.length + 4}">${detail(row, picks, idx.labs, res)}</td>`;
+      tr.after(det);
+      if (!reduce.matches) {
+        const inner = det.querySelector<HTMLElement>('.cmp-detin')!;
+        const h = inner.offsetHeight;
+        inner.animate(
+          [
+            { height: '0px', opacity: 0 },
+            { height: `${h}px`, opacity: 1 },
+          ],
+          { duration: 360, easing: EASE },
+        );
+      }
+    }
+
+    // ---- picks, source, sort, filters, view ---------------------------------------------------------
     const q = $<HTMLInputElement>('[data-q]');
     function remove(id: string) {
-      st = { ...st, m: st.m.filter((x) => x !== id) };
+      st = { ...st, m: st.m.filter((x) => x !== id), ...(st.sort === `m:${id}` ? { sort: 'labs' as SortCol, rev: false } : {}) };
       update();
       q.focus();
     }
@@ -235,10 +344,26 @@ const SORT_HOW = {
       const t = e.target as HTMLElement;
       const x = t.closest<HTMLButtonElement>('[data-x]');
       if (x) return remove(x.dataset.x!);
+      const s = t.closest<HTMLButtonElement>('[data-sort]');
+      if (s) {
+        const col = s.dataset.sort as SortCol;
+        st = st.sort === col ? { ...st, rev: !st.rev } : { ...st, sort: col, rev: false };
+        update(true).then(() => $<HTMLButtonElement>(`[data-results] [data-sort="${CSS.escape(col)}"]`)?.focus());
+        return;
+      }
+      const dis = t.closest<HTMLButtonElement>('[data-dis]');
+      if (dis) return toggle(dis.dataset.dis!);
+      const tr = t.closest<HTMLElement>('tr.cmp-row');
+      if (tr && !t.closest('a,button,input')) return toggle(tr.dataset.id!);
+      if (t.closest('[data-reset]')) {
+        st = { ...st, cited: 'any', labs: 0, area: '' };
+        update(true);
+        return;
+      }
       if (t.closest('[data-all]')) {
         showAll = true;
-        const box = $('[data-table]');
-        for (const tr of box.querySelectorAll<HTMLElement>('tr.later')) tr.hidden = false;
+        const box = $('[data-results]');
+        for (const el of box.querySelectorAll<HTMLElement>('.later')) el.hidden = false;
         box.querySelector('[data-all]')?.remove();
         return;
       }
@@ -247,13 +372,31 @@ const SORT_HOW = {
     });
     root.addEventListener('change', (e) => {
       const t = e.target as HTMLInputElement;
-      if (t.name === 'cmp-src') {
-        st = { ...st, src: t.value as Source };
-        update(true);
-      } else if (t.name === 'cmp-sort') {
-        st = { ...st, sort: t.value as SortKey };
-        update(true);
-      }
+      if (t.name === 'cmp-src') st = { ...st, src: t.value as Source };
+      else if (t.name === 'cmp-cited') st = { ...st, cited: t.value as Cited };
+      else if (t.name === 'cmp-labs') st = { ...st, labs: Number(t.value) };
+      else if (t.name === 'cmp-area') st = { ...st, area: t.value };
+      else if (t.name === 'cmp-view') st = { ...st, view: t.value as View };
+      else return;
+      const name = t.name;
+      const value = t.value;
+      update(true).then(() => root.querySelector<HTMLInputElement>(`input[name="${name}"][value="${CSS.escape(value)}"]`)?.focus());
+    });
+
+    // ---- the Bars view by keyboard: one tab stop, arrow keys move from bar to bar ---------------------
+    root.addEventListener('keydown', (e) => {
+      const bar = (e.target as HTMLElement).closest?.<HTMLElement>('.cmp-bb');
+      if (!bar) return;
+      const all = [...$('[data-results]').querySelectorAll<HTMLElement>('.cmp-blist > li:not([hidden]) .cmp-bb')];
+      const i = all.indexOf(bar);
+      const to = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? all.length - 1 : -2;
+      if (to === -2) return;
+      e.preventDefault();
+      const next = all[Math.max(0, Math.min(all.length - 1, to))];
+      if (!next || next === bar) return;
+      bar.tabIndex = -1;
+      next.tabIndex = 0;
+      next.focus();
     });
 
     // ---- search ------------------------------------------------------------------------------------
@@ -267,12 +410,11 @@ const SORT_HOW = {
       const words = norm(q.value).split(' ').filter(Boolean);
       if (!words.length) return close();
       const taken = new Set(st.m);
-      hits = [];
       // the list is in ECI order, so the strongest matching models come first. Names that start with the words lead.
       const starts: number[] = [];
       const rest: number[] = [];
       for (let i = 0; i < hay.length && starts.length < 12; i++) {
-        if (taken.has(idx.models[i][0]) || !words.every((w) => hay[i].includes(` ${w}`) || hay[i].includes(w))) continue;
+        if (taken.has(idx.models[i][0]) || !words.every((w) => hay[i].includes(w))) continue;
         (hay[i].startsWith(` ${words[0]}`) ? starts : rest).push(i);
       }
       hits = [...starts, ...rest].slice(0, 12);
@@ -482,20 +624,11 @@ const SORT_HOW = {
     font-size: 13.5px;
     color: var(--ink-3);
   }
-  .cmp-root .cmp-hint,
-  .cmp-root .cmp-how {
+  .cmp-root .cmp-hint {
     margin-top: 10px;
     font-size: 13.5px;
     line-height: 1.45;
     color: var(--ink-3);
-  }
-  .cmp-root .cmp-how {
-    margin-top: -8px;
-  }
-  .cmp-root .cmp-switches {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px 40px;
   }
   .cmp-root .cmp-seg {
     flex-wrap: wrap;
@@ -514,7 +647,7 @@ const SORT_HOW = {
   }
   .cmp-root .cmp-wins {
     list-style: none;
-    margin: 0 0 36px;
+    margin: 0 0 32px;
     padding: 0;
     display: grid;
     grid-template-columns: max-content minmax(0, max-content) minmax(80px, 220px) max-content;
@@ -541,7 +674,7 @@ const SORT_HOW = {
   .cmp-root .cmp-wbar span {
     display: block;
     height: 100%;
-    border-radius: 3px;
+    border-radius: 0 3px 3px 0;
     min-width: 2px;
   }
   .cmp-root .cmp-wn {
@@ -553,7 +686,8 @@ const SORT_HOW = {
     flex: none;
     vertical-align: middle;
   }
-  .cmp-root .cmp-mask {
+  .cmp-root .cmp-mask,
+  .cmp-pop .cmp-mask {
     width: var(--s);
     height: var(--s);
     background: var(--ink);
@@ -566,10 +700,84 @@ const SORT_HOW = {
     width: var(--s);
     height: var(--s);
     border-radius: 50%;
-    background: var(--bg);
+    background: var(--panel);
     color: var(--ink-3);
     font-size: 10px;
     font-weight: 600;
+  }
+  /* the area marks come from areaSvg as plain strings, so AreaMark.astro's scoped style doesn't reach them */
+  .cmp-root .amark {
+    display: inline-block;
+    flex: none;
+    fill: currentColor;
+  }
+
+  /* the filter row: one row on a wide screen, wrapping cleanly on a phone */
+  .cmp-root .cmp-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    margin-bottom: 22px;
+  }
+  .cmp-root .cmp-tools[hidden] {
+    display: none;
+  }
+  .cmp-root .cmp-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    min-width: 0;
+  }
+  .cmp-root .cmp-f {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+  }
+  .cmp-root .cmp-fl {
+    font-size: 13px;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .cmp-root .cmp-fseg {
+    flex-wrap: wrap;
+  }
+  .cmp-root .cmp-fseg label,
+  .cmp-root .cmp-view label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 7px;
+    font-size: 12.5px;
+  }
+  .cmp-root .cmp-fseg label.am {
+    padding: 7px 6px;
+  }
+  .cmp-root .cmp-fseg .ct {
+    font-size: 11.5px;
+    color: var(--ink-4);
+  }
+  .cmp-root .cmp-fseg label:has(input:checked) .ct {
+    color: var(--ink-3);
+  }
+  .cmp-root .cmp-fseg label.zero {
+    color: var(--ink-4);
+  }
+  .cmp-root .cmp-view[hidden] {
+    display: none;
+  }
+  .cmp-root .cmp-empty {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    padding: 18px 0 8px;
+    color: var(--ink-2);
+  }
+  .cmp-root .cmp-empty[hidden] {
+    display: none;
   }
 
   /* the table scrolls sideways inside its own box on a phone, never the page */
@@ -584,55 +792,170 @@ const SORT_HOW = {
     padding: 0 var(--gutter) 6px;
   }
   .cmp-root .cmp-t {
-    min-width: 620px;
+    min-width: 660px;
+  }
+  .cmp-root .cmp-t th {
+    padding-bottom: 8px;
   }
   .cmp-root .cmp-t th.cm {
     white-space: normal;
     vertical-align: bottom;
-    min-width: 7em;
+    min-width: 8.5em;
     max-width: 11em;
   }
-  /* names wrap between words only, so the column widens to its longest word instead of splitting it */
+  .cmp-root .cmp-t th.r {
+    vertical-align: bottom;
+  }
+  /* a header is a sort button: the label, then a small arrow on the active column */
+  .cmp-root .cmp-sort {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 5px;
+    padding: 4px 6px;
+    margin: 0 -6px;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--ink-3);
+    font: 500 12.5px/1.25 var(--sans);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+  .cmp-root .cmp-sort.r {
+    justify-content: flex-end;
+    text-align: right;
+  }
+  .cmp-root .cmp-sort:hover,
+  .cmp-root .cmp-sort:focus-visible {
+    color: var(--ink);
+    background: var(--hover);
+  }
+  .cmp-root .cmp-sort.on {
+    color: var(--ink);
+  }
+  .cmp-root .cmp-arr {
+    flex: none;
+    width: 9px;
+    height: 9px;
+    margin-bottom: 2px;
+  }
+  .cmp-root .cmp-arr.none {
+    display: inline-block;
+  }
+  .cmp-root .hw {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  /* the info button beside a header opens a short popover in plain words */
+  .cmp-root .cmp-info {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    margin: 0 0 3px 4px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--ink-3);
+    font: 600 11px/18px var(--sans);
+    text-align: center;
+    cursor: pointer;
+  }
+  .cmp-root .cmp-info:hover,
+  .cmp-root .cmp-info:focus-visible,
+  .cmp-root .cmp-info[aria-expanded='true'] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .cmp-pop {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    padding: 14px 16px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font-size: 13.5px;
+    line-height: 1.5;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px var(--line);
+  }
+  .cmp-pop:popover-open {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: find-in 140ms ease-out;
+  }
+  .cmp-pop b {
+    color: var(--ink);
+    font-weight: 500;
+  }
   .cmp-root .cmp-t .mh {
     display: inline-flex;
     align-items: flex-end;
     justify-content: flex-end;
     gap: 6px;
     text-align: right;
-    color: var(--ink-2);
     overflow-wrap: break-word;
   }
   .cmp-root .cmp-t .mh .cmp-mark {
     margin-bottom: 1px;
   }
   .cmp-root .cmp-t td.bn {
-    min-width: 13em;
+    min-width: 14em;
   }
   .cmp-root .cmp-t .bw {
     display: flex;
     align-items: baseline;
-    gap: 9px;
+    gap: 8px;
   }
-  /* the area marks come from areaSvg as plain strings, so AreaMark.astro's scoped style doesn't reach them */
   .cmp-root .cmp-t .bw .amark {
-    display: inline-block;
-    flex: none;
-    fill: currentColor;
     position: relative;
     top: 0.5px;
   }
-  .cmp-root .cmp-t .bt {
+  .cmp-root .bt {
     display: flex;
     flex-direction: column;
     min-width: 0;
   }
-  .cmp-root .cmp-t .bt a {
+  .cmp-root .bt a {
     overflow-wrap: anywhere;
   }
-  .cmp-root .cmp-t .u {
+  .cmp-root .u {
     font-size: 12px;
     color: var(--ink-3);
     margin-top: 2px;
+  }
+  .cmp-root .cmp-t tr.cmp-row {
+    cursor: pointer;
+  }
+  .cmp-root .cmp-dis {
+    align-self: center;
+    width: 20px;
+    height: 20px;
+    flex: none;
+    margin: 0 -2px 0 -6px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 5px;
+    background: none;
+    color: var(--ink-4);
+    cursor: pointer;
+  }
+  .cmp-root .cmp-dis svg {
+    transition: rotate 200ms ease;
+  }
+  .cmp-root .cmp-dis[aria-expanded='true'] svg {
+    rotate: 90deg;
+  }
+  .cmp-root .cmp-dis:hover,
+  .cmp-root .cmp-dis:focus-visible {
+    color: var(--ink);
+    background: var(--panel);
   }
   .cmp-root .cmp-t td.num {
     white-space: nowrap;
@@ -648,6 +971,19 @@ const SORT_HOW = {
     color: var(--ink-3);
     font-size: 13.5px;
   }
+  /* an open row and its bars read as one block */
+  .cmp-root .cmp-t tr.open td {
+    border-bottom-color: transparent;
+  }
+  .cmp-root .cmp-t tr.cmp-det td {
+    border-top: 0;
+    padding: 0 4px 20px 34px;
+    cursor: default;
+  }
+  .cmp-root .cmp-t tbody tr.cmp-det:hover td {
+    background: none;
+    box-shadow: none;
+  }
   /* a lab's own number: a small ring after it. Other cells keep an empty slot, so the digits line up. */
   .cmp-root .own {
     display: inline-block;
@@ -661,6 +997,221 @@ const SORT_HOW = {
   .cmp-root .own.no {
     box-shadow: none;
   }
+
+  /* one row's bars */
+  .cmp-root .cmp-detin {
+    overflow: hidden;
+    max-width: 760px;
+  }
+  .cmp-root .cmp-ds {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin: 2px 0 14px;
+    max-width: 68ch;
+  }
+  .cmp-root .cmp-dbars {
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(120px, 1fr) max-content;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .cmp-root .cmp-dn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    min-width: 0;
+    max-width: 16em;
+  }
+  .cmp-root .cmp-dn span {
+    overflow-wrap: anywhere;
+  }
+  .cmp-root .cmp-dt {
+    position: relative;
+    height: 12px;
+  }
+  /* the percent axis: hairlines at every quarter, behind the bars */
+  .cmp-root .cmp-dbars.pct .cmp-dt {
+    background: linear-gradient(to right, var(--grid) 1px, transparent 1px) 0 0 / 25% 100% repeat-x;
+  }
+  .cmp-root .cmp-df {
+    display: block;
+    height: 100%;
+    min-width: 2px;
+    border-radius: 0 4px 4px 0;
+  }
+  .cmp-root .cmp-dv {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .cmp-root .cmp-dv b {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  /* the gap as a bracket under the bars, from the worst score to the best */
+  .cmp-root .cmp-gb {
+    position: relative;
+    height: 26px;
+  }
+  .cmp-root .cmp-gbr {
+    position: absolute;
+    top: 2px;
+    height: 7px;
+    border: 1.5px solid var(--ink-3);
+    border-top: 0;
+    border-radius: 0 0 2px 2px;
+    box-sizing: border-box;
+  }
+  .cmp-root .cmp-gbl {
+    position: absolute;
+    top: 11px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .cmp-root .cmp-dx {
+    position: relative;
+    height: 16px;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .cmp-root .cmp-dx span {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+  }
+  .cmp-root .cmp-dx span:first-child {
+    transform: none;
+  }
+  .cmp-root .cmp-dx span:last-child {
+    transform: translateX(-100%);
+  }
+  .cmp-root .cmp-dfoot {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+
+  /* the Bars view */
+  .cmp-root .cmp-bhead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 24px;
+    margin-bottom: 14px;
+  }
+  .cmp-root .cmp-legend-row,
+  .cmp-root .cmp-bsorts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+  }
+  .cmp-root .cmp-leg {
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .cmp-root .cmp-leg .cmp-arr {
+    margin-bottom: 0;
+  }
+  .cmp-root .cmp-swatch {
+    width: 12px;
+    height: 6px;
+    border-radius: 0 3px 3px 0;
+    flex: none;
+  }
+  .cmp-root .cmp-bax,
+  .cmp-root .cmp-bg {
+    display: grid;
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    gap: 4px 20px;
+  }
+  .cmp-root .cmp-baxt {
+    position: relative;
+    height: 16px;
+    margin-right: 56px;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .cmp-root .cmp-baxt span {
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  .cmp-root .cmp-baxt span:first-child {
+    transform: none;
+  }
+  .cmp-root .cmp-baxt span:last-child {
+    transform: translateX(-100%);
+  }
+  .cmp-root .cmp-blist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cmp-root .cmp-bg {
+    padding: 10px 0;
+    border-top: 1px solid var(--grid);
+    align-items: center;
+  }
+  .cmp-root .cmp-bn a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .cmp-root .cmp-bn a:hover {
+    text-decoration: underline;
+  }
+  .cmp-root .cmp-bn {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 14px;
+    min-width: 0;
+  }
+  .cmp-root .cmp-bbs {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 56px;
+  }
+  /* each bar's hover and focus target is its whole row, taller than the 6px bar */
+  .cmp-root .cmp-bb {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 10px;
+    border-radius: 3px;
+    outline-offset: 2px;
+    background: linear-gradient(to right, var(--grid) 1px, transparent 1px) 0 0 / 25% 100% repeat-x;
+  }
+  .cmp-root .cmp-bb:hover .cmp-bf,
+  .cmp-root .cmp-bb:focus-visible .cmp-bf {
+    filter: brightness(1.12);
+  }
+  .cmp-root .cmp-bf {
+    display: block;
+    height: 6px;
+    min-width: 2px;
+    border-radius: 0 3px 3px 0;
+    transform-origin: left center;
+  }
+  /* the leader's value, at the tip of its bar. The 56px margin on the bars keeps room for it. */
+  .cmp-root .cmp-bl {
+    flex: none;
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
   .cmp-root .cmp-legend {
     display: flex;
     flex-wrap: wrap;
@@ -701,6 +1252,11 @@ const SORT_HOW = {
   .cmp-root input:disabled {
     cursor: default;
   }
+  @media (prefers-reduced-motion: reduce) {
+    .cmp-root .cmp-dis svg {
+      transition: none;
+    }
+  }
   @media (max-width: 720px) {
     .cmp-root .cmp-wins {
       grid-template-columns: max-content minmax(0, 1fr) minmax(60px, 34%);
@@ -709,6 +1265,36 @@ const SORT_HOW = {
     .cmp-root .cmp-wn {
       grid-column: 2 / -1;
       margin-top: -6px;
+    }
+    /* on a phone each filter's label sits above its options, so the options get the full width */
+    .cmp-root .cmp-f {
+      flex-wrap: wrap;
+    }
+    .cmp-root .cmp-fl {
+      flex-basis: 100%;
+    }
+    /* on a phone the bars stack under the benchmark name */
+    .cmp-root .cmp-bax,
+    .cmp-root .cmp-bg {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cmp-root .cmp-bax > span:first-child {
+      display: none;
+    }
+    .cmp-root .cmp-baxt,
+    .cmp-root .cmp-bbs {
+      margin-right: 48px;
+    }
+    .cmp-root .cmp-dbars {
+      grid-template-columns: minmax(0, 7.5em) minmax(80px, 1fr) max-content;
+    }
+    .cmp-root .cmp-t tr.cmp-det td {
+      padding-left: 4px;
+    }
+    .cmp-root .cmp-detin {
+      max-width: calc(100vw - 2 * var(--gutter));
+      position: sticky;
+      left: 0;
     }
   }
 </style>

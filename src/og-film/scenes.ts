@@ -10,8 +10,11 @@ import { labColor, LAB_SLOTS } from '../lib/palette.ts';
 import { reportingData, currentYear } from '../lib/reporting.ts';
 import { DEFAULT_VIEW } from '../lib/reporting-view.ts';
 import { swarmSvg, heroHead, symbolsSvg, type SwarmOpts } from '../lib/reporting-graphics.ts';
+import { buildPayload } from '../lib/build-data.ts';
+import { LAYERS, monthsSince, ridgePaths } from '../lib/ridge.ts';
+import { Matrix, compute, defaultNeed, headline, type State } from '../lib/build-index.ts';
 
-export const SCENES = ['rise', 'index', 'reigns', 'pace', 'reporting'] as const;
+export const SCENES = ['ridge', 'rise', 'index', 'reigns', 'pace', 'reporting', 'build'] as const;
 export type SceneId = (typeof SCENES)[number];
 
 export const W = 1200;
@@ -53,6 +56,17 @@ export interface Scene {
   fixed?: string;
   /** Symbol definitions the marks use. */
   defs?: string;
+  /** The build scene has no front: its weights shift and its ranking reorders (Film.astro, rank mode). */
+  rank?: RankFilm;
+}
+
+export interface RankFilm {
+  /** One per weighting the film visits. The film starts and ends on the first. */
+  states: { caption: string; shares: number[]; rank: number[]; value: number[] }[];
+  /** Rows on show at once. */
+  rows: number;
+  /** The value a full bar stands for. */
+  max: number;
 }
 
 const t0 = Date.parse(FROM);
@@ -143,6 +157,66 @@ function labLegend(present: Set<string | undefined>) {
   ];
 }
 
+/** The site's preview: the footer's landscape at full width. Benchmarks released each month since 2019, stacked
+ * by area and drawn as an even grid of dots in each area's color (src/lib/ridge.ts). The counter counts every
+ * benchmark the front passes. The title compares this year's count with the earliest years it beats combined. */
+function ridge(): Scene {
+  const { y0, y1 } = BOX;
+  const months = monthsSince();
+  const at = new Map(months.map((m, i) => [m, i]));
+  const x = (i: number) => (i / (months.length - 1)) * W;
+  const paths = ridgePaths(W, y1 - y0);
+  // the top area first, and each area below covers it, as in the footer: a faint wash, then the dots
+  const bands = [...LAYERS]
+    .reverse()
+    .map((id) => `<path d="${paths.get(id)}" style="fill:color-mix(in srgb, var(--area-${id}) 9%, var(--bg))"/><path d="${paths.get(id)}" fill="url(#ridge-${id})"/>`)
+    .join('');
+  const defs = LAYERS.map(
+    (id) => `<pattern id="ridge-${id}" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.7" fill="var(--area-${id})"/></pattern>`,
+  ).join('');
+  const starts: number[] = [];
+  const perYear = new Map<number, number>();
+  for (const b of benchmarks) {
+    const i = at.get(b.released?.slice(0, 7) ?? '');
+    if (i === undefined) continue;
+    starts.push(x(i));
+    const y = Number(months[i].slice(0, 4));
+    perYear.set(y, (perYear.get(y) ?? 0) + 1);
+  }
+  starts.sort((a, b) => a - b);
+  // "2026 brought more AI benchmarks than 2019 to 2024 combined": the latest year with whole months, against
+  // the longest run of years from 2019 whose sum it still beats
+  const first = Number(months[0].slice(0, 4));
+  const last = Number(months.at(-1)!.slice(0, 4));
+  const now = perYear.get(last) ?? 0;
+  let upTo = 0;
+  let sum = 0;
+  for (let y = first; y < last; y++) {
+    sum += perYear.get(y) ?? 0;
+    if (sum < now) upTo = y;
+    else break;
+  }
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return {
+    id: 'ridge',
+    title: upTo > first ? `${last} brought more AI benchmarks than ${first} to ${upTo} combined` : `AI benchmarks released each month since ${first}`,
+    subtitle: `Benchmarks released each month since ${first}, colored by area.`,
+    unit: `benchmarks since ${first}`,
+    total: starts.length,
+    starts,
+    reveal: `<g transform="translate(0 ${y0})">${bands}</g>`,
+    dots: '',
+    end: '',
+    defs,
+    front: [0, W],
+    ticks: months.flatMap((m, i) => (m.endsWith('-01') ? [{ x: x(i), label: m.slice(0, 4) }] : [])),
+    stops: months.map((m, i) => ({ x: x(i), label: `${MON[Number(m.slice(5)) - 1]} ${m.slice(0, 4)}` })),
+    legend: AREA_SHORT.map(([id, label]) => ({ label, color: `var(--area-${id})`, shape: AREA_SHAPES[id] })),
+    titleSize: 44,
+    subTop: 152,
+  };
+}
+
 /** The capability index over time, after the models page: one dot per model, a step line for the best so far. */
 function index(): Scene {
   const { x0, x1, y0, y1 } = BOX;
@@ -209,7 +283,8 @@ function reigns(): Scene {
   const { y0, y1 } = BOX;
   const mathIds = benchmarks.filter((b) => b.category === 'math').map((b) => b.id);
   const eci = eciReigns();
-  const rows = [...(eci ? [eci] : []), ...leaderRows(mathIds, 'all', 6)];
+  // each benchmark from the one source its page leads with, as on /leaders/
+  const rows = [...(eci ? [eci] : []), ...leaderRows(mathIds, 'headline', 6)];
   const names = new Map(benchmarks.map((b) => [b.id, b.name]));
   const gap = 10;
   const rh = (y1 - y0 - gap * (rows.length - 1)) / rows.length;
@@ -237,7 +312,7 @@ function reigns(): Scene {
       let d = `M${n1(sx)} ${n1(base)}V${n1(yv(steps[0].value))}`;
       for (const s of steps.slice(1)) if (s.date > g.start) d += `H${n1(Math.min(ex, x(s.date)))}V${n1(yv(s.value))}`;
       d += `H${n1(ex)}V${n1(base)}Z`;
-      reveal.push(`<path d="${d}" fill="${labColor(g.lab)}" fill-opacity="0.9"/>`);
+      reveal.push(`<path d="${d}" fill="${labColor(g.lab)}"/>`);
     });
     const now = shown.at(-1);
     const who = now ? (models.find((m) => m.id === now.model)?.name ?? now.model) : '';
@@ -362,8 +437,8 @@ function reporting(): Scene {
   const vb = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
   if (!vb) throw new Error('The reporting swarm drew nothing');
   const [vw, vh] = [Number(vb[1]), Number(vb[2])];
-  const top = 204;
-  const bottom = 566;
+  const top = 200;
+  const bottom = 556;
   const s = Math.min((BOX.x1 - BOX.x0) / vw, (bottom - top) / vh);
   const X = BOX.x0;
   const Y = bottom - vh * s;
@@ -414,15 +489,87 @@ function reporting(): Scene {
     box: { y0: top + 20, y1: bottom - 30 },
     ticks: [],
     stops: stops.sort((p, q) => p.x - q.x),
-    legend: AREA_SHORT.map(([id, label]) => ({ label, color: `var(--area-${id})`, shape: AREA_SHAPES[id] })),
+    // only the areas drawn: safety evaluations are off by default on the page
+    legend: AREA_SHORT.filter(([id]) => dots.some((t) => t.includes(`a-${id}"`))).map(([id, label]) => ({ label, color: `var(--area-${id})`, shape: AREA_SHAPES[id] })),
+  };
+}
+
+/**
+ * The index builder's film: the page's default index (the tests most labs reported this year, weighted equally),
+ * then the same tests with one area counted four times, twice, then back. The weight bar shifts first, and then
+ * the ranking glides into its new order, so a viewer sees that the weights decide who leads.
+ */
+function build(): Scene {
+  const p = buildPayload();
+  const mx = new Matrix(p);
+  const preset = p.presets[0];
+  const base: State = { b: preset.b.map((id) => ({ id, w: 50 })), src: 'all', need: defaultNeed(preset.b.length) };
+  const first = compute(mx, base);
+  const tests = first.used.map((u) => ({ id: u.id, name: p.benches[u.bi][1], area: p.benches[u.bi][2] }));
+  const areas = [...new Set(tests.map((t) => t.area))];
+  const ROWS = 6;
+  // each area counted four times: keep the two whose leaders differ from the start and from each other,
+  // else the two that reorder the top rows most
+  const tries = areas.map((a) => {
+    const st: State = { ...base, b: base.b.map((x) => ({ id: x.id, w: tests.find((t) => t.id === x.id)?.area === a ? 100 : 25 })) };
+    const res = compute(mx, st);
+    const moved = res.rows.slice(0, ROWS).filter((r, i) => first.rows[i]?.m !== r.m).length;
+    return { a, res, lead: res.rows[0]?.m, moved, n: tests.filter((t) => t.area === a).length };
+  });
+  const picked: typeof tries = [];
+  for (const t of [...tries].sort((x, y) => y.moved - x.moved || y.n - x.n))
+    if (t.lead !== first.rows[0]?.m && !picked.some((q) => q.lead === t.lead)) picked.push(t);
+  for (const t of [...tries].sort((x, y) => y.moved - x.moved || y.n - x.n)) if (picked.length < 2 && !picked.includes(t)) picked.push(t);
+  const AREA_LABEL: Record<string, string> = { knowledge: 'Knowledge', reasoning: 'Math and science', code: 'Coding', agents: 'Agent', work: 'Work', multimodal: 'Vision and audio', safety: 'Safety' };
+  const runs = [{ caption: 'Equal weights', res: first }, ...picked.slice(0, 2).map((t) => ({ caption: `${AREA_LABEL[t.a] ?? t.a} tests count four times`, res: t.res }))];
+  // every model that reaches the shown rows in any weighting gets a row, in its first weighting's place
+  const ids = [...new Set(runs.flatMap((r) => r.res.rows.slice(0, ROWS).map((x) => x.m)))];
+  const states = runs.map((r) => {
+    const at = new Map(r.res.rows.map((x, i) => [x.m, i]));
+    const val = new Map(r.res.rows.map((x) => [x.m, x.value]));
+    const shares = tests.map((t) => r.res.used.find((u) => u.id === t.id)?.share ?? 0);
+    return { caption: r.caption, shares, rank: ids.map((m) => at.get(m) ?? ROWS + 2), value: ids.map((m) => Math.round((val.get(m) ?? 0) * 10) / 10) };
+  });
+  const max = Math.ceil(Math.max(...states.flatMap((s) => s.value)) / 10) * 10;
+  // the marks: the weight bar's segments and one row per model, placed by the script
+  const { x0, x1 } = BOX;
+  const segs = tests
+    .map(
+      (t, i) =>
+        `<g data-seg="${i}"><rect y="236" height="44" rx="4" fill="var(--area-${t.area})" fill-opacity="0.16"/><rect y="236" height="5" rx="2" fill="var(--area-${t.area})"/><text y="265" class="seg" data-full="${esc(t.name)}">${esc(t.name)}</text></g>`,
+    )
+    .join('');
+  const rowsSvg = ids
+    .map((m, j) => {
+      const [, name, lab] = p.models[m];
+      return `<g data-row="${j}"><text x="${x0}" y="0" class="rk"></text><circle cx="${x0 + 40}" cy="-6" r="6" fill="${labColor(lab)}"/><text x="${x0 + 56}" y="0" class="nm">${esc(name)}</text><rect x="${x0 + 360}" y="-17" height="22" rx="3" fill="${labColor(lab)}"/><text y="0" class="val"></text></g>`;
+    })
+    .join('');
+  return {
+    id: 'build',
+    title: headline(p, first),
+    subtitle: `${preset.name}, weighted equally. Change the weights and the order changes.`,
+    titleSize: 44,
+    subTop: 152,
+    starts: [],
+    reveal: '',
+    dots: '',
+    end: '',
+    fixed: `<text x="${x0}" y="222" class="cap" data-cap></text>${segs}<g class="rows">${rowsSvg}</g>`,
+    front: [x0, x1],
+    ticks: [],
+    rank: { states, rows: ROWS, max },
+    legend: AREA_SHORT.filter(([id]) => areas.includes(id)).map(([id, label]) => ({ label, color: `var(--area-${id})`, shape: AREA_SHAPES[id] })),
   };
 }
 
 export function scene(id: string): Scene {
+  if (id === 'ridge') return ridge();
   if (id === 'index') return index();
   if (id === 'reigns') return reigns();
   if (id === 'pace') return pace();
   if (id === 'reporting') return reporting();
+  if (id === 'build') return build();
   return rise();
 }
 

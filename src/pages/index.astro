@@ -10,6 +10,7 @@ import SearchBox from '../components/SearchBox.astro';
 import { AREAS, areaOf } from '../lib/taxonomy.ts';
 import ReignChart from '../components/ReignChart.astro';
 import { mostReportedRows } from '../lib/leaders.ts';
+import { POOL_LABEL } from '../lib/pools.ts';
 import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED, LEADERBOARDS, benchById } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
 import { SITE_NAME, SITE_DESCRIPTION, CATALOG_ID } from '../lib/site.ts';
@@ -47,8 +48,14 @@ interface Find {
 }
 // who held number one on the tests the most model releases reported over the last year
 const crown = mostReportedRows(AS_OF);
-const crownRows = crown.all;
-const crownIndep = crown.independent;
+// three views, as on /leaders/: each benchmark from the one source its page leads with (the default), every
+// independent run, and every score with claims included
+const crownViews = [
+  { pool: 'headline', label: 'One source per benchmark', rows: crown.headline },
+  { pool: 'independent', label: POOL_LABEL.independent, rows: crown.independent },
+  { pool: 'all', label: POOL_LABEL.all, rows: crown.all },
+] as const;
+const crownRows = crown.headline;
 const topTest = crown.tests.length ? (benchById.get(crown.tests[0].fam)?.name ?? crown.tests[0].fam) : '';
 const n = (v: number) => v.toLocaleString('en-US');
 // the hero's area chips: how many benchmarks each area holds
@@ -141,7 +148,7 @@ const catalog = {
 
     {
       crownRows.length > 0 && (
-        <section class="switch">
+        <section class="pools">
           <div class="sh-row">
             <div class="sh">
               <h2>Who held number one</h2>
@@ -150,19 +157,22 @@ const catalog = {
               </p>
             </div>
             <div class="crown-tools">
-              <label class="claims">
-                <input type="checkbox" data-claims checked />
-                Include lab claims
-              </label>
+              <div class="seg" role="radiogroup" aria-label="Scores from">
+                {crownViews.map((v, k) => (
+                  <label>
+                    <input type="radio" name="pool" value={v.pool} checked={k === 0} />
+                    {v.label}
+                  </label>
+                ))}
+              </div>
               <a class="more" href="/leaders/">Every category</a>
             </div>
           </div>
-          <div class="when-a">
-            <ReignChart rows={crownRows} levels={false} />
-          </div>
-          <div class="when-b">
-            <ReignChart rows={crownIndep} levels={false} />
-          </div>
+          {crownViews.map((v) => (
+            <div class={`pool-${v.pool}`}>
+              <ReignChart rows={v.rows} levels={false} />
+            </div>
+          ))}
         </section>
       )
     }

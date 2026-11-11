@@ -30,13 +30,18 @@ function build() {
     if ((b.unit ?? '%') === 'usd') continue;
     const s = benchSummary(b.id);
     const sign = b.better === 'lower' ? -1 : 1;
-    // independent: the benchmark's own leaderboard and Epoch AI's runs, the better of the two for each model
+    // independent: the benchmark's own leaderboard, Epoch AI's own runs, and boards we don't read that Epoch
+    // copied, the best for each model. Scores Epoch collected from labs' reports are claims, so they stay out.
     const ind = new Map<string, { v: number; from: 'b' | 'e' }>();
-    for (const x of s.leaderboardBoard) ind.set(x.model, { v: x.value, from: 'b' });
-    for (const x of s.epochBoard) {
-      const cur = ind.get(x.model);
-      if (!cur || sign * x.value > sign * cur.v) ind.set(x.model, { v: x.value, from: 'e' });
-    }
+    const take = (xs: typeof s.epochBoard, from: 'b' | 'e') => {
+      for (const x of xs) {
+        const cur = ind.get(x.model);
+        if (!cur || sign * x.value > sign * cur.v) ind.set(x.model, { v: x.value, from });
+      }
+    };
+    take(s.leaderboardBoard, 'b');
+    take(s.epochBoard, 'e');
+    take(s.viaBoard, 'b');
     const lab = new Map(s.cardBoard.map((x) => [x.model, x.value]));
     const ids = [...new Set([...ind.keys(), ...lab.keys()])].filter((id) => featured.has(id));
     if (!ids.length) continue;
@@ -106,7 +111,8 @@ function benchSet(id: string): Set<string> {
 
 /**
  * The model a model page's "Compare" link pairs it with: a model from another lab, released within six months of
- * it, that shares the most benchmarks with it. Ties go to the higher ECI. Without one, any model sharing the most.
+ * it, that shares the most benchmarks with it (five or more). Then any model from those six months, then any model
+ * at all. Ties go to the higher ECI.
  */
 export function rivalOf(id: string): string | undefined {
   const me = modelById.get(id);
@@ -114,18 +120,16 @@ export function rivalOf(id: string): string | undefined {
   const mine = benchSet(id);
   const day = (d: string) => Date.parse(d.length === 7 ? `${d}-01` : d);
   const t = me.released ? day(me.released) : NaN;
-  let best: { id: string; k: number; eci: number; near: boolean; other: boolean } | undefined;
+  const cands: { id: string; k: number; eci: number; near: boolean; other: boolean }[] = [];
   for (const other of build().files.keys()) {
     if (other === id) continue;
     const m = modelById.get(other)!;
-    const theirs = benchSet(other);
     let k = 0;
-    for (const b of theirs) if (mine.has(b)) k++;
+    for (const b of benchSet(other)) if (mine.has(b)) k++;
     if (!k) continue;
     const near = !Number.isNaN(t) && !!m.released && Math.abs(day(m.released) - t) <= 183 * 864e5;
-    const cand = { id: other, k, eci: eciByModel.get(other)?.eci ?? -1e9, near, other: m.lab !== me.lab };
-    const rank = (x: typeof cand) => (x.near && x.other ? 2 : x.near || x.other ? 1 : 0);
-    if (!best || rank(cand) > rank(best) || (rank(cand) === rank(best) && (cand.k > best.k || (cand.k === best.k && cand.eci > best.eci)))) best = cand;
+    cands.push({ id: other, k, eci: eciByModel.get(other)?.eci ?? -1e9, near, other: m.lab !== me.lab });
   }
-  return best?.id;
+  const top = (xs: typeof cands) => xs.sort((a, b) => b.k - a.k || b.eci - a.eci)[0];
+  return (top(cands.filter((c) => c.near && c.other && c.k >= 5)) ?? top(cands.filter((c) => c.near && c.k >= 5)) ?? top(cands))?.id;
 }

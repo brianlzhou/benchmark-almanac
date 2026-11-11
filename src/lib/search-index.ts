@@ -4,11 +4,16 @@
 //   /search-words.json  the key words of each benchmark's description, one string per row of the first
 //                       file, loaded after it so words like "chess" or "OpenUSD" also find benchmarks
 // Both carry the same version key, so the browser never pairs words with the rows of another build.
-import { benchmarks, labs, labById, featuredModels, cardScores, leaderboardScores, epochScores } from './data.ts';
+import { benchmarks, labs, labById, featuredModels, cardScores, leaderboardScores, epochScores, collectedScores, cards, systemCards } from './data.ts';
 import { AREAS, CATEGORY_NAMES, SUBCATEGORIES, areaOf } from './taxonomy.ts';
+import { monthYear } from './format.ts';
 
-/** [name, url, kind, detail, other spellings, weight (how often it is reported), more words to match]
- * kind: b benchmark, m model, l lab, c category, p page */
+/** [name, url, kind, detail, other spellings, weight, more words to match]
+ * kind: b benchmark, m model, l lab, c category, p page
+ * weight orders rows that match the query equally well. For a benchmark it is the launch posts that list it, then
+ * the system cards, then the release month, so the most-cited version of a test comes first and the detail line
+ * says how often it is cited. For a model it is the release date, so the newest comes first. See
+ * src/scripts/search-rank.ts. */
 export type SearchRow = [string, string, 'b' | 'm' | 'l' | 'c' | 'p', string, string, number, string];
 
 const STOP = new Set(
@@ -33,7 +38,7 @@ export function searchIndex() {
   if (built) return built;
   const uses = new Map<string, number>();
   const modelUses = new Map<string, number>();
-  for (const s of [...cardScores, ...leaderboardScores, ...epochScores]) {
+  for (const s of [...cardScores, ...leaderboardScores, ...epochScores, ...collectedScores]) {
     uses.set(s.benchmark, (uses.get(s.benchmark) ?? 0) + 1);
     modelUses.set(s.model, (modelUses.get(s.model) ?? 0) + 1);
   }
@@ -45,14 +50,29 @@ export function searchIndex() {
     if (b.subcategory) subCount.set(b.subcategory, (subCount.get(b.subcategory) ?? 0) + 1);
   }
   const n = (k: number, one: string, many: string) => `${k.toLocaleString('en-US')} ${k === 1 ? one : many}`;
+  // the documents that cite each benchmark: launch posts, then system cards
+  const cited = (docs: { results: { benchmark: string }[] }[]) => {
+    const m = new Map<string, number>();
+    for (const d of docs) for (const id of new Set(d.results.map((r) => r.benchmark))) m.set(id, (m.get(id) ?? 0) + 1);
+    return m;
+  };
+  const launchPosts = cited(cards);
+  const sysCards = cited(systemCards);
   const areaName = (cat: string) => AREAS.find((a) => a.id === areaOf(cat))?.name ?? '';
 
   const rows: SearchRow[] = [];
   const extra: string[] = [];
   for (const b of benchmarks) {
-    const detail = [CATEGORY_NAMES[b.category ?? ''] ?? '', b.org ?? ''].filter(Boolean).join(', ');
+    const lp = launchPosts.get(b.id) ?? 0;
+    const sc = sysCards.get(b.id) ?? 0;
+    const cites = lp ? n(lp, 'launch post', 'launch posts') : sc ? n(sc, 'system card', 'system cards') : '';
+    // the count first: a long maker name is cut off at the end of the line, and the count explains the order
+    const detail = [cites, [CATEGORY_NAMES[b.category ?? ''] ?? '', b.org ?? ''].filter(Boolean).join(', ')].filter(Boolean).join(' · ');
     const aliases = (b.aliases ?? []).join(' | ');
-    rows.push([b.name, `/benchmarks/${b.id}/`, 'b', detail, aliases, weight(uses.get(b.id) ?? 0), '']);
+    // launch posts, then system cards, then scores, then the newer release
+    const month = Number((b.released ?? '').replace(/\D/g, '').slice(0, 6).padEnd(6, '0')) || 0;
+    const w = lp * 1e4 + Math.min(sc, 99) * 100 + Math.min(99, uses.get(b.id) ?? 0) * 0.9 + month / 1e6;
+    rows.push([b.name, `/benchmarks/${b.id}/`, 'b', detail, aliases, Math.round(w * 1e4) / 1e4, '']);
     // only the description words the row does not already show
     const seen = new Set(words(b.name, aliases, detail));
     extra.push(words(b.description).filter((w) => !seen.has(w)).join(' '));
@@ -63,9 +83,10 @@ export function searchIndex() {
       m.name,
       `/models/${m.id}/`,
       'm',
-      [lab?.name, m.released?.slice(0, 4)].filter(Boolean).join(', '),
+      [lab?.name, m.released ? monthYear(m.released) : undefined].filter(Boolean).join(', '),
       (m.aliases ?? []).join(' | '),
-      weight(modelUses.get(m.id) ?? 0),
+      // models that match equally well: the newest first, then the most scored
+      Number((m.released ?? '').replace(/\D/g, '').slice(0, 8).padEnd(8, '0')) / 1e4 + weight(modelUses.get(m.id) ?? 0) / 1e6,
       words(...(lab?.aliases ?? [])).join(' '),
     ]);
   }
@@ -77,14 +98,15 @@ export function searchIndex() {
     for (const s of subs.filter((s) => subCount.has(s.id) && norm(s.name) !== norm(CATEGORY_NAMES[cat] ?? '')))
       rows.push([s.name, `/benchmarks/?area=s:${s.id}`, 'c', `${CATEGORY_NAMES[cat] ?? cat}, ${n(subCount.get(s.id)!, 'benchmark', 'benchmarks')}`, '', 7, '']);
   const pages = [
-    ['All benchmarks', '/benchmarks/', 'The full table, with filters', 'benchmarks table catalogue list'],
+    ['All benchmarks', '/benchmarks/', 'The full table, with filters', 'benchmarks table catalog list'],
     ['Leaders', '/leaders/', 'Who held number one', 'number one top spot reign leaderboard'],
     ['Arenas', '/arenas/', 'Ranked by people and matches', 'arena elo vote preference head to head lmarena'],
     ['Models', '/models/', 'Every model with a page', 'models capabilities index eci'],
     ['Labs', '/labs/', 'Every lab with a page', 'labs companies developers'],
     ['Model cards', '/cards/', 'Launch posts and system cards', 'cards launch posts system cards technical reports'],
-    ['New', '/new/', 'Added, waiting and left out', 'new recent added queue discovery'],
-    ['Sources', '/sources/', 'Where the almanac looks', 'sources feeds newsletters'],
+    ['New', '/new/', 'Added, waiting and left out, and new models', 'new recent added queue discovery models releases'],
+    ['Audits', '/audits/', 'Known issues that audits found in benchmarks', 'audits known issues problems broken grader leaked answers wrong labels contamination errors'],
+    ['Sources', '/sources/', 'Where we find new benchmarks', 'sources feeds newsletters'],
     ['About', '/about/', 'How this works', 'about method methodology how this works faq'],
   ] as const;
   for (const [name, url, detail, w] of pages) rows.push([name, url, 'p', detail, '', 6, w]);

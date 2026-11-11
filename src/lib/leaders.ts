@@ -1,6 +1,7 @@
 // Pick and order the rows of a "who held number one" chart.
 import { benchSummary, modelById, cards, systemCards } from './data.ts';
-import { reignRow, familyOf, type ReignRow, type Source } from './reigns.ts';
+import { reignRow, familyOf, originsOf, type ReignRow, type Source, type Origin } from './reigns.ts';
+import type { Score } from './types.ts';
 import { levelIndex, RANKED_BY_PEOPLE_OR_MATCHES } from './taxonomy.ts';
 import { makerParts } from './makers.ts';
 
@@ -10,19 +11,12 @@ import { makerParts } from './makers.ts';
  * claims cover also needs two other labs reporting it. Independent runs (a leaderboard, Epoch AI) settle it.
  */
 function contested(s: ReturnType<typeof benchSummary>, source: Source): boolean {
-  const pool =
-    source === 'all'
-      ? [...s.leaderboardBoard, ...s.epochBoard, ...s.cardBoard]
-      : source === 'independent'
-        ? [...s.leaderboardBoard, ...s.epochBoard]
-        : source === 'leaderboard'
-          ? s.leaderboardBoard
-          : source === 'epoch'
-            ? s.epochBoard
-            : s.cardBoard;
+  const boards: Record<Origin, Score[]> = { leaderboard: s.leaderboardBoard, epoch: s.epochBoard, collected: s.viaBoard, card: s.cardBoard, claim: s.claimBoard };
+  const pool = originsOf(s.b.id, source).flatMap((o) => boards[o]);
   const labs = new Set(pool.map((x) => modelById.get(x.model)?.lab).filter((l): l is string => !!l));
   if (labs.size < 2) return false;
-  if (pool.some((x) => x.source !== 'card')) return true;
+  // an independent run settles it: anything but a lab's card or a claim Epoch AI collected
+  if (pool.some((x) => x.source !== 'card' && !(x.source === 'collected' && x.via !== 'board'))) return true;
   const makers = new Set(makerParts(s.b.org ?? '').map((p) => p.lab).filter(Boolean));
   return makers.size === 0 || [...labs].filter((l) => !makers.has(l)).length >= 2;
 }
@@ -98,7 +92,7 @@ export function mostReportedRows(asOf: string, families = 7, minVersion = 3) {
     .sort((a, b) => b.n - a.n || a.fam.localeCompare(b.fam))
     .slice(0, families);
   const rows = (source: Source) => picked.flatMap((f) => f.ids.map((id) => usable(id, source)).filter((r): r is ReignRow => !!r));
-  return { since, tests: picked, all: rows('all'), independent: rows('independent') };
+  return { since, tests: picked, all: rows('all'), independent: rows('independent'), headline: rows('headline') };
 }
 
 // rows without a level go last
@@ -113,7 +107,7 @@ function rank(level: string | null | undefined): number {
  * holder, counted from the day it took the top spot. A version nobody has tested in six weeks is left out, since
  * nobody is racing for it now.
  */
-export function currentRuns(asOf: string, source: 'all' | 'independent', families = 12) {
+export function currentRuns(asOf: string, source: 'all' | 'independent' | 'headline', families = 12) {
   const picked = mostReportedRows(asOf, families);
   const day = 86_400_000;
   const runs = picked[source]

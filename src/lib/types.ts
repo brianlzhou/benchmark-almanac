@@ -64,12 +64,31 @@ export interface Benchmark {
   access?: Access;
   note?: string;
   successor?: string;
+  /** The day this record joined the almanac (YYYY-MM-DD), for records added since 2026-11-01. */
+  added?: string;
+  /** Dated releases that replaced questions but kept the benchmark one record (LiveBench). Charts draw a line at each. */
+  refreshes?: { date: string; label: string }[];
+  /**
+   * Dated changes by the maintainers that change what a score means: a regrade, a new grader, removed or fixed
+   * tasks, a new official harness, a new headline metric, corrected questions, or new leaderboard rules. The date
+   * is a day (YYYY-MM-DD) or a month (YYYY-MM).
+   */
+  changes?: BenchmarkChange[];
   unit?: string;
   better?: 'higher' | 'lower';
   confidence?: Confidence;
   /** Epoch Difficulty Index: on the same scale as the Epoch Capabilities Index. */
   edi?: number;
   epoch?: { epoch_name: string; random?: number; ceiling?: number; runs?: 'epoch' | 'external'; in_eci?: boolean };
+}
+
+export type ChangeKind = 'regrade' | 'grader' | 'subset' | 'harness' | 'scoring' | 'questions' | 'policy';
+
+export interface BenchmarkChange {
+  date: string;
+  kind: ChangeKind;
+  text: string;
+  url: string;
 }
 
 export interface Resource {
@@ -124,7 +143,41 @@ export interface Score {
   cost?: number | null;
   /** Average output tokens per task, when the leaderboard reports it. */
   tokens?: number | null;
-  /** Who measured it: the benchmark's own leaderboard, Epoch AI, or the lab in its model card. */
-  source: 'leaderboard' | 'epoch' | 'card';
+  /** Other numbers the leaderboard reports for the run, such as latency in seconds ("latency") or pass^3 ("pass3"). */
+  metrics?: Record<string, number>;
+  /**
+   * Who measured it: the benchmark's own leaderboard, Epoch AI's own run, the lab in its model card, or a score
+   * Epoch AI collected from somewhere else ('collected', with `via` and `from`).
+   */
+  source: 'leaderboard' | 'epoch' | 'card' | 'collected';
+  /**
+   * For a collected score, where Epoch AI got it: another leaderboard ('board', which counts as an independent
+   * run), a lab's own report ('lab'), a research paper ('paper'), or a source Epoch doesn't name ('unknown').
+   * Only 'board' counts as independent. The rest are claims.
+   */
+  via?: 'board' | 'lab' | 'paper' | 'unknown';
+  /** For a collected score, the source Epoch AI names: a title or a link. */
+  from?: string | null;
   card?: string;
+  /**
+   * The leaderboard's own name for an entry that is not in data/models.json (a fine-tune, agent system, product
+   * or older model). Such a score has an empty `model`, shows on its benchmark's board, and never counts toward
+   * leaders or lab credit.
+   */
+  name?: string;
+}
+
+/** The abstract of a benchmark's own paper, in its authors' words (data/abstracts.json, from scripts/abstracts.ts). */
+export interface PaperAbstract {
+  text: string;
+  /** The paper's title as its host gives it. */
+  title: string;
+  url: string;
+  source: 'arxiv' | 'acl' | 'crossref' | 'openreview';
+  /** How the page names the paper: "arXiv:2406.19314", "ACL 2024.emnlp-main.499", "doi:10.1038/sdata.2018.251". */
+  ref: string;
+  /** "CC0 1.0" or "CC BY 4.0": only licenses that allow reuse with credit. */
+  license: string;
+  /** The day the abstract was read (YYYY-MM-DD). */
+  fetched: string;
 }

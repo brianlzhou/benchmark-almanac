@@ -306,6 +306,28 @@ section + section {
   color: var(--ink);
   font-weight: 500;
 }
+/* a count that sets the table's filter (src/scripts/facts.ts) */
+.facts .fact {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted var(--ink-4);
+  text-underline-offset: 4px;
+}
+.facts .fact:hover {
+  color: var(--ink-2);
+  text-decoration-color: var(--ink-3);
+}
+.facts .fact[aria-pressed='true'] {
+  color: var(--ink);
+  text-decoration: underline solid var(--ink);
+}
+[data-filter] {
+  scroll-margin-top: 84px;
+}
 
 .head + section {
   margin-top: 40px;
@@ -464,6 +486,31 @@ select.field {
 }
 .switch:has(input[value='b']:checked) .when-b {
   display: block;
+}
+/* the pool switch (benchmark pages, /leaders/, category pages): radios named pool show the matching .pool-*
+   blocks. A wrapper takes no box of its own, so what it holds lays out as if the wrapper weren't there. */
+.pool-headline,
+.pool-independent,
+.pool-all {
+  display: contents;
+}
+.pools .pool-independent,
+.pools .pool-all,
+.pools:has(input[name='pool'][value='independent']:checked) .pool-headline,
+.pools:has(input[name='pool'][value='all']:checked) .pool-headline {
+  display: none;
+}
+.pools:has(input[name='pool'][value='independent']:checked) .pool-independent,
+.pools:has(input[name='pool'][value='all']:checked) .pool-all {
+  display: contents;
+}
+.pool-switch {
+  margin-top: 20px;
+}
+/* three long labels don't fit a phone in one row: the control wraps instead of running off the screen */
+.seg:has(input[name='pool']) {
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 /* the lab claims switch: on shows .when-a (every score), off shows .when-b (independent runs only) */
 .switch:has(input[data-claims]:not(:checked)) .when-a {

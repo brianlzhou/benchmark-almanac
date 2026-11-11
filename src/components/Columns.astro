@@ -5,7 +5,7 @@
 // arrows and a count of the ranks in view. Desktop only; phones get BarBoard.
 import type { Score } from '../lib/types.ts';
 import LabMark from './LabMark.astro';
-import { modelById } from '../lib/data.ts';
+import { modelById, sourceLabel } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
@@ -25,7 +25,7 @@ const max = unit === '%' ? 100 : rated ? top : niceMax(top);
 // a rating has no true zero, so its bars start a little below the lowest rating on the board
 const lo = rated ? ratingFloor(rows.map((s) => s.value)) : 0;
 const h = (v: number) => Math.max(2, ((v - lo) / (max - lo)) * height);
-const src = (s: Score) => (s.source === 'leaderboard' ? 'Official leaderboard' : s.source === 'epoch' ? 'Epoch AI data' : 'Lab model card');
+const src = (s: Score) => sourceLabel(s);
 const many = rows.length > 12;
 const what = rows.some((s) => !s.model) ? 'entries' : 'models';
 ---

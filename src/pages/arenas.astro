@@ -13,6 +13,7 @@ import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptio
 import { AREAS, CATEGORY_NAMES, LEVELS, SUB_BY_ID, SUBCATEGORIES, RANKED_BY_PEOPLE_OR_MATCHES } from '../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../lib/format.ts';
 import { familyOf, nextVersion } from '../lib/reigns.ts';
+import reviewedJson from '../../data/reviewed.json';
 
 // where the newest score came from, for the Last added column's tooltip
 const ADDED_FROM: Record<string, string> = { leaderboard: 'its leaderboard', epoch: 'Epoch AI', card: 'a model card' };
@@ -40,7 +41,13 @@ const rows = all
       b.cites.length + b.docCites.length - (a.cites.length + a.docCites.length) ||
       a.b.name.localeCompare(b.b.name),
   );
-const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).length;
+// a row stands for its whole family, and every version counts (src/lib/counts.ts)
+const famSize = (s: (typeof rows)[number]) => (s.b.family ? familyOf(s.b.id).filter((v) => byId.has(v)).length : 1);
+const inRows = (f: (s: (typeof rows)[number]) => boolean) => rows.filter(f).reduce((n, s) => n + famSize(s), 0);
+const arenaCount = all.length;
+// the newest arena added to the catalog, as "November 4th"
+const lastAddedDate = (reviewedJson as { added: { id: string; date: string }[] }).added.filter((a) => byId.has(a.id)).reduce((m, a) => (a.date > m ? a.date : m), '');
+const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '') : '';
 const rankedCount = (k: string) => inRows((s) => RANKED[s.b.scoring!].key === k);
 const withBoard = inRows((s) => s.board.length >= 3);
 const areaCounts = AREAS.map((a) => ({
@@ -110,12 +117,12 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     <header class="head">
       <h1>Arenas</h1>
       <p class="lede">
-        We track {rows.length} arenas and match leagues. In some, people vote between two answers. In others, models play each other in games and contests. Ratings move as new models join, so compare a rating only with others from the same arena. Tests with fixed answers are on the <a href="/benchmarks/">Benchmarks page</a>.
+        We track {arenaCount} arenas and match leagues{lastAdded && `, with the last one added on ${lastAdded}`}. Benchmarks, where models are scored against fixed answers, can be found <a href="/benchmarks/">here</a>. Have an arena that you want us to track? Let us know <a href="/submit/">here</a>.
       </p>
       <div class="facts">
-        <span><b>{rankedCount('votes')}</b> ranked by votes</span>
-        <span><b>{rankedCount('matches')}</b> ranked by matches</span>
-        <span><b>{inRows((s) => s.status === 'in use')}</b> in use</span>
+        <button type="button" class="fact" data-fact="ranked=votes" aria-pressed="false"><b>{rankedCount('votes')}</b> ranked by votes</button>
+        <button type="button" class="fact" data-fact="ranked=matches" aria-pressed="false"><b>{rankedCount('matches')}</b> ranked by matches</button>
+        <button type="button" class="fact" data-fact="status=in-use" aria-pressed="false"><b>{inRows((s) => s.status === 'in use')}</b> in use</button>
         <span><b>{withBoard}</b> with a leaderboard here</span>
         <span>Scores refreshed <b>{humanDate(AS_OF)}</b></span>
       </div>
@@ -166,7 +173,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
           <Dropdown filterKey="data" label="Data" options={dataOptions} />
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
         </div>
-        <span class="count muted" data-count>{rows.length} arenas</span>
+        <span class="count muted" data-count>{arenaCount} arenas</span>
       </div>
 
       <div class="table-wrap wide">
@@ -203,7 +210,8 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
           <tbody>
             {
               rows.map((s) => {
-                const top = s.best ? modelById.get(s.best.model) : undefined;
+                // a rating quoted in a lab's own post isn't the arena's best, so lab-claim-only arenas show none
+                const top = s.best && s.shownSource !== 'card' && s.shownSource !== 'claim' ? modelById.get(s.best.model) : undefined;
                 const prev = s.b.family ? earlier(s.b.id) : [];
                 const kind = kindOf(s);
                 const group = prev.length ? s.b.family : undefined;
@@ -213,6 +221,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                     <tr
                       class:list={{ fam: !!group }}
                       data-group={group}
+                      data-n={famSize(s) > 1 ? famSize(s) : undefined}
                       data-area={`a:${s.area} c:${s.b.category ?? 'other'}${s.b.subcategory ? ` s:${s.b.subcategory}` : ''}`}
                       data-level={s.b.level ?? ''}
                       data-ranked={ranked.key}
@@ -243,7 +252,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                           <span class="sl">{STATUS[s.status]}</span>
                         </span>
                       </td>
-                      <td class="best-c" data-v={s.best ? String(s.best.value) : undefined}>
+                      <td class="best-c" data-v={s.best && top ? String(s.best.value) : undefined}>
                         {s.best && top && (
                           <span class="best">
                             <LabMark lab={top.lab} size={14} />
@@ -257,7 +266,7 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
                       <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
                     </tr>
                     {prev.map((p, i) => {
-                      const ptop = p.best ? modelById.get(p.best.model) : undefined;
+                      const ptop = p.best && p.shownSource !== 'card' && p.shownSource !== 'claim' ? modelById.get(p.best.model) : undefined;
                       const next = nextVersion(p.b.id);
                       const pkind = kindOf(p);
                       const pranked = RANKED[p.b.scoring!];
@@ -356,7 +365,9 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
 <script>
   import { wireFilter } from '../scripts/filter.ts';
   import { wirePeek } from '../scripts/peek.ts';
+  import { wireFacts } from '../scripts/facts.ts';
   wireFilter('arenas');
+  wireFacts(document.querySelector<HTMLElement>('[data-filter="arenas"]'));
   const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
   if (peekTable) wirePeek(peekTable);
   // the area and category links set the area filter in place, and a second click clears it

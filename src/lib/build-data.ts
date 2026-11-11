@@ -2,7 +2,7 @@
 // source, and presets computed from the catalog. /build/matrix.json serves it, and the page renders its
 // default view from it on the server. The math lives in build-index.ts.
 
-import { benchmarks, models, labs, cards, systemCards, leaderboardScores, epochScores, cardScores, bestPerModel, benchById, AS_OF } from './data.ts';
+import { benchmarks, models, labs, cards, systemCards, leaderboardScores, epochScores, viaBoardScores, cardScores, bestPerModel, benchById, AS_OF } from './data.ts';
 import { areaOf } from './taxonomy.ts';
 import { labColor } from './palette.ts';
 import { COLOR_MARKS, MONO_MARKS } from './marks.ts';
@@ -32,7 +32,8 @@ let cached: Payload | null = null;
 
 export function buildPayload(): Payload {
   if (cached) return cached;
-  const indBy = group([...leaderboardScores, ...epochScores]);
+  // independent runs: leaderboards, Epoch AI's own runs, and boards Epoch AI copied. Its collected claims stay out.
+  const indBy = group([...leaderboardScores, ...epochScores, ...viaBoardScores]);
   const labBy = group(cardScores);
   const best = (by: Map<string, Score[]>, b: Benchmark) => bestPerModel(by.get(b.id) ?? [], b);
 

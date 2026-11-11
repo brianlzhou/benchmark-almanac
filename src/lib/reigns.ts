@@ -1,24 +1,42 @@
 // Who held number one, and when. A model takes the top spot on the day a score beats every earlier score
 // (its release date for independent runs, the card's date for lab claims). It keeps the spot until a
-// later model beats it. Ties leave the incumbent in place.
+// later model beats it. Ties leave the incumbent in place. A pooled row ('all', or 'independent') takes
+// every score from its sources, so the top spot goes to the best score anyone had reported so far. The
+// 'headline' row takes only the source the benchmark's page leads with (data.ts boardSource), so who leads and
+// who closed it out agree with that page.
 //
-// The clock that counts time at number one stops at the first of three moments:
+// The clock that counts time at number one stops at the first of two moments:
 //   - the best score passes 85%: the benchmark is saturated, and nobody can take the lead in a way that
 //     means much. The model that took it past 85% gets a close-out instead, counted on its own.
-//   - the next version comes out (Terminal-Bench 2.0 retires 1.0).
-//   - the newest model tested: after that, nobody knows who would lead.
-import { epochScores, cardScores, leaderboardScores, benchById, benchmarks, modelById, eciByModel, models, AS_OF, SATURATED } from './data.ts';
+//   - the newest model tested, once six weeks pass with no newer one: after that, nobody knows who would lead.
+// A new version does not stop the old one's clock. While people still test the old version its race goes
+// on, and whoever closes it out gets the credit (ARC-AGI-2 came out in March 2025, long before anyone took
+// ARC-AGI-1 past 85%). When testing stopped around the time the next version came out, the stop reads as
+// a replacement.
+import { epochScores, cardScores, leaderboardScores, viaBoardScores, collectedClaims, benchById, benchmarks, benchSummary, modelById, eciByModel, models, AS_OF, SATURATED } from './data.ts';
 import type { Score } from './types.ts';
 
-export type Source = 'leaderboard' | 'epoch' | 'card';
+/**
+ * Where a score came from: the benchmark's own leaderboard, Epoch AI's run, a board Epoch AI copied that we don't
+ * read ourselves ('collected'), a lab's own card, or a claim Epoch AI collected from a lab's report or a paper.
+ */
+export type Origin = 'leaderboard' | 'epoch' | 'collected' | 'card' | 'claim';
+/**
+ * One source, or a pool. 'headline' takes the one source the benchmark's page leads with. 'independent' takes
+ * every independent run (leaderboard, Epoch AI, boards Epoch AI copied). 'all' adds labs' own numbers and the
+ * claims Epoch AI collected.
+ */
+export type Source = Origin | 'all' | 'independent' | 'headline';
+export const INDEPENDENT: Origin[] = ['leaderboard', 'epoch', 'collected'];
+export const EVERY: Origin[] = ['leaderboard', 'epoch', 'collected', 'card', 'claim'];
 
 export interface Reign {
   model: string;
   lab?: string;
   start: string;
   end: string;
-  /** Best score while this model held the top spot, one step per improvement. */
-  steps: { date: string; value: number }[];
+  /** Best score while this model held the top spot, one step per improvement, and where each came from. */
+  steps: { date: string; value: number; from?: Origin }[];
 }
 
 export interface CloseOut {
@@ -43,7 +61,9 @@ export interface ReignRow {
   replacedBy?: { benchmark: string; date: string };
 }
 
-function build(points: { date: string; value: number; model: string }[], better: 'higher' | 'lower', unit: string): Omit<ReignRow, 'benchmark' | 'source'> | null {
+type Point = { date: string; value: number; model: string; from?: Origin };
+
+function build(points: Point[], better: 'higher' | 'lower', unit: string): Omit<ReignRow, 'benchmark' | 'source'> | null {
   const pts = points.filter((p) => p.date && p.date <= AS_OF).sort((a, b) => a.date.localeCompare(b.date));
   if (pts.length < 3) return null;
   const sign = better === 'lower' ? -1 : 1;
@@ -60,21 +80,52 @@ function build(points: { date: string; value: number; model: string }[], better:
     const best = cur?.steps.at(-1)?.value;
     if (best !== undefined && sign * p.value <= sign * best) continue;
     if (cur && cur.model === p.model) {
-      cur.steps.push({ date: p.date, value: p.value });
+      cur.steps.push({ date: p.date, value: p.value, from: p.from });
       continue;
     }
     if (cur) cur.end = p.date;
-    reigns.push({ model: p.model, lab: modelById.get(p.model)?.lab, start: p.date, end: AS_OF, steps: [{ date: p.date, value: p.value }] });
+    reigns.push({ model: p.model, lab: modelById.get(p.model)?.lab, start: p.date, end: AS_OF, steps: [{ date: p.date, value: p.value, from: p.from }] });
   }
   const vals = pts.map((p) => p.value);
   const domain: [number, number] = unit === '%' ? [0, 100] : [Math.min(0, ...vals), Math.max(...vals)];
   const lastTested = pts.at(-1)!.date;
-  const first = unit === '%' && better === 'higher' ? pts.find((p) => p.value >= SATURATED) : undefined;
+  // the close-out goes to the best score on the first day any score passed 85%: when a new benchmark opens,
+  // many older models get their scores on the same day, and the credit belongs to the one that led
+  const day = unit === '%' && better === 'higher' ? pts.find((p) => p.value >= SATURATED)?.date : undefined;
+  const first = day ? bestOfDay.get(day) : undefined;
   const closedOut = first ? { date: first.date, model: first.model, lab: modelById.get(first.model)?.lab, value: first.value } : undefined;
   return { unit, reigns, domain, lastTested, closedOut };
 }
 
 const cache = new Map<string, ReignRow | null>();
+// each source's scores by benchmark, so a pooled row does not scan every score
+const byBench = (xs: Score[]) => {
+  const m = new Map<string, Score[]>();
+  for (const s of xs) {
+    const l = m.get(s.benchmark);
+    if (l) l.push(s);
+    else m.set(s.benchmark, [s]);
+  }
+  return m;
+};
+const scoresOf = new Map<Origin, Map<string, Score[]>>([
+  ['leaderboard', byBench(leaderboardScores)],
+  ['epoch', byBench(epochScores)],
+  ['collected', byBench(viaBoardScores)],
+  ['card', byBench(cardScores)],
+  ['claim', byBench(collectedClaims)],
+]);
+
+/** The sources a pool takes for one benchmark. */
+export function originsOf(benchmark: string, source: Source): Origin[] {
+  if (source === 'all') return EVERY;
+  if (source === 'independent') return INDEPENDENT;
+  if (source === 'headline') {
+    const h = benchSummary(benchmark).boardSource;
+    return h ? [h] : [];
+  }
+  return [source];
+}
 
 export function reignRow(benchmark: string, source: Source): ReignRow | null {
   const k = `${benchmark}|${source}`;
@@ -83,14 +134,15 @@ export function reignRow(benchmark: string, source: Source): ReignRow | null {
   let row: ReignRow | null = null;
   if (b) {
     const unit = b.unit ?? '%';
-    const scores: Score[] = (source === 'leaderboard' ? leaderboardScores : source === 'epoch' ? epochScores : cardScores).filter(
-      (s) => s.benchmark === benchmark && s.unit === unit,
+    const origins = originsOf(benchmark, source);
+    const scores: (Score & { from: Origin })[] = origins.flatMap((o) =>
+      (scoresOf.get(o)!.get(benchmark) ?? []).filter((s) => s.unit === unit).map((s) => ({ ...s, from: o })),
     );
     // Epoch places scores at each model's release date, so a model older than the benchmark would seem to
     // lead before the benchmark existed. Nobody held a top spot until the benchmark came out.
     const opened = b.released ? `${b.released.slice(0, 7)}-01` : '';
     const built = build(
-      scores.map((s) => ({ date: s.date && s.date < opened ? opened : (s.date ?? ''), value: s.value, model: s.model })),
+      scores.map((s) => ({ date: s.date && s.date < opened ? opened : (s.date ?? ''), value: s.value, model: s.model, from: s.from })),
       b.better === 'lower' ? 'lower' : 'higher',
       unit,
     );
@@ -134,14 +186,13 @@ export type StopReason = 'closed' | 'replaced' | 'untested';
 export function clockStop(r: ReignRow): { date: string; why: StopReason } | null {
   const cands: { date: string; why: StopReason }[] = [];
   if (r.closedOut) cands.push({ date: r.closedOut.date, why: 'closed' });
-  if (r.replacedBy) cands.push({ date: r.replacedBy.date, why: 'replaced' });
   // a benchmark nobody has tested for six weeks: the leader is only the leader of what was tested
   if (days(r.lastTested, AS_OF) > 45) cands.push({ date: r.lastTested, why: 'untested' });
-  const live = cands.filter((c) => c.date < AS_OF).sort((a, b) => a.date.localeCompare(b.date));
-  // testing usually stops a little before the next version ships: call that a replacement
-  const rep = live.find((c) => c.why === 'replaced');
-  if (live[0]?.why === 'untested' && rep && days(live[0].date, rep.date) <= 120) return rep;
-  return live[0] ?? null;
+  const first = cands.filter((c) => c.date < AS_OF).sort((a, b) => a.date.localeCompare(b.date))[0];
+  // testing usually stops a little before the next version ships, or soon after: call that a replacement
+  const rep = r.replacedBy;
+  if (first?.why === 'untested' && rep && rep.date < AS_OF && Math.abs(days(first.date, rep.date)) <= 120) return { date: rep.date < first.date ? first.date : rep.date, why: 'replaced' };
+  return first ?? null;
 }
 
 /** When the clock stops: today, unless it stopped earlier. */

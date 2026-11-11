@@ -1,9 +1,9 @@
 ---
 // A benchmark's top five, small enough for a grid: the name as a link, then five rows of mark, model,
-// value and a thin bar in the lab's colour.
+// value and a thin bar in the lab's color.
 import type { BenchSummary } from '../lib/data.ts';
 import ModelName from './ModelName.astro';
-import { modelById } from '../lib/data.ts';
+import { modelById, fromName } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { score as fmt } from '../lib/format.ts';
 
@@ -32,7 +32,7 @@ const max = unit === '%' ? 100 : Math.max(...s.board.slice(0, n).map((x) => x.va
       ))
     }
   </ol>
-  <p class="src">{s.boardSource === 'leaderboard' ? 'Official leaderboard' : s.boardSource === 'epoch' ? 'Epoch AI data' : 'As labs report it'}</p>
+  <p class="src">{s.boardSource === 'leaderboard' ? 'Official leaderboard' : s.boardSource === 'epoch' ? 'Epoch AI runs' : s.boardSource === 'collected' ? `${s.board[0] ? fromName(s.board[0]) : 'Another board'}, via Epoch AI` : s.boardSource === 'claim' ? 'Claims Epoch AI collected' : 'As labs report it'}</p>
 </article>
 
 <style>

@@ -25,5 +25,5 @@ export function untested(id: string, top = 20): Untested | null {
   // a board updated in the last six weeks is current enough: models released since may simply be queued
   const stale = (Date.parse(AS_OF) - Date.parse(last)) / 86_400_000 > 45;
   if (newer.length < 2 || !stale) return null;
-  return { last, missing, newer, claimed: s.boardSource === 'epoch' ? missing.filter((m) => claims.has(m)) : [], top };
+  return { last, missing, newer, claimed: s.boardSource === 'epoch' || s.boardSource === 'collected' ? missing.filter((m) => claims.has(m)) : [], top };
 }
