@@ -130,7 +130,7 @@ function presets(p: Payload): Preset[] {
   };
 
   // 1. the families the most labs reported this year that still separate models, each as the version reported this
-  // year that has independent scores for the most recent models
+  // year that the most models from the last six months have
   const reported: { f: string; id: string; labs: number }[] = [];
   for (const [f, s] of [...labsYear.entries()].sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]))) {
     const v = (members.get(f) ?? [])
@@ -144,7 +144,7 @@ function presets(p: Payload): Preset[] {
     {
       id: 'reported',
       name: `The ${reported.length} tests most labs reported in ${year}`,
-      how: `The benchmark families named by the most labs in their own ${year} launch posts and system cards (from ${reported[0]?.labs} labs down to ${reported.at(-1)?.labs}), leaving out any where top models score past 92%. Each comes as the version with independent scores for the most recent models.`,
+      how: `The benchmark families named by the most labs in their own ${year} launch posts and system cards (from ${reported[0]?.labs} labs down to ${reported.at(-1)?.labs}), leaving out any where top models score past 92%. Each comes as the version the most models from the last six months have.`,
       b: reported.map((x) => x.id),
     },
   ];
@@ -169,7 +169,7 @@ function presets(p: Payload): Preset[] {
     return {
       id: pid,
       name: `${ids.length} ${label} tests`,
-      how: `${label[0].toUpperCase()}${label.slice(1)} benchmarks that at least two labs reported in the last 18 months, with independent scores for the most recent models. One version each, leaving out vote-based boards and any test past 92%.`,
+      how: `${label[0].toUpperCase()}${label.slice(1)} benchmarks that at least two labs reported in the last 18 months, each as the version the most models from the last six months have. One version each, leaving out vote-based boards and any test past 92%.`,
       b: ids.map((x) => x.id),
     };
   };

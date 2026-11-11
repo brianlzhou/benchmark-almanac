@@ -9,74 +9,129 @@ import { fullDate } from '../lib/format.ts';
 
 interface Props {
   lines: SpreadLine[];
-  /** How many of the fastest to ten labs to draw in color. */
+  /** How many of the fastest to the goal to draw in color. */
   fast?: number;
+  /** The count of labs that marks "spread": ten of all labs, or all five frontier labs. */
+  goal?: number;
+  /** The goal in a few words, for labels: "ten labs", "all five". */
+  goalText?: string;
 }
-const { lines, fast = 5 } = Astro.props;
+const { lines, fast = 5, goal = 10, goalText = 'ten labs' } = Astro.props;
+const reach = (l: SpreadLine) => (l.days.length >= goal ? l.days[goal - 1] : null);
 
 const f1 = (n: number) => (Math.round(n * 10) / 10).toString();
 const MONTH = 365.25 / 12;
 const maxEnd = Math.max(...lines.map((l) => l.end));
 const months = Math.ceil(maxEnd / MONTH / 3) * 3;
-const maxLabs = Math.ceil(Math.max(...lines.map((l) => l.days.length)) / 10) * 10;
+// up to a dozen labs get a tick each; dozens get one every ten
+const most = Math.max(...lines.map((l) => l.days.length));
+const maxLabs = most <= 12 ? most : Math.ceil(most / 10) * 10;
+const yTicks = most <= 12 ? Array.from({ length: most + 1 }, (_, i) => i) : [0, 10, 20, 30, 40, 50].filter((n) => n <= maxLabs);
 
 const fastest = lines
-  .filter((l) => l.d10 != null)
-  .sort((a, b) => a.d10! - b.d10! || a.name.localeCompare(b.name))
+  .filter((l) => reach(l) != null)
+  .sort((a, b) => reach(a)! - reach(b)! || a.name.localeCompare(b.name))
   .slice(0, fast);
-const widest = lines.filter((l) => !fastest.includes(l)).slice(0, 2);
+// When the goal is every lab there is (the frontier labs), reaching it ends the story: lines stop there, and their
+// names sit above that finish line in the order they crossed it, or in a column beside it on a phone. Only lines
+// that crossed it get a name then, so the widest of the rest stay faint too.
+const finish = goal >= most;
+const widest = finish ? [] : lines.filter((l) => !fastest.includes(l)).slice(0, 2);
 const on = new Set([...fastest, ...widest]);
 const kind = (l: SpreadLine) => (fastest.includes(l) ? 'fast' : widest.includes(l) ? 'wide' : 'faint');
+const lead = fastest[0];
+// the fastest one's label carries its pace; a phone's narrow column keeps just the name
+function endText(l: SpreadLine, narrow: boolean) {
+  return l === lead && !narrow ? `${l.name}, ${goalText} in ${reach(l)} days` : l.name;
+}
 
 const ZONES = [
   { key: 'wide', w: 1120, h: 430, l: 34, r: 196, t: 14, b: 46, font: 12, every: 3, columns: false },
-  { key: 'narrow', w: 358, h: 360, l: 26, r: 112, t: 14, b: 42, font: 11, every: 6, columns: true },
+  { key: 'narrow', w: 358, h: 360, l: 26, r: 122, t: 14, b: 42, font: 11, every: 6, columns: true },
 ];
 
-const views = ZONES.map((z) => {
-  const X = (days: number) => z.l + (days / (months * MONTH)) * (z.w - z.l - z.r);
+const stop = (l: SpreadLine) => (finish && reach(l) != null ? reach(l)! : l.end);
+
+const views = ZONES.map((z0) => {
+  const X = (days: number) => z0.l + (days / (months * MONTH)) * (z0.w - z0.l - z0.r);
+  type L = { l: SpreadLine; ex: number; ey: number; x: number; y: number; w: number; text: string; col: boolean; slot: number };
+  const placed: L[] = [];
+  let rail = 0;
+  if (finish) {
+    const items = [...on]
+      .filter((x) => reach(x) != null)
+      .map((l) => {
+        const text = endText(l, z0.columns);
+        return { l, ex: X(reach(l)!), w: textW(text, z0.font), text };
+      })
+      .sort((a, b) => a.ex - b.ex);
+    const minX = z0.l - 20;
+    const maxX = z0.w - 2;
+    const total = items.reduce((sum, it) => sum + it.w + 12, -12);
+    if (!z0.columns && total <= maxX - minX) {
+      // one rail above the finish line, in crossing order, pushed apart: the leaders slant but never cross
+      const xs: number[] = [];
+      items.forEach((it, i) => (xs[i] = Math.max(it.ex - it.w / 2, i ? xs[i - 1] + items[i - 1].w + 12 : minX)));
+      for (let i = items.length - 1; i >= 0; i--) {
+        const lim = i < items.length - 1 ? xs[i + 1] - 12 : maxX;
+        if (xs[i] + items[i].w > lim) xs[i] = lim - items[i].w;
+      }
+      items.forEach((it, i) => placed.push({ ...it, ey: 0, x: xs[i], y: 0, col: false, slot: 0 }));
+      rail = 1;
+    } else
+      // a column at the right: the crossing nearest the column takes the top place, so the leaders nest
+      [...items]
+        .sort((a, b) => b.ex - a.ex)
+        .forEach((it, i) => placed.push({ ...it, ey: 0, x: z0.w - z0.r + 6, y: 0, col: true, slot: i }));
+  }
+  const z = { ...z0, t: z0.t + rail * (z0.font + 30) };
   const Y = (n: number) => z.h - z.b - (n / maxLabs) * (z.h - z.t - z.b);
+  for (const e of placed) {
+    e.ey = Y(goal);
+    e.y = e.col ? Y(goal) + 4 + e.slot * (z.font + 4) : Y(goal) - 34;
+  }
   const path = (l: SpreadLine) => {
     let d = `M${f1(X(0))},${f1(Y(1))}`;
-    for (let k = 1; k < l.days.length; k++) d += `H${f1(X(l.days[k]))}V${f1(Y(k + 1))}`;
-    return `${d}H${f1(X(l.end))}`;
+    for (let k = 1; k < l.days.length && l.days[k] <= stop(l); k++) d += `H${f1(X(l.days[k]))}V${f1(Y(k + 1))}`;
+    return `${d}H${f1(X(stop(l)))}`;
   };
-  // end labels: at the line's end on a wide screen, in a column at the right on a phone, pushed apart to never touch
-  type L = { l: SpreadLine; ex: number; ey: number; x: number; y: number; w: number };
-  const ends: L[] = [...on]
-    .map((l) => {
-      const ex = X(l.end);
-      const ey = Y(l.days.length);
-      return { l, ex, ey, x: z.columns ? z.w - z.r + 8 : ex + 6, y: ey + 4, w: textW(l.name, z.font) };
-    })
-    .sort((a, b) => a.ey - b.ey);
-  const placed: L[] = [];
-  for (const e of ends) {
-    const clash = () => placed.some((p) => e.x < p.x + p.w + 4 && p.x < e.x + e.w + 4 && Math.abs(p.y - e.y) < z.font + 3);
-    while (clash()) e.y += 1;
-    placed.push(e);
+  if (!finish) {
+    // at the line's end on a wide screen, in a column at the right on a phone, pushed apart to never touch
+    const ends: L[] = [...on]
+      .map((l) => {
+        const ex = X(l.end);
+        const ey = Y(l.days.length);
+        const text = endText(l, z.columns);
+        return { l, ex, ey, x: z.columns ? z.w - z.r + 6 : ex + 6, y: ey + 4, w: textW(text, z.font), text, col: z.columns, slot: 0 };
+      })
+      .sort((a, b) => a.ey - b.ey);
+    for (const e of ends) {
+      const clash = () => placed.some((p) => e.x < p.x + p.w + 4 && p.x < e.x + e.w + 4 && Math.abs(p.y - e.y) < z.font + 3);
+      // capped, so no layout can stall the page render
+      for (let k = 0; k < 2000 && clash(); k++) e.y += 1;
+      placed.push(e);
+    }
   }
   const ticks: number[] = [];
   for (let mth = 0; mth <= months; mth += z.every) ticks.push(mth);
   return { z, X, Y, path, ends: placed, ticks };
 });
 
-const lead = fastest[0];
 const tipFor = (l: SpreadLine) => ({
   'data-tv': l.name,
   'data-tn': `${l.days.length} labs in ${l.end} days`,
-  'data-ts': `${l.d10 != null ? `Ten labs by day ${l.d10}. ` : ''}First named ${fullDate(l.first)}`,
+  'data-ts': `${reach(l) != null ? `${goalText.replace(/^./, (c) => c.toUpperCase())} by day ${reach(l)}. ` : ''}First named ${fullDate(l.first)}`,
 });
 const ordered = [...lines].sort((a, b) => Number(on.has(a)) - Number(on.has(b)));
-const label = `${lines.length} benchmarks released since 2025, each lined up on the day a lab first named it. ${fastest.map((l) => `${l.name} reached ten labs in ${l.d10} days.`).join(' ')}`;
-const mlabel = (m: number) => (m === 0 ? '0' : m % 12 === 0 ? `${m / 12} ${m === 12 ? 'year' : 'years'}` : `${m} months`);
+const label = `${lines.length} benchmarks released since 2025, each lined up on the day a lab first named it. ${fastest.map((l) => `${l.name} reached ${goalText} in ${reach(l)} days.`).join(' ')}`;
+const mlabel = (m: number) => String(m);
 ---
 
 <div class="rp-spread">
   {
     views.map(({ z, X, Y, path, ends, ticks }) => (
       <svg class={`only-${z.key}`} viewBox={`0 0 ${z.w} ${z.h}`} role={z.key === 'wide' ? 'group' : 'img'} aria-label={label} style={`--f:${z.font}px`} data-rove={z.key === 'wide' ? '' : undefined}>
-        {[0, 10, 20, 30, 40, 50].filter((n) => n <= maxLabs).map((n) => (
+        {yTicks.map((n) => (
           <g>
             <line class="g" x1={z.l} x2={z.w - z.r} y1={f1(Y(n))} y2={f1(Y(n))} />
             <text class="t num" x={z.l - 6} y={f1(Y(n) + 4)} text-anchor="end">
@@ -90,7 +145,7 @@ const mlabel = (m: number) => (m === 0 ? '0' : m % 12 === 0 ? `${m / 12} ${m ===
           </text>
         ))}
         <text class="t" x={z.l} y={z.h - 6}>
-          Time since a lab first named it
+          Months since a lab first named it
         </text>
         {ordered.map((l, i) => (
           <g class={`rp-sl rp-${kind(l)}`} data-l={i} tabindex={z.key === 'wide' ? (l === lead ? 0 : -1) : undefined} {...(z.key === 'wide' ? tipFor(l) : {})}>
@@ -98,19 +153,20 @@ const mlabel = (m: number) => (m === 0 ? '0' : m % 12 === 0 ? `${m / 12} ${m ===
             <path class={`ln a-${l.area}`} d={path(l)} />
           </g>
         ))}
-        {z.key === 'wide' && lead && (
+        {(finish ? fastest : lead ? [lead] : []).map((l) => (
           <g class="rp-ann">
-            <circle class={`a-${lead.area}`} cx={f1(X(lead.d10!))} cy={f1(Y(10))} r="4.5" />
-            <text x={f1(X(lead.d10!) + 9)} y={f1(Y(10) - 9)}>
-              {`Ten labs in ${lead.d10} days`}
-            </text>
+            <circle class={`a-${l.area}`} cx={f1(X(reach(l)!))} cy={f1(Y(goal))} r="4" />
           </g>
-        )}
+        ))}
         {ends.map((e) => (
           <g class="rp-se">
-            {Math.abs(e.y - 4 - e.ey) > 3 || z.columns ? <line x1={f1(e.ex + 2)} y1={f1(e.ey)} x2={f1(e.x - 3)} y2={f1(e.y - 4)} /> : null}
+            {finish && !e.col ? (
+              <line x1={f1(e.ex)} y1={f1(e.ey - 5)} x2={f1(Math.min(Math.max(e.ex, e.x + 4), e.x + e.w - 4))} y2={f1(e.y + 3)} />
+            ) : Math.abs(e.y - 4 - e.ey) > 3 || e.col ? (
+              <line x1={f1(e.ex + 2)} y1={f1(e.ey)} x2={f1(e.x - 3)} y2={f1(e.y - 4)} />
+            ) : null}
             <text x={f1(e.x)} y={f1(e.y)} class={kind(e.l) === 'fast' ? 'on' : ''}>
-              {e.l.name}
+              {e.text}
             </text>
           </g>
         ))}
@@ -125,6 +181,17 @@ const mlabel = (m: number) => (m === 0 ? '0' : m % 12 === 0 ? `${m / 12} ${m ===
     width: 100%;
     height: auto;
     overflow: visible;
+  }
+  svg.only-narrow {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    svg.only-wide {
+      display: none;
+    }
+    svg.only-narrow {
+      display: block;
+    }
   }
   .g {
     stroke: var(--grid);

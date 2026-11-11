@@ -1,0 +1,1431 @@
+---
+// Which benchmarks labs report, as a set of graphics built from our own launch posts and the documents published
+// with them: every benchmark of a year as one shape (the canon and the long tail), the top ten each quarter, how
+// fast new benchmarks spread, what each lab names by area, and a lab-by-benchmark lookup. The year graphics and the
+// lookup render here for the default view, and the page script renders other views from /reporting.json with the
+// same functions (src/lib/reporting-view.ts, src/lib/reporting-graphics.ts).
+import Base from '../layouts/Base.astro';
+import ReportingBump from '../components/ReportingBump.astro';
+import ReportingSpread from '../components/ReportingSpread.astro';
+import { reportingData, currentYear, bump, spread, frontierNames } from '../lib/reporting.ts';
+import { matrix, headHtml, bodyHtml, statusText, DEFAULT_VIEW, DOT_KEY, dotSize, areaIcon, FRONTIER, FRONTIER_LABS, FRONTIER_BASIS } from '../lib/reporting-view.ts';
+import { symbolsSvg, swarmSvg, SWARMS, heroHead, heroLede, printsHtml, printsHead, printsLede, lookupHead, lookupLede, word } from '../lib/reporting-graphics.ts';
+
+const d = reportingData();
+const year = currentYear();
+const view = DEFAULT_VIEW(year);
+const m = matrix(d, view);
+const cap = (t: string) => t.replace(/^./, (c) => c.toUpperCase());
+const names = frontierNames();
+const frontierList = `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
+
+// The two charts that cover every year render twice, for every lab and for the frontier labs, and the switch
+// shows one. Each version's headline is computed from its own counts.
+const modes = [
+  { key: 'all', labs: undefined, who: 'labs', minLabs: 5 },
+  { key: 'fr', labs: FRONTIER, who: 'frontier labs', minLabs: Math.max(3, Math.ceil(FRONTIER_LABS.length / 2)) },
+].map((mode) => {
+  // the top ten each column, and who stayed in it throughout
+  const b = bump(mode.labs);
+  const last = b.cols.length - 1;
+  const first = b.cols[0].label;
+  const always = b.lines.filter((l) => l.ranks.every((r) => r != null));
+  const stayed = b.lines.filter((l) => l.ranks[0] != null && l.ranks[last] != null);
+  // when nothing stayed throughout, the benchmark in the top ten most often, counting the quarters alone so that
+  // a benchmark born after 2024 compares fairly
+  const inTop = (l: (typeof b.lines)[number]) => l.ranks.slice(1).filter((r) => r != null).length;
+  const most = Math.max(...b.lines.map(inTop));
+  const mostOften = b.lines.filter((l) => inTop(l) === most);
+  const quarters = b.cols.length - 1;
+  const since = b.cols[1]?.label.slice(-4) ?? first;
+  const tenOf = mode.labs ? "frontier labs' top ten" : 'the top ten';
+  const bumpHead =
+    always.length === 1
+      ? `Only ${always[0].name} has made ${tenOf} in every quarter since ${first}`
+      : always.length
+        ? `${cap(word(always.length))} benchmarks have made ${tenOf} in every quarter since ${first}`
+        : `${mostOften.map((l) => l.name).join(' and ')} ${mostOften.length > 1 ? 'each ' : ''}made ${tenOf} in ${word(most)} of the ${word(quarters)} quarters since ${since} began, more than any other benchmark`;
+  const leader = b.lines.find((l) => l.ranks[last] === 1);
+  // how many columns in a row, up to the latest, the current leader has been first
+  const leadRun = leader ? ([...leader.ranks].reverse().findIndex((r) => r !== 1) + 1 || leader.ranks.length + 1) - 1 : 0;
+  const bumpNote = `Of ${first}'s top ten, ${stayed.length ? word(stayed.length) : 'none'} ${stayed.length === 1 ? 'is' : 'are'} still in it${leader && leadRun > 1 ? `, and ${leader.name} has been first for ${word(leadRun)} quarters running` : ''}.`;
+  const bumpLede = `The ten benchmarks ${mode.who} named in the most releases, quarter by quarter. A line's thickness is the share of that quarter's releases that named it. ${bumpNote} ${first} is one column because ${mode.who} published only ${b.cols[0].n} launch posts with scores that year.`;
+
+  // the spread: ten labs of every lab, or all of the frontier labs (four if none got to all of them)
+  const sp = spread(mode.minLabs, mode.labs);
+  const reachAt = (goal: number) =>
+    sp
+      .filter((l) => l.days.length >= goal)
+      .map((l) => ({ l, days: l.days[goal - 1] }))
+      .sort((a, c) => a.days - c.days);
+  // all of them if any benchmark got there, else the most that any did (capped, like every loop on this page)
+  let goal = mode.labs ? FRONTIER_LABS.length : 10;
+  let reached = reachAt(goal);
+  for (let k = 0; mode.labs && !reached.length && goal > 2 && k < 20; k++) reached = reachAt(--goal);
+  const goalText = !mode.labs ? 'ten labs' : goal === FRONTIER_LABS.length ? `all ${word(goal)}` : `${word(goal)} of the ${word(FRONTIER_LABS.length)}`;
+  const goalLong = mode.labs ? `${goalText} frontier labs` : goalText;
+  const fastest = reached[0];
+  const median = reached.length ? reached[Math.floor(reached.length / 2)].days : 0;
+  const spreadHead = !fastest
+    ? 'How fast new benchmarks spread'
+    : reached.length === 1
+      ? `${fastest.l.name} is the only new benchmark that reached ${goalLong}, ${fastest.days} days after the first one named it`
+      : `${fastest.l.name} reached ${goalLong} ${fastest.days} days after the first one named it, the fastest of ${reached.length} new benchmarks that got there`;
+  const spreadLede = `Every benchmark released since the start of 2025 that at least ${word(mode.minLabs)} ${mode.who} have named, lined up on the day the first one named it. Each step up is another lab.${
+    reached.length > 1 ? ` Half of the ${reached.length} that reached ${goalText} took ${median} days or less.` : ''
+  }`;
+  return { ...mode, b, bumpHead, bumpLede, sp, goal, goalText, spreadHead, spreadLede };
+});
+
+// The title and opening paragraph of every year view, so a link to one can show the right words before the
+// first paint (the inline script under the switches). The graphics wait for the data instead.
+const texts: Record<string, [string, string]> = {};
+for (const y of d.years)
+  for (const safety of [false, true])
+    for (const frontier of [false, true]) {
+      const v = { ...DEFAULT_VIEW(y), safety, frontier };
+      texts[`${y}|${+safety}|${+frontier}`] = [heroHead(d, v), heroLede(d, v)];
+    }
+
+const sizeKey = [1, 10, 50];
+---
+
+<Base title="What labs report" description={`Which benchmarks AI labs named for their model releases in ${year}, from the canon every lab names to the long tail only one lab does.`} film="reporting">
+  <Fragment set:html={symbolsSvg()} />
+  <div class="page rp-page">
+    <script is:inline define:vars={{ rpYears: d.years }}>
+      // Before the first paint: a link to another view marks the graphics that wait for its data, so the default
+      // view never shows in their place. The page script clears the marks once it has drawn the view.
+      var el = document.currentScript.parentElement;
+      var q = new URLSearchParams(location.search);
+      var yr = rpYears.indexOf(q.get('year')) > 0 ? q.get('year') : rpYears[0];
+      var safe = q.get('safety') === '1';
+      var fr = q.get('labs') === 'frontier';
+      el.classList.toggle('fr', fr);
+      el.classList.toggle('rp-safe', safe);
+      if (yr !== rpYears[0] || safe || fr) el.classList.add('rp-wait');
+      else if (q.get('names') === 'exact' || q.has('min') || q.has('sort') || q.get('q')) el.classList.add('rp-wait-look');
+      el.dataset.view = yr + '|' + (safe ? 1 : 0) + '|' + (fr ? 1 : 0);
+    </script>
+    <header class="head">
+      <h1 class="long" data-rp-h1>{heroHead(d, view)}</h1>
+      <p class="lede" data-rp-lede>{heroLede(d, view)}</p>
+      <form class="rp-top" data-rp-top>
+        <div class="seg" role="radiogroup" aria-label="Year">
+          {
+            d.years.map((y) => (
+              <label>
+                <input type="radio" name="year" value={y} checked={y === year} />
+                {y}
+              </label>
+            ))
+          }
+        </div>
+        <label class="claims" title="Safety, alignment, bio-chem and cyber evaluations, mostly from system cards">
+          <input type="checkbox" name="safety" />
+          Include safety evaluations
+        </label>
+        <label class="claims" title={`Only releases from ${frontierList}`}>
+          <input type="checkbox" name="frontier" />
+          Frontier labs only
+        </label>
+      </form>
+      <p class="rp-fl">The frontier labs are the {word(FRONTIER_LABS.length)} {FRONTIER_BASIS}: {frontierList}.</p>
+      <p class="rp-note" data-rp-note hidden>The data for this view didn't load, so the page shows {year} for every lab. Try the switches again in a moment.</p>
+      <script is:inline define:vars={{ rpTexts: texts }}>
+        // the title, the opening paragraph and the switches, set for the view the link asks for before they paint
+        var page = document.currentScript.closest('.rp-page');
+        var parts = page.dataset.view.split('|');
+        var t = rpTexts[page.dataset.view];
+        if (t)
+          [['[data-rp-h1]', t[0]], ['[data-rp-lede]', t[1]]].forEach(function (x) {
+            var e = page.querySelector(x[0]);
+            if (e && e.textContent !== x[1]) {
+              e.dataset.orig = e.textContent;
+              e.textContent = x[1];
+            }
+          });
+        var form = page.querySelector('[data-rp-top]');
+        var r = form.querySelector('input[name=year][value="' + parts[0] + '"]');
+        if (r) r.checked = true;
+        form.querySelector('input[name=safety]').checked = parts[1] === '1';
+        form.querySelector('input[name=frontier]').checked = parts[2] === '1';
+        // if the page script never starts, show the default view again rather than empty space
+        if (/rp-wait/.test(page.className))
+          setTimeout(function () {
+            if (page.dataset.ready) return;
+            page.classList.remove('rp-wait', 'rp-wait-look', 'fr', 'rp-safe');
+            page.querySelectorAll('[data-orig]').forEach(function (e) {
+              e.textContent = e.dataset.orig;
+            });
+            form.reset();
+            page.querySelector('[data-rp-note]').hidden = false;
+          }, 12000);
+      </script>
+    </header>
+
+    <section id="canon" class="rp-hero" aria-label="Every benchmark named this year">
+      <div class="rp-swarmbox" data-rp-swarm set:html={SWARMS.map((o) => swarmSvg(d, view, o)).join('')} />
+      <div class="rp-keys">
+        <ul class="rp-key" aria-label="Areas">
+          {
+            d.areas.map((a) => (
+              <li class={a.id === 'safety' ? 'rp-ksafe' : undefined}>
+                <Fragment set:html={areaIcon(a.id, 11)} />
+                {a.name}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="rp-size">
+          <svg width="118" height="32" viewBox="0 0 118 32" aria-hidden="true">
+            {
+              sizeKey.map((n, i) => (
+                <g>
+                  <circle cx={[3, 33, 79][i]} cy={30 - 2.1 * Math.sqrt(n)} r={2.1 * Math.sqrt(n)} />
+                  <text x={[3, 33, 79][i] + 2.1 * Math.sqrt(n) + 4} y="30" class="num">
+                    {n}
+                  </text>
+                </g>
+              ))
+            }
+          </svg>
+          <span>releases named it</span>
+        </p>
+      </div>
+      <div id="rp-pop" role="tooltip" hidden></div>
+    </section>
+
+    <section id="charts">
+      {
+        modes.map((mo) => (
+          <div class={`rp-v-${mo.key}`}>
+            <div class="sh">
+              <h2>{mo.bumpHead}</h2>
+              <p>{mo.bumpLede}</p>
+            </div>
+            <ReportingBump cols={mo.b.cols} lines={mo.b.lines} />
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="spread">
+      {
+        modes.map((mo) => (
+          <div class={`rp-v-${mo.key}`}>
+            <div class="sh">
+              <h2>{mo.spreadHead}</h2>
+              <p>{mo.spreadLede}</p>
+            </div>
+            <ReportingSpread lines={mo.sp} goal={mo.goal} goalText={mo.goalText} />
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="labs">
+      <div class="sh">
+        <h2 data-rp-prints-head>{printsHead(d, view)}</h2>
+        <p data-rp-prints-lede>{printsLede(d, view)}</p>
+      </div>
+      <ul class="rp-key rp-pkey" aria-label="Areas">
+        {
+          d.areas.map((a) => (
+            <li class={a.id === 'safety' ? 'rp-ksafe' : undefined}>
+              <Fragment set:html={areaIcon(a.id, 11)} />
+              {a.name}
+            </li>
+          ))
+        }
+      </ul>
+      <div class="rp-prints" data-rp-prints data-rove set:html={printsHtml(d, view)} />
+    </section>
+
+    <section id="lookup">
+      <div class="sh">
+        <h2 data-rp-look-head>{lookupHead(d, view)}</h2>
+        <p data-rp-look-lede>{lookupLede(d, view)}</p>
+      </div>
+
+      <form class="rp-ctl" data-rp-ctl>
+        <div class="seg" role="radiogroup" aria-label="Names">
+          <label><input type="radio" name="names" value="grouped" checked />Versions grouped</label>
+          <label><input type="radio" name="names" value="exact" />Exact names</label>
+        </div>
+        <label class="rp-min" title="Only benchmarks that at least this many labs named in the year">
+          At least
+          <input class="field num" type="number" name="min" min="1" max="60" value={view.min} inputmode="numeric" />
+          labs
+        </label>
+        <label class="rp-sort">
+          <span class="sr">Sort</span>
+          <select class="field" name="sort">
+            <option value="labs" selected>Most labs</option>
+            <option value="releases">Most releases</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+        <input class="field rp-q" type="search" name="q" placeholder="Benchmark or maker" aria-label="Find a benchmark or its maker" autocomplete="off" />
+      </form>
+
+      <p class="rp-status muted" data-rp-status aria-live="polite">{statusText(m, view)}</p>
+
+      <div class="table-wrap wide rp-wrap">
+        <table class="rp-m" data-rp-matrix>
+          <caption class="sr">Releases per lab that named each benchmark in the chosen year</caption>
+          <thead set:html={headHtml(d, m)} />
+          <tbody set:html={bodyHtml(d, m)} />
+        </table>
+      </div>
+
+      <div class="rp-legend" aria-hidden="true">
+        <span class="muted">Releases per dot</span>
+        {
+          DOT_KEY.map((n) => (
+            <span class="rp-lk">
+              <i class="rp-dot" style={`--d:${dotSize(n)}px`} />
+              <span class="num">{n}</span>
+            </span>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="sh">
+        <h2>How this is counted</h2>
+      </div>
+      <div class="rp-method">
+        <p>
+          A release is one launch post. When a lab put out several models under one post, that's one release. The system cards, model cards and technical reports that came with a post count toward the same release.
+          A benchmark counts once per release, however many settings, subsets or documents report it, and with or without a score.
+        </p>
+        <p>
+          Versions of one test count as one benchmark in the graphics, so Terminal-Bench 2.0 and 3.0 are both Terminal-Bench. Tests with their own task sets stay apart, like SWE-bench Verified, SWE-Bench Pro and
+          SWE-bench Multilingual. The lookup can show every version on its own.
+        </p>
+        <p>
+          A benchmark's color and shape come from its area, the same eight areas the rest of the almanac uses. Safety, alignment, bio and cyber evaluations are left out until you switch them on. Most come from
+          system cards, and only a few labs publish those.
+        </p>
+        <p>
+          The quarterly chart counts {modes[0].b.cols[0].label} as one column, because we have only {modes[0].b.cols[0].n} launch posts with scores from that year. The spread chart only shows benchmarks released since
+          2025, so the first lab we saw name one is the first lab that did.
+        </p>
+        <p>
+          "Frontier labs only" counts just the releases of the {word(FRONTIER_LABS.length)} labs {FRONTIER_BASIS}. Every count on the page then compares those labs with each other, and the spread chart asks how
+          fast a benchmark reached them.
+        </p>
+        <p>
+          We only count what labs reported themselves. Leaderboard and Epoch AI scores don't count here. Every number links back to its source on the benchmark's page and the model's page, and the
+          <a href="/cards/">Model cards</a> page lists every post we read.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { matrix, headHtml, bodyHtml, statusText, cellReleases, DEFAULT_VIEW, esc, areaIcon, type RData, type View, type Row } from '../lib/reporting-view.ts';
+  import { swarmSvg, swarmRows, swarmOrder, SWARMS, heroHead, heroLede, printsHtml, printsHead, printsLede, lookupHead, lookupLede } from '../lib/reporting-graphics.ts';
+  import { fullDate } from '../lib/format.ts';
+
+  const top = document.querySelector<HTMLFormElement>('[data-rp-top]')!;
+  const form = document.querySelector<HTMLFormElement>('[data-rp-ctl]')!;
+  const table = document.querySelector<HTMLTableElement>('[data-rp-matrix]')!;
+  const status = document.querySelector<HTMLElement>('[data-rp-status]')!;
+  const swarmBox = document.querySelector<HTMLElement>('[data-rp-swarm]')!;
+  const prints = document.querySelector<HTMLElement>('[data-rp-prints]')!;
+  const pop = document.getElementById('rp-pop')!;
+  const page = document.querySelector<HTMLElement>('.rp-page')!;
+  page.dataset.ready = '1';
+  const years = [...top.querySelectorAll<HTMLInputElement>('input[name=year]')].map((i) => i.value);
+  const base = DEFAULT_VIEW(years[0]);
+  const text = (sel: string, s: string) => document.querySelectorAll(sel).forEach((el) => (el.textContent = s));
+
+  let data: RData | null = null;
+  let loading: Promise<RData> | null = null;
+  // a failed load is forgotten, so the next switch tries again
+  const load = () =>
+    (loading ??= fetch('/reporting.json')
+      .then((r) => {
+        if (!r.ok) throw new Error(`reporting.json ${r.status}`);
+        return r.json() as Promise<RData>;
+      })
+      .then((x) => (data = x))
+      .catch((e) => {
+        loading = null;
+        throw e;
+      }));
+
+  function readForm(): View {
+    const t = new FormData(top);
+    const f = new FormData(form);
+    return {
+      year: String(t.get('year') ?? base.year),
+      safety: t.get('safety') === 'on',
+      frontier: t.get('frontier') === 'on',
+      names: f.get('names') === 'exact' ? 'exact' : 'grouped',
+      min: Math.max(1, Math.min(60, Math.round(Number(f.get('min')) || 1))),
+      sort: (['labs', 'releases', 'name'].includes(String(f.get('sort'))) ? f.get('sort') : 'labs') as View['sort'],
+      q: String(f.get('q') ?? ''),
+    };
+  }
+
+  function writeForm(v: View) {
+    top.querySelector<HTMLInputElement>(`input[name=year][value="${v.year}"]`)!.checked = true;
+    top.querySelector<HTMLInputElement>('input[name=safety]')!.checked = v.safety;
+    top.querySelector<HTMLInputElement>('input[name=frontier]')!.checked = v.frontier;
+    form.querySelector<HTMLInputElement>(`input[name=names][value="${v.names}"]`)!.checked = true;
+    form.querySelector<HTMLInputElement>('input[name=min]')!.value = String(v.min);
+    form.querySelector<HTMLSelectElement>('select[name=sort]')!.value = v.sort;
+    form.querySelector<HTMLInputElement>('input[name=q]')!.value = v.q;
+  }
+
+  function fromUrl(): View {
+    const p = new URLSearchParams(location.search);
+    const v = { ...base };
+    if (p.get('year') && years.includes(p.get('year')!)) v.year = p.get('year')!;
+    if (p.get('names') === 'exact') v.names = 'exact';
+    if (p.get('min') && Number(p.get('min')) >= 1) v.min = Math.min(60, Math.round(Number(p.get('min'))));
+    if (['releases', 'name'].includes(p.get('sort') ?? '')) v.sort = p.get('sort') as View['sort'];
+    if (p.get('q')) v.q = p.get('q')!;
+    if (p.get('safety') === '1') v.safety = true;
+    if (p.get('labs') === 'frontier') v.frontier = true;
+    return v;
+  }
+
+  function toUrl(v: View) {
+    const p = new URLSearchParams();
+    if (v.year !== base.year) p.set('year', v.year);
+    if (v.safety) p.set('safety', '1');
+    if (v.frontier) p.set('labs', 'frontier');
+    if (v.names !== base.names) p.set('names', v.names);
+    if (v.min !== base.min) p.set('min', String(v.min));
+    if (v.sort !== base.sort) p.set('sort', v.sort);
+    if (v.q.trim()) p.set('q', v.q.trim());
+    const qs = p.toString();
+    history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+  }
+
+  const sameYear = (a: View, b: View) => a.year === b.year && a.safety === b.safety && a.frontier === b.frontier;
+  const same = (a: View, b: View) => sameYear(a, b) && a.names === b.names && a.min === b.min && a.sort === b.sort && a.q.trim() === b.q.trim();
+
+  let current: View = base;
+  // the view the graphics show, which a failed load falls back to
+  let drawn: View = base;
+  const note = document.querySelector<HTMLElement>('[data-rp-note]')!;
+  // the beeswarm's frame: every view draws at the height the server drew the default one, so nothing moves
+  const frames = SWARMS.map((o) => swarmBox.querySelector<SVGSVGElement>(`svg.only-${o.key}`)?.viewBox.baseVal.height || undefined);
+  // the shapes of the beeswarm in page order, so a shape's place gives its benchmark
+  let order: Row[] | null = null;
+  const dotRows = () => (order ??= data ? swarmOrder(swarmRows(data, current).rows) : null);
+
+  async function render(v: View) {
+    const d = data ?? (await load());
+    const yearChanged = !sameYear(v, current);
+    current = v;
+    if (yearChanged) {
+      hide();
+      order = null;
+      text('[data-rp-h1]', heroHead(d, v));
+      text('[data-rp-lede]', heroLede(d, v));
+      swarmBox.innerHTML = SWARMS.map((o, i) => swarmSvg(d, v, o, frames[i])).join('');
+      text('[data-rp-prints-head]', printsHead(d, v));
+      text('[data-rp-prints-lede]', printsLede(d, v));
+      prints.innerHTML = printsHtml(d, v);
+      text('[data-rp-look-head]', lookupHead(d, v));
+      page.classList.toggle('fr', v.frontier);
+      page.classList.toggle('rp-safe', v.safety);
+      page.querySelectorAll<HTMLElement>('[data-orig]').forEach((el) => delete el.dataset.orig);
+      swarmStops();
+    }
+    const m = matrix(d, v);
+    table.tHead!.innerHTML = headHtml(d, m);
+    table.tBodies[0].innerHTML = bodyHtml(d, m);
+    status.textContent = statusText(m, v);
+    text('[data-rp-look-lede]', lookupLede(d, v));
+    gridStops();
+    toUrl(v);
+    drawn = v;
+    note.hidden = true;
+    page.classList.remove('rp-wait', 'rp-wait-look');
+  }
+
+  // the data didn't come: show what is drawn (the server's default view on a first load), and say so
+  function failed() {
+    current = drawn;
+    page.classList.remove('rp-wait', 'rp-wait-look');
+    page.classList.toggle('fr', drawn.frontier);
+    page.classList.toggle('rp-safe', drawn.safety);
+    page.querySelectorAll<HTMLElement>('[data-orig]').forEach((el) => {
+      el.textContent = el.dataset.orig!;
+      delete el.dataset.orig;
+    });
+    writeForm(drawn);
+    toUrl(drawn);
+    note.hidden = false;
+  }
+
+  let timer = 0;
+  const onInput = (e: Event) => {
+    const t = e.target as HTMLInputElement;
+    clearTimeout(timer);
+    timer = window.setTimeout(() => render(readForm()).catch(failed), t.name === 'q' || t.name === 'min' ? 160 : 0);
+  };
+  top.addEventListener('input', onInput);
+  form.addEventListener('input', onInput);
+  // Enter in the search box filters in place rather than reloading the page
+  top.addEventListener('submit', (e) => e.preventDefault());
+  form.addEventListener('submit', (e) => e.preventDefault());
+
+  // ---- the popover: a beeswarm shape's benchmark, or a lookup cell's releases ----------------------------
+  let shown: Element | null = null;
+  function place(r: DOMRect) {
+    const p = pop.getBoundingClientRect();
+    const left = Math.min(window.innerWidth - p.width - 12, Math.max(12, r.left + r.width / 2 - p.width / 2));
+    const top2 = r.top - p.height - 10 < 8 ? r.bottom + 10 : r.top - p.height - 10;
+    pop.style.left = `${left}px`;
+    pop.style.top = `${top2}px`;
+  }
+  function open(anchor: Element, html: string, tap = false) {
+    pop.innerHTML = html;
+    pop.hidden = false;
+    pop.classList.toggle('tap', tap);
+    shown = anchor;
+    place(anchor.getBoundingClientRect());
+  }
+  function hide() {
+    shown = null;
+    pop.hidden = true;
+    pop.classList.remove('tap');
+    table.querySelectorAll('.rp-hl').forEach((el) => el.classList.remove('rp-hl'));
+    document.querySelectorAll('.rp-ring').forEach((el) => el.remove());
+  }
+
+  // the beeswarm: the nearest shape to the pointer, so small shapes don't need a steady hand
+  function dotHtml(d: RData, row: Row) {
+    const labs = [...row.byLab.entries()].sort((a, b) => b[1].length - a[1].length || d.labs[a[0]].name.localeCompare(d.labs[b[0]].name)).map(([l]) => d.labs[l].name);
+    const list = labs.length > 8 ? `${labs.slice(0, 8).join(', ')} and ${labs.length - 8} more` : labs.join(', ');
+    return (
+      `<div class="rp-ph">${areaIcon(row.area, 11)} <b>${esc(row.name)}</b></div>` +
+      (row.org ? `<p class="rp-pmk">${esc(row.org)}</p>` : '') +
+      `<p class="rp-pt">Named by <b class="num">${row.labs}</b> ${row.labs === 1 ? 'lab' : 'labs'} in ${esc(current.year)}, in <b class="num">${row.releases}</b> ${row.releases === 1 ? 'release' : 'releases'}</p>` +
+      `<p class="rp-pls">${esc(list)}</p>` +
+      `<a class="rp-go" href="${row.href}">Open ${esc(row.name)}</a>`
+    );
+  }
+  function nearest(svg: SVGSVGElement, x: number, y: number) {
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return null;
+    const pt = new DOMPoint(x, y).matrixTransform(ctm.inverse());
+    const reach = 10 / ctm.a;
+    let best: { u: SVGUseElement; i: number; d: number } | null = null;
+    svg.querySelectorAll<SVGUseElement>('.rp-dots use').forEach((u, i) => {
+      const w = u.width.baseVal.value;
+      const cx = u.x.baseVal.value + w / 2;
+      const cy = u.y.baseVal.value + w / 2;
+      const dd = Math.hypot(pt.x - cx, pt.y - cy) - w / 2;
+      if (dd < reach && (!best || dd < best.d)) best = { u, i, d: dd };
+    });
+    return best as { u: SVGUseElement; i: number; d: number } | null;
+  }
+  function ring(svg: SVGSVGElement, u: SVGUseElement) {
+    svg.querySelectorAll('.rp-ring').forEach((el) => el.remove());
+    const w = u.width.baseVal.value;
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('class', 'rp-ring');
+    c.setAttribute('cx', String(u.x.baseVal.value + w / 2));
+    c.setAttribute('cy', String(u.y.baseVal.value + w / 2));
+    c.setAttribute('r', String(w / 2 + 2.5));
+    svg.append(c);
+  }
+  async function showDot(svg: SVGSVGElement, u: SVGUseElement, i: number, tap: boolean) {
+    const d = data ?? (await load());
+    const row = dotRows()?.[i];
+    if (!row) return;
+    ring(svg, u);
+    open(u, dotHtml(d, row), tap);
+  }
+  let touch = false;
+  swarmBox.addEventListener('pointerdown', (e) => (touch = e.pointerType !== 'mouse'));
+  swarmBox.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    const svg = (e.target as Element).closest<SVGSVGElement>('svg.rp-swarm');
+    const hitDot = svg && nearest(svg, e.clientX, e.clientY);
+    if (svg && hitDot) {
+      if (shown !== hitDot.u) showDot(svg, hitDot.u, hitDot.i, false);
+    } else if (shown && !pop.classList.contains('tap')) hide();
+  });
+  swarmBox.addEventListener('pointerleave', () => {
+    if (!pop.classList.contains('tap')) hide();
+  });
+  swarmBox.addEventListener('click', (e) => {
+    const svg = (e.target as Element).closest<SVGSVGElement>('svg.rp-swarm');
+    if (!svg) return;
+    const hitDot = nearest(svg, e.clientX, e.clientY);
+    if (!hitDot) return hide();
+    // a tap opens the card, whose link goes to the page; a click goes straight there
+    if (touch) {
+      e.preventDefault();
+      showDot(svg, hitDot.u, hitDot.i, true);
+    } else if (!(e.target as Element).closest('a')) {
+      const a = hitDot.u.closest('a');
+      if (a) location.href = a.getAttribute('href')!;
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (pop.classList.contains('tap') && !(e.target as Element).closest('#rp-pop, [data-rp-swarm]')) hide();
+  });
+  swarmBox.addEventListener('focusin', (e) => {
+    const a = (e.target as Element).closest('a');
+    const svg = a?.closest<SVGSVGElement>('svg.rp-swarm');
+    const u = a?.querySelector('use');
+    if (!svg || !u) return;
+    const i = [...svg.querySelectorAll('.rp-dots use')].indexOf(u);
+    showDot(svg, u, i, false);
+  });
+  swarmBox.addEventListener('focusout', () => hide());
+
+  // the lookup: a cell's releases with their scores
+  function showCell(td: HTMLTableCellElement) {
+    if (!data) return;
+    const tr = td.closest('tr')!;
+    const key = tr.dataset.key ?? '';
+    const name = tr.querySelector('th a')?.textContent ?? '';
+    const head = table.tHead!.rows[0].cells[td.cellIndex];
+    const labName = head?.querySelector('[title]')?.getAttribute('title') ?? head?.textContent?.trim() ?? '';
+    const ids = (td.dataset.r ?? '').split(',').filter(Boolean).map(Number);
+    const isOther = td.classList.contains('rp-oc');
+    let html = `<div class="rp-ph"><b>${esc(isOther ? 'Other labs' : labName)}</b> on ${esc(name)}</div>`;
+    if (!ids.length) html += `<p class="rp-pn">No release named it in ${esc(current.year)}.</p>`;
+    else {
+      const items = cellReleases(data, current, key, ids);
+      html +=
+        '<ul>' +
+        items
+          .slice(0, 12)
+          .map(({ rel, hits }) => {
+            const scores = hits.map((h) => `${current.names === 'grouped' && h.name !== name ? `${esc(h.name)} ` : ''}${h.score ? esc(h.score) : 'no score'}`).join(', ');
+            const who = isOther ? `<span class="rp-pl">${esc(data!.labs[rel.lab].name)}</span>` : '';
+            return `<li><span class="rp-pm">${esc(rel.model)}</span>${who}<span class="rp-pd num">${esc(fullDate(rel.date))}</span><span class="rp-ps num">${scores}</span></li>`;
+          })
+          .join('') +
+        '</ul>' +
+        (items.length > 12 ? `<p class="rp-pn">And ${items.length - 12} more.</p>` : '');
+    }
+    open(td, html);
+    tr.querySelector('th')?.classList.add('rp-hl');
+    head?.classList.add('rp-hl');
+  }
+  table.addEventListener('pointerover', (e) => {
+    const td = (e.target as Element).closest<HTMLTableCellElement>('td.rp-c');
+    if (!td) return hide();
+    load().then(() => showCell(td));
+  });
+  table.addEventListener('pointerleave', hide);
+  table.addEventListener('focusin', (e) => {
+    const td = (e.target as Element).closest<HTMLTableCellElement>('td.rp-c');
+    if (td) load().then(() => showCell(td));
+  });
+  table.addEventListener('focusout', hide);
+
+  // a scroll moves the popover with its mark, and hides it once the mark leaves the view or slides under the names
+  let frame = 0;
+  const follow = () => {
+    if (!shown || frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (!shown) return;
+      const r = shown.getBoundingClientRect();
+      const names = shown.closest('table') ? (table.querySelector('tbody th')?.getBoundingClientRect().right ?? 0) : -Infinity;
+      if (r.bottom < 0 || r.top > window.innerHeight || r.left < names - 4 || r.right > window.innerWidth) hide();
+      else place(r);
+    });
+  };
+  window.addEventListener('scroll', follow, { passive: true });
+  table.closest('.rp-wrap')?.addEventListener('scroll', follow, { passive: true });
+
+  // ---- keyboard: one tab stop per graphic, then the arrow keys move between its marks -------------------
+  const ROVE = '.rp-dots a, .rp-fp, .rp-bl, .rp-sl[tabindex]';
+  function swarmStops() {
+    swarmBox.querySelectorAll<SVGAElement>('svg.only-wide .rp-dots a').forEach((a, i, all) => a.setAttribute('tabindex', i === all.length - 1 ? '0' : '-1'));
+  }
+  document.addEventListener('keydown', (e) => {
+    const el = (e.target as Element).closest?.(ROVE);
+    const box = el?.closest('[data-rove]');
+    if (!el || !box) return;
+    const items = [...box.querySelectorAll<HTMLElement>(ROVE)];
+    const i = items.indexOf(el as HTMLElement);
+    const j = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: items.length - 1 }[e.key];
+    if (j == null || j < 0 || j >= items.length) return;
+    e.preventDefault();
+    items.forEach((x) => x.setAttribute('tabindex', '-1'));
+    items[j].setAttribute('tabindex', '0');
+    items[j].focus();
+  });
+  function gridStops() {
+    table.querySelectorAll<HTMLElement>('td.rp-c').forEach((c, i) => (c.tabIndex = i === 0 ? 0 : -1));
+  }
+  table.addEventListener('keydown', (e) => {
+    const td = (e.target as Element).closest<HTMLTableCellElement>('td.rp-c');
+    if (!td) return;
+    const moves: Record<string, [number, number]> = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] };
+    const mv = moves[e.key];
+    if (!mv) return;
+    const row = (td.parentElement as HTMLTableRowElement).rowIndex + mv[0];
+    const next = row >= 1 ? table.rows[row]?.cells[td.cellIndex + mv[1]] : undefined;
+    if (!next || !next.matches('td.rp-c')) return;
+    e.preventDefault();
+    td.tabIndex = -1;
+    next.tabIndex = 0;
+    next.focus({ preventScroll: true });
+    next.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
+
+  // ---- the quarterly charts: pointing at a line picks it out, and a phone opens on the latest quarters ----
+  const bumpBoxes = [...document.querySelectorAll<HTMLElement>('[data-rp-bump]')];
+  const toEnd = () => bumpBoxes.forEach((box) => box.scrollWidth > box.clientWidth && (box.scrollLeft = box.scrollWidth));
+  for (const box of bumpBoxes) {
+    const svg = box.querySelector('svg');
+    if (!svg) continue;
+    const pick = (li: string | null) => {
+      svg.classList.toggle('rp-hov', li != null);
+      svg.querySelectorAll('[data-l]').forEach((el) => el.classList.toggle('on', li != null && (el as HTMLElement).dataset.l === li));
+    };
+    svg.addEventListener('pointerover', (e) => pick((e.target as Element).closest<SVGElement>('[data-l]')?.dataset.l ?? null));
+    svg.addEventListener('pointerleave', () => pick(null));
+    svg.addEventListener('focusin', (e) => pick((e.target as Element).closest<SVGElement>('[data-l]')?.dataset.l ?? null));
+    svg.addEventListener('focusout', () => pick(null));
+  }
+  toEnd();
+  // the all-years charts are already on the page in both versions, so the switch shows the other one at once,
+  // before the year graphics finish loading; a hidden chart scrolls to its end once it shows
+  top.querySelector<HTMLInputElement>('input[name=frontier]')?.addEventListener('change', (e) => {
+    page.classList.toggle('fr', (e.target as HTMLInputElement).checked);
+    requestAnimationFrame(toEnd);
+  });
+
+  swarmStops();
+  gridStops();
+  const start = fromUrl();
+  if (!same(start, base)) {
+    writeForm(start);
+    page.classList.toggle('fr', start.frontier);
+    current = { ...base, year: '' };
+    // the marked graphics stay hidden until this draws them, so the data loads now rather than at idle
+    render(start)
+      .then(() => requestAnimationFrame(toEnd))
+      .catch(failed);
+  } else {
+    page.classList.remove('rp-wait', 'rp-wait-look');
+    const idle = (window as unknown as { requestIdleCallback?: (f: () => void) => void }).requestIdleCallback ?? ((f: () => void) => setTimeout(f, 600));
+    idle(() => load());
+  }
+</script>
+
+<style is:global>
+  /* area colors and shapes, the same as AreaMark.astro, for every chart on this page */
+  .a-knowledge {
+    color: var(--area-knowledge);
+  }
+  .a-reasoning {
+    color: var(--area-reasoning);
+  }
+  .a-code {
+    color: var(--area-code);
+  }
+  .a-agents {
+    color: var(--area-agents);
+  }
+  .a-work {
+    color: var(--area-work);
+  }
+  .a-multimodal {
+    color: var(--area-multimodal);
+  }
+  .a-safety {
+    color: var(--area-safety);
+  }
+  .a-other {
+    color: var(--area-other);
+  }
+  .rp-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  .rp-page use {
+    fill: currentColor;
+  }
+  .rp-ai {
+    display: inline-block;
+    flex: none;
+    vertical-align: -1px;
+  }
+
+  .rp-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin-top: 26px;
+  }
+  .rp-fl {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  /* five lab columns need no stretching across the page */
+  .rp-page.fr table.rp-m {
+    min-width: 0;
+  }
+  /* the all-years charts render once for every lab and once for the frontier labs; the switch shows one */
+  .rp-page:not(.fr) .rp-v-fr,
+  .rp-page.fr .rp-v-all {
+    display: none;
+  }
+
+  /* the beeswarm */
+  .rp-hero {
+    position: relative;
+  }
+  .rp-swarm {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    font-size: 12.5px;
+  }
+  .rp-swarm.only-narrow {
+    display: none;
+    font-size: 11.5px;
+  }
+  @media (max-width: 720px) {
+    .rp-swarm.only-narrow {
+      display: block;
+    }
+  }
+  .rp-swarm a {
+    outline: none;
+  }
+  .rp-swarm a:focus-visible use {
+    stroke: var(--ink);
+    stroke-width: 1.5px;
+  }
+  .rp-axl {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .rp-tk {
+    font-size: 11px;
+    fill: var(--ink-3);
+  }
+  .rp-at {
+    font-size: 12px;
+    fill: var(--ink-3);
+  }
+  .rp-br,
+  .rp-ld {
+    fill: none;
+    stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+  .rp-nb {
+    font-size: 16px;
+    font-weight: 600;
+    fill: var(--ink);
+  }
+  .rp-ns {
+    fill: var(--ink-2);
+  }
+  .rp-lb {
+    font-weight: 500;
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+  .rp-lbn {
+    font-weight: 400;
+    font-size: 0.88em;
+    fill: var(--ink-3);
+  }
+  .rp-ring {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.5;
+    pointer-events: none;
+  }
+  .rp-keys {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 14px 32px;
+    margin-top: 22px;
+  }
+  .rp-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .rp-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  /* safety shapes only appear once the switch is on */
+  .rp-key .rp-ksafe {
+    display: none;
+  }
+  .rp-safe .rp-key .rp-ksafe {
+    display: inline-flex;
+  }
+  /* a link to another view hides what waits for its data, keeping its space, until the page script draws it */
+  .rp-wait :is([data-rp-swarm], [data-rp-prints], [data-rp-prints-head], [data-rp-prints-lede], [data-rp-look-head], [data-rp-look-lede], [data-rp-status], .rp-wrap),
+  .rp-wait-look :is([data-rp-status], .rp-wrap) {
+    visibility: hidden;
+  }
+  .rp-note {
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .rp-size {
+    display: inline-flex;
+    align-items: end;
+    gap: 10px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .rp-size circle {
+    fill: none;
+    stroke: var(--ink-3);
+    stroke-width: 1.2;
+  }
+  .rp-size text {
+    font-size: 11px;
+    fill: var(--ink-3);
+  }
+
+  /* lab fingerprints */
+  .rp-prints {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px 28px;
+  }
+  .rp-pkey {
+    margin-bottom: 28px;
+  }
+  /* a lab's card: its name across the top, the grid, and its numbers beside the grid */
+  .rp-fp {
+    display: grid;
+    grid-template-columns: minmax(0, 132px) minmax(0, 1fr);
+    grid-template-areas: 'cap cap' 'wf fs';
+    column-gap: 18px;
+    margin: 0;
+    min-width: 0;
+    border-radius: 8px;
+    outline: none;
+  }
+  .rp-fp figcaption {
+    grid-area: cap;
+  }
+  .rp-fp .rp-wf {
+    grid-area: wf;
+  }
+  .rp-fp .rp-fs {
+    grid-area: fs;
+    align-self: end;
+  }
+  .rp-fp:focus-visible {
+    box-shadow: 0 0 0 2px var(--focus);
+    outline-offset: 4px;
+  }
+  .rp-fp figcaption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 14.5px;
+    font-weight: 500;
+  }
+  .rp-fp figcaption a {
+    text-decoration: none;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .rp-fp figcaption a:hover {
+    text-decoration: underline;
+  }
+  .rp-fpr {
+    margin-left: auto;
+    color: var(--ink-3);
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .rp-fpr::after {
+    content: ' releases';
+    font-family: var(--sans);
+  }
+  .rp-wf {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .rp-fs {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    font-size: 12.5px;
+  }
+  .rp-fs dt {
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+  .rp-fs dd {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--ink);
+  }
+  .rp-fb {
+    display: inline-block;
+    width: 48px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .rp-fb i {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: var(--ink-2);
+  }
+
+  /* the lookup */
+  .rp-ctl {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+  }
+  .rp-min {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .rp-min .field {
+    width: 64px;
+    padding: 9px 10px;
+    text-align: center;
+  }
+  .rp-sort .field {
+    padding-block: 10px;
+  }
+  .rp-q {
+    flex: 1 1 180px;
+    max-width: 320px;
+  }
+  .rp-status {
+    margin: 18px 0 14px;
+    font-size: 14px;
+  }
+
+  .rp-wrap {
+    padding-bottom: 6px;
+    /* a cell brought into view by the arrow keys stops beside the sticky names, not under them */
+    scroll-padding-left: calc(var(--gutter) + 290px);
+  }
+  table.rp-m {
+    border-collapse: separate;
+    border-spacing: 3px;
+    font-size: 13px;
+    min-width: 100%;
+  }
+  .rp-m th {
+    font-weight: 500;
+    text-align: left;
+    vertical-align: bottom;
+  }
+  .rp-m thead th {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    padding: 0 0 8px;
+  }
+  .rp-m .rp-bn {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--bg);
+    /* covers the scroll container's left padding, so scrolled cells don't show beside the sticky column */
+    box-shadow: -64px 0 0 var(--bg);
+    padding: 6px 12px 6px 0;
+    font-weight: 400;
+    color: var(--ink);
+    vertical-align: middle;
+    line-height: 1.3;
+  }
+  .rp-m thead .rp-bn {
+    vertical-align: bottom;
+    padding-bottom: 8px;
+    color: var(--ink-3);
+  }
+  /* one line per row at a fixed width: the maker shortens first, then the name, and both keep their full text in a title */
+  .rp-bw {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    width: 270px;
+  }
+  .rp-rk {
+    flex: none;
+    min-width: 1.8em;
+    color: var(--ink-4);
+    font: 11px var(--mono);
+  }
+  .rp-m .rp-bn a {
+    flex: none;
+    max-width: calc(100% - 2.4em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .rp-m .rp-bn a:hover {
+    text-decoration: underline;
+  }
+  .rp-org {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--ink-3);
+    font-size: 11.5px;
+  }
+  .rp-m .rp-hl,
+  .rp-m .rp-hl a {
+    color: var(--ink);
+  }
+  .rp-m tbody .rp-hl {
+    box-shadow:
+      inset 2px 0 0 var(--ink),
+      -64px 0 0 var(--bg);
+  }
+  .rp-lc {
+    width: 52px;
+    min-width: 52px;
+    text-align: center !important;
+  }
+  .rp-lh {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .rp-m thead .rp-oc {
+    color: var(--ink-3);
+  }
+  thead .rp-lc.rp-hl .rp-lh {
+    color: var(--ink);
+  }
+  .rp-mk {
+    display: inline-block;
+    flex: none;
+    width: 18px;
+    height: 18px;
+  }
+  .rp-mask {
+    background: var(--ink);
+    -webkit-mask: var(--m) center / contain no-repeat;
+    mask: var(--m) center / contain no-repeat;
+  }
+  .rp-init {
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--ink-3);
+    font: 600 10px / 1 var(--sans);
+  }
+  .rp-c {
+    /* holds the cell's hidden count, so it stays inside the table's scroll box */
+    position: relative;
+    height: 32px;
+    min-width: 36px;
+    border-radius: 4px;
+    background: var(--panel-2);
+    text-align: center;
+    font: 500 12.5px / 1 var(--mono);
+    font-variant-numeric: tabular-nums;
+    cursor: default;
+  }
+  /* a Bertin dot: its area follows the releases, its color the benchmark's area */
+  .rp-dot {
+    display: inline-block;
+    width: var(--d);
+    height: var(--d);
+    border-radius: 50%;
+    background: currentColor;
+    vertical-align: middle;
+  }
+  /* the last column adds up many labs, so it reads as plain numbers, apart from the lab grid */
+  .rp-m .rp-c.rp-oc {
+    background: none;
+    color: var(--ink-2);
+    box-shadow: inset 1px 0 0 var(--line);
+  }
+  .rp-c:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 4px;
+  }
+  .rp-c:hover {
+    box-shadow: 0 0 0 2px var(--ink);
+  }
+  .rp-tc {
+    min-width: 92px;
+    padding: 0 0 0 10px;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  thead .rp-tc {
+    text-align: right !important;
+  }
+  .rp-rc {
+    min-width: 76px;
+  }
+  .rp-of {
+    color: var(--ink-4);
+  }
+  .rp-bar {
+    display: inline-block;
+    width: 34px;
+    height: 6px;
+    margin-right: 8px;
+    border-radius: 3px;
+    background: var(--panel);
+    vertical-align: middle;
+    overflow: hidden;
+  }
+  .rp-bar i {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    background: var(--ink-2);
+  }
+  .rp-none td {
+    padding: 28px 0;
+    color: var(--ink-3);
+    text-align: left;
+  }
+  .rp-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    margin-top: 16px;
+    font-size: 12.5px;
+  }
+  .rp-lk {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-2);
+  }
+  .rp-lk .rp-dot {
+    background: var(--ink-3);
+  }
+
+  #rp-pop {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;
+    width: max-content;
+    max-width: min(360px, calc(100vw - 24px));
+    background: var(--bg);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.12), 0 0 0 1px rgb(0 0 0 / 0.06);
+  }
+  :root[data-theme='dark'] #rp-pop {
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) #rp-pop {
+      box-shadow: 0 8px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.08);
+    }
+  }
+  #rp-pop[hidden] {
+    display: none;
+  }
+  .rp-ph {
+    margin-bottom: 6px;
+    color: var(--ink-2);
+  }
+  .rp-ph b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  #rp-pop ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+  #rp-pop li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+  }
+  .rp-pm {
+    font-weight: 500;
+  }
+  .rp-pl {
+    grid-column: 1;
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+  .rp-pd {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--ink-3);
+    font-size: 12px;
+    text-align: right;
+  }
+  .rp-ps {
+    grid-column: 1 / -1;
+    color: var(--ink-2);
+    font-size: 12px;
+  }
+  .rp-pn {
+    margin-top: 6px;
+    color: var(--ink-3);
+  }
+
+
+  /* the popover's beeswarm card */
+  .rp-pmk {
+    margin: -4px 0 6px;
+    color: var(--ink-3);
+    font-size: 12px;
+  }
+  .rp-pt b {
+    font-weight: 600;
+  }
+  .rp-pls {
+    margin-top: 4px;
+    color: var(--ink-2);
+    font-size: 12.5px;
+  }
+  .rp-go {
+    display: none;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  #rp-pop.tap {
+    pointer-events: auto;
+  }
+  #rp-pop.tap .rp-go {
+    display: block;
+  }
+
+  .rp-method {
+    display: grid;
+    gap: 14px;
+    max-width: 68ch;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 1100px) {
+    .rp-prints {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 720px) {
+    .rp-prints {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px 18px;
+    }
+    .rp-fp {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'cap' 'wf' 'fs';
+    }
+    .rp-fp .rp-wf {
+      max-width: 150px;
+    }
+    .rp-fp figcaption {
+      flex-wrap: wrap;
+      row-gap: 2px;
+    }
+    .rp-fpr {
+      flex-basis: 100%;
+      margin-left: 26px;
+    }
+    .rp-fp .rp-fs {
+      margin-top: 12px;
+      gap: 4px;
+    }
+    .rp-fs div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .rp-fb {
+      display: none;
+    }
+    .rp-keys {
+      margin-top: 14px;
+    }
+    .rp-m .rp-bn {
+      padding-right: 8px;
+    }
+    .rp-wrap {
+      scroll-padding-left: calc(var(--gutter) + 166px);
+    }
+    .rp-bw {
+      flex-wrap: wrap;
+      width: 150px;
+      gap: 0 5px;
+    }
+    .rp-m .rp-bn a {
+      white-space: normal;
+      max-width: calc(100% - 16px);
+    }
+    .rp-org {
+      flex-basis: 100%;
+    }
+    .rp-rk {
+      display: none;
+    }
+    .rp-q {
+      max-width: none;
+      flex-basis: 100%;
+    }
+  }
+</style>

@@ -1,5 +1,5 @@
-// The Reporting page's matrix and lab table, as pure functions of a compact data set (src/lib/reporting.ts builds
-// it, /reporting.json serves it). The page renders the default view with these on the server, and its script
+// The Reporting page's lookup table and lab numbers, as pure functions of a compact data set (src/lib/reporting.ts
+// builds it, /reporting.json serves it). The page renders the default view with these on the server, and its script
 // renders every other view with the same code, so the two never drift. No data imports here: the browser loads
 // this file.
 
@@ -9,6 +9,8 @@ export interface RLab {
   /** A short name for a column head ("Google" for Google DeepMind). */
   short: string;
   mark: 'color' | 'mono' | 'none';
+  /** Whether the lab has a page of its own. */
+  page: boolean;
 }
 export interface RBench {
   id: string;
@@ -19,6 +21,8 @@ export interface RBench {
   famName: string;
   /** Safety, alignment, bio-chem and cyber evaluations, left out by default. */
   safety: boolean;
+  /** The benchmark's area (src/lib/taxonomy.ts), for its color and shape. */
+  area: string;
   /** Labs among the benchmark's makers, for "made by the lab". */
   makers: string[];
 }
@@ -37,7 +41,24 @@ export interface RData {
   benches: RBench[];
   rels: RRel[];
   years: string[];
+  /** Areas in their fixed order, with their names. */
+  areas: { id: string; name: string }[];
+  /** Launch posts and the documents published with them, per year, from every lab and from the frontier labs. */
+  sources: Record<string, { posts: number; docs: number; frontier: { posts: number; docs: number } }>;
+  /** The data's last day. */
+  asOf: string;
 }
+
+/**
+ * The frontier labs, by their ids in data/labs.json, for the page's "Frontier labs only" switch: the nine whose
+ * best 2026 models score highest on Epoch AI's Capabilities Index, as of November 2026, in that order. The next
+ * lab, Mistral, trails the ninth by more than two points. Change the list here, and FRONTIER_BASIS with it.
+ * Google covers Google DeepMind, Google Research and Google Brain, which the data files as one lab.
+ */
+export const FRONTIER_LABS: readonly string[] = ['anthropic', 'openai', 'google', 'moonshot', 'meta', 'deepseek', 'xai', 'qwen', 'zai'];
+/** Why these labs, in words the page shows before their names. */
+export const FRONTIER_BASIS = "whose best 2026 models score highest on Epoch AI's Capabilities Index, as of November 2026";
+export const FRONTIER = new Set(FRONTIER_LABS);
 
 export type Names = 'grouped' | 'exact';
 export type SortKey = 'labs' | 'releases' | 'name';
@@ -48,6 +69,8 @@ export interface View {
   sort: SortKey;
   q: string;
   safety: boolean;
+  /** Count only releases from the frontier labs. */
+  frontier: boolean;
 }
 
 export const COLS = 12;
@@ -57,6 +80,7 @@ export interface Row {
   name: string;
   org: string;
   href: string;
+  area: string;
   labs: number;
   releases: number;
   /** Release indexes per lab index. */
@@ -85,6 +109,7 @@ function uses(d: RData, v: View) {
   const out: { rel: number; keys: Map<string, number[]> }[] = [];
   d.rels.forEach((rel, i) => {
     if (!rel.date.startsWith(v.year)) return;
+    if (v.frontier && !FRONTIER.has(d.labs[rel.lab].id)) return;
     const keys = new Map<string, number[]>();
     for (const [bi] of rel.r) {
       const b = d.benches[bi];
@@ -112,7 +137,7 @@ export function matrix(d: RData, v: View): Matrix {
       let row = rows.get(k);
       if (!row) {
         const b = d.benches[bis[0]];
-        row = { key: k, name: v.names === 'grouped' ? b.famName : b.name, org: '', href: '', labs: 0, releases: 0, byLab: new Map(), members: new Map() };
+        row = { key: k, name: v.names === 'grouped' ? b.famName : b.name, org: '', href: '', area: b.area, labs: 0, releases: 0, byLab: new Map(), members: new Map() };
         rows.set(k, row);
       }
       row.releases++;
@@ -126,6 +151,7 @@ export function matrix(d: RData, v: View): Matrix {
     const top = [...row.members.entries()].sort((a, b) => b[1] - a[1])[0][0];
     row.href = `/benchmarks/${d.benches[top].id}/`;
     row.org = d.benches[top].org;
+    row.area = d.benches[top].area;
   }
   const all = [...rows.values()];
   const cmp: Record<SortKey, (a: Row, b: Row) => number> = {
@@ -148,17 +174,10 @@ export function matrix(d: RData, v: View): Matrix {
   };
 }
 
-/** The bins of the cell scale: 1, 2, 3, 4, 5 to 6, 7 to 9, 10 or more. */
-export const BINS = [
-  { label: '1', test: (n: number) => n === 1 },
-  { label: '2', test: (n: number) => n === 2 },
-  { label: '3', test: (n: number) => n === 3 },
-  { label: '4', test: (n: number) => n === 4 },
-  { label: '5 to 6', test: (n: number) => n >= 5 && n <= 6 },
-  { label: '7 to 9', test: (n: number) => n >= 7 && n <= 9 },
-  { label: '10+', test: (n: number) => n >= 10 },
-];
-export const binOf = (n: number) => BINS.findIndex((b) => b.test(n));
+/** A cell's dot: its area grows with the releases, so 4 releases draw twice as wide as 1. */
+export const dotSize = (n: number) => Math.min(26, Math.round(7 * Math.sqrt(n) * 10) / 10);
+/** Counts the size key shows. */
+export const DOT_KEY = [1, 4, 9];
 
 const ESC: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ESC[c]);
@@ -180,28 +199,37 @@ export function headHtml(d: RData, m: Matrix): string {
   return `<tr><th class="rp-bn" scope="col">Benchmark</th>${labs}${other}<th class="rp-tc" scope="col">Labs</th><th class="rp-tc rp-rc" scope="col">Releases</th></tr>`;
 }
 
-function cellHtml(rels: number[] | undefined, row: number, col: number): string {
+// A lab's cell is a dot in the benchmark's area color, sized by releases. The other-labs cell adds up many labs,
+// so it shows its number instead.
+// The page script finds a cell's lab and row from its place in the table, and sets its tab stop.
+function cellHtml(rels: number[] | undefined, area: string, sum = false): string {
   const n = rels?.length ?? 0;
-  if (!n) return `<td class="rp-c" data-row="${row}" data-col="${col}" tabindex="-1"></td>`;
-  return `<td class="rp-c rp-b${binOf(n)}" data-row="${row}" data-col="${col}" data-r="${rels!.join(',')}" tabindex="-1">${n}</td>`;
+  const cls = sum ? 'rp-c rp-oc' : 'rp-c';
+  if (!n) return `<td class="${cls}"></td>`;
+  const mark = sum ? String(n) : `<i class="rp-dot a-${area}" style="--d:${dotSize(n)}px"></i><span class="sr">${n}</span>`;
+  return `<td class="${cls}" data-r="${rels!.join(',')}">${mark}</td>`;
 }
 
-export function bodyHtml(d: RData, m: Matrix): string {
+/** An area's shape, from the symbols the page defines once (see reporting-graphics.ts). */
+export const areaIcon = (area: string, size = 10) =>
+  `<svg class="rp-ai" width="${size}" height="${size}" viewBox="0 0 10 10" aria-hidden="true"><use href="#rp-s-${area}" class="rp-u a-${area}"/></svg>`;
+
+export function bodyHtml(_d: RData, m: Matrix): string {
   if (!m.shown.length) return `<tr class="rp-none"><td colspan="${m.cols.length + (m.otherLabs ? 4 : 3)}">No benchmark matches. Try a lower threshold or another name.</td></tr>`;
   return m.shown
     .map((r, ri) => {
-      const cells = m.cols.map((l, ci) => cellHtml(r.byLab.get(l), ri, ci)).join('');
+      const cells = m.cols.map((l) => cellHtml(r.byLab.get(l), r.area)).join('');
       let other = '';
       if (m.otherLabs) {
         const rest = [...r.byLab.entries()].filter(([l]) => !m.cols.includes(l)).flatMap(([, x]) => x);
-        other = cellHtml(rest.length ? rest : undefined, ri, m.cols.length).replace('class="rp-c', 'class="rp-c rp-oc');
+        other = cellHtml(rest.length ? rest : undefined, r.area, true);
       }
       const lw = Math.round((r.labs / Math.max(1, m.totalLabs)) * 100);
       const rw = Math.round((r.releases / m.maxReleases) * 100);
       return (
-        `<tr data-key="${esc(r.key)}"><th class="rp-bn" scope="row"><span class="rp-rk num">${ri + 1}</span><a href="${r.href}">${esc(r.name)}</a>` +
-        (r.org ? ` <span class="rp-org">${esc(r.org)}</span>` : '') +
-        `</th>${cells}${other}` +
+        `<tr data-key="${esc(r.key)}"><th class="rp-bn" scope="row"><span class="rp-bw"><span class="rp-rk num">${ri + 1}</span>${areaIcon(r.area, 9)}<a href="${r.href}" title="${esc(r.name)}">${esc(r.name)}</a>` +
+        (r.org ? `<span class="rp-org" title="${esc(r.org)}">${esc(r.org)}</span>` : '') +
+        `</span></th>${cells}${other}` +
         `<td class="rp-tc num"><span class="rp-bar" aria-hidden="true"><i style="width:${lw}%"></i></span>${r.labs}<span class="rp-of">/${m.totalLabs}</span></td>` +
         `<td class="rp-tc rp-rc num"><span class="rp-bar" aria-hidden="true"><i style="width:${rw}%"></i></span>${r.releases}</td></tr>`
       );
@@ -212,10 +240,14 @@ export function bodyHtml(d: RData, m: Matrix): string {
 export function statusText(m: Matrix, v: View): string {
   const all = m.rows.length.toLocaleString('en-US');
   const yr = v.year;
-  const thr = v.min <= 1 ? `all ${m.passing.length.toLocaleString('en-US')} benchmarks the ${m.totalLabs} labs named in ${yr}` : `the ${m.passing.length.toLocaleString('en-US')} benchmarks that at least ${v.min} labs named in ${yr}`;
+  const labs = v.frontier ? 'frontier labs' : 'labs';
+  const thr =
+    v.min <= 1
+      ? `all ${m.passing.length.toLocaleString('en-US')} benchmarks the ${m.totalLabs} ${labs} named in ${yr}`
+      : `the ${m.passing.length.toLocaleString('en-US')} benchmarks that at least ${v.min} ${labs} named in ${yr}`;
   if (v.q.trim()) {
     const hidden = m.rows.filter((r) => r.labs < v.min && (r.name.toLowerCase().includes(v.q.trim().toLowerCase()) || r.org.toLowerCase().includes(v.q.trim().toLowerCase()))).length;
-    return `${m.shown.length.toLocaleString('en-US')} ${m.shown.length === 1 ? 'match' : 'matches'} among ${thr}.${hidden ? ` ${hidden} more ${hidden === 1 ? 'match' : 'match'} at a lower threshold.` : ''}`;
+    return `${m.shown.length.toLocaleString('en-US')} ${m.shown.length === 1 ? 'match' : 'matches'} among ${thr}.${hidden ? ` ${hidden} more ${hidden === 1 ? 'match' : 'matches'} at a lower threshold.` : ''}`;
   }
   return v.min <= 1 ? `Showing ${thr}.` : `Showing ${thr}, out of ${all} in total.`;
 }
@@ -227,6 +259,8 @@ export interface LabHabit {
   made: number;
   shared: number;
   uses: number;
+  /** Uses per area. */
+  areas: Record<string, number>;
 }
 
 /** Each lab's reporting in the year: releases with scores, the median count per release, and two shares of its uses. */
@@ -234,14 +268,16 @@ export function labHabits(d: RData, v: View): LabHabit[] {
   const us = uses(d, v);
   const labsPerKey = new Map<string, Set<number>>();
   for (const u of us) for (const k of u.keys.keys()) labsPerKey.set(k, (labsPerKey.get(k) ?? new Set()).add(d.rels[u.rel].lab));
-  const by = new Map<number, { counts: number[]; made: number; shared: number; uses: number }>();
+  const by = new Map<number, { counts: number[]; made: number; shared: number; uses: number; areas: Record<string, number> }>();
   for (const u of us) {
     const lab = d.rels[u.rel].lab;
     const labId = d.labs[lab].id;
-    const h = by.get(lab) ?? { counts: [], made: 0, shared: 0, uses: 0 };
+    const h = by.get(lab) ?? { counts: [], made: 0, shared: 0, uses: 0, areas: {} };
     h.counts.push(u.keys.size);
     for (const [k, bis] of u.keys) {
       h.uses++;
+      const a = d.benches[bis[0]].area;
+      h.areas[a] = (h.areas[a] ?? 0) + 1;
       if (bis.some((bi) => d.benches[bi].makers.includes(labId))) h.made++;
       const others = [...(labsPerKey.get(k) ?? [])].filter((l) => l !== lab).length;
       if (others >= 3) h.shared++;
@@ -254,23 +290,22 @@ export function labHabits(d: RData, v: View): LabHabit[] {
     return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
   };
   return [...by.entries()]
-    .map(([lab, h]) => ({ lab, releases: h.counts.length, median: median(h.counts), made: h.made / h.uses, shared: h.shared / h.uses, uses: h.uses }))
+    .map(([lab, h]) => ({ lab, releases: h.counts.length, median: median(h.counts), made: h.made / h.uses, shared: h.shared / h.uses, uses: h.uses, areas: h.areas }))
     .sort((a, b) => b.releases - a.releases || b.uses - a.uses || d.labs[a.lab].name.localeCompare(d.labs[b.lab].name));
 }
 
-const pct = (x: number) => `${Math.round(x * 100)}%`;
-const half = (x: number) => (Number.isInteger(x) ? String(x) : x.toFixed(1));
+export const DEFAULT_VIEW = (year: string): View => ({ year, names: 'grouped', min: 3, sort: 'labs', q: '', safety: false, frontier: false });
 
-export function habitsHtml(d: RData, hs: LabHabit[]): string {
-  return hs
-    .map(
-      (h) =>
-        `<tr><td><span class="rp-lab">${markHtml(d.labs[h.lab])}<a href="/labs/${esc(d.labs[h.lab].id)}/">${esc(d.labs[h.lab].name)}</a></span></td>` +
-        `<td class="r num">${h.releases}</td><td class="r num">${half(h.median)}</td>` +
-        `<td class="r num"><span class="rp-share"><span class="rp-bar" aria-hidden="true"><i style="width:${Math.round(h.made * 100)}%"></i></span>${pct(h.made)}</span></td>` +
-        `<td class="r num"><span class="rp-share"><span class="rp-bar" aria-hidden="true"><i style="width:${Math.round(h.shared * 100)}%"></i></span>${pct(h.shared)}</span></td></tr>`,
-    )
-    .join('');
+/** The benchmarks behind one cell, for its tooltip: each release with what it reported under the row's name. */
+export function cellReleases(d: RData, v: View, key: string, rels: number[]) {
+  return rels
+    .map((i) => {
+      const rel = d.rels[i];
+      const hits = rel.r.filter(([bi]) => {
+        const b = d.benches[bi];
+        return (v.safety || !b.safety) && keyOf(b, v.names) === key;
+      });
+      return { rel, hits: hits.map(([bi, s]) => ({ name: d.benches[bi].name, score: s })) };
+    })
+    .sort((a, b) => b.rel.date.localeCompare(a.rel.date));
 }
-
-export const DEFAULT_VIEW = (year: string): View => ({ year, names: 'grouped', min: 3, sort: 'labs', q: '', safety: false });

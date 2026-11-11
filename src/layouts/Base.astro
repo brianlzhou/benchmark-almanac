@@ -8,6 +8,7 @@ import FootRidge from '../components/FootRidge.astro';
 import AreaMark from '../components/AreaMark.astro';
 import SearchBox from '../components/SearchBox.astro';
 import SeoHead, { type Film } from '../components/SeoHead.astro';
+import { SITE_DESCRIPTION } from '../lib/site.ts';
 
 interface Props {
   title?: string;
@@ -23,7 +24,7 @@ interface Props {
 }
 const {
   title,
-  description = 'A catalog of AI benchmarks, with the labs that report each one and how its scores have changed.',
+  description = SITE_DESCRIPTION,
   film,
   crumbs,
   jsonLd,
@@ -277,12 +278,11 @@ const foldOn = FOLDS.some((n) => current(n.href));
     text-decoration: none;
     white-space: nowrap;
   }
-  /* The row, from widest to narrowest (measured, with room for a 15px scrollbar):
-       1560px and up: every link, the More menu, Submit and the search field
-       1260 to 1559px: the same, with a search icon in place of the field, and tighter spacing below 1440px
+  /* The row, from widest to narrowest (measured with a 15px scrollbar, and at least 25px to spare):
+       1260px and up: every link, More, Submit, search and theme, with tighter spacing below 1440px
        960 to 1259px: Build an index, Model cards and Reporting move into the More menu
        below 960px: the whole row folds into the menu button
-     The header keeps its height and the name keeps its place at every step. */
+     The name keeps its place at every step. */
   nav {
     display: flex;
     align-items: center;
@@ -479,21 +479,16 @@ const foldOn = FOLDS.some((n) => current(n.href));
     color: var(--ink);
     background: var(--panel);
   }
-  /* the header search: a field where it fits, else an icon that opens one over the bar */
+  /* The header search is an icon that opens a field over the bar. The row holds the links at every width,
+     and the page width caps the row at 1240px, so a standing field no longer fits beside them. */
   .bar-s {
-    flex: 0 1 240px;
-    min-width: 168px;
+    flex: none;
     transition: opacity 160ms ease, visibility 160ms;
   }
-  /* a page with its own big box shows the header box only once that one scrolls away */
+  /* a page with its own big box shows the header search only once that one scrolls away */
   :global(html.js:has([data-search-main])) .bar-s:not(.main-gone) {
     visibility: hidden;
     opacity: 0;
-  }
-  .find-p {
-    display: flex;
-    align-items: center;
-    gap: 6px;
   }
   .find-p :global(.search) {
     flex: 1;
@@ -501,38 +496,30 @@ const foldOn = FOLDS.some((n) => current(n.href));
   }
   .find-b,
   .find-x {
+    display: block;
+  }
+  /* the icon needs a script, so without one the table's own search box stands in */
+  :global(html:not(.js)) .bar-s {
     display: none;
   }
-  @media (max-width: 1299px) {
-    .bar-s {
-      flex: none;
-      min-width: 0;
-    }
-    .find-b,
-    .find-x {
-      display: block;
-    }
-    /* the icon needs a script, so without one the table's own search box stands in */
-    :global(html:not(.js)) .bar-s {
-      display: none;
-    }
-    /* the open field covers the links, from the end of the name to the right edge */
-    .find-p {
-      display: none;
-      position: absolute;
-      z-index: 1;
-      inset: 0 var(--gutter) 0 calc(var(--gutter) + 218px);
-      background: var(--bg);
-    }
-    .bar-s.finding .find-p {
-      display: flex;
-      animation: find-in 160ms ease-out;
-    }
-    /* the open field is wide, so its suggestions line up under it */
-    .find-p :global(.search [role='listbox']) {
-      left: 0;
-      width: auto;
-    }
+  /* the open field covers the links, from the end of the name to the right edge */
+  .find-p {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    z-index: 1;
+    inset: 0 var(--gutter) 0 calc(var(--gutter) + 218px);
+    background: var(--bg);
+  }
+  .bar-s.finding .find-p {
+    display: flex;
+    animation: find-in 160ms ease-out;
+  }
+  /* the open field is wide, so its suggestions line up under it */
+  .find-p :global(.search [role='listbox']) {
+    left: 0;
+    width: auto;
   }
   @keyframes find-in {
     from {
@@ -755,6 +742,7 @@ const foldOn = FOLDS.some((n) => current(n.href));
       margin: 4px 0 0;
       padding: 10px 12px;
       border-radius: 8px;
+      font-size: 16px;
     }
   }
 </style>
