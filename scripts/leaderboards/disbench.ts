@@ -1,9 +1,8 @@
 // DISBench reports exact match and F1 for image-search agents.
 // Overall EM is the official default ranking. F1 and intra/inter-image scores are metrics.
 // Agent and retriever identify the harness; the track is a whole-set configuration.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard/resolve/main/leaderboard_data.json";
 const board: Leaderboard = {

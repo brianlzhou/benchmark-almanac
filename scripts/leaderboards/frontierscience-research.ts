@@ -1,7 +1,7 @@
 // FrontierScience Research has separate model and reasoning-effort charts. Keep the Research
 // accuracy percentage and confidence limits. Do not mix in the Olympiad task set.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/frontierscience/';
 const board: Leaderboard = {
   benchmark: 'frontierscience-research', url: PAGE, feed: `${PAGE} (Research model and effort charts)`, terms: OPENAI_TERMS,

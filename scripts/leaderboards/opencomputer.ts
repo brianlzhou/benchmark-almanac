@@ -1,8 +1,8 @@
 // OpenComputer headline is its own environment task success percentage, not the adjacent OSWorld comparison.
 // Average reward and steps remain metrics.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://echo0715.github.io/OpenComputer/";
 const board: Leaderboard = {

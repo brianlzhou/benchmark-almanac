@@ -2,7 +2,7 @@
 // The chart caption says: "Overall" is calculated by averaging all scores across tasks.
 // The chart uses GPT-4.1 as judge. We copy its printed Overall values without recomputing them.
 import type { Leaderboard } from './types.ts';
-import { checkChart, CHART_TERMS } from '../lib/boards/github-round3-t.ts';
+import { checkChart, CHART_TERMS } from '../lib/boards/transcribed-github-chart.ts';
 
 const IMAGE = 'https://raw.githubusercontent.com/PKU-YuanGroup/ImgEdit/main/assets/leaderboard.png';
 const SHA256 = '4b0da7fb34e3c16c3b230d59b6e0d7b29a85e26e6dd79872a754fa977ed9c0ba';

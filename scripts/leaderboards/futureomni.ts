@@ -1,7 +1,7 @@
 // FutureOmni: the actual result rows report future-event prediction accuracy by eight video categories and their Average, in percent. Ignore obsolete video-length header markup. Preserve the audio/video modality and parameter labels.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://openmoss.github.io/FutureOmni/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

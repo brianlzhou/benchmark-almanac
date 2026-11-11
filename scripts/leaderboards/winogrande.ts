@@ -1,9 +1,9 @@
 // WinoGrande: the paper’s main comparison reports test accuracy, already in percent.
 // Development accuracy is a metric. The inaccessible AllenAI board cannot supply later submissions.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1907.10641";
 const board: Leaderboard = {

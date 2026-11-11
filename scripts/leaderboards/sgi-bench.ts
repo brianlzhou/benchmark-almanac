@@ -3,9 +3,7 @@
 // The page defines: "The SGI-Score is the average across these tasks".
 // Only complete overview models get rows. The five task scores remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://InternScience.github.io/SGI-Page/";
 const board: Leaderboard = {

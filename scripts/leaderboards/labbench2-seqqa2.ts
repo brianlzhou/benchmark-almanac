@@ -2,8 +2,8 @@
 // Retains tool/effort variants, input modes, dates, output tokens and duration.
 // Retry labels identify repeated runs, not configurations; keep the latest run per configuration.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://advances.edisonscientific.com/benchmarks/labbench2/seqqa2/";
 const board: Leaderboard = {

@@ -3,9 +3,8 @@
 // Use pass@1 for the headline score. Higher pass@k scores and run costs remain metrics.
 // Preserve the Mistral Vibe scaffold and the score-versus-cost chart for pass@1 runs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://mistral.ai/news/leanstral/";
 const board: Leaderboard = {

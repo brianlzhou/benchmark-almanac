@@ -1,7 +1,7 @@
 // xDailyBench: the official Seed2.1 page embeds the comparison table as JSON. Use the live header row to identify models, because internal column keys refer to older model names. The xDailyBench row is the reported percentage score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://seed.bytedance.com/en/seed2_1";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

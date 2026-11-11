@@ -4,10 +4,8 @@
 // Image: https://cdn.sanity.io/images/aqo64vfr/production/a41eb1f0e165d9b09e03c0276198bd5ea5fa7027-3840x2288.png?w=2640&q=80&fit=max&auto=format
 // SHA-256: 174c848580e5e86aaae15137c42e474727da65ebecfc64670ab410c01c15e908
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://cdn.sanity.io/images/aqo64vfr/production/a41eb1f0e165d9b09e03c0276198bd5ea5fa7027-3840x2288.png?w=2640&q=80&fit=max&auto=format (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "answer-factuality-perplexity",

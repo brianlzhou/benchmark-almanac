@@ -2,7 +2,7 @@
 // The shared Surge reader stops before unrelated benchmark previews and preserves reasoning effort.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { surgeRows, SURGE_TERMS } from '../lib/boards/surgehq-cov2.ts';
+import { surgeRows, SURGE_TERMS } from '../lib/boards/surgehq.ts';
 const PAGE = 'https://surgehq.ai/benchmarks/enterprisebench-corecraft';
 const board: Leaderboard = {
  benchmark: 'enterprisebench-corecraft', url: PAGE, feed: `${PAGE} (primary data-leaderboard-row elements)`,

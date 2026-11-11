@@ -1,7 +1,7 @@
 // IndoMMLU: Average is zero-shot multiple-choice accuracy in percent. Keep model sizes and five subject-group accuracies, excluding the random baseline.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

@@ -3,10 +3,9 @@
 // Tokens combine input and output, so they remain totalTokens in metrics rather than output tokens.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2607.01647";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "agenticdatabench",
   url: "https://github.com/AgenticDataBench/AgenticDataBench",

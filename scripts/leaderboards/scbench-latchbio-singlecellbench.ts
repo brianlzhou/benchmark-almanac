@@ -2,9 +2,7 @@
 // Keep the current website cohort only. Older repository evaluations use another task set.
 // Their costs and durations cannot be transferred to the website scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://benchmarks.bio/benchmarks/scbench/latest.json";
 const board: Leaderboard = {

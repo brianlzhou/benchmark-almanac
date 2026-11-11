@@ -4,10 +4,8 @@
 // Image: https://cdn.deepseek.com/api-docs/benchmark_4.jpg
 // SHA-256: 25219071fc8b06a03ac31a7d6c66f5ba2d5c555a813f52dfcd3652d3dc743d4d
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://cdn.deepseek.com/api-docs/benchmark_4.jpg (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "ds-fim-eval",

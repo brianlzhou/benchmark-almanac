@@ -1,8 +1,7 @@
 // YoCausal publishes RSI Average in its default RSI view. CCI and domain scores remain secondary metrics. Release dates are not evaluation dates.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://www.youzhexie.me/papers/YoCausal/index.html";
 const board: Leaderboard = {

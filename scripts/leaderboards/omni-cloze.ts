@@ -1,8 +1,8 @@
 // Omni-Cloze: the official Omni-Captioner README publishes three benchmark accuracy percentages.
 // The importer reads the benchmark-specific performance table at the repository head.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/ddlBoJack/Omni-Captioner/HEAD/README.md";

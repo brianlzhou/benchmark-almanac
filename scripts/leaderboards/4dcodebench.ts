@@ -1,9 +1,7 @@
 // 4DCodeBench: published overall score across all 200 scenes, including penalties for missing renders.
 // The source defines overall as the mean of five reconstruction families. Costs and output tokens are means per task.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://4dcodebench.com/data/leaderboard.json";
 const board: Leaderboard = {

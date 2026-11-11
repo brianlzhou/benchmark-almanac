@@ -1,8 +1,8 @@
 // StableToolBench: latest MirrorAPI average solvable pass rate, the first headline table.
 // FAC is a secondary metric. Exclude legacy GPT-cache results and retain CoT/DFS harnesses.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/THUNLP-MT/StableToolBench/master/README.md";

@@ -1,9 +1,8 @@
 // ARC paper test accuracy. These static paper rows will not refresh with later submissions.
 // The Challenge and Easy columns belong to separate catalog records. Random and dataset-definition baselines are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1803.05457";
 const board: Leaderboard = {

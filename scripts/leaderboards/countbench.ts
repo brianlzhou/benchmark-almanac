@@ -2,7 +2,7 @@
 //  These are the paper's static results and will not refresh with new model releases.
 //  Each backbone has five trained variants. Mean deviation remains a metric, not a separate leaderboard row.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2302.12066";
 

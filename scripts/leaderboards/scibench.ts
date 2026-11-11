@@ -1,9 +1,8 @@
 // SciBench: official published Avg in the current Zero-Shot Learning table.
 // Textbook scores remain metrics. Commented historical runs are excluded. Generic GPT snapshots remain unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://scibench-ucla.github.io/data/results/model_scores.js";
 const board: Leaderboard = {

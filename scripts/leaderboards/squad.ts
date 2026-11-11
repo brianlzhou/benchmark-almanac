@@ -2,9 +2,8 @@
 // The table is identified by its 2016 human reference, keeping it separate from SQuAD 2.0.
 // Single-model and ensemble configurations and submission dates are preserved.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://rajpurkar.github.io/SQuAD-explorer/";
 const board: Leaderboard = {

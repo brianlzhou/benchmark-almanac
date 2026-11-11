@@ -1,7 +1,7 @@
 // GameCraft-Bench overall rubric percentage, preserving harness and effort. The separate usage table supplies output tokens per task for uniquely identified runs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/tongxuluo/gamecraft-bench/main/README.md";

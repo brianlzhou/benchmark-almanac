@@ -2,10 +2,9 @@
 // Unspecified model snapshots remain unlisted. Agent S2 retains its system name because this table does not identify its backbone.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2502.08047";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "worldgui",
   url: "https://github.com/showlab/WorldGUI",

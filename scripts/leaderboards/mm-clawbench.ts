@@ -4,10 +4,8 @@
 // Image: https://filecdn.minimax.chat/public/4f5db695-e248-481a-9081-311b35ba5a87.jpg
 // SHA-256: 28ef4e8ec02080a6e0e47cd060e360c9ed4d770253aae308a91ef708fe926cf7
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://filecdn.minimax.chat/public/4f5db695-e248-481a-9081-311b35ba5a87.jpg (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "mm-clawbench",

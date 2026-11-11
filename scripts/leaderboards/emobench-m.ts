@@ -1,7 +1,7 @@
 // EmoBench-M official average percentage, with FER, CEU, and SCEA as component metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/Emo-gml/EmoBench-M/main/README.md";

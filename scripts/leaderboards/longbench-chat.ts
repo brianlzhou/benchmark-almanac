@@ -4,10 +4,8 @@
 // Image: https://raw.githubusercontent.com/THUDM/LongAlign/HEAD/assets/leaderboard.png
 // SHA-256: 44ebdeeaf77500a0d0d24bf3dac4d645701616ad80a5a8e14e75d217dfa7fe97
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/THUDM/LongAlign/HEAD/assets/leaderboard.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "longbench-chat",

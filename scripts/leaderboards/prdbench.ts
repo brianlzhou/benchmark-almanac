@@ -1,8 +1,8 @@
 // PRDBench reports development and debugging scores for minimal and commercial agents.
 // Stages remain separate; commercial system identities are not attributed to guessed backbones.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/AGI-Eval-Official/PRDBench/main/README.md";
 const board: Leaderboard = {

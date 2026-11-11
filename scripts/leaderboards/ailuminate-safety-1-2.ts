@@ -1,7 +1,7 @@
 // AILuminate Safety 1.2 English (US): official percentile scores, preserving model and guard tables. Retain MLCommons citation wording and version.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://mlcommons.org/ailuminate/safety/results/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

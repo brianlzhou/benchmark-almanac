@@ -1,8 +1,8 @@
 // DP-Bench: published NID document-layout score (0–100), the table ordering.
 // TEDS and TEDS-S table-recognition scores, request dates, and seconds per request remain attached.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { text, tables, num, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

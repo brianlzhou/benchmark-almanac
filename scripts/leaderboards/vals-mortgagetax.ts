@@ -1,8 +1,7 @@
 // Vals published accuracy and per-test cost from the page’s live chart data. Table token prices are not used as task costs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, fetchJson } from '../lib/util.ts';
+import { tables } from '../lib/html.ts';
 import {valsRows,VALS_ALIASES} from './vals-index.ts';
 const FEED = "https://www.vals.ai/benchmarks/mortgage_tax";
 const board: Leaderboard = {

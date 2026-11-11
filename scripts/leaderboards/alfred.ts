@@ -1,9 +1,7 @@
 // ALFRED: default Unseen Success Rate, multiplied by 100.
 // The official board ranks unseen task completion. Seen scores stay metrics. Repeated system submissions keep the latest dated result.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://askforalfred.com/leaderboard/leaderboard.html";
 const board: Leaderboard = {

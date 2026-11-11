@@ -1,7 +1,7 @@
 // PhysClosureBench mean atomic score on a 0–10 scale. Research-closure categories count attempts; once/all percentages count tasks across three independent runs.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://uncertainty2019.github.io/PhysClosureBench/site-data.js";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

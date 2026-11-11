@@ -1,9 +1,8 @@
 // DeepPlanning v1.1: Avg Acc. is the headline percentage across travel and shopping planning.
 // Six diagnostic scores and explicit reasoning effort are preserved from the static leaderboard.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://qwenlm.github.io/Qwen-Agent/en/benchmarks/deepplanning/";
 const board: Leaderboard = {

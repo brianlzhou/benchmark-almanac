@@ -2,8 +2,8 @@
 // are divided by the live task-count table; the comparison table already gives per-task cost and minutes.
 // Additional harness results remain separate from the OpenClaw leaderboard.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/InternLM/WildClawBench/HEAD/README.md";

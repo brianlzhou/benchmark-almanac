@@ -2,8 +2,8 @@
 // the reported plus/minus spread and the other language metrics without treating the spread as a CI.
 // Human references are excluded; undated API names are not assigned snapshots.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://q-ivd.github.io/";
 const board: Leaderboard = {

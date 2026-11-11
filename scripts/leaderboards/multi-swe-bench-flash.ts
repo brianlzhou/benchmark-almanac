@@ -1,9 +1,7 @@
 // Multi-SWE-bench Flash: resolvedRate on the All language view multiplied by 100.
 // The 300-task Flash subset is one benchmark. Language and difficulty views are not rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-flash.json";
 const board: Leaderboard = {

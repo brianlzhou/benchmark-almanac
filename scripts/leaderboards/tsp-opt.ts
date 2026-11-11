@@ -1,8 +1,7 @@
 // TSP-Opt: mean optimal-tour correctness across runs, as percentages.
 // Reads only current archive summaries using ZIP byte ranges. Completion usage is output tokens per instance.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 import { inflateRawSync } from 'node:zlib';
 type Entry={name:string;offset:number;size:number;method:number};
 let lastRequest=0;

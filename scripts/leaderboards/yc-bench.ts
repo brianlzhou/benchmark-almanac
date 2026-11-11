@@ -1,8 +1,8 @@
 // YC-Bench: average simulated net worth in US dollars, not API cost. Read the live leaderboard
 // and preserve bankruptcy counts and run counts. Keep the Greedy Bot baseline as a named system.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://collinear-ai.github.io/yc-bench/";
 const board: Leaderboard = {

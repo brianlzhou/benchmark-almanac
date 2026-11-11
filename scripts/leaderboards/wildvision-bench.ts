@@ -1,7 +1,7 @@
 // WildVision-Bench vision_bench_0617: Score is the leaderboard ranking score, distinct from win rate. Preserve average response tokens, reward and preference counts without converting the headline score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

@@ -1,8 +1,7 @@
 // MiMo Code Bench: the maker’s current overview array, percentages in the published model order.
 // The importer reads model labels and score arrays without evaluating the script.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://mimo.xiaomi.com/mimo-v2-6/bench.js";
 const board: Leaderboard = {

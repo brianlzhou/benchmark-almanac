@@ -1,7 +1,7 @@
 // CMMLU: the official README publishes mean accuracy in percent across 67 Chinese subjects. Both zero-shot and five-shot tables are retained, with subject-group accuracies as metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/haonan-li/CMMLU/master/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

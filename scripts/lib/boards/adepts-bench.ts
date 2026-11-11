@@ -1,7 +1,7 @@
 // ADeptS publishes safety score S separately on 358 Mobile and 501 Desktop tasks. Each child uses its published S, with other measures as metrics.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { text, tables, num, jsonAfter } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { text, tables } from '../html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

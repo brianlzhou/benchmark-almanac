@@ -1,8 +1,7 @@
 // Galahad current named-object reach percentages from the official project page. Policy checkpoints remain undisclosed and unlisted; superseded drafts and benchmark-completion claims are not substituted for the battery results.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const FEED = "https://xn--7xa.monster/Galahad/";
 const board: Leaderboard = {

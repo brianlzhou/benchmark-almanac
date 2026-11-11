@@ -1,7 +1,7 @@
 // CyberOffense range data, retained as input to the publisher-defined whole-score mean.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
-import { tables, num, text, jsLiteral } from '../html.ts';
+import { tables, text, jsLiteral } from '../html.ts';
 const FEED = "https://www.vals.ai/benchmarks/cyber_offense";
 const board: Leaderboard = {
   benchmark: "vals-cyberoffense", url: "https://www.vals.ai/benchmarks/cyber_offense", feed: FEED,

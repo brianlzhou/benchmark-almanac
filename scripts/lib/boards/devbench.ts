@@ -1,8 +1,7 @@
 // DevBench has separate lifecycle task families. Implementation uses acceptance-test pass rate; unit-test pass rate remains auxiliary. Design metrics have no single headline.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { num, text, tables, jsonAfter } from '../html.ts';
-import { markdownTables } from '../boards/github-markdown.ts';
+import { fetchText } from '../util.ts';
+import { num, text, tables } from '../html.ts';
 
 const FEED = "https://raw.githubusercontent.com/open-compass/DevEval/main/README.md";
 const board: Leaderboard = {

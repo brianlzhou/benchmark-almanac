@@ -14,7 +14,7 @@ export function amlBoard(benchmark: string, track: 'industry' | 'academic', type
         return data.filter(r => r.track === track).map(r => ({model: r.model + ' (memory system)', setting: r.version,
           score: r.datasets.amlCoding.taskSolve, metrics: r.datasets.amlCoding}));
       }
-      const data = await fetchJson<{entries: {target_version_label: string; average_score: number; metadata: {version?: string}; dataset_scores: {category_scores?: {category: string; score: number}[]}[]} }>(feed);
+      const data = await fetchJson<{entries: {target_version_label: string; average_score: number; metadata: {version?: string}; dataset_scores: {category_scores?: {category: string; score: number}[]}[]}[]}>(feed);
       if (!data.entries?.length) throw new Error('AML textual data missing');
       return data.entries.map(r => ({model: r.target_version_label + ' (memory system)', setting: r.metadata.version,
         score: r.average_score, metrics: Object.fromEntries(r.dataset_scores.flatMap(d => (d.category_scores ?? []).map(c => [c.category, c.score])))}));

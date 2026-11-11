@@ -1,9 +1,7 @@
 // MMAU-Pro: the official project page loads results.json with average accuracy in percent.
 // All published audio-category scores remain metrics; random and human baselines are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://sonalkum.github.io/mmau-pro/results.json";
 const board: Leaderboard = {

@@ -4,7 +4,7 @@
 // Standard deviations are subscripts and are not part of the accuracy. SFT results cover only 2D and are excluded.
 // These are static paper results and will not refresh with new models. Undated API snapshots remain unlisted.
 import type { Leaderboard } from './types.ts';
-import { paperHtml, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperHtml, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { tables, text } from '../lib/html.ts';
 
 const FEED = 'https://arxiv.org/html/2506.02022';

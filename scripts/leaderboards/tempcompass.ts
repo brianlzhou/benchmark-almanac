@@ -1,9 +1,9 @@
 // TempCompass: the author Space sorts by Avg. All across all temporal tasks.
 // Frame counts are whole-benchmark input configurations. Group averages remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://huggingface.co/spaces/lyx97/TempCompass/resolve/main/file/result.csv";
 const board: Leaderboard = {

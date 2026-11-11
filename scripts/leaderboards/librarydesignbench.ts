@@ -1,9 +1,8 @@
 // LibraryDesignBench scores pass-rate squared times simplicity, averaged with equal task weights.
 // The source fractions become 0-100 scores. Cost is mean dollars to design one library task;
 // implementation-problem cost remains a separate metric. Production/no-library references are excluded.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://ldbench.com/data/site.json";
 const board: Leaderboard = {

@@ -1,7 +1,7 @@
 // MCP-Bench publishes an overall composite score on its native 0-1 scale. Keep that score unchanged and leave undated model families unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

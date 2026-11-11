@@ -3,7 +3,7 @@
 // The chart repeats the paper scores, with one added model. It does not establish the cataloged 1,811-item scope.
 // These are revised Full text-only scores, not the Confident subset with uncertain questions removed.
 import type { Leaderboard } from './types.ts';
-import { checkChart, CHART_TERMS } from '../lib/boards/github-round3-t.ts';
+import { checkChart, CHART_TERMS } from '../lib/boards/transcribed-github-chart.ts';
 
 const IMAGE = 'https://raw.githubusercontent.com/SKYLENAGE-AI/HLE-Verified/main/figure/leaderboard_HLE_Verified.png';
 const SHA256 = 'a70eb678b1b3cb71635a9a4d1f7f3675d75dd2e4a5129891025095304acccf31';

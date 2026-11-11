@@ -2,10 +2,9 @@
 // Token budgets are whole-range configurations. Maximum steps remain metrics. Cooling Tower is a different range.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2603.11214";
-import { paperTables } from '../lib/boards/arxiv-h1.ts';
+import { paperTables } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "uk-aisi-caisi-enterprise-network-range",
   url: "https://www.aisi.gov.uk/blog/how-do-frontier-ai-agents-perform-in-multi-step-cyber-attack-scenarios",

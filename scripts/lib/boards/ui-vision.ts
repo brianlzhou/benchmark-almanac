@@ -1,7 +1,7 @@
 // UI-Vision has three distinct task families. Each uses its published headline metric; other metrics are auxiliary.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
-import { text, tables } from '../html.ts';
+import { text } from '../html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

@@ -1,8 +1,8 @@
 // WorldAuditBench: the official Overall success percentage across five anomaly families.
 // VLM-only and VLA-VLM are whole-suite agent configurations. The source reports cost in dollars per task.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://ucsb-nlp-chang.github.io/WorldAuditBench/assets/app.js";
 const board: Leaderboard = {

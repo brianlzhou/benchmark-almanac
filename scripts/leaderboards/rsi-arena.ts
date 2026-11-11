@@ -1,9 +1,8 @@
 // RSI Arena paper: final human-arena Rating of each agent-trained model.
 // These static paper rows will not refresh. The agent identity names the training system. GPU hours and API spending cover training.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2610.33624";
 const board: Leaderboard = {

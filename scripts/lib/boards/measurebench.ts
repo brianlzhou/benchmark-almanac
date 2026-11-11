@@ -1,7 +1,7 @@
 // MeasureBench publishes real-world and synthetic test-set overall accuracy separately. Each child reads its Ovr column.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { num, tables, text } from '../html.ts';
 
 const FEED = "https://flageval-baai.github.io/MeasureBenchPage/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -1,8 +1,8 @@
 // ScreenSpot: Average GUI-grounding accuracy is the headline percentage in the SeeClick README.
 // Mobile, desktop and web text/icon accuracies remain diagnostic metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/njucckevin/SeeClick/main/readme.md";

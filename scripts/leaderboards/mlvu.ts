@@ -2,8 +2,8 @@
 // Dev uses different questions and option counts, so exclude it. Frame sampling is a
 // whole-benchmark configuration. Generative and task scores remain secondary metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/JUNJIE99/MLVU/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

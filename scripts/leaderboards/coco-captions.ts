@@ -1,8 +1,7 @@
 // COCO defaults to the C5 captioning board, ranked by CIDEr-D. Raw CIDEr-D is multiplied by 100 to match this catalog record and its lab results. Source submission names identify systems and remain unlisted. Empty names are excluded. Repeated names keep their latest submission. C40 and human challenge metrics are different views.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const FEED = "https://cocodataset.org/leaderboard/cap_c5.json";
 const board: Leaderboard = {

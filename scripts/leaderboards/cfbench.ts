@@ -2,9 +2,9 @@
 // Tables 2 and 7 cover the same benchmark. Their overlapping rows agree. Easy and Hard scores remain metrics.
 // Rows are static paper results and will not refresh with later model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2408.01122";
 const board: Leaderboard = {

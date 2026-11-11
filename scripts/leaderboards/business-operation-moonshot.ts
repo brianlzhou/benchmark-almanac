@@ -1,9 +1,9 @@
 // Business Operation: the author image alt text prints two whole-benchmark percentage scores.
 // Finance Modeling and Financial Research are different benchmarks and are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://www.kimi.com/en/blog/kimi-k3-1-pro";
 const board: Leaderboard = {

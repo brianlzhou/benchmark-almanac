@@ -1,7 +1,7 @@
 // AV-SpeakerBench: overall audio-visual speaker understanding accuracy in percent from the official leaderboard. Human performance is excluded. Task categories remain metrics and thinking configurations remain separate settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://plnguyen2908.github.io/AV-SpeakerBench-project-page/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

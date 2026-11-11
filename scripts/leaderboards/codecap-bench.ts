@@ -1,8 +1,8 @@
 // CodeCap-Bench uses overall fine-grained visual retention as its headline score.
 // The static main table retains harness identity and five component metrics. Cost/token charts are image-only.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://codecap-bench.github.io/";
 const board: Leaderboard = {

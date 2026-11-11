@@ -2,9 +2,7 @@
 // not the normalized trend axis. Reasoning-token budgets are configuration limits, not measured output usage.
 // Confidence intervals, refusal rates and release dates remain attached; duplicated chart traces are collapsed.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { num, text } from '../lib/html.ts';
 import { sbCharts, SB_ALIASES } from './hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 const board: Leaderboard = {

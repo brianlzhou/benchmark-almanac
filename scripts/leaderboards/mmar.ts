@@ -1,7 +1,7 @@
 // MMAR: Avg is audio reasoning accuracy in percent. Preserve reported model sizes, caption scaffolds and all sound/music/speech mixture accuracies; exclude random guessing.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

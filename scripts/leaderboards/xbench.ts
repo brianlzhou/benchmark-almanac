@@ -2,9 +2,8 @@
 // The published net_sentiment is a signed fraction. Scores use percentage points, including negative values.
 // The importer reads the maker's public summary only. It never requests X or Twitter hosts.
 // Harness sentiment and per-week results are separate views, not additional rows.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://media.offpolicyinc.com/xbench/data/labels-v3/public-summary.json?v=2026-09-28a";
 const board: Leaderboard = {

@@ -5,8 +5,6 @@
 // human and random baselines and entries without an Avg are dropped.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { num } from '../lib/html.ts';
-import { mdTables } from './big-bench-extra-hard.ts';
 
 const PAGE = 'https://scienceqa.github.io/leaderboard.html';
 const FEED = 'https://scienceqa.github.io/javascript/leaderboard-data.js';

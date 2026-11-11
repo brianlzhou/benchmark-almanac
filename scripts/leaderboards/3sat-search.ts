@@ -8,10 +8,9 @@
 // The reader requests only ZIP directories and small report ranges, with public unauthenticated requests.
 // Sources are live repository-head archives, though their stored experiments are historical.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { hfZipEntries, hfZipTexts } from '../lib/boards/huggingface-zip-h2.ts';
+import { fetchJson } from '../lib/util.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { hfZipEntries, hfZipTexts } from '../lib/boards/huggingface-zip.ts';
 const FEED = "https://huggingface.co/api/datasets/microsoft/Eureka-Bench-Logs/tree/main/SAT";
 const board: Leaderboard = {
  benchmark: "3sat-search",

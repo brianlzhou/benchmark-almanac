@@ -1,7 +1,7 @@
 // Moonshot reports two named internal speech test subsets. Each child imports its whole-subset WER; the paper does not publish a combined denominator.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { text, tables, num, jsonAfter } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { text, tables } from '../html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

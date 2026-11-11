@@ -1,8 +1,7 @@
 // MiMo Coding Bench: the original V2.5-Pro launch evaluation.
 // This is distinct from MiMo Code Bench in the V2.6 report. Published score keys join the page’s model labels.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://mimo.xiaomi.com/mimo-v2-5-pro/index.html";
 const board: Leaderboard = {

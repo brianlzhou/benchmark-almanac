@@ -2,8 +2,7 @@
 // Oracle and Realistic are whole-suite access settings. Patch application and correctness remain metrics.
 // Duplicate identical source rows are collapsed.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://swe-perf.github.io/performances.json";
 const board: Leaderboard = {

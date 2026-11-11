@@ -1,8 +1,8 @@
 // MMLU-STEM: the official MMLU Test Leaderboard STEM accuracy percentage, not its overall average.
 // Preserve model-size and few-shot/fine-tuning configurations; exclude the random baseline.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/hendrycks/test/master/README.md";
 const board: Leaderboard = {

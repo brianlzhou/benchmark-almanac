@@ -3,7 +3,7 @@
 // These are static paper results and will not refresh with new models. The dataset is CC BY 4.0;
 // that dataset license is not an automated-reading ban on the published paper's result table.
 import type { Leaderboard } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2605.28218';
 const board: Leaderboard = {

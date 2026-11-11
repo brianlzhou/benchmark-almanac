@@ -1,9 +1,9 @@
 // IntPhys 2: the paper’s Overall accuracy on its main evaluation set, in percent.
 // Easy, medium, hard and held-out accuracy remain secondary metrics.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2506.09849";
 const board: Leaderboard = {

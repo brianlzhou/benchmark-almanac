@@ -1,4 +1,4 @@
-// Readers used only by round 3 H1 importers. ArXiv sometimes nests small header tables inside data tables.
+// Readers for arXiv paper tables. ArXiv sometimes nests small header tables inside data tables.
 import { tables, num } from '../html.ts';
 import { fetchText } from '../util.ts';
 import type { LeaderboardRow } from '../../leaderboards/types.ts';

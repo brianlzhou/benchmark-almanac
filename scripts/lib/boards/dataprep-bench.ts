@@ -1,7 +1,7 @@
 // DataPrep-Bench reports six domain averages for generated data. Backbone choice is a run configuration within each domain.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { tables, num, text } from '../html.ts';
 
 const FEED = "https://datapreparationbench.github.io/";
 const board: Leaderboard = {

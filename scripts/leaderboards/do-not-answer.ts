@@ -1,8 +1,8 @@
 // Do-Not-Answer: human-rated harmlessness is the published ranking and headline percentage.
 // GPT-4 and Longformer evaluate the same responses and remain secondary metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/Libr-AI/do-not-answer/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

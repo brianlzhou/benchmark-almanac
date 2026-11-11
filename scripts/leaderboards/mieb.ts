@@ -1,9 +1,7 @@
 // MIEB Multilingual: current default Mean(TaskType), scaled to the displayed 0-to-100 score.
 // Only rows with a published whole-benchmark aggregate qualify. Task-type scores remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores";
 const board: Leaderboard = {

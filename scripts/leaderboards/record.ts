@@ -1,7 +1,7 @@
 // ReCoRD: official reading-comprehension F1 in percent, with exact match retained separately. Preserve full submitted-system labels and exclude human/random references.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://sheng-z.github.io/ReCoRD-explorer/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

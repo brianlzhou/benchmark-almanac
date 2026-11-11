@@ -1,7 +1,7 @@
 // AutoLogi: Overall Scores is the official mean of English and Chinese augmented-task accuracies, in percent. Preserve both language scores and their reported uncertainty.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

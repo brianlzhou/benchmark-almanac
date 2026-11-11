@@ -1,7 +1,7 @@
 // CiteVQA strict answer-attribution accuracy (SAA) percentage. Recall, relevance and answer accuracy remain component metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://huggingface.co/datasets/opendatalab/CiteVQA/raw/main/README.md";

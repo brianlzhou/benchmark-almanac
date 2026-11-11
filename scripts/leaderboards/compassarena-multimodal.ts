@@ -1,2 +1,2 @@
-import { compassArena } from '../lib/boards/compassarena-arenas.ts';
+import { compassArena } from '../lib/boards/compassarena.ts';
 export default compassArena(true);

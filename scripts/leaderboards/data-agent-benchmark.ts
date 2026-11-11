@@ -1,8 +1,8 @@
 // Data Agent Benchmark Pass@1 from the current official README, converted from fractions.
 // Preserves agent identity, model combinations, effort, hints, prompt tuning, trials and submission date.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/ucbepic/DataAgentBench/main/README.md";
 const board: Leaderboard = {

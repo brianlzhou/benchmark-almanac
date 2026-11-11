@@ -3,7 +3,7 @@
 //  Precision and coverage remain secondary metrics. These are the paper's static results and will not refresh.
 //  GPT-4o and GPT-4-Turbo lack snapshot dates in the table and remain unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2407.10362";
 

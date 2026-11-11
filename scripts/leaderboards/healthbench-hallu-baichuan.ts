@@ -3,10 +3,9 @@
 // The score is the weighted hallucination rate, not the neighboring HealthBench-Hard score. Lower is better.
 // Two separate visual passes checked every printed score. The image hash must match before rows are returned.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/baichuan-inc/Baichuan-M3-235B/main/images/hb_metrics.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://raw.githubusercontent.com/baichuan-inc/Baichuan-M3-235B/main/images/hb_metrics.png";
 const SHA256 = "c9a98d8ee64f89730da83c2e4cf241f99bcd453b41472ee37488c317efa39fa4";
 const ROWS: LeaderboardRow[] = [

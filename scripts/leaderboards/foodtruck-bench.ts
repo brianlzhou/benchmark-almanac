@@ -1,8 +1,7 @@
 // FoodTruck Bench ranks models by median-run net worth in dollars. The live page serializes the full model list behind its initial ten visible rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://foodtruckbench.com/";
 const board: Leaderboard = {

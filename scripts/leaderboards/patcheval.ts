@@ -1,7 +1,6 @@
 // PatchEval-Verified: the README reports Pass@1 as passed/total followed by a percentage. Read the parenthesized percentage, not the numerator, and retain the task counts. Agent names are harnesses and model names remain separate.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/bytedance/PatchEval/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

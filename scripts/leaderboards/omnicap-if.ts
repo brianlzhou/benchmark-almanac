@@ -1,8 +1,8 @@
 // OmniCap-IF: Overall constraint-satisfaction rate (CSR), in percent. Retain Overall ISR and the
 // format, content and modality scores as metrics. Exclude the human reference and section headings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://nju-link.github.io/OmniCap-IF/";
 const board: Leaderboard = {

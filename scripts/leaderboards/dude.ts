@@ -2,10 +2,10 @@
 // Calibration error and selective-risk area remain secondary metrics.
 // Live challenge submissions are added without losing the static paper baselines.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
-import { rrcPage } from '../lib/boards/rrc-cov5.ts';
+import { rrcPage } from '../lib/boards/rrc.ts';
 const RRC = 'https://rrc.cvc.uab.es/?ch=23&com=evaluation&task=1';
 const FEED = "https://arxiv.org/html/2305.08455";
 const board: Leaderboard = {

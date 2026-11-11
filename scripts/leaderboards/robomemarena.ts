@@ -1,9 +1,7 @@
 // RoboMemArena: official overall task success rate across Tasks 1 through 26.
 // The simulation board is the default. Real-world tasks are separate and excluded. Component success remains a metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://robomemarena.github.io/leaderboard_data.json";
 const board: Leaderboard = {

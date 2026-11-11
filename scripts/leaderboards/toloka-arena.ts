@@ -1,8 +1,8 @@
 // Toloka Arena: pass^5 is the registry’s headline reliability metric, in percent.
 // Pass^1 is a supporting metric on that same whole-benchmark row; effort remains a setting.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://toloka.ai/blog/toloka-arena-independent-evaluation-of-agentic-intelligence/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

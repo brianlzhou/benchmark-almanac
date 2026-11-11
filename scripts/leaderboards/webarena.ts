@@ -2,9 +2,8 @@
 // System names remain unlisted when no exact model is named; work and submission month are retained.
 // Only run-configuration notes become settings, not citation links or publication comments.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://docs.google.com/spreadsheets/d/1M801lEpBbKSNwP-vDBkC_pF7LdyGU1f_ufZb_NWNBZQ/export?format=csv";
 const board: Leaderboard = {

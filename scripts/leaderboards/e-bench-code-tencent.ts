@@ -4,10 +4,8 @@
 // Image: https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg
 // SHA-256: 02c751bf51c52c52cc02094561d7144bbfe3e27084d48d8a405d580da3554e21
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/Tencent-Hunyuan/Hy4-preview/main/assets/benchmark-appendix.jpg (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "e-bench-code-tencent",

@@ -1,8 +1,8 @@
 // AVMeme Exam: the published AVG across all question types, in percent.
 // Sound and question-type scores remain metrics. Undated audio model labels remain unlisted.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://avmemeexam.github.io/public/";
 const board: Leaderboard = {

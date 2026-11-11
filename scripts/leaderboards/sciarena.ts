@@ -2,21 +2,14 @@
 // Cost per 100 calls remains a metric because calls are not benchmark tasks. Release-month inconsistencies are not model aliases.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2507.01001";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "sciarena",
   url: "https://sciarena.allen.ai/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-  aliases: {
-    'Claude-4.1-Opus': 'claude-opus-4-1', 'Claude-4-Opus': 'claude-opus-4',
-    'Claude-4-Sonnet': 'claude-sonnet-4',
-    'Qwen3-235B-A22B-2507': 'qwen3-235b-a22b-instruct-jul-2025',
-    'Qwen3-30B-A3B-Instruct-2507': 'qwen3-30b-a3b-instruct-jul-2025',
-  },
   aliases: {
     'Claude-4.1-Opus': 'claude-opus-4-1', 'Claude-4-Opus': 'claude-opus-4',
     'Claude-4-Sonnet': 'claude-sonnet-4',

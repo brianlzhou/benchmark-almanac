@@ -1,8 +1,7 @@
 // CoVEBench Union Accuracy Score (UAS) from the official video-editing leaderboard, with all component metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://nju-link.github.io/CoVEBench/";
 const board: Leaderboard = {

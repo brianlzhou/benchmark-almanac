@@ -1,8 +1,8 @@
 // AgentWorldBench: Overall is the official aggregate score on a 0–100 scale.
 // Seven domain scores remain metrics; downstream application benchmarks are excluded from this importer.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/QwenLM/Qwen-AgentWorld/HEAD/README.md";

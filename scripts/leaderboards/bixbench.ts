@@ -2,9 +2,8 @@
 // Answer format and refusal options apply to the whole set. Precision and coverage remain metrics.
 // These are zero-shot baselines, not agentic runs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchJson } from '../lib/util.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://raw.githubusercontent.com/Future-House/BixBench/HEAD/bixbench-v1.5_results/zero_shot_baselines.json";
 const board: Leaderboard = {

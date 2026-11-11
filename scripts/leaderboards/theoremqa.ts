@@ -2,8 +2,8 @@
 // multibenchmark average. The Space documents 5-shot chain-of-thought evaluation. Preserve base-model
 // labels so they cannot be confused with instruction-tuned variants.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/datasets/wenhu/science_leaderboard_submission/resolve/main/results.csv";
 const board: Leaderboard = {

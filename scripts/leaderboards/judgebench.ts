@@ -2,8 +2,7 @@
 // pairwise judgments. Use the first/default GPT-4o response dataset, including Nemotron results
 // appended to that view. Claude response-dataset scores do not become separate leaderboard rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://scalerlab-judgebench.hf.space/config";
 const board: Leaderboard = {

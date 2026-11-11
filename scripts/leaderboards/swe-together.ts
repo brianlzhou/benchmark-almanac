@@ -1,8 +1,8 @@
 // SWE-Together pass@1 percentage. Output plus reasoning tokens and API dollars are per task.
 // The site uses the opencode harness with two trials; pass-squared, judge, corrections, and time remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { text, tables, num, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { text, num } from '../lib/html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

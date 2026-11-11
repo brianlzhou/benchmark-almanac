@@ -1,7 +1,7 @@
 // RULERv2 average percentage from the official evaluation guide, with context-length scores retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/NVIDIA-NeMo/Skills/main/docs/evaluation/long-context.md";

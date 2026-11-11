@@ -1,7 +1,7 @@
 // Official chart labels, transcribed 2026-11-10. Model repository identities and run dates
 // come from the maker's reproduction/manifest.json. Only the 518-question hard split is imported.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = 'https://huggingface.co/datasets/joelniklaus/LEXam-hard/resolve/main/figures/lexam_full_vs_hard.png';
 const ROWS: LeaderboardRow[] = [
   {

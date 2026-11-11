@@ -2,8 +2,8 @@
 // the view normally reported for this registry record. Subjective Overall is secondary.
 // Keep subject metrics and dated API model identities. Do not average question types.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/OpenLMLab/GAOKAO-Bench/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

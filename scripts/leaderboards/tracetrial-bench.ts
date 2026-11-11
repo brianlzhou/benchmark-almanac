@@ -1,9 +1,8 @@
 // TraceTrial-Bench: layered is the board’s Overall score and default sort column.
 // It is the published equal-weight mean of Agent Score and Harness Macro. No aggregate is recomputed.
 // Resource values are means per selected execution of one task. Output tokens are stored in thousands in the feed.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://tracelite.ai/data/leaderboard.json";
 const board: Leaderboard = {

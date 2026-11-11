@@ -1,7 +1,7 @@
 // VisualWebArena task success percentages from the complete official results table. Expand merged cells and preserve input modality and visual backbone.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://jykoh.com/vwa";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

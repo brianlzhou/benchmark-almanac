@@ -2,10 +2,8 @@
 // Max Base and Lite results are secondary metrics. No original-scene and changed-scene aggregate is invented.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2609.36518";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "libero-max",
   url: "https://github.com/liberomax/LIBERO-MAX",

@@ -1,7 +1,7 @@
 // SAFE-Teen assigns each conversation to one of three risk areas. Each child uses that task-family failure rate, lower is better.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { tables, num, text } from '../html.ts';
 
 const FEED = "https://www.vals.ai/benchmarks/mental-health";
 const board: Leaderboard = {

@@ -1,8 +1,8 @@
 // CoQA overall F1 for nonhuman submissions, with in-domain and out-of-domain metrics.
 // Preserves system and ensemble identities rather than assigning specialized systems to guessed backbones.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://stanfordnlp.github.io/coqa/";
 const board: Leaderboard = {

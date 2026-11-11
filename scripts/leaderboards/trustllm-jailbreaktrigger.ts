@@ -1,9 +1,8 @@
 // TrustLLM paper: Overall jailbreak refusal-to-answer rate multiplied by 100.
 // These static paper rows will not refresh. QBB and ITC are metrics. Other TrustLLM dimensions are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2401.05561";
 const board: Leaderboard = {

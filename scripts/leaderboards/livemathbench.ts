@@ -1,7 +1,7 @@
 // LiveMathBench-202412 mG-Pass@16 percentage from the first release-specific table. Greedy and G-Pass threshold metrics remain components.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/open-compass/GPassK/main/README.md";

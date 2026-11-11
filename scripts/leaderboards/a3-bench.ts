@@ -1,7 +1,7 @@
 // A³-Bench published average accuracy for three memory paradigms. Token totals remain metrics because the source does not identify average output tokens per task.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://a3-bench.github.io/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

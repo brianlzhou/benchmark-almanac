@@ -1,8 +1,7 @@
 // OmniBench: overall accuracy in percent for each of four input conditions. Preserve all numeric
 // category scores and model-size labels. Missing values remain missing, not zero.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://m-a-p.ai/OmniBench/leaderboard_data.json";
 const board: Leaderboard = {

@@ -1,9 +1,8 @@
 // RoboEval: the official global success mean across all tasks, as a percentage (the board's 0 to 1 mean times 100,
 // the scale lab results use). The other behavior metrics stay on the board's 0 to 1 scale.
 // Other published behavior metrics remain secondary. Human demonstration results are excluded.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://robo-eval.github.io/static/data/leaderboard_global.json";
 const board: Leaderboard = {

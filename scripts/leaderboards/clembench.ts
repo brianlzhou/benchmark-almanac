@@ -3,9 +3,9 @@
 // The CSV repeats each published language clemscore across its games. Count each language once.
 // Source: https://clembench.github.io/assets/js/leaderboard.js
 // Costs and token counts are full-suite totals, retained as metrics rather than per-task values.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num, jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://clembench.github.io/assets/benchmark_results/v4/combined_results.csv";
 const board: Leaderboard = {

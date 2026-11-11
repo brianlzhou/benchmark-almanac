@@ -1,8 +1,7 @@
 // LABBench2 LitQA3 mean score converted to percentage, with tool/mode settings, output tokens, and duration. Empty failed runs are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://advances.edisonscientific.com/benchmarks/labbench2/litqa3/";
 const board: Leaderboard = {

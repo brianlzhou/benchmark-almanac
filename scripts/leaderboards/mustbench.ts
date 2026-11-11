@@ -1,7 +1,6 @@
 // MusTBench: the live JSON reports overall music temporal-understanding performance on a 0–100 scale. Keep all grounding submetrics and the explicitly stated model size; MusT fine-tunes retain their full names instead of being credited to base models.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://daeyongkwon98.github.io/mustbench/data/leaderboard.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -2,9 +2,7 @@
 // that macro average and converts fractions to percentages. Dataset coverage is explicit, since some
 // configurations cover only a subset. Scenario and dataset scores and post-training variants are retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/facebookresearch/AbstentionBench/main/analysis/abstention_performance.csv";
 const board: Leaderboard = {

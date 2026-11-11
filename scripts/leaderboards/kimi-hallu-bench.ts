@@ -1,9 +1,9 @@
 // Kimi Hallu Bench: the author image alt text prints claim-level hallucination rates, lower is better.
 // Use the default set without tools. The Hard set with tools is a distinct subset and is excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://www.kimi.com/blog/kimi-k3-1-pro";
 const board: Leaderboard = {

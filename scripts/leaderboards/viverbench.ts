@@ -1,8 +1,8 @@
 // ViVerBench overall verification accuracy. Fractions become percentages.
 // Human and random references are excluded; sixteen category accuracies are retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://omniverifier.github.io/";
 const board: Leaderboard = {

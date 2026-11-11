@@ -2,8 +2,8 @@
 // The second table is SQuAD 1.1 and is excluded. Remove team affiliations, preserving submission names
 // and the single-model/ensemble setting; human reference performance is not a model.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://rajpurkar.github.io/SQuAD-explorer/";
 const board: Leaderboard = {

@@ -1,7 +1,7 @@
 // IneqMath reports overall proof accuracy in percent, requiring both correct answers and valid reasoning. Preserve effort and generation limits in settings, not as measured output tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

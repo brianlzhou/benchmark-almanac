@@ -2,8 +2,7 @@
 // Cost and completion-token means retain the source averaging scope and checks-run counts.
 // All numeric geometry, generation, rendering and timing statistics remain attached.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://willpatrick.xyz/cadevalresults_20250422_095709/dashboard_data.json";
 const board: Leaderboard = {

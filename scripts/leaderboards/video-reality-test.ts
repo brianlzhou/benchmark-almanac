@@ -1,8 +1,7 @@
 // Video Reality Test reviewer accuracy percentage. Generator failure rates are a distinct lower-is-better measure and are not mixed with reviewer accuracy.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://video-reality-test.github.io/";
 const board: Leaderboard = {

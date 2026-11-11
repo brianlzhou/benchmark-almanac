@@ -3,10 +3,8 @@
 // Automated-evaluation pass rate is the common headline for all eight systems. Human-evaluation pass rates remain metrics. Product and API are full-benchmark harnesses.
 // Two separate visual passes agreed. A changed SHA-256 requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://huggingface.co/datasets/FinWorkBench/Finch/resolve/main/figs/exp_results.jpg (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://huggingface.co/datasets/FinWorkBench/Finch/resolve/main/figs/exp_results.jpg";
 const SHA256 = "82b19be823218dd3a84fd2802ebcadf154f8f218543fd945a654607276001b79";
 const ROWS: LeaderboardRow[] = [

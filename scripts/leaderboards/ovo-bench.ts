@@ -2,10 +2,9 @@
 //  Frame budgets describe whole-benchmark configurations. The three group averages remain metrics.
 //  Models without an Overall Avg. are incomplete and excluded. These static paper rows will not refresh.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2501.05510";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "ovo-bench",
   url: "https://joeleelyf.github.io/OVO-Bench/",

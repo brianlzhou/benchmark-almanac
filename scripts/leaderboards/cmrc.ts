@@ -1,7 +1,7 @@
 // CMRC2018: Test F1 is the headline reading-comprehension score, in percent. Preserve test exact match and challenge EM/F1 as separate metrics. Keep submitted system identities, including single-model/ensemble labels, and exclude human performance.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://ymcui.com/cmrc2018/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

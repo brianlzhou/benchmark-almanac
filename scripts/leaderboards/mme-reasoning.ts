@@ -1,8 +1,8 @@
 // MME-Reasoning overall accuracy percentages with capability and reasoning-type breakdowns.
 // The -T suffix identifies thinking mode; undated API snapshots remain unmatched.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://alpha-innovator.github.io/mmereasoning.github.io/";
 const board: Leaderboard = {

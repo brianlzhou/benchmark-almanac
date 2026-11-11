@@ -1,8 +1,8 @@
 // TurkishMMLU: average accuracy and four subject-group accuracies from the official README.
 // Keep base and instruction-tuned variants distinct; undated GPT API names stay unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/ArdaYueksel/TurkishMMLU/main/README.md";
 const board: Leaderboard = {

@@ -1,8 +1,8 @@
 // OpenThoughts-TBLite: published task success percentage, with reported uncertainty.
 // Runtime is total benchmark minutes, not task latency; Terminal-Bench 2 comparisons remain supporting metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { text, tables, num, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { text, tables } from '../lib/html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

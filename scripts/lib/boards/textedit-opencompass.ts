@@ -1,7 +1,7 @@
 // TextEdit separates Real and Virtual image test sets. Import only the Full edition, using the published judged Avg, with other metrics attached.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { tables, num, text } from '../html.ts';
 
 const FEED = "https://raw.githubusercontent.com/open-compass/TextEdit/main/README.md";
 const board: Leaderboard = {

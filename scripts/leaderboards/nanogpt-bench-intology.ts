@@ -1,8 +1,8 @@
 // Intology NanoGPT-Bench: percentage of human optimization progress recovered.
 // The baseline labels supply the model, reasoning effort, and agent harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { text, tables, num, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

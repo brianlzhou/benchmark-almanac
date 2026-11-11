@@ -1,9 +1,8 @@
 // VLMs Are Blind: the static results table reports mean accuracy in percent across eight visual tasks.
 // Model and task names come from image alt labels, not image recognition; random and aggregate rows are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://vlmsareblind.github.io/";
 const board: Leaderboard = {

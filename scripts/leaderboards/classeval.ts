@@ -2,8 +2,7 @@
 // The headline is class-level pass@1. Sampling and greedy are whole-suite configurations.
 // Class-level pass@3 and pass@5 remain metrics alongside method and partial-success scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://fudanselab-classeval.github.io/pass_at_k_result_H.json";
 const board: Leaderboard = {

@@ -1,8 +1,8 @@
 // LLMBoxing archived vote totals, preserving the two independent head-to-head contests.
 // Archive date identifies the snapshot; vote totals are not cross-contest model ratings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 
 const FEED = "https://web.archive.org/web/20231225081704/https://llmboxing.com/leaderboard";
 const board: Leaderboard = {

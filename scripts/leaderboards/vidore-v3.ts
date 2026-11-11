@@ -2,8 +2,7 @@
 // Only the all-task mean is eligible. Public-only subsets remain excluded.
 // Preserve model configurations, representation types, and ten task scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/ViDoRe%28v3%29/scores";
 const board: Leaderboard = {

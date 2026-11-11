@@ -4,10 +4,8 @@
 // Image: https://raw.githubusercontent.com/OpenMOSS/ABC-Bench/HEAD/figs/main-results.png
 // SHA-256: e0e7e7217a0ef678f666e0fb3e9b0cabbd075d5c7b23b51aaade15ff48d18c8f
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/OpenMOSS/ABC-Bench/HEAD/figs/main-results.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "abc-bench-backend-coding",

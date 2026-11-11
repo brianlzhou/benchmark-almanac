@@ -1,5 +1,5 @@
 // Bedside Bench: Fireworks publishes Doximity's headline clinical accuracy, cost, and token metrics.
-import { fireworksBoard } from '../lib/boards/fireworks-cov2.ts';
+import { fireworksBoard } from '../lib/boards/fireworks.ts';
 const source=fireworksBoard('bedside-bench', 'healthcare/bedside-bench');
 export default {...source,async fetch(){
  const rows=await source.fetch();

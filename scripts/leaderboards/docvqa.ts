@@ -1,10 +1,9 @@
 // DocVQA: live RRC Task 1 submissions plus the retained paper baselines, with ANLS multiplied by 100.
 // The live table keeps every submission and its category scores. Paper baseline rows remain for continuity. The M4C and BERT tables publish model variants with distinct training configurations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
-import { rrcPage } from '../lib/boards/rrc-cov5.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
+import { rrcPage } from '../lib/boards/rrc.ts';
 
 const FEED = "https://arxiv.org/html/2007.00398";
 const RRC = 'https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1';

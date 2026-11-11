@@ -1,8 +1,7 @@
 // HUMAINE: the published overall Bradley-Terry-Davidson rating is the headline score.
 // Dimension ratings are secondary metrics. Demographic slices do not represent the whole benchmark.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard/resolve/main/leaderboard-app/public/btd_frontend_data.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

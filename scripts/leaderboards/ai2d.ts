@@ -1,9 +1,9 @@
 // AI2D: paper Table 3 reports whole-test diagram question-answering accuracy.
 // Training datasets are whole-benchmark configurations. JIG parsing scores are not QA scores.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1603.07396";
 const board: Leaderboard = {

@@ -1,7 +1,7 @@
 // TemporalBench: overall Multiple Binary Accuracy in percent is the primary QA score. Binary accuracy, short/long video splits, and captioning similarity remain separate metrics. Frame counts distinguish configurations, including zero-frame baselines; human and random references are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://temporalbench.github.io/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

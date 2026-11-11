@@ -1,8 +1,7 @@
 // CHI-Bench pass@1 percentages from the live static leaderboard. Only all-domain scores become rows; domain scores remain metrics. The launch page supplies exact cost labels for 30 configurations in its SVG chart.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const FEED = "https://www.actava.ai/benchmarks/leaderboards";
 const board: Leaderboard = {

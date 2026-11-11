@@ -1,8 +1,8 @@
 // TRACES, the current official Apodex Discovery leaderboard, reports 0–4 overall capability ratings.
 // Preserves model/harness combinations, six dimensions, policy refusals and incomplete rates.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://www.discovertraces.ai/liveleaderboard/the-traces-leaderboard";
 const board: Leaderboard = {

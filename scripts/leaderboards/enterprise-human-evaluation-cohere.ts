@@ -3,10 +3,8 @@
 // The Average bar supplies each model's win rate across all enterprise tasks. Ties and losses remain metrics.
 // Two separate visual passes agreed. A changed SHA-256 requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Win-Rate_Command-A-vs-GPT4o-Nov-.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Win-Rate_Command-A-vs-GPT4o-Nov-.png";
 const SHA256 = "b7b3c1d158a3c991fbe508bbea50c9318e1118abe070396aca1a350ecd44bc59";
 const ROWS: LeaderboardRow[] = [

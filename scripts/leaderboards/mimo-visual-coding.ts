@@ -1,9 +1,7 @@
 // MiMo Visual Coding: the official article table score in percent.
 // Models and scores are read from the live script as data, without executing it. Null results are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://mimo.xiaomi.com/mimo-v2-6/bench.js";
 const board: Leaderboard = {

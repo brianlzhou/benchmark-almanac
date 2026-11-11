@@ -1,7 +1,7 @@
 // VHELM (Stanford CRFM). The project publishes run suites, not releases. The newest suite's core_scenarios.json
 // Accuracy table gives "Mean win rate", relative to the models on the board, times 100. Read through helmRows
 // in helm-capabilities.ts.
-import { helmWithScenarioTokens } from '../lib/boards/helm-cov6.ts';
+import { helmWithScenarioTokens } from '../lib/boards/helm-scenario-tokens.ts';
 import type { Leaderboard } from './types.ts';
 import { HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 

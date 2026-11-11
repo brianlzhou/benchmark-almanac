@@ -2,8 +2,7 @@
 // Preserve reasoning budgets, release dates, confidence intervals and refusal rates. Deduplicate
 // repeated grouping traces; omit points the source flags as unreliable due to excessive refusals.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 import {sbCharts,SB_ALIASES} from './hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 const board: Leaderboard = {

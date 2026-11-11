@@ -1,7 +1,7 @@
 // CharXiv descriptive questions: the CSV repeats the Overall header, first for reasoning and then for descriptive questions. Rename those headers before parsing and use only the descriptive aggregate, in percent; keep its five question-category scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://charxiv.github.io/data/val_result.csv";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

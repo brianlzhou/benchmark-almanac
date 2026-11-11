@@ -1,7 +1,7 @@
 // LLM Colosseum ranks Street Fighter agents by Elo. Separate text and vision inputs, retain dated API identifiers, and leave latest aliases or undated model families unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

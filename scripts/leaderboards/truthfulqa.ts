@@ -1,7 +1,7 @@
 // TruthfulQA: human-rated truthfulness (% true) is the score, with informativeness and automatic metrics retained. Use only the current updated-reference baseline table; exclude v0.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

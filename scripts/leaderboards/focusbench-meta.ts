@@ -3,10 +3,8 @@
 // Image: https://research.meta.ai/articles/introducing-muse-wonder/images/focusbench-light-v1.webp
 // SHA-256: 1956ec30aad1df21ea9d709624133f0492a4786cb00cc0c5bccd324cb9a0f8c9
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://research.meta.ai/articles/introducing-muse-wonder/images/focusbench-light-v1.webp (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "focusbench-meta",

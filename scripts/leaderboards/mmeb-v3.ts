@@ -2,8 +2,8 @@
 // Matches the site: round dataset percentages, average equally, and count missing datasets as zero.
 // Reports overall V3-suite performance, the new-only V3 score, modality means, and missing-data counts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { text, tables, num, jsonAfter } from '../lib/html.ts';
+import { fetchText, fetchJson } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

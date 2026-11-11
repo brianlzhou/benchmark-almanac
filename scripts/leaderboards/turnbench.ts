@@ -1,8 +1,8 @@
 // TurnBench overall recall percentages from the server-rendered ranking.
 // False-positive rate and median latency remain separate; high-FPR systems are retained with qualification labels.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 
 const FEED = "https://turnbench.sesame.com/";
 const board: Leaderboard = {

@@ -1,9 +1,8 @@
 // BrowseComp-Plus: official whole-benchmark accuracy. The retriever is a harness configuration.
 // The page embeds the table as fallbackData. Recall, search calls and calibration error remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://texttron.github.io/BrowseComp-Plus/";
 const board: Leaderboard = {

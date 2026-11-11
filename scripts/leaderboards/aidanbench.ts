@@ -4,10 +4,8 @@
 // The repository JSON contains per-answer records, not the published headline totals. No new aggregation is computed.
 // Two separate visual passes checked every printed score. The image hash must match before rows are returned.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/aidanmclaughlin/AidanBench/main/assets/results.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://raw.githubusercontent.com/aidanmclaughlin/AidanBench/main/assets/results.png";
 const SHA256 = "1b0b4c2a133e1e04a204be009b7005b0b9e3ff0c0cc3320562e52f04651cfe54";
 const ROWS: LeaderboardRow[] = [

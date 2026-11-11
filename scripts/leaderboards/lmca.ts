@@ -1,7 +1,7 @@
 // LMCA conceptual argumentation score on the published 0–100 scale. Includes all effort settings and USD per response from the official cost chart.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { CRI_ALIASES } from './dtbench.ts';
 const FEED = "https://conceptualreasoning.ai/data/cri-scores.csv";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

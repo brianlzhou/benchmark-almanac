@@ -1,9 +1,8 @@
 // xAI's Grok 4.1 launch article publishes the Hallucination Rate chart as embedded JSON.
 // The score is the macro-average percentage of atomic claims with major or minor errors.
 // Lower is better. Both models use non-reasoning mode and web search. FActScore is a separate benchmark.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://x.ai/news/grok-4-1";
 const board: Leaderboard = {

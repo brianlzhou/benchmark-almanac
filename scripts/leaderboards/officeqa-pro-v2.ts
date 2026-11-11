@@ -5,10 +5,8 @@
 // Image: https://raw.githubusercontent.com/databricks/officeqa/HEAD/figures/officeqa_pro_v2_agent_harness_performance.png
 // SHA-256: d97762a15ad277575c2f567c4e3a318b6bb1d4e4d4d0008cd4f5c7953bae3253
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/databricks/officeqa/HEAD/figures/officeqa_pro_v2_agent_harness_performance.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "officeqa-pro-v2",

@@ -1,9 +1,8 @@
 // Butter-Bench paper: published Avg completion percentage across all tasks.
 // These static paper rows will not refresh. End-to-end completion and intermediate tasks remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2510.21860";
 const board: Leaderboard = {

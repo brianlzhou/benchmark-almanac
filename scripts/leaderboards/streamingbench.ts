@@ -3,10 +3,8 @@
 //  Two independent visual passes agreed on every model row. Human and random references are excluded.
 //  fetch() checks the SHA-256 before returning the transcribed rows. A changed image requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/THUNLP-MT/StreamingBench/main/figs/result_1.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://raw.githubusercontent.com/THUNLP-MT/StreamingBench/main/figs/result_1.png";
 const SHA256 = "085f260b5ec0051b63c291b70e5c4147c2fd23918aa0acebd666edbc37f8437f";
 const ROWS: LeaderboardRow[] = [

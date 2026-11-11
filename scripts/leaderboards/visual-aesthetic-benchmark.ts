@@ -1,8 +1,8 @@
 // Visual Aesthetic Benchmark: use the headline Top-1 accuracy percentage.
 // TB-1 and category averages are secondary metrics on the overall row.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://vab.bakelab.ai";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

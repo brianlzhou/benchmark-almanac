@@ -1,7 +1,7 @@
 // FrontierScience Olympiad: official accuracy percentages, retaining reasoning-effort configurations.
 // Research results are a different task set and never enter this importer. Confidence bounds are percentages.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/frontierscience/';
 const board: Leaderboard = {
   benchmark: 'frontierscience-olympiad', url: PAGE, feed: `${PAGE} (Olympiad model and reasoning-effort charts)`, terms: OPENAI_TERMS,

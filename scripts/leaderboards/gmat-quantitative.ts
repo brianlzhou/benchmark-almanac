@@ -2,9 +2,8 @@
 // These static paper rows will not refresh. The report calls its July instruction-tuned systems Llama 3.
 // The table uses Llama 3 for the report’s July 2024 Llama 3.1 release. Unspecified GPT and Claude snapshots remain unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2407.21783v3";
 const board: Leaderboard = {

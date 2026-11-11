@@ -1,8 +1,7 @@
 // BEHAVIOR-1K: the current 2026 challenge’s Q-score, its ranked whole-challenge progress metric.
 // Q-score fractions become percentages. Success rate remains a metric. Method names stay unlisted when no base model is identified.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard/raw/main/data/results.jsonl";
 const board: Leaderboard = {

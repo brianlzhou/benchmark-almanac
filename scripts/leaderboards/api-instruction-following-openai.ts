@@ -1,7 +1,7 @@
 // Official release article's Internal API instruction following (hard) table.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { tables, num } from '../lib/html.ts';
-import { openaiHtml, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiHtml, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const URL = 'https://openai.com/index/gpt-4-1/';
 const board: Leaderboard = {
   benchmark: 'api-instruction-following-openai', url: URL, feed: URL, terms: OPENAI_TERMS,

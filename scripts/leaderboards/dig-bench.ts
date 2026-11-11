@@ -1,2 +1,2 @@
-import { digBoard } from '../lib/boards/dig-cov7.ts';
+import { digBoard } from '../lib/boards/dig.ts';
 export default digBoard();

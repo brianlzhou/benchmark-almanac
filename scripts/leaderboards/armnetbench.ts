@@ -2,8 +2,8 @@
 // The published HTML bar chart gives strict success across all 12 tasks. Task scores are metrics.
 // Generic policy labels retain their source identity without guessing architecture checkpoints.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://armnet-dev.github.io/armnetbench-v0.1/";
 const board: Leaderboard = {

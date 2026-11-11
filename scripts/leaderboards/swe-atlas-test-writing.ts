@@ -3,7 +3,7 @@
 // runs with an elevated refusal rate, which Scale scored as failures. The board's ± interval is kept as
 // metrics.ciLow and ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
+import { SCALE_ALIASES, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('sweatlas-tw');
 

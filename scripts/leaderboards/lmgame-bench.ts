@@ -4,8 +4,7 @@
 // the sample standard deviation; absent game scores contribute zero. Reproduce that published
 // definition, including baseline rows in normalization, while keeping raw game scores as metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/lmgame/lmgame_bench/raw/main/rank_data_03_25_2025.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

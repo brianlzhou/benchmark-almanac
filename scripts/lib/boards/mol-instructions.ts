@@ -1,7 +1,7 @@
 // Mol-Instructions publishes complete task sets for molecular generation and biomedical NLP. Each child uses Exact, accuracy, or F1 as explicitly labeled by the source.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
-import { tables, num, text } from '../html.ts';
+import { num, text } from '../html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

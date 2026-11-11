@@ -1,9 +1,9 @@
 // X, read through Grok. X's terms forbid scraping, so this reader never fetches x.com. Grok Build, xAI's
-// command-line agent, searches X with its own tools under the user's Grok sign-in, and this reader asks it for the
-// benchmark launches of the scan window. Added 2026-11-06 at the user's request, after ShadowBench, DeepFinance and
-// FrontierPhysics launched on X and the scan missed them.
+// command-line agent, searches X with its own tools under the maintainer's Grok sign-in, and this reader asks it for
+// the benchmark launches of the scan window. Added 2026-11-06, after ShadowBench, DeepFinance and FrontierPhysics
+// launched on X and the scan missed them.
 //
-// It runs only where Grok Build is installed and signed in (the user's Mac), not in GitHub Actions, and costs about
+// It runs only where Grok Build is installed and signed in (a maintainer's computer), not in GitHub Actions, and costs about
 // $1.40 of Grok usage and 6 minutes a run. Grok answers in JSON against a schema. Every link it gives is fetched
 // before it counts, so a link Grok guessed is dropped, and the finds go to the review queue like any other feed.
 import { execFile } from 'node:child_process';

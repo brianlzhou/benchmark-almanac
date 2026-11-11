@@ -1,8 +1,8 @@
 // MindCube: official Overall accuracy percentage with Rotation, Among and Around as metrics.
 // Exclude the two chance/frequency references. Keep specialized spatial systems under their own names.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://mind-cube.github.io/";
 const board: Leaderboard = {

@@ -2,8 +2,8 @@
 // Single-app, multi-app and memory task scores remain metrics. The full-pass Droidrun
 // protocol is a separate whole-benchmark configuration; solved counts remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://iosworld.io/leaderboard/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

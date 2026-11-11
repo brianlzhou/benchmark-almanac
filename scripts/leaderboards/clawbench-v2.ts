@@ -1,7 +1,7 @@
 // ClawBench V2 reward percentages. Retain the dataset rows and supplement the official website’s 130-task OpenClaw cohort absent from that feed.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 import {clawRows} from './clawbench.ts';
 const FEED = "https://claw-bench.com/leaderboard";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -2,9 +2,7 @@
 // The importer discovers the bundle each time, then reads avg@4 percentages and reasoning efforts as data.
 // Bar widths are presentation values and are not used as scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://www.stepfun.com/step-5-preview";
 const board: Leaderboard = {

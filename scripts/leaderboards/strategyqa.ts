@@ -2,9 +2,7 @@
 // converted to percent on their unofficial development split, not the hidden test set.
 // Unavailable archived configurations are omitted; BoolQ pretraining and decomposition scores are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/eladsegal/strategyqa/HEAD/README.md";
 const board: Leaderboard = {

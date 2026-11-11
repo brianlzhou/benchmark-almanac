@@ -1,7 +1,7 @@
 // SORRY-Bench unsafe compliance rates: mean over the 44 published categories, matching the heatmap average. Convert fractions to percentages; lower is better.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://sorry-bench.github.io/sorry_bench_files/heatmap.js";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

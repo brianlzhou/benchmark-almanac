@@ -1,9 +1,9 @@
 // 1X's default README leaderboard reports temporally teacher-forced cross-entropy loss on val_v1.1.
 // The catalog must change unit from percent to loss and direction to lower before these rows are used.
 // Token accuracy, LPIPS and seconds per frame remain secondary metrics. Compression is the default view.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/1x-technologies/1xgpt/main/README.md";
 const board: Leaderboard = {

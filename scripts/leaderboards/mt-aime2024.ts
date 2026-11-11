@@ -1,8 +1,8 @@
 // MT-AIME2024: the MCLM dataset card reports accuracy over its 55-language translation of AIME 2024.
 // Read only the MT-AIME2024 column, not the four-benchmark average.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://huggingface.co/datasets/amphora/MCLM/resolve/main/README.md";
 const board: Leaderboard = {

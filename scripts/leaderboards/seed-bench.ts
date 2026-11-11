@@ -1,8 +1,8 @@
 // SEED-Bench: Avg. All is whole-benchmark accuracy in percent. Exclude image-only
 // submissions whose overall aggregate is unavailable. Keep image/video and task metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdCell } from './big-bench-extra-hard.ts';
 const FEED = "https://huggingface.co/spaces/AILab-CVC/SEED-Bench_Leaderboard/resolve/main/file/result.csv";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -3,10 +3,8 @@
 // The score is the Doubao Multi-Turn Bench row, not the other benchmarks in the image.
 // Two separate visual passes checked every printed score. The image hash must match before rows are returned.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4ujsp.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4ujsp.png";
 const SHA256 = "2e310e463e6a3b6ca9b5f79fbc0c5cdfd7bcfe34fec4500dc1a2c7146f6a0e8b";
 const ROWS: LeaderboardRow[] = [

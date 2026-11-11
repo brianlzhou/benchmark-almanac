@@ -1,8 +1,7 @@
 // ExtractBench published ranked systems and overall value F1 percentage. Cost_Per_Page is USD in the CSV (the README multiplies by 100 for cents); it remains a per-page metric, not per-document task cost.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard.csv";
 const board: Leaderboard = {

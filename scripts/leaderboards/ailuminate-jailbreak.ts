@@ -1,8 +1,7 @@
 // MLCommons AILuminate Jailbreak official hazard percentage. Anonymous system identities remain unlisted; risk interval bounds come from the published HTML data attributes.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://ailuminate.mlcommons.org/benchmarks/security/0.5-en_us-official-ensemble";
 const board: Leaderboard = {

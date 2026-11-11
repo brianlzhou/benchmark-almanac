@@ -1,7 +1,7 @@
 // AutoBaxBench ranks correct-and-secure pass@1. Convert its 0-1 fraction to percent and retain correctness and insecure-among-correct metrics. Use the board’s default Easy view, as selected by static/js/index.js.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://baxbench.com/static/data/leaderboard_data_abb_easy.json";
 const board: Leaderboard = {
   benchmark: "autobaxbench", url: "https://baxbench.com/", feed: FEED,

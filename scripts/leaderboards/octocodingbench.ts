@@ -1,7 +1,7 @@
 // OctoCodingbench: the MiniMax-M2.1 README publishes a benchmark-by-model comparison table. Transpose only the OctoCodingbench row, retaining reported percentages and the GPT thinking setting; unavailable entries are not zero scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.1/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

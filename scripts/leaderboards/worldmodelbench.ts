@@ -1,8 +1,8 @@
 // WorldModelBench: total.overall, the column the official index.js sorts descending on initial load.
 // Instruction following, common sense and physics adherence are secondary metrics.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://worldmodelbench-team.github.io/leaderboard_data.json";
 const board: Leaderboard = {

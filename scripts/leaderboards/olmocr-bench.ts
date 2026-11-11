@@ -1,7 +1,7 @@
 // olmOCR-Bench overall percentage and OCR category breakdowns, including confidence interval width as a metric when provided. Blank separator excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/allenai/olmocr/HEAD/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

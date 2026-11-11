@@ -1,9 +1,8 @@
 // Encyclo-K: published Avg. over the complete benchmark. Domain scores remain metrics.
 // Reasoning and non-reasoning modes are configurations of the whole benchmark. The current page names the bundle.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://encyclo-k.github.io/";
 const board: Leaderboard = {

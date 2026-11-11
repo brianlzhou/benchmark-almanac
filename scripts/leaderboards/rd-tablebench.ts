@@ -3,10 +3,8 @@
 // The figure prints the complete table-extraction score for eight systems. Vendor systems retain names without guessed backbones.
 // Two separate visual passes agreed. A changed SHA-256 requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://reducto.ai/api/media/file/rd-tablebench.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://reducto.ai/api/media/file/rd-tablebench.png";
 const SHA256 = "779c672001aca028136a664c9a8429ff4ff3385a1adede1e15df257fbea179c1";
 const ROWS: LeaderboardRow[] = [

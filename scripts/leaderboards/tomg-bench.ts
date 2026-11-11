@@ -1,8 +1,8 @@
 // TOMG/S²-Bench: the official leaderboard ranks by mean weighted success rate, in percent.
 // Unweighted success rate remains a metric. Fine-tuned OpenMolIns variants remain distinct model identities.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/phenixace/S2-TOMG-Bench/HEAD/README.md";

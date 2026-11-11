@@ -1,8 +1,8 @@
 // UNO-Bench: the official leaderboard ranks omni models by its published Omni-Avg.
 // Audio, visual, Omni-MC and Omni-MO scores remain metrics. Read the current application asset as data.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://meituan-longcat.github.io/UNO-Bench/";
 const board: Leaderboard = {

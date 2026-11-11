@@ -3,10 +3,8 @@
 // The score is ensemble AUROC across evaluations and deployment transcripts, on a zero-to-one scale. Model-family labels without sizes remain unlisted.
 // Two separate visual passes agreed. A changed SHA-256 requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2609.01611v1/x6.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://arxiv.org/html/2609.01611v1/x6.png";
 const SHA256 = "8a3398b89270df73d9a403ca08854c85a9d56f2d98ba076a29cfd1236608fa41";
 const ROWS: LeaderboardRow[] = [

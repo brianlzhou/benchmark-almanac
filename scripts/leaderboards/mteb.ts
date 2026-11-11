@@ -1,9 +1,8 @@
 // MTEB: the original English v1 suite, matching the catalog’s original benchmark.
 // The API publishes meanTask as its headline mean. Fractions become percentages.
 // Task-type aggregates remain metrics, and other MTEB suites are excluded.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MTEB%28eng%2C%20v1%29/scores";
 const board: Leaderboard = {

@@ -1,8 +1,6 @@
 // OccuBench clean-environment average success percentage and separate robustness environments. The dimensionless robustness ratio remains a metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 import {jsLiteral} from '../lib/html.ts';
 const FEED = "https://gregxmhu.github.io/OccuBench-website/";
 const board: Leaderboard = {

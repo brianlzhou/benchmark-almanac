@@ -7,10 +7,8 @@
 // Image: https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Aya-Vision-8B-Combined-Win-Rates-2.png
 // SHA-256: 6a699672406b32580bba9fea2baa2a173693eea2bf2198908fa1737be30eab3c
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Aya-Vision-8B-Combined-Win-Rates-2.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "ayavisionbench",

@@ -1,8 +1,7 @@
 // The default Overall view ranks by Avg. Rank, lower is better. The page states: "Avg. Rank averages per-metric ranks across all 15 models, excluding Operational metrics (ES and TC); ties receive average ranks." This reader follows app.js. TC is API output tokens per attempted task, including reasoning.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://code2video-compass.github.io/benchmark-data.js?v=55";
 const board: Leaderboard = {

@@ -1,8 +1,8 @@
 // ChatRAG Bench: Main Results / Average (all) is the published whole-suite score.
 // Dataset scores, the alternate average, and answerability scores remain supporting metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://huggingface.co/datasets/nvidia/ChatRAG-Bench/raw/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

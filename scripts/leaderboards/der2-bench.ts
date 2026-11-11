@@ -1,8 +1,8 @@
 // DeR²-Bench: accuracy percentage under four retrieval conditions. Preserve each condition as a
 // setting, reasoning effort separately within that label, and retrieval loss as a metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://retrieval-infused-reasoning-sandbox.github.io/";
 const board: Leaderboard = {

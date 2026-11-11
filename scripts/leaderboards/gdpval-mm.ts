@@ -4,10 +4,8 @@
 // Image: https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/figures/bench_7.png
 // SHA-256: 8ff3840ebd22c220307a958a356b89c02c89bed3afb4ddadb37526c6e1be8998
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/MiniMax-AI/MiniMax-M2.5/main/figures/bench_7.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "gdpval-mm",

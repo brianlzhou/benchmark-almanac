@@ -3,7 +3,7 @@
 //  The paper splits twelve task columns across two tables. They remain metrics on the overall row.
 //  Nested header tables are flattened before using the shared HTML reader. Undated API models stay unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2406.09411";
 

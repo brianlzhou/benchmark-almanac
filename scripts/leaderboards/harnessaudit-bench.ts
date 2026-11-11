@@ -1,8 +1,8 @@
 // HarnessAudit scores the model-harness pair on Overall safety, on the source 0-1 score scale.
 // Boundary, execution, stability and perturbation metrics remain on their original scale.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://harnessaudit.github.io/";
 const board: Leaderboard = {

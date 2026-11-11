@@ -1,8 +1,8 @@
 // FeatureBench Lite percentage of passed tests, the official ranking column.
 // Retains fully resolved task percentages and scaffold identity separately.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/LiberCoders/FeatureBench/main/README.md";
 const board: Leaderboard = {

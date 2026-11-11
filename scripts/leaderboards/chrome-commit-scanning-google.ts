@@ -1,8 +1,7 @@
 // Chrome Production Commit Scanning: the maker’s pass@1 success-rate chart.
 // The chart configuration is embedded as URL-encoded JSON in the article. No image transcription is used.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://deepmind.google/blog/introducing-gemini-3-5-flash-cyber/";
 const board: Leaderboard = {

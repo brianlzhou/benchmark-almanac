@@ -1,4 +1,4 @@
-// Hash-guarded chart labels for H2. A changed image requires two new transcription passes.
+// Scores transcribed from chart images, guarded by the image hash. A changed image requires two new transcription passes.
 import { createHash } from 'node:crypto';
 import type { LeaderboardRow } from '../../leaderboards/types.ts';
 export async function chartRows(url:string, expected:string, rows:LeaderboardRow[]):Promise<LeaderboardRow[]> {

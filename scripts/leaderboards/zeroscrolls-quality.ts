@@ -1,9 +1,9 @@
 // ZeroSCROLLS QuALITY: QALT accuracy in the paper’s main comparison.
 // This catalog record names QuALITY only, so other suite tasks are excluded. Token limits apply to the whole evaluation.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2305.14196";
 const board: Leaderboard = {

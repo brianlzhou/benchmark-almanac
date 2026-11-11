@@ -2,10 +2,9 @@
 //  Strict accuracy and checklist scores remain metrics. Tool use and reasoning effort are whole-benchmark settings.
 //  Named agent frameworks become harnesses. These are static paper results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2508.13186";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "mm-browsecomp",
   url: "https://github.com/MMBrowseComp/MM-BrowseComp",

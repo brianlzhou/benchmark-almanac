@@ -1,9 +1,9 @@
 // CoWorkBench: Qwen’s maker-published comparison table.
 // The article API returns the same HTML shown on the public blog. Scores use the published whole-benchmark row.
 // Undated DeepSeek labels remain unlisted. Reasoning modes distinguish whole-benchmark runs.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://qwen.ai/api/v2/article/?language=en-US&path=qwen3.8&type=qwen_ai";
 const board: Leaderboard = {

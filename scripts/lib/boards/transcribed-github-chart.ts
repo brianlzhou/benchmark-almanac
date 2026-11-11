@@ -1,4 +1,4 @@
-// Part T's transcribed GitHub charts. A changed chart requires a fresh two-pass transcription.
+// Scores transcribed from chart images on GitHub. A changed chart requires a fresh two-pass transcription.
 import { createHash } from 'node:crypto';
 
 let pending: Promise<unknown> = Promise.resolve();

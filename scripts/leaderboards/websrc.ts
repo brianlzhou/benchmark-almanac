@@ -1,7 +1,7 @@
 // WebSRC exact-match percentages with F1 and POS metrics. Model names exclude affiliation and citation markup; seed averaging remains explicit.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://x-lance.github.io/WebSRC/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

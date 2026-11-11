@@ -1,7 +1,7 @@
 // MiniMax Role-play Benchmark overall score with worlds, stories and preferences components.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://huggingface.co/datasets/MiniMaxAI/role-play-bench/resolve/main/README.md";

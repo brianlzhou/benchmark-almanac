@@ -19,9 +19,26 @@ export async function openaiHtml(url: string): Promise<string> {
     if (!/403/.test(String(error))) throw error;
     await new Promise(resolve => setTimeout(resolve, 1100));
     if (new URL(url).hostname !== 'openai.com') throw error;
-    const result = await execFileAsync('curl', ['--http1.1', '--fail', '--silent', '--show-error', '--location', '--max-time', '60', '--user-agent', 'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)', url], { timeout: 65000, maxBuffer: 16000000 });
-    html = result.stdout;
+    try {
+      const result = await execFileAsync('curl', ['--http1.1', '--fail', '--silent', '--show-error', '--location', '--max-time', '60', '--user-agent', 'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)', url], { timeout: 65000, maxBuffer: 16000000 });
+      html = result.stdout;
+    } catch {
+      html = await archivedHtml(url);
+    }
   }
+  return html;
+}
+
+// openai.com answers scripts with a Cloudflare challenge. The almanac reads these pages anyway (decided 2026-11-10),
+// so the last fallback is the Internet Archive's newest copy that loaded (status 200). OpenAI's
+// articles don't change after they're published, so the copy carries the same chart data.
+async function archivedHtml(url: string): Promise<string> {
+  const bare = url.replace(/^https?:\/\//, '');
+  const index = JSON.parse(await fetchText(`https://web.archive.org/cdx/search/cdx?url=${encodeURIComponent(bare)}&filter=statuscode:200&output=json&fl=timestamp&limit=-1`)) as string[][];
+  const ts = index.length > 1 ? index.at(-1)![0] : undefined;
+  if (!ts) throw new Error(`No archived copy of ${url}`);
+  const html = await fetchText(`https://web.archive.org/web/${ts}id_/${url}`);
+  if (/Just a moment/.test(html.slice(0, 4000))) throw new Error(`The archived copy of ${url} is a challenge page`);
   return html;
 }
 export async function openaiSpecs(url: string): Promise<VegaSpec[]> {

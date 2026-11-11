@@ -1,8 +1,8 @@
 // TAT-DQA: published test F1 percentage, with exact match retained separately. These are specialized
 // document-QA systems; preserve their names and sizes rather than crediting generic backbones.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://nextplusplus.github.io/TAT-DQA/";
 const board: Leaderboard = {

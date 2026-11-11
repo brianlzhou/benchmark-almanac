@@ -2,8 +2,7 @@
 // Verification and tool use describe full runs. Token metadata describes training, not inference usage.
 // Page through all records and retain unlisted models and agent names.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://datasets-server.huggingface.co/rows?dataset=jablonkagroup%2FChemBench-Results&config=default&split=2.0.2&offset=0&length=100";
 const board: Leaderboard = {

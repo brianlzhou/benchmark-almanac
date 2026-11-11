@@ -1,9 +1,8 @@
 // Gray Swan Agent Red-Teaming snapshot: ASR is attack success rate in percent, where lower is safer.
 // The model table is distinct from human competitor rankings. Attack/chat counts and anonymized configuration labels are retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://www.grayswan.ai/blog/uk-aisi-x-gray-swan-agent-red-teaming-challenge-results-snapshot";
 const board: Leaderboard = {

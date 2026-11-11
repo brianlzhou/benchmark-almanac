@@ -2,9 +2,8 @@
 // The current paper is UniGenBench++, the paper linked by this catalog record.
 // Only primary dimension averages remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchJson } from '../lib/util.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://huggingface.co/spaces/CodeGoat24/UniGenBench_Leaderboard/resolve/main/leaderboard_data.json";
 const board: Leaderboard = {

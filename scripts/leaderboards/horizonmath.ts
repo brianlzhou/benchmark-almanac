@@ -2,8 +2,8 @@
 // Keep calibration success and accepted unsolved-tier solutions as metrics. Split explicit reasoning
 // effort and Codex harness labels from the published model/configuration names.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://ewang26.github.io/HorizonMath/";
 const board: Leaderboard = {

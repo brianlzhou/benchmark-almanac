@@ -2,9 +2,8 @@
 // DeepSeek prepared this evaluation. These static paper rows will not refresh.
 // Compact source dates identify the exact model snapshots. The reader verifies the header order before assigning scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2412.19437";
 const board: Leaderboard = {

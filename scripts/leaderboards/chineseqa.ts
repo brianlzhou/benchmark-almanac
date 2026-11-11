@@ -2,8 +2,8 @@
 // Read the ChineseQA column from the base and chat tables, retaining 5-shot evaluation and distinct
 // base/chat identities. Deduplicate the repeated DeepSeek base rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-LLM/main/README.md";
 const board: Leaderboard = {

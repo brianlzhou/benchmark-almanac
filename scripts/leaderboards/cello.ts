@@ -2,8 +2,8 @@
 // values. Merge task and constraint metrics by model within each named track; keep Ch_cc, Ch_fs and
 // Eg separate. Fetch all six files from the current repository branch with host pacing.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/Abbey4799/CELLO/main/scores/";
 const board: Leaderboard = {

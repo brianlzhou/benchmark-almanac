@@ -1,7 +1,7 @@
 // WildGraphBench compares GraphRAG methods by average question-answering accuracy in percent. Preserve complete method identities and retrieval recall, precision, F1 and question-type accuracy.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

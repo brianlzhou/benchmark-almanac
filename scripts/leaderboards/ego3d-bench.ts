@@ -2,10 +2,8 @@
 // Accuracy is a secondary metric. Ego3D-VLM is the adaptation harness, not another benchmark split.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2509.06266";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperRows, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "ego3d-bench",
   url: "https://raw.githubusercontent.com/vbdi/Ego3D-Bench/main/README.md",

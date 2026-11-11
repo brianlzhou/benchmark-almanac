@@ -1,9 +1,9 @@
 // FEVER: the main end-to-end paper comparison’s ScoreEv accuracy requires correct evidence and label.
 // NoScoreEv is label accuracy only and remains a metric. The live shared-task host blocks robots retrieval.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1803.05355";
 const board: Leaderboard = {

@@ -1,8 +1,6 @@
 // The voice-v2 manifest identifies the current complete six-language, three-domain benchmark submissions. The published summary score is multiplied by 100. Domain and language scores remain metrics. The separate domain-extension manifest is excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json";
 const board: Leaderboard = {

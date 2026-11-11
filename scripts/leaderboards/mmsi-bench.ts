@@ -1,7 +1,7 @@
 // MMSI-Bench: overall spatial-intelligence accuracy in percent from the official README. Exclude human and random references, retain the blind model baseline, and distinguish thinking configurations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/OpenRobotLab/MMSI-Bench/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -1,8 +1,6 @@
 // COCO defaults to BBOX Dev (bbox_dev2015), ranked by AP averaged over IoU thresholds 0.50 through 0.95. Fractions become percentages. Segmentation and other years are separate views. Repeated submission names keep their latest submission.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://cocodataset.org/leaderboard/bbox_dev2015.json";
 const board: Leaderboard = {

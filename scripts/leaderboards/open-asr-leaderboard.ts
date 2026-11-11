@@ -1,9 +1,8 @@
 // Open ASR paper: English short-form Avg. WER, lower is better.
 // These static paper rows will not refresh. Multilingual and long-form tables are excluded. RTFx is a secondary metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2510.06961";
 const board: Leaderboard = {

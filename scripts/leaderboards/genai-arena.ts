@@ -1,8 +1,8 @@
 // GenAI-Arena anonymous-vote Elo by image generation, editing and video tracks.
 // The full-vote Elo is retained as a separate metric. Scores from different tracks remain separate.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena/resolve/main/arena_elo/results/latest/";
 const board: Leaderboard = {

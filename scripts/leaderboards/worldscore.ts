@@ -2,9 +2,9 @@
 // The source script sets currentSortCol to WorldScore-Static. Dynamic scores remain secondary metrics.
 // Source: https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard/raw/main/script.js
 // Only models with the default headline score produce rows. Models with only Dynamic scores do not.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard/raw/main/leaderboard.csv";
 const board: Leaderboard = {

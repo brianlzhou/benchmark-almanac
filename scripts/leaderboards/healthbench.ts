@@ -1,7 +1,7 @@
 // HealthBench overall scores from the author's launch page. In the theme chart, theme:null
 // denotes the published overall value. Do not average the overlapping theme categories.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/healthbench/';
 const board: Leaderboard = {
   benchmark: 'healthbench', url: PAGE, feed: `${PAGE} (HealthBench scores by theme, overall values)`, terms: OPENAI_TERMS,

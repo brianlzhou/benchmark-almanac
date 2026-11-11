@@ -1,7 +1,7 @@
 // Claw-SWE-Bench Full-350 reports pass@1 in percent. Divide full-run USD and output-token totals by the instance count; separate single runs from three-run means and do not join historical per-language scores to those means.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://claw-swe-bench.github.io/";
 const board: Leaderboard = {
   benchmark: "claw-swe-bench", url: "https://claw-swe-bench.github.io/", feed: FEED,

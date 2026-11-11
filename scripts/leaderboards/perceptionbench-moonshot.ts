@@ -1,8 +1,8 @@
 // PerceptionBench (Moonshot): Overall is the published aggregate accuracy percentage.
 // The official README provides ten capability accuracies alongside the headline score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/MoonshotAI/PerceptionBench/HEAD/README.md";

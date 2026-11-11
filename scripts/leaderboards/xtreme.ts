@@ -1,8 +1,7 @@
 // XTREME: avgAllScoreString is the board’s published whole-suite score.
 // Four task-family averages remain metrics. The importer reads scalar literals without executing the application.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://sites.research.google/xtreme/app.js";
 const board: Leaderboard = {

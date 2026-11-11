@@ -1,9 +1,9 @@
 // Full-Duplex-Bench v3 reports tool-use Pass@1 fractions, converted to percent.
 // Other tool metrics, turn-taking, interruptions, filler rates and latency remain attached.
 // Voice-system labels do not identify exact API snapshots.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://daniellin94144.github.io/FDB-v3-demo/";
 const board: Leaderboard = {

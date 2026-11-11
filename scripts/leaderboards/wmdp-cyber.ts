@@ -3,10 +3,9 @@
 //  These are the paper's static results and will not refresh with new model releases.
 //  The parent WMDP record combines three domains and has no published overall in this table.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2403.03218";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "wmdp-cyber",
   url: "https://www.wmdp.ai",

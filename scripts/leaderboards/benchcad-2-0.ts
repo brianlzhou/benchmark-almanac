@@ -1,2 +1,2 @@
-import { benchcadCore } from '../lib/boards/benchcad-cov1.ts';
+import { benchcadCore } from '../lib/boards/benchcad.ts';
 export default benchcadCore('2.0');

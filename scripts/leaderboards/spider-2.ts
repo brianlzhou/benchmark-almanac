@@ -2,9 +2,8 @@
 // Its Score is task success percentage. DBT and Lite use different task sets and are excluded.
 // Agent-plus-model submissions retain the named agent as their harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://spider2-sql.github.io/";
 const board: Leaderboard = {

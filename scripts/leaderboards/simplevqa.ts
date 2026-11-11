@@ -2,9 +2,9 @@
 // The other overall metrics, including F-score, are secondary metrics. Table 6 adds text-only runs.
 // Rows are the static paper results and will not refresh with later model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
-import { grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2502.13059";
 const board: Leaderboard = {

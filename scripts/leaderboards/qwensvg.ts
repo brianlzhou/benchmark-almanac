@@ -2,9 +2,8 @@
 // QwenSVG and QwenSVGBench remain separate because the source does not establish an identical evaluation version.
 // The Qwen3.7-Max and Qwen3.7-Plus articles reproduce identical shared baseline scores. Both model releases are retained. Conflicting shared scores fail the reader.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://qwen.ai/api/v2/article/?language=en-US&path=qwen3.7-plus&type=qwen_ai";
 const board: Leaderboard = {

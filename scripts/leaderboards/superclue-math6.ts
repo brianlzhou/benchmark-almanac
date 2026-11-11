@@ -1,8 +1,8 @@
 // SuperCLUE-Math6 combined reasoning score, on the published 0–100 scale.
 // Reasoning level and the weighted reasoning/accuracy components remain separate.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://www.CLUEbenchmarks.com/superclue_math6.html";
 const board: Leaderboard = {

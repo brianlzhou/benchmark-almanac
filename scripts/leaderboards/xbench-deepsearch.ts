@@ -1,9 +1,7 @@
 // The current default DeepSearch 2510 API publishes exact accuracy scores. Historical 2505 score bands are excluded. Product names without model snapshots remain unlisted. Cost strings mix subscriptions and usage, so no per-task cost is inferred.
 // The generic Gemini Pro product label does not identify a Gemini generation.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://admin.xbench-ai.com/api/deepsearch2510?populate[Leaderboard][populate]=company";
 const board: Leaderboard = {

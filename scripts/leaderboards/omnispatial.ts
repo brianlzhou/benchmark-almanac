@@ -1,8 +1,8 @@
 // OmniSpatial: Overall accuracy is the percentage in the official README leaderboard.
 // Four spatial capability scores are retained. The human upper-bound row is not a model.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/qizekun/OmniSpatial/HEAD/README.md";

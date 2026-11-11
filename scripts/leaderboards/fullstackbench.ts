@@ -2,7 +2,7 @@
 // Domain columns are supplementary metrics. These are static paper results, not a refreshing leaderboard.
 // The GitHub README image path is robots-disallowed; arXiv publishes the numbers as an allowed HTML table.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2412.00535';
 const board: Leaderboard = {
@@ -13,7 +13,6 @@ const board: Leaderboard = {
     'DeepSeekCoder-v2-Instruct': 'deepseek-coder-v2-236b',
     'DeepSeekCoder-v2-Lite-Instruct': 'deepseek-coder-v2-lite-instruct',
     'CodeQwen1.5-7B-Chat': 'codeqwen1-5-7b',
-    'OpenAI o1-preview': 'o1-preview', 'OpenAI o1-mini': 'o1-mini',
     'OpenAI o1-preview': 'o1-preview', 'OpenAI o1-mini': 'o1-mini',
   },
   async fetch() {

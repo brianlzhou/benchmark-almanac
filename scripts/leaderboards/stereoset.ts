@@ -2,7 +2,7 @@
 // remain metrics alongside the overall language-model and stereotype scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/moinnadeem/StereoSet/master/code/predictions.txt";
 const board: Leaderboard = {
   benchmark: "stereoset", url: "https://github.com/moinnadeem/StereoSet", feed: FEED,

@@ -1,7 +1,7 @@
 // VBVR-Pro current release overall score, with in-domain and out-of-domain metrics. Keep the Pro version and modality explicit.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://video-reason.com/?v=pro";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -1,9 +1,7 @@
 // SALAD-Bench base-set safety rate. The published total column is the whole base-set score.
 // Attack-enhanced, defense-enhanced and multiple-choice views are separate evaluations and are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://adwardlee.github.io/salad_bench/base_order.csv";
 const board: Leaderboard = {

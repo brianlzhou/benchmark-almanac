@@ -1,9 +1,8 @@
 // AutoResearchBench: default Deep Research accuracy, multiplied by 100.
 // The page explicitly sorts Deep Research Accuracy. Wide Research stays a metric. Token counts include input and output.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://cheryou.github.io/autoresearchbench.github.io/";
 const board: Leaderboard = {

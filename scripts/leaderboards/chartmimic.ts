@@ -1,8 +1,7 @@
 // ChartMimic: the maker’s Overall column combines the reported high-level and low-level evaluation.
 // The public chart already publishes Overall, so no new aggregate is computed.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://chartmimic.github.io/static/data/benchmark.json";
 const board: Leaderboard = {

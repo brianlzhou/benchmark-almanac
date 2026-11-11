@@ -1,8 +1,7 @@
 // CRAB leaderboard completion-ratio percentage. Success rate is retained separately, with visual prompting and output structure kept as settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://crab.camel-ai.org/";
 const board: Leaderboard = {

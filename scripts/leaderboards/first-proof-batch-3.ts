@@ -3,8 +3,8 @@
 // The report is static and will not refresh with new model releases. No new aggregate is computed.
 // Catalog proposal: name average correctness as the headline score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 const FEED = "https://hexagonmath.org/api/v1/works/2610.00244v1/source?path=Batch3.tex";
 
 const board: Leaderboard = {

@@ -1,9 +1,8 @@
 // WildVision Arena paper: overall human-battle Elo.
 // These static paper rows will not refresh. Model-judged WildVision-Bench scores are a different evaluation. Historical ambiguous names remain unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2406.11069";
 const board: Leaderboard = {

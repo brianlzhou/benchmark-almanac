@@ -1,8 +1,8 @@
 // GroundUI: total UI grounding accuracy in percent. Read the first Web/Desktop/Mobile table,
 // under GroundUI, not the later CriticBench tables. Retain platform accuracies and submission dates.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://ltzheng.github.io/agent-studio";
 const board: Leaderboard = {

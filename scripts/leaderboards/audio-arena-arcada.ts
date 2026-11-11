@@ -6,8 +6,7 @@
 // GLM Realtime Air is excluded by the maker because its audio backend was unavailable.
 // Only configurations with all six scenarios are returned. Model identifiers remain as published.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://audioarena.ai/api/leaderboard/runs?recent_per_group=20";
 const board: Leaderboard = {

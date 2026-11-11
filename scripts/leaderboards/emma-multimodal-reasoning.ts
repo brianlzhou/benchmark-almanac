@@ -1,8 +1,8 @@
 // EMMA: overall accuracy on the full EMMA test, in percent. EMMA-mini remains a separate subset.
 // Chain-of-thought is a whole-benchmark prompt configuration. Undated model names remain unresolved.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://emma-benchmark.github.io/emma_leaderboard.json";
 const board: Leaderboard = {

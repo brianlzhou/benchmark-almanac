@@ -2,9 +2,8 @@
 // transfer success rate across all 117 perturbations (success in at least one of three runs).
 // Source-agent rates are secondary metrics. Optimization-domain studies are not this benchmark score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://osu-nlp-group.github.io/AutoElicit/";
 const board: Leaderboard = {

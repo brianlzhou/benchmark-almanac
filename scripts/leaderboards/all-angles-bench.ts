@@ -2,8 +2,8 @@
 // subset excluded from the full evaluation. Spatial-reasoning systems retain their own names.
 // Undated API snapshots are explicitly unlisted rather than assigned to the newest registry release.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://danielchyeh.github.io/All-Angles-Bench/";
 const board: Leaderboard = {

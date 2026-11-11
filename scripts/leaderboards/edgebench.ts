@@ -1,8 +1,8 @@
 // EdgeBench: use scores on all 134 tasks at each published time budget.
 // The released 51-task subset is excluded. Category scores at 12 hours remain metrics on that run.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import {mdTables} from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/ByteDance-Seed/EdgeBench/HEAD/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

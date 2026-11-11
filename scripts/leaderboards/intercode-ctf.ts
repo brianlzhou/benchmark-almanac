@@ -2,9 +2,8 @@
 // This implementation applies the report’s GDM/Inspect task exclusions, named in the setting.
 // DNF is not a score and is omitted; the reported standard error is retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://ukgovernmentbeis.github.io/inspect_evals/evals/gdm_intercode_ctf/index.html";
 const board: Leaderboard = {

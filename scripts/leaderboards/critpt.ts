@@ -1,8 +1,8 @@
 // CritPt v2: Challenge Accuracy is the published percentage of physics challenges solved.
 // The version label prevents these scores from being confused with the original benchmark.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/CritPt-Benchmark/CritPt/HEAD/README.md";

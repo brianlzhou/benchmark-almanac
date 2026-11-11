@@ -1,8 +1,8 @@
 // WorldArena: use the first/default EWMScore_P leaderboard for video quality.
 // Policy Evaluator and Data Engine are separate utility tasks, not alternative whole-benchmark settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText, fetchJson } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://worldarena-worldarena.hf.space/config";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

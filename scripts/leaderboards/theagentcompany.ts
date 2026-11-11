@@ -2,9 +2,7 @@
 // Partial checkpoint score and average steps are metrics. Costs are dollars per task. The current page supplies the bundle URL.
 // The November 2025 DeepSeek-V3.2 label predates its named stable release. It remains unlisted because the source does not identify Exp.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://the-agent-company.com/";
 const board: Leaderboard = {

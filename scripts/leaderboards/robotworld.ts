@@ -4,9 +4,8 @@
 // Costs and output tokens are per-task means over scored runs with recorded usage.
 // The source says: "per-task mean over scored runs with recorded usage, scaled to all tasks".
 // This importer keeps the mean without scaling it to the full suite. Missing runs count as failures, as on the board.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://robotworldai.github.io/data/data.json";
 const board: Leaderboard = {

@@ -4,7 +4,7 @@
 // The paper names Llama2's 70B-chat endpoint in Appendix A. Undated API snapshots remain unlisted.
 // These are static paper results and will not refresh with new models.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { paperTables, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2311.11944';
 const percent = (s: string) => {

@@ -1,9 +1,8 @@
 // RAGTruth paper: overall span-level hallucination-detection F1.
 // These static paper rows will not refresh. Response-level F1 and raw hallucination counts measure different outcomes.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2401.00396";
 const board: Leaderboard = {

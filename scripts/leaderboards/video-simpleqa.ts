@@ -1,9 +1,8 @@
 // Video SimpleQA: the leaderboard ranks by F-score, expressed as a percentage.
 // Correctness, abstention, conditional correctness and four category F-scores remain available as metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://videosimpleqa.github.io/";
 const board: Leaderboard = {

@@ -3,8 +3,8 @@
 // LENGTHS_32k is 0k, 1k, 2k, 4k, 8k, 16k, 32k; pandas excludes missing values and the page replaces -1 with NaN.
 // Reproduce that published definition only. Context-length sub-scores remain metrics, and RAG is a harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/RMT-team/babilong/raw/main/data/leaderboard-v0_results.csv";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

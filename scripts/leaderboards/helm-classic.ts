@@ -1,7 +1,7 @@
 // HELM Classic (Stanford CRFM), last release v0.4.0. The headline is "Mean win rate" in the Accuracy table of
 // core_scenarios.json, relative to the models on the board, times 100. Read through helmRows in
 // helm-capabilities.ts.
-import { helmWithScenarioTokens } from '../lib/boards/helm-cov6.ts';
+import { helmWithScenarioTokens } from '../lib/boards/helm-scenario-tokens.ts';
 import type { Leaderboard } from './types.ts';
 import { HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 

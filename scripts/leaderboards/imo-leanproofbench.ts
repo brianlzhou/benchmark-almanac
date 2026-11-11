@@ -3,7 +3,7 @@
 // Basic/advanced table scores are subsets. Do not synthesize overall scores for the other systems.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { text } from '../lib/html.ts';
 const FEED = "https://imobench.github.io/";
 const board: Leaderboard = {
   benchmark: "imo-leanproofbench", url: "https://imobench.github.io/", feed: FEED,

@@ -1,7 +1,7 @@
 // TableBench overall percentages with FC, NR, DA and VIZ metrics, with prompting strategies as whole-benchmark settings. Remove affiliation markup and exclude the human baseline.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://tablebench.github.io/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

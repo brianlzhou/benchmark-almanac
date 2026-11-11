@@ -1,6 +1,6 @@
 // SWE Atlas v1.1 combines all three task categories in the source aggregate.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
+import { SCALE_ALIASES, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('swe-atlas');
 

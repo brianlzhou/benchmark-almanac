@@ -2,9 +2,9 @@
 // Compose-level and perception-level accuracies remain metrics. Fine-tuned models retain their training suffix.
 // Rows are static paper results and will not refresh with later model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2504.07957";
 const board: Leaderboard = {

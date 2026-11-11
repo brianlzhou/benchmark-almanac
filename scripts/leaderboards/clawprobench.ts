@@ -1,8 +1,8 @@
 // ClawProBench: use the open dataset Final Score, the page’s stated default ranking.
 // The closed dataset is a separate task set. Costs and tokens are whole-run totals, kept as metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://suyoumo.github.io/bench/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -3,7 +3,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
-import { SURGE_TERMS, SURGE_ALIASES } from '../lib/boards/surgehq-cov2.ts';
+import { SURGE_TERMS, SURGE_ALIASES } from '../lib/boards/surgehq.ts';
 const URL = 'https://surgehq.ai/benchmarks';
 const board: Leaderboard = {
   benchmark: 'tuesday-work-index', url: URL, feed: `${URL} (Tuesday Work Index data-ii-item chart)`, terms: SURGE_TERMS, aliases: { ...SURGE_ALIASES, 'Muse Wonder 1.0': 'muse-wonder' },

@@ -4,7 +4,7 @@
 // Llama 3 lacks both tool-use tasks, so its partial-task average is excluded. IPP is a whole-set prompt variant.
 // These are static paper results and will not refresh with new models.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2502.08745';
 const KEYS = ['ruleSingle', 'ruleMulti', 'extraction', 'generation', 'classification', 'hijack', 'passwordExtraction', 'toolIntrinsic', 'toolInjected'];

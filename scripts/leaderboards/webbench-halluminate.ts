@@ -1,8 +1,7 @@
 // WebBench publishes overall success for autonomous and human-assisted agent configurations. Read and write scores remain metrics. Agent product names stay unlisted when the underlying model is unspecified.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://webbench.ai/assets/index-BZfRa_LN.js";
 const board: Leaderboard = {

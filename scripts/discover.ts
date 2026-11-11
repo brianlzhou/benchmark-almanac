@@ -4,7 +4,7 @@
 // reader uses only official feeds and APIs, within the source's terms and robots.txt, and runs under its
 // own time limit, so one slow or failing source cannot stop the run. Sources whose terms forbid automated
 // reading (Artificial Analysis, Scale's SEAL pages) have no reader, and their `manual` field says why. X is never
-// fetched: the `x` reader asks Grok Build, signed in on the user's Mac, to search it (scripts/lib/discover/x.ts).
+// fetched: the `x` reader asks Grok Build, signed in on a maintainer's computer, to search it (scripts/lib/discover/x.ts).
 //
 // Scoring follows a two-stage rule measured on the week of 2026-10-25:
 //   Stage A asks whether an item is a new benchmark at all (precision 0.91 at 5 points or more).

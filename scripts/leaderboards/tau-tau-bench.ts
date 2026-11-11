@@ -2,8 +2,7 @@
 // Overall is the headline percentage; domain percentages are metrics. Cost is build USD per task, not serve credits.
 // The manifest discovers current submissions at every refresh.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://sierra-research.github.io/hyper-tau-bench/hyper-submissions/manifest.json";
 const board: Leaderboard = {

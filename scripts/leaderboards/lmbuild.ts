@@ -3,7 +3,7 @@
 // As on the page, incomplete twelve-metric submissions have no overall score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://lumos-jiateng.github.io/LMBuild/data/results.json";
 const board: Leaderboard = {
   benchmark: "lmbuild", url: "https://lumos-jiateng.github.io/LMBuild/", feed: FEED,

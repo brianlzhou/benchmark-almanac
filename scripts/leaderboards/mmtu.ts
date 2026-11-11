@@ -1,8 +1,8 @@
 // MMTU publishes accuracy fractions with uncertainty. Scores and uncertainty are converted to percentages.
 // The source labels one o4-mini row with a contradictory 2024 date; its exact label remains unlisted.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/MMTU-benchmark/MMTU/main/README.md";
 const board: Leaderboard = {

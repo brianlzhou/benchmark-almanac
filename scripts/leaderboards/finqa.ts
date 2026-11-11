@@ -1,7 +1,7 @@
 // FinQA public-test leaderboard score percentages under published submission usernames, whose model identities are not asserted. Keep the corrected FinQANet baseline separately.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://codalab.lisn.upsaclay.fr/competitions/1846";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

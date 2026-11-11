@@ -1,7 +1,7 @@
 // ChartMuseum: overall chart-question accuracy in percent from the official HTML leaderboard. Visual, synthesis, mixed visual/text, and text reasoning categories remain separate metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://chartmuseum-leaderboard.github.io/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -1,8 +1,8 @@
 // LoopArena: use Type III SSR, the official site’s default selected leaderboard view.
 // Type I decisions and Type II condensed tasks are different evaluations, not model settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import {mdTables} from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/AMAP-ML/LoopArena/HEAD/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

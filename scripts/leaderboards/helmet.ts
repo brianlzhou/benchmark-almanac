@@ -2,9 +2,8 @@
 // Use the official page’s selected default, 128k input. Seven task categories stay in metrics.
 // Context-window capacity is not measured output-token usage and is not imported as tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://princeton-nlp.github.io/HELMET/data/agg_results_128k.csv";
 const board: Leaderboard = {

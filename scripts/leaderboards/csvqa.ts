@@ -1,9 +1,8 @@
 // CSVQA: Overall is accuracy in percent in the official dataset card.
 // Subject scores and open-ended/multiple-choice accuracies remain metrics; random and category-heading rows are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/datasets/Skywork/CSVQA/raw/main/README.md";
 const board: Leaderboard = {

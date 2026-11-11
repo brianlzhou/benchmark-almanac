@@ -2,7 +2,7 @@
 // The paper's Lite subset, generation scores and extended planning experiment are not rows on this board.
 // These are static paper results and will not refresh except when the paper itself is revised.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2503.19990';
 const KEYS = ['height', 'adjacency', 'rotation', 'multiview', 'nextStep', 'dependency', 'rotationStat', 'position', 'backwards', 'ordering', 'outlier'];

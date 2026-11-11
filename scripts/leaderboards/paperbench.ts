@@ -2,8 +2,8 @@
 // Agent names become harnesses; reasoning effort and explicit time limits become settings. The reported
 // plus/minus value is preserved without assuming it is a confidence interval. Undated API names stay unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md";
 const board: Leaderboard = {

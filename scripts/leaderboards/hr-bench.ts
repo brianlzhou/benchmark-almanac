@@ -1,8 +1,8 @@
 // HR-Bench: Avg. is the published mean accuracy percentage across 4K and 8K images.
 // Both resolution accuracies and the DC² scaffold are retained. The human baseline is excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/DreamMr/HR-Bench/HEAD/README.md";

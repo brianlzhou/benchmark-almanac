@@ -1,7 +1,7 @@
 // VDEBench uses local editing quality as its headline, on the native 0–1 scale. Preserve global quality as a separate metric for each image-editing system.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

@@ -2,8 +2,8 @@
 // CLI and GUI subset scores remain metrics. Overall API cost is per task;
 // output tokens are per-turn means and stay metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://engiworld.github.io/assets/main_results.csv";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

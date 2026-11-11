@@ -2,8 +2,8 @@
 // Pass@2, pass@4, years and difficulties remain metrics. Only explicit effort is a setting.
 // Undated API snapshots are explicitly unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md";
 const board: Leaderboard = {

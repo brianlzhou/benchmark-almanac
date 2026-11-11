@@ -2,8 +2,8 @@
 // Counts are divided by trials, not treated as completed physical actions. Each model ran at high effort.
 // Overall pools five tasks with twelve trials per condition per task. Per-task rates remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://robocurve.org/robospoof/";
 const board: Leaderboard = {

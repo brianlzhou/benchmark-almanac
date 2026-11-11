@@ -2,7 +2,7 @@
 // All models use maximum thinking effort. Claude may include fallbacks; GPT may include cyberguards.
 // Only Kimi Code Bench 3.0 Long-horizon is imported from this multi-benchmark image.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = 'https://kimi-img.kimi.ai/pub/slides/kimi-fs/managed-assets/43394bf2-0bfe-4f41-8f93-bb7fb3a079c2.webp';
 const ROWS: LeaderboardRow[] = [
   {

@@ -1,8 +1,8 @@
 // SimpleQA: correctness percentage from the official simple-evals README. The repository is deprecated,
 // but the importer reads its current head. Reasoning-effort configurations remain separate.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/openai/simple-evals/HEAD/README.md";

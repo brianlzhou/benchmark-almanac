@@ -2,9 +2,8 @@
 // These static paper rows will not refresh. A turn budget applies to every example, not a subtask.
 // Thinking and high-effort modes stay in setting alongside the turn budget, preventing duplicate resolved configurations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2504.21625";
 const board: Leaderboard = {

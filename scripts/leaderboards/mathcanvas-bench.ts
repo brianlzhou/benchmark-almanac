@@ -1,9 +1,8 @@
 // MathCanvas-Bench: Complete is the all-requirements success percentage; Weighted is retained separately.
 // The static table also provides eight mathematical topic scores, thinking mode and evaluation dates.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://mathcanvas.github.io/";
 const board: Leaderboard = {

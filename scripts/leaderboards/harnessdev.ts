@@ -1,9 +1,8 @@
 // HarnessDev paper: published Avg score across five downstream benchmarks in Creation.
 // These static paper rows will not refresh. Self-Eval and Unified-Eval apply to the whole generated harness. Seed and mixed-model baselines are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2609.01437";
 const board: Leaderboard = {

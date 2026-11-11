@@ -1,8 +1,8 @@
 // ToolBench: use the published Average pass rate for each model and method.
 // Average win rate and task-group pass rates are secondary metrics. Methods remain harnesses.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/OpenBMB/ToolBench/master/README.md";
 const board: Leaderboard = {

@@ -2,9 +2,7 @@
 // Precision is a whole-benchmark configuration. The six dimensions remain metrics.
 // The dated Gemini 2.5 Pro preview maps explicitly to the May 2025 snapshot.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/inception42/Leaderboards/resolve/main/assets/results/aragen_v3_results.json";
 const board: Leaderboard = {

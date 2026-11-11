@@ -4,8 +4,8 @@
 // Training-data ablations are excluded.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2509.14233";
 const board: Leaderboard = {

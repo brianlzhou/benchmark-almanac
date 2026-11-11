@@ -1,7 +1,7 @@
 // LifeSciBench's overall mean rubric score (percent), from the official article's live Vega chart values.
 // Workflow scores and pass rates are secondary metrics, never competing overall rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, chartTitle, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, chartTitle, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/introducing-life-sci-bench/';
 const board: Leaderboard = {
   benchmark: 'lifescibench', url: PAGE, feed: `${PAGE} (embedded LifeSciBench overall and workflow charts)`, terms: OPENAI_TERMS,

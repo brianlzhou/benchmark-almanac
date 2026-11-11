@@ -1,8 +1,8 @@
 // EnterpriseOps-Gym: use full-benchmark Oracle task success rates only.
 // Exclude the public subset. Reasoning effort stays in setting and domain success rates remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/ServiceNow/EnterpriseOps-Gym/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

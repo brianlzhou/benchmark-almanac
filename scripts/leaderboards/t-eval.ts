@@ -1,8 +1,7 @@
 // T-Eval: the official English leaderboard’s overall score, in percent.
 // The six process scores remain metrics on one whole-benchmark row.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://open-compass.github.io/T-Eval/scores.csv";
 const board: Leaderboard = {

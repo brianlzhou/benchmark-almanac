@@ -1,8 +1,8 @@
 // AlphaEval reports average task score over 94 tasks, displayed on a 0-100 percentage scale.
 // Every scaffold-model configuration remains separate.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://alphaeval.ai";
 const board: Leaderboard = {

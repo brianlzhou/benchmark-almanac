@@ -3,9 +3,9 @@
 // Table 6 identifies GPT-4o as 2024-08-06 and Claude 3.5 as 2024-06-20.
 // Rows are static paper results and will not refresh with later model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
-import { grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2411.00836";
 const board: Leaderboard = {

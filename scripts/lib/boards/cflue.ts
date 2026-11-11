@@ -1,7 +1,7 @@
 // CFLUE publishes knowledge accuracy and an application average over its task metrics. The application average is a score, not percentage accuracy.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
-import { tables, num, text } from '../html.ts';
+import { num, text } from '../html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

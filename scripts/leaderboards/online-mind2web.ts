@@ -2,9 +2,8 @@
 // The human leaderboard is the reference evaluation. Easy, Medium and Hard are metrics.
 // The scaffold is the harness. Evaluator agreement tables measure a different task and are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { tables, num } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/osunlp/Online_Mind2Web_Leaderboard/raw/main/human_Mind2Web-Online%20-%20Leaderboard_data.csv";
 const board: Leaderboard = {

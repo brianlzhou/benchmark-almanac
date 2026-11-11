@@ -1,9 +1,9 @@
 // MBABench v1: the v1 overall score across all three spreadsheet dimensions.
 // Product rows remain unlisted when the board does not identify the underlying model.
 // The source also has v2 results, which are excluded from this original record.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://mbabench.org/assets/index-BCfvtkED.js";
 const board: Leaderboard = {

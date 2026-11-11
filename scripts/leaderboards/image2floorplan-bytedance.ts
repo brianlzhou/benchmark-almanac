@@ -3,10 +3,8 @@
 // The score is Image2FloorPlan Avg Score.
 // Two separate visual passes checked every printed score. The image hash must match before rows are returned.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4v1ol.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4v1ol.png";
 const SHA256 = "ce06740fa065985fdd2fc492012437b2114f2e606a43e5135cfbc52aeaba4a2e";
 const ROWS: LeaderboardRow[] = [

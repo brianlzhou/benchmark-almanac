@@ -1,7 +1,6 @@
 // BioTIER defines separate refuse (398 prompts) and permit (144 prompts) test sets. Each child uses correct compliance in percent.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../html.ts';
+import { text } from '../html.ts';
 import { sbCharts } from '../../leaderboards/hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

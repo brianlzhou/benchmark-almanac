@@ -1,9 +1,8 @@
 // AMemGym v1.base: overall mean accuracy, multiplied by 100.
 // The official bundle publishes overall model and memory-agent tables. Period scores remain metrics. Random baselines are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://agi-eval-official.github.io/amemgym";
 const board: Leaderboard = {

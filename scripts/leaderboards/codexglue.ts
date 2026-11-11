@@ -1,8 +1,7 @@
 // CodeXGLUE: the official overall board’s CodeXGLUE Score.
 // Task boards cannot become separate rows on the suite. The ten published task columns remain metrics.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://microsoft.github.io/CodeXGLUE/webpage_files/participants/overall.json";
 const board: Leaderboard = {

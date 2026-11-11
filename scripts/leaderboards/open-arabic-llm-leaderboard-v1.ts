@@ -1,8 +1,7 @@
 // Open Arabic LLM Leaderboard v1 public Gradio table. Average is the published percentage; task metrics and precision remain available. Community repository owners are retained to avoid base-model misidentification.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const FEED = "https://oall-open-arabic-llm-leaderboard-v1.hf.space/config";
 const board: Leaderboard = {

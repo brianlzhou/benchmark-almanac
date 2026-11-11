@@ -1,7 +1,7 @@
 // Investor’s Last Exam published overall score, with forecast and simulated portfolio measures retained as metrics. Portfolio returns are not substituted for benchmark score.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/Prophetlab/Investor-Last-Exam/HEAD/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

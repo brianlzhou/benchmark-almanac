@@ -1,8 +1,7 @@
 // MMEB image leaderboard. Image-Overall is the percentage aggregate; embedding model identities and all category metrics remain intact.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/TIGER-Lab/MMEB-Leaderboard/resolve/main/rankings/image_ranking.csv";
 const board: Leaderboard = {

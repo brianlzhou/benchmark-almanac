@@ -4,10 +4,8 @@
 // One shortened label differed between passes. A third view confirmed the advisor and actor configuration.
 // Two separate visual passes checked every printed score. The image hash must match before rows are returned.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://metr.org/assets/images/evaluations/openai_o1_preview_report/sep2024_o1_preview_report_general_heatmap.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://metr.org/assets/images/evaluations/openai_o1_preview_report/sep2024_o1_preview_report_general_heatmap.png";
 const SHA256 = "2ce0ad4d867488b02df055ef0736ff394cc04731ccfc2a110e7c2a4356717548";
 const ROWS: LeaderboardRow[] = [

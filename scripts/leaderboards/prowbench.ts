@@ -3,8 +3,8 @@
 // of categories in this setting." Reproduce that published formula, requiring every metric, without rounding.
 // Other scene sets are not alternative configurations of this default view. Raw submetrics remain in metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://alaya-lab.github.io/PROWBench/assets/leaderboard-data.js";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

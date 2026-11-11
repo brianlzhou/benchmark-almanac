@@ -1,7 +1,6 @@
 // MT-Bench: mean GPT-4 single-answer judgment across questions and both conversation turns, on the original 1–10 scale. Invalid negative judgments are excluded. Turn means and judgment counts remain available as metrics.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/lmsys/mt-bench/resolve/main/data/mt_bench/model_judgment/gpt-4_single.jsonl";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

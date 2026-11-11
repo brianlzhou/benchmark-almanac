@@ -3,8 +3,8 @@
 // The original board redirects away from the project.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2201.03533";
 const board: Leaderboard = {

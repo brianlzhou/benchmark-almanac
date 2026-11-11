@@ -1,7 +1,7 @@
 // IFStruct v1.0: the official announcement’s IFStruct column is the instruction/structure success percentage. The neighboring StructEval and Structured Output Benchmark figures are retained only as separately named metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://www.liquid.ai/blog/ifstruct-v1.0";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

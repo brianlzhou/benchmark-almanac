@@ -1,7 +1,7 @@
 // LABBench2 FigQA2 average correctness, converted from fractions to percentages. Keep tool/reasoning variants and modes; tokens and durations are published averages.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://advances.edisonscientific.com/benchmarks/labbench2/figqa2/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

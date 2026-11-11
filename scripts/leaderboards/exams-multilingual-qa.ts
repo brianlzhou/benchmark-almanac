@@ -1,7 +1,7 @@
 // EXAMS overall multilingual accuracy percentage, retaining all language splits and excluding random/IR baselines.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/mhardalov/exams-qa/HEAD/README.md";

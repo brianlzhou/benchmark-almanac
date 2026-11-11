@@ -1,8 +1,8 @@
 // ts-bench: the default v2 board reports Solved out of five SWE-Lancer tasks. The ratio becomes a percentage.
 // The v1 Exercism results stay excluded. Agent names identify the harness. Total runtime remains a metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://laiso.github.io/ts-bench/";
 
 const board: Leaderboard = {

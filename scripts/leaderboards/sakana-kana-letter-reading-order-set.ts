@@ -1,8 +1,7 @@
 // Sakana Fugu paper Table 3 reports mean NED across all 25 expert-annotated letters, explicitly higher is better. Fractions become percentages. All models use beam search. These paper rows are static and will not refresh. Anonymous models stay anonymous. Model C has no completed run.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2606.21228v2";
 const board: Leaderboard = {

@@ -2,8 +2,8 @@
 // Keep that default testmini / Text-DeRedundancy score in percent. Multiple-choice
 // accuracy and physics domains remain metrics, not separate headline rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://killthefullmoon.github.io/projects/PhyX/leaderboard_data.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -2,10 +2,9 @@
 //  Each prompt runs the whole benchmark and becomes a setting. Five question-type scores remain metrics.
 //  These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2504.05506";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "chartqa-pro",
   url: "https://raw.githubusercontent.com/vis-nlp/ChartQAPro/main/README.md",

@@ -1,8 +1,7 @@
 // CyberSecEval Instruct secure-code pass rate, weighted by language trial counts.
 // Autocomplete results are not part of this benchmark.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/insecure_code.json";
 const board: Leaderboard = {

@@ -1,7 +1,7 @@
 // Omni-InteractScope separates explicit-request tasks T1-T7 from proactive assistance T8. Each track uses its published overall column.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { num, tables, text } from '../html.ts';
 
 const FEED = "https://yinsongyan.github.io/Omni-InteractScope/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

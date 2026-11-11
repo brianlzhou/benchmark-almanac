@@ -2,9 +2,9 @@
 // Program accuracy remains a secondary metric. Human reference rows are not model evaluations.
 // FinQANet-Gold uses gold retrieval, which is a distinct whole-benchmark configuration.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2210.03849";
 const board: Leaderboard = {

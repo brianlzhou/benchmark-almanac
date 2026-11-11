@@ -2,8 +2,8 @@
 // Zero-shot, few-shot and chain-of-thought are whole-suite prompting settings.
 // The 87 individual task columns are omitted to keep the metric count bounded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/YLab-Open/BRIDGE-Medical-Leaderboard/raw/main/leaderboards/Zero-Shot_leaderboard.json";
 const board: Leaderboard = {

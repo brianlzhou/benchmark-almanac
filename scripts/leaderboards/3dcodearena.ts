@@ -1,7 +1,7 @@
 // 3DCodeArena single-turn pool: combined Bradley-Terry Elo from the live Next.js payload.
 // Keep modality scores, confidence bounds, vote counts, executability and the published cost frontier.
 import type { Leaderboard } from './types.ts';
-import { code3dRows } from '../lib/boards/3dcodebench-arenas.ts';
+import { code3dRows } from '../lib/boards/3dcodearena.ts';
 const board: Leaderboard = {
   benchmark: '3dcodearena', url: 'https://www.3dcodebench.com/leaderboard',
   feed: 'https://www.3dcodebench.com/leaderboard (models payload); https://www.3dcodebench.com/ (cost chart)',

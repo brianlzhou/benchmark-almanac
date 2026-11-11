@@ -1,7 +1,7 @@
 // WebCanvas Mind2Web-Live task-success percentages with completion and USD-efficiency metrics. Efficiency is not a directly reported per-task cost. Keep environment settings separate.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 import {mdTables} from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/iMeanAI/WebCanvas/HEAD/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -1,9 +1,8 @@
 // Social IQa paper: development accuracy, matching the catalog note.
 // These static paper rows will not refresh. Test accuracy is a secondary metric. Context ablations are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1904.09728";
 const board: Leaderboard = {

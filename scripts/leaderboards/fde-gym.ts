@@ -1,9 +1,8 @@
 // FDE-Gym paper: main Score over all 95 tasks at L3.
 // These static paper rows will not refresh. Original-task difficulty scores remain metrics. Negative scores are valid.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2610.22350";
 const board: Leaderboard = {

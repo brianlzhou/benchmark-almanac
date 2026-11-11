@@ -4,10 +4,8 @@
 // Image: https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png
 // SHA-256: d0f4acc8b06da1c1ba8c21acd256bc06eb9618e2c4c58041f2bb12fd70198b95
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://raw.githubusercontent.com/zai-org/GLM-5/main/resources/realworld_bench.png (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "cc-bench-v2-chained-tasks-zai",

@@ -1,9 +1,8 @@
 // Surface Evolver: overall mean score, multiplied by 100, from the official interactive chart.
 // Mean cost per run is per task. The source reports total tokens, not output tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://yhenon.github.io/surface-evolver-llm-eval/assets/charts/performance.html";
 const board: Leaderboard = {

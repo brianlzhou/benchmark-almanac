@@ -3,8 +3,8 @@
 // only input modality and explicit thinking effort remain settings, with domains in metrics.
 // Affiliations beneath model names are not part of the model identity.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://jaaackhongggg.github.io/WorldSense";
 const board: Leaderboard = {

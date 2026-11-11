@@ -1,9 +1,7 @@
 // AdaExploreBench: calibrated accuracy for each whole-benchmark interaction setting.
 // Diagnostic settings vary evidence access, probing policy or rule drift, not the scored task subset.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://hkust-knowcomp.github.io/AdaExploreBench/assets/data/site-data.json?v=20261019-02";
 const board: Leaderboard = {

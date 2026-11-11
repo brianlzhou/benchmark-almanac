@@ -1,9 +1,8 @@
 // HotpotQA: headline Joint F1 in the first, Distractor leaderboard.
 // Answer and supporting-fact scores remain metrics. The fullwiki leaderboard is a separate task and is excluded. Repeated system submissions keep the latest submission date.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://hotpotqa.github.io/";
 const board: Leaderboard = {

@@ -6,7 +6,7 @@
 // o3 deep research has a model record.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
-import { num, tables, text } from '../lib/html.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = 'https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard/resolve/main/data_drb2/leaderboard.csv';
 

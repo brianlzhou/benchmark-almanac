@@ -1,8 +1,8 @@
 // AgentBoard reports the published Avg progress rate percentage across all nine environments.
 // Task and group progress rates are secondary metrics, alongside overall success and grounding.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://hkust-nlp.github.io/agentboard/data/To_Release/main_data_new.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

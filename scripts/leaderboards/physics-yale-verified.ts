@@ -1,2 +1,2 @@
-import { physicsVerified } from '../lib/boards/physics-yale-cov7.ts';
+import { physicsVerified } from '../lib/boards/physics-yale.ts';
 export default physicsVerified(false);

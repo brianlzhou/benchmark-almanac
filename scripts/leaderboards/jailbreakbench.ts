@@ -3,8 +3,8 @@
 // The catalog's benign behaviors are used for other metrics, not the ASR denominator.
 // Artifact links identify Vicuna v1.5 and Llama 2 Chat snapshots. Undated closed models stay unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://jailbreakbench.github.io/tables/table_open_source.html";
 const board: Leaderboard = {

@@ -1,8 +1,6 @@
 // EurekaBench final combined score from published row attributes, preserving reasoning effort, agent harness and scientific component scores. Human references are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://eurekabench.github.io/";
 const board: Leaderboard = {

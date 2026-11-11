@@ -1,8 +1,8 @@
 // Reka Research-Eval: Score is average accuracy across five runs, in percent.
 // The README prices 1,000 requests, so cost is divided by 1,000 to give USD per request; search harnesses remain explicit.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/reka-ai/research-eval/HEAD/README.md";

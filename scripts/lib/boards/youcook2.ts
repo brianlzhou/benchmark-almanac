@@ -1,7 +1,7 @@
 // YouCook2 dense video description requires both temporal segments and captions. Read its CIDEr score. Captioning micro/macro protocols have no default and are excluded.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
-import { text, tables } from '../html.ts';
+import { text } from '../html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

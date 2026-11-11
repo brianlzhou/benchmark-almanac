@@ -1,9 +1,8 @@
 // MME-RealWorld: Overall Avg is the published accuracy percentage across the real-world questions.
 // Perception and reasoning averages and task-specific accuracies remain diagnostic metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://mme-realworld.github.io/home_page.html";
 const board: Leaderboard = {

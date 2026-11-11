@@ -7,10 +7,8 @@
 // Image: https://huggingface.co/datasets/zai-org/CC-Bench-trajectories/resolve/v1.1/assets/winrate_and_token_usage.jpg
 // SHA-256: 50f264551901933ae21fa5496a0f5c7516e47a0c78f44f98d748d5c24f8a0175
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://huggingface.co/datasets/zai-org/CC-Bench-trajectories/resolve/v1.1/assets/winrate_and_token_usage.jpg (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "cc-bench",

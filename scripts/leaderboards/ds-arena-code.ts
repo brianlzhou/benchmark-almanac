@@ -3,10 +3,8 @@
 // Only two models have printed DS-Arena-Code win rates. The absent DeepSeek-V2-0628 bar is not a zero.
 // Two separate visual passes checked every printed score. The image hash must match before rows are returned.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://cdn.deepseek.com/api-docs/benchmark_3.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://cdn.deepseek.com/api-docs/benchmark_3.png";
 const SHA256 = "770f4f00706e24888db3bd0ca27f5bdbb5d1425466e288f809e3c5975e3f06a9";
 const ROWS: LeaderboardRow[] = [

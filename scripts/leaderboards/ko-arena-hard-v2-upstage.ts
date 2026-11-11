@@ -2,9 +2,9 @@
 // The Full Benchmark Details paragraph identifies both exact API snapshots.
 // The image CDN was unavailable. The HTML publishes both scores independently.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://www.upstage.ai/blog/en/solar-pro-3-0323";
 const board: Leaderboard = {

@@ -1,8 +1,7 @@
 // VAKRA: the public API’s overall score, in percent, across the full benchmark.
 // The named agent goes in harness. Component scores remain metrics.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://ibm-research-vakra.hf.space/api/leaderboard";
 const board: Leaderboard = {

@@ -1,7 +1,6 @@
 // CausalVQA baseline percentages embedded in the official public Space source. Read literal baseline fields without executing Python; exclude human and dummy data.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/facebook/pwm_leaderboard/resolve/main/app.py";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

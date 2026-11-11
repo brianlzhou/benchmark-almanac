@@ -1,7 +1,7 @@
 // HealthBench Professional: overall rubric score from OpenAI's clinician release chart, in percent.
 // The human baseline is excluded. The ChatGPT for Clinicians product configuration remains a separate harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartTitle, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartTitle, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/making-chatgpt-better-for-clinicians/';
 const board: Leaderboard = {
   benchmark: 'healthbench-professional', url: PAGE, feed: `${PAGE} (embedded overall-score chart)`, terms: OPENAI_TERMS,

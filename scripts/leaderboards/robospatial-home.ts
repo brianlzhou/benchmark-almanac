@@ -1,8 +1,8 @@
 // RoboSpatial Home: Total is the official aggregate percentage across configuration, compatibility and pointing.
 // All available component scores are retained without inventing values for the table’s missing cells.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/chanhee-luke/RoboSpatial-Eval/HEAD/README.md";

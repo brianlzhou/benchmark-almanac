@@ -1,7 +1,7 @@
 // GDPval's hosted leaderboard is retired. The official release article still supplies its chart as JSON.
 // The headline is expert-graded wins plus ties, not wins alone. Both components and the interval are retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/gdpval/';
 const board: Leaderboard = {
   benchmark: 'gdpval', url: PAGE, feed: `${PAGE} (embedded GDPval wins and ties chart)`, terms: OPENAI_TERMS,

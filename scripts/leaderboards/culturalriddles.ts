@@ -1,9 +1,8 @@
 // CulturalRiddles: overall human-evaluated accuracy from the official dashboard.
 // Reasoning and search configurations remain settings. Exact match and community coverage remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://huggingface.co/spaces/CohereLabsCommunity/CulturalRiddles/raw/main/index.html";
 const board: Leaderboard = {

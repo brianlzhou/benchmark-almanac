@@ -1,9 +1,7 @@
 // InteractiveBench: use the published Overall pass percentage.
 // Task-group pass rates, completion rate and capability scores remain metrics. The source script is parsed, never executed.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 import {jsLiteral} from '../lib/html.ts';
 const FEED = "https://meta-interactiveworld.github.io/assets/results.js?v=23";
 const board: Leaderboard = {

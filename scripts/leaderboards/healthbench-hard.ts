@@ -1,7 +1,7 @@
 // HealthBench Hard: overall scores are the theme=null entries in OpenAI's Hard-subset chart.
 // Values are fractions, converted to percent. Axis scores stay in metrics, not separate leaderboard rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/healthbench/';
 const board: Leaderboard = {
   benchmark: 'healthbench-hard', url: PAGE, feed: `${PAGE} (HealthBench Hard chart, overall rows)`, terms: OPENAI_TERMS,

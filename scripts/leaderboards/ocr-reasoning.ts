@@ -2,10 +2,9 @@
 //  The OCR + LLM group uses OCR as a harness. Table 2's non-CoT runs are additional whole-benchmark settings.
 //  Reasoning-type scores remain metrics. These are static paper results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2505.17163";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "ocr-reasoning",
   url: "https://github.com/SCUT-DLVCLab/OCR-Reasoning",

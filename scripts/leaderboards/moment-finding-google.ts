@@ -2,9 +2,9 @@
 // The scatter plot has no printed values for other models. Its positions are not transcribed.
 // Mean absolute distance, in seconds, remains a secondary metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/";
 const board: Leaderboard = {

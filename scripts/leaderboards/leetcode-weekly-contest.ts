@@ -2,7 +2,7 @@
 // Read the LeetCode column, not the neighboring Hungarian Exam or IFEval columns.
 // These are static paper results and will not refresh with new contest weeks.
 import type { Leaderboard } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2401.02954';
 const board: Leaderboard = {

@@ -1,7 +1,7 @@
 // VideoReasonBench: overall video reasoning accuracy in percent from the official table. Retain six reasoning-category accuracies, thinking status, and explicitly reported model sizes; exclude human and section-header rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://llyx97.github.io/video_reason_bench/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

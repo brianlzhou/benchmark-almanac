@@ -1,8 +1,8 @@
 // OK-VQA: Overall Accuracy in percent from the official static leaderboard. Preserve specialized
 // system names, including the named baselines, without mapping their backbone to a generic model.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://okvqa.allenai.org/leaderboard.html";
 const board: Leaderboard = {

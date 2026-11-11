@@ -1,8 +1,6 @@
 // Learn2Play normalized maximum performance and mean dollars per completed episode. Keep methods in harness and distinguish billed cost from estimates in metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://liushiliushi.github.io/learn2play-bench-website/assets/performance-cost.json?v=astra-billed-150-20261008";
 const board: Leaderboard = {

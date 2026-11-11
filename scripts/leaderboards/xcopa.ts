@@ -2,8 +2,8 @@
 // reference, not a model. Parenthesized language values are published fallback results, retained as
 // metrics without treating them as independently measured scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/cambridgeltl/xcopa/master/README.md";
 const board: Leaderboard = {

@@ -1,9 +1,8 @@
 // Orak: Avg.Rank is the leaderboard’s aggregate score, where lower ranks are better.
 // Per-game mean scores and deviations remain metrics, and agentic strategy becomes the harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://krafton-ai.github.io/orak-leaderboard/";
 const board: Leaderboard = {

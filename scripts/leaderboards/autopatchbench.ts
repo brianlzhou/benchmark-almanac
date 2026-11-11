@@ -4,10 +4,8 @@
 // Image: https://engineering.fb.com/wp-content/uploads/2025/04/AutoPatchBench-image-2.png?w=1024
 // SHA-256: 915a3b857475c5677ebe1847ecd434e4b4d494cd8adf0536f4c6282d0dda576f
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://engineering.fb.com/wp-content/uploads/2025/04/AutoPatchBench-image-2.png?w=1024 (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "autopatchbench",

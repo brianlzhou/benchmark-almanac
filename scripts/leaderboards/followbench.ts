@@ -3,7 +3,7 @@
 // in Appendix D; its HSR average is a supplementary metric, not a competing row or an invented aggregate.
 // These are static paper results and will not refresh with new models.
 import type { Leaderboard } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2310.20410';
 const board: Leaderboard = {

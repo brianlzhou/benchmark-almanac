@@ -1,8 +1,7 @@
 // Irregular states that GPT-6 Cyber solved all 22 Atomic challenges at least once. The count becomes the share solved. This is the latest updated challenge set. Earlier Astra and Sol runs use different snapshots and are excluded. Domain success rates remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const FEED = "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks";
 const board: Leaderboard = {

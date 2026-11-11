@@ -1,8 +1,8 @@
 // ComplexFuncBench: Overall Success Rate in percent from the official README. Keep call accuracy,
 // completeness and correctness as separate metrics; dated model names identify exact snapshots.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/zai-org/ComplexFuncBench/main/README.md";
 const board: Leaderboard = {

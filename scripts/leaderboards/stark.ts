@@ -2,7 +2,7 @@
 // No cross-domain aggregate is published. Keep only this default view; Hit@5, recall and MRR remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text, jsLiteral } from '../lib/html.ts';
+import { tables, text, jsLiteral } from '../lib/html.ts';
 const FEED = "https://huggingface.co/spaces/snap-stanford/stark-leaderboard/resolve/main/app.py";
 const board: Leaderboard = {
   benchmark: "stark", url: "https://huggingface.co/spaces/snap-stanford/stark-leaderboard", feed: FEED,

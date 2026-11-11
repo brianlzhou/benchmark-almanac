@@ -1,8 +1,8 @@
 // SpatialViz-Bench: the official script’s reported whole-test overall, direct, or CoT accuracy.
 // Direct and CoT are prompt configurations across the same full benchmark.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://wangst0181.github.io/SpatialViz-Bench/assets/main.js?v=4";
 const board: Leaderboard = {

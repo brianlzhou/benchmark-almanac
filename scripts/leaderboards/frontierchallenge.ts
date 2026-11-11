@@ -1,9 +1,9 @@
 // FrontierChallenge historical pass rates use native Score >=99.9 over 97 tasks.
 // They have not been recomputed under the current strict task_score >0.999 policy.
 // The page links the current script asset, parsed as data without executing code.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://apodexai.github.io/FrontierAgent/benchmarks/FrontierChallenge/";
 const board: Leaderboard = {

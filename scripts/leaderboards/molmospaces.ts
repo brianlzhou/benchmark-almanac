@@ -4,9 +4,9 @@
 // Here xe is the number of selected task types. Missing task results contribute zero, as on the board.
 // Source: https://molmospaces.allen.ai/assets/index-Cbh0yr1e.js
 // Oracle Rate is the board's default headline. Task rates remain metrics.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { Leaderboard } from './types.ts';
 import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://molmospaces.allen.ai/benchmark/data/index.json";
 const board: Leaderboard = {

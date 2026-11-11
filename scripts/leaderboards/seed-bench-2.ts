@@ -2,8 +2,7 @@
 // "Avg. Single" (sort_values at startup). Other published group averages are metrics.
 // Evaluation method is the configuration; no aggregate is invented.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/AILab-CVC/SEED-Bench_Leaderboard/resolve/main/file/result_v2.csv";
 const board: Leaderboard = {

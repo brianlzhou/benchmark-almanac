@@ -1,9 +1,8 @@
 // BLiMP publishes per-paradigm accuracy for four model families.
 // Use the explicit overall score. Exclude 13 aggregate rows from the 67-paradigm category means.
 // Linguistic-category means remain metrics; family labels are not guessed checkpoint IDs.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/alexwarstadt/blimp/master/raw_results/summary/models_summary.jsonl";
 const board: Leaderboard = {

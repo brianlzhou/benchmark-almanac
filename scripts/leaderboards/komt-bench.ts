@@ -1,7 +1,7 @@
 // KoMT-Bench official model comparison scores. The transposed dataset-card table supplies each published model and its judge score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://huggingface.co/datasets/LGAI-EXAONE/KoMT-Bench/raw/main/README.md";

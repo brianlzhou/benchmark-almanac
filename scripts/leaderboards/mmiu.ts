@@ -1,8 +1,8 @@
 // MMIU overall accuracy with all 52 task metrics.
 // Two HTML rows describe each model; frequency and random baselines are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://mmiu-bench.github.io/";
 const board: Leaderboard = {

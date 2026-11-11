@@ -3,7 +3,7 @@
 //  The main table gives PaLM CoT 65.2, while appendix Table 3 says 63.3. Keep the main headline table.
 //  NLP and algorithmic scores are secondary metrics. Human and composite prior-best rows are not model runs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
+import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2210.09261";
 

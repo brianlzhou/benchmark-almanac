@@ -1,7 +1,6 @@
 // JevBench current capability score (mean Intelligence and Calibration, 0–100). Preserve ranking eligibility and release settings; convert USD per 1,000 decisions to per decision.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://benchmarkheaven.com/api/jevbench/latest";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

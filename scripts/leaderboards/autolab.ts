@@ -1,8 +1,8 @@
 // AutoLab current release: the rendered overall Avg@3 is the headline score.
 // Best@3 and up to 23 task-detail scores remain metrics, never competing headline rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://autolab.moe/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

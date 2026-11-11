@@ -1,9 +1,8 @@
 // KellyBench paper: average return on investment, as a percentage, over the test season.
 // These static paper rows will not refresh. Negative ROI is valid and must not be clamped. Bankroll remains a metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2604.27865";
 const board: Leaderboard = {

@@ -1,9 +1,9 @@
 // VizWiz VQA: the paper’s overall answer accuracy, converted from fractions to percentages.
 // Citation numbers distinguish architecture variants and remain in their original labels.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1802.08218";
 const board: Leaderboard = {

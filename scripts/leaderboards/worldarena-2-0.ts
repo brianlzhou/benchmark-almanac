@@ -1,8 +1,7 @@
 // WorldArena 2.0 defaults to Track 1 Simulator Video Quality. The public Gradio reader returns the rendered table and its EWMScore-P headline. This importer reads that published aggregate without recomputing it. Other tracks remain separate.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, fetchJson } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://worldarena-worldarena2-0.hf.space/gradio_api/call/reload_data";
 const board: Leaderboard = {

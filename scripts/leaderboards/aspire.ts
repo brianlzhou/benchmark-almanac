@@ -3,9 +3,9 @@
 // These are Qwen3.5-4B and Qwen3.5-9B evolution results, not the separate S3Gym game leaderboard.
 // The harness-creation table covers only 20 writing items and is excluded.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2608.31111";
 const board: Leaderboard = {

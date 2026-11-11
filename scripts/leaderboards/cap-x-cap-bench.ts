@@ -1,8 +1,7 @@
 // CAP-X / CAP-Bench: the published avgSuccessRate over all six simulation tasks.
 // Task success rates remain metrics. Hardware experiments are not pooled with simulation.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://capgym.github.io/data/model_data.json";
 const board: Leaderboard = {

@@ -1,8 +1,7 @@
 // HumanEvalPack: use Synthesizing Code multilingual pass@1, the task this record describes.
 // Fixing and explaining scores remain metrics. Read literal arrays without executing the notebook.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/bigcode-project/octopack/HEAD/visuals/plots.ipynb";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

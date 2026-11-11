@@ -1,7 +1,7 @@
 // Archived official OmniAI page and original CDN chart labels, transcribed 2026-11-10.
 // Costs are per 1,000 pages, not per benchmark document. Global average tokens are not model-specific.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const ROWS: LeaderboardRow[] = [
   {
     "model": "OmniAI (OCR service)",

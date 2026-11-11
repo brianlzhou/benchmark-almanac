@@ -1,7 +1,7 @@
 // FinStepBench publishes three separate finance task suites. Each child reads one suite score, retaining reasoning effort.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { text, tables, num, jsonAfter } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { text } from '../html.ts';
 
 const clean = (s: string) => text(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '')).trim();
 function markdownTables(source: string): string[][][] {

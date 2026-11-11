@@ -3,7 +3,7 @@
 // Average is the score. Read all serialized models, not only the UI-selected subset.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { num, tables, nextFlight, jsonAfter } from '../lib/html.ts';
+import { nextFlight, jsonAfter } from '../lib/html.ts';
 
 const URL = 'https://llm-aggrefact.github.io/';
 

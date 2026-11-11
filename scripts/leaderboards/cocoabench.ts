@@ -1,9 +1,8 @@
 // CocoaBench: overall published task score from official chart data.
 // Existing agents and Cocoa-Agent configurations retain their harness. Unknown product backbones remain unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://cocoabench.github.io/assets/js/chart.js";
 const board: Leaderboard = {

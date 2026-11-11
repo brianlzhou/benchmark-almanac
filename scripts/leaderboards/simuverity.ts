@@ -1,7 +1,7 @@
 // SimuVerity overall score for each agent system. Delivery, executable, and grader-pass percentages remain metrics; the named agent is the harness.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://simuverity.github.io/SimuVerity/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

@@ -3,7 +3,7 @@
 // nonmaskedSollen is the source's "Tokens used" axis, kept as a metric because its precise
 // accounting is not specified as average output tokens per task in the article.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai-cov8.ts';
+import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/introducing-genebench-pro/';
 const board: Leaderboard = {
   benchmark: 'genebench-pro', url: PAGE, feed: `${PAGE} (embedded passrate and scaling charts)`, terms: OPENAI_TERMS,

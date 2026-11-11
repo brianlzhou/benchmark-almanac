@@ -1,9 +1,9 @@
 // Multi-LCB: the main table’s published Avg pass@1 across twelve languages.
 // Language scores remain metrics. The paper’s reasoning effort labels are whole-suite configurations.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2606.20517";
 const board: Leaderboard = {

@@ -1,8 +1,8 @@
 // KRIS-Bench image editing, overall score on the published 0–100 scale.
 // Retains factual, conceptual and procedural knowledge metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://yongliang-wu.github.io/kris_bench_project_page/";
 const board: Leaderboard = {

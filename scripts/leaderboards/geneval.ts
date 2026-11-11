@@ -1,8 +1,8 @@
 // GenEval: the official main-results table reports overall success as a 0–1 fraction. Multiply by
 // 100 for the benchmark percentage unit. Keep the published CLIP retrieval baseline as its own system.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/djghosh13/geneval/main/README.md";
 const board: Leaderboard = {

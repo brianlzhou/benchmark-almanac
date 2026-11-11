@@ -4,7 +4,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAfter } from '../lib/html.ts';
-import { SURGE_TERMS, SURGE_ALIASES, surgeRows, surgeName } from '../lib/boards/surgehq-cov2.ts';
+import { SURGE_TERMS, SURGE_ALIASES, surgeRows, surgeName } from '../lib/boards/surgehq.ts';
 const PAGE='https://surgehq.ai/benchmarks/chartography';
 interface Point {label:string;x:number;y:number}
 export default {

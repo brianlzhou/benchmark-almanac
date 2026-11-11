@@ -1,7 +1,7 @@
 // OdysseyArena-Lite defines four environment task families. Read avg@4, keeping pass@4 as a metric. Trading returns retain native percentage units.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { num, jsLiteral } from '../html.ts';
 
 const FEED = "https://yayayacc.github.io/Odyssey-Home/";
 const board: Leaderboard = {

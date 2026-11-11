@@ -2,8 +2,8 @@
 // The comparison table repeats the same runs, so it supplies reference metrics only.
 // Accuracy and standard error are converted from fractions to percentages.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://ukgovernmentbeis.github.io/inspect_evals/evals/macbench/index.html";
 const board: Leaderboard = {

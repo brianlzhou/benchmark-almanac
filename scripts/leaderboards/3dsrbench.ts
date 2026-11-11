@@ -2,8 +2,8 @@
 // Common/uncommon viewpoints are subscores, retained as metrics. The conflicting dataset-card table
 // is excluded so each model has one published evaluation protocol, not competing source settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://3dsrbench.github.io/";
 const board: Leaderboard = {

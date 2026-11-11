@@ -2,8 +2,8 @@
 // Preserve effort, harness, cost and tokens; older benchmark revisions never compete.
 // Reads serialized live page data, retaining task costs, output tokens and uncertainty.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { nextFlight } from '../lib/html.ts';
 
 const FEED = "https://www.reactbench.com/";
 const board: Leaderboard = {

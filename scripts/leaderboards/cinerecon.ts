@@ -3,8 +3,7 @@
 // representation settings"; app.js defines r.overall=(r.camera+r.static+r.dynamic)/3.
 // Preserve this published formula, effort and per-video generation cost.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://cinerecon.github.io/assets/results.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

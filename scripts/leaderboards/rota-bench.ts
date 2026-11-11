@@ -1,7 +1,6 @@
 // RoTA-Bench success percentages on the frozen 100-task test and separate pilot. Paper API costs use uncached list prices, including agent workflows; output tokens are per completed task.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/MAC-AutoML/RoTA-Bench/main/website/assets/paper-data.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

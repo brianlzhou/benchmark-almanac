@@ -1,7 +1,6 @@
 // MMLongBench-Doc: the official Space JSON reports accuracy in percent. Model details retain the visual detail setting, modality, and parameter count. Monthly release labels are not treated as exact evaluation dates.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc/resolve/main/leaderboard_data.json";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

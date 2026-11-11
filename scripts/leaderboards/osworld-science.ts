@@ -1,9 +1,8 @@
 // OSWorld-Science: the latest release, all-domain partial score is the headline percentage.
 // Domain scores are metrics; reasoning is the configuration. Costs and output tokens are per task.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://discoailab.github.io/osworld-science-page/static/js/osciData.js";
 const board: Leaderboard = {

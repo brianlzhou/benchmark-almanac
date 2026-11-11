@@ -5,8 +5,8 @@
 // We read that published score directly. Full-precision tooltip values avoid rounding from the displayed cells.
 // Overall Cost is the board's category-macro-averaged cost per problem. Multi-model agents retain their system name.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://allenai-asta-bench-leaderboard.hf.space/config";
 
 const board: Leaderboard = {

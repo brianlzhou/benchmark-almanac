@@ -2,8 +2,8 @@
 // Preserve frame budgets as settings and
 // category scores as metrics. Model cells include a separate affiliation, which is not part of the name.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://motion-bench.github.io/";
 const board: Leaderboard = {

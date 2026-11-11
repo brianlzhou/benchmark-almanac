@@ -1,7 +1,7 @@
 // KoBALT: the dataset card reports average accuracy as a fraction. Convert accuracy to percent and retain the five domain accuracies on the same percentage scale.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

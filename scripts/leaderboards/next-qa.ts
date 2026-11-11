@@ -1,8 +1,8 @@
 // NExT-QA: validation-set accuracy in percent for GloVe and BERT-FT text representations. Preserve
 // causal, temporal and descriptive question accuracy. The human reference is excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/doc-doc/NExT-QA/main/README.md";
 const board: Leaderboard = {

@@ -1,9 +1,8 @@
 // RoboGate reports real-inference success on its 68-scenario industrial Pick&Place protocol.
 // Rates are fractions converted to percentages; scripted reference policies are excluded.
 // These qualified zero-success runs do not imply general policy inability.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/liveplex-cpu/robogate-leaderboard/main/leaderboard.json";
 const board: Leaderboard = {

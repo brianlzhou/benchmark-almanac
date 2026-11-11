@@ -1,8 +1,8 @@
 // CrossVid: O.Avg is overall accuracy in percent on cross-video reasoning.
 // Frame counts and C.Avg, T.Avg, M.Avg and CCQA metrics stay attached to each result.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/chuntianli666/CrossVid/HEAD/README.md";

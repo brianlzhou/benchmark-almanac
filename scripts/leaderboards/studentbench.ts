@@ -1,2 +1,2 @@
-import {studentBoard} from '../lib/boards/studentbench-cov6.ts';
+import {studentBoard} from '../lib/boards/studentbench.ts';
 export default studentBoard('studentbench','learning');

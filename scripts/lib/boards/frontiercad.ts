@@ -1,7 +1,7 @@
 // FrontierCAD uses separate parts and assembly test sets. Each child reads the published native 0-1 mean. Original evaluation drawings remain identified.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText, fetchJson, parseCsv } from '../util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../html.ts';
+import { fetchText } from '../util.ts';
+import { jsonAfter, nextFlight } from '../html.ts';
 
 const FEED = "https://normal.ai/research/frontiercad";
 const board: Leaderboard = {

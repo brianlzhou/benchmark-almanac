@@ -1,8 +1,7 @@
 // Multi-SWE-bench mini: All-language resolvedRate on the 400-task mini set, as a percent.
 // Only the All view supplies rows. Difficulty slices remain metrics. Exact repeated entries are deduplicated.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json";
 const board: Leaderboard = {

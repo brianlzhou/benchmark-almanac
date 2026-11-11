@@ -1,9 +1,8 @@
 // CG-Bench: long-video MCQ accuracy is the headline percentage, distinct from clue-only accuracy.
 // Grounding, credibility and open-ended scores remain metrics, with both frame budgets retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://cg-bench.github.io/leaderboard/";
 const board: Leaderboard = {

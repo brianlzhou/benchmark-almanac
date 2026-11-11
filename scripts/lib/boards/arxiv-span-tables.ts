@@ -1,4 +1,4 @@
-// Readers for the H2 paper tables. Expand author row and column spans before selecting a score.
+// Readers for arXiv paper tables. Expand author row and column spans before selecting a score.
 // Ambiguous provider families remain unlisted rather than inheriting a later model snapshot.
 import { tables as htmlTables, text, type Cell } from '../html.ts';
 export function paperTables(html:string):Cell[][][] {
@@ -25,13 +25,13 @@ export function uncertain(model: string): string {
  return /^(?:gpt[- ]?4o(?:[- ]mini)?|gpt[- ]?4(?:[- ]turbo)?|gpt[- ]?3[.]5(?:[- ]turbo)?|gemini[- ]?(?:pro[- ]?)?1[.]5(?:[- ]?(?:pro|flash))?|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5(?:[- ]?sonnet)?|deepseek[- ]?(?:v3|r1)|claude|qwen[- ]max)$/i.test(model.trim()) ? `${model.trim()} (snapshot unspecified)` : model.trim();
 }
 export function checked(rows: LeaderboardRow[], min=1): LeaderboardRow[] {
- if(rows.length<min) throw new Error(`H2 source changed: only ${rows.length} rows`);
+ if(rows.length<min) throw new Error(`Paper table changed: only ${rows.length} rows`);
  const seen=new Set<string>();
  for(const r of rows) {
-  if(!r.model || !Number.isFinite(r.score)) throw new Error('H2 source has an invalid score');
+  if(!r.model || !Number.isFinite(r.score)) throw new Error('Paper table has an invalid score');
   r.model=uncertain(r.model.replace(/\s*\[\s*\d+(?:\s*,\s*\d+)*\s*\]/g,'').replace('Claude-3.5-Sonnet2','Claude-3.5-Sonnet'));
   const k=JSON.stringify([r.model,r.setting,r.harness]);
-  if(seen.has(k)) throw new Error(`H2 duplicate configuration: ${k}`);
+  if(seen.has(k)) throw new Error(`Paper table has a duplicate configuration: ${k}`);
   seen.add(k);
  }
  return rows;

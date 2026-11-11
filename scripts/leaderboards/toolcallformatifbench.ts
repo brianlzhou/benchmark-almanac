@@ -1,7 +1,7 @@
 // Qwen's maker-published ToolcallFormatIFBench panel, transcribed 2026-11-10.
 // Only this internal benchmark panel is imported. Other panels in the source image are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = 'https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen3.6/Figures/qwen3.6_max_preview_score.png';
 const ROWS: LeaderboardRow[] = [
   {

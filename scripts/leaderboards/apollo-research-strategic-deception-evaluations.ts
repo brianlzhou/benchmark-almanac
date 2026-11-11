@@ -3,9 +3,9 @@
 // AS names identify research-trained variants, not the later production releases.
 // These static paper results will not gain new models automatically.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
-import { paperTables as tables, grid, checked, uncertain } from '../lib/boards/arxiv-h2.ts';
+import { fetchText } from '../lib/util.ts';
+import { text } from '../lib/html.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2509.15541";
 const board: Leaderboard = {

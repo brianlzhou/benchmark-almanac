@@ -1,4 +1,4 @@
-// Readers for the Part T paper tables. Serialize these arXiv requests and honor its 15-second crawl delay.
+// Readers for arXiv paper tables. Serialize these arXiv requests and honor its 15-second crawl delay.
 import { fetchText } from '../util.ts';
 import { tables } from '../html.ts';
 

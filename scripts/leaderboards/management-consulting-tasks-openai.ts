@@ -1,7 +1,7 @@
 // OpenAI's launch table publishes Management Consulting Tasks accuracy in percent.
 // Select this exact row; other evaluations in the same table are not imported.
 import type { Leaderboard } from './types.ts';
-import { openaiHtml } from '../lib/boards/openai-cov8.ts';
+import { openaiHtml } from '../lib/boards/openai.ts';
 import { tables, num } from '../lib/html.ts';
 const URL='https://openai.com/index/gpt-5-6/';
 const board:Leaderboard={benchmark:'management-consulting-tasks-openai',url:URL,feed:URL,

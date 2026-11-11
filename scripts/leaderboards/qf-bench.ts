@@ -1,8 +1,6 @@
 // QF-Bench V11 CLI pass@1 percentage. Discover the current app bundle and parse its data without execution; preserve pass@3, task count, date and harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
 import {jsLiteral} from '../lib/html.ts';
 const FEED = "https://qfbench.com/";
 const board: Leaderboard = {

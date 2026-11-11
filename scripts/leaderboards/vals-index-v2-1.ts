@@ -2,9 +2,6 @@
 // The shared Vals reader also preserves available output-token usage, latency and confidence intervals.
 // The chart reproduces the board’s accuracy-versus-cost comparison.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
 import { valsRows, VALS_ALIASES } from './vals-index.ts';
 const FEED = "https://www.vals.ai/benchmarks/vals_index_v2_1";
 const board: Leaderboard = {

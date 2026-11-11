@@ -1,9 +1,7 @@
 // MAEB v1: default Mean(Task), scaled to the displayed 0-to-100 score.
 // The current API renamed the beta benchmark. Only published whole-benchmark aggregates qualify. Category scores remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MAEB%28v1%29/scores";
 const board: Leaderboard = {

@@ -3,7 +3,7 @@
 // Keep only the models in that published overview. Category scores remain metrics, and linear probes are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text, jsLiteral } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://tttonyalpha.github.io/act2answer/";
 const board: Leaderboard = {
   benchmark: "act2answer", url: "https://tttonyalpha.github.io/act2answer/", feed: FEED,

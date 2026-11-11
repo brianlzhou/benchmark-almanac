@@ -4,13 +4,12 @@
 // These are static paper results and will not refresh with new models. The anonymous repository disallows
 // automated reading, but arXiv permits this separately hosted paper's HTML path.
 import type { Leaderboard } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2606.24819';
 const AMBIGUOUS = /^(GPT |Gemini |Qwen 3$|DeepSeek 3\.1$|Grok 4\.20$)/;
 const board: Leaderboard = {
   benchmark: 'helpbench', url: FEED, feed: FEED, terms: PAPER_TERMS,
-  aliases: { 'DeepSeek 3.2': 'deepseek-v3-2' },
   aliases: { 'DeepSeek 3.2': 'deepseek-v3-2' },
   async fetch() {
     const all = await paperTables(FEED);

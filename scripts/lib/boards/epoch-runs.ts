@@ -2,10 +2,10 @@
 // Headline scores are fractions. Token fields are whole-run totals, so they are not output tokens per task.
 import { fetchText, parseCsv } from '../util.ts';
 import type { LeaderboardRow } from '../../leaderboards/types.ts';
-export const EPOCH_COV1_FEED = 'https://epoch.ai/data/benchmarks.csv';
-export async function epochCov1Rows(task: string): Promise<LeaderboardRow[]> {
+export const EPOCH_RUNS_FEED = 'https://epoch.ai/data/benchmarks.csv';
+export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
   const rows: LeaderboardRow[] = [];
-  for (const r of parseCsv(await fetchText(EPOCH_COV1_FEED))) {
+  for (const r of parseCsv(await fetchText(EPOCH_RUNS_FEED))) {
     if (r.task !== task || !r['Best score (across scorers)']?.trim()) continue;
     const score = Number(r['Best score (across scorers)']);
     if (!Number.isFinite(score) || score < 0 || score > 1) throw new Error(`Invalid Epoch fraction for ${task}`);

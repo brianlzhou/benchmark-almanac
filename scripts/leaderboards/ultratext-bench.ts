@@ -1,8 +1,7 @@
 // UltraText Bench reported composite ratings on a 0–100 score scale.
 // The bilingual composite is the score. Language/difficulty slices and dimensions are metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/LINs-lab/UltraText_Bench/main/data/leaderboard.json";
 const board: Leaderboard = {

@@ -1,7 +1,7 @@
 // Collaborative Intelligence 4.0.0 scores team tests on scenarios passed alone, averaged over eight dimensions. Preserve high versus minimum effort, public/private splits, confidence intervals and dimension scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://zou-group.github.io/collaborative-intelligence/data/leaderboard_v4.json";
 const board: Leaderboard = {
   benchmark: "collaborative-intelligence-benchmark", url: "https://zou-group.github.io/collaborative-intelligence/", feed: FEED,

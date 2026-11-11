@@ -3,10 +3,8 @@
 // The current Qodo page publishes whole-benchmark F1 for seven code review systems. Backbone models are unspecified. This source is Qodo, not Fireworks.
 // Two separate visual passes agreed. A changed SHA-256 requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png";
 const SHA256 = "e8e529079d799937bfe257905fac73260ac5b66c641df24a20c54808a1aa5b96";
 const ROWS: LeaderboardRow[] = [

@@ -5,7 +5,7 @@
 // repositories, not a model score-versus-cost chart, so it is not reproduced as a board chart.
 // These are static paper results and will not refresh with new models.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-round3-t.ts';
+import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const FEED = 'https://arxiv.org/html/2508.18993';
 const NAMES: Record<string, string> = {

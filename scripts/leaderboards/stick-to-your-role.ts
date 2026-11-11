@@ -1,9 +1,7 @@
 // Stick To Your Role: published headline Ordinal (Win rate), on its 0-to-1 scale.
 // Cardinal score and the five stability statistics remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/flowers-team/StickToYourRoleLeaderboard/raw/main/static/leaderboard.csv";
 const board: Leaderboard = {

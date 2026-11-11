@@ -1,9 +1,8 @@
 // BRIGHT: the leaderboard Score, mean nDCG@10 across all 12 datasets.
 // Research retrievers remain unlisted when absent from the model registry. The score already uses the published 0-to-100 scale.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://brightbenchmark.github.io/";
 const board: Leaderboard = {

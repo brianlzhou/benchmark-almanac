@@ -1,10 +1,8 @@
 // UniREditBench: the main in-domain table reports Overall across real-world and game-world edits. Category averages remain metrics.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2511.01295";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "unireditbench",
   url: "https://maplebb.github.io/UniREditBench/",

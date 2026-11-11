@@ -1,9 +1,9 @@
 // CMMMU: use the published Test (11K) accuracy percentage.
 // Validation is a smaller subset and remains a secondary metric when present.
 // Frequent-choice and random-choice baselines are excluded; configuration markers remain in model labels.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/CMMMU-Benchmark/CMMMU/main/README.md";
 const board: Leaderboard = {

@@ -1,10 +1,9 @@
 // CC-Bench-V2: Repo Exploration Pass@1, in percent. Other suite components are excluded.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2602.15763";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "cc-bench-v2-repo-exploration-zai",
   url: "https://raw.githubusercontent.com/zai-org/GLM-5/main/README.md",

@@ -1,8 +1,8 @@
 // SGP-Bench: use Overall accuracy from the default visible SVG table, in percent.
 // The CAD table is initially hidden. Retain category scores as metrics; exclude random-choice references.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://sgp-bench.github.io/";
 const board: Leaderboard = {

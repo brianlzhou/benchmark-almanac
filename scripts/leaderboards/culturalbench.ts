@@ -1,9 +1,8 @@
 // CulturalBench: Hard average accuracy, the official app’s initial display.
 // The app sets display_leaderboard("CulturalBench_Hard", "average") as its default.
 // Regional diagnostics and the Easy view do not become independent rows.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/kellycyy/CulturalBench/raw/main/data/CulturalBench_Hard_average.csv";
 const board: Leaderboard = {

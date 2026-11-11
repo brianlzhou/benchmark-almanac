@@ -3,10 +3,8 @@
 //  Two independent visual passes agreed on every model row. Human and random references are excluded.
 //  fetch() checks the SHA-256 before returning the transcribed rows. A changed image requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/CUHK-ARISE/VisFactor/main/assets/leaderboard.png (transcribed 2026-11-08)";
-import { checkedImageRows } from '../lib/boards/transcribed-h1.ts';
+import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://raw.githubusercontent.com/CUHK-ARISE/VisFactor/main/assets/leaderboard.png";
 const SHA256 = "a5b2d97187ee46510e2a2ac469e6740afefc9e1e16af67be97767b71e3905383";
 const ROWS: LeaderboardRow[] = [

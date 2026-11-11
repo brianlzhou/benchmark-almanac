@@ -2,10 +2,9 @@
 //  Model-size continuation rows inherit their named family. Four subsets and two language totals remain metrics.
 //  These are static paper results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2405.04520";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "naturalcodebench",
   url: "https://github.com/THUDM/NaturalCodeBench",

@@ -1,9 +1,9 @@
 // ScienceBoard: the main board’s Acc column covers all six scientific domains.
 // Input modality and the published protocol distinguish whole-suite runs.
 // The separate SeeAct board omits domains and is excluded.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://qiushisun.github.io/ScienceBoard-Home/";
 const board: Leaderboard = {

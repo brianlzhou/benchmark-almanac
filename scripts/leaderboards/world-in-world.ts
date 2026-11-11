@@ -1,8 +1,8 @@
 // World-in-World: the published whole-benchmark task success percentage.
 // Post-training and zero-shot execution are separate configurations. Generation quality remains a metric.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://world-in-world.github.io/subpages/leaderboard.html";
 const board: Leaderboard = {

@@ -1,8 +1,8 @@
 // ParallelKernelBench: the published Total row gives solved counts over all 87 problems.
 // Use Total pass@1 as a percentage. Keep pass@3, faster-than-reference counts and category pass@1 in metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://www.together.ai/blog/parallelkernelbench";
 const board: Leaderboard = {

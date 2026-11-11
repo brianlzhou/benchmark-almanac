@@ -2,10 +2,8 @@
 // The retrieval variant uses the same full benchmark. Gemini-1.5 lacks an exact model specification.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2406.07230";
-import { paperRows, paperTables, paperModel } from '../lib/boards/arxiv-h1.ts';
+import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "mm-niah",
   url: "https://github.com/OpenGVLab/MM-NIAH",

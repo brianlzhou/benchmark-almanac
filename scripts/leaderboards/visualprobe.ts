@@ -1,8 +1,8 @@
 // VisualProbe: hard-split accuracy is the headline percentage; medium and easy remain metrics.
 // Only rows with an actual VisualProbe score are imported. Other benchmarks in the comparison table are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/Mini-o3/Mini-o3/HEAD/README.md";

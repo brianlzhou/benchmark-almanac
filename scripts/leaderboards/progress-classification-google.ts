@@ -1,5 +1,5 @@
 // Printed labels visually verified on 2026-11-10. Fail closed if the source image changes.
 import type { Leaderboard } from './types.ts';
-import { chartRows } from '../lib/boards/verified-chart-h2.ts';
+import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const board:Leaderboard={benchmark:'progress-classification-google',url:'https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/',feed:"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Progress_Classification_Comparis.width-1200.format-webp.webp",terms:'Public Google research results. The Almanac credits Google and links the source.',async fetch(){return chartRows("https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Progress_Classification_Comparis.width-1200.format-webp.webp", "6e6b112d74dc5802552c23acc00ce7a687fe5c5a17e1e1a1ea3839f8de4172ed", [{"model": "Claude Opus 5", "score": 37.1}, {"model": "GPT 5.6 Sol", "score": 46.2}, {"model": "Gemini Robotics ER 1.6", "score": 42.7}, {"model": "Gemini 3.6 Flash", "score": 43.9}, {"model": "Gemini Robotics ER 2", "score": 57.4}]);}};
 export default board;

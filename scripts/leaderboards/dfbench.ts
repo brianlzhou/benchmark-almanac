@@ -2,8 +2,8 @@
 // Differential-analysis recall is a secondary metric, never a competing row.
 // Parallel HTML table fragments share model/effort rows; retain task costs and scope/category metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://depthfirst.com/research/dfbench";
 const board: Leaderboard = {

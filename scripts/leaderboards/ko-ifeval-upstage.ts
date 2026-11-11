@@ -1,8 +1,6 @@
 // The official Ko-LLM reader defines Ko-IFEval as "np.mean([ko_ifeval["prompt_level_strict_acc,none"], ko_ifeval["inst_level_strict_acc,none"]])" times 100. This reader follows that plain mean. It discovers every result file from the current repository manifest. It keeps the latest result per model, precision, and shot count. The archive is large and requests are paced at two seconds.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/api/datasets/open-ko-llm-leaderboard/results";
 const board: Leaderboard = {

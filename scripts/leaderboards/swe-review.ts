@@ -1,7 +1,7 @@
 // SWE-Review evaluates code-review performance. Read its named row from the MiniMax-M2.1 release table, in percent, without mixing neighboring coding benchmarks.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, num, text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 function markdownTables(source: string): string[][][] {
   const out: string[][][] = []; let current: string[][] = [];

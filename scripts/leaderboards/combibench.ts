@@ -2,8 +2,8 @@
 // Both solution-prompt configurations cover the same full set. The board reports pass@16 throughout.
 // Read the two named inline arrays as data without executing the page scripts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://moonshotai.github.io/CombiBench/leaderboard.html";
 const board: Leaderboard = {

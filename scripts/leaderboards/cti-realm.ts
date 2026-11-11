@@ -1,7 +1,7 @@
 // CTI-REALM published mean reward, converted from 0–1 to percent. Keep standard error and confidence intervals on the percentage scale.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables, text } from '../lib/html.ts';
 
 const FEED = "https://ukgovernmentbeis.github.io/inspect_evals/evals/cti_realm/index.html";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

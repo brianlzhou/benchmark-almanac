@@ -1,8 +1,8 @@
 // Qwen-Image-Bench: published Overall is the headline score on the native scale.
 // The five scoring dimensions remain metrics on that overall row.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, tables, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 import {mdTables} from './big-bench-extra-hard.ts';
 const FEED = "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/raw/main/README.md";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.

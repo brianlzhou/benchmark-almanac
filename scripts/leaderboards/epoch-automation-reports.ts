@@ -6,7 +6,7 @@
 // Individual published task examples are excluded from benchmark scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { num, text } from '../lib/html.ts';
+import { num } from '../lib/html.ts';
 
 const PAGE = 'https://epoch.ai/benchmarks/epoch-automation-reports';
 

@@ -1,7 +1,7 @@
 // HappyWorld Embodied: separate vote pool and Elo ranking.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://aiarena.alibaba-inc.com/sla/arena/happyworld?isInternalSite=false&isIframe=true";
 const board: Leaderboard = {

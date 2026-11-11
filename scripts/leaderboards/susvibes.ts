@@ -2,8 +2,7 @@
 // Python is the complete original benchmark, not a language subset. Agent frameworks remain harnesses.
 // The importer uses published results and does not copy contact details.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://leililab.github.io/susvibes-leaderboard/submissions/index.json";
 const board: Leaderboard = {

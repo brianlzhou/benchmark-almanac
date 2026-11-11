@@ -1,9 +1,8 @@
 // BABE paper Table 2 publishes Average Score across the full benchmark. The HTML encodes its table with spans, which this reader converts to table tags. These static paper rows will not refresh. Strong and weak correlation groups remain metrics. Source model labels remain intact when snapshots are ambiguous.
 // Azure Claude mode suffixes become settings. Explicit GPT date codes map to their matching snapshots.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
+import { fetchText } from '../lib/util.ts';
+import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2602.05857";
 const board: Leaderboard = {

@@ -2,9 +2,9 @@
 // The official bundle sets DEFAULT_BATTLE_TAB to worldModel. Its Elo is the headline score.
 // Embodied and spatial reconstruction are separate boards and are not additional benchmark rows.
 // The importer discovers the current application bundle from the page on every refresh.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral } from '../lib/html.ts';
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://aiarena.alibaba-inc.com/sla/arena/happyworld?isInternalSite=false&isIframe=true";
 const board: Leaderboard = {

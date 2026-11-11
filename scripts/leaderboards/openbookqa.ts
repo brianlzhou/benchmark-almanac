@@ -1,8 +1,8 @@
 // OpenBookQA: test accuracy averaged over five runs is the headline score, in percent.
 // Both no-knowledge baselines and knowledge-enhanced readers remain separate, with best-run accuracy and test deviation.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { num, text, tables, jsonAfter } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num, tables } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/allenai/OpenBookQA/HEAD/README.md";

@@ -2,8 +2,8 @@
 // settings. Keep v1.1 AGIEval-all averages; language averages are metrics. Exclude v1.0.
 // Undated API names are marked unspecified so the resolver cannot assign a later snapshot.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { num } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/ruixiangcui/AGIEval/main/README.md";
 const board: Leaderboard = {

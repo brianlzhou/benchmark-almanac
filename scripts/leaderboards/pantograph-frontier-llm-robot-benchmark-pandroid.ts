@@ -3,8 +3,8 @@
 // Individual manipulation tasks remain metrics on the overall row.
 // The shared harness has a 20-minute or 96-turn budget. Human references are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson, parseCsv } from '../lib/util.ts';
-import { tables, num, text, jsonAfter, jsLiteral, nextFlight } from '../lib/html.ts';
+import { fetchText } from '../lib/util.ts';
+import { jsonAfter, nextFlight } from '../lib/html.ts';
 
 const FEED = "https://pantograph.com/journal/vlm-harness";
 const board: Leaderboard = {
