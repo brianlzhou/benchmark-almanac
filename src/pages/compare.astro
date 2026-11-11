@@ -1,0 +1,714 @@
+---
+// Compare: two to four models on every benchmark all of them have a score on. The data comes from
+// compare-data.ts, the math and markup from compare.ts, so the server render and the page script draw the same
+// thing. The server draws the default picks. A link with ?m= draws its own picks once their files load.
+import Base from '../layouts/Base.astro';
+import { compareIndex, compareFile, defaultPicks } from '../lib/compare-data.ts';
+import { compute, headline, sub, chips, winsList, table, legend, MAX_PICKS, type ModelFile } from '../lib/compare.ts';
+
+const idx = compareIndex();
+const ids = defaultPicks();
+const files = ids.map((id) => compareFile(id)).filter((f): f is ModelFile => !!f);
+const picks = files.map((f) => ({ id: f.id, name: f.name, lab: f.lab }));
+const res = compute(files, 'all', 'labs');
+const names = picks.map((p) => p.name);
+const SORT_HOW = {
+  labs: 'Benchmarks the most labs report in their launch posts and system cards come first.',
+  cited: 'Benchmarks that more of these models’ own launch posts and system cards report come first.',
+  gap: 'The widest spread between the best and worst model comes first. Percentages count in points, and other units as a share of the test’s whole range.',
+  name: 'A to Z.',
+};
+---
+
+<Base
+  title="Compare models"
+  description="Pick two to four AI models and see every benchmark all of them have a score on, side by side, with the leader of each test and the gaps between them."
+>
+  <div class="page cmp-root" data-cmp data-default={JSON.stringify(ids)} data-sort-how={JSON.stringify(SORT_HOW)}>
+    <script is:inline>
+      // Before the first paint: a link with its own picks hides the default view until its files load, so the
+      // default never flashes in its place. The page script removes the mark once it has drawn.
+      if (/[?&](m|src|sort)=/.test(location.search)) document.currentScript.parentElement.classList.add('cmp-wait');
+    </script>
+    <header class="head">
+      <h1>Compare models</h1>
+      <p class="lede">
+        Pick two to four models. The table lists every benchmark all of them have a score on and leaves out any test one of them lacks, so each row compares like with like.
+      </p>
+    </header>
+
+    <section class="cmp-controls" data-wait>
+      <div class="cmp-pick">
+        <h2 class="cmp-label" id="cmp-models">Models</h2>
+        <div class="cmp-box">
+          <ul class="cmp-chips" aria-labelledby="cmp-models" data-chips set:html={chips(picks, idx.labs).replace(/<button type="button" class="cmp-x"/g, '<button type="button" class="cmp-x" disabled')} />
+          <input
+            class="cmp-q"
+            type="search"
+            placeholder={picks.length >= MAX_PICKS ? 'Remove a model to add another' : 'Add a model'}
+            autocomplete="off"
+            spellcheck="false"
+            role="combobox"
+            aria-expanded="false"
+            aria-controls="cmp-list"
+            aria-autocomplete="list"
+            aria-label="Add a model"
+            data-q
+            disabled
+          />
+          <ul id="cmp-list" class="cmp-list" role="listbox" aria-label="Matching models" hidden data-list></ul>
+        </div>
+        <p class="cmp-hint" data-hint>Up to {MAX_PICKS} of the {idx.models.length.toLocaleString('en-US')} models with scores here.</p>
+      </div>
+      <div class="cmp-switches">
+        <div class="cmp-sw">
+          <h2 class="cmp-label" id="cmp-src">Scores from</h2>
+          <div class="seg cmp-seg" role="radiogroup" aria-labelledby="cmp-src">
+            <label><input type="radio" name="cmp-src" value="ind" disabled />Independent runs</label>
+            <label><input type="radio" name="cmp-src" value="lab" disabled />Labs' own numbers</label>
+            <label><input type="radio" name="cmp-src" value="all" checked disabled />Both</label>
+          </div>
+        </div>
+        <div class="cmp-sw">
+          <h2 class="cmp-label" id="cmp-sort">Sort by</h2>
+          <div class="seg cmp-seg" role="radiogroup" aria-labelledby="cmp-sort">
+            <label><input type="radio" name="cmp-sort" value="labs" checked disabled />Most reported</label>
+            <label><input type="radio" name="cmp-sort" value="cited" disabled />Cited by these models</label>
+            <label><input type="radio" name="cmp-sort" value="gap" disabled />Biggest gap</label>
+            <label><input type="radio" name="cmp-sort" value="name" disabled />Name</label>
+          </div>
+        </div>
+      </div>
+      <p class="cmp-how" data-sort-text>{SORT_HOW.labs}</p>
+    </section>
+
+    <section class="cmp-out" aria-live="polite" data-wait data-out>
+      <div class="sh">
+        <h2 data-head>{headline(res, names)}</h2>
+        <p data-sub>{sub(res)}</p>
+      </div>
+      <div data-wins set:html={winsList(res, picks, idx.labs)} />
+      <div class="cmp-table" data-table set:html={table(res, picks, idx.labs)} />
+      <p class="cmp-legend" data-legend set:html={legend(res)} />
+      <div class="cmp-share">
+        <button type="button" class="cmp-small" data-copy disabled>Copy link to this comparison</button>
+        <span class="cmp-status" role="status" data-status></span>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { compute, headline, sub, chips, winsList, table, legend, readState, writeState, esc, labMark, MAX_PICKS, type ModelIndex, type ModelFile, type State, type Source, type SortKey, type Pick } from '../lib/compare.ts';
+
+  const root = document.querySelector<HTMLElement>('[data-cmp]')!;
+  const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const defaults: string[] = JSON.parse(root.dataset.default ?? '[]');
+  const SORT_HOW: Record<SortKey, string> = JSON.parse(root.dataset.sortHow ?? '{}');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const shown = () => root.classList.remove('cmp-wait');
+
+  async function getJson<T>(url: string): Promise<T> {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(String(r.status));
+    return r.json() as Promise<T>;
+  }
+
+  async function main() {
+    let idx: ModelIndex;
+    try {
+      idx = await getJson<ModelIndex>('/compare/models.json');
+    } catch {
+      shown();
+      $('[data-status]').textContent = 'The model list did not load. Reload the page to try again.';
+      return;
+    }
+    const byId = new Map(idx.models.map((m) => [m[0], m]));
+    const fallback: State = { m: defaults.filter((id) => byId.has(id)), src: 'all', sort: 'labs' };
+    let st = readState(location.search, fallback, (id) => byId.has(id));
+    const cache = new Map<string, ModelFile>();
+    let showAll = false;
+    let seq = 0;
+
+    async function load(ids: string[]): Promise<boolean> {
+      const need = ids.filter((id) => !cache.has(id));
+      if (!need.length) return true;
+      try {
+        const got = await Promise.all(need.map((id) => getJson<ModelFile>(`/compare/m/${encodeURIComponent(id)}.json`)));
+        for (const f of got) cache.set(f.id, f);
+        return true;
+      } catch {
+        $('[data-status]').textContent = 'Some scores did not load. Reload the page to try again.';
+        return false;
+      }
+    }
+
+    const pickOf = (id: string): Pick => {
+      const m = byId.get(id)!;
+      return { id, name: m[1], lab: m[2] };
+    };
+
+    // ---- render ------------------------------------------------------------------------------------
+    function renderPicks() {
+      $('[data-chips]').innerHTML = chips(st.m.map(pickOf), idx.labs);
+      const q = $<HTMLInputElement>('[data-q]');
+      const full = st.m.length >= MAX_PICKS;
+      q.disabled = full;
+      q.placeholder = full ? 'Remove a model to add another' : st.m.length ? 'Add another model' : 'Add a model';
+      for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-src"]')) r.checked = r.value === st.src;
+      for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-sort"]')) r.checked = r.value === st.sort;
+      $('[data-sort-text]').textContent = SORT_HOW[st.sort] ?? '';
+    }
+
+    function renderOut(glide = false) {
+      const files = st.m.map((id) => cache.get(id)).filter((f): f is ModelFile => !!f);
+      if (files.length !== st.m.length) return;
+      const picks = files.map((f) => ({ id: f.id, name: f.name, lab: f.lab }));
+      const res = compute(files, st.src, st.sort);
+      const box = $('[data-table]');
+      const before = glide && !reduce.matches ? positions(box) : null;
+      $('[data-head]').textContent = headline(res, picks.map((p) => p.name));
+      $('[data-sub]').textContent = sub(res);
+      $('[data-wins]').innerHTML = winsList(res, picks, idx.labs);
+      box.innerHTML = table(res, picks, idx.labs, showAll);
+      $('[data-legend]').innerHTML = legend(res);
+      $('[data-out]').removeAttribute('aria-busy');
+      if (before) play(box, before);
+      else if (glide) fade(box);
+      history.replaceState(null, '', writeState(st));
+    }
+
+    // a sort change: each row glides from where it was, and rows new to the view fade in. Capped at 120 rows.
+    function positions(box: HTMLElement): Map<string, number> {
+      const out = new Map<string, number>();
+      const rows = box.querySelectorAll<HTMLElement>('tbody tr:not([hidden])');
+      for (let i = 0; i < rows.length && i < 120; i++) out.set(rows[i].dataset.id!, rows[i].getBoundingClientRect().top);
+      return out;
+    }
+    function play(box: HTMLElement, before: Map<string, number>) {
+      const rows = box.querySelectorAll<HTMLElement>('tbody tr:not([hidden])');
+      for (let i = 0; i < rows.length && i < 120; i++) {
+        const tr = rows[i];
+        const was = before.get(tr.dataset.id!);
+        const dy = was === undefined ? 0 : was - tr.getBoundingClientRect().top;
+        if (was === undefined) tr.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
+        else if (Math.abs(dy) > 0.5) tr.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: 360, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      }
+    }
+    function fade(box: HTMLElement) {
+      box.animate([{ opacity: 0.4 }, { opacity: 1 }], { duration: 140, easing: 'ease-out' });
+    }
+
+    async function update(glide = false) {
+      const mine = ++seq;
+      renderPicks();
+      $('[data-out]').setAttribute('aria-busy', 'true');
+      const ok = await load(st.m);
+      if (mine !== seq) return;
+      if (!ok) {
+        $('[data-out]').removeAttribute('aria-busy');
+        return;
+      }
+      renderOut(glide);
+    }
+
+    for (const el of root.querySelectorAll<HTMLInputElement | HTMLButtonElement>('[disabled]')) el.disabled = false;
+    const own = location.search && writeState(st) !== writeState(fallback);
+    if (own) await update();
+    else {
+      renderPicks();
+      // the default view is already drawn. Its files load quietly for the first change.
+      load(st.m);
+    }
+    shown();
+
+    // ---- picks, source, sort -----------------------------------------------------------------------
+    const q = $<HTMLInputElement>('[data-q]');
+    function remove(id: string) {
+      st = { ...st, m: st.m.filter((x) => x !== id) };
+      update();
+      q.focus();
+    }
+    root.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const x = t.closest<HTMLButtonElement>('[data-x]');
+      if (x) return remove(x.dataset.x!);
+      if (t.closest('[data-all]')) {
+        showAll = true;
+        const box = $('[data-table]');
+        for (const tr of box.querySelectorAll<HTMLElement>('tr.later')) tr.hidden = false;
+        box.querySelector('[data-all]')?.remove();
+        return;
+      }
+      if (t.closest('[data-copy]')) copy();
+      if (t.closest('.cmp-box') && !t.closest('a,button')) q.focus();
+    });
+    root.addEventListener('change', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.name === 'cmp-src') {
+        st = { ...st, src: t.value as Source };
+        update(true);
+      } else if (t.name === 'cmp-sort') {
+        st = { ...st, sort: t.value as SortKey };
+        update(true);
+      }
+    });
+
+    // ---- search ------------------------------------------------------------------------------------
+    const list = $<HTMLUListElement>('[data-list]');
+    const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const hay = idx.models.map((m) => ` ${norm(`${m[1]} ${idx.labs[m[2]]?.[0] ?? ''} ${m[0]}`)}`);
+    let hits: number[] = [];
+    let active = -1;
+    const when = (d: string) => (d ? `${MONTHS[Number(d.slice(5, 7)) - 1] ?? ''} ${d.slice(0, 4)}`.trim() : '');
+    function find() {
+      const words = norm(q.value).split(' ').filter(Boolean);
+      if (!words.length) return close();
+      const taken = new Set(st.m);
+      hits = [];
+      // the list is in ECI order, so the strongest matching models come first. Names that start with the words lead.
+      const starts: number[] = [];
+      const rest: number[] = [];
+      for (let i = 0; i < hay.length && starts.length < 12; i++) {
+        if (taken.has(idx.models[i][0]) || !words.every((w) => hay[i].includes(` ${w}`) || hay[i].includes(w))) continue;
+        (hay[i].startsWith(` ${words[0]}`) ? starts : rest).push(i);
+      }
+      hits = [...starts, ...rest].slice(0, 12);
+      active = hits.length ? 0 : -1;
+      list.innerHTML = hits.length
+        ? hits
+            .map((i, k) => {
+              const [, name, lab, rel, n] = idx.models[i];
+              const meta = [idx.labs[lab]?.[0], when(rel), `${n.toLocaleString('en-US')} ${n === 1 ? 'benchmark' : 'benchmarks'}`].filter(Boolean).join(', ');
+              return `<li role="option" id="cmp-o${k}" data-i="${i}" aria-selected="${k === active}">${labMark(idx.labs, lab)}<span class="cmp-oname">${esc(name)}</span><span class="cmp-ometa">${esc(meta)}</span></li>`;
+            })
+            .join('')
+        : '<li class="cmp-none" role="presentation">No model with scores matches.</li>';
+      list.hidden = false;
+      q.setAttribute('aria-expanded', 'true');
+      q.setAttribute('aria-activedescendant', active >= 0 ? `cmp-o${active}` : '');
+    }
+    function close() {
+      list.hidden = true;
+      hits = [];
+      active = -1;
+      q.setAttribute('aria-expanded', 'false');
+      q.removeAttribute('aria-activedescendant');
+    }
+    function add(i: number) {
+      if (st.m.length >= MAX_PICKS) return;
+      st = { ...st, m: [...st.m, idx.models[i][0]] };
+      q.value = '';
+      close();
+      update();
+      if (st.m.length < MAX_PICKS) q.focus();
+    }
+    function move(d: number) {
+      if (!hits.length) return;
+      active = (active + d + hits.length) % hits.length;
+      for (const li of list.querySelectorAll<HTMLElement>('[role="option"]')) li.setAttribute('aria-selected', String(li.id === `cmp-o${active}`));
+      q.setAttribute('aria-activedescendant', `cmp-o${active}`);
+      list.querySelector(`#cmp-o${active}`)?.scrollIntoView({ block: 'nearest' });
+    }
+    q.addEventListener('input', find);
+    q.addEventListener('focus', () => q.value && find());
+    q.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') (e.preventDefault(), move(1));
+      else if (e.key === 'ArrowUp') (e.preventDefault(), move(-1));
+      else if (e.key === 'Enter' && active >= 0) (e.preventDefault(), add(hits[active]));
+      else if (e.key === 'Escape') close();
+      else if (e.key === 'Backspace' && !q.value && st.m.length) remove(st.m.at(-1)!);
+    });
+    list.addEventListener('pointerdown', (e) => {
+      const li = (e.target as HTMLElement).closest<HTMLElement>('[data-i]');
+      if (li) (e.preventDefault(), add(Number(li.dataset.i)));
+    });
+    q.addEventListener('blur', () => setTimeout(close, 120));
+
+    // ---- share -------------------------------------------------------------------------------------
+    async function copy() {
+      const status = $('[data-status]');
+      history.replaceState(null, '', writeState(st));
+      try {
+        await navigator.clipboard.writeText(location.href);
+        status.textContent = 'Link copied.';
+      } catch {
+        status.textContent = 'Copy the link from the address bar. It holds this comparison.';
+      }
+      setTimeout(() => (status.textContent = ''), 4000);
+    }
+  }
+  main();
+</script>
+
+<style is:global>
+  .cmp-root.cmp-wait [data-wait] {
+    visibility: hidden;
+  }
+  .cmp-root .cmp-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .cmp-root .cmp-label {
+    font: 500 14px/1.3 var(--sans);
+    letter-spacing: 0;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  /* the picked models and the search field share one box, the way a token field works */
+  .cmp-root .cmp-box {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-height: 48px;
+    padding: 6px;
+    border-radius: 12px;
+    background: var(--panel);
+    cursor: text;
+    max-width: 920px;
+  }
+  .cmp-root .cmp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cmp-root .cmp-chips:empty {
+    display: none;
+  }
+  .cmp-root .cmp-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    max-width: 100%;
+    padding: 5px 4px 5px 10px;
+    border-radius: 999px;
+    background: var(--bg);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  .cmp-root .cmp-chip a {
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .cmp-root .cmp-chip a:hover {
+    text-decoration: underline;
+  }
+  .cmp-root .cmp-x {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--ink-3);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .cmp-root .cmp-x:hover:not(:disabled),
+  .cmp-root .cmp-x:focus-visible {
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .cmp-root .cmp-q {
+    flex: 1 1 12em;
+    min-width: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: 400 14.5px/1 var(--sans);
+    padding: 9px 8px;
+    outline: none;
+  }
+  .cmp-root .cmp-q::placeholder {
+    color: var(--ink-3);
+  }
+  .cmp-root .cmp-box:focus-within {
+    box-shadow: 0 0 0 2px var(--focus);
+  }
+  .cmp-root .cmp-list {
+    position: absolute;
+    z-index: 30;
+    left: 0;
+    right: 0;
+    top: calc(100% + 6px);
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px var(--line);
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  .cmp-root .cmp-list [role='option'] {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 9px;
+    align-items: center;
+    padding: 7px 8px;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  .cmp-root .cmp-list [aria-selected='true'] {
+    background: var(--panel);
+  }
+  .cmp-root .cmp-oname {
+    font-size: 14px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .cmp-root .cmp-ometa {
+    grid-column: 2;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .cmp-root .cmp-none {
+    padding: 8px;
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+  .cmp-root .cmp-hint,
+  .cmp-root .cmp-how {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink-3);
+  }
+  .cmp-root .cmp-how {
+    margin-top: -8px;
+  }
+  .cmp-root .cmp-switches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px 40px;
+  }
+  .cmp-root .cmp-seg {
+    flex-wrap: wrap;
+  }
+
+  /* results */
+  .cmp-root .cmp-out {
+    margin-top: 56px;
+    transition: opacity 140ms ease;
+  }
+  .cmp-root .cmp-out[aria-busy='true'] {
+    opacity: 0.55;
+  }
+  .cmp-root .cmp-out .sh {
+    max-width: 68ch;
+  }
+  .cmp-root .cmp-wins {
+    list-style: none;
+    margin: 0 0 36px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: max-content minmax(0, max-content) minmax(80px, 220px) max-content;
+    justify-content: start;
+    align-items: center;
+    gap: 10px 12px;
+    max-width: 920px;
+  }
+  .cmp-root .cmp-wins li {
+    display: contents;
+  }
+  .cmp-root .cmp-wins .nm {
+    font-size: 14.5px;
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .cmp-root .cmp-wbar {
+    display: block;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .cmp-root .cmp-wbar span {
+    display: block;
+    height: 100%;
+    border-radius: 3px;
+    min-width: 2px;
+  }
+  .cmp-root .cmp-wn {
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .cmp-root .cmp-mark {
+    display: inline-block;
+    flex: none;
+    vertical-align: middle;
+  }
+  .cmp-root .cmp-mask {
+    width: var(--s);
+    height: var(--s);
+    background: var(--ink);
+    -webkit-mask: var(--m) center / contain no-repeat;
+    mask: var(--m) center / contain no-repeat;
+  }
+  .cmp-root .cmp-initial {
+    display: inline-grid;
+    place-items: center;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--ink-3);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  /* the table scrolls sideways inside its own box on a phone, never the page */
+  .cmp-root .cmp-tbox {
+    /* positioned, so the screen-reader text in the cells stays inside the scroll box instead of widening the page */
+    position: relative;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-4) transparent;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 6px;
+  }
+  .cmp-root .cmp-t {
+    min-width: 620px;
+  }
+  .cmp-root .cmp-t th.cm {
+    white-space: normal;
+    vertical-align: bottom;
+    min-width: 7em;
+    max-width: 11em;
+  }
+  /* names wrap between words only, so the column widens to its longest word instead of splitting it */
+  .cmp-root .cmp-t .mh {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 6px;
+    text-align: right;
+    color: var(--ink-2);
+    overflow-wrap: break-word;
+  }
+  .cmp-root .cmp-t .mh .cmp-mark {
+    margin-bottom: 1px;
+  }
+  .cmp-root .cmp-t td.bn {
+    min-width: 13em;
+  }
+  .cmp-root .cmp-t .bw {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+  }
+  /* the area marks come from areaSvg as plain strings, so AreaMark.astro's scoped style doesn't reach them */
+  .cmp-root .cmp-t .bw .amark {
+    display: inline-block;
+    flex: none;
+    fill: currentColor;
+    position: relative;
+    top: 0.5px;
+  }
+  .cmp-root .cmp-t .bt {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .cmp-root .cmp-t .bt a {
+    overflow-wrap: anywhere;
+  }
+  .cmp-root .cmp-t .u {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+  .cmp-root .cmp-t td.num {
+    white-space: nowrap;
+  }
+  .cmp-root .cmp-t td.lead b {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .cmp-root .cmp-t td.r:not(.lead) {
+    color: var(--ink-2);
+  }
+  .cmp-root .cmp-t td.muted {
+    color: var(--ink-3);
+    font-size: 13.5px;
+  }
+  /* a lab's own number: a small ring after it. Other cells keep an empty slot, so the digits line up. */
+  .cmp-root .own {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 5px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.3px var(--ink-3);
+    vertical-align: 0.12em;
+  }
+  .cmp-root .own.no {
+    box-shadow: none;
+  }
+  .cmp-root .cmp-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .cmp-root .cmp-legend .own {
+    margin: 0 7px 0 0;
+  }
+  .cmp-root .cmp-share {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .cmp-root .cmp-small {
+    font: 500 13px/1 var(--sans);
+    color: var(--ink-2);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 13px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .cmp-root .cmp-small:hover:not(:disabled) {
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .cmp-root .cmp-status {
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+  .cmp-root button:disabled,
+  .cmp-root input:disabled {
+    cursor: default;
+  }
+  @media (max-width: 720px) {
+    .cmp-root .cmp-wins {
+      grid-template-columns: max-content minmax(0, 1fr) minmax(60px, 34%);
+      justify-content: stretch;
+    }
+    .cmp-root .cmp-wn {
+      grid-column: 2 / -1;
+      margin-top: -6px;
+    }
+  }
+</style>

@@ -14,7 +14,7 @@ const START = 2019;
 export const LAYERS = AREAS.map((a) => a.id);
 
 // whole months only: the month in progress would show as a false drop at the right edge
-function monthsSince() {
+export function monthsSince() {
   const [ey, em] = AS_OF.split('-').map(Number);
   const out: string[] = [];
   for (let y = START; y <= ey; y++) for (let m = 1; m <= 12; m++) if (y < ey || m < em) out.push(`${y}-${String(m).padStart(2, '0')}`);
@@ -38,11 +38,13 @@ function smooth(raw: number[]) {
   });
 }
 
-let cache: Map<string, string> | undefined;
+const cache = new Map<string, Map<string, string>>();
 
-/** For each area, the outline of it and every area below it, as SVG path data in a W by H box. */
-export function ridgePaths() {
-  if (cache) return cache;
+/** For each area, the outline of it and every area below it, as SVG path data in a w by h box (the footer's
+ * W by H unless given). The link-preview film draws it at its own size, so its dots stay round. */
+export function ridgePaths(w = W, h = H) {
+  const key = `${w}x${h}`;
+  if (cache.has(key)) return cache.get(key)!;
   const months = monthsSince();
   const at = new Map(months.map((m, i) => [m, i]));
   const raw = new Map(LAYERS.map((id) => [id, months.map(() => 0)]));
@@ -53,25 +55,26 @@ export function ridgePaths() {
   const bands = LAYERS.map((id) => smooth(raw.get(id)!));
   const total = months.map((_, i) => bands.reduce((s, b) => s + b[i], 0));
   const top = Math.max(...total);
-  const height = total.map((t) => Math.pow(t / top, 0.45) * (H - 30));
-  const x = (i: number) => (i / (months.length - 1)) * W;
+  const height = total.map((t) => Math.pow(t / top, 0.45) * (h - 30));
+  const x = (i: number) => (i / (months.length - 1)) * w;
   const f = (n: number) => n.toFixed(1);
   const outline = (ys: number[]) => {
-    let d = `M0 ${H}L0 ${f(ys[0])}`;
+    let d = `M0 ${h}L0 ${f(ys[0])}`;
     for (let i = 1; i < ys.length; i++) {
       const m = (x(i - 1) + x(i)) / 2;
       d += `C${f(m)} ${f(ys[i - 1])} ${f(m)} ${f(ys[i])} ${f(x(i))} ${f(ys[i])}`;
     }
-    return `${d}L${W} ${H}Z`;
+    return `${d}L${w} ${h}Z`;
   };
-  cache = new Map();
+  const out = new Map<string, string>();
+  cache.set(key, out);
   const below = months.map(() => 0);
   LAYERS.forEach((id, k) => {
     bands[k].forEach((v, i) => (below[i] += v));
     // 6px of ground under every band, so the baseline never shows through
-    cache!.set(id, outline(below.map((c, i) => H - 6 - (total[i] ? (c / total[i]) * height[i] : 0))));
+    out.set(id, outline(below.map((c, i) => h - 6 - (total[i] ? (c / total[i]) * height[i] : 0))));
   });
-  return cache;
+  return out;
 }
 
 /** One dot in a square tile. Repeated, it makes an even halftone grid, like a dot-matrix print. */

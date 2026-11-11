@@ -1,12 +1,13 @@
 ---
 // Search and link-preview tags for every page: canonical URL, Open Graph, X (Twitter) card and structured
 // data. Apps that play video in a link bubble (iMessage, Telegram, Discord) loop the page's film, silent.
-// The others (X, Slack, LinkedIn, WhatsApp) show its poster. scripts/og-film.ts makes both in public/og/.
-import { createHash } from 'node:crypto';
-import { existsSync, readFileSync } from 'node:fs';
+// The others (X, Slack, LinkedIn, WhatsApp) show its poster. scripts/og-film.ts makes both in public/og/,
+// each named by a hash of its content (pace-1a2b3c4d.mp4), so a new film always has a new URL.
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { SITE_NAME } from '../lib/site.ts';
 
-export type Film = 'rise' | 'index' | 'reigns';
+export type Film = 'ridge' | 'pace' | 'rise' | 'index' | 'reigns' | 'reporting' | 'build';
 type Json = Record<string, unknown>;
 
 interface Props {
@@ -20,29 +21,32 @@ interface Props {
   noindex?: boolean;
 }
 
-const SITE_NAME = 'Benchmark Almanac';
 const FILM_ALT: Record<Film, string> = {
+  ridge: 'Benchmarks released each month since 2019, stacked by area as a landscape of colored dots',
+  pace: 'How soon a model passed 85% on the benchmarks released in each of the last three years, by months since release',
+  reporting: 'Every benchmark labs named this year, one shape each, placed by how many labs named it',
+  build: 'An index built from the tests labs reported most, with its weights shifting and the ranking reordering',
   rise: 'Each benchmark’s best score since 2023, one line per benchmark, colored by area',
   index: 'Models on Epoch AI’s Capabilities Index by release date, colored by lab, with the best so far as a line',
   reigns: 'Which lab held the top score on the capability index and the main math benchmarks since 2023',
 };
 const SIZE = { width: '1200', height: '630' };
 
-const { title, description, film = 'rise', crumbs, jsonLd, noindex = false } = Astro.props;
+const { title, description, film = 'ridge', crumbs, jsonLd, noindex = false } = Astro.props;
 const site = Astro.site!;
 // Every page is a folder, so its URL ends in a slash (vercel.json trailingSlash).
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const url = new URL(path, site).href;
 const abs = (href: string) => new URL(href, site).href;
 
-// A short content hash on the image URLs, so apps that cache previews by image URL fetch a new poster.
-// The film keeps its plain URL, the form Ashton's working iMessage preview uses.
-const file = (name: string) => join(process.cwd(), 'public', 'og', name);
-const version = (name: string) => (existsSync(file(name)) ? createHash('sha1').update(readFileSync(file(name))).digest('hex').slice(0, 10) : '');
-const posterV = version(`${film}.png`);
-const hasVideo = existsSync(file(`${film}.mp4`));
-const poster = posterV ? abs(`/og/${film}.png?v=${posterV}`) : '';
-const video = hasVideo ? abs(`/og/${film}.mp4`) : '';
+// the scene's current files, by name: pace-1a2b3c4d.png and pace-5e6f7a8b.mp4
+const dir = join(process.cwd(), 'public', 'og');
+const files = existsSync(dir) ? readdirSync(dir) : [];
+const named = (ext: string) => files.find((f) => new RegExp(`^${film}-[0-9a-f]{8}\\.${ext}$`).test(f)) ?? files.find((f) => f === `${film}.${ext}`);
+const posterFile = named('png');
+const videoFile = named('mp4');
+const poster = posterFile ? abs(`/og/${posterFile}`) : '';
+const video = videoFile ? abs(`/og/${videoFile}`) : '';
 const ogTitle = title ?? SITE_NAME;
 
 const graph: Json[] = [...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
@@ -55,7 +59,13 @@ if (crumbs?.length)
 const ld = graph.length ? JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c') : '';
 ---
 
-{noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="max-image-preview:large" />}
+{
+  noindex ? (
+    <meta name="robots" content="noindex" />
+  ) : (
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  )
+}
 {!noindex && <link rel="canonical" href={url} />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={SITE_NAME} />
@@ -76,7 +86,7 @@ const ld = graph.length ? JSON.stringify({ '@context': 'https://schema.org', '@g
   )
 }
 {
-  video && (
+  video && !noindex && (
     <>
       <meta property="og:video" content={video} />
       <meta property="og:video:secure_url" content={video} />

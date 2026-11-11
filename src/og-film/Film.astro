@@ -39,7 +39,7 @@ const box = s.box ?? BOX;
       data-rank={s.rank ? JSON.stringify(s.rank) : undefined}
     >
       <h1 set:html={s.title} style={s.titleSize ? `font-size:${s.titleSize}px` : undefined} />
-      <p class="sub" style={s.subTop ? `top:${s.subTop}px` : undefined}>{s.subtitle}</p>
+      <p class="sub" style={s.subTop ? `top:${s.subTop}px;max-width:1072px` : undefined}>{s.subtitle}</p>
       {
         s.total !== undefined && (
           <div class="count" data-count>
@@ -199,20 +199,6 @@ const box = s.box ?? BOX;
         }
       }
 
-      const ready = (async () => {
-        await document.fonts.ready;
-        // a leader's name longer than its column loses letters to an ellipsis, measured in the real font
-        for (const el of stage.querySelectorAll<SVGTextElement>('text[data-w]')) {
-          const max = Number(el.dataset.w);
-          const full = el.textContent ?? '';
-          for (let k = full.length; k > 4 && el.getComputedTextLength() > max; k--) el.textContent = `${full.slice(0, k - 1).trimEnd()}…`;
-        }
-        // the build scene names a weight segment only when its name fits inside it
-        for (const el of stage.querySelectorAll<SVGTextElement>('text.seg')) el.dataset.len = String(el.getComputedTextLength());
-        rank?.seek(0);
-        return [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/["']/g, ''));
-      })();
-
       // ---- rank mode (the build scene): the weights shift, then the ranking glides into its new order ----
       type RankFilm = { states: { caption: string; shares: number[]; rank: number[]; value: number[] }[]; rows: number; max: number };
       const rank = stage.dataset.rank ? rankFilm(JSON.parse(stage.dataset.rank) as RankFilm) : null;
@@ -271,7 +257,14 @@ const box = s.box ?? BOX;
               rect.setAttribute('width', width.toFixed(1));
             }
             s.text.setAttribute('x', (x + 9).toFixed(1));
-            s.text.setAttribute('opacity', Number(s.text.dataset.len ?? 1e9) + 18 <= width ? '1' : '0');
+            // the whole name when it fits, else as much as fits with an ellipsis, else nothing
+            const full = s.text.dataset.full ?? '';
+            const ws: number[] = s.text.dataset.w ? JSON.parse(s.text.dataset.w) : [];
+            const room = width - 18;
+            let label = '';
+            if (ws.length && ws[ws.length - 1] <= room) label = full;
+            else for (let k = ws.length - 1; k >= 3; k--) if (ws[k - 1] + Number(s.text.dataset.dots) <= room) { label = `${full.slice(0, k).trimEnd()}…`; break; }
+            if (s.text.textContent !== label) s.text.textContent = label;
             x += share * BW;
           });
           rows.forEach((row, j) => {
@@ -291,6 +284,25 @@ const box = s.box ?? BOX;
         }
         return { seek, duration: RDUR };
       }
+
+      const ready = (async () => {
+        await document.fonts.ready;
+        // a leader's name longer than its column loses letters to an ellipsis, measured in the real font
+        for (const el of stage.querySelectorAll<SVGTextElement>('text[data-w]')) {
+          const max = Number(el.dataset.w);
+          const full = el.textContent ?? '';
+          for (let k = full.length; k > 4 && el.getComputedTextLength() > max; k--) el.textContent = `${full.slice(0, k - 1).trimEnd()}…`;
+        }
+        // the build scene names a weight segment only when its name fits inside it
+        for (const el of stage.querySelectorAll<SVGTextElement>('text.seg')) {
+          const full = el.dataset.full ?? '';
+          el.textContent = full;
+          el.dataset.w = JSON.stringify(Array.from({ length: full.length }, (_, k) => Math.ceil(el.getSubStringLength(0, k + 1))));
+          el.dataset.dots = String(Math.ceil(el.getComputedTextLength() / Math.max(1, full.length)) + 2);
+        }
+        rank?.seek(0);
+        return [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/["']/g, ''));
+      })();
 
       const run = rank ?? { seek, duration: DURATION };
       Object.assign(window, { film: { duration: run.duration, fps: 30, poster: 0, seek: run.seek, ready } });
@@ -315,6 +327,11 @@ const box = s.box ?? BOX;
     height: 630px;
     overflow: hidden;
     background: #ffffff;
+  }
+  /* the site reserves a scrollbar's width on every page (global.css). The film has no scrollbar, and an
+     edge-to-edge scene such as the ridge must reach the right edge */
+  html {
+    scrollbar-gutter: auto;
   }
   /* astro dev adds its toolbar to every page; the film must not show it */
   astro-dev-toolbar {
@@ -491,6 +508,27 @@ const box = s.box ?? BOX;
     fill: var(--ink-3);
     letter-spacing: 0;
   }
+  /* the build scene: the weight bar, its caption, and the ranking */
+  .stage .cap {
+    font: 500 14px var(--mono);
+    fill: var(--ink-2);
+  }
+  .stage .seg {
+    font: 500 14px var(--sans);
+    fill: var(--ink);
+  }
+  .stage .rk {
+    font: 400 15px var(--mono);
+    fill: var(--ink-3);
+  }
+  .stage .nm {
+    font: 500 19px var(--sans);
+    fill: var(--ink);
+  }
+  .stage .val {
+    font: 500 17px var(--mono);
+    fill: var(--ink-2);
+  }
   /* the reporting scene: the page's beeswarm, its area colors and its labels, larger for a small preview */
   .stage .a-knowledge { color: var(--area-knowledge); }
   .stage .a-reasoning { color: var(--area-reasoning); }
@@ -522,7 +560,7 @@ const box = s.box ?? BOX;
     stroke-width: 1;
   }
   .stage .rp-nb {
-    font: 600 20px var(--mono);
+    font: 600 16px var(--mono);
     fill: var(--ink);
   }
   .stage .rp-ns {
