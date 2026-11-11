@@ -8,13 +8,12 @@ import FootRidge from '../components/FootRidge.astro';
 import AreaMark from '../components/AreaMark.astro';
 import SearchBox from '../components/SearchBox.astro';
 import SeoHead, { type Film } from '../components/SeoHead.astro';
-import { SITE_DESCRIPTION } from '../lib/site.ts';
 
 interface Props {
   title?: string;
   description?: string;
   wide?: boolean;
-  /** The link-preview film and poster (public/og/): the footer ridge unless the page says otherwise. */
+  /** The link-preview film and poster (public/og/): rise unless the page says otherwise. */
   film?: Film;
   /** The page's breadcrumb trail, for search engines (BreadcrumbList). */
   crumbs?: { href: string; label: string }[];
@@ -24,7 +23,7 @@ interface Props {
 }
 const {
   title,
-  description = SITE_DESCRIPTION,
+  description = 'A catalog of AI benchmarks, with the labs that report each one and how its scores have changed.',
   film,
   crumbs,
   jsonLd,
@@ -32,11 +31,9 @@ const {
 } = Astro.props;
 const fullTitle = title ? `${title} | Benchmark Almanac` : 'Benchmark Almanac: AI benchmarks and who leads them';
 const path = Astro.url.pathname;
-// Three tracks: the tests we track, who does well on them, and what labs say about their own models. Pages about
-// the catalog itself sit in the More menu at the right, beside Submit. A link marked fold moves into More on
-// mid-size screens, so the row never crowds, and the whole row folds into the menu button on small ones. A link
-// marked fold: 'menu' sits in More at every width, because the row has no room for it under the page's width cap.
-const NAV: { id: string; label: string; links: { href: string; label: string; fold?: boolean | 'menu' }[] }[] = [
+// Three groups: the tests we track, who does well on them, and how the catalog works. The first two sit
+// side by side as two tracks, and the third sits at the right beside search, quieter, since it is about us.
+const NAV = [
   {
     id: 'track',
     label: 'What we track',
@@ -51,33 +48,24 @@ const NAV: { id: string; label: string; links: { href: string; label: string; fo
     links: [
       { href: '/leaders/', label: 'Leaders' },
       { href: '/models/', label: 'Models' },
-      { href: '/compare/', label: 'Compare', fold: 'menu' },
       { href: '/labs/', label: 'Labs' },
-      { href: '/build/', label: 'Build an index', fold: true },
+      { href: '/cards/', label: 'Model cards' },
     ],
   },
   {
-    id: 'say',
-    label: 'What labs report',
+    id: 'work',
+    label: 'How it works',
     links: [
-      { href: '/cards/', label: 'Model cards', fold: true },
-      { href: '/reporting/', label: 'Reporting', fold: true },
+      { href: '/new/', label: 'New' },
+      { href: '/audits/', label: 'Audits' },
+      { href: '/sources/', label: 'Sources' },
+      { href: '/submit/', label: 'Submit', cta: true },
     ],
   },
 ];
-const MORE = [
-  { href: '/new/', label: 'New this month' },
-  { href: '/audits/', label: 'Audits' },
-  { href: '/sources/', label: 'Sources' },
-  { href: '/contribute/', label: 'Contribute' },
-];
 // the same links in one list, for the footer
 const NAV_LINKS = NAV.flatMap((g) => g.links);
-const FOLDS = NAV_LINKS.filter((n) => n.fold);
 const current = (href: string) => path.startsWith(href) || (href === '/benchmarks/' && path.startsWith('/categories/'));
-const moreOn = MORE.some((n) => current(n.href));
-const foldOn = FOLDS.some((n) => current(n.href));
-const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
 ---
 
 <!doctype html>
@@ -114,36 +102,13 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
             NAV.map((g) => (
               <div class={`ng ng-${g.id}`} role="group" aria-label={g.label}>
                 {g.links.map((n) => (
-                  <a href={n.href} class:list={{ fold: n.fold, 'fold-m': n.fold === 'menu' }} aria-current={current(n.href) ? 'page' : undefined}>
+                  <a href={n.href} class:list={{ cta: 'cta' in n && n.cta }} aria-current={current(n.href) ? 'page' : undefined}>
                     {n.label}
                   </a>
                 ))}
               </div>
             ))
           }
-          <div class="ng ng-work" role="group" aria-label="About the catalog">
-            <button class="more-b" type="button" popovertarget="more" aria-haspopup="true" data-on={moreOn || undefined} data-fold-on={foldOn || undefined} data-fold-menu-on={foldMenuOn || undefined}>
-              More
-              <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>
-            </button>
-            <div class="more-p" id="more" popover>
-              {
-                FOLDS.map((n) => (
-                  <a href={n.href} class:list={['fold-c', { 'fold-cm': n.fold === 'menu' }]} aria-current={current(n.href) ? 'page' : undefined}>
-                    {n.label}
-                  </a>
-                ))
-              }
-              {
-                MORE.map((n, i) => (
-                  <a href={n.href} class:list={{ first: i === 0 }} aria-current={current(n.href) ? 'page' : undefined}>
-                    {n.label}
-                  </a>
-                ))
-              }
-            </div>
-            <a href="/submit/" class="cta" aria-current={current('/submit/') ? 'page' : undefined}>Submit</a>
-          </div>
         </nav>
         <div class="bar-end">
           <div class="bar-s" data-bar-search>
@@ -184,7 +149,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           <div>
             <h2>Explore</h2>
             <ul>
-              {[...NAV_LINKS.filter((n) => !n.fold), { href: '/compare/', label: 'Compare models' }, { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
+              {[...NAV_LINKS.slice(0, 5), { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }]
                 .filter((n, i, xs) => xs.findIndex((y) => y.href === n.href) === i)
                 .map((n) => (
                   <li><a href={n.href}>{n.label}</a></li>
@@ -239,16 +204,6 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
         },
         true,
       );
-      // the More menu opens in the top layer, so it is placed under its button by hand: right edges aligned
-      const moreB = document.querySelector<HTMLElement>('.more-b');
-      const moreP = document.getElementById('more');
-      moreP?.addEventListener('beforetoggle', (e) => {
-        if ((e as ToggleEvent).newState !== 'open' || !moreB) return;
-        const r = moreB.getBoundingClientRect();
-        moreP.style.top = `${Math.round(r.bottom + 8)}px`;
-        moreP.style.right = `${Math.max(12, Math.round(document.documentElement.clientWidth - r.right))}px`;
-      });
-      moreP?.addEventListener('toggle', (e) => moreB?.setAttribute('aria-expanded', String((e as ToggleEvent).newState === 'open')));
       document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
         const root = document.documentElement;
         const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
@@ -282,20 +237,16 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     text-decoration: none;
     white-space: nowrap;
   }
-  /* The row, from widest to narrowest (measured with a 15px scrollbar, and at least 25px to spare):
-       1260px and up: every link but Compare, More, Submit, search and theme, with tighter spacing below 1440px.
-         Compare sits at the top of More at every width: with it the row runs 27px over even at the 1240px cap.
-       960 to 1259px: Compare, Build an index, Model cards and Reporting move into the More menu
-       below 960px: the whole row folds into the menu button
-     The name keeps its place at every step. */
+  /* The links keep their full width (about 760px) and the search field gives way first. The widths below
+     come from that: the field fits from 1300px, an icon from 1211px, and the menu folds below that. */
   nav {
     display: flex;
     align-items: center;
     gap: 10px;
     flex: 1 0 auto;
   }
-  /* A group is one track: its links share a tint, and the current page sits raised on it, so the tracks read
-     as separate sets without a rule between them. */
+  /* A group is one track: its links share a tint, and the current page sits raised on it, so the two tracks
+     read as two sets without a rule between them. */
   .ng {
     --seg-on: var(--bg);
     display: flex;
@@ -303,8 +254,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     gap: 2px;
   }
   .ng-track,
-  .ng-lead,
-  .ng-say {
+  .ng-lead {
     padding: 3px;
     border-radius: 11px;
     background: var(--panel);
@@ -321,98 +271,24 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     color: var(--ink);
   }
   .ng-track a[aria-current='page'],
-  .ng-lead a[aria-current='page'],
-  .ng-say a[aria-current='page'] {
+  .ng-lead a[aria-current='page'] {
     color: var(--ink);
     background: var(--seg-on);
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
   }
-  /* pages about the catalog: a quiet More menu at the right, with Submit as the one button */
+  /* how the catalog works: plain links at the right, beside search, with Submit as the one button */
   .ng-work {
     margin-left: auto;
-    gap: 6px;
   }
-  .more-b {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  .ng-work a {
+    font-size: 13.5px;
     padding: 6px 9px;
-    border: 0;
-    border-radius: 8px;
-    background: none;
-    color: var(--ink-3);
-    font: 400 13.5px/1.2 var(--sans);
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background-color 140ms ease, color 140ms ease;
   }
-  .more-b:hover,
-  .more-b[aria-expanded='true'] {
-    color: var(--ink);
-    background: var(--panel);
-  }
-  .more-b[data-on] {
-    color: var(--ink);
-  }
-  .more-b svg {
-    color: var(--ink-4);
-    transition: rotate 140ms ease;
-  }
-  .more-b[aria-expanded='true'] svg {
-    rotate: 180deg;
-  }
-  /* the open menu, in the style of the site's dropdowns. The script places it under the button. */
-  .more-p {
-    position: fixed;
-    inset: auto;
-    margin: 0;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 188px;
-    padding: 6px;
-    border: 0;
-    border-radius: 12px;
-    background: var(--bg);
-    color: var(--ink);
-    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px var(--line);
-  }
-  .more-p:popover-open {
-    display: flex;
-    animation: find-in 140ms ease-out;
-  }
-  .more-p a {
-    padding: 8px 10px;
-    border-radius: 7px;
-    color: var(--ink-2);
-  }
-  .more-p a:hover,
-  .more-p a:focus-visible {
-    color: var(--ink);
-    background: var(--hover);
-  }
-  .more-p a[aria-current='page'] {
-    color: var(--ink);
-    font-weight: 500;
-  }
-  /* the links that live in the row on wide screens show in the menu only on mid-size ones */
-  .more-p .fold-c {
-    display: none;
-  }
-  /* Compare lives in the menu at every desktop width, set apart from the pages about the catalog by a space */
-  nav a.fold-m {
-    display: none;
-  }
-  .more-p .fold-cm {
-    display: block;
-  }
-  .more-p .first {
-    margin-top: 8px;
-  }
-  .more-b[data-fold-menu-on] {
+  .ng-work a[aria-current='page'] {
     color: var(--ink);
   }
   .ng-work a.cta {
-    font-size: 13.5px;
+    margin-left: 6px;
     padding: 5px 13px;
     border-radius: 999px;
     color: var(--ink-2);
@@ -422,33 +298,6 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   .ng-work a.cta[aria-current='page'] {
     color: var(--ink);
     box-shadow: inset 0 0 0 1px var(--ink-4);
-  }
-  @media (max-width: 1439px) {
-    .bar-in {
-      gap: 24px;
-    }
-    nav {
-      gap: 8px;
-    }
-    nav a {
-      padding: 6px 9px;
-    }
-  }
-  @media (max-width: 1259px) {
-    nav a.fold,
-    .ng-say {
-      display: none;
-    }
-    .more-p .fold-c {
-      display: block;
-    }
-    /* a space, not a rule, sets the folded links apart from the pages about the catalog */
-    .more-p .first {
-      margin-top: 8px;
-    }
-    .more-b[data-fold-on] {
-      color: var(--ink);
-    }
   }
   @media (prefers-color-scheme: dark) {
     :global(:root:not([data-theme='light'])) .ng {
@@ -497,16 +346,21 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     color: var(--ink);
     background: var(--panel);
   }
-  /* The header search is an icon that opens a field over the bar. The row holds the links at every width,
-     and the page width caps the row at 1240px, so a standing field no longer fits beside them. */
+  /* the header search: a field where it fits, else an icon that opens one over the bar */
   .bar-s {
-    flex: none;
+    flex: 0 1 240px;
+    min-width: 168px;
     transition: opacity 160ms ease, visibility 160ms;
   }
-  /* a page with its own big box shows the header search only once that one scrolls away */
+  /* a page with its own big box shows the header box only once that one scrolls away */
   :global(html.js:has([data-search-main])) .bar-s:not(.main-gone) {
     visibility: hidden;
     opacity: 0;
+  }
+  .find-p {
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
   .find-p :global(.search) {
     flex: 1;
@@ -514,30 +368,38 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   }
   .find-b,
   .find-x {
-    display: block;
-  }
-  /* the icon needs a script, so without one the table's own search box stands in */
-  :global(html:not(.js)) .bar-s {
     display: none;
   }
-  /* the open field covers the links, from the end of the name to the right edge */
-  .find-p {
-    display: none;
-    align-items: center;
-    gap: 6px;
-    position: absolute;
-    z-index: 1;
-    inset: 0 var(--gutter) 0 calc(var(--gutter) + 218px);
-    background: var(--bg);
-  }
-  .bar-s.finding .find-p {
-    display: flex;
-    animation: find-in 160ms ease-out;
-  }
-  /* the open field is wide, so its suggestions line up under it */
-  .find-p :global(.search [role='listbox']) {
-    left: 0;
-    width: auto;
+  @media (max-width: 1299px) {
+    .bar-s {
+      flex: none;
+      min-width: 0;
+    }
+    .find-b,
+    .find-x {
+      display: block;
+    }
+    /* the icon needs a script, so without one the table's own search box stands in */
+    :global(html:not(.js)) .bar-s {
+      display: none;
+    }
+    /* the open field covers the links, from the end of the name to the right edge */
+    .find-p {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      inset: 0 var(--gutter) 0 calc(var(--gutter) + 218px);
+      background: var(--bg);
+    }
+    .bar-s.finding .find-p {
+      display: flex;
+      animation: find-in 160ms ease-out;
+    }
+    /* the open field is wide, so its suggestions line up under it */
+    .find-p :global(.search [role='listbox']) {
+      left: 0;
+      width: auto;
+    }
   }
   @keyframes find-in {
     from {
@@ -659,8 +521,8 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  /* the short row needs about 920px with a scrollbar. Below 960px the nav folds into the menu button */
-  @media (max-width: 959px) {
+  /* the full nav, the search icon and the theme button need about 1190px. Below that the nav folds into the menu button */
+  @media (max-width: 1210px) {
     .bar-in {
       gap: 8px;
     }
@@ -694,44 +556,9 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     nav[popover]:popover-open {
       display: flex;
     }
-    /* in the menu each group is a column, and space sets the groups apart. A short window scrolls the menu. */
+    /* in the menu each group is a column, and space sets the groups apart */
     nav[popover] {
       align-items: stretch;
-      max-height: calc(100dvh - var(--bar-h) - 12px);
-      overflow-y: auto;
-      overscroll-behavior: contain;
-    }
-    /* the menu lists every page: the folded links sit back in their groups, and More's pages show as a group */
-    nav a.fold,
-    nav a.fold-m,
-    nav[popover] .ng-say {
-      display: flex;
-    }
-    .more-b,
-    .more-p .fold-c {
-      display: none;
-    }
-    .more-p {
-      display: flex;
-      position: static;
-      min-width: 0;
-      padding: 0;
-      border-radius: 0;
-      background: none;
-      box-shadow: none;
-      animation: none;
-    }
-    .more-p .first {
-      margin-top: 0;
-    }
-    .more-p a {
-      padding: 10px 12px;
-      border-radius: 8px;
-      color: var(--ink-3);
-    }
-    .ng-work {
-      margin-left: 0;
-      gap: 2px;
     }
     nav[popover] .ng {
       flex-direction: column;
@@ -752,7 +579,6 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     }
     .ng-track a[aria-current='page'],
     .ng-lead a[aria-current='page'],
-    .ng-say a[aria-current='page'],
     .ng-work a[aria-current='page'] {
       background: var(--panel);
       box-shadow: none;
@@ -761,7 +587,6 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
       margin: 4px 0 0;
       padding: 10px 12px;
       border-radius: 8px;
-      font-size: 16px;
     }
   }
 </style>
