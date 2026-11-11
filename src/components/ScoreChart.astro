@@ -1,8 +1,8 @@
 ---
-// A benchmark's scores over time: every score from Epoch AI and from lab cards, the best score so far,
-// and the reference lines that matter for that benchmark.
+// A benchmark's scores over time: every score from its leaderboard, Epoch AI's runs, boards and claims Epoch AI
+// collected, and lab cards, the best score so far, and the reference lines that matter for that benchmark.
 import type { BenchSummary } from '../lib/data.ts';
-import { epochScores, cardScores, leaderboardScores, SATURATED } from '../lib/data.ts';
+import { epochScores, collectedScores, cardScores, leaderboardScores, SATURATED, LEADERBOARDS } from '../lib/data.ts';
 import TimeScatter, { type Pt } from './TimeScatter.astro';
 
 interface Props {
@@ -11,9 +11,14 @@ interface Props {
 const { s } = Astro.props;
 const b = s.b;
 const unit = b.unit ?? '%';
-const points: Pt[] = [...leaderboardScores.filter((x) => x.benchmark === b.id), ...epochScores.filter((x) => x.benchmark === b.id), ...cardScores.filter((x) => x.benchmark === b.id && x.unit === unit)]
+const points: Pt[] = [
+  ...leaderboardScores.filter((x) => x.benchmark === b.id),
+  ...epochScores.filter((x) => x.benchmark === b.id),
+  ...collectedScores.filter((x) => x.benchmark === b.id),
+  ...cardScores.filter((x) => x.benchmark === b.id && x.unit === unit),
+]
   .filter((x) => x.date)
-  .map((x) => ({ date: x.date!, value: x.value, model: x.model, source: x.source, setting: x.setting, harness: x.harness }));
+  .map((x) => ({ date: x.date!, value: x.value, model: x.model, source: x.source, via: x.via, from: x.from, setting: x.setting, harness: x.harness }));
 
 const refs: { v: number; label: string }[] = [];
 if (unit === '%') {
@@ -31,5 +36,7 @@ const frontier = s.frontier.filter((p) => points.some((q) => q.model === p.model
   label={`${b.name} scores over time`}
   domain={unit === '%' ? [0, 100] : undefined}
   refs={refs}
+  marks={b.refreshes}
   better={b.better}
+  sourceNote={LEADERBOARDS[b.id]?.host ? { leaderboard: `On ${LEADERBOARDS[b.id].host}’s leaderboard` } : {}}
 />

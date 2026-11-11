@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PairScatter, { type PairPt } from '../components/PairScatter.astro';
-import { cards, systemCards, benchmarks, benchById, modelById, leaderboardScores, epochScores, LEADERBOARDS, eciByModel, EPOCH_SOURCE } from '../lib/data.ts';
+import { cards, systemCards, benchmarks, benchById, modelById, leaderboardScores, epochScores, viaBoardScores, collectedClaims, LEADERBOARDS, eciByModel, EPOCH_SOURCE } from '../lib/data.ts';
 import { SR_FIT, SR_RULES, srHeldOut, srVsEci, srBenchmarks, selfReported } from '../lib/self-reported.ts';
 import { claimPairs, claimStats, SAME_WITHIN } from '../lib/claims.ts';
 import { humanDate } from '../lib/format.ts';
@@ -44,9 +44,9 @@ const topBenches = srBenchmarks.slice(0, 16);
         <dt>Leaderboards</dt>
         <dd>{n(boards)} boards that benchmarks' makers publish, with {n(leaderboardScores.length)} scores for models we track. Some boards run every model themselves, and others accept submissions, sometimes from the labs.</dd>
         <dt>Epoch AI</dt>
-        <dd>{n(epochScores.length)} scores from <a href={EPOCH_SOURCE.url}>Epoch AI</a>, retrieved {humanDate(EPOCH_SOURCE.retrieved)}. Epoch runs some benchmarks itself and collects the rest. Its Epoch Capabilities Index (ECI) covers {n(eciByModel.size)} models.</dd>
+        <dd>{n(epochScores.length)} scores from <a href={EPOCH_SOURCE.url}>Epoch AI</a>’s own runs, retrieved {humanDate(EPOCH_SOURCE.retrieved)}. Epoch also collects scores from elsewhere. We count {n(viaBoardScores.length)} it copied from leaderboards we don’t read ourselves as independent runs, and the {n(collectedClaims.length)} it took from labs’ reports, papers and unnamed sources as claims. Its Epoch Capabilities Index (ECI) covers {n(eciByModel.size)} models.</dd>
       </dl>
-      <p class="gap">Every chart and table says which kind it shows. Filled dots are leaderboard or Epoch scores, and rings are numbers a lab reports about its own model.</p>
+      <p class="gap">Our charts and tables say which kind of score they show. Filled squares and dots are leaderboard scores and Epoch AI’s runs, and filled diamonds are leaderboards Epoch AI copied. Rings are numbers a lab reports about its own model, and hollow diamonds are claims Epoch AI collected.</p>
     </section>
 
     <section id="one-score">
@@ -62,7 +62,7 @@ const topBenches = srBenchmarks.slice(0, 16);
     <section id="lead">
       <h2>Which board a page leads with</h2>
       <p>
-        A benchmark page leads with the benchmark's own leaderboard when it has five or more models and its newest score is within six months of the newest score from any source. Otherwise it leads with Epoch AI's scores on the same terms, and then with lab reports. A board that stopped at last year's models shouldn't headline a benchmark labs still report.
+        A benchmark page leads with the benchmark's own leaderboard, or with a board a third party such as Stanford's HELM runs for it, when the board has five or more models and its newest score is within six months of the newest score from any source. Otherwise it leads with Epoch AI's scores on the same terms, and then with lab reports. A board that stopped at last year's models shouldn't headline a benchmark labs still report. Who leads a benchmark, and who first took it past 85%, comes from that one source, here and on the <a href="/leaders/">leaders page</a>. A switch on each page ranks every independent run together, or every score with claims included.
       </p>
     </section>
 
@@ -93,7 +93,7 @@ const topBenches = srBenchmarks.slice(0, 16);
         {withChanges.length > 0
           ? `${withChanges.length} benchmark pages list ${changeCount} dated changes by their maintainers.`
           : 'Benchmark pages list dated changes by their maintainers.'}{' '}
-        We log seven kinds: scores recomputed, a new grader, tasks removed or fixed, a new official harness, a new headline metric, corrected questions, and new leaderboard rules. Each entry links to the maintainers' own source, such as a commit, a changelog, a paper revision or their announcement. New versions aren't changes, because each has its own record.
+        We log seven kinds: scores recomputed, a new grader, tasks removed or fixed, a new official harness, a new headline metric, corrected questions, and new leaderboard rules. Each entry links to the maintainers' own source, such as a commit, a changelog, a paper revision or their announcement. We log changes that can move a headline score or change what a benchmark tests, and leave out fixes to single questions. New versions aren't changes, because each has its own record. So far we've researched the 120 benchmarks labs cite most, so other pages may have changes we haven't logged.
       </p>
     </section>
 
@@ -103,7 +103,7 @@ const topBenches = srBenchmarks.slice(0, 16);
         The <a href="/claims/">claims page</a> pairs each lab's best number for its model with the same model's best row on the benchmark's own leaderboard. Where the benchmark has no leaderboard, it uses Epoch AI's score, but only for benchmarks Epoch runs itself, since the scores Epoch collects are often the lab's own. We have {n(claims.pairs)} pairs across {claims.benchmarks} benchmarks.
       </p>
       <p>
-        Numbers within {SAME_WITHIN} points count as the same, and {claims.same} of the {claims.pct} pairs in percent match. A match usually means one side copied the other. Of the rest, the lab's number is better in {claims.labHigher} and worse in {claims.labLower}. Most gaps come from setup, not error. Where we've checked a large gap, the table says what differs.
+        Numbers within {SAME_WITHIN} points count as the same, as do dollars and ratings within half a unit, since labs often print them whole. {claims.same} of the {claims.pct} pairs in percent match. A match usually means one side copied the other. Of the rest, the lab's number is better in {claims.labHigher} and worse in {claims.labLower}. Most gaps come from setup, not error. Where we've checked a large gap, the table says what differs.
       </p>
     </section>
 
@@ -142,7 +142,7 @@ const topBenches = srBenchmarks.slice(0, 16);
     <section class="wide-fig">
       <h2>The two indexes side by side</h2>
       <p>Each dot is a model with both scores. Dots above the dashed line score higher on their labs' own numbers than on the ECI. We name the six furthest from the line.</p>
-      <PairScatter points={vsPts} xLabel="Epoch Capabilities Index" yLabel="Self-Reported Index" label="Self-Reported Index against the Epoch Capabilities Index" unit="index" labelIds={far} />
+      <PairScatter points={vsPts} xLabel="Epoch Capabilities Index" yLabel="Self-Reported Index" label="Self-Reported Index against the Epoch Capabilities Index" unit="index" labelIds={far} height={640} />
     </section>
 
     <section>
@@ -169,7 +169,7 @@ const topBenches = srBenchmarks.slice(0, 16);
     <section id="left-out">
       <h2>What we leave out</h2>
       <p>
-        We use no data from Artificial Analysis, whose terms bar reuse in other ranking products. A lab that quotes an Artificial Analysis number in its own launch post keeps it, credited to the lab. We don't read sites whose terms forbid automated reading, and we never get around a block. The <a href="/sources/">Sources page</a> lists what we read.
+        We use no data from Artificial Analysis, whose terms bar reuse in other ranking products. A lab that quotes an Artificial Analysis number in its own launch post keeps it, credited to the lab. Every leaderboard we import is credited and linked on its benchmark's page. The <a href="/sources/">Sources page</a> lists what we read.
       </p>
     </section>
 

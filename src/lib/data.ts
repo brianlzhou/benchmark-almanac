@@ -28,9 +28,13 @@ export const modelById = new Map(models.map((m) => [m.id, m]));
 export const benchById = new Map(benchmarks.map((b) => [b.id, b]));
 export const cardById = new Map(cards.map((c) => [c.id, c]));
 
-type EpochRow = [string, string, string | null, string | null, number, string | null];
+type ScoreRow = [string, string, string | null, string | null, number, string | null];
+// Epoch rows add secondary metrics, then where Epoch got the score (scripts/lib/epoch-provenance.ts): 'epoch' for
+// its own run, or 'board', 'lab', 'paper' or 'unknown' for a score it collected, and the source it names
+type Via = 'epoch' | 'board' | 'lab' | 'paper' | 'unknown';
+type EpochRow = [...ScoreRow, (Record<string, number> | null)?, Via?, (string | null)?];
 // leaderboard rows add cost (US dollars per task) and output tokens per task
-type BoardRow = [...EpochRow, (number | null)?, (number | null)?];
+type BoardRow = [...ScoreRow, (number | null)?, (number | null)?, Record<string, number>?];
 const epoch = epochJson as unknown as {
   source: string;
   url: string;
@@ -41,7 +45,21 @@ const epoch = epochJson as unknown as {
 };
 export const EPOCH_SOURCE = { name: epoch.source, url: epoch.url, license: epoch.license, retrieved: epoch.retrieved };
 
-type Board = { url: string; feed: string; terms: string; retrieved: string; rows: number; unmatched: string[] };
+export interface ChartAxis {
+  key: string;
+  label: string;
+  unit?: string;
+  better?: 'higher' | 'lower';
+  log?: boolean;
+}
+/** A chart a board draws from more than its headline score (scripts/leaderboards/types.ts). */
+export interface BoardChart {
+  title: string;
+  x: ChartAxis;
+  y: ChartAxis;
+  note?: string;
+}
+type Board = { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: BoardChart; costPer?: 'run'; failed?: { date: string; error: string } };
 const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
@@ -93,7 +111,7 @@ export function normUnit(u: string | null | undefined): string {
   return 'score';
 }
 
-export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, setting, harness, value, date, cost, tokens]) => ({
+export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, setting, harness, value, date, cost, tokens, metrics]) => ({
   benchmark,
   model,
   value,
@@ -103,6 +121,7 @@ export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, settin
   date: date ?? modelById.get(model)?.released ?? null,
   cost: cost ?? null,
   tokens: tokens ?? null,
+  ...(metrics ? { metrics } : {}),
   source: 'leaderboard',
 }));
 
@@ -110,7 +129,7 @@ export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, settin
  * Entries on official leaderboards that are not in data/models.json, under the board's own name. Pages show them
  * on their benchmark's board. They never count toward leaders, reigns or lab credit.
  */
-export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, setting, harness, value, date, cost, tokens]) => ({
+export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, setting, harness, value, date, cost, tokens, metrics]) => ({
   benchmark,
   model: '',
   name,
@@ -121,19 +140,61 @@ export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, 
   date: date ?? null,
   cost: cost ?? null,
   tokens: tokens ?? null,
+  ...(metrics ? { metrics } : {}),
   source: 'leaderboard',
 }));
 
-export const epochScores: Score[] = epoch.rows.map(([benchmark, model, setting, harness, value, date]) => ({
-  benchmark,
-  model,
-  value,
-  unit: benchById.get(benchmark)?.unit ?? '%',
-  setting,
-  harness,
-  date: date ?? modelById.get(model)?.released ?? null,
-  source: 'epoch',
-}));
+// An older epoch.json has no via column: its rows take the benchmark's kind, and collected ones name no source
+const viaOf = (r: EpochRow): Via => r[7] ?? (benchById.get(r[0])?.epoch?.runs === 'external' ? 'unknown' : 'epoch');
+const epochScore = (r: EpochRow) => ({
+  benchmark: r[0],
+  model: r[1],
+  value: r[4],
+  unit: benchById.get(r[0])?.unit ?? '%',
+  setting: r[2],
+  harness: r[3],
+  date: r[5] ?? modelById.get(r[1])?.released ?? null,
+});
+
+/** Epoch AI's own runs: independent, like a leaderboard. */
+export const epochScores: Score[] = epoch.rows.filter((r) => viaOf(r) === 'epoch').map((r) => ({ ...epochScore(r), source: 'epoch' as const }));
+
+const hostOf = (u: string | null | undefined) => (u ?? '').match(/https?:\/\/([^/\s?#]+)/i)?.[1].toLowerCase().replace(/^www\./, '') ?? '';
+// the hosts of the boards the almanac reads itself, per benchmark: Epoch's copy of one of them is a duplicate
+const readHosts = new Map(Object.entries(lb.boards).map(([id, x]) => [id, new Set([hostOf(x.url), hostOf(x.feed)].filter(Boolean))]));
+
+/**
+ * Scores Epoch AI collected from somewhere else, and where from. A copy of a leaderboard the almanac reads
+ * itself is dropped. A copy of another board ('board') counts as an independent run. A lab's report, a paper or
+ * an unnamed source is a claim: it shows only where a page includes claimed scores.
+ */
+export const collectedScores: Score[] = epoch.rows
+  .filter((r) => viaOf(r) !== 'epoch')
+  // a copy of a board we read ourselves: the same host, or no link at all (Epoch often names the board only)
+  .filter((r) => !(viaOf(r) === 'board' && readHosts.has(r[0]) && (!hostOf(r[8]) || readHosts.get(r[0])!.has(hostOf(r[8])))))
+  .map((r) => ({ ...epochScore(r), source: 'collected' as const, via: viaOf(r) as Exclude<Via, 'epoch'>, from: r[8] ?? null }));
+/** The collected scores that count as independent runs: copies of boards the almanac doesn't read itself. */
+export const viaBoardScores = collectedScores.filter((x) => x.via === 'board');
+/** The collected scores that are claims: a lab's report, a paper, or a source Epoch doesn't name. */
+export const collectedClaims = collectedScores.filter((x) => x.via !== 'board');
+
+/** A short name for where a collected score came from: the board or report Epoch names, or its site. */
+export function fromName(x: Pick<Score, 'from'>): string {
+  const f = (x.from ?? '').trim();
+  if (!f) return 'a source Epoch AI doesn’t name';
+  if (/^https?:\/\//i.test(f)) return hostOf(f);
+  return f.length > 60 ? `${f.slice(0, 57).trimEnd()}…` : f;
+}
+
+/** Where a score came from, in a few words, for tooltips and tables. */
+export function sourceLabel(x: Pick<Score, 'source' | 'via' | 'from'>): string {
+  if (x.source === 'leaderboard') return 'Official leaderboard';
+  if (x.source === 'epoch') return 'Epoch AI run';
+  if (x.source === 'card') return 'Lab model card';
+  if (x.via === 'board') return `${fromName(x)}, via Epoch AI`;
+  if (x.via === 'unknown') return 'Collected by Epoch AI, source not named';
+  return `Claim in ${fromName(x)}, via Epoch AI`;
+}
 
 /** Card scores in the benchmark's own unit. A score in another unit (an Elo beside percentages) is left out. */
 export const cardScores: Score[] = [...cards, ...systemCards].flatMap((c) =>
@@ -165,6 +226,8 @@ function groupBy<T>(xs: T[], k: (x: T) => string): Map<string, T[]> {
 }
 
 const epochByBench = groupBy(epochScores, (s) => s.benchmark);
+const viaByBench = groupBy(viaBoardScores, (s) => s.benchmark);
+const claimsByBench = groupBy(collectedClaims, (s) => s.benchmark);
 const lbByBench = groupBy(leaderboardScores, (s) => s.benchmark);
 const unlistedByBench = groupBy(unlistedScores, (s) => s.benchmark);
 const cardScoresByBench = groupBy(cardScores, (s) => s.benchmark);
@@ -196,6 +259,11 @@ export function bestPerModel(scores: Score[], b: Benchmark): Score[] {
   return [...top.values()].sort((x, y) => sign * (y.value - x.value) || (x.date ?? '').localeCompare(y.date ?? ''));
 }
 
+/** The best score per model from one source, out of a summary's boards. */
+export function boardOf(src: BoardSource | null, s: Pick<BenchSummary, 'leaderboardBoard' | 'epochBoard' | 'viaBoard' | 'cardBoard' | 'claimBoard'>): Score[] {
+  return src === 'leaderboard' ? s.leaderboardBoard : src === 'epoch' ? s.epochBoard : src === 'collected' ? s.viaBoard : src === 'card' ? s.cardBoard : src === 'claim' ? s.claimBoard : [];
+}
+
 // ---- benchmark summaries --------------------------------------------------------------------------
 export type Status = 'in use' | 'fading' | 'dropped' | 'system cards' | 'not in cards';
 
@@ -203,8 +271,16 @@ export interface FrontierPoint {
   date: string;
   value: number;
   model: string;
-  source: 'leaderboard' | 'epoch' | 'card';
+  source: Score['source'];
+  via?: Score['via'];
+  from?: string | null;
 }
+
+/**
+ * One source a benchmark's page can lead with. 'collected' is a board Epoch AI copied that we don't read
+ * ourselves. 'claim' is the claims Epoch AI collected, a last resort when a benchmark has nothing else.
+ */
+export type BoardSource = 'leaderboard' | 'epoch' | 'collected' | 'card' | 'claim';
 
 export interface BenchSummary {
   b: Benchmark;
@@ -223,11 +299,16 @@ export interface BenchSummary {
   /** Best score so far over time, from cards and Epoch combined (percent benchmarks only). */
   frontier: FrontierPoint[];
   leaderboardBoard: Score[];
+  /** Epoch AI's own runs, best per model. */
   epochBoard: Score[];
+  /** Copies of other leaderboards in Epoch AI's data, from boards we don't read ourselves: independent runs. */
+  viaBoard: Score[];
   cardBoard: Score[];
+  /** Claims Epoch AI collected: lab reports, papers and unnamed sources. Shown only with claimed scores included. */
+  claimBoard: Score[];
   /** The board pages lead with: the official leaderboard's, then Epoch's, when either covers five or more models. */
   board: Score[];
-  boardSource: 'leaderboard' | 'epoch' | 'card' | null;
+  boardSource: BoardSource | null;
   /** Entries on the official leaderboard that are not in the model list, best per name. Shown, never credited. */
   unlisted: Score[];
   /**
@@ -235,9 +316,11 @@ export interface BenchSummary {
    * or the unlisted entries alone when no other source has a score.
    */
   shown: Score[];
-  shownSource: 'leaderboard' | 'epoch' | 'card' | null;
+  shownSource: BoardSource | null;
   best?: Score;
   saturatedAt?: string;
+  /** The date the best score first reached NEAR_CEILING, when some tests take a long time to close out. */
+  nearCeilingAt?: string;
   nScores: number;
   /** The newest score from any source: when a model was last added. An old date means the board has gone quiet. */
   lastAdded?: { date: string; model: string; source: Score['source'] };
@@ -246,6 +329,7 @@ export interface BenchSummary {
 }
 
 export const SATURATED = 85;
+export const NEAR_CEILING = 95;
 
 const summaries = new Map<string, BenchSummary>();
 
@@ -272,27 +356,37 @@ export function benchSummary(id: string): BenchSummary {
 
   const leaderboardBoard = bestPerModel(lbByBench.get(id) ?? [], b);
   const epochBoard = bestPerModel(epochByBench.get(id) ?? [], b);
+  const viaBoard = bestPerModel(viaByBench.get(id) ?? [], b);
   const cardBoard = bestPerModel(cardScoresByBench.get(id) ?? [], b);
+  const claimBoard = bestPerModel(claimsByBench.get(id) ?? [], b);
   // An independent board leads, unless it stopped six or more months before the newest score from another
-  // source. A board that ends at o4-mini should not headline a benchmark labs still report today.
+  // source. A board that ends at o4-mini should not headline a benchmark labs still report today. Independent
+  // sources come in this order: the benchmark's own leaderboard, Epoch AI's runs, then a board Epoch AI copied.
   const newest = (xs: Score[]) => xs.reduce((m, x) => (x.date && x.date > m ? x.date : m), '');
-  const latest = [leaderboardBoard, epochBoard, cardBoard].map(newest).reduce((a, x) => (x > a ? x : a), '');
+  const latest = [leaderboardBoard, epochBoard, viaBoard, cardBoard].map(newest).reduce((a, x) => (x > a ? x : a), '');
   const fresh = (xs: Score[]) => !latest || !newest(xs) || monthsBetween(newest(xs), latest) < 6;
+  const [nL, nE, nV, nC] = [leaderboardBoard.length, epochBoard.length, viaBoard.length, cardBoard.length];
   const boardSource: BenchSummary['boardSource'] =
-    (leaderboardBoard.length >= 5 && fresh(leaderboardBoard)) || (leaderboardBoard.length > 0 && epochBoard.length < 5 && cardBoard.length === 0)
+    (nL >= 5 && fresh(leaderboardBoard)) || (nL > 0 && nE < 5 && nV < 5 && nC === 0)
       ? 'leaderboard'
-      : (epochBoard.length >= 5 && fresh(epochBoard)) || (epochBoard.length > 0 && cardBoard.length === 0)
+      : (nE >= 5 && fresh(epochBoard)) || (nE > 0 && nV < 5 && nC === 0)
         ? 'epoch'
-        : cardBoard.length >= 5 || (cardBoard.length > 0 && leaderboardBoard.length < 5 && epochBoard.length < 5)
-          ? 'card'
-          : leaderboardBoard.length >= 5
-            ? 'leaderboard'
-            : epochBoard.length
-              ? 'epoch'
-              : cardBoard.length
-                ? 'card'
-                : null;
-  const board = boardSource === 'leaderboard' ? leaderboardBoard : boardSource === 'epoch' ? epochBoard : boardSource === 'card' ? cardBoard : [];
+        : (nV >= 5 && fresh(viaBoard)) || (nV > 0 && nC === 0)
+          ? 'collected'
+          : nC >= 5 || (nC > 0 && nL < 5 && nE < 5 && nV < 5)
+            ? 'card'
+            : nL >= 5
+              ? 'leaderboard'
+              : nE
+                ? 'epoch'
+                : nV
+                  ? 'collected'
+                  : nC
+                    ? 'card'
+                    : claimBoard.length
+                      ? 'claim'
+                      : null;
+  const board = boardOf(boardSource, { leaderboardBoard, epochBoard, viaBoard, cardBoard, claimBoard });
   const unlisted = bestPerModel(unlistedByBench.get(id) ?? [], b);
   const shownSource = boardSource ?? (unlisted.length ? 'leaderboard' : null);
   const shown = shownSource === 'leaderboard' && unlisted.length ? bestPerModel([...board, ...unlisted], b) : board;
@@ -303,8 +397,11 @@ export function benchSummary(id: string): BenchSummary {
   if (pct) {
     for (const s of lbByBench.get(id) ?? []) if (s.date) points.push({ date: s.date, value: s.value, model: s.model, source: 'leaderboard' });
     for (const s of epochByBench.get(id) ?? []) if (s.date) points.push({ date: s.date, value: s.value, model: s.model, source: 'epoch' });
+    for (const s of viaByBench.get(id) ?? []) if (s.date) points.push({ date: s.date, value: s.value, model: s.model, source: 'collected', via: s.via, from: s.from });
     for (const s of cardScoresByBench.get(id) ?? [])
       if (s.unit === '%' && s.value > 0 && s.value <= 100 && s.date) points.push({ date: s.date, value: s.value, model: s.model, source: 'card' });
+    // after the cards, so a lab's own card wins a tie with Epoch AI's copy of the same claim
+    for (const s of claimsByBench.get(id) ?? []) if (s.date) points.push({ date: s.date, value: s.value, model: s.model, source: 'collected', via: s.via, from: s.from });
   }
   points.sort((x, y) => x.date.localeCompare(y.date) || y.value - x.value);
   const frontier: FrontierPoint[] = [];
@@ -323,6 +420,7 @@ export function benchSummary(id: string): BenchSummary {
   }
   const atLast = last ? frontier.filter((p) => p.date <= last).at(-1)?.value : undefined;
   const saturatedAt = b.better !== 'lower' ? frontier.find((p) => p.value >= SATURATED)?.date : undefined;
+  const nearCeilingAt = b.better !== 'lower' ? frontier.find((p) => p.value >= NEAR_CEILING)?.date : undefined;
   if (status === 'fading' || status === 'dropped') {
     const succ = b.successor ? citesByBench.get(b.successor)?.[0]?.card.date : undefined;
     if (atLast !== undefined && atLast >= SATURATED) why = 'saturated';
@@ -331,12 +429,12 @@ export function benchSummary(id: string): BenchSummary {
   }
 
   let lastAdded: BenchSummary['lastAdded'];
-  for (const x of [...(lbByBench.get(id) ?? []), ...(epochByBench.get(id) ?? []), ...(cardScoresByBench.get(id) ?? [])])
+  for (const x of [...(lbByBench.get(id) ?? []), ...(epochByBench.get(id) ?? []), ...(viaByBench.get(id) ?? []), ...(claimsByBench.get(id) ?? []), ...(cardScoresByBench.get(id) ?? [])])
     if (x.date && x.date <= AS_OF && (!lastAdded || x.date > lastAdded.date)) lastAdded = { date: x.date, model: x.model, source: x.source };
   for (const c of [...cites, ...docCites]) if (!lastAdded || c.card.date > lastAdded.date) lastAdded = { date: c.card.date, model: c.card.model, source: 'card' };
   const refreshed = [
     ...(lbByBench.get(id)?.length && LEADERBOARDS[id]?.retrieved ? [LEADERBOARDS[id].retrieved] : []),
-    ...(epochByBench.get(id)?.length ? [epoch.retrieved] : []),
+    ...(epochByBench.get(id)?.length || viaByBench.get(id)?.length || claimsByBench.get(id)?.length ? [epoch.retrieved] : []),
   ].sort().at(-1);
 
   const s: BenchSummary = {
@@ -353,7 +451,9 @@ export function benchSummary(id: string): BenchSummary {
     frontier,
     leaderboardBoard,
     epochBoard,
+    viaBoard,
     cardBoard,
+    claimBoard,
     board,
     boardSource,
     unlisted,
@@ -361,7 +461,8 @@ export function benchSummary(id: string): BenchSummary {
     shownSource,
     best: board[0],
     saturatedAt,
-    nScores: new Set([...leaderboardBoard, ...epochBoard, ...cardBoard].map((x) => x.model)).size,
+    nearCeilingAt,
+    nScores: new Set([...leaderboardBoard, ...epochBoard, ...viaBoard, ...cardBoard, ...claimBoard].map((x) => x.model)).size,
     lastAdded,
     refreshed,
   };
@@ -418,7 +519,7 @@ export function modelSummary(id: string): ModelSummary {
   const results: ModelResult[] = [];
   for (const b of benchmarks) {
     const s = benchSummary(b.id);
-    for (const board of [s.board, s.leaderboardBoard, s.epochBoard, s.cardBoard]) {
+    for (const board of [s.board, s.leaderboardBoard, s.epochBoard, s.viaBoard, s.cardBoard, s.claimBoard]) {
       if (!board.length) continue;
       const i = board.findIndex((x) => x.model === id);
       if (i >= 0) {
@@ -442,13 +543,15 @@ export function modelSummary(id: string): ModelSummary {
 
 /** Models worth a page: anything with a launch post, an ECI score, or scores on three or more benchmarks from any source. */
 const benchesByModel = new Map<string, Set<string>>();
-for (const s of [...epochScores, ...leaderboardScores, ...cardScores]) {
+for (const s of [...epochScores, ...collectedScores, ...leaderboardScores, ...cardScores]) {
   let set = benchesByModel.get(s.model);
   if (!set) benchesByModel.set(s.model, (set = new Set()));
   set.add(s.benchmark);
 }
 const launched = new Set(cards.map((c) => c.model));
 export const featuredModels = models.filter((m) => eciByModel.has(m.id) || launched.has(m.id) || (benchesByModel.get(m.id)?.size ?? 0) >= 3);
+/** Labs with a page of their own: those with at least one model that has a page (see pages/labs/[id].astro). */
+export const labPages = new Set(featuredModels.map((m) => m.lab).filter((l): l is string => !!l));
 
 export { eciOrder };
 

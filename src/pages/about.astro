@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { cards, systemCards, benchmarks, labs, EPOCH_SOURCE, SATURATED, AS_OF } from '../lib/data.ts';
-import { benchmarkCount } from '../lib/counts.ts';
 import { LEVELS, SCORING } from '../lib/taxonomy.ts';
 import { humanDate } from '../lib/format.ts';
 import reviewed from '../../data/reviewed.json';
@@ -39,16 +38,16 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
       <p>
         <b>Lab model cards.</b> {cards.length} launch posts from {new Set(cards.map((c) => c.lab)).size} labs, from March 2023 to {humanDate(AS_OF)}. For each post we record the benchmarks in its headline results and the model's score on each, as the post gives it. Whether we call a benchmark in use, fading or dropped depends only on these posts.
         {systemCards.length > 0 && ` We also read ${systemCards.length} system cards, model cards and technical reports that came out with the releases. From these we record every evaluation each document reports, safety and frontier-risk tests included, along with the section each result appears in.`}
-        Labs pick their own settings, so card scores don't compare as cleanly as independent runs. We say on each page which kind of score it shows.
+        Labs pick their own settings, so card scores don't compare as cleanly as independent runs. We say on each page which kind of score it shows, and <a href="/methodology/">How we compare scores</a> explains when two scores compare.
       </p>
       <p>
-        <b>Official leaderboards.</b> Many benchmarks keep their own leaderboard, and new models usually show up there first. We import each board from the data file it publishes, using the scripts in <code>scripts/leaderboards/</code>, and match its model names to ours. If a benchmark's own board has five or more models, we lead with it on that benchmark's page.
+        <b>Official leaderboards.</b> Many benchmarks keep their own leaderboard, and new models usually show up there first. We import each board from the data file it publishes, using the scripts in <code>scripts/leaderboards/</code>, and match its model names to ours. Some benchmarks have no board of their own, and a third party such as Stanford's HELM, MathArena or Vals AI runs one. We read those boards the same way and name who runs them. If a benchmark's board has five or more models, we lead with it on that benchmark's page.
       </p>
       <p>
-        <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {humanDate(EPOCH_SOURCE.retrieved)}. Epoch runs some of these itself and collects the rest from public leaderboards. We also use its Epoch Capabilities Index, which puts models on one scale across many benchmarks. We leave out the rows Epoch collected from Artificial Analysis, because Artificial Analysis's terms do not allow reuse in other ranking products.
+        <b>Independent runs.</b> Scores from <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a> ({EPOCH_SOURCE.license}), retrieved {humanDate(EPOCH_SOURCE.retrieved)}. Epoch runs some of these itself and collects the rest. A score it copied from a leaderboard counts as an independent run. One it took from a lab’s report or a paper counts as a claim. We also use its Epoch Capabilities Index, which puts models on one scale across many benchmarks. We leave out the rows Epoch collected from Artificial Analysis, because Artificial Analysis's terms do not allow reuse in other ranking products.
       </p>
       <p>
-        <b>The catalog.</b> {benchmarkCount.toLocaleString('en-US')} benchmarks ({benchmarks.length.toLocaleString('en-US')} counting each version), each with what it tests, who made it, and links to its code, paper, data and leaderboard. We checked every GitHub link against the GitHub API. The list began with benchmarks from lab cards, Epoch's hub and public collections, and research agents filled in the details from primary sources.
+        <b>The catalog.</b> {benchmarks.length.toLocaleString('en-US')} benchmarks, each with what it tests, who made it, and links to its code, paper, data and leaderboard. We checked every GitHub link against the GitHub API. The list began with benchmarks from lab cards, Epoch's hub and public collections, and research agents filled in the details from primary sources.
       </p>
     </section>
 
@@ -109,7 +108,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
         A model takes number one on a benchmark on the day its score beats every earlier score, and holds it until a later model beats it. If two models tie, the earlier one keeps the spot. We date a score to its model's release, or a lab claim to the card that made it. No score is dated before the benchmark came out. Our charts start in January 2023.
       </p>
       <p>
-        We stop counting time at number one once the best score passes {SATURATED}%, since a lead means little after that. We also stop if more than 45 days go by with no newer model tested, because then nobody knows who would lead. In that case the count ends on the date of the newest model tested. The first model to take a benchmark past {SATURATED}% gets a close-out, which we count separately. A new version doesn't end the count for the old one. As long as people still test the old version its race goes on, and ARC-AGI-1 wasn't closed out until long after ARC-AGI-2 came out. Shares of time at number one include only these contested days.
+        We stop counting time at number one once the best score passes {SATURATED}%, since a lead means little after that. We also stop if more than 45 days go by with no newer model tested, because then nobody knows who would lead. In that case the count ends on the date of the newest model tested. The first model to take a benchmark past {SATURATED}% gets a close-out, which we count separately. By default both come from the one source the benchmark’s own page leads with, so a lab claim or an outside run can’t contradict it. A new version doesn't end the count for the old one. As long as people still test the old version its race goes on, and ARC-AGI-1 wasn't closed out until long after ARC-AGI-2 came out. Shares of time at number one include only these contested days.
       </p>
     </section>
 
@@ -126,7 +125,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
     <section id="credits">
       <h2>Credits</h2>
       <p>
-        Scores and the capability index: Epoch AI, under CC BY 4.0. Paper abstracts: arXiv metadata, under CC0, and other papers under the license each one names. Lab marks: <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a>, under the MIT License, and the labs’ own websites and GitHub or Hugging Face organizations. The marks are trademarks of their owners. Type: Newsreader and Geist, under the SIL Open Font License. Our page designs borrow from the benchmark pages of Epoch AI, Artificial Analysis, Arena and Design Arena.
+        Scores and the capability index: Epoch AI, under CC BY 4.0. Leaderboard scores: each board’s makers, linked on its benchmark’s page, including <a href="https://www.designarena.ai/">Design Arena</a> for its arena ratings. Paper abstracts: arXiv metadata, under CC0, and other papers under the license each one names. Lab marks: <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a>, under the MIT License, and the labs’ own websites and GitHub or Hugging Face organizations. The marks are trademarks of their owners. Type: Newsreader and Geist, under the SIL Open Font License.
       </p>
     </section>
   </div>

@@ -1,13 +1,18 @@
 ---
 // Who held number one. One row per benchmark on a shared time axis. The filled step shape rises with the
-// best score so far, so its height shows how good the leader was, and each stretch takes the colour of
+// best score so far, so its height shows how good the leader was, and each stretch takes the color of
 // the lab whose model held the top spot. The model's name and lab mark sit under the stretch it held.
-// Once the clock stops (the benchmark passed 85%, a new version replaced it, or no newer model was
-// tested) the rest of the row fades, and a mark says which of the three happened.
+// Once the clock stops (the benchmark passed 85%, or no newer model was tested, often because a new version
+// replaced it) the rest of the row fades, and a mark says which happened. A new version alone does not stop
+// the old one's clock: its race goes on while people still test it.
+//
+// Versions of one test share a row: each version holds the strip from its release until the next one
+// comes out, a dark tick marks each hand-over, and the version names sit under the strip. A button under
+// the name opens one row per version, with the full history of each.
 import type { ReignRow } from '../lib/reigns.ts';
 import { reignDays, clockStop } from '../lib/reigns.ts';
 import LabMark from './LabMark.astro';
-import { benchById, modelById, labById, AS_OF } from '../lib/data.ts';
+import { benchById, modelById, labById, AS_OF, LEADERBOARDS } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { yearFrac, monthYear, score as fmt } from '../lib/format.ts';
 import { timeTicks, yearLines } from '../lib/scale.ts';
@@ -19,8 +24,12 @@ interface Props {
   /** Names for rows that are not benchmarks (the capability index). */
   names?: Record<string, { name: string; href?: string }>;
   from?: string;
+  /** Open each version's own row under a family's shared row from the start. */
+  open?: boolean;
+  /** Head each run of rows with its difficulty level. Off when rows follow another order, such as report counts. */
+  levels?: boolean;
 }
-const { rows: input, names = {}, from = '2023-01-01' } = Astro.props;
+const { rows: input, names = {}, from = '2023-01-01', open = false, levels = true } = Astro.props;
 const rows = input
   .map((r) => ({ ...r, reigns: r.reigns.filter((g) => g.end > from).map((g) => (g.start < from ? { ...g, start: from, steps: [g.steps.filter((s) => s.date <= from).at(-1) ?? g.steps[0], ...g.steps.filter((s) => s.date > from)] } : g)) }))
   .filter((r) => r.reigns.length);
@@ -29,13 +38,23 @@ const t1 = yearFrac(AS_OF) + 0.02;
 const X = (d: string) => ((yearFrac(d) - t0) / (t1 - t0)) * 1000;
 const pct = (d: string) => `${Math.max(0, Math.min(100, ((yearFrac(d) - t0) / (t1 - t0)) * 100)).toFixed(2)}%`;
 const H = 40;
-const months = (g: { start: string; end: string }) => Math.max(1, Math.round(reignDays(g) / 30.4));
 const name = (id: string) => modelById.get(id)?.name ?? id;
 const labs = [...new Set(rows.flatMap((r) => r.reigns.map((g) => g.lab ?? 'other')))];
 const mixed = new Set(rows.map((r) => r.source)).size > 1;
 const ticks = timeTicks(t0, t1, 10);
 const gridAt = ticks.map((t) => pct(t.date));
 const grid = `--yl:${yearLines(gridAt)};--yc:${yearLines(gridAt, 'var(--bg)')}`;
+const ORIGIN = {
+  leaderboard: 'From the benchmark’s own leaderboard',
+  epoch: 'From an Epoch AI run',
+  collected: 'From another leaderboard, via Epoch AI',
+  card: 'From a lab’s own report',
+  claim: 'From a claim Epoch AI collected',
+} as const;
+// a page can hold several charts, and a chart can show twice (one per score switch): ids stay unique
+const g = globalThis as { __reignChart?: number };
+const uid = (g.__reignChart = (g.__reignChart ?? 0) + 1);
+
 // "Terminal-Bench 4.0" after "Terminal-Bench 3.0" reads as "4.0"
 const shorten = (next: string, cur: string) => {
   const a = next.split(' ');
@@ -50,31 +69,229 @@ const shorten = (next: string, cur: string) => {
   return rest;
 };
 
-function shape(r: ReignRow) {
+interface Part {
+  d: string;
+  fill: string;
+  tv: string;
+  tn: string;
+  ts: string;
+  start: string;
+  lab?: string;
+  fits: boolean;
+  last: boolean;
+}
+interface Mark {
+  left: string;
+  cls: string;
+  tv: string;
+  tn: string;
+  ts: string;
+}
+interface View {
+  key: string;
+  nm: string;
+  href?: string;
+  level?: string;
+  sub: string[];
+  /** a family's shared row: the button that opens one row per version */
+  toggle?: { id: string; n: number };
+  /** a version's own row, hidden under its family's row until opened */
+  of?: string;
+  first: number;
+  parts: Part[];
+  fades: { x: number; w: number }[];
+  marks: Mark[];
+  ticks: { left: string; tv: string; tn: string; ts: string }[];
+  /** dated question refreshes that kept the benchmark one record (LiveBench) */
+  refreshes: { left: string; tv: string; tn: string; ts: string }[];
+  labels: { left: string; text: string; lab?: string; minor: boolean }[];
+  /** `wide`: shown only where the strip is wide enough (a phone strip is about 340 px) */
+  versions: { left: string; text: string; now: boolean; wide: boolean }[];
+  now: { lab?: string; model: string; value: string };
+}
+
+/** The filled step shape of each reign, cut off at `until` (the day the next version came out). */
+function shape(r: ReignRow, until = '9999-12-31', version?: string): Part[] {
   const [d0, d1] = r.domain;
   const y = (v: number) => H - Math.max(1.5, ((v - d0) / (d1 - d0 || 1)) * H);
-  return r.reigns.map((g, i) => {
-    const x0 = Math.max(0, X(g.start));
-    const x1 = Math.min(1000, X(g.end));
+  const gs = r.reigns.filter((x) => x.start < until);
+  return gs.map((x, i) => {
+    const end = x.end < until ? x.end : until;
+    const x0 = Math.max(0, X(x.start));
+    const x1 = Math.min(1000, X(end));
+    const steps = x.steps.filter((s, j) => j === 0 || s.date < until);
     let d = `M${x0.toFixed(1)},${H}`;
-    g.steps.forEach((s, j) => {
+    steps.forEach((s, j) => {
       const sx = j === 0 ? x0 : Math.max(x0, X(s.date));
       d += `L${sx.toFixed(1)},${y(s.value).toFixed(1)}`;
-      const nx = j + 1 < g.steps.length ? Math.max(x0, X(g.steps[j + 1].date)) : x1;
+      const nx = j + 1 < steps.length ? Math.max(x0, X(steps[j + 1].date)) : x1;
       d += `L${nx.toFixed(1)},${y(s.value).toFixed(1)}`;
     });
     d += `L${x1.toFixed(1)},${H}Z`;
-    const best = g.steps.at(-1)!.value;
+    const top = steps.at(-1)!;
+    const m = Math.max(1, Math.round(reignDays({ start: x.start, end }) / 30.4));
+    // a board a third party runs goes by its runner's name
+    const host = top.from === 'leaderboard' ? LEADERBOARDS[r.benchmark]?.host : undefined;
+    const origin = top.from && r.source !== top.from ? ` ${host ? `From ${host}’s leaderboard` : ORIGIN[top.from]}.` : '';
     return {
-      g,
       d,
-      best,
-      last: i === r.reigns.length - 1,
+      fill: labColor(x.lab),
+      tv: r.unit === 'index' ? top.value.toFixed(1) : fmt(top.value, r.unit),
+      tn: name(x.model),
+      ts: `Number one${version ? ` on ${version}` : ''} from ${monthYear(x.start)}${end >= AS_OF ? ' to now' : ` to ${monthYear(end)}`}, ${m} ${m === 1 ? 'month' : 'months'}.${origin}`,
+      start: x.start,
+      lab: x.lab,
       // a label fits when its stretch is wide enough on a desktop strip of about 640 px
-      fits: ((x1 - x0) / 1000) * 640 >= name(g.model).length * 6.6 + 30,
+      fits: ((x1 - x0) / 1000) * 640 >= name(x.model).length * 6.6 + 30,
+      last: i === gs.length - 1,
     };
   });
 }
+
+/** Why and when a row's clock stopped, as the line under its name and the mark on its strip. */
+function stopOf(r: ReignRow) {
+  const stop = clockStop(r);
+  if (!stop) return null;
+  const b = benchById.get(r.benchmark);
+  const next = r.replacedBy ? benchById.get(r.replacedBy.benchmark) : undefined;
+  const nextName = next?.name ?? '';
+  // "OSWorld 2.0 (Aug 2026)" after "OSWorld 2.0" would shorten to "(Aug 2026)"; the version label reads better
+  const cut = shorten(nextName, b?.name ?? '');
+  const shortNext = /^[^\p{L}\p{N}]/u.test(cut) ? (next?.version ?? nextName) : cut;
+  const text =
+    stop.why === 'closed' ? `Passed 85% in ${monthYear(stop.date)}, by ${name(r.closedOut!.model)}` : stop.why === 'replaced' ? `Replaced by ${shortNext}, ${monthYear(stop.date)}` : `Not tested since ${monthYear(stop.date)}`;
+  const tip =
+    stop.why === 'closed'
+      ? { tv: fmt(r.closedOut!.value, r.unit), tn: `Closed out by ${name(r.closedOut!.model)}`, ts: `${monthYear(stop.date)}. We stop counting time at number one here.` }
+      : stop.why === 'replaced'
+        ? { tv: nextName, tn: 'Replaced by a new version', ts: `People stopped testing it around ${monthYear(stop.date)}, when the new version came out. We stop counting here.` }
+        : { tv: monthYear(stop.date), tn: 'No newer model tested', ts: 'No score has come in since, so we stop counting here.' };
+  return { ...stop, text, mark: { left: pct(stop.date), cls: stop.why, ...tip } };
+}
+
+const nowOf = (r: ReignRow) => {
+  const g = r.reigns.at(-1)!;
+  const v = g.steps.at(-1)!.value;
+  return { lab: g.lab, model: g.model, value: r.unit === 'index' ? v.toFixed(1) : fmt(v, r.unit) };
+};
+const leaders = (n: number) => `${n} ${n === 1 ? 'leader' : 'leaders'}`;
+
+// only where the row has a strip: a refresh before its first score would hang over empty space
+const refreshesOf = (id: string, since: string, until = '9999-12-31') =>
+  (benchById.get(id)?.refreshes ?? [])
+    .filter((x) => x.date > from && x.date > since && x.date < until && x.date <= AS_OF)
+    .map((x) => ({ left: pct(x.date), tv: 'Questions refreshed', tn: monthYear(x.date), ts: x.label }));
+
+function single(r: ReignRow, of?: string): View {
+  const b = benchById.get(r.benchmark);
+  const given = names[`${r.benchmark}|${r.source}`] ?? names[r.benchmark];
+  const parts = shape(r);
+  const stop = stopOf(r);
+  const xs = stop ? Math.max(0, X(stop.date)) : 1000;
+  return {
+    key: `${r.benchmark}|${r.source}`,
+    nm: given?.name ?? b?.name ?? r.benchmark,
+    href: given ? given.href : b ? `/benchmarks/${b.id}/` : undefined,
+    level: b?.level ?? undefined,
+    sub: [...(r.source === 'card' && mixed && !given ? ['Lab claims'] : []), stop ? stop.text : leaders(r.reigns.length)],
+    of,
+    first: Math.max(0, X(r.reigns[0].start)),
+    parts,
+    fades: stop && xs < 1000 ? [{ x: xs, w: 1000 - xs }] : [],
+    marks: stop ? [stop.mark] : [],
+    ticks: [],
+    refreshes: refreshesOf(r.benchmark, r.reigns[0].start),
+    labels: parts.filter((p) => p.fits).map((p) => ({ left: pct(p.start), text: p.tn, lab: p.lab, minor: !p.last })),
+    versions: [],
+    now: nowOf(r),
+  };
+}
+
+/** One row for every version of a test, oldest first. */
+function family(rs: ReignRow[], id: string): View {
+  const k = rs.length;
+  const bs = rs.map((r) => benchById.get(r.benchmark)!);
+  const newest = bs[k - 1];
+  const release = (i: number) => (bs[i].released ? `${bs[i].released!.slice(0, 7)}-01` : rs[i].reigns[0].start);
+  // each version holds the strip until the next version came out
+  const until = rs.map((r, i) => (i < k - 1 ? (r.replacedBy?.date ?? release(i + 1)) : '9999-12-31'));
+  const each = rs.map((r, i) => shape(r, until[i], bs[i].name));
+  const parts = each.flat();
+  // a version with no score before the next one came out holds no part of the strip: no tick, no name
+  const live = rs.map((_, i) => i).filter((i) => each[i].length > 0);
+  const fades: View['fades'] = [];
+  const marks: Mark[] = [];
+  rs.forEach((r, i) => {
+    const stop = stopOf(r);
+    if (!stop) return;
+    if (i === k - 1) {
+      const xs = Math.max(0, X(stop.date));
+      if (xs < 1000) fades.push({ x: xs, w: 1000 - xs });
+      marks.push(stop.mark);
+    } else if (stop.why !== 'replaced' && stop.date < until[i]) {
+      // an older version that passed 85%, or that nobody tested, before the next one came out
+      const x0 = Math.max(0, X(stop.date));
+      fades.push({ x: x0, w: Math.max(0, Math.min(1000, X(until[i])) - x0) });
+      marks.push(stop.mark);
+    }
+  });
+  // the version names under the strip: newest first, and an older name gives way when they would collide
+  // a version named by its year ("2025") would read as the time axis, so it keeps its full name
+  const label = (i: number) => {
+    const v = bs[i].version;
+    const t = v && !(i === 0 && /^original$/i.test(v)) ? v : i === 0 ? bs[0].name : shorten(bs[i].name, bs[i - 1].name);
+    return /^\d{4}$/.test(t) ? bs[i].name : t;
+  };
+  const at = rs.map((r, i) => (i === live[0] ? r.reigns[0].start : release(i)));
+  const versions: View['versions'] = [];
+  let room = Infinity;
+  let roomPhone = Infinity;
+  for (const i of [...live].reverse()) {
+    const w = label(i).length * 6.4 + 12;
+    const px = (Math.max(0, X(at[i])) / 1000) * 640;
+    const pxPhone = (Math.max(0, X(at[i])) / 1000) * 340;
+    const newest = i === live.at(-1);
+    if (!newest && px + w > room) continue;
+    const phone = newest || pxPhone + w <= roomPhone;
+    versions.unshift({ left: `min(${pct(at[i])}, calc(100% - ${Math.round(w)}px))`, text: label(i), now: i === k - 1, wide: !phone });
+    room = px - 4;
+    if (phone) roomPhone = pxPhone - 4;
+  }
+  const stop = stopOf(rs[k - 1]);
+  return {
+    key: `${newest.id}|family`,
+    nm: newest.name,
+    href: `/benchmarks/${newest.id}/`,
+    level: newest.level ?? undefined,
+    sub: [stop ? stop.text : leaders(rs.reduce((n, r) => n + r.reigns.length, 0))],
+    toggle: { id, n: k },
+    first: Math.max(0, X(rs[live[0] ?? 0].reigns[0].start)),
+    parts,
+    fades,
+    marks,
+    ticks: live.slice(1).map((i, j) => ({ left: pct(at[i]), tv: bs[i].name, tn: 'New version', ts: `${monthYear(at[i])}. Before this, the row is ${bs[live[j]].name}.` })),
+    refreshes: rs.flatMap((r, i) => refreshesOf(r.benchmark, r.reigns[0].start, until[i])),
+    labels: [],
+    versions,
+    now: nowOf(rs[k - 1]),
+  };
+}
+
+// versions of one test sit next to each other in the rows (see leaderRows): gather them
+const groups: ReignRow[][] = [];
+for (const r of rows) {
+  const fam = benchById.get(r.benchmark)?.family;
+  const last = groups.at(-1);
+  const prev = last?.at(-1);
+  if (fam && prev && prev.source === r.source && benchById.get(prev.benchmark)?.family === fam && !last!.some((x) => x.benchmark === r.benchmark)) last!.push(r);
+  else groups.push([r]);
+}
+const views: View[] = groups.flatMap((rs, i) => {
+  if (rs.length === 1) return [single(rs[0])];
+  const id = `rc${uid}-${i}`;
+  return [family(rs, id), ...rs.map((r) => single(r, id))];
+});
+const levelsShown = new Set(views.filter((v) => !v.of).map((v) => v.level));
 ---
 
 <figure class="rc">
@@ -92,96 +309,73 @@ function shape(r: ReignRow) {
   </div>
   <div class="rows">
     {
-      rows.map((r, i) => {
-        const b = benchById.get(r.benchmark);
-        const prevLevel = i > 0 ? benchById.get(rows[i - 1].benchmark)?.level : undefined;
-        const heading = b?.level && b.level !== prevLevel && rows.some((x) => benchById.get(x.benchmark)?.level !== b.level) ? LEVEL_BY_ID.get(b.level) : undefined;
-        const given = names[`${r.benchmark}|${r.source}`] ?? names[r.benchmark];
-        const nm = given?.name ?? b?.name ?? r.benchmark;
-        const href = given ? given.href : b ? `/benchmarks/${b.id}/` : undefined;
-        const parts = shape(r);
-        const now = r.reigns.at(-1)!;
-        const unit = r.unit;
-        const first = r.reigns[0].start;
-        const stop = clockStop(r);
-        const xs = stop ? Math.max(0, X(stop.date)) : 1000;
-        const nextName = r.replacedBy ? (benchById.get(r.replacedBy.benchmark)?.name ?? '') : '';
-        // "OSWorld 2.0 (Aug 2026)" after "OSWorld 2.0" would shorten to "(Aug 2026)"; the version label reads better
-        const cut = shorten(nextName, b?.name ?? '');
-        const shortNext = /^[^\p{L}\p{N}]/u.test(cut) ? (benchById.get(r.replacedBy?.benchmark ?? '')?.version ?? nextName) : cut;
-        const stopText = !stop
-          ? ''
-          : stop.why === 'closed'
-            ? `Passed 85% in ${monthYear(stop.date)}`
-            : stop.why === 'replaced'
-              ? `Replaced by ${shortNext}, ${monthYear(stop.date)}`
-              : `Not tested since ${monthYear(stop.date)}`;
-        const stopTip = !stop
-          ? undefined
-          : stop.why === 'closed'
-            ? { tv: fmt(r.closedOut!.value, unit), tn: `Closed out by ${name(r.closedOut!.model)}`, ts: `${monthYear(stop.date)}. Time after this does not count toward the share at number one.` }
-            : stop.why === 'replaced'
-              ? { tv: nextName, tn: 'Replaced by a new version', ts: `${monthYear(stop.date)}. Time after this does not count.` }
-              : { tv: monthYear(stop.date), tn: 'No newer model tested', ts: 'Later models have no score here, so time after this does not count.' };
+      views.map((v, i) => {
+        const prevLevel = views.slice(0, i).filter((x) => !x.of).at(-1)?.level;
+        const heading = levels && !v.of && v.level && v.level !== prevLevel && levelsShown.size > 1 ? LEVEL_BY_ID.get(v.level) : undefined;
         return (
           <>
-          {heading && (
-            <div class="group">
-              <span>{heading.name}</span>
-              <span class="gw">{heading.who}</span>
-            </div>
-          )}
-          <div class="row">
-            <div class="who">
-              {href ? <a href={href}>{nm}</a> : <span>{nm}</span>}
-              <span class="sub">
-                {r.source === 'card' && mixed && !given && <span>Lab claims</span>}
-                {stopText ? (
-                  <span>{stopText}</span>
-                ) : (
-                  <span>
-                    {r.reigns.length} {r.reigns.length === 1 ? 'leader' : 'leaders'}
-                  </span>
-                )}
-              </span>
-            </div>
-            <div class="plot" style={grid}>
-              <svg class="strip" viewBox={`0 0 1000 ${H}`} preserveAspectRatio="none" aria-label={`${nm}: number one over time`} role="img">
-                <rect class="track" x={Math.max(0, X(first))} y="0" width={1000 - Math.max(0, X(first))} height={H} />
-                {parts.map((p) => (
-                  <path
-                    d={p.d}
-                    fill={labColor(p.g.lab)}
-                    class="seg"
-                    data-tv={unit === 'index' ? p.best.toFixed(1) : fmt(p.best, unit)}
-                    data-tn={name(p.g.model)}
-                    data-ts={`Number one from ${monthYear(p.g.start)}${p.last ? ' to now' : ` to ${monthYear(p.g.end)}`}, ${months(p.g)} ${months(p.g) === 1 ? 'month' : 'months'}`}
-                  />
+            {heading && (
+              <div class="group">
+                <span>{heading.name}</span>
+                <span class="gw">{heading.who}</span>
+              </div>
+            )}
+            <div class:list={['row', { fam: !!v.toggle, ver: !!v.of }]} data-of={v.of} hidden={v.of && !open ? true : undefined}>
+              <div class="who">
+                {v.href ? <a href={v.href}>{v.nm}</a> : <span>{v.nm}</span>}
+                <span class="sub">
+                  {v.toggle && (
+                    <button type="button" class="vt" data-vt={v.toggle.id} aria-expanded={open ? 'true' : 'false'}>
+                      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                        <path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      {v.toggle.n} versions
+                    </button>
+                  )}
+                  {v.sub.map((s) => (
+                    <span>{s}</span>
+                  ))}
+                </span>
+              </div>
+              <div class="plot" style={grid}>
+                <svg class="strip" viewBox={`0 0 1000 ${H}`} preserveAspectRatio="none" aria-label={`${v.nm}: number one over time`} role="img">
+                  <rect class="track" x={v.first} y="0" width={1000 - v.first} height={H} />
+                  {v.parts.map((p) => (
+                    <path d={p.d} fill={p.fill} class="seg" data-tv={p.tv} data-tn={p.tn} data-ts={p.ts} />
+                  ))}
+                  {v.fades.map((f) => (
+                    <rect class="after" x={f.x} y="0" width={f.w} height={H} />
+                  ))}
+                </svg>
+                {v.refreshes.map((t) => (
+                  <span class="rf" style={`left:${t.left}`} data-tv={t.tv} data-tn={t.tn} data-ts={t.ts} />
                 ))}
-                {stop && xs < 1000 && <rect class="after" x={xs} y="0" width={1000 - xs} height={H} />}
-              </svg>
-              {stop && stopTip && (
-                <span class:list={['stop', stop.why]} style={`left:${pct(stop.date)}`} data-tv={stopTip.tv} data-tn={stopTip.tn} data-ts={stopTip.ts} />
-              )}
-              <div class="labels" aria-hidden="true">
-                {parts
-                  .filter((p) => p.fits)
-                  .map((p) => (
-                    <span class:list={['lbl', { minor: !p.last }]} style={`left:${pct(p.g.start)}`}>
-                      <LabMark lab={p.g.lab} size={12} />
-                      {name(p.g.model)}
+                {v.ticks.map((t) => (
+                  <span class="vb" style={`left:${t.left}`} data-tv={t.tv} data-tn={t.tn} data-ts={t.ts} />
+                ))}
+                {v.marks.map((m) => (
+                  <span class:list={['stop', m.cls]} style={`left:${m.left}`} data-tv={m.tv} data-tn={m.tn} data-ts={m.ts} />
+                ))}
+                <div class="labels" aria-hidden="true">
+                  {v.labels.map((l) => (
+                    <span class:list={['lbl', { minor: l.minor }]} style={`left:${l.left}`}>
+                      <LabMark lab={l.lab} size={12} />
+                      {l.text}
                     </span>
                   ))}
+                  {v.versions.map((l) => (
+                    <span class:list={['vl', { cur: l.now, wide: l.wide }]} style={`left:${l.left}`}>
+                      {l.text}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div class="now">
+                <LabMark lab={v.now.lab} size={15} />
+                <span class="nn">{featuredIds.has(v.now.model) ? <a href={`/models/${v.now.model}/`}>{name(v.now.model)}</a> : name(v.now.model)}</span>
+                <b class="num">{v.now.value}</b>
               </div>
             </div>
-            <div class="now">
-              <LabMark lab={now.lab} size={15} />
-              <span class="nn">
-                {featuredIds.has(now.model) ? <a href={`/models/${now.model}/`}>{name(now.model)}</a> : name(now.model)}
-              </span>
-              <b class="num">{unit === 'index' ? now.steps.at(-1)!.value.toFixed(1) : fmt(now.steps.at(-1)!.value, unit)}</b>
-            </div>
-          </div>
           </>
         );
       })
@@ -201,6 +395,17 @@ function shape(r: ReignRow) {
     </div>
   </div>
 </figure>
+
+<script>
+  // a family's button opens and closes one row per version
+  document.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest?.<HTMLButtonElement>('.rc [data-vt]');
+    if (!b) return;
+    const open = b.getAttribute('aria-expanded') !== 'true';
+    b.setAttribute('aria-expanded', String(open));
+    for (const row of document.querySelectorAll<HTMLElement>(`[data-of="${b.dataset.vt}"]`)) row.hidden = !open;
+  });
+</script>
 
 <style>
   .rc {
@@ -263,15 +468,16 @@ function shape(r: ReignRow) {
     font-size: 12px;
     color: var(--ink-3);
   }
+  /* a close-out names its model, so the line can run long: it wraps instead of running into the strip */
   .sub > span {
-    white-space: nowrap;
+    white-space: normal;
   }
   .plot {
     position: relative;
     padding-bottom: 22px;
     isolation: isolate;
   }
-  /* year gridlines: grey on the empty page, and a white cut through the coloured shapes */
+  /* year gridlines: gray on the empty page, and a white cut through the colored shapes */
   .plot::before,
   .plot::after {
     content: '';
@@ -308,8 +514,8 @@ function shape(r: ReignRow) {
     filter: brightness(1.08);
   }
   .after {
-    fill: var(--bg);
-    opacity: 0.62;
+    fill: var(--fade);
+    opacity: var(--fade-o);
     pointer-events: none;
   }
   .stop {
@@ -318,6 +524,8 @@ function shape(r: ReignRow) {
     height: 40px;
     width: 14px;
     margin-left: -7px;
+    /* above a version's hand-over tick, when a version closed out the month it came out */
+    z-index: 2;
   }
   .stop::before {
     content: '';
@@ -401,6 +609,104 @@ function shape(r: ReignRow) {
     height: 5px;
     border-left: 1px solid var(--ink-4);
   }
+  /* a family's rows: the shared row, then one row per version when opened */
+  .row[hidden] {
+    display: none;
+  }
+  .vt {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 0 0 -4px;
+    padding: 1px 6px 1px 3px;
+    border: 0;
+    border-radius: 5px;
+    background: none;
+    color: var(--ink-2);
+    font: 500 12px/1.4 var(--sans);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 140ms ease;
+  }
+  .vt:hover {
+    background: var(--panel);
+  }
+  .vt:focus-visible {
+    outline: 2px solid var(--ink-3);
+    outline-offset: 1px;
+  }
+  .vt svg {
+    flex: none;
+    color: var(--ink-3);
+    transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .vt[aria-expanded='true'] svg {
+    transform: rotate(90deg);
+  }
+  .ver .who {
+    margin-left: 7px;
+    padding-left: 12px;
+    border-left: 1px solid var(--line);
+  }
+  .ver .who a,
+  .ver .who > span:first-child {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+  .ver .strip {
+    opacity: 0.85;
+  }
+  /* the hand-over to a new version: a dark tick through the strip */
+  .vb {
+    position: absolute;
+    top: -3px;
+    height: 46px;
+    width: 12px;
+    margin-left: -6px;
+    z-index: 1;
+  }
+  .vb::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0;
+    bottom: 0;
+    border-left: 2px solid var(--ink);
+    box-shadow: 0 0 0 1px var(--bg);
+  }
+  /* a question refresh: a dotted line through the strip, quieter than a new version */
+  .rf {
+    position: absolute;
+    top: 0;
+    height: 40px;
+    width: 10px;
+    margin-left: -5px;
+    z-index: 1;
+  }
+  .rf::before {
+    content: '';
+    position: absolute;
+    left: 4.5px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dotted var(--ink);
+    opacity: 0.55;
+  }
+  .rf:hover::before {
+    opacity: 1;
+    border-left-style: solid;
+  }
+  .vl {
+    position: absolute;
+    font: 500 11.5px/16px var(--sans);
+    color: var(--ink-3);
+    white-space: nowrap;
+    padding-left: 1px;
+  }
+  .vl.cur {
+    color: var(--ink);
+  }
   @media (max-width: 900px) {
     .row {
       grid-template-columns: minmax(0, 1fr);
@@ -420,8 +726,20 @@ function shape(r: ReignRow) {
     .labels {
       display: none;
     }
+    .fam .labels {
+      display: block;
+    }
+    .vl.wide {
+      display: none;
+    }
     .plot {
       padding-bottom: 6px;
+    }
+    .fam .plot {
+      padding-bottom: 22px;
+    }
+    .ver .who {
+      margin-left: 0;
     }
     .axis .who,
     .axis .now {

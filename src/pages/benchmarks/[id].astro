@@ -23,11 +23,16 @@ import Spark from '../../components/Spark.astro';
 import LinkIcon from '../../components/LinkIcon.astro';
 import { makerParts } from '../../lib/makers.ts';
 import { familyOf } from '../../lib/reigns.ts';
-import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores } from '../../lib/data.ts';
-import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES } from '../../lib/taxonomy.ts';
+import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores, sourceLabel, fromName } from '../../lib/data.ts';
+import { poolViews, aheadElsewhere, firstPast } from '../../lib/pools.ts';
+import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES, RANKED_BY_PEOPLE_OR_MATCHES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
 import githubJson from '../../../data/github.json';
+import ClaimTable from '../../components/ClaimTable.astro';
+import { claimsForBenchmark, claimStats } from '../../lib/claims.ts';
+import type { ChangeKind } from '../../lib/types.ts';
+import { SITE_NAME, CATALOG_ID } from '../../lib/site.ts';
 
 export function getStaticPaths() {
   return benchmarks.map((b) => ({ params: { id: b.id } }));
@@ -55,6 +60,19 @@ const chartNum = (v: number, unit?: string) => {
   return unit === '%' ? `${Math.round(v * 10) / 10}%` : unit === '$' || unit === 'usd' ? `$${n}` : unit ? `${n} ${unit}` : n;
 };
 const openIssues = unresolved(issues).length;
+const myClaims = claimsForBenchmark(b.id);
+const claimSum = claimStats(myClaims);
+const CHANGE: Record<ChangeKind, string> = {
+  regrade: 'Scores recomputed',
+  grader: 'Grader changed',
+  subset: 'Tasks changed',
+  harness: 'Harness changed',
+  scoring: 'Metric changed',
+  questions: 'Questions corrected',
+  policy: 'Leaderboard rules changed',
+};
+const changes = [...(b.changes ?? [])].reverse();
+const changeDate = (d: string) => (d.length === 7 ? longMonthYear(`${d}-01`) : humanDate(d));
 const unit = b.unit ?? '%';
 const area = AREA_BY_ID.get(s.area)!;
 const gh = (githubJson as Record<string, { stars?: number; archived?: boolean; license?: string | null; pushed?: string }>)[
@@ -65,7 +83,10 @@ const WHY: Record<string, string> = { saturated: 'after it saturated', replaced:
 const succ = b.successor ? benchById.get(b.successor) : undefined;
 const gap = untested(b.id);
 const official = LEADERBOARDS[b.id];
-const SRC: Record<string, string> = { leaderboard: 'on its own leaderboard', epoch: 'in Epoch AI data', card: 'in lab cards' };
+// a board a third party runs, such as Vals AI's MATH-500 board, goes by its runner's name, not as the benchmark's own
+const boardHost = official?.host;
+const boardIs = boardHost ? `${boardHost}’s leaderboard` : 'the benchmark’s own leaderboard';
+const SRC: Record<string, string> = { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : 'on its own leaderboard', epoch: 'in Epoch AI’s runs', collected: 'on a board Epoch AI copied', card: 'in lab cards', claim: 'in claims Epoch AI collected' };
 const family = b.family ? benchmarks.filter((x) => x.family === b.family).sort((x, y) => (x.released ?? '').localeCompare(y.released ?? '')) : [];
 const SHOW = 4;
 // every run on the official board, by effort level and cost
@@ -76,20 +97,37 @@ const effortRuns = effort ? [...effort.all].sort((x, y) => y.value - x.value) : 
 // The reign chart starts in 2023, or at the release month for a benchmark that came out later
 const opened = b.released ? `${b.released.slice(0, 7)}-01` : '';
 const reignFrom = opened > '2023-01-01' ? opened : '2023-01-01';
-const reignRows = (['leaderboard', 'epoch', 'card'] as const)
+const reignRows = (['leaderboard', 'epoch', 'collected', 'card'] as const)
   .map((src) => reignRow(b.id, src))
   .filter((r): r is NonNullable<typeof r> => r !== null && r.reigns.some((g) => g.end > reignFrom));
-const ROW_NAME: Record<string, string> = { leaderboard: 'Own leaderboard', epoch: 'Epoch AI runs', card: 'Lab claims' };
-const ROW_TEXT: Record<string, string> = { leaderboard: 'the benchmark’s own leaderboard', epoch: 'Epoch AI’s runs', card: 'what labs claim in their cards' };
+const viaName = s.viaBoard[0] ? fromName(s.viaBoard[0]) : 'Another board';
+const ROW_NAME: Record<string, string> = { leaderboard: boardHost ? `${boardHost} leaderboard` : 'Own leaderboard', epoch: 'Epoch AI runs', collected: `${viaName}, via Epoch AI`, card: 'Lab claims' };
+const ROW_TEXT: Record<string, string> = {
+  leaderboard: boardIs,
+  epoch: 'Epoch AI’s runs',
+  collected: `${viaName}, which Epoch AI copied`,
+  card: 'what labs claim in their cards',
+};
 const reignNames = Object.fromEntries(reignRows.map((r) => [`${b.id}|${r.source}`, { name: ROW_NAME[r.source] }]));
-const holders = reignRows[0] ? new Set(reignRows[0].reigns.filter((g) => g.end > reignFrom).map((g) => g.model)).size : 0;
+// the pools the page can switch between: the source it leads with, every independent run, and claims too
+const pools = poolViews(b.id, reignFrom);
+const poolOn = pools.length > 1;
+const ahead = aheadElsewhere(b.id, (v) => fmt(v, unit));
+const past85 = firstPast(s, 85);
+// where each pool's count of leaders comes from, for the chart's title
+const POOL_WHERE: Record<string, string> = {
+  headline: { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : 'on the official leaderboard', epoch: 'in Epoch AI’s runs', collected: `on ${viaName}`, card: 'in labs’ own numbers', claim: 'in collected claims' }[s.boardSource ?? 'card'] ?? '',
+  independent: 'across all independent runs',
+  all: 'with claims included',
+};
 const listText = (xs: string[]) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
 // all versions of the family, each handing over to the next
-const familyRows = family.length > 1 ? leaderRows(family.map((x) => x.id), 'all', family.length) : [];
+// each version's leader and close-out come from the source its own page leads with
+const familyRows = family.length > 1 ? leaderRows(family.map((x) => x.id), 'headline', family.length) : [];
 const familyStart = familyRows.map((r) => r.reigns[0].start).sort()[0] ?? '';
 const familyFrom = familyStart > '2023-01-01' ? `${familyStart.slice(0, 7)}-01` : '2023-01-01';
 const pred = benchmarks.filter((x) => x.successor === b.id);
-const both = [s.leaderboardBoard, s.epochBoard, s.cardBoard].filter((x) => x.length).length > 1;
+const both = [s.leaderboardBoard, s.epochBoard, s.viaBoard, s.cardBoard, s.claimBoard].filter((x) => x.length).length > 1;
 // the masthead: who leads now and since when, from the same source as the board below
 const top = s.best ? modelById.get(s.best.model) : undefined;
 const nowRow = s.boardSource ? reignRow(b.id, s.boardSource) : null;
@@ -98,6 +136,8 @@ const since = nowReign && s.best && nowReign.model === s.best.model ? nowReign.s
 // an entry the board ranks above every model we track (a fine-tune, agent system or product): named, never credited
 const sign = b.better === 'lower' ? -1 : 1;
 const topOther = s.shownSource === 'leaderboard' ? s.unlisted[0] : undefined;
+// an arena whose only ratings come from labs' own posts: no leader, and a link to the live board
+const arenaClaims = (s.shownSource === 'card' || s.shownSource === 'claim') && RANKED_BY_PEOPLE_OR_MATCHES.has(b.scoring ?? '');
 const otherAhead = topOther && (!s.best || sign * topOther.value > sign * s.best.value) ? topOther : undefined;
 const shownWhat = s.unlisted.length && s.shownSource === 'leaderboard' ? 'entries' : 'models';
 const cat = b.category ?? 'other';
@@ -163,24 +203,38 @@ const dataset = {
 ---
 
 <Base title={b.name} description={metaDescription} crumbs={trail} jsonLd={dataset}>
-  <div class="page">
+  <div class:list={['page', poolOn && 'pools']}>
     <header class="head" style={`--a: var(--area-${s.area})`}>
       <Crumbs items={trail} />
       <h1 class="with-amark"><AreaMark area={s.area} size={20} />{b.name}</h1>
       <div class="mast">
-        {otherAhead && (
-          <span class="mast-lead">
-            <ModelName id="" name={otherAhead.name} size={18} />
-            <b class="num">{fmt(otherAhead.value, unit)}</b>
-            <span class="muted">tops its leaderboard</span>
-          </span>
-        )}
-        {s.best && top && (
-          <span class="mast-lead">
-            <ModelName id={s.best.model} size={18} />
-            <b class="num">{fmt(s.best.value, unit)}</b>
-            {otherAhead ? <span class="muted">leads the models we track</span> : since && <span class="muted">leads since {longMonthYear(since)}</span>}
-          </span>
+        <div class="pool-headline">
+          {otherAhead && (
+            <span class="mast-lead">
+              <ModelName id="" name={otherAhead.name} size={18} />
+              <b class="num">{fmt(otherAhead.value, unit)}</b>
+              <span class="muted">tops its leaderboard</span>
+            </span>
+          )}
+          {s.best && top && (
+            <span class="mast-lead">
+              <ModelName id={s.best.model} size={18} />
+              <b class="num">{fmt(s.best.value, unit)}</b>
+              {otherAhead ? <span class="muted">leads the models we track</span> : since && <span class="muted">leads since {longMonthYear(since)}</span>}
+            </span>
+          )}
+        </div>
+        {pools.slice(1).map(
+          (v) =>
+            v.best && (
+              <div class={`pool-${v.pool}`}>
+                <span class="mast-lead">
+                  <ModelName id={v.best.model} size={18} />
+                  <b class="num">{fmt(v.best.value, unit)}</b>
+                  <span class="muted">{v.since ? `leads since ${longMonthYear(v.since)}` : 'leads'}</span>
+                </span>
+              </div>
+            ),
         )}
         {s.frontier.length >= 2 && <Spark points={s.frontier} unit={unit} better={b.better} color={`var(--area-${s.area})`} label={`Best score on ${b.name} over time`} />}
         <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
@@ -194,6 +248,42 @@ const dataset = {
           </a>
         )}
       </div>
+      {
+        poolOn && (
+          <div class="pool-switch">
+            <div class="seg" role="radiogroup" aria-label="Scores from">
+              {pools.map((v, k) => (
+                <label>
+                  <input type="radio" name="pool" value={v.pool} checked={k === 0} />
+                  {v.label}
+                </label>
+              ))}
+            </div>
+            <script is:inline>
+              // before the page below paints: a link with ?pool= picks that pool, so nothing jumps
+              (function () {
+                var box = document.currentScript.parentElement;
+                var q = new URLSearchParams(location.search).get('pool');
+                var pick = (q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
+                if (pick) pick.checked = true;
+                box.addEventListener('change', function (e) {
+                  var u = new URL(location.href);
+                  if (e.target.value === 'headline') u.searchParams.delete('pool');
+                  else u.searchParams.set('pool', e.target.value);
+                  history.replaceState(history.state, '', u);
+                });
+              })();
+            </script>
+          </div>
+        )
+      }
+      {
+        ahead && (
+          <div class="pool-headline">
+            <p class="ahead">{ahead}</p>
+          </div>
+        )
+      }
       {
         family.length > 1 && (
           <nav class="seg versions" aria-label="Versions">
@@ -326,7 +416,7 @@ const dataset = {
           {s.shown.length > 0 && (
             <div class="stat">
               <div class="v">{s.shown.length.toLocaleString('en-US')}</div>
-              <div class="l">{shownWhat === 'entries' ? `Entries on its own leaderboard, ${count(s.board.length, 'model')} we track` : `${s.shown.length === 1 ? 'Model scored' : 'Models scored'} ${SRC[s.shownSource ?? 'card']}`}</div>
+              <div class="l">{shownWhat === 'entries' ? `Entries on ${boardHost ? `${boardHost}’s leaderboard` : 'its own leaderboard'}, ${count(s.board.length, 'model')} we track` : `${s.shown.length === 1 ? 'Model scored' : 'Models scored'} ${SRC[s.shownSource ?? 'card']}`}</div>
             </div>
           )}
           {s.cites.length > 0 && (
@@ -371,84 +461,152 @@ const dataset = {
         <section class="views">
           <div class="sh-row">
             <div class="sh">
-              <h2>{otherAhead ? `${otherAhead.name} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : leaderLine(s, gap?.last)}</h2>
-              <p>
-                {s.shownSource === 'leaderboard' ? (
-                  <>
-                    Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from the benchmark's <a href={official?.url}>own leaderboard</a>, read on {humanDate(official?.retrieved)}. Where a model ran with several settings or harnesses, we keep its best.{effort && ' Every run is in the next chart.'}
-                    {shownWhat === 'entries' && ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`}
-                    {otherAhead && s.best && ` The best model we track is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
-                  </>
-                ) : s.boardSource === 'epoch' ? (
-                  'Best score per model in Epoch AI’s data. Where a model ran with several settings or harnesses, we keep its best.'
-                ) : (
-                  'Best score per model as labs report them in their own cards. Labs pick their own settings, so these compare less cleanly than independent runs.'
-                )}
-              </p>
+              <div class="pool-headline">
+                <h2>{otherAhead ? `${otherAhead.name} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : leaderLine(s, gap?.last)}</h2>
+                <p>
+                  {s.shownSource === 'leaderboard' ? (
+                    <>
+                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}, read on {humanDate(official?.retrieved)}. Where a model ran with several settings or harnesses, we keep its best.{effort && ' Every run is in the next chart.'}
+                      {shownWhat === 'entries' && ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`}
+                      {otherAhead && s.best && ` The best model we track is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
+                    </>
+                  ) : s.boardSource === 'epoch' ? (
+                    'Best score per model from Epoch AI’s own runs. Where a model ran with several settings or harnesses, we keep its best.'
+                  ) : s.boardSource === 'collected' ? (
+                    `Best score per model from ${viaName}, as Epoch AI copied it. We don’t read that board ourselves yet. Where a model ran with several settings, we keep its best.`
+                  ) : s.boardSource === 'claim' ? (
+                    'Best score per model from claims Epoch AI collected out of labs’ reports and papers. Nobody independent has run this benchmark, so these show what was claimed, not who leads.'
+                  ) : (
+                    <>
+                      Best score per model as labs report them in their own cards. Labs pick their own settings, so these compare less cleanly than independent runs.
+                      {arenaClaims && (
+                        <>
+                          {' '}A rating ranks a model only against others rated in the same arena at the same time, so these don’t show who leads.{' '}
+                          {unreadWhy(b.links?.leaderboard) ?? ''}{' '}
+                          {b.links?.leaderboard && <a href={b.links.leaderboard}>See the live leaderboard on {host(b.links.leaderboard)}</a>}
+                        </>
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
+              {pools.slice(1).map((v) => (
+                <div class={`pool-${v.pool}`}>
+                  <h2>{v.best ? `${modelById.get(v.best.model)?.name ?? v.best.model} leads with ${fmt(v.best.value, unit)}${v.pool === 'all' ? ', claims included' : ' across all independent runs'}` : 'No scores yet'}</h2>
+                  <p>
+                    {v.pool === 'independent'
+                      ? `Best score per model across ${boardHost ? `${boardHost}’s leaderboard` : 'the official leaderboard'}, Epoch AI’s own runs and any board Epoch AI copied. Each bar and row names its source.`
+                      : 'Best score per model from every source, including labs’ own numbers and claims Epoch AI collected from reports and papers. Labs pick their own settings, so a claim can beat an independent run of the same model.'}
+                  </p>
+                </div>
+              ))}
             </div>
             <div class="seg" role="radiogroup" aria-label="View">
               <label><input type="radio" name="v-board" value="graph" checked />Bars</label>
               <label><input type="radio" name="v-board" value="table" />Table</label>
             </div>
           </div>
-          {gap && (
-            <div class="gap">
-              <p>
-                The newest model with a score here came out in {longMonthYear(gap.last)}, and nobody has {s.boardSource === 'card' ? 'reported' : 'tested'} a newer one. Among the {gap.top} highest-ranked models on the capability index, these have no score yet:
-              </p>
-              <ul>
-                {gap.newer.slice(0, SHOW).map((m) => (
-                  <li>
-                    <ModelName id={m} size={15} />
-                  </li>
-                ))}
-                {gap.missing.length > SHOW && <li class="more-n">and {gap.missing.length - SHOW} more</li>}
-              </ul>
-              {gap.claimed.length > 0 && <p class="claimed">{gap.claimed.length === 1 ? 'One of them reports a score in its own model card' : `${gap.claimed.length} of them report scores in their own model cards`}. We plot lab claims in the charts below.</p>}
-            </div>
-          )}
-          <div class="view-graph">
-            {b.better === 'lower' ? (
-              <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
-            ) : (
-              <>
-                <div class="only-wide"><Columns scores={s.shown} unit={unit} /></div>
-                <div class="only-narrow"><BarBoard scores={s.shown} unit={unit} limit={10} all /></div>
-              </>
+          <div class="pool-headline">
+            {gap && (
+              <div class="gap">
+                <p>
+                  The newest model with a score here came out in {longMonthYear(gap.last)}, and nobody has {s.boardSource === 'card' ? 'reported' : 'tested'} a newer one. Among the {gap.top} highest-ranked models on the capability index, these have no score yet:
+                </p>
+                <ul>
+                  {gap.newer.slice(0, SHOW).map((m) => (
+                    <li>
+                      <ModelName id={m} size={15} />
+                    </li>
+                  ))}
+                  {gap.missing.length > SHOW && <li class="more-n">and {gap.missing.length - SHOW} more</li>}
+                </ul>
+                {gap.claimed.length > 0 && <p class="claimed">{gap.claimed.length === 1 ? 'One of them reports a score in its own model card' : `${gap.claimed.length} of them report scores in their own model cards`}. We plot lab claims in the charts below.</p>}
+              </div>
             )}
           </div>
+          <div class="view-graph">
+            <div class="pool-headline">
+              {b.better === 'lower' ? (
+                <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
+              ) : (
+                <>
+                  <div class="only-wide"><Columns scores={s.shown} unit={unit} /></div>
+                  <div class="only-narrow"><BarBoard scores={s.shown} unit={unit} limit={10} all /></div>
+                </>
+              )}
+            </div>
+            {pools.slice(1).map((v) => (
+              <div class={`pool-${v.pool}`}>
+                {b.better === 'lower' ? (
+                  <BarBoard scores={v.board} unit={unit} limit={15} better={b.better} all />
+                ) : (
+                  <>
+                    <div class="only-wide"><Columns scores={v.board} unit={unit} /></div>
+                    <div class="only-narrow"><BarBoard scores={v.board} unit={unit} limit={10} all /></div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
           <div class="view-table table-wrap">
-            <table class="t" data-sort>
-              <thead>
-                <tr><th>#</th><th>{shownWhat === 'entries' ? 'Entry' : 'Model'}</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
-              </thead>
-              <tbody>
-                {s.shown.map((x, i) => (
-                  <tr>
-                    <td class="rank">{i + 1}</td>
-                    <td><ModelName id={x.model} name={x.name} /></td>
-                    <td class="r">{fmt(x.value, unit)}</td>
-                    <td class="muted">{[x.setting, x.harness].filter((v) => v && v !== 'unknown').join(', ')}</td>
-                    <td class="muted num">{monthYear(x.date)}</td>
-                    <td class="muted">{x.source === 'leaderboard' ? 'Official leaderboard' : x.source === 'epoch' ? 'Epoch AI' : 'Model card'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div class="pool-headline">
+              <table class="t" data-sort>
+                <thead>
+                  <tr><th>#</th><th>{shownWhat === 'entries' ? 'Entry' : 'Model'}</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
+                </thead>
+                <tbody>
+                  {s.shown.map((x, i) => (
+                    <tr>
+                      <td class="rank">{i + 1}</td>
+                      <td><ModelName id={x.model} name={x.name} /></td>
+                      <td class="r">{fmt(x.value, unit)}</td>
+                      <td class="muted">{[x.setting, x.harness].filter((v) => v && v !== 'unknown').join(', ')}</td>
+                      <td class="muted num">{monthYear(x.date)}</td>
+                      <td class="muted">{sourceLabel(x)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {pools.slice(1).map((v) => (
+              <div class={`pool-${v.pool}`}>
+                <table class="t" data-sort>
+                  <thead>
+                    <tr><th>#</th><th>Model</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
+                  </thead>
+                  <tbody>
+                    {v.board.map((x, i) => (
+                      <tr>
+                        <td class="rank">{i + 1}</td>
+                        <td><ModelName id={x.model} name={x.name} /></td>
+                        <td class="r">{fmt(x.value, unit)}</td>
+                        <td class="muted">{[x.setting, x.harness].filter((w) => w && w !== 'unknown').join(', ')}</td>
+                        <td class="muted num">{monthYear(x.date)}</td>
+                        <td class="muted">{sourceLabel(x)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
           </div>
           {both && (
-            <p class="also">
-              {[
-                s.shownSource !== 'leaderboard' && s.leaderboardBoard.length + s.unlisted.length
-                  ? `The benchmark's own leaderboard has ${s.unlisted.length ? `${count(s.leaderboardBoard.length + s.unlisted.length, 'entry', 'entries')}, ${s.leaderboardBoard.length} of them models we track` : count(s.leaderboardBoard.length, 'model')}.`
-                  : '',
-                s.boardSource !== 'epoch' && s.epochBoard.length ? `Epoch AI has scores for ${count(s.epochBoard.length, 'model')}.` : '',
-                s.boardSource !== 'card' && s.cardBoard.length ? `Labs report scores for ${count(s.cardBoard.length, 'model')} in their cards.` : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}{' '}
-              We plot every source in the charts below.
-            </p>
+            <div class="pool-headline">
+              <p class="also">
+                {[
+                  s.shownSource !== 'leaderboard' && s.leaderboardBoard.length + s.unlisted.length
+                    ? `${boardHost ? `${boardHost}’s leaderboard` : "The benchmark's own leaderboard"} has ${s.unlisted.length ? `${count(s.leaderboardBoard.length + s.unlisted.length, 'entry', 'entries')}, ${s.leaderboardBoard.length} of them models we track` : count(s.leaderboardBoard.length, 'model')}.`
+                    : '',
+                  s.boardSource !== 'epoch' && s.epochBoard.length ? `Epoch AI has run ${count(s.epochBoard.length, 'model')}.` : '',
+                  s.boardSource !== 'collected' && s.viaBoard.length ? `Epoch AI copied scores for ${count(s.viaBoard.length, 'model')} from ${viaName}.` : '',
+                  s.boardSource !== 'card' && s.cardBoard.length ? `Labs report scores for ${count(s.cardBoard.length, 'model')} in their cards.` : '',
+                  s.boardSource !== 'claim' && s.claimBoard.length ? `Epoch AI collected claims for ${count(s.claimBoard.length, 'model')} from labs’ reports and papers.` : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}{' '}
+                {poolOn ? 'Switch the scores above to rank them together.' : 'We plot every source in the charts below.'}
+              </p>
+            </div>
           )}
         </section>
       )
@@ -462,7 +620,7 @@ const dataset = {
               <h2>{boardChart.title}</h2>
               <p>
                 {boardChart.note && `${boardChart.note} `}
-                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a>.
+                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on {boardHost ? <a href={LEADERBOARDS[b.id].url}>{boardHost}’s leaderboard</a> : <>the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a></>}.
               </p>
             </div>
             <div class="seg" role="radiogroup" aria-label="View">
@@ -556,9 +714,13 @@ const dataset = {
         <section>
           <div class="sh">
             <h2>
-              {holders > 1
-                ? `${holders} models have held number one since ${reignFrom === opened ? `its release in ${longMonthYear(opened)}` : '2023'}`
-                : 'Number one over time'}
+              {pools.map((v) => (
+                <span class={`pool-${v.pool}`}>
+                  {v.holders > 1
+                    ? `${v.holders} models have held number one ${POOL_WHERE[v.pool]} since ${reignFrom === opened ? `its release in ${longMonthYear(opened)}` : '2023'}`
+                    : 'Number one over time'}
+                </span>
+              ))}
             </h2>
             <p>
               Lab claims count from the day the card came out, independent runs from the model’s release.
@@ -574,7 +736,7 @@ const dataset = {
       s.nScores > 0 && (
         <section>
           <div class="sh">
-            <h2>{s.saturatedAt ? `The best score passed ${85}% in ${longMonthYear(s.saturatedAt)}` : 'Scores over time'}</h2>
+            <h2>{past85 ? `${past85.who[0].toUpperCase()}${past85.who.slice(1)} passed 85% in ${longMonthYear(past85.date)}` : 'Scores over time'}</h2>
             <p>All the scores we have, one dot each, so a model tested at several settings appears more than once.</p>
           </div>
           <ScoreChart s={s} />
@@ -652,6 +814,48 @@ const dataset = {
               </tbody>
             </table>
           </div>
+        </section>
+      )
+    }
+
+    {
+      myClaims.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>
+              {myClaims.length === 1
+                ? "One lab claim next to the leaderboard"
+                : claimSum.labHigher + claimSum.labLower > 1
+                  ? `The lab's number comes out ahead in ${claimSum.labHigher} of ${claimSum.labHigher + claimSum.labLower} pairs that differ`
+                  : `${myClaims.length} lab claims next to the leaderboard`}
+            </h2>
+            <p>
+              Each score a lab reported for its own model, beside the same model's best score {s.leaderboardBoard.length ? 'on the leaderboard' : 'from Epoch AI'}. Gaps mostly come from different harnesses, effort levels and task subsets.{claimSum.same > 0 && ` ${claimSum.same} of them match, which usually means one side copied the other.`} <a href="/claims/">Every benchmark</a>.
+            </p>
+          </div>
+          <ClaimTable pairs={myClaims} benchmark={false} />
+        </section>
+      )
+    }
+
+    {
+      changes.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>{changes.length === 1 ? 'One logged change that moves scores' : `${changes.length} logged changes that move scores`}</h2>
+            <p>Changes by the maintainers, so a score from before a change may not compare with one from after it. Newest first, each with the maintainers' own source. The list may be incomplete. <a href="/methodology/#changes">What we log</a>.</p>
+          </div>
+          <ol class="changes">
+            {changes.map((c) => (
+              <li>
+                <div class="ch-h">
+                  <span class="ch-k">{CHANGE[c.kind]}</span>
+                  <span class="ch-d muted num">{changeDate(c.date)}</span>
+                </div>
+                <p>{c.text} <a href={c.url}>Source</a></p>
+              </li>
+            ))}
+          </ol>
         </section>
       )
     }
@@ -888,6 +1092,13 @@ const dataset = {
     font-weight: 500;
     font-size: 15px;
   }
+  /* a higher score elsewhere, for a model the page's own source hasn't tested yet */
+  .ahead {
+    margin: 12px 0 0;
+    max-width: 68ch;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
   .mast .muted {
     font-size: 14px;
   }
@@ -1058,5 +1269,29 @@ const dataset = {
   .ki-flag:hover .sl {
     text-decoration: underline;
     text-decoration-color: var(--ink-4);
+  }
+  .changes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+    max-width: 72ch;
+  }
+  .ch-h {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .ch-k {
+    font-weight: 500;
+  }
+  .ch-d {
+    font-size: 13px;
+  }
+  .changes p {
+    margin: 4px 0 0;
+    color: var(--ink-2);
   }
 </style>

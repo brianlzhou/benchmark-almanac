@@ -1,9 +1,9 @@
 ---
-// Values over time, after Epoch AI's charts: one dot per model in its lab's colour, an optional step line
+// Values over time, after Epoch AI's charts: one dot per model in its lab's color, an optional step line
 // for the best value so far, direct labels on chosen points, optional interval whiskers, and dashed
 // reference lines. Filled dots are independent runs. Rings are numbers a lab reports about itself.
 // It renders twice, at a desktop and a phone width, so text keeps its size on both.
-import { modelById } from '../lib/data.ts';
+import { modelById, sourceLabel } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { linear, niceTicks, yearTicks } from '../lib/scale.ts';
 import { yearFrac, score as fmt, monthYear } from '../lib/format.ts';
@@ -12,7 +12,10 @@ export interface Pt {
   date: string;
   value: number;
   model: string;
-  source: 'leaderboard' | 'epoch' | 'card';
+  /** 'collected' is a score Epoch AI collected: from another board (via 'board') or a claim (any other via). */
+  source: 'leaderboard' | 'epoch' | 'card' | 'collected';
+  via?: 'board' | 'lab' | 'paper' | 'unknown';
+  from?: string | null;
   setting?: string | null;
   harness?: string | null;
   low?: number | null;
@@ -27,14 +30,16 @@ interface Props {
   /** Fixed y range; computed from the data when left out. */
   domain?: [number, number];
   refs?: { v: number; label: string }[];
-  /** Models to draw in colour; the rest go grey and quiet. */
+  /** Dated events drawn as dotted vertical lines, such as a benchmark refreshing its questions. */
+  marks?: { date: string; label: string; kind?: string }[];
+  /** Models to draw in color; the rest go gray and quiet. */
   highlight?: string[];
   /** Points to label when there is no frontier. */
   labelIds?: string[];
   better?: 'higher' | 'lower';
   legend?: boolean;
   height?: number;
-  sourceNote?: { leaderboard: string; epoch: string; card: string };
+  sourceNote?: { leaderboard?: string; epoch?: string; card?: string; collected?: string; claim?: string };
 }
 const {
   points,
@@ -43,17 +48,30 @@ const {
   label,
   domain,
   refs = [],
+  marks = [],
   highlight,
   labelIds,
   legend = true,
   height = 440,
-  sourceNote = { leaderboard: 'On the benchmark’s own leaderboard', epoch: 'Run or collected by Epoch AI', card: 'Reported by the lab in its model card' },
+  sourceNote: note = {},
 } = Astro.props;
+
+const sourceNote = {
+  leaderboard: 'On the benchmark’s own leaderboard',
+  epoch: 'Run by Epoch AI',
+  card: 'Reported by the lab in its model card',
+  collected: 'On another leaderboard, collected by Epoch AI',
+  claim: 'A claim Epoch AI collected from a report or paper',
+  ...note,
+};
+// a score Epoch AI collected draws as a diamond: filled when it comes from another board, hollow when it is a claim
+const isBoardCopy = (p: Pt) => p.source === 'collected' && p.via === 'board';
+const isClaim = (p: Pt) => p.source === 'collected' && p.via !== 'board';
 
 const log = unit === 'minutes';
 const pts = points.filter((p) => !log || p.value > 0).map((p) => ({ ...p, t: yearFrac(p.date), lab: modelById.get(p.model)?.lab }));
 const hl = highlight ? new Set(highlight) : undefined;
-// grey points first, so coloured ones sit on top
+// gray points first, so colored ones sit on top
 pts.sort((a, b) => Number(hl ? hl.has(a.model) : 0) - Number(hl ? hl.has(b.model) : 0));
 
 const sizes = [
@@ -93,6 +111,8 @@ const vFmt = (v: number) => (unit === 'index' ? v.toFixed(1) : fmt(v, unit));
 const hasCard = pts.some((p) => p.source === 'card');
 const hasBoard = pts.some((p) => p.source === 'leaderboard');
 const hasEpoch = pts.some((p) => p.source === 'epoch');
+const hasCopy = pts.some(isBoardCopy);
+const hasClaim = pts.some(isClaim);
 const name = (id: string) => modelById.get(id)?.name ?? id;
 
 function layout(w: number, h: number, nLabels: number) {
@@ -154,12 +174,37 @@ function layout(w: number, h: number, nLabels: number) {
               {sourceNote.card}
             </span>
           )}
+          {hasCopy && (
+            <span class="tag">
+              <svg width="12" height="12" aria-hidden="true">
+                <path d="M6 1.2 10.8 6 6 10.8 1.2 6z" fill="var(--ink-3)" />
+              </svg>
+              {sourceNote.collected}
+            </span>
+          )}
+          {hasClaim && (
+            <span class="tag">
+              <svg width="12" height="12" aria-hidden="true">
+                <path d="M6 1.8 10.2 6 6 10.2 1.8 6z" fill="none" stroke="var(--ink-3)" stroke-width="1.5" />
+              </svg>
+              {sourceNote.claim}
+            </span>
+          )}
           {frontier.length > 1 && (
             <span class="tag">
               <svg width="18" height="12" aria-hidden="true">
                 <path d="M1 9H8V3H17" fill="none" stroke="var(--ink-2)" stroke-width="1.6" />
               </svg>
               Best so far
+            </span>
+          )}
+          {marks.length > 0 && (
+            <span class="tag">
+              <svg width="12" height="14" aria-hidden="true">
+                <circle cx="6" cy="3.5" r="2.6" fill="var(--bg)" stroke="var(--ink-3)" stroke-width="1.2" />
+                <path d="M6 7V13" stroke="var(--ink-3)" stroke-dasharray="1 2.5" stroke-linecap="round" />
+              </svg>
+              {marks[0].kind ?? 'Questions refreshed'}
             </span>
           )}
         </div>
@@ -196,6 +241,26 @@ function layout(w: number, h: number, nLabels: number) {
                   </text>
                 </g>
               ))}
+            {marks
+              .filter((m) => yearFrac(m.date) >= t0 && yearFrac(m.date) <= t1)
+              .map((m) => (
+                <g class="mark">
+                  <line x1={x(yearFrac(m.date))} x2={x(yearFrac(m.date))} y1={pad.t} y2={h - pad.b} class="mk" />
+                  <circle cx={x(yearFrac(m.date))} cy={pad.t} r="3" class="mk-dot" />
+                  {key === 'wide' && (
+                    <line
+                      x1={x(yearFrac(m.date))}
+                      x2={x(yearFrac(m.date))}
+                      y1={pad.t - 4}
+                      y2={h - pad.b}
+                      class="mk-hit"
+                      data-tv={m.kind ?? 'Questions refreshed'}
+                      data-tn={monthYear(m.date)}
+                      data-ts={m.label}
+                    />
+                  )}
+                </g>
+              ))}
             {d && <path d={d} class="front" />}
             {pts.map((p) => {
               const on = !hl || hl.has(p.model);
@@ -208,7 +273,7 @@ function layout(w: number, h: number, nLabels: number) {
                   ? {
                       'data-tv': vFmt(p.value),
                       'data-tn': `${name(p.model)}${p.setting && p.setting !== 'unknown' ? ` (${p.setting})` : ''}`,
-                      'data-ts': `${monthYear(p.date)}. ${p.source === 'leaderboard' ? 'Official leaderboard' : p.source === 'epoch' ? 'Epoch AI data' : 'Lab model card'}${p.harness ? `, ${p.harness}` : ''}${p.low != null && p.high != null ? `. 90% interval ${vFmt(p.low)} to ${vFmt(p.high)}` : ''}`,
+                      'data-ts': `${monthYear(p.date)}. ${unit === 'index' ? 'Epoch AI' : sourceLabel(p)}${p.harness ? `, ${p.harness}` : ''}${p.low != null && p.high != null ? `. 90% interval ${vFmt(p.low)} to ${vFmt(p.high)}` : ''}`,
                     }
                   : {};
               return (
@@ -216,6 +281,10 @@ function layout(w: number, h: number, nLabels: number) {
                   {p.low != null && p.high != null && <line x1={cx} x2={cx} y1={Y(p.low)} y2={Y(p.high)} stroke={c} class="ci" />}
                   {p.source === 'leaderboard' ? (
                     <rect x={cx - 4} y={cy - 4} width="8" height="8" rx="1.5" fill={c} />
+                  ) : isBoardCopy(p) ? (
+                    <path d={`M${cx} ${cy - 5}L${cx + 5} ${cy}L${cx} ${cy + 5}L${cx - 5} ${cy}Z`} fill={c} />
+                  ) : isClaim(p) ? (
+                    <path d={`M${cx} ${cy - 4.4}L${cx + 4.4} ${cy}L${cx} ${cy + 4.4}L${cx - 4.4} ${cy}Z`} fill="var(--bg)" stroke={c} stroke-width="1.6" />
                   ) : p.source === 'epoch' ? (
                     <circle cx={cx} cy={cy} r={on && hl ? 5 : 4} fill={c} />
                   ) : (
@@ -273,6 +342,25 @@ function layout(w: number, h: number, nLabels: number) {
     stroke: var(--ink-4);
     stroke-width: 1;
     stroke-dasharray: 4 4;
+  }
+  .mk {
+    stroke: var(--ink-3);
+    stroke-width: 1;
+    stroke-dasharray: 1 3;
+    stroke-linecap: round;
+  }
+  .mk-dot {
+    fill: var(--bg);
+    stroke: var(--ink-3);
+    stroke-width: 1.2;
+  }
+  .mk-hit {
+    stroke: transparent;
+    stroke-width: 10;
+  }
+  .mark:hover .mk {
+    stroke: var(--ink);
+    stroke-dasharray: none;
   }
   .ref-l {
     font: 400 var(--f) / 1 var(--sans);
