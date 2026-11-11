@@ -106,3 +106,22 @@ function rank(level: string | null | undefined): number {
   const i = levelIndex(level ?? undefined);
   return i < 0 ? 99 : i;
 }
+
+/**
+ * The longest runs at number one that are still going today, on the tests the most model releases reported in
+ * the year before `asOf` (the `mostReportedRows` pick, with more tests). One run per test version: its current
+ * holder, counted from the day it took the top spot. A version nobody has tested in six weeks is left out, since
+ * nobody is racing for it now.
+ */
+export function currentRuns(asOf: string, source: 'all' | 'independent', families = 12) {
+  const picked = mostReportedRows(asOf, families);
+  const day = 86_400_000;
+  const runs = picked[source]
+    .filter((r) => (Date.parse(asOf) - Date.parse(r.lastTested)) / day <= 45)
+    .flatMap((r) => {
+      const g = r.reigns.at(-1);
+      return g && g.end >= asOf ? [{ g, b: r.benchmark, months: (Date.parse(asOf) - Date.parse(g.start)) / day / 30.4, start: g.start, end: asOf }] : [];
+    })
+    .sort((a, b) => b.months - a.months);
+  return { tests: picked.tests.length, since: picked.since, runs };
+}
