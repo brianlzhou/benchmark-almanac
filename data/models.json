@@ -5425,6 +5425,16 @@
     ]
   },
   {
+    "id": "deepseek-r1-zero",
+    "name": "DeepSeek-R1-Zero",
+    "lab": "deepseek",
+    "family": "DeepSeek-R1",
+    "released": "2025-01-20",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Zero"
+  },
+  {
     "id": "kimi-k1-5",
     "name": "Kimi k1.5",
     "lab": "moonshot",
@@ -5933,6 +5943,39 @@
     "epoch": "Claude 3.7 Sonnet"
   },
   {
+    "id": "wan2-1-i2v-14b-720p",
+    "name": "Wan2.1-I2V-14B-720P",
+    "lab": "alibaba",
+    "released": "2025-02-25",
+    "weights": "open",
+    "card": "https://github.com/Wan-Video/Wan2.1",
+    "aliases": [
+      "Wan2.1-I2V-14B-720P"
+    ]
+  },
+  {
+    "id": "wan2-1-t2v-1-3b",
+    "name": "Wan2.1-T2V-1.3B",
+    "lab": "alibaba",
+    "released": "2025-02-25",
+    "weights": "open",
+    "card": "https://github.com/Wan-Video/Wan2.1",
+    "aliases": [
+      "Wan2.1-T2V-1.3B"
+    ]
+  },
+  {
+    "id": "wan2-1-t2v-14b",
+    "name": "Wan2.1-T2V-14B",
+    "lab": "alibaba",
+    "released": "2025-02-25",
+    "weights": "open",
+    "card": "https://github.com/Wan-Video/Wan2.1",
+    "aliases": [
+      "Wan2.1-T2V-14B"
+    ]
+  },
+  {
     "id": "granite-3-2-8b-instruct",
     "name": "Granite 3.2 8B Instruct",
     "lab": "ibm",
@@ -6294,6 +6337,18 @@
       "GPT 4o Mini Transcribe",
       "GPT 4o Mini Transcribe (Streaming)",
       "gpt-4o-mini-transcribe"
+    ]
+  },
+  {
+    "id": "gpt-4o-mini-tts",
+    "name": "GPT-4o Mini TTS",
+    "lab": "openai",
+    "released": "2025-03-20",
+    "weights": "closed",
+    "card": "https://developers.openai.com/api/docs/models/gpt-4o-mini-tts",
+    "aliases": [
+      "OpenAI gpt-4o-mini-tts",
+      "GPT-4o-Mini-TTS"
     ]
   },
   {
@@ -8000,6 +8055,30 @@
     "card": "https://huggingface.co/microsoft/Phi-4-mini-flash-reasoning"
   },
   {
+    "id": "step1x-edit-v1-1",
+    "name": "Step1X-Edit v1.1",
+    "lab": "stepfun",
+    "released": "2025-07-09",
+    "weights": "open",
+    "card": "https://github.com/stepfun-ai/Step1X-Edit",
+    "aliases": [
+      "Step1X-Edit v1.1"
+    ]
+  },
+  {
+    "id": "audio-flamingo-3",
+    "name": "Audio Flamingo 3",
+    "lab": "nvidia",
+    "family": "Audio Flamingo",
+    "released": "2025-07-10",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/nvidia/audio-flamingo-3",
+    "aliases": [
+      "Audio Flamingo 3"
+    ]
+  },
+  {
     "id": "devstral-medium",
     "name": "Devstral Medium",
     "lab": "mistral",
@@ -8231,6 +8310,39 @@
     "name": "chutes/GLM-4.5-FP8",
     "released": "2025-07-27",
     "epoch": "chutes/GLM-4.5-FP8"
+  },
+  {
+    "id": "wan2-2-i2v-a14b",
+    "name": "Wan2.2-I2V-A14B",
+    "lab": "alibaba",
+    "released": "2025-07-28",
+    "weights": "open",
+    "card": "https://github.com/Wan-Video/Wan2.2",
+    "aliases": [
+      "Wan2.2-I2V-A14B"
+    ]
+  },
+  {
+    "id": "wan2-2-t2v-a14b",
+    "name": "Wan2.2-T2V-A14B",
+    "lab": "alibaba",
+    "released": "2025-07-28",
+    "weights": "open",
+    "card": "https://github.com/Wan-Video/Wan2.2",
+    "aliases": [
+      "Wan2.2-T2V-A14B"
+    ]
+  },
+  {
+    "id": "wan2-2-ti2v-5b",
+    "name": "Wan2.2-TI2V-5B",
+    "lab": "alibaba",
+    "released": "2025-07-28",
+    "weights": "open",
+    "card": "https://github.com/Wan-Video/Wan2.2",
+    "aliases": [
+      "Wan2.2-TI2V-5B"
+    ]
   },
   {
     "id": "afm-4-5b",
@@ -8873,6 +8985,20 @@
     ]
   },
   {
+    "id": "apertus-8b",
+    "name": "Apertus 8B Instruct",
+    "lab": "swiss-ai",
+    "family": "Apertus",
+    "released": "2025-09-02",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509",
+    "aliases": [
+      "Apertus 8B Instruct",
+      "Apertus-8B-Instruct-2509"
+    ]
+  },
+  {
     "id": "ui-tars-2",
     "name": "UI-TARS-2",
     "lab": "bytedance",
@@ -9100,6 +9226,15 @@
     "epoch": "DeepSeek-V3.1-Terminus"
   },
   {
+    "id": "qwen-image-edit-2509",
+    "name": "Qwen-Image-Edit-2509",
+    "lab": "qwen",
+    "family": "Qwen-Image-Edit",
+    "released": "2025-09-22",
+    "weights": "open",
+    "card": "https://huggingface.co/Qwen/Qwen-Image-Edit-2509"
+  },
+  {
     "id": "qwen3-omni-30b-a3b",
     "name": "Qwen3-Omni-30B-A3B",
     "lab": "qwen",
@@ -9285,6 +9420,32 @@
     "epoch": "granite-4.0-micro"
   },
   {
+    "id": "qwen3-vl-30b-a3b-instruct",
+    "name": "Qwen3-VL-30B-A3B-Instruct",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-04",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-30B-A3B-Instruct",
+    "aliases": [
+      "Qwen3-VL-30B-A3B-Instruct"
+    ]
+  },
+  {
+    "id": "qwen3-vl-30b-a3b-thinking",
+    "name": "Qwen3-VL-30B-A3B-Thinking",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-04",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-30B-A3B-Thinking",
+    "aliases": [
+      "Qwen3-VL-30B-A3B-Thinking"
+    ]
+  },
+  {
     "id": "tiny-recursion-model",
     "name": "tiny-recursion-model",
     "released": "2025-10-06",
@@ -9354,6 +9515,45 @@
     "epoch": "Claude Haiku 4.5"
   },
   {
+    "id": "qwen3-vl-4b-instruct",
+    "name": "Qwen3-VL-4B-Instruct",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-15",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct",
+    "aliases": [
+      "Qwen3-VL-4B-Instruct"
+    ]
+  },
+  {
+    "id": "qwen3-vl-4b-thinking",
+    "name": "Qwen3-VL-4B-Thinking",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-15",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-4B-Thinking",
+    "aliases": [
+      "Qwen3-VL-4B-Thinking"
+    ]
+  },
+  {
+    "id": "qwen3-vl-8b-instruct",
+    "name": "Qwen3-VL-8B-Instruct",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-15",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+    "aliases": [
+      "Qwen3-VL-8B-Instruct"
+    ]
+  },
+  {
     "id": "qwen3-vl-8b-thinking",
     "name": "Qwen3-VL-8B-Thinking",
     "lab": "qwen",
@@ -9378,6 +9578,58 @@
     "aliases": [
       "qwen3-vl-flash",
       "Qwen3-VL-Flash"
+    ]
+  },
+  {
+    "id": "qwen3-vl-2b-instruct",
+    "name": "Qwen3-VL-2B-Instruct",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-21",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct",
+    "aliases": [
+      "Qwen3-VL-2B-Instruct"
+    ]
+  },
+  {
+    "id": "qwen3-vl-2b-thinking",
+    "name": "Qwen3-VL-2B-Thinking",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-21",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-2B-Thinking",
+    "aliases": [
+      "Qwen3-VL-2B-Thinking"
+    ]
+  },
+  {
+    "id": "qwen3-vl-32b-instruct",
+    "name": "Qwen3-VL-32B-Instruct",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-21",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-32B-Instruct",
+    "aliases": [
+      "Qwen3-VL-32B-Instruct"
+    ]
+  },
+  {
+    "id": "qwen3-vl-32b-thinking",
+    "name": "Qwen3-VL-32B-Thinking",
+    "lab": "qwen",
+    "family": "Qwen3-VL",
+    "released": "2025-10-21",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-32B-Thinking",
+    "aliases": [
+      "Qwen3-VL-32B-Thinking"
     ]
   },
   {
@@ -9645,6 +9897,18 @@
     "card": "https://huggingface.co/PrimeIntellect/INTELLECT-3"
   },
   {
+    "id": "step1x-edit-v1-2",
+    "name": "Step1X-Edit v1.2",
+    "lab": "stepfun",
+    "released": "2025-11-26",
+    "weights": "open",
+    "card": "https://github.com/stepfun-ai/Step1X-Edit",
+    "aliases": [
+      "Step1x-Edit v1.2",
+      "Step1X-Edit-v1p2"
+    ]
+  },
+  {
     "id": "deepseek-math-v2",
     "name": "DeepSeekMath-V2",
     "lab": "deepseek",
@@ -9653,6 +9917,17 @@
     "weights": "open",
     "tier": "mid",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-Math-V2"
+  },
+  {
+    "id": "dragon-hd-omni",
+    "name": "Dragon HD Omni",
+    "lab": "microsoft",
+    "released": "2025-12",
+    "weights": "closed",
+    "card": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/releasenotes",
+    "aliases": [
+      "Microsoft Azure Dragon HD Omni"
+    ]
   },
   {
     "id": "deepseek-v3-2",
@@ -10103,6 +10378,24 @@
     ]
   },
   {
+    "id": "qwen3-vl-embedding-2b",
+    "name": "Qwen3-VL-Embedding-2B",
+    "lab": "qwen",
+    "family": "Qwen3-VL-Embedding",
+    "released": "2026-01",
+    "weights": "open",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B"
+  },
+  {
+    "id": "qwen3-vl-embedding-8b",
+    "name": "Qwen3-VL-Embedding-8B",
+    "lab": "qwen",
+    "family": "Qwen3-VL-Embedding",
+    "released": "2026-01",
+    "weights": "open",
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B"
+  },
+  {
     "id": "falcon-h1r-7b",
     "name": "Falcon H1R 7B",
     "lab": "tii",
@@ -10236,6 +10529,28 @@
     "card": "https://ernie.baidu.com/blog/posts/ernie5.0/"
   },
   {
+    "id": "minimax-speech-2-8-hd",
+    "name": "MiniMax Speech 2.8 HD",
+    "lab": "minimax",
+    "released": "2026-01-23",
+    "weights": "closed",
+    "card": "https://www.minimax.io/news/minimax-speech-28",
+    "aliases": [
+      "speech-2.8-hd"
+    ]
+  },
+  {
+    "id": "minimax-speech-2-8-turbo",
+    "name": "MiniMax Speech 2.8 Turbo",
+    "lab": "minimax",
+    "released": "2026-01-23",
+    "weights": "closed",
+    "card": "https://www.minimax.io/news/minimax-speech-28",
+    "aliases": [
+      "speech-2.8-turbo"
+    ]
+  },
+  {
     "id": "kimi-k2-5",
     "name": "Kimi K2.5",
     "lab": "moonshot",
@@ -10277,6 +10592,15 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/arcee-ai/Trinity-Large-Preview"
+  },
+  {
+    "id": "qwen3-asr-1-7b",
+    "name": "Qwen3-ASR-1.7B",
+    "lab": "qwen",
+    "family": "Qwen3-ASR",
+    "released": "2026-01-29",
+    "weights": "open",
+    "card": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B"
   },
   {
     "id": "glm-ocr",
@@ -10386,6 +10710,18 @@
       "GPT-5.3-Codex (xhigh)"
     ],
     "epoch": "GPT-5.3 Codex"
+  },
+  {
+    "id": "bulbul-v3",
+    "name": "Bulbul V3",
+    "lab": "sarvam",
+    "released": "2026-02-07",
+    "weights": "closed",
+    "card": "https://www.sarvam.ai/blogs/bulbul-v3",
+    "aliases": [
+      "Sarvam Bulbul V3",
+      "Sarvam AI Bulbul V3"
+    ]
   },
   {
     "id": "composer-1-5",
@@ -10528,6 +10864,19 @@
     ]
   },
   {
+    "id": "qwen3-5-plus",
+    "name": "Qwen3.5-Plus",
+    "lab": "qwen",
+    "family": "Qwen3.5",
+    "released": "2026-02-15",
+    "weights": "closed",
+    "card": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-plus",
+    "aliases": [
+      "Qwen3.5 Plus",
+      "qwen3.5-plus-2026-02-15"
+    ]
+  },
+  {
     "id": "qwen-3-5-plus-hosted-397b-a17b",
     "name": "Qwen 3.5 Plus (hosted 397B-A17B)",
     "lab": "qwen",
@@ -10554,6 +10903,62 @@
     "epoch": "Grok 4.20"
   },
   {
+    "id": "tiny-aya-earth",
+    "name": "Tiny Aya Earth",
+    "lab": "cohere",
+    "family": "Tiny Aya",
+    "released": "2026-02-17",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/CohereLabs/tiny-aya-earth",
+    "aliases": [
+      "Tiny Aya Earth",
+      "tiny-aya-earth"
+    ]
+  },
+  {
+    "id": "tiny-aya-fire",
+    "name": "Tiny Aya Fire",
+    "lab": "cohere",
+    "family": "Tiny Aya",
+    "released": "2026-02-17",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/CohereLabs/tiny-aya-fire",
+    "aliases": [
+      "Tiny Aya Fire",
+      "tiny-aya-fire"
+    ]
+  },
+  {
+    "id": "tiny-aya-global",
+    "name": "Tiny Aya Global",
+    "lab": "cohere",
+    "family": "Tiny Aya",
+    "released": "2026-02-17",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/CohereLabs/tiny-aya-global",
+    "aliases": [
+      "Tiny Aya Global",
+      "tiny-aya-global"
+    ]
+  },
+  {
+    "id": "tiny-aya-water",
+    "name": "Tiny Aya Water",
+    "lab": "cohere",
+    "family": "Tiny Aya",
+    "released": "2026-02-17",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/CohereLabs/tiny-aya-water",
+    "aliases": [
+      "Tiny Aya Water",
+      "tiny-aya-water"
+    ]
+  },
+  {
     "id": "gemini-3-1-pro",
     "name": "Gemini 3.1 Pro",
     "lab": "google",
@@ -10571,6 +10976,19 @@
     "released": "2026-02-20",
     "weights": "closed",
     "epoch": "Mercury 2"
+  },
+  {
+    "id": "gpt-realtime-1-5",
+    "name": "GPT-Realtime-1.5",
+    "lab": "openai",
+    "family": "GPT-Realtime",
+    "released": "2026-02-23",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://developers.openai.com/api/docs/models/gpt-realtime-1.5",
+    "aliases": [
+      "gpt-realtime-1.5"
+    ]
   },
   {
     "id": "qwen3-5-flash",
@@ -10709,6 +11127,18 @@
     "released": "2026-03-05",
     "weights": "closed",
     "epoch": "GPT-5.4 Pro"
+  },
+  {
+    "id": "ltx-2-3",
+    "name": "LTX-2.3",
+    "lab": "lightricks",
+    "family": "LTX",
+    "released": "2026-03-05",
+    "weights": "open",
+    "card": "https://huggingface.co/Lightricks/LTX-2.3",
+    "aliases": [
+      "LTX 2.3"
+    ]
   },
   {
     "id": "sarvam-105b",
@@ -10942,6 +11372,28 @@
     ]
   },
   {
+    "id": "lyria-3-clip",
+    "name": "Lyria 3 Clip",
+    "lab": "google",
+    "released": "2026-03-25",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/lyria-3-developers/",
+    "aliases": [
+      "lyria-3-clip-preview"
+    ]
+  },
+  {
+    "id": "lyria-3-pro",
+    "name": "Lyria 3 Pro",
+    "lab": "google",
+    "released": "2026-03-25",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/lyria-3-developers/",
+    "aliases": [
+      "lyria-3-pro-preview"
+    ]
+  },
+  {
     "id": "cohere-transcribe-03-2026",
     "name": "Cohere Transcribe",
     "lab": "cohere",
@@ -11135,6 +11587,17 @@
     "epoch": "Qwen 3.6 35B-A3B"
   },
   {
+    "id": "gemini-3-1-flash-tts",
+    "name": "Gemini 3.1 Flash TTS",
+    "lab": "google",
+    "released": "2026-04-15",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-tts/",
+    "aliases": [
+      "Google DeepMind Gemini 3.1 Flash TTS"
+    ]
+  },
+  {
     "id": "claude-opus-4-7",
     "name": "Claude Opus 4.7",
     "lab": "anthropic",
@@ -11144,6 +11607,15 @@
     "tier": "flagship",
     "card": "https://www.anthropic.com/news/claude-opus-4-7",
     "epoch": "Claude Opus 4.7"
+  },
+  {
+    "id": "gpt-rosalind",
+    "name": "GPT-Rosalind",
+    "lab": "openai",
+    "family": "GPT-Rosalind",
+    "released": "2026-04-16",
+    "weights": "closed",
+    "card": "https://openai.com/index/introducing-gpt-rosalind/"
   },
   {
     "id": "pi0-7",
@@ -11167,6 +11639,17 @@
     "released": "2026-04-17",
     "weights": "closed",
     "epoch": "Grok 4.3 Beta"
+  },
+  {
+    "id": "grok-tts",
+    "name": "Grok TTS",
+    "lab": "xai",
+    "released": "2026-04-17",
+    "weights": "closed",
+    "card": "https://x.ai/news/grok-stt-and-tts-apis",
+    "aliases": [
+      "xAI Grok TTS"
+    ]
   },
   {
     "id": "gr00t-n1-7",
@@ -11431,6 +11914,16 @@
     "card": "https://huggingface.co/inclusionAI/Ling-2.6-1T"
   },
   {
+    "id": "step-image-edit-2",
+    "name": "Step Image Edit 2",
+    "lab": "stepfun",
+    "released": "2026-04-29",
+    "card": "https://github.com/stepfun-ai/Step1X-Edit",
+    "aliases": [
+      "Step Image Edit 2"
+    ]
+  },
+  {
     "id": "grok-4-3",
     "name": "Grok 4.3",
     "lab": "xai",
@@ -11495,6 +11988,16 @@
     "card": "https://ernie.baidu.com/blog/posts/ernie-5.1-0508-release/"
   },
   {
+    "id": "sensenova-6-7-flash-lite",
+    "name": "SenseNova 6.7 Flash-Lite",
+    "lab": "sensetime",
+    "family": "SenseNova",
+    "released": "2026-05-09",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://sensetime.com/en/news/51170639"
+  },
+  {
     "id": "ring-2-6-1t",
     "name": "Ring-2.6-1T",
     "lab": "ant-group",
@@ -11539,6 +12042,17 @@
     "released": "2026-05-20",
     "weights": "open",
     "epoch": "Command A+"
+  },
+  {
+    "id": "stable-audio-3-medium",
+    "name": "Stable Audio 3 Medium",
+    "lab": "stability-ai",
+    "released": "2026-05-20",
+    "weights": "open",
+    "card": "https://stability.ai/research/stable-audio-3",
+    "aliases": [
+      "Stable Audio 3 (Medium)"
+    ]
   },
   {
     "id": "fara1-5-27b",
@@ -11598,6 +12112,38 @@
     "epoch": "Step 3.7 Flash"
   },
   {
+    "id": "cosmos3-nano",
+    "name": "Cosmos3-Nano",
+    "lab": "nvidia",
+    "released": "2026-05-31",
+    "weights": "open",
+    "aliases": [
+      "Cosmos 3-Nano"
+    ]
+  },
+  {
+    "id": "cosmos3-nano-policy-droid",
+    "name": "Cosmos3-Nano-Policy-DROID",
+    "lab": "nvidia",
+    "family": "Cosmos3",
+    "released": "2026-05-31",
+    "weights": "open",
+    "card": "https://build.nvidia.com/nvidia/cosmos3-nano/modelcard",
+    "aliases": [
+      "Cosmos3 Nano (DROID policy)"
+    ]
+  },
+  {
+    "id": "cosmos3-super-image2video",
+    "name": "Cosmos3-Super-Image2Video",
+    "lab": "nvidia",
+    "released": "2026-05-31",
+    "weights": "open",
+    "aliases": [
+      "Cosmos 3-Super-Image2Video"
+    ]
+  },
+  {
     "id": "minimax-m3",
     "name": "MiniMax-M3",
     "lab": "minimax",
@@ -11650,6 +12196,15 @@
       "Gemma 4 12B",
       "Gemma-4-12B-it"
     ]
+  },
+  {
+    "id": "gpt-rosalind-5-5",
+    "name": "GPT-Rosalind-5.5",
+    "lab": "openai",
+    "family": "GPT-Rosalind",
+    "released": "2026-06-03",
+    "weights": "closed",
+    "card": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"
   },
   {
     "id": "nemotron-3-ultra",
@@ -11839,6 +12394,32 @@
     "card": "https://huggingface.co/meituan-longcat/LongCat-2.0"
   },
   {
+    "id": "gpt-realtime-2-1",
+    "name": "GPT-Realtime-2.1",
+    "lab": "openai",
+    "family": "GPT-Realtime",
+    "released": "2026-07-06",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+    "aliases": [
+      "gpt-realtime-2.1"
+    ]
+  },
+  {
+    "id": "gpt-realtime-2-1-mini",
+    "name": "GPT-Realtime-2.1 Mini",
+    "lab": "openai",
+    "family": "GPT-Realtime",
+    "released": "2026-07-06",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+    "aliases": [
+      "gpt-realtime-2.1-mini"
+    ]
+  },
+  {
     "id": "kat-coder-pro-v2-5",
     "name": "KAT-Coder-Pro V2.5",
     "lab": "kuaishou",
@@ -11908,6 +12489,18 @@
     "epoch": "GPT-5.6 Terra"
   },
   {
+    "id": "lingbot-video-moe",
+    "name": "LingBot-Video-MoE",
+    "lab": "ant-group",
+    "family": "LingBot-Video",
+    "released": "2026-07-09",
+    "weights": "open",
+    "card": "https://huggingface.co/robbyant/lingbot-video-moe-30b-a3b",
+    "aliases": [
+      "LingBot Video MoE 30B-A3B"
+    ]
+  },
+  {
     "id": "muse-spark-1-1",
     "name": "Muse Spark 1.1",
     "lab": "meta",
@@ -11944,6 +12537,16 @@
     "tier": "flagship",
     "card": "https://huggingface.co/moonshotai/Kimi-K3",
     "epoch": "Kimi K3"
+  },
+  {
+    "id": "cosmos3-edge",
+    "name": "Cosmos3-Edge",
+    "lab": "nvidia",
+    "released": "2026-07-20",
+    "weights": "open",
+    "aliases": [
+      "Cosmos 3-Edge"
+    ]
   },
   {
     "id": "gemini-3-5-flash-cyber",
@@ -11988,6 +12591,26 @@
     "card": "https://poolside.ai/blog/introducing-laguna-s-2-1"
   },
   {
+    "id": "fara1-5-4b",
+    "name": "Fara1.5-4B",
+    "lab": "microsoft",
+    "family": "Fara",
+    "released": "2026-07-22",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://github.com/microsoft/fara"
+  },
+  {
+    "id": "fara1-5-9b",
+    "name": "Fara1.5-9B",
+    "lab": "microsoft",
+    "family": "Fara",
+    "released": "2026-07-22",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://github.com/microsoft/fara"
+  },
+  {
     "id": "solar-open-2",
     "name": "Solar Open 2",
     "lab": "upstage",
@@ -12010,6 +12633,34 @@
     "weights": "open",
     "tier": "small",
     "card": "https://huggingface.co/Kwaipilot/KAT-Coder-V2.5-Dev"
+  },
+  {
+    "id": "apertus-1-5-70b",
+    "name": "Apertus 1.5 70B",
+    "lab": "swiss-ai",
+    "family": "Apertus",
+    "released": "2026-07-24",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/swiss-ai/Apertus-v1.5-70B",
+    "aliases": [
+      "Apertus v1.5 70B",
+      "Apertus-v1.5-70B"
+    ]
+  },
+  {
+    "id": "apertus-1-5-8b",
+    "name": "Apertus 1.5 8B",
+    "lab": "swiss-ai",
+    "family": "Apertus",
+    "released": "2026-07-24",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/swiss-ai/Apertus-v1.5-8B",
+    "aliases": [
+      "Apertus v1.5 8B",
+      "Apertus-v1.5-8B"
+    ]
   },
   {
     "id": "claude-opus-5",
@@ -12168,6 +12819,18 @@
     "released": "2026-08-10",
     "weights": "open",
     "epoch": "Muse Glimmer"
+  },
+  {
+    "id": "ltx-2-5",
+    "name": "LTX-2.5",
+    "lab": "lightricks",
+    "family": "LTX",
+    "released": "2026-08-11",
+    "weights": "open",
+    "card": "https://huggingface.co/Lightricks/LTX-2.5",
+    "aliases": [
+      "LTX 2.5"
+    ]
   },
   {
     "id": "nemotron-3-5-lightning-30b-a3b",
@@ -12357,6 +13020,17 @@
     "released": "2026-08-26",
     "weights": "closed",
     "epoch": "Qwen3.8 Flash"
+  },
+  {
+    "id": "qwen3-8-flash-next",
+    "name": "Qwen3.8-Flash-Next",
+    "lab": "qwen",
+    "released": "2026-08-26",
+    "weights": "open",
+    "card": "https://github.com/QwenLM/Qwen3.8-Flash-Next",
+    "aliases": [
+      "Qwen-3.8-Flash-Next"
+    ]
   },
   {
     "id": "tencent-hy4-preview",
@@ -12607,6 +13281,15 @@
     "epoch": "Claude Opus 5.5"
   },
   {
+    "id": "flux-3-action",
+    "name": "FLUX 3 Action",
+    "lab": "black-forest-labs",
+    "family": "FLUX",
+    "released": "2026-09-22",
+    "weights": "open",
+    "card": "https://bfl.ai/models/flux-3-action"
+  },
+  {
     "id": "gpt-6-luna",
     "name": "GPT-6 Luna",
     "lab": "openai",
@@ -12636,6 +13319,28 @@
     "card": "https://fireworks.ai/blog/ember-1",
     "aliases": [
       "Ember-1"
+    ]
+  },
+  {
+    "id": "gemini-3-8-flash-lite-tts",
+    "name": "Gemini 3.8 Flash-Lite TTS",
+    "lab": "google",
+    "released": "2026-09-23",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/",
+    "aliases": [
+      "Google DeepMind Gemini 3.8 Flash-Lite TTS"
+    ]
+  },
+  {
+    "id": "gemini-3-8-flash-tts",
+    "name": "Gemini 3.8 Flash TTS",
+    "lab": "google",
+    "released": "2026-09-23",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/",
+    "aliases": [
+      "Google DeepMind Gemini 3.8 Flash TTS"
     ]
   },
   {
@@ -12688,6 +13393,16 @@
     "released": "2026-10-05",
     "weights": "open",
     "epoch": "Beam 1.0"
+  },
+  {
+    "id": "embeddinggemma-2",
+    "name": "EmbeddingGemma 2",
+    "lab": "google",
+    "released": "2026-10-06",
+    "weights": "open",
+    "aliases": [
+      "google/embeddinggemma-2"
+    ]
   },
   {
     "id": "falcon-emirati-7b",
@@ -12867,6 +13582,18 @@
     "card": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
   },
   {
+    "id": "voxtral-mini-tts-3-0",
+    "name": "Voxtral Mini TTS 3",
+    "lab": "mistral",
+    "released": "2026-10-20",
+    "weights": "closed",
+    "card": "https://docs.mistral.ai/models/voxtral-mini-tts-3-0",
+    "aliases": [
+      "Mistral AI Voxtral-mini-tts-3-0",
+      "Voxtral TTS 3"
+    ]
+  },
+  {
     "id": "spark-x2-6-4b",
     "name": "Spark-X2.6-4B",
     "lab": "iflytek",
@@ -12972,6 +13699,22 @@
     ]
   },
   {
+    "id": "gpt-image-2-6-flare",
+    "name": "GPT-Image-2.6 Flare",
+    "lab": "openai",
+    "released": "2026-11-04",
+    "weights": "closed",
+    "card": "https://openai.com/index/introducing-images-2-6/"
+  },
+  {
+    "id": "gpt-image-2-6-sunburst",
+    "name": "GPT-Image-2.6 Sunburst",
+    "lab": "openai",
+    "released": "2026-11-04",
+    "weights": "closed",
+    "card": "https://openai.com/index/introducing-images-2-6/"
+  },
+  {
     "id": "ripple-65b-preview",
     "name": "Ripple-65B Preview",
     "lab": "ricursive",
@@ -13013,6 +13756,14 @@
     ]
   },
   {
+    "id": "gemini-omni-1-2-flash",
+    "name": "Gemini Omni 1.2 Flash",
+    "lab": "google",
+    "released": "2026-11-05",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/"
+  },
+  {
     "id": "inkling-2-small",
     "name": "Inkling 2 Small",
     "lab": "thinking-machines",
@@ -13041,6 +13792,20 @@
       "Claude Mythos 5.2"
     ],
     "epoch": "Claude Fable 5.2"
+  },
+  {
+    "id": "muse-ember",
+    "name": "Muse Ember",
+    "lab": "meta",
+    "family": "Muse Ember",
+    "released": "2026-11-09",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://research.meta.ai/blog/muse-ember",
+    "aliases": [
+      "Muse Ember 1.0",
+      "muse-ember-1.0"
+    ]
   },
   {
     "id": "bagel",

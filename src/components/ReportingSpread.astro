@@ -1,0 +1,198 @@
+---
+// How fast a new benchmark spreads: every line starts on the day a lab first named the benchmark, and climbs a step
+// each time another lab names it. All of them share one start, so their shapes compare directly. The fastest to
+// reach ten labs are drawn in their area color and named at their line ends, the two most widely named in ink, and
+// the rest stay faint. It renders twice, at a desktop and a phone width, so text keeps its size on both.
+import type { SpreadLine } from '../lib/reporting.ts';
+import { textW } from '../lib/reporting-graphics.ts';
+import { fullDate } from '../lib/format.ts';
+
+interface Props {
+  lines: SpreadLine[];
+  /** How many of the fastest to ten labs to draw in color. */
+  fast?: number;
+}
+const { lines, fast = 5 } = Astro.props;
+
+const f1 = (n: number) => (Math.round(n * 10) / 10).toString();
+const MONTH = 365.25 / 12;
+const maxEnd = Math.max(...lines.map((l) => l.end));
+const months = Math.ceil(maxEnd / MONTH / 3) * 3;
+const maxLabs = Math.ceil(Math.max(...lines.map((l) => l.days.length)) / 10) * 10;
+
+const fastest = lines
+  .filter((l) => l.d10 != null)
+  .sort((a, b) => a.d10! - b.d10! || a.name.localeCompare(b.name))
+  .slice(0, fast);
+const widest = lines.filter((l) => !fastest.includes(l)).slice(0, 2);
+const on = new Set([...fastest, ...widest]);
+const kind = (l: SpreadLine) => (fastest.includes(l) ? 'fast' : widest.includes(l) ? 'wide' : 'faint');
+
+const ZONES = [
+  { key: 'wide', w: 1120, h: 430, l: 34, r: 196, t: 14, b: 46, font: 12, every: 3, columns: false },
+  { key: 'narrow', w: 358, h: 360, l: 26, r: 112, t: 14, b: 42, font: 11, every: 6, columns: true },
+];
+
+const views = ZONES.map((z) => {
+  const X = (days: number) => z.l + (days / (months * MONTH)) * (z.w - z.l - z.r);
+  const Y = (n: number) => z.h - z.b - (n / maxLabs) * (z.h - z.t - z.b);
+  const path = (l: SpreadLine) => {
+    let d = `M${f1(X(0))},${f1(Y(1))}`;
+    for (let k = 1; k < l.days.length; k++) d += `H${f1(X(l.days[k]))}V${f1(Y(k + 1))}`;
+    return `${d}H${f1(X(l.end))}`;
+  };
+  // end labels: at the line's end on a wide screen, in a column at the right on a phone, pushed apart to never touch
+  type L = { l: SpreadLine; ex: number; ey: number; x: number; y: number; w: number };
+  const ends: L[] = [...on]
+    .map((l) => {
+      const ex = X(l.end);
+      const ey = Y(l.days.length);
+      return { l, ex, ey, x: z.columns ? z.w - z.r + 8 : ex + 6, y: ey + 4, w: textW(l.name, z.font) };
+    })
+    .sort((a, b) => a.ey - b.ey);
+  const placed: L[] = [];
+  for (const e of ends) {
+    const clash = () => placed.some((p) => e.x < p.x + p.w + 4 && p.x < e.x + e.w + 4 && Math.abs(p.y - e.y) < z.font + 3);
+    while (clash()) e.y += 1;
+    placed.push(e);
+  }
+  const ticks: number[] = [];
+  for (let mth = 0; mth <= months; mth += z.every) ticks.push(mth);
+  return { z, X, Y, path, ends: placed, ticks };
+});
+
+const lead = fastest[0];
+const tipFor = (l: SpreadLine) => ({
+  'data-tv': l.name,
+  'data-tn': `${l.days.length} labs in ${l.end} days`,
+  'data-ts': `${l.d10 != null ? `Ten labs by day ${l.d10}. ` : ''}First named ${fullDate(l.first)}`,
+});
+const ordered = [...lines].sort((a, b) => Number(on.has(a)) - Number(on.has(b)));
+const label = `${lines.length} benchmarks released since 2025, each lined up on the day a lab first named it. ${fastest.map((l) => `${l.name} reached ten labs in ${l.d10} days.`).join(' ')}`;
+const mlabel = (m: number) => (m === 0 ? '0' : m % 12 === 0 ? `${m / 12} ${m === 12 ? 'year' : 'years'}` : `${m} months`);
+---
+
+<div class="rp-spread">
+  {
+    views.map(({ z, X, Y, path, ends, ticks }) => (
+      <svg class={`only-${z.key}`} viewBox={`0 0 ${z.w} ${z.h}`} role={z.key === 'wide' ? 'group' : 'img'} aria-label={label} style={`--f:${z.font}px`} data-rove={z.key === 'wide' ? '' : undefined}>
+        {[0, 10, 20, 30, 40, 50].filter((n) => n <= maxLabs).map((n) => (
+          <g>
+            <line class="g" x1={z.l} x2={z.w - z.r} y1={f1(Y(n))} y2={f1(Y(n))} />
+            <text class="t num" x={z.l - 6} y={f1(Y(n) + 4)} text-anchor="end">
+              {n}
+            </text>
+          </g>
+        ))}
+        {ticks.map((m) => (
+          <text class="t num" x={f1(X(m * MONTH))} y={z.h - z.b + 18} text-anchor={m === 0 ? 'start' : 'middle'}>
+            {mlabel(m)}
+          </text>
+        ))}
+        <text class="t" x={z.l} y={z.h - 6}>
+          Time since a lab first named it
+        </text>
+        {ordered.map((l, i) => (
+          <g class={`rp-sl rp-${kind(l)}`} data-l={i} tabindex={z.key === 'wide' ? (l === lead ? 0 : -1) : undefined} {...(z.key === 'wide' ? tipFor(l) : {})}>
+            <path class="hitl" d={path(l)} />
+            <path class={`ln a-${l.area}`} d={path(l)} />
+          </g>
+        ))}
+        {z.key === 'wide' && lead && (
+          <g class="rp-ann">
+            <circle class={`a-${lead.area}`} cx={f1(X(lead.d10!))} cy={f1(Y(10))} r="4.5" />
+            <text x={f1(X(lead.d10!) + 9)} y={f1(Y(10) - 9)}>
+              {`Ten labs in ${lead.d10} days`}
+            </text>
+          </g>
+        )}
+        {ends.map((e) => (
+          <g class="rp-se">
+            {Math.abs(e.y - 4 - e.ey) > 3 || z.columns ? <line x1={f1(e.ex + 2)} y1={f1(e.ey)} x2={f1(e.x - 3)} y2={f1(e.y - 4)} /> : null}
+            <text x={f1(e.x)} y={f1(e.y)} class={kind(e.l) === 'fast' ? 'on' : ''}>
+              {e.l.name}
+            </text>
+          </g>
+        ))}
+      </svg>
+    ))
+  }
+</div>
+
+<style>
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .g {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .t {
+    font: 11px var(--mono);
+    fill: var(--ink-3);
+  }
+  .rp-sl {
+    outline: none;
+  }
+  .hitl {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 10;
+  }
+  .ln {
+    fill: none;
+    stroke-linejoin: round;
+    transition: opacity 140ms ease;
+  }
+  .rp-faint .ln {
+    stroke: var(--ink-4);
+    stroke-width: 1.2;
+    opacity: 0.45;
+  }
+  .rp-wide .ln {
+    stroke: var(--ink-2);
+    stroke-width: 2;
+  }
+  .rp-fast .ln {
+    stroke: currentColor;
+    stroke-width: 2.6;
+  }
+  .rp-sl:hover .ln,
+  .rp-sl:focus-visible .ln {
+    stroke-width: 3;
+    opacity: 1;
+  }
+  .rp-sl.rp-faint:hover .ln,
+  .rp-sl.rp-faint:focus-visible .ln {
+    stroke: var(--ink);
+  }
+  .rp-ann circle {
+    fill: currentColor;
+    stroke: var(--bg);
+    stroke-width: 2;
+  }
+  .rp-ann text,
+  .rp-se text {
+    font-size: var(--f);
+    fill: var(--ink-2);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+  .rp-ann text {
+    font-weight: 600;
+    fill: var(--ink);
+  }
+  .rp-se text.on {
+    fill: var(--ink);
+    font-weight: 500;
+  }
+  .rp-se line {
+    stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+</style>

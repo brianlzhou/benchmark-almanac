@@ -1,0 +1,263 @@
+---
+// The benchmark charts, like a music chart: the ten benchmarks named in the most releases in each column, rank
+// down the page. A line's thickness is the share of that column's releases that named it, so a benchmark can hold
+// its rank and still fade. Lines take the benchmark's area color. Names sit at both ends, and where a benchmark
+// enters or leaves the top ten. Hovering or focusing a line picks it out.
+import type { BumpCol, BumpLine } from '../lib/reporting.ts';
+import { textW } from '../lib/reporting-graphics.ts';
+
+interface Props {
+  cols: BumpCol[];
+  lines: BumpLine[];
+}
+const { cols, lines } = Astro.props;
+
+const W = 1120;
+const GL = 176;
+const GR = 176;
+const TOP = 50;
+const ROW = 33;
+const H = TOP + 10 * ROW + 12;
+const F = 12;
+const FI = 11.5;
+const last = cols.length - 1;
+const X = (i: number) => GL + (i * (W - GL - GR)) / Math.max(1, last);
+const Y = (rank: number) => TOP + (rank - 0.5) * ROW;
+const wOf = (share: number) => 2 + share * 13;
+const rOf = (share: number) => Math.max(3.4, wOf(share) / 2 + 1.2);
+const f1 = (n: number) => (Math.round(n * 10) / 10).toString();
+
+interface Pt {
+  i: number;
+  x: number;
+  y: number;
+  w: number;
+  r: number;
+  share: number;
+}
+type Rect = { x0: number; y0: number; x1: number; y1: number };
+const hit = (a: Rect, b: Rect, pad = 2) => a.x0 < b.x1 + pad && b.x0 < a.x1 + pad && a.y0 < b.y1 + pad && b.y0 < a.y1 + pad;
+
+// runs of consecutive columns in the top ten
+const drawn = lines.map((l, li) => {
+  const segs: Pt[][] = [];
+  let cur: Pt[] = [];
+  l.ranks.forEach((rank, i) => {
+    if (rank == null) {
+      if (cur.length) segs.push(cur);
+      cur = [];
+      return;
+    }
+    const share = l.shares[i]!;
+    cur.push({ i, x: X(i), y: Y(rank), w: wOf(share), r: rOf(share), share });
+  });
+  if (cur.length) segs.push(cur);
+  return { l, li, segs };
+});
+
+// a ribbon whose edges curve between columns, as wide as each column's share
+const ribbon = (seg: Pt[]) => {
+  if (seg.length < 2) return '';
+  let top = `M${f1(seg[0].x)},${f1(seg[0].y - seg[0].w / 2)}`;
+  for (let k = 1; k < seg.length; k++) {
+    const a = seg[k - 1];
+    const b = seg[k];
+    const xm = (a.x + b.x) / 2;
+    top += `C${f1(xm)},${f1(a.y - a.w / 2)} ${f1(xm)},${f1(b.y - b.w / 2)} ${f1(b.x)},${f1(b.y - b.w / 2)}`;
+  }
+  const z = seg.at(-1)!;
+  let bot = `L${f1(z.x)},${f1(z.y + z.w / 2)}`;
+  for (let k = seg.length - 1; k > 0; k--) {
+    const a = seg[k];
+    const b = seg[k - 1];
+    const xm = (a.x + b.x) / 2;
+    bot += `C${f1(xm)},${f1(a.y + a.w / 2)} ${f1(xm)},${f1(b.y + b.w / 2)} ${f1(b.x)},${f1(b.y + b.w / 2)}`;
+  }
+  return `${top}${bot}Z`;
+};
+
+// labels: the ends of the chart first, then entries and exits inside it where they fit
+const taken: Rect[] = drawn.flatMap((dr) => dr.segs.flat().map((p) => ({ x0: p.x - p.r, y0: p.y - p.r, x1: p.x + p.r, y1: p.y + p.r })));
+const labels: { li: number; x: number; y: number; anchor: 'start' | 'middle' | 'end'; text: string; cls: string }[] = [];
+const place = (li: number, text: string, cands: { x: number; y: number; anchor: 'start' | 'middle' | 'end' }[], size: number, cls: string, force: boolean) => {
+  const w = textW(text, size);
+  for (const c of cands) {
+    const x0 = c.anchor === 'start' ? c.x : c.anchor === 'end' ? c.x - w : c.x - w / 2;
+    const rect = { x0, y0: c.y - size + 1, x1: x0 + w, y1: c.y + 3 };
+    if (rect.x0 < 0 || rect.x1 > W) continue;
+    if (!force && taken.some((t) => hit(t, rect, 1))) continue;
+    taken.push(rect);
+    labels.push({ li, x: c.x, y: c.y, anchor: c.anchor, text, cls });
+    return true;
+  }
+  return false;
+};
+for (const { l, li, segs } of drawn)
+  for (const seg of segs) {
+    const a = seg[0];
+    if (a.i === 0) place(li, l.name, [{ x: a.x - a.r - 8, y: a.y + 4, anchor: 'end' }], F, 'rp-bn0', true);
+    const z = seg.at(-1)!;
+    if (z.i === last) place(li, l.name, [{ x: z.x + z.r + 8, y: z.y + 4, anchor: 'start' }], F, 'rp-bn0', true);
+  }
+for (const { l, li, segs } of drawn)
+  for (const seg of segs) {
+    const a = seg[0];
+    const z = seg.at(-1)!;
+    if (a.i > 0)
+      place(
+        li,
+        l.name,
+        [
+          { x: a.x - a.r - 5, y: a.y + 4, anchor: 'end' },
+          { x: a.x, y: a.y - a.r - 5, anchor: 'middle' },
+          { x: a.x, y: a.y + a.r + FI + 2, anchor: 'middle' },
+          { x: a.x + a.r + 5, y: a.y - a.r - 2, anchor: 'start' },
+        ],
+        FI,
+        'rp-bin',
+        false,
+      );
+    if (z.i < last && (z.i > a.i || a.i === 0))
+      place(
+        li,
+        `${l.name} out`,
+        [
+          { x: z.x + z.r + 5, y: z.y + 4, anchor: 'start' },
+          { x: z.x, y: z.y + z.r + FI + 2, anchor: 'middle' },
+          { x: z.x, y: z.y - z.r - 5, anchor: 'middle' },
+        ],
+        FI,
+        'rp-bout',
+        false,
+      );
+  }
+
+const colName = (i: number) => (cols[i].sub ? `${cols[i].label} (${cols[i].sub})` : cols[i].label);
+const tip = (l: BumpLine) => {
+  const inTop = l.ranks.filter((r) => r != null).length;
+  const firsts = l.ranks.filter((r) => r === 1).length;
+  const best = l.shares.reduce<number>((b, s, i) => (s != null && (b < 0 || s > l.shares[b]!) ? i : b), -1);
+  return {
+    'data-tv': l.name,
+    'data-tn': `In the top ten in ${inTop} of ${cols.length} columns${firsts ? `, first in ${firsts}` : ''}`,
+    'data-ts': best >= 0 ? `Named in ${Math.round(l.shares[best]! * 100)}% of releases in ${colName(best)}, its most` : '',
+  };
+};
+const label = `The ten benchmarks named in the most releases, from ${cols[0]?.label} to ${cols[last]?.label}. ${lines
+  .filter((l) => l.ranks[last] === 1)
+  .map((l) => `${l.name} is first in ${cols[last].label}.`)
+  .join(' ')}`;
+---
+
+<div class="rp-bump" data-rp-bump>
+  <svg viewBox={`0 0 ${W} ${H}`} role="group" aria-label={label} data-rove>
+    {
+      cols.map((c, i) => (
+        <g class="rp-bh">
+          <text x={X(i)} y="16" text-anchor="middle" class="num">
+            {c.label}
+          </text>
+          {c.sub && (
+            <text x={X(i)} y="31" text-anchor="middle" class="rp-bhs">
+              {c.sub}
+            </text>
+          )}
+        </g>
+      ))
+    }
+    {
+      [1, 10].map((r) => (
+        <text x="6" y={Y(r) + 4} class="rp-bhs num">
+          {r === 1 ? '1st' : '10th'}
+        </text>
+      ))
+    }
+    {
+      drawn.map(({ l, li, segs }) => (
+        <g class="rp-bl" data-l={li} tabindex={li === 0 ? 0 : -1} {...tip(l)}>
+          {segs.map((seg) => (
+            <>
+              {seg.length > 1 && <path d={ribbon(seg)} class={`rp-rib a-${l.area}`} />}
+              {seg.map((p) => (
+                <circle cx={f1(p.x)} cy={f1(p.y)} r={f1(p.r)} class={`rp-bnode a-${l.area}`} />
+              ))}
+            </>
+          ))}
+        </g>
+      ))
+    }
+    {
+      labels.map((t) => (
+        <text x={f1(t.x)} y={f1(t.y)} text-anchor={t.anchor} class:list={['rp-blb', t.cls]} data-l={t.li}>
+          {t.text}
+        </text>
+      ))
+    }
+  </svg>
+</div>
+
+<style>
+  .rp-bump {
+    overflow-x: auto;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 6px;
+    scrollbar-width: thin;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .rp-bh text {
+    font: 500 12px var(--mono);
+    fill: var(--ink-2);
+  }
+  .rp-bhs {
+    font: 11px var(--mono);
+    fill: var(--ink-3);
+  }
+  .rp-rib {
+    fill: currentColor;
+    opacity: 0.82;
+  }
+  .rp-bnode {
+    fill: currentColor;
+    stroke: var(--bg);
+    stroke-width: 2;
+  }
+  .rp-bl {
+    outline: none;
+    transition: opacity 140ms ease;
+  }
+  .rp-blb {
+    font-size: 12px;
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    transition: opacity 140ms ease;
+  }
+  .rp-bin {
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+  .rp-bout {
+    font-size: 11.5px;
+    fill: var(--ink-3);
+  }
+  :global(.rp-hov) .rp-bl:not(.on),
+  :global(.rp-hov) .rp-blb:not(.on) {
+    opacity: 0.16;
+  }
+  .rp-bl:focus-visible .rp-bnode {
+    stroke: var(--ink);
+  }
+  @media (max-width: 720px) {
+    svg {
+      width: 940px;
+      max-width: none;
+    }
+  }
+</style>

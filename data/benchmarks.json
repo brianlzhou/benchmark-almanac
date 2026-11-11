@@ -2232,14 +2232,15 @@
       "site": "https://lhannnn.github.io/agentic-abstention/"
     },
     "access": "public",
-    "note": "Over 28,000 tasks built from WebShop, AbstentionBench-style questions and Terminal-Bench. Headline metric is timely recall. Accepted to NeurIPS 2026.",
+    "note": "The parent has no aggregate across WebShop, Terminal and interactive QA. The WebShop child imports timely recall from the numeric CONVOLVE table. Terminal and QA results remain image-only.",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2606.28733",
       "https://github.com/lhannnn/agentic-abstention",
-      "https://huggingface.co/api/papers/2606.28733"
+      "https://huggingface.co/api/papers/2606.28733",
+      "https://lhannnn.github.io/agentic-abstention/"
     ],
     "added": "2026-11-01"
   },
@@ -3398,7 +3399,6 @@
       "AIR-Bench audio",
       "AirBench-chat",
       "AIR-Bench Chat",
-      "AIR-Bench Foundation",
       "Audio InstRuction Benchmark"
     ],
     "category": "audio-video",
@@ -3456,6 +3456,31 @@
       "https://crfm.stanford.edu/helm/air-bench/latest/",
       "https://storage.googleapis.com/crfm-helm-public/air-bench/benchmark_output/releases/v1.19.0/summary.json"
     ]
+  },
+  {
+    "id": "air-bench-foundation",
+    "name": "AIR-Bench Foundation",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models answer foundational audio understanding questions. The score is the official average accuracy across nineteen tasks.",
+    "org": "Zhejiang University and Alibaba Group",
+    "released": "2024-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2402.07729",
+      "repo": "https://github.com/OFA-Sys/AIR-Bench"
+    },
+    "access": "public",
+    "note": "Foundation accuracy differs from Chat judge scores. Speech-only baseline has no published overall average.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/OFA-Sys/AIR-Bench"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "airs-bench",
@@ -6608,6 +6633,8 @@
     "level": "university",
     "scoring": "model-judged",
     "format": "open-ended",
+    "family": "artifactsbench",
+    "version": "Gemini 2.5 Pro judge",
     "description": "Models generate interactive visual code artifacts for 1,825 tasks. An MLLM judge scores rendered screenshots and code against a per-task checklist.",
     "org": "Tencent Hunyuan",
     "released": "2025-07",
@@ -6623,8 +6650,41 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2507.04952",
-      "https://github.com/Tencent-Hunyuan/ArtifactsBenchmark"
+      "https://github.com/Tencent-Hunyuan/ArtifactsBenchmark",
+      "https://artifactsbenchmark.github.io/leaderboard.html"
     ]
+  },
+  {
+    "id": "artifactsbench-gemini-0506",
+    "name": "ArtifactsBench (Gemini 2.5 Pro 0506 judge)",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "family": "artifactsbench",
+    "version": "Gemini 2.5 Pro 0506 judge",
+    "description": "Models generate interactive visual code artifacts for 1,825 tasks. An MLLM judge scores rendered screenshots and code against a per-task checklist.",
+    "org": "Tencent Hunyuan",
+    "released": "2025-07",
+    "links": {
+      "repo": "https://github.com/Tencent-Hunyuan/ArtifactsBenchmark",
+      "paper": "https://arxiv.org/abs/2507.04952",
+      "site": "https://artifactsbenchmark.github.io/",
+      "leaderboard": "https://artifactsbenchmark.github.io/leaderboard.html",
+      "dataset": "https://huggingface.co/datasets/tencent/ArtifactsBenchmark/"
+    },
+    "access": "public",
+    "note": "The historical judge tab uses Gemini 2.5 Pro 0506. Its scores remain separate from the current Gemini 2.5 Pro judge.",
+    "successor": "artifactsbench",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2507.04952",
+      "https://github.com/Tencent-Hunyuan/ArtifactsBenchmark"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "aa-coding-agent-index-v1-0",
@@ -10953,6 +11013,8 @@
     "subcategory": "domain-finance",
     "level": "university",
     "format": "short-answer",
+    "family": "bizfinbench",
+    "version": "1",
     "description": "Models answer 6,781 Chinese finance queries drawn from real business scenarios. The queries cover numerical calculation, reasoning, information extraction, prediction recognition and knowledge questions, in nine categories. Some tasks are scored against answers and others by IteraJudge, the authors' LLM judging method.",
     "org": "HiThink Research",
     "released": "2025-05",
@@ -10963,14 +11025,49 @@
     },
     "access": "public",
     "note": "The README now marks this first version as outdated and points to BizFinBench.v2 (ICML 2026), a larger bilingual set that the almanac also lacks. About 170 GitHub stars and 64 HF paper upvotes. The paper evaluates 25 models.",
+    "successor": "bizfinbench-2",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2505.19457",
-      "https://github.com/HiThink-Research/BizFinBench"
+      "https://github.com/HiThink-Research/BizFinBench",
+      "https://hithink-research.github.io/BizFinBench.v2/"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "bizfinbench-2",
+    "name": "BizFinBench v2",
+    "aliases": [
+      "BizFinBench.v2"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "family": "bizfinbench",
+    "version": "2",
+    "description": "Models answer expert financial questions grounded in business data. The score is average accuracy on eight offline tasks.",
+    "org": "HiThink Research",
+    "released": "2026-01",
+    "links": {
+      "site": "https://hithink-research.github.io/BizFinBench.v2/",
+      "repo": "https://github.com/HiThink-Research/BizFinBench",
+      "dataset": "https://huggingface.co/datasets/HiThink-Research/BizFinBench.v2"
+    },
+    "access": "public",
+    "note": "Online tasks have separate scoring. Official chart labels are hash-checked. Broad API names remain unlisted.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://hithink-research.github.io/BizFinBench.v2/",
+      "https://hithink-research.github.io/BizFinBench.v2/static/images/score_sequence.png"
+    ],
+    "added": "2026-11-10",
+    "arena": false
   },
   {
     "id": "black-box-rna-sequence-design-anthropic",
@@ -11800,6 +11897,34 @@
     ]
   },
   {
+    "id": "browsesafe-adapt",
+    "name": "BrowseSafe-Adapt",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Browser agents face adaptive prompt injections across 1,024 tasks. The score is attack success within 64 attempts.",
+    "org": "Perplexity",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.17457",
+      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
+      "site": "https://browsesafe.perplexity.ai/",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
+      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate published result set. Scores are not mixed with the other tracks.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "browsesafe-bench",
     "name": "BrowseSafe-Bench",
     "aliases": [
@@ -12320,8 +12445,10 @@
     "id": "c3-bench",
     "name": "C3-Bench",
     "aliases": [
+      "C3 Bench",
       "C^3-Bench",
-      "C3 Bench"
+      "Wild-Tool-Bench",
+      "WildToolBench"
     ],
     "category": "tool-use",
     "subcategory": "tools-function-calling",
@@ -12333,17 +12460,20 @@
     "released": "2025-05",
     "links": {
       "paper": "https://arxiv.org/abs/2505.18746",
-      "repo": "https://github.com/Tencent-Hunyuan/C3-Benchmark",
-      "dataset": "https://huggingface.co/datasets/tencent/C3-BenchMark"
+      "repo": "https://github.com/yupeijei1997/WildToolBench",
+      "dataset": "https://huggingface.co/datasets/tencent/C3-BenchMark",
+      "site": "https://yupeijei1997.github.io/WildToolBench/",
+      "leaderboard": "https://yupeijei1997.github.io/WildToolBench/"
     },
     "access": "public",
-    "note": "The paper tests 49 agents.",
+    "note": "The authors moved C3-Bench to WildToolBench. The maintained board evaluates 57 configurations on 256 sessions. Session accuracy is the headline score.",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://github.com/Tencent-Hunyuan/C3-Benchmark",
-      "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"
+      "https://huggingface.co/tencent/Hunyuan-A13B-Instruct",
+      "https://yupeijei1997.github.io/WildToolBench/"
     ],
     "added": "2026-11-01"
   },
@@ -12914,6 +13044,168 @@
     "added": "2026-11-01"
   },
   {
+    "id": "catarena-gomoku",
+    "name": "CATArena Gomoku",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Code agents compete in Gomoku. The public competition board reports Elo Rating for each agent configuration.",
+    "org": "AGI-Eval (Meituan)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26852",
+      "repo": "https://github.com/AGI-Eval-Official/CATArena",
+      "site": "https://catarena.ai",
+      "leaderboard": "https://catarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "This competition has its own published scores. Harness-only names do not identify base models.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://catarena.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "catarena-oibench-5",
+    "name": "CATArena OIBench-5",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Code agents compete in OIBench-5. The public competition board reports Time AUC for each agent configuration.",
+    "org": "AGI-Eval (Meituan)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26852",
+      "repo": "https://github.com/AGI-Eval-Official/CATArena",
+      "site": "https://catarena.ai",
+      "leaderboard": "https://catarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "This competition has its own published scores. Harness-only names do not identify base models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://catarena.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "catarena-pommerman",
+    "name": "CATArena Pommerman",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Code agents compete in Pommerman. The public competition board reports Elo Rating for each agent configuration.",
+    "org": "AGI-Eval (Meituan)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26852",
+      "repo": "https://github.com/AGI-Eval-Official/CATArena",
+      "site": "https://catarena.ai",
+      "leaderboard": "https://catarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "This competition has its own published scores. Harness-only names do not identify base models.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://catarena.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "catarena-swe-perf-10",
+    "name": "CATArena SWE-Perf-10",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Code agents compete in SWE-Perf-10. The public competition board reports Time Ratio for each agent configuration.",
+    "org": "AGI-Eval (Meituan)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26852",
+      "repo": "https://github.com/AGI-Eval-Official/CATArena",
+      "site": "https://catarena.ai",
+      "leaderboard": "https://catarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "This competition has its own published scores. Harness-only names do not identify base models.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://catarena.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "catarena-tetris",
+    "name": "CATArena Tetris",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Code agents compete in Tetris. The public competition board reports Score for each agent configuration.",
+    "org": "AGI-Eval (Meituan)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26852",
+      "repo": "https://github.com/AGI-Eval-Official/CATArena",
+      "site": "https://catarena.ai",
+      "leaderboard": "https://catarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "This competition has its own published scores. Harness-only names do not identify base models.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://catarena.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "catarena-holdem",
+    "name": "CATArena Texas Holdem",
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Code agents compete in Texas Holdem. The public competition board reports Elo Rating for each agent configuration.",
+    "org": "AGI-Eval (Meituan)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.26852",
+      "repo": "https://github.com/AGI-Eval-Official/CATArena",
+      "site": "https://catarena.ai",
+      "leaderboard": "https://catarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "This competition has its own published scores. Harness-only names do not identify base models.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://catarena.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "catastrophic-biology-scenario-uplift-trial-anthropic",
     "name": "Catastrophic biology scenario uplift trial (Anthropic)",
     "aliases": [
@@ -13372,6 +13664,30 @@
     ]
   },
   {
+    "id": "cekura-agent",
+    "name": "Cekura Agent Performance",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Scenario reliability across three repeated calls (Pass³).",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "leaderboard": "https://benchmarks.cekura.ai/speech-to-speech"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate task board. No combined Cekura score exists. Costs use their explicitly named units.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/speech-to-speech"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "cekura-bench",
     "name": "Cekura Bench",
     "aliases": [
@@ -13400,6 +13716,126 @@
       "https://raw.githubusercontent.com/cekura-ai/cekura-bench/main/README.md"
     ],
     "added": "2026-11-08"
+  },
+  {
+    "id": "cekura-production",
+    "name": "Cekura Production Voice Agents",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Published composite score for production voice agents.",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "leaderboard": "https://benchmarks.cekura.ai/experiments/production-voice-agents"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate task board. No combined Cekura score exists. Costs use their explicitly named units.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/experiments/production-voice-agents"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "cekura-real",
+    "name": "Cekura Real Human Calls",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Real caller reliability across three repeated calls (Pass³).",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "leaderboard": "https://benchmarks.cekura.ai/speech-to-speech/real-calls"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate task board. No combined Cekura score exists. Costs use their explicitly named units.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/speech-to-speech/real-calls"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "cekura-stt",
+    "name": "Cekura Speech to Text",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Overall word error rate across the published audio clips.",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "leaderboard": "https://benchmarks.cekura.ai/stt"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate task board. No combined Cekura score exists. Costs use their explicitly named units.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/stt"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "cekura-tts",
+    "name": "Cekura Text to Speech",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Round-trip word error rate averaged across the two transcribers, as displayed by Cekura.",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "leaderboard": "https://benchmarks.cekura.ai/text-to-speech"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate task board. No combined Cekura score exists. Costs use their explicitly named units.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/text-to-speech"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "cekura-turn",
+    "name": "Cekura Turn Bench",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Mean end-of-turn score across six line conditions, as published by Cekura.",
+    "org": "Cekura",
+    "released": "2026-07",
+    "links": {
+      "leaderboard": "https://benchmarks.cekura.ai/speech-to-speech/turn-bench"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate task board. No combined Cekura score exists. Costs use their explicitly named units.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.cekura.ai/speech-to-speech/turn-bench"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "cello",
@@ -13929,6 +14365,30 @@
     "evidence": [
       "https://arxiv.org/pdf/2408.00118v1"
     ]
+  },
+  {
+    "id": "kaggle-chart-arena",
+    "name": "Chart Arena",
+    "category": "coding",
+    "subcategory": "coding-data",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models create charts. Pairwise votes determine the published Arena rating.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/chart-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/chart-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/chart-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "chartmimic",
@@ -16346,6 +16806,30 @@
     ]
   },
   {
+    "id": "code2video-arena",
+    "name": "Code2Video Arena",
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models create videos through code. Pairwise votes determine the published Arena rating.",
+    "org": "HeyGen on Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/heygen/code2video-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/heygen/code2video-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/heygen/code2video-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "code2video-benchmark",
     "name": "Code2Video Benchmark",
     "category": "audio-video",
@@ -17112,6 +17596,31 @@
       "https://huggingface.co/spaces/opencompass/CompassArena"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "compassarena-multimodal",
+    "name": "CompassArena Multimodal",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Users compare anonymous multimodal model answers and vote for the better response. A Bradley-Terry model estimates ratings from these votes.",
+    "org": "OpenCompass (Shanghai AI Laboratory)",
+    "links": {
+      "leaderboard": "https://rank.opencompass.org.cn/leaderboard-arena-multimodal",
+      "site": "https://arena.opencompass.org.cn/?tab=mllm_leaderboard"
+    },
+    "access": "public",
+    "note": "The public summary API exposes ten ranked models. Its total model count is larger, and the full-table callback currently fails.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arena.opencompass.org.cn/?tab=leaderboard",
+      "https://rank.opencompass.org.cn/assets/index-f74d42ec.js"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "compassrank",
@@ -18168,6 +18677,30 @@
     ]
   },
   {
+    "id": "kaggle-corp-speak-arena",
+    "name": "Corp Speak Arena",
+    "category": "writing-creative-taste",
+    "subcategory": "writing-taste",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models rewrite text in corporate language. Pairwise votes determine the published Arena rating.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/corp-speak-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/corp-speak-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/corp-speak-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "corpbench-work",
     "name": "CorpBench Work",
     "aliases": [
@@ -18436,6 +18969,56 @@
       "https://arxiv.org/abs/2508.06585",
       "https://huggingface.co/datasets/Jayant-Sravan/CountQA"
     ]
+  },
+  {
+    "id": "coval-stt-wer",
+    "name": "Coval Speech-to-Text WER",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Speech models transcribe call-like audio. The score is mean word error percentage over the published pooled 24-hour window.",
+    "org": "Coval",
+    "released": "2026-04",
+    "links": {
+      "repo": "https://github.com/coval-ai/benchmarks",
+      "leaderboard": "https://benchmarks.coval.ai/stt"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.coval.ai/stt",
+      "https://github.com/coval-ai/benchmarks"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "coval-tts-ttfa",
+    "name": "Coval Text-to-Speech TTFA",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Speech models synthesize customer-service prompts. The score is median time to first audible sample in milliseconds over the published 24-hour window.",
+    "org": "Coval",
+    "released": "2026-04",
+    "links": {
+      "repo": "https://github.com/coval-ai/benchmarks",
+      "leaderboard": "https://benchmarks.coval.ai/tts"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://benchmarks.coval.ai/tts",
+      "https://github.com/coval-ai/benchmarks"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "coval-voice-benchmarks",
@@ -19890,19 +20473,52 @@
     "level": "expert",
     "scoring": "verified",
     "format": "code",
+    "family": "cwe-bench",
+    "version": "1",
     "description": "Agents audit a repository and write a patch for a security flaw, without being told where the bug is. Covers six programming languages.",
     "org": "Collinear AI",
     "released": "2026-09",
     "links": {
-      "leaderboard": "https://cwe-bench.com/"
+      "leaderboard": "https://cwe-bench.com/v1"
     },
     "access": "private",
     "note": "V1 has 120 tasks and is not comparable with v0. The held-out set is private to Collinear. Google reports Gemini 4 Argon at 68% pass@1 and says patches must preserve the existing functional and regression tests.",
+    "successor": "cwe-bench-2",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://cwe-bench.com/",
+      "https://cwe-bench.com/v1",
       "https://storage.googleapis.com/deepmind-media/gemini/gemini_4_safety_report.pdf"
     ]
+  },
+  {
+    "id": "cwe-bench-2",
+    "name": "CWE-bench 2",
+    "category": "cyber",
+    "subcategory": "cyber-secure-code",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "family": "cwe-bench",
+    "version": "2",
+    "description": "Agents audit and patch vulnerabilities in 250 codebases. The score is pass@1 under deterministic verification.",
+    "org": "Collinear AI",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://cwe-bench.com/#leaderboard",
+      "site": "https://cwe-bench.com/",
+      "dataset": "https://huggingface.co/datasets/collinear-ai/cwe-bench"
+    },
+    "access": "public+private-holdout",
+    "note": "The board publishes pass@4 and average API cost per rollout. Runs use high reasoning and a one-hour task limit.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://cwe-bench.com/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "cweval",
@@ -20371,6 +20987,33 @@
       "https://github.com/sunblaze-ucb/cybergym-e2e",
       "https://arxiv.org/abs/2606.04460",
       "https://rdi.berkeley.edu/blog/cybergym-e2e/",
+      "https://www.cybergym.io/cybergym-e2e/"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "cybergym-e2e-615",
+    "name": "CyberGym-E2E (615 tasks)",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents discover and demonstrate vulnerabilities on the older 615-task cohort. The headline is cumulative stage S3 success.",
+    "org": "UC Berkeley RDI (Sunblaze) and collaborators",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.04460",
+      "repo": "https://github.com/sunblaze-ucb/cybergym-e2e",
+      "site": "https://www.cybergym.io/cybergym-e2e/",
+      "leaderboard": "https://www.cybergym.io/cybergym-e2e/"
+    },
+    "access": "public",
+    "note": "Agents discover and demonstrate vulnerabilities on the older 615-task cohort. The headline is cumulative stage S3 success.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
       "https://www.cybergym.io/cybergym-e2e/"
     ],
     "added": "2026-11-01"
@@ -21764,6 +22407,35 @@
     "added": "2026-11-01"
   },
   {
+    "id": "decision-index-vision",
+    "name": "Decision Index Vision",
+    "category": "other",
+    "subcategory": "other-indices",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models make decisions over images and screens. The score is the published equal-weight mean of public and private vision scores.",
+    "org": "Hugging Face community (apolinario, multimodalart)",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/apolinario/decision-index",
+      "site": "https://huggingface.co/spaces/multimodalart/jev-decision-index",
+      "dataset": "https://huggingface.co/datasets/multimodalart/decision-index-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/multimodalart/jev-decision-index"
+    },
+    "access": "public+private-holdout",
+    "note": "Separate vision suite, edition 0.4, with an image cap of 1,638,400 pixels.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/multimodalart/decision-index-vision-leaderboard",
+      "https://huggingface.co/spaces/multimodalart/jev-decision-index"
+    ],
+    "added": "2026-11-10",
+    "arena": false
+  },
+  {
     "id": "deck-bench-moonshot",
     "name": "DECK Bench",
     "category": "economic-work",
@@ -22213,6 +22885,34 @@
     "added": "2026-11-01"
   },
   {
+    "id": "deepresearch-bench-ii-gemini25",
+    "name": "DeepResearch Bench II (Gemini 2.5 Pro judge)",
+    "category": "tool-use",
+    "subcategory": "tools-deep-research",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Systems conduct deep research under the legacy Gemini 2.5 Pro evaluator. Scores remain separate from the current GPT-5.5 evaluator.",
+    "org": "University of Science and Technology of China and Metastone Technology",
+    "released": "2026-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/2601.08536",
+      "repo": "https://github.com/imlrz/DeepResearch-Bench-II",
+      "site": "https://agentresearchlab.org/benchmarks/deepresearch-bench-ii/index.html",
+      "dataset": "https://huggingface.co/datasets/muset-ai/DeepResearch-Bench-II-Dataset",
+      "leaderboard": "https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard"
+    },
+    "access": "public",
+    "note": "Systems conduct deep research under the legacy Gemini 2.5 Pro evaluator. Scores remain separate from the current GPT-5.5 evaluator.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard"
+    ],
+    "added": "2026-11-01"
+  },
+  {
     "id": "deepresearcheval",
     "name": "DeepResearchEval",
     "aliases": [
@@ -22243,6 +22943,37 @@
       "https://infinity-ailab.github.io/deep_research_eval/"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "deepresearcheval-1",
+    "name": "DeepResearchEval v1",
+    "category": "tool-use",
+    "subcategory": "tools-deep-research",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Research agents prepare reports. The score is average report quality on the original evaluation tasks.",
+    "org": "Infinity Lab (Shanda Group) and Nanyang Technological University",
+    "released": "2026-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/2601.09688",
+      "repo": "https://github.com/Infinity-AILab/DeepResearchEval",
+      "site": "https://infinity-ailab.github.io/deep_research_eval/",
+      "dataset": "https://huggingface.co/datasets/Infinity-AILab/DeepResearchEval"
+    },
+    "access": "public",
+    "note": "Separate historical task release. Factuality counts and percentages are retained as metrics.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2601.09688",
+      "https://github.com/Infinity-AILab/DeepResearchEval",
+      "https://infinity-ailab.github.io/deep_research_eval/",
+      "https://huggingface.co/datasets/Infinity-AILab/DeepResearchEval"
+    ],
+    "added": "2026-11-10",
+    "arena": false
   },
   {
     "id": "deeprsi",
@@ -26226,6 +26957,30 @@
     ]
   },
   {
+    "id": "kaggle-eli5-arena",
+    "name": "ELI5 Arena",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-quality",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models explain concepts in simple language. Pairwise votes determine the published Arena rating.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/eli5-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/eli5-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/eli5-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "elimination-game",
     "name": "Elimination Game",
     "aliases": [
@@ -28790,15 +29545,42 @@
       "repo": "https://github.com/LiberCoders/FeatureBench"
     },
     "access": "public",
-    "note": "ICLR 2026. Harbor hosts the 200-task set and a 30-task Lite split.",
+    "note": "The existing importer reads the 30-task Lite board. Move those rows to proposed featurebench-lite before publishing new data under the full benchmark.",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2602.10975",
-      "https://hub.harborframework.com/datasets"
+      "https://hub.harborframework.com/datasets",
+      "https://github.com/LiberCoders/FeatureBench"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "featurebench-lite",
+    "name": "FeatureBench Lite",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "The public 30-task Lite leaderboard ranks passed-test percentages and reports fully resolved-task percentages separately.",
+    "org": "LiberCoders",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.10975",
+      "repo": "https://github.com/LiberCoders/FeatureBench"
+    },
+    "access": "public",
+    "note": "The public 30-task Lite leaderboard ranks passed-test percentages and reports fully resolved-task percentages separately.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2602.10975",
+      "https://github.com/LiberCoders/FeatureBench"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "fermat-last-theorem-lean-anthropic",
@@ -29081,13 +29863,14 @@
       "leaderboard": "https://huggingface.co/spaces/TheFinAI/Open-FinLLM-Leaderboard"
     },
     "access": "public",
-    "note": "Most datasets come from earlier finance work. The PIXIU repository that holds it has about 890 GitHub stars. The Open FinLLM Leaderboard on Hugging Face runs it.",
+    "note": "The linked Open-FinLLM Space now publishes MultiFinBen, a distinct multilingual and multimodal evaluation.",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2402.12659",
-      "https://github.com/The-FinAI/PIXIU"
+      "https://github.com/The-FinAI/PIXIU",
+      "https://huggingface.co/spaces/TheFinAI/Open-FinLLM-Leaderboard"
     ],
     "added": "2026-11-05"
   },
@@ -29142,6 +29925,33 @@
       "https://github.com/SUFE-AIFLM-Lab/FinEval"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "fineval-6",
+    "name": "FinEval 6.0",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models solve financial evaluation tasks. The score is the official 6.0 total score.",
+    "org": "Shanghai University of Finance and Economics (AIFLM Lab)",
+    "released": "2023-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2308.09975",
+      "repo": "https://github.com/SUFE-AIFLM-Lab/FinEval"
+    },
+    "access": "public+private-holdout",
+    "note": "Distinct result table with different tasks and scoring from the earlier text aggregate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2308.09975",
+      "https://github.com/SUFE-AIFLM-Lab/FinEval"
+    ],
+    "added": "2026-11-10",
+    "arena": false
   },
   {
     "id": "finqa",
@@ -29685,6 +30495,31 @@
     ]
   },
   {
+    "id": "kaggle-floorplan-arena",
+    "name": "Floorplan Arena",
+    "category": "coding",
+    "subcategory": "coding-data",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models furnish hand-drawn room sketches. People compare the layouts and vote for the better floorplan.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/floorplan-arena",
+      "site": "https://www.kaggle.com/benchmarks/kaggle/floorplan-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes Arena ratings, confidence intervals and vote counts.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/floorplan-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/floorplan-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "flores",
     "name": "Flores",
     "aliases": [
@@ -29995,6 +30830,33 @@
       "https://arxiv.org/abs/2504.21801v2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "formalmath-lite",
+    "name": "FormalMATH Lite",
+    "category": "math",
+    "subcategory": "math-formal",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "proof",
+    "description": "Models prove statements in the FormalMATH Lite subset. The board reports proof success at the stated sampling budget.",
+    "org": "SphereLab, M-A-P, The Chinese University of Hong Kong, Numina and others",
+    "links": {
+      "paper": "https://arxiv.org/abs/2505.02735",
+      "repo": "https://github.com/Sphere-AI-Lab/FormalMATH-Bench",
+      "site": "https://sphere-ai-lab.github.io/FormalMATH/",
+      "dataset": "https://huggingface.co/SphereLab",
+      "leaderboard": "https://sphere-ai-lab.github.io/FormalMATH/"
+    },
+    "access": "public",
+    "note": "The official source reports this result separately. It is not the parent benchmark aggregate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://sphere-ai-lab.github.io/FormalMATH/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "forte",
@@ -30421,6 +31283,36 @@
       "https://github.com/FrontierCS/Frontier-CS"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "frontiercs-1-1",
+    "name": "FrontierCS 1.1",
+    "category": "coding",
+    "subcategory": "coding-competitive",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "code",
+    "family": "frontiercs",
+    "version": "1.1",
+    "description": "Agents solve 179 algorithmic tasks under revised scoring that rewards solutions beyond the reference. The score is the official average task score.",
+    "org": "FrontierCS team (UC Berkeley and others)",
+    "released": "2025-12",
+    "links": {
+      "paper": "https://arxiv.org/abs/2512.15699",
+      "repo": "https://github.com/FrontierCS/Frontier-CS",
+      "site": "https://frontier-cs.org",
+      "leaderboard": "https://frontier-cs.org"
+    },
+    "access": "public",
+    "note": "Version 1.1 changes the task set and scoring. It is separate from 1.0 and the research-focused FrontierCS 2.",
+    "successor": "frontiercs-2",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://frontier-cs.org/v1/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "frontiercs-2",
@@ -31298,6 +32190,35 @@
       "https://arxiv.org/abs/2311.12983",
       "https://huggingface.co/datasets/gaia-benchmark/GAIA"
     ]
+  },
+  {
+    "id": "gaia2-cli",
+    "name": "Gaia2-CLI",
+    "aliases": [
+      "GAIA2 CLI"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-assistants",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents complete realistic tasks through command-line tools. The benchmark measures task success across search, execution, adaptability, ambiguity, and time constraints.",
+    "org": "Meta FAIR",
+    "released": "2026-04",
+    "links": {
+      "repo": "https://github.com/facebookresearch/meta-agents-research-environments/tree/main/gaia2-cli",
+      "leaderboard": "https://huggingface.co/spaces/meta-agents-research-environments/leaderboard"
+    },
+    "access": "public",
+    "note": "CLI task-set scores remain separate from legacy Gaia2. The official board identifies the OpenClaw harness and reasoning settings.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/facebookresearch/meta-agents-research-environments/tree/main/gaia2-cli",
+      "https://huggingface.co/spaces/meta-agents-research-environments/leaderboard/resolve/main/app.py"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "galahad-vla",
@@ -32871,6 +33792,87 @@
     "added": "2026-11-01"
   },
   {
+    "id": "genai-arena-image-edit",
+    "name": "GenAI-Arena Image Editing",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models edit images from user instructions. Anonymous human comparisons determine Elo in this independent vote pool.",
+    "org": "TIGER-Lab (University of Waterloo)",
+    "released": "2024-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2406.04485",
+      "repo": "https://github.com/TIGER-AI-Lab/GenAI-Arena",
+      "site": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena",
+      "leaderboard": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena"
+    },
+    "access": "public",
+    "note": "Full-vote Elo remains an auxiliary metric. This board keeps anonymous votes separate from other GenAI-Arena tasks.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "genai-arena-image-generation",
+    "name": "GenAI-Arena Image Generation",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate images from text prompts. Anonymous human comparisons determine Elo in this independent vote pool.",
+    "org": "TIGER-Lab (University of Waterloo)",
+    "released": "2024-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2406.04485",
+      "repo": "https://github.com/TIGER-AI-Lab/GenAI-Arena",
+      "site": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena",
+      "leaderboard": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena"
+    },
+    "access": "public",
+    "note": "Full-vote Elo remains an auxiliary metric. This board keeps anonymous votes separate from other GenAI-Arena tasks.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "genai-arena-video-generation",
+    "name": "GenAI-Arena Video Generation",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate videos from text prompts. Anonymous human comparisons determine Elo in this independent vote pool.",
+    "org": "TIGER-Lab (University of Waterloo)",
+    "released": "2024-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2406.04485",
+      "repo": "https://github.com/TIGER-AI-Lab/GenAI-Arena",
+      "site": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena",
+      "leaderboard": "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena"
+    },
+    "access": "public",
+    "note": "Full-vote Elo remains an auxiliary metric. This board keeps anonymous votes separate from other GenAI-Arena tasks.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "genebench",
     "name": "GeneBench",
     "category": "bio-chem",
@@ -34237,6 +35239,32 @@
     }
   },
   {
+    "id": "gsm8k-platinum-268",
+    "name": "GSM8K Platinum Initial 268",
+    "category": "math",
+    "subcategory": "math-word-problems",
+    "level": "school",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models answer the original 268-question cleaned GSM8K subset. The live matrix reports each model configuration separately.",
+    "org": "MIT Madry Lab (Vendrow et al.)",
+    "released": "2025-02",
+    "links": {
+      "site": "http://platinum-bench.csail.mit.edu/",
+      "leaderboard": "http://platinum-bench.csail.mit.edu/"
+    },
+    "access": "public",
+    "note": "This initial subset differs from the full 1,209-question GSM8K-Platinum test set.",
+    "successor": "gsm8k-platinum",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "http://platinum-bench.csail.mit.edu/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "gsm8k-platinum",
     "name": "GSM8K-Platinum",
     "aliases": [
@@ -34847,6 +35875,54 @@
       "https://github.com/tommccoy1/hans"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "happyworld-embodied",
+    "name": "HappyWorld Embodied",
+    "category": "world-models",
+    "subcategory": "world-interactive",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "The HappyWorld arena publishes a separate embodied vote pool and Elo ranking.",
+    "org": "Alibaba",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.24308"
+    },
+    "access": "public",
+    "note": "Separate matches produce these ratings. They are not sub-scores of the Video World Model board.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/papers/2609.24308"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "happyworld-reconstruction",
+    "name": "HappyWorld Spatial Reconstruction",
+    "category": "world-models",
+    "subcategory": "world-interactive",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "The HappyWorld arena publishes a separate spatial reconstruction vote pool and Elo ranking.",
+    "org": "Alibaba",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.24308"
+    },
+    "access": "public",
+    "note": "Separate matches produce these ratings. They are not sub-scores of the Video World Model board.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/papers/2609.24308"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "happyworld-bench",
@@ -40869,6 +41945,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "kaggle-joke-arena",
+    "name": "Joke Arena",
+    "category": "writing-creative-taste",
+    "subcategory": "writing-creative",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models write jokes. Pairwise votes determine the published Arena rating.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/joke-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/joke-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/joke-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "judgebench",
     "name": "JudgeBench",
     "category": "instruction-following-chat",
@@ -43200,6 +44300,30 @@
     ]
   },
   {
+    "id": "kaggle-landing-page-arena",
+    "name": "Landing Page Arena",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models create landing pages. Pairwise votes determine the published Arena rating.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/landing-page-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/landing-page-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/landing-page-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "language-confusion-benchmark",
     "name": "Language Confusion Benchmark",
     "aliases": [
@@ -44375,6 +45499,7 @@
     "access": "public+private-holdout",
     "note": "20 environments, 1,667 main tasks and 185 side tasks. The public repo holds 10 environments, 919 main tasks and 93 side tasks with trajectories for 11 models. LaStraj adds human-made attack trajectories.",
     "unit": "%",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://linuxarena.ai",
@@ -48632,14 +49757,13 @@
   {
     "id": "mcpmark",
     "name": "MCPMark",
-    "aliases": [
-      "MCPMark-Verified"
-    ],
     "category": "tool-use",
     "subcategory": "tools-apps",
     "level": "university",
     "scoring": "verified",
     "format": "agent-task",
+    "family": "mcpmark",
+    "version": "Original",
     "description": "Agent stress-tests realistic MCP tool use (GitHub, Notion, Postgres, browser). Graded by programmatic verification scripts.",
     "org": "eval-sys (MCPMark team)",
     "released": "2025-09",
@@ -48650,8 +49774,42 @@
     },
     "access": "public",
     "note": "Kimi K3 reports a 'Verified' revision.",
+    "successor": "mcpmark-verified",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/eval-sys/mcpmark",
+      "https://mcpmark.ai/leaderboard/verified"
+    ]
+  },
+  {
+    "id": "mcpmark-verified",
+    "name": "MCPMark Verified",
+    "category": "tool-use",
+    "subcategory": "tools-apps",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "mcpmark",
+    "version": "Verified",
+    "description": "Agents complete 127 tasks through version-pinned MCP servers. Stabilized verifiers score single-run task success.",
+    "org": "eval-sys (MCPMark team)",
+    "released": "2026-06",
+    "links": {
+      "repo": "https://github.com/eval-sys/mcpmark",
+      "site": "https://mcpmark.ai/",
+      "leaderboard": "https://mcpmark.ai/leaderboard/verified"
+    },
+    "access": "public",
+    "note": "The authors deprecate earlier task versions and state that their results are not directly comparable.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/eval-sys/mcpmark",
+      "https://mcpmark.ai/leaderboard/verified"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "mdolly",
@@ -49532,16 +50690,19 @@
     "released": "2026-07",
     "links": {
       "paper": "https://arxiv.org/abs/2607.28956",
-      "repo": "https://github.com/KhanCold/merchantbench"
+      "repo": "https://github.com/KhanCold/merchantbench",
+      "site": "https://air.1688.com/kapp/next1688/merchantbench/",
+      "leaderboard": "https://air.1688.com/kapp/next1688/merchantbench/"
     },
     "access": "public",
-    "note": "101 HF paper upvotes and about 170 GitHub stars.",
+    "note": "The headline leaderboard reports mean final net assets in thousands of RMB across three 365-day runs per model and harness.",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/papers/2607.28956",
-      "https://github.com/KhanCold/merchantbench"
+      "https://github.com/KhanCold/merchantbench",
+      "https://air.1688.com/kapp/next1688/merchantbench/"
     ],
     "added": "2026-11-01"
   },
@@ -50774,9 +51935,7 @@
     "id": "mieb",
     "name": "MIEB",
     "aliases": [
-      "Massive Image Embedding Benchmark",
-      "MIEB lite",
-      "MIEB (lite)"
+      "Massive Image Embedding Benchmark"
     ],
     "category": "multimodal-vision",
     "subcategory": "vision-general",
@@ -50801,6 +51960,30 @@
       "https://huggingface.co/google/embeddinggemma-2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "mieb-lite",
+    "name": "MIEB Lite",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Embedding models complete the MIEB Lite task set. The official API reports the mean across task types.",
+    "org": "MTEB community",
+    "links": {
+      "paper": "https://arxiv.org/abs/2504.10471",
+      "repo": "https://github.com/embeddings-benchmark/mteb",
+      "leaderboard": "https://huggingface.co/spaces/mteb/leaderboard"
+    },
+    "access": "public",
+    "note": "This task set has a separate official score endpoint. Task-type scores remain auxiliary metrics.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mteb-leaderboard-backend.hf.space/v1/benchmarks"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "miklos-schweitzer-2025",
@@ -55770,6 +56953,31 @@
     "added": "2026-11-01"
   },
   {
+    "id": "multifinben",
+    "name": "MultiFinBen",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "university",
+    "format": "short-answer",
+    "description": "Models complete 36 financial datasets across five languages and text, vision, and audio. The board reports a modality-balanced score.",
+    "org": "The Fin AI (Qianqian Xie and coauthors)",
+    "released": "2025-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2506.14028",
+      "repo": "https://github.com/xueqingpeng/MultiFinBen",
+      "leaderboard": "https://huggingface.co/spaces/TheFinAI/Open-FinLLM-Leaderboard"
+    },
+    "access": "public",
+    "note": "The headline is the mean of text, vision, and audio averages. Unsupported modalities receive zero, as the official board specifies.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/TheFinAI/Open-FinLLM-Leaderboard/raw/main/index.html"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "multihop-rag",
     "name": "MultiHop-RAG",
     "aliases": [
@@ -56301,6 +57509,34 @@
       "https://arxiv.org/abs/2507.20900"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "music-arena-vocal",
+    "name": "Music Arena Vocal",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate music with vocals. Listeners compare anonymous tracks, and separate vocal preference votes determine the Arena score.",
+    "org": "Carnegie Mellon University (G-CLef) with Arena and Sony researchers",
+    "released": "2025-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2507.20900",
+      "repo": "https://github.com/gclef-cmu/music-arena",
+      "site": "https://music-arena.org",
+      "dataset": "https://huggingface.co/music-arena",
+      "leaderboard": "https://music-arena.org/"
+    },
+    "access": "public",
+    "note": "Vocal votes form a separate pool from the instrumental leaderboard.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://music-arena.org/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "musr",
@@ -57171,6 +58407,32 @@
     "added": "2026-11-01"
   },
   {
+    "id": "nolima-hard",
+    "name": "NoLiMa-Hard",
+    "category": "long-context",
+    "subcategory": "long-retrieval",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models retrieve latent associations for the ten hardest NoLiMa question-needle pairs. Results are reported separately at four context lengths.",
+    "org": "Adobe Research and LMU Munich (Modarressi et al.)",
+    "links": {
+      "paper": "https://arxiv.org/abs/2502.05167",
+      "repo": "https://github.com/adobe-research/NoLiMa",
+      "dataset": "https://huggingface.co/datasets/amodaresi/NoLiMa",
+      "leaderboard": "https://github.com/adobe-research/NoLiMa"
+    },
+    "access": "public",
+    "note": "The parent has no cross-context aggregate. Context boards contain the scores. The first release month is not established by the source.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/adobe-research/NoLiMa"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "nova-63",
     "name": "NOVA-63",
     "aliases": [
@@ -57295,14 +58557,46 @@
       "site": "https://www.nuscenes.org"
     },
     "access": "public",
-    "note": "Qwen lists it under spatial intelligence without a footnote, so the 3D grounding setup is inferred from its Hypersim row.",
+    "note": "The catalog description infers a camera grounding setup from a model report. The official nuScenes detection board ranks NDS and has a separate nuscenes-detection proposal.",
     "unit": "score",
     "confidence": "likely",
     "evidence": [
       "https://arxiv.org/abs/1903.11027",
       "https://github.com/nutonomy/nuscenes-devkit",
-      "https://huggingface.co/Qwen/Qwen3.5-397B-A17B"
+      "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+      "https://www.nuscenes.org/detection.json"
     ]
+  },
+  {
+    "id": "nuscenes-detection",
+    "name": "nuScenes Detection",
+    "aliases": [
+      "nuScenes NDS"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-detection",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models detect 3D objects in nuScenes sensor data. The official test leaderboard ranks submissions by nuScenes Detection Score.",
+    "org": "Motional (nuTonomy)",
+    "released": "2019-03",
+    "links": {
+      "site": "https://www.nuscenes.org/object-detection",
+      "leaderboard": "https://www.nuscenes.org/object-detection",
+      "repo": "https://github.com/nutonomy/nuscenes-devkit",
+      "paper": "https://arxiv.org/abs/1903.11027"
+    },
+    "access": "public",
+    "note": "NDS stays on its raw 0–1 scale. Sensor configurations and submission identities remain separate. This is not an inferred vision-language grounding setup.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.nuscenes.org/detection.json",
+      "https://www.nuscenes.org/static/js/ObjectDetection.3ab317fc.chunk.js"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "nv-chat-benchmark-nvidia",
@@ -59604,6 +60898,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "kaggle-opening-lines-arena",
+    "name": "Opening Lines Arena",
+    "category": "writing-creative-taste",
+    "subcategory": "writing-creative",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models write opening lines for stories. Pairwise votes determine the published Arena rating.",
+    "org": "Kaggle",
+    "links": {
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/opening-lines-arena"
+    },
+    "access": "public",
+    "note": "The official API publishes an Arena rating, confidence interval and vote count. Voter identity requires confirmation from the board description.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/opening-lines-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/opening-lines-arena/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "openrca",
     "name": "OpenRCA",
     "category": "coding",
@@ -61065,9 +62383,6 @@
   {
     "id": "paperbench",
     "name": "PaperBench",
-    "aliases": [
-      "PaperBench Code-Dev"
-    ],
     "category": "ai-rnd-rsi",
     "subcategory": "rnd-research",
     "level": "frontier",
@@ -61084,6 +62399,31 @@
     "note": "Repo renamed from openai/preparedness. Qwen and MiniMax use different judges (Opus 4.6) and 12h runs, so scores are not comparable.",
     "unit": "%",
     "confidence": "verified"
+  },
+  {
+    "id": "paperbench-code-dev",
+    "name": "PaperBench Code-Dev",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents implement research paper code. The Code-Dev variant evaluates coding separately from full research replication.",
+    "org": "OpenAI",
+    "released": "2025-04",
+    "links": {
+      "repo": "https://github.com/openai/frontier-evals",
+      "paper": "https://arxiv.org/abs/2504.01848"
+    },
+    "access": "public",
+    "note": "The official README publishes a distinct Code-Dev result. This evaluation is not full PaperBench replication.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "paperbenchx",
@@ -61305,6 +62645,8 @@
     "level": "expert",
     "scoring": "verified",
     "format": "code",
+    "family": "patcheval",
+    "version": "Original",
     "description": "Models write patches for 1,000 real CVE vulnerabilities from 2015 to 2025 in Go, JavaScript and Python. Containers run exploit and unit tests to validate each patch.",
     "org": "ByteDance",
     "released": "2025-11",
@@ -61314,11 +62656,40 @@
     },
     "access": "public",
     "note": "inspect_evals uses the verified dockerized subset.",
+    "successor": "patcheval-verified",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2511.11019",
+      "https://github.com/bytedance/PatchEval"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "patcheval-verified",
+    "name": "PatchEval-Verified",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "family": "patcheval",
+    "version": "Verified",
+    "description": "Models write patches for 1,000 real CVE vulnerabilities from 2015 to 2025 in Go, JavaScript and Python. Containers run exploit and unit tests to validate each patch.",
+    "org": "ByteDance",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2511.11019",
+      "repo": "https://github.com/bytedance/PatchEval",
+      "leaderboard": "https://github.com/bytedance/PatchEval"
+    },
+    "access": "public",
+    "note": "Revised PoC tests across 230 CVEs. Original PatchEval and Verified are not comparable.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
       "https://github.com/bytedance/PatchEval"
     ],
     "added": "2026-11-01"
@@ -62233,6 +63604,8 @@
     "level": "expert",
     "scoring": "verified",
     "format": "short-answer",
+    "family": "physics-yale",
+    "version": "Original",
     "description": "Models solve 1,297 PhD qualifying exam physics problems across six subfields, 298 of them with images. Answers are checked by symbolic equivalence.",
     "org": "Yale University (Kaiyue Feng, Arman Cohan et al.)",
     "released": "2025-03",
@@ -62241,12 +63614,15 @@
     },
     "access": "public",
     "note": "Shanghai AI Lab Intern-S1 reports it as Physics.",
+    "successor": "physics-yale-verified",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2503.21821",
-      "https://arxiv.org/abs/2508.15763"
+      "https://arxiv.org/abs/2508.15763",
+      "https://github.com/yale-nlp/Physics",
+      "https://huggingface.co/datasets/yale-nlp/physics-verified"
     ],
     "added": "2026-11-01"
   },
@@ -62312,6 +63688,34 @@
       "https://physics-iq-verified.anates.ai"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "physics-yale-verified",
+    "name": "PHYSICS-Verified",
+    "category": "science-reasoning",
+    "subcategory": "science-questions",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "family": "physics-yale",
+    "version": "Verified",
+    "description": "Corrected PHYSICS test problems with answer-level accuracy. The complete verified test set.",
+    "org": "Yale University (Kaiyue Feng, Arman Cohan et al.)",
+    "links": {
+      "repo": "https://github.com/yale-nlp/Physics",
+      "dataset": "https://huggingface.co/datasets/yale-nlp/physics-verified",
+      "leaderboard": "https://huggingface.co/datasets/yale-nlp/physics-verified"
+    },
+    "access": "public",
+    "note": "Original PHYSICS uses problem-level grading. Verified uses corrected problems and answer-level grading.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/yale-nlp/Physics",
+      "https://huggingface.co/datasets/yale-nlp/physics-verified"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "physicsfinals",
@@ -64015,6 +65419,7 @@
     "unit": "score",
     "confidence": "verified",
     "evidence": [
+      "https://proteingym.org/",
       "https://github.com/OATML-Markslab/ProteinGym",
       "https://github.com/OATML-Markslab/ProteinGym/releases"
     ]
@@ -65757,7 +67162,6 @@
     "id": "real-swe",
     "name": "Real-SWE",
     "aliases": [
-      "Real-SWE 1.1",
       "Real-SWE 1.0",
       "Specific Labs Real-SWE"
     ],
@@ -65766,6 +67170,8 @@
     "level": "expert",
     "scoring": "verified",
     "format": "code",
+    "family": "real-swe",
+    "version": "1",
     "description": "Models resolve tasks in private production codebases licensed from real companies. The board reports resolution rate with standard errors.",
     "org": "Specific Labs",
     "released": "2026-09",
@@ -65775,14 +67181,42 @@
     },
     "access": "private",
     "note": "Real-SWE 1.1 (2026-10) covers 18 models on 25 tasks. Check whether 1.1 scores compare with the 2026-09 first release.",
+    "successor": "real-swe-1-1",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://withspecific.com/benchmarks/real-swe",
-      "https://news.ycombinator.com/item?id=49676820"
+      "https://news.ycombinator.com/item?id=49676820",
+      "https://withspecific.com/blog/real-swe"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "real-swe-1-1",
+    "name": "Real-SWE 1.1",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "family": "real-swe",
+    "version": "1.1",
+    "description": "Resolution rate on private enterprise coding tasks, averaged across five runs per task.",
+    "org": "Specific Labs",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://withspecific.com/blog/real-swe"
+    },
+    "access": "private",
+    "note": "Retains highest effort, harness, estimated rollout cost, and standard errors. Separate from the original Real-SWE.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://withspecific.com/blog/real-swe"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "realtime-av-interaction-meituan",
@@ -73239,6 +74673,30 @@
     ]
   },
   {
+    "id": "speecharena",
+    "name": "Speech Arena",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech. Listeners compare outputs, and pairwise votes determine Elo ratings.",
+    "org": "Speech Arena",
+    "links": {
+      "site": "https://www.speecharena.org",
+      "leaderboard": "https://www.speecharena.org/leaderboard"
+    },
+    "access": "public",
+    "note": "The Bradley-Terry view estimates the same vote pool and remains an auxiliary metric.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.speecharena.org/leaderboard"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "speechrole",
     "name": "SpeechRole",
     "aliases": [
@@ -74068,9 +75526,10 @@
     "level": "expert",
     "scoring": "model-judged",
     "format": "agent-task",
+    "family": "state-bench-main",
+    "version": "0.8.0",
     "description": "Agents work multi-step enterprise tasks in travel, customer support and shopping with a sandbox database, domain tools and a simulated user. They must apply the right policy.",
     "org": "Microsoft",
-    "released": "2026-05",
     "links": {
       "repo": "https://github.com/microsoft/STATE-Bench",
       "leaderboard": "https://microsoft.github.io/STATE-Bench/leaderboard/"
@@ -74085,6 +75544,34 @@
       "https://microsoft.github.io/STATE-Bench/leaderboard/"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "state-bench-main-0-7-0",
+    "name": "STATE-Bench Main 0.7.0",
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "family": "state-bench-main",
+    "version": "0.7.0",
+    "description": "Agents complete enterprise tasks in travel, customer support, and shopping. The score is overall pass@1 for this track and version.",
+    "org": "Microsoft",
+    "links": {
+      "repo": "https://github.com/microsoft/STATE-Bench",
+      "leaderboard": "https://microsoft.github.io/STATE-Bench/leaderboard/"
+    },
+    "access": "public",
+    "note": "The first dated submission is 2026-05. The public release date for this track and version is not stated.",
+    "successor": "state-bench",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://microsoft.github.io/STATE-Bench/leaderboard/",
+      "https://microsoft.github.io/STATE-Bench/leaderboard/leaderboard.js"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "statebench",
@@ -74347,6 +75834,33 @@
     "added": "2026-11-01"
   },
   {
+    "id": "storycloze-2018",
+    "name": "Story Cloze Winter 2018",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "storycloze",
+    "version": "Winter 2018",
+    "description": "Systems select the correct story ending on the Winter 2018 test set. CodaLab reports percentage accuracy under submission identities.",
+    "org": "University of Rochester",
+    "released": "2018-01",
+    "links": {
+      "paper": "https://arxiv.org/abs/1604.01696",
+      "leaderboard": "https://competitions.codalab.org/competitions/15333"
+    },
+    "access": "public",
+    "note": "Systems select the correct story ending on the Winter 2018 test set. CodaLab reports percentage accuracy under submission identities.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://competitions.codalab.org/competitions/15333"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "storycloze",
     "name": "StoryCloze",
     "aliases": [
@@ -74357,6 +75871,8 @@
     "level": "everyday",
     "scoring": "verified",
     "format": "multiple-choice",
+    "family": "storycloze",
+    "version": "Spring 2016",
     "description": "Models pick the correct ending for a four-sentence everyday story from two candidate endings. Scored by accuracy.",
     "org": "University of Rochester",
     "released": "2016-04",
@@ -74364,10 +75880,12 @@
       "paper": "https://arxiv.org/abs/1604.01696"
     },
     "access": "public",
+    "successor": "storycloze-2018",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
-      "https://arxiv.org/abs/1604.01696"
+      "https://arxiv.org/abs/1604.01696",
+      "https://competitions.codalab.org/competitions/15333"
     ]
   },
   {
@@ -74797,6 +76315,78 @@
       "https://arxiv.org/abs/2609.28470"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "studyarena-audio",
+    "name": "StudyArena Audio",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models produce audio responses to user prompts. Anonymous human comparisons determine the published rating in this separate vote pool.",
+    "org": "StudyArena",
+    "links": {
+      "leaderboard": "https://studyarena.com/leaderboard/audio",
+      "site": "https://studyarena.com/"
+    },
+    "access": "public",
+    "note": "Only entries with observed ballots count as results. Topic filters do not form separate benchmark records.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://studyarena.com/leaderboard/audio"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "studyarena-image",
+    "name": "StudyArena Image",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models produce image responses to user prompts. Anonymous human comparisons determine the published rating in this separate vote pool.",
+    "org": "StudyArena",
+    "links": {
+      "leaderboard": "https://studyarena.com/leaderboard/image",
+      "site": "https://studyarena.com/"
+    },
+    "access": "public",
+    "note": "Only entries with observed ballots count as results. Topic filters do not form separate benchmark records.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://studyarena.com/leaderboard/image"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "studyarena-text",
+    "name": "StudyArena Text",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-quality",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models produce text responses to user prompts. Anonymous human comparisons determine the published rating in this separate vote pool.",
+    "org": "StudyArena",
+    "links": {
+      "leaderboard": "https://studyarena.com/leaderboard",
+      "site": "https://studyarena.com/"
+    },
+    "access": "public",
+    "note": "Only entries with observed ballots count as results. Topic filters do not form separate benchmark records.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://studyarena.com/leaderboard"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "subversion-strategy-eval",
@@ -75595,6 +77185,8 @@
     "level": "expert",
     "scoring": "model-judged",
     "format": "open-ended",
+    "family": "swe-atlas",
+    "version": "Original",
     "description": "Scale's coding-agent suite beyond patching: codebase Q&A, writing production tests, and refactoring in real repos. Rubric/test-scored leaderboards.",
     "org": "Scale AI",
     "released": "2026-03",
@@ -75606,9 +77198,11 @@
     },
     "access": "public",
     "note": "This record covers SWE Atlas Codebase QnA (124 tasks), whose dataset and leaderboard it links. Test Writing and Refactoring have their own records.",
+    "successor": "swe-atlas-1-1",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://labs.scale.com/leaderboard/swe-atlas",
       "https://github.com/scaleapi/SWE-Atlas",
       "https://labs.scale.com/leaderboard"
     ]
@@ -75707,6 +77301,41 @@
       "https://labs.scale.com/leaderboard"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "swe-atlas-1-1",
+    "name": "SWE Atlas v1.1",
+    "aliases": [
+      "SWE Atlas - Codebase QnA",
+      "SWE Atlas Codebase QnA",
+      "SWE-Atlas-QnA",
+      "SWEAtlas CodeBase QnA"
+    ],
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "family": "swe-atlas",
+    "version": "1.1",
+    "description": "Scale's coding-agent suite beyond patching: codebase Q&A, writing production tests, and refactoring in real repos. Rubric/test-scored leaderboards.",
+    "org": "Scale AI",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/scaleapi/SWE-Atlas",
+      "dataset": "https://huggingface.co/datasets/ScaleAI/SWE-Atlas-QnA",
+      "leaderboard": "https://labs.scale.com/leaderboard/swe-atlas",
+      "paper": "https://arxiv.org/abs/2605.08366"
+    },
+    "access": "public",
+    "note": "Combined index over QnA, Test Writing, and Refactoring. Separate category boards remain distinct.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://labs.scale.com/leaderboard/swe-atlas"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "swe-refactor-bench",
@@ -75927,6 +77556,33 @@
       "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro",
       "https://cursor.com/blog/reward-hacking-coding-benchmarks"
     ]
+  },
+  {
+    "id": "swe-bench-pro-private",
+    "name": "SWE-Bench Pro Private",
+    "aliases": [
+      "SWE-Bench Pro (Private Dataset)"
+    ],
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Agents resolve held-out software issues from the private SWE-Bench Pro split. The leaderboard reports the percentage of resolved tasks.",
+    "org": "Scale AI",
+    "released": "2025-09",
+    "links": {
+      "repo": "https://github.com/scaleapi/SWE-bench_Pro-os",
+      "leaderboard": "https://labs.scale.com/leaderboard/swe_bench_pro"
+    },
+    "access": "private",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://labs.scale.com/leaderboard/swe_bench_pro"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "swe-bench-pro-v2",
@@ -76218,6 +77874,34 @@
     "evidence": [
       "https://github.com/microsoft/SWE-bench-Live",
       "https://arxiv.org/abs/2505.23419"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "swe-bench-live-verified",
+    "name": "SWE-bench-Live Verified",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Task success on the official Verified split. The source reports each submission denominator separately. Other language and platform splits remain separate.",
+    "org": "Microsoft",
+    "released": "2025-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2505.23419",
+      "repo": "https://github.com/microsoft/SWE-bench-Live",
+      "site": "https://swe-bench-live.github.io/",
+      "dataset": "https://huggingface.co/collections/SWE-bench-Live/swe-bench-live",
+      "leaderboard": "https://swe-bench-live.github.io/"
+    },
+    "access": "public",
+    "note": "Task success on the official Verified split. The source reports each submission denominator separately. Other language and platform splits remain separate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://swe-bench-live.github.io/"
     ],
     "added": "2026-11-01"
   },
@@ -79763,6 +81447,33 @@
     "added": "2026-11-05"
   },
   {
+    "id": "ts-bench-v1",
+    "name": "ts-bench v1",
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents solve 25 self-contained TypeScript exercises from Exercism. The score is the percentage of exercises that pass their tests.",
+    "org": "laiso (independent)",
+    "released": "2025-06",
+    "links": {
+      "repo": "https://github.com/laiso/ts-bench",
+      "site": "https://blog.lai.so/ts-bench/",
+      "leaderboard": "https://github.com/laiso/ts-bench/tree/v1-final"
+    },
+    "access": "public",
+    "note": "Version 1 is frozen at the v1-final tag. Version 2 uses five SWE-Lancer tasks.",
+    "successor": "ts-bench",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://raw.githubusercontent.com/laiso/ts-bench/v1-final/README.md"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "tsp-opt",
     "name": "TSP-Opt",
     "aliases": [
@@ -81989,6 +83700,37 @@
     "added": "2026-11-01"
   },
   {
+    "id": "vbench-i2v",
+    "name": "VBench image-to-video",
+    "aliases": [
+      "VBench I2V"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models animate input images. Automatic checks score image conditioning and video quality across the complete image-to-video suite.",
+    "org": "NTU S-Lab and Shanghai AI Laboratory (Vchitect)",
+    "released": "2024-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2411.13503",
+      "repo": "https://github.com/Vchitect/VBench",
+      "site": "https://vchitect.github.io/VBench-project/",
+      "leaderboard": "https://huggingface.co/spaces/Vchitect/VBench_Leaderboard"
+    },
+    "access": "public",
+    "note": "The official Gradio board provides a separate image-to-video table. Total Score is the headline, with I2V and Quality scores retained separately.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/Vchitect/VBench_Leaderboard",
+      "https://vchitect.github.io/VBench-project/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "vbench-2-0",
     "name": "VBench-2.0",
     "aliases": [
@@ -82045,15 +83787,50 @@
       "leaderboard": "https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard"
     },
     "access": "public",
-    "note": "It comes with the VBVR training set of 200 tasks and more than a million clips, so the authors' own fine-tuned models appear on the board. Humans score 0.974 overall. A later suite, VBVR-Pro (arXiv 2608.26105), may be a successor and needs a check. 181 HF paper upvotes.",
+    "note": "The existing importer reads VBVR-Pro. Move those rows to proposed vbvr-pro and restore original VBVR scope independently.",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2602.20159",
-      "https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard"
+      "https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard",
+      "https://github.com/Video-Reason/VBVR-EvalKit",
+      "https://video-reason.com/",
+      "https://huggingface.co/datasets/Video-Reason/VBVR-Bench-Data"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "vbvr-pro",
+    "name": "VBVR-Pro",
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "The current official results table evaluates the Pro release. Original VBVR results must remain separate.",
+    "org": "Video-Reason (Maijunxian Wang, Ruisi Wang and others)",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2602.20159",
+      "repo": "https://github.com/Video-Reason/VBVR-EvalKit",
+      "site": "https://video-reason.com/",
+      "dataset": "https://huggingface.co/datasets/Video-Reason/VBVR-Bench-Data",
+      "leaderboard": "https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard"
+    },
+    "access": "public",
+    "note": "The current official results table evaluates the Pro release. Original VBVR results must remain separate.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2602.20159",
+      "https://github.com/Video-Reason/VBVR-EvalKit",
+      "https://video-reason.com/",
+      "https://huggingface.co/datasets/Video-Reason/VBVR-Bench-Data",
+      "https://huggingface.co/spaces/Video-Reason/VBVR-Bench-Leaderboard"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "vcr-visual-caption-restoration",
@@ -82553,6 +84330,8 @@
     "level": "expert",
     "scoring": "model-judged",
     "format": "short-answer",
+    "family": "vials",
+    "version": "1.0.0",
     "description": "Vision models answer 161 questions about lab images such as gel blots, plasmid maps, microscopy and flow cytometry plots. An LLM judge grades each answer against a key.",
     "org": "Handshake AI Research",
     "released": "2026-08",
@@ -82564,6 +84343,7 @@
     },
     "access": "public",
     "note": "Images come from everyday biotech work, not published figures. Judge is GPT-5 mini. Version 2.0.0 on 2026-10-30 revised 3 of 161 tasks after expert review, so scores stay close to version 1.0.0.",
+    "successor": "vials-2",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
@@ -82575,6 +84355,36 @@
       "https://huggingface.co/datasets/handshake-ai-research/VIALS"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "vials-2",
+    "name": "VIALS 2",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "family": "vials",
+    "version": "2.0.0",
+    "description": "Models interpret 161 professional life-science visual artifacts. The score is judged accuracy averaged across three rollouts.",
+    "org": "Handshake AI Research",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://joinhandshake.com/research/benchmarks/vials/",
+      "repo": "https://github.com/Handshake-AI-Research/VIALS",
+      "dataset": "https://huggingface.co/datasets/handshake-ai-research/VIALS"
+    },
+    "access": "public",
+    "note": "The official changelog requires reruns after three task changes. Values are transcribed from the current chart and hash-checked. Unlabeled confidence intervals are not digitized.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://joinhandshake.com/research/benchmarks/vials/",
+      "https://github.com/Handshake-AI-Research/VIALS",
+      "https://huggingface.co/datasets/handshake-ai-research/VIALS"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "vibe-minimax",
@@ -83155,8 +84965,7 @@
     "id": "videogamebench",
     "name": "VideoGameBench",
     "aliases": [
-      "VGBench",
-      "VideoGameBench Lite"
+      "VGBench"
     ],
     "category": "games-long-horizon",
     "subcategory": "games-video-games",
@@ -83180,7 +84989,34 @@
     "evidence": [
       "https://github.com/alexzhang13/videogamebench",
       "https://arxiv.org/abs/2505.18134",
-      "https://arxiv.org/abs/2505.18134"
+      "https://vgbench.com/"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "videogamebench-lite",
+    "name": "VideoGameBench Lite",
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents play video games while the environment pauses during inference. The headline is the official Overall Score.",
+    "org": "Alex Zhang, Ofir Press and collaborators",
+    "released": "2025-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2505.18134",
+      "repo": "https://github.com/alexzhang13/videogamebench",
+      "site": "https://www.vgbench.com",
+      "leaderboard": "https://www.vgbench.com"
+    },
+    "access": "public+private-holdout",
+    "note": "Agents play video games while the environment pauses during inference. The headline is the official Overall Score.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.vgbench.com"
     ],
     "added": "2026-11-01"
   },
@@ -83560,6 +85396,99 @@
       "https://arxiv.org/abs/2603.26648",
       "https://github.com/zai-org/Vision2Web"
     ]
+  },
+  {
+    "id": "vision2web-s1-2026",
+    "name": "Vision2Web S1-2026",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "family": "vision2web",
+    "version": "S1-2026",
+    "description": "Agents build websites from 918 prototype images across 193 tasks, from static pages to full-stack apps. A GUI agent and a VLM judge score them.",
+    "org": "Z.ai (zai-org)",
+    "released": "2026-03",
+    "links": {
+      "repo": "https://github.com/zai-org/Vision2Web",
+      "leaderboard": "https://vision2web-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2603.26648",
+      "site": "https://vision2web-bench.github.io/"
+    },
+    "access": "public",
+    "note": "This season uses Gemini-3-pro-preview as its visual judge. Scores from other seasons use different judge or agent configurations.",
+    "successor": "vision2web-s2-2026",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://vision2web-bench.github.io/",
+      "https://vision2web-bench.github.io/data/leaderboard.json"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "vision2web-s2-2026",
+    "name": "Vision2Web S2-2026",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "family": "vision2web",
+    "version": "S2-2026",
+    "description": "Agents build websites from 918 prototype images across 193 tasks, from static pages to full-stack apps. A GUI agent and a VLM judge score them.",
+    "org": "Z.ai (zai-org)",
+    "released": "2026-03",
+    "links": {
+      "repo": "https://github.com/zai-org/Vision2Web",
+      "leaderboard": "https://vision2web-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2603.26648",
+      "site": "https://vision2web-bench.github.io/"
+    },
+    "access": "public",
+    "note": "This season uses Gemini-3.1-pro-preview as its visual judge. Scores from other seasons use different judge or agent configurations.",
+    "successor": "vision2web-s3-2026",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://vision2web-bench.github.io/",
+      "https://vision2web-bench.github.io/data/leaderboard.json"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "vision2web-s3-2026",
+    "name": "Vision2Web S3-2026",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "family": "vision2web",
+    "version": "S3-2026",
+    "description": "Agents build websites from 918 prototype images across 193 tasks, from static pages to full-stack apps. A GUI agent and a VLM judge score them.",
+    "org": "Z.ai (zai-org)",
+    "released": "2026-06",
+    "links": {
+      "repo": "https://github.com/zai-org/Vision2Web",
+      "leaderboard": "https://vision2web-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2603.26648",
+      "site": "https://vision2web-bench.github.io/"
+    },
+    "access": "public",
+    "note": "This season uses Gemini-3.5-flash as its visual judge. Scores from other seasons use different judge or agent configurations.",
+    "successor": "vision2web",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://vision2web-bench.github.io/",
+      "https://vision2web-bench.github.io/data/leaderboard.json"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "vispeak-bench",
@@ -84205,6 +86134,306 @@
     ]
   },
   {
+    "id": "voicearena-arabic-msa",
+    "name": "Voice Arena Arabic MSA",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Arabic MSA. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/arabic-msa"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/arabic-msa",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-bahasa",
+    "name": "Voice Arena Bahasa",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Bahasa. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/bahasa"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/bahasa",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-brazilian-portuguese",
+    "name": "Voice Arena Brazilian Portuguese",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Brazilian Portuguese. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/brazilian-portuguese"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/brazilian-portuguese",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-french",
+    "name": "Voice Arena French",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in French. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/french"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/french",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-german",
+    "name": "Voice Arena German",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in German. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/german"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/german",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-hindi",
+    "name": "Voice Arena Hindi",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Hindi. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/hindi"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/hindi",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-indian-english",
+    "name": "Voice Arena Indian English",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Indian English. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/indian-english"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/indian-english",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-japanese",
+    "name": "Voice Arena Japanese",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Japanese. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/japanese"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/japanese",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-mexican-spanish",
+    "name": "Voice Arena Mexican Spanish",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Mexican Spanish. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/mexican-spanish"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/mexican-spanish",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-tagalog",
+    "name": "Voice Arena Tagalog",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Tagalog. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/tagalog"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/tagalog",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-us-english",
+    "name": "Voice Arena US English",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in US English. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/us-english"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/us-english",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "voicearena-vietnamese",
+    "name": "Voice Arena Vietnamese",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Vietnamese. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/vietnamese"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/vietnamese",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "voice-persuasion-study-openai",
     "name": "Voice persuasion study on party preferences",
     "category": "safety-alignment",
@@ -84285,8 +86514,7 @@
     "id": "voxelbench",
     "name": "VoxelBench",
     "aliases": [
-      "VoxelBench Text",
-      "VoxelBench Image"
+      "VoxelBench Text"
     ],
     "category": "multimodal-vision",
     "subcategory": "vision-spatial",
@@ -84309,6 +86537,31 @@
       "https://voxelbench.ai/"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "voxelbench-image",
+    "name": "VoxelBench Image",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models turn image prompts into voxel structures. Human comparisons determine Glicko-2 ratings in a separate image-prompt vote pool.",
+    "org": "VoxelBench",
+    "released": "2025-09",
+    "links": {
+      "site": "https://voxelbench.ai/",
+      "leaderboard": "https://voxelbench.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "The site requires at least 50 votes. Text-prompt ratings belong to the separate VoxelBench Text board.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voxelbench.ai/leaderboard"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "voxmem",
@@ -86335,6 +88588,8 @@
     "level": "school",
     "scoring": "model-judged",
     "format": "open-ended",
+    "family": "wise",
+    "version": "Original",
     "description": "Text-to-image models draw 1,000 prompts that need world knowledge in culture, space, time and natural science. A vision model judge gives the WiScore.",
     "org": "Peking University (PKU-YuanGroup)",
     "released": "2025-03",
@@ -86344,6 +88599,7 @@
     },
     "access": "public",
     "note": "Scores run from 0 to 1 and cover 25 subdomains. Unified models such as BAGEL report it with and without reasoning before drawing.",
+    "successor": "wise-verified",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
@@ -86351,6 +88607,34 @@
       "https://arxiv.org/abs/2503.07265",
       "https://github.com/PKU-YuanGroup/WISE",
       "https://arxiv.org/abs/2505.14683v3"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "wise-verified",
+    "name": "WISE Verified",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "school",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "family": "wise",
+    "version": "Verified",
+    "description": "Models generate images from the revised WISE prompts. The verified evaluation changes about 200 prompts and the judge, so original scores remain separate.",
+    "org": "Peking University (PKU-YuanGroup)",
+    "released": "2026-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.07265",
+      "repo": "https://github.com/PKU-YuanGroup/WISE",
+      "leaderboard": "https://github.com/PKU-YuanGroup/WISE"
+    },
+    "access": "public",
+    "note": "Models generate images from the revised WISE prompts. The verified evaluation changes about 200 prompts and the judge, so original scores remain separate.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/PKU-YuanGroup/WISE"
     ],
     "added": "2026-11-01"
   },
@@ -86812,11 +89096,37 @@
     "added": "2026-11-01"
   },
   {
+    "id": "workspacebench-lite",
+    "name": "Workspace-Bench-Lite",
+    "category": "economic-work",
+    "subcategory": "work-office",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Agents complete 100 workspace tasks. The leaderboard reports the percentage of 1,856 rubric checks passed, with separate runs for each model and harness.",
+    "org": "SJTU + ByteDance (OpenDataBox)",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.03596",
+      "repo": "https://github.com/OpenDataBox/Workspace-Bench",
+      "site": "https://workspace-bench.github.io/",
+      "dataset": "https://huggingface.co/datasets/Workspace-Bench/Workspace-Bench-Lite",
+      "leaderboard": "https://workspace-bench.github.io/leaderboard.html"
+    },
+    "access": "public",
+    "note": "This Lite subset has a separate 45-run leaderboard. The full benchmark does not publish named per-system scores. Remove the Lite alias from workspacebench during integration.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://workspace-bench.github.io/leaderboard.html",
+      "https://workspace-bench.github.io/data/site-data.js?v=20260507e"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "workspacebench",
     "name": "WorkSpaceBench",
-    "aliases": [
-      "Workspace-Bench-Lite"
-    ],
     "category": "economic-work",
     "subcategory": "work-office",
     "level": "university",
@@ -86827,12 +89137,18 @@
     "released": "2026-05",
     "links": {
       "repo": "https://github.com/OpenDataBox/Workspace-Bench",
-      "paper": "https://arxiv.org/abs/2605.03596"
+      "paper": "https://arxiv.org/abs/2605.03596",
+      "site": "https://workspace-bench.github.io/",
+      "leaderboard": "https://workspace-bench.github.io/leaderboard.html"
     },
     "access": "public",
-    "note": "Name match assumed: the Qwen3.8-Max card lists 'WorkSpaceBench' without a citation.",
+    "note": "The full benchmark contains 388 tasks. Its site publishes only anonymous summary results. The 100-task Lite subset has its own leaderboard and record.",
     "unit": "%",
-    "confidence": "likely"
+    "confidence": "likely",
+    "evidence": [
+      "https://workspace-bench.github.io/leaderboard.html",
+      "https://workspace-bench.github.io/data/site-data.js?v=20260507e"
+    ]
   },
   {
     "id": "world-class-bio-securebio",
@@ -88074,13 +90390,21 @@
     "level": "expert",
     "scoring": "verified",
     "format": "code",
+    "version": "1.0",
     "description": "Zhipu in-house coding benchmark used for GLM-5.3. Reports pass rate and output tokens per task. Method unpublished.",
     "org": "Zhipu AI (Z.ai)",
     "released": "2026-08",
+    "links": {
+      "site": "https://z.ai/blog/glm-5.3"
+    },
     "access": "private",
-    "note": "Lab-created in-house eval (Zhipu/Z.ai). Not in the GLM-5.3 tables. Card claims a 50% gain over GLM-5.2.",
+    "note": "The official launch posts publish exact accuracy and token values for selected effort levels. Additional effort points appear only in chart images.",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://z.ai/blog/glm-5.3",
+      "https://z.ai/blog/glm-5.3-flash"
+    ]
   },
   {
     "id": "zclawbench",
