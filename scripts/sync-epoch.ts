@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { dataPath, readJson, writeJson, key, slug, parseCsv, today } from './lib/util.ts';
 import { epochModelOverride, epochScoreColumn, epochSecondaryMetrics, epochBenchmarkOverride } from './lib/epoch-mapping.ts';
+import { provenance, FROM_ARTIFICIAL_ANALYSIS, type Via } from './lib/epoch-provenance.ts';
 
 const ZIP_URL = 'https://epoch.ai/data/benchmark_data.zip';
 
@@ -173,12 +174,16 @@ function benchFor(ename: string, released?: string): Bench {
 }
 
 const bmeta = file('benchmark_metadata.csv') ?? [];
-type EpochRow = [string, string, string | null, string | null, number, string | null, Record<string, number> | null];
+// via and from: where Epoch got the score (scripts/lib/epoch-provenance.ts). Appended last, so readers that take
+// the first fields by position keep working.
+type EpochRow = [string, string, string | null, string | null, number, string | null, Record<string, number> | null, Via, string | null];
 const rows: EpochRow[] = [];
 // Same fields as rows, but the second field is the unresolved source name. Never create a guessed model.
 const others: EpochRow[] = [];
 const skipped: Record<string, number> = {};
 const skip = (why: string) => (skipped[why] = (skipped[why] ?? 0) + 1);
+// per benchmark, how many rows came from each kind of source, printed at the end for a person to check
+const viaCount = new Map<string, Partial<Record<Via, number>>>();
 
 for (const m of [...bmeta, ...Object.keys(FILE_GUESS).filter((n) => !bmeta.some((r) => r.benchmark === n)).map((n) => ({ benchmark: n }) as Record<string, string>)]) {
   const ename = m.benchmark;
@@ -198,7 +203,7 @@ for (const m of [...bmeta, ...Object.keys(FILE_GUESS).filter((n) => !bmeta.some(
   }
   const tb1 = ename === 'Terminal Bench' ? (benchByKey.get(key('Terminal-Bench')) ?? benchFor('Terminal-Bench')) : undefined;
   for (const r of data) {
-    if (r['AA model slug'] || Object.values(r).some((v) => /artificial ?analysis/i.test(v))) {
+    if (FROM_ARTIFICIAL_ANALYSIS.has(f) || r['AA model slug'] || Object.values(r).some((v) => /artificial ?analysis/i.test(v))) {
       skip('Artificial Analysis rows');
       continue;
     }
@@ -229,9 +234,12 @@ for (const m of [...bmeta, ...Object.keys(FILE_GUESS).filter((n) => !bmeta.some(
     const target = targetId ? benchmarks.find((x) => x.id === targetId)
       : tb1 && (r['Run date'] || r.Created || '9999') < '2025-11-01' ? tb1 : b;
     if (!target) throw new Error(`Epoch row requires missing benchmark ${targetId}; add its reviewed catalog record first`);
+    const { via, from } = provenance(f, r);
     const output: EpochRow = [target.id, model?.id ?? sourceName, setting, harness, Math.round(value * 100) / 100,
-      (r['Release date'] || mm.date || '').slice(0, 10) || null, epochSecondaryMetrics(ename, r)];
+      (r['Release date'] || mm.date || '').slice(0, 10) || null, epochSecondaryMetrics(ename, r), via, from];
     (model ? rows : others).push(output);
+    const vc = viaCount.get(target.id) ?? viaCount.set(target.id, {}).get(target.id)!;
+    vc[via] = (vc[via] ?? 0) + 1;
   }
   const rb = Number(m.random_baseline || 0);
   const ceil = Number(m.score_ceiling || 1);
@@ -268,9 +276,9 @@ if (rows.length < lastRows / 2 && !process.argv.includes('--allow-drop')) {
 rows.sort((a, b) => a[0].localeCompare(b[0]) || (a[5] ?? '').localeCompare(b[5] ?? '') || a[1].localeCompare(b[1]));
 const out =
   `{\n  "source": "Epoch AI Benchmarking Hub",\n  "url": "https://epoch.ai/benchmarks",\n  "license": "CC BY 4.0",\n  "retrieved": "${today()}",\n` +
-  `  "columns": ["benchmark", "model", "setting", "harness", "score", "date", "metrics"],\n  "rows": [\n` +
+  `  "columns": ["benchmark", "model", "setting", "harness", "score", "date", "metrics", "via", "from"],\n  "rows": [\n` +
   rows.map((r) => `    ${JSON.stringify(r)}`).join(',\n') +
-  `\n  ],\n  "otherColumns": ["benchmark", "name", "setting", "harness", "score", "date", "metrics"],\n` +
+  `\n  ],\n  "otherColumns": ["benchmark", "name", "setting", "harness", "score", "date", "metrics", "via", "from"],\n` +
   `  "others": ${JSON.stringify(others)},\n  "eci": [\n` +
   eci
     .sort((a, b) => (b.eci ?? -1) - (a.eci ?? -1))
@@ -282,3 +290,11 @@ writeJson(dataPath('models.json'), models.sort((a, b) => (a.released ?? '9999').
 writeJson(dataPath('benchmarks.json'), benchmarks.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
 writeJson(dataPath('labs.json'), labs);
 console.log(`Wrote ${rows.length} Epoch scores and ${eci.length} index scores. Skipped: ${JSON.stringify(skipped)}`);
+// where each benchmark's rows came from: epoch is Epoch's own run, the rest Epoch collected (see epoch-provenance.ts)
+const kinds: Via[] = ['epoch', 'board', 'lab', 'paper', 'unknown'];
+const total: Partial<Record<Via, number>> = {};
+for (const [id, c] of [...viaCount.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+  for (const k of kinds) total[k] = (total[k] ?? 0) + (c[k] ?? 0);
+  if (!c.epoch) console.log(`  ${id}: ${kinds.filter((k) => c[k]).map((k) => `${c[k]} ${k}`).join(', ')}`);
+}
+console.log(`Sources: ${kinds.map((k) => `${total[k] ?? 0} ${k}`).join(', ')}`);

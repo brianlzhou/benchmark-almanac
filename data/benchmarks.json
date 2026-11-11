@@ -11951,6 +11951,41 @@
     ]
   },
   {
+    "id": "browsesafe-plus-plus",
+    "name": "BrowseSafe++",
+    "aliases": [
+      "BrowseSafe Plus Plus",
+      "browsesafe-plus-plus"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "browsesafe",
+    "version": "2",
+    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
+    "org": "Perplexity",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.17457",
+      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
+      "site": "https://browsesafe.perplexity.ai/",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
+      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://browsesafe.perplexity.ai/",
+      "https://arxiv.org/abs/2610.17457"
+    ],
+    "added": "2026-11-01"
+  },
+  {
     "id": "browsesafe-adapt",
     "name": "BrowseSafe-Adapt",
     "category": "safety-alignment",
@@ -12008,41 +12043,6 @@
     "evidence": [
       "https://arxiv.org/abs/2511.20597",
       "https://browsesafe.perplexity.ai/"
-    ],
-    "added": "2026-11-01"
-  },
-  {
-    "id": "browsesafe-plus-plus",
-    "name": "BrowseSafe++",
-    "aliases": [
-      "BrowseSafe Plus Plus",
-      "browsesafe-plus-plus"
-    ],
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "university",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "family": "browsesafe",
-    "version": "2",
-    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
-    "org": "Perplexity",
-    "released": "2026-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2610.17457",
-      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
-      "site": "https://browsesafe.perplexity.ai/",
-      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
-      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
-    },
-    "access": "public+private-holdout",
-    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://browsesafe.perplexity.ai/",
-      "https://arxiv.org/abs/2610.17457"
     ],
     "added": "2026-11-01"
   },
@@ -30695,41 +30695,6 @@
     ]
   },
   {
-    "id": "flores-200",
-    "name": "FLORES-200",
-    "aliases": [
-      "Flores 200",
-      "FLORES200"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-translation",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "open-ended",
-    "family": "flores",
-    "version": "200",
-    "description": "Models translate English Wikipedia sentences into about 200 languages. Outputs are scored with BLEU or chrF against human reference translations.",
-    "org": "Meta AI (NLLB Team)",
-    "released": "2022-07",
-    "links": {
-      "paper": "https://arxiv.org/abs/2207.04672",
-      "repo": "https://github.com/facebookresearch/flores"
-    },
-    "access": "public",
-    "note": "Extends FLORES-101 to about 200 languages. The flores record covers FLORES-101.",
-    "successor": "flores-plus",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf",
-      "https://arxiv.org/abs/2207.04672",
-      "https://oldi.org/",
-      "https://github.com/openlanguagedata/flores",
-      "https://github.com/facebookresearch/flores"
-    ]
-  },
-  {
     "id": "flores-plus",
     "name": "FLORES+",
     "aliases": [
@@ -30763,6 +30728,41 @@
       "https://huggingface.co/datasets/openlanguagedata/flores_plus"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "flores-200",
+    "name": "FLORES-200",
+    "aliases": [
+      "Flores 200",
+      "FLORES200"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "flores",
+    "version": "200",
+    "description": "Models translate English Wikipedia sentences into about 200 languages. Outputs are scored with BLEU or chrF against human reference translations.",
+    "org": "Meta AI (NLLB Team)",
+    "released": "2022-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2207.04672",
+      "repo": "https://github.com/facebookresearch/flores"
+    },
+    "access": "public",
+    "note": "Extends FLORES-101 to about 200 languages. The flores record covers FLORES-101.",
+    "successor": "flores-plus",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf",
+      "https://arxiv.org/abs/2207.04672",
+      "https://oldi.org/",
+      "https://github.com/openlanguagedata/flores",
+      "https://github.com/facebookresearch/flores"
+    ]
   },
   {
     "id": "flteval",
@@ -34869,7 +34869,8 @@
     "links": {
       "paper": "https://arxiv.org/abs/2311.12022",
       "repo": "https://github.com/idavidrein/gpqa",
-      "dataset": "https://huggingface.co/datasets/Idavidrein/gpqa"
+      "dataset": "https://huggingface.co/datasets/Idavidrein/gpqa",
+      "leaderboard": "https://crfm.stanford.edu/helm/capabilities/latest/#/leaderboard/gpqa"
     },
     "access": "public",
     "note": "Main set of GPQA. The gpqa-diamond record covers the 198 question Diamond subset.",
@@ -38536,7 +38537,8 @@
     "links": {
       "repo": "https://github.com/openai/human-eval",
       "dataset": "https://huggingface.co/datasets/openai/openai_humaneval",
-      "paper": "https://arxiv.org/abs/2107.03374"
+      "paper": "https://arxiv.org/abs/2107.03374",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
     },
     "access": "public",
     "note": "Saturated. Reported only for DeepSeek-V4 base model.",
@@ -38610,64 +38612,6 @@
     ]
   },
   {
-    "id": "humaneval-cobol-cohere",
-    "name": "HumanEval-COBOL (Cohere)",
-    "aliases": [
-      "HumanEval-COBOL"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "university",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models write COBOL versions of HumanEval problems, or translate COBOL solutions to Python. Unit tests score pass@1.",
-    "org": "Cohere",
-    "released": "2025-04",
-    "links": {
-      "paper": "https://arxiv.org/abs/2504.00698v2"
-    },
-    "access": "unknown",
-    "note": "Cohere built it for the Command A report. The report does not say whether it is released.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2504.00698v2"
-    ],
-    "added": "2026-11-01"
-  },
-  {
-    "id": "humaneval-v",
-    "name": "HumanEval-V",
-    "aliases": [
-      "HumanEval V"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "university",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models read a diagram and a function signature, then write Python code that must pass test cases. Tasks span six types of visual reasoning.",
-    "org": "Fengji Zhang, Jacky Keung et al.",
-    "released": "2024-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2410.12381",
-      "repo": "https://github.com/HumanEval-V/HumanEval-V-Benchmark",
-      "site": "https://humaneval-v.github.io/",
-      "leaderboard": "https://humaneval-v.github.io/"
-    },
-    "access": "public",
-    "note": "Tasks and diagrams are written by hand. Scores are pass@1.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "likely",
-    "evidence": [
-      "https://arxiv.org/abs/2410.12381",
-      "https://huggingface.co/stepfun-ai/Step3-VL-10B"
-    ],
-    "added": "2026-11-01"
-  },
-  {
     "id": "humaneval-plus",
     "name": "HumanEval+",
     "aliases": [
@@ -38727,6 +38671,64 @@
       "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
       "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
     ]
+  },
+  {
+    "id": "humaneval-cobol-cohere",
+    "name": "HumanEval-COBOL (Cohere)",
+    "aliases": [
+      "HumanEval-COBOL"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "university",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models write COBOL versions of HumanEval problems, or translate COBOL solutions to Python. Unit tests score pass@1.",
+    "org": "Cohere",
+    "released": "2025-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2504.00698v2"
+    },
+    "access": "unknown",
+    "note": "Cohere built it for the Command A report. The report does not say whether it is released.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2504.00698v2"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "humaneval-v",
+    "name": "HumanEval-V",
+    "aliases": [
+      "HumanEval V"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "university",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models read a diagram and a function signature, then write Python code that must pass test cases. Tasks span six types of visual reasoning.",
+    "org": "Fengji Zhang, Jacky Keung et al.",
+    "released": "2024-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2410.12381",
+      "repo": "https://github.com/HumanEval-V/HumanEval-V-Benchmark",
+      "site": "https://humaneval-v.github.io/",
+      "leaderboard": "https://humaneval-v.github.io/"
+    },
+    "access": "public",
+    "note": "Tasks and diagrams are written by hand. Scores are pass@1.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://arxiv.org/abs/2410.12381",
+      "https://huggingface.co/stepfun-ai/Step3-VL-10B"
+    ],
+    "added": "2026-11-01"
   },
   {
     "id": "humanevalpack",
@@ -39580,7 +39582,8 @@
     "links": {
       "repo": "https://github.com/google-research/google-research/tree/master/instruction_following_eval",
       "dataset": "https://huggingface.co/datasets/google/IFEval",
-      "paper": "https://arxiv.org/abs/2311.07911"
+      "paper": "https://arxiv.org/abs/2311.07911",
+      "leaderboard": "https://crfm.stanford.edu/helm/capabilities/latest/#/leaderboard/ifeval"
     },
     "access": "public",
     "note": "Frontier models now score near 90 percent, so it is close to saturation.",
@@ -49843,7 +49846,8 @@
     "links": {
       "repo": "https://github.com/google-research/google-research/tree/master/mbpp",
       "dataset": "https://huggingface.co/datasets/google-research-datasets/mbpp",
-      "paper": "https://arxiv.org/abs/2108.07732"
+      "paper": "https://arxiv.org/abs/2108.07732",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
     },
     "access": "public",
     "note": "EvalPlus released MBPP+ with many more tests per task because the original three tests miss wrong solutions.",
@@ -50547,7 +50551,8 @@
     "released": "2020-09",
     "links": {
       "repo": "https://github.com/jind11/MedQA",
-      "paper": "https://arxiv.org/abs/2009.13081"
+      "paper": "https://arxiv.org/abs/2009.13081",
+      "leaderboard": "https://crfm.stanford.edu/helm/lite/latest/#/leaderboard/med_qa"
     },
     "access": "public",
     "note": "The full dataset also has simplified and traditional Chinese exam sets.",

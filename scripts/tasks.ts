@@ -53,7 +53,8 @@ const groups = openTasks({
   models,
   docs,
   boards: lb.boards,
-  epoch: new Set(epoch.rows.map((r) => r[0] as string)),
+  // independent runs from Epoch AI: its own (via 'epoch') and boards it copied ('board'). Collected claims don't count.
+  epoch: new Set(epoch.rows.filter((r) => r[7] === undefined || r[7] === 'epoch' || r[7] === 'board').map((r) => r[0] as string)),
   modelPages,
   modelScores: scores,
   levels,
