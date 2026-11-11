@@ -8,8 +8,10 @@ import { num, tables } from '../lib/html.ts';
 const FEED = 'https://vals-ai.com/benchmarks/biomysterybench';
 const board: Leaderboard = {
   benchmark: 'biomysterybench',
+  host: 'Vals AI',
   url: FEED,
   feed: FEED,
+  aliases: { 'Gemini 3.1 Pro Preview (02/26)': 'gemini-3-1-pro' },
   terms: 'Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.',
   async fetch(): Promise<LeaderboardRow[]> {
     const table = tables(await fetchText(FEED)).find((t) => t[0]?.some((c) => c.text === 'Accuracy'));

@@ -23,7 +23,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run' }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -64,6 +64,12 @@ for (const f of files) {
     continue;
   }
   seen.add(board.benchmark).add(f.replace(/\.ts$/, ''));
+  // who runs a board is the importer's own fact, so every run refreshes it, also for boards it does not read
+  const kept = store.boards[board.benchmark];
+  if (!dry && kept) {
+    if (board.host) kept.host = board.host;
+    else delete kept.host;
+  }
   if (only && !only.includes(board.benchmark) && !only.includes(f.replace(/\.ts$/, ''))) continue;
   if (!benchmarks.has(board.benchmark)) {
     console.log(`  ${f}: unknown benchmark ${board.benchmark}`);
@@ -108,10 +114,13 @@ for (const f of files) {
       throw new Error(`${now} entries against ${before} last time; rerun with --allow-drop if the board really shrank`);
     store.rows = store.rows.filter((r) => r[0] !== board.benchmark).concat(rows);
     store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(others);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}) };
   } catch (e) {
     failed++;
-    console.log(`  ${board.benchmark}: failed, keeping the last rows (${(e as Error).message})`);
+    const error = (e as Error).message;
+    console.log(`  ${board.benchmark}: failed, keeping the last rows (${error})`);
+    // record the failure, so the Contribute page can list the importer. The next good read replaces the record.
+    if (!dry && store.boards[board.benchmark]) store.boards[board.benchmark].failed = { date: today(), error: error.replace(/\s+/g, ' ').slice(0, 200) };
   }
 }
 

@@ -6,6 +6,7 @@ const COMP = 'imo--imo_2025';
 
 const board: Leaderboard = {
   benchmark: 'imo-2025',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

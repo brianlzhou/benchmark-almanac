@@ -7,6 +7,7 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'global-mmlu-lite',
+  host: 'Kaggle',
   url: 'https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite',
   feed: kaggleFeed('cohere-labs', 'global-mmlu-lite'),
   terms: KAGGLE_TERMS,

@@ -8,6 +8,7 @@ const TABLE: HelmTable = { project: 'safety', group: 'simple_safety_tests', colu
 
 const board: Leaderboard = {
   benchmark: 'simplesafetytests',
+  host: 'Stanford HELM',
   url: 'https://crfm.stanford.edu/helm/safety/latest/',
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,

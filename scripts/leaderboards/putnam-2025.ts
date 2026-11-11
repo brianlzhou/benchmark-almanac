@@ -8,6 +8,7 @@ const COMP = 'putnam--putnam_2025';
 
 const board: Leaderboard = {
   benchmark: 'putnam-2025',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

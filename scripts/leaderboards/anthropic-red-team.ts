@@ -23,6 +23,7 @@ async function outputTokens(): Promise<{ score: number; tokens?: number }[]> {
 
 const board: Leaderboard = {
   benchmark: 'anthropic-red-team',
+  host: 'Stanford HELM',
   url: 'https://crfm.stanford.edu/helm/safety/latest/',
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,

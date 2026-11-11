@@ -113,6 +113,7 @@ const COMP = 'aime--aime_2026';
 
 const board: Leaderboard = {
   benchmark: 'aime-2026',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

@@ -11,6 +11,39 @@ const FEED = 'https://datasets-server.huggingface.co/rows?dataset=open-llm-leade
 const MAKERS = new Set(['Qwen', 'meta-llama', 'google', 'microsoft', 'mistralai', 'deepseek-ai', 'CohereForAI', 'CohereLabs', 'nvidia', 'allenai', 'tiiuae', 'ibm-granite', '01-ai']);
 const TASKS = ['IFEval', 'BBH', 'MATH Lvl 5', 'GPQA', 'MUSR', 'MMLU-PRO'];
 
+// Every unflagged entry of the results dataset, as the viewer returns it. Other importers read single task
+// columns from it, such as musr.ts.
+export async function openLlmEntries(): Promise<Record<string, any>[]> {
+  const out: Record<string, any>[] = [];
+  let offset = 0;
+  let total = Infinity;
+  while (offset < total) {
+    if (offset) await new Promise((resolve) => setTimeout(resolve, 6000));
+    let page: { rows: { row: Record<string, any> }[]; num_rows_total: number } | undefined;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      try {
+        page = await fetchJson<typeof page>(`${FEED}&offset=${offset}&length=100`);
+        break;
+      } catch (error) {
+        // the viewer answers 429 when busy and sometimes 502 to 504 on the last pages
+        if (!/\b(429|50[234])\b/.test(String(error)) || attempt === 3) throw error;
+        await new Promise((resolve) => setTimeout(resolve, 60000));
+      }
+    }
+    if (!page?.rows?.length) throw new Error(`Incomplete Open LLM results at ${offset}/${total}`);
+    total = page.num_rows_total;
+    for (const { row: r } of page.rows) if (r.fullname && !r.Flagged) out.push(r);
+    offset += page.rows.length;
+  }
+  if (!out.length) throw new Error('Open LLM results missing');
+  return out;
+}
+
+export const openLlmOwner = (r: Record<string, any>) => String(r.fullname).split('/')[0];
+export const openLlmModel = (r: Record<string, any>) => (MAKERS.has(openLlmOwner(r)) ? r.fullname : r.fullname.replace('/', ' '));
+export const openLlmPrecision = (r: Record<string, any>) => (/^b?float16$/.test(r.Precision ?? '') ? undefined : r.Precision || undefined);
+export { MAKERS as OPEN_LLM_MAKERS };
+
 const board: Leaderboard = {
   benchmark: 'open-llm-leaderboard-v2',
   url: 'https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard',
@@ -19,37 +52,11 @@ const board: Leaderboard = {
   aliases: {},
   async fetch() {
     const out: LeaderboardRow[] = [];
-    let offset = 0;
-    let total = Infinity;
-    while (offset < total) {
-      if (offset) await new Promise((resolve) => setTimeout(resolve, 6000));
-      let page: { rows: { row: Record<string, any> }[]; num_rows_total: number } | undefined;
-      for (let attempt = 0; attempt < 4; attempt++) {
-        try {
-          page = await fetchJson<typeof page>(`${FEED}&offset=${offset}&length=100`);
-          break;
-        } catch (error) {
-          if (!String(error).includes('429') || attempt === 3) throw error;
-          await new Promise((resolve) => setTimeout(resolve, 60000));
-        }
-      }
-      if (!page?.rows?.length) throw new Error(`Incomplete Open LLM results at ${offset}/${total}`);
-      total = page.num_rows_total;
-      for (const { row: r } of page.rows) {
-        if (!r.fullname || typeof r['Average ⬆️'] !== 'number' || r.Flagged) continue;
-        const owner = String(r.fullname).split('/')[0];
-        const metrics: Record<string, number> = {};
-        for (const k of TASKS) if (typeof r[k] === 'number') metrics[k] = r[k];
-        const precision = /^b?float16$/.test(r.Precision ?? '') ? undefined : r.Precision || undefined;
-        out.push({
-          model: MAKERS.has(owner) ? r.fullname : r.fullname.replace('/', ' '),
-          score: r['Average ⬆️'],
-          setting: precision,
-          date: r['Submission Date'] || undefined,
-          metrics,
-        });
-      }
-      offset += page.rows.length;
+    for (const r of await openLlmEntries()) {
+      if (typeof r['Average ⬆️'] !== 'number') continue;
+      const metrics: Record<string, number> = {};
+      for (const k of TASKS) if (typeof r[k] === 'number') metrics[k] = r[k];
+      out.push({ model: openLlmModel(r), score: r['Average ⬆️'], setting: openLlmPrecision(r), date: r['Submission Date'] || undefined, metrics });
     }
     if (!out.length) throw new Error('Open LLM results missing');
     return out;

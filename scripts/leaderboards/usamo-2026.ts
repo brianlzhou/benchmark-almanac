@@ -6,6 +6,7 @@ const COMP = 'usamo--usamo_2026';
 
 const board: Leaderboard = {
   benchmark: 'usamo-2026',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

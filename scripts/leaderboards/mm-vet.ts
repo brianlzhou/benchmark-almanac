@@ -3,7 +3,8 @@
 import type { Leaderboard } from './types.ts';
 import { OPENVLM_FEED, OPENVLM_TERMS, openVlmRows } from './mmbench-en-v1-1.ts';
 const board: Leaderboard = {
-  benchmark: 'mm-vet', url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
+  benchmark: 'mm-vet',
+  host: 'OpenCompass', url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: OPENVLM_FEED, terms: OPENVLM_TERMS,
   fetch: () => openVlmRows('MMVet'),
 };

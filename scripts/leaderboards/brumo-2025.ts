@@ -6,6 +6,7 @@ const COMP = 'brumo--brumo_2025';
 
 const board: Leaderboard = {
   benchmark: 'brumo-2025',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

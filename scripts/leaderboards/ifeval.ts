@@ -6,10 +6,11 @@ import type { Leaderboard } from './types.ts';
 import { HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 
 const TABLE: HelmTable = { project: 'capabilities', group: 'core_scenarios', table: 'Accuracy', column: 'IFEval - IFEval Strict Acc', scale: 100 };
-const SETTING = 'HELM, strict, share of instructions per prompt';
+const SETTING = 'strict, share of instructions followed';
 
 const board: Leaderboard = {
   benchmark: 'ifeval',
+  host: 'Stanford HELM',
   url: 'https://crfm.stanford.edu/helm/capabilities/latest/#/leaderboard/ifeval',
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,

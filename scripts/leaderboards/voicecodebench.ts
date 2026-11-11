@@ -8,6 +8,7 @@ const SLUG = 'voice-code-bench';
 
 const board: Leaderboard = {
   benchmark: 'voicecodebench',
+  host: 'Vals AI',
   url: valsPage(SLUG),
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,

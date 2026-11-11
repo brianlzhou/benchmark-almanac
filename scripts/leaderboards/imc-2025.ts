@@ -10,6 +10,7 @@ const COMP = 'imc--imc_2025';
 
 const board: Leaderboard = {
   benchmark: 'imc-2025',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

@@ -6,6 +6,7 @@ const COMP = 'hmmt--hmmt_feb_2026';
 
 const board: Leaderboard = {
   benchmark: 'hmmt-2026',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

@@ -6,6 +6,7 @@ const COMP = 'smt--smt_2025';
 
 const board: Leaderboard = {
   benchmark: 'smt-2025',
+  host: 'MathArena',
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,

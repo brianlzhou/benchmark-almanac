@@ -7,6 +7,7 @@ const SLUG = 'legal_bench';
 
 const board: Leaderboard = {
   benchmark: 'legalbench',
+  host: 'Vals AI',
   url: valsPage(SLUG),
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,

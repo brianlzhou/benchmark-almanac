@@ -64,6 +64,11 @@ export interface Leaderboard {
   feed: string;
   /** One sentence on the terms that apply to reading the feed. */
   terms: string;
+  /**
+   * Who runs the board, when it is not the benchmark's makers: 'Vals AI' for Vals AI's MATH-500 board. Pages then
+   * name it, as "Vals AI's leaderboard", instead of calling it the benchmark's own leaderboard.
+   */
+  host?: string;
   /** Names on this board that the shared resolver cannot place: board name -> model id. */
   aliases?: Record<string, string>;
   /** A chart the board draws from more than its headline score. */
