@@ -13024,7 +13024,23 @@
     "aliases": [
       "Inkling-2-Small",
       "Inkling 2-Small"
-    ]
+    ],
+    "epoch": "Inkling 2 Small"
+  },
+  {
+    "id": "claude-fable-5-2",
+    "name": "Claude Fable 5.2",
+    "lab": "anthropic",
+    "family": "Claude 5.2",
+    "released": "2026-11-09",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+    "aliases": [
+      "Claude Fable 5.2 / Mythos 5.2",
+      "Claude Mythos 5.2"
+    ],
+    "epoch": "Claude Fable 5.2"
   },
   {
     "id": "bagel",

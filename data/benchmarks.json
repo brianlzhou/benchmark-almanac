@@ -1753,7 +1753,7 @@
     },
     "access": "public",
     "note": "Arena says the board measures signals from real sessions rather than preference votes alone. It went live on 2026-06-04, and signal definitions changed on 2026-10-01 and 2026-10-12.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -3100,7 +3100,7 @@
     "note": "Exercises come from public Exercism tracks, so contamination is possible.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 138.14,
+    "edi": 138.17,
     "epoch": {
       "epoch_name": "Aider polyglot",
       "random": 0,
@@ -4677,7 +4677,7 @@
     "note": "Model cards report the rounds R1, R2, and R3 separately or as an average.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.35,
+    "edi": 122.21,
     "epoch": {
       "epoch_name": "ANLI",
       "random": 33.33,
@@ -5542,7 +5542,7 @@
     "successor": "apex-agents-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.03,
+    "edi": 157.05,
     "epoch": {
       "epoch_name": "APEX-Agents",
       "random": 0,
@@ -6255,7 +6255,7 @@
     "successor": "arc-agi-2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.47,
+    "edi": 145.49,
     "epoch": {
       "epoch_name": "ARC-AGI",
       "random": 0,
@@ -6383,7 +6383,7 @@
     "note": "Saturated by frontier models, which score above 95%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.82,
+    "edi": 95.05,
     "epoch": {
       "epoch_name": "ARC AI2",
       "random": 25,
@@ -8859,7 +8859,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.65,
+    "edi": 154.68,
     "epoch": {
       "epoch_name": "Balrog",
       "random": 0,
@@ -9336,6 +9336,8 @@
     "level": "university",
     "scoring": "verified",
     "format": "code",
+    "family": "benchcad",
+    "version": "1.0",
     "description": "Programmatic CAD: 17,900 execution-verified CadQuery programs over 106 industrial part families. Four matched tasks scored on geometry.",
     "org": "BenchCAD team",
     "released": "2026-05",
@@ -9345,9 +9347,111 @@
       "paper": "https://arxiv.org/abs/2605.10865"
     },
     "access": "public",
-    "note": "BenchCAD 2.0 (agentic) is in preparation at github.com/BenchCAD-org/benchcad-2.",
+    "note": "Models reconstruct CAD geometry. Later BenchCAD versions add engineering tasks and different scoring, so their scores do not compare.",
+    "successor": "benchcad-2-0",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf",
+      "https://github.com/BenchCAD-org/benchcad-2-main/releases/tag/v2.0-core1",
+      "https://github.com/BenchCAD-org/benchcad-2-main/releases/tag/v2.1-beta",
+      "https://github.com/BenchCAD-org/benchcad-2-main/releases/tag/v2.1"
+    ]
+  },
+  {
+    "id": "benchcad-2-0",
+    "name": "BenchCAD 2.0",
+    "aliases": [
+      "BenchCAD v2.0"
+    ],
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "benchcad",
+    "version": "2.0",
+    "description": "Models reconstruct parts, assemblies, and circuit boards from drawings and images. The Core set contains 100 problems with partial credit.",
+    "org": "BenchCAD team",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/BenchCAD-org/benchcad-2-main"
+    },
+    "access": "public+private-holdout",
+    "note": "Models use 30 rounds with compaction at 180,000 tokens. Scores do not compare with 2.1-beta or 2.1. Core requires a Hugging Face account with access. Public samples are available.",
+    "successor": "benchcad-2-1-beta",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/BenchCAD-org/benchcad-2-main/releases/tag/v2.0-core1",
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf",
+      "https://github.com/BenchCAD-org/benchcad-2-main"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "benchcad-2-1",
+    "name": "BenchCAD 2.1",
+    "aliases": [
+      "BenchCAD v2.1"
+    ],
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "benchcad",
+    "version": "2.1",
+    "description": "Models reconstruct parts, assemblies, and circuit boards from drawings and images. The Core set contains 100 problems with partial credit.",
+    "org": "BenchCAD team",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/BenchCAD-org/benchcad-2-main"
+    },
+    "access": "public+private-holdout",
+    "note": "Models use 60 rounds and 500,000 output tokens in the standard harness. The revised scorer makes scores incomparable with earlier versions. Core requires a Hugging Face account with access. Public samples are available.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/BenchCAD-org/benchcad-2-main/releases/tag/v2.1",
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf",
+      "https://github.com/BenchCAD-org/benchcad-2-main"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "benchcad-2-1-beta",
+    "name": "BenchCAD 2.1-beta",
+    "aliases": [
+      "BenchCAD v2.1-beta"
+    ],
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "benchcad",
+    "version": "2.1-beta",
+    "description": "Models reconstruct parts, assemblies, and circuit boards from drawings and images. The Core set contains 100 problems with partial credit.",
+    "org": "BenchCAD team",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/BenchCAD-org/benchcad-2-main"
+    },
+    "access": "public+private-holdout",
+    "note": "Models retain reasoning across rounds with 40 rounds and 500,000 output tokens. Scores do not compare with 2.0 or 2.1. Core requires a Hugging Face account with access. Public samples are available.",
+    "successor": "benchcad-2-1",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/BenchCAD-org/benchcad-2-main/releases/tag/v2.1-beta",
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf",
+      "https://github.com/BenchCAD-org/benchcad-2-main"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "berkeley-function-calling-leaderboard-bfcl",
@@ -9642,7 +9746,7 @@
     "successor": "big-bench-extra-hard",
     "unit": "%",
     "confidence": "verified",
-    "edi": 106.15,
+    "edi": 106.23,
     "epoch": {
       "epoch_name": "BBH",
       "random": 25,
@@ -12292,7 +12396,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 139.1,
+    "edi": 139.12,
     "epoch": {
       "epoch_name": "CadEval",
       "random": 0,
@@ -14339,7 +14443,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 161.52,
+    "edi": 161.81,
     "epoch": {
       "epoch_name": "Chess Puzzles",
       "random": 4.96,
@@ -14849,7 +14953,7 @@
     "note": "500 contexts, 1,899 tasks, 31,607 rubrics. Follow-up CL-bench Life (2026-04) covers everyday contexts.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 180.3,
+    "edi": 180.33,
     "epoch": {
       "epoch_name": "CL-bench",
       "random": 0,
@@ -14884,7 +14988,7 @@
     "note": "The best model solved 19.3 percent of tasks at release.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.1,
+    "edi": 177.05,
     "epoch": {
       "epoch_name": "CL-bench Life",
       "random": 0,
@@ -19849,7 +19953,7 @@
     "note": "40 professional CTF tasks from four competitions, each split into subtasks for partial credit. Agents work in a Kali Linux environment. The board mixes HAL leaderboard runs with lab system-card scores on 35 to 39 task subsets. Anthropic reports it near saturation. The makers point readers to their later BountyBench.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.11,
+    "edi": 146.13,
     "epoch": {
       "epoch_name": "Cybench",
       "random": 0,
@@ -22056,7 +22160,7 @@
     "note": "The official judge model changed from Gemini 2.5 Pro to GPT-5.5 in May 2026, so older and newer scores do not compare directly.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.79,
+    "edi": 154.68,
     "epoch": {
       "epoch_name": "DeepResearch Bench",
       "random": 0,
@@ -22771,7 +22875,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=3d&board=3d-design"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22799,7 +22903,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=game-dev&board=agentic-game-dev"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22827,7 +22931,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=agentic-image-to-html"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22836,6 +22940,35 @@
       "https://www.designarena.ai/blog/methodology"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "designarena-agentic-overall",
+    "name": "DesignArena Agentic Overall",
+    "aliases": [
+      "Design Arena Agents",
+      "DesignArena Agents Overall"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Coding agents build apps, games, slides and spreadsheets from user prompts. Users compare the results, and votes from every agent board form one rating.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "designarena-android",
@@ -22857,7 +22990,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=mobile-dev&board=android"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22886,7 +23019,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=art&board=ascii"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22915,7 +23048,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=audio&section=tts&board=audiorealismbench"
     },
     "access": "public",
-    "note": "DesignArena introduced it in the post Audio Realism Benchmark: Measuring Realism in Audio Models. It reports artificial speech and human speech views. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "DesignArena introduced it in the post Audio Realism Benchmark: Measuring Realism in Audio Models. It reports artificial speech and human speech views. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22924,6 +23057,34 @@
       "https://www.designarena.ai/blog/methodology"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "designarena-blender",
+    "name": "DesignArena Blender",
+    "aliases": [
+      "Design Arena Blender"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Agents build a 3D scene in Blender from a user prompt. Users compare the rendered scenes and vote for the better one.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard/agents"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard/agents",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "designarena-builder",
@@ -22944,7 +23105,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=builder"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22974,10 +23135,10 @@
     "released": "2025-07",
     "links": {
       "site": "https://www.designarena.ai/",
-      "leaderboard": "https://www.designarena.ai/leaderboard"
+      "leaderboard": "https://www.designarena.ai/leaderboard?section=overall&board=code"
     },
     "access": "public",
-    "note": "The Code overall board combines the Website, UI Component, Game Dev, Data Visualization and 3D boards. It listed 190 models on 2026-11-01. Launched on Hacker News on 2025-07-12. DesignArena runs 33 boards in all, from agentic web apps and slides to image, video and speech. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "The Code overall board combines the Website, UI Component, Game Dev, Data Visualization and 3D boards. It listed 190 models on 2026-11-01. Launched on Hacker News on 2025-07-12. DesignArena runs 40 boards in all, from agentic web apps and slides to image, video and speech.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -22986,9 +23147,38 @@
       "https://www.designarena.ai/leaderboard?section=overall&board=builder",
       "https://news.ycombinator.com/item?id=44542578",
       "https://www.designarena.ai/leaderboard",
-      "https://www.designarena.ai/terms-and-conditions"
+      "https://www.designarena.ai/terms-and-conditions",
+      "https://www.designarena.ai/leaderboard?section=overall&board=code"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "designarena-code-to-video",
+    "name": "DesignArena Code to Video",
+    "aliases": [
+      "Design Arena Code to Video"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Agents write code that renders a video from a user prompt. Users compare the two videos and vote for the better one.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard?section=art&board=agon_code_video"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard?section=art&board=agon_code_video",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "designarena-data-viz",
@@ -23006,16 +23196,17 @@
     "org": "DesignArena (Intelligence)",
     "links": {
       "site": "https://www.designarena.ai/",
-      "leaderboard": "https://www.designarena.ai/leaderboard?category=dataviz"
+      "leaderboard": "https://www.designarena.ai/leaderboard/data-viz"
     },
     "access": "public",
-    "note": "It is one of the five categories behind the Code overall board, with its own prompts on the DesignArena home page. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "It is one of the five categories behind the Code overall board, with its own prompts on the DesignArena home page. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://www.designarena.ai/leaderboard?category=dataviz",
-      "https://www.designarena.ai/blog/methodology"
+      "https://www.designarena.ai/blog/methodology",
+      "https://www.designarena.ai/leaderboard/data-viz"
     ],
     "added": "2026-11-01"
   },
@@ -23039,7 +23230,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=webapps"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23068,7 +23259,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=fullstack"
     },
     "access": "public",
-    "note": "DesignArena published a Fullstack Arena methodology post. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "DesignArena published a Fullstack Arena methodology post. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23097,7 +23288,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=game-dev&board=game-dev"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23126,7 +23317,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=game-dev&board=godot-game-dev"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23135,6 +23326,34 @@
       "https://www.designarena.ai/blog/methodology"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "designarena-graphic-design",
+    "name": "DesignArena Graphic Design",
+    "aliases": [
+      "Design Arena Graphic Design"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Image models make a graphic design piece from a user prompt. Users compare two anonymous designs and vote for the better one.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard/image"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard/image",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "designarena-html-slides",
@@ -23154,7 +23373,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=office&section=slides&board=agentic-html-slides"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23184,7 +23403,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=image&section=image&board=image"
     },
     "access": "public",
-    "note": "Filters split it by subject, such as products, landscapes, architecture, typography and marketing. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "Filters split it by subject, such as products, landscapes, architecture, typography and marketing. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23213,7 +23432,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=image&section=image-edit&board=image-to-image"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23242,7 +23461,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=image-to-webapp"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23271,7 +23490,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=image-to-html"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23299,7 +23518,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=image-to-video"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23308,6 +23527,62 @@
       "https://www.designarena.ai/blog/methodology"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "designarena-logo",
+    "name": "DesignArena Logo",
+    "aliases": [
+      "Design Arena Logo"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Image models design a logo from a user prompt. Users compare two anonymous logos and vote for the better one.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard/image"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard/image",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "designarena-mobile-builder",
+    "name": "DesignArena Mobile Builder",
+    "aliases": [
+      "Design Arena Mobile Builders"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "AI app builders make a mobile app from the same user prompt. Users compare the apps and vote for the better one.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard/builder"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard/builder",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "designarena-multi-image-to-video",
@@ -23327,7 +23602,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=multi-to-video"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23355,7 +23630,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=video&section=video&board=multimodal-to-video"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23364,6 +23639,34 @@
       "https://www.designarena.ai/blog/methodology"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "designarena-pdf",
+    "name": "DesignArena PDF",
+    "aliases": [
+      "Design Arena PDF"
+    ],
+    "category": "economic-work",
+    "subcategory": "work-office",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Agents build a PDF document from a user prompt. Users compare the two documents and vote for the better one.",
+    "org": "DesignArena (Intelligence)",
+    "links": {
+      "site": "https://www.designarena.ai/",
+      "leaderboard": "https://www.designarena.ai/leaderboard?tab=office&section=pdf&board=agon_pdf"
+    },
+    "access": "public",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.designarena.ai/leaderboard?tab=office&section=pdf&board=agon_pdf",
+      "https://www.designarena.ai/api/registry"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "designarena-slides",
@@ -23384,7 +23687,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=office&section=slides&board=slides"
     },
     "access": "public",
-    "note": "DesignArena open-sourced data from more than 50,000 slide generations. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "DesignArena open-sourced data from more than 50,000 slide generations. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23413,7 +23716,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=office&section=slides&board=agentic-slides"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23443,7 +23746,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=mobile-dev&board=mobileapps"
     },
     "access": "public",
-    "note": "DesignArena described the setup in its post Evaluating Mobile App-Building Agents. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "DesignArena described the setup in its post Evaluating Mobile App-Building Agents. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23472,7 +23775,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=audio&section=s2s&board=audio"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23500,7 +23803,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=office&section=spreadsheet&board=spreadsheet"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23529,7 +23832,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=art&board=svgs"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23558,7 +23861,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=audio&section=tts&board=tts"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23584,16 +23887,17 @@
     "org": "DesignArena (Intelligence)",
     "links": {
       "site": "https://www.designarena.ai/",
-      "leaderboard": "https://www.designarena.ai/leaderboard?category=uicomponent"
+      "leaderboard": "https://www.designarena.ai/leaderboard/website"
     },
     "access": "public",
-    "note": "It is one of the five categories behind the Code overall board, with its own prompts on the DesignArena home page. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "It is one of the five categories behind the Code overall board, with its own prompts on the DesignArena home page. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://www.designarena.ai/leaderboard?category=uicomponent",
-      "https://www.designarena.ai/blog/methodology"
+      "https://www.designarena.ai/blog/methodology",
+      "https://www.designarena.ai/leaderboard/website"
     ],
     "added": "2026-11-01"
   },
@@ -23645,7 +23949,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?tab=video&section=video-editing&board=video-to-video"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23673,7 +23977,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=video-to-website"
     },
     "access": "public",
-    "note": "One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -23703,7 +24007,7 @@
       "leaderboard": "https://www.designarena.ai/leaderboard?section=website&board=website"
     },
     "access": "public",
-    "note": "Filters split it by site type, such as e-commerce, portfolio, dashboard and blog. DesignArena blog posts also call it the Web Design (Non-Agentic) arena. One of 33 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes. Its terms forbid automated reading, so the almanac imports no scores.",
+    "note": "Filters split it by site type, such as e-commerce, portfolio, dashboard and blog. DesignArena blog posts also call it the Web Design (Non-Agentic) arena. One of 40 DesignArena boards. DesignArena ranks entries with Bradley-Terry ratings from user votes.",
     "unit": "elo",
     "better": "higher",
     "confidence": "verified",
@@ -25134,7 +25438,7 @@
     "note": "Near saturation, with top models at about 98% in August 2026. Random guessing scores 40%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 135.72,
+    "edi": 135.73,
     "epoch": {
       "epoch_name": "DTBench",
       "random": 40,
@@ -25557,7 +25861,7 @@
     "note": "One card was banned in 2026-10 after it broke the game. Epoch expects saturation soon. Game material is not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.39,
+    "edi": 164.35,
     "epoch": {
       "epoch_name": "EBR-bench",
       "random": 0,
@@ -27604,7 +27908,7 @@
     "note": "41 real V8 N-day vulnerabilities with production mitigations on. 16 binary capability flags over five tiers: coverage, bug triggering, V8 internal primitives, general primitives and arbitrary code execution. Flags are checked by oracles compiled into a patched d8 binary. Episodes cap at 300 turns. Saturated by GPT-6 Astra at 100%, and OpenAI built a post-cutoff internal port to check contamination.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.39,
+    "edi": 163.3,
     "epoch": {
       "epoch_name": "ExploitBench",
       "random": 0,
@@ -28497,6 +28801,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "fermat-last-theorem-lean-anthropic",
+    "name": "Fermat's Last Theorem in Lean (Anthropic)",
+    "aliases": [
+      "Fermat’s Last Theorem in Lean"
+    ],
+    "category": "math",
+    "subcategory": "math-formal",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agent teams formalize Fermat's Last Theorem in Lean. Scores measure the weighted proportion of 60 accepted intermediate theorems.",
+    "org": "Anthropic",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Teams run for 18 hours without internet access. This theorem differs from the earlier large agent team task.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "fever",
     "name": "FEVER",
     "aliases": [
@@ -28546,7 +28874,7 @@
     "access": "unknown",
     "unit": "%",
     "confidence": "likely",
-    "edi": 133.43,
+    "edi": 133.42,
     "epoch": {
       "epoch_name": "Fiction.LiveBench",
       "random": 0,
@@ -29999,7 +30327,7 @@
     "successor": "frontiercode-1-1",
     "unit": "%",
     "confidence": "likely",
-    "edi": 163.83,
+    "edi": 163.89,
     "epoch": {
       "epoch_name": "FrontierCode",
       "random": 0,
@@ -30208,7 +30536,7 @@
     "successor": "frontiermath-tiers-1-3-v2",
     "unit": "%",
     "confidence": "likely",
-    "edi": 150.7,
+    "edi": 150.73,
     "epoch": {
       "epoch_name": "FrontierMath-2025-02-28-Private",
       "random": 0,
@@ -30285,7 +30613,7 @@
     "successor": "frontiermath-tier-4-v2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.99,
+    "edi": 158.94,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-2025-07-01-Private",
       "random": 0,
@@ -30325,7 +30653,7 @@
     "note": "Version 2 corrected 12 problems and removed 7 from the original Tier 4 set.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.71,
+    "edi": 158.72,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-v2-Private",
       "random": 0,
@@ -30365,7 +30693,7 @@
     "note": "Version 2 fixed errors in 42 percent of problems, and Epoch says the tiers are nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.68,
+    "edi": 150.69,
     "epoch": {
       "epoch_name": "FrontierMath-Tiers-1-3-v2-Private",
       "random": 0,
@@ -30577,7 +30905,7 @@
     "note": "This record is FrontierSWE v2 (2026-09-02), the version Epoch AI tracks. It added 21 tasks to reach 34 and runs every model in the proximus harness. v1 (April 2026, 17 tasks) has its own record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.93,
+    "edi": 165.01,
     "epoch": {
       "epoch_name": "FrontierSWE",
       "random": 0,
@@ -30838,7 +31166,7 @@
     "note": "LLM grader checks error descriptions. Novice human baseline 63%. Photos and manuals are not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.72,
+    "edi": 165.92,
     "epoch": {
       "epoch_name": "Furniture Assembly",
       "random": 30,
@@ -32138,7 +32466,7 @@
     "note": "Only the 220-task gold set is public, with an automated grading service. OpenAI says its hosted GDPval leaderboard is no longer active and points to the GDPval-AA board instead.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.7,
+    "edi": 154.65,
     "epoch": {
       "epoch_name": "GDPval",
       "random": 0,
@@ -32745,7 +33073,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.8,
+    "edi": 122.92,
     "epoch": {
       "epoch_name": "GeoBench",
       "random": 0,
@@ -33899,7 +34227,7 @@
     "successor": "math",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.34,
+    "edi": 94.57,
     "epoch": {
       "epoch_name": "GSM8K",
       "random": 0,
@@ -33991,7 +34319,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.77,
+    "edi": 159.82,
     "epoch": {
       "epoch_name": "GSO-Bench",
       "random": 0,
@@ -35024,6 +35352,7 @@
     "format": "open-ended",
     "description": "Artificial Analysis's run of Harvey's Legal Agent Benchmark on Harvey's newer private set of 120 tasks across 24 practice areas. A deliverable with a material hallucination scores zero, and the headline is the share of judges who find every rubric criterion passed.",
     "org": "Artificial Analysis",
+    "released": "2026-10",
     "links": {
       "site": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
     },
@@ -35033,7 +35362,8 @@
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
     ],
     "added": "2026-11-09"
   },
@@ -35434,7 +35764,7 @@
     "note": "Saturated. GitHub repo rowanz/hellaswag returns HTTP 451 (blocked by a WikiHow DMCA notice dated 2026-09-14), so repo is null.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 62.26,
+    "edi": 62.87,
     "epoch": {
       "epoch_name": "HellaSwag",
       "random": 25,
@@ -42856,7 +43186,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 43.14,
+    "edi": 43.92,
     "epoch": {
       "epoch_name": "LAMBADA",
       "random": 0,
@@ -45192,7 +45522,7 @@
     "note": "Same benchmark as the lmca record, from the same arXiv paper 2607.27499.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.05,
+    "edi": 152.06,
     "epoch": {
       "epoch_name": "LMCA",
       "random": 0,
@@ -46891,17 +47221,47 @@
     "level": "everyday",
     "scoring": "model-judged",
     "format": "agent-task",
+    "family": "malicious-agentic-influence-campaigns-anthropic",
+    "version": "Original",
     "description": "Agents receive requests to run multi-step influence operations with tools. Score is the refusal rate.",
     "org": "Anthropic",
     "released": "2026-04",
     "access": "private",
     "note": "In-house Anthropic evaluation. The tasks are not public.",
+    "successor": "malicious-agentic-influence-campaigns-34-point-anthropic",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://assets.claude.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5.pdf"
+      "https://assets.claude.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5.pdf",
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
     ]
+  },
+  {
+    "id": "malicious-agentic-influence-campaigns-34-point-anthropic",
+    "name": "Malicious agentic influence campaigns, 34-point rubric (Anthropic)",
+    "aliases": [
+      "Agentic influence operation evaluation, 34-point rubric"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-dangerous",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "family": "malicious-agentic-influence-campaigns-anthropic",
+    "version": "34-point rubric",
+    "description": "Agents run simulated voter suppression and domestic polarization campaigns. Weighted criteria measure campaign execution on a 34-point scale.",
+    "org": "Anthropic",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Anthropic changed the environment and weighted rubric. The maximum increased from 32 to 34, making earlier scores incomparable.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "malicious-computer-use-anthropic",
@@ -47334,7 +47694,7 @@
     "note": "Near saturation, and contamination is likely because the problems have been public since 2021.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 126.12,
+    "edi": 126.1,
     "epoch": {
       "epoch_name": "MATH level 5",
       "random": 0,
@@ -51220,7 +51580,7 @@
     "note": "25 targets, 3 kept private. ~34% of tests held out. Source programs are open source, so memorization cannot be fully ruled out.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.39,
+    "edi": 164.49,
     "epoch": {
       "epoch_name": "MirrorCode",
       "random": 0,
@@ -52735,7 +53095,7 @@
     "successor": "mmlu-pro",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.69,
+    "edi": 102.81,
     "epoch": {
       "epoch_name": "MMLU",
       "random": 25,
@@ -56133,7 +56493,7 @@
     "note": "Game identity, prompts and positions are kept secret to prevent targeted preparation. Likely the 'game-puzzles' benchmark in the Epoch post.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.77,
+    "edi": 164.64,
     "epoch": {
       "epoch_name": "Mystery Game Puzzles",
       "random": 9.22,
@@ -59085,7 +59445,7 @@
     "note": "Saturated by frontier models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 93.5,
+    "edi": 93.62,
     "epoch": {
       "epoch_name": "OpenBookQA",
       "random": 25,
@@ -59954,7 +60314,7 @@
     "successor": "osworld-verified",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.71,
+    "edi": 146.7,
     "epoch": {
       "epoch_name": "OSWorld",
       "random": 0,
@@ -59999,7 +60359,7 @@
     "successor": "osworld-2-0-2026-08-08",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.77,
+    "edi": 169.71,
     "epoch": {
       "epoch_name": "OSWorld 2.0",
       "random": 0,
@@ -60282,7 +60642,7 @@
     "note": "Epoch AI added it as a harder successor to MATH Level 5, which was nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 137.18,
+    "edi": 137.19,
     "epoch": {
       "epoch_name": "OTIS Mock AIME 2024-2025",
       "random": 0.1,
@@ -62139,7 +62499,7 @@
     "access": "public+private-holdout",
     "unit": "%",
     "confidence": "verified",
-    "edi": 60.77,
+    "edi": 61.53,
     "epoch": {
       "epoch_name": "PIQA",
       "random": 50,
@@ -62569,7 +62929,7 @@
     "successor": "posttrainbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.11,
+    "edi": 169.23,
     "epoch": {
       "epoch_name": "PostTrainBench",
       "random": 0,
@@ -63447,7 +63807,7 @@
     "successor": "proofbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.45,
+    "edi": 156.43,
     "epoch": {
       "epoch_name": "ProofBench",
       "random": 0,
@@ -66442,7 +66802,7 @@
     "note": "The best agent automated only 2.5% of projects at launch. Only a 10 task public set is released.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.64,
+    "edi": 177.83,
     "epoch": {
       "epoch_name": "Remote Labor Index",
       "random": 0,
@@ -71088,7 +71448,7 @@
     "note": "The human baseline from nine non-expert people is 83.7 percent. A small open-ended variant lists three models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.28,
+    "edi": 152.26,
     "epoch": {
       "epoch_name": "SimpleBench",
       "random": 16.67,
@@ -71181,7 +71541,7 @@
     "note": "Google fixed one dataset error on 2026-03-09 and posted paper v2 on 2026-03-10. Scores stay comparable, so it remains one record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.51,
+    "edi": 157.12,
     "epoch": {
       "epoch_name": "SimpleQA Verified",
       "random": 0,
@@ -73146,7 +73506,7 @@
     "note": "Top human players win ~85% (StS1) and ~95% (StS2). Seeds are not published.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 175.51,
+    "edi": 178.4,
     "epoch": {
       "epoch_name": "SpireClimb",
       "random": 0,
@@ -73797,6 +74157,26 @@
     "note": "Open-source in Inspect Evals (gdm_stealth, gdm_self_reasoning). External review found many SA tasks test one ability.",
     "unit": "%",
     "confidence": "verified"
+  },
+  {
+    "id": "stem-professor-bench-anthropic",
+    "name": "STEM Professor Bench",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents solve unpublished research problems written by professional scientists. Most problems concern theoretical physics, with some partial credit.",
+    "org": "Anthropic",
+    "access": "private",
+    "note": "Anthropic reports 64 problems and nine attempts per problem. A model grades 56 problems, while author procedures grade eight.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "step-race-lech-mazur",
@@ -75043,7 +75423,7 @@
     "note": "Only one example task is public, and the scored tasks and grading scripts stay hidden.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.7,
+    "edi": 150.76,
     "epoch": {
       "epoch_name": "Surface Evolver Bench",
       "random": 0,
@@ -77497,7 +77877,7 @@
     "successor": "terminal-bench-2-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 149.4,
+    "edi": 149.41,
     "epoch": {
       "epoch_name": "Terminal Bench",
       "random": 0,
@@ -78171,7 +78551,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.97,
+    "edi": 146,
     "epoch": {
       "epoch_name": "The Agent Company",
       "random": 0,
@@ -79224,7 +79604,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 49.55,
+    "edi": 49.74,
     "epoch": {
       "epoch_name": "TriviaQA",
       "random": 0,
@@ -83980,7 +84360,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 153.03,
+    "edi": 153.09,
     "epoch": {
       "epoch_name": "VPCT",
       "random": 33.33,
@@ -85078,7 +85458,7 @@
     "successor": "weirdml-v3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.49,
+    "edi": 145.5,
     "epoch": {
       "epoch_name": "WeirdML",
       "random": 0,
@@ -85115,7 +85495,7 @@
     "note": "Scores are not raw accuracy and are not comparable with WeirdML v2.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 168.11,
+    "edi": 168.22,
     "epoch": {
       "epoch_name": "WeirdML v3",
       "random": 0,
@@ -85934,7 +86314,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.7,
+    "edi": 102.83,
     "epoch": {
       "epoch_name": "Winogrande",
       "random": 50,

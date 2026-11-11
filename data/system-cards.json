@@ -9667,7 +9667,7 @@
       },
       {
         "benchmark": "berkeley-function-calling-leaderboard-bfcl",
-        "score": 77.3,
+        "score": null,
         "unit": "%",
         "as_written": "BFCL v2, 0-shot, overall_ast_summary/macro_avg/valid (Instruction tuned models table)",
         "section": "capabilities"
@@ -10871,7 +10871,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 40.5,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench (Pass@1-COT), questions Aug to Nov 2024, DeepSeek-V3 (Table 6). Plain Pass@1 37.6",
         "section": "capabilities"
@@ -11557,7 +11557,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "livecodebench",
+        "benchmark": "livecodebench-v5",
         "score": 65.9,
         "unit": "%",
         "as_written": "LiveCodeBench (Pass@1-COT), 2024-08 to 2025-01, DeepSeek-R1 (Table 8, same as final column of Table 3)",
@@ -14219,7 +14219,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 16.3,
         "unit": "%",
         "as_written": "BBEH, IT, 0-shot (Table 18)",
@@ -14603,7 +14603,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 7.2,
         "unit": "%",
         "as_written": "BBEH, IT, 0-shot (Table 18)",
@@ -14861,7 +14861,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 19.3,
         "unit": "%",
         "as_written": "BBEH, IT, 0-shot (Table 18)",
@@ -15252,7 +15252,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 11.0,
         "unit": "%",
         "as_written": "BBEH, IT, 0-shot (Table 18)",
@@ -16197,7 +16197,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 43.4,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench (10/01/2024-02/01/2025), 0-shot, pass@1, instruction tuned (Instruction tuned models table)",
         "section": "capabilities"
@@ -16308,7 +16308,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 32.8,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench (10/01/2024-02/01/2025), 0-shot, pass@1, instruction tuned (Instruction tuned models table)",
         "section": "capabilities"
@@ -18157,7 +18157,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "livecodebench",
+        "benchmark": "livecodebench-v5",
         "score": 53.1,
         "unit": "%",
         "as_written": "LCB 8/24 - 1/25, pass@1 (Table 1)",
@@ -18318,7 +18318,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "livecodebench",
+        "benchmark": "livecodebench-v5",
         "score": 53.8,
         "unit": "%",
         "as_written": "LCB 8/24 - 1/25, pass@1 (Table 1)",
@@ -18473,7 +18473,7 @@
       },
       {
         "benchmark": "berkeley-function-calling-leaderboard-bfcl",
-        "score": 74.1,
+        "score": null,
         "unit": "%",
         "as_written": "BFCL V2 Live, reasoning on, reasoning off 73.6 (Table 5)",
         "section": "capabilities"
@@ -18550,7 +18550,7 @@
       },
       {
         "benchmark": "berkeley-function-calling-leaderboard-bfcl",
-        "score": 73.7,
+        "score": null,
         "unit": "%",
         "as_written": "BFCL V2 Live, reasoning on, reasoning off 73.9 (Table 4)",
         "section": "capabilities"
@@ -21446,7 +21446,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 24.7,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench (2410 to 2502) pass@1 (Table 7)",
         "section": "capabilities"
@@ -22709,7 +22709,7 @@
     "results": [
       {
         "benchmark": "livecodebench",
-        "score": 59.3,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench, pass@1, 1/1/2025-5/1/2025 window (Table 3)",
         "section": "capabilities"
@@ -23114,7 +23114,7 @@
     "results": [
       {
         "benchmark": "livecodebench",
-        "score": 74.2,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench, pass@1, 1/1/2025-5/1/2025 window (Table 3)",
         "section": "capabilities"
@@ -24645,7 +24645,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "livecodebench",
+        "benchmark": "livecodebench-v6",
         "score": 33.7,
         "unit": "%",
         "as_written": "LiveCodeBench*, 1,055 problems from v1 to v6 (Figure 1). The v6 result named in 4.1 is not printed",
@@ -26829,7 +26829,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 71.1,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench, NVIDIA-Nemotron-Nano-9B-v2 (Figure 1). Section 3.3 names the 07/24 to 12/24 window",
         "section": "capabilities"
@@ -27213,7 +27213,7 @@
       },
       {
         "benchmark": "eq-bench-3",
-        "score": 85.5,
+        "score": null,
         "unit": "score",
         "as_written": "EQBench3, reasoning mode (Table 3). Non-reasoning 74.6. v1 printed 85.4",
         "section": "capabilities"
@@ -29870,7 +29870,7 @@
         "section": "hallucination"
       },
       {
-        "benchmark": "livecodebench",
+        "benchmark": "livecodebench-v6",
         "score": 74.1,
         "unit": "%",
         "as_written": "LiveCodeBench (2408-2505) (Pass@1), DeepSeek-V3.2-Exp (Table 1)",
@@ -30569,7 +30569,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 59.63,
         "unit": "%",
         "as_written": "BBEH (Table 1)",
@@ -31514,7 +31514,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 69.4,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench (07/24 to 12/24), reasoning on, SFT stage 4 (Table 6)",
         "section": "capabilities"
@@ -33803,7 +33803,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "livecodebench",
+        "benchmark": "livecodebench-v6",
         "score": 83.3,
         "unit": "%",
         "as_written": "LiveCodeBench (2024.08-2025.04) (Pass@1-COT), DeepSeek-V3.2 Thinking (Table 2)",
@@ -37476,7 +37476,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 66.63,
         "unit": "%",
         "as_written": "BBEH (Table 2)",
@@ -38092,7 +38092,7 @@
       },
       {
         "benchmark": "eclektic",
-        "score": 37.3,
+        "score": null,
         "unit": "%",
         "as_written": "ECLeKTic subset in original languages, net score (correct minus incorrect), extended thinking, value printed on chart; correct rate 53.9, net 34.6 with thinking plus effort (Figure 4.3.A)",
         "section": "hallucination"
@@ -40840,7 +40840,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 34.4,
+        "score": null,
         "unit": "%",
         "as_written": "GLM-5-Base, LiveCodeBench-Base (Pass@1), version not stated (Table 11)",
         "section": "capabilities"
@@ -41405,7 +41405,7 @@
       },
       {
         "benchmark": "livecodebench",
-        "score": 72.0,
+        "score": null,
         "unit": "%",
         "as_written": "LiveCodeBench, UI 1/1/2025 to 5/1/2025 (results table, p.4)",
         "section": "capabilities"
@@ -44383,7 +44383,7 @@
       },
       {
         "benchmark": "eclektic",
-        "score": 24.1,
+        "score": null,
         "unit": "%",
         "as_written": "ECLeKTic multilingual, full cross-lingual set, net score (correct minus incorrect), closed book, printed on chart. Correct 35.4, unsure 53.3, incorrect 11.3 (6.3.3.1, Figures 6.3.3.1.A and B)",
         "section": "hallucination"
@@ -47315,7 +47315,7 @@
       },
       {
         "benchmark": "eclektic",
-        "score": 39.0,
+        "score": null,
         "unit": "%",
         "as_written": "ECLeKTic full cross-lingual set (multilingual factual questions), net score 0.39 (correct minus incorrect), closed book, printed on chart (6.3.3.1, Figure 6.3.3.1.B)",
         "section": "hallucination"
@@ -49270,7 +49270,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 52.37,
         "unit": "%",
         "as_written": "bbeh, Pass@1 (Table 5)",
@@ -49649,7 +49649,7 @@
       },
       {
         "benchmark": "claw-eval-mm",
-        "score": 51.0,
+        "score": null,
         "unit": "%",
         "as_written": "Claw-Eval [Multimodal], Pass^3 (Table 3)",
         "section": "capabilities"
@@ -53490,7 +53490,7 @@
       },
       {
         "benchmark": "fortress",
-        "score": 78.0,
+        "score": null,
         "unit": "%",
         "as_written": "FORTRESS Adversarial, Benign 95.9 (5. Evaluations table, effort 0.99)",
         "section": "safety"
@@ -54605,7 +54605,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 64.8,
         "unit": "%",
         "as_written": "Big Bench Extra Hard micro avg, thinking (Table 5)",
@@ -54786,7 +54786,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 74.4,
         "unit": "%",
         "as_written": "Big Bench Extra Hard micro avg, thinking (Table 5)",
@@ -55171,7 +55171,7 @@
       },
       {
         "benchmark": "saas-bench",
-        "score": 60.1,
+        "score": null,
         "unit": "%",
         "as_written": "SaaS-Bench (Table 2)",
         "section": "capabilities"
@@ -55184,8 +55184,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "harvey-lab-legal-agent-benchmark",
-        "score": null,
+        "benchmark": "harvey-lab-aa",
+        "score": 94.6,
         "unit": "%",
         "as_written": "Harvey Lab-AA, criterion pass rate, cited from Artificial Analysis (Table 2)",
         "section": "capabilities"
@@ -55668,7 +55668,7 @@
       },
       {
         "benchmark": "fortress",
-        "score": 71.6,
+        "score": null,
         "unit": "%",
         "as_written": "FORTRESS adversarial, benign 96.9 (5. Evaluations table)",
         "section": "safety"
@@ -55751,7 +55751,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "big-bench-extra-hard",
+        "benchmark": "big-bench-extra-hard-micro",
         "score": 47.6,
         "unit": "%",
         "as_written": "BigBench EH, TD, 40.0 no-think (Table 3)",
@@ -56887,7 +56887,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "harvey-lab-legal-agent-benchmark",
+        "benchmark": "harvey-lab-aa",
         "score": 90.7,
         "unit": "%",
         "as_written": "Harvey LAB-AA (results table, p.5)",
@@ -62047,7 +62047,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "harvey-lab-legal-agent-benchmark",
+        "benchmark": "harvey-lab-aa-1-1",
         "score": 13.1,
         "unit": "%",
         "as_written": "Harvey LAB-AA, Artificial Analysis version 1.1 with hallucination checks, Muse Wonder Full (max) (capabilities table image, page 3)",
@@ -62292,7 +62292,7 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "harvey-lab-legal-agent-benchmark",
+        "benchmark": "harvey-lab-aa-1-1",
         "score": 10.0,
         "unit": "%",
         "as_written": "Harvey LAB-AA, Artificial Analysis version 1.1 with hallucination checks, Muse Wonder (max) (capabilities table image, page 3)",
@@ -65148,6 +65148,377 @@
         "score": 66.0,
         "unit": "%",
         "as_written": "OSWorld-Verified Overall, 50 steps, OS 87.5, Office 64.9, Daily 65.0, Professional 66.3, Workflow 62.7 (Table 2)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "anthropic-claude-fable-5-2-system-card-2026-11-09",
+    "lab": "anthropic",
+    "model": "claude-fable-5-2",
+    "date": "2026-11-09",
+    "kind": "system-card",
+    "doc": "system card",
+    "title": "System Card: Claude Fable 5.2 & Claude Mythos 5.2",
+    "url": "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf",
+    "release": "anthropic-claude-fable-5-2-mythos-5-2-2026-11-09",
+    "notes": "264 pages, dated November 9, 2026, covering safeguards, agentic safety, fallback alignment, and Fable capabilities. Following Fable 5.1, this record excludes Mythos-only capabilities, alignment, and welfare, bespoke red teaming, deployment monitoring, and duplicate multi-agent settings.",
+    "results": [
+      {
+        "benchmark": "cyber-harm-coverage-anthropic",
+        "score": 99.8,
+        "unit": "%",
+        "as_written": "Cyber coverage evaluation, overall recall of deployed classifiers, 99.8% printed on chart (Figure 3.4.1.A)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "vulnerability-finding-evaluations-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Violative and defensive vulnerability discovery, classifier flag rate: violative binary discovery 98.4%, defensive source code discovery 5.3%. No overall score (Figure 3.4.2.A)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "rewind-attacker-anthropic",
+        "score": 3.9,
+        "unit": "%",
+        "as_written": "Cyber adversarial robustness evaluation, rewind-attacker, mean attack success rate across 133 tasks, 3.9% printed on chart, lower is better (Figure 3.5.1.A)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "single-turn-harmful-request-evaluations-anthropic",
+        "score": 93.74,
+        "unit": "%",
+        "as_written": "Single-turn harmful request evaluations, overall harmless response rate, API without a system prompt, thinking enabled, seven languages. Claude.ai 96.49% (Table 4.1.1.A)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "single-turn-benign-request-evaluations-anthropic",
+        "score": 0,
+        "unit": "%",
+        "as_written": "Single-turn benign request evaluations, overall refusal rate, API without a system prompt. Claude.ai 0.19%, lower is better (Table 4.1.2.A)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "multi-turn-testing-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Multi-turn testing, appropriate response rates by risk area, API without a system prompt and claude.ai. No overall score. API biological weapons 88%, tracking and surveillance 61%, suicide and self-harm 52% (Figure 4.1.3.A and Sections 4.1.3 to 4.1.4)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "child-safety-evaluations-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Child safety, API without a system prompt: single-turn harmless rate 99.31%, benign refusal rate 0%, multi-turn appropriate response rate 90%. Claude.ai: 99.17%, 0%, 100%. No overall (Tables 4.2.A and 4.2.B)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "suicide-and-self-harm-evaluations-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Suicide and self-harm, API without a system prompt: single-turn harmless rate 97.37%, benign refusal rate 0%, multi-turn appropriate response rate 52%. Claude.ai: 99.72%, 0.45%, 100%. No overall (Tables 4.3.1.A and 4.3.1.B)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "disordered-eating-evaluations-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Disordered eating, single-turn harmless rate 94.48% and benign refusal rate 0% on the API without a system prompt. Claude.ai: 99.50% and 0%. Multi-turn testing is qualitative. No overall (Table 4.3.2.A)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "anthropic-political-even-handedness-eval",
+        "score": 99.1,
+        "unit": "%",
+        "as_written": "Pairwise political bias, even-handedness, API without a system prompt. Claude.ai 99.7%. Opposing perspectives: API 38.4%, claude.ai 69.3% (Figures 4.4.1.A to 4.4.1.C and Section 4.4.1)",
+        "section": "bias"
+      },
+      {
+        "benchmark": "bbq-bias-benchmark-for-qa",
+        "score": 89.69,
+        "unit": "%",
+        "as_written": "BBQ disambiguated accuracy, no system prompt, thinking enabled. Ambiguous accuracy >99.99%, disambiguated bias -0.65%, ambiguous bias 0.00% (Tables 4.4.2.A and 4.4.2.B)",
+        "section": "bias"
+      },
+      {
+        "benchmark": "election-integrity-evaluations-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Election integrity, single-turn harmless rate 100% and benign refusal rate 0% on both API and claude.ai. Multi-turn appropriate response rate: API 85%, claude.ai 90%. No overall (Tables 4.4.3.A and 4.4.3.B)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "malicious-use-of-claude-code-anthropic",
+        "score": 82.8,
+        "unit": "%",
+        "as_written": "Malicious use of Claude Code, refusal rate on 61 malicious prompts over 10 trials, Claude Code system prompt, no additional safeguards, row labeled Mythos 5.2. Dual-use and benign success rate 98.2%. Retained under the shared-model agentic safety convention (Table 5.1.1.A)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "malicious-computer-use-anthropic",
+        "score": 88.39,
+        "unit": "%",
+        "as_written": "Malicious computer use, refusal rate on 112 tasks without mitigations, thinking enabled, row labeled Mythos 5.2. Retained under the shared-model agentic safety convention (Table 5.1.2.A)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "malicious-agentic-influence-campaigns-34-point-anthropic",
+        "score": null,
+        "unit": "score",
+        "as_written": "Agentic influence operation evaluation, helpful-only Mythos 5.2 variant, median campaign execution score at highest difficulty: voter suppression 23.5, domestic polarization 24.5. Updated 34-point rubric, two runs of eight attempts, completed attempts only. No overall (Table 5.1.3.A)",
+        "section": "persuasion"
+      },
+      {
+        "benchmark": "gray-swan-ipi-arena-benchmark",
+        "score": 0.3,
+        "unit": "%",
+        "as_written": "Gray Swan IPI benchmark (Q1+Q2 2026), attack success rate at k=1 with blocking classifiers and Opus 4.8 fallbacks, without prompt injection protections, extended thinking. At k=10: 2.90%, k=15: 4.09% (Figure 5.2.1.A and Section 5.2.1)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "prompt-injection-adaptive-coding-anthropic",
+        "score": 89.82,
+        "unit": "%",
+        "as_written": "Shade indirect prompt injection in coding, attempt-level attack success rate without prompt injection probes, adaptive thinking, with cyber classifier fallbacks, 40/40 scenarios. With probes 28.16%. Of valid responses, 99.46% were served by Opus 4.8 (Table 5.2.2.1.A)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "prompt-injection-adaptive-computer-use-anthropic",
+        "score": 1.43,
+        "unit": "%",
+        "as_written": "Shade indirect prompt injection in computer use, attempt-level attack success rate without prompt injection probes, adaptive thinking, with fallbacks, 3/14 scenarios. With probes 0.25%. Fallbacks account for 38 of 40 successful attacks without probes (Table 5.2.2.2.A)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "anthropic-automated-behavioral-audit",
+        "score": null,
+        "unit": "score",
+        "as_written": "Automated behavioral audit with safety fallbacks enabled, row labeled Mythos 5.2 + safety measures, about 500 investigations, 1 to 10 scale, lower is better: biological weapons uplift 1.02, chemical weapons uplift 1.01, disallowed cyberoffense 1.19, cooperation with misuse 2.49, targeted violence assistance 1.30, explosive weapons uplift 1.07. No overall (Figure 6.4.10.A)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "swe-bench-pro",
+        "score": 93.0,
+        "unit": "%",
+        "as_written": "SWE-bench Pro, adaptive thinking max effort, average of five trials (Table 8.1.A and Section 8.2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-multilingual",
+        "score": 96.6,
+        "unit": "%",
+        "as_written": "SWE-bench Multilingual, adaptive thinking max effort, average of five trials (Table 8.1.A and Section 8.2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-multimodal",
+        "score": 74.1,
+        "unit": "%",
+        "as_written": "SWE-bench Multimodal, adaptive thinking max effort, average of five trials (Table 8.1.A and Section 8.2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "deepswe",
+        "score": 74.3,
+        "unit": "%",
+        "as_written": "DeepSWE v1.1, 113 tasks, average of five trials (Section 8.3)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 49.1,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0, mean@5, Xhigh effort, headline best-performing effort. Max effort 45.7%, or 44.4% if timed-out attempts score zero. High effort 45.3% (Table 8.1.A and Section 8.4)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 67.6,
+        "unit": "%",
+        "as_written": "Terminal-Bench 4.0, safeguards enabled, Claude Code --bare, max effort, no internet access, 10 trials per task. Mythos-only score 70.5% excluded (Section 8.5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 74.6,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1, safeguards enabled, Claude Code --bare, max effort, no internet access, 10 trials per task. Mythos-only score 75.3% excluded (Section 8.6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "frontierswe",
+        "score": 69.9,
+        "unit": "%",
+        "as_written": "FrontierSWE v2, max effort, Proximal harness, mean over five trials per task, 20-hour budget (Section 8.7)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cursorbench-4-0",
+        "score": 60.0,
+        "unit": "%",
+        "as_written": "CursorBench 4.0, max effort, independently run by Cursor. Additional prompt and harness improvements may prevent comparisons with earlier system cards (Section 8.8)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "stem-professor-bench-anthropic",
+        "score": 61.8,
+        "unit": "%",
+        "as_written": "STEM Professor Bench, mean score at max effort over up to nine attempts on 64 problems, 61.8% printed on chart (Figure 8.9.A)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "programbench-tests-passed",
+        "score": 85.6,
+        "unit": "%",
+        "as_written": "ProgramBench hidden-test pass rate on 166 golden tasks, single agent, mini-swe-agent harness, no time limit, 1M-token window. Showing remaining context raises the score to 91.6% (Section 8.10.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 73.2,
+        "unit": "%",
+        "as_written": "Humanity's Last Exam, no tools, adaptive thinking max effort, 980k-token budget. With tools 74.2%. The no-tools setting follows Fable 5.1's document record (Table 8.1.A and Section 8.11.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "draco",
+        "score": 87.7,
+        "unit": "%",
+        "as_written": "DRACO normalized score at max effort, 980k-token budget, Claude Opus 4.6 judge, five grading runs, 87.7% printed on chart. Judge and harness differ from the original paper (Figure 8.11.2.A)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "wandr",
+        "score": 82.1,
+        "unit": "%",
+        "as_written": "WANDR relaxed score, soft F1, max effort, 500 tasks, 980k-token budget, offline web index and Claude Opus 4.6 judge. Not comparable with the original live-web harness (Table 8.1.A and Section 8.11.3)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "fermat-last-theorem-lean-anthropic",
+        "score": 35.0,
+        "unit": "%",
+        "as_written": "Fermat's Last Theorem in Lean, 100-agent team, best weighted proof-completion score within 18 hours, mean of three runs, 0.35 converted to 35%. Single agent 0.12. The 1,000-agent result uses an earlier snapshot and is excluded (Section 8.12.3 and Figure 8.12.3.A)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 73.4,
+        "unit": "%",
+        "as_written": "Chartography, no tools, adaptive thinking max effort, five runs, Gemini 3.5 Flash grader. With tools 91.6%. Separate contamination check: original charts 74.3%, redrawn charts 76.4% (Table 8.1.A and Section 8.13.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "benchcad-2-1",
+        "score": 75.4,
+        "unit": "%",
+        "as_written": "BenchCAD 2.1 Core, 100 problems, no tools, adaptive thinking max effort, official scorer, five runs, up to 60 rounds and 500k output tokens. With tools 83.5%, without round or token limits. Not comparable with BenchCAD 1.0 (Section 8.13.2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "osworld-2-1-offline",
+        "score": 89.3,
+        "unit": "%",
+        "as_written": "OSWorld 2.1 offline set, partial score, max effort, 82 tasks, Pass@1 averaged over five attempts. Strict pass rate 54.6%. Official offline set, no internet access (Table 8.1.A and Section 8.13.3)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "officeqa",
+        "score": 83.4,
+        "unit": "%",
+        "as_written": "OfficeQA, relevant documents preselected and provided as extracted text, max effort, mean of five runs (Section 8.14.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "officeqa-pro",
+        "score": 72.9,
+        "unit": "%",
+        "as_written": "OfficeQA Pro, harder 133-question subset, relevant documents preselected and provided as extracted text, max effort, mean of five runs (Section 8.14.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "harvey-lab-aa-1-1",
+        "score": 7.2,
+        "unit": "%",
+        "as_written": "Harvey LAB-AA v1.1, hallucination-gated all-pass rate, max effort, updated private set, three judges. All-pass before hallucination gate 10.8%. Not comparable with v1.0 or Harvey public LAB (Section 8.14.2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gdpval-aa-v2-1",
+        "score": 1831,
+        "unit": "elo",
+        "as_written": "GDPval-AA v2.1 Elo, max effort, independently run by Artificial Analysis. Xhigh 1751. Anchored to DeepSeek-V4.1-Flash (max) at 1600 (Table 8.1.A and Section 8.14.3)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aa-briefcase-1-1",
+        "score": 1785,
+        "unit": "elo",
+        "as_written": "AA-Briefcase v1.1 Elo, max effort, independently run by Artificial Analysis. Xhigh 1738. Rubric pass rate 66.1%. Elo follows the Fable 5.1 record (Table 8.1.A and Section 8.14.4)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 51.4,
+        "unit": "%",
+        "as_written": "AutomationBench, Zapier private 1.0.6 set, 657 tasks per effort level, max effort, default API fallbacks. Scores from October 8, 2026 run (Table 8.1.A and Section 8.14.5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "real-world-finance-v2-anthropic",
+        "score": 1637,
+        "unit": "elo",
+        "as_written": "Real-World Finance v2 Elo, max effort, one attempt at each of 123 tasks. Opus 5.5 grader gaps divided by 2.61 and anchored to Fable 5 at 1374. Six unfinished tasks excluded from headline comparison (Section 8.14.6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "remote-labor-index",
+        "score": 41.3,
+        "unit": "%",
+        "as_written": "Remote Labor Index, automation rate, 99 of 240 projects, default High effort, 200k context, 32k output tokens per response, independently run by Scale AI (Table 8.1.A and Section 8.14.7)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-agi-3",
+        "score": 79.26,
+        "unit": "%",
+        "as_written": "ARC-AGI-3, verified headline Standard harness score, High effort. Provider Adapter 97.72% at High. At Max: Standard 65.66%, Provider Adapter 94.90% (Section 8.15)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "healthbench",
+        "score": 59.6,
+        "unit": "%",
+        "as_written": "HealthBench, length-adjusted score at max effort, following Fable 5.1 metric choice. Raw score 58.8%. Independently run by Artificial Analysis with GPT-4.1 grader and fallbacks. Not comparable with prior Anthropic-graded runs (Section 8.16.1)",
+        "section": "health"
+      },
+      {
+        "benchmark": "healthbench-professional",
+        "score": 67.7,
+        "unit": "%",
+        "as_written": "HealthBench Professional, length-adjusted score at max effort, following Fable 5.1 metric choice. Raw score 71.1%. Artificial Analysis run with GPT-5.4 low-effort grader and fallbacks. Not comparable with prior Anthropic-graded runs (Section 8.16.2)",
+        "section": "health"
+      },
+      {
+        "benchmark": "physicianbench",
+        "score": 64.4,
+        "unit": "%",
+        "as_written": "PhysicianBench, attempt pass rate at max effort over 100 tasks and five attempts each, Claude Opus 5 grader, fallbacks enabled (Section 8.16.3)",
+        "section": "health"
+      },
+      {
+        "benchmark": "global-mmlu",
+        "score": 96.0,
+        "unit": "%",
+        "as_written": "GMMLU, average accuracy across 42 languages, max effort, single trial, no tools or custom system prompt. Blocked or unanswered questions excluded, 0.5% for Fable 5.2 (Section 8.17.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "milu",
+        "score": 94.1,
+        "unit": "%",
+        "as_written": "MILU, average accuracy across 11 languages, max effort, five trials, no tools or custom system prompt. Blocked or unanswered questions excluded, under 0.2% (Section 8.17.2)",
         "section": "capabilities"
       }
     ]
