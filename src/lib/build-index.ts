@@ -4,7 +4,8 @@
 // An index here is a weighted average. Each chosen benchmark's scores go on a 0 to 100 scale first: percentages
 // stay as they are, other units (Elo, ratings, raw scores) are rescaled from the lowest to the highest model on
 // that benchmark, and a benchmark where lower is better is flipped. A model needs scores on at least `need` of the
-// chosen benchmarks. Its index averages the ones it has, with their weights rescaled to sum to one.
+// chosen benchmarks. A test it lacks gets a predicted score, so skipping a hard test doesn't lift a model: on the
+// logit scale, each score is fit as the model's ability minus the test's difficulty (see `fitAbility`).
 
 export type Source = 'ind' | 'lab' | 'all';
 
@@ -56,6 +57,8 @@ export interface Row {
   first: number;
   /** Per chosen benchmark, the 0 to 100 score that went in (or null). */
   parts: (number | null)[];
+  /** Per chosen benchmark, the predicted score used where `parts` is null (null where the model has a score). */
+  est: (number | null)[];
 }
 
 export interface Result {
@@ -165,26 +168,33 @@ export function compute(mx: Matrix, st: State): Result {
   const cols = used.map((u) => mx.normalized(u.bi, st.src));
   const models = new Set<number>();
   for (const c of cols) for (const m of c.keys()) models.add(m);
-  const elig: { m: number; parts: (number | null)[]; has: number }[] = [];
-  for (const m of models) {
-    const parts = cols.map((c) => c.get(m) ?? null);
-    const has = parts.filter((x) => x !== null).length;
-    if (has >= need) elig.push({ m, parts, has });
-  }
-  const score = (parts: (number | null)[], w: number[]) => {
+  // every model with a score helps place the tests' difficulties, and only models with enough tests are ranked
+  const all = [...models].map((m) => cols.map((c) => c.get(m) ?? null));
+  const base = used.map((u) => u.share);
+  const fit = fitAbility(all, base);
+  // a predicted score stays within the real scores on that test, so a near-solved test can't predict past its best
+  const floor = cols.map((c) => Math.min(...c.values()));
+  const ceil = cols.map((c) => Math.max(...c.values()));
+  const guess = (th: number, j: number) => Math.min(ceil[j], Math.max(floor[j], fromLogit(th - fit.d[j])));
+  const ids = [...models];
+  const elig: { m: number; parts: (number | null)[]; z: (number | null)[]; has: number }[] = [];
+  ids.forEach((m, i) => {
+    const has = all[i].filter((x) => x !== null).length;
+    if (has >= need) elig.push({ m, parts: all[i], z: fit.z[i], has });
+  });
+  // the index: the weighted average of the model's scores, with a predicted score for each test it lacks
+  const score = (e: (typeof elig)[number], w: number[]) => {
+    const th = ability(e.z, w, fit.d);
     let s = 0;
     let ws = 0;
-    for (let j = 0; j < parts.length; j++) {
-      const x = parts[j];
-      if (x === null) continue;
-      s += w[j] * x;
+    for (let j = 0; j < w.length; j++) {
+      s += w[j] * (e.parts[j] ?? guess(th, j));
       ws += w[j];
     }
     return ws ? s / ws : 0;
   };
-  const base = used.map((u) => u.share);
   const name = (m: number) => mx.p.models[m][1];
-  const values = elig.map((e) => score(e.parts, base));
+  const values = elig.map((e) => score(e, base));
   const order = elig.map((_, i) => i).sort((a, b) => values[b] - values[a] || elig[b].has - elig[a].has || name(elig[a].m).localeCompare(name(elig[b].m)));
   const rank = new Array<number>(elig.length);
   order.forEach((i, r) => (rank[i] = r + 1));
@@ -199,7 +209,7 @@ export function compute(mx: Matrix, st: State): Result {
   const idx = elig.map((_, i) => i);
   for (let d = 0; d < draws; d++) {
     const w = base.map((x) => x * (0.5 + rand()));
-    for (let i = 0; i < elig.length; i++) vals[i] = score(elig[i].parts, w);
+    for (let i = 0; i < elig.length; i++) vals[i] = score(elig[i], w);
     idx.sort((a, b) => vals[b] - vals[a] || elig[b].has - elig[a].has);
     for (let r = 0; r < idx.length; r++) {
       const i = idx[r];
@@ -217,8 +227,67 @@ export function compute(mx: Matrix, st: State): Result {
     hi: hi[i],
     first: draws ? first[i] / draws : 1,
     parts: elig[i].parts,
+    est: elig[i].parts.map((x, j) => (x === null ? guess(ability(elig[i].z, base, fit.d), j) : null)),
   }));
   return { rows, used, empty, need, draws };
+}
+
+// ---- predicted scores -----------------------------------------------------------------------------
+// A score of x on the 0 to 100 scale becomes log(x / (100 - x)), clipped at 1 and 99 so a perfect or zero score
+// stays finite. On that scale each score is fit as the model's ability minus the test's difficulty, by weighted
+// least squares. A test's difficulty comes from every model that took it, so a model's predicted score on a test
+// it lacks reflects how hard that test was for the models that took it. Difficulties average zero.
+
+const toLogit = (x: number) => {
+  const q = Math.min(0.99, Math.max(0.01, x / 100));
+  return Math.log(q / (1 - q));
+};
+const fromLogit = (z: number) => 100 / (1 + Math.exp(-z));
+
+/** A model's ability: the weighted mean of its logit scores, each lifted by its test's difficulty. */
+function ability(z: (number | null)[], w: number[], d: Float64Array): number {
+  let s = 0;
+  let ws = 0;
+  for (let j = 0; j < z.length; j++) {
+    const v = z[j];
+    if (v === null) continue;
+    s += w[j] * (v + d[j]);
+    ws += w[j];
+  }
+  return ws ? s / ws : 0;
+}
+
+/** Fits test difficulties by alternating between abilities and difficulties until they settle. */
+export function fitAbility(parts: (number | null)[][], w: number[], iters = 200): { d: Float64Array; z: (number | null)[][] } {
+  const k = w.length;
+  const z = parts.map((ps) => ps.map((x) => (x === null ? null : toLogit(x))));
+  const d = new Float64Array(k);
+  const th = new Float64Array(z.length);
+  for (let it = 0; it < iters; it++) {
+    for (let i = 0; i < z.length; i++) th[i] = ability(z[i], w, d);
+    let move = 0;
+    let mean = 0;
+    const next = new Float64Array(k);
+    for (let j = 0; j < k; j++) {
+      let s = 0;
+      let c = 0;
+      for (let i = 0; i < z.length; i++) {
+        const v = z[i][j];
+        if (v === null) continue;
+        s += th[i] - v;
+        c++;
+      }
+      next[j] = c ? s / c : 0;
+      mean += next[j];
+    }
+    mean /= k || 1;
+    for (let j = 0; j < k; j++) {
+      move = Math.max(move, Math.abs(next[j] - mean - d[j]));
+      d[j] = next[j] - mean;
+    }
+    if (move < 1e-6) break;
+  }
+  return { d, z };
 }
 
 // ---- the URL --------------------------------------------------------------------------------------
@@ -239,7 +308,7 @@ export function readState(search: string, fallback: State): State {
   const need = q.get('need');
   return {
     b,
-    src: src === 'lab' || src === 'all' ? src : 'ind',
+    src: src === 'ind' || src === 'lab' || src === 'all' ? src : fallback.src,
     need: need === 'all' ? 'all' : need && Number(need) >= 1 ? Math.round(Number(need)) : fallback.need,
   };
 }
@@ -249,8 +318,8 @@ export function writeState(st: State): string {
   return `?t=${t}&src=${st.src}&need=${st.need}`;
 }
 
-/** The default minimum: about two thirds of the chosen tests, at least one. */
-export const defaultNeed = (k: number) => Math.max(1, Math.ceil(k * 0.66));
+/** The default minimum: half the chosen tests, rounded up. */
+export const defaultNeed = (k: number) => Math.max(1, Math.ceil(k / 2));
 
 // ---- markup ---------------------------------------------------------------------------------------
 // Plain strings, so the server render and the page script draw the same thing. Every name is escaped.
@@ -276,7 +345,7 @@ function modelName(p: Payload, m: number): string {
 
 function partsLine(p: Payload, r: Row, res: Result): string {
   return res.used
-    .map((u, j) => `${p.benches[u.bi][1]} ${r.parts[j] === null ? 'no score' : fmt(r.parts[j]!)}`)
+    .map((u, j) => `${p.benches[u.bi][1]} ${r.parts[j] === null ? `${fmt(r.est[j]!)} predicted` : fmt(r.parts[j]!)}`)
     .join(', ');
 }
 
@@ -307,7 +376,7 @@ export function columns(p: Payload, res: Result, limit = 40): string {
     .map((r) => {
       const [, name, lab] = p.models[r.m];
       const h = Math.max(2, (r.value / 100) * H);
-      return `<li class="bm-col"><span class="bm-hit" tabindex="0" data-tv="${fmt(r.value)}" data-tn="${r.rank}. ${esc(name)}" data-ts="${esc(`${r.has} of ${res.used.length} tests. ${partsLine(p, r, res)}`)}"><span class="bm-plot"><span class="bm-v num">${fmt(r.value)}</span><span class="bm-bar" style="height:${h.toFixed(1)}px;background:${labColor(p, lab)}"></span></span>${mark(p, lab)}<span class="bm-n">${esc(name)}</span></span></li>`;
+      return `<li class="bm-col"><span class="bm-hit" data-tv="${fmt(r.value)}" data-tn="${r.rank}. ${esc(name)}" data-ts="${esc(`${r.has} of ${res.used.length} tests. ${partsLine(p, r, res)}`)}"><span class="bm-plot"><span class="bm-v num">${fmt(r.value)}</span><span class="bm-bar" style="height:${h.toFixed(1)}px;background:${labColor(p, lab)}"></span></span>${mark(p, lab)}<span class="bm-cn">${esc(name)}</span></span></li>`;
     })
     .join('')}</ol>`;
 }
@@ -333,7 +402,7 @@ export function table(p: Payload, res: Result, limit = 50): string {
       const lab = p.models[r.m][2];
       const one = r.lo === r.hi;
       const strip = `<span class="bm-range" role="img" aria-label="Rank ${r.lo} at best, ${r.hi} at worst"><span class="bm-track"></span>${one ? '' : `<span class="bm-seg" style="left:${x(r.lo).toFixed(1)}%;width:${(x(r.hi) - x(r.lo)).toFixed(1)}%"></span>`}<span class="bm-dot" style="left:${x(r.lo).toFixed(1)}%"></span>${one ? '' : `<span class="bm-dot" style="left:${x(r.hi).toFixed(1)}%"></span>`}</span>`;
-      return `<tr${i >= limit ? ' class="later" hidden' : ''}><td class="r rank num">${r.rank}</td><td class="who">${mark(p, lab)}<span class="nm">${modelName(p, r.m)}</span></td><td class="r num"><b>${fmt(r.value)}</b></td><td class="r num has">${r.has} of ${res.used.length}</td><td class="r num lo">${r.lo}</td><td class="rng">${strip}</td><td class="num hi">${r.hi}</td><td class="r num first">${r.first > 0 ? pct(r.first) : ''}</td></tr>`;
+      return `<tr${i >= limit ? ' class="later" hidden' : ''}><td class="r rank num">${r.rank}</td><td class="who">${mark(p, lab)}<span class="nm">${modelName(p, r.m)}</span></td><td class="r num"><b>${fmt(r.value)}</b></td><td class="r num has">${r.has} of ${res.used.length}</td><td class="r num lo">${r.lo}</td><td class="rng">${strip}</td><td class="num hi">${r.hi}</td><td class="r num first">${r.first >= 0.005 ? pct(r.first) : r.first > 0 ? '<1%' : ''}</td></tr>`;
     })
     .join('');
   return `<table class="t bm-t"><thead><tr><th class="r">Rank</th><th>Model</th><th class="r">Index</th><th class="r has">Tests</th><th class="r lo">Best</th><th class="rng">Rank range</th><th class="hi">Worst</th><th class="r first">First</th></tr></thead><tbody>${body}</tbody></table>${n > limit ? `<button type="button" class="bm-more" data-more-t>Show all ${n} models</button>` : ''}`;

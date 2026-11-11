@@ -11,7 +11,7 @@ import { COLOR_MARKS, MONO_MARKS } from './marks.ts';
 import { score as fmtScore } from './format.ts';
 import { AREAS, areaOf } from './taxonomy.ts';
 import type { Benchmark } from './types.ts';
-import type { RData, RLab, RBench, RRel } from './reporting-view.ts';
+import { FRONTIER, FRONTIER_LABS, type RData, type RLab, type RBench, type RRel } from './reporting-view.ts';
 
 export const FIRST_YEAR = '2024';
 /** Categories a capability count leaves out by default: they are mostly safety testing in system cards. */
@@ -49,11 +49,11 @@ function familyNames(): Map<string, string> {
 }
 
 /** Launch posts and linked documents counted in a year, and how many documents had no launch post to join. */
-export function sourceCounts(year: string) {
-  const posts = cards.filter((c) => c.date.startsWith(year));
+export function sourceCounts(year: string, labs?: ReadonlySet<string>) {
+  const posts = cards.filter((c) => c.date.startsWith(year) && (!labs || labs.has(c.lab)));
   const ids = new Set(posts.map((c) => c.id));
   const docs = systemCards.filter((d) => d.release && ids.has(d.release));
-  const loose = systemCards.filter((d) => !d.release && d.date.startsWith(year)).length;
+  const loose = systemCards.filter((d) => !d.release && d.date.startsWith(year) && (!labs || labs.has(d.lab))).length;
   return { posts: posts.length, docs: docs.length, loose };
 }
 
@@ -108,13 +108,22 @@ export function reportingData(): RData {
     rels.push({ lab: lab(c.lab), model: m?.name ?? c.model, href: featuredIds.has(c.model) ? `/models/${c.model}/` : null, date: c.date, r: [...seen.entries()] });
   }
   const years = [...new Set(rels.map((r) => r.date.slice(0, 4)))].filter((y) => y >= FIRST_YEAR).sort().reverse();
-  const sources = Object.fromEntries(years.map((y) => [y, sourceCounts(y)]));
+  const sources = Object.fromEntries(
+    years.map((y) => {
+      const all = sourceCounts(y);
+      const fr = sourceCounts(y, FRONTIER);
+      return [y, { posts: all.posts, docs: all.docs, frontier: { posts: fr.posts, docs: fr.docs } }];
+    }),
+  );
   cached = { labs, benches, rels, years, areas: AREAS.map((a) => ({ id: a.id, name: a.name })), sources, asOf: AS_OF };
   return cached;
 }
 
 /** The year the page opens on: the latest one. */
 export const currentYear = () => reportingData().years[0];
+
+/** The frontier labs' names, in the list's order. */
+export const frontierNames = () => FRONTIER_LABS.map((id) => labById.get(id)?.name ?? id);
 
 /** One benchmark family's name, link, area and maker, from the version labs named most. */
 function famInfo(d: RData) {
@@ -156,14 +165,14 @@ export interface BumpLine {
  * posts with scores that year), then each quarter from 2025. Ties go to the one more labs named, then by name.
  * Safety evaluations are left out, and versions count as one benchmark.
  */
-export function bump(): { cols: BumpCol[]; lines: BumpLine[] } {
+export function bump(labs?: ReadonlySet<string>): { cols: BumpCol[]; lines: BumpLine[] } {
   const d = reportingData();
   const info = famInfo(d);
   const colOf = (date: string) => (date < '2025' ? (date >= FIRST_YEAR ? FIRST_YEAR : null) : `${date.slice(0, 4)}-${Math.floor((Number(date.slice(5, 7)) - 1) / 3) + 1}`);
   const tally = new Map<string, { n: number; cnt: Map<string, number>; labs: Map<string, Set<number>> }>();
   for (const rel of d.rels) {
     const c = colOf(rel.date);
-    if (!c) continue;
+    if (!c || (labs && !labs.has(d.labs[rel.lab].id))) continue;
     const keys = new Set(rel.r.map(([bi]) => d.benches[bi]).filter((b) => !b.safety).map((b) => b.fam));
     if (!keys.size) continue;
     const t = tally.get(c) ?? tally.set(c, { n: 0, cnt: new Map(), labs: new Map() }).get(c)!;
@@ -240,7 +249,7 @@ const dayGap = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(
  * have named, with the day each lab first named it. Only benchmarks released after our launch posts grow dense,
  * so the first lab we see is the first lab there was. Safety evaluations are left out.
  */
-export function spread(minLabs = 5): SpreadLine[] {
+export function spread(minLabs = 5, labs?: ReadonlySet<string>): SpreadLine[] {
   const d = reportingData();
   const info = famInfo(d);
   const released = familyReleased();
@@ -248,7 +257,7 @@ export function spread(minLabs = 5): SpreadLine[] {
   for (const rel of d.rels)
     for (const [bi] of rel.r) {
       const b = d.benches[bi];
-      if (b.safety) continue;
+      if (b.safety || (labs && !labs.has(d.labs[rel.lab].id))) continue;
       const m = first.get(b.fam) ?? first.set(b.fam, new Map()).get(b.fam)!;
       const f = m.get(rel.lab);
       if (!f || rel.date < f) m.set(rel.lab, rel.date);

@@ -179,6 +179,9 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: 80px;
+  /* With a mouse, macOS shows a scrollbar that takes about 15px. Keeping its space at all times means a page
+     never narrows when the scrollbar appears, as a long page streams in or after a click to a longer page. */
+  scrollbar-gutter: stable;
 }
 body {
   margin: 0;

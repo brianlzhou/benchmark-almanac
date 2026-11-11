@@ -4,7 +4,7 @@ import AreaShare from '../components/AreaShare.astro';
 import LabMark from '../components/LabMark.astro';
 import { cards, systemCards, labById, modelById, benchById } from '../lib/data.ts';
 import { SECTION_NAMES, SECTION_ORDER } from '../lib/taxonomy.ts';
-import { fullDate } from '../lib/format.ts';
+import { fullDate, shortNum, humanDate } from '../lib/format.ts';
 import { featuredIds } from '../lib/routes.ts';
 
 // what each card added and dropped against the same lab's previous card of the same size
@@ -19,6 +19,31 @@ const rows = cards.map((c) => {
 rows.reverse();
 const years = [...new Set(rows.map((r) => r.c.date.slice(0, 4)))];
 const labCount = new Set(cards.map((c) => c.lab)).size;
+const docLabs = new Set([...cards, ...systemCards].map((c) => c.lab)).size;
+// the newest launch post, as "November 9th"
+const newest = humanDate(cards.reduce((m, c) => (c.date > m ? c.date : m), '')).replace(/, \d{4}$/, '');
+// The same for the longer documents: what each one added and dropped against the same lab's previous
+// document of the same kind, for a model of the same size. An addendum reports only what changed, so it is
+// compared with the last full document and never counts as one.
+const tierOf = new Map(cards.map((c) => [c.model, c.tier === 'small' || c.tier === 'open-weights' ? 'small' : 'big']));
+const cardById = new Map(cards.map((c) => [c.id, c]));
+const prevDoc = new Map<string, string[]>();
+const docDiff = new Map<string, { added: Set<string>; dropped: string[]; first: boolean; addendum: boolean }>();
+for (const d of systemCards) {
+  const addendum = /addendum/.test(d.doc ?? '');
+  const kind = (d.doc ?? 'system card').replace(' addendum', '');
+  const size = tierOf.get(d.model) ?? (d.release ? tierOf.get(cardById.get(d.release)?.model ?? '') : undefined) ?? 'big';
+  const k = `${d.lab}|${kind}|${size}`;
+  const names = d.results.map((r) => r.benchmark);
+  const p = prevDoc.get(k);
+  if (!addendum) prevDoc.set(k, names);
+  docDiff.set(d.id, {
+    added: new Set(p ? names.filter((n) => !p.includes(n)) : []),
+    dropped: p && !addendum ? p.filter((n) => !names.includes(n)) : [],
+    first: !p,
+    addendum,
+  });
+}
 // the longer documents published with each launch post, and what they add to its headline results
 const docsFor = (c: (typeof cards)[number]) => {
   const head = new Set(c.results.map((r) => r.benchmark));
@@ -29,7 +54,9 @@ const docsFor = (c: (typeof cards)[number]) => {
       const bySec = new Map<string, typeof extra>();
       for (const r of extra) bySec.set(r.section ?? 'other', [...(bySec.get(r.section ?? 'other') ?? []), r]);
       const rank = (k: string) => (SECTION_ORDER.includes(k) ? SECTION_ORDER.indexOf(k) : 99);
-      return { d, extra, groups: [...bySec.entries()].sort(([a], [b]) => rank(a) - rank(b)) };
+      const diff = docDiff.get(d.id)!;
+      const fresh = extra.filter((r) => diff.added.has(r.benchmark)).length;
+      return { d, extra, fresh, diff, groups: [...bySec.entries()].sort(([a], [b]) => rank(a) - rank(b)) };
     });
 };
 ---
@@ -39,16 +66,16 @@ const docsFor = (c: (typeof cards)[number]) => {
     <header class="head">
       <h1>Model cards</h1>
       <p class="lede">
-        The {cards.length} launch posts from {labCount} labs that the almanac reads, newest first. For each, the benchmarks in its headline results, and what changed from the same lab's previous post.{systemCards.length > 0 && ` Under each, the ${systemCards.length > 1 ? 'system cards, model cards and technical reports' : 'system card'} published with it, and the evaluations they add.`}
+        We've read {cards.length} launch posts{systemCards.length > 0 && ` and ${systemCards.length} system cards`} from {docLabs} labs, with the newest one posted on {newest}. Each post shows the benchmarks it headlines and what changed since that lab's last one.{systemCards.length > 0 && ' System cards, model cards and technical reports can be found under their launch post.'}
+      </p>
+      <p class="key">
+        <span class="new-dot" aria-hidden="true"></span>
+        A green dot means the benchmark is new since that lab’s last post or document of the same kind, for a model of the same size.
       </p>
     </header>
 
     <section>
-      <div class="sh">
-        <h2>What the cards measure</h2>
-        <p>Share of headline benchmarks by area, every half year, across all {labCount} labs.</p>
-      </div>
-      <AreaShare />
+      <AreaShare heading sub={`What all ${labCount} labs headline in their launch posts, by area, every half year.`} />
     </section>
 
     {
@@ -80,6 +107,7 @@ const docsFor = (c: (typeof cards)[number]) => {
                         {c.results.map((r) => (
                           <li class:list={{ add: !first && added.includes(r.benchmark) }}>
                             <a href={`/benchmarks/${r.benchmark}/`}>{benchById.get(r.benchmark)?.name}</a>
+                            {r.score != null && <span class="sc">{shortNum(r.score)}</span>}
                           </li>
                         ))}
                       </ul>
@@ -88,20 +116,21 @@ const docsFor = (c: (typeof cards)[number]) => {
                           Dropped since the last post:{' '}
                           {dropped.map((b, i) => (
                             <>
-                              <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>
-                              {i < dropped.length - 1 ? ', ' : ''}
+                              <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name}</a>{i < dropped.length - 1 ? ', ' : ''}
                             </>
                           ))}
                         </p>
                       )}
-                      {docsFor(c).map(({ d, extra, groups }) => (
+                      {docsFor(c).map(({ d, extra, fresh, diff, groups }) => (
                         <details class="sys">
                           <summary>
                             <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
                             <span>
-                              Its {d.doc ?? 'system card'} adds {extra.length} {extra.length === 1 ? 'evaluation' : 'evaluations'}
+                              {d.model !== c.model && `${modelById.get(d.model)?.name ?? d.model}: `}Its {d.doc ?? 'system card'} adds {extra.length} {extra.length === 1 ? 'evaluation' : 'evaluations'}
                             </span>
-                            <span class="muted">{d.results.length} results in all</span>
+                            {fresh > 0 && <span class="fresh">{fresh} new</span>}
+                            {diff.dropped.length > 0 && <span class="muted">{diff.dropped.length} dropped</span>}
+                            <span class="muted">{d.results.length} {d.results.length === 1 ? 'result' : 'results'} in all</span>
                           </summary>
                           <div class="sys-b">
                             {d.url && <a class="doc" href={d.url}>{d.title ?? 'Read the document'}</a>}
@@ -110,13 +139,24 @@ const docsFor = (c: (typeof cards)[number]) => {
                                 <h3>{SECTION_NAMES[sec] ?? sec}</h3>
                                 <ul class="chips">
                                   {rs.map((r) => (
-                                    <li>
+                                    <li class:list={{ add: !diff.first && diff.added.has(r.benchmark) }}>
                                       <a href={`/benchmarks/${r.benchmark}/`}>{benchById.get(r.benchmark)?.name ?? r.benchmark}</a>
+                                      {r.score != null && <span class="sc">{shortNum(r.score)}</span>}
                                     </li>
                                   ))}
                                 </ul>
                               </div>
                             ))}
+                            {diff.dropped.length > 0 && (
+                              <p class="dropped">
+                                Dropped since the lab’s previous {(d.doc ?? 'system card').replace(' addendum', '')}:{' '}
+                                {diff.dropped.map((b, i) => (
+                                  <>
+                                    <a href={`/benchmarks/${b}/`}>{benchById.get(b)?.name ?? b}</a>{i < diff.dropped.length - 1 ? ', ' : ''}
+                                  </>
+                                ))}
+                              </p>
+                            )}
                           </div>
                         </details>
                       ))}
@@ -170,25 +210,62 @@ const docsFor = (c: (typeof cards)[number]) => {
     text-decoration: underline !important;
     text-decoration-color: var(--ink-4) !important;
   }
+  /* each benchmark sits in its own soft tile, with its score in mono, so long lists stay easy to scan */
   .chips {
     list-style: none;
     padding: 0;
-    margin: 12px 0 0;
+    margin: 10px 0 0;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
   }
   .chips li {
-    background: var(--panel);
-    border-radius: 7px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    min-width: 0;
     padding: 5px 9px;
-    font-size: 13px;
-  }
-  .chips li.add {
-    box-shadow: inset 0 0 0 1px var(--status-good);
+    border-radius: 7px;
+    background: var(--panel);
+    font-size: 13.5px;
+    line-height: 1.3;
   }
   .chips a {
+    color: var(--ink);
     text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .chips a:hover {
+    text-decoration: underline;
+  }
+  .chips .sc {
+    font: 400 12px var(--mono);
+    color: var(--ink-3);
+  }
+  /* new since the lab's previous post: a green dot before the name */
+  .chips li.add a::before,
+  .new-dot {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 6px 1px 0;
+    border-radius: 50%;
+    background: var(--status-good);
+    vertical-align: middle;
+  }
+  .key {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+  .fresh {
+    color: var(--status-good);
+    font-weight: 500;
   }
   .dropped {
     margin-top: 10px;

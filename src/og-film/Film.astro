@@ -11,8 +11,9 @@ export function getStaticPaths() {
 }
 
 const s = scene(Astro.params.scene!);
-const ticks = yearTicks(s.front[0], s.front[1]);
-const total = s.total.toLocaleString('en-US');
+const ticks = s.ticks ?? yearTicks(s.front[0], s.front[1]);
+const total = s.total?.toLocaleString('en-US') ?? '';
+const box = s.box ?? BOX;
 ---
 
 <!doctype html>
@@ -34,31 +35,42 @@ const total = s.total.toLocaleString('en-US');
       data-from={Date.parse(FROM)}
       data-to={Date.parse(AS_OF)}
       data-starts={JSON.stringify(s.starts.map((x) => Math.round(x * 10) / 10))}
+      data-stops={s.stops ? JSON.stringify(s.stops.map((p) => [Math.round(p.x * 10) / 10, p.label])) : undefined}
+      data-rank={s.rank ? JSON.stringify(s.rank) : undefined}
     >
-      <h1 set:html={s.title} />
-      <p class="sub">{s.subtitle}</p>
-      <div class="count" data-count>
-        <span class="n"><span class="sizer" aria-hidden="true">{total}</span><span class="val" data-n>{total}</span></span>
-        <span class="u">{s.unit}</span>
-      </div>
+      <h1 set:html={s.title} style={s.titleSize ? `font-size:${s.titleSize}px` : undefined} />
+      <p class="sub" style={s.subTop ? `top:${s.subTop}px` : undefined}>{s.subtitle}</p>
+      {
+        s.total !== undefined && (
+          <div class="count" data-count>
+            <span class="n">
+              <span class="sizer" aria-hidden="true">{total}</span>
+              <span class="val" data-n>{total}</span>
+            </span>
+            <span class="u">{s.unit}</span>
+          </div>
+        )
+      }
       <svg class="chart" width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
         <defs>
           <clipPath id="front"><rect data-front-clip x="0" y="0" width={W} height={H}></rect></clipPath>
+          {s.defs && <Fragment set:html={s.defs} />}
         </defs>
         <g class="grid">
-          {ticks.map((t) => <line x1={t.x} x2={t.x} y1={BOX.y0 - 6} y2={BOX.y1} />)}
+          {ticks.map((t) => <line x1={t.x} x2={t.x} y1={box.y0 - 6} y2={box.y1} />)}
         </g>
         <g class="ticks">
-          {ticks.map((t) => <text x={t.x + 6} y={BOX.y1 + 24}>{t.label}</text>)}
+          {ticks.map((t) => <text x={t.x + 6} y={box.y1 + 24}>{t.label}</text>)}
         </g>
+        {s.fixed && <g class="fixed" set:html={s.fixed} />}
         <g data-data>
           <g clip-path="url(#front)" set:html={s.reveal} />
           <g data-dots set:html={s.dots} />
         </g>
         <g data-end set:html={s.end} />
         <g data-cursor opacity="0">
-          <line data-cursor-line x1="0" x2="0" y1={BOX.y0 - 10} y2={BOX.y1}></line>
-          <text data-cursor-text x="0" y={BOX.y0 - 18} text-anchor="middle"></text>
+          <line data-cursor-line x1="0" x2="0" y1={box.y0 - 10} y2={box.y1}></line>
+          <text data-cursor-text x="0" y={box.y0 - 18} text-anchor="middle"></text>
         </g>
       </svg>
       <footer>
@@ -69,6 +81,8 @@ const total = s.total.toLocaleString('en-US');
               <li>
                 {l.shape ? (
                   <svg width="12" height="12" viewBox="0 0 10 10" style={`color:${l.color};fill:currentColor`} set:html={l.shape} />
+                ) : l.line ? (
+                  <b class="line" style={`background:${l.color}`} />
                 ) : (
                   <i style={`background:${l.color}`} />
                 )}
@@ -101,9 +115,19 @@ const total = s.total.toLocaleString('en-US');
       const cursor = stage.querySelector<SVGGElement>('[data-cursor]')!;
       const cline = stage.querySelector<SVGLineElement>('[data-cursor-line]')!;
       const ctext = stage.querySelector<SVGTextElement>('[data-cursor-text]')!;
-      const count = stage.querySelector<HTMLElement>('[data-count]')!;
-      const n = stage.querySelector<HTMLElement>('[data-n]')!;
-      const dots = [...stage.querySelectorAll<SVGCircleElement>('[data-dots] circle')].map((c) => ({ c, x: Number(c.dataset.x), r: Number(c.dataset.r) }));
+      const count = stage.querySelector<HTMLElement>('[data-count]');
+      const n = stage.querySelector<HTMLElement>('[data-n]');
+      // a scene whose axis is not time names each point the cursor passes ("6 months", "10 labs")
+      const stops: [number, string][] | null = stage.dataset.stops ? JSON.parse(stage.dataset.stops) : null;
+      // circles grow their radius; other marks (the reporting scene's shapes) scale about their center
+      const dots = [...stage.querySelectorAll<SVGGraphicsElement>('[data-dots] [data-x]')].map((c) => ({
+        c,
+        x: Number(c.dataset.x),
+        r: Number(c.dataset.r),
+        cx: Number(c.dataset.cx),
+        cy: Number(c.dataset.cy),
+        circle: c.tagName === 'circle',
+      }));
 
       const clamp = (v: number) => Math.max(0, Math.min(1, v));
       // The front leaves at a brisk pace and slows into the present. Most benchmarks and models arrived in
@@ -152,14 +176,27 @@ const total = s.total.toLocaleString('en-US');
         data.setAttribute('opacity', dataO.toFixed(3));
         end.setAttribute('opacity', endO.toFixed(3));
         cursor.setAttribute('opacity', cursorO.toFixed(3));
-        count.style.opacity = countO.toFixed(3);
-        n.textContent = (counted < 0 ? passed(fx) : counted).toLocaleString('en-US');
-        for (const p of dots) p.c.setAttribute('r', (p.r * pop(clamp((fx - p.x) / 16))).toFixed(2));
+        if (count && n) {
+          count.style.opacity = countO.toFixed(3);
+          n.textContent = (counted < 0 ? passed(fx) : counted).toLocaleString('en-US');
+        }
+        for (const p of dots) {
+          const k = pop(clamp((fx - p.x) / 16));
+          if (p.circle) p.c.setAttribute('r', (p.r * k).toFixed(2));
+          else if (k === 1) p.c.removeAttribute('transform');
+          else p.c.setAttribute('transform', `translate(${p.cx} ${p.cy}) scale(${k.toFixed(3)}) translate(${-p.cx} ${-p.cy})`);
+        }
         cline.setAttribute('x1', fx.toFixed(1));
         cline.setAttribute('x2', fx.toFixed(1));
-        ctext.setAttribute('x', Math.max(x0 + 32, Math.min(x1 - 32, fx)).toFixed(1));
-        const at = new Date(from + f * (to - from));
-        ctext.textContent = `${MONTHS[at.getUTCMonth()]} ${at.getUTCFullYear()}`;
+        ctext.setAttribute('x', Math.max(x0 + 40, Math.min(x1 - 40, fx)).toFixed(1));
+        if (stops) {
+          let label = stops[0][1];
+          for (const [sx, l] of stops) if (sx <= fx + 0.5) label = l;
+          ctext.textContent = label;
+        } else {
+          const at = new Date(from + f * (to - from));
+          ctext.textContent = `${MONTHS[at.getUTCMonth()]} ${at.getUTCFullYear()}`;
+        }
       }
 
       const ready = (async () => {
@@ -170,14 +207,98 @@ const total = s.total.toLocaleString('en-US');
           const full = el.textContent ?? '';
           for (let k = full.length; k > 4 && el.getComputedTextLength() > max; k--) el.textContent = `${full.slice(0, k - 1).trimEnd()}…`;
         }
+        // the build scene names a weight segment only when its name fits inside it
+        for (const el of stage.querySelectorAll<SVGTextElement>('text.seg')) el.dataset.len = String(el.getComputedTextLength());
+        rank?.seek(0);
         return [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/["']/g, ''));
       })();
-      Object.assign(window, { film: { duration: DURATION, fps: 30, poster: 0, seek, ready } });
-      seek(0);
+
+      // ---- rank mode (the build scene): the weights shift, then the ranking glides into its new order ----
+      type RankFilm = { states: { caption: string; shares: number[]; rank: number[]; value: number[] }[]; rows: number; max: number };
+      const rank = stage.dataset.rank ? rankFilm(JSON.parse(stage.dataset.rank) as RankFilm) : null;
+      function rankFilm(R: RankFilm) {
+        const RDUR = 10;
+        const MORPH = 0.6; // the weight bar moves
+        const GLIDE = 0.6; // then the rows move, and their values count
+        const n = R.states.length;
+        // each visit: when it starts, from which weighting, to which. The film ends where it started.
+        const visits = n >= 3 ? [1.6, 4.5, 7.4].map((t, i) => ({ t, a: i, b: (i + 1) % 3 })) : n === 2 ? [2, 6].map((t, i) => ({ t, a: i, b: (i + 1) % 2 })) : [];
+        const X0 = 64;
+        const BW = 1072;
+        const TOP = 322;
+        const ROW = 41;
+        const BAR0 = X0 + 360;
+        const BARW = 1136 - 96 - BAR0;
+        const segs = [...stage.querySelectorAll<SVGGElement>('[data-seg]')].map((g) => ({ rects: [...g.querySelectorAll('rect')], text: g.querySelector('text')! }));
+        const rows = [...stage.querySelectorAll<SVGGElement>('[data-row]')].map((g) => ({
+          g,
+          rk: g.querySelector<SVGTextElement>('.rk')!,
+          bar: g.querySelector<SVGRectElement>('rect')!,
+          val: g.querySelector<SVGTextElement>('.val')!,
+        }));
+        const cap = stage.querySelector<SVGTextElement>('[data-cap]')!;
+        const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
+        const ease = (k: number) => (k < 0.5 ? 4 * k * k * k : 1 - (-2 * k + 2) ** 3 / 2);
+        function at(t: number) {
+          // where the weights and the rows are at time t: a weighting, or partway from one to the next
+          let w = { a: 0, b: 0, k: 0 };
+          let r = { a: 0, b: 0, k: 0 };
+          let capK = 1;
+          let capText = R.states[0].caption;
+          for (const v of visits) {
+            if (t >= v.t) {
+              const kw = clamp((t - v.t) / MORPH);
+              const kr = clamp((t - v.t - MORPH) / GLIDE);
+              w = { a: v.a, b: v.b, k: ease(kw) };
+              r = { a: v.a, b: v.b, k: ease(kr) };
+              capText = kw < 0.5 ? R.states[v.a].caption : R.states[v.b].caption;
+              capK = Math.abs(kw - 0.5) * 2;
+            }
+          }
+          return { w, r, capK, capText };
+        }
+        function seek(t: number) {
+          t = ((t % RDUR) + RDUR) % RDUR;
+          const { w, r, capK, capText } = at(t);
+          cap.textContent = capText;
+          cap.setAttribute('opacity', capK.toFixed(3));
+          let x = X0;
+          segs.forEach((s, i) => {
+            const share = lerp(R.states[w.a].shares[i], R.states[w.b].shares[i], w.k);
+            const width = Math.max(0, share * BW - 3);
+            for (const rect of s.rects) {
+              rect.setAttribute('x', x.toFixed(1));
+              rect.setAttribute('width', width.toFixed(1));
+            }
+            s.text.setAttribute('x', (x + 9).toFixed(1));
+            s.text.setAttribute('opacity', Number(s.text.dataset.len ?? 1e9) + 18 <= width ? '1' : '0');
+            x += share * BW;
+          });
+          rows.forEach((row, j) => {
+            const ra = R.states[r.a].rank[j];
+            const rb = R.states[r.b].rank[j];
+            const place = lerp(Math.min(ra, R.rows), Math.min(rb, R.rows), r.k);
+            const seen = lerp(ra < R.rows ? 1 : 0, rb < R.rows ? 1 : 0, r.k);
+            const v = lerp(R.states[r.a].value[j], R.states[r.b].value[j], r.k);
+            const width = Math.max(2, (v / R.max) * BARW);
+            row.g.setAttribute('transform', `translate(0 ${(TOP + place * ROW).toFixed(1)})`);
+            row.g.setAttribute('opacity', seen.toFixed(3));
+            row.rk.textContent = String(Math.round(r.k < 0.5 ? ra : rb) + 1);
+            row.bar.setAttribute('width', width.toFixed(1));
+            row.val.setAttribute('x', (BAR0 + width + 10).toFixed(1));
+            row.val.textContent = v.toFixed(1);
+          });
+        }
+        return { seek, duration: RDUR };
+      }
+
+      const run = rank ?? { seek, duration: DURATION };
+      Object.assign(window, { film: { duration: run.duration, fps: 30, poster: 0, seek: run.seek, ready } });
+      run.seek(0);
       if (!location.search.includes('capture')) {
         const t0 = performance.now();
         const tick = (now: number) => {
-          seek((now - t0) / 1000);
+          run.seek((now - t0) / 1000);
           requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
@@ -341,5 +462,83 @@ const total = s.total.toLocaleString('en-US');
     width: 10px;
     height: 10px;
     border-radius: 50%;
+  }
+  .stage .legend b.line {
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    align-self: center;
+  }
+  /* the pace scene: share axis, and the share and year at each line's end */
+  .stage .hgrid {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .stage .fixed .base {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .stage .pv {
+    font: 500 26px var(--mono);
+    fill: var(--ink-3);
+    letter-spacing: -0.02em;
+  }
+  .stage .pv.lead {
+    fill: var(--ink);
+  }
+  .stage .pv .py {
+    font: 400 17px var(--sans);
+    fill: var(--ink-3);
+    letter-spacing: 0;
+  }
+  /* the reporting scene: the page's beeswarm, its area colors and its labels, larger for a small preview */
+  .stage .a-knowledge { color: var(--area-knowledge); }
+  .stage .a-reasoning { color: var(--area-reasoning); }
+  .stage .a-code { color: var(--area-code); }
+  .stage .a-agents { color: var(--area-agents); }
+  .stage .a-work { color: var(--area-work); }
+  .stage .a-multimodal { color: var(--area-multimodal); }
+  .stage .a-safety { color: var(--area-safety); }
+  .stage .a-other { color: var(--area-other); }
+  .stage use {
+    fill: currentColor;
+  }
+  .stage .rp-axl {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .stage .rp-tk {
+    font: 400 13px var(--mono);
+    fill: var(--ink-4);
+  }
+  .stage .rp-at {
+    font: 400 14px var(--sans);
+    fill: var(--ink-3);
+  }
+  .stage .rp-br,
+  .stage .rp-ld {
+    fill: none;
+    stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+  .stage .rp-nb {
+    font: 600 20px var(--mono);
+    fill: var(--ink);
+  }
+  .stage .rp-ns {
+    font: 400 15px var(--sans);
+    fill: var(--ink-2);
+  }
+  .stage .rp-lb {
+    font: 500 15px var(--sans);
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+  .stage .rp-lbn {
+    font: 400 13px var(--mono);
+    fill: var(--ink-3);
   }
 </style>

@@ -158,7 +158,7 @@ const dataset = {
   })(),
   keywords: [...new Set(['AI benchmark', area.name, catName])],
   variableMeasured: { '@type': 'PropertyValue', name: 'Score', unitText: unit },
-  includedInDataCatalog: { '@type': 'DataCatalog', name: 'Benchmark Almanac', url: new URL('/', Astro.site).href },
+  includedInDataCatalog: { '@type': 'DataCatalog', '@id': new URL(`/${CATALOG_ID}`, Astro.site).href, name: SITE_NAME, url: new URL('/', Astro.site).href },
 };
 ---
 

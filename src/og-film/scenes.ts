@@ -1,13 +1,17 @@
-// The link-preview films: three charts from the almanac, drawn at 1200 by 630 so a frame can be filmed
-// as it is. scripts/og-film.ts films them from the dev-only page Film.astro and writes public/og/.
-// Every scene shares one time axis, January 2023 to the data date, so one draw front can reveal it.
-import { AS_OF, benchmarks, eciByModel, labById, models } from '../lib/data.ts';
+// The link-preview films: charts from the almanac, drawn at 1200 by 630 so a frame can be filmed as it is.
+// scripts/og-film.ts films them from the dev-only page Film.astro and writes public/og/. A moving front
+// reveals each chart from left to right. Most scenes run on time since January 2023. The pace scene runs on
+// months since a benchmark's release, and the reporting scene on the number of labs that named a benchmark.
+import { AS_OF, allSummaries, benchmarks, eciByModel, labById, models, SATURATED } from '../lib/data.ts';
 import { leaderRows } from '../lib/leaders.ts';
 import { eciReigns } from '../lib/reigns.ts';
 import { areaOf } from '../lib/taxonomy.ts';
 import { labColor, LAB_SLOTS } from '../lib/palette.ts';
+import { reportingData, currentYear } from '../lib/reporting.ts';
+import { DEFAULT_VIEW } from '../lib/reporting-view.ts';
+import { swarmSvg, heroHead, symbolsSvg, type SwarmOpts } from '../lib/reporting-graphics.ts';
 
-export const SCENES = ['rise', 'index', 'reigns'] as const;
+export const SCENES = ['rise', 'index', 'reigns', 'pace', 'reporting'] as const;
 export type SceneId = (typeof SCENES)[number];
 
 export const W = 1200;
@@ -21,9 +25,11 @@ export interface Scene {
   /** The title, with <em> for the one italic word the page's own heading uses. */
   title: string;
   subtitle: string;
-  /** What the counter counts, and its final value. */
-  unit: string;
-  total: number;
+  /** What the counter counts, and its final value. A scene without a total has no counter. */
+  unit?: string;
+  total?: number;
+  /** Top and bottom of the chart, for the cursor, when not BOX's. */
+  box?: { y0: number; y1: number };
   /** x of each counted item, sorted, so the counter can count the ones the front has passed. */
   starts: number[];
   /** SVG revealed by the moving front: lines and filled areas. */
@@ -34,7 +40,19 @@ export interface Scene {
   end: string;
   /** Left and right edges of the front, when a scene keeps a label column. */
   front: [number, number];
-  legend: { label: string; color: string; shape?: string }[];
+  legend: { label: string; color: string; shape?: string; line?: boolean }[];
+  /** Title size in px, when the title is a long finding. 56 otherwise. */
+  titleSize?: number;
+  /** Where the subtitle starts, under a title of two lines. 124 otherwise. */
+  subTop?: number;
+  /** The tick row under the chart, when the axis is not years. */
+  ticks?: { x: number; label: string }[];
+  /** What the cursor reads at each point the front passes, when it is not a month and year. */
+  stops?: { x: number; label: string }[];
+  /** SVG that never moves: axes and tick labels. */
+  fixed?: string;
+  /** Symbol definitions the marks use. */
+  defs?: string;
 }
 
 const t0 = Date.parse(FROM);
@@ -242,9 +260,169 @@ function reigns(): Scene {
   };
 }
 
+/**
+ * The home page's film: how soon a model passes 85% on a new benchmark, for the benchmarks released in each of the
+ * last three full years. One line per release year, by months since each benchmark came out. A Kaplan-Meier
+ * estimate, so a benchmark no model has passed yet counts as still open, not as a miss. Only the first year shows:
+ * that is where the years differ, and the youngest year has about a year of history.
+ */
+function pace(): Scene {
+  const x0 = 120;
+  const L1 = 930;
+  const y0 = 262;
+  const y1 = BOX.y1;
+  const last = Number(AS_OF.slice(0, 4)) - 1;
+  const years = [last - 2, last - 1, last];
+  const MONTH = 30.4375 * 864e5;
+  const day = (d: string) => Date.parse(d.length === 4 ? `${d}-07-01` : d.length === 7 ? `${d}-01` : d);
+  // the benchmarks labs report: named in three or more launch posts, scored in percent, higher is better
+  const pool = allSummaries().filter((s) => s.cites.length >= 3 && s.b.released && (s.b.unit ?? '%') === '%' && s.b.better !== 'lower');
+  const curves = years.map((yr) => {
+    const items = pool
+      .filter((s) => s.b.released!.startsWith(String(yr)))
+      .map((s) => {
+        const from = day(s.b.released!);
+        const hit = s.frontier.find((p) => p.value >= SATURATED);
+        // a model scored before the benchmark's release date counts as passing it at release
+        return hit ? { t: Math.max(0, (Date.parse(hit.date) - from) / MONTH), hit: true } : { t: (Date.parse(AS_OF) - from) / MONTH, hit: false };
+      });
+    const times = [...new Set(items.filter((i) => i.hit).map((i) => i.t))].filter((t) => t <= 12).sort((a, b) => a - b);
+    let open = 1;
+    const pts: [number, number][] = [[0, 0]];
+    for (const t of times) {
+      const atRisk = items.filter((i) => i.t >= t).length;
+      const passed = items.filter((i) => i.hit && i.t === t).length;
+      open *= 1 - passed / atRisk;
+      pts.push([t, 1 - open]);
+    }
+    return { yr, n: items.length, pts, end: pts.at(-1)![1] };
+  });
+  const top = Math.max(0.1, Math.ceil(Math.max(...curves.map((c) => c.end)) * 10) / 10);
+  const x = (m: number) => x0 + (Math.min(12, m) / 12) * (L1 - x0);
+  const y = (v: number) => y1 - (v / top) * (y1 - y0);
+  const pct = (v: number) => `${Math.round(v * 100)}%`;
+  const ink = ['var(--ink-4)', 'var(--ink-3)', 'var(--ink)'];
+  const path = (pts: [number, number][]) => {
+    let d = `M${n1(x(0))} ${n1(y(0))}`;
+    for (const [t, v] of pts) d += `H${n1(x(t))}V${n1(y(v))}`;
+    return `${d}H${n1(x(12))}`;
+  };
+  const newest = curves.at(-1)!;
+  const reveal = [
+    `<path d="${path(newest.pts)}V${n1(y(0))}H${n1(x(0))}Z" fill="var(--ink)" fill-opacity="0.05"/>`,
+    ...curves.map((c, i) => `<path d="${path(c.pts)}" fill="none" stroke="${ink[i]}" stroke-width="${i === 2 ? 4 : 3}" stroke-linejoin="round"/>`),
+  ].join('');
+  // labels at the end of each line, pushed apart so two close lines keep both labels
+  const ends = curves.map((c, i) => ({ c, i, y: y(c.end) })).sort((a, b) => a.y - b.y);
+  for (let k = 1; k < ends.length; k++) ends[k].y = Math.max(ends[k].y, ends[k - 1].y + 30);
+  const end = ends
+    .map(
+      ({ c, i, y: ly }) =>
+        `<circle cx="${n1(x(12))}" cy="${n1(y(c.end))}" r="6" fill="${ink[i]}" stroke="var(--bg)" stroke-width="2"/>` +
+        `<text x="${n1(x(12) + 18)}" y="${n1(ly + 7)}" class="pv${i === 2 ? ' lead' : ''}">${pct(c.end)}<tspan class="py" dx="9">${c.yr}</tspan></text>`,
+    )
+    .join('');
+  const yt = Array.from({ length: Math.round(top * 10) + 1 }, (_, k) => k / 10);
+  const fixed = yt
+    .map((v) => `<line x1="${x0}" x2="${n1(x(12))}" y1="${n1(y(v))}" y2="${n1(y(v))}" class="${v ? 'hgrid' : 'base'}"/><text x="${x0 - 14}" y="${n1(y(v) + 5)}" class="ytick" text-anchor="end">${pct(v)}</text>`)
+    .join('');
+  const monthLabel = (m: number) => (m === 0 ? 'Release' : m === 12 ? '1 year' : `${m} month${m === 1 ? '' : 's'}`);
+  const rising = curves.every((c, i) => !i || c.end > curves[i - 1].end);
+  const [a, b] = curves;
+  const n = curves.reduce((s, c) => s + c.n, 0);
+  return {
+    id: 'pace',
+    title: `A model passed 85% on ${pct(newest.end)} of ${newest.yr}’s benchmarks within a year`,
+    subtitle: `${rising ? 'Up from' : 'Against'} ${pct(b.end)} of ${b.yr}’s and ${pct(a.end)} of ${a.yr}’s, across the ${n} benchmarks from those years that labs named in three or more launch posts.`,
+    titleSize: 50,
+    subTop: 166,
+    starts: [],
+    reveal,
+    dots: '',
+    end,
+    fixed,
+    front: [x0, L1],
+    box: { y0, y1 },
+    ticks: [0, 3, 6, 9, 12].map((m) => ({ x: x(m), label: monthLabel(m) })),
+    stops: Array.from({ length: 13 }, (_, m) => ({ x: x(m), label: monthLabel(m) })),
+    legend: curves.map((c, i) => ({ label: `Released in ${c.yr}`, color: ink[i], line: true })),
+  };
+}
+
+/**
+ * The reporting page's film: its beeswarm of every benchmark labs named this year, one shape each, placed by how
+ * many labs named it. The shapes arrive from left to right, so the long tail of benchmarks one lab named fills first.
+ * It draws with the page's own code (reporting-graphics.ts) and lifts the shapes out so each can pop in.
+ */
+function reporting(): Scene {
+  const d = reportingData();
+  const v = DEFAULT_VIEW(currentYear());
+  const o: SwarmOpts = { key: 'wide', orient: 'h', W: 1072, len: 990, rk: 2.15, rMax: 22, font: 15, labels: 6 };
+  const svg = swarmSvg(d, v, o);
+  const vb = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+  if (!vb) throw new Error('The reporting swarm drew nothing');
+  const [vw, vh] = [Number(vb[1]), Number(vb[2])];
+  const top = 204;
+  const bottom = 566;
+  const s = Math.min((BOX.x1 - BOX.x0) / vw, (bottom - top) / vh);
+  const X = BOX.x0;
+  const Y = bottom - vh * s;
+  const inner = svg
+    .replace(/^<svg[^>]*>/, '')
+    .replace(/<\/svg>$/, '')
+    .replace(/<a [^>]*>|<\/a>/g, '');
+  const tags = inner.match(/<text\b[^>]*>.*?<\/text>|<(?:line|path|use)\b[^>]*\/>/g) ?? [];
+  const fixed: string[] = [];
+  const end: string[] = [];
+  const dots: string[] = [];
+  const starts: number[] = [];
+  const stops: { x: number; label: string }[] = [];
+  const attr = (t: string, k: string) => Number(t.match(new RegExp(`\\b${k}="(-?[\\d.]+)"`))?.[1] ?? 0);
+  for (const t of tags) {
+    const cls = t.match(/class="([^"]*)"/)?.[1] ?? '';
+    if (t.startsWith('<use')) {
+      const cx = attr(t, 'x') + attr(t, 'width') / 2;
+      const cy = attr(t, 'y') + attr(t, 'height') / 2;
+      const ox = X + cx * s;
+      starts.push(ox);
+      dots.push(t.replace('<use ', `<use data-x="${n1(ox)}" data-cx="${n1(cx)}" data-cy="${n1(cy)}" `));
+    } else if (/\brp-(axl|tk|at)\b/.test(cls)) {
+      fixed.push(t);
+      if (/\brp-tk\b/.test(cls)) {
+        const k = t.replace(/<[^>]+>/g, '');
+        stops.push({ x: X + attr(t, 'x') * s, label: `${k} ${k === '1' ? 'lab' : 'labs'}` });
+      }
+    } else end.push(t);
+  }
+  const g = (parts: string[]) => `<g transform="translate(${n1(X)} ${n1(Y)}) scale(${s.toFixed(4)})">${parts.join('')}</g>`;
+  starts.sort((p, q) => p - q);
+  return {
+    id: 'reporting',
+    title: heroHead(d, v),
+    subtitle: 'One shape per benchmark, placed by how many labs named it, and sized by how many releases did.',
+    titleSize: 44,
+    subTop: 152,
+    unit: 'benchmarks',
+    total: dots.length,
+    starts,
+    reveal: '',
+    dots: g(dots),
+    end: g(end),
+    fixed: g(fixed),
+    defs: symbolsSvg().replace(/^.*?<defs>|<\/defs>.*$/g, ''),
+    front: [starts[0] - 24, starts.at(-1)! + 40],
+    box: { y0: top + 20, y1: bottom - 30 },
+    ticks: [],
+    stops: stops.sort((p, q) => p.x - q.x),
+    legend: AREA_SHORT.map(([id, label]) => ({ label, color: `var(--area-${id})`, shape: AREA_SHAPES[id] })),
+  };
+}
+
 export function scene(id: string): Scene {
   if (id === 'index') return index();
   if (id === 'reigns') return reigns();
+  if (id === 'pace') return pace();
+  if (id === 'reporting') return reporting();
   return rise();
 }
 

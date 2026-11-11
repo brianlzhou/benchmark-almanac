@@ -84,63 +84,83 @@ const famOf = (id: string) => benchById.get(id)?.family ?? id;
 function presets(p: Payload): Preset[] {
   const inBuilder = new Map(p.benches.map((b, i) => [b[0], i]));
   const nInd = (id: string) => (p.ind[inBuilder.get(id)!]?.length ?? 0) / 2;
-  const nLab = (id: string) => (p.lab[inBuilder.get(id)!]?.length ?? 0) / 2;
-  // the member of a family to use: the one with the most independent runs, then the most lab numbers, then the newest
   const members = new Map<string, string[]>();
   for (const [id] of p.benches) (members.get(famOf(id)) ?? members.set(famOf(id), []).get(famOf(id))!).push(id);
-  const pickMember = (fam: string) =>
-    (members.get(fam) ?? [])
-      .slice()
-      .sort((a, b) => nInd(b) - nInd(a) || nLab(b) - nLab(a) || (benchById.get(b)?.released ?? '').localeCompare(benchById.get(a)?.released ?? ''))[0];
 
-  // 1. the families the most labs reported in their 2026 launch posts and documents
+  // which labs reported each family, and how often each version was reported, in this year and in the last 18 months
   const year = AS_OF.slice(0, 4);
-  const labsBy = new Map<string, Set<string>>();
+  const since = new Date(Date.parse(AS_OF) - 548 * 864e5).toISOString().slice(0, 10);
+  const labsYear = new Map<string, Set<string>>();
+  const labsRecent = new Map<string, Set<string>>();
+  const versionYear = new Map<string, number>();
+  const add = (m: Map<string, Set<string>>, k: string, v: string) => (m.get(k) ?? m.set(k, new Set()).get(k)!).add(v);
   for (const d of [...cards, ...systemCards]) {
-    if (!d.date?.startsWith(year)) continue;
+    if (!d.date || d.date < since) continue;
     for (const r of d.results) {
       const b = benchById.get(r.benchmark);
       if (!b || NOT_CAPABILITY.has(areaOf(b.category))) continue;
       const f = famOf(r.benchmark);
-      (labsBy.get(f) ?? labsBy.set(f, new Set()).get(f)!).add(d.lab);
+      add(labsRecent, f, d.lab);
+      if (d.date.startsWith(year)) {
+        add(labsYear, f, d.lab);
+        versionYear.set(r.benchmark, (versionYear.get(r.benchmark) ?? 0) + 1);
+      }
     }
   }
-  const top = [...labsBy.entries()]
-    .filter(([f]) => members.has(f))
-    .sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]))
-    .slice(0, 8);
+
+  // models released in the last six months with a score on this version, from either source. Counting over a
+  // longer window picks old versions (Terminal-Bench 2.0) that the newest models no longer report.
+  const fresh = new Date(Date.parse(AS_OF) - 183 * 864e5).toISOString().slice(0, 10);
+  const recent = (id: string) => {
+    const bi = inBuilder.get(id)!;
+    const seen = new Set<number>();
+    for (const list of [p.ind[bi] ?? [], p.lab[bi] ?? []])
+      for (let i = 0; i < list.length; i += 2) if ((p.models[list[i]][3] ?? '') >= fresh) seen.add(list[i]);
+    return seen.size;
+  };
+  const top = (list: number[]) => {
+    let hi = -Infinity;
+    for (let i = 1; i < list.length; i += 2) hi = Math.max(hi, list[i]);
+    return hi;
+  };
+  // past 92% on independent runs, or past 95% in the labs' own numbers: the test no longer separates top models
+  const nearCeiling = (id: string) => {
+    const [, , , unit, better] = p.benches[inBuilder.get(id)!];
+    return unit === '%' && better > 0 && (top(p.ind[inBuilder.get(id)!] ?? []) >= 92 || top(p.lab[inBuilder.get(id)!] ?? []) >= 95);
+  };
+
+  // 1. the families the most labs reported this year that still separate models, each as the version reported this
+  // year that has independent scores for the most recent models
+  const reported: { f: string; id: string; labs: number }[] = [];
+  for (const [f, s] of [...labsYear.entries()].sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]))) {
+    const v = (members.get(f) ?? [])
+      .filter((id) => (versionYear.get(id) ?? 0) > 0 && nInd(id) >= p.minModels)
+      .sort((a, b) => recent(b) - recent(a) || (versionYear.get(b) ?? 0) - (versionYear.get(a) ?? 0))[0];
+    if (!v || nearCeiling(v)) continue;
+    reported.push({ f, id: v, labs: s.size });
+    if (reported.length === 8) break;
+  }
   const out: Preset[] = [
     {
       id: 'reported',
-      name: `The ${top.length} tests most labs reported in ${year}`,
-      how: `The benchmark families the most labs named in their own ${year} launch posts and system cards, ${top
-        .slice(0, 3)
-        .map(([, s]) => s.size)
-        .join(', ')} and so on labs each, using the version with the most independent runs.`,
-      b: top.map(([f]) => pickMember(f)).filter(Boolean),
+      name: `The ${reported.length} tests most labs reported in ${year}`,
+      how: `The benchmark families named by the most labs in their own ${year} launch posts and system cards (from ${reported[0]?.labs} labs down to ${reported.at(-1)?.labs}), leaving out any where top models score past 92%. Each comes as the version with independent scores for the most recent models.`,
+      b: reported.map((x) => x.id),
     },
   ];
 
-  // 2. one per area: the busiest boards for recent models, one version per family, leaving out tests near the ceiling
-  const since = new Date(Date.parse(AS_OF) - 548 * 864e5).toISOString().slice(0, 10);
-  const recent = (id: string) => {
-    const list = p.ind[inBuilder.get(id)!] ?? [];
-    let n = 0;
-    for (let i = 0; i < list.length; i += 2) if ((p.models[list[i]][3] ?? '') >= since) n++;
-    return n;
-  };
-  const ceiling = (id: string) => {
-    const list = p.ind[inBuilder.get(id)!] ?? [];
-    let top = -Infinity;
-    for (let i = 1; i < list.length; i += 2) top = Math.max(top, list[i]);
-    return top;
-  };
+  // 2. one per area: tests at least two labs reported in the last 18 months, with independent scores for the most
+  // recent models. One version per family. Votes and head-to-head matches stay out, and so do tests near the ceiling.
+  const VOTES = new Set(['preference', 'head-to-head']);
   const area = (pid: string, label: string, keep: (b: Benchmark) => boolean) => {
     const best = new Map<string, { id: string; n: number }>();
-    for (const [id, , , unit, better] of p.benches) {
+    for (const [id] of p.benches) {
       const b = benchById.get(id)!;
-      if (!keep(b) || nInd(id) < p.minModels) continue;
-      if (unit === '%' && better > 0 && ceiling(id) >= 92) continue;
+      // a second metric of one benchmark (ProgramBench and ProgramBench almost solved) counts once
+      if (/-(almost|tests-passed)$/.test(id) && inBuilder.has(id.replace(/-(almost|tests-passed)$/, ''))) continue;
+      if (!keep(b) || VOTES.has(b.scoring ?? '') || nInd(id) < p.minModels) continue;
+      if ((labsRecent.get(famOf(id))?.size ?? 0) < 2) continue;
+      if (nearCeiling(id)) continue;
       const n = recent(id);
       const f = famOf(id);
       if (n > (best.get(f)?.n ?? 0)) best.set(f, { id, n });
@@ -149,7 +169,7 @@ function presets(p: Payload): Preset[] {
     return {
       id: pid,
       name: `${ids.length} ${label} tests`,
-      how: `The ${label} benchmarks with independent scores for the most models released in the last 18 months, one version each, leaving out any where the best score is past 92%.`,
+      how: `${label[0].toUpperCase()}${label.slice(1)} benchmarks that at least two labs reported in the last 18 months, with independent scores for the most recent models. One version each, leaving out vote-based boards and any test past 92%.`,
       b: ids.map((x) => x.id),
     };
   };

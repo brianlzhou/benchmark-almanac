@@ -5,7 +5,7 @@
   "description": "A reference for AI benchmarks: what each one tests, which model cards report it, and how scores have moved.",
   "type": "module",
   "engines": {
-    "node": ">=22.18"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "dev": "astro dev",
@@ -13,6 +13,19 @@
     "preview": "astro preview",
     "check": "node scripts/check-data.ts && astro check",
     "sync:epoch": "node scripts/sync-epoch.ts",
-    "discover": "node scripts/discover.ts"
+    "sync:leaderboards": "node scripts/sync-leaderboards.ts",
+    "discover": "node scripts/discover.ts",
+    "og:film": "node scripts/og-film.ts",
+    "test": "node --test \"scripts/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^22.20.5",
+    "playwright-core": "1.64.1",
+    "typescript": "^6.0.3"
   }
 }

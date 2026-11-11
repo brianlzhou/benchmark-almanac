@@ -1,19 +1,27 @@
 ---
 // What model cards measure: for each half year, the headline benchmarks in launch posts, stacked by area.
 // Two scales: each area's share (to 100%) or the number of mentions. A reader can open an area to see its
-// categories, and a category to see its subcategories. The build draws the default view, and a small script
-// redraws the chart from the JSON below when the reader changes it (src/lib/area-share.ts draws both).
+// categories, and a category to see its subcategories. Two more views stack the same mentions by difficulty
+// level: all areas at once, or one small chart per area. The build draws the default view, and a small script
+// redraws the chart from the JSON below when the reader changes it (src/lib/area-share.ts draws all three).
+// With `heading`, the chart carries its own headline, computed from the data for each view.
 import { cards, benchById, AS_OF } from '../lib/data.ts';
 import type { Card } from '../lib/types.ts';
-import { AREAS, areaOf, CATEGORY_NAMES, SUBCATEGORIES } from '../lib/taxonomy.ts';
-import { renderShare, sizesFor, opens, type ShareData, type ShareNode } from '../lib/area-share.ts';
+import { AREAS, AREA_BY_ID, LEVELS, areaOf, CATEGORY_NAMES, SUBCATEGORIES } from '../lib/taxonomy.ts';
+import { renderShare, sizesFor, opens, values, MINI_FROM, MINI_MIN, type ShareData, type ShareNode, type LevelData } from '../lib/area-share.ts';
 import AreaMark from './AreaMark.astro';
 
 interface Props {
   lab?: string;
   height?: number;
+  /** Show a headline and a line under it, computed for each view. */
+  heading?: boolean;
+  /** The line under the headline in the area view. */
+  sub?: string;
+  /** A link beside the headline. */
+  more?: { href: string; label: string };
 }
-const { lab, height = 380 } = Astro.props;
+const { lab, height = 380, heading = false, sub, more } = Astro.props;
 const src: Card[] = lab ? cards.filter((c) => c.lab === lab) : cards;
 
 // every half year from the first post to the data's date, with none skipped
@@ -26,15 +34,31 @@ for (let k = first; k <= half(AS_OF); k = next(k)) buckets.push(k);
 const lastK = buckets.at(-1)!;
 const f = Math.min(1, (Date.parse(AS_OF) + 864e5 - startOf(lastK)) / (startOf(next(lastK)) - startOf(lastK)));
 const idx = new Map(buckets.map((k, i) => [k, i]));
+const zeros = () => new Array(buckets.length).fill(0);
 
-// counts per subcategory, then the tree areas > categories > subcategories, with empty branches left out
+// counts per subcategory, then the tree areas > categories > subcategories, with empty branches left out.
+// The same mentions also go into counts per level, for all areas and for each area.
 const counts = new Map<string, number[]>();
+const levelIds = LEVELS.map((l) => l.id);
+const byLevel = levelIds.map(zeros);
+const byAreaLevel = new Map(AREAS.map((a) => [a.id, levelIds.map(zeros)]));
+let unrated = 0;
+let mentions = 0;
 for (const c of src)
   for (const r of c.results) {
     const b = benchById.get(r.benchmark);
-    const key = `${areaOf(b?.category)}|${b?.category ?? 'other'}|${b?.subcategory ?? ''}`;
-    if (!counts.has(key)) counts.set(key, new Array(buckets.length).fill(0));
-    counts.get(key)![idx.get(half(c.date))!]++;
+    const area = areaOf(b?.category);
+    const key = `${area}|${b?.category ?? 'other'}|${b?.subcategory ?? ''}`;
+    const i = idx.get(half(c.date))!;
+    if (!counts.has(key)) counts.set(key, zeros());
+    counts.get(key)![i]++;
+    mentions++;
+    const l = levelIds.indexOf(b?.level ?? '');
+    if (l < 0) unrated++;
+    else {
+      byLevel[l][i]++;
+      byAreaLevel.get(area)![l][i]++;
+    }
   }
 const has = (v: number[] | undefined) => !!v && v.some((x) => x > 0);
 const subsOf = (area: string, cat: string): ShareNode[] => {
@@ -42,7 +66,7 @@ const subsOf = (area: string, cat: string): ShareNode[] => {
   const out = known.map((s) => ({ id: s.id, n: s.name, v: counts.get(`${area}|${cat}|${s.id}`) })).filter((s) => has(s.v));
   const rest = [...counts.entries()].filter(([k]) => k.startsWith(`${area}|${cat}|`) && !known.some((s) => k.endsWith(`|${s.id}`)));
   if (rest.length) {
-    const v = new Array(buckets.length).fill(0);
+    const v = zeros();
     for (const [, c] of rest) c.forEach((x, i) => (v[i] += x));
     out.push({ id: `${cat}-unsorted`, n: 'Unsorted', v });
   }
@@ -57,17 +81,123 @@ const root: ShareNode = {
     c: a.categories.map((cat) => ({ id: cat, n: CATEGORY_NAMES[cat] ?? cat, c: subsOf(a.id, cat) })).filter((cat) => cat.c.length),
   })).filter((a) => a.c.length),
 };
+
+// the small charts: every area but Other, which is mostly benchmarks without a level, and only areas with
+// mentions since the small charts start
+const from = Math.max(0, buckets.indexOf(MINI_FROM));
+const lv: LevelData = {
+  ids: levelIds,
+  names: LEVELS.map((l) => l.name),
+  who: LEVELS.map((l) => l.who),
+  all: byLevel,
+  areas: AREAS.filter((a) => a.id !== 'other')
+    .map((a) => ({ id: a.id, n: a.name, v: byAreaLevel.get(a.id)! }))
+    .filter((a) => a.v.some((v) => v.slice(from).some((x) => x > 0))),
+};
 const asOf = new Date(AS_OF).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
-const data: ShareData = { b: buckets, f: Math.round(f * 1000) / 1000, asOf, root };
+const data: ShareData = { b: buckets, f: Math.round(f * 1000) / 1000, asOf, root, lv };
 // the JSON goes out before drawing, which fills in each parent's sums
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
 const svg = sizesFor(height)
   .map((s) => renderShare(data, 'share', [], s))
   .join('');
 const areas = root.c!;
+
+// ---- findings ------------------------------------------------------------------------------------
+// Years compared: the first with at least 300 mentions, and the data's own year.
+const yearOf = (k: string) => k.slice(0, 4);
+const sumYear = (v: number[], y: string) => v.reduce((s, x, i) => (yearOf(buckets[i]) === y ? s + x : s), 0);
+const y1 = AS_OF.slice(0, 4);
+const years = [...new Set(buckets.map(yearOf))];
+const y0 = years.find((y) => y < y1 && areas.reduce((s, a) => s + sumYear(values(a, buckets.length), y), 0) >= 300);
+const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
+const HARD = [levelIds.indexOf('expert'), levelIds.indexOf('frontier')];
+const SHORT: Record<string, string> = {
+  knowledge: 'knowledge tests',
+  reasoning: 'math and science tests',
+  code: 'coding tests',
+  agents: 'agent tests',
+  work: 'professional work tests',
+  multimodal: 'vision, audio and robotics tests',
+  safety: 'safety tests',
+  other: 'other tests',
+};
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+// each area's share of a year's mentions
+const total = (y: string) => areas.reduce((s, a) => s + sumYear(values(a, buckets.length), y), 0);
+const shareOf = (a: ShareNode, y: string) => pct(sumYear(values(a, buckets.length), y), total(y));
+// a level view's share of hard tests among the mentions that have a level
+const hardShare = (v: number[][], y: string) => pct(HARD.reduce((s, l) => s + sumYear(v[l], y), 0), v.reduce((s, x) => s + sumYear(x, y), 0));
+const ratedIn = (v: number[][], y: string) => v.reduce((s, x) => s + sumYear(x, y), 0);
+
+const heads = { area: 'What labs headline in launch posts', level: 'What labs headline, by difficulty', both: 'Each area, by difficulty' };
+const subs = {
+  area: sub ?? 'What labs headline in their launch posts, by area, every half year.',
+  level: 'The same benchmarks by level: who could solve their tasks, from most adults to researchers on open problems.',
+  both: 'Each area by level, every half year since 2024.',
+};
+if (heading && y0) {
+  // area: the area that rose most and the one that fell most
+  const moves = areas.filter((a) => a.id !== 'other').map((a) => ({ a, d: shareOf(a, y1) - shareOf(a, y0) }));
+  const up = moves.reduce((m, x) => (x.d > m.d ? x : m));
+  const down = moves.reduce((m, x) => (x.d < m.d ? x : m));
+  if (up.d > 0 && down.d < 0)
+    heads.area = `${cap(SHORT[up.a.id])} rose from ${shareOf(up.a, y0)}% of what labs headlined in ${y0} to ${shareOf(up.a, y1)}% in ${y1}, as ${SHORT[down.a.id]} fell from ${shareOf(down.a, y0)}% to ${shareOf(down.a, y1)}%`;
+  // level: expert and research-frontier tests, then and now
+  heads.level = `Expert and research-frontier tests went from ${hardShare(byLevel, y0)}% of what labs headlined in ${y0} to ${hardShare(byLevel, y1)}% in ${y1}`;
+  // both: the hardest and the easiest capability area this year, among areas with enough mentions. Safety tests
+  // measure risk, not capability, so they stay out of the comparison, as they do in the index builder's presets.
+  const ranked = lv.areas.filter((a) => a.id !== 'safety' && ratedIn(a.v, y1) >= 100).map((a) => ({ a, h: hardShare(a.v, y1) }));
+  if (ranked.length >= 2) {
+    const hi = ranked.reduce((m, x) => (x.h > m.h ? x : m));
+    const lo = ranked.reduce((m, x) => (x.h < m.h ? x : m));
+    heads.both = `In ${y1}, ${hi.h}% of the ${SHORT[hi.a.id]} labs headlined were expert level or harder, against ${lo.h}% of the ${SHORT[lo.a.id]}`;
+  }
+  // robotics on its own, when its benchmarks are still mostly everyday tasks
+  let robot = 0;
+  let everyday = 0;
+  for (const c of src)
+    if (c.date.startsWith(y1))
+      for (const r of c.results) {
+        const b = benchById.get(r.benchmark);
+        if (b?.category !== 'robotics-embodied') continue;
+        robot++;
+        if (b.level === 'everyday') everyday++;
+      }
+  if (robot >= 10 && everyday / robot >= 0.75)
+    subs.both += ` ${pct(everyday, robot)}% of the robotics tests labs headlined in ${y1} were everyday tasks that most adults can do without training.`;
+}
+const unratedPct = pct(unrated, mentions);
+const hints = {
+  area: 'Select an area to break it down.',
+  level: `A level is who could solve a benchmark's tasks. <a href="/about/#levels">How we set levels</a>.${unratedPct >= 1 ? ` Benchmarks without a level, ${unratedPct}% of mentions, are left out.` : ''}`,
+  both: `Shares leave out a half year with fewer than ${MINI_MIN} benchmarks in that area.`,
+};
+// each small chart's caption: the share of its tests this year that were expert level or harder
+const figure = (a: LevelData['areas'][number]) => (ratedIn(a.v, y1) >= MINI_MIN ? `${hardShare(a.v, y1)}% expert or harder in ${y1}` : '');
+const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
 ---
 
 <figure class="as" data-as data-h={height}>
+  {
+    heading &&
+      (more ? (
+        <div class="sh-row">
+          <div class="sh">
+            <h2 data-head>{heads.area}</h2>
+            <p data-sub>{subs.area}</p>
+          </div>
+          <a class="more" href={more.href}>
+            {more.label}
+          </a>
+        </div>
+      ) : (
+        <div class="sh">
+          <h2 data-head>{heads.area}</h2>
+          <p data-sub>{subs.area}</p>
+        </div>
+      ))
+  }
   <div class="as-bar">
     <div class="as-key" data-key>
       {
@@ -86,43 +216,97 @@ const areas = root.c!;
         )
       }
     </div>
-    <div class="seg" role="group" aria-label="Scale">
-      <button type="button" aria-pressed="true" data-mode="share">Share</button>
-      <button type="button" aria-pressed="false" data-mode="count">Count</button>
+    <div class="as-ctl">
+      <div class="seg" role="group" aria-label="Group by">
+        <button type="button" aria-pressed="true" data-view="area">By area</button>
+        <button type="button" aria-pressed="false" data-view="level">By difficulty</button>
+        <button type="button" aria-pressed="false" data-view="both">Both</button>
+      </div>
+      <div class="seg" role="group" aria-label="Scale">
+        <button type="button" aria-pressed="true" data-mode="share">Share</button>
+        <button type="button" aria-pressed="false" data-mode="count">Count</button>
+      </div>
     </div>
   </div>
-  <p class="as-hint" data-hint>Click an area to break it down.</p>
+  <p class="as-hint" data-hint set:html={hints.area} />
   <div class="as-plot" data-plot set:html={svg} />
+  <div class="as-grid" data-grid hidden>
+    {
+      lv.areas.map((a) => (
+        <div class="as-cell" data-cell={a.id}>
+          <p class="as-cap">
+            <span class="as-cn">
+              <AreaMark area={a.id} size={11} />
+              {AREA_BY_ID.get(a.id)?.name ?? a.n}
+            </span>
+            <span class="as-fig num">{figure(a)}</span>
+          </p>
+          <div class="as-mini" data-mini />
+        </div>
+      ))
+    }
+  </div>
   {f < 1 && <p class="as-hint" data-note hidden>{`The last half year runs through ${asOf}, so its count is partial.`}</p>}
   <span class="sr" aria-live="polite" data-live></span>
   <script type="application/json" is:inline data-json set:html={json} />
+  <script type="application/json" is:inline data-views set:html={views} />
 </figure>
 
 <script>
-  import { renderShare, sizesFor, childAt, opens, nodeAt, fillOf, levelName, type ShareData, type ShareMode } from '../lib/area-share.ts';
+  import { renderShare, renderLevels, renderMini, miniSizes, miniTop, levelKey, sizesFor, childAt, opens, nodeAt, fillOf, levelName, type ShareData, type ShareMode, type ShareView } from '../lib/area-share.ts';
 
   const chevron = '<svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 3 5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const SAID: Record<ShareView, string> = { area: 'by area', level: 'by difficulty level', both: 'by area and difficulty level' };
 
   for (const fig of document.querySelectorAll<HTMLElement>('figure[data-as]')) {
     const raw = fig.querySelector('[data-json]')?.textContent;
     if (!raw) continue;
     const data = JSON.parse(raw) as ShareData;
+    const text = JSON.parse(fig.querySelector('[data-views]')?.textContent ?? '{}') as Record<'heads' | 'subs' | 'hints', Record<ShareView, string>>;
     const sizes = sizesFor(Number(fig.dataset.h) || 380);
+    const mini = miniSizes();
+    const top = miniTop(data);
     const key = fig.querySelector<HTMLElement>('[data-key]')!;
     const plot = fig.querySelector<HTMLElement>('[data-plot]')!;
+    const grid = fig.querySelector<HTMLElement>('[data-grid]');
     const hint = fig.querySelector<HTMLElement>('[data-hint]');
     const note = fig.querySelector<HTMLElement>('[data-note]');
     const live = fig.querySelector<HTMLElement>('[data-live]');
+    const head = fig.querySelector<HTMLElement>('[data-head]');
+    const sub = fig.querySelector<HTMLElement>('[data-sub]');
     const rootKey = key.innerHTML;
     let mode: ShareMode = 'share';
+    let view: ShareView = 'area';
     let path: string[] = [];
     const back: string[][] = [];
 
     const draw = (announce = false) => {
-      plot.innerHTML = sizes.map((s) => renderShare(data, mode, path, s)).join('');
       if (note) note.hidden = mode !== 'count';
-      if (hint) hint.hidden = path.length > 0;
+      if (head && text.heads) head.textContent = text.heads[view];
+      if (sub && text.subs) sub.textContent = text.subs[view];
+      plot.hidden = view === 'both';
+      if (grid) grid.hidden = view !== 'both';
+      if (view === 'level') plot.innerHTML = sizes.map((s) => renderLevels(data, mode, s)).join('');
+      if (view === 'both' && grid)
+        for (const cell of grid.querySelectorAll<HTMLElement>('[data-cell]')) {
+          const box = cell.querySelector<HTMLElement>('[data-mini]');
+          if (box) box.innerHTML = mini.map((s) => renderMini(data, mode, cell.dataset.cell!, s, top)).join('');
+        }
+      if (view !== 'area') {
+        key.innerHTML = levelKey(data.lv);
+        if (hint && text.hints) {
+          hint.hidden = false;
+          hint.innerHTML = text.hints[view];
+        }
+        if (announce && live) live.textContent = `Showing benchmarks ${SAID[view]}`;
+        return;
+      }
+      plot.innerHTML = sizes.map((s) => renderShare(data, mode, path, s)).join('');
+      if (hint) {
+        hint.hidden = path.length > 0;
+        if (text.hints) hint.innerHTML = text.hints.area;
+      }
       if (!path.length) key.innerHTML = rootKey;
       else {
         const node = nodeAt(data.root, path);
@@ -133,18 +317,18 @@ const areas = root.c!;
           `<button type="button" class="as-back" data-back>${chevron}${esc(upName)}</button><b class="as-lvl">${esc(node.n)}</b>` +
           kids
             .map((c, i) => {
-              const { fill, opacity } = fillOf(path, i, kids.length, c.id);
-              const sw = `<span class="as-sw" style="background:${fill};opacity:${opacity}"></span>`;
+              const sw = `<span class="as-sw" style="background:${fillOf(path, i, kids.length, c.id)}"></span>`;
               return opens(c)
                 ? `<button type="button" class="tag as-pick" data-node="${esc(c.id)}" title="Break ${esc(c.n)} down">${sw}${esc(c.n)}</button>`
                 : `<span class="tag">${sw}${esc(c.n)}</span>`;
             })
             .join('');
       }
-      if (announce && live) live.textContent = path.length ? `Showing ${nodeAt(data.root, path).n} by ${levelName(data, path)}` : 'Showing all areas';
+      if (announce && live) live.textContent = path.length ? `Showing ${nodeAt(data.root, path).n} by ${levelName(path)}` : 'Showing all areas';
     };
 
     const open = (id: string) => {
+      if (view !== 'area') return;
       const node = nodeAt(data.root, [...path, id]);
       const more = opens(node);
       if (!more) return;
@@ -161,6 +345,14 @@ const areas = root.c!;
         draw();
       }),
     );
+    fig.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((b) =>
+      b.addEventListener('click', () => {
+        if (view === b.dataset.view) return;
+        view = b.dataset.view as ShareView;
+        fig.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+        draw(true);
+      }),
+    );
     key.addEventListener('click', (e) => {
       const t = e.target as Element;
       if (t.closest('[data-back]')) {
@@ -172,8 +364,9 @@ const areas = root.c!;
       const pick = t.closest<HTMLElement>('[data-node]');
       if (pick) open(pick.dataset.node!);
     });
-    // a click on the chart opens the band under the pointer
+    // a click on the chart opens the band under the pointer, in the area view
     plot.addEventListener('click', (e) => {
+      if (view !== 'area') return;
       const hit = (e.target as Element).closest<SVGRectElement>('rect.hit');
       const svg = hit?.ownerSVGElement;
       const size = sizes.find((s) => svg?.classList.contains(`only-${s.key}`));
@@ -187,8 +380,34 @@ const areas = root.c!;
 </script>
 
 <style is:global>
+  /* difficulty levels: one ink ramp, from everyday tasks to the research frontier. Validated as an ordinal ramp
+     (monotone lightness, visible steps, the lightest step clearing 2:1 on the page) in both themes. */
   .as {
     margin: 0;
+    --lvl-1: #b0b0b9;
+    --lvl-2: #8e8e96;
+    --lvl-3: #6e6e76;
+    --lvl-4: #4f4f56;
+    --lvl-5: #303036;
+    --lvl-6: #0b0a10;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .as {
+      --lvl-1: #47474e;
+      --lvl-2: #65656d;
+      --lvl-3: #85858d;
+      --lvl-4: #a7a7af;
+      --lvl-5: #c9c9d2;
+      --lvl-6: #f4f4fd;
+    }
+  }
+  :root[data-theme='dark'] .as {
+    --lvl-1: #47474e;
+    --lvl-2: #65656d;
+    --lvl-3: #85858d;
+    --lvl-4: #a7a7af;
+    --lvl-5: #c9c9d2;
+    --lvl-6: #f4f4fd;
   }
   .as [hidden] {
     display: none !important;
@@ -208,6 +427,11 @@ const areas = root.c!;
     gap: 6px 20px;
     flex: 1 1 420px;
     min-width: 0;
+  }
+  .as-ctl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
   }
   .as .as-pick {
     font: inherit;
@@ -258,13 +482,65 @@ const areas = root.c!;
     font-size: 13px;
     color: var(--ink-3);
   }
-  .as-plot + .as-hint {
+  .as-hint a {
+    color: var(--ink-2);
+    text-underline-offset: 3px;
+  }
+  .as-plot + .as-hint,
+  .as-grid + .as-hint {
     margin: 8px 0 0;
   }
-  .as-plot svg {
+  .as-plot svg,
+  .as-mini svg {
     width: 100%;
     height: auto;
     overflow: visible;
+  }
+  /* one small chart per area: four columns, two on phones */
+  .as-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 24px;
+    margin-top: 6px;
+  }
+  /* a caption that wraps to more lines pushes nothing: the charts in a row share one baseline */
+  .as-cell {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .as-mini {
+    margin-top: auto;
+  }
+  .as-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 0 0 8px;
+  }
+  .as-cn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: 500 13.5px / 1.25 var(--sans);
+    color: var(--ink);
+  }
+  .as-fig {
+    font: 400 12px / 1.2 var(--mono);
+    color: var(--ink-3);
+    min-height: 1.2em;
+  }
+  @media (max-width: 720px) {
+    .as-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px 16px;
+    }
+    .as-cn {
+      font-size: 12.5px;
+    }
+    .as-fig {
+      font-size: 11px;
+    }
   }
   .as .axis {
     stroke: var(--ink-4);

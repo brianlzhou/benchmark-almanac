@@ -1,8 +1,9 @@
 ---
 // The benchmark charts, like a music chart: the ten benchmarks named in the most releases in each column, rank
 // down the page. A line's thickness is the share of that column's releases that named it, so a benchmark can hold
-// its rank and still fade. Lines take the benchmark's area color. Names sit at both ends, and where a benchmark
-// enters or leaves the top ten. Hovering or focusing a line picks it out.
+// its rank and still fade. Lines take the benchmark's area color, and each quarter's point its area shape (the page
+// defines the shapes once, see reporting-graphics.ts). Names sit at both ends, and where a benchmark enters or
+// leaves the top ten. Hovering or focusing a line picks it out.
 import type { BumpCol, BumpLine } from '../lib/reporting.ts';
 import { textW } from '../lib/reporting-graphics.ts';
 
@@ -79,7 +80,11 @@ const ribbon = (seg: Pt[]) => {
 // labels: the ends of the chart first, then entries and exits inside it where they fit
 const taken: Rect[] = drawn.flatMap((dr) => dr.segs.flat().map((p) => ({ x0: p.x - p.r, y0: p.y - p.r, x1: p.x + p.r, y1: p.y + p.r })));
 const labels: { li: number; x: number; y: number; anchor: 'start' | 'middle' | 'end'; text: string; cls: string }[] = [];
-const place = (li: number, text: string, cands: { x: number; y: number; anchor: 'start' | 'middle' | 'end' }[], size: number, cls: string, force: boolean) => {
+const place = (li: number, full: string, cands: { x: number; y: number; anchor: 'start' | 'middle' | 'end' }[], size: number, cls: string, force: boolean) => {
+  // a name too long for the margin at the chart's ends loses letters to an ellipsis rather than its label
+  let text = full;
+  const room = (c: (typeof cands)[number]) => (c.anchor === 'end' ? c.x : W - c.x) - 2;
+  if (force) while (text.length > 4 && textW(text, size) > room(cands[0])) text = `${text.slice(0, text.length - 2).trimEnd()}…`;
   const w = textW(text, size);
   for (const c of cands) {
     const x0 = c.anchor === 'start' ? c.x : c.anchor === 'end' ? c.x - w : c.x - w / 2;
@@ -117,7 +122,7 @@ for (const { l, li, segs } of drawn)
         'rp-bin',
         false,
       );
-    if (z.i < last && (z.i > a.i || a.i === 0))
+    if (z.i < last && z.i > a.i)
       place(
         li,
         `${l.name} out`,
@@ -179,7 +184,10 @@ const label = `The ten benchmarks named in the most releases, from ${cols[0]?.la
             <>
               {seg.length > 1 && <path d={ribbon(seg)} class={`rp-rib a-${l.area}`} />}
               {seg.map((p) => (
-                <circle cx={f1(p.x)} cy={f1(p.y)} r={f1(p.r)} class={`rp-bnode a-${l.area}`} />
+                <>
+                  <circle cx={f1(p.x)} cy={f1(p.y)} r={f1(p.r + 1.6)} class="rp-bbg" />
+                  <use href={`#rp-s-${l.area}`} x={f1(p.x - p.r * 1.12)} y={f1(p.y - p.r * 1.12)} width={f1(p.r * 2.24)} height={f1(p.r * 2.24)} class={`rp-bnode a-${l.area}`} />
+                </>
               ))}
             </>
           ))}
@@ -223,8 +231,9 @@ const label = `The ten benchmarks named in the most releases, from ${cols[0]?.la
   }
   .rp-bnode {
     fill: currentColor;
-    stroke: var(--bg);
-    stroke-width: 2;
+  }
+  .rp-bbg {
+    fill: var(--bg);
   }
   .rp-bl {
     outline: none;
@@ -251,8 +260,9 @@ const label = `The ten benchmarks named in the most releases, from ${cols[0]?.la
   :global(.rp-hov) .rp-blb:not(.on) {
     opacity: 0.16;
   }
-  .rp-bl:focus-visible .rp-bnode {
+  .rp-bl:focus-visible .rp-bbg {
     stroke: var(--ink);
+    stroke-width: 1.5;
   }
   @media (max-width: 720px) {
     svg {

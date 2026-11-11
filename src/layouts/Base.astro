@@ -31,9 +31,10 @@ const {
 } = Astro.props;
 const fullTitle = title ? `${title} | Benchmark Almanac` : 'Benchmark Almanac: AI benchmarks and who leads them';
 const path = Astro.url.pathname;
-// Three groups: the tests we track, who does well on them, and how the catalog works. The first two sit
-// side by side as two tracks, and the third sits at the right beside search, quieter, since it is about us.
-const NAV = [
+// Three tracks: the tests we track, who does well on them, and what labs say about their own models. Pages about
+// the catalog itself sit in the More menu at the right, beside Submit. A link marked fold moves into More on
+// mid-size screens, so the row never crowds, and the whole row folds into the menu button on small ones.
+const NAV: { id: string; label: string; links: { href: string; label: string; fold?: boolean }[] }[] = [
   {
     id: 'track',
     label: 'What we track',
@@ -49,23 +50,29 @@ const NAV = [
       { href: '/leaders/', label: 'Leaders' },
       { href: '/models/', label: 'Models' },
       { href: '/labs/', label: 'Labs' },
-      { href: '/cards/', label: 'Model cards' },
+      { href: '/build/', label: 'Build an index', fold: true },
     ],
   },
   {
-    id: 'work',
-    label: 'How it works',
+    id: 'say',
+    label: 'What labs report',
     links: [
-      { href: '/new/', label: 'New' },
-      { href: '/audits/', label: 'Audits' },
-      { href: '/sources/', label: 'Sources' },
-      { href: '/submit/', label: 'Submit', cta: true },
+      { href: '/cards/', label: 'Model cards', fold: true },
+      { href: '/reporting/', label: 'Reporting', fold: true },
     ],
   },
 ];
+const MORE = [
+  { href: '/new/', label: 'New this month' },
+  { href: '/audits/', label: 'Audits' },
+  { href: '/sources/', label: 'Sources' },
+];
 // the same links in one list, for the footer
 const NAV_LINKS = NAV.flatMap((g) => g.links);
+const FOLDS = NAV_LINKS.filter((n) => n.fold);
 const current = (href: string) => path.startsWith(href) || (href === '/benchmarks/' && path.startsWith('/categories/'));
+const moreOn = MORE.some((n) => current(n.href));
+const foldOn = FOLDS.some((n) => current(n.href));
 ---
 
 <!doctype html>
@@ -102,13 +109,36 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
             NAV.map((g) => (
               <div class={`ng ng-${g.id}`} role="group" aria-label={g.label}>
                 {g.links.map((n) => (
-                  <a href={n.href} class:list={{ cta: 'cta' in n && n.cta }} aria-current={current(n.href) ? 'page' : undefined}>
+                  <a href={n.href} class:list={{ fold: n.fold }} aria-current={current(n.href) ? 'page' : undefined}>
                     {n.label}
                   </a>
                 ))}
               </div>
             ))
           }
+          <div class="ng ng-work" role="group" aria-label="About the catalog">
+            <button class="more-b" type="button" popovertarget="more" aria-haspopup="true" data-on={moreOn || undefined} data-fold-on={foldOn || undefined}>
+              More
+              <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>
+            </button>
+            <div class="more-p" id="more" popover>
+              {
+                FOLDS.map((n) => (
+                  <a href={n.href} class="fold-c" aria-current={current(n.href) ? 'page' : undefined}>
+                    {n.label}
+                  </a>
+                ))
+              }
+              {
+                MORE.map((n, i) => (
+                  <a href={n.href} class:list={{ first: i === 0 }} aria-current={current(n.href) ? 'page' : undefined}>
+                    {n.label}
+                  </a>
+                ))
+              }
+            </div>
+            <a href="/submit/" class="cta" aria-current={current('/submit/') ? 'page' : undefined}>Submit</a>
+          </div>
         </nav>
         <div class="bar-end">
           <div class="bar-s" data-bar-search>
@@ -204,6 +234,16 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
         },
         true,
       );
+      // the More menu opens in the top layer, so it is placed under its button by hand: right edges aligned
+      const moreB = document.querySelector<HTMLElement>('.more-b');
+      const moreP = document.getElementById('more');
+      moreP?.addEventListener('beforetoggle', (e) => {
+        if ((e as ToggleEvent).newState !== 'open' || !moreB) return;
+        const r = moreB.getBoundingClientRect();
+        moreP.style.top = `${Math.round(r.bottom + 8)}px`;
+        moreP.style.right = `${Math.max(12, Math.round(document.documentElement.clientWidth - r.right))}px`;
+      });
+      moreP?.addEventListener('toggle', (e) => moreB?.setAttribute('aria-expanded', String((e as ToggleEvent).newState === 'open')));
       document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
         const root = document.documentElement;
         const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
@@ -237,16 +277,20 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
     text-decoration: none;
     white-space: nowrap;
   }
-  /* The links keep their full width (about 760px) and the search field gives way first. The widths below
-     come from that: the field fits from 1300px, an icon from 1211px, and the menu folds below that. */
+  /* The row, from widest to narrowest (measured, with room for a 15px scrollbar):
+       1560px and up: every link, the More menu, Submit and the search field
+       1260 to 1559px: the same, with a search icon in place of the field, and tighter spacing below 1440px
+       960 to 1259px: Build an index, Model cards and Reporting move into the More menu
+       below 960px: the whole row folds into the menu button
+     The header keeps its height and the name keeps its place at every step. */
   nav {
     display: flex;
     align-items: center;
     gap: 10px;
     flex: 1 0 auto;
   }
-  /* A group is one track: its links share a tint, and the current page sits raised on it, so the two tracks
-     read as two sets without a rule between them. */
+  /* A group is one track: its links share a tint, and the current page sits raised on it, so the tracks read
+     as separate sets without a rule between them. */
   .ng {
     --seg-on: var(--bg);
     display: flex;
@@ -254,7 +298,8 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
     gap: 2px;
   }
   .ng-track,
-  .ng-lead {
+  .ng-lead,
+  .ng-say {
     padding: 3px;
     border-radius: 11px;
     background: var(--panel);
@@ -271,24 +316,85 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
     color: var(--ink);
   }
   .ng-track a[aria-current='page'],
-  .ng-lead a[aria-current='page'] {
+  .ng-lead a[aria-current='page'],
+  .ng-say a[aria-current='page'] {
     color: var(--ink);
     background: var(--seg-on);
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
   }
-  /* how the catalog works: plain links at the right, beside search, with Submit as the one button */
+  /* pages about the catalog: a quiet More menu at the right, with Submit as the one button */
   .ng-work {
     margin-left: auto;
+    gap: 6px;
   }
-  .ng-work a {
-    font-size: 13.5px;
+  .more-b {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     padding: 6px 9px;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--ink-3);
+    font: 400 13.5px/1.2 var(--sans);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 140ms ease, color 140ms ease;
   }
-  .ng-work a[aria-current='page'] {
+  .more-b:hover,
+  .more-b[aria-expanded='true'] {
+    color: var(--ink);
+    background: var(--panel);
+  }
+  .more-b[data-on] {
     color: var(--ink);
   }
+  .more-b svg {
+    color: var(--ink-4);
+    transition: rotate 140ms ease;
+  }
+  .more-b[aria-expanded='true'] svg {
+    rotate: 180deg;
+  }
+  /* the open menu, in the style of the site's dropdowns. The script places it under the button. */
+  .more-p {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 188px;
+    padding: 6px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--ink);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px var(--line);
+  }
+  .more-p:popover-open {
+    display: flex;
+    animation: find-in 140ms ease-out;
+  }
+  .more-p a {
+    padding: 8px 10px;
+    border-radius: 7px;
+    color: var(--ink-2);
+  }
+  .more-p a:hover,
+  .more-p a:focus-visible {
+    color: var(--ink);
+    background: var(--hover);
+  }
+  .more-p a[aria-current='page'] {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  /* the links that live in the row on wide screens show in the menu only on mid-size ones */
+  .more-p .fold-c {
+    display: none;
+  }
   .ng-work a.cta {
-    margin-left: 6px;
+    font-size: 13.5px;
     padding: 5px 13px;
     border-radius: 999px;
     color: var(--ink-2);
@@ -298,6 +404,33 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
   .ng-work a.cta[aria-current='page'] {
     color: var(--ink);
     box-shadow: inset 0 0 0 1px var(--ink-4);
+  }
+  @media (max-width: 1439px) {
+    .bar-in {
+      gap: 24px;
+    }
+    nav {
+      gap: 8px;
+    }
+    nav a {
+      padding: 6px 9px;
+    }
+  }
+  @media (max-width: 1259px) {
+    nav a.fold,
+    .ng-say {
+      display: none;
+    }
+    .more-p .fold-c {
+      display: block;
+    }
+    /* a space, not a rule, sets the folded links apart from the pages about the catalog */
+    .more-p .first {
+      margin-top: 8px;
+    }
+    .more-b[data-fold-on] {
+      color: var(--ink);
+    }
   }
   @media (prefers-color-scheme: dark) {
     :global(:root:not([data-theme='light'])) .ng {
@@ -521,8 +654,8 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  /* the full nav, the search icon and the theme button need about 1190px. Below that the nav folds into the menu button */
-  @media (max-width: 1210px) {
+  /* the short row needs about 920px with a scrollbar. Below 960px the nav folds into the menu button */
+  @media (max-width: 959px) {
     .bar-in {
       gap: 8px;
     }
@@ -556,9 +689,43 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
     nav[popover]:popover-open {
       display: flex;
     }
-    /* in the menu each group is a column, and space sets the groups apart */
+    /* in the menu each group is a column, and space sets the groups apart. A short window scrolls the menu. */
     nav[popover] {
       align-items: stretch;
+      max-height: calc(100dvh - var(--bar-h) - 12px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    /* the menu lists every page: the folded links sit back in their groups, and More's pages show as a group */
+    nav a.fold,
+    nav[popover] .ng-say {
+      display: flex;
+    }
+    .more-b,
+    .more-p .fold-c {
+      display: none;
+    }
+    .more-p {
+      display: flex;
+      position: static;
+      min-width: 0;
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      animation: none;
+    }
+    .more-p .first {
+      margin-top: 0;
+    }
+    .more-p a {
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--ink-3);
+    }
+    .ng-work {
+      margin-left: 0;
+      gap: 2px;
     }
     nav[popover] .ng {
       flex-direction: column;
@@ -579,6 +746,7 @@ const current = (href: string) => path.startsWith(href) || (href === '/benchmark
     }
     .ng-track a[aria-current='page'],
     .ng-lead a[aria-current='page'],
+    .ng-say a[aria-current='page'],
     .ng-work a[aria-current='page'] {
       background: var(--panel);
       box-shadow: none;

@@ -4,12 +4,12 @@
 // server render and the page script draw the same thing.
 import Base from '../layouts/Base.astro';
 import { buildPayload, MIN_MODELS } from '../lib/build-data.ts';
-import { Matrix, compute, defaultNeed, headline, sub, columns, bars, table, weightBar, chosen, esc, type State } from '../lib/build-index.ts';
+import { Matrix, compute, defaultNeed, headline, sub, columns, bars, table, weightBar, chosen, type State } from '../lib/build-index.ts';
 
 const p = buildPayload();
 const mx = new Matrix(p);
 const preset = p.presets[0];
-const st: State = { b: preset.b.map((id) => ({ id, w: 50 })), src: 'ind', need: defaultNeed(preset.b.length) };
+const st: State = { b: preset.b.map((id) => ({ id, w: 50 })), src: 'all', need: defaultNeed(preset.b.length) };
 const res = compute(mx, st);
 
 // a finding for the explanation: how many of the default mix's top ten can move three places or more
@@ -27,6 +27,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 <Base
   title="Build your own index"
   description="Pick benchmarks and weights to build your own AI capability index, see which model leads it, and see how much the ranking depends on the weights."
+  film="build"
 >
   <div class="page bm-root" data-bm data-presets={presetJson}>
     <header class="head">
@@ -82,12 +83,12 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 
         <div class="bm-block">
           <h2 class="bm-label" id="bm-src">Scores from</h2>
-          <div class="seg bm-seg" role="radiogroup" aria-labelledby="bm-src">
-            <label><input type="radio" name="bm-src" value="ind" checked disabled />Independent runs</label>
+          <div class="seg bm-srcseg" role="radiogroup" aria-labelledby="bm-src">
+            <label><input type="radio" name="bm-src" value="ind" disabled />Independent runs</label>
             <label><input type="radio" name="bm-src" value="lab" disabled />Labs' own numbers</label>
-            <label><input type="radio" name="bm-src" value="all" disabled />Both</label>
+            <label><input type="radio" name="bm-src" value="all" checked disabled />Both</label>
           </div>
-          <p class="bm-how" data-src-how>Official leaderboards and Epoch AI's runs. Labs don't grade their own models here.</p>
+          <p class="bm-how" data-src-how>Independent runs first. Where a model has none on a test, the lab's own number fills the gap.</p>
         </div>
 
         <fieldset class="bm-block bm-need">
@@ -97,7 +98,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
             <span>at least <input class="field num bm-n" type="number" min="1" max={res.used.length} value={res.need} aria-label="Minimum number of tests" data-n disabled /> of the tests</span>
           </label>
           <label class="bm-radio"><input type="radio" name="bm-need" value="all" disabled /><span>every test</span></label>
-          <p class="bm-how">A model with fewer tests is averaged over the ones it has, with their weights rescaled.</p>
+          <p class="bm-how">A test a model lacks gets a predicted score, from how the model did on its other tests and how hard that test was for the models that took it.</p>
         </fieldset>
 
         <div class="bm-block bm-share">
@@ -123,13 +124,13 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       </div>
       <ol class="bm-notes">
         <li>
-          <b>How the index is computed.</b> Each test's scores go on a 0 to 100 scale. Percentages stay as they are. Elo, ratings and other units are rescaled from the lowest model on that test to the highest. A test where lower is better is flipped. A model's index is the weighted average of the tests it has. If it's missing some, the weights of the ones it has are rescaled to sum to 100%.
+          <b>How the index is computed.</b> Each test's scores go on a 0 to 100 scale. Percentages stay as they are. Elo, ratings and other units are rescaled from the lowest model on that test to the highest. A test where lower is better is flipped. A model's index is the weighted average of all the chosen tests. Where a model has no score on a test, a predicted score takes its place. To predict it, we fit each score as the model's ability minus the test's difficulty, on a scale that stretches near 0 and 100, using every model that took any of the tests. So skipping a hard test doesn't lift a model, and taking one doesn't sink it. Hover a model to see which of its scores are predicted.
         </li>
         <li>
-          <b>Why the weights matter.</b> Two indexes built from the same scores can disagree on who's first, because the weights decide which tests count most. Published indexes change their weights from version to version, and every change reorders some models. So the board shows a rank range for each model. We ranked every model again under {400} weightings near yours, each weight scaled up or down by as much as half, and kept its best and worst rank. "First" is the share of those weightings where the model came out on top.
+          <b>Why the weights matter.</b> Two indexes built from the same scores can disagree on who's first, because the weights decide which tests count most. Published indexes change their weights from version to version, and every change reorders some models. So the board shows a rank range for each model. We ranked every model again under 400 weightings near yours, each weight scaled up or down by as much as half, and kept its best and worst rank. "First" is the share of those weightings where the model came out on top.
         </li>
         <li>
-          <b>What it leaves out.</b> Independent runs cover far fewer of the newest models than the labs' own posts do, so a strict mix can leave out a model you'd expect to see. Switch to "Both" to fill gaps with the labs' own numbers, which they ran on their own terms. Averaging over the tests a model has favors models that skipped a hard test. Raising the minimum limits that. Tests rescaled from lowest to highest move with the set of models on them. And no average says how sure we should be about any single score.
+          <b>What it leaves out.</b> Independent runs cover far fewer of the newest models than the labs' own posts do, so the board starts with both. Labs ran their own numbers on their own terms. Switch to "Independent runs" to leave those out, though the newest models may drop off the board. A predicted score assumes a model's strengths carry over from test to test, so it misses a model that is strong at one kind of task and weak at another. Raising the minimum leans less on predictions. Tests rescaled from lowest to highest move with the set of models on them. And no average says how sure we should be about any single score.
         </li>
       </ol>
     </section>
@@ -162,10 +163,12 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
     const mx = new Matrix(p);
     const presets = new Map(p.presets.map((x) => [x.id, x]));
     const first = p.presets[0];
-    const fallback: State = { b: first.b.map((id) => ({ id, w: 50 })), src: 'ind', need: defaultNeed(first.b.length) };
+    const fallback: State = { b: first.b.map((id) => ({ id, w: 50 })), src: 'all', need: defaultNeed(first.b.length) };
     let st = readState(location.search, fallback);
     st.b = st.b.filter((x, i, xs) => mx.benchIndex.has(x.id) && xs.findIndex((y) => y.id === x.id) === i);
     let presetId = location.search ? matchPreset() : first.id;
+    // the preset a custom mix started from, named in place of its description
+    let startedFrom: string | null = presetId;
 
     for (const el of root.querySelectorAll<HTMLInputElement | HTMLButtonElement>('[disabled]')) el.disabled = false;
 
@@ -201,7 +204,17 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       n.max = String(Math.max(1, res.used.length));
       if (st.need !== 'all') n.value = String(res.need);
       for (const b of root.querySelectorAll<HTMLButtonElement>('[data-preset]')) b.setAttribute('aria-pressed', String(b.dataset.preset === presetId));
-      $('[data-how]').textContent = presetId ? (presets.get(presetId)?.how ?? '') : 'Your own mix.';
+      const how = $('[data-how]');
+      if (presetId) {
+        startedFrom = presetId;
+        how.style.minHeight = '';
+        how.textContent = presets.get(presetId)?.how ?? '';
+      } else {
+        // keep the description's height while the reader edits, so the weight list below doesn't jump mid-drag
+        if (!how.style.minHeight) how.style.minHeight = `${how.offsetHeight}px`;
+        const from = startedFrom ? presets.get(startedFrom)?.name : undefined;
+        how.textContent = from ? `Your own mix, started from “${from}”.` : 'Your own mix.';
+      }
       $('[data-src-how]').textContent = SRC_HOW[st.src];
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="bm-src"]')) r.checked = r.value === st.src;
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="bm-need"]')) r.checked = r.value === (st.need === 'all' ? 'all' : 'n');
@@ -238,6 +251,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       }
       const xb = t.closest<HTMLButtonElement>('[data-x]');
       if (xb) {
+        resize(st.b.length - 1);
         st.b.splice(Number(xb.dataset.x), 1);
         presetId = matchPreset();
         if (st.need !== 'all') st.need = Math.min(st.need, Math.max(1, st.b.length));
@@ -323,7 +337,12 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       q.setAttribute('aria-expanded', 'false');
       q.removeAttribute('aria-activedescendant');
     }
+    // a minimum still at its default follows the number of tests. One the reader set stays.
+    function resize(k: number) {
+      if (st.need !== 'all' && st.need === defaultNeed(st.b.length)) st.need = defaultNeed(k);
+    }
     function add(i: number) {
+      resize(st.b.length + 1);
       st.b.push({ id: p.benches[i][0], w: 50 });
       presetId = matchPreset();
       q.value = '';
@@ -385,12 +404,6 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
     gap: 30px;
     min-width: 0;
   }
-  @media (min-width: 1041px) {
-    .bm-root .bm-panel {
-      position: sticky;
-      top: 84px;
-    }
-  }
   .bm-root .bm-block {
     min-width: 0;
   }
@@ -424,7 +437,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       background-color 140ms ease,
       color 140ms ease;
   }
-  .bm-root .bm-presets button:hover:not(:disabled) {
+  .bm-root .bm-presets button:hover:not(:disabled):not([aria-pressed='true']) {
     color: var(--ink);
   }
   .bm-root .bm-presets button[aria-pressed='true'] {
@@ -591,7 +604,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
     background: var(--panel);
     color: var(--ink);
   }
-  .bm-root .bm-seg {
+  .bm-root .bm-srcseg {
     flex-wrap: wrap;
   }
   .bm-root .bm-radio {
@@ -684,7 +697,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
   .bm-root .bm-col .bm-mark {
     margin-top: 12px;
   }
-  .bm-root .bm-n:not(input) {
+  .bm-root .bm-cn {
     margin-top: 8px;
     font-size: 12px;
     line-height: 1.3;
