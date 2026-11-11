@@ -1,0 +1,248 @@
+---
+// Open tasks for outside contributors: each gap in data/ that one source can fill, and each leaderboard that
+// needs an importer, with a prefilled GitHub issue form or the guide to start from. The list comes from
+// src/lib/tasks.ts. /contribute/tasks.json has every task, and scripts/tasks.ts turns some into issues.
+import Base from '../layouts/Base.astro';
+import ContributeTask from '../components/ContributeTask.astro';
+import { siteTasks, SITE } from '../lib/tasks-site.ts';
+import { headline, type Task } from '../lib/tasks.ts';
+import { LEADERBOARDS } from '../lib/data.ts';
+import { REPO, SUBMIT_FORM } from '../lib/criteria.ts';
+
+const groups = siteTasks();
+const total = groups.reduce((s, g) => s + g.tasks.length, 0);
+const fmt = (n: number) => n.toLocaleString('en-US');
+// five tasks show at first, twenty more behind a button, and tasks.json holds the rest
+const SHOW = 5;
+const MORE = 20;
+const GUIDE = `${REPO}/blob/main/.github/CONTRIBUTING.md#add-a-leaderboard-importer`;
+const local = (url: string) => (url.startsWith(SITE) ? url.slice(SITE.length) || '/' : url);
+const rows = (tasks: Task[]) => tasks.map((t) => ({ ...t, page: local(t.page) }));
+const boards = Object.keys(LEADERBOARDS).length;
+---
+
+<Base title="Contribute" description="Open tasks in Benchmark Almanac's data that one source can fill, each with a GitHub form that's already filled in, and leaderboards that need an importer.">
+  <div class="page ct">
+    <header class="head">
+      <h1 class="long">{headline(groups)}</h1>
+      <p class="lede">
+        Finding its leaderboard is one of {fmt(total)} open tasks below, from a missing release date to a leaderboard we don't read yet. Each links to a GitHub form that's already filled in. You add the value and a source, and a maintainer checks it.
+      </p>
+      <p class="note">The forms need a free GitHub account. Everything you write there is public.</p>
+    </header>
+
+    <section class="ct-index" aria-label="Open tasks by kind">
+      <ol class="ct-kinds">
+        {
+          groups.map((g) => (
+            <li>
+              <a href={`#t-${g.kind}`}>
+                <span class="v num mono">{fmt(g.tasks.length)}</span>
+                <span class="l">{g.short}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section id="how" class="ct-how">
+      <div class="sh">
+        <h2>How contributing works</h2>
+      </div>
+      <ol class="steps">
+        <li><b>Pick a task and open its form.</b> The form already names the record and what's missing. Add the value and a link to a source that shows it.</li>
+        <li><b>A maintainer checks the source.</b> When it holds up, they add the "accepted" label, and a bot opens a pull request with the change, linked to your issue.</li>
+        <li><b>Code comes as pull requests.</b> New importers and importer fixes go straight to a pull request. The steps are <a href="#importer">below</a>.</li>
+      </ol>
+      <p>
+        You can also edit the data yourself. Every record lives in <code>data/*.json</code>, so a pull request that changes one record and names its source works as well as a form. To add a benchmark we don't have, use the <a href={SUBMIT_FORM}>submission form</a>. The <a href="/submit/">Submit page</a> lists the other forms.
+      </p>
+    </section>
+
+    {
+      groups.map((g) => {
+        const list = rows(g.tasks);
+        return (
+          <section id={`t-${g.kind}`} class="ct-g">
+            <div class="sh">
+              <h2>{g.title}</h2>
+              <p>
+                {g.how}
+                {g.kind === 'leaderboard' && (
+                  <>
+                    {' '}
+                    If you made one of them, <a href={`${REPO}/issues/new?template=maintainer.yml`}>tell us where to read your results</a>.
+                  </>
+                )}
+                {g.kind === 'level' && (
+                  <>
+                    {' '}
+                    <a href="/about/#levels">See the levels</a>.
+                  </>
+                )}
+                {g.code && (
+                  <>
+                    {' '}
+                    <a href="#importer">{g.kind === 'broken' ? 'How importers work' : 'How to write one'}</a>.
+                  </>
+                )}
+              </p>
+            </div>
+            <ul class="ct-list">
+              {list.slice(0, SHOW).map((t) => (
+                <ContributeTask task={t} verb={g.verb} />
+              ))}
+            </ul>
+            {list.length > SHOW && (
+              <details class="ct-more">
+                <summary><span class="open-l">Show {Math.min(MORE, list.length - SHOW)} more</span><span class="close-l">Show fewer</span></summary>
+                <ul class="ct-list">
+                  {list.slice(SHOW, SHOW + MORE).map((t) => (
+                <ContributeTask task={t} verb={g.verb} />
+              ))}
+                </ul>
+                {list.length > SHOW + MORE && (
+                  <p class="ct-all">
+                    The other {fmt(list.length - SHOW - MORE)} are in <a href="/contribute/tasks.json">tasks.json</a>, with the rest of this page.
+                  </p>
+                )}
+              </details>
+            )}
+          </section>
+        );
+      })
+    }
+
+    <section id="importer" class="ct-how">
+      <div class="sh">
+        <h2>Write an importer</h2>
+        <p>
+          Each file in <code>scripts/leaderboards/</code> reads one benchmark's official leaderboard, and {fmt(boards)} boards already have one. Most are short, because shared readers handle common sources such as Hugging Face datasets and GitHub tables.
+        </p>
+      </div>
+      <ol class="steps">
+        <li><b>Pick a board</b> from the leaderboards above, and check that its terms and robots.txt allow reading it.</li>
+        <li><b>Start from a short importer,</b> such as <code>scripts/leaderboards/aider-polyglot.ts</code>, saved as <code>scripts/leaderboards/&lt;benchmark-id&gt;.ts</code>. Point it at the board's published data file.</li>
+        <li><b>Test it</b> with <code>node scripts/sync-leaderboards.ts --only &lt;benchmark-id&gt; --dry</code>, and open a pull request.</li>
+      </ol>
+      <p><a href={GUIDE}>The importer guide</a> explains every field and the rules for each source.</p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .ct .note {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  .ct-kinds {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 24px 32px;
+  }
+  .ct-kinds a {
+    display: grid;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .ct-kinds .v {
+    font-size: 34px;
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .ct-kinds .l {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .ct-kinds a:hover .l {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .ct section[id] {
+    scroll-margin-top: 90px;
+  }
+  .ct-how {
+    max-width: 68ch;
+  }
+  .ct-how > p {
+    color: var(--ink-2);
+  }
+  .ct code {
+    font-family: var(--mono);
+    font-size: 0.9em;
+    overflow-wrap: anywhere;
+  }
+  .steps {
+    display: grid;
+    gap: 14px;
+    margin: 0 0 22px;
+    padding-left: 22px;
+    color: var(--ink-2);
+  }
+  .steps li::marker {
+    color: var(--ink-3);
+  }
+  .steps b {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .ct-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    max-width: 980px;
+  }
+  .ct-more {
+    margin-top: 10px;
+  }
+  .ct-more summary {
+    display: inline-block;
+    cursor: pointer;
+    list-style: none;
+    padding: 7px 0;
+    font-size: 14.5px;
+    color: var(--ink-2);
+    text-decoration: underline dotted var(--ink-4);
+    text-underline-offset: 4px;
+  }
+  .ct-more summary::-webkit-details-marker {
+    display: none;
+  }
+  .ct-more summary:hover {
+    color: var(--ink);
+  }
+  .ct-more[open] summary {
+    margin-bottom: 8px;
+  }
+  .ct-more .close-l,
+  .ct-more[open] .open-l {
+    display: none;
+  }
+  .ct-more[open] .close-l {
+    display: inline;
+  }
+  .ct-all {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    .ct-kinds {
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 20px;
+    }
+    .ct-kinds .v {
+      font-size: 28px;
+    }
+  }
+</style>

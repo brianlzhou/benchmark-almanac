@@ -1,0 +1,102 @@
+---
+// One open task on the Contribute page: the record, what's missing, and the form or guide that fills it.
+import type { Task } from '../lib/tasks.ts';
+
+interface Props {
+  task: Task;
+  verb: string;
+}
+const { task: t, verb } = Astro.props;
+---
+
+<li class="ct-t">
+  <div class="ct-what">
+    <a class="ct-n" href={t.page}>{t.name}</a>
+    <span class="ct-d">{t.detail}</span>
+  </div>
+  <div class="ct-acts">
+    {t.extra && <a class="ct-x" href={t.extra.url}>{t.extra.label}</a>}
+    <a class="ct-go" href={t.action}>{verb}</a>
+  </div>
+</li>
+
+<style>
+  .ct-t {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px 24px;
+    padding: 10px 14px;
+    margin: 0 -14px;
+    border-radius: 10px;
+  }
+  .ct-t:hover {
+    background: var(--hover);
+  }
+  .ct-what {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 12px;
+    min-width: 0;
+  }
+  .ct-n {
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .ct-n:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .ct-d {
+    font-size: 14px;
+    color: var(--ink-3);
+    min-width: 0;
+  }
+  .ct-acts {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+  }
+  .ct-x {
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .ct-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  /* an arrow out to GitHub, drawn once here instead of in every row */
+  .ct-go::after {
+    content: '';
+    width: 11px;
+    height: 11px;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.5 8.5l5-5M4.5 3.5h4v4' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  .ct-go:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  @media (max-width: 720px) {
+    .ct-t {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+    .ct-acts {
+      white-space: normal;
+      flex-wrap: wrap;
+    }
+  }
+</style>

@@ -5,7 +5,7 @@
 import Base from '../layouts/Base.astro';
 import Criteria from '../components/Criteria.astro';
 import { STAYS_OUT, SUBMIT_FORM, SUBMISSIONS, REPO } from '../lib/criteria.ts';
-import { benchmarkCount } from '../lib/counts.ts';
+import { benchmarks } from '../lib/data.ts';
 
 const INCLUDE = [
   { t: 'The name', d: 'And the version, when there is more than one.' },
@@ -23,7 +23,7 @@ const INCLUDE = [
     <header class="head">
       <h1>Submit a benchmark</h1>
       <p class="lede">
-        If you made a benchmark or found one we're missing, send it in. You'll get an automatic reply within a minute, and we review every submission by hand.
+        Made a benchmark, or found one we're missing? Let us know <a href={SUBMIT_FORM}>here</a>. You'll get an automatic reply within a minute, and we review every submission by hand.
       </p>
       <div class="cta">
         <a class="go" href={SUBMIT_FORM}>
@@ -38,7 +38,7 @@ const INCLUDE = [
     <section id="tests">
       <h2>What gets cataloged</h2>
       <p>
-        We list {benchmarkCount.toLocaleString('en-US')} benchmarks so far. A new one gets in if it passes <b>at least one</b> of four tests.
+        We track {benchmarks.length.toLocaleString('en-US')} benchmarks so far. A new one gets in if it passes <b>at least one</b> of these four tests.
       </p>
       <Criteria />
       <p><b>What stays out:</b> {STAYS_OUT}</p>
@@ -74,6 +74,12 @@ const INCLUDE = [
       </ol>
       <p>
         To report a mistake in one of our records, use the <a href={`${REPO}/issues/new?template=correction.yml`}>correction form</a>. Include a link to the page and a source for the right value.
+      </p>
+      <p>
+        Want to help without a benchmark of your own? The <a href="/contribute/">Contribute page</a> lists open gaps in our data, such as missing release dates and leaderboards we don't read yet, each with a form that's already filled in.
+      </p>
+      <p>
+        Other forms cover the rest. Use <a href={`${REPO}/issues/new?template=score.yml`}>Add or fix a score</a> for a result a lab or leaderboard published that we lack, and <a href={`${REPO}/issues/new?template=critique.yml`}>Log a known critique</a> for a published problem with a benchmark, such as a broken grader or leaked answers. If you make or maintain a benchmark, <a href={`${REPO}/issues/new?template=maintainer.yml`}>tell us where to read your results</a> or how your benchmark should be described.
       </p>
     </section>
   </div>
