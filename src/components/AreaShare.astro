@@ -1,10 +1,13 @@
 ---
-// What model cards measure: for each half-year, the share of headline benchmarks in each area, stacked to
-// 100%. Areas carry a legend and direct labels at the right edge where the band is tall enough.
-import { cards, benchById } from '../lib/data.ts';
+// What model cards measure: for each half year, the headline benchmarks in launch posts, stacked by area.
+// Two scales: each area's share (to 100%) or the number of mentions. A reader can open an area to see its
+// categories, and a category to see its subcategories. The build draws the default view, and a small script
+// redraws the chart from the JSON below when the reader changes it (src/lib/area-share.ts draws both).
+import { cards, benchById, AS_OF } from '../lib/data.ts';
 import type { Card } from '../lib/types.ts';
-import { AREAS, areaOf } from '../lib/taxonomy.ts';
-import { linear } from '../lib/scale.ts';
+import { AREAS, areaOf, CATEGORY_NAMES, SUBCATEGORIES } from '../lib/taxonomy.ts';
+import { renderShare, sizesFor, opens, type ShareData, type ShareNode } from '../lib/area-share.ts';
+import AreaMark from './AreaMark.astro';
 
 interface Props {
   lab?: string;
@@ -12,153 +15,281 @@ interface Props {
 }
 const { lab, height = 380 } = Astro.props;
 const src: Card[] = lab ? cards.filter((c) => c.lab === lab) : cards;
-const half = (d: string) => `${d.slice(0, 4)}-${Number(d.slice(5, 7)) <= 6 ? 'H1' : 'H2'}`;
-const buckets = [...new Set(src.map((c) => half(c.date)))].sort();
-const order = AREAS.map((a) => a.id);
-const share = buckets.map((k) => {
-  const counts = new Map<string, number>(order.map((a) => [a, 0]));
-  let n = 0;
-  for (const c of src.filter((c) => half(c.date) === k))
-    for (const r of c.results) {
-      const a = areaOf(benchById.get(r.benchmark)?.category);
-      counts.set(a, (counts.get(a) ?? 0) + 1);
-      n++;
-    }
-  return { k, n, v: order.map((a) => (n ? (counts.get(a) ?? 0) / n : 0)) };
-});
-const used = order.filter((_, i) => share.some((s) => s.v[i] > 0));
-const sizes = [
-  { key: 'wide', w: 1120, h: height, font: 12.5, label: true },
-  { key: 'narrow', w: 380, h: Math.round(height * 0.75), font: 11, label: false },
-];
-const pad = { l: 46, r: 150, t: 8, b: 30 };
-const name = (id: string) => AREAS.find((a) => a.id === id)!.name;
-const labelOf = (k: string) => (k.endsWith('H1') ? k.slice(0, 4) : '');
 
-function shape(w: number, h: number, label: boolean) {
-  const r = label ? pad.r : 12;
-  const x = linear([0, Math.max(1, share.length - 1)], [pad.l, w - r]);
-  const y = linear([0, 1], [h - pad.b, pad.t]);
-  const layers = order.map((a, i) => {
-    const lo = share.map((s) => s.v.slice(0, i).reduce((p, q) => p + q, 0));
-    const hi = lo.map((v, j) => v + share[j].v[i]);
-    const top = hi.map((v, j) => `${x(j)},${y(v)}`).join(' L');
-    const bottom = lo.map((v, j) => `${x(j)},${y(v)}`).reverse().join(' L');
-    const last = share.length - 1;
-    return { a, d: `M${top} L${bottom} Z`, mid: y((lo[last] + hi[last]) / 2), thick: (hi[last] - lo[last]) * (h - pad.t - pad.b), endX: x(last) };
-  });
-  return { x, y, layers };
-}
+// every half year from the first post to the data's date, with none skipped
+const half = (d: string) => `${d.slice(0, 4)}-${Number(d.slice(5, 7)) <= 6 ? 'H1' : 'H2'}`;
+const startOf = (k: string) => Date.UTC(Number(k.slice(0, 4)), k.endsWith('H1') ? 0 : 6, 1);
+const next = (k: string) => (k.endsWith('H1') ? `${k.slice(0, 4)}-H2` : `${Number(k.slice(0, 4)) + 1}-H1`);
+const first = src.map((c) => half(c.date)).sort()[0] ?? half(AS_OF);
+const buckets: string[] = [];
+for (let k = first; k <= half(AS_OF); k = next(k)) buckets.push(k);
+const lastK = buckets.at(-1)!;
+const f = Math.min(1, (Date.parse(AS_OF) + 864e5 - startOf(lastK)) / (startOf(next(lastK)) - startOf(lastK)));
+const idx = new Map(buckets.map((k, i) => [k, i]));
+
+// counts per subcategory, then the tree areas > categories > subcategories, with empty branches left out
+const counts = new Map<string, number[]>();
+for (const c of src)
+  for (const r of c.results) {
+    const b = benchById.get(r.benchmark);
+    const key = `${areaOf(b?.category)}|${b?.category ?? 'other'}|${b?.subcategory ?? ''}`;
+    if (!counts.has(key)) counts.set(key, new Array(buckets.length).fill(0));
+    counts.get(key)![idx.get(half(c.date))!]++;
+  }
+const has = (v: number[] | undefined) => !!v && v.some((x) => x > 0);
+const subsOf = (area: string, cat: string): ShareNode[] => {
+  const known = (SUBCATEGORIES as Record<string, { id: string; name: string }[]>)[cat] ?? [];
+  const out = known.map((s) => ({ id: s.id, n: s.name, v: counts.get(`${area}|${cat}|${s.id}`) })).filter((s) => has(s.v));
+  const rest = [...counts.entries()].filter(([k]) => k.startsWith(`${area}|${cat}|`) && !known.some((s) => k.endsWith(`|${s.id}`)));
+  if (rest.length) {
+    const v = new Array(buckets.length).fill(0);
+    for (const [, c] of rest) c.forEach((x, i) => (v[i] += x));
+    out.push({ id: `${cat}-unsorted`, n: 'Unsorted', v });
+  }
+  return out as ShareNode[];
+};
+const root: ShareNode = {
+  id: 'all',
+  n: 'All areas',
+  c: AREAS.map((a) => ({
+    id: a.id,
+    n: a.name,
+    c: a.categories.map((cat) => ({ id: cat, n: CATEGORY_NAMES[cat] ?? cat, c: subsOf(a.id, cat) })).filter((cat) => cat.c.length),
+  })).filter((a) => a.c.length),
+};
+const asOf = new Date(AS_OF).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+const data: ShareData = { b: buckets, f: Math.round(f * 1000) / 1000, asOf, root };
+// the JSON goes out before drawing, which fills in each parent's sums
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+const svg = sizesFor(height)
+  .map((s) => renderShare(data, 'share', [], s))
+  .join('');
+const areas = root.c!;
 ---
 
-<figure class="as">
-  <div class="key">
-    {
-      used.map((a) => (
-        <span class="tag">
-          <svg width="12" height="12" aria-hidden="true">
-            <rect width="12" height="12" rx="3" fill={`var(--area-${a})`} />
-          </svg>
-          {name(a)}
-        </span>
-      ))
-    }
+<figure class="as" data-as data-h={height}>
+  <div class="as-bar">
+    <div class="as-key" data-key>
+      {
+        areas.map((a) =>
+          opens(a) ? (
+            <button type="button" class="tag as-pick" data-node={a.id} title={`Break ${a.n} down`}>
+              <AreaMark area={a.id} size={11} />
+              {a.n}
+            </button>
+          ) : (
+            <span class="tag">
+              <AreaMark area={a.id} size={11} />
+              {a.n}
+            </span>
+          ),
+        )
+      }
+    </div>
+    <div class="seg" role="group" aria-label="Scale">
+      <button type="button" aria-pressed="true" data-mode="share">Share</button>
+      <button type="button" aria-pressed="false" data-mode="count">Count</button>
+    </div>
   </div>
-  {
-    sizes.map(({ key, w, h, font, label }) => {
-      const { x, y, layers } = shape(w, h, label);
-      return (
-        <svg class={`only-${key}`} viewBox={`0 0 ${w} ${h}`} role="img" aria-label="Share of model card benchmarks by area over time" style={`--f:${font}px`}>
-          {[0, 0.25, 0.5, 0.75, 1].map((v) => (
-            <text x={pad.l - 12} y={y(v) + 4} class="tick" text-anchor="end">
-              {Math.round(v * 100)}%
-            </text>
-          ))}
-          {layers.map((l) => (
-            <path d={l.d} fill={`var(--area-${l.a})`} class="layer" />
-          ))}
-          <line x1={pad.l - 4} x2={x(share.length - 1)} y1={y(0)} y2={y(0)} class="axis" />
-          <line x1={pad.l - 4} x2={pad.l - 4} y1={y(1)} y2={y(0)} class="axis" />
-          {[0, 0.25, 0.5, 0.75, 1].map((v) => (
-            <line x1={pad.l - 8} x2={pad.l - 4} y1={y(v)} y2={y(v)} class="axis" />
-          ))}
-          {share.map((s, j) => (
-            <g>
-              {labelOf(s.k) && (
-                <>
-                  <line x1={x(j)} x2={x(j)} y1={y(0)} y2={y(0) + 5} class="axis" />
-                  <text x={x(j)} y={h - 8} class="tick" text-anchor="middle">
-                    {labelOf(s.k)}
-                  </text>
-                </>
-              )}
-              <rect
-                x={x(j) - (x(1) - x(0)) / 2}
-                y={pad.t}
-                width={x(1) - x(0)}
-                height={h - pad.t - pad.b}
-                class="hit"
-                data-tn={`${s.k.slice(0, 4)}, ${s.k.endsWith('H1') ? 'first half' : 'second half'}`}
-                data-ts={order
-                  .map((a, i) => ({ a, v: s.v[i] }))
-                  .filter((z) => z.v >= 0.01)
-                  .sort((p, q) => q.v - p.v)
-                  .map((z) => `${name(z.a)} ${Math.round(z.v * 100)}%`)
-                  .join('. ')}
-                data-tv={`${s.n} benchmark mentions`}
-              />
-            </g>
-          ))}
-          {label &&
-            layers
-              .filter((l) => l.thick >= 16)
-              .map((l) => (
-                <text x={l.endX + 10} y={l.mid + 4} class="end">
-                  {name(l.a)}
-                </text>
-              ))}
-        </svg>
-      );
-    })
-  }
+  <p class="as-hint" data-hint>Click an area to break it down.</p>
+  <div class="as-plot" data-plot set:html={svg} />
+  {f < 1 && <p class="as-hint" data-note hidden>{`The last half year runs through ${asOf}, so its count is partial.`}</p>}
+  <span class="sr" aria-live="polite" data-live></span>
+  <script type="application/json" is:inline data-json set:html={json} />
 </figure>
 
-<style>
+<script>
+  import { renderShare, sizesFor, childAt, opens, nodeAt, fillOf, levelName, type ShareData, type ShareMode } from '../lib/area-share.ts';
+
+  const chevron = '<svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 3 5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  for (const fig of document.querySelectorAll<HTMLElement>('figure[data-as]')) {
+    const raw = fig.querySelector('[data-json]')?.textContent;
+    if (!raw) continue;
+    const data = JSON.parse(raw) as ShareData;
+    const sizes = sizesFor(Number(fig.dataset.h) || 380);
+    const key = fig.querySelector<HTMLElement>('[data-key]')!;
+    const plot = fig.querySelector<HTMLElement>('[data-plot]')!;
+    const hint = fig.querySelector<HTMLElement>('[data-hint]');
+    const note = fig.querySelector<HTMLElement>('[data-note]');
+    const live = fig.querySelector<HTMLElement>('[data-live]');
+    const rootKey = key.innerHTML;
+    let mode: ShareMode = 'share';
+    let path: string[] = [];
+    const back: string[][] = [];
+
+    const draw = (announce = false) => {
+      plot.innerHTML = sizes.map((s) => renderShare(data, mode, path, s)).join('');
+      if (note) note.hidden = mode !== 'count';
+      if (hint) hint.hidden = path.length > 0;
+      if (!path.length) key.innerHTML = rootKey;
+      else {
+        const node = nodeAt(data.root, path);
+        const kids = node.c ?? [];
+        const up = back.at(-1) ?? [];
+        const upName = up.length ? nodeAt(data.root, up).n : 'All areas';
+        key.innerHTML =
+          `<button type="button" class="as-back" data-back>${chevron}${esc(upName)}</button><b class="as-lvl">${esc(node.n)}</b>` +
+          kids
+            .map((c, i) => {
+              const { fill, opacity } = fillOf(path, i, kids.length, c.id);
+              const sw = `<span class="as-sw" style="background:${fill};opacity:${opacity}"></span>`;
+              return opens(c)
+                ? `<button type="button" class="tag as-pick" data-node="${esc(c.id)}" title="Break ${esc(c.n)} down">${sw}${esc(c.n)}</button>`
+                : `<span class="tag">${sw}${esc(c.n)}</span>`;
+            })
+            .join('');
+      }
+      if (announce && live) live.textContent = path.length ? `Showing ${nodeAt(data.root, path).n} by ${levelName(data, path)}` : 'Showing all areas';
+    };
+
+    const open = (id: string) => {
+      const node = nodeAt(data.root, [...path, id]);
+      const more = opens(node);
+      if (!more) return;
+      back.push(path);
+      path = [...path, id, ...more];
+      draw(true);
+      key.querySelector<HTMLElement>('[data-back]')?.focus();
+    };
+
+    fig.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) =>
+      b.addEventListener('click', () => {
+        mode = b.dataset.mode as ShareMode;
+        fig.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+        draw();
+      }),
+    );
+    key.addEventListener('click', (e) => {
+      const t = e.target as Element;
+      if (t.closest('[data-back]')) {
+        path = back.pop() ?? [];
+        draw(true);
+        (key.querySelector<HTMLElement>('[data-back]') ?? key.querySelector<HTMLElement>('[data-node]'))?.focus();
+        return;
+      }
+      const pick = t.closest<HTMLElement>('[data-node]');
+      if (pick) open(pick.dataset.node!);
+    });
+    // a click on the chart opens the band under the pointer
+    plot.addEventListener('click', (e) => {
+      const hit = (e.target as Element).closest<SVGRectElement>('rect.hit');
+      const svg = hit?.ownerSVGElement;
+      const size = sizes.find((s) => svg?.classList.contains(`only-${s.key}`));
+      const ctm = svg?.getScreenCTM();
+      if (!hit || !svg || !size || !ctm) return;
+      const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm.inverse());
+      const node = childAt(data, mode, path, size, Number(hit.dataset.j), p.y);
+      if (node) open(node.id);
+    });
+  }
+</script>
+
+<style is:global>
   .as {
     margin: 0;
   }
-  .key {
+  .as [hidden] {
+    display: none !important;
+  }
+  .as-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 20px;
-    margin-bottom: 14px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-bottom: 10px;
   }
-  svg {
+  .as-key {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 20px;
+    flex: 1 1 420px;
+    min-width: 0;
+  }
+  .as .as-pick {
+    font: inherit;
+    font-size: 13px;
+    background: none;
+    border: 0;
+    padding: 2px 0;
+    cursor: pointer;
+    color: var(--ink-2);
+    align-items: center;
+  }
+  .as .as-pick:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .as .tag {
+    align-items: center;
+  }
+  .as-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font: 500 13px / 1 var(--sans);
+    color: var(--ink-2);
+    background: var(--panel);
+    border: 0;
+    border-radius: 7px;
+    padding: 6px 10px 6px 7px;
+    cursor: pointer;
+  }
+  .as-back:hover {
+    color: var(--ink);
+  }
+  .as-lvl {
+    font: 600 13px / 1.2 var(--sans);
+    color: var(--ink);
+  }
+  .as-sw {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex: none;
+  }
+  .as-hint {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .as-plot + .as-hint {
+    margin: 8px 0 0;
+  }
+  .as-plot svg {
     width: 100%;
     height: auto;
     overflow: visible;
   }
-  .axis {
+  .as .axis {
     stroke: var(--ink-4);
     stroke-width: 1;
   }
-  .layer {
+  .as .layer {
     stroke: var(--bg);
     stroke-width: 2;
     stroke-linejoin: round;
   }
-  .tick {
+  .as .tick {
     font: 400 var(--f) / 1 var(--mono);
     fill: var(--ink-3);
   }
-  .end {
+  .as .end {
     font: 400 var(--f) / 1 var(--sans);
     fill: var(--ink-2);
   }
-  .hit {
+  .as .hit {
     fill: transparent;
   }
-  .hit:hover {
+  .as .hit.go {
+    cursor: pointer;
+  }
+  .as .hit:hover {
     fill: rgb(255 255 255 / 0.18);
   }
 </style>

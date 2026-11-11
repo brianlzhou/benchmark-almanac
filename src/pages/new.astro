@@ -1,9 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import discoveredJson from '../../data/discovered.json';
+import discoveredModelsJson from '../../data/discovered-models.json';
+import discoveredAuditsJson from '../../data/discovered-audits.json';
+import { PROBLEMS, type Problem } from '../lib/audits.ts';
 import reviewedJson from '../../data/reviewed.json';
-import { benchmarks, benchById } from '../lib/data.ts';
-import { fullDate, monthYear } from '../lib/format.ts';
+import { benchmarks, benchById, models, labById } from '../lib/data.ts';
+import { fullDate, monthYear, humanDate } from '../lib/format.ts';
 import { CATEGORY_NAMES } from '../lib/taxonomy.ts';
 
 interface Candidate {
@@ -15,13 +18,15 @@ interface Candidate {
   last: string;
   org?: string;
   repo?: string;
+  arxiv?: string;
   upvotes?: number;
   stars?: number;
   feeds: string[];
   curated: { source: string; url: string }[];
   registries: { source: string; url?: string }[];
   score: number;
-  decision: 'catalogue' | 'watch';
+  decision: 'catalog' | 'watch';
+  sameNameAs?: string;
 }
 interface Reviewed {
   added: { id: string; date: string; via?: string }[];
@@ -30,7 +35,7 @@ interface Reviewed {
 const d = discoveredJson as unknown as { updated: string | null; items: Candidate[] };
 const rv = reviewedJson as Reviewed;
 
-// the same name key the data scripts use, so a candidate that is now catalogued or left out drops off the queue
+// the same name key the data scripts use, so a candidate that is now cataloged or left out drops off the queue
 const key = (s: string) =>
   s
     .toLowerCase()
@@ -39,14 +44,21 @@ const key = (s: string) =>
     .replace(/(\d)\.0\b/g, '$1')
     .replace(/\b(benchmark|the)\b/g, '')
     .replace(/[^a-z0-9]/g, '');
-const known = new Set(benchmarks.flatMap((b) => [b.name, ...(b.aliases ?? [])].map(key)));
+// name key -> the records with that name or alias, and the arXiv ids of cataloged papers
+const idsByName = new Map<string, string[]>();
+for (const b of benchmarks) for (const n of [b.name, ...(b.aliases ?? [])]) idsByName.set(key(n), [...(idsByName.get(key(n)) ?? []), b.id]);
+const papers = new Set(benchmarks.map((b) => b.links?.paper?.match(/(\d{4}\.\d{4,5})/)?.[1]).filter(Boolean));
+const nameOf = new Map(benchmarks.map((b) => [b.id, b.name]));
+// a find that shares a cataloged name but is a different test (the scan marks it) counts only another record
+const cataloged = (c: Candidate) => (!!c.arxiv && papers.has(c.arxiv)) || (idsByName.get(key(c.name)) ?? []).some((id) => id !== c.sameNameAs);
 const leftOut = new Set(rv.rejected.map((r) => key(r.name)));
-const open = d.items.filter((c) => !known.has(key(c.name)) && !leftOut.has(key(c.name)));
-const top = open.filter((c) => c.decision === 'catalogue');
+const open = d.items.filter((c) => !cataloged(c) && !leftOut.has(key(c.name)));
+const top = open.filter((c) => c.decision === 'catalog');
 const watch = open.filter((c) => c.decision === 'watch');
-const FEED: Record<string, string> = { hf: 'Hugging Face papers', arxiv: 'arXiv' };
+const FEED: Record<string, string> = { hf: 'Hugging Face papers', 'hf-daily-papers': 'Hugging Face papers', arxiv: 'arXiv', bluesky: 'Bluesky' };
 const where = (c: Candidate) => [...c.curated.map((s) => s.source), ...c.registries.map((s) => s.source), ...c.feeds.map((f) => FEED[f] ?? f)];
-const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upvotes} upvotes` : '', c.stars ? `${c.stars} stars` : ''].filter(Boolean).join('. ');
+const twin = (c: Candidate) => (c.sameNameAs && nameOf.has(c.sameNameAs) ? `Not the cataloged ${nameOf.get(c.sameNameAs)}, which has the same name` : '');
+const meta = (c: Candidate) => [c.org, where(c).join(', '), c.upvotes ? `${c.upvotes} ${c.feeds.includes('bluesky') && !c.feeds.includes('hf') ? 'likes' : 'upvotes'}` : '', c.stars ? `${c.stars} stars` : '', twin(c)].filter(Boolean).join('. ');
 
 // added to the almanac, newest first. A record in a family with an older member is a new version.
 const added = rv.added
@@ -56,24 +68,84 @@ const added = rv.added
 const olderOf = (id: string) => benchmarks.find((b) => b.successor === id);
 const newVersions = added.filter((x) => olderOf(x.b.id)).length;
 const rejected = [...rv.rejected].sort((p, q) => q.date.localeCompare(p.date) || p.name.localeCompare(q.name));
-const lastReview = added[0]?.a.date ?? rejected[0]?.date;
+// a review sometimes left out a whole group in one row ("Awesome-CUA low-traction benchmarks (AppSim-Bench, ...)"):
+// show the group's label, and its names behind a toggle
+function splitName(n: string): { label: string; list?: string; count?: number } {
+  if (n.length <= 100) return { label: n };
+  const c = n.indexOf(': ');
+  const p = n.indexOf(' (');
+  const [label, rest] = c > 0 && c < 160 ? [n.slice(0, c), n.slice(c + 2)] : p > 0 && p < 160 ? [n.slice(0, p), n.slice(p + 2).replace(/\)$/, '')] : [`${n.slice(0, 90)}…`, n];
+  const list = rest.replace(/\s+([;,])/g, '$1').replace(/\s+/g, ' ').trim();
+  const count = list.split(/;\s|,\s/).length;
+  // a long name that is not a list of names stays whole
+  return count >= 2 ? { label, list, count } : { label: n };
+}
+
+// new models from scripts/discover-models.ts. A find whose name is now a model record drops off.
+interface ModelFind {
+  key: string;
+  name: string;
+  url: string;
+  first: string;
+  created?: string;
+  org?: string;
+  lab?: string;
+  params?: number;
+  sources: { source: string; url: string }[];
+  score: number;
+}
+const mq = discoveredModelsJson as unknown as { updated: string | null; items: ModelFind[] };
+const modelKeys = new Set(models.flatMap((m) => [m.id, m.name, ...(m.aliases ?? [])].map(key)));
+const modelFinds = mq.items.filter((f) => !modelKeys.has(key(f.name)));
+const modelTop = modelFinds.filter((f) => f.score >= 7);
+const modelWatch = modelFinds.filter((f) => f.score < 7);
+const makerOf = (f: ModelFind) => (f.lab ? labById.get(f.lab)?.name : undefined) ?? f.org ?? '';
+const sizeOf = (f: ModelFind) => (!f.params ? '' : f.params >= 1000 ? `${(f.params / 1000).toFixed(1)}T` : `${f.params >= 10 ? Math.round(f.params) : f.params}B`);
+const foundIn = (f: ModelFind) => f.sources.map((s) => s.source).join(', ');
+
+// possible audits of cataloged benchmarks, from the discovery job (scripts/lib/discover/audits.ts)
+interface AuditFind {
+  key: string;
+  title: string;
+  url: string;
+  source: string;
+  date?: string;
+  first: string;
+  benchmarks: string[];
+  problems: string[];
+  score: number;
+}
+const possibleAudits = (discoveredAuditsJson as unknown as { items: AuditFind[] }).items;
+
+// papers that introduce a benchmark we catalog without a paper link (scripts/lib/discover/core.ts)
+interface PaperFind {
+  benchmark: string;
+  arxiv: string;
+  title: string;
+  url: string;
+  source: string;
+  first: string;
+}
+const waitingPapers = ((discoveredJson as unknown as { papers?: PaperFind[] }).papers ?? []).filter((p) => !benchById.get(p.benchmark)?.links?.paper);
 ---
 
-<Base title="New benchmarks" description="Benchmarks added to the almanac, the ones the discovery job found and is weighing, and the ones checked and left out.">
+<Base title="New benchmarks and models" description="Benchmarks we've added, finds still waiting for review, the ones we checked and left out, and new models we haven't added yet.">
   <div class="page">
     <header class="head">
-      <h1>New benchmarks</h1>
+      <h1>New benchmarks and models</h1>
       <p class="lede">
-        A job reads paper feeds, newsletters, registries and leaderboards every morning and scores each find on whether it is a benchmark at all, whether its code or data is out, who made it, and how many sources mention it.
-        A person or an agent then checks each find at its source and either adds it to the almanac or leaves it out, with the reason.
+        We look for new benchmarks every morning in paper feeds, newsletters, registries and leaderboards. We check every find at its source before we add it, and the ones we leave out are listed at the bottom with the reason. New models we haven't added yet can be found <a href="#models">here</a>.
       </p>
       <div class="facts">
-        <span><b>{added.length}</b> added{lastReview && ` since ${fullDate(added.at(-1)?.a.date ?? lastReview)}`}</span>
+        {added.length > 0 && <span><b>{added.length}</b> added {added.at(-1)!.a.date === added[0].a.date ? `on ${humanDate(added[0].a.date)}` : `since ${humanDate(added.at(-1)!.a.date)}`}</span>}
         {newVersions > 0 && <span><b>{newVersions}</b> of them new versions</span>}
         <span><b>{top.length + watch.length}</b> waiting</span>
+        {modelFinds.length > 0 && <span><b>{modelFinds.length}</b> models waiting</span>}
+        {waitingPapers.length > 0 && <a href="#papers"><b>{waitingPapers.length}</b> {waitingPapers.length === 1 ? 'paper' : 'papers'} to link</a>}
+        {possibleAudits.length > 0 && <a href="#audits"><b>{possibleAudits.length}</b> possible {possibleAudits.length === 1 ? 'audit' : 'audits'}</a>}
         <span><b>{rejected.length}</b> left out</span>
-        {d.updated && <span>Checked {fullDate(d.updated)}</span>}
-        <a href="/sources/">The sources it reads</a>
+        {d.updated && <span>Checked {humanDate(d.updated)}</span>}
+        <a href="/sources/">Sources we watch</a>
       </div>
     </header>
 
@@ -81,11 +153,11 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
       added.length > 0 && (
         <section>
           <div class="sh">
-            <h2>Added to the almanac</h2>
-            <p>Each was checked at its maker's own page. A new version also shows the record it replaces.</p>
+            <h2>Added to the catalog</h2>
+            <p>We checked each one at its maker's own page. New versions link to the record they replace.</p>
           </div>
           <div class="table-wrap">
-            <table class="t added">
+            <table class="t added" data-sort>
               <thead>
                 <tr>
                   <th>Benchmark</th>
@@ -127,8 +199,8 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
       top.length > 0 && (
         <section>
           <div class="sh">
-            <h2>Ready to catalogue</h2>
-            <p>Finds that scored 8 or more. Each waits for a check at its source.</p>
+            <h2>Ready to catalog</h2>
+            <p>Finds that scored 8 or more, waiting for us to check them at the source. The score depends on who made it, whether its code or data is out, and how many sources mention it.</p>
           </div>
           <ol class="cands">
             {top.map((c) => (
@@ -154,10 +226,10 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
         <section>
           <div class="sh">
             <h2>Watch list</h2>
-            <p>Each needs one more signal, such as a second source, released code, or a mention in a newsletter. Lower scores wait here for 14 days.</p>
+            <p>Finds that scored 5 to 7. These need one more thing before we look, like a second source, released code or a newsletter mention. A find drops off after 14 days with no new mention.</p>
           </div>
           <div class="table-wrap">
-            <table class="t">
+            <table class="t" data-sort>
               <thead>
                 <tr><th class="r">Score</th><th>Name</th><th>Found in</th><th>First seen</th></tr>
               </thead>
@@ -178,24 +250,162 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
     }
 
     {
+      modelFinds.length > 0 && (
+        <section id="models">
+          <div class="sh">
+            <h2>New models</h2>
+            <p>
+              Models we don't have yet, found on Hugging Face, in AINews, on Bluesky and on leaderboards. Once a model scores 7 or more, we add it with its launch post.
+            </p>
+          </div>
+          {modelTop.length > 0 && (
+            <div class="table-wrap">
+              <table class="t models" data-sort>
+                <thead>
+                  <tr><th class="r">Score</th><th>Model</th><th>Found in</th><th class="r">Size</th><th class="nowrap">Published</th></tr>
+                </thead>
+                <tbody>
+                  {modelTop.map((f) => (
+                    <tr>
+                      <td class="r muted">{f.score}</td>
+                      <td class="mn"><a href={f.url}>{f.name}</a>{makerOf(f) && <span class="muted"> {makerOf(f)}</span>}</td>
+                      <td class="muted">{foundIn(f)}</td>
+                      <td class="r muted num nowrap" data-v={f.params ?? 0}>{sizeOf(f)}</td>
+                      <td class="muted num nowrap">{fullDate(f.created ?? f.first)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {modelWatch.length > 0 && (
+            <details class="left mw">
+              <summary>
+                <span class="sh">
+                  <h3>Model watch list</h3>
+                  <p>{modelWatch.length} models that scored 3 to 6. Most are research releases or community models. A model drops off after 21 days with no new mention.</p>
+                </span>
+              </summary>
+              <div class="table-wrap">
+                <table class="t models" data-sort>
+                  <thead>
+                    <tr><th class="r">Score</th><th>Model</th><th>Found in</th><th class="r">Size</th><th class="nowrap">Published</th></tr>
+                  </thead>
+                  <tbody>
+                    {modelWatch.map((f) => (
+                      <tr>
+                        <td class="r muted">{f.score}</td>
+                        <td class="mn"><a href={f.url}>{f.name}</a>{makerOf(f) && <span class="muted"> {makerOf(f)}</span>}</td>
+                        <td class="muted">{foundIn(f)}</td>
+                        <td class="r muted num nowrap" data-v={f.params ?? 0}>{sizeOf(f)}</td>
+                        <td class="muted num nowrap">{fullDate(f.created ?? f.first)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          )}
+        </section>
+      )
+    }
+
+    {
+      waitingPapers.length > 0 && (
+        <section id="papers">
+          <div class="sh">
+            <h2>Papers for benchmarks we catalog</h2>
+            <p>
+              New papers for benchmarks we list without one, usually because the leaderboard came out first. If a paper is the benchmark's own, we link it. If it's a different test with the same name, we add that test separately.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table class="t" data-sort>
+              <thead>
+                <tr><th>Paper</th><th>Benchmark we list</th><th>Found in</th><th class="nowrap">First seen</th></tr>
+              </thead>
+              <tbody>
+                {waitingPapers.map((p) => (
+                  <tr>
+                    <td class="mn"><a href={p.url}>{p.title}</a><span class="muted"> arXiv {p.arxiv}</span></td>
+                    <td><a href={`/benchmarks/${p.benchmark}/`}>{benchById.get(p.benchmark)?.name ?? p.benchmark}</a></td>
+                    <td class="muted">{FEED[p.source] ?? p.source}</td>
+                    <td class="muted num nowrap">{fullDate(p.first)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      possibleAudits.length > 0 && (
+        <section id="audits">
+          <div class="sh">
+            <h2>Possible audits</h2>
+            <p>
+              Papers and posts that might show a problem with a benchmark we track, like a broken grader or leaked answers. If one holds up, it goes on the <a href="/audits/">audits page</a> and in the Known issues section of each benchmark it covers.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table class="t pa" data-sort>
+              <thead>
+                <tr><th class="r">Score</th><th>Source</th><th>Benchmarks</th><th>Problem it suggests</th><th class="nowrap">Published</th></tr>
+              </thead>
+              <tbody>
+                {possibleAudits.map((a) => (
+                  <tr>
+                    <td class="r muted">{a.score}</td>
+                    <td class="mn"><a href={a.url}>{a.title}</a><span class="muted"> {a.source}</span></td>
+                    <td class="muted">{a.benchmarks.map((id, i) => <>{i > 0 && ', '}<a href={`/benchmarks/${id}/`}>{benchById.get(id)?.name ?? id}</a></>)}</td>
+                    <td class="muted">{a.problems.map((p) => PROBLEMS[p as Problem]?.name ?? p).join(', ')}</td>
+                    <td class="muted num nowrap">{fullDate(a.date ?? a.first)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )
+    }
+
+    {
       rejected.length > 0 && (
         <section>
           <details class="left">
             <summary>
               <span class="sh">
                 <h2>Checked and left out</h2>
-                <p>{rejected.length} finds that are not benchmarks, are too narrow, or have no users yet. Each line gives the reason.</p>
+                <p>{rejected.length} finds that failed all four of our <a href="/about/#cataloged">tests for cataloging</a>. Some weren't benchmarks, and others were too narrow or had no users yet.</p>
               </span>
             </summary>
             <div class="table-wrap">
-              <table class="t">
+              <table class="t" data-sort>
                 <thead>
                   <tr><th>Name</th><th>Why it was left out</th><th class="nowrap">Checked</th></tr>
                 </thead>
                 <tbody>
                   {rejected.map((r) => (
                     <tr>
-                      <td class="rn">{r.url ? <a href={r.url}>{r.name}</a> : r.name}</td>
+                      <td class="rn">
+                        {(() => {
+                          const s = splitName(r.name);
+                          const label = r.url ? <a href={r.url}>{s.label}</a> : s.label;
+                          return s.list ? (
+                            <>
+                              {label}
+                              <details class="names">
+                                <summary>{s.count} names</summary>
+                                <p>{s.list}</p>
+                              </details>
+                            </>
+                          ) : (
+                            label
+                          );
+                        })()}
+                      </td>
                       <td class="muted">{r.reason}</td>
                       <td class="muted num nowrap">{fullDate(r.date)}</td>
                     </tr>
@@ -285,6 +495,19 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
   .rn {
     min-width: 180px;
   }
+  .names summary {
+    margin-top: 4px;
+    color: var(--ink-3);
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .names p {
+    margin-top: 4px;
+    max-width: 60ch;
+    color: var(--ink-3);
+    font-size: 13px;
+    line-height: 1.45;
+  }
   .left summary {
     list-style: none;
     cursor: pointer;
@@ -292,7 +515,15 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
   .left summary::-webkit-details-marker {
     display: none;
   }
-  .left summary h2::after {
+  .mn {
+    min-width: 220px;
+    overflow-wrap: anywhere;
+  }
+  .mw {
+    margin-top: 22px;
+  }
+  .left summary h2::after,
+  .left summary h3::after {
     content: '';
     display: inline-block;
     width: 9px;
@@ -303,13 +534,18 @@ const lastReview = added[0]?.a.date ?? rejected[0]?.date;
     transform: translateY(-5px) rotate(45deg);
     transition: transform 140ms ease;
   }
-  .left[open] summary h2::after {
+  .left[open] summary h2::after,
+  .left[open] summary h3::after {
     transform: translateY(-1px) rotate(225deg);
   }
   .left summary .sh {
     display: block;
   }
   @media (max-width: 900px) {
+    .pa th:nth-child(4),
+    .pa td:nth-child(4),
+    .models th:nth-child(3),
+    .models td:nth-child(3),
     .added th:nth-child(2),
     .added td:nth-child(2),
     .added th:nth-child(3),

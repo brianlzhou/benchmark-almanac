@@ -1,8 +1,9 @@
 ---
 // Rise and retirement. One lane per benchmark, ordered by when labs started reporting it. A ruled band
 // runs from the first model card that reports it to the last. Each tick is one such card. A diamond marks
-// the month the best score passed 85%. Status sits by the name, so retired tests read at a glance.
-import { benchSummary, AS_OF, SATURATED } from '../lib/data.ts';
+// the month the best score passed 85%, and a dot the month it reached 95%, since some tests take a long time
+// to close out. Status sits by the name, so retired tests read at a glance.
+import { benchSummary, AS_OF, SATURATED, NEAR_CEILING } from '../lib/data.ts';
 import { yearFrac, monthYear } from '../lib/format.ts';
 import { yearTicks, yearLines } from '../lib/scale.ts';
 import { AREA_BY_ID } from '../lib/taxonomy.ts';
@@ -27,18 +28,22 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
       const a = pos(s.first!);
       const z = pos(s.last!);
       const sat = s.saturatedAt && s.saturatedAt >= '2023-02' ? pos(s.saturatedAt) : undefined;
+      const top = s.nearCeilingAt && s.nearCeilingAt >= '2023-02' ? pos(s.nearCeilingAt) : undefined;
+      // when both marks land in the same spot, the dot sits just right of the diamond
+      const nudge = sat !== undefined && top !== undefined && top - sat < 1.2 ? ' near' : '';
       return (
         <a class="row" href={`/benchmarks/${s.b.id}/`} style={`--a:var(--area-${s.area})`}>
           <span class="who">
             <span class:list={['dot', `status-${s.status.replace(/ /g, '-')}`]} title={STATUS[s.status]} />
             <span class="nm">{s.b.name}</span>
           </span>
-          <span class="lane" style={grid} data-tn={s.b.name} data-ts={`${STATUS[s.status]}. ${s.cites.length} model cards, ${monthYear(s.first)} to ${monthYear(s.last)}${s.saturatedAt ? `. Passed ${SATURATED}% in ${monthYear(s.saturatedAt)}` : ''}. ${AREA_BY_ID.get(s.area)?.name}`}>
+          <span class="lane" style={grid} data-tn={s.b.name} data-ts={`${STATUS[s.status]}. ${s.cites.length} model cards, ${monthYear(s.first)} to ${monthYear(s.last)}${s.saturatedAt ? `. Passed ${SATURATED}% in ${monthYear(s.saturatedAt)}` : ''}${s.nearCeilingAt ? `. Reached ${NEAR_CEILING}% in ${monthYear(s.nearCeilingAt)}` : ''}. ${AREA_BY_ID.get(s.area)?.name}`}>
             <span class="band" style={`left:${a}%;width:${Math.max(0.4, z - a)}%`} />
             {s.cites.map((c) => (
               <i style={`left:${pos(c.card.date)}%`} />
             ))}
             {sat !== undefined && <b class="sat" style={`left:${sat}%`} />}
+            {top !== undefined && <b class={`top${nudge}`} style={`left:${top}%`} />}
           </span>
         </a>
       );
@@ -62,6 +67,7 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
   <span class="tag"><span class="dot status-fading" />Fading</span>
   <span class="tag"><span class="dot status-dropped" />Dropped: no card for a year</span>
   <span class="tag"><svg width="12" height="12" aria-hidden="true"><path d="M6 1 11 6 6 11 1 6z" fill="var(--ink)" /></svg>Best score passed {SATURATED}%</span>
+  <span class="tag"><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" fill="var(--ink)" /></svg>Best score reached {NEAR_CEILING}%</span>
 </div>
 
 <style>
@@ -124,6 +130,19 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
     rotate: 45deg;
     background: var(--ink);
     box-shadow: 0 0 0 2px var(--bg);
+  }
+  .top {
+    position: absolute;
+    top: 6.5px;
+    width: 9px;
+    height: 9px;
+    margin-left: -4.5px;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: 0 0 0 2px var(--bg);
+  }
+  .top.near {
+    margin-left: 5px;
   }
   .axis .lane {
     height: 24px;

@@ -6,18 +6,16 @@ import AreaShare from '../components/AreaShare.astro';
 import Lifecycle from '../components/Lifecycle.astro';
 import HeroArt from '../components/HeroArt.astro';
 import AreaMark from '../components/AreaMark.astro';
-import { benchmarkCount, isNewest } from '../lib/counts.ts';
 import SearchBox from '../components/SearchBox.astro';
 import { AREAS, areaOf } from '../lib/taxonomy.ts';
 import ReignChart from '../components/ReignChart.astro';
-import { eciReigns } from '../lib/reigns.ts';
-import { leaderRows } from '../lib/leaders.ts';
-import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED } from '../lib/data.ts';
+import { mostReportedRows } from '../lib/leaders.ts';
+import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED, LEADERBOARDS, benchById } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
 import discoveredJson from '../../data/discovered.json';
+import githubJson from '../../data/github.json';
 
 const all = allSummaries();
-const cardLabs = new Set(cards.map((c) => c.lab));
 // the saturation claim counts established benchmarks only: five or more model cards
 const est = all.filter((s) => s.cites.length >= 5);
 const estDropped = est.filter((s) => s.status === 'dropped');
@@ -46,12 +44,14 @@ interface Find {
   org?: string;
   decision: string;
 }
-const eci = eciReigns();
-const mathIds = benchmarks.filter((b) => b.category === 'math').map((b) => b.id);
-const crownRows = [...(eci ? [eci] : []), ...leaderRows(mathIds, 'all', 6)];
-const crownIndep = [...(eci ? [eci] : []), ...leaderRows(mathIds, 'independent', 6)];
+// who held number one on the tests the most model releases reported over the last year
+const crown = mostReportedRows(AS_OF);
+const crownRows = crown.all;
+const crownIndep = crown.independent;
+const topTest = crown.tests.length ? (benchById.get(crown.tests[0].fam)?.name ?? crown.tests[0].fam) : '';
+const n = (v: number) => v.toLocaleString('en-US');
 // the hero's area chips: how many benchmarks each area holds
-const areaCounts = AREAS.filter((a) => a.id !== 'other').map((a) => ({ id: a.id, name: a.name, n: benchmarks.filter((b) => isNewest(b) && areaOf(b.category) === a.id).length }));
+const areaCounts = AREAS.filter((a) => a.id !== 'other').map((a) => ({ id: a.id, name: a.name, n: benchmarks.filter((b) => areaOf(b.category) === a.id).length }));
 // the hero's pill: benchmarks added in the last 30 days, else the newest releases
 const monthAgo = new Date(Date.parse(AS_OF) - 30 * 864e5).toISOString().slice(0, 10);
 // newest additions first, then the ones labs already report, so the pill names benchmarks people know
@@ -64,9 +64,17 @@ const fresh = byAdded.length
   ? byAdded
   : benchmarks.filter((b) => b.released && b.released >= monthAgo.slice(0, 7) && b.access !== 'private').sort((a, b) => b.released!.localeCompare(a.released!));
 const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter((d) => d.decision === 'catalog').slice(0, 6);
+// schema.org WebSite: the site's name and address for search engines
+const website = {
+  '@type': 'WebSite',
+  name: 'Benchmark Almanac',
+  url: new URL('/', Astro.site).href,
+  description: 'A catalog of AI benchmarks, with the labs that report each one and how its scores have changed.',
+  inLanguage: 'en',
+};
 ---
 
-<Base>
+<Base jsonLd={website}>
   <div class="page">
     <header class="hero">
       <HeroArt />
@@ -83,9 +91,9 @@ const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter
             </a>
           )
         }
-        <h1>AI benchmarks and who <em>leads</em> them</h1>
+        <h1>Benchmark Almanac</h1>
         <p class="hero-lede">
-          We track {benchmarkCount.toLocaleString('en-US')} benchmarks: what each one tests, which model is ahead, and whether labs still report it. We take scores from public leaderboards, Epoch AI, and {cards.length} launch posts{systemCards.length > 0 && ` and ${systemCards.length} system cards`} from {cardLabs.size} labs.
+          We track {n(benchmarks.length)} benchmarks from {n(Object.keys(LEADERBOARDS).length)} public leaderboards, {n(cards.length)} launch posts, {n(systemCards.length)} system cards, and {n(Object.keys(githubJson).length)} open-source GitHub repositories.
         </p>
         <SearchBox id="search-list" main preload label="Search benchmarks" />
         <nav class="chips" aria-label="Benchmarks by area">
@@ -99,7 +107,7 @@ const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter
             ))
           }
         </nav>
-        <p class="art-key">We drew each benchmark's best score since 2023 as one line, colored by area. Click a line to open it.</p>
+        <p class="art-key">Click on any of the benchmarks to open them!</p>
       </div>
     </header>
 
@@ -122,7 +130,9 @@ const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter
           <div class="sh-row">
             <div class="sh">
               <h2>Who held number one</h2>
-              <p>The capability index and six of the most-used math benchmarks, since 2023. Taller means a higher score.</p>
+              <p>
+                The {crown.tests.length} tests the most model releases reported since {humanDate(crown.since)}, most reported first. {topTest} comes first, with {n(crown.tests[0].n)} releases. Each version labs reported in that year gets its own row. Taller means a higher score.
+              </p>
             </div>
             <div class="crown-tools">
               <label class="claims">
@@ -133,10 +143,10 @@ const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter
             </div>
           </div>
           <div class="when-a">
-            <ReignChart rows={crownRows} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} />
+            <ReignChart rows={crownRows} />
           </div>
           <div class="when-b">
-            <ReignChart rows={crownIndep} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} />
+            <ReignChart rows={crownIndep} />
           </div>
         </section>
       )

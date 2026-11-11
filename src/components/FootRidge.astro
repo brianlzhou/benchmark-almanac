@@ -47,12 +47,18 @@ import { LAYERS } from '../lib/ridge.ts';
     mask-composite: intersect;
     background: var(--c);
   }
+  /* the caption stays out of the way until someone hovers over the landscape */
   .ridge-key {
     position: absolute;
     inset: 10px 0 auto;
     margin: 0 auto;
     font-size: 12px;
     color: var(--ink-3);
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+  .ridge:hover .ridge-key {
+    opacity: 1;
   }
   @media (max-width: 720px) {
     .ridge {

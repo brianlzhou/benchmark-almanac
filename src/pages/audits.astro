@@ -11,6 +11,19 @@ const benchCount = new Set(findings.map((f) => f.finding.benchmark)).size;
 const counts = new Map<Problem, number>();
 for (const { finding } of findings) for (const p of finding.problems) counts.set(p, (counts.get(p) ?? 0) + 1);
 const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.localeCompare(PROBLEMS[b[0]].name));
+// the headline: the problem audits find most often
+const plural = (name: string) => /s$/.test(name);
+const top = kinds.filter(([, n]) => n === kinds[0]?.[1]).map(([p]) => PROBLEMS[p].name);
+const headline = !kinds.length
+  ? 'What the audits found'
+  : top.length === 1
+    ? `${top[0]} ${plural(top[0]) ? 'show' : 'shows'} up in ${kinds[0][1]} of ${findings.length} findings, more than any other problem`
+    : `${top.slice(0, -1).join(', ')} and ${top.at(-1)!.toLowerCase()} show up most, in ${kinds[0][1]} of ${findings.length} findings each`;
+// a finding's problems as one line of text: "Unclear tasks and broken grader"
+const kindText = (ps: Problem[]) => {
+  const names = ps.map((p, i) => (i === 0 ? PROBLEMS[p].name : PROBLEMS[p].name.toLowerCase()));
+  return names.length < 2 ? (names[0] ?? '') : `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
+};
 ---
 
 <Base title="Benchmark audits" description="Published reviews that found problems in benchmarks: broken graders, leaked answers, wrong labels and contamination, with each finding linked to its source.">
@@ -18,7 +31,7 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
     <header class="head">
       <h1>Audits</h1>
       <p class="lede">
-        Sometimes people check a benchmark and find problems in it. A grader rejects right answers, the answers leak online, or some reference answers are wrong. We list each published audit here, and on the page of every benchmark it covers.
+        These are published audits that found problems in benchmarks we track, like graders that reject right answers or answers that leak online. Each finding also shows up on its benchmark's page. Know of an audit we're missing? Let us know <a href="/submit/">here</a>.
       </p>
       <div class="facts">
         <span><b>{audits.length}</b> audits</span>
@@ -30,7 +43,7 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
 
     <section>
       <div class="sh">
-        <h2>What the audits found</h2>
+        <h2>{headline}</h2>
         <p>Pick a kind of problem to see only those findings.</p>
       </div>
       <div class="ak" role="group" aria-label="Kind of problem">
@@ -63,12 +76,9 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
                     <li data-kinds={f.problems.join(' ')}>
                       <div class="al-top">
                         <a class="al-b" href={`/benchmarks/${f.benchmark}/#issues`}>{b?.name ?? f.benchmark}</a>
-                        <span class="al-kinds">{f.problems.map((p) => <span class="ki-kind">{PROBLEMS[p].name}</span>)}</span>
-                        <span class:list={['ki-st', st.tone]}>
-                          <span class="dot" />
-                          {st.name}
-                        </span>
+                        <span class:list={['al-st', st.tone]}>{st.name}</span>
                       </div>
+                      <p class="al-k">{kindText(f.problems)}</p>
                       <p class="al-sum">{f.summary}</p>
                     </li>
                   );
@@ -84,12 +94,11 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
       <div class="sh">
         <h2>What we include</h2>
       </div>
-      <ol class="rules">
-        <li><b>A primary source.</b> The author must publish the method, in a paper, a write-up or a repository with the fixes. A post or a newsletter line alone is not enough. We add it once the author publishes the method.</li>
-        <li><b>Credit and the auditor's own numbers.</b> We name who found each problem and quote the numbers as printed.</li>
-        <li><b>The maker's response.</b> When the maker replies or fixes the benchmark, we link that too.</li>
-        <li><b>Leaderboards stay as reported.</b> Re-scored results often use a different harness or only the public tasks. So we keep them in the finding's text, not on the leaderboards.</li>
-      </ol>
+      <div class="rules">
+        <p>We list an audit once its author publishes how they did it, in a paper, a write-up or a repo with the fixes. A post or a newsletter line on its own isn't enough.</p>
+        <p>We name who found each problem and quote their numbers as printed. If the benchmark's makers reply or fix it, we link that too.</p>
+        <p>We don't change leaderboard scores because of an audit. Re-scored results often use a different harness or only the public tasks, so they stay in the finding's text.</p>
+      </div>
       <p class="upd muted">Updated {humanDate(audits[0]?.date)}. To suggest an audit, <a href="/submit/">send a correction</a>.</p>
     </section>
   </div>
@@ -107,40 +116,44 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
 </script>
 
 <style>
+  /* the kinds of problem, as plain text toggles: the chosen one in full ink, underlined */
   .ak {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 4px 20px;
   }
   .ak-b {
-    padding: 6px 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--bg);
-    color: var(--ink-2);
+    padding: 4px 0;
+    border: 0;
+    background: none;
+    color: var(--ink-3);
     font: inherit;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 6px;
+    transition: color 140ms ease, text-decoration-color 140ms ease;
+  }
+  .ak-b:hover {
+    color: var(--ink);
   }
   .ak-b .num {
-    margin-left: 4px;
-    color: var(--ink-3);
+    margin-left: 3px;
+    font: 400 13px/1 var(--mono);
+    color: var(--ink-4);
   }
   .ak-b[aria-pressed='true'] {
-    border-color: var(--ink);
-    background: var(--ink);
-    color: var(--bg);
-  }
-  .ak-b[aria-pressed='true'] .num {
-    color: inherit;
-    opacity: 0.7;
+    color: var(--ink);
+    text-decoration-color: currentColor;
   }
   .al {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 40px;
+    gap: 56px;
   }
   .al-a {
     display: grid;
@@ -148,13 +161,14 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
     gap: 24px;
   }
   .al-when {
-    padding-top: 4px;
+    padding-top: 6px;
+    font: 400 13px/1.4 var(--mono);
     color: var(--ink-3);
-    font-size: 14px;
   }
   .al-body h3 {
-    font: 400 24px/1.25 var(--serif);
+    font: 400 26px/1.2 var(--serif);
     text-wrap: balance;
+    max-width: 36ch;
   }
   .al-body h3 a {
     text-decoration: none;
@@ -162,81 +176,71 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
   .al-body h3 a:hover {
     text-decoration: underline;
     text-decoration-color: var(--ink-4);
+    text-underline-offset: 4px;
   }
   .al-by {
-    margin-top: 4px;
-    color: var(--ink-2);
+    margin-top: 6px;
+    color: var(--ink-3);
     font-size: 14.5px;
   }
+  /* each finding is a short block of text, set apart by space alone */
   .al-f {
     list-style: none;
-    margin: 16px 0 0;
+    margin: 24px 0 0;
     padding: 0;
     display: grid;
-    gap: 12px;
-    max-width: 80ch;
-  }
-  .al-f > li {
-    padding: 14px 18px;
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--status-warn);
-    border-radius: 10px;
+    gap: 26px;
+    max-width: 72ch;
   }
   .al-top {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 6px 12px;
+    align-items: baseline;
+    gap: 4px 16px;
   }
   .al-b {
-    font-weight: 600;
-  }
-  .al-kinds {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .ki-kind {
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: var(--panel);
-    color: var(--ink-2);
-    font-size: 12.5px;
+    font-size: 16.5px;
     font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
   }
-  .ki-st {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  .al-b:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+    text-underline-offset: 3px;
+  }
+  .al-st {
     margin-left: auto;
-    font-size: 13px;
-    color: var(--ink-2);
+    font-size: 13.5px;
+    color: var(--ink-3);
     white-space: nowrap;
   }
-  .ki-st.good .dot {
-    background: var(--status-good);
+  .al-st.warn {
+    color: var(--ink-2);
   }
-  .ki-st.warn .dot {
-    background: var(--status-warn);
+  .al-st.bad {
+    color: var(--ink);
+    font-weight: 500;
   }
-  .ki-st.bad .dot {
-    background: var(--status-bad);
+  .al-k {
+    margin-top: 2px;
+    font-size: 14px;
+    color: var(--ink-3);
   }
   .al-sum {
     margin-top: 8px;
-    line-height: 1.55;
+    line-height: 1.6;
     color: var(--ink-2);
   }
   .rules {
-    margin: 0;
-    padding-left: 22px;
     display: grid;
-    gap: 10px;
-    max-width: 68ch;
-    line-height: 1.55;
+    gap: 12px;
+    max-width: 66ch;
+    line-height: 1.6;
+    color: var(--ink-2);
   }
-  .rules b {
-    font-weight: 600;
+  .rules p {
+    margin: 0;
   }
   .upd {
     margin-top: 18px;
@@ -247,7 +251,10 @@ const kinds = [...counts].sort((a, b) => b[1] - a[1] || PROBLEMS[a[0]].name.loca
       grid-template-columns: minmax(0, 1fr);
       gap: 6px;
     }
-    .ki-st {
+    .al-body h3 {
+      font-size: 23px;
+    }
+    .al-st {
       margin-left: 0;
     }
   }
