@@ -644,6 +644,14 @@
     "description": "Questions requiring reasoning across multiple real documents totaling about 100K tokens. Answers judged by an LLM.",
     "org": "Artificial Analysis",
     "released": "2025-08",
+    "changes": [
+      {
+        "date": "2025-11-26",
+        "kind": "questions",
+        "text": "Artificial Analysis fixed question-string encoding in the AA-LCR dataset. Evaluations using older revisions can present corrupted question text, so comparisons should identify the dataset revision.",
+        "url": "https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR/commit/0a471f2"
+      }
+    ],
     "links": {
       "dataset": "https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR",
       "leaderboard": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
@@ -654,6 +662,7 @@
     "unit": "%",
     "confidence": "likely",
     "evidence": [
+      "https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR/commit/0a471f2",
       "https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR",
       "https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR/commits/main"
     ]
@@ -1021,7 +1030,7 @@
     },
     "access": "unknown",
     "note": "Many labs refuse these prompts, so comparison columns are sparse.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -3091,7 +3100,7 @@
     "note": "Exercises come from public Exercism tracks, so contamination is possible.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 138.44,
+    "edi": 138.14,
     "epoch": {
       "epoch_name": "Aider polyglot",
       "random": 0,
@@ -4622,6 +4631,14 @@
     "description": "Agents complete 116 tasks across 20 real Android apps in an emulator. Each task checks the device's system state to judge success.",
     "org": "Google Research",
     "released": "2024-05",
+    "changes": [
+      {
+        "date": "2024-11-18",
+        "kind": "harness",
+        "text": "The AndroidWorld maintainers changed task step budgets to approximately twice the human average completion time. Earlier runs used different action limits, so success rates should identify the budget settings.",
+        "url": "https://github.com/google-research/android_world/blob/main/README.md"
+      }
+    ],
     "links": {
       "repo": "https://github.com/google-research/android_world",
       "paper": "https://arxiv.org/abs/2405.14573",
@@ -4633,7 +4650,8 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2405.14573",
-      "https://github.com/google-research/android_world"
+      "https://github.com/google-research/android_world",
+      "https://github.com/google-research/android_world/blob/main/README.md"
     ]
   },
   {
@@ -4659,7 +4677,7 @@
     "note": "Model cards report the rounds R1, R2, and R3 separately or as an average.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 127.53,
+    "edi": 122.35,
     "epoch": {
       "epoch_name": "ANLI",
       "random": 33.33,
@@ -5524,7 +5542,7 @@
     "successor": "apex-agents-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.41,
+    "edi": 157.03,
     "epoch": {
       "epoch_name": "APEX-Agents",
       "random": 0,
@@ -6218,6 +6236,14 @@
     "description": "Few-shot grid puzzles: infer a hidden transformation from about three examples and produce the output grid. Semi-private sets verified by ARC Prize.",
     "org": "ARC Prize Foundation (Chollet)",
     "released": "2019-11",
+    "changes": [
+      {
+        "date": "2024-06-21",
+        "kind": "questions",
+        "text": "François Chollet released corrections to two training tasks and nine evaluation tasks in ARC-AGI 1.0.2. Earlier copies contain different examples or expected outputs, so scores should identify the dataset revision.",
+        "url": "https://github.com/fchollet/ARC-AGI/releases/tag/v1.0.2"
+      }
+    ],
     "links": {
       "repo": "https://github.com/fchollet/ARC-AGI",
       "paper": "https://arxiv.org/abs/1911.01547",
@@ -6229,7 +6255,7 @@
     "successor": "arc-agi-2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.12,
+    "edi": 145.47,
     "epoch": {
       "epoch_name": "ARC-AGI",
       "random": 0,
@@ -6238,6 +6264,7 @@
       "in_eci": true
     },
     "evidence": [
+      "https://github.com/fchollet/ARC-AGI/releases/tag/v1.0.2",
       "https://arxiv.org/abs/2603.06590",
       "https://arxiv.org/abs/1911.01547",
       "https://github.com/fchollet/ARC-AGI",
@@ -6260,6 +6287,20 @@
     "description": "Models infer a rule from example grid pairs and produce the output grid for new inputs. Scored by tasks solved within two attempts.",
     "org": "ARC Prize Foundation",
     "released": "2025-03",
+    "changes": [
+      {
+        "date": "2025-11-04",
+        "kind": "policy",
+        "text": "The maintainers introduced certified scores through ARC Prize Verified. Only official evaluations on hidden datasets receive verification, distinguishing them from independently reported results.",
+        "url": "https://arcprize.org/blog/arc-prize-verified-program"
+      },
+      {
+        "date": "2025-12-05",
+        "kind": "policy",
+        "text": "The maintainers added a Model Refinements leaderboard category for systems with application-layer refinement. Readers can distinguish those evaluations from baseline model runs.",
+        "url": "https://arcprize.org/blog/arc-prize-2025-results-analysis"
+      }
+    ],
     "links": {
       "repo": "https://github.com/arcprize/ARC-AGI-2",
       "leaderboard": "https://arcprize.org/leaderboard",
@@ -6271,7 +6312,7 @@
     "successor": "arc-agi-3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 153.74,
+    "edi": 154.55,
     "epoch": {
       "epoch_name": "ARC-AGI-2",
       "random": 0,
@@ -6282,7 +6323,9 @@
     "evidence": [
       "https://arcprize.org/arc-agi/2/",
       "https://arxiv.org/abs/2505.11831",
-      "https://github.com/arcprize/ARC-AGI-2"
+      "https://github.com/arcprize/ARC-AGI-2",
+      "https://arcprize.org/blog/arc-prize-2025-results-analysis",
+      "https://arcprize.org/blog/arc-prize-verified-program"
     ]
   },
   {
@@ -6340,7 +6383,7 @@
     "note": "Saturated by frontier models, which score above 95%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 106.85,
+    "edi": 94.82,
     "epoch": {
       "epoch_name": "ARC AI2",
       "random": 25,
@@ -6437,6 +6480,14 @@
     "description": "500 hard arena prompts judged by an LLM against a baseline. Cheap proxy for arena rank.",
     "org": "Arena (formerly LMArena)",
     "released": "2024-04",
+    "changes": [
+      {
+        "date": "2024-10-14",
+        "kind": "scoring",
+        "text": "The Arena-Hard maintainers added optional style control for response length and Markdown formatting. Style-controlled scores adjust for presentation features and should not be compared directly with unadjusted scores.",
+        "url": "https://github.com/lmarena/arena-hard-auto#style-control"
+      }
+    ],
     "links": {
       "repo": "https://github.com/lmarena/arena-hard-auto",
       "paper": "https://arxiv.org/abs/2406.11939",
@@ -6447,6 +6498,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://github.com/lmarena/arena-hard-auto#style-control",
       "https://github.com/lmarena/arena-hard-auto",
       "https://arxiv.org/abs/2406.11939",
       "https://huggingface.co/datasets/lmarena-ai/arena-hard-auto-v0.1",
@@ -8180,6 +8232,20 @@
     "description": "Agent completes end-to-end business workflows inside a simulated company exposing dozens of REST APIs. Graded on resulting state.",
     "org": "Zapier",
     "released": "2026-04",
+    "changes": [
+      {
+        "date": "2026-07-16",
+        "kind": "subset",
+        "text": "The maintainers expanded and revised tasks in patch 1.0.5 to improve fairness and task requirements. Scores from earlier task snapshots may not be comparable.",
+        "url": "https://github.com/zapier/AutomationBench/blob/main/CHANGELOG.md"
+      },
+      {
+        "date": "2026-07-31",
+        "kind": "subset",
+        "text": "The maintainers corrected task discoverability and overly strict checks in patch 1.0.6, increased private-task difficulty, and refreshed official runs. Earlier scores use different task requirements.",
+        "url": "https://github.com/zapier/AutomationBench/blob/main/CHANGELOG.md"
+      }
+    ],
     "links": {
       "repo": "https://github.com/zapier/AutomationBench",
       "leaderboard": "https://zapier.com/benchmarks",
@@ -8793,7 +8859,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.43,
+    "edi": 154.65,
     "epoch": {
       "epoch_name": "Balrog",
       "random": 0,
@@ -8961,6 +9027,36 @@
       "https://github.com/logic-star-ai/baxbench"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "big-bench-extra-hard-micro",
+    "name": "BBEH micro average",
+    "aliases": [
+      "BBEH (Micro Avg)",
+      "BIG-Bench Extra Hard micro average"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models solve harder replacements for each of the 23 BIG-Bench Hard tasks, 4,520 examples in total. The score is the share of all examples answered correctly.",
+    "org": "Google DeepMind",
+    "released": "2025-02",
+    "links": {
+      "repo": "https://github.com/google-deepmind/bbeh",
+      "leaderboard": "https://github.com/google-deepmind/bbeh/blob/main/leaderboard.md",
+      "paper": "https://arxiv.org/abs/2502.19187"
+    },
+    "access": "public",
+    "note": "The board ranks by the harmonic mean over tasks, which the BIG-Bench Extra Hard record holds. Labs print this number. Some cards don't name the average and are filed here because every card that names it uses the micro average.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/google-deepmind/bbeh/blob/main/leaderboard.md"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "bbq-bias-benchmark-for-qa",
@@ -9266,6 +9362,38 @@
     "description": "Model emits function calls for single, parallel, multi-turn and agentic scenarios. Scored by AST and execution checks.",
     "org": "UC Berkeley (Gorilla)",
     "released": "2024-02",
+    "changes": [
+      {
+        "date": "2024-07-06",
+        "kind": "questions",
+        "text": "The maintainers corrected reference answers for 39 parallel-call tasks. Earlier scores used different answer keys.",
+        "url": "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md"
+      },
+      {
+        "date": "2024-08-19",
+        "kind": "subset",
+        "text": "The maintainers added user-contributed live tasks in BFCL V2. Its coverage differs from V1.",
+        "url": "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md"
+      },
+      {
+        "date": "2024-09-19",
+        "kind": "subset",
+        "text": "The maintainers added multi-turn tasks and state-based evaluation in BFCL V3. Its coverage differs from earlier versions.",
+        "url": "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md"
+      },
+      {
+        "date": "2024-10-16",
+        "kind": "questions",
+        "text": "The maintainers corrected questions and reference answers across six categories. Earlier evaluations used different task definitions.",
+        "url": "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md"
+      },
+      {
+        "date": "2024-10-30",
+        "kind": "grader",
+        "text": "The maintainers required multi-turn answers to pass both response and state checks. Earlier evaluations checked state alone.",
+        "url": "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md"
+      }
+    ],
     "links": {
       "repo": "https://github.com/ShishirPatil/gorilla",
       "leaderboard": "https://gorilla.cs.berkeley.edu/leaderboard.html"
@@ -9274,7 +9402,10 @@
     "note": "Live benchmark. Nova 2 pins results to a 2025 commit, so versions matter.",
     "successor": "bfcl-v4",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md"
+    ]
   },
   {
     "id": "betterchartqa",
@@ -9338,6 +9469,26 @@
     "description": "Models call functions and tools, including multi-turn agentic tasks with web search and memory. Checked against expected calls and outcomes.",
     "org": "UC Berkeley (Gorilla)",
     "released": "2025-07",
+    "changes": [
+      {
+        "date": "2025-10-13",
+        "kind": "questions",
+        "text": "The maintainers corrected prompts and ground truths across single-turn and multi-turn categories. Evaluations now use revised questions and expected calls.",
+        "url": "https://github.com/ShishirPatil/gorilla/pull/1160"
+      },
+      {
+        "date": "2025-11-04",
+        "kind": "regrade",
+        "text": "The maintainers updated leaderboard scores using checkpoint 86d0374 after dataset, backend, and grading fixes. Earlier leaderboard scores use different evaluation behavior.",
+        "url": "https://github.com/ShishirPatil/gorilla/pull/1231"
+      },
+      {
+        "date": "2025-12-17",
+        "kind": "regrade",
+        "text": "The maintainers updated leaderboard scores using checkpoint f7cf735 after backend and dataset fixes. The new scores supersede the preceding checkpoint’s results.",
+        "url": "https://github.com/ShishirPatil/gorilla/pull/1268"
+      }
+    ],
     "links": {
       "repo": "https://github.com/ShishirPatil/gorilla",
       "leaderboard": "https://gorilla.cs.berkeley.edu/leaderboard.html"
@@ -9348,7 +9499,10 @@
     "confidence": "verified",
     "evidence": [
       "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-calling-leaderboard/CHANGELOG.md",
-      "https://gorilla.cs.berkeley.edu/blogs/16_bfcl_v4_memory.html"
+      "https://gorilla.cs.berkeley.edu/blogs/16_bfcl_v4_memory.html",
+      "https://github.com/ShishirPatil/gorilla/pull/1160",
+      "https://github.com/ShishirPatil/gorilla/pull/1231",
+      "https://github.com/ShishirPatil/gorilla/pull/1268"
     ]
   },
   {
@@ -9456,7 +9610,7 @@
       "paper": "https://arxiv.org/abs/2502.19187"
     },
     "access": "public",
-    "note": "A mini version with 460 examples also exists, so check which one a model card reports.",
+    "note": "A mini version with 460 examples also exists, so check which one a model card reports. Labs usually print the micro average, which the BBEH micro average record holds.",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
@@ -9488,7 +9642,7 @@
     "successor": "big-bench-extra-hard",
     "unit": "%",
     "confidence": "verified",
-    "edi": 114.01,
+    "edi": 106.15,
     "epoch": {
       "epoch_name": "BBH",
       "random": 25,
@@ -10838,6 +10992,14 @@
     "description": "Models answer 3,807 multiple choice questions built from 14 classic computer vision tasks that use one or more images. Scoring is accuracy.",
     "org": "Xingyu Fu et al.",
     "released": "2024-04",
+    "changes": [
+      {
+        "date": "2025-09-27",
+        "kind": "grader",
+        "text": "The BLINK maintainers corrected the answer-matching prompt to mark the current response as the grading target. Runs using the earlier prompt can map free-form answers to choices differently.",
+        "url": "https://github.com/zeyofu/BLINK_Benchmark/commit/529b0ba"
+      }
+    ],
     "links": {
       "repo": "https://github.com/zeyofu/BLINK_Benchmark",
       "dataset": "https://huggingface.co/datasets/BLINK-Benchmark/BLINK",
@@ -10851,7 +11013,8 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2404.12390",
-      "https://github.com/zeyofu/BLINK_Benchmark"
+      "https://github.com/zeyofu/BLINK_Benchmark",
+      "https://github.com/zeyofu/BLINK_Benchmark/commit/529b0ba"
     ]
   },
   {
@@ -11533,6 +11696,39 @@
     ]
   },
   {
+    "id": "browsesafe-bench",
+    "name": "BrowseSafe-Bench",
+    "aliases": [
+      "BrowseSafe",
+      "BrowseSafe Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "browsesafe",
+    "version": "1",
+    "description": "Detectors and browser agents face prompt injections hidden in realistic HTML pages, across 11 attack types, nine placements and three writing styles. 3,680 test samples.",
+    "org": "Perplexity",
+    "released": "2025-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2511.20597",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-bench"
+    },
+    "access": "public",
+    "note": "14,719 samples in all, 11,039 for training. Released with the BrowseSafe detection model.",
+    "successor": "browsesafe-plus-plus",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2511.20597",
+      "https://browsesafe.perplexity.ai/"
+    ],
+    "added": "2026-11-01"
+  },
+  {
     "id": "browsesafe-plus-plus",
     "name": "BrowseSafe++",
     "aliases": [
@@ -11564,39 +11760,6 @@
     "evidence": [
       "https://browsesafe.perplexity.ai/",
       "https://arxiv.org/abs/2610.17457"
-    ],
-    "added": "2026-11-01"
-  },
-  {
-    "id": "browsesafe-bench",
-    "name": "BrowseSafe-Bench",
-    "aliases": [
-      "BrowseSafe",
-      "BrowseSafe Bench"
-    ],
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "university",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "family": "browsesafe",
-    "version": "1",
-    "description": "Detectors and browser agents face prompt injections hidden in realistic HTML pages, across 11 attack types, nine placements and three writing styles. 3,680 test samples.",
-    "org": "Perplexity",
-    "released": "2025-11",
-    "links": {
-      "paper": "https://arxiv.org/abs/2511.20597",
-      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-bench"
-    },
-    "access": "public",
-    "note": "14,719 samples in all, 11,039 for training. Released with the BrowseSafe detection model.",
-    "successor": "browsesafe-plus-plus",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2511.20597",
-      "https://browsesafe.perplexity.ai/"
     ],
     "added": "2026-11-01"
   },
@@ -12129,7 +12292,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 139.55,
+    "edi": 139.1,
     "epoch": {
       "epoch_name": "CadEval",
       "random": 0,
@@ -13833,6 +13996,14 @@
     "description": "Chart understanding on real arXiv figures. Reasoning questions require synthesizing information from complex charts.",
     "org": "Princeton NLP",
     "released": "2024-06",
+    "changes": [
+      {
+        "date": "2024-08-18",
+        "kind": "grader",
+        "text": "The maintainers pinned the grader to a dated API snapshot and fixed reasoning-grader failure handling. Earlier runs using the floating judge alias can receive different grades.",
+        "url": "https://github.com/princeton-nlp/CharXiv/commit/5e102482d256e6e0dd638db718fdd7215963da8b.patch"
+      }
+    ],
     "links": {
       "repo": "https://github.com/princeton-nlp/CharXiv",
       "dataset": "https://huggingface.co/datasets/princeton-nlp/CharXiv",
@@ -13842,7 +14013,10 @@
     "access": "public+private-holdout",
     "note": "Cards report the reasoning (RQ) split, with or without a Python tool.",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/princeton-nlp/CharXiv/commit/5e102482d256e6e0dd638db718fdd7215963da8b.patch"
+    ]
   },
   {
     "id": "charxiv-dq",
@@ -14165,7 +14339,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 161.26,
+    "edi": 161.52,
     "epoch": {
       "epoch_name": "Chess Puzzles",
       "random": 4.96,
@@ -14675,7 +14849,7 @@
     "note": "500 contexts, 1,899 tasks, 31,607 rubrics. Follow-up CL-bench Life (2026-04) covers everyday contexts.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 184.73,
+    "edi": 180.3,
     "epoch": {
       "epoch_name": "CL-bench",
       "random": 0,
@@ -14710,7 +14884,7 @@
     "note": "The best model solved 19.3 percent of tasks at release.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.46,
+    "edi": 177.1,
     "epoch": {
       "epoch_name": "CL-bench Life",
       "random": 0,
@@ -16099,7 +16273,7 @@
     "level": "everyday",
     "scoring": "model-judged",
     "format": "code",
-    "description": "Multimodal models write programs that render complete videos from text, an image or a video.",
+    "description": "Multimodal models write programs that render complete videos from text, an image or a video. The default Overall board ranks models by their mean rank across quality metrics, so a lower score is better.",
     "org": "Fudan University",
     "released": "2026-10",
     "links": {
@@ -16110,7 +16284,7 @@
     "access": "public",
     "note": "It had 41 Hugging Face paper upvotes and 8 GitHub stars. HeyGen's Code2Video Benchmark on Kaggle is a different test.",
     "unit": "score",
-    "better": "higher",
+    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/papers/2610.28416",
@@ -19675,7 +19849,7 @@
     "note": "40 professional CTF tasks from four competitions, each split into subtasks for partial credit. Agents work in a Kali Linux environment. The board mixes HAL leaderboard runs with lab system-card scores on 35 to 39 task subsets. Anthropic reports it near saturation. The makers point readers to their later BountyBench.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.77,
+    "edi": 146.11,
     "epoch": {
       "epoch_name": "Cybench",
       "random": 0,
@@ -21882,7 +22056,7 @@
     "note": "The official judge model changed from Gemini 2.5 Pro to GPT-5.5 in May 2026, so older and newer scores do not compare directly.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.85,
+    "edi": 154.79,
     "epoch": {
       "epoch_name": "DeepResearch Bench",
       "random": 0,
@@ -22280,6 +22454,14 @@
     "description": "113 original long-horizon engineering tasks across 91 repos and five languages, written from scratch. Hand-written verifiers accept alternative solutions.",
     "org": "Datacurve",
     "released": "2026-05",
+    "changes": [
+      {
+        "date": "2026-06-15",
+        "kind": "harness",
+        "text": "The maintainers introduced isolated verification in v1.1 while retaining 113 tasks. The verifier now grades committed patches in pristine containers, changing the evaluation environment from earlier runs.",
+        "url": "https://deepswe.datacurve.ai/changelog"
+      }
+    ],
     "links": {
       "repo": "https://github.com/datacurve-ai/deep-swe",
       "dataset": "https://huggingface.co/datasets/datacurve/deep-swe",
@@ -22296,7 +22478,10 @@
       "ceiling": 100,
       "runs": "external",
       "in_eci": false
-    }
+    },
+    "evidence": [
+      "https://deepswe.datacurve.ai/changelog"
+    ]
   },
   {
     "id": "deepterminalbench",
@@ -24949,7 +25134,7 @@
     "note": "Near saturation, with top models at about 98% in August 2026. Random guessing scores 40%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 136.73,
+    "edi": 135.72,
     "epoch": {
       "epoch_name": "DTBench",
       "random": 40,
@@ -25372,7 +25557,7 @@
     "note": "One card was banned in 2026-10 after it broke the game. Epoch expects saturation soon. Game material is not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.99,
+    "edi": 164.39,
     "epoch": {
       "epoch_name": "EBR-bench",
       "random": 0,
@@ -27419,7 +27604,7 @@
     "note": "41 real V8 N-day vulnerabilities with production mitigations on. 16 binary capability flags over five tiers: coverage, bug triggering, V8 internal primitives, general primitives and arbitrary code execution. Flags are checked by oracles compiled into a patched d8 binary. Episodes cap at 300 turns. Saturated by GPT-6 Astra at 100%, and OpenAI built a post-cutoff internal port to check contamination.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.05,
+    "edi": 163.39,
     "epoch": {
       "epoch_name": "ExploitBench",
       "random": 0,
@@ -28361,7 +28546,7 @@
     "access": "unknown",
     "unit": "%",
     "confidence": "likely",
-    "edi": 134.65,
+    "edi": 133.43,
     "epoch": {
       "epoch_name": "Fiction.LiveBench",
       "random": 0,
@@ -29203,41 +29388,6 @@
     ]
   },
   {
-    "id": "flores-plus",
-    "name": "FLORES+",
-    "aliases": [
-      "FLORES Plus",
-      "flores_plus",
-      "OLDI FLORES+"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-translation",
-    "level": "university",
-    "scoring": "verified",
-    "format": "open-ended",
-    "family": "flores",
-    "version": "plus",
-    "description": "Models translate English Wikipedia sentences that professionals and community contributors translated into over 200 languages. Outputs are scored with metrics such as chrF against the references.",
-    "org": "Open Language Data Initiative (OLDI)",
-    "released": "2023-10",
-    "links": {
-      "repo": "https://github.com/openlanguagedata/flores",
-      "site": "https://oldi.org/",
-      "dataset": "https://huggingface.co/datasets/openlanguagedata/flores_plus"
-    },
-    "access": "public",
-    "note": "OLDI calls it an extended and improved version of FLORES-200 and keeps adding languages and fixes. The Hugging Face dataset is gated under CC BY-SA 4.0 and had 237 configs on 2026-11-01.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://oldi.org/",
-      "https://github.com/openlanguagedata/flores",
-      "https://huggingface.co/datasets/openlanguagedata/flores_plus"
-    ],
-    "added": "2026-11-01"
-  },
-  {
     "id": "flores-200",
     "name": "FLORES-200",
     "aliases": [
@@ -29271,6 +29421,41 @@
       "https://github.com/openlanguagedata/flores",
       "https://github.com/facebookresearch/flores"
     ]
+  },
+  {
+    "id": "flores-plus",
+    "name": "FLORES+",
+    "aliases": [
+      "FLORES Plus",
+      "flores_plus",
+      "OLDI FLORES+"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "flores",
+    "version": "plus",
+    "description": "Models translate English Wikipedia sentences that professionals and community contributors translated into over 200 languages. Outputs are scored with metrics such as chrF against the references.",
+    "org": "Open Language Data Initiative (OLDI)",
+    "released": "2023-10",
+    "links": {
+      "repo": "https://github.com/openlanguagedata/flores",
+      "site": "https://oldi.org/",
+      "dataset": "https://huggingface.co/datasets/openlanguagedata/flores_plus"
+    },
+    "access": "public",
+    "note": "OLDI calls it an extended and improved version of FLORES-200 and keeps adding languages and fixes. The Hugging Face dataset is gated under CC BY-SA 4.0 and had 237 configs on 2026-11-01.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://oldi.org/",
+      "https://github.com/openlanguagedata/flores",
+      "https://huggingface.co/datasets/openlanguagedata/flores_plus"
+    ],
+    "added": "2026-11-01"
   },
   {
     "id": "flteval",
@@ -29410,8 +29595,8 @@
     },
     "access": "public",
     "note": "Since March 2026 the leaderboards show a Brier Index from 0 to 100 percent, where higher is better. The tournament track allows tools and the baseline track does not. Questions resolve after model training cutoffs, so the set resists contamination.",
-    "unit": "index",
-    "better": "higher",
+    "unit": "brier",
+    "better": "lower",
     "confidence": "verified",
     "epoch": {
       "epoch_name": "ForecastBench",
@@ -29814,7 +29999,7 @@
     "successor": "frontiercode-1-1",
     "unit": "%",
     "confidence": "likely",
-    "edi": 163.88,
+    "edi": 163.83,
     "epoch": {
       "epoch_name": "FrontierCode",
       "random": 0,
@@ -30023,7 +30208,7 @@
     "successor": "frontiermath-tiers-1-3-v2",
     "unit": "%",
     "confidence": "likely",
-    "edi": 149.75,
+    "edi": 150.7,
     "epoch": {
       "epoch_name": "FrontierMath-2025-02-28-Private",
       "random": 0,
@@ -30100,7 +30285,7 @@
     "successor": "frontiermath-tier-4-v2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.38,
+    "edi": 158.99,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-2025-07-01-Private",
       "random": 0,
@@ -30140,7 +30325,7 @@
     "note": "Version 2 corrected 12 problems and removed 7 from the original Tier 4 set.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.52,
+    "edi": 158.71,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-v2-Private",
       "random": 0,
@@ -30180,7 +30365,7 @@
     "note": "Version 2 fixed errors in 42 percent of problems, and Epoch says the tiers are nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.29,
+    "edi": 150.68,
     "epoch": {
       "epoch_name": "FrontierMath-Tiers-1-3-v2-Private",
       "random": 0,
@@ -30392,7 +30577,7 @@
     "note": "This record is FrontierSWE v2 (2026-09-02), the version Epoch AI tracks. It added 21 tasks to reach 34 and runs every model in the proximus harness. v1 (April 2026, 17 tasks) has its own record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.72,
+    "edi": 164.93,
     "epoch": {
       "epoch_name": "FrontierSWE",
       "random": 0,
@@ -30653,7 +30838,7 @@
     "note": "LLM grader checks error descriptions. Novice human baseline 63%. Photos and manuals are not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.13,
+    "edi": 165.72,
     "epoch": {
       "epoch_name": "Furniture Assembly",
       "random": 30,
@@ -31953,7 +32138,7 @@
     "note": "Only the 220-task gold set is public, with an automated grading service. OpenAI says its hosted GDPval leaderboard is no longer active and points to the GDPval-AA board instead.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.07,
+    "edi": 154.7,
     "epoch": {
       "epoch_name": "GDPval",
       "random": 0,
@@ -32560,7 +32745,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 119.08,
+    "edi": 122.8,
     "epoch": {
       "epoch_name": "GeoBench",
       "random": 0,
@@ -32697,6 +32882,14 @@
     "description": "Models answer MMLU questions in 15 languages, with 200 culturally sensitive and 200 culturally agnostic questions per language. All items are human translated or post-edited. Accuracy.",
     "org": "Cohere Labs",
     "released": "2024-12",
+    "changes": [
+      {
+        "date": "2025-05-27",
+        "kind": "subset",
+        "text": "The maintainers added a 400-question Burmese test set, expanding coverage from 15 to 16 languages. Aggregates including Burmese differ in language coverage from the original paper results.",
+        "url": "https://huggingface.co/datasets/CohereLabs/Global-MMLU-Lite/commit/2b6bf3d"
+      }
+    ],
     "links": {
       "paper": "https://arxiv.org/abs/2412.03304",
       "site": "https://cohere.com/research/globalmmlu",
@@ -32711,7 +32904,8 @@
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/datasets/CohereLabs/Global-MMLU-Lite",
-      "https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite"
+      "https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite",
+      "https://huggingface.co/datasets/CohereLabs/Global-MMLU-Lite/commit/2b6bf3d"
     ],
     "added": "2026-11-01"
   },
@@ -33106,7 +33300,7 @@
     "note": "Saturated (about 94-96%). Several 2026 cards use it only as a substrate for CoT-controllability or monitor-evasion tests.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 134.75,
+    "edi": 133.96,
     "epoch": {
       "epoch_name": "GPQA diamond",
       "random": 25,
@@ -33231,6 +33425,20 @@
     "description": "A graph is given as an edge list in long context. The model answers BFS or parent queries, scored by F1.",
     "org": "OpenAI",
     "released": "2025-04",
+    "changes": [
+      {
+        "date": "2026-02-27",
+        "kind": "questions",
+        "text": "OpenAI corrected ground truth for 24 of 400 short-context parents examples and clarified exact-depth breadth-first search prompts. Earlier dataset revisions can yield different answers and scores.",
+        "url": "https://huggingface.co/datasets/openai/graphwalks/blob/main/README.md"
+      },
+      {
+        "date": "2026-09-14",
+        "kind": "grader",
+        "text": "OpenAI corrected the published answer parser and F1 grading code. Parse failures and nonoverlapping answers now receive zero, while matching empty sets receive full credit, changing scores from the earlier code.",
+        "url": "https://huggingface.co/datasets/openai/graphwalks/commit/be6cc6e"
+      }
+    ],
     "links": {
       "dataset": "https://huggingface.co/datasets/openai/graphwalks",
       "site": "https://openai.com/index/gpt-4-1/"
@@ -33240,6 +33448,8 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://huggingface.co/datasets/openai/graphwalks/blob/main/README.md",
+      "https://huggingface.co/datasets/openai/graphwalks/commit/be6cc6e",
       "https://huggingface.co/datasets/openai/graphwalks"
     ]
   },
@@ -33689,7 +33899,7 @@
     "successor": "math",
     "unit": "%",
     "confidence": "verified",
-    "edi": 106.33,
+    "edi": 94.34,
     "epoch": {
       "epoch_name": "GSM8K",
       "random": 0,
@@ -33781,7 +33991,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.18,
+    "edi": 159.77,
     "epoch": {
       "epoch_name": "GSO-Bench",
       "random": 0,
@@ -34112,6 +34322,14 @@
     "description": "Models answer 1,129 yes or no questions about 346 images, built in pairs to expose language hallucination and visual illusion. Scored by accuracy.",
     "org": "University of Maryland",
     "released": "2023-10",
+    "changes": [
+      {
+        "date": "2023-11-28",
+        "kind": "subset",
+        "text": "The maintainers expanded the dataset and updated the leaderboard. Scores on the expanded questions do not use the original evaluation set.",
+        "url": "https://github.com/tianyi-lab/HallusionBench#updates"
+      }
+    ],
     "links": {
       "repo": "https://github.com/tianyi-lab/HallusionBench",
       "paper": "https://arxiv.org/abs/2310.14566"
@@ -34121,7 +34339,8 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2310.14566",
-      "https://github.com/tianyi-lab/HallusionBench"
+      "https://github.com/tianyi-lab/HallusionBench",
+      "https://github.com/tianyi-lab/HallusionBench#updates"
     ]
   },
   {
@@ -34679,8 +34898,6 @@
       "HLAB",
       "HLab",
       "Harvey LAB",
-      "Harvey LAB-AA",
-      "Harvey Lab-AA",
       "Harvey Legal Agent Benchmark (LAB)",
       "Harvey's Legal Agent Benchmark",
       "LAB",
@@ -34697,6 +34914,20 @@
     "description": "Agent works through legal matter files across 24+ practice areas and produces work product. Expert rubric, task passes only if every criterion passes.",
     "org": "Harvey",
     "released": "2026-05",
+    "changes": [
+      {
+        "date": "2026-06-12",
+        "kind": "subset",
+        "text": "Harvey added 500 contracting tasks to LAB. Results covering the expanded benchmark measure a broader task mix than the original law-firm release.",
+        "url": "https://www.harvey.ai/blog/legal-agent-benchmark-in-house-contracting"
+      },
+      {
+        "date": "2026-08-07",
+        "kind": "subset",
+        "text": "Harvey added a firm-knowledge environment with 250 tasks. Runs including this expansion test retrieval across a much larger document collection.",
+        "url": "https://www.harvey.ai/blog/legal-agent-bench-law-firm-knowledge"
+      }
+    ],
     "links": {
       "repo": "https://github.com/harveyai/harvey-labs",
       "dataset": "https://hub.harborframework.com/datasets/punitarani/harvey-labs",
@@ -34709,6 +34940,8 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://www.harvey.ai/blog/legal-agent-bench-law-firm-knowledge",
+      "https://www.harvey.ai/blog/legal-agent-benchmark-in-house-contracting",
       "https://www.vals.ai/benchmarks/hlab-v1",
       "https://www.vals.ai/benchmarks/hlab"
     ]
@@ -34747,6 +34980,62 @@
       "https://github.com/harveyai/harvey-labs/releases"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "harvey-lab-aa",
+    "name": "Harvey LAB-AA v1.0",
+    "aliases": [
+      "Harvey LAB-AA",
+      "Harvey Lab-AA",
+      "Harvey LAB-AA v1.0"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-law",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Artificial Analysis runs agents on Harvey's Legal Agent Benchmark tasks in an offline sandbox, where they write legal work products such as memos and redlines from case documents. Judges grade each deliverable against a task rubric, and the headline is the share of rubric criteria passed.",
+    "org": "Artificial Analysis",
+    "links": {
+      "site": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    },
+    "access": "private",
+    "note": "Artificial Analysis's setup differs from Harvey's, with three judges, exact filenames and no helper scripts, so these scores do not compare with the Harvey LAB record. Version 1.1 replaced this one, and its scores do not compare either.",
+    "successor": "harvey-lab-aa-1-1",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    ],
+    "added": "2026-11-09"
+  },
+  {
+    "id": "harvey-lab-aa-1-1",
+    "name": "Harvey LAB-AA v1.1",
+    "aliases": [
+      "Harvey LAB-AA v1.1",
+      "Harvey LAB-AA 1.1"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-law",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Artificial Analysis's run of Harvey's Legal Agent Benchmark on Harvey's newer private set of 120 tasks across 24 practice areas. A deliverable with a material hallucination scores zero, and the headline is the share of judges who find every rubric criterion passed.",
+    "org": "Artificial Analysis",
+    "links": {
+      "site": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    },
+    "access": "private",
+    "note": "Artificial Analysis says scores do not compare with version 1.0, whose headline was the criterion pass rate. The setup also differs from Harvey's own runs on the Harvey LAB record.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    ],
+    "added": "2026-11-09"
   },
   {
     "id": "hate-harassment-safety-eval-google",
@@ -35145,7 +35434,7 @@
     "note": "Saturated. GitHub repo rowanz/hellaswag returns HTTP 451 (blocked by a WikiHow DMCA notice dated 2026-09-14), so repo is null.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 87.38,
+    "edi": 62.26,
     "epoch": {
       "epoch_name": "HellaSwag",
       "random": 25,
@@ -36654,37 +36943,6 @@
     ]
   },
   {
-    "id": "humaneval-plus",
-    "name": "HumanEval+",
-    "aliases": [
-      "HumanEvalPlus",
-      "HumanEval Plus",
-      "EvalPlus HumanEval+"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "school",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
-    "org": "UIUC (EvalPlus)",
-    "released": "2023-05",
-    "links": {
-      "paper": "https://arxiv.org/abs/2305.01210",
-      "repo": "https://github.com/evalplus/evalplus",
-      "leaderboard": "https://evalplus.github.io/leaderboard.html"
-    },
-    "access": "public",
-    "note": "Scores are pass@1 and run lower than plain HumanEval.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2305.01210",
-      "https://arxiv.org/abs/2504.21318v1"
-    ]
-  },
-  {
     "id": "humaneval-cobol-cohere",
     "name": "HumanEval-COBOL (Cohere)",
     "aliases": [
@@ -36743,6 +37001,67 @@
     "added": "2026-11-01"
   },
   {
+    "id": "humaneval-plus",
+    "name": "HumanEval+",
+    "aliases": [
+      "HumanEvalPlus",
+      "HumanEval Plus",
+      "EvalPlus HumanEval+"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "school",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
+    "org": "UIUC (EvalPlus)",
+    "released": "2023-05",
+    "changes": [
+      {
+        "date": "2023-06-02",
+        "kind": "subset",
+        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
+      },
+      {
+        "date": "2023-11-24",
+        "kind": "questions",
+        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
+      },
+      {
+        "date": "2024-04-02",
+        "kind": "harness",
+        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
+      },
+      {
+        "date": "2024-10-20",
+        "kind": "grader",
+        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+      }
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.01210",
+      "repo": "https://github.com/evalplus/evalplus",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
+    },
+    "access": "public",
+    "note": "Scores are pass@1 and run lower than plain HumanEval.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.01210",
+      "https://arxiv.org/abs/2504.21318v1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+    ]
+  },
+  {
     "id": "humanevalpack",
     "name": "HumanEvalPack",
     "aliases": [
@@ -36790,6 +37109,32 @@
     "description": "2,500 expert-written closed-ended questions across 100+ subjects. Exact-match or multiple-choice answers graded by an LLM judge.",
     "org": "Center for AI Safety + Scale AI",
     "released": "2025-01",
+    "changes": [
+      {
+        "date": "2025-02-11",
+        "kind": "grader",
+        "text": "The maintainers replaced the default answer judge and added a judge-selection option. Scores produced with the previous default use a different grader.",
+        "url": "https://github.com/centerforaisafety/hle/commit/f7ed498f88a0"
+      },
+      {
+        "date": "2025-04-03",
+        "kind": "subset",
+        "text": "The maintainers finalized HLE at 2,500 questions. Earlier evaluations used a different question set and are not directly comparable.",
+        "url": "https://lastexam.ai/"
+      },
+      {
+        "date": "2026-02-20",
+        "kind": "subset",
+        "text": "The maintainers began rolling updates to the question set, restoring 166 questions, removing 27 and updating 8. Scores from before and after use different questions.",
+        "url": "https://github.com/centerforaisafety/hle/blob/main/hle-rolling-changes.txt"
+      },
+      {
+        "date": "2026-07-27",
+        "kind": "subset",
+        "text": "A rolling release added 79 questions and removed 6. Scores from before and after use different questions.",
+        "url": "https://github.com/centerforaisafety/hle/blob/main/hle-rolling-changes.txt"
+      }
+    ],
     "links": {
       "repo": "https://github.com/centerforaisafety/hle",
       "dataset": "https://huggingface.co/datasets/cais/hle",
@@ -36810,6 +37155,8 @@
       "in_eci": false
     },
     "evidence": [
+      "https://github.com/centerforaisafety/hle/blob/main/hle-rolling-changes.txt",
+      "https://github.com/centerforaisafety/hle/commit/f7ed498f88a0",
       "https://lastexam.ai/",
       "https://lastexam.ai/blog/hle-diamond",
       "https://lastexam.ai",
@@ -37512,6 +37859,26 @@
     "description": "58 new out-of-domain verifiable output constraints. Scored by programmatic constraint checks (strict or loose).",
     "org": "AllenAI",
     "released": "2025-07",
+    "changes": [
+      {
+        "date": "2025-11-11",
+        "kind": "regrade",
+        "text": "The maintainers revised the leaderboard after fixing IFBench verifiers. Earlier published scores can differ from the revised results.",
+        "url": "https://github.com/allenai/IFBench/commit/c62b34768bf2d54412faaa61f3980e7e72dd9a2c"
+      },
+      {
+        "date": "2026-01-04",
+        "kind": "grader",
+        "text": "The maintainers fixed verifier crashes, case handling, tokenization, and word-boundary matching. The revised checks can assign different results to identical responses.",
+        "url": "https://github.com/allenai/IFBench/commit/8e6a9bebc16530d33a502d514b3894817eb71317"
+      },
+      {
+        "date": "2026-07-17",
+        "kind": "grader",
+        "text": "The maintainers fixed six instruction verifiers that incorrectly accepted or rejected responses. Scores can move in either direction without changing the task set.",
+        "url": "https://github.com/allenai/IFBench/commit/1d62c1d6dc4f6608938d22424c46edef6ce50671"
+      }
+    ],
     "links": {
       "repo": "https://github.com/allenai/IFBench",
       "dataset": "https://huggingface.co/datasets/allenai/IFBench_test",
@@ -37522,6 +37889,9 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://github.com/allenai/IFBench/commit/1d62c1d6dc4f6608938d22424c46edef6ce50671",
+      "https://github.com/allenai/IFBench/commit/8e6a9bebc16530d33a502d514b3894817eb71317",
+      "https://github.com/allenai/IFBench/commit/c62b34768bf2d54412faaa61f3980e7e72dd9a2c",
       "https://github.com/allenai/IFBench/commits/main",
       "https://huggingface.co/datasets/allenai/IFBench_multi-turn"
     ]
@@ -38045,6 +38415,14 @@
     "description": "400 olympiad problems with short verifiable answers, robustified against memorization. Scored by answer match.",
     "org": "Google DeepMind",
     "released": "2025-11",
+    "changes": [
+      {
+        "date": "2026-02-12",
+        "kind": "questions",
+        "text": "The maintainers replaced the original file with answerbench_v2.csv to correct ambiguous questions and incorrect answers. Scores using the deprecated file can differ.",
+        "url": "https://github.com/google-deepmind/superhuman/blob/main/imobench/README.md"
+      }
+    ],
     "links": {
       "repo": "https://github.com/google-deepmind/superhuman",
       "paper": "https://arxiv.org/abs/2511.01846",
@@ -38056,6 +38434,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://github.com/google-deepmind/superhuman/blob/main/imobench/README.md",
       "https://raw.githubusercontent.com/google-deepmind/superhuman/main/imobench/README.md",
       "https://imobench.github.io/"
     ]
@@ -39999,6 +40378,7 @@
     },
     "access": "public",
     "unit": "%",
+    "better": "lower",
     "confidence": "verified"
   },
   {
@@ -42476,7 +42856,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 59.34,
+    "edi": 43.14,
     "epoch": {
       "epoch_name": "LAMBADA",
       "random": 0,
@@ -43769,6 +44149,20 @@
         "label": "New release"
       }
     ],
+    "changes": [
+      {
+        "date": "2024-06-24",
+        "kind": "subset",
+        "text": "The maintainers removed the house-traversal task after fixing ambiguous answer parsing revealed saturation. Scores thereafter cover a different set of tasks.",
+        "url": "https://github.com/LiveBench/LiveBench/blob/main/changelog.md"
+      },
+      {
+        "date": "2025-10-03",
+        "kind": "regrade",
+        "text": "The maintainers reran agentic coding with Mini-SWE-Agent and raised the step limit from 50 to 250. They replaced the existing leaderboard results, so earlier scores use a different scaffold and budget.",
+        "url": "https://github.com/LiveBench/LiveBench/blob/main/changelog.md"
+      }
+    ],
     "links": {
       "repo": "https://github.com/LiveBench/LiveBench",
       "dataset": "https://huggingface.co/livebench",
@@ -43841,6 +44235,14 @@
     "description": "Competitive programming problems collected after model cutoffs from LeetCode, AtCoder, Codeforces. Scored pass@1 on hidden tests.",
     "org": "UC Berkeley / MIT / Cornell",
     "released": "2024-03",
+    "changes": [
+      {
+        "date": "2024-04-16",
+        "kind": "harness",
+        "text": "The LiveCodeBench maintainers added tests to the lite code-generation dataset. Earlier evaluations used a different test collection, which can change whether a generated program passes.",
+        "url": "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/2c35eba"
+      }
+    ],
     "links": {
       "repo": "https://github.com/LiveCodeBench/LiveCodeBench",
       "dataset": "https://huggingface.co/datasets/livecodebench/code_generation_lite",
@@ -43853,6 +44255,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://huggingface.co/datasets/livecodebench/code_generation_lite/commit/2c35eba",
       "https://github.com/LiveCodeBench/LiveCodeBench",
       "https://arxiv.org/abs/2506.11928"
     ]
@@ -44789,7 +45192,7 @@
     "note": "Same benchmark as the lmca record, from the same arXiv paper 2607.27499.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 151.68,
+    "edi": 152.05,
     "epoch": {
       "epoch_name": "LMCA",
       "random": 0,
@@ -46931,7 +47334,7 @@
     "note": "Near saturation, and contamination is likely because the problems have been public since 2021.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 127.99,
+    "edi": 126.12,
     "epoch": {
       "epoch_name": "MATH level 5",
       "random": 0,
@@ -47623,6 +48026,20 @@
     "description": "Models write short Python functions for MBPP problems, and EvalPlus checks each one against many more generated tests than the original.",
     "org": "UIUC (EvalPlus)",
     "released": "2023-12",
+    "changes": [
+      {
+        "date": "2024-04-02",
+        "kind": "harness",
+        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
+      },
+      {
+        "date": "2024-10-20",
+        "kind": "grader",
+        "text": "The maintainers shipped corrected input constraints and reference checkers for MBPP+. Identical generated programs can receive different pass results with the updated dataset.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+      }
+    ],
     "links": {
       "paper": "https://arxiv.org/abs/2305.01210",
       "repo": "https://github.com/evalplus/evalplus",
@@ -47636,7 +48053,9 @@
     "confidence": "likely",
     "evidence": [
       "https://github.com/evalplus/evalplus",
-      "https://evalplus.github.io/leaderboard.html"
+      "https://evalplus.github.io/leaderboard.html",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
     ],
     "added": "2026-11-01"
   },
@@ -47742,6 +48161,20 @@
     "description": "Multi-step workflows over real MCP servers. Scores tool-use competency on realistic tasks.",
     "org": "Scale AI",
     "released": "2026-01",
+    "changes": [
+      {
+        "date": "2026-07-04",
+        "kind": "harness",
+        "text": "The maintainers replaced the Python harness with a TypeScript agent loop and configurable run controls. Scores from the old and new harnesses require matching execution settings.",
+        "url": "https://github.com/scaleapi/mcp-atlas/pull/53"
+      },
+      {
+        "date": "2026-10-23",
+        "kind": "harness",
+        "text": "The maintainers enforced per-task tool restrictions during execution and stopped advertising disabled tools. Earlier runs could invoke tools outside the allowed set.",
+        "url": "https://github.com/scaleapi/mcp-atlas/pull/101"
+      }
+    ],
     "links": {
       "repo": "https://github.com/scaleapi/mcp-atlas",
       "dataset": "https://huggingface.co/datasets/ScaleAI/MCP-Atlas",
@@ -47751,7 +48184,11 @@
     "access": "public+private-holdout",
     "note": "500 public tasks of 1,000. Rest held back. Labs use different judge models, so self-reported scores vary.",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/scaleapi/mcp-atlas/pull/101",
+      "https://github.com/scaleapi/mcp-atlas/pull/53"
+    ]
   },
   {
     "id": "mcp-prompt-injection-anthropic",
@@ -48447,6 +48884,32 @@
       "https://github.com/ADoublLEN/Meeseeks"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "meeseeks-utility-rate",
+    "name": "Meeseeks Utility Rate",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-multi-turn",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models follow complex instructions with feedback for up to 20 turns. The score measures fully usable responses as a percentage.",
+    "org": "Meituan",
+    "released": "2025-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2504.21625",
+      "repo": "https://github.com/ADoublLEN/Meeseeks",
+      "leaderboard": "https://github.com/ADoublLEN/Meeseeks"
+    },
+    "access": "public",
+    "note": "The paper reports utility rate separately from requirement-level Meeseeks Score. The importer reads final-turn utility rate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/html/2504.21625"
+    ],
+    "added": "2026-11-08"
   },
   {
     "id": "mega-bench",
@@ -49435,7 +49898,7 @@
     "successor": "metr-time-horizon-1-1",
     "unit": "minutes",
     "confidence": "verified",
-    "edi": 136.63,
+    "edi": 136.04,
     "epoch": {
       "epoch_name": "METR Time Horizons",
       "runs": "external",
@@ -50757,7 +51220,7 @@
     "note": "25 targets, 3 kept private. ~34% of tests held out. Source programs are open source, so memorization cannot be fully ruled out.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 160.67,
+    "edi": 164.39,
     "epoch": {
       "epoch_name": "MirrorCode",
       "random": 0,
@@ -52272,7 +52735,7 @@
     "successor": "mmlu-pro",
     "unit": "%",
     "confidence": "verified",
-    "edi": 111.14,
+    "edi": 102.69,
     "epoch": {
       "epoch_name": "MMLU",
       "random": 25,
@@ -52513,6 +52976,14 @@
     "description": "Harder 10-option version of MMLU with reasoning-focused questions across 14 subjects.",
     "org": "TIGER-Lab (Waterloo)",
     "released": "2024-06",
+    "changes": [
+      {
+        "date": "2026-01-18",
+        "kind": "questions",
+        "text": "The maintainers removed inconsistent leading spaces from answer options in STEM subjects. This correction removed a formatting shortcut that could inflate earlier scores.",
+        "url": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro"
+      }
+    ],
     "links": {
       "repo": "https://github.com/TIGER-AI-Lab/MMLU-Pro",
       "dataset": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro",
@@ -52718,13 +53189,24 @@
     "description": "MMLU professionally translated into 14 languages. Multiple-choice accuracy.",
     "org": "OpenAI",
     "released": "2024-09",
+    "changes": [
+      {
+        "date": "2025-01-31",
+        "kind": "grader",
+        "text": "The maintainers merged improved multilingual answer parsing into the official evaluator. Evaluations using the earlier parser can classify the same responses differently.",
+        "url": "https://github.com/openai/simple-evals/pull/41"
+      }
+    ],
     "links": {
       "repo": "https://github.com/openai/simple-evals",
       "dataset": "https://huggingface.co/datasets/openai/MMMLU"
     },
     "access": "public",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/openai/simple-evals/pull/41"
+    ]
   },
   {
     "id": "mmmu",
@@ -52737,6 +53219,14 @@
     "description": "11.5K college-level multimodal questions across 30 subjects. Multiple-choice and open accuracy.",
     "org": "MMMU team (OSU, Waterloo and others)",
     "released": "2023-11",
+    "changes": [
+      {
+        "date": "2026-02-12",
+        "kind": "policy",
+        "text": "The MMMU team released the test answers, allowing local test scoring. Later test results no longer come exclusively from evaluation against hidden answers.",
+        "url": "https://mmmu-benchmark.github.io/"
+      }
+    ],
     "links": {
       "repo": "https://github.com/MMMU-Benchmark/MMMU",
       "dataset": "https://huggingface.co/datasets/MMMU/MMMU",
@@ -52749,6 +53239,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://mmmu-benchmark.github.io/",
       "https://github.com/MMMU-Benchmark/MMMU"
     ]
   },
@@ -54322,6 +54813,14 @@
     "description": "80 two-turn questions graded by GPT-4 as judge. Introduced LLM-as-judge methodology.",
     "org": "LMSYS",
     "released": "2023-06",
+    "changes": [
+      {
+        "date": "2023-07-04",
+        "kind": "harness",
+        "text": "The LMSYS maintainers doubled the default single-answer judge output limit from 1,024 to 2,048 tokens. Later runs can complete longer grading explanations before truncation, so comparisons should identify the harness revision.",
+        "url": "https://github.com/lm-sys/FastChat/commit/6d06351"
+      }
+    ],
     "links": {
       "repo": "https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge",
       "paper": "https://arxiv.org/abs/2306.05685",
@@ -54332,6 +54831,7 @@
     "unit": "score",
     "confidence": "verified",
     "evidence": [
+      "https://github.com/lm-sys/FastChat/commit/6d06351",
       "https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge",
       "https://huggingface.co/datasets/lmsys/mt_bench_human_judgments"
     ]
@@ -55305,6 +55805,26 @@
     "description": "Models write code for HumanEval and MBPP problems translated into 18 other programming languages. Scored by pass@1 on unit tests.",
     "org": "Northeastern University Programming Research Lab (NuPRL) et al.",
     "released": "2022-08",
+    "changes": [
+      {
+        "date": "2022-10-03",
+        "kind": "subset",
+        "text": "The maintainers added translated MBPP tasks alongside HumanEval tasks. Scores must identify which source task set they use.",
+        "url": "https://huggingface.co/datasets/nuprl/MultiPL-E/commit/6d6272d02c88d3efec3e11206dbdfd3e6b5e9f27"
+      },
+      {
+        "date": "2024-07-06",
+        "kind": "subset",
+        "text": "The maintainers added four programming languages and corrected four Scala problems in version 3.0. The release also changed prompt whitespace across several existing languages.",
+        "url": "https://huggingface.co/datasets/nuprl/MultiPL-E/commit/c0d6f653ee85d06e5d0129bc3f79f491f73ffc6f"
+      },
+      {
+        "date": "2025-07-15",
+        "kind": "harness",
+        "text": "The maintainers removed a spurious Lua stop token. New Lua evaluations avoid premature truncation and can score higher than earlier runs.",
+        "url": "https://github.com/nuprl/MultiPL-E/commit/3e7bec4"
+      }
+    ],
     "links": {
       "repo": "https://github.com/nuprl/MultiPL-E",
       "dataset": "https://huggingface.co/datasets/nuprl/MultiPL-E",
@@ -55315,7 +55835,10 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2208.08227",
-      "https://github.com/nuprl/MultiPL-E"
+      "https://github.com/nuprl/MultiPL-E",
+      "https://github.com/nuprl/MultiPL-E/commit/3e7bec4",
+      "https://huggingface.co/datasets/nuprl/MultiPL-E/commit/6d6272d02c88d3efec3e11206dbdfd3e6b5e9f27",
+      "https://huggingface.co/datasets/nuprl/MultiPL-E/commit/c0d6f653ee85d06e5d0129bc3f79f491f73ffc6f"
     ]
   },
   {
@@ -55610,7 +56133,7 @@
     "note": "Game identity, prompts and positions are kept secret to prevent targeted preparation. Likely the 'game-puzzles' benchmark in the Epoch post.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.21,
+    "edi": 164.77,
     "epoch": {
       "epoch_name": "Mystery Game Puzzles",
       "random": 9.22,
@@ -56168,6 +56691,14 @@
     "description": "From one natural-language requirements document and an empty workspace, agent builds an installable Python library. Scored by original project's test pass rate.",
     "org": "ByteDance + M-A-P + 2077AI",
     "released": "2025-12",
+    "changes": [
+      {
+        "date": "2026-05-13",
+        "kind": "scoring",
+        "text": "The maintainers revised test-count denominators for 34 tasks. The harness divides passed tests by these counts, so unchanged test outcomes can produce different success rates.",
+        "url": "https://github.com/multimodal-art-projection/NL2RepoBench/commit/781a1da1ee41fb8edb0bed22f586d69111610edf"
+      }
+    ],
     "links": {
       "repo": "https://github.com/multimodal-art-projection/NL2RepoBench",
       "paper": "https://arxiv.org/abs/2512.12730"
@@ -56175,7 +56706,10 @@
     "access": "public",
     "note": "104 tasks. Labs add anti-cheat blocks on pip download/git clone of the target repo to stop reward hacking.",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/multimodal-art-projection/NL2RepoBench/commit/781a1da1ee41fb8edb0bed22f586d69111610edf"
+    ]
   },
   {
     "id": "no-cot-math-time-horizon-uk-aisi",
@@ -56733,6 +57267,20 @@
     "description": "Visual-text localization and reasoning tasks across 31 scenarios (documents, scenes, charts). Averaged task accuracy.",
     "org": "HUST (Yuliang Liu et al.)",
     "released": "2024-12",
+    "changes": [
+      {
+        "date": "2025-06-21",
+        "kind": "subset",
+        "text": "The maintainers introduced a private evaluation dataset and quarterly leaderboard updates. Private-set results measure a different question set from the public release.",
+        "url": "https://github.com/Yuliang-Liu/MultimodalOCR#news"
+      },
+      {
+        "date": "2025-07-05",
+        "kind": "grader",
+        "text": "The maintainers corrected English answer-length routing. Longer answers now receive edit-distance scoring, while short answers use substring matching.",
+        "url": "https://github.com/Yuliang-Liu/MultimodalOCR/commit/161c6dfbea88c52075566c3bd1846169341b4683"
+      }
+    ],
     "links": {
       "repo": "https://github.com/Yuliang-Liu/MultimodalOCR",
       "dataset": "https://huggingface.co/datasets/ling99/OCRBench_v2",
@@ -56743,6 +57291,8 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://github.com/Yuliang-Liu/MultimodalOCR#news",
+      "https://github.com/Yuliang-Liu/MultimodalOCR/commit/161c6dfbea88c52075566c3bd1846169341b4683",
       "https://github.com/Yuliang-Liu/MultimodalOCR"
     ]
   },
@@ -58535,7 +59085,7 @@
     "note": "Saturated by frontier models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 106.25,
+    "edi": 93.5,
     "epoch": {
       "epoch_name": "OpenBookQA",
       "random": 25,
@@ -59404,7 +59954,7 @@
     "successor": "osworld-verified",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.13,
+    "edi": 146.71,
     "epoch": {
       "epoch_name": "OSWorld",
       "random": 0,
@@ -59449,7 +59999,7 @@
     "successor": "osworld-2-0-2026-08-08",
     "unit": "%",
     "confidence": "verified",
-    "edi": 170.33,
+    "edi": 169.77,
     "epoch": {
       "epoch_name": "OSWorld 2.0",
       "random": 0,
@@ -59655,6 +60205,14 @@
     "description": "369 open-ended tasks in real desktop apps. Agent acts through screenshots, mouse and keyboard. Execution-based checkers score success.",
     "org": "XLANG Lab (HKU) + collaborators",
     "released": "2025-07",
+    "changes": [
+      {
+        "date": "2026-11-02",
+        "kind": "grader",
+        "text": "The maintainers replaced permissive document and spreadsheet checks with stricter content checks. Incorrect outputs that previously passed can now fail.",
+        "url": "https://github.com/xlang-ai/OSWorld/commit/3d28e632f58dd3ed9dab6e92d2deceb2d214f173"
+      }
+    ],
     "links": {
       "repo": "https://github.com/xlang-ai/OSWorld",
       "dataset": "https://huggingface.co/datasets/xlangai/ubuntu_osworld_verified_trajs",
@@ -59665,7 +60223,10 @@
     "note": "Human baseline 72.4%. Top reported scores are ~83-86%, so near-saturated. Successor OSWorld 2.0 released 2026-06 (repo xlang-ai/OSWorld-V2).",
     "successor": "osworld-2-0",
     "unit": "%",
-    "confidence": "verified"
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/xlang-ai/OSWorld/commit/3d28e632f58dd3ed9dab6e92d2deceb2d214f173"
+    ]
   },
   {
     "id": "otelbench",
@@ -59721,7 +60282,7 @@
     "note": "Epoch AI added it as a harder successor to MATH Level 5, which was nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 137.21,
+    "edi": 137.18,
     "epoch": {
       "epoch_name": "OTIS Mock AIME 2024-2025",
       "random": 0.1,
@@ -61578,7 +62139,7 @@
     "access": "public+private-holdout",
     "unit": "%",
     "confidence": "verified",
-    "edi": 86.7,
+    "edi": 60.77,
     "epoch": {
       "epoch_name": "PIQA",
       "random": 50,
@@ -62008,7 +62569,7 @@
     "successor": "posttrainbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 173.28,
+    "edi": 169.11,
     "epoch": {
       "epoch_name": "PostTrainBench",
       "random": 0,
@@ -62886,7 +63447,7 @@
     "successor": "proofbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.28,
+    "edi": 156.45,
     "epoch": {
       "epoch_name": "ProofBench",
       "random": 0,
@@ -65881,7 +66442,7 @@
     "note": "The best agent automated only 2.5% of projects at launch. Only a 10 task public set is released.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 178.49,
+    "edi": 177.64,
     "epoch": {
       "epoch_name": "Remote Labor Index",
       "random": 0,
@@ -66998,7 +67559,7 @@
     },
     "access": "public",
     "note": "The paper ships over three thousand expert demonstrations. Version 2 of the paper came out on 2026-05-04. Ai2 reports a 0 to 1 score for MolmoAct 2.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "likely",
     "evidence": [
@@ -68811,6 +69372,14 @@
     "description": "Scientist-curated research coding problems split into subproblems across natural sciences. Code checked against test cases.",
     "org": "SciCode team",
     "released": "2024-07",
+    "changes": [
+      {
+        "date": "2024-07-24",
+        "kind": "harness",
+        "text": "The SciCode maintainers added scientist-written background and an evaluation setting that supplies it. Scores from this setting measure performance with extra scientific guidance and differ from scores without that guidance.",
+        "url": "https://github.com/scicode-bench/SciCode#news"
+      }
+    ],
     "links": {
       "repo": "https://github.com/scicode-bench/SciCode",
       "dataset": "https://huggingface.co/datasets/SciCode1/SciCode",
@@ -68827,7 +69396,10 @@
       "ceiling": 100,
       "runs": "external",
       "in_eci": false
-    }
+    },
+    "evidence": [
+      "https://github.com/scicode-bench/SciCode#news"
+    ]
   },
   {
     "id": "sciences-last-exam",
@@ -70516,7 +71088,7 @@
     "note": "The human baseline from nine non-expert people is 83.7 percent. A small open-ended variant lists three models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 151.74,
+    "edi": 152.28,
     "epoch": {
       "epoch_name": "SimpleBench",
       "random": 16.67,
@@ -70609,7 +71181,7 @@
     "note": "Google fixed one dataset error on 2026-03-09 and posted paper v2 on 2026-03-10. Scores stay comparable, so it remains one record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.81,
+    "edi": 157.51,
     "epoch": {
       "epoch_name": "SimpleQA Verified",
       "random": 0,
@@ -72574,7 +73146,7 @@
     "note": "Top human players win ~85% (StS1) and ~95% (StS2). Seeds are not published.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 175.98,
+    "edi": 175.51,
     "epoch": {
       "epoch_name": "SpireClimb",
       "random": 0,
@@ -74471,7 +75043,7 @@
     "note": "Only one example task is public, and the scored tasks and grading scripts stay hidden.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.34,
+    "edi": 150.7,
     "epoch": {
       "epoch_name": "Surface Evolver Bench",
       "random": 0,
@@ -74944,6 +75516,20 @@
     "description": "1,865 long-horizon issue-resolution tasks from 41 repos in four languages. Agent patch must pass hidden tests. Pass@1.",
     "org": "Scale AI",
     "released": "2025-09",
+    "changes": [
+      {
+        "date": "2025-10-03",
+        "kind": "harness",
+        "text": "The maintainers published results without the previous cap limit. Comparisons with earlier capped runs must account for the different execution budget.",
+        "url": "https://github.com/scaleapi/SWE-bench_Pro-os"
+      },
+      {
+        "date": "2026-02-09",
+        "kind": "grader",
+        "text": "The maintainers removed outdated unit tests, including tests requiring the year 2025, and tests included by mistake. Earlier and later verifiers can judge the same patch differently.",
+        "url": "https://github.com/scaleapi/SWE-bench_Pro-os"
+      }
+    ],
     "links": {
       "repo": "https://github.com/scaleapi/SWE-bench_Pro-os",
       "dataset": "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro",
@@ -74956,6 +75542,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://github.com/scaleapi/SWE-bench_Pro-os",
       "https://arxiv.org/abs/2610.24206",
       "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro",
       "https://cursor.com/blog/reward-hacking-coding-benchmarks"
@@ -75103,6 +75690,20 @@
     "description": "500 human-validated GitHub issues from 12 Python repos. Agent writes a patch that must pass hidden tests.",
     "org": "Princeton NLP + OpenAI",
     "released": "2024-08",
+    "changes": [
+      {
+        "date": "2026-08-12",
+        "kind": "grader",
+        "text": "The maintainers fixed grading for 662 truncated test identifiers in Verified. Passing tests that previously counted as missing can now receive credit.",
+        "url": "https://github.com/SWE-bench/SWE-bench/commit/535db3e8bc35173cb47b84e2d3034f4cf5088fad"
+      },
+      {
+        "date": "2026-08-14",
+        "kind": "grader",
+        "text": "The maintainers added test exit-code checks to detect forged passing output. Patches that spoof test results can no longer receive the same credit.",
+        "url": "https://github.com/SWE-bench/SWE-bench/commit/62ad43acd5219d40cf91056e4ba68594cdb1cbc4"
+      }
+    ],
     "links": {
       "repo": "https://github.com/SWE-bench/SWE-bench",
       "dataset": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified",
@@ -75123,6 +75724,8 @@
       "in_eci": false
     },
     "evidence": [
+      "https://github.com/SWE-bench/SWE-bench/commit/535db3e8bc35173cb47b84e2d3034f4cf5088fad",
+      "https://github.com/SWE-bench/SWE-bench/commit/62ad43acd5219d40cf91056e4ba68594cdb1cbc4",
       "https://github.com/SWE-bench/SWE-bench",
       "https://github.com/scaleapi/SWE-bench_Pro-os",
       "https://www.swebench.com/"
@@ -76315,6 +76918,26 @@
     "description": "Agents chat with a simulated user and call retail or airline APIs under policy rules. A task passes if the final database matches the goal.",
     "org": "Sierra",
     "released": "2024-06",
+    "changes": [
+      {
+        "date": "2024-07-10",
+        "kind": "questions",
+        "text": "The Sierra maintainers corrected retail reference actions and clarified ambiguous user instructions. Earlier revisions can require different actions or mislead the simulated user, affecting task success.",
+        "url": "https://github.com/sierra-research/tau-bench/pull/2"
+      },
+      {
+        "date": "2024-12-10",
+        "kind": "questions",
+        "text": "The Sierra maintainers clarified retail test instructions to reduce simulated-user errors. Evaluations before and after this change present different guidance to the user simulator.",
+        "url": "https://github.com/sierra-research/tau-bench/pull/15"
+      },
+      {
+        "date": "2024-12-10",
+        "kind": "grader",
+        "text": "The Sierra maintainers required both the final database state and requested outputs to be correct for full reward. The earlier grader could accept correct-looking text despite an incorrect database state.",
+        "url": "https://github.com/sierra-research/tau-bench/pull/16"
+      }
+    ],
     "links": {
       "repo": "https://github.com/sierra-research/tau-bench",
       "paper": "https://arxiv.org/abs/2406.12045"
@@ -76326,7 +76949,10 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2406.12045",
-      "https://github.com/sierra-research/tau-bench"
+      "https://github.com/sierra-research/tau-bench",
+      "https://github.com/sierra-research/tau-bench/pull/15",
+      "https://github.com/sierra-research/tau-bench/pull/16",
+      "https://github.com/sierra-research/tau-bench/pull/2"
     ]
   },
   {
@@ -76871,7 +77497,7 @@
     "successor": "terminal-bench-2-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 148.93,
+    "edi": 149.4,
     "epoch": {
       "epoch_name": "Terminal Bench",
       "random": 0,
@@ -76927,6 +77553,20 @@
     "description": "89 hard terminal tasks across 16 categories in containers. Hidden tests verify the final state. 5 trials per task.",
     "org": "Stanford + Laude Institute",
     "released": "2026-05",
+    "changes": [
+      {
+        "date": "2026-07-11",
+        "kind": "grader",
+        "text": "The maintainers changed the reward-hacking judge to assess task intent instead of gold-file heuristics. The revised rules can change which successful trials the leaderboard disqualifies.",
+        "url": "https://github.com/harbor-framework/terminal-bench-2-1/commit/dfe8183d7d51a4f52cdbcfec0ca8303ce48a850f"
+      },
+      {
+        "date": "2026-07-13",
+        "kind": "policy",
+        "text": "The maintainers required ATIF trajectories for rewarded trials during submission checks. Submissions without those trajectories now fail intake despite reporting successful tasks.",
+        "url": "https://github.com/harbor-framework/terminal-bench-2-1/commit/49f02087e73a3b70ba3544d5e3052e23b9ee10fd"
+      }
+    ],
     "links": {
       "repo": "https://github.com/harbor-framework/terminal-bench-2-1",
       "dataset": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench-2-1/latest",
@@ -76941,6 +77581,8 @@
     "confidence": "verified",
     "evidence": [
       "https://www.tbench.ai/news/terminal-bench-2-1",
+      "https://github.com/harbor-framework/terminal-bench-2-1/commit/49f02087e73a3b70ba3544d5e3052e23b9ee10fd",
+      "https://github.com/harbor-framework/terminal-bench-2-1/commit/dfe8183d7d51a4f52cdbcfec0ca8303ce48a850f",
       "https://www.tbench.ai/benchmarks"
     ]
   },
@@ -77529,7 +78171,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.75,
+    "edi": 145.97,
     "epoch": {
       "epoch_name": "The Agent Company",
       "random": 0,
@@ -78582,7 +79224,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 58.08,
+    "edi": 49.55,
     "epoch": {
       "epoch_name": "TriviaQA",
       "random": 0,
@@ -78687,6 +79329,14 @@
     "description": "Models answer 817 questions across 38 categories that are written to elicit common misconceptions. Scoring checks for truthful answers, often in multiple-choice form.",
     "org": "University of Oxford and OpenAI",
     "released": "2021-09",
+    "changes": [
+      {
+        "date": "2025-01-15",
+        "kind": "scoring",
+        "text": "The maintainers added a recommended two-option multiple-choice format with randomized answer order. They retain the earlier formats and state that previous results remain valid.",
+        "url": "https://github.com/sylinrl/TruthfulQA/pull/19"
+      }
+    ],
     "links": {
       "repo": "https://github.com/sylinrl/TruthfulQA",
       "dataset": "https://huggingface.co/datasets/truthfulqa/truthful_qa",
@@ -78700,6 +79350,7 @@
       "https://arxiv.org/abs/2109.07958",
       "https://github.com/sylinrl/TruthfulQA",
       "https://huggingface.co/datasets/truthfulqa/truthful_qa",
+      "https://github.com/sylinrl/TruthfulQA/pull/19",
       "https://www.alignmentforum.org/posts/Bunfwz6JsNd44kgLT/new-improved-multiple-choice-truthfulqa"
     ]
   },
@@ -81919,6 +82570,14 @@
     "description": "Models answer 2,700 multiple-choice questions about 900 videos from 11 seconds to 1 hour long, with and without subtitles. Scored by accuracy.",
     "org": "Video-MME team (USTC, XMU, et al.)",
     "released": "2024-05",
+    "changes": [
+      {
+        "date": "2024-06-15",
+        "kind": "questions",
+        "text": "The maintainers replaced videos with broken or potentially broken links and annotated the replacements again. Evaluations before and after this update use different video content and annotations.",
+        "url": "https://github.com/MME-Benchmarks/Video-MME#-news"
+      }
+    ],
     "links": {
       "repo": "https://github.com/MME-Benchmarks/Video-MME",
       "leaderboard": "https://video-mme.github.io",
@@ -81941,6 +82600,7 @@
       "https://arxiv.org/abs/2405.21075",
       "https://github.com/MME-Benchmarks/Video-MME",
       "https://video-mme.github.io",
+      "https://github.com/MME-Benchmarks/Video-MME#-news",
       "https://github.com/MME-Benchmarks/Video-MME-v2",
       "https://arxiv.org/abs/2604.05015"
     ]
@@ -83320,7 +83980,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.94,
+    "edi": 153.03,
     "epoch": {
       "epoch_name": "VPCT",
       "random": 33.33,
@@ -84418,7 +85078,7 @@
     "successor": "weirdml-v3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.74,
+    "edi": 145.49,
     "epoch": {
       "epoch_name": "WeirdML",
       "random": 0,
@@ -84455,7 +85115,7 @@
     "note": "Scores are not raw accuracy and are not comparable with WeirdML v2.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 167.76,
+    "edi": 168.11,
     "epoch": {
       "epoch_name": "WeirdML v3",
       "random": 0,
@@ -85274,7 +85934,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 110.96,
+    "edi": 102.7,
     "epoch": {
       "epoch_name": "Winogrande",
       "random": 50,
@@ -87110,6 +87770,20 @@
     "description": "100 hand-made visual questions that all frontier models originally failed. Scored by exact answer, pass@1 and pass@5.",
     "org": "University of Cambridge and others",
     "released": "2025-02",
+    "changes": [
+      {
+        "date": "2025-03",
+        "kind": "questions",
+        "text": "The maintainers revised questions after post-release review. Results should identify the question revision used for evaluation.",
+        "url": "https://zerobench.github.io"
+      },
+      {
+        "date": "2026-08",
+        "kind": "regrade",
+        "text": "The maintainers corrected 0.71% of grading decisions and updated official scores. Mean pass@5 increased by 0.79 percentage points without question changes.",
+        "url": "https://zerobench.github.io"
+      }
+    ],
     "links": {
       "repo": "https://github.com/jonathan-roberts1/zerobench",
       "dataset": "https://huggingface.co/datasets/jonathan-roberts1/zerobench",
@@ -87121,6 +87795,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
+      "https://zerobench.github.io",
       "https://github.com/jonathan-roberts1/zerobench"
     ]
   },
@@ -87322,6 +87997,20 @@
     "description": "Agents act as banking customer-service reps over many turns with a simulated user, following policy. Pass^1 on the final database state.",
     "org": "Sierra",
     "released": "2026-03",
+    "changes": [
+      {
+        "date": "2026-05-13",
+        "kind": "harness",
+        "text": "The maintainers changed banking’s default retrieval configuration from BM25 to AllTools, combining sparse search, dense search, and shell access. Default runs now expose different tools.",
+        "url": "https://github.com/sierra-research/tau2-bench/commit/d22d77f238177f11d01aa99791dbb2c2c98827c1"
+      },
+      {
+        "date": "2026-07-22",
+        "kind": "regrade",
+        "text": "The maintainers regraded banking leaderboard trajectories under the corrected evaluation scheme. The revised results are not comparable with scores from the earlier grader.",
+        "url": "https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1"
+      }
+    ],
     "links": {
       "leaderboard": "https://taubench.com/leaderboard"
     },
@@ -87330,7 +88019,9 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
-      "https://taubench.com/leaderboard"
+      "https://taubench.com/leaderboard",
+      "https://github.com/sierra-research/tau2-bench/commit/d22d77f238177f11d01aa99791dbb2c2c98827c1",
+      "https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1"
     ]
   }
 ]
