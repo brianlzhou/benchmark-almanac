@@ -36877,6 +36877,82 @@
     ]
   },
   {
+    "id": "zai-glm-image-2026-01-14-model-card",
+    "lab": "zai",
+    "model": "glm-image",
+    "date": "2026-01-14",
+    "doc": "model card",
+    "title": "GLM-Image Hugging Face model card",
+    "url": "https://huggingface.co/zai-org/GLM-Image",
+    "release": "zai-glm-image-2026-01-14",
+    "notes": "The model card repeats the official text rendering and image generation tables.",
+    "results": [
+      {
+        "benchmark": "cvtg-2k",
+        "score": 0.9116,
+        "unit": "score",
+        "as_written": "CVTG-2K Word Accuracy average 0.9116, NED 0.9557, CLIPScore 0.7877, region word accuracy 0.966 / 0.952 / 0.979 / 0.8975",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "longtext-bench",
+        "score": 0.966,
+        "unit": "score",
+        "as_written": "LongText-Bench EN 0.966, ZH 0.979",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "oneig-bench",
+        "score": 0.528,
+        "unit": "score",
+        "as_written": "OneIG-Bench EN overall 0.528, ZH overall 0.511",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "tiif-bench",
+        "score": 81.01,
+        "unit": "score",
+        "as_written": "TIIF-Bench short overall 81.01, long overall 81.02",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "dpg-bench",
+        "score": 84.78,
+        "unit": "score",
+        "as_written": "DPG-Bench overall 84.78",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "google-translategemma-technical-report-2026-01-21",
+    "lab": "google",
+    "model": "translategemma-27b",
+    "date": "2026-01-21",
+    "kind": "technical report",
+    "doc": "technical report",
+    "title": "TranslateGemma Technical Report",
+    "url": "https://arxiv.org/pdf/2601.09012",
+    "release": "google-translategemma-27b-2026-01-15",
+    "notes": "Technical report tables cover WMT24++, Vistra and WMT25 MQM evaluations for TranslateGemma model sizes.",
+    "results": [
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 84.4,
+        "unit": "score",
+        "as_written": "TranslateGemma 27B, COMET-22, WMT24++ 55-language average",
+        "section": "other"
+      },
+      {
+        "benchmark": "vistra",
+        "score": 77.7,
+        "unit": "score",
+        "as_written": "TranslateGemma 27B, COMET-22, Vistra image translation, English to German, Spanish, Russian and Chinese average",
+        "section": "other"
+      }
+    ]
+  },
+  {
     "id": "meituan-longcat-flash-thinking-2601-technical-report-2026-01-23",
     "lab": "meituan",
     "model": "longcat-flash-thinking-2601",
@@ -37033,6 +37109,26 @@
         "score": 54.2,
         "unit": "%",
         "as_written": "SWE-bench Verified at 64K eval context, mean of 3 seeds, std 1.4. At 32K context 49.5, std 1.9 (Table 1)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "deepseek-deepseek-ocr-2-2026-01-28-technical-report",
+    "lab": "deepseek",
+    "model": "deepseek-ocr-2",
+    "date": "2026-01-28",
+    "doc": "technical report",
+    "title": "DeepSeek-OCR 2: Visual Causal Flow",
+    "url": "https://arxiv.org/abs/2601.20552",
+    "release": "deepseek-deepseek-ocr-2-2026-01-28",
+    "notes": "Table 1 reports the main OmniDocBench v1.5 result and component metrics.",
+    "results": [
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 91.09,
+        "unit": "score",
+        "as_written": "OmniDocBench v1.5 Overall 91.09, V-token max 1120, Text Edit 0.048, Formula CDM 90.31, Table TEDS 87.75, Table TEDS-S 92.06, R-order Edit 0.057 (Table 1)",
         "section": "capabilities"
       }
     ]
@@ -41127,6 +41223,40 @@
     ]
   },
   {
+    "id": "google-gemini-3-1-flash-image-model-card-2026-02-26",
+    "lab": "google",
+    "model": "gemini-3-1-flash-image-nano-banana-2-web-search",
+    "date": "2026-02-26",
+    "doc": "model card",
+    "title": "Gemini 3.1 Flash Image - Model Card",
+    "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-image/",
+    "release": "google-gemini-3-1-flash-image-2026-02-26",
+    "notes": "The page reports image generation and editing evaluations. GenExam is named as a public benchmark, but no numeric GenExam result is printed.",
+    "results": [
+      {
+        "benchmark": "genai-bench",
+        "score": 1079.0,
+        "unit": "elo",
+        "as_written": "Overall Preference (GenAI-Bench), Thinking + Text Search + Image Search",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "human-sxs-image-generation-google",
+        "score": 1114.0,
+        "unit": "elo",
+        "as_written": "Infographics (Factuality), Thinking + Text Search + Image Search",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "human-sxs-image-editing-google",
+        "score": 1065.0,
+        "unit": "elo",
+        "as_written": "General Editing, Thinking + Text Search + Image Search",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "qwen-qwen3-coder-next-technical-report-2026-02-28",
     "lab": "qwen",
     "model": "qwen3-coder-next",
@@ -43783,6 +43913,145 @@
     ]
   },
   {
+    "id": "xai-grok-4-20-model-card-2026-04-07",
+    "lab": "xai",
+    "model": "grok-4-20",
+    "date": "2026-04-07",
+    "doc": "model card",
+    "title": "Grok 4.20 System Card",
+    "url": "https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf",
+    "release": "xai-grok-4-20-2026-03-09",
+    "notes": "Official 18-page model card. Scores are from tables 1, 2 and 4. Table 3 audit rows are not mapped because the existing benchmark catalog has no exact reusable record for the xAI audit suite.",
+    "results": [
+      {
+        "benchmark": "general-refusals-xai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Chat Refusals, violation rate 0.00, Grok 4.2 SA, Table 1",
+        "section": "safety"
+      },
+      {
+        "benchmark": "user-jailbreaks-xai",
+        "score": 1.0,
+        "unit": "%",
+        "as_written": "Chat Refusals + User Jailbreak, violation rate 0.01, Grok 4.2 SA, Table 1",
+        "section": "safety"
+      },
+      {
+        "benchmark": "system-jailbreaks-xai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Chat Refusals + System Jailbreak, violation rate 0.00, Grok 4.2 SA, Table 1",
+        "section": "safety"
+      },
+      {
+        "benchmark": "agentharm",
+        "score": 30.0,
+        "unit": "%",
+        "as_written": "AgentHarm, violation rate 0.30, no jailbreak, Grok 4.2 SA, Table 1",
+        "section": "safety"
+      },
+      {
+        "benchmark": "agentdojo",
+        "score": 33.0,
+        "unit": "%",
+        "as_written": "AgentDojo, attack success rate 0.33, Grok 4.2 SA, Table 1",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "mask",
+        "score": 73.0,
+        "unit": "%",
+        "as_written": "MASK, dishonesty rate 0.27, Grok 4.2 SA, Table 2",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "sycophancy-eval-answer",
+        "score": 4.0,
+        "unit": "%",
+        "as_written": "Anthropic sycophancy evaluation, answer change rate 0.04, Grok 4.2 SA, Table 2",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "xai-sycophancy-eval",
+        "score": 35.0,
+        "unit": "%",
+        "as_written": "Contrastive internal sycophancy evaluation, sycophancy rate 0.35, Grok 4.2 SA, Table 2",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "hle-calibration",
+        "score": 19.0,
+        "unit": "%",
+        "as_written": "Humanity’s Last Exam, RMS calibration error 0.19, Grok 4.2 SA, Table 2",
+        "section": "hallucination"
+      },
+      {
+        "benchmark": "wmdp-biology",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "WMDP Bio, accuracy 0.91, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "virology-capabilities-test-vct",
+        "score": 54.0,
+        "unit": "%",
+        "as_written": "Virology Capabilities Test, accuracy 0.54, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "protocolqa-open-ended-xai",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "ProtocolQA, accuracy 0.79, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "lab-bench-figqa",
+        "score": 66.0,
+        "unit": "%",
+        "as_written": "FigQA, accuracy 0.66, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "lab-bench-cloningscenarios",
+        "score": 67.0,
+        "unit": "%",
+        "as_written": "CloningScenarios, accuracy 0.67, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "wmdp-chemistry",
+        "score": 90.0,
+        "unit": "%",
+        "as_written": "WMDP Chem, accuracy 0.90, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "wmdp-cyber",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "WMDP Cyber, accuracy 0.91, Grok 4.2 SA, Table 4",
+        "section": "safety"
+      },
+      {
+        "benchmark": "cybench",
+        "score": 53.0,
+        "unit": "%",
+        "as_written": "CyBench, success rate 0.53, unguided, Grok 4.2 SA, Table 4",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "makemesay-openai",
+        "score": 8.0,
+        "unit": "%",
+        "as_written": "MakeMeSay, win rate 0.08, Grok 4.2 SA, Table 4",
+        "section": "persuasion"
+      }
+    ]
+  },
+  {
     "id": "ai2-molmoweb-8b-technical-report-2026-04-09",
     "lab": "ai2",
     "model": "molmoweb-8b",
@@ -45534,6 +45803,13 @@
         "unit": "%",
         "as_written": "Cyber safety training evaluation, policy compliance on production and synthetic data, no overall score (Table 17, 9.3.2.2)",
         "section": "safety"
+      },
+      {
+        "benchmark": "basharena",
+        "score": 99.1,
+        "unit": "%",
+        "as_written": "BashArena monitor recall",
+        "section": "monitorability"
       }
     ]
   },
@@ -46148,6 +46424,76 @@
         "unit": "%",
         "as_written": "SciCode, 1 run (Table 10)",
         "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-embedding-2-technical-report-2026-05-01",
+    "lab": "google",
+    "model": "gemini-embedding-2",
+    "date": "2026-05-01",
+    "kind": "technical report",
+    "doc": "technical report",
+    "title": "Gemini Embedding 2: A Native Multimodal Embedding Model from Gemini",
+    "url": "https://arxiv.org/abs/2605.27295",
+    "release": "google-gemini-embedding-2-2026-03-10",
+    "notes": "The linked technical report is the primary research source for the Gemini Embedding 2 model and its cross-modal evaluation table.",
+    "results": [
+      {
+        "benchmark": "mteb",
+        "score": 69.9,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, MTEB Multilingual mean task score",
+        "section": "other"
+      },
+      {
+        "benchmark": "textcaps",
+        "score": 89.6,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to image TextCaps recall@1",
+        "section": "other"
+      },
+      {
+        "benchmark": "docci",
+        "score": 93.4,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to image Docci recall@1",
+        "section": "other"
+      },
+      {
+        "benchmark": "vidore-v2",
+        "score": 64.9,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to document ViDoRe v2 nDCG@10",
+        "section": "other"
+      },
+      {
+        "benchmark": "vatex",
+        "score": 68.8,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to video VATEX nDCG@10",
+        "section": "other"
+      },
+      {
+        "benchmark": "msr-vtt-retrieval",
+        "score": 68.0,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to video MSR-VTT nDCG@10",
+        "section": "other"
+      },
+      {
+        "benchmark": "youcook2-retrieval",
+        "score": 52.5,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to video YouCook2 nDCG@10",
+        "section": "other"
+      },
+      {
+        "benchmark": "mseb",
+        "score": 73.9,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, speech to text MSEB mRR@10",
+        "section": "other"
       }
     ]
   },
@@ -57395,6 +57741,20 @@
         "unit": "%",
         "as_written": "MILU average accuracy over 11 languages, max effort, 5 trials (8.18.2)",
         "section": "capabilities"
+      },
+      {
+        "benchmark": "arxivmath",
+        "score": 91.33,
+        "unit": "%",
+        "as_written": "ArXivMath, 91.33% without tools",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "biomysterybench",
+        "score": 90.3,
+        "unit": "%",
+        "as_written": "BioMysteryBench, 90.3% solvable and 44.1% difficult",
+        "section": "capabilities"
       }
     ]
   },
@@ -58086,6 +58446,20 @@
         "unit": "%",
         "as_written": "SecureBio BioTIER, safeguarded configuration refused requests designated for refusal (benign allowed 95.3%) (10.2.4.2)",
         "section": "safety"
+      },
+      {
+        "benchmark": "internal-computer-use-safety-openai",
+        "score": 2.4,
+        "unit": "%",
+        "as_written": "Internal computer use safety benchmark, lower is better",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "internal-factuality-evals-openai",
+        "score": 4.2,
+        "unit": "%",
+        "as_written": "Internal hallucination benchmark, lower is better",
+        "section": "hallucination"
       }
     ]
   },
@@ -61082,6 +61456,88 @@
         "unit": "%",
         "as_written": "Cybersecurity Safety Evaluation, production chat and agentic environment rows, no overall score (Table 12)",
         "section": "safety"
+      }
+    ]
+  },
+  {
+    "id": "google-embeddinggemma-2-model-card-2026-10-06",
+    "lab": "google",
+    "model": "embeddinggemma-2",
+    "date": "2026-10-06",
+    "doc": "model card",
+    "title": "google/embeddinggemma-2 model card",
+    "url": "https://huggingface.co/google/embeddinggemma-2",
+    "release": "google-embeddinggemma-2-2026-10-06",
+    "notes": "All rows use the full-precision checkpoint at 768 dimensions. The card reports MTEB, MIEB, MMEB v2, MSEB and MAEB results.",
+    "results": [
+      {
+        "benchmark": "mteb",
+        "score": 61.36,
+        "unit": "score",
+        "as_written": "MTEB multilingual v2, Mean(Task), full precision, 768d",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mieb-lite",
+        "score": 65.67,
+        "unit": "score",
+        "as_written": "MIEB lite, Mean(TaskType), full precision, 768d",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmeb-v2",
+        "score": 57.28,
+        "unit": "%",
+        "as_written": "MMEB v2 Image, Mean(Task), Hit@1, full precision, 768d",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mseb",
+        "score": 69.54,
+        "unit": "score",
+        "as_written": "MSEB Retrieval, Mean(Task), MRR@10, full precision, 768d",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "maeb",
+        "score": 49.87,
+        "unit": "score",
+        "as_written": "MAEB, Mean(Task), full precision, 768d",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "google-nano-banana-2-1-model-card-2026-10-06",
+    "lab": "google",
+    "model": "gemini-nano-banana-2-1",
+    "date": "2026-10-06",
+    "doc": "model card",
+    "title": "Nano Banana 2.1 - Model Card",
+    "url": "https://deepmind.google/models/model-cards/nano-banana-2-1/",
+    "release": "google-nano-banana-2-1-2026-10-06",
+    "notes": "Results are listed as of October 2026. The card reports internal human Elo ratings, an internal infographic factuality score and editing consistency ratings.",
+    "results": [
+      {
+        "benchmark": "human-sxs-image-generation-google",
+        "score": 1050,
+        "unit": "elo",
+        "as_written": "Overall Preference, Thinking",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "infographic-factuality-google",
+        "score": 0.521,
+        "unit": "score",
+        "as_written": "Infographic Factuality, Thinking",
+        "section": "hallucination"
+      },
+      {
+        "benchmark": "human-sxs-image-editing-google",
+        "score": 1026,
+        "unit": "elo",
+        "as_written": "General Editing, Thinking",
+        "section": "capabilities"
       }
     ]
   },
@@ -64394,6 +64850,13 @@
         "unit": "%",
         "as_written": "Action-Belief Coherence, Mean Coherency Score on the shared item set, Muse Spark 1.3 (API) (4.4.8)",
         "section": "alignment"
+      },
+      {
+        "benchmark": "agentic-if-index",
+        "score": 57.8,
+        "unit": "index",
+        "as_written": "Agentic IF Index, 57.8",
+        "section": "capabilities"
       }
     ]
   },
@@ -65153,6 +65616,124 @@
     ]
   },
   {
+    "id": "openai-gpt-6-cyber-system-card-2026-11-05",
+    "lab": "openai",
+    "model": "gpt-6-cyber",
+    "date": "2026-11-05",
+    "doc": "system card",
+    "title": "GPT-6 Cyber System Card",
+    "url": "https://deploymentsafety.openai.com/gpt-6-cyber/gpt-6-cyber.pdf",
+    "release": "openai-gpt-6-cyber-2026-11-05",
+    "notes": "Official GPT-6 Cyber system card. It reports cyber capability, alignment, biological safety and AI self-improvement results. Several tables contain category rows without one aggregate score.",
+    "results": [
+      {
+        "benchmark": "respecting-auto-review-openai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Auto-Review, prohibited action completed, GPT-6 Cyber",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "respecting-warnings-openai",
+        "score": 73.0,
+        "unit": "%",
+        "as_written": "Warnings, STOP split 73.00% and PERSIST split 80.43%, GPT-6 Cyber",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "exploitgym-honeypot-openai",
+        "score": 0.07,
+        "unit": "%",
+        "as_written": "ExploitGym Honeypot, without deployment safety instructions, exploitation rate",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "blocker-deception-openai",
+        "score": 20.29,
+        "unit": "%",
+        "as_written": "Blocker Deception, blocker-related deception",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "broken-search-tool-openai",
+        "score": 0.33,
+        "unit": "%",
+        "as_written": "Broken Search Tool, misrepresented tool access or retrieved evidence",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "exploitbench",
+        "score": 100.0,
+        "unit": "%",
+        "as_written": "ExploitBench, ACE-normalized mean capability score",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitbench-internal-port-openai",
+        "score": 42.0,
+        "unit": "%",
+        "as_written": "ExploitBench Internal Port, mean arbitrary code-execution success rate across V8 and Chrome targets, June to August 2026",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 87.02,
+        "unit": "%",
+        "as_written": "SEC-Bench Pro, pass@1",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "sre-bench",
+        "score": 92.84,
+        "unit": "%",
+        "as_written": "SRE-Bench, pass@1, all six objectives required",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitgym",
+        "score": 48.45,
+        "unit": "%",
+        "as_written": "ExploitGym, intended-exploit success rate",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "cyscenariobench",
+        "score": 61.0,
+        "unit": "%",
+        "as_written": "CyScenarioBench, average success rate across 11 long-horizon challenges",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "frontiercyber-irregular",
+        "score": 31.25,
+        "unit": "%",
+        "as_written": "FrontierCyber, 90 of 288 challenges solved",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "atomic-challenges-irregular",
+        "score": 97.0,
+        "unit": "%",
+        "as_written": "Atomic Challenges, vulnerability research and exploitation 97%, network attack simulation 98%, evasion 63%",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "expert-swe-openai",
+        "score": 82.95,
+        "unit": "%",
+        "as_written": "ExpertSWE, long-horizon software-engineering tasks",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "protocolqa-open-ended-openai",
+        "score": 47.2,
+        "unit": "%",
+        "as_written": "ProtocolQA Open-Ended, standard scoring",
+        "section": "bio-chem"
+      }
+    ]
+  },
+  {
     "id": "anthropic-claude-fable-5-2-system-card-2026-11-09",
     "lab": "anthropic",
     "model": "claude-fable-5-2",
@@ -65519,6 +66100,82 @@
         "score": 94.1,
         "unit": "%",
         "as_written": "MILU, average accuracy across 11 languages, max effort, five trials, no tools or custom system prompt. Blocked or unanswered questions excluded, under 0.2% (Section 8.17.2)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "meta-muse-ember-evaluation-report-2026-11-09",
+    "lab": "meta",
+    "model": "muse-ember",
+    "date": "2026-11-09",
+    "doc": "technical report",
+    "title": "Muse Ember Evaluation Report",
+    "url": "https://research.meta.ai/static/muse-ember-evaluation-report",
+    "release": "meta-muse-ember-2026-11-09",
+    "notes": "Official Meta evaluation report. It documents the benchmark harnesses and reproduces the launch post’s numeric results. The report’s composite Artificial Analysis index is not recorded because it is a composite rather than a separate benchmark row.",
+    "results": [
+      {
+        "benchmark": "automationbench",
+        "score": 37.8,
+        "unit": "%",
+        "as_written": "AutomationBench-AA, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "agents-last-exam",
+        "score": 61.6,
+        "unit": "%",
+        "as_written": "Agents’ Last Exam, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "personal-superintelligence-index-meta",
+        "score": 46.8,
+        "unit": "%",
+        "as_written": "Personal Superintelligence Index, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 40.9,
+        "unit": "%",
+        "as_written": "Terminal-Bench 4.0, best published harness, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "artificial-analysis-coding-agent-index",
+        "score": 46.0,
+        "unit": "index",
+        "as_written": "AA Coding Agent Index v2.0, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 27.2,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0-AA, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gdp-pdf",
+        "score": 22.8,
+        "unit": "%",
+        "as_written": "GDP.pdf-AA, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "osworld-2-1",
+        "score": 69.5,
+        "unit": "%",
+        "as_written": "OSWorld 2.1, partial-credit reward, Muse Ember max reasoning",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "perceptionbench-moonshot",
+        "score": 80.6,
+        "unit": "%",
+        "as_written": "PerceptionBench with tools, Muse Ember max reasoning",
         "section": "capabilities"
       }
     ]

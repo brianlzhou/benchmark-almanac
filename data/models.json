@@ -9246,7 +9246,7 @@
   },
   {
     "id": "qwen3-coder-plus",
-    "name": "qwen3-coder-plus",
+    "name": "Qwen3-Coder-Plus",
     "released": "2025-09-23",
     "epoch": "qwen3-coder-plus"
   },
@@ -10498,6 +10498,42 @@
     "card": "https://huggingface.co/meituan-longcat/LongCat-Flash-Thinking-2601"
   },
   {
+    "id": "translategemma-12b",
+    "name": "TranslateGemma 12B",
+    "lab": "google",
+    "family": "TranslateGemma",
+    "released": "2026-01-15",
+    "weights": "open",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/?id=TranslateGemma",
+    "aliases": [
+      "TranslateGemma-12B"
+    ]
+  },
+  {
+    "id": "translategemma-27b",
+    "name": "TranslateGemma 27B",
+    "lab": "google",
+    "family": "TranslateGemma",
+    "released": "2026-01-15",
+    "weights": "open",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/?id=TranslateGemma",
+    "aliases": [
+      "TranslateGemma-27B"
+    ]
+  },
+  {
+    "id": "translategemma-4b",
+    "name": "TranslateGemma 4B",
+    "lab": "google",
+    "family": "TranslateGemma",
+    "released": "2026-01-15",
+    "weights": "open",
+    "card": "https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/?id=TranslateGemma",
+    "aliases": [
+      "TranslateGemma-4B"
+    ]
+  },
+  {
     "id": "glm-4-7-flash",
     "name": "glm-4.7-flash",
     "epoch": "glm-4.7-flash",
@@ -10594,6 +10630,19 @@
     "card": "https://huggingface.co/arcee-ai/Trinity-Large-Preview"
   },
   {
+    "id": "deepseek-ocr-2",
+    "name": "DeepSeek-OCR 2",
+    "lab": "deepseek",
+    "family": "DeepSeek-OCR",
+    "released": "2026-01-28",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+    "aliases": [
+      "DeepSeek-OCR 2"
+    ]
+  },
+  {
     "id": "qwen3-asr-1-7b",
     "name": "Qwen3-ASR-1.7B",
     "lab": "qwen",
@@ -10624,7 +10673,7 @@
   },
   {
     "id": "qwen3-coder-next",
-    "name": "qwen3-coder-next",
+    "name": "Qwen3-Coder-Next",
     "released": "2026-02-02",
     "epoch": "qwen3-coder-next",
     "lab": "qwen",
@@ -11167,6 +11216,14 @@
       "sarvam-30b",
       "Sarvam-30B"
     ]
+  },
+  {
+    "id": "gemini-embedding-2",
+    "name": "Gemini Embedding 2",
+    "lab": "google",
+    "released": "2026-03-10",
+    "weights": "closed",
+    "card": "https://deepmind.google/models/gemini/embedding/"
   },
   {
     "id": "nemotron-3-super",
@@ -11996,6 +12053,20 @@
     "weights": "closed",
     "tier": "small",
     "card": "https://sensetime.com/en/news/51170639"
+  },
+  {
+    "id": "tml-interaction-small",
+    "name": "TML-Interaction-Small",
+    "lab": "thinking-machines",
+    "family": "TML Interaction",
+    "released": "2026-05-11",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://thinkingmachines.ai/blog/interaction-models/",
+    "aliases": [
+      "TML-Interaction-Small",
+      "TML interaction small"
+    ]
   },
   {
     "id": "ring-2-6-1t",
@@ -13014,6 +13085,32 @@
     ]
   },
   {
+    "id": "gemini-3-5-transcribe",
+    "name": "Gemini 3.5 Transcribe",
+    "lab": "google",
+    "family": "Gemini 3.5 Audio",
+    "released": "2026-08-26",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/",
+    "aliases": [
+      "gemini-3.5-transcribe"
+    ]
+  },
+  {
+    "id": "gemini-3-5-transcribe-live",
+    "name": "Gemini 3.5 Transcribe Live",
+    "lab": "google",
+    "family": "Gemini 3.5 Audio",
+    "released": "2026-08-26",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/",
+    "aliases": [
+      "gemini-3.5-transcribe-live"
+    ]
+  },
+  {
     "id": "qwen3-8-flash",
     "name": "Qwen3.8 Flash",
     "lab": "qwen",
@@ -13070,6 +13167,20 @@
     "card": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
     "aliases": [
       "Claude Mythos 5.1"
+    ]
+  },
+  {
+    "id": "muse-voice-transcribe-1-0",
+    "name": "Muse Voice Transcribe 1.0",
+    "lab": "meta",
+    "family": "Muse Voice Transcribe",
+    "released": "2026-09-01",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://dev.meta.ai/models/muse-voice-transcribe/",
+    "aliases": [
+      "Muse Voice Transcribe",
+      "muse-voice-transcribe-1.0"
     ]
   },
   {
@@ -13447,6 +13558,20 @@
     "epoch": "Claude Haiku 5.5"
   },
   {
+    "id": "glm-5-3-flashx-legal",
+    "name": "GLM-5.3-FlashX-Legal",
+    "lab": "zai",
+    "family": "GLM-5",
+    "released": "2026-10-12",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://docs.z.ai/guides/vlm/glm-5.3-flash",
+    "aliases": [
+      "GLM-5.3-FlashX-Legal",
+      "GLM-Legal"
+    ]
+  },
+  {
     "id": "glm-legal",
     "name": "GLM Legal",
     "lab": "zai",
@@ -13764,6 +13889,16 @@
     "card": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/"
   },
   {
+    "id": "gpt-6-cyber",
+    "name": "GPT-6 Cyber",
+    "lab": "openai",
+    "family": "GPT-6",
+    "released": "2026-11-05",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://deploymentsafety.openai.com/gpt-6-cyber"
+  },
+  {
     "id": "inkling-2-small",
     "name": "Inkling 2 Small",
     "lab": "thinking-machines",
@@ -13805,7 +13940,8 @@
     "aliases": [
       "Muse Ember 1.0",
       "muse-ember-1.0"
-    ]
+    ],
+    "epoch": "Muse Ember"
   },
   {
     "id": "bagel",

@@ -1,0 +1,478 @@
+[
+  {
+    "model": "claude-opus-4",
+    "benchmark": "aime-2025",
+    "cause": "setup",
+    "reason": "The lab used parallel test-time compute, while MathArena averages separate individual runs.",
+    "evidence": [
+      "https://matharena.ai/?comp=aime--aime_2025",
+      "https://matharena.ai/competition_tables/aime--aime_2025"
+    ]
+  },
+  {
+    "model": "qwen2-5-vl-72b",
+    "benchmark": "androidworld",
+    "cause": "setup",
+    "reason": "The lab evaluates Qwen's visual agent, while the board pairs Qwen2.5-VL-72B with the MobileUse agent.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct",
+      "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct/raw/main/README.md",
+      "https://docs.google.com/spreadsheets/d/1cchzP9dlTZ3WXQTfYNhh3avxoLipqHN75v1Tb86uhHo/export?format=csv&gid=0"
+    ]
+  },
+  {
+    "model": "kimi-k2-6",
+    "benchmark": "babyvision",
+    "cause": "setup",
+    "reason": "The lab score excludes Python tools, while the board reports the Python-enabled run.",
+    "evidence": [
+      "https://huggingface.co/moonshotai/Kimi-K2.6",
+      "https://unipat.ai/benchmarks/BabyVision"
+    ]
+  },
+  {
+    "model": "gemini-3-7-flash",
+    "benchmark": "code-arena",
+    "cause": "setup",
+    "reason": "Google quotes an August Arena rating as an integer, while the board supplies a later rating with decimal precision.",
+    "evidence": [
+      "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+      "https://arena.ai/leaderboard/code/webdev"
+    ]
+  },
+  {
+    "model": "glm-5",
+    "benchmark": "code-arena",
+    "cause": "setup",
+    "reason": "The lab reproduces an early Code Arena snapshot, while the board uses a later rating from additional votes.",
+    "evidence": [
+      "https://arxiv.org/pdf/2602.15763v2",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ]
+  },
+  {
+    "model": "kimi-k3",
+    "benchmark": "code-arena",
+    "cause": "setup",
+    "reason": "Moonshot quotes Arena's July 23 rating, while the board reflects votes collected through November.",
+    "evidence": [
+      "https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf",
+      "https://arena.ai/leaderboard/code/webdev"
+    ]
+  },
+  {
+    "model": "claude-3-7-sonnet",
+    "benchmark": "cybench",
+    "cause": "metric",
+    "reason": "Anthropic counts challenges solved at least once across up to 30 trials, while the board counts eight solved challenges in its run.",
+    "evidence": [
+      "https://cybench.github.io/",
+      "https://cybench.github.io/data/leaderboard.csv"
+    ]
+  },
+  {
+    "model": "claude-opus-4-6",
+    "benchmark": "cybergym",
+    "cause": "setup",
+    "reason": "The lab used its think-tool evaluation, while the board reports the later mneme agent running in a cleaned vulnerable Docker environment.",
+    "evidence": [
+      "https://assets.claude.com/6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd.pdf",
+      "https://www.cybergym.io/assets/data/cybergym.json"
+    ]
+  },
+  {
+    "model": "glm-5-1",
+    "benchmark": "cybergym",
+    "cause": "setup",
+    "reason": "The lab uses Claude Code, while the board pairs GLM-5.1 with Tencent's Xuanwu Atuin AI agent.",
+    "evidence": [
+      "https://huggingface.co/zai-org/GLM-5.1",
+      "https://www.cybergym.io/cybergym/",
+      "https://www.cybergym.io/assets/data/cybergym.json"
+    ]
+  },
+  {
+    "model": "leanstral",
+    "benchmark": "flteval",
+    "cause": "metric",
+    "reason": "The lab reports success across sixteen attempts, while the board reports single-attempt success.",
+    "evidence": [
+      "https://mistral.ai/news/leanstral/"
+    ]
+  },
+  {
+    "model": "inkling",
+    "benchmark": "fortress",
+    "cause": "metric",
+    "reason": "The lab reports adversarial safeguard success with higher scores better, while the board reports average risk with lower scores better.",
+    "evidence": [
+      "https://thinkingmachines.ai/news/introducing-inkling/",
+      "https://arxiv.org/abs/2506.14922"
+    ]
+  },
+  {
+    "model": "o1-preview",
+    "benchmark": "gpqa-diamond",
+    "cause": "metric",
+    "reason": "The lab reports consensus across 64 responses, while Epoch averages scores from individual responses.",
+    "evidence": [
+      "https://epoch.ai/benchmarks"
+    ]
+  },
+  {
+    "model": "claude-opus-5",
+    "benchmark": "harvey-lab-legal-agent-benchmark",
+    "cause": "setup",
+    "reason": "Anthropic evaluates 1,235 public problems, while Vals evaluates Harvey's private holdout with its benchmark harness.",
+    "evidence": [
+      "https://www.vals.ai/benchmarks/hlab-v1"
+    ]
+  },
+  {
+    "model": "gemma-2-27b",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "The lab quotes a July 2024 Arena rating, while the board uses a November 2026 rating with style controls.",
+    "evidence": [
+      "https://arxiv.org/pdf/2408.00118v1",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ]
+  },
+  {
+    "model": "gemma-2-9b",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Google quotes Arena's 2024 rating, while the board reflects later votes and rating adjustments.",
+    "evidence": [
+      "https://arxiv.org/pdf/2408.00118v1",
+      "https://arena.ai/leaderboard/text",
+      "https://arena.ai/company/leaderboard-changelog"
+    ]
+  },
+  {
+    "model": "gemma-3-27b",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Google reports a preliminary March 2025 Arena rating, while the board reports a later rating from updated votes.",
+    "evidence": [
+      "https://arxiv.org/pdf/2503.19786v1",
+      "https://arena.ai/leaderboard/text",
+      "https://arena.ai/company/leaderboard-changelog"
+    ]
+  },
+  {
+    "model": "gemma-4-26b-a4b",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "The lab quotes a rounded June 19 Arena rating, while the board uses the November 8 rating.",
+    "evidence": [
+      "https://arxiv.org/pdf/2607.02770v2",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ]
+  },
+  {
+    "model": "gemma-4-31b-it",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Google quotes Arena's June 19 rating, while the board reflects a later snapshot with more votes.",
+    "evidence": [
+      "https://arxiv.org/pdf/2607.02770v2",
+      "https://arena.ai/leaderboard/text"
+    ]
+  },
+  {
+    "model": "glm-5",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Z.ai quotes an earlier Arena rating, while the board reports a later rating from updated votes and scoring.",
+    "evidence": [
+      "https://arxiv.org/pdf/2602.15763v2",
+      "https://arena.ai/leaderboard/text",
+      "https://arena.ai/company/leaderboard-changelog"
+    ]
+  },
+  {
+    "model": "grok-3",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "The lab quotes the early chocolate model snapshot, while the board rates the later Grok 3 Preview release with style controls.",
+    "evidence": [
+      "https://x.ai/news/grok-3",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ]
+  },
+  {
+    "model": "grok-4-1",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "xAI quotes Grok 4.1 Thinking's launch rating, while the board reports its later Arena rating.",
+    "evidence": [
+      "https://x.ai/news/grok-4-1",
+      "https://arena.ai/leaderboard/text",
+      "https://arena.ai/company/leaderboard-changelog"
+    ]
+  },
+  {
+    "model": "kimi-k3",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Moonshot quotes Arena's July 23 rating, while the board reports a later rating as votes accumulate.",
+    "evidence": [
+      "https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf",
+      "https://raw.githubusercontent.com/MoonshotAI/Kimi-K3/main/k3_tech_report.pdf",
+      "https://arena.ai/leaderboard/text"
+    ]
+  },
+  {
+    "model": "mistral-large-3",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Mistral quotes its December 2025 Arena rating, while the board reflects a later rating snapshot.",
+    "evidence": [
+      "https://mistral.ai/news/mistral-3",
+      "https://mistral.ai/_astro/4626af3d-7554-4d50-9c0e-041fe7111ece_Z1qTh5k.webp",
+      "https://arena.ai/leaderboard/text"
+    ]
+  },
+  {
+    "model": "mixtral-8x7b",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "Mistral quotes Arena's December 2023 rating, while the board reports a later rating from its updated vote pool and scoring method.",
+    "evidence": [
+      "https://arxiv.org/pdf/2401.04088v1",
+      "https://arena.ai/leaderboard/text",
+      "https://arena.ai/company/leaderboard-changelog"
+    ]
+  },
+  {
+    "model": "nemotron-3-5-super-vl",
+    "benchmark": "lmarena-elo",
+    "cause": "setup",
+    "reason": "NVIDIA reports a preliminary Arena rating from 2,328 votes, while the board reports a later rating.",
+    "evidence": [
+      "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Super-and-Lightning-Technical-Report.pdf",
+      "https://arena.ai/leaderboard/text"
+    ]
+  },
+  {
+    "model": "ernie-5-1",
+    "benchmark": "lmarena-search-arena",
+    "cause": "setup",
+    "reason": "Baidu quotes the May 9 Arena Search rating, while the comparison uses a later leaderboard snapshot.",
+    "evidence": [
+      "https://ernie.baidu.com/research/posts/ernie-5.1-0508-release/",
+      "https://arena.ai/leaderboard",
+      "https://arena.ai/leaderboard/chat/search"
+    ]
+  },
+  {
+    "model": "grok-4-fast",
+    "benchmark": "lmarena-search-arena",
+    "cause": "setup",
+    "reason": "The lab quotes the September 2025 Search Arena snapshot, while the board uses a later rating with style controls.",
+    "evidence": [
+      "https://x.ai/news/grok-4-fast",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ]
+  },
+  {
+    "model": "qwen2-5-vl-72b",
+    "benchmark": "mmbench-video",
+    "cause": "setup",
+    "reason": "The lab allowed up to 768 video frames, while the board evaluated the model with 64 frames.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct",
+      "https://arxiv.org/pdf/2502.13923",
+      "http://opencompass.openxlab.space/utils/video_leaderboard.json"
+    ]
+  },
+  {
+    "model": "claude-opus-4-8",
+    "benchmark": "officeqa-pro",
+    "cause": "setup",
+    "reason": "Anthropic uses an internal agentic harness, while Databricks evaluates Opus 4.8 through Claude Agent SDK.",
+    "evidence": [
+      "https://github.com/databricks/officeqa",
+      "https://raw.githubusercontent.com/databricks/officeqa/HEAD/README.md"
+    ]
+  },
+  {
+    "model": "claude-opus-5",
+    "benchmark": "programbench-tests-passed",
+    "cause": "setup",
+    "reason": "The lab used five million-token episodes on 166 filtered tasks, while the board evaluates mini-SWE-agent on the full benchmark.",
+    "evidence": [
+      "https://assets.claude.com/ceaf5c7ff2783855203fde8208ec311252dced5b.pdf",
+      "https://programbench.com/"
+    ]
+  },
+  {
+    "model": "devstral-small-1-1",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Mistral evaluates Devstral Small 1.1 with OpenHands, while the board uses SWE-agent.",
+    "evidence": [
+      "https://mistral.ai/news/devstral-2507/",
+      "https://www.swebench.com/",
+      "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json"
+    ]
+  },
+  {
+    "model": "gemini-2-5-flash-jun-2025",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Google uses its internal coding agent, while the board uses mini-SWE-agent.",
+    "evidence": [
+      "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf",
+      "https://arxiv.org/html/2507.06261v1",
+      "https://www.swebench.com/",
+      "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json"
+    ]
+  },
+  {
+    "model": "gpt-4-1",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "The lab evaluates 477 tasks, while the board reports a separate mini-SWE-agent run.",
+    "evidence": [
+      "https://www.swebench.com/",
+      "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json"
+    ]
+  },
+  {
+    "model": "gpt-4o-may-2024",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "The lab reports pass@1 on 477 tasks, while the AutoCodeRover board entry uses multiple attempts on the full Verified set.",
+    "evidence": [
+      "https://www.swebench.com/",
+      "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json"
+    ]
+  },
+  {
+    "model": "gpt-5-nano",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "The lab evaluates 477 tasks, while the board reports a mini-SWE-agent run at medium reasoning effort.",
+    "evidence": [
+      "https://www.swebench.com/",
+      "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json"
+    ]
+  },
+  {
+    "model": "gpt-oss-120b",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "OpenAI evaluates a fixed 477-task subset, while the board uses mini-SWE-agent on the 500-task Verified benchmark.",
+    "evidence": [
+      "https://arxiv.org/html/2508.10925v1",
+      "https://www.swebench.com/"
+    ]
+  },
+  {
+    "model": "o1-preview",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "The lab used an Agentless five-try scaffold, while the board reports W&B Programmer O1 crosscheck5.",
+    "evidence": [
+      "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json"
+    ]
+  },
+  {
+    "model": "qwen-3-6-plus",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Qwen uses its internal coding scaffold, while Epoch uses its own tool loop and a validated 484-task subset.",
+    "evidence": [
+      "https://qwen.ai/blog?id=qwen3.6",
+      "https://epoch.ai/benchmarks",
+      "https://epoch.ai/benchmarks/swe-bench-verified"
+    ]
+  },
+  {
+    "model": "grok-4-5",
+    "benchmark": "tau3-banking",
+    "cause": "setup",
+    "reason": "xAI quotes Artificial Analysis's run of the same tasks, with its own user simulator and judge. The board shows Sierra's own runs.",
+    "evidence": [
+      "https://media.x.ai/v1/website/4p5-5184fdf9.pdf",
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    ]
+  },
+  {
+    "model": "gemini-3-flash",
+    "benchmark": "terminal-bench-2-0",
+    "cause": "setup",
+    "reason": "Google uses the Terminus-2 harness, while the board pairs Gemini 3 Flash with Junie CLI.",
+    "evidence": [
+      "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Flash-Model-Card.pdf",
+      "https://www.tbench.ai/?version=2.0"
+    ]
+  },
+  {
+    "model": "gemini-3-pro",
+    "benchmark": "terminal-bench-2-0",
+    "cause": "setup",
+    "reason": "The lab used Terminus-2, while the board reports the Ante agent.",
+    "evidence": [
+      "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
+      "https://www.tbench.ai/?version=2.0",
+      "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read"
+    ]
+  },
+  {
+    "model": "qwen-3-6-35b-a3b",
+    "benchmark": "terminal-bench-2-0",
+    "cause": "setup",
+    "reason": "Qwen uses Terminus-2 with a three-hour timeout, while the compared leaderboard entry uses little-coder.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+      "https://www.tbench.ai/?version=2.0",
+      "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read"
+    ]
+  },
+  {
+    "model": "claude-opus-4-8",
+    "benchmark": "vending-bench-2",
+    "cause": "setup",
+    "reason": "The lab reports max reasoning effort, while the board selects high reasoning effort.",
+    "evidence": [
+      "https://assets.claude.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61.pdf",
+      "https://andonlabs.com/evals/vending-bench-2"
+    ]
+  },
+  {
+    "model": "qwen3-max",
+    "benchmark": "vita-bench",
+    "cause": "setup",
+    "reason": "The lab reports Qwen3-Max-Thinking, while the board evaluates Qwen3-Max without thinking.",
+    "evidence": [
+      "https://qwen.ai/blog?id=qwen3-max-thinking",
+      "https://vitabench.github.io/"
+    ]
+  },
+  {
+    "model": "qwen3-235b-a22b",
+    "benchmark": "writingbench",
+    "cause": "setup",
+    "reason": "Qwen reports an earlier WritingBench evaluation, while the current board uses Claude Sonnet 4.5 to judge responses.",
+    "evidence": [
+      "https://arxiv.org/html/2505.09388",
+      "https://huggingface.co/spaces/WritingBench/WritingBench",
+      "https://writingbench-writingbench.hf.space/",
+      "https://raw.githubusercontent.com/X-PLUG/WritingBench/main/README.md"
+    ]
+  },
+  {
+    "model": "qwen3-235b-a22b-thinking-jul-2025",
+    "benchmark": "writingbench",
+    "cause": "setup",
+    "reason": "The lab published its score before WritingBench switched judges, while the current board uses Claude Sonnet 4.5.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507",
+      "https://raw.githubusercontent.com/X-PLUG/WritingBench/main/README.md",
+      "https://huggingface.co/spaces/WritingBench/WritingBench/raw/main/app.py"
+    ]
+  }
+]

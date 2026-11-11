@@ -7,7 +7,7 @@
     "kind": "newsletter",
     "cadence": "Weekdays",
     "signal": "high",
-    "why": "Every issue has an evals cluster in its recap, often under a New evals heading. It catches launches that never become papers, such as BallotBench and Immigration Bench.",
+    "why": "Every issue's recap has a cluster of evals, often under a New evals heading. Good for launches that never become papers, such as BallotBench and Immigration Bench.",
     "feed": "https://latent.space/feeds/news.xml",
     "automated": true
   },
@@ -19,9 +19,9 @@
     "kind": "newsletter",
     "cadence": "Weekly roundup",
     "signal": "high",
-    "why": "Each weekly AI roundup has an On Your Marks section about benchmarks and evals, with commentary on what they show.",
+    "why": "The weekly AI roundup has an On Your Marks section on benchmarks and evals, with Zvi's take on what they show.",
     "feed": "https://thezvi.wordpress.com/tag/ai/feed/",
-    "automated": false
+    "automated": true
   },
   {
     "id": "import-ai",
@@ -31,9 +31,9 @@
     "kind": "newsletter",
     "cadence": "Weekly",
     "signal": "high",
-    "why": "Half of recent issues lead with a named benchmark, most of them new, and explain why it matters.",
+    "why": "Half of recent issues lead with a named benchmark, most of them new, and Clark says why he thinks it matters.",
     "feed": "https://jack-clark.net/feed/",
-    "automated": false
+    "automated": true
   },
   {
     "id": "epoch-substack",
@@ -45,7 +45,7 @@
     "signal": "high",
     "why": "Announces Epoch's own new benchmarks and its Benchmark Reviews.",
     "feed": "https://epochai.substack.com/feed",
-    "automated": false
+    "automated": true
   },
   {
     "id": "interconnects",
@@ -55,9 +55,57 @@
     "kind": "newsletter",
     "cadence": "One to three posts a week",
     "signal": "medium",
-    "why": "Mostly open models and post-training, with occasional deep reads on new evals.",
+    "why": "Mostly about open models and post-training, with the occasional long post on a new eval.",
     "feed": "https://www.interconnects.ai/feed",
-    "automated": false
+    "automated": true
+  },
+  {
+    "id": "semianalysis",
+    "name": "SemiAnalysis",
+    "by": "Dylan Patel and the SemiAnalysis team",
+    "url": "https://newsletter.semianalysis.com/",
+    "kind": "newsletter",
+    "cadence": "Several posts a week",
+    "signal": "medium",
+    "why": "Launches its own benchmarks in the newsletter, such as GDPx in November 2026. Most posts are about chips and datacenters, so we take only launches.",
+    "feed": "https://newsletter.semianalysis.com/feed",
+    "automated": true
+  },
+  {
+    "id": "dwarkesh",
+    "name": "Dwarkesh Podcast",
+    "by": "Dwarkesh Patel",
+    "url": "https://www.dwarkesh.com/",
+    "kind": "newsletter",
+    "cadence": "Weekly",
+    "signal": "medium",
+    "why": "Launched Clocktower Bench in a post and video essay in November 2026. Most posts are podcast episodes, so we take only launches.",
+    "feed": "https://www.dwarkesh.com/feed",
+    "automated": true
+  },
+  {
+    "id": "prime-intellect-blog",
+    "name": "Prime Intellect blog",
+    "by": "Prime Intellect",
+    "url": "https://www.primeintellect.ai/blog",
+    "kind": "lab",
+    "cadence": "A few posts a month",
+    "signal": "medium",
+    "why": "Publishes audits of public evaluations, such as its November 2026 review of AutomationBench, OfficeQA Pro v2 and HLE-Diamond. We read it for the audit queue on the New page.",
+    "feed": "https://www.primeintellect.ai/sitemap.xml",
+    "automated": true
+  },
+  {
+    "id": "bluesky",
+    "name": "Bluesky",
+    "by": "Labs, evaluators and the tech press",
+    "url": "https://bsky.app/",
+    "kind": "social",
+    "cadence": "Continuous",
+    "signal": "medium",
+    "why": "Labs and evaluators often post their X launch threads here too, and Techmeme posts its headlines. We search for launch wording such as “releasing” or “new benchmark”.",
+    "feed": "https://api.bsky.app/xrpc/app.bsky.feed.searchPosts",
+    "automated": true
   },
   {
     "id": "hf-daily-papers",
@@ -67,7 +115,7 @@
     "kind": "paper-feed",
     "cadence": "Weekdays",
     "signal": "high",
-    "why": "About one paper in five is a new benchmark. Upvotes, the author's organization and a code link come with each paper, which makes ranking easy.",
+    "why": "About one paper in five is a new benchmark. Each comes with upvotes, the authors' organization and a code link, so they're easy to rank.",
     "feed": "https://huggingface.co/api/daily_papers",
     "automated": true
   },
@@ -79,7 +127,7 @@
     "kind": "paper-feed",
     "cadence": "Weekdays",
     "signal": "high",
-    "why": "Most new benchmarks appear here first. Recall is the best of any feed, but most hits only mention benchmarks, so a filter has to do the work.",
+    "why": "No other feed catches as many new benchmarks. But the bulk of hits only mention a benchmark, so we filter hard.",
     "feed": "https://export.arxiv.org/api/query",
     "automated": true
   },
@@ -91,9 +139,10 @@
     "kind": "paper-feed",
     "cadence": "Once a year",
     "signal": "high",
-    "why": "Every accepted paper is a dataset or an evaluation, reviewed. It arrives in one batch each autumn.",
-    "feed": null,
-    "automated": false
+    "why": "Every accepted paper is a peer-reviewed dataset or evaluation. They arrive in one batch each fall.",
+    "feed": "https://api2.openreview.net/notes?content.venueid=NeurIPS.cc/2026/Evaluations_and_Datasets_Track",
+    "automated": false,
+    "manual": "OpenReview's API now needs a signed-in account to list papers. We'll read this track automatically once we have one."
   },
   {
     "id": "epoch-hub",
@@ -103,7 +152,7 @@
     "kind": "registry",
     "cadence": "Data rebuilt daily",
     "signal": "high",
-    "why": "A curated list with independent runs and a capability index. A new row in its metadata is a benchmark worth tracking. The almanac's scores come from here.",
+    "why": "A curated list with independent runs and a capability index. A new row in its metadata means a benchmark worth tracking. Our independent runs come from here.",
     "feed": "https://epoch.ai/data/benchmark_data.zip",
     "automated": true
   },
@@ -115,7 +164,7 @@
     "kind": "registry",
     "cadence": "Several times a month",
     "signal": "high",
-    "why": "New evals register as their own folder, so each new folder is a newly submitted, runnable benchmark.",
+    "why": "Each new eval gets its own folder, so a new folder means someone has packaged a benchmark to run.",
     "feed": "https://api.github.com/repos/UKGovernmentBEIS/inspect_evals/contents/register",
     "automated": true
   },
@@ -127,9 +176,9 @@
     "kind": "registry",
     "cadence": "Continuous",
     "signal": "high",
-    "why": "Labs and vendors publish agent task sets here first, packaged to run. Test entries appear too, so it needs review.",
-    "feed": null,
-    "automated": false
+    "why": "Labs and vendors publish agent task sets here first, ready to run. Some entries are only tests, so finds from here need a closer look.",
+    "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/rest/v1/package?type=eq.dataset",
+    "automated": true
   },
   {
     "id": "prime-hub",
@@ -139,9 +188,9 @@
     "kind": "registry",
     "cadence": "Daily",
     "signal": "medium",
-    "why": "New eval and training environments every day. Most are for reinforcement learning, a few are benchmarks.",
-    "feed": null,
-    "automated": false
+    "why": "New eval and training environments every day. Most are for reinforcement learning, and only a few are benchmarks.",
+    "feed": "https://api.primeintellect.ai/api/v1/environmentshub/",
+    "automated": true
   },
   {
     "id": "every-eval-ever",
@@ -151,9 +200,9 @@
     "kind": "registry",
     "cadence": "Several updates a day",
     "signal": "medium",
-    "why": "A shared store of results on thousands of benchmarks. A new collection folder is a benchmark entering the corpus.",
+    "why": "A shared store of results on thousands of benchmarks. A new collection folder means a new benchmark has been added.",
     "feed": "https://huggingface.co/api/datasets/evaleval/EEE_datastore/tree/main/data",
-    "automated": false
+    "automated": true
   },
   {
     "id": "hf-official-benchmarks",
@@ -163,8 +212,20 @@
     "kind": "registry",
     "cadence": "A few a month",
     "signal": "high",
-    "why": "A curated allow-list of evaluation datasets that model cards can report against. Every entry is a real benchmark.",
+    "why": "Hugging Face's own allow-list of evaluation datasets that model cards can report results on. Every entry is a real benchmark.",
     "feed": "https://huggingface.co/api/datasets?filter=benchmark:official",
+    "automated": true
+  },
+  {
+    "id": "hf-benchmark-results",
+    "name": "Benchmark datasets with results",
+    "by": "Hugging Face",
+    "url": "https://huggingface.co/datasets?other=benchmark",
+    "kind": "registry",
+    "cadence": "About two a day",
+    "signal": "low",
+    "why": "New datasets tagged benchmark whose card reports results for at least three current models from two or more labs, such as ShadowBench. About 60 datasets a day get the tag and most have no results. This finds about two a day, from lab releases to personal projects, so its finds wait on the watch list until a second source names them.",
+    "feed": "https://huggingface.co/api/datasets?filter=benchmark",
     "automated": true
   },
   {
@@ -176,8 +237,8 @@
     "cadence": "Weekly",
     "signal": "high",
     "why": "New multimodal and video benchmarks land here within weeks of their papers.",
-    "feed": null,
-    "automated": false
+    "feed": "https://api.github.com/repos/open-compass/VLMEvalKit/contents/vlmeval/dataset",
+    "automated": true
   },
   {
     "id": "vals",
@@ -187,9 +248,9 @@
     "kind": "leaderboard",
     "cadence": "Several posts a week",
     "signal": "medium",
-    "why": "Launches its own professional benchmarks in law, finance, medicine and tax, and announces each one on its blog.",
+    "why": "Vals builds its own benchmarks for law, finance, medicine and tax, and announces each one on its blog.",
     "feed": "https://www.vals.ai/blogs/rss.xml",
-    "automated": false
+    "automated": true
   },
   {
     "id": "scale-seal",
@@ -201,7 +262,8 @@
     "signal": "medium",
     "why": "Scale publishes its own new benchmarks here, each with a dated post.",
     "feed": null,
-    "automated": false
+    "automated": false,
+    "manual": "New Scale boards are added by hand. Once added, each board's scores are read from its public page (scripts/lib/scale.ts)."
   },
   {
     "id": "artificial-analysis",
@@ -211,9 +273,10 @@
     "kind": "leaderboard",
     "cadence": "New evaluations several times a month",
     "signal": "medium",
-    "why": "Its changelog announces each evaluation it adopts. Its terms bar reuse of its data in other ranking products, so the almanac links to it and imports nothing.",
+    "why": "Its changelog announces each evaluation it adopts.",
     "feed": null,
-    "automated": false
+    "automated": false,
+    "manual": "Its terms ban automated queries and bar its data from other ranking products, so we link to it and read nothing from it."
   },
   {
     "id": "lmarena",
@@ -223,21 +286,22 @@
     "kind": "leaderboard",
     "cadence": "Daily",
     "signal": "low",
-    "why": "Adds its own arenas a few times a year. Read it through its published dataset, not the site.",
-    "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
-    "automated": false
+    "why": "Adds new arenas a few times a year. We read its published dataset instead of the site.",
+    "feed": "https://huggingface.co/api/datasets/lmarena-ai/leaderboard-dataset/tree/main",
+    "automated": true
   },
   {
     "id": "lab-cards",
     "name": "Lab model cards and system cards",
-    "by": "Anthropic, Google DeepMind, OpenAI, Qwen, DeepSeek, Moonshot and others",
+    "by": "Anthropic, Google DeepMind, OpenAI, Ai2, Qwen, DeepSeek, Moonshot and others",
     "url": "https://www.anthropic.com/news",
     "kind": "lab",
     "cadence": "With each model release",
     "signal": "high",
-    "why": "A benchmark that appears in a frontier lab's headline table has arrived. Open-weight labs put their tables in Hugging Face READMEs.",
+    "why": "Labs with closed models publish results in launch posts and system cards. Open-weight labs put their tables in Hugging Face READMEs.",
     "feed": "https://deepmind.google/blog/rss.xml",
-    "automated": false
+    "automated": true,
+    "manual": "We read launch posts from Google DeepMind, Google, Mistral and Ai2 automatically, along with new open-weight model cards on Hugging Face. Anthropic, OpenAI, Meta, DeepSeek and Kimi bar automated reading of their own sites, so we check those by hand."
   },
   {
     "id": "awesome-ai-leaderboard",
@@ -248,8 +312,8 @@
     "cadence": "About ten additions a month",
     "signal": "medium",
     "why": "The most active general list of AI leaderboards.",
-    "feed": null,
-    "automated": false
+    "feed": "https://api.github.com/repos/SAILResearch/awesome-ai-leaderboard/readme",
+    "automated": true
   },
   {
     "id": "awesome-cua",
@@ -260,19 +324,31 @@
     "cadence": "Daily",
     "signal": "medium",
     "why": "Structured, dated records of computer-use agent benchmarks, kept current by a scanner.",
-    "feed": null,
-    "automated": false
+    "feed": "https://api.github.com/repos/reacher-z/Awesome-CUA/contents/data/catalog.jsonl",
+    "automated": true
+  },
+  {
+    "id": "benchmarklist",
+    "name": "BenchmarkList",
+    "by": "benchmarklist.com",
+    "url": "https://benchmarklist.com/",
+    "kind": "registry",
+    "cadence": "Daily",
+    "signal": "low",
+    "why": "A large catalog of about 2,600 benchmarks, including vendor and independent boards that have no paper, such as LifeSci Diamond. We read its public data API once a day for reference: new entries' names and their own links, which we check at the source. We copy none of its text or scores.",
+    "feed": "https://benchmarklist.com/api/v1/benchmarks.json",
+    "automated": true
   },
   {
     "id": "x",
-    "name": "Benchmark authors on X",
-    "by": "Researchers and labs",
+    "name": "Benchmark launches on X",
+    "by": "Researchers and labs, searched by Grok",
     "url": "https://x.com",
     "kind": "social",
     "cadence": "Continuous",
     "signal": "high",
-    "why": "Most launches that are not papers start as a thread. X's terms forbid scraping, so this one stays manual. AINews links the threads it covers.",
-    "feed": null,
-    "automated": false
+    "why": "Most launches that are not papers start as an X thread, such as ShadowBench and DeepFinance. We never fetch X. Grok Build, xAI's command-line agent, searches X with its own tools, and we check every link it returns at the source.",
+    "feed": "Grok Build (grok -p) with its X search, on a maintainer's computer",
+    "automated": true
   }
 ]

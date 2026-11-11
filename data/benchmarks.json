@@ -6687,6 +6687,33 @@
     "added": "2026-11-10"
   },
   {
+    "id": "aa-wer",
+    "name": "Artificial Analysis average word error rate",
+    "aliases": [
+      "Word error rate (AA average)"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Speech transcription systems are scored by average word error rate across the Artificial Analysis evaluation set.",
+    "org": "Artificial Analysis",
+    "released": "2026-08",
+    "links": {
+      "site": "https://artificialanalysis.ai/"
+    },
+    "access": "private",
+    "note": "Google quotes Artificial Analysis average WER for Gemini 3.5 Transcribe. The almanac records only the values quoted in Google's launch post.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "aa-coding-agent-index-v1-0",
     "name": "Artificial Analysis Coding Agent Index v1.0",
     "aliases": [
@@ -9936,6 +9963,33 @@
       "https://fireworks.ai/specialized-intelligence-index/api/index.json"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "biglaw-bench",
+    "name": "BigLaw Bench",
+    "aliases": [
+      "BigLaw Bench"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-law",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models review legal documents and receive rubric scores for substantive accuracy and editing quality.",
+    "org": "Harvey",
+    "released": "2026-04",
+    "links": {
+      "site": "https://www.harvey.ai"
+    },
+    "access": "private",
+    "note": "Anthropic reports Claude Opus 4.7 at 90.9% high effort.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-opus-4-7"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "bigobench",
@@ -17014,12 +17068,28 @@
     "scoring": "verified",
     "format": "code",
     "description": "Model solves recent Codeforces contest problems. An Elo-style rating is computed from simulated contest performance.",
-    "org": "Codeforces (problems); each lab runs its own harness",
+    "org": "Codeforces",
     "released": "2024",
     "access": "unknown",
     "note": "No standard public harness. Each lab's rating method differs, so numbers are not comparable across cards.",
     "unit": "elo",
-    "confidence": "unverified"
+    "confidence": "unverified",
+    "evidence": [
+      "h",
+      "t",
+      "p",
+      "s",
+      ":",
+      "/",
+      "c",
+      "o",
+      "d",
+      "e",
+      "f",
+      "r",
+      ".",
+      "m"
+    ]
   },
   {
     "id": "codesimpleqa",
@@ -19999,6 +20069,33 @@
     "added": "2026-11-05"
   },
   {
+    "id": "cuespeak",
+    "name": "CueSpeak",
+    "aliases": [
+      "CueSpeak internal"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models speak at the correct moment and give the expected semantic response during simultaneous speech.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-05",
+    "links": {
+      "site": "https://thinkingmachines.ai/blog/interaction-models/"
+    },
+    "access": "private",
+    "note": "The launch post reports macro-averaged accuracy on an internal benchmark.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/blog/interaction-models/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "culturalbench",
     "name": "CulturalBench",
     "aliases": [
@@ -20461,6 +20558,31 @@
       "https://huggingface.co/papers/2406.05967"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "cvtg-2k",
+    "name": "CVTG-2K",
+    "aliases": [
+      "CVTG-2k"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Image models render text in images across regions and languages. CVTG-2K reports normalized edit distance, CLIPScore and word accuracy.",
+    "org": "Z.ai",
+    "released": "2026-01",
+    "access": "unknown",
+    "note": "GLM-Image reports the benchmark in its launch materials. The source table has two normalized metrics and word accuracy by region count.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://z.ai/blog/glm-image",
+      "https://huggingface.co/zai-org/GLM-Image"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "cwe-bench",
@@ -25503,6 +25625,28 @@
       "https://github.com/YuyaoGe/doc2harness"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "docci",
+    "name": "Docci",
+    "aliases": [
+      "DOCCI"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models retrieve matching documents and images using the DOCCI corpus.",
+    "org": "Google DeepMind",
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini/embedding/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "document-arena",
@@ -33873,6 +34017,26 @@
     "added": "2026-11-10"
   },
   {
+    "id": "genai-bench",
+    "name": "GenAI-Bench",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Image generation systems are compared by human side-by-side preference on text-to-image prompts.",
+    "org": "Google DeepMind",
+    "access": "unknown",
+    "note": "Google DeepMind names GenAI-Bench in the Gemini 3.1 Flash Image model card and reports overall preference and visual quality Elo.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/model-cards/gemini-3-1-flash-image/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "genebench",
     "name": "GeneBench",
     "category": "bio-chem",
@@ -34028,6 +34192,26 @@
       "https://github.com/djghosh13/geneval"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "genexam",
+    "name": "GenExam",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "university",
+    "scoring": "expert-graded",
+    "format": "open-ended",
+    "description": "Image generation systems are evaluated on subject-focused educational tasks with expert ratings.",
+    "org": "Google DeepMind",
+    "access": "public",
+    "note": "Google DeepMind calls GenExam a public benchmark subset in the Gemini 3.1 Flash Image model card, but the page gives no numeric GenExam row.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/model-cards/gemini-3-1-flash-image/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "genspark-slides-benchmark",
@@ -37829,6 +38013,33 @@
     ]
   },
   {
+    "id": "honeybench-v0-2-alpha",
+    "name": "HoneyBench v0.2-alpha",
+    "aliases": [
+      "HoneyBench v0.2-alpha"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Measures reward hacking: how often an agent games its grader instead of doing the task. Lower is better.",
+    "org": "Goodhart Labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://goodhart.ai"
+    },
+    "access": "unknown",
+    "note": "Version 0.2-alpha. Labs have published little about its tasks or scoring.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/model-card/inkling-2-small/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "honeypot-exploitation-monitorability-openai",
     "name": "Honeypot exploitation monitorability",
     "aliases": [
@@ -38260,6 +38471,56 @@
     "evidence": [
       "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf"
     ]
+  },
+  {
+    "id": "human-sxs-image-editing-google",
+    "name": "Human SxS image editing Elo (Google)",
+    "aliases": [
+      "Human SxS image editing Elo (internal)"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Google compares edited images side by side and converts human preferences into Elo ratings.",
+    "org": "Google DeepMind",
+    "released": "2026-02",
+    "access": "private",
+    "note": "The Gemini 3.1 Flash Image and Nano Banana 2.1 model cards report internal human side-by-side image editing ratings.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/model-cards/gemini-3-1-flash-image/",
+      "https://deepmind.google/models/model-cards/nano-banana-2-1/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
+    "id": "human-sxs-image-generation-google",
+    "name": "Human SxS image generation Elo (Google)",
+    "aliases": [
+      "Human SxS image generation Elo (internal)"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Google compares generated images side by side and converts human preferences into Elo ratings.",
+    "org": "Google DeepMind",
+    "released": "2026-02",
+    "access": "private",
+    "note": "The Gemini 3.1 Flash Image and Nano Banana 2.1 model cards report internal human side-by-side image generation ratings.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/model-cards/gemini-3-1-flash-image/",
+      "https://deepmind.google/models/model-cards/nano-banana-2-1/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "humaneval",
@@ -39632,6 +39893,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "image-mining-zai",
+    "name": "ImageMining",
+    "aliases": [
+      "Image Mining"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-deep-research",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Multimodal agents retrieve and reason over image information for image mining tasks.",
+    "org": "Z.ai",
+    "released": "2026-04",
+    "access": "unknown",
+    "note": "GLM-5V-Turbo reports this in its official documentation table.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://docs.z.ai/guides/vlm/glm-5v-turbo"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "imc-2025",
     "name": "IMC 2025",
     "aliases": [
@@ -40514,6 +40799,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "infographic-factuality-google",
+    "name": "Infographic factuality (Google)",
+    "aliases": [
+      "Infographic factuality (internal)"
+    ],
+    "category": "factuality-hallucination",
+    "subcategory": "factuality-hallucination",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Image generation systems produce infographics and an automated rater scores factuality.",
+    "org": "Google DeepMind",
+    "released": "2026-10",
+    "access": "private",
+    "note": "Nano Banana 2.1 reports an internal infographic factuality score as a fraction.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/model-cards/nano-banana-2-1/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "infographicvqa",
     "name": "InfographicVQA",
     "aliases": [
@@ -41147,6 +41456,33 @@
     "evidence": [
       "https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf"
     ]
+  },
+  {
+    "id": "internal-computer-use-safety-openai",
+    "name": "Internal computer use safety benchmark (OpenAI)",
+    "aliases": [
+      "Internal computer use safety benchmark"
+    ],
+    "category": "computer-use-browser",
+    "subcategory": "computer-desktop",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models complete computer-use tasks while avoiding unsafe actions.",
+    "org": "OpenAI",
+    "released": "2026-09",
+    "links": {
+      "site": "https://openai.com/index/gpt-6-astra/"
+    },
+    "access": "private",
+    "note": "OpenAI reports lower-is-better failure rates in the GPT-6 Astra launch comparison.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://openai.com/index/gpt-6-astra/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "internal-model-use-survey-anthropic",
@@ -47503,6 +47839,32 @@
       "https://github.com/xiaowu0162/LongMemEval-V2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "longtext-bench",
+    "name": "LongText-Bench",
+    "aliases": [
+      "LongText-Bench-EN",
+      "LongText-Bench-ZH"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Image models render long text in images. The benchmark reports separate English and Chinese scores.",
+    "org": "Z.ai",
+    "released": "2026-01",
+    "access": "unknown",
+    "note": "GLM-Image reports English and Chinese scores in its official model card and launch post.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://z.ai/blog/glm-image",
+      "https://huggingface.co/zai-org/GLM-Image"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "longvideobench",
@@ -54873,6 +55235,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "mmsearch",
+    "name": "MMSearch",
+    "aliases": [
+      "MMSearch benchmark"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-deep-research",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Multimodal agents search and answer questions that require visual and textual evidence.",
+    "org": "Z.ai",
+    "released": "2026-04",
+    "access": "unknown",
+    "note": "GLM-5V-Turbo reports MMSearch separately from MMSearch-Plus.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://docs.z.ai/guides/vlm/glm-5v-turbo"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "mmsearch-plus",
     "name": "MMSearch-Plus",
     "aliases": [
@@ -56272,6 +56658,29 @@
       "https://seed.bytedance.com/en/blog/seed2-1-officially-released-advancing-ai-productivity"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "msr-vtt-retrieval",
+    "name": "MSR-VTT retrieval",
+    "aliases": [
+      "MSR-VTT nDCG"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models retrieve videos from text queries in the MSR-VTT collection.",
+    "org": "Microsoft Research",
+    "released": "2016-06",
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini/embedding/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "msrvtt-qa",
@@ -60035,6 +60444,32 @@
     "added": "2026-11-01"
   },
   {
+    "id": "oneig-bench",
+    "name": "OneIG-Bench",
+    "aliases": [
+      "OneIG-Bench-EN",
+      "OneIG-Bench-ZH"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Image models generate images from prompts with English and Chinese evaluation splits.",
+    "org": "Z.ai",
+    "released": "2026-01",
+    "access": "unknown",
+    "note": "GLM-Image reports English and Chinese overall scores in its official model card.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://z.ai/blog/glm-image",
+      "https://huggingface.co/zai-org/GLM-Image"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "kimi-online-experience-moonshot",
     "name": "Online Experience (Moonshot)",
     "aliases": [
@@ -63701,6 +64136,7 @@
     "version": "Verified",
     "description": "Corrected PHYSICS test problems with answer-level accuracy. The complete verified test set.",
     "org": "Yale University (Kaiyue Feng, Arman Cohan et al.)",
+    "released": "2026-09",
     "links": {
       "repo": "https://github.com/yale-nlp/Physics",
       "dataset": "https://huggingface.co/datasets/yale-nlp/physics-verified",
@@ -63713,7 +64149,29 @@
     "confidence": "verified",
     "evidence": [
       "https://github.com/yale-nlp/Physics",
-      "https://huggingface.co/datasets/yale-nlp/physics-verified"
+      "https://huggingface.co/datasets/yale-nlp/physics-verified",
+      "h",
+      "t",
+      "p",
+      "s",
+      ":",
+      "/",
+      "u",
+      "g",
+      "i",
+      "n",
+      "f",
+      "a",
+      "c",
+      "e",
+      ".",
+      "o",
+      "d",
+      "y",
+      "l",
+      "-",
+      "v",
+      "r"
     ],
     "added": "2026-11-10"
   },
@@ -64063,6 +64521,36 @@
       "https://github.com/xiaoman-zhang/PMC-VQA",
       "https://huggingface.co/datasets/xmcmic/PMC-VQA"
     ]
+  },
+  {
+    "id": "pmpp-hard",
+    "name": "PMPP-Hard",
+    "aliases": [
+      "PMPP-Hard"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-kernels",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents write GPU kernels for 69 tasks that must be correct, and on 48 of them also run within 1.25 times the reference time. The score is the area under the solved-tasks curve over a 10-hour budget, out of 690 task-hours.",
+    "org": "Sinatras, sponsored by Prime Intellect",
+    "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/SinatrasC/pmpp-hard",
+      "dataset": "https://huggingface.co/datasets/sinatras/pmpp-hard",
+      "site": "https://blog.sinatras.dev/PMPP-Hard",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments/sinatras/pmpp-hard/evals"
+    },
+    "access": "unknown",
+    "note": "Thinking Machines reports an adapted version with task and grading fixes.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/model-card/inkling-2-small/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "point-bench",
@@ -64642,6 +65130,33 @@
     "evidence": [
       "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf"
     ]
+  },
+  {
+    "id": "proactive-videoqa",
+    "name": "ProactiveVideoQA",
+    "aliases": [
+      "Proactive VideoQA internal"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "Models answer spoken questions when a streamed video first reveals the answer.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-05",
+    "links": {
+      "site": "https://thinkingmachines.ai/blog/interaction-models/"
+    },
+    "access": "private",
+    "note": "The launch post reports turn-weighted PAUC at omega 0.5. A no-response baseline scores 25.0.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/blog/interaction-models/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "procbench",
@@ -68249,6 +68764,33 @@
       "https://github.com/centerforaisafety/rli_evaluation_platform",
       "https://www.remotelabor.ai"
     ]
+  },
+  {
+    "id": "repcount-a",
+    "name": "RepCount-A",
+    "aliases": [
+      "RepCount-A internal"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "Models count repeated actions in streamed video and are scored by distance from the true count.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-05",
+    "links": {
+      "site": "https://thinkingmachines.ai/blog/interaction-models/"
+    },
+    "access": "private",
+    "note": "The launch post reports off-by-one performance for online visual counting.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/blog/interaction-models/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "repobench",
@@ -74697,6 +75239,33 @@
     "added": "2026-11-10"
   },
   {
+    "id": "speech-to-speech-index",
+    "name": "Speech-to-Speech Index",
+    "aliases": [
+      "Speech-to-Speech Index"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Artificial Analysis's combined score for speech-to-speech models.",
+    "org": "Artificial Analysis",
+    "released": "2026-10",
+    "links": {
+      "site": "https://artificialanalysis.ai"
+    },
+    "access": "unknown",
+    "note": "xAI quotes the index in its Grok Voice 3 launch post.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://x.ai/news/grok-voice-3"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "speechrole",
     "name": "SpeechRole",
     "aliases": [
@@ -75530,6 +76099,7 @@
     "version": "0.8.0",
     "description": "Agents work multi-step enterprise tasks in travel, customer support and shopping with a sandbox database, domain tools and a simulated user. They must apply the right policy.",
     "org": "Microsoft",
+    "released": "2026-06",
     "links": {
       "repo": "https://github.com/microsoft/STATE-Bench",
       "leaderboard": "https://microsoft.github.io/STATE-Bench/leaderboard/"
@@ -75541,7 +76111,36 @@
     "confidence": "verified",
     "evidence": [
       "https://github.com/microsoft/STATE-Bench",
-      "https://microsoft.github.io/STATE-Bench/leaderboard/"
+      "https://microsoft.github.io/STATE-Bench/leaderboard/",
+      "h",
+      "t",
+      "p",
+      "s",
+      ":",
+      "/",
+      "g",
+      "i",
+      "u",
+      "b",
+      ".",
+      "c",
+      "o",
+      "m",
+      "r",
+      "f",
+      "S",
+      "T",
+      "A",
+      "E",
+      "-",
+      "B",
+      "e",
+      "n",
+      "l",
+      "a",
+      "v",
+      "0",
+      "8"
     ],
     "added": "2026-11-01"
   },
@@ -75557,19 +76156,49 @@
     "version": "0.7.0",
     "description": "Agents complete enterprise tasks in travel, customer support, and shopping. The score is overall pass@1 for this track and version.",
     "org": "Microsoft",
+    "released": "2026-05",
     "links": {
       "repo": "https://github.com/microsoft/STATE-Bench",
       "leaderboard": "https://microsoft.github.io/STATE-Bench/leaderboard/"
     },
     "access": "public",
-    "note": "The first dated submission is 2026-05. The public release date for this track and version is not stated.",
+    "note": "The first dated submission is 2026-05.",
     "successor": "state-bench",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://microsoft.github.io/STATE-Bench/leaderboard/",
-      "https://microsoft.github.io/STATE-Bench/leaderboard/leaderboard.js"
+      "https://microsoft.github.io/STATE-Bench/leaderboard/leaderboard.js",
+      "h",
+      "t",
+      "p",
+      "s",
+      ":",
+      "/",
+      "g",
+      "i",
+      "u",
+      "b",
+      ".",
+      "c",
+      "o",
+      "m",
+      "r",
+      "f",
+      "S",
+      "T",
+      "A",
+      "E",
+      "-",
+      "B",
+      "e",
+      "n",
+      "l",
+      "a",
+      "v",
+      "0",
+      "7"
     ],
     "added": "2026-11-10"
   },
@@ -79724,8 +80353,11 @@
     "name": "Terminal-Bench 4.0",
     "aliases": [
       "TB 4.0",
+      "TB 4.1",
       "Terminal Bench 4.0",
-      "Terminal-Bench 4"
+      "Terminal Bench 4.1",
+      "Terminal-Bench 4",
+      "Terminal-Bench 4.1"
     ],
     "category": "agentic-terminal",
     "subcategory": "terminal-tasks",
@@ -79737,21 +80369,49 @@
     "description": "Agents complete 66 hard tasks in containerized terminals across software, ML, science, security, and operations. Test scripts verify each result, scored as resolution rate.",
     "org": "Stanford University, Harbor, and Laude Institute",
     "released": "2026-08",
+    "changes": [
+      {
+        "date": "2026-11-03",
+        "kind": "grader",
+        "text": "Terminal-Bench 4.1 kept the 4.0 tasks and hardened the verifiers of 44 tasks against reward hacking, then regraded the saved 4.0 runs. 162 trials changed score, and every model stayed within its earlier 95% interval.",
+        "url": "https://www.tbench.ai/news/terminal-bench-4-1"
+      }
+    ],
     "links": {
       "repo": "https://github.com/harbor-framework/terminal-bench",
       "dataset": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4",
-      "leaderboard": "https://www.tbench.ai/",
+      "leaderboard": "https://www.tbench.ai/?version=4.1",
       "site": "https://www.tbench.ai/"
     },
     "access": "public",
-    "note": "It removed 8 saturated or flawed tasks from Terminal-Bench 3.0 and set a flat 8-hour agent timeout.",
+    "note": "It removed 8 saturated or flawed tasks from Terminal-Bench 3.0 and set a flat 8-hour agent timeout. Board scores come from the 4.1 regrade where one exists and from 4.0 grading otherwise, which the setting marks.",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
       "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
       "https://github.com/harbor-framework/terminal-bench",
       "https://www.tbench.ai/",
-      "https://www.tbench.ai/news/terminal-bench-4-0"
+      "https://www.tbench.ai/news/terminal-bench-4-0",
+      "h",
+      "t",
+      "p",
+      "s",
+      ":",
+      "/",
+      "w",
+      ".",
+      "b",
+      "e",
+      "n",
+      "c",
+      "a",
+      "i",
+      "r",
+      "m",
+      "l",
+      "-",
+      "4",
+      "1"
     ]
   },
   {
@@ -80035,6 +80695,28 @@
       "https://arxiv.org/abs/2504.11442",
       "https://github.com/TextArena/TextArena"
     ]
+  },
+  {
+    "id": "textcaps",
+    "name": "TextCaps",
+    "aliases": [
+      "TextCaps retrieval"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models retrieve matching text and images using the TextCaps corpus.",
+    "org": "Google DeepMind",
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini/embedding/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "textedit-opencompass",
@@ -80346,6 +81028,31 @@
     "confidence": "verified"
   },
   {
+    "id": "tiif-bench",
+    "name": "TIIF-Bench",
+    "aliases": [
+      "TIIF Bench"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Image models generate short and long images scored on overall image quality.",
+    "org": "Z.ai",
+    "released": "2026-01",
+    "access": "unknown",
+    "note": "GLM-Image reports short and long overall scores in its official model card.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://z.ai/blog/glm-image",
+      "https://huggingface.co/zai-org/GLM-Image"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "vals-time-horizon-index-ksp",
     "name": "Time Horizon Index: KSP",
     "aliases": [
@@ -80427,6 +81134,33 @@
       "https://arxiv.org/abs/2512.14698"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "timespeak",
+    "name": "TimeSpeak",
+    "aliases": [
+      "TimeSpeak internal"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models initiate speech at specified times while producing the requested content.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-05",
+    "links": {
+      "site": "https://thinkingmachines.ai/blog/interaction-models/"
+    },
+    "access": "private",
+    "note": "The launch post reports macro-averaged accuracy on an internal benchmark.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/blog/interaction-models/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "tir-bench",
@@ -85166,6 +85900,35 @@
     "added": "2026-11-01"
   },
   {
+    "id": "vidore-v2",
+    "name": "ViDoRe v2",
+    "aliases": [
+      "ViDoRe V2"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "vidore",
+    "version": "2",
+    "description": "Models retrieve relevant documents from multimodal document collections.",
+    "org": "Illuin Technology",
+    "released": "2025-01",
+    "links": {
+      "site": "https://huggingface.co/vidore"
+    },
+    "access": "public",
+    "successor": "vidore-v3",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini/embedding/"
+    ],
+    "added": "2026-11-10"
+  },
+  {
     "id": "vidore-v3",
     "name": "ViDoRe V3",
     "aliases": [
@@ -85177,6 +85940,8 @@
     "subcategory": "vision-documents",
     "level": "everyday",
     "format": "short-answer",
+    "family": "vidore",
+    "version": "3",
     "description": "Retrieval and RAG pipelines answer queries over visually rich documents, such as reports with tables, charts and images. The benchmark has 10 datasets from professional domains, about 26,000 pages and 3,099 human-verified queries, each in 6 languages. It scores retrieval relevance, bounding-box grounding and the final answers.",
     "org": "Illuin Technology and NVIDIA",
     "released": "2026-01",
@@ -85194,7 +85959,26 @@
     "evidence": [
       "https://arxiv.org/abs/2601.08620",
       "https://github.com/illuin-tech/vidore-benchmark",
-      "https://huggingface.co/spaces/vidore/vidore-leaderboard"
+      "https://huggingface.co/spaces/vidore/vidore-leaderboard",
+      "h",
+      "t",
+      "p",
+      "s",
+      ":",
+      "/",
+      "u",
+      "g",
+      "i",
+      "n",
+      "f",
+      "a",
+      "c",
+      "e",
+      ".",
+      "o",
+      "v",
+      "d",
+      "r"
     ],
     "added": "2026-11-05"
   },
@@ -85546,6 +86330,32 @@
       "https://labs.scale.com/leaderboard/visual_language_understanding"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "vistra",
+    "name": "Vistra",
+    "aliases": [
+      "Vistra image translation benchmark"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Systems translate text in natural images across multiple language directions.",
+    "org": "Google Research",
+    "released": "2024-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2409.04581"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/pdf/2601.09012"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "visual-aesthetic-benchmark",
@@ -90349,6 +91159,29 @@
       "https://arxiv.org/html/1703.09788"
     ],
     "added": "2026-11-08"
+  },
+  {
+    "id": "youcook2-retrieval",
+    "name": "YouCook2 retrieval",
+    "aliases": [
+      "YouCook2 nDCG"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models retrieve cooking videos from text queries in the YouCook2 collection.",
+    "org": "University of Illinois and collaborators",
+    "released": "2018-09",
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini/embedding/"
+    ],
+    "added": "2026-11-10"
   },
   {
     "id": "yupp-vibe-score",

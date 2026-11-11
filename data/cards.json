@@ -9554,6 +9554,12 @@
         "score": 57.4,
         "unit": "%",
         "as_written": "Seal-0"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "AA-LCR 70.0 (evaluation table)"
       }
     ]
   },
@@ -10736,6 +10742,102 @@
         "score": 98.9,
         "unit": "%",
         "as_written": "Tau2-bench Telecom (xhigh; body chart shows 64.3% without reasoning)"
+      },
+      {
+        "benchmark": "vals-finance-agent",
+        "score": 56.0,
+        "unit": "%",
+        "as_written": "FinanceAgent v1.1 (GPT-5.4)"
+      },
+      {
+        "benchmark": "investment-banking-modeling-openai",
+        "score": 87.3,
+        "unit": "%",
+        "as_written": "Investment Banking Modeling Tasks (Internal, GPT-5.4)"
+      },
+      {
+        "benchmark": "webarena-verified",
+        "score": 67.3,
+        "unit": "%",
+        "as_written": "WebArena-Verified, DOM and screenshot-driven interaction"
+      },
+      {
+        "benchmark": "online-mind2web",
+        "score": 92.8,
+        "unit": "%",
+        "as_written": "Online-Mind2Web, screenshot-based observations only"
+      },
+      {
+        "benchmark": "biglaw-bench",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "BigLaw Bench (GPT-5.4)"
+      },
+      {
+        "benchmark": "officeqa",
+        "score": 68.1,
+        "unit": "%",
+        "as_written": "OfficeQA (GPT-5.4)"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 67.2,
+        "unit": "%",
+        "as_written": "MCP Atlas"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 93.0,
+        "unit": "%",
+        "as_written": "GraphWalks BFS 0K-128K (21.4% at 256K-1M)"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 79.3,
+        "unit": "%",
+        "as_written": "OpenAI MRCR v2 8-needle 128K-256K (36.6% at 512K-1M)"
+      },
+      {
+        "benchmark": "frontierscience-research",
+        "score": 33.0,
+        "unit": "%",
+        "as_written": "Frontier Science Research (GPT-5.4)"
+      },
+      {
+        "benchmark": "frontiermath",
+        "score": 47.6,
+        "unit": "%",
+        "as_written": "FrontierMath Tier 1-3 (GPT-5.4)"
+      },
+      {
+        "benchmark": "frontiermath-tier-4",
+        "score": 27.1,
+        "unit": "%",
+        "as_written": "FrontierMath Tier 4 (GPT-5.4)"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 92.8,
+        "unit": "%",
+        "as_written": "GPQA Diamond (GPT-5.4)"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 52.1,
+        "unit": "%",
+        "as_written": "Humanity's Last Exam with tools 52.1% (without tools 39.8%)"
+      },
+      {
+        "benchmark": "arc-agi",
+        "score": 93.7,
+        "unit": "%",
+        "as_written": "ARC-AGI-1 (Verified)"
+      },
+      {
+        "benchmark": "arc-agi-2",
+        "score": 73.3,
+        "unit": "%",
+        "as_written": "ARC-AGI-2 (Verified)"
       }
     ]
   },
@@ -11618,6 +11720,12 @@
         "score": 5634.41,
         "unit": "USD",
         "as_written": "Vending Bench 2"
+      },
+      {
+        "benchmark": "kernel-bench-l3",
+        "score": 3.6,
+        "unit": "speedup",
+        "as_written": "KernelBench Level 3, 3.6x geometric mean speedup"
       }
     ]
   },
@@ -11744,6 +11852,12 @@
         "score": 1444,
         "unit": "Elo",
         "as_written": "GDPval-AA Elo (Office Tasks (Artificial Analysis))"
+      },
+      {
+        "benchmark": "frontierscience-research",
+        "score": 38.0,
+        "unit": "%",
+        "as_written": "FrontierScience Research, Contemplating mode, 38%"
       }
     ]
   },
@@ -11864,6 +11978,24 @@
         "score": 75.83,
         "unit": "%",
         "as_written": "ARC-AGI-2"
+      },
+      {
+        "benchmark": "cursorbench-3-1",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "CursorBench, 70% at high effort"
+      },
+      {
+        "benchmark": "biglaw-bench",
+        "score": 90.9,
+        "unit": "%",
+        "as_written": "BigLaw Bench, 90.9% at high effort"
+      },
+      {
+        "benchmark": "xbow-validation-benchmarks",
+        "score": 98.5,
+        "unit": "%",
+        "as_written": "XBOW visual-acuity benchmark, 98.5%"
       }
     ]
   },
@@ -12104,6 +12236,84 @@
         "score": 80.5,
         "unit": "%",
         "as_written": "BixBench"
+      },
+      {
+        "benchmark": "expert-swe-openai",
+        "score": 73.1,
+        "unit": "%",
+        "as_written": "Expert-SWE (Internal)"
+      },
+      {
+        "benchmark": "cybergym",
+        "score": 81.8,
+        "unit": "%",
+        "as_written": "CyberGym"
+      },
+      {
+        "benchmark": "swe-bench-pro",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "SWE-Bench Pro (Public)"
+      },
+      {
+        "benchmark": "vals-finance-agent",
+        "score": 60.0,
+        "unit": "%",
+        "as_written": "FinanceAgent v1.1"
+      },
+      {
+        "benchmark": "officeqa-pro",
+        "score": 54.1,
+        "unit": "%",
+        "as_written": "OfficeQA Pro"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 83.2,
+        "unit": "%",
+        "as_written": "MMMU Pro with tools 83.2% (no tools 81.2%)"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 75.3,
+        "unit": "%",
+        "as_written": "MCP Atlas"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 93.6,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "ctf-internal-openai",
+        "score": 88.1,
+        "unit": "%",
+        "as_written": "Capture-the-Flags challenge tasks (Internal)"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 73.7,
+        "unit": "%",
+        "as_written": "GraphWalks BFS 256K 73.7% (1M 45.4%)"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 87.5,
+        "unit": "%",
+        "as_written": "OpenAI MRCR v2 8-needle 128K-256K 87.5% (512K-1M 74.0%)"
+      },
+      {
+        "benchmark": "arc-agi",
+        "score": 95.0,
+        "unit": "%",
+        "as_written": "ARC-AGI-1 (Verified)"
+      },
+      {
+        "benchmark": "arc-agi-2",
+        "score": 85.0,
+        "unit": "%",
+        "as_written": "ARC-AGI-2 (Verified)"
       }
     ]
   },
@@ -12878,6 +13088,12 @@
         "score": 99.3,
         "unit": "%",
         "as_written": "Best of GraphWalks BFS 256K / GraphWalks Parents 256K"
+      },
+      {
+        "benchmark": "online-mind2web",
+        "score": 84.0,
+        "unit": "%",
+        "as_written": "Online-Mind2Web, 84%"
       }
     ]
   },
@@ -13760,6 +13976,84 @@
         "score": 59.9,
         "unit": "%",
         "as_written": "LifeSciBench (Sol, max)"
+      },
+      {
+        "benchmark": "management-consulting-tasks-openai",
+        "score": 43.2,
+        "unit": "%",
+        "as_written": "Management Consulting Tasks (Internal)"
+      },
+      {
+        "benchmark": "swe-bench-pro",
+        "score": 64.6,
+        "unit": "%",
+        "as_written": "SWE-Bench Pro"
+      },
+      {
+        "benchmark": "medchembench-openai",
+        "score": 48.3,
+        "unit": "%",
+        "as_written": "MedChemBench (Internal)"
+      },
+      {
+        "benchmark": "healthbench-professional",
+        "score": 60.5,
+        "unit": "%",
+        "as_written": "HealthBench Professional"
+      },
+      {
+        "benchmark": "benchcad",
+        "score": 70.6,
+        "unit": "%",
+        "as_written": "BenchCAD"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 84.6,
+        "unit": "%",
+        "as_written": "MMMU Pro with tools 84.6% (no tools 83.0%)"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 94.6,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "frontiermath-tiers-1-3-v2",
+        "score": 89.0,
+        "unit": "%",
+        "as_written": "FrontierMath Tier 1-3 (v2)"
+      },
+      {
+        "benchmark": "frontiermath-tier-4-v2",
+        "score": 83.0,
+        "unit": "%",
+        "as_written": "FrontierMath Tier 4 (v2)"
+      },
+      {
+        "benchmark": "toolathlon",
+        "score": 58.0,
+        "unit": "%",
+        "as_written": "Toolathlon"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 91.5,
+        "unit": "%",
+        "as_written": "OpenAI MRCR v2 8-needle 256K-512K 91.5% (512K-1M 73.8%)"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 90.7,
+        "unit": "%",
+        "as_written": "GraphWalks BFS 256K F1 90.7% (1M F1 77.1%)"
+      },
+      {
+        "benchmark": "arc-agi-3",
+        "score": 7.78,
+        "unit": "%",
+        "as_written": "ARC-AGI-3"
       }
     ]
   },
@@ -13786,7 +14080,7 @@
         "as_written": "JobBench (Professional tool use)"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 75.6,
         "unit": "%",
         "as_written": "Toolathlon-Verified (Personal tool use)"
@@ -13874,6 +14168,12 @@
         "score": 64.7,
         "unit": "%",
         "as_written": "SWE Bench Pro resolve rate"
+      },
+      {
+        "benchmark": "tau3-bench",
+        "score": 32.6,
+        "unit": "%",
+        "as_written": "τ³-bench, banking, 32.6%"
       }
     ]
   },
@@ -13990,7 +14290,7 @@
         "as_written": "GDPval-AA v2 (Elo)"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 76.5,
         "unit": "%",
         "as_written": "Toolathlon-Verified"
@@ -14428,7 +14728,7 @@
         "as_written": "DeepSWE"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 70.3,
         "unit": "%",
         "as_written": "Toolathlon-Verified"
@@ -14578,7 +14878,7 @@
         "as_written": "Automation-Bench (Pass@1)"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 72.5,
         "unit": "%",
         "as_written": "Toolathlon Verified (Pass@1)"
@@ -14996,6 +15296,18 @@
         "score": 82.9,
         "unit": "%",
         "as_written": "Terminal-Bench 2.1 (Muse Code harness)"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 90.3,
+        "unit": "%",
+        "as_written": "MCP-Atlas, 90.3%"
+      },
+      {
+        "benchmark": "gdpval-aa-v2",
+        "score": 1631,
+        "unit": "elo",
+        "as_written": "GDPval-AA v2, 1631 Elo"
       }
     ]
   },
@@ -15232,7 +15544,7 @@
         "as_written": "DeepSWE"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 74.1,
         "unit": "%",
         "as_written": "Toolathlon-Verified"
@@ -15340,7 +15652,7 @@
         "as_written": "ExploitBench"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 73.0,
         "unit": "%",
         "as_written": "Toolathlon Verified"
@@ -15734,6 +16046,42 @@
         "score": 37.1,
         "unit": "%",
         "as_written": "GeneBench Pro"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 100.0,
+        "unit": "%",
+        "as_written": "OpenAI MRCR v2 8-needle 256K-512K 100.0% (512K-1M 96.3%)"
+      },
+      {
+        "benchmark": "database-migration-tasks-openai",
+        "score": 63.9,
+        "unit": "%",
+        "as_written": "Internal Database Migration Tasks"
+      },
+      {
+        "benchmark": "data-science-tasks-openai",
+        "score": 40.9,
+        "unit": "%",
+        "as_written": "Internal Data Science Tasks"
+      },
+      {
+        "benchmark": "design-tasks-openai",
+        "score": 50.0,
+        "unit": "%",
+        "as_written": "Internal Design Tasks"
+      },
+      {
+        "benchmark": "medchembench-openai",
+        "score": 49.3,
+        "unit": "%",
+        "as_written": "MedChemBench (Internal)"
+      },
+      {
+        "benchmark": "gray-swan-ipi-arena-benchmark",
+        "score": 8.5,
+        "unit": "%",
+        "as_written": "Gray Swan IPI Arena, estimated attack success rate over 15 attempts (lower is better)"
       }
     ]
   },
@@ -16826,6 +17174,918 @@
         "score": 74.1,
         "unit": "%",
         "as_written": "SWE-bench Multimodal, adaptive thinking max effort, average of five trials (Table 8.1.A only)"
+      }
+    ]
+  },
+  {
+    "id": "xai-grok-4-20-2026-03-09",
+    "lab": "xai",
+    "model": "grok-4-20",
+    "date": "2026-03-09",
+    "title": "Grok 4.20 model documentation",
+    "url": "https://docs.x.ai/developers/models/grok-4.20",
+    "tier": "flagship",
+    "notes": "The API documentation page identifies Grok 4.20. Scores come from the official April 7, 2026 model card. The model card calls the modes Grok 4.2 SA and Grok 4.2 MA. The input date is earlier than the model card date because the documentation page has no publication date.",
+    "results": [
+      {
+        "benchmark": "general-refusals-xai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Chat Refusals, violation rate 0.00, Grok 4.2 SA, Table 1"
+      },
+      {
+        "benchmark": "user-jailbreaks-xai",
+        "score": 1.0,
+        "unit": "%",
+        "as_written": "Chat Refusals + User Jailbreak, violation rate 0.01, Grok 4.2 SA, Table 1"
+      },
+      {
+        "benchmark": "system-jailbreaks-xai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Chat Refusals + System Jailbreak, violation rate 0.00, Grok 4.2 SA, Table 1"
+      },
+      {
+        "benchmark": "agentharm",
+        "score": 30.0,
+        "unit": "%",
+        "as_written": "AgentHarm, violation rate 0.30, no jailbreak, Grok 4.2 SA, Table 1"
+      },
+      {
+        "benchmark": "agentdojo",
+        "score": 33.0,
+        "unit": "%",
+        "as_written": "AgentDojo, attack success rate 0.33, Grok 4.2 SA, Table 1"
+      },
+      {
+        "benchmark": "mask",
+        "score": 73.0,
+        "unit": "%",
+        "as_written": "MASK, dishonesty rate 0.27, Grok 4.2 SA, Table 2"
+      },
+      {
+        "benchmark": "sycophancy-eval-answer",
+        "score": 4.0,
+        "unit": "%",
+        "as_written": "Anthropic sycophancy evaluation, answer change rate 0.04, Grok 4.2 SA, Table 2"
+      },
+      {
+        "benchmark": "xai-sycophancy-eval",
+        "score": 35.0,
+        "unit": "%",
+        "as_written": "Contrastive internal sycophancy evaluation, sycophancy rate 0.35, Grok 4.2 SA, Table 2"
+      },
+      {
+        "benchmark": "hle-calibration",
+        "score": 19.0,
+        "unit": "%",
+        "as_written": "Humanity’s Last Exam, RMS calibration error 0.19, Grok 4.2 SA, Table 2"
+      },
+      {
+        "benchmark": "wmdp-biology",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "WMDP Bio, accuracy 0.91, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "virology-capabilities-test-vct",
+        "score": 54.0,
+        "unit": "%",
+        "as_written": "Virology Capabilities Test, accuracy 0.54, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "protocolqa-open-ended-xai",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "ProtocolQA, accuracy 0.79, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "lab-bench-figqa",
+        "score": 66.0,
+        "unit": "%",
+        "as_written": "FigQA, accuracy 0.66, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "lab-bench-cloningscenarios",
+        "score": 67.0,
+        "unit": "%",
+        "as_written": "CloningScenarios, accuracy 0.67, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "wmdp-chemistry",
+        "score": 90.0,
+        "unit": "%",
+        "as_written": "WMDP Chem, accuracy 0.90, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "wmdp-cyber",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "WMDP Cyber, accuracy 0.91, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "cybench",
+        "score": 53.0,
+        "unit": "%",
+        "as_written": "CyBench, success rate 0.53, unguided, Grok 4.2 SA, Table 4"
+      },
+      {
+        "benchmark": "makemesay-openai",
+        "score": 8.0,
+        "unit": "%",
+        "as_written": "MakeMeSay, win rate 0.08, Grok 4.2 SA, Table 4"
+      }
+    ]
+  },
+  {
+    "id": "thinking-machines-tml-interaction-small-2026-05-11",
+    "lab": "thinking-machines",
+    "model": "tml-interaction-small",
+    "date": "2026-05-11",
+    "title": "Interaction Models",
+    "url": "https://thinkingmachines.ai/blog/interaction-models/",
+    "tier": "small",
+    "notes": "Research preview. The post reports streaming and turn-based scores with a background agent for benchmarks that require reasoning or tool calls. BigBench Audio includes an alternative 96.5 value under a different baseline setting, so the headline table value 75.7 is recorded. Internal TimeSpeak, CueSpeak, RepCount-A and ProactiveVideoQA values are in the technical discussion and are recorded in the separate benchmark file.",
+    "results": [
+      {
+        "benchmark": "full-duplex-bench",
+        "score": 0.4,
+        "unit": "score",
+        "as_written": "FD-bench v1 turn-taking latency, seconds, streaming audio"
+      },
+      {
+        "benchmark": "full-duplex-bench-1-5",
+        "score": 77.8,
+        "unit": "score",
+        "as_written": "FD-bench v1.5 average quality, streaming audio"
+      },
+      {
+        "benchmark": "full-duplex-bench-3",
+        "score": 68.0,
+        "unit": "%",
+        "as_written": "FD-bench v3 Pass@1, with background agent, audio plus tools"
+      },
+      {
+        "benchmark": "qivd",
+        "score": 54.0,
+        "unit": "%",
+        "as_written": "QIVD accuracy, streaming video plus audio"
+      },
+      {
+        "benchmark": "audio-mc",
+        "score": 43.4,
+        "unit": "%",
+        "as_written": "Audio MultiChallenge APR, audio"
+      },
+      {
+        "benchmark": "big-bench-audio",
+        "score": 75.7,
+        "unit": "%",
+        "as_written": "BigBench Audio accuracy, audio, first reported value 75.7, alternative 96.5 setting shown"
+      },
+      {
+        "benchmark": "voicebench",
+        "score": 82.1,
+        "unit": "%",
+        "as_written": "IFEval (VoiceBench) accuracy, audio"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 89.7,
+        "unit": "%",
+        "as_written": "IFEval accuracy, text"
+      },
+      {
+        "benchmark": "harmbench",
+        "score": 99.0,
+        "unit": "%",
+        "as_written": "HarmBench refusal rate, text"
+      },
+      {
+        "benchmark": "timespeak",
+        "score": 64.7,
+        "unit": "%",
+        "as_written": "TimeSpeak macro-accuracy, internal"
+      },
+      {
+        "benchmark": "cuespeak",
+        "score": 81.7,
+        "unit": "%",
+        "as_written": "CueSpeak macro-accuracy, internal"
+      },
+      {
+        "benchmark": "repcount-a",
+        "score": 35.4,
+        "unit": "score",
+        "as_written": "RepCount-A off-by-one score, internal"
+      },
+      {
+        "benchmark": "proactive-videoqa",
+        "score": 33.5,
+        "unit": "score",
+        "as_written": "ProactiveVideoQA PAUC at omega 0.5, internal"
+      },
+      {
+        "benchmark": "charades-sta",
+        "score": 32.4,
+        "unit": "%",
+        "as_written": "Charades mIoU, internal visual proactivity adaptation"
+      }
+    ]
+  },
+  {
+    "id": "openai-gpt-6-cyber-2026-11-05",
+    "lab": "openai",
+    "model": "gpt-6-cyber",
+    "date": "2026-11-05",
+    "title": "GPT-6 Cyber deployment safety",
+    "url": "https://deploymentsafety.openai.com/gpt-6-cyber",
+    "tier": "flagship",
+    "notes": "Scores come from the official GPT-6 Cyber system card PDF. Suites reported only as category rows, with no overall score, are left out. The system card also reports 11 of 11 CyScenarioBench challenges solved at least once, 22 of 22 Atomic challenges solved, and challenge counts for FrontierCyber.",
+    "results": [
+      {
+        "benchmark": "respecting-auto-review-openai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Auto-Review, prohibited action completed, GPT-6 Cyber"
+      },
+      {
+        "benchmark": "respecting-warnings-openai",
+        "score": 73.0,
+        "unit": "%",
+        "as_written": "Warnings, STOP split 73.00% and PERSIST split 80.43%, GPT-6 Cyber"
+      },
+      {
+        "benchmark": "exploitgym-honeypot-openai",
+        "score": 0.07,
+        "unit": "%",
+        "as_written": "ExploitGym Honeypot, without deployment safety instructions, exploitation rate"
+      },
+      {
+        "benchmark": "blocker-deception-openai",
+        "score": 20.29,
+        "unit": "%",
+        "as_written": "Blocker Deception, blocker-related deception"
+      },
+      {
+        "benchmark": "broken-search-tool-openai",
+        "score": 0.33,
+        "unit": "%",
+        "as_written": "Broken Search Tool, misrepresented tool access or retrieved evidence"
+      },
+      {
+        "benchmark": "exploitbench",
+        "score": 100.0,
+        "unit": "%",
+        "as_written": "ExploitBench, ACE-normalized mean capability score"
+      },
+      {
+        "benchmark": "exploitbench-internal-port-openai",
+        "score": 42.0,
+        "unit": "%",
+        "as_written": "ExploitBench Internal Port, mean arbitrary code-execution success rate across V8 and Chrome targets, June to August 2026"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 87.02,
+        "unit": "%",
+        "as_written": "SEC-Bench Pro, pass@1"
+      },
+      {
+        "benchmark": "sre-bench",
+        "score": 92.84,
+        "unit": "%",
+        "as_written": "SRE-Bench, pass@1, all six objectives required"
+      },
+      {
+        "benchmark": "exploitgym",
+        "score": 48.45,
+        "unit": "%",
+        "as_written": "ExploitGym, intended-exploit success rate"
+      },
+      {
+        "benchmark": "cyscenariobench",
+        "score": 61.0,
+        "unit": "%",
+        "as_written": "CyScenarioBench, average success rate across 11 long-horizon challenges"
+      },
+      {
+        "benchmark": "frontiercyber-irregular",
+        "score": 31.25,
+        "unit": "%",
+        "as_written": "FrontierCyber, 90 of 288 challenges solved"
+      },
+      {
+        "benchmark": "atomic-challenges-irregular",
+        "score": 97.0,
+        "unit": "%",
+        "as_written": "Atomic Challenges, vulnerability research and exploitation 97%, network attack simulation 98%, evasion 63%"
+      },
+      {
+        "benchmark": "expert-swe-openai",
+        "score": 82.95,
+        "unit": "%",
+        "as_written": "ExpertSWE, long-horizon software-engineering tasks"
+      },
+      {
+        "benchmark": "protocolqa-open-ended-openai",
+        "score": 47.2,
+        "unit": "%",
+        "as_written": "ProtocolQA Open-Ended, standard scoring"
+      }
+    ]
+  },
+  {
+    "id": "meta-muse-ember-2026-11-09",
+    "lab": "meta",
+    "model": "muse-ember",
+    "date": "2026-11-09",
+    "title": "Introducing Our Smallest, Most Efficient Model: Muse Ember",
+    "url": "https://research.meta.ai/blog/muse-ember",
+    "tier": "small",
+    "notes": "The official Meta post quotes Artificial Analysis results in its own evaluation table. Those values are recorded because Meta reports them in the launch post. Internal results use Meta’s evaluation suite.",
+    "results": [
+      {
+        "benchmark": "automationbench",
+        "score": 37.8,
+        "unit": "%",
+        "as_written": "AutomationBench-AA, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "agents-last-exam",
+        "score": 61.6,
+        "unit": "%",
+        "as_written": "Agents’ Last Exam, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "personal-superintelligence-index-meta",
+        "score": 46.8,
+        "unit": "%",
+        "as_written": "Personal Superintelligence Index, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 40.9,
+        "unit": "%",
+        "as_written": "Terminal-Bench 4.0, best published harness, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "artificial-analysis-coding-agent-index",
+        "score": 46.0,
+        "unit": "index",
+        "as_written": "AA Coding Agent Index v2.0, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 27.2,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0-AA, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "gdp-pdf",
+        "score": 22.8,
+        "unit": "%",
+        "as_written": "GDP.pdf-AA, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "osworld-2-1",
+        "score": 69.5,
+        "unit": "%",
+        "as_written": "OSWorld 2.1, partial-credit reward, Muse Ember max reasoning"
+      },
+      {
+        "benchmark": "perceptionbench-moonshot",
+        "score": 80.6,
+        "unit": "%",
+        "as_written": "PerceptionBench with tools, Muse Ember max reasoning"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-3-1-flash-image-2026-02-26",
+    "lab": "google",
+    "model": "gemini-3-1-flash-image-nano-banana-2-web-search",
+    "date": "2026-02-26",
+    "title": "Gemini 3.1 Flash Image model card (Google DeepMind)",
+    "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-image/",
+    "tier": "mid",
+    "notes": "The model card was published on 2026-02-26. It reports GenAI-Bench overall preference and visual quality Elo, plus image editing Elo rows. The input lead date was 2026-04-01.",
+    "results": [
+      {
+        "benchmark": "genai-bench",
+        "score": 1079.0,
+        "unit": "elo",
+        "as_written": "Overall Preference (GenAI-Bench), Thinking + Text Search + Image Search"
+      },
+      {
+        "benchmark": "human-sxs-image-editing-google",
+        "score": 1065.0,
+        "unit": "elo",
+        "as_written": "General Editing, Thinking + Text Search + Image Search"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-3-5-transcribe-2026-08-26",
+    "lab": "google",
+    "model": "gemini-3-5-transcribe",
+    "date": "2026-08-26",
+    "title": "Introducing Gemini 3.5 Transcribe (Google blog)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/",
+    "tier": "mid",
+    "notes": "The post introduces gemini-3.5-transcribe for pre-recorded audio and gemini-3.5-transcribe-live for streaming. It quotes Artificial Analysis WER and reports FLEURS WER. The post's date matches the input lead.",
+    "results": [
+      {
+        "benchmark": "aa-wer",
+        "score": 4.0,
+        "unit": "%",
+        "as_written": "Average Word Error Rate (WER), streaming, Artificial Analysis"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 5.5,
+        "unit": "%",
+        "as_written": "FLEURS WER, streaming mode, top languages and locales"
+      }
+    ]
+  },
+  {
+    "id": "google-embeddinggemma-2-2026-10-06",
+    "lab": "google",
+    "model": "embeddinggemma-2",
+    "date": "2026-10-06",
+    "title": "EmbeddingGemma 2: an open, lightweight multimodal embedding model (Google blog)",
+    "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+    "tier": "small",
+    "notes": "The post reports a 9.92-point MTEB Code improvement and points to the model card for full evaluation metrics. Full numeric rows are recorded from the Hugging Face model card.",
+    "results": [
+      {
+        "benchmark": "mteb",
+        "score": 78.68,
+        "unit": "score",
+        "as_written": "MTEB Code, NDCG@10, full precision, 768d"
+      }
+    ]
+  },
+  {
+    "id": "google-nano-banana-2-1-2026-10-06",
+    "lab": "google",
+    "model": "gemini-nano-banana-2-1",
+    "date": "2026-10-06",
+    "title": "Nano Banana 2.1 model card (Google DeepMind)",
+    "url": "https://deepmind.google/models/model-cards/nano-banana-2-1/",
+    "tier": "mid",
+    "notes": "The model card reports October 2026 results for internal human side-by-side image generation and editing ratings, plus infographic factuality. The input lead date matches the source.",
+    "results": [
+      {
+        "benchmark": "human-sxs-image-generation-google",
+        "score": 1050,
+        "unit": "elo",
+        "as_written": "Overall Preference, Thinking"
+      },
+      {
+        "benchmark": "infographic-factuality-google",
+        "score": 0.521,
+        "unit": "score",
+        "as_written": "Infographic Factuality, Thinking"
+      },
+      {
+        "benchmark": "human-sxs-image-editing-google",
+        "score": 1026,
+        "unit": "elo",
+        "as_written": "General Editing, Thinking"
+      }
+    ]
+  },
+  {
+    "id": "zai-glm-image-2026-01-14",
+    "lab": "zai",
+    "model": "glm-image",
+    "date": "2026-01-14",
+    "title": "GLM-Image (official blog)",
+    "url": "https://z.ai/blog/glm-image",
+    "tier": "flagship",
+    "notes": "Official Z.ai blog and Hugging Face model card. The source reports text rendering and image generation tables.",
+    "results": [
+      {
+        "benchmark": "cvtg-2k",
+        "score": 0.9116,
+        "unit": "score",
+        "as_written": "CVTG-2K Word Accuracy average 0.9116, NED 0.9557, CLIPScore 0.7877, region word accuracy 0.966 / 0.952 / 0.979 / 0.8975"
+      },
+      {
+        "benchmark": "longtext-bench",
+        "score": 0.966,
+        "unit": "score",
+        "as_written": "LongText-Bench EN 0.966, ZH 0.979"
+      },
+      {
+        "benchmark": "oneig-bench",
+        "score": 0.528,
+        "unit": "score",
+        "as_written": "OneIG-Bench EN overall 0.528, ZH overall 0.511"
+      },
+      {
+        "benchmark": "tiif-bench",
+        "score": 81.01,
+        "unit": "score",
+        "as_written": "TIIF-Bench short overall 81.01, long overall 81.02"
+      },
+      {
+        "benchmark": "dpg-bench",
+        "score": 84.78,
+        "unit": "score",
+        "as_written": "DPG-Bench overall 84.78"
+      }
+    ]
+  },
+  {
+    "id": "deepseek-deepseek-ocr-2-2026-01-28",
+    "lab": "deepseek",
+    "model": "deepseek-ocr-2",
+    "date": "2026-01-28",
+    "title": "DeepSeek-OCR 2: Visual Causal Flow (technical report and repository)",
+    "url": "https://github.com/deepseek-ai/DeepSeek-OCR-2",
+    "tier": "mid",
+    "notes": "The official technical report evaluates DeepSeek-OCR 2 on OmniDocBench v1.5.",
+    "results": [
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 91.09,
+        "unit": "score",
+        "as_written": "OmniDocBench v1.5 Overall 91.09, V-token max 1120, Text Edit 0.048, Formula CDM 90.31, Table TEDS 87.75, Table TEDS-S 92.06, R-order Edit 0.057 (Table 1)"
+      }
+    ]
+  },
+  {
+    "id": "zai-glm-5v-turbo-2026-04-01",
+    "lab": "zai",
+    "model": "glm-5v-turbo",
+    "date": "2026-04-01",
+    "title": "GLM-5V-Turbo (official documentation)",
+    "url": "https://docs.z.ai/guides/vlm/glm-5v-turbo",
+    "tier": "flagship",
+    "notes": "Official Z.AI documentation tables report multimodal coding, agentic, and pure-text coding scores.",
+    "results": [
+      {
+        "benchmark": "design2code",
+        "score": 94.8,
+        "unit": "%",
+        "as_written": "Design2Code 94.8"
+      },
+      {
+        "benchmark": "flame-react-eval",
+        "score": 93.8,
+        "unit": "%",
+        "as_written": "Flame-VLM-Code 93.8"
+      },
+      {
+        "benchmark": "vision2web",
+        "score": 31.0,
+        "unit": "%",
+        "as_written": "Vision2Web 31.0"
+      },
+      {
+        "benchmark": "image-mining-zai",
+        "score": 30.7,
+        "unit": "%",
+        "as_written": "ImageMining 30.7"
+      },
+      {
+        "benchmark": "browsecomp-vl",
+        "score": 51.9,
+        "unit": "%",
+        "as_written": "BrowseComp-VL 51.9"
+      },
+      {
+        "benchmark": "mmsearch",
+        "score": 72.9,
+        "unit": "%",
+        "as_written": "MMSearch 72.9"
+      },
+      {
+        "benchmark": "mmsearch-plus",
+        "score": 30.0,
+        "unit": "%",
+        "as_written": "MMSearch-Plus 30.0"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 78.2,
+        "unit": "%",
+        "as_written": "SimpleVQA 78.2"
+      },
+      {
+        "benchmark": "facts-benchmark-suite",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "Facts 58.6"
+      },
+      {
+        "benchmark": "v",
+        "score": 89.0,
+        "unit": "%",
+        "as_written": "V* 89.0"
+      },
+      {
+        "benchmark": "osworld",
+        "score": 62.3,
+        "unit": "%",
+        "as_written": "OSWorld 62.3"
+      },
+      {
+        "benchmark": "androidworld",
+        "score": 75.7,
+        "unit": "%",
+        "as_written": "AndroidWorld 75.7"
+      },
+      {
+        "benchmark": "webvoyager",
+        "score": 88.5,
+        "unit": "%",
+        "as_written": "WebVoyager 88.5"
+      },
+      {
+        "benchmark": "cc-bench-v2-backend-zai",
+        "score": 22.8,
+        "unit": "%",
+        "as_written": "CC-Backend 22.8"
+      },
+      {
+        "benchmark": "cc-bench-v2-frontend-zai",
+        "score": 68.4,
+        "unit": "%",
+        "as_written": "CC-Frontend 68.4"
+      },
+      {
+        "benchmark": "cc-bench-v2-repo-exploration-zai",
+        "score": 72.2,
+        "unit": "%",
+        "as_written": "CC-Repo-Exploration 72.2"
+      },
+      {
+        "benchmark": "pinchbench",
+        "score": 80.7,
+        "unit": "%",
+        "as_written": "PinchBench Best / Avg 87.0 / 80.7"
+      },
+      {
+        "benchmark": "claw-eval",
+        "score": 75.0,
+        "unit": "%",
+        "as_written": "ClawEval Pass^3 / Pass@3 57.7 / 75.0"
+      },
+      {
+        "benchmark": "zclawbench",
+        "score": 57.6,
+        "unit": "%",
+        "as_written": "ZClawBench 57.6"
+      }
+    ]
+  },
+  {
+    "id": "zai-glm-5-3-flashx-legal-2026-10-12",
+    "lab": "zai",
+    "model": "glm-5-3-flashx-legal",
+    "date": "2026-10-12",
+    "title": "GLM-5.3-FlashX-Legal (official documentation)",
+    "url": "https://docs.z.ai/guides/vlm/glm-5.3-flash",
+    "tier": "mid",
+    "notes": "The official Z.AI page reports the GLM-5.3-FlashX-Legal Harvey LAB result in its legal benchmark section.",
+    "results": [
+      {
+        "benchmark": "harvey-lab-legal-agent-benchmark",
+        "score": 19.2,
+        "unit": "%",
+        "as_written": "Harvey LAB all-criteria pass rate 19.2%"
+      }
+    ]
+  },
+  {
+    "id": "google-translategemma-27b-2026-01-15",
+    "lab": "google",
+    "model": "translategemma-27b",
+    "date": "2026-01-15",
+    "title": "TranslateGemma: A new suite of open translation models",
+    "url": "https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/?id=TranslateGemma",
+    "tier": "open-weights",
+    "notes": "Google reports automatic WMT24++ and Vistra scores for TranslateGemma 4B, 12B and 27B. The technical report also reports MQM scores for ten WMT25 language pairs. Scores use COMET-22. The post also reports MetricX, and WMT25 human ratings per language pair with no average, which are left out.",
+    "results": [
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 84.4,
+        "unit": "%",
+        "as_written": "TranslateGemma 27B, COMET-22, WMT24++ 55-language average"
+      },
+      {
+        "benchmark": "vistra",
+        "score": 77.7,
+        "unit": "score",
+        "as_written": "TranslateGemma 27B, COMET-22, Vistra image translation, English to German, Spanish, Russian and Chinese average"
+      }
+    ]
+  },
+  {
+    "id": "google-translategemma-12b-2026-01-15",
+    "lab": "google",
+    "model": "translategemma-12b",
+    "date": "2026-01-15",
+    "title": "TranslateGemma: A new suite of open translation models",
+    "url": "https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/?id=TranslateGemma",
+    "tier": "open-weights",
+    "notes": "Google reports automatic WMT24++ and Vistra scores for TranslateGemma 4B, 12B and 27B. The technical report also reports MQM scores for ten WMT25 language pairs. Scores use COMET-22. The post also reports MetricX, and WMT25 human ratings per language pair with no average, which are left out.",
+    "results": [
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 83.5,
+        "unit": "%",
+        "as_written": "TranslateGemma 12B, COMET-22, WMT24++ 55-language average"
+      },
+      {
+        "benchmark": "vistra",
+        "score": 72.8,
+        "unit": "score",
+        "as_written": "TranslateGemma 12B, COMET-22, Vistra image translation, English to German, Spanish, Russian and Chinese average"
+      }
+    ]
+  },
+  {
+    "id": "google-translategemma-4b-2026-01-15",
+    "lab": "google",
+    "model": "translategemma-4b",
+    "date": "2026-01-15",
+    "title": "TranslateGemma: A new suite of open translation models",
+    "url": "https://blog.google/innovation-and-ai/technology/developers-tools/translategemma/?id=TranslateGemma",
+    "tier": "open-weights",
+    "notes": "Google reports automatic WMT24++ and Vistra scores for TranslateGemma 4B, 12B and 27B. The technical report also reports MQM scores for ten WMT25 language pairs. Scores use COMET-22. The post also reports MetricX, and WMT25 human ratings per language pair with no average, which are left out.",
+    "results": [
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 80.1,
+        "unit": "%",
+        "as_written": "TranslateGemma 4B, COMET-22, WMT24++ 55-language average"
+      },
+      {
+        "benchmark": "vistra",
+        "score": 70.7,
+        "unit": "score",
+        "as_written": "TranslateGemma 4B, COMET-22, Vistra image translation, English to German, Spanish, Russian and Chinese average"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-embedding-2-2026-03-10",
+    "lab": "google",
+    "model": "gemini-embedding-2",
+    "date": "2026-03-10",
+    "title": "Gemini Embedding 2",
+    "url": "https://deepmind.google/models/gemini/embedding/",
+    "tier": "flagship",
+    "notes": "Google DeepMind reports cross-modal retrieval scores across text, image, document, video and speech tasks.",
+    "results": [
+      {
+        "benchmark": "mteb",
+        "score": 69.9,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, MTEB Multilingual mean task score"
+      },
+      {
+        "benchmark": "textcaps",
+        "score": 89.6,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to image TextCaps recall@1"
+      },
+      {
+        "benchmark": "docci",
+        "score": 93.4,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to image Docci recall@1"
+      },
+      {
+        "benchmark": "vidore-v2",
+        "score": 64.9,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to document ViDoRe v2 nDCG@10"
+      },
+      {
+        "benchmark": "vatex",
+        "score": 68.8,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to video VATEX nDCG@10"
+      },
+      {
+        "benchmark": "msr-vtt-retrieval",
+        "score": 68.0,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to video MSR-VTT nDCG@10"
+      },
+      {
+        "benchmark": "youcook2-retrieval",
+        "score": 52.5,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, text to video YouCook2 nDCG@10"
+      },
+      {
+        "benchmark": "mseb",
+        "score": 73.9,
+        "unit": "score",
+        "as_written": "Gemini Embedding 2, speech to text MSEB mRR@10"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-8-max-0902-2026-09-02",
+    "lab": "qwen",
+    "model": "qwen3-8-max-0902",
+    "date": "2026-09-02",
+    "title": "Qwen3.8-Max-0902 announcement (score table image in Qwen's post on X)",
+    "url": "https://x.com/Alibaba_Qwen/status/2094968708288680276",
+    "tier": "flagship",
+    "notes": "Scores are read from the table image in Qwen's announcement post. The table compares Qwen3.8-Max, Claude Opus 5, Claude Fable 5 and GPT-5.6 Sol. Three rows are left out. SWE-Marathon gives no version. QwenSWEBench V2 does not compare with the first version. The WorkArena row is a crowdsourced Elo rating, not the ServiceNow WorkArena benchmark.",
+    "results": [
+      {
+        "benchmark": "terminal-bench-3-0",
+        "score": 29.0,
+        "unit": "%",
+        "as_written": "Agentic terminal coding, TerminalBench 3.0"
+      },
+      {
+        "benchmark": "deepswe",
+        "score": 69.3,
+        "unit": "%",
+        "as_written": "Agentic coding, DeepSWE 1.1"
+      },
+      {
+        "benchmark": "nl2repo-bench",
+        "score": 64.9,
+        "unit": "%",
+        "as_written": "Repository-level code generation, NL2Repo-Bench"
+      },
+      {
+        "benchmark": "programbench-almost",
+        "score": 28.0,
+        "unit": "%",
+        "as_written": "Black-box software replication, ProgramBench (Almost Solved)"
+      },
+      {
+        "benchmark": "mls-bench",
+        "score": 50.1,
+        "unit": "%",
+        "as_written": "Machine learning research engineering, MLS-Bench-Lite"
+      },
+      {
+        "benchmark": "swe-atlas",
+        "score": 66.3,
+        "unit": "%",
+        "as_written": "Repository-level code understanding, SWE-Atlas QnA"
+      },
+      {
+        "benchmark": "coworkbench",
+        "score": 76.1,
+        "unit": "%",
+        "as_written": "Long-horizon office work, CoWorkBench"
+      },
+      {
+        "benchmark": "jobbench",
+        "score": 64.0,
+        "unit": "%",
+        "as_written": "Professional job tasks, JobBench"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 50.8,
+        "unit": "%",
+        "as_written": "Agentic SaaS workflow, Automation Bench v1.0.6 (Pass@1)"
+      },
+      {
+        "benchmark": "toolathlon-verified",
+        "score": 73.3,
+        "unit": "%",
+        "as_written": "Real-world tool use, Toolathlon Verified (Pass@1)"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 82.7,
+        "unit": "%",
+        "as_written": "STEM visual reasoning, MMMU-Pro"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 78.3,
+        "unit": "%",
+        "as_written": "Embodied intelligence, ERQA"
+      },
+      {
+        "benchmark": "claw-eval-mm",
+        "score": 80.2,
+        "unit": "%",
+        "as_written": "Multimodal tool use, ClawEval-MM (Pass@3)"
+      },
+      {
+        "benchmark": "babyvision",
+        "score": 93.8,
+        "unit": "%",
+        "as_written": "General visual reasoning, BabyVision (w/ CI)"
       }
     ]
   },
@@ -18880,7 +20140,7 @@
         "as_written": "DeepSWE"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 75.9,
         "unit": "%",
         "as_written": "Toolathlon-Verified"
@@ -19228,7 +20488,7 @@
         "as_written": "NL2Repo"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 78.4,
         "unit": "%",
         "as_written": "Toolathlon Verified"
@@ -19304,6 +20564,18 @@
         "score": 77.8,
         "unit": "%",
         "as_written": "Vision2Web"
+      },
+      {
+        "benchmark": "z-ai-code-bench",
+        "score": 29.0,
+        "unit": "%",
+        "as_written": "Z.ai Code Bench v1.0, 29.0"
+      },
+      {
+        "benchmark": "aa-intelligence-index-v4-1",
+        "score": 57.0,
+        "unit": "index",
+        "as_written": "AA Intelligence Index v4.1.1, 57"
       }
     ]
   },
@@ -20026,7 +21298,7 @@
         "as_written": "Agents' Last Exam Pass@1 24.3 Score 51.2"
       },
       {
-        "benchmark": "toolathlon",
+        "benchmark": "toolathlon-verified",
         "score": 73.5,
         "unit": "%",
         "as_written": "Real-world tool use Toolathlon Verified (Pass@1)"
@@ -26096,6 +27368,12 @@
         "score": 66.2,
         "unit": "%",
         "as_written": "Aider"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 88.2,
+        "unit": "%",
+        "as_written": "C-Eval, 88.2"
       }
     ]
   },
@@ -33218,6 +34496,24 @@
         "score": 98.6,
         "unit": "%",
         "as_written": "StrongREJECT"
+      },
+      {
+        "benchmark": "designarena-website",
+        "score": 1257,
+        "unit": "elo",
+        "as_written": "DesignArena, agentic web development, 1257 Elo"
+      },
+      {
+        "benchmark": "forecastbench",
+        "score": 61.1,
+        "unit": "brier",
+        "as_written": "ForecastBench, Brier Index, no search, 61.1"
+      },
+      {
+        "benchmark": "prophet-arena",
+        "score": 0.1617,
+        "unit": "brier",
+        "as_written": "Prophet Arena, Brier score 0.1617"
       }
     ]
   },
@@ -39200,6 +40496,12 @@
         "score": 52.68,
         "unit": "%",
         "as_written": "OSWorld 2.0, offline set (GPT-6 Luna max)"
+      },
+      {
+        "benchmark": "internal-factuality-evals-openai",
+        "score": 7.6,
+        "unit": "%",
+        "as_written": "Internal factuality evaluation, GPT-6 Luna, factual error rate"
       }
     ]
   },
@@ -39872,6 +41174,18 @@
         "score": 0.8,
         "unit": "%",
         "as_written": "ARC-AGI-3"
+      },
+      {
+        "benchmark": "management-consulting-tasks-openai",
+        "score": 37.2,
+        "unit": "%",
+        "as_written": "Management Consulting Tasks (Internal)"
+      },
+      {
+        "benchmark": "medchembench-openai",
+        "score": 35.0,
+        "unit": "%",
+        "as_written": "MedChemBench (Internal)"
       }
     ]
   },
@@ -40046,6 +41360,18 @@
         "score": 0.18,
         "unit": "%",
         "as_written": "ARC-AGI-3"
+      },
+      {
+        "benchmark": "management-consulting-tasks-openai",
+        "score": 35.4,
+        "unit": "%",
+        "as_written": "Management Consulting Tasks (Internal)"
+      },
+      {
+        "benchmark": "medchembench-openai",
+        "score": 30.4,
+        "unit": "%",
+        "as_written": "MedChemBench (Internal)"
       }
     ]
   },
@@ -41276,6 +42602,18 @@
         "score": 71.6,
         "unit": "%",
         "as_written": "τ-Voice"
+      },
+      {
+        "benchmark": "full-duplex-bench",
+        "score": 97.0,
+        "unit": "%",
+        "as_written": "Full Duplex Bench, 97.0%"
+      },
+      {
+        "benchmark": "speech-to-speech-index",
+        "score": 86.9,
+        "unit": "index",
+        "as_written": "Speech-to-Speech Index, 86.9, per Artificial Analysis"
       }
     ]
   },
@@ -43298,6 +44636,12 @@
         "score": 50.5,
         "unit": "%",
         "as_written": "CMT-Benchmark"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 81.5,
+        "unit": "%",
+        "as_written": "MMMU-Pro, no tools, 81.5%"
       }
     ]
   },
@@ -46856,6 +48200,126 @@
         "score": 1021,
         "unit": "elo",
         "as_written": "AA-3D"
+      },
+      {
+        "benchmark": "sudo-l7",
+        "score": 14.1,
+        "unit": "%",
+        "as_written": "Sudo L7, 14.1%"
+      },
+      {
+        "benchmark": "swe-marathon-1-1",
+        "score": 38.8,
+        "unit": "%",
+        "as_written": "SWE-Marathon v1.1, 38.8%"
+      },
+      {
+        "benchmark": "swe-bench-multilingual",
+        "score": 81.2,
+        "unit": "%",
+        "as_written": "SWE-bench Multilingual, 81.2%"
+      },
+      {
+        "benchmark": "swe-bench-multimodal",
+        "score": 43.1,
+        "unit": "%",
+        "as_written": "SWE-bench Multimodal v2, 43.1%"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 82.2,
+        "unit": "%",
+        "as_written": "SWE-bench Verified, 82.2%"
+      },
+      {
+        "benchmark": "browsecomp",
+        "score": 90.2,
+        "unit": "%",
+        "as_written": "BrowseComp with context management, 90.2%"
+      },
+      {
+        "benchmark": "deepsearchqa",
+        "score": 90.9,
+        "unit": "%",
+        "as_written": "DeepSearchQA, 90.9%"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 45.6,
+        "unit": "%",
+        "as_written": "AutomationBench v1.0.6, 45.6%"
+      },
+      {
+        "benchmark": "vals-finance-agent-v2-1",
+        "score": 67.5,
+        "unit": "%",
+        "as_written": "Finance Agent v2.1, 67.5%"
+      },
+      {
+        "benchmark": "vals-excel-modeling-benchmark-1-1",
+        "score": 69.5,
+        "unit": "%",
+        "as_written": "Excel Modeling Benchmark v1.1, 69.5%"
+      },
+      {
+        "benchmark": "vals-tax-agent-bench",
+        "score": 65.8,
+        "unit": "%",
+        "as_written": "Tax Agent Bench, 65.8%"
+      },
+      {
+        "benchmark": "harvey-lab-1-1",
+        "score": 21.7,
+        "unit": "%",
+        "as_written": "Harvey LAB v1.1, 21.7%"
+      },
+      {
+        "benchmark": "legal-research-bench",
+        "score": 46.6,
+        "unit": "%",
+        "as_written": "Legal Research Bench, 46.6%"
+      },
+      {
+        "benchmark": "code-arena",
+        "score": 1653,
+        "unit": "elo",
+        "as_written": "Code Arena, 1653 Elo"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 92.8,
+        "unit": "%",
+        "as_written": "MathVision, 92.8%"
+      },
+      {
+        "benchmark": "vals-sage-1-1",
+        "score": 88.6,
+        "unit": "%",
+        "as_written": "SAGE v1.1, 88.6%"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 93.0,
+        "unit": "%",
+        "as_written": "GPQA Diamond, 93.0%"
+      },
+      {
+        "benchmark": "hmmt-2026",
+        "score": 95.8,
+        "unit": "%",
+        "as_written": "HMMT Feb 2026, 95.8%"
+      },
+      {
+        "benchmark": "honeybench-v0-2-alpha",
+        "score": 44,
+        "unit": "score",
+        "as_written": "HoneyBench v0.2-alpha Reward Hacking, 44, lower is better"
+      },
+      {
+        "benchmark": "pmpp-hard",
+        "score": 494.27,
+        "unit": "score",
+        "as_written": "PMPP-Hard AUC, 494.27 task-hours"
       }
     ]
   }

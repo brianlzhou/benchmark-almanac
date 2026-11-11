@@ -1,4 +1,4 @@
-// Terminal-Bench 4.0. tbench.ai renders every Terminal-Bench leaderboard from the Harbor Hub registry: its
+// Terminal-Bench 4.0 and 4.1. tbench.ai renders every Terminal-Bench leaderboard from the Harbor Hub registry: its
 // client POSTs {package, name} to a public Supabase edge function, leaderboard-read, and gets back the
 // board's columns plus every row (metadata: agent, model, effort, date; metrics: accuracy 0 to 100).
 // The other versions (2.0, 2.1, 3.0) import makeTerminalBench from this file.
@@ -71,6 +71,11 @@ export function makeTerminalBench(opts: {
   aliases?: Record<string, string>;
   /** Also read cost, output tokens, pass@k, the confidence interval and trial time, and declare the Pareto chart. */
   extras?: boolean;
+  /**
+   * An earlier board of the same tasks, graded the older way. Its rows fill in runs the main board doesn't have
+   * yet, with "<version> grader" added to their setting.
+   */
+  fallback?: { name: string; version: string };
 }): Leaderboard {
   return {
     benchmark: opts.benchmark,
@@ -90,34 +95,48 @@ export function makeTerminalBench(opts: {
         }
       : {}),
     async fetch() {
-      const body = JSON.stringify({ package: opts.pkg, name: opts.name });
-      const res = JSON.parse(
-        await fetchText(FEED, { method: 'POST', headers: { 'content-type': 'application/json' }, body }),
-      ) as { leaderboard: { title: string }; rows: Row[] };
-      const out: LeaderboardRow[] = [];
-      for (const r of res.rows) {
-        if (r.status && r.status !== 'display') continue;
-        const model = label(r.metadata.model_display);
-        // "Multiple" marks agents that route between models; there is no one model to credit
-        if (!model || /^multiple$/i.test(model)) continue;
-        out.push({
-          model,
-          score: Number(r.metrics.accuracy),
-          setting: r.metadata.reasoning_effort?.toLowerCase() || undefined,
-          harness: label(r.metadata.agent_display),
-          date: r.metadata.date ?? r.metadata.release_date,
-          ...(opts.extras ? extrasOf(r.metrics) : {}),
-        });
+      const read = async (name: string): Promise<LeaderboardRow[]> => {
+        const body = JSON.stringify({ package: opts.pkg, name });
+        const res = JSON.parse(
+          await fetchText(FEED, { method: 'POST', headers: { 'content-type': 'application/json' }, body }),
+        ) as { leaderboard: { title: string }; rows: Row[] };
+        const out: LeaderboardRow[] = [];
+        for (const r of res.rows) {
+          if (r.status && r.status !== 'display') continue;
+          const model = label(r.metadata.model_display);
+          // "Multiple" marks agents that route between models; there is no one model to credit
+          if (!model || /^multiple$/i.test(model)) continue;
+          out.push({
+            model,
+            score: Number(r.metrics.accuracy),
+            setting: r.metadata.reasoning_effort?.toLowerCase() || undefined,
+            harness: label(r.metadata.agent_display),
+            date: r.metadata.date ?? r.metadata.release_date,
+            ...(opts.extras ? extrasOf(r.metrics) : {}),
+          });
+        }
+        return out;
+      };
+      const out = await read(opts.name);
+      if (!opts.fallback) return out;
+      const key = (r: LeaderboardRow) => `${r.model}|${r.harness ?? ''}|${r.setting ?? ''}`;
+      const have = new Set(out.map(key));
+      for (const r of await read(opts.fallback.name)) {
+        if (have.has(key(r))) continue;
+        out.push({ ...r, setting: [r.setting, `${opts.fallback.version} grader`].filter(Boolean).join(', ') });
       }
       return out;
     },
   };
 }
 
+// Terminal-Bench 4.1 (2026-11-03) kept the 4.0 tasks and regraded the 4.0 runs with hardened verifiers, so it
+// stays this record. Its board leads, and runs not yet regraded come from the 4.0 board.
 export default makeTerminalBench({
   benchmark: 'terminal-bench-4-0',
-  version: '4.0',
+  version: '4.1',
   pkg: 'terminal-bench/terminal-bench',
-  name: '4-0-0',
+  name: '4-1-0',
   extras: true,
+  fallback: { name: '4-0-0', version: '4.0' },
 });

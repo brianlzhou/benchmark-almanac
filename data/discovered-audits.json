@@ -1,0 +1,67 @@
+{
+  "updated": "2026-11-08",
+  "items": [
+    {
+      "key": "https://arxiv.org/abs/2611.07950",
+      "title": "Leakage- and Label-Aware Benchmarking of Class-Imbalance Strategies for Multimodal Chest X-Ray and EHR Classification",
+      "url": "https://arxiv.org/abs/2611.07950",
+      "source": "arXiv",
+      "date": "2026-11-05",
+      "first": "2026-11-06",
+      "last": "2026-11-08",
+      "benchmarks": [
+        "mimic-cxr-classification"
+      ],
+      "problems": [],
+      "score": 4
+    },
+    {
+      "key": "https://arxiv.org/abs/2611.07042",
+      "title": "Follow the Policy, Fail the Benchmark: Auditing and Revising Policy-Based Decision Benchmarks",
+      "url": "https://arxiv.org/abs/2611.07042",
+      "source": "arXiv",
+      "date": "2026-11-04",
+      "first": "2026-11-06",
+      "last": "2026-11-06",
+      "benchmarks": [
+        "legalbench",
+        "legora-bar"
+      ],
+      "problems": [],
+      "score": 4
+    },
+    {
+      "key": "https://arxiv.org/abs/2611.05665",
+      "title": "Construct Validity of Coding Benchmarks for LLM-based Agentic Coding Tools",
+      "url": "https://arxiv.org/abs/2611.05665",
+      "source": "arXiv",
+      "date": "2026-11-03",
+      "first": "2026-11-06",
+      "last": "2026-11-06",
+      "benchmarks": [
+        "internal-agentic-coding-evaluation-anthropic"
+      ],
+      "problems": [],
+      "score": 4
+    },
+    {
+      "key": "https://arxiv.org/abs/2611.00460",
+      "title": "From Small to Large: Assessing Medical Reasoning, Benchmark Contamination, and Model Size in Language Models",
+      "url": "https://arxiv.org/abs/2611.00460",
+      "source": "arXiv",
+      "date": "2026-10-30",
+      "first": "2026-11-04",
+      "last": "2026-11-04",
+      "benchmarks": [
+        "medqa",
+        "medmcqa",
+        "pubmedqa"
+      ],
+      "problems": [
+        "contamination"
+      ],
+      "score": 4
+    }
+  ],
+  "dismissed": []
+}

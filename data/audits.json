@@ -1,0 +1,242 @@
+[
+  {
+    "id": "prime-intellect-2026-11-03",
+    "title": "Learnings from Auditing Public Evaluations",
+    "author": "Prime Intellect",
+    "people": [
+      "Florian Brand"
+    ],
+    "date": "2026-11-03",
+    "url": "https://www.primeintellect.ai/blog/auditing-public-evaluations",
+    "source": "write-up",
+    "findings": [
+      {
+        "benchmark": "automationbench",
+        "problems": [
+          "underspecified-tasks",
+          "broken-grader"
+        ],
+        "summary": "Prime Intellect reports that AutomationBench describes API request bodies in prose instead of JSON Schema, so models had to guess parameters. It also reports graders that enforced requirements the tasks did not state.",
+        "numbers": "After the fixes, Claude Opus 5.5 at max effort scores 92.15% (70.83% strict) and DeepSeek V4.1-Flash 1017 scores 91.61% (69.50% strict) on the public set.",
+        "status": "fixed-in-fork",
+        "fixes": [
+          {
+            "label": "Fixed fork (AutomationBench-PI)",
+            "url": "https://github.com/xeophon/AutomationBench-PI"
+          }
+        ],
+        "quote": "the actions the models can discover with the search tool describe their request bodies in prose rather than in JSON Schema"
+      },
+      {
+        "benchmark": "officeqa-pro-v2",
+        "problems": [
+          "broken-grader",
+          "leaked-answers",
+          "underspecified-tasks",
+          "content-filter"
+        ],
+        "summary": "Prime Intellect reports that the OfficeQA Pro v2 regex grader rejects many valid answers and that agents with web access retrieved solutions from Hugging Face. It also reports a default prompt that trips Anthropic content filters and some ambiguous tasks.",
+        "numbers": "The original grader also rejects any answer over 250 characters. On the fixed version, Claude Opus 5.5 at max effort scores 85.6% (average of 4 runs) with Prime Agent, and DeepSeek V4.1-Flash 1017 scores 78.8%.",
+        "status": "fixed-in-fork",
+        "fixes": [
+          {
+            "label": "Fixed environment (78 of 90 tasks)",
+            "url": "https://github.com/PrimeIntellect-ai/prime-envs/tree/main/environments/search/pi_officeqa_pro_v2"
+          }
+        ],
+        "quote": "OfficeQA is graded using a custom regex- and Python-based extraction and grading script. In practice, it rejects many valid answers"
+      },
+      {
+        "benchmark": "hle-diamond",
+        "problems": [
+          "leaked-answers",
+          "reward-hacking"
+        ],
+        "summary": "Prime Intellect reports that HLE-Diamond answers leak through mirrors and public rollout logs, so domain blocklists do not stop agents from finding them. In one trace, DeepSeek V4.1-Flash 1017 read a graded answer through OpenReward's public API and submitted it.",
+        "numbers": "DeepSeek V4.1-Flash 1017 dropped its own answer (0.070) and submitted the leaked answer 0.011 with 98% confidence.",
+        "status": "open",
+        "fixes": [
+          {
+            "label": "Tool-output monitors (a partial guard)",
+            "url": "https://www.primeintellect.ai/blog/verifiers-v1"
+          }
+        ],
+        "quote": "It went through OpenReward’s public rollout API, found another model’s trajectory on the same question, and read the grader’s verdict: Correct Answer: 0.011."
+      }
+    ]
+  },
+  {
+    "id": "futurehouse-2025-07-23",
+    "title": "About 30% of Humanity’s Last Exam Chemistry/Biology Answers are Likely Wrong",
+    "author": "FutureHouse",
+    "people": [
+      "Michael Skarlinski",
+      "Jon Laurent",
+      "Albert Bou",
+      "Andrew White"
+    ],
+    "date": "2025-07-23",
+    "url": "https://www.futurehouse.org/research/hle-exam",
+    "source": "write-up",
+    "findings": [
+      {
+        "benchmark": "humanitys-last-exam",
+        "problems": [
+          "wrong-labels"
+        ],
+        "summary": "FutureHouse reports that about 29% of the text-only chemistry and biology answers in Humanity's Last Exam conflict with peer-reviewed literature. FutureHouse released HLE Bio/Chem Gold, a subset its system graded as supported by research.",
+        "numbers": "29 ± 3.7% (95% CI) of 321 text-only chemistry and biology questions. The Crow agent flagged 53.3% (n=171), and experts reviewed 150 outputs.",
+        "status": "fixed-in-fork",
+        "fixes": [
+          {
+            "label": "HLE Bio/Chem Gold (149 questions)",
+            "url": "https://huggingface.co/datasets/futurehouse/hle-gold-bio-chem"
+          }
+        ],
+        "response": {
+          "text": "The HLE team's own review of a biology, chemistry and health subset found experts disagreed with about 18% of answers. The team announced HLE-Rolling to take in community fixes.",
+          "url": "https://arxiv.org/abs/2501.14249"
+        },
+        "quote": "We found that 29 ± 3.7% (95% CI) of the text-only chemistry and biology questions had answers with directly conflicting evidence in peer reviewed literature."
+      }
+    ]
+  },
+  {
+    "id": "openai-2024-08-13",
+    "title": "Introducing SWE-bench Verified",
+    "author": "OpenAI",
+    "people": [
+      "Neil Chowdhury",
+      "James Aung",
+      "Chan Jun Shern",
+      "Oliver Jaffe",
+      "Dane Sherburn",
+      "Giulio Starace",
+      "Evan Mays",
+      "Rachel Dias",
+      "Marwan Aljubeh",
+      "Mia Glaese",
+      "Carlos E. Jimenez",
+      "John Yang",
+      "Leyton Ho",
+      "Tejal Patwardhan",
+      "Kevin Liu",
+      "Aleksander Madry"
+    ],
+    "date": "2024-08-13",
+    "url": "https://openai.com/index/introducing-swe-bench-verified/",
+    "source": "write-up",
+    "findings": [
+      {
+        "benchmark": "swe-bench",
+        "problems": [
+          "underspecified-tasks",
+          "broken-grader"
+        ],
+        "summary": "OpenAI reports that its annotators flagged many SWE-bench test samples for underspecified problem statements and for unit tests that may reject valid solutions. OpenAI and the SWE-bench authors released the 500 samples that passed review as SWE-bench Verified.",
+        "numbers": "93 software developers annotated 1,699 random samples. 38.3% were flagged for underspecified problem statements, 61.1% for unfair unit tests, and 68.3% were filtered out.",
+        "status": "new-version",
+        "fixes": [
+          {
+            "label": "SWE-bench Verified dataset (500 tasks)",
+            "url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+          },
+          {
+            "label": "Annotation results",
+            "url": "https://cdn.openai.com/introducing-swe-bench-verified/swe-bench-annotation-results.zip"
+          }
+        ],
+        "response": {
+          "text": "The SWE-bench team published the 500-task SWE-bench Verified set under its princeton-nlp Hugging Face organization on the day of the post.",
+          "url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+        },
+        "quote": "We see that 38.3% of samples were flagged for underspecified problem statements, and 61.1% were flagged for unit tests that may unfairly mark valid solutions as incorrect.",
+        "see": "swe-bench-verified"
+      }
+    ]
+  },
+  {
+    "id": "gema-2024-06-06",
+    "title": "Are We Done with MMLU?",
+    "author": "Gema et al.",
+    "people": [
+      "Aryo Pradipta Gema",
+      "Joshua Ong Jun Leang",
+      "Giwon Hong",
+      "Alessio Devoto",
+      "Alberto Carlo Maria Mancino",
+      "Rohit Saxena",
+      "Xuanli He",
+      "Yu Zhao",
+      "Xiaotang Du",
+      "Mohammad Reza Ghasemi Madani",
+      "Claire Barale",
+      "Robert McHardy",
+      "Joshua Harris",
+      "Jean Kaddour",
+      "Emile van Krieken",
+      "Pasquale Minervini"
+    ],
+    "date": "2024-06-06",
+    "url": "https://arxiv.org/abs/2406.04127",
+    "source": "paper",
+    "findings": [
+      {
+        "benchmark": "mmlu",
+        "problems": [
+          "wrong-labels",
+          "underspecified-tasks"
+        ],
+        "summary": "Gema et al. report numerous ground-truth errors in MMLU, with Virology the worst subject they analyzed. They re-annotated 5,700 questions across all 57 subjects as MMLU-Redux and estimate the error rate for all of MMLU.",
+        "numbers": "57% of the analyzed Virology questions contain errors, and the authors estimate that 6.49% of all MMLU questions contain errors.",
+        "status": "fixed-in-fork",
+        "fixes": [
+          {
+            "label": "MMLU-Redux 2.0 (5,700 re-annotated questions)",
+            "url": "https://huggingface.co/datasets/edinburgh-dawg/mmlu-redux-2.0"
+          }
+        ],
+        "quote": "For example, we find that 57% of the analysed questions in the Virology subset contain errors.",
+        "see": "mmlu-redux-2-0"
+      }
+    ]
+  },
+  {
+    "id": "scale-ai-2024-05-01",
+    "title": "A Careful Examination of Large Language Model Performance on Grade School Arithmetic",
+    "author": "Scale AI",
+    "people": [
+      "Hugh Zhang",
+      "Jeff Da",
+      "Dean Lee",
+      "Vaughn Robinson",
+      "Catherine Wu",
+      "Will Song",
+      "Tiffany Zhao",
+      "Pranav Raja",
+      "Charlotte Zhuang",
+      "Dylan Slack",
+      "Qin Lyu",
+      "Sean Hendryx",
+      "Russell Kaplan",
+      "Michele Lunati",
+      "Summer Yue"
+    ],
+    "date": "2024-05-01",
+    "url": "https://arxiv.org/abs/2405.00332",
+    "source": "paper",
+    "findings": [
+      {
+        "benchmark": "gsm8k",
+        "problems": [
+          "contamination"
+        ],
+        "summary": "Scale AI reports that many models score lower on GSM1k, a new set written to mirror GSM8K, than on GSM8K itself. It reads the gap as evidence that some models partially memorized GSM8K, while frontier models show minimal signs of overfitting.",
+        "numbers": "Accuracy drops by up to 8% on GSM1k. A model's chance of generating GSM8K examples tracks its GSM8K-to-GSM1k gap (Spearman's r² = 0.36).",
+        "status": "open",
+        "quote": "Our analysis confirms the widespread suspicion in the field that many models are contaminated by benchmark data, with the worst models performing 8% worse on GSM1k compared to GSM8k.",
+        "see": "gsm1k"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1393 @@
+[
+  {
+    "id": "adding-error-bars-to-evals",
+    "name": "Adding Error Bars to Evals",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "How to report eval results with standard errors, clustered SEs and paired differences.",
+    "org": "Evan Miller (Anthropic)",
+    "released": "2024-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2411.00640"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "agentic-benchmark-checklist-abc",
+    "name": "Agentic Benchmark Checklist (ABC)",
+    "kind": "standard",
+    "category": "methodology",
+    "description": "Checklist for outcome validity, task validity and reporting in agent benchmarks. Audits of 10 popular benchmarks with repro scripts.",
+    "org": "UIUC Kang Lab (Zhu et al.)",
+    "released": "2025-07",
+    "links": {
+      "repo": "https://github.com/uiuc-kang-lab/agentic-benchmarks",
+      "paper": "https://arxiv.org/abs/2507.02825"
+    },
+    "note": "Found a do-nothing agent scores 38% on tau-bench. 7 of 10 benchmarks had outcome-validity flaws.",
+    "confidence": "verified"
+  },
+  {
+    "id": "ai-agent-benchmark-compendium",
+    "name": "AI Agent Benchmark Compendium",
+    "kind": "awesome-list",
+    "category": "meta-collection",
+    "description": "50+ agent benchmarks grouped by function calling, reasoning, coding, computer use.",
+    "org": "Philipp Schmid",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/philschmid/ai-agent-benchmark-compendium"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "ai-agents-that-matter",
+    "name": "AI Agents That Matter",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Argues for cost-controlled agent evals and warns about overfitting and holdout leakage.",
+    "org": "Princeton (Kapoor, Narayanan et al.)",
+    "released": "2024-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2407.01502"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "ai-and-the-everything-in-the-whole-wide-world-benchmark",
+    "name": "AI and the Everything in the Whole Wide World Benchmark",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Critique of 'general' benchmarks as claims about general ability.",
+    "org": "Raji et al.",
+    "released": "2021-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2111.15366"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "aisi-engineering-playbook",
+    "name": "AISI Engineering Playbook",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "UK AISI's engineering practices for running evals at scale on Inspect.",
+    "org": "UK AI Security Institute",
+    "released": "2026-06",
+    "links": {
+      "leaderboard": "https://www.aisi.gov.uk/blog/releasing-aisis-engineering-playbook"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "arize-phoenix",
+    "name": "Arize Phoenix",
+    "kind": "tooling",
+    "category": "meta-collection",
+    "description": "Open-source tracing plus evaluation for LLM apps.",
+    "org": "Arize",
+    "released": "2023",
+    "links": {
+      "repo": "https://github.com/Arize-ai/phoenix"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "artificial-analysis",
+    "name": "Artificial Analysis",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Independent runs of standard benchmarks into an Intelligence Index, plus price and speed tracking.",
+    "org": "Artificial Analysis",
+    "released": "2024",
+    "links": {
+      "leaderboard": "https://artificialanalysis.ai"
+    },
+    "note": "Results public. Harness private.",
+    "confidence": "verified"
+  },
+  {
+    "id": "artificial-analysis-intelligence-index",
+    "name": "Artificial Analysis Intelligence Index",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Composite score that aggregates Artificial Analysis' independently run benchmark suite into one number per model.",
+    "org": "Artificial Analysis",
+    "released": "2024",
+    "links": {
+      "leaderboard": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
+    },
+    "note": "Version changes (v4.1, v4.3) shift scores. OpenAI launch table cited it per secondary sources.",
+    "confidence": "verified"
+  },
+  {
+    "id": "atropos",
+    "name": "Atropos",
+    "kind": "rl-env-hub",
+    "category": "meta-collection",
+    "description": "Nous Research's RL environments framework for collecting and scoring rollouts.",
+    "org": "Nous Research",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/NousResearch/atropos"
+    },
+    "note": "Archived in 2026.",
+    "confidence": "verified"
+  },
+  {
+    "id": "automating-eval-design-and-hillclimbing-with-claude",
+    "name": "Automating eval design and hillclimbing with Claude",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Guide to eval design (production-like tasks, headroom, low variance, cheapest adequate grader) plus Claude Code build-eval and hillclimb commands.",
+    "org": "Anthropic",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://github.com/anthropics/skills",
+      "leaderboard": "https://claude.dev/blog/automating-eval-design-and-hillclimbing/"
+    },
+    "note": "Hillclimb uses a train/test split and keeps a patch only if both improve. The article does not mention 'claude plugin eval'.",
+    "confidence": "verified"
+  },
+  {
+    "id": "awesome-ai-benchmarks",
+    "name": "awesome-ai-benchmarks",
+    "kind": "awesome-list",
+    "category": "meta-collection",
+    "description": "Curated list of 100+ AI benchmarks across domains.",
+    "org": "panilya",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/panilya/awesome-ai-benchmarks"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "awesome-llm-eval",
+    "name": "Awesome-LLM-Eval",
+    "kind": "awesome-list",
+    "category": "meta-collection",
+    "description": "Curated list of eval tools, datasets, leaderboards and papers.",
+    "org": "onejune2018",
+    "released": "2023",
+    "links": {
+      "repo": "https://github.com/onejune2018/Awesome-LLM-Eval"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "behavior-specs-agentbehavior",
+    "name": "Behavior specs (agentbehavior)",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Open standard: BEHAVIOR.md files describe how an agent should act across a trajectory. An LLM judge grades each spec true, false or NA.",
+    "org": "Braintrust + Basis",
+    "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/braintrustdata/agentbehavior",
+      "leaderboard": "https://www.braintrust.dev/blog/behavior-specs"
+    },
+    "note": "Grades process, not only outcome. So far proposed by one vendor with one design partner.",
+    "confidence": "verified"
+  },
+  {
+    "id": "benchflow",
+    "name": "BenchFlow",
+    "kind": "rl-env-hub",
+    "category": "meta-collection",
+    "description": "Infra for building RL environments and evals (SkillsBench, FrontierPhysics). Skill evals with/without the skill.",
+    "org": "BenchFlow",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/benchflow-ai/benchflow",
+      "leaderboard": "https://benchflow.ai/"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "benchgen",
+    "name": "Benchgen",
+    "kind": "registry",
+    "category": "meta-collection",
+    "description": "Agent benchmarking platform: create a benchmark from a repo (questions, answer key, asker and scorer programs) and get a live ranking.",
+    "org": "Benchgen",
+    "released": "2026",
+    "links": {
+      "repo": "https://github.com/benchgen-ai/benchgen-benchmark-examples",
+      "leaderboard": "https://benchgen.com/benchmarks"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "benchlm-ai",
+    "name": "BenchLM.ai",
+    "kind": "registry",
+    "category": "meta-collection",
+    "description": "Aggregator listing 668 LLM benchmarks with scores (Oct 2026).",
+    "org": null,
+    "released": "2026",
+    "links": {
+      "leaderboard": "https://benchlm.ai/benchmarks"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "benchmark-map-of-the-us-economy",
+    "name": "Benchmark Map of the US Economy",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Maps prompts from 29 public benchmarks to O*NET tasks with an LLM judge to show which US occupations benchmarks cover.",
+    "org": "Mercor",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://www.mercor.com/research/labor-index/benchmark-map/"
+    },
+    "note": "Finds only 208 of 923 occupations covered. A task counts as covered only with 5+ matching prompts. Estimates are provisional. 4 of the 29 benchmarks are Mercor's.",
+    "confidence": "verified"
+  },
+  {
+    "id": "benchmark-registry",
+    "name": "Benchmark Registry",
+    "kind": "registry",
+    "category": "meta-collection",
+    "description": "Collects model results from primary sources (95 models, 84 benchmarks, 942 records).",
+    "org": null,
+    "released": "2026",
+    "links": {
+      "leaderboard": "https://benchmarkregistry.org/"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "benchmarks-bio",
+    "name": "benchmarks.bio",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "14 agentic biology benchmarks built from real experimental data snapshots. Deterministic graders check recovery of the real result. Scored per model and harness.",
+    "org": "LatchBio",
+    "released": null,
+    "links": {
+      "repo": "https://github.com/latchbio/latch-eval-tools",
+      "leaderboard": "https://benchmarks.bio"
+    },
+    "note": "Each benchmark has its own latchbio repo (e.g. latchbio/spatialbench, latchbio/scbench). SpatialBench releases a representative sample and withholds the full set against contamination. Results reported per harness because harness shifts scores. V1 capability top: Claude Opus 5.5 58.1%. BioSecBench-Refusal is LLM-judged, unlike the rest.",
+    "confidence": "verified"
+  },
+  {
+    "id": "betterbench",
+    "name": "BetterBench",
+    "kind": "registry",
+    "category": "methodology",
+    "description": "46-criterion quality assessment of benchmarks across their lifecycle. Living repository of scored benchmarks and a minimum-quality checklist.",
+    "org": "Stanford (Reuel, Hardy et al.)",
+    "released": "2024-11",
+    "links": {
+      "leaderboard": "https://betterbench.stanford.edu/",
+      "paper": "https://arxiv.org/abs/2411.12990"
+    },
+    "note": "Most benchmarks reviewed did not report statistical significance or allow easy replication.",
+    "confidence": "verified"
+  },
+  {
+    "id": "big-bench",
+    "name": "BIG-bench",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "204-task collaborative benchmark (2022) that introduced many task styles. BIG-Bench Hard subset still cited.",
+    "org": "Google + 450 authors",
+    "released": "2022-06",
+    "links": {
+      "repo": "https://github.com/google/BIG-bench",
+      "paper": "https://arxiv.org/abs/2206.04615"
+    },
+    "note": "Archived. Classic example of crowd-sourced task design and its contamination problems.",
+    "confidence": "verified"
+  },
+  {
+    "id": "bloom",
+    "name": "Bloom",
+    "kind": "harness",
+    "category": "safety-alignment",
+    "description": "Generates evaluation suites for any described behavior automatically.",
+    "org": "Anthropic safety-research",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/safety-research/bloom"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "braintrust-autoevals",
+    "name": "Braintrust autoevals",
+    "kind": "tooling",
+    "category": "meta-collection",
+    "description": "Library of LLM-judge and heuristic scorers.",
+    "org": "Braintrust",
+    "released": "2023",
+    "links": {
+      "repo": "https://github.com/braintrustdata/autoevals"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "challenges-in-evaluating-ai-systems",
+    "name": "Challenges in evaluating AI systems",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "Anthropic's account of practical problems with MMLU, BBQ, BIG-bench, HELM and red teaming.",
+    "org": "Anthropic",
+    "released": "2023-10",
+    "links": {
+      "leaderboard": "https://www.anthropic.com/research/evaluating-ai-systems"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "controlarena",
+    "name": "ControlArena",
+    "kind": "harness",
+    "category": "safety-alignment",
+    "description": "Settings, model organisms and protocols for AI control experiments.",
+    "org": "UK AISI",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/UKGovernmentBEIS/control-arena",
+      "leaderboard": "https://control-arena.aisi.org.uk"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "cube-standard",
+    "name": "CUBE standard",
+    "kind": "standard",
+    "category": "methodology",
+    "description": "Proposed standard and registry for packaging agent benchmarks so any harness can run them.",
+    "org": null,
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.15798"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "decision-index",
+    "name": "Decision Index",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Index of 37 benchmarks framed as multiple-choice decisions for decision models. Chance-normalized scores (0 = random, 100 = perfect).",
+    "org": "Community-maintained (Hugging Face Space by multimodalart)",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/apolinario/decision-index",
+      "leaderboard": "https://huggingface.co/spaces/multimodalart/jev-decision-index"
+    },
+    "note": "Later versions weight private tests in the Full score. The repo is a reproduction kit, not affiliated with TypeSafe. Not the same as the Artificial Analysis Decision Index.",
+    "confidence": "likely"
+  },
+  {
+    "id": "deepeval",
+    "name": "DeepEval",
+    "kind": "tooling",
+    "category": "meta-collection",
+    "description": "Pytest-style LLM eval framework with many built-in metrics.",
+    "org": "Confident AI",
+    "released": "2023",
+    "links": {
+      "repo": "https://github.com/confident-ai/deepeval"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "demystifying-evals-for-ai-agents",
+    "name": "Demystifying evals for AI agents",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "Anthropic's practical guide: tasks, trials, graders, pass@k vs pass^k, capability vs regression suites, 8-step roadmap.",
+    "org": "Anthropic",
+    "released": "2026-01",
+    "links": {
+      "leaderboard": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "design-arena",
+    "name": "Design Arena",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Crowdsourced arena for AI-generated websites, games, images and video. Four anonymous models per battle, votes feed Bradley-Terry ratings.",
+    "org": "Intelligence (YC S25)",
+    "released": "2025-07",
+    "links": {
+      "leaderboard": "https://www.designarena.ai"
+    },
+    "note": "Free leaderboard API by application. Revenue comes from labs buying evaluation data.",
+    "confidence": "likely"
+  },
+  {
+    "id": "dynabench",
+    "name": "Dynabench",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Human-and-model-in-the-loop dynamic dataset creation to keep benchmarks hard.",
+    "org": "Meta (Kiela et al.)",
+    "released": "2021-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2104.14337"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "eleutherai-lm-evaluation-harness",
+    "name": "EleutherAI LM Evaluation Harness",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Standard few-shot harness for base and chat models. Hundreds of task configs (MMLU, ARC, HellaSwag, GSM8K...). Backend of the old Open LLM Leaderboard.",
+    "org": "EleutherAI",
+    "released": "2020",
+    "links": {
+      "repo": "https://github.com/EleutherAI/lm-evaluation-harness"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "embodied-arena",
+    "name": "Embodied Arena",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Platform integrating 22 embodied benchmarks (embodied QA, navigation, task planning) with leaderboards for 30+ models.",
+    "org": "Tianjin University + Huawei Noah's Ark + others",
+    "released": "2025-09",
+    "links": {
+      "repo": "https://github.com/EmbodiedArena/embodied-arena",
+      "leaderboard": "https://www.embodied-arena.com/",
+      "paper": "https://arxiv.org/abs/2509.15273"
+    },
+    "note": "Hosts ERQA and Where2Place boards, mostly platform-run. Scores differ from DeepMind and Unitree tables.",
+    "confidence": "verified"
+  },
+  {
+    "id": "epoch-ai-benchmarking-hub",
+    "name": "Epoch AI Benchmarking Hub",
+    "kind": "registry",
+    "category": "meta-collection",
+    "description": "Independent runs and curated external results for ~93 benchmarks. CSV download, Python client, and the IRT-based Epoch Capabilities Index.",
+    "org": "Epoch AI",
+    "released": "2024-11",
+    "links": {
+      "repo": "https://github.com/epoch-research/epochai-python",
+      "dataset": "https://epoch.ai/benchmarks/use-this-data",
+      "leaderboard": "https://epoch.ai/benchmarks"
+    },
+    "note": "ECI CSVs publish fitted difficulty and discriminability per benchmark, a good model for combining benchmarks.",
+    "confidence": "verified"
+  },
+  {
+    "id": "epoch-capabilities-index-eci",
+    "name": "Epoch Capabilities Index (ECI)",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Combines 50+ benchmark results into one capability scale using fitted benchmark difficulty and slope. Anchored Claude 3.5 Sonnet = 130, GPT-5 = 150.",
+    "org": "Epoch AI",
+    "released": "2025-10",
+    "links": {
+      "repo": "https://github.com/epoch-research/eci-public",
+      "dataset": "https://epoch.ai/data/eci_benchmarks.csv",
+      "leaderboard": "https://epoch.ai/eci",
+      "paper": "https://arxiv.org/abs/2512.00193"
+    },
+    "note": "Models need 4+ benchmark results to get a score. Domain variants cover software engineering, math and cyber.",
+    "confidence": "verified"
+  },
+  {
+    "id": "every-eval-ever",
+    "name": "Every Eval Ever",
+    "kind": "registry",
+    "category": "meta-collection",
+    "description": "Shared JSON schema and crowdsourced database of eval results (~229k results, 2,200+ benchmarks on HF). Converters for Inspect, HELM, lm-eval.",
+    "org": "EvalEval Coalition (HF, Edinburgh, EleutherAI)",
+    "released": "2026-02",
+    "links": {
+      "repo": "https://github.com/evaleval/every_eval_ever",
+      "leaderboard": "https://evalevalai.com/projects/every-eval-ever/",
+      "paper": "https://arxiv.org/abs/2606.14516"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "every-eval-ever-paper",
+    "name": "Every Eval Ever (paper)",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Schema and community repository for comparable eval results.",
+    "org": "EvalEval Coalition",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.14516"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "fluid-language-model-benchmarking",
+    "name": "Fluid Language Model Benchmarking",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Uses item response theory to pick test items adaptively per model.",
+    "org": "Ai2",
+    "released": "2025-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2509.11106"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "harbor",
+    "name": "Harbor",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Framework and dataset registry for agent evals and RL rollouts from the Terminal-Bench team. `harbor run -d <dataset>` runs any registered task set.",
+    "org": "Laude Institute / Harbor Framework",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/harbor-framework/harbor",
+      "leaderboard": "https://harborframework.com/"
+    },
+    "note": "Many 2026 benchmarks (Terminal-Bench 2, Harvey LAB, SMDD) ship in Harbor format. Good template for task packaging.",
+    "confidence": "verified"
+  },
+  {
+    "id": "helm",
+    "name": "HELM",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Holistic Evaluation of Language Models: framework plus public leaderboards (Capabilities, Safety, AIR-Bench, MMLU, VHELM...).",
+    "org": "Stanford CRFM",
+    "released": "2022-11",
+    "links": {
+      "repo": "https://github.com/stanford-crfm/helm",
+      "leaderboard": "https://crfm.stanford.edu/helm",
+      "paper": "https://arxiv.org/abs/2211.09110"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "holistic-agent-leaderboard-hal",
+    "name": "Holistic Agent Leaderboard (HAL)",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Standardized, cost-aware agent leaderboard over 9 benchmarks with public trajectories. Now a reliability dashboard.",
+    "org": "Princeton (Kapoor, Narayanan et al.)",
+    "released": "2025-10",
+    "links": {
+      "repo": "https://github.com/princeton-pli/hal-harness",
+      "leaderboard": "https://hal.cs.princeton.edu",
+      "paper": "https://arxiv.org/abs/2510.11977"
+    },
+    "note": "Harness archived. Leaderboard updates paused in 2026 to focus on reliability. Found agents searching HF for benchmark answers.",
+    "confidence": "verified"
+  },
+  {
+    "id": "how-reliably-can-ai-audit-ai-free-systems",
+    "name": "How reliably can AI audit AI? (Free Systems)",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Study scoring LLMs as auditors of agent transcripts (METR MALT, R-Judge) for reward hacking, sandbagging and unsafe actions, by recall at fixed false-positive rates.",
+    "org": "Free Systems (Andy Hall, Dan Thompson)",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://freesystems.substack.com/p/were-using-ai-to-audit-ai"
+    },
+    "note": "Pilot study on public datasets (R-Judge repo: https://github.com/Lordog/R-Judge). Catching 99% of unsafe R-Judge cases cost ~15% FPR even for the best model. Newer or pricier models were not consistently better. Fable 5 and Opus 5 refused to label the logs. Possible self-preference bias on Claude-heavy MALT logs.",
+    "confidence": "verified"
+  },
+  {
+    "id": "hugging-face-llm-evaluation-guidebook",
+    "name": "Hugging Face LLM Evaluation Guidebook",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "Practical and theoretical notes on LLM evaluation from the Open LLM Leaderboard team.",
+    "org": "Hugging Face (Fourrier)",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/huggingface/evaluation-guidebook"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "hugging-face-open-llm-leaderboard",
+    "name": "Hugging Face Open LLM Leaderboard",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Open-weight model leaderboard on lm-eval (v2: IFEval, BBH, MATH-Hard, GPQA, MuSR, MMLU-Pro).",
+    "org": "Hugging Face",
+    "released": "2023",
+    "links": {
+      "leaderboard": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard"
+    },
+    "note": "Retired in 2025. A case study in benchmark gaming by merges and fine-tunes.",
+    "confidence": "verified"
+  },
+  {
+    "id": "inspect-ai",
+    "name": "Inspect AI",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Open-source eval framework: datasets, solvers, scorers, sandboxed agent tools, log viewer. Used by UK AISI, METR and many labs.",
+    "org": "UK AI Security Institute",
+    "released": "2024-05",
+    "links": {
+      "repo": "https://github.com/UKGovernmentBEIS/inspect_ai",
+      "leaderboard": "https://inspect.aisi.org.uk/"
+    },
+    "note": "METR moved its time-horizon evals from Vivaria to Inspect in Jan 2026.",
+    "confidence": "verified"
+  },
+  {
+    "id": "inspect-evals",
+    "name": "Inspect Evals",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Largest open collection of runnable eval implementations (171 benchmarks, 200+ tasks as of Sep 2026) on the Inspect framework.",
+    "org": "UK AI Security Institute + community",
+    "released": "2024-11",
+    "links": {
+      "repo": "https://github.com/UKGovernmentBEIS/inspect_evals",
+      "leaderboard": "https://ukgovernmentbeis.github.io/inspect_evals/"
+    },
+    "note": "Best single place to read well-built eval code: cyber, coding, safeguards, reasoning, agents. Community registration since 2026-05.",
+    "confidence": "verified"
+  },
+  {
+    "id": "inspect-harbor",
+    "name": "Inspect Harbor",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Runs Harbor-format tasks (Terminal-Bench 2.0, SWE-Bench Pro, ...) inside Inspect.",
+    "org": "Meridian Labs",
+    "released": "2026",
+    "links": {
+      "repo": "https://github.com/meridianlabs-ai/inspect_harbor",
+      "leaderboard": "https://meridianlabs-ai.github.io/inspect_harbor/"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "introducing-swe-bench-verified",
+    "name": "Introducing SWE-bench Verified",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "Case study: 93 engineers screened SWE-bench tasks for underspecified issues and unfair tests.",
+    "org": "OpenAI",
+    "released": "2024-08",
+    "links": {
+      "leaderboard": "https://openai.com/index/introducing-swe-bench-verified/"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "investigating-unintended-model-actions-in-our-evaluations-and-internal-use",
+    "name": "Investigating unintended model actions in our evaluations and internal use",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Anthropic report on four behavior types where Claude acted on real websites during evals: injection exploits, real form submissions, fee-gate bypass, URL-shortener evasion.",
+    "org": "Anthropic",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://www.anthropic.com/research/investigating-unintended-model-actions"
+    },
+    "note": "Eval-design lessons: unclear or impossible tasks triggered workarounds. Banned-action lists left gaps. Fragile sandboxes pushed agents onto live sites. Incidents arose in DeepSearchQA, BrowseComp, LABBench2, OSWorld, Odysseys and HLE. Anthropic took all internal evals offline and dropped or rebuilt live-internet public evals.",
+    "confidence": "verified"
+  },
+  {
+    "id": "kaggle-benchmarks",
+    "name": "Kaggle Benchmarks",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Kaggle's platform and Python library for publishing open benchmarks with model leaderboards.",
+    "org": "Kaggle / Google",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/Kaggle/kaggle-benchmarks",
+      "leaderboard": "https://www.kaggle.com/benchmarks"
+    },
+    "note": "Full inputs and outputs are recorded for reproducibility. Hosts Code2Video and BenchFlow's Agent Skill Lift.",
+    "confidence": "verified"
+  },
+  {
+    "id": "life-after-benchmark-saturation",
+    "name": "Life After Benchmark Saturation",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Paper arguing saturated benchmarks still measure validity, generalization, efficiency, reliability and human uplift. CORE-Bench Hard is the case study.",
+    "org": "Princeton (Narayanan, Kapoor et al.)",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.26158"
+    },
+    "note": "Releases CORE-Bench v1.1 and an OOD task suite.",
+    "confidence": "verified"
+  },
+  {
+    "id": "lighteval",
+    "name": "lighteval",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Hugging Face's eval toolkit across inference backends. Powers HF leaderboards and Open-R1 evals.",
+    "org": "Hugging Face",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/huggingface/lighteval",
+      "leaderboard": "https://huggingface.co/docs/lighteval/en/index"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "livebench",
+    "name": "LiveBench",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Monthly-refreshed questions with objective ground truth (math, code, reasoning, data analysis) to resist contamination.",
+    "org": "Abacus.AI + NYU et al.",
+    "released": "2024-06",
+    "links": {
+      "repo": "https://github.com/LiveBench/LiveBench",
+      "leaderboard": "https://livebench.ai"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "llm-agent-benchmark-list",
+    "name": "LLM-Agent-Benchmark-List",
+    "kind": "awesome-list",
+    "category": "meta-collection",
+    "description": "Actively updated list of agent benchmarks.",
+    "org": "zhangxjohn",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/zhangxjohn/LLM-Agent-Benchmark-List"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "llm-eval-survey",
+    "name": "LLM-eval-survey",
+    "kind": "awesome-list",
+    "category": "meta-collection",
+    "description": "Paper list for 'A Survey on Evaluation of Large Language Models'.",
+    "org": "Jilin Univ. et al.",
+    "released": "2023-07",
+    "links": {
+      "repo": "https://github.com/MLGroupJLU/LLM-eval-survey",
+      "paper": "https://arxiv.org/abs/2307.03109"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "lmarena",
+    "name": "LMArena",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Crowdsourced pairwise human-preference arena (text, vision, WebDev, search...) with Elo/Bradley-Terry ratings.",
+    "org": "LMArena (ex-LMSYS)",
+    "released": "2023-05",
+    "links": {
+      "repo": "https://github.com/lm-sys/FastChat",
+      "dataset": "https://huggingface.co/datasets/lmarena-ai/arena-human-preference-55k",
+      "leaderboard": "https://lmarena.ai",
+      "paper": "https://arxiv.org/abs/2403.04132"
+    },
+    "note": "See 'The Leaderboard Illusion' for private-testing and sampling critiques. Arena-Hard-Auto is its automatic proxy.",
+    "confidence": "verified"
+  },
+  {
+    "id": "lmms-eval",
+    "name": "lmms-eval",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "One harness for text, image, video and audio benchmarks of large multimodal models.",
+    "org": "EvolvingLMMs-Lab",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/EvolvingLMMs-Lab/lmms-eval"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "manifold-bifrost",
+    "name": "Manifold (Bifrost)",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Commercial service that runs robot policies in GPU-parallel simulation across LIBERO, RoboCasa, RoboTwin and other benchmarks, with subgoal scores and failure clustering.",
+    "org": "Bifrost AI",
+    "released": "2026-08",
+    "links": {},
+    "note": "Early access only. One harness covers about 10 academic benchmarks and custom tasks. Agents cluster failures and rank them by impact. Linking the @skara_io launch post to Bifrost is inferred from matching features. Bifrost's page does not name Isaac Lab Arena.",
+    "confidence": "likely"
+  },
+  {
+    "id": "many-benchmarks-scores-would-appear-much-higher-if-you-let-the-ais-use-adequate-labor",
+    "name": "Many Benchmarks Scores Would Appear Much Higher If You Let The AIs Use Adequate Labor",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Blog post arguing reported benchmark scores understate AI ability when token, time or budget limits stop agents before performance plateaus.",
+    "org": "METR (Joel Becker, Nate Rush)",
+    "released": "2026-04",
+    "links": {
+      "leaderboard": "https://joelbkr.substack.com/p/many-benchmarks-scores-would-appear"
+    },
+    "note": "Examples: RE-Bench, PostTrainBench, PaperBench, WeirdML.",
+    "confidence": "verified"
+  },
+  {
+    "id": "mass-multi-agent-self-supervision",
+    "name": "MASS (Multi-Agent Self-Supervision)",
+    "kind": "method",
+    "category": "ai-rnd-rsi",
+    "description": "RSI method: one model proposes, runs and self-judges multi-agent workflows, then fine-tunes on the best team's traces. Measured on four research benchmarks.",
+    "org": "Sakana AI + UC Berkeley",
+    "released": "2026-10",
+    "links": {
+      "repo": "https://github.com/SakanaAI/mass",
+      "paper": "https://arxiv.org/abs/2610.12176"
+    },
+    "note": "Method paper, not a benchmark. Reports score per output token (1.2-1.6x base after two cycles with Qwen3.6-27B). Authors flag the eval risk of a model judging itself: shared blind spots can be accepted as progress.",
+    "confidence": "verified"
+  },
+  {
+    "id": "measuring-ai-ability-to-complete-long-tasks",
+    "name": "Measuring AI Ability to Complete Long Tasks",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "METR time-horizon method: fit success vs human task length. 50% horizon doubling ~7 months. TH 1.1 update Jan 2026.",
+    "org": "METR",
+    "released": "2025-03",
+    "links": {
+      "repo": "https://github.com/METR/eval-analysis-public",
+      "leaderboard": "https://metr.org/blog/2026-01-29-time-horizon-1-1/",
+      "paper": "https://arxiv.org/abs/2503.14499"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "measuring-what-matters-construct-validity-in-llm-benchmarks",
+    "name": "Measuring what Matters: Construct Validity in LLM Benchmarks",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Systematic review of 445 benchmarks. 8 recommendations, starting with defining the phenomenon and justifying construct validity.",
+    "org": "Oxford Internet Institute (Bean et al.)",
+    "released": "2025-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2511.04703"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "metr-eval-analysis-public",
+    "name": "METR eval-analysis-public",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "DVC pipeline behind METR's time-horizon plots. Shows how to fit logistic success-vs-task-length curves.",
+    "org": "METR",
+    "released": "2025-03",
+    "links": {
+      "repo": "https://github.com/METR/eval-analysis-public",
+      "paper": "https://arxiv.org/abs/2503.14499"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "metr-task-suite-and-tooling",
+    "name": "METR task suite and tooling",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "METR's public autonomy tasks, Task Standard and Vivaria runner (all archived 2026) and Hawk, the current Inspect-based eval platform.",
+    "org": "METR",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/METR/hawk",
+      "leaderboard": "https://hawk.metr.org"
+    },
+    "note": "Archived: METR/public-tasks, METR/task-standard, METR/vivaria, METR/inspect-action. Analysis code: METR/eval-analysis-public.",
+    "confidence": "verified"
+  },
+  {
+    "id": "munari",
+    "name": "Munari",
+    "kind": "tooling",
+    "category": "robotics-embodied",
+    "description": "Scores human robot demonstrations and operators 0-10 on kinematic quality against same-task, same-session peers to guide data collection.",
+    "org": "Munari",
+    "released": "2026-09",
+    "links": {},
+    "note": "Data-quality scoring, not a model benchmark. Compares each episode with the same task in the same session, not a dataset average, so hard tasks do not penalize operators. Demo used XDOF's ABC-130K.",
+    "confidence": "verified"
+  },
+  {
+    "id": "olmes",
+    "name": "OLMES",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Ai2's reproducible evaluation standard and suite used for OLMo reports.",
+    "org": "Ai2",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/allenai/olmes"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "openai-evals",
+    "name": "OpenAI Evals",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Older eval framework plus open registry of community-contributed evals.",
+    "org": "OpenAI",
+    "released": "2023-03",
+    "links": {
+      "repo": "https://github.com/openai/evals"
+    },
+    "note": "Legacy. Little new activity. Useful as a history of eval formats.",
+    "confidence": "verified"
+  },
+  {
+    "id": "openai-frontier-evals",
+    "name": "OpenAI Frontier Evals",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "OpenAI's open-sourced Preparedness evals (e.g. PaperBench, SWE-Lancer) with their agent scaffolds.",
+    "org": "OpenAI",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/openai/frontier-evals"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "openai-simple-evals",
+    "name": "OpenAI simple-evals",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Lightweight reference implementations OpenAI used for headline numbers (MMLU, GPQA, MATH, HumanEval, SimpleQA, BrowseComp, HealthBench).",
+    "org": "OpenAI",
+    "released": "2024-04",
+    "links": {
+      "repo": "https://github.com/openai/simple-evals"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "openbench",
+    "name": "openbench",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Provider-agnostic open eval runner bundling many standard benchmarks on top of Inspect.",
+    "org": "Groq",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/groq/openbench",
+      "leaderboard": "https://openbench.dev"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "opencompass",
+    "name": "OpenCompass",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Large Chinese-led evaluation platform and CompassRank leaderboard covering 100+ datasets.",
+    "org": "Shanghai AI Lab",
+    "released": "2023",
+    "links": {
+      "repo": "https://github.com/open-compass/opencompass",
+      "leaderboard": "https://opencompass.org.cn/"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "openenv",
+    "name": "OpenEnv",
+    "kind": "rl-env-hub",
+    "category": "meta-collection",
+    "description": "Gym-style interface and hub for agentic RL environments, integrated with TRL.",
+    "org": "Meta PyTorch + Hugging Face",
+    "released": "2025-10",
+    "links": {
+      "repo": "https://github.com/openenv/OpenEnv",
+      "leaderboard": "https://huggingface.co/docs/openenv/index"
+    },
+    "note": "Docs at https://huggingface.co/docs/openenv. Repo moved from meta-pytorch/OpenEnv to openenv/OpenEnv. Hosts FinQA, tau2, Terminal-Bench 2 and Harbor wrappers. Rubrics for rewards and Inspect AI for evals.",
+    "confidence": "verified"
+  },
+  {
+    "id": "petri",
+    "name": "Petri",
+    "kind": "harness",
+    "category": "safety-alignment",
+    "description": "Automated alignment-auditing agent that probes target models across many seeded scenarios.",
+    "org": "Anthropic (now Meridian Labs)",
+    "released": "2025-10",
+    "links": {
+      "repo": "https://github.com/meridianlabs-ai/inspect_petri",
+      "leaderboard": "https://meridianlabs-ai.github.io/inspect_petri/"
+    },
+    "note": "UK AISI used an internal version for its Astra tests. Google's Gram builds on it. github.com/safety-research/petri redirects here.",
+    "confidence": "verified"
+  },
+  {
+    "id": "prime-intellect-agentic-rl-tasksets-swe-terminal-search",
+    "name": "Prime Intellect agentic RL tasksets (SWE, terminal, search)",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "23 revalidated SWE, terminal and search tasksets (~365k tasks) behind one taskset API and sandbox lifecycle for evals and RL training.",
+    "org": "Prime Intellect",
+    "released": "2026-07",
+    "links": {
+      "repo": "https://github.com/PrimeIntellect-ai/prime-envs",
+      "dataset": "https://huggingface.co/collections/PrimeIntellect/swe-rl",
+      "paper": "https://www.primeintellect.ai/blog/scaling-agentic-rl"
+    },
+    "note": "Re-validates upstream sets with gold-patch, retry and no-edit passes: SWE-rebench-V2 kept 6,275 of 32,079 tasks, Multi-SWE 2,232 of 4,703. Grading files hidden until scoring, yet reward hacking still observed. Tests mined from PRs cause false negatives. research-environments repo redirects to prime-envs.",
+    "confidence": "verified"
+  },
+  {
+    "id": "prime-intellect-environments-hub",
+    "name": "Prime Intellect Environments Hub",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Community hub to publish, share and evaluate RL environments and eval reports across models. Environments run on prime-rl and Prime sandboxes.",
+    "org": "Prime Intellect",
+    "released": "2025-08",
+    "links": {
+      "repo": "https://github.com/PrimeIntellect-ai/community-environments",
+      "paper": "https://www.primeintellect.ai/blog/environments"
+    },
+    "note": "Hub at https://app.primeintellect.ai/dashboard/environments. Contributions arrive as PRs (prime-environments repo now redirects to community-environments, 'lightly reviewed'), so quality varies by environment.",
+    "confidence": "verified"
+  },
+  {
+    "id": "prime-intellect-environments-hub-plus-verifiers",
+    "name": "Prime Intellect Environments Hub + verifiers",
+    "kind": "rl-env-hub",
+    "category": "meta-collection",
+    "description": "Library and hub of RL environments that double as evals. 365k+ SWE/terminal/search tasks in 23 tasksets (Jul 2026).",
+    "org": "Prime Intellect",
+    "released": "2025-08",
+    "links": {
+      "repo": "https://github.com/PrimeIntellect-ai/verifiers",
+      "leaderboard": "https://app.primeintellect.ai/dashboard/environments",
+      "paper": "https://www.primeintellect.ai/blog/verifiers-v1"
+    },
+    "note": "Community repo: PrimeIntellect-ai/community-environments.",
+    "confidence": "verified"
+  },
+  {
+    "id": "promptfoo",
+    "name": "promptfoo",
+    "kind": "tooling",
+    "category": "meta-collection",
+    "description": "CLI for prompt/agent test suites and red-teaming in CI.",
+    "org": "promptfoo",
+    "released": "2023",
+    "links": {
+      "repo": "https://github.com/promptfoo/promptfoo",
+      "leaderboard": "https://promptfoo.dev"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "reasoning-gym",
+    "name": "Reasoning Gym",
+    "kind": "rl-env-hub",
+    "category": "meta-collection",
+    "description": "100+ procedurally generated reasoning tasks with verifiers for RLVR and eval.",
+    "org": "open-thought",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/open-thought/reasoning-gym"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "scale-labs-leaderboards-seal",
+    "name": "Scale Labs leaderboards (SEAL)",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Expert-built private-holdout leaderboards (HLE, SWE-Bench Pro, MultiChallenge, EnigmaEval, HSS...).",
+    "org": "Scale AI",
+    "released": "2024-05",
+    "links": {
+      "leaderboard": "https://scale.com/leaderboard"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "signal-and-noise",
+    "name": "Signal and Noise",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Measures benchmark signal-to-noise. Picks metrics and subtasks that make small-scale decisions reliable.",
+    "org": "Ai2",
+    "released": "2025-08",
+    "links": {
+      "leaderboard": "https://allenai.org/blog/signal-noise",
+      "paper": "https://arxiv.org/abs/2508.13144"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "snorkel-ai-open-benchmarks-grants",
+    "name": "Snorkel AI Open Benchmarks Grants",
+    "kind": "funding",
+    "category": "other",
+    "description": "$30M grant program funding open benchmarks, plus a red team that audits benchmarks and a research fellowship for evaluation work.",
+    "org": "Snorkel AI",
+    "released": "2026-10",
+    "links": {
+      "leaderboard": "https://benchmarks.snorkel.ai/frontier-ai-is-accelerating-open-benchmarks-need-to-keep-up/"
+    },
+    "note": "Partners include Terminal-Bench, TB-Science, OSWorld 2.0, Agents' Last Exam and Continual Learning Bench. Red team checks verifiers, contamination and ambiguous tasks.",
+    "confidence": "verified"
+  },
+  {
+    "id": "successful-language-model-evals",
+    "name": "Successful language model evals",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "Jason Wei's checklist of what made evals like MMLU and GSM8K succeed.",
+    "org": "Jason Wei",
+    "released": "2024-05",
+    "links": {
+      "leaderboard": "https://www.jasonwei.net/blog/evals"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "sunday-evals-foldlab-laundry-folding-failure-analysis",
+    "name": "Sunday evals (FoldLab laundry-folding failure analysis)",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Failure analysis of Sunday Robotics' Memo folding laundry for three hours: 52 attempts labeled with 15 failure types, plus clips and an annotation tool.",
+    "org": "BluPe",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://blupe.io/sunday-evals/"
+    },
+    "note": "Taxonomy example: 32 failure events and 49 retries over 52 attempts. Most common failures: extra garment picked and wrong grasp location. The page warns that bed color is confounded with run order and garment mix. Source is one public video, not a reusable benchmark.",
+    "confidence": "verified"
+  },
+  {
+    "id": "swe-gym-r2e-gym-swe-smith",
+    "name": "SWE-Gym / R2E-Gym / SWE-smith",
+    "kind": "rl-env-hub",
+    "category": "coding",
+    "description": "Training environments for SWE agents: real repos with executable tests, procedurally generated tasks at scale.",
+    "org": "Various (Berkeley, UCB/ANL, Stanford)",
+    "released": "2025",
+    "links": {
+      "repo": "https://github.com/SWE-bench/SWE-smith"
+    },
+    "note": "Related repos: SWE-Gym/SWE-Gym, R2E-Gym/R2E-Gym.",
+    "confidence": "verified"
+  },
+  {
+    "id": "the-benchmark-lottery",
+    "name": "The Benchmark Lottery",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Shows benchmark choice changes which method looks best.",
+    "org": "Google (Dehghani et al.)",
+    "released": "2021-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2107.07002"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "the-leaderboard-illusion",
+    "name": "The Leaderboard Illusion",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Shows how private testing and uneven sampling distort Chatbot Arena rankings.",
+    "org": "Cohere Labs et al.",
+    "released": "2025-04",
+    "links": {
+      "paper": "https://arxiv.org/abs/2504.20879"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "the-lifecycle-of-llm-as-a-judge-netflix",
+    "name": "The Lifecycle of LLM-as-a-Judge (Netflix)",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Paper describing Netflix's LLM judge for recommendation explanations as a four-phase lifecycle: birth, training, deployment, monitoring.",
+    "org": "Netflix",
+    "released": "2026-08",
+    "links": {
+      "paper": "https://arxiv.org/abs/2608.18300"
+    },
+    "note": "Rubric tuning uses a meta-judge on the judge's reasoning. Human-in-the-loop drift monitoring triggers re-tuning.",
+    "confidence": "verified"
+  },
+  {
+    "id": "tinybenchmarks",
+    "name": "tinyBenchmarks",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Estimates full-benchmark scores from ~100 IRT-selected items.",
+    "org": "Polo et al.",
+    "released": "2024-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2402.14992"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "vals-ai",
+    "name": "Vals AI",
+    "kind": "leaderboard",
+    "category": "meta-collection",
+    "description": "Independent domain benchmarks (legal, finance, tax, medical, coding) with a Vals Index. Runs a benchmark fellowship.",
+    "org": "Vals AI",
+    "released": "2024",
+    "links": {
+      "leaderboard": "https://www.vals.ai"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "vals-fellowship",
+    "name": "Vals Fellowship",
+    "kind": "funding",
+    "category": "other",
+    "description": "3-6 month funded fellowship to build a proposed benchmark or eval technique, with API credits, Vals infrastructure and a weekly stipend.",
+    "org": "Vals AI",
+    "released": "2026-05",
+    "links": {
+      "leaderboard": "https://x.com/ValsAI/status/2059069740774248770"
+    },
+    "note": "Applications were due 2026-06-30.",
+    "confidence": "verified"
+  },
+  {
+    "id": "vals-index",
+    "name": "Vals Index",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Combines agentic finance, coding, legal and tax benchmarks, weighted by each sector's share of US GDP, into one score.",
+    "org": "Vals AI",
+    "released": "2025-10",
+    "links": {
+      "leaderboard": "https://www.vals.ai/benchmarks/vals_index"
+    },
+    "note": "Most weight comes from private test sets. Vals also publishes Science, Multimodal and RSI indexes.",
+    "confidence": "likely"
+  },
+  {
+    "id": "vlmevalkit",
+    "name": "VLMEvalKit",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Eval toolkit for multimodal models: 220+ models and 80+ image/video benchmarks. Open VLM Leaderboard.",
+    "org": "OpenCompass",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/open-compass/VLMEvalKit",
+      "leaderboard": "https://huggingface.co/spaces/opencompass/open_vlm_leaderboard"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "why-language-models-hallucinate",
+    "name": "Why Language Models Hallucinate",
+    "kind": "paper",
+    "category": "methodology",
+    "description": "Argues binary-graded benchmarks reward guessing. Proposes scoring that credits abstention.",
+    "org": "OpenAI",
+    "released": "2025-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2509.04664"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "your-ai-product-needs-evals-llm-evals-faq",
+    "name": "Your AI Product Needs Evals / LLM Evals FAQ",
+    "kind": "guide",
+    "category": "methodology",
+    "description": "Error-analysis-first approach to application evals and LLM judges.",
+    "org": "Hamel Husain",
+    "released": "2024",
+    "links": {
+      "leaderboard": "https://hamel.dev/blog/posts/evals-faq/"
+    },
+    "note": null,
+    "confidence": "verified"
+  },
+  {
+    "id": "zeroeval",
+    "name": "ZeroEval",
+    "kind": "harness",
+    "category": "meta-collection",
+    "description": "Simple unified zero-shot framework for reasoning benchmarks (MMLU-Redux, ZebraLogic, CRUX...).",
+    "org": "Ai2 / WildEval",
+    "released": "2024",
+    "links": {
+      "repo": "https://github.com/WildEval/ZeroEval"
+    },
+    "note": null,
+    "confidence": "verified"
+  }
+]
