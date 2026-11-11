@@ -12,8 +12,8 @@ export const EVALPLUS_TERMS = 'Static JSON on the EvalPlus GitHub Pages site; th
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-/** One row per model with pass@1 on `task` ("humaneval+" or "mbpp+"). */
-export async function evalplusRows(task: 'humaneval+' | 'mbpp+'): Promise<LeaderboardRow[]> {
+/** One row per model with pass@1 on `task`: "humaneval", "humaneval+", "mbpp" or "mbpp+". */
+export async function evalplusRows(task: 'humaneval' | 'humaneval+' | 'mbpp' | 'mbpp+'): Promise<LeaderboardRow[]> {
   const data = await fetchJson<Record<string, { 'pass@1'?: Record<string, number | null> }>>(EVALPLUS_FEED);
   const rows: LeaderboardRow[] = [];
   for (const [name, e] of Object.entries(data)) {

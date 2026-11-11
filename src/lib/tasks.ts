@@ -35,10 +35,14 @@ export interface TaskGroup {
   kind: TaskKind;
   /** A sentence with the count, used as the section heading. */
   title: string;
+  /** A few words for the list of kinds at the top of the page. */
+  short: string;
   /** What to do, in one or two sentences. */
   how: string;
   /** The label of each task's main link. */
   verb: string;
+  /** The start of an issue title, before the record's name ("Add the release date of"). */
+  ask: string;
   /** Code tasks are pull requests. The rest are issue forms. */
   code: boolean;
   tasks: Task[];
@@ -91,6 +95,9 @@ export interface TaskInput {
 const GUIDE = `${REPO}/blob/main/.github/CONTRIBUTING.md#add-a-leaderboard-importer`;
 const form = (template: string, fields: Record<string, string>) => `${REPO}/issues/new?${new URLSearchParams({ template, ...fields })}`;
 const isPublic = (b: Benchmark) => b.access === 'public' || b.access === 'public+private-holdout';
+/** A difficulty level describes who could do a test's tasks. It doesn't fit safety evaluations, indexes or votes. */
+const levelFits = (b: Benchmark) =>
+  b.category !== 'safety-alignment' && b.category !== 'other' && b.scoring !== 'preference' && b.scoring !== 'head-to-head' && !/\bindex\b/i.test(b.name);
 /** Artificial Analysis's terms keep its numbers out of the almanac, so its boards never get importers. */
 const NO_IMPORT = /artificialanalysis\.ai/;
 
@@ -142,15 +149,16 @@ export function openTasks(input: TaskInput): TaskGroup[] {
   const correction = (b: Benchmark, what: string, wrong: string) =>
     form('correction.yml', { title: `Correction: ${what} of ${b.name}`, page: benchPage(b), wrong });
 
-  // 1. public benchmarks two or more labs report, with no leaderboard we know of
+  // 1. public benchmarks two or more labs report, with only the labs' own scores: no leaderboard we read or link,
+  // and no Epoch AI runs
   const leaderboard = benchmarks
     .filter((b) => isPublic(b) && nLabs(b.id) >= 2 && !b.links?.leaderboard && !read(b.id))
     .map((b) =>
       bench(
         'leaderboard',
         b,
-        `${nLabs(b.id)} labs report it, and we know of no leaderboard that ranks it.`,
-        correction(b, 'leaderboard', `${b.name} has no leaderboard linked. Its results are ranked at: `),
+        `${nLabs(b.id)} labs report it. Every score here is a lab's own.`,
+        correction(b, 'leaderboard', `${b.name} has only the labs' own scores. A leaderboard that ranks it: `),
         'links.leaderboard',
       ),
     );
@@ -163,14 +171,14 @@ export function openTasks(input: TaskInput): TaskGroup[] {
   // 3. benchmarks with no difficulty level
   const levelList = input.levels.length > 1 ? `${input.levels.slice(0, -1).join(', ')} or ${input.levels.at(-1)}` : input.levels.join('');
   const level = benchmarks
-    .filter((b) => !b.level)
+    .filter((b) => !b.level && levelFits(b))
     .map((b) =>
       bench('level', b, 'No difficulty level.', correction(b, 'level', `${b.name} has no difficulty level. It should be ${levelList}, because `), 'level'),
     );
 
-  // 4. public benchmarks with no paper or report linked
+  // 4. public benchmarks with no paper or report linked. Contests such as AIME have none to find.
   const paper = benchmarks
-    .filter((b) => isPublic(b) && !b.links?.paper)
+    .filter((b) => isPublic(b) && !b.links?.paper && b.level !== 'competition')
     .map((b) => bench('paper', b, 'No paper or report linked.', correction(b, 'paper', `${b.name} has no paper or report linked. It is: `), 'links.paper'));
 
   // 5. models with no release date
@@ -202,12 +210,12 @@ export function openTasks(input: TaskInput): TaskGroup[] {
       (f): Task => ({
         id: `review:${f.key}`,
         kind: 'review',
-        name: f.name,
+        name: f.name.replace(/\$/g, ''),
         page: `${site}/new/`,
         detail: f.title,
         action: form('benchmark.yml', {
-          title: `Benchmark: ${f.name}`,
-          name: f.name,
+          title: `Benchmark: ${f.name.replace(/\$/g, '')}`,
+          name: f.name.replace(/\$/g, ''),
           paper: f.arxiv ? `https://arxiv.org/abs/${f.arxiv}` : f.url,
           ...(f.repo ? { code: f.repo } : {}),
           evidence: 'Links that show it passes one of the four tests: ',
@@ -252,7 +260,7 @@ export function openTasks(input: TaskInput): TaskGroup[] {
     .map(([id, f]) => {
       const b = benchById.get(id)!;
       const file = `scripts/leaderboards/${id}.ts`;
-      const since = `It has failed since ${f.date}${f.error ? `: ${f.error}` : ''}.`;
+      const since = f.error ? `It failed on ${f.date}: ${f.error.replace(/[.\s]+$/, '')}.` : `Its last good read was ${f.date}.`;
       return {
         ...bench('broken', b, since, form('bug.yml', { title: `Bug: the ${b.name} importer fails`, page: benchPage(b), what: `The importer ${file} fails. ${since}` }), undefined, { label: 'Importer', url: `${REPO}/blob/main/${file}` }),
         file,
@@ -261,26 +269,26 @@ export function openTasks(input: TaskInput): TaskGroup[] {
 
   const n = (k: number, one: string, many: string) => `${k.toLocaleString('en-US')} ${k === 1 ? one : many}`;
   const groups: TaskGroup[] = [
-    { kind: 'leaderboard', title: `${n(leaderboard.length, 'public benchmark two or more labs report has', 'public benchmarks two or more labs report have')} no leaderboard we know of`, how: 'If you know where one is ranked, send the link. If you made it, the maker form below lets us read your results directly.', verb: 'Send the link', code: false, tasks: leaderboard },
-    { kind: 'release', title: `${n(release.length, 'benchmark has', 'benchmarks have')} no release date`, how: 'The month its paper, repository or launch post first appeared. Give the link you dated it from.', verb: 'Add the date', code: false, tasks: release },
-    { kind: 'level', title: `${n(level.length, 'benchmark has', 'benchmarks have')} no difficulty level`, how: 'Who could solve its tasks, from most adults to researchers on open problems. The levels are explained on the About page.', verb: 'Suggest a level', code: false, tasks: level },
-    { kind: 'paper', title: `${n(paper.length, 'public benchmark has', 'public benchmarks have')} no paper or report linked`, how: 'The paper, technical report or launch post that introduced it. Some have none, and that is worth knowing too.', verb: 'Add the paper', code: false, tasks: paper },
-    { kind: 'model-release', title: `${n(modelRelease.length, 'model has', 'models have')} no release date`, how: 'The day its lab released it, from the launch post, model card or API changelog.', verb: 'Add the date', code: false, tasks: modelRelease },
-    { kind: 'review', title: `${n(review.length, 'new benchmark waits', 'new benchmarks wait')} for review`, how: 'Our daily scan ranked these worth cataloging. A benchmark gets in when it passes one of four tests, so evidence that a lab reports it or a leaderboard runs it settles it.', verb: 'Send the evidence', code: false, tasks: review },
-    { kind: 'critique', title: `${n(critique.length, 'write-up may criticize', 'write-ups may criticize')} a benchmark we catalog`, how: 'Our scan flagged these. If one documents a real problem, such as leaked answers or a broken grader, log it as a critique.', verb: 'Log the critique', code: false, tasks: critique },
-    { kind: 'importer', title: `${n(importer.length, 'official leaderboard we link isn\'t', 'official leaderboards we link aren\'t')} read yet`, how: 'Each needs a short importer that reads the board\'s published data. Check the board\'s terms first. The guide explains how.', verb: 'Write the importer', code: true, tasks: importer },
-    { kind: 'broken', title: `${n(broken.length, 'importer has', 'importers have')} stopped working`, how: 'The board keeps its last scores until the importer is fixed. Most breaks are a moved file or a changed page.', verb: 'Report it', code: true, tasks: broken },
+    { kind: 'leaderboard', ask: 'Find a leaderboard for', short: 'Only labs\' own scores', title: `${n(leaderboard.length, 'public benchmark that two or more labs report has', 'public benchmarks that two or more labs report have')} no independent scores here yet`, how: 'Every score we have for these comes from the labs themselves. If a leaderboard or an outside group ranks models on one, send the link.', verb: 'Send the link', code: false, tasks: leaderboard },
+    { kind: 'release', ask: 'Add the release date of', short: 'Benchmarks with no release date', title: `${n(release.length, 'benchmark has', 'benchmarks have')} no release date`, how: 'The month its paper, repository or launch post first appeared. Give the link you dated it from.', verb: 'Add the date', code: false, tasks: release },
+    { kind: 'level', ask: 'Add a difficulty level for', short: 'Benchmarks with no level', title: `${n(level.length, 'benchmark has', 'benchmarks have')} no difficulty level`, how: 'Who could solve its tasks, from most adults to researchers on open problems. The levels are explained on the About page.', verb: 'Suggest a level', code: false, tasks: level },
+    { kind: 'paper', ask: 'Find the paper for', short: 'No paper linked', title: `${n(paper.length, 'public benchmark has', 'public benchmarks have')} no paper or report linked`, how: 'The paper, technical report or launch post that introduced it. Some have none, and that is worth knowing too.', verb: 'Add the paper', code: false, tasks: paper },
+    { kind: 'model-release', ask: 'Add the release date of', short: 'Models with no release date', title: `${n(modelRelease.length, 'model has', 'models have')} no release date`, how: 'The day its lab released it, from the launch post, model card or API changelog.', verb: 'Add the date', code: false, tasks: modelRelease },
+    { kind: 'review', ask: 'Review', short: 'Finds waiting for review', title: `${n(review.length, 'new benchmark waits', 'new benchmarks wait')} for review`, how: 'Our daily scan ranked these worth cataloging. A benchmark gets in when it passes one of four tests, so evidence that a lab reports it or a leaderboard runs it settles it.', verb: 'Send the evidence', code: false, tasks: review },
+    { kind: 'critique', ask: 'Check a critique of', short: 'Possible critiques', title: `${n(critique.length, 'write-up may criticize', 'write-ups may criticize')} a benchmark we catalog`, how: 'Our scan flagged these. If one documents a real problem, such as leaked answers or a broken grader, log it as a critique.', verb: 'Log the critique', code: false, tasks: critique },
+    { kind: 'importer', ask: 'Write an importer for', short: 'Leaderboards to read', title: `${n(importer.length, 'official leaderboard we link isn\'t', 'official leaderboards we link aren\'t')} read yet`, how: 'Each needs a short importer that reads the board\'s published data. Check the board\'s terms first.', verb: 'Write the importer', code: true, tasks: importer },
+    { kind: 'broken', ask: 'Fix the importer for', short: 'Broken importers', title: `${n(broken.length, 'importer has', 'importers have')} stopped working`, how: 'The board keeps its last scores until the importer is fixed. Most breaks are a moved file or a changed page.', verb: 'Report it', code: true, tasks: broken },
   ];
   for (const g of groups) g.tasks.sort(byRank);
   return groups.filter((g) => g.tasks.length);
 }
 
-/** The page's headline: the gap that most needs outside help, as a finding. */
+/** The page's headline: the most-reported benchmark with only the labs' own scores, as a finding. */
 export function headline(groups: TaskGroup[]): string {
-  const lb = groups.find((g) => g.kind === 'leaderboard');
-  if (lb) return lb.title;
-  const top = [...groups].sort((a, b) => b.tasks.length - a.tasks.length)[0];
-  return top ? top.title : 'Nothing is waiting right now';
+  const top = groups.find((g) => g.kind === 'leaderboard')?.tasks[0];
+  if (top) return `${top.rank} labs report ${top.name}, and we have no independent scores for it yet`;
+  const big = [...groups].sort((a, b) => b.tasks.length - a.tasks.length)[0];
+  return big ? big.title : 'Nothing is waiting right now';
 }
 
 /** The issue a task becomes on GitHub. The hidden marker lets a rerun find it again. */
@@ -307,7 +315,7 @@ export function issueOf(t: Task, g: TaskGroup): { title: string; body: string; l
     );
   }
   return {
-    title: `${g.verb}: ${t.name}`,
+    title: `${g.ask} ${t.name}`,
     body: lines.join('\n'),
     labels: ['good first issue', g.code ? 'importer' : 'data'],
   };
