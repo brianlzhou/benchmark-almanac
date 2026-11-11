@@ -12,6 +12,8 @@ body:
         Thanks for reaching out. We read every leaderboard from its makers' own published data, and we would rather read a file you choose than parse your web page. A CSV, a JSON file, a Hugging Face dataset or an API all work, as long as its terms allow automated reading.
 
         You can also correct how the almanac describes your benchmark: what it tests, who made it, its links, its versions and its status.
+
+        When a maintainer accepts your request, a bot opens a pull request with the change, runs the data checks, and links it here. The bot applies the `field: value` lines in **Text changes**. A results feed needs an importer, which a maintainer writes by hand.
   - type: input
     id: benchmark
     attributes:
@@ -62,7 +64,7 @@ body:
     id: text
     attributes:
       label: Text changes
-      description: What the page says now, and what it should say. Links help.
+      description: "What the page says now, and what it should say. To let the bot apply a change, put it on its own line as `field: value`. The fields are name, org, released (YYYY-MM), version, description, paper, repo, dataset, leaderboard and site. Links must start with https."
   - type: textarea
     id: more
     attributes:

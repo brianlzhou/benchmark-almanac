@@ -12,6 +12,8 @@ body:
         We record scores as their source reports them, with the source's own settings. We need a link to the page or document where the number appears.
 
         To report a wrong date, name or link instead, use **Correct a record**.
+
+        When a maintainer accepts a score from a launch post or a system card, a bot adds it in a pull request, runs the data checks, and links it here. The bot needs the **Source** link to match the post or document the almanac already has. Leaderboard scores come from the importers instead.
   - type: input
     id: model
     attributes:

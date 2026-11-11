@@ -1,0 +1,43 @@
+# Keeps a few of the Contribute page's open tasks open as "good first issue" issues (scripts/tasks.ts).
+# It runs only by hand, from the Actions tab. Each issue carries a hidden marker with its task id, so a rerun
+# never opens a second issue for a task, never reopens a closed one, and closes an open one once the data has
+# the answer. Start with a dry run to see what it would do.
+name: Good first issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: Keep at most this many task issues open (0 to 100)
+        required: true
+        default: '15'
+      dry:
+        description: Only print what would change
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: tasks
+  cancel-in-progress: false
+
+jobs:
+  issues:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # the inputs go through the environment, never into the shell command itself
+      - name: Open, update and close task issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COUNT: ${{ inputs.count }}
+          DRY: ${{ inputs.dry }}
+        run: |
+          if ! [[ "$COUNT" =~ ^[0-9]{1,3}$ ]]; then echo "count must be a number"; exit 1; fi
+          if [ "$DRY" = "true" ]; then node scripts/tasks.ts --issues "$COUNT" --dry; else node scripts/tasks.ts --issues "$COUNT"; fi

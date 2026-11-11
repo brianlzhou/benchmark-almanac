@@ -11,7 +11,7 @@ body:
       value: |
         Thanks for sending a benchmark. We add one if it passes **at least one** of four tests: a major lab reports it, an independent leaderboard runs it, an established evaluation group made it, or people use it. Our Submit page explains each test.
 
-        You'll get an automatic reply within a minute, and we review every submission by hand.
+        You'll get an automatic reply within a minute, and we review every submission by hand. When a maintainer accepts it, a bot opens a pull request with the change, runs the data checks, and links it here. A maintainer then reviews and merges it.
   - type: input
     id: name
     attributes:

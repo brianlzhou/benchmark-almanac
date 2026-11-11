@@ -1,0 +1,60 @@
+name: Accept an issue
+
+# When a maintainer adds the "accepted" label to an issue opened from a form in .github/ISSUE_TEMPLATE/, turn it
+# into a pull request: scripts/accept.ts reads the form, edits data/, runs the data checks and opens or updates a
+# pull request from accept/<issue number>. Forms that can't become a data change (bugs, ideas, unclear values) get
+# a reply instead. The issue text is untrusted, so the job reads it only from the event file, inside Node, and
+# passes values to git and gh as single arguments, never through a shell line.
+#
+# A pull request opened with GITHUB_TOKEN doesn't start other workflows, so this job runs the data checks itself
+# and puts their output in the pull request. The repository setting "Allow GitHub Actions to create and approve
+# pull requests" must be on.
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: accept-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  accept:
+    if: github.event.label.name == 'accepted'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check that the labeler can write to the repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ACTOR: ${{ github.event.sender.login }}
+        run: |
+          perm="$(gh api "repos/$GH_REPO/collaborators/$ACTOR/permission" --jq .permission)"
+          case "$perm" in
+            admin|maintain|write) echo "$ACTOR has $perm access" ;;
+            *) echo "::error::Only maintainers can accept an issue. $ACTOR has $perm access."; exit 1 ;;
+          esac
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Turn the issue into a pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/accept.ts --event "$RUNNER_TEMP/accept"
+      - name: Keep what the bot decided
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accept-${{ github.event.issue.number }}
+          path: ${{ runner.temp }}/accept
+          if-no-files-found: ignore
+          retention-days: 14

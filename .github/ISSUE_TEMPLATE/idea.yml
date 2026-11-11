@@ -4,6 +4,10 @@ description: A page, chart, filter or data source you'd like the almanac to have
 title: 'Idea: '
 labels: [idea]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        A maintainer reads every idea and replies here. Ideas change the site's code, so the accept bot doesn't open a pull request for them.
   - type: textarea
     id: want
     attributes:

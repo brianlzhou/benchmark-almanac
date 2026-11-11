@@ -12,6 +12,8 @@ body:
         A benchmark page lists the problems that published audits found in it. We summarize each finding and credit it to its source, so we need a source we can link: a paper, a write-up, a GitHub issue or the maker's own notes.
 
         If you found the problem yourself and haven't published it, link the repository, issue or notebook that shows it.
+
+        When a maintainer accepts the critique, a bot opens a pull request with the change, runs the data checks, and links it here. Put the source's author and date after its link, as in the example, so the bot can credit it.
   - type: input
     id: benchmark
     attributes:
@@ -82,7 +84,7 @@ body:
         - I found the problem
         - I made or maintain the benchmark
         - I read about it
-        - None
+        - No connection
   - type: textarea
     id: more
     attributes:

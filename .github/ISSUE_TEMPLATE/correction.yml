@@ -4,6 +4,10 @@ description: Report a wrong score, date, name or link on Benchmark Almanac.
 title: 'Correction: '
 labels: [correction]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        When a maintainer accepts a correction, a bot drafts a pull request with the change, runs the data checks, and links it here. The bot can draft it when **Page** links a benchmark, model or lab page and **What is wrong** has the new value on its own line as `field: value`.
   - type: input
     id: page
     attributes:
@@ -16,7 +20,7 @@ body:
     id: wrong
     attributes:
       label: What is wrong
-      description: What the page says, and what it should say.
+      description: "What the page says, and what it should say. To let the bot draft the fix, add a line such as `released: 2024-02` or `name: SWE-bench Verified`. Benchmarks take name, org, released, version, description and links (paper, repo, dataset, leaderboard, site). Models take name and released. Labs take name."
     validations:
       required: true
   - type: input
