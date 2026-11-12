@@ -15123,5 +15123,180 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
+  },
+  {
+    "id": "gpt-transcribe",
+    "name": "GPT-Transcribe",
+    "lab": "openai",
+    "family": "GPT Transcribe",
+    "released": "2026-07-29",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://developers.openai.com/api/docs/models/gpt-transcribe"
+  },
+  {
+    "id": "gpt-live-transcribe",
+    "name": "GPT-Live-Transcribe",
+    "lab": "openai",
+    "family": "GPT Transcribe",
+    "released": "2026-07-29",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://developers.openai.com/api/docs/models/gpt-live-transcribe"
+  },
+  {
+    "id": "qwen3-tts-12hz-1-7b-base",
+    "name": "Qwen3-TTS-12Hz-1.7B-Base",
+    "lab": "qwen",
+    "family": "Qwen3-TTS",
+    "released": "2026-01-22",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+    "aliases": [
+      "Qwen3-TTS-12Hz-1.7B-Base"
+    ]
+  },
+  {
+    "id": "qwen3-tts-12hz-1-7b-customvoice",
+    "name": "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    "lab": "qwen",
+    "family": "Qwen3-TTS",
+    "released": "2026-01-22",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    "aliases": [
+      "Qwen3-TTS-12Hz-1.7B-CustomVoice"
+    ]
+  },
+  {
+    "id": "qwen3-asr-0-6b",
+    "name": "Qwen3-ASR-0.6B",
+    "lab": "qwen",
+    "family": "Qwen3-ASR",
+    "released": "2026-01-29",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+    "aliases": [
+      "Qwen3-ASR-0.6B"
+    ]
+  },
+  {
+    "id": "qwen3-5-omni-flash",
+    "name": "Qwen3.5-Omni-Flash",
+    "lab": "qwen",
+    "family": "Qwen3.5-Omni",
+    "released": "2026-03-30",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://qwen.ai/blog?id=qwen3.5-omni",
+    "aliases": [
+      "Qwen3.5-Omni-Flash"
+    ]
+  },
+  {
+    "id": "gpt-live-1",
+    "name": "GPT-Live-1",
+    "lab": "openai",
+    "family": "GPT-Live",
+    "released": "2026-07-08",
+    "weights": "closed",
+    "card": "https://openai.com/index/introducing-gpt-live-1-in-the-api/",
+    "aliases": [
+      "GPT Live 1"
+    ]
+  },
+  {
+    "id": "gpt-live-1-mini",
+    "name": "GPT-Live-1 mini",
+    "lab": "openai",
+    "family": "GPT-Live",
+    "released": "2026-07-08",
+    "weights": "closed",
+    "card": "https://openai.com/index/introducing-gpt-live-1-in-the-api/",
+    "aliases": [
+      "GPT Live 1 mini"
+    ]
+  },
+  {
+    "id": "gpt-rosalind-6",
+    "name": "GPT-Rosalind-6",
+    "lab": "openai",
+    "family": "GPT-Rosalind",
+    "released": "2026-10-30",
+    "weights": "closed",
+    "card": "https://deploymentsafety.openai.com/gpt-rosalind-6/introduction",
+    "aliases": [
+      "GPT-6 Rosalind Research",
+      "GPT Rosalind 6"
+    ]
+  },
+  {
+    "id": "nemotron-3-5-lightning-30b-a3b-base",
+    "name": "Nemotron 3.5 Lightning 30B-A3B Base",
+    "lab": "nvidia",
+    "family": "Nemotron 3.5",
+    "released": "2026-08-11",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-Base-BF16",
+    "aliases": [
+      "Nemotron 3.5 Lightning 30B-A3B Base"
+    ]
+  },
+  {
+    "id": "nemotron-3-5-super-120b-a12b-base",
+    "name": "Nemotron 3.5 Super 120B-A12B Base",
+    "lab": "nvidia",
+    "family": "Nemotron 3.5",
+    "released": "2026-10-15",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-120B-A12B-Base-BF16",
+    "aliases": [
+      "Nemotron 3.5 Super 120B-A12B Base"
+    ]
+  },
+  {
+    "id": "deepseek-v4-1-flash-base",
+    "name": "DeepSeek-V4.1-Flash Base",
+    "lab": "deepseek",
+    "family": "DeepSeek V4.1",
+    "released": "2026-09-10",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+    "aliases": [
+      "DeepSeek-V4.1-Flash-Base"
+    ]
+  },
+  {
+    "id": "beam-1-0-base",
+    "name": "Beam 1.0 Base",
+    "lab": "reflection",
+    "family": "Beam 1",
+    "released": "2026-10-05",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://reflection.ai/documents/beam-model-tech-report",
+    "aliases": [
+      "Beam base model",
+      "Beam 501B-A23B base"
+    ]
+  },
+  {
+    "id": "nemotron-3-ultra-base",
+    "name": "Nemotron 3 Ultra 550B-A55B Base",
+    "lab": "nvidia",
+    "family": "Nemotron 3",
+    "released": "2026-06-04",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16",
+    "aliases": [
+      "Nemotron-3-Ultra-550B-A55B-Base"
+    ]
   }
 ]

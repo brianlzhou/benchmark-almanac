@@ -35232,6 +35232,138 @@
     ]
   },
   {
+    "id": "nvidia-nemotron-3-nano-30b-a3b-base-technical-report-2025-12-23",
+    "lab": "nvidia",
+    "model": "nemotron-3-nano-30b-a3b-base",
+    "date": "2025-12-23",
+    "doc": "technical report",
+    "title": "Nemotron 3 Nano: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
+    "url": "https://arxiv.org/pdf/2512.20848v1",
+    "release": "nvidia-nemotron-3-nano-30b-a3b-2025-12-15",
+    "notes": "Base-model results from Table 2, the N-3-Nano 30B-A3B Base column. This is a separate base checkpoint from the instruction-tuned release.",
+    "results": [
+      {
+        "benchmark": "mmlu",
+        "score": 78.56,
+        "unit": "%",
+        "as_written": "MMLU, 5-shot accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 65.05,
+        "unit": "%",
+        "as_written": "MMLU-Pro, 5-shot CoT EM, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "agieval",
+        "score": 68.32,
+        "unit": "%",
+        "as_written": "AGIEval-English, 3/5-shot CoT accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humaneval",
+        "score": 78.05,
+        "unit": "%",
+        "as_written": "HumanEval, 0-shot, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mbpp",
+        "score": 75.49,
+        "unit": "%",
+        "as_written": "MBPP-Sanitized, 3-shot, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gsm8k",
+        "score": 92.34,
+        "unit": "%",
+        "as_written": "GSM8K, 8-shot accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math",
+        "score": 82.88,
+        "unit": "%",
+        "as_written": "MATH, 4-shot accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math-500",
+        "score": 78.63,
+        "unit": "%",
+        "as_written": "MATH-500, 4-shot avg@32, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-challenge",
+        "score": 91.89,
+        "unit": "%",
+        "as_written": "ARC-Challenge, 25-shot acc_norm, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hellaswag",
+        "score": 85.56,
+        "unit": "%",
+        "as_written": "HellaSwag, 10-shot acc_norm, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "openbookqa",
+        "score": 46.2,
+        "unit": "%",
+        "as_written": "OpenBookQA, 0-shot acc_norm, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "piqa",
+        "score": 84.33,
+        "unit": "%",
+        "as_written": "PIQA, 0-shot acc_norm, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "winogrande",
+        "score": 79.64,
+        "unit": "%",
+        "as_written": "WinoGrande, 5-shot accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "race",
+        "score": 88.04,
+        "unit": "%",
+        "as_written": "RACE, 0-shot accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "global-mmlu-lite-2",
+        "score": 74.47,
+        "unit": "%",
+        "as_written": "MMLU Global Lite, 5-shot average accuracy, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mgsm",
+        "score": 83.0,
+        "unit": "%",
+        "as_written": "MGSM, 8-shot average, base model Table 2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ruler",
+        "score": 75.44,
+        "unit": "%",
+        "as_written": "RULER, 256K 0-shot accuracy, 64K 87.50 and 128K 82.92, base model Table 2",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "nvidia-nemotron-3-nano-30b-a3b-technical-report-2025-12-23",
     "lab": "nvidia",
     "model": "nemotron-3-nano-30b-a3b",
@@ -44048,6 +44180,13 @@
         "unit": "%",
         "as_written": "MakeMeSay, win rate 0.08, Grok 4.2 SA, Table 4",
         "section": "persuasion"
+      },
+      {
+        "benchmark": "lab-bench-protocolqa",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "ProtocolQA, accuracy 0.79, Grok 4.2 SA (human baseline 0.79)",
+        "section": "bio-chem"
       }
     ]
   },
@@ -45821,7 +45960,7 @@
     "doc": "technical report",
     "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence (arXiv 2606.19348)",
     "url": "https://arxiv.org/abs/2606.19348",
-    "release": "deepseek-deepseek-v4-pro-max-2026-04-24",
+    "release": "deepseek-deepseek-v4-flash-2026-04-24",
     "notes": "58-page DeepSeek-V4 report shared with V4-Pro, with Flash numbers from the Max column of Table 7 and Figure 8. Table 1 (base models) is not recorded, and the real-world task sections report V4-Pro only.",
     "results": [
       {
@@ -48082,6 +48221,402 @@
     ]
   },
   {
+    "id": "nvidia-cosmos3-edge-technical-report-2026-05-31",
+    "lab": "nvidia",
+    "model": "cosmos3-edge",
+    "date": "2026-05-31",
+    "doc": "technical report",
+    "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+    "url": "https://research.nvidia.com/labs/cosmos-lab/cosmos3/technical-report.pdf",
+    "release": null,
+    "notes": "Cosmos3-Edge reasoning scores from the official report Table 10. The report says Edge was included in a later release, while its benchmark column is already printed.",
+    "results": [
+      {
+        "benchmark": "mmbench",
+        "score": 76.6,
+        "unit": "%",
+        "as_written": "MMBench-Dev, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 73.3,
+        "unit": "%",
+        "as_written": "RealWorldQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cvbench",
+        "score": 84.9,
+        "unit": "%",
+        "as_written": "CVBench, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "videophy-2",
+        "score": 40.3,
+        "unit": "%",
+        "as_written": "VideoPhy2, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "causalvqa",
+        "score": 37.0,
+        "unit": "%",
+        "as_written": "CausalVQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mvpbench",
+        "score": 53.3,
+        "unit": "%",
+        "as_written": "MVPBench, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 89.9,
+        "unit": "%",
+        "as_written": "CountBenchQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 75.4,
+        "unit": "%",
+        "as_written": "AI2D, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "docvqa",
+        "score": 86.8,
+        "unit": "%",
+        "as_written": "DocVQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "infographicvqa",
+        "score": 60.1,
+        "unit": "%",
+        "as_written": "InfoVQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ocrbench-v2",
+        "score": 43.7,
+        "unit": "%",
+        "as_written": "OCRBench-v2, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "logicvista",
+        "score": 34.7,
+        "unit": "%",
+        "as_written": "LogicVista, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 26.4,
+        "unit": "%",
+        "as_written": "MMMU-Pro, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 58.2,
+        "unit": "%",
+        "as_written": "MVBench, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 80.1,
+        "unit": "%",
+        "as_written": "RefCOCO, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 40.7,
+        "unit": "%",
+        "as_written": "HallusionBench, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 20.8,
+        "unit": "%",
+        "as_written": "IFBench, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 48.4,
+        "unit": "%",
+        "as_written": "RefSpatial, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vsi-bench",
+        "score": 59.2,
+        "unit": "%",
+        "as_written": "VSI-Bench, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 42.0,
+        "unit": "%",
+        "as_written": "ERQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "robospatial-home",
+        "score": 63.4,
+        "unit": "%",
+        "as_written": "RoboSpatialHome, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "where2place",
+        "score": 55.0,
+        "unit": "%",
+        "as_written": "Where2Place, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "lingoqa",
+        "score": 58.2,
+        "unit": "%",
+        "as_written": "LingoQA, Cosmos3-Edge 2B column, Table 10",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "nvidia-cosmos3-nano-policy-droid-technical-report-2026-05-31",
+    "lab": "nvidia",
+    "model": "cosmos3-nano-policy-droid",
+    "date": "2026-05-31",
+    "doc": "technical report",
+    "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+    "url": "https://research.nvidia.com/labs/cosmos-lab/cosmos3/technical-report.pdf",
+    "release": null,
+    "notes": "Cosmos3-Nano-Policy-DROID RoboLab-120 task success rates from Table 19. The model card links to this report and provides no separate numeric table.",
+    "results": [
+      {
+        "benchmark": "robolab",
+        "score": 39.7,
+        "unit": "%",
+        "as_written": "RoboLab-120 overall, specific language level, Cosmos3-Nano-Policy-DROID, Table 19",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "nvidia-cosmos3-nano-technical-report-2026-05-31",
+    "lab": "nvidia",
+    "model": "cosmos3-nano",
+    "date": "2026-05-31",
+    "doc": "technical report",
+    "title": "Cosmos 3: Omnimodal World Models for Physical AI",
+    "url": "https://research.nvidia.com/labs/cosmos-lab/cosmos3/technical-report.pdf",
+    "release": null,
+    "notes": "Scores for Cosmos3-Nano from the official report Tables 10-13. The report uses separate text-to-video, image-to-video and generation settings, which are preserved in as_written.",
+    "results": [
+      {
+        "benchmark": "unigenbench",
+        "score": 84.61,
+        "unit": "score",
+        "as_written": "Cosmos3-Nano text-to-image UniGenBench All (1170), Table 11",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "pai-bench",
+        "score": 79.4,
+        "unit": "%",
+        "as_written": "Cosmos3-Nano text-to-video PAIBench-G Overall, Table 12. Also Cosmos3-Nano image-to-video PAIBench-G Overall, Table 12 82.7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "rbench",
+        "score": 58.4,
+        "unit": "%",
+        "as_written": "Cosmos3-Nano image-to-video RBench score, Table 12",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "physics-iq",
+        "score": 40.2,
+        "unit": "score",
+        "as_written": "Cosmos3-Nano image-to-video Physics-IQ direct, Table 13. Also Cosmos3-Nano image-to-video Physics-IQ with WMReward best-of-N, Table 13 43.8. Also Cosmos3-Nano video-to-video Physics-IQ direct, Table 13 50.2. Also Cosmos3-Nano video-to-video Physics-IQ with WMReward best-of-N, Table 13 57.7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmbench",
+        "score": 85.1,
+        "unit": "%",
+        "as_written": "MMBench-Dev, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 72.2,
+        "unit": "%",
+        "as_written": "RealWorldQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cvbench",
+        "score": 86.5,
+        "unit": "%",
+        "as_written": "CVBench, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "videophy-2",
+        "score": 45.6,
+        "unit": "%",
+        "as_written": "VideoPhy2, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "causalvqa",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "CausalVQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mvpbench",
+        "score": 66.9,
+        "unit": "%",
+        "as_written": "MVPBench, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 84.8,
+        "unit": "%",
+        "as_written": "CountBenchQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 85.0,
+        "unit": "%",
+        "as_written": "AI2D, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "docvqa",
+        "score": 94.2,
+        "unit": "%",
+        "as_written": "DocVQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "infographicvqa",
+        "score": 81.8,
+        "unit": "%",
+        "as_written": "InfoVQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ocrbench-v2",
+        "score": 60.1,
+        "unit": "%",
+        "as_written": "OCRBench-v2, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "logicvista",
+        "score": 41.8,
+        "unit": "%",
+        "as_written": "LogicVista, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 41.1,
+        "unit": "%",
+        "as_written": "MMMU-Pro, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 73.2,
+        "unit": "%",
+        "as_written": "MVBench, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 84.3,
+        "unit": "%",
+        "as_written": "RefCOCO, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 50.5,
+        "unit": "%",
+        "as_written": "HallusionBench, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 32.0,
+        "unit": "%",
+        "as_written": "IFBench, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 53.1,
+        "unit": "%",
+        "as_written": "RefSpatial, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vsi-bench",
+        "score": 54.9,
+        "unit": "%",
+        "as_written": "VSI-Bench, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 44.0,
+        "unit": "%",
+        "as_written": "ERQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "robospatial-home",
+        "score": 66.3,
+        "unit": "%",
+        "as_written": "RoboSpatialHome, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "where2place",
+        "score": 64.0,
+        "unit": "%",
+        "as_written": "Where2Place, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "lingoqa",
+        "score": 68.4,
+        "unit": "%",
+        "as_written": "LingoQA, Cosmos3-Nano 8B column, Table 10",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "microsoft-mai-code-1-flash-model-card-2026-06-02",
     "lab": "microsoft",
     "model": "mai-code-1-flash",
@@ -48405,6 +48940,138 @@
         "unit": "%",
         "as_written": "Jailbreak attack success rate by bucket, no overall: Foundational 4.4%, Compositional 17.6%, Adaptive 26.8%, lower is better (Figure 21)",
         "section": "robustness"
+      }
+    ]
+  },
+  {
+    "id": "nvidia-nemotron-3-ultra-base-model-card-2026-06-04",
+    "lab": "nvidia",
+    "model": "nemotron-3-ultra-base",
+    "date": "2026-06-04",
+    "doc": "model card",
+    "title": "NVIDIA-Nemotron-3-Ultra-550B-A55B-Base model card (Hugging Face)",
+    "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-Base-BF16",
+    "release": "nvidia-nemotron-3-ultra-2026-06-04",
+    "notes": "Base model benchmark table.",
+    "results": [
+      {
+        "benchmark": "mmlu",
+        "score": 89.08,
+        "unit": "%",
+        "as_written": "MMLU, 5-shot acc",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 79.07,
+        "unit": "%",
+        "as_written": "MMLU-Pro, 5-shot CoT EM",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "agieval",
+        "score": 78.73,
+        "unit": "%",
+        "as_written": "AGIEval-En, 3/5-shot CoT EM",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 50.0,
+        "unit": "%",
+        "as_written": "GPQA, 5-shot CoT EM",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gsm8k",
+        "score": 88.1,
+        "unit": "%",
+        "as_written": "GSM8K, 8-shot CoT EM",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math",
+        "score": 82.0,
+        "unit": "%",
+        "as_written": "MATH, 4-shot EM",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humaneval",
+        "score": 83.84,
+        "unit": "%",
+        "as_written": "HumanEval, sampled pass@1 n=32, EvalPlus sanitized",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mbpp",
+        "score": 85.97,
+        "unit": "%",
+        "as_written": "MBPP-Sanitized, 3-shot pass@1 n=32, EvalPlus sanitized",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-challenge",
+        "score": 97.35,
+        "unit": "%",
+        "as_written": "ARC-Challenge, 25-shot acc_norm",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hellaswag",
+        "score": 90.51,
+        "unit": "%",
+        "as_written": "HellaSwag, 10-shot acc_norm",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "openbookqa",
+        "score": 48.6,
+        "unit": "%",
+        "as_written": "OpenBookQA, 0-shot acc_norm",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "piqa",
+        "score": 83.79,
+        "unit": "%",
+        "as_written": "PIQA, 0-shot acc_norm",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "winogrande",
+        "score": 79.32,
+        "unit": "%",
+        "as_written": "WinoGrande, 5-shot acc",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "race",
+        "score": 92.15,
+        "unit": "%",
+        "as_written": "RACE, 0-shot acc",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "global-mmlu-lite-3",
+        "score": 90.13,
+        "unit": "%",
+        "as_written": "MMLU Global Lite, 5-shot avg",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mgsm",
+        "score": 87.73,
+        "unit": "%",
+        "as_written": "MGSM, 8-shot native CoT avg",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ruler",
+        "score": 92.49,
+        "unit": "%",
+        "as_written": "RULER 128K, 0-shot (64K 95.30, 256K 86.22, 512K 84.54, 1M 76.83)",
+        "section": "capabilities"
       }
     ]
   },
@@ -49153,6 +49820,13 @@
         "unit": "%",
         "as_written": "USAMO 2026, 41/42, generate-verify-refine test-time scaling, human graded (Table 11)",
         "section": "capabilities"
+      },
+      {
+        "benchmark": "speed-bench",
+        "score": 5.152,
+        "unit": "speedup",
+        "as_written": "SPEED-Bench qualitative split, coding category, MTP average acceptance length",
+        "section": "other"
       }
     ]
   },
@@ -55253,6 +55927,340 @@
     ]
   },
   {
+    "id": "google-gemma-4-e2b-technical-report-2026-07-24",
+    "lab": "google",
+    "model": "gemma-4-e2b-it",
+    "date": "2026-07-24",
+    "doc": "technical report",
+    "title": "Gemma 4 Technical Report (arXiv 2607.02770v2)",
+    "url": "https://arxiv.org/pdf/2607.02770v2",
+    "release": "google-gemma-4-e2b-2026-04-02",
+    "notes": "Gemma 4 column from Tables 5, 6, 7 and 9 of the official technical report. Audio values are corpusBLEU for CoVoST and WER for FLEURS.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 60,
+        "unit": "%",
+        "as_written": "MMLU Pro, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 37.5,
+        "unit": "%",
+        "as_written": "AIME 2026 no tools, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 44,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 633,
+        "unit": "elo",
+        "as_written": "Codeforces Elo, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "scicode",
+        "score": 21,
+        "unit": "%",
+        "as_written": "SciCode, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 43.4,
+        "unit": "%",
+        "as_written": "GPQA Diamond, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "big-bench-extra-hard-micro",
+        "score": 21.9,
+        "unit": "%",
+        "as_written": "Big Bench Extra Hard micro avg, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 38,
+        "unit": "%",
+        "as_written": "IFBench, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 94.6,
+        "unit": "%",
+        "as_written": "IFEval, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 67.4,
+        "unit": "%",
+        "as_written": "MMMLU, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mrcr-v2",
+        "score": 19.1,
+        "unit": "%",
+        "as_written": "MRCR v2 8-needle, 128k, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-hard",
+        "score": 3,
+        "unit": "%",
+        "as_written": "Terminal Bench Hard, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 44.2,
+        "unit": "%",
+        "as_written": "MMMU Pro, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 52.4,
+        "unit": "%",
+        "as_written": "MATH-Vision, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 23.5,
+        "unit": "%",
+        "as_written": "MedXPertQA MM, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "infographicvqa",
+        "score": 63.9,
+        "unit": "%",
+        "as_written": "InfographicVQA, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 0.29,
+        "unit": "score",
+        "as_written": "OmniDocBench 1.5, edit distance lower is better (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "covost2",
+        "score": 35.4,
+        "unit": "score",
+        "as_written": "CoVoST average corpusBLEU (Table 7)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 0.09,
+        "unit": "score",
+        "as_written": "FLEURS average WER, lower is better (Table 7)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ruler",
+        "score": 70.4,
+        "unit": "%",
+        "as_written": "RULER accuracy, 128k, without thinking (Table 9)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "loft",
+        "score": 50.5,
+        "unit": "%",
+        "as_written": "LOFT Text Retrieval Recall@k, 128k, without thinking (Table 9)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 4.1,
+        "unit": "%",
+        "as_written": "GraphWalks F1, under 128k, without thinking (Table 9)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "google-gemma-4-e4b-technical-report-2026-07-24",
+    "lab": "google",
+    "model": "gemma-4-e4b-it",
+    "date": "2026-07-24",
+    "doc": "technical report",
+    "title": "Gemma 4 Technical Report (arXiv 2607.02770v2)",
+    "url": "https://arxiv.org/pdf/2607.02770v2",
+    "release": "google-gemma-4-e4b-2026-04-02",
+    "notes": "Gemma 4 column from Tables 5, 6, 7 and 9 of the official technical report. Audio values are corpusBLEU for CoVoST and WER for FLEURS.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 69.4,
+        "unit": "%",
+        "as_written": "MMLU Pro, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 42.5,
+        "unit": "%",
+        "as_written": "AIME 2026 no tools, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 52,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 940,
+        "unit": "elo",
+        "as_written": "Codeforces Elo, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "scicode",
+        "score": 24,
+        "unit": "%",
+        "as_written": "SciCode, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "GPQA Diamond, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "big-bench-extra-hard-micro",
+        "score": 33.1,
+        "unit": "%",
+        "as_written": "Big Bench Extra Hard micro avg, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 44,
+        "unit": "%",
+        "as_written": "IFBench, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 96.7,
+        "unit": "%",
+        "as_written": "IFEval, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 76.6,
+        "unit": "%",
+        "as_written": "MMMLU, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mrcr-v2",
+        "score": 25.4,
+        "unit": "%",
+        "as_written": "MRCR v2 8-needle, 128k, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-hard",
+        "score": 8,
+        "unit": "%",
+        "as_written": "Terminal Bench Hard, thinking (Table 5)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 52.6,
+        "unit": "%",
+        "as_written": "MMMU Pro, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 59.5,
+        "unit": "%",
+        "as_written": "MATH-Vision, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 28.7,
+        "unit": "%",
+        "as_written": "MedXPertQA MM, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "infographicvqa",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "InfographicVQA, max resolution, thinking (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 0.181,
+        "unit": "score",
+        "as_written": "OmniDocBench 1.5, edit distance lower is better (Table 6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "covost2",
+        "score": 38.2,
+        "unit": "score",
+        "as_written": "CoVoST average corpusBLEU (Table 7)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 0.075,
+        "unit": "score",
+        "as_written": "FLEURS average WER, lower is better (Table 7)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "ruler",
+        "score": 86.6,
+        "unit": "%",
+        "as_written": "RULER accuracy, 128k, without thinking (Table 9)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "loft",
+        "score": 58.5,
+        "unit": "%",
+        "as_written": "LOFT Text Retrieval Recall@k, 128k, without thinking (Table 9)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 50.9,
+        "unit": "%",
+        "as_written": "GraphWalks F1, under 128k, without thinking (Table 9)",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "microsoft-mai-cyber-1-flash-model-card-2026-07-27",
     "lab": "microsoft",
     "model": "mai-cyber-1-flash",
@@ -57755,6 +58763,55 @@
         "unit": "%",
         "as_written": "BioMysteryBench, 90.3% solvable and 44.1% difficult",
         "section": "capabilities"
+      },
+      {
+        "benchmark": "spatialbench-latchbio",
+        "score": 77.6,
+        "unit": "%",
+        "as_written": "LatchBio SpatialBench Verified, Mythos 5.1",
+        "section": "other"
+      },
+      {
+        "benchmark": "scbench-latchbio-singlecellbench",
+        "score": 61.9,
+        "unit": "%",
+        "as_written": "LatchBio SingleCellBench, Mythos 5.1",
+        "section": "other"
+      },
+      {
+        "benchmark": "proteingym",
+        "score": 49.3,
+        "unit": "%",
+        "as_written": "ProteinGym Hard, Mythos 5.1",
+        "section": "other"
+      },
+      {
+        "benchmark": "organic-chemistry-v2-anthropic",
+        "score": 69.2,
+        "unit": "%",
+        "as_written": "Organic Chemistry V2, Mythos 5.1",
+        "section": "other"
+      },
+      {
+        "benchmark": "virology-capabilities-test-vct",
+        "score": 58.0,
+        "unit": "%",
+        "as_written": "Multimodal Virology VCT, Mythos 5.1",
+        "section": "other"
+      },
+      {
+        "benchmark": "protein-design-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Protein Design, Sequence Generation 46.0% and Library Ranking 49.3%, no overall, Mythos 5.1 (8.19.4)",
+        "section": "other"
+      },
+      {
+        "benchmark": "protocols-anthropic",
+        "score": null,
+        "unit": "%",
+        "as_written": "Protocols, Troubleshooting 70.2% and Understanding 77.2%, no overall, Mythos 5.1 (8.19.6)",
+        "section": "other"
       }
     ]
   },
@@ -58634,6 +59691,159 @@
         "unit": "%",
         "as_written": "SimpleQA-Verified (Pass@1) vs reasoning effort, chart only (Figure 12)",
         "section": "hallucination"
+      }
+    ]
+  },
+  {
+    "id": "deepseek-v4-1-flash-base-model-card-2026-09-10",
+    "lab": "deepseek",
+    "model": "deepseek-v4-1-flash-base",
+    "date": "2026-09-10",
+    "doc": "model card",
+    "title": "DeepSeek-V4.1-Flash model card, base model table (Hugging Face)",
+    "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash",
+    "release": "deepseek-deepseek-v4-1-flash-2026-09-10",
+    "notes": "Base model table, DeepSeek-V4.1-Flash-Base column.",
+    "results": [
+      {
+        "benchmark": "agieval",
+        "score": 83.4,
+        "unit": "%",
+        "as_written": "AGIEval, EM, 3-5-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 74.1,
+        "unit": "%",
+        "as_written": "MMLU-Pro, EM, 5-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 92.1,
+        "unit": "%",
+        "as_written": "C-Eval, EM, 5-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "multiloko",
+        "score": 45.5,
+        "unit": "%",
+        "as_written": "MultiLoKo, LLM judge, 5-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "simpleqa-verified",
+        "score": 42.3,
+        "unit": "%",
+        "as_written": "SimpleQA-Verified, EM, 25-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 53.1,
+        "unit": "%",
+        "as_written": "SuperGPQA, EM, 5-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "big-bench-hard",
+        "score": 86.1,
+        "unit": "%",
+        "as_written": "BBH, EM, 3-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "big-bench-extra-hard-micro",
+        "score": 27.2,
+        "unit": "%",
+        "as_written": "BBEH, EM, 1-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "drop",
+        "score": 87.9,
+        "unit": "%",
+        "as_written": "DROP, F1, 1-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hellaswag",
+        "score": 87.2,
+        "unit": "%",
+        "as_written": "HellaSwag, EM, 0-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "bigcodebench",
+        "score": 60.6,
+        "unit": "%",
+        "as_written": "BigCodeBench, pass@1, 3-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humaneval",
+        "score": 79.4,
+        "unit": "%",
+        "as_written": "HumanEval, pass@1, 0-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gsm8k",
+        "score": 93.0,
+        "unit": "%",
+        "as_written": "GSM8K, EM, 8-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math",
+        "score": 61.1,
+        "unit": "%",
+        "as_written": "MATH, EM, 4-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mgsm",
+        "score": 80.2,
+        "unit": "%",
+        "as_written": "MGSM, EM, 8-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 45.2,
+        "unit": "%",
+        "as_written": "LongBench-V2, EM, 1-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 56.5,
+        "unit": "%",
+        "as_written": "MMMU-Pro, EM, 4-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cvbench",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "CVBench, EM, 4-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "docvqa",
+        "score": 95.6,
+        "unit": "%",
+        "as_written": "DocVQA, LLM judge, 4-shot",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 86.0,
+        "unit": "%",
+        "as_written": "RefCOCO-avg, Acc@0.5, 0-shot",
+        "section": "capabilities"
       }
     ]
   },
@@ -60594,6 +61804,151 @@
     ]
   },
   {
+    "id": "google-gemini-3-8-flash-lite-tts-model-card-2026-09-23",
+    "lab": "google",
+    "model": "gemini-3-8-flash-lite-tts",
+    "date": "2026-09-23",
+    "doc": "model card",
+    "title": "Gemini 3.8 Flash TTS and Flash-Lite TTS, speech generation model page (Google DeepMind)",
+    "url": "https://deepmind.google/models/gemini-audio/speech-generation/",
+    "release": "google-gemini-3-8-flash-tts-2026-09-23",
+    "notes": "Evaluation tables on the model page. Methodology: https://deepmind.google/models/evals-methodology/gemini-3-8-tts.",
+    "results": [
+      {
+        "benchmark": "hume-ai-overall-quality-index",
+        "score": 0.914,
+        "unit": "index",
+        "as_written": "Hume AI Text-to-Speech Quality Benchmark, Overall Reliability x Expressiveness, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-us-english",
+        "score": 1087,
+        "unit": "elo",
+        "as_written": "Voice Arena us english, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-japanese",
+        "score": 1152,
+        "unit": "elo",
+        "as_written": "Voice Arena japanese, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-brazilian-portuguese",
+        "score": 1134,
+        "unit": "elo",
+        "as_written": "Voice Arena brazilian portuguese, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-vietnamese",
+        "score": 1156,
+        "unit": "elo",
+        "as_written": "Voice Arena vietnamese, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-arabic-msa",
+        "score": 1181,
+        "unit": "elo",
+        "as_written": "Voice Arena arabic msa, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-hindi",
+        "score": 1076,
+        "unit": "elo",
+        "as_written": "Voice Arena hindi, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-mexican-spanish",
+        "score": 1146,
+        "unit": "elo",
+        "as_written": "Voice Arena mexican spanish, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-3-8-flash-tts-model-card-2026-09-23",
+    "lab": "google",
+    "model": "gemini-3-8-flash-tts",
+    "date": "2026-09-23",
+    "doc": "model card",
+    "title": "Gemini 3.8 Flash TTS and Flash-Lite TTS, speech generation model page (Google DeepMind)",
+    "url": "https://deepmind.google/models/gemini-audio/speech-generation/",
+    "release": "google-gemini-3-8-flash-tts-2026-09-23",
+    "notes": "Evaluation tables on the model page. Methodology: https://deepmind.google/models/evals-methodology/gemini-3-8-tts.",
+    "results": [
+      {
+        "benchmark": "hume-ai-overall-quality-index",
+        "score": 0.92,
+        "unit": "index",
+        "as_written": "Hume AI Text-to-Speech Quality Benchmark, Overall Reliability x Expressiveness, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hume-ai-voice-design-benchmark",
+        "score": 71.4,
+        "unit": "score",
+        "as_written": "Hume AI Voice Design Benchmark, Overall English, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-us-english",
+        "score": 1061,
+        "unit": "elo",
+        "as_written": "Voice Arena us english, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-japanese",
+        "score": 1232,
+        "unit": "elo",
+        "as_written": "Voice Arena japanese, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-brazilian-portuguese",
+        "score": 1104,
+        "unit": "elo",
+        "as_written": "Voice Arena brazilian portuguese, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-vietnamese",
+        "score": 1135,
+        "unit": "elo",
+        "as_written": "Voice Arena vietnamese, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-arabic-msa",
+        "score": 1204,
+        "unit": "elo",
+        "as_written": "Voice Arena arabic msa, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-hindi",
+        "score": 1106,
+        "unit": "elo",
+        "as_written": "Voice Arena hindi, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "voicearena-mexican-spanish",
+        "score": 1152,
+        "unit": "elo",
+        "as_written": "Voice Arena mexican spanish, Elo, Gemini speech generation model page",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "anthropic-claude-sonnet-5-5-system-card-2026-09-28",
     "lab": "anthropic",
     "model": "claude-sonnet-5-5",
@@ -61456,6 +62811,235 @@
         "unit": "%",
         "as_written": "Cybersecurity Safety Evaluation, production chat and agentic environment rows, no overall score (Table 12)",
         "section": "safety"
+      }
+    ]
+  },
+  {
+    "id": "reflection-beam-1-0-base-technical-report-2026-10-05",
+    "lab": "reflection",
+    "model": "beam-1-0-base",
+    "date": "2026-10-05",
+    "doc": "technical report",
+    "title": "Beam Model Technical Report, base model evaluations",
+    "url": "https://reflection.ai/documents/beam-model-tech-report",
+    "release": "reflection-beam-1-0-2026-10-05",
+    "notes": "Table 23 base model results, Beam Base column, from the lab's own evaluation.",
+    "results": [
+      {
+        "benchmark": "hellaswag",
+        "score": 90.3,
+        "unit": "%",
+        "as_written": "HellaSwag, 10-shot likelihood, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "winogrande",
+        "score": 86.7,
+        "unit": "%",
+        "as_written": "WinoGrande, 5-shot likelihood, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "big-bench-hard",
+        "score": 90.4,
+        "unit": "%",
+        "as_written": "BBH, 3-shot CoT greedy, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 72.6,
+        "unit": "%",
+        "as_written": "MMLU-Pro, 5-shot CoT greedy, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "triviaqa",
+        "score": 86.6,
+        "unit": "%",
+        "as_written": "TriviaQA, 5-shot greedy, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 72.4,
+        "unit": "%",
+        "as_written": "GPQA Diamond, 0-shot temperature 0.7, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math",
+        "score": 94.9,
+        "unit": "%",
+        "as_written": "MATH, 0-shot greedy, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 63.7,
+        "unit": "%",
+        "as_written": "AIME 2026, 0-shot temperature 0.7, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humaneval",
+        "score": 87.3,
+        "unit": "%",
+        "as_written": "HumanEval+, 0-shot temperature 0.7, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mbpp",
+        "score": 87.8,
+        "unit": "%",
+        "as_written": "MBPP+, 3-shot greedy, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 63.4,
+        "unit": "%",
+        "as_written": "LCB v6, 0-shot greedy, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 49.2,
+        "unit": "%",
+        "as_written": "SWE-bench Verified, agentic, raw bash harness, temperature 0.7, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-multilingual",
+        "score": 32.1,
+        "unit": "%",
+        "as_written": "SWE-bench Multilingual, agentic, temperature 0.7, Table 23",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-pro",
+        "score": 28.4,
+        "unit": "%",
+        "as_written": "SWE-Bench Pro, agentic, temperature 0.7, Table 23",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "reflection-beam-1-0-technical-report-2026-10-05",
+    "lab": "reflection",
+    "model": "beam-1-0",
+    "date": "2026-10-05",
+    "doc": "technical report",
+    "title": "Beam Model Technical Report",
+    "url": "https://reflection.ai/documents/beam-model-tech-report",
+    "release": "reflection-beam-1-0-2026-10-05",
+    "notes": "Safety, biology, chemistry, cyber and prompt injection results, plus the general-capability table. Base model results are in the Beam 1.0 Base record.",
+    "results": [
+      {
+        "benchmark": "iris-safety-evaluations-reflection",
+        "score": 88.9,
+        "unit": "%",
+        "as_written": "Iris Safety Evaluations, harmful request refusal or pivot rate, Beam BF16",
+        "section": "safety"
+      },
+      {
+        "benchmark": "molecular-biology-capabilities-test-securebio",
+        "score": 48.5,
+        "unit": "%",
+        "as_written": "MBCT exact-match accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "human-pathogen-capabilities-test-securebio",
+        "score": 61.0,
+        "unit": "%",
+        "as_written": "HPCT accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "world-class-bio-securebio",
+        "score": 37.9,
+        "unit": "%",
+        "as_written": "World-Class Biology accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "virology-capabilities-test-vct",
+        "score": 52.0,
+        "unit": "%",
+        "as_written": "SecureBio VCT V2 exact-match accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "biotier-securebio-refuse",
+        "score": 64.6,
+        "unit": "%",
+        "as_written": "BioTIER refuse split accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "biotier-securebio-permit",
+        "score": 97.2,
+        "unit": "%",
+        "as_written": "BioTIER permit split accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "wmdp-chemistry",
+        "score": 62.4,
+        "unit": "%",
+        "as_written": "WMDP-Chem accuracy",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "cyscenariobench",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Irregular CTF suite, CyScenarioBench group, 0 of 10 solved",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "mirrordojo-reflection",
+        "score": 3.1,
+        "unit": "%",
+        "as_written": "MirrorDojo attack success rate, no defense prompt (utility 87.6 clean, 86.9 attacked), Table 35",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "simpleqa-verified",
+        "score": 41.8,
+        "unit": "%",
+        "as_written": "SimpleQA Verified, Table 22 general-capability results",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "abc-bench-fragment-design",
+        "score": 82.1,
+        "unit": "%",
+        "as_written": "ABC-Bench Fragment Design, 23 of 28 completed attempts passed, Pass@1",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "atomic-challenges-irregular",
+        "score": 57.5,
+        "unit": "%",
+        "as_written": "Irregular CTF suite, Atomic Challenges group, 23 of 40 solved (23 of 50 overall)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "mirrordyn-reflection",
+        "score": 3.6,
+        "unit": "%",
+        "as_written": "MirrorDyn attack success rate, no defense prompt (utility 83.3 clean, 82.7 attacked), Table 35",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "gray-swan-reward-hacking-bench",
+        "score": null,
+        "unit": "%",
+        "as_written": "Per scenario: insecure fix adopted 6 of 44, third-party harm 1 of 5, 3 of 5 and 3 of 5, exfiltration 0 of 5 and 0 of 5, scope escape 0 of 5 when solvable in scope and 4 of 5 when not",
+        "section": "alignment"
       }
     ]
   },
@@ -63735,6 +65319,180 @@
     ]
   },
   {
+    "id": "nvidia-nemotron-3-5-lightning-30b-a3b-base-technical-report-2026-10-15",
+    "lab": "nvidia",
+    "model": "nemotron-3-5-lightning-30b-a3b-base",
+    "date": "2026-10-15",
+    "doc": "technical report",
+    "title": "Nemotron 3.5 Super and Lightning technical report, base model evaluations",
+    "url": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Super-and-Lightning-Technical-Report.pdf",
+    "release": "nvidia-nemotron-3-5-lightning-30b-a3b-2026-08-11",
+    "notes": "Table 6 base model results.",
+    "results": [
+      {
+        "benchmark": "mmlu",
+        "score": 78.63,
+        "unit": "%",
+        "as_written": "MMLU, exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 67.5,
+        "unit": "%",
+        "as_written": "MMLU-Pro, exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "agieval",
+        "score": 68.62,
+        "unit": "%",
+        "as_written": "AGIEval-En, CoT exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 33.21,
+        "unit": "%",
+        "as_written": "SuperGPQA, CoT, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 33.33,
+        "unit": "%",
+        "as_written": "GPQA Diamond, 5-shot CoT exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gsm8k",
+        "score": 91.74,
+        "unit": "%",
+        "as_written": "GSM8K, 8-shot CoT exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math",
+        "score": 83.1,
+        "unit": "%",
+        "as_written": "Minerva MATH, exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math-500",
+        "score": 79.53,
+        "unit": "%",
+        "as_written": "MATH-500, 4-shot sampled pass@1, n=32, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humaneval",
+        "score": 76.91,
+        "unit": "%",
+        "as_written": "HumanEval, sampled pass@1, n=32, EvalPlus sanitized, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mbpp",
+        "score": 76.98,
+        "unit": "%",
+        "as_written": "MBPP-Sanitized, 3-shot sampled pass@1, n=32, EvalPlus sanitized, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "livecodebench",
+        "score": 29.77,
+        "unit": "%",
+        "as_written": "LiveCodeBench CodeGen, pass@1, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "bigcodebench",
+        "score": 50.09,
+        "unit": "%",
+        "as_written": "BigCodeBench Complete, greedy, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "commonsenseqa",
+        "score": 81.08,
+        "unit": "%",
+        "as_written": "CommonsenseQA, 7-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-challenge",
+        "score": 93.17,
+        "unit": "%",
+        "as_written": "ARC-Challenge, 25-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hellaswag",
+        "score": 85.25,
+        "unit": "%",
+        "as_written": "HellaSwag, 10-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "openbookqa",
+        "score": 47.8,
+        "unit": "%",
+        "as_written": "OpenBookQA, 0-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "piqa",
+        "score": 85.09,
+        "unit": "%",
+        "as_written": "PIQA, 0-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "truthfulqa",
+        "score": 55.53,
+        "unit": "%",
+        "as_written": "TruthfulQA MC2, 0-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "winogrande",
+        "score": 78.06,
+        "unit": "%",
+        "as_written": "WinoGrande, 5-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "siqa",
+        "score": 47.8,
+        "unit": "%",
+        "as_written": "SocialIQA, 0-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "race",
+        "score": 87.85,
+        "unit": "%",
+        "as_written": "RACE, 0-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "global-mmlu",
+        "score": 75.09,
+        "unit": "%",
+        "as_written": "Global MMLU, average across 8 languages, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mgsm",
+        "score": 82.27,
+        "unit": "%",
+        "as_written": "MGSM, 8-shot native CoT, average across 6 languages, Table 6",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
     "id": "nvidia-nemotron-3-5-lightning-30b-a3b-technical-report-2026-10-15",
     "lab": "nvidia",
     "model": "nemotron-3-5-lightning-30b-a3b",
@@ -63863,6 +65621,180 @@
         "score": 12.06,
         "unit": "score",
         "as_written": "LM Arena Proxy, BF16 acc. (Table 22), the row Table 23 calls NV Chat Benchmark",
+        "section": "capabilities"
+      }
+    ]
+  },
+  {
+    "id": "nvidia-nemotron-3-5-super-120b-a12b-base-technical-report-2026-10-15",
+    "lab": "nvidia",
+    "model": "nemotron-3-5-super-120b-a12b-base",
+    "date": "2026-10-15",
+    "doc": "technical report",
+    "title": "Nemotron 3.5 Super and Lightning technical report, base model evaluations",
+    "url": "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Super-and-Lightning-Technical-Report.pdf",
+    "release": "nvidia-nemotron-3-5-super-vl-2026-10-15",
+    "notes": "Table 6 base model results.",
+    "results": [
+      {
+        "benchmark": "mmlu",
+        "score": 84.14,
+        "unit": "%",
+        "as_written": "MMLU, exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 76.25,
+        "unit": "%",
+        "as_written": "MMLU-Pro, exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "agieval",
+        "score": 75.65,
+        "unit": "%",
+        "as_written": "AGIEval-En, CoT exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 47.65,
+        "unit": "%",
+        "as_written": "SuperGPQA, CoT, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 66.16,
+        "unit": "%",
+        "as_written": "GPQA Diamond, 5-shot CoT exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gsm8k",
+        "score": 91.74,
+        "unit": "%",
+        "as_written": "GSM8K, 8-shot CoT exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math",
+        "score": 87.66,
+        "unit": "%",
+        "as_written": "Minerva MATH, exact match, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math-500",
+        "score": 81.56,
+        "unit": "%",
+        "as_written": "MATH-500, 4-shot sampled pass@1, n=32, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humaneval",
+        "score": 81.31,
+        "unit": "%",
+        "as_written": "HumanEval, sampled pass@1, n=32, EvalPlus sanitized, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mbpp",
+        "score": 79.06,
+        "unit": "%",
+        "as_written": "MBPP-Sanitized, 3-shot sampled pass@1, n=32, EvalPlus sanitized, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "livecodebench",
+        "score": 47.61,
+        "unit": "%",
+        "as_written": "LiveCodeBench CodeGen, pass@1, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "bigcodebench",
+        "score": 48.42,
+        "unit": "%",
+        "as_written": "BigCodeBench Complete, greedy, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "commonsenseqa",
+        "score": 85.26,
+        "unit": "%",
+        "as_written": "CommonsenseQA, 7-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-challenge",
+        "score": 95.99,
+        "unit": "%",
+        "as_written": "ARC-Challenge, 25-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hellaswag",
+        "score": 88.96,
+        "unit": "%",
+        "as_written": "HellaSwag, 10-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "openbookqa",
+        "score": 48.8,
+        "unit": "%",
+        "as_written": "OpenBookQA, 0-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "piqa",
+        "score": 85.09,
+        "unit": "%",
+        "as_written": "PIQA, 0-shot acc_norm, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "truthfulqa",
+        "score": 71.18,
+        "unit": "%",
+        "as_written": "TruthfulQA MC2, 0-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "winogrande",
+        "score": 79.08,
+        "unit": "%",
+        "as_written": "WinoGrande, 5-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "siqa",
+        "score": 49.03,
+        "unit": "%",
+        "as_written": "SocialIQA, 0-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "race",
+        "score": 91.39,
+        "unit": "%",
+        "as_written": "RACE, 0-shot acc, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "global-mmlu",
+        "score": 86.56,
+        "unit": "%",
+        "as_written": "Global MMLU, average across 8 languages, Table 6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mgsm",
+        "score": 87.53,
+        "unit": "%",
+        "as_written": "MGSM, 8-shot native CoT, average across 6 languages, Table 6",
         "section": "capabilities"
       }
     ]
@@ -64108,6 +66040,146 @@
         "score": 1420,
         "unit": "elo",
         "as_written": "Text Arena, Overall, With Style Control, 1420 +/- 12, 2,328 votes, preliminary NVFP4 (Table 11)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 57.5,
+        "unit": "%",
+        "as_written": "ERQA, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "omni3d",
+        "score": 53.4,
+        "unit": "%",
+        "as_written": "Omni3D, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "omnispatial",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "OmniSpatial, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "spbench",
+        "score": 63.8,
+        "unit": "%",
+        "as_written": "SPBench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mindcube",
+        "score": 62.2,
+        "unit": "%",
+        "as_written": "MindCube, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmsi-bench",
+        "score": 43.1,
+        "unit": "%",
+        "as_written": "MMSI, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "spar-bench",
+        "score": 64.2,
+        "unit": "%",
+        "as_written": "SPAR-Bench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "blink",
+        "score": 71.3,
+        "unit": "%",
+        "as_written": "BLINK, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "spatialtree",
+        "score": 58.1,
+        "unit": "%",
+        "as_written": "SpatialTree, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "viewspatial-bench",
+        "score": 52.0,
+        "unit": "%",
+        "as_written": "ViewSpatial, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "osi-bench",
+        "score": 30.6,
+        "unit": "%",
+        "as_written": "OSI-Bench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "pai-bench",
+        "score": 63.8,
+        "unit": "%",
+        "as_written": "PAI-Bench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vsi-bench",
+        "score": 48.1,
+        "unit": "%",
+        "as_written": "VSI-Bench-U, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "dsi-bench",
+        "score": 61.4,
+        "unit": "%",
+        "as_written": "DSI-Bench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cvbench",
+        "score": 69.6,
+        "unit": "%",
+        "as_written": "CV-Bench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "perceptioncomp",
+        "score": 39.4,
+        "unit": "%",
+        "as_written": "PercepComp, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 74.4,
+        "unit": "%",
+        "as_written": "Video-MME, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "speed-bench",
+        "score": 4.718,
+        "unit": "score",
+        "as_written": "SPEED-Bench qualitative split, average acceptance length, greedy, after MTP boosting",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vsti-bench",
+        "score": 67.3,
+        "unit": "%",
+        "as_written": "VSTI-Bench, SpatialClaw harness, with agentic vision training, Table 7",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmsi-video-bench",
+        "score": 34.5,
+        "unit": "%",
+        "as_written": "MMSI-Video, SpatialClaw harness, with agentic vision training, Table 7",
         "section": "capabilities"
       }
     ]
@@ -65616,6 +67688,180 @@
     ]
   },
   {
+    "id": "openai-gpt-rosalind-6-system-card-2026-10-30",
+    "doc": "system card",
+    "title": "GPT-Rosalind-6 System Card (OpenAI Deployment Safety Hub)",
+    "url": "https://deploymentsafety.openai.com/gpt-rosalind-6/cybersecurity",
+    "release": null,
+    "notes": "OpenAI Deployment Safety Hub page published October 30, 2026. Scores use the displayed benchmark chart or table values.",
+    "results": [
+      {
+        "benchmark": "medchembench-openai",
+        "score": 49.6,
+        "unit": "%",
+        "as_written": "MedChemBench v7, highest reasoning budget, mean rubric score",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "genebench-pro",
+        "score": 37.7,
+        "unit": "%",
+        "as_written": "GeneBench Pro v13, highest reasoning budget, single-attempt success",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "lifescibench",
+        "score": 61.3,
+        "unit": "%",
+        "as_written": "LifeSciBench Gold, highest reasoning budget, average score",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "protocolqa-open-ended-openai",
+        "score": 42.0,
+        "unit": "%",
+        "as_written": "ProtocolQA Open-Ended, pass@1, refusal-adjusted",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "troubleshootingbench-openai",
+        "score": 59.0,
+        "unit": "%",
+        "as_written": "TroubleshootingBench, pass@1, refusal-adjusted, 491/832",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "tacit-knowledge-troubleshooting-openai",
+        "score": 78.3,
+        "unit": "%",
+        "as_written": "Tacit Knowledge and Troubleshooting, cons@32 (refusal-adjusted 85.0%), Table 4 Biorisk knowledge",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "multimodal-troubleshooting-virology-openai",
+        "score": 63.1,
+        "unit": "%",
+        "as_written": "SecureBio multimodal virology troubleshooting, refusal-adjusted pass@1",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "aav-capsid-packaging-prediction-openai",
+        "score": 0.529,
+        "unit": "score",
+        "as_written": "AAV Capsid Packaging Prediction, Spearman correlation",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "shp2-protein-function-prediction-openai",
+        "score": 0.38,
+        "unit": "score",
+        "as_written": "SHP2 Protein Function Prediction, mean R²",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "coronavirus-ace2-cell-entry-screen-openai",
+        "score": 0.42,
+        "unit": "score",
+        "as_written": "Coronavirus-ACE2 Cell-Entry Screen, composite score",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "phage-plasmid-coevolution-openai",
+        "score": 13.41,
+        "unit": "score",
+        "as_written": "Phage-plasmid Co-evolution, negative log-likelihood",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "exploitgym-honeypot-openai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "ExploitGym Honeypot, successfully exploiting evaluation infrastructure",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "oai-repo-sabotage-v2-openai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "OAI-repo Sabotage v2, 0% unguided and 0% guided successful sabotage attempts",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "math-side-tasking-monitor-evasion-openai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Math Side-tasking Monitor Evasion, full-context monitor bypass rate",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "cot-control",
+        "score": 71.8,
+        "unit": "%",
+        "as_written": "CoT-Control, GPQA 71.8%, HLE 59.3%, MMLU 83.1%",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "blocker-deception-openai",
+        "score": 9.5,
+        "unit": "%",
+        "as_written": "Blocker Deception, blocker-related deception rate",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "broken-search-tool-openai",
+        "score": 1.3,
+        "unit": "%",
+        "as_written": "Broken Search Tool, failure to acknowledge unavailable search",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "respecting-warnings-openai",
+        "score": 21.7,
+        "unit": "%",
+        "as_written": "Respecting Warnings, successful circumvention after warning",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "respecting-auto-review-openai",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Respecting Auto-Review, attempted circumvention rate",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "external-agent-messages-openai",
+        "score": 2.5,
+        "unit": "%",
+        "as_written": "Unintended Engagement with External Agent Messages, performed specified misaligned action",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "realistic-work-environments-misalignment-openai",
+        "score": 1.4,
+        "unit": "%",
+        "as_written": "Cowork Misalignment, overall misaligned outcomes",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "historical-jailbreak-regression-openai",
+        "score": 14.3,
+        "unit": "%",
+        "as_written": "Historical Jailbreak Regression, task success rate under jailbreak attacks",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "agent-replay-auto-review-openai",
+        "score": 27.1,
+        "unit": "%",
+        "as_written": "Agent Replay Auto-Review, harmful or unauthorized actions rated at threshold or higher",
+        "section": "alignment"
+      }
+    ],
+    "lab": "openai",
+    "model": "gpt-rosalind-6",
+    "date": "2026-10-30"
+  },
+  {
     "id": "openai-gpt-6-cyber-system-card-2026-11-05",
     "lab": "openai",
     "model": "gpt-6-cyber",
@@ -65729,6 +67975,13 @@
         "score": 47.2,
         "unit": "%",
         "as_written": "ProtocolQA Open-Ended, standard scoring",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "biology-refusal-evals-openai",
+        "score": 99.87,
+        "unit": "%",
+        "as_written": "Biology refusal evaluations, severe-risk requests, safe responses 99.87% (dual-use 98.27%, benign no unnecessary refusal 97.22%)",
         "section": "bio-chem"
       }
     ]
@@ -66101,6 +68354,34 @@
         "unit": "%",
         "as_written": "MILU, average accuracy across 11 languages, max effort, five trials, no tools or custom system prompt. Blocked or unanswered questions excluded, under 0.2% (Section 8.17.2)",
         "section": "capabilities"
+      },
+      {
+        "benchmark": "cyscenariobench",
+        "score": 76.3,
+        "unit": "%",
+        "as_written": "CyScenarioBench, Claude Mythos 5.2 completed 76.3% of all challenges (pre-release snapshot)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "opportunistic-sandbox-escape-anthropic",
+        "score": 3.1,
+        "unit": "%",
+        "as_written": "Dedicated sandbox escape evaluation, Claude Mythos 5.2 used credentials or files outside its sandbox in 3.1% of scenarios (6.5.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "de-novo-protein-binder-design-anthropic",
+        "score": 85.1,
+        "unit": "%",
+        "as_written": "De Novo Binder Design, no safeguards, Claude Mythos 5.2, Table 8.1.A",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cve-rediscovery-anthropic",
+        "score": 89.6,
+        "unit": "%",
+        "as_written": "CVE Rediscovery, max effort, cyber and bio safeguards off, Claude Mythos 5.2 (8.19, Table 8.1.A)",
+        "section": "cyber"
       }
     ]
   },

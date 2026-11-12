@@ -1,6 +1,146 @@
 {
   "added": [
     {
+      "id": "vsti-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "speed-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "speech-agent-arena",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "spbench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "spatialtree",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "spar-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "real-world-audio-recording-openai",
+      "date": "2026-11-12",
+      "via": "OpenAI GPT-Live-Transcribe announcement."
+    },
+    {
+      "id": "perceptioncomp",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "osi-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "omni3d",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "mmsi-video-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "misbehavior-thinking-machines",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "mirrordyn-reflection",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "mirrordojo-reflection",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "iris-safety-evaluations-reflection",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "hume-ai-voice-design-benchmark",
+      "date": "2026-11-12",
+      "via": "Google DeepMind names Hume AI Voice Design Benchmark in its Gemini 3.8 TTS page."
+    },
+    {
+      "id": "hume-ai-overall-quality-index",
+      "date": "2026-11-12",
+      "via": "Google DeepMind cites Hume AI in its Gemini 3.8 TTS quality table."
+    },
+    {
+      "id": "historical-jailbreak-regression-openai",
+      "date": "2026-11-12",
+      "via": "The GPT-Rosalind-6 system card addendum reports this named evaluation."
+    },
+    {
+      "id": "gray-swan-reward-hacking-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "dsi-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "diligencebench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "destructive-actions-thinking-machines",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "cve-rediscovery-anthropic",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "covert-misbehavior-thinking-machines",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "context-aware-asr-openai",
+      "date": "2026-11-12",
+      "via": "OpenAI GPT-Live-Transcribe announcement."
+    },
+    {
+      "id": "company-agent-bench",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "code2video-aa",
+      "date": "2026-11-12",
+      "via": ""
+    },
+    {
+      "id": "agent-replay-auto-review-openai",
+      "date": "2026-11-12",
+      "via": "The GPT-Rosalind-6 system card addendum reports this named evaluation."
+    },
+    {
       "id": "youcook2-retrieval",
       "date": "2026-11-10",
       "via": "Gemini Embedding 2 performance table"
@@ -13672,6 +13812,672 @@
       "url": "https://thezvi.wordpress.com/",
       "reason": "Informal labels or one-off anecdotes in Zvi's roundups, not maintained benchmarks. SpireBench maps to Epoch SpireClimb.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "100Q-Hard (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): 100q-hard-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "AAV capsid modeling (internal)",
+      "url": null,
+      "reason": "The official system card reports no readable aggregate score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Agentic misalignment evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): agentic-misalignment-suite-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Anthropic sycophancy eval",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): sycophancy-eval-answer, xai-sycophancy-eval.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Apollo Research covert action evaluations",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Apollo Research evaluation-awareness assessment",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Apollo Research sandbagging assessments",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): apollo-research-strategic-deception-evaluations, internal-research-debugging-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Auto-Review, warnings, blocker-deception, workplace and simulated-deployment evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): respecting-auto-review-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated behavioral audit, chain-of-thought controllability, external red teaming",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): anthropic-automated-behavioral-audit.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated behavioral audit, reward hacking, sandbagging, self-preference, decision theory",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): impossible-tasks-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated behavioral audit, sandbagging on dangerous-capability evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): anthropic-automated-behavioral-audit.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated behavioral audit, sandbagging, self-preference, junk science",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): anthropic-automated-behavioral-audit.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated behavioral audit, sandbox escape, self-preference, hallucination, CoT controllability",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): anthropic-automated-behavioral-audit.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated behavioral audit, self-preference, sandbagging, CoT controllability, monitorability",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): anthropic-automated-behavioral-audit.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Automated red-teamer jailbreak evaluation",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): anthropic-automated-behavioral-audit.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Biochemistry knowledge, protein binding and DNA design preparedness evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): biochemistry-knowledge-improvement-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Biology refusal evaluations",
+      "url": null,
+      "reason": "Already recorded for this release under benchmark id biology-refusal-evals-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "CBRN uplift trials & virology tasks",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): asl-4-virology-uplift-trial-anthropic, creative-biology-uplift-trial-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Child safety, suicide/self-harm, eating-disorder evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): child-safety-evaluations-anthropic, suicide-and-self-harm-evaluations-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Code2Video-AA",
+      "url": null,
+      "reason": "The official source does not report a readable lab-owned score for this Artificial Analysis comparison.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Computer-use safety (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): internal-computer-use-safety-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "CoT monitor evasion evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): math-side-tasking-monitor-evasion-openai, honeypot-exploitation-monitorability-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Creative Biology (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): creative-biology-anthropic, creative-biology-uplift-trial-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "CVE Rediscovery (internal)",
+      "url": null,
+      "reason": "The official system card reports separate vulnerability-finding results, not one CVE Rediscovery score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Cyber evaluation suite (web/crypto/pwn/rev/network)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): cybench, crypto-ctf-anthropic, web-ctf-anthropic, pwn-ctf-anthropic, rev-ctf-anthropic, network-ctf-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "CyberSecEval",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Cybersecurity Safety Evaluation",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): openai-cyber-safety-evaluations-incl-daybreak-blue.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "DECK-Arena (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): deck-arena-moonshot.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Design Bench (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): design-bench-moonshot.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Destructive actions, user confirmations, fairness, metagaming, CoT monitorability",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): destructive-action-avoidance-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Diarization error rate comparison (internal)",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "DNA Synthesis Screening Evasion (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): dna-synthesis-screening-evasion-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Dynamic mental health benchmarks",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): openai-dynamic-mental-health-benchmarks.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "External Agent Red Teaming (ART) benchmark",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): gray-swan-art-benchmark.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "First-person fairness",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): first-person-fairness-evaluation.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Forecasting Misaligned Behavior (Codex deployment simulation)",
+      "url": null,
+      "reason": "Already recorded for this release under benchmark id openai-deployment-simulation.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "FrontierCode v1.1",
+      "url": null,
+      "reason": "The supplied launch page did not load a readable FrontierCode score, and the system card does not report this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.5 Live Translate scores",
+      "url": null,
+      "reason": "The official model documentation describes the API but gives no readable benchmark score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.5 Transcribe Live additional scores",
+      "url": null,
+      "reason": "The official launch post and evaluation PDF were already recorded by the existing launch and technical checks. No additional readable score was found for this input line.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.8 Flash TTS evaluation PDF numeric rows",
+      "url": null,
+      "reason": "The official evaluation PDF contains benchmark charts without printed numeric values. The printed values come from the official speech-generation page and are recorded in the launch records.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.8 Live Artificial Analysis speech-to-speech evaluation score",
+      "url": null,
+      "reason": "The official evaluation PDF contains an Artificial Analysis chart without printed numeric values.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.8 Live EVA-Bench numeric score",
+      "url": null,
+      "reason": "The official evaluation PDF shows EVA-Bench as a chart without printed numeric values.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.8 Live τ-bench score",
+      "url": null,
+      "reason": "The official evaluation PDF contains no printed τ-bench value.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini 3.8 Live τ³-bench Banking new PDF score",
+      "url": null,
+      "reason": "The existing release already records tau3-banking. The new official PDF has no printed numeric value to add.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini Omni 1.1 Flash MovieGenBench and VBench scores",
+      "url": null,
+      "reason": "The official launch post and model card print no numeric MovieGenBench or VBench score. The existing launch and model card records already cover this check.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini Omni 1.2 Flash scores",
+      "url": null,
+      "reason": "The official launch post reports capabilities and pricing but no readable benchmark score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gemini Omni May 2026 scores",
+      "url": null,
+      "reason": "The official launch post describes product capabilities but gives no readable benchmark score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Generalized instrument reading (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): instrument-reading-google.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "GLM-4.6V-Flash",
+      "url": null,
+      "reason": "The official Hugging Face card links a benchmark image for the GLM-4.6V family, but it does not print a separate readable GLM-4.6V-Flash score column. The existing GLM-4.6V record is for the 106B model.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "GPT-Live-1 mini separate benchmark scores",
+      "url": null,
+      "reason": "The archived OpenAI launch post names GPT-Live-1 mini but gives no separate numeric benchmark result for it.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "GPT-Realtime-1.5 rows from the GPT-Realtime-2 post",
+      "url": null,
+      "reason": "The scores are the comparison column of the May 2026 GPT-Realtime-2 launch post, not GPT-Realtime-1.5's own February launch materials, so they do not make a launch record for it.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "GPT-Realtime-2.1 and GPT-Realtime-2.1 Mini scores",
+      "url": null,
+      "reason": "The official model pages describe the models but print no readable benchmark score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "GPT-Realtime-Translate and GPT-Realtime-Whisper additional scores",
+      "url": null,
+      "reason": "The official launch page and model documentation describe both models but print no separate numeric benchmark score. GPT-Realtime-2 already has the two launch chart scores.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Gray Swan prompt-injection benchmark",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): gray-swan-ipi-arena-benchmark.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Grok TTS benchmark scores",
+      "url": null,
+      "reason": "The official Grok Speech to Text and Text to Speech post gives transcription scores but no TTS benchmark score. The TTS documentation gives features and pricing only.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Grok Voice Think Fast 1.0 additional scores",
+      "url": null,
+      "reason": "The official launch page gives a numeric overall τ-voice result already recorded. Its other chart tabs have no additional readable numeric values in the page text.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Hallucination rate (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): internal-factuality-evals-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Hermes Bench 63.44",
+      "url": null,
+      "reason": "Not found in the model card or the technical report.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Human SxS video editing preference (internal)",
+      "url": null,
+      "reason": "The official launch post reports no readable benchmark score for this internal comparison.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Human SxS video generation preference (internal)",
+      "url": null,
+      "reason": "The official launch post reports no readable benchmark score for this internal comparison.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "IndicGenBench FLORES 47.47",
+      "url": null,
+      "reason": "Measured on an intermediate midtraining checkpoint, not on the released model.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Internal AI R&D evaluation suite (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): internal-ai-research-evaluation-suite-2-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Internal AI research evaluation suite (kernels, time series, RL, LLM training, compiler)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): kernels-task-anthropic, time-series-forecasting-task-anthropic, text-based-rl-task-anthropic, llm-training-task-anthropic, quadruped-rl-task-anthropic, novel-compiler-task-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Internal AI research evaluation suites 1 & 2",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): internal-ai-research-evaluation-suite-2-anthropic, kernels-task-anthropic, time-series-forecasting-task-anthropic, text-based-rl-task-anthropic, llm-training-task-anthropic, quadruped-rl-task-anthropic, novel-compiler-task-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Internal Chemistry Refusal (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): chemical-agents-refusal-meta.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Internal Database Migration",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): database-migration-tasks-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "International Math Olympiad 2026",
+      "url": null,
+      "reason": "Already recorded for this release under benchmark id imo-2026.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Kimi Hallu Bench (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): kimi-hallu-bench.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Long-form virology tasks (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): long-form-virology-tasks-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Long-form virology tasks, DNA synthesis screening evasion, creative biology uplift trials",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): long-form-virology-tasks-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Long-form virology tasks, DNA synthesis screening evasion, SecureBio creative biology",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): long-form-virology-tasks-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Malicious Claude Code / computer use / agentic influence campaigns, external red teaming",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "MILU 77.90",
+      "url": null,
+      "reason": "Measured on an intermediate checkpoint after Indic continued pretraining, not on the released model.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "MRCR 0.800",
+      "url": null,
+      "reason": "A cell of a quantization analysis table by candidate count, not a headline score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Muse Voice Transcribe numeric scores",
+      "url": null,
+      "reason": "The official model page shows qualitative claims and charts without readable benchmark numbers. The existing launch record has no numeric results.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "NanoGPT (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): nanogpt-speedrun.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "NV Chat Benchmark (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): nv-chat-benchmark-nvidia.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "OAI-repo Sabotage",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): monorepo-bench-openai.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Preparedness evals (cyber, bio/chem, AI self-improvement)",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Presentation preference evaluation (internal)",
+      "url": null,
+      "reason": "The official source did not provide a readable lab-reported score that fits an existing record.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Production Benchmarks (disallowed content)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): openai-production-benchmarks-and-safe-completion-evals.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Production benchmarks, agentic and under-18 safe completions, jailbreak evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): openai-production-benchmarks-and-safe-completion-evals.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Production benchmarks, destructive-action avoidance, jailbreak campaigns and UK AISI jailbreak testing",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): openai-production-benchmarks-and-safe-completion-evals.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Production benchmarks, dynamic mental-health benchmarks, jailbreak and prompt-injection evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): openai-production-benchmarks-and-safe-completion-evals.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Production, under-18, agentic safe completions, jailbreak, biology and cyber refusal evals",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Progress classification (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): progress-classification-google.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen-Audio-3.0-TTS scores",
+      "url": null,
+      "reason": "The official Qwen research and model pages checked have no readable lab-reported benchmark score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen-Audio-3.1 TTS and ASR scores",
+      "url": null,
+      "reason": "The official Qwen research and model pages checked have no readable lab-reported benchmark score.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen3.5-Flash",
+      "url": null,
+      "reason": "The official QwenCloud and Alibaba Model Studio pages describe the hosted model and pricing, but they do not provide a readable lab-reported benchmark score table. The Qwen3.5 launch and open-weights cards report other Qwen3.5 models, not the hosted Flash endpoint.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen3.5-Omni-Light scores",
+      "url": null,
+      "reason": "The official Qwen launch page names the Light variant but publishes no numeric Light result. The technical report evaluates Plus and Flash only.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen3.6-Flash",
+      "url": null,
+      "reason": "The official Qwen3.6-35B-A3B card and Qwen blog publish scores for Qwen3.6-35B-A3B, not the hosted Qwen3.6-Flash model. The QwenCloud model page describes features and pricing but has no readable benchmark score table.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen3.8-Flash separate column",
+      "url": null,
+      "reason": "The official Hugging Face and GitHub cards have one score column for Qwen3.8-Flash-Next. They do not print a separate Qwen3.8-Flash column, so no separate record is added. The existing qwen-qwen3-8-flash-next-2026-08-26 record holds the published table.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Qwen3.8-LiveTranslate additional scores",
+      "url": null,
+      "reason": "The official launch post and technical report already contain the readable audio and audio-visual rows for the existing Qwen3.8-Omni-Flash record. No separate LiveTranslate score was printed.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "QwenSWEBench v2",
+      "url": null,
+      "reason": "No readable official score was found. The supplied score appears only in an X post, which is not fetched.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Refusal, jailbreak, internal sycophancy and automated-audit evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): sycophancy-eval-answer, xai-sycophancy-eval.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Reward hacking (impossible tasks, hack-prone coding tasks)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): reward-hack-prone-coding-tasks-anthropic, impossible-tasks-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Sabotage capability evals",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): internal-codebase-sabotage-propensity-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Safety instruction following (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): asimov.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Shade prompt injection, browser Best-of-N injection",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): shade-arena, prompt-injection-adaptive-coding-anthropic, prompt-injection-adaptive-computer-use-anthropic, prompt-injection-adaptive-browser-use-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Short-horizon computational biology tasks (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): short-horizon-computational-biology-tasks-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Single-turn and multi-turn harmful-request, child-safety and mental-health evaluations",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): single-turn-harmful-request-evaluations-anthropic, multi-turn-testing-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Single-turn harmful/benign requests, child safety, suicide and self-harm, disordered eating, election integrity",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): child-safety-evaluations-anthropic, suicide-and-self-harm-evaluations-anthropic.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Streaming speech-to-text WER comparison (internal)",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Success detection (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): success-detection-google.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Terminal-Bench Lite (base model)",
+      "url": null,
+      "reason": "Ambiguous benchmark name, no matching catalog record.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "UK AISI / Apollo / Andon Labs external testing",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): uk-aisi-alignment-and-monitorability-evaluations.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "UK AISI sabotage, monitorability and cyber-cheating evaluations",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): uk-aisi-unprompted-sabotage.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "UK AISI sabotage, monitorability and cyber-cheating evaluations; Apollo Research sandbagging assessments",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): uk-aisi-sabotage-continuation, uk-aisi-unprompted-sabotage.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "WildChat answered rate 94.7",
+      "url": null,
+      "reason": "Not found in the technical report.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "Wiz penetration testing benchmark (internal)",
+      "url": null,
+      "reason": "The official source names this evaluation but provides no readable absolute score for this row.",
+      "date": "2026-11-12"
+    },
+    {
+      "name": "xdev-bench-hard (internal)",
+      "url": null,
+      "reason": "The existing record already carries this evaluation under benchmark id(s): xdev-bench-hard-moonshot.",
+      "date": "2026-11-12"
     }
   ]
 }

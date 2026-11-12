@@ -1941,6 +1941,30 @@
     "added": "2026-11-01"
   },
   {
+    "id": "agent-replay-auto-review-openai",
+    "name": "Agent Replay Auto-Review",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Monitors replayed agentic conversations for harmful or unauthorized actions. Scored by the rate above a severity threshold.",
+    "org": "OpenAI",
+    "released": "2026-10",
+    "links": {
+      "site": "https://deploymentsafety.openai.com/gpt-rosalind-6/cybersecurity"
+    },
+    "access": "private",
+    "note": "In-house OpenAI evaluation. The replay set is not public.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-rosalind-6/cybersecurity"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "agent-startup-bench-bytedance",
     "name": "Agent Startup Bench",
     "category": "economic-work",
@@ -3101,7 +3125,7 @@
     "note": "Exercises come from public Exercism tracks, so contamination is possible.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 138.17,
+    "edi": 138.13,
     "epoch": {
       "epoch_name": "Aider polyglot",
       "random": 0,
@@ -4702,7 +4726,7 @@
     "note": "Model cards report the rounds R1, R2, and R3 separately or as an average.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.21,
+    "edi": 122.25,
     "epoch": {
       "epoch_name": "ANLI",
       "random": 33.33,
@@ -5567,7 +5591,7 @@
     "successor": "apex-agents-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.05,
+    "edi": 156.98,
     "epoch": {
       "epoch_name": "APEX-Agents",
       "random": 0,
@@ -6280,7 +6304,7 @@
     "successor": "arc-agi-2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.49,
+    "edi": 145.5,
     "epoch": {
       "epoch_name": "ARC-AGI",
       "random": 0,
@@ -6337,7 +6361,7 @@
     "successor": "arc-agi-3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.55,
+    "edi": 154.63,
     "epoch": {
       "epoch_name": "ARC-AGI-2",
       "random": 0,
@@ -6408,7 +6432,7 @@
     "note": "Saturated by frontier models, which score above 95%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 95.05,
+    "edi": 94.49,
     "epoch": {
       "epoch_name": "ARC AI2",
       "random": 25,
@@ -8946,7 +8970,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.68,
+    "edi": 154.66,
     "epoch": {
       "epoch_name": "Balrog",
       "random": 0,
@@ -9833,7 +9857,7 @@
     "successor": "big-bench-extra-hard",
     "unit": "%",
     "confidence": "verified",
-    "edi": 106.23,
+    "edi": 105.92,
     "epoch": {
       "epoch_name": "BBH",
       "random": 25,
@@ -12580,7 +12604,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 139.12,
+    "edi": 139.13,
     "epoch": {
       "epoch_name": "CadEval",
       "random": 0,
@@ -14957,7 +14981,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 161.81,
+    "edi": 161.7,
     "epoch": {
       "epoch_name": "Chess Puzzles",
       "random": 4.96,
@@ -15467,7 +15491,7 @@
     "note": "500 contexts, 1,899 tasks, 31,607 rubrics. Follow-up CL-bench Life (2026-04) covers everyday contexts.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 180.33,
+    "edi": 180.34,
     "epoch": {
       "epoch_name": "CL-bench",
       "random": 0,
@@ -15502,7 +15526,7 @@
     "note": "The best model solved 19.3 percent of tasks at release.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.05,
+    "edi": 177.3,
     "epoch": {
       "epoch_name": "CL-bench Life",
       "random": 0,
@@ -16908,6 +16932,36 @@
     ]
   },
   {
+    "id": "code2video-aa",
+    "name": "Code2Video-AA",
+    "aliases": [
+      "Code2Video-AA Benchmark"
+    ],
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Artificial Analysis' implementation of HeyGen's Code2Video Bench: models write a HyperFrames HTML composition for each of 114 product and brand video briefs. A model judge compares two rendered videos at a time on five axes, and the comparisons become Elo ratings.",
+    "org": "Artificial Analysis",
+    "released": "2026-10",
+    "links": {
+      "site": "https://artificialanalysis.ai/articles/code2video-aa",
+      "leaderboard": "https://artificialanalysis.ai/evaluations/code2video-aa",
+      "repo": "https://github.com/heygen-com/hyperframes"
+    },
+    "access": "private",
+    "note": "Gemini 4 Argon is the judge. The overall Elo is the mean of the five axis ratings. Artificial Analysis terms bar reuse of its data, so link only.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://artificialanalysis.ai/evaluations/code2video-aa",
+      "https://artificialanalysis.ai/articles/code2video-aa"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "code2video-compass",
     "name": "Code2Video-Compass",
     "category": "audio-video",
@@ -17636,6 +17690,31 @@
     ]
   },
   {
+    "id": "company-agent-bench",
+    "name": "Company Agent Bench",
+    "category": "economic-work",
+    "subcategory": "work-company",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "205 questions on how well an agent understands its company, built from a month of real Slack history: who wrote an anonymized message, whom a teammate tagged, and who sent each reply. Agents search a replayed sandbox workspace using only messages from before the answer.",
+    "org": "Concept",
+    "released": "2026-11",
+    "links": {
+      "site": "https://companyagentbench.com",
+      "leaderboard": "https://concept.dev/blog/company-agent-bench"
+    },
+    "access": "private",
+    "note": "Built from one small company's workspace, about 10 teammates. Products ran once on default settings. API models ran in Concept's own Slack harness. The overall score weights the three parts equally.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://concept.dev/blog/company-agent-bench"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "compassarena",
     "name": "CompassArena",
     "aliases": [
@@ -18204,6 +18283,33 @@
       "https://arxiv.org/abs/2602.10604v2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "context-aware-asr-openai",
+    "name": "Context Aware Automatic Speech Recognition",
+    "aliases": [
+      "Context Aware ASR"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "Speech transcription systems are scored for semantic accuracy with and without free-form context.",
+    "org": "OpenAI",
+    "released": "2026-07",
+    "links": {
+      "site": "https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318"
+    },
+    "access": "private",
+    "note": "OpenAI reports this internal benchmark for GPT-Live-Transcribe.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "contextbench",
@@ -19145,6 +19251,30 @@
       "https://huggingface.co/papers/2606.08415"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "covert-misbehavior-thinking-machines",
+    "name": "Covert misbehavior (Thinking Machines)",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agentic tasks that check whether a model misbehaves and conceals it. Scored by the rate of covert misbehavior.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://thinkingmachines.ai/news/inkling-2-small/"
+    },
+    "access": "private",
+    "note": "In-house test. Tasks are not public.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/news/inkling-2-small/"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "covost2",
@@ -20469,6 +20599,33 @@
     "added": "2026-11-01"
   },
   {
+    "id": "cve-rediscovery-anthropic",
+    "name": "CVE Rediscovery (Anthropic)",
+    "aliases": [
+      "CVE Rediscovery"
+    ],
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models get a known-vulnerable snapshot of an open-source repository and the list of files its fix changed, then report security bugs in one attempt. A model judge counts a success when a report has the advisory's root cause. 1,829 advisories from October 2026.",
+    "org": "Anthropic",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    },
+    "access": "private",
+    "note": "Some advisories may have been public before training, so contamination cannot be ruled out.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "cve-bench",
     "name": "CVE-Bench",
     "category": "cyber",
@@ -20691,7 +20848,7 @@
     "note": "40 professional CTF tasks from four competitions, each split into subtasks for partial credit. Agents work in a Kali Linux environment. The board mixes HAL leaderboard runs with lab system-card scores on 35 to 39 task subsets. Anthropic reports it near saturation. The makers point readers to their later BountyBench.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.13,
+    "edi": 146.16,
     "epoch": {
       "epoch_name": "Cybench",
       "random": 0,
@@ -22954,7 +23111,7 @@
     "note": "The official judge model changed from Gemini 2.5 Pro to GPT-5.5 in May 2026, so older and newer scores do not compare directly.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.68,
+    "edi": 154.78,
     "epoch": {
       "epoch_name": "DeepResearch Bench",
       "random": 0,
@@ -24940,6 +25097,30 @@
     ]
   },
   {
+    "id": "destructive-actions-thinking-machines",
+    "name": "Destructive actions (Thinking Machines)",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agentic tasks that check whether a model takes destructive actions it was not authorized to take. Scored by the rate of destructive actions.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://thinkingmachines.ai/news/inkling-2-small/"
+    },
+    "access": "private",
+    "note": "In-house test. Tasks are not public.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/news/inkling-2-small/"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "destructive-production-evaluation-anthropic",
     "name": "Destructive production evaluation (Anthropic)",
     "aliases": [
@@ -25210,6 +25391,34 @@
       "https://snorkel.ai/leaderboard/digital-work-index/"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "diligencebench",
+    "name": "DiligenceBench",
+    "aliases": [
+      "Diligence Bench"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "150 public-equity research tasks on large US companies across sectors. Agents answer open-ended research questions in their own harness, and a model judge scores each answer against a dense task rubric for factual accuracy, analysis and risk awareness.",
+    "org": "Thoughtful Lab and Paper Instruments",
+    "released": "2026-07",
+    "links": {
+      "site": "https://www.paperinstruments.com/blog/diligence-bench"
+    },
+    "access": "private",
+    "note": "No fixed harness. Results are reported per harness (Loop, Sandbox, Finance) and as a best-harness score.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.paperinstruments.com/blog/diligence-bench",
+      "https://thinkingmachines.ai/news/inkling-2-small/"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "representative-prompts-disallowed-content-openai",
@@ -26228,6 +26437,32 @@
     "confidence": "verified"
   },
   {
+    "id": "dsi-bench",
+    "name": "DSI-Bench",
+    "aliases": [
+      "Dynamic Spatial Intelligence Benchmark"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Video questions about dynamic scenes where both the observer and objects move, testing whether models separate camera motion from object motion.",
+    "org": "Zhang et al.",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.18873"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2510.18873"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "dtap-direct-misuse",
     "name": "DTap Direct Misuse",
     "aliases": [
@@ -26313,7 +26548,7 @@
     "note": "Near saturation, with top models at about 98% in August 2026. Random guessing scores 40%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 135.73,
+    "edi": 135.68,
     "epoch": {
       "epoch_name": "DTBench",
       "random": 40,
@@ -26736,7 +26971,7 @@
     "note": "One card was banned in 2026-10 after it broke the game. Epoch expects saturation soon. Game material is not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.35,
+    "edi": 163.97,
     "epoch": {
       "epoch_name": "EBR-bench",
       "random": 0,
@@ -28807,7 +29042,7 @@
     "note": "41 real V8 N-day vulnerabilities with production mitigations on. 16 binary capability flags over five tiers: coverage, bug triggering, V8 internal primitives, general primitives and arbitrary code execution. Flags are checked by oracles compiled into a patched d8 binary. Episodes cap at 300 turns. Saturated by GPT-6 Astra at 100%, and OpenAI built a post-cutoff internal port to check contamination.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.3,
+    "edi": 163.33,
     "epoch": {
       "epoch_name": "ExploitBench",
       "random": 0,
@@ -29800,7 +30035,7 @@
     "access": "unknown",
     "unit": "%",
     "confidence": "likely",
-    "edi": 133.42,
+    "edi": 133.37,
     "epoch": {
       "epoch_name": "Fiction.LiveBench",
       "random": 0,
@@ -31333,7 +31568,7 @@
     "successor": "frontiercode-1-1",
     "unit": "%",
     "confidence": "likely",
-    "edi": 163.89,
+    "edi": 163.85,
     "epoch": {
       "epoch_name": "FrontierCode",
       "random": 0,
@@ -31572,7 +31807,7 @@
     "successor": "frontiermath-tiers-1-3-v2",
     "unit": "%",
     "confidence": "likely",
-    "edi": 150.73,
+    "edi": 150.78,
     "epoch": {
       "epoch_name": "FrontierMath-2025-02-28-Private",
       "random": 0,
@@ -31649,7 +31884,7 @@
     "successor": "frontiermath-tier-4-v2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.94,
+    "edi": 158.91,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-2025-07-01-Private",
       "random": 0,
@@ -31689,7 +31924,7 @@
     "note": "Version 2 corrected 12 problems and removed 7 from the original Tier 4 set.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.72,
+    "edi": 158.71,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-v2-Private",
       "random": 0,
@@ -31729,7 +31964,7 @@
     "note": "Version 2 fixed errors in 42 percent of problems, and Epoch says the tiers are nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.69,
+    "edi": 150.71,
     "epoch": {
       "epoch_name": "FrontierMath-Tiers-1-3-v2-Private",
       "random": 0,
@@ -31941,7 +32176,7 @@
     "note": "This record is FrontierSWE v2 (2026-09-02), the version Epoch AI tracks. It added 21 tasks to reach 34 and runs every model in the proximus harness. v1 (April 2026, 17 tasks) has its own record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.01,
+    "edi": 165.48,
     "epoch": {
       "epoch_name": "FrontierSWE",
       "random": 0,
@@ -32202,7 +32437,7 @@
     "note": "LLM grader checks error descriptions. Novice human baseline 63%. Photos and manuals are not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.92,
+    "edi": 165.91,
     "epoch": {
       "epoch_name": "Furniture Assembly",
       "random": 30,
@@ -33531,7 +33766,7 @@
     "note": "Only the 220-task gold set is public, with an automated grading service. OpenAI says its hosted GDPval leaderboard is no longer active and points to the GDPval-AA board instead.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.65,
+    "edi": 154.79,
     "epoch": {
       "epoch_name": "GDPval",
       "random": 0,
@@ -34259,7 +34494,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.92,
+    "edi": 118.9,
     "epoch": {
       "epoch_name": "GeoBench",
       "random": 0,
@@ -34814,7 +35049,7 @@
     "note": "Saturated (about 94-96%). Several 2026 cards use it only as a substrate for CoT-controllability or monitor-evasion tests.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 133.96,
+    "edi": 133.91,
     "epoch": {
       "epoch_name": "GPQA diamond",
       "random": 25,
@@ -35104,6 +35339,33 @@
     "evidence": [
       "https://cdn.openai.com/o1-system-card-20241205.pdf"
     ]
+  },
+  {
+    "id": "gray-swan-reward-hacking-bench",
+    "name": "Gray Swan Reward Hacking Bench",
+    "aliases": [
+      "Reward Hacking Bench"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agentic environments where a task can be finished honestly or by crossing a declared line, such as shipping insecure code, leaking a secret, harming a third party through a shared service or leaving the scope of a penetration test. Reports how often each line is crossed.",
+    "org": "Gray Swan",
+    "released": "2026-10",
+    "links": {
+      "site": "https://www.grayswan.ai/"
+    },
+    "access": "private",
+    "note": "Reports give per-scenario rates, not one overall score.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://reflection.ai/documents/beam-model-tech-report"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "gray-swan-shade-adaptive-attacker",
@@ -35414,7 +35676,7 @@
     "successor": "math",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.57,
+    "edi": 94.02,
     "epoch": {
       "epoch_name": "GSM8K",
       "random": 0,
@@ -35532,7 +35794,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.82,
+    "edi": 159.81,
     "epoch": {
       "epoch_name": "GSO-Bench",
       "random": 0,
@@ -37025,7 +37287,7 @@
     "note": "Saturated. GitHub repo rowanz/hellaswag returns HTTP 451 (blocked by a WikiHow DMCA notice dated 2026-09-14), so repo is null.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 62.87,
+    "edi": 61.69,
     "epoch": {
       "epoch_name": "HellaSwag",
       "random": 25,
@@ -37626,6 +37888,30 @@
       "https://github.com/SciYu/HiPhO",
       "https://phyarena.github.io"
     ]
+  },
+  {
+    "id": "historical-jailbreak-regression-openai",
+    "name": "Historical Jailbreak Regression",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Replays previously found cyber jailbreak attacks against fixed ExploitBench tasks with real-time blocking turned off. Scored by mean task success rate under attack.",
+    "org": "OpenAI",
+    "released": "2026-10",
+    "links": {
+      "site": "https://deploymentsafety.openai.com/gpt-rosalind-6/cybersecurity"
+    },
+    "access": "private",
+    "note": "In-house OpenAI evaluation. The task set is not public.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-rosalind-6/cybersecurity"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "hle-calibration",
@@ -38922,6 +39208,62 @@
       "https://arxiv.org/abs/2610.02089"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "hume-ai-overall-quality-index",
+    "name": "Hume AI Overall Quality Index",
+    "aliases": [
+      "Hume AI Text-to-Speech Quality Benchmark"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Listeners rate generated speech on reliability and expressiveness. The benchmark reports an overall quality index.",
+    "org": "Hume AI",
+    "released": "2026-09",
+    "links": {
+      "site": "https://deepmind.google/models/evals-methodology/gemini-3-8-tts"
+    },
+    "access": "private",
+    "note": "Hume AI runs the evaluation. No public leaderboard was found, so numbers come from model makers' reports.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini-audio/speech-generation/",
+      "https://deepmind.google/models/evals-methodology/gemini-3-8-tts"
+    ],
+    "added": "2026-11-12"
+  },
+  {
+    "id": "hume-ai-voice-design-benchmark",
+    "name": "Hume AI Voice Design Benchmark",
+    "aliases": [
+      "Hume AI Voice Design"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Listeners rate generated voices for English voice design, multilingual control, accents and voice qualities.",
+    "org": "Hume AI",
+    "released": "2026-09",
+    "links": {
+      "site": "https://deepmind.google/models/evals-methodology/gemini-3-8-tts"
+    },
+    "access": "private",
+    "note": "Hume AI runs the evaluation. No public leaderboard was found, so numbers come from model makers' reports.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/models/gemini-audio/speech-generation/",
+      "https://deepmind.google/models/evals-methodology/gemini-3-8-tts"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "hummusqa",
@@ -41896,6 +42238,33 @@
     "added": "2026-11-08"
   },
   {
+    "id": "iris-safety-evaluations-reflection",
+    "name": "Iris Safety Evaluations",
+    "aliases": [
+      "ISE"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Reflection AI's in-house safety suite of single-turn, multi-turn, jailbreak and agentic requests. Reports the share of harmful requests refused or redirected and the share of harmless requests answered.",
+    "org": "Reflection AI",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://reflection.ai/documents/beam-model-tech-report"
+    },
+    "access": "private",
+    "note": "In-house test. Prompts are not public.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://reflection.ai/documents/beam-model-tech-report"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "irokobench",
     "name": "IrokoBench",
     "aliases": [
@@ -44625,7 +44994,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 43.92,
+    "edi": 42.11,
     "epoch": {
       "epoch_name": "LAMBADA",
       "random": 0,
@@ -46986,7 +47355,7 @@
     "note": "Same benchmark as the lmca record, from the same arXiv paper 2607.27499.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.06,
+    "edi": 152.04,
     "epoch": {
       "epoch_name": "LMCA",
       "random": 0,
@@ -49184,7 +49553,7 @@
     "note": "Near saturation, and contamination is likely because the problems have been public since 2021.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 126.1,
+    "edi": 126.03,
     "epoch": {
       "epoch_name": "MATH level 5",
       "random": 0,
@@ -51786,7 +52155,7 @@
     "successor": "metr-time-horizon-1-1",
     "unit": "minutes",
     "confidence": "verified",
-    "edi": 136.04,
+    "edi": 136.03,
     "epoch": {
       "epoch_name": "METR Time Horizons",
       "runs": "external",
@@ -53130,7 +53499,7 @@
     "note": "25 targets, 3 kept private. ~34% of tests held out. Source programs are open source, so memorization cannot be fully ruled out.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.49,
+    "edi": 159.78,
     "epoch": {
       "epoch_name": "MirrorCode",
       "random": 0,
@@ -53138,6 +53507,54 @@
       "runs": "epoch",
       "in_eci": true
     }
+  },
+  {
+    "id": "mirrordojo-reflection",
+    "name": "MirrorDojo",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Indirect prompt injection test run in Reflection AI's Mirror agent harness, based on AgentDojo. Each episode pairs a user task with an instruction planted in a tool result. Reports attack success rate and utility.",
+    "org": "Reflection AI",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://reflection.ai/documents/beam-model-tech-report"
+    },
+    "access": "private",
+    "note": "Not comparable to public AgentDojo results, because Mirror runs the agent loop instead of the benchmark's reference agent.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://reflection.ai/documents/beam-model-tech-report"
+    ],
+    "added": "2026-11-12"
+  },
+  {
+    "id": "mirrordyn-reflection",
+    "name": "MirrorDyn",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Indirect prompt injection test run in Reflection AI's Mirror agent harness, based on AgentDyn. Reports attack success rate and utility.",
+    "org": "Reflection AI",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://reflection.ai/documents/beam-model-tech-report"
+    },
+    "access": "private",
+    "note": "Not comparable to public AgentDyn results, because Mirror runs the agent loop.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://reflection.ai/documents/beam-model-tech-report"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "realistic-work-environments-misalignment-openai",
@@ -53161,6 +53578,30 @@
     "evidence": [
       "https://cdn.openai.com/pdf/38e3efcf-545e-44cd-99ec-2b7eb395f4cc/oai_GPT_6_1_Sol.pdf"
     ]
+  },
+  {
+    "id": "misbehavior-thinking-machines",
+    "name": "Misbehavior (Thinking Machines)",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agentic tasks that check whether a model fabricates results, ignores instructions or hides what it did when a task is hard. Scored by the rate of misbehavior.",
+    "org": "Thinking Machines Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://thinkingmachines.ai/news/inkling-2-small/"
+    },
+    "access": "private",
+    "note": "In-house test. Tasks are not public.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://thinkingmachines.ai/news/inkling-2-small/"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "misc-ctf-anthropic",
@@ -54645,7 +55086,7 @@
     "successor": "mmlu-pro",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.81,
+    "edi": 102.44,
     "epoch": {
       "epoch_name": "MMLU",
       "random": 25,
@@ -55320,6 +55761,32 @@
       "https://huggingface.co/sensenova/SenseNova-SI-1.3-InternVL3-8B"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "mmsi-video-bench",
+    "name": "MMSI-Video-Bench",
+    "aliases": [
+      "MMSI-Video"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Human-annotated questions on video-based spatial intelligence, organized in four levels from perception to planning and prediction.",
+    "org": "Lin et al.",
+    "released": "2025-12",
+    "links": {
+      "paper": "https://arxiv.org/abs/2512.10863"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2512.10863"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "mmstar",
@@ -58143,7 +58610,7 @@
     "note": "Game identity, prompts and positions are kept secret to prevent targeted preparation. Likely the 'game-puzzles' benchmark in the Epoch post.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.64,
+    "edi": 164.56,
     "epoch": {
       "epoch_name": "Mystery Game Puzzles",
       "random": 9.22,
@@ -60049,6 +60516,32 @@
     ]
   },
   {
+    "id": "omni3d",
+    "name": "Omni3D",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "A large benchmark for 3D object detection from a single image, built by unifying indoor and outdoor datasets such as SUN RGB-D, ARKitScenes, Hypersim, Objectron, KITTI and nuScenes. Vision-language models answer its 3D grounding questions.",
+    "org": "Meta AI",
+    "released": "2022-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2207.10660",
+      "repo": "https://github.com/facebookresearch/omni3d"
+    },
+    "access": "public",
+    "note": "Language-model reports use question sets drawn from Omni3D rather than the original detection metric, so numbers differ by harness.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2207.10660",
+      "https://github.com/facebookresearch/omni3d"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "omniai-ocr-benchmark",
     "name": "OmniAI OCR Benchmark",
     "aliases": [
@@ -61179,7 +61672,7 @@
     "note": "Saturated by frontier models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 93.62,
+    "edi": 93.13,
     "epoch": {
       "epoch_name": "OpenBookQA",
       "random": 25,
@@ -62016,6 +62509,37 @@
     "confidence": "verified"
   },
   {
+    "id": "osi-bench",
+    "name": "OSI-Bench",
+    "aliases": [
+      "Open Spatial Intelligence Bench",
+      "OpenBench"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Spatial reasoning questions on outdoor pedestrian-view videos with metric 3D ground truth from synchronized stereo cameras, LiDAR and GPS. 8,736 questions range from relative direction to metric and motion estimates.",
+    "org": "UCAS, ETH Zurich and Microsoft Research Asia",
+    "released": "2025-12",
+    "links": {
+      "paper": "https://arxiv.org/abs/2512.19683",
+      "repo": "https://github.com/mingrui-wu/OSI-Bench",
+      "site": "https://mingrui-wu.github.io/osi-bench/"
+    },
+    "access": "public",
+    "note": "The arXiv paper calls the benchmark OpenBench. The repository and project page call it OSI-Bench.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2512.19683",
+      "https://github.com/mingrui-wu/OSI-Bench"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "ost-bench",
     "name": "OST-Bench",
     "aliases": [
@@ -62072,7 +62596,7 @@
     "successor": "osworld-verified",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.7,
+    "edi": 146.75,
     "epoch": {
       "epoch_name": "OSWorld",
       "random": 0,
@@ -62117,7 +62641,7 @@
     "successor": "osworld-2-0-2026-08-08",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.71,
+    "edi": 169.94,
     "epoch": {
       "epoch_name": "OSWorld 2.0",
       "random": 0,
@@ -62400,7 +62924,7 @@
     "note": "Epoch AI added it as a harder successor to MATH Level 5, which was nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 137.19,
+    "edi": 137.16,
     "epoch": {
       "epoch_name": "OTIS Mock AIME 2024-2025",
       "random": 0.1,
@@ -62592,6 +63116,37 @@
       "https://arxiv.org/abs/2606.03890"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "owe-bench",
+    "name": "OWE-Bench",
+    "aliases": [
+      "OpenWorldEngineer",
+      "OpenWorldEngineer (OWE-Bench)"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "26 long-horizon engineering and research projects across software, physical engineering, machine learning and scientific computing, from GPU kernels to aircraft design. Agents get 4 to 18 hours per attempt, and an offline verifier scores what they ship on held-out cases.",
+    "org": "Mercor",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/Mercor-Intelligence/OpenWorldEngineer",
+      "leaderboard": "https://www.mercor.com/apex/open-world-engineer-leaderboard/",
+      "dataset": "https://huggingface.co/datasets/mercor/OpenWorldEngineer",
+      "site": "https://openworldengineer.mercor.com/"
+    },
+    "access": "public+private-holdout",
+    "note": "Each task is rescaled so the untouched baseline scores 0% and the task's ceiling scores 100%, and the board reports the mean of eight attempts. Mercor set exploits that raised a score to zero. Ten of the 26 graders stay private because they contain hidden data.",
+    "unit": "%",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.mercor.com/blog/introducing-owe-bench/",
+      "https://www.mercor.com/apex/open-world-engineer-leaderboard/"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "package-registry-publishing-anthropic",
@@ -63421,6 +63976,36 @@
     "note": "Lab-created in-house eval (Moonshot AI). Not the same as other public benchmarks with this name.",
     "unit": "%",
     "confidence": "verified"
+  },
+  {
+    "id": "perceptioncomp",
+    "name": "PerceptionComp",
+    "aliases": [
+      "PercepComp"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "1,114 five-choice questions on 279 complex videos. Each question needs evidence from several separate moments, so no single frame answers it.",
+    "org": "PerceptionComp authors (ECCV 2026)",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.26653",
+      "repo": "https://github.com/hrinnnn/PerceptionComp",
+      "site": "https://perceptioncomp.github.io/"
+    },
+    "access": "public",
+    "note": "People who watch a video once score near chance, while experts who can rewatch reach 100%.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2603.26653",
+      "https://github.com/hrinnnn/PerceptionComp"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "robocurve-perceptual-attacks",
@@ -64366,7 +64951,7 @@
     "access": "public+private-holdout",
     "unit": "%",
     "confidence": "verified",
-    "edi": 61.53,
+    "edi": 60.34,
     "epoch": {
       "epoch_name": "PIQA",
       "random": 50,
@@ -64826,7 +65411,7 @@
     "successor": "posttrainbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.23,
+    "edi": 173.14,
     "epoch": {
       "epoch_name": "PostTrainBench",
       "random": 0,
@@ -65731,7 +66316,7 @@
     "successor": "proofbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.43,
+    "edi": 156.46,
     "epoch": {
       "epoch_name": "ProofBench",
       "random": 0,
@@ -67766,6 +68351,33 @@
     "added": "2026-11-01"
   },
   {
+    "id": "real-world-audio-recording-openai",
+    "name": "Real-World Audio Recording",
+    "aliases": [
+      "Real-World Audio Recording benchmark"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Speech transcription systems are scored by word error rate on real-world recordings across multiple languages.",
+    "org": "OpenAI",
+    "released": "2026-07",
+    "links": {
+      "site": "https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318"
+    },
+    "access": "private",
+    "note": "OpenAI reports this internal benchmark for GPT-Live-Transcribe.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "real-world-finance-anthropic",
     "name": "Real-World Finance (Anthropic)",
     "aliases": [
@@ -68756,7 +69368,7 @@
     "note": "The best agent automated only 2.5% of projects at launch. Only a 10 task public set is released.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.83,
+    "edi": 176.75,
     "epoch": {
       "epoch_name": "Remote Labor Index",
       "random": 0,
@@ -73429,7 +74041,7 @@
     "note": "The human baseline from nine non-expert people is 83.7 percent. A small open-ended variant lists three models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.26,
+    "edi": 152.22,
     "epoch": {
       "epoch_name": "SimpleBench",
       "random": 16.67,
@@ -73522,7 +74134,7 @@
     "note": "Google fixed one dataset error on 2026-03-09 and posted paper v2 on 2026-03-10. Scores stay comparable, so it remains one record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.12,
+    "edi": 157.03,
     "epoch": {
       "epoch_name": "SimpleQA Verified",
       "random": 0,
@@ -74912,6 +75524,32 @@
     ]
   },
   {
+    "id": "spar-bench",
+    "name": "SPAR-Bench",
+    "aliases": [
+      "SPAR Bench"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Spatial perception and reasoning questions over single and multiple views of indoor 3D scenes, from depth and distance estimates to object relations and spatial imagination.",
+    "org": "Zhang et al. (From Flatland to Space)",
+    "released": "2025-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2503.22976"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2503.22976"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "spatialbench-latchbio",
     "name": "SpatialBench (LatchBio)",
     "aliases": [
@@ -75080,6 +75718,29 @@
     ]
   },
   {
+    "id": "spatialtree",
+    "name": "SpatialTree",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Organizes spatial abilities into a hierarchy, from low-level perception to mental mapping, simulation and agentic use, and tests vision-language models at each level.",
+    "org": "Xiao et al.",
+    "released": "2025-12",
+    "links": {
+      "paper": "https://arxiv.org/abs/2512.20617"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2512.20617"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "spatialviz-bench",
     "name": "SpatialViz-Bench",
     "aliases": [
@@ -75200,6 +75861,37 @@
     "added": "2026-11-08"
   },
   {
+    "id": "spbench",
+    "name": "SPBench",
+    "aliases": [
+      "Spatial Perception and Reasoning Benchmark",
+      "SPBench-SI",
+      "SPBench-MV"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Spatial perception and reasoning questions built from ScanNet scenes. A single-image set covers distance, size and direction, and a multi-view set adds counting across views. Answers are numbers or multiple choice.",
+    "org": "Zhejiang University and collaborators (SpatialLadder)",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.08531",
+      "dataset": "https://huggingface.co/datasets/hongxingli/SPBench"
+    },
+    "access": "public",
+    "note": "Reports do not always say whether a score is the single-image set, the multi-view set or both.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2510.08531",
+      "https://huggingface.co/datasets/hongxingli/SPBench"
+    ],
+    "added": "2026-11-12"
+  },
+  {
     "id": "speaker-identification-openai",
     "name": "Speaker identification",
     "category": "safety-alignment",
@@ -75218,6 +75910,35 @@
     "evidence": [
       "https://cdn.openai.com/gpt-4o-system-card.pdf"
     ]
+  },
+  {
+    "id": "speech-agent-arena",
+    "name": "Speech Agent Arena",
+    "aliases": [
+      "Artificial Analysis Speech Agent Arena"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "agent-task",
+    "description": "People hold live conversations with two hidden speech-to-speech agents on the same scenario, some with tool calls, then pick the one they preferred. Votes are fit to an Elo rating, and the arena also tracks task success.",
+    "org": "Artificial Analysis",
+    "released": "2026-08",
+    "links": {
+      "site": "https://artificialanalysis.ai/articles/announcing-the-speech-agent-arena",
+      "leaderboard": "https://artificialanalysis.ai/speech-to-speech/arena"
+    },
+    "access": "public",
+    "note": "Ratings move as votes arrive, so a lab post freezes a value that later drifts.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://artificialanalysis.ai/articles/announcing-the-speech-agent-arena",
+      "https://artificialanalysis.ai/speech-to-speech/arena"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "speecharena",
@@ -75298,6 +76019,34 @@
       "https://qwen.ai/blog?id=qwen3.5-omni"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "speed-bench",
+    "name": "SPEED-Bench",
+    "aliases": [
+      "SPEED-bench"
+    ],
+    "category": "other",
+    "subcategory": "other-misc",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Measures speculative decoding across varied prompts and domains. Reports the average acceptance length of draft tokens, so higher means faster generation at the same output.",
+    "org": "NVIDIA",
+    "released": "2026-02",
+    "links": {
+      "paper": "https://arxiv.org/abs/2604.09557",
+      "site": "https://research.nvidia.com/publication/2026-02_speed-bench-unified-and-diverse-benchmark-speculative-decoding"
+    },
+    "access": "public",
+    "note": "Scores depend on the draft method and draft length, so labs report the split and settings next to each number.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2604.09557",
+      "https://openreview.net/forum?id=Rl2uQlCoQX"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "speedrunbench",
@@ -75538,7 +76287,7 @@
     "note": "Top human players win ~85% (StS1) and ~95% (StS2). Seeds are not published.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 178.4,
+    "edi": 177.68,
     "epoch": {
       "epoch_name": "SpireClimb",
       "random": 0,
@@ -77647,7 +78396,7 @@
     "note": "Only one example task is public, and the scored tasks and grading scripts stay hidden.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.76,
+    "edi": 150.72,
     "epoch": {
       "epoch_name": "Surface Evolver Bench",
       "random": 0,
@@ -80195,7 +80944,7 @@
     "successor": "terminal-bench-2-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 149.41,
+    "edi": 149.42,
     "epoch": {
       "epoch_name": "Terminal Bench",
       "random": 0,
@@ -80922,7 +81671,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146,
+    "edi": 146.03,
     "epoch": {
       "epoch_name": "The Agent Company",
       "random": 0,
@@ -82027,7 +82776,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 49.74,
+    "edi": 48.19,
     "epoch": {
       "epoch_name": "TriviaQA",
       "random": 0,
@@ -87428,7 +88177,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 153.09,
+    "edi": 153.15,
     "epoch": {
       "epoch_name": "VPCT",
       "random": 33.33,
@@ -87699,6 +88448,32 @@
       "https://arxiv.org/html/2205.00363"
     ],
     "added": "2026-11-08"
+  },
+  {
+    "id": "vsti-bench",
+    "name": "VSTI-Bench",
+    "aliases": [
+      "Vision-Spatial-Temporal Intelligence benchmark"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Video questions about how spatial relationships change over time in 3D scenes, over 138,000 pairs across five tasks.",
+    "org": "VLM-3R authors",
+    "released": "2025-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2505.20279"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2505.20279"
+    ],
+    "added": "2026-11-12"
   },
   {
     "id": "vulnerability-finding-evaluations-anthropic",
@@ -88563,7 +89338,7 @@
     "note": "Scores are not raw accuracy and are not comparable with WeirdML v2.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 168.22,
+    "edi": 168.12,
     "epoch": {
       "epoch_name": "WeirdML v3",
       "random": 0,
@@ -89382,7 +90157,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.83,
+    "edi": 102.43,
     "epoch": {
       "epoch_name": "Winogrande",
       "random": 50,

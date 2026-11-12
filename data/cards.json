@@ -9692,6 +9692,12 @@
         "score": 91.1,
         "unit": "%",
         "as_written": "Multilingual Q&A MMMLU"
+      },
+      {
+        "benchmark": "biglaw-bench",
+        "score": 90.2,
+        "unit": "%",
+        "as_written": "BigLaw Bench 90.2%, quoted from Harvey in the launch post (\"40% perfect scores and 84% above 0.8\")"
       }
     ]
   },
@@ -10412,6 +10418,12 @@
         "score": 70.0,
         "unit": "%",
         "as_written": "MedXpertQA-MM"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 92.3,
+        "unit": "%",
+        "as_written": "RefCOCO(avg)"
       }
     ]
   },
@@ -10682,6 +10694,12 @@
         "score": 60.1,
         "unit": "%",
         "as_written": "Best of MRCR v2 (8-needle), 128k (average) / MRCR v2 (8-needle), 1M (pointwise)"
+      },
+      {
+        "benchmark": "lmarena-elo",
+        "score": 1432,
+        "unit": "elo",
+        "as_written": "Elo 1432 on the Arena.ai leaderboard, quoted in the Gemini 3.1 Flash-Lite launch blog"
       }
     ]
   },
@@ -10915,7 +10933,7 @@
     "title": "Introducing GPT-5.4 mini and nano",
     "url": "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/",
     "tier": "small",
-    "notes": "Wayback 2026-04-01 snapshot (openai.com 403). Up-front table read as text (GPT-5.4 mini, xhigh; nano also shown). Body charts repeat SWE-Bench Pro and OSWorld-Verified. Rows only in the later category tables, not recorded: MCP Atlas, tau2-bench telecom 93.4, HLE (41.5 w/ tool, 28.2 w/o), MMMU-Pro, OmniDocBench 1.5, OpenAI MRCR v2 8-needle, Graphwalks.",
+    "notes": "Wayback 2026-04-01 snapshot (openai.com 403). Up-front table read as text (GPT-5.4 mini, xhigh; nano also shown). Body charts repeat SWE-Bench Pro and OSWorld-Verified. The later category tables add MCP Atlas, tau2-bench telecom, HLE (41.5 with tools, 28.2 without), MMMU-Pro, OmniDocBench 1.5, OpenAI MRCR v2 8-needle and Graphwalks.",
     "results": [
       {
         "benchmark": "swe-bench-pro",
@@ -10946,6 +10964,48 @@
         "score": 72.1,
         "unit": "%",
         "as_written": "OSWorld-Verified"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 57.7,
+        "unit": "%",
+        "as_written": "MCP-Atlas"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 93.4,
+        "unit": "%",
+        "as_written": "τ²-bench telecom"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 28.2,
+        "unit": "%",
+        "as_written": "Humanity’s Last Exam without tools, best of HLE with tools 41.5%"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 78.0,
+        "unit": "%",
+        "as_written": "MMMU-Pro with Python, without Python 76.6%"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 0.1263,
+        "unit": "score",
+        "as_written": "OmniDocBench 1.5, lower is better"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 47.7,
+        "unit": "%",
+        "as_written": "OpenAI MRCR v2 8-needle, 64K-128K"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 76.3,
+        "unit": "%",
+        "as_written": "GraphWalks BFS, 0K-128K"
       }
     ]
   },
@@ -32756,6 +32816,12 @@
         "score": 24.65,
         "unit": "%",
         "as_written": "DeepSWE [offline]"
+      },
+      {
+        "benchmark": "aa-briefcase",
+        "score": 1137,
+        "unit": "elo",
+        "as_written": "AA-Briefcase-Lite offline, Nemotron 3.5 Super"
       }
     ]
   },
@@ -33860,6 +33926,12 @@
         "score": 13.0,
         "unit": "index",
         "as_written": "AA Omniscience (index), public split only (our results)"
+      },
+      {
+        "benchmark": "livecodebench",
+        "score": 88.3,
+        "unit": "%",
+        "as_written": "LiveCodeBench, Beam BF16"
       }
     ]
   },
@@ -42614,6 +42686,18 @@
         "score": 86.9,
         "unit": "index",
         "as_written": "Speech-to-Speech Index, 86.9, per Artificial Analysis"
+      },
+      {
+        "benchmark": "speech-agent-arena",
+        "score": 1070,
+        "unit": "elo",
+        "as_written": "Speech Agent Arena human preference Elo"
+      },
+      {
+        "benchmark": "eva-bench-servicenow",
+        "score": 74.0,
+        "unit": "%",
+        "as_written": "EVA-Bench accuracy"
       }
     ]
   },
@@ -42638,6 +42722,18 @@
         "score": 56.5,
         "unit": "%",
         "as_written": "Agentic Performance τ-voice Bench (per Artificial Analysis)"
+      },
+      {
+        "benchmark": "speech-to-speech-index",
+        "score": 82.9,
+        "unit": "index",
+        "as_written": "Overall AA Speech-to-Speech Quality Index, Grok Voice 2.0, per Artificial Analysis"
+      },
+      {
+        "benchmark": "full-duplex-bench",
+        "score": 95.1,
+        "unit": "%",
+        "as_written": "Conversational Dynamics Full Duplex Bench, Grok Voice 2.0, per Artificial Analysis"
       }
     ]
   },
@@ -48320,6 +48416,3324 @@
         "score": 494.27,
         "unit": "score",
         "as_written": "PMPP-Hard AUC, 494.27 task-hours"
+      },
+      {
+        "benchmark": "misbehavior-thinking-machines",
+        "score": 14.9,
+        "unit": "%",
+        "as_written": "Misbehavior (Internal), lower is better, alignment table"
+      },
+      {
+        "benchmark": "covert-misbehavior-thinking-machines",
+        "score": 11.8,
+        "unit": "%",
+        "as_written": "Covert misbehavior (Internal), lower is better, alignment table"
+      },
+      {
+        "benchmark": "destructive-actions-thinking-machines",
+        "score": 4.7,
+        "unit": "%",
+        "as_written": "Destructive actions (Internal), lower is better, alignment table"
+      },
+      {
+        "benchmark": "apollo-research-strategic-deception-evaluations",
+        "score": 8,
+        "unit": "%",
+        "as_written": "Covert Action with No Goal (Apollo Research) 8, Covert Action with Goal 0, lower is better, alignment table"
+      },
+      {
+        "benchmark": "diligencebench",
+        "score": 58.1,
+        "unit": "%",
+        "as_written": "Diligence Bench, best harness, as reported by Thoughtful"
+      },
+      {
+        "benchmark": "code2video-aa",
+        "score": 1020,
+        "unit": "elo",
+        "as_written": "Code2Video-AA (Artificial Analysis, quoted in the launch post)"
+      }
+    ]
+  },
+  {
+    "id": "openai-gpt-live-transcribe-2026-07-29",
+    "lab": "openai",
+    "model": "gpt-live-transcribe",
+    "date": "2026-07-29",
+    "title": "GPT-Live-Transcribe and GPT-Transcribe: Two New Transcription Models in the API (OpenAI Developer Community)",
+    "url": "https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318",
+    "tier": "mid",
+    "notes": "The OpenAI announcement reports GPT-Live-Transcribe scores. GPT-Transcribe is described but has no separate numeric result.",
+    "results": [
+      {
+        "benchmark": "context-aware-asr-openai",
+        "score": 44.6,
+        "unit": "%",
+        "as_written": "Context Aware Automatic Speech Recognition semantic accuracy with free-form context"
+      },
+      {
+        "benchmark": "common-voice",
+        "score": 19.7,
+        "unit": "%",
+        "as_written": "Common Voice transcription error rate across 22 languages"
+      },
+      {
+        "benchmark": "real-world-audio-recording-openai",
+        "score": 9.6,
+        "unit": "%",
+        "as_written": "Real-World Audio Recording transcription error rate across nine languages"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-3-1-flash-tts-2026-04-16",
+    "lab": "google",
+    "model": "gemini-3-1-flash-tts",
+    "date": "2026-04-16",
+    "title": "Gemini 3.1 Flash TTS (Google blog)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-tts/",
+    "tier": "mid",
+    "notes": "The Google launch post reports the model's Artificial Analysis TTS leaderboard Elo.",
+    "results": [
+      {
+        "benchmark": "aa-speech-arena",
+        "score": 1211,
+        "unit": "elo",
+        "as_written": "Artificial Analysis TTS leaderboard Elo"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-tts-12hz-1-7b-base-2026-01-22",
+    "lab": "qwen",
+    "model": "qwen3-tts-12hz-1-7b-base",
+    "date": "2026-01-22",
+    "title": "Qwen3-TTS (Qwen blog and Hugging Face model card)",
+    "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+    "tier": "small",
+    "notes": "The Qwen3-TTS model card reports Seed-TTS evaluation for the 12Hz 1.7B base model. The source gives separate Chinese and English values, so the Chinese headline value is recorded.",
+    "results": [
+      {
+        "benchmark": "seed-tts-eval",
+        "score": 0.77,
+        "unit": "%",
+        "as_written": "SEEDtest-zh WER, Qwen3-TTS-12Hz-1.7B-Base"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-tts-12hz-1-7b-customvoice-2026-01-22",
+    "lab": "qwen",
+    "model": "qwen3-tts-12hz-1-7b-customvoice",
+    "date": "2026-01-22",
+    "title": "Qwen3-TTS (Qwen blog and Hugging Face model card)",
+    "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    "tier": "small",
+    "notes": "The Qwen3-TTS model card reports InstructTTSEval for the 12Hz 1.7B CustomVoice model. The Chinese APS score is recorded as the headline result because the table has separate APS, DSD and RP columns.",
+    "results": [
+      {
+        "benchmark": "instructttseval",
+        "score": 83.0,
+        "unit": "%",
+        "as_written": "InstructTTSEval-ZH APS, Qwen3-TTS-12Hz-1.7B-CustomVoice"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-asr-1-7b-2026-01-29",
+    "lab": "qwen",
+    "model": "qwen3-asr-1-7b",
+    "date": "2026-01-29",
+    "title": "Qwen3-ASR (Qwen blog and Hugging Face model card)",
+    "url": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B",
+    "tier": "small",
+    "notes": "The Qwen3-ASR model card reports public multilingual WER tables. The recorded rows use the 1.7B column and name the table setting.",
+    "results": [
+      {
+        "benchmark": "fleurs",
+        "score": 4.9,
+        "unit": "%",
+        "as_written": "Fleurs multilingual WER, Qwen3-ASR-1.7B, 12 languages"
+      },
+      {
+        "benchmark": "common-voice",
+        "score": 9.18,
+        "unit": "%",
+        "as_written": "CommonVoice multilingual WER, Qwen3-ASR-1.7B, 13 languages"
+      },
+      {
+        "benchmark": "librispeech",
+        "score": 1.63,
+        "unit": "%",
+        "as_written": "Librispeech clean WER, Qwen3-ASR-1.7B"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-omni-flash-2026-03-30",
+    "lab": "qwen",
+    "model": "qwen3-5-omni-flash",
+    "date": "2026-03-30",
+    "title": "Qwen3.5-Omni: Scaling Up, Toward Native Omni-Modal AGI (blog)",
+    "url": "https://qwen.ai/blog?id=qwen3.5-omni",
+    "tier": "mid",
+    "notes": "The Qwen3.5-Omni launch table reports Flash results for audio and audio-visual tasks. Rows with split values and no single headline score are omitted.",
+    "results": [
+      {
+        "benchmark": "daily-omni",
+        "score": 81.8,
+        "unit": "%",
+        "as_written": "DailyOmni, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "worldsense-omnimodal",
+        "score": 57.9,
+        "unit": "%",
+        "as_written": "WorldSense, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "avut",
+        "score": 81.4,
+        "unit": "%",
+        "as_written": "AVUT, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "av-speakerbench",
+        "score": 65.2,
+        "unit": "%",
+        "as_written": "AV-SpeakerBench, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 79.3,
+        "unit": "%",
+        "as_written": "VideoMME with audio, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "qivd",
+        "score": 66.3,
+        "unit": "%",
+        "as_written": "QualcommInteractive, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "omni-cloze",
+        "score": 63.0,
+        "unit": "%",
+        "as_written": "Omni-Cloze, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "omnigaia",
+        "score": 33.9,
+        "unit": "%",
+        "as_written": "OmniGAIA without thinking prompt, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "mmau",
+        "score": 80.4,
+        "unit": "%",
+        "as_written": "MMAU, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "mmar",
+        "score": 74.0,
+        "unit": "%",
+        "as_written": "MMAR, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "mmsu",
+        "score": 72.2,
+        "unit": "%",
+        "as_written": "MMSU, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "muchomusic",
+        "score": 60.5,
+        "unit": "%",
+        "as_written": "RUL-MuchoMusic, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "voicebench",
+        "score": 87.8,
+        "unit": "%",
+        "as_written": "VoiceBench, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "speechrole",
+        "score": 119.8,
+        "unit": "score",
+        "as_written": "SpeechRole, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "wildspeech-bench",
+        "score": 72.2,
+        "unit": "score",
+        "as_written": "WildSpeech-Bench, Qwen3.5-Omni-Flash"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 10.75,
+        "unit": "%",
+        "as_written": "Fleurs top60 ASR WER, Qwen3.5-Omni-Flash"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-9b-2026-03-02",
+    "lab": "qwen",
+    "model": "qwen3-5-9b",
+    "date": "2026-03-02",
+    "title": "Qwen3.5-9B model card (Hugging Face), Qwen3.5 small series",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+    "tier": "open-weights",
+    "notes": "Scores are from the official Hugging Face model card tables. Split cells use the with-CI value, and paired VideoMME and ZEROBench rows use the higher setting.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 82.5,
+        "unit": "%",
+        "as_written": "MMLU-Pro"
+      },
+      {
+        "benchmark": "mmlu-redux",
+        "score": 91.1,
+        "unit": "%",
+        "as_written": "MMLU-Redux"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 88.2,
+        "unit": "%",
+        "as_written": "C-Eval"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 58.2,
+        "unit": "%",
+        "as_written": "SuperGPQA"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 81.7,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 91.5,
+        "unit": "%",
+        "as_written": "IFEval"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 64.5,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "multichallenge",
+        "score": 54.5,
+        "unit": "%",
+        "as_written": "MultiChallenge"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 63.0,
+        "unit": "%",
+        "as_written": "AA-LCR"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 55.2,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "hmmt-2025",
+        "score": 83.2,
+        "unit": "%",
+        "as_written": "HMMT Feb 25"
+      },
+      {
+        "benchmark": "hmmt-nov-2025",
+        "score": 82.9,
+        "unit": "%",
+        "as_written": "HMMT Nov 25"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 65.6,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "ojbench",
+        "score": 29.2,
+        "unit": "%",
+        "as_written": "OJBench"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 66.1,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 79.1,
+        "unit": "%",
+        "as_written": "TAU2-Bench"
+      },
+      {
+        "benchmark": "vita-bench",
+        "score": 29.8,
+        "unit": "%",
+        "as_written": "VITA-Bench"
+      },
+      {
+        "benchmark": "deepplanning",
+        "score": 18.0,
+        "unit": "%",
+        "as_written": "DeepPlanning"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 81.2,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmlu-prox",
+        "score": 76.3,
+        "unit": "%",
+        "as_written": "MMLU-ProX"
+      },
+      {
+        "benchmark": "nova-63",
+        "score": 55.9,
+        "unit": "%",
+        "as_written": "NOVA-63"
+      },
+      {
+        "benchmark": "include",
+        "score": 75.6,
+        "unit": "%",
+        "as_written": "INCLUDE"
+      },
+      {
+        "benchmark": "global-piqa",
+        "score": 83.2,
+        "unit": "%",
+        "as_written": "Global PIQA"
+      },
+      {
+        "benchmark": "polymath",
+        "score": 57.3,
+        "unit": "%",
+        "as_written": "PolyMATH"
+      },
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 72.6,
+        "unit": "score",
+        "as_written": "WMT24++"
+      },
+      {
+        "benchmark": "maxife",
+        "score": 83.4,
+        "unit": "%",
+        "as_written": "MAXIFE"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 78.4,
+        "unit": "%",
+        "as_written": "MMMU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 70.1,
+        "unit": "%",
+        "as_written": "MMMU-Pro"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 78.9,
+        "unit": "%",
+        "as_written": "MathVision"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 85.7,
+        "unit": "%",
+        "as_written": "Mathvista(mini)"
+      },
+      {
+        "benchmark": "we-math",
+        "score": 75.2,
+        "unit": "%",
+        "as_written": "We-Math"
+      },
+      {
+        "benchmark": "dynamath",
+        "score": 83.6,
+        "unit": "%",
+        "as_written": "DynaMath"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 31.1,
+        "unit": "%",
+        "as_written": "Best of ZEROBench / ZEROBench_sub 31.1"
+      },
+      {
+        "benchmark": "vlms-are-blind",
+        "score": 93.7,
+        "unit": "%",
+        "as_written": "VlmsAreBlind"
+      },
+      {
+        "benchmark": "babyvision",
+        "score": 28.6,
+        "unit": "%",
+        "as_written": "BabyVision 28.6/25.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 80.3,
+        "unit": "%",
+        "as_written": "RealWorldQA"
+      },
+      {
+        "benchmark": "mmstar",
+        "score": 79.7,
+        "unit": "%",
+        "as_written": "MMStar"
+      },
+      {
+        "benchmark": "mmbench-en-v1-1",
+        "score": 90.1,
+        "unit": "%",
+        "as_written": "MMBench EN-DEV-v1.1"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 51.2,
+        "unit": "%",
+        "as_written": "SimpleVQA"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 69.3,
+        "unit": "%",
+        "as_written": "HallusionBench"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 87.7,
+        "unit": "%",
+        "as_written": "OmniDocBench1.5"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 73.0,
+        "unit": "%",
+        "as_written": "CharXiv(RQ)"
+      },
+      {
+        "benchmark": "mmlongbench-doc",
+        "score": 57.7,
+        "unit": "%",
+        "as_written": "MMLongBench-Doc"
+      },
+      {
+        "benchmark": "cc-ocr",
+        "score": 79.3,
+        "unit": "%",
+        "as_written": "CC-OCR"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 90.2,
+        "unit": "%",
+        "as_written": "AI2D_TEST"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 89.2,
+        "unit": "%",
+        "as_written": "OCRBench"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 55.5,
+        "unit": "%",
+        "as_written": "ERQA"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 97.2,
+        "unit": "%",
+        "as_written": "CountBench"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 89.7,
+        "unit": "%",
+        "as_written": "RefCOCO(avg)"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 83.0,
+        "unit": "%",
+        "as_written": "EmbSpatialBench"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 58.5,
+        "unit": "%",
+        "as_written": "RefSpatialBench"
+      },
+      {
+        "benchmark": "lingoqa",
+        "score": 80.4,
+        "unit": "%",
+        "as_written": "LingoQA"
+      },
+      {
+        "benchmark": "hypersim",
+        "score": 13.5,
+        "unit": "score",
+        "as_written": "Hypersim"
+      },
+      {
+        "benchmark": "nuscene",
+        "score": 11.8,
+        "unit": "score",
+        "as_written": "Nuscene"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 84.5,
+        "unit": "%",
+        "as_written": "Best of VideoMME(w sub.) / VideoMME(w/o sub.) 84.5"
+      },
+      {
+        "benchmark": "video-mmmu",
+        "score": 78.9,
+        "unit": "%",
+        "as_written": "VideoMMMU"
+      },
+      {
+        "benchmark": "mlvu",
+        "score": 84.4,
+        "unit": "%",
+        "as_written": "MLVU"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 74.4,
+        "unit": "%",
+        "as_written": "MVBench"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "LVBench"
+      },
+      {
+        "benchmark": "mmvu",
+        "score": 67.8,
+        "unit": "%",
+        "as_written": "MMVU"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 65.2,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro"
+      },
+      {
+        "benchmark": "osworld-verified",
+        "score": 41.8,
+        "unit": "%",
+        "as_written": "OSWorld-Verified"
+      },
+      {
+        "benchmark": "androidworld",
+        "score": 57.8,
+        "unit": "%",
+        "as_written": "AndroidWorld"
+      },
+      {
+        "benchmark": "tir-bench",
+        "score": 45.6,
+        "unit": "%",
+        "as_written": "TIR-Bench 45.6/31.9 (with CI / without CI)"
+      },
+      {
+        "benchmark": "v",
+        "score": 90.1,
+        "unit": "%",
+        "as_written": "V* 90.1/88.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "slake",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "SLAKE"
+      },
+      {
+        "benchmark": "pmc-vqa",
+        "score": 57.9,
+        "unit": "%",
+        "as_written": "PMC-VQA"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 49.9,
+        "unit": "%",
+        "as_written": "MedXpertQA-MM"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-4b-2026-03-02",
+    "lab": "qwen",
+    "model": "qwen3-5-4b",
+    "date": "2026-03-02",
+    "title": "Qwen3.5-4B model card (Hugging Face), Qwen3.5 small series",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+    "tier": "open-weights",
+    "notes": "Scores are from the official Hugging Face model card tables. Split cells use the with-CI value, and paired VideoMME and ZEROBench rows use the higher setting.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 79.1,
+        "unit": "%",
+        "as_written": "MMLU-Pro"
+      },
+      {
+        "benchmark": "mmlu-redux",
+        "score": 88.8,
+        "unit": "%",
+        "as_written": "MMLU-Redux"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 85.1,
+        "unit": "%",
+        "as_written": "C-Eval"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 52.9,
+        "unit": "%",
+        "as_written": "SuperGPQA"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 76.2,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 89.8,
+        "unit": "%",
+        "as_written": "IFEval"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 59.2,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "multichallenge",
+        "score": 49.0,
+        "unit": "%",
+        "as_written": "MultiChallenge"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 57.0,
+        "unit": "%",
+        "as_written": "AA-LCR"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 50.0,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "hmmt-2025",
+        "score": 74.0,
+        "unit": "%",
+        "as_written": "HMMT Feb 25"
+      },
+      {
+        "benchmark": "hmmt-nov-2025",
+        "score": 76.8,
+        "unit": "%",
+        "as_written": "HMMT Nov 25"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 55.8,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "ojbench",
+        "score": 24.1,
+        "unit": "%",
+        "as_written": "OJBench"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 50.3,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 79.9,
+        "unit": "%",
+        "as_written": "TAU2-Bench"
+      },
+      {
+        "benchmark": "vita-bench",
+        "score": 22.0,
+        "unit": "%",
+        "as_written": "VITA-Bench"
+      },
+      {
+        "benchmark": "deepplanning",
+        "score": 17.6,
+        "unit": "%",
+        "as_written": "DeepPlanning"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 76.1,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmlu-prox",
+        "score": 71.5,
+        "unit": "%",
+        "as_written": "MMLU-ProX"
+      },
+      {
+        "benchmark": "nova-63",
+        "score": 54.3,
+        "unit": "%",
+        "as_written": "NOVA-63"
+      },
+      {
+        "benchmark": "include",
+        "score": 71.0,
+        "unit": "%",
+        "as_written": "INCLUDE"
+      },
+      {
+        "benchmark": "global-piqa",
+        "score": 78.9,
+        "unit": "%",
+        "as_written": "Global PIQA"
+      },
+      {
+        "benchmark": "polymath",
+        "score": 51.1,
+        "unit": "%",
+        "as_written": "PolyMATH"
+      },
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 66.6,
+        "unit": "score",
+        "as_written": "WMT24++"
+      },
+      {
+        "benchmark": "maxife",
+        "score": 78.0,
+        "unit": "%",
+        "as_written": "MAXIFE"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 77.6,
+        "unit": "%",
+        "as_written": "MMMU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 66.3,
+        "unit": "%",
+        "as_written": "MMMU-Pro"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 74.6,
+        "unit": "%",
+        "as_written": "MathVision"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 85.1,
+        "unit": "%",
+        "as_written": "Mathvista(mini)"
+      },
+      {
+        "benchmark": "we-math",
+        "score": 75.4,
+        "unit": "%",
+        "as_written": "We-Math"
+      },
+      {
+        "benchmark": "dynamath",
+        "score": 83.3,
+        "unit": "%",
+        "as_written": "DynaMath"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 26.3,
+        "unit": "%",
+        "as_written": "Best of ZEROBench / ZEROBench_sub 26.3"
+      },
+      {
+        "benchmark": "vlms-are-blind",
+        "score": 92.6,
+        "unit": "%",
+        "as_written": "VlmsAreBlind"
+      },
+      {
+        "benchmark": "babyvision",
+        "score": 16.0,
+        "unit": "%",
+        "as_written": "BabyVision 16.0/19.1 (with CI / without CI)"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 79.5,
+        "unit": "%",
+        "as_written": "RealWorldQA"
+      },
+      {
+        "benchmark": "mmstar",
+        "score": 78.3,
+        "unit": "%",
+        "as_written": "MMStar"
+      },
+      {
+        "benchmark": "mmbench-en-v1-1",
+        "score": 89.4,
+        "unit": "%",
+        "as_written": "MMBench EN-DEV-v1.1"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 43.4,
+        "unit": "%",
+        "as_written": "SimpleVQA"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 65.0,
+        "unit": "%",
+        "as_written": "HallusionBench"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 86.2,
+        "unit": "%",
+        "as_written": "OmniDocBench1.5"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 70.8,
+        "unit": "%",
+        "as_written": "CharXiv(RQ)"
+      },
+      {
+        "benchmark": "mmlongbench-doc",
+        "score": 54.2,
+        "unit": "%",
+        "as_written": "MMLongBench-Doc"
+      },
+      {
+        "benchmark": "cc-ocr",
+        "score": 76.7,
+        "unit": "%",
+        "as_written": "CC-OCR"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 89.6,
+        "unit": "%",
+        "as_written": "AI2D_TEST"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 85.0,
+        "unit": "%",
+        "as_written": "OCRBench"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 54.0,
+        "unit": "%",
+        "as_written": "ERQA"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 96.3,
+        "unit": "%",
+        "as_written": "CountBench"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 88.1,
+        "unit": "%",
+        "as_written": "RefCOCO(avg)"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 81.3,
+        "unit": "%",
+        "as_written": "EmbSpatialBench"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 54.6,
+        "unit": "%",
+        "as_written": "RefSpatialBench"
+      },
+      {
+        "benchmark": "lingoqa",
+        "score": 74.4,
+        "unit": "%",
+        "as_written": "LingoQA"
+      },
+      {
+        "benchmark": "hypersim",
+        "score": 12.5,
+        "unit": "score",
+        "as_written": "Hypersim"
+      },
+      {
+        "benchmark": "nuscene",
+        "score": 9.9,
+        "unit": "score",
+        "as_written": "Nuscene"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 83.5,
+        "unit": "%",
+        "as_written": "Best of VideoMME(w sub.) / VideoMME(w/o sub.) 83.5"
+      },
+      {
+        "benchmark": "video-mmmu",
+        "score": 74.1,
+        "unit": "%",
+        "as_written": "VideoMMMU"
+      },
+      {
+        "benchmark": "mlvu",
+        "score": 82.8,
+        "unit": "%",
+        "as_written": "MLVU"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 71.2,
+        "unit": "%",
+        "as_written": "MVBench"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 66.4,
+        "unit": "%",
+        "as_written": "LVBench"
+      },
+      {
+        "benchmark": "mmvu",
+        "score": 64.9,
+        "unit": "%",
+        "as_written": "MMVU"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 60.3,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro"
+      },
+      {
+        "benchmark": "osworld-verified",
+        "score": 35.6,
+        "unit": "%",
+        "as_written": "OSWorld-Verified"
+      },
+      {
+        "benchmark": "androidworld",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "AndroidWorld"
+      },
+      {
+        "benchmark": "tir-bench",
+        "score": 38.9,
+        "unit": "%",
+        "as_written": "TIR-Bench 38.9/29.9 (with CI / without CI)"
+      },
+      {
+        "benchmark": "v",
+        "score": 84.3,
+        "unit": "%",
+        "as_written": "V* 84.3/86.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "slake",
+        "score": 76.1,
+        "unit": "%",
+        "as_written": "SLAKE"
+      },
+      {
+        "benchmark": "pmc-vqa",
+        "score": 55.5,
+        "unit": "%",
+        "as_written": "PMC-VQA"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 42.9,
+        "unit": "%",
+        "as_written": "MedXpertQA-MM"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-2b-2026-03-02",
+    "lab": "qwen",
+    "model": "qwen3-5-2b",
+    "date": "2026-03-02",
+    "title": "Qwen3.5-2B model card (Hugging Face), Qwen3.5 small series",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-2B",
+    "tier": "open-weights",
+    "notes": "Scores are from the official Hugging Face model card tables. For duplicate language rows, the Thinking setting is recorded. Split cells use the with-CI value, and paired VideoMME and ZEROBench rows use the higher setting.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 66.5,
+        "unit": "%",
+        "as_written": "MMLU-Pro (Thinking)"
+      },
+      {
+        "benchmark": "mmlu-redux",
+        "score": 79.6,
+        "unit": "%",
+        "as_written": "MMLU-Redux (Thinking)"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 73.2,
+        "unit": "%",
+        "as_written": "C-Eval (Thinking)"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 37.5,
+        "unit": "%",
+        "as_written": "SuperGPQA (Thinking)"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 78.6,
+        "unit": "%",
+        "as_written": "IFEval (Thinking)"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 63.1,
+        "unit": "%",
+        "as_written": "MMMLU (Thinking)"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 51.6,
+        "unit": "%",
+        "as_written": "GPQA"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 41.3,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "multichallenge",
+        "score": 33.7,
+        "unit": "%",
+        "as_written": "MultiChallenge"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 25.6,
+        "unit": "%",
+        "as_written": "AA-LCR"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 38.7,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "hmmt-2025",
+        "score": 22.9,
+        "unit": "%",
+        "as_written": "HMMT Feb 25"
+      },
+      {
+        "benchmark": "hmmt-nov-2025",
+        "score": 19.6,
+        "unit": "%",
+        "as_written": "HMMT Nov 25"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 43.6,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 48.8,
+        "unit": "%",
+        "as_written": "TAU2-Bench"
+      },
+      {
+        "benchmark": "mmlu-prox",
+        "score": 52.3,
+        "unit": "%",
+        "as_written": "MMLU-ProX"
+      },
+      {
+        "benchmark": "nova-63",
+        "score": 46.4,
+        "unit": "%",
+        "as_written": "NOVA-63"
+      },
+      {
+        "benchmark": "include",
+        "score": 55.4,
+        "unit": "%",
+        "as_written": "INCLUDE"
+      },
+      {
+        "benchmark": "global-piqa",
+        "score": 69.3,
+        "unit": "%",
+        "as_written": "Global PIQA"
+      },
+      {
+        "benchmark": "polymath",
+        "score": 26.1,
+        "unit": "%",
+        "as_written": "PolyMATH"
+      },
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 45.8,
+        "unit": "score",
+        "as_written": "WMT24++"
+      },
+      {
+        "benchmark": "maxife",
+        "score": 60.6,
+        "unit": "%",
+        "as_written": "MAXIFE"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 64.2,
+        "unit": "%",
+        "as_written": "MMMU 64.2/64.2 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 50.3,
+        "unit": "%",
+        "as_written": "MMMU-Pro 50.3/47.7 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 76.7,
+        "unit": "%",
+        "as_written": "Mathvista(mini) 76.7/73.9 (with CI / without CI)"
+      },
+      {
+        "benchmark": "dynamath",
+        "score": 73.6,
+        "unit": "%",
+        "as_written": "DynaMath 73.6/69.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 17.1,
+        "unit": "%",
+        "as_written": "Best of ZEROBench / ZEROBench_sub 17.1/18.6"
+      },
+      {
+        "benchmark": "vlms-are-blind",
+        "score": 75.8,
+        "unit": "%",
+        "as_written": "VlmsAreBlind 75.8/74.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 74.5,
+        "unit": "%",
+        "as_written": "RealWorldQA 74.5/71.2 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmstar",
+        "score": 71.7,
+        "unit": "%",
+        "as_written": "MMStar 71.7/68.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmbench-en-v1-1",
+        "score": 83.3,
+        "unit": "%",
+        "as_written": "MMBench EN-DEV-v1.1 83.3/81.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 38.5,
+        "unit": "%",
+        "as_written": "SimpleVQA 38.5/39.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 58.0,
+        "unit": "%",
+        "as_written": "HallusionBench 58.0/51.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmlongbench-doc",
+        "score": 45.4,
+        "unit": "%",
+        "as_written": "MMLongBench-Doc 45.4/38.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 83.3,
+        "unit": "%",
+        "as_written": "AI2D_TEST 83.3/81.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "cc-ocr",
+        "score": 72.9,
+        "unit": "%",
+        "as_written": "CC-OCR 72.9/75.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 79.8,
+        "unit": "%",
+        "as_written": "OmniDocBench1.5 79.8/80.9 (with CI / without CI)"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 58.8,
+        "unit": "%",
+        "as_written": "CharXiv(RQ) 58.8/52.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 84.5,
+        "unit": "%",
+        "as_written": "OCRBench 84.5/85.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 84.8,
+        "unit": "%",
+        "as_written": "RefCOCO(avg) 84.8/84.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 91.4,
+        "unit": "%",
+        "as_written": "CountBench 91.4/86.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "odinw-13",
+        "score": 35.9,
+        "unit": "%",
+        "as_written": "ODInW13 35.9/40.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 43.8,
+        "unit": "%",
+        "as_written": "ERQA 43.8/33.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "EmbSpatialBench 77.9/66.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 32.9,
+        "unit": "%",
+        "as_written": "RefSpatialBench 32.9/30.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "hypersim",
+        "score": 12.4,
+        "unit": "score",
+        "as_written": "Hypersim 12.4/12.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "sunrgbd",
+        "score": 28.7,
+        "unit": "score",
+        "as_written": "SUNRGBD 28.7/25.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "nuscene",
+        "score": 6.9,
+        "unit": "score",
+        "as_written": "Nuscene 6.9/8.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 75.6,
+        "unit": "%",
+        "as_written": "Best of VideoMME(w sub.) / VideoMME(w/o sub.) 75.6/--"
+      },
+      {
+        "benchmark": "video-mmmu",
+        "score": 62.1,
+        "unit": "%",
+        "as_written": "VideoMMMU 62.1/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "mlvu",
+        "score": 76.2,
+        "unit": "%",
+        "as_written": "MLVU 76.2/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 64.9,
+        "unit": "%",
+        "as_written": "MVBench 64.9/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 57.1,
+        "unit": "%",
+        "as_written": "LVBench 57.1/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmvu",
+        "score": 48.6,
+        "unit": "%",
+        "as_written": "MMVU 48.6/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "slake",
+        "score": 74.4,
+        "unit": "%",
+        "as_written": "SLAKE 74.4/67.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "pmc-vqa",
+        "score": 48.8,
+        "unit": "%",
+        "as_written": "PMC-VQA 48.8/54.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 26.9,
+        "unit": "%",
+        "as_written": "MedXpertQA-MM 26.9/19.1 (with CI / without CI)"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 54.5,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro --/54.5"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-0-8b-2026-03-02",
+    "lab": "qwen",
+    "model": "qwen3-5-0-8b",
+    "date": "2026-03-02",
+    "title": "Qwen3.5-0.8B model card (Hugging Face), Qwen3.5 small series",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+    "tier": "open-weights",
+    "notes": "Scores are from the official Hugging Face model card tables. For duplicate language rows, the Thinking setting is recorded. Split cells use the with-CI value, and paired VideoMME and ZEROBench rows use the higher setting.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 42.3,
+        "unit": "%",
+        "as_written": "MMLU-Pro (Thinking)"
+      },
+      {
+        "benchmark": "mmlu-redux",
+        "score": 59.5,
+        "unit": "%",
+        "as_written": "MMLU-Redux (Thinking)"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 50.5,
+        "unit": "%",
+        "as_written": "C-Eval (Thinking)"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 21.3,
+        "unit": "%",
+        "as_written": "SuperGPQA (Thinking)"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 44.0,
+        "unit": "%",
+        "as_written": "IFEval (Thinking)"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 44.3,
+        "unit": "%",
+        "as_written": "MMMLU (Thinking)"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 11.9,
+        "unit": "%",
+        "as_written": "GPQA"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 21.0,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "multichallenge",
+        "score": 18.9,
+        "unit": "%",
+        "as_written": "MultiChallenge"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 4.7,
+        "unit": "%",
+        "as_written": "AA-LCR"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 26.1,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 25.3,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 11.6,
+        "unit": "%",
+        "as_written": "TAU2-Bench"
+      },
+      {
+        "benchmark": "mmlu-prox",
+        "score": 34.6,
+        "unit": "%",
+        "as_written": "MMLU-ProX"
+      },
+      {
+        "benchmark": "nova-63",
+        "score": 42.4,
+        "unit": "%",
+        "as_written": "NOVA-63"
+      },
+      {
+        "benchmark": "include",
+        "score": 40.6,
+        "unit": "%",
+        "as_written": "INCLUDE"
+      },
+      {
+        "benchmark": "global-piqa",
+        "score": 59.4,
+        "unit": "%",
+        "as_written": "Global PIQA"
+      },
+      {
+        "benchmark": "polymath",
+        "score": 8.2,
+        "unit": "%",
+        "as_written": "PolyMATH"
+      },
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 27.2,
+        "unit": "score",
+        "as_written": "WMT24++"
+      },
+      {
+        "benchmark": "maxife",
+        "score": 39.2,
+        "unit": "%",
+        "as_written": "MAXIFE"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 49.0,
+        "unit": "%",
+        "as_written": "MMMU 49/47.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 31.2,
+        "unit": "%",
+        "as_written": "MMMU-Pro 31.2/31.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 62.2,
+        "unit": "%",
+        "as_written": "Mathvista(mini) 62.2/58.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "dynamath",
+        "score": 49.9,
+        "unit": "%",
+        "as_written": "DynaMath 49.9/46.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 12.9,
+        "unit": "%",
+        "as_written": "Best of ZEROBench / ZEROBench_sub 12.9/11.4"
+      },
+      {
+        "benchmark": "vlms-are-blind",
+        "score": 59.4,
+        "unit": "%",
+        "as_written": "VlmsAreBlind 59.4/57.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 63.4,
+        "unit": "%",
+        "as_written": "RealWorldQA 63.4/61.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmstar",
+        "score": 58.3,
+        "unit": "%",
+        "as_written": "MMStar 58.3/55.9 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmbench-en-v1-1",
+        "score": 69.9,
+        "unit": "%",
+        "as_written": "MMBench EN-DEV-v1.1 69.9/68.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 31.3,
+        "unit": "%",
+        "as_written": "SimpleVQA 31.3/30.4 (with CI / without CI)"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 53.1,
+        "unit": "%",
+        "as_written": "HallusionBench 53.1/46.7 (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmlongbench-doc",
+        "score": 33.6,
+        "unit": "%",
+        "as_written": "MMLongBench-Doc 33.6/28.1 (with CI / without CI)"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 69.9,
+        "unit": "%",
+        "as_written": "AI2D_TEST 69.9/68.7 (with CI / without CI)"
+      },
+      {
+        "benchmark": "cc-ocr",
+        "score": 63.2,
+        "unit": "%",
+        "as_written": "CC-OCR 63.2/66.7 (with CI / without CI)"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 61.0,
+        "unit": "%",
+        "as_written": "OmniDocBench1.5 61.0/70.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 41.3,
+        "unit": "%",
+        "as_written": "CharXiv(RQ) 41.3/38.2 (with CI / without CI)"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 74.5,
+        "unit": "%",
+        "as_written": "OCRBench 74.5/79.1 (with CI / without CI)"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 79.3,
+        "unit": "%",
+        "as_written": "RefCOCO(avg) 79.3/77.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 77.0,
+        "unit": "%",
+        "as_written": "CountBench 77.0/68.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "odinw-13",
+        "score": 31.6,
+        "unit": "%",
+        "as_written": "ODInW13 31.6/33.2 (with CI / without CI)"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 34.5,
+        "unit": "%",
+        "as_written": "ERQA 34.5/23.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 68.6,
+        "unit": "%",
+        "as_written": "EmbSpatialBench 68.6/54.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 23.5,
+        "unit": "%",
+        "as_written": "RefSpatialBench 23.5/21.7 (with CI / without CI)"
+      },
+      {
+        "benchmark": "hypersim",
+        "score": 11.9,
+        "unit": "score",
+        "as_written": "Hypersim 11.9/11.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "sunrgbd",
+        "score": 26.1,
+        "unit": "score",
+        "as_written": "SUNRGBD 26.1/23.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "nuscene",
+        "score": 5.7,
+        "unit": "score",
+        "as_written": "Nuscene 5.7/7.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 63.8,
+        "unit": "%",
+        "as_written": "Best of VideoMME(w sub.) / VideoMME(w/o sub.) 63.8/--"
+      },
+      {
+        "benchmark": "video-mmmu",
+        "score": 44.3,
+        "unit": "%",
+        "as_written": "VideoMMMU 44.3/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "mlvu",
+        "score": 65.6,
+        "unit": "%",
+        "as_written": "MLVU 65.6/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 55.8,
+        "unit": "%",
+        "as_written": "MVBench 55.8/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 45.1,
+        "unit": "%",
+        "as_written": "LVBench 45.1/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "mmvu",
+        "score": 34.3,
+        "unit": "%",
+        "as_written": "MMVU 34.3/-- (with CI / without CI)"
+      },
+      {
+        "benchmark": "slake",
+        "score": 62.6,
+        "unit": "%",
+        "as_written": "SLAKE 62.6/59.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "pmc-vqa",
+        "score": 40.4,
+        "unit": "%",
+        "as_written": "PMC-VQA 40.4/45.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 17.1,
+        "unit": "%",
+        "as_written": "MedXpertQA-MM 17.1/25.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 46.5,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro --/46.5"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-27b-2026-02-24",
+    "lab": "qwen",
+    "model": "qwen3-5-27b",
+    "date": "2026-02-24",
+    "title": "Qwen3.5-27B model card (Hugging Face), Qwen3.5 medium series",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-27B",
+    "tier": "open-weights",
+    "notes": "Scores are from the official Hugging Face model card tables. Split cells use the with-CI value, and paired VideoMME and ZEROBench rows use the higher setting.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 86.1,
+        "unit": "%",
+        "as_written": "MMLU-Pro"
+      },
+      {
+        "benchmark": "mmlu-redux",
+        "score": 93.2,
+        "unit": "%",
+        "as_written": "MMLU-Redux"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 90.5,
+        "unit": "%",
+        "as_written": "C-Eval"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 65.6,
+        "unit": "%",
+        "as_written": "SuperGPQA"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 95.0,
+        "unit": "%",
+        "as_written": "IFEval"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 76.5,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "multichallenge",
+        "score": 60.8,
+        "unit": "%",
+        "as_written": "MultiChallenge"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 66.1,
+        "unit": "%",
+        "as_written": "AA-LCR"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 60.6,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 85.5,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "hmmt-2025",
+        "score": 92.0,
+        "unit": "%",
+        "as_written": "HMMT Feb 25"
+      },
+      {
+        "benchmark": "hmmt-nov-2025",
+        "score": 89.8,
+        "unit": "%",
+        "as_written": "HMMT Nov 25"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 72.4,
+        "unit": "%",
+        "as_written": "SWE-bench Verified"
+      },
+      {
+        "benchmark": "terminal-bench-2-0",
+        "score": 41.6,
+        "unit": "%",
+        "as_written": "Terminal Bench 2"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 80.7,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 1899.0,
+        "unit": "Elo",
+        "as_written": "CodeForces"
+      },
+      {
+        "benchmark": "ojbench",
+        "score": 40.1,
+        "unit": "%",
+        "as_written": "OJBench"
+      },
+      {
+        "benchmark": "fullstackbench",
+        "score": 58.8,
+        "unit": "%",
+        "as_written": "Mean of FullStackBench en 60.1 / FullStackBench zh 57.4"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 68.5,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "TAU2-Bench"
+      },
+      {
+        "benchmark": "vita-bench",
+        "score": 41.9,
+        "unit": "%",
+        "as_written": "VITA-Bench"
+      },
+      {
+        "benchmark": "deepplanning",
+        "score": 22.6,
+        "unit": "%",
+        "as_written": "DeepPlanning"
+      },
+      {
+        "benchmark": "browsecomp",
+        "score": 61.0,
+        "unit": "%",
+        "as_written": "Browsecomp"
+      },
+      {
+        "benchmark": "browsecomp-zh",
+        "score": 62.1,
+        "unit": "%",
+        "as_written": "Browsecomp-zh"
+      },
+      {
+        "benchmark": "widesearch",
+        "score": 61.1,
+        "unit": "%",
+        "as_written": "WideSearch"
+      },
+      {
+        "benchmark": "seal-0",
+        "score": 47.2,
+        "unit": "%",
+        "as_written": "Seal-0"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 85.9,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmlu-prox",
+        "score": 82.2,
+        "unit": "%",
+        "as_written": "MMLU-ProX"
+      },
+      {
+        "benchmark": "nova-63",
+        "score": 58.1,
+        "unit": "%",
+        "as_written": "NOVA-63"
+      },
+      {
+        "benchmark": "include",
+        "score": 81.6,
+        "unit": "%",
+        "as_written": "INCLUDE"
+      },
+      {
+        "benchmark": "global-piqa",
+        "score": 87.5,
+        "unit": "%",
+        "as_written": "Global PIQA"
+      },
+      {
+        "benchmark": "polymath",
+        "score": 71.2,
+        "unit": "%",
+        "as_written": "PolyMATH"
+      },
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 77.6,
+        "unit": "score",
+        "as_written": "WMT24++"
+      },
+      {
+        "benchmark": "maxife",
+        "score": 88.0,
+        "unit": "%",
+        "as_written": "MAXIFE"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 82.3,
+        "unit": "%",
+        "as_written": "MMMU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 75.0,
+        "unit": "%",
+        "as_written": "MMMU-Pro"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 86.0,
+        "unit": "%",
+        "as_written": "MathVision"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 87.8,
+        "unit": "%",
+        "as_written": "Mathvista(mini)"
+      },
+      {
+        "benchmark": "dynamath",
+        "score": 87.7,
+        "unit": "%",
+        "as_written": "DynaMath"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 36.2,
+        "unit": "%",
+        "as_written": "Best of ZEROBench / ZEROBench_sub 36.2"
+      },
+      {
+        "benchmark": "vlms-are-blind",
+        "score": 96.9,
+        "unit": "%",
+        "as_written": "VlmsAreBlind"
+      },
+      {
+        "benchmark": "babyvision",
+        "score": 44.6,
+        "unit": "%",
+        "as_written": "BabyVision 44.6 / 34.8 (with CI / without CI)"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 83.7,
+        "unit": "%",
+        "as_written": "RealWorldQA"
+      },
+      {
+        "benchmark": "mmstar",
+        "score": 81.0,
+        "unit": "%",
+        "as_written": "MMStar"
+      },
+      {
+        "benchmark": "mmbench-en-v1-1",
+        "score": 92.6,
+        "unit": "%",
+        "as_written": "MMBench EN-DEV-v1.1"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 56.0,
+        "unit": "%",
+        "as_written": "SimpleVQA"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 70.0,
+        "unit": "%",
+        "as_written": "HallusionBench"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 88.9,
+        "unit": "%",
+        "as_written": "OmniDocBench1.5"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 79.5,
+        "unit": "%",
+        "as_written": "CharXiv(RQ)"
+      },
+      {
+        "benchmark": "mmlongbench-doc",
+        "score": 60.2,
+        "unit": "%",
+        "as_written": "MMLongBench-Doc"
+      },
+      {
+        "benchmark": "cc-ocr",
+        "score": 81.0,
+        "unit": "%",
+        "as_written": "CC-OCR"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 92.9,
+        "unit": "%",
+        "as_written": "AI2D_TEST"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 89.4,
+        "unit": "%",
+        "as_written": "OCRBench"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 60.5,
+        "unit": "%",
+        "as_written": "ERQA"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 97.8,
+        "unit": "%",
+        "as_written": "CountBench"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 90.9,
+        "unit": "%",
+        "as_written": "RefCOCO(avg)"
+      },
+      {
+        "benchmark": "odinw-13",
+        "score": 41.1,
+        "unit": "%",
+        "as_written": "ODInW13"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 84.5,
+        "unit": "%",
+        "as_written": "EmbSpatialBench"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 67.7,
+        "unit": "%",
+        "as_written": "RefSpatialBench"
+      },
+      {
+        "benchmark": "lingoqa",
+        "score": 82.0,
+        "unit": "%",
+        "as_written": "LingoQA"
+      },
+      {
+        "benchmark": "hypersim",
+        "score": 13.0,
+        "unit": "score",
+        "as_written": "Hypersim"
+      },
+      {
+        "benchmark": "sunrgbd",
+        "score": 35.4,
+        "unit": "score",
+        "as_written": "SUNRGBD"
+      },
+      {
+        "benchmark": "nuscene",
+        "score": 15.2,
+        "unit": "score",
+        "as_written": "Nuscene"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 87.0,
+        "unit": "%",
+        "as_written": "Best of VideoMME(w sub.) / VideoMME(w/o sub.) 87.0"
+      },
+      {
+        "benchmark": "video-mmmu",
+        "score": 82.3,
+        "unit": "%",
+        "as_written": "VideoMMMU"
+      },
+      {
+        "benchmark": "mlvu",
+        "score": 85.9,
+        "unit": "%",
+        "as_written": "MLVU"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 74.6,
+        "unit": "%",
+        "as_written": "MVBench"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 73.6,
+        "unit": "%",
+        "as_written": "LVBench"
+      },
+      {
+        "benchmark": "mmvu",
+        "score": 73.3,
+        "unit": "%",
+        "as_written": "MMVU"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 70.3,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro"
+      },
+      {
+        "benchmark": "osworld-verified",
+        "score": 56.2,
+        "unit": "%",
+        "as_written": "OSWorld-Verified"
+      },
+      {
+        "benchmark": "androidworld",
+        "score": 64.2,
+        "unit": "%",
+        "as_written": "AndroidWorld"
+      },
+      {
+        "benchmark": "tir-bench",
+        "score": 59.8,
+        "unit": "%",
+        "as_written": "TIR-Bench 59.8 / 42.3 (with CI / without CI)"
+      },
+      {
+        "benchmark": "v",
+        "score": 93.7,
+        "unit": "%",
+        "as_written": "V* 93.7 / 89.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "slake",
+        "score": 80.0,
+        "unit": "%",
+        "as_written": "SLAKE"
+      },
+      {
+        "benchmark": "pmc-vqa",
+        "score": 62.4,
+        "unit": "%",
+        "as_written": "PMC-VQA"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 62.4,
+        "unit": "%",
+        "as_written": "MedXpertQA-MM"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 48.5,
+        "unit": "%",
+        "as_written": "HLE w/ CoT 24.3; HLE w/ tool 48.5"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-5-35b-a3b-2026-02-24",
+    "lab": "qwen",
+    "model": "qwen3-5-35b-a3b",
+    "date": "2026-02-24",
+    "title": "Qwen3.5-35B-A3B model card (Hugging Face), Qwen3.5 medium series",
+    "url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+    "tier": "open-weights",
+    "notes": "Scores are from the official Hugging Face model card tables. Split cells use the with-CI value, and paired VideoMME and ZEROBench rows use the higher setting.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 85.3,
+        "unit": "%",
+        "as_written": "MMLU-Pro"
+      },
+      {
+        "benchmark": "mmlu-redux",
+        "score": 93.3,
+        "unit": "%",
+        "as_written": "MMLU-Redux"
+      },
+      {
+        "benchmark": "c-eval",
+        "score": 90.2,
+        "unit": "%",
+        "as_written": "C-Eval"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 63.4,
+        "unit": "%",
+        "as_written": "SuperGPQA"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 91.9,
+        "unit": "%",
+        "as_written": "IFEval"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 70.2,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "multichallenge",
+        "score": 60.0,
+        "unit": "%",
+        "as_written": "MultiChallenge"
+      },
+      {
+        "benchmark": "aa-lcr-artificial-analysis-long-context-reasoning",
+        "score": 58.5,
+        "unit": "%",
+        "as_written": "AA-LCR"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 59.0,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 84.2,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "hmmt-2025",
+        "score": 89.0,
+        "unit": "%",
+        "as_written": "HMMT Feb 25"
+      },
+      {
+        "benchmark": "hmmt-nov-2025",
+        "score": 89.2,
+        "unit": "%",
+        "as_written": "HMMT Nov 25"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 69.2,
+        "unit": "%",
+        "as_written": "SWE-bench Verified"
+      },
+      {
+        "benchmark": "terminal-bench-2-0",
+        "score": 40.5,
+        "unit": "%",
+        "as_written": "Terminal Bench 2"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 74.6,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 2028.0,
+        "unit": "Elo",
+        "as_written": "CodeForces"
+      },
+      {
+        "benchmark": "ojbench",
+        "score": 36.0,
+        "unit": "%",
+        "as_written": "OJBench"
+      },
+      {
+        "benchmark": "fullstackbench",
+        "score": 56.5,
+        "unit": "%",
+        "as_written": "Mean of FullStackBench en 58.1 / FullStackBench zh 55.0"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 67.3,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 81.2,
+        "unit": "%",
+        "as_written": "TAU2-Bench"
+      },
+      {
+        "benchmark": "vita-bench",
+        "score": 31.9,
+        "unit": "%",
+        "as_written": "VITA-Bench"
+      },
+      {
+        "benchmark": "deepplanning",
+        "score": 22.8,
+        "unit": "%",
+        "as_written": "DeepPlanning"
+      },
+      {
+        "benchmark": "browsecomp",
+        "score": 61.0,
+        "unit": "%",
+        "as_written": "Browsecomp"
+      },
+      {
+        "benchmark": "browsecomp-zh",
+        "score": 69.5,
+        "unit": "%",
+        "as_written": "Browsecomp-zh"
+      },
+      {
+        "benchmark": "widesearch",
+        "score": 57.1,
+        "unit": "%",
+        "as_written": "WideSearch"
+      },
+      {
+        "benchmark": "seal-0",
+        "score": 41.4,
+        "unit": "%",
+        "as_written": "Seal-0"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 85.2,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmlu-prox",
+        "score": 81.0,
+        "unit": "%",
+        "as_written": "MMLU-ProX"
+      },
+      {
+        "benchmark": "nova-63",
+        "score": 57.1,
+        "unit": "%",
+        "as_written": "NOVA-63"
+      },
+      {
+        "benchmark": "include",
+        "score": 79.7,
+        "unit": "%",
+        "as_written": "INCLUDE"
+      },
+      {
+        "benchmark": "global-piqa",
+        "score": 86.6,
+        "unit": "%",
+        "as_written": "Global PIQA"
+      },
+      {
+        "benchmark": "polymath",
+        "score": 64.4,
+        "unit": "%",
+        "as_written": "PolyMATH"
+      },
+      {
+        "benchmark": "wmt24-plus-plus",
+        "score": 76.3,
+        "unit": "score",
+        "as_written": "WMT24++"
+      },
+      {
+        "benchmark": "maxife",
+        "score": 86.6,
+        "unit": "%",
+        "as_written": "MAXIFE"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 81.4,
+        "unit": "%",
+        "as_written": "MMMU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 75.1,
+        "unit": "%",
+        "as_written": "MMMU-Pro"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 83.9,
+        "unit": "%",
+        "as_written": "MathVision"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 86.2,
+        "unit": "%",
+        "as_written": "Mathvista(mini)"
+      },
+      {
+        "benchmark": "dynamath",
+        "score": 85.0,
+        "unit": "%",
+        "as_written": "DynaMath"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 34.1,
+        "unit": "%",
+        "as_written": "Best of ZEROBench / ZEROBench_sub 34.1"
+      },
+      {
+        "benchmark": "vlms-are-blind",
+        "score": 97.0,
+        "unit": "%",
+        "as_written": "VlmsAreBlind"
+      },
+      {
+        "benchmark": "babyvision",
+        "score": 38.4,
+        "unit": "%",
+        "as_written": "BabyVision 38.4 / 29.6 (with CI / without CI)"
+      },
+      {
+        "benchmark": "realworldqa",
+        "score": 84.1,
+        "unit": "%",
+        "as_written": "RealWorldQA"
+      },
+      {
+        "benchmark": "mmstar",
+        "score": 81.9,
+        "unit": "%",
+        "as_written": "MMStar"
+      },
+      {
+        "benchmark": "mmbench-en-v1-1",
+        "score": 91.5,
+        "unit": "%",
+        "as_written": "MMBench EN-DEV-v1.1"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 58.3,
+        "unit": "%",
+        "as_written": "SimpleVQA"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 67.9,
+        "unit": "%",
+        "as_written": "HallusionBench"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 89.3,
+        "unit": "%",
+        "as_written": "OmniDocBench1.5"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 77.5,
+        "unit": "%",
+        "as_written": "CharXiv(RQ)"
+      },
+      {
+        "benchmark": "mmlongbench-doc",
+        "score": 59.5,
+        "unit": "%",
+        "as_written": "MMLongBench-Doc"
+      },
+      {
+        "benchmark": "cc-ocr",
+        "score": 80.7,
+        "unit": "%",
+        "as_written": "CC-OCR"
+      },
+      {
+        "benchmark": "ai2d",
+        "score": 92.6,
+        "unit": "%",
+        "as_written": "AI2D_TEST"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 91.0,
+        "unit": "%",
+        "as_written": "OCRBench"
+      },
+      {
+        "benchmark": "erqa",
+        "score": 64.8,
+        "unit": "%",
+        "as_written": "ERQA"
+      },
+      {
+        "benchmark": "countbench",
+        "score": 97.8,
+        "unit": "%",
+        "as_written": "CountBench"
+      },
+      {
+        "benchmark": "refcoco-refcoco-plus-refcocog",
+        "score": 89.2,
+        "unit": "%",
+        "as_written": "RefCOCO(avg)"
+      },
+      {
+        "benchmark": "odinw-13",
+        "score": 42.6,
+        "unit": "%",
+        "as_written": "ODInW13"
+      },
+      {
+        "benchmark": "embspatialbench",
+        "score": 83.1,
+        "unit": "%",
+        "as_written": "EmbSpatialBench"
+      },
+      {
+        "benchmark": "refspatial-bench",
+        "score": 63.5,
+        "unit": "%",
+        "as_written": "RefSpatialBench"
+      },
+      {
+        "benchmark": "lingoqa",
+        "score": 79.2,
+        "unit": "%",
+        "as_written": "LingoQA"
+      },
+      {
+        "benchmark": "hypersim",
+        "score": 13.1,
+        "unit": "score",
+        "as_written": "Hypersim"
+      },
+      {
+        "benchmark": "sunrgbd",
+        "score": 33.4,
+        "unit": "score",
+        "as_written": "SUNRGBD"
+      },
+      {
+        "benchmark": "nuscene",
+        "score": 14.6,
+        "unit": "score",
+        "as_written": "Nuscene"
+      },
+      {
+        "benchmark": "video-mme",
+        "score": 86.6,
+        "unit": "%",
+        "as_written": "Best of VideoMME(w sub.) / VideoMME(w/o sub.) 86.6"
+      },
+      {
+        "benchmark": "video-mmmu",
+        "score": 80.4,
+        "unit": "%",
+        "as_written": "VideoMMMU"
+      },
+      {
+        "benchmark": "mlvu",
+        "score": 85.6,
+        "unit": "%",
+        "as_written": "MLVU"
+      },
+      {
+        "benchmark": "mvbench",
+        "score": 74.8,
+        "unit": "%",
+        "as_written": "MVBench"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 71.4,
+        "unit": "%",
+        "as_written": "LVBench"
+      },
+      {
+        "benchmark": "mmvu",
+        "score": 72.3,
+        "unit": "%",
+        "as_written": "MMVU"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 68.6,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro"
+      },
+      {
+        "benchmark": "osworld-verified",
+        "score": 54.5,
+        "unit": "%",
+        "as_written": "OSWorld-Verified"
+      },
+      {
+        "benchmark": "androidworld",
+        "score": 71.1,
+        "unit": "%",
+        "as_written": "AndroidWorld"
+      },
+      {
+        "benchmark": "tir-bench",
+        "score": 55.5,
+        "unit": "%",
+        "as_written": "TIR-Bench 55.5 / 38.0 (with CI / without CI)"
+      },
+      {
+        "benchmark": "v",
+        "score": 92.7,
+        "unit": "%",
+        "as_written": "V* 92.7 / 89.5 (with CI / without CI)"
+      },
+      {
+        "benchmark": "slake",
+        "score": 78.7,
+        "unit": "%",
+        "as_written": "SLAKE"
+      },
+      {
+        "benchmark": "pmc-vqa",
+        "score": 62.0,
+        "unit": "%",
+        "as_written": "PMC-VQA"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 61.4,
+        "unit": "%",
+        "as_written": "MedXpertQA-MM"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 47.4,
+        "unit": "%",
+        "as_written": "HLE w/ CoT 22.4; HLE w/ tool 47.4"
+      }
+    ]
+  },
+  {
+    "id": "openai-gpt-live-1-2026-07-08",
+    "lab": "openai",
+    "model": "gpt-live-1",
+    "date": "2026-07-08",
+    "title": "Introducing GPT-Live-1 in the API (OpenAI)",
+    "url": "https://openai.com/index/introducing-gpt-live-1-in-the-api/",
+    "tier": "mid",
+    "notes": "The launch post gives printed chart labels for Full Duplex Bench v1.5, Tau3 voice intelligence and Tau Banking voice knowledge. The page does not give a separate numeric result for GPT-Live-1 mini.",
+    "results": [
+      {
+        "benchmark": "full-duplex-bench-1-5",
+        "score": 80.1,
+        "unit": "%",
+        "as_written": "Full Duplex Bench v1.5 Interactivity, average score"
+      },
+      {
+        "benchmark": "tau3-bench",
+        "score": 86.2,
+        "unit": "%",
+        "as_written": "Tau3 (Voice) Intelligence, Pass@1, GPT-Live-1 paired with GPT-6 Astra at medium reasoning effort (asterisked in the chart)"
+      },
+      {
+        "benchmark": "tau3-banking",
+        "score": 32.0,
+        "unit": "%",
+        "as_written": "Tau Banking (Voice) Knowledge, Pass@1, GPT-Live-1 paired with GPT-6 Astra at medium reasoning effort (asterisked in the chart)"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-3-8-flash-tts-2026-09-23",
+    "lab": "google",
+    "model": "gemini-3-8-flash-tts",
+    "date": "2026-09-23",
+    "title": "Gemini 3.8 Flash TTS launch (Google DeepMind)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/",
+    "tier": "mid",
+    "notes": "The launch post prints the Hume AI results. The Voice Arena table is on the model page record.",
+    "results": [
+      {
+        "benchmark": "hume-ai-overall-quality-index",
+        "score": 0.92,
+        "unit": "index",
+        "as_written": "Hume AI Text-to-Speech Quality Benchmark, Overall Reliability x Expressiveness"
+      },
+      {
+        "benchmark": "hume-ai-voice-design-benchmark",
+        "score": 71.4,
+        "unit": "score",
+        "as_written": "Hume AI Voice Design Benchmark, Overall English"
+      }
+    ]
+  },
+  {
+    "id": "google-gemma-4-e2b-2026-04-02",
+    "lab": "google",
+    "model": "gemma-4-e2b-it",
+    "date": "2026-04-02",
+    "title": "Gemma 4 model card",
+    "url": "https://ai.google.dev/gemma/docs/core/model_card_4",
+    "tier": "small",
+    "notes": "Instruction-tuned scores from the official Gemma 4 model card. The card table compares Gemma 4 31B, 26B A4B, 12B Unified, E4B and E2B. Scores with a dash are omitted.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 60,
+        "unit": "%",
+        "as_written": "MMLU Pro"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 37.5,
+        "unit": "%",
+        "as_written": "AIME 2026 no tools"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 44,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 633,
+        "unit": "elo",
+        "as_written": "Codeforces ELO"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 43.4,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 24.5,
+        "unit": "%",
+        "as_written": "Tau2 (average over 3)"
+      },
+      {
+        "benchmark": "big-bench-extra-hard-micro",
+        "score": 21.9,
+        "unit": "%",
+        "as_written": "BigBench Extra Hard"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 67.4,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 44.2,
+        "unit": "%",
+        "as_written": "MMMU Pro"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 0.29,
+        "unit": "score",
+        "as_written": "OmniDocBench 1.5 (average edit distance, lower is better)"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 52.4,
+        "unit": "%",
+        "as_written": "MATH-Vision"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 23.5,
+        "unit": "%",
+        "as_written": "MedXPertQA MM"
+      },
+      {
+        "benchmark": "covost2",
+        "score": 33.47,
+        "unit": "score",
+        "as_written": "CoVoST average, excluding Chinese"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 0.09,
+        "unit": "score",
+        "as_written": "FLEURS average WER, lower is better, excluding Chinese"
+      },
+      {
+        "benchmark": "mrcr-v2",
+        "score": 19.1,
+        "unit": "%",
+        "as_written": "MRCR v2 8 needle 128k (average)"
+      }
+    ]
+  },
+  {
+    "id": "google-gemma-4-e4b-2026-04-02",
+    "lab": "google",
+    "model": "gemma-4-e4b-it",
+    "date": "2026-04-02",
+    "title": "Gemma 4 model card",
+    "url": "https://ai.google.dev/gemma/docs/core/model_card_4",
+    "tier": "small",
+    "notes": "Instruction-tuned scores from the official Gemma 4 model card. The card table compares Gemma 4 31B, 26B A4B, 12B Unified, E4B and E2B. Scores with a dash are omitted.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 69.4,
+        "unit": "%",
+        "as_written": "MMLU Pro"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 42.5,
+        "unit": "%",
+        "as_written": "AIME 2026 no tools"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 52,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 940,
+        "unit": "elo",
+        "as_written": "Codeforces ELO"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 42.2,
+        "unit": "%",
+        "as_written": "Tau2 (average over 3)"
+      },
+      {
+        "benchmark": "big-bench-extra-hard-micro",
+        "score": 33.1,
+        "unit": "%",
+        "as_written": "BigBench Extra Hard"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 76.6,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 52.6,
+        "unit": "%",
+        "as_written": "MMMU Pro"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 0.181,
+        "unit": "score",
+        "as_written": "OmniDocBench 1.5 (average edit distance, lower is better)"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 59.5,
+        "unit": "%",
+        "as_written": "MATH-Vision"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 28.7,
+        "unit": "%",
+        "as_written": "MedXPertQA MM"
+      },
+      {
+        "benchmark": "covost2",
+        "score": 35.54,
+        "unit": "score",
+        "as_written": "CoVoST average, excluding Chinese"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 0.08,
+        "unit": "score",
+        "as_written": "FLEURS average WER, lower is better, excluding Chinese"
+      },
+      {
+        "benchmark": "mrcr-v2",
+        "score": 25.4,
+        "unit": "%",
+        "as_written": "MRCR v2 8 needle 128k (average)"
+      }
+    ]
+  },
+  {
+    "id": "google-gemma-4-12b-2026-06-03",
+    "lab": "google",
+    "model": "gemma-4-12b-it",
+    "date": "2026-06-03",
+    "title": "Gemma 4 model card",
+    "url": "https://ai.google.dev/gemma/docs/core/model_card_4",
+    "tier": "small",
+    "notes": "Instruction-tuned Gemma 4 12B Unified scores from the official model card. The 12B model is the June 3, 2026 addition to the Gemma 4 table. Audio values exclude Chinese where the card marks that footnote.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 77.2,
+        "unit": "%",
+        "as_written": "MMLU Pro"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 77.5,
+        "unit": "%",
+        "as_written": "AIME 2026 no tools"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 72,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 1659,
+        "unit": "elo",
+        "as_written": "Codeforces ELO"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 78.8,
+        "unit": "%",
+        "as_written": "GPQA Diamond"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 69.0,
+        "unit": "%",
+        "as_written": "Tau2 (average over 3)"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 5.2,
+        "unit": "%",
+        "as_written": "HLE no tools"
+      },
+      {
+        "benchmark": "big-bench-extra-hard-micro",
+        "score": 53.0,
+        "unit": "%",
+        "as_written": "BigBench Extra Hard"
+      },
+      {
+        "benchmark": "mmmlu",
+        "score": 83.4,
+        "unit": "%",
+        "as_written": "MMMLU"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 69.1,
+        "unit": "%",
+        "as_written": "MMMU Pro"
+      },
+      {
+        "benchmark": "omnidocbench-1-5",
+        "score": 0.164,
+        "unit": "score",
+        "as_written": "OmniDocBench 1.5 (average edit distance, lower is better)"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 79.7,
+        "unit": "%",
+        "as_written": "MATH-Vision"
+      },
+      {
+        "benchmark": "medxpertqa-mm",
+        "score": 48.7,
+        "unit": "%",
+        "as_written": "MedXPertQA MM"
+      },
+      {
+        "benchmark": "covost2",
+        "score": 38.5,
+        "unit": "score",
+        "as_written": "CoVoST average, excluding Chinese"
+      },
+      {
+        "benchmark": "fleurs",
+        "score": 0.069,
+        "unit": "score",
+        "as_written": "FLEURS average WER, lower is better, excluding Chinese"
+      },
+      {
+        "benchmark": "mrcr-v2",
+        "score": 43.4,
+        "unit": "%",
+        "as_written": "MRCR v2 8 needle 128k (average)"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-vl-embedding-2b-2026-01-08",
+    "lab": "qwen",
+    "model": "qwen3-vl-embedding-2b",
+    "date": "2026-01-08",
+    "title": "Qwen3-VL-Embedding-2B model card",
+    "url": "https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B",
+    "tier": "small",
+    "notes": "Scores from the official Hugging Face model card. MMEB-V2 and MMTEB tables are lab-reported card values. MMEB-V2 rows preserve the card’s Image, Video, VisDoc and All aggregates.",
+    "results": [
+      {
+        "benchmark": "mmeb-v2",
+        "score": 73.2,
+        "unit": "%",
+        "as_written": "MMEB-V2 All, image 75.0, video 61.9, VisDoc 79.2 (2B card table)"
+      },
+      {
+        "benchmark": "mteb",
+        "score": 63.87,
+        "unit": "score",
+        "as_written": "MMTEB Mean (Task)"
+      }
+    ]
+  },
+  {
+    "id": "qwen-qwen3-vl-embedding-8b-2026-01-08",
+    "lab": "qwen",
+    "model": "qwen3-vl-embedding-8b",
+    "date": "2026-01-08",
+    "title": "Qwen3-VL-Embedding-8B model card",
+    "url": "https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B",
+    "tier": "small",
+    "notes": "Scores from the official Hugging Face model card. MMEB-V2 and MMTEB tables are lab-reported card values. MMEB-V2 rows preserve the card’s Image, Video, VisDoc and All aggregates.",
+    "results": [
+      {
+        "benchmark": "mmeb-v2",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "MMEB-V2 All, image 80.1, video 66.1, VisDoc 83.3 (8B card table, VisDoc OOD split re-evaluated)"
+      },
+      {
+        "benchmark": "mteb",
+        "score": 67.88,
+        "unit": "score",
+        "as_written": "MMTEB Mean (Task)"
+      }
+    ]
+  },
+  {
+    "id": "deepseek-deepseek-v4-flash-2026-04-24",
+    "lab": "deepseek",
+    "model": "deepseek-v4-flash",
+    "date": "2026-04-24",
+    "title": "DeepSeek-V4-Flash model card (Hugging Face)",
+    "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+    "tier": "open-weights",
+    "notes": "Scores from the official Hugging Face card comparison-across-modes table. This record uses the DeepSeek-V4-Flash Max column. The technical report is recorded separately in data/system-cards.json.",
+    "results": [
+      {
+        "benchmark": "mmlu-pro",
+        "score": 86.2,
+        "unit": "%",
+        "as_written": "MMLU-Pro (EM), V4-Flash Max"
+      },
+      {
+        "benchmark": "simpleqa-verified",
+        "score": 34.1,
+        "unit": "%",
+        "as_written": "SimpleQA-Verified (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "chinese-simpleqa",
+        "score": 78.9,
+        "unit": "%",
+        "as_written": "Chinese-SimpleQA (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 88.1,
+        "unit": "%",
+        "as_written": "GPQA Diamond (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 34.8,
+        "unit": "%",
+        "as_written": "HLE (Pass@1), V4-Flash Max. HLE with tools 45.1"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 91.6,
+        "unit": "%",
+        "as_written": "LiveCodeBench (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "codeforces-rating",
+        "score": 3052,
+        "unit": "elo",
+        "as_written": "Codeforces (Rating), V4-Flash Max"
+      },
+      {
+        "benchmark": "hmmt-2026",
+        "score": 94.8,
+        "unit": "%",
+        "as_written": "HMMT 2026 Feb (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "imo-answerbench",
+        "score": 88.4,
+        "unit": "%",
+        "as_written": "IMOAnswerBench (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "matharena-apex-imo-usamo",
+        "score": 33.0,
+        "unit": "%",
+        "as_written": "Apex (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "matharena-apex-shortlist",
+        "score": 85.7,
+        "unit": "%",
+        "as_written": "Apex Shortlist (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "mrcr-v2",
+        "score": 78.7,
+        "unit": "%",
+        "as_written": "MRCR 1M (MMR), V4-Flash Max"
+      },
+      {
+        "benchmark": "corpusqa-1m",
+        "score": 60.5,
+        "unit": "%",
+        "as_written": "CorpusQA 1M (ACC), V4-Flash Max"
+      },
+      {
+        "benchmark": "terminal-bench-2-0",
+        "score": 56.9,
+        "unit": "%",
+        "as_written": "Terminal Bench 2.0 (Acc), V4-Flash Max"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "SWE Verified (Resolved), V4-Flash Max"
+      },
+      {
+        "benchmark": "swe-bench-pro",
+        "score": 52.6,
+        "unit": "%",
+        "as_written": "SWE Pro (Resolved), V4-Flash Max"
+      },
+      {
+        "benchmark": "swe-bench-multilingual",
+        "score": 73.3,
+        "unit": "%",
+        "as_written": "SWE Multilingual (Resolved), V4-Flash Max"
+      },
+      {
+        "benchmark": "browsecomp",
+        "score": 73.2,
+        "unit": "%",
+        "as_written": "BrowseComp (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 69.0,
+        "unit": "%",
+        "as_written": "MCPAtlas (Pass@1), V4-Flash Max"
+      },
+      {
+        "benchmark": "gdpval-aa",
+        "score": 1395,
+        "unit": "elo",
+        "as_written": "GDPval-AA (Elo), V4-Flash Max"
+      },
+      {
+        "benchmark": "toolathlon",
+        "score": 47.8,
+        "unit": "%",
+        "as_written": "Toolathlon (Pass@1), V4-Flash Max"
       }
     ]
   }
