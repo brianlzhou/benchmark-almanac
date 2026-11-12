@@ -1,6 +1,22 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-12",
   "items": [
+    {
+      "key": "https://arxiv.org/abs/2611.12521",
+      "title": "Can the Confidence and Decisions of System 1 Models Be Trusted? An Explainability and Perturbation Audit of Jev-Style Decision Models",
+      "url": "https://arxiv.org/abs/2611.12521",
+      "source": "arXiv",
+      "date": "2026-11-09",
+      "first": "2026-11-12",
+      "last": "2026-11-12",
+      "benchmarks": [
+        "hans"
+      ],
+      "problems": [
+        "reward-hacking"
+      ],
+      "score": 4
+    },
     {
       "key": "https://arxiv.org/abs/2611.07950",
       "title": "Leakage- and Label-Aware Benchmarking of Class-Imbalance Strategies for Multimodal Chest X-Ray and EHR Classification",
