@@ -175,6 +175,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           <p class="foot-n">
             {benchmarks.length.toLocaleString('en-US')} benchmarks, {featuredModels.length.toLocaleString('en-US')} models and {labs.length} labs. Data as of {humanDate(AS_OF)}.
           </p>
+          <p class="foot-n foot-by">Built and maintained by <a href="https://www.brianzhou.org">Brian Zhou</a>.</p>
           <a class="foot-submit" href="/submit/">
             Submit a benchmark
             <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7M6.5 3l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -585,6 +586,19 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   .foot-n {
     color: var(--ink-3);
     font-size: 13px;
+  }
+  .foot-by {
+    margin-top: -4px;
+  }
+  .foot-by a {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  .foot-by a:hover {
+    color: var(--ink);
+    text-decoration-color: currentColor;
   }
   .foot-submit {
     justify-self: start;
