@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../../lib/figure-text.ts';
+import ChartDownload from '../../components/ChartDownload.astro';
+import { sourcesCredit, POOL_CREDIT } from '../../lib/credits.ts';
 import Base from '../../layouts/Base.astro';
 import ReignChart from '../../components/ReignChart.astro';
 import CrownShare from '../../components/CrownShare.astro';
@@ -119,17 +122,23 @@ const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmar
           </div>
           {poolList.map((v) => (
             <div class={`pool-${v.src}`}>
-              <ReignChart rows={v.rows} />
+              <ChartDownload credit={sourcesCredit(v.rows)} name={`number-one-${v.src}`} deckFrom="@lede" counts={`One row per benchmark in this category. Each stretch is the model with the best score at that time, colored by its lab. ${POOL_NOTES[v.src].counts}`} leaves={POOL_NOTES[v.src].leaves}>
+                <ReignChart rows={v.rows} />
+              </ChartDownload>
               <div class="share">
                 <h3>{v.share}</h3>
-                <CrownShare shares={v.shares} />
+                <ChartDownload credit={POOL_CREDIT[v.src]} name={`time-at-number-one-${v.src}`} deck="Each lab’s share of the days its models held number one on this category’s benchmarks." counts={`${CLOCK_NOTE} ${POOL_NOTES[v.src].counts}`} leaves={POOL_NOTES[v.src].leaves}>
+                  <CrownShare shares={v.shares} />
+                </ChartDownload>
               </div>
               {v.closed.length > 0 && (
                 <div class="share">
                   <h3>
                     Closed out: {v.closed.length} {v.closed.length === 1 ? 'benchmark' : 'benchmarks'} passed 85%
                   </h3>
-                  <CrownShare shares={v.closedBy} what="Benchmarks closed out since 2023" />
+                  <ChartDownload credit={POOL_CREDIT[v.src]} name={`closed-out-${v.src}`} deck="Close-outs by lab: a close-out goes to the model that first took a benchmark past 85%." counts={POOL_NOTES[v.src].counts} leaves="Benchmarks nobody has taken past 85%.">
+                    <CrownShare shares={v.closedBy} what="Benchmarks closed out since 2023" />
+                  </ChartDownload>
                   <ul class="closed">
                     {v.closed.map((c) => (
                       <li>

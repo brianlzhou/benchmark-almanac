@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../lib/figure-text.ts';
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, sourcesCredit, LAUNCH_POSTS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import ModelCard from '../components/ModelCard.astro';
 import MiniBoard from '../components/MiniBoard.astro';
@@ -56,6 +59,21 @@ const crownViews = [
   { pool: 'all', label: POOL_LABEL.all, rows: crown.all },
 ] as const;
 const crownRows = crown.headline;
+// what the downloaded charts say about what they count
+const crownFigure = (pool: string, rows: { source: string }[]) => ({
+  credit: sourcesCredit(rows),
+  name: `number-one-${pool}`,
+  deckFrom: '@lede',
+  counts: `One row per benchmark. Each stretch is the model with the best score at that time, colored by its lab. ${POOL_NOTES[pool].counts}`,
+  leaves: POOL_NOTES[pool].leaves,
+});
+const lifeFigure = {
+  credit: creditLine([LAUNCH_POSTS]),
+  name: 'benchmark-lifecycles',
+  deckFrom: '@lede',
+  counts: 'Labs’ launch posts that list each benchmark, one tick per post, in the order labs took them up.',
+  leaves: 'System cards and leaderboard scores.',
+};
 const topTest = crown.tests.length ? (benchById.get(crown.tests[0].fam)?.name ?? crown.tests[0].fam) : '';
 const n = (v: number) => v.toLocaleString('en-US');
 // the hero's area chips: how many benchmarks each area holds
@@ -170,7 +188,9 @@ const catalog = {
           </div>
           {crownViews.map((v) => (
             <div class={`pool-${v.pool}`}>
-              <ReignChart rows={v.rows} levels={false} />
+              <ChartDownload {...crownFigure(v.pool, v.rows)}>
+                <ReignChart rows={v.rows} levels={false} />
+              </ChartDownload>
             </div>
           ))}
         </section>
@@ -202,7 +222,9 @@ const catalog = {
           Below are the {life.length} benchmarks launch posts list most often, in the order labs took them up. Each tick is a post.
         </p>
       </div>
-      <Lifecycle ids={life} />
+      <ChartDownload {...lifeFigure}>
+        <Lifecycle ids={life} />
+      </ChartDownload>
     </section>
 
     {

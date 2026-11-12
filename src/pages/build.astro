@@ -2,6 +2,8 @@
 // Build your own index: pick benchmarks and weights, see the ranking, and see how much it moves when the
 // weights shift a little. The data comes from build-data.ts, the math and markup from build-index.ts, so the
 // server render and the page script draw the same thing.
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import { buildPayload, MIN_MODELS } from '../lib/build-data.ts';
 import { Matrix, compute, defaultNeed, headline, sub, columns, bars, table, weightBar, chosen, type State } from '../lib/build-index.ts';
@@ -112,8 +114,10 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
           <h2 data-head>{headline(p, res)}</h2>
           <p data-sub>{sub(p, res, st.src)}</p>
         </div>
-        <div class="only-wide bm-colbox" data-cols set:html={columns(p, res)} />
-        <div class="only-narrow" data-bars set:html={bars(p, res)} />
+        <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="index" context="build" yAxis="Index, 0 to 100, higher is better">
+          <div class="only-wide bm-colbox" data-cols set:html={columns(p, res)} />
+          <div class="only-narrow" data-bars set:html={bars(p, res)} />
+        </ChartDownload>
         <div class="bm-tbox" data-table set:html={table(p, res)} />
       </div>
     </section>

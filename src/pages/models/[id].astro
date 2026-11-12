@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../../lib/figure-text.ts';
+import ChartDownload from '../../components/ChartDownload.astro';
+import { creditLine, ECI_CREDIT } from '../../lib/credits.ts';
 import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import LabMark from '../../components/LabMark.astro';
@@ -176,7 +179,9 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
             <h2>{ms.lab?.name ?? 'The lab'}'s models over time</h2>
             <p>{ms.lab?.name}'s models in color, against every other model on the Epoch Capabilities Index, by release date.</p>
           </div>
+          <ChartDownload credit={creditLine([ECI_CREDIT])} deck={`${ms.lab?.name ?? 'The lab'}’s models in color, against every other model on the index. ${ECI_DECK}`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with an Epoch Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
           <TimeScatter points={labPts} unit="index" label={`${ms.lab?.name} models on the Epoch Capabilities Index`} highlight={labIds} labelIds={[m.id, ...labIds.filter((x) => x !== m.id)]} legend={false} height={400} />
+          </ChartDownload>
         </section>
       )
     }

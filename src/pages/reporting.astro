@@ -4,6 +4,8 @@
 // fast new benchmarks spread, what each lab names by area, and a lab-by-benchmark lookup. The year graphics and the
 // lookup render here for the default view, and the page script renders other views from /reporting.json with the
 // same functions (src/lib/reporting-view.ts, src/lib/reporting-graphics.ts).
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, LAUNCH_POSTS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import ReportingBump from '../components/ReportingBump.astro';
 import ReportingSpread from '../components/ReportingSpread.astro';
@@ -165,6 +167,7 @@ const sizeKey = [1, 10, 50];
     </header>
 
     <section id="canon" class="rp-hero" aria-label="Every benchmark named this year">
+      <ChartDownload credit={creditLine([LAUNCH_POSTS])} titleFrom="[data-rp-h1]" name="every-benchmark-named" deckFrom="[data-rp-lede]" context="reporting">
       <div class="rp-swarmbox" data-rp-swarm set:html={SWARMS.map((o) => swarmSvg(d, view, o)).join('')} />
       <div class="rp-keys">
         <ul class="rp-key" aria-label="Areas">
@@ -193,6 +196,7 @@ const sizeKey = [1, 10, 50];
           <span>releases named it</span>
         </p>
       </div>
+      </ChartDownload>
       <div id="rp-pop" role="tooltip" hidden></div>
     </section>
 
@@ -204,7 +208,9 @@ const sizeKey = [1, 10, 50];
               <h2>{mo.bumpHead}</h2>
               <p>{mo.bumpLede}</p>
             </div>
-            <ReportingBump cols={mo.b.cols} lines={mo.b.lines} />
+            <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`top-ten-${mo.key}`} deckFrom="@lede" context="reporting">
+              <ReportingBump cols={mo.b.cols} lines={mo.b.lines} />
+            </ChartDownload>
           </div>
         ))
       }
@@ -218,7 +224,9 @@ const sizeKey = [1, 10, 50];
               <h2>{mo.spreadHead}</h2>
               <p>{mo.spreadLede}</p>
             </div>
-            <ReportingSpread lines={mo.sp} goal={mo.goal} goalText={mo.goalText} />
+            <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`spread-${mo.key}`} deckFrom="@lede" context="reporting">
+              <ReportingSpread lines={mo.sp} goal={mo.goal} goalText={mo.goalText} />
+            </ChartDownload>
           </div>
         ))
       }
@@ -229,6 +237,7 @@ const sizeKey = [1, 10, 50];
         <h2 data-rp-prints-head>{printsHead(d, view)}</h2>
         <p data-rp-prints-lede>{printsLede(d, view)}</p>
       </div>
+      <ChartDownload credit={creditLine([LAUNCH_POSTS])} titleFrom="[data-rp-prints-head]" name="lab-fingerprints" deckFrom="[data-rp-prints-lede]" context="reporting">
       <ul class="rp-key rp-pkey" aria-label="Areas">
         {
           d.areas.map((a) => (
@@ -240,6 +249,7 @@ const sizeKey = [1, 10, 50];
         }
       </ul>
       <div class="rp-prints" data-rp-prints data-rove set:html={printsHtml(d, view)} />
+      </ChartDownload>
     </section>
 
     <section id="lookup">

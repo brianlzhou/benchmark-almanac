@@ -16,6 +16,9 @@ import LabMark from '../../components/LabMark.astro';
 import AuthorsWords from '../../components/AuthorsWords.astro';
 import KnownIssues from '../../components/KnownIssues.astro';
 import BoardChart from '../../components/BoardChart.astro';
+import ChartDownload from '../../components/ChartDownload.astro';
+import { creditLine, sourcesCredit, EPOCH_CREDIT, EPOCH_RUNS, LAB_CARDS } from '../../lib/credits.ts';
+import { benchDeck, benchAxis } from '../../lib/figure-text.ts';
 import { issuesByBenchmark, unresolved } from '../../lib/audits.ts';
 import Crumbs from '../../components/Crumbs.astro';
 import AreaMark from '../../components/AreaMark.astro';
@@ -120,6 +123,22 @@ const POOL_WHERE: Record<string, string> = {
   independent: 'across all independent runs',
   all: 'with claims included',
 };
+// who each source's numbers come from, for the credit under each chart and in its downloaded file
+const SRC_CREDIT: Record<string, string> = {
+  leaderboard: boardHost ? `${boardHost}’s leaderboard` : `official ${b.name} leaderboard`,
+  epoch: EPOCH_RUNS,
+  collected: `${viaName}, via ${EPOCH_CREDIT}`,
+  card: LAB_CARDS,
+  claim: `claims collected by ${EPOCH_CREDIT}`,
+};
+// what a downloaded chart says about itself: the benchmark, its makers, what it tests and what the score is
+const figDeck = benchDeck(b);
+const figAxis = benchAxis(b);
+const boardName = boardHost ? `${boardHost}’s leaderboard` : `the official ${b.name} leaderboard`;
+const costNote = (per: 'task' | 'run') => `Cost is US dollars ${per === 'run' ? 'for the full run' : 'per task'}, as ${boardName} prices runs, so it compares only within this board.`;
+const reignCounts = (rows: { source: string }[]) =>
+  `One row for each source: ${listText(rows.map((r) => ROW_TEXT[r.source] ?? r.source))}. Each stretch is the model that held the best score at that time, colored by its lab. Lab claims count from the day the card came out, independent runs from the model’s release.`;
+const boardCredit = (xs: { source?: string }[]) => creditLine([...new Set(xs.map((x) => x.source ?? 'card'))].map((k) => SRC_CREDIT[k]));
 const listText = (xs: string[]) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
 // all versions of the family, each handing over to the next
 // each version's leader and close-out come from the source its own page leads with
@@ -526,25 +545,29 @@ const dataset = {
           </div>
           <div class="view-graph">
             <div class="pool-headline">
-              {b.better === 'lower' ? (
-                <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
-              ) : (
-                <>
-                  <div class="only-wide"><Columns scores={s.shown} unit={unit} /></div>
-                  <div class="only-narrow"><BarBoard scores={s.shown} unit={unit} limit={10} all /></div>
-                </>
-              )}
+              <ChartDownload subject={b.name} credit={boardCredit(s.shown)} name="leaderboard" deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE.headline}, one bar per model.`} leaves="Other settings of the same model, which keep only their best score.">
+                {b.better === 'lower' ? (
+                  <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
+                ) : (
+                  <>
+                    <div class="only-wide"><Columns scores={s.shown} unit={unit} /></div>
+                    <div class="only-narrow"><BarBoard scores={s.shown} unit={unit} limit={10} all /></div>
+                  </>
+                )}
+              </ChartDownload>
             </div>
             {pools.slice(1).map((v) => (
               <div class={`pool-${v.pool}`}>
-                {b.better === 'lower' ? (
-                  <BarBoard scores={v.board} unit={unit} limit={15} better={b.better} all />
-                ) : (
-                  <>
-                    <div class="only-wide"><Columns scores={v.board} unit={unit} /></div>
-                    <div class="only-narrow"><BarBoard scores={v.board} unit={unit} limit={10} all /></div>
-                  </>
-                )}
+                <ChartDownload subject={b.name} credit={boardCredit(v.board)} name={`leaderboard-${v.pool}`} deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE[v.pool]}, one bar per model.`} leaves={v.pool === 'independent' ? 'Labs’ own numbers, and other settings of the same model.' : 'Other settings of the same model, which keep only their best score.'}>
+                  {b.better === 'lower' ? (
+                    <BarBoard scores={v.board} unit={unit} limit={15} better={b.better} all />
+                  ) : (
+                    <>
+                      <div class="only-wide"><Columns scores={v.board} unit={unit} /></div>
+                      <div class="only-narrow"><BarBoard scores={v.board} unit={unit} limit={10} all /></div>
+                    </>
+                  )}
+                </ChartDownload>
               </div>
             ))}
           </div>
@@ -629,7 +652,9 @@ const dataset = {
             </div>
           </div>
           <div class="view-graph">
-            <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} />
+            <ChartDownload subject={b.name} credit={creditLine([SRC_CREDIT.leaderboard])} quiet deck={`${figDeck} ${boardChart.x.unit === '$' || boardChart.x.key === 'cost' ? costNote(official?.costPer === 'run' ? 'run' : 'task') : ''}`} counts="The runs on the board that report both measures. The line joins the runs that no other run beats on both." leaves="Runs that report only one of the two measures.">
+              <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} />
+            </ChartDownload>
           </div>
           <div class="view-table table-wrap">
             <table class="t" data-sort>
@@ -684,7 +709,17 @@ const dataset = {
             </div>
           </div>
           <div class="view-graph">
+            <ChartDownload
+              subject={b.name}
+              credit={creditLine([SRC_CREDIT.leaderboard])}
+              deck={`${figDeck}${effort.mode === 'cost' ? ` ${costNote(effort.costPer)}` : ''}`}
+              yAxis={effort.mode === 'cost' ? figAxis : undefined}
+              xAxis={effort.mode === 'cost' ? undefined : figAxis}
+              counts={effort.mode === 'cost' ? 'Runs on the leaderboard with a cost. The step line is the cost frontier: runs that score higher than any cheaper run.' : 'Models the leaderboard ran at two or more effort levels, one dot per level from lightest to darkest.'}
+              leaves={effort.mode === 'cost' ? 'Runs without a cost.' : 'Models run at only one effort level.'}
+            >
             <EffortChart view={effort} label={`${b.name}: scores by effort level${effort.mode === 'cost' ? (effort.costPer === 'run' ? ' and cost of the full run' : ' and cost per task') : ''}`} />
+            </ChartDownload>
           </div>
           <div class="view-table table-wrap">
             <table class="t" data-sort>
@@ -727,7 +762,9 @@ const dataset = {
               {reignRows.length > 1 && ` We draw one row each for ${listText(reignRows.map((r) => ROW_TEXT[r.source]))}.`}
             </p>
           </div>
-          <ReignChart rows={reignRows} names={reignNames} from={reignFrom} />
+          <ChartDownload subject={b.name} credit={sourcesCredit(reignRows, SRC_CREDIT)} name="number-one-over-time" deck={figDeck} counts={reignCounts(reignRows)} leaves="Models with no score here from these sources, and any score that never beat the best so far.">
+            <ReignChart rows={reignRows} names={reignNames} from={reignFrom} />
+          </ChartDownload>
         </section>
       )
     }
@@ -873,7 +910,11 @@ const dataset = {
               </p>
             )}
           </div>
-          {familyRows.length > 1 && <ReignChart rows={familyRows} from={familyFrom} open />}
+          {familyRows.length > 1 && (
+            <ChartDownload subject={b.name} credit={sourcesCredit(familyRows)} name="versions" deck={`${figDeck} One row per version of the test.`} counts="Each version from the one source its own page leads with: its official leaderboard when that is current, else Epoch AI’s own runs, else labs’ own numbers. The top row switches to each new version when it comes out." leaves="Versions with too few scores to rank.">
+              <ReignChart rows={familyRows} from={familyFrom} open />
+            </ChartDownload>
+          )}
           <div class="ver">
             {pred.map((p) => (
               <a href={`/benchmarks/${p.id}/`}>

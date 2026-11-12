@@ -5,6 +5,8 @@
 // level: all areas at once, or one small chart per area. The build draws the default view, and a small script
 // redraws the chart from the JSON below when the reader changes it (src/lib/area-share.ts draws all three).
 // With `heading`, the chart carries its own headline, computed from the data for each view.
+import ChartDownload from './ChartDownload.astro';
+import { creditLine, LAUNCH_POSTS } from '../lib/credits.ts';
 import { cards, benchById, AS_OF } from '../lib/data.ts';
 import type { Card } from '../lib/types.ts';
 import { AREAS, AREA_BY_ID, LEVELS, areaOf, CATEGORY_NAMES, SUBCATEGORIES } from '../lib/taxonomy.ts';
@@ -198,6 +200,7 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
         </div>
       ))
   }
+  <ChartDownload credit={creditLine([LAUNCH_POSTS])} name="launch-posts" deckFrom="@lede" counts={`Headline results in ${lab ? 'this lab’s' : 'labs’'} launch posts, every half year, sorted into areas and difficulty levels.`} leaves="System cards, and scores from leaderboards and Epoch AI.">
   <div class="as-bar">
     <div class="as-key" data-key>
       {
@@ -216,7 +219,7 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
         )
       }
     </div>
-    <div class="as-ctl">
+    <div class="as-ctl" data-dl-skip>
       <div class="seg" role="group" aria-label="Group by">
         <button type="button" aria-pressed="true" data-view="area">By area</button>
         <button type="button" aria-pressed="false" data-view="level">By difficulty</button>
@@ -247,6 +250,7 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
     }
   </div>
   {f < 1 && <p class="as-hint" data-note hidden>{`The last half year runs through ${asOf}, so its count is partial.`}</p>}
+  </ChartDownload>
   <span class="sr" aria-live="polite" data-live></span>
   <script type="application/json" is:inline data-json set:html={json} />
   <script type="application/json" is:inline data-views set:html={views} />

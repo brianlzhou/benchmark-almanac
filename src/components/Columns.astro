@@ -35,11 +35,11 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
     (many || lo > 0) && (
       <div class="cols-bar">
         <p class="cols-n num" aria-live="polite">
-          <span data-cols-range>{many ? `${rows.length} ${what}. Scroll sideways for the rest.` : ''}</span>
+          <span data-cols-range data-dl-skip>{many ? `${rows.length} ${what}. Scroll sideways for the rest.` : ''}</span>
           {lo > 0 && <span class="base">Bars start at {lo.toLocaleString('en-US')}.</span>}
         </p>
         {many && (
-          <div class="cols-arrows">
+          <div class="cols-arrows" data-dl-skip>
             <button type="button" class="arw" data-cols-go="-1" aria-label="Earlier ranks" disabled>
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3 4.5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
             </button>

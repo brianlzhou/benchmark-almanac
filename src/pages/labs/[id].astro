@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../../lib/figure-text.ts';
+import ChartDownload from '../../components/ChartDownload.astro';
+import { creditLine, ECI_CREDIT } from '../../lib/credits.ts';
 import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
 import ModelCard from '../../components/ModelCard.astro';
@@ -81,7 +84,9 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
             <h2>{lab.name}'s models against the field</h2>
             <p>Every model on the Epoch Capabilities Index by release date, with {lab.name}'s in color.</p>
           </div>
+          <ChartDownload credit={creditLine([ECI_CREDIT])} deck={`${lab.name}’s models in color, against every other model on the index. ${ECI_DECK}`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with an Epoch Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
           <TimeScatter points={pts} unit="index" label={`${lab.name} on the Epoch Capabilities Index`} highlight={mine} labelIds={ranked.slice(0, 8).map((m) => m.id)} legend={false} height={420} />
+          </ChartDownload>
         </section>
       )
     }

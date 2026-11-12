@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../../lib/figure-text.ts';
+import ChartDownload from '../../components/ChartDownload.astro';
+import { creditLine, ECI_CREDIT, LAB_CARDS } from '../../lib/credits.ts';
 import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import ModelName from '../../components/ModelName.astro';
@@ -57,7 +60,9 @@ const weightOptions: Option[] = [
         <h2>The frontier keeps moving</h2>
         <p>Epoch Capabilities Index by release date. The thin vertical bars are 90% intervals, and the step line is the best score so far.</p>
       </div>
-      <TimeScatter points={eciPts} frontier={frontier} unit="index" label="Epoch Capabilities Index over time" legend={false} height={460} />
+      <ChartDownload credit={creditLine([ECI_CREDIT])} quiet deck={`${ECI_DECK} The thin vertical bars are 90% intervals, and the step line is the best score so far.`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with an Epoch Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
+        <TimeScatter points={eciPts} frontier={frontier} unit="index" label="Epoch Capabilities Index over time" legend={false} height={460} />
+      </ChartDownload>
       <p class="src">Source: <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a>, {EPOCH_SOURCE.license}.</p>
     </section>
 
@@ -68,7 +73,9 @@ const weightOptions: Option[] = [
           The Self-Reported Index puts each model on the ECI's scale using only the scores its lab published, so it covers new releases before independent runs arrive. Labs choose what to report and how to run it, so treat it as a claim. It agrees with the ECI at r = {SR_FIT.pearson.toFixed(2)} across the {SR_FIT.overlap} models that have both. Rings mark numbers labs report about themselves, and the bars are 90% intervals. <a href="/methodology/#self-reported">How we compute it</a>.
         </p>
       </div>
-      <TimeScatter points={srPts} frontier={srFrontier} unit="index" label="Self-Reported Index over time" legend={false} height={460} />
+      <ChartDownload credit={creditLine([`${LAB_CARDS}, placed on the Epoch Capabilities Index scale by Benchmark Almanac`])} deck={`${SRI_DECK} Rings mark numbers labs report about themselves, and the bars are 90% intervals.`} yAxis="Self-Reported Index, on the Epoch Capabilities Index scale" xAxis={RELEASE_AXIS} counts="Models whose labs published enough scores to place them, using the same item response model as the Epoch Capabilities Index." leaves="Leaderboard and Epoch AI scores, and models with too few lab-reported scores.">
+        <TimeScatter points={srPts} frontier={srFrontier} unit="index" label="Self-Reported Index over time" legend={false} height={460} />
+      </ChartDownload>
     </section>
 
     <section>

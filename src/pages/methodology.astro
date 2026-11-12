@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../lib/figure-text.ts';
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, ECI_CREDIT, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import PairScatter, { type PairPt } from '../components/PairScatter.astro';
 import { cards, systemCards, benchmarks, benchById, modelById, leaderboardScores, epochScores, viaBoardScores, collectedClaims, LEADERBOARDS, eciByModel, EPOCH_SOURCE } from '../lib/data.ts';
@@ -142,7 +145,9 @@ const topBenches = srBenchmarks.slice(0, 16);
     <section class="wide-fig">
       <h2>The two indexes side by side</h2>
       <p>Each dot is a model with both scores. Dots above the dashed line score higher on their labs' own numbers than on the ECI. We name the six furthest from the line.</p>
-      <PairScatter points={vsPts} xLabel="Epoch Capabilities Index" yLabel="Self-Reported Index" label="Self-Reported Index against the Epoch Capabilities Index" unit="index" labelIds={far} height={640} />
+      <ChartDownload credit={creditLine([ECI_CREDIT, LAB_CARDS])} deck={`${SRI_DECK} Each dot is a model with both scores, and dots above the dashed line score higher on their labs’ own numbers than on the ECI.`} counts="Models with both an Epoch Capabilities Index score and a Self-Reported Index score." leaves="Models with only one of the two.">
+        <PairScatter points={vsPts} xLabel="Epoch Capabilities Index" yLabel="Self-Reported Index" label="Self-Reported Index against the Epoch Capabilities Index" unit="index" labelIds={far} height={640} />
+      </ChartDownload>
     </section>
 
     <section>

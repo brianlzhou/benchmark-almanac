@@ -1,0 +1,214 @@
+---
+// Wraps a chart with a "Download graph" button, after Epoch AI's: a PNG or an SVG of the chart as the page
+// shows it now, with its headline above and the site, the page's address and the source credit below
+// (src/scripts/chart-download.ts). The credit also shows at the left of the button row, so the page and the
+// file say the same thing.
+interface Props {
+  /** Who the numbers come from, as one line: "Source: Epoch AI, CC BY 4.0". */
+  credit?: string;
+  /** The file name after the page's own name, such as "scores-over-time". Defaults to the chart's label. */
+  name?: string;
+  /** The headline when the closest heading above the chart is not it. */
+  title?: string;
+  /** A selector for the element whose current text is the headline, for headlines a script rewrites. */
+  titleFrom?: string;
+  /** Show the button only while this selector matches, such as a "Bars" view being picked. */
+  showWhen?: string;
+  /** Hide the credit on the page, for charts whose text above already names the source. */
+  quiet?: boolean;
+  /** The file's deck, under the headline: what the benchmark or index is, who made it, what the number measures. */
+  deck?: string;
+  /** Selectors for page text to add to the deck when the reader saves, for text a script rewrites. */
+  deckFrom?: string;
+  /** Titles for the value axes, printed with the chart in the file: "Score (%), higher is better". */
+  yAxis?: string;
+  xAxis?: string;
+  /** What the chart counts and what it leaves out, printed under the chart in the file. */
+  counts?: string;
+  leaves?: string;
+  /** A page whose live state the file describes: "build" (the mix and its weights) or "reporting" (the view). */
+  context?: 'build' | 'reporting';
+  /** The benchmark the chart is about, added to a headline that doesn't name it. */
+  subject?: string;
+}
+const { credit, name, title, titleFrom, showWhen, quiet = false, deck, deckFrom, yAxis, xAxis, counts, leaves, context, subject } = Astro.props;
+---
+
+<div
+  class="cdl"
+  data-chart-dl
+  data-credit={credit}
+  data-name={name}
+  data-title={title}
+  data-title-from={titleFrom}
+  data-show-when={showWhen}
+  data-deck={deck}
+  data-deck-from={deckFrom}
+  data-y-axis={yAxis}
+  data-x-axis={xAxis}
+  data-counts={counts}
+  data-leaves={leaves}
+  data-context={context}
+  data-subject={subject}
+>
+  <div data-chart-capture><slot /></div>
+  <div class="cdl-row">
+    {credit && !quiet ? <p class="cdl-credit">{credit}</p> : <span />}
+    <div class="cdl-dd">
+      <button type="button" class="cdl-b" aria-haspopup="menu" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M7 1.75v7.5M3.75 6.25 7 9.5l3.25-3.25M2 12.25h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span class="cdl-t">Download graph</span>
+      </button>
+      <div class="cdl-m" role="menu" aria-label="Download as" hidden>
+        <button type="button" role="menuitem" tabindex="-1" data-fmt="png">PNG<span>Image, twice the screen's size</span></button>
+        <button type="button" role="menuitem" tabindex="-1" data-fmt="svg">SVG<span>Vector, for editing</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import '../scripts/chart-download.ts';
+</script>
+
+<style is:global>
+  /* set for one task while a chart is copied in the light theme, so no color is caught mid-transition */
+  .dl-still *,
+  .dl-still *::before,
+  .dl-still *::after {
+    transition: none !important;
+  }
+</style>
+
+<style>
+  .cdl-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    margin-top: 14px;
+  }
+  .cdl-row[hidden] {
+    display: none;
+  }
+  .cdl-credit {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--ink-3);
+    min-width: 0;
+  }
+  .cdl-dd {
+    position: relative;
+    flex: none;
+    margin-left: auto;
+  }
+  .cdl-b {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 400 13px/1 var(--sans);
+    color: var(--ink-2);
+    background: var(--panel);
+    border: 0;
+    border-radius: 999px;
+    padding: 8px 13px 8px 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color 140ms ease,
+      color 140ms ease;
+  }
+  .cdl-b:hover,
+  .cdl-b[aria-expanded='true'] {
+    background: var(--line);
+    color: var(--ink);
+  }
+  .cdl-b:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .cdl-b:disabled {
+    cursor: progress;
+    color: var(--ink-3);
+  }
+  .cdl-b svg {
+    flex: none;
+    color: var(--ink-3);
+  }
+  .cdl-m {
+    position: absolute;
+    z-index: 40;
+    right: 0;
+    bottom: calc(100% + 6px);
+    width: max-content;
+    min-width: 200px;
+    max-width: calc(100vw - 32px);
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow:
+      0 12px 32px rgb(0 0 0 / 0.14),
+      0 0 0 1px rgb(0 0 0 / 0.06);
+    padding: 6px;
+    display: grid;
+    gap: 2px;
+    animation: cdl-in 140ms ease;
+  }
+  .cdl-m[hidden] {
+    display: none;
+  }
+  .cdl-m button {
+    display: grid;
+    gap: 3px;
+    text-align: left;
+    font: 500 14px/1.2 var(--sans);
+    color: var(--ink);
+    background: none;
+    border: 0;
+    border-radius: 7px;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  .cdl-m button span {
+    font-weight: 400;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .cdl-m button:hover,
+  .cdl-m button:focus-visible {
+    background: var(--panel);
+    outline: none;
+  }
+  /* on a dark page a shadow disappears, so the menu sits a step lighter with a hairline ring */
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .cdl-m {
+      background: var(--panel-2);
+      box-shadow:
+        0 12px 32px rgb(0 0 0 / 0.5),
+        0 0 0 1px var(--line);
+    }
+  }
+  :global(:root[data-theme='dark']) .cdl-m {
+    background: var(--panel-2);
+    box-shadow:
+      0 12px 32px rgb(0 0 0 / 0.5),
+      0 0 0 1px var(--line);
+  }
+  @keyframes cdl-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cdl-m {
+      animation: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .cdl-credit {
+      font-size: 12.5px;
+    }
+  }
+</style>

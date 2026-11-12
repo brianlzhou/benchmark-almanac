@@ -4,6 +4,9 @@
 import type { BenchSummary } from '../lib/data.ts';
 import { epochScores, collectedScores, cardScores, leaderboardScores, SATURATED, LEADERBOARDS } from '../lib/data.ts';
 import TimeScatter, { type Pt } from './TimeScatter.astro';
+import ChartDownload from './ChartDownload.astro';
+import { sourcesCredit, SOURCE_CREDIT, EPOCH_CREDIT } from '../lib/credits.ts';
+import { benchDeck, benchAxis } from '../lib/figure-text.ts';
 
 interface Props {
   s: BenchSummary;
@@ -27,8 +30,31 @@ if (unit === '%') {
   if (b.epoch?.ceiling && b.epoch.ceiling < 100) refs.push({ v: b.epoch.ceiling, label: 'Highest possible score' });
 }
 const frontier = s.frontier.filter((p) => points.some((q) => q.model === p.model));
+const host = LEADERBOARDS[b.id]?.host;
+// a copied board and a collected claim both come through Epoch AI; the legend tells them apart
+const credit = sourcesCredit(
+  points.map((p) => ({ source: p.source === 'collected' && p.via !== 'board' ? 'claim' : p.source })),
+  { ...SOURCE_CREDIT, leaderboard: host ? `${host}’s leaderboard` : `official ${b.name} leaderboard`, collected: `other boards, via ${EPOCH_CREDIT}` },
+);
+const kinds = [
+  points.some((p) => p.source === 'leaderboard') && (host ? `${host}’s leaderboard` : 'the official leaderboard'),
+  points.some((p) => p.source === 'epoch') && 'Epoch AI’s own runs',
+  points.some((p) => p.source === 'collected') && 'boards and claims Epoch AI collected',
+  points.some((p) => p.source === 'card') && 'labs’ model cards',
+].filter((x): x is string => Boolean(x));
+const counts = `Every dated score we have, one mark each, from ${kinds.length < 3 ? kinds.join(' and ') : `${kinds.slice(0, -1).join(', ')} and ${kinds.at(-1)}`}. A model tested at several settings appears more than once. The step line is the best score so far.`;
 ---
 
+<ChartDownload
+  subject={b.name}
+  credit={credit}
+  name="scores-over-time"
+  deck={benchDeck(b)}
+  yAxis={benchAxis(b)}
+  xAxis="Date: the date the board or Epoch AI gives a run, else the model’s release, and the card’s date for lab claims"
+  counts={counts}
+  leaves="Scores with no date, and lab numbers reported in a different unit."
+>
 <TimeScatter
   points={points}
   frontier={frontier}
@@ -40,3 +66,4 @@ const frontier = s.frontier.filter((p) => points.some((q) => q.model === p.model
   better={b.better}
   sourceNote={LEADERBOARDS[b.id]?.host ? { leaderboard: `On ${LEADERBOARDS[b.id].host}’s leaderboard` } : {}}
 />
+</ChartDownload>

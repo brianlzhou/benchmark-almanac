@@ -114,10 +114,13 @@ const pts = points.map((p) => ({ ...p, lab: modelById.get(p.model)?.lab })).sort
     margin: 0;
   }
   .ps svg {
-    display: block;
     width: 100%;
     height: auto;
     overflow: visible;
+  }
+  /* the desktop render is a block; the phone render stays hidden until the site's narrow rule shows it */
+  .ps svg.only-wide {
+    display: block;
   }
   .ps .grid {
     stroke: var(--grid);

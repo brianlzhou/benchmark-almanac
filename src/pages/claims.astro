@@ -1,4 +1,6 @@
 ---
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import PairScatter, { type PairPt } from '../components/PairScatter.astro';
 import ClaimTable from '../components/ClaimTable.astro';
@@ -59,8 +61,10 @@ const signed = (v: number) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).
           Each dot is one model on one benchmark scored in percent, with the lab's number across and the leaderboard's up. Dots on the dashed line agree. Dots below it are where the lab's number is higher. The {all.same} pairs on the line usually mean one side copied the other, often a leaderboard that lists the lab's own number.
         </p>
       </div>
-      <PairScatter points={scatter} xLabel="The lab's number" yLabel="The leaderboard's number" label="Lab claims against leaderboard scores" band={5} height={680} />
-      <p class="key muted">The gray band is within 5 points either way. Colors follow each model's lab, and gray is any lab outside the eight we color.</p>
+      <ChartDownload credit={creditLine([LAB_CARDS, 'official leaderboards'])} deckFrom="@lede" counts="Every model and benchmark pair scored in percent that has both a number in the lab’s own post or card and a number on the benchmark’s leaderboard." leaves="Benchmarks scored in other units, and pairs missing either number.">
+        <PairScatter points={scatter} xLabel="The lab's number" yLabel="The leaderboard's number" label="Lab claims against leaderboard scores" band={5} height={680} />
+        <p class="key muted">The gray band is within 5 points either way. Colors follow each model's lab, and gray is any lab outside the eight we color.</p>
+      </ChartDownload>
     </section>
 
     <section>

@@ -3,6 +3,8 @@
 // compare-data.ts, the math and markup from compare.ts, so the server render and the page script draw the same
 // thing. The server draws the default picks. A link with its own picks, sort, filters or view draws them once
 // their files load.
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import { compareIndex, compareFile, defaultPicks } from '../lib/compare-data.ts';
 import { compute, headline, sub, chips, winsList, table, filterRow, legend, DEFAULT_STATE, MAX_PICKS, type ModelFile, type State } from '../lib/compare.ts';
@@ -85,8 +87,10 @@ const names = picks.map((p) => p.name);
         <p>No shared benchmark matches these filters.</p>
         <button type="button" class="cmp-small" data-reset>Clear the filters</button>
       </div>
-      <div class="cmp-results" data-results set:html={table(res, picks, idx.labs, st, new Set())} />
-      <p class="cmp-legend" data-legend set:html={legend(res, 'table')} />
+      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="bars" showWhen={'input[name="cmp-view"][value="bars"]:checked'} deckFrom="@lede" counts="Benchmarks that every picked model has a score on, from the sources chosen under Scores from. Percentage tests share one axis, and other tests use their own scale, from the lowest model to the highest." leaves="Benchmarks any picked model lacks.">
+        <div class="cmp-results" data-results set:html={table(res, picks, idx.labs, st, new Set())} />
+        <p class="cmp-legend" data-legend set:html={legend(res, 'table')} />
+      </ChartDownload>
       <div class="cmp-share">
         <button type="button" class="cmp-small" data-copy disabled>Copy link to this comparison</button>
         <span class="cmp-status" role="status" data-status></span>

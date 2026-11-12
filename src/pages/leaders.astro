@@ -1,4 +1,7 @@
 ---
+import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../lib/figure-text.ts';
+import ChartDownload from '../components/ChartDownload.astro';
+import { creditLine, ECI_CREDIT, POOL_CREDIT } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import ReignChart from '../components/ReignChart.astro';
 import CrownShare from '../components/CrownShare.astro';
@@ -20,6 +23,21 @@ const changes = eci ? eci.reigns.filter((g) => g.start >= '2023-01-01').length :
 // every category's chart, three ways: each benchmark from the one source its page leads with (the default, so
 // this page and the benchmark pages agree), every independent run, and every score with claims included
 type PoolSource = 'headline' | 'independent' | 'all';
+// what the downloaded share charts say about what they count
+const shareFigure = (src: PoolSource, n: number) => ({
+  credit: POOL_CREDIT[src],
+  name: `time-at-number-one-${src}`,
+  deck: `Each lab’s share of the days its models held number one, across ${n} benchmarks with enough scores.`,
+  counts: `${CLOCK_NOTE} ${POOL_NOTES[src].counts}`,
+  leaves: `${POOL_NOTES[src].leaves} A new version doesn’t stop the old one’s clock while people still test it.`,
+});
+const closedFigure = (src: PoolSource) => ({
+  credit: POOL_CREDIT[src],
+  name: `closed-out-${src}`,
+  deck: 'Close-outs by lab since 2023: a close-out goes to the model that first took a benchmark past 85%. We count these separately from time at number one.',
+  counts: POOL_NOTES[src].counts,
+  leaves: 'Benchmarks nobody has taken past 85%.',
+});
 const POOL_TEXT: Record<PoolSource, { label: string; within: string; short: string }> = {
   headline: { label: 'One source per benchmark', within: 'each from the one source its page leads with', short: 'One source per benchmark' },
   independent: { label: 'All independent runs', within: 'independent runs only', short: 'Independent runs only' },
@@ -105,7 +123,9 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
               {longest && ` The longest run at the top since 2023 was ${Math.round(reignDays(longest) / 30.4)} ${Math.round(reignDays(longest) / 30.4) === 1 ? 'month' : 'months'}.`}
             </p>
           </div>
-          <ReignChart rows={eciRows} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} from="2023-01-01" />
+          <ChartDownload credit={creditLine([ECI_CREDIT])} name="capability-index-number-one" deck={ECI_DECK} counts="Every model on the Epoch Capabilities Index. Each stretch is the model with the highest index at that time, colored by its lab, dated by the model’s release." leaves="Models without an index score.">
+            <ReignChart rows={eciRows} names={{ eci: { name: 'Capabilities Index', href: '/models/' } }} from="2023-01-01" />
+          </ChartDownload>
         </section>
       )
     }
@@ -128,7 +148,9 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
                     Each lab’s share of the days its models held number one, across {allRows.length} benchmarks with enough scores, {POOL_TEXT[v.source].within}. We count only contested time. A benchmark’s clock stops when its best score passes 85%, or at its newest score once 45 days go by without another. A new version doesn’t stop the old one’s clock while people still test it.
                   </p>
                 </div>
-                <CrownShare shares={overall} />
+                <ChartDownload {...shareFigure(v.source, allRows.length)}>
+                  <CrownShare shares={overall} />
+                </ChartDownload>
               </section>
             )
           }
@@ -193,7 +215,9 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
                     A close-out goes to the model that first took a benchmark past 85%. We count these separately from time at number one.
                   </p>
                 </div>
-                <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
+                <ChartDownload {...closedFigure(v.source)}>
+                  <CrownShare shares={closedBy} what="Benchmarks closed out since 2023" />
+                </ChartDownload>
                 <div class="table-wrap closed">
                   <table class="t" data-sort>
                     <thead>
