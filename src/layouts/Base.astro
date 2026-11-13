@@ -1,7 +1,7 @@
 ---
 import { Font } from 'astro:assets';
 import '../styles/global.css';
-import { benchmarks, AS_OF, featuredModels, labs } from '../lib/data.ts';
+import { benchmarks, AS_OF, featuredModels, labs, LEADERBOARDS } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
 import { AREAS } from '../lib/taxonomy.ts';
 import FootRidge from '../components/FootRidge.astro';
@@ -171,7 +171,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
       <div class="page foot-in">
         <div class="foot-brand">
           <a class="word" href="/">Benchmark Almanac</a>
-          <p>AI benchmarks, who leads them, and which ones labs still report.</p>
+          <p>Scores from lab launch posts, system cards and {Object.keys(LEADERBOARDS).length.toLocaleString('en-US')} public leaderboards.</p>
           <p class="foot-n">
             {benchmarks.length.toLocaleString('en-US')} benchmarks, {featuredModels.length.toLocaleString('en-US')} models and {labs.length} labs. Data as of {humanDate(AS_OF)}.
           </p>
