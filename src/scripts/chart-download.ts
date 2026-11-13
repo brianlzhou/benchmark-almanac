@@ -655,6 +655,8 @@ async function build(wrap: HTMLElement): Promise<Built> {
   useFace(mono, '400|normal');
   const text = (x: number, y: number, t: string, o: { size: number; fill: string; weight?: number; font?: string; anchor?: string }) =>
     `<text x="${n2(x)}" y="${n2(y)}" fill="${o.fill}"${o.anchor ? ` text-anchor="${o.anchor}"` : ''} style="font-family:${q(o.font ?? sans)};font-size:${o.size}px;font-weight:${o.weight ?? 400}">${t}</text>`;
+  // y is the bottom of the last thing drawn. One gap separates the headline, the deck, the chart and the footer.
+  const GAP = 24;
   let y = PAD;
   const top: string[] = [];
 
@@ -667,23 +669,24 @@ async function build(wrap: HTMLElement): Promise<Built> {
     const lines = wrapLines(title, `${weight} ${size}px ${family}`, snap.w);
     useFace(family, `${weight}|normal`);
     lines.forEach((l, i) => top.push(`<text x="${PAD}" y="${n2(y + size * 0.86 + i * lh)}" fill="${snap.ink}" style="font-family:${q(family)};font-size:${size}px;font-weight:${weight}${snap.head?.ls && snap.head.ls !== 'normal' ? `;letter-spacing:${snap.head.ls}` : ''}">${esc(l)}</text>`));
-    y += lines.length * lh + 10;
+    y += size * 0.86 + (lines.length - 1) * lh + size * 0.24;
   }
 
   // the deck: what this is, who made it and what the number measures, then any page state it depends on
   const deck = curly([wrap.dataset.deck, ...textFrom(wrap.dataset.deckFrom, head), snap.ctx.deck].filter(Boolean).join(' '));
   if (deck) {
+    y += GAP - 10;
     for (const l of wrapLines(deck, `400 14.5px ${sans}`, snap.w)) {
       y += 21;
       top.push(text(PAD, y, esc(l), { size: 14.5, fill: snap.ink2 }));
     }
-    y += 8;
+    y += 4;
   }
 
   // a mix: each test and its share of the index, in columns, with a small bar for the share
   const mix = snap.ctx.mix ?? [];
   if (mix.length) {
-    y += 8;
+    y += 12;
     const cols = Math.max(1, Math.min(3, Math.floor(snap.w / 300)));
     const colW = snap.w / cols;
     const rows = Math.ceil(mix.length / cols);
@@ -703,83 +706,88 @@ async function build(wrap: HTMLElement): Promise<Built> {
       top.push(`<rect x="${n2(bx)}" y="${n2(cy - 8)}" width="${barW}" height="5" rx="2.5" fill="${snap.line}"/>`);
       top.push(`<rect x="${n2(bx)}" y="${n2(cy - 8)}" width="${n2(Math.max(2, barW * Math.min(1, m.frac)))}" height="5" rx="2.5" fill="${m.color}"/>`);
     });
-    y += rows * 22 + 10;
+    y += (rows - 1) * 22 + 15 + 4;
   }
 
   // the value axis's title, over the chart, so the scale says what it measures
+  y += GAP;
   if (wrap.dataset.yAxis) {
-    y += deck || mix.length ? 32 : 22;
+    // the axis title belongs to the chart, so it sits close above it
+    y += 9;
     top.push(text(PAD, y, esc(curly(wrap.dataset.yAxis)), { size: 12.5, fill: snap.ink3, weight: 500 }));
-    y += 4;
+    y += 12;
   }
-  y += 12;
   const chartY = y;
   y += snap.h;
+  // lines that belong to the chart itself stay right under it
+  let under = false;
   if (out.ranks) {
     y += 18;
     top.push(text(PAD, y, esc(`Ranks ${out.ranks.first} to ${out.ranks.last} of ${out.ranks.total}.`), { size: 12.5, fill: snap.ink3 }));
+    under = true;
   }
   if (wrap.dataset.xAxis) {
-    y += 18;
-    top.push(text(PAD + snap.w, y, esc(curly(wrap.dataset.xAxis)), { size: 12.5, fill: snap.ink3, weight: 500, anchor: 'end' }));
-  }
-  y += 22;
-
-  // what the chart counts and leaves out
-  const notes: [string, string | undefined][] = [
-    ['Counts', curly(wrap.dataset.counts ?? snap.ctx.counts ?? '') || undefined],
-    ['Leaves out', curly(wrap.dataset.leaves ?? snap.ctx.leaves ?? '') || undefined],
-  ];
-  for (const [label, body] of notes) {
-    if (!body) continue;
-    measure ??= document.createElement('canvas').getContext('2d');
-    measure!.font = `600 13px ${sans}`;
-    const lw = measure!.measureText(label).width + 8;
-    // the first line leaves room for its label; the rest use the full width
-    const words = body.split(/\s+/);
-    measure!.font = `400 13px ${sans}`;
-    let line = '';
-    const lines: string[] = [];
-    for (const w of words) {
-      const next = line ? `${line} ${w}` : w;
-      const room = lines.length === 0 ? snap.w - lw : snap.w;
-      if (line && measure!.measureText(next).width > room) {
-        lines.push(line);
-        line = w;
-      } else line = next;
+    // right-aligned under the axis it names, wrapped when the figure is narrow
+    for (const l of wrapLines(curly(wrap.dataset.xAxis), `500 12.5px ${sans}`, snap.w)) {
+      y += 18;
+      top.push(text(PAD + snap.w, y, esc(l), { size: 12.5, fill: snap.ink3, weight: 500, anchor: 'end' }));
     }
-    if (line) lines.push(line);
-    lines.forEach((l, i) => {
-      y += 19;
-      if (i === 0) top.push(text(PAD, y, esc(label), { size: 13, fill: snap.ink2, weight: 600 }));
-      top.push(text(PAD + (i === 0 ? lw : 0), y, esc(l), { size: 13, fill: snap.ink3 }));
-    });
-    y += 6;
+    under = true;
   }
-  y += 14;
+  y += (under ? 5 : 0) + GAP;
 
-  // the footer: the site and the page's address, then the source credit
+  // the footer: a short list of what the chart counts, leaves out and comes from, and the signature beside it
   const foot: string[] = [];
-  const site = 'Benchmark Almanac';
+  const serif = `${snap.serif}, Georgia, serif`;
+  useFace(serif, '400|normal');
+  const creditLabel = /^Sources:/.test(credit) ? 'Sources' : 'Source';
+  const creditValue = credit.replace(/^Sources?:\s*/, '');
+  const rows = (
+    [
+      ['Counts', curly(wrap.dataset.counts ?? snap.ctx.counts ?? '')],
+      ['Leaves out', curly(wrap.dataset.leaves ?? snap.ctx.leaves ?? '')],
+      [creditLabel, creditValue ? `${creditValue.charAt(0).toUpperCase()}${creditValue.slice(1)}` : ''],
+    ] as [string, string][]
+  ).filter(([, v]) => v);
   measure ??= document.createElement('canvas').getContext('2d');
-  measure!.font = `600 13px ${sans}`;
-  const siteW = measure!.measureText(site).width;
-  foot.push(text(PAD, y + 11, esc(site), { size: 13, fill: snap.ink, weight: 600 }));
-  // the page's address sits beside the site's name, or under it when the figure is too narrow for both
-  measure!.font = `400 12px ${mono}`;
+  const site = 'Benchmark Almanac';
   const url = pageUrl();
-  const beside = PAD + siteW + 12 + measure!.measureText(url).width <= W - PAD;
-  if (!beside) y += 19;
-  foot.push(text(beside ? PAD + siteW + 12 : PAD, y + 11, esc(url), { size: 12, fill: snap.ink3, font: mono }));
-  y += 18;
-  if (credit) {
-    for (const l of wrapLines(credit, `400 13px ${sans}`, snap.w)) {
-      y += 19;
-      foot.push(text(PAD, y, esc(l), { size: 13, fill: snap.ink3 }));
-    }
-    y += 4;
+  measure!.font = `400 17px ${serif}`;
+  const siteW = measure!.measureText(site).width;
+  measure!.font = `400 12px ${mono}`;
+  const urlW = measure!.measureText(url).width;
+  // two columns when the signature fits in the last third, else the signature goes under the list
+  const sideW = Math.max(siteW, urlW);
+  const twoCol = rows.length > 0 && snap.w >= 600 && sideW <= snap.w * 0.34 - 24;
+  const listW = twoCol ? Math.round(snap.w * 0.66) : snap.w;
+  measure!.font = `500 13px ${sans}`;
+  const labelW = Math.max(0, ...rows.map(([l]) => measure!.measureText(l).width)) + 16;
+  const firstBase = y + 9.5;
+  let base = firstBase - 19;
+  rows.forEach(([label, value], r) => {
+    if (r) base += 7;
+    wrapLines(value, `400 13px ${sans}`, listW - labelW).forEach((l, i) => {
+      base += 19;
+      if (i === 0) foot.push(text(PAD, base, esc(label), { size: 13, fill: snap.ink2, weight: 500 }));
+      foot.push(text(PAD + labelW, base, esc(l), { size: 13, fill: snap.ink3 }));
+    });
+  });
+  const listBottom = rows.length ? base + 5 : y;
+  let sigBottom: number;
+  if (twoCol) {
+    // the signature's top lines up with the list's first line
+    const nameBase = firstBase + 3;
+    foot.push(text(PAD + snap.w, nameBase, esc(site), { size: 17, fill: snap.ink, font: serif, anchor: 'end' }));
+    foot.push(text(PAD + snap.w, nameBase + 20, esc(url), { size: 12, fill: snap.ink3, font: mono, anchor: 'end' }));
+    sigBottom = nameBase + 24;
+  } else {
+    const nameBase = (rows.length ? listBottom + 18 : y) + 13;
+    foot.push(text(PAD, nameBase, esc(site), { size: 17, fill: snap.ink, font: serif }));
+    foot.push(text(PAD, nameBase + 20, esc(url), { size: 12, fill: snap.ink3, font: mono }));
+    sigBottom = nameBase + 24;
   }
-  const H = Math.ceil(y + PAD - 4);
+  y = Math.max(listBottom, sigBottom);
+  const H = Math.ceil(y + PAD - 6);
 
   const [fonts, images] = await Promise.all([embedFonts(out.fonts), Promise.all(out.images.map((im) => dataUrl(im.url).catch(() => '')))]);
   let body = out.parts.join('');
