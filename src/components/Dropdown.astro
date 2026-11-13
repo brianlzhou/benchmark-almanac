@@ -18,13 +18,15 @@ interface Props {
   options: Option[];
   search?: boolean;
   wide?: boolean;
+  /** Changes how the table shows its rows, not which rows show: the filter script leaves it alone. */
+  viewOnly?: boolean;
 }
-const { filterKey, label, options, search = false, wide = false } = Astro.props;
+const { filterKey, label, options, search = false, wide = false, viewOnly = false } = Astro.props;
 const first = options[0];
 const id = `dd-${filterKey}`;
 ---
 
-<div class:list={['dd', { wide }]} data-dd>
+<div class:list={['dd', { wide }]} data-dd data-view-only={viewOnly ? '' : undefined}>
   <select class="dd-native" aria-hidden="true" tabindex="-1" {...{ [`data-${filterKey}`]: '' }}>
     {options.map((o) => <option value={o.value}>{o.label}</option>)}
   </select>

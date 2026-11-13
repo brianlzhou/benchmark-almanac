@@ -6,7 +6,8 @@
 // "86.1%", "$1,200", "12k" and "1,105" sort as numbers, "Jul 2025" and "2025-07-14" as dates, the rest as
 // text. Empty cells always go last. A header can set data-first="asc" or "desc" to choose the first press,
 // or data-nosort to stay plain. Rows nested under a parent (data-parent="k" after data-group="k") move
-// with their parent. The URL keeps ?sort=<column>&dir=, so a sorted view can be shared.
+// with their parent. The URL keeps ?sort=<column>&dir=, so a sorted view can be shared. A table that changes
+// its cells' values in place sends it a "sort:refresh" event, and a sorted table sorts again.
 
 type Kind = 'num' | 'date' | 'text';
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -105,6 +106,12 @@ export function wireSort(table: HTMLTableElement, onSort?: () => void) {
     if (f === 'asc' || f === 'desc') return f;
     return values(i).kind === 'text' ? 'asc' : 'desc';
   };
+
+  // a column whose cells change in place (a count's time window) sorts again by its new values
+  table.addEventListener('sort:refresh', () => {
+    cache.clear();
+    if (col >= 0 && dir) order();
+  });
 
   cols.forEach((th, i) => {
     if (th.dataset.nosort !== undefined || !keys[i]) return;

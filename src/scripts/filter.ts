@@ -78,7 +78,8 @@ export function wireFilter(name: string) {
   // what a search matches: the row's visible text plus any hidden aliases
   const haystack = new Map(all.map((r) => [r, `${r.textContent ?? ''} ${r.dataset.text ?? ''}`.toLowerCase()]));
   const q = box.querySelector<HTMLInputElement>('[data-q]');
-  const selects = [...box.querySelectorAll<HTMLSelectElement>('select')];
+  // a view-only dropdown (Dropdown viewOnly) changes how rows show, not which rows show
+  const selects = [...box.querySelectorAll<HTMLSelectElement>('select')].filter((s) => !s.closest('[data-view-only]'));
   // radio groups carry data-key, the row attribute they match
   const radios = [...box.querySelectorAll<HTMLInputElement>('input[type="radio"][data-key]')];
   const radioKeys = [...new Set(radios.map((r) => r.dataset.key!))];
@@ -154,9 +155,9 @@ export function wireFilter(name: string) {
     if (text) p.set('q', text);
     for (const s of selects) if (s.value) p.set(keyOf(s), s.value);
     for (const k of radioKeys) if (radioValue(k)) p.set(k, radioValue(k));
-    // the sort order lives in the URL too (see sort.ts)
+    // the sort order lives in the URL too (see sort.ts), and so do any params the table names in data-keep
     const cur = new URLSearchParams(location.search);
-    for (const k of ['sort', 'dir']) if (cur.has(k)) p.set(k, cur.get(k)!);
+    for (const k of ['sort', 'dir', ...(table!.dataset.keep ?? '').split(' ').filter(Boolean)]) if (cur.has(k)) p.set(k, cur.get(k)!);
     const qs = p.toString();
     history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
   }

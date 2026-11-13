@@ -89,15 +89,37 @@ const probe = {
 // what the two count columns cover, for their header hovers, and each cell's labs and newest document
 const span = (docs: { lab: string; date: string }[]) => {
   const ds = docs.map((d) => d.date).filter(Boolean).sort();
-  return `${docs.length.toLocaleString('en-US')} from ${new Set(docs.map((d) => d.lab)).size} labs, ${monthYear(ds[0])} to ${monthYear(ds.at(-1))}`;
+  return { n: docs.length.toLocaleString('en-US'), labs: new Set(docs.map((d) => d.lab)).size, from: monthYear(ds[0]), to: monthYear(ds.at(-1)) };
 };
-const postsTip = `Lab launch posts that show a score for it. We read ${span(cards)}.`;
-const docsTip = `System cards, model cards and technical reports that report it. We read ${span(systemCards)}.`;
-const citeTip = (xs: { card: { lab: string; date: string } }[]) => {
+const postsSpan = span(cards);
+const docsSpan = span(systemCards);
+const labCount = (n: number) => (n === 1 ? '1 lab' : `${n} labs`);
+type Cite = { card: { lab: string; date: string } };
+const citeTip = (xs: Cite[]) => {
   if (!xs.length) return undefined;
-  const labs = new Set(xs.map((x) => x.card.lab)).size;
   const newest = xs.map((x) => x.card.date).sort().at(-1);
-  return `${labs === 1 ? '1 lab' : `${labs} labs`}, newest ${monthYear(newest)}`;
+  return `${labCount(new Set(xs.map((x) => x.card.lab)).size)}, newest ${monthYear(newest)}`;
+};
+// the same count over the last 12 and 6 months, and the labs behind each, for the Cited dropdown:
+// "posts in 12 months, posts in 6 months, labs in 12 months, labs in 6 months". None in 12 months leaves it out.
+const windowCounts = (xs: Cite[]) => {
+  const within = (m: number) => xs.filter((x) => monthsBetween(x.card.date, AS_OF) < m);
+  const [a, b] = [within(12), within(6)];
+  if (!a.length) return undefined;
+  const labs = (ys: Cite[]) => new Set(ys.map((y) => y.card.lab)).size;
+  return `${a.length} ${b.length} ${labs(a)} ${labs(b)}`;
+};
+const countedOptions: Option[] = [
+  { value: '', label: 'Cited: all time' },
+  { value: '12m', label: 'Cited: last 12 months' },
+  { value: '6m', label: 'Cited: last 6 months' },
+];
+// the header hovers: what each column means
+const TIPS = {
+  posts: `Lab launch posts that show a score on this benchmark. We read ${postsSpan.n} posts from ${postsSpan.labs} labs, ${postsSpan.from} to ${postsSpan.to}.`,
+  docs: `System cards, model cards and technical reports that give a score on this benchmark. We read ${docsSpan.n} from ${docsSpan.labs} labs, ${docsSpan.from} to ${docsSpan.to}.`,
+  released: 'When the benchmark came out, from its paper or its first public release.',
+  added: 'When a model last got a score here, from its leaderboard, Epoch AI or a lab’s own report. Dates a year old or more are grayed out.',
 };
 const maxArea = Math.max(...areaCounts.map((x) => x.n));
 // the newest addition to the catalog, as "November 4th"
@@ -159,7 +181,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
         <label title="Predictions scored against what happens"><input type="radio" name="method" value="events" data-key="method" />Real events <span class="n">{methodCount('events')}</span></label>
       </div>
       <div class="frow">
-        <input class="field grow" type="search" placeholder="Search benchmarks, makers or models" aria-label="Search benchmarks" data-q />
+        <input class="field grow" type="search" placeholder="Search benchmarks" aria-label="Search benchmarks" data-q />
         <button type="button" class="fbtn" aria-expanded="false" aria-controls="fpanel" data-fbtn>
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 3.5h11M3.5 7h7M5.5 10.5h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
           Filters<span class="fn" data-fn></span>
@@ -170,12 +192,13 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
           <Dropdown filterKey="status" label="Status" options={statusOptions} />
           <Dropdown filterKey="added" label="Last added" options={addedOptions(rows)} />
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
+          <Dropdown filterKey="counted" label="Cited in launch posts and system cards" options={countedOptions} viewOnly />
         </div>
         <span class="count muted" data-count>{benchmarks.length.toLocaleString('en-US')} benchmarks</span>
       </div>
 
     <div class="table-wrap wide">
-      <table class="t bt" data-rows data-sort>
+      <table class="t bt" data-rows data-sort data-keep="counted">
         <thead>
           <tr>
             <SortHead>Benchmark</SortHead>
@@ -184,10 +207,18 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
             <SortHead data-first="asc">Level</SortHead>
             <SortHead data-first="asc">Status</SortHead>
             <SortHead>Best score</SortHead>
-            <SortHead class="r two" title={postsTip}>Launch<br />posts</SortHead>
-            <SortHead class="r two" title={docsTip}>System<br />cards</SortHead>
-            <SortHead>Released</SortHead>
-            <SortHead title="When a model last got a score here, from any source">Last<br />added</SortHead>
+            <th class="r two" data-col="posts">
+              <button type="button" class="sort" data-tn="Launch posts" data-ts={TIPS.posts}><span class="def">Launch<br />posts</span><svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg></button>
+            </th>
+            <th class="r two" data-col="docs">
+              <button type="button" class="sort" data-tn="System cards" data-ts={TIPS.docs}><span class="def">System<br />cards</span><svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg></button>
+            </th>
+            <th>
+              <button type="button" class="sort" data-tn="Released" data-ts={TIPS.released}><span class="def">Released</span><svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg></button>
+            </th>
+            <th>
+              <button type="button" class="sort" data-tn="Last added" data-ts={TIPS.added}><span class="def">Last<br />added</span><svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg></button>
+            </th>
           </tr>
           <tr data-probe aria-hidden="true">
             <td class="nm" />
@@ -276,8 +307,8 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                         </span>
                       )}
                     </td>
-                    <td class="r" title={citeTip(s.cites)}>{s.cites.length || ''}</td>
-                    <td class="r muted" title={citeTip(s.docCites)}>{s.docCites.length || ''}</td>
+                    <td class="r" title={citeTip(s.cites)} data-w={windowCounts(s.cites)}>{s.cites.length || ''}</td>
+                    <td class="r muted" title={citeTip(s.docCites)} data-w={windowCounts(s.docCites)}>{s.docCites.length || ''}</td>
                     <td class="muted num nowrap">{monthYear(s.b.released)}</td>
                     <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
                   </tr>
@@ -311,8 +342,8 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                             </span>
                           )}
                         </td>
-                        <td class="r" title={citeTip(p.cites)}>{p.cites.length || ''}</td>
-                        <td class="r muted" title={citeTip(p.docCites)}>{p.docCites.length || ''}</td>
+                        <td class="r" title={citeTip(p.cites)} data-w={windowCounts(p.cites)}>{p.cites.length || ''}</td>
+                        <td class="r muted" title={citeTip(p.docCites)} data-w={windowCounts(p.docCites)}>{p.docCites.length || ''}</td>
                         <td class="muted num nowrap">{monthYear(p.b.released)}</td>
                         <td class:list={['muted', 'num', 'nowrap', { stale: !!p.lastAdded && monthsBetween(p.lastAdded.date, AS_OF) >= 12 }]} data-v={p.lastAdded?.date} title={p.lastAdded ? `${modelById.get(p.lastAdded.model)?.name ?? p.lastAdded.model}, from ${ADDED_FROM[p.lastAdded.source]}` : undefined}>{monthYear(p.lastAdded?.date)}</td>
                       </tr>
@@ -327,12 +358,66 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
     </div>
     </div>
   </div>
+
 </Base>
 
 <script>
   import { wireFilter } from '../../scripts/filter.ts';
   import { wirePeek } from '../../scripts/peek.ts';
   import { wireFacts } from '../../scripts/facts.ts';
+  // the count columns' time window, from the Cited dropdown: all time, the last 12 months or the last 6. The
+  // server put each cell's window counts in data-w ("12-month count, 6-month count, 12-month labs, 6-month labs"),
+  // and left it out when the last 12 months have none. The URL keeps the choice as counted=. It runs before the
+  // filter, so a shared sorted link sorts by it.
+  const counted = document.querySelector<HTMLTableElement>('table[data-rows]');
+  const pick = document.querySelector<HTMLSelectElement>('select[data-counted]');
+  const SPANS: Record<string, { at: number; months: number }> = { '12m': { at: 0, months: 12 }, '6m': { at: 1, months: 6 } };
+  if (counted && pick) {
+    const heads = [...(counted.tHead?.rows[0]?.cells ?? [])];
+    const cols = ['posts', 'docs'].map((key) => {
+      const at = heads.findIndex((th) => th.dataset.col === key);
+      const btn = heads[at]?.querySelector<HTMLElement>('[data-ts]');
+      const cells = [...counted.tBodies[0].rows].map((r) => r.cells[at]).filter((c): c is HTMLTableCellElement => !!c?.textContent?.trim());
+      return { btn, tip: btn?.dataset.ts ?? '', cells, orig: new Map(cells.map((c) => [c, { text: c.textContent ?? '', title: c.title }])) };
+    });
+    const set = (v: string, write: boolean) => {
+      const w = SPANS[v];
+      for (const { btn, tip, cells, orig } of cols) {
+        for (const c of cells) {
+          const o = orig.get(c)!;
+          if (!w) {
+            c.textContent = o.text;
+            c.title = o.title;
+            continue;
+          }
+          const xs = (c.dataset.w ?? '').split(' ').map(Number);
+          const n = xs[w.at] || 0;
+          const labs = xs[w.at + 2] || 0;
+          c.textContent = n ? String(n) : '';
+          if (n) c.title = o.title.replace(/^\d+ labs?/, labs === 1 ? '1 lab' : `${labs} labs`);
+          else c.removeAttribute('title');
+        }
+        // the hover says which window the numbers count
+        if (btn) btn.dataset.ts = w ? `${tip} Now counting the last ${w.months} months.` : tip;
+        btn?.closest('th')?.classList.toggle('windowed', !!w);
+      }
+      if (write) {
+        const p = new URLSearchParams(location.search);
+        if (w) p.set('counted', v);
+        else p.delete('counted');
+        const qs = p.toString();
+        history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+      }
+      counted.dispatchEvent(new Event('sort:refresh'));
+    };
+    const start = new URLSearchParams(location.search).get('counted') ?? '';
+    if (SPANS[start]) {
+      pick.value = start;
+      pick.dispatchEvent(new Event('sync'));
+      set(start, false);
+    }
+    pick.addEventListener('change', () => set(pick.value, true));
+  }
   wireFilter('benchmarks');
   wireFacts(document.querySelector<HTMLElement>('[data-filter="benchmarks"]'));
   const peekTable = document.querySelector<HTMLTableElement>('table[data-rows]');
@@ -649,6 +734,18 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
     line-height: 1.25;
     vertical-align: bottom;
   }
+  /* a header with a definition on hover: a dotted underline under its words. A count column that counts a
+     window shows its underline solid. */
+  .bx .bt th .def {
+    text-decoration: underline dotted;
+    text-decoration-color: var(--ink-4, var(--line));
+    text-underline-offset: 3px;
+  }
+  .bx .bt th.windowed .def {
+    text-decoration-style: solid;
+    text-decoration-color: var(--ink-2);
+    color: var(--ink);
+  }
   .bx .bt td {
     padding-top: 11px;
     padding-bottom: 11px;
@@ -752,6 +849,10 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
     }
   }
   @media (max-width: 900px) {
+    /* the count columns hide here, so their window does too */
+    .bx [data-view-only] {
+      display: none;
+    }
     .bx .bt th:nth-child(2),
     .bx .bt td:nth-child(2),
     .bx .bt th:nth-child(3),

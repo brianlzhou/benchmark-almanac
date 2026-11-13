@@ -110,6 +110,11 @@ const probe = {
 };
 const kindOf = (s: (typeof all)[number]) => (s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
 const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
+// the header hovers: what each column means
+const ATIPS = {
+  released: 'When the arena opened, from its paper or its launch.',
+  added: 'When a model last got a score here, from the arena’s own leaderboard, Epoch AI or a lab’s own report. Dates a year old or more are grayed out.',
+};
 ---
 
 <Base title="Arenas" description="Every arena and match league we track, who runs it, how it's judged, and which model leads it.">
@@ -187,8 +192,12 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
               <SortHead data-first="asc">Status</SortHead>
               <SortHead>Leader</SortHead>
               <SortHead class="r two" title="Models with a score here">Models<br />rated</SortHead>
-              <SortHead>Released</SortHead>
-              <SortHead title="When a model last got a score here, from any source">Last<br />added</SortHead>
+              <th>
+                <button type="button" class="sort" data-tn="Released" data-ts={ATIPS.released}><span class="def">Released</span><svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg></button>
+              </th>
+              <th>
+                <button type="button" class="sort" data-tn="Last added" data-ts={ATIPS.added}><span class="def">Last<br />added</span><svg width="8" height="10" viewBox="0 0 8 10" aria-hidden="true"><path class="up" d="M1 4l3-3 3 3"></path><path class="dn" d="M1 6l3 3 3-3"></path></svg></button>
+              </th>
             </tr>
             <tr data-probe aria-hidden="true">
               <td class="nm" />
@@ -685,6 +694,12 @@ const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.le
     white-space: normal;
     line-height: 1.25;
     vertical-align: bottom;
+  }
+  /* a header with a definition on hover: a dotted underline under its words */
+  .ax .at th .def {
+    text-decoration: underline dotted;
+    text-decoration-color: var(--ink-4, var(--line));
+    text-underline-offset: 3px;
   }
   .ax .at td {
     padding-top: 11px;
