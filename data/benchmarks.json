@@ -17129,20 +17129,7 @@
     "unit": "elo",
     "confidence": "unverified",
     "evidence": [
-      "h",
-      "t",
-      "p",
-      "s",
-      ":",
-      "/",
-      "c",
-      "o",
-      "d",
-      "e",
-      "f",
-      "r",
-      ".",
-      "m"
+      "https://codeforces.com/"
     ]
   },
   {
@@ -64740,28 +64727,7 @@
     "evidence": [
       "https://github.com/yale-nlp/Physics",
       "https://huggingface.co/datasets/yale-nlp/physics-verified",
-      "h",
-      "t",
-      "p",
-      "s",
-      ":",
-      "/",
-      "u",
-      "g",
-      "i",
-      "n",
-      "f",
-      "a",
-      "c",
-      "e",
-      ".",
-      "o",
-      "d",
-      "y",
-      "l",
-      "-",
-      "v",
-      "r"
+      "https://huggingface.co/api/datasets/yale-nlp/physics-verified"
     ],
     "added": "2026-11-10"
   },
@@ -76866,35 +76832,7 @@
     "evidence": [
       "https://github.com/microsoft/STATE-Bench",
       "https://microsoft.github.io/STATE-Bench/leaderboard/",
-      "h",
-      "t",
-      "p",
-      "s",
-      ":",
-      "/",
-      "g",
-      "i",
-      "u",
-      "b",
-      ".",
-      "c",
-      "o",
-      "m",
-      "r",
-      "f",
-      "S",
-      "T",
-      "A",
-      "E",
-      "-",
-      "B",
-      "e",
-      "n",
-      "l",
-      "a",
-      "v",
-      "0",
-      "8"
+      "https://github.com/microsoft/STATE-Bench/releases/tag/v0.8.0"
     ],
     "added": "2026-11-01"
   },
@@ -76924,35 +76862,7 @@
     "evidence": [
       "https://microsoft.github.io/STATE-Bench/leaderboard/",
       "https://microsoft.github.io/STATE-Bench/leaderboard/leaderboard.js",
-      "h",
-      "t",
-      "p",
-      "s",
-      ":",
-      "/",
-      "g",
-      "i",
-      "u",
-      "b",
-      ".",
-      "c",
-      "o",
-      "m",
-      "r",
-      "f",
-      "S",
-      "T",
-      "A",
-      "E",
-      "-",
-      "B",
-      "e",
-      "n",
-      "l",
-      "a",
-      "v",
-      "0",
-      "7"
+      "https://github.com/microsoft/STATE-Bench/releases/tag/v0.7.0"
     ],
     "added": "2026-11-10"
   },
@@ -81107,11 +81017,8 @@
     "name": "Terminal-Bench 4.0",
     "aliases": [
       "TB 4.0",
-      "TB 4.1",
       "Terminal Bench 4.0",
-      "Terminal Bench 4.1",
-      "Terminal-Bench 4",
-      "Terminal-Bench 4.1"
+      "Terminal-Bench 4"
     ],
     "category": "agentic-terminal",
     "subcategory": "terminal-tasks",
@@ -81123,14 +81030,41 @@
     "description": "Agents complete 66 hard tasks in containerized terminals across software, ML, science, security, and operations. Test scripts verify each result, scored as resolution rate.",
     "org": "Stanford University, Harbor, and Laude Institute",
     "released": "2026-08",
-    "changes": [
-      {
-        "date": "2026-11-03",
-        "kind": "grader",
-        "text": "Terminal-Bench 4.1 kept the 4.0 tasks and hardened the verifiers of 44 tasks against reward hacking, then regraded the saved 4.0 runs. 162 trials changed score, and every model stayed within its earlier 95% interval.",
-        "url": "https://www.tbench.ai/news/terminal-bench-4-1"
-      }
+    "links": {
+      "repo": "https://github.com/harbor-framework/terminal-bench",
+      "dataset": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4",
+      "leaderboard": "https://www.tbench.ai/?version=4.0",
+      "site": "https://www.tbench.ai/"
+    },
+    "access": "public",
+    "note": "It removed 8 saturated or flawed tasks from Terminal-Bench 3.0 and set a flat 8-hour agent timeout.",
+    "unit": "%",
+    "confidence": "verified",
+    "evidence": [
+      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://github.com/harbor-framework/terminal-bench",
+      "https://www.tbench.ai/",
+      "https://www.tbench.ai/news/terminal-bench-4-0"
     ],
+    "successor": "terminal-bench-4-1"
+  },
+  {
+    "id": "terminal-bench-4-1",
+    "name": "Terminal-Bench 4.1",
+    "aliases": [
+      "TB 4.1",
+      "Terminal Bench 4.1"
+    ],
+    "category": "agentic-terminal",
+    "subcategory": "terminal-tasks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "terminal-bench",
+    "version": "4.1",
+    "description": "The Terminal-Bench 4.0 tasks with hardened verifiers: agents complete 66 hard tasks in containerized terminals across software, ML, science, security, and operations. Test scripts verify each result, scored as resolution rate.",
+    "org": "Stanford University, Harbor, and Laude Institute",
+    "released": "2026-11",
     "links": {
       "repo": "https://github.com/harbor-framework/terminal-bench",
       "dataset": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4",
@@ -81138,35 +81072,15 @@
       "site": "https://www.tbench.ai/"
     },
     "access": "public",
-    "note": "It removed 8 saturated or flawed tasks from Terminal-Bench 3.0 and set a flat 8-hour agent timeout. Board scores come from the 4.1 regrade where one exists and from 4.0 grading otherwise, which the setting marks.",
+    "note": "It kept the 4.0 tasks and hardened the verifiers of 44 of them against reward hacking, then regraded the saved 4.0 runs. 162 trials changed score, and every model stayed within its earlier 95% interval.",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
-      "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "https://www.tbench.ai/news/terminal-bench-4-1",
       "https://github.com/harbor-framework/terminal-bench",
-      "https://www.tbench.ai/",
-      "https://www.tbench.ai/news/terminal-bench-4-0",
-      "h",
-      "t",
-      "p",
-      "s",
-      ":",
-      "/",
-      "w",
-      ".",
-      "b",
-      "e",
-      "n",
-      "c",
-      "a",
-      "i",
-      "r",
-      "m",
-      "l",
-      "-",
-      "4",
-      "1"
-    ]
+      "https://www.tbench.ai/?version=4.1"
+    ],
+    "added": "2026-11-13"
   },
   {
     "id": "terminal-bench-challenges",
@@ -86714,25 +86628,7 @@
       "https://arxiv.org/abs/2601.08620",
       "https://github.com/illuin-tech/vidore-benchmark",
       "https://huggingface.co/spaces/vidore/vidore-leaderboard",
-      "h",
-      "t",
-      "p",
-      "s",
-      ":",
-      "/",
-      "u",
-      "g",
-      "i",
-      "n",
-      "f",
-      "a",
-      "c",
-      "e",
-      ".",
-      "o",
-      "v",
-      "d",
-      "r"
+      "https://huggingface.co/vidore"
     ],
     "added": "2026-11-05"
   },

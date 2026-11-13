@@ -13777,6 +13777,14 @@
     "epoch": "Gemini 4 Carbon"
   },
   {
+    "id": "gemini-4-hydrogen",
+    "name": "Gemini 4 Hydrogen",
+    "lab": "google",
+    "family": "Gemini 4",
+    "released": "2026-11-12",
+    "weights": "closed"
+  },
+  {
     "id": "mistral-large-4-le-chonk",
     "name": "Mistral Large 4 (Le Chonk, open weights)",
     "lab": "mistral",
@@ -13909,7 +13917,8 @@
     "card": "https://thinkingmachines.ai/news/inkling-2-small/",
     "aliases": [
       "Inkling-2-Small",
-      "Inkling 2-Small"
+      "Inkling 2-Small",
+      "Inkling Small 2"
     ],
     "epoch": "Inkling 2 Small"
   },

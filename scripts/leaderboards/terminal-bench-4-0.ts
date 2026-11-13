@@ -1,12 +1,12 @@
-// Terminal-Bench 4.0 and 4.1. tbench.ai renders every Terminal-Bench leaderboard from the Harbor Hub registry: its
+// Terminal-Bench 4.0. tbench.ai renders every Terminal-Bench leaderboard from the Harbor Hub registry: its
 // client POSTs {package, name} to a public Supabase edge function, leaderboard-read, and gets back the
 // board's columns plus every row (metadata: agent, model, effort, date; metrics: accuracy 0 to 100).
-// The other versions (2.0, 2.1, 3.0) import makeTerminalBench from this file.
+// The other versions (2.0, 2.1, 3.0, 4.1) import makeTerminalBench from this file.
 //
 // The site shows the best effort per agent and model by default, with an "all efforts" toggle. Every
 // effort is kept here, with the effort in `setting`, so the almanac can pick.
 //
-// With `extras` (on for 4.0), each row also carries what the row's metrics give: cost per trial (total_cost_usd
+// With `extras` (on for 4.0 and 4.1), each row also carries what the row's metrics give: cost per trial (total_cost_usd
 // over n_trials; a zero total means unknown), output tokens per trial, pass@2 to pass@5 ("passAt2".."passAt5", %),
 // the 95% confidence half-width ("ci95", points) and the mean trial time ("time", seconds). The board's Pareto
 // view plots accuracy against total run time; with a fixed trial count that is the same frontier as mean time.
@@ -130,13 +130,12 @@ export function makeTerminalBench(opts: {
   };
 }
 
-// Terminal-Bench 4.1 (2026-11-03) kept the 4.0 tasks and regraded the 4.0 runs with hardened verifiers, so it
-// stays this record. Its board leads, and runs not yet regraded come from the 4.0 board.
+// Terminal-Bench 4.0's own board, graded the 4.0 way. Terminal-Bench 4.1 (terminal-bench-4-1.ts) regraded the
+// same runs with hardened verifiers and is its own record.
 export default makeTerminalBench({
   benchmark: 'terminal-bench-4-0',
-  version: '4.1',
+  version: '4.0',
   pkg: 'terminal-bench/terminal-bench',
-  name: '4-1-0',
+  name: '4-0-0',
   extras: true,
-  fallback: { name: '4-0-0', version: '4.0' },
 });

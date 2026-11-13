@@ -57,6 +57,8 @@ for (const b of benchmarks) {
   if (b.access && !ACCESS.has(b.access as string)) fail(`benchmark ${b.id}: unknown access ${b.access}`);
   if (b.unit && !UNITS.has(b.unit as string)) fail(`benchmark ${b.id}: unknown unit ${b.unit}`);
   if (b.successor && !benchIds.has(b.successor as string)) fail(`benchmark ${b.id}: unknown successor ${b.successor}`);
+  // evidence is a list of links; a single string merged into it once left one character per entry
+  if (b.evidence !== undefined && (!Array.isArray(b.evidence) || (b.evidence as unknown[]).some((u) => typeof u !== 'string' || !/^https?:\/\//.test(u)))) fail(`benchmark ${b.id}: evidence must be a list of links`);
   const rf = b.refreshes as { date?: string; label?: string }[] | undefined;
   if (rf && (!Array.isArray(rf) || rf.some((r, i) => !/^\d{4}-\d{2}-\d{2}$/.test(r.date ?? '') || !r.label || (i > 0 && r.date! <= rf[i - 1].date!))))
     fail(`benchmark ${b.id}: refreshes need dated labels in order`);
