@@ -14,11 +14,12 @@ import { AREAS, areaOf } from '../lib/taxonomy.ts';
 import ReignChart from '../components/ReignChart.astro';
 import { mostReportedRows } from '../lib/leaders.ts';
 import { POOL_LABEL } from '../lib/pools.ts';
-import { allSummaries, benchmarks, cards, systemCards, eciOrder, AS_OF, monthsBetween, SATURATED, LEADERBOARDS, benchById } from '../lib/data.ts';
+import { allSummaries, benchmarks, cards, eciOrder, AS_OF, monthsBetween, SATURATED, benchById } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
+import Criteria from '../components/Criteria.astro';
+import { REPO, SUBMIT_FORM } from '../lib/criteria.ts';
 import { SITE_NAME, SITE_DESCRIPTION, CATALOG_ID } from '../lib/site.ts';
 import discoveredJson from '../../data/discovered.json';
-import githubJson from '../../data/github.json';
 
 const all = allSummaries();
 // the saturation claim counts established benchmarks only: five or more model cards
@@ -33,6 +34,15 @@ const watch = all
   .sort((a, b) => b.recent - a.recent || b.s.board.length - a.s.board.length)
   .slice(0, 6)
   .map((x) => x.s);
+
+// the ways to help, for the last section
+const CONTRIBUTE = [
+  { t: 'Suggest a benchmark', d: 'Send it through the submission form, with a link to its paper, code or leaderboard.', href: SUBMIT_FORM },
+  { t: 'Add a score or fix a record', d: 'The Contribute page lists open tasks. Each one opens a form that names what’s missing.', href: '/contribute/' },
+  { t: 'Point us at your results', d: 'If you made a benchmark, tell us where its results live and we’ll import them.', href: `${REPO}/issues/new?template=maintainer.yml` },
+  { t: 'Send code', d: 'New leaderboard importers and fixes go straight to a pull request.', href: REPO },
+];
+const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
 // rise and retirement: the 36 benchmarks the most cards report
 const life = all
@@ -64,14 +74,14 @@ const crownFigure = (pool: string, rows: { source: string }[]) => ({
   credit: sourcesCredit(rows),
   name: `number-one-${pool}`,
   deckFrom: '@lede',
-  counts: `One row per benchmark. Each stretch is the model with the best score at that time, colored by its lab. ${POOL_NOTES[pool].counts}`,
+  counts: `One row per benchmark. Each colored stretch is the model with the best score at the time. ${POOL_NOTES[pool].counts}`,
   leaves: POOL_NOTES[pool].leaves,
 });
 const lifeFigure = {
   credit: creditLine([LAUNCH_POSTS]),
   name: 'benchmark-lifecycles',
   deckFrom: '@lede',
-  counts: 'Labs’ launch posts that list each benchmark, one tick per post, in the order labs took them up.',
+  counts: 'Every launch post that shows a score on each benchmark, one tick per post.',
   leaves: 'System cards and leaderboard scores.',
 };
 const topTest = crown.tests.length ? (benchById.get(crown.tests[0].fam)?.name ?? crown.tests[0].fam) : '';
@@ -133,7 +143,7 @@ const catalog = {
         }
         <h1>Benchmark Almanac</h1>
         <p class="hero-lede">
-          We track {n(benchmarks.length)} benchmarks from {n(Object.keys(LEADERBOARDS).length)} public leaderboards, {n(cards.length)} launch posts, {n(systemCards.length)} system cards, and {n(Object.keys(githubJson).length)} open-source GitHub repositories.
+          {SITE_DESCRIPTION}
         </p>
         <SearchBox id="search-list" main preload label="Search benchmarks" />
         <nav class="chips" aria-label="Benchmarks by area">
@@ -154,8 +164,8 @@ const catalog = {
     <section>
       <div class="sh-row">
         <div class="sh">
-          <h2>The models at the top</h2>
-          <p>Ranked by Epoch AI's Capabilities Index, one score built from many benchmarks.</p>
+          <h2>Catching the frontier</h2>
+          <p>We rank models based on Epoch AI's Capabilities Index, an aggregate score from many benchmarks.</p>
         </div>
         <a class="more" href="/models/">All models</a>
       </div>
@@ -169,9 +179,9 @@ const catalog = {
         <section class="pools">
           <div class="sh-row">
             <div class="sh">
-              <h2>Who held number one</h2>
+              <h2>Who is dominating the leaderboards?</h2>
               <p>
-                The {crown.tests.length} tests the most model releases reported since {humanDate(crown.since)}, most reported first. {topTest} comes first, with {n(crown.tests[0].n)} releases. Each version labs reported in that year gets its own row. Taller means a higher score.
+                We track the {crown.tests.length} most-cited benchmarks in model releases in the past year. {topTest} was the most cited, featured in {n(crown.tests[0].n)} releases.
               </p>
             </div>
             <div class="crown-tools">
@@ -201,7 +211,7 @@ const catalog = {
       <div class="sh-row">
         <div class="sh">
           <h2>Leaderboards to watch</h2>
-          <p>No model has reached {SATURATED}% on these yet, and labs have reported them in launch posts over the last six months.</p>
+          <p>Here are the {WORDS[watch.length] ?? watch.length} most popular benchmarks that haven't yet saturated (score &gt;{SATURATED}%).</p>
         </div>
         <a class="more" href="/benchmarks/?status=in-use">All benchmarks in use</a>
       </div>
@@ -211,7 +221,8 @@ const catalog = {
     </section>
 
     <section>
-      <AreaShare heading more={{ href: '/cards/', label: 'All model cards' }} />
+      <AreaShare heading pair title="What do labs feature the most?" more={{ href: '/cards/', label: 'All model cards' }} />
+      <AreaShare heading pair catalog hidden title="What do new benchmarks test?" more={{ href: '/benchmarks/', label: 'All benchmarks' }} />
     </section>
 
     <section>
@@ -248,10 +259,75 @@ const catalog = {
         </section>
       )
     }
+
+    <section id="what-gets-in">
+      <div class="sh-row">
+        <div class="sh">
+          <h2>What gets in</h2>
+          <p>We add a benchmark if anyone can run it again and it passes at least one of these four tests.</p>
+        </div>
+        <a class="more" href="/about/#cataloged">How we decide</a>
+      </div>
+      <Criteria />
+      <p class="muted fine">Test sets made only for one paper’s own method, training datasets and renamed copies stay out. The <a href="/new/">New page</a> lists every find we left out, with the reason.</p>
+    </section>
+
+    <section id="contribute">
+      <div class="sh-row">
+        <div class="sh">
+          <h2>How to contribute</h2>
+          <p>The almanac is open source. Every change goes through GitHub, and a maintainer checks its source before it lands.</p>
+        </div>
+        <a class="more" href="/contribute/">Open tasks</a>
+      </div>
+      <ul class="ways">
+        {CONTRIBUTE.map((w) => (
+          <li>
+            <a href={w.href}>{w.t}</a>
+            <span>{w.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   </div>
 </Base>
 
 <style>
+  /* the last section: the ways to help, two to a row like the four tests above it */
+  .ways {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    margin: 20px 0 0;
+    padding: 0;
+  }
+  .ways li {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    padding: 16px 0 18px;
+  }
+  .ways a {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-underline-offset: 3px;
+  }
+  .ways span {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .fine {
+    margin: 0;
+    font-size: 14px;
+  }
+  @media (max-width: 640px) {
+    .ways {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
   /* hero: a centered title over a drawing of the data, a search box and the eight areas */
   /* the drawing bleeds to the window edges, so main clips it sideways (clip, not hidden, keeps sticky and dropdowns working) */
   :global(main) {

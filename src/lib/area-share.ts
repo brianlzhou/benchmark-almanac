@@ -23,6 +23,10 @@ export interface ShareData {
   root: ShareNode;
   /** The same mentions by difficulty level. Benchmarks without a level are left out. */
   lv: LevelData;
+  /** What the chart counts, for screen readers: "headline benchmarks in launch posts" unless set. */
+  what?: string;
+  /** One counted thing and several, for the hover: "benchmark mention" and "benchmark mentions" unless set. */
+  unit?: [string, string];
 }
 
 /** Mentions by level, easiest first: for all areas, and for each area on its own. */
@@ -139,7 +143,7 @@ export function renderShare(data: ShareData, mode: ShareMode, path: string[], si
     size,
     pad: PAD,
     bands: kids.map((c, k) => ({ n: c.n, v: values(c, data.b.length), fill: fillOf(path, k, kids.length, c.id) })),
-    aria: `${mode === 'share' ? 'Share' : 'Number'} of headline benchmarks in launch posts by ${levelName(path)}, by half year`,
+    aria: `${mode === 'share' ? 'Share' : 'Number'} of ${data.what ?? 'headline benchmarks in launch posts'} by ${levelName(path)}, by half year`,
     go: kids.some((c) => !!opens(c)),
   });
 }
@@ -155,7 +159,7 @@ export function renderLevels(data: ShareData, mode: ShareMode, size: ShareSize):
     size,
     pad: PAD,
     bands: data.lv.ids.map((_, k) => ({ n: data.lv.names[k], v: data.lv.all[k], fill: levelFill(k) })),
-    aria: `${mode === 'share' ? 'Share' : 'Number'} of headline benchmarks in launch posts by difficulty level, by half year`,
+    aria: `${mode === 'share' ? 'Share' : 'Number'} of ${data.what ?? 'headline benchmarks in launch posts'} by difficulty level, by half year`,
     go: false,
   });
 }
@@ -192,7 +196,7 @@ export function renderMini(data: ShareData, mode: ShareMode, area: string, size:
     size,
     pad: MINI_PAD,
     bands: data.lv.ids.map((_, k) => ({ n: data.lv.names[k], v: a.v[k], fill: levelFill(k) })),
-    aria: `${a.n}: ${mode === 'share' ? 'share' : 'number'} of headline benchmarks by difficulty level, by half year`,
+    aria: `${a.n}: ${mode === 'share' ? 'share' : 'number'} of ${data.what ?? 'headline benchmarks in launch posts'} by difficulty level, by half year`,
     go: false,
     from: Math.max(0, data.b.indexOf(MINI_FROM)),
     min: MINI_MIN,
@@ -241,7 +245,9 @@ function stack(s: StackSpec): string {
   const totals = data.b.map((_, i) => series.reduce((sum, v) => sum + v[i], 0));
   const end = nb - 1 + data.f;
   const mid = (i: number) => (i === nb - 1 ? i + data.f / 2 : i + 0.5);
-  const right = label ? s.pad.r : Math.min(s.pad.r, 12);
+  // room at the right for the longest direct label (about 0.56 em a character in the sans), within limits
+  const longest = Math.max(0, ...bands.map((b) => b.n.length));
+  const right = label ? Math.min(280, Math.max(s.pad.r, Math.ceil(longest * font * 0.56) + 16)) : Math.min(s.pad.r, 12);
   const shareTicks = s.ticks ?? [0, 0.25, 0.5, 0.75, 1];
   const count = s.top !== undefined ? { top: s.top, ticks: [0, s.top / 2, s.top] } : countAxis(totals.slice(from));
   const { top, ticks } = mode === 'share' ? { top: 1, ticks: shareTicks } : count;
@@ -309,7 +315,8 @@ function stack(s: StackSpec): string {
           .filter((z) => z.v > 0 && (mode === 'count' || z.v / (totals[i] || 1) >= 0.01))
           .sort((p, q) => q.v - p.v)
           .map((z) => (mode === 'share' ? `${z.n} ${Math.round((z.v / totals[i]) * 100)}%` : `${z.n} ${z.v}`));
-    const tv = `${totals[i].toLocaleString('en-US')} benchmark ${totals[i] === 1 ? 'mention' : 'mentions'}`;
+    const [one, many] = data.unit ?? ['benchmark mention', 'benchmark mentions'];
+    const tv = `${totals[i].toLocaleString('en-US')} ${totals[i] === 1 ? one : many}`;
     out.push(
       `<rect x="${x0}" y="${s.pad.t}" width="${r1(x1 - x0)}" height="${h - s.pad.t - s.pad.b}" class="hit${s.go ? ' go' : ''}" data-j="${i}" data-tv="${esc(tv)}" data-tn="${esc(periodName(data, i))}" data-ts="${esc(parts.join('. '))}"/>`,
     );
