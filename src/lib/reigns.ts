@@ -9,12 +9,18 @@
 //   - the best score passes 85%: the benchmark is saturated, and nobody can take the lead in a way that
 //     means much. The model that took it past 85% gets a close-out instead, counted on its own.
 //   - the newest model tested, once six weeks pass with no newer one: after that, nobody knows who would lead.
+// Between those, the clock runs only while someone else is racing. A lab gets IDLE_DAYS from the day it takes
+// the top spot, and IDLE_DAYS more from each score another lab's model gets. Its own later models don't count, so
+// a lab that is the only one still reporting a benchmark can't run up its time alone.
 // A new version does not stop the old one's clock. While people still test the old version its race goes
 // on, and whoever closes it out gets the credit (ARC-AGI-2 came out in March 2025, long before anyone took
 // ARC-AGI-1 past 85%). When testing stopped around the time the next version came out, the stop reads as
 // a replacement.
 import { epochScores, cardScores, leaderboardScores, viaBoardScores, collectedClaims, benchById, benchmarks, benchSummary, modelById, eciByModel, models, AS_OF, SATURATED } from './data.ts';
 import type { Score } from './types.ts';
+
+/** The thresholds a reader can pick for a close-out. The first is the one the clock stops at. */
+export const CLOSE_LEVELS = [SATURATED, 90, 95];
 
 /**
  * Where a score came from: the benchmark's own leaderboard, Epoch AI's run, a board Epoch AI copied that we don't
@@ -57,6 +63,10 @@ export interface ReignRow {
   lastTested: string;
   /** The score that first passed 85%, for percentage benchmarks where higher is better. */
   closedOut?: CloseOut;
+  /** The score that first reached each of CLOSE_LEVELS, for the close-out threshold a reader can pick. */
+  crossings?: Partial<Record<number, CloseOut>>;
+  /** Every day a score came in, with the lab of each model scored that day. */
+  scored?: { date: string; labs: string[] }[];
   /** The next version of the same test, and the day it came out. */
   replacedBy?: { benchmark: string; date: string };
 }
@@ -94,7 +104,21 @@ function build(points: Point[], better: 'higher' | 'lower', unit: string): Omit<
   const day = unit === '%' && better === 'higher' ? pts.find((p) => p.value >= SATURATED)?.date : undefined;
   const first = day ? bestOfDay.get(day) : undefined;
   const closedOut = first ? { date: first.date, model: first.model, lab: modelById.get(first.model)?.lab, value: first.value } : undefined;
-  return { unit, reigns, domain, lastTested, closedOut };
+  const crossings: Partial<Record<number, CloseOut>> = {};
+  if (unit === '%' && better === 'higher')
+    for (const t of CLOSE_LEVELS) {
+      const d = pts.find((p) => p.value >= t)?.date;
+      const f = d ? bestOfDay.get(d) : undefined;
+      if (f) crossings[t] = { date: f.date, model: f.model, lab: modelById.get(f.model)?.lab, value: f.value };
+    }
+  const byDay = new Map<string, Set<string>>();
+  for (const p of pts) {
+    const l = byDay.get(p.date) ?? new Set<string>();
+    l.add(modelById.get(p.model)?.lab ?? p.model);
+    byDay.set(p.date, l);
+  }
+  const scored = [...byDay.entries()].map(([date, labs]) => ({ date, labs: [...labs] }));
+  return { unit, reigns, domain, lastTested, closedOut, crossings, scored };
 }
 
 const cache = new Map<string, ReignRow | null>();
@@ -175,7 +199,7 @@ export function familyOf(benchmark: string): string[] {
 export function eciReigns(): ReignRow | null {
   const pts = models.filter((m) => eciByModel.has(m.id) && m.released).map((m) => ({ date: m.released!, value: eciByModel.get(m.id)!.eci, model: m.id }));
   const built = build(pts, 'higher', 'index');
-  return built ? { benchmark: 'eci', source: 'epoch', ...built, closedOut: undefined } : null;
+  return built ? { benchmark: 'eci', source: 'epoch', ...built, closedOut: undefined, crossings: undefined } : null;
 }
 
 const days = (a: string, b: string) => (Date.parse(b) - Date.parse(a)) / 86_400_000;
@@ -200,12 +224,36 @@ export function clockStops(r: ReignRow): string {
   return clockStop(r)?.date ?? AS_OF;
 }
 
-/** Contested days of a reign: from its start, or `since`, to its end or the moment the clock stopped. */
+/** How long a lab's clock runs with nobody else tested: from taking the top spot, and from each other lab's score. */
+export const IDLE_DAYS = 45;
+const plus = (d: string, n: number) => new Date(Date.parse(d) + n * 86_400_000).toISOString().slice(0, 10);
+
+/**
+ * Contested days of a reign: from its start, or `since`, to its end or the moment the clock stopped, counting
+ * only the IDLE_DAYS after the lab took the top spot and after each score from another lab's model.
+ */
 export function contestedDays(g: Reign, r: ReignRow, since = '2023-01-01'): number {
   const s = g.start < since ? since : g.start;
   const stop = clockStops(r);
   const e = g.end < stop ? g.end : stop;
-  return Math.max(0, days(s, e));
+  if (e <= s) return 0;
+  if (!r.scored) return days(s, e);
+  // the lab took the top spot at the start of its streak: one of its own models handing over to the next keeps it
+  const lab = g.lab ?? g.model;
+  let i = r.reigns.indexOf(g);
+  while (i > 0 && (r.reigns[i - 1].lab ?? r.reigns[i - 1].model) === lab) i--;
+  const opens = [r.reigns[i]?.start ?? g.start, ...r.scored.filter((x) => x.labs.some((l) => l !== lab)).map((x) => x.date)].sort();
+  let tot = 0;
+  let reach = s;
+  for (const o of opens) {
+    const a = o > reach ? o : reach;
+    const b = plus(o, IDLE_DAYS) < e ? plus(o, IDLE_DAYS) : e;
+    if (b > a) {
+      tot += days(a, b);
+      reach = b;
+    }
+  }
+  return tot;
 }
 
 /** Share of contested benchmark-days each lab held number one, across the given rows. */
@@ -223,17 +271,19 @@ export function labShares(rows: ReignRow[], since = '2023-01-01'): { lab: string
   return [...tot.entries()].map(([lab, d]) => ({ lab, days: d, share: all ? d / all : 0 })).sort((a, b) => b.days - a.days);
 }
 
-/** Close-outs across the given rows, newest first: the model that took each benchmark past 85%. */
-export function closeOuts(rows: ReignRow[], since = '2023-01-01'): (CloseOut & { benchmark: string; source: Source })[] {
+const closeAt = (r: ReignRow, t: number) => (t === SATURATED ? r.closedOut : r.crossings?.[t]);
+
+/** Close-outs across the given rows, newest first: the model that took each benchmark past the threshold. */
+export function closeOuts(rows: ReignRow[], since = '2023-01-01', t = SATURATED): (CloseOut & { benchmark: string; source: Source })[] {
   return rows
-    .filter((r) => r.closedOut && r.closedOut.date >= since)
-    .map((r) => ({ ...r.closedOut!, benchmark: r.benchmark, source: r.source }))
+    .filter((r) => (closeAt(r, t)?.date ?? '') >= since)
+    .map((r) => ({ ...closeAt(r, t)!, benchmark: r.benchmark, source: r.source }))
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 /** Close-outs per lab, most first. */
-export function closeOutShares(rows: ReignRow[], since = '2023-01-01'): { lab: string; count: number; share: number }[] {
-  const list = closeOuts(rows, since);
+export function closeOutShares(rows: ReignRow[], since = '2023-01-01', t = SATURATED): { lab: string; count: number; share: number }[] {
+  const list = closeOuts(rows, since, t);
   const tot = new Map<string, number>();
   for (const c of list) tot.set(c.lab ?? 'other', (tot.get(c.lab ?? 'other') ?? 0) + 1);
   return [...tot.entries()].map(([lab, count]) => ({ lab, count, share: list.length ? count / list.length : 0 })).sort((a, b) => b.count - a.count);

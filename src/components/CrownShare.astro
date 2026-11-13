@@ -22,6 +22,7 @@ const label = (s: { share: number; count?: number }) => (s.count !== undefined ?
       shown.map((s) => (
         <span
           class="blk"
+          data-lab={s.lab}
           style={`flex:${s.share};background:${labColor(s.lab)};color:${onLabColor(s.lab)}`}
           data-tv={label(s)}
           data-tn={labById.get(s.lab)?.name ?? 'Other labs'}
@@ -35,7 +36,7 @@ const label = (s: { share: number; count?: number }) => (s.count !== undefined ?
   <div class="key">
     {
       shown.map((s) => (
-        <span class="tag">
+        <span class="tag" data-lab={s.lab}>
           {s.lab === 'other' || !labById.has(s.lab) ? (
             <svg width="12" height="12" aria-hidden="true">
               <rect width="12" height="12" rx="3" fill={labColor(s.lab)} />
