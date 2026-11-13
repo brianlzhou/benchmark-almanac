@@ -40,13 +40,11 @@ const weightOptions: Option[] = [
 ];
 ---
 
-<Base title="Models" description="Every model with scores here, ranked by the Epoch Capabilities Index, with a Self-Reported Index from each lab's own numbers." film="index">
+<Base title="Models" description="Every AI model with scores here, ranked by Epoch AI's Capabilities Index." film="index">
   <div class="page">
     <header class="head">
       <h1>Models</h1>
-      <p class="lede">
-        We list every model we have scores for and rank them by Epoch AI's Capabilities Index. We use each lab's own name for a model, and add a snapshot label when a lab shipped several versions under one name.
-      </p>
+      <p class="lede">We rank every model we have scores for by Epoch AI's Capabilities Index, an aggregate score from many benchmarks. Models go by their labs' own names.</p>
       <div class="facts">
         <span><b>{featuredModels.length}</b> models</span>
         <span><b>{eciByModel.size}</b> with an ECI score</span>
@@ -58,9 +56,9 @@ const weightOptions: Option[] = [
     <section>
       <div class="sh">
         <h2>The frontier keeps moving</h2>
-        <p>Epoch Capabilities Index by release date. The thin vertical bars are 90% intervals, and the step line is the best score so far.</p>
+        <p>Every model's Capabilities Index score by release date. The step line is the best score so far, and the thin bars are 90% intervals.</p>
       </div>
-      <ChartDownload credit={creditLine([ECI_CREDIT])} quiet deck={`${ECI_DECK} The thin vertical bars are 90% intervals, and the step line is the best score so far.`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with an Epoch Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
+      <ChartDownload credit={creditLine([ECI_CREDIT])} quiet deck={`${ECI_DECK} The step line is the best score so far, and the thin bars are 90% intervals.`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with a Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
         <TimeScatter points={eciPts} frontier={frontier} unit="index" label="Epoch Capabilities Index over time" legend={false} height={460} />
       </ChartDownload>
       <p class="src">Source: <a href={EPOCH_SOURCE.url}>{EPOCH_SOURCE.name}</a>, {EPOCH_SOURCE.license}.</p>
@@ -68,20 +66,20 @@ const weightOptions: Option[] = [
 
     <section>
       <div class="sh">
-        <h2>The labs' own numbers place {srOnly} more models</h2>
+        <h2>What do labs' own numbers say?</h2>
         <p>
-          The Self-Reported Index puts each model on the ECI's scale using only the scores its lab published, so it covers new releases before independent runs arrive. Labs choose what to report and how to run it, so treat it as a claim. It agrees with the ECI at r = {SR_FIT.pearson.toFixed(2)} across the {SR_FIT.overlap} models that have both. Rings mark numbers labs report about themselves, and the bars are 90% intervals. <a href="/methodology/#self-reported">How we compute it</a>.
+          Our Self-Reported Index places {srOnly} more models on the same scale, using only the scores their labs published, so new releases show up before independent runs arrive. It tracks the Capabilities Index closely (r = {SR_FIT.pearson.toFixed(2)} across the {SR_FIT.overlap} models with both), but labs pick what to report, so treat it as a claim. <a href="/methodology/#self-reported">How we compute it</a>.
         </p>
       </div>
-      <ChartDownload credit={creditLine([`${LAB_CARDS}, placed on the Epoch Capabilities Index scale by Benchmark Almanac`])} deck={`${SRI_DECK} Rings mark numbers labs report about themselves, and the bars are 90% intervals.`} yAxis="Self-Reported Index, on the Epoch Capabilities Index scale" xAxis={RELEASE_AXIS} counts="Models whose labs published enough scores to place them, using the same item response model as the Epoch Capabilities Index." leaves="Leaderboard and Epoch AI scores, and models with too few lab-reported scores.">
+      <ChartDownload credit={creditLine([`${LAB_CARDS}, placed on the Epoch Capabilities Index scale by Benchmark Almanac`])} deck={`${SRI_DECK} Rings mark numbers labs report about themselves, and the bars are 90% intervals.`} yAxis="Self-Reported Index, on the Epoch Capabilities Index scale" xAxis={RELEASE_AXIS} counts="Models whose labs published enough scores to place them, fit the same way as the Capabilities Index." leaves="Independent scores, and models with too few lab-reported ones.">
         <TimeScatter points={srPts} frontier={srFrontier} unit="index" label="Self-Reported Index over time" legend={false} height={460} />
       </ChartDownload>
     </section>
 
     <section>
       <div class="sh">
-        <h2>The 24 highest-ranked models</h2>
-        <p>The dot on each strip is the model's place among all {eciByModel.size} index scores. For the three benchmarks, we favor ones labs headlined in the last year that are still under 85%.</p>
+        <h2>The top {top.length}</h2>
+        <p>Each strip shows where a model ranks among all {eciByModel.size} scored models. Under it are three benchmarks, favoring ones labs reported this past year that no model has passed 85% on.</p>
       </div>
       <div class="grid">
         {top.map((id) => <ModelCard id={id} />)}

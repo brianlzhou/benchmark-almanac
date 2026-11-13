@@ -326,7 +326,12 @@ export function headline(res: Result, names: string[], st: Pick<State, 'cited' |
   return top.length === 1 ? `${top[0]} leads on ${of}` : `${listNames(top)} each lead on ${of}`;
 }
 
-/** The line under the headline: what the rows are and how ties count. */
+/** The line under the section title: the finding, then what the rows are and how ties count. */
+export function caption(res: Result, names: string[], st: Pick<State, 'cited' | 'labs' | 'area'>): string {
+  return `${headline(res, names, st)}. ${sub(res, st)}`.trim();
+}
+
+/** What the rows are and how ties count. */
 export function sub(res: Result, st: Pick<State, 'cited' | 'labs' | 'area'>): string {
   const N = res.rows.length;
   if (res.n < 2) return 'The table lists every benchmark all the picked models have a score on.';
@@ -342,12 +347,12 @@ export function sub(res: Result, st: Pick<State, 'cited' | 'labs' | 'area'>): st
   }
   const from =
     res.src === 'ind'
-      ? 'Scores from independent runs only.'
+      ? 'Independent runs only.'
       : res.src === 'lab'
-        ? 'Scores from the labs’ own posts and system cards only.'
-        : 'Independent runs first. Where a model has none, its lab’s own number fills in.';
-  const kept = filtered(st) ? ` The filters keep ${N.toLocaleString('en-US')} of the ${res.shared.toLocaleString('en-US')} shared benchmarks.` : '';
-  const tie = res.tied ? ` At the precision shown, ${res.tied === 1 ? 'one benchmark ends' : `${res.tied.toLocaleString('en-US')} benchmarks end`} in a tie for first.` : '';
+        ? 'Labs’ own numbers only.'
+        : 'We use independent runs where they exist and fill the gaps with labs’ own numbers.';
+  const kept = filtered(st) ? ` The filters show ${N.toLocaleString('en-US')} of the ${res.shared.toLocaleString('en-US')} shared benchmarks.` : '';
+  const tie = res.tied ? ` ${res.tied === 1 ? 'One benchmark is' : `${res.tied.toLocaleString('en-US')} benchmarks are`} a tie for first.` : '';
   return `${from}${kept}${tie}`;
 }
 
@@ -607,16 +612,16 @@ export function barsView(res: Result, picks: ModelPick[], labs: Record<string, L
     })
     .join('');
   const more = !all && N > SHOW_ROWS ? `<button type="button" class="more-rows" data-all>Show all ${N.toLocaleString('en-US')} benchmarks</button>` : '';
-  return `<div class="cmp-bars"><div class="cmp-bhead"><div class="cmp-legend-row" role="group" aria-label="Models, in bar order. Click one to sort by its score.">${legend}</div><div class="cmp-bsorts" role="group" aria-label="Sort">${sorts}</div></div>${axis}<ol class="cmp-blist" aria-label="Scores on each benchmark">${groups}</ol>${more}</div>`;
+  return `<div class="cmp-bars"><div class="cmp-bhead"><div class="cmp-legend-row" role="group" aria-label="Models, in bar order. Click one to sort by its score.">${legend}</div><div class="cmp-bsorts" role="group" aria-label="Sort" data-dl-skip>${sorts}</div></div>${axis}<ol class="cmp-blist" aria-label="Scores on each benchmark">${groups}</ol>${more}</div>`;
 }
 
 /** The legend line under the table or the bars. */
 export function legend(res: Result, view: View): string {
   if (!res.rows.length) return '';
-  const own = view === 'table' && res.src === 'all' && res.rows.some((r) => r.cells.some((c) => c.from === 'l')) ? '<span><i class="own" aria-hidden="true"></i>A lab’s own number. The rest are independent runs.</span>' : '';
+  const own = view === 'table' && res.src === 'all' && res.rows.some((r) => r.cells.some((c) => c.from === 'l')) ? '<span><i class="own" aria-hidden="true"></i>A lab’s own number. Everything else is an independent run.</span>' : '';
   return view === 'table'
-    ? `${own}<span>Scores are percentages unless the row says otherwise. Bold marks the best in each row. Click a row to see its bars.</span>`
-    : '<span>Percentage tests share the 0 to 100 axis at the top. Other tests use their own scale, from the lowest to the highest model on that test. The value labels the leader.</span>';
+    ? `${own}<span>Scores are percentages unless the row says otherwise. Bold is the best in each row. Click a row for its bars.</span>`
+    : '<span>Percentage tests share the 0 to 100 axis. Other tests run from their lowest model to their highest. The number labels the leader.</span>';
 }
 
 // ---- the address ---------------------------------------------------------------------------------------

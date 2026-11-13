@@ -356,16 +356,22 @@ export function headline(p: Payload, res: Result): string {
   const name = p.models[top.m][1];
   if (res.rows.length === 1) return `${name} is the only model with enough of these tests`;
   const tail =
-    top.first >= 0.995 ? 'and stays first under every nearby weighting' : `and stays first under ${pct(top.first)} of nearby weightings`;
-  return `${name} leads this mix with ${fmt(top.value)}, ${tail}`;
+    top.first >= 0.995 ? 'stays first under every nearby weighting' : `stays first under ${pct(top.first)} of nearby weightings`;
+  return `${name} leads this mix with ${fmt(top.value)} and ${tail}`;
+}
+
+/** The line under "Who comes out on top?": the leader, the runner-up, and which models the board ranks. */
+export function caption(p: Payload, res: Result, src: Source): string {
+  return `${headline(p, res)}.${sub(p, res, src) ? ` ${sub(p, res, src)}` : ''}`;
 }
 
 export function sub(p: Payload, res: Result, src: Source): string {
   if (!res.used.length) return '';
-  const from = src === 'ind' ? 'independent runs' : src === 'lab' ? 'the labs’ own numbers' : 'independent runs, with the labs’ own numbers filling gaps';
+  const from = src === 'ind' ? 'independent runs' : src === 'lab' ? 'labs’ own numbers' : 'independent runs and labs’ own numbers';
   const runner = res.rows[1];
-  const gap = runner ? ` ${p.models[runner.m][1]} is second at ${fmt(runner.value)}.` : '';
-  return `${res.rows.length} ${res.rows.length === 1 ? 'model has' : 'models have'} scores on at least ${res.need} of the ${res.used.length} tests, from ${from}.${gap}`;
+  const gap = runner ? `${p.models[runner.m][1]} is second at ${fmt(runner.value)}. ` : '';
+  const n = res.rows.length;
+  return `${gap}We rank the ${n} ${n === 1 ? 'model' : 'models'} with scores on at least ${res.need} of the ${res.used.length} tests, from ${from}.`;
 }
 
 /** Desktop: columns in lab colors from one baseline, the value on the cap, mark and name under it. */

@@ -545,7 +545,7 @@ const dataset = {
           </div>
           <div class="view-graph">
             <div class="pool-headline">
-              <ChartDownload subject={b.name} credit={boardCredit(s.shown)} name="leaderboard" deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE.headline}, one bar per model.`} leaves="Other settings of the same model, which keep only their best score.">
+              <ChartDownload subject={b.name} credit={boardCredit(s.shown)} name="leaderboard" deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE.headline}, one bar per model.`} leaves="Each model’s other settings. Only its best score shows.">
                 {b.better === 'lower' ? (
                   <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
                 ) : (
@@ -558,7 +558,7 @@ const dataset = {
             </div>
             {pools.slice(1).map((v) => (
               <div class={`pool-${v.pool}`}>
-                <ChartDownload subject={b.name} credit={boardCredit(v.board)} name={`leaderboard-${v.pool}`} deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE[v.pool]}, one bar per model.`} leaves={v.pool === 'independent' ? 'Labs’ own numbers, and other settings of the same model.' : 'Other settings of the same model, which keep only their best score.'}>
+                <ChartDownload subject={b.name} credit={boardCredit(v.board)} name={`leaderboard-${v.pool}`} deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE[v.pool]}, one bar per model.`} leaves={v.pool === 'independent' ? 'Labs’ own numbers, and each model’s other settings.' : 'Each model’s other settings. Only its best score shows.'}>
                   {b.better === 'lower' ? (
                     <BarBoard scores={v.board} unit={unit} limit={15} better={b.better} all />
                   ) : (
@@ -762,7 +762,7 @@ const dataset = {
               {reignRows.length > 1 && ` We draw one row each for ${listText(reignRows.map((r) => ROW_TEXT[r.source]))}.`}
             </p>
           </div>
-          <ChartDownload subject={b.name} credit={sourcesCredit(reignRows, SRC_CREDIT)} name="number-one-over-time" deck={figDeck} counts={reignCounts(reignRows)} leaves="Models with no score here from these sources, and any score that never beat the best so far.">
+          <ChartDownload subject={b.name} credit={sourcesCredit(reignRows, SRC_CREDIT)} name="number-one-over-time" deck={figDeck} counts={reignCounts(reignRows)} leaves="Models with no score from these sources, and scores that never beat the best so far.">
             <ReignChart rows={reignRows} names={reignNames} from={reignFrom} />
           </ChartDownload>
         </section>
@@ -911,7 +911,7 @@ const dataset = {
             )}
           </div>
           {familyRows.length > 1 && (
-            <ChartDownload subject={b.name} credit={sourcesCredit(familyRows)} name="versions" deck={`${figDeck} One row per version of the test.`} counts="Each version from the one source its own page leads with: its official leaderboard when that is current, else Epoch AI’s own runs, else labs’ own numbers. The top row switches to each new version when it comes out." leaves="Versions with too few scores to rank.">
+            <ChartDownload subject={b.name} credit={sourcesCredit(familyRows)} name="versions" deck={`${figDeck} One row per version of the test.`} counts="Each version from one source: its official leaderboard when that’s current, otherwise Epoch AI’s runs, otherwise labs’ own numbers. The top row moves to each new version when it comes out." leaves="Versions with too few scores to rank.">
               <ReignChart rows={familyRows} from={familyFrom} open />
             </ChartDownload>
           )}

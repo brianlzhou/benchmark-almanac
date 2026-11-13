@@ -6,7 +6,7 @@ import ChartDownload from '../components/ChartDownload.astro';
 import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import { buildPayload, MIN_MODELS } from '../lib/build-data.ts';
-import { Matrix, compute, defaultNeed, headline, sub, columns, bars, table, weightBar, chosen, type State } from '../lib/build-index.ts';
+import { Matrix, compute, defaultNeed, caption, columns, bars, table, weightBar, chosen, type State } from '../lib/build-index.ts';
 
 const p = buildPayload();
 const mx = new Matrix(p);
@@ -20,23 +20,21 @@ const movers = top10.filter((r) => r.hi - r.lo >= 3).length;
 const why =
   top10.length >= 5
     ? movers === top10.length
-      ? `In the default mix, every model in the top ${top10.length} can move three places or more when the weights shift`
-      : `In the default mix, ${movers} of the top ${top10.length} can move three places or more when the weights shift`
-    : 'Small changes in the weights can reorder the top';
+      ? `In the default mix, every model in the top ${top10.length} can move three places or more when the weights shift.`
+      : `In the default mix, ${movers} of the top ${top10.length} models can move three places or more when the weights shift.`
+    : 'Small changes in the weights can reorder the top.';
 const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 ---
 
 <Base
   title="Build your own index"
-  description="Pick benchmarks and weights to build your own AI capability index, see which model leads it, and see how much the ranking depends on the weights."
+  description="Pick the benchmarks and weights for your own AI index, and see who comes out on top."
   film="build"
 >
   <div class="page bm-root" data-bm data-presets={presetJson}>
     <header class="head">
       <h1>Build your own index</h1>
-      <p class="lede">
-        Every intelligence index is a weighted average of benchmark scores, and somebody picked the weights. Pick your own tests and weights here. You'll see which model comes out on top, and how far each model would move if the weights shifted a little.
-      </p>
+      <p class="lede">Every intelligence index is a weighted average of benchmark scores, and somebody picked the weights. Here, you pick them. See who comes out on top, and whether the ranking holds when the weights shift.</p>
     </header>
 
     <section class="bm-grid">
@@ -74,7 +72,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
             />
             <ul id="bm-list" class="bm-list" role="listbox" aria-label="Matching benchmarks" hidden data-list></ul>
           </div>
-          <p class="bm-hint">Any of the {p.benches.length.toLocaleString('en-US')} benchmarks where at least {MIN_MODELS} models have a score.</p>
+          <p class="bm-hint">Pick from {p.benches.length.toLocaleString('en-US')} benchmarks with at least {MIN_MODELS} scored models.</p>
           <ol class="bm-picks" aria-labelledby="bm-tests" data-picks set:html={chosen(p, mx, st, res).replace(/<input /g, '<input disabled ').replace(/<button type="button" class="bm-x"/g, '<button type="button" class="bm-x" disabled')} />
           <div class="bm-wrow">
             <div data-wbar class="bm-wbox" set:html={weightBar(p, res)} />
@@ -90,7 +88,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
             <label><input type="radio" name="bm-src" value="lab" disabled />Labs' own numbers</label>
             <label><input type="radio" name="bm-src" value="all" checked disabled />Both</label>
           </div>
-          <p class="bm-how" data-src-how>Independent runs first. Where a model has none on a test, the lab's own number fills the gap.</p>
+          <p class="bm-how" data-src-how>We use independent runs where they exist and fill the gaps with labs' own numbers.</p>
         </div>
 
         <fieldset class="bm-block bm-need">
@@ -100,7 +98,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
             <span>at least <input class="field num bm-n" type="number" min="1" max={res.used.length} value={res.need} aria-label="Minimum number of tests" data-n disabled /> of the tests</span>
           </label>
           <label class="bm-radio"><input type="radio" name="bm-need" value="all" disabled /><span>every test</span></label>
-          <p class="bm-how">A test a model lacks gets a predicted score, from how the model did on its other tests and how hard that test was for the models that took it.</p>
+          <p class="bm-how">Where a model skipped a test, we predict its score from its other results and how hard that test was.</p>
         </fieldset>
 
         <div class="bm-block bm-share">
@@ -111,8 +109,8 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 
       <div class="bm-out" aria-live="polite">
         <div class="sh">
-          <h2 data-head>{headline(p, res)}</h2>
-          <p data-sub>{sub(p, res, st.src)}</p>
+          <h2>Who comes out on top?</h2>
+          <p data-sub>{caption(p, res, st.src)}</p>
         </div>
         <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="index" context="build" yAxis="Index, 0 to 100, higher is better">
           <div class="only-wide bm-colbox" data-cols set:html={columns(p, res)} />
@@ -124,34 +122,41 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 
     <section class="bm-why">
       <div class="sh">
-        <h2>{why}</h2>
+        <h2>How much do the weights matter?</h2>
+        <p>{why}</p>
       </div>
-      <ol class="bm-notes">
-        <li>
-          <b>How the index is computed.</b> Each test's scores go on a 0 to 100 scale. Percentages stay as they are. Elo, ratings and other units are rescaled from the lowest model on that test to the highest. A test where lower is better is flipped. A model's index is the weighted average of all the chosen tests. Where a model has no score on a test, a predicted score takes its place. To predict it, we fit each score as the model's ability minus the test's difficulty, on a scale that stretches near 0 and 100, using every model that took any of the tests. So skipping a hard test doesn't lift a model, and taking one doesn't sink it. Hover a model to see which of its scores are predicted.
-        </li>
-        <li>
-          <b>Why the weights matter.</b> Two indexes built from the same scores can disagree on who's first, because the weights decide which tests count most. Published indexes change their weights from version to version, and every change reorders some models. So the board shows a rank range for each model. We ranked every model again under 400 weightings near yours, each weight scaled up or down by as much as half, and kept its best and worst rank. "First" is the share of those weightings where the model came out on top.
-        </li>
-        <li>
-          <b>What it leaves out.</b> Independent runs cover far fewer of the newest models than the labs' own posts do, so the board starts with both. Labs ran their own numbers on their own terms. Switch to "Independent runs" to leave those out, though the newest models may drop off the board. A predicted score assumes a model's strengths carry over from test to test, so it misses a model that is strong at one kind of task and weak at another. Raising the minimum leans less on predictions. Tests rescaled from lowest to highest move with the set of models on them. And no average says how sure we should be about any single score.
-        </li>
-      </ol>
+      <div class="bm-notes">
+        <div>
+          <h3>How it works</h3>
+          <p>We put every test on a 0 to 100 scale. Percentages stay as they are. Elo and other units run from the lowest model to the highest, and tests where lower is better get flipped. A model's index is the weighted average.</p>
+          <p>Where a model skipped a test, we predict that score from its other results and the test's difficulty, so skipping a hard test doesn't help and taking one doesn't hurt. Hover a model to see which of its scores are predicted.</p>
+        </div>
+        <div>
+          <h3>Why weights matter</h3>
+          <p>Two indexes built from the same scores can disagree on who's first, because the weights decide which tests count most. Published indexes change their weights between versions, and every change reorders some models.</p>
+          <p>So we rerank every model under 400 weightings near yours, each weight moved up or down by as much as half. Rank range shows each model's best and worst place, and First is the share of those weightings it wins.</p>
+        </div>
+        <div>
+          <h3>What it leaves out</h3>
+          <p>Independent runs cover far fewer new models than labs' own posts, so the board starts with both. Switch to Independent runs to leave lab numbers out, though the newest models may drop off.</p>
+          <p>Predictions assume a model's strengths carry across tests, so they miss a model that's strong at one thing and weak at another. Raise the minimum to lean on them less. And no average says how sure to be about any one score.</p>
+        </div>
+      </div>
     </section>
   </div>
 </Base>
 
 <script>
-  import { Matrix, compute, defaultNeed, headline, sub, columns, bars, table, weightBar, chosen, readState, writeState, esc, AREA_NAMES, type Payload, type State, type Source } from '../lib/build-index.ts';
+  import { Matrix, compute, defaultNeed, caption, columns, bars, table, weightBar, chosen, readState, writeState, esc, AREA_NAMES, type Payload, type State, type Source } from '../lib/build-index.ts';
 
   const root = document.querySelector<HTMLElement>('[data-bm]')!;
   const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const presetIds: { id: string; b: string[] }[] = JSON.parse(root.dataset.presets ?? '[]');
 
   const SRC_HOW: Record<Source, string> = {
-    ind: "Official leaderboards and Epoch AI's runs. Labs don't grade their own models here.",
-    lab: 'Only the numbers labs published about their own models, in launch posts, system cards and technical reports.',
-    all: "Independent runs first. Where a model has none on a test, the lab's own number fills the gap.",
+    ind: "Only official leaderboards and Epoch AI's runs.",
+    lab: 'Only the numbers labs published about their own models.',
+    all: "We use independent runs where they exist and fill the gaps with labs' own numbers.",
   };
 
   async function main() {
@@ -194,8 +199,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       }
     }
     function renderOut() {
-      $('[data-head]').textContent = headline(p, res);
-      $('[data-sub]').textContent = sub(p, res, st.src);
+      $('[data-sub]').textContent = caption(p, res, st.src);
       $('[data-cols]').innerHTML = columns(p, res);
       $('[data-bars]').innerHTML = bars(p, res);
       $('[data-table]').innerHTML = table(p, res);
@@ -899,17 +903,26 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
   }
 
   /* explanation */
+  /* the three notes side by side, one column each on phones */
   .bm-root .bm-notes {
-    margin: 0;
-    padding-left: 1.3em;
-    max-width: 68ch;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 40px;
     color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.55;
   }
-  .bm-root .bm-notes b {
+  .bm-root .bm-notes h3 {
+    margin: 0 0 8px;
+    font: 500 16px/1.3 var(--sans);
     color: var(--ink);
-    font-weight: 500;
+  }
+  .bm-root .bm-notes p {
+    margin: 0 0 10px;
+  }
+  @media (max-width: 860px) {
+    .bm-root .bm-notes {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>

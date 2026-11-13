@@ -289,7 +289,7 @@ section + section {
 }
 .head .lede {
   margin-top: 18px;
-  max-width: 62ch;
+  max-width: 72ch;
   font-size: 18px;
   line-height: 1.5;
   color: var(--ink-2);
@@ -333,10 +333,9 @@ section + section {
   margin-top: 40px;
 }
 
-/* section head */
+/* section head: a title runs as wide as the page allows, and the line under it wraps at a reading width */
 .sh {
   margin-bottom: 28px;
-  max-width: 68ch;
 }
 .sh h2 {
   font-size: clamp(26px, 3vw, 34px);
@@ -345,6 +344,7 @@ section + section {
 .sh p {
   margin-top: 10px;
   color: var(--ink-2);
+  max-width: 90ch;
 }
 .sh-row {
   display: flex;
@@ -356,6 +356,9 @@ section + section {
 }
 .sh-row .sh {
   margin-bottom: 0;
+  /* beside a link or controls, the head takes all the room they leave */
+  flex: 1 1 480px;
+  min-width: 0;
 }
 
 /* one component, two renders: a desktop one and a phone one */

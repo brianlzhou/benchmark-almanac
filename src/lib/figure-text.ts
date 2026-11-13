@@ -53,28 +53,28 @@ export function benchDeck(b: Benchmark): string {
 export const benchAxis = (b: Benchmark) => `${UNIT_AXIS[b.unit ?? '%'] ?? 'Score'}, ${better(b)}`;
 
 export const ECI_DECK =
-  'The Epoch Capabilities Index, from Epoch AI, puts models on one scale across many benchmarks. It fits each model’s capability and each benchmark’s difficulty from Epoch AI’s data, so a higher score means a more capable model.';
+  'Epoch AI’s Capabilities Index puts models on one scale across many benchmarks, fit from each model’s capability and each benchmark’s difficulty. Higher means more capable.';
 export const ECI_AXIS = 'Epoch Capabilities Index, higher is more capable';
 export const SRI_DECK =
-  'The Self-Reported Index puts each model on the Epoch Capabilities Index’s scale using only the scores its lab published, so it covers new releases before independent runs arrive. Labs choose what to report and how to run it, so treat it as a claim.';
+  'Our Self-Reported Index puts models on the Capabilities Index’s scale using only the scores their labs published, so new releases show up before independent runs arrive. Labs pick what to report, so treat it as a claim.';
 export const RELEASE_AXIS = 'Model release date';
 
 /** What a pooled number-one chart counts and leaves out, by the score-source choice on the leader pages. */
 export const POOL_NOTES: Record<string, { counts: string; leaves: string }> = {
   headline: {
-    counts: 'Each benchmark from the one source its own page leads with: its official leaderboard when that is current, else Epoch AI’s own runs, else labs’ own numbers. Independent runs are dated by the model’s release, lab numbers by when they came out.',
-    leaves: 'The other sources for each benchmark, and benchmarks with too few scores to rank.',
+    counts: 'One source per benchmark: its official leaderboard when that’s current, otherwise Epoch AI’s runs, otherwise labs’ own numbers. Independent runs are dated by model release, lab numbers by when they were published.',
+    leaves: 'Every other source, and benchmarks with too few scores to rank.',
   },
   independent: {
-    counts: 'Every independent run: each benchmark’s official leaderboard, Epoch AI’s own runs and the boards Epoch AI copied, dated by the model’s release.',
-    leaves: 'Labs’ own numbers, so benchmarks that only labs report drop out.',
+    counts: 'Independent runs only: official leaderboards, Epoch AI’s runs and the boards Epoch AI copied, dated by model release.',
+    leaves: 'Labs’ own numbers, so benchmarks only labs report drop out.',
   },
   all: {
-    counts: 'Every score, including labs’ own numbers and the claims Epoch AI collected from reports and papers.',
-    leaves: 'Benchmarks with too few scores to rank. Labs pick their own settings, so a claim can beat an independent run of the same model.',
+    counts: 'Every score, including labs’ own numbers and claims Epoch AI collected from reports and papers. Labs pick their own settings, so a claim can beat an independent run.',
+    leaves: 'Benchmarks with too few scores to rank.',
   },
 };
 
 /** Time-at-number-one shares: the clock rules from the leaders page. */
 export const CLOCK_NOTE =
-  'Only contested time. A benchmark’s clock stops when its best score passes 85%, or at its newest score once 45 days go by without another.';
+  'Contested time only. A leader’s clock runs for 45 days after it takes the top spot and 45 more after each score from another lab. It stops once the best score passes 85%, or at the last score once 45 days pass without another.';

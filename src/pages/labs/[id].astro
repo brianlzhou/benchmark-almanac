@@ -1,7 +1,7 @@
 ---
 import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../../lib/figure-text.ts';
 import ChartDownload from '../../components/ChartDownload.astro';
-import { creditLine, ECI_CREDIT } from '../../lib/credits.ts';
+import { creditLine, ECI_CREDIT, LAUNCH_POSTS } from '../../lib/credits.ts';
 import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
 import ModelCard from '../../components/ModelCard.astro';
@@ -10,7 +10,7 @@ import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
 import AreaShare from '../../components/AreaShare.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import Spark from '../../components/Spark.astro';
-import { labs, featuredModels, labPages, models, cards, eciByModel, benchById } from '../../lib/data.ts';
+import { labs, featuredModels, labPages, models, cards, systemCards, eciByModel, benchById } from '../../lib/data.ts';
 import { monthYear, fullDate, yearFrac } from '../../lib/format.ts';
 import { labColor } from '../../lib/palette.ts';
 import { yearTicks, yearLines } from '../../lib/scale.ts';
@@ -35,27 +35,42 @@ for (const m of [...ranked].sort((a, b) => (a.released ?? '').localeCompare(b.re
   if (m.released && (!bestRun.length || v > bestRun.at(-1)!.value)) bestRun.push({ date: m.released, value: v });
 }
 
-// the benchmarks this lab's cards report, as rows of ticks over its cards
-const counts = new Map<string, number>();
-for (const c of cs) for (const r of c.results) counts.set(r.benchmark, (counts.get(r.benchmark) ?? 0) + 1);
-const rows = [...counts.entries()]
-  .filter(([, n]) => n >= 2)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 28)
-  .map(([b]) => ({ b: benchById.get(b)!, on: new Set(cs.filter((c) => c.results.some((r) => r.benchmark === b)).map((c) => c.id)) }))
-  .sort((a, b) => {
-    const first = (x: typeof a) => cs.find((c) => x.on.has(c.id))!.date;
-    return first(a).localeCompare(first(b));
-  });
-const t0 = cs.length ? yearFrac(cs[0].date) - 0.1 : 2023;
-const t1 = cs.length ? yearFrac(cs.at(-1)!.date) + 0.1 : 2027;
-const pos = (d: string) => `${(((yearFrac(d) - t0) / (t1 - t0)) * 100).toFixed(2)}%`;
+// the benchmarks this lab reports most, as rows of ticks over its documents: launch posts, system cards and
+// technical reports, or both. A pill on the page picks one.
+type Doc = { key: string; date: string; results: { benchmark: string }[] };
+const sys = systemCards.filter((c) => c.lab === id);
+const docSets = [
+  { id: 'posts', label: 'Launch posts', where: 'in its launch posts', credit: LAUNCH_POSTS, docs: cs.map((c) => ({ key: `p:${c.id}`, date: c.date, results: c.results })) },
+  { id: 'docs', label: 'System cards', where: 'in its system cards and technical reports', credit: 'labs’ system cards and technical reports, read by Benchmark Almanac', docs: sys.map((c) => ({ key: `s:${c.id}`, date: c.date, results: c.results })) },
+  { id: 'all', label: 'All reports', where: 'across all its launch posts and reports', credit: 'labs’ launch posts, system cards and technical reports, read by Benchmark Almanac', docs: [] as Doc[] },
+];
+docSets[2].docs = [...docSets[0].docs, ...docSets[1].docs];
+const brag = docSets
+  .map((set) => {
+    const docs = [...set.docs].sort((a, b) => a.date.localeCompare(b.date));
+    const counts = new Map<string, number>();
+    for (const d of docs) for (const r of new Set(d.results.map((x) => x.benchmark))) counts.set(r, (counts.get(r) ?? 0) + 1);
+    const rows = [...counts.entries()]
+      .filter(([b, n]) => n >= 2 && benchById.has(b))
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 28)
+      .map(([b]) => ({ b: benchById.get(b)!, on: new Set(docs.filter((d) => d.results.some((r) => r.benchmark === b)).map((d) => d.key)) }))
+      .sort((a, b) => {
+        const first = (x: typeof a) => docs.find((d) => x.on.has(d.key))!.date;
+        return first(a).localeCompare(first(b));
+      });
+    const t0 = docs.length ? yearFrac(docs[0].date) - 0.1 : 2023;
+    const t1 = docs.length ? yearFrac(docs.at(-1)!.date) + 0.1 : 2027;
+    const pos = (d: string) => `${(((yearFrac(d) - t0) / (t1 - t0)) * 100).toFixed(2)}%`;
+    const years = yearTicks(t0, t1);
+    return { ...set, docs, rows, pos, years, grid: `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`, cap: `Here are the ${rows.length} benchmarks ${lab.name} mentions most ${set.where}.` };
+  })
+  .filter((x) => x.rows.length > 0);
+const bragCaps = JSON.stringify(Object.fromEntries(brag.map((x) => [x.id, x.cap])));
 const color = labColor(id);
-const years = yearTicks(t0, t1);
-const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
 ---
 
-<Base title={lab.name} description={`${lab.name}: its models, their scores, and what its model cards measure.`} film="index" crumbs={[{ href: '/labs/', label: 'Labs' }]}>
+<Base title={lab.name} description={`${lab.name}'s AI models, their benchmark scores, and what its model cards report.`} film="index" crumbs={[{ href: '/labs/', label: 'Labs' }]}>
   <div class="page">
     <header class="head" style={`--lc:${color}`}>
       <Crumbs items={[{ href: '/labs/', label: 'Labs' }]} />
@@ -81,10 +96,10 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
       ranked.length > 0 && (
         <section>
           <div class="sh">
-            <h2>{lab.name}'s models against the field</h2>
-            <p>Every model on the Epoch Capabilities Index by release date, with {lab.name}'s in color.</p>
+            <h2>How does {lab.name} stack up?</h2>
+            <p>Every model on Epoch AI's Capabilities Index by release date, with {lab.name}'s in color.</p>
           </div>
-          <ChartDownload credit={creditLine([ECI_CREDIT])} deck={`${lab.name}’s models in color, against every other model on the index. ${ECI_DECK}`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with an Epoch Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
+          <ChartDownload credit={creditLine([ECI_CREDIT])} deck={`${lab.name}’s models in color, against every other model on the index. ${ECI_DECK}`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with a Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
           <TimeScatter points={pts} unit="index" label={`${lab.name} on the Epoch Capabilities Index`} highlight={mine} labelIds={ranked.slice(0, 8).map((m) => m.id)} legend={false} height={420} />
           </ChartDownload>
         </section>
@@ -95,7 +110,7 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
       ranked.length > 0 && (
         <section>
           <div class="sh">
-            <h2>Its strongest models</h2>
+            <h2>{lab.name}'s best models</h2>
           </div>
           <div class="cards">
             {ranked.slice(0, 6).map((m) => <ModelCard id={m.id} />)}
@@ -105,34 +120,52 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
     }
 
     {
-      rows.length > 0 && (
-        <section>
-          <div class="sh">
-            <h2>What its model cards measure</h2>
-            <p>Tall ticks are {lab.name} model cards that list the benchmark in their headline table. Gray dots are cards that leave it out. Rows are the benchmarks the lab listed most, at least twice each, in the order it started using them.</p>
-          </div>
-          <div class="matrix" style={`--c:${color}`}>
-            {rows.map(({ b, on }) => (
-              <a class="mrow" href={`/benchmarks/${b.id}/`}>
-                <span class="mname">{b.name}</span>
-                <span class="mlane" style={grid}>
-                  {cs.map((c) => (
-                    <i class:list={{ on: on.has(c.id) }} style={`left:${pos(c.date)}`} />
-                  ))}
-                </span>
-              </a>
-            ))}
-            <div class="mrow axis" aria-hidden="true">
-              <span class="mname" />
-              <span class="mlane">
-                {years.map((y) => (
-                  <span class="yr" style={`left:${pos(`${y}-01-01`)}`}>
-                    {y}
-                  </span>
-                ))}
-              </span>
+      brag.length > 0 && (
+        <section data-brag>
+          <div class="sh-row">
+            <div class="sh">
+              <h2>What benchmarks does {lab.name} mention most?</h2>
+              <p data-brag-cap data-caps={bragCaps}>{brag[0].cap}</p>
             </div>
+            {brag.length > 1 && (
+              <div class="seg" role="radiogroup" aria-label="Count benchmarks in">
+                {brag.map((x, i) => (
+                  <label>
+                    <input type="radio" name="brag" value={x.id} checked={i === 0} />
+                    {x.label}
+                  </label>
+                ))}
+              </div>
+            )}
           </div>
+          {brag.map((x, i) => (
+            <div data-brag-v={x.id} hidden={i > 0}>
+              <ChartDownload credit={creditLine([x.credit])} name={`${lab.id}-${x.id}-benchmarks`} counts={`The benchmarks ${lab.name} reported at least twice, one row each, in the order it started using them. Each tall tick is a document that shows a score on the benchmark, and each gray dot is one that doesn't.`} leaves="Benchmarks the lab reported only once.">
+                <div class="matrix" style={`--c:${color}`}>
+                  {x.rows.map(({ b, on }) => (
+                    <a class="mrow" href={`/benchmarks/${b.id}/`}>
+                      <span class="mname">{b.name}</span>
+                      <span class="mlane" style={x.grid}>
+                        {x.docs.map((d) => (
+                          <i class:list={{ on: on.has(d.key) }} style={`left:${x.pos(d.date)}`} />
+                        ))}
+                      </span>
+                    </a>
+                  ))}
+                  <div class="mrow axis" aria-hidden="true">
+                    <span class="mname" />
+                    <span class="mlane">
+                      {x.years.map((y) => (
+                        <span class="yr" style={`left:${x.pos(`${y}-01-01`)}`}>
+                          {y}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                </div>
+              </ChartDownload>
+            </div>
+          ))}
           {cs.length >= 4 && (
             <div class="share">
               <AreaShare lab={id} height={300} />
@@ -187,6 +220,20 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
   </div>
 </Base>
 
+<script>
+  // the brag chart's pill: launch posts, system cards or all reports
+  for (const sec of document.querySelectorAll<HTMLElement>('section[data-brag]')) {
+    const cap = sec.querySelector<HTMLElement>('[data-brag-cap]');
+    const caps = JSON.parse(cap?.dataset.caps ?? '{}') as Record<string, string>;
+    sec.addEventListener('change', (e) => {
+      const r = e.target as HTMLInputElement;
+      if (r.name !== 'brag') return;
+      if (cap) cap.textContent = caps[r.value] ?? '';
+      for (const v of sec.querySelectorAll<HTMLElement>('[data-brag-v]')) v.hidden = v.dataset.bragV !== r.value;
+    });
+  }
+</script>
+
 <style>
   .with-mark {
     display: flex;
@@ -231,7 +278,7 @@ const grid = `--yl:${yearLines(years.map((y) => pos(`${y}-01-01`)))}`;
   }
   .mrow {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: 16px;
     align-items: center;
     text-decoration: none;

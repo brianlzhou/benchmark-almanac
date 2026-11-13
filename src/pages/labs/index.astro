@@ -18,13 +18,11 @@ const lead = rows.filter((r) => r.nCards > 0);
 const rest = rows.filter((r) => r.nCards === 0);
 ---
 
-<Base title="Labs" description="The labs behind the models, their best model on the Epoch Capabilities Index, and the model cards they publish." film="index">
+<Base title="Labs" description="The labs behind the AI models we track, with each one's best model and the model cards it publishes." film="index">
   <div class="page">
     <header class="head">
       <h1>Labs</h1>
-      <p class="lede">
-        We read every model card from the first {lead.length} labs below. After them comes every other lab with a scored model. Open a lab to see its models over time and the benchmarks its cards report.
-      </p>
+      <p class="lede">We read every model card from the {lead.length} labs at the top of this page. Below them is every other lab with a scored model. Open a lab to see its models and what its cards report.</p>
     </header>
 
     <section class="grid" aria-label="Labs whose model cards we read">

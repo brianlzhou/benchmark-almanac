@@ -96,7 +96,7 @@ const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmar
               <h2>{headline}</h2>
               <p>
                 {top && shares.length > 1 && `That's about ${monthsHeld} of the ${span} months since January 2023, averaged over the benchmarks below. `}
-                The easiest benchmarks are at the top. Versions of one test share a row, with a dark tick at each new version. We stop the clock, and fade the rest of the row, when the best score passes 85%, or at the newest score if 45 days go by without another.
+                The easiest benchmarks are at the top. Versions of one test share a row, with a dark tick at each new version. We stop the clock, and fade the rest of the row, when the best score passes 85%, or at the newest score if 45 days go by without another. In between, the leader’s clock runs for at most 45 days at a time without a score from another lab.
               </p>
             </div>
             {switchable && (
@@ -127,7 +127,7 @@ const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmar
           </div>
           {poolList.map((v) => (
             <div class={`pool-${v.src}`}>
-              <ChartDownload credit={sourcesCredit(v.rows)} name={`number-one-${v.src}`} deckFrom="@lede" counts={`One row per benchmark in this category. Each stretch is the model with the best score at that time, colored by its lab. ${POOL_NOTES[v.src].counts}`} leaves={POOL_NOTES[v.src].leaves}>
+              <ChartDownload credit={sourcesCredit(v.rows)} name={`number-one-${v.src}`} deckFrom="@lede" counts={`One row per benchmark in this category. Each colored stretch is the model with the best score at the time. ${POOL_NOTES[v.src].counts}`} leaves={POOL_NOTES[v.src].leaves}>
                 <ReignChart rows={v.rows} />
               </ChartDownload>
               <div class="share">

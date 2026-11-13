@@ -7,7 +7,7 @@ import ChartDownload from '../components/ChartDownload.astro';
 import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import { compareIndex, compareFile, defaultPicks } from '../lib/compare-data.ts';
-import { compute, headline, sub, chips, winsList, table, filterRow, legend, DEFAULT_STATE, MAX_PICKS, type ModelFile, type State } from '../lib/compare.ts';
+import { compute, caption, chips, winsList, table, filterRow, legend, DEFAULT_STATE, MAX_PICKS, type ModelFile, type State } from '../lib/compare.ts';
 
 const idx = compareIndex();
 const ids = defaultPicks();
@@ -20,7 +20,7 @@ const names = picks.map((p) => p.name);
 
 <Base
   title="Compare models"
-  description="Pick two to four AI models and see every benchmark all of them have a score on, side by side, with the leader of each test and the gaps between them."
+  description="Compare up to four AI models on every benchmark they've all been scored on."
 >
   <div class="page cmp-root" data-cmp data-default={JSON.stringify(ids)}>
     <script is:inline>
@@ -30,20 +30,19 @@ const names = picks.map((p) => p.name);
     </script>
     <header class="head">
       <h1>Compare models</h1>
-      <p class="lede">
-        Pick two to four models. The table lists every benchmark all of them have a score on and leaves out any test one of them lacks, so each row compares like with like.
-      </p>
+      <p class="lede">Pick up to four models to see how they stack up on every benchmark they've all been scored on.</p>
     </header>
 
     <section class="cmp-controls" data-wait>
       <div class="cmp-pick">
-        <h2 class="cmp-label" id="cmp-models">Models</h2>
+        <h2 class="sr" id="cmp-models">Models</h2>
         <div class="cmp-box">
           <ul class="cmp-chips" aria-labelledby="cmp-models" data-chips set:html={chips(picks, idx.labs).replace(/<button type="button" class="cmp-x"/g, '<button type="button" class="cmp-x" disabled')} />
           <input
             class="cmp-q"
             type="search"
-            placeholder={picks.length >= MAX_PICKS ? 'Remove a model to add another' : 'Add a model'}
+            placeholder={picks.length ? 'Add another model' : 'Add a model'}
+            hidden={picks.length >= MAX_PICKS}
             autocomplete="off"
             spellcheck="false"
             role="combobox"
@@ -56,7 +55,6 @@ const names = picks.map((p) => p.name);
           />
           <ul id="cmp-list" class="cmp-list" role="listbox" aria-label="Matching models" hidden data-list></ul>
         </div>
-        <p class="cmp-hint">Up to {MAX_PICKS} of the {idx.models.length.toLocaleString('en-US')} models with scores here.</p>
       </div>
       <div class="cmp-sw">
         <h2 class="cmp-label" id="cmp-src">Scores from</h2>
@@ -71,8 +69,8 @@ const names = picks.map((p) => p.name);
     <section class="cmp-out" aria-live="polite" data-wait data-out>
       <div class="sh-row">
         <div class="sh">
-          <h2 data-head>{headline(res, names, st)}</h2>
-          <p data-sub>{sub(res, st)}</p>
+          <h2>Who comes out ahead?</h2>
+          <p data-sub>{caption(res, names, st)}</p>
         </div>
         <div class="seg cmp-view" role="radiogroup" aria-label="Show as" data-viewsw>
           <label><input type="radio" name="cmp-view" value="table" checked disabled />Table</label>
@@ -87,7 +85,7 @@ const names = picks.map((p) => p.name);
         <p>No shared benchmark matches these filters.</p>
         <button type="button" class="cmp-small" data-reset>Clear the filters</button>
       </div>
-      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="bars" showWhen={'input[name="cmp-view"][value="bars"]:checked'} deckFrom="@lede" counts="Benchmarks that every picked model has a score on, from the sources chosen under Scores from. Percentage tests share one axis, and other tests use their own scale, from the lowest model to the highest." leaves="Benchmarks any picked model lacks.">
+      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="bars" showWhen={'input[name="cmp-view"][value="bars"]:checked'} deckFrom="@lede" counts="Every benchmark all the picked models have scores on, from the sources picked under Scores from." leaves="Benchmarks that any picked model hasn't been scored on.">
         <div class="cmp-results" data-results set:html={table(res, picks, idx.labs, st, new Set())} />
         <p class="cmp-legend" data-legend set:html={legend(res, 'table')} />
       </ChartDownload>
@@ -98,23 +96,20 @@ const names = picks.map((p) => p.name);
     </section>
 
     <div class="cmp-pop" id="cmp-pop-gap" popover>
-      <p><b>The gap</b> is the spread between the best and the worst of the picked models on a benchmark.</p>
-      <p>For a percentage it is in points: 74.3 against 68.1 is a gap of 6.2. Other tests keep their own unit, such as Elo points.</p>
-      <p>A small gap means the models score about the same on that test. A big gap means the test tells them apart. To sort tests in different units together, a gap counts as points for a percentage and as a share of the test’s whole range otherwise.</p>
+      <p><b>Gap</b> is how far apart the best and worst picked models are on a test. A small gap means they're about even. A big one means the test tells them apart.</p>
+      <p>It's in points for percentages (74.3 against 68.1 is 6.2) and in the test's own unit otherwise, such as Elo. To sort mixed units together, we count those as a share of the test's full range.</p>
     </div>
     <div class="cmp-pop" id="cmp-pop-labs" popover>
-      <p><b>Labs</b> is how many labs report the benchmark in their launch posts and system cards, across the whole almanac, not only the labs of these models.</p>
-      <p>A high count means a widely used test. A low one means a niche or new test.</p>
+      <p><b>Labs</b> is how many labs report this benchmark in their launch posts and system cards, across the whole almanac. A high count means a widely used test.</p>
     </div>
     <div class="cmp-pop" id="cmp-pop-cited" popover>
-      <p><b>Cited by</b> is how many of the picked models’ own launch posts and system cards report the benchmark.</p>
-      <p>At 0, every score in the row comes from independent runs, such as the benchmark’s own leaderboard or Epoch AI.</p>
+      <p><b>Cited by</b> is how many of the picked models' own launch posts and system cards report this benchmark. At 0, every score in the row is an independent run.</p>
     </div>
   </div>
 </Base>
 
 <script>
-  import { compute, headline, sub, chips, winsList, table, barsView, detail, filterRow, legend, readState, writeState, esc, labMark, MAX_PICKS, DEFAULT_STATE, type ModelIndex, type ModelFile, type State, type Source, type Cited, type SortCol, type View, type ModelPick, type Result } from '../lib/compare.ts';
+  import { compute, caption, chips, winsList, table, barsView, detail, filterRow, legend, readState, writeState, esc, labMark, MAX_PICKS, DEFAULT_STATE, type ModelIndex, type ModelFile, type State, type Source, type Cited, type SortCol, type View, type ModelPick, type Result } from '../lib/compare.ts';
 
   const root = document.querySelector<HTMLElement>('[data-cmp]')!;
   const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
@@ -208,8 +203,10 @@ const names = picks.map((p) => p.name);
       $('[data-chips]').innerHTML = chips(st.m.map(pickOf), idx.labs);
       const q = $<HTMLInputElement>('[data-q]');
       const full = st.m.length >= MAX_PICKS;
+      // four picks fill the box: the field hides until a model comes out
       q.disabled = full;
-      q.placeholder = full ? 'Remove a model to add another' : st.m.length ? 'Add another model' : 'Add a model';
+      q.hidden = full;
+      q.placeholder = st.m.length ? 'Add another model' : 'Add a model';
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-src"]')) r.checked = r.value === st.src;
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="cmp-view"]')) r.checked = r.value === st.view;
     }
@@ -222,8 +219,7 @@ const names = picks.map((p) => p.name);
       const box = $('[data-results]');
       const before = glide && !reduce.matches ? positions(box) : null;
       for (const id of [...open]) if (!res.rows.some((r) => r.id === id)) open.delete(id);
-      $('[data-head]').textContent = headline(res, picks.map((p) => p.name), st);
-      $('[data-sub]').textContent = sub(res, st);
+      $('[data-sub]').textContent = caption(res, picks.map((p) => p.name), st);
       $('[data-wins]').innerHTML = winsList(res, picks, idx.labs);
       const has = res.shared > 0 && picks.length >= 2;
       $('[data-tools]').hidden = !has;
@@ -495,8 +491,24 @@ const names = picks.map((p) => p.name);
   }
   .cmp-root .cmp-controls {
     display: flex;
-    flex-direction: column;
-    gap: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 28px;
+  }
+  .cmp-root .cmp-pick {
+    flex: 1 1 520px;
+    min-width: 0;
+  }
+  .cmp-root .cmp-sw {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .cmp-root .cmp-sw .cmp-label {
+    margin: 0;
+    color: var(--ink-3);
+    font-weight: 400;
   }
   .cmp-root .cmp-label {
     font: 500 14px/1.3 var(--sans);
@@ -516,7 +528,6 @@ const names = picks.map((p) => p.name);
     border-radius: 12px;
     background: var(--panel);
     cursor: text;
-    max-width: 920px;
   }
   .cmp-root .cmp-chips {
     display: flex;
@@ -645,9 +656,6 @@ const names = picks.map((p) => p.name);
   }
   .cmp-root .cmp-out[aria-busy='true'] {
     opacity: 0.55;
-  }
-  .cmp-root .cmp-out .sh {
-    max-width: 68ch;
   }
   .cmp-root .cmp-wins {
     list-style: none;

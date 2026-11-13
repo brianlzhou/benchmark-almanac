@@ -50,8 +50,11 @@ const modes = [
   const leader = b.lines.find((l) => l.ranks[last] === 1);
   // how many columns in a row, up to the latest, the current leader has been first
   const leadRun = leader ? ([...leader.ranks].reverse().findIndex((r) => r !== 1) + 1 || leader.ranks.length + 1) - 1 : 0;
-  const bumpNote = `Of ${first}'s top ten, ${stayed.length ? word(stayed.length) : 'none'} ${stayed.length === 1 ? 'is' : 'are'} still in it${leader && leadRun > 1 ? `, and ${leader.name} has been first for ${word(leadRun)} quarters running` : ''}.`;
-  const bumpLede = `The ten benchmarks ${mode.who} named in the most releases, quarter by quarter. A line's thickness is the share of that quarter's releases that named it. ${bumpNote} ${first} is one column because ${mode.who} published only ${b.cols[0].n} launch posts with scores that year.`;
+  // the line under the title: what we track, then the finding. "Of 2024's top ten, one is still in it" repeats
+  // the finding when the one that stayed is the one that never left, so it shows only when it adds to it.
+  const kept = stayed.length > always.length ? ` Only ${word(stayed.length)} of ${first}'s top ten ${stayed.length === 1 ? 'is' : 'are'} still in it.` : '';
+  const run = leader && leadRun > 1 ? ` ${leader.name} has been first for ${word(leadRun)} quarters running.` : '';
+  const bumpLede = `We track the ten benchmarks ${mode.who} cite in the most releases each quarter. ${bumpHead}.${kept}${run}`;
 
   // the spread: ten labs of every lab, or all of the frontier labs (four if none got to all of them)
   const sp = spread(mode.minLabs, mode.labs);
@@ -69,13 +72,11 @@ const modes = [
   const fastest = reached[0];
   const median = reached.length ? reached[Math.floor(reached.length / 2)].days : 0;
   const spreadHead = !fastest
-    ? 'How fast new benchmarks spread'
+    ? ''
     : reached.length === 1
-      ? `${fastest.l.name} is the only new benchmark that reached ${goalLong}, ${fastest.days} days after the first one named it`
-      : `${fastest.l.name} reached ${goalLong} ${fastest.days} days after the first one named it, the fastest of ${reached.length} new benchmarks that got there`;
-  const spreadLede = `Every benchmark released since the start of 2025 that at least ${word(mode.minLabs)} ${mode.who} have named, lined up on the day the first one named it. Each step up is another lab.${
-    reached.length > 1 ? ` Half of the ${reached.length} that reached ${goalText} took ${median} days or less.` : ''
-  }`;
+      ? `${fastest.l.name} is the only new benchmark that reached ${goalLong}, ${fastest.days} days after the first one cited it.`
+      : `${fastest.l.name} reached ${goalLong} ${fastest.days} days after the first one cited it, the fastest of the ${word(reached.length)} new benchmarks that got there. Half of them took ${median} days or less.`;
+  const spreadLede = `${spreadHead ? `${spreadHead} ` : ''}We count every benchmark released since 2025 that at least ${word(mode.minLabs)} ${mode.who} have cited.`;
   return { ...mode, b, bumpHead, bumpLede, sp, goal, goalText, spreadHead, spreadLede };
 });
 
@@ -205,7 +206,7 @@ const sizeKey = [1, 10, 50];
         modes.map((mo) => (
           <div class={`rp-v-${mo.key}`}>
             <div class="sh">
-              <h2>{mo.bumpHead}</h2>
+              <h2>Which benchmarks stay on top?</h2>
               <p>{mo.bumpLede}</p>
             </div>
             <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`top-ten-${mo.key}`} deckFrom="@lede" context="reporting">
@@ -221,7 +222,7 @@ const sizeKey = [1, 10, 50];
         modes.map((mo) => (
           <div class={`rp-v-${mo.key}`}>
             <div class="sh">
-              <h2>{mo.spreadHead}</h2>
+              <h2>How fast do new benchmarks catch on?</h2>
               <p>{mo.spreadLede}</p>
             </div>
             <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`spread-${mo.key}`} deckFrom="@lede" context="reporting">

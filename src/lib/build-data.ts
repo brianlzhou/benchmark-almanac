@@ -145,7 +145,7 @@ function presets(p: Payload): Preset[] {
     {
       id: 'reported',
       name: `The ${reported.length} tests most labs reported in ${year}`,
-      how: `The benchmark families named by the most labs in their own ${year} launch posts and system cards (from ${reported[0]?.labs} labs down to ${reported.at(-1)?.labs}), leaving out any where top models score past 92%. Each comes as the version the most models from the last six months have.`,
+      how: `The benchmarks the most labs reported in ${year} (${reported[0]?.labs} labs down to ${reported.at(-1)?.labs}), minus any where top models already score past 92%. We use the version most recent models were scored on.`,
       b: reported.map((x) => x.id),
     },
   ];
@@ -170,7 +170,7 @@ function presets(p: Payload): Preset[] {
     return {
       id: pid,
       name: `${ids.length} ${label} tests`,
-      how: `${label[0].toUpperCase()}${label.slice(1)} benchmarks that at least two labs reported in the last 18 months, each as the version the most models from the last six months have. One version each, leaving out vote-based boards and any test past 92%.`,
+      how: `${label[0].toUpperCase()}${label.slice(1)} benchmarks at least two labs reported in the last 18 months, minus vote-based boards and any test past 92%. We use the version most recent models were scored on.`,
       b: ids.map((x) => x.id),
     };
   };
