@@ -50,11 +50,16 @@ const main = POOL_VIEWS[0].rows;
 const switchable = main.length > 0 && poolList.length > 1;
 const shares = POOL_VIEWS[0].shares;
 const top = shares[0];
-const lower = name.charAt(0).toLowerCase() + name.slice(1);
-const headline =
-  top && shares.length > 1
-    ? `${labById.get(top.lab)?.name ?? 'Other labs'} held the top ${lower} score ${Math.round(top.share * 100)}% of the contested time`
-    : `Who held number one in ${lower}`;
+const lower = lowerLabel(name);
+// within two points, the runner-up shares the headline: one or two long reigns can decide a thin area
+const pct = (x: { share: number }) => Math.round(x.share * 100);
+const labName = (x: { lab: string }) => labById.get(x.lab)?.name ?? 'Other labs';
+const second = shares[1];
+const headline = !top || shares.length < 2
+  ? `Who held number one in ${lower}`
+  : pct(top) - pct(second) <= 2
+    ? `${labName(top)} and ${labName(second)} held the top ${lower} score about equally, ${pct(top)}% and ${pct(second)}% of the contested time`
+    : `${labName(top)} held the top ${lower} score ${pct(top)}% of the contested time`;
 
 const span = monthsBetween('2023-01', AS_OF);
 const monthsHeld = top ? Math.round(top.share * span) : 0;
