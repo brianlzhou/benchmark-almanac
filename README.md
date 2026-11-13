@@ -131,12 +131,12 @@ and [`/contribute/tasks.json`](https://benchmarks.brianzhou.org/contribute/tasks
 
 ## Terms
 
-The discovery job reads only official feeds and APIs, and only where a source's terms and robots.txt
-allow it. It never scrapes X, whose terms forbid it. Each source in `data/sources.json` that the job does
-not read says why in its `manual` field. Leaderboard importers read public pages and data files, and each
-records the robots.txt and terms it relies on in its `terms` field. Artificial Analysis's terms do not
-allow its data in other ranking products, so the almanac links to Artificial Analysis and imports none of
-its numbers, including rows that Epoch AI collected from it.
+The discovery job reads only official feeds and APIs, and only where a source's terms and robots.txt allow
+it. It never scrapes X, whose terms forbid it. Each source in `data/sources.json` that the job does not read
+says why in its `manual` field. Leaderboard importers read public pages and data files, and each records the
+robots.txt and terms it relies on in its `terms` field. We are currently unable to feature Artificial
+Analysis benchmarks due to their terms of service, so the almanac imports none of its numbers, including
+rows that Epoch AI collected from it.
 
 ## License
 
