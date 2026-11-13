@@ -394,6 +394,10 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 </script>
 
 <style is:global>
+  /* a tool page: the controls sit right under the intro */
+  .bm-root .head + section {
+    margin-top: 4px;
+  }
   .bm-root .bm-grid {
     display: grid;
     grid-template-columns: minmax(0, 380px) minmax(0, 1fr);

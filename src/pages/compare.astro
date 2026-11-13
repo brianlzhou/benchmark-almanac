@@ -77,7 +77,11 @@ const names = picks.map((p) => p.name);
           <label><input type="radio" name="cmp-view" value="bars" disabled />Bars</label>
         </div>
       </div>
-      <div data-wins set:html={winsList(res, picks, idx.labs)} />
+      <div class="cmp-winbox">
+      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="wins" counts="For each picked model, the benchmarks where it has the best score, among every benchmark all of them have scores on, from the sources picked under Scores from. A tie counts for each model in it." leaves="Benchmarks that any picked model hasn't been scored on.">
+        <div data-wins set:html={winsList(res, picks, idx.labs)} />
+      </ChartDownload>
+      </div>
       <div class="cmp-tools" data-tools>
         <div class="cmp-filters" data-filters set:html={filterRow(res, st).replace(/<input /g, '<input disabled ')} />
       </div>
@@ -486,6 +490,14 @@ const names = picks.map((p) => p.name);
 </script>
 
 <style is:global>
+  /* the wins chart's download row keeps clear of the filters under it */
+  .cmp-root .cmp-winbox {
+    margin-bottom: 28px;
+  }
+  /* a tool page: the picks sit right under the intro */
+  .cmp-root .head + .cmp-controls {
+    margin-top: 4px;
+  }
   .cmp-root.cmp-wait [data-wait] {
     visibility: hidden;
   }
