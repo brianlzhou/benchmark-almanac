@@ -95,8 +95,8 @@ const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmar
             <div class="sh">
               <h2>{headline}</h2>
               <p>
-                {top && shares.length > 1 && `That's about ${monthsHeld} of the ${span} months since January 2023, averaged over the benchmarks below. `}
-                The easiest benchmarks are at the top. Versions of one test share a row, with a dark tick at each new version. We stop the clock, and fade the rest of the row, when the best score passes 85%, or at the newest score if 45 days go by without another. In between, the leader’s clock runs for at most 45 days at a time without a score from another lab.
+                {top && shares.length > 1 && `That's about ${monthsHeld} of the ${span} months since January 2023, averaged over these benchmarks. `}
+                We only count time while other labs are still testing, and stop once a model passes 85%. Faded stretches no longer count.
               </p>
             </div>
             {switchable && (
