@@ -6,14 +6,14 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "benchmarks.brianzhou.org"
         }
       ],
-      "destination": "https://www.benchmarkalmanac.com/:path*",
+      "destination": "https://www.benchmarkalmanac.com/$1",
       "permanent": true
     }
   ],
