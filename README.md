@@ -1,6 +1,6 @@
 # Benchmark Almanac
 
-A reference for AI benchmarks: what each one tests, which labs report it, and which model leads it. It
+We track AI benchmarks from public leaderboards, lab launch posts, system cards and open-source GitHub repositories. The almanac
 also records where each benchmark's code lives, how its best score has moved, and when labs stop reporting
 it, and why.
 

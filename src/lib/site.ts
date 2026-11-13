@@ -1,8 +1,11 @@
-// The site's one name and one description. Search engines and assistants match an entity by repeated words, so
-// the home page's description and structured data, every page's og:site_name and the README's first line all use
-// these exact words. Change them here, and in README.md.
+// The site's one name and one description. The description is the home page's subtitle, with live counts, and
+// every page that has no description of its own uses it. The README's first line and package.json say the same
+// thing without the counts. Change them together.
+import { benchmarks, cards, systemCards, LEADERBOARDS } from './data.ts';
+import githubJson from '../../data/github.json';
 
+const n = (v: number) => v.toLocaleString('en-US');
 export const SITE_NAME = 'Benchmark Almanac';
-export const SITE_DESCRIPTION = 'A reference for AI benchmarks: what each one tests, which labs report it, and which model leads it.';
+export const SITE_DESCRIPTION = `We track ${n(benchmarks.length)} benchmarks from ${n(Object.keys(LEADERBOARDS).length)} public leaderboards, ${n(cards.length)} launch posts, ${n(systemCards.length)} system cards, and ${n(Object.keys(githubJson).length)} open-source GitHub repositories.`;
 /** The home page's DataCatalog, which every benchmark's Dataset names as its catalog. */
 export const CATALOG_ID = '#catalog';
