@@ -62,8 +62,8 @@ const { credit, name, title, titleFrom, showWhen, quiet = false, deck, deckFrom,
         <span class="cdl-t">Download graph</span>
       </button>
       <div class="cdl-m" role="menu" aria-label="Download as" hidden>
-        <button type="button" role="menuitem" tabindex="-1" data-fmt="png">PNG<span>Image, twice the screen's size</span></button>
-        <button type="button" role="menuitem" tabindex="-1" data-fmt="svg">SVG<span>Vector, for editing</span></button>
+        <button type="button" role="menuitem" tabindex="-1" data-fmt="png">PNG</button>
+        <button type="button" role="menuitem" tabindex="-1" data-fmt="svg">SVG</button>
       </div>
     </div>
   </div>
@@ -74,6 +74,13 @@ const { credit, name, title, titleFrom, showWhen, quiet = false, deck, deckFrom,
 </script>
 
 <style is:global>
+  /* set for one task while a chart is measured for its file: what the file leaves out gives up its room, so the
+     file has no blank bands. Controls, tips marked data-dl-skip, and the unseen versions of a line that keeps
+     every view's version in one cell (AreaShare's .as-stack). Never inside an SVG, where .seg is a chart's
+     own shape (ReignChart's stretches). */
+  .cdl-exporting :is([data-dl-skip], .seg, [role='radiogroup'], .as-stack > :not(.on)):not(svg *) {
+    display: none !important;
+  }
   /* set for one task while a chart is copied in the light theme, so no color is caught mid-transition */
   .dl-still *,
   .dl-still *::before,
@@ -144,7 +151,7 @@ const { credit, name, title, titleFrom, showWhen, quiet = false, deck, deckFrom,
     right: 0;
     bottom: calc(100% + 6px);
     width: max-content;
-    min-width: 200px;
+    min-width: 112px;
     max-width: calc(100vw - 32px);
     background: var(--bg);
     border-radius: 12px;
@@ -170,11 +177,6 @@ const { credit, name, title, titleFrom, showWhen, quiet = false, deck, deckFrom,
     border-radius: 7px;
     padding: 8px 10px;
     cursor: pointer;
-  }
-  .cdl-m button span {
-    font-weight: 400;
-    font-size: 12.5px;
-    color: var(--ink-3);
   }
   .cdl-m button:hover,
   .cdl-m button:focus-visible {

@@ -7,6 +7,8 @@
 // from the light theme whatever theme the page is in, because a downloaded chart usually lands on white, and
 // the fonts are embedded, so the file looks the same in a slide deck, a vector editor or a post.
 
+import { humanDate } from '../lib/format.ts';
+
 const NS = 'http://www.w3.org/2000/svg';
 const SITE = 'benchmarks.brianzhou.org';
 const PAD = 32;
@@ -498,6 +500,12 @@ function fileName(wrap: HTMLElement, title: string, capture: HTMLElement) {
   return s.replace(/-+/g, '-').slice(0, 100) || 'chart';
 }
 
+/** Today in the reader's time zone, as "November 13th, 2026". */
+function today() {
+  const d = new Date();
+  return humanDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
+}
+
 function pageUrl() {
   const canon = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
   const u = new URL(canon ?? location.href);
@@ -573,7 +581,7 @@ const CONTEXTS: Record<string, () => Context> = {
     const all = root.querySelector<HTMLInputElement>('input[name="bm-need"]:checked')?.value === 'all';
     const n = root.querySelector<HTMLInputElement>('[data-n]')?.value;
     return {
-      deck: `${preset ? `The “${preset}” starting mix` : `A custom mix of ${mix.length} ${mix.length === 1 ? 'test' : 'tests'}`}, weighted as listed below. Each test’s scores go on a 0 to 100 scale (other units are rescaled from the lowest model to the highest, and lower-is-better tests are flipped), and a model’s index is the weighted average.`,
+      deck: `${preset ? `Mix: “${preset}”` : `A custom mix of ${mix.length} ${mix.length === 1 ? 'test' : 'tests'}`}, weighted as shown. Every test is on a 0 to 100 scale, with other units rescaled from lowest to highest and lower-is-better tests flipped. A model’s index is the weighted average.`,
       mix,
       counts: `Scores from ${from}. A model needs scores on ${all ? 'every test' : `at least ${n} of the tests`}, and a test it lacks gets a predicted score from its other tests.`,
       leaves: 'Models below that bar, and tests outside the mix.',
@@ -620,11 +628,23 @@ async function build(wrap: HTMLElement): Promise<Built> {
   if (subject && title && !title.toLowerCase().includes(subject.toLowerCase()))
     title = /\d/.test(title) || title.length > 48 ? `${subject}: ${title}` : `${subject} ${title.charAt(0).toLowerCase()}${title.slice(1)}`;
   title = curly(title);
-  const credit = curly(wrap.dataset.credit ?? '');
+  // every file names a source: a chart that passes none says so in development and credits the almanac
+  if (!wrap.dataset.credit && import.meta.env.DEV) console.warn('Download graph: this chart passes no credit', wrap);
+  const credit = curly(wrap.dataset.credit || 'Source: Benchmark Almanac');
 
   const snap = inLight(() => {
-    const r = capture.getBoundingClientRect();
-    walk(capture, r.left, r.top, out, 1);
+    // parts the file leaves out (controls, tips, the unseen versions of a stacked line) give up their room while
+    // the chart is measured, in this same task, so the reader never sees the page change
+    wrap.classList.add('cdl-exporting');
+    try {
+      return measureChart();
+    } finally {
+      wrap.classList.remove('cdl-exporting');
+    }
+  });
+  function measureChart() {
+    const r = capture!.getBoundingClientRect();
+    walk(capture!, r.left, r.top, out, 1);
     const rootCs = getComputedStyle(document.documentElement);
     const v = (n: string) => rootCs.getPropertyValue(n).trim();
     const headCs = head ? getComputedStyle(head) : null;
@@ -642,7 +662,7 @@ async function build(wrap: HTMLElement): Promise<Built> {
       head: headCs ? { size: parseFloat(headCs.fontSize), weight: headCs.fontWeight, family: headCs.fontFamily, ls: headCs.letterSpacing } : null,
       ctx: wrap.dataset.context && CONTEXTS[wrap.dataset.context] ? CONTEXTS[wrap.dataset.context]() : ({} as Context),
     };
-  });
+  }
 
   const W = snap.w + PAD * 2;
   const sans = `${snap.sans}, system-ui, sans-serif`;
@@ -672,8 +692,12 @@ async function build(wrap: HTMLElement): Promise<Built> {
     y += size * 0.86 + (lines.length - 1) * lh + size * 0.24;
   }
 
-  // the deck: what this is, who made it and what the number measures, then any page state it depends on
-  const deck = curly([wrap.dataset.deck, ...textFrom(wrap.dataset.deckFrom, head), snap.ctx.deck].filter(Boolean).join(' '));
+  // the deck: what this is, who made it and what the number measures, then any page state it depends on. A
+  // headline that asks a question ("Who comes out on top?") leaves the answer to the line under it on the page,
+  // so the file leads with that line.
+  const asks = /\?\s*$/.test(title);
+  const from = textFrom(wrap.dataset.deckFrom ?? (asks ? '@lede' : undefined), head);
+  const deck = curly((asks ? [...from, wrap.dataset.deck, snap.ctx.deck] : [wrap.dataset.deck, ...from, snap.ctx.deck]).filter((x, i, xs) => x && xs.indexOf(x) === i).join(' '));
   if (deck) {
     y += GAP - 10;
     for (const l of wrapLines(deck, `400 14.5px ${sans}`, snap.w)) {
@@ -747,6 +771,8 @@ async function build(wrap: HTMLElement): Promise<Built> {
       ['Counts', curly(wrap.dataset.counts ?? snap.ctx.counts ?? '')],
       ['Leaves out', curly(wrap.dataset.leaves ?? snap.ctx.leaves ?? '')],
       [creditLabel, creditValue ? `${creditValue.charAt(0).toUpperCase()}${creditValue.slice(1)}` : ''],
+      // the day the file was made, in the reader's own calendar, since the data behind it changes daily
+      ['Downloaded', today()],
     ] as [string, string][]
   ).filter(([, v]) => v);
   measure ??= document.createElement('canvas').getContext('2d');
@@ -775,11 +801,13 @@ async function build(wrap: HTMLElement): Promise<Built> {
   const listBottom = rows.length ? base + 5 : y;
   let sigBottom: number;
   if (twoCol) {
-    // the signature's top lines up with the list's first line
-    const nameBase = firstBase + 3;
-    foot.push(text(PAD + snap.w, nameBase, esc(site), { size: 17, fill: snap.ink, font: serif, anchor: 'end' }));
-    foot.push(text(PAD + snap.w, nameBase + 20, esc(url), { size: 12, fill: snap.ink3, font: mono, anchor: 'end' }));
-    sigBottom = nameBase + 24;
+    // the signature sits in the bottom-right corner: the address's baseline lines up with the list's last line,
+    // and it keeps the page margin at the right, as the list does at the left. A list shorter than the signature
+    // lines up with the signature's top instead.
+    const urlBase = Math.max(base, firstBase + 23);
+    foot.push(text(PAD + snap.w, urlBase - 20, esc(site), { size: 17, fill: snap.ink, font: serif, anchor: 'end' }));
+    foot.push(text(PAD + snap.w, urlBase, esc(url), { size: 12, fill: snap.ink3, font: mono, anchor: 'end' }));
+    sigBottom = urlBase + 5;
   } else {
     const nameBase = (rows.length ? listBottom + 18 : y) + 13;
     foot.push(text(PAD, nameBase, esc(site), { size: 17, fill: snap.ink, font: serif }));

@@ -28,8 +28,18 @@ export const SOURCE_CREDIT: Record<string, string> = {
 };
 
 /** The credit for rows of a reign chart or any list of things with a score source. */
-export const sourcesCredit = (rows: { source?: string }[], names: Record<string, string> = SOURCE_CREDIT) =>
-  creditLine(['leaderboard', 'epoch', 'collected', 'card', 'claim'].filter((k) => rows.some((r) => r.source === k)).map((k) => names[k] ?? SOURCE_CREDIT[k]));
+// A row names its source, or, for a reign row from a pool ('headline', 'independent', 'all'), carries where each
+// step's score came from. Both count, so a pooled chart credits the sources its steps actually use.
+type Sourced = { source?: string; reigns?: { steps?: { from?: string }[] }[] };
+const ORIGINS = ['leaderboard', 'epoch', 'collected', 'card', 'claim'];
+export const sourcesCredit = (rows: Sourced[], names: Record<string, string> = SOURCE_CREDIT) => {
+  const used = new Set<string>();
+  for (const r of rows) {
+    if (r.source) used.add(r.source);
+    for (const g of r.reigns ?? []) for (const st of g.steps ?? []) if (st.from) used.add(st.from);
+  }
+  return creditLine(ORIGINS.filter((k) => used.has(k)).map((k) => names[k] ?? SOURCE_CREDIT[k]));
+};
 
 /** Charts that pool many benchmarks under one of the score-source choices the leader pages offer. */
 export const POOL_CREDIT: Record<string, string> = {
