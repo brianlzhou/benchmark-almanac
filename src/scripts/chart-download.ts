@@ -274,15 +274,44 @@ function emitText(node: Text, cs: CSSStyleDeclaration, ox: number, oy: number, o
   const re = /\S+/g;
   const lines = new Map<number, { x: number; y: number; w: string }[]>();
   const a = ascent(cs);
-  for (let m = re.exec(text); m; m = re.exec(text)) {
-    range.setStart(node, m.index);
-    range.setEnd(node, m.index + m[0].length);
-    const rects = Array.from(range.getClientRects()).filter((q) => q.width > 0);
-    if (!rects.length) continue;
-    const q = rects[0];
+  // one piece of text, set where its first box sits
+  const place = (s: number, e: number) => {
+    range.setStart(node, s);
+    range.setEnd(node, e);
+    const q = Array.from(range.getClientRects()).find((r) => r.width > 0);
+    if (!q) return;
     const key = Math.round(q.top);
     if (!lines.has(key)) lines.set(key, []);
-    lines.get(key)!.push({ x: q.left - ox, y: q.top - oy + q.height * a, w: curly(caseOf(m[0], cs.textTransform)) });
+    lines.get(key)!.push({ x: q.left - ox, y: q.top - oy + q.height * a, w: curly(caseOf(text.slice(s, e), cs.textTransform)) });
+  };
+  const topAt = (i: number) => {
+    range.setStart(node, i);
+    range.setEnd(node, i + 1);
+    const r = Array.from(range.getClientRects()).find((x) => x.width > 0);
+    return r ? Math.round(r.top) : undefined;
+  };
+  for (let m = re.exec(text); m; m = re.exec(text)) {
+    const end = m.index + m[0].length;
+    range.setStart(node, m.index);
+    range.setEnd(node, end);
+    const rects = Array.from(range.getClientRects()).filter((q) => q.width > 0);
+    if (!rects.length) continue;
+    if (rects.length === 1) {
+      place(m.index, end);
+      continue;
+    }
+    // a word the browser broke across lines, at a hyphen or anywhere: each piece goes on its own line
+    let from = m.index;
+    let top = topAt(m.index);
+    for (let i = m.index + 1; i < end; i++) {
+      const t = topAt(i);
+      if (t !== undefined && top !== undefined && t !== top) {
+        place(from, i);
+        from = i;
+      }
+      if (t !== undefined) top = t;
+    }
+    place(from, end);
   }
   if (!lines.size) return;
   useFont(out, cs);

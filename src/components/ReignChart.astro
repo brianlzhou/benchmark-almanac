@@ -446,15 +446,15 @@ const levelsShown = new Set(views.filter((v) => !v.of).map((v) => v.level));
     padding-top: 8px;
     min-width: 0;
   }
+  /* a long benchmark name wraps onto a second line rather than losing its end */
   .who a,
   .who > span:first-child {
     display: block;
     font-weight: 500;
     font-size: 14px;
+    line-height: 1.25;
     text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
   }
   .who a:hover {
     text-decoration: underline;
