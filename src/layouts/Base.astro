@@ -51,9 +51,9 @@ const NAV: { id: string; label: string; links: { href: string; label: string; fo
     links: [
       { href: '/leaders/', label: 'Leaders' },
       { href: '/models/', label: 'Models' },
-      { href: '/compare/', label: 'Compare', fold: 'menu' },
+      { href: '/compare/', label: 'Compare', fold: true },
       { href: '/labs/', label: 'Labs' },
-      { href: '/build/', label: 'Build an index', fold: true },
+      { href: '/build/', label: 'Index' },
     ],
   },
   {
@@ -185,7 +185,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           <div>
             <h2>Explore</h2>
             <ul>
-              {[...NAV_LINKS.filter((n) => !n.fold), { href: '/compare/', label: 'Compare models' }, { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
+              {[...NAV_LINKS.filter((n) => !n.fold && n.href !== '/build/'), { href: '/compare/', label: 'Compare models' }, { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
                 .filter((n, i, xs) => xs.findIndex((y) => y.href === n.href) === i)
                 .map((n) => (
                   <li><a href={n.href}>{n.label}</a></li>
@@ -284,9 +284,8 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     white-space: nowrap;
   }
   /* The row, from widest to narrowest (measured with a 15px scrollbar, and at least 25px to spare):
-       1260px and up: every link but Compare, More, Submit, search and theme, with tighter spacing below 1440px.
-         Compare sits at the top of More at every width: with it the row runs 27px over even at the 1240px cap.
-       960 to 1259px: Compare, Build an index, Model cards and Reporting move into the More menu
+       1260px and up: every link, More, Submit, search and theme, with tighter spacing below 1440px.
+       960 to 1259px: Compare, Model cards and Reporting move into the More menu
        below 960px: the whole row folds into the menu button
      The name keeps its place at every step. */
   nav {
