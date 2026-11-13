@@ -1,6 +1,23 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "items": [
+    {
+      "key": "https://arxiv.org/abs/2611.16843",
+      "title": "Shortcuts or Memorisation? Revisiting Data Corruption in Natural Language Understanding with Large Language Models",
+      "url": "https://arxiv.org/abs/2611.16843",
+      "source": "arXiv",
+      "date": "2026-11-12",
+      "first": "2026-11-13",
+      "last": "2026-11-13",
+      "benchmarks": [
+        "anli"
+      ],
+      "problems": [
+        "contamination",
+        "reward-hacking"
+      ],
+      "score": 5
+    },
     {
       "key": "https://arxiv.org/abs/2611.12521",
       "title": "Can the Confidence and Decisions of System 1 Models Be Trusted? An Explainability and Perturbation Audit of Jev-Style Decision Models",
