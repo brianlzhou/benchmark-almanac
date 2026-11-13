@@ -140,7 +140,7 @@ its numbers, including rows that Epoch AI collected from it.
 
 ## License
 
-The code license is not chosen yet.
+The code is under the MIT License (see `LICENSE`). It covers the code, not the data.
 
 The data in `data/` is not under one license. Each source keeps its own terms, and some allow only
 non-commercial use: the SWE-bench boards are CC BY-NC 4.0 and MathArena's datasets are CC BY-NC-SA 4.0.

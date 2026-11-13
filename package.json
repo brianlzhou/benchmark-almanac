@@ -2,6 +2,7 @@
   "name": "benchmark-almanac",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "A reference for AI benchmarks: what each one tests, which model cards report it, and how scores have moved.",
   "type": "module",
   "engines": {
