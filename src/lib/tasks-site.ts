@@ -8,7 +8,7 @@ import { benchmarks, models, cards, systemCards, LEADERBOARDS, epochScores, viaB
 import { LEVELS } from './taxonomy.ts';
 import { openTasks, type AuditFind, type Find, type TaskGroup } from './tasks.ts';
 
-export const SITE = String(import.meta.env.SITE ?? 'https://benchmarks.brianzhou.org').replace(/\/$/, '');
+export const SITE = String(import.meta.env.SITE ?? 'https://www.benchmarkalmanac.com').replace(/\/$/, '');
 
 let cached: TaskGroup[] | null = null;
 

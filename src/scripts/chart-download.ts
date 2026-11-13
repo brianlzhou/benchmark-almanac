@@ -10,7 +10,7 @@
 import { humanDate } from '../lib/format.ts';
 
 const NS = 'http://www.w3.org/2000/svg';
-const SITE = 'benchmarks.brianzhou.org';
+const SITE = 'benchmarkalmanac.com';
 const PAD = 32;
 
 interface Out {

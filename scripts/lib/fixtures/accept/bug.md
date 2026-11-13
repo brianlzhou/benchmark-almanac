@@ -1,6 +1,6 @@
 ### Page
 
-https://benchmarks.brianzhou.org/build/
+https://www.benchmarkalmanac.com/build/
 
 ### What happened
 

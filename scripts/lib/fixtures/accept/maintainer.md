@@ -1,6 +1,6 @@
 ### Benchmark
 
-https://benchmarks.brianzhou.org/benchmarks/zeta-qa/
+https://www.benchmarkalmanac.com/benchmarks/zeta-qa/
 
 ### Your connection to it
 

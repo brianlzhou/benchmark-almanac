@@ -8,7 +8,7 @@ export async function checkChart(url: string, sha256: string) {
     await new Promise(resolve => setTimeout(resolve, Math.max(0, 1050 - (Date.now() - last))));
     last = Date.now();
     const res = await fetch(url, {
-      headers: { 'User-Agent': 'benchmark-almanac (+https://benchmarks.brianzhou.org)' },
+      headers: { 'User-Agent': 'benchmark-almanac (+https://www.benchmarkalmanac.com)' },
       redirect: 'error', signal: AbortSignal.timeout(30_000),
     });
     if (!res.ok) throw new Error(`Chart HTTP ${res.status}`);

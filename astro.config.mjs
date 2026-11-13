@@ -55,7 +55,7 @@ function lastmodOf(url) {
 
 export default defineConfig({
   // Canonical URLs, the sitemap and link previews need absolute URLs. SITE_URL overrides the production host.
-  site: process.env.SITE_URL || 'https://benchmarks.brianzhou.org',
+  site: process.env.SITE_URL || 'https://www.benchmarkalmanac.com',
   compressHTML: true,
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
   build: { inlineStylesheets: 'auto' },

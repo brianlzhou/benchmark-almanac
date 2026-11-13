@@ -1,6 +1,6 @@
 ### Page
 
-https://benchmarks.brianzhou.org/benchmarks/zeta-qa/
+https://www.benchmarkalmanac.com/benchmarks/zeta-qa/
 
 ### What is wrong
 

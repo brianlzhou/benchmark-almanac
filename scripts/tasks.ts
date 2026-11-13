@@ -14,7 +14,7 @@ import { dataPath, readJson } from './lib/util.ts';
 import { openTasks, issueOf, type AuditFind, type Find, type Task, type TaskGroup } from '../src/lib/tasks.ts';
 import type { Benchmark, Model } from '../src/lib/types.ts';
 
-const SITE = process.env.SITE_URL || 'https://benchmarks.brianzhou.org';
+const SITE = process.env.SITE_URL || 'https://www.benchmarkalmanac.com';
 const arg = (k: string) => {
   const i = process.argv.indexOf(k);
   return i > 0 ? process.argv[i + 1] : undefined;

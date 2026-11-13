@@ -4,7 +4,7 @@ We track AI benchmarks from public leaderboards, lab launch posts, system cards 
 also records where each benchmark's code lives, how its best score has moved, and when labs stop reporting
 it, and why.
 
-The site is at [benchmarks.brianzhou.org](https://benchmarks.brianzhou.org). Daily jobs look for new
+The site is at [benchmarkalmanac.com](https://www.benchmarkalmanac.com). Daily jobs look for new
 benchmarks and refresh every leaderboard, and each opens a pull request with what it found.
 
 The site is static. Every page is built from the files in `data/`, and charts are drawn as SVG at build
@@ -116,9 +116,9 @@ npm run build     # static site in dist/
 
 ## Contributing
 
-The [Contribute page](https://benchmarks.brianzhou.org/contribute/) lists open tasks, such as benchmarks with
+The [Contribute page](https://www.benchmarkalmanac.com/contribute/) lists open tasks, such as benchmarks with
 no release date and official leaderboards we don't read yet. Each has a GitHub form that's already filled in,
-and [`/contribute/tasks.json`](https://benchmarks.brianzhou.org/contribute/tasks.json) has the whole list.
+and [`/contribute/tasks.json`](https://www.benchmarkalmanac.com/contribute/tasks.json) has the whole list.
 `node scripts/tasks.ts` prints the same tasks as JSON lines.
 
 - **Data changes:** edit the record in `data/*.json` (benchmarks, models, labs, launch posts, system cards and
