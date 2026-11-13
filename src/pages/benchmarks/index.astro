@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
 import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import AreaMark from '../../components/AreaMark.astro';
-import { allSummaries, benchmarks, modelById, monthsBetween, AS_OF, addedWindows, addedOptions } from '../../lib/data.ts';
+import { allSummaries, benchmarks, modelById, monthsBetween, AS_OF, addedWindows, addedOptions, cards, systemCards } from '../../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf, levelIndex } from '../../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../../lib/format.ts';
 import { familyOf, nextVersion } from '../../lib/reigns.ts';
@@ -85,6 +85,19 @@ const probe = {
   status: Object.keys(STATUS).filter((k) => everyRow.some((s) => s.status === k)).sort((a, b) => STATUS[b].length - STATUS[a].length)[0] ?? 'in use',
   released: longest(everyRow.map((s) => monthYear(s.b.released))),
   added: longest(everyRow.map((s) => monthYear(s.lastAdded?.date))),
+};
+// what the two count columns cover, for their header hovers, and each cell's labs and newest document
+const span = (docs: { lab: string; date: string }[]) => {
+  const ds = docs.map((d) => d.date).filter(Boolean).sort();
+  return `${docs.length.toLocaleString('en-US')} from ${new Set(docs.map((d) => d.lab)).size} labs, ${monthYear(ds[0])} to ${monthYear(ds.at(-1))}`;
+};
+const postsTip = `Lab launch posts that show a score for it. We read ${span(cards)}.`;
+const docsTip = `System cards, model cards and technical reports that report it. We read ${span(systemCards)}.`;
+const citeTip = (xs: { card: { lab: string; date: string } }[]) => {
+  if (!xs.length) return undefined;
+  const labs = new Set(xs.map((x) => x.card.lab)).size;
+  const newest = xs.map((x) => x.card.date).sort().at(-1);
+  return `${labs === 1 ? '1 lab' : `${labs} labs`}, newest ${monthYear(newest)}`;
 };
 const maxArea = Math.max(...areaCounts.map((x) => x.n));
 // the newest addition to the catalog, as "November 4th"
@@ -171,8 +184,8 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
             <SortHead data-first="asc">Level</SortHead>
             <SortHead data-first="asc">Status</SortHead>
             <SortHead>Best score</SortHead>
-            <SortHead class="r two" title="Launch posts that list it in their headline results">Launch<br />posts</SortHead>
-            <SortHead class="r two" title="System cards, model cards and technical reports that report it">System<br />cards</SortHead>
+            <SortHead class="r two" title={postsTip}>Launch<br />posts</SortHead>
+            <SortHead class="r two" title={docsTip}>System<br />cards</SortHead>
             <SortHead>Released</SortHead>
             <SortHead title="When a model last got a score here, from any source">Last<br />added</SortHead>
           </tr>
@@ -263,8 +276,8 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                         </span>
                       )}
                     </td>
-                    <td class="r">{s.cites.length || ''}</td>
-                    <td class="r muted">{s.docCites.length || ''}</td>
+                    <td class="r" title={citeTip(s.cites)}>{s.cites.length || ''}</td>
+                    <td class="r muted" title={citeTip(s.docCites)}>{s.docCites.length || ''}</td>
                     <td class="muted num nowrap">{monthYear(s.b.released)}</td>
                     <td class:list={['muted', 'num', 'nowrap', { stale: !!s.lastAdded && monthsBetween(s.lastAdded.date, AS_OF) >= 12 }]} data-v={s.lastAdded?.date} title={s.lastAdded ? `${modelById.get(s.lastAdded.model)?.name ?? s.lastAdded.model}, from ${ADDED_FROM[s.lastAdded.source]}` : undefined}>{monthYear(s.lastAdded?.date)}</td>
                   </tr>
@@ -298,8 +311,8 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                             </span>
                           )}
                         </td>
-                        <td class="r">{p.cites.length || ''}</td>
-                        <td class="r muted">{p.docCites.length || ''}</td>
+                        <td class="r" title={citeTip(p.cites)}>{p.cites.length || ''}</td>
+                        <td class="r muted" title={citeTip(p.docCites)}>{p.docCites.length || ''}</td>
                         <td class="muted num nowrap">{monthYear(p.b.released)}</td>
                         <td class:list={['muted', 'num', 'nowrap', { stale: !!p.lastAdded && monthsBetween(p.lastAdded.date, AS_OF) >= 12 }]} data-v={p.lastAdded?.date} title={p.lastAdded ? `${modelById.get(p.lastAdded.model)?.name ?? p.lastAdded.model}, from ${ADDED_FROM[p.lastAdded.source]}` : undefined}>{monthYear(p.lastAdded?.date)}</td>
                       </tr>
