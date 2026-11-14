@@ -68443,6 +68443,32 @@
     ]
   },
   {
+    "id": "real2sim",
+    "name": "Real2Sim",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents get a robot recording from DROID (three camera videos, stereo calibration, joint and gripper commands and the task instruction) and build an interactive simulation of the scene. Each scene is scored on how closely it matches the recording, on replaying the recorded actions, and on whether a fixed robot policy completes the task in it.",
+    "org": "Momentum Research Labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.real2sim.bot/",
+      "leaderboard": "https://www.real2sim.bot/#leaderboard"
+    },
+    "access": "public",
+    "note": "Ten DROID episodes, all recorded on one Franka Panda rig. Each model builds every scene twice, once with a plain prompt and once with the agent instructions from RoboSimStudio (arXiv 2610.18835). The score is the mean of four equally weighted parts: visual fidelity (1 minus LPIPS), semantic fidelity (DINOv2 cosine), replay of the recorded actions and success of the π0.5-DROID policy. One reviewer who knew the model and harness judged the replays. No policy rollout has succeeded so far, and the policy was not tested on a known-good scene, so a failure may come from the policy rather than the scene.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.real2sim.bot/#leaderboard",
+      "https://www.real2sim.bot/runs.html"
+    ],
+    "added": "2026-11-14"
+  },
+  {
     "id": "realcompanion",
     "name": "RealCompanion",
     "category": "instruction-following-chat",

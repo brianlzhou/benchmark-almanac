@@ -344,9 +344,11 @@ export function insertSorted<T>(list: T[], item: T, ahead: (a: T, b: T) => boole
   const i = list.findIndex((x) => ahead(item, x));
   return i < 0 ? [...list, item] : [...list.slice(0, i), item, ...list.slice(i)];
 }
-// benchmarks.json is sorted by lowercase name, audits newest first, reviewed.json's added list newest first
+// benchmarks.json is sorted by lowercase name, audits newest first, reviewed.json's added list by id. Alphabetical
+// order puts two pull requests' new lines in different places, so they don't conflict.
 const byName = (a: Benchmark, b: Benchmark) => a.name.toLowerCase() < b.name.toLowerCase();
 const newestFirst = (a: { date: string; id: string }, b: { date: string; id: string }) => a.date > b.date || (a.date === b.date && a.id > b.id);
+const byId = (a: { id: string }, b: { id: string }) => a.id < b.id;
 
 function uniqueId(base: string, taken: Set<string>): string {
   const b = base.slice(0, 80).replace(/-+$/, '') || 'benchmark';
@@ -426,7 +428,7 @@ function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: 
     } else todo.push(`The form says it replaces ${shown(replaces)}. Set the family and the successor by hand.`);
   }
   for (const k of Object.keys(rec)) if (k !== 'id' && k !== 'name' && k !== 'added') changes.push(`  ${k}: ${shown(rec[k])}`);
-  const reviewed: Reviewed = { ...data.reviewed, added: insertSorted(data.reviewed.added, { id, date: today, via: `Submitted through the benchmark form, issue #${issue.number}.` }, newestFirst) };
+  const reviewed: Reviewed = { ...data.reviewed, added: insertSorted(data.reviewed.added, { id, date: today, via: `Submitted through the benchmark form, issue #${issue.number}.` }, byId) };
   changes.push(`data/reviewed.json: ${shown(id)} listed as added on ${today}.`);
   return {
     kind: 'benchmark',

@@ -176,6 +176,15 @@ for (const [id, a] of Object.entries(abstracts)) {
   if (!/^\d{4}-\d\d-\d\d$/.test(a.fetched ?? '')) fail(`abstract ${id}: bad fetch date ${a.fetched}`);
 }
 
+// data/reviewed.json keeps both lists alphabetical (added by id, rejected by name), so two pull requests that each
+// add an entry change different lines of the file instead of the same first or last line
+const reviewed = readJson<{ added: { id: string }[]; rejected: { name: string; date: string }[] }>(dataPath('reviewed.json'));
+const rejectKey = (r: { name: string; date: string }) => `${r.name.toLowerCase()}\u0000${r.date}`;
+const addedAt = reviewed.added.findIndex((a, i) => i > 0 && reviewed.added[i - 1].id > a.id);
+if (addedAt > 0) fail(`reviewed.json: the added list is out of order at ${reviewed.added[addedAt].id}. Keep it sorted by id.`);
+const rejectedAt = reviewed.rejected.findIndex((r, i) => i > 0 && rejectKey(reviewed.rejected[i - 1]) > rejectKey(r));
+if (rejectedAt > 0) fail(`reviewed.json: the rejected list is out of order at ${reviewed.rejected[rejectedAt].name}. Keep it sorted by name.`);
+
 // audits (data/audits.json): published reviews that found problems in benchmarks, shown as "Known issues"
 const AUDIT_PROBLEMS = new Set(['broken-grader', 'leaked-answers', 'wrong-labels', 'contamination', 'reward-hacking', 'ignored-input', 'harness-differences', 'underspecified-tasks', 'content-filter']);
 const AUDIT_STATUSES = new Set(['fixed-by-maker', 'fixed-in-fork', 'new-version', 'open', 'disputed']);

@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-11-13",
+  "retrieved": "2026-11-14",
   "boards": {
     "1h-videoqa-google": {
       "url": "https://www.kaggle.com/benchmarks/deepmind/video-qa",
@@ -35319,6 +35319,14 @@
           "better": "higher"
         }
       }
+    },
+    "real2sim": {
+      "url": "https://www.real2sim.bot/#leaderboard",
+      "feed": "https://www.real2sim.bot/benchmark-data.js",
+      "terms": "The site states no terms of use and its robots.txt allows all agents. The DROID recordings keep their own license.",
+      "retrieved": "2026-11-14",
+      "rows": 6,
+      "unmatched": []
     },
     "realmpathology": {
       "url": "https://www.micro1.ai/benchmark/realm-pathology",
@@ -75891,6 +75899,12 @@
     ["real-swe-1-1","gpt-6-1-sol","highest available effort; five runs per task","Codex CLI",47.2,"2026-09-29",0.7862,31913,{"meanToolCalls":28.424,"meanMinutes":15.361,"standardErrorLowPercent":44.8,"standardErrorHighPercent":49.6}],
     ["real-swe-1-1","gemini-4-argon","highest available effort; five runs per task","Antigravity CLI",39.2,"2026-09-30",4.657,135946,{"meanToolCalls":127.55,"meanMinutes":35.387,"standardErrorLowPercent":35.9,"standardErrorHighPercent":42.5}],
     ["real-swe-1-1","kimi-k3-1-pro","highest available effort; five runs per task","Kimi Code",39.2,"2026-10-23",2.032,42625,{"meanToolCalls":105.07,"meanMinutes":63.834,"standardErrorLowPercent":35.8,"standardErrorHighPercent":42.6}],
+    ["real2sim","gpt-6-astra",null,"Raw",0.328,"2026-09-03",13.33,29442,{"visual":0.534,"semantic":0.779,"replay":0,"policy":0}],
+    ["real2sim","gpt-6-astra",null,"RoboSimStudio",0.396,"2026-09-03",15.78,24030,{"visual":0.532,"semantic":0.751,"replay":30,"policy":0}],
+    ["real2sim","claude-opus-5-5",null,"Raw",0.451,"2026-09-22",68.8,83845,{"visual":0.574,"semantic":0.63,"replay":60,"policy":0}],
+    ["real2sim","claude-opus-5-5",null,"RoboSimStudio",0.585,"2026-09-22",84.98,99019,{"visual":0.58,"semantic":0.76,"replay":100,"policy":0}],
+    ["real2sim","gemini-4-argon",null,"Raw",0.43,"2026-09-30",43.58,214930,{"visual":0.527,"semantic":0.694,"replay":50,"policy":0}],
+    ["real2sim","gemini-4-argon",null,"RoboSimStudio",0.509,"2026-09-30",37.46,155094,{"visual":0.512,"semantic":0.724,"replay":80,"policy":0}],
     ["realmpathology","claude-sonnet-5",null,null,71.7,"2026-06-30",null,null,{"reasoningTokens":3200,"ciLow":67.4,"ciHigh":75.7,"bestOf3":79,"passAt3":52}],
     ["realmpathology","muse-spark-1-1","xhigh",null,74.9,"2026-07-09",null,null,{"reasoningTokens":3000,"ciLow":70.3,"ciHigh":79,"bestOf3":80.9,"passAt3":62}],
     ["realmpathology","claude-opus-5","max",null,75.2,"2026-07-24",null,null,{"reasoningTokens":6600,"ciLow":70.7,"ciHigh":79.3,"bestOf3":81,"passAt3":62}],
