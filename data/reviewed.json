@@ -2746,6 +2746,11 @@
       "via": "Qwen3.7-Plus launch post autonomous driving rows."
     },
     {
+      "id": "egohome",
+      "date": "2026-11-13",
+      "via": "Perceptron released it with Perceptron Egocentric 1.0, with code on GitHub and data on Hugging Face."
+    },
+    {
       "id": "ehrnoteqa",
       "date": "2026-11-01",
       "via": "MedGemma 1.5 model card, medical record evaluations table."
