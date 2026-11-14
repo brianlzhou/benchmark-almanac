@@ -196,6 +196,20 @@ export function sourceLabel(x: Pick<Score, 'source' | 'via' | 'from'>): string {
   return `Claim in ${fromName(x)}, via Epoch AI`;
 }
 
+/** True for a lab's own number or a claim Epoch AI collected: anything nobody independent measured. */
+export const isClaim = (x: Pick<Score, 'source' | 'via'>) => x.source === 'card' || (x.source === 'collected' && x.via !== 'board');
+/** True for an independent rerun: Epoch AI's own run, or another board's run that Epoch AI copied. */
+export const isRerun = (x: Pick<Score, 'source' | 'via'>) => x.source === 'epoch' || (x.source === 'collected' && x.via === 'board');
+
+// the effort level a lab's wording states for a result ("xhigh effort", "max reasoning", "thinking: high"), kept as
+// the score's setting so pages can show it beside the number
+const EFFORT = /\b(none|minimal|low|medium|high|x-?high|max(?:imum)?)\s+(?:reasoning\s+)?(?:effort|reasoning|thinking)\b|\b(?:effort|reasoning|thinking)(?:\s+level)?[:=]?\s*\(?(none|minimal|low|medium|high|x-?high|max(?:imum)?)\b/i;
+function effortOf(text: string | undefined): string | null {
+  const m = text?.match(EFFORT);
+  const w = (m?.[1] ?? m?.[2])?.toLowerCase().replace('-', '').replace('maximum', 'max');
+  return w ? `${w} effort` : null;
+}
+
 /** Card scores in the benchmark's own unit. A score in another unit (an Elo beside percentages) is left out. */
 export const cardScores: Score[] = [...cards, ...systemCards].flatMap((c) =>
   c.results
@@ -206,7 +220,7 @@ export const cardScores: Score[] = [...cards, ...systemCards].flatMap((c) =>
       model: c.model,
       value: r.score as number,
       unit: normUnit(r.unit),
-      setting: null,
+      setting: effortOf(r.as_written),
       harness: null,
       date: c.date,
       source: 'card' as const,

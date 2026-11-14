@@ -214,6 +214,18 @@ function emitBox(cs: CSSStyleDeclaration, r: DOMRect, ox: number, oy: number, ou
     return;
   }
   if (!transparent(cs.backgroundColor)) out.parts.push(`<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}"${rx ? ` rx="${n2(rx)}"` : ''} fill="${cs.backgroundColor}"${o}/>`);
+  // a bar's stripes (a lab's claim) or dots (an independent rerun), which the page draws with a CSS gradient
+  const pat = cs.getPropertyValue('--pat').trim();
+  if ((pat === 'stripes' || pat === 'dots') && !transparent(cs.backgroundColor)) {
+    const id = `dlp-${pat}`;
+    if (!out.defs.some((d) => d.includes(`id="${id}"`)))
+      out.defs.push(
+        pat === 'stripes'
+          ? `<pattern id="${id}" width="5.5" height="5.5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.5" height="5.5" fill="#ffffff" fill-opacity="0.62"/></pattern>`
+          : `<pattern id="${id}" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#ffffff" fill-opacity="0.7"/></pattern>`,
+      );
+    out.parts.push(`<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}"${rx ? ` rx="${n2(rx)}"` : ''} fill="url(#${id})"${o}/>`);
+  }
   const sides = (['Top', 'Right', 'Bottom', 'Left'] as const).map((s) => ({
     s,
     w: parseFloat(cs.getPropertyValue(`border-${s.toLowerCase()}-width`)) || 0,

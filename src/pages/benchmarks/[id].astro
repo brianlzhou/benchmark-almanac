@@ -501,14 +501,14 @@ const cite = {
                       {otherAhead && s.best && ` The best model we track is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
                     </>
                   ) : s.boardSource === 'epoch' ? (
-                    'Best score per model from Epoch AI’s own runs. Where a model ran with several settings or harnesses, we keep its best.'
+                    'Best score per model from Epoch AI’s own runs, drawn dotted as reruns. Where a model ran with several settings or harnesses, we keep its best.'
                   ) : s.boardSource === 'collected' ? (
-                    `Best score per model from ${viaName}, as Epoch AI copied it. We don’t read that board ourselves yet. Where a model ran with several settings, we keep its best.`
+                    `Best score per model from ${viaName}, as Epoch AI copied it, drawn dotted as reruns. We don’t read that board ourselves yet. Where a model ran with several settings, we keep its best.`
                   ) : s.boardSource === 'claim' ? (
-                    'Best score per model from claims Epoch AI collected out of labs’ reports and papers. Nobody independent has run this benchmark, so these show what was claimed, not who leads.'
+                    'Best score per model from claims Epoch AI collected out of labs’ reports and papers. Nobody independent has run this benchmark, so these show what was claimed, not who leads. Bars are striped for that reason.'
                   ) : (
                     <>
-                      Best score per model as labs report them in their own cards. Labs pick their own settings, so these compare less cleanly than independent runs.
+                      Best score per model as labs report them in their own cards, drawn striped. Labs pick their own settings, so these compare less cleanly than independent runs.
                       {arenaClaims && (
                         <>
                           {' '}A rating ranks a model only against others rated in the same arena at the same time, so these don’t show who leads.{' '}
@@ -525,8 +525,8 @@ const cite = {
                   <h2>{v.best ? `${modelById.get(v.best.model)?.name ?? v.best.model} leads with ${fmt(v.best.value, unit)}${v.pool === 'all' ? ', claims included' : ' across all independent runs'}` : 'No scores yet'}</h2>
                   <p>
                     {v.pool === 'independent'
-                      ? `Best score per model across ${boardHost ? `${boardHost}’s leaderboard` : 'the official leaderboard'}, Epoch AI’s own runs and any board Epoch AI copied. Each bar and row names its source.`
-                      : 'Best score per model from every source, including labs’ own numbers and claims Epoch AI collected from reports and papers. Labs pick their own settings, so a claim can beat an independent run of the same model.'}
+                      ? `Best score per model across ${boardHost ? `${boardHost}’s leaderboard` : 'the official leaderboard'}, Epoch AI’s own runs and any board Epoch AI copied. Dotted bars are reruns by Epoch AI or another board, and each row names its source.`
+                      : 'Best score per model from every source, including labs’ own numbers and claims Epoch AI collected from reports and papers. Labs pick their own settings, so a claim can beat an independent run of the same model. Striped bars are claims, and dotted bars are reruns by Epoch AI or another board.'}
                   </p>
                 </div>
               ))}

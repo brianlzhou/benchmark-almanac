@@ -106,7 +106,7 @@ const docsFor = (c: (typeof cards)[number]) => {
                       <ul class="chips">
                         {c.results.map((r) => (
                           <li class:list={{ add: !first && added.includes(r.benchmark) }}>
-                            <a href={`/benchmarks/${r.benchmark}/`}>{benchById.get(r.benchmark)?.name}</a>
+                            <a href={`/benchmarks/${r.benchmark}/?pool=all`}>{benchById.get(r.benchmark)?.name}</a>
                             {r.score != null && <span class="sc">{shortNum(r.score)}</span>}
                           </li>
                         ))}
@@ -140,7 +140,7 @@ const docsFor = (c: (typeof cards)[number]) => {
                                 <ul class="chips">
                                   {rs.map((r) => (
                                     <li class:list={{ add: !diff.first && diff.added.has(r.benchmark) }}>
-                                      <a href={`/benchmarks/${r.benchmark}/`}>{benchById.get(r.benchmark)?.name ?? r.benchmark}</a>
+                                      <a href={`/benchmarks/${r.benchmark}/?pool=all`}>{benchById.get(r.benchmark)?.name ?? r.benchmark}</a>
                                       {r.score != null && <span class="sc">{shortNum(r.score)}</span>}
                                     </li>
                                   ))}

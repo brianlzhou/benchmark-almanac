@@ -6,7 +6,7 @@ import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import LabMark from '../../components/LabMark.astro';
 import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
-import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById, sourceLabel } from '../../lib/data.ts';
+import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById, sourceLabel, isClaim } from '../../lib/data.ts';
 import { AREAS, areaOf, SECTION_NAMES, SECTION_ORDER } from '../../lib/taxonomy.ts';
 import { modelLine } from '../../lib/findings.ts';
 import { fullDate, score as fmt, shortNum, humanDate } from '../../lib/format.ts';
@@ -120,7 +120,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
                       const unit = r.benchmark.unit ?? '%';
                       return (
                         <tr>
-                          <td><a href={`/benchmarks/${r.benchmark.id}/`}>{r.benchmark.name}</a></td>
+                          <td><a href={`/benchmarks/${r.benchmark.id}/${isClaim(r.score) ? '?pool=all' : ''}`}>{r.benchmark.name}</a></td>
                           <td class="r">{fmt(r.score.value, unit)}</td>
                           <td class="bar-c">
                             {unit === '%' && <span class="mini-bar"><span style={`width:${Math.max(1, r.score.value)}%;background:${color}`} /></span>}
@@ -151,7 +151,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
           <ul class="chips">
             {sr.scores.map((x) => (
               <li>
-                <a href={`/benchmarks/${x.benchmark}/`}>{benchById.get(x.benchmark)?.name ?? x.benchmark}</a>
+                <a href={`/benchmarks/${x.benchmark}/?pool=all`}>{benchById.get(x.benchmark)?.name ?? x.benchmark}</a>
                 <span class="sc">{shortNum(x.value)}</span>
               </li>
             ))}
@@ -202,7 +202,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
               <ul class="chips">
                 {c.results.map((r) => (
                   <li>
-                    <a href={`/benchmarks/${r.benchmark}/`}>{r.as_written ?? r.benchmark}</a>
+                    <a href={`/benchmarks/${r.benchmark}/?pool=all`}>{r.as_written ?? r.benchmark}</a>
                     {r.score !== null && <span class="sc">{shortNum(r.score)}</span>}
                   </li>
                 ))}
@@ -235,7 +235,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
                   <ul class="chips">
                     {rs.map((r) => (
                       <li>
-                        <a href={`/benchmarks/${r.benchmark}/`}>{benchById.get(r.benchmark)?.name ?? r.benchmark}</a>
+                        <a href={`/benchmarks/${r.benchmark}/?pool=all`}>{benchById.get(r.benchmark)?.name ?? r.benchmark}</a>
                         {r.score !== null && <span class="sc">{shortNum(r.score)}</span>}
                       </li>
                     ))}

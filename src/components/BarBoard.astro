@@ -3,7 +3,7 @@
 // from a zero baseline, and the value at its tip. Bars are 14 px with air between rows.
 import type { Score } from '../lib/types.ts';
 import ModelName from './ModelName.astro';
-import { modelById, sourceLabel } from '../lib/data.ts';
+import { modelById, sourceLabel, isClaim, isRerun } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
@@ -42,8 +42,8 @@ const src = (s: Score) => sourceLabel(s);
         <span class="who">
           <ModelName id={s.model} setting={s.setting} name={s.name} />
         </span>
-        <span class="track" data-tv={fmt(s.value, unit)} data-tn={modelById.get(s.model)?.name ?? s.name} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}>
-          <span class="fill" style={`width:${w(s.value)};background:${labColor(modelById.get(s.model)?.lab)}`} />
+        <span class="track" data-tv={fmt(s.value, unit)} data-tn={`${modelById.get(s.model)?.name ?? s.name}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}>
+          <span class:list={['fill', { claim: isClaim(s), rerun: isRerun(s) }]} style={`width:${w(s.value)};background-color:${labColor(modelById.get(s.model)?.lab)}`} />
           <span class="val num">{fmt(s.value, unit)}</span>
         </span>
       </li>
@@ -61,7 +61,7 @@ const src = (s: Score) => sourceLabel(s);
             <ModelName id={extra.model} setting={extra.setting} />
           </span>
           <span class="track">
-            <span class="fill" style={`width:${w(extra.value)};background:${labColor(modelById.get(extra.model)?.lab)}`} />
+            <span class:list={['fill', { claim: isClaim(extra), rerun: isRerun(extra) }]} style={`width:${w(extra.value)};background-color:${labColor(modelById.get(extra.model)?.lab)}`} />
             <span class="val num">{fmt(extra.value, unit)}</span>
           </span>
         </li>
@@ -151,6 +151,17 @@ const src = (s: Score) => sourceLabel(s);
     border-radius: 0 4px 4px 0;
     flex: none;
     max-width: calc(100% - 64px);
+  }
+  /* a lab's own number: the lab color under diagonal stripes of the page color. --pat tells a downloaded chart */
+  .fill.claim {
+    background-image: repeating-linear-gradient(135deg, transparent 0 3px, color-mix(in srgb, var(--bg) 62%, transparent) 3px 5.5px);
+    --pat: stripes;
+  }
+  /* an independent rerun (Epoch AI's, or another board's): dots instead of stripes */
+  .fill.rerun {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--bg) 70%, transparent) 1.1px, transparent 1.5px);
+    background-size: 4px 4px;
+    --pat: dots;
   }
   .val {
     font-size: 13.5px;

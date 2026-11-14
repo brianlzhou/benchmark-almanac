@@ -5,7 +5,7 @@
 // arrows and a count of the ranks in view. Desktop only; phones get BarBoard.
 import type { Score } from '../lib/types.ts';
 import LabMark from './LabMark.astro';
-import { modelById, sourceLabel } from '../lib/data.ts';
+import { modelById, sourceLabel, isClaim, isRerun } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
@@ -69,7 +69,7 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
               >
                 <span class="plot">
                   <span class="v num">{scoreBare(s.value, unit)}</span>
-                  <span class="bar" style={`height:${h(s.value)}px;background:${labColor(m?.lab)}`} />
+                  <span class:list={['bar', { claim: isClaim(s), rerun: isRerun(s) }]} style={`height:${h(s.value)}px;background-color:${labColor(m?.lab)}`} />
                 </span>
                 <LabMark lab={m?.lab} size={18} class="lm" label={m ? undefined : label} />
                 <span class="n">{label}</span>
@@ -260,6 +260,17 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
   .bar {
     width: 38px;
     border-radius: 4px 4px 0 0;
+  }
+  /* a lab's own number: the lab color under diagonal stripes of the page color. --pat tells a downloaded chart */
+  .bar.claim {
+    background-image: repeating-linear-gradient(135deg, transparent 0 3px, color-mix(in srgb, var(--bg) 62%, transparent) 3px 5.5px);
+    --pat: stripes;
+  }
+  /* an independent rerun (Epoch AI's, or another board's): dots instead of stripes */
+  .bar.rerun {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--bg) 70%, transparent) 1.1px, transparent 1.5px);
+    background-size: 4px 4px;
+    --pat: dots;
   }
   .col :global(.lm) {
     margin-top: 12px;
