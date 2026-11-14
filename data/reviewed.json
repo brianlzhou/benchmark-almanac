@@ -1,6 +1,11 @@
 {
   "added": [
     {
+      "id": "real2sim",
+      "date": "2026-11-14",
+      "via": "Submitted through the benchmark form, issue #3."
+    },
+    {
       "id": "vsti-bench",
       "date": "2026-11-12",
       "via": ""

@@ -68412,6 +68412,25 @@
     ]
   },
   {
+    "id": "real2sim",
+    "name": "Real2Sim",
+    "category": "multimodal-vision",
+    "description": "Coding agents get a robot recording from DROID (three camera videos, stereo calibration, joint and gripper commands and the task instruction) and build an interactive simulation of the scene. Each scene is scored on how closely it matches the recording, on replaying the recorded actions, and on whether a fixed robot policy completes the task in it.",
+    "org": "Momentum Research Labs",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://www.real2sim.bot/",
+      "leaderboard": "https://www.real2sim.bot/#leaderboard"
+    },
+    "access": "public",
+    "confidence": "likely",
+    "evidence": [
+      "https://www.real2sim.bot/#leaderboard",
+      "https://www.real2sim.bot/runs.html"
+    ],
+    "added": "2026-11-14"
+  },
+  {
     "id": "realcompanion",
     "name": "RealCompanion",
     "category": "instruction-following-chat",
