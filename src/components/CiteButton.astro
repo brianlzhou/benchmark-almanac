@@ -1,0 +1,312 @@
+---
+// The header's cite button: a popover with a citation as text and as BibTeX, each with a copy button. On any page
+// but the home page, a switch picks this page or the almanac as a whole. The server writes the data date as the
+// access date, and the script swaps in the reader's own date when the popover opens.
+import { AS_OF } from '../lib/data.ts';
+
+export interface CiteInfo {
+  /** The title the page citation uses, when it isn't the page title: "GPQA Diamond scores". */
+  title?: string;
+  /** The work the page describes, as its makers name it: "GPQA Diamond". */
+  subject?: string;
+  /** The makers' own paper, so a reader cites the benchmark itself there and not here. */
+  source?: { label: string; url: string; bibtex?: string };
+}
+interface Props {
+  /** The page's own title, as Base gets it. The home page has none. */
+  title?: string;
+  /** The page's path, such as "/benchmarks/frontierbioml/". */
+  path: string;
+  cite?: CiteInfo;
+}
+const { title, path, cite } = Astro.props;
+
+const SITE = 'https://www.benchmarkalmanac.com';
+const NAME = 'Benchmark Almanac';
+const year = AS_OF.slice(0, 4);
+const page = path !== '/' && title ? { title: cite?.title ?? title, url: `${SITE}${path}` } : undefined;
+const source = cite?.source;
+const accessed = new Date(`${AS_OF}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+
+<div class="cite" data-cite data-site={`${SITE}/`} data-name={NAME} data-year={year} data-title={page?.title} data-url={page?.url}>
+  <button class="cite-b" type="button" popovertarget="cite-p" aria-label="Cite Benchmark Almanac" aria-haspopup="dialog" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M6.75 7.75H2.5V3.5h4.25v4.25c0 2.6-1.3 4.35-3.75 5.25M13.5 7.75H9.25V3.5h4.25v4.25c0 2.6-1.3 4.35-3.75 5.25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  <div class="cite-p" id="cite-p" popover role="dialog" aria-label="Cite">
+    <p class="cite-h">Cite {page ? 'this page' : NAME}</p>
+    {
+      source && (
+        <p class="cite-src">
+          To cite {cite?.subject ?? 'the benchmark'} itself, cite its paper, <a href={source.url}>{source.label}</a>{source.bibtex ? <> (<a href={source.bibtex}>BibTeX</a>)</> : ''}.
+        </p>
+      )
+    }
+    {
+      page && (
+        <div class="seg cite-s" role="group" aria-label="What to cite">
+          <button type="button" aria-pressed="true" data-scope="page">
+            This page
+          </button>
+          <button type="button" aria-pressed="false" data-scope="site">
+            {NAME}
+          </button>
+        </div>
+      )
+    }
+    <div class="cite-f">
+      <div class="cite-r">
+        <span>Text</span>
+        <button type="button" class="cite-c" data-copy="text">Copy</button>
+      </div>
+      <p class="cite-t" data-out="text">
+        Zhou, B. ({year}). {page ? `${page.title}. ${NAME}` : NAME}. Retrieved {accessed}, from {page ? page.url : `${SITE}/`}
+      </p>
+    </div>
+    <div class="cite-f">
+      <div class="cite-r">
+        <span>BibTeX</span>
+        <button type="button" class="cite-c" data-copy="bibtex">Copy</button>
+      </div>
+      <pre class="cite-t cite-bib" data-out="bibtex"></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+  // BibTeX's special characters, escaped so a title like "R&D" survives
+  const tex = (s: string) => s.replace(/([&%$#_{}])/g, '\\$1').replace(/~/g, '\\textasciitilde{}').replace(/\^/g, '\\textasciicircum{}');
+  const key = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-cite]')) {
+    const d = root.dataset;
+    const pop = root.querySelector<HTMLElement>('.cite-p')!;
+    const btn = root.querySelector<HTMLButtonElement>('.cite-b')!;
+    let scope: 'page' | 'site' = d.url ? 'page' : 'site';
+
+    const render = () => {
+      const accessed = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      const onPage = scope === 'page' && d.url && d.title;
+      const url = onPage ? d.url! : d.site!;
+      const text = onPage
+        ? `Zhou, B. (${d.year}). ${d.title}. ${d.name}. Retrieved ${accessed}, from ${url}`
+        : `Zhou, B. (${d.year}). ${d.name}. Retrieved ${accessed}, from ${url}`;
+      const slug = onPage ? key(d.url!.replace(d.site!, '').split('/').filter(Boolean).at(-1) ?? '') : '';
+      const bib = [
+        `@misc{zhou${d.year}${onPage ? slug : 'benchmarkalmanac'},`,
+        `  author = {Zhou, Brian},`,
+        `  title = {${tex(onPage ? d.title! : d.name!)}},`,
+        ...(onPage ? [`  howpublished = {${tex(d.name!)}},`] : []),
+        `  year = {${d.year}},`,
+        `  url = {${url}},`,
+        `  note = {Accessed ${accessed}}`,
+        `}`,
+      ].join('\n');
+      root.querySelector('[data-out="text"]')!.textContent = text;
+      root.querySelector('[data-out="bibtex"]')!.textContent = bib;
+      root.querySelector('.cite-h')!.textContent = onPage ? 'Cite this page' : `Cite ${d.name}`;
+      for (const b of root.querySelectorAll<HTMLButtonElement>('[data-scope]')) b.setAttribute('aria-pressed', String(b.dataset.scope === scope));
+    };
+    render();
+
+    pop.addEventListener('beforetoggle', (e) => {
+      if ((e as ToggleEvent).newState !== 'open') return;
+      render();
+      // under the button, its right edge on the button's, moved in so the whole popover stays 12px inside the window
+      const r = btn.getBoundingClientRect();
+      // the page keeps a scrollbar gutter, which a fixed popover can't use, so take the narrower of the two widths
+      const vw = Math.min(document.documentElement.clientWidth, document.documentElement.scrollWidth);
+      const width = Math.min(440, vw - 24);
+      pop.style.width = `${width}px`;
+      pop.style.top = `${Math.round(r.bottom + 8)}px`;
+      pop.style.right = `${Math.max(12, Math.min(Math.round(vw - r.right), vw - 12 - width))}px`;
+    });
+    pop.addEventListener('toggle', (e) => btn.setAttribute('aria-expanded', String((e as ToggleEvent).newState === 'open')));
+
+    for (const b of root.querySelectorAll<HTMLButtonElement>('[data-scope]')) {
+      b.addEventListener('click', () => {
+        scope = b.dataset.scope as 'page' | 'site';
+        render();
+      });
+    }
+
+    for (const b of root.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+      b.addEventListener('click', async () => {
+        const out = root.querySelector<HTMLElement>(`[data-out="${b.dataset.copy}"]`)!;
+        try {
+          await navigator.clipboard.writeText(out.textContent ?? '');
+        } catch {
+          // no clipboard: select the text so the reader can copy it
+          const range = document.createRange();
+          range.selectNodeContents(out);
+          const sel = getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(range);
+          return;
+        }
+        b.textContent = 'Copied';
+        b.dataset.done = '';
+        setTimeout(() => {
+          b.textContent = 'Copy';
+          delete b.dataset.done;
+        }, 1600);
+      });
+    }
+  }
+</script>
+
+<style>
+  .cite {
+    display: contents;
+  }
+  .cite-b {
+    flex: none;
+    border: 0;
+    background: none;
+    color: var(--ink-3);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+  }
+  .cite-b:hover,
+  .cite-b[aria-expanded='true'] {
+    color: var(--ink);
+    background: var(--panel);
+  }
+  .cite-b:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .cite-b svg {
+    display: block;
+  }
+  .cite-p {
+    position: fixed;
+    inset: auto;
+    /* where it opens if a reader clicks before the script has run, which then places it under the button */
+    top: calc(var(--bar-h) + 4px);
+    right: 12px;
+    margin: 0;
+    width: 440px;
+    max-width: calc(100vw - 24px);
+    padding: 16px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--ink);
+    box-shadow:
+      0 12px 32px rgb(0 0 0 / 0.14),
+      0 0 0 1px var(--line);
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cite-p:popover-open {
+    display: flex;
+    animation: cite-in 140ms ease-out;
+  }
+  @keyframes cite-in {
+    from {
+      opacity: 0;
+    }
+  }
+  .cite-h {
+    margin: 0;
+    font: 400 19px/1.2 var(--serif);
+  }
+  .cite-src {
+    margin: -4px 0 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .cite-src a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 2px;
+  }
+  .cite-src a:hover {
+    text-decoration-color: currentColor;
+  }
+  .cite-s {
+    align-self: flex-start;
+  }
+  .cite-f {
+    display: grid;
+    gap: 6px;
+  }
+  .cite-r {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .cite-c {
+    font: 500 13px/1 var(--sans);
+    color: var(--ink-2);
+    background: var(--panel);
+    border: 0;
+    border-radius: 999px;
+    padding: 6px 11px;
+    cursor: pointer;
+    transition:
+      background-color 140ms ease,
+      color 140ms ease;
+  }
+  .cite-c:hover {
+    background: var(--line);
+    color: var(--ink);
+  }
+  .cite-c[data-done] {
+    color: var(--ink);
+  }
+  .cite-c:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .cite-t {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--panel);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+    user-select: all;
+  }
+  .cite-bib {
+    font: 400 12.5px/1.55 var(--mono);
+    white-space: pre-wrap;
+  }
+  /* on a dark page a shadow disappears, so the popover sits a step lighter, as the download menu does */
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .cite-p {
+      background: var(--panel-2);
+      box-shadow:
+        0 12px 32px rgb(0 0 0 / 0.5),
+        0 0 0 1px var(--line);
+    }
+    :global(:root:not([data-theme='light'])) .cite-t {
+      background: var(--bg);
+    }
+  }
+  :global(:root[data-theme='dark']) .cite-p {
+    background: var(--panel-2);
+    box-shadow:
+      0 12px 32px rgb(0 0 0 / 0.5),
+      0 0 0 1px var(--line);
+  }
+  :global(:root[data-theme='dark']) .cite-t {
+    background: var(--bg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cite-p:popover-open {
+      animation: none;
+    }
+  }
+</style>

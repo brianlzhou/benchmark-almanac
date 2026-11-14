@@ -68,7 +68,7 @@ const finding = modelLine(ms);
 const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms.lab.name}` : ''}` : finding}. ${finding === m.name ? `Its scores on ${ms.results.length.toLocaleString('en-US')} ${ms.results.length === 1 ? 'benchmark' : 'benchmarks'}` : 'Its scores'}, its rank on each leaderboard${ms.eciRank ? `, its place on the Epoch Capabilities Index` : ''}, and what its model cards report.`;
 ---
 
-<Base title={m.name} description={metaDescription} film="index" crumbs={trail}>
+<Base title={m.name} description={metaDescription} film="index" crumbs={trail} cite={{ title: `${m.name} benchmark scores` }}>
   <div class="page">
     <header class="head split">
       <div>

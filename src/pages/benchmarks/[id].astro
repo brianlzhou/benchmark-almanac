@@ -14,6 +14,8 @@ import { host, unreadWhy } from '../../lib/unread.ts';
 import ModelName from '../../components/ModelName.astro';
 import LabMark from '../../components/LabMark.astro';
 import AuthorsWords from '../../components/AuthorsWords.astro';
+import abstractsJson from '../../../data/abstracts.json';
+import type { PaperAbstract } from '../../lib/types.ts';
 import KnownIssues from '../../components/KnownIssues.astro';
 import BoardChart from '../../components/BoardChart.astro';
 import ChartDownload from '../../components/ChartDownload.astro';
@@ -219,9 +221,18 @@ const dataset = {
   variableMeasured: { '@type': 'PropertyValue', name: 'Score', unitText: unit },
   includedInDataCatalog: { '@type': 'DataCatalog', '@id': new URL(`/${CATALOG_ID}`, Astro.site).href, name: SITE_NAME, url: new URL('/', Astro.site).href },
 };
+// the cite button names this page for what the almanac adds, and points readers to the makers' own paper for the
+// benchmark itself
+const abstract = (abstractsJson as Record<string, PaperAbstract>)[b.id];
+const arxivId = b.links?.paper?.match(/arxiv\.org\/(?:abs|pdf)\/(\d{4}\.\d{4,5})/)?.[1];
+const cite = {
+  title: `${b.name} scores`,
+  subject: b.name,
+  source: b.links?.paper ? { label: abstract?.title ?? 'linked here', url: b.links.paper, bibtex: arxivId ? `https://arxiv.org/bibtex/${arxivId}` : undefined } : undefined,
+};
 ---
 
-<Base title={b.name} description={metaDescription} crumbs={trail} jsonLd={dataset}>
+<Base title={b.name} description={metaDescription} crumbs={trail} jsonLd={dataset} cite={cite}>
   <div class:list={['page', poolOn && 'pools']}>
     <header class="head" style={`--a: var(--area-${s.area})`}>
       <Crumbs items={trail} />

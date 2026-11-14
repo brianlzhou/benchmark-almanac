@@ -7,6 +7,7 @@ import { AREAS } from '../lib/taxonomy.ts';
 import FootRidge from '../components/FootRidge.astro';
 import AreaMark from '../components/AreaMark.astro';
 import SearchBox from '../components/SearchBox.astro';
+import CiteButton, { type CiteInfo } from '../components/CiteButton.astro';
 import SeoHead, { type Film } from '../components/SeoHead.astro';
 import { SITE_DESCRIPTION } from '../lib/site.ts';
 
@@ -21,6 +22,8 @@ interface Props {
   /** Structured data for the page (schema.org), beside the breadcrumbs. */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  /** What the cite button calls this page, and the work it describes when that work has its own paper. */
+  cite?: CiteInfo;
 }
 const {
   title,
@@ -29,6 +32,7 @@ const {
   crumbs,
   jsonLd,
   noindex,
+  cite,
 } = Astro.props;
 const fullTitle = title ? `${title} | Benchmark Almanac` : 'Benchmark Almanac: AI benchmarks and who leads them';
 const path = Astro.url.pathname;
@@ -157,6 +161,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
               </button>
             </div>
           </div>
+          <CiteButton title={title} path={path} cite={cite} />
           <button class="theme" type="button" aria-label="Switch light or dark theme" data-theme-toggle>
             <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path></svg>
           </button>
@@ -483,6 +488,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   .menu-b,
   .find-b,
   .find-x {
+    flex: none;
     border: 0;
     background: none;
     color: var(--ink-3);
