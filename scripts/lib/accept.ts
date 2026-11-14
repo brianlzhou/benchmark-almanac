@@ -393,14 +393,19 @@ function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: 
   }
   if (Object.keys(recLinks).length) rec.links = recLinks;
   rec.access = ACCESS[plain(f.get('Test set'), 40) ?? ''] ?? 'unknown';
-  const scoring = plain(f.get('Scoring'), 200);
+  // the form doesn't limit the answer's length, so read a long one too. shown() shortens it in the message.
+  const scoringText = f.get('Scoring');
+  const scoring = plain(scoringText, 2000);
   if (scoring && /%|percent|accuracy|pass@|resolve|success rate/i.test(scoring)) {
     rec.unit = '%';
     rec.better = 'higher';
   } else if (scoring && /\belo\b/i.test(scoring)) {
     rec.unit = 'elo';
     rec.better = 'higher';
-  } else todo.push(`Set the unit and whether higher is better. The form says ${shown(scoring ?? 'nothing')} about scoring.`);
+  } else
+    todo.push(
+      `Set the unit and whether higher is better. ${scoring ? `The form says ${shown(scoring)} about scoring.` : scoringText ? 'The bot could not read the Scoring answer as plain text.' : 'The form says nothing about scoring.'}`,
+    );
   rec.confidence = 'likely';
   const evidence = links(f.get('Evidence'));
   if (evidence.length) rec.evidence = evidence;
@@ -408,7 +413,7 @@ function benchmarkForm(issue: Issue, f: Map<string, string>, data: Data, today: 
   todo.push('Raise confidence to "verified" once the links check out.');
   const scores = https(f.get('Scores file'));
   if (scores) todo.push(`The makers point to a scores file: ${shown(scores)}. Add an importer in scripts/leaderboards/ if its terms allow.`);
-  const license = plain(f.get('License'), 120);
+  const license = plain(f.get('License'), 600);
   if (license) todo.push(`The form gives the license ${shown(license)}.`);
 
   const benchmarks = insertSorted(data.benchmarks, rec, byName);

@@ -118,6 +118,17 @@ test('a benchmark submission becomes a new record, in name order, with its famil
   assert.ok(o.todo.some((t) => t.includes('scores.json')));
 });
 
+test('a long Scoring answer is still read', () => {
+  const i = issue('benchmark', 'submission', 'Benchmark: Quill Bench');
+  const long = `Percent of tasks resolved, pass@1. ${'Each task runs in a fresh container with the repository at its base commit. '.repeat(5)}`;
+  i.body = i.body.replace('Percent of tasks resolved, pass@1', long);
+  const o = accept(i, fixture(), TODAY);
+  const rec = (JSON.parse(o.files['data/benchmarks.json']) as Record<string, unknown>[]).find((b) => b.id === 'quill-bench-2-0')!;
+  assert.ok(long.length > 200);
+  assert.equal(rec.unit, '%');
+  assert.ok(!o.todo.some((t) => t.includes('says nothing')));
+});
+
 test('a benchmark the almanac has gets a reply, not a pull request', () => {
   const i = issue('benchmark', 'submission');
   i.body = i.body.replace('Quill Bench', 'Alpha Bench').replace('### Version\n\n2.0', '### Version\n\n_No response_');
