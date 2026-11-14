@@ -5476,6 +5476,11 @@
       "via": "micro1 benchmark index."
     },
     {
+      "id": "mka",
+      "date": "2026-11-14",
+      "via": "Google's launch post (2026-11-10). The scan queued it on 2026-11-12 under the misread name 'MKA Most', and Gemini 4 Hydrogen's model card reports it."
+    },
+    {
       "id": "mlagentbench",
       "date": "2026-11-01",
       "via": "AI R&D vertical check."

@@ -51736,5 +51736,95 @@
         "as_written": "Toolathlon (Pass@1), V4-Flash Max"
       }
     ]
+  },
+  {
+    "id": "google-gemini-4-hydrogen-2026-11-12",
+    "lab": "google",
+    "model": "gemini-4-hydrogen",
+    "date": "2026-11-12",
+    "title": "Introducing Gemini 4 Hydrogen (Google blog)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+    "tier": "mid",
+    "notes": "Scores come from the evaluation table image (gemini-4-hydrogen_benchmarks_table.gif), which matches the model card, and the Artificial Analysis Index, Tax Agent Bench and Legal Research Bench come from the text. The table names no thinking level, tools or attempt count. Terminal-Bench 4.1 is the cheating-adjusted score, and OSWorld-2.1 uses the offline subset. The AutomationBench, MKA and Artificial Analysis Index scores come from Artificial Analysis runs that Google quotes. The model card is at deepmind.google/models/model-cards/gemini-4-hydrogen, and methodology is at deepmind.google/models/evals-methodology/gemini-4-hydrogen.",
+    "results": [
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 54,
+        "unit": "index",
+        "as_written": "Artificial Analysis Intelligence Index, 54 at the xhigh thinking level (51 at the default high level)"
+      },
+      {
+        "benchmark": "swe-sweep",
+        "score": 13.5,
+        "unit": "%",
+        "as_written": "SWE-sweep"
+      },
+      {
+        "benchmark": "terminal-bench-4-1",
+        "score": 57.0,
+        "unit": "%",
+        "as_written": "Terminal-Bench 4.1 (Cheating-adjusted)"
+      },
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "score": 71.6,
+        "unit": "%",
+        "as_written": "Agents' Last Exam v1.1 (Score)"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 76.1,
+        "unit": "%",
+        "as_written": "AutomationBench-AA"
+      },
+      {
+        "benchmark": "vending-bench-2",
+        "score": 14549,
+        "unit": "USD",
+        "as_written": "Vending-Bench 2 (Bank balance $)"
+      },
+      {
+        "benchmark": "osworld-2-1-offline",
+        "score": 77.6,
+        "unit": "%",
+        "as_written": "OSWorld-2.1 (Offline subset)"
+      },
+      {
+        "benchmark": "mka",
+        "score": 53.4,
+        "unit": "%",
+        "as_written": "MKA (Climb WSR accuracy)"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 66.6,
+        "unit": "%",
+        "as_written": "Chartography"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 51.4,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1"
+      },
+      {
+        "benchmark": "hle-diamond",
+        "score": 58.8,
+        "unit": "%",
+        "as_written": "HLE-Diamond"
+      },
+      {
+        "benchmark": "vals-tax-agent-bench",
+        "score": 52.3,
+        "unit": "%",
+        "as_written": "Vals Tax Agent Bench (#1 overall)"
+      },
+      {
+        "benchmark": "legal-research-bench",
+        "score": 55.8,
+        "unit": "%",
+        "as_written": "Vals Legal Research Bench (ties for #1)"
+      }
+    ]
   }
 ]

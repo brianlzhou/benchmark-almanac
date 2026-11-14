@@ -53876,6 +53876,39 @@
     ]
   },
   {
+    "id": "mka",
+    "name": "MKA",
+    "aliases": [
+      "Multimodal Knowledge Agent",
+      "Multimodal Knowledge Agent benchmark"
+    ],
+    "category": "economic-work",
+    "subcategory": "work-occupations",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Agents complete professional tasks whose work is visual, 200 tasks across 10 fields and 83 occupations, each about three to eight hours of expert work. An agentic grader checks each deliverable against an expert rubric of about 70 yes or no checks, weighted 75% on factual accuracy and 25% on visual design.",
+    "org": "Google DeepMind and Artificial Analysis",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://storage.googleapis.com/deepmind-media/papers/mka_tech_paper.pdf",
+      "site": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/multimodal-knowledge-agent-benchmark/",
+      "dataset": "https://huggingface.co/datasets/google/multimodal-knowledge-agent",
+      "leaderboard": "https://artificialanalysis.ai/evaluations/mka"
+    },
+    "access": "public+private-holdout",
+    "note": "Artificial Analysis runs the 200-task set and keeps it private. Ten sample tasks are public on Hugging Face. Every model runs in the same agent harness, Stirrup. The grader is built on a model from outside Google, and experts agreed with it 96% of the time. Labs report Climb WSR, the weighted share of the harder rubric checks a model meets. We don't import Artificial Analysis's leaderboard, so scores here come from lab posts.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/multimodal-knowledge-agent-benchmark/",
+      "https://storage.googleapis.com/deepmind-media/papers/mka_tech_paper.pdf",
+      "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+    ],
+    "added": "2026-11-14"
+  },
+  {
     "id": "mlagentbench",
     "name": "MLAgentBench",
     "aliases": [
@@ -81147,6 +81180,7 @@
     },
     "access": "public",
     "note": "It removed 8 saturated or flawed tasks from Terminal-Bench 3.0 and set a flat 8-hour agent timeout.",
+    "successor": "terminal-bench-4-1",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
@@ -81154,8 +81188,7 @@
       "https://github.com/harbor-framework/terminal-bench",
       "https://www.tbench.ai/",
       "https://www.tbench.ai/news/terminal-bench-4-0"
-    ],
-    "successor": "terminal-bench-4-1"
+    ]
   },
   {
     "id": "terminal-bench-4-1",
