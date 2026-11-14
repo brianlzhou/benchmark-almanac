@@ -36194,6 +36194,29 @@
     ]
   },
   {
+    "id": "halluworld",
+    "name": "HalluWorld",
+    "category": "other",
+    "description": "Language models are evaluated on hallucinations across controlled reference worlds spanning gridworlds, chess, and realistic terminal environments. Each environment has a fully specified ground truth, allowing automatic evaluation of whether model claims are correct. Questions test perception, memory, causal reasoning, uncertainty/abstention, and compound reasoning under varying levels of observability, complexity, and conflicting information.",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.19341",
+      "repo": "https://github.com/DegenAI-Labs/HalluWorld",
+      "dataset": "https://huggingface.co/datasets/DegenAI-Labs/HalluWorld",
+      "leaderboard": "https://halluworld.ai/#leaderboard"
+    },
+    "access": "unknown",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://halluworld.ai/#leaderboard",
+      "https://arxiv.org/abs/2605.19341",
+      "https://github.com/DegenAI-Labs/HalluWorld",
+      "https://www.patronus.ai/research/halluworld"
+    ],
+    "added": "2026-11-14"
+  },
+  {
     "id": "halteval-prelim-meta",
     "name": "HaltEval-prelim (Meta)",
     "aliases": [
