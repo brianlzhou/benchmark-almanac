@@ -55,5 +55,19 @@ jobs:
           git add data
           git commit -m "Sync leaderboards, Epoch AI scores, GitHub repo facts and paper abstracts ($(date -u +%F))"
           git push --force origin bot/sync
-          gh pr view bot/sync --json state -q .state 2>/dev/null | grep -q OPEN || \
-            gh pr create --head bot/sync --title "Score sync" --body-file sync.log
+          # a pull request body holds at most 65,536 characters, and the full log runs far longer, so the body keeps
+          # its last 50,000 bytes and links the run for the rest
+          {
+            echo "The daily sync refreshed leaderboard scores, Epoch AI scores, GitHub repo facts and paper abstracts. The data checks and the build passed. Merge it to publish the new scores."
+            echo
+            echo "Full log: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo '```'
+            tail -c 50000 sync.log
+            echo '```'
+          } > pr-body.md
+          if gh pr view bot/sync --json state -q .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit bot/sync --body-file pr-body.md
+          else
+            gh pr create --head bot/sync --title "Score sync" --body-file pr-body.md
+          fi
