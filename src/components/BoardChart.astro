@@ -121,15 +121,21 @@ const sizes = [
     d += i === 0 ? `M${X(p.x).toFixed(1)},${Y(p.y).toFixed(1)}` : `H${X(p.x).toFixed(1)}V${Y(p.y).toFixed(1)}`;
   });
   // labels on frontier runs, flipped to the left near the right edge, and nudged apart when two would touch
-  const labels: { p: Pt; x: number; y: number; anchor: 'start' | 'end' }[] = [];
+  const labels: { p: Pt; x: number; y: number; anchor: 'start' | 'end'; x0: number; x1: number }[] = [];
   for (const p of [...frontier].sort((a, b) => b.y - a.y)) {
     const px = X(p.x);
     const anchor = px > z.w * 0.62 ? 'end' : 'start';
-    let ly = Y(p.y) - 9;
-    while (labels.some((l) => Math.abs(l.y - ly) < z.font + 2 && Math.abs(l.x - px) < 150)) ly += z.font + 3;
-    // keep the label inside the plot, above the x axis
-    ly = Math.max(z.pad.t + z.font, Math.min(ly, z.h - z.pad.b - 4));
-    labels.push({ p, x: anchor === 'start' ? px + 9 : px - 9, y: ly, anchor });
+    const x = anchor === 'start' ? px + 9 : px - 9;
+    // the label's span from an average glyph width, so two labels that would touch are found by their text
+    const w = runName(p).length * z.font * 0.56;
+    const x0 = anchor === 'start' ? x : x - w;
+    const x1 = x0 + w;
+    // below the plot's top before the overlap check, so a label pushed down from the top edge is checked where it lands
+    let ly = Math.max(z.pad.t + z.font, Y(p.y) - 9);
+    while (labels.some((l) => Math.abs(l.y - ly) < z.font + 2 && l.x0 < x1 + 6 && x0 < l.x1 + 6)) ly += z.font + 3;
+    // above the x axis
+    ly = Math.min(ly, z.h - z.pad.b - 4);
+    labels.push({ p, x, y: ly, anchor, x0, x1 });
   }
   return { ...z, X, Y, d, labels };
 });
