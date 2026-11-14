@@ -109,6 +109,10 @@ test('a benchmark submission becomes a new record, in name order, with its famil
   );
   assert.equal(list.find((b) => b.id === 'alpha-bench')!.successor, 'quill-bench-2-0');
   const reviewed = JSON.parse(o.files['data/reviewed.json']);
+  assert.deepEqual(
+    reviewed.added.map((a: { id: string }) => a.id),
+    ['quill-bench-2-0', 'zeta-qa'],
+  );
   assert.deepEqual(reviewed.added[0], { id: 'quill-bench-2-0', date: TODAY, via: 'Submitted through the benchmark form, issue #42.' });
   assert.ok(o.todo.some((t) => t.includes('data link')));
   assert.ok(o.todo.some((t) => t.includes('scores.json')));

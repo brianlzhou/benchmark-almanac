@@ -44,8 +44,9 @@ rebuilds them.
 
 1. Edit the files in `data/` that people keep by hand: `labs.json`, `models.json`, `benchmarks.json`,
    `taxonomy.json`, `cards.json`, `system-cards.json`, `audits.json`, `claim-notes.json`, `sources.json`,
-   `reviewed.json` and `resources.json`. Keep each file's order (`benchmarks.json` is sorted by name) and its
-   two-space indent.
+   `reviewed.json` and `resources.json`. Keep each file's order and its two-space indent. `benchmarks.json` is
+   sorted by name, and `reviewed.json` keeps `added` sorted by id and `rejected` sorted by name. Alphabetical
+   order puts each pull request's new lines in a different place, so two pull requests rarely conflict.
 2. Leave the files that scripts write to the scripts. The daily sync updates `data/scores/` from the leaderboards
    and Epoch AI on its own, and other scripts write `data/github.json`, `data/abstracts.json`,
    `data/discovered.json`, `data/discovered-models.json`, `data/discovered-audits.json` and `public/meaning/`.
