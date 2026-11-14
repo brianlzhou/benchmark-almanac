@@ -71,3 +71,7 @@ jobs:
           else
             gh pr create --head bot/sync --title "Score sync" --body-file pr-body.md
           fi
+          # the data checks and the build above already passed on this commit, so the sync merges itself and the new
+          # scores go live without waiting for a maintainer. A conflict with main leaves the pull request open
+          # for a person, and the next day's run rebuilds the branch from main.
+          gh pr merge bot/sync --merge || echo "::warning::The sync pull request could not merge on its own. A maintainer needs to merge it."
