@@ -27150,7 +27150,7 @@
       "site": "https://www.perceptron.inc/blog/egohome"
     },
     "access": "public",
-    "note": "Perceptron released it with its own Perceptron Egocentric model. Scores run from 0 to 1, with one score per annotation type. The data is CC BY-NC 4.0.",
+    "note": "Perceptron released it with Perceptron Egocentric 1.0. Each annotation type gets its own score from 0 to 1, and the headline here is the subtask score, which the card plots against cost. Perceptron averaged its own model over several runs, and every other system ran once. The data is CC BY-NC 4.0, with a grant that lets anyone evaluate models on it and publish the results.",
     "unit": "score",
     "better": "higher",
     "confidence": "verified",
@@ -31449,6 +31449,35 @@
       "https://api.github.com/repos/Einsia/Frontier3D"
     ],
     "added": "2026-11-08"
+  },
+  {
+    "id": "frontierbioml",
+    "name": "FrontierBioML",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "25 machine learning tasks in computational biology, across antibody development, protein engineering, structural biology, binder design and functional genomics. An agent gets real experimental data and a brief, works offline for up to six hours and submits a prediction script. A sealed grader runs the script on held-out data, such as new antibody families or new protein targets, and scores each task from 0 at a simple baseline to 100 for a perfect answer.",
+    "org": "Valen Labs",
+    "released": "2026-11",
+    "links": {
+      "site": "https://valenlabs.com/blog/frontierbioml",
+      "leaderboard": "https://www.frontierbioml.com/",
+      "dataset": "https://hub.harborframework.com/datasets/valenlabs/frontierbioml"
+    },
+    "access": "public+private-holdout",
+    "note": "Each model runs in a coding harness such as Claude Code, Codex CLI or OpenCode, three times per task. Runs that fail a check or that a provider's safety filter blocks count as 0. OpenAI's biosafety filter blocked 36 of 150 GPT runs because Valen is not in OpenAI's trusted access program. Both Claude models ran under Anthropic's Life Science Verification Program. Scores are not comparable across tasks. The tasks use public datasets, and Valen reports that one model named a dataset's source from memory. Four tasks are public on Harbor and the Prime Intellect Environments Hub. The other 21 are available on request.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://valenlabs.com/blog/frontierbioml",
+      "https://www.frontierbioml.com/method.html",
+      "https://www.frontierbioml.com/data/data.js",
+      "https://hub.harborframework.com/datasets/valenlabs/frontierbioml"
+    ],
+    "added": "2026-11-14"
   },
   {
     "id": "frontiercad",

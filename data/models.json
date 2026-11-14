@@ -13932,10 +13932,22 @@
     "tier": "flagship",
     "card": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
     "aliases": [
-      "Claude Fable 5.2 / Mythos 5.2",
-      "Claude Mythos 5.2"
+      "Claude Fable 5.2 / Mythos 5.2"
     ],
     "epoch": "Claude Fable 5.2"
+  },
+  {
+    "id": "claude-mythos-5-2",
+    "name": "Claude Mythos 5.2",
+    "lab": "anthropic",
+    "family": "Claude Mythos",
+    "released": "2026-11-09",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+    "aliases": [
+      "Claude Mythos 5.2"
+    ]
   },
   {
     "id": "muse-ember",

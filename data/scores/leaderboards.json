@@ -11339,6 +11339,34 @@
         "Gemini-1.5-Pro (snapshot unspecified)"
       ]
     },
+    "egohome": {
+      "url": "https://huggingface.co/datasets/PerceptronAI/EgoHome#egohome-results",
+      "feed": "https://huggingface.co/datasets/PerceptronAI/EgoHome/raw/main/README.md (results table, Subtask column)",
+      "terms": "The dataset card is CC BY-NC 4.0, with a grant that lets anyone use EgoHome to evaluate models and publish results.",
+      "retrieved": "2026-11-14",
+      "rows": 6,
+      "unmatched": [
+        "FLORA (NVIDIA)",
+        "Glimpse (Elorian)",
+        "Perceptron Egocentric"
+      ],
+      "chart": {
+        "title": "Subtask score against subtask cost per video-hour",
+        "x": {
+          "key": "costPerHour",
+          "label": "Subtask cost per video-hour",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Subtask score",
+          "better": "higher"
+        },
+        "note": "The card plots each system’s subtask score against what one hour of video costs to annotate."
+      }
+    },
     "egolife-with-memory": {
       "url": "https://arxiv.org/html/2503.03803",
       "feed": "https://arxiv.org/html/2503.03803",
@@ -12920,6 +12948,29 @@
       "retrieved": "2026-11-12",
       "rows": 11,
       "unmatched": []
+    },
+    "frontierbioml": {
+      "url": "https://www.frontierbioml.com/",
+      "feed": "https://www.frontierbioml.com/data/data.js (window.FBML_DATA, every run)",
+      "terms": "The site states no terms of use and has no robots.txt. It names data/data.js as the source of its raw scores.",
+      "retrieved": "2026-11-14",
+      "rows": 11,
+      "unmatched": [],
+      "chart": {
+        "title": "Score against time",
+        "x": {
+          "key": "minutes",
+          "label": "Median agent minutes per run",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean score",
+          "better": "higher"
+        },
+        "note": "The board plots each agent’s mean score against its median minutes per run."
+      }
     },
     "frontiercad-assemblies": {
       "url": "https://normal.ai/research/frontiercad",
@@ -59186,6 +59237,12 @@
     ["ego3d-bench","internvl3-78b",null,"Ego3D-VLM",7.4,"2025-04-11",null,null,{"accuracy":71.8,"egoDistanceRMSE":6.8,"objectDistanceRMSE":8.1}],
     ["ego3d-bench","internvl3-8b",null,null,27.2,"2025-04-11",null,null,{"accuracy":43.1,"egoDistanceRMSE":15.2,"objectDistanceRMSE":39.1}],
     ["ego3d-bench","internvl3-8b",null,"Ego3D-VLM",8,"2025-04-11",null,null,{"accuracy":60.1,"egoDistanceRMSE":6.8,"objectDistanceRMSE":9}],
+    ["egohome","gemini-3-8-flash","4 fps video",null,0.663,"2026-09-02",null,null,{"handAction":0.405,"handCaption":0.558,"handBox":0.454,"costPerHour":1.3}],
+    ["egohome","gemini-3-8-flash","1 fps video",null,0.639,"2026-09-02",null,null,{"handAction":0.39,"handCaption":0.557,"handBox":0.574}],
+    ["egohome","gpt-6-astra","4 fps frames",null,0.797,"2026-09-03",null,null,{"handAction":0.498,"handCaption":0.749,"handBox":0.979,"costPerHour":76}],
+    ["egohome","gpt-6-astra","1 fps frames",null,0.775,"2026-09-03",null,null,{"handAction":0.479,"handCaption":0.724,"handBox":0.865,"costPerHour":20}],
+    ["egohome","gpt-6-astra",null,"Argus (Pantheon)",0.367,"2026-09-03",null,null,{"handAction":0.336,"handCaption":0.593,"costPerHour":24.17}],
+    ["egohome","gpt-6-1-sol","Midcentury's settings","Argus (Pantheon)",0.315,"2026-09-29",null,null,{"handAction":0.327,"handCaption":0.59,"costPerHour":7.76}],
     ["elimination-game","gpt-4o-mini",null,null,3.299,"2024-07-18",null,null,{"sigma":0.144,"games":1114}],
     ["elimination-game","llama-3-1-405b",null,null,3.072,"2024-07-23",null,null,{"sigma":0.172,"games":784}],
     ["elimination-game","claude-3-5-haiku",null,null,3.154,"2024-10-22",null,null,{"sigma":0.139,"games":1193}],
@@ -60901,6 +60958,17 @@
     ["frontier3dbench","minimax-m3-1-flash","max","Claude Code",52.55,"2026-10-19",null,null,{"l1":58.98,"l2":60.55,"l3":41.74}],
     ["frontier3dbench","kimi-k3-1-pro","max","Kimi CLI",55.96,"2026-10-23",null,null,{"l1":61.34,"l2":59.42,"l3":49.34}],
     ["frontier3dbench","doubao-seed-evolving-nov-2026","max","Claude Code",42.94,"2026-11-02",null,null,{"l1":51.24,"l2":49.58,"l3":31.72}],
+    ["frontierbioml","gpt-6-astra","max effort","Codex CLI (Azure)",28.8,"2026-09-03",10.3,86925,{"failed":0,"refused":19,"minutes":32.9,"medianCost":8.2}],
+    ["frontierbioml","deepseek-v4-1-flash","max effort","OpenCode",22.4,"2026-09-09",0.21,73812,{"failed":5,"refused":0,"minutes":89.7,"medianCost":0.19}],
+    ["frontierbioml","grok-4-7","xhigh effort","OpenCode",24,"2026-09-21",5.04,62856,{"failed":1,"refused":0,"minutes":39.4,"medianCost":4.68}],
+    ["frontierbioml","claude-opus-5-5","max effort","Claude Code",36.5,"2026-09-22",12.58,211660,{"failed":0,"refused":0,"minutes":73,"medianCost":11.46}],
+    ["frontierbioml","gpt-6-1-sol","max effort","Codex CLI",29.1,"2026-09-29",1.96,100641,{"failed":0,"refused":17,"minutes":26.4,"medianCost":1.62}],
+    ["frontierbioml","gemini-4-argon","high effort","OpenCode",36.8,"2026-09-30",6.71,166148,{"failed":1,"refused":0,"minutes":93.7,"medianCost":6.38}],
+    ["frontierbioml","muse-wonder","max effort","OpenCode",26.9,"2026-10-12",6.38,64756,{"failed":0,"refused":0,"minutes":34.1,"medianCost":5.96}],
+    ["frontierbioml","nemotron-3-5-super-vl","reasoning on","OpenCode (PrimeIntellect)",11,"2026-10-15",0.11,22290,{"failed":13,"refused":0,"minutes":12.3,"medianCost":0.1}],
+    ["frontierbioml","kimi-k3-1-pro","max effort","OpenCode",25.8,"2026-10-23",2.29,30893,{"failed":4,"refused":0,"minutes":33.9,"medianCost":2.08}],
+    ["frontierbioml","gemini-4-carbon","high effort","OpenCode",39,"2026-10-28",8.52,250637,{"failed":0,"refused":0,"minutes":106.9,"medianCost":7.64}],
+    ["frontierbioml","claude-mythos-5-2","max effort","Claude Code",40.3,"2026-11-09",48.17,412480,{"failed":0,"refused":0,"minutes":147.3,"medianCost":45.67}],
     ["frontiercad-assemblies","grok-4-6","xhigh; original evaluation inputs","grok-build",0.3335,"2026-08-12",null,null,{"scheduled":16,"scored":16,"scoreLow":0.19838,"scoreHigh":0.49125,"passRate":12.5,"tokenCoverage":0,"turnCoverage":0}],
     ["frontiercad-assemblies","glm-5-3-flash","max; original evaluation inputs","opencode",0.0754,"2026-08-20",null,null,{"scheduled":16,"scored":16,"scoreLow":0.037297,"scoreHigh":0.1231,"passRate":0,"tokenCoverage":0,"turnCoverage":0}],
     ["frontiercad-assemblies","claude-fable-5-1","max; original evaluation inputs","claude-code",0.6182,"2026-09-01",null,null,{"scheduled":16,"scored":16,"scoreLow":0.47928,"scoreHigh":0.75488,"passRate":18.75,"tokenCoverage":0,"turnCoverage":0}],
@@ -93519,6 +93587,11 @@
     ["ego3d-bench","GPT-4o (snapshot unspecified)",null,null,19.2,null,null,null,{"accuracy":56.7,"egoDistanceRMSE":8.5,"objectDistanceRMSE":29.5}],
     ["ego3d-bench","GPT-4o (snapshot unspecified)",null,"Ego3D-VLM",7.4,null,null,null,{"accuracy":73.2,"egoDistanceRMSE":6.3,"objectDistanceRMSE":8.4}],
     ["ego3d-bench","Gemini-1.5-Pro (snapshot unspecified)",null,"Ego3D-VLM",7.2,null,null,null,{"accuracy":73.1,"egoDistanceRMSE":6.6,"objectDistanceRMSE":7.8}],
+    ["egohome","Perceptron Egocentric","8 fps, option",null,0.798,"2026-11-04",null,null,{"handAction":0.421,"handCaption":0.626,"handBox":0.973,"costPerHour":15}],
+    ["egohome","Perceptron Egocentric","4 fps, default",null,0.787,"2026-11-04",null,null,{"handAction":0.421,"handCaption":0.613,"handBox":0.942,"costPerHour":9}],
+    ["egohome","FLORA (NVIDIA)",null,null,0.747,"2026-11-04",null,null,{"costPerHour":35.39}],
+    ["egohome","Glimpse (Elorian)","4 fps video",null,0.689,"2026-11-04",null,null,{"handAction":0.39,"handCaption":0.56,"handBox":0.489,"costPerHour":2.8}],
+    ["egohome","Glimpse (Elorian)","1 fps video",null,0.59,"2026-11-04",null,null,{"handAction":0.353,"handCaption":0.56,"handBox":0.247}],
     ["egolife-with-memory","Gemini-1.5-Pro (snapshot unspecified)","frames -, audio ✓, identity ✗","EgoButler",36.9,null,null,null,{"entityLog":36,"eventRecall":37.3,"habitInsight":45.9,"relationMap":30.4,"taskMaster":34.9}],
     ["egolife-with-memory","GPT-4o (snapshot unspecified)","frames 1 FPS, audio ✗, identity ✗","EgoButler",36.2,null,null,null,{"entityLog":34.4,"eventRecall":42.1,"habitInsight":29.5,"relationMap":30.4,"taskMaster":44.4}],
     ["egolife-with-memory","EgoGPT (EgoIT-99K+D1)","frames 1 FPS, audio ✓, identity ✓","EgoButler",36,null,null,null,{"entityLog":39.2,"eventRecall":36.5,"habitInsight":31.1,"relationMap":33.6,"taskMaster":39.7}],
