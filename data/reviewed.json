@@ -1,6 +1,11 @@
 {
   "added": [
     {
+      "id": "egohome",
+      "date": "2026-11-13",
+      "via": "Perceptron released it with Perceptron Egocentric 1.0, with code on GitHub and data on Hugging Face."
+    },
+    {
       "id": "vsti-bench",
       "date": "2026-11-12",
       "via": ""
