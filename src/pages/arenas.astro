@@ -13,6 +13,8 @@ import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptio
 import { AREAS, CATEGORY_NAMES, LEVELS, SUB_BY_ID, SUBCATEGORIES, RANKED_BY_PEOPLE_OR_MATCHES } from '../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../lib/format.ts';
 import { familyOf, nextVersion } from '../lib/reigns.ts';
+import { makerId, makerParts, makers } from '../lib/makers.ts';
+import { isArena } from '../lib/counts.ts';
 import reviewedJson from '../../data/reviewed.json';
 
 // where the newest score came from, for the Last added column's tooltip
@@ -109,7 +111,15 @@ const probe = {
   added: longest(everyRow.map((s) => monthYear(s.lastAdded?.date))),
 };
 const kindOf = (s: (typeof all)[number]) => (s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
-const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length);
+const boards = rows.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length || a.b.name.localeCompare(b.b.name));
+// The grid shows one arena per maker, its largest. Design Arena alone runs 36 boards, so a plain "most rated
+// models" cut filled most of the grid with its categories. Each board links to its maker's page, which has the rest.
+// A maker is the lead name in the "Made by" field: "Kaggle and Google DeepMind" counts toward Kaggle.
+const makerOf = (s: (typeof boards)[number]) => makerId(makerParts(s.b.org ?? '')[0]?.text ?? '') ?? s.b.org ?? '';
+const byMaker = new Map<string, typeof boards>();
+for (const s of boards) byMaker.set(makerOf(s), [...(byMaker.get(makerOf(s)) ?? []), s]);
+const leads = [...byMaker.values()].map((v) => v[0]);
+const SHOWN = 9;
 // the header hovers: what each column means
 const ATIPS = {
   released: 'When the arena opened, from its paper or its launch.',
@@ -325,11 +335,35 @@ const ATIPS = {
         <section id="boards">
           <div class="sh">
             <h2>Arena leaderboards</h2>
-            <p>Top five in each of the {Math.min(9, boards.length)} arenas with the most rated models.</p>
+            <p>
+              Top five in the largest arena from each of the {byMaker.size} makers. Some makers run many arenas, so we show one each here. Their names link to every arena they run.
+            </p>
           </div>
           <div class="grid3">
-            {boards.slice(0, 9).map((s) => <MiniBoard s={s} />)}
+            {
+              leads.map((s, i) => {
+                const id = makerOf(s);
+                const maker = makers.get(id);
+                // every arena on the maker's page, earlier versions and ones without a board included
+                const n = maker ? maker.ids.filter((x) => isArena(byId.get(x)?.b ?? {})).length : 1;
+                return (
+                  <div class="mbw" hidden={i >= SHOWN}>
+                    <MiniBoard s={s} />
+                    {maker && (
+                      <a class="mk-l" href={`/makers/${id}/`}>
+                        {n > 2 ? `All ${n} arenas from ${maker.name}` : n === 2 ? `Both arenas from ${maker.name}` : `More from ${maker.name}`}
+                      </a>
+                    )}
+                  </div>
+                );
+              })
+            }
           </div>
+          {leads.length > SHOWN && (
+            <button type="button" class="more-rows" data-boards-more>
+              Show all {leads.length}
+            </button>
+          )}
         </section>
       )
     }
@@ -415,6 +449,13 @@ const ATIPS = {
     fbtn.setAttribute('aria-expanded', String(open));
     box?.classList.toggle('fopen', open);
   });
+  // the arena leaderboards past the first nine wait behind one button
+  const bmore = document.querySelector<HTMLButtonElement>('[data-boards-more]');
+  bmore?.addEventListener('click', () => {
+    for (const c of document.querySelectorAll<HTMLElement>('#boards .mbw')) c.hidden = false;
+    bmore.hidden = true;
+  });
+
   // the column names stick under the filter row, so the row's height sets where
   const frow = box?.querySelector<HTMLElement>('.frow');
   if (box && frow) new ResizeObserver(() => box.style.setProperty('--frow-h', `${frow.offsetHeight}px`)).observe(frow);
@@ -716,6 +757,22 @@ const ATIPS = {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 56px 48px;
+  }
+  .ax .mbw {
+    min-width: 0;
+  }
+  .ax .mk-l {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  .ax .mk-l:hover {
+    color: var(--ink);
+    text-decoration-color: currentColor;
   }
   /* narrower windows drop the least needed columns first, so the table never scrolls sideways */
   @media (max-width: 1340px) {
