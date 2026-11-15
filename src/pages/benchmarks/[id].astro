@@ -26,7 +26,7 @@ import Crumbs from '../../components/Crumbs.astro';
 import AreaMark from '../../components/AreaMark.astro';
 import Spark from '../../components/Spark.astro';
 import LinkIcon from '../../components/LinkIcon.astro';
-import { makerParts } from '../../lib/makers.ts';
+import { makerParts, makerId, makers } from '../../lib/makers.ts';
 import { isArena } from '../../lib/counts.ts';
 import { familyOf } from '../../lib/reigns.ts';
 import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores, sourceLabel, fromName } from '../../lib/data.ts';
@@ -343,7 +343,7 @@ const cite = {
                 <dd>
                   {/* separator and name on one line: a line break between them renders as a space before the comma */}
                   {makerParts(b.org).map((p) => (
-                    <>{p.sep}{p.lab && labPages.has(p.lab) ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`${arena ? '/arenas/' : '/benchmarks/'}?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`${arena ? 'Arenas' : 'Benchmarks'} made by ${p.text}`}>{p.text}</a>}</>
+                    <>{p.sep}{makers.has(makerId(p.text) ?? '') ? <a class="mk" href={`/makers/${makerId(p.text)}/`} title={`Everything ${makers.get(makerId(p.text)!)!.name} made`}>{p.text}</a> : p.lab && labPages.has(p.lab) ? <a class="mk" href={`/labs/${p.lab}/`}>{p.text}</a> : <a class="mk" href={`${arena ? '/arenas/' : '/benchmarks/'}?q=${encodeURIComponent(p.text.toLowerCase())}`} title={`${arena ? 'Arenas' : 'Benchmarks'} made by ${p.text}`}>{p.text}</a>}</>
                   ))}
                 </dd>
               </div>

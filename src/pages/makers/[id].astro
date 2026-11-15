@@ -1,0 +1,189 @@
+---
+// One maker's page: every benchmark and arena an organization made or helped make, its arenas' top fives first,
+// then its benchmarks as a table. Makers with two or more records get a page (src/lib/makers.ts), and each
+// benchmark page's "Made by" names link here.
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import LabMark from '../../components/LabMark.astro';
+import MiniBoard from '../../components/MiniBoard.astro';
+import { benchSummary, modelById } from '../../lib/data.ts';
+import { makers } from '../../lib/makers.ts';
+import { isArena } from '../../lib/counts.ts';
+import { CATEGORY_NAMES, SUB_BY_ID } from '../../lib/taxonomy.ts';
+import { score as fmt, monthYear } from '../../lib/format.ts';
+
+export function getStaticPaths() {
+  return [...makers.keys()].map((id) => ({ params: { id } }));
+}
+
+const m = makers.get(Astro.params.id!)!;
+const all = m.ids
+  .map((id) => benchSummary(id))
+  .sort((a, b) => b.cites.length + b.docCites.length - (a.cites.length + a.docCites.length) || b.nScores - a.nScores || a.b.name.localeCompare(b.b.name));
+const tests = all.filter((s) => !isArena(s.b));
+const arenas = all.filter((s) => isArena(s.b));
+// arenas with a board here, the most rated models first, the way the Arenas page orders them
+const boards = arenas.filter((s) => s.board.length >= 3).sort((a, b) => b.board.length - a.board.length || a.b.name.localeCompare(b.b.name));
+const quiet = arenas.filter((s) => s.board.length < 3);
+const SHOWN = 9;
+
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
+const plural = (n: number, one: string) => `${n.toLocaleString('en-US')} ${n === 1 ? one : `${one}s`}`;
+const counts = [tests.length && plural(tests.length, 'benchmark'), arenas.length && plural(arenas.length, 'arena')].filter(Boolean).join(' and ');
+const kindOf = (s: (typeof all)[number]) => (s.b.subcategory ? SUB_BY_ID.get(s.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[s.b.category ?? 'other'] ?? 'Other';
+const trail = arenas.length > tests.length ? [{ href: '/arenas/', label: 'Arenas' }] : [{ href: '/benchmarks/', label: 'Benchmarks' }];
+---
+
+<Base title={m.name} description={`The ${counts} ${m.name} made that we track, and which model leads each one.`} crumbs={trail}>
+  <div class="page">
+    <header class="head">
+      <Crumbs items={trail} />
+      <h1 class:list={[{ 'with-mark': m.lab }]}>{m.lab && <LabMark lab={m.lab} size={44} />}{m.name}</h1>
+      <p class="lede">
+        We track {counts} that {m.name} made or helped make.{m.lab && <> Its models are on <a href={`/labs/${m.lab}/`}>its lab page</a>.</>}
+      </p>
+      <div class="facts">
+        <span><b>{all.filter((s) => s.status === 'in use').length}</b> in use</span>
+        <span><b>{all.filter((s) => !!s.b.links?.repo).length}</b> with public code</span>
+        <span><b>{all.filter((s) => s.board.length >= 3).length}</b> with a leaderboard here</span>
+      </div>
+    </header>
+
+    {
+      boards.length > 0 && (
+        <section data-boards data-shown={SHOWN}>
+          <div class="sh">
+            <h2>Arena leaderboards</h2>
+            <p>
+              Top five in each of its {plural(boards.length, 'arena')} with three or more rated models, the most rated first.
+              {quiet.length > 0 && ` We don't have a leaderboard yet for ${quiet.length === 1 ? 'one other' : `${quiet.length} others`}, listed below.`}
+            </p>
+          </div>
+          <div class="grid3">
+            {boards.map((s, i) => (
+              <div class="mbw" hidden={i >= SHOWN}>
+                <MiniBoard s={s} />
+              </div>
+            ))}
+          </div>
+          {boards.length > SHOWN && (
+            <button type="button" class="more-rows" data-boards-more>
+              Show all {boards.length}
+            </button>
+          )}
+        </section>
+      )
+    }
+
+    {
+      [
+        { title: 'Benchmarks', xs: tests },
+        { title: boards.length ? 'Arenas without a leaderboard here' : 'Arenas', xs: quiet },
+      ]
+        .filter((g) => g.xs.length)
+        .map((g) => (
+          <section>
+            <div class="sh">
+              <h2>{g.title}</h2>
+            </div>
+            <div class="table-wrap">
+              <table class="t" data-sort>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Kind</th>
+                    <th class="r">Released</th>
+                    <th class="r">Best score</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {g.xs.map((s) => {
+                    const lead = s.best ? modelById.get(s.best.model) : undefined;
+                    return (
+                      <tr>
+                        <td class="nm">
+                          <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                          {s.b.description && <span class="desc">{s.b.description}</span>}
+                        </td>
+                        <td class="muted">{kindOf(s)}</td>
+                        <td class="r muted num nowrap" data-v={s.b.released}>{monthYear(s.b.released)}</td>
+                        <td class="r nowrap" data-v={s.best && (s.b.unit ?? '%') === '%' ? String(s.best.value) : undefined}>
+                          {s.best && lead && (
+                            <span class="best" title={lead.name}>
+                              <LabMark lab={lead.lab} size={14} />
+                              {fmt(s.best.value, s.b.unit ?? '%')}
+                            </span>
+                          )}
+                        </td>
+                        <td class="nowrap">
+                          <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                            <span class="dot" />
+                            {STATUS[s.status]}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))
+    }
+  </div>
+</Base>
+
+<script>
+  // the arena leaderboards past the first nine wait behind one button
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-boards-more]')) {
+    b.addEventListener('click', () => {
+      for (const c of b.closest('section')!.querySelectorAll<HTMLElement>('.mbw')) c.hidden = false;
+      b.hidden = true;
+    });
+  }
+</script>
+
+<style>
+  .with-mark {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 56px 48px;
+  }
+  .mbw {
+    min-width: 0;
+  }
+  .nm a {
+    font-weight: 500;
+  }
+  .desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--ink-3);
+    font-size: 13px;
+    max-width: 58ch;
+  }
+  .best {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 1080px) {
+    .grid3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 720px) {
+    .grid3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
