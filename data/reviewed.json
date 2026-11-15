@@ -226,6 +226,26 @@
       "via": "Table 12 of the ChatGPT Agent System Card."
     },
     {
+      "id": "active-swe",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated repository had 105 stars in the required first-run snapshot. Its primary documentation was opened in this run."
+    },
+    {
+      "id": "activevision",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The paper has 26 refreshed Hugging Face upvotes, near the brief approximate 30 threshold. Its full primary paper also publishes scored comparisons of six current frontier models."
+    },
+    {
+      "id": "ad-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker leaderboard reports ten models. Its repository and paper were opened in this run."
+    },
+    {
+      "id": "ada-leval",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. OpenCompass made and hosts this evaluation. The maker repository and paper were opened in this run."
+    },
+    {
       "id": "adaexplorebench",
       "date": "2026-11-01",
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
@@ -271,6 +291,11 @@
       "via": "MedGemma and MedGemma 1.5 model card, text evaluation table."
     },
     {
+      "id": "afrobench-lite",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker results file includes 24 models, with GPT-5, Gemini 3 Pro, Claude 4.5 Sonnet, and other recent models."
+    },
+    {
       "id": "agencybench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -284,6 +309,11 @@
       "id": "agent-replay-auto-review-openai",
       "date": "2026-11-12",
       "via": "The GPT-Rosalind-6 system card addendum reports this named evaluation."
+    },
+    {
+      "id": "agent-reward-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList and Benchmark Radar. The refreshed paper lookup has 29 upvotes, near the stated 30 threshold. SEAgent independently evaluates its World State Model on AgentRewardBench."
     },
     {
       "id": "agent-safetybench",
@@ -331,6 +361,11 @@
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
     },
     {
+      "id": "agentick",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker leaderboard reports more than five distinct recent models, including GPT-6 Astra, Claude Opus 5, and GPT-5.6 variants."
+    },
+    {
       "id": "agenticvbench",
       "date": "2026-11-01",
       "via": "Qwen3.8-Omni-Flash launch post benchmark table."
@@ -361,6 +396,16 @@
       "via": "Snorkel leaderboard index listed Agents' Last Exam V1.1 next to the archived v1."
     },
     {
+      "id": "agentset-reranker-eval",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker publishes twelve reranker results, including Cohere Rerank 4, Voyage Rerank 2.5, Qwen3 Reranker, and Zerank."
+    },
+    {
+      "id": "agentswe",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated benchmark paper has 56 refreshed Hugging Face upvotes. The opened repository and full paper define tasks, held-out cases, execution gates, and rubric-based scoring."
+    },
+    {
       "id": "agentworldbench",
       "date": "2026-11-01",
       "via": "Qwen-AgentWorld-35B-A3B model card lists the dataset Qwen/AgentWorldBench."
@@ -379,6 +424,16 @@
       "id": "ai-diplomacy",
       "date": "2026-11-01",
       "via": "Arena survey: multi-agent Diplomacy games between models."
+    },
+    {
+      "id": "ai-spreadsheet-benchmark",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dataset card reports five spreadsheet assistants under a shared protocol."
+    },
+    {
+      "id": "aidabench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. SenseTime Research reports the benchmark in its technical paper with eleven model evaluations. OpenCompass indexing alone was not used as evidence."
     },
     {
       "id": "aidanbench",
@@ -576,6 +631,11 @@
       "via": "HF paper search for benchmark papers with 35 or more upvotes."
     },
     {
+      "id": "app-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker leaderboard reports ten tools. The maker methodology and published citation establish scoring and release date."
+    },
+    {
       "id": "appworld",
       "date": "2026-11-01",
       "via": "UK AISI inspect_evals register folder appworld (added 2026-07)."
@@ -589,6 +649,11 @@
       "id": "appworld-test-normal",
       "date": "2026-11-08",
       "via": "Held leaderboard tracks get separate records, a rule set on 2026-11-08."
+    },
+    {
+      "id": "aqua-rat",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated repository had 341 stars in the required first-run snapshot. Its primary documentation was opened in this run."
     },
     {
       "id": "arabculture",
@@ -639,6 +704,11 @@
       "id": "arena-image-to-webdev",
       "date": "2026-11-01",
       "via": "Arena leaderboard navigation. Launch month 2026-04 comes from a search snippet of Arena's 2026-04-15 announcement."
+    },
+    {
+      "id": "argus-inspection",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Shanghai Artificial Intelligence Laboratory reports the named benchmark in an opened technical paper. OpenCompass indexing alone was not used as evidence."
     },
     {
       "id": "arkitscenes",
@@ -706,6 +776,11 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "asynctool",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated benchmark repository had 101 stars in the required first-run snapshot. Its README and paper were opened in this run."
+    },
+    {
       "id": "athenabench",
       "date": "2026-11-01",
       "via": "Appendix A.4 and Table 14 of the Qwen3-Coder-Next technical report."
@@ -726,6 +801,11 @@
       "via": "open-compass GitHub organization and HF spaces list."
     },
     {
+      "id": "atrex-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Alibaba reports six frontier coding agents in its technical report."
+    },
+    {
       "id": "attaq",
       "date": "2026-11-01",
       "via": "IBM's Granite 4.1 model card reports AttaQ in its safety rows, and the almanac had no record."
@@ -736,6 +816,11 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "audio-reasoning-challenge-2026",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports 14 single-model entrants and 16 agent systems in the 2026 challenge."
+    },
+    {
       "id": "audio-understanding-benchmark-mistral",
       "date": "2026-11-01",
       "via": "Mistral's Voxtral launch post (2025-07-15) charts the AU Benchmark next to speech versions of MMLU, TriviaQA and GSM8K."
@@ -744,6 +829,16 @@
       "id": "audiobench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "audiotrust",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated benchmark repository had 220 stars in the required first-run snapshot. Its README and paper were opened in this run."
+    },
+    {
+      "id": "autoadvexbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Google DeepMind and ETH Zurich report the benchmark in an opened technical paper. The OpenCompass catalog label was not treated as authorship."
     },
     {
       "id": "autobaxbench",
@@ -764,6 +859,11 @@
       "id": "automated-llm-speedrunning-benchmark-meta",
       "date": "2026-11-01",
       "via": "Web search for Intology NanoGPT-Bench."
+    },
+    {
+      "id": "automedbench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker site reports seven agentic models and publishes its scoring rubric. The site, repository, and paper were opened in this run."
     },
     {
       "id": "autopatchbench",
@@ -789,6 +889,11 @@
       "id": "av-speakerbench",
       "date": "2026-11-01",
       "via": "Qwen3.5-Omni launch post audio-visual table."
+    },
+    {
+      "id": "avgen-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Microsoft reports results for more than five current generation systems, including Seedance 2.0, Veo 3.1, Sora 2, Wan2.6, and Kling 2.6."
     },
     {
       "id": "avmeme-exam",
@@ -824,6 +929,11 @@
       "id": "babilong",
       "date": "2026-11-01",
       "via": "lm-evaluation-harness task folder babilong."
+    },
+    {
+      "id": "babyai",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated repository had 772 stars in the required first-run snapshot. Its primary documentation was opened in this run."
     },
     {
       "id": "backendbench-meta",
@@ -894,6 +1004,16 @@
       "id": "benchcad-2-1-beta",
       "date": "2026-11-10",
       "via": "Fable 5.2 system card evaluation and version review."
+    },
+    {
+      "id": "benchmax",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The paper has 50 refreshed Hugging Face upvotes. Its primary paper and repository establish a named multilingual adaptation suite. OpenCompass indexing was not used as authorship evidence."
+    },
+    {
+      "id": "benger",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker publishes a twelve-system results table, including Gemini 3.1 Pro, Opus 4.7, GPT-5.4, Sonnet 4.6, and Gemini 3.1 Flash-Lite."
     },
     {
       "id": "big-bench",
@@ -1039,6 +1159,11 @@
       "id": "blimp",
       "date": "2026-11-01",
       "via": "lm-evaluation-harness task folder blimp."
+    },
+    {
+      "id": "blind-spots-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated paper has 30 refreshed Hugging Face upvotes. Its opened repository and full paper document the tasks, reference solutions, and grading protocol."
     },
     {
       "id": "blueprint-bench",
@@ -1204,6 +1329,11 @@
       "id": "cais-vision-capabilities-index",
       "date": "2026-11-01",
       "via": "The CAIS simple-evals README led to the dashboard, whose bundle defines the vision index."
+    },
+    {
+      "id": "calm",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated repository had 120 stars in the required first-run snapshot. Its primary documentation was opened in this run."
     },
     {
       "id": "canitedit",
@@ -1431,6 +1561,11 @@
       "via": "Google DeepMind's Gemini 3.5 Flash Cyber launch post (2026-07-21) charts both in-house cyber evaluations."
     },
     {
+      "id": "chronomagic-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The dedicated benchmark repository had 214 stars in the required first-run snapshot. Its README and paper were opened in this run."
+    },
+    {
       "id": "cinerecon",
       "date": "2026-11-01",
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
@@ -1496,6 +1631,11 @@
       "via": "Upstage Solar Open 2 model card reports CLIcK."
     },
     {
+      "id": "clinhallu",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The makers publish results for eleven models, including Gemini 3 Flash, Qwen3.5, and InternVL3.5, in the public repository."
+    },
+    {
       "id": "clinicare-bench",
       "date": "2026-11-01",
       "via": "Scale GitHub org repos."
@@ -1529,6 +1669,11 @@
       "id": "clue",
       "date": "2026-11-01",
       "via": "CLUEbenchmark GitHub organization. Task count from the arXiv abstract."
+    },
+    {
+      "id": "cmb",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 256 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
     },
     {
       "id": "cmimc-2025",
@@ -1621,6 +1766,11 @@
       "via": "Table 14 of the Seed-Coder report."
     },
     {
+      "id": "codeelo",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: 50 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "codesimpleqa",
       "date": "2026-11-01",
       "via": "Seed2.0 model card Table 11 lists CodeSimpleQA, and the almanac had no record."
@@ -1639,6 +1789,11 @@
       "id": "collaborative-intelligence-benchmark",
       "date": "2026-11-04",
       "via": "The paper's launch post on X (2026-11-04). The scan read the paper on arXiv but scored it 3 of the 5 points it needs, because its title has no benchmark word."
+    },
+    {
+      "id": "colorbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 48 Hugging Face paper upvotes. Opened maker sources in the second run."
     },
     {
       "id": "combibench",
@@ -1706,6 +1861,11 @@
       "via": "Hunyuan-A13B-Instruct model card table."
     },
     {
+      "id": "composite-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker publishes comparable scores for eight current base models under a fixed compute protocol."
+    },
+    {
       "id": "compositional-tasks-bytedance",
       "date": "2026-11-01",
       "via": "Section 3.4 and Table 13 of the Seed2.0 model card."
@@ -1714,6 +1874,11 @@
       "id": "computeeval-nvidia",
       "date": "2026-11-01",
       "via": "inspect_evals ships compute_eval."
+    },
+    {
+      "id": "conceptedit-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 52 freshly retrieved Hugging Face paper upvotes. The maker releases a standalone test set and evaluator with Flux and Qwen inference examples."
     },
     {
       "id": "conceptual-reasoning-index",
@@ -1786,6 +1951,11 @@
       "via": "lm-evaluation-harness task folder coqa."
     },
     {
+      "id": "coral",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 56 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "core-bench",
       "date": "2026-11-01",
       "via": "inspect_evals ships core_bench."
@@ -1834,6 +2004,11 @@
       "id": "covert-misbehavior-thinking-machines",
       "date": "2026-11-12",
       "via": ""
+    },
+    {
+      "id": "cpret",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 136 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "crab-benchmark",
@@ -1909,6 +2084,11 @@
       "id": "csat-math-2025",
       "date": "2026-11-01",
       "via": "LG AI Research's EXAONE Deep 32B model card reports CSAT Math 2025 next to AIME."
+    },
+    {
+      "id": "csl",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 672 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "csvqa",
@@ -2191,6 +2371,11 @@
       "via": "Hacker News story 'Dayjob: Tax' (263 points, 2026-10-28)."
     },
     {
+      "id": "debugbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 92 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "decepeval",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
@@ -2229,6 +2414,11 @@
       "id": "deep-research-prompt-injection-openai",
       "date": "2026-11-01",
       "via": "Table 2 of the Deep Research System Card."
+    },
+    {
+      "id": "deep20bench-1-1",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker leaderboard contains 25 current models, including November 2026 runs."
     },
     {
       "id": "deepconsult",
@@ -2291,6 +2481,11 @@
       "via": "Ai2's MolmoWeb launch post reports DeepShop, and the almanac had no record."
     },
     {
+      "id": "deepsynth",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Huawei Noah's Ark Lab reports this named benchmark in its technical paper. The maker also maintains a public results board."
+    },
+    {
       "id": "deepterminalbench",
       "date": "2026-11-01",
       "via": "Terminal-X README, which bundles it with EvoCode-Bench and RoadmapBench."
@@ -2304,6 +2499,11 @@
       "id": "defects4j",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "delulu",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Microsoft reports eleven code models in its benchmark technical report."
     },
     {
       "id": "der2-bench",
@@ -2531,6 +2731,11 @@
       "via": "DesignArena's code leaderboards list 19 boards, and the almanac had two DesignArena records."
     },
     {
+      "id": "deskcraft",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 90 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "destructive-actions-thinking-machines",
       "date": "2026-11-12",
       "via": ""
@@ -2559,6 +2764,11 @@
       "id": "devbench-unit-testing",
       "date": "2026-11-08",
       "via": "Review of the DevBench importer, which was on hold."
+    },
+    {
+      "id": "dexverse",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 122 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
     },
     {
       "id": "dfbench",
@@ -2706,6 +2916,11 @@
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
     },
     {
+      "id": "dycodeeval",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 222 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "dynamic-superb-phase-2",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -2766,9 +2981,19 @@
       "via": "Seed1.8 model card Table 1 lists EIFBench, and the almanac had no record."
     },
     {
+      "id": "elephantbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Maker leaderboard reports 32 model configurations, including at least five current models. Opened maker sources in the second run."
+    },
+    {
       "id": "elimination-game",
       "date": "2026-11-01",
       "via": "Lech Mazur's repo list, reached from Extended NYT Connections."
+    },
+    {
+      "id": "embodied-agent-interface",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 302 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
     },
     {
       "id": "embodied-first-exam",
@@ -2886,6 +3111,11 @@
       "via": "The Epoch benchmark hub, checked in full. Many almanac records carry an epoch.in_eci flag but the index itself had no record."
     },
     {
+      "id": "eprstmt",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 517 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "eq-bench-2",
       "date": "2026-11-01",
       "via": "Building the EQ-Bench family after finding EQ-Bench 4 missing. eqbench.com still lists EQ-Bench v2 under legacy leaderboards."
@@ -2929,6 +3159,11 @@
       "id": "evaldetectbench",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-10-29, where an independent check used it on DeepSeek V4.1 Flash."
+    },
+    {
+      "id": "evalverse",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The paper received 30 Hugging Face upvotes in the paced second-run lookup."
     },
     {
       "id": "evmbench",
@@ -2994,6 +3229,11 @@
       "id": "expert-swe-openai",
       "date": "2026-11-01",
       "via": "GPT-5.5 launch post, agentic coding section and table."
+    },
+    {
+      "id": "expertcrowd-swe",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports seven current models under one evaluation protocol."
     },
     {
       "id": "explorationbench-tencent",
@@ -3106,6 +3346,16 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "fieldworkarena-2",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Fujitsu publishes this named evaluation in its research portal and technical paper. The current maker page documents the task-expanding V2.0 release and V2.1 wording corrections."
+    },
+    {
+      "id": "fin-eva",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 270 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "financebench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -3164,6 +3414,11 @@
       "id": "finstepbench-livesearch",
       "date": "2026-11-08",
       "via": "Review of the FinStepBench importer, which was on hold."
+    },
+    {
+      "id": "fintoolbench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The benchmark paper has 27 refreshed Hugging Face upvotes, near the approximate 30-vote threshold, and the dedicated repository has 37 cached stars."
     },
     {
       "id": "fireworks-specialized-intelligence-index",
@@ -3234,6 +3489,16 @@
       "id": "forte",
       "date": "2026-11-01",
       "via": "LongCat-2.0 model card reports FORTE with a link to the repository."
+    },
+    {
+      "id": "fortisavqa",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 115 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
+      "id": "founder-bench-eico",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Eico reports five current models on the same four business ideas: Fable 5, Opus 4.8, GPT-5.6 Sol, GLM 5.2, and Kimi K3."
     },
     {
       "id": "freshqa",
@@ -3471,6 +3736,11 @@
       "via": "Gemini 3.1 Flash Image model card."
     },
     {
+      "id": "general-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 82 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "general365",
       "date": "2026-11-01",
       "via": "Meituan LongCat's GitHub org, checked while reviewing AMO-Bench."
@@ -3489,6 +3759,11 @@
       "id": "genspark-slides-benchmark",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, slide generation domain."
+    },
+    {
+      "id": "gim",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Meta’s maker repository and report describe a leaderboard covering 22 models. Both were opened in this run."
     },
     {
       "id": "gittaskbench",
@@ -3521,6 +3796,11 @@
       "via": "Patronus AI Hugging Face datasets."
     },
     {
+      "id": "glue",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 833 GitHub stars on the maker's original baseline repository, checked in this run. Read the maker's benchmark paper and original implementation."
+    },
+    {
       "id": "gmai-mmbench",
       "date": "2026-11-01",
       "via": "VLMEvalKit supported datasets list."
@@ -3529,6 +3809,11 @@
       "id": "golden3-microsoft",
       "date": "2026-11-01",
       "via": "SSUM rows of Tables 3 and 6 in the Phi-4-Mini Technical Report."
+    },
+    {
+      "id": "goodai-ltm-benchmark",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 90 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "gorilla-agent-arena",
@@ -3544,6 +3829,16 @@
       "id": "gqa",
       "date": "2026-11-01",
       "via": "Cohere's North Micro Vision Instruct model card reports GQA TestDev Balanced."
+    },
+    {
+      "id": "graduate-admissions-agent-benchmark",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 700 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
+      "id": "grailqa",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 112 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "gray-swan-reward-hacking-bench",
@@ -3716,6 +4011,16 @@
       "via": "METR research page and the metr-time-horizon-1-1 note, which names HCAST tasks that had no record."
     },
     {
+      "id": "healthagentbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: Maker leaderboard reports 12 agent configurations using more than five model versions. Opened maker sources in the second run."
+    },
+    {
+      "id": "healthagentbench-2",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: Maker leaderboard reports six current agent models. Opened maker sources in the second run."
+    },
+    {
       "id": "healthbench-hallu-baichuan",
       "date": "2026-11-01",
       "via": "Baichuan-M3-235B model card reports a hallucination rate chart."
@@ -3726,9 +4031,19 @@
       "via": "Fireworks Specialized Intelligence Index, finance domain."
     },
     {
+      "id": "hedge-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 103 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "heim",
       "date": "2026-11-01",
       "via": "HELM project list."
+    },
+    {
+      "id": "hellobench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: 41 Hugging Face paper upvotes. Opened maker sources in the second run."
     },
     {
       "id": "helm-arabic",
@@ -3774,6 +4089,11 @@
       "id": "hermes-index-nous",
       "date": "2026-11-01",
       "via": "benchlm.ai benchmark index diff (lead only), then the maker's site."
+    },
+    {
+      "id": "hex-databench-v1-1",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker leaderboard reports more than five current base models, separately from their reasoning settings."
     },
     {
       "id": "hil-bench-scale",
@@ -3876,6 +4196,11 @@
       "via": "Gemini image model cards."
     },
     {
+      "id": "humanclaw-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 72 freshly retrieved Hugging Face paper upvotes. The maker's paper and site define reusable tasks for nine general vision-language models."
+    },
+    {
       "id": "humaneval-cobol-cohere",
       "date": "2026-11-01",
       "via": "The Command A technical report (arXiv 2504.00698) reports it for Command A."
@@ -3889,6 +4214,11 @@
       "id": "humaneval-v",
       "date": "2026-11-01",
       "via": "StepFun Step3-VL-10B model card reports HumanEval-V."
+    },
+    {
+      "id": "humaneval-x",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 8792 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
     },
     {
       "id": "humanitys-sixth-sense",
@@ -4021,6 +4351,11 @@
       "via": "Hugging Face datasets tagged benchmark:official."
     },
     {
+      "id": "ig-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 36 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "image-mining-zai",
       "date": "2026-11-10",
       "via": "GLM-5V-Turbo official benchmark table"
@@ -4151,6 +4486,26 @@
       "via": "Seed1.8 model card Table 1, economically valuable fields."
     },
     {
+      "id": "interactive-benchmarks-logic",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker site publishes results for six models across these interactive tasks. This is distinct from the Meta and Duke wearable-assistance benchmark named InteractiveBench."
+    },
+    {
+      "id": "interactive-benchmarks-math",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker site publishes results for six models across these interactive tasks. This is distinct from the Meta and Duke wearable-assistance benchmark named InteractiveBench."
+    },
+    {
+      "id": "interactive-benchmarks-poker",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker site publishes results for six models across these interactive tasks. This is distinct from the Meta and Duke wearable-assistance benchmark named InteractiveBench."
+    },
+    {
+      "id": "interactive-benchmarks-trust",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker site publishes results for six models across these interactive tasks. This is distinct from the Meta and Duke wearable-assistance benchmark named InteractiveBench."
+    },
+    {
       "id": "interactivebench",
       "date": "2026-11-01",
       "via": "Daily discovery queue (HF daily papers, 76 upvotes). Meta repo with 150 stars in its first week."
@@ -4236,6 +4591,11 @@
       "via": "micro1 benchmark index, next to RedlineBench."
     },
     {
+      "id": "jailtrickbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 167 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "jevbench",
       "date": "2026-11-01",
       "via": "Hacker News 'Show HN: JevBench' (154 points, 2026-09-22) and the GitHub topic scan (327 stars)."
@@ -4271,6 +4631,11 @@
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
     },
     {
+      "id": "k-metbench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker leaderboard has more than five current base models, including Qwen3.5, Qwen3.6, Gemma 4, Kimi K3, and DeepSeek V4."
+    },
+    {
       "id": "k-sort-arena",
       "date": "2026-11-01",
       "via": "Arena survey: a K-wise arena for generative models."
@@ -4279,6 +4644,11 @@
       "id": "k-viscuit",
       "date": "2026-11-01",
       "via": "LG EXAONE 4.5 model card reports K-Viscuit."
+    },
+    {
+      "id": "k12-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The paper received 54 Hugging Face upvotes in the paced second-run lookup."
     },
     {
       "id": "kaggle-chart-arena",
@@ -4646,6 +5016,11 @@
       "via": "Table 10 of the Command A technical report cites the Language Confusion Benchmark."
     },
     {
+      "id": "language-table",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated repository had 369 stars in the required first-run snapshot. Its primary documentation was opened in this run."
+    },
+    {
       "id": "last-translation-benchmark",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
@@ -4766,6 +5141,11 @@
       "via": "Bluesky posts about OpenAI's launch (2026-11-02). OpenAI's site bars automated reading, so the details come from its launch page as quoted in press coverage."
     },
     {
+      "id": "lingoly-too",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The paper has 25 refreshed Hugging Face upvotes, treated as near the approximate 30-vote adoption threshold."
+    },
+    {
       "id": "linguasafe",
       "date": "2026-11-01",
       "via": "The Apertus technical report (arXiv 2509.14233) reports it for Apertus-70B-Instruct."
@@ -4841,6 +5221,11 @@
       "via": "Arena survey: a fighting-game arena between models."
     },
     {
+      "id": "llm-srbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 132 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
       "id": "llm-wikirace",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -4894,6 +5279,16 @@
       "id": "logiqa",
       "date": "2026-11-01",
       "via": "lm-evaluation-harness task folders logiqa and logiqa2."
+    },
+    {
+      "id": "loki",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 180 GitHub stars in the first-run count. Opened the maker's repository README in the second run."
+    },
+    {
+      "id": "long-code-arena",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The paper has 25 refreshed Hugging Face upvotes, near the brief approximate 30 threshold. The maker Space source supplies the six tasks and scoring definitions."
     },
     {
       "id": "long-horizon-terminal-bench-2-0",
@@ -4954,6 +5349,11 @@
       "id": "looparena",
       "date": "2026-11-01",
       "via": "GitHub topic scan (153 stars)."
+    },
+    {
+      "id": "loopsbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The maker's leaderboard bundle reports eight model configurations with current models. Opened maker sources in the second run."
     },
     {
       "id": "lpfqa",
@@ -5076,6 +5476,11 @@
       "via": "GitHub keyword search, where another repo claimed first place on Code-Review-Bench."
     },
     {
+      "id": "massive",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated repository had 577 stars in the required first-run snapshot. Its primary documentation was opened in this run."
+    },
+    {
       "id": "matbench",
       "date": "2026-11-01",
       "via": "Intern-S1-Pro model card scientific table."
@@ -5111,6 +5516,11 @@
       "via": "The Apertus technical report (arXiv 2509.14233) reports it for Apertus-70B-Instruct."
     },
     {
+      "id": "mathtutorbench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The opened maker leaderboard source contains 17 scored model rows, including Apertus v1.5, GLM 4.7 Flash, Qwen3.6, Sonnet 4.6, Gemini 3.1 Pro, and Gemini 3.6 Flash."
+    },
+    {
       "id": "mathverse",
       "date": "2026-11-01",
       "via": "ERNIE 5.0 tech report Table 3 reports MathVerse."
@@ -5119,6 +5529,11 @@
       "id": "mathvision-wildphoto-qwen",
       "date": "2026-11-01",
       "via": "Tables 2 to 4 of the Qwen3-VL technical report."
+    },
+    {
+      "id": "maud",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated repository had 107 stars in the required first-run snapshot. The paper and README were opened in this run."
     },
     {
       "id": "maverix",
@@ -5221,6 +5636,16 @@
       "via": "Hacker News story 'From GPT-4 to GPT-5: Measuring progress through MedHELM' (127 points), and the medicine vertical list."
     },
     {
+      "id": "medical-chronology-llm-benchmark",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports eleven models, including Opus 4.6, Gemini 3.1 Pro, GPT-5.4, GPT-5.4 Mini, and MiniMax M2.5."
+    },
+    {
+      "id": "medsafe-dx-0-3",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker README publishes a 20-model current leaderboard and the v0.3 protocol. Its results include multiple current models from different providers."
+    },
+    {
       "id": "medxpertqa-mm-extended-mercor",
       "date": "2026-11-01",
       "via": "The Mercor APEX hub lists Mercor-extended leaderboards next to APEX-SWE, and the almanac has none of them."
@@ -5269,6 +5694,11 @@
       "id": "memtrapbench",
       "date": "2026-11-01",
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
+    },
+    {
+      "id": "mer-unibench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 438 stars on the broader AffectGPT repository and later use in OmniOPSD. Read the correct benchmark paper and scoring implementation."
     },
     {
       "id": "merchantbench",
@@ -5446,6 +5876,11 @@
       "via": "Latent Space AINews 2026-05-21."
     },
     {
+      "id": "miragebench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 34 freshly retrieved Hugging Face paper upvotes. Opened the maker's paper and read the benchmark construction and metric definitions."
+    },
+    {
       "id": "mirb",
       "date": "2026-11-01",
       "via": "Table 5 of the InternVL3.5 technical report cites it as reference 181."
@@ -5476,9 +5911,19 @@
       "via": "micro1 benchmark index."
     },
     {
+      "id": "mj-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 54 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "mka",
       "date": "2026-11-14",
       "via": "Google's launch post (2026-11-10). The scan queued it on 2026-11-12 under the misread name 'MKA Most', and Gemini 4 Hydrogen's model card reports it."
+    },
+    {
+      "id": "mkqa",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 199 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "mlagentbench",
@@ -5506,6 +5951,11 @@
       "via": "lm-evaluation-harness task folder mlqa."
     },
     {
+      "id": "mm-alignbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 144 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "mm-browsecomp",
       "date": "2026-11-01",
       "via": "Seed2.0 model card Table 11 lists MM-BrowseComp, and the almanac had no record."
@@ -5529,6 +5979,11 @@
       "id": "mm-niah",
       "date": "2026-11-01",
       "via": "VLMEvalKit dataset list compared with the almanac. 55 HF upvotes and 129 GitHub stars."
+    },
+    {
+      "id": "mm-ocean",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The paper received 47 Hugging Face upvotes in the paced second-run lookup."
     },
     {
       "id": "mm-safetybench",
@@ -5631,6 +6086,11 @@
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
     },
     {
+      "id": "mmie",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: 51 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "mmiu",
       "date": "2026-11-01",
       "via": "inspect_evals ships mmiu."
@@ -5719,6 +6179,11 @@
       "id": "mobileminiwob",
       "date": "2026-11-01",
       "via": "Qwen2.5-VL agent table reports MobileMiniWob++_SR."
+    },
+    {
+      "id": "mobilepa-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 39 freshly retrieved Hugging Face paper upvotes. The maker also maintains a public board with 20 models and one planner system."
     },
     {
       "id": "mol-instructions",
@@ -5841,6 +6306,11 @@
       "via": "MedGemma 1.5 model card, disease progression table."
     },
     {
+      "id": "ms-marco-qa",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 235 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "msearth",
       "date": "2026-11-01",
       "via": "Intern-S1-Pro model card scientific table."
@@ -5879,6 +6349,11 @@
       "id": "mteb-arena",
       "date": "2026-11-01",
       "via": "Arena survey: MTEB's human preference arena for embedding models."
+    },
+    {
+      "id": "mteb-br",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker report evaluates 93 models, including recent Qwen3, Gemini Embedding, Voyage, and Jina families, and links its public leaderboard."
     },
     {
       "id": "mu-bench",
@@ -5951,9 +6426,19 @@
       "via": "Table 5 of the NVIDIA Nemotron Nano V2 VL report lists Multilingual MMBench per language."
     },
     {
+      "id": "multimedqa",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Google reports Med-PaLM and Med-PaLM 2 on the named suite in its primary research page."
+    },
+    {
       "id": "multinrc",
       "date": "2026-11-01",
       "via": "Scale Labs papers page and the Scale HF dataset list. The board is not in the current Scale Labs index."
+    },
+    {
+      "id": "multiref-compass",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Borderline clear-use test: 28 freshly retrieved Hugging Face paper upvotes, within the brief's approximate 30-upvote bar. Read the standalone dataset and evaluation protocol."
     },
     {
       "id": "music-arena",
@@ -6016,9 +6501,19 @@
       "via": "Seed Diffusion Preview report Table 3 lists NaturalCodeBench, and the almanac had no record."
     },
     {
+      "id": "naturalproofs",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 138 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "naturebench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
+    },
+    {
+      "id": "ncp-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 31 freshly retrieved Hugging Face paper upvotes. Opened the maker's README and paper abstract."
     },
     {
       "id": "needlebench-v2",
@@ -6101,6 +6596,11 @@
       "via": "HF paper search for benchmark papers with 40 or more upvotes."
     },
     {
+      "id": "ocnli",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 166 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "ocr-arena",
       "date": "2026-11-01",
       "via": "Show HN 'OCR Arena – A playground for OCR models' (216 points)."
@@ -6109,6 +6609,11 @@
       "id": "ocr-reasoning",
       "date": "2026-11-01",
       "via": "The NVIDIA Nemotron 3.5 Super VL model card reports OCR-Reasoning, and the almanac had no record."
+    },
+    {
+      "id": "oct-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 250 GitHub stars. Opened maker sources in the second run."
     },
     {
       "id": "odv-bench",
@@ -6141,6 +6646,11 @@
       "via": "Review of the OdysseyArena importer, which was on hold."
     },
     {
+      "id": "odysseybench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Microsoft reports ten language models in the benchmark technical report."
+    },
+    {
       "id": "officeqa-pro-v2",
       "date": "2026-11-01",
       "via": "Kimi K3.1 Pro tech blog reports OfficeQA Pro v2 next to OfficeQA Pro."
@@ -6156,6 +6666,11 @@
       "via": "Hugging Face datasets tagged benchmark:official."
     },
     {
+      "id": "olymmath",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: 40 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "olympiadbench",
       "date": "2026-11-01",
       "via": "Seed1.5-VL tech report Table 6 lists OlympiadBench, and the almanac had no record."
@@ -6169,6 +6684,16 @@
       "id": "omega-math",
       "date": "2026-11-01",
       "via": "The Ai2 Olmo 3.1 32B Think model card reports OMEGA, and the almanac had no record."
+    },
+    {
+      "id": "omi-medical-speech-benchmark",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports 21 batch models and 13 realtime models with a shared scorer."
+    },
+    {
+      "id": "omi-soap-note-safety",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports six named models under the same claim-grounding protocol."
     },
     {
       "id": "omni-cloze",
@@ -6219,6 +6744,16 @@
       "id": "omnidocbench-1-6",
       "date": "2026-11-01",
       "via": "The OmniDocBench README news lists major updates from v1.0 to v1.5 and then v1.6."
+    },
+    {
+      "id": "omniearth-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Shanghai Artificial Intelligence Laboratory co-created and reports this named scientific-reasoning evaluation. Its maker site, repository, and full technical paper were opened."
+    },
+    {
+      "id": "omniechobench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Major-lab test: the opened Qwen3.8-Omni technical report evaluates OmniEchoBench. The maker README also reports ten model rows updated October 18, 2026. Refreshed paper upvotes: 28."
     },
     {
       "id": "omnigaia",
@@ -6341,6 +6876,11 @@
       "via": "r/singularity post on DeepSeek V4.1 Flash on OpenDesign Arena (823 points, 2026-09-09)."
     },
     {
+      "id": "openfindata",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Qualifying evidence: Created by the OpenCompass evaluation group. The first-run repository count is 92 stars. Opened maker sources in the second run."
+    },
+    {
       "id": "openfrontiers-bench",
       "date": "2026-11-01",
       "via": "Daily discovery queue watch list. Data released on Hugging Face by a top university lab."
@@ -6349,6 +6889,11 @@
       "id": "openhands-index",
       "date": "2026-11-01",
       "via": "benchlm.ai benchmark index diff (lead only), then the maker's site."
+    },
+    {
+      "id": "openhueval",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Shanghai Artificial Intelligence Laboratory co-created this evaluation and reports it in a technical paper. The maker site confirms the affiliations and task protocol."
     },
     {
       "id": "openrsi-index",
@@ -6419,6 +6964,11 @@
       "id": "operator-prompt-injection-scenarios-openai",
       "date": "2026-11-01",
       "via": "Section 4.6 of the Operator System Card."
+    },
+    {
+      "id": "opt-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 127 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "or-license",
@@ -6496,6 +7046,11 @@
       "via": "lm-evaluation-harness task folder paloma."
     },
     {
+      "id": "panda-cvl",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 39 freshly retrieved Hugging Face paper upvotes. The maker separates the model-evaluation test set from training data and its annotation-tool user study."
+    },
+    {
       "id": "paperbench-code-dev",
       "date": "2026-11-10",
       "via": "Coverage audit found a Code-Dev table and an incorrect alias on the full PaperBench record."
@@ -6541,9 +7096,19 @@
       "via": "Amazon Science blog feed, post of 2026-07-29."
     },
     {
+      "id": "patterneval",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 35 freshly retrieved Hugging Face paper upvotes. Read the maker's model-independent diagnostic protocol and benchmark comparison before its training-method experiments."
+    },
+    {
       "id": "pawbench",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-08-29."
+    },
+    {
+      "id": "pca-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 108 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "pct-political-consistency",
@@ -6601,6 +7166,11 @@
       "via": "micro1 benchmark index."
     },
     {
+      "id": "phoneharness-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 125 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "phybench",
       "date": "2026-11-01",
       "via": "Seed2.0 model card Table 3 lists Phybench, and the almanac had no record."
@@ -6631,6 +7201,11 @@
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
     },
     {
+      "id": "picabench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 47 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "pinchbench-2",
       "date": "2026-11-01",
       "via": "GitHub releases of pinchbench/skill while checking the PinchBench record."
@@ -6641,6 +7216,11 @@
       "via": "Keye-VL-2.0-30B-A3B model card general VQA rows."
     },
     {
+      "id": "planbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 476 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "planbench-xl",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
@@ -6649,6 +7229,11 @@
       "id": "planningbench-tencent",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
+    },
+    {
+      "id": "playworld",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 94 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "ple-google",
@@ -6676,6 +7261,16 @@
       "via": "The Ai2 Olmo 3.1 32B Think model card reports PopQA, and the almanac had no record."
     },
     {
+      "id": "posterbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 260 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
+      "id": "powerbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Established evaluation group test: the official repository belongs to OpenCompass. Opened maker sources in the second run."
+    },
+    {
       "id": "prdbench",
       "date": "2026-11-01",
       "via": "AGI-Eval-Official GitHub organization."
@@ -6689,6 +7284,11 @@
       "id": "privacylens",
       "date": "2026-11-01",
       "via": "Table 5 of the Muse Glimmer 30B technical report."
+    },
+    {
+      "id": "prmbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 95 GitHub stars, within the brief's approximate 100-star threshold. Opened maker sources in the second run."
     },
     {
       "id": "proactive-refusals-high-risk-tasks-openai",
@@ -6724,6 +7324,11 @@
       "id": "programbench-tests-passed",
       "date": "2026-11-08",
       "via": "Split from ProgramBench on 2026-11-08: lab results report the test pass rate, while the board ranks by resolved tasks."
+    },
+    {
+      "id": "programdistill",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 39 freshly retrieved Hugging Face paper upvotes. Read the maker's benchmark construction and replay-based scoring protocol."
     },
     {
       "id": "progress-bench",
@@ -6771,6 +7376,11 @@
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
     },
     {
+      "id": "pulsebench-tab",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports current results for at least five named models, including Fable 5.1, Gemini 3.8 Flash, GPT-6 Astra, GPT-5.6 Sol, and Mistral OCR 4.1. The release month follows the documented April 2026 evaluation."
+    },
+    {
       "id": "putnam-2024",
       "date": "2026-11-01",
       "via": "DeepSeekMath-V2 model card reports Putnam 2024, and the almanac has only Putnam 2025."
@@ -6806,6 +7416,11 @@
       "via": "VLMEvalKit README news lists it as a supported benchmark, and the almanac lacked it."
     },
     {
+      "id": "qasc",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. AllenAI introduced and evaluated this named test in its technical paper, with a separate test split. The original paper and maker dataset card were opened."
+    },
+    {
       "id": "qf-bench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -6834,6 +7449,11 @@
       "id": "quant-arena",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-10-23. 26 HF upvotes."
+    },
+    {
+      "id": "quantsightbench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker reports eleven current models under the same agentic interval-forecasting setting."
     },
     {
       "id": "quixbugs",
@@ -6891,6 +7511,11 @@
       "via": "Table 3 of the NVIDIA Nemotron Nano V2 VL report lists RDTableBench under document understanding."
     },
     {
+      "id": "react-native-evals",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated repository had 112 stars in the required first-run snapshot. The maker README and dated methodology paper were opened in this run."
+    },
+    {
       "id": "reactbench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -6904,6 +7529,11 @@
       "id": "readability-perplexity",
       "date": "2026-11-01",
       "via": "Perplexity's new Sonar launch post (2025-02-11) reports both in-house scores next to IFEval and MMLU."
+    },
+    {
+      "id": "real-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 513 GitHub stars for the AGI SDK repository that hosts the benchmark. Opened maker sources in the second run."
     },
     {
       "id": "real-swe",
@@ -7054,6 +7684,11 @@
       "id": "rmbench",
       "date": "2026-11-01",
       "via": "The RoboTwin README news list announces RMBench on 2026-03-03."
+    },
+    {
+      "id": "rng-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 50 Hugging Face paper upvotes. Maker repository reports updated October 2026 evaluations. Opened maker sources in the second run."
     },
     {
       "id": "roadmapbench",
@@ -7216,6 +7851,16 @@
       "via": "LongCat-2.0 model card reports RWSearch with a link to the repository."
     },
     {
+      "id": "s-ember",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Meta reports frontier model evaluations in its technical report."
+    },
+    {
+      "id": "s-eval",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 123 GitHub stars. Opened maker sources in the second run."
+    },
+    {
       "id": "s3gym",
       "date": "2026-11-01",
       "via": "HarnessDev project site, which lists both benchmarks."
@@ -7224,6 +7869,11 @@
       "id": "safelibero",
       "date": "2026-11-01",
       "via": "A web search for LIBERO successors named SafeLIBERO next to LIBERO-PRO and LIBERO-Plus."
+    },
+    {
+      "id": "safepyramid",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Maker leaderboard data contains 16 models, including ten current frontier models. Opened maker sources in the second run."
     },
     {
       "id": "safety-modes-cohere",
@@ -7381,6 +8031,11 @@
       "via": "UK AISI inspect_evals register, cyber and bio sweep for evaluations the almanac lacks"
     },
     {
+      "id": "secrespond",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 324 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "seed-bench",
       "date": "2026-11-01",
       "via": "Janus-Pro technical report Table 3 reports SEED."
@@ -7426,6 +8081,11 @@
       "via": "Harbor hub dataset snorkel-ai/senior-swe-bench-v2026.06."
     },
     {
+      "id": "sequential-question-answering",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Google Research independently evaluates TAPAS on SQA in its official model repository."
+    },
+    {
       "id": "sevenllm",
       "date": "2026-11-01",
       "via": "UK AISI inspect_evals register, cyber and bio sweep for evaluations the almanac lacks"
@@ -7454,6 +8114,11 @@
       "id": "sheetbench-hud",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, finance domain."
+    },
+    {
+      "id": "shopping-mmlu",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Amazon authors report this named suite in a technical paper. The maker repository also confirms its use in the Amazon KDD Cup 2024 challenge."
     },
     {
       "id": "short-form-bench",
@@ -7616,6 +8281,11 @@
       "via": "Import AI 460 (2026-06-08)."
     },
     {
+      "id": "socrates",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 40 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "sol-execbench",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-10-15, where Google's DuoDiscover claimed first place. Repo has 329 stars."
@@ -7644,6 +8314,11 @@
       "id": "space-10",
       "date": "2026-11-01",
       "via": "InternVL3.5 model card overall comparison table."
+    },
+    {
+      "id": "spacedg-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. Shanghai Artificial Intelligence Laboratory co-created the named test and reports 25 model evaluations in the primary paper. The paper separates benchmark scenes from the training collection. It also has 25 refreshed paper upvotes."
     },
     {
       "id": "spar-bench",
@@ -8066,6 +8741,11 @@
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
     },
     {
+      "id": "swe-game",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Borderline clear-use test: 29 freshly retrieved Hugging Face paper upvotes, within the brief's approximate 30-upvote bar. Read the maker's task construction and executable evaluation protocol."
+    },
+    {
       "id": "swe-interact",
       "date": "2026-11-01",
       "via": "Scale GitHub org repos."
@@ -8106,6 +8786,11 @@
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
     },
     {
+      "id": "tabfact",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 417 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "tablebench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
@@ -8114,6 +8799,21 @@
       "id": "tacos",
       "date": "2026-11-01",
       "via": "Seed1.5-VL technical report Table 7 lists TACoS under video grounding, and the almanac had no record."
+    },
+    {
+      "id": "tailor-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 30 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
+      "id": "taskbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 25649 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
+      "id": "taste-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 32 freshly retrieved Hugging Face paper upvotes. The opened maker README also reports 14 model rows under the paired_order_v1 protocol."
     },
     {
       "id": "tat-qa",
@@ -8134,6 +8834,11 @@
       "id": "tau-bench-retail",
       "date": "2026-11-08",
       "via": "Held leaderboard tracks get separate records, a rule set on 2026-11-08."
+    },
+    {
+      "id": "tau-c-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The paper had 73 refreshed Hugging Face upvotes. The paper and maker repository confirm a released task set evaluated on 11 agent/user pairs."
     },
     {
       "id": "tau-voice",
@@ -8166,6 +8871,11 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "telbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 58 freshly retrieved Hugging Face paper upvotes. The maker releases a model-independent error-localization task and scoring protocol, separate from the proposed auditor."
+    },
+    {
       "id": "tempcompass",
       "date": "2026-11-01",
       "via": "ERNIE-4.5-VL-28B-A3B-Thinking model card chart reports TempCompass."
@@ -8194,6 +8904,11 @@
       "id": "terminal-x",
       "date": "2026-11-01",
       "via": "UniPat blog index."
+    },
+    {
+      "id": "terminalworld",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The opened maker leaderboard publishes eight current-model results on the Verified subset, including Opus 4.7, Kimi K2.6, GLM 5.1, Gemini 3.1 Pro, Qwen3.6, GPT-5.5, DeepSeek V4, and MiniMax M2.7."
     },
     {
       "id": "terms-bench",
@@ -8239,6 +8954,11 @@
       "id": "theophyseval",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-10-16, plus press coverage of the GPT-6 Astra 49/50 result."
+    },
+    {
+      "id": "thinkingbox-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 117 GitHub stars for the hosting ThinkingBox framework. Opened maker sources in the second run."
     },
     {
       "id": "threecb",
@@ -8296,9 +9016,19 @@
       "via": "Search for older Scale SEAL boards that the current Scale Labs index hides."
     },
     {
+      "id": "toolmaze",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Borderline clear-use test: 27 freshly retrieved Hugging Face paper upvotes, within the brief's approximate 30-upvote bar. Read the maker's benchmark and scoring documentation."
+    },
+    {
       "id": "toolqa",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "toolret",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 226 GitHub stars. Opened maker sources in the second run."
     },
     {
       "id": "toolsandbox",
@@ -8344,6 +9074,11 @@
       "id": "tritonbench",
       "date": "2026-11-01",
       "via": "Checking kernel-generation neighbors of KernelBench. The repo has about 140 stars."
+    },
+    {
+      "id": "triworldbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 234 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "trlawbench",
@@ -8396,6 +9131,11 @@
       "via": "ScaleAI datasets on Hugging Face."
     },
     {
+      "id": "tvrbench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Borderline clear-use test: 28 freshly retrieved Hugging Face paper upvotes, within the brief's approximate 30-upvote bar. Read the maker's evaluation split and exact success criterion."
+    },
+    {
       "id": "txbench-antibody-discovery",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index life sciences board, then benchmarks.bio."
@@ -8424,6 +9164,16 @@
       "id": "ugmathbench",
       "date": "2026-11-01",
       "via": "Table 1 of the Ring-1T technical report."
+    },
+    {
+      "id": "uhgeval",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 183 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
+      "id": "ui-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The maker maintains a ten-system public board for AI website builders."
     },
     {
       "id": "ui-tars-15-games-bytedance",
@@ -8721,6 +9471,16 @@
       "via": "Vals benchmarks list. Vals introduced it on 2026-07-23."
     },
     {
+      "id": "vantage-bench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. The official leaderboard lists 19 models and was updated on 2026-10-21. Opened maker sources in the second run."
+    },
+    {
+      "id": "varex-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. IBM Research introduced and evaluated this named benchmark in its technical paper. The paper and maker site were opened in this run."
+    },
+    {
       "id": "variantbench",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index life sciences board, then benchmarks.bio."
@@ -8769,6 +9529,11 @@
       "id": "vdebench",
       "date": "2026-11-01",
       "via": "Hugging Face datasets tagged benchmark:official."
+    },
+    {
+      "id": "vdr-bench",
+      "date": "2026-11-15",
+      "via": "BenchmarkList. The dedicated benchmark paper has 83 refreshed Hugging Face upvotes. Its full primary paper defines reusable tasks, scoring, and comparisons beyond the proposed search method."
     },
     {
       "id": "vectara-hallucination-leaderboard-2",
@@ -8861,6 +9626,11 @@
       "via": "r/singularity post on Griffin topping NVIDIA benchmark for full-duplex video (1,387 points), then Hugging Face datasets by likes."
     },
     {
+      "id": "videogaia",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 95 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "videogamebench",
       "date": "2026-11-01",
       "via": "Checking game benchmarks next to BALROG. The repo has about 380 stars."
@@ -8929,6 +9699,11 @@
       "id": "vista-scale",
       "date": "2026-11-01",
       "via": "Search for older Scale SEAL boards. Read by hand once. The 2024-12 launch month comes from a search snippet of Scale's launch post."
+    },
+    {
+      "id": "vistorybench",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 173 GitHub stars and 30 Hugging Face paper upvotes. Opened maker sources in the second run."
     },
     {
       "id": "vistra",
@@ -9161,6 +9936,11 @@
       "via": "Hugging Face datasets tagged benchmark:official."
     },
     {
+      "id": "wearableqa",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 33 freshly retrieved Hugging Face paper upvotes. Opened the maker's paper and public benchmark README."
+    },
+    {
       "id": "weavebench",
       "date": "2026-11-01",
       "via": "GitHub topic scan (175 stars)."
@@ -9386,6 +10166,11 @@
       "via": "Awesome-CUA catalog benchmark records."
     },
     {
+      "id": "worldolympiad",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 33 Hugging Face paper upvotes. Opened maker sources in the second run."
+    },
+    {
       "id": "worldsense-omnimodal",
       "date": "2026-11-01",
       "via": "LongCat-Flash-Omni model card omni-modality table."
@@ -9399,6 +10184,11 @@
       "id": "x-browse-xai",
       "date": "2026-11-01",
       "via": "xAI's Grok 4.1 Fast launch post reports X Browse next to Research-Eval and FRAMES."
+    },
+    {
+      "id": "x-stream",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. 31 Hugging Face paper upvotes. Opened maker sources in the second run."
     },
     {
       "id": "xbench-deepsearch-2510",
@@ -9431,6 +10221,11 @@
       "via": "Table 4 of the Aya Vision paper."
     },
     {
+      "id": "xcodeeval",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 90 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
       "id": "xdailybench-bytedance",
       "date": "2026-11-01",
       "via": "Seed2.1 launch page evaluation table."
@@ -9439,6 +10234,11 @@
       "id": "xdev-bench-hard-moonshot",
       "date": "2026-11-01",
       "via": "Kimi K3.1 Pro tech blog cybersecurity section."
+    },
+    {
+      "id": "xl-sum-english",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar aggregator lead. Clear-use test: 279 GitHub stars on the newly identified maker repository, checked in this run. GEM also includes the evaluation."
     },
     {
       "id": "xlrs-bench",
@@ -9464,6 +10264,11 @@
       "id": "xstorycloze",
       "date": "2026-11-01",
       "via": "lm-evaluation-harness task folder xstorycloze."
+    },
+    {
+      "id": "xsum",
+      "date": "2026-11-15",
+      "via": "Benchmark Radar. Clear-use test: 378 GitHub stars in the first-run count. Opened maker sources in the second run."
     },
     {
       "id": "xtreme",
