@@ -7,14 +7,15 @@
 import { benchmarks, labs, labById, featuredModels, cardScores, leaderboardScores, epochScores, collectedScores, cards, systemCards } from './data.ts';
 import { AREAS, CATEGORY_NAMES, SUBCATEGORIES, areaOf } from './taxonomy.ts';
 import { monthYear } from './format.ts';
+import { isArena } from './counts.ts';
 
 /** [name, url, kind, detail, other spellings, weight, more words to match]
- * kind: b benchmark, m model, l lab, c category, p page
+ * kind: b benchmark, a arena (listed on /arenas/), m model, l lab, c category, p page
  * weight orders rows that match the query equally well. For a benchmark it is the launch posts that list it, then
  * the system cards, then the release month, so the most-cited version of a test comes first and the detail line
  * says how often it is cited. For a model it is the release date, so the newest comes first. See
  * src/scripts/search-rank.ts. */
-export type SearchRow = [string, string, 'b' | 'm' | 'l' | 'c' | 'p', string, string, number, string];
+export type SearchRow = [string, string, 'b' | 'a' | 'm' | 'l' | 'c' | 'p', string, string, number, string];
 
 const STOP = new Set(
   'the and for with from that this into over than then them they their what when where which while who whom whose are was were has have had not but its can each how out per via about across after all also any both does done each more most much one only other own same some such two use used uses using very within without would'.split(
@@ -72,7 +73,7 @@ export function searchIndex() {
     // launch posts, then system cards, then scores, then the newer release
     const month = Number((b.released ?? '').replace(/\D/g, '').slice(0, 6).padEnd(6, '0')) || 0;
     const w = lp * 1e4 + Math.min(sc, 99) * 100 + Math.min(99, uses.get(b.id) ?? 0) * 0.9 + month / 1e6;
-    rows.push([b.name, `/benchmarks/${b.id}/`, 'b', detail, aliases, Math.round(w * 1e4) / 1e4, '']);
+    rows.push([b.name, `/benchmarks/${b.id}/`, isArena(b) ? 'a' : 'b', detail, aliases, Math.round(w * 1e4) / 1e4, '']);
     // only the description words the row does not already show
     const seen = new Set(words(b.name, aliases, detail));
     extra.push(words(b.description).filter((w) => !seen.has(w)).join(' '));

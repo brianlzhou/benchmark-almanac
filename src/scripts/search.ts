@@ -3,7 +3,8 @@
 // skip it. It loads /search.json once, shares it between the boxes, and suggests benchmarks, models, labs,
 // categories and pages as people type (search-rank.ts ranks them). The first suggestion is highlighted, so
 // Enter opens it. Under the suggestions, one row offers the benchmarks table filtered by the text and the
-// last one opens a GitHub form to suggest a benchmark we don't list.
+// last one opens a GitHub form to suggest a benchmark we don't list. When an arena matches, another row offers the
+// arenas table, first when arenas make up most of the close matches.
 //
 // A query that reads like a sentence ("a benchmark where models play chess") also offers search by meaning
 // (see meaning.ts). Once the reader turns it on, meaning matches join the list under any name matches.
@@ -11,7 +12,9 @@ import { Meaning, MEANING_MB, meaningPossible, probeGpu } from './meaning.ts';
 import { type Entry, type Hit, type Kind, type Memo, type Row, QUERY_STOP, STRONG, addWords, norm, rank, toEntry } from './search-rank.ts';
 import { SUBMIT_FORM } from '../lib/criteria.ts';
 
-const KIND: Record<Kind, string> = { b: 'Benchmark', m: 'Model', l: 'Lab', c: 'Category', p: 'Page' };
+const KIND: Record<Kind, string> = { b: 'Benchmark', a: 'Arena', m: 'Model', l: 'Lab', c: 'Category', p: 'Page' };
+// benchmarks and arenas both have a description and a page under /benchmarks/
+const TEST = (k: Kind) => k === 'b' || k === 'a';
 const SHOW = 8;
 
 interface Item {
@@ -76,7 +79,7 @@ let df: Map<string, number> | null = null;
 const docFreq = () => {
   if (df) return df;
   df = new Map();
-  for (const e of entries ?? []) if (e.r[2] === 'b') for (const w of new Set(e.all.split(' '))) if (w) df.set(w, (df.get(w) ?? 0) + 1);
+  for (const e of entries ?? []) if (TEST(e.r[2])) for (const w of new Set(e.all.split(' '))) if (w) df.set(w, (df.get(w) ?? 0) + 1);
   return df;
 };
 
@@ -134,7 +137,7 @@ function wire(form: HTMLFormElement): Box {
     const near = await meaning.search(input.value.trim(), 100);
     if (!near || norm(input.value) !== q) return;
     const f = docFreq();
-    const n = entries?.filter((e) => e.r[2] === 'b').length ?? 1;
+    const n = entries?.filter((e) => TEST(e.r[2])).length ?? 1;
     const words = [...new Set(q.split(' '))].filter((w) => w.length >= 3 && !QUERY_STOP.has(w));
     const idf = (w: string) => Math.log(1 + n / (1 + (f.get(w) ?? 0)));
     const total = words.reduce((a, w) => a + idf(w), 0) || 1;
@@ -154,7 +157,14 @@ function wire(form: HTMLFormElement): Box {
   }
 
   // ---- the list ----
-  const tableHref = () => `/benchmarks/?q=${encodeURIComponent(text())}`;
+  // the Benchmarks table leaves arenas out, so a query that finds arenas also offers the Arenas table, first when
+  // arenas make up most of the close matches
+  const arenaHits = () => scored.filter((x) => x.r[2] === 'a').length;
+  const arenasFirst = () => {
+    const s = strong();
+    return s.filter((x) => x.r[2] === 'a').length > s.filter((x) => x.r[2] === 'b').length;
+  };
+  const tableHref = (where = arenasFirst() ? 'arenas' : 'benchmarks') => `/${where}/?q=${encodeURIComponent(text())}`;
   const mb = (b: number) => Math.round(b / 1e6).toLocaleString('en-US');
 
   function compose(): Item[] {
@@ -196,7 +206,12 @@ function wire(form: HTMLFormElement): Box {
           act: () => void meaning.start(),
         });
     }
-    out.push({ href: tableHref(), name: out.length ? `Search the table for “${text()}”` : `No direct match. Search the table for “${text()}”`, detail: '', kind: 'Table', cls: 'sr-all' });
+    if (arenaHits()) {
+      const tables = arenasFirst() ? ['arenas', 'benchmarks'] : ['benchmarks', 'arenas'];
+      tables.forEach((t, i) => out.push({ href: tableHref(t), name: `Search the ${t} table for “${text()}”`, detail: '', kind: 'Table', cls: i ? 'sr-all2' : 'sr-all' }));
+    } else {
+      out.push({ href: tableHref('benchmarks'), name: out.length ? `Search the table for “${text()}”` : `No direct match. Search the table for “${text()}”`, detail: '', kind: 'Table', cls: 'sr-all' });
+    }
     // a benchmark we don't list yet: the submission form, with the text as its title
     out.push({ href: `${SUBMIT_FORM}&title=${encodeURIComponent(text())}`, name: `Not listed? Suggest “${text()}”`, detail: '', kind: 'GitHub', cls: 'sr-add', skip: true, away: true });
     return out;

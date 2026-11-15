@@ -6,7 +6,7 @@
 // by weight: for benchmarks, the launch posts that cite them (shown on each row), so "aime" lists the
 // most-cited AIME first. Weight never lifts a row above a better kind of match.
 
-export type Kind = 'b' | 'm' | 'l' | 'c' | 'p';
+export type Kind = 'b' | 'a' | 'm' | 'l' | 'c' | 'p';
 /** [name, url, kind, detail, other spellings, weight, more words]. See src/lib/search-index.ts. */
 export type Row = [string, string, Kind, string, string, number, string];
 /** A name or other-spelling match scores this or more. Below it, the match is only on other words. */
