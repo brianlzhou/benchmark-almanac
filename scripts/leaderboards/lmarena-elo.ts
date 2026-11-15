@@ -1,11 +1,14 @@
 // Arena (formerly LMArena) text leaderboard, read only through Arena's Hugging Face dataset
 // lmarena-ai/leaderboard-dataset. The page's default view is style-controlled, so this reads the
-// text_style_control subset, "latest" split, category "overall", through the Hugging Face dataset
-// viewer's documented API (the files themselves are Parquet). The other Arena importers reuse arenaRows.
+// text_style_control subset, "latest" split, category "overall". Each subset's latest split is one small Parquet
+// file in the dataset (628 KB for Text, under 70 KB for most), so arenaSubset downloads it and reads it with
+// hyparquet: one request an arena, where the dataset viewer's API took 100 rows a request and answered 429 to a
+// burst. The other Arena importers reuse arenaRows and arenaSubset.
 // Each row also keeps the score's 95% interval (rating_lower, rating_upper as metrics.ciLow, ciHigh) and its
 // vote count (metrics.votes), when the subset has them.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
+import { parquetReadObjects } from 'hyparquet';
+import { fetchBytes } from '../lib/util.ts';
 
 const DATASET = 'lmarena-ai/leaderboard-dataset';
 export const ARENA_TERMS = 'Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.';
@@ -138,47 +141,48 @@ function splitName(raw: string, published?: string): { model: string; date?: str
   return { model: name, date: published };
 }
 
+const FILES = `https://huggingface.co/datasets/${DATASET}/resolve/main`;
+const rating = (r: ArenaRow) => r.rating ?? r.score;
+const read = new Map<string, Promise<object[]>>();
+
 /**
- * Every row of one category (default "overall") of one subset's latest published leaderboard; the rating is the
- * Arena score. Image-to-WebDev, for one, is the "image_to_webdev" category of the webdev subset.
- * The viewer's /filter endpoint takes 15 to 60+ seconds, so this reads the overall count from /statistics
- * and pages through /rows (overall rows come first today) until it has them all. When /statistics is busy
- * (it answers 500 for a while after an update), it pages until the category's rows end.
+ * Every row of one subset's latest published leaderboard, every category, in the file's order. Each file is read
+ * once a run and shared by the importers that use it (Code Arena and Image-to-WebDev both read webdev). Parquet
+ * keeps whole numbers such as rank as BigInt, so they come back as numbers.
  */
-export async function arenaRows(config: string, category = 'overall'): Promise<LeaderboardRow[]> {
-  const api = 'https://datasets-server.huggingface.co';
-  const ds = `dataset=${encodeURIComponent(DATASET)}&config=${config}&split=latest`;
-  let want = Infinity;
-  try {
-    const stats = await fetchJson<{ statistics: { column_name: string; column_statistics: { frequencies?: Record<string, number> } }[] }>(
-      `${api}/statistics?${ds}`,
+export function arenaSubset<T extends object = ArenaRow>(config: string): Promise<T[]> {
+  let rows = read.get(config);
+  if (!rows) {
+    rows = fetchBytes(`${FILES}/${config}/latest-00000-of-00001.parquet`).then(async (file) =>
+      (await parquetReadObjects({ file })).map((r) => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, typeof v === 'bigint' ? Number(v) : v]))),
     );
-    want = stats.statistics.find((c) => c.column_name === 'category')?.column_statistics.frequencies?.[category] ?? 0;
-  } catch {
-    // keep paging until the category's run of rows ends
+    rows.catch(() => read.delete(config));
+    read.set(config, rows);
   }
-  if (!want) throw new Error(`no ${category} category in ${config}`);
-  const rows: LeaderboardRow[] = [];
-  for (let offset = 0; rows.length < want; offset += 100) {
-    const page = await fetchJson<{ rows: { row: ArenaRow }[]; num_rows_total: number }>(`${api}/rows?${ds}&offset=${offset}&length=100`);
-    const before = rows.length;
-    for (const { row } of page.rows) {
-      const value = row.rating ?? row.score;
-      if (row.category !== category || !row.model_name || !Number.isFinite(value)) continue;
-      const metrics: Record<string, number> = {};
-      if (Number.isFinite(row.rating_lower) && Number.isFinite(row.rating_upper)) Object.assign(metrics, { ciLow: row.rating_lower, ciHigh: row.rating_upper });
-      if (Number.isFinite(row.vote_count)) metrics.votes = row.vote_count!;
-      rows.push({
-        ...splitName(row.model_name.trim(), row.leaderboard_publish_date),
-        score: value!,
-        ...(Object.keys(metrics).length ? { metrics } : {}),
-      });
-    }
-    if (!page.rows.length || offset + 100 >= page.num_rows_total) break;
-    if (want === Infinity && before > 0 && rows.length === before) break;
-  }
+  return rows as Promise<T[]>;
+}
+
+/** One Arena row as a leaderboard row: the score, its interval and its vote count. */
+function toRow(row: ArenaRow): LeaderboardRow {
+  const metrics: Record<string, number> = {};
+  if (Number.isFinite(row.rating_lower) && Number.isFinite(row.rating_upper)) Object.assign(metrics, { ciLow: row.rating_lower, ciHigh: row.rating_upper });
+  if (Number.isFinite(row.vote_count)) metrics.votes = row.vote_count!;
+  return { ...splitName(row.model_name.trim(), row.leaderboard_publish_date), score: rating(row)!, ...(Object.keys(metrics).length ? { metrics } : {}) };
+}
+
+/**
+ * The rows of one category (default "overall") of one subset's latest published leaderboard. Image-to-WebDev,
+ * for one, is the "image_to_webdev" category of the webdev subset.
+ */
+async function arenaRaw(config: string, category = 'overall'): Promise<ArenaRow[]> {
+  const rows = (await arenaSubset(config)).filter((r) => r.category === category && r.model_name && Number.isFinite(rating(r)));
   if (!rows.length) throw new Error(`no ${category} rows in ${config}`);
   return rows;
+}
+
+/** Every row of one category (default "overall") of one subset; the rating is the Arena score. */
+export async function arenaRows(config: string, category = 'overall'): Promise<LeaderboardRow[]> {
+  return (await arenaRaw(config, category)).map(toRow);
 }
 
 const board: Leaderboard = {

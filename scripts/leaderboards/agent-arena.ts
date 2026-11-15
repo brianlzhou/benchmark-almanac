@@ -1,13 +1,12 @@
 // Arena's Agent Arena, read through Arena's Hugging Face dataset: its "agent" subset, overall category, latest split.
-// The helper lives in lmarena-elo.ts. The agent subset has columns the helper does not read, so this file reads
-// the same rows again and adds them: median cost and output tokens stay in explicitly named metrics,
+// The helper lives in lmarena-elo.ts. The agent subset has columns the helper does not read, so this file takes
+// the same rows from arenaSubset and adds them: median cost and output tokens stay in explicitly named metrics,
 // because the shared cost and tokens fields mean averages. Also preserve the score's 95% interval
 // (score_ci_lower, score_ci_upper as metrics.ciLow, ciHigh) and the session count (metrics.sessions).
 // The dataset stores the score as a share (0.2014). Arena and the labs print it as a percentage (20.14%), so the
 // score and its interval are multiplied by 100 here, and the record's unit is %.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
-import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRows } from './lmarena-elo.ts';
+import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRows, arenaSubset } from './lmarena-elo.ts';
 
 interface AgentRow {
   model_name: string;
@@ -24,16 +23,9 @@ interface AgentRow {
 
 const fin = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 
-/** The agent subset's overall rows, in dataset order, filtered as arenaRows filters them. */
+/** The agent subset's overall rows, in the file's order, filtered as arenaRows filters them. */
 async function agentRows(): Promise<AgentRow[]> {
-  const api = 'https://datasets-server.huggingface.co/rows?dataset=lmarena-ai%2Fleaderboard-dataset&config=agent&split=latest';
-  const out: AgentRow[] = [];
-  for (let offset = 0; ; offset += 100) {
-    const page = await fetchJson<{ rows: { row: AgentRow }[]; num_rows_total: number }>(`${api}&offset=${offset}&length=100`);
-    out.push(...page.rows.map((r) => r.row).filter((r) => r.category === 'overall' && r.model_name && fin(r.score)));
-    if (!page.rows.length || offset + 100 >= page.num_rows_total) break;
-  }
-  return out;
+  return (await arenaSubset<AgentRow>('agent')).filter((r) => r.category === 'overall' && r.model_name && fin(r.score));
 }
 
 const board: Leaderboard = {
@@ -54,11 +46,8 @@ const board: Leaderboard = {
     const raw = await agentRows().catch(() => [] as AgentRow[]);
     const signals=new Map<string,Map<string,AgentRow>>();
     for(const name of ['bash_reliability','praise_complaint','steerability','task_outcome_explicit','tool_hallucination']){
-      await new Promise(r=>setTimeout(r,2100));
-      const url='https://datasets-server.huggingface.co/rows?dataset=lmarena-ai%2Fleaderboard-dataset&config=agent_'+name+'&split=latest&offset=0&length=100';
-      const data=await fetchJson<{rows:{row:AgentRow}[];num_rows_total:number}>(url);
-      if(data.num_rows_total>100)throw new Error('Agent signal needs pagination: '+name);
-      signals.set(name,new Map(data.rows.map(r=>[r.row.model_name,r.row])));
+      const data=await arenaSubset<AgentRow>('agent_'+name);
+      signals.set(name,new Map(data.map(r=>[r.model_name,r])));
     }
     // the two reads list the same rows in the same order; a row takes the extras only when its score matches
     const pct = (v: number) => Math.round(v * 1e6) / 1e4;

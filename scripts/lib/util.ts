@@ -79,6 +79,15 @@ export function parseCsv(text: string): Record<string, string>[] {
 
 /** `timeoutMs` bounds one attempt: 60 seconds by default, longer for a big file (PolicyBench's is 139 MB). */
 export async function fetchText(url: string, init: RequestInit = {}, tries = 3, timeoutMs = 60_000): Promise<string> {
+  return fetchBody(url, init, tries, timeoutMs, (res) => res.text());
+}
+
+/** A binary file, such as Parquet, with fetchText's retries. */
+export async function fetchBytes(url: string, init: RequestInit = {}, tries = 3, timeoutMs = 60_000): Promise<ArrayBuffer> {
+  return fetchBody(url, init, tries, timeoutMs, (res) => res.arrayBuffer());
+}
+
+async function fetchBody<T>(url: string, init: RequestInit, tries: number, timeoutMs: number, read: (res: Response) => Promise<T>): Promise<T> {
   let last: unknown;
   for (let i = 0; i < tries; i++) {
     try {
@@ -89,7 +98,7 @@ export async function fetchText(url: string, init: RequestInit = {}, tries = 3, 
       });
       if (res.status === 429 || res.status >= 500) throw new Error(`${res.status} ${url}`);
       if (!res.ok) throw Object.assign(new Error(`${res.status} ${url}`), { fatal: true });
-      return await res.text();
+      return await read(res);
     } catch (e) {
       last = e;
       if ((e as { fatal?: boolean }).fatal) break;
