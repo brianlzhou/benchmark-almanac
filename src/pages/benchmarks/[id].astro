@@ -36,6 +36,8 @@ import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
 import githubJson from '../../../data/github.json';
 import ClaimTable from '../../components/ClaimTable.astro';
+import ArenaCategories from '../../components/ArenaCategories.astro';
+import { arenaCategories } from '../../lib/arena-categories.ts';
 import { claimsForBenchmark, claimStats } from '../../lib/claims.ts';
 import type { ChangeKind } from '../../lib/types.ts';
 import { SITE_NAME, CATALOG_ID } from '../../lib/site.ts';
@@ -198,6 +200,9 @@ const format = b.format ? FORMAT_BY_ID.get(b.format) : undefined;
 // an arena's trail runs through the Arenas page, where it is listed
 const arena = isArena(b);
 const home = arena ? '/arenas/' : '/benchmarks/';
+// an arena's ratings on the votes for one kind of prompt, when its board keeps them (Arena's do)
+const catViews = arenaCategories(b.id);
+const catOwner = (makerParts(b.org ?? '')[0]?.text ?? '').replace(/\s*\(.*\)\s*$/, '') || 'the arena';
 const trail = [
   { href: home, label: arena ? 'Arenas' : 'Benchmarks' },
   // Coding is both an area and its main category: one step, to the category page
@@ -649,6 +654,8 @@ const cite = {
         </section>
       )
     }
+
+    {catViews.length > 0 && <ArenaCategories views={catViews} overall={s.leaderboardBoard.length ? s.leaderboardBoard : s.board} unit={unit} arena={catOwner} />}
 
     {
       boardChart && boardChartRuns.length >= 4 && (

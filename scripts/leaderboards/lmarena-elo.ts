@@ -6,6 +6,12 @@
 // burst. The other Arena importers reuse arenaRows and arenaSubset.
 // Each row also keeps the score's 95% interval (rating_lower, rating_upper as metrics.ciLow, ciHigh) and its
 // vote count (metrics.votes), when the subset has them.
+//
+// Arena also rates models on the votes for one kind of prompt: coding, math, a language, an industry. It tags each
+// battle with every category its prompt fits, so one vote counts in several, and the categories are views of the
+// same votes rather than separate arenas. arenaRowsByCategory keeps each one as a metric on the overall row
+// ("cat:coding"), and the benchmark page shows them in a category switch. Factuality, Arena's ranking that also
+// weighs whether a reply's claims check out, is another view of the same battles, kept the same way.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { parquetReadObjects } from 'hyparquet';
 import { fetchBytes } from '../lib/util.ts';
@@ -13,7 +19,7 @@ import { fetchBytes } from '../lib/util.ts';
 const DATASET = 'lmarena-ai/leaderboard-dataset';
 export const ARENA_TERMS = 'Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.';
 export const arenaFeed = (config: string, category = 'overall') =>
-  `https://huggingface.co/datasets/${DATASET} (subset ${config}, split latest, category ${category})`;
+  `https://huggingface.co/datasets/${DATASET} (subset ${config}, split latest, ${category === '*' ? 'every category' : `category ${category}`})`;
 
 /** Arena's spellings the shared resolver cannot place; both Arena importers use these. */
 export const ARENA_ALIASES: Record<string, string> = {
@@ -185,12 +191,36 @@ export async function arenaRows(config: string, category = 'overall'): Promise<L
   return (await arenaRaw(config, category)).map(toRow);
 }
 
+/**
+ * The overall rows of one subset, each with the model's rating in every other category as a metric
+ * ("cat:coding"). `skip` leaves out a category we track as its own arena (Image-to-WebDev). `views` adds the
+ * overall ratings of another subset under a key of its own, such as text_factuality as "cat:factuality".
+ */
+export async function arenaRowsByCategory(config: string, opts: { skip?: string[]; views?: Record<string, string> } = {}): Promise<LeaderboardRow[]> {
+  const usable = (await arenaSubset(config)).filter((r) => r.model_name && Number.isFinite(rating(r)));
+  const cats = new Map<string, Record<string, number>>();
+  const put = (name: string, key: string, v: number) => {
+    const m = cats.get(name.trim()) ?? {};
+    m[`cat:${key}`] = Math.round(v * 100) / 100;
+    cats.set(name.trim(), m);
+  };
+  for (const r of usable) if (r.category !== 'overall' && !opts.skip?.includes(r.category)) put(r.model_name, r.category, rating(r)!);
+  for (const [key, other] of Object.entries(opts.views ?? {})) for (const r of await arenaRaw(other)) put(r.model_name, key, rating(r)!);
+  const overall = usable.filter((r) => r.category === 'overall');
+  if (!overall.length) throw new Error(`no overall rows in ${config}`);
+  return overall.map((r) => {
+    const row = toRow(r);
+    const extra = cats.get(r.model_name.trim());
+    return extra ? { ...row, metrics: { ...row.metrics, ...extra } } : row;
+  });
+}
+
 const board: Leaderboard = {
   benchmark: 'lmarena-elo',
   url: 'https://arena.ai/leaderboard/text',
-  feed: arenaFeed('text_style_control'),
+  feed: arenaFeed('text_style_control', '*'),
   terms: ARENA_TERMS,
   aliases: ARENA_ALIASES,
-  fetch: () => arenaRows('text_style_control'),
+  fetch: () => arenaRowsByCategory('text_style_control', { views: { factuality: 'text_factuality' } }),
 };
 export default board;
