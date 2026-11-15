@@ -4,13 +4,13 @@ import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
 import Dropdown, { type Option } from '../../components/Dropdown.astro';
 import AreaMark from '../../components/AreaMark.astro';
-import { allSummaries, benchmarks, modelById, monthsBetween, AS_OF, addedWindows, addedOptions, cards, systemCards } from '../../lib/data.ts';
+import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions, cards, systemCards } from '../../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, LEVEL_BY_ID, SUB_BY_ID, SUBCATEGORIES, areaOf, levelIndex } from '../../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../../lib/format.ts';
 import { familyOf, nextVersion } from '../../lib/reigns.ts';
 import { issuesByBenchmark, unresolved, PROBLEMS } from '../../lib/audits.ts';
 import reviewedJson from '../../../data/reviewed.json';
-import { familySize } from '../../lib/counts.ts';
+import { familySize, isArena, benchmarkCount } from '../../lib/counts.ts';
 
 // where the newest score came from, for the Last added column's tooltip
 const ADDED_FROM: Record<string, string> = { leaderboard: 'its leaderboard', epoch: 'Epoch AI', card: 'a model card' };
@@ -28,7 +28,8 @@ const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', d
 // the order a sort by status puts them in
 const STATUS_RANK: Record<string, number> = { 'in use': 0, fading: 1, dropped: 2, 'system cards': 3, 'not in cards': 4 };
 
-const all = allSummaries();
+// arenas and match leagues have their own page (/arenas/), so this table holds only the tests with fixed standards
+const all = allSummaries().filter((s) => !isArena(s.b));
 // one row per test: a versioned family shows its newest version and links the earlier ones
 const newest = (id: string) => familyOf(id).at(-1);
 const rows = all
@@ -123,7 +124,7 @@ const TIPS = {
 };
 const maxArea = Math.max(...areaCounts.map((x) => x.n));
 // the newest addition to the catalog, as "November 4th"
-const lastAddedDate = (reviewedJson as { added: { date: string }[] }).added.reduce((m, a) => (a.date > m ? a.date : m), '');
+const lastAddedDate = (reviewedJson as { added: { id: string; date: string }[] }).added.filter((a) => byId.has(a.id)).reduce((m, a) => (a.date > m ? a.date : m), '');
 const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '') : '';
 ---
 
@@ -132,7 +133,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
     <header class="head">
       <h1>Benchmarks</h1>
       <p class="lede">
-        We track {benchmarks.length.toLocaleString('en-US')} benchmarks{lastAdded && `, with the last one added on ${lastAdded}`}. Arenas, where models are scored with Elo rankings or by human voting, can be found <a href="/arenas/">here</a>. Have a benchmark that you want us to track? Let us know <a href="/submit/">here</a>.
+        We track {benchmarkCount.toLocaleString('en-US')} benchmarks{lastAdded && `, with the last one added on ${lastAdded}`}. Arenas, where models are scored with Elo rankings or by human voting, can be found <a href="/arenas/">here</a>. Have a benchmark that you want us to track? Let us know <a href="/submit/">here</a>.
       </p>
       <div class="facts">
         <button type="button" class="fact" data-fact="status=in-use" aria-pressed="false"><b>{inRows((s) => s.status === 'in use')}</b> in use</button>
@@ -177,7 +178,6 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
         <label><input type="radio" name="method" value="" data-key="method" checked />All</label>
         <label title="An answer key, unit tests or a check of the final state"><input type="radio" name="method" value="fixed" data-key="method" />Checked automatically <span class="n">{methodCount('fixed')}</span></label>
         <label title="A model or human experts grade the output"><input type="radio" name="method" value="graded" data-key="method" />Graded <span class="n">{methodCount('graded')}</span></label>
-        <label title="People vote between two answers, or models play each other"><input type="radio" name="method" value="arena" data-key="method" />Arenas <span class="n">{methodCount('arena')}</span></label>
         <label title="Predictions scored against what happens"><input type="radio" name="method" value="events" data-key="method" />Real events <span class="n">{methodCount('events')}</span></label>
       </div>
       <div class="frow">
@@ -194,7 +194,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
           <Dropdown filterKey="counted" label="Cited in launch posts and system cards" options={countedOptions} viewOnly />
         </div>
-        <span class="count muted" data-count>{benchmarks.length.toLocaleString('en-US')} benchmarks</span>
+        <span class="count muted" data-count>{benchmarkCount.toLocaleString('en-US')} benchmarks</span>
       </div>
 
     <div class="table-wrap wide">

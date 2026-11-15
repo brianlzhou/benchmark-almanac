@@ -1,8 +1,9 @@
 ---
 import { Font } from 'astro:assets';
 import '../styles/global.css';
-import { benchmarks, AS_OF, featuredModels, labs, LEADERBOARDS } from '../lib/data.ts';
+import { AS_OF, featuredModels, labs, LEADERBOARDS } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
+import { benchmarkCount, arenaCount } from '../lib/counts.ts';
 import { AREAS } from '../lib/taxonomy.ts';
 import FootRidge from '../components/FootRidge.astro';
 import AreaMark from '../components/AreaMark.astro';
@@ -178,7 +179,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           <a class="word" href="/">Benchmark Almanac</a>
           <p>Scores from lab launch posts, system cards and {Object.keys(LEADERBOARDS).length.toLocaleString('en-US')} public leaderboards.</p>
           <p class="foot-n">
-            {benchmarks.length.toLocaleString('en-US')} benchmarks, {featuredModels.length.toLocaleString('en-US')} models and {labs.length} labs. Data as of {humanDate(AS_OF)}.
+            {benchmarkCount.toLocaleString('en-US')} benchmarks, {arenaCount} arenas, {featuredModels.length.toLocaleString('en-US')} models and {labs.length} labs. Data as of {humanDate(AS_OF)}.
           </p>
           <p class="foot-n foot-by">Built and maintained by <a href="https://www.brianzhou.org">Brian Zhou</a>.</p>
           <a class="foot-submit" href="/submit/">

@@ -3,6 +3,7 @@
 // is its family's size.
 import { benchmarks } from './data.ts';
 import type { Benchmark } from './types.ts';
+import { RANKED_BY_PEOPLE_OR_MATCHES } from './taxonomy.ts';
 
 const newestOfFamily = new Map<string, string>();
 // the same order familyOf() uses, so the last one seen is the newest
@@ -16,5 +17,11 @@ for (const b of benchmarks) if (b.family) familyCount.set(b.family, (familyCount
 /** How many records a benchmark's row stands for: itself and every other version in its family. */
 export const familySize = (b: Benchmark) => (b.family ? (familyCount.get(b.family) ?? 1) : 1);
 
-/** How many benchmarks we track, each version counted. */
-export const benchmarkCount = benchmarks.length;
+/** True for an arena or match league: scored by votes or by games, not against fixed answers. These live on
+ * /arenas/, and every other record on /benchmarks/. */
+export const isArena = (b: Pick<Benchmark, 'scoring'>) => RANKED_BY_PEOPLE_OR_MATCHES.has(b.scoring ?? '');
+
+/** How many benchmarks we track, each version counted, arenas not included. */
+export const benchmarkCount = benchmarks.filter((b) => !isArena(b)).length;
+/** How many arenas and match leagues we track, each version counted. */
+export const arenaCount = benchmarks.length - benchmarkCount;
