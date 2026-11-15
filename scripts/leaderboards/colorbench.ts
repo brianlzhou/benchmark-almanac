@@ -1,0 +1,15 @@
+// Published whole-benchmark headline result. Sub-scores remain metrics.
+import type {Leaderboard,LeaderboardRow} from './types.ts';
+import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
+import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL="https://arxiv.org/html/2504.10514";
+const board:Leaderboard={benchmark:"colorbench",url:URL,feed:URL,terms:PAPER_TERMS,
+ async fetch(){
+ const t=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0])==="[\"\",\"Color Perception\",\"Color Perception\",\"Color Perception\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"P & R\",\"Robustness\"]");
+ if(!t)throw new Error('Reviewed results table missing');const out:LeaderboardRow[]=[];
+ for(const c of t.slice(2)){const raw=c[11]?.match(/^(-?(?:\d+(?:\.\d+)?|\.\d+))(?:%|\s|$)/);if(!raw)continue;
+ const metrics:Record<string,number>={};
+ for(const [i,key] of [[12, "robustness"]] as [number,string][]){const v=Number(c[i]);if(c[i]?.trim()&&Number.isFinite(v))metrics[key]=v;}
+ out.push({model:c[0].replace(/\s*\(CoT\)/g,''),setting:c[0].includes('(CoT)')?'CoT':undefined,score:Number(raw[1])*1,metrics});
+ }return checked(out,3);
+ }};export default board;

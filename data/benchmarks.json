@@ -24015,7 +24015,8 @@
       "https://deep20bench.com/results/",
       "https://deep20bench.com/methodology/"
     ],
-    "added": "2026-11-15"
+    "added": "2026-11-15",
+    "unit": "score"
   },
   {
     "id": "deepconsult",
@@ -32877,7 +32878,8 @@
     "evidence": [
       "https://eico.so/founder-bench"
     ],
-    "added": "2026-11-15"
+    "added": "2026-11-15",
+    "unit": "score"
   },
   {
     "id": "frames",
@@ -43709,7 +43711,8 @@
       "https://www.interactivebench.org/",
       "https://arxiv.org/pdf/2603.04737"
     ],
-    "added": "2026-11-15"
+    "added": "2026-11-15",
+    "unit": "score"
   },
   {
     "id": "interactive-benchmarks-trust",
@@ -43735,7 +43738,8 @@
       "https://www.interactivebench.org/",
       "https://arxiv.org/pdf/2603.04737"
     ],
-    "added": "2026-11-15"
+    "added": "2026-11-15",
+    "unit": "score"
   },
   {
     "id": "intercode-ctf",
@@ -56827,7 +56831,7 @@
     },
     "access": "public",
     "note": "The evaluation set is separate from the OmniAlign-V training datasets. The star count belongs to the combined project.",
-    "unit": "score",
+    "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
@@ -61864,7 +61868,7 @@
     },
     "access": "public",
     "note": "The player, narrator, and auditor have separate roles. The reference methods share a common evaluation interface. Auditor settings differ between the main comparison and the HiAgent experiment.",
-    "unit": "%",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
