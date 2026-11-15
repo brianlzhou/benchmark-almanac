@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-11-14",
+  "retrieved": "2026-11-15",
   "boards": {
     "1h-videoqa-google": {
       "url": "https://www.kaggle.com/benchmarks/deepmind/video-qa",
@@ -431,11 +431,28 @@
       "url": "https://arena.ai/leaderboard/agent",
       "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset agent, split latest, category overall)",
       "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
-      "retrieved": "2026-11-14",
+      "retrieved": "2026-11-15",
       "rows": 58,
       "unmatched": [
         "Spark-X2.6"
-      ]
+      ],
+      "chart": {
+        "title": "Score against cost per task",
+        "x": {
+          "key": "costPerTaskMedianUsd",
+          "label": "Median cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Agent Arena score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Each cost is the median cost of one task in Agent Mode sessions, as Arena reports it."
+      }
     },
     "agent-memory-leaderboard": {
       "url": "https://agentmemoryleaderboard.ai/leaderboard/industry/textual",

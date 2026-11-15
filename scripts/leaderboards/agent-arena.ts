@@ -42,6 +42,13 @@ const board: Leaderboard = {
   feed: arenaFeed('agent'),
   terms: ARENA_TERMS,
   aliases: ARENA_ALIASES,
+  // Arena's own Pareto view plots the score against cost per task, with the median (p50) as its default cost
+  chart: {
+    title: 'Score against cost per task',
+    x: { key: 'costPerTaskMedianUsd', label: 'Median cost per task', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Agent Arena score', unit: '%', better: 'higher' },
+    note: 'Each cost is the median cost of one task in Agent Mode sessions, as Arena reports it.',
+  },
   async fetch() {
     const rows = await arenaRows('agent');
     const raw = await agentRows().catch(() => [] as AgentRow[]);
