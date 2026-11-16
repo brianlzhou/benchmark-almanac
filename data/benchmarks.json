@@ -206,6 +206,36 @@
     ]
   },
   {
+    "id": "3dscenebench",
+    "name": "3DSceneBench",
+    "category": "world-models",
+    "subcategory": "world-physics",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents reconstruct interactive MuJoCo scenes from images and task descriptions. Verifiers measure appearance, geometry, and physical functionality, then average the three scores.",
+    "org": "Prana Labs and University of California, Berkeley",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/PranaLabs/3DSceneBench",
+      "site": "https://pranalabs.github.io/3DSceneBench/",
+      "dataset": "https://hub.harborframework.com/datasets/pranalabs-ai-team/3dscenebench-mini",
+      "leaderboard": "https://pranalabs.github.io/3DSceneBench/#leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "The full suite contains 49 scenes. The public mini package contains seven scenes. Full-suite leaderboard scores must not be presented as mini scores.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/PranaLabs/3DSceneBench",
+      "https://pranalabs.github.io/3DSceneBench/",
+      "https://hub.harborframework.com/datasets/pranalabs-ai-team/3dscenebench-mini",
+      "https://pranalabs.github.io/3DSceneBench/#leaderboard"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "3dsrbench",
     "name": "3DSRBench",
     "aliases": [
@@ -1998,6 +2028,35 @@
     "evidence": [
       "https://storage.googleapis.com/deepmind-media/gemini/gemini_4_safety_report.pdf"
     ]
+  },
+  {
+    "id": "agent-initiative-benchmark",
+    "name": "Agent Initiative Benchmark",
+    "category": "economic-work",
+    "subcategory": "work-company",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents inspect workplace situations and decide whether to act without an explicit task. Two model judges score responses to 50 situations from 0 to 10.",
+    "org": "Deepnote",
+    "links": {
+      "repo": "https://github.com/deepnote/agent-initiative-benchmark",
+      "site": "https://deepnote.com/research/benchmark",
+      "dataset": "https://huggingface.co/datasets/deepnote/pagemantle-company-dataset",
+      "leaderboard": "https://deepnote.com/research/benchmark"
+    },
+    "access": "public",
+    "note": "Each run allows 180 seconds in a synthetic company with 11 services. Some situations require correctly taking no action. The release day remains unconfirmed.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/deepnote/agent-initiative-benchmark",
+      "https://deepnote.com/research/benchmark",
+      "https://huggingface.co/datasets/deepnote/pagemantle-company-dataset",
+      "https://x.com/jakubjurovych/status/2121256499552915586"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "agent-jsk-openai",
@@ -8012,6 +8071,32 @@
     "added": "2026-11-01"
   },
   {
+    "id": "asimov-jailbreak",
+    "name": "ASIMOV-Jailbreak",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Embodied agents handle adversarial instructions involving physical safety. Tool-call checks and model judges measure harmful compliance, refusals, and physical safety rubric adherence.",
+    "org": "Google DeepMind",
+    "released": "2026-11",
+    "links": {
+      "site": "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+      "dataset": "https://huggingface.co/datasets/google/asimov_agentic"
+    },
+    "access": "public",
+    "note": "The current release contains 845 multi-turn jailbreak episodes and separate harmful and benign tabletop suites. Dataset access requires accepting conditions. Higher safety compliance is better, while attack success is lower-is-better.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/",
+      "https://huggingface.co/datasets/google/asimov_agentic"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "asl-4-virology-uplift-trial-anthropic",
     "name": "ASL-4 virology uplift trial (Anthropic)",
     "aliases": [
@@ -11090,6 +11175,36 @@
     ]
   },
   {
+    "id": "bioml-bench",
+    "name": "BioML-bench",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents build and evaluate machine learning systems for biomedical experiments spanning proteins, drugs, single cells, imaging, and biomarkers. Task-specific metrics compare submissions with experimental reference results.",
+    "org": "Science Machine",
+    "released": "2025-09",
+    "links": {
+      "paper": "https://doi.org/10.1101/2025.09.01.673319",
+      "repo": "https://github.com/science-machine/biomlbench",
+      "site": "https://www.prnewswire.com/news-releases/nextflow-frontier-develops-discovery-system-to-solve-sciences-most-complex-problems-with-breakthrough-results-302937312.html",
+      "dataset": "https://hub.harborframework.com/datasets/nextflow-frontier/bioml-bench"
+    },
+    "access": "public+private-holdout",
+    "note": "The original suite and the 22-task Harbor package differ. Some tasks need separately authorized data. Historical aggregate results use different task cohorts.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://doi.org/10.1101/2025.09.01.673319",
+      "https://github.com/science-machine/biomlbench",
+      "https://www.prnewswire.com/news-releases/nextflow-frontier-develops-discovery-system-to-solve-sciences-most-complex-problems-with-breakthrough-results-302937312.html",
+      "https://hub.harborframework.com/datasets/nextflow-frontier/bioml-bench"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "biomnibench",
     "name": "BiomniBench",
     "aliases": [
@@ -12682,6 +12797,41 @@
     ]
   },
   {
+    "id": "browsesafe-plus-plus",
+    "name": "BrowseSafe++",
+    "aliases": [
+      "BrowseSafe Plus Plus",
+      "browsesafe-plus-plus"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "browsesafe",
+    "version": "2",
+    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
+    "org": "Perplexity",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.17457",
+      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
+      "site": "https://browsesafe.perplexity.ai/",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
+      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://browsesafe.perplexity.ai/",
+      "https://arxiv.org/abs/2610.17457"
+    ],
+    "added": "2026-11-01"
+  },
+  {
     "id": "browsesafe-adapt",
     "name": "BrowseSafe-Adapt",
     "category": "safety-alignment",
@@ -12739,41 +12889,6 @@
     "evidence": [
       "https://arxiv.org/abs/2511.20597",
       "https://browsesafe.perplexity.ai/"
-    ],
-    "added": "2026-11-01"
-  },
-  {
-    "id": "browsesafe-plus-plus",
-    "name": "BrowseSafe++",
-    "aliases": [
-      "BrowseSafe Plus Plus",
-      "browsesafe-plus-plus"
-    ],
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "university",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "family": "browsesafe",
-    "version": "2",
-    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
-    "org": "Perplexity",
-    "released": "2026-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2610.17457",
-      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
-      "site": "https://browsesafe.perplexity.ai/",
-      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
-      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
-    },
-    "access": "public+private-holdout",
-    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://browsesafe.perplexity.ai/",
-      "https://arxiv.org/abs/2610.17457"
     ],
     "added": "2026-11-01"
   },
@@ -15106,6 +15221,37 @@
     ]
   },
   {
+    "id": "chaos-bench-ocr",
+    "name": "CHAOS-Bench",
+    "aliases": [
+      "Character-level Hallucination Assessment for OCR Seeing-is-believing"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models read deliberately corrupted words in 500 academic page images. Scores measure faithful recognition of the visible strings instead of correction to plausible words.",
+    "org": "Tencent Hunyuan",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2607.04884",
+      "repo": "https://github.com/Tencent-Hunyuan/HunyuanOCR/tree/main/benchmarks/CHAOS-Bench",
+      "site": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    },
+    "access": "public",
+    "note": "OpenBMB uses full-page matching and averages word-hit rates by page across 1,025 altered words. This differs from the maker protocol that aligns individual regions.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/Tencent-Hunyuan/HunyuanOCR/tree/main/benchmarks/CHAOS-Bench",
+      "https://arxiv.org/abs/2607.04884",
+      "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "charades-sta",
     "name": "Charades-STA",
     "aliases": [
@@ -15731,6 +15877,33 @@
       "https://epochai.substack.com/p/two-new-benchmarks-added-to-our-suite",
       "https://github.com/epoch-research/chess-puzzles-mirror"
     ]
+  },
+  {
+    "id": "chessbench",
+    "name": "ChessBench",
+    "aliases": [
+      "ChessBench ★"
+    ],
+    "category": "games-long-horizon",
+    "subcategory": "games-puzzles",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models select chess moves from legal options in positions scored by a chess engine. Decision Index measures whether the selected move has maximal action value.",
+    "org": "Google DeepMind",
+    "links": {
+      "repo": "https://github.com/google-deepmind/searchless_chess"
+    },
+    "access": "public",
+    "note": "The Decision Index adaptation samples 5,000 positions from searchless_chess and accepts tied best moves. This accuracy is not chess Elo. The adaptation release month remains unconfirmed.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/google-deepmind/searchless_chess",
+      "https://huggingface.co/inclusionAI/LemonDecider"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "chest-imagenome",
@@ -17350,6 +17523,33 @@
       "https://arxiv.org/html/2412.19437v1",
       "https://arxiv.org/abs/2412.19437"
     ]
+  },
+  {
+    "id": "co-design-bench",
+    "name": "Co-Design Bench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents revise existing applications from multimodal user requests. A judge checks browser and repository evidence against 2,331 expert criteria across 273 tasks.",
+    "org": "Xilin Wei and collaborators",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.35138",
+      "repo": "https://github.com/Wiselnn570/Co-Design-Bench"
+    },
+    "access": "public",
+    "note": "The evaluation uses a judge-then-refute procedure. Scores depend on the judge and execution environment.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2610.35138",
+      "https://github.com/Wiselnn570/Co-Design-Bench",
+      "https://huggingface.co/papers/2610.35138"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "cobench-anthropic",
@@ -23777,6 +23977,36 @@
     "added": "2026-11-01"
   },
   {
+    "id": "decision-index-v0-3",
+    "name": "Decision Index Public v0.3",
+    "aliases": [
+      "Jev Decision Index v0.3",
+      "Decision Index v0.3"
+    ],
+    "category": "other",
+    "subcategory": "other-indices",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Decision models return probabilities over labeled options in public tasks covering knowledge, language, retrieval, tools, and arts. A chance-corrected weighted aggregate combines the task scores.",
+    "org": "Hugging Face Decision Index community",
+    "links": {
+      "repo": "https://github.com/apolinario/decision-index",
+      "site": "https://huggingface.co/ibm-granite/granite-switch-4.1-30b"
+    },
+    "access": "public",
+    "note": "This is the public v0.3 component. The full Decision Index uses separate private tests, so its scores are not interchangeable. RouterBench and SGD appear as diagnostics but do not count toward this aggregate. Release month remains unconfirmed.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/ibm-granite/granite-switch-4.1-30b",
+      "https://huggingface.co/ibm-granite/granite-switch-4.1-8b",
+      "https://github.com/apolinario/decision-index"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "decision-index-vision",
     "name": "Decision Index Vision",
     "category": "other",
@@ -28174,6 +28404,39 @@
     "added": "2026-11-01"
   },
   {
+    "id": "earthrecord",
+    "name": "EarthRecord",
+    "category": "science-reasoning",
+    "subcategory": "science-lab",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents analyze multidecade satellite observations to answer land-change questions. Reference checks score answers to 238 questions across 56 sites.",
+    "org": "AIEyes team",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.12934",
+      "repo": "https://github.com/ranranrannervous/EarthRecord",
+      "site": "https://ranranrannervous.github.io/EarthRecord/",
+      "dataset": "https://huggingface.co/datasets/haoranranranran/EarthRecord",
+      "leaderboard": "https://ranranrannervous.github.io/EarthRecord/#leaderboard"
+    },
+    "access": "public",
+    "note": "The benchmark requires tool use and multisensor temporal reasoning. Perturbation controls test sensitivity to the evidence rather than only geographic familiarity.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.12934",
+      "https://github.com/ranranrannervous/EarthRecord",
+      "https://ranranrannervous.github.io/EarthRecord/",
+      "https://huggingface.co/datasets/haoranranranran/EarthRecord",
+      "https://ranranrannervous.github.io/EarthRecord/#leaderboard",
+      "https://huggingface.co/papers/2611.12934"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "ebench",
     "name": "EBench",
     "aliases": [
@@ -28700,6 +28963,33 @@
       "https://github.com/lechmazur/elimination_game"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "embodied-agent-arena",
+    "name": "Embodied Agent Arena",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Vision-language agents solve geometry, spatial reasoning, affordance, planning, and manipulation tasks. The 1,000-case evaluation combines 32 established sources with GeoProbe.",
+    "org": "HKUST Guangzhou, CUHK, and KnowinAI",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.00854",
+      "repo": "https://github.com/embodied-agent-arena/embodied-agent-arena"
+    },
+    "access": "public",
+    "note": "GeoProbe contributes 168 cases within the suite. The evaluation covers 10 models. Domain-specific metrics do not define one interchangeable aggregate.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2610.00854",
+      "https://github.com/embodied-agent-arena/embodied-agent-arena",
+      "https://huggingface.co/papers/2610.00854"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "embodied-agent-interface",
@@ -31760,6 +32050,30 @@
     "confidence": "verified"
   },
   {
+    "id": "findendro",
+    "name": "FinDendro",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-finance",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models recall dated US financial facts and identify the limits of their knowledge. Four prompt styles test value recall, self-knowledge, and historical timing.",
+    "org": "Lingfei Qian and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.06808"
+    },
+    "access": "public",
+    "note": "The suite contains 2,226 facts spanning 1999 through 2026. The chance-controlled baseline is about 0.27, so scores require the prompt protocol.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.06808"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "fineval",
     "name": "FinEval",
     "category": "domain-legal-finance-medical",
@@ -32436,41 +32750,6 @@
     ]
   },
   {
-    "id": "flores-200",
-    "name": "FLORES-200",
-    "aliases": [
-      "Flores 200",
-      "FLORES200"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-translation",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "open-ended",
-    "family": "flores",
-    "version": "200",
-    "description": "Models translate English Wikipedia sentences into about 200 languages. Outputs are scored with BLEU or chrF against human reference translations.",
-    "org": "Meta AI (NLLB Team)",
-    "released": "2022-07",
-    "links": {
-      "paper": "https://arxiv.org/abs/2207.04672",
-      "repo": "https://github.com/facebookresearch/flores"
-    },
-    "access": "public",
-    "note": "Extends FLORES-101 to about 200 languages. The flores record covers FLORES-101.",
-    "successor": "flores-plus",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf",
-      "https://arxiv.org/abs/2207.04672",
-      "https://oldi.org/",
-      "https://github.com/openlanguagedata/flores",
-      "https://github.com/facebookresearch/flores"
-    ]
-  },
-  {
     "id": "flores-plus",
     "name": "FLORES+",
     "aliases": [
@@ -32504,6 +32783,41 @@
       "https://huggingface.co/datasets/openlanguagedata/flores_plus"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "flores-200",
+    "name": "FLORES-200",
+    "aliases": [
+      "Flores 200",
+      "FLORES200"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "flores",
+    "version": "200",
+    "description": "Models translate English Wikipedia sentences into about 200 languages. Outputs are scored with BLEU or chrF against human reference translations.",
+    "org": "Meta AI (NLLB Team)",
+    "released": "2022-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2207.04672",
+      "repo": "https://github.com/facebookresearch/flores"
+    },
+    "access": "public",
+    "note": "Extends FLORES-101 to about 200 languages. The flores record covers FLORES-101.",
+    "successor": "flores-plus",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf",
+      "https://arxiv.org/abs/2207.04672",
+      "https://oldi.org/",
+      "https://github.com/openlanguagedata/flores",
+      "https://github.com/facebookresearch/flores"
+    ]
   },
   {
     "id": "flteval",
@@ -37859,6 +38173,32 @@
     "added": "2026-11-01"
   },
   {
+    "id": "halachabench",
+    "name": "HalachaBench",
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-other",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer 60 Hebrew rabbinical qualification exam questions. A model judge awards rubric credit on a scale from 0 to 100.",
+    "org": "HalachaBench",
+    "released": "2026-11",
+    "links": {
+      "repo": "https://github.com/halachabench/halacha-bench-results",
+      "leaderboard": "https://github.com/halachabench/halacha-bench-results"
+    },
+    "access": "private",
+    "note": "Each model answers every question three times. AI generated the rubrics and judged the answers. No rabbi reviewed the evaluation, and scores are not qualification grades. The public result bundle withholds question text and rubric text.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/halachabench/halacha-bench-results",
+      "https://x.com/HalachaBench/status/2118698684384981113"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "production-hallucinations-openai",
     "name": "Hallucinations on production-representative prompts",
     "aliases": [
@@ -40847,6 +41187,67 @@
     ]
   },
   {
+    "id": "humaneval-plus",
+    "name": "HumanEval+",
+    "aliases": [
+      "HumanEvalPlus",
+      "HumanEval Plus",
+      "EvalPlus HumanEval+"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "school",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
+    "org": "UIUC (EvalPlus)",
+    "released": "2023-05",
+    "changes": [
+      {
+        "date": "2023-06-02",
+        "kind": "subset",
+        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
+      },
+      {
+        "date": "2023-11-24",
+        "kind": "questions",
+        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
+      },
+      {
+        "date": "2024-04-02",
+        "kind": "harness",
+        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
+      },
+      {
+        "date": "2024-10-20",
+        "kind": "grader",
+        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+      }
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.01210",
+      "repo": "https://github.com/evalplus/evalplus",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
+    },
+    "access": "public",
+    "note": "Scores are pass@1 and run lower than plain HumanEval.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.01210",
+      "https://arxiv.org/abs/2504.21318v1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+    ]
+  },
+  {
     "id": "humaneval-cobol-cohere",
     "name": "HumanEval-COBOL (Cohere)",
     "aliases": [
@@ -40929,67 +41330,6 @@
       "https://github.com/THUDM/CodeGeeX"
     ],
     "added": "2026-11-15"
-  },
-  {
-    "id": "humaneval-plus",
-    "name": "HumanEval+",
-    "aliases": [
-      "HumanEvalPlus",
-      "HumanEval Plus",
-      "EvalPlus HumanEval+"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "school",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
-    "org": "UIUC (EvalPlus)",
-    "released": "2023-05",
-    "changes": [
-      {
-        "date": "2023-06-02",
-        "kind": "subset",
-        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
-      },
-      {
-        "date": "2023-11-24",
-        "kind": "questions",
-        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
-      },
-      {
-        "date": "2024-04-02",
-        "kind": "harness",
-        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
-      },
-      {
-        "date": "2024-10-20",
-        "kind": "grader",
-        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-      }
-    ],
-    "links": {
-      "paper": "https://arxiv.org/abs/2305.01210",
-      "repo": "https://github.com/evalplus/evalplus",
-      "leaderboard": "https://evalplus.github.io/leaderboard.html"
-    },
-    "access": "public",
-    "note": "Scores are pass@1 and run lower than plain HumanEval.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2305.01210",
-      "https://arxiv.org/abs/2504.21318v1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-    ]
   },
   {
     "id": "humanevalpack",
@@ -41809,6 +42149,37 @@
     ]
   },
   {
+    "id": "ideataste",
+    "name": "IdeaTaste",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-research",
+    "level": "frontier",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Agents propose research ideas from literature frozen at 2025. Evaluation compares their citations and ideas with 2026 publications and measures diversity.",
+    "org": "Carnegie Mellon University",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.03424",
+      "repo": "https://github.com/cxcscmu/IdeaTaste",
+      "site": "https://cxcscmu.github.io/IdeaTaste",
+      "dataset": "https://huggingface.co/datasets/cx-cmu/IdeaTaste"
+    },
+    "access": "public",
+    "note": "The four metrics are citation matching, idea matching, citation diversity, and idea diversity. Idea extraction and matching use model judges.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.03424",
+      "https://github.com/cxcscmu/IdeaTaste",
+      "https://cxcscmu.github.io/IdeaTaste",
+      "https://huggingface.co/datasets/cx-cmu/IdeaTaste",
+      "https://huggingface.co/papers/2611.03424"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "if-badcase-zai",
     "name": "IF-Badcase",
     "category": "instruction-following-chat",
@@ -42326,6 +42697,34 @@
       "https://cdn.amazon.science/c5/3d/84514a224666b5be6de4b43ef4aa/nova-2-0-technical-report2.pdf"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "imgmt",
+    "name": "ImgMT",
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models translate text embedded in diagrams, maps, and infographics. Evaluation measures text recognition, region matching, and translation with CER, F1, chrF, and COMET.",
+    "org": "Šárka Uramová, Petar Petrov, Josef Jon, Ondřej Bojar, and Michal Novák",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://aclanthology.org/2026.wmt-main.43/",
+      "repo": "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/imgmt.py",
+      "dataset": "https://huggingface.co/datasets/sarkau/ImgMT-Dataset-For-Evaluating-Text-Image-Translation"
+    },
+    "access": "public",
+    "note": "The dataset contains 35,612 aligned image pairs in 129 languages. Report the test split and metric because error rates and quality scores have opposite directions.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://aclanthology.org/2026.wmt-main.43/",
+      "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/imgmt.py",
+      "https://huggingface.co/datasets/sarkau/ImgMT-Dataset-For-Evaluating-Text-Image-Translation"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "immigration-bench",
@@ -43251,6 +43650,33 @@
       "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/research/Seed-1.8-Modelcard.pdf"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "infrathon",
+    "name": "Infrathon",
+    "category": "coding",
+    "subcategory": "coding-performance",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents optimize AI infrastructure under correctness and fidelity constraints. Hidden workloads measure performance gains, with additional checks for rule compliance.",
+    "org": "University of Washington, Ai2, and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.11995",
+      "repo": "https://github.com/InfrathonX/Infrathon"
+    },
+    "access": "public",
+    "note": "The paper evaluates six models over 150 runs with a 24-hour budget. Metrics depend on the task and should retain their workload and resource limits.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.11995",
+      "https://github.com/InfrathonX/Infrathon",
+      "https://huggingface.co/papers/2611.11995"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "innovationeval",
@@ -44466,6 +44892,36 @@
       "https://cdn.openai.com/pdf/839e66fc-602c-48bf-81d3-b21eacc3459d/chatgpt_agent_system_card.pdf"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "isarcasmeval",
+    "name": "iSarcasmEval",
+    "aliases": [
+      "iSarcasmEval ★"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models identify intended sarcasm in English and Arabic texts labeled by their authors. Other tracks classify ironic speech and distinguish sarcastic text from a literal paraphrase.",
+    "org": "Ibrahim Abu Farha, Silviu Vlad Oprea, Steven Wilson, and Walid Magdy",
+    "released": "2022-07",
+    "links": {
+      "paper": "https://aclanthology.org/2022.semeval-1.111",
+      "repo": "https://github.com/iabufarha/iSarcasmEval"
+    },
+    "access": "public",
+    "note": "Task A uses sarcastic-class F1, Task B uses macro-F1, and Task C uses accuracy. Decision Index reports its English Task A adaptation.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://aclanthology.org/2022.semeval-1.111",
+      "https://github.com/iabufarha/iSarcasmEval",
+      "https://huggingface.co/inclusionAI/LemonDecider"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "itbench",
@@ -50098,6 +50554,32 @@
     "added": "2026-11-01"
   },
   {
+    "id": "longbanana",
+    "name": "LongBanana",
+    "category": "multimodal-vision",
+    "subcategory": "image-generation",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models synthesize images from many reference images and textual constraints. Atomic rubric checks score content fidelity, relationships, and global constraints across 90 tasks.",
+    "org": "Kling AI Research",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.06856",
+      "repo": "https://github.com/KlingAIResearch/LongBanana"
+    },
+    "access": "public",
+    "note": "Tasks average about 32 references and 20 constraints. The 4,670 checks award 0, 1, or 2 points before normalization per case. The current repository uses an unweighted mean of case scores. Historical weighted paper results require their original protocol.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.06856",
+      "https://github.com/KlingAIResearch/LongBanana"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "longbench",
     "name": "LongBench",
     "aliases": [
@@ -50549,6 +51031,40 @@
       "https://github.com/xiaowu0162/LongMemEval-V2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "longshotbench",
+    "name": "LongShOTBench",
+    "aliases": [
+      "longshot-bench",
+      "LongShOT"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-long",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer single-turn and multi-turn questions about long videos using visual, spoken, and ambient audio evidence. Weighted rubrics award partial credit.",
+    "org": "MBZUAI",
+    "released": "2025-12",
+    "links": {
+      "paper": "https://arxiv.org/abs/2512.16978",
+      "repo": "https://github.com/mbzuai-oryx/LongShOT",
+      "dataset": "https://huggingface.co/datasets/MBZUAI/longshot-bench",
+      "leaderboard": "https://longshot.cvmbzuai.com/leaderboard"
+    },
+    "access": "public",
+    "note": "The suite contains 3,401 questions over 274 videos totaling 188 hours. Report the modality and question track with each score.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2512.16978",
+      "https://github.com/mbzuai-oryx/LongShOT",
+      "https://huggingface.co/datasets/MBZUAI/longshot-bench",
+      "https://longshot.cvmbzuai.com/leaderboard"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "longtext-bench",
@@ -51763,6 +52279,36 @@
     ]
   },
   {
+    "id": "marathondocbench",
+    "name": "MarathonDocBench",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models parse 100 documents spanning 103 to 300 pages. Evaluation scores content, cross-page continuations, figures, reading order, and heading hierarchy.",
+    "org": "Baidu ERNIE Team",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.39308",
+      "repo": "https://github.com/baidu/Unlimited-OCR",
+      "site": "https://huggingface.co/baidu/Unlimited-OCR-2",
+      "dataset": "https://huggingface.co/datasets/baidu/MarathonDocBench"
+    },
+    "access": "unknown",
+    "note": "The paper describes about 205,000 layout elements. The linked Hugging Face dataset returned HTTP 401 during this audit, so public data access remains unverified.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2610.39308",
+      "https://github.com/baidu/Unlimited-OCR",
+      "https://huggingface.co/datasets/baidu/MarathonDocBench",
+      "https://huggingface.co/baidu/Unlimited-OCR-2"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "mars-bench",
     "name": "MARS-Bench",
     "aliases": [
@@ -52555,6 +53101,33 @@
       "https://arxiv.org/abs/2209.05401"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "maxxbench",
+    "name": "MaxxBench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents solve 89 modified DeepSWE repository tasks. Revised requirements, code, reference patches, and tests check whether agents can solve changed problems rather than recall original fixes.",
+    "org": "unLAP",
+    "released": "2026-10",
+    "links": {
+      "site": "https://maxxbench.unlap.ai/research/why-maxxbench/",
+      "leaderboard": "https://maxxbench.unlap.ai/"
+    },
+    "access": "public",
+    "note": "The maker dates the methodology October 20. Task success requires passing the modified tests.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://maxxbench.unlap.ai/research/why-maxxbench/",
+      "https://maxxbench.unlap.ai/",
+      "https://x.com/loresjpg/status/2118880329490637049"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "mbabench",
@@ -57384,6 +57957,42 @@
     "added": "2026-11-01"
   },
   {
+    "id": "mmdm",
+    "name": "MMDM",
+    "aliases": [
+      "Massive Multitask Decision Making"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Decision models assign probabilities to options in 5,448 questions across 16 categories. Hard choices use accuracy or exact set match, while soft targets use Brier error.",
+    "org": "Chinese University of Hong Kong and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.14309",
+      "repo": "https://github.com/mmdm-benchmark/mmdm",
+      "site": "https://mmdm-benchmark.github.io",
+      "dataset": "https://huggingface.co/datasets/shenjunhao/mmdm",
+      "leaderboard": "https://mmdm-benchmark.github.io/#leaderboard"
+    },
+    "access": "public",
+    "note": "Inputs contain up to 1,024 options and about 64,000 tokens. Hard accuracy is higher-is-better, but Brier error is lower-is-better. Keep the tracks separate.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.14309",
+      "https://github.com/mmdm-benchmark/mmdm",
+      "https://mmdm-benchmark.github.io",
+      "https://huggingface.co/datasets/shenjunhao/mmdm",
+      "https://mmdm-benchmark.github.io/#leaderboard",
+      "https://huggingface.co/papers/2611.14309"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "mmdu",
     "name": "MMDU",
     "aliases": [
@@ -59703,6 +60312,35 @@
     "added": "2026-11-01"
   },
   {
+    "id": "mpdocbench-parse",
+    "name": "MPDocBench-Parse",
+    "aliases": [
+      "MPDocBench"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models parse complete multipage documents while preserving content and cross-page structure. Evaluation scores text, formulas, tables, figure extraction, reading order, and heading hierarchy.",
+    "org": "Bangbang Zhou and collaborators",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.22100",
+      "site": "https://arxiv.org/html/2610.39308v2"
+    },
+    "access": "unknown",
+    "note": "The benchmark contains 433 documents and 3,246 pages in English and Chinese. Cross-page text and table merging contribute to the document-level evaluation.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2605.22100",
+      "https://arxiv.org/html/2610.39308v2"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "mpie-bench",
     "name": "MPIE-Bench",
     "category": "multimodal-vision",
@@ -61618,6 +62256,37 @@
       "https://github.com/IntologyAI/NanoGPT-Bench"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "narrativebench",
+    "name": "NarrativeBench",
+    "category": "multilingual",
+    "subcategory": "multilingual-reading",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models seek, include, exclude, and recover narratives from multilingual news articles. Citation-based F1 or recall scores narrative coverage after checking the response language.",
+    "org": "Nikhil Sharma, Kelly Marchisio, Kenton Murray, and Ziang Xiao",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.12750",
+      "repo": "https://github.com/isle-dev/Narrative-Bench-NeurIPS-2026",
+      "site": "https://isle-dev.github.io/Narrative-Bench-NeurIPS-2026/",
+      "dataset": "https://huggingface.co/datasets/jhu-clsp/narrative-bench",
+      "leaderboard": "https://isle-dev.github.io/Narrative-Bench-NeurIPS-2026/"
+    },
+    "access": "public",
+    "note": "The release includes 1,333 articles, 460 queries, and 4,800 evaluation cases. Five tasks use different metrics, and language or framing gaps are lower-is-better.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.12750",
+      "https://github.com/isle-dev/Narrative-Bench-NeurIPS-2026",
+      "https://isle-dev.github.io/Narrative-Bench-NeurIPS-2026/",
+      "https://huggingface.co/datasets/jhu-clsp/narrative-bench"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "narrativeqa",
@@ -66097,6 +66766,36 @@
     ]
   },
   {
+    "id": "otbench",
+    "name": "OTBench",
+    "aliases": [
+      "One Table Benchmark"
+    ],
+    "category": "coding",
+    "subcategory": "coding-data",
+    "level": "university",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Tabular models generate missing data, impute cells, and predict targets under shared evaluation protocols. The suite compares 46 methods over 56 datasets and 20 evaluation axes.",
+    "org": "Yuanrui Wang, Kaifang Li, Xuanyue Li, Ziyun Li, Yan Lu, Xingxuan Zhang, and Peng Cui",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.13001",
+      "repo": "https://github.com/limix-ldm-ai/OTBench"
+    },
+    "access": "public",
+    "note": "There is no single interchangeable score across generation, imputation, and prediction. Dataset and metric identities must accompany results.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.13001",
+      "https://github.com/limix-ldm-ai/OTBench",
+      "https://huggingface.co/papers/2611.13001"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "otelbench",
     "name": "OTelBench",
     "aliases": [
@@ -66750,16 +67449,24 @@
     "level": "expert",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Agents author editable parametric FreeCAD part designs, graded against held-back references for geometry and spec consistency.",
+    "description": "Agents create and edit parametric FreeCAD models from text and engineering drawings. Programmatic checks award continuous task rewards for geometry and specification consistency.",
     "org": "gNucleus AI",
-    "released": "2026",
+    "released": "2026-09",
     "links": {
-      "leaderboard": "https://cadbench.ai/"
+      "leaderboard": "https://cadbench.ai/",
+      "paper": "https://arxiv.org/abs/2611.02659",
+      "site": "https://cadbench.ai/"
     },
     "access": "private",
-    "note": "Not the same as anniedoris/CADBench. A submission-portal repo exists at github.com/gNucleus-AI/cad-bench-submission. The board shows version 3. Lab results from before it keep their citations without a plotted score.",
-    "unit": "%",
-    "confidence": "likely"
+    "note": "The current record represents version 3, released September 21, 2026. Its 100 tasks comprise 30 text creation, 30 text creation or editing, and 40 drawing reconstruction tasks. Overall is mean continuous reward on a 0 to 100 scale. Earlier versions use different cohorts and scoring.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.02659",
+      "https://cadbench.ai/",
+      "https://cadbench.ai/cad-bench/news/cad-bench-v3"
+    ]
   },
   {
     "id": "parsebench",
@@ -66769,6 +67476,8 @@
     "level": "expert",
     "scoring": "verified",
     "format": "short-answer",
+    "family": "parsebench",
+    "version": "1",
     "description": "Document parsers process about 2,000 human-verified enterprise pages. Over 169,000 test rules score tables, charts, content faithfulness, formatting and visual grounding.",
     "org": "LlamaIndex",
     "released": "2026-04",
@@ -66781,14 +67490,49 @@
     },
     "access": "public",
     "note": "On Hugging Face's official benchmark list, with 168 likes.",
+    "successor": "parsebench-2",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://huggingface.co/datasets/llamaindex/ParseBench",
-      "https://arxiv.org/abs/2604.08538"
+      "https://arxiv.org/abs/2604.08538",
+      "https://huggingface.co/datasets/llamaindex/ParseBench-2"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "parsebench-2",
+    "name": "ParseBench-2",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "family": "parsebench",
+    "version": "2",
+    "description": "Parsers extract text, formatting, tables, charts, layout, and forms from 4,317 page cases across 2,645 documents. Rule checks score six dimensions and average them equally.",
+    "org": "LlamaIndex",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://www.parsebench.ai/parsebench-2.pdf",
+      "repo": "https://github.com/run-llama/ParseBench",
+      "site": "https://parsebench.ai",
+      "dataset": "https://huggingface.co/datasets/llamaindex/ParseBench-2",
+      "leaderboard": "https://parsebench.ai"
+    },
+    "access": "public",
+    "note": "Version 2 changes the tasks and scoring from ParseBench. Version 2.01 fixes annotations without defining another benchmark. Severity caps limit credit for serious errors.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.parsebench.ai/parsebench-2.pdf",
+      "https://github.com/run-llama/ParseBench",
+      "https://parsebench.ai",
+      "https://huggingface.co/datasets/llamaindex/ParseBench-2"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "partbench",
@@ -71654,6 +72398,36 @@
     "confidence": "verified"
   },
   {
+    "id": "rbench-m",
+    "name": "RBench-M",
+    "aliases": [
+      "R-Bench-M"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models answer 665 graduate-level multimodal reasoning questions in English and Chinese. Top-1 accuracy compares selected answers with the answer key.",
+    "org": "Meng-Hao Guo and collaborators",
+    "released": "2025-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2505.02018",
+      "dataset": "https://huggingface.co/datasets/R-Bench/R-Bench"
+    },
+    "access": "public",
+    "note": "This is the multimodal track of the multidisciplinary RBench. It is distinct from the existing rbench record about video generation. English and Chinese results are separate language tracks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2505.02018",
+      "https://huggingface.co/datasets/R-Bench/R-Bench",
+      "https://huggingface.co/inclusionAI/SingVL_S1_4B"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "rcm-bench-1",
     "name": "RCM-Bench-1",
     "aliases": [
@@ -72132,6 +72906,34 @@
       "https://www.real2sim.bot/runs.html"
     ],
     "added": "2026-11-14"
+  },
+  {
+    "id": "real5-omnidocbench",
+    "name": "Real5-OmniDocBench",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models parse the same 1,355 document pages under five physical capture conditions. Text edit distance, formula matching, and table similarity determine the overall score.",
+    "org": "Baidu PaddlePaddle",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.04205",
+      "site": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+      "dataset": "https://huggingface.co/datasets/PaddlePaddle/Real5-OmniDocBench"
+    },
+    "access": "public",
+    "note": "The five scenarios use OmniDocBench v1.5 annotations. The aggregate averages scenario scores equally. Reading order is a separate metric.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/PaddlePaddle/Real5-OmniDocBench",
+      "https://arxiv.org/abs/2603.04205",
+      "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "realcompanion",
@@ -73393,6 +74195,37 @@
     ]
   },
   {
+    "id": "retrace",
+    "name": "ReTrace",
+    "aliases": [
+      "ReTRACE",
+      "Lost in Recovery"
+    ],
+    "category": "computer-use-browser",
+    "subcategory": "computer-desktop",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Computer agents recover from injected errors in desktop tasks. Replaying the remaining actions checks whether the recovered state produces the original successful outcome.",
+    "org": "KAIST, ETRI, and DeepAuto.ai",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.27954",
+      "repo": "https://github.com/BangProx/ReTRACE"
+    },
+    "access": "unknown",
+    "note": "The framework uses OSWorld and WindowsAgentArena tasks. The repository still says code will be released soon, despite the paper describing availability.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2610.27954",
+      "https://github.com/BangProx/ReTRACE",
+      "https://huggingface.co/papers/2610.27954"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "rev-ctf-anthropic",
     "name": "Rev CTF challenges (Anthropic)",
     "aliases": [
@@ -74115,6 +74948,36 @@
     "confidence": "verified"
   },
   {
+    "id": "robocolosseum",
+    "name": "RoboColosseum",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "agent-task",
+    "description": "Physical robots execute fresh instructions in paired blind trials. Human evaluators choose the better run or a tie, and comparisons determine ratings for each embodiment.",
+    "org": "RoboColosseum consortium",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.02497",
+      "repo": "https://github.com/RoboColosseum/robocolosseum-client",
+      "site": "https://robocolosseum.ai/",
+      "leaderboard": "https://robocolosseum.ai/"
+    },
+    "access": "public+private-holdout",
+    "note": "The separate fine-tune track uses 100 demonstrations per task and 25 attempts, reporting success and progress. Ratings cannot be compared across embodiments or tracks.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.02497",
+      "https://github.com/RoboColosseum/robocolosseum-client",
+      "https://robocolosseum.ai/",
+      "https://huggingface.co/papers/2611.02497"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "robocurve-physical-tool-use-benchmark-unidentified",
     "name": "Robocurve physical tool-use benchmark (unidentified)",
     "category": "robotics-embodied",
@@ -74804,6 +75667,30 @@
       "https://huggingface.co/papers/2610.17665"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "routerbench",
+    "name": "RouterBench",
+    "category": "other",
+    "subcategory": "other-indices",
+    "level": "university",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Routers select a language model for each prompt using cached responses, quality measurements, and costs. Evaluation measures the quality and cost of those selections.",
+    "org": "Martian",
+    "links": {
+      "dataset": "https://huggingface.co/datasets/withmartian/routerbench"
+    },
+    "access": "public",
+    "note": "The dataset contains more than 30,000 prompts and outputs from 11 models. Decision Index uses a sampled adaptation with separate calibration, not the original full protocol. The release month was not verified from the opened dataset card.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/datasets/withmartian/routerbench",
+      "https://huggingface.co/inclusionAI/LemonDecider"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "rsi-arena",
@@ -75900,6 +76787,33 @@
     "evidence": [
       "https://arxiv.org/abs/2407.21783v3"
     ]
+  },
+  {
+    "id": "sata-bench",
+    "name": "SATA-Bench",
+    "aliases": [
+      "SATA-Bench ★"
+    ],
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models select every correct option in 1,650 multiple-choice questions. Exact set match measures complete answers, with Jaccard overlap and option-count metrics as diagnostics.",
+    "org": "SATA-Bench authors",
+    "links": {
+      "repo": "https://github.com/sata-bench/sata-bench"
+    },
+    "access": "public",
+    "note": "Decision Index uses an adapted scoring protocol. Do not combine exact match with Jaccard scores. The maker repository does not establish a release month.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/sata-bench/sata-bench",
+      "https://huggingface.co/inclusionAI/LemonDecider"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "save-bench-meta",
@@ -79113,6 +80027,37 @@
       "https://github.com/snorkel-ai/Snorkel-Wordle-Benchmark"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "so-arena",
+    "name": "SO-Arena",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models choose answers across 11 domains and five capability groups. Evaluation tests accuracy, stability under changed option sets, and recognition that the correct answer is missing.",
+    "org": "National University of Singapore and collaborators",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.15777",
+      "repo": "https://github.com/holdrain/SO-Arena",
+      "site": "https://lichenlillc.github.io/SO-Arena/",
+      "dataset": "https://huggingface.co/datasets/SO-Arena/SO-Arena"
+    },
+    "access": "public",
+    "note": "The evaluation compares decision models with generative models. Accuracy and option-set diagnostics must retain their individual labels.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.15777",
+      "https://github.com/holdrain/SO-Arena",
+      "https://lichenlillc.github.io/SO-Arena/",
+      "https://huggingface.co/datasets/SO-Arena/SO-Arena",
+      "https://huggingface.co/papers/2611.15777"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "soccernet-caption",
@@ -85282,6 +86227,39 @@
       "https://artificialanalysis.ai/evaluations/terminalbench-hard",
       "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
     ]
+  },
+  {
+    "id": "tb-mathmodel",
+    "name": "Terminal-Bench Math Modeling",
+    "aliases": [
+      "TB-MathModel",
+      "TB-MathModeling"
+    ],
+    "category": "coding",
+    "subcategory": "coding-scientific",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents use a terminal to solve 18 mathematical modeling problems and submit numerical answers. Feasibility checks and numerical scoring compare answers with reference solutions.",
+    "org": "TB-MathModel authors",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.08237",
+      "repo": "https://github.com/wxj630/terminal-bench-math-modeling",
+      "site": "https://wxj630.github.io/terminal-bench-math-modeling/",
+      "leaderboard": "https://wxj630.github.io/terminal-bench-math-modeling/"
+    },
+    "access": "public",
+    "note": "The current board uses Multi-O against 99 human papers. The paper and repository also describe different one-reference scoring rules. Their results are not interchangeable.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.08237",
+      "https://github.com/wxj630/terminal-bench-math-modeling",
+      "https://wxj630.github.io/terminal-bench-math-modeling/"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "terminal-bench-science",
@@ -93603,6 +94581,35 @@
     "added": "2026-11-01"
   },
   {
+    "id": "websitebench",
+    "name": "WebsiteBench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents explore reference websites and rebuild their appearance, behavior, and persistent state. Hidden browser tests require functional correctness and screenshot similarity, then report the fraction passed.",
+    "org": "TIGER-AI-Lab",
+    "links": {
+      "repo": "https://github.com/TIGER-AI-Lab/WebsiteBench",
+      "site": "https://website-bench.com/",
+      "dataset": "https://huggingface.co/datasets/TIGER-Lab/WebsiteBench",
+      "leaderboard": "https://website-bench.com/"
+    },
+    "access": "public",
+    "note": "The suite contains 70 sites and 46,916 checks. Screenshot checks require normalized RGB SSIM of at least 0.99. Reference sites carry research-use restrictions. Release month remains unconfirmed.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/TIGER-AI-Lab/WebsiteBench",
+      "https://website-bench.com/",
+      "https://huggingface.co/datasets/TIGER-Lab/WebsiteBench",
+      "https://hub.harborframework.com/datasets/websitebench/WebsiteBench"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "websrc",
     "name": "WebSRC",
     "aliases": [
@@ -94162,6 +95169,37 @@
       "https://github.com/ppasupat/WikiTableQuestions"
     ],
     "added": "2026-11-05"
+  },
+  {
+    "id": "wild-omnidocbench",
+    "name": "Wild-OmniDocBench",
+    "aliases": [
+      "Wild_OmniDocBench"
+    ],
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models parse 1,350 photographed document pages with geometric distortion, lighting changes, and other capture artifacts. OmniDocBench metrics score text, formulas, tables, and reading order.",
+    "org": "Gengluo Li and collaborators",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.23885",
+      "repo": "https://github.com/VirtualLUOUCAS/Wild_OmniDocBench",
+      "site": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    },
+    "access": "public",
+    "note": "The data correspond to OmniDocBench v1.5. OpenBMB reports a deskewed-input track using the v1.6 scorer. That track must remain distinct from original-image results.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/VirtualLUOUCAS/Wild_OmniDocBench",
+      "https://arxiv.org/abs/2603.23885",
+      "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "wildartifactbench-meta",
@@ -96443,6 +97481,34 @@
     "added": "2026-11-05"
   },
   {
+    "id": "xybench",
+    "name": "XYBench",
+    "category": "instruction-following-chat",
+    "subcategory": "chat-quality",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models answer requests that pursue a mistaken solution to an underlying problem. A model judge checks the useful solution, its emphasis, and identification of the misconception.",
+    "org": "Ai2 and collaborators",
+    "released": "2026-09",
+    "links": {
+      "paper": "https://arxiv.org/abs/2609.06842",
+      "repo": "https://github.com/allenai/XYBench",
+      "site": "https://allenai.org/blog/xybench"
+    },
+    "access": "public",
+    "note": "The 8,115 questions mix community posts, manually written cases, and generated WikiHow cases. The paper predates the November launch post.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2609.06842",
+      "https://github.com/allenai/XYBench",
+      "https://allenai.org/blog/xybench"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "xyeval-google",
     "name": "XYEval",
     "aliases": [
@@ -96942,6 +98008,39 @@
     "confidence": "verified"
   },
   {
+    "id": "tau-c-bench",
+    "name": "τc-Bench",
+    "aliases": [
+      "tau-c-Bench",
+      "TASTE agent benchmark"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "tau-bench",
+    "version": "Contextual",
+    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
+    "org": "Technion and IBM Research",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.28556",
+      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    },
+    "access": "public",
+    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
+    "successor": "tau-bench-2-0",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/pdf/2605.28556v2",
+      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "tau3-banking",
     "name": "τ³-bench Banking",
     "category": "tool-use",
@@ -96978,38 +98077,5 @@
       "https://github.com/sierra-research/tau2-bench/commit/d22d77f238177f11d01aa99791dbb2c2c98827c1",
       "https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1"
     ]
-  },
-  {
-    "id": "tau-c-bench",
-    "name": "τc-Bench",
-    "aliases": [
-      "tau-c-Bench",
-      "TASTE agent benchmark"
-    ],
-    "category": "tool-use",
-    "subcategory": "tools-customer-service",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "agent-task",
-    "family": "tau-bench",
-    "version": "Contextual",
-    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
-    "org": "Technion and IBM Research",
-    "released": "2026-05",
-    "links": {
-      "paper": "https://arxiv.org/abs/2605.28556",
-      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    },
-    "access": "public",
-    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
-    "successor": "tau-bench-2-0",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/pdf/2605.28556v2",
-      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    ],
-    "added": "2026-11-15"
   }
 ]

@@ -51940,5 +51940,575 @@
         "as_written": "Last Secure Code Bench, code reconstruction without a security hint, function-level pass rate for both function and security"
       }
     ]
+  },
+  {
+    "id": "openbmb-minicpm-ocr-1-0-2026-10-28",
+    "lab": "openbmb",
+    "model": "minicpm-ocr-1-0",
+    "date": "2026-10-28",
+    "title": "MiniCPM-OCR-1.0 model card",
+    "url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+    "tier": "small",
+    "notes": "Scores were transcribed from the opened ocr-benchmarks.png image. OpenBMB uses 4x visual compression with thinking disabled. Wild uses SDK rotation correction. CHAOS uses full-page page-macro matching, not cropped-region recognition. Methodology: https://github.com/OpenBMB/MiniCPM-OCR/blob/main/docs/benchmark_reproduction_en.md.",
+    "results": [
+      {
+        "benchmark": "omnidocbench-1-6",
+        "score": 96.51,
+        "unit": "%",
+        "as_written": "OmniDocBench v1.6"
+      },
+      {
+        "benchmark": "real5-omnidocbench",
+        "score": 93.68,
+        "unit": "%",
+        "as_written": "Real5-OmniDocBench"
+      },
+      {
+        "benchmark": "wild-omnidocbench",
+        "score": 92.39,
+        "unit": "%",
+        "as_written": "Wild-OmniDocBench"
+      },
+      {
+        "benchmark": "olmocr-bench",
+        "score": 82.7,
+        "unit": "%",
+        "as_written": "olmOCR-bench"
+      },
+      {
+        "benchmark": "chaos-bench-ocr",
+        "score": 29.78,
+        "unit": "%",
+        "as_written": "CHAOS-Bench"
+      },
+      {
+        "benchmark": "ocrbench-v2",
+        "score": 54.7,
+        "unit": "%",
+        "as_written": "OCRBench v2"
+      }
+    ]
+  },
+  {
+    "id": "baidu-unlimited-ocr-2-2026-10-27",
+    "lab": "baidu",
+    "model": "unlimited-ocr-2",
+    "date": "2026-10-27",
+    "title": "Unlimited OCR 2 model card",
+    "url": "https://huggingface.co/baidu/Unlimited-OCR-2",
+    "tier": "small",
+    "notes": "MPDocBench and MarathonDocBench use the rounded headline values in the opened leaderboard image. The technical report gives 84.59 and 77.06. OmniDocBench comes from Table 3 of https://arxiv.org/html/2610.39308v2. Component scores and runtime measurements are omitted.",
+    "results": [
+      {
+        "benchmark": "mpdocbench-parse",
+        "score": 84.6,
+        "unit": "%",
+        "as_written": "MPDocBench Overall"
+      },
+      {
+        "benchmark": "marathondocbench",
+        "score": 77.1,
+        "unit": "%",
+        "as_written": "MarathonDocBench Overall"
+      },
+      {
+        "benchmark": "omnidocbench-1-6",
+        "score": 94.02,
+        "unit": "%",
+        "as_written": "OmniDocBench v1.6 Overall"
+      }
+    ]
+  },
+  {
+    "id": "xiaomi-corp-mimo-v2-6-flash-2026-09-21",
+    "lab": "xiaomi-corp",
+    "model": "mimo-v2-6-flash",
+    "date": "2026-09-21",
+    "title": "MiMo-V2.6-Flash-RL model card",
+    "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+    "tier": "mid",
+    "notes": "Values use the Flash column, not the Pro column. DeepSWE v1.1 and AutomationBench v1.0.6 map to existing records with documented refreshes. CyberGym 95.1 is omitted because the any-of versus final-submission metric is unstated. SEC Bench Pro 47.5 is omitted because the task snapshot is unstated. The Flash GDPval-AA cell is blank. Date follows the existing model release.",
+    "results": [
+      {
+        "benchmark": "deepswe",
+        "score": 67.9,
+        "unit": "%",
+        "as_written": "DeepSWE v1.1"
+      },
+      {
+        "benchmark": "programbench",
+        "score": 26.0,
+        "unit": "%",
+        "as_written": "ProgramBench"
+      },
+      {
+        "benchmark": "mimo-code-bench",
+        "score": 61.2,
+        "unit": "%",
+        "as_written": "MiMo Code Bench"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 52.3,
+        "unit": "%",
+        "as_written": "AutomationBench v1.0.6"
+      },
+      {
+        "benchmark": "toolathlon-verified",
+        "score": 73.6,
+        "unit": "%",
+        "as_written": "Toolathlon-Verified"
+      },
+      {
+        "benchmark": "agents-last-exam",
+        "score": 27.6,
+        "unit": "%",
+        "as_written": "Agents’ Last Exam"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 28.8,
+        "unit": "%",
+        "as_written": "Terminal Bench 4.0"
+      },
+      {
+        "benchmark": "terminal-bench-2-1",
+        "score": 87.6,
+        "unit": "%",
+        "as_written": "Terminal Bench 2.1"
+      },
+      {
+        "benchmark": "osworld-verified",
+        "score": 80.8,
+        "unit": "%",
+        "as_written": "OSWorld-Verified"
+      },
+      {
+        "benchmark": "jobbench",
+        "score": 61.2,
+        "unit": "%",
+        "as_written": "JobBench"
+      },
+      {
+        "benchmark": "mimo-cyber-bench",
+        "score": 77.2,
+        "unit": "%",
+        "as_written": "MiMo Cyber Bench"
+      },
+      {
+        "benchmark": "exploitgym",
+        "score": 6.0,
+        "unit": "%",
+        "as_written": "ExploitGym"
+      },
+      {
+        "benchmark": "exploitbench",
+        "score": 25.3,
+        "unit": "%",
+        "as_written": "ExploitBench"
+      },
+      {
+        "benchmark": "mimo-visual-coding",
+        "score": 71.5,
+        "unit": "%",
+        "as_written": "MiMo VisualCoding"
+      }
+    ]
+  },
+  {
+    "id": "ibm-granite-switch-4-1-30b-2026-10-27",
+    "lab": "ibm",
+    "model": "granite-switch-4-1-30b",
+    "date": "2026-10-27",
+    "title": "Granite Switch 4.1.1 30B model card",
+    "url": "https://huggingface.co/ibm-granite/granite-switch-4.1-30b",
+    "tier": "mid",
+    "notes": "The scores apply to revision 4.1.1 and public Decision Index v0.3. They are scaled by 100. The decision adapter reads a softmax over first-token option logits. Category subscores are omitted.",
+    "results": [
+      {
+        "benchmark": "decision-index-v0-3",
+        "score": 51.33,
+        "unit": "index",
+        "as_written": "Decision Index (JEV) — decision aLoRA, Overall"
+      }
+    ]
+  },
+  {
+    "id": "ibm-granite-switch-4-1-8b-2026-10-27",
+    "lab": "ibm",
+    "model": "granite-switch-4-1-8b",
+    "date": "2026-10-27",
+    "title": "Granite Switch 4.1.1 8B model card",
+    "url": "https://huggingface.co/ibm-granite/granite-switch-4.1-8b",
+    "tier": "small",
+    "notes": "The scores apply to revision 4.1.1 and public Decision Index v0.3. They are scaled by 100. The decision adapter reads a softmax over first-token option logits. Category subscores are omitted.",
+    "results": [
+      {
+        "benchmark": "decision-index-v0-3",
+        "score": 46.72,
+        "unit": "index",
+        "as_written": "Decision Index (JEV) — decision aLoRA, Overall"
+      }
+    ]
+  },
+  {
+    "id": "recursive-superintelligence-flint-2026-10-21",
+    "lab": "recursive-superintelligence",
+    "model": "flint",
+    "date": "2026-10-21",
+    "title": "Flint BF16 model card",
+    "url": "https://huggingface.co/RecursiveSI/flint",
+    "tier": "small",
+    "notes": "Undated model card. The date is the day its Hugging Face page was created, not a verified launch day. Scores come from the BF16 column of the opened flint_benchmarks_nvfp4.png image. NVFP4 results are omitted. Agentic results average pass@1 over at least five attempts with Terminus 2 or mini-swe-agent. The card excludes retrieved Terminal-Bench solutions. IFBench and IFEval scoring variants are not specified.",
+    "results": [
+      {
+        "benchmark": "terminal-bench-2-1",
+        "score": 54.9,
+        "unit": "%",
+        "as_written": "Terminal-Bench 2.1"
+      },
+      {
+        "benchmark": "swe-bench-pro-v2",
+        "score": 89.7,
+        "unit": "%",
+        "as_written": "SWE-bench Pro v2"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 74.2,
+        "unit": "%",
+        "as_written": "SWE-bench Verified"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 80.3,
+        "unit": "%",
+        "as_written": "LiveCodeBench v6"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 89.2,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 95.1,
+        "unit": "%",
+        "as_written": "IFEval"
+      }
+    ]
+  },
+  {
+    "id": "ant-group-ming-3-0-tts-0-5b-2026-09-22",
+    "lab": "ant-group",
+    "model": "ming-3-0-tts-0-5b",
+    "date": "2026-09-22",
+    "title": "Ming-3.0-tts-0.5B model card",
+    "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B",
+    "tier": "small",
+    "notes": "Undated model card. The date is the day its Hugging Face page was created, not a verified launch day. Language rows remain separate. These are error rates, not higher-is-better quality scores. Speaker similarity is omitted to avoid mixing incompatible scales. NVBench, WSC-Eval-TTS, WSYue-TTS-eval, emotion, and free-form control results are omitted because their exact benchmark identities and protocols were not fully verified.",
+    "results": [
+      {
+        "benchmark": "seed-tts-eval",
+        "score": 0.8,
+        "unit": "%",
+        "as_written": "seed-tts-eval-zh WER ↓"
+      },
+      {
+        "benchmark": "minimax-tts-multilingual-test-set",
+        "score": 0.365,
+        "unit": "%",
+        "as_written": "German WER ↓"
+      }
+    ]
+  },
+  {
+    "id": "runway-praxis-1-2026-11-11",
+    "lab": "runway",
+    "model": "praxis-1",
+    "date": "2026-11-11",
+    "title": "Praxis-1 Is Now Available",
+    "url": "https://runway.com/news/company-news/praxis-1-is-now-available",
+    "tier": "flagship",
+    "notes": "Runway reports 1,200 RoboLab-120 episodes. The SimplerEnv result uses a checkpoint fine-tuned on the RT-1 embodiment. It is not zero-shot performance. Date marks public weight availability.",
+    "results": [
+      {
+        "benchmark": "robolab",
+        "score": 46.2,
+        "unit": "%",
+        "as_written": "RoboLab-120 Success"
+      },
+      {
+        "benchmark": "simplerenv",
+        "score": 80.0,
+        "unit": "%",
+        "as_written": "80.0% success on SimplerEnv"
+      }
+    ]
+  },
+  {
+    "id": "datalab-surya-ocr-2-5-2026-10-25",
+    "lab": "datalab",
+    "model": "surya-ocr-2-5",
+    "date": "2026-10-25",
+    "title": "Surya OCR 2.5 model card",
+    "url": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+    "tier": "small",
+    "notes": "Undated model card. The date is the day its Hugging Face page was created, not a verified launch day. The internal 91-language result of 74.9 is omitted because no independently identified benchmark protocol was verified. Throughput claims are omitted.",
+    "results": [
+      {
+        "benchmark": "omniparsebench",
+        "score": 85.9,
+        "unit": "score",
+        "as_written": "85.9 on OmniParseBench"
+      },
+      {
+        "benchmark": "olmocr-bench",
+        "score": 83.7,
+        "unit": "%",
+        "as_written": "83.7% on olmOCR-bench"
+      }
+    ]
+  },
+  {
+    "id": "somark-oxr-1-0-2026-10-05",
+    "lab": "somark",
+    "model": "oxr-1-0",
+    "date": "2026-10-05",
+    "title": "OXR-1.0 accuracy snapshot",
+    "url": "https://huggingface.co/SoMarkAI/OXR-1.0",
+    "tier": "small",
+    "notes": "Date is the explicitly dated accuracy snapshot, not the model release. Scores were read from the opened three-benchmark image and checked against https://github.com/SoMarkAI/OXR/blob/main/docs/benchmark.md. That document identifies the v1.6_full OmniDocBench table. DocParsingBench 87.76 is omitted because its maker and exact protocol were not independently verified. Speed and component tables are omitted.",
+    "results": [
+      {
+        "benchmark": "olmocr-bench",
+        "score": 87.84,
+        "unit": "%",
+        "as_written": "olmOCR-bench Overall"
+      },
+      {
+        "benchmark": "omnidocbench-1-6",
+        "score": 97.18,
+        "unit": "%",
+        "as_written": "OmniDocBench Overall"
+      }
+    ]
+  },
+  {
+    "id": "nvidia-nemotron-3-5-transcribe-30b-a4b-2026-10-28",
+    "lab": "nvidia",
+    "model": "nemotron-3-5-transcribe-30b-a4b",
+    "date": "2026-10-28",
+    "title": "NVIDIA Nemotron 3.5 Transcribe model card",
+    "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "tier": "mid",
+    "notes": "Results were captured October 12. AIR-Bench covers speech foundation tasks only. IFEval uses prompt-level strict scoring, not the four-measure average of 84.65. GPQA 62.12 is omitted because the split is unspecified. MMAU 73.40 is omitted because the version is unspecified. MMAU-Pro non-music scores are omitted because they do not match a full benchmark aggregate. Numerous ASR corpus, streaming, latency, translation, speaker, and subcategory results are omitted rather than merged into broad benchmark IDs.",
+    "results": [
+      {
+        "benchmark": "mmar",
+        "score": 66.67,
+        "unit": "%",
+        "as_written": "MMAR — Audio reasoning"
+      },
+      {
+        "benchmark": "air-bench-foundation",
+        "score": 67.27,
+        "unit": "%",
+        "as_written": "AIR-Bench — Foundation, speech tasks"
+      },
+      {
+        "benchmark": "mmlu",
+        "score": 83.99,
+        "unit": "%",
+        "as_written": "MMLU — Accuracy"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 74.14,
+        "unit": "%",
+        "as_written": "MMLU-Pro — Accuracy"
+      },
+      {
+        "benchmark": "ifeval",
+        "score": 80.59,
+        "unit": "%",
+        "as_written": "Prompt-level, strict"
+      }
+    ]
+  },
+  {
+    "id": "openbmb-minicpm-v-4-7-35b-a3b-2026-10-07",
+    "lab": "openbmb",
+    "model": "minicpm-v-4-7-35b-a3b",
+    "date": "2026-10-07",
+    "title": "MiniCPM-V 4.7 35B-A3B evaluation tables",
+    "url": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B",
+    "tier": "mid",
+    "notes": "Undated model card. The date is the day its Hugging Face page was created, not a verified launch day. We opened both the instruct and language evaluation table images. Vision results use the 4x compression column consistently. The 16x column is omitted. All results use instruct mode. AIME averages 16 attempts. MathVerse_MINI maps to the cataloged testmini track. The MMMU-Pro option variant and IFBench grading variant are unspecified. MMBench, CC-OCR, ScreenSpot, and Video-MME are omitted because their versions are unclear. RefCOCO and MMHal are omitted because their exact track mapping was not verified.",
+    "results": [
+      {
+        "benchmark": "mmstar",
+        "score": 80.67,
+        "unit": "%",
+        "as_written": "MMStar"
+      },
+      {
+        "benchmark": "mmt-bench",
+        "score": 75.47,
+        "unit": "%",
+        "as_written": "MMT-Bench"
+      },
+      {
+        "benchmark": "simplevqa",
+        "score": 54.14,
+        "unit": "%",
+        "as_written": "SimpleVQA"
+      },
+      {
+        "benchmark": "mmmu",
+        "score": 80.22,
+        "unit": "%",
+        "as_written": "MMMU"
+      },
+      {
+        "benchmark": "mathvista",
+        "score": 88.0,
+        "unit": "%",
+        "as_written": "MathVista"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 69.71,
+        "unit": "%",
+        "as_written": "MMMU-Pro"
+      },
+      {
+        "benchmark": "mathverse",
+        "score": 86.45,
+        "unit": "%",
+        "as_written": "MathVerse_MINI"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 74.24,
+        "unit": "%",
+        "as_written": "MathVision"
+      },
+      {
+        "benchmark": "ocrbench",
+        "score": 91.2,
+        "unit": "%",
+        "as_written": "OCRBench"
+      },
+      {
+        "benchmark": "ocrbench-v2",
+        "score": 68.47,
+        "unit": "%",
+        "as_written": "OCRBench_v2"
+      },
+      {
+        "benchmark": "omnidocbench-1-6",
+        "score": 94.24,
+        "unit": "%",
+        "as_written": "OmniDocBench_v1.6"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 75.6,
+        "unit": "%",
+        "as_written": "CharXiv_Reasoning"
+      },
+      {
+        "benchmark": "textvqa",
+        "score": 84.99,
+        "unit": "%",
+        "as_written": "TextVQA_VAL"
+      },
+      {
+        "benchmark": "blink",
+        "score": 70.33,
+        "unit": "%",
+        "as_written": "BLINK"
+      },
+      {
+        "benchmark": "mmsi-bench",
+        "score": 16.0,
+        "unit": "%",
+        "as_written": "MMSI-Bench"
+      },
+      {
+        "benchmark": "hallusionbench",
+        "score": 63.83,
+        "unit": "%",
+        "as_written": "Hallusion-Bench"
+      },
+      {
+        "benchmark": "mm-ifeval",
+        "score": 65.41,
+        "unit": "%",
+        "as_written": "MM-IFEval"
+      },
+      {
+        "benchmark": "longvideobench",
+        "score": 68.9,
+        "unit": "%",
+        "as_written": "LongVideoBench"
+      },
+      {
+        "benchmark": "motionbench",
+        "score": 68.12,
+        "unit": "%",
+        "as_written": "MotionBench"
+      },
+      {
+        "benchmark": "cmmlu",
+        "score": 90.21,
+        "unit": "%",
+        "as_written": "CMMLU"
+      },
+      {
+        "benchmark": "mmlu-pro",
+        "score": 83.45,
+        "unit": "%",
+        "as_written": "MMLU-Pro"
+      },
+      {
+        "benchmark": "supergpqa",
+        "score": 61.23,
+        "unit": "%",
+        "as_written": "SuperGPQA"
+      },
+      {
+        "benchmark": "ifbench",
+        "score": 47.67,
+        "unit": "%",
+        "as_written": "IFBench"
+      },
+      {
+        "benchmark": "aime-2026",
+        "score": 76.46,
+        "unit": "%",
+        "as_written": "AIME26@avg16"
+      },
+      {
+        "benchmark": "livecodebench-v6",
+        "score": 56.57,
+        "unit": "%",
+        "as_written": "LiveCodeBench-v6"
+      },
+      {
+        "benchmark": "bfcl-v4",
+        "score": 60.06,
+        "unit": "%",
+        "as_written": "BFCL-V4"
+      },
+      {
+        "benchmark": "tau2-bench",
+        "score": 84.65,
+        "unit": "%",
+        "as_written": "τ²-Bench"
+      }
+    ]
   }
 ]

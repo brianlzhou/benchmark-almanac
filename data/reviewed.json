@@ -11,6 +11,11 @@
       "via": "Split from 3DCodeBench on 2026-11-08: the live arena board reports Elo, while lab results report execution reward."
     },
     {
+      "id": "3dscenebench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker board includes 10 distinct current models across 12 configurations."
+    },
+    {
       "id": "3dsrbench",
       "date": "2026-11-01",
       "via": "SenseNova-SI model card spatial benchmark table."
@@ -299,6 +304,11 @@
       "id": "agencybench",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "agent-initiative-benchmark",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker compares 12 frontier models."
     },
     {
       "id": "agent-memory-leaderboard",
@@ -761,6 +771,11 @@
       "via": "The Gemini 4 Argon safety report lists ASIMOV-Agentic next to ASIMOV-2.0, and the almanac had it only as an alias of ASIMOV."
     },
     {
+      "id": "asimov-jailbreak",
+      "date": "2026-11-15",
+      "via": "Discover queue. Google reports it in the Gemini Robotics 2.5 launch."
+    },
+    {
       "id": "assetopsbench",
       "date": "2026-11-01",
       "via": "Kaggle benchmark list, IBM Research boards."
@@ -1089,6 +1104,11 @@
       "id": "biology-instructions",
       "date": "2026-11-01",
       "via": "Intern-S2-397B model card scientific table."
+    },
+    {
+      "id": "bioml-bench",
+      "date": "2026-11-15",
+      "via": "Discover queue. Nextflow Frontier reports external use in its company-issued November 12 announcement."
     },
     {
       "id": "biomnibench",
@@ -1486,6 +1506,11 @@
       "via": "Seed1.8 model card Table 3 lists CGBench, and the almanac had no record."
     },
     {
+      "id": "chaos-bench-ocr",
+      "date": "2026-11-15",
+      "via": "Discover model-card result follow-up. Tencent publishes the benchmark and OpenBMB independently reports it."
+    },
+    {
       "id": "charades-sta",
       "date": "2026-11-01",
       "via": "The Qwen3-VL technical report (arXiv 2511.21631) lists its evaluation prompt for this benchmark, and the almanac lacked it."
@@ -1529,6 +1554,11 @@
       "id": "chembench",
       "date": "2026-11-01",
       "via": "inspect_evals ships chembench."
+    },
+    {
+      "id": "chessbench",
+      "date": "2026-11-15",
+      "via": "Discover queue. Ant Group reports the adaptation in the LemonDecider model card."
     },
     {
       "id": "chest-imagenome",
@@ -1699,6 +1729,11 @@
       "id": "cnml-level-problems-deepseek",
       "date": "2026-11-01",
       "via": "Figure 1 of the DeepSeekMath-V2 paper reports mean proof scores on these problems by category."
+    },
+    {
+      "id": "co-design-bench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker repository has 118 stars."
     },
     {
       "id": "cocoabench",
@@ -2391,6 +2426,11 @@
       "via": "Hugging Face datasets tagged benchmark:official."
     },
     {
+      "id": "decision-index-v0-3",
+      "date": "2026-11-15",
+      "via": "Discover model-card result follow-up. IBM reports this exact version."
+    },
+    {
       "id": "decision-index-vision",
       "date": "2026-11-10",
       "via": "Separate vision JSON feed linked in the official Space."
@@ -2941,6 +2981,11 @@
       "via": "Qwen research index lists E-Commerce Bench (2026-09-03) next to Qwen3.8 launch posts."
     },
     {
+      "id": "earthrecord",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker publishes results for more than five current agents."
+    },
+    {
       "id": "echo-prediction-leaderboard-unipat",
       "date": "2026-11-01",
       "via": "UniPat benchmarks page lists it under Prediction Intelligence."
@@ -2989,6 +3034,11 @@
       "id": "elimination-game",
       "date": "2026-11-01",
       "via": "Lech Mazur's repo list, reached from Extended NYT Connections."
+    },
+    {
+      "id": "embodied-agent-arena",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker repository has 118 stars."
     },
     {
       "id": "embodied-agent-interface",
@@ -3369,6 +3419,11 @@
       "id": "finben",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "findendro",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has about 34 Hugging Face upvotes."
     },
     {
       "id": "fineval",
@@ -3916,6 +3971,11 @@
       "via": "Upstage Solar Open 2 model card reports HAE-RAE v1.1."
     },
     {
+      "id": "halachabench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker publishes results for 30 models."
+    },
+    {
       "id": "halluworld",
       "date": "2026-11-14",
       "via": "Submitted through the benchmark form, issue #5."
@@ -4336,6 +4396,11 @@
       "via": "Google's Gemini 3 Deep Think post (2026-02-12) reports gold-medal level on the written sections of IPhO 2025 and IChO 2025."
     },
     {
+      "id": "ideataste",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has 47 Hugging Face upvotes."
+    },
+    {
       "id": "ifeval-ood",
       "date": "2026-11-01",
       "via": "Table 24 of the OLMo 2 paper and Table 33 of the Tulu 3 paper report it."
@@ -4379,6 +4444,11 @@
       "id": "imgedit-bench",
       "date": "2026-11-01",
       "via": "Table 9 of the Amazon Nova 2 technical report."
+    },
+    {
+      "id": "imgmt",
+      "date": "2026-11-15",
+      "via": "Discover queue. OpenCompass includes an external implementation in VLMEvalKit."
     },
     {
       "id": "immigration-bench",
@@ -4454,6 +4524,11 @@
       "id": "information-processing-bytedance",
       "date": "2026-11-01",
       "via": "Seed1.8 model card Table 1, economically valuable fields."
+    },
+    {
+      "id": "infrathon",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has 52 Hugging Face upvotes."
     },
     {
       "id": "innovationeval",
@@ -4574,6 +4649,11 @@
       "id": "irrelevant-instructions-visual-browser-openai",
       "date": "2026-11-01",
       "via": "Table 12 of the ChatGPT Agent System Card."
+    },
+    {
+      "id": "isarcasmeval",
+      "date": "2026-11-15",
+      "via": "Discover queue. Ant Group reports it in the LemonDecider model card. The original shared task received submissions from 60 teams."
     },
     {
       "id": "itbench",
@@ -5306,6 +5386,11 @@
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
     },
     {
+      "id": "longbanana",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has about 31 Hugging Face upvotes."
+    },
+    {
       "id": "longbench-chinese",
       "date": "2026-11-08",
       "via": "Held leaderboard tracks get separate records, a rule set on 2026-11-08."
@@ -5339,6 +5424,11 @@
       "id": "longmemeval-v2",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, benchmark papers with over 100 GitHub stars."
+    },
+    {
+      "id": "longshotbench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker leaderboard evaluates more than 105 models."
     },
     {
       "id": "longtext-bench",
@@ -5466,6 +5556,11 @@
       "via": "LongCat-Flash-Omni model card multi-image table."
     },
     {
+      "id": "marathondocbench",
+      "date": "2026-11-15",
+      "via": "Discover model-card result follow-up. Baidu reports it in the Unlimited OCR 2 launch card."
+    },
+    {
       "id": "mars-bench",
       "date": "2026-11-01",
       "via": "Seed2.0 model card Table 3 lists MARS-Bench, and the almanac had no record."
@@ -5549,6 +5644,11 @@
       "id": "maxm",
       "date": "2026-11-01",
       "via": "Table 4 of the Aya Vision paper (arXiv 2505.08751)."
+    },
+    {
+      "id": "maxxbench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker publishes results for 17 model configurations and the queue links newsletter coverage."
     },
     {
       "id": "mbabench",
@@ -6031,6 +6131,11 @@
       "via": "VLMEvalKit supported datasets list."
     },
     {
+      "id": "mmdm",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker leaderboard compares 28 decision models."
+    },
+    {
       "id": "mmdu",
       "date": "2026-11-01",
       "via": "VLMEvalKit dataset list compared with the almanac. 62 HF upvotes and 111 GitHub stars."
@@ -6296,6 +6401,11 @@
       "via": "Microsoft Mage-VL model card and tech report, reference [132]."
     },
     {
+      "id": "mpdocbench-parse",
+      "date": "2026-11-15",
+      "via": "Discover model-card result follow-up. Baidu reports it in the Unlimited OCR 2 model card and technical report."
+    },
+    {
       "id": "mpie-bench",
       "date": "2026-11-01",
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
@@ -6479,6 +6589,11 @@
       "id": "nanogpt-bench-intology",
       "date": "2026-11-01",
       "via": "Latent Space AINews 2026-05-20."
+    },
+    {
+      "id": "narrativebench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker explorer publishes results for 15 model configurations covering 14 models."
     },
     {
       "id": "narrativeqa",
@@ -7006,6 +7121,11 @@
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
     },
     {
+      "id": "otbench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has 39 Hugging Face upvotes."
+    },
+    {
       "id": "otelbench",
       "date": "2026-11-01",
       "via": "Hacker News story 'Benchmarking OpenTelemetry: Can AI trace your failed login?' (144 points, 2026-01-29)."
@@ -7069,6 +7189,11 @@
       "id": "parsebench",
       "date": "2026-11-01",
       "via": "Hugging Face datasets tagged benchmark:official."
+    },
+    {
+      "id": "parsebench-2",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker publishes results for 20 models."
     },
     {
       "id": "past-imo-formal-bytedance",
@@ -7501,6 +7626,11 @@
       "via": "LongCat-Flash-Thinking-2601 model card and tech report."
     },
     {
+      "id": "rbench-m",
+      "date": "2026-11-15",
+      "via": "Discover queue. Ant Group reports it in the SingVL model card."
+    },
+    {
       "id": "rcm-bench-1",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, healthcare domain."
@@ -7554,6 +7684,11 @@
       "id": "real2sim",
       "date": "2026-11-14",
       "via": "Submitted through the benchmark form, issue #3."
+    },
+    {
+      "id": "real5-omnidocbench",
+      "date": "2026-11-15",
+      "via": "Discover model-card result follow-up. The maker board lists 18 models and OpenBMB reports it."
     },
     {
       "id": "realcompanion",
@@ -7651,6 +7786,11 @@
       "via": "Web search for ResearchGym, a benchmark Epoch's InnovationEval report cites."
     },
     {
+      "id": "retrace",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has 36 Hugging Face upvotes."
+    },
+    {
       "id": "reviewbench-github",
       "date": "2026-11-01",
       "via": "benchlm.ai index diff (reviewbench) and Harbor hub, then GitHub's blog."
@@ -7709,6 +7849,11 @@
       "id": "robochallenge-table30-v2",
       "date": "2026-11-01",
       "via": "The RoboChallenge record note named a v2 dataset, and the site JSON lists Table 30 V2 as benchmark_version v2.0."
+    },
+    {
+      "id": "robocolosseum",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker runs a public physical-robot evaluation platform and the paper has 51 Hugging Face upvotes."
     },
     {
       "id": "robocurve-perceptual-attacks",
@@ -7789,6 +7934,11 @@
       "id": "rota-bench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers, top upvoted benchmark papers."
+    },
+    {
+      "id": "routerbench",
+      "date": "2026-11-15",
+      "via": "Discover queue. Ant Group reports it in the LemonDecider model card."
     },
     {
       "id": "rsi-arena",
@@ -7894,6 +8044,11 @@
       "id": "sat-spatial-aptitude",
       "date": "2026-11-01",
       "via": "Microsoft Mage-VL model card. a name search matched SAT to 3SAT-Search, which is a different benchmark."
+    },
+    {
+      "id": "sata-bench",
+      "date": "2026-11-15",
+      "via": "Discover queue. Ant Group reports it in the LemonDecider model card."
     },
     {
       "id": "scanbench-baichuan",
@@ -8269,6 +8424,11 @@
       "id": "snorkelwordle",
       "date": "2026-11-01",
       "via": "Snorkel leaderboard index."
+    },
+    {
+      "id": "so-arena",
+      "date": "2026-11-15",
+      "via": "Discover queue. The paper has 136 Hugging Face upvotes and reports 21 models."
     },
     {
       "id": "soccernet-caption",
@@ -8859,6 +9019,11 @@
       "id": "taxcalcbench-2",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, then the Column Tax repo README."
+    },
+    {
+      "id": "tb-mathmodel",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker board includes five current models."
     },
     {
       "id": "tcs-bench",
@@ -9981,6 +10146,11 @@
       "via": "Awesome-CUA catalog benchmark records."
     },
     {
+      "id": "websitebench",
+      "date": "2026-11-15",
+      "via": "Discover queue. The maker repository has 101 stars."
+    },
+    {
       "id": "websrc",
       "date": "2026-11-01",
       "via": "Microsoft Mage-VL tech report, reference [134]."
@@ -10044,6 +10214,11 @@
       "id": "wikitablequestions",
       "date": "2026-11-05",
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
+    },
+    {
+      "id": "wild-omnidocbench",
+      "date": "2026-11-15",
+      "via": "Discover model-card result follow-up. OpenBMB independently reports this benchmark."
     },
     {
       "id": "wildartifactbench-meta",
@@ -10291,6 +10466,11 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "xybench",
+      "date": "2026-11-15",
+      "via": "Discover queue. Ai2 publishes the benchmark and results for five current models."
+    },
+    {
       "id": "xyeval-google",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-09-29."
@@ -10328,6 +10508,12 @@
   ],
   "rejected": [
     {
+      "name": "$τ$-Rec-Books",
+      "url": "https://arxiv.org/abs/2611.04459",
+      "reason": "The books evaluation has four agents and seven repository stars. The linked leaderboard covers movies, not the 450-task books suite.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "100Q-Hard (internal)",
       "url": null,
       "reason": "The existing record already carries this evaluation under benchmark id(s): 100q-hard-anthropic.",
@@ -10350,6 +10536,12 @@
       "url": "https://arxiv.org/abs/2610.38231",
       "reason": "CMU-led benchmark of 2,592 Blender program edits. 2 stars and no HF paper page yet. Its neighbor 3DCodeBench is already in the almanac and got a patch.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "3DSceneBench mini",
+      "url": "https://hub.harborframework.com/datasets/pranalabs-ai-team/3dscenebench-mini",
+      "reason": "Seven-scene subset of 3dscenebench. Catalog the parent benchmark, and keep full-suite scores separate from mini scores.",
+      "date": "2026-11-15"
     },
     {
       "name": "AA-PersonalityBench",
@@ -10964,6 +11156,18 @@
       "date": "2026-11-01"
     },
     {
+      "name": "BestRand",
+      "url": "https://arxiv.org/abs/2611.00883",
+      "reason": "BestRand is a compression method evaluated on existing benchmarks, not a new benchmark.",
+      "date": "2026-11-15"
+    },
+    {
+      "name": "Beyond Instruction Override",
+      "url": "https://arxiv.org/abs/2611.07640",
+      "reason": "Amazon research introduces task-tampering cases, but no model launch reports them. The repository has zero stars and no verified external adoption.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "Binary Exploitation Benchmark (formerly OSS-Fuzz)",
       "url": "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf",
       "reason": "Section 3.3.3 reports Mythos 5.2 with reduced safeguards, not Fable 5.2. Excluded following the Fable 5.1 capability convention.",
@@ -11102,6 +11306,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "case_bench",
+      "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/register/case_bench",
+      "reason": "Eight repository stars. The Inspect registry points to a third-party implementation, not a UK AISI-authored benchmark. No qualifying model-card use or current five-model leaderboard was verified.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "CASTLE (CWE static analysis benchmark)",
       "url": "https://arxiv.org/abs/2503.09433",
       "reason": "Narrow CWE detection set for static analyzers, low traction.",
@@ -11178,6 +11388,12 @@
       "url": "https://latent.space/news/",
       "reason": "Named in AINews from X posts. HF paper search did not find it. Recheck.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Claude Fable 5.2 in Agent Arena",
+      "url": "https://latent.space/p/ainews-the-no-ai-slop-manifesto/",
+      "reason": "misread name of agent-arena",
+      "date": "2026-11-15"
     },
     {
       "name": "ClawsBench",
@@ -11342,6 +11558,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "CrossSWE",
+      "url": "https://huggingface.co/papers/2611.01484",
+      "reason": "The paper has 26 upvotes and evaluates five models. No separate current leaderboard or external adoption was verified.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "CrucibleBench",
       "url": "https://cruciblebench.ai/",
       "reason": "Self-described 99 dollar proof of concept on a MUD (HN 109 points).",
@@ -11364,6 +11586,12 @@
       "url": "https://cruxevals.com/crux-1",
       "reason": "Open-world case studies with one long task each and qualitative log analysis. No fixed score that other models can be ranked on. Cited by the Terminal-Bench Challenges post.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "CRUXEval-O",
+      "url": "https://huggingface.co/ibm-granite/granite-4.1-8b-llmon-preview",
+      "reason": "misread name of cruxeval",
+      "date": "2026-11-15"
     },
     {
       "name": "CSI-TextBench",
@@ -11624,6 +11852,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "DRPixelBench",
+      "url": "https://huggingface.co/papers/2611.03097",
+      "reason": "The test set supports the DR Pixel method. The sources show 35 repository stars and five paper upvotes, with no verified external use.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "DuplexAct-Bench",
       "url": "https://arxiv.org/abs/2609.39446",
       "reason": "0 HF upvotes. Full-Duplex-Bench family already covers the area.",
@@ -11730,6 +11964,12 @@
       "url": "https://arxiv.org/abs/2601.09142",
       "reason": "Narrow earnings-call evasion classification with labels generated by a fine-tuned classifier.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "EVIE-8B",
+      "url": "https://huggingface.co/tencent/EVIE-8B",
+      "reason": "Fine-tuned Qwen3.5-based document retrieval adaptation. The card identifies its ColQwen architecture and third-party base model.",
+      "date": "2026-11-15"
     },
     {
       "name": "EvoCodeBench (Peking University, 2024)",
@@ -12104,6 +12344,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "GeoFaham-Bench",
+      "url": "https://arxiv.org/abs/2611.04977",
+      "reason": "The 40-task test set supports the GeoFaham method. The repository has 37 stars and no verified external use.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "German Language LLM Index (PeerBench)",
       "url": "https://dach.peerbench.ai",
       "reason": "PeerBench composite of six existing German-language datasets (INCLUDE, GermEval, SB10K, ScaLA, MMLU-ProX, MuSR) over 55 models. An aggregate index from a little-known maker with no coverage found, not a new evaluation.",
@@ -12426,6 +12672,12 @@
       "url": "https://arxiv.org/abs/2609.04444",
       "reason": "Animal welfare agent eval, 4 HF upvotes, 2 stars.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "HashkafaBench",
+      "url": "https://x.com/HalachaBench/status/2118698684384981113",
+      "reason": "Held for schema incompatibility. The 288-question study measures religious stringency, which has no better direction. The required schema forces higher or lower.",
+      "date": "2026-11-15"
     },
     {
       "name": "HealthBench-Psych",
@@ -12896,6 +13148,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Kierston & KierstonBench",
+      "url": "https://huggingface.co/papers/2611.04785",
+      "reason": "The simulation and paper introduce 32 task families, but the repository has one star and the paper has one upvote. No qualifying leaderboard or external use was verified.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "KilometerAudio",
       "url": "https://perception-test-challenge.github.io/",
       "reason": "New 2026 Perception Test Challenge track with no paper or page of its own yet. Mentioned in the KilometerVision note instead.",
@@ -12948,6 +13206,12 @@
       "url": "https://arxiv.org/abs/2508.19958",
       "reason": "Long-horizon CALVIN variant from the Long-VLA method paper. No outside users found.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "l1-l2-bench-v2",
+      "url": "https://hub.harborframework.com/datasets/Enterprise-Bench/l1-l2-bench-v2",
+      "reason": "Admission remains unverified. The Harbor package has 42 tasks, but both DevRev maker pages returned HTTP 429. Harbor hosting alone does not establish authorship or adoption.",
+      "date": "2026-11-15"
     },
     {
       "name": "L2-Bench",
@@ -13164,6 +13428,12 @@
       "url": "https://huggingface.co/datasets/vtllms/sealqa",
       "reason": "Long-context split of SealQA. No card reports it and the paper has 5 HF upvotes",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Longtail-SWE",
+      "url": "https://huggingface.co/papers/2611.10304",
+      "reason": "The sources show four repository stars and 23 paper upvotes. The paper evaluates nine configurations, but no qualifying public board or external adoption was verified.",
+      "date": "2026-11-15"
     },
     {
       "name": "LoRA Speedrun",
@@ -13388,6 +13658,18 @@
       "date": "2026-11-12"
     },
     {
+      "name": "MiMo-V2.6-Flash-RL",
+      "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+      "reason": "Already cataloged as mimo-v2-6-flash. Patch its alias and model card instead of adding a duplicate.",
+      "date": "2026-11-15"
+    },
+    {
+      "name": "MiMo-V2.6-Pro-RL",
+      "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+      "reason": "Already cataloged as mimo-v2-6-pro. Patch its alias and model card instead of adding a duplicate.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "Mind2Web-SC",
       "url": "https://arxiv.org/abs/2406.09187",
       "reason": "Safety-control test set from the GuardAgent method paper.",
@@ -13410,6 +13692,12 @@
       "url": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct",
       "reason": "Narrow music information retrieval task: singing voice and lyric dataset used for lyric ASR. Reported in the Qwen3-Omni card but outside general AI capability.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "MKA Most",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/multimodal-knowledge-agent-benchmark/",
+      "reason": "misread name of mka",
+      "date": "2026-11-15"
     },
     {
       "name": "ML-Dev-Bench",
@@ -13464,6 +13752,12 @@
       "url": "https://arxiv.org/abs/2512.10863",
       "reason": "22 HF upvotes, 62 stars.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "MMSUDataset",
+      "url": "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/mmsu.py",
+      "reason": "misread name of mmsu",
+      "date": "2026-11-15"
     },
     {
       "name": "MMTB (Multimedia Terminal Bench)",
@@ -13568,6 +13862,12 @@
       "date": "2026-11-12"
     },
     {
+      "name": "Muse-Glimmer-30B",
+      "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+      "reason": "Already cataloged as muse-glimmer. Patch its alias and model card instead of adding a duplicate.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "Muses-Bench",
       "url": "https://arxiv.org/abs/2609.34392",
       "reason": "Test set inside the Org-Agent method paper.",
@@ -13620,6 +13920,12 @@
       "url": "https://huggingface.co/datasets/ScaleAI/ndm_bench",
       "reason": "Nuclear escalation and proliferation scenario CSVs with an empty card, no paper and no board. Too little to describe.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Nemotron 3 Ultra-550B",
+      "url": "https://latent.space/p/ainews-it-s-swapping-season/",
+      "reason": "Already cataloged as nemotron-3-ultra. Patch its alias and model card instead of adding a duplicate.",
+      "date": "2026-11-15"
     },
     {
       "name": "NeuralBench (Meta FAIR)",
@@ -13836,6 +14142,12 @@
       "url": "https://arxiv.org/abs/2610.34386",
       "reason": "Borderline. UC Berkeley (Dawn Song) RSI post-training gym, but the repo says the benchmark files are not released yet. Only three agent systems run, 2 stars, 12 HF upvotes. Revisit when the data ships.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "ParseBench-2 dispute",
+      "url": "https://x.com/jerryjliu0/status/2121278045013377092",
+      "reason": "misread name of parsebench-2",
+      "date": "2026-11-15"
     },
     {
       "name": "PatentAgentBench",
@@ -14084,6 +14396,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Published ParseBench ↑",
+      "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse",
+      "reason": "misread name of parsebench",
+      "date": "2026-11-15"
+    },
+    {
       "name": "PubTabNet",
       "url": "https://huggingface.co/zai-org/GLM-OCR",
       "reason": "Narrow OCR dataset (formula, table or form extraction) reported only in the GLM-OCR table. Outside general capability per the bar.",
@@ -14240,6 +14558,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "ramen-bench",
+      "url": "https://hub.harborframework.com/datasets/stbenjam/ramen-bench",
+      "reason": "One creative-coding prompt and a gallery. No scored five-model board, qualifying adoption, or major-lab report was verified.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "RaR-Medicine and RaR-Science (Scale)",
       "url": "https://huggingface.co/datasets/ScaleAI/RaR-Science",
       "reason": "Rubrics-as-Rewards training data, not an evaluation.",
@@ -14256,6 +14580,12 @@
       "url": "https://github.com/AI4Science-WestlakeU/RealPDEBench",
       "reason": "Benchmark for scientific ML surrogate models of PDEs, outside the almanac's model scope.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "RealSSA",
+      "url": "https://huggingface.co/papers/2610.32749",
+      "reason": "RealSSA tests narrow audio source separation for the Falcon method. The sources show 66 repository stars and 28 paper upvotes, with no verified external use.",
+      "date": "2026-11-15"
     },
     {
       "name": "Reasoning Gym",
@@ -14322,6 +14652,12 @@
       "url": "https://arxiv.org/abs/2510.24591",
       "reason": "5 HF upvotes, no lab use found.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Reported ParseBench overall",
+      "url": "https://huggingface.co/nvidia/Nemotron-3.5-Parse",
+      "reason": "misread name of parsebench",
+      "date": "2026-11-15"
     },
     {
       "name": "ResearchCodeBench",
@@ -14774,6 +15110,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "SWE-Pair v0",
+      "url": "https://hub.harborframework.com/datasets/evaligo/swe-pair",
+      "reason": "The maker board has five configurations but only four distinct models. No other admission criterion was verified.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "SWE-QA",
       "url": "https://arxiv.org/abs/2509.14635",
       "reason": "12 HF upvotes, 58 stars.",
@@ -15110,6 +15452,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "VidUEU-Agent",
+      "url": "https://huggingface.co/papers/2611.04418",
+      "reason": "VidUEU-Agent is a training-data curation pipeline, not a new evaluation benchmark.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "VimGolf challenges",
       "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/vimgolf_challenges",
       "reason": "Novelty task with no paper or users.",
@@ -15242,6 +15590,18 @@
       "date": "2026-11-01"
     },
     {
+      "name": "WeVisDoc-2B",
+      "url": "https://huggingface.co/tencent/WeVisDoc-2B",
+      "reason": "The maker explicitly identifies this checkpoint as fine-tuned from Qwen3-VL.",
+      "date": "2026-11-15"
+    },
+    {
+      "name": "WeVisDoc-4B",
+      "url": "https://huggingface.co/tencent/WeVisDoc-4B",
+      "reason": "The maker explicitly identifies this checkpoint as fine-tuned from Qwen3-VL.",
+      "date": "2026-11-15"
+    },
+    {
       "name": "WGO-Bench",
       "url": "https://latent.space/p/ainews-openai-launches-gpt-56-solterraluna/",
       "reason": "Robot video annotation metric cited in a Google robotics data-engine summary. A data-labeling evaluation, not a model capability benchmark, and no maker page found.",
@@ -15312,6 +15672,12 @@
       "url": "https://arxiv.org/abs/2610.29927",
       "reason": "UIUC NeurIPS 2026 method paper with diagnostic metrics for difficulty coverage across 25 existing benchmarks. It is not a benchmark itself.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "ZeroBench-main",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "reason": "misread name of zerobench",
+      "date": "2026-11-15"
     },
     {
       "name": "Zvi joke and personal benchmarks (EditorBench, PokemonCrosswordBench, SlayTheBench, SpireBench, Zorkbench, MarketBench, NormieBench, BookTenobrusAndGirlfriendVacationBench, EldenRingCorruptedSaveFileBench, SurvivorPoolBench, BenchBench, DrivingBench)",

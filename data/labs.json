@@ -964,5 +964,47 @@
       "Ricursive Intelligence",
       "ricursiveAI"
     ]
+  },
+  {
+    "id": "fish-audio",
+    "name": "Fish Audio",
+    "url": "https://huggingface.co/fishaudio",
+    "aliases": [
+      "fishaudio"
+    ]
+  },
+  {
+    "id": "recursive-superintelligence",
+    "name": "Recursive Superintelligence",
+    "url": "https://huggingface.co/RecursiveSI",
+    "aliases": [
+      "RecursiveSI",
+      "Recursive"
+    ]
+  },
+  {
+    "id": "cactus-compute",
+    "name": "Cactus Compute",
+    "url": "https://huggingface.co/Cactus-Compute",
+    "aliases": [
+      "Cactus-Compute"
+    ]
+  },
+  {
+    "id": "somark",
+    "name": "SoMark",
+    "url": "https://huggingface.co/SoMarkAI",
+    "aliases": [
+      "SoMarkAI"
+    ]
+  },
+  {
+    "id": "datalab",
+    "name": "Datalab",
+    "url": "https://huggingface.co/datalab-to",
+    "aliases": [
+      "Datalab.to",
+      "datalab-to"
+    ]
   }
 ]
