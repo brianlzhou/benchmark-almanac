@@ -13794,6 +13794,32 @@
     "card": "https://huggingface.co/inclusionAI/Ling-3.1-flash"
   },
   {
+    "id": "granite-switch-4-1-30b",
+    "name": "Granite Switch 4.1 30B",
+    "lab": "ibm",
+    "family": "Granite Switch",
+    "released": "2026-10-14",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/ibm-granite/granite-switch-4.1-30b",
+    "aliases": [
+      "granite-switch-4.1-30b"
+    ]
+  },
+  {
+    "id": "granite-switch-4-1-8b",
+    "name": "Granite Switch 4.1 8B",
+    "lab": "ibm",
+    "family": "Granite Switch",
+    "released": "2026-10-14",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/ibm-granite/granite-switch-4.1-8b",
+    "aliases": [
+      "granite-switch-4.1-8b"
+    ]
+  },
+  {
     "id": "grok-voice-3",
     "name": "Grok Voice 3.0",
     "lab": "xai",
@@ -13949,12 +13975,51 @@
     "card": "https://www.liquid.ai/blog/lfm3"
   },
   {
+    "id": "unlimited-ocr-2",
+    "name": "Unlimited OCR 2",
+    "lab": "baidu",
+    "family": "Unlimited OCR",
+    "released": "2026-10-27",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/baidu/Unlimited-OCR-2",
+    "aliases": [
+      "Unlimited-OCR-2"
+    ]
+  },
+  {
     "id": "gemini-4-carbon",
     "name": "Gemini 4 Carbon",
     "lab": "google",
     "released": "2026-10-28",
     "weights": "closed",
     "epoch": "Gemini 4 Carbon"
+  },
+  {
+    "id": "minicpm-ocr-1-0",
+    "name": "MiniCPM-OCR-1.0",
+    "lab": "openbmb",
+    "family": "MiniCPM-OCR",
+    "released": "2026-10-28",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+    "aliases": [
+      "MiniCPM-OCR-1.0"
+    ]
+  },
+  {
+    "id": "nemotron-3-5-transcribe-30b-a4b",
+    "name": "NVIDIA Nemotron 3.5 Transcribe 30B-A4B",
+    "lab": "nvidia",
+    "family": "Nemotron 3.5",
+    "released": "2026-10-28",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "aliases": [
+      "NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+    ]
   },
   {
     "id": "mistral-large-4-le-chonk",
@@ -14122,6 +14187,14 @@
     "epoch": "Claude Fable 5.2"
   },
   {
+    "id": "claude-fable-5-2-claude-mythos-5-2",
+    "name": "Claude Fable 5.2,Claude Mythos 5.2",
+    "lab": "anthropic",
+    "released": "2026-11-09",
+    "weights": "closed",
+    "epoch": "Claude Fable 5.2,Claude Mythos 5.2"
+  },
+  {
     "id": "claude-mythos-5-2",
     "name": "Claude Mythos 5.2",
     "lab": "anthropic",
@@ -14150,12 +14223,41 @@
     "epoch": "Muse Ember"
   },
   {
+    "id": "praxis-1",
+    "name": "Praxis-1",
+    "lab": "runway",
+    "family": "Praxis",
+    "released": "2026-11-11",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://runway.com/news/company-news/praxis-1-is-now-available",
+    "aliases": [
+      "Praxis-1"
+    ]
+  },
+  {
     "id": "gemini-4-hydrogen",
     "name": "Gemini 4 Hydrogen",
     "lab": "google",
     "family": "Gemini 4",
     "released": "2026-11-12",
     "weights": "closed"
+  },
+  {
+    "id": "qwen4-max",
+    "name": "Qwen4-Max",
+    "lab": "qwen",
+    "family": "Qwen4",
+    "released": "2026-11-15",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://qwen.ai/blog?id=qwen4-max",
+    "aliases": [
+      "Qwen4-Max",
+      "Qwen 4 Max",
+      "Qwen4 Max",
+      "qwen4-max"
+    ]
   },
   {
     "id": "bagel",
@@ -14205,6 +14307,30 @@
     "aliases": [
       "dreamina-seedance-2.5",
       "dreamina-seedance-2.5-720p"
+    ]
+  },
+  {
+    "id": "fish-audio-drama-3",
+    "name": "Fish Audio Drama 3",
+    "lab": "fish-audio",
+    "family": "Drama",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/fishaudio/drama-3",
+    "aliases": [
+      "drama-3"
+    ]
+  },
+  {
+    "id": "flint",
+    "name": "Flint",
+    "lab": "recursive-superintelligence",
+    "family": "Flint",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/RecursiveSI/flint",
+    "aliases": [
+      "flint"
     ]
   },
   {
@@ -14269,6 +14395,18 @@
     "name": "FLUX.2 [pro]",
     "lab": "black-forest-labs",
     "weights": "closed"
+  },
+  {
+    "id": "flux-3-image-klein",
+    "name": "FLUX 3 Image Klein",
+    "lab": "black-forest-labs",
+    "family": "FLUX 3",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
+    "aliases": [
+      "flux-3-image-klein"
+    ]
   },
   {
     "id": "flux-3-video",
@@ -14703,6 +14841,18 @@
     "epoch": "learnlm-1.5-pro-experimental"
   },
   {
+    "id": "ling-3-2-flash",
+    "name": "Ling-3.2-flash",
+    "lab": "ant-group",
+    "family": "Ling 3",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://developer.ant-ling.com/en/docs/models/ling",
+    "aliases": [
+      "Ling-3.2-flash"
+    ]
+  },
+  {
     "id": "ltx-2-19b",
     "name": "LTX-2 19B",
     "lab": "lightricks",
@@ -14755,6 +14905,30 @@
     "weights": "closed"
   },
   {
+    "id": "ming-3-0-tts-0-5b",
+    "name": "Ming-3.0-tts-0.5B",
+    "lab": "ant-group",
+    "family": "Ming 3",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B",
+    "aliases": [
+      "Ming-3.0-tts-0.5B"
+    ]
+  },
+  {
+    "id": "minicpm-v-4-7-35b-a3b",
+    "name": "MiniCPM-V-4.7-35B-A3B",
+    "lab": "openbmb",
+    "family": "MiniCPM-V",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B",
+    "aliases": [
+      "MiniCPM-V-4.7-35B-A3B"
+    ]
+  },
+  {
     "id": "minimax-h3",
     "name": "MiniMax H3",
     "lab": "minimax",
@@ -14762,6 +14936,42 @@
     "aliases": [
       "Minimax H3",
       "minimax-h3"
+    ]
+  },
+  {
+    "id": "minimax-h3-image",
+    "name": "MiniMax-H3-Image",
+    "lab": "minimax",
+    "family": "MiniMax H3",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image",
+    "aliases": [
+      "MiniMax-H3-Image"
+    ]
+  },
+  {
+    "id": "minimax-music-3",
+    "name": "MiniMax Music 3",
+    "lab": "minimax",
+    "family": "MiniMax Music",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/MiniMaxAI/MiniMax-Music3",
+    "aliases": [
+      "MiniMax-Music3"
+    ]
+  },
+  {
+    "id": "mirage",
+    "name": "Mirage",
+    "lab": "cactus-compute",
+    "family": "Mirage",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Cactus-Compute/mirage",
+    "aliases": [
+      "mirage"
     ]
   },
   {
@@ -14791,6 +15001,18 @@
     "weights": "closed",
     "aliases": [
       "muse-video"
+    ]
+  },
+  {
+    "id": "oxr-1-0",
+    "name": "OXR-1.0",
+    "lab": "somark",
+    "family": "OXR",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/SoMarkAI/OXR-1.0",
+    "aliases": [
+      "OXR-1.0"
     ]
   },
   {
@@ -14835,6 +15057,18 @@
     "name": "Qwen-Image-2.1",
     "lab": "qwen",
     "weights": "open"
+  },
+  {
+    "id": "qwen-image-2-1-turbo",
+    "name": "Qwen-Image-2.1-Turbo",
+    "lab": "qwen",
+    "family": "Qwen Image",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo",
+    "aliases": [
+      "Qwen-Image-2.1-Turbo"
+    ]
   },
   {
     "id": "qwen-image-2512",
@@ -15094,6 +15328,18 @@
     "weights": "open"
   },
   {
+    "id": "surya-ocr-2-5",
+    "name": "Surya OCR 2.5",
+    "lab": "datalab",
+    "family": "Surya",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+    "aliases": [
+      "surya-ocr-2.5"
+    ]
+  },
+  {
     "id": "switch-base",
     "name": "Switch-Base",
     "epoch": "Switch-Base"
@@ -15337,243 +15583,5 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
-  },
-  {
-    "id": "qwen4-max",
-    "name": "Qwen4-Max",
-    "lab": "qwen",
-    "family": "Qwen4",
-    "released": "2026-11-15",
-    "weights": "closed",
-    "tier": "flagship",
-    "card": "https://qwen.ai/blog?id=qwen4-max",
-    "aliases": [
-      "Qwen4-Max",
-      "Qwen 4 Max",
-      "Qwen4 Max",
-      "qwen4-max"
-    ]
-  },
-  {
-    "id": "minicpm-ocr-1-0",
-    "name": "MiniCPM-OCR-1.0",
-    "lab": "openbmb",
-    "family": "MiniCPM-OCR",
-    "released": "2026-10-28",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
-    "aliases": [
-      "MiniCPM-OCR-1.0"
-    ]
-  },
-  {
-    "id": "flux-3-image-klein",
-    "name": "FLUX 3 Image Klein",
-    "lab": "black-forest-labs",
-    "family": "FLUX 3",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/black-forest-labs/flux-3-image-klein",
-    "aliases": [
-      "flux-3-image-klein"
-    ]
-  },
-  {
-    "id": "unlimited-ocr-2",
-    "name": "Unlimited OCR 2",
-    "lab": "baidu",
-    "family": "Unlimited OCR",
-    "released": "2026-10-27",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/baidu/Unlimited-OCR-2",
-    "aliases": [
-      "Unlimited-OCR-2"
-    ]
-  },
-  {
-    "id": "granite-switch-4-1-30b",
-    "name": "Granite Switch 4.1 30B",
-    "lab": "ibm",
-    "family": "Granite Switch",
-    "released": "2026-10-14",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/ibm-granite/granite-switch-4.1-30b",
-    "aliases": [
-      "granite-switch-4.1-30b"
-    ]
-  },
-  {
-    "id": "granite-switch-4-1-8b",
-    "name": "Granite Switch 4.1 8B",
-    "lab": "ibm",
-    "family": "Granite Switch",
-    "released": "2026-10-14",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/ibm-granite/granite-switch-4.1-8b",
-    "aliases": [
-      "granite-switch-4.1-8b"
-    ]
-  },
-  {
-    "id": "minimax-h3-image",
-    "name": "MiniMax-H3-Image",
-    "lab": "minimax",
-    "family": "MiniMax H3",
-    "weights": "open",
-    "tier": "flagship",
-    "card": "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image",
-    "aliases": [
-      "MiniMax-H3-Image"
-    ]
-  },
-  {
-    "id": "fish-audio-drama-3",
-    "name": "Fish Audio Drama 3",
-    "lab": "fish-audio",
-    "family": "Drama",
-    "weights": "open",
-    "tier": "flagship",
-    "card": "https://huggingface.co/fishaudio/drama-3",
-    "aliases": [
-      "drama-3"
-    ]
-  },
-  {
-    "id": "flint",
-    "name": "Flint",
-    "lab": "recursive-superintelligence",
-    "family": "Flint",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/RecursiveSI/flint",
-    "aliases": [
-      "flint"
-    ]
-  },
-  {
-    "id": "ming-3-0-tts-0-5b",
-    "name": "Ming-3.0-tts-0.5B",
-    "lab": "ant-group",
-    "family": "Ming 3",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B",
-    "aliases": [
-      "Ming-3.0-tts-0.5B"
-    ]
-  },
-  {
-    "id": "ling-3-2-flash",
-    "name": "Ling-3.2-flash",
-    "lab": "ant-group",
-    "family": "Ling 3",
-    "weights": "closed",
-    "tier": "mid",
-    "card": "https://developer.ant-ling.com/en/docs/models/ling",
-    "aliases": [
-      "Ling-3.2-flash"
-    ]
-  },
-  {
-    "id": "praxis-1",
-    "name": "Praxis-1",
-    "lab": "runway",
-    "family": "Praxis",
-    "released": "2026-11-11",
-    "weights": "open",
-    "tier": "flagship",
-    "card": "https://runway.com/news/company-news/praxis-1-is-now-available",
-    "aliases": [
-      "Praxis-1"
-    ]
-  },
-  {
-    "id": "minicpm-v-4-7-35b-a3b",
-    "name": "MiniCPM-V-4.7-35B-A3B",
-    "lab": "openbmb",
-    "family": "MiniCPM-V",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B",
-    "aliases": [
-      "MiniCPM-V-4.7-35B-A3B"
-    ]
-  },
-  {
-    "id": "qwen-image-2-1-turbo",
-    "name": "Qwen-Image-2.1-Turbo",
-    "lab": "qwen",
-    "family": "Qwen Image",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo",
-    "aliases": [
-      "Qwen-Image-2.1-Turbo"
-    ]
-  },
-  {
-    "id": "mirage",
-    "name": "Mirage",
-    "lab": "cactus-compute",
-    "family": "Mirage",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/Cactus-Compute/mirage",
-    "aliases": [
-      "mirage"
-    ]
-  },
-  {
-    "id": "nemotron-3-5-transcribe-30b-a4b",
-    "name": "NVIDIA Nemotron 3.5 Transcribe 30B-A4B",
-    "lab": "nvidia",
-    "family": "Nemotron 3.5",
-    "released": "2026-10-28",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
-    "aliases": [
-      "NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
-    ]
-  },
-  {
-    "id": "oxr-1-0",
-    "name": "OXR-1.0",
-    "lab": "somark",
-    "family": "OXR",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/SoMarkAI/OXR-1.0",
-    "aliases": [
-      "OXR-1.0"
-    ]
-  },
-  {
-    "id": "surya-ocr-2-5",
-    "name": "Surya OCR 2.5",
-    "lab": "datalab",
-    "family": "Surya",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/datalab-to/surya-ocr-2.5",
-    "aliases": [
-      "surya-ocr-2.5"
-    ]
-  },
-  {
-    "id": "minimax-music-3",
-    "name": "MiniMax Music 3",
-    "lab": "minimax",
-    "family": "MiniMax Music",
-    "weights": "open",
-    "tier": "flagship",
-    "card": "https://huggingface.co/MiniMaxAI/MiniMax-Music3",
-    "aliases": [
-      "MiniMax-Music3"
-    ]
   }
 ]
