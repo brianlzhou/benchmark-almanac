@@ -15319,5 +15319,21 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
+  },
+  {
+    "id": "qwen4-max",
+    "name": "Qwen4-Max",
+    "lab": "qwen",
+    "family": "Qwen4",
+    "released": "2026-11-15",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://qwen.ai/blog?id=qwen4-max",
+    "aliases": [
+      "Qwen4-Max",
+      "Qwen 4 Max",
+      "Qwen4 Max",
+      "qwen4-max"
+    ]
   }
 ]

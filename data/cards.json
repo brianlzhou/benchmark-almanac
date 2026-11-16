@@ -51826,5 +51826,119 @@
         "as_written": "Vals Legal Research Bench (ties for #1)"
       }
     ]
+  },
+  {
+    "id": "qwen-qwen4-max-2026-11-15",
+    "lab": "qwen",
+    "model": "qwen4-max",
+    "date": "2026-11-15",
+    "title": "Qwen4-Max: Your New Teammate Has Arrived (blog)",
+    "url": "https://qwen.ai/blog?id=qwen4-max",
+    "tier": "flagship",
+    "notes": "qwen.ai renders client-side, so the text was read from the site article API (path=qwen4-max), which dates the post 2026-11-16 10:00 Beijing time. Scores come from the 16-panel chart image, which compares Qwen3.8-Max-0902, Claude Opus 5.5, GPT-6.1 Sol, GPT-6 Astra and Kimi K3.1. The token efficiency chart puts the Work360 and Terminal-Bench 4.0 headline scores at Xhigh effort. Qwen cites CodeArena and AgentArena from Arena, AA-Briefcase v1.1 and Automationbench-AA from Artificial Analysis, HLAB-Vals-1.1 from the Vals Index and Agents' Last Exam v1.1 from its leaderboard. ProgramBench is the almost-solved share, since Qwen3.8-Max-0902's 28.0 in the chart equals its own almost-solved figure. Humanity's Last Exam and Chartography are without tools: Kimi K3.1's 51.1 and Claude Opus 5.5's 66.3 in the chart are those models' no-tools figures. APEX-Agents v1.1 (72.1) is left out because it is Pass@1, cited from Mercor's board, and the record ranks by mean score. Last Secure Code Bench rose from 22.0% for Qwen3.8-Max. The pre-training bits-per-byte chart is in-house and not recorded.",
+    "results": [
+      {
+        "benchmark": "work360",
+        "score": 52.69,
+        "unit": "score",
+        "as_written": "Work360 (Xhigh effort)"
+      },
+      {
+        "benchmark": "deepswe",
+        "score": 75.7,
+        "unit": "%",
+        "as_written": "Agentic coding, DeepSWE v1.1"
+      },
+      {
+        "benchmark": "code-arena",
+        "score": 1750,
+        "unit": "Elo",
+        "as_written": "Web development, CodeArena (Elo), cited from Arena"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 48.5,
+        "unit": "%",
+        "as_written": "Agentic terminal coding, Terminal-Bench 4.0 (Xhigh effort)"
+      },
+      {
+        "benchmark": "programbench-almost",
+        "score": 31.5,
+        "unit": "%",
+        "as_written": "Black-box software replication, ProgramBench"
+      },
+      {
+        "benchmark": "aa-briefcase-1-1",
+        "score": 1686,
+        "unit": "Elo",
+        "as_written": "Agentic knowledge work, AA-Briefcase v1.1 (Elo), cited from Artificial Analysis"
+      },
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "score": 46.7,
+        "unit": "%",
+        "as_written": "Long-horizon valuable tasks, Agents' Last Exam v1.1, cited from its leaderboard"
+      },
+      {
+        "benchmark": "jobbench",
+        "score": 68.5,
+        "unit": "%",
+        "as_written": "Professional job tasks, JobBench (updated dataset and evaluation code)"
+      },
+      {
+        "benchmark": "harvey-lab-1-1",
+        "score": 21.3,
+        "unit": "%",
+        "as_written": "Legal agent work, HLAB-Vals-1.1, cited from the Vals Index"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 72.5,
+        "unit": "%",
+        "as_written": "Agentic SaaS workflow, Automationbench-AA, cited from Artificial Analysis"
+      },
+      {
+        "benchmark": "agent-arena",
+        "score": 7.5,
+        "unit": "%",
+        "as_written": "Real-world agent tasks, AgentArena (Net Improvement), cited from Arena"
+      },
+      {
+        "benchmark": "biomysterybench",
+        "score": 85.0,
+        "unit": "%",
+        "as_written": "Bioinformatics research, BioMysteryBench"
+      },
+      {
+        "benchmark": "healthbench-professional",
+        "score": 60.0,
+        "unit": "%",
+        "as_written": "Clinical reasoning, HealthBench Professional"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 51.7,
+        "unit": "%",
+        "as_written": "Multidisciplinary reasoning, Humanity's Last Exam"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 54.2,
+        "unit": "%",
+        "as_written": "Visual chart understanding, Chartography (min_pixels 4096×32×32)"
+      },
+      {
+        "benchmark": "video-index",
+        "score": 68.1,
+        "unit": "%",
+        "as_written": "Video understanding, Video-Index"
+      },
+      {
+        "benchmark": "lscbench",
+        "score": 31.8,
+        "unit": "%",
+        "as_written": "Last Secure Code Bench, code reconstruction without a security hint, function-level pass rate for both function and security"
+      }
+    ]
   }
 ]

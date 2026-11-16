@@ -24008,6 +24008,7 @@
     },
     "access": "public",
     "note": "Edition 1.1 changes the answer options and question limit from edition 1.0. Model-based answer checks can require replaying rounds. September is the earliest month of the opened edition 1.1 results. The small subject set limits generalization.",
+    "unit": "score",
     "better": "lower",
     "confidence": "verified",
     "evidence": [
@@ -24015,8 +24016,7 @@
       "https://deep20bench.com/results/",
       "https://deep20bench.com/methodology/"
     ],
-    "added": "2026-11-15",
-    "unit": "score"
+    "added": "2026-11-15"
   },
   {
     "id": "deepconsult",
@@ -32873,13 +32873,13 @@
     },
     "access": "private",
     "note": "This record covers the July 22, 2026 snapshot of twenty businesses. Ad spend varies by agent, so raw attention counts are not budget-normalized. These early outcomes do not establish profitability. This is unrelated to Yufeng Wang's simulated FounderBench.",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://eico.so/founder-bench"
     ],
-    "added": "2026-11-15",
-    "unit": "score"
+    "added": "2026-11-15"
   },
   {
     "id": "frames",
@@ -43705,14 +43705,14 @@
     },
     "access": "public",
     "note": "The maker site reports 5,000 hands. Opponent roster, starting stacks, and hand count affect results.",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://www.interactivebench.org/",
       "https://arxiv.org/pdf/2603.04737"
     ],
-    "added": "2026-11-15",
-    "unit": "score"
+    "added": "2026-11-15"
   },
   {
     "id": "interactive-benchmarks-trust",
@@ -43732,14 +43732,14 @@
     },
     "access": "public",
     "note": "The payoff matrix and continuation probability define the game. Results depend on the opponent roster and number of matches.",
+    "unit": "score",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
       "https://www.interactivebench.org/",
       "https://arxiv.org/pdf/2603.04737"
     ],
-    "added": "2026-11-15",
-    "unit": "score"
+    "added": "2026-11-15"
   },
   {
     "id": "intercode-ctf",
@@ -90601,6 +90601,38 @@
     "added": "2026-11-01"
   },
   {
+    "id": "video-index",
+    "name": "Video-Index",
+    "aliases": [
+      "Video Index"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-understanding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models answer 840 multiple-choice questions about videos, the 210 hardest in each of four groups: perception, time, space and reasoning. Questions that shortcut attacks could answer without the video were left out.",
+    "org": "Song et al. (arXiv 2610.00960)",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.00960",
+      "repo": "https://github.com/Espere-1119-Song/Video-Index",
+      "dataset": "https://huggingface.co/datasets/Video-Index/Video-Index",
+      "site": "https://www.enxinsong.com/blog/video-index/"
+    },
+    "access": "public",
+    "note": "Built from 505,518 questions in 112 earlier video benchmarks. Human volunteers scored 55.0.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2610.00960",
+      "https://www.enxinsong.com/blog/video-index/",
+      "https://qwen.ai/blog?id=qwen4-max"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "video-mme",
     "name": "Video-MME",
     "aliases": [
@@ -95032,6 +95064,30 @@
       "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "work360",
+    "name": "Work360",
+    "aliases": [
+      "WORK360"
+    ],
+    "category": "economic-work",
+    "subcategory": "work-occupations",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Agents complete professional tasks drawn from a map of 26 industries, 182 subfields and 721 specialties. Qwen in-house scoring (method unpublished).",
+    "org": "Alibaba Qwen",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Lab-created in-house eval (Alibaba Qwen). Only Qwen reports scores. Qwen's post shows sample tasks, which mix rule checks and rubrics, but not the full set or the graders.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://qwen.ai/blog?id=qwen4-max"
+    ],
+    "added": "2026-11-15"
   },
   {
     "id": "workarena",

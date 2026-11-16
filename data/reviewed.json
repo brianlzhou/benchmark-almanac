@@ -9596,6 +9596,11 @@
       "via": "Xiaomi MiMo-V2.5 launch post reports VideoHolmes."
     },
     {
+      "id": "video-index",
+      "date": "2026-11-15",
+      "via": "Qwen4-Max launch post"
+    },
+    {
       "id": "video-oasis",
       "date": "2026-11-01",
       "via": "HF paper search for benchmark papers with 35 or more upvotes."
@@ -10124,6 +10129,11 @@
       "id": "word-task-tencent",
       "date": "2026-11-01",
       "via": "Hunyuan-A13B-Instruct model card table."
+    },
+    {
+      "id": "work360",
+      "date": "2026-11-15",
+      "via": "Qwen4-Max launch post"
     },
     {
       "id": "workarena",
