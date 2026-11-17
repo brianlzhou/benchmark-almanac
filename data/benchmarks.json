@@ -5095,7 +5095,7 @@
     "note": "Model cards report the rounds R1, R2, and R3 separately or as an average.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.25,
+    "edi": 122.05,
     "epoch": {
       "epoch_name": "ANLI",
       "random": 33.33,
@@ -5960,7 +5960,7 @@
     "successor": "apex-agents-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.98,
+    "edi": 156.87,
     "epoch": {
       "epoch_name": "APEX-Agents",
       "random": 0,
@@ -6729,7 +6729,7 @@
     "successor": "arc-agi-2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.5,
+    "edi": 145.52,
     "epoch": {
       "epoch_name": "ARC-AGI",
       "random": 0,
@@ -6786,7 +6786,7 @@
     "successor": "arc-agi-3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.63,
+    "edi": 154.65,
     "epoch": {
       "epoch_name": "ARC-AGI-2",
       "random": 0,
@@ -6857,7 +6857,7 @@
     "note": "Saturated by frontier models, which score above 95%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.49,
+    "edi": 94.14,
     "epoch": {
       "epoch_name": "ARC AI2",
       "random": 25,
@@ -9673,7 +9673,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.66,
+    "edi": 154.71,
     "epoch": {
       "epoch_name": "Balrog",
       "random": 0,
@@ -10619,7 +10619,7 @@
     "successor": "big-bench-extra-hard",
     "unit": "%",
     "confidence": "verified",
-    "edi": 105.92,
+    "edi": 105.63,
     "epoch": {
       "epoch_name": "BBH",
       "random": 25,
@@ -12797,41 +12797,6 @@
     ]
   },
   {
-    "id": "browsesafe-plus-plus",
-    "name": "BrowseSafe++",
-    "aliases": [
-      "BrowseSafe Plus Plus",
-      "browsesafe-plus-plus"
-    ],
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "university",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "family": "browsesafe",
-    "version": "2",
-    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
-    "org": "Perplexity",
-    "released": "2026-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2610.17457",
-      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
-      "site": "https://browsesafe.perplexity.ai/",
-      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
-      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
-    },
-    "access": "public+private-holdout",
-    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://browsesafe.perplexity.ai/",
-      "https://arxiv.org/abs/2610.17457"
-    ],
-    "added": "2026-11-01"
-  },
-  {
     "id": "browsesafe-adapt",
     "name": "BrowseSafe-Adapt",
     "category": "safety-alignment",
@@ -12889,6 +12854,41 @@
     "evidence": [
       "https://arxiv.org/abs/2511.20597",
       "https://browsesafe.perplexity.ai/"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "browsesafe-plus-plus",
+    "name": "BrowseSafe++",
+    "aliases": [
+      "BrowseSafe Plus Plus",
+      "browsesafe-plus-plus"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "browsesafe",
+    "version": "2",
+    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
+    "org": "Perplexity",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.17457",
+      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
+      "site": "https://browsesafe.perplexity.ai/",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
+      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://browsesafe.perplexity.ai/",
+      "https://arxiv.org/abs/2610.17457"
     ],
     "added": "2026-11-01"
   },
@@ -13426,7 +13426,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 139.13,
+    "edi": 139.15,
     "epoch": {
       "epoch_name": "CadEval",
       "random": 0,
@@ -15864,7 +15864,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 161.7,
+    "edi": 161.82,
     "epoch": {
       "epoch_name": "Chess Puzzles",
       "random": 4.96,
@@ -16430,7 +16430,7 @@
     "note": "500 contexts, 1,899 tasks, 31,607 rubrics. Follow-up CL-bench Life (2026-04) covers everyday contexts.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 180.34,
+    "edi": 180.78,
     "epoch": {
       "epoch_name": "CL-bench",
       "random": 0,
@@ -16465,7 +16465,7 @@
     "note": "The best model solved 19.3 percent of tasks at release.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.3,
+    "edi": 177,
     "epoch": {
       "epoch_name": "CL-bench Life",
       "random": 0,
@@ -22084,7 +22084,7 @@
     "note": "40 professional CTF tasks from four competitions, each split into subtasks for partial credit. Agents work in a Kali Linux environment. The board mixes HAL leaderboard runs with lab system-card scores on 35 to 39 task subsets. Anthropic reports it near saturation. The makers point readers to their later BountyBench.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.16,
+    "edi": 146.13,
     "epoch": {
       "epoch_name": "Cybench",
       "random": 0,
@@ -24463,7 +24463,7 @@
     "note": "The official judge model changed from Gemini 2.5 Pro to GPT-5.5 in May 2026, so older and newer scores do not compare directly.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.78,
+    "edi": 154.76,
     "epoch": {
       "epoch_name": "DeepResearch Bench",
       "random": 0,
@@ -28487,7 +28487,7 @@
     "note": "One card was banned in 2026-10 after it broke the game. Epoch expects saturation soon. Game material is not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.97,
+    "edi": 163.95,
     "epoch": {
       "epoch_name": "EBR-bench",
       "random": 0,
@@ -30754,7 +30754,7 @@
     "note": "41 real V8 N-day vulnerabilities with production mitigations on. 16 binary capability flags over five tiers: coverage, bug triggering, V8 internal primitives, general primitives and arbitrary code execution. Flags are checked by oracles compiled into a patched d8 binary. Episodes cap at 300 turns. Saturated by GPT-6 Astra at 100%, and OpenAI built a post-cutoff internal port to check contamination.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.33,
+    "edi": 163.24,
     "epoch": {
       "epoch_name": "ExploitBench",
       "random": 0,
@@ -31747,7 +31747,7 @@
     "access": "unknown",
     "unit": "%",
     "confidence": "likely",
-    "edi": 133.37,
+    "edi": 133.43,
     "epoch": {
       "epoch_name": "Fiction.LiveBench",
       "random": 0,
@@ -32750,41 +32750,6 @@
     ]
   },
   {
-    "id": "flores-plus",
-    "name": "FLORES+",
-    "aliases": [
-      "FLORES Plus",
-      "flores_plus",
-      "OLDI FLORES+"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-translation",
-    "level": "university",
-    "scoring": "verified",
-    "format": "open-ended",
-    "family": "flores",
-    "version": "plus",
-    "description": "Models translate English Wikipedia sentences that professionals and community contributors translated into over 200 languages. Outputs are scored with metrics such as chrF against the references.",
-    "org": "Open Language Data Initiative (OLDI)",
-    "released": "2023-10",
-    "links": {
-      "repo": "https://github.com/openlanguagedata/flores",
-      "site": "https://oldi.org/",
-      "dataset": "https://huggingface.co/datasets/openlanguagedata/flores_plus"
-    },
-    "access": "public",
-    "note": "OLDI calls it an extended and improved version of FLORES-200 and keeps adding languages and fixes. The Hugging Face dataset is gated under CC BY-SA 4.0 and had 237 configs on 2026-11-01.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://oldi.org/",
-      "https://github.com/openlanguagedata/flores",
-      "https://huggingface.co/datasets/openlanguagedata/flores_plus"
-    ],
-    "added": "2026-11-01"
-  },
-  {
     "id": "flores-200",
     "name": "FLORES-200",
     "aliases": [
@@ -32818,6 +32783,41 @@
       "https://github.com/openlanguagedata/flores",
       "https://github.com/facebookresearch/flores"
     ]
+  },
+  {
+    "id": "flores-plus",
+    "name": "FLORES+",
+    "aliases": [
+      "FLORES Plus",
+      "flores_plus",
+      "OLDI FLORES+"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "flores",
+    "version": "plus",
+    "description": "Models translate English Wikipedia sentences that professionals and community contributors translated into over 200 languages. Outputs are scored with metrics such as chrF against the references.",
+    "org": "Open Language Data Initiative (OLDI)",
+    "released": "2023-10",
+    "links": {
+      "repo": "https://github.com/openlanguagedata/flores",
+      "site": "https://oldi.org/",
+      "dataset": "https://huggingface.co/datasets/openlanguagedata/flores_plus"
+    },
+    "access": "public",
+    "note": "OLDI calls it an extended and improved version of FLORES-200 and keeps adding languages and fixes. The Hugging Face dataset is gated under CC BY-SA 4.0 and had 237 configs on 2026-11-01.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://oldi.org/",
+      "https://github.com/openlanguagedata/flores",
+      "https://huggingface.co/datasets/openlanguagedata/flores_plus"
+    ],
+    "added": "2026-11-01"
   },
   {
     "id": "flteval",
@@ -33472,7 +33472,7 @@
     "successor": "frontiercode-1-1",
     "unit": "%",
     "confidence": "likely",
-    "edi": 163.85,
+    "edi": 163.91,
     "epoch": {
       "epoch_name": "FrontierCode",
       "random": 0,
@@ -33711,7 +33711,7 @@
     "successor": "frontiermath-tiers-1-3-v2",
     "unit": "%",
     "confidence": "likely",
-    "edi": 150.78,
+    "edi": 150.81,
     "epoch": {
       "epoch_name": "FrontierMath-2025-02-28-Private",
       "random": 0,
@@ -33788,7 +33788,7 @@
     "successor": "frontiermath-tier-4-v2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.91,
+    "edi": 159,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-2025-07-01-Private",
       "random": 0,
@@ -33828,7 +33828,7 @@
     "note": "Version 2 corrected 12 problems and removed 7 from the original Tier 4 set.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.71,
+    "edi": 158.74,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-v2-Private",
       "random": 0,
@@ -33868,7 +33868,7 @@
     "note": "Version 2 fixed errors in 42 percent of problems, and Epoch says the tiers are nearing saturation.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.71,
+    "edi": 150.73,
     "epoch": {
       "epoch_name": "FrontierMath-Tiers-1-3-v2-Private",
       "random": 0,
@@ -34080,7 +34080,7 @@
     "note": "This record is FrontierSWE v2 (2026-09-02), the version Epoch AI tracks. It added 21 tasks to reach 34 and runs every model in the proximus harness. v1 (April 2026, 17 tasks) has its own record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.48,
+    "edi": 165.53,
     "epoch": {
       "epoch_name": "FrontierSWE",
       "random": 0,
@@ -34341,7 +34341,7 @@
     "note": "LLM grader checks error descriptions. Novice human baseline 63%. Photos and manuals are not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.91,
+    "edi": 166.12,
     "epoch": {
       "epoch_name": "Furniture Assembly",
       "random": 30,
@@ -35670,7 +35670,7 @@
     "note": "Only the 220-task gold set is public, with an automated grading service. OpenAI says its hosted GDPval leaderboard is no longer active and points to the GDPval-AA board instead.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.79,
+    "edi": 154.77,
     "epoch": {
       "epoch_name": "GDPval",
       "random": 0,
@@ -36455,7 +36455,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 118.9,
+    "edi": 118.78,
     "epoch": {
       "epoch_name": "GeoBench",
       "random": 0,
@@ -37100,7 +37100,7 @@
     "note": "Saturated (about 94-96%). Several 2026 cards use it only as a substrate for CoT-controllability or monitor-evasion tests.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 133.91,
+    "edi": 133.89,
     "epoch": {
       "epoch_name": "GPQA diamond",
       "random": 25,
@@ -37785,7 +37785,7 @@
     "successor": "math",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.02,
+    "edi": 93.64,
     "epoch": {
       "epoch_name": "GSM8K",
       "random": 0,
@@ -37903,7 +37903,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.81,
+    "edi": 159.87,
     "epoch": {
       "epoch_name": "GSO-Bench",
       "random": 0,
@@ -39540,7 +39540,7 @@
     "note": "Saturated. GitHub repo rowanz/hellaswag returns HTTP 451 (blocked by a WikiHow DMCA notice dated 2026-09-14), so repo is null.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 61.69,
+    "edi": 61.07,
     "epoch": {
       "epoch_name": "HellaSwag",
       "random": 25,
@@ -41215,67 +41215,6 @@
     ]
   },
   {
-    "id": "humaneval-plus",
-    "name": "HumanEval+",
-    "aliases": [
-      "HumanEvalPlus",
-      "HumanEval Plus",
-      "EvalPlus HumanEval+"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "school",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
-    "org": "UIUC (EvalPlus)",
-    "released": "2023-05",
-    "changes": [
-      {
-        "date": "2023-06-02",
-        "kind": "subset",
-        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
-      },
-      {
-        "date": "2023-11-24",
-        "kind": "questions",
-        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
-      },
-      {
-        "date": "2024-04-02",
-        "kind": "harness",
-        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
-      },
-      {
-        "date": "2024-10-20",
-        "kind": "grader",
-        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-      }
-    ],
-    "links": {
-      "paper": "https://arxiv.org/abs/2305.01210",
-      "repo": "https://github.com/evalplus/evalplus",
-      "leaderboard": "https://evalplus.github.io/leaderboard.html"
-    },
-    "access": "public",
-    "note": "Scores are pass@1 and run lower than plain HumanEval.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2305.01210",
-      "https://arxiv.org/abs/2504.21318v1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-    ]
-  },
-  {
     "id": "humaneval-cobol-cohere",
     "name": "HumanEval-COBOL (Cohere)",
     "aliases": [
@@ -41358,6 +41297,67 @@
       "https://github.com/THUDM/CodeGeeX"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "humaneval-plus",
+    "name": "HumanEval+",
+    "aliases": [
+      "HumanEvalPlus",
+      "HumanEval Plus",
+      "EvalPlus HumanEval+"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "school",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
+    "org": "UIUC (EvalPlus)",
+    "released": "2023-05",
+    "changes": [
+      {
+        "date": "2023-06-02",
+        "kind": "subset",
+        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
+      },
+      {
+        "date": "2023-11-24",
+        "kind": "questions",
+        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
+      },
+      {
+        "date": "2024-04-02",
+        "kind": "harness",
+        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
+      },
+      {
+        "date": "2024-10-20",
+        "kind": "grader",
+        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+      }
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.01210",
+      "repo": "https://github.com/evalplus/evalplus",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
+    },
+    "access": "public",
+    "note": "Scores are pass@1 and run lower than plain HumanEval.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.01210",
+      "https://arxiv.org/abs/2504.21318v1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+    ]
   },
   {
     "id": "humanevalpack",
@@ -47677,7 +47677,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 42.11,
+    "edi": 41.29,
     "epoch": {
       "epoch_name": "LAMBADA",
       "random": 0,
@@ -50120,7 +50120,7 @@
     "note": "Same benchmark as the lmca record, from the same arXiv paper 2607.27499.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.04,
+    "edi": 152.07,
     "epoch": {
       "epoch_name": "LMCA",
       "random": 0,
@@ -52524,7 +52524,7 @@
     "note": "Near saturation, and contamination is likely because the problems have been public since 2021.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 126.03,
+    "edi": 126.01,
     "epoch": {
       "epoch_name": "MATH level 5",
       "random": 0,
@@ -55325,7 +55325,7 @@
     "successor": "metr-time-horizon-1-1",
     "unit": "minutes",
     "confidence": "verified",
-    "edi": 136.03,
+    "edi": 136.01,
     "epoch": {
       "epoch_name": "METR Time Horizons",
       "runs": "external",
@@ -56697,7 +56697,7 @@
     "note": "25 targets, 3 kept private. ~34% of tests held out. Source programs are open source, so memorization cannot be fully ruled out.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.78,
+    "edi": 159.82,
     "epoch": {
       "epoch_name": "MirrorCode",
       "random": 0,
@@ -58493,7 +58493,7 @@
     "successor": "mmlu-pro",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.44,
+    "edi": 102.15,
     "epoch": {
       "epoch_name": "MMLU",
       "random": 25,
@@ -62190,7 +62190,7 @@
     "note": "Game identity, prompts and positions are kept secret to prevent targeted preparation. Likely the 'game-puzzles' benchmark in the Epoch post.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.56,
+    "edi": 164.37,
     "epoch": {
       "epoch_name": "Mystery Game Puzzles",
       "random": 9.22,
@@ -65516,7 +65516,7 @@
     "note": "Saturated by frontier models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 93.13,
+    "edi": 92.72,
     "epoch": {
       "epoch_name": "OpenBookQA",
       "random": 25,
@@ -66519,7 +66519,7 @@
     "successor": "osworld-verified",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.75,
+    "edi": 146.72,
     "epoch": {
       "epoch_name": "OSWorld",
       "random": 0,
@@ -66564,7 +66564,7 @@
     "successor": "osworld-2-0-2026-08-08",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.94,
+    "edi": 169.92,
     "epoch": {
       "epoch_name": "OSWorld 2.0",
       "random": 0,
@@ -69100,7 +69100,7 @@
     "access": "public+private-holdout",
     "unit": "%",
     "confidence": "verified",
-    "edi": 60.34,
+    "edi": 59.52,
     "epoch": {
       "epoch_name": "PIQA",
       "random": 50,
@@ -69644,7 +69644,7 @@
     "successor": "posttrainbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 173.14,
+    "edi": 174.64,
     "epoch": {
       "epoch_name": "PostTrainBench",
       "random": 0,
@@ -70632,7 +70632,7 @@
     "successor": "proofbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.46,
+    "edi": 156.5,
     "epoch": {
       "epoch_name": "ProofBench",
       "random": 0,
@@ -73913,7 +73913,7 @@
     "note": "The best agent automated only 2.5% of projects at launch. Only a 10 task public set is released.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 176.75,
+    "edi": 177.13,
     "epoch": {
       "epoch_name": "Remote Labor Index",
       "random": 0,
@@ -78921,7 +78921,7 @@
     "note": "The human baseline from nine non-expert people is 83.7 percent. A small open-ended variant lists three models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.22,
+    "edi": 152.37,
     "epoch": {
       "epoch_name": "SimpleBench",
       "random": 16.67,
@@ -79014,7 +79014,7 @@
     "note": "Google fixed one dataset error on 2026-03-09 and posted paper v2 on 2026-03-10. Scores stay comparable, so it remains one record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.03,
+    "edi": 157.09,
     "epoch": {
       "epoch_name": "SimpleQA Verified",
       "random": 0,
@@ -81253,7 +81253,7 @@
     "note": "Top human players win ~85% (StS1) and ~95% (StS2). Seeds are not published.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.68,
+    "edi": 177.6,
     "epoch": {
       "epoch_name": "SpireClimb",
       "random": 0,
@@ -83306,7 +83306,7 @@
     "note": "Only one example task is public, and the scored tasks and grading scripts stay hidden.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.72,
+    "edi": 150.75,
     "epoch": {
       "epoch_name": "Surface Evolver Bench",
       "random": 0,
@@ -86023,7 +86023,7 @@
     "successor": "terminal-bench-2-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 149.42,
+    "edi": 149.45,
     "epoch": {
       "epoch_name": "Terminal Bench",
       "random": 0,
@@ -86819,7 +86819,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.03,
+    "edi": 145.98,
     "epoch": {
       "epoch_name": "The Agent Company",
       "random": 0,
@@ -88005,7 +88005,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 48.19,
+    "edi": 47.76,
     "epoch": {
       "epoch_name": "TriviaQA",
       "random": 0,
@@ -94898,7 +94898,7 @@
     "note": "Scores are not raw accuracy and are not comparable with WeirdML v2.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 168.12,
+    "edi": 168.11,
     "epoch": {
       "epoch_name": "WeirdML v3",
       "random": 0,
@@ -95748,7 +95748,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.43,
+    "edi": 102.19,
     "epoch": {
       "epoch_name": "Winogrande",
       "random": 50,
@@ -98090,39 +98090,6 @@
     "confidence": "verified"
   },
   {
-    "id": "tau-c-bench",
-    "name": "τc-Bench",
-    "aliases": [
-      "tau-c-Bench",
-      "TASTE agent benchmark"
-    ],
-    "category": "tool-use",
-    "subcategory": "tools-customer-service",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "agent-task",
-    "family": "tau-bench",
-    "version": "Contextual",
-    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
-    "org": "Technion and IBM Research",
-    "released": "2026-05",
-    "links": {
-      "paper": "https://arxiv.org/abs/2605.28556",
-      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    },
-    "access": "public",
-    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
-    "successor": "tau-bench-2-0",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/pdf/2605.28556v2",
-      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    ],
-    "added": "2026-11-15"
-  },
-  {
     "id": "tau3-banking",
     "name": "τ³-bench Banking",
     "category": "tool-use",
@@ -98159,5 +98126,38 @@
       "https://github.com/sierra-research/tau2-bench/commit/d22d77f238177f11d01aa99791dbb2c2c98827c1",
       "https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1"
     ]
+  },
+  {
+    "id": "tau-c-bench",
+    "name": "τc-Bench",
+    "aliases": [
+      "tau-c-Bench",
+      "TASTE agent benchmark"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "tau-bench",
+    "version": "Contextual",
+    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
+    "org": "Technion and IBM Research",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.28556",
+      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    },
+    "access": "public",
+    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
+    "successor": "tau-bench-2-0",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/pdf/2605.28556v2",
+      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    ],
+    "added": "2026-11-15"
   }
 ]
