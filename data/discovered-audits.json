@@ -1,6 +1,39 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-17",
   "items": [
+    {
+      "key": "https://arxiv.org/abs/2611.21315",
+      "title": "Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month -- from post-training down to pre-training base models",
+      "url": "https://arxiv.org/abs/2611.21315",
+      "source": "arXiv",
+      "date": "2026-11-16",
+      "first": "2026-11-17",
+      "last": "2026-11-17",
+      "benchmarks": [
+        "humaneval",
+        "openbookqa"
+      ],
+      "problems": [
+        "contamination"
+      ],
+      "score": 5
+    },
+    {
+      "key": "https://latent.space/p/ainews-perplexity-hits-a-1b-revenue-run-rate-up-4x-in-2026/#claudeappearstohavememorizeddetailsoflinuxarenacontrolevalkarvonen",
+      "title": "Benchmark contamination: Claude appears to have memorized details of the LinuxArena control eval ( Karvonen ).",
+      "url": "https://latent.space/p/ainews-perplexity-hits-a-1b-revenue-run-rate-up-4x-in-2026/",
+      "source": "AINews",
+      "date": "2026-11-17",
+      "first": "2026-11-17",
+      "last": "2026-11-17",
+      "benchmarks": [
+        "linuxarena"
+      ],
+      "problems": [
+        "contamination"
+      ],
+      "score": 4
+    },
     {
       "key": "https://arxiv.org/abs/2611.12521",
       "title": "Can the Confidence and Decisions of System 1 Models Be Trusted? An Explainability and Perturbation Audit of Jev-Style Decision Models",
