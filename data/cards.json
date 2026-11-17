@@ -52510,5 +52510,203 @@
         "as_written": "τ²-Bench"
       }
     ]
+  },
+  {
+    "id": "openai-gpt-6-2-astra-2026-11-17",
+    "lab": "openai",
+    "model": "gpt-6-2-astra",
+    "date": "2026-11-17",
+    "title": "Introducing GPT-6.2 Astra and Sol",
+    "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "tier": "flagship",
+    "notes": "openai.com refuses scripts, so the post was read from a Wayback Machine copy taken at 17:47 UTC on launch day. The post has no table. Scores are the best effort point in each chart's embedded data, which is Max effort except on Agents' Last Exam v1.1, where Xhigh scores highest. AA-AnalystAgent and AA-3D come from the text, and the post cites both from Artificial Analysis. The cyber charts (ExploitBench Internal Port, SecureSWE, PatchBench) use internal configurations with cyber safeguards and classifiers disabled. DeepBinary is left out because it charts bounty totals per binary file, not one score. The two alignment charts (blocker deception, improper actions in workplace tasks) are left out. In these charts GPT-6 Astra scores 68.1 on Terminal-Bench-Science 0.1, above the 64.6 in its own launch post. The chart's Terminal-Bench-Science score for Claude Fable 5.2 is Artificial Analysis's mini-swe-agent run (73.3), not Anthropic's 74.6. The Astra for Law post, with Harvey's Legal Agent Benchmark, is a separate configuration and is not recorded here.",
+    "results": [
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "score": 78.3,
+        "unit": "%",
+        "as_written": "Agents' Last Exam v1.1 (GPT-6.2 Astra Xhigh, 77.6 at Max)"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 77.1,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1 (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 62.1,
+        "unit": "index",
+        "as_written": "Artificial Analysis Intelligence Index v5.0.1 (GPT-6.2 Astra Max), cited from Artificial Analysis"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 44.2,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0 (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "lifeval",
+        "score": 86.1,
+        "unit": "%",
+        "as_written": "LifeVal (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "harvey-lab-aa-1-1",
+        "score": 15.0,
+        "unit": "%",
+        "as_written": "Harvey-LAB-AA v1.1 (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "gdpval-v2-openai",
+        "score": 50.4,
+        "unit": "%",
+        "as_written": "GDPval v2 (Internal) (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "aa-analystagent",
+        "score": 62.5,
+        "unit": "%",
+        "as_written": "AA-AnalystAgent, questions answered correctly on all five independent attempts"
+      },
+      {
+        "benchmark": "aa-3d",
+        "score": 1318,
+        "unit": "elo",
+        "as_written": "AA-3D, 1,318 Elo"
+      },
+      {
+        "benchmark": "vals-science-index",
+        "score": 68.4,
+        "unit": "%",
+        "as_written": "Vals Science Index v1 (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "benchcad-2-1",
+        "score": 82.5,
+        "unit": "%",
+        "as_written": "BenchCAD 2.1 Core (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 52.4,
+        "unit": "%",
+        "as_written": "AutomationBench 1.0.6 (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "exploitbench-internal-port-openai",
+        "score": 53.5,
+        "unit": "%",
+        "as_written": "ExploitBench Internal Port (June to August 2026), success rate (GPT-6.2 Astra Max, safeguards and classifiers disabled)"
+      },
+      {
+        "benchmark": "secureswe-openai",
+        "score": 65.7,
+        "unit": "%",
+        "as_written": "SecureSWE (GPT-6.2 Astra Max)"
+      },
+      {
+        "benchmark": "patchbench-openai",
+        "score": 79.7,
+        "unit": "%",
+        "as_written": "PatchBench (GPT-6.2 Astra Xhigh and Max)"
+      }
+    ]
+  },
+  {
+    "id": "openai-gpt-6-2-sol-2026-11-17",
+    "lab": "openai",
+    "model": "gpt-6-2-sol",
+    "date": "2026-11-17",
+    "title": "Introducing GPT-6.2 Astra and Sol",
+    "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "tier": "mid",
+    "notes": "The same post as GPT-6.2 Astra's, read from a Wayback Machine copy taken at 17:47 UTC on launch day because openai.com refuses scripts. The post has no table. Scores are the best effort point in each chart's embedded data, which is Max effort except on the Vals Science Index and AutomationBench. AA-3D comes from the text, and the post cites it from Artificial Analysis. The post gives no AA-AnalystAgent score for Sol. The cyber charts (ExploitBench Internal Port, SecureSWE, PatchBench) use internal configurations with cyber safeguards and classifiers disabled. DeepBinary and the two alignment charts are left out, as on the Astra record. The text says Sol gains 5.3 points over GPT-6.1 Sol on GDPval v2, but the chart values (46.9 and 41.5) differ by 5.4.",
+    "results": [
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "score": 73.0,
+        "unit": "%",
+        "as_written": "Agents' Last Exam v1.1 (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 68.0,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1 (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 57.3,
+        "unit": "index",
+        "as_written": "Artificial Analysis Intelligence Index v5.0.1 (GPT-6.2 Sol Max), cited from Artificial Analysis"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 43.8,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0 (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "lifeval",
+        "score": 83.8,
+        "unit": "%",
+        "as_written": "LifeVal (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "harvey-lab-aa-1-1",
+        "score": 11.1,
+        "unit": "%",
+        "as_written": "Harvey-LAB-AA v1.1 (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "gdpval-v2-openai",
+        "score": 46.9,
+        "unit": "%",
+        "as_written": "GDPval v2 (Internal) (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "aa-3d",
+        "score": 1259,
+        "unit": "elo",
+        "as_written": "AA-3D, 1,259 Elo"
+      },
+      {
+        "benchmark": "vals-science-index",
+        "score": 58.5,
+        "unit": "%",
+        "as_written": "Vals Science Index v1 (GPT-6.2 Sol Xhigh, 57.8 at Max)"
+      },
+      {
+        "benchmark": "benchcad-2-1",
+        "score": 73.1,
+        "unit": "%",
+        "as_written": "BenchCAD 2.1 Core (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 41.2,
+        "unit": "%",
+        "as_written": "AutomationBench 1.0.6 (GPT-6.2 Sol High, 41.1 at Max)"
+      },
+      {
+        "benchmark": "exploitbench-internal-port-openai",
+        "score": 50.5,
+        "unit": "%",
+        "as_written": "ExploitBench Internal Port (June to August 2026), success rate (GPT-6.2 Sol Max, safeguards and classifiers disabled)"
+      },
+      {
+        "benchmark": "secureswe-openai",
+        "score": 55.6,
+        "unit": "%",
+        "as_written": "SecureSWE (GPT-6.2 Sol Max)"
+      },
+      {
+        "benchmark": "patchbench-openai",
+        "score": 75.6,
+        "unit": "%",
+        "as_written": "PatchBench (GPT-6.2 Sol Max)"
+      }
+    ]
   }
 ]

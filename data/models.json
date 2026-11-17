@@ -15583,5 +15583,38 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
+  },
+  {
+    "id": "gpt-6-2-astra",
+    "name": "GPT-6.2 Astra",
+    "lab": "openai",
+    "family": "GPT-6",
+    "released": "2026-11-17",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "aliases": [
+      "GPT-6.2 Astra",
+      "GPT 6.2 Astra",
+      "gpt-6.2-astra",
+      "Astra 6.2"
+    ],
+    "epoch": "GPT-6.2 Astra"
+  },
+  {
+    "id": "gpt-6-2-sol",
+    "name": "GPT-6.2 Sol",
+    "lab": "openai",
+    "family": "GPT-6",
+    "released": "2026-11-17",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+    "aliases": [
+      "GPT-6.2 Sol",
+      "GPT 6.2 Sol",
+      "gpt-6.2-sol",
+      "Sol 6.2"
+    ]
   }
 ]

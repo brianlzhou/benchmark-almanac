@@ -12797,6 +12797,41 @@
     ]
   },
   {
+    "id": "browsesafe-plus-plus",
+    "name": "BrowseSafe++",
+    "aliases": [
+      "BrowseSafe Plus Plus",
+      "browsesafe-plus-plus"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "browsesafe",
+    "version": "2",
+    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
+    "org": "Perplexity",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.17457",
+      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
+      "site": "https://browsesafe.perplexity.ai/",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
+      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://browsesafe.perplexity.ai/",
+      "https://arxiv.org/abs/2610.17457"
+    ],
+    "added": "2026-11-01"
+  },
+  {
     "id": "browsesafe-adapt",
     "name": "BrowseSafe-Adapt",
     "category": "safety-alignment",
@@ -12854,41 +12889,6 @@
     "evidence": [
       "https://arxiv.org/abs/2511.20597",
       "https://browsesafe.perplexity.ai/"
-    ],
-    "added": "2026-11-01"
-  },
-  {
-    "id": "browsesafe-plus-plus",
-    "name": "BrowseSafe++",
-    "aliases": [
-      "BrowseSafe Plus Plus",
-      "browsesafe-plus-plus"
-    ],
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "university",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "family": "browsesafe",
-    "version": "2",
-    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
-    "org": "Perplexity",
-    "released": "2026-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2610.17457",
-      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
-      "site": "https://browsesafe.perplexity.ai/",
-      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
-      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
-    },
-    "access": "public+private-holdout",
-    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://browsesafe.perplexity.ai/",
-      "https://arxiv.org/abs/2610.17457"
     ],
     "added": "2026-11-01"
   },
@@ -32750,41 +32750,6 @@
     ]
   },
   {
-    "id": "flores-200",
-    "name": "FLORES-200",
-    "aliases": [
-      "Flores 200",
-      "FLORES200"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-translation",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "open-ended",
-    "family": "flores",
-    "version": "200",
-    "description": "Models translate English Wikipedia sentences into about 200 languages. Outputs are scored with BLEU or chrF against human reference translations.",
-    "org": "Meta AI (NLLB Team)",
-    "released": "2022-07",
-    "links": {
-      "paper": "https://arxiv.org/abs/2207.04672",
-      "repo": "https://github.com/facebookresearch/flores"
-    },
-    "access": "public",
-    "note": "Extends FLORES-101 to about 200 languages. The flores record covers FLORES-101.",
-    "successor": "flores-plus",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf",
-      "https://arxiv.org/abs/2207.04672",
-      "https://oldi.org/",
-      "https://github.com/openlanguagedata/flores",
-      "https://github.com/facebookresearch/flores"
-    ]
-  },
-  {
     "id": "flores-plus",
     "name": "FLORES+",
     "aliases": [
@@ -32818,6 +32783,41 @@
       "https://huggingface.co/datasets/openlanguagedata/flores_plus"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "flores-200",
+    "name": "FLORES-200",
+    "aliases": [
+      "Flores 200",
+      "FLORES200"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "flores",
+    "version": "200",
+    "description": "Models translate English Wikipedia sentences into about 200 languages. Outputs are scored with BLEU or chrF against human reference translations.",
+    "org": "Meta AI (NLLB Team)",
+    "released": "2022-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2207.04672",
+      "repo": "https://github.com/facebookresearch/flores"
+    },
+    "access": "public",
+    "note": "Extends FLORES-101 to about 200 languages. The flores record covers FLORES-101.",
+    "successor": "flores-plus",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf",
+      "https://arxiv.org/abs/2207.04672",
+      "https://oldi.org/",
+      "https://github.com/openlanguagedata/flores",
+      "https://github.com/facebookresearch/flores"
+    ]
   },
   {
     "id": "flteval",
@@ -35711,6 +35711,34 @@
       "https://www.mercor.com/apex/"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "gdpval-v2-openai",
+    "name": "GDPval v2 (OpenAI)",
+    "aliases": [
+      "GDPval v2",
+      "GDPval v2 (Internal)"
+    ],
+    "category": "economic-work",
+    "subcategory": "work-occupations",
+    "level": "expert",
+    "scoring": "expert-graded",
+    "format": "agent-task",
+    "description": "Multistep assignments drawn from real projects in consulting, finance and design, given with the files and messages the team had when the work was assigned. OpenAI has not published the task count or grading.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    },
+    "access": "private",
+    "note": "Lab-created in-house eval (OpenAI), the next version of GDPval. Only OpenAI reports scores. Grading method is a guess. Not the same as the February 2026 update to the public GDPval gold set on Hugging Face.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://web.archive.org/web/20261117174742/https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    ],
+    "added": "2026-11-17"
   },
   {
     "id": "gdpval-aa",
@@ -41187,6 +41215,67 @@
     ]
   },
   {
+    "id": "humaneval-plus",
+    "name": "HumanEval+",
+    "aliases": [
+      "HumanEvalPlus",
+      "HumanEval Plus",
+      "EvalPlus HumanEval+"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "school",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
+    "org": "UIUC (EvalPlus)",
+    "released": "2023-05",
+    "changes": [
+      {
+        "date": "2023-06-02",
+        "kind": "subset",
+        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
+      },
+      {
+        "date": "2023-11-24",
+        "kind": "questions",
+        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
+      },
+      {
+        "date": "2024-04-02",
+        "kind": "harness",
+        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
+      },
+      {
+        "date": "2024-10-20",
+        "kind": "grader",
+        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+      }
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.01210",
+      "repo": "https://github.com/evalplus/evalplus",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
+    },
+    "access": "public",
+    "note": "Scores are pass@1 and run lower than plain HumanEval.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.01210",
+      "https://arxiv.org/abs/2504.21318v1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+    ]
+  },
+  {
     "id": "humaneval-cobol-cohere",
     "name": "HumanEval-COBOL (Cohere)",
     "aliases": [
@@ -41269,67 +41358,6 @@
       "https://github.com/THUDM/CodeGeeX"
     ],
     "added": "2026-11-15"
-  },
-  {
-    "id": "humaneval-plus",
-    "name": "HumanEval+",
-    "aliases": [
-      "HumanEvalPlus",
-      "HumanEval Plus",
-      "EvalPlus HumanEval+"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "school",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
-    "org": "UIUC (EvalPlus)",
-    "released": "2023-05",
-    "changes": [
-      {
-        "date": "2023-06-02",
-        "kind": "subset",
-        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
-      },
-      {
-        "date": "2023-11-24",
-        "kind": "questions",
-        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
-      },
-      {
-        "date": "2024-04-02",
-        "kind": "harness",
-        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
-      },
-      {
-        "date": "2024-10-20",
-        "kind": "grader",
-        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-      }
-    ],
-    "links": {
-      "paper": "https://arxiv.org/abs/2305.01210",
-      "repo": "https://github.com/evalplus/evalplus",
-      "leaderboard": "https://evalplus.github.io/leaderboard.html"
-    },
-    "access": "public",
-    "note": "Scores are pass@1 and run lower than plain HumanEval.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2305.01210",
-      "https://arxiv.org/abs/2504.21318v1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-    ]
   },
   {
     "id": "humanevalpack",
@@ -67629,6 +67657,33 @@
     "added": "2026-11-01"
   },
   {
+    "id": "patchbench-openai",
+    "name": "PatchBench (OpenAI)",
+    "aliases": [
+      "PatchBench"
+    ],
+    "category": "cyber",
+    "subcategory": "cyber-secure-code",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Models patch security flaws. Automated tests and model-based review check that each patch fixes the flaw, keeps the intended behavior and is ready to merge.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    },
+    "access": "private",
+    "note": "Lab-created in-house eval (OpenAI), used for its Codex Security patch skill. Only OpenAI reports scores. Not the academic PatchBench (arXiv 2609.04075), which patches C and C++ vulnerabilities.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://web.archive.org/web/20261117174742/https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    ],
+    "added": "2026-11-17"
+  },
+  {
     "id": "patcheval",
     "name": "PatchEval",
     "aliases": [
@@ -78098,6 +78153,33 @@
     "access": "private",
     "unit": "%",
     "confidence": "likely"
+  },
+  {
+    "id": "secureswe-openai",
+    "name": "SecureSWE (OpenAI)",
+    "aliases": [
+      "SecureSWE"
+    ],
+    "category": "cyber",
+    "subcategory": "cyber-secure-code",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models write functional and secure code for security-sensitive components, such as serving files or handling database queries. OpenAI has not published the task count or grading.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "links": {
+      "site": "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    },
+    "access": "private",
+    "note": "Lab-created in-house eval (OpenAI). Only OpenAI reports scores. Grading method is a guess.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://web.archive.org/web/20261117174742/https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    ],
+    "added": "2026-11-17"
   },
   {
     "id": "seed-bench",
@@ -98008,6 +98090,39 @@
     "confidence": "verified"
   },
   {
+    "id": "tau-c-bench",
+    "name": "τc-Bench",
+    "aliases": [
+      "tau-c-Bench",
+      "TASTE agent benchmark"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "tau-bench",
+    "version": "Contextual",
+    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
+    "org": "Technion and IBM Research",
+    "released": "2026-05",
+    "links": {
+      "paper": "https://arxiv.org/abs/2605.28556",
+      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    },
+    "access": "public",
+    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
+    "successor": "tau-bench-2-0",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/pdf/2605.28556v2",
+      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    ],
+    "added": "2026-11-15"
+  },
+  {
     "id": "tau3-banking",
     "name": "τ³-bench Banking",
     "category": "tool-use",
@@ -98044,38 +98159,5 @@
       "https://github.com/sierra-research/tau2-bench/commit/d22d77f238177f11d01aa99791dbb2c2c98827c1",
       "https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1"
     ]
-  },
-  {
-    "id": "tau-c-bench",
-    "name": "τc-Bench",
-    "aliases": [
-      "tau-c-Bench",
-      "TASTE agent benchmark"
-    ],
-    "category": "tool-use",
-    "subcategory": "tools-customer-service",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "agent-task",
-    "family": "tau-bench",
-    "version": "Contextual",
-    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
-    "org": "Technion and IBM Research",
-    "released": "2026-05",
-    "links": {
-      "paper": "https://arxiv.org/abs/2605.28556",
-      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    },
-    "access": "public",
-    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
-    "successor": "tau-bench-2-0",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/pdf/2605.28556v2",
-      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    ],
-    "added": "2026-11-15"
   }
 ]

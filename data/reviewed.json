@@ -3746,6 +3746,11 @@
       "via": "The Mercor APEX hub lists Mercor-extended leaderboards next to APEX-SWE, and the almanac has none of them."
     },
     {
+      "id": "gdpval-v2-openai",
+      "date": "2026-11-17",
+      "via": "GPT-6.2 Astra launch post"
+    },
+    {
       "id": "gdpworks",
       "date": "2026-11-08",
       "via": "Found by the X scan on 2026-11-08 and cataloged on 2026-11-08."
@@ -7201,6 +7206,11 @@
       "via": "Seed-Prover technical report Table 3."
     },
     {
+      "id": "patchbench-openai",
+      "date": "2026-11-17",
+      "via": "GPT-6.2 Astra launch post"
+    },
+    {
       "id": "patcheval",
       "date": "2026-11-01",
       "via": "UK AISI inspect_evals register folder patcheval."
@@ -8189,6 +8199,11 @@
       "id": "secrespond",
       "date": "2026-11-15",
       "via": "Benchmark Radar. Clear-use test: 324 GitHub stars in the first-run count. Opened maker sources in the second run."
+    },
+    {
+      "id": "secureswe-openai",
+      "date": "2026-11-17",
+      "via": "GPT-6.2 Astra launch post"
     },
     {
       "id": "seed-bench",
