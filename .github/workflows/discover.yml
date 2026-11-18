@@ -2,7 +2,7 @@ name: Discover benchmarks and models
 
 # Every morning, after AINews and Hugging Face Daily Papers publish, read the feeds and refresh the review
 # queues in data/discovered.json (benchmarks), data/discovered-audits.json (possible audits of cataloged
-# benchmarks) and data/discovered-models.json (models). Changes go to one rolling pull request.
+# benchmarks) and data/discovered-models.json (models). Changes go to one rolling pull request, which merges itself.
 on:
   schedule:
     - cron: '30 10 * * *'
@@ -50,3 +50,7 @@ jobs:
           gh pr view bot/discover --json state -q .state 2>/dev/null | grep -q OPEN || \
             gh pr create --head bot/discover --title "New benchmarks and models to review" \
               --body "The daily discovery jobs refreshed data/discovered.json and data/discovered-models.json. Merge it to publish the queues on /new/. To catalog a find, add it to the registries in another pull request."
+          # the queues are review lists, not catalog changes, so the pull request merges itself and /new/ and the home
+          # page show today's finds (2026-11-17, at the owner's request). A conflict with main leaves it open for a
+          # person, and the next day's run rebuilds the branch from main.
+          gh pr merge bot/discover --merge || echo "::warning::The discovery pull request could not merge on its own. A maintainer needs to merge it."

@@ -47,9 +47,26 @@ export async function ainews(r: Reader) {
       const href = (body.match(/href="(https?:\/\/[^"]+)"/) ?? [])[1]?.replace(/[?&]utm_[^"]*$/, '').replace(/&amp;/g, '&') ?? link;
       // one bullet can name two benchmarks: "AutomationBench and OfficeQA Pro v2"
       const parts = bold.split(/\s+(?:and|&)\s+/);
+      let named = false;
       for (const part of parts.length > 1 && parts.every(benchName) ? parts : [bold]) {
         const nm = benchName(part);
-        if (nm) r.add({ key: key(nm), name: nm, title: nm, url: href, stageA: 5, general: true }, { curated: { source: 'AINews', url: link } });
+        if (nm) {
+          named = true;
+          r.add({ key: key(nm), name: nm, title: nm, url: href, stageA: 5, general: true }, { curated: { source: 'AINews', url: link } });
+        }
+      }
+      // a bullet led by a topic ("Reasoning effort: On the HF Harness Leaderboard, high effort ...") can still name a
+      // benchmark in its text. Those count a little lower, since the bullet isn't about the benchmark itself.
+      if (!named) {
+        const text = stripTags(body);
+        // the name finders want a capital first, so "3D Design Arena" comes back as "D Design Arena": put the digits back
+        const whole = (nm: string) => {
+          const i = text.indexOf(nm);
+          const pre = i > 0 ? text.slice(Math.max(0, i - 4), i).match(/(?:^|[^\w])(\d+)$/) : null;
+          return pre ? `${pre[1]}${nm}` : nm;
+        };
+        for (const nm of new Set([...names(text), ...phraseNames(text)].map(whole)))
+          r.add({ key: key(nm), name: nm, title: nm, url: href, stageA: 4, general: true }, { curated: { source: 'AINews', url: link } });
       }
     }
   }

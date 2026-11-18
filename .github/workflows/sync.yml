@@ -30,6 +30,10 @@ jobs:
       - run: npm ci
       - run: node scripts/sync-epoch.ts | tee sync.log
       - run: node scripts/sync-leaderboards.ts | tee -a sync.log
+      # the day each leaderboard row first appeared, for the time machine: compares the new scores with HEAD's
+      - run: node scripts/first-seen.ts | tee -a sync.log
+      # Arena's dated rating snapshots from its CC BY 4.0 dataset on Hugging Face; skips the download when unchanged
+      - run: node scripts/arena-history.ts | tee -a sync.log
       - run: node scripts/sync-github.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,6 +65,9 @@ jobs:
             echo "The daily sync refreshed leaderboard scores, Epoch AI scores, GitHub repo facts and paper abstracts. The data checks and the build passed. Merge it to publish the new scores."
             echo
             echo "Full log: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            # the field watch: fields boards publish that their importers may drop, listed in data/scores/field-review.json
+            grep -h "^Field watch:" sync.log || true
             echo
             echo '```'
             tail -c 50000 sync.log
