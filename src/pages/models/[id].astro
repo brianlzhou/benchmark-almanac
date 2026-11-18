@@ -27,10 +27,11 @@ const m = ms.m;
 const color = labColor(m.lab);
 const byArea = AREAS.map((a) => ({
   a,
-  rows: ms.results.filter((r) => areaOf(r.benchmark.category) === a.id).sort((x, y) => x.rank / x.of - y.rank / y.of || y.of - x.of),
+  // ranked rows first by place, then lab numbers ranked among labs' numbers, then unranked lab numbers
+  rows: ms.results.filter((r) => areaOf(r.benchmark.category) === a.id).sort((x, y) => (x.among === 'none' ? 1 : 0) - (y.among === 'none' ? 1 : 0) || (x.among ? 1 : 0) - (y.among ? 1 : 0) || (x.of ? x.rank / x.of : 1) - (y.of ? y.rank / y.of : 1) || y.of - x.of),
 })).filter((g) => g.rows.length);
-const firsts = ms.results.filter((r) => r.rank === 1 && r.of >= 5).length;
-const top3 = ms.results.filter((r) => r.rank <= 3 && r.of >= 5).length;
+const firsts = ms.results.filter((r) => !r.among && r.rank === 1 && r.of >= 5).length;
+const top3 = ms.results.filter((r) => !r.among && r.rank >= 1 && r.rank <= 3 && r.of >= 5).length;
 
 // the lab's models on the index, this one in front
 const labPts: Pt[] = ms.eci
@@ -136,7 +137,15 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
                           <td class="bar-c">
                             {unit === '%' && <span class="mini-bar"><span style={`width:${Math.max(1, r.score.value)}%;background:${color}`} /></span>}
                           </td>
-                          <td class="r nowrap">{r.rank === 1 ? <b>#1</b> : `#${r.rank}`} <span class="muted">of {r.of}</span></td>
+                          <td class="r nowrap">
+                            {r.among === 'none' ? (
+                              <span class="muted" data-tn="Not ranked" data-ts="A lab's own number. Independent runs of this benchmark haven't scored this model yet, so it isn't ranked against them.">Not ranked</span>
+                            ) : r.among === 'claims' ? (
+                              <>#{r.rank} <span class="muted">of {r.of} lab {r.of === 1 ? 'number' : 'numbers'}</span></>
+                            ) : (
+                              <>{r.rank === 1 ? <b>#1</b> : `#${r.rank}`} <span class="muted">of {r.of}</span></>
+                            )}
+                          </td>
                           <td class="muted nowrap">{sourceLabel(r.score)}</td>
                         </tr>
                       );
