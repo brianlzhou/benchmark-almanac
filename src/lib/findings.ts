@@ -51,13 +51,13 @@ function monthsAgo(d: string) {
 }
 
 export function modelLine(m: ModelSummary): string {
-  const firsts = m.results.filter((r) => r.rank === 1 && r.of >= 5);
+  const firsts = m.results.filter((r) => !r.among && r.rank === 1 && r.of >= 5);
   const n = m.m.name;
   // the count is of benchmarks with five or more models scored, the same ones a first place counts on
   if (firsts.length >= 2) return `${n} ranks first on ${firsts.length} of the ${m.results.filter((r) => r.of >= 5).length} benchmarks with five or more models scored`;
   if (firsts.length === 1) return `${n} ranks first on ${firsts[0].benchmark.name}`;
   if (m.eciRank && m.eciRank <= 10) return `${n} is number ${m.eciRank} on the Epoch Capabilities Index`;
-  const top3 = m.results.filter((r) => r.rank <= 3 && r.of >= 5);
+  const top3 = m.results.filter((r) => !r.among && r.rank >= 1 && r.rank <= 3 && r.of >= 5);
   if (top3.length) return `${n} places in the top three on ${top3.length === 1 ? top3[0].benchmark.name : `${top3.length} benchmarks`}`;
   return n;
 }

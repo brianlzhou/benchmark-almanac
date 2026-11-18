@@ -220,11 +220,13 @@ const entryViews =
       ]
     : [];
 const views = entryViews.length > 1 ? entryViews : [{ key: 'every', label: '', scores: s.shown, what: shownWhat, tip: '' }];
-// the pool the page opens on: whichever source view has the most entries, so a thin official board opens on every
-// score while a full one (Arena's, with entries outside our model list) stays as it is. Leader credit elsewhere
-// keeps the one-source rule.
+// the pool the page opens on: whichever independent view has the most entries, so a thin official board opens on
+// every independent run while a full one (Arena's, with entries outside our model list) stays as it is. The view
+// with labs' claims included opens only when it is all there is, so a lab's own number never leads by default.
+// Leader credit elsewhere keeps the one-source rule.
 const poolSize = (v: (typeof pools)[number]) => (v.pool === 'headline' ? views[0].scores.length : v.board.length);
-const defaultPool = poolOn ? [...pools].sort((a, c) => poolSize(c) - poolSize(a))[0].pool : 'headline';
+const openable = pools.filter((v) => v.pool !== 'all');
+const defaultPool = poolOn ? [...(openable.length ? openable : pools)].sort((a, c) => poolSize(c) - poolSize(a))[0].pool : 'headline';
 // the source views whose bars have intervals: each gets the error bars switch while it shows
 const hasIv = (xs: Score[]) => xs.some((x) => x.info?.low !== undefined && x.info?.high !== undefined);
 const wkPools = [...(views.some((v) => hasIv(v.scores)) ? ['headline'] : []), ...pools.slice(1).filter((v) => hasIv(v.board)).map((v) => v.pool)];

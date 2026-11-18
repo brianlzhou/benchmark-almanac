@@ -673,8 +673,11 @@ export function addedOptions(rows: BenchSummary[]) {
 export interface ModelResult {
   benchmark: Benchmark;
   score: Score;
+  /** The model's place on the board its score comes from, or 0 when the score is a lab's own number on a benchmark that independent runs also score: a claim never ranks against those. */
   rank: number;
   of: number;
+  /** 'claims': ranked among labs' own numbers, the only scores the benchmark has. 'none': a lab's own number, not ranked. */
+  among?: 'claims' | 'none';
 }
 
 export interface ModelSummary {
@@ -697,13 +700,17 @@ export function modelSummary(id: string): ModelSummary {
   const results: ModelResult[] = [];
   for (const b of benchmarks) {
     const s = benchSummary(b.id);
+    // a lab's own number ranks only where labs' numbers are all the benchmark has. Where independent runs exist and
+    // haven't scored this model, its lab's number shows unranked, so a claim never reads as first place.
+    const independent = s.leaderboardBoard.length + s.epochBoard.length + s.viaBoard.length > 0;
     for (const board of [s.board, s.leaderboardBoard, s.epochBoard, s.viaBoard, s.cardBoard, s.claimBoard]) {
       if (!board.length) continue;
       const i = board.findIndex((x) => x.model === id);
-      if (i >= 0) {
-        results.push({ benchmark: b, score: board[i], rank: i + 1, of: board.length });
-        break;
-      }
+      if (i < 0) continue;
+      const claim = isClaim(board[i]);
+      if (claim && independent) results.push({ benchmark: b, score: board[i], rank: 0, of: 0, among: 'none' });
+      else results.push({ benchmark: b, score: board[i], rank: i + 1, of: board.length, ...(claim ? { among: 'claims' as const } : {}) });
+      break;
     }
   }
   const eci = eciByModel.get(id);
