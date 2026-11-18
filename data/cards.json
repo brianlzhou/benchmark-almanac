@@ -52708,5 +52708,137 @@
         "as_written": "PatchBench (GPT-6.2 Sol Max)"
       }
     ]
+  },
+  {
+    "id": "google-gemini-4-neon-2026-11-18",
+    "lab": "google",
+    "model": "gemini-4-neon",
+    "date": "2026-11-18",
+    "title": "Introducing Gemini 4 Neon (Google blog)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+    "tier": "mid",
+    "notes": "Scores come from the evaluation table image (gemini_4_neon_table), which matches the model card. The AA Coding Agent Index comes from the text and Gray Swan IPI from its chart (k=15 attempts). SWE-sweep is the mini-SWE harness score, and 39.0% with Google Antigravity as the harness. The AA Intelligence Index is at xhigh thinking. In Google's testing Neon refused 1.98% of Terminal-Bench 4.0 tasks, cheated on 0.0% of them, and took shortcuts on 2.45% of its coding cheating evaluation. Priced at $3 and $15 per million input and output tokens, with a 1M-token context. Neon for cyber goes to defenders in the Fairwind Program. Methodology is at deepmind.google/models/evals-methodology/gemini-4-neon.",
+    "results": [
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 61,
+        "unit": "index",
+        "as_written": "AA Index v5.0.1"
+      },
+      {
+        "benchmark": "vals-index",
+        "score": 70.9,
+        "unit": "%",
+        "as_written": "Vals Index v2.2"
+      },
+      {
+        "benchmark": "cursorbench-4-1",
+        "score": 65.4,
+        "unit": "%",
+        "as_written": "CursorBench 4.1 (Score)"
+      },
+      {
+        "benchmark": "terminal-bench-4-1",
+        "score": 65.2,
+        "unit": "%",
+        "as_written": "Terminal-bench 4.1 (Cheating adjusted accuracy)"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 46.2,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0 (Main score), at the default high thinking level"
+      },
+      {
+        "benchmark": "swe-sweep",
+        "score": 12.8,
+        "unit": "%",
+        "as_written": "SWE-sweep (Mini-SWE harness). 39.0% with the provider harness, Google Antigravity"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 56.3,
+        "unit": "%",
+        "as_written": "AutomationBench"
+      },
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "score": 75.8,
+        "unit": "%",
+        "as_written": "Agents' Last Exam v1.1"
+      },
+      {
+        "benchmark": "riemann-bench",
+        "score": 84.0,
+        "unit": "%",
+        "as_written": "RiemannBench"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 70.5,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1"
+      },
+      {
+        "benchmark": "hle-diamond",
+        "score": 71.3,
+        "unit": "%",
+        "as_written": "HLE-Diamond"
+      },
+      {
+        "benchmark": "mka",
+        "score": 56.5,
+        "unit": "%",
+        "as_written": "MKA (Climb WSR)"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 73.5,
+        "unit": "%",
+        "as_written": "Chartography"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 89.0,
+        "unit": "%",
+        "as_written": "LVBench"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 95.2,
+        "unit": "%",
+        "as_written": "GraphWalks (256k to 1M, BFS (F1))"
+      },
+      {
+        "benchmark": "cwe-bench-2",
+        "score": 70.7,
+        "unit": "%",
+        "as_written": "CWE-Bench v2"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 90.5,
+        "unit": "%",
+        "as_written": "SEC-bench Pro"
+      },
+      {
+        "benchmark": "webexploitbench",
+        "score": 51.26,
+        "unit": "%",
+        "as_written": "WebExploitBench v1.2 (51.26% in the text, 51.3% in the table)"
+      },
+      {
+        "benchmark": "artificial-analysis-coding-agent-index",
+        "score": 58.6,
+        "unit": "index",
+        "as_written": "Artificial Analysis Coding Agent Index, #1 overall (58.6), text"
+      },
+      {
+        "benchmark": "gray-swan-ipi-arena-benchmark",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Gray Swan IPI, attack success rate at k=15 attempts 0.0% (lower is better), chart"
+      }
+    ]
   }
 ]
