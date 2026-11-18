@@ -436,6 +436,11 @@
       "via": "Arena survey: multi-agent Diplomacy games between models."
     },
     {
+      "id": "ai-professions-prompt-benchmark",
+      "date": "2026-11-18",
+      "via": "Submitted through the benchmark form, issue #10."
+    },
+    {
       "id": "ai-spreadsheet-benchmark",
       "date": "2026-11-15",
       "via": "BenchmarkList. The dataset card reports five spreadsheet assistants under a shared protocol."

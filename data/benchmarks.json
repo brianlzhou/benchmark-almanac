@@ -3328,6 +3328,29 @@
     "added": "2026-11-01"
   },
   {
+    "id": "ai-professions-prompt-benchmark",
+    "name": "AI Professions Prompt Benchmark",
+    "category": "economic-work",
+    "description": "A model drafts everyday work documents from a fictional input: 100 prompts for tasks in 10 professions (accounting, law, healthcare administration, real estate, engineering, sales and others) plus Excel / Microsoft 365, in English, Spanish, French and Portuguese. A cross-family LLM judge marks 5 pass/fail criteria per prompt, hash-locked before any model ran.",
+    "org": "AI Professions (aiprofessions.ai)",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://aiprofessions.ai/methodology/",
+      "repo": "https://github.com/aiprofessions/prompt-benchmark",
+      "dataset": "https://huggingface.co/datasets/aiprofessions/prompt-benchmark",
+      "leaderboard": "https://aiprofessions.ai/models/ai-model-test-results/"
+    },
+    "access": "public",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://aiprofessions.ai/models/ai-model-test-results/",
+      "https://github.com/aiprofessions/prompt-benchmark/blob/main/data/results.csv"
+    ],
+    "added": "2026-11-18"
+  },
+  {
     "id": "ai-spreadsheet-benchmark",
     "name": "AI Spreadsheet Benchmark",
     "category": "economic-work",
