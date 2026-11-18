@@ -1,10 +1,11 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // ToolComp: Scale runs two boards, Agentic Tool Use (Enterprise) and Agentic Tool Use (Chat). This importer reads
 // the Enterprise board, which the benchmark's record links. The score is final-answer accuracy in percent, graded
 // by an LLM against the ground truth.
 // The board's "± 4.20" after each score (confidenceInterval_upper) is kept as the interval's bounds,
 // metrics.ciLow and metrics.ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 
 /** The ± half-width Scale prints after the score, as the interval's two ends. */
 function interval(e: ScaleEntry) {

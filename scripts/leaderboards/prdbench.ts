@@ -6,6 +6,8 @@ import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/AGI-Eval-Official/PRDBench/main/README.md";
 const board: Leaderboard = {
+ harnesses: 'system',
+ reference: ['Minimal'],
  benchmark: "prdbench", url: "https://github.com/AGI-Eval-Official/PRDBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 

@@ -20,6 +20,7 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'naturebench',
+  harnesses: 'system',
   url: `${PAGE}#leaderboard`,
   feed: `${FEED} (Full track, Surpass-SOTA computed as the page does)`,
   terms: 'Static data file on the project site (GitHub Pages, no robots.txt rules); the FrontisAI/NatureBench repository is MIT-licensed.',

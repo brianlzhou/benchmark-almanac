@@ -7,6 +7,7 @@ import { OPENVLM_ALIASES, OPENVLM_FEED, OPENVLM_TERMS, OPENVLM_URL, openvlmRows 
 
 const board: Leaderboard = {
   benchmark: 'vcr-visual-caption-restoration',
+  verified: 'marked verified by OpenCompass',
   url: OPENVLM_URL,
   feed: `${OPENVLM_FEED} (VCR.Overall-Jaccard)`,
   terms: OPENVLM_TERMS,

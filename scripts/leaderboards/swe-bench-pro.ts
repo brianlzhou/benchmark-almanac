@@ -5,6 +5,16 @@
 import type { Leaderboard } from './types.ts';
 import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
+/** Keep the published interval in row fields as well as the existing metrics. */
+export function scaleRowsWithInterval(...[entries, extra]: Parameters<typeof scaleRows>) {
+  return scaleRows(entries, (name, entry) => {
+    const half = entry.confidenceInterval_upper;
+    const interval = typeof half === 'number' && Number.isFinite(half) && half > 0
+      ? { low: Number(entry.score) - half, high: Number(entry.score) + half } : {};
+    return { ...interval, ...extra?.(name, entry) };
+  });
+}
+
 const PAGE = scaleUrl('swe_bench_pro');
 const TAB = 'public';
 
@@ -26,6 +36,6 @@ const board: Leaderboard = {
     'minimax-2.1': 'minimax-m2-1',
   },
   fetch: async () =>
-    scaleRows(await fetchScaleEntries(PAGE, TAB), (n, e) => ({ harness: n.marks.includes('*') ? 'mini-SWE-agent' : 'SWE-agent', ...ci(n, e) })),
+    scaleRowsWithInterval(await fetchScaleEntries(PAGE, TAB), (n, e) => ({ harness: n.marks.includes('*') ? 'mini-SWE-agent' : 'SWE-agent', ...ci(n, e) })),
 };
 export default board;

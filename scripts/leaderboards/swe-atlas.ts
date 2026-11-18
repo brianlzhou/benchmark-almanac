@@ -1,9 +1,10 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // SWE Atlas (Codebase QnA): Scale's board has one table. The score is the task resolve rate in percent (an
 // answer must pass every rubric item). Names carry the harness ("(Claude Code)", "(Mini-SWE-Agent)") and effort.
 // "*" marks runs with an elevated refusal rate, which Scale scored as failures.
 // The ± after each score (confidenceInterval_upper) is kept as metrics.ciLow and ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed,  scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('sweatlas-qna');
 
@@ -17,6 +18,8 @@ const ci = (_: unknown, e: ScaleEntry & { confidenceInterval_upper?: number | nu
 
 const board: Leaderboard = {
   benchmark: 'swe-atlas',
+  harnesses: 'system',
+  reference: ['mini-SWE-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,

@@ -36,8 +36,12 @@ const board: Leaderboard = {
       const cases = num(r.test_cases);
       const out = num(r.completion_tokens);
       const latency = num(r.seconds_per_case);
+      // an architect run names two models, "o3 (high) + gpt-4.1": the architect plans and editor_model edits. It is a
+      // blend, named by its architect
+      const architect = r.editor_model && r.model.includes(' + ') ? r.model.split(' + ')[0].trim() : undefined;
       return {
-        model: r.model,
+        model: architect ?? r.model,
+        ...(architect ? { models: [architect, r.editor_model] } : {}),
         score: Number(r.pass_rate_2),
         harness: r.edit_format ? `aider, ${r.edit_format} edits` : 'aider',
         date: r.date,

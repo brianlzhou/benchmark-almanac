@@ -9,6 +9,7 @@ const FEED = "https://hexagonmath.org/api/v1/works/2610.00244v1/source?path=Batc
 
 const board: Leaderboard = {
   benchmark: "first-proof-batch-3",
+  harnesses: 'system',
   url: "https://1stproof.org/third-batch.html",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
@@ -23,7 +24,11 @@ const board: Leaderboard = {
     const score=column('correctness','Average'),correct=column('correctness','Total Correct'),exposition=column('exposition','Average'),attribution=column('attribution','Average');
     const models=['GPT-6 Astra','Claude Opus 5.5','ProofCouncil (multiple models)','MerLean (GPT-6, variant unspecified)','Kimi K3'];
     const harness=[undefined,'Siege','ProofCouncil','MerLean','Humanize'];
-    return models.map((model,i)=>({model,harness:harness[i],score:score[i],metrics:{totalCorrect:correct[i],exposition:exposition[i],attribution:attribution[i]}}));
+    const paths=[undefined,'siege','proofcouncil','merlean','humanize'];
+    return models.map((model,i)=>({model,harness:harness[i],
+      link:paths[i]&&tex.includes('https://github.com/1stproof/batch-3/tree/main/batch-3-submissions/'+paths[i])?'https://github.com/1stproof/batch-3/tree/main/batch-3-submissions/'+paths[i]:undefined,
+      agentOrg:i===1&&tex.includes('Anthropic Siege')?'Anthropic':undefined,
+      open:i===4&&tex.includes('open-weight} model Kimi K3')?true:undefined,score:score[i],metrics:{totalCorrect:correct[i],exposition:exposition[i],attribution:attribution[i]}}));
   },
 };
 export default board;

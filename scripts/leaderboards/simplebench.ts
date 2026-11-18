@@ -2,6 +2,7 @@
 // { rank, model, score: "88.4%", organization, dateAdded } objects, one per line.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
+import { jsLiteral } from '../lib/html.ts';
 
 const FEED = 'https://simple-bench.com/static/js/leaderboard-data.js';
 
@@ -44,13 +45,16 @@ const board: Leaderboard = {
     // stands in, letting the resolver pick the right snapshot ("DeepSeek V3" is the December 2024 one)
     const listed = new Map<string, string>();
     for (const m of js.slice(js.indexOf('modelMeta')).matchAll(/^\s*"([^"]+)":\s*\{[^}]*released:\s*"([\d-]+)"/gm)) listed.set(m[1], m[2]);
+    const metaAt = js.indexOf('modelMeta =');
+    const meta = metaAt < 0 ? {} : jsLiteral<Record<string, { input?: number; output?: number }>>(js, js.indexOf('{', metaAt));
     const rows: LeaderboardRow[] = [];
     const re = /\{\s*rank:\s*"([^"]*)",\s*model:\s*"([^"]*)",\s*score:\s*"([\d.]+)%",\s*organization:\s*"[^"]*",\s*dateAdded:\s*(?:"([\d-]+)"|null)\s*\}/g;
     for (const m of block.matchAll(re)) {
       if (m[1] === '-') continue; // human baselines
       // "o1-2024-12-17 (med)": the resolver knows "medium"
       const model = m[2].trim().replace(/\(med\)$/, '(medium)');
-      rows.push({ model, score: Number(m[3]), date: m[4] ?? listed.get(m[2].trim()) });
+      const price = meta[m[2].trim()];
+      rows.push({ model, score: Number(m[3]), metrics: { ...(typeof price?.input === 'number' ? { priceIn: price.input } : {}), ...(typeof price?.output === 'number' ? { priceOut: price.output } : {}) }, date: m[4] ?? listed.get(m[2].trim()) });
     }
     if (!rows.length) throw new Error('no leaderboardData rows');
     return rows;

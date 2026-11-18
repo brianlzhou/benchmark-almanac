@@ -10,5 +10,5 @@ const board:Leaderboard={benchmark:'cf-div2-stepfun',url:PAGE,feed:PAGE+'/raw/ma
  async fetch(){
  const t=markdownTables(await fetchText(PAGE+'/raw/main/README.md')).find(t=>t[0]?.some(h=>h.includes('C++ (avg@8)')));
  if(!t)throw new Error('CF-Div2 result table missing');
- return t.slice(1).flatMap(r=>{const score=num(r[1]);return score===undefined?[]:[{model:r[0],score,setting:'C++; avg@8',metrics:{python:num(r[2])!,java:num(r[3])!,cppPass8Rating:num(r[4])!}}];});
+ return t.slice(1).flatMap(r=>{const score=num(r[1]);return score===undefined?[]:[{model:r[0],score,trials:8,setting:'C++; avg@8',metrics:{python:num(r[2])!,java:num(r[3])!,cppPass8Rating:num(r[4])!}}];});
  }};export default board;

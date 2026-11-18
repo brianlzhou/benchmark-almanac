@@ -57,6 +57,7 @@ const board: Leaderboard = {
       if (costs.length) metrics.medianCost = round(median(costs), 2);
       out.push({
         model: a.model,
+        trials: per,
         setting: a.reasoning ? (a.reasoning === 'on' ? 'reasoning on' : `${a.reasoning} effort`) : undefined,
         harness: a.harness,
         score: round(mean(byTask.map(mean)) * 100, 1),

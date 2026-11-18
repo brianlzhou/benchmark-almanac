@@ -11,6 +11,7 @@ const PAGE = 'https://yonatanbisk.com/piqa/';
 
 const board: Leaderboard = {
   benchmark: 'piqa',
+  harnesses: 'system',
   url: PAGE,
   feed: `${PAGE} (static HTML table, Accuracy)`,
   terms: 'Static GitHub Pages site of the PIQA authors (no robots.txt, so nothing is disallowed); it publishes no terms.',
@@ -27,7 +28,22 @@ const board: Leaderboard = {
       const model = text((r[1]?.html ?? '').split(/<p\b/i)[0]);
       const score = num(r[2]?.text);
       if (!model || score === undefined || /^(majority class|random)/i.test(model)) continue;
-      rows.push({ model, score });
+      const institution = text(r[1]?.html.match(/<p\b[^>]*class=["']institution["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] ?? '');
+      const submitter = institution && !/^Baseline\b/i.test(institution) ? institution : undefined;
+      const href = r[1]?.html.match(/href=["'](https:\/\/[^"']+)["']/)?.[1];
+      const blend = model.match(/^Zero-shot GPT-XL (self-talk with GPT-medium|with COMET)$/);
+      rows.push({
+        model: blend ? 'GPT-XL' : model,
+        score,
+        submitter,
+        link: href && (blend || href.includes('benchen4395/QA/')) ? href : undefined,
+        ...(blend ? {
+          setting: 'zero-shot',
+          harness: blend[1].startsWith('self-talk') ? 'self-talk' : 'COMET',
+          agentOrg: submitter,
+          models: ['GPT-XL', blend[1].startsWith('self-talk') ? 'GPT-medium' : 'COMET'],
+        } : {}),
+      });
     }
     return rows;
   },

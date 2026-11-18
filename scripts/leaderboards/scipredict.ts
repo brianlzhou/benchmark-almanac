@@ -1,6 +1,7 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // Scale's standalone SciPredict board publishes the whole-set score and confidence margin.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 const PAGE = scaleUrl('scipredict');
 const board: Leaderboard = {
   benchmark: 'scipredict', url: PAGE, feed: scaleFeed(PAGE),

@@ -31,7 +31,7 @@ const board: Leaderboard = {
       if (!r.model || score === undefined) continue;
       const metrics: Record<string, number> = {};
       const sd = num(r.score.split('±')[1]);
-      if (sd !== undefined) metrics.sd = sd;
+      if (sd !== undefined) metrics.std = metrics.sd = sd;
       // Time/task as "8.0m"; the unit letter scales it to seconds
       const time = r.time?.match(/([\d.]+)\s*([hms])/);
       if (time) metrics.latency = Math.round(Number(time[1]) * { h: 3600, m: 60, s: 1 }[time[2] as 'h' | 'm' | 's']);

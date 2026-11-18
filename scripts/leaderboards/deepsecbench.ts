@@ -50,6 +50,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       for (const [k, v] of [['recall', at(iRecall)], ['precision', at(iPrecision)], ['fp', at(iFp)], ['runHours', iTime < 0 ? undefined : hours(r[iTime]?.text.trim())], ['tokensK', at(iTokens)]] as const)
         if (v !== undefined) metrics[k] = v;
+      if (metrics.runHours !== undefined) metrics.time = metrics.runHours * 3600;
       rows.push({ model: name, score, setting: effort?.toLowerCase(), harness: r[iHarness]?.text || undefined, cost: at(iCost), metrics });
     }
     return rows;

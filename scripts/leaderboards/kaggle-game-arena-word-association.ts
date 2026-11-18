@@ -4,7 +4,7 @@
 // cents), not as tokens and cost. The rating's confidence interval is kept as metrics.ciLow and ciHigh. Read
 // through the helper in kaggle-game-arena.ts (Kaggle's documented public leaderboard endpoint).
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-word-association',
@@ -12,6 +12,6 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'word-association'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('kaggle', 'word-association', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn', scale: 0.01 } }),
+  fetch: () => kaggleRowsWithBounds('kaggle', 'word-association', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn', scale: 0.01 } }),
 };
 export default board;

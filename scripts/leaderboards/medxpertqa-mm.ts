@@ -33,7 +33,8 @@ const board: Leaderboard = {
       const model = r[iModel]?.text;
       const score = num(r[iAvg]?.text);
       const date = r[iDate]?.text;
-      if (model && score !== undefined) rows.push({ model, score, date: /^\d{4}-\d\d$/.test(date ?? '') ? `${date}-01` : undefined });
+      const openness = r[head.indexOf('Opensource?')]?.text;
+      if (model && score !== undefined) rows.push({ model, score, open: openness === 'open-source' ? true : openness === 'proprietary' ? false : undefined, date: /^\d{4}-\d\d$/.test(date ?? '') ? `${date}-01` : undefined });
     }
     return rows;
   },

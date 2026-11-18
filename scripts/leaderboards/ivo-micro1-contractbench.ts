@@ -27,6 +27,12 @@ const board: Leaderboard = {
       if(found){if(Math.abs(found.score-score)>0.01)throw new Error('ContractBench sources disagree for '+model);found.metrics={...found.metrics,...metrics};}
       else rows.push({model,score,metrics});
     }
+    const page = await fetchText(PAGE);
+    for (const m of page.matchAll(/data-icb-tip="([^":]+): ([\d.]+) min mean, [\d.]+ min median per completed rollout"/g)) {
+      const model = m[1].startsWith('Opus ') ? 'Claude ' + m[1] : m[1];
+      const row = rows.find(r => r.model === model);
+      if (row) row.metrics = {...row.metrics, minutes: Number(m[2])};
+    }
     return rows;
   },
 };

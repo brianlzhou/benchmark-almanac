@@ -4,7 +4,7 @@
 // task, so they are kept as metrics.tokensPerTurn and costPerTurn (US dollars; the board shows cents), not as
 // tokens and cost. The rating's confidence interval is kept as metrics.ciLow and ciHigh.
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-go',
@@ -12,6 +12,6 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'go'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('kaggle', 'go', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn', scale: 0.01 } }),
+  fetch: () => kaggleRowsWithBounds('kaggle', 'go', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn', scale: 0.01 } }),
 };
 export default board;

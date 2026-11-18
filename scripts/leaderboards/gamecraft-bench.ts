@@ -7,6 +7,7 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/tongxuluo/gamecraft-bench/main/README.md";
 const board: Leaderboard = {
  benchmark: "gamecraft-bench",
+ harnesses: 'system',
  url: "https://github.com/tongxuluo/gamecraft-bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

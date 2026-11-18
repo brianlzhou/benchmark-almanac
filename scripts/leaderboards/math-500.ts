@@ -29,7 +29,10 @@ const board: Leaderboard = {
     const rows = table.slice(1).flatMap((r) => {
       const value = num(r[score]?.text);
       const name = r[model]?.text.trim();
-      return name && value !== undefined ? [{ model: name, score: value, setting: 'Vals AI harness' }] : [];
+      const prices = r[headers.indexOf('Cost In / Out')]?.text.match(/\$([\d.]+)\s*\/\s*\$([\d.]+)/);
+      const latency = num(r[headers.indexOf('Latency')]?.text);
+      const metrics = { ...(prices ? { priceIn: Number(prices[1]), priceOut: Number(prices[2]) } : {}), ...(latency !== undefined ? { latency } : {}) };
+      return name && value !== undefined ? [{ model: name, score: value, setting: 'Vals AI harness', metrics }] : [];
     });
     if (!rows.length) throw new Error('MATH-500 Vals rows missing');
     return rows;

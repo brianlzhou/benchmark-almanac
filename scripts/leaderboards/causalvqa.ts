@@ -18,7 +18,7 @@ const board: Leaderboard = {
       if(m[1]==='HUMAN_BASELINES')continue;const score=m[2].match(/f"score_\{WMQA_KEY\}":\s*([\d.]+)/)?.[1];const name=m[2].match(/"model":\s*"([^"]+)"/)?.[1];if(!score||!name)continue;
       const backbone=m[2].match(/"llm_backbone":\s*"([^"]+)"/)?.[1];const vision=m[2].match(/"vision_backbone":\s*"([^"]+)"/)?.[1];const frames=Number(m[2].match(/"num_frames":\s*(-?\d+)/)?.[1]);
       const model=name==='InternVL2.5'?'InternVL2.5-8B':name==='Qwen2.5-VL'?'Qwen2.5-VL-7B-Instruct':name==='LLaVA-OneVision'?'llava-onevision-qwen2-7b-ov':name;
-      out.push({model:identity(model),score:Number(score),setting:`Published baseline; vision ${vision}; LLM ${backbone}`,date:m[2].match(/"date":\s*"([^"]+)"/)?.[1],metrics:frames>=0?{frames}:{}});
+      out.push({model:identity(model),score:Number(score),submitter:m[2].match(/"organization":\s*"([^"]+)"/)?.[1],open:/"model_type":\s*"Open"/.test(m[2])?true:/"model_type":\s*"Closed"/.test(m[2])?false:undefined,setting:`Published baseline; vision ${vision}; LLM ${backbone}`,date:m[2].match(/"date":\s*"([^"]+)"/)?.[1],metrics:frames>=0?{frames}:{}});
     }if(!out.length)throw new Error('CausalVQA baseline literals missing');return out;
   },
 };

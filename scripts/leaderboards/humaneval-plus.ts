@@ -14,7 +14,7 @@ const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', '
 
 /** One row per model with pass@1 on `task`: "humaneval", "humaneval+", "mbpp" or "mbpp+". */
 export async function evalplusRows(task: 'humaneval' | 'humaneval+' | 'mbpp' | 'mbpp+'): Promise<LeaderboardRow[]> {
-  const data = await fetchJson<Record<string, { 'pass@1'?: Record<string, number | null> }>>(EVALPLUS_FEED);
+  const data = await fetchJson<Record<string, { 'pass@1'?: Record<string, number | null>; size?: number | null }>>(EVALPLUS_FEED);
   const rows: LeaderboardRow[] = [];
   for (const [name, e] of Object.entries(data)) {
     const score = e['pass@1']?.[task];
@@ -30,7 +30,12 @@ export async function evalplusRows(task: 'humaneval' | 'humaneval+' | 'mbpp' | '
       date = new Date(Date.UTC(Number(when[2]), month + 1, 0)).toISOString().slice(0, 10);
       model = model.slice(0, when.index).trim();
     }
-    rows.push({ model: historicalCommand ? 'Command-R+ (April 2024)' : model, score, date });
+    // These sizes describe active parameters rather than total parameters.
+    const activeSize = /deepseek-(?:v[23]|coder-v2)|dbrx|mixtral/i.test(name);
+    const size = typeof e.size === 'number' && Number.isFinite(e.size) && e.size > 0 ? e.size : undefined;
+    rows.push({ model: historicalCommand ? 'Command-R+ (April 2024)' : model, score, date,
+      params: activeSize ? undefined : size,
+      metrics: activeSize && size !== undefined ? { activeParams: size } : undefined });
   }
   if (!rows.length) throw new Error(`no ${task} scores in results.json`);
   return rows;

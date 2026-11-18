@@ -3,7 +3,7 @@ import type {Leaderboard} from './types.ts';
 import {fetchText} from '../lib/util.ts';
 import {text} from '../lib/html.ts';
 const URL='https://appbench.ai/';
-const board:Leaderboard={benchmark:'app-bench',url:URL,feed:URL,
+const board:Leaderboard={benchmark:'app-bench',harnesses:'system',url:URL,feed:URL,
  terms:'Public maker leaderboard; robots.txt permits the root page and no additional reading restrictions are stated.',
  async fetch(){
   const html=await fetchText(URL);const rows=[];

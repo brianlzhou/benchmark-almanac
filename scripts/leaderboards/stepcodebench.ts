@@ -23,7 +23,7 @@ const board: Leaderboard = {
   const rows:LeaderboardRow[]=[];
   for(const m of section.matchAll(/model:"([^"]+)"[^}]*?value:"([\d.]+)"/g)){
     const effort=m[1].match(/\s*\((High|Max|Medium|Low)\)$/i);
-    rows.push({model:effort?m[1].slice(0,effort.index):m[1],score:Number(m[2]),setting:'avg@4'+(effort?'; '+effort[1].toLowerCase():'')});
+    rows.push({model:effort?m[1].slice(0,effort.index):m[1],score:Number(m[2]),trials:4,setting:'avg@4'+(effort?'; '+effort[1].toLowerCase():'')});
   }
   if(!rows.length)throw new Error('StepCodeBench has no model scores');
   return rows;

@@ -24,11 +24,11 @@ const board: Leaderboard = {
   if(count<=0) throw new Error('WildClawBench task count missing');
   const rows:LeaderboardRow[]=t.slice(1).filter(r=>num(r[3])!==undefined).map(r=>({model:r[1],score:num(r[3])!,harness:'OpenClaw',
     cost:r[5]==='Free'?0:num(r[5])!==undefined?num(r[5])!/count:undefined,
-    metrics:{minutesPerTask:num(r[4])!/count}}));
+    metrics:{minutes:num(r[4])!/count,minutesPerTask:num(r[4])!/count}}));
   const comparison=ts.find(t=>t[0].includes('Hermes Agent'));
   for(const r of comparison?.slice(2)??[]) for(const [index,harness] of [[4,'Claude Code'],[7,'Codex'],[10,'Hermes Agent']] as const){
     const score=num(r[index+2]);if(score===undefined)continue;
-    rows.push({model:r[0],harness,score,cost:num(r[index+1]),metrics:{minutesPerTask:num(r[index])!}});
+    rows.push({model:r[0],harness,score,cost:num(r[index+1]),metrics:{minutes:num(r[index])!,minutesPerTask:num(r[index])!}});
   }
   return rows;
   })();

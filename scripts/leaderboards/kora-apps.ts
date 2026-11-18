@@ -40,7 +40,7 @@ const board: Leaderboard = {
     for (const m of blocks) {
       const values = [...text(m[3]).matchAll(/(\d+)\s*%/g)].slice(0, 5).map(x => Number(x[1]));
       if (values.length !== 5) throw new Error('Application safety scores changed');
-      rows.push({ model: `${text(m[1])} application`, setting: m[2], score: values[4], metrics: { onlineSafety: values[0], physicalSexual: values[1], psychosocial: values[2], learningDevelopment: values[3] } });
+      rows.push({ model: `${text(m[1])} application`, setting: m[2], agentOrg: text(m[3].match(/<div class="font-mono text-xs tracking-wide[^"]*">([^<]+)<\/div>/)?.[1] ?? '') || undefined, score: values[4], metrics: { onlineSafety: values[0], physicalSexual: values[1], psychosocial: values[2], learningDevelopment: values[3] } });
     }
     if (!rows.length) throw new Error('No application rows');
     return rows;

@@ -12,9 +12,11 @@ const FEED = `https://eval.ai/api/jobs/challenge_phase_split/${SPLIT}/leaderboar
 
 interface Entry {
   submission__participant_team__team_name: string;
+  submission__participant_team__team_url?: string | null;
   submission__method_name: string | null;
   submission__submitted_at: string;
   submission__is_baseline: boolean;
+  submission__is_verified_by_host?: boolean;
   result: number[];
   leaderboard__schema: { labels: string[]; default_order_by?: string };
 }
@@ -32,7 +34,14 @@ const board: Leaderboard = {
       if (col < 0) throw new Error(`no Top-1 column: ${e.leaderboard__schema.labels.join(', ')}`);
       if (e.submission__is_baseline) continue;
       const model = e.submission__method_name?.trim() || e.submission__participant_team__team_name;
-      rows.push({ model, score: e.result[col] * 100, date: e.submission__submitted_at.slice(0, 10) });
+      rows.push({
+        model,
+        score: e.result[col] * 100,
+        date: e.submission__submitted_at.slice(0, 10),
+        submitter: e.submission__participant_team__team_name,
+        verified: e.submission__is_verified_by_host,
+        link: e.submission__participant_team__team_url || undefined,
+      });
     }
     return rows;
   },

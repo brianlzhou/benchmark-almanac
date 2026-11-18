@@ -27,7 +27,7 @@ const board: Leaderboard = {
         metrics[key+'CiHigh'] = Number(interval[2]);
       }
     }
-    return {model:r[1].replace(/-(high|low)thinking$/, ''), score:num(r[2])!,
+    return {model:r[1].replace(/-(high|low)thinking$/, ''), score:num(r[2])!, low:metrics.overallCiLow, high:metrics.overallCiHigh,
       setting:effort ? effort[1]+' thinking' : undefined, metrics};
   });
   if (!rows.length) throw new Error('role-play-bench-minimax has no scored rows');

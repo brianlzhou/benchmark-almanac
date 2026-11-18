@@ -17,6 +17,10 @@ const OFFLINE_TASKS = 82;
 
 interface Result {
   model: string;
+  official?: boolean;
+  company?: string;
+  trajectoryUrl?: string;
+  reproductionGuideUrl?: string;
   reasoning?: string;
   toolSetting?: string;
   stepBudget?: number;
@@ -33,6 +37,8 @@ interface Result {
 
 const board: Leaderboard = {
   benchmark: 'osworld-2-1-offline',
+  harnesses: 'system',
+  verified: 'marked official by OSWorld',
   url: 'https://osworld-v2.xlang.ai/',
   feed: `${FEED} (releaseVersion ${RELEASE}, ${SCOPE} set)`,
   terms: 'Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.',
@@ -50,8 +56,11 @@ const board: Leaderboard = {
       rows.push({
         model,
         score: r.binaryAccuracy,
-        setting: [r.reasoning?.toLowerCase(), steps].filter(Boolean).join(', ') || undefined,
-        harness: harness ?? (r.toolSetting || undefined),
+        setting: [r.reasoning?.toLowerCase(), steps, r.toolSetting || undefined].filter(Boolean).join(', ') || undefined,
+        harness,
+          verified: typeof r.official === 'boolean' ? r.official : undefined,
+          agentOrg: harness ? r.company : undefined,
+          link: [r.trajectoryUrl, r.reproductionGuideUrl].find((url) => url?.startsWith('https://')),
         cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / OFFLINE_TASKS : undefined),
         tokens: r.outputTokensPerTask ?? undefined,
         metrics: typeof r.partialScore === 'number' ? { partial: r.partialScore } : undefined,

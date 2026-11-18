@@ -17,6 +17,8 @@ export const bcbFeed = (hard: boolean) => `${BCB_PAGE}${hard ? 'results-hard.jso
 interface Entry {
   'pass@1'?: { complete?: number | null; instruct?: number | null };
   date?: string;
+  size?: number;
+  act_param?: number;
 }
 
 export async function bigcodebenchRows(hard: boolean): Promise<LeaderboardRow[]> {
@@ -38,7 +40,8 @@ export async function bigcodebenchRows(hard: boolean): Promise<LeaderboardRow[]>
       model,
       setting,
       score: Number(((complete + instruct) / 2).toFixed(1)),
-      metrics: { complete, instruct },
+      params: !hard && typeof e.size === 'number' && e.size > 0 ? e.size : undefined,
+      metrics: { complete, instruct, ...(!hard && typeof e.act_param === 'number' && e.act_param > 0 ? { activeParams: e.act_param } : {}) },
       date: /^\d{4}-\d\d-\d\d$/.test(e.date ?? '') ? e.date : undefined,
     });
   }

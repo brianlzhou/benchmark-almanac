@@ -11,7 +11,7 @@ export const MMMU_TERMS =
   'Static JSON on the MMMU GitHub Pages site, which states no license or terms; the MMMU repository is Apache-2.0.';
 
 interface Row {
-  info: { name: string; date?: string; type: string };
+  info: { name: string; date?: string; type: string; size?: string };
   pro?: { overall?: string };
   validation?: { overall?: string };
   test?: { overall?: string };
@@ -47,7 +47,13 @@ export async function mmmuRows(column: 'validation' | 'pro'): Promise<Leaderboar
     if (r.info.type === 'human_expert' || r.info.type === 'random_frequent') continue;
     const score = Number(r[column]?.overall);
     if (!Number.isFinite(score) || !r[column]?.overall) continue;
-    rows.push({ ...splitMmmuName(r.info.name), score, date: r.info.date || undefined });
+    const size = r.info.size?.match(/^(\d+(?:\.\d+)?)B$/);
+    // These rows report active sizes rather than total sizes.
+    const activeSize = /^(?:Llama 4 |DeepSeek-VL2)|^Qwen3-VL 235B-A22B$/.test(r.info.name);
+    rows.push({ ...splitMmmuName(r.info.name), score, date: r.info.date || undefined,
+      open: r.info.type === 'open_source' ? true : r.info.type === 'proprietary' ? false : undefined,
+      params: size && !activeSize ? Number(size[1]) : undefined,
+      metrics: size && activeSize ? { activeParams: Number(size[1]) } : undefined });
   }
   return rows;
 }

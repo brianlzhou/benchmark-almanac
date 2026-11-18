@@ -58,7 +58,8 @@ const board: Leaderboard = {
     'InternVL2.5-78B': 'internvl2-5-78b',
   },
   async fetch() {
-    const [main] = tables(await fetchText(PAGE));
+    const [main, openModels] = tables(await fetchText(PAGE));
+    const openNames = new Set((openModels ?? []).slice(1).map((r) => split(r[1]?.text ?? '')?.model));
     const head = main?.[0]?.map((c) => c.text);
     if (!head || head[1] !== 'Model' || head[3] !== 'Date' || head[4] !== 'ALL') throw new Error(`unexpected MathVision header: ${head?.join(' | ')}`);
     const rows: LeaderboardRow[] = [];
@@ -74,7 +75,7 @@ const board: Leaderboard = {
         const value = num(r[i]?.text);
         if (value !== undefined) metrics[head[i]] = value;
       }
-      rows.push({ ...parsed, score, date, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({ ...parsed, score, date, open: openNames.has(parsed.model) ? true : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

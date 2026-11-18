@@ -72,6 +72,8 @@ const BASE = { benchmark: 'swe-marathon-1-1', url: SWEM_PAGE, terms: SWEM_TERMS 
 const board: Leaderboard = {
   ...BASE,
   feed: `${SWEM_PAGE}assets/index-<hash>.js (v1.1 trial data; pass@1 per agent, model and effort)`,
+  harnesses: 'system',
+  reference: ['Terminus 2'],
   async fetch() {
     const { js } = await swemBundle();
     const at = js.search(/version:`v1\.1`,tasks:JSON\.parse\(`/);
@@ -110,6 +112,7 @@ const board: Leaderboard = {
         setting: g.named ? g.effort : undefined,
         harness: g.agent,
         date: starts[0],
+        trials: g.trials.length,
         cost: costs.length ? costs.reduce((a, b) => a + b, 0) / costs.length : undefined,
       });
     }

@@ -30,7 +30,7 @@ const board: Leaderboard = {
         const value=Number(r[label]?.replace(/,/g,''));
         if(r[label]?.trim()&&Number.isFinite(value))(metrics as Record<string,number>)[key]=value;
       }
-      if (r.Model && Number.isFinite(score)) rows.push({ ...lechMazurName(r.Model), score, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      if (r.Model && Number.isFinite(score)) rows.push({ ...lechMazurName(r.Model), score, low: ci ? Number(ci[1]) : undefined, high: ci ? Number(ci[2]) : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

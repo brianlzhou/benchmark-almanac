@@ -3,7 +3,7 @@
 // per move, not per task, so they are metrics (tokensPerTurn, costPerTurn in US dollars), not tokens and
 // cost. Read through the helper in kaggle-game-arena.ts (Kaggle's documented public leaderboard endpoint).
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-five-in-a-row',
@@ -12,6 +12,6 @@ const board: Leaderboard = {
   terms: KAGGLE_TERMS,
   aliases: {},
   fetch: () =>
-    kaggleRows('kaggle', 'five-in-a-row', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn' } }),
+    kaggleRowsWithBounds('kaggle', 'five-in-a-row', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn' } }),
 };
 export default board;

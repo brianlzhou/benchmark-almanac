@@ -17,6 +17,7 @@ const board: Leaderboard = {
     return source.filter(r => r.Model?.trim() && r['Final Score'].trim() && Number.isFinite(Number(r['Final Score']))).map(r => ({
       model: /^(?:GPT4V|GPT-?4o|Gemini)$/i.test(r.Model.trim()) ? `${r.Model.trim()} (snapshot unspecified)` : r.Model.trim(),
       score: Number(r['Final Score']) / 10,
+      open: r['Open Source']?.trim() === 'Yes' ? true : r['Open Source']?.trim() === 'No' ? false : undefined,
       metrics: Object.fromEntries(['Text Recognition', 'Scene Text-Centric VQA', 'Doc-Oriented VQA', 'KIE', 'HMER'].flatMap(k =>
         r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : [])),
     }));

@@ -6,7 +6,7 @@ import { fetchJson } from '../util.ts';
 const FEED = 'https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json';
 type Track = 'test-normal' | 'test-challenge';
 type Result = { task_goal_completion: number; scenario_goal_completion: number; interactions: number };
-type Entry = { llm: { name: string; tooltip: string }; method: { name: string }; date: string } &
+type Entry = { llm: { name: string; tooltip: string }; method: { name: string }; date: string; url?: string } &
   Partial<Record<'test_normal' | 'test_challenge', Record<string, Result>>>;
 
 export function appworldBoard(track: Track): Leaderboard {
@@ -30,7 +30,7 @@ export function appworldBoard(track: Track): Leaderboard {
         for (const [level, v] of Object.entries(results!)) {
           if (level !== 'all' && Number.isFinite(v.task_goal_completion)) metrics[level.replace(/\s+/g, '')] = v.task_goal_completion;
         }
-        rows.push({ model, score: all.task_goal_completion, harness: r.method.name, date: r.date, metrics });
+        rows.push({ model, score: all.task_goal_completion, harness: r.method.name, date: r.date, link: r.url?.startsWith('https://') && r.url !== 'https://appworld.dev' ? r.url : undefined, metrics });
       }
       if (!rows.length) throw new Error(`AppWorld ${track}: no TGC rows`);
       return rows;

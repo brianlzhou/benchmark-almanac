@@ -81,6 +81,7 @@ const board: Leaderboard = {
         // the instruct and thinking 2507 releases of Qwen3 235B share one label
         model: /qwen3-235b-a22b-thinking-2507/.test(m.full ?? '') ? 'Qwen3 235B A22B Thinking 2507' : name,
         score: a.sum_chain_avg,
+        ...(Array.isArray(ci) && ci.length === 2 && ci.every(Number.isFinite) ? { low: ci[0], high: ci[1] } : {}),
         setting: paren?.[1].trim().toLowerCase() || undefined,
         cost: trials && m.estimated_cost_usd ? m.estimated_cost_usd / trials : undefined,
         tokens: trials && m.output_tokens ? m.output_tokens / trials : undefined,

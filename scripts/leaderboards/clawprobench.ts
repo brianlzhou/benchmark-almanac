@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at suyoumo.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  costPer: 'run',
   chart: {title: 'Final Score versus cost', x: {key: 'runCost', label: 'Total run cost', unit: '$', better: 'lower'}, y: {key: 'score', label: 'Final Score', unit: '%', better: 'higher'}, note: 'The source reports whole-run costs and token totals, not per-task averages.'},
   async fetch() {
     const out: LeaderboardRow[] = [];
@@ -26,7 +27,7 @@ const board: Leaderboard = {
       for (let i = 3; i < 14; i++) { const v = num(r[i]?.attrs['data-value']); if (v !== undefined) metrics[head[i]] = v * 100; }
       for (const [key, i] of [['latency',14],['runTokens',15],['runCost',17]] as const) { const v = num(r[i]?.attrs['data-value']); if (v !== undefined) metrics[key] = v; }
       const output = r[16]?.text.match(/output:\s*([\d,]+)/)?.[1]; if (output) metrics.runOutputTokens = Number(output.replace(/,/g,''));
-      out.push({model: identity(model), score, setting: /Closed Dataset/.test(r[1].text) ? 'Closed Dataset' : 'Open Dataset', harness: `OpenClaw ${r[19]?.text}`, date: r[21]?.text, metrics});
+      out.push({model: identity(model), score, setting: /Closed Dataset/.test(r[1].text) ? 'Closed Dataset' : 'Open Dataset', harness: `OpenClaw ${r[19]?.text}`, date: r[21]?.text, cost: metrics.runCost, metrics});
     }
     if (!out.length) throw new Error('ClawProBench scores missing');
     return out.filter(r => r.setting === 'Open Dataset').map(r => ({...r, setting:undefined}));

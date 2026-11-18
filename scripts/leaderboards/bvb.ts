@@ -49,9 +49,9 @@ const board: Leaderboard = {
 ,
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED);
-    const data = jsonAfter(source,'window.BVB_DATA =') as {name:string,overall:number,effort:string,harness:string,costUsd:number,runtimeMin:number,dualVqa:number,latentSim:number,layout:number,motion:number,tasks:Record<string,number>}[];
+    const data = jsonAfter(source,'window.BVB_DATA =') as {name:string,overall:number,effort:string,harness:string,costUsd:number,runtimeMin:number,openWeight?:boolean,dualVqa:number,latentSim:number,layout:number,motion:number,tasks:Record<string,number>}[];
     if (!Array.isArray(data) || !data.length) throw new Error('BVB data missing');
-    return data.filter(r=>Number.isFinite(r.overall)).map(r=>({model:identity(r.name),score:r.overall,setting:r.effort,harness:r.harness,cost:r.costUsd,metrics:{...r.tasks,dualVqa:r.dualVqa,latentSimilarity:r.latentSim,layout:r.layout,motion:r.motion,cost:r.costUsd,latency:r.runtimeMin*60}}));
+    return data.filter(r=>Number.isFinite(r.overall)).map(r=>({model:identity(r.name),score:r.overall,open:r.openWeight,setting:r.effort,harness:r.harness,cost:r.costUsd,metrics:{minutes:r.runtimeMin,...r.tasks,dualVqa:r.dualVqa,latentSimilarity:r.latentSim,layout:r.layout,motion:r.motion,cost:r.costUsd,latency:r.runtimeMin*60}}));
   },
 };
 export default board;

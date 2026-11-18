@@ -56,7 +56,7 @@ const board: Leaderboard = {
     }
     if (!keys.length || !module) throw new Error('arena runs or data module not found');
     const data = await fetchText(BASE + module);
-    type Runs = Record<string, Record<string, { final_value?: number }>>;
+    type Runs = Record<string, Record<string, { final_value?: number; num_final_values?: number; final_value_ci95?: number; final_value_std?: number; final_value_sem?: number }>>;
     let runs: Runs;
     // newer builds: runs:JSON.parse(`{"vb2":{...}}`), JSON in a template literal (undo its escapes, never run it)
     const marker = 'runs:JSON.parse(`';
@@ -82,6 +82,9 @@ const board: Leaderboard = {
         rows.push({
           model: effort ? effort[1] : name,
           score: Math.round(r.final_value * 100) / 100,
+          trials: r.num_final_values,
+          ...(typeof r.final_value_ci95 === 'number' ? { low: r.final_value - r.final_value_ci95, high: r.final_value + r.final_value_ci95 } : {}),
+          metrics: { ...(typeof r.final_value_std === 'number' ? { std: r.final_value_std } : {}), ...(typeof r.final_value_sem === 'number' ? { stderr: r.final_value_sem } : {}) },
           setting: [effort ? `${effort[2].toLowerCase()} reasoning` : '', `vs ${others.join(', ')}`].filter(Boolean).join(', '),
         });
       }

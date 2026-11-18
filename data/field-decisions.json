@@ -1,0 +1,4 @@
+{
+  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "boards": {}
+}

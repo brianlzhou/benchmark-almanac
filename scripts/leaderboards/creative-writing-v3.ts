@@ -128,6 +128,24 @@ export async function eqbenchRows(file: string, variable: string, column: string
   return rows
     .map((r): LeaderboardRow => {
       const row: LeaderboardRow = { model: r[name], score: parseFloat(r[column]) * scale };
+      // These paths reproduce the board's own per-entry links.
+      const safe = r[name].replace(/\//g, '__');
+      let path: string | undefined;
+      if (file === 'creative_writing.js') path = `results/creative-writing-v3/${safe.replace(/[^a-zA-Z0-9_.-]/g, '_')}.html`;
+      if (file === 'creative_writing_longform.js') path = `results/creative-writing-longform/${safe}_longform_report.html`;
+      if (file === 'buzzbench.js') path = `results/buzzbench/${r[name].replace('/', '__')}_outputs.txt`;
+      if (file === 'spiral-bench.js' || file === 'spiral-bench_v1.0.js') {
+        const folder = file === 'spiral-bench.js' ? 'spiral_bench_v1.2_reports' : 'delusionbench_reports';
+        path = `results/${folder}/${safe.replace(/[^a-zA-Z0-9_.-]/g, '-').toLowerCase()}.html`;
+        const lo = parseFloat(r.ci_low_norm), hi = parseFloat(r.ci_high_norm);
+        if (Number.isFinite(lo) && Number.isFinite(hi)) { row.low = lo; row.high = hi; }
+      }
+      if (file === 'buzzbench.js') {
+        const lo = parseFloat(r.c95_lower), hi = parseFloat(r.c95_upper);
+        if (Number.isFinite(lo) && Number.isFinite(hi)) { row.low = lo; row.high = hi; }
+      }
+      if (file === 'eqbench-v2.js' && /^\d+(?:\.\d+)?$/.test(r.params ?? '')) row.params = Number(r.params);
+      if (path) row.link = new URL(path, 'https://eqbench.com/').href;
       if (metrics) {
         const m = Object.fromEntries(Object.entries(metrics).map(([k, c]) => [k, parseFloat(r[c])]).filter(([, v]) => Number.isFinite(v)));
         if (Object.keys(m).length) row.metrics = m;

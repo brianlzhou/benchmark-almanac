@@ -42,7 +42,9 @@ const board: Leaderboard = {
       if (!score) continue;
       const author = line.match(/^([^,]+),.*?\((\d{4})\)/);
       const model = author ? `${author[1]} et al. (${author[2]})` : line.match(/:\s*(\S+)\s+achieves/i)?.[1];
-      if (model) rows.push({model,score:Number(score[1]),setting:'test set'});
+      const file = m[1].match(/href="([^"]*downloads\/[^"]+)"/)?.[1];
+      if (model) rows.push({model,score:Number(score[1]),setting:'test set',
+        link:file?new URL(file,FEED).href:undefined});
     }
     if (!rows.length) throw new Error('No COPA accuracy results');
     return rows;

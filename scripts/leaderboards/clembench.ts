@@ -2,7 +2,7 @@
 // The official reader says "the model score is then the mean of those per-language clemscores".
 // The CSV repeats each published language clemscore across its games. Count each language once.
 // Source: https://clembench.github.io/assets/js/leaderboard.js
-// Costs and token counts are full-suite totals, retained as metrics rather than per-task values.
+// Costs are full-suite totals. Token counts remain full-suite metrics.
 import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num, jsonAfter } from '../lib/html.ts';
@@ -10,6 +10,7 @@ import { num, jsonAfter } from '../lib/html.ts';
 const FEED = "https://clembench.github.io/assets/benchmark_results/v4/combined_results.csv";
 const board: Leaderboard = {
   benchmark: "clembench",
+  costPer: 'run',
   url: "https://clembench.github.io/leaderboard.html",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
@@ -31,6 +32,7 @@ const board: Leaderboard = {
         return values[0];});
       const cs=costs.filter(r=>canon(r.model_folder || r.model_label)===model);
       return {model,score:scores.reduce((s,x)=>s+x,0)/scores.length,setting:'v4, all languages',
+        ...(cs.some(r=>num(r.total_cost)!==undefined)?{cost:cs.reduce((s,r)=>s+(num(r.total_cost)||0),0)}:{}),
         metrics:{languages:langs.length,totalCost:cs.reduce((s,r)=>s+(num(r.total_cost)||0),0),totalInputTokens:cs.reduce((s,r)=>s+(num(r.input_tokens)||0),0),totalOutputTokens:cs.reduce((s,r)=>s+(num(r.output_tokens)||0),0)}};
     });
   },

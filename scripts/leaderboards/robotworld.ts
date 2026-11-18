@@ -23,13 +23,18 @@ const board: Leaderboard = {
     return Object.entries(names).map(([key,model]) => {
       const runs = d.runs.filter((r:any) => r.model === key);
       const us = runs.filter((r:any) => r.score !== null && usage[r.id] && !usage[r.id].zero).map((r:any) => usage[r.id]);
+      const timing: Record<string, number> = {};
+      for (const key of ['steps', 'minutes']) {
+        const measured = runs.filter((r:any) => r.score !== null && typeof r[key] === 'number' && Number.isFinite(r[key]));
+        if (measured.length) timing[key] = measured.reduce((sum:number,r:any) => sum+r[key],0)/measured.length;
+      }
       const priced = us.filter((u:any) => typeof u.cost === 'number');
       const output = us.filter((u:any) => typeof u.outputTokens === 'number');
       const cost = priced.length ? priced.reduce((s:number,u:any)=>s+u.cost,0)/priced.length : undefined;
       return {model, score:100*runs.filter((r:any)=>r.score===1).length/d.registered,
         ...(cost !== undefined ? {cost} : {}),
         ...(output.length ? {tokens:output.reduce((s:number,u:any)=>s+u.outputTokens,0)/output.length} : {}),
-        metrics:{scored:runs.filter((r:any)=>r.score!==null).length, registered:d.registered,
+        metrics:{...timing,scored:runs.filter((r:any)=>r.score!==null).length, registered:d.registered,
           ...(cost !== undefined ? {cost} : {}),
           ...(us.length ? {totalTokensPerTask:us.reduce((s:number,u:any)=>s+u.totalTokens,0)/us.length} : {})}};
     });

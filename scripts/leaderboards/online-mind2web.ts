@@ -10,11 +10,16 @@ const board: Leaderboard = {
   benchmark: "online-mind2web",
   url: "https://huggingface.co/spaces/osunlp/Online_Mind2Web_Leaderboard",
   feed: FEED,
+  harnesses: 'system',
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const clean=(s:string)=>s.replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').trim();
-      return parseCsv(await fetchText(FEED)).filter(r=>num(r['Average SR'])!==undefined).map(r=>({model:clean(r.Model),harness:clean(r.Agent),score:num(r['Average SR'])!,date:r.Date?.split('-').map((p,i)=>i?p.padStart(2,'0'):p).join('-'),metrics:{easy:num(r.Easy)!,medium:num(r.Medium)!,hard:num(r.Hard)!}}));
+      return parseCsv(await fetchText(FEED)).filter(r=>num(r['Average SR'])!==undefined).map(r=>{
+        const models = clean(r.Model).split(' and ');
+        const url = r.Agent.match(/\]\((https:\/\/[^)]+)\)/)?.[1];
+        return {model:models[0],models:models.length > 1 ? models : undefined,harness:clean(r.Agent),agentOrg:clean(r.Organization),submitter:clean(r.Source),link:url?.startsWith('https://yutori.com/blog/') ? url : undefined,score:num(r['Average SR'])!,date:r.Date?.split('-').map((p,i)=>i?p.padStart(2,'0'):p).join('-'),metrics:{easy:num(r.Easy)!,medium:num(r.Medium)!,hard:num(r.Hard)!}};
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

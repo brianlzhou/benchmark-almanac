@@ -6,6 +6,7 @@ import { OPENVLM_ALIASES, OPENVLM_FEED, OPENVLM_TERMS, openVlmRows } from './mmb
 
 const board: Leaderboard = {
   benchmark: 'mmbench-cn-v1-1',
+  verified: 'marked verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${OPENVLM_FEED} (MMBench_TEST_CN_V11.Overall)`,
   terms: OPENVLM_TERMS,

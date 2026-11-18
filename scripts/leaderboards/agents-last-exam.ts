@@ -13,6 +13,7 @@ interface Row {
   totalOutputTokens?: number | null; totalCostUsd?: number | null;
 }
 const board: Leaderboard = {
+  harnesses: 'system',
   benchmark: 'agents-last-exam', url: PAGE, feed: `${FEED} (full/overall)`,
   terms: 'The authors publish this JSON for the archived v1.0 page. Code is Apache-2.0 and data CC BY 4.0; the almanac credits and links the source.',
   aliases: { 'anthropic-claude-fable-5': 'claude-fable-5', 'qwen-qwen3-7-max': 'qwen3-7-max' },

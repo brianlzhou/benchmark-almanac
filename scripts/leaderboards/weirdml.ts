@@ -48,7 +48,10 @@ const board: Leaderboard = {
         setting: effort,
         date: /^\d{4}-\d\d-\d\d$/.test(r.release_date ?? '') ? r.release_date : undefined,
         cost: Number.isFinite(cost) && cost > 0 ? cost : undefined,
-        ...(Number.isFinite(tokens) && tokens > 0 ? { metrics: { tokensPerCall: tokens } } : {}),
+        metrics: {
+          ...(Number.isFinite(tokens) && tokens > 0 ? { tokensPerCall: tokens } : {}),
+          ...(r.exec_time_median_s?.trim() && Number.isFinite(Number(r.exec_time_median_s)) ? { time: Number(r.exec_time_median_s) } : {}),
+        },
       });
     }
     return rows;

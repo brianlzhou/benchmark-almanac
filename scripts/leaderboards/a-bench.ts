@@ -6,6 +6,7 @@ import { OPENVLM_ALIASES, OPENVLM_FEED, OPENVLM_TERMS, OPENVLM_URL, openvlmRows 
 
 const board: Leaderboard = {
   benchmark: 'a-bench',
+  verified: 'marked verified by OpenCompass',
   url: OPENVLM_URL,
   feed: `${OPENVLM_FEED} (ABench.Overall)`,
   terms: OPENVLM_TERMS,

@@ -6,6 +6,7 @@ const FEED = "https://raw.githubusercontent.com/bytedance/PatchEval/main/README.
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
+ harnesses: 'system',
   benchmark: "patcheval",
   url: "https://github.com/bytedance/PatchEval",
   feed: FEED,

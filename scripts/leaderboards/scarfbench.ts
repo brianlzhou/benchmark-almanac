@@ -6,6 +6,7 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'scarfbench',
+  harnesses: 'system',
   url: 'https://www.kaggle.com/benchmarks/ibm-research/scarfbench',
   feed: kaggleFeed('ibm-research', 'scarfbench'),
   terms: KAGGLE_TERMS,

@@ -45,7 +45,7 @@ const board: Leaderboard = {
         const row = s ? tables(s)[0]?.find(r=>r[1]?.text===model) : undefined;
         const n = num(row?.[4]?.text); if (n !== undefined) metrics[category.toLowerCase()] = n;
       }
-      rows.push({model,score,metrics});
+      rows.push({model,score,metrics,submitter:r[2]?.text||undefined,link:r[3]?.html.match(/href="(https:\/\/[^"]+)"/)?.[1]});
     }
     return rows;
   },

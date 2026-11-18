@@ -15,6 +15,7 @@ interface Result {
   name: string;
   resolved: number;
   date?: string;
+  verified?: boolean;
 }
 interface Language {
   name: string;
@@ -23,6 +24,8 @@ interface Language {
 
 const board: Leaderboard = {
   benchmark: 'multi-swe-bench',
+  harnesses: 'system',
+  verified: 'verified by the Multi-SWE-bench board on every language',
   url: 'https://multi-swe-bench.github.io/',
   feed: `${FEED} (non-Python aggregate)`,
   terms: 'Repository file in multi-swe-bench/experiments (Apache-2.0) that the project site loads.',
@@ -40,12 +43,13 @@ const board: Leaderboard = {
     const langs = allLangs.filter((l) => l.name !== 'Python');
     if (langs.length !== 7) throw new Error(`expected 7 non-Python languages, got ${langs.map((l) => l.name).join(', ')}`);
     let tasks = 0;
-    const sums = new Map<string, { resolved: number; boards: number; date: string; metrics: Record<string, number> }>();
+    const sums = new Map<string, { resolved: number; boards: number; date: string; verified: boolean | undefined; metrics: Record<string, number> }>();
     for (const lang of langs)
       for (const set of lang.data) {
         tasks += set.data.all_ids.length;
         for (const r of set.results) {
-          const s = sums.get(r.name) ?? { resolved: 0, boards: 0, date: '', metrics: {} };
+          const s = sums.get(r.name) ?? { resolved: 0, boards: 0, date: '', verified: r.verified, metrics: {} };
+          s.verified = s.verified === false || r.verified === false ? false : s.verified === true && r.verified === true ? true : undefined;
           s.resolved += r.resolved;
           s.metrics[lang.name.toLowerCase()] = 100 * r.resolved / set.data.all_ids.length;
           s.boards++;
@@ -64,7 +68,7 @@ const board: Leaderboard = {
       let m = model.join(' + ').trim().replace(/^OpenAI-(?=o\d)/, '');
       const effort = m.match(/^(o\d[\w-]*?)-(low|medium|high)$/);
       if (effort) m = effort[1];
-      rows.push({ model: m, setting: effort?.[2], harness: harness.trim(), score: (100 * s.resolved) / tasks, date: s.date || undefined, metrics: s.metrics });
+      rows.push({ model: m, verified: s.verified, setting: effort?.[2], harness: harness.trim(), score: (100 * s.resolved) / tasks, date: s.date || undefined, metrics: s.metrics });
     }
     return rows;
   },

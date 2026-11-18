@@ -28,7 +28,7 @@ export const OPENVLM_ALIASES: Record<string, string> = {
   'ChatGPT-4o-latest': 'gpt-4o-mar-2025',
 };
 
-type Entry = { META?: { Method?: [string, string?]; Time?: string } } & Record<string, { Overall?: number } | undefined>;
+type Entry = { META?: { Method?: [string, string?]; Time?: string; Verified?: string; OpenSource?: string; Parameters?: string } } & Record<string, { Overall?: number } | undefined>;
 
 /** Rows for one OpenVLM.json benchmark key, scored by its Overall value. */
 export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
@@ -57,7 +57,12 @@ export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
       model = model.replace(/-CoT$/, '');
       setting = setting ? `${setting}, cot` : 'cot';
     }
-    rows.push({ model, score, setting, date });
+    const meta = e.META;
+    rows.push({ model, score, setting, date,
+      verified: meta?.Verified === 'Yes' ? true : meta?.Verified === 'No' ? false : undefined,
+      open: meta?.OpenSource === 'Yes' ? true : meta?.OpenSource === 'No' ? false : undefined,
+      params: /^\d+(?:\.\d+)?B$/.test(meta?.Parameters ?? '') ? parseFloat(meta!.Parameters!) : undefined,
+    });
   }
   if (!rows.length) throw new Error(`no ${benchKey} rows in OpenVLM.json`);
   return rows;
@@ -65,6 +70,7 @@ export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
 
 const board: Leaderboard = {
   benchmark: 'mmbench-en-v1-1',
+  verified: 'marked verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${OPENVLM_FEED} (MMBench_TEST_EN_V11.Overall)`,
   terms: OPENVLM_TERMS,

@@ -29,7 +29,7 @@ const board: Leaderboard = {
       if (!model || /^(human|random)/i.test(model)) continue;
       const date = /^\d{4}-\d\d-\d\d$/.test(r[4].text) ? r[4].text : undefined;
       const cot = num(r[5]?.text);
-      if (score !== undefined) rows.push({model, score, date, metrics:cot===undefined?undefined:{cotE:cot}});
+      if (score !== undefined) rows.push({model, score, date, params: model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i) ? Number(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i)![1]) : undefined, metrics:cot===undefined?undefined:{cotE:cot}});
     }
     return rows;
   },

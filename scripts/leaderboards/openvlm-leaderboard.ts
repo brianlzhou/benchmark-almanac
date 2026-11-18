@@ -15,8 +15,18 @@ export const OPENVLM_URL = 'https://huggingface.co/spaces/opencompass/open_vlm_l
 export const OPENVLM_TERMS = "OpenCompass's published leaderboard data file, which the Apache-2.0 Space renders; the file states no license.";
 
 export type OpenVlmEntry = Record<string, Record<string, number> | undefined> & {
-  META?: { Method?: [string, string?]; Time?: string };
+  META?: { Method?: [string, string?]; Time?: string; Parameters?: string; Verified?: string; OpenSource?: string };
 };
+
+/** Keep only explicit board marks and numeric sizes. */
+export function openvlmInfo(meta: OpenVlmEntry['META']) {
+  const params = meta?.Parameters?.match(/^(\d+(?:\.\d+)?)B$/);
+  return {
+    verified: meta?.Verified === 'Yes' ? true : meta?.Verified === 'No' ? false : undefined,
+    open: meta?.OpenSource === 'Yes' ? true : meta?.OpenSource === 'No' ? false : undefined,
+    params: params ? Number(params[1]) : undefined,
+  };
+}
 
 let cache: Promise<Record<string, OpenVlmEntry>> | undefined;
 const load = () => (cache ??= fetchJson<{ results: Record<string, OpenVlmEntry> }>(OPENVLM_FEED).then((d) => d.results));
@@ -39,7 +49,7 @@ export async function openvlmRows(pick: (e: OpenVlmEntry) => number | undefined)
       setting = snap[3];
       model = model.slice(0, snap.index).trim();
     }
-    rows.push({ model, score, setting, date });
+    rows.push({ model, score, setting, date, ...openvlmInfo(e.META) });
   }
   return rows;
 }
@@ -76,6 +86,7 @@ function avgScore(e: OpenVlmEntry): number | undefined {
 
 const board: Leaderboard = {
   benchmark: 'openvlm-leaderboard',
+  verified: 'marked verified by OpenCompass',
   url: OPENVLM_URL,
   feed: `${OPENVLM_FEED} (Avg Score over the eight default benchmarks)`,
   terms: OPENVLM_TERMS,

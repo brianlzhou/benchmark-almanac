@@ -13,6 +13,16 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
-  fetch: async () => (await matharenaRows(COMP)).map((r) => ({ ...r, score: Math.round(r.score * 1.2 * 10) / 10 })),
+  fetch: async () => (await matharenaRows(COMP)).map((r) => ({
+    ...r,
+    score: Math.round(r.score * 1.2 * 10) / 10,
+    low: r.low === undefined ? undefined : +(r.low * 1.2).toFixed(3),
+    high: r.high === undefined ? undefined : +(r.high * 1.2).toFixed(3),
+    metrics: r.metrics && {
+      ...r.metrics,
+      ...(r.metrics.ciLow === undefined ? {} : { ciLow: +(r.metrics.ciLow * 1.2).toFixed(3) }),
+      ...(r.metrics.ciHigh === undefined ? {} : { ciHigh: +(r.metrics.ciHigh * 1.2).toFixed(3) }),
+    },
+  })),
 };
 export default board;

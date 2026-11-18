@@ -24,7 +24,7 @@ const board: Leaderboard = {
       const values = r.cells.slice(1).map(c => Number(blocks(c)[0]));
       if (values.some(v => !Number.isFinite(v))) throw new Error('Invalid ATLAS-Finance numeric cell');
       const [score, ciMargin, pass3, rubricScore, cost, minutes, inputTokens, tokens] = values;
-      return { model: labels[0], setting: labels[1]?.split('·')[1]?.trim().toLowerCase(), harness: 'OpenCode', score, cost, tokens,
+      return { model: labels[0], setting: labels[1]?.split('·')[1]?.trim().toLowerCase(), harness: 'OpenCode', score, cost, tokens, low: score - ciMargin, high: score + ciMargin,
         metrics: { ciMargin, pass3, rubricScore, latency: minutes * 60, inputTokens } };
     });
     if (!rows.length) throw new Error('ATLAS-Finance rows missing');

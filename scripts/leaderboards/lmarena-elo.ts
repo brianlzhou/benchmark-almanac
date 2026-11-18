@@ -123,7 +123,7 @@ interface ArenaRow {
  * "Llama 3.1 405B Instruct (FP8)". A full snapshot date becomes the row date, so the resolver picks that
  * snapshot; it also stays in the name as a bare stamp, so an alias written with the parenthesis still matches.
  */
-function splitName(raw: string, published?: string): { model: string; date?: string; setting?: string; harness?: string } {
+export function splitName(raw: string, published?: string): { model: string; date?: string; setting?: string; harness?: string } {
   // "Command R+" and "Command R" share a match key, and the registry has only the "+" model and the 08-2024
   // Command R; naming the March 2024 original keeps it from landing on Command R+
   const name = raw === 'Command R' ? 'Command R (03-2024)' : raw.replace(/\+/g, ' Plus');

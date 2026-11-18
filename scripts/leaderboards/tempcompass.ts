@@ -14,7 +14,7 @@ const board: Leaderboard = {
 
  async fetch(): Promise<LeaderboardRow[]> {
 const rows=parseCsv(await fetchText(FEED));
- return checked(rows.map(r=>({model:r.Model.replace(/^\[([^\]]+)\]\([^)]*\)$/,'$1'),score:num(r['Avg. All'])!,setting:`frames ${r.Frames}`,metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>k.startsWith('Avg. ')&&k!=='Avg. All'&&num(v)!==undefined).map(([k,v])=>[k,num(v)!]))})),20);
+ return checked(rows.map(r=>({model:r.Model.replace(/^\[([^\]]+)\]\([^)]*\)$/,'$1'),score:num(r['Avg. All'])!,params:/^\d+(?:\.\d+)?B$/.test(r['Model Size'])?Number(r['Model Size'].slice(0,-1)):undefined,setting:`frames ${r.Frames}`,metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>k.startsWith('Avg. ')&&k!=='Avg. All'&&num(v)!==undefined).map(([k,v])=>[k,num(v)!]))})),20);
  },
 };
 export default board;

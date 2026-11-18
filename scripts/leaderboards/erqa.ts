@@ -14,7 +14,7 @@ interface Bench {
   $data: { code: string; default?: { property?: string }; properties: Record<string, { index: number }> };
 }
 interface Model {
-  $data: { name: string; score?: { benchmark?: Record<string, { legacy?: (number | null)[] }> } };
+  $data: { name: string; opensource?: boolean; score?: { benchmark?: Record<string, { legacy?: (number | null)[] }> } };
 }
 
 /** The `name=JSON.parse(...)` literal in the data chunk, read as data (single quotes or backticks). */
@@ -50,7 +50,7 @@ export async function embodiedArenaRows(code: string): Promise<LeaderboardRow[]>
   const rows: LeaderboardRow[] = [];
   for (const { $data: m } of Object.values(models)) {
     const v = m.score?.benchmark?.[id]?.legacy?.[col];
-    if (typeof v === 'number') rows.push({ model: m.name, score: v });
+    if (typeof v === 'number') rows.push({ model: m.name, score: v, open: typeof m.opensource === 'boolean' ? m.opensource : undefined });
   }
   if (!rows.length) throw new Error(`no ${code} scores`);
   return rows;

@@ -49,6 +49,7 @@ const board: Leaderboard = {
     for (const [id, run] of Object.entries(props.benchmarkView.tasks.overall)) {
       if (typeof run.accuracy !== 'number') continue;
       const metrics: Record<string, number> = {};
+      if (fin(run.stderr) && run.stderr >= 0) metrics.stderr = run.stderr;
       if (fin(run.latency) && run.latency > 0) metrics.latency = run.latency;
       if (fin(run.stderr) && run.stderr > 0) Object.assign(metrics, { ciLow: run.accuracy - 1.96 * run.stderr, ciHigh: run.accuracy + 1.96 * run.stderr });
       if (fin(human[id]?.accuracy)) metrics.human = human[id].accuracy!;

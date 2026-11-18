@@ -25,6 +25,7 @@ interface Row {
 
 const board: Leaderboard = {
   benchmark: 'commerceagentbench',
+  harnesses: 'system',
   url: PAGE,
   feed: `${PAGE} (inline script#rrb-data JSON, rows[].pass_rate)`,
   terms: 'Static page on Accio\'s public object storage (no robots.txt); the page states no terms and releases its task replicas under an open license.',

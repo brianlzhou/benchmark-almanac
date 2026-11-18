@@ -2,7 +2,7 @@
 // renders /assets/data/cybergym.json: the page keeps level1 rows with trials === 1 that are not hidden,
 // sorts them by score_10 (success rate, 0 to 1) and shows that as the Success Rate. Rows scheduled with a
 // future visible_after are not shown yet, so they are skipped. Each row names an agent and a model; the
-// agent is the harness. Multi-model systems keep their published system name as unlisted entries.
+// agent is the harness. Multi-model systems retain their constituent models.
 // Earlier variants listed as subRows inherit the parent's agent. The "dynamic" and "test-time mem."
 // features (setups the page can filter out) become the setting. Many rows are agent systems submitted by
 // their makers, and some scores come from lab model cards (the source column).
@@ -17,6 +17,8 @@ interface Row {
   score_10?: number;
   date?: string;
   trials?: number;
+  source?: string;
+  source_url?: string;
   hidden?: boolean;
   visible_after?: string;
   features?: string | string[];
@@ -27,6 +29,7 @@ const unescape = (s?: string) => s?.replace(/\\([()])/g, '$1').trim();
 
 const board: Leaderboard = {
   benchmark: 'cybergym',
+  harnesses: 'system',
   url: 'https://www.cybergym.io/cybergym/',
   feed: `${FEED} (level1, single trial)`,
   terms: 'Static JSON on the CyberGym site, which states no terms and whose robots.txt is absent; the CyberGym repository is Apache-2.0.',
@@ -46,13 +49,16 @@ const board: Leaderboard = {
       const feats = (Array.isArray(features) ? features : features ? [features] : [])
         .map((f) => f.split(' (')[0].trim())
         .filter((f) => f === 'dynamic' || f === 'test-time mem.');
-      rows.push({ model, harness: unescape(agent), score: r.score_10 * 100, setting: feats.join(', ') || undefined, date: r.date });
+      const blend = /^Multi-model \((.+)\)$/.exec(model)?.[1].split(',').map((s) => s.trim());
+      const models = blend && blend.length > 1 ? blend : undefined;
+      const link = r.source_url?.startsWith('https://') && !/^https:\/\/(?:huggingface\.co|www\.opensage-agent\.ai)\//.test(r.source_url) ? r.source_url : undefined;
+      rows.push({ model, models, submitter: unescape(r.source), trials: r.trials, link, harness: unescape(agent), score: r.score_10 * 100, setting: feats.join(', ') || undefined, date: r.date });
     };
     for (const r of level1) {
       if (r.trials !== 1 || r.hidden) continue;
       if (r.visible_after && Date.parse(r.visible_after) > now) continue;
       add(r, r.agent, r.features);
-      for (const s of r.subRows ?? []) add(s, s.agent ?? r.agent, s.features ?? r.features);
+      for (const s of r.subRows ?? []) add({ ...s, source: s.source ?? r.source, trials: s.trials ?? r.trials }, s.agent ?? r.agent, s.features ?? r.features);
     }
     return rows;
   },

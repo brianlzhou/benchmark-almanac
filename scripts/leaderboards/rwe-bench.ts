@@ -16,6 +16,7 @@ const field = (obj: string, key: string) => obj.match(new RegExp(`\\b${key}:\\s*
 
 const board: Leaderboard = {
   benchmark: 'rwe-bench',
+  harnesses: 'system',
   url: `${SITE}/rwe-bench`,
   feed: `${FEED} (window.RWE.models, pass1)`,
   terms: 'Data file the public page loads; robots.txt allows / for all user agents except named AI crawlers (content signal use=reference, ai-train=no).',
@@ -52,6 +53,8 @@ const board: Leaderboard = {
       rows.push({
         model: name,
         score,
+        low: Number.isFinite(lo) ? lo : undefined,
+        high: Number.isFinite(hi) ? hi : undefined,
         setting: field(obj, 'effort') || undefined,
         harness: field(obj, 'harness') || undefined,
         cost: Number.isFinite(cost) && cost > 0 ? cost : undefined,

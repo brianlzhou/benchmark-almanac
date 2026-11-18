@@ -3,7 +3,7 @@
 // questions, not the AssetOpsBench agent tasks. The "Score" task, a fraction, is the score (0 to 100). Read
 // through the helper in kaggle-game-arena.ts.
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'failuresensoriq',
@@ -11,6 +11,6 @@ const board: Leaderboard = {
   feed: kaggleFeed('ibm-research', 'asset-ops-bench'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('ibm-research', 'asset-ops-bench', 'Score', 100),
+  fetch: () => kaggleRowsWithBounds('ibm-research', 'asset-ops-bench', 'Score', 100),
 };
 export default board;

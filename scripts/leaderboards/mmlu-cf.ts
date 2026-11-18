@@ -47,9 +47,11 @@ const board: Leaderboard = {
     for (const r of t.slice(2)) {
       const score = num(r[2]?.text);
       if (!r[0]?.text) continue;
+      const size = r[0].text.match(/(?:-|\()(\d+(?:\.\d+)?)B(?:-|\)|$)/i);
+      const params = size ? Number(size[1]) : undefined;
       const validation5 = num(r[3]?.text), test0 = num(r[5]?.text), validation0 = num(r[6]?.text);
-      if (score !== undefined) rows.push({ model: r[0].text, score, date: '2024-12-01', setting: '5-shot test', metrics: validation5 === undefined ? undefined : {validation: validation5} });
-      if (test0 !== undefined) rows.push({ model: r[0].text, score: test0, date: '2024-12-01', setting: '0-shot test', metrics: validation0 === undefined ? undefined : {validation: validation0} });
+      if (score !== undefined) rows.push({ model: r[0].text, params, score, date: '2024-12-01', setting: '5-shot test', metrics: validation5 === undefined ? undefined : {validation: validation5} });
+      if (test0 !== undefined) rows.push({ model: r[0].text, params, score: test0, date: '2024-12-01', setting: '0-shot test', metrics: validation0 === undefined ? undefined : {validation: validation0} });
     }
     return rows;
   },

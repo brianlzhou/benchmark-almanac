@@ -11,6 +11,10 @@ const ROWS = (offset: number) =>
 
 interface Row {
   model: string | null;
+  /** the submitting organization, as the submitter typed it */
+  organisation?: string | null;
+  /** the submitter's link: code, a paper or a product page */
+  url?: string | null;
   model_family: string | null;
   score: number | null;
   date: string | null;
@@ -38,6 +42,8 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/gaia-benchmark/leaderboard',
   feed: `https://huggingface.co/datasets/${DATASET} (config 2023, split test, via the dataset viewer API)`,
   terms: 'Public, ungated Hugging Face dataset that the GAIA Space reads to draw its board; the dataset states no license, and Hugging Face terms allow reading it.',
+  // every submission is an agent its submitter named, built around the model in model_family
+  harnesses: 'system',
   aliases: {
     // Gemini 3.1 Pro Preview spelled backwards; the resolver would place it on Gemini 1.0 Pro
     'gemini-pro-preview-3-1': 'gemini-3-1-pro',
@@ -65,6 +71,8 @@ const board: Leaderboard = {
         harness: r.model?.trim() || undefined,
         setting: `public test submission ${index}${ambiguous && family ? '; models: ' + family : ''}`,
         date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date! : undefined,
+        submitter: r.organisation?.trim() || undefined,
+        link: /^https?:\/\/\S+$/.test(r.url?.trim() ?? '') ? r.url!.trim() : undefined,
         metrics,
       }];
     });

@@ -11,6 +11,9 @@ const FEED = 'https://tongyi-mai.github.io/MobileWorld/leaderboard.json';
 
 interface Entry {
   model: string;
+  organization?: string;
+  link?: string;
+  traj_file?: string;
   date?: string;
   max_steps?: number;
   runs?: number;
@@ -44,6 +47,9 @@ const board: Leaderboard = {
         score: ((r.gui_only ?? 0) * counts[0] + (r.user_int ?? 0) * counts[1] + (r.mcp ?? 0) * counts[2]) / total,
         setting: [r.max_steps != null ? `max_steps=${r.max_steps}` : null, r.runs != null ? `runs=${r.runs}` : null].filter(Boolean).join("; ") || undefined,
         harness: pair ? `with ${pair[2].trim()} grounding` : r.agent_type,
+        agentOrg: r.organization,
+        link: r.traj_file ? new URL(r.traj_file, FEED).href : undefined,
+        trials: typeof r.runs === 'number' && r.runs > 0 ? r.runs : undefined,
         date: r.date,
               metrics: {
                 guiOnly: r.gui_only,

@@ -19,7 +19,7 @@ const board: Leaderboard = {
       const m = r[0].text.match(/^(.*?)\s+(?:Anthropic|OpenAI|Google|DeepSeek|Moonshot(?: AI)?|Alibaba|Z[ .]AI|xAI|Meta)\s*·\s*(.*)$/);
       const metrics: Record<string, number> = {};
       for (const [key, value] of [['ciMargin', num(r[2]?.text)], ['pass3', num(r[3]?.text)], ['rubric', num(r[4]?.text)], ['minutes', num(r[6]?.text)], ['inputTokens', count(r[7]?.text ?? '')]] as const) if (value !== undefined) metrics[key] = value;
-      rows.push({ model: m?.[1] || r[0].text, setting: m?.[2]?.toLowerCase(), score, cost: num(r[5]?.text), tokens: count(r[8]?.text ?? ''), metrics });
+      rows.push({ model: m?.[1] || r[0].text, setting: m?.[2]?.toLowerCase(), score, ...(metrics.ciMargin !== undefined ? { low: score - metrics.ciMargin, high: score + metrics.ciMargin } : {}), cost: num(r[5]?.text), tokens: count(r[8]?.text ?? ''), metrics });
     }
     if (!rows.length) throw new Error('No ATLAS-Finance scores');
     return rows;

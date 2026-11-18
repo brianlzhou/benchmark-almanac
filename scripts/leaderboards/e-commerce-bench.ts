@@ -19,13 +19,18 @@ const board: Leaderboard = {
     'Qwen3.5-Plus': 'qwen-3-5-plus-hosted-397b-a17b',
   },
   async fetch() {
-    const [t] = tables(await fetchText(FEED));
+    const source = await fetchText(FEED);
+    const trials = /five episodes each/i.test(source) ? 5 : undefined;
+    const [t] = tables(source);
     const head = t?.[0]?.map((c) => c.text);
     if (head?.[0] !== 'Model' || !/^Final assets/.test(head?.[1] ?? '')) throw new Error(`unexpected E-Commerce Bench header: ${head?.join(' | ')}`);
     const col = (re: RegExp) => head.findIndex((h) => re.test(h));
     const [iSd, iCalls, iTurns] = [col(/^std\b/i), col(/^Tool calls$/i), col(/^Turns$/i)];
     const rows: LeaderboardRow[] = [];
+    let open: boolean | undefined;
     for (const r of t.slice(1)) {
+      if (r[0]?.text === 'Open-weight') open = true;
+      else if (r[0]?.text === 'Proprietary') open = false;
       if (r.length < 3) continue; // tier label rows span the table
       const assets = num(r[1]?.text);
       if (!r[0]?.text || assets === undefined) continue;
@@ -33,13 +38,13 @@ const board: Leaderboard = {
       const preview = /-Preview$/i.test(r[0].text);
       const [sd, calls, turns] = [iSd, iCalls, iTurns].map((i) => (i >= 0 ? num(r[i]?.text) : undefined));
       const metrics = {
-        ...(sd !== undefined ? { sd: sd / 100 } : {}),
-        ...(calls !== undefined ? { toolCalls: calls } : {}),
+        ...(sd !== undefined ? { sd: sd / 100, std: sd / 100 } : {}),
+        ...(calls !== undefined ? { toolCalls: calls, steps: calls } : {}),
         ...(turns !== undefined ? { turns } : {}),
       };
       rows.push({
         model: r[0].text.replace(/-Preview$/i, ''),
-        score: assets / 100,
+        score: assets / 100, open, trials,
         setting: preview ? 'preview' : undefined,
         metrics: Object.keys(metrics).length ? metrics : undefined,
       });

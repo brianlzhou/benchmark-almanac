@@ -39,6 +39,7 @@ const board: Leaderboard = {
         ['actions', r.actions_per_beaten_level],
       ] as const)
         if (v !== undefined && v !== '' && Number.isFinite(Number(v))) metrics[k] = Number(v);
+      if (metrics.sd !== undefined) metrics.std = metrics.sd;
       rows.push({
         model: r.model.trim(),
         score,

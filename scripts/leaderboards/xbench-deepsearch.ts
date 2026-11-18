@@ -13,7 +13,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 
 const d=await fetchJson<any>(FEED);
-return d.data.Leaderboard.map((r:any)=>{const m=r.product.match(/^(.+?)\s*\(([^)]+)\)$/);return {model:(m?m[1].trim():r.product)==='Gemini Pro'?'Gemini Pro (version unspecified)':(m?m[1].trim():r.product),setting:m?.[2],score:r.score,date:r.evaluationDate};});
+return d.data.Leaderboard.map((r:any)=>{const m=r.product.match(/^(.+?)\s*\(([^)]+)\)$/);return {model:(m?m[1].trim():r.product)==='Gemini Pro'?'Gemini Pro (version unspecified)':(m?m[1].trim():r.product),setting:m?.[2],score:r.score,date:r.evaluationDate,metrics:(()=>{const exact=String(r.timeCost??'').match(/^(\d+(?:\.\d+)?)min$/);const range=String(r.timeCost??'').match(/^(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)min$/);return exact?{minutes:Number(exact[1])}:range?{minutesMin:Number(range[1]),minutesMax:Number(range[2])}:undefined;})()};});
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

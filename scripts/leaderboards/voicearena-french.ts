@@ -1,2 +1,8 @@
 import { voiceArena } from '../lib/boards/voicearena.ts';
-export default voiceArena("French","french");
+const board = voiceArena("French","french");
+const fetchRows = board.fetch;
+board.fetch = async () => (await fetchRows()).map(row => {
+  const ci = row.metrics?.ci;
+  return {...row, ...(typeof ci === 'number' && ci >= 0 ? {low: row.score - ci, high: row.score + ci} : {})};
+});
+export default board;

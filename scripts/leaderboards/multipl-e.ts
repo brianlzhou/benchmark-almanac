@@ -9,7 +9,7 @@ const board: Leaderboard = {
   async fetch() {
     const rows = parseCsv(await fetchText(FEED)).filter(r => r.Model && r['Average score']?.trim() && Number.isFinite(Number(r['Average score'])));
     if (!rows.length) throw new Error('No MultiPL-E scores');
-    return rows.map(r => ({model: r.Model, score: Number(r['Average score']), metrics: Object.fromEntries(['humaneval-python','java','javascript','cpp','php','julia','d','lua','r','racket','rust','swift','Throughput (tokens/s)'].flatMap(k => r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : []))}));
+    return rows.map(r => ({model: r.Model, score: Number(r['Average score']), params: r['Size (B)']?.trim() && Number.isFinite(Number(r['Size (B)'])) && Number(r['Size (B)']) > 0 ? Number(r['Size (B)']) : undefined, link: r['Submission PR']?.startsWith('https://') ? r['Submission PR'] : undefined, metrics: Object.fromEntries(['humaneval-python','java','javascript','cpp','php','julia','d','lua','r','racket','rust','swift','Throughput (tokens/s)'].flatMap(k => r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : []))}));
   },
 };
 export default board;

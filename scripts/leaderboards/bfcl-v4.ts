@@ -2,7 +2,7 @@
 // (BFCL V4, the only version the page shows; "Last Updated" 2026-04-12 at the time of writing). The
 // headline is "Overall Acc", a percentage string. Each model name ends in its calling mode: "(FC)" for
 // native function calling or "(Prompt)" for prompted calls, sometimes with a thinking flag; the mode goes
-// to `harness` and the thinking flag to `setting`. "Total Cost ($)" is the board's estimate for the entire
+// to `setting` together with the thinking flag. "Total Cost ($)" is the board's estimate for the entire
 // benchmark run, so `cost` is a run cost (costPer 'run'). "Latency Mean (s)" and "Latency 95th Percentile (s)"
 // are kept as metrics.latency and metrics.latencyP95.
 import type { Leaderboard } from './types.ts';
@@ -52,14 +52,15 @@ const board: Leaderboard = {
         const xai = name.match(/^(.*?)-(non-reasoning|reasoning)$/);
         const num = (v: string | undefined) => (v && Number.isFinite(Number(v)) ? Number(v) : undefined);
         const latency = num(r['Latency Mean (s)']);
+        const latencyStd = num(r['Latency Standard Deviation (s)']);
         const latencyP95 = num(r['Latency 95th Percentile (s)']);
         return {
           model: xai ? xai[1] : name,
           score: parseFloat(r['Overall Acc']),
-          setting: xai ? xai[2] : thinking,
-          harness: mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined,
+          setting: [xai ? xai[2] : thinking, mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined].filter(Boolean).join('; ') || undefined,
+          license: r.License || undefined,
           cost: num(r['Total Cost ($)']),
-          metrics: latency === undefined && latencyP95 === undefined ? undefined : { ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) },
+          metrics: latency === undefined && latencyP95 === undefined && latencyStd === undefined ? undefined : { ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) },
         };
       });
   },

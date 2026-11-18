@@ -1,9 +1,10 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // MultiNRC: Scale's board (deprecated by Scale, still served) has one table. The score is accuracy in percent
 // against the native speakers' reference answers.
 // The board's "± 4.20" after each score (confidenceInterval_upper) is kept as the interval's bounds,
 // metrics.ciLow and metrics.ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 
 /** The ± half-width Scale prints after the score, as the interval's two ends. */
 function interval(e: ScaleEntry) {

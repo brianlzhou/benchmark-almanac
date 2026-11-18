@@ -28,6 +28,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://www.soccer-net.org/tasks/dense-video-captioning";
 const board: Leaderboard = {
   "benchmark": "soccernet-caption",
+  harnesses: 'system',
   "url": "https://www.soccer-net.org/tasks/dense-video-captioning",
   "feed": "https://www.soccer-net.org/tasks/dense-video-captioning",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
@@ -39,7 +40,7 @@ const board: Leaderboard = {
     const t=data.find(t=>t[0]?.some(c=>c.text==='METEOR'));if(!t)throw new Error('Embedded METEOR table missing');
     return t.slice(1).filter(r=>num(r[1]?.text)!==undefined).map(r=>{
       const metrics:Record<string,number>={};for(let i=2;i<r.length;i++){const n=num(r[i].text);if(n!==undefined)metrics[t[0][i].text]=n;}
-      return {model:`${r[0].text} captioning system`,score:num(r[1].text)!,setting:'2023 challenge',metrics};
+      return {model:`${r[0].text} captioning system`,submitter:r[0].text,score:num(r[1].text)!,setting:'2023 challenge',metrics};
     });
   },
 };

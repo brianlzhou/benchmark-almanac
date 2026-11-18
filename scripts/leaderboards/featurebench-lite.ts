@@ -5,6 +5,7 @@ import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/LiberCoders/FeatureBench/main/README.md";
 const board: Leaderboard = {
+ harnesses: 'system',
  benchmark: "featurebench-lite", url: "https://github.com/LiberCoders/FeatureBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 

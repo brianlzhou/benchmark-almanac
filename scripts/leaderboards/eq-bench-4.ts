@@ -17,6 +17,7 @@ interface Model {
   ci_low?: number;
   ci_high?: number;
   rank?: number;
+  transcript_dir?: string;
 }
 
 const board: Leaderboard = {
@@ -30,8 +31,8 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const m of data.models) {
       if (typeof m.elo !== 'number') continue;
-      const ci = typeof m.ci_low === 'number' && typeof m.ci_high === 'number' ? { metrics: { ciLow: m.ci_low, ciHigh: m.ci_high } } : {};
-      rows.push({ model: m.model.trim(), score: m.elo, ...ci });
+      const ci = typeof m.ci_low === 'number' && typeof m.ci_high === 'number' ? { low: m.ci_low, high: m.ci_high, metrics: { ciLow: m.ci_low, ciHigh: m.ci_high } } : {};
+      rows.push({ model: m.model.trim(), score: m.elo, link: m.transcript_dir?.startsWith('transcripts/') ? new URL(m.transcript_dir + '/', FEED).href : undefined, ...ci });
     }
     if (!rows.length) throw new Error('no models in EQBENCH4_DATA');
     return rows;

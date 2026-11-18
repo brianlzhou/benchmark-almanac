@@ -1,3 +1,4 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // Audio MC (AudioMultiChallenge): Scale's main board lists every run. It marks text-output runs with "*" and
 // audio-output runs with "†", but newer rows carry no mark. So the importer reads the two boards the main board
 // joins (Text Output and Audio Output) and puts the output mode in the setting. The score is the Average Pass
@@ -5,7 +6,7 @@
 // The board's "±" after each score (confidenceInterval_upper) is kept as the interval's bounds,
 // metrics.ciLow and metrics.ciHigh.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries,  scaleUrl } from '../lib/scale.ts';
 
 /** The ± half-width Scale prints after the score, as the interval's two ends. */
 function interval(e: ScaleEntry) {

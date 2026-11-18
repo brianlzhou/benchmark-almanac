@@ -3,14 +3,16 @@
 // category scores stay in metrics. This is the text-rich SEED-Bench-2-Plus set, not SEED-Bench-2.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
-import { OPENVLM_FEED as FEED } from './openvlm-leaderboard.ts';
+import { OPENVLM_FEED as FEED, openvlmInfo, type OpenVlmEntry } from './openvlm-leaderboard.ts';
 
 interface Result {
+  META?: OpenVlmEntry['META'];
   SEEDBench2_Plus?: Record<string, number>;
 }
 
 const board: Leaderboard = {
   benchmark: 'seed-bench-2-plus',
+  verified: 'marked verified by OpenCompass',
   host: 'OpenCompass',
   url: 'https://huggingface.co/spaces/opencompass/open_vlm_leaderboard',
   feed: `${FEED} (results[*].SEEDBench2_Plus.Overall)`,
@@ -27,7 +29,7 @@ const board: Leaderboard = {
         const value = values?.[key];
         if (typeof value === 'number') metrics[key] = value;
       }
-      rows.push({ model: name.trim(), score: overall, metrics });
+      rows.push({ model: name.trim(), score: overall, metrics, ...openvlmInfo(result.META) });
     }
     if (!rows.length) throw new Error('no SEEDBench2_Plus rows in OpenVLM.json');
     return rows;

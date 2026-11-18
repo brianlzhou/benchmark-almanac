@@ -17,6 +17,10 @@ interface Row {
   version?: string;
   with_skills_score?: number;
   with_skills_ci?: number;
+  without_skills_ci?: number;
+  with_selected_trials?: number;
+  without_selected_trials?: number;
+  audit_status?: string;
   coverage_status?: string;
   without_skills_score?: number;
   skill_lift?: number;
@@ -32,6 +36,8 @@ const AGENTS: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'skillsbench',
+  harnesses: 'system',
+  verified: 'reviewed for release alignment by SkillsBench',
   url: 'https://www.skillsbench.ai/leaderboard',
   feed: `${FEED} (with_skills_score)`,
   terms: 'Hugging Face dataset benchflow/skillsbench-leaderboard, licensed Apache-2.0.',
@@ -43,10 +49,14 @@ const board: Leaderboard = {
       if (typeof r.with_skills_score !== 'number' || (r.version && r.version !== 'v1.1')) continue;
       const ci = r.with_skills_ci;
       const metrics: Record<string, number> = typeof ci === 'number' ? { ciLow: r.with_skills_score - ci, ciHigh: r.with_skills_score + ci } : {};
-      for (const key of ['without_skills_score', 'skill_lift', 'normalized_gain'] as const) if (typeof r[key] === 'number') metrics[key] = r[key];
+      for (const key of ['without_skills_score', 'skill_lift', 'normalized_gain', 'without_skills_ci', 'without_selected_trials'] as const) if (typeof r[key] === 'number') metrics[key] = r[key];
       rows.push({
         model: r.model.trim(),
         score: r.with_skills_score,
+        low: typeof ci === 'number' ? r.with_skills_score - ci : undefined,
+        high: typeof ci === 'number' ? r.with_skills_score + ci : undefined,
+        verified: r.audit_status === 'reviewed_release_aligned' ? true : undefined,
+        trials: r.with_selected_trials,
         harness: r.agent ? (AGENTS[r.agent] ?? r.agent) : undefined,
         metrics,
       });

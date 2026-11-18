@@ -1,9 +1,10 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // Humanity's Sixth Sense: Scale's board has one table. The score is pass@1 in percent, averaged over three
 // attempts per task (a task passes only if every rubric item is met). Names carry the reasoning effort.
 // The board's "± 4.20" after each score (confidenceInterval_upper) is kept as the interval's bounds,
 // metrics.ciLow and metrics.ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 
 /** The ± half-width Scale prints after the score, as the interval's two ends. */
 function interval(e: ScaleEntry) {
@@ -20,6 +21,6 @@ const board: Leaderboard = {
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,
   aliases: { ...SCALE_ALIASES },
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), (_, e) => interval(e)),
+  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), (_, e) => ({ ...interval(e), trials: 3 })),
 };
 export default board;

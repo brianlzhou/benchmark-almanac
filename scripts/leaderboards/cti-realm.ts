@@ -19,9 +19,9 @@ const board: Leaderboard = {
     return t.slice(1).flatMap(r => {
       const score = num(r[2]?.text); if (score === undefined) return [];
       const metrics: Record<string,number> = {};
-      const se = num(r[3]?.text); if (se !== undefined) metrics.standardError = se*100;
+      const se = num(r[3]?.text); if (se !== undefined) metrics.stderr = metrics.standardError = se*100;
       const ci = r[4]?.text.match(/\[([\d.]+),\s*([\d.]+)\]/); if (ci) {metrics.ciLow=Number(ci[1])*100;metrics.ciHigh=Number(ci[2])*100;}
-      return [{model: identity(r[0].text.replace(/ \((?:high|medium|low)\)$/, '')), setting: r[0].text.match(/\((high|medium|low)\)$/)?.[1], score: score*100, metrics}];
+      return [{model: identity(r[0].text.replace(/ \((?:high|medium|low)\)$/, '')), setting: r[0].text.match(/\((high|medium|low)\)$/)?.[1], score: score*100, ...(ci ? {low: metrics.ciLow, high: metrics.ciHigh} : {}), metrics}];
     });
   },
 };

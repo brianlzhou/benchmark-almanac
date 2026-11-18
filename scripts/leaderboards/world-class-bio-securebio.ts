@@ -3,7 +3,7 @@
 // Confidence intervals, refusal rates and release dates remain attached; duplicated chart traces are collapsed.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { num, text } from '../lib/html.ts';
-import { sbCharts, SB_ALIASES } from './hpct-v2-securebio.ts';
+import { sbFacts, sbCharts, SB_ALIASES } from './hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 const board: Leaderboard = {
  benchmark: "world-class-bio-securebio",
@@ -22,7 +22,7 @@ const board: Leaderboard = {
     const m=lines[0].match(/^(.*?)\s*(?:\[([^\]]+)\])?$/)!;
     const budget=num(lines.find(l=>l.startsWith('Reasoning budget:')));
     const refusal=num(lines.find(l=>l.startsWith('Refusals:')));
-    rows.set(lines[0],{model:m[1].trim(),setting:m[2]??lines.find(l=>l.startsWith('Reasoning:'))?.slice(10).trim(),
+    rows.set(lines[0],{...sbFacts(lines, "Accuracy"),model:m[1].trim(),setting:m[2]??lines.find(l=>l.startsWith('Reasoning:'))?.slice(10).trim(),
       date:lines.find(l=>l.startsWith('Released:'))?.slice(9).trim(),score:Number(s[1]),
       metrics:{ciLow:Number(s[2]),ciHigh:Number(s[3]),...(budget!==undefined?{reasoningBudget:budget}:{}),...(refusal!==undefined?{refusals:refusal}:{})}});
   }

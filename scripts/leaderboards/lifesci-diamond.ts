@@ -1,21 +1,46 @@
-// LifeSci-Diamond strict full-set pass rate, with generation USD per task.
-// Retains system scaffolds and graded-task coverage; mean graded quality is a separate metric.
+// LifeSci Diamond: strict pass rate on the full set, with generation cost per task, from the makers'
+// leaderboard.csv. Each row names its system ("Arca + GPT-6 Astra", "GPT-6 Astra API") and its model
+// ("openai/gpt-6-astra") in separate columns. Arca's rows are Arca's own agent built on the model, so they show as
+// their own entries and never count as the model's score. The API rows are the model on its own. "Arca + Auto"
+// lets Arca pick the model, so it has no model to name. Graded-task counts and the mean on graded tasks (partial
+// credit) go in metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText } from '../lib/util.ts';
-import { num } from '../lib/html.ts';
-import { mdTables } from './big-bench-extra-hard.ts';
-const FEED = "https://raw.githubusercontent.com/arcainc/lifesci-diamond/main/README.md";
-const board: Leaderboard = {
- benchmark: "lifesci-diamond", url: "https://github.com/arcainc/lifesci-diamond", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+import { fetchText, parseCsv } from '../lib/util.ts';
 
- async fetch() {
-const t=mdTables(await fetchText(FEED)).find(t=>t.head.includes('Strict pass on full set'));if(!t)throw new Error('Missing LifeSci table');const rows:LeaderboardRow[]=[];
-for(const r of t.rows){const score=num(r[2]);if(score===undefined)continue;let model=r[0],harness:string|undefined;
-if(model.startsWith('Arca + ')){model=model.slice(7);harness='Arca';if(model==='Auto')model='Arca Auto [system]';}
-else if(model.endsWith(' API')){model=model.slice(0,-4);harness='API';}
-const counts=r[1].match(/(\d+)\s*\/\s*(\d+)/);const mean=num(r[3]);const metrics:Record<string,number>={};if(counts){metrics.graded=Number(counts[1]);metrics.tasks=Number(counts[2]);}if(mean!==undefined)metrics.meanGraded=mean;
-rows.push({model,score,harness,cost:num(r[4]),metrics});}return rows;
- },
+const FEED = 'https://raw.githubusercontent.com/arcainc/lifesci-diamond/main/leaderboard.csv';
+const num = (s: string | undefined) => (s !== undefined && s.trim() !== '' && Number.isFinite(Number(s)) ? Number(s) : undefined);
+
+const board: Leaderboard = {
+  benchmark: 'lifesci-diamond',
+  url: 'https://github.com/arcainc/lifesci-diamond',
+  feed: FEED,
+  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+  reference: ['API'],
+  harnesses: 'system',
+  aliases: { 'meta/muse-wonder-1.0': 'muse-wonder' },
+  async fetch() {
+    const rows: LeaderboardRow[] = [];
+    for (const r of parseCsv(await fetchText(FEED))) {
+      const score = num(r.pass_pct);
+      if (score === undefined || !r.system) continue;
+      const arca = /^Arca \+ /.test(r.system);
+      const low = num(r.pass_lower_pct);
+      const high = num(r.pass_upper_pct);
+      const metrics: Record<string, number> = {};
+      for (const [k, v] of [['graded', r.graded], ['tasks', r.tasks], ['meanGraded', r.mean_on_graded]] as const) if (num(v) !== undefined) metrics[k] = num(v)!;
+      rows.push({
+        model: r.model === 'auto' ? 'Arca Auto' : r.model,
+        score,
+        harness: arca ? 'Arca' : 'API',
+        ...(arca ? { agentOrg: 'Arca' } : {}),
+        cost: num(r.cost_per_task_usd),
+        // the file gives an interval; today its two ends equal the score, so it adds nothing yet
+        ...(low !== undefined && high !== undefined && high > low ? { low, high } : {}),
+        metrics,
+      });
+    }
+    if (!rows.length) throw new Error('no LifeSci Diamond rows in leaderboard.csv');
+    return rows;
+  },
 };
 export default board;

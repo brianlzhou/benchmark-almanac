@@ -27,7 +27,7 @@ const board: Leaderboard = {
     const lines = js.slice(open, js.indexOf('`', open)).trim().split('\n');
     return lines
       .map((l) => l.split(','))
-      .map(([model, score, , , , cost]): LeaderboardRow => ({ model: (model ?? '').replace(/^\*/, '').trim(), score: parseFloat(score), cost: num(cost) }))
+      .map(([model, score, , , , cost]): LeaderboardRow => ({ model: (model ?? '').replace(/^\*/, '').trim(), score: parseFloat(score), link: `https://eqbench.com/results/judgemark-v2/charts/judgemark_3chart_${(model ?? '').replace(/^[*!]+/, '').replace(/\//g, '__').replace(/[^\w\-]/g, '-')}.png`, cost: num(cost) }))
       .filter((r) => r.model && Number.isFinite(r.score));
   },
 };

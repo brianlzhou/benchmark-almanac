@@ -18,6 +18,7 @@ const HARNESSES = [
 interface Member {
   key: string;
   label: string;
+  type?: string;
   real?: boolean;
   home?: boolean;
 }
@@ -70,7 +71,7 @@ const board: Leaderboard = {
       for (const m of roster) {
         const vals = core.map((t) => pct(current.get(t.name)?.[h.field]?.[m.key])).filter((v): v is number => v !== undefined);
         if (!vals.length) continue;
-        rows.push({ model: m.label, score: Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1)), harness: h.name });
+        rows.push({ model: m.label, trials: 3, open: m.type === 'open' ? true : m.type === 'proprietary' ? false : undefined, score: Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1)), harness: h.name });
       }
     }
     return rows;

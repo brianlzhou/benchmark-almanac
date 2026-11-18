@@ -16,6 +16,7 @@ interface Entry {
   overall?: number;
   graded_at?: string;
   baseline?: boolean;
+  wall_clock_hours?: number;
 }
 
 const board: Leaderboard = {
@@ -30,7 +31,7 @@ const board: Leaderboard = {
       const model = e.model || e.label;
       if (!model) continue;
       const harness = /^goose-/.test(e.candidate ?? '') ? 'goose' : /^codex-/.test(e.candidate ?? '') ? 'Codex' : undefined;
-      rows.push({ model, harness, score: Number((e.overall * 100).toFixed(2)), date: e.graded_at.slice(0, 10) });
+      rows.push({ model, harness, score: Number((e.overall * 100).toFixed(2)), date: e.graded_at.slice(0, 10), ...(typeof e.wall_clock_hours === 'number' && Number.isFinite(e.wall_clock_hours) ? { metrics: { time: e.wall_clock_hours * 3600 } } : {}) });
     }
     return rows;
   },

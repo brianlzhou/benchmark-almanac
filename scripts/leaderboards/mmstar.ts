@@ -8,6 +8,7 @@ import { OPENVLM_ALIASES, OPENVLM_FEED, OPENVLM_TERMS, openvlmRows } from './ope
 
 const board: Leaderboard = {
   benchmark: 'mmstar',
+  verified: 'marked verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${OPENVLM_FEED} (MMStar.Overall)`,
   terms: OPENVLM_TERMS,

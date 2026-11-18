@@ -31,7 +31,9 @@ const board: Leaderboard = {
       if (!model || score === undefined) continue;
       const d = r[4].text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
       const date = d ? `${d[1]}-${d[2].padStart(2, '0')}-${d[3].padStart(2, '0')}` : undefined;
-      rows.push({ model, score, date });
+      const size = r[3]?.text.match(/^(\d+(?:\.\d+)?)B(?:\(A(\d+(?:\.\d+)?)B\))?$/);
+      rows.push({ model, score, date, params: size ? Number(size[1]) : undefined,
+        metrics: size?.[2] ? { activeParams: Number(size[2]) } : undefined });
     }
     return rows;
   },

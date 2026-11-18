@@ -13,7 +13,7 @@ const html=await fetchText(FEED); const data=jsLiteral<any[]>(html,html.indexOf(
  const rows:LeaderboardRow[]=[];
  for(const d of data){let model=d.model;const effort=model.match(/\((high|medium|low)\)/i)?.[1];model=model.replace(/\s*\((high|medium|low)\)/i,'');if(['Gemini 2.5 Pro','Gemini 3 Pro Preview'].includes(model))model+=' [snapshot unspecified]';
  const metrics={tradingAvg4Return:num(d.aiTradingAvg4)!,tradingPass4Return:num(d.aiTradingPass4)!};
- for(const task of ['turnOnLights','energyDispatch','repoSystem','aiTrading'])for(const protocol of ['Avg4','Pass4']){const score=num(String(d[task+protocol]));if(typeof score==='number' && protocol==='Avg4')rows.push({model,score,setting:['OdysseyArena-Lite',task,protocol,effort].filter(Boolean).join('; '),metrics:{passAt4:num(String(d[task+'Pass4']))!}});}}
+ for(const task of ['turnOnLights','energyDispatch','repoSystem','aiTrading'])for(const protocol of ['Avg4','Pass4']){const score=num(String(d[task+protocol]));if(typeof score==='number' && protocol==='Avg4')rows.push({model,score,trials:4,open:typeof d.isProprietary==='boolean'?!d.isProprietary:undefined,setting:['OdysseyArena-Lite',task,protocol,effort].filter(Boolean).join('; '),metrics:{passAt4:num(String(d[task+'Pass4']))!}});}}
  if(!rows.length)throw new Error('No Odyssey scores');return rows;
  },
 };

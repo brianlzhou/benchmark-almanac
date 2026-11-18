@@ -19,11 +19,15 @@ const board: Leaderboard = {
     const headers = table[0].map((c) => c.text);
     const model = headers.indexOf('Model');
     const score = headers.indexOf('Accuracy');
+    const cost = headers.indexOf('Cost / Test');
+    const duration = headers.indexOf('Duration / Test');
     if (model < 0 || score < 0) throw new Error('BioMysteryBench Vals columns missing');
     const rows = table.slice(1).flatMap((r) => {
       const value = num(r[score]?.text);
       const name = r[model]?.text.trim();
-      return name && value !== undefined ? [{ model: name, score: value, setting: 'Vals AI harness, v11 full set' }] : [];
+      const parts = r[duration]?.text.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s)?$/);
+      const time = parts && parts[0] ? Number(parts[1] || 0) * 3600 + Number(parts[2] || 0) * 60 + Number(parts[3] || 0) : undefined;
+      return name && value !== undefined ? [{ model: name, score: value, setting: 'Vals AI harness, v11 full set', cost: num(r[cost]?.text), ...(time !== undefined ? { metrics: { time } } : {}) }] : [];
     });
     if (!rows.length) throw new Error('BioMysteryBench Vals rows missing');
     return rows;

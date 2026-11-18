@@ -28,10 +28,18 @@ interface Domain {
 interface Submission {
   model_name: string;
   submission_type?: string;
+  submitting_organization?: string;
+  voice_config?: { pipeline?: { llm?: string; asr?: string; tts?: string } };
+  references?: { type?: string; url?: string }[];
   submission_date?: string;
   reasoning_effort?: string | null;
   results: Record<string, Domain | undefined>;
-  methodology?: { evaluation_date?: string; tau2_bench_version?: string };
+  methodology?: {
+    evaluation_date?: string;
+    tau2_bench_version?: string;
+    notes?: string;
+    verification?: { details?: string };
+  };
 }
 
 export async function loadTau(kind: 'submissions' | 'legacy_submissions'): Promise<Submission[]> {
@@ -65,8 +73,15 @@ export function overallExtras(s: Submission): Pick<LeaderboardRow, 'cost' | 'met
 }
 
 export function row(s: Submission, score: number): LeaderboardRow {
+  const details = s.methodology?.verification?.details ?? '';
+  const trial = s.methodology?.notes?.match(/\b(\d+|one|four|single) trials?\b/i)?.[1].toLowerCase();
+  const trials = trial === 'four' ? 4 : trial === 'one' || trial === 'single' ? 1 : trial ? Number(trial) : undefined;
   return {
     model: s.model_name,
+    submitter: s.submitting_organization,
+    verified: /^Unverified submission\b/i.test(details) ? false : /^Verified evaluation\b/i.test(details) ? true : undefined,
+    trials,
+    link: s.references?.find((r) => r.type === 'github' && r.url?.startsWith('https://github.com/'))?.url,
     score,
     setting: s.reasoning_effort?.toLowerCase() || undefined,
     date: s.methodology?.evaluation_date ?? s.submission_date,
@@ -87,6 +102,7 @@ const board: Leaderboard = {
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: `${BASE}/manifest.json (legacy_submissions)`,
   terms: TERMS,
+  verified: 'marked verified or unverified in the submission methodology',
   aliases: ALIASES,
   async fetch() {
     const rows: LeaderboardRow[] = [];

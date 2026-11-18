@@ -50,6 +50,21 @@ export async function sbCharts(): Promise<{ title: string; hovers: string[] }[]>
   return out;
 }
 
+/** Published row metadata from a score hover, without using its model release date. */
+export function sbFacts(lines: string[], label: string): Partial<LeaderboardRow> {
+  const line = lines.find(l => l.startsWith(`${label}:`)) ?? '';
+  const ci = line.match(/\[(-?[\d.]+)%?,\s*(-?[\d.]+)%?\]/);
+  const trials = line.match(/\((\d+) runs\)/);
+  const access = lines.find(l => l.startsWith('Accessibility:'))?.slice(14).trim();
+  const size = lines[0]?.match(/(?:^|\s)(\d+(?:\.\d+)?)([BT])(?:\b|-)/);
+  return {
+    low: ci ? Number(ci[1]) : undefined, high: ci ? Number(ci[2]) : undefined,
+    trials: trials ? Number(trials[1]) : undefined,
+    open: access === 'Open weights' ? true : access === 'API access' ? false : undefined,
+    params: size ? Number(size[1]) * (size[2] === 'T' ? 1000 : 1) : undefined,
+  };
+}
+
 /**
  * Rows from hover texts whose score line starts with `label` (for example "Accuracy" or "ABLE (Full)"), in
  * the charts whose title matches `chart`.
@@ -70,7 +85,7 @@ export async function sbRows(chart: RegExp, label: string): Promise<LeaderboardR
       let setting = m?.[2]?.toLowerCase();
       if (tag && /reasoning/i.test(tag[1])) setting ??= tag[1].toLowerCase();
       const model = SB_ALIASES[full] || !tag ? full : full.slice(0, tag.index).trim();
-      if (!seen.has(lines[0])) seen.set(lines[0], { model, score: Number(score), setting });
+      if (!seen.has(lines[0])) seen.set(lines[0], { model, score: Number(score), setting, ...sbFacts(lines, label) });
     }
   return [...seen.values()];
 }

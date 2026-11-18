@@ -20,7 +20,7 @@ const board: Leaderboard = {
     if(!script)throw new Error('Arena data bundle missing');
     const source=(await fetchText(script)).replace(/`([^`]*?)`/g,(_,s)=>JSON.stringify(s));
     const rows=jsonAfter(source,'var WORLD_MODEL_LEADERBOARD_ROWS=') as any[][];
-    return rows.map(r=>({model:r[1],score:r[5],metrics:{votes:r[3],winRate:r[6]}}));
+    return rows.map(r=>{const ci=typeof r[4]==='string'?r[4].match(/^\[([\d.]+),\s*([\d.]+)\]$/):undefined;return {model:r[1],score:r[5],...(ci?{low:Number(ci[1]),high:Number(ci[2])}:{}),metrics:{votes:r[3],winRate:r[6]}};});
   },
 };
 

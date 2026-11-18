@@ -7,6 +7,8 @@ import { fetchText } from '../lib/util.ts';
 const FEED = "https://the-agent-company.com/";
 const board: Leaderboard = {
   benchmark: "theagentcompany",
+  harnesses: 'system',
+  verified: 'checked by TheAgentCompany',
   url: "https://the-agent-company.com/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
@@ -18,7 +20,7 @@ const board: Leaderboard = {
       const literal=[...s.matchAll(/JSON\.parse\('((?:[^'\\]|\\.)*)'\)/g)].find(m=>m[1].includes('"resolved"'))?.[1];
       if(!literal) throw new Error('TheAgentCompany results missing');
       const data=JSON.parse(literal.replace(/\\'/g,"'"));
-      return data.G.map((r:any)=>{const p=r.model.split(' + ');return {model:(()=>{const name=p.pop();return /^Deepseek-V3.2$/i.test(name)&&r.date<'2025-12-01'?name+' (snapshot unspecified)':name;})(),harness:p.join(' + ')||undefined,score:r.resolved,date:r.date,cost:r.costs,metrics:{partialScore:r.score,...(typeof r.steps==='number'?{steps:r.steps}:{})}};});
+      return data.G.map((r:any)=>{const p=r.model.split(' + ');return {model:(()=>{const name=p.pop();return /^Deepseek-V3.2$/i.test(name)&&r.date<'2025-12-01'?name+' (snapshot unspecified)':name;})(),harness:p.join(' + ')||undefined,score:r.resolved,date:r.date,verified:typeof r.checked==='boolean'?r.checked:undefined,link:typeof r.site==='string'&&r.site.startsWith('https://')?r.site:undefined,cost:r.costs,metrics:{partialScore:r.score,...(typeof r.steps==='number'?{steps:r.steps}:{})}};});
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

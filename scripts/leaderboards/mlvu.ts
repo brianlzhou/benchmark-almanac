@@ -17,7 +17,9 @@ const board: Leaderboard = {
   
   async fetch() {
     const out: LeaderboardRow[] = [];
-    for (const t of mdTables(await fetchText(FEED))) {
+    const md = await fetchText(FEED);
+    const code = new Map([...md.matchAll(/\[([^\]]+)\]\((https:\/\/github\.com\/[^)]+)\)/g)].map(m => [m[1], m[2]]));
+    for (const t of mdTables(md)) {
       const at = t.head.findIndex(h => h.toLowerCase() === 'm-avg');
       if (at < 0 || !/MLVU-Test/i.test(t.heading)) continue;
       for (const r of t.rows) {
@@ -30,7 +32,7 @@ const board: Leaderboard = {
         const name = /\d+B/i.test(size) && !/\d+B/i.test(sourceName) ? `${sourceName} ${size}` : sourceName;
         const metrics: Record<string, number> = {};
         for (let i = 3; i < t.head.length; i++) { const v = num(r[i]); if (i !== at && v !== undefined) metrics[t.head[i]] = v; }
-        out.push({ model: identity(name), score, setting: r[1], metrics });
+        out.push({ model: identity(name), score, setting: r[1], link: code.get(r[0]), params: /^\d+(?:\.\d+)?B$/i.test(size) ? parseFloat(size) : undefined, open: /\*$/.test(r[0]) ? false : undefined, metrics });
       }
     }
     if (!out.length) throw new Error('MLVU tables missing');

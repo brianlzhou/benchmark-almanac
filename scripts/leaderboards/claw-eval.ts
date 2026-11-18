@@ -60,6 +60,9 @@ const EXTRAS: [key: string, field: string, scale: number][] = [
   ['completion', 'avg_completion', 100],
   ['robustness', 'avg_robustness', 100],
   ['safety', 'avg_safety', 100],
+  ['completionStd', 'avg_completion_std', 100],
+  ['robustnessStd', 'avg_robustness_std', 100],
+  ['safetyStd', 'avg_safety_std', 100],
 ];
 
 /** One row per model from the named board, scored by `field` times `scale`; `extras` adds the EXTRAS metrics. */
@@ -70,6 +73,8 @@ export async function clawRows(board: 'general' | 'multimodal', field: string, s
     const v = m.fields[field];
     if (typeof v !== 'number') continue;
     const metrics: Record<string, number> = {};
+    const std = m.fields.avg_score_std;
+    if (typeof std === 'number') metrics[field === 'avg_score' ? 'std' : 'avgScoreStd'] = Number((std * 100).toFixed(2));
     if (extras) {
       for (const [k, f, x] of EXTRAS) {
         const e = m.fields[f];

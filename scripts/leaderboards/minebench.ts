@@ -34,6 +34,8 @@ const board: Leaderboard = {
         if (typeof b.costEstimated === 'boolean') metrics.costEstimated = Number(b.costEstimated);
       }
       rows.push({ model: r.displayName, score: r.eloRating,
+        low: typeof r.ciLower === 'number' && Number.isFinite(r.ciLower) ? r.ciLower : undefined,
+        high: typeof r.ciUpper === 'number' && Number.isFinite(r.ciUpper) ? r.ciUpper : undefined,
         ...(typeof b?.averageCostUsd === 'number' ? {cost: b.averageCostUsd} : {}), metrics });
     }
     if (!rows.length) throw new Error('MineBench returned no rated models');

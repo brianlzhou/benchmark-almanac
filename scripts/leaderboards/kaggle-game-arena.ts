@@ -74,12 +74,17 @@ export async function kaggleRows(owner: string, slug: string, task = 'Score', sc
   return out;
 }
 
+/** Keep interval fields for boards that expose a score interval. */
+export async function kaggleRowsWithBounds(...args: Parameters<typeof kaggleRows>): Promise<LeaderboardRow[]> {
+  return (await kaggleRows(...args)).map((r) => ({ ...r, low: r.metrics?.ciLow, high: r.metrics?.ciHigh }));
+}
+
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena',
   url: 'https://www.kaggle.com/benchmarks/kaggle/game-arena',
   feed: FEED,
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('kaggle', 'game-arena'),
+  fetch: () => kaggleRowsWithBounds('kaggle', 'game-arena'),
 };
 export default board;

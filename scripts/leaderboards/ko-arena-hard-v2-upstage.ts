@@ -18,7 +18,8 @@ const board: Leaderboard = {
  const s=text(await fetchText(FEED));
  const m=s.match(/On Ko-Arena-hard-v2, Solar Pro 3 reaches\s*(\d+(?:\.\d+)?)\s*, up from Solar Pro 2[’']s\s*(\d+(?:\.\d+)?)/);
  if(!m || !s.includes('solar-pro2-251215') || !s.includes('solar-pro3-260323')) throw new Error('Ko-Arena scores or snapshot provenance changed');
- return checked([{model:'solar-pro3-260323',score:Number(m[1])},{model:'solar-pro2-251215',score:Number(m[2])}]);
+ const size=s.match(/Solar Pro 3 is built on a Mixture-of-Experts architecture with (\d+(?:\.\d+)?)B total parameters, activating only (\d+(?:\.\d+)?)B/);
+ return checked([{model:'solar-pro3-260323',score:Number(m[1]),params:size?Number(size[1]):undefined,metrics:size?{activeParams:Number(size[2])}:undefined},{model:'solar-pro2-251215',score:Number(m[2])}]);
 
  },
 };
