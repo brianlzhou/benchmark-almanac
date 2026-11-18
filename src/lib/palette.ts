@@ -12,6 +12,15 @@ export function labColor(lab: string | undefined): string {
   return i >= 0 ? `var(--lab-${LAB_SLOTS[i]})` : 'var(--lab-other)';
 }
 
+/**
+ * The color of an agent someone else built around a model ("Arca + GPT-6 Astra"): the model's lab color mixed half
+ * with the page, so it reads as that lab's model without looking like the lab's own score. Lighter on a light page,
+ * darker on a dark one. A blend of several models stays gray: it belongs to no one lab.
+ */
+export function agentTint(lab: string | undefined): string {
+  return `color-mix(in oklab, ${labColor(lab)} 50%, var(--bg))`;
+}
+
 /** Text color for a label set inside a lab-colored fill: white or near-black, whichever reads better. */
 export function onLabColor(lab: string | undefined): string {
   const id = lab === 'xai' || LAB_SLOTS.includes(lab as (typeof LAB_SLOTS)[number]) ? lab : 'other';

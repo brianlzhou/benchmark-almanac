@@ -6,10 +6,10 @@
 // - ladder: when the board reports no cost, one row per model with a dot for each effort level, from
 //   the lowest effort (light) to the highest (full color).
 // The cost form renders twice, at a desktop and a phone width, so text keeps its size on both.
-import type { EffortView, Run } from '../lib/effort.ts';
+import type { EffortView, Run, Series } from '../lib/effort.ts';
 import { usd, tokenCount } from '../lib/effort.ts';
-import { modelById, labById } from '../lib/data.ts';
-import { labColor } from '../lib/palette.ts';
+import { labById } from '../lib/data.ts';
+import { labColor, agentTint } from '../lib/palette.ts';
 import { linear, niceTicks, niceMax, yearLines } from '../lib/scale.ts';
 import { score as fmt } from '../lib/format.ts';
 import LabMark from './LabMark.astro';
@@ -20,8 +20,10 @@ interface Props {
 }
 const { view, label } = Astro.props;
 const { unit } = view;
-const name = (id: string) => modelById.get(id)?.name ?? id;
-const runName = (r: Run) => `${name(r.model)}${r.setting ? `, ${r.setting}` : ''}`;
+const runName = (r: Run) => `${r.label}${r.setting ? `, ${r.setting}` : ''}`;
+// a run that counts as the model's score takes its lab's color, an agent another company built takes a pale shade
+// of it, and a blend is gray
+const base = (s: Pick<Series, 'counted' | 'kind' | 'lab'>) => (s.counted ? labColor(s.lab) : s.kind === 'blend' ? labColor(undefined) : agentTint(s.lab));
 const vFmt = (v: number) => fmt(v, unit);
 const runNote = (r: Run) =>
   [r.cost !== null ? `${usd(r.cost)} ${view.costPer === 'run' ? 'for the full run' : 'per task'}` : '', r.tokens !== null ? `${tokenCount(r.tokens)} output tokens per task` : '', r.harness ?? '']
@@ -30,7 +32,7 @@ const runNote = (r: Run) =>
 
 // ---------- cost form ----------
 const onFront = new Set(view.frontier.map((r) => `${r.model}|${r.harness ?? ''}`));
-const colorOf = (key: string, lab?: string) => (onFront.has(key) ? labColor(lab) : 'var(--ink-4)');
+const colorOf = (s: Series) => (onFront.has(s.key) ? base(s) : 'var(--ink-4)');
 const costs = view.runs.map((r) => r.cost!).filter((c) => c > 0);
 const lo = costs.length ? 10 ** Math.floor(Math.log10(Math.min(...costs))) : 1;
 const hi = costs.length ? 10 ** Math.ceil(Math.log10(Math.max(...costs))) : 10;
@@ -45,7 +47,8 @@ const sizes = [
   { key: 'wide', w: 1120, h: 460, labels: 7, font: 12.5 },
   { key: 'narrow', w: 380, h: 330, labels: 2, font: 11 },
 ];
-const frontLabs = [...new Set(view.series.filter((s) => onFront.has(s.key)).map((s) => s.lab ?? 'other'))];
+const frontLabs = [...new Set(view.series.filter((s) => onFront.has(s.key) && s.counted).map((s) => s.lab ?? 'other'))];
+const frontAgents = view.series.some((s) => onFront.has(s.key) && !s.counted);
 // gray series first, so colored ones sit on top
 const drawOrder = [...view.series].sort((a, b) => Number(onFront.has(a.key)) - Number(onFront.has(b.key)));
 
@@ -85,8 +88,8 @@ const l1 = Math.min(unit === '%' ? 100 : Infinity, lt.at(-1)! < Math.max(...lv) 
 const lTicks = niceTicks(l0, l1, 5).filter((v) => v >= l0 && v <= l1);
 const pctX = (v: number) => `${(((v - l0) / (l1 - l0 || 1)) * 100).toFixed(2)}%`;
 const ladderGrid = yearLines(lTicks.map(pctX));
-const tint = (lab: string | undefined, i: number, n: number) =>
-  n <= 1 ? labColor(lab) : `color-mix(in oklab, ${labColor(lab)} ${Math.round(35 + (65 * i) / (n - 1))}%, var(--bg))`;
+const tint = (color: string, i: number, n: number) =>
+  n <= 1 ? color : `color-mix(in oklab, ${color} ${Math.round(35 + (65 * i) / (n - 1))}%, var(--bg))`;
 ---
 
 {
@@ -101,6 +104,14 @@ const tint = (lab: string | undefined, i: number, n: number) =>
             {labById.get(l)?.name ?? 'Other labs'}
           </span>
         ))}
+        {frontAgents && (
+          <span class="tag">
+            <svg width="12" height="12" aria-hidden="true">
+              <rect width="12" height="12" rx="3" fill={agentTint(view.series.find((s) => onFront.has(s.key) && !s.counted)?.lab)} />
+            </svg>
+            Agents other companies built, in a pale shade of the model’s lab
+          </span>
+        )}
         <span class="tag">
           <svg width="22" height="12" aria-hidden="true">
             <path d="M1 10H8V3H21" fill="none" stroke="var(--ink-2)" stroke-width="1.6" />
@@ -149,7 +160,7 @@ const tint = (lab: string | undefined, i: number, n: number) =>
               {view.costPer === 'run' ? 'Cost of the full run, log scale' : 'Cost per task, log scale'}
             </text>
             {drawOrder.map((s) => {
-              const c = colorOf(s.key, s.lab);
+              const c = colorOf(s);
               const on = onFront.has(s.key);
               return (
                 <g class:list={{ dim: !on }}>
@@ -210,17 +221,17 @@ const tint = (lab: string | undefined, i: number, n: number) =>
             <div class="row">
               <div class="who">
                 <LabMark lab={s.lab} size={14} />
-                <span class="nm">{name(s.model)}</span>
-                {s.harness && <span class="hn">{s.harness}</span>}
+                <span class="nm">{s.label}</span>
+                {s.harness && s.counted && <span class="hn">{s.harness}</span>}
               </div>
               <div class="plot" style={`--yl:${ladderGrid}`}>
-                <span class="bar" style={`left:${pctX(Math.min(...xs))};width:calc(${pctX(Math.max(...xs))} - ${pctX(Math.min(...xs))});background:${labColor(s.lab)}`} />
+                <span class="bar" style={`left:${pctX(Math.min(...xs))};width:calc(${pctX(Math.max(...xs))} - ${pctX(Math.min(...xs))});background:${base(s)}`} />
                 {s.runs.map((r, i) => (
                   <>
                     <span
                       class="dot"
                       tabindex="0"
-                      style={`left:${pctX(r.value)};background:${tint(s.lab, i, s.runs.length)}`}
+                      style={`left:${pctX(r.value)};background:${tint(base(s), i, s.runs.length)}`}
                       data-tv={vFmt(r.value)}
                       data-tn={runName(r)}
                       data-ts={runNote(r) || undefined}

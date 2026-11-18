@@ -280,12 +280,15 @@ section + section {
 .head h1.long {
   max-width: 24ch;
 }
-/* an area page or a benchmark carries its area's mark before the title */
+/* an area page or a benchmark carries its area's mark after the title, held on the last word's line */
 .head h1.with-amark .amark {
   width: 0.34em;
   height: 0.34em;
-  margin: 0 0.3em 0.12em 0;
+  margin: 0 0 0.12em 0.3em;
   vertical-align: middle;
+}
+.head h1.with-amark .tail {
+  white-space: nowrap;
 }
 .head .lede {
   margin-top: 18px;
@@ -509,6 +512,50 @@ select.field {
 }
 .pool-switch {
   margin-top: 20px;
+}
+/* the entries switch on a benchmark page: radios named entries pick a view (every entry, the models alone, or only
+   runs in a standard harness) for every chart of the official board. Rules only hide, so what shows keeps its own
+   display. .ent-not-same marks what the first two views share. */
+.page:has(input[name='entries']:not([value='every']):checked) .ent-every,
+.page:not(:has(input[name='entries'][value='models']:checked)) .ent-models,
+.page:not(:has(input[name='entries'][value='same']:checked)) .ent-same,
+.page:has(input[name='entries'][value='same']:checked) .ent-not-same {
+  display: none;
+}
+/* the switch matters only for the official board, so it steps aside when the pool switch shows other sources */
+.pools:has(input[name='pool']:not([value='headline']):checked) .ent-ctl {
+  display: none;
+}
+.ent-switch {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+.ent-ctl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  margin-top: 12px;
+}
+/* a small round (?) that explains the control beside it, through the shared tooltip */
+.help-q {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-3);
+  font: 500 12px/1 var(--sans);
+  cursor: help;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.help-q:hover,
+.help-q:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink-4);
 }
 /* three long labels don't fit a phone in one row: the control wraps instead of running off the screen */
 .seg:has(input[name='pool']) {
@@ -847,6 +894,10 @@ table.t {
 }
 #tip .ts {
   color: var(--ink-3);
+  white-space: pre-line;
+}
+#tip.wide {
+  max-width: 360px;
 }
 :root[data-theme='dark'] #tip {
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.08);

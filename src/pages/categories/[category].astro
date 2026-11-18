@@ -76,7 +76,7 @@ const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }, { href: `/benchmar
   <div class="page">
     <header class="head">
       <Crumbs items={trail} />
-      <h1 class="with-amark"><AreaMark area={area.id} size={20} />{name}</h1>
+      <h1 class="with-amark">{name.split(' ').slice(0, -1).join(' ')} <span class="tail">{name.split(' ').at(-1)}<AreaMark area={area.id} size={20} /></span></h1>
       <p class="lede">
         We track <a href={`/benchmarks/?area=c:${cat}`}>{all.length} {all.length === 1 ? 'benchmark' : 'benchmarks'}</a> in {lowerLabel(name)}.
         {levels.length > 1 && ` They run from ${lowerLabel(levels[0].l.name)} level to ${lowerLabel(levels.at(-1)!.l.name)} level.`}

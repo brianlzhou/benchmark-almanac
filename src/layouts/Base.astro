@@ -63,17 +63,19 @@ const NAV: { id: string; label: string; links: { href: string; label: string; fo
   },
   {
     id: 'say',
-    label: 'What labs report',
+    label: 'What labs report, and trends over time',
     links: [
       { href: '/cards/', label: 'Model cards', fold: true },
-      { href: '/reporting/', label: 'Reporting', fold: true },
+      { href: '/insights/', label: 'Insights', fold: true },
     ],
   },
 ];
 const MORE = [
   { href: '/new/', label: 'New this month' },
+  { href: '/time-machine/', label: 'Time machine' },
   { href: '/audits/', label: 'Audits' },
   { href: '/sources/', label: 'Sources' },
+  { href: '/sql/', label: 'Query with SQL' },
   { href: '/contribute/', label: 'Contribute' },
 ];
 // the same links in one list, for the footer
@@ -191,7 +193,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           <div>
             <h2>Explore</h2>
             <ul>
-              {[...NAV_LINKS.filter((n) => !n.fold && n.href !== '/build/'), { href: '/compare/', label: 'Compare models' }, { href: '/cards/', label: 'Model cards' }, { href: '/reporting/', label: 'What labs report' }, { href: '/build/', label: 'Build your own index' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
+              {[...NAV_LINKS.filter((n) => !n.fold && n.href !== '/build/'), { href: '/compare/', label: 'Compare models' }, { href: '/cards/', label: 'Model cards' }, { href: '/insights/', label: 'Insights' }, { href: '/build/', label: 'Build your own index' }, { href: '/time-machine/', label: 'Time machine' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
                 .filter((n, i, xs) => xs.findIndex((y) => y.href === n.href) === i)
                 .map((n) => (
                   <li><a href={n.href}>{n.label}</a></li>
@@ -219,6 +221,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
               <li><a href="/about/#finding">Finding new benchmarks</a></li>
               <li><a href="/audits/#rules">Known issues</a></li>
               <li><a href="/sources/">Sources</a></li>
+              <li><a href="/sql/">Query the data with SQL</a></li>
             </ul>
           </div>
         </div>
@@ -291,7 +294,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   }
   /* The row, from widest to narrowest (measured with a 15px scrollbar, and at least 25px to spare):
        1260px and up: every link, More, Submit, search and theme, with tighter spacing below 1440px.
-       960 to 1259px: Compare, Model cards and Reporting move into the More menu
+       960 to 1259px: Compare, Model cards and Insights move into the More menu
        below 960px: the whole row folds into the menu button
      The name keeps its place at every step. */
   nav {
@@ -411,7 +414,8 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   .more-p .fold-cm {
     display: block;
   }
-  .more-p .first {
+  /* only when a link marked fold: 'menu' sits above it; with none, the menu starts with no gap */
+  .more-p .fold-cm ~ .first {
     margin-top: 8px;
   }
   .more-b[data-fold-menu-on] {

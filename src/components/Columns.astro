@@ -5,8 +5,8 @@
 // arrows and a count of the ranks in view. Desktop only; phones get BarBoard.
 import type { Score } from '../lib/types.ts';
 import LabMark from './LabMark.astro';
-import { modelById, sourceLabel, isClaim, isRerun } from '../lib/data.ts';
-import { labColor } from '../lib/palette.ts';
+import { modelById, sourceLabel, isClaim, isRerun, entryLabel, intervalName } from '../lib/data.ts';
+import { labColor, agentTint } from '../lib/palette.ts';
 import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
 import { featuredIds } from '../lib/routes.ts';
@@ -27,6 +27,16 @@ const lo = rated ? ratingFloor(rows.map((s) => s.value)) : 0;
 const h = (v: number) => Math.max(2, ((v - lo) / (max - lo)) * height);
 const src = (s: Score) => sourceLabel(s);
 const many = rows.length > 12;
+// a whisker for each score whose board publishes an interval, clamped to the chart; the board's switch hides them
+const clamp = (v: number) => Math.min(max, Math.max(lo, v));
+const whisker = (s: Score) => {
+  const a = s.info?.low;
+  const b = s.info?.high;
+  if (a === undefined || b === undefined || !(b > a)) return undefined;
+  const bottom = h(clamp(a));
+  const top = h(clamp(b));
+  return { bottom, height: Math.max(1, top - bottom), up: Math.max(0, top - h(s.value)), text: `${(intervalName(s.benchmark) ?? 'interval').replace(/^./, (c) => c.toUpperCase())}: ${scoreBare(a, unit)} to ${scoreBare(b, unit)}` };
+};
 const what = rows.some((s) => !s.model) ? 'entries' : 'models';
 ---
 
@@ -55,21 +65,26 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
     <ol class="cols" style={`--h:${height}px`}>
       {
         rows.map((s, i) => {
-          const m = modelById.get(s.model);
-          const href = featuredIds.has(s.model) ? `/models/${s.model}/` : undefined;
+          // an agent system or blend reads as the board names it ("Arca + GPT-6 Astra"). An agent takes a pale tint
+          // of its model's lab and a blend stays gray, since neither counts for the lab.
+          const m = s.system ? undefined : modelById.get(s.model);
+          const color = !s.system ? labColor(m?.lab) : (s.info?.models?.length ?? 0) > 1 ? labColor(undefined) : agentTint(modelById.get(s.model)?.lab);
+          const href = !s.system && featuredIds.has(s.model) ? `/models/${s.model}/` : undefined;
           // an entry not in the model list keeps the board's own name, in gray
-          const label = m?.name ?? s.name ?? s.model;
+          const label = s.system ? entryLabel(s) : (m?.name ?? s.name ?? s.model);
+          const wk = whisker(s);
           return (
             <li class:list={['col', { unlisted: !m }]}>
               <a
                 href={href}
                 data-tv={fmt(s.value, unit)}
                 data-tn={`${i + 1}. ${label}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`}
-                data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}
+                data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}${wk ? `\n\n${wk.text}` : ''}`}
               >
-                <span class="plot">
+                <span class="plot" style={wk ? `--up:${wk.up.toFixed(1)}px` : undefined}>
                   <span class="v num">{scoreBare(s.value, unit)}</span>
-                  <span class:list={['bar', { claim: isClaim(s), rerun: isRerun(s) }]} style={`height:${h(s.value)}px;background-color:${labColor(m?.lab)}`} />
+                  <span class:list={['bar', { claim: isClaim(s), rerun: isRerun(s) }]} style={`height:${h(s.value)}px;background-color:${color}`} />
+                  {wk && <span class="wk" style={`bottom:${wk.bottom.toFixed(1)}px;height:${wk.height.toFixed(1)}px`} aria-hidden="true" />}
                 </span>
                 <LabMark lab={m?.lab} size={18} class="lm" label={m ? undefined : label} />
                 <span class="n">{label}</span>
@@ -243,6 +258,7 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
     background: var(--hover);
   }
   .plot {
+    position: relative;
     height: calc(var(--h) + 24px);
     display: flex;
     flex-direction: column;
@@ -254,7 +270,8 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
   .v {
     font-size: 12.5px;
     color: var(--ink-2);
-    margin-bottom: 6px;
+    /* above the whisker's top cap when error bars show */
+    margin-bottom: calc(6px + var(--up, 0px));
     white-space: nowrap;
   }
   .bar {
@@ -271,6 +288,33 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
     background-image: radial-gradient(circle, color-mix(in srgb, var(--bg) 70%, transparent) 1.1px, transparent 1.5px);
     background-size: 4px 4px;
     --pat: dots;
+  }
+  /* the board's interval: a thin line with caps across the bar, in the ink color */
+  .wk {
+    position: absolute;
+    left: 50%;
+    width: 10px;
+    transform: translateX(-50%);
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .wk::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--ink);
+    transform: translateX(-50%);
+  }
+  :global(.wk-off) .wk {
+    display: none;
+  }
+  :global(.wk-off) .v {
+    margin-bottom: 6px;
   }
   .col :global(.lm) {
     margin-top: 12px;

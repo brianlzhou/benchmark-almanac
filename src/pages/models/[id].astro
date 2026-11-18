@@ -6,7 +6,7 @@ import Base from '../../layouts/Base.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import LabMark from '../../components/LabMark.astro';
 import TimeScatter, { type Pt } from '../../components/TimeScatter.astro';
-import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById, sourceLabel, isClaim } from '../../lib/data.ts';
+import { featuredModels, modelSummary, models, eciByModel, cards, systemCards, benchById, sourceLabel, isClaim, systemScores, leaderboardScores, entryLabel } from '../../lib/data.ts';
 import { AREAS, areaOf, SECTION_NAMES, SECTION_ORDER } from '../../lib/taxonomy.ts';
 import { modelLine } from '../../lib/findings.ts';
 import { fullDate, score as fmt, shortNum, humanDate } from '../../lib/format.ts';
@@ -50,6 +50,17 @@ const myDocs = systemCards
     const inLaunch = new Set(myCards.filter((c) => c.id === d.release).flatMap((c) => c.results.map((r) => r.benchmark)));
     return { d, groups: ordered, extra: d.results.filter((r) => !inLaunch.has(r.benchmark)).length };
   });
+// boards that list this model inside an agent or product: the agent's score, beside the model's own on that board
+const better = (bid: string) => (benchById.get(bid)?.better === 'lower' ? -1 : 1);
+const bestOf = <T extends { value: number }>(xs: T[], bid: string) => xs.reduce<T | undefined>((a, x) => (!a || better(bid) * x.value > better(bid) * a.value ? x : a), undefined);
+const agentRows = [...Map.groupBy(systemScores.filter((x) => x.model === m.id || x.info?.models?.includes(m.id)), (x) => `${x.benchmark}|${entryLabel(x)}`).values()]
+  .map((xs) => {
+    const top = bestOf(xs, xs[0].benchmark)!;
+    const own = bestOf(leaderboardScores.filter((x) => x.model === m.id && x.benchmark === top.benchmark), top.benchmark);
+    return { top, own, b: benchById.get(top.benchmark)! };
+  })
+  .filter((r) => r.b)
+  .sort((x, y) => x.b.name.localeCompare(y.b.name) || better(y.top.benchmark) * (y.top.value - x.top.value));
 const sr = selfReported.get(m.id);
 const srGap = sr && ms.eci ? sr.value - ms.eci.eci : undefined;
 const srHead = !sr
@@ -135,6 +146,36 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
               </div>
             </div>
           ))}
+        </section>
+      )
+    }
+
+    {
+      agentRows.length > 0 && (
+        <section>
+          <div class="sh">
+            <h2>Inside agents</h2>
+            <p>
+              Boards that list {m.name} inside an agent or product, such as {entryLabel(agentRows[0].top)}. Those scores belong to the agent, so we don't count them as the model's own. Its own score on the same board is beside each one.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table class="t" data-sort>
+              <thead>
+                <tr><th>Benchmark</th><th>Entry</th><th class="r">Agent's score</th><th class="r">Its own score</th></tr>
+              </thead>
+              <tbody>
+                {agentRows.map(({ top, own, b }) => (
+                  <tr>
+                    <td><a href={`/benchmarks/${b.id}/`}>{b.name}</a></td>
+                    <td>{entryLabel(top)}</td>
+                    <td class="r">{fmt(top.value, b.unit ?? '%')}</td>
+                    <td class="r muted">{own ? fmt(own.value, b.unit ?? '%') : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       )
     }

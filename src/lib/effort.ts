@@ -2,10 +2,15 @@
 // (low, medium, high, xhigh, max), and some report the cost of each run. The main board keeps each
 // model's best run; this module keeps every run, grouped into one series per model and harness.
 import type { Score } from './types.ts';
-import { leaderboardScores, benchById, modelById, LEADERBOARDS } from './data.ts';
+import { leaderboardScores, systemScores, benchById, modelById, LEADERBOARDS, entryKind, entryLabel, inEntryView, type EntryKind, type EntryView } from './data.ts';
 
 export interface Run {
   model: string;
+  /** How the board names the entry: the model, or "Arca + GPT-6 Astra" for an agent built around it. */
+  label: string;
+  kind: EntryKind;
+  /** Whether the run counts as the model's own score (a standard harness, or by LAB_AGENT_IS_MODEL its maker's agent). */
+  counted: boolean;
   harness: string | null;
   setting: string | null;
   value: number;
@@ -16,6 +21,9 @@ export interface Run {
 export interface Series {
   key: string;
   model: string;
+  label: string;
+  kind: EntryKind;
+  counted: boolean;
   lab?: string;
   harness: string | null;
   /** Lowest effort first. Ordered by cost when every run has one. */
@@ -55,14 +63,17 @@ export function effortRank(setting: string | null | undefined): number {
 
 const clean = (v: string | null | undefined) => (v && v !== 'unknown' ? v : null);
 
-export function effortView(benchmark: string): EffortView | null {
+export function effortView(benchmark: string, entries: EntryView = 'every'): EffortView | null {
   const b = benchById.get(benchmark);
   if (!b) return null;
   const unit = b.unit ?? '%';
   const sign = b.better === 'lower' ? -1 : 1;
-  const runs: Run[] = leaderboardScores
+  // agent systems are runs too: each keeps its own series, named as the board names it. A view of the models keeps
+  // only the runs that count as a model's score, and the standard-harness view only runs in a standard harness.
+  const runs: Run[] = [...leaderboardScores, ...systemScores]
     .filter((s: Score) => s.benchmark === benchmark && s.unit === unit)
-    .map((s) => ({ model: s.model, harness: clean(s.harness), setting: clean(s.setting), value: s.value, cost: s.cost ?? null, tokens: s.tokens ?? null }));
+    .filter((s) => inEntryView(s, entries))
+    .map((s) => ({ model: s.model, label: entryLabel(s), kind: entryKind(s.benchmark, s.model, s.harness, s.info), counted: !s.system, harness: clean(s.harness), setting: clean(s.setting), value: s.value, cost: s.cost ?? null, tokens: s.tokens ?? null }));
   if (!runs.length) return null;
 
   const groups = new Map<string, Run[]>();
@@ -85,7 +96,7 @@ export function effortView(benchmark: string): EffortView | null {
       mode === 'cost'
         ? rs.filter((r) => r.cost !== null && r.cost > 0).sort((a, c) => a.cost! - c.cost!)
         : [...rs].sort((a, c) => effortRank(a.setting) - effortRank(c.setting) || a.value - c.value);
-    return { key, model: rs[0].model, lab: modelById.get(rs[0].model)?.lab, harness: rs[0].harness, runs: ordered };
+    return { key, model: rs[0].model, label: rs[0].label, kind: rs[0].kind, counted: rs[0].counted, lab: modelById.get(rs[0].model)?.lab, harness: rs[0].harness, runs: ordered };
   });
 
   if (mode === 'cost') {
