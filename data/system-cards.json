@@ -68462,6 +68462,138 @@
     ]
   },
   {
+    "id": "google-gemini-4-carbon-model-card-2026-11-10",
+    "lab": "google",
+    "model": "gemini-4-carbon",
+    "date": "2026-11-10",
+    "doc": "model card",
+    "title": "Gemini 4 Carbon Model Card",
+    "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-4-Carbon-Model-Card.pdf",
+    "release": "google-gemini-4-carbon-2026-10-28",
+    "notes": "The web card (deepmind.google/models/model-cards/gemini-4-carbon) is dated 10 November 2026 and the PDF November 2026. Its results table, as of October 2026, matches the launch post. Cybersecurity results reflect access through the Fairwind Program. The Safety & Security Report is a separate document (gemini_4_carbon_safety_report.pdf).",
+    "results": [
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 59,
+        "unit": "index",
+        "as_written": "AA Index v5.0 (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-index",
+        "score": 70.4,
+        "unit": "%",
+        "as_written": "Vals Index v2.2 (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-sweep",
+        "score": 9.6,
+        "unit": "%",
+        "as_written": "SWE-sweep (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "frontierswe",
+        "score": 61.2,
+        "unit": "%",
+        "as_written": "FrontierSWE 2 (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 65.2,
+        "unit": "%",
+        "as_written": "Terminal-Bench 4.0 (AA) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "score": 77.4,
+        "unit": "%",
+        "as_written": "Agents' Last Exam v1.1 (Score) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "osworld-2-1-offline",
+        "score": 81.5,
+        "unit": "%",
+        "as_written": "OSWorld-2.1 (Offline subset) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 53.9,
+        "unit": "%",
+        "as_written": "AutomationBench (Zapier) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vending-bench-2",
+        "score": 16484,
+        "unit": "USD",
+        "as_written": "Vending-Bench 2 (Bank balance $) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 72.5,
+        "unit": "%",
+        "as_written": "Chartography (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "blueprint-bench-2",
+        "score": 58.6,
+        "unit": "%",
+        "as_written": "Blueprint-Bench 2 (Similarity score) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 96.2,
+        "unit": "%",
+        "as_written": "GraphWalks (256k to 1M, BFS (F1)) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "riemann-bench",
+        "score": 80.0,
+        "unit": "%",
+        "as_written": "RiemannBench (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 64.8,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1 (AA) (results table)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "cwe-bench",
+        "score": 71.0,
+        "unit": "%",
+        "as_written": "CWE-bench (results table)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitgym",
+        "score": 54.8,
+        "unit": "%",
+        "as_written": "ExploitGym (results table)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 88.2,
+        "unit": "%",
+        "as_written": "SEC-bench Pro (results table)",
+        "section": "cyber"
+      }
+    ]
+  },
+  {
     "id": "openai-gpt-6-2-astra-system-card-2026-11-17",
     "lab": "openai",
     "model": "gpt-6-2-astra",
