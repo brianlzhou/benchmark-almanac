@@ -1,9 +1,12 @@
-// Builds public/meaning/: one vector per benchmark from Google's EmbeddingGemma 2 (Apache 2.0), so the home
-// page search box can find benchmarks by what they test, not only by name. The browser embeds the query with
-// the same model and ranks benchmarks by cosine similarity against these vectors.
+// Builds public/meaning/: one vector per benchmark from Google's EmbeddingGemma 2 (Apache 2.0), so the search
+// box and the Build an index picker can find benchmarks by what they test, not only by name. The browser embeds
+// the query with the same model and ranks benchmarks by cosine similarity against these vectors. The picker adds
+// a word score over each benchmark's description and paper abstract (src/lib/meaning-rank.ts), and
+// scripts/meaning-eval.ts measures the whole ranking.
 //
 // Each benchmark is embedded from its name, other names, description, note, maker and category, with the
-// model's document prompt. Vectors are cut to the first DIM dimensions (the model is trained so that a
+// model's document prompt. Adding paper abstracts to this text did not improve the eval (2026-11-15), so
+// abstracts go into the word score instead. Vectors are cut to the first DIM dimensions (the model is trained so that a
 // prefix of its vector still works), normalized, and stored as int8 with one float32 scale per vector:
 //   public/meaning/vectors.bin   N float32 scales, then N x DIM int8 values, rows in the order of index.json
 //   public/meaning/index.json    model, dim, query prompt and ids: what the browser reads
@@ -75,11 +78,12 @@ export function docText(b: Bench): string {
     .join(' ');
 }
 const docPrompt = (b: Bench) => `title: ${b.name} | text: ${docText(b)}`;
+
 const hash = (s: string) => createHash('sha256').update(`${MODEL}|${DTYPE}|${s}`).digest('hex').slice(0, 10);
 
 // a variable name, so the type checker does not look for a package the site does not install
 const LIB: string = '@huggingface/transformers';
-async function loadLib() {
+export async function loadLib() {
   try {
     return await import(LIB);
   } catch {

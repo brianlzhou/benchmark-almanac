@@ -8,7 +8,7 @@
 //
 // A query that reads like a sentence ("a benchmark where models play chess") also offers search by meaning
 // (see meaning.ts). Once the reader turns it on, meaning matches join the list under any name matches.
-import { Meaning, MEANING_MB, meaningPossible, probeGpu } from './meaning.ts';
+import { Meaning, MEANING_MB, meaningPossible, probeGpu, sharedMeaning } from './meaning.ts';
 import { type Entry, type Hit, type Kind, type Memo, type Row, QUERY_STOP, STRONG, addWords, norm, rank, toEntry } from './search-rank.ts';
 import { SUBMIT_FORM } from '../lib/criteria.ts';
 
@@ -71,7 +71,7 @@ const loadWords = (v: string) =>
     .catch(() => {});
 
 // ---- search by meaning, one model for every box ----
-const meaning = new Meaning(() => {
+const meaning = sharedMeaning(() => {
   for (const b of boxes) b.meaningChanged();
 });
 // how rare each word is among benchmarks, so a rare query word found in a benchmark's own text can lift it

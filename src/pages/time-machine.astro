@@ -1,0 +1,667 @@
+---
+// The time machine: the almanac as it stood on any day since 2023. The server renders the default day (a year before
+// the data's last day) from the same payload and markup the page script uses (src/lib/time-machine.ts and
+// time-machine-view.ts), so the page is whole before any script runs.
+import Base from '../layouts/Base.astro';
+import { timeMachinePayload, ARENA } from '../lib/time-machine.ts';
+import { dayView, renderDay, renderWatchShell } from '../lib/time-machine-view.ts';
+import { FIRST_SEEN_SINCE } from '../lib/as-of.ts';
+import { humanDate, yearFrac } from '../lib/format.ts';
+import { timeTicks } from '../lib/scale.ts';
+import { creditLine, ECI_CREDIT, LAUNCH_POSTS } from '../lib/credits.ts';
+
+const p = timeMachinePayload();
+const v = dayView(p, p.def);
+const dayHtml = renderDay(p, v, renderWatchShell(p, v));
+const span = Math.round((Date.parse(p.end) - Date.parse(p.start)) / 864e5);
+const defIndex = Math.round((Date.parse(p.def) - Date.parse(p.start)) / 864e5);
+const years = timeTicks(yearFrac(p.start), yearFrac(p.end));
+
+---
+
+<Base title="Time machine" description="See the AI benchmarks, models and leaders as they stood on any day since 2023.">
+  <div class="page tm-root" data-tm data-start={p.start} data-end={p.end} data-def={p.def}>
+    <header class="head">
+      <h1>Time machine</h1>
+      <p class="lede">Pick any day since 2023 to see the almanac as it stood then.</p>
+      <p class="tm-note">
+        We date each score by its model’s release, so a model a board tested later shows up early. Since {humanDate(FIRST_SEEN_SINCE)}, we also record
+        the day each new score appears.
+      </p>
+    </header>
+
+    <section class="tm-control" aria-label="Pick a day">
+      <div class="tm-pick">
+        <button type="button" class="tm-step" data-step="-1" aria-label="A month earlier" disabled>←</button>
+        <div class="tm-track">
+          <input type="range" id="tm-range" min="0" max={span} value={defIndex} step="1" aria-label="Day" aria-valuetext={humanDate(p.def)} disabled />
+          <div class="tm-years" aria-hidden="true">
+            {years.map((t) => <span style={`left:${(((Date.parse(t.date) - Date.parse(p.start)) / 864e5 / span) * 100).toFixed(2)}%`}>{t.label}</span>)}
+          </div>
+        </div>
+        <button type="button" class="tm-step" data-step="1" aria-label="A month later" disabled>→</button>
+        <input type="date" id="tm-date" class="field tm-field" min={p.start} max={p.end} value={p.def} aria-label="Pick a day" disabled />
+      </div>
+    </section>
+
+    <p class="sr" aria-live="polite" data-tm-live></p>
+    <section class="tm-day" data-tm-day set:html={dayHtml} />
+
+    <p class="tm-moved">How much of the catalog was past 85% over time is now on <a href="/insights/evals/#past-85">How are evals changing?</a></p>
+
+    <section class="tm-sources">
+      <p>
+        {creditLine([ECI_CREDIT, `Arena’s leaderboard dataset on Hugging Face (${ARENA.license})`, LAUNCH_POSTS, 'official leaderboards'])}. Leaders and
+        watched boards use the same source as each benchmark’s page.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { dayView, renderDay, finding, clampDay, isDay, addDays, renderWatchHead, renderWatchBody, watchMatches, watchBoard, type Payload, type DayView, type WatchFile } from '../lib/time-machine-view.ts';
+  import { humanDate } from '../lib/format.ts';
+
+  const root = document.querySelector<HTMLElement>('[data-tm]')!;
+  const range = root.querySelector<HTMLInputElement>('#tm-range')!;
+  const date = root.querySelector<HTMLInputElement>('#tm-date')!;
+  const view = root.querySelector<HTMLElement>('[data-tm-day]')!;
+  const live = root.querySelector<HTMLElement>('[data-tm-live]')!;
+  const steps = [...root.querySelectorAll<HTMLButtonElement>('[data-step]')];
+  const start = root.dataset.start!;
+  const end = root.dataset.end!;
+  let p: Payload | null = null;
+  let day = root.dataset.def!;
+  let shown = day;
+
+  const index = (d: string) => Math.round((Date.parse(d) - Date.parse(start)) / 864e5);
+
+  let frame = 0;
+  let said = 0;
+  function set(d: string, opts: { url?: boolean } = {}) {
+    day = clampDay({ start, end }, d);
+    range.value = String(index(day));
+    range.setAttribute('aria-valuetext', humanDate(day));
+    date.value = day;
+    if (opts.url !== false) writeUrl();
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      if (!p || shown === day) return;
+      const v = dayView(p, day);
+      // the watch column survives the redraw, so its search field and pick stay as they were
+      watchEl.remove();
+      view.innerHTML = renderDay(p, v);
+      view.querySelector('[data-watch-slot]')?.replaceWith(watchEl);
+      current = v;
+      drawWatch();
+      shown = day;
+      // a screen reader hears the day and its headline once the slider rests, not the whole panel at every step
+      clearTimeout(said);
+      said = window.setTimeout(() => (live.textContent = `${humanDate(day)}. ${finding(p!, v)}`), 600);
+    });
+  }
+
+  // ---- the watch column: one benchmark's board on the chosen day ----------------------------------------
+  const watchEl = root.querySelector<HTMLElement>('[data-watch]')!;
+  const watchInput = watchEl.querySelector<HTMLInputElement>('#tm-watch')!;
+  const watchList = watchEl.querySelector<HTMLUListElement>('#tm-watch-list')!;
+  const watchFind = watchEl.querySelector<HTMLElement>('[data-watch-find]')!;
+  const files = new Map<string, WatchFile>();
+  let current: DayView | null = null;
+  let watching: string | null = null;
+  let watchState: WatchFile | null | 'loading' | 'missing' = null;
+  let options: Payload['watch'] = [];
+  let active = -1;
+  const escHtml = (t: string) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
+  function writeUrl() {
+    const u = new URL(location.href);
+    if (day === root.dataset.def) u.searchParams.delete('d');
+    else u.searchParams.set('d', day);
+    if (watching) u.searchParams.set('b', watching);
+    else u.searchParams.delete('b');
+    history.replaceState(null, '', u);
+  }
+
+  function drawWatch() {
+    if (!p) return;
+    const v = current && current.day === day ? current : dayView(p, day);
+    const w = watchState && typeof watchState === 'object' ? watchState : null;
+    watchEl.querySelector('[data-watch-head]')!.innerHTML = renderWatchHead(w, v.day, w ? watchBoard(w, v.day).models : 0);
+    watchEl.querySelector('[data-watch-body]')!.innerHTML = renderWatchBody(p, v, watchState);
+    watchFind.hidden = !!watching && watchState !== 'missing';
+  }
+
+  async function watch(id: string | null, url = true) {
+    watching = id;
+    closeList();
+    watchInput.value = '';
+    if (url) writeUrl();
+    if (!id) {
+      watchState = null;
+      drawWatch();
+      return;
+    }
+    const have = files.get(id);
+    watchState = have ?? 'loading';
+    drawWatch();
+    if (have) return;
+    try {
+      const r = await fetch(`/time-machine/b/${encodeURIComponent(id)}.json`);
+      if (!r.ok) throw new Error(String(r.status));
+      const f = (await r.json()) as WatchFile;
+      files.set(id, f);
+      if (watching === id) watchState = f;
+    } catch {
+      if (watching === id) watchState = 'missing';
+    }
+    drawWatch();
+  }
+
+  function closeList() {
+    watchList.hidden = true;
+    watchInput.setAttribute('aria-expanded', 'false');
+    watchInput.removeAttribute('aria-activedescendant');
+  }
+  function drawList() {
+    options = p ? watchMatches(p, watchInput.value) : [];
+    if (!watchInput.value.trim()) return closeList();
+    watchList.innerHTML = options.length
+      ? options
+          .map(([, name, , m], i) => `<li id="tm-w${i}" role="option" aria-selected="${i === active}" data-i="${i}"><span>${escHtml(name)}</span><span class="num">${m} ${m === 1 ? 'model' : 'models'}</span></li>`)
+          .join('')
+      : '<li class="tm-wnone" role="presentation">No benchmark by that name has scores.</li>';
+    watchList.hidden = false;
+    watchInput.setAttribute('aria-expanded', 'true');
+    if (options.length && active >= 0) watchInput.setAttribute('aria-activedescendant', `tm-w${active}`);
+  }
+  watchInput.addEventListener('input', () => {
+    active = 0;
+    drawList();
+  });
+  watchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      if (!options.length) return;
+      e.preventDefault();
+      active = (active + (e.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
+      drawList();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const o = options[Math.max(active, 0)];
+      if (o) void watch(o[0]);
+    } else if (e.key === 'Escape') closeList();
+  });
+  watchInput.addEventListener('blur', () => window.setTimeout(closeList, 120));
+  watchList.addEventListener('pointerdown', (e) => {
+    const li = (e.target as HTMLElement).closest<HTMLElement>('[data-i]');
+    if (!li) return;
+    e.preventDefault();
+    void watch(options[Number(li.dataset.i)][0]);
+  });
+  watchEl.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    const chip = t.closest<HTMLElement>('[data-watch-id]');
+    if (chip) return void watch(chip.dataset.watchId!);
+    if (t.closest('[data-watch-change]')) {
+      watchFind.hidden = false;
+      watchInput.focus();
+    }
+    if (t.closest('[data-watch-clear]')) void watch(null);
+  });
+
+  /** The same day of the month a month earlier or later, or the month's last day when it is shorter. */
+  function monthStep(d: string, k: number) {
+    const [y, m, dd] = d.split('-').map(Number);
+    const last = new Date(Date.UTC(y, m - 1 + k + 1, 0)).getUTCDate();
+    return new Date(Date.UTC(y, m - 1 + k, Math.min(dd, last))).toISOString().slice(0, 10);
+  }
+
+  range.addEventListener('input', () => set(addDays(start, Number(range.value))));
+  date.addEventListener('change', () => isDay(date.value) && set(date.value));
+  for (const b of steps) b.addEventListener('click', () => set(monthStep(day, Number(b.dataset.step))));
+
+  const asked = new URL(location.href).searchParams.get('d');
+  const askedWatch = new URL(location.href).searchParams.get('b');
+  fetch('/time-machine.json')
+    .then((r) => r.json())
+    .then((data: Payload) => {
+      p = data;
+      for (const el of [range, date, ...steps, watchInput]) el.disabled = false;
+      if (isDay(asked)) set(asked, { url: false });
+      if (askedWatch && /^[a-z0-9-]+$/.test(askedWatch)) void watch(askedWatch, false);
+    })
+    .catch(() => {
+      view.insertAdjacentHTML('afterbegin', '<p class="tm-none">The time machine’s data didn’t load. Reload the page to try again.</p>');
+    });
+</script>
+
+<style is:global>
+  .tm-root .tm-note {
+    margin-top: 12px;
+    max-width: 72ch;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  .tm-root .tm-control {
+    position: sticky;
+    top: var(--bar-h);
+    z-index: 5;
+    padding: 14px 0;
+    background: var(--bg);
+    border-image: linear-gradient(var(--bg), var(--bg)) fill 0 / 0 / 0 100vmax;
+  }
+  .tm-root .tm-pick {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .tm-root .tm-track {
+    position: relative;
+    flex: 1 1 320px;
+    min-width: 0;
+    padding-bottom: 18px;
+  }
+  .tm-root .tm-track input[type='range'] {
+    width: 100%;
+    accent-color: var(--ink);
+  }
+  .tm-root .tm-years {
+    position: absolute;
+    inset: auto 8px 0 8px;
+    height: 16px;
+    font: 11.5px/16px var(--mono);
+    color: var(--ink-3);
+  }
+  .tm-root .tm-years span {
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  .tm-root .tm-years span:first-child {
+    transform: none;
+  }
+  .tm-root .tm-step {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink-2);
+    font: 15px/1 var(--sans);
+    cursor: pointer;
+    margin-bottom: 18px;
+  }
+  .tm-root .tm-step:hover:not(:disabled) {
+    color: var(--ink);
+    border-color: var(--ink-4);
+  }
+  .tm-root .tm-step:disabled,
+  .tm-root input:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+  .tm-root .tm-field {
+    width: auto;
+    margin-bottom: 18px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .tm-root .tm-day {
+    margin-top: 28px;
+  }
+  .tm-root .tm-date {
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.1;
+  }
+  .tm-root .tm-find {
+    margin-top: 10px;
+    max-width: 72ch;
+    font-size: 17px;
+    color: var(--ink-2);
+  }
+  .tm-root .tm-stats {
+    margin-top: 28px;
+  }
+  /* Each column is a heading row and a body row on a shared subgrid, so the first entries line up across columns
+     however many lines each heading takes. Columns that wrap below get the 40px gap as padding on their heading. */
+  .tm-root .tm-cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 40px;
+    row-gap: 0;
+    margin-top: 56px;
+  }
+  .tm-root .tm-cols > .tm-col {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
+  @media (max-width: 1100px) {
+    .tm-root .tm-cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tm-root .tm-cols > .tm-col:nth-child(n + 3) > .tm-chead {
+      padding-top: 40px;
+    }
+  }
+  @media (max-width: 720px) {
+    .tm-root .tm-cols {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .tm-root .tm-cols > .tm-col:nth-child(n + 2) > .tm-chead {
+      padding-top: 40px;
+    }
+  }
+  .tm-root .tm-chead,
+  .tm-root .tm-cbody {
+    min-width: 0;
+  }
+  .tm-root .tm-wfind {
+    position: relative;
+    margin-top: 14px;
+  }
+  .tm-root .tm-wfind[hidden] {
+    display: none;
+  }
+  .tm-root .tm-wfind input {
+    width: 100%;
+  }
+  .tm-root .tm-wlist {
+    position: absolute;
+    z-index: 6;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+    max-height: 320px;
+    overflow: auto;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 0.12);
+  }
+  .tm-root .tm-wlist li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14.5px;
+    cursor: pointer;
+  }
+  .tm-root .tm-wlist li .num {
+    flex: none;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .tm-root .tm-wlist li[aria-selected='true'],
+  .tm-root .tm-wlist li:hover {
+    background: var(--panel);
+  }
+  .tm-root .tm-wlist .tm-wnone {
+    color: var(--ink-3);
+    cursor: default;
+  }
+  .tm-root .tm-wlist .tm-wnone:hover {
+    background: none;
+  }
+  .tm-root .tm-wtry {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .tm-root .tm-wsug {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .tm-root .tm-chip {
+    font: 500 13px/1 var(--sans);
+    padding: 8px 11px;
+    border-radius: 99px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .tm-root .tm-chip:hover {
+    color: var(--ink);
+    border-color: var(--ink-4);
+  }
+  .tm-root .tm-wchange {
+    margin-top: 14px;
+  }
+  .tm-root .tm-wname {
+    color: inherit;
+    text-decoration: none;
+  }
+  .tm-root .tm-wname:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .tm-root .tm-col,
+  .tm-root .tm-block {
+    min-width: 0;
+  }
+  .tm-root .tm-col {
+    margin-top: 0;
+  }
+  .tm-root .tm-block {
+    margin-top: 56px;
+  }
+  .tm-root .tm-day h3 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .tm-root .tm-sub {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--ink-3);
+    max-width: 72ch;
+  }
+  .tm-root .tm-list {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+  }
+  .tm-root .tm-list li {
+    display: grid;
+    grid-template-columns: 2.5ch minmax(0, 1fr) 8ch;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .tm-root .tm-list .tm-v {
+    text-align: right;
+  }
+  .tm-root .tm-rk,
+  .tm-root .tm-v {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .tm-root .tm-v {
+    color: var(--ink-2);
+  }
+  .tm-root .tm-who {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+  }
+  .tm-root .tm-nm {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .tm-root .tm-x {
+    color: var(--ink-3);
+  }
+  .tm-root .tm-nm a,
+  .tm-root .tm-bn a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .tm-root .tm-nm a:hover,
+  .tm-root .tm-bn a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .tm-root .tm-mark {
+    display: inline-block;
+    flex: none;
+  }
+  .tm-root .tm-mask {
+    width: var(--s);
+    height: var(--s);
+    background: var(--ink);
+    -webkit-mask: var(--m) center / contain no-repeat;
+    mask: var(--m) center / contain no-repeat;
+  }
+  .tm-root .tm-initial {
+    display: inline-grid;
+    place-items: center;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--ink-3);
+    font: 600 calc(var(--s) * 0.55) / 1 var(--sans);
+  }
+  .tm-root .tm-scroll {
+    overflow-x: auto;
+    margin-top: 14px;
+  }
+  /* fixed column widths: moving the day changes the names in the cells, never the columns */
+  .tm-root .tm-t {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 15px;
+  }
+  .tm-root .tm-t th:nth-child(1) {
+    width: 34%;
+  }
+  .tm-root .tm-t th:nth-child(3) {
+    width: 9ch;
+  }
+  .tm-root .tm-t th:nth-child(4) {
+    width: 16ch;
+  }
+  .tm-root .tm-t td {
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 560px) {
+    .tm-root .tm-t .since {
+      display: none;
+    }
+    .tm-root .tm-t th:nth-child(1) {
+      width: 42%;
+    }
+  }
+  .tm-root .tm-t td,
+  .tm-root .tm-t th {
+    padding: 9px 16px 9px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .tm-root .tm-t th {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink-3);
+    text-align: left;
+  }
+  .tm-root .tm-t .r {
+    text-align: right;
+  }
+  .tm-root .tm-t .num {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tm-root .tm-t .since {
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .tm-root .tm-posts {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    columns: 2 340px;
+    column-gap: 56px;
+  }
+  .tm-root .tm-posts li {
+    display: grid;
+    grid-template-columns: 11ch minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    break-inside: avoid;
+    font-size: 15px;
+  }
+  .tm-root .tm-d {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .tm-root .tm-src {
+    font-size: 13px;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .tm-root .tm-more,
+  .tm-root .tm-none {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  /* in a column, an empty note sits where the first entry would */
+  .tm-root .tm-cbody .tm-none {
+    margin-top: 14px;
+    padding: 8px 0;
+  }
+  .tm-root .tm-moved {
+    margin-top: 48px;
+    color: var(--ink-3);
+    font-size: 14px;
+  }
+  .tm-root .tm-moved a,
+  .tm-root .tm-sources a {
+    color: var(--ink-2);
+  }
+  .tm-root .tm-sources {
+    margin-top: 56px;
+    font-size: 13px;
+    color: var(--ink-3);
+    max-width: 90ch;
+  }
+  @media (max-width: 720px) {
+    .tm-root .tm-control {
+      padding: 10px 0;
+    }
+    .tm-root .tm-track {
+      flex-basis: 100%;
+      order: -1;
+    }
+    .tm-root .tm-step,
+    .tm-root .tm-field {
+      margin-bottom: 0;
+    }
+    .tm-root .tm-t .since {
+      display: none;
+    }
+    .tm-root .tm-posts li {
+      grid-template-columns: 10ch minmax(0, 1fr);
+    }
+    .tm-root .tm-src {
+      display: none;
+    }
+  }
+</style>
