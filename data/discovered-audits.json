@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17",
+  "updated": "2026-11-18",
   "items": [
     {
       "key": "https://arxiv.org/abs/2611.21315",
@@ -8,7 +8,7 @@
       "source": "arXiv",
       "date": "2026-11-16",
       "first": "2026-11-17",
-      "last": "2026-11-17",
+      "last": "2026-11-18",
       "benchmarks": [
         "humaneval",
         "openbookqa"
@@ -25,12 +25,28 @@
       "source": "AINews",
       "date": "2026-11-17",
       "first": "2026-11-17",
-      "last": "2026-11-17",
+      "last": "2026-11-18",
       "benchmarks": [
         "linuxarena"
       ],
       "problems": [
         "contamination"
+      ],
+      "score": 4
+    },
+    {
+      "key": "https://arxiv.org/abs/2611.22027",
+      "title": "GauntletScore: Auditable Fact-Checking That Matches the Best Published Checkers on LLM-AggreFact",
+      "url": "https://arxiv.org/abs/2611.22027",
+      "source": "arXiv",
+      "date": "2026-11-17",
+      "first": "2026-11-18",
+      "last": "2026-11-18",
+      "benchmarks": [
+        "llm-aggrefact"
+      ],
+      "problems": [
+        "broken-grader"
       ],
       "score": 4
     },
