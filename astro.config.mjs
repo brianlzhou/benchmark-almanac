@@ -58,6 +58,8 @@ export default defineConfig({
   site: process.env.SITE_URL || 'https://www.benchmarkalmanac.com',
   compressHTML: true,
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
+  // Reporting moved under Insights on 2026-11-17. Vercel sends the same redirect with the query kept (vercel.json).
+  redirects: { '/reporting': '/insights/reporting/' },
   build: { inlineStylesheets: 'auto' },
   integrations: [sitemap({ serialize: (item) => ({ ...item, lastmod: lastmodOf(item.url) }) }), ogFilm],
   fonts: [

@@ -4,14 +4,14 @@
 // settings report it. reporting-view.ts and reporting-graphics.ts draw the year views from this, and bump() and
 // spread() below feed the two charts that cover every year.
 
-import { cards, systemCards, labById, modelById, benchmarks, benchById, labPages, normUnit, AS_OF } from './data.ts';
+import { cards, systemCards, labById, modelById, benchmarks, benchById, labPages, normUnit, AS_OF, models, eciByModel } from './data.ts';
 import { featuredIds } from './routes.ts';
 import { makerParts } from './makers.ts';
 import { COLOR_MARKS, MONO_MARKS } from './marks.ts';
 import { score as fmtScore } from './format.ts';
 import { AREAS, areaOf } from './taxonomy.ts';
 import type { Benchmark } from './types.ts';
-import { FRONTIER, FRONTIER_LABS, type RData, type RLab, type RBench, type RRel } from './reporting-view.ts';
+import { FRONTIER, FRONTIER_LABS, FRONTIER_MODEL_TOP, type RData, type RLab, type RBench, type RRel } from './reporting-view.ts';
 
 export const FIRST_YEAR = '2024';
 /** Categories a capability count leaves out by default: they are mostly safety testing in system cards. */
@@ -48,14 +48,43 @@ function familyNames(): Map<string, string> {
   return out;
 }
 
+/** Index scores with release dates, best first, for ranking a model against the models out on a day. */
+let eciDated: { id: string; d: string; e: number }[] | null = null;
+/**
+ * Whether a launch post's model was a frontier model the day the post came out: in the top FRONTIER_MODEL_TOP on
+ * Epoch AI's Capabilities Index among the models released by then, itself included. A model with no index score
+ * doesn't count.
+ */
+export function isFrontierRelease(model: string, date: string): boolean {
+  const e = eciByModel.get(model)?.eci;
+  if (e === undefined) return false;
+  eciDated ??= models
+    .filter((m) => m.released && eciByModel.has(m.id))
+    .map((m) => ({ id: m.id, d: m.released!, e: eciByModel.get(m.id)!.eci }))
+    .sort((a, b) => b.e - a.e);
+  let above = 0;
+  for (const x of eciDated) {
+    if (x.e <= e) break;
+    if (x.d <= date && x.id !== model) above++;
+  }
+  return above < FRONTIER_MODEL_TOP;
+}
+
 /** Launch posts and linked documents counted in a year, and how many documents had no launch post to join. */
-export function sourceCounts(year: string, labs?: ReadonlySet<string>) {
-  const posts = cards.filter((c) => c.date.startsWith(year) && (!labs || labs.has(c.lab)));
+export function sourceCounts(year: string, labs?: ReadonlySet<string>, frontierModels = false) {
+  const posts = cards.filter((c) => c.date.startsWith(year) && (!labs || labs.has(c.lab)) && (!frontierModels || isFrontierRelease(c.model, c.date)));
   const ids = new Set(posts.map((c) => c.id));
   const docs = systemCards.filter((d) => d.release && ids.has(d.release));
   const loose = systemCards.filter((d) => !d.release && d.date.startsWith(year) && (!labs || labs.has(d.lab))).length;
   return { posts: posts.length, docs: docs.length, loose };
 }
+
+/** Which releases a chart counts: from the frontier labs, of frontier models, both or neither. */
+export interface RelFilter {
+  labs?: ReadonlySet<string>;
+  models?: boolean;
+}
+const keeps = (d: RData, rel: RRel, f: RelFilter = {}) => (!f.labs || f.labs.has(d.labs[rel.lab].id)) && (!f.models || rel.f === 1);
 
 let cached: RData | null = null;
 
@@ -105,14 +134,16 @@ export function reportingData(): RData {
       }
     if (!seen.size) continue;
     const m = modelById.get(c.model);
-    rels.push({ lab: lab(c.lab), model: m?.name ?? c.model, href: featuredIds.has(c.model) ? `/models/${c.model}/` : null, date: c.date, r: [...seen.entries()] });
+    rels.push({ lab: lab(c.lab), model: m?.name ?? c.model, href: featuredIds.has(c.model) ? `/models/${c.model}/` : null, date: c.date, r: [...seen.entries()], ...(isFrontierRelease(c.model, c.date) ? { f: 1 as const } : {}) });
   }
   const years = [...new Set(rels.map((r) => r.date.slice(0, 4)))].filter((y) => y >= FIRST_YEAR).sort().reverse();
   const sources = Object.fromEntries(
     years.map((y) => {
-      const all = sourceCounts(y);
-      const fr = sourceCounts(y, FRONTIER);
-      return [y, { posts: all.posts, docs: all.docs, frontier: { posts: fr.posts, docs: fr.docs } }];
+      const pick = ({ posts, docs }: { posts: number; docs: number }) => ({ posts, docs });
+      return [
+        y,
+        { ...pick(sourceCounts(y)), frontier: pick(sourceCounts(y, FRONTIER)), models: pick(sourceCounts(y, undefined, true)), frontierModels: pick(sourceCounts(y, FRONTIER, true)) },
+      ];
     }),
   );
   cached = { labs, benches, rels, years, areas: AREAS.map((a) => ({ id: a.id, name: a.name })), sources, asOf: AS_OF };
@@ -165,14 +196,14 @@ export interface BumpLine {
  * posts with scores that year), then each quarter from 2025. Ties go to the one more labs named, then by name.
  * Safety evaluations are left out, and versions count as one benchmark.
  */
-export function bump(labs?: ReadonlySet<string>): { cols: BumpCol[]; lines: BumpLine[] } {
+export function bump(only: RelFilter = {}): { cols: BumpCol[]; lines: BumpLine[] } {
   const d = reportingData();
   const info = famInfo(d);
   const colOf = (date: string) => (date < '2025' ? (date >= FIRST_YEAR ? FIRST_YEAR : null) : `${date.slice(0, 4)}-${Math.floor((Number(date.slice(5, 7)) - 1) / 3) + 1}`);
   const tally = new Map<string, { n: number; cnt: Map<string, number>; labs: Map<string, Set<number>> }>();
   for (const rel of d.rels) {
     const c = colOf(rel.date);
-    if (!c || (labs && !labs.has(d.labs[rel.lab].id))) continue;
+    if (!c || !keeps(d, rel, only)) continue;
     const keys = new Set(rel.r.map(([bi]) => d.benches[bi]).filter((b) => !b.safety).map((b) => b.fam));
     if (!keys.size) continue;
     const t = tally.get(c) ?? tally.set(c, { n: 0, cnt: new Map(), labs: new Map() }).get(c)!;
@@ -249,7 +280,7 @@ const dayGap = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(
  * have named, with the day each lab first named it. Only benchmarks released after our launch posts grow dense,
  * so the first lab we see is the first lab there was. Safety evaluations are left out.
  */
-export function spread(minLabs = 5, labs?: ReadonlySet<string>): SpreadLine[] {
+export function spread(minLabs = 5, only: RelFilter = {}): SpreadLine[] {
   const d = reportingData();
   const info = famInfo(d);
   const released = familyReleased();
@@ -257,7 +288,7 @@ export function spread(minLabs = 5, labs?: ReadonlySet<string>): SpreadLine[] {
   for (const rel of d.rels)
     for (const [bi] of rel.r) {
       const b = d.benches[bi];
-      if (b.safety || (labs && !labs.has(d.labs[rel.lab].id))) continue;
+      if (b.safety || !keeps(d, rel, only)) continue;
       const m = first.get(b.fam) ?? first.set(b.fam, new Map()).get(b.fam)!;
       const f = m.get(rel.lab);
       if (!f || rel.date < f) m.set(rel.lab, rel.date);

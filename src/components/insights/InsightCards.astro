@@ -1,0 +1,158 @@
+---
+// The Insights pages as cards: each one's title, its lead finding and a small chart of its lead series. The
+// overview lists all of them, and each page ends with the others.
+import { reportingTrend, evalTrend, openGap, reportingFinding, evalFinding, gapFinding } from '../../lib/insights.ts';
+
+interface Props {
+  /** The page this sits on, left out of the list. */
+  except?: 'reporting' | 'evals' | 'frontier';
+}
+const { except } = Astro.props;
+
+type Line = { label: string; color: string; vals: (number | null)[]; fmt: (v: number) => string };
+const share = (v: number) => `${Math.round(100 * v)}%`;
+const gap = openGap();
+const all: { key: NonNullable<Props['except']>; href: string; title: string; finding: string; what: string; lines: Line[]; zero: boolean }[] = [
+  {
+    key: 'reporting',
+    href: '/insights/reporting/',
+    title: 'What labs report',
+    finding: reportingFinding(),
+    what: 'Share of the benchmarks labs named that came out in the year before, each half year since 2024',
+    lines: [{ label: '', color: 'var(--ink)', vals: reportingTrend().fresh.map((v) => v.v), fmt: share }],
+    zero: true,
+  },
+  {
+    key: 'evals',
+    href: '/insights/evals/',
+    title: 'How are evals changing?',
+    finding: evalFinding(),
+    what: 'Share of new benchmarks that are agent tasks, each year since 2020',
+    lines: [{ label: '', color: 'var(--ink)', vals: evalTrend().agent.map((v) => v.v), fmt: share }],
+    zero: true,
+  },
+  {
+    key: 'frontier',
+    href: '/insights/frontier/',
+    title: 'How fast is the frontier moving?',
+    finding: gapFinding(),
+    what: 'The best capabilities index score of closed and open models, each month since 2023',
+    lines: [
+      { label: 'Closed', color: 'var(--ink)', vals: gap.map((p) => p.closed), fmt: (v) => String(Math.round(v)) },
+      { label: 'Open', color: 'var(--ink-4)', vals: gap.map((p) => p.open), fmt: (v) => String(Math.round(v)) },
+    ],
+    zero: false,
+  },
+];
+const cards = all.filter((c) => c.key !== except);
+
+// a small line chart in a 300 by 84 box, with the last value named at the right
+const W = 300;
+const H = 84;
+const R = 64;
+function spark(c: (typeof all)[number]) {
+  const vals = c.lines.flatMap((l) => l.vals).filter((v): v is number => v !== null);
+  const lo = c.zero ? 0 : Math.min(...vals);
+  const hi = Math.max(...vals);
+  const n = Math.max(...c.lines.map((l) => l.vals.length));
+  const X = (i: number) => 4 + (i / Math.max(1, n - 1)) * (W - R - 8);
+  const Y = (v: number) => H - 6 - ((v - lo) / (hi - lo || 1)) * (H - 16);
+  const out = c.lines.map((l) => {
+    const pts = l.vals.map((v, i) => (v === null ? null : { x: X(i), y: Y(v), v })).filter((p): p is { x: number; y: number; v: number } => !!p);
+    const last = pts.at(-1)!;
+    return { l, d: pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(''), last, ty: last.y + 4 };
+  });
+  // two end labels that would touch move apart, the upper one up
+  if (out.length === 2 && Math.abs(out[0].ty - out[1].ty) < 14) {
+    const [up, down] = out[0].ty <= out[1].ty ? [out[0], out[1]] : [out[1], out[0]];
+    const mid = (up.ty + down.ty) / 2;
+    up.ty = mid - 7;
+    down.ty = mid + 7;
+  }
+  return out;
+}
+---
+
+<ul class="ic" style={`--n:${cards.length}`}>
+  {
+    cards.map((c) => (
+      <li>
+        <a href={c.href}>
+          <h3>{c.title}</h3>
+          <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={c.what}>
+            {spark(c).map((s) => (
+              <g>
+                <path d={s.d} stroke={s.l.color} />
+                <circle cx={s.last.x} cy={s.last.y} r="3.5" fill={s.l.color} />
+                <text x={s.last.x + 8} y={s.ty}>
+                  {[s.l.label, s.l.fmt(s.last.v)].filter(Boolean).join(' ')}
+                </text>
+              </g>
+            ))}
+          </svg>
+          <p>{c.finding}</p>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .ic {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (max-width: 960px) {
+    .ic {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .ic a {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 100%;
+    padding: 22px 22px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 160ms ease, border-color 160ms ease;
+  }
+  .ic a:hover {
+    background: var(--hover);
+    border-color: var(--ink-4);
+  }
+  .ic h3 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .ic svg {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    overflow: visible;
+  }
+  .ic path {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .ic text {
+    fill: var(--ink-2);
+    font: 500 12px var(--mono);
+  }
+  .ic p {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+</style>

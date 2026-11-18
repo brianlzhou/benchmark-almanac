@@ -4,14 +4,20 @@
 // fast new benchmarks spread, what each lab names by area, and a lab-by-benchmark lookup. The year graphics and the
 // lookup render here for the default view, and the page script renders other views from /reporting.json with the
 // same functions (src/lib/reporting-view.ts, src/lib/reporting-graphics.ts).
-import ChartDownload from '../components/ChartDownload.astro';
-import { creditLine, LAUNCH_POSTS } from '../lib/credits.ts';
-import Base from '../layouts/Base.astro';
-import ReportingBump from '../components/ReportingBump.astro';
-import ReportingSpread from '../components/ReportingSpread.astro';
-import { reportingData, currentYear, bump, spread, frontierNames } from '../lib/reporting.ts';
-import { matrix, headHtml, bodyHtml, statusText, DEFAULT_VIEW, DOT_KEY, dotSize, areaIcon, FRONTIER, FRONTIER_LABS, FRONTIER_BASIS } from '../lib/reporting-view.ts';
-import { symbolsSvg, swarmSvg, SWARMS, heroHead, heroLede, printsHtml, printsHead, printsLede, lookupHead, lookupLede, word } from '../lib/reporting-graphics.ts';
+import ChartDownload from '../../components/ChartDownload.astro';
+import { creditLine, LAUNCH_POSTS } from '../../lib/credits.ts';
+import Base from '../../layouts/Base.astro';
+import ReportingBump from '../../components/ReportingBump.astro';
+import ReportingSpread from '../../components/ReportingSpread.astro';
+import { reportingData, currentYear, bump, spread, frontierNames } from '../../lib/reporting.ts';
+import { matrix, headHtml, bodyHtml, statusText, DEFAULT_VIEW, DOT_KEY, dotSize, areaIcon, forModels, FRONTIER, FRONTIER_LABS, FRONTIER_BASIS, FRONTIER_MODEL_BASIS } from '../../lib/reporting-view.ts';
+import { symbolsSvg, swarmSvg, SWARMS, heroHead, heroLede, printsHtml, printsHead, printsLede, lookupHead, lookupLede, word } from '../../lib/reporting-graphics.ts';
+import Crumbs from '../../components/Crumbs.astro';
+import TrendChart from '../../components/insights/TrendChart.astro';
+import InsightCards from '../../components/insights/InsightCards.astro';
+import { reportingTrend, claimTrend, carried, trendSeries, timeAxis, pct, CARRY_MIN, type Val } from '../../lib/insights.ts';
+import CarryList from '../../components/insights/CarryList.astro';
+import { POOL_CREDIT } from '../../lib/credits.ts';
 
 const d = reportingData();
 const year = currentYear();
@@ -21,14 +27,22 @@ const cap = (t: string) => t.replace(/^./, (c) => c.toUpperCase());
 const names = frontierNames();
 const frontierList = `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
 
-// The two charts that cover every year render twice, for every lab and for the frontier labs, and the switch
-// shows one. Each version's headline is computed from its own counts.
-const modes = [
-  { key: 'all', labs: undefined, who: 'labs', minLabs: 5 },
-  { key: 'fr', labs: FRONTIER, who: 'frontier labs', minLabs: Math.max(3, Math.ceil(FRONTIER_LABS.length / 2)) },
-].map((mode) => {
+// The two charts that cover every year render once for each setting of the two frontier switches (labs and
+// models), and the page's classes show the one that matches. Each version's headline is computed from its own counts.
+const modes = [false, true]
+  .flatMap((fr) => [false, true].map((fm) => ({ fr, fm })))
+  .map(({ fr, fm }) => ({
+    key: `${+fr}${+fm}`,
+    labs: fr ? FRONTIER : undefined,
+    models: fm,
+    who: fr ? 'frontier labs' : 'labs',
+    minLabs: fm ? 3 : fr ? Math.max(3, Math.ceil(FRONTIER_LABS.length / 2)) : 5,
+    // the labs a benchmark could reach: the frontier labs, or the labs that released a frontier model
+    pool: fm ? new Set(d.rels.filter((r) => r.f && (!fr || FRONTIER.has(d.labs[r.lab].id))).map((r) => r.lab)).size : fr ? FRONTIER_LABS.length : 10,
+  }))
+  .map((mode) => {
   // the top ten each column, and who stayed in it throughout
-  const b = bump(mode.labs);
+  const b = bump({ labs: mode.labs, models: mode.models });
   const last = b.cols.length - 1;
   const first = b.cols[0].label;
   const always = b.lines.filter((l) => l.ranks.every((r) => r != null));
@@ -54,20 +68,20 @@ const modes = [
   // the finding when the one that stayed is the one that never left, so it shows only when it adds to it.
   const kept = stayed.length > always.length ? ` Only ${word(stayed.length)} of ${first}'s top ten ${stayed.length === 1 ? 'is' : 'are'} still in it.` : '';
   const run = leader && leadRun > 1 ? ` ${leader.name} has been first for ${word(leadRun)} quarters running.` : '';
-  const bumpLede = `We track the ten benchmarks ${mode.who} cite in the most releases each quarter. ${bumpHead}.${kept}${run}`;
+  const bumpLede = `We track the ten benchmarks ${mode.who} cite in the most ${mode.models ? 'frontier-model releases' : 'releases'} each quarter. ${bumpHead}.${kept}${run}`;
 
   // the spread: ten labs of every lab, or all of the frontier labs (four if none got to all of them)
-  const sp = spread(mode.minLabs, mode.labs);
+  const sp = spread(mode.minLabs, { labs: mode.labs, models: mode.models });
   const reachAt = (goal: number) =>
     sp
       .filter((l) => l.days.length >= goal)
       .map((l) => ({ l, days: l.days[goal - 1] }))
       .sort((a, c) => a.days - c.days);
   // all of them if any benchmark got there, else the most that any did (capped, like every loop on this page)
-  let goal = mode.labs ? FRONTIER_LABS.length : 10;
+  let goal = mode.pool;
   let reached = reachAt(goal);
-  for (let k = 0; mode.labs && !reached.length && goal > 2 && k < 20; k++) reached = reachAt(--goal);
-  const goalText = !mode.labs ? 'ten labs' : goal === FRONTIER_LABS.length ? `all ${word(goal)}` : `${word(goal)} of the ${word(FRONTIER_LABS.length)}`;
+  for (let k = 0; (mode.labs || mode.models) && !reached.length && goal > 2 && k < 20; k++) reached = reachAt(--goal);
+  const goalText = !mode.labs ? `${word(goal)} labs` : goal === mode.pool ? `all ${word(goal)}` : `${word(goal)} of the ${word(mode.pool)}`;
   const goalLong = mode.labs ? `${goalText} frontier labs` : goalText;
   const fastest = reached[0];
   const median = reached.length ? reached[Math.floor(reached.length / 2)].days : 0;
@@ -76,7 +90,7 @@ const modes = [
     : reached.length === 1
       ? `${fastest.l.name} is the only new benchmark that reached ${goalLong}, ${fastest.days} days after the first one cited it.`
       : `${fastest.l.name} reached ${goalLong} ${fastest.days} days after the first one cited it, the fastest of the ${word(reached.length)} new benchmarks that got there. Half of them took ${median} days or less.`;
-  const spreadLede = `${spreadHead ? `${spreadHead} ` : ''}We count every benchmark released since 2025 that at least ${word(mode.minLabs)} ${mode.who} have cited.`;
+  const spreadLede = `${spreadHead ? `${spreadHead} ` : ''}We count every benchmark released since 2025 that at least ${word(mode.minLabs)} ${mode.who} have cited${mode.models ? ' for frontier models' : ''}.`;
   return { ...mode, b, bumpHead, bumpLede, sp, goal, goalText, spreadHead, spreadLede };
 });
 
@@ -85,12 +99,100 @@ const modes = [
 const texts: Record<string, [string, string]> = {};
 for (const y of d.years)
   for (const safety of [false, true])
-    for (const frontier of [false, true]) {
-      const v = { ...DEFAULT_VIEW(y), safety, frontier };
-      texts[`${y}|${+safety}|${+frontier}`] = [heroHead(d, v), heroLede(d, v)];
-    }
+    for (const frontier of [false, true])
+      for (const models of [false, true]) {
+        const v = { ...DEFAULT_VIEW(y), safety, frontier, models };
+        texts[`${y}|${+safety}|${+frontier}|${+models}`] = [heroHead(d, v), heroLede(d, v)];
+      }
 
 const sizeKey = [1, 10, 50];
+
+// benchmarks one or two labs carry, with and without safety evaluations (the safety switch shows one)
+const carryViews = [false, true].map((sf) => {
+  const c = carried(sf);
+  const one = c.list.filter((x) => x.carriers === 1);
+  const two = c.list.filter((x) => x.carriers === 2);
+  const others = c.list.filter((x) => !x.own);
+  const byLab = new Map<string, { name: string; third: number; own: number }>();
+  for (const x of c.list.filter((y) => y.carriers === 1)) {
+    const e = byLab.get(x.labs[0].id) ?? { name: x.labs[0].name, third: 0, own: 0 };
+    if (x.own) e.own++;
+    else e.third++;
+    byLab.set(x.labs[0].id, e);
+  }
+  const lead = [...byLab.values()].sort((a, b) => b.third - a.third)[0];
+  const leadEx = others.filter((x) => x.carriers === 1 && x.labs[0].name === lead.name).slice(0, 2).map((x) => x.name);
+  const lede = `Of the ${c.total} benchmarks named in ${word(CARRY_MIN)} or more releases since 2024, ${one.length} owe at least half of those releases to one lab, and ${two.length} more owe four in five to two labs. ${one.filter((x) => x.own).length} of the ones a single lab carries are its own. ${lead.name} carries the most that others made, ${lead.third}, among them ${leadEx.join(' and ')}.`;
+  return { key: `rp-cv-${+sf}`, lede, others: others.slice(0, 20), all: c.list.slice(0, 20) };
+});
+
+// lab numbers against independent runs, by the year of the lab's document
+const ct = claimTrend();
+const ctLast = ct.periods.length - 1;
+const ctPanels = [
+  {
+    title: 'The lab’s number is higher',
+    sub: 'Of the pairs where the two differ',
+    s: trendSeries({ key: 'better', label: 'The lab’s number is higher', color: 'var(--ink)', periods: ct.periods, vals: ct.labBetter, share: true, detail: (v) => (v.of ? `${v.of[0]} of ${v.of[1]} pairs that differ` : undefined) }),
+    y: { unit: '%' as const, min: 0, max: 100 },
+  },
+  {
+    title: 'Median gap, in points',
+    sub: 'The lab’s number less the independent run’s',
+    s: trendSeries({ key: 'gap', label: 'Median gap, in points', color: 'var(--ink)', periods: ct.periods, vals: ct.gap, detail: (v) => (v.of ? `The median of ${v.of[1]} pairs that differ` : undefined) }),
+    y: { unit: '' as const },
+  },
+];
+const ctLede = `In ${ct.periods[ctLast].name}, labs' own numbers beat an independent run of the same model on the same benchmark in ${pct(ct.labBetter[ctLast].v!)} of the pairs where the two differ, by a median of ${(Math.round(ct.gap[ctLast].v! * 10) / 10).toFixed(1)} points. In ${ct.periods[0].name} it was ${pct(ct.labBetter[0].v!)}.`;
+// how many launch posts were for frontier models, per year, for the switch's help
+const frontierModelYears = [...d.years]
+  .reverse()
+  .map((y) => `${y}: ${d.sources[y].models.posts} of ${d.sources[y].posts} launch posts`)
+  .join('. ')
+  .concat('.');
+
+// How reporting changed, half year by half year since 2024. One version per setting of the three switches (every
+// lab or the frontier labs, every release or frontier models, with or without safety evaluations). The page's
+// classes show the one that matches.
+const trendAxis = timeAxis(2024);
+const trendViews = [false, true].flatMap((fr) =>
+  [false, true].flatMap((fm) => [false, true].map((sf) => ({ fr, fm, sf }))),
+).map(({ fr, fm, sf }) => {
+    const t = reportingTrend(fr, sf, fm);
+    const rel = (i: number) => `${t.releases[i]} release${t.releases[i] === 1 ? '' : 's'}`;
+    const named = (v: Val, i: number) => (v.of ? `${v.of[0]} of ${v.of[1]} benchmarks named, in ${rel(i)}` : undefined);
+    const a = t.fresh.findIndex((v, i) => v.v !== null && !t.periods[i].partial);
+    const b = t.periods.length - 1;
+    const who = fr ? 'frontier labs' : 'labs';
+    const lede = `In ${t.periods[a].name}, ${pct(t.fresh[a].v!)} of the benchmarks ${who} named${forModels({ models: fm })} had come out in the year before the release. In ${t.periods[b].name}, ${pct(t.fresh[b].v!)} had. The ten most-named benchmarks went from ${pct(t.topTen[a].v!)} of mentions to ${pct(t.topTen[b].v!)}.`;
+    const panels = [
+      {
+        title: 'Released in the past year',
+        sub: 'Named benchmarks that came out in the 12 months before the release',
+        s: trendSeries({ key: 'fresh', label: 'Released in the past year', color: 'var(--ink)', periods: t.periods, vals: t.fresh, share: true, detail: named }),
+        unit: '%' as const,
+      },
+      {
+        title: 'The ten most named',
+        sub: 'Mentions that went to the ten benchmarks named most that half year, with versions of a test as one',
+        s: trendSeries({ key: 'top', label: 'The ten most named', color: 'var(--ink)', periods: t.periods, vals: t.topTen, share: true, detail: (v, i) => (v.of ? `${v.of[0]} of ${v.of[1]} mentions, in ${rel(i)}` : undefined) }),
+        unit: '%' as const,
+      },
+      {
+        title: 'The lab’s own benchmarks',
+        sub: 'Named benchmarks that the releasing lab made',
+        s: trendSeries({ key: 'own', label: 'The lab’s own benchmarks', color: 'var(--ink)', periods: t.periods, vals: t.own, share: true, detail: named }),
+        unit: '%' as const,
+      },
+      {
+        title: 'Benchmarks per release',
+        sub: 'The median release, counting each benchmark once',
+        s: trendSeries({ key: 'per', label: 'Benchmarks per release', color: 'var(--ink)', periods: t.periods, vals: t.perRelease, detail: (_, i) => `The median of ${rel(i)}` }),
+        unit: '' as const,
+      },
+    ];
+    return { key: `rp-t-${+fr}${+fm}${+sf}`, lede, panels };
+  });
 ---
 
 <Base title="What labs report" description={`Which benchmarks AI labs named for their model releases in ${year}, from the canon every lab names to the long tail only one lab does.`} film="reporting">
@@ -104,13 +206,16 @@ const sizeKey = [1, 10, 50];
       var yr = rpYears.indexOf(q.get('year')) > 0 ? q.get('year') : rpYears[0];
       var safe = q.get('safety') === '1';
       var fr = q.get('labs') === 'frontier';
+      var fm = q.get('models') === 'frontier';
       el.classList.toggle('fr', fr);
+      el.classList.toggle('fm', fm);
       el.classList.toggle('rp-safe', safe);
-      if (yr !== rpYears[0] || safe || fr) el.classList.add('rp-wait');
+      if (yr !== rpYears[0] || safe || fr || fm) el.classList.add('rp-wait');
       else if (q.get('names') === 'exact' || q.has('min') || q.has('sort') || q.get('q')) el.classList.add('rp-wait-look');
-      el.dataset.view = yr + '|' + (safe ? 1 : 0) + '|' + (fr ? 1 : 0);
+      el.dataset.view = yr + '|' + (safe ? 1 : 0) + '|' + (fr ? 1 : 0) + '|' + (fm ? 1 : 0);
     </script>
     <header class="head">
+      <Crumbs items={[{ href: '/insights/', label: 'Insights' }]} />
       <h1 class="long" data-rp-h1>{heroHead(d, view)}</h1>
       <p class="lede" data-rp-lede>{heroLede(d, view)}</p>
       <form class="rp-top" data-rp-top>
@@ -128,12 +233,24 @@ const sizeKey = [1, 10, 50];
           <input type="checkbox" name="safety" />
           Include safety evaluations
         </label>
-        <label class="claims" title={`Only releases from ${frontierList}`}>
-          <input type="checkbox" name="frontier" />
-          Frontier labs only
-        </label>
+        <span class="rp-sw">
+          <label class="claims">
+            <input type="checkbox" name="frontier" />
+            Frontier labs only
+          </label>
+          <button type="button" class="help-q" aria-label="What counts as a frontier lab" data-tn="Frontier labs" data-ts={`The ${word(FRONTIER_LABS.length)} labs ${FRONTIER_BASIS}: ${frontierList}.`} data-wide>?</button>
+        </span>
+        <span class="rp-sw">
+          <label class="claims">
+            <input type="checkbox" name="models" />
+            Frontier models only
+          </label>
+          <button type="button" class="help-q" aria-label="What counts as a frontier model" data-tn="Frontier models" data-ts={`A model that ${FRONTIER_MODEL_BASIS}, from any lab. A model without an index score doesn't count.\n\n${frontierModelYears}`} data-wide>?</button>
+        </span>
       </form>
-      <p class="rp-fl">The frontier labs are the {word(FRONTIER_LABS.length)} {FRONTIER_BASIS}: {frontierList}.</p>
+      <p class="rp-fl">
+        The frontier labs are the {word(FRONTIER_LABS.length)} {FRONTIER_BASIS}: {frontierList}. A frontier model {FRONTIER_MODEL_BASIS}.
+      </p>
       <p class="rp-note" data-rp-note hidden>The data for this view didn't load, so the page shows {year} for every lab. Try the switches again in a moment.</p>
       <script is:inline define:vars={{ rpTexts: texts }}>
         // the title, the opening paragraph and the switches, set for the view the link asks for before they paint
@@ -153,11 +270,12 @@ const sizeKey = [1, 10, 50];
         if (r) r.checked = true;
         form.querySelector('input[name=safety]').checked = parts[1] === '1';
         form.querySelector('input[name=frontier]').checked = parts[2] === '1';
+        form.querySelector('input[name=models]').checked = parts[3] === '1';
         // if the page script never starts, show the default view again rather than empty space
         if (/rp-wait/.test(page.className))
           setTimeout(function () {
             if (page.dataset.ready) return;
-            page.classList.remove('rp-wait', 'rp-wait-look', 'fr', 'rp-safe');
+            page.classList.remove('rp-wait', 'rp-wait-look', 'fr', 'fm', 'rp-safe');
             page.querySelectorAll('[data-orig]').forEach(function (e) {
               e.textContent = e.dataset.orig;
             });
@@ -201,10 +319,55 @@ const sizeKey = [1, 10, 50];
       <div id="rp-pop" role="tooltip" hidden></div>
     </section>
 
+    <section id="over-time">
+      {
+        trendViews.map((v) => (
+          <div class={`rp-t ${v.key}`}>
+            <div class="sh">
+              <h2>How has reporting changed?</h2>
+              <p>{v.lede}</p>
+            </div>
+            <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`reporting-over-time-${v.key}`} deck="How the benchmarks labs name in launch posts changed, half year by half year since 2024.">
+            <div class="rp-trend">
+              {v.panels.map((p) => (
+                <div>
+                  <h3>{p.title}</h3>
+                  <p class="rp-tsub">{p.sub}</p>
+                  <TrendChart series={[p.s]} x={trendAxis} y={{ unit: p.unit }} label={`${p.title}, each half year since 2024`} w={590} h={250} nh={220} />
+                </div>
+              ))}
+            </div>
+            </ChartDownload>
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="claims">
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Do lab numbers match independent runs?</h2>
+          <p>{ctLede} This counts every lab, whatever the switches above say.</p>
+        </div>
+        <a class="more" href="/claims/">Every pair</a>
+      </div>
+      <ChartDownload credit={POOL_CREDIT.all} name="lab-numbers-against-independent-runs" deck="For each year of the lab's document, how lab-reported scores compare with an official leaderboard's or Epoch AI's run of the same model on the same percentage benchmark.">
+        <div class="rp-trend">
+          {ctPanels.map((p) => (
+            <div>
+              <h3>{p.title}</h3>
+              <p class="rp-tsub">{p.sub}</p>
+              <TrendChart series={[p.s]} x={timeAxis(2024)} y={p.y} label={`${p.title}, each year since 2024`} w={590} h={250} nh={220} />
+            </div>
+          ))}
+        </div>
+      </ChartDownload>
+    </section>
+
     <section id="charts">
       {
         modes.map((mo) => (
-          <div class={`rp-v-${mo.key}`}>
+          <div class={`rp-v rp-v-${mo.key}`}>
             <div class="sh">
               <h2>Which benchmarks stay on top?</h2>
               <p>{mo.bumpLede}</p>
@@ -220,13 +383,56 @@ const sizeKey = [1, 10, 50];
     <section id="spread">
       {
         modes.map((mo) => (
-          <div class={`rp-v-${mo.key}`}>
+          <div class={`rp-v rp-v-${mo.key}`}>
             <div class="sh">
               <h2>How fast do new benchmarks catch on?</h2>
               <p>{mo.spreadLede}</p>
             </div>
             <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`spread-${mo.key}`} deckFrom="@lede" context="reporting">
               <ReportingSpread lines={mo.sp} goal={mo.goal} goalText={mo.goalText} />
+            </ChartDownload>
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="carried">
+      {
+        carryViews.map((v) => (
+          <div class={`rp-cv ${v.key}`}>
+            <div class="sh">
+              <h2>Which benchmarks do one or two labs carry?</h2>
+              <p>{v.lede}</p>
+            </div>
+          </div>
+        ))
+      }
+      <div class="rp-carry-ctl">
+        <label class="claims">
+          <input type="checkbox" data-carry-own />
+          Include each lab's own benchmarks
+        </label>
+        <button type="button" class="help-q" aria-label="What counts as carried" data-tn="Carried by one or two labs" data-ts={`Of the releases since 2024 that named a benchmark, at least half came from one lab, or at least four in five from two labs. Only benchmarks named in ${word(CARRY_MIN)} or more releases count. A lab's own benchmark is one it made, alone or with others.`} data-wide>?</button>
+      </div>
+      <script is:inline>
+        (function () {
+          var box = document.currentScript.previousElementSibling.querySelector('[data-carry-own]');
+          var sec = box.closest('section');
+          box.addEventListener('change', function () {
+            sec.classList.toggle('own', box.checked);
+          });
+        })();
+      </script>
+      {
+        carryViews.map((v) => (
+          <div class={`rp-cv ${v.key}`}>
+            <ChartDownload credit={creditLine([LAUNCH_POSTS])} name="benchmarks-one-lab-carries" deck="The benchmarks named in the most releases since 2024 where one lab accounts for at least half of those releases, or two labs for four in five, and each lab's share.">
+              <div class="rp-carry-others">
+                <CarryList rows={v.others} label="Benchmarks others made that one or two labs carry, by releases that named them" />
+              </div>
+              <div class="rp-carry-all">
+                <CarryList rows={v.all} label="Benchmarks one or two labs carry, by releases that named them" />
+              </div>
             </ChartDownload>
           </div>
         ))
@@ -325,6 +531,13 @@ const sizeKey = [1, 10, 50];
           2025, so the first lab we saw name one is the first lab that did.
         </p>
         <p>
+          The charts over time count by half year from 2024. We have read far fewer launch posts from 2024 than from later years ({reportingTrend().releases[0]} from the first half of 2024, {Math.max(...reportingTrend().releases)} from the busiest half year since), so the
+          earliest points rest on fewer releases. Hover a point to see how many. The latest half year isn't over yet, so its point is hollow.
+        </p>
+        <p>
+          "Frontier models only" counts just the releases of a model that {FRONTIER_MODEL_BASIS}, from any lab. It uses Epoch AI's index, so a model Epoch hasn't scored doesn't count. Both switches can be on at once.
+        </p>
+        <p>
           "Frontier labs only" counts just the releases of the {word(FRONTIER_LABS.length)} labs {FRONTIER_BASIS}. Every count on the page then compares those labs with each other, and the spread chart asks how
           fast a benchmark reached them.
         </p>
@@ -334,13 +547,20 @@ const sizeKey = [1, 10, 50];
         </p>
       </div>
     </section>
+
+    <section id="more-insights">
+      <div class="sh">
+        <h2>More insights</h2>
+      </div>
+      <InsightCards except="reporting" />
+    </section>
   </div>
 </Base>
 
 <script>
-  import { matrix, headHtml, bodyHtml, statusText, cellReleases, DEFAULT_VIEW, esc, areaIcon, type RData, type View, type Row } from '../lib/reporting-view.ts';
-  import { swarmSvg, swarmRows, swarmOrder, SWARMS, heroHead, heroLede, printsHtml, printsHead, printsLede, lookupHead, lookupLede } from '../lib/reporting-graphics.ts';
-  import { fullDate } from '../lib/format.ts';
+  import { matrix, headHtml, bodyHtml, statusText, cellReleases, DEFAULT_VIEW, esc, areaIcon, type RData, type View, type Row } from '../../lib/reporting-view.ts';
+  import { swarmSvg, swarmRows, swarmOrder, SWARMS, heroHead, heroLede, printsHtml, printsHead, printsLede, lookupHead, lookupLede } from '../../lib/reporting-graphics.ts';
+  import { fullDate } from '../../lib/format.ts';
 
   const top = document.querySelector<HTMLFormElement>('[data-rp-top]')!;
   const form = document.querySelector<HTMLFormElement>('[data-rp-ctl]')!;
@@ -377,6 +597,7 @@ const sizeKey = [1, 10, 50];
       year: String(t.get('year') ?? base.year),
       safety: t.get('safety') === 'on',
       frontier: t.get('frontier') === 'on',
+      models: t.get('models') === 'on',
       names: f.get('names') === 'exact' ? 'exact' : 'grouped',
       min: Math.max(1, Math.min(60, Math.round(Number(f.get('min')) || 1))),
       sort: (['labs', 'releases', 'name'].includes(String(f.get('sort'))) ? f.get('sort') : 'labs') as View['sort'],
@@ -388,6 +609,7 @@ const sizeKey = [1, 10, 50];
     top.querySelector<HTMLInputElement>(`input[name=year][value="${v.year}"]`)!.checked = true;
     top.querySelector<HTMLInputElement>('input[name=safety]')!.checked = v.safety;
     top.querySelector<HTMLInputElement>('input[name=frontier]')!.checked = v.frontier;
+    top.querySelector<HTMLInputElement>('input[name=models]')!.checked = v.models;
     form.querySelector<HTMLInputElement>(`input[name=names][value="${v.names}"]`)!.checked = true;
     form.querySelector<HTMLInputElement>('input[name=min]')!.value = String(v.min);
     form.querySelector<HTMLSelectElement>('select[name=sort]')!.value = v.sort;
@@ -404,6 +626,7 @@ const sizeKey = [1, 10, 50];
     if (p.get('q')) v.q = p.get('q')!;
     if (p.get('safety') === '1') v.safety = true;
     if (p.get('labs') === 'frontier') v.frontier = true;
+    if (p.get('models') === 'frontier') v.models = true;
     return v;
   }
 
@@ -412,6 +635,7 @@ const sizeKey = [1, 10, 50];
     if (v.year !== base.year) p.set('year', v.year);
     if (v.safety) p.set('safety', '1');
     if (v.frontier) p.set('labs', 'frontier');
+    if (v.models) p.set('models', 'frontier');
     if (v.names !== base.names) p.set('names', v.names);
     if (v.min !== base.min) p.set('min', String(v.min));
     if (v.sort !== base.sort) p.set('sort', v.sort);
@@ -420,7 +644,7 @@ const sizeKey = [1, 10, 50];
     history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
   }
 
-  const sameYear = (a: View, b: View) => a.year === b.year && a.safety === b.safety && a.frontier === b.frontier;
+  const sameYear = (a: View, b: View) => a.year === b.year && a.safety === b.safety && a.frontier === b.frontier && a.models === b.models;
   const same = (a: View, b: View) => sameYear(a, b) && a.names === b.names && a.min === b.min && a.sort === b.sort && a.q.trim() === b.q.trim();
 
   let current: View = base;
@@ -448,6 +672,7 @@ const sizeKey = [1, 10, 50];
       prints.innerHTML = printsHtml(d, v);
       text('[data-rp-look-head]', lookupHead(d, v));
       page.classList.toggle('fr', v.frontier);
+      page.classList.toggle('fm', v.models);
       page.classList.toggle('rp-safe', v.safety);
       page.querySelectorAll<HTMLElement>('[data-orig]').forEach((el) => delete el.dataset.orig);
       swarmStops();
@@ -469,6 +694,7 @@ const sizeKey = [1, 10, 50];
     current = drawn;
     page.classList.remove('rp-wait', 'rp-wait-look');
     page.classList.toggle('fr', drawn.frontier);
+    page.classList.toggle('fm', drawn.models);
     page.classList.toggle('rp-safe', drawn.safety);
     page.querySelectorAll<HTMLElement>('[data-orig]').forEach((el) => {
       el.textContent = el.dataset.orig!;
@@ -713,10 +939,14 @@ const sizeKey = [1, 10, 50];
   toEnd();
   // the all-years charts are already on the page in both versions, so the switch shows the other one at once,
   // before the year graphics finish loading; a hidden chart scrolls to its end once it shows
-  top.querySelector<HTMLInputElement>('input[name=frontier]')?.addEventListener('change', (e) => {
-    page.classList.toggle('fr', (e.target as HTMLInputElement).checked);
-    requestAnimationFrame(toEnd);
-  });
+  for (const [name, cls] of [
+    ['frontier', 'fr'],
+    ['models', 'fm'],
+  ])
+    top.querySelector<HTMLInputElement>(`input[name=${name}]`)?.addEventListener('change', (e) => {
+      page.classList.toggle(cls, (e.target as HTMLInputElement).checked);
+      requestAnimationFrame(toEnd);
+    });
 
   swarmStops();
   gridStops();
@@ -724,6 +954,7 @@ const sizeKey = [1, 10, 50];
   if (!same(start, base)) {
     writeForm(start);
     page.classList.toggle('fr', start.frontier);
+    page.classList.toggle('fm', start.models);
     current = { ...base, year: '' };
     // the marked graphics stay hidden until this draws them, so the data loads now rather than at idle
     render(start)
@@ -794,9 +1025,75 @@ const sizeKey = [1, 10, 50];
     min-width: 0;
   }
   /* the all-years charts render once for every lab and once for the frontier labs; the switch shows one */
-  .rp-page:not(.fr) .rp-v-fr,
-  .rp-page.fr .rp-v-all {
+  /* the all-years charts render once per setting of the two frontier switches; the matching one shows */
+  .rp-v {
     display: none;
+  }
+  .rp-page:not(.fr):not(.fm) .rp-v-00,
+  .rp-page:not(.fr).fm .rp-v-01,
+  .rp-page.fr:not(.fm) .rp-v-10,
+  .rp-page.fr.fm .rp-v-11 {
+    display: block;
+  }
+  /* the charts over time render once per setting of all three switches; the matching one shows */
+  .rp-t {
+    display: none;
+  }
+  .rp-page:not(.fr):not(.fm):not(.rp-safe) .rp-t-000,
+  .rp-page:not(.fr):not(.fm).rp-safe .rp-t-001,
+  .rp-page:not(.fr).fm:not(.rp-safe) .rp-t-010,
+  .rp-page:not(.fr).fm.rp-safe .rp-t-011,
+  .rp-page.fr:not(.fm):not(.rp-safe) .rp-t-100,
+  .rp-page.fr:not(.fm).rp-safe .rp-t-101,
+  .rp-page.fr.fm:not(.rp-safe) .rp-t-110,
+  .rp-page.fr.fm.rp-safe .rp-t-111 {
+    display: block;
+  }
+  /* the carried benchmarks: one version per safety setting, and the own-benchmarks switch picks the list */
+  .rp-cv {
+    display: none;
+  }
+  .rp-page:not(.rp-safe) .rp-cv-0,
+  .rp-page.rp-safe .rp-cv-1 {
+    display: block;
+  }
+  #carried:not(.own) .rp-carry-all,
+  #carried.own .rp-carry-others {
+    display: none;
+  }
+  .rp-carry-ctl {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: -8px 0 22px;
+  }
+  /* a switch and the (?) that says what it counts */
+  .rp-sw {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .rp-trend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px 56px;
+  }
+  @media (max-width: 860px) {
+    .rp-trend {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .rp-trend > div {
+    min-width: 0;
+  }
+  .rp-trend h3 {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .rp-tsub {
+    margin: 4px 0 14px;
+    color: var(--ink-3);
+    font-size: 14px;
   }
 
   /* the beeswarm */

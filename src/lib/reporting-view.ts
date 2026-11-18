@@ -35,6 +35,12 @@ export interface RRel {
   date: string;
   /** Each benchmark the release names, once: [index into benches, the score as written or null]. */
   r: [number, string | null][];
+  /** 1 when the model was a frontier model (FRONTIER_MODEL_TOP) the day the post came out. */
+  f?: 1;
+}
+export interface SourceCount {
+  posts: number;
+  docs: number;
 }
 export interface RData {
   labs: RLab[];
@@ -43,8 +49,9 @@ export interface RData {
   years: string[];
   /** Areas in their fixed order, with their names. */
   areas: { id: string; name: string }[];
-  /** Launch posts and the documents published with them, per year, from every lab and from the frontier labs. */
-  sources: Record<string, { posts: number; docs: number; frontier: { posts: number; docs: number } }>;
+  /** Launch posts and the documents published with them, per year: every lab, the frontier labs, and the same two
+   * counting only frontier models. */
+  sources: Record<string, SourceCount & { frontier: SourceCount; models: SourceCount; frontierModels: SourceCount }>;
   /** The data's last day. */
   asOf: string;
 }
@@ -59,6 +66,13 @@ export const FRONTIER_LABS: readonly string[] = ['anthropic', 'openai', 'google'
 /** Why these labs, in words the page shows before their names. */
 export const FRONTIER_BASIS = "whose best 2026 models score highest on Epoch AI's Capabilities Index, as of November 2026";
 export const FRONTIER = new Set(FRONTIER_LABS);
+/**
+ * A frontier model, for the "Frontier models only" switch: one that ranked in the top FRONTIER_MODEL_TOP on Epoch
+ * AI's Capabilities Index among every model out the day its launch post came out. A model without an index score
+ * doesn't count. src/lib/reporting.ts marks each release.
+ */
+export const FRONTIER_MODEL_TOP = 10;
+export const FRONTIER_MODEL_BASIS = `ranked in the top ten on Epoch AI's Capabilities Index among the models out the day it was released`;
 
 export type Names = 'grouped' | 'exact';
 export type SortKey = 'labs' | 'releases' | 'name';
@@ -71,6 +85,8 @@ export interface View {
   safety: boolean;
   /** Count only releases from the frontier labs. */
   frontier: boolean;
+  /** Count only releases of frontier models. */
+  models: boolean;
 }
 
 export const COLS = 12;
@@ -110,6 +126,7 @@ function uses(d: RData, v: View) {
   d.rels.forEach((rel, i) => {
     if (!rel.date.startsWith(v.year)) return;
     if (v.frontier && !FRONTIER.has(d.labs[rel.lab].id)) return;
+    if (v.models && !rel.f) return;
     const keys = new Map<string, number[]>();
     for (const [bi] of rel.r) {
       const b = d.benches[bi];
@@ -241,10 +258,11 @@ export function statusText(m: Matrix, v: View): string {
   const all = m.rows.length.toLocaleString('en-US');
   const yr = v.year;
   const labs = v.frontier ? 'frontier labs' : 'labs';
+  const what = forModels(v);
   const thr =
     v.min <= 1
-      ? `all ${m.passing.length.toLocaleString('en-US')} benchmarks the ${m.totalLabs} ${labs} named in ${yr}`
-      : `the ${m.passing.length.toLocaleString('en-US')} benchmarks that at least ${v.min} ${labs} named in ${yr}`;
+      ? `all ${m.passing.length.toLocaleString('en-US')} benchmarks the ${m.totalLabs} ${labs} named${what} in ${yr}`
+      : `the ${m.passing.length.toLocaleString('en-US')} benchmarks that at least ${v.min} ${labs} named${what} in ${yr}`;
   if (v.q.trim()) {
     const hidden = m.rows.filter((r) => r.labs < v.min && (r.name.toLowerCase().includes(v.q.trim().toLowerCase()) || r.org.toLowerCase().includes(v.q.trim().toLowerCase()))).length;
     return `${m.shown.length.toLocaleString('en-US')} ${m.shown.length === 1 ? 'match' : 'matches'} among ${thr}.${hidden ? ` ${hidden} more ${hidden === 1 ? 'match' : 'matches'} at a lower threshold.` : ''}`;
@@ -294,7 +312,10 @@ export function labHabits(d: RData, v: View): LabHabit[] {
     .sort((a, b) => b.releases - a.releases || b.uses - a.uses || d.labs[a.lab].name.localeCompare(d.labs[b.lab].name));
 }
 
-export const DEFAULT_VIEW = (year: string): View => ({ year, names: 'grouped', min: 3, sort: 'labs', q: '', safety: false, frontier: false });
+export const DEFAULT_VIEW = (year: string): View => ({ year, names: 'grouped', min: 3, sort: 'labs', q: '', safety: false, frontier: false, models: false });
+
+/** " for frontier models" when the view counts only those releases, for the end of "labs named". */
+export const forModels = (v: Pick<View, 'models'>) => (v.models ? ' for frontier models' : '');
 
 /** The benchmarks behind one cell, for its tooltip: each release with what it reported under the row's name. */
 export function cellReleases(d: RData, v: View, key: string, rels: number[]) {

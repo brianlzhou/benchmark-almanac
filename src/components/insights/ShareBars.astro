@@ -1,0 +1,145 @@
+---
+// One column per period, split to 100% by category, for the Insights pages. Drawn in HTML, so text keeps its size
+// at every width. The first category sits at the bottom. A segment tall enough carries its share. Every segment
+// carries the site's shared tooltip (src/scripts/tips.ts), and a legend names every category, so color is never
+// the only cue.
+interface Props {
+  periods: { label: string; partial?: boolean }[];
+  cats: { key: string; label: string; color: string; ink: string }[];
+  /** [category][period], 0 to 1. */
+  shares: number[][];
+  /** The tooltip for each segment, [category][period]. */
+  tips: { tv: string; tn: string; ts?: string }[][];
+  label: string;
+}
+const { periods, cats, shares, tips, label } = Astro.props;
+const pctOf = (v: number) => `${Math.round(100 * v)}%`;
+---
+
+<figure class="sb" aria-label={label}>
+  <ul class="sb-key">
+    {
+      cats.map((c) => (
+        <li>
+          <span class="sw" style={`background:${c.color}`} />
+          {c.label}
+        </li>
+      ))
+    }
+  </ul>
+  <div class="sb-plot" role="img" aria-label={label}>
+    <div class="sb-axis" aria-hidden="true">
+      {[100, 75, 50, 25, 0].map((t) => <span style={`bottom:${t}%`}>{t}%</span>)}
+    </div>
+    <div class="sb-cols" style={`--n:${periods.length}`}>
+      {
+        periods.map((p, i) => (
+          <div class:list={['sb-col', { partial: p.partial }]}>
+            {cats.map((c, k) =>
+              shares[k][i] > 0 ? (
+                <span class="seg" style={`flex-grow:${shares[k][i]};background:${c.color};color:${c.ink}`} data-tv={tips[k][i].tv} data-tn={tips[k][i].tn} data-ts={tips[k][i].ts}>
+                  {shares[k][i] >= 0.12 && <span class="v">{pctOf(shares[k][i])}</span>}
+                </span>
+              ) : null,
+            )}
+          </div>
+        ))
+      }
+    </div>
+    <div class="sb-x" style={`--n:${periods.length}`} aria-hidden="true">
+      {periods.map((p) => <span>{p.label}</span>)}
+    </div>
+  </div>
+</figure>
+
+<style>
+  .sb {
+    margin: 0;
+  }
+  .sb-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .sb-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .sb-plot {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-rows: 340px auto;
+  }
+  @media (max-width: 720px) {
+    .sb-plot {
+      grid-template-rows: 260px auto;
+    }
+  }
+  .sb-axis {
+    position: relative;
+    font: 11.5px var(--mono);
+    color: var(--ink-3);
+  }
+  .sb-axis span {
+    position: absolute;
+    right: 8px;
+    transform: translateY(50%);
+  }
+  .sb-cols,
+  .sb-x {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 0 clamp(6px, 2vw, 22px);
+  }
+  .sb-cols {
+    align-items: stretch;
+  }
+  .sb-col {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2px;
+    min-width: 0;
+  }
+  .sb-col .seg:last-child {
+    border-radius: 4px 4px 0 0;
+  }
+  .seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 0;
+    min-height: 0;
+    font: 500 12.5px var(--sans);
+    font-variant-numeric: tabular-nums;
+    cursor: default;
+  }
+  .seg:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .sb-col.partial .seg {
+    background-image: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in oklab, var(--bg) 22%, transparent) 6px 8px);
+  }
+  .sb-x {
+    grid-column: 2;
+    margin-top: 10px;
+    font: 11.5px var(--mono);
+    color: var(--ink-3);
+    text-align: center;
+  }
+  .sb-x span {
+    min-width: 0;
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+// Benchmarks one or two labs carry, as rows: the benchmark, a bar split by the share of the releases naming it that
+// came from each lab (the two biggest in their lab colors, the rest in gray), and how many releases named it. Each
+// segment carries the shared tooltip, and the row names the top lab and its share, so color is never the only cue.
+import { labColor } from '../../lib/palette.ts';
+import type { Carried } from '../../lib/insights.ts';
+
+interface Props {
+  rows: Carried[];
+  label: string;
+}
+const { rows, label } = Astro.props;
+const pct = (v: number) => `${Math.round(100 * v)}%`;
+const segs = (r: Carried) => {
+  const top = r.labs.slice(0, 2).filter((l) => l.n >= 2 || l === r.labs[0]);
+  const rest = r.releases - top.reduce((a, l) => a + l.n, 0);
+  return [
+    ...top.map((l) => ({ key: l.id, name: l.name, n: l.n, color: labColor(l.id) })),
+    ...(rest > 0 ? [{ key: 'rest', name: `${r.labs.length - top.length} other lab${r.labs.length - top.length === 1 ? '' : 's'}`, n: rest, color: 'var(--ink-4)' }] : []),
+  ];
+};
+---
+
+<ol class="cl" aria-label={label}>
+  {
+    rows.map((r) => (
+      <li>
+        <a class="cl-n" href={r.href}>
+          {r.name}
+        </a>
+        <span class="cl-bar">
+          {segs(r).map((g) => (
+            <span class="cl-s" style={`flex-grow:${g.n};background:${g.color}`} data-tv={pct(g.n / r.releases)} data-tn={g.name} data-ts={`${g.n} of the ${r.releases} releases since 2024 that named ${r.name}`} />
+          ))}
+        </span>
+        <span class="cl-w">
+          {r.labs[0].name} {pct(r.labs[0].n / r.releases)}
+          {r.carriers === 2 && `, ${r.labs[1].name} ${pct(r.labs[1].n / r.releases)}`}
+          {r.own && <span class="cl-own"> its own</span>}
+        </span>
+        <span class="cl-r num">{r.releases}</span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .cl {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cl li {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 14rem) 3rem;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+  @media (max-width: 860px) {
+    .cl li {
+      grid-template-columns: minmax(0, 1fr) 3rem;
+      gap: 4px 12px;
+    }
+    .cl-bar {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .cl-w {
+      grid-column: 1 / -1;
+      grid-row: 3;
+    }
+  }
+  .cl-n {
+    color: var(--ink);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cl-n:hover {
+    text-decoration: underline;
+  }
+  .cl-bar {
+    display: flex;
+    gap: 2px;
+    height: 14px;
+  }
+  .cl-s {
+    flex-basis: 0;
+    min-width: 2px;
+  }
+  .cl-s:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  .cl-s:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+  .cl-s:only-child {
+    border-radius: 4px;
+  }
+  .cl-s:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .cl-w {
+    color: var(--ink-2);
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cl-own {
+    color: var(--ink-3);
+  }
+  .cl-r {
+    text-align: right;
+    color: var(--ink-3);
+  }
+</style>

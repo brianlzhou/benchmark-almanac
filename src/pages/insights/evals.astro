@@ -1,0 +1,384 @@
+---
+// How evals are changing: how the benchmarks that came out each year were built (format, scoring, private test
+// items), who made them, what they test (the catalog view of AreaShare), how fast each year's benchmarks saturated,
+// how much of the catalog was past 85% over time, and which areas saturate first. The series come from
+// src/lib/insights.ts. Every chart but the catalog view renders twice, for every benchmark and for the benchmarks
+// labs cite in launch posts, and the page's switch shows one.
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import AreaShare from '../../components/AreaShare.astro';
+import ChartDownload from '../../components/ChartDownload.astro';
+import TrendChart from '../../components/insights/TrendChart.astro';
+import InsightCards from '../../components/insights/InsightCards.astro';
+import {
+  evalTrend,
+  evalFinding,
+  saturationCohorts,
+  saturationFinding,
+  satCompareMonth,
+  makerTrend,
+  areaSaturation,
+  citedIds,
+  trendSeries,
+  timeAxis,
+  pct,
+  EVAL_FROM,
+  SAT_MONTHS,
+  SAT_MIN_SCORES,
+  type Val,
+  type TSeries,
+} from '../../lib/insights.ts';
+import { timeMachinePayload } from '../../lib/time-machine.ts';
+import { SATURATED, benchmarks, AS_OF } from '../../lib/data.ts';
+import { yearFrac, humanDate } from '../../lib/format.ts';
+import { POOL_CREDIT } from '../../lib/credits.ts';
+
+const CATALOG = 'Source: The Benchmark Almanac catalog';
+const axis = timeAxis(EVAL_FROM);
+const tm = timeMachinePayload();
+const SHARE_MIN = 20;
+
+const versions = [false, true].map((cited) => {
+  const which = cited ? 'cited' : 'all';
+  const kind = cited ? 'benchmarks labs cite' : 'benchmarks';
+
+  // how new benchmarks are built
+  const t = evalTrend(cited);
+  const last = t.periods.length - 1;
+  const y23 = t.periods.findIndex((p) => p.key === '2023');
+  const of = (v: Val, i: number) => (v.of ? `${v.of[0]} of the ${v.of[1]} ${kind} from ${t.periods[i].name}` : undefined);
+  const built = [
+    { key: 'agent', title: 'Agent tasks', sub: 'The model acts over many steps in an environment, a browser or a terminal', vals: t.agent },
+    { key: 'choice', title: 'Multiple choice', sub: 'The model picks an answer from a list', vals: t.choice },
+    { key: 'judged', title: 'Scored by a model', sub: 'Another model grades the answers, often against a rubric', vals: t.judged },
+    { key: 'hidden', title: 'Private test items', sub: 'Some or all of the test is kept out of public view, to stop leaks into training data', vals: t.hidden },
+  ].map((p) => ({ ...p, s: trendSeries({ key: p.key, label: p.title, color: 'var(--ink)', periods: t.periods, vals: p.vals, share: true, detail: of }) }));
+  const lede = `${evalFinding(t).replace('of the new benchmarks', cited ? 'of the new benchmarks labs cite' : 'of the new benchmarks')} We count every benchmark in our catalog${cited ? ' that a lab has named in a launch post' : ''} by the year it came out.`;
+  const buildLede = `Benchmarks scored by another model went from ${pct(t.judged[y23].v!)} of the year's new ${kind} in 2023 to ${pct(t.judged[last].v!)} in ${t.periods[last].key}. Those that keep some test items private went from ${pct(t.hidden[y23].v!)} to ${pct(t.hidden[last].v!)}.`;
+
+  // who makes them
+  const mt = makerTrend(cited);
+  const mLast = mt.periods.length - 1;
+  const makerPanels = mt.kinds
+    .filter((k) => k.id !== 'person')
+    .map((k) => ({ ...k, s: trendSeries({ key: k.id, label: k.name, color: 'var(--ink)', periods: mt.periods, vals: k.vals, share: true, detail: (v, i) => (v.of ? `${v.of[0]} of the ${v.of[1]} ${kind} from ${mt.periods[i].name}` : undefined) }) }));
+  const kindAt = (id: string, i: number) => mt.kinds.find((k) => k.id === id)!.vals[i].v ?? 0;
+  const makerLede = `Universities and institutes helped make ${pct(kindAt('academia', 0))} of the new ${kind} in ${EVAL_FROM} and ${pct(kindAt('academia', mLast))} in ${mt.periods[mLast].key}. Eval orgs went from ${pct(kindAt('eval', 0))} to ${pct(kindAt('eval', mLast))}, and data vendors from ${pct(kindAt('data', 0))} to ${pct(kindAt('data', mLast))}.`;
+
+  // saturation by release year: one line per year, light to dark from oldest to newest
+  const cohorts = saturationCohorts(cited);
+  const ramp = ['var(--ink-4)', 'var(--ink-3)', 'var(--ink-2)', 'var(--ink)'];
+  const satSeries: TSeries[] = cohorts.map((c, k) => ({
+    key: c.year,
+    label: c.year,
+    color: ramp[Math.max(0, ramp.length - cohorts.length + k)],
+    pts: c.share.map((v, m) => ({
+      x: m,
+      y: v === null ? null : 100 * v,
+      tv: v === null ? undefined : pct(v),
+      tn: `Benchmarks from ${c.year}, ${m === 0 ? 'the day they came out' : `${m} month${m === 1 ? '' : 's'} after release`}`,
+      ts: `Estimated share with a score past ${SATURATED}%, of the ${c.n} from ${c.year} that we follow`,
+    })),
+  }));
+  const followed = cohorts.reduce((a, c) => a + c.n, 0);
+
+  // the share of the catalog past 85% over time, from the time machine's counts on the first of each month
+  const monthly = tm.share;
+  const shareLine = (key: string, label: string, color: string, k: 1 | 3) =>
+    ({
+      key,
+      label,
+      color,
+      pts: monthly.map((s) => {
+        const hit = s[k] as number;
+        const n = s[k + 1] as number;
+        return { x: yearFrac(s[0]), y: n >= SHARE_MIN ? (100 * hit) / n : null, tv: n ? pct(hit / n) : undefined, tn: humanDate(s[0]), ts: `${hit} of ${n} ${k === 3 ? 'benchmarks featured in launch posts' : 'benchmarks with scores'}` };
+      }),
+    }) as TSeries;
+  const pastSeries = cited ? [shareLine('featured', 'Featured in launch posts', 'var(--ink)', 3)] : [shareLine('all', 'Every benchmark with scores', 'var(--ink)', 1), shareLine('featured', 'Featured in launch posts', 'var(--ink-3)', 3)];
+  const now = tm.share.at(-1)!;
+  const yearAgo = tm.share.filter((s) => s[0] <= `${Number(now[0].slice(0, 4)) - 1}${now[0].slice(4)}`).at(-1)!;
+  const pastLede = cited
+    ? `Today ${pct(now[3] / now[4])} of the benchmarks labs have featured in launch posts have a best score past ${SATURATED}%, against ${pct(yearAgo[3] / yearAgo[4])} a year ago.`
+    : `Today ${pct(now[1] / now[2])} of the benchmarks with scores have a best score past ${SATURATED}%, and ${pct(now[3] / now[4])} of the ones labs featured in launch posts. A year ago those shares were ${pct(yearAgo[1] / yearAgo[2])} and ${pct(yearAgo[3] / yearAgo[4])}.`;
+
+  // which areas saturate first, one small chart per area in the area's color
+  const as = areaSaturation(cited);
+  const areaPanels = as.areas.map((a) => ({
+    ...a,
+    s: trendSeries({ key: a.id, label: a.name, color: `var(--area-${a.id})`, periods: as.periods, vals: a.vals, share: true, detail: (v) => (v.of ? `${v.of[0]} of ${v.of[1]} ${kind} with scores by then` : undefined) }),
+  }));
+  const ranked = as.areas.map((a) => ({ a, v: a.vals.at(-1)?.v ?? 0 })).sort((x, y) => y.v - x.v);
+  const areaLede = `${ranked[0].a.name} benchmarks saturate first: ${pct(ranked[0].v)} of them have a score past ${SATURATED}%. ${ranked.at(-1)!.a.name} trails at ${pct(ranked.at(-1)!.v)}.`;
+
+  return { which, cited, kind, built, lede, buildLede, makerPanels, makerLede, cohorts, satSeries, followed, m: satCompareMonth(cohorts), pastSeries, pastLede, areaPanels, areaLede, unclassified: mt.unclassified[mLast] };
+});
+const satAxis = { min: 0, max: SAT_MONTHS, ticks: [0, 6, 12, 18, 24, 30, 36].map((v) => ({ v, label: String(v) })), title: 'Months since release' };
+const pastAxis = timeAxis(2023);
+const areaAxis = timeAxis(2024);
+const dated = benchmarks.filter((b) => /^\d{4}-\d\d/.test(b.released ?? '')).length;
+const nCited = citedIds().size;
+// shared tops, so small charts of one kind compare at a glance: a round step above the highest value in either version
+const roundUp = (v: number, step: number) => Math.max(step, Math.ceil((100 * v) / step) * step);
+const topOf = (vals: (number | null)[], step: number) => roundUp(Math.max(0, ...vals.filter((v): v is number => v !== null)), step);
+const bigKinds = new Set(['lab', 'academia']);
+const makerTop = (id: string) =>
+  topOf(versions.flatMap((v) => v.makerPanels.filter((p) => bigKinds.has(p.id) === bigKinds.has(id)).flatMap((p) => p.vals.map((x) => x.v))), bigKinds.has(id) ? 20 : 10);
+const areaTop = topOf(versions.flatMap((v) => v.areaPanels.flatMap((p) => p.vals.map((x) => x.v))), 20);
+---
+
+<Base title="How are evals changing?" description="How the AI benchmarks that come out each year are built, who makes them, and how fast they saturate." crumbs={[{ href: '/insights/', label: 'Insights' }]}>
+  <div class="page ev-page">
+    <script is:inline>
+      // before the first paint: a link to the cited-only view shows it at once
+      if (new URLSearchParams(location.search).get('benchmarks') === 'cited') document.currentScript.parentElement.classList.add('cited');
+    </script>
+    <header class="head">
+      <Crumbs items={[{ href: '/insights/', label: 'Insights' }]} />
+      <h1>How are evals changing?</h1>
+      {versions.map((v) => <p class={`lede ev-v ev-v-${v.which}`}>{v.lede}</p>)}
+      <div class="ev-top">
+        <label class="claims">
+          <input type="checkbox" name="cited" data-ev-cited />
+          Only benchmarks labs cite
+        </label>
+        <button type="button" class="help-q" aria-label="What counts as a benchmark labs cite" data-tn="Benchmarks labs cite" data-ts={`The ${nCited.toLocaleString('en-US')} benchmarks that at least one lab named in a launch post or the documents published with it. The switch applies to every chart on this page except "What do new benchmarks test?", which counts the whole catalog.`} data-wide>?</button>
+      </div>
+    </header>
+
+    {
+      versions.map((v) => (
+        <div class={`ev-v ev-v-${v.which}`}>
+          <section id={v.cited ? undefined : 'built'}>
+            <div class="sh">
+              <h2>How are new benchmarks built?</h2>
+              <p>{v.buildLede}</p>
+            </div>
+            <ChartDownload credit={CATALOG} name={`how-new-benchmarks-are-built-${v.which}`} deck={`The share of the ${v.kind} that came out each year with each trait.`}>
+              <div class="ev-grid">
+                {v.built.map((p) => (
+                  <div>
+                    <h3>{p.title}</h3>
+                    <p class="ev-sub">{p.sub}</p>
+                    <TrendChart series={[p.s]} x={axis} y={{ unit: '%' }} label={`${p.title}: share of the ${v.kind} that came out each year since ${EVAL_FROM}`} w={590} h={250} nh={220} />
+                  </div>
+                ))}
+              </div>
+            </ChartDownload>
+          </section>
+
+          <section id={v.cited ? undefined : 'makers'}>
+            <div class="sh">
+              <h2>Who makes new benchmarks?</h2>
+              <p>{v.makerLede}</p>
+            </div>
+            <ChartDownload credit={CATALOG} name={`who-makes-benchmarks-${v.which}`} deck={`The share of the ${v.kind} that came out each year made with at least one maker of each kind. A benchmark with makers of two kinds counts in both.`}>
+              <div class="ev-grid ev-grid3">
+                {v.makerPanels.map((p) => (
+                  <div>
+                    <h3>{p.name}</h3>
+                    <p class="ev-sub">{p.note}</p>
+                    <TrendChart series={[p.s]} x={axis} y={{ unit: '%', max: makerTop(p.id) }} label={`${p.name}: share of the ${v.kind} that came out each year since ${EVAL_FROM}`} w={390} h={220} nh={220} />
+                  </div>
+                ))}
+              </div>
+            </ChartDownload>
+          </section>
+        </div>
+      ))
+    }
+
+    <section id="tests">
+      <AreaShare heading catalog title="What do new benchmarks test?" more={{ href: '/benchmarks/', label: 'All benchmarks' }} />
+    </section>
+
+    {
+      versions.map((v) => (
+        <div class={`ev-v ev-v-${v.which}`}>
+          <section id={v.cited ? undefined : 'saturation'}>
+            <div class="sh">
+              <h2>How fast do benchmarks saturate?</h2>
+              <p>
+                {saturationFinding(v.cohorts)} Each line follows the {v.kind} that came out in one year, from release to the first score past {SATURATED}%.
+              </p>
+            </div>
+            <ChartDownload
+              credit={POOL_CREDIT.all}
+              name={`time-to-saturation-${v.which}`}
+              deck={`For the ${v.kind} that came out each year, the estimated share with a score past ${SATURATED}% so many months after release.`}
+              counts={`${v.followed} percentage benchmarks where higher is better, with scores from at least ${SAT_MIN_SCORES} models. A score counts from the release date of the model that made it.`}
+              leaves="Safety evaluations, vote and match rankings, and benchmarks with fewer scores."
+            >
+              <TrendChart series={v.satSeries} x={satAxis} y={{ unit: '%' }} label={`Share of each year's ${v.kind} with a score past ${SATURATED}%, by months since release`} w={1120} h={420} nh={300} dots={false} legend />
+            </ChartDownload>
+          </section>
+
+          <section id={v.cited ? undefined : 'past-85'}>
+            <div class="sh">
+              <h2>How much of the catalog is past 85%?</h2>
+              <p>{v.pastLede}</p>
+            </div>
+            <ChartDownload
+              credit={POOL_CREDIT.headline}
+              name={`share-past-85-${v.which}`}
+              deck="The share of benchmarks whose best score had passed 85%, among benchmarks with at least three scores, and among those labs had featured in launch posts."
+              counts="Percentage benchmarks where higher is better, from the source each benchmark’s page leads with, counted from the first score we know."
+              leaves="Vote and match rankings, safety evals and benchmarks with fewer than three scores."
+            >
+              <TrendChart series={v.pastSeries} x={pastAxis} y={{ unit: '%' }} label={`Share of ${v.kind} past ${SATURATED}% over time`} w={1120} h={360} nh={280} dots={false} legend={v.pastSeries.length > 1} />
+            </ChartDownload>
+            <p class="ev-credit">Inspired by Ethan Mollick’s <a href="https://github.com/emollick/satbench">SatBench</a>. Pick a day on the <a href="/time-machine/">Time machine</a> to see the leaders then.</p>
+          </section>
+
+          <section id={v.cited ? undefined : 'areas'}>
+            <div class="sh">
+              <h2>Which areas saturate first?</h2>
+              <p>{v.areaLede} Each chart is the share of an area's {v.kind} with a score past {SATURATED}%, at the end of each half year.</p>
+            </div>
+            <ChartDownload credit={POOL_CREDIT.all} name={`saturation-by-area-${v.which}`} deck={`The share of each area's ${v.kind} with a score past ${SATURATED}%, at the end of each half year.`} counts="Percentage benchmarks where higher is better, with at least three scores and a first score by then.">
+              <div class="ev-grid ev-grid4">
+                {v.areaPanels.map((p) => (
+                  <div>
+                    <h3>{p.name}</h3>
+                    <TrendChart series={[p.s]} x={areaAxis} y={{ unit: '%', max: areaTop }} label={`${p.name}: share past ${SATURATED}%, each half year`} w={290} h={200} nh={220} />
+                  </div>
+                ))}
+              </div>
+            </ChartDownload>
+          </section>
+        </div>
+      ))
+    }
+
+    <section id="method">
+      <div class="sh">
+        <h2>How this is counted</h2>
+      </div>
+      <div class="ev-method">
+        <p>
+          The catalog holds {dated.toLocaleString('en-US')} benchmarks with a release month. We find recent benchmarks more completely than old ones, so the number per year rises faster than the field did. The
+          shares are less affected, and each point's tooltip shows how many benchmarks it rests on. The current year isn't over, so its point is hollow.
+        </p>
+        <p>
+          "Only benchmarks labs cite" keeps the {nCited.toLocaleString('en-US')} benchmarks that at least one lab named in a launch post or the documents published with it. It applies to every chart
+          but "What do new benchmarks test?", which counts the whole catalog.
+        </p>
+        <p>Format, scoring and test access come from each benchmark's entry, the same fields the benchmarks table filters on. A benchmark with no value for a field is left out of that chart.</p>
+        <p>
+          Makers come from each benchmark's credit. AI labs are the labs in our lab list that release models. Universities and institutes are named as such. Eval orgs, data vendors, other companies,
+          government and nonprofits are sorted by hand for the makers with the most benchmarks. A benchmark can count under two kinds. Independent researchers made too few to chart. {pct(versions[0].unclassified.v ?? 0)} of the new benchmarks from {AS_OF.slice(0, 4)} have only makers we haven't sorted yet.
+        </p>
+        <p>
+          A benchmark saturates here when any score we know of passes {SATURATED}%, from a leaderboard, Epoch AI or a lab's own report. A model's score counts from the day the model came out, so a benchmark
+          that older models already passed counts as saturated on day one. Benchmarks reach different ages, so each line is a survival estimate: every month, of the benchmarks old enough and not yet past {SATURATED}%,
+          the share that passed. A line stops when fewer than 15 benchmarks are left to follow. The comparison above uses month {versions[0].m}, the latest month every line reaches.
+        </p>
+      </div>
+    </section>
+
+    <section id="more-insights">
+      <div class="sh">
+        <h2>More insights</h2>
+      </div>
+      <InsightCards except="evals" />
+    </section>
+  </div>
+</Base>
+
+<script>
+  // "Only benchmarks labs cite": every version is on the page, so the switch only swaps which one shows
+  const page = document.querySelector<HTMLElement>('.ev-page')!;
+  const box = page.querySelector<HTMLInputElement>('[data-ev-cited]')!;
+  box.checked = page.classList.contains('cited');
+  box.addEventListener('change', () => {
+    page.classList.toggle('cited', box.checked);
+    const u = new URL(location.href);
+    if (box.checked) u.searchParams.set('benchmarks', 'cited');
+    else u.searchParams.delete('benchmarks');
+    history.replaceState(null, '', u);
+  });
+</script>
+
+<style>
+  .ev-page:not(.cited) .ev-v-cited,
+  .ev-page.cited .ev-v-all {
+    display: none;
+  }
+  .ev-page > .ev-v + section,
+  .ev-page > section + .ev-v,
+  .ev-v > section + section {
+    margin-top: 104px;
+  }
+  @media (max-width: 720px) {
+    .ev-page > .ev-v + section,
+    .ev-page > section + .ev-v,
+    .ev-v > section + section {
+      margin-top: 72px;
+    }
+  }
+  .ev-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 22px;
+  }
+  .ev-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px 56px;
+  }
+  .ev-grid3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 40px;
+  }
+  .ev-grid4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 36px 32px;
+  }
+  @media (max-width: 1100px) {
+    .ev-grid3,
+    .ev-grid4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 860px) {
+    .ev-grid,
+    .ev-grid3,
+    .ev-grid4 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .ev-grid > div {
+    min-width: 0;
+  }
+  .ev-grid h3 {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .ev-grid4 h3 {
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+  .ev-sub {
+    margin: 4px 0 14px;
+    color: var(--ink-3);
+    font-size: 14px;
+  }
+  /* every note in a row of three takes two lines, so the charts beside each other start level */
+  @media (min-width: 861px) {
+    .ev-grid3 .ev-sub {
+      min-height: calc(2 * 1.5em);
+    }
+  }
+  .ev-credit {
+    margin-top: 14px;
+    color: var(--ink-3);
+    font-size: 13.5px;
+  }
+  .ev-method {
+    display: grid;
+    gap: 14px;
+    max-width: 78ch;
+    color: var(--ink-2);
+  }
+</style>

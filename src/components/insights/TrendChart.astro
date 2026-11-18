@@ -1,0 +1,260 @@
+---
+// A line chart over time for the Insights pages: one series in a small multiple, or a few series on one axis.
+// It renders at a desktop and a phone width, each drawn at about the size it shows, so text keeps its size.
+// Every point carries the site's shared tooltip (src/scripts/tips.ts). A point that covers a period not yet over
+// is hollow, and the line into it is dashed. With `ends`, each line is named at its right end (a few series), or
+// a single series shows its first and last values.
+import { linear, niceTicks } from '../../lib/scale.ts';
+
+import type { TPoint, TSeries } from '../../lib/insights.ts';
+
+interface Props {
+  series: TSeries[];
+  x: { min: number; max: number; ticks: { v: number; label: string }[]; title?: string };
+  y: { min?: number; max?: number; ticks?: number[]; unit?: '%' | ''; title?: string };
+  label: string;
+  /** Desktop drawing width and height. The phone render is 380 wide. */
+  w?: number;
+  h?: number;
+  nh?: number;
+  /** A dot on every point, not only where the reader hovers. */
+  dots?: boolean;
+  ends?: boolean;
+  legend?: boolean;
+}
+const { series, x, y, label, w = 600, h = 300, nh = 240, dots = true, ends = true, legend = false } = Astro.props;
+
+const ys = series.flatMap((s) => s.pts.map((p) => p.y)).filter((v): v is number => v !== null);
+const yMin = y.min ?? 0;
+// the top tick sits at or above the highest value, one step past it at most, and a percentage stops at 100
+const dataMax = Math.max(...ys);
+const yTicks = y.ticks ?? niceTicks(yMin, y.max ?? dataMax, 4);
+if (y.max === undefined && yTicks.length > 1 && yTicks.at(-1)! < dataMax) yTicks.push(Number((yTicks.at(-1)! + yTicks[1] - yTicks[0]).toFixed(10)));
+if (y.unit === '%' && y.max === undefined) while (yTicks.length > 2 && yTicks.at(-2)! >= 100) yTicks.pop();
+const yMax = y.max ?? yTicks.at(-1)!;
+const fmtTick = (t: number) => `${Number.isInteger(t) ? t.toLocaleString('en-US') : t}${y.unit === '%' ? '%' : ''}`;
+// a small value keeps one decimal (a 1.2-point gap), everything else rounds
+const fmtVal = (t: number) => `${y.unit !== '%' && Math.abs(t) < 10 && !Number.isInteger(t) ? t.toFixed(1) : Math.round(t).toLocaleString('en-US')}${y.unit === '%' ? '%' : ''}`;
+const single = series.length === 1;
+
+const sizes = [
+  { key: 'wide', W: w, H: h, font: 12.5 },
+  { key: 'narrow', W: 380, H: nh, font: 11 },
+].map((z) => {
+  const nameW = !single && ends ? Math.max(...series.map((s) => s.label.length)) * z.font * 0.58 + 14 : 0;
+  const pad = { l: 40, r: Math.max(single && ends ? 34 : 14, nameW), t: single && ends ? 24 : 14, b: x.title ? 46 : 28 };
+  if (y.title) pad.l += 14;
+  const X = linear([x.min, x.max], [pad.l, z.W - pad.r]);
+  const Y = linear([yMin, yMax], [z.H - pad.b, pad.t]);
+  const lines = series.map((s) => {
+    // solid runs between gaps, and a dashed run into a point whose period has not ended
+    const solid: string[] = [];
+    const dashed: string[] = [];
+    let d = '';
+    let prev: TPoint | null = null;
+    for (const p of s.pts) {
+      if (p.y === null) {
+        if (d) solid.push(d);
+        d = '';
+        prev = null;
+        continue;
+      }
+      const px = X(p.x).toFixed(1);
+      const py = Y(p.y).toFixed(1);
+      if (!prev) d = `M${px},${py}`;
+      else if (p.partial) {
+        const from = `M${X(prev.x).toFixed(1)},${Y(prev.y!).toFixed(1)}`;
+        dashed.push(s.step ? `${from}H${px}V${py}` : `${from}L${px},${py}`);
+      } else d += s.step ? `H${px}V${py}` : `L${px},${py}`;
+      prev = p;
+    }
+    if (d) solid.push(d);
+    const shown = s.pts.filter((p): p is TPoint & { y: number } => p.y !== null);
+    return { s, solid, dashed, shown };
+  });
+  // names at the line ends, nudged apart when two would touch
+  const names: { s: TSeries; x: number; y: number }[] = [];
+  if (!single && ends)
+    for (const l of [...lines].sort((a, b) => (b.shown.at(-1)?.y ?? 0) - (a.shown.at(-1)?.y ?? 0))) {
+      const last = l.shown.at(-1);
+      if (!last) continue;
+      let ny = Y(last.y) + 4;
+      while (names.some((n) => Math.abs(n.y - ny) < z.font + 2)) ny += z.font + 2;
+      names.push({ s: l.s, x: X(last.x) + 8, y: ny });
+    }
+  return { ...z, pad, X, Y, lines, names };
+});
+---
+
+<figure class="tc">
+  {
+    legend && series.length > 1 && (
+      <ul class="tc-key" aria-hidden="true">
+        {series.map((s) => (
+          <li>
+            <svg width="18" height="10">
+              <line x1="1" x2="17" y1="5" y2="5" stroke={s.color} stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+            {s.label}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+  {
+    sizes.map((z) => (
+      <svg class:list={['tc-svg', z.key === 'wide' ? 'only-wide' : 'only-narrow']} viewBox={`0 0 ${z.W} ${z.H}`} role="img" aria-label={label} style={`--fs:${z.font}px`}>
+        {yTicks.map((t) => (
+          <g>
+            <line class="grid" x1={z.pad.l} x2={z.W - z.pad.r} y1={z.Y(t)} y2={z.Y(t)} />
+            <text class="tick" x={z.pad.l - 8} y={z.Y(t) + 4} text-anchor="end">
+              {fmtTick(t)}
+            </text>
+          </g>
+        ))}
+        {x.ticks.map((t) => (
+          <text class="tick" x={z.X(t.v)} y={z.H - z.pad.b + 18} text-anchor="middle">
+            {t.label}
+          </text>
+        ))}
+        {x.title && (
+          <text class="axis" x={(z.pad.l + z.W - z.pad.r) / 2} y={z.H - 8} text-anchor="middle">
+            {x.title}
+          </text>
+        )}
+        {y.title && (
+          <text class="axis" transform={`translate(12 ${(z.pad.t + z.H - z.pad.b) / 2}) rotate(-90)`} text-anchor="middle">
+            {y.title}
+          </text>
+        )}
+        {z.lines.map((l) => (
+          <g>
+            {l.solid.map((d) => (
+              <path class="ln" d={d} stroke={l.s.color} />
+            ))}
+            {l.dashed.map((d) => (
+              <path class="ln dash" d={d} stroke={l.s.color} />
+            ))}
+          </g>
+        ))}
+        {z.lines.map((l) =>
+          l.shown.map((p, i) => {
+            const end = i === 0 || i === l.shown.length - 1;
+            const r = dots || end ? (end ? 4.5 : 3.5) : 0;
+            return (
+              <g class="pt" data-tv={p.tv ?? fmtVal(p.y)} data-tn={p.tn ?? l.s.label} data-ts={p.ts}>
+                {r > 0 && <circle class:list={['dot', { hollow: p.partial }]} cx={z.X(p.x)} cy={z.Y(p.y)} r={r} fill={p.partial ? 'var(--bg)' : l.s.color} style={p.partial ? `stroke:${l.s.color}` : undefined} />}
+                <circle class="hit" cx={z.X(p.x)} cy={z.Y(p.y)} r="10" />
+              </g>
+            );
+          }),
+        )}
+        {single &&
+          ends &&
+          [z.lines[0].shown[0], z.lines[0].shown.at(-1)].map(
+            (p, i) =>
+              p && (
+                <text class="val" x={z.X(p.x) + (i === 0 ? 6 : 8)} y={z.Y(p.y) - 10} text-anchor="start">
+                  {fmtVal(p.y)}
+                </text>
+              ),
+          )}
+        {z.names.map((n) => (
+          <text class="name" x={n.x} y={n.y}>
+            {n.s.label}
+          </text>
+        ))}
+      </svg>
+    ))
+  }
+</figure>
+
+<style>
+  .tc {
+    margin: 0;
+  }
+  .tc-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    font-size: var(--fs);
+  }
+  .tc-svg.only-narrow {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .tc-svg.only-wide {
+      display: none;
+    }
+    .tc-svg.only-narrow {
+      display: block;
+    }
+  }
+  .tc-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .tc-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .grid {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .tick {
+    fill: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.92em;
+    font-variant-numeric: tabular-nums;
+  }
+  .axis {
+    fill: var(--ink-2);
+    font-weight: 500;
+  }
+  .ln {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .ln.dash {
+    stroke-dasharray: 2 4;
+  }
+  .dot {
+    stroke: var(--bg);
+    stroke-width: 2;
+    paint-order: stroke;
+  }
+  .dot.hollow {
+    stroke-width: 2;
+  }
+  .hit {
+    fill: transparent;
+  }
+  .pt:hover .hit {
+    stroke: var(--ink);
+    stroke-width: 1.2;
+  }
+  .val,
+  .name {
+    fill: var(--ink);
+    font-weight: 500;
+    pointer-events: none;
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 3px;
+    stroke-linejoin: round;
+  }
+  .val {
+    font-variant-numeric: tabular-nums;
+  }
+</style>
