@@ -21724,11 +21724,38 @@
     },
     "access": "private",
     "note": "Added long-horizon problems: investigation, intent understanding, managing jobs and design adherence. Scores do not compare with 3.x.",
+    "successor": "cursorbench-4-1",
     "unit": "%",
     "confidence": "verified",
     "evidence": [
       "https://cursor.com/cursorbench"
     ]
+  },
+  {
+    "id": "cursorbench-4-1",
+    "name": "CursorBench 4.1",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "code",
+    "family": "cursorbench",
+    "version": "4.1",
+    "description": "Ambiguous multi-file coding tasks from real Cursor sessions in Cursor's production harness. Agentic graders score correctness, with cost reported.",
+    "org": "Cursor",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://cursor.com/cursorbench"
+    },
+    "access": "private",
+    "note": "Google first reports version 4.1 in its Gemini 4 Neon launch post. Cursor has not said what changed from 4.0, so scores may not compare.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+    ],
+    "added": "2026-11-18"
   },
   {
     "id": "cusp-scientific-forecasting",
@@ -30943,6 +30970,34 @@
       "https://www.cybergym.io/assets/data/exploitgym.json",
       "https://www.cybergym.io/"
     ]
+  },
+  {
+    "id": "webexploitbench",
+    "name": "WebExploitBench",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents find and exploit 110 vulnerabilities in 15 real web applications, each in its own container. A verifier checks that the agent's proof of concept hits the same endpoint as the reference exploit.",
+    "org": "AgentCyberRange",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.14295",
+      "repo": "https://github.com/AgentCyberRange/WebExploitBench",
+      "dataset": "https://huggingface.co/datasets/AgentCyberRange/WebExploitBench"
+    },
+    "access": "public",
+    "note": "The vulnerabilities are 18 zero-day, 56 one-day and 36 synthetic, across 17 kinds such as SQL injection and SSRF. The repo holds 5 of the 15 apps, and the full set is on Hugging Face behind a gate, for evaluation only. Google reports version 1.2.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "likely",
+    "evidence": [
+      "https://arxiv.org/abs/2606.14295",
+      "https://github.com/AgentCyberRange/WebExploitBench",
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+    ],
+    "added": "2026-11-18"
   },
   {
     "id": "explorationbench-tencent",
