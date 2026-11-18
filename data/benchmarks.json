@@ -3331,8 +3331,12 @@
     "id": "ai-professions-prompt-benchmark",
     "name": "AI Professions Prompt Benchmark",
     "category": "economic-work",
-    "description": "A model drafts everyday work documents from a fictional input: 100 prompts for tasks in 10 professions (accounting, law, healthcare administration, real estate, engineering, sales and others) plus Excel / Microsoft 365, in English, Spanish, French and Portuguese. A cross-family LLM judge marks 5 pass/fail criteria per prompt, hash-locked before any model ran.",
-    "org": "AI Professions (aiprofessions.ai)",
+    "subcategory": "work-occupations",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models draft everyday work documents from fictional inputs: 100 prompts for tasks in 10 professions, such as accounting, law, healthcare administration and real estate, plus Excel and Microsoft 365, in English, Spanish, French and Portuguese. A judge model from another family checks 5 pass or fail criteria per prompt, fixed before any model ran.",
+    "org": "AI Professions",
     "released": "2026-10",
     "links": {
       "paper": "https://aiprofessions.ai/methodology/",
@@ -3341,9 +3345,10 @@
       "leaderboard": "https://aiprofessions.ai/models/ai-model-test-results/"
     },
     "access": "public",
+    "note": "Kept by its makers, who grade GPT-6 Astra with Claude Opus 5.5 and every other model with GPT-6 Astra. Only the models that share that judge are on the board here. Submitted by the makers in issue 10.",
     "unit": "%",
     "better": "higher",
-    "confidence": "likely",
+    "confidence": "verified",
     "evidence": [
       "https://aiprofessions.ai/models/ai-model-test-results/",
       "https://github.com/aiprofessions/prompt-benchmark/blob/main/data/results.csv"

@@ -812,6 +812,14 @@
         "whisper-1_gpt-4o-2024-11-20"
       ]
     },
+    "ai-professions-prompt-benchmark": {
+      "url": "https://aiprofessions.ai/models/ai-model-test-results/",
+      "feed": "https://raw.githubusercontent.com/aiprofessions/prompt-benchmark/main/data/results.csv (per-prompt scores)",
+      "terms": "Per-prompt scores the makers publish in their GitHub repository under CC BY 4.0.",
+      "retrieved": "2026-11-18",
+      "rows": 4,
+      "unmatched": []
+    },
     "ai-spreadsheet-benchmark": {
       "url": "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark",
       "feed": "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark/raw/main/README.md",
@@ -49277,6 +49285,10 @@
     ["ahelm","qwen2-5-omni-7b",null,null,49.51,"2025-03-27",null,null],
     ["ahelm","gemini-2-5-pro-jun-2025",null,null,80.26,"2025-06-05",null,null],
     ["ahelm","gemini-2-5-flash-sep-2025",null,null,49.67,"2025-09-25",null,null],
+    ["ai-professions-prompt-benchmark","claude-sonnet-5",null,null,79.6,"2026-06-30",null,null,null,{"run":"2026-10-21","trials":3}],
+    ["ai-professions-prompt-benchmark","claude-fable-5-1",null,null,82.86,"2026-09-01",null,null,null,{"run":"2026-10-21","trials":3}],
+    ["ai-professions-prompt-benchmark","claude-opus-5-5",null,null,85.94,"2026-09-22",null,null,null,{"run":"2026-10-21","trials":3}],
+    ["ai-professions-prompt-benchmark","gemini-4-argon","medium",null,84.87,"2026-09-30",null,null,null,{"run":"2026-10-21","trials":3}],
     ["ai-wellbeing-index-positive-experiences","grok-4-6",null,null,69.7,"2026-08-12",null,null],
     ["ai-wellbeing-index-positive-experiences","claude-fable-5-1",null,null,77.3,"2026-09-01",null,null],
     ["ai-wellbeing-index-positive-experiences","gemini-3-8-flash",null,null,68.5,"2026-09-02",null,null],
