@@ -1,0 +1,181 @@
+---
+// Insights: the overview of the trend pages (src/pages/insights/), a few headline numbers from them, and the other
+// pages that look back in time. Every number is computed from src/lib/insights.ts.
+import Base from '../../layouts/Base.astro';
+import InsightCards from '../../components/insights/InsightCards.astro';
+import { reportingTrend, evalTrend, saturationCohorts, satCompareMonth, leadTrend, makerTrend, arenaYears, pct } from '../../lib/insights.ts';
+import { SATURATED } from '../../lib/data.ts';
+
+const word = (n: number) => ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][n] ?? String(n);
+
+const r = reportingTrend();
+const rFirst = r.topTen.findIndex((v, i) => v.v !== null && !r.periods[i].partial);
+const rLast = r.topTen.length - 1;
+const e = evalTrend();
+const eLast = e.periods.length - 1;
+const e23 = e.periods.findIndex((p) => p.key === '2023');
+const cs = saturationCohorts();
+const m = satCompareMonth(cs);
+const lt = leadTrend();
+const lLast = lt.periods.length - 1;
+const mk = makerTrend();
+const mkLast = mk.periods.length - 1;
+const acad = mk.kinds.find((k) => k.id === 'academia')!;
+const evalOrgs = mk.kinds.find((k) => k.id === 'eval')!;
+const ay = arenaYears();
+const lead = lt.labs.map((l, k) => ({ l, s: lt.shares[k][lLast] })).filter((x) => x.l.id !== 'other').sort((a, b) => b.s - a.s)[0];
+
+const stats = [
+  {
+    v: pct(r.topTen[rLast].v!),
+    l: `of benchmark mentions in launch posts went to the ten most named in ${r.periods[rLast].name}, down from ${pct(r.topTen[rFirst].v!)} in ${r.periods[rFirst].name}`,
+    href: '/insights/reporting/#over-time',
+  },
+  {
+    v: pct(e.hidden[eLast].v!),
+    l: `of the benchmarks from ${e.periods[eLast].key} keep some test items private, against ${pct(e.hidden[e23].v!)} of those from 2023`,
+    href: '/insights/evals/#built',
+  },
+  {
+    v: pct(cs.at(-1)!.share[m]!),
+    l: `of the benchmarks from ${cs.at(-1)!.year} had a score past ${SATURATED}% ${word(m)} months after release, against ${pct(cs[0].share[m]!)} of those from ${cs[0].year}`,
+    href: '/insights/evals/#saturation',
+  },
+  {
+    v: pct(acad.vals[mkLast].v!),
+    l: `of the new benchmarks from ${mk.periods[mkLast].key} were made with a university or institute, against ${pct(acad.vals[0].v!)} in ${mk.periods[0].key}. Eval orgs made ${pct(evalOrgs.vals[mkLast].v!)}`,
+    href: '/insights/evals/#makers',
+  },
+  {
+    v: `${Math.round(ay.at(-1)!.median)} days`,
+    l: `is how long Arena's number one has lasted in ${ay.at(-1)!.year} so far, at the median, against ${Math.round(ay.at(-2)!.median)} days in ${ay.at(-2)!.year}`,
+    href: '/insights/frontier/#arena',
+  },
+  {
+    v: pct(lead.s),
+    l: `of contested benchmark-days at number one went to ${lead.l.name} in ${lt.periods[lLast].name}`,
+    href: '/insights/frontier/#number-one',
+  },
+];
+
+const elsewhere = [
+  { href: '/time-machine/', name: 'Time machine', what: 'The almanac as it stood on any day since 2023, with who led the capabilities index and Arena.' },
+  { href: '/leaders/', name: 'Leaders', what: 'Who held number one in each category, for how long, and who took benchmarks past 85%.' },
+  { href: '/claims/', name: 'Lab claims next to leaderboards', what: 'How the scores labs publish compare with independent runs of the same models.' },
+  { href: '/cards/', name: 'Model cards', what: 'Every launch post and system card we read, and what labs feature by area each half year.' },
+  { href: '/sql/', name: 'Query with SQL', what: 'Every score and date behind these charts, to query in the browser or download.' },
+];
+---
+
+<Base title="Insights" description="How AI evaluation has changed since 2023, in charts that update with the almanac’s data.">
+  <div class="page in-page">
+    <header class="head">
+      <h1>Insights</h1>
+      <p class="lede">How AI evaluation has changed since 2023. Every chart comes from the same data as the rest of the almanac, and updates with it.</p>
+    </header>
+
+    <section>
+      <InsightCards />
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>In numbers</h2>
+      </div>
+      <ul class="in-stats">
+        {
+          stats.map((s) => (
+            <li>
+              <a href={s.href}>
+                <span class="v num">{s.v}</span>
+                <span class="l">{s.l}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <div class="sh">
+        <h2>Elsewhere in the almanac</h2>
+      </div>
+      <ul class="in-links">
+        {
+          elsewhere.map((x) => (
+            <li>
+              <a href={x.href}>{x.name}</a>
+              <span>{x.what}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .in-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 36px 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (max-width: 960px) {
+    .in-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 520px) {
+    .in-stats {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .in-stats a {
+    display: grid;
+    gap: 8px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .in-stats .v {
+    font-size: 40px;
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .in-stats .l {
+    color: var(--ink-3);
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+  .in-stats a:hover .l {
+    color: var(--ink-2);
+  }
+  .in-links {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 80ch;
+  }
+  .in-links li {
+    display: grid;
+    grid-template-columns: 15em minmax(0, 1fr);
+    gap: 4px 24px;
+  }
+  @media (max-width: 720px) {
+    .in-links li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  .in-links a {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .in-links span {
+    color: var(--ink-3);
+  }
+</style>

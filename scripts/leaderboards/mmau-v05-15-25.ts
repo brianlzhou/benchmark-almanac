@@ -14,7 +14,7 @@ const board: Leaderboard = {
   terms: MMAU_TERMS,
   aliases: MMAU_ALIASES,
   async fetch() {
-    const data=await fetchJson<{leaderboardData:{info:{name:string,type:string,size:string},Avg:Record<string,string>,Sound:Record<string,string>,Music:Record<string,string>,Speech:Record<string,string>}[]}>(MMAU_PAGE+'leaderboard_data_v15_parsed.json');
+    const data=await fetchJson<{leaderboardData:{info:{name:string,type:string,size:string,link?:string},Avg:Record<string,string>,Sound:Record<string,string>,Music:Record<string,string>,Speech:Record<string,string>}[]}>(MMAU_PAGE+'leaderboard_data_v15_parsed.json');
     const rows:LeaderboardRow[]=[];
     for(const e of data.leaderboardData){
       if(['random_guess','human_expert'].includes(e.info.type))continue;
@@ -25,7 +25,7 @@ const board: Leaderboard = {
       if(/^Gemini 2\.[05] (?:Pro|Flash|Flash Lite)$/i.test(model) || /^GPT-4o(?: mini)? Audio$/i.test(model))model+=' (snapshot unspecified)';
       const metrics:Record<string,number>={};
       for(const key of ['Avg','Sound','Music','Speech'] as const)for(const split of ['Test-mini','Test']){const n=num(e[key]?.[split]);if(n!==undefined)metrics[`${key}_${split}`]=n;}
-      rows.push({model,score,metrics});
+      rows.push({open: ['open_source','open_access','open'].includes(e.info.type ?? '') ? true : ['closed','proprietary'].includes(e.info.type ?? '') ? false : undefined, params: /^(\d+(?:\.\d+)?)[BM]$/i.test(e.info.size ?? '') && !/^Gemma 3n$/i.test(e.info.name.trim()) ? parseFloat(e.info.size!) * (/M$/i.test(e.info.size!) ? 0.001 : 1) : undefined, link: e.info.link?.startsWith('https://github.com/') ? e.info.link : undefined, model,score,metrics});
     }
     return rows;
   },

@@ -33,7 +33,7 @@ const board: Leaderboard = {
       const metrics:Record<string,number>={};
       if(typeof ci==='number') Object.assign(metrics,{ciLow:score-ci,ciHigh:score+ci});
       if(typeof votes==='number') metrics.votes=votes;
-      rows.push({model:at('Model') as string,score,metrics});
+      rows.push({model:at('Model') as string,score,metrics,...(typeof ci==='number'&&Number.isFinite(ci)&&ci>=0?{low:score-ci,high:score+ci}:{})});
     }
     if(!rows.length) throw new Error('BigCodeArena returned no ratings');
     return rows;

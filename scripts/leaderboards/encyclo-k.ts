@@ -22,7 +22,7 @@ const board: Leaderboard = {
         for(const r of data) {
           const metrics=Object.fromEntries(Object.entries(r).filter(([k,v])=>typeof v==='number'&&!['rank','avg'].includes(k))) as Record<string,number>;
           let model=r.model;const mode=model.match(/-(no-thinking|non-thinking|thinking|high|medium|low)$/);if(mode)model=model.slice(0,-mode[0].length);
-          out.push({model,score:r.avg,setting:mode?.[1],metrics});
+          out.push({model,score:r.avg,open:r.type==='open'?true:r.type==='closed'?false:undefined,setting:mode?.[1],metrics});
         }
       }return out;
     })();

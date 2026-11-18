@@ -35,10 +35,12 @@ const board: Leaderboard = {
       const model = text(r[1].html.replace(/<p\b[\s\S]*?<\/p>/gi, '')).replace(/🧠/g, '').trim();
       if (!model || /^human$/i.test(model)) continue;
       const date = /^\d{4}-\d\d-\d\d$/.test(r[4].text) ? r[4].text : undefined;
+      const size = r[2]?.text.match(/^(\d+(?:\.\d+)?)([BT])$/);
+      const params = size ? Number(size[1]) * (size[2] === 'T' ? 1000 : 1) : undefined;
       const plain = num(r[5].text);
       const cot = num(r[6].text);
-      if (plain !== undefined) rows.push({ model, score: plain, date });
-      if (cot !== undefined) rows.push({ model, score: cot, setting: 'CoT', date });
+      if (plain !== undefined) rows.push({ model, score: plain, date, params });
+      if (cot !== undefined) rows.push({ model, score: cot, setting: 'CoT', date, params });
     }
     return rows;
   },

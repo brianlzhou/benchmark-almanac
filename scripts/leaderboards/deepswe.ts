@@ -19,6 +19,9 @@ interface Row {
   pass_at_4?: number | null;
   /** Half-width of the 95% run-to-run interval, 0 to 1. */
   ci_half?: number | null;
+  ci_lo?: number | null;
+  ci_hi?: number | null;
+  n_runs?: number | null;
   mean_agent_steps?: number | null;
   mean_duration_seconds?: number | null;
 }
@@ -49,6 +52,9 @@ export function makeDeepSwe(benchmark: string, version: string): Leaderboard {
           score: r.pass_at_1! * 100,
           setting: r.reasoning_effort?.toLowerCase() || undefined,
           harness: r.harness,
+          trials: num(r.n_runs) && Number.isInteger(r.n_runs) && r.n_runs > 0 ? r.n_runs : undefined,
+          low: num(r.ci_lo) ? r.ci_lo * 100 : undefined,
+          high: num(r.ci_hi) ? r.ci_hi * 100 : undefined,
           cost: r.mean_cost_usd ?? undefined,
           tokens: r.mean_output_tokens ?? undefined,
           metrics: {

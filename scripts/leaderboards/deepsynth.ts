@@ -4,7 +4,8 @@ import {fetchText} from '../lib/util.ts';
 import {markdownTables} from '../lib/boards/github-markdown.ts';
 import {num} from '../lib/html.ts';
 const FEED='https://raw.githubusercontent.com/agentdeepsynthesis/deepsynth-bench/HEAD/README.md';
-const board:Leaderboard={benchmark:'deepsynth',url:'https://huggingface.co/spaces/DeepSynthesisTeam/deepsynth-leaderboard',feed:FEED,
+const board:Leaderboard={benchmark:'deepsynth',harnesses:'system',
+ reference:['GPT-5.2-Pro','Gemini-Pro-2.5','GPT-5.1','GPT-4.1','o3','DeepSeek-R1-Chat','o4-mini','DeepSeek-R1-Reasoner'],url:'https://huggingface.co/spaces/DeepSynthesisTeam/deepsynth-leaderboard',feed:FEED,
  terms:'Apache-2.0 repository; raw.githubusercontent.com has no robots.txt.',
  async fetch(){
   const table=markdownTables(await fetchText(FEED)).find(t=>t[0]?.includes('Base model') && t[0]?.includes('Precision'));

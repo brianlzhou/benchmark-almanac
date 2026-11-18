@@ -2,7 +2,7 @@
 // Keep reasoning effort, refusal rates and accuracy intervals; deduplicate the chart's grouping traces.
 // Exclude points the publisher flags as unreliable because of excessive refusals.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { sbCharts, SB_PAGE, SB_TERMS, SB_ALIASES } from './hpct-v2-securebio.ts';
+import { sbFacts, sbCharts, SB_PAGE, SB_TERMS, SB_ALIASES } from './hpct-v2-securebio.ts';
 import { text } from '../lib/html.ts';
 const board:Leaderboard={benchmark:'human-pathogen-capabilities-test-securebio',url:SB_PAGE,feed:SB_PAGE,terms:SB_TERMS,aliases:SB_ALIASES,async fetch(){
  const rows=new Map<string,LeaderboardRow>();
@@ -14,7 +14,7 @@ const board:Leaderboard={benchmark:'human-pathogen-capabilities-test-securebio',
   const name=lines[0].match(/^(.*?)\s*(?:\[([^\]]+)\])?$/)!;
   const model=name[1].trim(); const setting=name[2]??lines.find(l=>/^Reasoning(?: effort)?:/.test(l))?.split(':').slice(1).join(':').trim();
   const refusal=lines.find(l=>l.startsWith('Refusals:'))?.match(/([\d.]+)%/);
-  rows.set(lines[0],{model,score:Number(accuracy[1]),setting,metrics:{ciLow:Number(accuracy[2]),ciHigh:Number(accuracy[3]),...(refusal?{refusalRate:Number(refusal[1])}:{})}});
+  rows.set(lines[0],{...sbFacts(lines, "Accuracy"),model,score:Number(accuracy[1]),setting,metrics:{ciLow:Number(accuracy[2]),ciHigh:Number(accuracy[3]),...(refusal?{refusalRate:Number(refusal[1])}:{})}});
  }
  if(!rows.size)throw new Error('No original HPCT accuracy rows');return [...rows.values()];
 }};

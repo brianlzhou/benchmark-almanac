@@ -17,7 +17,7 @@ const PAGE = 'https://mcpmark.ai/leaderboard';
 interface Overall {
   name: string;
   actualModelName?: string;
-  passAtOne?: { avg?: number };
+  passAtOne?: { avg?: number; std?: number };
   passAtFour?: number;
   passHatFour?: number;
   avgExecutionTime?: number;
@@ -70,6 +70,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (typeof r.passAtFour === 'number') metrics.passAt4 = r.passAtFour * 100;
       if (typeof r.passHatFour === 'number') metrics.pass4 = r.passHatFour * 100;
+      if (typeof r.passAtOne?.std === 'number') metrics.std = r.passAtOne.std * 100;
       if (r.avgExecutionTime) metrics.time = r.avgExecutionTime;
       rows.push({
         model: mode ? mode[1] : r.name,

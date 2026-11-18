@@ -16,10 +16,38 @@ export interface LeaderboardRow {
    * limit, shot count, a prompt or attack mode applied to the whole set.
    */
   setting?: string;
-  /** Agent, scaffold or harness, when the board names one. */
+  /**
+   * Agent, scaffold or harness, when the board names one. Whether a row in it is the model on its own or an agent
+   * system built around the model is the board's call: see `Leaderboard.reference` and `Leaderboard.harnesses`.
+   */
   harness?: string;
   /** When the board says the run was made or submitted (YYYY-MM-DD). */
   date?: string;
+  /** Who submitted or ran the entry, as the board names them: a team, company or person. */
+  submitter?: string;
+  /** Who made the agent or harness, as the board names them. */
+  agentOrg?: string;
+  /** The board's own verified or official mark on this entry. `Leaderboard.verified` says what it means. */
+  verified?: boolean;
+  /**
+   * Every model behind one entry, as the board names them, when it uses more than one: an architect and an
+   * editor, a planner and an executor, a router's pool. `model` names the main one. An entry with several models
+   * is a blend, and the site never credits its score to one model.
+   */
+  models?: string[];
+  /** A link to this entry's own logs, trajectories, transcripts or results. */
+  link?: string;
+  /** How many trials, attempts or runs the score averages, when the board says. */
+  trials?: number;
+  /** The board's uncertainty interval for the score (95% unless the board says otherwise), in the score's unit. */
+  low?: number;
+  high?: number;
+  /** Whether the model's weights are open, as the board marks it. */
+  open?: boolean;
+  /** The model's license, as the board gives it. */
+  license?: string;
+  /** The model's size in billions of parameters, as the board gives it. */
+  params?: number;
   /**
    * Average cost of one task in US dollars, as the board computes it. Boards price runs differently, so
    * costs compare within one board only.
@@ -73,6 +101,19 @@ export interface Leaderboard {
   aliases?: Record<string, string>;
   /** A chart the board draws from more than its headline score. */
   chart?: BoardChart;
+  /**
+   * Harness names that are the board's own way of running every model: Terminus 2 on Terminal-Bench, a plain API
+   * call on LifeSci Diamond. A row in one of them is the model on its own.
+   */
+  reference?: string[];
+  /**
+   * What any other harness name on this board is. 'system' (an agent or product built around the model, such as
+   * "Arca + GPT-6 Astra") shows as its own entry and never counts as the model's score. 'model' (the default)
+   * treats the harness as a label on the model's own score, as when it only names the board's tool setup.
+   */
+  harnesses?: 'system' | 'model';
+  /** What the board's verified mark means, in a few words: "checked by the SWE-bench team". */
+  verified?: string;
   /**
    * What a row's `cost` covers: one task (the default) or the whole run of the test set, as ARC-AGI-3 reports.
    * Pages label the cost axis to match.

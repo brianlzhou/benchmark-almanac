@@ -1,4 +1,4 @@
-// Search by meaning, for the home page search box. Google's EmbeddingGemma 2 (Apache 2.0) turns the query
+// Search by meaning, for the search box and the Build an index picker. Google's EmbeddingGemma 2 (Apache 2.0) turns the query
 // into a vector on the reader's own device, and the benchmarks are ranked by cosine similarity against
 // vectors made ahead of time by scripts/embed.ts (public/meaning/).
 //
@@ -6,6 +6,8 @@
 // and the text part of the model from Hugging Face (about 210 MB the first time, from the browser's cache
 // after that). The worker also holds the vectors and does the ranking, so typing never waits on any of it.
 // It needs WebGPU. A browser without it gets name search only.
+import { readVectors, type Vectors } from '../lib/meaning-rank.ts';
+
 const LIB = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.1/dist/transformers.min.js';
 /** What the first use downloads: the 4-bit text model (175 MB), its tokenizer (32 MB) and the runtime. */
 export const MEANING_MB = 210;
@@ -85,6 +87,7 @@ onmessage = async (e) => {
     for (const x of q) n += x * x;
     n = Math.sqrt(n) || 1;
     for (let i = 0; i < dim; i++) q[i] /= n;
+    if (m.type === 'embed') return postMessage({ type: 'vec', id: m.id, vec: q }, [q.buffer]);
     // cosine against every benchmark, keeping the best k
     const k = m.k, top = [];
     for (let i = 0; i < scales.length; i++) {
@@ -111,11 +114,14 @@ export class Meaning {
   total = 0;
   device = '';
   error = '';
+  /** A copy of the benchmark vectors on the page's side, for rankers that score every row themselves. */
+  vectors: Vectors | null = null;
   private worker?: Worker;
   private ids: string[] = [];
   private query = '';
   private seq = 0;
   private waiting = new Map<number, (top: [number, number][] | null) => void>();
+  private waitingVec = new Map<number, (vec: Float32Array | null) => void>();
   private boot?: { ok: () => void; fail: (e: Error) => void };
 
   constructor(private changed: () => void) {}
@@ -142,6 +148,8 @@ export class Meaning {
       ]);
       this.ids = index.ids;
       this.query = index.query;
+      // the worker takes the buffer, so the page keeps its own copy
+      this.vectors = readVectors(index, bin.slice(0));
       const url = URL.createObjectURL(new Blob([workerCode(index.model)], { type: 'text/javascript' }));
       this.worker = new Worker(url, { type: 'module' });
       this.worker.onmessage = (e) => this.message(e.data);
@@ -166,7 +174,7 @@ export class Meaning {
     this.changed();
   }
 
-  private message(m: { type: string; id?: number; top?: [number, number][]; loaded?: number; total?: number; device?: string; message?: string; ms?: number }) {
+  private message(m: { type: string; id?: number; top?: [number, number][]; vec?: Float32Array; loaded?: number; total?: number; device?: string; message?: string; ms?: number }) {
     if (m.type === 'progress') {
       this.loaded = m.loaded!;
       this.total = m.total!;
@@ -174,6 +182,9 @@ export class Meaning {
     } else if (m.type === 'ready') {
       this.device = m.device!;
       this.boot?.ok();
+    } else if (m.type === 'vec') {
+      this.waitingVec.get(m.id!)?.(m.vec!);
+      this.waitingVec.delete(m.id!);
     } else if (m.type === 'top') {
       const now = performance.now();
       performance.measure('meaning-query', { start: now - (m.ms ?? 0), end: now });
@@ -184,6 +195,8 @@ export class Meaning {
       else {
         this.waiting.get(m.id)?.(null);
         this.waiting.delete(m.id);
+        this.waitingVec.get(m.id)?.(null);
+        this.waitingVec.delete(m.id);
       }
     }
   }
@@ -197,4 +210,25 @@ export class Meaning {
       this.worker!.postMessage({ type: 'search', id, k, text: this.query + text });
     });
   }
+
+  /** The text's vector, normalized and cut to the stored dimensions, or null if the model failed. */
+  embed(text: string): Promise<Float32Array | null> {
+    if (this.state !== 'ready' || !this.worker) return Promise.resolve(null);
+    const id = ++this.seq;
+    return new Promise((done) => {
+      this.waitingVec.set(id, done);
+      this.worker!.postMessage({ type: 'embed', id, text: this.query + text });
+    });
+  }
+}
+
+// One model for the whole page: the header search and the Build an index picker share it, so a reader who uses
+// both downloads and runs it once.
+let shared: Meaning | null = null;
+const listeners = new Set<() => void>();
+export function sharedMeaning(listener: () => void): Meaning {
+  listeners.add(listener);
+  return (shared ??= new Meaning(() => {
+    for (const f of listeners) f();
+  }));
 }

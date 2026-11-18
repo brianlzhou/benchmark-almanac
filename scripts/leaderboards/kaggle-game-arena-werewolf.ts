@@ -4,7 +4,7 @@
 // are per move, so they are metrics (tokensPerTurn, costPerTurn in US dollars), not tokens and cost. Read
 // through the helper in kaggle-game-arena.ts.
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-werewolf',
@@ -13,6 +13,6 @@ const board: Leaderboard = {
   terms: KAGGLE_TERMS,
   aliases: {},
   fetch: () =>
-    kaggleRows('kaggle', 'werewolf', 'Equilibrium Rating', 100, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn' } }),
+    kaggleRowsWithBounds('kaggle', 'werewolf', 'Equilibrium Rating', 100, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn' } }),
 };
 export default board;

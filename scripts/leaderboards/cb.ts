@@ -7,6 +7,7 @@ import type { Leaderboard } from './types.ts';
 import { SUPERGLUE_ALIASES, SUPERGLUE_FEED, SUPERGLUE_PAGE, SUPERGLUE_TERMS, superglueRows } from './superglue.ts';
 
 const board: Leaderboard = {
+  verified: 'approved for publication by SuperGLUE administrators',
   benchmark: 'cb',
   url: SUPERGLUE_PAGE,
   feed: `${SUPERGLUE_FEED}, task CB accuracy`,

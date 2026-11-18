@@ -34,7 +34,7 @@ interface Result {
   macroScore?: number;
   superglueVersion?: number;
   uploaderUid: string;
-  editable?: { name?: string };
+  editable?: { name?: string; url?: string };
   tasks?: Record<string, TaskResult>;
 }
 
@@ -70,12 +70,13 @@ export async function superglueRows(pick: (r: Result, task: (identifier: string)
     });
     const model = r.editable?.name?.trim();
     if (!model || v === undefined || !Number.isFinite(v)) continue;
-    rows.push({ model, score: Number((v * 100).toFixed(2)), date: new Date(r.createdOn).toISOString().slice(0, 10) });
+    rows.push({ model, verified: true, link: r.editable?.url?.startsWith('https://github.com/') ? r.editable.url : undefined, score: Number((v * 100).toFixed(2)), date: new Date(r.createdOn).toISOString().slice(0, 10) });
   }
   return rows;
 }
 
 const board: Leaderboard = {
+  verified: 'approved for publication by SuperGLUE administrators',
   benchmark: 'superglue',
   url: SUPERGLUE_PAGE,
   feed: `${SUPERGLUE_FEED}, macroScore`,

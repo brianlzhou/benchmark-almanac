@@ -21,14 +21,15 @@ interface ScoresData {
   resultsVersion?: string;
   benchmarkWeights: Record<string, number>;
   modelBenchmarkData: Record<string, Record<string, Record<string, Cell>>>;
-  aggregatedScores?: Record<string, { avg: number; std?: number }>;
-  timeData?: Record<string, { hours?: number }>;
+  aggregatedScores?: Record<string, { avg: number; std?: number; n?: number }>;
+  timeData?: Record<string, { hours?: number; stdHours?: number; n?: number }>;
 }
 interface AgentInfo {
   name?: string;
   scaffold?: string;
   reasoningEffort?: string;
   chartSourceLabel?: string;
+  verificationNote?: string;
   isBaseline?: boolean;
   isExternal?: boolean;
 }
@@ -70,6 +71,7 @@ function parseAgentInfo(js: string): Record<string, AgentInfo> {
       scaffold: str('scaffold'),
       reasoningEffort: str('reasoningEffort'),
       chartSourceLabel: str('chartSourceLabel'),
+      verificationNote: str('verificationNote'),
       isBaseline: bool('isBaseline'),
       isExternal: bool('isExternal'),
     };
@@ -84,6 +86,8 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
   const feed = SITE + FILES[version];
   return {
     benchmark,
+    harnesses: 'system',
+    verified: 'reviewed by PostTrainBench',
     url: version === 'v1.2' ? SITE : `${SITE}?version=${version}`,
     feed,
     terms: 'Generated data file on the PostTrainBench site; the benchmark repository (aisa-group/PostTrainBench) is MIT-licensed.',
@@ -122,11 +126,17 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
         const metrics: Record<string, number> = {};
         const sd = data.aggregatedScores?.[key]?.std;
         const hours = data.timeData?.[key]?.hours;
-        if (typeof sd === 'number') metrics.sd = sd;
+        if (typeof sd === 'number') { metrics.sd = sd; metrics.std = sd; }
+        const time = data.timeData?.[key];
+        if (typeof time?.stdHours === 'number') metrics.runHoursStd = time.stdHours;
+        if (typeof time?.n === 'number') metrics.runtimeTrials = time.n;
         if (typeof hours === 'number') metrics.runHours = hours;
         rows.push({
           model: ctx ? a.name.slice(0, ctx.index) : a.name,
           score,
+          trials: data.aggregatedScores?.[key]?.n,
+          submitter: a.isExternal ? a.chartSourceLabel : undefined,
+          verified: /reviewed by PostTrainBench/.test(a.verificationNote ?? '') ? true : undefined,
           setting: setting || undefined,
           harness: a.isExternal ? `${a.name} (${a.chartSourceLabel ?? 'external'})` : a.scaffold,
           metrics: Object.keys(metrics).length ? metrics : undefined,

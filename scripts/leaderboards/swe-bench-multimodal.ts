@@ -1,13 +1,14 @@
 // SWE-bench Multimodal: the "Multimodal" board in the same swebench.com data file as SWE-bench Verified
 // (JavaScript issues with images), scored as % resolved. Read through the helper in swe-bench-verified.ts.
 import type { Leaderboard } from './types.ts';
-import { SWE_BENCH_ALIASES, SWE_BENCH_FEED, SWE_BENCH_TERMS, sweBenchRows } from './swe-bench-verified.ts';
+import { SWE_BENCH_ALIASES, SWE_BENCH_FEED, SWE_BENCH_TERMS, sweBenchRows, SWE_BENCH_BOARD } from './swe-bench-verified.ts';
 
 const board: Leaderboard = {
   benchmark: 'swe-bench-multimodal',
   url: 'https://www.swebench.com/multimodal.html',
   feed: `${SWE_BENCH_FEED} (board "Multimodal")`,
   terms: SWE_BENCH_TERMS,
+  ...SWE_BENCH_BOARD,
   aliases: {
     ...SWE_BENCH_ALIASES,
     // every "Claude 3.5 Sonnet" row here is tagged "Model: claude-3-5-sonnet-20241022", although the

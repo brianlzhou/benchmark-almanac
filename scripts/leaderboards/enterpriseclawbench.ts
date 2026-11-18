@@ -12,7 +12,7 @@ const PAGE = 'https://frontisai.github.io/EnterpriseClawBench/';
 const FEED = `${PAGE}ecb-data.js`;
 
 interface Data {
-  combos: { model?: string; harnessLabel?: string; primaryScore?: number; medianSec?: number | null; costRmb?:number; costPerCompleted?:number }[];
+  combos: { model?: string; harnessLabel?: string; primaryScore?: number; medianSec?: number | null; avgSec?: number; turnAvg?: number; costRmb?:number; costPerCompleted?:number }[];
 }
 
 const board: Leaderboard = {
@@ -36,7 +36,7 @@ const board: Leaderboard = {
         model: c.model,
         harness: c.harnessLabel,
         score: Number((c.primaryScore * 100).toFixed(2)),
-        metrics: {...(typeof c.medianSec==='number'&&c.medianSec>0?{latency:Math.round(c.medianSec)}:{}),...(Number.isFinite(c.costRmb)?{'run cost (RMB)':c.costRmb!}:{}),...(Number.isFinite(c.costPerCompleted)?{'cost per completed task (RMB)':c.costPerCompleted!}:{})},
+        metrics: {...(typeof c.avgSec==='number'?{time:c.avgSec}:{}),...(typeof c.turnAvg==='number'?{turns:c.turnAvg}:{}),...(typeof c.medianSec==='number'&&c.medianSec>0?{latency:Math.round(c.medianSec)}:{}),...(Number.isFinite(c.costRmb)?{'run cost (RMB)':c.costRmb!}:{}),...(Number.isFinite(c.costPerCompleted)?{'cost per completed task (RMB)':c.costPerCompleted!}:{})},
       });
     }
     return rows;

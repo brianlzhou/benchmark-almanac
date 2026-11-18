@@ -77,9 +77,14 @@ export function parseCsv(text: string): Record<string, string>[] {
   return body.map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ''])));
 }
 
+/** Called with every body fetchText reads. The leaderboard sync's field watch listens here (scripts/lib/feed-fields.ts). */
+export const bodyHooks: ((url: string, body: string) => void)[] = [];
+
 /** `timeoutMs` bounds one attempt: 60 seconds by default, longer for a big file (PolicyBench's is 139 MB). */
 export async function fetchText(url: string, init: RequestInit = {}, tries = 3, timeoutMs = 60_000): Promise<string> {
-  return fetchBody(url, init, tries, timeoutMs, (res) => res.text());
+  const body = await fetchBody(url, init, tries, timeoutMs, (res) => res.text());
+  for (const hook of bodyHooks) hook(url, body);
+  return body;
 }
 
 /** A binary file, such as Parquet, with fetchText's retries. */

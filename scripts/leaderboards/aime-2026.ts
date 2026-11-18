@@ -3,7 +3,7 @@
 // MathArena publishes no results file (its GitHub repo has code only, and the Hugging Face *_outputs
 // datasets lag the site), so the importer reads that table. The other MathArena importers reuse
 // matharenaRows from this file. Besides cost and output tokens per answer, each row keeps the table's
-// "Average Time" per answer (metrics.latency, seconds) and the accuracy's 95% interval (metrics.ciLow, ciHigh).
+// "Average Time" per answer (metrics.latency, seconds) and the accuracy's 95% interval.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -68,11 +68,25 @@ export async function matharenaRows(comp: string): Promise<LeaderboardRow[]> {
     const tds = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => text(c[1]));
     const time = timeCol >= 0 && tds.length === head.length ? tds[timeCol].match(/^(?:(\d+)h\s*)?(?:(\d+)m\s*)?(?:(\d+(?:\.\d+)?)s)?$/) : null;
     if (time && time[0]) metrics.latency = 3600 * Number(time[1] ?? 0) + 60 * Number(time[2] ?? 0) + Number(time[3] ?? 0);
+    const column = (label: string) => tds.length === head.length ? tds[head.indexOf(label)] : undefined;
+    const parameterCount = (label: string) => {
+      const value = column(label);
+      return value && /^\d+(?:\.\d+)?$/.test(value) ? Number(value) : undefined;
+    };
+    const activeParams = parameterCount('Active Parameters');
+    if (activeParams !== undefined) metrics.activeParams = activeParams;
+    const openMark = column('Open');
+    const href = tr.match(/<a class="model-link"[^>]*href="([^"]+)"/)?.[1];
     rows.push({
       model,
       score,
       setting,
       harness,
+      open: openMark?.includes('✔') ? true : openMark?.includes('❌') ? false : undefined,
+      params: parameterCount('Parameters'),
+      link: href?.startsWith('/models/') ? new URL(href, 'https://matharena.ai').href : undefined,
+      low: ci ? +(score - Number(ci[1])).toFixed(2) : undefined,
+      high: ci ? +(score + Number(ci[1])).toFixed(2) : undefined,
       cost: cell('cost'),
       tokens: cell('tokens'),
       metrics: Object.keys(metrics).length ? metrics : undefined,

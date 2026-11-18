@@ -1,4 +1,5 @@
-import {fetchScaleEntries,scaleRows,scaleFeed,SCALE_ALIASES} from '../lib/scale.ts';
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
+import {fetchScaleEntries,scaleFeed,SCALE_ALIASES} from '../lib/scale.ts';
 const URL='https://labs.scale.com/leaderboard/tutorbench';
 export default {benchmark:'tutorbench',url:URL,feed:scaleFeed(URL),
  terms:'Scale terms restrict automated access and license supported-browser use for internal purposes. The Almanac credits Scale AI and links the source.',

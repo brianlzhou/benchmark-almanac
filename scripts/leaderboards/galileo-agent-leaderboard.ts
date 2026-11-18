@@ -16,7 +16,12 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const r of parseCsv(await fetchText(galileoFeed('results_v1.csv')))) {
       const score = Number(r['Model Avg']);
-      if (r.Model && r.Model !== 'Dataset Avg' && Number.isFinite(score)) rows.push({ model: r.Model.trim(), score, date: stampDate(r.Model.trim()), metrics:Object.fromEntries([...["Input cost per million token","Output cost per million token"].map(k=>[k,Number(r[k])])].filter(p=>Number.isFinite(p[1]))) });
+      const prices: Record<string, number> = {};
+      for (const [key, column] of [['priceIn', 'Input cost per million token'], ['priceOut', 'Output cost per million token']] as const) {
+        const value = r[column]?.trim() ? Number(r[column]) : NaN;
+        if (Number.isFinite(value)) prices[key] = value;
+      }
+      if (r.Model && r.Model !== 'Dataset Avg' && Number.isFinite(score)) rows.push({ model: r.Model.trim(), score, date: stampDate(r.Model.trim()), metrics:{...prices,...Object.fromEntries([...["Input cost per million token","Output cost per million token"].map(k=>[k,Number(r[k])])].filter(p=>Number.isFinite(p[1])))} });
     }
     // A submission date alone does not identify an undated model snapshot.
     return rows.map(r => ({...r, model: /^(?:gpt[- ]?4o|gemini[- ]?[12][.]5[- ]?(?:pro|flash)|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));

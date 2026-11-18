@@ -19,16 +19,21 @@ const FEED = HARBOR_FEED;
 export type Link = string | { label?: string; url?: string };
 interface Row {
   status?: string;
+  n_trials?: number;
   metadata: {
     agent_display?: Link;
+    pr_url?: Link;
     model_display?: Link;
     model_names?: string[];
     reasoning_effort?: string;
+    agent_org?: Link;
+    verified?: boolean;
     date?: string;
     release_date?: string;
   };
   metrics: {
     accuracy?: number;
+    accuracy_stderr?: number;
     n_trials?: number;
     total_cost_usd?: number;
     output_tokens?: number;
@@ -44,17 +49,19 @@ interface Row {
 const num = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 
 /** Cost, tokens and other numbers from a row's metrics, per trial where the feed gives totals. */
-function extrasOf(m: Row['metrics']): Pick<LeaderboardRow, 'cost' | 'tokens' | 'metrics'> {
+function extrasOf(m: Row['metrics'], costPerRun = false): Pick<LeaderboardRow, 'cost' | 'tokens' | 'metrics'> {
   const n = num(m.n_trials) && m.n_trials > 0 ? m.n_trials : undefined;
   const metrics: Record<string, number> = {};
   for (const k of [2, 3, 4, 5] as const) {
     const v = m[`pass_at_${k}`];
     if (num(v)) metrics[`passAt${k}`] = Math.round(v * 1e4) / 100;
   }
+  if (num(m.accuracy_stderr)) metrics.stderr = m.accuracy_stderr;
   if (num(m.accuracy_ci95_half_width)) metrics.ci95 = m.accuracy_ci95_half_width;
   if (num(m.avg_trial_duration_sec) && m.avg_trial_duration_sec > 0) metrics.time = m.avg_trial_duration_sec;
   return {
-    cost: n && num(m.total_cost_usd) && m.total_cost_usd > 0 ? m.total_cost_usd / n : undefined,
+    cost: num(m.total_cost_usd) && m.total_cost_usd >= 0
+      ? costPerRun ? m.total_cost_usd : n ? m.total_cost_usd / n : undefined : undefined,
     tokens: n && num(m.output_tokens) && m.output_tokens > 0 ? m.output_tokens / n : undefined,
     metrics: Object.keys(metrics).length ? metrics : undefined,
   };
@@ -71,6 +78,7 @@ export function makeTerminalBench(opts: {
   aliases?: Record<string, string>;
   /** Also read cost, output tokens, pass@k, the confidence interval and trial time, and declare the Pareto chart. */
   extras?: boolean;
+  costPer?: 'run';
   /**
    * An earlier board of the same tasks, graded the older way. Its rows fill in runs the main board doesn't have
    * yet, with "<version> grader" added to their setting.
@@ -79,7 +87,13 @@ export function makeTerminalBench(opts: {
 }): Leaderboard {
   return {
     benchmark: opts.benchmark,
+    costPer: opts.costPer,
     url: `https://www.tbench.ai/?version=${opts.version}`,
+    // every entry is an agent and a model. Terminus 2 is the board's own agent (data/harnesses.json); the others are
+    // agents built around the model, shown as their own entries
+    harnesses: 'system',
+    reference: ['Terminus 2'],
+    verified: 'marked verified on the Terminal-Bench board',
     feed: `${FEED} (POST {"package":"${opts.pkg}","name":"${opts.name}"})`,
     terms:
       'Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.',
@@ -103,16 +117,28 @@ export function makeTerminalBench(opts: {
         const out: LeaderboardRow[] = [];
         for (const r of res.rows) {
           if (r.status && r.status !== 'display') continue;
-          const model = label(r.metadata.model_display);
-          // "Multiple" marks agents that route between models; there is no one model to credit
-          if (!model || /^multiple$/i.test(model)) continue;
+          const names = (r.metadata.model_names ?? []).filter(Boolean);
+          // "Multiple" marks agents that use several models: a blend, named by its first model and listed in full
+          const multiple = /^multiple$/i.test(label(r.metadata.model_display) ?? '');
+          const model = multiple ? names[0] : label(r.metadata.model_display);
+          if (!model) continue;
+          const half = r.metrics.accuracy_ci95_half_width;
+          const score = Number(r.metrics.accuracy);
+          const trials = r.metrics.n_trials ?? r.n_trials;
+          const link = typeof r.metadata.pr_url === 'string' ? r.metadata.pr_url : r.metadata.pr_url?.url;
           out.push({
             model,
-            score: Number(r.metrics.accuracy),
+            score,
+            trials: num(trials) && trials > 0 ? trials : undefined,
+            link: link?.startsWith('https://') ? link : undefined,
             setting: r.metadata.reasoning_effort?.toLowerCase() || undefined,
             harness: label(r.metadata.agent_display),
             date: r.metadata.date ?? r.metadata.release_date,
-            ...(opts.extras ? extrasOf(r.metrics) : {}),
+            agentOrg: label(r.metadata.agent_org) || undefined,
+            verified: typeof r.metadata.verified === 'boolean' ? r.metadata.verified : undefined,
+            ...(multiple && names.length > 1 ? { models: names } : {}),
+            ...(num(half) && half >= 0 ? { low: score - half, high: score + half } : {}),
+            ...(opts.extras ? extrasOf(r.metrics, opts.costPer === 'run') : {}),
           });
         }
         return out;

@@ -2,7 +2,7 @@
 // ZeroEval-main/result_dirs/zebra-grid.summary.json: per run the model, decoding mode, Puzzle Acc (share of
 // puzzles solved fully, 0 to 100), Cell Acc and splits by size. The Space keeps only runs over all 1,000
 // puzzles, and so does the importer. Puzzle Acc is the score. "o3-mini-2025-01-31-high" carries the reasoning
-// effort, which becomes the setting, and "@together" style suffixes name the API provider, kept as harness.
+// effort, which becomes the setting, and "@together" style suffixes name the API provider, kept in the setting.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -12,6 +12,8 @@ interface Run {
   Model: string;
   'Puzzle Acc': string;
   'Total Puzzles': number;
+  N_Mode?: string;
+  N_Size?: number;
 }
 
 /**
@@ -62,10 +64,10 @@ const board: Leaderboard = {
       let model = r.Model.trim();
       const unlisted = UNLISTED.has(model);
       let setting: string | undefined;
-      let harness: string | undefined;
+      let provider: string | undefined;
       const at = model.match(/@([\w-]+)$/);
       if (at) {
-        harness = at[1];
+        provider = at[1];
         model = model.slice(0, at.index);
       }
       // Retain repeat evaluations as separate configurations.
@@ -75,7 +77,7 @@ const board: Leaderboard = {
       }
       if (unlisted) model += " (unlisted snapshot)";
       const effort = model.match(/^(o\d-mini)-\d{4}-\d\d-\d\d-(low|medium|high)$/);
-      rows.push({ model: effort ? effort[1] : model, setting: effort?.[2] ?? setting, harness, score });
+      rows.push({ model: effort ? effort[1] : model, setting: [effort?.[2] ?? setting, provider ? `provider: ${provider}` : undefined].filter(Boolean).join('; ') || undefined, trials: r.N_Mode === 'single' && r.N_Size === 1 ? 1 : undefined, score });
     }
     if (!rows.length) throw new Error('no full runs in the summary');
     return rows;

@@ -13,6 +13,14 @@ interface Entry {
   date?: string;
   overall?: string | number;
   type?: string;
+  size?: string;
+  open?: boolean;
+  link?: string;
+  operation?: string | number;
+  logic?: string | number;
+  cipher?: string | number;
+  puzzle?: string | number;
+  counterfactual?: string | number;
 }
 
 const board: Leaderboard = {
@@ -46,14 +54,27 @@ const board: Leaderboard = {
       const score = Number(e.overall);
       if (!Number.isFinite(score)) continue;
       let model = e.model.trim();
-      let date = e.date;
+      const date = e.date;
       const snap = model.match(/\s*\((\d{4}-\d\d-\d\d)\)$/);
       if (snap) {
-        date = snap[1];
         model = model.slice(0, snap.index).trim();
       }
       if (e.type && e.type !== 'chat model') model += ' (base)';
-      rows.push({ model, score, date, setting: e.type ?? 'chat model' });
+      const metrics: Record<string, number> = {};
+      for (const [key, value] of [['operation', e.operation], ['logic', e.logic], ['cipher', e.cipher], ['puzzle', e.puzzle]] as const) {
+        const n = Number(value);
+        if (Number.isFinite(n)) metrics[key] = n;
+      }
+      const counter = String(e.counterfactual ?? '').match(/^([\d.]+)(?:\(([\d.]+)\))?$/);
+      if (counter) {
+        metrics.counterfactual = Number(counter[1]);
+        if (counter[2]) metrics.counterfactualStd = Number(counter[2]);
+      }
+      const params = String(e.size ?? '').match(/^(\d+(?:\.\d+)?)B$/i)?.[1];
+      rows.push({ model, score, date, setting: e.type ?? 'chat model',
+        ...(params ? { params: Number(params) } : {}),
+        ...(typeof e.open === 'boolean' ? { open: e.open } : {}),
+        metrics });
     }
     if (!rows.length) throw new Error('no chat-model rows in the KOR-Bench data');
     return rows;

@@ -2,7 +2,7 @@
 // named in a year, and one waffle per lab of what it named, by area. The server renders the default year with
 // these and the page script renders the others with the same code. No data imports here: the browser loads it.
 
-import { matrix, labHabits, esc, markHtml, FRONTIER_LABS, type RData, type View, type Row, type LabHabit } from './reporting-view.ts';
+import { matrix, labHabits, esc, markHtml, forModels, FRONTIER_LABS, type RData, type View, type Row, type LabHabit } from './reporting-view.ts';
 
 export const AREA_ORDER = ['knowledge', 'reasoning', 'code', 'agents', 'work', 'multimodal', 'safety', 'other'];
 
@@ -358,7 +358,7 @@ function drawSwarm(d: RData, v: View, o: SwarmOpts, pad: number): { svg: string;
     axis =
       `<line class="rp-axl" x1="${f1(dx + at(0.5))}" x2="${f1(dx + at(maxLabs + 0.5))}" y1="${f1(axisY)}" y2="${f1(axisY)}"/>` +
       ticks.map((t) => `<line class="rp-axl" x1="${f1(dx + at(t))}" x2="${f1(dx + at(t))}" y1="${f1(axisY)}" y2="${f1(axisY + 4)}"/><text class="rp-tk num" x="${f1(dx + at(t))}" y="${f1(axisY + 17)}" text-anchor="middle">${t}</text>`).join('') +
-      `<text class="rp-at" x="${f1(dx + at(0.5))}" y="${f1(axisY + 36)}">${v.frontier ? 'Frontier labs' : 'Labs'} that named it in ${esc(v.year)}</text>`;
+      `<text class="rp-at" x="${f1(dx + at(0.5))}" y="${f1(axisY + 36)}">${v.frontier ? 'Frontier labs' : 'Labs'} that named it${forModels(v)} in ${esc(v.year)}</text>`;
   } else {
     dx = 40 - Math.min(...dots.map((p) => p.x - p.r));
     dy = 34 - Math.min(...ys) + pad;
@@ -404,7 +404,7 @@ function drawSwarm(d: RData, v: View, o: SwarmOpts, pad: number): { svg: string;
   const labelSvg = labels
     .map((l) => `<text class="rp-lb" x="${f1(l.x + dx)}" y="${f1(l.y + dy)}">${esc(l.name)}<tspan class="rp-lbn num" dx="5">${l.n}</tspan></text>`)
     .join('');
-  const aria = `Every benchmark ${who(v)} named in ${v.year}, one shape each, placed by how many labs named it and sized by how many releases did. ${num(rows.length)} benchmarks, ${num(once.length)} named by one lab. ${top
+  const aria = `Every benchmark ${who(v)} named${forModels(v)} in ${v.year}, one shape each, placed by how many labs named it and sized by how many releases did. ${num(rows.length)} benchmarks, ${num(once.length)} named by one lab. ${top
     .slice(0, 3)
     .map((p) => `${p.row.name}: ${p.row.labs} labs`)
     .join('. ')}.`;
@@ -420,15 +420,16 @@ export function heroHead(d: RData, v: View): string {
   const once = m.rows.filter((r) => r.labs === 1).length;
   if (!m.rows.length) return `No benchmarks named in ${v.year}`;
   return v.frontier
-    ? `Of the ${num(m.rows.length)} benchmarks frontier labs named in ${v.year}, ${num(once)} were named by just one of them`
-    : `Of the ${num(m.rows.length)} benchmarks labs named in ${v.year}, ${num(once)} were named by just one lab`;
+    ? `Of the ${num(m.rows.length)} benchmarks frontier labs named${forModels(v)} in ${v.year}, ${num(once)} were named by just one of them`
+    : `Of the ${num(m.rows.length)} benchmarks labs named${forModels(v)} in ${v.year}, ${num(once)} were named by just one lab`;
 }
 
 /** The opening paragraph's numbers. */
 export function heroLede(d: RData, v: View): string {
-  const all = d.sources[v.year] ?? { posts: 0, docs: 0, frontier: { posts: 0, docs: 0 } };
-  const s = v.frontier ? all.frontier : all;
-  return `We counted every benchmark named in the ${num(s.posts)} launch posts ${who(v)} published in ${v.year}, and in the ${num(s.docs)} system cards, model cards and technical reports published with them. Each shape below is one benchmark. The more ${who(v)} named it, the further right it sits, and the more releases named it, the bigger it is.`;
+  const none = { posts: 0, docs: 0 };
+  const all = d.sources[v.year] ?? { ...none, frontier: none, models: none, frontierModels: none };
+  const s = v.frontier ? (v.models ? all.frontierModels : all.frontier) : v.models ? all.models : all;
+  return `We counted every benchmark named in the ${num(s.posts)} launch posts ${who(v)} published${forModels(v)} in ${v.year}, and in the ${num(s.docs)} system cards, model cards and technical reports published with them. Each shape below is one benchmark. The more ${who(v)} named it, the further right it sits, and the more releases named it, the bigger it is.`;
 }
 
 /** The lookup table's heading: the benchmark the most labs named. */
@@ -442,12 +443,12 @@ export function lookupHead(d: RData, v: View): string {
     // in a year when not every frontier lab published scores, say whose count it is
     const all = `all ${word(m.totalLabs)} frontier labs${m.totalLabs < FRONTIER_LABS.length ? ' that published scores' : ''}`;
     return tied.length === 1
-      ? `${lead.name} was the only benchmark ${all} named in ${v.year}`
-      : `${word(tied.length).replace(/^./, (c) => c.toUpperCase())} benchmarks were named by ${all} in ${v.year}`;
+      ? `${lead.name} was the only benchmark ${all} named${forModels(v)} in ${v.year}`
+      : `${word(tied.length).replace(/^./, (c) => c.toUpperCase())} benchmarks were named by ${all}${forModels(v)} in ${v.year}`;
   }
-  if (tied.length === 1) return `${lead.name} was named by ${lead.labs} of the ${m.totalLabs} ${who(v)} that published scores in ${v.year}`;
+  if (tied.length === 1) return `${lead.name} was named by ${lead.labs} of the ${m.totalLabs} ${who(v)} that published scores${forModels(v)} in ${v.year}`;
   const names = tied.length > 2 ? `${tied.length} benchmarks` : tied.map((r) => r.name).join(' and ');
-  return `${names} were each named by ${lead.labs} of the ${m.totalLabs} ${who(v)} that published scores in ${v.year}`;
+  return `${names} were each named by ${lead.labs} of the ${m.totalLabs} ${who(v)} that published scores${forModels(v)} in ${v.year}`;
 }
 
 /** The lookup's paragraph: which labs the columns are. */
@@ -566,10 +567,10 @@ export function printsHead(d: RData, v: View): string {
     const fall = [...all].sort((x, y) => x.to - x.from - (y.to - y.from))[0];
     const moved = gain && gain.to - gain.from >= 0.01 ? gain : fall;
     if (moved && Math.round(moved.to * 100) !== Math.round(moved.from * 100))
-      return `${name(moved.a)} ${moved.to > moved.from ? 'rose' : 'fell'} from ${pct(moved.from)} of what ${who(v)} reported in ${prevYear} to ${pct(moved.to)} in ${v.year}`;
+      return `${name(moved.a)} ${moved.to > moved.from ? 'rose' : 'fell'} from ${pct(moved.from)} of what ${who(v)} reported${forModels(v)} in ${prevYear} to ${pct(moved.to)} in ${v.year}`;
   }
   const topA = Object.entries(now).sort((a, b) => b[1] - a[1])[0];
-  return topA ? `${name(topA[0])} made up ${pct(topA[1])} of what ${who(v)} reported in ${v.year}, more than any other area` : `What each lab reported in ${v.year}`;
+  return topA ? `${name(topA[0])} made up ${pct(topA[1])} of what ${who(v)} reported${forModels(v)} in ${v.year}, more than any other area` : `What each lab reported in ${v.year}`;
 }
 
 /** The lab section's paragraph. */
@@ -578,5 +579,5 @@ export function printsLede(d: RData, v: View): string {
   const labs = v.frontier
     ? `the ${word(n)} frontier labs${n < FRONTIER_LABS.length ? ' with two or more releases' : ''}`
     : `the ${n} labs with the most releases`;
-  return `What each of ${labs} named in ${v.year}, by area. Each grid has 100 shapes, one for every 1% of the benchmarks the lab named across its releases. Labs with similar mixes sit side by side. "Their own" is the share the lab made itself, alone or with others, and "Shared" is the share that at least three other ${who(v)} also named that year.`;
+  return `What each of ${labs} named${forModels(v)} in ${v.year}, by area. Each grid has 100 shapes, one for every 1% of the benchmarks the lab named across its releases. Labs with similar mixes sit side by side. "Their own" is the share the lab made itself, alone or with others, and "Shared" is the share that at least three other ${who(v)} also named that year.`;
 }

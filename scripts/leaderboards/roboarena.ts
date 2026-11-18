@@ -31,7 +31,7 @@ const board: Leaderboard = {
       if (!p.policy || typeof p.score !== 'number' || !Number.isFinite(p.score) || (p.num_evals ?? 0) <= 0) continue;
       const official=(p.num_evals ?? 0)>=OFFICIAL_EVALS;
       rows.push({ model: p.policy, score: p.score, setting:official?undefined:'unofficial; fewer than 100 evaluations',
-        metrics:{evaluations:p.num_evals!,official:Number(official),...(typeof p.std==='number'?{sd:p.std}:{})} });
+        metrics:{evaluations:p.num_evals!,official:Number(official),...(typeof p.std==='number'?{sd:p.std,std:p.std}:{})} });
     }
     if (!rows.length) throw new Error('no official RoboArena rows');
     return rows;

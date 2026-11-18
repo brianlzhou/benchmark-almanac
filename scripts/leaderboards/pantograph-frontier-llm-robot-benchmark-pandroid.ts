@@ -12,7 +12,7 @@ const board: Leaderboard = {
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {
-const s=nextFlight(await fetchText(FEED));const d=jsonAfter<Record<string,any>>(s,'"scores":');const rows:LeaderboardRow[]=[];for(const task of Object.values(d))for(const [id,model] of [['astra','GPT-6 Astra'],['fable','Claude Fable 5.1']]){const r=task.scores[id];if(!r)continue;rows.push({model,harness:'Pantograph Pandroid',score:r.mean*100,setting:`${task.label}; low; 20 minutes or 96 turns`,metrics:{successes:r.successes,trials:r.environmentCount,ciLow:r.ciLow*100,ciHigh:r.ciHigh*100}});}if(!rows.length)throw new Error('No robot results');
+const s=nextFlight(await fetchText(FEED));const d=jsonAfter<Record<string,any>>(s,'"scores":');const rows:LeaderboardRow[]=[];for(const task of Object.values(d))for(const [id,model] of [['astra','GPT-6 Astra'],['fable','Claude Fable 5.1']]){const r=task.scores[id];if(!r)continue;rows.push({model,harness:'Pantograph Pandroid',score:r.mean*100,low:r.ciLow*100,high:r.ciHigh*100,setting:`${task.label}; low; 20 minutes or 96 turns`,metrics:{successes:r.successes,trials:r.environmentCount,ciLow:r.ciLow*100,ciHigh:r.ciHigh*100}});}if(!rows.length)throw new Error('No robot results');
 return rows.filter(r => r.setting!.startsWith('Overall; ')).map(r => ({...r,
  setting:r.setting!.replace('Overall; ',''), metrics:{...r.metrics,...Object.fromEntries(rows
   .filter(x => x.model===r.model && !x.setting!.startsWith('Overall; '))

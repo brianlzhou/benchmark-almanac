@@ -13,6 +13,8 @@ const FEED = 'https://sec-bench.github.io/data/results.json';
 const SNAPSHOT = '260505';
 
 interface Result {
+  verified?: boolean;
+  open_source?: boolean;
   agent?: string;
   model: string;
   effort?: string;
@@ -32,6 +34,8 @@ const key = (r: { agent?: string; model: string; effort?: string }) => `${r.agen
 
 const board: Leaderboard = {
   benchmark: 'sec-bench-pro',
+  harnesses: 'system',
+  verified: 'marked verified on the SEC-bench board',
   url: 'https://sec-bench.github.io',
   feed: `${FEED} (snapshot ${SNAPSHOT}, overall)`,
   terms: 'Static JSON on the SEC-bench GitHub Pages site, whose repository is Apache-2.0; the SEC-bench Pro repository is MIT.',
@@ -67,6 +71,8 @@ const board: Leaderboard = {
       rows.push({
         model: r.model,
         score,
+        verified: typeof r.verified === 'boolean' ? r.verified : undefined,
+        open: typeof r.open_source === 'boolean' ? r.open_source : undefined,
         setting: r.effort?.toLowerCase() || undefined,
         harness: r.agent,
         date: r.date,

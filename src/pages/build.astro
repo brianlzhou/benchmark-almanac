@@ -39,6 +39,31 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 
     <section class="bm-grid">
       <div class="bm-panel">
+        <div class="bm-block bm-ask">
+          <h2 class="bm-label"><label for="bm-ask">Describe what you care about</label></h2>
+          <form class="bm-askrow" data-ask-form>
+            <input
+              id="bm-ask"
+              class="field"
+              type="search"
+              placeholder="How well a model searches the web for facts"
+              autocomplete="off"
+              spellcheck="false"
+              maxlength="200"
+              data-ask
+              disabled
+            />
+            <button type="submit" class="bm-small" data-ask-go disabled>Find tests</button>
+          </form>
+          <p class="bm-how" role="status" data-ask-status>We’ll suggest eight benchmarks that test it.</p>
+          <button type="button" class="bm-small bm-askmeaning" data-ask-meaning hidden>Match by meaning</button>
+          <div class="bm-askout" data-ask-out hidden>
+            <div class="bm-phead" aria-hidden="true"><span>Closest matches</span><span>Weight</span></div>
+            <ol class="bm-props" aria-label="Proposed benchmarks, closest first" data-ask-list></ol>
+            <button type="button" class="bm-small bm-primary" data-ask-use>Use these 8 tests</button>
+          </div>
+        </div>
+
         <div class="bm-block">
           <h2 class="bm-label" id="bm-start">Start from</h2>
           <div class="bm-presets" role="group" aria-labelledby="bm-start">
@@ -148,6 +173,8 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
 
 <script>
   import { Matrix, compute, defaultNeed, caption, columns, bars, table, weightBar, chosen, readState, writeState, esc, AREA_NAMES, type Payload, type State, type Source } from '../lib/build-index.ts';
+  import { bm25, capStems, cosines, prior, rank, wordsOnly, WORD_WEIGHT, type Lexicon, type Ranked } from '../lib/meaning-rank.ts';
+  import { Meaning, MEANING_MB, meaningPossible, probeGpu, sharedMeaning } from '../scripts/meaning.ts';
 
   const root = document.querySelector<HTMLElement>('[data-bm]')!;
   const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
@@ -174,10 +201,12 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
     const first = p.presets[0];
     const fallback: State = { b: first.b.map((id) => ({ id, w: 50 })), src: 'all', need: defaultNeed(first.b.length) };
     let st = readState(location.search, fallback);
+    // the description the current mix came from, kept in the address (?q=) next to the picks themselves
+    let asked = new URLSearchParams(location.search).get('t') ? (new URLSearchParams(location.search).get('q') ?? '').slice(0, 200) : '';
     st.b = st.b.filter((x, i, xs) => mx.benchIndex.has(x.id) && xs.findIndex((y) => y.id === x.id) === i);
     let presetId = location.search ? matchPreset() : first.id;
     // the preset a custom mix started from, named in place of its description
-    let startedFrom: string | null = presetId;
+    let startedFrom: string | null = asked ? null : presetId;
 
     for (const el of root.querySelectorAll<HTMLInputElement | HTMLButtonElement>('[disabled]')) el.disabled = false;
 
@@ -221,12 +250,12 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
         // keep the description's height while the reader edits, so the weight list below doesn't jump mid-drag
         if (!how.style.minHeight) how.style.minHeight = `${how.offsetHeight}px`;
         const from = startedFrom ? presets.get(startedFrom)?.name : undefined;
-        how.textContent = from ? `Your own mix, started from “${from}”.` : 'Your own mix.';
+        how.textContent = asked ? `Your own mix, started from your description.` : from ? `Your own mix, started from “${from}”.` : 'Your own mix.';
       }
       $('[data-src-how]').textContent = SRC_HOW[st.src];
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="bm-src"]')) r.checked = r.value === st.src;
       for (const r of root.querySelectorAll<HTMLInputElement>('input[name="bm-need"]')) r.checked = r.value === (st.need === 'all' ? 'all' : 'n');
-      history.replaceState(null, '', writeState(st));
+      history.replaceState(null, '', writeState(st) + (asked ? `&q=${encodeURIComponent(asked)}` : ''));
     }
     // recompute at most once a frame, so dragging a slider never blocks typing or scrolling
     let frame = 0;
@@ -254,6 +283,7 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
       if (pb) {
         const x = presets.get(pb.dataset.preset!)!;
         presetId = x.id;
+        asked = '';
         st = { ...st, b: x.b.map((id) => ({ id, w: 50 })), need: st.need === 'all' ? 'all' : defaultNeed(x.b.length) };
         return update(true);
       }
@@ -378,6 +408,175 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
     });
     q.addEventListener('blur', () => setTimeout(close, 120));
 
+    // ---- describe what you care about -----------------------------------------------------------------
+    // The request is matched to each benchmark by meaning (the shared model, opt-in, WebGPU) plus a word score
+    // over descriptions and paper abstracts and a lift for benchmarks many models took, with versions folded into
+    // one pick and at most three picks from one named suite (src/lib/meaning-rank.ts).
+    // Without the model, words alone rank them. scripts/meaning-eval.ts tests both paths.
+    const PICKS = 8;
+    const askForm = $<HTMLFormElement>('[data-ask-form]');
+    const ask = $<HTMLInputElement>('[data-ask]');
+    const askStatus = $('[data-ask-status]');
+    const askOut = $('[data-ask-out]');
+    const askList = $<HTMLOListElement>('[data-ask-list]');
+    const askUse = $<HTMLButtonElement>('[data-ask-use]');
+    const askMeaning = $<HTMLButtonElement>('[data-ask-meaning]');
+    const DEFAULT_STATUS = askStatus.textContent ?? '';
+    if (asked) {
+      ask.value = asked;
+      askStatus.textContent = 'These tests came from this description. Change it to find others.';
+    }
+    let words: { fam: string[]; post: Lexicon['post']; len: number[] } | null = null;
+    let wordsLoading: Promise<void> | null = null;
+    const loadWords = () =>
+      (wordsLoading ??= fetch('/build/words.json')
+        .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+        .then((w) => void (words = w))
+        .catch(() => void (wordsLoading = null)));
+    const ids = p.benches.map((b) => b[0]);
+    const benchNames = p.benches.map((b) => b[1]);
+    // the scored-model prior: the larger of a benchmark's two sources
+    const models = new Map(ids.map((id, i) => [id, Math.max(p.ind[i]?.length ?? 0, p.lab[i]?.length ?? 0) / 2]));
+    const lift = (id: string) => prior(models.get(id) ?? 0);
+    const nameById = new Map(ids.map((id, i) => [id, benchNames[i]]));
+    const nameOf = (id: string) => nameById.get(id) ?? id;
+    const famOf = new Map<string, string>();
+    let proposals: (Ranked & { w: number; on: boolean })[] = [];
+    let pending = '';
+    let matchedBy: 'meaning' | 'words' = 'words';
+
+    const meaning = sharedMeaning(() => meaningChanged());
+    probeGpu(() => {});
+
+    // only a request made here, waiting on the model, changes this box (the header search shares the model)
+    function meaningChanged() {
+      if (!pending) return;
+      if (meaning.state === 'loading') {
+        askMeaning.hidden = true;
+        askStatus.textContent = Meaning.remembered()
+          ? 'Loading the model from this device.'
+          : meaning.total
+            ? `Loading the model, ${Math.round(meaning.loaded / 1e6)} of ${Math.round(meaning.total / 1e6)} MB. This happens once.`
+            : 'Loading the model.';
+      } else if (meaning.state === 'ready') {
+        void findTests(pending);
+      } else if (meaning.state === 'failed') {
+        askStatus.textContent = 'The model didn’t load, so we matched your words to each benchmark’s description.';
+        pending = '';
+      }
+    }
+
+    async function findTests(text: string) {
+      await loadWords();
+      if (!words) {
+        askStatus.textContent = 'The benchmark list didn’t load. Try again.';
+        return;
+      }
+      if (!famOf.size) ids.forEach((id, i) => famOf.set(id, words!.fam[i] || id));
+      const lex: Lexicon = { post: words.post, len: words.len };
+      const family = (id: string) => famOf.get(id) ?? id;
+      let ranked: Ranked[];
+      if (meaning.state === 'ready' && meaning.vectors) {
+        pending = '';
+        const vec = await meaning.embed(text);
+        if (!vec) return showWords(text, lex, family, 'The model failed on that, so we matched your words.');
+        const v = meaning.vectors;
+        const all = cosines(v, vec);
+        const row = new Map(v.ids.map((id, r) => [id, r]));
+        const cos = Float32Array.from(ids, (id) => (row.has(id) ? all[row.get(id)!] : 0));
+        ranked = capStems(rank(ids, cos, { words: bm25(lex, text), wordWeight: WORD_WEIGHT, lift, family, k: 40 }), nameOf).slice(0, 20);
+        matchedBy = 'meaning';
+        askMeaning.hidden = true;
+        askStatus.textContent = 'Matched by meaning, on your device.';
+      } else {
+        // offer the model where it can run. A reader who used it before gets it without asking again.
+        if (meaningPossible()) {
+          if (meaning.state === 'loading') pending = text;
+          else if (Meaning.remembered() && meaning.state !== 'failed') {
+            pending = text;
+            void meaning.start();
+          } else askMeaning.hidden = false;
+        }
+        return showWords(
+          text,
+          lex,
+          family,
+          meaningPossible()
+            ? 'Matched by words. Matching by meaning works better, but downloads a ' + MEANING_MB + ' MB model the first time.'
+            : 'Matched by words, since this browser can’t run our search model.',
+        );
+      }
+      show(ranked);
+    }
+
+    function showWords(text: string, lex: Lexicon, family: (id: string) => string, note: string) {
+      const ranked = capStems(rank(ids, wordsOnly(lex, benchNames, text), { lift, family, k: 40 }), nameOf)
+        .filter((r) => r.s > lift(r.id))
+        .slice(0, 20);
+      matchedBy = 'words';
+      askStatus.textContent = !ranked.length
+        ? 'No benchmark’s description uses those words. Try other words.'
+        : pending && meaning.state === 'loading'
+          ? 'Matched by words for now. We’ll match by meaning once the model loads.'
+          : note;
+      show(ranked);
+    }
+
+    // weights from closeness: the best match gets 100, and the rest scale down to 30 at the 20th match
+    function show(ranked: Ranked[]) {
+      const top = ranked.slice(0, PICKS);
+      const hi = ranked[0]?.s ?? 0;
+      const lo = ranked.at(-1)?.s ?? 0;
+      proposals = top.map((r) => ({ ...r, w: hi > lo ? Math.round(30 + (70 * (r.s - lo)) / (hi - lo)) : 50, on: true }));
+      askOut.hidden = !proposals.length;
+      askList.innerHTML = proposals
+        .map((r, k) => {
+          const i = mx.benchIndex.get(r.id)!;
+          const [, name, area] = p.benches[i];
+          const c = mx.column(i, st.src).size;
+          return `<li class="bm-prop"><input type="checkbox" id="bm-p${k}" data-pk="${k}" checked /><label for="bm-p${k}"><span class="bm-adot" style="background:var(--area-${esc(area)})"></span><span class="bm-pn">${esc(name)}</span><span class="bm-pm">${esc(AREA_NAMES[area] ?? area)}, ${c ? `${c} models` : 'no scores from this source'}</span></label><span class="bm-pw" title="Starting weight">${r.w}</span></li>`;
+        })
+        .join('');
+      useLabel();
+    }
+    function useLabel() {
+      const n = proposals.filter((x) => x.on).length;
+      askUse.textContent = n === 1 ? 'Use this test' : `Use these ${n} tests`;
+      askUse.disabled = !n;
+    }
+
+    askForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = ask.value.trim();
+      if (text) void findTests(text);
+    });
+    ask.addEventListener('focus', () => void loadWords(), { once: true });
+    askMeaning.addEventListener('click', () => {
+      pending = ask.value.trim();
+      void meaning.start();
+    });
+    askList.addEventListener('change', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.dataset.pk === undefined) return;
+      proposals[Number(t.dataset.pk)].on = t.checked;
+      useLabel();
+    });
+    askUse.addEventListener('click', () => {
+      const picked = proposals.filter((x) => x.on);
+      if (!picked.length) return;
+      st = { ...st, b: picked.map((x) => ({ id: x.id, w: x.w })), need: st.need === 'all' ? 'all' : defaultNeed(picked.length) };
+      asked = ask.value.trim();
+      presetId = matchPreset();
+      startedFrom = null;
+      askStatus.textContent = `We set your tests from this description, matched by ${matchedBy}. Adjust the weights below.`;
+      askOut.hidden = true;
+      askMeaning.hidden = true;
+      update(true);
+    });
+    ask.addEventListener('input', () => {
+      if (!ask.value.trim()) askStatus.textContent = DEFAULT_STATUS;
+    });
+
     // ---- share ---------------------------------------------------------------------------------------
     async function copy() {
       const status = $('[data-status]');
@@ -430,6 +629,93 @@ const presetJson = JSON.stringify(p.presets.map((x) => ({ id: x.id, b: x.b })));
     color: var(--ink);
     margin: 0 0 10px;
     padding: 0;
+  }
+  /* describe what you care about */
+  .bm-root .bm-askrow {
+    display: flex;
+    gap: 8px;
+  }
+  .bm-root .bm-askrow .field {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .bm-root .bm-askmeaning {
+    margin-top: 10px;
+  }
+  .bm-root .bm-askout {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .bm-root .bm-phead {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: -6px;
+  }
+  .bm-root .bm-props {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .bm-root .bm-prop {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: 10px;
+    padding: 6px 0;
+  }
+  .bm-root .bm-prop input[type='checkbox'] {
+    accent-color: var(--ink);
+    margin: 3px 0 0;
+  }
+  .bm-root .bm-prop label {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 8px;
+    align-items: baseline;
+    cursor: pointer;
+    min-width: 0;
+  }
+  .bm-root .bm-prop .bm-adot {
+    transform: translateY(-1px);
+  }
+  .bm-root .bm-pn {
+    font-size: 14px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+  .bm-root .bm-pm {
+    grid-column: 2;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .bm-root .bm-prop input:not(:checked) + label .bm-pn {
+    color: var(--ink-3);
+  }
+  .bm-root .bm-pw {
+    font: 400 13px/1.3 var(--mono);
+    color: var(--ink-2);
+    text-align: right;
+    min-width: 2.2em;
+  }
+  .bm-root .bm-small.bm-primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .bm-root .bm-small.bm-primary:hover:not(:disabled) {
+    background: var(--ink-2);
+    color: var(--bg);
   }
   .bm-root .bm-presets {
     display: flex;

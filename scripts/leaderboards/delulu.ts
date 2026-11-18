@@ -10,6 +10,6 @@ const board:Leaderboard={benchmark:"delulu",url:URL,feed:URL,terms:PAPER_TERMS,
  for(const c of t.slice(1)){const raw=c[7]?.match(/^(-?(?:\d+(?:\.\d+)?|\.\d+))(?:%|\s|$)/);if(!raw)continue;
  const metrics:Record<string,number>={};
  for(const [i,key] of [[3, "exactMatch"], [4, "editSimilarity"], [5, "codeBleu"], [6, "hallucinationRate"]] as [number,string][]){const v=Number(c[i]);if(c[i]?.trim()&&Number.isFinite(v))metrics[key]=v;}
- out.push({model:c[1],score:Number(raw[1])*100,metrics});
+ out.push({model:c[1],score:Number(raw[1])*100,params:/^\d+(?:\.\d+)?B$/.test(c[2])?Number(c[2].slice(0,-1)):undefined,metrics});
  }return checked(out,3);
  }};export default board;

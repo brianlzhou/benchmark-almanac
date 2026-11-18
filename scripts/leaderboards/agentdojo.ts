@@ -45,6 +45,7 @@ const board: Leaderboard = {
       rows.push({
         model: name,
         score,
+        link: r[head?.indexOf('Traces') ?? -1]?.html.match(/href=["'](https:\/\/[^"']+)["']/)?.[1],
         setting: settings.join(', ') || undefined,
         date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : date >= 0 ? r[date]?.text : undefined,
       });

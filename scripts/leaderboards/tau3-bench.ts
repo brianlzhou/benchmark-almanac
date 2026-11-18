@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: 'https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json (submissions)',
   terms: TERMS,
+  verified: 'marked verified or unverified in the submission methodology',
   aliases: ALIASES,
   async fetch() {
     const rows: LeaderboardRow[] = [];

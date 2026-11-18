@@ -1,7 +1,8 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // MultiChallenge: both model-size tabs use the same conversations and percentage passed.
 // Read both tabs so the small-model roster is retained alongside the large-model roster.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, scaleEntries, scaleFlight, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, scaleEntries, scaleFlight,  scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('multichallenge');
 

@@ -25,7 +25,10 @@ const board: Leaderboard = {
       }
       const ci = c[1].match(/\[([\d.]+)[–-]([\d.]+)\]/);
       if (ci) { metrics.ciLow = Number(ci[1]); metrics.ciHigh = Number(ci[2]); }
-      rows.push({ model: c[0], score, setting: 'high reasoning effort where available', metrics });
+      const passAt8Ci = c[2].match(/\[([\d.]+)[–-]([\d.]+)\]/);
+      if (passAt8Ci) { metrics.passAt8Low = Number(passAt8Ci[1]); metrics.passAt8High = Number(passAt8Ci[2]); }
+      rows.push({ model: c[0], score, low: ci ? Number(ci[1]) : undefined,
+        high: ci ? Number(ci[2]) : undefined, setting: 'high reasoning effort where available', metrics });
     }
     if (!rows.length) throw new Error('APEX-Agents launch baseline table has no rows');
     return rows;

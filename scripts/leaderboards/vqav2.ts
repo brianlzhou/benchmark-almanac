@@ -15,6 +15,7 @@ interface Entry {
   submission__participant_team__team_name: string;
   submission__method_name?: string | null;
   submission__submitted_at?: string;
+  submission__is_verified_by_host?: boolean;
   result: number[];
 }
 
@@ -58,6 +59,8 @@ const board: Leaderboard = {
         const metrics: Record<string, number> = {};
         ['yesNo', 'number', 'other'].forEach((key, i) => { if (Number.isFinite(e.result[i])) metrics[key] = e.result[i]; });
         rows.push({ model, score, date: e.submission__submitted_at?.slice(0, 10),
+          submitter: team || undefined,
+          verified: typeof e.submission__is_verified_by_host === 'boolean' ? e.submission__is_verified_by_host : undefined,
           setting: known ? undefined : `EvalAI submission ${e.submission__id ?? e.id ?? `${page}-${rows.length}`}`,
           metrics });
       }

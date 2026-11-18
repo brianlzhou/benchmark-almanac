@@ -3,7 +3,7 @@
 // CSV files in HuanzhiMao/BFCL-Result (Apache-2.0). The 2025-06-14 copy is the last one in V3 form (the next,
 // 2025-08-26, adds the V4 web search and memory columns), so it is the frozen V3 board read here, and its
 // date is passed to the resolver. "Overall Acc" is the score. Model names end in the calling mode, "(FC)"
-// or "(Prompt)", which goes to the harness, as in bfcl-v4.ts, whose aliases are reused.
+// or "(Prompt)", which goes to the setting, as in bfcl-v4.ts, whose aliases are reused.
 // "Cost ($ Per 1k Function Calls)" over 1,000 is the cost per test entry (`cost`), and "Latency Mean (s)" and
 // "Latency 95th Percentile (s)" are kept as metrics.latency and metrics.latencyP95, as in bfcl-v4.ts.
 import type { Leaderboard } from './types.ts';
@@ -44,13 +44,14 @@ const board: Leaderboard = {
         const thinking = mode && /thinking/i.test(mode[1]) ? 'thinking' : undefined;
         const per1k = num(r['Cost ($ Per 1k Function Calls)']);
         const latency = num(r['Latency Mean (s)']);
+        const latencyStd = num(r['Latency Standard Deviation (s)']);
         const latencyP95 = num(r['Latency 95th Percentile (s)']);
-        const metrics = { ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) };
+        const metrics = { ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) };
         return {
           model: name,
           score: parseFloat(r['Overall Acc']),
-          setting: thinking,
-          harness: mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined,
+          setting: [thinking, mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined].filter(Boolean).join('; ') || undefined,
+          license: r.License || undefined,
           date: SNAPSHOT,
           cost: per1k === undefined ? undefined : per1k / 1000,
           ...(Object.keys(metrics).length ? { metrics } : {}),

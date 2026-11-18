@@ -44,7 +44,7 @@ interface Entry {
   timeCost?: number | null;
   reasoning_effort?: string;
   evaluationDate?: string;
-  model?: { name?: string };
+  model?: { name?: string; pricingInput?: number; pricingOutput?: number };
 }
 
 const PATH = 'scienceqas?sort[0]=score:desc&sort[1]=BoN:desc&pagination[limit]=100&populate[model][populate]=company&filters[is_ranked]=true';
@@ -63,6 +63,8 @@ const board: Leaderboard = {
       if (!model || typeof e.score !== 'number') continue;
       const effort = e.reasoning_effort && e.reasoning_effort !== 'default' ? e.reasoning_effort : undefined;
       const metrics: Record<string, number> = {};
+      if (typeof e.model?.pricingInput === 'number') metrics.priceIn = e.model.pricingInput;
+      if (typeof e.model?.pricingOutput === 'number') metrics.priceOut = e.model.pricingOutput;
       if (typeof e.BoN === 'number') metrics.bestOf5 = e.BoN;
       if (typeof e.timeCost === 'number' && e.timeCost > 0) metrics.latency = e.timeCost;
       rows.push({ model, score: e.score, setting: effort, date: e.evaluationDate, metrics: Object.keys(metrics).length ? metrics : undefined });

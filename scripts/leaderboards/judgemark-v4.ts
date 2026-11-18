@@ -26,6 +26,9 @@ const board: Leaderboard = {
       rows.push({
         model: r[name],
         score,
+        low: Number.isFinite(lo) ? lo : undefined,
+        high: Number.isFinite(hi) ? hi : undefined,
+        link: r.chart?.startsWith('results/') ? new URL(r.chart, 'https://eqbench.com/').href : undefined,
         cost: Number.isFinite(cost) ? cost : undefined,
         metrics: Number.isFinite(lo) && Number.isFinite(hi) ? { ciLow: lo, ciHigh: hi } : undefined,
       });

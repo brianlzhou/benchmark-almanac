@@ -6,6 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 import { SUPERGLUE_ALIASES, SUPERGLUE_TERMS } from './superglue.ts';
 const DB='https://mtl-sentence-representations.firebaseio.com/superglue/';
 const board:Leaderboard={
+ verified: 'approved for publication by SuperGLUE administrators',
  benchmark:'multirc',url:'https://super.gluebenchmark.com/leaderboard',feed:DB+'resultsVisibility.json',terms:SUPERGLUE_TERMS,aliases:SUPERGLUE_ALIASES,
  async fetch(){
   let first=true;
@@ -13,11 +14,11 @@ const board:Leaderboard={
   const vis=await get<Record<string,{adminApproved?:boolean;public?:boolean}>>('resultsVisibility');
   const tasks=await get<Record<string,{identifier:string}>>('tasks');
   const taskId=Object.entries(tasks).find(([,t])=>t.identifier==='MultiRC')?.[0];if(!taskId)throw new Error('MultiRC task missing');
-  type Result={superglueVersion?:number;macroScore?:number;uploaderUid:string;createdOn:number;editable?:{name?:string};tasks?:Record<string,{score?:number;accuracy?:number}>};
+  type Result={superglueVersion?:number;macroScore?:number;uploaderUid:string;createdOn:number;editable?:{name?:string;url?:string};tasks?:Record<string,{score?:number;accuracy?:number}>};
   const best=new Map<string,Result>();
   for(const [id,v] of Object.entries(vis)){if(!v.adminApproved||!v.public)continue;const r=await get<Result|null>('results/'+id);if(!r||(r.superglueVersion??1.9).toFixed(1)!=='2.0'||typeof r.macroScore!=='number')continue;const old=best.get(r.uploaderUid);if(!old||r.macroScore>old.macroScore!)best.set(r.uploaderUid,r);}
   const rows:LeaderboardRow[]=[];
-  for(const r of best.values()){const model=r.editable?.name?.trim(),v=r.tasks?.[taskId];if(!model||/human|most frequent|CBoW/i.test(model)||typeof v?.score!=='number')continue;rows.push({model,score:v.score*100,setting:'F1a',date:new Date(r.createdOn).toISOString().slice(0,10),...(typeof v.accuracy==='number'?{metrics:{exactMatch:v.accuracy*100}}:{})});}
+  for(const r of best.values()){const model=r.editable?.name?.trim(),v=r.tasks?.[taskId];if(!model||/human|most frequent|CBoW/i.test(model)||typeof v?.score!=='number')continue;rows.push({model,verified:true,link:r.editable?.url?.startsWith('https://github.com/')?r.editable.url:undefined,score:v.score*100,setting:'F1a',date:new Date(r.createdOn).toISOString().slice(0,10),...(typeof v.accuracy==='number'?{metrics:{exactMatch:v.accuracy*100}}:{})});}
   if(!rows.length)throw new Error('No MultiRC results');return rows;
  }
 };

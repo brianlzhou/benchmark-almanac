@@ -1,9 +1,10 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // SWE Atlas Test Writing: Scale's board has one table. The score is the task resolve rate in percent (the tests
 // must pass the manifest check, the mutation test and the rubrics). Names carry the harness and effort. "*" marks
 // runs with an elevated refusal rate, which Scale scored as failures. The board's ± interval is kept as
 // metrics.ciLow and ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
+import { SCALE_ALIASES, fetchScaleEntries, scaleFeed,  scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('sweatlas-tw');
 
@@ -16,6 +17,8 @@ const ci = (e: ScaleEntry & { confidenceInterval_upper?: number }) => {
 
 const board: Leaderboard = {
   benchmark: 'swe-atlas-test-writing',
+  harnesses: 'system',
+  reference: ['mini-SWE-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: 'Scale terms restrict automated extraction. The almanac credits Scale AI and links the source.',

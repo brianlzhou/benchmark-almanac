@@ -1,11 +1,10 @@
 // MLE-bench. The leaderboard is the first markdown table under "## Leaderboard" in the openai/mle-bench
 // README: per agent and LLM, any-medal rates on the Low (Lite), Medium and High splits and on All 75
 // competitions, run time and date. The table is ordered by All (%), the score here. The agent is the
-// harness. Rows whose LLM column names several models ("o3 + GPT-4.1") or none ("undisclosed") have no
-// single model to credit and are skipped. Run budgets other than the usual 24 hours go in the setting. Rows carry their
+// harness. Named blends keep their component models. Undisclosed models are skipped. Run budgets other than the usual 24 hours go in the setting. Rows carry their
 // submission date, so the resolver picks the snapshot current at that date.
 // The "Additional Leaderboard Submissions" table is marked not comparable and is not read. Each row also keeps
-// the ± after All (%) as metrics.ciLow and ciHigh (All minus and plus it), and the Low (Lite), Medium and High
+// the standard error after All (%) as metrics.stderr, and the Low (Lite), Medium and High
 // split rates as "low", "medium" and "high" (%). OpenAI stopped
 // taking submissions on 2026-04-24.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -26,6 +25,7 @@ const plain = (s: string) =>
 
 const board: Leaderboard = {
   benchmark: 'mle-bench',
+  harnesses: 'system',
   url: 'https://github.com/openai/mle-bench#leaderboard',
   feed: `${FEED} (main leaderboard table, All %)`,
   terms: 'Markdown table in the openai/mle-bench README; the repository code is MIT-licensed (GitHub lists the license as custom because of a note on external datasets).',
@@ -48,7 +48,9 @@ const board: Leaderboard = {
       const cells = line.split('|').slice(1, -1);
       const score = num(plain(cells[all] ?? '').split('±')[0]);
       let model = plain(cells[llm] ?? '');
-      if (score === undefined || !model || /\+|,|ensemble|undisclosed/i.test(model)) continue;
+      if (score === undefined || !model || /,|ensemble|undisclosed/i.test(model)) continue;
+      const models = model.includes(' + ') ? model.split(' + ').map((m) => m.trim()) : undefined;
+      if (models) model = models[0];
       const settings: string[] = [];
       // "gpt-5 (low verbosity/effort)"
       const paren = model.match(/\s*\(([^)]*)\)$/);
@@ -61,7 +63,7 @@ const board: Leaderboard = {
       const d = plain(cells[date] ?? '');
       const metrics: Record<string, number> = {};
       const pm = num(plain(cells[all] ?? '').split('±')[1]);
-      if (pm !== undefined && pm > 0) Object.assign(metrics, { ciLow: score - pm, ciHigh: score + pm });
+      if (pm !== undefined) metrics.stderr = pm;
       for (const [k, i] of splits) {
         const v = i >= 0 ? num(plain(cells[i] ?? '').split('±')[0]) : undefined;
         if (v !== undefined) metrics[k] = v;
@@ -69,6 +71,9 @@ const board: Leaderboard = {
       rows.push({
         model,
         score,
+        models,
+        link: cells[agent]?.match(/\]\((https:\/\/github\.com\/[^)]+)\)/)?.[1],
+        agentOrg: /<br\s*\/?>\(Fractal AI Research\)/i.test(cells[agent] ?? '') ? 'Fractal AI Research' : undefined,
         harness: plain(cells[agent] ?? '') || undefined,
         setting: settings.join(', ') || undefined,
         date: /^\d{4}-\d\d-\d\d$/.test(d) ? d : undefined,

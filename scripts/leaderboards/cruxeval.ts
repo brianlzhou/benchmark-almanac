@@ -10,6 +10,7 @@ const FEED = 'https://crux-eval.github.io/data.csv';
 
 const board: Leaderboard = {
   benchmark: 'cruxeval',
+  verified: 'not marked as under verification by the board',
   url: 'https://crux-eval.github.io/leaderboard.html',
   feed: `${FEED} (o@1, CRUXEval-O pass@1)`,
   terms: 'Static CSV on the CRUXEval GitHub Pages site; the cruxeval repository is MIT-licensed.',
@@ -28,7 +29,8 @@ const board: Leaderboard = {
       // plain "gpt-4o" does not say which snapshot ran, and the resolver would pick the newest; retain it as an unlisted entry
       if (model === 'gpt-4o') model += ' (snapshot unspecified)';
       const pass5 = r['o@5'] ? Number(r['o@5']) : NaN;
-      rows.push({ model, score, setting: cot ? 'CoT' : undefined, metrics: { ...(Number.isFinite(pass5) ? { pass5 } : {}), ...(Number.isFinite(Number(r['i@1'])) ? { inputPass1: Number(r['i@1']) } : {}), ...(r['i@5'] && Number.isFinite(Number(r['i@5'])) ? { inputPass5: Number(r['i@5']) } : {}) } });
+      const size = model.match(/(?:^|[- ])(\d+(?:\.\d+)?)b(?:$|[- ])/i);
+      rows.push({ model, score, params: size ? Number(size[1]) : undefined, verified: /under verification/.test(r.Model) ? false : undefined, setting: cot ? 'CoT' : undefined, metrics: { ...(Number.isFinite(pass5) ? { pass5 } : {}), ...(Number.isFinite(Number(r['i@1'])) ? { inputPass1: Number(r['i@1']) } : {}), ...(r['i@5'] && Number.isFinite(Number(r['i@5'])) ? { inputPass5: Number(r['i@5']) } : {}) } });
     }
     if (!rows.length) throw new Error('no rows in data.csv');
     return rows;

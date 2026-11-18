@@ -13,12 +13,13 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = 'http://opencompass.openxlab.space/assets/OpenVLM.json';
 
 interface Entry {
-  META?: { Method?: [string, string?]; Time?: string };
+  META?: { Method?: [string, string?]; Time?: string; Verified?: string; OpenSource?: string; Parameters?: string };
   MMBench_TEST_EN?: { Overall?: number };
 }
 
 const board: Leaderboard = {
   benchmark: 'mmbench',
+  verified: 'verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${FEED} (MMBench_TEST_EN.Overall)`,
   terms: "OpenCompass's published leaderboard data file, which states no license; the VLMEvalKit and MMBench repositories are Apache-2.0.",
@@ -46,7 +47,12 @@ const board: Leaderboard = {
         setting = snap[3];
         model = model.slice(0, snap.index).trim();
       }
-      rows.push({ model, score, setting, date });
+      rows.push({ model, score, setting, date,
+        verified: e.META?.Verified === 'Yes' ? true : e.META?.Verified === 'No' ? false : undefined,
+        open: e.META?.OpenSource === 'Yes' ? true : e.META?.OpenSource === 'No' ? false : undefined,
+        params: /^\d+(?:\.\d+)?B$/i.test(e.META?.Parameters ?? '') ? parseFloat(e.META!.Parameters!) : undefined,
+        link: e.META?.Method?.[1]?.startsWith('https://github.com/') ? e.META.Method[1] : undefined,
+      });
     }
     return rows;
   },

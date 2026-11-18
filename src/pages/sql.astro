@@ -1,0 +1,524 @@
+---
+// Query the almanac with SQL: the whole catalog as one SQLite database (public/data/almanac.db, built from data/
+// by scripts/build-db.ts before each site build). The page reads the file at build time for its counts, its
+// table docs and the first example's results, so it is complete before any script runs. In the browser,
+// src/scripts/sql.ts loads sql.js and the database only when someone runs a query.
+import { DatabaseSync } from 'node:sqlite';
+import { existsSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import Base from '../layouts/Base.astro';
+import { TABLES, VIEWS, EXAMPLES, CREDIT_LINE, HOW_TO_CREDIT, LICENSE_NOTE, DATES_NOTE, DB_PATH, DB_GZ_PATH, citation } from '../lib/db-schema.ts';
+import { humanDate } from '../lib/format.ts';
+import { columnDecimals, showNumber } from '../lib/sql-format.ts';
+
+const file = join(process.cwd(), 'public', 'data', 'almanac.db');
+if (!existsSync(file) || !existsSync(`${file}.gz`)) throw new Error('public/data/almanac.db is missing. Run `npm run db` (npm run build does it first).');
+const db = new DatabaseSync(file, { readOnly: true });
+const rowsOf = (t: string) => Number((db.prepare(`select count(*) as n from ${t}`).get() as { n: number }).n);
+const counts = Object.fromEntries(TABLES.map((t) => [t.name, rowsOf(t.name)]));
+const viewCounts = Object.fromEntries(VIEWS.map((v) => [v.name, rowsOf(v.name)]));
+const about = Object.fromEntries((db.prepare('select key, value from about').all() as { key: string; value: string }[]).map((r) => [r.key, r.value]));
+const scoreModels = Number((db.prepare("select count(*) as n from scores where entry_kind = 'model'").get() as { n: number }).n);
+const first = EXAMPLES[0];
+const firstRows = db.prepare(first.sql).all() as Record<string, unknown>[];
+const firstCols = firstRows.length ? Object.keys(firstRows[0]) : [];
+db.close();
+
+const mb = (bytes: number) => `${(bytes / 1e6).toFixed(1)} MB`;
+const rawSize = mb(statSync(file).size);
+const gzSize = mb(statSync(`${file}.gz`).size);
+const n = (v: number) => v.toLocaleString('en-US');
+const cite = citation(about.built);
+const numeric = firstCols.map((c) => firstRows.every((r) => r[c] === null || typeof r[c] === 'number'));
+const decimals = firstCols.map((c, i) => (numeric[i] ? columnDecimals(firstRows.map((r) => r[c])) : 0));
+const cell = (v: unknown, i: number) => (v === null || v === undefined ? '' : typeof v === 'number' ? showNumber(v, decimals[i]) : String(v));
+const examplesJson = JSON.stringify(EXAMPLES.map((e) => ({ id: e.id, sql: e.sql })));
+---
+
+<Base title="Query the almanac" description="Every score, benchmark, model and lab document in one SQLite database. Run SQL on it in your browser, or download it.">
+  <div class="page sq-page">
+    <header class="head">
+      <h1>Query the almanac</h1>
+      <p class="lede">Every score, benchmark, model and lab document we track sits in one SQLite database. Query it here in your browser, or download it.</p>
+      <div class="facts">
+        <span><b class="num">{n(counts.scores)}</b> scores</span>
+        <span><b class="num">{n(counts.benchmarks)}</b> benchmarks</span>
+        <span><b class="num">{n(counts.models)}</b> models</span>
+        <span><b class="num">{n(counts.cards)}</b> lab documents</span>
+        <span>Data as of {humanDate(about.data_as_of)}</span>
+      </div>
+    </header>
+
+    <section class="sq" data-sq data-db={DB_GZ_PATH} data-size={gzSize} data-examples={examplesJson}>
+      <div class="sq-ex" role="group" aria-label="Example queries">
+        {
+          EXAMPLES.map((e, i) => (
+            <button type="button" data-ex={e.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+              {e.label}
+            </button>
+          ))
+        }
+      </div>
+      <label class="sr" for="sq-q">SQL query</label>
+      <textarea id="sq-q" class="sq-q" wrap="off" spellcheck="false" autocomplete="off" autocapitalize="off" rows={Math.min(24, Math.max(6, first.sql.split('\n').length + 1))} data-q>{first.sql}</textarea>
+      <div class="sq-bar">
+        <button type="button" class="sq-run" data-run>Run</button>
+        <button type="button" class="sq-stop" data-stop hidden>Stop</button>
+        <span class="sq-key" data-key>Ctrl Enter</span>
+        <p class="sq-status" role="status" aria-live="polite" data-status>
+          Your first query loads the database ({gzSize}).
+        </p>
+      </div>
+
+      <div class="sq-out" data-out>
+        <p class="sq-meta" data-meta>{n(firstRows.length)} {firstRows.length === 1 ? 'row' : 'rows'}</p>
+        <div class="table-wrap sq-wrap">
+          <table class="t sq-t" data-table>
+            <thead>
+              <tr>{firstCols.map((c, i) => <th class={numeric[i] ? 'r' : undefined}>{c}</th>)}</tr>
+            </thead>
+            <tbody>
+              {
+                firstRows.map((r) => (
+                  <tr>
+                    {firstCols.map((c, i) => (
+                      <td class={numeric[i] ? 'r num' : undefined}>{cell(r[c], i)}</td>
+                    ))}
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <div class="sq-export">
+          <div class="sq-actions">
+            <button type="button" data-csv>Download CSV</button>
+            <button type="button" data-md>Copy as Markdown</button>
+            <button type="button" data-link>Copy link to query</button>
+          </div>
+          <p class="sq-credit">{CREDIT_LINE} <a href="#credit">How to credit it</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sq-two">
+      <div id="credit" class="sq-card">
+        <h2>How to credit this data</h2>
+        <ul class="sq-list">
+          {HOW_TO_CREDIT.map((t) => <li>{t}</li>)}
+        </ul>
+        <div class="sq-cite">
+          <div class="sq-cite-h">
+            <span>Cite the almanac</span>
+            <button type="button" data-copy-cite>Copy</button>
+          </div>
+          <p data-cite-text>{cite.text}</p>
+          <details>
+            <summary>BibTeX</summary>
+            <pre>{cite.bibtex}</pre>
+          </details>
+        </div>
+      </div>
+      <div id="download" class="sq-card">
+        <h2>Download the database</h2>
+        <ul class="sq-files">
+          <li>
+            <a href={DB_GZ_PATH} download="benchmark-almanac.db.gz">benchmark-almanac.db.gz</a>
+            <span class="muted num">{gzSize}, gzipped</span>
+          </li>
+          <li>
+            <a href={DB_PATH} download="benchmark-almanac.db">benchmark-almanac.db</a>
+            <span class="muted num">{rawSize}</span>
+          </li>
+        </ul>
+        <p>Open it with sqlite3, Datasette, DuckDB or any other SQLite tool. We rebuild it each time the site updates.</p>
+        <pre class="sq-cmd">gunzip benchmark-almanac.db.gz
+sqlite3 benchmark-almanac.db "select * from about"</pre>
+        <p class="sq-small">{LICENSE_NOTE}</p>
+      </div>
+    </section>
+
+    <section id="tables">
+      <div class="sh">
+        <h2>What’s in it</h2>
+        <p>{TABLES.length} tables and {VIEWS.length} views. The scores table has one row per run, so a model can appear several times on one benchmark. {DATES_NOTE}</p>
+      </div>
+      <div class="sq-tables">
+        {
+          TABLES.map((t) => (
+            <details class="sq-tbl" open={t.name === 'scores'}>
+              <summary>
+                <span class="mono sq-name">{t.name}</span>
+                <span class="num muted">{n(counts[t.name])} rows</span>
+                <span class="sq-doc">{t.doc}</span>
+              </summary>
+              <div class="table-wrap">
+                <table class="t sq-cols">
+                  <tbody>
+                    {t.cols.map((col) => (
+                      <tr>
+                        <td class="mono">{col.name}</td>
+                        <td class="mono muted">{col.type.toLowerCase()}</td>
+                        <td>{col.doc}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          ))
+        }
+        {
+          VIEWS.map((v) => (
+            <details class="sq-tbl">
+              <summary>
+                <span class="mono sq-name">{v.name}</span>
+                <span class="num muted">view, {n(viewCounts[v.name])} rows</span>
+                <span class="sq-doc">{v.doc}</span>
+              </summary>
+              <pre class="sq-cmd">{v.sql}</pre>
+            </details>
+          ))
+        }
+      </div>
+      <p class="sq-small sq-foot">Of the {n(counts.scores)} scores, {n(scoreModels)} are on models we track. The rest are unlisted entries that boards show under their own names.</p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .sq-page section + section {
+    margin-top: 88px;
+  }
+  .sq-ex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .sq-ex button,
+  .sq-actions button,
+  .sq-cite-h button {
+    font: 500 13px/1 var(--sans);
+    color: var(--ink-2);
+    background: var(--panel);
+    border: 0;
+    border-radius: 999px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  .sq-ex button:hover,
+  .sq-actions button:hover,
+  .sq-cite-h button:hover {
+    color: var(--ink);
+  }
+  .sq-ex button[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .sq-q {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    font: 13.5px/1.6 var(--mono);
+    color: var(--ink);
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    resize: vertical;
+    tab-size: 2;
+  }
+  .sq-q:focus {
+    outline: none;
+    border-color: var(--ink-4);
+  }
+  .sq-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin-top: 12px;
+  }
+  .sq-run,
+  .sq-stop {
+    font: 500 14px/1 var(--sans);
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .sq-stop {
+    background: var(--bg);
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .sq-run:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+  .sq-key {
+    font: 12.5px var(--mono);
+    color: var(--ink-3);
+  }
+  @media (pointer: coarse) {
+    .sq-key {
+      display: none;
+    }
+  }
+  .sq-status {
+    flex: 1 1 260px;
+    min-width: 0;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  .sq-status.err {
+    color: var(--area-safety);
+    font-family: var(--mono);
+    font-size: 13px;
+    white-space: pre-wrap;
+  }
+  .sq-out {
+    margin-top: 28px;
+  }
+  .sq-meta {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+  }
+  .sq-wrap {
+    max-height: 640px;
+    overflow: auto;
+  }
+  /* the result fills the width like the site's other tables, so a short result leaves no empty band on the right */
+  .sq-t {
+    width: 100%;
+    font-size: 13.5px;
+  }
+  .sq-t th {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding-top: 6px;
+    font-family: var(--mono);
+    font-weight: 500;
+    z-index: 1;
+  }
+  .sq-t td {
+    padding: 9px 12px;
+    max-width: 42ch;
+    overflow-wrap: break-word;
+  }
+  .sq-t .r {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .sq-t td.null {
+    color: var(--ink-4);
+  }
+  .sq-export {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .sq-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .sq-credit {
+    font-size: 13.5px;
+    color: var(--ink-3);
+    min-width: 0;
+  }
+  .sq-credit a {
+    color: var(--ink-2);
+    margin-left: 4px;
+  }
+  .sq-two {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 20px;
+  }
+  .sq-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px 24px 26px;
+    min-width: 0;
+    scroll-margin-top: 84px;
+  }
+  .sq-card h2 {
+    font-size: 26px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .sq-card p {
+    color: var(--ink-2);
+    margin-top: 12px;
+  }
+  .sq-list {
+    margin: 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: 8px;
+    color: var(--ink-2);
+  }
+  .sq-cite {
+    margin-top: 20px;
+    background: var(--panel-2);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .sq-cite-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .sq-cite-h button {
+    padding: 6px 10px;
+    background: var(--bg);
+  }
+  .sq-cite p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+  .sq-cite summary {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+    cursor: pointer;
+  }
+  .sq-cite pre,
+  .sq-cmd {
+    font: 12.5px/1.55 var(--mono);
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0 0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .sq-files {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .sq-files li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    align-items: baseline;
+  }
+  .sq-files a {
+    font: 500 14px var(--mono);
+  }
+  .sq-small {
+    font-size: 13.5px;
+  }
+  .sq-tables {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .sq-tbl {
+    border-bottom: 1px solid var(--line);
+  }
+  .sq-tbl summary {
+    display: grid;
+    grid-template-columns: 11rem 9rem minmax(0, 1fr);
+    gap: 4px 16px;
+    align-items: baseline;
+    padding: 14px 4px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .sq-tbl summary::-webkit-details-marker {
+    display: none;
+  }
+  .sq-tbl summary:hover .sq-name {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .sq-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .sq-doc {
+    color: var(--ink-2);
+    font-size: 14.5px;
+  }
+  .sq-cols {
+    font-size: 13.5px;
+    margin-bottom: 14px;
+  }
+  .sq-cols td {
+    padding: 8px 12px;
+    vertical-align: top;
+  }
+  .sq-cols td:first-child {
+    white-space: nowrap;
+  }
+  .sq-tbl .sq-cmd {
+    margin-bottom: 16px;
+  }
+  .sq-foot {
+    margin-top: 14px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 720px) {
+    /* one row of examples that scrolls sideways, edge to edge */
+    .sq-ex {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: 0 calc(-1 * var(--gutter));
+      padding: 0 var(--gutter) 4px;
+      scrollbar-width: none;
+    }
+    .sq-ex button {
+      flex: none;
+    }
+    .sq-tbl summary {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .sq-doc {
+      grid-column: 1 / -1;
+    }
+    .sq-card {
+      padding: 18px 16px 20px;
+    }
+    /* column docs go under the name and type, so they get the full width */
+    .sq-cols tr {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0 12px;
+      padding: 9px 0;
+      border-top: 1px solid var(--grid);
+    }
+    .sq-cols td {
+      padding: 0;
+      border-top: 0;
+    }
+    .sq-cols td:last-child {
+      grid-column: 1 / -1;
+      margin-top: 2px;
+    }
+  }
+</style>
+
+<script>
+  import { wireSql } from '../scripts/sql.ts';
+  wireSql();
+</script>

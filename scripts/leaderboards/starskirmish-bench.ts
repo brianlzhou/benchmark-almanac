@@ -24,6 +24,7 @@ function exported<T>(js: string, name: string): T {
 
 const board: Leaderboard = {
   benchmark: 'starskirmish-bench',
+  costPer: 'run',
   url: PAGE,
   feed: `${FEED} (SCORES, COSTS, PRACTICE, RUNS)`,
   terms: 'Static data module on starskirmish.com; robots.txt allows all paths and the site publishes no terms of use.',
@@ -51,7 +52,7 @@ const board: Leaderboard = {
       if (typeof practice[s.k] === 'number') metrics.practice = practice[s.k];
       const r = (runs[s.k] ?? []).filter((x) => typeof x === 'number');
       if (r.length) Object.assign(metrics, { runMin: Math.min(...r), runMax: Math.max(...r) });
-      rows.push({ model: name, score: s.score, setting: named.get(name) ?? others, cost: costs[s.k], metrics });
+      rows.push({ model: name, score: s.score, trials: r.length || undefined, setting: named.get(name) ?? others, cost: costs[s.k], metrics });
     }
     return rows;
   },

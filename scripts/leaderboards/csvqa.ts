@@ -15,8 +15,15 @@ const board: Leaderboard = {
   const result = await (async (): Promise<LeaderboardRow[]> => {
   const t = tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Overall'));
   if (!t) throw new Error('csvqa table missing');
+  let open: boolean | undefined;
+  const access = new Map<string, boolean | undefined>();
+  for (const r of t.slice(1)) {
+    if (/^Open-source VLM$/i.test(r[0]?.text ?? '')) open = true;
+    else if (/^Closed-source VLM$/i.test(r[0]?.text ?? '')) open = false;
+    access.set(r[0]?.text, open);
+  }
   const rows=t.slice(1).filter(r=>r[0]?.text && !/human|random/i.test(r[0].text) && num(r[1]?.text)!==undefined).map(r=>({
-    model:r[0].text,score:num(r[1].text)!,
+    model:r[0].text,score:num(r[1].text)!,open:access.get(r[0].text),
     metrics:Object.fromEntries(t[0].map((h,i)=>[h.text,i!==0 && i!==1?num(r[i]?.text):undefined]).filter((p):p is [string,number]=>typeof p[1]==='number'))
   }));
   if(!rows.length) throw new Error('csvqa has no scored rows');

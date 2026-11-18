@@ -29,6 +29,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://gdpx.semianalysis.com/";
 const board: Leaderboard = {
   "benchmark": "gdpx",
+  harnesses: 'system',
   "url": "https://gdpx.semianalysis.com/",
   "feed": "https://gdpx.semianalysis.com/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
@@ -78,7 +79,7 @@ const board: Leaderboard = {
       const overall = data.overall[model.id];
       if (Number.isFinite(overall?.costPerTask)) metrics.cost = overall.costPerTask;
       if (Number.isFinite(overall?.tokensPerTask)) metrics.outputTokens = overall.tokensPerTask;
-      rows.push({ model: model.name, score: average([...groups.values()].map(average)), harness: model.harness, setting: model.reasoning, cost: overall?.costPerTask ?? undefined, tokens: overall?.tokensPerTask ?? undefined, metrics });
+      rows.push({ model: model.name, open: typeof model.openWeights === 'boolean' ? model.openWeights : undefined, score: average([...groups.values()].map(average)), harness: model.harness, setting: model.reasoning, cost: overall?.costPerTask ?? undefined, tokens: overall?.tokensPerTask ?? undefined, metrics });
     }
     return rows;
   },

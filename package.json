@@ -10,9 +10,11 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "npm run db",
     "build": "astro build",
     "preview": "astro preview",
     "check": "node scripts/check-data.ts && astro check",
+    "db": "node --disable-warning=ExperimentalWarning scripts/build-db.ts",
     "sync:epoch": "node scripts/sync-epoch.ts",
     "sync:leaderboards": "node scripts/sync-leaderboards.ts",
     "discover": "node scripts/discover.ts",

@@ -1,7 +1,7 @@
 // BioTIER defines separate refuse (398 prompts) and permit (144 prompts) test sets. Each child uses correct compliance in percent.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { text } from '../html.ts';
-import { sbCharts } from '../../leaderboards/hpct-v2-securebio.ts';
+import { sbCharts, sbFacts } from '../../leaderboards/hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
@@ -24,7 +24,10 @@ const board: Leaderboard = {
           const score = lines.find(l => l.startsWith(`BioTIER-${metric}:`))?.match(/:\s*([\d.]+)%/)?.[1];
           if (score === undefined) continue;
           const setting = [`BioTIER-${metric}`, m[2]].filter(Boolean).join('; ');
-          out.set(`${name}:${metric}`, {model: identity(m[1].trim()), score: Number(score), setting});
+          const evaluated = lines.find(l => l.startsWith('Evaluated:'))?.slice(10).trim();
+          const stamp = metric === 'permit' && evaluated ? Date.parse(evaluated + ' UTC') : NaN;
+          const date = Number.isFinite(stamp) ? new Date(stamp).toISOString().slice(0, 10) : undefined;
+          out.set(`${name}:${metric}`, {model: identity(m[1].trim()), score: Number(score), setting, ...(date ? { date } : {}), ...sbFacts(lines, `BioTIER-${metric}`)});
         }
       }
     }

@@ -1,8 +1,9 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // EnigmaEval: Scale's board (deprecated by Scale, still served) has one table of five entries. The score is
 // accuracy (pass@1) in percent. Names end in the effort ("claude-fable-5-high"), which the resolver splits off.
 // The board's ± (each entry's confidenceInterval_upper) becomes the interval bounds metrics.ciLow and ciHigh.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('enigma_eval');
 

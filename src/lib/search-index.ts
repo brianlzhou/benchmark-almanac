@@ -108,6 +108,12 @@ export function searchIndex() {
     ['New', '/new/', 'Added, waiting and left out, and new models', 'new recent added queue discovery models releases'],
     ['Audits', '/audits/', 'Known issues that audits found in benchmarks', 'audits known issues problems broken grader leaked answers wrong labels contamination errors'],
     ['Sources', '/sources/', 'Where we find new benchmarks', 'sources feeds newsletters'],
+    ['Insights', '/insights/', 'Trends over time in reporting, evals and the frontier', 'insights trends over time history analysis charts'],
+    ['What labs report', '/insights/reporting/', 'Which benchmarks labs name in launch posts, and how that changed', 'reporting what labs report launch posts cited benchmarks canon trends'],
+    ['How are evals changing?', '/insights/evals/', 'How new benchmarks are built, and how fast they saturate', 'evals trends new benchmarks agent tasks multiple choice saturation saturate llm judge private test'],
+    ['How fast is the frontier moving?', '/insights/frontier/', 'Open and closed models, and who held number one', 'frontier open weights closed gap lag who leads number one trends'],
+    ['Time machine', '/time-machine/', 'The almanac as it stood on any day', 'time machine history past date then on this day who led arena history'],
+    ['Query with SQL', '/sql/', 'Run SQL on every score, or download the database', 'sql sqlite database download query data export csv api'],
     ['About', '/about/', 'How this works', 'about method methodology how this works faq'],
   ] as const;
   for (const [name, url, detail, w] of pages) rows.push([name, url, 'p', detail, '', 6, w]);

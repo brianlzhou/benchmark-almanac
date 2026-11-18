@@ -21,10 +21,15 @@ const board: Leaderboard = {
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);
+    const configs = new Map(source.split('\n').filter(l => l.includes('[config](')).map(l => {
+      const model = markdownTables(l)[0]?.[0]?.[0]?.replace(/ \[\d+\]/g, '');
+      const path = l.match(/\[config\]\(([^)]+)\)/)?.[1];
+      return [model, path ? new URL(path, 'https://github.com/microsoft/GLIP/blob/main/').href : undefined];
+    }));
     const rows: LeaderboardRow[] = [];
     const table=all.find(t => t[0].some(h=>h.includes("ODinW [4]")));
     if (!table) throw new Error("Missing ODinW-13 model zoo");
-    for (const r of table.slice(1)) { const score=num(r[4]); if(score===undefined)continue; rows.push({model:r[0].replace(/ \[\d+\]/g,""),score,setting:`zero-shot; pretrain ${r[5]}${r[4].includes("~") ? "; approximate" : ""}`}); }
+    for (const r of table.slice(1)) { const score=num(r[4]); if(score===undefined)continue; rows.push({model:r[0].replace(/ \[\d+\]/g,""),score,link:configs.get(r[0].replace(/ \[\d+\]/g,"")),setting:`zero-shot; pretrain ${r[5]}${r[4].includes("~") ? "; approximate" : ""}`}); }
     if (!rows.length) throw new Error("No odinw-13 score rows");
     return rows;
   },

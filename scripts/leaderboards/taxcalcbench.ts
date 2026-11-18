@@ -39,9 +39,10 @@ export async function tcbRows(edition: string): Promise<LeaderboardRow[]> {
     .map((r) => ({
       model: r.base,
       score: r.strict!,
+      trials: edition === 'v1' ? 4 : 1,
       setting: r.webSearch ? 'web search' : undefined,
       cost: r.cost ?? undefined,
-      ...(typeof r.time === 'number' ? { metrics: { runtime: r.time } } : {}),
+      ...(typeof r.time === 'number' ? { metrics: { runtime: r.time, time: r.time } } : {}),
     }));
 }
 

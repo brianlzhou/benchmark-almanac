@@ -7,6 +7,7 @@ import { tables, jsLiteral } from '../lib/html.ts';
 const FEED = "https://agi-eval-official.github.io/amemgym";
 const board: Leaderboard = {
   benchmark: "amemgym",
+  harnesses: 'system',
   url: "https://agi-eval-official.github.io/amemgym",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

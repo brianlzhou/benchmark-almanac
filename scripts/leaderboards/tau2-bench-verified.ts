@@ -1,6 +1,6 @@
 // tau2-bench Verified: Average accuracy across Airline, Retail and Telecom is the headline percentage.
-// Reasoning effort stays in setting. Price/performance totals remain metrics because the README does not
-// define a per-task denominator; output-token totals must not be reported as output tokens per task.
+// Reasoning effort stays in setting. Cost is USD per full run, averaged across five runs.
+// Output-token totals remain metrics because the README does not define a per-task denominator.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -28,6 +28,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md";
 const board: Leaderboard = {
   "benchmark": "tau2-bench-verified",
+  costPer: 'run',
   "url": "https://github.com/amazon-agi/tau2-bench-verified",
   "feed": "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
@@ -69,6 +70,7 @@ const board: Leaderboard = {
         if (Number.isFinite(value)) row.metrics[key] = value;
       }
     }
+    for (const row of rows) if (typeof row.metrics?.reportedCost === 'number') row.cost = row.metrics.reportedCost;
     if (!rows.length) throw new Error("No scored model rows in the published results");
     return rows;
   },

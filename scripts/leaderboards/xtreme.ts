@@ -12,8 +12,10 @@ const board: Leaderboard = {
   
   async fetch() {
     const s=await fetchText(FEED);const out:LeaderboardRow[]=[];
+    const provenance = new Map([...s.matchAll(/participant:"([^"\\]*)",\s*affiliation:"[^"\\]*",\s*modelName:"([^"\\]*)"/g)].map(m=>[m[2],m[1]]));
+    const links = new Map([...s.matchAll(/modelName:"([^"\\]*)",\s*timestampMicros:\d+,\s*date:"[^"\\]*",\s*referenceLink:"([^"\\]*)"/g)].map(m=>[m[1],m[2]]));
     for(const m of s.matchAll(/modelName:"([^"\\]*)",\s*timestampMicros:\d+,\s*date:"([^"\\]*)",\s*referenceLink:"[^"\\]*",\s*avgAllScoreString:"([\d.]+)",\s*avgSpcScoreString:"([\d.]+)",\s*avgSpScoreString:"([\d.]+)",\s*avgQaScoreString:"([\d.]+)",\s*avgSrScoreString:"([\d.]+)"/g)){
-      if(!m[1])continue;out.push({model:m[1],score:Number(m[3]),metrics:{sentenceClassification:Number(m[4]),structuredPrediction:Number(m[5]),questionAnswering:Number(m[6]),sentenceRetrieval:Number(m[7])}});
+      if(!m[1])continue;out.push({model:m[1],submitter:provenance.get(m[1])||undefined,link:links.get(m[1])?.startsWith('https://')?links.get(m[1]):undefined,score:Number(m[3]),metrics:{sentenceClassification:Number(m[4]),structuredPrediction:Number(m[5]),questionAnswering:Number(m[6]),sentenceRetrieval:Number(m[7])}});
     }if(!out.length)throw new Error('XTREME rows missing');return out;
   },
 };

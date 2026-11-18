@@ -19,7 +19,7 @@ const board: Leaderboard = {
       const data=await fetchJson<Record<string,Record<string,any>>>(FEED.replace('Zero-Shot',mode));
       for(const key of Object.keys(data.Model)){
         const score=num(String(data['Average Performance'][key]));
-        if(typeof score==='number')out.push({model:data.Model[key],score,setting:[mode, /Non-Thinking$/i.test(data.Model[key])?'non-thinking':/Thinking$/i.test(data.Model[key])?'thinking':''].filter(Boolean).join(', ')});
+        if(typeof score==='number')out.push({model:data.Model[key],score,license:typeof data['Model: License']?.[key]==='string'?data['Model: License'][key]:undefined,open:data['Model: Accessibility']?.[key]==='Open Source'?true:data['Model: Accessibility']?.[key]==='Proprietary'?false:undefined,params:Number(data['Size (B)']?.[key])>0?Number(data['Size (B)'][key]):undefined,setting:[mode, /Non-Thinking$/i.test(data.Model[key])?'non-thinking':/Thinking$/i.test(data.Model[key])?'thinking':''].filter(Boolean).join(', ')});
       }
     }return out;
   },

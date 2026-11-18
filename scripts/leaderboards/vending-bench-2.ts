@@ -123,7 +123,7 @@ const board: Leaderboard = {
         harness,
         cost: spend?.cost,
         tokens: spend?.tokens,
-        metrics: typeof r.final_value_sem === 'number' ? { sem: r.final_value_sem } : undefined,
+        metrics: typeof r.final_value_sem === 'number' ? { sem: r.final_value_sem, stderr: r.final_value_sem } : undefined,
       });
     }
     return rows;

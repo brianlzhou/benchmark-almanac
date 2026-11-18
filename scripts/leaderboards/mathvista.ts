@@ -19,6 +19,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mathvista',
+  harnesses: 'system',
   url: 'https://mathvista.github.io/#leaderboard',
   feed: `${FEED} (ALL, testmini)`,
   terms: 'Static data file on the MathVista GitHub Pages site; the MathVista repository is CC BY-SA 4.0.',
@@ -41,7 +42,8 @@ const board: Leaderboard = {
       const model = e.Model?.replace(/[\u{1F947}-\u{1F949}]/gu, '').trim();
       if (!model || typeof e.ALL !== 'number' || /human|random|frequent guess/i.test(model)) continue;
       const metrics = Object.fromEntries(Object.entries(e).filter(([key, value]) => key !== 'ALL' && typeof value === 'number' && Number.isFinite(value))) as Record<string, number>;
-      rows.push({ model, score: e.ALL, date: /^\d{4}-\d\d-\d\d$/.test(e.Date ?? '') ? e.Date : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      const system = model.match(/^(DreamPRM|TextGrad) \(([^)]+)\)$/);
+      rows.push({ model: system?.[2] ?? model, harness: system?.[1], link: system && typeof e.Source === 'string' && e.Source.startsWith('https://') ? e.Source : undefined, score: e.ALL, date: /^\d{4}-\d\d-\d\d$/.test(e.Date ?? '') ? e.Date : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no rows in score_table');
     return rows;

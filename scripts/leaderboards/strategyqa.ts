@@ -22,7 +22,7 @@ const board: Leaderboard = {
     await new Promise(resolve=>setTimeout(resolve,1100));
     try {
       const r=await fetchJson<{accuracy?:number}>(url);
-      if(typeof r.accuracy==='number')rows.push({model,score:r.accuracy*100,setting:'unofficial dev split'});
+      if(typeof r.accuracy==='number')rows.push({model,score:r.accuracy*100,link:url,setting:'unofficial dev split'});
     }catch(error){if(!/\b40[34]\b/.test(String(error)))throw error;}
   }
   if(!rows.length)throw new Error('No accessible StrategyQA accuracy results');

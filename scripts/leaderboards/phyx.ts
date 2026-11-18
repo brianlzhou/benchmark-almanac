@@ -16,7 +16,7 @@ const board: Leaderboard = {
   aliases: {"GPT-o4-mini": "o4-mini", "GPT-o3-mini": "o3-mini", "Kimi-VL-A3B-Instruct-2.8B": "kimi-vl-a3b-instruct"},
   
   async fetch() {
-    type Entry = { info: { name: string; type: string }; pro: Record<string, string>; validation: Record<string, string>; test: Record<string, string> };
+    type Entry = { info: { name: string; type: string; size?: string; link?: string; date?: string }; pro: Record<string, string>; validation: Record<string, string>; test: Record<string, string> };
     const { leaderboardData } = await fetchJson<{ leaderboardData: Entry[] }>(FEED);
     const rows: LeaderboardRow[] = [];
     for (const r of leaderboardData) {
@@ -27,7 +27,16 @@ const board: Leaderboard = {
         const metrics: Record<string, number> = {};
         const fields = key === 'pro' ? { fullText: r.pro.vision, textMinimal: r.pro.original, mechanics: r.test.artDesign, electromagnetism: r.test.business, thermodynamics: r.test.science, wavesAcoustics: r.test.healthMedicine, optics: r.test.humanSocialSci, modernPhysics: r.test.techEng } : { fullText: r.validation.artDesign, textMinimal: r.validation.business };
         for (const [k, v] of Object.entries(fields)) { const n = num(v); if (n !== undefined) metrics[k] = n; }
-        rows.push({ model: identity(name), score, setting: `testmini; ${label}; Text-DeRedundancy`, metrics });
+        const size = r.info.size?.match(/[0-9]+(?:\.[0-9]+)?/);
+        rows.push({
+          model: identity(name),
+          score,
+          setting: `testmini; ${label}; Text-DeRedundancy`,
+          params: size ? Number(size[0]) : undefined,
+          open: /open[_ -]?source/i.test(r.info.type) ? true : /proprietary/i.test(r.info.type) ? false : undefined,
+          link: /^https:\/\//.test(r.info.link ?? '') ? r.info.link : undefined,
+          metrics,
+        });
       }
     }
     if (!rows.length) throw new Error('PhyX score entries missing');

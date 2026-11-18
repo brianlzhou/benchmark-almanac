@@ -16,9 +16,18 @@ export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
       if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[`run_${key}`] = Number(r[key]);
     }
     if (r.stderr?.trim() && Number.isFinite(Number(r.stderr))) metrics.standardError = Number(r.stderr) * 100;
+    if (metrics.standardError !== undefined) metrics.stderr = metrics.standardError;
     if (r.mean_score?.trim() && Number.isFinite(Number(r.mean_score))) metrics.meanScore = Number(r.mean_score) * 100;
     const setting = [effort?.[1], r['task version'] ? `task version ${r['task version']}` : undefined].filter(Boolean).join('; ') || undefined;
-    rows.push({ model, score: score * 100, setting, harness: 'Epoch', date: r.started_at?.slice(0, 10) || undefined, metrics });
+    const access = r['Model accessibility'];
+    const size = Number(r.Parameters);
+    const active = r['Parameters notes']?.match(/\b(\d+(?:\.\d+)?)\s*(B|billion) active\b/);
+    if (active) metrics.activeParams = Number(active[1]);
+    const license = r['Accessibility notes']?.match(/^(Modified MIT|MIT|Apache-2\.0|Apache 2\.0)(?: [Ll]icense)?(?:$|\s)/)?.[1];
+    rows.push({ model, score: score * 100, setting, harness: 'Epoch',
+      open: access?.startsWith('Open weights') ? true : ['API access','Hosted access (no API)','Unreleased'].includes(access) ? false : undefined,
+      params: r.Parameters?.trim() && Number.isFinite(size) && size > 0 ? size / 1e9 : undefined,
+      link: r.logs?.startsWith('https://') ? r.logs : undefined, license, date: r.started_at?.slice(0, 10) || undefined, metrics });
   }
   if (!rows.length) throw new Error(`Epoch run export has no rows for ${task}`);
   return rows;

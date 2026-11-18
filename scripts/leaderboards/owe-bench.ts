@@ -47,7 +47,7 @@ const board: Leaderboard = {
       if (Number.isFinite(r.score['best-8'])) metrics.best8 = r.score['best-8'];
       if (Number.isFinite(r.score.elo)) metrics.elo = r.score.elo;
       if (typeof r.error?.['mean-8'] === 'number') metrics.ci95 = r.error['mean-8'];
-      rows.push({ model: r.model_name, score, setting: r.effort || undefined, metrics });
+      rows.push({ model: r.model_name, score, trials: 8, ...(Number.isFinite(metrics.ci95)&&metrics.ci95>=0?{low:score-metrics.ci95,high:score+metrics.ci95}:{}), setting: r.effort || undefined, metrics });
     }
     if (rows.length < 5) throw new Error(`Mercor OWE-Bench board has only ${rows.length} Mean@8 rows`);
     return rows;

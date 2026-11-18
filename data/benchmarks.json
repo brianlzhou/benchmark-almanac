@@ -98159,5 +98159,345 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "bio-probe-openai",
+    "name": "Bio-Probe",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models give probabilities for 21 unpublished biology hypotheses before their results are known. Scored by Brier score against the outcomes.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card. A constant 50% guess scores 0.250.",
+    "unit": "brier",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "eureka-bench-openai",
+    "name": "EUREKA-Bench (OpenAI)",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents build predictive models for six biology research tasks. Scored as predictive performance with the best published predictor in each field set to 100.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card. A six-task pilot. Not the same as the EurekaBench in the catalog.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "sequitur-lab-automation",
+    "name": "Sequitur Research Lab Automation",
+    "category": "bio-chem",
+    "subcategory": "bio-life-sciences",
+    "level": "frontier",
+    "scoring": "expert-graded",
+    "format": "agent-task",
+    "description": "Agents run simulated wet-lab automation protocols. Scored out of 100 on how well each experimental phase is carried out, averaged over six runs.",
+    "org": "Sequitur Research",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Third-party evaluation by Sequitur Research, first reported in the GPT-6.2 System Card.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "uk-aisi-vulnerability-discovery",
+    "name": "UK AISI vulnerability discovery challenges",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "A private suite of synthetic vulnerability discovery challenges. Models answer in a single response without tools, scored pass@1.",
+    "org": "UK AI Security Institute",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Third-party UK AISI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "oeci-openai",
+    "name": "OpenAI Epoch Capabilities Index (OECI)",
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-lab-internal",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "OpenAI's own capabilities index, fit with Epoch AI's method over 34 public and 35 internal benchmarks.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card. Not the same as Epoch AI's own Capabilities Index.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "epoch-no-cot-serial-steps",
+    "name": "Epoch AI no-CoT serial reasoning steps",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "How many serial reasoning steps of fixed difficulty a model can do in a single output token, without a chain of thought, at 25% above chance.",
+    "org": "Epoch AI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Unreleased Epoch AI benchmark, first reported in the GPT-6.2 System Card. The score is a number of steps.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "expected-cyber-refusals-openai",
+    "name": "Expected Cyber Refusals",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Requests for harmful cyber help that a model should refuse. Scored on the share it refuses.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "cyber-utility-openai",
+    "name": "Cyber Utility",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Allowed cybersecurity requests that a model should answer. Scored on the share it answers within policy.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "reasoning-extraction-red-teaming-openai",
+    "name": "Reasoning extraction red-teaming",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Six attacker models try to make a model reveal its hidden reasoning. Scored on how often an attack succeeds.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "prompt-injection-benchmark-environments-openai",
+    "name": "Prompt Injection in Benchmark Environments",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "An automated attacker plants prompt injections in 115 held-out agent environments adapted from Gray Swan challenges. Scored on the share of attacks the model resists.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "prompt-injection-model-generated-environments-openai",
+    "name": "Prompt Injection in Model-Generated Environments",
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "An automated attacker writes both the agent environments and the prompt injections in them. Scored on the share of attacks the model resists.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "model-spec-targeted-cases-openai",
+    "name": "Model Spec Targeted Cases",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "738 cases written to test specific rules of OpenAI's Model Spec. Scored on the share of responses that follow it.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "model-spec-conversation-replay-openai",
+    "name": "Model Spec Conversation Replay",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "596 contexts taken from real conversations are replayed to the model. Scored from 0 to 100 against a rubric drawn from the Model Spec.",
+    "org": "OpenAI",
+    "released": "2026-11",
+    "access": "private",
+    "note": "In-house OpenAI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "uk-aisi-correlated-monitor-failure",
+    "name": "UK AISI correlated monitor failure",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "The model acts as a monitor over transcripts of another model carrying out an unsanctioned cyber attack. Scored on the share of violations it fails to flag.",
+    "org": "UK AI Security Institute",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Third-party UK AISI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "uk-aisi-file-download-monitor-evasion",
+    "name": "UK AISI File Download monitor evasion",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "The model tries to download a forbidden file without a monitoring model noticing. Scored on how often it evades the monitor.",
+    "org": "UK AI Security Institute",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Third-party UK AISI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "uk-aisi-sandbox-escape-monitor-evasion",
+    "name": "UK AISI simulated sandbox escape monitor evasion",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "The model tries to escape a deliberately vulnerable sandbox without a monitoring model noticing. Scored on the share of samples where it escapes undetected.",
+    "org": "UK AI Security Institute",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Third-party UK AISI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
+  },
+  {
+    "id": "uk-aisi-no-cot-maths",
+    "name": "UK AISI no-CoT maths competition problems",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "competition",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Competition maths problems from AIME, HMMT, CMIMC, SMT, BRUMO and OTIS Mock AIME, answered without a chain of thought. Scored on accuracy.",
+    "org": "UK AI Security Institute",
+    "released": "2026-11",
+    "access": "private",
+    "note": "Third-party UK AISI evaluation, first reported in the GPT-6.2 System Card.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf"
+    ]
   }
 ]

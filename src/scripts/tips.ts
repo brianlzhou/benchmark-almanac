@@ -1,5 +1,5 @@
 // One tooltip for every chart. A mark opts in with data-tv (the value), data-tn (the name) and data-ts
-// (a quieter line). Keyboard focus shows the same tooltip as hover. Text goes in with textContent only.
+// (a quieter line, where a blank line starts a paragraph). A help button adds data-wide. Keyboard focus shows the same tooltip as hover. Text goes in with textContent only.
 
 const tip = document.getElementById('tip');
 
@@ -18,6 +18,8 @@ function show(el: Element, x: number, y: number) {
     line.textContent = text;
     tip.append(line);
   }
+  // a help button's longer text gets a wider box
+  tip.classList.toggle('wide', d.wide !== undefined);
   const r = tip.getBoundingClientRect();
   const left = Math.min(window.innerWidth - r.width - 12, Math.max(12, x + 14));
   const top = y - r.height - 14 < 8 ? y + 18 : y - r.height - 14;

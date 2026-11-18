@@ -13,7 +13,17 @@ export const SWE_BENCH_TERMS =
 interface Result {
   name: string;
   agent: string;
+  agent_org?: string;
   model_display: string;
+  /** true when the SWE-bench team checked the submission; false, null or a "false (...)" note otherwise */
+  checked?: boolean | string | null;
+  /** s3://swe-bench-submissions/<split>/<folder>/logs: the same folder is public in SWE-bench/experiments */
+  logs?: unknown;
+  trajs?: unknown;
+  trajs_docent?: unknown;
+  site?: string;
+  os_model?: boolean | null;
+  folder?: string;
   reasoning_effort: string | null;
   resolved: number;
   /** US dollars per task instance; "cost" is the total for all 500. */
@@ -27,17 +37,40 @@ export async function sweBenchRows(name: string): Promise<LeaderboardRow[]> {
   const data = await fetchJson<{ leaderboards: { name: string; results: Result[] }[] }>(SWE_BENCH_FEED);
   const board = data.leaderboards.find((b) => b.name === name);
   if (!board) throw new Error(`no ${name} board in leaderboards.json`);
-  return board.results
-    .filter((r) => r.model_display && !/^multiple$/i.test(r.model_display)) // "Multiple": several models
-    .map((r) => ({
-      model: r.model_display,
+  const out: LeaderboardRow[] = [];
+  for (const r of board.results) {
+    if (!r.model_display) continue;
+    // "Multiple" marks a submission that uses several models: a blend, named by its first model. The tags list
+    // every model ("Model: claude-sonnet-4-20250514").
+    const tagged = (r.tags ?? []).filter((t) => t.startsWith('Model: ')).map((t) => t.slice(7).trim());
+    const multiple = /^multiple$/i.test(r.model_display);
+    const model = multiple ? tagged[0] : r.model_display;
+    if (!model) continue;
+    const path = typeof r.logs === 'string' ? r.logs : typeof r.trajs === 'string' ? r.trajs : undefined;
+    const split = !path ? null : path.match(/^s3:\/\/swe-bench-submissions\/([\w-]+)\/([^/]+)\//);
+    out.push({
+      model,
       score: Number(r.resolved),
       setting: r.reasoning_effort?.toLowerCase() || undefined,
       harness: r.agent,
       date: r.date,
       cost: r.instance_cost ?? undefined,
-    }));
+      agentOrg: r.agent_org?.trim() || undefined,
+      verified: typeof r.checked === 'boolean' ? r.checked : typeof r.checked === 'string' && /^false\b/i.test(r.checked) ? false : undefined,
+      trials: r.tags?.includes('System: Attempts - 1') ? 1 : undefined,
+      ...(multiple && new Set(tagged).size > 1 ? { models: tagged } : {}),
+      link: typeof r.trajs_docent === 'string' && r.trajs_docent.startsWith('https://') ? r.trajs_docent : split ? `https://github.com/SWE-bench/experiments/tree/main/evaluation/${split[1]}/${split[2]}` : r.site?.startsWith('https://github.com/') ? r.site : undefined,
+      ...(typeof r.os_model === 'boolean' ? { open: r.os_model } : {}),
+    });
+  }
+  return out;
 }
+
+/**
+ * What every SWE-bench board shares: each entry is an agent and a model. mini-SWE-agent, the "Bash Only" view, is
+ * the neutral one (data/harnesses.json). Other agents show as their own entries.
+ */
+export const SWE_BENCH_BOARD = { harnesses: 'system', reference: ['mini-SWE-agent', 'RAG'], verified: 'checked by the SWE-bench team' } satisfies Pick<Leaderboard, 'harnesses' | 'reference' | 'verified'>;
 
 export const SWE_BENCH_ALIASES: Record<string, string> = {
   'Claude 4 Opus': 'claude-opus-4',
@@ -66,6 +99,7 @@ const board: Leaderboard = {
   feed: SWE_BENCH_FEED,
   terms: SWE_BENCH_TERMS,
   aliases: SWE_BENCH_ALIASES,
+  ...SWE_BENCH_BOARD,
   fetch: () => sweBenchRows('Verified'),
 };
 export default board;

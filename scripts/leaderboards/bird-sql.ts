@@ -3,7 +3,7 @@
 // (the evidence hints) was given, and execution accuracy on Dev and on the hidden Test set. Test (%) is the
 // ranking and the score; the Dev column mixes the original and the 2025-11-06 dev sets. Rows without oracle knowledge are retained with an explicit setting.
 // The reported Dev score remains a metric because the board mixes dev-set versions. Most entries are text-to-SQL systems built on a model ("CHASE-SQL + Gemini"), which the
-// resolver leaves unmatched; the plain-model baselines (GPT-5.5, Claude Opus 4.6, DeepSeek-R1, T5...) match.
+// explicit system/model pairs are kept separately from the plain-model baselines.
 // The date badge is the submission date.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -23,6 +23,7 @@ function badgeDate(s: string): string | undefined {
 
 const board: Leaderboard = {
   benchmark: 'bird-sql',
+  harnesses: 'system',
   url: URL,
   feed: `${URL} (main leaderboard table, Test %)`,
   terms: 'Static GitHub Pages site of the BIRD project; there is no robots.txt and the site publishes no terms of use.',
@@ -42,14 +43,27 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       // the model cell is "Name<br><span class="affiliation">Team</span>..."
-      const model = text(r[iModel]?.html.split(/<br|<span/i)[0] ?? '');
+      let model = text(r[iModel]?.html.split(/<br|<span/i)[0] ?? '');
       const score = num(r[iTest]?.text);
       if (!model || score === undefined || /human performance/i.test(model)) continue;
       const oracle = /✔/.test(r[iOracle]?.text ?? '');
       const dev = num(r[head.indexOf('Dev (%)')]?.text);
+      const submitter = text(r[iModel]?.html.match(/<span\b[^>]*class="affiliation"[^>]*>([\s\S]*?)<\/span\s*>/i)?.[1] ?? '') || undefined;
+      const code = r[head.indexOf('Code')]?.html.match(/href="(https:\/\/[^"\s]+)"/i)?.[1];
+      const link = code && !/^https:\/\/(huggingface\.co|developers\.openai\.com)\//.test(code) ? code : undefined;
+      const size = r[head.indexOf('Size')]?.text.match(/^(\d+(?:\.\d+)?)\s*([BM])(?:-(\d+(?:\.\d+)?)B-MoE)?$/i);
+      const params = size ? Number(size[1]) / (size[2].toUpperCase() === 'M' ? 1000 : 1) : undefined;
+      let harness: string | undefined;
+      const agent = model.match(/^(.+?)\s*\+\s*((?:GPT-|Gemini|Qwen|XiYanSQL-|granite-|DeepSeek|gpt-oss-).*)$/);
+      const flash = model.match(/^(flash-sqlite(?:-4b)?): (Qwen\S+) Generator/);
+      if (agent) { harness = agent[1].trim(); model = agent[2].trim(); }
+      else if (flash) { harness = flash[1]; model = flash[2]; }
+      else if (model === 'SFT CodeS-15B + SQLFixAgent') { harness = 'SQLFixAgent'; model = 'SFT CodeS-15B'; }
       rows.push({ model, score, date: badgeDate(r[0]?.text ?? ''),
+        harness, submitter, link, params,
         setting: oracle ? undefined : 'without oracle knowledge',
-        metrics: dev === undefined ? undefined : { developmentReported: dev },
+        metrics: { ...(dev === undefined ? {} : { developmentReported: dev }),
+          ...(size?.[3] ? { activeParams: Number(size[3]) } : {}) },
       });
     }
     return rows;

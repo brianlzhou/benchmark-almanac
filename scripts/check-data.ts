@@ -159,6 +159,42 @@ for (const r of boards.rows) {
   if (!modelIds.has(r[1])) fail(`leaderboard row: unknown model ${r[1]}`);
 }
 
+// the info column (scripts/sync-leaderboards.ts): what a board says about an entry beyond its score
+{
+  const INFO_KEYS = new Set(['submitter', 'agentOrg', 'verified', 'models', 'run', 'link', 'trials', 'low', 'high', 'open', 'license', 'params']);
+  const all = [...boards.rows, ...((boards as { others?: unknown[][] }).others ?? [])];
+  for (const r of all) {
+    if (r.length <= 9) continue;
+    const at = `leaderboard row ${r[0]} ${r[1]}`;
+    if (r[8] !== null && (typeof r[8] !== 'object' || Array.isArray(r[8]))) fail(`${at}: metrics is not an object or null`);
+    const i = r[9] as Record<string, unknown>;
+    if (!i || typeof i !== 'object' || Array.isArray(i)) {
+      fail(`${at}: info is not an object`);
+      continue;
+    }
+    for (const k of Object.keys(i)) if (!INFO_KEYS.has(k)) fail(`${at}: unknown info key ${k}`);
+    if (i.models !== undefined && (!Array.isArray(i.models) || i.models.length < 2 || i.models.some((m) => typeof m !== 'string' || (!m.startsWith('~') && !modelIds.has(m)))))
+      fail(`${at}: info.models must list two or more known model ids or ~names`);
+    if (i.run !== undefined && !/^\d{4}-\d\d-\d\d$/.test(String(i.run))) fail(`${at}: info.run is not a date`);
+    if (i.link !== undefined && !/^https?:\/\/\S+$/.test(String(i.link))) fail(`${at}: info.link is not a web address`);
+    if ((i.low === undefined) !== (i.high === undefined) || (typeof i.low === 'number' && typeof i.high === 'number' && i.low > i.high)) fail(`${at}: info.low and info.high must come together, low first`);
+    for (const k of ['verified', 'open']) if (i[k] !== undefined && typeof i[k] !== 'boolean') fail(`${at}: info.${k} is not true or false`);
+    for (const k of ['trials', 'params']) if (i[k] !== undefined && !(typeof i[k] === 'number' && i[k] > 0)) fail(`${at}: info.${k} is not a positive number`);
+  }
+  // data/harnesses.json: names the site uses to tell an agent built around a model from the model on its own
+  const harnesses = readJson<{ id: string; name: string; aliases: string[]; maker: string; kind: string }[]>(dataPath('harnesses.json'));
+  const seenNames = new Map<string, string>();
+  for (const h of harnesses) {
+    if (!h.id || !h.name || !Array.isArray(h.aliases) || !h.maker) fail(`harness ${h.id}: needs id, name, aliases and maker`);
+    if (!['reference', 'agent'].includes(h.kind)) fail(`harness ${h.id}: kind must be reference or agent`);
+    for (const n of [h.id, h.name, ...h.aliases]) {
+      const k = n.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (seenNames.has(k) && seenNames.get(k) !== h.id) fail(`harness ${h.id}: name ${n} is also ${seenNames.get(k)}`);
+      seenNames.set(k, h.id);
+    }
+  }
+}
+
 // paper abstracts written by scripts/abstracts.ts: only for known benchmarks, and only under an open license
 const abstractsPath = dataPath('abstracts.json');
 const abstracts = existsSync(abstractsPath)
@@ -206,6 +242,50 @@ for (const a of audits) {
     if (!AUDIT_STATUSES.has(f.status ?? '')) fail(`${at}: unknown status ${f.status}`);
     if (!f.summary?.trim()) fail(`${at}: no summary`);
     for (const x of [...(f.fixes ?? []), ...(f.response ? [f.response] : [])]) if (!/^https:\/\//.test(x.url ?? '')) fail(`${at}: a link is not an https address`);
+  }
+}
+
+// the first day we saw each new leaderboard score (scripts/first-seen.ts), for the time machine
+const DAY = /^\d{4}-\d\d-\d\d$/;
+const firstSeenPath = dataPath('scores', 'first-seen.json');
+if (existsSync(firstSeenPath)) {
+  const fs = readJson<{ since?: string; updated?: string; boards?: Record<string, string>; rows?: unknown[][] }>(firstSeenPath);
+  if (!DAY.test(fs.since ?? '') || !DAY.test(fs.updated ?? '')) fail('first-seen.json: bad since or updated day');
+  for (const [b, d] of Object.entries(fs.boards ?? {})) {
+    if (!benchIds.has(b)) warn.push(`first-seen.json: board of unknown benchmark ${b}`);
+    if (!DAY.test(d) || d <= fs.since!) fail(`first-seen.json: board ${b} has a bad first day ${d}`);
+  }
+  const keys = new Set<string>();
+  for (const r of fs.rows ?? []) {
+    const [b, entry, setting, harness, day] = r as [string, string, string | null, string | null, string];
+    const k = `${b}\t${entry}\t${setting ?? ''}\t${harness ?? ''}`;
+    if (keys.has(k)) fail(`first-seen.json: duplicate row ${k.replace(/\t/g, ' | ')}`);
+    keys.add(k);
+    if (!DAY.test(day ?? '') || day <= fs.since!) fail(`first-seen.json: row ${b} ${entry} has a bad first day ${day}`);
+    // a model or benchmark can leave the catalog after we saw it: that's only worth a warning
+    if (!benchIds.has(b)) warn.push(`first-seen.json: row of unknown benchmark ${b}`);
+    else if (!entry?.startsWith('~') && !modelIds.has(entry)) warn.push(`first-seen.json: row of unknown model ${entry}`);
+  }
+}
+
+// Arena's text leaderboard on each day it was published (scripts/arena-history.ts), for the time machine
+const arenaPath = dataPath('scores', 'arena-history.json');
+if (existsSync(arenaPath)) {
+  const ah = readJson<{ license?: string; url?: string; retrieved?: string; snapshots?: { date: string; rows: [string, string | null, string | null, number, number][] }[] }>(arenaPath);
+  if (ah.license !== 'CC BY 4.0') fail(`arena-history.json: license ${ah.license}, expected CC BY 4.0`);
+  if (!/^https:\/\/huggingface\.co\//.test(ah.url ?? '')) fail('arena-history.json: the source must be the Hugging Face dataset');
+  if (!DAY.test(ah.retrieved ?? '')) fail('arena-history.json: bad retrieved day');
+  let last = '';
+  for (const s of ah.snapshots ?? []) {
+    if (!DAY.test(s.date) || s.date <= last) fail(`arena-history.json: snapshot ${s.date} is out of order or not a day`);
+    last = s.date;
+    if (!s.rows.length) fail(`arena-history.json: snapshot ${s.date} has no rows`);
+    for (const [name, model, lab, rating] of s.rows) {
+      if (!name) fail(`arena-history.json: ${s.date} has a row with no name`);
+      if (model && !modelIds.has(model)) fail(`arena-history.json: ${s.date} names unknown model ${model}`);
+      if (lab && !labIds.has(lab)) fail(`arena-history.json: ${s.date} names unknown lab ${lab}`);
+      if (!Number.isFinite(rating)) fail(`arena-history.json: ${s.date} ${name} has no rating`);
+    }
   }
 }
 

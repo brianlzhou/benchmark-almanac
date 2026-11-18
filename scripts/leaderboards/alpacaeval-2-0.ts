@@ -10,6 +10,8 @@ const FEED = 'https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/
 
 const board: Leaderboard = {
   benchmark: 'alpacaeval-2-0',
+  harnesses: 'system',
+  verified: 'listed in the verified submission group',
   url: 'https://tatsu-lab.github.io/alpaca_eval/',
   feed: `${FEED} (length_controlled_winrate, all submission groups)`,
   terms: 'CSV in the tatsu-lab/alpaca_eval repository, which is Apache-2.0.',
@@ -47,7 +49,30 @@ const board: Leaderboard = {
       const score = Number(r.length_controlled_winrate);
       // plain "GPT-4" does not say which snapshot ran ("GPT-4 (06/13)" and "GPT-4 (03/14)" are separate rows)
       if (!r.name || !r.length_controlled_winrate.trim() || !Number.isFinite(score)) continue;
-      rows.push({ model: r.name.trim() === 'GPT-4' ? 'GPT-4 (snapshot unspecified)' : r.name.trim(), score, setting: r.filter || 'unclassified submission' });
+      const name = r.name.trim();
+      const row: LeaderboardRow = {
+        model: name === 'GPT-4' ? 'GPT-4 (snapshot unspecified)' : name,
+        score,
+        setting: r.filter || 'unclassified submission',
+        verified: r.filter === 'verified' ? true : undefined,
+        link: r.samples?.startsWith('https://') ? r.samples : undefined,
+      };
+      const aligner = name.match(/^Aligner 2B\+(.+)$/);
+      const pair = name.match(/^PairRM 0\.4B\+(.+) \(best-of-16\)$/);
+      const self = name.match(/^SelfMoA \+ (.+)$/);
+      if (aligner || pair) {
+        row.model = (aligner ?? pair)![1];
+        row.harness = aligner ? 'Aligner' : 'PairRM';
+        row.models = [row.model, aligner ? 'Aligner 2B' : 'PairRM 0.4B'];
+        if (pair) row.setting += '; best-of-16';
+      } else if (self) {
+        row.model = self[1];
+        row.harness = 'SelfMoA';
+      } else if (name === 'OpenPipe MoA GPT-4 Turbo') {
+        row.model = 'GPT-4 Turbo';
+        row.harness = 'OpenPipe MoA';
+      }
+      rows.push(row);
     }
     if (!rows.length) throw new Error('no verified rows in the AlpacaEval 2.0 CSV');
     return rows;

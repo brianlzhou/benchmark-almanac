@@ -15,7 +15,7 @@ const board: Leaderboard = {
     const fixed=source.replace(/<\/td>\s*<tr>/g,"</td></tr><tr>").replace("<b>54.4</b><td>","<b>54.4</b></td><td>");const ts=tables(fixed).map(t=>t.map(r=>r.map(c=>c.text)));let taskTable=0;
     for(const t of ts){const avg=t[0]?.[0]==="Averaging",task=t[0]?.[0]==="Dataset"&&t[0]?.includes("CaseHOLD");if(!avg&&!task)continue;if(task)taskTable++;for(const r of t.slice(2)){if(r.length!==t[0].length)continue;for(let i=1;i<r.length;i++){const parts=r[i].split("/");const score=num(parts[0]);if(score===undefined)continue;const macro=num(parts[1]);rows.push({model:r[0],score,setting:avg?`${t[0][i]} mean; micro-F1`:`${t[0][i]}; ${taskTable===3?"small-sized":"standard"}; micro-F1`,metrics:macro===undefined?undefined:{macroF1:macro}});}}}
     if (!rows.length) throw new Error("No lexglue score rows");
-    return rows.filter(r=>r.setting==='Harmonic mean; micro-F1').map(r=>({...r,setting:undefined,
+    return rows.filter(r=>r.setting==='Harmonic mean; micro-F1').map(r=>({...r,setting:undefined,trials:/5 randoms seeds/.test(source)?5:undefined,
       metrics:{...r.metrics,...Object.fromEntries(rows.filter(x=>x.model===r.model&&/^(Arithmetic|Geometric) mean/.test(x.setting??'')).flatMap(x=>{
         const key=x.setting!.split(' ')[0].toLowerCase();return [[key+'_microF1',x.score],...(x.metrics?.macroF1===undefined?[]:[[key+'_macroF1',x.metrics.macroF1]])];
       }))}}));

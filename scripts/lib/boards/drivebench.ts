@@ -16,7 +16,7 @@ const board: Leaderboard = {
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Perception ( Clean )'));if(!t)throw new Error('DriveBench score table missing');
     const out:LeaderboardRow[]=[];const head=t[0].map(c=>c.text);
-    for(const r of t.slice(1)){if(!r[0]?.text||r[0].text==='Human')continue;const model=r[0].text+(r[1].text!=='-'?' '+r[1].text:'');for(let i=3;i<head.length;i++){const score=num(r[i]?.text);if(score!==undefined)out.push({model:identity(model),score,setting:head[i]});}}
+    for(const r of t.slice(1)){if(!r[0]?.text||r[0].text==='Human')continue;const model=r[0].text+(r[1].text!=='-'?' '+r[1].text:'');for(let i=3;i<head.length;i++){const score=num(r[i]?.text);if(score!==undefined)out.push({model:identity(model),score,setting:head[i],params: /^\d+(?:\.\d+)?B$/.test(r[1].text) ? Number(r[1].text.slice(0,-1)) : undefined,open: r[2].text === "Open" ? true : undefined});}}
     return out;
   },
 };

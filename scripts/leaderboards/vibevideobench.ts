@@ -20,6 +20,7 @@ interface Vvb {
 
 const board: Leaderboard = {
   benchmark: 'vibevideobench',
+  harnesses: 'system',
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (inline window.VVB, board.avg mean)`,
   terms: 'Static project page on GitHub Pages (no robots.txt); the VibeVideoBench repository is Apache-2.0.',

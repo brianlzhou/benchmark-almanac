@@ -14,12 +14,13 @@ export const evalaiFeed = (split: number) => `https://eval.ai/api/jobs/challenge
 interface Entry {
   submission__participant_team__team_name?: string;
   submission__method_name?: string;
+  submission__is_verified_by_host?: boolean;
   submission__submitted_at?: string;
   result?: number[];
 }
 
 /** One row per public submission by `team`, scored by the result at `index` times `scale`. */
-export async function evalaiRows(split: number, team: string, index = 0, scale = 100): Promise<LeaderboardRow[]> {
+export async function evalaiRows(split: number, team: string, index = 0, scale = 100, details = false): Promise<LeaderboardRow[]> {
   const rows: LeaderboardRow[] = [];
   let next: string | null = evalaiFeed(split);
   while (next) {
@@ -28,7 +29,8 @@ export async function evalaiRows(split: number, team: string, index = 0, scale =
       const v = e.result?.[index];
       const model = e.submission__method_name?.trim();
       if (!model || typeof v !== 'number' || e.submission__participant_team__team_name !== team) continue;
-      rows.push({ model, score: v * scale, date: e.submission__submitted_at?.slice(0, 10) });
+      rows.push({ model, score: v * scale, date: e.submission__submitted_at?.slice(0, 10),
+        ...(details ? { submitter: e.submission__participant_team__team_name, verified: e.submission__is_verified_by_host } : {}) });
     }
     next = page.next;
   }
@@ -40,6 +42,7 @@ import { mdTables } from './big-bench-extra-hard.ts';
 
 const board: Leaderboard = {
   benchmark: 'blink',
+  verified: 'verified by the BLINK host on EvalAI',
   url: 'https://eval.ai/web/challenges/challenge-page/2287/leaderboard/5658',
   feed: `${evalaiFeed(5658)} and https://raw.githubusercontent.com/zeyofu/BLINK_Benchmark/main/README.md (test split)`,
   terms: EVALAI_TERMS,
@@ -51,7 +54,7 @@ const board: Leaderboard = {
   // The README adds GPT-4o and GPT-4 Turbo after the EvalAI host submissions.
   // Keep the precise API rows and add those two published test results without assigning snapshots.
   async fetch() {
-    const rows = await evalaiRows(5658, 'Host_28919_Team');
+    const rows = await evalaiRows(5658, 'Host_28919_Team', 0, 100, true);
     const md = await fetchText('https://raw.githubusercontent.com/zeyofu/BLINK_Benchmark/main/README.md');
     const t = mdTables(md).find(t => t.head.includes('Test (1,907)'));
     if (!t) throw new Error('BLINK README test table missing');
@@ -76,7 +79,7 @@ const board: Leaderboard = {
           const value = e.result?.[i];
           if (i > 0 && typeof value === 'number' && Number.isFinite(value)) metrics[label] = value * 100;
         }
-        rows.push({model: `BLINK submission ${e.id}: ${e.submission__method_name?.trim() || e.submission__participant_team__team_name || 'unnamed'}`, score: score * 100, harness: e.submission__participant_team__team_name, date: e.submission__submitted_at?.slice(0,10), metrics});
+        rows.push({model: `BLINK submission ${e.id}: ${e.submission__method_name?.trim() || e.submission__participant_team__team_name || 'unnamed'}`, score: score * 100, submitter: e.submission__participant_team__team_name, verified: e.submission__is_verified_by_host, date: e.submission__submitted_at?.slice(0,10), metrics});
       }
       next = page.next;
     }

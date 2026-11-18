@@ -3,9 +3,9 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const FEED='http://opencompass.openxlab.space/utils/video_leaderboard.json';
-const board:Leaderboard={benchmark:'mmbench-video',url:'https://rank.opencompass.org.cn/leaderboard-multimodal',feed:FEED,terms:'Public OpenCompass leaderboard file, subject to project and host terms.',
-async fetch(){const {results}=await fetchJson<{results:Record<string,{META?:{Method?:string[];Frames?:string;Time?:string};'MMBench-Video'?:Record<string,number>}>}>(FEED);const rows:LeaderboardRow[]=[];
-for(const [id,e] of Object.entries(results)){const m=e['MMBench-Video'];if(typeof m?.Overall!=='number')continue;rows.push({model:e.META?.Method?.[0]??id,score:m.Overall,setting:e.META?.Frames?`${e.META.Frames} frames`:undefined,date:e.META?.Time?.replace(/\//g,'-'),metrics:Object.fromEntries(Object.entries(m).filter(([k,v])=>k!=='Overall'&&typeof v==='number'))});}if(!rows.length)throw new Error('No MMBench-Video scores');return rows;}};
+const board:Leaderboard={benchmark:'mmbench-video',url:'https://rank.opencompass.org.cn/leaderboard-multimodal',feed:FEED,verified:'marked verified by OpenCompass',terms:'Public OpenCompass leaderboard file, subject to project and host terms.',
+async fetch(){const {results}=await fetchJson<{results:Record<string,{META?:{Method?:string[];Frames?:string;Time?:string;Verified?:string;OpenSource?:string;Parameters?:string};'MMBench-Video'?:Record<string,number>}>}>(FEED);const rows:LeaderboardRow[]=[];
+for(const [id,e] of Object.entries(results)){const m=e['MMBench-Video'];if(typeof m?.Overall!=='number')continue;rows.push({model:e.META?.Method?.[0]??id,score:m.Overall,verified:e.META?.Verified==='Yes'?true:e.META?.Verified==='No'?false:undefined,open:e.META?.OpenSource==='Yes'?true:e.META?.OpenSource==='No'?false:undefined,params:/^\d+(?:\.\d+)?B$/.test(e.META?.Parameters??'')?Number(e.META!.Parameters!.slice(0,-1)):undefined,setting:e.META?.Frames?`${e.META.Frames} frames`:undefined,date:e.META?.Time?.replace(/\//g,'-'),metrics:Object.fromEntries(Object.entries(m).filter(([k,v])=>k!=='Overall'&&typeof v==='number'))});}if(!rows.length)throw new Error('No MMBench-Video scores');return rows;}};
 // An evaluation date does not establish a model snapshot. Preserve ambiguous names as unlisted entries.
 const snapshotFetch = board.fetch;
 board.fetch = async () => (await snapshotFetch()).map(r => {

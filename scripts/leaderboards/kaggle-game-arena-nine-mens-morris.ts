@@ -3,7 +3,7 @@
 // per move, not per task, and are not kept. Read through the helper in kaggle-game-arena.ts (Kaggle's
 // documented public leaderboard endpoint).
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-nine-mens-morris',
@@ -11,6 +11,6 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'nine-mens-morris'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('kaggle', 'nine-mens-morris'),
+  fetch: () => kaggleRowsWithBounds('kaggle', 'nine-mens-morris'),
 };
 export default board;

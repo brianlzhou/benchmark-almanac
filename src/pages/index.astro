@@ -100,13 +100,14 @@ const fresh = byAdded.length
   ? byAdded
   : benchmarks.filter((b) => b.released && b.released >= monthAgo.slice(0, 7) && b.access !== 'private').sort((a, b) => b.released!.localeCompare(a.released!));
 const discovered = (discoveredJson as unknown as { items: Find[] }).items.filter((d) => d.decision === 'catalog').slice(0, 6);
-// schema.org: the site, and the catalog every benchmark page's Dataset names as its home (CATALOG_ID)
+// schema.org: the site, and the catalog every benchmark page's Dataset names as its home (CATALOG_ID). The
+// WebSite has no alternateName: Google picks its site name from name and alternateName, and the hostname there
+// would let it show "www.benchmarkalmanac.com" instead of the site's name.
 const home = new URL('/', Astro.site).href;
 const website = {
   '@type': 'WebSite',
   '@id': `${home}#website`,
   name: SITE_NAME,
-  alternateName: new URL(home).hostname,
   url: home,
   description: SITE_DESCRIPTION,
   inLanguage: 'en',

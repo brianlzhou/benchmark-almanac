@@ -6,6 +6,10 @@ dist/
 # Local caches
 .cache/
 
+# The SQLite database, rebuilt from data/ before each site build (scripts/build-db.ts)
+public/data/almanac.db
+public/data/almanac.db.gz
+
 # Vercel CLI link and prebuilt output
 .vercel/
 

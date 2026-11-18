@@ -63,6 +63,7 @@ export function makeFrontierCode(opts: { benchmark: string; url: string; path: s
   const feed = `https://cognition.com${opts.path}`;
   return {
     benchmark: opts.benchmark,
+    harnesses: 'system',
     url: opts.url,
     feed,
     terms: "Static JSON on cognition.com that the page's chart loads; Cognition's website terms set no rule against automated reading.",

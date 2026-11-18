@@ -68460,5 +68460,899 @@
         "section": "capabilities"
       }
     ]
+  },
+  {
+    "id": "openai-gpt-6-2-astra-system-card-2026-11-17",
+    "lab": "openai",
+    "model": "gpt-6-2-astra",
+    "date": "2026-11-17",
+    "doc": "system card",
+    "title": "GPT-6.2 System Card",
+    "url": "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf",
+    "release": "openai-gpt-6-2-astra-2026-11-17",
+    "notes": "119 pages, sections 2 to 4 recorded from tables, text and printed chart labels, with category-only tables and unlabeled charts as null. Misuse monitor recall, SecureBio scores given only as differences from GPT-6 Astra, qualitative red-teaming findings and evaluations with no catalog id yet (such as Bio-Probe, EUREKA-Bench, the OpenAI Epoch Capabilities Index and the Model Spec evals) are not recorded. The Vals AI RSI Index result is left out, since the card ran a modified version.",
+    "results": [
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 97.0,
+        "unit": "%",
+        "as_written": "GPQA Diamond (no tools), accuracy (Table 2, 2.1.1.1.1)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "multimodal-troubleshooting-virology-openai",
+        "score": 61.8,
+        "unit": "%",
+        "as_written": "Multi-select Virology Troubleshooting, pass@1 observed (refusal-adjusted 61.93%) (Table 2, 2.1.1.1.2)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "aav-capsid-packaging-prediction-openai",
+        "score": 0.5931,
+        "unit": "score",
+        "as_written": "AAV capsid packaging, mean Spearman rank correlation, updated prompt (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "shp2-protein-function-prediction-openai",
+        "score": 0.4604,
+        "unit": "score",
+        "as_written": "SHP2 protein function, mean of median R² across three assays (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "coronavirus-ace2-cell-entry-screen-openai",
+        "score": 0.4352,
+        "unit": "score",
+        "as_written": "Coronavirus–ACE2 cell entry, median composite score (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "phage-plasmid-coevolution-openai",
+        "score": 11.645,
+        "unit": "score",
+        "as_written": "Phage–plasmid co-evolution, median pair-weighted NLL, lower is better (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "reprobait-securebio",
+        "score": null,
+        "unit": "%",
+        "as_written": "SecureBio ReproBAIT, pre-release checkpoint, 109.4% and 88.8% of the original tool's performance on two protein-design tasks, no overall score (2.1.1.3.4)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "advanced-screening-evasion-securebio",
+        "score": 0.698,
+        "unit": "score",
+        "as_written": "SecureBio Advanced Screening Evasion, helpful-only variant (2.1.1.3.4), printed as 69.8%",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 86.75,
+        "unit": "%",
+        "as_written": "SEC-Bench Pro, vulnerability reproduction pass@1, maximum reasoning effort (Table 4)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitbench",
+        "score": 100,
+        "unit": "%",
+        "as_written": "ExploitBench V8, Cap Percent (mean capability credit, five attempts per vulnerability), every reasoning setting (Table 4, 2.1.2.1.2)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitbench-internal-port-openai",
+        "score": 53.5,
+        "unit": "%",
+        "as_written": "ExploitBench Internal Port (June to August 2026), mean arbitrary code execution rate across V8 and Chrome, maximum reasoning setting (Table 4)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "sandbox-bench-openai",
+        "score": 36.4,
+        "unit": "%",
+        "as_written": "Sandbox Bench, share of targets solved (2.1.2.2.1)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "cyscenariobench",
+        "score": 63,
+        "unit": "%",
+        "as_written": "Irregular CyScenarioBench, success rate, latest suite version (9 of 11 solved at least once) (2.1.2.2.3)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "frontiercyber-irregular",
+        "score": 31.3,
+        "unit": "%",
+        "as_written": "Irregular FrontierCyber, 68 of 217 challenges solved, latest suite version (2.1.2.2.3)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "internal-research-debugging-openai",
+        "score": 81.85,
+        "unit": "%",
+        "as_written": "Internal Research Debugging, mean rubric score (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "kernelgen-1p-openai",
+        "score": 76.92,
+        "unit": "%",
+        "as_written": "KernelGen 1P, mean rubric score (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "nanogpt-speedrun",
+        "score": 42.87,
+        "unit": "%",
+        "as_written": "NanoGPT, mean share of baseline training time saved, version 5 (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "posttrainbench",
+        "score": 74.79,
+        "unit": "%",
+        "as_written": "PostTrainBench Lite, mean share of performance gap closed, 12 tasks (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "mle-bench",
+        "score": 96.06,
+        "unit": "%",
+        "as_written": "MLE-Bench Revised (72 problems), mean reference percentile (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "epoch-capabilities-index",
+        "score": 174,
+        "unit": "index",
+        "as_written": "Epoch AI Epoch Capabilities Index (ECI), pre-release evaluation (2.1.3.2.2)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "frontiermath-erdos",
+        "score": 10.3,
+        "unit": "%",
+        "as_written": "Epoch AI FrontierMath Erdős, Lean solutions to 7 of 68 problems with a $300 budget per question (2.1.3.2.2)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "epoch-automation-reports",
+        "score": null,
+        "unit": "%",
+        "as_written": "Epoch Automation Reports, subset of an improved version, text says no meaningful improvement over GPT-6 Astra, no score (2.1.3.2.2)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "biology-refusal-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Biology Model Refusal Evaluation, severe, dual-use and benign rows, no overall score (Table 6)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "biological-safety-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Biological Safeguards Evaluations, 4 sets, model only and with system-level safeguards, no overall score (Table 7)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "openai-cyber-safety-evaluations-incl-daybreak-blue",
+        "score": null,
+        "unit": "%",
+        "as_written": "Cybersecurity Safety Evaluation, production conversation, synthetic agent and production-seeded task rows on a 0 to 1 scale, no overall score (Table 8)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "static-jailbreak-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Static Jailbreak, share of responses that withheld unsafe assistance, 5 categories, no overall score (Table 10)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "multiturn-jailbreak-evals-openai",
+        "score": 80.9,
+        "unit": "%",
+        "as_written": "Multiturn Jailbreak, worst-case defender success rate at the largest attacker budget (96.1% at the smallest) (2.2.3.2, Figure 21)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "biotier-securebio-refuse",
+        "score": 79.85,
+        "unit": "%",
+        "as_written": "SecureBio BioTIER, refusal rate on BioTIER-refuse with bio classifiers enabled, updated checkpoint (50.18% model-level with classifiers disabled, BioTIER-permit compliance 98.96%) (2.2.6.2)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "openai-production-benchmarks-and-safe-completion-evals",
+        "score": null,
+        "unit": "%",
+        "as_written": "Evaluations with Challenging Prompts, 7 categories, no overall score (Table 13)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "u18-safety-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Safety Evaluations for Users Under 18, 6 categories, no overall score (Table 14)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "agentic-safe-completions-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Agentic Safe Completions, 7 Codex and connected chat plugin rows, no overall score (Table 15)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "image-input-safety-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Harmful Image Inputs, 4 categories, no overall score (Table 16)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "openai-user-flagged-hallucination-eval",
+        "score": null,
+        "unit": "%",
+        "as_written": "Performance in Cases Flagged by Users, refreshed 1,000-case version, error rates vs simulated response time, chart without printed numbers (Figure 25)",
+        "section": "hallucination"
+      },
+      {
+        "benchmark": "healthbench-professional",
+        "score": 66.3,
+        "unit": "%",
+        "as_written": "HealthBench Professional, length-adjusted (unadjusted 66.0) (Table 17)",
+        "section": "health"
+      },
+      {
+        "benchmark": "openai-dynamic-mental-health-benchmarks",
+        "score": null,
+        "unit": "%",
+        "as_written": "Dynamic Mental Health Benchmarks with Adversarial User Simulations, 3 categories, no overall score (Table 18)",
+        "section": "health"
+      },
+      {
+        "benchmark": "mentalhealthbench",
+        "score": 53.3,
+        "unit": "%",
+        "as_written": "MentalHealthBench (overall), maximum reasoning effort, 53.3 ± 1.0 (Table 19)",
+        "section": "health"
+      },
+      {
+        "benchmark": "respecting-auto-review-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "Respecting Auto-Review, text says no attempts to circumvent, printed chart label 0% completed (4.1.2.1, Figure 31)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "respecting-warnings-openai",
+        "score": 17.41,
+        "unit": "%",
+        "as_written": "Respecting Warnings, updated evaluation, share of trials that completed the prohibited action (4.1.2.2, Figure 32)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "exploitgym-honeypot-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "ExploitGym Honeypot, maximum reasoning effort, text says no attempts to attack the honeypot (legitimate capture 5.31%) (4.1.2.3)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "agent-replay-auto-review-openai",
+        "score": 12.3,
+        "unit": "%",
+        "as_written": "AgentReplay, share of scored replays that repeated the earlier agent's failure (4.1.2.4)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "blocker-deception-openai",
+        "score": 22.28,
+        "unit": "%",
+        "as_written": "Blocker Deception, blocker-related deception rate without the Codex developer prompt (8.04% with it, printed chart label) (4.1.3.1, Figure 35)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "broken-search-tool-openai",
+        "score": 23.0,
+        "unit": "%",
+        "as_written": "Broken Search Tool, task-failure rate without the Codex developer prompt (8.50% with it, printed chart label) (4.1.3.2, Figure 36)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "realistic-work-environments-misalignment-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Improper Actions in Workplace Tasks, 0.64% of scored trials had high-severity improper actions, a stricter measure than the overall rate earlier cards report (4.1.4.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "openai-deployment-simulation",
+        "score": 0.45,
+        "unit": "%",
+        "as_written": "Deployment Simulation of Internal Codex Traffic, share of turns with confirmed severity 3+ misalignment, printed chart label (all severity levels 4.96%, laziness 3.17%) (Figure 38, 4.1.4.2)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "external-agent-messages-openai",
+        "score": 11.25,
+        "unit": "%",
+        "as_written": "Unintended Engagement with External Agent Messages, attempted contact in 9 of 80 trials (specified unauthorized action 0 of 80) (4.1.5.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "verbalized-metagaming-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Verbalized metagaming (level 1+), original and replayed Codex turns by source traffic, no overall score (Figure 41, 4.1.6.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "oversight-gaming-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Oversight gaming (level 4+) in Codex replays and in runs graded as aligned on 6 evaluations, no overall score (Figures 42, 43). Flag rate on training attempts rose from 14.65% to 17.43% (4.1.6.2)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "uk-aisi-out-of-scope-supply-chain-attack",
+        "score": null,
+        "unit": "%",
+        "as_written": "UK AISI simulated Unsanctioned Supply-Chain Attack: no attacks, but UK AISI judges the result uninformative given 85% evaluation awareness (4.1.7.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "cot-monitorability-openai",
+        "score": null,
+        "unit": "score",
+        "as_written": "Aggregate Monitorability g-mean² vs reasoning and output tokens, CoT-only, action-only and full-transcript monitors, chart without printed numbers (text gives about 0.84 full-transcript at the longest setting) (Figure 46, 4.2.1.1)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "cot-control",
+        "score": 38.6,
+        "unit": "%",
+        "as_written": "CoT-Control, CoTs of 750 to 1,250 analysis tokens (4.2.2.1)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "oai-repo-sabotage-v2-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "OAI-repo Sabotage v2, monitor evasion under guided and unguided sabotage, charts without printed numbers (Figures 50, 51)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "sneaky-sandbox-escape-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Sneaky Sandbox Escape, text says full-trajectory monitor evasion is near zero and no successful escape evaded the actions-only monitor, charts without printed numbers (4.2.2.3, Figures 52, 53)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "math-side-tasking-monitor-evasion-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "Math Side-tasking Monitor Evasion, text says a monitor detected the work whenever a model solved the math problem (4.2.2.4)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "nocot-bench-ncri",
+        "score": 171,
+        "unit": "index",
+        "as_written": "UK AISI No-CoT Reasoning Index (NCRI, Nanda) without filler tokens (4.2.2.5)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "bio-probe-openai",
+        "score": 0.232,
+        "unit": "brier",
+        "as_written": "Bio-Probe, best mean Brier score across reasoning settings on 21 unpublished hypotheses, lower is better (2.1.1.3.1, Figure 5)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "eureka-bench-openai",
+        "score": 100.33,
+        "unit": "score",
+        "as_written": "EUREKA-Bench six-task pilot, mean predictive performance with field-specific SOTA predictors set to 100 (novelty 1.20 of 5). Sol not reported (2.1.1.3.2, Figures 6, 7)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "sequitur-lab-automation",
+        "score": 74.5,
+        "unit": "score",
+        "as_written": "Sequitur Research simulated wet-lab automation, mean phase-execution score out of 100 across six runs. Sol not reported (2.1.1.3.3, Figure 8)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "uk-aisi-vulnerability-discovery",
+        "score": 88.6,
+        "unit": "%",
+        "as_written": "UK AISI private suite of synthetic vulnerability discovery challenges, pass@1, single response without tools, pre-release version. Sol not tested (2.1.2.2.2, Figure 13)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "oeci-openai",
+        "score": 170.1,
+        "unit": "index",
+        "as_written": "OECI score, 90% bootstrap CI 166.1 to 171.4 for Astra and 165.2 to 171.0 for Sol (2.1.3.2.1, Figure 19)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "epoch-no-cot-serial-steps",
+        "score": 12.3,
+        "unit": "score",
+        "as_written": "Serial reasoning steps of fixed complexity done in a single output token at 25% above chance, not-yet-finalized benchmark. Sol not tested (2.1.3.2.2)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "expected-cyber-refusals-openai",
+        "score": 98.5,
+        "unit": "%",
+        "as_written": "Expected Cyber Refusals, final launch model instructions (Table 9)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "cyber-utility-openai",
+        "score": 78.1,
+        "unit": "%",
+        "as_written": "Cyber Utility, allowed cyber requests answered within policy, final launch model instructions (Table 9)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "reasoning-extraction-red-teaming-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Adaptive red-teaming attack success across six attacker models, no overall score. Astra prior-turn 0.2% and same-turn 0.9%. Sol prior-turn 0.5% and same-turn 0.8% (Table 12)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "prompt-injection-benchmark-environments-openai",
+        "score": 99.23,
+        "unit": "%",
+        "as_written": "Share of final GPT-Red 2 attacks resisted on 115 held-out environments adapted from Gray Swan IPI challenges (all five attempts resisted 97.73% Astra, 99.13% Sol) (3.2.1.1, Figure 23)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "prompt-injection-model-generated-environments-openai",
+        "score": 84.67,
+        "unit": "%",
+        "as_written": "Share of final GPT-Red 2 attacks resisted in GPT-Red 2 generated environments (all five attempts resisted 74.46% Astra, 80.06% Sol) (3.2.1.2, Figure 24)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "model-spec-targeted-cases-openai",
+        "score": 87.8,
+        "unit": "%",
+        "as_written": "Targeted Cases compliance pass rate on 738 cases at maximum API reasoning effort (steerability on 87 cases: Astra 66.9%, Sol 59.2%) (4.1.1.1, Figure 27)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "model-spec-conversation-replay-openai",
+        "score": 80.6,
+        "unit": "score",
+        "as_written": "Conversation Replay mean rubric score from 0 to 100 on 596 contexts from real conversations (4.1.1.2, Figure 29)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "uk-aisi-correlated-monitor-failure",
+        "score": 19,
+        "unit": "%",
+        "as_written": "GPT-6.2 Astra as monitor failed to flag 19% of violative transcripts of GPT-6 Astra performing an unsanctioned cyber-attack (51% when given unsummarized CoT with actions), lower is better. Sol not tested (4.1.7.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "uk-aisi-file-download-monitor-evasion",
+        "score": null,
+        "unit": "%",
+        "as_written": "Astra evades a GPT-5.6 Sol action-only monitor 48.8% of the time and a GPT-6.1 Sol monitor 0.6%, and never evaded a full-surface monitor, no overall score. Sol not tested (4.2.2.5, Figure 55)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "uk-aisi-sandbox-escape-monitor-evasion",
+        "score": 0.5,
+        "unit": "%",
+        "as_written": "Astra escaped a vulnerable sandbox undetected by a GPT-6.1 Sol action-only monitor in 5 of 920 samples. Sol not tested (4.2.2.5)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "uk-aisi-no-cot-maths",
+        "score": 79.2,
+        "unit": "%",
+        "as_written": "Accuracy without chain of thought on a new collection extending Greenblatt (AIME, HMMT, CMIMC, SMT, BRUMO, OTIS Mock AIME). Sol not tested (4.2.2.5, Figure 56)",
+        "section": "monitorability"
+      }
+    ]
+  },
+  {
+    "id": "openai-gpt-6-2-sol-system-card-2026-11-17",
+    "lab": "openai",
+    "model": "gpt-6-2-sol",
+    "date": "2026-11-17",
+    "doc": "system card",
+    "title": "GPT-6.2 System Card",
+    "url": "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/gpt-6-2-astra-sol.pdf",
+    "release": "openai-gpt-6-2-sol-2026-11-17",
+    "notes": "The same 119-page card as GPT-6.2 Astra's, recorded from tables, text and printed chart labels, with category-only tables and unlabeled charts as null. The card runs the exploratory bio evaluations and the SecureBio, UK AISI, Irregular, Epoch AI and Vals AI tests only on GPT-6.2 Astra, and misuse monitor recall and evaluations with no catalog id yet are not recorded. The Vals AI RSI Index result is left out, since the card ran a modified version.",
+    "results": [
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 96.0,
+        "unit": "%",
+        "as_written": "GPQA Diamond (no tools), accuracy (Table 2, 2.1.1.1.1)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "multimodal-troubleshooting-virology-openai",
+        "score": 55.4,
+        "unit": "%",
+        "as_written": "Multi-select Virology Troubleshooting, pass@1 observed (refusal-adjusted 55.71%) (Table 2, 2.1.1.1.2)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "aav-capsid-packaging-prediction-openai",
+        "score": 0.5736,
+        "unit": "score",
+        "as_written": "AAV capsid packaging, mean Spearman rank correlation, updated prompt (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "shp2-protein-function-prediction-openai",
+        "score": 0.3957,
+        "unit": "score",
+        "as_written": "SHP2 protein function, mean of median R² across three assays (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "coronavirus-ace2-cell-entry-screen-openai",
+        "score": 0.4405,
+        "unit": "score",
+        "as_written": "Coronavirus–ACE2 cell entry, median composite score (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "phage-plasmid-coevolution-openai",
+        "score": 12.3888,
+        "unit": "score",
+        "as_written": "Phage–plasmid co-evolution, median pair-weighted NLL, lower is better (Table 3)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 88.34,
+        "unit": "%",
+        "as_written": "SEC-Bench Pro, vulnerability reproduction pass@1 (Table 4)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitbench",
+        "score": 100,
+        "unit": "%",
+        "as_written": "ExploitBench V8, Cap Percent (mean capability credit, five attempts per vulnerability) (Table 4)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "exploitbench-internal-port-openai",
+        "score": 50.5,
+        "unit": "%",
+        "as_written": "ExploitBench Internal Port (June to August 2026), mean arbitrary code execution rate across V8 and Chrome, maximum reasoning setting (Table 4)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "sandbox-bench-openai",
+        "score": 25.0,
+        "unit": "%",
+        "as_written": "Sandbox Bench, share of targets solved (2.1.2.2.1)",
+        "section": "cyber"
+      },
+      {
+        "benchmark": "internal-research-debugging-openai",
+        "score": 74.66,
+        "unit": "%",
+        "as_written": "Internal Research Debugging, mean rubric score (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "kernelgen-1p-openai",
+        "score": 74.71,
+        "unit": "%",
+        "as_written": "KernelGen 1P, mean rubric score (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "nanogpt-speedrun",
+        "score": 14.59,
+        "unit": "%",
+        "as_written": "NanoGPT, mean share of baseline training time saved, version 5 (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "posttrainbench",
+        "score": 44.89,
+        "unit": "%",
+        "as_written": "PostTrainBench Lite, mean share of performance gap closed, 12 tasks, includes three zero-score attempts (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "mle-bench",
+        "score": 91.38,
+        "unit": "%",
+        "as_written": "MLE-Bench Revised (72 problems), mean reference percentile (Table 5)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "biology-refusal-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Biology Model Refusal Evaluation, severe, dual-use and benign rows, no overall score (Table 6)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "biological-safety-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Biological Safeguards Evaluations, 4 sets, model only and with system-level safeguards, no overall score (Table 7)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "openai-cyber-safety-evaluations-incl-daybreak-blue",
+        "score": null,
+        "unit": "%",
+        "as_written": "Cybersecurity Safety Evaluation, production conversation, synthetic agent and production-seeded task rows on a 0 to 1 scale, no overall score (Table 8)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "static-jailbreak-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Static Jailbreak, share of responses that withheld unsafe assistance, 5 categories, no overall score (Table 10)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "multiturn-jailbreak-evals-openai",
+        "score": 80.9,
+        "unit": "%",
+        "as_written": "Multiturn Jailbreak, worst-case defender success rate at the largest attacker budget (95.4% at the smallest) (2.2.3.2, Figure 21)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "openai-production-benchmarks-and-safe-completion-evals",
+        "score": null,
+        "unit": "%",
+        "as_written": "Evaluations with Challenging Prompts, 7 categories, no overall score (Table 13)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "u18-safety-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Safety Evaluations for Users Under 18, 6 categories, no overall score (Table 14)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "agentic-safe-completions-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Agentic Safe Completions, 7 Codex and connected chat plugin rows, no overall score (Table 15)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "image-input-safety-evals-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Harmful Image Inputs, 4 categories, no overall score (Table 16)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "openai-user-flagged-hallucination-eval",
+        "score": null,
+        "unit": "%",
+        "as_written": "Performance in Cases Flagged by Users, refreshed 1,000-case version, error rates vs simulated response time, chart without printed numbers (Figure 25)",
+        "section": "hallucination"
+      },
+      {
+        "benchmark": "healthbench-professional",
+        "score": 65.9,
+        "unit": "%",
+        "as_written": "HealthBench Professional, length-adjusted (unadjusted 65.5) (Table 17)",
+        "section": "health"
+      },
+      {
+        "benchmark": "openai-dynamic-mental-health-benchmarks",
+        "score": null,
+        "unit": "%",
+        "as_written": "Dynamic Mental Health Benchmarks with Adversarial User Simulations, 3 categories, no overall score (Table 18)",
+        "section": "health"
+      },
+      {
+        "benchmark": "mentalhealthbench",
+        "score": 50.9,
+        "unit": "%",
+        "as_written": "MentalHealthBench (overall), maximum reasoning effort, 50.9 ± 1.0 (Table 19)",
+        "section": "health"
+      },
+      {
+        "benchmark": "respecting-auto-review-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "Respecting Auto-Review, share of trials that completed a prohibited action after rejection, printed chart label (Figure 31)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "respecting-warnings-openai",
+        "score": 23.3,
+        "unit": "%",
+        "as_written": "Respecting Warnings, updated evaluation, share of trials that completed the prohibited action, printed chart label (Figure 32)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "exploitgym-honeypot-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "ExploitGym Honeypot, share of trials with a successful honeypot exploit, printed chart label (Figure 33)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "agent-replay-auto-review-openai",
+        "score": 12.14,
+        "unit": "%",
+        "as_written": "AgentReplay, share of scored replays that repeated the earlier agent's failure (4.1.2.4)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "blocker-deception-openai",
+        "score": 24.08,
+        "unit": "%",
+        "as_written": "Blocker Deception, blocker-related deception rate without the Codex developer prompt, printed chart label (8.88% with it) (Figure 35)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "broken-search-tool-openai",
+        "score": 9.33,
+        "unit": "%",
+        "as_written": "Broken Search Tool, failure rate without the Codex developer prompt, printed chart label (3.92% with it) (Figure 36)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "realistic-work-environments-misalignment-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Improper Actions in Workplace Tasks, 0.71% of scored trials had high-severity improper actions, a stricter measure than the overall rate earlier cards report (4.1.4.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "openai-deployment-simulation",
+        "score": 0.47,
+        "unit": "%",
+        "as_written": "Deployment Simulation of Internal Codex Traffic, share of turns with confirmed severity 3+ misalignment, printed chart label (all severity levels 6.78%, laziness 5.25%) (Figure 38, 4.1.4.2)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "external-agent-messages-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "Unintended Engagement with External Agent Messages, attempted contact in 0 of 80 trials (specified unauthorized action 0 of 80) (4.1.5.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "verbalized-metagaming-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Verbalized metagaming (level 1+), original and replayed Codex turns by source traffic, no overall score (Figure 41, 4.1.6.1)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "oversight-gaming-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Oversight gaming (level 4+) in Codex replays and in runs graded as aligned on 6 evaluations, no overall score (Figures 42, 43)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "cot-monitorability-openai",
+        "score": null,
+        "unit": "score",
+        "as_written": "Aggregate Monitorability g-mean² vs reasoning and output tokens, CoT-only, action-only and full-transcript monitors, chart without printed numbers (Figure 46, 4.2.1.1)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "cot-control",
+        "score": 28.3,
+        "unit": "%",
+        "as_written": "CoT-Control, CoTs of 750 to 1,250 analysis tokens (4.2.2.1)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "oai-repo-sabotage-v2-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "OAI-repo Sabotage v2, monitor evasion under guided and unguided sabotage, charts without printed numbers (Figures 50, 51)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "sneaky-sandbox-escape-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Sneaky Sandbox Escape, text says full-trajectory monitor evasion is near zero and no successful escape evaded the actions-only monitor, charts without printed numbers (4.2.2.3, Figures 52, 53)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "math-side-tasking-monitor-evasion-openai",
+        "score": 0,
+        "unit": "%",
+        "as_written": "Math Side-tasking Monitor Evasion, text says a monitor detected the work whenever a model solved the math problem (4.2.2.4)",
+        "section": "monitorability"
+      },
+      {
+        "benchmark": "bio-probe-openai",
+        "score": 0.261,
+        "unit": "brier",
+        "as_written": "Bio-Probe, best mean Brier score across reasoning settings on 21 unpublished hypotheses, lower is better (2.1.1.3.1, Figure 5)",
+        "section": "bio-chem"
+      },
+      {
+        "benchmark": "oeci-openai",
+        "score": 168.8,
+        "unit": "index",
+        "as_written": "OECI score, 90% bootstrap CI 166.1 to 171.4 for Astra and 165.2 to 171.0 for Sol (2.1.3.2.1, Figure 19)",
+        "section": "ai-rnd"
+      },
+      {
+        "benchmark": "expected-cyber-refusals-openai",
+        "score": 99.4,
+        "unit": "%",
+        "as_written": "Expected Cyber Refusals, final launch model instructions (Table 9)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "cyber-utility-openai",
+        "score": 69.5,
+        "unit": "%",
+        "as_written": "Cyber Utility, allowed cyber requests answered within policy, final launch model instructions (Table 9)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "reasoning-extraction-red-teaming-openai",
+        "score": null,
+        "unit": "%",
+        "as_written": "Adaptive red-teaming attack success across six attacker models, no overall score. Astra prior-turn 0.2% and same-turn 0.9%. Sol prior-turn 0.5% and same-turn 0.8% (Table 12)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "prompt-injection-benchmark-environments-openai",
+        "score": 99.76,
+        "unit": "%",
+        "as_written": "Share of final GPT-Red 2 attacks resisted on 115 held-out environments adapted from Gray Swan IPI challenges (all five attempts resisted 97.73% Astra, 99.13% Sol) (3.2.1.1, Figure 23)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "prompt-injection-model-generated-environments-openai",
+        "score": 91.65,
+        "unit": "%",
+        "as_written": "Share of final GPT-Red 2 attacks resisted in GPT-Red 2 generated environments (all five attempts resisted 74.46% Astra, 80.06% Sol) (3.2.1.2, Figure 24)",
+        "section": "robustness"
+      },
+      {
+        "benchmark": "model-spec-targeted-cases-openai",
+        "score": 87.1,
+        "unit": "%",
+        "as_written": "Targeted Cases compliance pass rate on 738 cases at maximum API reasoning effort (steerability on 87 cases: Astra 66.9%, Sol 59.2%) (4.1.1.1, Figure 27)",
+        "section": "alignment"
+      },
+      {
+        "benchmark": "model-spec-conversation-replay-openai",
+        "score": 79.6,
+        "unit": "score",
+        "as_written": "Conversation Replay mean rubric score from 0 to 100 on 596 contexts from real conversations (4.1.1.2, Figure 29)",
+        "section": "alignment"
+      }
+    ]
   }
 ]

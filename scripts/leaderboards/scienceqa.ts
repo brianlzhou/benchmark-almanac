@@ -13,6 +13,8 @@ interface Entry {
   Model: string;
   Date?: string;
   Avg?: string;
+  Size?: string;
+  Link?: string;
 }
 
 const board: Leaderboard = {
@@ -38,7 +40,9 @@ const board: Leaderboard = {
       const score = Number(e.Avg);
       if (!model || !Number.isFinite(score) || /^(human performance|random chance)$/i.test(model)) continue;
       const d = e.Date?.match(/^(\d\d)-(\d\d)-(\d\d)$/);
-      rows.push({ model, score, ...(d ? { date: `20${d[1]}-${d[2]}-${d[3]}` } : {}) });
+      const size = e.Size?.match(/^([\d.]+)([MB])$/);
+      rows.push({ model, score, params: size ? Number(size[1]) / (size[2] === 'M' ? 1000 : 1) : undefined,
+        link: /^https:\/\/(?:arxiv.org|aclanthology.org)\//.test(e.Link ?? '') ? e.Link : undefined, ...(d ? { date: `20${d[1]}-${d[2]}-${d[3]}` } : {}) });
     }
     if (rows.length < 50) throw new Error(`only ${rows.length} ScienceQA rows`);
     return rows;

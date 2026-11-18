@@ -1,0 +1,2060 @@
+{
+  "retrieved": "2026-11-17",
+  "note": "What each board's ± means, checked against the board's own pages. Built by private/audits/intervals-2026-11-17/merge.mjs.",
+  "boards": {
+    "3dcodearena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap for Bradley-Terry MLE",
+      "by": "board",
+      "says": "stated",
+      "url": "https://www.3dcodebench.com/leaderboard",
+      "quote": "BT Elo = Bradley-Terry MLE (refreshed every 30 min, with 95% bootstrap CI)."
+    },
+    "abc-bench-fragment-design": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bias-corrected and accelerated bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://securebio.org/benchmarks/about/",
+      "quote": "Technically: error bars are 95% confidence intervals on the model’s mean accuracy, computed using the bias-corrected and accelerated (BCa) bootstrap with 10,000 resamples."
+    },
+    "abc-bench-liquid-handling-robot": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bias-corrected and accelerated bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://securebio.org/benchmarks/about/",
+      "quote": "Technically: error bars are 95% confidence intervals on the model’s mean accuracy, computed using the bias-corrected and accelerated (BCa) bootstrap with 10,000 resamples."
+    },
+    "accord-conceptual-consistency": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "sampling error over benchmark items",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://conceptualreasoning.ai/methodology",
+      "quote": "All confidence intervals shown are 95% confidence intervals that reflect sampling error over benchmark items."
+    },
+    "agent-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/blob/main/README.md",
+      "quote": "score_ci_lower | float | Lower 95% confidence bound"
+    },
+    "agentick": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "percentile bootstrap over capability scores, 1,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://roger-creus.github.io/agentick/board/",
+      "quote": "Score 95% CI"
+    },
+    "aime-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://matharena.ai/competition_tables/aime--aime_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "aime-2026": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/aime--aime_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "android-bench-2-0": {
+      "kind": "confidence interval",
+      "by": "board",
+      "says": "implied",
+      "url": "https://developer.android.com/bench",
+      "quote": "Expected performance range, reflecting the results' statistical reliability"
+    },
+    "androidbench": {
+      "kind": "confidence interval",
+      "by": "board",
+      "says": "implied",
+      "url": "https://developer.android.com/bench",
+      "quote": "Expected performance range, reflecting the results' statistical reliability"
+    },
+    "anthropic-political-even-handedness-eval": {
+      "kind": "confidence interval",
+      "by": "board",
+      "says": "stated",
+      "url": "https://www.anthropic.com/research/political-even-handedness",
+      "quote": "Results may fluctuate somewhat beyond the reported confidence intervals between evaluations."
+    },
+    "apex-accounting": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "task-level bootstrap, 10,000 resamples",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.mercor.com/apex/apex-accounting-leaderboard/",
+      "quote": "All intervals are 95% task-level bootstraps over 10,000 resamples."
+    },
+    "apex-agents": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://huggingface.co/datasets/mercor/apex-agents#leaderboard-baselines",
+      "quote": "Model Pass@1 (95% CI) Pass@8 (95% CI)"
+    },
+    "arena-hard-auto": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/Arena-OSS/arena-hard-auto/main/misc/past_leaderboards.md",
+      "quote": "95% CI: (-2.3, 2.2)"
+    },
+    "arena-hard-v2": {
+      "kind": "confidence interval",
+      "level": 90,
+      "method": "bootstrap pairwise model, 5th to 95th percentiles",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://raw.githubusercontent.com/Arena-OSS/arena-hard-auto/main/show_result.py",
+      "quote": "table.quantile(0.05).to_frame(\"lower\").reset_index().rename(columns={\"index\": \"model\"}), table.quantile(0.95).to_frame(\"upper\").reset_index().rename(columns={\"index\": \"model\"})"
+    },
+    "arena-image-to-webdev": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "arxivlean": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/arxivlean--september",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "arxivmath": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/overall--arxivmath",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "autoresearchexam": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://benchmarks.bespokelabs.ai/autoresearchexam/live-leaderboard.js?v=pareto-tooltip-20261019",
+      "quote": "Error bars show 95% confidence intervals at the selected time."
+    },
+    "benchcad-2-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://benchcad.com/leaderboard.html",
+      "quote": "Mean of 5 passes over the 100 Core cases, ±95%."
+    },
+    "bigcodearena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "100 bootstrap resamples of battles",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://huggingface.co/spaces/bigcode/arena/raw/main/elo_calculation.py",
+      "quote": "Calculate 95% confidence intervals"
+    },
+    "brokenarxiv": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/overall--brokenarxiv",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "brumo-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/brumo--brumo_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "btf-3": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "percentile bootstrap over questions, 5,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://evals.futuresearch.ai/#btf3",
+      "quote": "Brackets are 95% confidence intervals, computed by percentile bootstrap (5,000 resamples of the question set)."
+    },
+    "buzzbench": {
+      "kind": "confidence interval",
+      "method": "typically 5–10 iterations per model",
+      "by": "board",
+      "says": "stated",
+      "url": "https://eqbench.com/about.html#buzzbench",
+      "quote": "Several (typically 5-10) iterations are performed per model to establish confidence intervals and mitigate variance."
+    },
+    "cad-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over parts",
+      "by": "board",
+      "says": "implied",
+      "url": "https://normalfactory.com/leaderboard/cad-arena",
+      "quote": "The 95 percent interval comes from a bootstrap over the parts."
+    },
+    "civbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of Bradley–Terry rating",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://raw.githubusercontent.com/vox-deorum/civ-bench/main/bench/reports/front_page.py",
+      "quote": "half = 1.96 * float(err) if math.isfinite(err) else 0.0"
+    },
+    "clocktower-bench": {
+      "kind": "confidence interval",
+      "level": 90,
+      "method": "bootstrap over whole side-swapped pairs",
+      "by": "board",
+      "says": "stated",
+      "url": "https://clocktowerbench.com/",
+      "quote": "Whiskers are 90% intervals from a bootstrap over side-swapped pairs"
+    },
+    "clocktower-radio": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://clocktower-radio.com/",
+      "quote": "The ± shows the margin of error (or 95% CI)."
+    },
+    "cmimc-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/cmimc--cmimc_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "code-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "code2video-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/heygen/code2video-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "code2video-benchmark": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.heygen.com/research/introducing-code2video-benchmark",
+      "quote": "Dots show Elo estimates; lines show 95% confidence intervals."
+    },
+    "collaborative-intelligence-benchmark": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over scenarios within dimension, 4,000 draws",
+      "by": "board",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/zou-group/collaborative-intelligence/main/scripts/leaderboard.py",
+      "quote": "with a 95% bootstrap interval (scenarios resampled within dimension, 4,000 draws)."
+    },
+    "conceptual-reasoning-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "sampling error over benchmark items",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://conceptualreasoning.ai/methodology",
+      "quote": "All confidence intervals shown are 95% confidence intervals that reflect sampling error over benchmark items."
+    },
+    "corpfin-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "cti-realm": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://ukgovernmentbeis.github.io/inspect_evals/evals/cti_realm/index.html",
+      "quote": "Model Provider Rewards StdErr 95% CI"
+    },
+    "datacenterbench-tier-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap resampling tasks",
+      "by": "board",
+      "says": "implied",
+      "url": "https://robocurve.org/datacenterbench/methods.html",
+      "quote": "The interval shown is a 95% bootstrap interval from resampling tasks."
+    },
+    "deep20bench-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Welch-Satterthwaite t interval with equal subject weights",
+      "by": "board",
+      "says": "stated",
+      "url": "https://deep20bench.com/editions/1.1/methodology/",
+      "quote": "A Welch-Satterthwaite t interval allows different variation for each subject."
+    },
+    "deepfinance": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://www.juliusresearch.ai/",
+      "quote": "mean rubric score (%) by model configuration with its 95% confidence interval"
+    },
+    "deepsearchqa": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://arxiv.org/html/2601.20975v1",
+      "quote": "The small number to the right of each metric is the 95 percent confidence interval."
+    },
+    "designarena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-agentic-game-dev": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-agentic-image-to-html": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-agentic-overall": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-android": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-ascii": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-audio-realism-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-blender": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-builder": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-code-to-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-fullstack": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-html-slides": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-image-editing": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-image-to-frontend": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-image-to-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-mobile-builder": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-multi-image-to-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-multimodal-to-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-pdf": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-python-pptx-slides": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-react-native": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-spreadsheet": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-tts": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-video-editing": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "designarena-web-apps": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 Bradley-Terry standard errors",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=code",
+      "quote": "Margin of Error: Shows ±standard error from the Bradley-Terry model for Elo rating confidence intervals."
+    },
+    "distressbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "10,000 paired bootstrap resamples over tasks",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://labs.scale.com/leaderboard/distressbench",
+      "quote": "95% confidence intervals come from 10,000 bootstrap resamples over tasks, paired across models."
+    },
+    "document-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "eclektic": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/google/eclektic/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "enigmaeval": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://labs.scale.com/leaderboard/enigma_eval",
+      "quote": "Model performance is measured using accuracy (pass@1) with a 95% confidence interval."
+    },
+    "eq-bench-3": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://github.com/EQ-bench/eqbench3/blob/main/README.md",
+      "quote": "ELO Norm │ ELO Raw │ 95% CI Norm │ Sigma"
+    },
+    "eq-bench-4": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over pairwise comparisons",
+      "by": "board",
+      "says": "stated",
+      "url": "https://eqbench.com/",
+      "quote": "Scores are normalised against fixed anchor models, and the 95% confidence intervals are estimated by bootstrapping over the pairwise comparisons."
+    },
+    "eva-bench-servicenow": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://servicenow.github.io/eva/assets/index-BNJMtYsi.js",
+      "quote": "Error bars (95% confidence intervals) reflect stochastic model behavior rather than measurement noise (see paper section 4.2)."
+    },
+    "facts-grounding": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "facts-grounding-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "facts-multimodal": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "facts-parametric": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap resampling",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "facts-parametric-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap resampling",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "facts-search": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "facts-search-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://storage.googleapis.com/deepmind-media/FACTS/FACTS_benchmark_suite_paper.pdf",
+      "quote": "Values represent Accuracy with 95% confidence intervals, averaged over both the public and the private datasets."
+    },
+    "failuresensoriq": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/ibm-research/asset-ops-bench/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "gamedevbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://waynechi.com/gamedevbench/#leaderboard",
+      "quote": "Error bars are 95% confidence intervals."
+    },
+    "harvey-lab-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "harvey-lab-legal-agent-benchmark": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "hmmt-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://matharena.ai/competition_tables/aime--aime_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "hmmt-2026": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/hmmt--hmmt_feb_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "hmmt-nov-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/hmmt--hmmt_nov_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "humaine": {
+      "kind": "credible interval",
+      "level": 95,
+      "method": "posterior draws of hierarchical Bradley–Terry–Davidson model",
+      "by": "board",
+      "says": "stated",
+      "url": "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard/raw/main/leaderboard-app/src/pages/Leaderboard.tsx",
+      "quote": "Error bars show posterior credible intervals."
+    },
+    "human-pathogen-capabilities-test-securebio": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bias-corrected and accelerated bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://securebio.org/benchmarks/about/",
+      "quote": "Technically: error bars are 95% confidence intervals on the model’s mean accuracy, computed using the bias-corrected and accelerated (BCa) bootstrap with 10,000 resamples."
+    },
+    "humanitys-last-exam": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://labs.scale.com/leaderboard/humanitys_last_exam",
+      "quote": "its lower-bound score (95% confidence interval) is higher than the other model’s upper-bound score"
+    },
+    "humanitys-sixth-sense": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "cluster bootstrap over tasks, keeping attempts together",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://labs.scale.com/leaderboard/hss",
+      "quote": "The ± value is the half-width of a 95% cluster bootstrap interval that resamples tasks and keeps their attempts together"
+    },
+    "imc-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/imc--imc_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "immigration-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "imo-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/imo--imo_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "ipi-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://ipibench.generalanalysis.com",
+      "quote": "Attack success rate, lower is better; ± is the 95% interval"
+    },
+    "judgemark-v4": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "prompt bootstrap",
+      "by": "board",
+      "says": "stated",
+      "url": "https://eqbench.com/judgemark-v4.html",
+      "quote": "95% CI : the line on each score bar is a prompt-bootstrap confidence interval."
+    },
+    "kaggle-chart-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/chart-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-corp-speak-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/corp-speak-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-eli5-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/eli5-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-floorplan-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/floorplan-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-game-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-bargaining": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/bargaining",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-checkers": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-chess": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "500 bootstrap resamples of match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-chess-openings": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-clobber": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/clobber",
+      "quote": "Rankings are based on a Bradley–Terry Elo-style model, with confidence intervals estimated by bootstrapping."
+    },
+    "kaggle-game-arena-coin-game": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/coin-game",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-dark-hex": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/dark-hex",
+      "quote": "Rankings are based on a Bradley–Terry Elo-style model, with confidence intervals estimated by bootstrapping."
+    },
+    "kaggle-game-arena-dots-and-boxes": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-five-in-a-row": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-four-in-a-row": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/chess-text",
+      "quote": "The small numbers shown below each Elo value indicate the 95 % confidence interval of the estimate"
+    },
+    "kaggle-game-arena-go": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/go",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-lines-of-action": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/lines-of-action",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-nine-mens-morris": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/nine-mens-morris",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-poker": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/poker-heads-up/leaderboard",
+      "quote": "\"hasUnevenConfidenceInterval\":true"
+    },
+    "kaggle-game-arena-reversi": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/reversi",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-ultimate-tic-tac-toe": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/ultimate-tic-tac-toe",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-werewolf": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/werewolf/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-game-arena-word-art": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over match results",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/word-art",
+      "quote": "using a Bradley–Terry Elo-style model with bootstrapped confidence intervals."
+    },
+    "kaggle-game-arena-word-association": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap games within each ordered pairing",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.kaggle.com/benchmarks/kaggle/word-association",
+      "quote": "Confidence intervals are computed via bootstrapping, with games resampled within each ordered pairing to preserve side-awareness."
+    },
+    "kaggle-joke-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/joke-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-landing-page-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/landing-page-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kaggle-opening-lines-arena": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/kaggle/opening-lines-arena/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "kangaroo-2025-matharena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/overall--visual_math",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "lech-mazur-creative-writing": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "300 bootstrap resamples of stories and evaluators",
+      "by": "board",
+      "says": "implied",
+      "url": "https://raw.githubusercontent.com/lechmazur/writing/master/README.md",
+      "quote": "The shaded ranges show how much scores vary across 300 resamples of stories and evaluators (bootstrap). The table gives the 95% bootstrap intervals."
+    },
+    "legal-research-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "legalbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "legalreasonbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "paired matter bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://www.micro1.ai/benchmark/legal-reason-bench",
+      "quote": "The bar is the mean of the 50 per-matter means; whiskers are a paired matter bootstrap (10,000 resamples)."
+    },
+    "lifescibench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "10,000 percentile bootstrap resamples of tasks",
+      "by": "board",
+      "says": "implied",
+      "url": "https://www.biorxiv.org/content/10.64898/2026.08.13.744657v1.full.pdf",
+      "quote": "intervals are 95% percentile intervals from 10,000 bootstrap resamples of tasks."
+    },
+    "linuxarena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Wilson score",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arxiv.org/html/2604.15384",
+      "quote": "the monitor did not flag any action before harm (see Section 5.1 ). Error bars show Wilson 95% CI."
+    },
+    "lmarena-elo": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmarena-image-edit": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmarena-image-to-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmarena-search-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmarena-text-to-image": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmarena-text-to-video": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmarena-video-edit": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "lmca": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "sampling error over benchmark items",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://conceptualreasoning.ai/methodology",
+      "quote": "All confidence intervals shown are 95% confidence intervals that reflect sampling error over benchmark items."
+    },
+    "madqa": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal interval with judge-calibration adjustment",
+      "by": "board",
+      "says": "stated",
+      "url": "https://huggingface.co/spaces/Snowflake/MADQA-Leaderboard/raw/main/eval/metrics.py",
+      "quote": "Compute confidence interval for bias-adjusted score."
+    },
+    "matharena-apex-imo-usamo": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://matharena.ai/competition_tables/aime--aime_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "matharena-apex-shortlist": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/apex--shortlist_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "medsafe-dx-0-3": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "2,000 bootstrap draws of cases within condition",
+      "by": "board",
+      "says": "stated",
+      "url": "https://github.com/cortico-health/MedSafe-Dx",
+      "quote": "Bootstrap 2,000 draws, seed 20260923: condition clusters for the validation rounds; cases within each condition for the full run, with the condition bootstrap as sensitivity"
+    },
+    "metr-time-horizon": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "hierarchical bootstrap over task families, tasks, and runs",
+      "by": "board",
+      "says": "implied",
+      "url": "https://arxiv.org/html/2503.14499",
+      "quote": "The shaded region represents 95% CI calculated by hierarchical bootstrap over task families, tasks, and task attempts."
+    },
+    "metr-time-horizon-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "hierarchical bootstrap over task families, tasks, and runs",
+      "by": "board",
+      "says": "implied",
+      "url": "https://arxiv.org/html/2503.14499",
+      "quote": "The shaded region represents 95% CI calculated by hierarchical bootstrap over task families, tasks, and task attempts."
+    },
+    "miklos-schweitzer-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/miklos--2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "mle-bench": {
+      "kind": "standard error",
+      "method": "SEM over at least three evaluation seeds",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://github.com/openai/mle-bench#leaderboard",
+      "quote": "Repeat each evaluation with at least 3 seeds and report the Any Medal (%) score as the mean ± one standard error of the mean."
+    },
+    "molecular-biology-capabilities-test-securebio": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bias-corrected and accelerated bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://securebio.org/benchmarks/about/",
+      "quote": "Technically: error bars are 95% confidence intervals on the model’s mean accuracy, computed using the bias-corrected and accelerated (BCa) bootstrap with 10,000 resamples."
+    },
+    "moneda-bench-advicebench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap, clustered where items belong together",
+      "by": "board",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/MonedaIO/benchmarks/main/README.md",
+      "quote": "Every score comes with a bootstrap 95% confidence interval, clustered where items belong together."
+    },
+    "moneda-bench-citebench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap, clustered where items belong together",
+      "by": "board",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/MonedaIO/benchmarks/main/README.md",
+      "quote": "Every score comes with a bootstrap 95% confidence interval, clustered where items belong together."
+    },
+    "moneda-bench-filingsbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap, clustered where items belong together",
+      "by": "board",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/MonedaIO/benchmarks/main/README.md",
+      "quote": "Every score comes with a bootstrap 95% confidence interval, clustered where items belong together."
+    },
+    "moneda-bench-groundbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap, clustered where items belong together",
+      "by": "board",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/MonedaIO/benchmarks/main/README.md",
+      "quote": "Every score comes with a bootstrap 95% confidence interval, clustered where items belong together."
+    },
+    "moneda-bench-portfoliobench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap, clustered where items belong together",
+      "by": "board",
+      "says": "stated",
+      "url": "https://raw.githubusercontent.com/MonedaIO/benchmarks/main/README.md",
+      "quote": "Every score comes with a bootstrap 95% confidence interval, clustered where items belong together."
+    },
+    "multichallenge": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://labs.scale.com/leaderboard/multichallenge",
+      "quote": "its lower-bound score (95% confidence interval) is higher than the other model’s upper-bound score"
+    },
+    "music-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap resampling, 1,000 iterations",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://music-arena.org/",
+      "quote": "95% confidence intervals are estimated via bootstrap resampling (1,000 iterations)."
+    },
+    "music-arena-vocal": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap resampling, 1,000 iterations",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://music-arena.org/",
+      "quote": "95% confidence intervals are estimated via bootstrap resampling (1,000 iterations)."
+    },
+    "nocot-bench-ncri": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "implied",
+      "url": "https://github.com/neelnanda-io/nocot-bench",
+      "quote": "each with its 95% interval and rank, and, where we measured it, the same model with filler tokens : the recipe used, the gain, the gain's 95% interval"
+    },
+    "pact-lech-mazur": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://github.com/lechmazur/pact",
+      "quote": "PACT Bilateral Rating Rating 95% CI"
+    },
+    "pantograph-frontier-llm-robot-benchmark-pandroid": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Wilson score",
+      "by": "board",
+      "says": "stated",
+      "url": "https://pantograph.com/journal/vlm-harness",
+      "quote": "Attempts graded 4/4 at low effort · Wilson 95% CI"
+    },
+    "physics-iq-verified": {
+      "kind": "standard deviation",
+      "method": "across four runs",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://raw.githubusercontent.com/google-deepmind/physics-IQ-benchmark/main/README.md",
+      "quote": "The aggregate leaderboard score in Step G is computed as the mean ± standard deviation across these four runs."
+    },
+    "political-science-llm-benchmark": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "resampling tasks",
+      "by": "board",
+      "says": "implied",
+      "url": "https://www.hannohilbig.com/llm-benchmark/",
+      "quote": "Points mark the mean F1 across the 33 tasks, grey bars mark 95% intervals that I obtain from resampling tasks."
+    },
+    "project-euler-matharena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/euler--euler",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "proofbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "proofbench-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "putnam-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/putnam--putnam_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "reactbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "run-to-run intervals",
+      "by": "board",
+      "says": "implied",
+      "url": "https://www.reactbench.com/",
+      "quote": "Pass@1 averaged across tasks; whiskers show 95% run-to-run intervals."
+    },
+    "realmpathology": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://www.micro1.ai/benchmark/realm-pathology",
+      "quote": "Performance summary Model Effort Mean 95% CI Best of 3 Pass@3 Perfect Tasks won"
+    },
+    "robolab": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Clopper-Pearson",
+      "by": "board",
+      "says": "stated",
+      "url": "https://research.nvidia.com/labs/srl/projects/robolab/static/js/index.js?v=20261101-track-ranks",
+      "quote": "Exact 95% Clopper-Pearson interval for k successes out of n trials."
+    },
+    "rwe-bench": {
+      "kind": "credible interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://xplore.ai/rwe-bench",
+      "quote": "Bars: average pass rate, with 95% credible interval."
+    },
+    "seal-coding": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://labs.scale.com/leaderboard/coding",
+      "quote": "its lower-bound score (95% confidence interval) is higher than the other model’s upper-bound score"
+    },
+    "seal-multilingual": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://labs.scale.com/leaderboard/spanish",
+      "quote": "its lower-bound score (95% confidence interval) is higher than the other model’s upper-bound score"
+    },
+    "shadowbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over plates",
+      "by": "board",
+      "says": "stated",
+      "url": "https://huggingface.co/datasets/perpetual-research/shadowbench",
+      "quote": "Intervals are 95% bootstrap intervals over plates"
+    },
+    "simpleqa-verified": {
+      "kind": "confidence interval",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://www.kaggle.com/api/v1/benchmarks/deepmind/simpleqa-verified/leaderboard",
+      "quote": "\"hasConfidenceInterval\":true"
+    },
+    "skillsbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 binomial standard errors (Wald)",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://arxiv.org/html/2602.12670",
+      "quote": "we compute 95% binomial (Wald) confidence intervals"
+    },
+    "smt-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://matharena.ai/competition_tables/aime--aime_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "splatbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bootstrap over tasks",
+      "by": "board",
+      "says": "stated",
+      "url": "https://huggingface.co/datasets/perpetual-research/splatbench",
+      "quote": "Intervals are 95% bootstrap intervals over tasks."
+    },
+    "sre-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "swe-atlas": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Wilson score at the trial level",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://static.scale.com/uploads/6691558a94899f2f65a87a75/Coding_Agent_Eval%20(5).pdf",
+      "quote": "Pass@1 is the mean per-trial pass rate (Wilson 95% CI computed at the trial level)"
+    },
+    "swe-atlas-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Wilson score at the trial level",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://static.scale.com/uploads/6691558a94899f2f65a87a75/Coding_Agent_Eval%20(5).pdf",
+      "quote": "Pass@1 is the mean per-trial pass rate (Wilson 95% CI computed at the trial level)"
+    },
+    "swe-atlas-refactoring": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Wilson score at the trial level",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://static.scale.com/uploads/6691558a94899f2f65a87a75/Coding_Agent_Eval%20(5).pdf",
+      "quote": "Pass@1 is the mean per-trial pass rate (Wilson 95% CI computed at the trial level)"
+    },
+    "swe-atlas-test-writing": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "Wilson score at the trial level",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://static.scale.com/uploads/6691558a94899f2f65a87a75/Coding_Agent_Eval%20(5).pdf",
+      "quote": "Pass@1 is the mean per-trial pass rate (Wilson 95% CI computed at the trial level)"
+    },
+    "swe-bench-pro": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "binomial proportion statistics",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://scaleapi.github.io/SWE-bench_Pro-os/",
+      "quote": "The (+/-) column shows the 95% confidence interval (margin of error) for each score, calculated using binomial proportion statistics (total problems: 730)."
+    },
+    "swe-clar": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "task bootstrap",
+      "by": "board",
+      "says": "stated",
+      "url": "https://github.com/upwork/SWE-Clar",
+      "quote": "Brackets show 95% task-bootstrap confidence intervals."
+    },
+    "tasteval": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "hierarchical bootstrap over tasks then runs, 1,000 resamples",
+      "by": "board",
+      "says": "implied",
+      "url": "https://arxiv.org/html/2610.06824",
+      "quote": "Error bars are 95% intervals from a two-level hierarchical bootstrap with 1,000 resamples, drawing first over tasks and then over runs within each task."
+    },
+    "terminal-bench-2-0": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.tbench.ai/?version=2.0",
+      "quote": "The whiskers span the 95% confidence interval."
+    },
+    "terminal-bench-2-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.tbench.ai/?version=2.1",
+      "quote": "The whiskers span the 95% confidence interval."
+    },
+    "terminal-bench-3-0": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.tbench.ai/?version=3.0",
+      "quote": "The whiskers span the 95% confidence interval."
+    },
+    "terminal-bench-4-0": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.tbench.ai/?version=4.0",
+      "quote": "The whiskers span the 95% confidence interval."
+    },
+    "terminal-bench-4-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.tbench.ai/?version=4.1",
+      "quote": "The whiskers span the 95% confidence interval."
+    },
+    "toolcomp": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "binomial exact match calculation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://labs.scale.com/leaderboard/tool_use_enterprise",
+      "quote": "The black bars show 95% confidence intervals for proportions with a binomial exact match calculation."
+    },
+    "ui-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "board",
+      "says": "stated",
+      "url": "https://www.uibench.ai/",
+      "quote": "Rating (μ): 30.08 95% CI: [ 26.61 , 33.55 ]"
+    },
+    "usamo-2025": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/usamo--usamo_2025",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "usamo-2026": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "normal approximation",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://matharena.ai/competition_tables/usamo--usamo_2026",
+      "quote": "Average performance of the model on the competition together with a 95% confidence interval obtained with the normal approximation."
+    },
+    "vals-ai-detection-benchmark": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-caselaw-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-code-migration": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-code-migration-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-cyberbench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-cyberbench-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-excel-modeling-benchmark": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-excel-modeling-benchmark-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-finance-agent": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-finance-agent-v1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-finance-agent-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-finance-agent-v2-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-finance-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-index-v1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-index-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-index-v2-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-ioi": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-ioi-2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-legal-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-medcode": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-medscribe": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-mortgagetax": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-multimodal-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-mysterymechanism": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-public-benefits-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-router-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-sage": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-sage-1-1": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-science-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-tax-agent-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-taxeval-v2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-time-horizon-index-ksp": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-vibe-code-bench-1-100": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vals-web-search-index": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vct-v2-securebio": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bias-corrected and accelerated bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://securebio.org/benchmarks/about/",
+      "quote": "Technically: error bars are 95% confidence intervals on the model’s mean accuracy, computed using the bias-corrected and accelerated (BCa) bootstrap with 10,000 resamples."
+    },
+    "vibe-code-bench": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "±1.96 standard errors of the mean",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://www.vals.ai/methodology",
+      "quote": "We report standard errors alongside benchmark scores to reflect statistical uncertainty."
+    },
+    "vibench-2": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "t interval from within-product build variance, exact binomial near boundaries",
+      "by": "importer",
+      "says": "implied",
+      "url": "https://arxiv.org/html/2611.05620",
+      "quote": "Both scores are averaged first over a product’s four builds and then over products, with 95% intervals computed from the spread of each product’s builds and an exact binomial range near 0%"
+    },
+    "vision-arena": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "closed-form CLT for Bradley-Terry M-estimators",
+      "by": "board",
+      "says": "stated",
+      "url": "https://arena.ai/blog/arena-rank",
+      "quote": "# compute ratings and 95% confidence intervals results = model.compute_ratings_and_cis(dataset, significance_level=0.05)"
+    },
+    "vista-scale": {
+      "kind": "standard deviation",
+      "method": "across three evaluations",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://labs.scale.com/leaderboard/visual_language_understanding",
+      "quote": "Each evaluation is repeated three times for statistical robustness, with results presented as averages with standard deviations."
+    },
+    "weirdml-v3": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "run variance pooled across configurations and models",
+      "by": "board",
+      "says": "implied",
+      "url": "https://htihle.github.io/weirdml.html",
+      "quote": "Shaded score bands show approximate 95% run-uncertainty intervals, with variance pooled across configurations and models."
+    },
+    "world-class-bio-securebio": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "bias-corrected and accelerated bootstrap, 10,000 resamples",
+      "by": "board",
+      "says": "stated",
+      "url": "https://securebio.org/benchmarks/about/",
+      "quote": "Technically: error bars are 95% confidence intervals on the model’s mean accuracy, computed using the bias-corrected and accelerated (BCa) bootstrap with 10,000 resamples."
+    },
+    "worldsense": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://github.com/facebookresearch/worldsense",
+      "quote": "AVERAGE ACCURACY ACROSS ALL PROBLEMS (with 95% confidence interval)"
+    }
+  }
+}

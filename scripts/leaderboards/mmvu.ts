@@ -41,7 +41,7 @@ const board: Leaderboard = {
       if (!e.info.name || !Number.isFinite(score)) continue;
       const date = /^\d{4}-\d\d$/.test(e.info.date ?? '') ? lastDay(e.info.date!) : undefined;
       const test = e.test?.overall?.trim() ? Number(e.test.overall) : NaN;
-      rows.push({ model: e.info.name.trim(), score, date, setting: e.info.frame && e.info.frame !== '-' ? e.info.frame : undefined, ...(Number.isFinite(test) ? {metrics: {testOverall: test}} : {}) });
+      rows.push({ model: e.info.name.trim(), score, date, open: e.info.type === 'open_source' ? true : e.info.type === 'proprietary' ? false : undefined, setting: e.info.frame && e.info.frame !== '-' ? e.info.frame : undefined, ...(Number.isFinite(test) ? {metrics: {testOverall: test}} : {}) });
     }
     return rows;
   },

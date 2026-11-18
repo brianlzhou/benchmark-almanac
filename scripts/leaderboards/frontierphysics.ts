@@ -91,6 +91,7 @@ const board: Leaderboard = {
       rows.push({
         model: effort ? a.model.slice(0, effort.index).trim() : a.model.trim(),
         score,
+        ...(finite(a.overall?.ci) !== undefined ? { low: score - a.overall!.ci!, high: score + a.overall!.ci! } : {}),
         setting: effort?.[1].toLowerCase(),
         harness: a.harness || undefined,
         cost: finite(a.cost?.perRollout),

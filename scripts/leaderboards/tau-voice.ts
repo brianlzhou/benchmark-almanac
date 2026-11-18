@@ -39,6 +39,8 @@ function interaction(o: Interaction | undefined): Record<string, number> | undef
 
 const board: Leaderboard = {
   benchmark: 'tau-voice',
+  harnesses: 'system',
+  reference: ['Cascaded baseline'],
   url: 'https://taubench.com/leaderboard?benchmark=voice',
   feed: 'https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json (voice_submissions)',
   terms: TERMS,
@@ -54,7 +56,21 @@ const board: Leaderboard = {
     for (const s of await loadTau(VOICE)) {
       const score = overall(s);
       const metrics = interaction((s as { interaction_metrics?: { overall?: Interaction } }).interaction_metrics?.overall);
-      if (score !== null) rows.push({ ...row(s, score), metrics });
+      if (score === null) continue;
+      const entry = { ...row(s, score), metrics };
+      const pipeline = s.voice_config?.pipeline;
+      if (s.model_name === 'Cascaded baseline' && pipeline?.llm && pipeline.asr && pipeline.tts) {
+        entry.model = pipeline.llm;
+        entry.harness = s.model_name;
+        entry.models = [pipeline.llm, pipeline.asr, pipeline.tts];
+      }
+      if (s.model_name === 'Ava Zero' && s.methodology?.notes?.includes('GLM 5.3 Anchor and Deepseek v4.1 Flash 1017')) {
+        entry.model = 'GLM 5.3 Anchor';
+        entry.harness = s.model_name;
+        entry.agentOrg = s.submitting_organization;
+        entry.models = ['GLM 5.3 Anchor', 'Deepseek v4.1 Flash 1017'];
+      }
+      rows.push(entry);
     }
     return rows;
   },

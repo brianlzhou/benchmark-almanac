@@ -84,7 +84,18 @@ const board: Leaderboard = {
     for (const r of parseCsv(await fetchText(FEED))) {
       const score = Number(r.Overall);
       if (!r.Models || !Number.isFinite(score) || r.Overall === '') continue;
-      rows.push({ ...clean(r.Models), score: score * 100 });
+      // a snapshot stamp stays in the name, where the resolver reads it: `date` is for the day of the run, which the
+      // file doesn't give
+      const c = clean(r.Models);
+      const size = Number(r['Model Size(B)']);
+      rows.push({
+        model: c.date ? `${c.model} ${c.date}` : c.model,
+        setting: c.setting,
+        score: score * 100,
+        // "TIGER-Lab" ran it, or "Self-Reported" by the model's makers
+        submitter: r['Data Source']?.trim() || undefined,
+        ...(r['Model Size(B)'] && Number.isFinite(size) && size > 0 ? { params: size } : {}),
+      });
     }
     if (!rows.length) throw new Error('no rows in the MMLU-Pro results.csv');
     return rows;

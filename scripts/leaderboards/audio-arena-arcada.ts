@@ -27,8 +27,9 @@ const board: Leaderboard = {
       if(mode==='Rehydrated' && runs.some((r:any)=>r.model===model&&!r.rehydrated))continue;
       const rates=scenarios.map(task=>{const rs=all.filter((r:any)=>r.benchmark===task).slice(0,20);return rs.length?rs.reduce((s:number,r:any)=>s+(r.passRate??0),0)/rs.length:undefined;});
       if(rates.some(x=>x===undefined))continue;
+      const turns=scenarios.map(task=>{const rs=all.filter((r:any)=>r.benchmark===task).slice(0,20);return rs.every((r:any)=>typeof r.turnsScored==='number'&&Number.isFinite(r.turnsScored))?rs.reduce((s:number,r:any)=>s+r.turnsScored,0)/rs.length:undefined;});
       out.push({model,score:rates.reduce((s:number,x)=>s+x!,0)/6,setting:mode,
-        metrics:Object.fromEntries(scenarios.map((k,i)=>[k,rates[i]!]))});
+        metrics:{...Object.fromEntries(scenarios.map((k,i)=>[k,rates[i]!])),...(turns.every(x=>x!==undefined)?{turns:turns.reduce((s:number,x)=>s+x!,0)/6}:{})}});
     }
     if(!out.length)throw new Error('No complete six-scenario configuration');return out;
   },

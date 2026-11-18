@@ -7,23 +7,44 @@
 // the data.
 //
 // usage: node scripts/sync-leaderboards.ts [--only id,id] [--dry] [--allow-drop]
-import { readdirSync, existsSync, writeFileSync } from 'node:fs';
+// With --dry and SYNC_DUMP=<file>, each board's full rows, others and harness declarations are appended to that
+// file as one JSON line, so a change to an importer can be compared with the rows it gave before.
+import { readdirSync, existsSync, writeFileSync, appendFileSync } from 'node:fs';
+import { begin, observe, review, type Flag } from './lib/feed-fields.ts';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT, dataPath, readJson, today } from './lib/util.ts';
+import { ROOT, dataPath, readJson, today, bodyHooks } from './lib/util.ts';
 import { makeResolver } from './lib/models.ts';
-import type { Leaderboard } from './leaderboards/types.ts';
+import type { Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
 
 // benchmark, model, setting, harness, score, date, cost (US dollars per task), tokens (output tokens per task),
-// and metrics (other numbers the board reports, such as latency) when it has any
+// metrics (other numbers the board reports, such as latency) when it has any, and info (facts about the entry:
+// who submitted it, the board's verified mark, a blend's models, the board's own date, a link to the run, trials
+// and interval, the model's weights and size) when it has any. A row with info but no metrics has null metrics.
 type Metrics = Record<string, number>;
-type Row = [string, string, string | null, string | null, number, string | null, number | null, number | null, Metrics?];
-const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics'];
+interface Info {
+  submitter?: string;
+  agentOrg?: string;
+  verified?: boolean;
+  /** Model ids, or "~" and the board's name for a model we don't track. */
+  models?: string[];
+  /** The board's own date for the run, when the row's date column holds the model's release instead. */
+  run?: string;
+  link?: string;
+  trials?: number;
+  low?: number;
+  high?: number;
+  open?: boolean;
+  license?: string;
+  params?: number;
+}
+type Row = [string, string, string | null, string | null, number, string | null, number | null, number | null, (Metrics | null)?, Info?];
+const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 // the same columns, with the board's own name for the entry in place of a model id
-const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics'];
+const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -37,11 +58,47 @@ const arg = (k: string) => {
 const only = arg('--only')?.split(',');
 const dry = process.argv.includes('--dry');
 
+const clean = (s: string | undefined) => s?.replace(/\s+/g, ' ').trim() || undefined;
+/** A board's "2023-5-11" as "2023-05-11", so dates compare as text and pass the data checks. */
+const day = (d: string | null | undefined) => d?.trim().replace(/^(\d{4})-(\d{1,2})-(\d{1,2})$/, (_, y, m, dd) => `${y}-${m.padStart(2, '0')}-${dd.padStart(2, '0')}`) ?? d;
+const finite = (v: unknown, digits = 5) => (typeof v === 'number' && Number.isFinite(v) ? Number(v.toPrecision(digits)) : undefined);
+/**
+ * The facts a board gives about one entry beyond its score, or undefined when it gives none. `runDiffers` is true
+ * for a matched row, whose date column holds the model's release, so the board's own date goes in `run`.
+ */
+function infoOf(r: LeaderboardRow, resolve: ReturnType<typeof makeResolver>, runDiffers: boolean): Info | undefined {
+  const i: Info = {};
+  if (clean(r.submitter)) i.submitter = clean(r.submitter);
+  if (clean(r.agentOrg)) i.agentOrg = clean(r.agentOrg);
+  if (typeof r.verified === 'boolean') i.verified = r.verified;
+  const names = [...new Set((r.models ?? []).map(clean).filter((n): n is string => !!n))];
+  if (names.length > 1) i.models = names.map((n) => resolve(n, r.date)?.id ?? `~${n}`);
+  if (runDiffers && r.date) i.run = r.date;
+  if (r.link && /^https?:\/\/\S+$/.test(r.link.trim())) i.link = r.link.trim();
+  if ((finite(r.trials) ?? 0) > 0) i.trials = Math.round(r.trials!);
+  const low = finite(r.low);
+  const high = finite(r.high);
+  if (low !== undefined && high !== undefined && low <= high) Object.assign(i, { low, high });
+  if (typeof r.open === 'boolean') i.open = r.open;
+  if (clean(r.license)) i.license = clean(r.license);
+  if ((finite(r.params, 4) ?? 0) > 0) i.params = finite(r.params, 4);
+  return Object.keys(i).length ? i : undefined;
+}
+
 const outPath = dataPath('scores', 'leaderboards.json');
 const store: Store = existsSync(outPath)
   ? readJson<Store>(outPath)
   : { retrieved: null, boards: {}, columns: COLUMNS, rows: [] };
 const benchmarks = new Set(readJson<{ id: string }[]>(dataPath('benchmarks.json')).map((b) => b.id));
+// the field watch: every body an importer fetches is noted, and fields of a kind the rows don't store are flagged for
+// review in data/scores/field-review.json. data/field-decisions.json holds the fields a person already reviewed.
+bodyHooks.push(observe);
+const fieldsPath = dataPath('scores', 'feed-fields.json');
+const reviewPath = dataPath('scores', 'field-review.json');
+const decisionsPath = dataPath('field-decisions.json');
+const feedFields: Record<string, string[]> = existsSync(fieldsPath) ? readJson<{ boards: Record<string, string[]> }>(fieldsPath).boards : {};
+const fieldReview: Record<string, Flag[]> = existsSync(reviewPath) ? readJson<{ boards: Record<string, Flag[]> }>(reviewPath).boards : {};
+const decided: Record<string, Record<string, unknown>> = existsSync(decisionsPath) ? readJson<{ boards: Record<string, Record<string, unknown>> }>(decisionsPath).boards : {};
 const released = new Map(readJson<{ id: string; released?: string }[]>(dataPath('models.json')).map((m) => [m.id, m.released]));
 
 const dir = join(ROOT, 'scripts', 'leaderboards');
@@ -78,19 +135,30 @@ for (const f of files) {
   }
   const resolve = makeResolver(board.aliases ?? {});
   try {
+    begin();
     const raw = await board.fetch();
+    {
+      const watched = review(raw, feedFields[board.benchmark], new Set(Object.keys(decided[board.benchmark] ?? {})));
+      if (watched.fields.length) feedFields[board.benchmark] = watched.fields;
+      if (watched.flags.length) fieldReview[board.benchmark] = watched.flags;
+      else delete fieldReview[board.benchmark];
+      if (dry && watched.flags.length) console.log(`    field watch: ${watched.flags.map((f) => `${f.field} (${f.kind}, ${f.why})`).join(', ')}`);
+    }
     const rows: Row[] = [];
     const others: Row[] = [];
     const unmatched = new Set<string>();
     for (const r of raw) {
       if (!Number.isFinite(r.score)) continue;
+      if (r.date) r.date = day(r.date)!;
       const cost = typeof r.cost === 'number' && r.cost > 0 ? Number(r.cost.toPrecision(4)) : null;
       const tokens = typeof r.tokens === 'number' && r.tokens > 0 ? Math.round(r.tokens) : null;
       // two decimals, or four for scores under 10, so a 0-to-1 board keeps 0.602 apart from 0.600
       const score = Math.abs(r.score) < 10 ? Math.round(r.score * 1e4) / 1e4 : Math.round(r.score * 100) / 100;
       const metrics = Object.fromEntries(Object.entries(r.metrics ?? {}).filter(([, v]) => Number.isFinite(v)).map(([k, v]) => [k, Number(v.toPrecision(5))]));
-      const extra: [Metrics?] = Object.keys(metrics).length ? [metrics] : [];
       const hit = resolve(r.model, r.date);
+      // a matched row's date column holds the model's release, so the board's own date goes in info.run
+      const info = infoOf(r, resolve, !!hit);
+      const extra: [(Metrics | null)?, Info?] = info ? [Object.keys(metrics).length ? metrics : null, info] : Object.keys(metrics).length ? [metrics] : [];
       if (!hit) {
         unmatched.add(r.model);
         const name = r.model.replace(/\s+/g, ' ').trim();
@@ -103,7 +171,9 @@ for (const f of files) {
     }
     console.log(`  ${board.benchmark}: ${raw.length} rows, ${rows.length} matched${unmatched.size ? `, unmatched: ${[...unmatched].slice(0, 12).join(' | ')}` : ''}`);
     if (dry) {
-      for (const r of rows.sort((a, b) => b[4] - a[4]).slice(0, 8)) console.log(`      ${r[4]}  ${r[1]}${r[2] ? ` (${r[2]})` : ''}${r[3] ? ` [${r[3]}]` : ''}`);
+      if (process.env.SYNC_DUMP)
+        appendFileSync(process.env.SYNC_DUMP, JSON.stringify({ board: board.benchmark, reference: board.reference, harnesses: board.harnesses, verified: board.verified, rows, others }) + '\n');
+      for (const r of rows.sort((a, b) => b[4] - a[4]).slice(0, 8)) console.log(`      ${r[4]}  ${r[1]}${r[2] ? ` (${r[2]})` : ''}${r[3] ? ` [${r[3]}]` : ''}${r[9] ? `  ${JSON.stringify(r[9]).slice(0, 160)}` : ''}`);
       continue;
     }
     if (!rows.length && !others.length) throw new Error('no rows');
@@ -114,7 +184,7 @@ for (const f of files) {
       throw new Error(`${now} entries against ${before} last time; rerun with --allow-drop if the board really shrank`);
     store.rows = store.rows.filter((r) => r[0] !== board.benchmark).concat(rows);
     store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(others);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}) };
   } catch (e) {
     failed++;
     const error = (e as Error).message;
@@ -142,11 +212,17 @@ if (!dry) {
   store.retrieved = today();
   store.columns = COLUMNS;
   // rows kept from a board that failed may predate the cost and tokens columns
-  store.rows = store.rows.map((r) => [...r.slice(0, 6), r[6] ?? null, r[7] ?? null, ...(r[8] ? [r[8]] : [])] as Row);
+  store.rows = store.rows.map((r) => [...r.slice(0, 6), r[6] ?? null, r[7] ?? null, ...(r[9] ? [r[8] ?? null, r[9]] : r[8] ? [r[8]] : [])] as Row);
   store.rows.sort((a, b) => a[0].localeCompare(b[0]) || (a[5] ?? '').localeCompare(b[5] ?? '') || a[1].localeCompare(b[1]));
   const others = (store.others ?? []).filter((r) => store.boards[r[0]]);
   others.sort((a, b) => a[0].localeCompare(b[0]) || b[4] - a[4] || a[1].localeCompare(b[1]));
   const boards = Object.fromEntries(Object.entries(store.boards).sort(([a], [b]) => a.localeCompare(b)));
+  // the field watch's two files: what each feed publishes, and what to review
+  const sortKeys = <T>(o: Record<string, T>) => Object.fromEntries(Object.entries(o).filter(([id]) => store.boards[id]).sort(([a], [b]) => a.localeCompare(b)));
+  writeFileSync(fieldsPath, `{\n  "note": "The record fields each board's feed published at the last sync (scripts/lib/feed-fields.ts).",\n  "boards": {\n${Object.entries(sortKeys(feedFields)).map(([id, f]) => `    ${JSON.stringify(id)}: ${JSON.stringify(f)}`).join(',\n')}\n  }\n}\n`);
+  const flagged = sortKeys(fieldReview);
+  writeFileSync(reviewPath, `{\n  "note": "Fields a board publishes that its importer may drop, or that the board added since the last sync. Wire them into the importer, or mark them reviewed in data/field-decisions.json.",\n  "updated": ${JSON.stringify(today())},\n  "boards": {\n${Object.entries(flagged).map(([id, f]) => `    ${JSON.stringify(id)}: ${JSON.stringify(f)}`).join(',\n')}\n  }\n}\n`);
+  console.log(`Field watch: ${Object.keys(flagged).length} boards with fields to review (data/scores/field-review.json).`);
   const lines = (rs: Row[]) => rs.map((r) => `    ${JSON.stringify(r)}`).join(',\n');
   writeFileSync(
     outPath,

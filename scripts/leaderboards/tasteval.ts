@@ -29,7 +29,7 @@ const board: Leaderboard = {
     for (const p of data.points ?? []) {
       if (!p.model || !Number.isFinite(p.m)) continue;
       const paren = p.model.match(/^(.*?)\s*\(([^)]+)\)$/);
-      const ci = Number.isFinite(p.lo) && Number.isFinite(p.hi) ? { metrics: { ciLow: Number((p.lo! * 100).toFixed(2)), ciHigh: Number((p.hi! * 100).toFixed(2)) } } : {};
+      const ci = Number.isFinite(p.lo) && Number.isFinite(p.hi) ? { low: Number((p.lo! * 100).toFixed(2)), high: Number((p.hi! * 100).toFixed(2)), metrics: { ciLow: Number((p.lo! * 100).toFixed(2)), ciHigh: Number((p.hi! * 100).toFixed(2)) } } : {};
       rows.push({ model: paren ? paren[1] : p.model, setting: paren ? paren[2].replace(/\s+effort$/i, '') : undefined, score: Number((p.m * 100).toFixed(2)), ...ci });
     }
     if (rows.length < 10) throw new Error(`only ${rows.length} TasteVal points`);

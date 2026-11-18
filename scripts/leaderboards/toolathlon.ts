@@ -57,10 +57,16 @@ export async function toolathlonRows(which: 'verified' | 'original', opts?: { me
     .filter((r) => r.Model && Number.isFinite(parseFloat(r['Pass@1'])))
     .map((r) => {
       const responses = r.Model.includes(' RESPONSES_API');
+      const spread = r['raw:Pass@1']?.match(/<sub>\s*±\s*([\d.]+)/)?.[1];
+      const score = parseFloat(r['Pass@1']);
       const agent = r.Agent && r.Agent !== 'Default' ? r.Agent : undefined;
       return {
         model: r.Model.replace(' RESPONSES_API', '').trim(),
-        score: parseFloat(r['Pass@1']),
+        score,
+        open: /^Open-(?:Weights|Source)$/.test(r.Type) ? true : r.Type === 'Proprietary' ? false : undefined,
+        trials: r['raw:Pass@1']?.includes('<sup>†</sup>') ? 1 : undefined,
+        low: which === 'verified' && spread ? score - Number(spread) : undefined,
+        high: which === 'verified' && spread ? score + Number(spread) : undefined,
         harness: responses ? [agent, 'Responses API'].filter(Boolean).join(', ') : agent,
         date: /^\d{4}-\d{2}-\d{2}$/.test(r.Date) ? r.Date : undefined,
         ...(opts?.metrics && Object.keys(rowMetrics(r)).length ? { metrics: rowMetrics(r) } : {}),

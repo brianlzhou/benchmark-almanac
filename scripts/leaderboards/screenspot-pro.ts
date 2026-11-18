@@ -9,11 +9,14 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = 'https://gui-agent.github.io/grounding-leaderboard/results/screenspot_pro.json';
 
 interface Entry {
+  description?: string;
+  link?: string;
   results?: { overall?: Record<string, number>; group?: Record<string, Record<string, number>> };
 }
 
 const board: Leaderboard = {
   benchmark: 'screenspot-pro',
+  harnesses: 'system',
   url: 'https://gui-agent.github.io/grounding-leaderboard/',
   feed: `${FEED} (results.overall.avg)`,
   terms: 'Static JSON on the grounding leaderboard GitHub Pages site; the gui-agent/grounding-leaderboard repository is Apache-2.0.',
@@ -31,11 +34,29 @@ const board: Leaderboard = {
       for (const [group, values] of Object.entries(e.results?.group ?? {})) {
         if (Number.isFinite(values.avg)) metrics[group] = values.avg * 100;
       }
+      const entry: Partial<LeaderboardRow> = {};
+      if (e.description === 'Proprietary') entry.license = e.description;
+      const cascade = name.match(/^GroundCascade \(([^+]+) \+ ([^)]+)\)$/);
+      if (cascade) {
+        entry.model = cascade[1].trim();
+        entry.harness = 'GroundCascade';
+        entry.setting = `helper: ${cascade[2].trim()}`;
+        entry.models = [entry.model, cascade[2].trim()];
+      } else if (name === 'KV-Ground-8B + Qwen3.5-27B Consistency Router') {
+        entry.model = 'KV-Ground-8B-BaseGuiOwl1.5-0315';
+        entry.harness = 'Consistency Router';
+        entry.models = [entry.model, 'Qwen3.5-27B-AWQ-4bit'];
+        if (e.link?.startsWith('https://')) entry.link = e.link;
+      } else if (name === 'AdaZoom-GUI-4B (cond. zoom-in, refine w/ Qwen3.5-397B)' && e.description?.includes('Qwen3.5-397B-A17B')) {
+        entry.model = 'AdaZoom-GUI-4B';
+        entry.harness = 'AdaZoom-GUI';
+        entry.models = [entry.model, 'Qwen3.5-397B-A17B'];
+      }
       // "GPT5-high (resized)": the reasoning effort as a suffix
       const gpt5 = name.match(/^GPT5-(\w+) \((resized)\)$/);
-      if (gpt5) rows.push({ model: 'GPT-5', setting: gpt5[1], harness: 'resized screenshots', score: avg * 100, metrics });
+      if (gpt5) rows.push({ model: 'GPT-5', setting: `${gpt5[1]}; resized screenshots`, score: avg * 100, metrics });
       // Preserve the undated baseline without assigning it to a particular GPT-4o snapshot.
-      else rows.push({ model: name === 'GPT-4o' ? 'GPT-4o (snapshot unspecified)' : name.trim(), score: avg * 100, metrics });
+      else rows.push({ model: name === 'GPT-4o' ? 'GPT-4o (snapshot unspecified)' : name.trim(), score: avg * 100, metrics, ...entry });
     }
     if (!rows.length) throw new Error('no entries in screenspot_pro.json');
     return rows;

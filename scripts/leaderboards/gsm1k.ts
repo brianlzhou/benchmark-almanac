@@ -1,7 +1,8 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // GSM1k: Scale's SEAL Math board (deprecated by Scale, still served) has one table. The score is accuracy in
 // percent on the held-out grade school math problems.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('math');
 

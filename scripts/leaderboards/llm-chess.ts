@@ -89,6 +89,7 @@ const board: Leaderboard = {
       rows.push({
         ...(/^unsloth\//i.test(r.Player)?{model:r.Player+' [community quantization]'}:norm(r.Player)),
         score: Number(elo.toFixed(1)),
+        ...(Number.isFinite(ci) ? { low: Number(elo.toFixed(1)) - ci, high: Number(elo.toFixed(1)) + ci } : {}),
         date: r.min_game_date || undefined,
         cost: cost > 0 ? cost : undefined,
         ...(Object.keys(metrics).length ? { metrics } : {}),

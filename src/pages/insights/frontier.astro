@@ -1,0 +1,165 @@
+---
+// How fast the frontier moves: the best capabilities index score of closed and open models each month, how many
+// months open models trail, and which lab held number one on the most benchmark-days each half year.
+// The series come from src/lib/insights.ts.
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ChartDownload from '../../components/ChartDownload.astro';
+import TrendChart from '../../components/insights/TrendChart.astro';
+import ShareBars from '../../components/insights/ShareBars.astro';
+import ReignStrip from '../../components/insights/ReignStrip.astro';
+import InsightCards from '../../components/insights/InsightCards.astro';
+import { openGap, gapFinding, leadTrend, leadFinding, timeAxis, pct, arenaReigns, arenaYears, eciRecords, cap, type TSeries } from '../../lib/insights.ts';
+import { ARENA } from '../../lib/time-machine.ts';
+import { labColor, onLabColor } from '../../lib/palette.ts';
+import { ECI_CREDIT, POOL_CREDIT } from '../../lib/credits.ts';
+import { ECI_DECK, CLOCK_NOTE } from '../../lib/figure-text.ts';
+import { fullDate, humanDate } from '../../lib/format.ts';
+
+const word = (n: number) => ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][n] ?? String(n);
+
+const g = openGap();
+const axis = timeAxis(2023);
+const round = (v: number) => String(Math.round(v));
+const now = g.at(-1)!;
+const before = g.find((p) => p.date >= `${Number(now.date.slice(0, 4)) - 2}${now.date.slice(4)}`) ?? g[0];
+const perYear = (now.closed - before.closed) / ((Date.parse(now.date) - Date.parse(before.date)) / (365.25 * 864e5));
+const recs = eciRecords();
+const recIn = (y: string) => recs.filter((r) => r.d.startsWith(y)).length;
+const thisYear = now.date.slice(0, 4);
+const lede = `The best capabilities index score rose about ${Math.round(perYear)} points a year over the last two years, and the index set ${word(recIn(thisYear))} new records in ${thisYear} so far, against ${word(recIn(String(Number(thisYear) - 2)))} in ${Number(thisYear) - 2}. Open models trail the best closed model by about ${word(Math.round(now.lag))} months.`;
+
+// Arena's number one, from its daily snapshots
+const reigns = arenaReigns();
+const ay = arenaYears(reigns);
+const ayNow = ay.at(-1)!;
+const ayPrev = ay.at(-2)!;
+const arenaLede = `${cap(word(ayNow.count))} models have held Arena's number one in ${ayNow.year} so far, for a median of ${Math.round(ayNow.median)} days each. In ${ayPrev.year}, ${word(ayPrev.count)} held it for a median of ${Math.round(ayPrev.median)} days. ${reigns.at(-1)!.name} is on top now.`;
+
+const by = (p: (typeof g)[number]) => `By ${fullDate(p.date)}`;
+const eciSeries: TSeries[] = [
+  { key: 'closed', label: 'Closed weights', color: 'var(--ink)', step: true, pts: g.map((p) => ({ x: p.x, y: p.closed, tv: round(p.closed), tn: p.closedModel, ts: `The best closed model by ${fullDate(p.date)}` })) },
+  { key: 'open', label: 'Open weights', color: 'var(--ink-3)', step: true, pts: g.map((p) => ({ x: p.x, y: p.open, tv: round(p.open), tn: p.openModel, ts: `The best open model by ${fullDate(p.date)}` })) },
+];
+const lo = Math.floor(Math.min(...g.map((p) => p.open)) / 10) * 10;
+const lagSeries: TSeries[] = [
+  {
+    key: 'lag',
+    label: 'Months behind',
+    color: 'var(--ink)',
+    pts: g.map((p) => ({ x: p.x, y: Math.round(p.lag * 10) / 10, tv: `${Math.round(p.lag)} months`, tn: by(p), ts: `${p.openModel} matched what closed models reached ${Math.round(p.lag)} months earlier` })),
+  },
+];
+
+const t = leadTrend();
+const half = (k: string) => `${k.slice(0, 4)} ${k.endsWith('H1') ? 'H1' : 'H2'}`;
+const cats = t.labs.map((l) => ({ key: l.id, label: l.name, color: labColor(l.id === 'other' ? undefined : l.id), ink: onLabColor(l.id === 'other' ? undefined : l.id) }));
+const tips = t.labs.map((l, k) =>
+  t.periods.map((p, i) => ({ tv: pct(t.shares[k][i]), tn: `${l.name}, ${p.name}`, ts: `Share of the contested benchmark-days at number one, across ${t.benchmarks[i]} benchmarks` })),
+);
+---
+
+<Base title="How fast is the frontier moving?" description="How fast the best AI models improve, how far open models trail closed ones, and which lab held number one on the most benchmarks over time." crumbs={[{ href: '/insights/', label: 'Insights' }]}>
+  <div class="page fr-page">
+    <header class="head">
+      <Crumbs items={[{ href: '/insights/', label: 'Insights' }]} />
+      <h1>How fast is the frontier moving?</h1>
+      <p class="lede">{lede}</p>
+    </header>
+
+    <section id="open">
+      <div class="sh">
+        <h2>How far behind are open models?</h2>
+        <p>{gapFinding(g)} We take the best score on Epoch AI’s Capabilities Index of any model released by the end of each month.</p>
+      </div>
+      <ChartDownload credit={ECI_CREDIT} name="open-and-closed" deck={`${ECI_DECK} Each line is the best score of any model released by that month, by whether its weights are published.`} yAxis="Epoch Capabilities Index, higher is more capable">
+        <TrendChart series={eciSeries} x={axis} y={{ min: lo, title: 'Capabilities index' }} label="The best capabilities index score of closed and open models, each month since 2023" w={1120} h={400} nh={300} dots={false} legend />
+      </ChartDownload>
+      <h3 class="fr-h3">Months behind</h3>
+      <p class="fr-sub">How long ago a closed model first reached the open models’ best, each month</p>
+      <ChartDownload credit={ECI_CREDIT} name="open-models-months-behind" deck="How many months before each month a closed model first reached the best open model’s capabilities index score.">
+        <TrendChart series={lagSeries} x={axis} y={{}} label="Months open models trail closed models, each month since 2023" w={1120} h={220} nh={200} dots={false} />
+      </ChartDownload>
+    </section>
+
+    <section id="arena">
+      <div class="sh">
+        <h2>How long does Arena's number one last?</h2>
+        <p>{arenaLede} We read Arena's text leaderboard with style control from its daily snapshots since {humanDate(reigns[0].start)}.</p>
+      </div>
+      <ChartDownload credit={`Source: Arena’s leaderboard dataset on Hugging Face (${ARENA.license})`} name="arena-number-one" deck="Each model that topped Arena's text leaderboard with style control, for as long as it stayed on top.">
+        <ReignStrip reigns={reigns} label="Each model that held number one on Arena's text leaderboard, along time, in its lab's color" />
+      </ChartDownload>
+    </section>
+
+    <section id="number-one">
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Who held number one?</h2>
+          <p>{leadFinding(t)}</p>
+        </div>
+        <a class="more" href="/leaders/">Leaders by category</a>
+      </div>
+      <ChartDownload credit={POOL_CREDIT.headline} name="number-one-by-lab" deck="Each lab's share of the contested benchmark-days at number one, each half year." counts={CLOCK_NOTE}>
+      <ShareBars
+        periods={t.periods.map((p) => ({ label: p.partial ? `${half(p.key)} so far` : half(p.key), partial: p.partial }))}
+        cats={cats}
+        shares={t.shares}
+        tips={tips}
+        label="Each lab's share of the contested benchmark-days at number one, each half year since 2024"
+      />
+      </ChartDownload>
+    </section>
+
+    <section id="method">
+      <div class="sh">
+        <h2>How this is counted</h2>
+      </div>
+      <div class="fr-method">
+        <p>
+          The capabilities index is Epoch AI’s. It puts models on one scale from many benchmarks. A line holds the best score of any model released by each month’s end, among the models whose weights we know are
+          published or not. A model counts from its release date, so a model scored later still counts from the month it came out.
+        </p>
+        <p>
+          The months behind are counted back from each month to the day a closed model first scored as high as the best open model had by then. When the best open model improves, the gap shrinks. When a
+          closed model sets a new best, the gap grows a month at a time.
+        </p>
+        <p>
+          Number one counts the same benchmarks as the <a href="/leaders/">Leaders</a> page, from the source each benchmark’s page leads with. {CLOCK_NOTE} Labs that never held a tenth of a half year are grouped as
+          other labs.
+        </p>
+      </div>
+    </section>
+
+    <section id="more-insights">
+      <div class="sh">
+        <h2>More insights</h2>
+      </div>
+      <InsightCards except="frontier" />
+    </section>
+  </div>
+</Base>
+
+<style>
+  .fr-h3 {
+    margin-top: 48px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .fr-sub {
+    margin: 4px 0 14px;
+    color: var(--ink-3);
+    font-size: 14px;
+  }
+  .fr-note {
+    margin-top: 14px;
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+  .fr-method {
+    display: grid;
+    gap: 14px;
+    max-width: 78ch;
+    color: var(--ink-2);
+  }
+</style>

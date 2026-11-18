@@ -7,9 +7,10 @@ const board:Leaderboard={benchmark:"colorbench",url:URL,feed:URL,terms:PAPER_TER
  async fetch(){
  const t=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0])==="[\"\",\"Color Perception\",\"Color Perception\",\"Color Perception\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"P & R\",\"Robustness\"]");
  if(!t)throw new Error('Reviewed results table missing');const out:LeaderboardRow[]=[];
- for(const c of t.slice(2)){const raw=c[11]?.match(/^(-?(?:\d+(?:\.\d+)?|\.\d+))(?:%|\s|$)/);if(!raw)continue;
+ let open:boolean|undefined;
+ for(const c of t.slice(2)){if(/^VLMs:/.test(c[0]))open=/Proprietary/.test(c[0])?false:undefined;else if(/Human Evaluation/.test(c[0]))open=undefined;const raw=c[11]?.match(/^(-?(?:\d+(?:\.\d+)?|\.\d+))(?:%|\s|$)/);if(!raw)continue;
  const metrics:Record<string,number>={};
  for(const [i,key] of [[12, "robustness"]] as [number,string][]){const v=Number(c[i]);if(c[i]?.trim()&&Number.isFinite(v))metrics[key]=v;}
- out.push({model:c[0].replace(/\s*\(CoT\)/g,''),setting:c[0].includes('(CoT)')?'CoT':undefined,score:Number(raw[1])*1,metrics});
+ out.push({model:c[0].replace(/\s*\(CoT\)/g,''),setting:c[0].includes('(CoT)')?'CoT':undefined,score:Number(raw[1])*1,open,metrics});
  }return checked(out,3);
  }};export default board;

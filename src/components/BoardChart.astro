@@ -5,8 +5,8 @@
 // the frontier are labeled. Entries that are not in our model list are gray. It renders at a desktop and a phone
 // width, so text keeps its size on both.
 import type { BoardChart, ChartAxis } from '../lib/data.ts';
-import { leaderboardScores, unlistedScores, modelById } from '../lib/data.ts';
-import { labColor } from '../lib/palette.ts';
+import { leaderboardScores, systemScores, unlistedScores, modelById, entryLabel, inEntryView, type EntryView } from '../lib/data.ts';
+import { labColor, agentTint } from '../lib/palette.ts';
 import { linear, niceTicks, niceMax } from '../lib/scale.ts';
 import type { Score } from '../lib/types.ts';
 
@@ -14,8 +14,10 @@ interface Props {
   benchmark: string;
   chart: BoardChart;
   label: string;
+  /** Which entries to draw, by the benchmark page's Entries switch. */
+  entries?: EntryView;
 }
-const { benchmark, chart, label } = Astro.props;
+const { benchmark, chart, label, entries = 'every' } = Astro.props;
 
 // an axis is the headline score, the run's cost or output tokens, or one of the board's other numbers
 const valueOf = (s: Score, a: ChartAxis) =>
@@ -26,12 +28,14 @@ interface Pt {
   setting: string | null;
   lab?: string;
   listed: boolean;
+  /** An agent someone else built around a model we track: drawn in a pale tint of the model's lab. */
+  tint?: boolean;
   x: number;
   y: number;
   front: boolean;
 }
-const pts: Pt[] = [...leaderboardScores, ...unlistedScores]
-  .filter((s) => s.benchmark === benchmark)
+const pts: Pt[] = [...leaderboardScores, ...systemScores, ...unlistedScores]
+  .filter((s) => s.benchmark === benchmark && inEntryView(s, entries))
   .flatMap((s, i) => {
     const x = valueOf(s, chart.x);
     const y = valueOf(s, chart.y);
@@ -39,7 +43,9 @@ const pts: Pt[] = [...leaderboardScores, ...unlistedScores]
     // a log axis has no place for zero or below
     if ((chart.x.log && x <= 0) || (chart.y.log && y <= 0)) return [];
     const m = s.model ? modelById.get(s.model) : undefined;
-    return [{ key: `p${i}`, name: m?.name ?? s.name ?? s.model, setting: s.setting ?? null, lab: m?.lab, listed: !!m, x, y, front: false }];
+    // an agent system shows under its own name, in a pale tint of its model's lab (a blend stays gray): never credited
+    const tint = !!s.system && !!m && (s.info?.models?.length ?? 0) < 2;
+    return [{ key: `p${i}`, name: entryLabel(s), setting: s.setting ?? null, lab: s.system && !tint ? undefined : m?.lab, listed: !!m && !s.system, tint, x, y, front: false }];
   });
 
 // the frontier: walking from the best x, keep each run that beats every run with a better x
@@ -110,7 +116,8 @@ const scaleOf = (a: typeof ax, range: [number, number]) => {
 };
 
 const sizes = [
-  { key: 'wide', w: 760, h: 380, pad: { l: 56, r: 28, t: 18, b: 52 }, font: 12 },
+  // the same drawing width and type size as the cost chart (EffortChart), so the two match when stretched to the column
+  { key: 'wide', w: 1120, h: 460, pad: { l: 56, r: 28, t: 18, b: 52 }, font: 12.5 },
   { key: 'narrow', w: 380, h: 300, pad: { l: 44, r: 14, t: 14, b: 46 }, font: 11 },
 ].map((z) => {
   const X = scaleOf(ax, [z.pad.l, z.w - z.pad.r]);
@@ -161,10 +168,9 @@ const sizes = [
           {[...pts]
             .sort((a, b) => Number(a.front) - Number(b.front))
             .map((p) => (
-              <g class:list={['pt', { on: p.front }]}>
-                <title>{`${runName(p)}: ${chart.y.label} ${fmtAxis(p.y, chart.y)}, ${chart.x.label.toLowerCase()} ${fmtAxis(p.x, chart.x)}${p.listed ? '' : '. Not in our model list'}`}</title>
-                <circle class="dotm" cx={z.X(p.x)} cy={z.Y(p.y)} r={p.front ? 5.5 : 4.5} fill={p.listed ? labColor(p.lab) : 'var(--ink-4)'} />
-                <circle cx={z.X(p.x)} cy={z.Y(p.y)} r="11" class="hit" />
+              <g class:list={['pt', { on: p.front }]} data-tv={`${chart.y.label}: ${fmtAxis(p.y, chart.y)}`} data-tn={runName(p)} data-ts={`${chart.x.label}: ${fmtAxis(p.x, chart.x)}${p.listed ? '' : '\n\nNot in our model list'}`}>
+                <circle class="dotm" cx={z.X(p.x)} cy={z.Y(p.y)} r={p.front ? 5.5 : 4.5} fill={p.listed ? labColor(p.lab) : p.tint ? agentTint(p.lab) : 'var(--ink-4)'} />
+                <circle cx={z.X(p.x)} cy={z.Y(p.y)} r="10" class="hit" />
               </g>
             ))}
           {z.labels.map((l) => (
@@ -228,7 +234,12 @@ const sizes = [
   .hit {
     fill: transparent;
   }
+  .pt:hover .hit {
+    stroke: var(--ink);
+    stroke-width: 1.2;
+  }
   .lab {
+    pointer-events: none;
     fill: var(--ink);
     font-weight: 500;
     paint-order: stroke;

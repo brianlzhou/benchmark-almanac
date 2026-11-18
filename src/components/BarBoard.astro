@@ -3,8 +3,8 @@
 // from a zero baseline, and the value at its tip. Bars are 14 px with air between rows.
 import type { Score } from '../lib/types.ts';
 import ModelName from './ModelName.astro';
-import { modelById, sourceLabel, isClaim, isRerun } from '../lib/data.ts';
-import { labColor } from '../lib/palette.ts';
+import { modelById, sourceLabel, isClaim, isRerun, entryLabel, LEADERBOARDS, intervalName } from '../lib/data.ts';
+import { labColor, agentTint } from '../lib/palette.ts';
 import { score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
 
@@ -29,8 +29,21 @@ const top = Math.max(...scores.map((s) => s.value), 1e-9);
 const max = unit === '%' && better !== 'lower' ? 100 : rated ? top : niceMax(top);
 // a rating has no true zero, so its bars start a little below the lowest rating on the board
 const lo = rated ? ratingFloor(scores.map((s) => s.value)) : 0;
-const w = (v: number) => `${Math.max(0.6, ((v - lo) / (max - lo)) * 100)}%`;
+const pctW = (v: number) => Math.max(0.6, ((Math.min(max, Math.max(lo, v)) - lo) / (max - lo)) * 100);
+const w = (v: number) => `${pctW(v)}%`;
+// a whisker for each score whose board publishes an interval; the board's switch hides them
+const whisker = (s: Score) => {
+  const a = s.info?.low;
+  const b = s.info?.high;
+  if (a === undefined || b === undefined || !(b > a)) return undefined;
+  return { left: pctW(a), width: Math.max(0.3, pctW(b) - pctW(a)), past: Math.max(0, pctW(b) - pctW(s.value)), text: `${(intervalName(s.benchmark) ?? 'interval').replace(/^./, (c) => c.toUpperCase())}: ${fmt(a, unit)} to ${fmt(b, unit)}` };
+};
 const src = (s: Score) => sourceLabel(s);
+// an agent system is drawn in a pale tint of its model's lab, and a blend in gray: their scores are shown, never
+// credited to the model's lab
+const lab = (s: Score) => (s.system ? undefined : modelById.get(s.model)?.lab);
+const fill = (s: Score) => (!s.system ? labColor(lab(s)) : (s.info?.models?.length ?? 0) > 1 ? labColor(undefined) : agentTint(modelById.get(s.model)?.lab));
+const mark = (s: Score) => (s.info?.verified && LEADERBOARDS[s.benchmark]?.verified ? `Verified: ${LEADERBOARDS[s.benchmark].verified}` : undefined);
 ---
 
 {lo > 0 && <p class="bb-base">Bars start at {lo.toLocaleString('en-US')}.</p>}
@@ -40,10 +53,11 @@ const src = (s: Score) => sourceLabel(s);
       <li class:list={{ hi: !!s.model && s.model === highlight, later: more && i >= limit }}>
         <span class="rk num">{i + 1}</span>
         <span class="who">
-          <ModelName id={s.model} setting={s.setting} name={s.name} />
+          <ModelName id={s.model} setting={s.setting} name={s.name} system={s.system} models={s.info?.models} verified={mark(s)} />
         </span>
-        <span class="track" data-tv={fmt(s.value, unit)} data-tn={`${modelById.get(s.model)?.name ?? s.name}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}`}>
-          <span class:list={['fill', { claim: isClaim(s), rerun: isRerun(s) }]} style={`width:${w(s.value)};background-color:${labColor(modelById.get(s.model)?.lab)}`} />
+        <span class="track" data-tv={fmt(s.value, unit)} data-tn={`${entryLabel(s)}${s.setting && s.setting !== 'unknown' ? ` (${s.setting})` : ''}`} data-ts={`${src(s)}${s.date ? `, ${monthYear(s.date)}` : ''}${whisker(s) ? `\n\n${whisker(s)!.text}` : ''}`} style={whisker(s) ? `--past:${whisker(s)!.past.toFixed(2)}%` : undefined}>
+          <span class:list={['fill', { claim: isClaim(s), rerun: isRerun(s) }]} style={`width:${w(s.value)};background-color:${fill(s)}`} />
+          {whisker(s) && <span class="wk" style={`left:${whisker(s)!.left.toFixed(2)}%;width:${whisker(s)!.width.toFixed(2)}%`} aria-hidden="true" />}
           <span class="val num">{fmt(s.value, unit)}</span>
         </span>
       </li>
@@ -141,10 +155,41 @@ const src = (s: Score) => sourceLabel(s);
     font-size: 14.5px;
   }
   .track {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
     min-width: 0;
+  }
+  /* the board's interval: a thin line with caps across the bar, and the value moved past its end */
+  .wk {
+    position: absolute;
+    top: 50%;
+    height: 10px;
+    transform: translateY(-50%);
+    border-left: 1.5px solid var(--ink);
+    border-right: 1.5px solid var(--ink);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .wk::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1.5px;
+    background: var(--ink);
+    transform: translateY(-50%);
+  }
+  .track:has(.wk) .val {
+    margin-left: var(--past, 0%);
+  }
+  :global(.wk-off) .wk {
+    display: none;
+  }
+  :global(.wk-off) .track .val {
+    margin-left: 0;
   }
   .fill {
     height: 14px;

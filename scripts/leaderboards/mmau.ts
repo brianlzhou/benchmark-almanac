@@ -15,7 +15,7 @@ export const MMAU_ALIASES: Record<string, string> = {
 export const MMAU_TERMS = 'JSON files on the MMAU GitHub Pages site that the page loads; the page states no terms.';
 
 interface Entry {
-  info: { name: string; type?: string; size?: string };
+  info: { name: string; type?: string; size?: string; link?: string };
   Avg?: { 'Test-mini'?: string; Test?: string };
 }
 
@@ -31,7 +31,7 @@ export async function mmauRows(file: string): Promise<LeaderboardRow[]> {
     if (score === undefined) continue;
     // "Gemma 3n" appears once per size ("2B", "4B"). Gemma 3n names its sizes E2B and E4B
     const gemma = /^Gemma 3n$/i.test(e.info.name.trim()) && /^\d+B$/i.test(e.info.size ?? '');
-    rows.push({ model: base ? 'Qwen2-Audio (base)' : gemma ? `Gemma 3n E${e.info.size}` : e.info.name.trim(), score });
+    rows.push({ open: ['open_source','open_access','open'].includes(e.info.type ?? '') ? true : ['closed','proprietary'].includes(e.info.type ?? '') ? false : undefined, params: /^(\d+(?:\.\d+)?)[BM]$/i.test(e.info.size ?? '') && !/^Gemma 3n$/i.test(e.info.name.trim()) ? parseFloat(e.info.size!) * (/M$/i.test(e.info.size!) ? 0.001 : 1) : undefined, link: e.info.link?.startsWith('https://github.com/') ? e.info.link : undefined, model: base ? 'Qwen2-Audio (base)' : gemma ? `Gemma 3n E${e.info.size}` : e.info.name.trim(), score });
   }
   return rows;
 }

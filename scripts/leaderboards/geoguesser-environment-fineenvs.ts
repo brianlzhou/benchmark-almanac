@@ -5,7 +5,7 @@ import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
 const FEED = 'https://huggingface.co/spaces/FineEnvs/geoguesser-article/resolve/main/app/src/content/assets/data/baseline-sweep.json';
-interface Entry { name: string; provider: string; reward: number; median_km: number; within25: number; within200: number }
+interface Entry { name: string; provider: string; reward: number; median_km: number; within25: number; within200: number; turns?: number }
 const board: Leaderboard = {
   benchmark: 'geoguesser-environment-fineenvs',
   url: 'https://huggingface.co/spaces/FineEnvs/geoguesser-article', feed: FEED,
@@ -15,7 +15,7 @@ const board: Leaderboard = {
     if (!source.length || source.some(r => !r.name || !Number.isFinite(r.reward))) throw new Error('GeoGuesser reward rows missing');
     return source.map(r => ({ model: r.name, score: r.reward,
       setting: r.provider ? `provider: ${r.provider}` : undefined,
-      metrics: { median_km: r.median_km, within25: r.within25, within200: r.within200 },
+      metrics: { ...(typeof r.turns === 'number' ? { turns: r.turns } : {}), median_km: r.median_km, within25: r.within25, within200: r.within200 },
     }));
   },
 };

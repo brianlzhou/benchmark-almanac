@@ -9,7 +9,9 @@ import cardsJson from '../../data/cards.json';
 import systemCardsJson from '../../data/system-cards.json';
 import epochJson from '../../data/scores/epoch.json';
 import leaderboardsJson from '../../data/scores/leaderboards.json';
-import type { Benchmark, Card, Lab, Model, Resource, Score } from './types.ts';
+import harnessesJson from '../../data/harnesses.json';
+import intervalsJson from '../../data/intervals.json';
+import type { Benchmark, Card, Harness, Lab, Model, Resource, Score, ScoreInfo } from './types.ts';
 import { areaOf } from './taxonomy.ts';
 
 export const labs = labsJson as Lab[];
@@ -33,8 +35,9 @@ type ScoreRow = [string, string, string | null, string | null, number, string | 
 // its own run, or 'board', 'lab', 'paper' or 'unknown' for a score it collected, and the source it names
 type Via = 'epoch' | 'board' | 'lab' | 'paper' | 'unknown';
 type EpochRow = [...ScoreRow, (Record<string, number> | null)?, Via?, (string | null)?];
-// leaderboard rows add cost (US dollars per task) and output tokens per task
-type BoardRow = [...ScoreRow, (number | null)?, (number | null)?, Record<string, number>?];
+// leaderboard rows add cost (US dollars per task), output tokens per task, metrics, and what the board says about
+// the entry (null metrics when a row has info but no metrics)
+type BoardRow = [...ScoreRow, (number | null)?, (number | null)?, (Record<string, number> | null)?, ScoreInfo?];
 const epoch = epochJson as unknown as {
   source: string;
   url: string;
@@ -59,10 +62,48 @@ export interface BoardChart {
   y: ChartAxis;
   note?: string;
 }
-type Board = { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: BoardChart; costPer?: 'run'; failed?: { date: string; error: string } };
+type Board = {
+  url: string;
+  feed: string;
+  terms: string;
+  host?: string;
+  retrieved: string;
+  rows: number;
+  unmatched: string[];
+  chart?: BoardChart;
+  costPer?: 'run';
+  /** Harness names that are the board's own way of running every model. */
+  reference?: string[];
+  /** 'system': other harness names on the board are agents built around the model, shown as their own entries. */
+  harnesses?: 'system';
+  /** What the board's verified mark means. */
+  verified?: string;
+  failed?: { date: string; error: string };
+};
 const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
+
+/** What a board's "±" is, checked against the board's own pages (data/intervals.json). */
+export interface IntervalInfo {
+  kind: string;
+  level?: number;
+  method?: string;
+  /** Whether the board publishes the bounds, or our importer builds them from the board's numbers. */
+  by: 'board' | 'importer';
+  says: 'stated' | 'implied' | 'inferred' | 'not found';
+  url?: string;
+  quote?: string;
+}
+export const INTERVALS = (intervalsJson as { boards: Record<string, IntervalInfo> }).boards;
+/** The interval in words: "95% confidence interval", or "confidence interval (the board gives no level)". */
+export function intervalName(id: string): string | undefined {
+  const i = INTERVALS[id];
+  if (!i) return undefined;
+  if (i.kind === 'standard error') return 'one standard error either side';
+  if (i.kind === 'standard deviation') return 'one standard deviation either side';
+  return i.level ? `${i.level}% ${i.kind}` : `${i.kind} (the board gives no level)`;
+}
 
 // ---- integrity ------------------------------------------------------------------------------------
 {
@@ -111,38 +152,140 @@ export function normUnit(u: string | null | undefined): string {
   return 'score';
 }
 
-export const leaderboardScores: Score[] = lb.rows.map(([benchmark, model, setting, harness, value, date, cost, tokens, metrics]) => ({
-  benchmark,
-  model,
-  value,
-  unit: benchById.get(benchmark)?.unit ?? '%',
-  setting,
-  harness,
-  date: date ?? modelById.get(model)?.released ?? null,
-  cost: cost ?? null,
-  tokens: tokens ?? null,
-  ...(metrics ? { metrics } : {}),
-  source: 'leaderboard',
-}));
+// ---- harnesses ------------------------------------------------------------------------------------
+/** Harnesses and agents we know by name (data/harnesses.json). */
+export const harnesses = harnessesJson as Harness[];
+const hkey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+const harnessByKey = new Map(harnesses.flatMap((h) => [h.name, h.id, ...h.aliases].map((n) => [hkey(n), h] as const)));
+export const harnessOf = (name: string | null | undefined) => (name ? harnessByKey.get(hkey(name)) : undefined);
+const labByKey = new Map(labs.flatMap((l) => [l.id, l.name, ...(l.aliases ?? [])].map((n) => [hkey(n), l.id] as const)));
+
+/**
+ * Whether a lab's own agent, run on the lab's own model (Claude Code with a Claude model), counts as the model's
+ * score. When false, it shows as its own entry, like an agent made by someone else.
+ */
+export const LAB_AGENT_IS_MODEL = true;
+
+/**
+ * What a board entry is, by the harness it ran in. A board decides what its harness names mean
+ * (scripts/leaderboards/types.ts): only a board marked `harnesses: 'system'` has agent entries.
+ * - `model`: the model on its own, in the board's reference harness, a neutral one, or none named.
+ * - `lab`: the model in its own maker's agent (Claude Code with a Claude model).
+ * - `agent`: an agent or product someone else built around the model ("Arca" for Arca + GPT-6 Astra).
+ * - `blend`: an entry that uses several models.
+ */
+export type EntryKind = 'model' | 'lab' | 'agent' | 'blend';
+export function entryKind(benchmark: string, model: string, harness: string | null | undefined, info?: ScoreInfo): EntryKind {
+  const h = harness?.trim();
+  if ((info?.models?.length ?? 0) > 1) return 'blend';
+  const board = lb.boards[benchmark];
+  if (!h || board?.harnesses !== 'system') return 'model';
+  if (board.reference?.some((r) => hkey(r) === hkey(h))) return 'model';
+  // a submission named after its own model ("GPT-4" on GPT-4) is the model on its own
+  const m = modelById.get(model);
+  if (m && [m.name, m.id, ...(m.aliases ?? []), m.epoch ?? ''].some((n) => n && hkey(n) === hkey(h))) return 'model';
+  const known = harnessOf(h);
+  if (known?.kind === 'reference') return 'model';
+  const maker = known?.maker ?? (info?.agentOrg ? labByKey.get(hkey(info.agentOrg)) : undefined);
+  return maker && maker === m?.lab ? 'lab' : 'agent';
+}
+
+/**
+ * The views of a board that has agent entries: every entry, the runs that count as a model's own score, or only
+ * runs in a standard harness. The benchmark page's Entries switch picks one for every chart of the official board.
+ */
+export type EntryView = 'every' | 'models' | 'same';
+/** Whether an official-board score belongs in a view. Unlisted entries and agents appear only in `every`. */
+export function inEntryView(s: Pick<Score, 'benchmark' | 'model' | 'harness' | 'info' | 'system'>, view: EntryView): boolean {
+  if (view === 'every') return true;
+  if (!s.model || s.system) return false;
+  return view === 'models' || entryKind(s.benchmark, s.model, s.harness, s.info) === 'model';
+}
+
+/**
+ * The agent a board entry runs in, when the entry doesn't count as the model's own score: "Arca" for Arca + GPT-6
+ * Astra. Undefined for the model's own score, which by LAB_AGENT_IS_MODEL includes its maker's own agent.
+ */
+function systemOf(benchmark: string, model: string, harness: string | null | undefined, info?: ScoreInfo): string | undefined {
+  const kind = entryKind(benchmark, model, harness, info);
+  if (kind === 'model' || (kind === 'lab' && LAB_AGENT_IS_MODEL)) return undefined;
+  return harness?.trim() || 'Several models';
+}
+
+/**
+ * A row's interval, in one place. The standard home is info.low and info.high. Many importers wrote theirs as
+ * metrics.ciLow and metrics.ciHigh before that existed, so those count too when they bracket the score, which
+ * rules out an interval that belongs to a sub-score.
+ */
+function withInterval(value: number, metrics: Record<string, number> | null | undefined, info: ScoreInfo | null | undefined): ScoreInfo | undefined {
+  if (info?.low !== undefined && info?.high !== undefined) return info;
+  const lo = metrics?.ciLow;
+  const hi = metrics?.ciHigh;
+  if (typeof lo !== 'number' || typeof hi !== 'number' || !Number.isFinite(lo) || !Number.isFinite(hi) || hi <= lo || value < lo || value > hi) return info ?? undefined;
+  return { ...(info ?? {}), low: lo, high: hi };
+}
+
+/** Every run on the official boards that resolves to a model we track, before the split into models and systems. */
+const boardRuns: Score[] = lb.rows.map(([benchmark, model, setting, harness, value, date, cost, tokens, metrics, rowInfo]) => {
+  const info = withInterval(value, metrics, rowInfo);
+  const system = systemOf(benchmark, model, harness, info);
+  return {
+    benchmark,
+    model,
+    value,
+    unit: benchById.get(benchmark)?.unit ?? '%',
+    setting,
+    harness,
+    date: date ?? modelById.get(model)?.released ?? null,
+    cost: cost ?? null,
+    tokens: tokens ?? null,
+    ...(metrics ? { metrics } : {}),
+    ...(info ? { info } : {}),
+    ...(system ? { system } : {}),
+    source: 'leaderboard' as const,
+  };
+});
+
+/** Official leaderboard scores of models on their own: these count toward leaders, reigns and lab credit. */
+export const leaderboardScores: Score[] = boardRuns.filter((s) => !s.system);
+
+/**
+ * Entries that are an agent or product built around a model we track ("Arca + GPT-6 Astra"), or that use several
+ * models. Pages show them on their benchmark's board under the agent's name. They never count as the model's score.
+ */
+export const systemScores: Score[] = boardRuns.filter((s) => !!s.system);
+
+const nameOf = (id: string) => (id.startsWith('~') ? id.slice(1) : (modelById.get(id)?.name ?? id));
+/** How a board entry reads: "Arca + GPT-6 Astra", "LemonHarness (Gemini 3.1 Pro + GPT-5.3 Codex)", or the model. */
+export function entryLabel(s: Pick<Score, 'model' | 'name' | 'system' | 'info'>): string {
+  const own = s.model ? nameOf(s.model) : (s.name ?? '');
+  const blend = s.info?.models && s.info.models.length > 1 ? s.info.models.map(nameOf).join(' + ') : undefined;
+  if (blend) return s.system && s.system !== 'Several models' ? `${s.system} (${blend})` : blend;
+  return s.system ? `${s.system} + ${own}` : own;
+}
 
 /**
  * Entries on official leaderboards that are not in data/models.json, under the board's own name. Pages show them
  * on their benchmark's board. They never count toward leaders, reigns or lab credit.
  */
-export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, setting, harness, value, date, cost, tokens, metrics]) => ({
-  benchmark,
-  model: '',
-  name,
-  value,
-  unit: benchById.get(benchmark)?.unit ?? '%',
-  setting,
-  harness,
-  date: date ?? null,
-  cost: cost ?? null,
-  tokens: tokens ?? null,
-  ...(metrics ? { metrics } : {}),
-  source: 'leaderboard',
-}));
+export const unlistedScores: Score[] = (lb.others ?? []).map(([benchmark, name, setting, harness, value, date, cost, tokens, metrics, rowInfo]) => {
+  const info = withInterval(value, metrics, rowInfo);
+  return {
+    benchmark,
+    model: '',
+    name,
+    value,
+    unit: benchById.get(benchmark)?.unit ?? '%',
+    setting,
+    harness,
+    date: date ?? null,
+    cost: cost ?? null,
+    tokens: tokens ?? null,
+    ...(metrics ? { metrics } : {}),
+    ...(info ? { info } : {}),
+    source: 'leaderboard' as const,
+  };
+});
 
 // An older epoch.json has no via column: its rows take the benchmark's kind, and collected ones name no source
 const viaOf = (r: EpochRow): Via => r[7] ?? (benchById.get(r[0])?.epoch?.runs === 'external' ? 'unknown' : 'epoch');
@@ -243,6 +386,7 @@ const epochByBench = groupBy(epochScores, (s) => s.benchmark);
 const viaByBench = groupBy(viaBoardScores, (s) => s.benchmark);
 const claimsByBench = groupBy(collectedClaims, (s) => s.benchmark);
 const lbByBench = groupBy(leaderboardScores, (s) => s.benchmark);
+const sysByBench = groupBy(systemScores, (s) => s.benchmark);
 const unlistedByBench = groupBy(unlistedScores, (s) => s.benchmark);
 const cardScoresByBench = groupBy(cardScores, (s) => s.benchmark);
 const citesByBench = groupBy(
@@ -260,13 +404,16 @@ export const eciByModel = new Map(
 
 const better = (b: Benchmark) => (b.better === 'lower' ? -1 : 1);
 
-/** Best score per model, best first. Settings and harnesses of one model compete; the best one stays. */
+/**
+ * Best score per model, best first. Settings and harnesses of one model compete; the best one stays. A system entry
+ * (an agent built around the model, or a blend) is its own entry, so it never takes the model's place.
+ */
 export function bestPerModel(scores: Score[], b: Benchmark): Score[] {
   const top = new Map<string, Score>();
   const sign = better(b);
   for (const s of scores) {
     // an unlisted entry has no model id, so its board name keys it
-    const k = s.model || `~${s.name}`;
+    const k = (s.model || `~${s.name}`) + (s.system ? `|${s.system}|${(s.info?.models ?? []).join('+')}` : '');
     const cur = top.get(k);
     if (!cur || sign * s.value > sign * cur.value) top.set(k, s);
   }
@@ -325,6 +472,14 @@ export interface BenchSummary {
   boardSource: BoardSource | null;
   /** Entries on the official leaderboard that are not in the model list, best per name. Shown, never credited. */
   unlisted: Score[];
+  /** Agents and products built around models we track, and blends, best per entry. Shown, never credited. */
+  systems: Score[];
+  /**
+   * The official board with only the runs in the board's own harness, best per model: no maker's agents. Set on a
+   * board of agent entries where a maker's agent holds some model's best score, and some model ran in the board's
+   * harness.
+   */
+  sameHarness?: Score[];
   /**
    * What the benchmark page's board draws: `board`, plus the unlisted entries when it is the official leaderboard,
    * or the unlisted entries alone when no other source has a score.
@@ -376,12 +531,16 @@ export function benchSummary(id: string): BenchSummary {
   // An independent board leads, unless it stopped six or more months before the newest score from another
   // source. A board that ends at o4-mini should not headline a benchmark labs still report today. Independent
   // sources come in this order: the benchmark's own leaderboard, Epoch AI's runs, then a board Epoch AI copied.
+  // the official board's entries include its agent systems: a board of agent submissions (GAIA) still leads with
+  // its own leaderboard, though few of its entries are a model on its own
+  const systems = bestPerModel(sysByBench.get(id) ?? [], b);
+  const officialEntries = [...leaderboardBoard, ...systems];
   const newest = (xs: Score[]) => xs.reduce((m, x) => (x.date && x.date > m ? x.date : m), '');
-  const latest = [leaderboardBoard, epochBoard, viaBoard, cardBoard].map(newest).reduce((a, x) => (x > a ? x : a), '');
+  const latest = [officialEntries, epochBoard, viaBoard, cardBoard].map(newest).reduce((a, x) => (x > a ? x : a), '');
   const fresh = (xs: Score[]) => !latest || !newest(xs) || monthsBetween(newest(xs), latest) < 6;
-  const [nL, nE, nV, nC] = [leaderboardBoard.length, epochBoard.length, viaBoard.length, cardBoard.length];
+  const [nL, nE, nV, nC] = [officialEntries.length, epochBoard.length, viaBoard.length, cardBoard.length];
   const boardSource: BenchSummary['boardSource'] =
-    (nL >= 5 && fresh(leaderboardBoard)) || (nL > 0 && nE < 5 && nV < 5 && nC === 0)
+    (nL >= 5 && fresh(officialEntries)) || (nL > 0 && nE < 5 && nV < 5 && nC === 0)
       ? 'leaderboard'
       : (nE >= 5 && fresh(epochBoard)) || (nE > 0 && nV < 5 && nC === 0)
         ? 'epoch'
@@ -402,8 +561,11 @@ export function benchSummary(id: string): BenchSummary {
                       : null;
   const board = boardOf(boardSource, { leaderboardBoard, epochBoard, viaBoard, cardBoard, claimBoard });
   const unlisted = bestPerModel(unlistedByBench.get(id) ?? [], b);
-  const shownSource = boardSource ?? (unlisted.length ? 'leaderboard' : null);
-  const shown = shownSource === 'leaderboard' && unlisted.length ? bestPerModel([...board, ...unlisted], b) : board;
+  const own = (x: Score) => entryKind(x.benchmark, x.model, x.harness, x.info) === 'model';
+  const sameBoard = boardSource === 'leaderboard' && board.some((x) => !own(x)) ? bestPerModel((lbByBench.get(id) ?? []).filter(own), b) : [];
+  const sameHarness = sameBoard.length ? sameBoard : undefined;
+  const shownSource = boardSource ?? (unlisted.length || systems.length ? 'leaderboard' : null);
+  const shown = shownSource === 'leaderboard' && (unlisted.length || systems.length) ? bestPerModel([...board, ...systems, ...unlisted], b) : board;
 
   // frontier: only for percent scores, where card and Epoch numbers share a scale
   const pct = (b.unit ?? '%') === '%';
@@ -471,6 +633,8 @@ export function benchSummary(id: string): BenchSummary {
     board,
     boardSource,
     unlisted,
+    systems,
+    ...(sameHarness ? { sameHarness } : {}),
     shown,
     shownSource,
     best: board[0],

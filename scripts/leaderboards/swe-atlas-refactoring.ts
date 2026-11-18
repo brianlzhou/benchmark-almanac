@@ -1,12 +1,15 @@
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // SWE Atlas Refactoring: Scale's board has one table. The score is the task resolve rate in percent (the
 // refactor must pass the tests and the rubrics). Names carry the harness and effort.
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, fetchScaleEntries, scaleFeed,  scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('sweatlas-refactoring');
 
 const board: Leaderboard = {
   benchmark: 'swe-atlas-refactoring',
+  harnesses: 'system',
+  reference: ['mini-SWE-agent'],
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: 'Scale terms restrict automated extraction. The almanac credits Scale AI and links the source.',

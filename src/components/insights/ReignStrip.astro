@@ -1,0 +1,140 @@
+---
+// Who held number one, as one strip along time: a segment per model, as long as it stayed on top, in its lab's color.
+// Wide enough segments carry the model's name. Every segment carries the site's shared tooltip, and the legend names
+// each lab, so color is never the only cue. It renders at a desktop and a phone width.
+import { labColor, onLabColor } from '../../lib/palette.ts';
+import { labById } from '../../lib/data.ts';
+import { yearFrac, fullDate } from '../../lib/format.ts';
+import { linear } from '../../lib/scale.ts';
+import type { ArenaReign } from '../../lib/insights.ts';
+
+interface Props {
+  reigns: ArenaReign[];
+  label: string;
+}
+const { reigns, label } = Astro.props;
+const t0 = yearFrac(reigns[0].start);
+const t1 = yearFrac(reigns.at(-1)!.end);
+const labs = [...new Set(reigns.map((r) => r.lab))];
+const nameOf = (lab: string) => labById.get(lab)?.name ?? lab;
+const years: number[] = [];
+for (let y = Math.ceil(t0); y <= Math.floor(t1); y++) years.push(y);
+const sizes = [
+  { key: 'wide', W: 1120, H: 92, font: 12.5 },
+  { key: 'narrow', W: 380, H: 84, font: 11 },
+].map((z) => {
+  const X = linear([t0, t1], [0, z.W]);
+  const segs = reigns.map((r) => {
+    const x = X(yearFrac(r.start));
+    const w = Math.max(1.5, X(yearFrac(r.end)) - x - 2);
+    const fits = w > r.name.length * z.font * 0.58 + 10;
+    return { r, x, w, fits };
+  });
+  return { ...z, X, segs };
+});
+const tipOf = (r: ArenaReign) => ({
+  tv: r.name,
+  tn: `${r.current ? 'Number one since' : 'Number one from'} ${fullDate(r.start)}${r.current ? '' : ` to ${fullDate(r.end)}`}`,
+  ts: `${r.days} day${r.days === 1 ? '' : 's'}${r.current ? ' so far' : ''}, ${nameOf(r.lab)}`,
+});
+---
+
+<figure class="rs">
+  <ul class="rs-key" aria-hidden="true">
+    {
+      labs.map((l) => (
+        <li>
+          <span class="sw" style={`background:${labColor(l)}`} />
+          {nameOf(l)}
+        </li>
+      ))
+    }
+  </ul>
+  {
+    sizes.map((z) => (
+      <svg class:list={['rs-svg', z.key === 'wide' ? 'only-wide' : 'only-narrow']} viewBox={`0 0 ${z.W} ${z.H}`} role="img" aria-label={label} style={`--fs:${z.font}px`}>
+        {z.segs.map((s) => {
+          const t = tipOf(s.r);
+          return (
+            <g class="seg" data-tv={t.tv} data-tn={t.tn} data-ts={t.ts}>
+              <rect x={s.x} y="0" width={s.w} height="56" rx="3" fill={labColor(s.r.lab)} />
+              {s.fits && (
+                <text x={s.x + 8} y="33" fill={onLabColor(s.r.lab)}>
+                  {s.r.name}
+                </text>
+              )}
+            </g>
+          );
+        })}
+        {years.map((y) => (
+          <g>
+            <line class="yr" x1={z.X(y)} x2={z.X(y)} y1="60" y2="68" />
+            <text class="tick" x={z.X(y)} y={z.H - 6} text-anchor="middle">
+              {y}
+            </text>
+          </g>
+        ))}
+      </svg>
+    ))
+  }
+</figure>
+
+<style>
+  .rs {
+    margin: 0;
+  }
+  .rs-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .rs-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .rs-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    font-size: var(--fs);
+  }
+  .rs-svg.only-narrow {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .rs-svg.only-wide {
+      display: none;
+    }
+    .rs-svg.only-narrow {
+      display: block;
+    }
+  }
+  .seg text {
+    font-weight: 500;
+    pointer-events: none;
+  }
+  .seg:hover rect {
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+  .yr {
+    stroke: var(--ink-4);
+  }
+  .tick {
+    fill: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 0.92em;
+  }
+</style>

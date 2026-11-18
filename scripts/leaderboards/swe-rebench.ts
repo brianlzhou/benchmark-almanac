@@ -49,7 +49,7 @@ const board: Leaderboard = {
       if (totalTokens !== undefined) metrics.totalTokens = totalTokens;
       // "64.5% ± 1.41%": the resolved rate and its standard error over the runs
       const sem = r[iScore]?.text.match(/±\s*([\d.]+)/);
-      if (sem) metrics.sem = Number(sem[1]);
+      if (sem) metrics.stderr = metrics.sem = Number(sem[1]);
       const pass5 = iPass5 >= 0 ? num(r[iPass5]?.text) : undefined;
       if (pass5 !== undefined) metrics.pass5 = pass5;
       rows.push({

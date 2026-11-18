@@ -18,7 +18,7 @@ const quality=d.metrics.filter((m:any)=>m.group!=='Operational');
 const ranks=new Map<string,number[]>();
 for(const k of quality){const rr=overall.filter((r:any)=>r.metrics[k.id]?.value!=null).sort((a:any,b:any)=>(k.direction==='down'?1:-1)*(a.metrics[k.id].value-b.metrics[k.id].value));
  for(let i=0;i<rr.length;){let j=i+1;while(j<rr.length&&Math.abs(rr[j].metrics[k.id].value-rr[i].metrics[k.id].value)<1e-12)j++;for(let p=i;p<j;p++)ranks.set(rr[p].model,[...(ranks.get(rr[p].model)||[]),((i+1)+j)/2]);i=j;}}
-return overall.map((r:any)=>{const m=d.models.find((m:any)=>m.id===r.model);const rank=ranks.get(r.model)!;if(rank.length!==quality.length)throw new Error('Incomplete overall ranks');return {model:m.name,score:rank.reduce((a,b)=>a+b,0)/rank.length,setting:m.reasoning==='fixed'?undefined:m.reasoning,tokens:r.metrics.TC.value,metrics:Object.fromEntries(Object.entries(r.metrics).map(([k,v]:[string,any])=>[k,v.value]))};});
+return overall.map((r:any)=>{const m=d.models.find((m:any)=>m.id===r.model);const rank=ranks.get(r.model)!;if(rank.length!==quality.length)throw new Error('Incomplete overall ranks');return {model:m.name,open:m.access==='open'?true:m.access==='closed'?false:undefined,score:rank.reduce((a,b)=>a+b,0)/rank.length,setting:m.reasoning==='fixed'?undefined:m.reasoning,tokens:r.metrics.TC.value,metrics:Object.fromEntries(Object.entries(r.metrics).map(([k,v]:[string,any])=>[k,v.value]))};});
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

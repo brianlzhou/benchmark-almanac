@@ -15,6 +15,10 @@ const FEED = 'https://osworld-v2.xlang.ai/static/data/leaderboard/official-resul
 
 interface Result {
   model: string;
+  official?: boolean;
+  company?: string;
+  trajectoryUrl?: string;
+  reproductionGuideUrl?: string;
   reasoning?: string;
   toolSetting?: string;
   stepBudget?: number;
@@ -48,6 +52,8 @@ export const ALIASES: Record<string, string> = {
 export function makeOsworld2(benchmark: string, release: string): Leaderboard {
   return {
     benchmark,
+    harnesses: 'system',
+    verified: 'marked official by OSWorld',
     url: 'https://osworld-v2.xlang.ai/',
     feed: `${FEED} (releaseVersion ${release}, full set)`,
     terms: 'Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.',
@@ -65,8 +71,11 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
         rows.push({
           model,
           score: r.binaryAccuracy,
-          setting: [r.reasoning?.toLowerCase(), steps].filter(Boolean).join(', ') || undefined,
-          harness: harness ?? (r.toolSetting || undefined),
+          setting: [r.reasoning?.toLowerCase(), steps, r.toolSetting || undefined].filter(Boolean).join(', ') || undefined,
+          harness,
+          verified: typeof r.official === 'boolean' ? r.official : undefined,
+          agentOrg: harness ? r.company : undefined,
+          link: [r.trajectoryUrl, r.reproductionGuideUrl].find((url) => url?.startsWith('https://')),
           cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / (data.datasetSize || 108) : undefined),
           tokens: r.outputTokensPerTask ?? undefined,
           metrics: typeof r.partialScore === 'number' ? { partial: r.partialScore } : undefined,

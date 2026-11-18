@@ -17,7 +17,7 @@ const board: Leaderboard = {
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text))).find(t=>t.some(r=>r[0]==='WorkArena (33 tasks)'));
  if(!t)throw new Error('WorkArena overall row missing');const all=t.find(r=>r[0]==='WorkArena (33 tasks)')!;
- return checked(t[0].slice(1).map((model,j)=>({model:model==='GPT-4o-V'?'GPT-4o':model==='Llama3'?'Llama 3 (size unspecified)':model,setting:model==='GPT-4o-V'?'vision and accessibility tree':'accessibility tree',harness:'BrowserGym baseline agent',score:num(all[1+j*2])!,metrics:{standardError:num(all[2+j*2])!,...Object.fromEntries(t.slice(3,10).map(r=>[r[0],num(r[1+j*2])!]))}})),4);
+ return checked(t[0].slice(1).map((model,j)=>({model:model==='GPT-4o-V'?'GPT-4o':model==='Llama3'?'Llama 3 (size unspecified)':model,setting:model==='GPT-4o-V'?'vision and accessibility tree':'accessibility tree',harness:'BrowserGym baseline agent',score:num(all[1+j*2])!,metrics:{standardError:num(all[2+j*2])!,stderr:num(all[2+j*2])!,...Object.fromEntries(t.slice(3,10).map(r=>[r[0],num(r[1+j*2])!]))}})),4);
  },
 };
 export default board;

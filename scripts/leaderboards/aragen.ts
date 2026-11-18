@@ -14,7 +14,7 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any[]>(FEED);
-      return d.filter(r=>r.Meta&&r['claude-sonnet-4-20250514 Scores']?.['3C3H Scores']?.['3C3H Score']).map(r=>{const s=r['claude-sonnet-4-20250514 Scores']['3C3H Scores'];return {model:r.Meta['Model Name'].replace(/^[^/]+\//,''),score:s['3C3H Score'].value*100,setting:r.Meta.Precision,metrics:Object.fromEntries(Object.entries(s).filter(([k])=>k!=='3C3H Score').map(([k,v]:[string,any])=>[k.toLowerCase(),v.value*100]))};});
+      return d.filter(r=>r.Meta&&r['claude-sonnet-4-20250514 Scores']?.['3C3H Scores']?.['3C3H Score']).map(r=>{const s=r['claude-sonnet-4-20250514 Scores']['3C3H Scores'];return {model:r.Meta['Model Name'].replace(/^[^/]+\//,''),score:s['3C3H Score'].value*100,setting:r.Meta.Precision,metrics:{...Object.fromEntries(Object.entries(s).filter(([k])=>k!=='3C3H Score').map(([k,v]:[string,any])=>[k.toLowerCase(),v.value*100])),...(typeof r.Meta.Run_Total_Duration_Seconds==='number'&&Number.isFinite(r.Meta.Run_Total_Duration_Seconds)?{time:r.Meta.Run_Total_Duration_Seconds}:{})}};});
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

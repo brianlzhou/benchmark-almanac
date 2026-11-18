@@ -16,7 +16,7 @@ const board: Leaderboard = {
   const result = await (async (): Promise<LeaderboardRow[]> => {
   const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Accuracy') && t[0]?.some(c=>c.text==='Stderr'));
   if(!t)throw new Error('Inspect CTF results missing');
-  return t.slice(1).filter(r=>num(r[2]?.text)!==undefined).map(r=>({model:r[0].text,score:num(r[2].text)!*100,harness:'Inspect gdm_intercode_ctf',setting:'Inspect/GDM task exclusions',metrics:{stderr:num(r[3].text)!*100}}));
+  return t.slice(1).filter(r=>num(r[2]?.text)!==undefined).map(r=>({model:r[0].text,score:num(r[2].text)!*100,harness:'Inspect gdm_intercode_ctf',setting:'Inspect/GDM task exclusions',metrics:{stderr:num(r[3].text)!*100,...(()=>{const m=r[4]?.text.match(/^(\d+)m\s*(\d+)s$/);return m?{time:Number(m[1])*60+Number(m[2])}:({} as Record<string, number>);})()}}));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.map(r => ({...r, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));

@@ -18,6 +18,7 @@ export function fireworksBoard(benchmark:string,slug:string):Leaderboard {
     const cost=r.metrics.cost_per_task??r.metrics.cost_per_deck;
     const output=Object.values(r.metrics).find(m=>m.unit==='tokens'&&/^Output tokens \/ task$/i.test(m.label));
     const metrics=Object.fromEntries(Object.entries(r.metrics).filter(([k,v])=>k!=='score'&&typeof v.value==='number').map(([k,v])=>[k,v.value as number]));
+    if (['web-search/web-context', 'finance/sheetbench'].includes(slug) && typeof r.metrics.se?.value === 'number') metrics.stderr = r.metrics.se.value;
     return {model:r.model,score,setting:r.raw?.reasoning,date:source.last_updated,cost:cost?.unit==='USD'?cost.value??undefined:undefined,tokens:output?.value??undefined,metrics};
    });
    if(!rows.length)throw new Error('Fireworks result rows missing');return rows;

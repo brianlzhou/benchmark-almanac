@@ -43,7 +43,7 @@ models and benchmarks to `data/models.json` and `data/benchmarks.json`.
 
 ## Scripts
 
-These TypeScript files run directly with Node 22.23.4 or later. Only `embed.ts` needs a package installed.
+These TypeScript files run directly with Node 22.23.4 or later. Only `embed.ts` and `meaning-eval.ts` need a package installed.
 
 | Command | What it does |
 | --- | --- |
@@ -56,6 +56,7 @@ These TypeScript files run directly with Node 22.23.4 or later. Only `embed.ts` 
 | `node scripts/check-data.ts` | Checks references, allowed values and copy style in `data/`. |
 | `npm test` | Runs the tests in `scripts/**/*.test.ts`, which cover how outside model names map to `data/models.json`. |
 | `node scripts/embed.ts` | Rebuilds `public/meaning/`, the vectors behind search by meaning, for benchmarks whose text changed. Run `npm i --no-save @huggingface/transformers@4.3.1` first. The model downloads once into `.cache/`. |
+| `node scripts/meaning-eval.ts` | Tests search by meaning against `scripts/meaning/queries.json`, plain-language requests with the benchmarks each should find, and prints recall and MRR for the dev and held-out requests. Needs the same package as `embed.ts` and the dev server (for the index builder's benchmark list). `--fallback` tests the ranking browsers without WebGPU get. |
 | `npm run og:film` | Films the link-preview loops and posters in `public/og/`. It needs ffmpeg and a Chrome or Chromium. Rerun it after a sync that changes the charts. |
 | `node scripts/submission.ts --list` | Prints the open benchmark submissions as JSON lines, with the same check the submission workflow runs. It needs the GitHub CLI, signed in. |
 | `node scripts/tasks.ts` | Prints the open tasks on the Contribute page as JSON lines. `--kind <kind>` keeps one kind. `--issues <n> [--dry]` keeps up to n of them open as "good first issue" issues, and needs `GITHUB_TOKEN` and `GITHUB_REPOSITORY`. |

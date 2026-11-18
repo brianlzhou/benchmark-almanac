@@ -33,6 +33,7 @@ export async function micro1Rows(page: string, scoreHead: string, metricHeads?: 
   const iEffort = head.indexOf('Effort');
   const clean = (s: string) => s.replace(/[\s*†‡]+$/u, '').trim();
   const usage = new Map<string, number>();
+  const timing = new Map<string, Record<string, number>>();
   if (reasoningTokens) for (const table of all) {
     const modelAt = table[0]?.findIndex((c) => c.text === 'Model') ?? -1;
     const tokensAt = table[0]?.findIndex((c) => /^Reasoning tokens(?: \(k\))?$/i.test(c.text)) ?? -1;
@@ -42,6 +43,13 @@ export async function micro1Rows(page: string, scoreHead: string, metricHeads?: 
       const name = clean(row[modelAt]?.text ?? '');
       const value = num(row[tokensAt]?.text);
       if (name && value !== undefined) usage.set(name, value * multiplier);
+      const details: Record<string, number> = {};
+      for (const [header, key] of [['Turns', 'turns'], ['Minutes', 'minutes']] as const) {
+        const at = table[0].findIndex(c => c.text === header);
+        const v = at < 0 ? undefined : num(row[at]?.text);
+        if (v !== undefined) details[key] = v;
+      }
+      if (name && Object.keys(details).length) timing.set(name, details);
     }
   }
   const rows: LeaderboardRow[] = [];
@@ -56,6 +64,7 @@ export async function micro1Rows(page: string, scoreHead: string, metricHeads?: 
     const effort = iEffort >= 0 ? r[iEffort]?.text.split(',')[0].trim().toLowerCase() : undefined;
     const metrics: Record<string, number> = {};
     if (usage.has(model)) metrics.reasoningTokens = usage.get(model)!;
+    if (timing.has(model)) Object.assign(metrics, timing.get(model));
     for (const [h, key] of Object.entries(metricHeads ?? {})) {
       const c = r[head.indexOf(h)]?.text ?? '';
       const f = (x: string) => Number((Number(x) * (c.includes('%') ? 1 : scale)).toFixed(2));
@@ -92,8 +101,14 @@ export async function micro1Data(page: string, key: string, tab?: string): Promi
   // index cards keep their composite rows in a tab whose id differs from defaultTab
   const t = data.tabs.find((x) => x.id === want) ?? (data.tabs.length === 1 ? data.tabs[0] : undefined);
   if (!t?.rows?.length) throw new Error(`no rows in tab ${want} for ${key}`);
+  // The report chart carries intervals for the original evaluated models only.
+  const reportAt = key === 'mission-report' ? html.indexOf('MODELS=[{n:') : -1;
+  const report = reportAt < 0 ? [] : jsLiteral<{ n: string; mean: number; lo: number; hi: number }[]>(html.slice(reportAt).replace(/:\.(\d)/g, ':0.$1'), html.slice(reportAt).indexOf('['));
   return t.rows
-    .map((r) => ({ model: r.name.replace(/[\s*†‡]+$/u, '').trim(), score: r.score }))
+    .map((r) => ({ model: r.name.replace(/[\s*†‡]+$/u, '').trim(), score: r.score, ...(key === 'mission-report' ? { trials: 3 } : {}), ...(() => {
+      const details = report.find(x => x.n === r.name && x.mean === r.score);
+      return details ? { low: details.lo, high: details.hi } : {};
+    })() }))
     .filter((r) => r.model && typeof r.score === 'number');
 }
 

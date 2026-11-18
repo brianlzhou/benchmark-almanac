@@ -55,7 +55,7 @@ const readDaily = (sources as { automated?: boolean }[]).filter((s) => s.automat
     <section id="names">
       <h2>One name per model</h2>
       <p>
-        We match every score to one record in <code>data/models.json</code>, whatever the source called the model. Each record has the model's name as its lab writes it, its lab and release date, whether its weights are open, and the other spellings it goes by. If a lab shipped several versions under one name, each version gets its own record and a snapshot label, such as GPT-4o (May 2024). Reasoning effort and harness are stored as settings on a score, so GPT-5 at high effort is still GPT-5. We rank a model on a benchmark by its best setting.
+        We match every score to one record in <code>data/models.json</code>, whatever the source called the model. Each record has the model's name as its lab writes it, its lab and release date, whether its weights are open, and the other spellings it goes by. If a lab shipped several versions under one name, each version gets its own record and a snapshot label, such as GPT-4o (May 2024). Reasoning effort and harness are stored as settings on a score, so GPT-5 at high effort is still GPT-5. We rank a model on a benchmark by its best setting. An agent that another company builds around a model, such as Arca + GPT-6 Astra, is its own entry, and its score never counts as the model's.
       </p>
       <p>We do the same for the {labs.length} labs and for benchmarks. Each has one record with its aliases, so "GPQA-D" in one card and "GPQA Diamond" in another count as one benchmark. Versions don't merge, so ARC-AGI-2 has a record of its own.</p>
     </section>

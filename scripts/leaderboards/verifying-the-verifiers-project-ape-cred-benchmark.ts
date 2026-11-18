@@ -50,7 +50,7 @@ const board: Leaderboard = {
         date: p.run_date,
         cost: p.cost_usd,
         ...(Array.isArray(p.recall_ci) && p.recall_ci.length === 2 && p.recall_ci.every(Number.isFinite)
-          ? { metrics: { ci: ((p.recall_ci[1] - p.recall_ci[0]) / 2) * 100 } }
+          ? { low: p.recall_ci[0] * 100, high: p.recall_ci[1] * 100, metrics: { ci: ((p.recall_ci[1] - p.recall_ci[0]) / 2) * 100 } }
           : {}),
       });
     }

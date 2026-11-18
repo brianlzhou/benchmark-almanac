@@ -165,6 +165,50 @@ export interface Score {
    * leaders or lab credit.
    */
   name?: string;
+  /** Facts the leaderboard gives about the entry beyond its score (scripts/sync-leaderboards.ts). */
+  info?: ScoreInfo;
+  /**
+   * For an entry that is an agent or product built around the model ("Arca + GPT-6 Astra"), or that uses several
+   * models, the agent's name. Such a score shows on its board under that name and never counts as the model's.
+   */
+  system?: string;
+}
+
+/** What a leaderboard says about one entry beyond its score. Every field is optional. */
+export interface ScoreInfo {
+  /** Who submitted or ran the entry. */
+  submitter?: string;
+  /** Who made the agent or harness. */
+  agentOrg?: string;
+  /** The board's own verified or official mark. */
+  verified?: boolean;
+  /** Every model behind a blend: model ids, or "~" and the board's name for one we don't track. */
+  models?: string[];
+  /** The board's own date for the run, when `date` holds the model's release. */
+  run?: string;
+  /** The entry's own logs, trajectories or results. */
+  link?: string;
+  /** How many trials the score averages. */
+  trials?: number;
+  /** The board's uncertainty interval, in the score's unit. */
+  low?: number;
+  high?: number;
+  /** The model's weights, license and size (billions of parameters), as the board gives them. */
+  open?: boolean;
+  license?: string;
+  params?: number;
+}
+
+/** A harness or agent in data/harnesses.json. */
+export interface Harness {
+  id: string;
+  name: string;
+  aliases: string[];
+  /** A lab id when a lab makes it, otherwise the maker's name. */
+  maker: string;
+  /** 'reference': a neutral harness, so a run in it is the model on its own. 'agent': an agent or product. */
+  kind: 'reference' | 'agent';
+  url?: string;
 }
 
 /** The abstract of a benchmark's own paper, in its authors' words (data/abstracts.json, from scripts/abstracts.ts). */

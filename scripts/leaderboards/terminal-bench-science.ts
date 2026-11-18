@@ -14,12 +14,14 @@ const NAME = 'v0-1-eval';
 
 interface Row {
   status?: string;
-  metadata: { agent_display?: Link; model_display?: Link; reasoning_effort?: string; date?: string };
+  n_trials?: number;
+  metadata: { agent_org?: Link; agent_display?: Link; model_display?: Link; reasoning_effort?: string; date?: string };
   metrics: { accuracy?: number; tasks?: number; total_cost_usd?: number; total_tokens?: number; accuracy_stderr?: number };
 }
 
 const board: Leaderboard = {
   benchmark: 'terminal-bench-science',
+  harnesses: 'system',
   url: 'https://www.terminal-bench-science.ai/',
   feed: `${HARBOR_FEED} (POST {"package":"${PACKAGE}","name":"${NAME}"})`,
   terms:
@@ -35,7 +37,7 @@ const board: Leaderboard = {
       if (!model || /^multiple$/i.test(model)) continue;
       const { accuracy, tasks, total_cost_usd: total, accuracy_stderr: sem, total_tokens: totalTokens } = r.metrics;
       const metrics: Record<string, number> = {};
-      if (typeof sem === 'number') metrics.sem = sem;
+      if (typeof sem === 'number') { metrics.sem = sem; metrics.stderr = sem; }
       if (typeof tasks === 'number' && tasks > 0) metrics.trials = tasks;
       if (typeof totalTokens === 'number' && totalTokens >= 0) {
         metrics.tokensTotal = totalTokens;
@@ -43,6 +45,8 @@ const board: Leaderboard = {
       }
       out.push({
         model,
+        agentOrg: label(r.metadata.agent_org),
+        trials: typeof r.n_trials === 'number' && r.n_trials > 0 ? r.n_trials : undefined,
         score: Number(accuracy),
         setting: r.metadata.reasoning_effort?.toLowerCase() || undefined,
         harness: label(r.metadata.agent_display),

@@ -1,6 +1,8 @@
 ---
 // A model as people write it: the lab's mark, the name, and the snapshot or setting in quieter type. An entry
 // that is not in the model list (`name` with no known id) shows its board name in gray, with its initial for a mark.
+// An agent system built around a model shows the agent first, as the board does: "Arca + GPT-6 Astra", with the
+// agent's initial for a mark, since its score is not the lab's. A blend lists its models.
 import LabMark from './LabMark.astro';
 import { modelById } from '../lib/data.ts';
 import { featuredIds } from '../lib/routes.ts';
@@ -12,19 +14,31 @@ interface Props {
   size?: number;
   /** The board's own name, for an entry with no model id. */
   name?: string;
+  /** The agent the entry runs in, for an agent system ("Arca"). */
+  system?: string;
+  /** Every model of a blend: model ids, or "~" and the board's name. */
+  models?: string[];
+  /** The board's verified mark, with what it means as the tooltip. */
+  verified?: string;
 }
-const { id, setting, link = true, size = 16, name } = Astro.props;
+const { id, setting, link = true, size = 16, name, system, models, verified } = Astro.props;
 const m = modelById.get(id);
 const unlisted = !m && !!name;
-const href = link && featuredIds.has(id) ? `/models/${id}/` : undefined;
+const blend = models && models.length > 1 ? models.map((x) => (x.startsWith('~') ? x.slice(1) : (modelById.get(x)?.name ?? x))).join(' + ') : undefined;
+const sys = system && system !== 'Several models' ? system : undefined;
+const href = link && !blend && featuredIds.has(id) ? `/models/${id}/` : undefined;
 const extra = [m?.version, setting && setting !== 'unknown' ? setting : null].filter(Boolean).join(', ');
 const Tag = href ? 'a' : 'span';
+const title = unlisted ? `${name}: not in our model list` : sys ? `${sys}, an agent built around ${blend ?? m?.name ?? id}. Its score is not the model's own.` : blend ? `Uses several models: ${blend}` : undefined;
 ---
 
-<Tag class:list={['mn', { unlisted }]} href={href} title={unlisted ? `${name}: not in our model list` : undefined}>
-  <LabMark lab={m?.lab} size={size} label={unlisted ? name : undefined} />
+<Tag class:list={['mn', { unlisted, sys: !!(sys || blend) }]} href={href} title={title}>
+  {sys || blend ? <LabMark size={size} label={sys ?? blend} /> : <LabMark lab={m?.lab} size={size} label={unlisted ? name : undefined} />}
   <span class="mn-t">
-    <span class="mn-n">{m?.name ?? name ?? id}</span>{extra && <span class="mn-x"> {extra}</span>}
+    {sys && <span class="mn-s">{sys}</span>}
+    {sys && <span class="mn-p">{blend ? ' ' : ' + '}</span>}
+    <span class="mn-n">{blend ? (sys ? `(${blend})` : blend) : (m?.name ?? name ?? id)}</span>{extra && <span class="mn-x"> {extra}</span>}
+    {verified && <span class="mn-v" title={verified} aria-label={verified}>✓</span>}
   </span>
 </Tag>
 
@@ -51,6 +65,20 @@ const Tag = href ? 'a' : 'span';
     font-weight: 500;
   }
   .mn-x {
+    color: var(--ink-3);
+  }
+  .mn-s {
+    font-weight: 600;
+  }
+  .mn-p {
+    color: var(--ink-3);
+  }
+  .sys .mn-n {
+    font-weight: 400;
+  }
+  .mn-v {
+    margin-left: 5px;
+    font-size: 0.85em;
     color: var(--ink-3);
   }
   .unlisted .mn-n {

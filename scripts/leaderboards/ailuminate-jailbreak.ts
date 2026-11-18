@@ -14,7 +14,7 @@ const board: Leaderboard = {
   const result = await (async (): Promise<LeaderboardRow[]> => {
 const s=await fetchText(FEED);const rows:LeaderboardRow[]=[];
 for(const m of s.matchAll(/<h3 class="security-sut-header">([^<]+)<\/h3>([\s\S]*?)(?=<h3 class="security-sut-header">|<\/section>)/g)){
- const part=m[2].split('<p>Security Jailbreak Hazard')[1];if(!part)continue;const get=(k:string)=>num(part.match(new RegExp('data-risk-'+k+'="([^" ]+)"'))?.[1]);const score=get('estimate');if(score===undefined)continue;rows.push({model:m[1],score,setting:'0.5 en-US official ensemble',metrics:{ciLow:get('lower')!,ciHigh:get('upper')!}});}
+ const part=m[2].split('<p>Security Jailbreak Hazard')[1];if(!part)continue;const get=(k:string)=>num(part.match(new RegExp('data-risk-'+k+'="([^" ]+)"'))?.[1]);const score=get('estimate');if(score===undefined)continue;rows.push({model:m[1],score,low:get('lower'),high:get('upper'),setting:'0.5 en-US official ensemble',metrics:{ciLow:get('lower')!,ciHigh:get('upper')!}});}
 return rows;
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

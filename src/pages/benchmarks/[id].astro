@@ -8,6 +8,7 @@ import ReignChart from '../../components/ReignChart.astro';
 import { reignRow } from '../../lib/reigns.ts';
 import { leaderRows } from '../../lib/leaders.ts';
 import { effortView, usd, costUnit } from '../../lib/effort.ts';
+import type { EntryView } from '../../lib/data.ts';
 import EffortChart from '../../components/EffortChart.astro';
 import { untested } from '../../lib/coverage.ts';
 import { host, unreadWhy } from '../../lib/unread.ts';
@@ -15,7 +16,7 @@ import ModelName from '../../components/ModelName.astro';
 import LabMark from '../../components/LabMark.astro';
 import AuthorsWords from '../../components/AuthorsWords.astro';
 import abstractsJson from '../../../data/abstracts.json';
-import type { PaperAbstract } from '../../lib/types.ts';
+import type { PaperAbstract, Score } from '../../lib/types.ts';
 import KnownIssues from '../../components/KnownIssues.astro';
 import BoardChart from '../../components/BoardChart.astro';
 import ChartDownload from '../../components/ChartDownload.astro';
@@ -29,7 +30,7 @@ import LinkIcon from '../../components/LinkIcon.astro';
 import { makerParts, makerId, makers } from '../../lib/makers.ts';
 import { isArena } from '../../lib/counts.ts';
 import { familyOf } from '../../lib/reigns.ts';
-import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, unlistedScores, sourceLabel, fromName } from '../../lib/data.ts';
+import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, systemScores, unlistedScores, sourceLabel, fromName, entryLabel, bestPerModel, harnessOf, LAB_AGENT_IS_MODEL, inEntryView, INTERVALS, intervalName } from '../../lib/data.ts';
 import { poolViews, aheadElsewhere, firstPast } from '../../lib/pools.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES, RANKED_BY_PEOPLE_OR_MATCHES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
@@ -53,9 +54,10 @@ const b = s.b;
 const issues = issuesByBenchmark.get(b.id) ?? [];
 // a chart the official leaderboard draws from more than its headline score (scripts/leaderboards/types.ts)
 const boardChart = LEADERBOARDS[b.id]?.chart;
-const boardChartRuns = boardChart
-  ? [...leaderboardScores, ...unlistedScores]
-      .filter((r) => r.benchmark === b.id)
+const boardRunsFor = (view: EntryView) =>
+  boardChart
+  ? [...leaderboardScores, ...systemScores, ...unlistedScores]
+      .filter((r) => r.benchmark === b.id && inEntryView(r, view))
       .map((r) => {
         const at = (k: string) => (k === 'score' ? r.value : k === 'cost' ? (r.cost ?? undefined) : k === 'tokens' ? (r.tokens ?? undefined) : r.metrics?.[k]);
         return { r, x: at(boardChart.x.key), y: at(boardChart.y.key) };
@@ -68,6 +70,43 @@ const chartNum = (v: number, unit?: string) => {
   return unit === '%' ? `${Math.round(v * 10) / 10}%` : unit === '$' || unit === 'usd' ? `$${n}` : unit ? `${n} ${unit}` : n;
 };
 const openIssues = unresolved(issues).length;
+// What the official board says about each entry, beyond its score. A column shows only when some entry has it.
+const infoRows = s.shownSource === 'leaderboard' ? s.shown : [];
+const runOf = (x: Score) => x.info?.run ?? (!x.model ? (x.date ?? undefined) : undefined);
+const hasBy = infoRows.some((x) => x.info?.submitter);
+const hasAgentBy = infoRows.some((x) => x.info?.agentOrg);
+const hasRun = infoRows.some((x) => x.info?.run);
+const hasLink = infoRows.some((x) => x.info?.link);
+const verifiedMeans = LEADERBOARDS[b.id]?.verified;
+const verifiedOf = (x: Score) => (x.info?.verified && verifiedMeans ? `Verified: ${verifiedMeans}` : undefined);
+const round1 = (v: number) => String(Math.round(v * 10) / 10);
+// the board's interval: "±2.1" when it is even around the score, otherwise its two ends
+const pmOf = (x: Score) => {
+  const lo = x.info?.low;
+  const hi = x.info?.high;
+  if (lo === undefined || hi === undefined || hi <= lo) return undefined;
+  const even = Math.abs(x.value - lo - (hi - x.value)) <= 0.02 * (hi - lo);
+  return even ? `±${round1((hi - lo) / 2)}` : `${round1(lo)} to ${round1(hi)}`;
+};
+// what the board's interval is, when we know: "95% confidence interval, bootstrap over battles"
+const intervalWords = (() => {
+  const name = intervalName(b.id);
+  const m = INTERVALS[b.id]?.method;
+  return name ? `${name.replace(/^./, (c) => c.toUpperCase())}${m ? `, ${m}` : ''}` : 'Interval';
+})();
+// the score column's heading names the interval when the board shows one: "± 95% CI", "± CI", "± 1 SE"
+const pmShort = (() => {
+  if (!infoRows.some((x) => pmOf(x))) return '';
+  const i = INTERVALS[b.id];
+  if (!i) return '±';
+  if (i.kind === 'standard error') return '± 1 SE';
+  if (i.kind === 'standard deviation') return '± 1 SD';
+  return `± ${i.level ? `${i.level}% ` : ''}${i.kind === 'credible interval' ? 'CrI' : 'CI'}`;
+})();
+const scoreNote = (x: Score) =>
+  [x.info?.low !== undefined && x.info?.high !== undefined ? `${intervalWords}: ${round1(x.info.low)} to ${round1(x.info.high)}` : '', x.info?.trials ? `${x.info.trials} trials` : ''].filter(Boolean).join('. ') || undefined;
+// for an entry we don't track, what the board says about its model
+const aboutOf = (x: Score) => (x.model ? '' : [x.info?.open === true ? 'open weights' : x.info?.open === false ? 'closed weights' : '', x.info?.params ? `${round1(x.info.params)}B` : ''].filter(Boolean).join(', '));
 const myClaims = claimsForBenchmark(b.id);
 const claimSum = claimStats(myClaims);
 const CHANGE: Record<ChangeKind, string> = {
@@ -99,7 +138,7 @@ const family = b.family ? benchmarks.filter((x) => x.family === b.family).sort((
 const SHOW = 4;
 // every run on the official board, by effort level and cost
 const effort = effortView(b.id);
-const runLabel = (r: { model: string; setting: string | null }) => `${modelById.get(r.model)?.name ?? r.model}${r.setting ? ` at ${r.setting}` : ''}`;
+const runLabel = (r: { label: string; setting: string | null }) => `${r.label}${r.setting ? ` at ${r.setting}` : ''}`;
 const costRatio = (k: number) => (Math.round(k) <= 2 ? 'about half the cost' : `${Math.round(k)} times cheaper`);
 const effortRuns = effort ? [...effort.all].sort((x, y) => y.value - x.value) : [];
 // The reign chart starts in 2023, or at the release month for a benchmark that came out later
@@ -159,11 +198,43 @@ const nowReign = nowRow?.reigns.at(-1);
 const since = nowReign && s.best && nowReign.model === s.best.model ? nowReign.start : undefined;
 // an entry the board ranks above every model we track (a fine-tune, agent system or product): named, never credited
 const sign = b.better === 'lower' ? -1 : 1;
-const topOther = s.shownSource === 'leaderboard' ? s.unlisted[0] : undefined;
+// an agent system built around a model we track counts the same way: named on the board, never credited
+const topOther = s.shownSource === 'leaderboard' ? bestPerModel([...s.systems, ...s.unlisted], b)[0] : undefined;
 // an arena whose only ratings come from labs' own posts: no leader, and a link to the live board
 const arenaClaims = (s.shownSource === 'card' || s.shownSource === 'claim') && RANKED_BY_PEOPLE_OR_MATCHES.has(b.scoring ?? '');
 const otherAhead = topOther && (!s.best || sign * topOther.value > sign * s.best.value) ? topOther : undefined;
-const shownWhat = s.unlisted.length && s.shownSource === 'leaderboard' ? 'entries' : 'models';
+const shownWhat = (s.unlisted.length || s.systems.length) && s.shownSource === 'leaderboard' ? 'entries' : 'models';
+// The entries switch on the official board: every entry, the models alone, or only runs in the board's own
+// harness. Boards differ on harnesses: some run every model in one (Terminus 2), others rank whatever agent a
+// submitter brings. The site's own credit (leaders, model pages) always uses the first view's rule.
+// the standard harnesses the third view's runs used, by their usual names ("Terminus 2", "mini-SWE-agent")
+const refNames = [...new Map((s.sameHarness ?? []).flatMap((x) => (x.harness ? [harnessOf(x.harness)?.name ?? x.harness] : [])).map((n) => [n.toLowerCase(), n])).values()];
+const refName = refNames.length && refNames.length <= 3 ? refNames.join(' or ') : 'a standard harness';
+const modelsTip = `One row per model we track, at its best score on its own${LAB_AGENT_IS_MODEL ? ' or in its maker’s own agent, such as Claude Code with a Claude model' : ''}. Agents by other companies, blends and models we don’t track are left out. Leaders and model pages use this score.`;
+const entryViews =
+  s.shownSource === 'leaderboard' && s.boardSource === 'leaderboard'
+    ? [
+        { key: 'every', label: 'Every entry', scores: s.shown, what: shownWhat, tip: `Every entry on ${boardName}, best per entry. Agents by other companies show in a pale shade of their model’s lab color, and blends in gray, each under its own name. They don’t count toward leaders.` },
+        ...(shownWhat === 'entries' ? [{ key: 'models', label: 'Models', scores: s.board, what: 'models', tip: modelsTip }] : []),
+        ...(s.sameHarness ? [{ key: 'same', label: 'Standard harness', scores: s.sameHarness, what: 'models', tip: `Only runs in ${refName}, a harness no model’s maker built, so every model used the same tools. A model that never ran in one drops out.` }] : []),
+      ]
+    : [];
+const views = entryViews.length > 1 ? entryViews : [{ key: 'every', label: '', scores: s.shown, what: shownWhat, tip: '' }];
+// the pool the page opens on: whichever source view has the most entries, so a thin official board opens on every
+// score while a full one (Arena's, with entries outside our model list) stays as it is. Leader credit elsewhere
+// keeps the one-source rule.
+const poolSize = (v: (typeof pools)[number]) => (v.pool === 'headline' ? views[0].scores.length : v.board.length);
+const defaultPool = poolOn ? [...pools].sort((a, c) => poolSize(c) - poolSize(a))[0].pool : 'headline';
+// the source views whose bars have intervals: each gets the error bars switch while it shows
+const hasIv = (xs: Score[]) => xs.some((x) => x.info?.low !== undefined && x.info?.high !== undefined);
+const wkPools = [...(views.some((v) => hasIv(v.scores)) ? ['headline'] : []), ...pools.slice(1).filter((v) => hasIv(v.board)).map((v) => v.pool)];
+const sameBest = s.sameHarness?.[0];
+// every chart of the official board follows the Entries switch: one render per view, shown by CSS
+const effortViews = views.map((v) => {
+  const e = v.key === 'every' ? effort : effortView(b.id, v.key as EntryView);
+  return { key: v.key, effort: e, effortRuns: e ? [...e.all].sort((x, y) => y.value - x.value) : [] };
+});
+const boardChartViews = views.map((v) => ({ key: v.key, runs: boardRunsFor(v.key as EntryView) }));
 const cat = b.category ?? 'other';
 const catName = CATEGORY_NAMES[cat] ?? area.name;
 // more in this category: one row per test (a family's newest version), in use first, then the most reported
@@ -211,7 +282,7 @@ const trail = [
 ];
 // search results and link previews lead with who is ahead, in the words of the leaderboard heading below, then
 // what the benchmark tests
-const metaLead = otherAhead ? `${otherAhead.name} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : s.best ? leaderLine(s, gap?.last) : '';
+const metaLead = otherAhead ? `${entryLabel(otherAhead)} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : s.best ? leaderLine(s, gap?.last) : '';
 const metaDescription = `${metaLead ? `${metaLead}. ` : ''}${b.description ?? `${b.name}: scores, leaderboard, and which model cards report it.`}`;
 // schema.org Dataset, for Google Dataset Search: the benchmark's tasks, who made them, and where they live
 const dataset = {
@@ -245,21 +316,28 @@ const cite = {
   <div class:list={['page', poolOn && 'pools']}>
     <header class="head" style={`--a: var(--area-${s.area})`}>
       <Crumbs items={trail} />
-      <h1 class="with-amark"><AreaMark area={s.area} size={20} />{b.name}</h1>
+      <h1 class="with-amark">{b.name.split(' ').slice(0, -1).join(' ')} <span class="tail">{b.name.split(' ').at(-1)}<AreaMark area={s.area} size={20} /></span></h1>
       <div class="mast">
         <div class="pool-headline">
           {otherAhead && (
-            <span class="mast-lead">
-              <ModelName id="" name={otherAhead.name} size={18} />
+            <span class="mast-lead ent-every">
+              <ModelName id={otherAhead.model} name={otherAhead.name} system={otherAhead.system} models={otherAhead.info?.models} size={18} />
               <b class="num">{fmt(otherAhead.value, unit)}</b>
               <span class="muted">tops its leaderboard</span>
             </span>
           )}
           {s.best && top && (
-            <span class="mast-lead">
+            <span class="mast-lead ent-not-same">
               <ModelName id={s.best.model} size={18} />
               <b class="num">{fmt(s.best.value, unit)}</b>
-              {otherAhead ? <span class="muted">leads the models we track</span> : since && <span class="muted">leads since {longMonthYear(since)}</span>}
+              {otherAhead ? <span class="muted">{otherAhead.system ? 'leads as a model on its own' : 'leads the models we track'}</span> : since && <span class="muted">leads since {longMonthYear(since)}</span>}
+            </span>
+          )}
+          {sameBest && (
+            <span class="mast-lead ent-same">
+              <ModelName id={sameBest.model} size={18} />
+              <b class="num">{fmt(sameBest.value, unit)}</b>
+              <span class="muted">leads in {refName}</span>
             </span>
           )}
         </div>
@@ -293,21 +371,21 @@ const cite = {
             <div class="seg" role="radiogroup" aria-label="Scores from">
               {pools.map((v, k) => (
                 <label>
-                  <input type="radio" name="pool" value={v.pool} checked={k === 0} />
+                  <input type="radio" name="pool" value={v.pool} checked={v.pool === defaultPool} />
                   {v.label}
                 </label>
               ))}
             </div>
-            <script is:inline>
+            <script is:inline define:vars={{ defaultPool }}>
               // before the page below paints: a link with ?pool= picks that pool, so nothing jumps
               (function () {
-                var box = document.currentScript.parentElement;
+                var box = document.querySelector('.pool-switch');
                 var q = new URLSearchParams(location.search).get('pool');
-                var pick = (q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
+                var pick = (q === 'headline' || q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
                 if (pick) pick.checked = true;
                 box.addEventListener('change', function (e) {
                   var u = new URL(location.href);
-                  if (e.target.value === 'headline') u.searchParams.delete('pool');
+                  if (e.target.value === defaultPool) u.searchParams.delete('pool');
                   else u.searchParams.set('pool', e.target.value);
                   history.replaceState(history.state, '', u);
                 });
@@ -316,6 +394,19 @@ const cite = {
           </div>
         )
       }
+          {views.length > 1 && (
+            <div class="ent-ctl">
+              <div class="seg ent-switch" role="radiogroup" aria-label="Entries">
+                {views.map((v, k) => (
+                  <label data-tn={v.label} data-ts={v.tip}><input type="radio" name="entries" value={v.key} checked={k === 0} />{v.label}</label>
+                ))}
+              </div>
+              <button type="button" class="help-q" data-tn="What each view counts" data-ts={views.map((v) => `${v.label}. ${v.tip}`).join('\n\n')} data-wide>
+                <span aria-hidden="true">?</span>
+                <span class="sr">What each view counts. {views.map((v) => `${v.label}: ${v.tip}`).join(' ')}</span>
+              </button>
+            </div>
+          )}
       {
         ahead && (
           <div class="pool-headline">
@@ -501,13 +592,22 @@ const cite = {
           <div class="sh-row">
             <div class="sh">
               <div class="pool-headline">
-                <h2>{otherAhead ? `${otherAhead.name} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : leaderLine(s, gap?.last)}</h2>
+                <h2>
+                  <span class="ent-every">{otherAhead ? `${entryLabel(otherAhead)} tops the leaderboard with ${fmt(otherAhead.value, unit)}` : leaderLine(s, gap?.last)}</span>
+                  {views.length > 1 && <span class="ent-models">{leaderLine(s, gap?.last)}</span>}
+                  {sameBest && <span class="ent-same">{`${modelById.get(sameBest.model)?.name ?? sameBest.model} leads with ${fmt(sameBest.value, unit)} in ${refName}`}</span>}
+                </h2>
                 <p>
                   {s.shownSource === 'leaderboard' ? (
                     <>
-                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}, read on {humanDate(official?.retrieved)}. Where a model ran with several settings or harnesses, we keep its best.{effort && ' Every run is in the next chart.'}
-                      {shownWhat === 'entries' && ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`}
-                      {otherAhead && s.best && ` The best model we track is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
+                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}, read on {humanDate(official?.retrieved)}. {s.systems.length ? 'Where a model ran on its own with several settings, we keep its best.' : 'Where a model ran with several settings or harnesses, we keep its best.'}{effort && ' Every run is in the next chart.'}
+                      <span class="ent-every">
+                        {shownWhat === 'entries' && (s.systems.length ? ` Agents other companies built around a model get a pale shade of that model's lab color. Gray marks blends and entries not in our model list, such as fine-tunes and older models. None of these count toward leaders.` : ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`)}
+                        {otherAhead && s.best && ` The best ${otherAhead.system ? 'model on its own' : 'model we track'} is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
+                        {s.systems.length > 0 && ` Agents built around a model, such as ${entryLabel(s.systems[0])}, are their own entries. We don't count them as the model's score.`}
+                      </span>
+                      {views.some((v) => v.key === 'models') && <span class="ent-models"> This view shows only models we track, each at its best.</span>}
+                      {sameBest && <span class="ent-same">{` This view keeps only runs in ${refName}, a harness no model’s maker built. A maker’s own agent, such as Claude Code with a Claude model, is left out.`}</span>}
                     </>
                   ) : s.boardSource === 'epoch' ? (
                     'Best score per model from Epoch AI’s own runs, drawn dotted as reruns. Where a model ran with several settings or harnesses, we keep its best.'
@@ -540,9 +640,49 @@ const cite = {
                 </div>
               ))}
             </div>
-            <div class="seg" role="radiogroup" aria-label="View">
-              <label><input type="radio" name="v-board" value="graph" checked />Bars</label>
-              <label><input type="radio" name="v-board" value="table" />Table</label>
+            <div class="view-ctl">
+              <div class="seg" role="radiogroup" aria-label="View">
+                <label><input type="radio" name="v-board" value="graph" checked />Bars</label>
+                <label><input type="radio" name="v-board" value="table" />Table</label>
+              </div>
+              {wkPools.map((pool) => (
+                <div class={`pool-${pool}`}>
+                  <label class="claims wk-switch" title={intervalWords === 'Interval' ? 'The board’s intervals on the bars' : `The board’s ${intervalWords.toLowerCase()} on the bars`}>
+                    <input type="checkbox" data-wk checked />
+                    Error bars
+                  </label>
+                </div>
+              ))}
+              {wkPools.length > 0 && (
+                <script is:inline>
+                  // the error bars switch, one per source view that has intervals: hides every whisker in this section,
+                  // and the page remembers the choice
+                  (function () {
+                    var ctl = document.currentScript.closest('.view-ctl');
+                    var boxes = ctl.querySelectorAll('[data-wk]');
+                    var sec = ctl.closest('section');
+                    var set = function (on) {
+                      boxes.forEach(function (b) {
+                        b.checked = on;
+                      });
+                      sec.classList.toggle('wk-off', !on);
+                    };
+                    var off = false;
+                    try {
+                      off = localStorage.getItem('almanac:error-bars') === 'off';
+                    } catch (e) {}
+                    set(!off);
+                    boxes.forEach(function (b) {
+                      b.addEventListener('change', function () {
+                        set(b.checked);
+                        try {
+                          localStorage.setItem('almanac:error-bars', b.checked ? 'on' : 'off');
+                        } catch (e) {}
+                      });
+                    });
+                  })();
+                </script>
+              )}
             </div>
           </div>
           <div class="pool-headline">
@@ -565,16 +705,20 @@ const cite = {
           </div>
           <div class="view-graph">
             <div class="pool-headline">
-              <ChartDownload subject={b.name} credit={boardCredit(s.shown)} name="leaderboard" deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE.headline}, one bar per model.`} leaves="Each model’s other settings. Only its best score shows.">
-                {b.better === 'lower' ? (
-                  <BarBoard scores={s.shown} unit={unit} limit={15} better={b.better} all />
-                ) : (
-                  <>
-                    <div class="only-wide"><Columns scores={s.shown} unit={unit} /></div>
-                    <div class="only-narrow"><BarBoard scores={s.shown} unit={unit} limit={10} all /></div>
-                  </>
-                )}
-              </ChartDownload>
+              {views.map((v) => (
+                <div class={`ent-${v.key}`}>
+                  <ChartDownload subject={b.name} credit={boardCredit(v.scores)} name={v.key === 'every' ? 'leaderboard' : `leaderboard-${v.key}`} deck={figDeck} yAxis={figAxis} counts={`Each model’s best score ${POOL_WHERE.headline}${v.key === 'same' ? ` in ${refName}` : ''}, one bar per model.`} leaves={v.key === 'same' ? 'Runs in other harnesses, and each model’s other settings.' : 'Each model’s other settings. Only its best score shows.'}>
+                    {b.better === 'lower' ? (
+                      <BarBoard scores={v.scores} unit={unit} limit={15} better={b.better} all />
+                    ) : (
+                      <>
+                        <div class="only-wide"><Columns scores={v.scores} unit={unit} /></div>
+                        <div class="only-narrow"><BarBoard scores={v.scores} unit={unit} limit={10} all /></div>
+                      </>
+                    )}
+                  </ChartDownload>
+                </div>
+              ))}
             </div>
             {pools.slice(1).map((v) => (
               <div class={`pool-${v.pool}`}>
@@ -593,23 +737,37 @@ const cite = {
           </div>
           <div class="view-table table-wrap">
             <div class="pool-headline">
-              <table class="t" data-sort>
-                <thead>
-                  <tr><th>#</th><th>{shownWhat === 'entries' ? 'Entry' : 'Model'}</th><th class="r">Score</th><th>Setting</th><th>Date</th><th>Source</th></tr>
-                </thead>
-                <tbody>
-                  {s.shown.map((x, i) => (
-                    <tr>
-                      <td class="rank">{i + 1}</td>
-                      <td><ModelName id={x.model} name={x.name} /></td>
-                      <td class="r">{fmt(x.value, unit)}</td>
-                      <td class="muted">{[x.setting, x.harness].filter((v) => v && v !== 'unknown').join(', ')}</td>
-                      <td class="muted num">{monthYear(x.date)}</td>
-                      <td class="muted">{sourceLabel(x)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {views.map((v) => (
+                <div class={`ent-${v.key}`}>
+                  <table class="t" data-sort>
+                    <thead>
+                      <tr><th>#</th><th>{v.what === 'entries' ? 'Entry' : 'Model'}</th><th class="r" title={pmShort ? intervalWords : undefined}>Score{pmShort && <span class="muted pm-h"> {pmShort}</span>}</th><th>Setting</th>{hasBy && <th>Submitted by</th>}{hasAgentBy && <th>Agent by</th>}<th>{hasRun ? 'Released' : 'Date'}</th>{hasRun && <th>Run on</th>}{hasLink && <th>Link</th>}<th>Source</th></tr>
+                    </thead>
+                    <tbody>
+                      {v.scores.map((x, i) => (
+                        <tr>
+                          <td class="rank">{i + 1}</td>
+                          <td>
+                            <ModelName id={x.model} name={x.name} system={x.system} models={x.info?.models} verified={verifiedOf(x)} />
+                            {aboutOf(x) && <span class="muted about"> {aboutOf(x)}</span>}
+                          </td>
+                          <td class="r nowrap" data-v={x.value} title={scoreNote(x)}>
+                            {fmt(x.value, unit)}
+                            {pmOf(x) && <span class="pm muted"> {pmOf(x)}</span>}
+                          </td>
+                          <td class="muted">{[x.setting, x.system ? null : x.harness].filter((v) => v && v !== 'unknown').join(', ')}</td>
+                          {hasBy && <td class="muted">{x.info?.submitter ?? ''}</td>}
+                          {hasAgentBy && <td class="muted">{x.info?.agentOrg ?? ''}</td>}
+                          <td class="muted num nowrap">{hasRun && !x.model ? '' : monthYear(x.date)}</td>
+                          {hasRun && <td class="muted num nowrap">{monthYear(runOf(x))}</td>}
+                          {hasLink && <td class="muted">{x.info?.link && <a href={x.info.link}>{hostname(x.info.link)}</a>}</td>}
+                          <td class="muted">{sourceLabel(x)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
             </div>
             {pools.slice(1).map((v) => (
               <div class={`pool-${v.pool}`}>
@@ -658,8 +816,8 @@ const cite = {
     {catViews.length > 0 && <ArenaCategories views={catViews} overall={s.leaderboardBoard.length ? s.leaderboardBoard : s.board} unit={unit} arena={catOwner} />}
 
     {
-      boardChart && boardChartRuns.length >= 4 && (
-        <section class="views">
+      boardChart && boardChartViews.map(({ key, runs: boardChartRuns }) => boardChartRuns.length >= 4 && (
+        <section class={`views ent-${key}`}>
           <div class="sh-row">
             <div class="sh">
               <h2>{boardChart.title}</h2>
@@ -669,13 +827,13 @@ const cite = {
               </p>
             </div>
             <div class="seg" role="radiogroup" aria-label="View">
-              <label><input type="radio" name="v-board" value="graph" checked />Chart</label>
-              <label><input type="radio" name="v-board" value="table" />Table</label>
+              <label><input type="radio" name={`v-bchart-${key}`} value="graph" checked />Chart</label>
+              <label><input type="radio" name={`v-bchart-${key}`} value="table" />Table</label>
             </div>
           </div>
           <div class="view-graph">
             <ChartDownload subject={b.name} credit={creditLine([SRC_CREDIT.leaderboard])} quiet deck={`${figDeck} ${boardChart.x.unit === '$' || boardChart.x.key === 'cost' ? costNote(official?.costPer === 'run' ? 'run' : 'task') : ''}`} counts="The runs on the board that report both measures. The line joins the runs that no other run beats on both." leaves="Runs that report only one of the two measures.">
-              <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} />
+              <BoardChart benchmark={b.id} chart={boardChart} label={`${b.name}: ${boardChart.title}`} entries={key as EntryView} />
             </ChartDownload>
           </div>
           <div class="view-table table-wrap">
@@ -686,7 +844,7 @@ const cite = {
               <tbody>
                 {boardChartRuns.map(({ r, x, y }) => (
                   <tr>
-                    <td>{r.model ? <ModelName id={r.model} /> : <span class="muted">{r.name}</span>}</td>
+                    <td>{r.model && !r.system ? <ModelName id={r.model} /> : <span class="muted">{entryLabel(r)}</span>}</td>
                     <td class="muted">{[r.setting, r.harness].filter(Boolean).join(', ')}</td>
                     <td class="r" data-v={String(y)}>{chartNum(y, boardChart.y.unit)}</td>
                     <td class="r muted" data-v={String(x)}>{chartNum(x, boardChart.x.unit)}</td>
@@ -696,12 +854,12 @@ const cite = {
             </table>
           </div>
         </section>
-      )
+      ))
     }
 
     {
-      effort && (
-        <section class="views">
+      effortViews.map(({ key, effort, effortRuns }) => effort && (
+        <section class={`views ent-${key}`}>
           <div class="sh-row">
             <div class="sh">
               <h2>
@@ -726,8 +884,8 @@ const cite = {
               </p>
             </div>
             <div class="seg" role="radiogroup" aria-label="View">
-              <label><input type="radio" name="v-effort" value="graph" checked />Chart</label>
-              <label><input type="radio" name="v-effort" value="table" />Table</label>
+              <label><input type="radio" name={`v-effort-${key}`} value="graph" checked />Chart</label>
+              <label><input type="radio" name={`v-effort-${key}`} value="table" />Table</label>
             </div>
           </div>
           <div class="view-graph">
@@ -751,7 +909,7 @@ const cite = {
               <tbody>
                 {effortRuns.map((r) => (
                   <tr>
-                    <td><ModelName id={r.model} /></td>
+                    <td>{r.counted ? <ModelName id={r.model} /> : <span class="muted">{r.label}</span>}</td>
                     <td class="muted">{r.setting ?? ''}</td>
                     <td class="muted">{r.harness ?? ''}</td>
                     <td class="r">{fmt(r.value, unit)}</td>
@@ -763,7 +921,7 @@ const cite = {
             </table>
           </div>
         </section>
-      )
+      ))
     }
 
     {
@@ -798,7 +956,8 @@ const cite = {
             <h2>{past85 ? `${past85.who[0].toUpperCase()}${past85.who.slice(1)} passed 85% in ${longMonthYear(past85.date)}` : 'Scores over time'}</h2>
             <p>All the scores we have, one dot each, so a model tested at several settings appears more than once.</p>
           </div>
-          <ScoreChart s={s} />
+          <div class="ent-not-same"><ScoreChart s={s} /></div>
+          {views.some((v) => v.key === 'same') && <div class="ent-same"><ScoreChart s={s} entries="same" /></div>}
         </section>
       )
     }
@@ -1252,6 +1411,13 @@ const cite = {
   .stats {
     margin-bottom: 96px;
   }
+  /* the board's view switch and its error bars switch, centered on one line */
+  .view-ctl {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+  }
   .gap {
     margin: -8px 0 32px;
     max-width: 72ch;
@@ -1274,6 +1440,13 @@ const cite = {
     margin-top: 8px;
     color: var(--ink-3);
     font-size: 13px;
+  }
+  /* the official board's table: a score and its interval, and dates, stay on one line */
+  .nowrap {
+    white-space: nowrap;
+  }
+  .about {
+    font-size: 0.9em;
   }
   .also {
     margin-top: 18px;

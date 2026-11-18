@@ -15,7 +15,7 @@ const board: Leaderboard = {
  async fetch(): Promise<LeaderboardRow[]> {
 const data=await fetchJson<{leaderboard:Record<string,any>[]}>(FEED);
  const keys=['Style','World Knowledge','Attribute-Overall','Action-Overall','Relationship-Overall','Compound-Overall','Grammar-Overall','Layout-Overall','Logical Reasoning','Text'];
- return checked(data.leaderboard.map(r=>({model:r.model==='GPT-4o-1.5'?'GPT-Image-1.5':r.model,score:Number(r.Overall),metrics:Object.fromEntries(keys.filter(k=>Number.isFinite(r[k])).map(k=>[k,r[k]]))})),10);
+ return checked(data.leaderboard.map(r=>({model:r.model==='GPT-4o-1.5'?'GPT-Image-1.5':r.model,score:Number(r.Overall),open:typeof r.open_source==='boolean'?r.open_source:undefined,metrics:Object.fromEntries(keys.filter(k=>Number.isFinite(r[k])).map(k=>[k,r[k]]))})),10);
  },
 };
 export default board;

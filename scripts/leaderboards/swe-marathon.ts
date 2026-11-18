@@ -26,6 +26,8 @@ const board: Leaderboard = {
   aliases: {
     'Gemini 3.1 Pro Preview': 'gemini-3-1-pro',
   },
+  harnesses: 'system',
+  reference: ['Terminus 2'],
   async fetch() {
     const { js } = await swemBundle();
     const at = js.search(/\[\{rank:`Ref`,id:`oracle`/);

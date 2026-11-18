@@ -14,7 +14,9 @@ export default {
   const page=await fetchText(PAGE); const rows=surgeRows(page);
   const src=page.match(/<script[^>]+src="([^"]*chartography-charts\.js)"/)?.[1];
   if(!src)throw new Error('Chartography Pareto script missing');
-  const data=jsonAfter<{cost:{all:Point[]};tok:{all:Point[]}}>(await fetchText(src),'var DATA = ');
+  const js=await fetchText(src);
+  const data=jsonAfter<{cost:{all:Point[]};tok:{all:Point[]}}>(js,'var DATA = ');
+  const titles=jsonAfter<{cost?:{desc?:string}}>(js,'var TITLES = ');
   if(!data?.cost?.all?.length || !data?.tok?.all?.length)throw new Error('Chartography Pareto data missing');
   const plot=new Map<string,LeaderboardRow>();
   for(const p of data.cost.all){
@@ -27,6 +29,8 @@ export default {
    const r=plot.get(key)??{...n,score:p.y*100,setting:`Pareto chart; ${n.setting ?? 'effort unspecified'}`};
    r.tokens=p.x;r.metrics={generatedTokens:p.x};plot.set(key,r);
   }
+  const trials = titles?.cost?.desc?.match(/(\d+) trials per model/)?.[1];
+  if(trials)for(const row of plot.values())row.trials=Number(trials);
   return rows.concat([...plot.values()]);
  }
 } satisfies Leaderboard;

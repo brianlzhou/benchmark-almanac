@@ -51,7 +51,7 @@ function build() {
       if (v < lo) lo = v;
       if (v > hi) hi = v;
     }
-    // the site-wide count of labs that report it, the same one /reporting/ and /contribute/ use
+    // the site-wide count of labs that report it, the same one /insights/reporting/ and /contribute/ use
     const nLabs = new Set([...s.labs, ...s.docLabs]).size;
     const area = areaOf(b.category);
     for (const id of ids) {
