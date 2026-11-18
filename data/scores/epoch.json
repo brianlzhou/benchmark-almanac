@@ -2,7 +2,7 @@
   "source": "Epoch AI Benchmarking Hub",
   "url": "https://epoch.ai/benchmarks",
   "license": "CC BY 4.0",
-  "retrieved": "2026-11-17",
+  "retrieved": "2026-11-18",
   "columns": ["benchmark", "model", "setting", "harness", "score", "date", "metrics", "via", "from"],
   "rows": [
     ["aider-polyglot","openhands-lm-32b-v0-1",null,null,10.2,"2024-03-26",null,"board","https://aider.chat/docs/leaderboards/"],
