@@ -31,7 +31,7 @@ import { makerParts, makerId, makers } from '../../lib/makers.ts';
 import { isArena } from '../../lib/counts.ts';
 import { familyOf } from '../../lib/reigns.ts';
 import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, systemScores, unlistedScores, sourceLabel, fromName, entryLabel, bestPerModel, harnessOf, LAB_AGENT_IS_MODEL, inEntryView, INTERVALS, intervalName } from '../../lib/data.ts';
-import { poolViews, aheadElsewhere, firstPast } from '../../lib/pools.ts';
+import { poolViews, aheadElsewhere, firstPast, newerClaims } from '../../lib/pools.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES, RANKED_BY_PEOPLE_OR_MATCHES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
@@ -226,6 +226,18 @@ const views = entryViews.length > 1 ? entryViews : [{ key: 'every', label: '', s
 // Leader credit elsewhere keeps the one-source rule.
 const poolSize = (v: (typeof pools)[number]) => (v.pool === 'headline' ? views[0].scores.length : v.board.length);
 const openable = pools.filter((v) => v.pool !== 'all');
+// newer models that only their labs have numbers for: said under the switch while it shows independent runs, so a
+// board that stopped adding models never looks like the whole story
+const newer = pools.some((v) => v.pool === 'all') ? newerClaims(b.id) : { models: [] };
+const newerNote = (() => {
+  const xs = newer.models;
+  if (!xs.length || !newer.last) return '';
+  const who = s.boardSource === 'epoch' ? 'Epoch AI' : boardHost ? `${boardHost}’s leaderboard` : 'The official leaderboard';
+  const lastM = modelById.get(newer.last.model);
+  const lastDate = lastM?.released ? longMonthYear(lastM.released) : '';
+  const top = xs[0];
+  return `${who} hasn’t scored a model released after ${lastM?.name ?? newer.last.model}${lastDate ? ` (${lastDate})` : ''}. Labs report their own numbers for ${xs.length === 1 ? 'one newer model' : `${xs.length} newer models`}${xs.length > 1 ? ', such as' : ':'} ${modelById.get(top.model)?.name ?? top.model} at ${fmt(top.value, unit)}.`;
+})();
 const defaultPool = poolOn ? [...(openable.length ? openable : pools)].sort((a, c) => poolSize(c) - poolSize(a))[0].pool : 'headline';
 // the source views whose bars have intervals: each gets the error bars switch while it shows
 const hasIv = (xs: Score[]) => xs.some((x) => x.info?.low !== undefined && x.info?.high !== undefined);
@@ -378,6 +390,11 @@ const cite = {
                 </label>
               ))}
             </div>
+            {newerNote && (
+              <p class="pool-note" data-pool-note>
+                {newerNote} <button type="button" class="pool-to" data-pool-to="all">Include claimed scores</button>
+              </p>
+            )}
             <script is:inline define:vars={{ defaultPool }}>
               // before the page below paints: a link with ?pool= picks that pool, so nothing jumps
               (function () {
@@ -385,11 +402,27 @@ const cite = {
                 var q = new URLSearchParams(location.search).get('pool');
                 var pick = (q === 'headline' || q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
                 if (pick) pick.checked = true;
+                // the note about newer, claim-only models shows only while the claims are left out
+                var note = box.querySelector('[data-pool-note]');
+                var sync = function () {
+                  var on = box.querySelector('input[name="pool"]:checked');
+                  if (note) note.hidden = !!on && on.value === 'all';
+                };
+                sync();
+                if (note)
+                  note.querySelector('[data-pool-to]').addEventListener('click', function () {
+                    var all = box.querySelector('input[name="pool"][value="all"]');
+                    if (all) {
+                      all.checked = true;
+                      all.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                  });
                 box.addEventListener('change', function (e) {
                   var u = new URL(location.href);
                   if (e.target.value === defaultPool) u.searchParams.delete('pool');
                   else u.searchParams.set('pool', e.target.value);
                   history.replaceState(history.state, '', u);
+                  sync();
                 });
               })();
             </script>
