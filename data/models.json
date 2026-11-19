@@ -14245,15 +14245,6 @@
     "epoch": "Gemini 4 Hydrogen"
   },
   {
-    "id": "gemini-4-neon",
-    "name": "Gemini 4 Neon",
-    "lab": "google",
-    "family": "Gemini 4",
-    "released": "2026-11-18",
-    "weights": "closed",
-    "epoch": "Gemini 4 Neon"
-  },
-  {
     "id": "qwen4-max",
     "name": "Qwen4-Max",
     "lab": "qwen",
@@ -14301,6 +14292,15 @@
       "gpt-6.2-sol",
       "Sol 6.2"
     ]
+  },
+  {
+    "id": "gemini-4-neon",
+    "name": "Gemini 4 Neon",
+    "lab": "google",
+    "family": "Gemini 4",
+    "released": "2026-11-18",
+    "weights": "closed",
+    "epoch": "Gemini 4 Neon"
   },
   {
     "id": "bagel",
