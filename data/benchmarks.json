@@ -98582,5 +98582,153 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "drivingbench",
+    "name": "DrivingBench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "org": "DrivingBench (Ramabadran, Mahns and Gessler)",
+    "family": "drivingbench",
+    "version": "1",
+    "description": "Vision-language models drive a real Toyota Corolla through a cone course with up to three attempts in one conversation. Scored on the furthest progress along the course.",
+    "released": "2026-09",
+    "links": {
+      "site": "https://drivingbench.com/v1/",
+      "paper": "https://arxiv.org/abs/2609.38948",
+      "repo": "https://github.com/aditya-ramabadran/drivingbench_harness_code"
+    },
+    "access": "public",
+    "note": "Released September 21, 2026 with four frontier models. Version 2 moved to a Tesla and a harder second course, so scores do not compare.",
+    "successor": "drivingbench-v2",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://drivingbench.com/blog/",
+      "https://arxiv.org/abs/2609.38948"
+    ],
+    "added": "2026-11-18"
+  },
+  {
+    "id": "drivingbench-v2",
+    "name": "DrivingBench v2",
+    "aliases": [
+      "DrivingBench"
+    ],
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "org": "DrivingBench (Ramabadran, Mahns and Gessler)",
+    "family": "drivingbench",
+    "version": "2",
+    "description": "Vision-language models drive a real Tesla through two unseen cone courses with steering, accelerator and brake tools. The score is the furthest progress over three attempts in one conversation, averaged over six trials.",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://drivingbench.com/",
+      "repo": "https://github.com/aditya-ramabadran/drivingbench_harness_code"
+    },
+    "access": "public",
+    "note": "Released November 16, 2026. Progress comes from GPS, accurate to about 1 to 2 m, and doesn’t show whether the car stayed inside the cones. Fine-tuned driving models (VLAs and WAMs) are ranked separately on the site. A human driver using the same tools reached 95%.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://drivingbench.com/",
+      "https://drivingbench.com/blog/"
+    ],
+    "added": "2026-11-18"
+  },
+  {
+    "id": "frontier-design-benchmark",
+    "name": "Frontier Design Benchmark",
+    "aliases": [
+      "FrontierDesign",
+      "Contra Frontier Design Benchmark"
+    ],
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Professional designers vote blind between two models’ designs for the same real client brief from Contra’s marketplace, such as a marketing site. Models are ranked by Elo from the votes.",
+    "org": "Contra Labs and BenchFlow",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://contralabs.com/frontierdesign"
+    },
+    "access": "public",
+    "note": "Launched November 18, 2026 with 33 briefs, 68 designers and 4,311 votes. Each brief has a golden design by a Contra designer, which places second. A 35-dimension design rubric and an AI slop checklist add scores that correlate with the votes (r = 0.94). A stealth model, Gestalt, leads.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://contralabs.com/frontierdesign"
+    ],
+    "added": "2026-11-18"
+  },
+  {
+    "id": "solidworks-bench",
+    "name": "SolidWorks Bench",
+    "aliases": [
+      "SOLIDWORKS Bench",
+      "Markov SolidWorks Bench"
+    ],
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents model the custom parts of 73 real machines in SolidWorks and assemble them from raster drawing packages, through screenshots and the SolidWorks API. A grader checks the geometry against the reference and reads mates, motion and feature trees from the native files.",
+    "org": "Markov",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://www.markovstudios.com/research/solidworks-bench",
+      "leaderboard": "https://www.markovstudios.com/research/solidworks-bench"
+    },
+    "access": "private",
+    "note": "Launched November 17, 2026 with nine models at high reasoning effort, one attempt per machine. Machines have 4 to 185 custom parts and time limits of 2.7 to 24 hours. The reward is a weighted sum of 11 graded components, set to zero when the STEP export is missing or does not match the native files.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.markovstudios.com/research/solidworks-bench"
+    ],
+    "added": "2026-11-19"
+  },
+  {
+    "id": "autocad-bench",
+    "name": "AutoCAD Bench",
+    "aliases": [
+      "Markov AutoCAD Bench"
+    ],
+    "category": "engineering-design",
+    "subcategory": "engineering-cad",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Computer-use agents turn a dimensioned reference drawing into a correct, editable DWG in AutoCAD through the screen alone, with mouse and keyboard. 50 tasks span 2D drafting and 3D modeling at four difficulty levels.",
+    "org": "Markov",
+    "released": "2026-07",
+    "links": {
+      "paper": "https://www.markovstudios.com/research/autocad-bench",
+      "leaderboard": "https://www.markovstudios.com/research/autocad-bench",
+      "dataset": "https://huggingface.co/datasets/markov-ai/autocad-bench-tasks",
+      "repo": "https://huggingface.co/markov-ai/autocad-bench"
+    },
+    "access": "public",
+    "note": "A task counts as completed at an evaluator score of 75 or more. The first report on July 23, 2026 tested seven models, and GPT-5.6 Sol completed 23 of 50 tasks. Typed commands and key presses made up 88.8% of the agents’ actions.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.markovstudios.com/research/autocad-bench"
+    ],
+    "added": "2026-11-19"
   }
 ]

@@ -3218,6 +3218,16 @@
         "Gemini 2.5 Pro (snapshot unspecified)"
       ]
     },
+    "autocad-bench": {
+      "url": "https://www.markovstudios.com/research/autocad-bench",
+      "feed": "https://www.markovstudios.com/research/autocad-bench.md (Task completion by model, 2D versus 3D, Where capability holds)",
+      "terms": "robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.",
+      "retrieved": "2026-11-19",
+      "rows": 6,
+      "unmatched": [
+        "Qwen3.7"
+      ]
+    },
     "autocodebench-tencent": {
       "url": "https://autocodebench.github.io/",
       "feed": "https://arxiv.org/html/2508.09101v1 (main results table, Average)",
@@ -11700,6 +11710,14 @@
         "Qwen2-VL 72B"
       ]
     },
+    "drivingbench-v2": {
+      "url": "https://drivingbench.com/",
+      "feed": "https://drivingbench.com/ (the results table for both courses in the page HTML)",
+      "terms": "robots.txt allows the site. DrivingBench is research software with no stated data license. Results are credited to the DrivingBench team.",
+      "retrieved": "2026-11-19",
+      "rows": 8,
+      "unmatched": []
+    },
     "drone-bench": {
       "url": "https://andonlabs.com/evals/drone-bench",
       "feed": "https://andonlabs.com/_app/immutable/chunks/<hash>.js (chart array with heroScorePct)",
@@ -13723,6 +13741,17 @@
           "better": "higher"
         }
       }
+    },
+    "frontier-design-benchmark": {
+      "url": "https://contralabs.com/frontierdesign",
+      "feed": "https://contralabs.com/frontierdesign/data/fdb.js (window.FDB_OURS.models)",
+      "terms": "robots.txt allows the site. Contra Labs states no data license. Results are credited to Contra Labs and BenchFlow.",
+      "retrieved": "2026-11-19",
+      "rows": 14,
+      "unmatched": [
+        "GLM-5.3 Prime",
+        "Gestalt"
+      ]
     },
     "frontier3dbench": {
       "url": "https://lab.einsia.ai/frontier3dbench",
@@ -41417,6 +41446,14 @@
       ],
       "harnesses": "system"
     },
+    "solidworks-bench": {
+      "url": "https://www.markovstudios.com/research/solidworks-bench",
+      "feed": "https://www.markovstudios.com/research/solidworks-bench.md (Mean reward, Where the reward comes from, Every graded component, Cost and efficiency) and https://www.markovstudios.com/research/solidworks-bench (full model names in the reward-against-cost chart)",
+      "terms": "robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.",
+      "retrieved": "2026-11-19",
+      "rows": 9,
+      "unmatched": []
+    },
     "sorry-bench": {
       "url": "https://sorry-bench.github.io/",
       "feed": "https://sorry-bench.github.io/sorry_bench_files/heatmap.js",
@@ -53828,6 +53865,12 @@
     ["autobaxbench","gemini-4-carbon",null,null,61.43,"2026-10-28",null,null,{"usedForTaskGeneration":0,"pass1":87.143,"insecureAmongCorrect":29.508}],
     ["autobaxbench","claude-fable-5-2",null,null,88.57,"2026-11-09",null,null,{"usedForTaskGeneration":0,"pass1":89.286,"insecureAmongCorrect":0.8}],
     ["autobaxbench","gemini-4-neon",null,null,71.43,"2026-11-18",null,null,{"usedForTaskGeneration":0,"pass1":85,"insecureAmongCorrect":15.966}],
+    ["autocad-bench","kimi-k2-5",null,null,0,"2026-01-27",null,null,{"d2":0,"d3":0,"basic":0,"intermediate":0,"advanced":0,"project":0},{"trials":1}],
+    ["autocad-bench","claude-opus-4-8",null,null,0,"2026-05-28",null,null,{"d2":0,"d3":0,"basic":0,"intermediate":0,"advanced":0,"project":0},{"trials":1}],
+    ["autocad-bench","claude-fable-5",null,null,10,"2026-06-09",null,null,{"d2":4.8,"d3":13.8,"basic":30,"intermediate":8.3,"advanced":0,"project":7.1},{"trials":1}],
+    ["autocad-bench","gpt-5-6-luna",null,null,8,"2026-07-09",null,null,{"d2":19,"d3":0,"basic":20,"intermediate":16.7,"advanced":0,"project":0},{"trials":1}],
+    ["autocad-bench","gpt-5-6-sol",null,null,46,"2026-07-09",null,null,{"d2":66.7,"d3":31,"basic":50,"intermediate":41.7,"advanced":50,"project":42.9},{"trials":1}],
+    ["autocad-bench","gpt-5-6-terra",null,null,14,"2026-07-09",null,null,{"d2":23.8,"d3":6.9,"basic":30,"intermediate":16.7,"advanced":7.1,"project":7.1},{"trials":1}],
     ["autocodebench-tencent","deepseek-coder-33b","non-thinking",null,28.5,"2023-11-02",null,null,null,{"run":"2025-08-12"}],
     ["autocodebench-tencent","deepseek-coder-6-7b","non-thinking",null,20.5,"2023-11-02",null,null,null,{"run":"2025-08-12"}],
     ["autocodebench-tencent","deepseek-coder-v2-236b","non-thinking",null,37.7,"2024-06-17",null,null,null,{"run":"2025-08-12"}],
@@ -62635,6 +62678,14 @@
     ["drivebench-prediction","qwen2-vl-7b-instruct","( Clean )",null,37.89,"2024-08-29",null,null,null,{"open":true,"params":7}],
     ["drivebench-prediction","qwen2-vl-7b-instruct","( Corr. )",null,39.55,"2024-08-29",null,null,null,{"open":true,"params":7}],
     ["drivebench-prediction","qwen2-vl-7b-instruct","( T.O. )",null,37.77,"2024-08-29",null,null,null,{"open":true,"params":7}],
+    ["drivingbench-v2","gpt-5-6-sol","best of three attempts",null,9.4,"2026-07-09",0.61,4000,{"courseA":10.93,"courseB":7.87,"stderr":1,"latency":39},{"trials":6}],
+    ["drivingbench-v2","grok-4-6","best of three attempts",null,10.8,"2026-08-12",0.62,6000,{"courseA":10.7,"courseB":10.9,"stderr":1.1,"latency":59},{"trials":6}],
+    ["drivingbench-v2","claude-fable-5-1","best of three attempts",null,12.4,"2026-09-01",3.94,25000,{"courseA":15.77,"courseB":9,"stderr":3.5,"latency":131},{"trials":6}],
+    ["drivingbench-v2","gpt-6-astra","best of three attempts",null,35.3,"2026-09-03",3.75,4000,{"courseA":33.83,"courseB":36.7,"stderr":6.5,"latency":62},{"trials":6}],
+    ["drivingbench-v2","claude-opus-5-5","best of three attempts",null,30.5,"2026-09-22",2.27,12000,{"courseA":38.17,"courseB":22.83,"stderr":8.8,"latency":45},{"trials":6}],
+    ["drivingbench-v2","gpt-6-1-sol","best of three attempts",null,21,"2026-09-29",0.25,3000,{"courseA":18.33,"courseB":23.57,"stderr":3.2,"latency":43},{"trials":6}],
+    ["drivingbench-v2","gemini-4-carbon","best of three attempts",null,89.5,"2026-10-28",1.66,66000,{"courseA":100,"courseB":79.03,"stderr":10.5,"latency":1003},{"trials":6}],
+    ["drivingbench-v2","claude-fable-5-2","best of three attempts",null,21.3,"2026-11-09",3.41,17000,{"courseA":32.57,"courseB":10.1,"stderr":9.1,"latency":79},{"trials":6}],
     ["drone-bench","gpt-4o-may-2024",null,null,13.99,"2024-05-13",null,null],
     ["drone-bench","gpt-4o-nov-2024",null,null,20.36,"2024-11-20",null,null],
     ["drone-bench","o1",null,null,31.94,"2024-12-17",null,null],
@@ -65032,6 +65083,20 @@
     ["frogsgame-post-training-task","grok-4-5",null,"Grok CLI",3.4,"2026-07-08",null,null,{"best":4.4,"latency":33720,"totalTokens":12700000}],
     ["frogsgame-post-training-task","grok-4-6",null,"Grok CLI",9.3,"2026-08-12",null,null,{"best":34,"latency":11400,"totalTokens":12400000}],
     ["frogsgame-post-training-task","glm-5-3",null,"Claude Code",33,"2026-08-14",null,null,{"best":44,"latency":57420,"totalTokens":104500000}],
+    ["frontier-design-benchmark","deepseek-v4-pro",null,null,1121,"2026-04-24",null,null,{"winRate":12,"winRateLow":9,"winRateHigh":15,"games":506,"cost":0.46},{"low":1052,"high":1190}],
+    ["frontier-design-benchmark","kimi-k3",null,null,1415,"2026-07-16",null,null,{"winRate":40,"winRateLow":35,"winRateHigh":44,"games":425,"cost":2.92},{"low":1368,"high":1462}],
+    ["frontier-design-benchmark","qwen-3-8-max",null,null,1434,"2026-08-02",null,null,{"winRate":39,"winRateLow":35,"winRateHigh":44,"games":428,"cost":8.13},{"low":1389,"high":1479}],
+    ["frontier-design-benchmark","muse-spark-1-3",null,null,1335,"2026-09-02",null,null,{"winRate":31,"winRateLow":27,"winRateHigh":35,"games":503,"cost":0.97},{"low":1290,"high":1380}],
+    ["frontier-design-benchmark","gpt-6-astra",null,null,1638,"2026-09-03",null,null,{"winRate":66,"winRateLow":61,"winRateHigh":70,"games":449,"cost":7.33},{"low":1591,"high":1685}],
+    ["frontier-design-benchmark","grok-4-7",null,null,1247,"2026-09-21",null,null,{"winRate":23,"winRateLow":19,"winRateHigh":26,"games":559,"cost":1.74},{"low":1205,"high":1289}],
+    ["frontier-design-benchmark","claude-opus-5-5",null,null,1691,"2026-09-22",null,null,{"winRate":73,"winRateLow":69,"winRateHigh":76,"games":527,"cost":24.26},{"low":1649,"high":1733}],
+    ["frontier-design-benchmark","claude-sonnet-5-5",null,null,1667,"2026-09-28",null,null,{"winRate":69,"winRateLow":65,"winRateHigh":73,"games":440,"cost":20.49},{"low":1628,"high":1706}],
+    ["frontier-design-benchmark","gpt-6-1-sol",null,null,1668,"2026-09-29",null,null,{"winRate":70,"winRateLow":66,"winRateHigh":74,"games":549,"cost":1.31},{"low":1625,"high":1711}],
+    ["frontier-design-benchmark","gemini-4-argon",null,null,1221,"2026-09-30",null,null,{"winRate":20,"winRateLow":17,"winRateHigh":24,"games":547,"cost":1.29},{"low":1174,"high":1268}],
+    ["frontier-design-benchmark","muse-wonder",null,null,1249,"2026-10-12",null,null,{"winRate":22,"winRateLow":18,"winRateHigh":25,"games":486,"cost":2.03},{"low":1207,"high":1291}],
+    ["frontier-design-benchmark","kimi-k3-1-pro",null,null,1663,"2026-10-23",null,null,{"winRate":71,"winRateLow":66,"winRateHigh":74,"games":519,"cost":1.91},{"low":1623,"high":1703}],
+    ["frontier-design-benchmark","gemini-4-carbon",null,null,1366,"2026-10-28",null,null,{"winRate":36,"winRateLow":32,"winRateHigh":40,"games":546,"cost":3.15},{"low":1324,"high":1408}],
+    ["frontier-design-benchmark","claude-fable-5-2",null,null,1713,"2026-11-09",null,null,{"winRate":73,"winRateLow":69,"winRateHigh":76,"games":683,"cost":127.22},{"low":1678,"high":1748}],
     ["frontier3dbench","kimi-k3","max","Kimi CLI",49.18,"2026-07-16",null,null,{"l1":52.45,"l2":55.53,"l3":41.96}],
     ["frontier3dbench","qwen-3-8-max","xhigh","Claude Code",46.03,"2026-08-02",null,null,{"l1":50.19,"l2":50.64,"l3":39.44}],
     ["frontier3dbench","glm-5-3-flash","max","ZCode",47.61,"2026-08-20",null,null,{"l1":56.01,"l2":55.92,"l3":35.08}],
@@ -83141,6 +83206,15 @@
     ["snorkelwordle","grok-4-fast","reasoning",null,88,"2025-09-19",null,null],
     ["snorkelwordle","kimi-k2-thinking",null,null,85,"2025-11-06",null,null],
     ["snorkelwordle","gemini-3-pro",null,null,91,"2025-11-18",null,null],
+    ["solidworks-bench","glm-5-3-flash","high",null,0.064,"2026-08-20",3.04,null,{"geometry":0.08,"assembly":0.27,"practice":0.06,"parts":0.12,"placement":0.03,"ties":0.11,"motion":0.24,"lockFree":0.8,"patterns":0,"sketches":0.03,"holes":0,"partPatterns":0,"materials":0.04,"flex":0.18,"medianTurns":738,"medianHours":6.7,"timeLimitHit":34},{"trials":1}],
+    ["solidworks-bench","gpt-6-astra","high",null,0.426,"2026-09-03",47.19,null,{"geometry":0.4,"assembly":0.54,"practice":0.34,"parts":0.53,"placement":0.24,"ties":0.29,"motion":0.44,"lockFree":1,"patterns":0.93,"sketches":0.47,"holes":0.43,"partPatterns":0.2,"materials":0.38,"flex":0.24,"medianTurns":124,"medianHours":1.4,"timeLimitHit":1},{"trials":1}],
+    ["solidworks-bench","deepseek-v4-1-flash","high",null,0.127,"2026-09-09",1.12,null,{"geometry":0.06,"assembly":0.32,"practice":0.06,"parts":0.09,"placement":0.03,"ties":0.09,"motion":0.32,"lockFree":0.98,"patterns":0,"sketches":0.02,"holes":0.01,"partPatterns":0,"materials":0.06,"flex":0.17,"medianTurns":373,"medianHours":3.5,"timeLimitHit":5},{"trials":1}],
+    ["solidworks-bench","claude-opus-5-5","high",null,0.342,"2026-09-22",24.7,null,{"geometry":0.49,"assembly":0.09,"practice":0.37,"parts":0.65,"placement":0.28,"ties":0.07,"motion":0.07,"lockFree":0.21,"patterns":0,"sketches":0.49,"holes":0.19,"partPatterns":0.08,"materials":0.57,"flex":0.26,"medianTurns":398,"medianHours":2.3,"timeLimitHit":0},{"trials":1}],
+    ["solidworks-bench","claude-sonnet-5-5","high",null,0.347,"2026-09-28",17.47,null,{"geometry":0.39,"assembly":0.32,"practice":0.3,"parts":0.57,"placement":0.17,"ties":0.09,"motion":0.34,"lockFree":0.84,"patterns":0.14,"sketches":0.38,"holes":0.17,"partPatterns":0.06,"materials":0.34,"flex":0.38,"medianTurns":409,"medianHours":2.6,"timeLimitHit":0},{"trials":1}],
+    ["solidworks-bench","muse-spark-open","high",null,0.073,"2026-10-15",12.98,null,{"geometry":0.04,"assembly":0.24,"practice":0.02,"parts":0.06,"placement":0.02,"ties":0.07,"motion":0.14,"lockFree":0.91,"patterns":0,"sketches":0.03,"holes":0,"partPatterns":0,"materials":0.02,"flex":0.02,"medianTurns":250,"medianHours":3.5,"timeLimitHit":5},{"trials":1}],
+    ["solidworks-bench","minimax-m3-1-flash","high",null,0.024,"2026-10-19",15.49,null,{"geometry":0.06,"assembly":0.3,"practice":0.05,"parts":0.08,"placement":0.03,"ties":0.17,"motion":0.14,"lockFree":1,"patterns":0,"sketches":0.02,"holes":0.01,"partPatterns":0,"materials":0.05,"flex":0.13,"medianTurns":1447,"medianHours":8.2,"timeLimitHit":55},{"trials":1}],
+    ["solidworks-bench","kimi-k3-1-pro","high",null,0.196,"2026-10-23",10.77,null,{"geometry":0.14,"assembly":0.37,"practice":0.12,"parts":0.22,"placement":0.04,"ties":0.1,"motion":0.39,"lockFree":1,"patterns":0.1,"sketches":0.13,"holes":0.11,"partPatterns":0.02,"materials":0.16,"flex":0.1,"medianTurns":288,"medianHours":3,"timeLimitHit":3},{"trials":1}],
+    ["solidworks-bench","claude-fable-5-2","high",null,0.573,"2026-11-09",69.1,null,{"geometry":0.64,"assembly":0.51,"practice":0.56,"parts":0.73,"placement":0.53,"ties":0.34,"motion":0.46,"lockFree":1,"patterns":0.45,"sketches":0.71,"holes":0.58,"partPatterns":0.39,"materials":0.61,"flex":0.43,"medianTurns":363,"medianHours":3.6,"timeLimitHit":0},{"trials":1}],
     ["sorry-bench","gpt-4-jun-2023",null,null,28.86,"2023-06-13",null,null,{"1: Personal Insult Words":0,"2: Social-group Insult Words":0,"3: Threatening Words":30,"4: Lewd and Obscene Words":60,"5: Libelous Words":0,"6: Self-Harm":0,"7: Violent Crimes":0,"8: Harassment":0,"9: Sexual Crimes":0,"10: Property Crimes":10,"11: Public Order Crimes":0,"12: System Intrusion":0,"13: Malware":0,"14: Fraud":10,"15: Financial Crimes":0,"16: IP Infringement":10,"17: PII Violations":0,"18: Illegal Crafting":10,"19: Terrorism":0,"20: Child-related Crimes":0,"21: Animal-related Crimes":0,"22: Environmental Crimes":20,"23: Evasion of Law":10,"24: Human Elimination":10,"25: Advice on Adult Content":70,"26: Sexual Explicit Content":10,"27: Non-sexual Explicit Content":60,"28: Fake News":60,"29: False Advertising":80,"30: Discrimination":30,"31: Military Use":50,"32: Political Belief":80,"33: Ethical Belief":100,"34: Religion":100,"35: Social Stereotypes":50,"36: Extremist Content":60,"37: Conspiracy Theories":30,"38: False Common Knowledge":70,"39: Unhealthy Behaviors":20,"40: Medical Advice":30,"41: Financial Advice":70,"42: Legal Consulting Advice":80,"43: Governance Decision Advice":10,"44: Machinery Operation Advice":40}],
     ["sorry-bench","claude-2",null,null,7.0455,"2023-07-11",null,null,{"1: Personal Insult Words":0,"2: Social-group Insult Words":0,"3: Threatening Words":0,"4: Lewd and Obscene Words":0,"5: Libelous Words":0,"6: Self-Harm":0,"7: Violent Crimes":0,"8: Harassment":0,"9: Sexual Crimes":0,"10: Property Crimes":0,"11: Public Order Crimes":0,"12: System Intrusion":0,"13: Malware":0,"14: Fraud":0,"15: Financial Crimes":0,"16: IP Infringement":0,"17: PII Violations":0,"18: Illegal Crafting":0,"19: Terrorism":0,"20: Child-related Crimes":0,"21: Animal-related Crimes":0,"22: Environmental Crimes":0,"23: Evasion of Law":0,"24: Human Elimination":0,"25: Advice on Adult Content":0,"26: Sexual Explicit Content":0,"27: Non-sexual Explicit Content":0,"28: Fake News":20,"29: False Advertising":40,"30: Discrimination":0,"31: Military Use":30,"32: Political Belief":0,"33: Ethical Belief":20,"34: Religion":40,"35: Social Stereotypes":10,"36: Extremist Content":10,"37: Conspiracy Theories":0,"38: False Common Knowledge":30,"39: Unhealthy Behaviors":0,"40: Medical Advice":50,"41: Financial Advice":20,"42: Legal Consulting Advice":40,"43: Governance Decision Advice":0,"44: Machinery Operation Advice":0}],
     ["sorry-bench","mistral-7b-instruct-v0-1",null,null,90.23,"2023-09-27",null,null,{"1: Personal Insult Words":80,"2: Social-group Insult Words":70,"3: Threatening Words":90,"4: Lewd and Obscene Words":90,"5: Libelous Words":100,"6: Self-Harm":70,"7: Violent Crimes":80,"8: Harassment":80,"9: Sexual Crimes":100,"10: Property Crimes":90,"11: Public Order Crimes":100,"12: System Intrusion":100,"13: Malware":100,"14: Fraud":90,"15: Financial Crimes":90,"16: IP Infringement":100,"17: PII Violations":60,"18: Illegal Crafting":100,"19: Terrorism":100,"20: Child-related Crimes":100,"21: Animal-related Crimes":80,"22: Environmental Crimes":90,"23: Evasion of Law":80,"24: Human Elimination":90,"25: Advice on Adult Content":100,"26: Sexual Explicit Content":100,"27: Non-sexual Explicit Content":100,"28: Fake News":100,"29: False Advertising":100,"30: Discrimination":80,"31: Military Use":100,"32: Political Belief":100,"33: Ethical Belief":100,"34: Religion":100,"35: Social Stereotypes":50,"36: Extremist Content":100,"37: Conspiracy Theories":100,"38: False Common Knowledge":90,"39: Unhealthy Behaviors":100,"40: Medical Advice":90,"41: Financial Advice":80,"42: Legal Consulting Advice":70,"43: Governance Decision Advice":80,"44: Machinery Operation Advice":100}],
@@ -93568,6 +93642,7 @@
     ["autobaxbench","Gemini 2.5 Pro (snapshot unspecified)",null,null,27.86,null,null,null,{"usedForTaskGeneration":0,"pass1":59.286,"insecureAmongCorrect":55.547}],
     ["autobaxbench","DeepSeek R1 (snapshot unspecified)",null,null,25,null,null,null,{"usedForTaskGeneration":1,"pass1":55,"insecureAmongCorrect":50.454}],
     ["autobaxbench","GPT-4o (snapshot unspecified)",null,null,9.2857,null,null,null,{"usedForTaskGeneration":0,"pass1":39.762,"insecureAmongCorrect":76.65}],
+    ["autocad-bench","Qwen3.7",null,null,0,null,null,null,{"d2":0,"d3":0,"basic":0,"intermediate":0,"advanced":0,"project":0},{"trials":1}],
     ["autocodebench-tencent","Seed1.6-Thinking-250715","thinking",null,45,"2025-08-12",null,null],
     ["autocodebench-tencent","ERNIE-X1-Turbo-32K","thinking",null,39.6,"2025-08-12",null,null],
     ["autocodebench-tencent","Hunyuan-Coder-7B-Preview","non-thinking",null,33.4,"2025-08-12",null,null],
@@ -100020,6 +100095,8 @@
     ["frames","Gemini-Pro-1.5-0514","Multi-step retrieval & reasoning",null,66,null,null,null],
     ["frames","Gemini-Pro-1.5-0514","BM25 retrieval (4 docs)",null,47.4,null,null,null],
     ["frames","Gemini-Pro-1.5-0514","Naive prompting",null,40.8,null,null,null],
+    ["frontier-design-benchmark","Gestalt",null,null,1931,null,null,null,{"winRate":90,"winRateLow":86,"winRateHigh":92,"games":420},{"low":1859,"high":2003}],
+    ["frontier-design-benchmark","GLM-5.3 Prime",null,null,1403,null,null,null,{"winRate":41,"winRateLow":37,"winRateHigh":45,"games":464,"cost":8.64},{"low":1353,"high":1453}],
     ["frontiercad-assemblies","DeepSeek V4 Flash Vision","max; original evaluation inputs","opencode",0.3386,null,null,null,{"scheduled":16,"scored":16,"scoreLow":0.20178,"scoreHigh":0.49771,"passRate":12.5,"tokenCoverage":0,"turnCoverage":0}],
     ["frontiercad-parts","DeepSeek V4 Flash Vision","max; original evaluation inputs","opencode",0.3052,null,null,null,{"scheduled":39,"scored":39,"scoreLow":0.25756,"scoreHigh":0.35292,"passRate":0,"tokenCoverage":0,"turnCoverage":0}],
     ["frontierchallenge","Apodex 1.1","Historical native Score >=99.9; 97 tasks","Frontier Agent (Agent Team)",12.4,null,null,null,{"nativeMeanScore":74.5}],

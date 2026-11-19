@@ -38,6 +38,7 @@
     "atrex-bench": [{"field":"Runtime","kind":"time, latency or steps","why":"not stored","share":1},{"field":"fp8_dynamic_per_token_quant","kind":"tokens","why":"not stored","share":1},{"field":"per_token_group_quant_fp8","kind":"tokens","why":"not stored","share":1},{"field":"fp8_blockscale_fused_moe","kind":"uncertainty","why":"not stored","share":1},{"field":"fused_moe","kind":"uncertainty","why":"not stored","share":1},{"field":"moe_align_block_size","kind":"uncertainty","why":"not stored","share":1},{"field":"moe_count_and_sort","kind":"uncertainty","why":"not stored","share":1},{"field":"moe_sum_reduce","kind":"uncertainty","why":"not stored","share":1},{"field":"moe_topk_gating_softmax","kind":"uncertainty","why":"not stored","share":1}],
     "audio-arena-arcada": [{"field":"createdAt","kind":"run date","why":"not stored","share":1,"sample":"2026-10-15T04:32:44.910553+00:00"}],
     "audio-reasoning-challenge-2026": [{"field":"Submission Limit","kind":"link","why":"not stored","share":1}],
+    "autocad-bench": [{"field":"Actions per turn","kind":"time, latency or steps","why":"not stored","share":1}],
     "autoelicit": [{"field":"# Seeds","kind":"trials","why":"not stored","share":1},{"field":"Per Seed ↑","kind":"trials","why":"not stored","share":1}],
     "autoresearchexam": [{"field":"Terminus 2 · 200 turns","kind":"time, latency or steps","why":"not stored","share":1}],
     "babaisbench": [{"field":"Harness","kind":"harness or agent","why":"not stored","share":1}],
