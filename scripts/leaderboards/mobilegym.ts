@@ -10,6 +10,12 @@ const URL = 'https://mobilegym.dev/';
 
 const board: Leaderboard = {
   benchmark: 'mobilegym',
+  parts: {
+    L1: { name: 'Level 1', group: 'Difficulty' },
+    L2: { name: 'Level 2', group: 'Difficulty' },
+    L3: { name: 'Level 3', group: 'Difficulty' },
+    L4: { name: 'Level 4', group: 'Difficulty' },
+  },
   url: URL,
   feed: `${URL} (leaderboard table, SR)`,
   terms: 'Static public page; robots.txt allows all paths for generic agents with a content signal, and the site publishes no terms.',

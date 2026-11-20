@@ -9,6 +9,13 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2605.03903";
 const board: Leaderboard = {
  benchmark: "cc-ocr-bench-v2",
+ parts: {
+   recognition: { name: 'Recognition', group: 'Task type' },
+   parsing: { name: 'Parsing', group: 'Task type' },
+   grounding: { name: 'Grounding', group: 'Task type' },
+   extraction: { name: 'Extraction', group: 'Task type' },
+   qa: { name: 'Question answering', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2605.03903",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

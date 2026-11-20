@@ -13,10 +13,21 @@ function enhance(root: HTMLElement) {
   const search = root.querySelector<HTMLInputElement>('.dd-s');
   const none = root.querySelector<HTMLElement>('.dd-none');
   const items = [...list.querySelectorAll<HTMLLIElement>('li')];
+  const multi = select.multiple;
+  // the values a multiple select holds, leaving out the "none chosen" option
+  const picked = () => new Set([...select.selectedOptions].map((o) => o.value).filter(Boolean));
   let active = -1;
 
   const visible = () => items.filter((li) => !li.hidden);
   const sync = () => {
+    if (multi) {
+      const on = picked();
+      for (const li of items) li.setAttribute('aria-selected', String(on.has(li.dataset.value ?? '') || (!on.size && !li.dataset.value)));
+      const chosen = items.filter((li) => on.has(li.dataset.value ?? ''));
+      const name = (li: HTMLLIElement) => li.querySelector('.ol')!.textContent ?? '';
+      label.textContent = !chosen.length ? name(items[0]) : chosen.length === 1 ? name(chosen[0]) : `${name(chosen[0])} +${chosen.length - 1}`;
+      return;
+    }
     const cur = items.find((li) => li.dataset.value === select.value) ?? items[0];
     for (const li of items) li.setAttribute('aria-selected', String(li === cur));
     label.textContent = cur.querySelector('.ol')!.textContent;
@@ -36,7 +47,7 @@ function enhance(root: HTMLElement) {
     panel.classList.remove('right');
     if (panel.getBoundingClientRect().right > window.innerWidth - 8) panel.classList.add('right');
     const vis = visible();
-    setActive(Math.max(0, vis.findIndex((li) => li.dataset.value === select.value)));
+    setActive(Math.max(0, vis.findIndex((li) => (multi ? picked().has(li.dataset.value ?? '') : li.dataset.value === select.value))));
     (search ?? list).focus();
   };
   const close = (refocus = true) => {
@@ -49,6 +60,16 @@ function enhance(root: HTMLElement) {
     if (refocus) button.focus();
   };
   const choose = (li: HTMLLIElement) => {
+    if (multi) {
+      // the first option clears every pick, any other option turns itself on or off, and the panel stays open
+      const v = li.dataset.value ?? '';
+      for (const o of select.options) if (!v) o.selected = false;
+      const opt = [...select.options].find((o) => o.value === v);
+      if (v && opt) opt.selected = !opt.selected;
+      sync();
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      return;
+    }
     select.value = li.dataset.value ?? '';
     sync();
     select.dispatchEvent(new Event('change', { bubbles: true }));

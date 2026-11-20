@@ -7,6 +7,16 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/Penguin-Scrolls/PenguinScrolls/master/README.md";
 const board: Leaderboard = {
  benchmark: "penguinscrolls",
+ parts: {
+   'Information Extraction(420 items)': { name: 'Information extraction', group: 'Task type' },
+   'Information Localization(278 items)': { name: 'Information localization', group: 'Task type' },
+   'Qualitative Analysis(305 items)': { name: 'Qualitative analysis', group: 'Task type' },
+   'Numerical Reasoning(313 items)': { name: 'Numerical reasoning', group: 'Task type' },
+   '0K-8K': { name: '0K to 8K', group: 'Split' },
+   '8K-32K': { name: '8K to 32K', group: 'Split' },
+   '32K-64K': { name: '32K to 64K', group: 'Split' },
+   '64K-128K': { name: '64K to 128K', group: 'Split' },
+ },
  url: "https://github.com/Penguin-Scrolls/PenguinScrolls",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

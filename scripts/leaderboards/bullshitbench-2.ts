@@ -6,7 +6,7 @@
 // refusals"), so the score is 100 * score_2 / (nonsense_count - refusal_count), as the viewer computes it.
 // bullshitbench.ts reads V1 with the same reader. For V2, cost and output tokens are the viewer's "USD / answer"
 // and "Output tok." columns: means over each variant's answers, refusals left out as the viewer does, read from
-// the gzipped viewer_rows file that manifest.json lists (response_cost_usd, response_completion_tokens).
+// the gzipped viewer rows. These also give latency, token usage and clear pushback by question technique.
 import { gunzipSync } from 'node:zlib';
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
@@ -39,46 +39,71 @@ export const BS_ALIASES: Record<string, string> = {
   'mistral-small-2603': 'mistral-small-4',
 };
 
-interface ViewerRow {
+const usageColumns = {
+  response_cost_usd: 'cost', response_completion_tokens: 'tokens', response_latency_ms: 'latency',
+  response_prompt_tokens: 'inputTokens', response_total_tokens: 'totalTokens', response_reasoning_tokens: 'reasoningTokens',
+  response_cached_prompt_tokens: 'cachedInputTokens', response_cache_write_tokens: 'cacheWriteTokens',
+  response_tokens_per_second: 'tokensPerSecond',
+} as const;
+
+interface ViewerRow extends Partial<Record<keyof typeof usageColumns, number | null>> {
   model: string;
+  status?: string;
+  technique?: string;
+  is_control?: boolean;
+  consensus_score?: number | null;
   response_refusal?: boolean | string | null;
   response_outcome?: string | null;
-  response_completion_tokens?: number | null;
-  response_cost_usd?: number | null;
+  finished_at_utc?: string;
 }
 
-/** Per model variant, the viewer's mean cost (US dollars) and output tokens per answer, refusals left out. */
-async function bsUsage(dir: string): Promise<Map<string, { cost?: number; tokens?: number }>> {
-  const manifest = JSON.parse(await fetchText(`${BS_PAGE}${dir}manifest.json`)) as {
-    storage?: { assets?: Record<string, { parts: { path: string }[] }> };
-  };
-  const parts = manifest.storage?.assets?.['viewer_rows.json.gz']?.parts;
-  if (!parts?.length) throw new Error(`no viewer_rows in ${dir}manifest.json`);
-  const sums = new Map<string, { cost: number; nc: number; tokens: number; nt: number }>();
-  for (const part of parts) {
-    const res = await fetch(`${BS_PAGE}${dir}${part.path}`, { signal: AbortSignal.timeout(120_000) });
-    if (!res.ok) throw new Error(`${res.status} ${part.path}`);
-    const rows = JSON.parse(gunzipSync(Buffer.from(await res.arrayBuffer())).toString('utf8')) as ViewerRow[];
+async function bsUsage(dir: string, parts: NonNullable<Leaderboard['parts']>) {
+  const manifest = JSON.parse(await fetchText(`${BS_PAGE}${dir}manifest.json`));
+  const files = manifest.storage?.assets?.['viewer_rows.json.gz']?.parts;
+  if (!files?.length) throw new Error(`no viewer_rows in ${dir}manifest.json`);
+  const sums = new Map<string, { date?: string; values: Record<string, { sum: number; count: number }> }>();
+  for (const file of files) {
+    const res = await fetch(`${BS_PAGE}${dir}${file.path}`, { signal: AbortSignal.timeout(120_000) });
+    if (!res.ok) throw new Error(`${res.status} ${file.path}`);
+    const rows: ViewerRow[] = JSON.parse(gunzipSync(Buffer.from(await res.arrayBuffer())).toString('utf8'));
     for (const r of rows) {
       const refusal = String(r.response_refusal ?? '').toLowerCase();
-      if (refusal === 'true' || (refusal !== 'false' && String(r.response_outcome ?? '').toLowerCase() === 'refusal')) continue;
-      const s = sums.get(r.model) ?? { cost: 0, nc: 0, tokens: 0, nt: 0 };
-      if (typeof r.response_cost_usd === 'number' && r.response_cost_usd >= 0) (s.cost += r.response_cost_usd), s.nc++;
-      if (typeof r.response_completion_tokens === 'number' && r.response_completion_tokens >= 0) (s.tokens += r.response_completion_tokens), s.nt++;
-      sums.set(r.model, s);
+      if (refusal === 'true' || (refusal !== 'false' && r.response_outcome?.toLowerCase() === 'refusal')) continue;
+      const entry = sums.get(r.model) ?? { values: {} };
+      const add = (key: string, value: number) => {
+        const cell = entry.values[key] ??= { sum: 0, count: 0 };
+        cell.sum += value;
+        cell.count++;
+      };
+      for (const column of Object.keys(usageColumns) as (keyof typeof usageColumns)[]) {
+        const value = r[column];
+        if (typeof value === 'number' && Number.isFinite(value) && value >= 0) {
+          add(usageColumns[column], column === 'response_latency_ms' ? value / 1000 : value);
+        }
+      }
+      if (r.technique && !r.is_control) {
+        add(r.technique, r.status === 'ok' && typeof r.consensus_score === 'number' && r.consensus_score >= 1.5 ? 100 : 0);
+        const name = r.technique.replace(/_/g, ' ');
+        parts[r.technique] = { name: name[0].toUpperCase() + name.slice(1), group: 'Technique' };
+      }
+      const date = r.finished_at_utc?.slice(0, 10);
+      if (date && (!entry.date || date > entry.date)) entry.date = date;
+      sums.set(r.model, entry);
     }
   }
-  return new Map(
-    [...sums].map(([m, s]) => [m, { cost: s.nc && s.cost > 0 ? s.cost / s.nc : undefined, tokens: s.nt && s.tokens > 0 ? s.tokens / s.nt : undefined }]),
-  );
+  return new Map([...sums].map(([model, entry]) => {
+    const means = Object.fromEntries(Object.entries(entry.values).map(([key, stat]) => [key, stat.sum / stat.count]));
+    const { cost, tokens, ...metrics } = means;
+    return [model, { cost, tokens, metrics, date: entry.date }] as const;
+  }));
 }
 
 /**
  * Rows from one version's leaderboard.csv (`dir` is "data/v2/latest/" or "data/latest/"). `usage` adds the
  * viewer's cost and output tokens per answer.
  */
-export async function bsRows(dir: string, usage = false): Promise<LeaderboardRow[]> {
-  const perAnswer = usage ? await bsUsage(dir) : undefined;
+export async function bsRows(dir: string, usage = false, parts: NonNullable<Leaderboard['parts']> = {}): Promise<LeaderboardRow[]> {
+  const perAnswer = usage ? await bsUsage(dir, parts) : undefined;
   const rows: LeaderboardRow[] = [];
   for (const r of parseCsv(await fetchText(`${BS_PAGE}${dir}leaderboard.csv`))) {
     // "nvidia/nemotron-nano-9b-v2:free@reasoning=none": drop the variant and OpenRouter's free-tier tag
@@ -87,11 +112,20 @@ export async function bsRows(dir: string, usage = false): Promise<LeaderboardRow
     const clear = Number(r.score_2);
     if (!model || !(asked > 0) || !Number.isFinite(clear)) continue;
     const reasoning = r.reasoning?.trim().toLowerCase();
+    const extra = perAnswer?.get(r.model);
+    const metrics = { ...extra?.metrics };
+    for (const [column, key] of Object.entries({
+      rank: 'rank', avg_score: 'meanJudgeScore', score_2: 'clear', score_1: 'partial', score_0: 'accepted',
+      refusal_count: 'refusals', answered_count: 'answered', nonsense_count: 'questions', error_count: 'errors',
+      green_rate: 'greenRate', red_rate: 'redRate', refusal_rate: 'refusalRate',
+    })) {
+      if (r[column]?.trim() && Number.isFinite(Number(r[column]))) metrics[key] = Number(r[column]);
+    }
     rows.push({
       model,
       score: Number(((100 * clear) / asked).toFixed(2)),
       setting: reasoning && reasoning !== 'default' ? reasoning : undefined,
-      ...perAnswer?.get(r.model),
+      ...extra, metrics,
     });
   }
   if (!rows.length) throw new Error(`no rows in ${dir}leaderboard.csv`);
@@ -104,6 +138,11 @@ const board: Leaderboard = {
   feed: `${BS_PAGE}data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)`,
   terms: BS_TERMS,
   aliases: BS_ALIASES,
-  fetch: () => bsRows('data/v2/latest/', true),
+  async fetch() {
+    const parts = {};
+    const rows = await bsRows('data/v2/latest/', true, parts);
+    board.parts = parts;
+    return rows;
+  },
 };
 export default board;

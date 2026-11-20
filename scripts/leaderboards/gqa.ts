@@ -7,6 +7,20 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/1902.09506";
 const board: Leaderboard = {
   benchmark: "gqa",
+  parts: {
+    open: { name: 'Open', group: 'Task type' },
+    binary: { name: 'Binary', group: 'Task type' },
+    query: { name: 'Query', group: 'Task type' },
+    compare: { name: 'Compare', group: 'Task type' },
+    choose: { name: 'Choose', group: 'Task type' },
+    logical: { name: 'Logical', group: 'Task type' },
+    verify: { name: 'Verify', group: 'Task type' },
+    global: { name: 'Global', group: 'Task type' },
+    object: { name: 'Object', group: 'Task type' },
+    attribute: { name: 'Attribute', group: 'Task type' },
+    relation: { name: 'Relation', group: 'Task type' },
+    category: { name: 'Category', group: 'Task type' },
+  },
   url: "https://arxiv.org/html/1902.09506",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

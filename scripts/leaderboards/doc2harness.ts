@@ -5,6 +5,15 @@ const FEED = "https://arxiv.org/html/2610.20344";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "doc2harness",
+  parts: {
+    permissions: { name: 'Permissions', group: 'Category' },
+    fileOps: { name: 'File operations', group: 'Category' },
+    session: { name: 'Session', group: 'Category' },
+    direct: { name: 'Direct', group: 'Category' },
+    headless: { name: 'Headless', group: 'Category' },
+    interactive: { name: 'Interactive', group: 'Category' },
+    other: { name: 'Other', group: 'Category' },
+  },
   url: "https://github.com/YuyaoGe/doc2harness",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

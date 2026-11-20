@@ -3,98 +3,14 @@
 // MathArena publishes no results file (its GitHub repo has code only, and the Hugging Face *_outputs
 // datasets lag the site), so the importer reads that table. The other MathArena importers reuse
 // matharenaRows from this file. Besides cost and output tokens per answer, each row keeps the table's
-// "Average Time" per answer (metrics.latency, seconds) and the accuracy's 95% interval.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
+// rank, input tokens, average retries, time per answer and the accuracy interval.
+import type { Leaderboard } from './types.ts';
+import { matharenaFeed, matharenaRows } from '../lib/boards/matharena.ts';
 
-export const matharenaFeed = (comp: string) => `https://matharena.ai/competition_tables/${comp}`;
+export { matharenaFeed, matharenaRows };
 export const matharenaPage = (comp: string) => `https://matharena.ai/?comp=${comp}`;
 export const MATHARENA_TERMS =
   'matharena.ai publishes no terms and no robots.txt; the code is MIT and the Hugging Face datasets are CC BY-NC-SA 4.0.';
-
-const text = (s: string) =>
-  s
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&#39;|&#x27;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/⚠️/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-
-/**
- * One row per model in the competition's main table, with "Accuracy" as the score (0 to 100).
- * Rows marked data-predicted="yes" include item-response-theory estimates for unrun questions; they are skipped.
- */
-export async function matharenaRows(comp: string): Promise<LeaderboardRow[]> {
-  const { table } = await fetchJson<{ table: string }>(matharenaFeed(comp));
-  const head = [...table.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map((h) => text(h[1]));
-  const timeCol = head.indexOf('Average Time');
-  const rows: LeaderboardRow[] = [];
-  for (const m of table.matchAll(/<tr class="model-row"([\s\S]*?)<\/tr>/g)) {
-    const tr = m[1];
-    const name = tr.match(/<a class="model-link"[^>]*>([\s\S]*?)<\/a>/);
-    const acc = tr.match(/metric-bar-cell--accuracy[^>]*?data-predicted="(\w+)"[^>]*>([\s\S]*?)<\/td>/);
-    if (!name || !acc) continue;
-    if (acc[1] !== 'no') continue;
-    const pct = text(acc[2]).match(/^(-?[\d.]+)%/);
-    if (!pct) continue;
-    // "Cost in USD for one model run on one problem" and "Average number of output tokens per answer"
-    const cell = (kind: string) => {
-      const c = tr.match(new RegExp(`metric-bar-cell--${kind}"[^>]*>([\\s\\S]*?)<\\/td>`));
-      const v = c && text(c[1]).replace(/[$,]/g, '').match(/^[\d.]+/);
-      return v ? Number(v[0]) : undefined;
-    };
-    let model = text(name[1]);
-    let setting: string | undefined;
-    let harness: string | undefined;
-    // "GPT-5 (High) Agent": the model inside MathArena's agent scaffold
-    if (/\sAgent$/.test(model)) {
-      harness = 'MathArena agent';
-      model = model.replace(/\s+Agent$/, '');
-    }
-    // "Kimi K3 (Think)": MathArena's label for thinking mode
-    const think = model.match(/\s*\(Think\)$/i);
-    if (think) {
-      setting = 'thinking';
-      model = model.slice(0, think.index);
-    }
-    const score = Number(pct[1]);
-    const metrics: Record<string, number> = {};
-    // "100.00% ± 0.00%": a 95% normal-approximation interval, kept within 0 to 100
-    const ci = text(acc[2]).match(/±\s*([\d.]+)%/);
-    if (ci) Object.assign(metrics, { ciLow: Math.max(0, +(score - Number(ci[1])).toFixed(2)), ciHigh: Math.min(100, +(score + Number(ci[1])).toFixed(2)) });
-    // "Average time taken per answer", such as "1m 50s" or "118m 13s"; "—" when not recorded
-    const tds = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => text(c[1]));
-    const time = timeCol >= 0 && tds.length === head.length ? tds[timeCol].match(/^(?:(\d+)h\s*)?(?:(\d+)m\s*)?(?:(\d+(?:\.\d+)?)s)?$/) : null;
-    if (time && time[0]) metrics.latency = 3600 * Number(time[1] ?? 0) + 60 * Number(time[2] ?? 0) + Number(time[3] ?? 0);
-    const column = (label: string) => tds.length === head.length ? tds[head.indexOf(label)] : undefined;
-    const parameterCount = (label: string) => {
-      const value = column(label);
-      return value && /^\d+(?:\.\d+)?$/.test(value) ? Number(value) : undefined;
-    };
-    const activeParams = parameterCount('Active Parameters');
-    if (activeParams !== undefined) metrics.activeParams = activeParams;
-    const openMark = column('Open');
-    const href = tr.match(/<a class="model-link"[^>]*href="([^"]+)"/)?.[1];
-    rows.push({
-      model,
-      score,
-      setting,
-      harness,
-      open: openMark?.includes('✔') ? true : openMark?.includes('❌') ? false : undefined,
-      params: parameterCount('Parameters'),
-      link: href?.startsWith('/models/') ? new URL(href, 'https://matharena.ai').href : undefined,
-      low: ci ? +(score - Number(ci[1])).toFixed(2) : undefined,
-      high: ci ? +(score + Number(ci[1])).toFixed(2) : undefined,
-      cost: cell('cost'),
-      tokens: cell('tokens'),
-      metrics: Object.keys(metrics).length ? metrics : undefined,
-    });
-  }
-  if (!rows.length) throw new Error(`no rows in ${comp}`);
-  return rows;
-}
 
 /** MathArena's spellings that the shared resolver cannot place; every MathArena importer uses these. */
 export const MATHARENA_ALIASES: Record<string, string> = {

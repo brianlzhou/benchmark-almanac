@@ -8,6 +8,15 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2512.21373";
 const board: Leaderboard = {
   benchmark: "ainsteinbench",
+  parts: {
+    hard: { name: 'Hard', group: 'Difficulty' },
+    medium: { name: 'Medium', group: 'Difficulty' },
+    easy: { name: 'Easy', group: 'Difficulty' },
+    NR: { name: 'Numerical relativity', group: 'Domain' },
+    QI: { name: 'Quantum information', group: 'Domain' },
+    MD: { name: 'Molecular dynamics', group: 'Domain' },
+    QC: { name: 'Quantum chemistry', group: 'Domain' },
+  },
   url: "https://arxiv.org/html/2512.21373",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

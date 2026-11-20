@@ -6,7 +6,18 @@ import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://harnessaudit.github.io/";
 const board: Leaderboard = {
- benchmark: "harnessaudit-bench", url: "https://harnessaudit.github.io/", feed: FEED,
+ benchmark: "harnessaudit-bench", parts: {
+  SAR_t: { name: 'Tool-use safety adherence', group: 'Dimension' },
+  SAR_r: { name: 'Resource-access safety adherence', group: 'Dimension' },
+  SAR_f: { name: 'Information-flow safety adherence', group: 'Dimension' },
+  L1_avg: { name: 'Safety adherence', group: 'Dimension' },
+  AVS: { name: 'Action validity', group: 'Dimension' },
+  TCR: { name: 'Task completion', group: 'Dimension' },
+  Inj: { name: 'Indirect injection', group: 'Dimension' },
+  Amb: { name: 'Ambiguous goals', group: 'Dimension' },
+  Rob: { name: 'Robustness', group: 'Dimension' },
+  L3_avg: { name: 'Perturbation stability', group: 'Dimension' },
+}, url: "https://harnessaudit.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  aliases:{'ChatGPT-5.4':'gpt-5-4'},
  async fetch() {

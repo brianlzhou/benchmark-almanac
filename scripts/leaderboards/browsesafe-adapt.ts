@@ -4,6 +4,10 @@ import { fetchJson } from '../lib/util.ts';
 const FEED='https://browsesafe.perplexity.ai/data/leaderboard.json';
 const board:Leaderboard={
  benchmark:"browsesafe-adapt", url:'https://browsesafe.perplexity.ai/', feed:FEED,
+ parts: {
+   state: { name: 'State', group: 'Task type' },
+   answer: { name: 'Answer', group: 'Task type' },
+ },
  terms:'Public static results from Perplexity. The repository is MIT licensed. The almanac credits and links the source.',
  async fetch(){
  const data=await fetchJson<{boards:{id:string;rows:{model:string;[key:string]:unknown}[]}[]}>(FEED);

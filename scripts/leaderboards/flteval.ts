@@ -8,7 +8,7 @@ import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://mistral.ai/news/leanstral/";
 const board: Leaderboard = {
- benchmark: "flteval",
+ benchmark: "flteval", measures: { 'pass@2': 'pass-2', 'pass@4': 'pass-4', 'pass@8': 'pass-8', 'pass@16': 'pass-16' },
  costPer: 'run',
  url: "https://mistral.ai/news/leanstral/",
  feed: FEED,

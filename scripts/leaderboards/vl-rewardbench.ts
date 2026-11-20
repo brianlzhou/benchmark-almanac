@@ -5,6 +5,11 @@ const FEED = "https://arxiv.org/html/2411.17451";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "vl-rewardbench",
+  parts: {
+    general: { name: 'General', group: 'Task type' },
+    hallucination: { name: 'Hallucination', group: 'Task type' },
+    reasoning: { name: 'Reasoning', group: 'Task type' },
+  },
   url: "https://vl-rewardbench.github.io/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

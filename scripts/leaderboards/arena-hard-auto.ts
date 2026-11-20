@@ -1,6 +1,6 @@
 // Arena-Hard v0.1's archived rankings, read from the maintained repository's main branch. The first
 // console block gives style-controlled win rates. The second gives original v0.1 win rates, used as the score.
-// Style-controlled win rate remains a secondary metric. Tokens and intervals belong to the original ranking.
+// Keep the original bounds and the separate style-controlled win rate, bounds and token count.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 const FEED = 'https://raw.githubusercontent.com/Arena-OSS/arena-hard-auto/main/misc/past_leaderboards.md';
@@ -20,7 +20,16 @@ const board: Leaderboard = {
     if (!rows.length) throw new Error('No archived results');
     return rows.filter(r => r.setting === 'v0.1 original').map(r => {
       const controlled = rows.find(x => x.model.toLowerCase() === r.model.toLowerCase() && x.setting === 'v0.1 style-controlled');
-      return {...r, setting: undefined, metrics: {...r.metrics, ...(controlled ? {styleControlledWinRate: controlled.score} : {})}};
+      const metrics = { ...r.metrics };
+      if (controlled) {
+        metrics.styleControlledWinRate = controlled.score;
+        if (controlled.metrics) {
+          metrics.styleControlledLow = controlled.metrics.ciLow;
+          metrics.styleControlledHigh = controlled.metrics.ciHigh;
+        }
+        if (controlled.tokens !== undefined) metrics.styleControlledTokens = controlled.tokens;
+      }
+      return { ...r, setting: undefined, low: metrics.ciLow, high: metrics.ciHigh, metrics };
     });
   },
 };

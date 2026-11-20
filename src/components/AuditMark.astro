@@ -1,0 +1,67 @@
+---
+// The mark for a data audit status: a check for a pass, a triangle for a warning, a cross for a problem and an "i"
+// for a note. Each status has its own shape as well as its color (--status-good, --status-warn, --status-bad), and
+// pages always print the status word beside it, so color is never the only cue.
+//
+// The shapes are drawn once per page (<AuditMark defs />) and each mark points at one, so a page with hundreds of
+// marks stays small. The styles are global for the same reason: no scoping attribute on every mark.
+import type { AuditStatus } from '../lib/bench-audit.ts';
+
+interface Props {
+  st?: AuditStatus;
+  size?: number;
+  /** Draw the four shapes for the page. Put this once before the first mark. */
+  defs?: boolean;
+}
+const { st = 'info', size = 14, defs = false } = Astro.props;
+---
+
+{
+  defs ? (
+    <svg class="am-defs" width="0" height="0" aria-hidden="true">
+      <symbol id="am-pass" viewBox="0 0 14 14">
+        <circle cx="7" cy="7" r="6.5" fill="currentColor" />
+        <path d="M4.1 7.3l2 2 3.9-4.3" fill="none" stroke="var(--bg)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="am-warn" viewBox="0 0 14 14">
+        <path d="M7 1.1l6.2 11H.8z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+        <path d="M7 5.2v3M7 10.2v.1" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="am-fail" viewBox="0 0 14 14">
+        <circle cx="7" cy="7" r="6.5" fill="currentColor" />
+        <path d="M4.8 4.8l4.4 4.4M9.2 4.8l-4.4 4.4" stroke="var(--bg)" stroke-width="1.6" stroke-linecap="round" />
+      </symbol>
+      <symbol id="am-info" viewBox="0 0 14 14">
+        <circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.2" />
+        <path d="M7 6.3v3.6M7 4.2v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </symbol>
+    </svg>
+  ) : (
+    <svg class={`am am-${st}`} width={size} height={size} aria-hidden="true"><use href={`#am-${st}`} /></svg>
+  )
+}
+
+<style is:global>
+  .am-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  .am {
+    flex: none;
+    display: inline-block;
+  }
+  .am-pass {
+    color: var(--status-good);
+  }
+  .am-warn {
+    color: var(--status-warn);
+  }
+  .am-fail {
+    color: var(--status-bad);
+  }
+  .am-info {
+    color: var(--ink-4);
+  }
+</style>

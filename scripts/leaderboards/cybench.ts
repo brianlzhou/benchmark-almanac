@@ -34,7 +34,11 @@ const board: Leaderboard = {
       if (!model || !r['End-to-End % Solved'] || !Number.isFinite(score)) continue;
       const count = Number(r.Count);
       if (count !== 40) continue;
-      rows.push({ model, score });
+      const metrics: Record<string, number> = { tasks: count };
+      for (const key of ['Flag Success Count', 'Subtask Challenge Count', 'Subtask-Guided # Solved', 'Subtask-Guided % Solved', 'Sum of Subtask Run Scores', 'Subtasks % Solved']) {
+        if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
+      }
+      rows.push({ model, score, metrics });
     }
     return rows;
   },

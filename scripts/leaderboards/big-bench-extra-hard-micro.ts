@@ -8,6 +8,9 @@ import bbeh from './big-bench-extra-hard.ts';
 
 const board: Leaderboard = {
   benchmark: 'big-bench-extra-hard-micro',
+  parts: {
+    mini: { name: 'Mini', group: 'Split' },
+  },
   url: bbeh.url,
   feed: bbeh.feed,
   terms: bbeh.terms,

@@ -7,6 +7,19 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://mme-realworld.github.io/home_page.html";
 const board: Leaderboard = {
  benchmark: "mme-realworld",
+ parts: {
+   perception: { name: 'Perception', group: 'Task type' },
+   reasoning: { name: 'Reasoning', group: 'Task type' },
+   perceptionOCR: { name: 'OCR perception', group: 'Task type' },
+   perceptionRS: { name: 'Remote sensing perception', group: 'Task type' },
+   perceptionAD: { name: 'Autonomous driving perception', group: 'Task type' },
+   reasoningOCR: { name: 'OCR reasoning', group: 'Task type' },
+   reasoningAD: { name: 'Autonomous driving reasoning', group: 'Task type' },
+   perceptionDT: { name: 'Diagram and table perception', group: 'Task type' },
+   perceptionMO: { name: 'Monitoring perception', group: 'Task type' },
+   reasoningDT: { name: 'Diagram and table reasoning', group: 'Task type' },
+   reasoningMO: { name: 'Monitoring reasoning', group: 'Task type' },
+ },
  url: "https://mme-realworld.github.io/home_page.html",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

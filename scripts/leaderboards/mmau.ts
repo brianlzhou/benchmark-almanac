@@ -16,7 +16,10 @@ export const MMAU_TERMS = 'JSON files on the MMAU GitHub Pages site that the pag
 
 interface Entry {
   info: { name: string; type?: string; size?: string; link?: string };
-  Avg?: { 'Test-mini'?: string; Test?: string };
+  Avg?: Record<string, string>;
+  Sound?: Record<string, string>;
+  Music?: Record<string, string>;
+  Speech?: Record<string, string>;
 }
 
 /** Rows of one MMAU leaderboard file, scored by Avg test-mini accuracy. */
@@ -31,13 +34,23 @@ export async function mmauRows(file: string): Promise<LeaderboardRow[]> {
     if (score === undefined) continue;
     // "Gemma 3n" appears once per size ("2B", "4B"). Gemma 3n names its sizes E2B and E4B
     const gemma = /^Gemma 3n$/i.test(e.info.name.trim()) && /^\d+B$/i.test(e.info.size ?? '');
-    rows.push({ open: ['open_source','open_access','open'].includes(e.info.type ?? '') ? true : ['closed','proprietary'].includes(e.info.type ?? '') ? false : undefined, params: /^(\d+(?:\.\d+)?)[BM]$/i.test(e.info.size ?? '') && !/^Gemma 3n$/i.test(e.info.name.trim()) ? parseFloat(e.info.size!) * (/M$/i.test(e.info.size!) ? 0.001 : 1) : undefined, link: e.info.link?.startsWith('https://github.com/') ? e.info.link : undefined, model: base ? 'Qwen2-Audio (base)' : gemma ? `Gemma 3n E${e.info.size}` : e.info.name.trim(), score });
+    const metrics: Record<string, number> = {};
+    for (const category of ['Avg', 'Sound', 'Music', 'Speech'] as const) {
+      for (const split of ['Test-mini', 'Test']) {
+        const value = num(e[category]?.[split]);
+        if (value !== undefined && !(category === 'Avg' && split === 'Test-mini')) metrics[category + '_' + split] = value;
+      }
+    }
+    rows.push({ metrics, open: ['open_source','open_access','open'].includes(e.info.type ?? '') ? true : ['closed','proprietary'].includes(e.info.type ?? '') ? false : undefined, params: /^(\d+(?:\.\d+)?)[BM]$/i.test(e.info.size ?? '') && !/^Gemma 3n$/i.test(e.info.name.trim()) ? parseFloat(e.info.size!) * (/M$/i.test(e.info.size!) ? 0.001 : 1) : undefined, link: e.info.link?.startsWith('https://github.com/') ? e.info.link : undefined, model: base ? 'Qwen2-Audio (base)' : gemma ? `Gemma 3n E${e.info.size}` : e.info.name.trim(), score });
   }
   return rows;
 }
 
 const board: Leaderboard = {
   benchmark: 'mmau',
+  parts: {
+    'Sound_Test-mini': 'Sound', 'Music_Test-mini': 'Music', 'Speech_Test-mini': 'Speech',
+  },
   url: MMAU_PAGE,
   feed: `${MMAU_PAGE}leaderboard_data.json (Avg, test-mini)`,
   terms: MMAU_TERMS,

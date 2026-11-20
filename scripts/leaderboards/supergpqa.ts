@@ -1,6 +1,6 @@
 // SuperGPQA (ByteDance Seed and M-A-P). supergpqa.github.io is a static single-page app whose results ship
 // inside its script bundle: one object per board, each model's entry written as JSON.parse('{...}') with
-// overall and per-difficulty accuracy (0 to 1) under the prompt setting. The chat-model board is zero-shot
+// overall, subject and per-difficulty accuracy (0 to 1) under the prompt setting. The chat-model board is zero-shot
 // and the base-model board is five-shot. The importer finds the bundle from the page, reads every entry that
 // has a zero-shot or five-shot block (as data, never run) and keeps its overall accuracy × 100.
 // Base checkpoints get an explicit suffix so the resolver cannot assign their scores to instruction models.
@@ -12,6 +12,11 @@ const SITE = 'https://supergpqa.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'supergpqa',
+  parts: {
+    hard: { name: 'Hard', group: 'Difficulty' },
+    middle: { name: 'Middle', group: 'Difficulty' },
+    easy: { name: 'Easy', group: 'Difficulty' },
+  },
   url: SITE,
   feed: `${SITE}assets/index-<hash>.js (zero-shot and five-shot results in the bundle)`,
   terms: 'Static GitHub Pages site with no stated terms or robots rules; the SuperGPQA repository publishes the evaluation code and results.',
@@ -52,6 +57,7 @@ const board: Leaderboard = {
     if (!src) throw new Error('bundle not found on the page');
     const js = await fetchText(new URL(src, SITE).href);
     const rows: LeaderboardRow[] = [];
+    const parts = { ...board.parts };
     for (const m of js.matchAll(/"([^"]{2,80})":JSON\.parse\('(\{"(?:zero|five)-shot"[^']*)'\)/g)) {
       const results = JSON.parse(m[2]) as Record<string, Record<string, unknown>>;
       for (const shot of ['zero-shot', 'five-shot']) {
@@ -65,10 +71,23 @@ const board: Leaderboard = {
           const value = result[`accuracy_${difficulty}`];
           if (typeof value === 'number') metrics[difficulty] = value * 100;
         }
+        if (typeof result.errors === 'number') metrics.errors = result.errors;
+        if (typeof result.miss === 'number') metrics.miss = result.miss;
+        const categories = result.categories as Record<string, { correct: number; total: number; error: number; miss: number }> | undefined;
+        for (const [path, counts] of Object.entries(categories ?? {})) {
+          if (!(counts.total > 0) || !Number.isFinite(counts.correct)) continue;
+          metrics[path] = 100 * counts.correct / counts.total;
+          const levels = path.split('/');
+          parts[path] = { name: levels.pop()!, group: levels.join(' / ') };
+          for (const [field, key] of [['total', 'questions'], ['correct', 'correct'], ['error', 'errorCount'], ['miss', 'missingCount']] as const) {
+            if (Number.isFinite(counts[field])) metrics[key] = (metrics[key] ?? 0) + counts[field];
+          }
+        }
         rows.push({ model: base ? `${m[1]} (base)` : effort ? effort[1] : m[1], setting: shot === 'five-shot' ? shot : effort?.[2], score: result.accuracy * 100, metrics });
       }
     }
     if (!rows.length) throw new Error('no results in the bundle');
+    board.parts = parts;
     return rows;
   },
 };

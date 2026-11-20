@@ -8,6 +8,13 @@ const FEED = "https://raw.githubusercontent.com/moonshotai/Kimi-Audio/HEAD/READM
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "kimi-audio-speech-conversation-moonshot",
+  parts: {
+    'Speed Control': { name: 'Speed control', group: 'Dimension' },
+    'Accent Control': { name: 'Accent control', group: 'Dimension' },
+    'Emotion Control': { name: 'Emotion control', group: 'Dimension' },
+    Empathy: { name: 'Empathy', group: 'Dimension' },
+    'Style Control': { name: 'Style control', group: 'Dimension' },
+  },
   url: "https://github.com/moonshotai/Kimi-Audio",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

@@ -5,7 +5,7 @@
 // rows don't each carry Astro's scoping attributes.
 import ModelName from './ModelName.astro';
 import { benchById, LEADERBOARDS } from '../lib/data.ts';
-import { claimNote, gapText, type ClaimPair } from '../lib/claims.ts';
+import { claimNote, gapText, pairMeasure, type ClaimPair } from '../lib/claims.ts';
 import { score as fmt, fullDate } from '../lib/format.ts';
 
 interface Props {
@@ -47,8 +47,18 @@ const hasNotes = pairs.some((p) => claimNote(p));
             data-gap={filter ? (p.same ? 'same' : p.gap > 0 ? 'higher' : 'lower') : undefined}
             data-text={filter ? (b?.aliases ?? []).join(' ').toLowerCase() || undefined : undefined}
           >
-            {model && <td><ModelName id={p.model} /></td>}
-            {benchmark && <td><a href={`/benchmarks/${p.benchmark}/`}>{b?.name ?? p.benchmark}</a></td>}
+            {model && (
+              <td>
+                <ModelName id={p.model} />
+                {!benchmark && pairMeasure(p) && <span class="ct-ms">{pairMeasure(p)}</span>}
+              </td>
+            )}
+            {benchmark && (
+              <td>
+                <a href={`/benchmarks/${p.benchmark}/`}>{b?.name ?? p.benchmark}</a>
+                {pairMeasure(p) && <span class="ct-ms">{pairMeasure(p)}</span>}
+              </td>
+            )}
             <td class="r" data-v={r2(p.claim.value)}>
               <a href={p.claim.card.url ?? `/cards/#${p.claim.card.id}`} title={`${p.claim.card.title ?? 'Lab document'}, ${fullDate(p.claim.card.date)}`}>{fmt(p.claim.value, p.unit)}</a>
               {p.claim.asWritten && <small>{p.claim.asWritten}</small>}
@@ -67,6 +77,16 @@ const hasNotes = pairs.some((p) => claimNote(p));
 </div>
 
 <style is:global>
+  /* the measure a row compares, when it isn't the benchmark's headline */
+  .ct-ms {
+    margin-left: 8px;
+    font-size: 12px;
+    color: var(--ink-3);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 0 7px;
+    white-space: nowrap;
+  }
   .ct td.r a {
     color: var(--ink);
     text-decoration: none;

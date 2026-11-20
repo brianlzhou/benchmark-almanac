@@ -10,6 +10,17 @@ const FEED = 'https://huggingface.co/spaces/DAGroup-PKU/RBench-Leaderboard/resol
 
 const board: Leaderboard = {
   benchmark: 'rbench',
+  parts: {
+    'Common Manipulation': { name: 'Common manipulation', group: 'Task type' },
+    'Spatial Relationship': { name: 'Spatial relationship', group: 'Task type' },
+    'Multi-entity Collaboration': { name: 'Multi entity collaboration', group: 'Task type' },
+    'Long-horizon Planning': { name: 'Long horizon planning', group: 'Task type' },
+    'Visual Reasoning': { name: 'Visual reasoning', group: 'Task type' },
+    'Single Arm': { name: 'Single arm', group: 'Category' },
+    'Dual Arm': { name: 'Dual arm', group: 'Category' },
+    'Quadruped Robot': { name: 'Quadruped robot', group: 'Category' },
+    'Humanoid Robot': { name: 'Humanoid robot', group: 'Category' },
+  },
   url: 'https://huggingface.co/spaces/DAGroup-PKU/RBench-Leaderboard',
   feed: `${FEED} (avg)`,
   terms: 'File in a public Hugging Face Space licensed MIT.',

@@ -4,7 +4,15 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://video-holmes.github.io/Page.github.io/";
 const board: Leaderboard = {
-  benchmark: "video-holmes", url: "https://video-holmes.github.io/Page.github.io/", feed: FEED,
+  benchmark: "video-holmes", parts: {
+  SR: { name: 'Social reasoning', group: 'Task type' },
+  IMC: { name: 'Intention and motive chaining', group: 'Task type' },
+  TCI: { name: 'Temporal causal inference', group: 'Task type' },
+  TA: { name: 'Timeline analysis', group: 'Task type' },
+  MHR: { name: 'Multimodal hint reasoning', group: 'Task type' },
+  PAR: { name: 'Physical anomaly reasoning', group: 'Task type' },
+  CTI: { name: 'Core theme inference', group: 'Task type' },
+}, url: "https://video-holmes.github.io/Page.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

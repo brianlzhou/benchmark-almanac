@@ -25,6 +25,11 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mobileworld',
+  parts: {
+    guiOnly: { name: 'GUI only', group: 'Task type' },
+    userInteraction: { name: 'User interaction', group: 'Task type' },
+    mcp: { name: 'MCP', group: 'Task type' },
+  },
   url: 'https://tongyi-mai.github.io/MobileWorld/#leaderboard',
   feed: `${FEED} (Overall success rate, weighted by published task counts)`,
   terms: 'JSON file on the MobileWorld GitHub Pages site that the page loads; the MobileWorld repository is Apache-2.0.',

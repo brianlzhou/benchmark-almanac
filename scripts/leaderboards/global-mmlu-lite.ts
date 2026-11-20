@@ -5,8 +5,11 @@
 import type { Leaderboard } from './types.ts';
 import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
+const tasks = ['Arabic', 'Bengali', 'Burmese', 'Chinese', 'Culturally Agnostic', 'Culturally Sensitive', 'English', 'French', 'German', 'Hindi', 'Indonesian', 'Italian', 'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Swahili', 'Yoruba'];
+
 const board: Leaderboard = {
   benchmark: 'global-mmlu-lite',
+  parts: Object.fromEntries(tasks.map(name => [name, { name, group: name.startsWith('Culturally') ? 'Cultural sensitivity' : 'Language' }])),
   host: 'Kaggle',
   url: 'https://www.kaggle.com/benchmarks/cohere-labs/global-mmlu-lite',
   feed: kaggleFeed('cohere-labs', 'global-mmlu-lite'),
@@ -14,6 +17,6 @@ const board: Leaderboard = {
   aliases: {
     'Command A': 'cohere-command-a',
   },
-  fetch: () => kaggleRows('cohere-labs', 'global-mmlu-lite', 'Average', 100),
+  fetch: () => kaggleRows('cohere-labs', 'global-mmlu-lite', 'Average', 100, Object.fromEntries(tasks.map(task => [task, { task, scale: 100 }]))),
 };
 export default board;

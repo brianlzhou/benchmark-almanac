@@ -18,6 +18,15 @@ export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
     if (r.stderr?.trim() && Number.isFinite(Number(r.stderr))) metrics.standardError = Number(r.stderr) * 100;
     if (metrics.standardError !== undefined) metrics.stderr = metrics.standardError;
     if (r.mean_score?.trim() && Number.isFinite(Number(r.mean_score))) metrics.meanScore = Number(r.mean_score) * 100;
+    for (const match of (r.Scores ?? '').matchAll(/(?:^|[,;]\s*)([^,:;]+):\s*([\d.]+)(?:±([\d.]+))?/g)) {
+      const key = match[1].trim();
+      metrics['scorer:' + key] = Number(match[2]) * 100;
+      if (match[3]) metrics['scorerSpread:' + key] = Number(match[3]) * 100;
+    }
+    for (const key of ['Training compute (FLOP)', 'Training dataset size (datapoints)', 'Training compute cost (2023 USD)', 'Finetune compute (FLOP)', 'Hardware quantity', 'Citations', 'Epochs', 'Batch size']) {
+      if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
+    }
+    if (r['Manual evaluation'] === 'True') metrics.manualEvaluation = 1;
     const setting = [effort?.[1], r['task version'] ? `task version ${r['task version']}` : undefined].filter(Boolean).join('; ') || undefined;
     const access = r['Model accessibility'];
     const size = Number(r.Parameters);
@@ -27,7 +36,7 @@ export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
     rows.push({ model, score: score * 100, setting, harness: 'Epoch',
       open: access?.startsWith('Open weights') ? true : ['API access','Hosted access (no API)','Unreleased'].includes(access) ? false : undefined,
       params: r.Parameters?.trim() && Number.isFinite(size) && size > 0 ? size / 1e9 : undefined,
-      link: r.logs?.startsWith('https://') ? r.logs : undefined, license, date: r.started_at?.slice(0, 10) || undefined, metrics });
+      link: [r['log viewer'], r.logs].find(url => url?.startsWith('https://')), license, date: r.started_at?.slice(0, 10) || undefined, metrics });
   }
   if (!rows.length) throw new Error(`Epoch run export has no rows for ${task}`);
   return rows;

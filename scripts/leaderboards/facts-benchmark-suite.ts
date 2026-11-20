@@ -7,6 +7,12 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'facts-benchmark-suite',
+  parts: {
+    grounding: { name: 'Grounding', group: 'Task type' },
+    multimodal: { name: 'Multimodal', group: 'Task type' },
+    search: { name: 'Search', group: 'Task type' },
+    parametric: { name: 'Parametric', group: 'Task type' },
+  },
   url: 'https://www.kaggle.com/benchmarks/google/facts',
   feed: kaggleFeed('google', 'facts'),
   terms: KAGGLE_TERMS,

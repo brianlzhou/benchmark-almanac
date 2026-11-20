@@ -7,10 +7,14 @@ import { CLAW_ALIASES, CLAW_FEED, CLAW_SITE, CLAW_TERMS, clawRows } from './claw
 
 const board: Leaderboard = {
   benchmark: 'claw-eval-pass-3',
+  parts: {
+    general_pass_all_3: { name: 'General', group: 'Task family' },
+    multi_turn_pass_all_3: { name: 'Multi-turn', group: 'Task family' },
+  },
   url: CLAW_SITE,
   feed: `${CLAW_FEED} (benchmarkData pass_all_3_rate)`,
   terms: CLAW_TERMS,
   aliases: CLAW_ALIASES,
-  fetch: () => clawRows('general', 'pass_all_3_rate', 1, true),
+  fetch: () => clawRows('general', 'pass_all_3_rate', 1, true, board),
 };
 export default board;

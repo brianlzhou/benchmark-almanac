@@ -1,36 +1,52 @@
 ---
-// An arena's categories in one switch: a list of every category with its leader, and the top ten of the one
-// picked, each with how far the model moved from its overall rank. "Show all" adds the rest of that category's
-// board. On a phone the list becomes a menu. The URL keeps the choice (?cat=coding). The ratings come from
-// src/lib/arena-categories.ts.
+// An arena's categories, or a benchmark's parts, in one switch: a list of every category with its leader, and the
+// top ten of the one picked, each with how far the model moved from its overall rank. "Show all" adds the rest of
+// that category's board. On a phone the list becomes a menu. The URL keeps the choice (?cat=coding). Arena's
+// ratings come from src/lib/arena-categories.ts, and the parts other boards score (a subject, a language, a user
+// group) from src/lib/board-parts.ts.
 import ModelName from './ModelName.astro';
 import LabMark from './LabMark.astro';
 import { modelById } from '../lib/data.ts';
 import { CAT_GROUPS, CAT_NOTE, inlineName, type CatGroup, type CatView } from '../lib/arena-categories.ts';
+import { MEASURE_GROUP, type PartView } from '../lib/board-parts.ts';
 import { score as fmt } from '../lib/format.ts';
 import type { Score } from '../lib/types.ts';
 
 interface Props {
+  /** CatViews from src/lib/arena-categories.ts, or PartViews from src/lib/board-parts.ts. */
   views: CatView[];
   /** The page's overall board, best first: ranks there are what the arrows compare against. */
   overall: Score[];
   unit: string;
+  /** Who publishes the board: "Arena", or a benchmark's makers. */
   arena: string;
+  /** An arena's categories (rated on one kind of prompt's votes) or a benchmark's parts (scored on a slice of its tasks). */
+  kind?: 'arena' | 'parts';
 }
-const { views, overall, unit, arena } = Astro.props;
+const { views, overall, unit, arena, kind = 'arena' } = Astro.props;
+const parts = kind === 'parts';
+const unitOf = (v: CatView) => (v as Partial<PartView>).unit || unit;
+const noteOf = (v: CatView) => (parts ? (v as Partial<PartView>).note : CAT_NOTE[v.key]);
+// a part keeps its name as the board gives it, since parts are often proper names (Python, Teen)
+const inline = (v: CatView) => (parts ? v.name : inlineName(v));
 const TOP = 10;
 const overallRank = new Map(overall.map((x, i) => [x.model, i + 1]));
-const groups = CAT_GROUPS.map((g) => ({ g, vs: views.filter((v) => v.group === g) })).filter((x) => x.vs.length);
+const groupOrder: string[] = parts ? [...new Set(views.map((v) => v.group))] : CAT_GROUPS;
+const groups = groupOrder.map((g) => ({ g, vs: views.filter((v) => v.group === g) })).filter((x) => x.vs.length);
 const first = views[0].key;
 const count = (n: number, one: string, many = `${one}s`) => `${n.toLocaleString('en-US')} ${n === 1 ? one : many}`;
 const and = (xs: string[]) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
 const nameOf = (id: string) => modelById.get(id)?.name ?? id;
 // the categories proper, and the other ways Arena ranks the same votes (ties left out, factuality weighted)
-const ranked = views.filter((v) => v.group !== 'Method');
-const methods = views.filter((v) => v.group === 'Method');
+const ranked = views.filter((v) => parts || v.group !== 'Method');
+const methods = views.filter((v) => !parts && v.group === 'Method');
 // one view needs no switch: Search Arena has only its factuality weighted ranking
 const single = views.length === 1;
-const title = ranked.length ? 'Rankings by category' : methods.length === 1 && methods[0].key === 'factuality' ? 'Ranked with factuality weighted in' : 'Another way to rank';
+// a board's other measures (a partial-credit score beside a pass rate) share the switch with its parts
+const nMeasures = parts ? views.filter((v) => (v as Partial<PartView>).kind === 'measure').length : 0;
+const nPartViews = ranked.length - nMeasures;
+const onlyMeasures = parts && nPartViews === 0;
+const title = onlyMeasures ? 'Other ways to score it' : parts ? 'Rankings by part' : ranked.length ? 'Rankings by category' : methods.length === 1 && methods[0].key === 'factuality' ? 'Ranked with factuality weighted in' : 'Another way to rank';
 // the finding: who leads the most categories (methods aside, since they rank the same votes another way)
 const leads = new Map<string, CatView[]>();
 for (const v of ranked) leads.set(v.board[0].model, [...(leads.get(v.board[0].model) ?? []), v]);
@@ -39,15 +55,27 @@ const [top, topVs] = byLead[0] ?? [];
 const finding = !top
   ? ''
   : leads.size === 1
-    ? `${nameOf(top)} leads ${ranked.length === 2 ? 'both' : 'every one of them'}.`
+    ? `${nameOf(top)} leads ${ranked.length === 1 ? 'it' : ranked.length === 2 ? 'both' : 'every one of them'}.`
     : ranked.length === 2
-      ? `${nameOf(top)} leads ${inlineName(topVs![0])} and ${nameOf(byLead[1][0])} leads ${inlineName(byLead[1][1][0])}.`
+      ? `${nameOf(top)} leads ${inline(topVs![0])} and ${nameOf(byLead[1][0])} leads ${inline(byLead[1][1][0])}.`
       : leads.size === 2
         ? `${nameOf(top)} leads ${topVs!.length} of them, and ${nameOf(byLead[1][0])} leads the other ${byLead[1][1].length === 1 ? 'one' : byLead[1][1].length}.`
         : `${nameOf(top)} leads ${topVs!.length} of them, and ${count(leads.size - 1, 'other model')} lead the rest.`;
-const listed =
-  ranked.length <= 3 ? `: ${and(ranked.map(inlineName))}. Each is rated on the votes for one kind of prompt.` : `, each rated on the votes for one kind of prompt, such as ${and(ranked.slice(0, 3).map(inlineName))}.`;
+// a board's parts, named by their groups where it has several ("acuity, user and context"), since part names are
+// the board's own and often capitalized
+const partGroups = groups.map(({ g }) => g).filter((g) => g && g !== MEASURE_GROUP);
+const partOnly = ranked.filter((v) => (v as Partial<PartView>).kind !== 'measure');
+const listed = parts
+  ? partGroups.length >= 2
+    ? ` in ${partGroups.length} groups: ${and(partGroups.map((g) => g.toLowerCase()))}. Each ranks models on one part of the test.`
+    : partOnly.length <= 3
+    ? `: ${and(partOnly.map(inline))}. Each ranks models on one part of the test.`
+    : `, each ranking models on one part of the test, such as ${and(partOnly.slice(0, 3).map(inline))}.`
+  : ranked.length <= 3
+    ? `: ${and(ranked.map(inline))}. Each is rated on the votes for one kind of prompt.`
+    : `, each rated on the votes for one kind of prompt, such as ${and(ranked.slice(0, 3).map(inline))}.`;
 const GROUP_NAME: Record<CatGroup, string> = { Task: 'Tasks', Language: 'Languages', Industry: 'Industries', Method: 'Other ways to rank' };
+const groupName = (g: string) => (parts ? g : GROUP_NAME[g as CatGroup]);
 const METHOD_PHRASE: Record<string, string> = { factuality: 'with factuality weighted in', exclude_ties: 'with ties left out' };
 const ARROWS = 'Arrows show how far a model moved from its overall rank among the models we track.';
 // The rows past the top ten wait behind "Show all", since Text alone has about 9,000 of them. Each model's name
@@ -55,14 +83,21 @@ const ARROWS = 'Arrows show how far a model moved from its overall rank among th
 // row is [the model's place in that template, score as shown, overall rank or 0].
 const restModels = [...new Set(views.flatMap((v) => v.board.slice(TOP).map((x) => x.model)))];
 const at = new Map(restModels.map((id, i) => [id, i]));
-const rest = (v: CatView) => JSON.stringify(v.board.slice(TOP).map((x) => [at.get(x.model), fmt(x.value, unit), overallRank.get(x.model) ?? 0])).replace(/</g, '\\u003c');
+const rest = (v: CatView) => JSON.stringify(v.board.slice(TOP).map((x) => [at.get(x.model), fmt(x.value, unitOf(v)), overallRank.get(x.model) ?? 0])).replace(/</g, '\\u003c');
 ---
 
 <section class="views cats" data-cats>
   <div class="sh">
     <h2>{title}</h2>
     {
-      ranked.length > 0 ? (
+      parts ? (
+        <p>
+          {onlyMeasures
+            ? `${arena.charAt(0).toUpperCase()}${arena.slice(1)} also reports ${and(ranked.map((v) => v.name))}, ${nMeasures === 1 ? 'another way' : 'other ways'} to score the whole test. Labs sometimes quote ${nMeasures === 1 ? 'it' : 'these'} instead of the headline. ${finding}`
+            : `We read ${count(nPartViews, 'part')}${nMeasures ? ` and ${count(nMeasures, 'other measure')}` : ''} from ${arena}${listed}`}{' '}
+          {!onlyMeasures && finding} {ARROWS}
+        </p>
+      ) : ranked.length > 0 ? (
         <p>
           We read {count(ranked.length, 'category', 'categories')} from {arena}{listed} One vote counts in every category its prompt fits. {finding}
           {methods.length > 0 && ` The list ends with ${methods.length === 1 ? 'another way' : methods.length === 2 ? 'two other ways' : `${methods.length} other ways`} ${arena} ranks the same votes.`} {ARROWS}
@@ -78,11 +113,11 @@ const rest = (v: CatView) => JSON.stringify(v.board.slice(TOP).map((x) => [at.ge
   <div class:list={['cg', { single }]}>
     {!single && (
       <label class="cpick">
-        <span>Category</span>
+        <span>{parts ? 'Part' : 'Category'}</span>
         <select data-cat-select>
           {
             groups.map(({ g, vs }) => (
-              <optgroup label={GROUP_NAME[g]}>
+              <optgroup label={groupName(g) || 'Parts'}>
                 {vs.map((v) => (
                   <option value={v.key} selected={v.key === first}>
                     {v.name}
@@ -95,11 +130,11 @@ const rest = (v: CatView) => JSON.stringify(v.board.slice(TOP).map((x) => [at.ge
       </label>
     )}
     {!single && (
-      <nav class="cl" aria-label="Categories">
+      <nav class="cl" aria-label={parts ? 'Parts' : 'Categories'}>
         {
           groups.map(({ g, vs }) => (
             <div class="cgp">
-              {groups.length > 1 && <h3>{GROUP_NAME[g]}</h3>}
+              {groups.length > 1 && groupName(g) && <h3>{groupName(g)}</h3>}
               {vs.map((v) => {
                 const lead = modelById.get(v.board[0].model);
                 return (
@@ -123,8 +158,8 @@ const rest = (v: CatView) => JSON.stringify(v.board.slice(TOP).map((x) => [at.ge
           <div class="cv" data-cat-view={v.key} hidden={v.key !== first}>
             {!single && <h3>{v.name}</h3>}
             <p class="cd">
-              {!single && CAT_NOTE[v.key] && `${CAT_NOTE[v.key]} `}
-              {count(v.board.length, 'model')} we track {v.board.length === 1 ? 'has' : 'have'} a rating here.
+              {(!single || parts) && noteOf(v) && `${noteOf(v)} `}
+              {count(v.board.length, 'model')} we track {v.board.length === 1 ? 'has' : 'have'} {parts ? 'a score' : 'a rating'} here.
             </p>
             <ol>
               {v.board.slice(0, TOP).map((x, i) => {
@@ -134,10 +169,10 @@ const rest = (v: CatView) => JSON.stringify(v.board.slice(TOP).map((x) => [at.ge
                   <li>
                     <span class="rk num">{i + 1}</span>
                     <ModelName id={x.model} size={15} />
-                    <span class:list={['mv', 'num', { up: move > 0, down: move < 0 }]} title={was ? `Number ${was} overall` : 'No overall rating'}>
+                    <span class:list={['mv', 'num', { up: move > 0, down: move < 0 }]} title={was ? `Number ${was} overall` : parts ? 'No overall score' : 'No overall rating'}>
                       {move > 0 ? `↑${move}` : move < 0 ? `↓${-move}` : ''}
                     </span>
-                    <span class="v num">{fmt(x.value, unit)}</span>
+                    <span class="v num">{fmt(x.value, unitOf(v))}</span>
                   </li>
                 );
               })}

@@ -1,0 +1,114 @@
+---
+// The facet filters for a list of benchmarks (src/lib/facets.ts): a "More filters" button that opens one dropdown per
+// facet, grouped by the part of an evaluation it describes. Each dropdown lets the reader pick several values, any of
+// which a row may match, and different facets narrow the list together. It sits inside a filter box
+// ([data-filter]) next to the other dropdowns, so the page's filter script reads it like them. Rows carry
+// facetAttrs(id). The panel opens by itself when the address already holds a facet filter.
+import Dropdown from './Dropdown.astro';
+import { FACETS, PARTS, FILTER_KEYS, facetOptions, facetsOf, taggedCount, isShownFacet } from '../lib/facets.ts';
+
+interface Props {
+  /** The benchmarks the list shows, each with the number of benchmarks its row stands for. */
+  items: { id: string; n?: number }[];
+}
+const { items } = Astro.props;
+const groups = PARTS.map((p) => ({
+  part: p,
+  facets: FACETS.filter((f) => f.part === p.id && isShownFacet(f.key))
+    .map((f) => ({ f, options: facetOptions(f.key, items).map((o, i) => (i === 0 ? { ...o, label: f.name } : o)) }))
+    .filter((x) => x.options.length > 1),
+})).filter((g) => g.facets.length);
+const untagged = items.filter((i) => !facetsOf(i.id)).length;
+---
+
+{
+  taggedCount > 0 && groups.length > 0 && (
+    <>
+      <button type="button" class="ffx-btn" aria-expanded="false" aria-controls="ffx-panel" data-ffx-btn>
+        More filters<span class="ffx-n" data-ffx-n />
+      </button>
+      <div class="ffx-panel" id="ffx-panel" data-ffx-panel hidden>
+        {groups.map(({ part, facets }) => (
+          <div class="ffx-group">
+            <span class="ffx-lab">{part.name}</span>
+            {facets.map(({ f, options }) => (
+              <Dropdown filterKey={FILTER_KEYS[f.key]} label={f.name} options={options} search={options.length > 14} wide={f.key === 'subject'} multiple />
+            ))}
+          </div>
+        ))}
+        <p class="ffx-note muted">
+          Facets describe each benchmark by a fixed list of values. <a href="/methodology/#facets">How we tag them</a>, or open a <a href="/views/">saved view</a>.
+          {untagged > 0 && ` ${untagged.toLocaleString('en-US')} benchmarks here are not tagged yet, and these filters leave them out.`}
+        </p>
+      </div>
+    </>
+  )
+}
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-ffx-btn]');
+  const panel = document.querySelector<HTMLElement>('[data-ffx-panel]');
+  const n = document.querySelector<HTMLElement>('[data-ffx-n]');
+  if (btn && panel) {
+    const selects = [...panel.querySelectorAll<HTMLSelectElement>('select')];
+    const count = () => {
+      const on = selects.filter((s) => [...s.selectedOptions].some((o) => o.value)).length;
+      if (n) n.textContent = on ? ` (${on})` : '';
+      return on;
+    };
+    const show = (open: boolean) => {
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+    };
+    btn.addEventListener('click', () => show(!!panel.hidden));
+    for (const s of selects) s.addEventListener('change', count);
+    // the filter script restores the address's filters and then fires "sync", so a shared link opens the panel
+    for (const s of selects)
+      s.addEventListener('sync', () => {
+        if (count()) show(true);
+      });
+  }
+</script>
+
+<style is:global>
+  .ffx-btn {
+    height: var(--ctl-h);
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: transparent;
+    color: var(--ink);
+    font: 500 13.5px/1 var(--sans);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .ffx-btn[aria-expanded='true'] {
+    background: var(--panel);
+  }
+  .ffx-panel {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    padding: 6px 0 4px;
+  }
+  .ffx-panel[hidden] {
+    display: none;
+  }
+  .ffx-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .ffx-lab {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-right: 2px;
+  }
+  .ffx-note {
+    flex-basis: 100%;
+    margin: 0;
+    font-size: 12.5px;
+  }
+</style>

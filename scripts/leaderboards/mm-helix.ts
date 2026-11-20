@@ -4,7 +4,11 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://mm-helix.github.io/";
 const board: Leaderboard = {
-  benchmark: "mm-helix", url: "https://mm-helix.github.io/", feed: FEED,
+  benchmark: "mm-helix", parts: {
+  Puzzles: { name: 'Puzzles', group: 'Task type' },
+  Algorithms: { name: 'Algorithms', group: 'Task type' },
+  Graphs: { name: 'Graphs', group: 'Task type' },
+}, url: "https://mm-helix.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

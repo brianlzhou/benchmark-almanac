@@ -4,7 +4,13 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://www.vals.ai/benchmarks/claimbench";
 const board: Leaderboard = {
-  benchmark: "vals-claimbench", url: "https://www.vals.ai/benchmarks/claimbench", feed: FEED,
+  benchmark: "vals-claimbench", parts: {
+  'Direct support': { name: 'Direct support', group: 'Category' },
+  'Subtle contradiction': { name: 'Subtle contradiction', group: 'Category' },
+  'Numeric discrepancy': { name: 'Numeric discrepancy', group: 'Category' },
+  'Missing evidence': { name: 'Missing evidence', group: 'Category' },
+  'Non-supporting citation': { name: 'Non-supporting citation', group: 'Category' },
+}, url: "https://www.vals.ai/benchmarks/claimbench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

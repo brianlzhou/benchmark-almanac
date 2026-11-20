@@ -5,7 +5,7 @@
 // by default on the site and are left out here.
 //
 // The site's table also shows Overall pass^2 to pass^4, kept here in `metrics` ("pass2".."pass4", %), and each
-// domain's "Avg Cost" per task; a row's cost is the mean of the three domains' costs when all three have one.
+// domain's pass scores and average cost per task. A row's cost is the mean of the three domains' costs when all three have one.
 //
 // Versions do not mix. "legacy_submissions" ran τ²-bench 0.x on the original tasks; "submissions" ran
 // release 1.0.x (τ³-bench), whose airline and retail tasks were fixed. So:
@@ -36,6 +36,7 @@ interface Submission {
   results: Record<string, Domain | undefined>;
   methodology?: {
     evaluation_date?: string;
+    user_simulator?: string;
     tau2_bench_version?: string;
     notes?: string;
     verification?: { details?: string };
@@ -68,6 +69,16 @@ export function overallExtras(s: Submission): Pick<LeaderboardRow, 'cost' | 'met
     const m = mean(domains.map((d) => d?.[`pass_${k}`]));
     if (m !== undefined) metrics[`pass${k}`] = m;
   }
+  for (const name of ['retail', 'airline', 'telecom']) {
+    const domain = s.results[name];
+    if (!domain) continue;
+    if (typeof domain.pass_1 === 'number') metrics[name] = domain.pass_1;
+    for (const k of [2, 3, 4] as const) {
+      const value = domain[`pass_${k}`];
+      if (typeof value === 'number') metrics[`${name}Pass${k}`] = value;
+    }
+    if (typeof domain.cost === 'number') metrics[`${name}CostUsd`] = domain.cost;
+  }
   const cost = mean(domains.map((d) => d?.cost));
   return { cost: cost && cost > 0 ? cost : undefined, metrics: Object.keys(metrics).length ? metrics : undefined };
 }
@@ -81,9 +92,13 @@ export function row(s: Submission, score: number): LeaderboardRow {
     submitter: s.submitting_organization,
     verified: /^Unverified submission\b/i.test(details) ? false : /^Verified evaluation\b/i.test(details) ? true : undefined,
     trials,
-    link: s.references?.find((r) => r.type === 'github' && r.url?.startsWith('https://github.com/'))?.url,
+    link: s.references?.find((r) => r.type === 'github' && r.url?.startsWith('https://github.com/'))?.url
+      ?? s.references?.find((r) => r.url?.startsWith('https://'))?.url,
     score,
-    setting: s.reasoning_effort?.toLowerCase() || undefined,
+    setting: [
+      s.reasoning_effort?.toLowerCase() || (/using extended thinking/i.test(s.methodology?.notes ?? '') ? 'extended thinking' : undefined),
+      s.methodology?.user_simulator ? `user simulator: ${s.methodology.user_simulator}` : undefined,
+    ].filter(Boolean).join(', ') || undefined,
     date: s.methodology?.evaluation_date ?? s.submission_date,
   };
 }
@@ -99,6 +114,7 @@ export const ALIASES: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'tau2-bench',
+  parts: { retail: { name: 'Retail', group: 'Domain' }, airline: { name: 'Airline', group: 'Domain' }, telecom: { name: 'Telecom', group: 'Domain' } },
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: `${BASE}/manifest.json (legacy_submissions)`,
   terms: TERMS,

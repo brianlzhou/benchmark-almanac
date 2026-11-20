@@ -6,6 +6,10 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 import { num } from '../lib/html.ts';
 const PAGE='https://huggingface.co/datasets/stepfun-ai/CF-Div2-Stepfun';
 const board:Leaderboard={benchmark:'cf-div2-stepfun',url:PAGE,feed:PAGE+'/raw/main/README.md',
+parts: {
+  python: { name: 'Python', group: 'Language' },
+  java: { name: 'Java', group: 'Language' },
+},
  terms:'CC-BY-4.0 benchmark data and public author results. The Almanac credits StepFun and links the source.',
  async fetch(){
  const t=markdownTables(await fetchText(PAGE+'/raw/main/README.md')).find(t=>t[0]?.some(h=>h.includes('C++ (avg@8)')));

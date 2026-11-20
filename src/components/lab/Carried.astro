@@ -1,0 +1,70 @@
+---
+// The benchmarks a lab carries (src/lib/insights.ts carried()): named in five or more releases since 2024, with this
+// lab behind at least half of them, or with one other lab four in five. The rows past the first eight wait behind
+// "Show all".
+import ChartDownload from '../ChartDownload.astro';
+import CarryList from '../insights/CarryList.astro';
+import { labCarried, labName } from '../../lib/model-insights.ts';
+import { CARRY_MIN } from '../../lib/insights.ts';
+import { creditLine, LAUNCH_POSTS } from '../../lib/credits.ts';
+
+interface Props {
+  lab: string;
+}
+const { lab } = Astro.props;
+const name = labName(lab);
+const rows = labCarried(lab);
+const SHOWN = 8;
+const top = rows[0];
+const mine = top?.labs.find((l) => l.id === lab);
+const own = rows.filter((r) => r.own && r.labs[0].id === lab).length;
+const word = (n: number) => ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'][n] ?? String(n);
+const caption = !top
+  ? ''
+  : `${rows.length === 1 ? 'One benchmark appears' : `${rows.length} benchmarks appear`} mostly in ${name}'s releases since 2024${own ? `, ${own === rows.length ? (rows.length === 1 ? 'and it is its own' : 'all of them its own') : `${own} of them its own`}` : ''}. ${name} named ${top.name} in ${mine?.n ?? 0} of the ${top.releases} releases that did.`;
+---
+
+{
+  rows.length > 0 && (
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Which benchmarks does {name} carry?</h2>
+          <p>{caption}</p>
+        </div>
+        <button
+          type="button"
+          class="help-q"
+          aria-label="What counts as carried"
+          data-tn="Carried by one or two labs"
+          data-ts={`Of the releases since 2024 that named a benchmark, at least half came from one lab, or at least four in five from two labs. Only benchmarks named in ${word(CARRY_MIN)} or more releases count, leaving out safety evaluations. A lab's own benchmark is one it made, alone or with others.`}
+          data-wide
+        >
+          ?
+        </button>
+      </div>
+      <ChartDownload credit={creditLine([LAUNCH_POSTS])} name={`${lab}-carried`} deck={`Benchmarks named in ${word(CARRY_MIN)} or more releases since 2024 where ${name} accounts for at least half of those releases, or it and one other lab for four in five, and each lab's share.`}>
+        <CarryList rows={rows.slice(0, SHOWN)} label={`Benchmarks ${name} carries, by releases that named them`} />
+        {rows.length > SHOWN && (
+          <div class="cr-rest" hidden data-reveal-row>
+            <CarryList rows={rows.slice(SHOWN)} label={`More benchmarks ${name} carries`} />
+          </div>
+        )}
+      </ChartDownload>
+      {rows.length > SHOWN && (
+        <button type="button" class="more-rows" data-reveal>
+          Show all {rows.length}
+        </button>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .cr-rest {
+    margin-top: 8px;
+  }
+  .cr-rest[hidden] {
+    display: none;
+  }
+</style>

@@ -4,17 +4,23 @@
 // per task (one page) is Cost_Per_Page / 100 dollars. Vision-language model rows are named "Maker Model (Setting)", such as "OpenAI GPT-5 Mini
 // (Reasoning Minimal)" or "Anthropic Opus 4.6". The maker is dropped (Anthropic tiers get "Claude" back)
 // and the setting is kept. Parser products (LlamaParse, IDP and startup APIs) have no model in the
-// registry and stay unmatched.
+// registry and stay unmatched. The five scored dimensions are parts. Category costs are dollars per page.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = 'https://raw.githubusercontent.com/run-llama/ParseBench/main/leaderboard.csv';
 
+const parts = {
+  Tables: 'Tables', Charts: 'Charts', Content_Faithfulness: 'Content Faithfulness',
+  Semantic_Formatting: 'Semantic Formatting', Visual_Grounding: 'Visual Grounding',
+};
 const board: Leaderboard = {
   benchmark: 'parsebench',
   url: 'https://parsebench.ai',
   feed: `${FEED} (Overall)`,
   terms: 'Repository file in run-llama/ParseBench, licensed Apache-2.0.',
+  parts,
+  verified: 'The ParseBench leaderboard marks this entry as verified.',
   aliases: {},
   async fetch() {
     const rows: LeaderboardRow[] = [];
@@ -32,7 +38,15 @@ const board: Leaderboard = {
       const level = paren?.[1].match(/(?:Reasoning|Thinking|Effort)\s+(\w+)/i)?.[1];
       const setting = level ? level.toLowerCase() : paren?.[1].toLowerCase();
       const cents = Number(r.Cost_Per_Page);
-      rows.push({ model: name, score, setting, cost: Number.isFinite(cents) && cents > 0 ? cents / 100 : undefined });
+      const metrics: Record<string, number> = {};
+      for (const key of [...Object.keys(parts), 'Cost_Charts', 'Cost_Tables', 'Cost_Text', 'Cost_Layout']) {
+        if (r[key]?.trim() && Number.isFinite(Number(r[key]))) {
+          if (key.startsWith('Cost_')) metrics[key + '_USD'] = Number(r[key]) / 100;
+          else metrics[key] = Number(r[key]);
+        }
+      }
+      const open = r.Category === 'VLM - Open Weight' ? true : r.Category === 'VLM - Proprietary' ? false : undefined;
+      rows.push({ model: name, score, setting, open, verified: r.Verified === 'yes' ? true : r.Verified === 'no' ? false : undefined, metrics, cost: Number.isFinite(cents) && cents > 0 ? cents / 100 : undefined });
     }
     return rows;
   },

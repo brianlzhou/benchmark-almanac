@@ -7,6 +7,11 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://jmhb0.github.io/microvqa/static/leaderboard/leaderboard.html";
 const board: Leaderboard = {
  benchmark: "microvqa",
+ parts: {
+   V: { name: 'Expert visual understanding', group: 'Task type' },
+   H: { name: 'Hypothesis generation', group: 'Task type' },
+   E: { name: 'Experimental proposal', group: 'Task type' },
+ },
  url: "https://jmhb0.github.io/microvqa/static/leaderboard/leaderboard.html",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

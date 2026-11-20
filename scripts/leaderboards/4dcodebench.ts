@@ -6,6 +6,13 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://4dcodebench.com/data/leaderboard.json";
 const board: Leaderboard = {
   benchmark: "4dcodebench",
+  parts: {
+    Perceptual: { name: 'Perceptual', group: 'Dimension' },
+    '2D Dynamics': { name: '2D dynamics', group: 'Dimension' },
+    '2.5D Geometry': { name: '2.5D geometry', group: 'Dimension' },
+    '3D Geometry': { name: '3D geometry', group: 'Dimension' },
+    '3D Dynamics': { name: '3D dynamics', group: 'Dimension' },
+  },
   url: "https://4dcodebench.com/data/leaderboard.json",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

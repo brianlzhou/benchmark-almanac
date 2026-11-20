@@ -8,6 +8,13 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://tarsier-vlm.github.io/";
 const board: Leaderboard = {
  benchmark: "dream-1k",
+ parts: {
+   LMF1: { name: 'Live-action movies', group: 'Category' },
+   AMF1: { name: 'Animation movies', group: 'Category' },
+   STF1: { name: 'Stock videos', group: 'Category' },
+   YTF1: { name: 'YouTube videos', group: 'Category' },
+   TTF1: { name: 'TikTok-style short videos', group: 'Category' },
+ },
  url: "https://tarsier-vlm.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

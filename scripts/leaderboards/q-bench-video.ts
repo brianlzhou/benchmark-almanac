@@ -58,4 +58,13 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  yesNo: { name: 'Yes/no', group: 'Task type' },
+  whatHow: { name: 'What/how', group: 'Task type' },
+  openEnded: { name: 'Open-ended', group: 'Task type' },
+  technical: { name: 'Technical', group: 'Category' },
+  aesthetic: { name: 'Aesthetic', group: 'Category' },
+  temporal: { name: 'Temporal', group: 'Category' },
+  aigc: { name: 'AI-generated content', group: 'Category', note: 'Questions about distortions in AI-generated videos.' },
+};
 export default board;

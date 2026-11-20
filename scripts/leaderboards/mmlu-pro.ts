@@ -3,11 +3,16 @@
 // Overall is the score here (0 to 100). A Data Source column marks each row "TIGER-Lab" (run by the
 // makers) or "Self-Reported" (submitted by the model's authors); the board shows both, and so does this
 // importer. Names such as "Claude-4.6-Opus(Thinking)", "Gemini-3-Pro(11/25)" and "GPT-4o (2024-05-13)" are
-// rewritten into registry order, with the date stamp passed on and the run month dropped.
+// rewritten into registry order. Each published subject accuracy uses the same percentage scale as Overall.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = 'https://huggingface.co/datasets/TIGER-Lab/mmlu_pro_leaderboard_submission/resolve/main/results.csv';
+
+const SUBJECTS = [
+  'Biology', 'Business', 'Chemistry', 'Computer Science', 'Economics', 'Engineering', 'Health',
+  'History', 'Law', 'Math', 'Philosophy', 'Physics', 'Psychology', 'Other',
+];
 
 function clean(raw: string): { model: string; setting?: string; date?: string } {
   let model = raw.trim();
@@ -39,6 +44,7 @@ function clean(raw: string): { model: string; setting?: string; date?: string } 
 
 const board: Leaderboard = {
   benchmark: 'mmlu-pro',
+  parts: Object.fromEntries(SUBJECTS.map((name) => [name, { name, group: 'Subject' }])),
   url: 'https://huggingface.co/spaces/TIGER-Lab/MMLU-Pro',
   feed: FEED,
   terms: 'CSV in the Hugging Face dataset TIGER-Lab/mmlu_pro_leaderboard_submission, licensed Apache-2.0.',
@@ -88,7 +94,13 @@ const board: Leaderboard = {
       // file doesn't give
       const c = clean(r.Models);
       const size = Number(r['Model Size(B)']);
+      const metrics: Record<string, number> = {};
+      for (const name of SUBJECTS) {
+        const value = r[name]?.trim();
+        if (value && Number.isFinite(Number(value))) metrics[name] = Number(value) * 100;
+      }
       rows.push({
+        metrics,
         model: c.date ? `${c.model} ${c.date}` : c.model,
         setting: c.setting,
         score: score * 100,

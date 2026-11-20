@@ -3,7 +3,7 @@
 // side is compared, as the site ranks every model at its best setting. Most gaps come from setup, and the pages
 // say so: a different harness, effort level, number of attempts or task subset.
 
-import { cards, systemCards, benchById, leaderboardScores, epochScores, bestPerModel, normUnit, modelById } from './data.ts';
+import { cards, systemCards, benchById, leaderboardScores, epochScores, measureScores, measureOf, bestPerModel, normUnit, modelById } from './data.ts';
 import type { Card, Score } from './types.ts';
 import { score as fmt } from './format.ts';
 import notesJson from '../../data/claim-notes.json';
@@ -16,6 +16,11 @@ export interface ClaimPair {
   claim: { value: number; card: Card; asWritten?: string };
   /** The board's best row for the model: the leaderboard's own, or Epoch AI's run. */
   board: Score;
+  /**
+   * When the lab quoted another of the benchmark's measures than its headline (a partial-credit score, one part), its
+   * id. The board side is then that measure's column, never the headline.
+   */
+  measure?: string;
   /** Lab minus board, signed so a positive gap means the lab's number is better (for lower-is-better tests too). */
   gap: number;
   /** The two numbers agree to rounding, which usually means one side copied the other. */
@@ -27,20 +32,24 @@ export const SAME_WITHIN = 0.15;
 
 const relGap = (p: { gap: number; claim: { value: number }; board: { value: number }; unit: string }) =>
   p.unit === '%' ? Math.abs(p.gap) / 100 : Math.abs(p.gap) / Math.max(Math.abs(p.claim.value), Math.abs(p.board.value), 1e-9);
-const sign = (id: string) => (benchById.get(id)?.better === 'lower' ? -1 : 1);
+const sign = (id: string, measure?: string) => ((measureOf(id, measure)?.better ?? benchById.get(id)?.better) === 'lower' ? -1 : 1);
 
-// the lab's best number per model and benchmark, in the benchmark's own unit
+// the lab's best number per model, benchmark and measure (the headline, or another the result names), in that
+// measure's unit. The key is model|benchmark|measure, with an empty measure for the headline.
 const claims = new Map<string, ClaimPair['claim']>();
 for (const card of [...cards, ...systemCards]) {
   for (const r of card.results) {
     const b = benchById.get(r.benchmark);
     if (!b || r.score === null) continue;
-    const unit = b.unit ?? '%';
+    const m = measureOf(r.benchmark, r.measure);
+    if (r.measure && !m) continue;
+    const unit = m?.unit ?? b.unit ?? '%';
     if (normUnit(r.unit) !== unit) continue;
     if (unit === '%' && (r.score < 0 || r.score > 100)) continue;
-    const k = `${card.model}|${r.benchmark}`;
+    const k = `${card.model}|${r.benchmark}|${m?.id ?? ''}`;
+    const s = sign(r.benchmark, m?.id);
     const cur = claims.get(k);
-    if (!cur || sign(r.benchmark) * r.score > sign(r.benchmark) * cur.value) claims.set(k, { value: r.score, card, asWritten: r.as_written });
+    if (!cur || s * r.score > s * cur.value) claims.set(k, { value: r.score, card, asWritten: r.as_written });
   }
 }
 
@@ -56,19 +65,31 @@ const epochRows = group(epochScores.filter((s) => benchById.get(s.benchmark)?.ep
 const bestRow = new Map<string, Score>();
 for (const [id, rows] of [...epochRows, ...boardRows]) {
   const b = benchById.get(id)!;
-  for (const s of bestPerModel(rows, b)) bestRow.set(`${s.model}|${id}`, s);
+  for (const s of bestPerModel(rows, b)) bestRow.set(`${s.model}|${id}|`, s);
+}
+// a measure's board column, the best for each model, ranked in the measure's own direction
+const measureRows = new Map<string, Score[]>();
+for (const s of measureScores) if (s.source === 'leaderboard') {
+  const k = `${s.benchmark}|${s.measure}`;
+  measureRows.set(k, [...(measureRows.get(k) ?? []), s]);
+}
+for (const [k, rows] of measureRows) {
+  const [id, measure] = k.split('|');
+  const b = benchById.get(id)!;
+  const better = measureOf(id, measure)?.better ?? b.better;
+  for (const s of bestPerModel(rows, { ...b, better })) bestRow.set(`${s.model}|${id}|${measure}`, s);
 }
 
 export const claimPairs: ClaimPair[] = [...claims.entries()]
   .flatMap(([k, claim]) => {
     const board = bestRow.get(k);
     if (!board) return [];
-    const [model, benchmark] = k.split('|');
-    const gap = sign(benchmark) * (claim.value - board.value);
-    const unit = benchById.get(benchmark)?.unit ?? '%';
+    const [model, benchmark, measure] = k.split('|');
+    const gap = sign(benchmark, measure || undefined) * (claim.value - board.value);
+    const unit = measureOf(benchmark, measure)?.unit ?? benchById.get(benchmark)?.unit ?? '%';
     // dollars and ratings are often printed whole, so a board's $16,484.21 matches a lab's $16,484
     const within = unit === 'usd' || unit === 'elo' || unit === 'rating' ? 0.5 : SAME_WITHIN;
-    return [{ model, benchmark, unit, claim, board, gap, same: Math.abs(gap) <= within }];
+    return [{ model, benchmark, ...(measure ? { measure } : {}), unit, claim, board, gap, same: Math.abs(gap) <= within }];
   })
   // largest gaps first, measured against the larger number, so dollars and ratings sort beside percentages
   .sort((a, b) => relGap(b) - relGap(a) || a.benchmark.localeCompare(b.benchmark));
@@ -131,7 +152,10 @@ export interface ClaimNote {
   evidence: string[];
 }
 const notes = new Map((notesJson as ClaimNote[]).map((n) => [`${n.model}|${n.benchmark}`, n]));
-export const claimNote = (p: ClaimPair) => notes.get(`${p.model}|${p.benchmark}`);
+// a note explains the headline pair, so a pair on another measure has none of its own
+export const claimNote = (p: ClaimPair) => (p.measure ? undefined : notes.get(`${p.model}|${p.benchmark}`));
+/** The measure a pair compares, when it isn't the headline: "Score". */
+export const pairMeasure = (p: Pick<ClaimPair, 'benchmark' | 'measure'>) => measureOf(p.benchmark, p.measure)?.name;
 
 /** The gap as a table shows it: "+4.4 pts", "\u22123 pts", "+23" for a rating, or "Same". */
 export function gapText(p: ClaimPair): string {

@@ -59,9 +59,12 @@ export async function toolathlonRows(which: 'verified' | 'original', opts?: { me
       const responses = r.Model.includes(' RESPONSES_API');
       const spread = r['raw:Pass@1']?.match(/<sub>\s*±\s*([\d.]+)/)?.[1];
       const score = parseFloat(r['Pass@1']);
-      const agent = r.Agent && r.Agent !== 'Default' ? r.Agent : undefined;
+      const agent = r.Agent && (which === 'verified' || r.Agent !== 'Default') ? r.Agent : undefined;
+      const model = r.Model.replace(' RESPONSES_API', '').trim();
+      const effort = model.match(/(?:[- (])(xhigh|high|medium|low|max|thinking)\)?$/i)?.[1];
+      const link = r['raw:Model']?.match(/\]\((https?:[^)]+)\)/)?.[1];
       return {
-        model: r.Model.replace(' RESPONSES_API', '').trim(),
+        model, setting: effort?.toLowerCase(), link,
         score,
         open: /^Open-(?:Weights|Source)$/.test(r.Type) ? true : r.Type === 'Proprietary' ? false : undefined,
         trials: r['raw:Pass@1']?.includes('<sup>†</sup>') ? 1 : undefined,

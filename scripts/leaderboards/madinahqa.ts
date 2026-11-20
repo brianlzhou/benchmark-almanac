@@ -11,6 +11,6 @@ const board: Leaderboard = {
   feed: oallFeed('MadinahQA'),
   terms: OALL_TERMS,
   aliases: OALL_ALIASES,
-  fetch: () => oallRows('MadinahQA'),
+  fetch: () => oallRows('MadinahQA', board),
 };
 export default board;

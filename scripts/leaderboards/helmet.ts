@@ -8,6 +8,14 @@ import { num } from '../lib/html.ts';
 const FEED = "https://princeton-nlp.github.io/HELMET/data/agg_results_128k.csv";
 const board: Leaderboard = {
  benchmark: "helmet",
+ parts: {
+   Recall: { name: 'Recall', group: 'Task type' },
+   RAG: { name: 'RAG', group: 'Task type' },
+   ICL: { name: 'ICL', group: 'Task type' },
+   'Re-rank': { name: 'Re-ranking', group: 'Task type' },
+   LongQA: { name: 'Long QA', group: 'Task type' },
+   Summ: { name: 'Summarization', group: 'Task type' },
+ },
  url: "https://princeton-nlp.github.io/HELMET/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

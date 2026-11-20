@@ -21,6 +21,7 @@ interface ScoresData {
   resultsVersion?: string;
   benchmarkWeights: Record<string, number>;
   modelBenchmarkData: Record<string, Record<string, Record<string, Cell>>>;
+  stdData?: Record<string, Record<string, Record<string, number>>>;
   aggregatedScores?: Record<string, { avg: number; std?: number; n?: number }>;
   timeData?: Record<string, { hours?: number; stdHours?: number; n?: number }>;
 }
@@ -86,6 +87,7 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
   const feed = SITE + FILES[version];
   return {
     benchmark,
+    parts: {},
     harnesses: 'system',
     verified: 'reviewed by PostTrainBench',
     url: version === 'v1.2' ? SITE : `${SITE}?version=${version}`,
@@ -124,13 +126,24 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
         const ctx = a.name.match(/\s*\((\d+[KM])\)$/);
         const setting = [a.reasoningEffort?.toLowerCase(), ctx ? `${ctx[1]} context` : undefined].filter(Boolean).join(', ');
         const metrics: Record<string, number> = {};
+        for (const base of baseModels) {
+          for (const [task] of weights) {
+            const value = perModel[base]?.[task]?.value;
+            if (typeof value !== 'number') continue;
+            const metric = base + ': ' + task;
+            metrics[metric] = value;
+            this.parts![metric] = { name: task, group: base };
+            const spread = data.stdData?.[key]?.[base]?.[task];
+            if (typeof spread === 'number') metrics[metric + ' SD'] = spread;
+          }
+        }
         const sd = data.aggregatedScores?.[key]?.std;
         const hours = data.timeData?.[key]?.hours;
         if (typeof sd === 'number') { metrics.sd = sd; metrics.std = sd; }
         const time = data.timeData?.[key];
         if (typeof time?.stdHours === 'number') metrics.runHoursStd = time.stdHours;
         if (typeof time?.n === 'number') metrics.runtimeTrials = time.n;
-        if (typeof hours === 'number') metrics.runHours = hours;
+        if (typeof hours === 'number') { metrics.runHours = hours; metrics.runtimeSeconds = hours * 3600; }
         rows.push({
           model: ctx ? a.name.slice(0, ctx.index) : a.name,
           score,

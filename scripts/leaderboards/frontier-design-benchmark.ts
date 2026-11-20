@@ -60,6 +60,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (window.FDB_OURS.models)`,
   terms: 'robots.txt allows the site. Contra Labs states no data license. Results are credited to Contra Labs and BenchFlow.',
+  measures: { winRate: 'win-rate' },
   aliases: { 'Muse Wonder': 'muse-wonder', 'Qwen3.8 Max': 'qwen-3-8-max' },
   async fetch() {
     const js = await fetchText(FEED);

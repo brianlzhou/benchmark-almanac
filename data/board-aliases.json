@@ -1,0 +1,117 @@
+{
+  "note": "Board names that mean one model on that board only, from reviews that read the board’s own page. scripts/sync-leaderboards.ts adds them to the board’s aliases.",
+  "boards": {
+    "accord-conceptual-consistency": {
+      "Qwen3 235B-A22B (2507)": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "agenticvbench": {
+      "Qwen3-VL-235B OSS": "qwen3-vl-235b-a22b-instruct"
+    },
+    "ale-bench": {
+      "qwen3": "qwen3-max",
+      "qwen3.7": "qwen3-7-max"
+    },
+    "apex-1-mercor": {
+      "Qwen3.5": "qwen3-5-397b-a17b"
+    },
+    "artifactsbench-gemini-0506": {
+      "Qwen3-253B-A22B (Instruct)": "qwen3-235b-a22b"
+    },
+    "browsecomp-zh": {
+      "LlaMa4": "llama-4-maverick"
+    },
+    "cc-ocr-bench-v2": {
+      "Gemini 3.1 Flash": "gemini-3-1-flash-lite"
+    },
+    "clinhallu": {
+      "Qwen3-VL-32B": "qwen3-vl-32b-instruct",
+      "Qwen3-VL-8B": "qwen3-vl-8b-instruct"
+    },
+    "cmt-benchmark": {
+      "Claude 4.1 Sonnet": "claude-sonnet-4"
+    },
+    "conceptual-reasoning-index": {
+      "Qwen3 235B-A22B (2507)": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "dtbench": {
+      "Qwen3 235B-A22B (2507)": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "evaldetectbench": {
+      "Qwen3.5 (size unspecified)": "qwen3-5-397b-a17b"
+    },
+    "facts-parametric": {
+      "Qwen 3 235B A22B Instruct 2506": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "facts-search-v2": {
+      "Qwen 3 235B A22B Instruct 2506": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "failuresensoriq": {
+      "Qwen 3 235B A22B Instruct 2506": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "foodtruck-bench": {
+      "Qwen3 VL 235B": "qwen3-vl-235b-a22b-instruct"
+    },
+    "gameworld": {
+      "Qwen3-VL-30B-A3B": "qwen3-vl-30b-a3b-thinking"
+    },
+    "global-mmlu-lite": {
+      "Qwen 3 235B A22B Instruct 2506": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "imo-answerbench": {
+      "Qwen3-235B": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "indicgenbench": {
+      "Qwen 3 235B A22B Instruct 2506": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "jointavbench": {
+      "Kimi-Audio 7B": "kimi-audio-7b-instruct"
+    },
+    "last-translation-benchmark": {
+      "Gemma 4": "gemma-4-31b-it"
+    },
+    "llm-wikirace": {
+      "Gemini 3": "gemini-3-pro"
+    },
+    "lmca": {
+      "Qwen3 235B-A22B (2507)": "qwen3-235b-a22b-instruct-jul-2025"
+    },
+    "millionaire-bench-de": {
+      "glm-4.6-flash": "glm-4-6v-flash"
+    },
+    "mmmu": {
+      "Kimi-VL-A3B": "kimi-vl-a3b-instruct"
+    },
+    "mmtu": {
+      "o4-mini (2024-11-20) [source date inconsistent]": "o4-mini"
+    },
+    "mobilegym": {
+      "Qwen3-VL-4B": "qwen3-vl-4b-instruct"
+    },
+    "omni-interactscope-explicit-request": {
+      "Qwen3-VL": "qwen3-vl-8b-instruct"
+    },
+    "omnigaia": {
+      "Qwen-3-Omni 30B": "qwen3-omni-30b-a3b-thinking"
+    },
+    "patientagentbench-amazon": {
+      "Qwen3-Next-80B": "qwen3-next-80b-a3b-instruct"
+    },
+    "posterbench": {
+      "Claude 4.8": "claude-opus-4-8"
+    },
+    "progress-bench": {
+      "Qwen3-VL-2B": "qwen3-vl-2b-instruct"
+    },
+    "structured-output-benchmark": {
+      "Qwen3-30B": "qwen3-30b-a3b-instruct-jul-2025"
+    },
+    "textquests": {
+      "Qwen 3 Instruct": "qwen3-235b-a22b-instruct-jul-2025",
+      "Qwen 3 Thinking": "qwen3-235b-a22b-thinking-jul-2025"
+    },
+    "vibe-eval": {
+      "Claude Haiku": "claude-3-haiku",
+      "Claude Opus": "claude-3-opus"
+    }
+  }
+}

@@ -7,6 +7,7 @@
 import { benchmarks, labs, labById, featuredModels, cardScores, leaderboardScores, epochScores, collectedScores, cards, systemCards } from './data.ts';
 import { AREAS, CATEGORY_NAMES, SUBCATEGORIES, areaOf } from './taxonomy.ts';
 import { monthYear } from './format.ts';
+import { facetWords, VIEWS } from './facets.ts';
 import { isArena } from './counts.ts';
 
 /** [name, url, kind, detail, other spellings, weight, more words to match]
@@ -76,7 +77,8 @@ export function searchIndex() {
     rows.push([b.name, `/benchmarks/${b.id}/`, isArena(b) ? 'a' : 'b', detail, aliases, Math.round(w * 1e4) / 1e4, '']);
     // only the description words the row does not already show
     const seen = new Set(words(b.name, aliases, detail));
-    extra.push(words(b.description).filter((w) => !seen.has(w)).join(' '));
+    // and the facet words: named apps and games, languages, subjects, risks ("Blender" finds benchmarks run in Blender)
+    extra.push(words(b.description, facetWords(b.id)).filter((w) => !seen.has(w)).join(' '));
   }
   for (const m of featuredModels) {
     const lab = labById.get(m.lab ?? '');
@@ -94,6 +96,8 @@ export function searchIndex() {
   for (const l of labs.filter((l) => labPages.has(l.id)))
     rows.push([l.name, `/labs/${l.id}/`, 'l', n(featuredModels.filter((m) => m.lab === l.id).length, 'model', 'models'), (l.aliases ?? []).join(' | '), 9, '']);
   for (const a of AREAS.filter((a) => a.id !== 'other')) rows.push([a.name, `/benchmarks/?area=a:${a.id}`, 'c', 'Area', '', 8, words(a.question).join(' ')]);
+  // saved views (data/views.json), named filters over the facets
+  for (const v of VIEWS) rows.push([v.name, `/views/${v.id}/`, 'c', 'View', '', 8, words(v.note).join(' ')]);
   for (const [id, k] of catCount) rows.push([CATEGORY_NAMES[id] ?? id, `/categories/${id}/`, 'c', `${areaName(id)}, ${n(k, 'benchmark', 'benchmarks')}`, '', 8, '']);
   for (const [cat, subs] of Object.entries(SUBCATEGORIES))
     for (const s of subs.filter((s) => subCount.has(s.id) && norm(s.name) !== norm(CATEGORY_NAMES[cat] ?? '')))
@@ -107,11 +111,13 @@ export function searchIndex() {
     ['Model cards', '/cards/', 'Launch posts and system cards', 'cards launch posts system cards technical reports'],
     ['New', '/new/', 'Added, waiting and left out, and new models', 'new recent added queue discovery models releases'],
     ['Audits', '/audits/', 'Known issues that audits found in benchmarks', 'audits known issues problems broken grader leaked answers wrong labels contamination errors'],
+    ['Data audit', '/audits/data/', 'How complete and consistent our data is for each benchmark', 'data audit quality completeness missing gaps checks broken links failed imports importer coverage'],
     ['Sources', '/sources/', 'Where we find new benchmarks', 'sources feeds newsletters'],
     ['Insights', '/insights/', 'Trends over time in reporting, evals and the frontier', 'insights trends over time history analysis charts'],
     ['What labs report', '/insights/reporting/', 'Which benchmarks labs name in launch posts, and how that changed', 'reporting what labs report launch posts cited benchmarks canon trends'],
     ['How are evals changing?', '/insights/evals/', 'How new benchmarks are built, and how fast they saturate', 'evals trends new benchmarks agent tasks multiple choice saturation saturate llm judge private test'],
-    ['How fast is the frontier moving?', '/insights/frontier/', 'Open and closed models, and who held number one', 'frontier open weights closed gap lag who leads number one trends'],
+    ['How fast is the frontier moving?', '/insights/frontier/', 'Open and closed models, and who held number one', 'frontier open weights closed gap lag who leads number one trends cost cheaper price per task'],
+    ['How do new models get tested?', '/insights/models/', 'How much of a launch post others check, and how long a model stays at the frontier', 'models new models tested launch post checked independent runs verify frontier top ten'],
     ['Time machine', '/time-machine/', 'The almanac as it stood on any day', 'time machine history past date then on this day who led arena history'],
     ['Query with SQL', '/sql/', 'Run SQL on every score, or download the database', 'sql sqlite database download query data export csv api'],
     ['About', '/about/', 'How this works', 'about method methodology how this works faq'],

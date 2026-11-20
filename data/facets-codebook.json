@@ -1,0 +1,894 @@
+{
+  "note": "The facets that describe each benchmark, with their allowed values. data/facets.json holds each benchmark’s values. Tagging rules are in private/audits/facets-2026-11-19/BRIEF.md. Values come from a widely adopted standard where one exists.",
+  "facets": [
+    {
+      "key": "construct",
+      "name": "Measures",
+      "question": "What does a higher score mean?",
+      "several": false,
+      "part": "measures",
+      "standard": "No formal standard. The terms follow the eval guides.",
+      "values": [
+        {
+          "id": "capability",
+          "name": "Capability",
+          "note": "The model can do more of the task."
+        },
+        {
+          "id": "propensity",
+          "name": "Propensity",
+          "note": "What the model chooses to do when it could do otherwise: refuse, comply with harm, deceive, cheat."
+        },
+        {
+          "id": "preference",
+          "name": "Preference",
+          "note": "How often people, or a judge standing in for people, prefer the output."
+        },
+        {
+          "id": "efficiency",
+          "name": "Efficiency",
+          "note": "Cost, speed or tokens on a fixed task."
+        }
+      ]
+    },
+    {
+      "key": "risk",
+      "name": "Risk",
+      "question": "Which harm was the benchmark built to measure?",
+      "several": true,
+      "part": "measures",
+      "standard": "EU General-Purpose AI Code of Practice (2025), Appendix 1.4, for systemic risks. MLCommons hazards, as Llama Guard 3 and 4 use them, for content.",
+      "values": [
+        {
+          "id": "none",
+          "name": "None"
+        },
+        {
+          "id": "cbrn",
+          "name": "CBRN",
+          "note": "Enabling chemical, biological, radiological or nuclear attacks or accidents."
+        },
+        {
+          "id": "cyber-offence",
+          "name": "Cyber offence",
+          "note": "Enabling large-scale cyberattacks: finding vulnerabilities, writing exploits, scaling attacks."
+        },
+        {
+          "id": "loss-of-control",
+          "name": "Loss of control",
+          "note": "Humans losing the ability to direct, modify or shut down a model."
+        },
+        {
+          "id": "harmful-manipulation",
+          "name": "Harmful manipulation",
+          "note": "Distorting the beliefs or behavior of many people or key decision makers."
+        },
+        {
+          "id": "violent-crimes",
+          "name": "Violent crimes"
+        },
+        {
+          "id": "non-violent-crimes",
+          "name": "Non-violent crimes"
+        },
+        {
+          "id": "sex-related-crimes",
+          "name": "Sex-related crimes"
+        },
+        {
+          "id": "child-sexual-exploitation",
+          "name": "Child sexual exploitation"
+        },
+        {
+          "id": "defamation",
+          "name": "Defamation"
+        },
+        {
+          "id": "specialized-advice",
+          "name": "Specialized advice"
+        },
+        {
+          "id": "privacy",
+          "name": "Privacy"
+        },
+        {
+          "id": "intellectual-property",
+          "name": "Intellectual property"
+        },
+        {
+          "id": "indiscriminate-weapons",
+          "name": "Indiscriminate weapons"
+        },
+        {
+          "id": "hate",
+          "name": "Hate"
+        },
+        {
+          "id": "suicide-self-harm",
+          "name": "Suicide and self-harm"
+        },
+        {
+          "id": "sexual-content",
+          "name": "Sexual content"
+        },
+        {
+          "id": "elections",
+          "name": "Elections"
+        }
+      ]
+    },
+    {
+      "key": "propensity",
+      "name": "Behavior",
+      "question": "For a propensity test, which behavior does it measure?",
+      "several": true,
+      "part": "measures",
+      "standard": "EU General-Purpose AI Code of Practice (2025), Appendix 1.3.2, model propensities.",
+      "values": [
+        {
+          "id": "none",
+          "name": "None"
+        },
+        {
+          "id": "misaligned-intent",
+          "name": "Misaligned with intent"
+        },
+        {
+          "id": "misaligned-values",
+          "name": "Misaligned with values"
+        },
+        {
+          "id": "harmful-use",
+          "name": "Harmful use",
+          "note": "Uses its abilities to manipulate or deceive."
+        },
+        {
+          "id": "hallucination",
+          "name": "Hallucination",
+          "note": "Makes things up or hides its sources."
+        },
+        {
+          "id": "bias",
+          "name": "Bias"
+        },
+        {
+          "id": "unreliability",
+          "name": "Unreliability"
+        },
+        {
+          "id": "lawlessness",
+          "name": "Lawlessness"
+        },
+        {
+          "id": "power-seeking",
+          "name": "Power-seeking",
+          "note": "Pursues goals, resists goal changes or seeks power."
+        },
+        {
+          "id": "collusion",
+          "name": "Collusion"
+        },
+        {
+          "id": "mis-coordination",
+          "name": "Mis-coordination"
+        }
+      ]
+    },
+    {
+      "key": "subject",
+      "name": "Subject",
+      "question": "Which specialist knowledge do the tasks need?",
+      "several": true,
+      "part": "about",
+      "standard": "OECD Fields of Research and Development (Frascati Manual 2015).",
+      "values": [
+        {
+          "id": "none",
+          "name": "No specialist field",
+          "note": "Everyday knowledge, general reasoning, games, puzzles and everyday computer use."
+        },
+        {
+          "id": "1.1",
+          "name": "Mathematics"
+        },
+        {
+          "id": "1.2",
+          "name": "Computer and information sciences",
+          "note": "Includes software engineering and cybersecurity."
+        },
+        {
+          "id": "1.3",
+          "name": "Physical sciences"
+        },
+        {
+          "id": "1.4",
+          "name": "Chemical sciences"
+        },
+        {
+          "id": "1.5",
+          "name": "Earth and environmental sciences"
+        },
+        {
+          "id": "1.6",
+          "name": "Biological sciences"
+        },
+        {
+          "id": "1.7",
+          "name": "Other natural sciences"
+        },
+        {
+          "id": "2.1",
+          "name": "Civil engineering"
+        },
+        {
+          "id": "2.2",
+          "name": "Electrical, electronic and information engineering",
+          "note": "Includes robotics, control and chip design."
+        },
+        {
+          "id": "2.3",
+          "name": "Mechanical engineering"
+        },
+        {
+          "id": "2.4",
+          "name": "Chemical engineering"
+        },
+        {
+          "id": "2.5",
+          "name": "Materials engineering"
+        },
+        {
+          "id": "2.6",
+          "name": "Medical engineering"
+        },
+        {
+          "id": "2.7",
+          "name": "Environmental engineering"
+        },
+        {
+          "id": "2.8",
+          "name": "Environmental biotechnology"
+        },
+        {
+          "id": "2.9",
+          "name": "Industrial biotechnology"
+        },
+        {
+          "id": "2.10",
+          "name": "Nanotechnology"
+        },
+        {
+          "id": "2.11",
+          "name": "Other engineering and technologies"
+        },
+        {
+          "id": "3.1",
+          "name": "Basic medicine"
+        },
+        {
+          "id": "3.2",
+          "name": "Clinical medicine"
+        },
+        {
+          "id": "3.3",
+          "name": "Health sciences"
+        },
+        {
+          "id": "3.4",
+          "name": "Medical biotechnology"
+        },
+        {
+          "id": "3.5",
+          "name": "Other medical sciences"
+        },
+        {
+          "id": "4.1",
+          "name": "Agriculture, forestry and fisheries"
+        },
+        {
+          "id": "4.2",
+          "name": "Animal and dairy science"
+        },
+        {
+          "id": "4.3",
+          "name": "Veterinary science"
+        },
+        {
+          "id": "4.4",
+          "name": "Agricultural biotechnology"
+        },
+        {
+          "id": "4.5",
+          "name": "Other agricultural sciences"
+        },
+        {
+          "id": "5.1",
+          "name": "Psychology"
+        },
+        {
+          "id": "5.2",
+          "name": "Economics and business"
+        },
+        {
+          "id": "5.3",
+          "name": "Education"
+        },
+        {
+          "id": "5.4",
+          "name": "Sociology"
+        },
+        {
+          "id": "5.5",
+          "name": "Law"
+        },
+        {
+          "id": "5.6",
+          "name": "Political science"
+        },
+        {
+          "id": "5.7",
+          "name": "Social and economic geography"
+        },
+        {
+          "id": "5.8",
+          "name": "Media and communications"
+        },
+        {
+          "id": "5.9",
+          "name": "Other social sciences"
+        },
+        {
+          "id": "6.1",
+          "name": "History and archaeology"
+        },
+        {
+          "id": "6.2",
+          "name": "Languages and literature"
+        },
+        {
+          "id": "6.3",
+          "name": "Philosophy, ethics and religion"
+        },
+        {
+          "id": "6.4",
+          "name": "Arts"
+        },
+        {
+          "id": "6.5",
+          "name": "Other humanities"
+        }
+      ]
+    },
+    {
+      "key": "language",
+      "name": "Language",
+      "question": "Which language does the model read and write?",
+      "several": true,
+      "part": "about",
+      "standard": "ISO 639 codes. mul for five or more languages.",
+      "codes": "iso639"
+    },
+    {
+      "key": "input",
+      "name": "Input",
+      "question": "What is the model given?",
+      "several": true,
+      "part": "io",
+      "standard": "Hugging Face Hub modality tags, plus code, screens and molecules.",
+      "values": [
+        {
+          "id": "text",
+          "name": "Text"
+        },
+        {
+          "id": "code",
+          "name": "Code"
+        },
+        {
+          "id": "image",
+          "name": "Images"
+        },
+        {
+          "id": "video",
+          "name": "Video"
+        },
+        {
+          "id": "audio",
+          "name": "Audio"
+        },
+        {
+          "id": "3d",
+          "name": "3D"
+        },
+        {
+          "id": "table",
+          "name": "Tables"
+        },
+        {
+          "id": "document",
+          "name": "Documents",
+          "note": "PDFs, scans and slides."
+        },
+        {
+          "id": "screen",
+          "name": "Screens",
+          "note": "Screenshots or accessibility trees of a live interface."
+        },
+        {
+          "id": "molecule",
+          "name": "Molecules and sequences",
+          "note": "Chemical and biological sequences and structures."
+        },
+        {
+          "id": "timeseries",
+          "name": "Time series",
+          "note": "Sensor streams, robot state and prices."
+        },
+        {
+          "id": "geospatial",
+          "name": "Maps and geodata"
+        }
+      ]
+    },
+    {
+      "key": "output",
+      "name": "Output",
+      "question": "What does the model produce?",
+      "several": true,
+      "part": "io",
+      "standard": "The input list, plus actions.",
+      "values": [
+        {
+          "id": "text",
+          "name": "Text"
+        },
+        {
+          "id": "code",
+          "name": "Code"
+        },
+        {
+          "id": "image",
+          "name": "Images"
+        },
+        {
+          "id": "video",
+          "name": "Video"
+        },
+        {
+          "id": "audio",
+          "name": "Audio"
+        },
+        {
+          "id": "3d",
+          "name": "3D"
+        },
+        {
+          "id": "table",
+          "name": "Tables"
+        },
+        {
+          "id": "document",
+          "name": "Documents",
+          "note": "PDFs, scans and slides."
+        },
+        {
+          "id": "screen",
+          "name": "Screens",
+          "note": "Screenshots or accessibility trees of a live interface."
+        },
+        {
+          "id": "molecule",
+          "name": "Molecules and sequences",
+          "note": "Chemical and biological sequences and structures."
+        },
+        {
+          "id": "timeseries",
+          "name": "Time series",
+          "note": "Sensor streams, robot state and prices."
+        },
+        {
+          "id": "geospatial",
+          "name": "Maps and geodata"
+        },
+        {
+          "id": "action",
+          "name": "Actions",
+          "note": "A click, command, move or tool call that changes an environment."
+        }
+      ]
+    },
+    {
+      "key": "interaction",
+      "name": "Interaction",
+      "question": "How does the model take part?",
+      "several": false,
+      "part": "conditions",
+      "standard": "No formal standard. The terms follow Anthropic’s eval guide.",
+      "values": [
+        {
+          "id": "single",
+          "name": "Single turn"
+        },
+        {
+          "id": "multi-turn",
+          "name": "Multi-turn",
+          "note": "A user, simulated user or script replies over several turns."
+        },
+        {
+          "id": "agentic",
+          "name": "Agentic",
+          "note": "The model takes a sequence of actions or tool calls and decides when to stop."
+        },
+        {
+          "id": "multi-agent",
+          "name": "Multi-agent",
+          "note": "Other agents or people act in the same episode."
+        }
+      ]
+    },
+    {
+      "key": "environment",
+      "name": "Environment",
+      "question": "Where does the model act?",
+      "several": true,
+      "part": "conditions",
+      "standard": "No formal standard. App and game names follow Wikipedia titles.",
+      "named": [
+        "application",
+        "game",
+        "simulator"
+      ],
+      "values": [
+        {
+          "id": "none",
+          "name": "None"
+        },
+        {
+          "id": "code-sandbox",
+          "name": "Code sandbox"
+        },
+        {
+          "id": "terminal",
+          "name": "Terminal"
+        },
+        {
+          "id": "browser",
+          "name": "Browser"
+        },
+        {
+          "id": "desktop",
+          "name": "Desktop apps"
+        },
+        {
+          "id": "mobile",
+          "name": "Phone apps"
+        },
+        {
+          "id": "api",
+          "name": "APIs and tools"
+        },
+        {
+          "id": "application",
+          "name": "A named app"
+        },
+        {
+          "id": "game",
+          "name": "A named game"
+        },
+        {
+          "id": "simulator",
+          "name": "A simulator"
+        },
+        {
+          "id": "physical",
+          "name": "A physical robot or device"
+        },
+        {
+          "id": "live-world",
+          "name": "The live world",
+          "note": "Real markets, events or people outside the evaluation."
+        }
+      ]
+    },
+    {
+      "key": "source",
+      "name": "Items from",
+      "question": "Where do the items come from?",
+      "several": true,
+      "part": "upkeep",
+      "standard": "No formal standard. The terms follow Bean et al.’s review of 445 benchmarks.",
+      "values": [
+        {
+          "id": "experts",
+          "name": "Written by experts"
+        },
+        {
+          "id": "crowd",
+          "name": "Written by crowdworkers"
+        },
+        {
+          "id": "exams",
+          "name": "Exams and contests"
+        },
+        {
+          "id": "real-use",
+          "name": "Real work and use"
+        },
+        {
+          "id": "derived",
+          "name": "Another benchmark"
+        },
+        {
+          "id": "translated",
+          "name": "Translated"
+        },
+        {
+          "id": "synthetic",
+          "name": "Generated"
+        },
+        {
+          "id": "live",
+          "name": "Live play or votes"
+        },
+        {
+          "id": "unknown",
+          "name": "Not stated"
+        }
+      ]
+    },
+    {
+      "key": "refresh",
+      "name": "Refresh",
+      "question": "How does the item set change?",
+      "several": false,
+      "part": "upkeep",
+      "standard": "No formal standard.",
+      "values": [
+        {
+          "id": "static",
+          "name": "One fixed set"
+        },
+        {
+          "id": "versioned",
+          "name": "New versions replace it"
+        },
+        {
+          "id": "rolling",
+          "name": "New items on a schedule"
+        },
+        {
+          "id": "live",
+          "name": "Live",
+          "note": "Every match, vote or question is new."
+        },
+        {
+          "id": "unknown",
+          "name": "Not stated"
+        }
+      ]
+    },
+    {
+      "key": "runner",
+      "name": "Run by",
+      "question": "Who can produce its official scores?",
+      "several": false,
+      "part": "upkeep",
+      "standard": "No formal standard.",
+      "values": [
+        {
+          "id": "anyone",
+          "name": "Anyone",
+          "note": "The items or harness are public, so anyone can run it."
+        },
+        {
+          "id": "host",
+          "name": "A host",
+          "note": "Its maker or a host runs it on held-back items for many developers’ models and publishes the results."
+        },
+        {
+          "id": "developer",
+          "name": "A model developer",
+          "note": "A developer’s own test of its own models, reported only in its model releases."
+        }
+      ]
+    },
+    {
+      "key": "basis",
+      "name": "Based on",
+      "question": "Is it its own test, a version of a public benchmark, or a run of someone else’s method?",
+      "several": false,
+      "part": "upkeep",
+      "standard": "No formal standard.",
+      "values": [
+        {
+          "id": "original",
+          "name": "Its own tasks"
+        },
+        {
+          "id": "version",
+          "name": "A version of a public benchmark",
+          "note": "A subset, port, translation, regrading or new release of a benchmark anyone or a host runs."
+        },
+        {
+          "id": "method",
+          "name": "A run of another’s method",
+          "note": "Another party’s scoring method or index, applied to new tests, as a lab’s ECI fit is."
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "key": "occupations",
+      "name": "Occupations",
+      "question": "Which occupations does the benchmark name for its tasks?",
+      "standard": "O*NET-SOC 2018 major groups.",
+      "values": [
+        {
+          "id": "11",
+          "name": "Management"
+        },
+        {
+          "id": "13",
+          "name": "Business and financial operations"
+        },
+        {
+          "id": "15",
+          "name": "Computer and mathematical"
+        },
+        {
+          "id": "17",
+          "name": "Architecture and engineering"
+        },
+        {
+          "id": "19",
+          "name": "Life, physical and social science"
+        },
+        {
+          "id": "21",
+          "name": "Community and social service"
+        },
+        {
+          "id": "23",
+          "name": "Legal"
+        },
+        {
+          "id": "25",
+          "name": "Educational instruction and library"
+        },
+        {
+          "id": "27",
+          "name": "Arts, design, entertainment, sports and media"
+        },
+        {
+          "id": "29",
+          "name": "Healthcare practitioners and technical"
+        },
+        {
+          "id": "31",
+          "name": "Healthcare support"
+        },
+        {
+          "id": "33",
+          "name": "Protective service"
+        },
+        {
+          "id": "35",
+          "name": "Food preparation and serving"
+        },
+        {
+          "id": "37",
+          "name": "Building and grounds cleaning and maintenance"
+        },
+        {
+          "id": "39",
+          "name": "Personal care and service"
+        },
+        {
+          "id": "41",
+          "name": "Sales"
+        },
+        {
+          "id": "43",
+          "name": "Office and administrative support"
+        },
+        {
+          "id": "45",
+          "name": "Farming, fishing and forestry"
+        },
+        {
+          "id": "47",
+          "name": "Construction and extraction"
+        },
+        {
+          "id": "49",
+          "name": "Installation, maintenance and repair"
+        },
+        {
+          "id": "51",
+          "name": "Production"
+        },
+        {
+          "id": "53",
+          "name": "Transportation and material moving"
+        },
+        {
+          "id": "55",
+          "name": "Military"
+        }
+      ]
+    },
+    {
+      "key": "humanTime",
+      "name": "Human time",
+      "question": "How long does a skilled person take per task, as the benchmark reports it?",
+      "standard": "METR’s time-horizon buckets.",
+      "values": [
+        {
+          "id": "<1m",
+          "name": "Under a minute"
+        },
+        {
+          "id": "1-15m",
+          "name": "1 to 15 minutes"
+        },
+        {
+          "id": "15m-1h",
+          "name": "15 minutes to an hour"
+        },
+        {
+          "id": "1-4h",
+          "name": "1 to 4 hours"
+        },
+        {
+          "id": "4h-1d",
+          "name": "4 hours to a day"
+        },
+        {
+          "id": ">1d",
+          "name": "More than a day"
+        }
+      ]
+    },
+    {
+      "key": "combines",
+      "name": "Combines",
+      "question": "Does its score combine other benchmarks’ scores?",
+      "standard": "No formal standard.",
+      "values": [
+        {
+          "id": "average",
+          "name": "An average of other benchmarks",
+          "note": "A plain or weighted average of other benchmarks’ scores."
+        },
+        {
+          "id": "fit",
+          "name": "A fit across benchmarks",
+          "note": "A statistical model fit over many benchmarks, as Epoch’s Capabilities Index is."
+        }
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "measures",
+      "name": "What it measures"
+    },
+    {
+      "id": "about",
+      "name": "What the tasks are about"
+    },
+    {
+      "id": "io",
+      "name": "What goes in and out"
+    },
+    {
+      "id": "conditions",
+      "name": "Conditions"
+    },
+    {
+      "id": "upkeep",
+      "name": "Origin and upkeep"
+    }
+  ]
+}

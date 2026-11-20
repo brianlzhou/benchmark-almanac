@@ -3,7 +3,7 @@
 // per model and agent, with_skills_score and without_skills_score (100 × mean reward over reviewed
 // non-timeout trials) and skill_lift. skillsbench.ai/leaderboard ranks by the With Skills column, so
 // with_skills_score is the score. The agent (OpenHands, Codex, Claude Code, Gemini CLI) is the harness.
-// Site-only with-skills runs supplement the paired export, preserving Hunyuan HY3.
+// Keep both published modes, their trial counts and uncertainty, and the site-only with-skills runs.
 // with_skills_ci, the half-width of the 95% interval the board shows on hover, gives metrics.ciLow and ciHigh.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { tables, num, text } from '../lib/html.ts';
@@ -20,6 +20,9 @@ interface Row {
   without_skills_ci?: number;
   with_selected_trials?: number;
   without_selected_trials?: number;
+  num_tasks?: number;
+  expected_trials_per_mode?: number;
+  trials_per_task_target?: number;
   audit_status?: string;
   coverage_status?: string;
   without_skills_score?: number;
@@ -49,10 +52,10 @@ const board: Leaderboard = {
       if (typeof r.with_skills_score !== 'number' || (r.version && r.version !== 'v1.1')) continue;
       const ci = r.with_skills_ci;
       const metrics: Record<string, number> = typeof ci === 'number' ? { ciLow: r.with_skills_score - ci, ciHigh: r.with_skills_score + ci } : {};
-      for (const key of ['without_skills_score', 'skill_lift', 'normalized_gain', 'without_skills_ci', 'without_selected_trials'] as const) if (typeof r[key] === 'number') metrics[key] = r[key];
+      for (const key of ['without_skills_score', 'skill_lift', 'normalized_gain', 'without_skills_ci', 'without_selected_trials', 'num_tasks', 'expected_trials_per_mode', 'trials_per_task_target'] as const) if (typeof r[key] === 'number') metrics[key] = r[key];
       rows.push({
         model: r.model.trim(),
-        score: r.with_skills_score,
+        score: r.with_skills_score, setting: 'With Skills',
         low: typeof ci === 'number' ? r.with_skills_score - ci : undefined,
         high: typeof ci === 'number' ? r.with_skills_score + ci : undefined,
         verified: r.audit_status === 'reviewed_release_aligned' ? true : undefined,
@@ -60,6 +63,17 @@ const board: Leaderboard = {
         harness: r.agent ? (AGENTS[r.agent] ?? r.agent) : undefined,
         metrics,
       });
+      if (typeof r.without_skills_score === 'number') {
+        const base = rows[rows.length - 1];
+        const score = r.without_skills_score;
+        const ci = r.without_skills_ci;
+        rows.push({ model: base.model, harness: base.harness, verified: base.verified, score,
+          setting: 'Without Skills', trials: r.without_selected_trials,
+          low: typeof ci === 'number' ? score - ci : undefined,
+          high: typeof ci === 'number' ? score + ci : undefined,
+          metrics: Object.fromEntries(Object.entries(metrics).filter(([key]) =>
+            ['num_tasks', 'expected_trials_per_mode', 'trials_per_task_target'].includes(key))) });
+      }
     }
     // The live site also publishes runs without a paired no-skills evaluation. Keep these
     // alongside the higher-precision export, without replacing any paired run.
@@ -70,7 +84,7 @@ const board: Leaderboard = {
       const spans = [...(r[1]?.html ?? '').matchAll(/<span\b[^>]*>([^<]+)<\/span>/g)].map(m => text(m[1]));
       const [model, harness] = spans;
       const score = num(r[3]?.text);
-      if (model && score !== undefined && !rows.some(v => v.model === model && v.harness === harness)) rows.push({model, harness, score});
+      if (model && score !== undefined && !rows.some(v => v.model === model && v.harness === harness)) rows.push({model, harness, score, setting: 'With Skills'});
     }
     return rows;
   },

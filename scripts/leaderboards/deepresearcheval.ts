@@ -51,4 +51,11 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  coverage: { name: 'Coverage', group: 'Dimension' },
+  insight: { name: 'Insight', group: 'Dimension' },
+  instruction: { name: 'Instruction', group: 'Dimension' },
+  clarity: { name: 'Clarity', group: 'Dimension' },
+  task: { name: 'Task', group: 'Dimension' },
+};
 export default board;

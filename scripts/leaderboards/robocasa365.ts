@@ -11,6 +11,11 @@ const PAGE = 'https://robocasa.ai/leaderboard';
 
 const board: Leaderboard = {
   benchmark: 'robocasa365',
+  parts: {
+    'Atomic-Seen': { name: 'Atomic seen', group: 'Split' },
+    'Composite-Seen': { name: 'Composite seen', group: 'Split' },
+    'Composite-Unseen': { name: 'Composite unseen', group: 'Split' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML table, Overall)`,
   terms: 'Static leaderboard page on GitHub Pages (no robots.txt rules); the submissions repository states no license and the site states no terms.',

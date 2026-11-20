@@ -10,6 +10,14 @@ const FEED = "https://iosworld.io/leaderboard/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "iosworld",
+  parts: {
+    single: { name: 'Single app', group: 'Environment' },
+    multi: { name: 'Multi app', group: 'Environment' },
+    memory: { name: 'Memory', group: 'Environment' },
+    single_steps: { name: 'Single app steps', group: 'Environment' },
+    multi_steps: { name: 'Multi app steps', group: 'Environment' },
+    memory_steps: { name: 'Memory steps', group: 'Environment' },
+  },
   url: "https://iosworld.io/leaderboard/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at iosworld.io; retain source attribution and follow the upstream terms.",

@@ -24,6 +24,7 @@ interface Value {
 export interface KaggleMetric {
   task: string;
   scale?: number;
+  interval?: boolean;
 }
 interface Row {
   modelVersionName?: string;
@@ -60,7 +61,14 @@ export async function kaggleRows(owner: string, slug: string, task = 'Score', sc
     for (const [k, m] of Object.entries({ ...perTurn, ...extra })) {
       const x = r.taskResults.find((t) => t.benchmarkTaskName === m.task)?.result;
       const v = x?.numericResultNullable?.value ?? x?.numericResult?.value;
-      if (v != null) metrics[k] = v * (m.scale ?? 1);
+      if (v == null) continue;
+      const scale = m.scale ?? 1;
+      metrics[k] = v * scale;
+      const stat = x?.numericResultNullable ?? x?.numericResult;
+      if (m.interval && stat?.hasConfidenceInterval && stat.confidenceInterval != null) {
+        metrics[k + 'Low'] = (v - stat.confidenceInterval) * scale;
+        metrics[k + 'High'] = (v + stat.confidenceInterval) * scale;
+      }
     }
     out.push({
       model: r.modelVersionName?.trim() || r.modelVersionSlug || '',

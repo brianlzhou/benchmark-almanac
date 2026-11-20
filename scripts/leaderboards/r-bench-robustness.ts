@@ -9,6 +9,17 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/Q-Future/R-Bench/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "r-bench-robustness",
+ parts: {
+   'MCQ low': { name: 'Multiple choice low', group: 'Difficulty' },
+   'MCQ mid': { name: 'Multiple choice medium', group: 'Difficulty' },
+   'MCQ high': { name: 'Multiple choice high', group: 'Difficulty' },
+   'VQA low': { name: 'Visual question answering low', group: 'Difficulty' },
+   'VQA mid': { name: 'Visual question answering medium', group: 'Difficulty' },
+   'VQA high': { name: 'Visual question answering high', group: 'Difficulty' },
+   'CAP low': { name: 'Captioning low', group: 'Difficulty' },
+   'CAP mid': { name: 'Captioning medium', group: 'Difficulty' },
+   'CAP high': { name: 'Captioning high', group: 'Difficulty' },
+ },
  url: "https://github.com/Q-Future/R-Bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

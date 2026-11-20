@@ -910,7 +910,17 @@ async function png(b: Built): Promise<Blob> {
   }
 }
 
-export async function downloadChart(wrap: HTMLElement, fmt: 'png' | 'svg') {
+/** The chart's data as CSV, from the text the page keeps in a `data-csv` element inside it. */
+function downloadCsv(wrap: HTMLElement) {
+  const text = wrap.querySelector<HTMLElement>('[data-csv]')?.textContent;
+  if (!text) throw new Error('no CSV on this chart');
+  const page = location.pathname.split('/').filter(Boolean).pop() ?? 'benchmark-almanac';
+  const what = wrap.dataset.name ?? 'table';
+  save(new Blob([text], { type: 'text/csv;charset=utf-8' }), `${what.startsWith(page) ? what : `${page}-${what}`}.csv`);
+}
+
+export async function downloadChart(wrap: HTMLElement, fmt: 'png' | 'svg' | 'csv') {
+  if (fmt === 'csv') return downloadCsv(wrap);
   const b = await build(wrap);
   if (fmt === 'svg') save(new Blob([b.svg], { type: 'image/svg+xml' }), `${b.name}.svg`);
   else save(await png(b), `${b.name}.png`);
@@ -964,17 +974,18 @@ function init() {
       const btn = dd.querySelector<HTMLButtonElement>('.cdl-b')!;
       const label = btn.querySelector<HTMLElement>('.cdl-t')!;
       close(dd, true);
-      const fmt = item.dataset.fmt === 'svg' ? 'svg' : 'png';
+      const fmt = item.dataset.fmt === 'svg' ? 'svg' : item.dataset.fmt === 'csv' ? 'csv' : 'png';
+      const idle = wrap.dataset.label ?? 'Download graph';
       btn.disabled = true;
       btn.setAttribute('aria-busy', 'true');
       label.textContent = `Saving ${fmt.toUpperCase()}`;
       try {
         await downloadChart(wrap, fmt);
-        label.textContent = 'Download graph';
+        label.textContent = idle;
       } catch (err) {
         console.error(err);
         label.textContent = 'Could not save, try again';
-        setTimeout(() => (label.textContent = 'Download graph'), 2600);
+        setTimeout(() => (label.textContent = idle), 2600);
       } finally {
         btn.disabled = false;
         btn.removeAttribute('aria-busy');

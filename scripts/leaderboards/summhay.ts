@@ -7,6 +7,9 @@ const FEED = "https://arxiv.org/html/2407.01370";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "summhay",
+  parts: {
+    coverage: { name: 'Coverage', group: 'Dimension' },
+  },
   url: "https://github.com/salesforce/summary-of-a-haystack",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

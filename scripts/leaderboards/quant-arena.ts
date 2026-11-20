@@ -28,6 +28,10 @@ const EXTRA: [string, string, number][] = [
 
 const board: Leaderboard = {
   benchmark: 'quant-arena',
+  parts: {
+    inSample: { name: 'In-sample', group: 'Split' },
+    outOfSample: { name: 'Out-of-sample', group: 'Split' },
+  },
   url: 'https://quant.lab.einsia.ai/arena/leaderboard',
   feed: `${FEED} (track "vanilla", values.total)`,
   terms: 'Public JSON API behind the leaderboard page; robots.txt sets no Disallow, and the terms (4.4) let anyone view and cite results with credit while barring high-frequency scraping.',

@@ -1,7 +1,7 @@
 // MATH-Vision (MathVision), full 3,040-problem test set. mathllm.github.io/mathvision is a static page
 // whose first table is the main leaderboard (# | Model | Source | Date | ALL | per-subject columns); the
 // second is the open-source subset and the third is MATH-Vision-Wild. ALL is the score. Rows note
-// "(3rd-party eval)" when MathVision's team did not run them; that note is dropped. Effort and tool use
+// "(3rd-party eval)" when MathVision's team did not run them; keep that attribution and the source link. Effort and tool use
 // in the name ("(xhigh reasoning, w/ Python)") become the setting. Rows marked "(testmini)" used the
 // 304-problem subset and are skipped, as are the human and random baselines.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -35,6 +35,24 @@ function split(raw: string): { model: string; setting?: string } | null {
 
 const board: Leaderboard = {
   benchmark: 'math-vision-mathvision',
+  parts: {
+    Angle: { name: 'Angle', group: 'Domain' },
+    Area: { name: 'Area', group: 'Domain' },
+    Alg: { name: 'Algebra', group: 'Domain' },
+    AnaG: { name: 'Analytic geometry', group: 'Domain' },
+    Ari: { name: 'Arithmetic', group: 'Domain' },
+    CombG: { name: 'Combinatorial geometry', group: 'Domain' },
+    Comb: { name: 'Combinatorics', group: 'Domain' },
+    Cnt: { name: 'Counting', group: 'Domain' },
+    DescG: { name: 'Descriptive geometry', group: 'Domain' },
+    GrphT: { name: 'Graph theory', group: 'Domain' },
+    Log: { name: 'Logic', group: 'Domain' },
+    Len: { name: 'Length', group: 'Domain' },
+    SolG: { name: 'Solid geometry', group: 'Domain' },
+    Stat: { name: 'Statistics', group: 'Domain' },
+    Topo: { name: 'Topology', group: 'Domain' },
+    TransG: { name: 'Transformation geometry', group: 'Domain' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML, main leaderboard table, ALL)`,
   terms: 'Static GitHub Pages site that states no license or terms; the MATH-V repository is MIT.',
@@ -75,7 +93,10 @@ const board: Leaderboard = {
         const value = num(r[i]?.text);
         if (value !== undefined) metrics[head[i]] = value;
       }
-      rows.push({ ...parsed, score, date, open: openNames.has(parsed.model) ? true : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      const link = r[2]?.html.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1]?.replace(/&amp;/g, '&');
+      const rank = num(r[0]?.text);
+      if (rank !== undefined) metrics.rank = rank;
+      rows.push({ ...parsed, score, date, link, submitter: /\(3rd-party eval/i.test(name) ? 'Third-party evaluation' : undefined, open: openNames.has(parsed.model) ? true : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

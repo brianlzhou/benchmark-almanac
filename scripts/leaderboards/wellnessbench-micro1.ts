@@ -30,6 +30,11 @@ async function usage(): Promise<Map<string, { tokens?: number; time?: number }>>
 
 const board: Leaderboard = {
   benchmark: 'wellnessbench-micro1',
+  parts: {
+    singleTurn: { name: 'Single turn', group: 'Task type' },
+    dialogue: { name: 'Dialogue', group: 'Task type' },
+    control: { name: 'Control', group: 'Split' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML results table, Primary pass)`,
   terms: MICRO1_TERMS,

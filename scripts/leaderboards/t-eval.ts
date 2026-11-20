@@ -6,6 +6,14 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 const FEED = "https://open-compass.github.io/T-Eval/scores.csv";
 const board: Leaderboard = {
   benchmark: "t-eval",
+  parts: {
+    instruct: { name: 'Instruction following', group: 'Dimension' },
+    plan: { name: 'Planning', group: 'Dimension' },
+    reason: { name: 'Reasoning', group: 'Dimension' },
+    retrieve: { name: 'Retrieval', group: 'Dimension' },
+    understand: { name: 'Understanding', group: 'Dimension' },
+    review: { name: 'Review', group: 'Dimension' },
+  },
   url: "https://open-compass.github.io/T-Eval/scores.csv",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 const PAGE = 'https://www.mercor.com/apex/apex-swe-leaderboard/';
 interface Run {
-  model_name: string; effort?: string;
+  model_name: string; effort?: string; descriptors?: string[];
   score: Record<string, Record<string, number>>;
   error?: Record<string, Record<string, number>>;
   n_samples?: number;
@@ -27,7 +27,13 @@ const board: Leaderboard = {
         const ci = r.error?.['pass-1']?.[harness];
         if (typeof ci === 'number') metrics.ci95 = ci;
         if (typeof r.n_samples === 'number') metrics.samples = r.n_samples;
-        rows.push({ model: r.model_name, score, setting: r.effort, harness, metrics });
+        const mean = r.score['mean-score']?.[harness];
+        const meanError = r.error?.['mean-score']?.[harness];
+        if (typeof mean === 'number') metrics.meanScore = mean;
+        if (typeof meanError === 'number') metrics.meanScoreError = meanError;
+        const setting = [r.effort, ...(r.descriptors ?? [])].filter(Boolean).join(', ') || undefined;
+        rows.push({ model: r.model_name, score, setting, harness, metrics,
+          low: ci === undefined ? undefined : score - ci, high: ci === undefined ? undefined : score + ci });
       }
     }
     if (!rows.length) throw new Error('Mercor APEX-SWE board has no Pass@1 rows');

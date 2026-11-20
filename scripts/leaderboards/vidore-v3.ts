@@ -6,7 +6,20 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/ViDoRe%28v3%29/scores";
 const board: Leaderboard = {
- benchmark: "vidore-v3", url: "https://mteb-leaderboard.hf.space/benchmark/ViDoRe%28v3%29", feed: FEED,
+ benchmark: "vidore-v3", parts: {
+  Vidore3PharmaceuticalsRetrieval: { name: 'Pharmaceuticals', group: 'Domain' },
+  Vidore3EnergyRetrieval: { name: 'Energy', group: 'Domain' },
+  Vidore3IndustrialRetrieval: { name: 'Industrial', group: 'Domain' },
+  Vidore3NuclearRetrieval: { name: 'Nuclear', group: 'Domain' },
+  Vidore3FinanceEnRetrieval: { name: 'Finance English', group: 'Domain' },
+  Vidore3TelecomRetrieval: { name: 'Telecom', group: 'Domain' },
+  Vidore3FinanceFrRetrieval: { name: 'Finance French', group: 'Domain' },
+  Vidore3ComputerScienceRetrieval: { name: 'Computer science', group: 'Domain' },
+  Vidore3PhysicsRetrieval: { name: 'Physics', group: 'Domain' },
+  public: { name: 'Public', group: 'Split' },
+  private: { name: 'Private', group: 'Split' },
+  Vidore3HrRetrieval: { name: 'Human resources', group: 'Domain' },
+}, url: "https://mteb-leaderboard.hf.space/benchmark/ViDoRe%28v3%29", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

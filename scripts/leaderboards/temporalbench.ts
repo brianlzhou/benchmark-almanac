@@ -8,6 +8,10 @@ const FEED = "https://temporalbench.github.io/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "temporalbench",
+  parts: {
+    shortMultipleBinary: { name: 'Short', group: 'Split' },
+    longMultipleBinary: { name: 'Long', group: 'Split' },
+  },
   url: "https://temporalbench.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at temporalbench.github.io; retain source attribution and follow the upstream terms.",

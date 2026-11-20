@@ -2,7 +2,7 @@
 // submissions dataset that needs a login, so the importer reads the makers' project page instead,
 // lvbench.github.io, whose leaderboard is a static HTML table: Model (maker in a <p> under the name), Frames,
 // LLM Params, Date, Overall and the six task scores. Overall accuracy (0 to 100) is the score and the date
-// (written like 2025-5-29) is the row date. A trailing "*" on a name marks a run the authors did themselves.
+// (written like 2025-5-29) is the row date. A trailing "*" on a name marks frames resized to 512 by 512.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables, text } from '../lib/html.ts';
@@ -11,6 +11,7 @@ const URL = 'https://lvbench.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'lvbench',
+  parts: { ER: "Entity recognition", EU: "Event understanding", KIR: "Key information retrieval", TG: "Temporal grounding", Rea: "Reasoning", Sum: "Summarization" },
   url: `${URL}#leaderboard`,
   feed: `${URL} (results table, Overall)`,
   terms: 'Static GitHub Pages project page with no stated terms; the LVBench repository is MIT-licensed, as is the Space.',
@@ -32,8 +33,17 @@ const board: Leaderboard = {
       const d = r[4].text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
       const date = d ? `${d[1]}-${d[2].padStart(2, '0')}-${d[3].padStart(2, '0')}` : undefined;
       const size = r[3]?.text.match(/^(\d+(?:\.\d+)?)B(?:\(A(\d+(?:\.\d+)?)B\))?$/);
-      rows.push({ model, score, date, params: size ? Number(size[1]) : undefined,
-        metrics: size?.[2] ? { activeParams: Number(size[2]) } : undefined });
+      const metrics: Record<string, number> = {};
+      if (size?.[2]) metrics.activeParams = Number(size[2]);
+      for (const [index, header] of head.entries()) {
+        if (index < 6) continue;
+        const value = num(r[index]?.text);
+        if (value !== undefined) metrics[header.split(' ')[0]] = value;
+      }
+      const frames = r[2]?.text, resized = r[1].text.includes('*');
+      const setting = [frames && frames !== '-' ? frames + ' frames' : '', resized ? '512×512' : ''].filter(Boolean).join(', ') || undefined;
+      const link = r[1].html.match(/href=["'](https?:[^"']+)/i)?.[1];
+      rows.push({ model, score, date, setting, link, metrics, params: size ? Number(size[1]) : undefined });
     }
     return rows;
   },

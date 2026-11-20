@@ -7,6 +7,18 @@ import { tables, text } from '../lib/html.ts';
 const FEED = "https://tttonyalpha.github.io/act2answer/";
 const board: Leaderboard = {
   benchmark: "act2answer", url: "https://tttonyalpha.github.io/act2answer/", feed: FEED,
+  parts: {
+    emotion: { name: 'Emotion', group: 'Category' },
+    attribute: { name: 'Attribute', group: 'Category' },
+    state: { name: 'State', group: 'Category' },
+    color: { name: 'Color', group: 'Category' },
+    shape: { name: 'Shape', group: 'Category' },
+    symmetry: { name: 'Symmetry', group: 'Category' },
+    public_info: { name: 'Public information', group: 'Category' },
+    traffic: { name: 'Traffic', group: 'Category' },
+    celebrity: { name: 'Celebrity', group: 'Category' },
+    living_world: { name: 'Living world', group: 'Category' },
+  },
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

@@ -1,0 +1,114 @@
+---
+// A benchmark's facets (src/lib/facets.ts) as rows of the facts column on its page. Each value links to the list of
+// benchmarks that share it, and the saved views the benchmark belongs to come last. Nothing renders while the
+// benchmark is not tagged yet.
+import { benchById } from '../lib/data.ts';
+import { facetsOf, shown, valueName, valueNote, factName, envType, FILTER_KEYS, VIEWS, inView, isShownFacet, type FacetKey } from '../lib/facets.ts';
+
+interface Props {
+  id: string;
+  /** Arenas link to the arenas list, other benchmarks to the benchmarks list. */
+  arena?: boolean;
+}
+const { id, arena = false } = Astro.props;
+const f = facetsOf(id);
+const list = arena ? '/arenas/' : '/benchmarks/';
+const filterValue = (key: FacetKey, v: string) => (key === 'environment' ? envType(v) : v);
+const link = (key: FacetKey, v: string) => ({ href: `${list}?${FILTER_KEYS[key]}=${encodeURIComponent(filterValue(key, v))}`, text: valueName(key, v), note: valueNote(key, v) });
+const rows: { label: string; items: { href?: string; text: string; note?: string }[]; joiner?: string }[] = [];
+if (f) {
+  const add = (label: string, key: FacetKey) => {
+    if (!isShownFacet(key)) return;
+    const vs = shown(f, key);
+    if (vs.length) rows.push({ label, items: vs.map((v) => link(key, v)) });
+  };
+  add('Measures', 'construct');
+  add('Risk', 'risk');
+  add('Behavior', 'propensity');
+  add('Subject', 'subject');
+  add('Language', 'language');
+  const ins = isShownFacet('input') ? shown(f, 'input').map((v) => link('input', v)) : [];
+  const outs = isShownFacet('output') ? shown(f, 'output').map((v) => link('output', v)) : [];
+  if (ins.length && outs.length) rows.push({ label: 'In and out', items: [...ins, { text: '→' }, ...outs] });
+  add('Interaction', 'interaction');
+  add('Environment', 'environment');
+  add('Items from', 'source');
+  add('Refresh', 'refresh');
+  add('Run by', 'runner');
+  if (f.basis && f.basis !== 'original' && isShownFacet('basis')) {
+    const bases = (f.basedOn ?? []).map((c) => benchById.get(c)).filter((x) => !!x);
+    const lead = f.basis === 'method' ? 'Another party’s method' : 'A version of another benchmark';
+    rows.push({ label: 'Based on', items: bases.length ? bases.map((x) => ({ href: `/benchmarks/${x!.id}/`, text: x!.name })) : [link('basis', f.basis)] });
+    if (!bases.length) rows.at(-1)!.items = [{ ...link('basis', f.basis), text: lead }];
+  }
+  if (f.occupations?.length) rows.push({ label: 'Occupations', items: f.occupations.map((o) => ({ text: factName('occupations', o) })) });
+  if (f.humanTime) rows.push({ label: 'Human time', items: [{ text: factName('humanTime', f.humanTime) }] });
+  if (f.combines) {
+    const parts = (f.components ?? []).map((c) => benchById.get(c)).filter((b) => !!b);
+    rows.push({ label: 'Combines', items: parts.length ? parts.map((b) => ({ href: `/benchmarks/${b!.id}/`, text: b!.name })) : [{ text: factName('combines', f.combines) }] });
+  }
+}
+const views = f ? VIEWS.filter((v) => inView(v, id)) : [];
+---
+
+{
+  f && (
+    <dl class="kv facets">
+      {rows.map((r) => (
+        <div>
+          <dt>{r.label}</dt>
+          {/* separators sit on the same line as the values, since a line break would render as a space before the comma */}
+          <dd>{r.items.map((it, i) => <>{i > 0 && it.text !== '→' && r.items[i - 1].text !== '→' ? ', ' : ''}{it.text === '→' ? <span class="arr"> → </span> : it.href ? <a href={it.href} title={it.note}>{it.text}</a> : it.text}</>)}</dd>
+        </div>
+      ))}
+      {views.length > 0 && (
+        <div>
+          <dt>In views</dt>
+          <dd>{views.map((v, i) => <>{i > 0 ? ', ' : ''}<a href={`/views/${v.id}/`}>{v.name}</a></>)}</dd>
+        </div>
+      )}
+    </dl>
+  )
+}
+
+<style>
+  /* the same rows as the page's other facts lists (.kv in src/pages/benchmarks/[id].astro) */
+  .facets {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+  }
+  .facets > div {
+    display: grid;
+    grid-template-columns: 148px minmax(0, 1fr);
+    gap: 14px;
+    align-items: baseline;
+  }
+  .facets dt {
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .facets dd {
+    margin: 0;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .facets a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  .facets a:hover {
+    text-decoration-color: currentColor;
+  }
+  .arr {
+    color: var(--ink-3);
+  }
+  @media (max-width: 420px) {
+    .facets > div {
+      grid-template-columns: 124px minmax(0, 1fr);
+      gap: 10px;
+    }
+  }
+</style>

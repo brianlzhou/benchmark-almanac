@@ -44,4 +44,11 @@ const board: Leaderboard = {
     });
   },
 };
+board.parts = {
+  'VIBE-Web': { name: 'Web', group: 'Environment' },
+  'VIBE-Simulation': { name: 'Simulation', group: 'Environment' },
+  'VIBE-Android': { name: 'Android', group: 'Environment' },
+  'VIBE-iOS': { name: 'iOS', group: 'Environment' },
+  'VIBE-Backend': { name: 'Backend', group: 'Environment' },
+};
 export default board;

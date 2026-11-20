@@ -16,7 +16,13 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md";
 const board: Leaderboard = {
-  benchmark: "fineval-6", url: "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md", feed: FEED,
+  benchmark: "fineval-6", parts: {
+  'Academic Knowledge': { name: 'Academic knowledge', group: 'Dimension' },
+  'Safety Awareness': { name: 'Safety awareness', group: 'Dimension' },
+  'Industry Understanding': { name: 'Industry understanding', group: 'Dimension' },
+  'Agent Application': { name: 'Agent application', group: 'Dimension' },
+  'Financial Rigor': { name: 'Financial rigor', group: 'Dimension' },
+}, url: "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

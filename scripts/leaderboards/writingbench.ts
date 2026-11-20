@@ -106,7 +106,14 @@ const board: Leaderboard = {
         model = mode[1];
         setting = mode[2] === 'thinking' ? 'thinking' : 'non-thinking';
       }
-      rows.push({ model, score, setting });
+      const metrics: Record<string, number> = {};
+      for (const [key, cell] of Object.entries(r)) {
+        if (!cell.trim() || !Number.isFinite(Number(cell)) || ['Overall', 'Model', 'Organization'].includes(key)) continue;
+        metrics[key] = Number(cell);
+        const domain = key.match(/^Domain([12])_(.+)$/);
+        if (domain) (board.parts ??= {})[key] = { name: domain[2], group: domain[1] === '1' ? 'Domain' : 'Writing task' };
+      }
+      rows.push({ model, score, setting, metrics });
     }
     if (!rows.length) throw new Error('no rows in score.xlsx');
     return rows;

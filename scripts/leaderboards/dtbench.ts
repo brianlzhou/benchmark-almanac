@@ -1,7 +1,7 @@
 // DTBench (decision theory in Newcomb-like problems), one part of the Conceptual Reasoning Index.
 // conceptualreasoning.ai renders raw accuracy from dtbench_accuracy (0 to 1). The headline is that value
 // times 100. The rescaled dtbench score and its dtbench_ci half-width remain secondary metrics.
-// No raw-accuracy interval is published, so the rescaled interval is not attached to the accuracy headline.
+// The feed also gives EDT attitude. No raw-accuracy interval is published, so the rescaled interval is not attached to the accuracy headline.
 // As in conceptual-reasoning-index.ts, effort variants (rows whose name differs from base_model)
 // appear on charts. DTBench keeps them with base_model as the model and effort as the setting.
 // Other columns keep canonical rows unless they opt in. Reka is left
@@ -46,7 +46,7 @@ export const CRI_TERMS = 'Static CSV the conceptualreasoning.ai page loads; robo
  * One sub-index column of cri-scores.csv, canonical rows only. `extra` optionally names the column's 95%
  * half-width column (`ci`, kept as metrics.ciLow and ciHigh) and its cost-per-response column (`cost`).
  */
-export async function criColumn(column: string, extra: { ci?: string; cost?: string; includeEfforts?: boolean; scale?: number; metrics?: Record<string, string> } = {}): Promise<LeaderboardRow[]> {
+export async function criColumn(column: string, extra: { ci?: string; cost?: string; includeEfforts?: boolean; scale?: number; ciCenter?: string; metrics?: Record<string, string> } = {}): Promise<LeaderboardRow[]> {
   const rows: LeaderboardRow[] = [];
   for (const r of parseCsv(await fetchText(CRI_FEED))) {
     if (!r.model || r.company === 'Reka') continue;
@@ -57,7 +57,10 @@ export async function criColumn(column: string, extra: { ci?: string; cost?: str
     const half = extra.ci ? Number(r[extra.ci]) : NaN;
     const cost = extra.cost ? Number(r[extra.cost]) : NaN;
     const metrics: Record<string, number> = {};
-    if (extra.ci && r[extra.ci]?.trim() && half > 0) Object.assign(metrics, { ciLow: score - half, ciHigh: score + half });
+    const center = extra.ciCenter ? Number(r[extra.ciCenter]?.trim() || NaN) : score;
+    if (extra.ci && r[extra.ci]?.trim() && Number.isFinite(center) && half >= 0) {
+      Object.assign(metrics, { ciLow: center - half, ciHigh: center + half });
+    }
     for (const [name, field] of Object.entries(extra.metrics ?? {})) {
       if (r[field]?.trim() && Number.isFinite(Number(r[field]))) metrics[name] = Number(r[field]);
     }
@@ -79,6 +82,6 @@ const board: Leaderboard = {
   feed: `${CRI_FEED} (100 * dtbench_accuracy)`,
   terms: CRI_TERMS,
   aliases: CRI_ALIASES,
-  fetch: () => criColumn('dtbench_accuracy', { scale: 100, cost: 'dt_cost', includeEfforts: true, ci: 'dtbench_ci', metrics: { dtbench: 'dtbench', dtbenchCi: 'dtbench_ci' } }),
+  fetch: () => criColumn('dtbench_accuracy', { scale: 100, cost: 'dt_cost', includeEfforts: true, ci: 'dtbench_ci', ciCenter: 'dtbench', metrics: { dtbench: 'dtbench', dtbenchCi: 'dtbench_ci', attitudeEdt: 'attitude_edt' } }),
 };
 export default board;

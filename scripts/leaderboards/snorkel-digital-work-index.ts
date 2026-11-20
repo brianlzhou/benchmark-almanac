@@ -3,7 +3,9 @@ import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL='https://snorkel.ai/leaderboard/digital-work-index/';
-const board:Leaderboard={benchmark:'snorkel-digital-work-index',url:URL,feed:URL,
+const board:Leaderboard={benchmark:'snorkel-digital-work-index', parts: {
+  coding: { name: 'Coding', group: 'Domain' },
+},url:URL,feed:URL,
  terms:'Snorkel terms prohibit automated extraction and republication; Benchmark Almanac credits Snorkel AI and links the source.',
  aliases:{'Gemini Flash 3.8':'gemini-3-8-flash','Nemotron 3 Ultra 550B':'nemotron-3-ultra'},
  async fetch(){const ts=tables(await fetchText(URL)).filter(t=>t[0]?.map(c=>c.text).join('|')==='Rank|Model|Score');if(ts.length!==2)throw new Error('Digital Work Index tables missing');return ts[0].slice(1).map(r=>{

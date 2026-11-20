@@ -63,6 +63,9 @@ const FEED = ghRaw(REPO, 'leaderboard.md');
 
 const board: Leaderboard = {
   benchmark: 'big-bench-extra-hard',
+  parts: {
+    mini: { name: 'Mini', group: 'Split' },
+  },
   url: `https://github.com/${REPO}/blob/main/leaderboard.md`,
   feed: `${FEED} (BBEH harmonic mean)`,
   terms: 'Markdown file in the google-deepmind/bbeh GitHub repository, which is Apache-2.0.',
@@ -88,8 +91,9 @@ const board: Leaderboard = {
         const v = i >= 0 && r[i]?.trim() ? Number(r[i]) : NaN;
         if (Number.isFinite(v)) metrics[k] = v;
       }
+      const size = model.match(/\b(\d+(?:\.\d+)?)b\b/i);
       rows.push({
-        model,
+        model, submitter: r[iBy]?.trim() || undefined, params: size ? Number(size[1]) : undefined,
         score,
         date: /original paper/i.test(r[iBy] ?? '') ? '2025-02-26' : undefined,
         ...(Object.keys(metrics).length ? { metrics } : {}),

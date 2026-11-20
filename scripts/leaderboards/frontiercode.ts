@@ -28,6 +28,8 @@ interface Cell {
   duration_min?: number | null;
   tool_calls?: number | null;
   steps?: number | null;
+  shortcut_rate_1_0?: number | null;
+  tokens_1_0?: number | null;
   ote?: number | null;
 }
 
@@ -56,10 +58,12 @@ function cellMetrics(c: Cell): Record<string, number> {
   put('toolCalls', c.tool_calls);
   put('steps', c.steps);
   put('ote', c.ote);
+  put('shortcutRateV1', c.shortcut_rate_1_0, 100);
+  put('tokensV1', c.tokens_1_0);
   return m;
 }
 
-export function makeFrontierCode(opts: { benchmark: string; url: string; path: string; wrapper?: string; metrics?: boolean; subsets?: boolean }): Leaderboard {
+export function makeFrontierCode(opts: { benchmark: string; url: string; path: string; wrapper?: string; metrics?: boolean; subsetMetrics?: boolean; subsets?: boolean }): Leaderboard {
   const feed = `https://cognition.com${opts.path}`;
   return {
     benchmark: opts.benchmark,
@@ -81,7 +85,12 @@ export function makeFrontierCode(opts: { benchmark: string; url: string; path: s
           const h = p.harness?.[model];
           const metrics = opts.metrics && cell ? cellMetrics(cell) : {};
           if (opts.subsets) for (const subset of ['extended', 'diamond']) {
-            const value = byEffort[effort]?.[subset]?.new_score;
+            const split = byEffort[effort]?.[subset];
+            const value = split?.new_score;
+            if (split && opts.subsetMetrics) {
+              const values = { ...cellMetrics(split), cost: split.cost, tokens: split.tokens };
+              for (const [key, n] of Object.entries(values)) if (typeof n === 'number') metrics[subset + '_' + key] = n;
+            }
             if (typeof value === 'number' && Number.isFinite(value)) metrics[subset] = value * 100;
           }
           rows.push({
@@ -108,6 +117,11 @@ export default {
     metrics: true,
     subsets: true,
   }),
+  // the harder and larger subsets, kept as metrics on each main row
+  parts: {
+    extended: { name: 'Extended', group: 'Split', note: 'The 150-task set. The headline score is on the main 100.' },
+    diamond: { name: 'Diamond', group: 'Split', note: 'A 50-task subset.' },
+  },
   chart: {
     title: 'Score against time',
     note: "Each point is one model at one reasoning effort. The post's chart can also put output tokens, cost, tool calls, agent steps or OTE on the x-axis.",

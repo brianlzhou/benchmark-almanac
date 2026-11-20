@@ -6,6 +6,11 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-flash.json";
 const board: Leaderboard = {
   benchmark: "multi-swe-bench-flash",
+  parts: {
+    easy: { name: 'Easy', group: 'Difficulty' },
+    medium: { name: 'Medium', group: 'Difficulty' },
+    hard: { name: 'Hard', group: 'Difficulty' },
+  },
   url: "https://multi-swe-bench.github.io/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

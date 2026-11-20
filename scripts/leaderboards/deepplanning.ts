@@ -7,6 +7,10 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://qwenlm.github.io/Qwen-Agent/en/benchmarks/deepplanning/";
 const board: Leaderboard = {
  benchmark: "deepplanning",
+ parts: {
+   travelAcc: { name: 'Travel planning', group: 'Task type' },
+   shoppingAcc: { name: 'Shopping planning', group: 'Task type' },
+ },
  url: "https://qwenlm.github.io/Qwen-Agent/en/benchmarks/deepplanning/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -7,6 +7,12 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/kxding/PlayWorld/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "playworld",
+  parts: {
+    geometry: { name: 'Geometry', group: 'Dimension' },
+    interaction: { name: 'Interaction', group: 'Dimension' },
+    insightEvolution: { name: 'In sight evolution', group: 'Dimension' },
+    outOfSightEvolution: { name: 'Out of sight evolution', group: 'Dimension' },
+  },
   url: "https://github.com/kxding/PlayWorld",
   feed: FEED,
   terms: "Public maker results table, no restriction on reading stated; image assets retain separate rights; raw.githubusercontent.com has no robots.txt.",

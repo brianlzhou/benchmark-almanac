@@ -5,7 +5,11 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const PAGE = 'https://randomtutu.github.io/MME-CC/';
 const board: Leaderboard = {
-  benchmark: 'mme-cc', url: PAGE, feed: `${PAGE} (Overall leaderboard table)`,
+  benchmark: 'mme-cc', parts: {
+  spatial: { name: 'Spatial', group: 'Category' },
+  geometric: { name: 'Geometric', group: 'Category' },
+  visualKnowledge: { name: 'Visual knowledge', group: 'Category' },
+}, url: PAGE, feed: `${PAGE} (Overall leaderboard table)`,
   terms: 'The public MME-CC project page publishes these results; the Almanac credits and links the source.',
   async fetch(): Promise<LeaderboardRow[]> {
     const table = tables(await fetchText(PAGE)).map(t => t.map(r => r.map(c => c.text))).find(t => t[0]?.join('|') === 'Rank|Models|Reasoning|Overall|SR|GR|VKR');

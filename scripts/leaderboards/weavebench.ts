@@ -60,4 +60,13 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  desktop: { name: 'Desktop', group: 'Domain' },
+  documents: { name: 'Documents', group: 'Domain' },
+  web: { name: 'Web', group: 'Domain' },
+  dataVisualization: { name: 'Data visualization', group: 'Domain' },
+  operations: { name: 'Operations', group: 'Domain' },
+  spatial: { name: 'Spatial', group: 'Domain' },
+  design: { name: 'Design', group: 'Domain' },
+};
 export default board;

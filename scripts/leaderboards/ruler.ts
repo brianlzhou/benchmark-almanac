@@ -1,12 +1,19 @@
 // RULER (NVIDIA): accuracy across synthetic long-context tasks, in percent. The live README reports
 // the published Avg. column as the headline. Context lengths and weighted averages are metrics.
-// Linked model identifiers retain the exact configuration.
+// Read the linked model, its published size, and claimed and effective lengths. Keep inequalities as bounds.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
 const FEED = 'https://raw.githubusercontent.com/NVIDIA/RULER/main/README.md';
 const board: Leaderboard = {
-  benchmark: 'ruler', url: 'https://github.com/NVIDIA/RULER', feed: FEED,
+  benchmark: 'ruler', measures: { '128K': '128k' }, parts: {
+  '4K': { name: '4K', group: 'Length' },
+  '8K': { name: '8K', group: 'Length' },
+  '16K': { name: '16K', group: 'Length' },
+  '32K': { name: '32K', group: 'Length' },
+  '64K': { name: '64K', group: 'Length' },
+  '128K': { name: '128K', group: 'Length' },
+}, url: 'https://github.com/NVIDIA/RULER', feed: FEED,
   terms: 'Public NVIDIA RULER repository results, subject to the repository license and GitHub terms.',
   async fetch() {
     const source = await fetchText(FEED);
@@ -24,7 +31,19 @@ const board: Leaderboard = {
         if (value !== undefined) metrics[key] = value;
       }
       const score = metrics['Avg.'];
-      if (score !== undefined) rows.push({model, score, metrics});
+      for (const [column, key] of [[1, 'claimedLength'], [2, 'effectiveLength']] as const) {
+        const length = cells[column]?.trim().match(/^([<>]?)(\d+(?:\.\d+)?)([KM])$/i);
+        if (!length) continue;
+        const bound = length[1] === '<' ? 'Below' : length[1] === '>' ? 'Above' : '';
+        metrics[key + bound + 'K'] = Number(length[2]) * (length[3].toUpperCase() === 'M' ? 1024 : 1);
+      }
+      for (const [i, key] of [[10, 'weightedIncreasingRank'], [11, 'weightedDecreasingRank']] as const) {
+        const rank = cells[i]?.match(/\((\d+)(?:st|nd|rd|th)\)/);
+        if (rank) metrics[key] = Number(rank[1]);
+      }
+      const size = cells[0].match(/\((?:(\d+(?:\.\d+)?)B\/)?(\d+(?:\.\d+)?)B\)\s*$/i);
+      if (size?.[1]) metrics.activeParams = Number(size[1]);
+      if (score !== undefined) rows.push({model, score, metrics, params: size ? Number(size[2]) : undefined});
     }
     if (!rows.length) throw new Error('No RULER accuracy rows');
     return rows;

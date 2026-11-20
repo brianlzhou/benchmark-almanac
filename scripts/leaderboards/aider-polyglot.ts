@@ -1,7 +1,7 @@
 // Aider's polyglot leaderboard: a YAML list in the aider repository, one entry per run.
 // The page's Cost column is total_cost, the US dollars for the whole run of 225 exercises (blank when 0), so
 // the board sets costPer 'run'. Each row's details list seconds_per_case (kept as metrics.latency) and, for
-// newer runs, completion_tokens for the run, divided by test_cases here for output tokens per task.
+// newer runs, prompt and output token totals. The feed also gives attempt counts, response quality and error counts.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -39,7 +39,19 @@ const board: Leaderboard = {
       // an architect run names two models, "o3 (high) + gpt-4.1": the architect plans and editor_model edits. It is a
       // blend, named by its architect
       const architect = r.editor_model && r.model.includes(' + ') ? r.model.split(' + ')[0].trim() : undefined;
+      const metrics: Record<string, number> = {};
+      if (latency !== undefined) metrics.latency = latency;
+      for (const key of ['test_cases', 'total_tests', 'pass_rate_1', 'pass_num_1', 'pass_num_2', 'percent_cases_well_formed',
+        'error_outputs', 'num_malformed_responses', 'num_with_malformed_responses', 'user_asks', 'lazy_comments',
+        'syntax_errors', 'indentation_errors', 'exhausted_context_windows', 'test_timeouts', 'thinking_tokens']) {
+        const value = r[key]?.split('#')[0].trim();
+        if (value && Number.isFinite(Number(value))) metrics[key] = Number(value);
+      }
+      const input = num(r.prompt_tokens);
+      if (cases && input !== undefined) metrics.inputTokens = input / cases;
+      const setting = r.reasoning_effort || (metrics.thinking_tokens !== undefined ? `thinking budget ${metrics.thinking_tokens}` : undefined);
       return {
+        setting,
         model: architect ?? r.model,
         ...(architect ? { models: [architect, r.editor_model] } : {}),
         score: Number(r.pass_rate_2),
@@ -47,7 +59,7 @@ const board: Leaderboard = {
         date: r.date,
         cost: num(r.total_cost),
         tokens: out && cases ? Math.round(out / cases) : undefined,
-        metrics: latency ? { latency } : undefined,
+        metrics,
       };
     });
   },

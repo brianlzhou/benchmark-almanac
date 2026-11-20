@@ -9,6 +9,15 @@ import { MMAU_ALIASES, MMAU_PAGE, MMAU_TERMS } from './mmau.ts';
 
 const board: Leaderboard = {
   benchmark: 'mmau-v05-15-25',
+  parts: {
+    Avg_Test: { name: 'Test', group: 'Split' },
+    'Sound_Test-mini': { name: 'Sound test-mini', group: 'Category' },
+    Sound_Test: { name: 'Sound test', group: 'Category' },
+    'Music_Test-mini': { name: 'Music test-mini', group: 'Category' },
+    Music_Test: { name: 'Music test', group: 'Category' },
+    'Speech_Test-mini': { name: 'Speech test-mini', group: 'Category' },
+    Speech_Test: { name: 'Speech test', group: 'Category' },
+  },
   url: MMAU_PAGE,
   feed: `${MMAU_PAGE}leaderboard_data_v15_parsed.json (Avg, test-mini)`,
   terms: MMAU_TERMS,

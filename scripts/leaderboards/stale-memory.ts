@@ -7,6 +7,14 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/icedreamc/STALE/main/README.md";
 const board: Leaderboard = {
  benchmark: "stale-memory",
+ parts: {
+   'Type I SR': { name: 'Type I state resolution', group: 'Task type' },
+   'Type I PR': { name: 'Type I premise resistance', group: 'Task type' },
+   'Type I IPA': { name: 'Type I implicit policy adaptation', group: 'Task type' },
+   'Type II SR': { name: 'Type II state resolution', group: 'Task type' },
+   'Type II PR': { name: 'Type II premise resistance', group: 'Task type' },
+   'Type II IPA': { name: 'Type II implicit policy adaptation', group: 'Task type' },
+ },
  url: "https://github.com/icedreamc/STALE",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

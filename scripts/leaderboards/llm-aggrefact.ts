@@ -9,6 +9,19 @@ const URL = 'https://llm-aggrefact.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'llm-aggrefact',
+  parts: {
+    CNN: { name: 'CNN', group: 'Split' },
+    XSum: { name: 'XSum', group: 'Split' },
+    WiCE: { name: 'WiCE', group: 'Split' },
+    REVEAL: { name: 'REVEAL', group: 'Split' },
+    ClaimVerify: { name: 'ClaimVerify', group: 'Split' },
+    FactCheck: { name: 'FactCheck', group: 'Split' },
+    ExpertQA: { name: 'ExpertQA', group: 'Split' },
+    LFQA: { name: 'LFQA', group: 'Split' },
+    RAGTruth: { name: 'RAGTruth', group: 'Split' },
+    MediaS: { name: 'TofuEval-MediaSum', group: 'Split' },
+    MeetB: { name: 'TofuEval-MeetingBank', group: 'Split' },
+  },
   url: URL,
   feed: `${URL} (serialized scoresData, mean dataset accuracy)`,
   terms: 'Static GitHub Pages site; robots.txt allows all paths and the page states no terms.',

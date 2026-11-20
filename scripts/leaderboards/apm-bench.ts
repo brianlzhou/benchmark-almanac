@@ -7,6 +7,11 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/Jianguo-Huang11/APM-Bench/main/README.md";
 const board: Leaderboard = {
  benchmark: "apm-bench",
+ parts: {
+   crossSessionUnderstanding: { name: 'Cross-session understanding', group: 'Task type' },
+   realTimePerception: { name: 'Real-time perception', group: 'Task type' },
+   adaptiveResponse: { name: 'Adaptive response', group: 'Task type' },
+ },
  url: "https://github.com/Jianguo-Huang11/APM-Bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

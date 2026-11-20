@@ -52,4 +52,8 @@ const board: Leaderboard = {
     });
   },
 };
+board.parts = {
+  outcomeScore: { name: 'Outcome', group: 'Dimension', note: 'Raw 0 to 1 outcome score contributes 60% of the composite.', unit: 'score' },
+  efficiencyScore: { name: 'Efficiency', group: 'Dimension', note: 'Normalized efficiency against fixed baselines contributes 15% of the composite.', unit: 'score' },
+};
 export default board;

@@ -7,6 +7,13 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/superinsight/superinsight-ai-benchmark/HEAD/benchmark_presentation_v2.md";
 const board: Leaderboard = {
   benchmark: "medical-chronology-llm-benchmark",
+  parts: {
+    f1: { name: 'F1', group: 'Dimension' },
+    formatting: { name: 'Formatting', group: 'Dimension' },
+    chronology: { name: 'Chronology', group: 'Dimension' },
+    rougeL: { name: 'ROUGE-L', group: 'Dimension' },
+    hallucination: { name: 'Hallucination', group: 'Dimension', note: 'Higher scores mean fewer unsupported claims.' },
+  },
   url: "https://github.com/superinsight/superinsight-ai-benchmark",
   feed: FEED,
   terms: "Apache-2.0 repository; raw.githubusercontent.com has no robots.txt.",

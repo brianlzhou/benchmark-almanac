@@ -1,4 +1,4 @@
-// TruthfulQA: human-rated truthfulness (% true) is the score, with informativeness and automatic metrics retained. Use only the current updated-reference baseline table; exclude v0.
+// TruthfulQA: human-rated truthfulness (% true) is the score, with informativeness and automatic metrics retained. Keep the current and v0 reference versions under distinct settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
@@ -22,11 +22,13 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = markdownTables(source);
     const rows: LeaderboardRow[] = [];
-    for (const [i, table] of all.filter(t => t[0].includes("% true")).slice(0,1).entries()) {
+    for (const [i, table] of all.filter(t => t[0].includes("% true")).entries()) {
       const head = table[0];
       for (const r of table.slice(1)) {
         const score = num(r[1]); if (!r[0] || score === undefined) continue;
-        rows.push({model:r[0], score, setting:i === 0 ? "generation, updated references" : "generation, v0", metrics:Object.fromEntries(head.slice(2).flatMap((h,j) => {const n=num(r[j+2]); return n === undefined ? [] : [[h,n]];}))});
+        const size = r[0].match(/([\d.]+)B$/)?.[1];
+        rows.push({model:r[0], score, params: size ? Number(size) : undefined,
+          setting: i === 0 ? "generation, updated references, greedy, temperature 0" : "generation, v0",  metrics:Object.fromEntries(head.slice(2).flatMap((h,j) => {const n=num(r[j+2]); return n === undefined ? [] : [[h,n]];}))});
       }
     }
     if (!rows.length) throw new Error("No truthfulqa score rows");

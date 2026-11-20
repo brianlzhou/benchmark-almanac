@@ -6,7 +6,9 @@
 // (with inputModality for the image and video versions of a board). Model names come from /api/registry, which
 // also says when an entry is one effort setting of a model ("Claude Opus 5.5 (high)" is a mode of Claude Opus
 // 5.5), so the effort goes in `setting`. The score is the board's Elo. Win rate, battles and the rating's 95%
-// interval (Elo plus or minus 1.96 standard errors, when the board gives one) go in metrics.
+// interval (Elo plus or minus 1.96 standard errors, when the board gives one) go in metrics. The board's average
+// cost of one generation in US dollars (avgCostUsd, over the costCount generations it priced) is the row's cost,
+// plus win/loss counts and the registry’s open-source mark. Its average generation time goes in metrics as generationSeconds (the field watch found both, 2026-11-18).
 //
 // Design Arena's terms bar automated access, and its robots.txt disallows /api/. The almanac imports it anyway
 // (decided 2026-11-10) with credit and a link, as Design Arena's own API license asks of data shown publicly. The
@@ -45,10 +47,14 @@ interface Entry {
   winRate?: number;
   elo?: number;
   btStdErr?: number | null;
+  avgCostUsd?: number | null;
+  costCount?: number | null;
+  avgGenerationTimeMs?: number | null;
 }
 interface RegistryModel {
   id: string;
   displayName?: string;
+  openSource?: boolean;
   modeOf?: string;
 }
 
@@ -77,11 +83,17 @@ export async function daRows(b: DaBoard): Promise<LeaderboardRow[]> {
     const base = self.modeOf ? (reg[self.modeOf] ?? { id: self.modeOf }) : undefined;
     const metrics: Record<string, number> = {};
     if (typeof e.winRate === 'number') metrics.winRate = e.winRate;
+    if (typeof e.wins === 'number') metrics.wins = e.wins;
+    if (typeof e.losses === 'number') metrics.losses = e.losses;
     if (typeof e.battles === 'number') metrics.battles = e.battles;
     if (typeof e.btStdErr === 'number') {
+      metrics.ratingStdErr = e.btStdErr;
       metrics.ciLow = Math.round((e.elo - 1.96 * e.btStdErr) * 10) / 10;
       metrics.ciHigh = Math.round((e.elo + 1.96 * e.btStdErr) * 10) / 10;
     }
+    if (typeof e.avgGenerationTimeMs === 'number' && e.avgGenerationTimeMs > 0) metrics.generationSeconds = Math.round(e.avgGenerationTimeMs / 100) / 10;
+    if (typeof e.costCount === 'number') metrics.costCount = e.costCount;
+    const cost = typeof e.avgCostUsd === 'number' && e.avgCostUsd >= 0 && (e.costCount ?? 1) > 0 ? e.avgCostUsd : undefined;
     let model = (base ?? self).displayName ?? (base ?? self).id;
     let setting = base ? effort(self, base) : undefined;
     // a name that carries its own settings, "GPT Image 2.6 Sunburst (quality: max, complexity: high)" or
@@ -94,7 +106,9 @@ export async function daRows(b: DaBoard): Promise<LeaderboardRow[]> {
     rows.push({
       model,
       setting,
-      score: e.elo,
+      score: e.elo, low: metrics.ciLow, high: metrics.ciHigh,
+      open: self.openSource ?? base?.openSource,
+      ...(cost !== undefined ? { cost } : {}),
       metrics,
     });
   }

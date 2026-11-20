@@ -6,6 +6,18 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://microsoft.github.io/CodeXGLUE/webpage_files/participants/overall.json";
 const board: Leaderboard = {
   benchmark: "codexglue",
+  parts: {
+    'clone detection': { name: 'Clone detection', group: 'Task type' },
+    'defect detection': { name: 'Defect detection', group: 'Task type' },
+    'cloze test': { name: 'Cloze test', group: 'Task type' },
+    'code completion': { name: 'Code completion', group: 'Task type' },
+    'code refinement': { name: 'Code refinement', group: 'Task type' },
+    'code translation': { name: 'Code translation', group: 'Task type' },
+    'natural language code search': { name: 'Natural language code search', group: 'Task type' },
+    'code generation': { name: 'Code generation', group: 'Task type' },
+    'code summarization': { name: 'Code summarization', group: 'Task type' },
+    'documentation translation': { name: 'Documentation translation', group: 'Task type' },
+  },
   url: "https://microsoft.github.io/CodeXGLUE/webpage_files/participants/overall.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -1,8 +1,7 @@
-// Terminal-Bench 2.0 (announced 2025-11-07). The reader lives in terminal-bench-4-0.ts. `extras` keeps the row
-// metrics the board has; on 2.0 that is only the 95% confidence half-width ("ci95"). The 2.0 rows carry no cost,
-// tokens or time, so the Pareto chart that `extras` declares is dropped here.
+// Terminal-Bench 2.0 publishes accuracy, rank, intervals and agent configurations.
+// Its archived rows have no measured cost, tokens or time.
 import type { Leaderboard } from './types.ts';
-import { makeTerminalBench } from './terminal-bench-4-0.ts';
+import { makeTerminalBench } from '../lib/boards/terminal-bench.ts';
 
 const board: Leaderboard = {
   ...makeTerminalBench({

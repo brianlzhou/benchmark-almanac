@@ -7,6 +7,19 @@ import { tables, jsLiteral } from '../lib/html.ts';
 const FEED = "https://agi-eval-official.github.io/amemgym";
 const board: Leaderboard = {
   benchmark: "amemgym",
+  parts: {
+    p0: { name: 'Period 0', group: 'Split' },
+    p1: { name: 'Period 1', group: 'Split' },
+    p2: { name: 'Period 2', group: 'Split' },
+    p3: { name: 'Period 3', group: 'Split' },
+    p4: { name: 'Period 4', group: 'Split' },
+    p5: { name: 'Period 5', group: 'Split' },
+    p6: { name: 'Period 6', group: 'Split' },
+    p7: { name: 'Period 7', group: 'Split' },
+    p8: { name: 'Period 8', group: 'Split' },
+    p9: { name: 'Period 9', group: 'Split' },
+    p10: { name: 'Period 10', group: 'Split' },
+  },
   harnesses: 'system',
   url: "https://agi-eval-official.github.io/amemgym",
   feed: FEED,

@@ -144,6 +144,7 @@ for (const [id, x] of Object.entries<Json>(lb.boards)) {
     unmatched: x.unmatched?.length ?? 0,
     cost_per: x.costPer,
     chart: json(x.chart),
+    parts: json(x.parts),
     last_failed: x.failed?.date,
   });
 }
@@ -205,6 +206,13 @@ for (const [kind, list] of [['launch', launch], ['system-card', docs]] as const)
   }
 }
 
+const putFacet = insert('facets');
+const facetFile = readJson<{ benchmarks: Record<string, Record<string, unknown>> }>(dataPath('facets.json'));
+for (const [benchmark, f] of Object.entries(facetFile.benchmarks)) {
+  if (!benchById.has(benchmark)) continue;
+  for (const [facet, v] of Object.entries(f)) for (const value of Array.isArray(v) ? v : v == null ? [] : [v]) putFacet({ benchmark, facet, value: String(value) });
+}
+
 const putEci = insert('eci');
 for (const e of epoch.eci as Json[]) putEci(e);
 
@@ -240,6 +248,7 @@ for (const [t, cols] of [
   ['cards', ['model', 'lab']],
   ['models', ['lab']],
   ['benchmarks', ['family', 'category', 'area']],
+  ['facets', ['benchmark', 'facet']],
 ] as const)
   for (const c of cols) db.exec(`create index ${t}_${c} on ${t}(${c})`);
 for (const v of VIEWS) db.exec(`create view ${v.name} as ${v.sql}`);

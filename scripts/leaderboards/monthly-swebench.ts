@@ -16,6 +16,10 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'monthly-swebench',
+  parts: {
+    bug_fix: { name: 'Bug fix', group: 'Task type' },
+    non_bug_fix: { name: 'Non bug fix', group: 'Task type' },
+  },
   url: URL,
   feed: `${URL} (inline SWE_DATA, newest Overall snapshot)`,
   terms: 'Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',

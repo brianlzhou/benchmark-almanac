@@ -3,7 +3,12 @@ import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const FEED = 'https://syuchin.github.io/MARS-Bench/static/data/mars_leaderboard_data.json';
 const board: Leaderboard = {
- benchmark: 'mars-bench', url: 'https://syuchin.github.io/MARS-Bench/', feed: FEED,
+ benchmark: 'mars-bench', parts: {
+  'Instruction Following': { name: 'Instruction following', group: 'Task type' },
+  'Context Retrieval': { name: 'Context retrieval', group: 'Task type' },
+  'Information Reasoning': { name: 'Information reasoning', group: 'Task type' },
+  'Task Switching': { name: 'Task switching', group: 'Task type' },
+}, url: 'https://syuchin.github.io/MARS-Bench/', feed: FEED,
  terms: 'Public academic project data; the site credits CC BY-SA 4.0. The almanac credits and links the source.',
  aliases: {'o1-1217': 'o1', 'GPT-4.5-Preview': 'gpt-4-5', 'Grok3': 'grok-3', 'o4-mini-0416': 'o4-mini', 'GPT-4o-1120': 'gpt-4o-nov-2024', 'GPT-4.1-mini-0414': 'gpt-4-1-mini', 'DeepSeek-V3-1226': 'deepseek-v3'},
  async fetch() {

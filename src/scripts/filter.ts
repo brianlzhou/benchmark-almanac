@@ -96,9 +96,12 @@ export function wireFilter(name: string) {
   (table.closest('.table-wrap') ?? table).after(more);
 
   const keyOf = (s: HTMLSelectElement) => Object.keys(s.dataset)[0];
+  // what a select holds: one value, or for a multiple select (Dropdown multiple) every value picked
+  const valuesOf = (s: HTMLSelectElement) => (s.multiple ? [...s.selectedOptions].map((o) => o.value).filter(Boolean) : s.value ? [s.value] : []);
   for (const s of selects) {
     const v = params.get(keyOf(s));
-    if (v && [...s.options].some((o) => o.value === v)) s.value = v;
+    if (v && s.multiple) for (const o of s.options) o.selected = !!o.value && v.split(',').includes(o.value);
+    else if (v && [...s.options].some((o) => o.value === v)) s.value = v;
     s.dispatchEvent(new Event('sync'));
   }
   if (q && params.get('q')) q.value = params.get('q')!;
@@ -135,8 +138,10 @@ export function wireFilter(name: string) {
       const ok =
         (!text || haystack.get(r)!.includes(text)) &&
         selects.every((s) => {
-          const k = keyOf(s);
-          return !s.value || (r.dataset[k] ?? '').split(' ').includes(s.value);
+          const vs = valuesOf(s);
+          if (!vs.length) return true;
+          const have = (r.dataset[keyOf(s)] ?? '').split(' ');
+          return vs.some((v) => have.includes(v));
         }) &&
         radioKeys.every((k) => {
           const v = radioValue(k);
@@ -153,7 +158,7 @@ export function wireFilter(name: string) {
     if (count) count.textContent = `${shown.toLocaleString("en-US")} ${shown === 1 ? noun.replace(/s$/, "") : noun}`;
     const p = new URLSearchParams();
     if (text) p.set('q', text);
-    for (const s of selects) if (s.value) p.set(keyOf(s), s.value);
+    for (const s of selects) if (valuesOf(s).length) p.set(keyOf(s), valuesOf(s).join(','));
     for (const k of radioKeys) if (radioValue(k)) p.set(k, radioValue(k));
     // the sort order lives in the URL too (see sort.ts), and so do any params the table names in data-keep
     const cur = new URLSearchParams(location.search);

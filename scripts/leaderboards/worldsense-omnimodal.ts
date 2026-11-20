@@ -8,7 +8,15 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://jaaackhongggg.github.io/WorldSense";
 const board: Leaderboard = {
- benchmark: "worldsense-omnimodal", url: "https://jaaackhongggg.github.io/WorldSense", feed: FEED,
+ benchmark: "worldsense-omnimodal", parts: {
+  'Tech & Science': { name: 'Tech & science', group: 'Domain' },
+  'Culture & Politics': { name: 'Culture & politics', group: 'Domain' },
+  'Daily Life': { name: 'Daily life', group: 'Domain' },
+  'Film & TV': { name: 'Film & TV', group: 'Domain' },
+  Performance: { name: 'Performance', group: 'Domain' },
+  Sports: { name: 'Sports', group: 'Domain' },
+  Music: { name: 'Music', group: 'Domain' },
+}, url: "https://jaaackhongggg.github.io/WorldSense", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

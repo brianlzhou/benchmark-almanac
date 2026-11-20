@@ -14,6 +14,7 @@ const LIST = 'https://storage.googleapis.com/storage/v1/b/crfm-helm-public/o?pre
 
 interface Cell {
   value: string | number;
+  href?: string;
   run_spec_names?: string[];
 }
 
@@ -76,6 +77,9 @@ const board: Leaderboard = {
     const [table] = await fetchJson<{ header: { value: string }[]; rows: Cell[][] }[]>(`${BUCKET}/${newest}groups/air_bench_2024.json`);
     const col = table?.header.findIndex((h) => h.value === 'Refusal Rate');
     if (!table || col === undefined || col < 0) throw new Error('no Refusal Rate column in air_bench_2024.json');
+    // The named top-level categories precede the numbered taxonomy in the table.
+    const categories = table.header.slice(col + 1, table.header.findIndex(h => h.value.startsWith('#1:')));
+    board.parts = Object.fromEntries(categories.map(({value}) => [value, { name: value, group: 'Risk category' }]));
     const rows: LeaderboardRow[] = [];
     for (const r of table.rows) {
       const score = r[col]?.value;
@@ -95,6 +99,11 @@ const board: Leaderboard = {
       rows.push({
         model,
         score: score * 100,
+        link: r[0].href ? new URL(r[0].href, board.url).href : undefined,
+        metrics: Object.fromEntries(categories.flatMap((h, i) => {
+          const value = r[col + 1 + i]?.value;
+          return typeof value === 'number' ? [[h.value, value * 100]] : [];
+        })),
         setting: settings.join(', ') || undefined,
         date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined,
       });

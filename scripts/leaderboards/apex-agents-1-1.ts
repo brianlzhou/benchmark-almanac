@@ -18,7 +18,10 @@ const board:Leaderboard={benchmark:'apex-agents-1-1',url,feed:`${url} (__NEXT_DA
    if(typeof pass==='number')metrics.passAt1=pass;
    if(typeof margin==='number'){metrics.ciLow=score-margin;metrics.ciHigh=score+margin;}
    if(typeof r.n_samples==='number')metrics.samples=r.n_samples;
-   rows.push({model:r.model_name,score,setting:r.effort||undefined,harness:p.harnessOptions.find((x:any)=>x.value===h)?.label??h,metrics});
+   const passError = r.error?.['pass-1']?.[h];
+   if (typeof passError === 'number') metrics.passAt1Error = passError;
+   const setting = [r.effort, ...(r.descriptors ?? [])].filter(Boolean).join(', ') || undefined;
+   rows.push({model:r.model_name,score,low:metrics.ciLow,high:metrics.ciHigh,setting,harness:p.harnessOptions.find((x:any)=>x.value===h)?.label??h,metrics});
   }
   if(!rows.length)throw new Error('No APEX-Agents v1.1 rows');return rows;
  }

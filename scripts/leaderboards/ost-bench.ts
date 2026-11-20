@@ -16,7 +16,15 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/OpenRobotLab/OST-Bench/main/README.md";
 const board: Leaderboard = {
-  benchmark: "ost-bench", url: "https://github.com/OpenRobotLab/OST-Bench", feed: FEED,
+  benchmark: "ost-bench", parts: {
+  Judge: { name: 'Judge', group: 'Task type' },
+  'A-State': { name: 'Agent state', group: 'Task type' },
+  'A-info': { name: 'Agent visible information', group: 'Task type' },
+  'AO-Spatial': { name: 'Agent object spatial', group: 'Task type' },
+  'Temp-Loc': { name: 'Temporal and locational', group: 'Task type' },
+  'Cnt.': { name: 'Counting', group: 'Task type' },
+  'Esti.': { name: 'Estimation', group: 'Task type' },
+}, url: "https://github.com/OpenRobotLab/OST-Bench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

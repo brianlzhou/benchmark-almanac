@@ -10,6 +10,10 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 const FEED = "https://arxiv.org/html/2503.08663";
 const board: Leaderboard = {
  benchmark: "asimov-1",
+ parts: {
+   normal: { name: 'Normal', group: 'Split' },
+   adversarial: { name: 'Adversarial', group: 'Split' },
+ },
  url: "https://arxiv.org/html/2503.08663",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

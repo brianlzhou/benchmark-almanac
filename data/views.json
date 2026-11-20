@@ -1,0 +1,375 @@
+{
+  "note": "Saved views: named filters over the facets in data/facets.json, each with its own page at /views/<id>/. The rule language is in src/lib/facets.ts.",
+  "views": [
+    {
+      "id": "computer-use",
+      "name": "Computer use",
+      "note": "Models operate a computer or phone through its screen.",
+      "rule": {
+        "all": [
+          {
+            "facet": "environment",
+            "in": [
+              "desktop",
+              "browser",
+              "mobile"
+            ]
+          },
+          {
+            "facet": "input",
+            "in": [
+              "screen"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "cad",
+      "name": "CAD",
+      "note": "Models design mechanical parts and assemblies, in CAD software or as CAD code and 3D models.",
+      "rule": {
+        "any": [
+          {
+            "facet": "environment",
+            "in": [
+              "application:SolidWorks",
+              "application:AutoCAD",
+              "application:Autodesk Fusion",
+              "application:Fusion 360",
+              "application:FreeCAD",
+              "application:Onshape",
+              "application:CATIA",
+              "application:Siemens NX",
+              "application:OpenSCAD",
+              "application:CadQuery",
+              "application:Rhinoceros 3D"
+            ]
+          },
+          {
+            "all": [
+              {
+                "facet": "output",
+                "in": [
+                  "3d"
+                ]
+              },
+              {
+                "facet": "subject",
+                "in": [
+                  "2.3"
+                ]
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "facet": "subject",
+                "in": [
+                  "2.3"
+                ]
+              },
+              {
+                "facet": "output",
+                "in": [
+                  "code"
+                ]
+              },
+              {
+                "facet": "environment",
+                "in": [
+                  "none"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "games",
+      "name": "Games",
+      "note": "Models play named games, alone or against each other.",
+      "rule": {
+        "facet": "environment",
+        "in": [
+          "game"
+        ]
+      }
+    },
+    {
+      "id": "agents",
+      "name": "Agents",
+      "note": "Models take a sequence of actions and decide when to stop, alone or with other agents.",
+      "rule": {
+        "facet": "interaction",
+        "in": [
+          "agentic",
+          "multi-agent"
+        ]
+      }
+    },
+    {
+      "id": "vision",
+      "name": "Vision",
+      "note": "Models work from images or video.",
+      "rule": {
+        "facet": "input",
+        "in": [
+          "image",
+          "video"
+        ]
+      }
+    },
+    {
+      "id": "audio",
+      "name": "Audio and speech",
+      "note": "Models listen or speak.",
+      "rule": {
+        "any": [
+          {
+            "facet": "input",
+            "in": [
+              "audio"
+            ]
+          },
+          {
+            "facet": "output",
+            "in": [
+              "audio"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "generation",
+      "name": "Image, video and 3D generation",
+      "note": "Models make images, video or 3D models.",
+      "rule": {
+        "facet": "output",
+        "in": [
+          "image",
+          "video",
+          "3d"
+        ]
+      }
+    },
+    {
+      "id": "robotics",
+      "name": "Robotics",
+      "note": "Models control a real robot or a simulated one.",
+      "rule": {
+        "any": [
+          {
+            "facet": "environment",
+            "in": [
+              "physical"
+            ]
+          },
+          {
+            "all": [
+              {
+                "facet": "environment",
+                "in": [
+                  "simulator"
+                ]
+              },
+              {
+                "facet": "output",
+                "in": [
+                  "action"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "biology-and-medicine",
+      "name": "Biology and medicine",
+      "note": "Tasks that need biology or medical knowledge.",
+      "rule": {
+        "facet": "subject",
+        "in": [
+          "1.6",
+          "3",
+          "2.6",
+          "2.8",
+          "2.9"
+        ]
+      }
+    },
+    {
+      "id": "chemistry-and-materials",
+      "name": "Chemistry and materials",
+      "note": "Tasks that need chemistry or materials science.",
+      "rule": {
+        "facet": "subject",
+        "in": [
+          "1.4",
+          "2.4",
+          "2.5"
+        ]
+      }
+    },
+    {
+      "id": "law-and-finance",
+      "name": "Law and finance",
+      "note": "Tasks that need legal, economic or business knowledge.",
+      "rule": {
+        "facet": "subject",
+        "in": [
+          "5.5",
+          "5.2"
+        ]
+      }
+    },
+    {
+      "id": "beyond-english",
+      "name": "Many languages",
+      "note": "Benchmarks in five or more languages.",
+      "rule": {
+        "facet": "language",
+        "in": [
+          "mul"
+        ]
+      }
+    },
+    {
+      "id": "dangerous-capabilities",
+      "name": "Dangerous capabilities",
+      "note": "Tests of abilities that could enable CBRN or cyber harm, as the EU Code of Practice defines them.",
+      "rule": {
+        "all": [
+          {
+            "facet": "construct",
+            "in": [
+              "capability"
+            ]
+          },
+          {
+            "facet": "risk",
+            "in": [
+              "cbrn",
+              "cyber-offence"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "loss-of-control",
+      "name": "Loss of control",
+      "note": "Tests of deceiving overseers, sandbagging, self-replication and other routes to losing control of a model.",
+      "rule": {
+        "facet": "risk",
+        "in": [
+          "loss-of-control"
+        ]
+      }
+    },
+    {
+      "id": "deception-and-scheming",
+      "name": "Deception and scheming",
+      "note": "Tests of what models choose to do when they could deceive overseers, manipulate people or pursue their own goals.",
+      "rule": {
+        "all": [
+          {
+            "facet": "construct",
+            "in": [
+              "propensity"
+            ]
+          },
+          {
+            "facet": "risk",
+            "in": [
+              "loss-of-control",
+              "harmful-manipulation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "content-safety",
+      "name": "Content safety",
+      "note": "Tests of refusing harmful requests, by the MLCommons hazards.",
+      "rule": {
+        "facet": "risk",
+        "in": [
+          "violent-crimes",
+          "non-violent-crimes",
+          "sex-related-crimes",
+          "child-sexual-exploitation",
+          "defamation",
+          "specialized-advice",
+          "privacy",
+          "intellectual-property",
+          "indiscriminate-weapons",
+          "hate",
+          "suicide-self-harm",
+          "sexual-content",
+          "elections"
+        ]
+      }
+    },
+    {
+      "id": "lab-internal",
+      "name": "Lab internal evals",
+      "note": "A developer’s own tests of its own models, reported only in its model releases. Its versions of public benchmarks are a separate view.",
+      "rule": {
+        "all": [
+          {
+            "facet": "runner",
+            "in": [
+              "developer"
+            ]
+          },
+          {
+            "facet": "basis",
+            "in": [
+              "original"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "lab-versions",
+      "name": "Labs’ versions of public benchmarks",
+      "note": "A developer’s own version of a public benchmark, or its own run of a public method, reported in its model releases: GDPval v2, a hard subset of SWE-bench Verified, a lab’s ECI fit.",
+      "rule": {
+        "all": [
+          {
+            "facet": "runner",
+            "in": [
+              "developer"
+            ]
+          },
+          {
+            "facet": "basis",
+            "in": [
+              "version",
+              "method"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "kept-fresh",
+      "name": "Kept fresh",
+      "note": "Benchmarks that add new items on a schedule or draw new ones every time.",
+      "rule": {
+        "facet": "refresh",
+        "in": [
+          "rolling",
+          "live"
+        ]
+      }
+    }
+  ]
+}

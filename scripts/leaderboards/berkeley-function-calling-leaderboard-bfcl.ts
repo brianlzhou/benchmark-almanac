@@ -5,7 +5,7 @@
 // date is passed to the resolver. "Overall Acc" is the score. Model names end in the calling mode, "(FC)"
 // or "(Prompt)", which goes to the setting, as in bfcl-v4.ts, whose aliases are reused.
 // "Cost ($ Per 1k Function Calls)" over 1,000 is the cost per test entry (`cost`), and "Latency Mean (s)" and
-// "Latency 95th Percentile (s)" are kept as metrics.latency and metrics.latencyP95, as in bfcl-v4.ts.
+// "Latency 95th Percentile (s)" are kept alongside the score and all three category tables.
 import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -36,6 +36,24 @@ const board: Leaderboard = {
   async fetch() {
     const csv = parseCsv(await fetchText(FEED));
     if (!csv[0] || 'Web Search Acc' in csv[0] || !('Multi Turn Acc' in csv[0])) throw new Error('snapshot is not in V3 form');
+    const splitRows = new Map<string, Record<string, number>>();
+    const parts: NonNullable<Leaderboard['parts']> = {};
+    for (const [file, group] of [['data_non_live', 'Non-live'], ['data_live', 'Live'], ['data_multi_turn', 'Multi-turn']]) {
+      await new Promise(resolve => setTimeout(resolve, 1050));
+      const split = parseCsv(await fetchText(FEED.replace('data_overall', file)));
+      for (const row of split) {
+        const metrics = splitRows.get(row.Model) ?? {};
+        for (const [name, raw] of Object.entries(row)) {
+          if (name === 'Rank' && /^\d+$/.test(raw)) metrics[`${group} rank`] = Number(raw);
+          if (!/^\d+(?:\.\d+)?%$/.test(raw)) continue;
+          const key = `${group}: ${name}`;
+          metrics[key] = parseFloat(raw);
+          parts[key] = { name, group };
+        }
+        splitRows.set(row.Model, metrics);
+      }
+    }
+    board.parts = parts;
     return csv
       .filter((r) => r.Model && /%$/.test(r['Overall Acc']))
       .map((r) => {
@@ -46,8 +64,16 @@ const board: Leaderboard = {
         const latency = num(r['Latency Mean (s)']);
         const latencyStd = num(r['Latency Standard Deviation (s)']);
         const latencyP95 = num(r['Latency 95th Percentile (s)']);
-        const metrics = { ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) };
+        const metrics: Record<string, number> = { ...splitRows.get(r.Model), ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) };
+        const rank = num(r.Rank);
+        if (rank !== undefined) metrics.rank = rank;
+        for (const [name, raw] of Object.entries(r)) {
+          if (name === 'Overall Acc' || !/^\d+(?:\.\d+)?%$/.test(raw)) continue;
+          metrics[name] = parseFloat(raw);
+          parts[name] = { name, group: 'Overall table' };
+        }
         return {
+
           model: name,
           score: parseFloat(r['Overall Acc']),
           setting: [thinking, mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined].filter(Boolean).join('; ') || undefined,

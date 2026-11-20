@@ -4,7 +4,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://evalcrafter.github.io/";
 const board: Leaderboard = {
-  benchmark: "evalcrafter", url: "https://evalcrafter.github.io/", feed: FEED,
+  benchmark: "evalcrafter", parts: {
+  'Visual Quality': { name: 'Visual quality', group: 'Dimension' },
+  'Text-Video Alignment': { name: 'Text to video alignment', group: 'Dimension' },
+  'Motion Quality': { name: 'Motion quality', group: 'Dimension' },
+  'Temporal Consistency': { name: 'Temporal consistency', group: 'Dimension' },
+}, url: "https://evalcrafter.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

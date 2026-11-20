@@ -8,6 +8,13 @@ const FEED = "https://raw.githubusercontent.com/Tencent/WildSpeech-Bench/main/RE
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "wildspeech-bench",
+  parts: {
+    TC: { name: 'Text creation', group: 'Category' },
+    II: { name: 'Information inquiry', group: 'Category' },
+    SR: { name: 'Solution request', group: 'Category' },
+    OE: { name: 'Opinion exchange', group: 'Category' },
+    PF: { name: 'Paralinguistic-featured query', group: 'Category' },
+  },
   url: "https://github.com/Tencent/WildSpeech-Bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

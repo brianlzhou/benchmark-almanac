@@ -5,6 +5,10 @@ import { BCB_ALIASES, BCB_PAGE, BCB_TERMS, bcbFeed, bigcodebenchRows } from './b
 
 const board: Leaderboard = {
   benchmark: 'bigcodebench-hard',
+  parts: {
+    complete: { name: 'Complete', group: 'Task type' },
+    instruct: { name: 'Instruct', group: 'Task type' },
+  },
   url: BCB_PAGE,
   feed: `${bcbFeed(true)} (mean of Complete and Instruct pass@1)`,
   terms: BCB_TERMS,

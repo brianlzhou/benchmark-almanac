@@ -5,7 +5,13 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
 const FEED='https://robocurve.org/roboharm/data/cells.csv';
-const board:Leaderboard={benchmark:'roboharm',url:'https://robocurve.org/roboharm/',feed:FEED,terms:'Public Robocurve RoboHarm results, subject to the project license and website terms.',async fetch(){
+const board:Leaderboard={benchmark:'roboharm', parts: {
+  task_doll: { name: 'Doll', group: 'Task type' },
+  task_burner: { name: 'Burner', group: 'Task type' },
+  task_toaster: { name: 'Toaster', group: 'Task type' },
+  task_brick: { name: 'Brick', group: 'Task type' },
+  task_pour: { name: 'Pour', group: 'Task type' },
+},url:'https://robocurve.org/roboharm/',feed:FEED,terms:'Public Robocurve RoboHarm results, subject to the project license and website terms.',async fetch(){
  const rows:LeaderboardRow[]=[];
  const data=parseCsv(await fetchText(FEED));
  for(const r of data){if(r.task!=='all')continue;const score=num(r.refuse_rate);if(score===undefined||!r.model)continue;const metrics:Record<string,number>={};

@@ -61,7 +61,7 @@ const examplesJson = JSON.stringify(EXAMPLES.map((e) => ({ id: e.id, sql: e.sql 
       </div>
       <label class="sr" for="sq-q">SQL query</label>
       <textarea id="sq-q" class="sq-q" wrap="off" spellcheck="false" autocomplete="off" autocapitalize="off" rows={Math.min(24, Math.max(6, first.sql.split('\n').length + 1))} data-q>{first.sql}</textarea>
-      <div class="sq-bar">
+      <div class="sq-bar ctl-row">
         <button type="button" class="sq-run" data-run>Run</button>
         <button type="button" class="sq-stop" data-stop hidden>Stop</button>
         <span class="sq-key" data-key>Ctrl Enter</span>
@@ -91,7 +91,7 @@ const examplesJson = JSON.stringify(EXAMPLES.map((e) => ({ id: e.id, sql: e.sql 
           </table>
         </div>
         <div class="sq-export">
-          <div class="sq-actions">
+          <div class="sq-actions ctl-row">
             <button type="button" data-csv>Download CSV</button>
             <button type="button" data-md>Copy as Markdown</button>
             <button type="button" data-link>Copy link to query</button>
@@ -233,9 +233,6 @@ sqlite3 benchmark-almanac.db "select * from about"</pre>
     border-color: var(--ink-4);
   }
   .sq-bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 10px 14px;
     margin-top: 12px;
   }
@@ -328,8 +325,6 @@ sqlite3 benchmark-almanac.db "select * from about"</pre>
     border-top: 1px solid var(--line);
   }
   .sq-actions {
-    display: flex;
-    flex-wrap: wrap;
     gap: 6px;
   }
   .sq-credit {

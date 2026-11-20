@@ -13,6 +13,8 @@ const PAPER_DATE = '2024-11-11';
 
 const board: Leaderboard = {
   benchmark: 'chinese-simpleqa',
+  parts: { CC: 'Chinese Culture', HU: 'Humanities', ETAS: 'Engineering, Technology, and Applied Sciences',
+    LAC: 'Life, Art, and Culture', SO: 'Society', NS: 'Natural Science' },
   url: URL,
   feed: `${URL} (leaderboard table)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the dataset is CC BY-NC-SA 4.0 and the scores are cited to the authors.',
@@ -29,11 +31,22 @@ const board: Leaderboard = {
     const iModel = head.findIndex((h) => /^models?$/i.test(h));
     const iScore = head.findIndex((h) => /^F-score$/i.test(h));
     const rows: LeaderboardRow[] = [];
+    let open: boolean | undefined;
     for (const r of t.slice(1)) {
+      if (r.length === 1) {
+        open = /^open-source/i.test(r[0].text) ? true : /^closed-source/i.test(r[0].text) ? false : undefined;
+        continue;
+      }
       const score = num(r[iScore]?.text);
       const model = r[iModel]?.text;
       if (!model || score === undefined || r.length < head.length) continue;
-      rows.push({ model, score, date: PAPER_DATE });
+      const metrics: Record<string, number> = {};
+      for (const [j, key] of head.entries()) {
+        const value = num(r[j]?.text);
+        if (j !== iScore && j !== iModel && value !== undefined) metrics[key] = value;
+      }
+      const size = model.match(/-(\d+(?:\.\d+)?)B\b/i);
+      rows.push({ model, score, open, metrics, params: size ? Number(size[1]) : undefined, date: PAPER_DATE });
     }
     if (!rows.length) throw new Error('no rows in the Chinese SimpleQA table');
     return rows;

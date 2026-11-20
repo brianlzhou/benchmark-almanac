@@ -8,7 +8,16 @@ import { jsonAfter, nextFlight } from '../lib/html.ts';
 
 const FEED = "https://pantograph.com/journal/vlm-harness";
 const board: Leaderboard = {
- benchmark: "pantograph-frontier-llm-robot-benchmark-pandroid", url: "https://pantograph.com/journal/vlm-harness", feed: FEED,
+ benchmark: "pantograph-frontier-llm-robot-benchmark-pandroid", parts: {
+  ball_into_bowl: { name: 'Ball into bowl', group: 'Task type' },
+  dunk_basketball: { name: 'Dunk basketball', group: 'Task type' },
+  towel_into_hamper: { name: 'Towel into hamper', group: 'Task type' },
+  pass_block: { name: 'Pass block', group: 'Task type' },
+  separate_legos: { name: 'Separate LEGOs', group: 'Task type' },
+  spoon_onto_plate: { name: 'Spoon onto plate', group: 'Task type' },
+  beanbag_from_drawer: { name: 'Beanbag from drawer', group: 'Task type' },
+  stack_blocks: { name: 'Stack blocks', group: 'Task type' },
+}, url: "https://pantograph.com/journal/vlm-harness", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

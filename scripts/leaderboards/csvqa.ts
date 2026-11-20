@@ -7,6 +7,14 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://huggingface.co/datasets/Skywork/CSVQA/raw/main/README.md";
 const board: Leaderboard = {
  benchmark: "csvqa",
+ parts: {
+   Biology: { name: 'Biology', group: 'Domain' },
+   Chemistry: { name: 'Chemistry', group: 'Domain' },
+   Math: { name: 'Math', group: 'Domain' },
+   Physics: { name: 'Physics', group: 'Domain' },
+   Open: { name: 'Open questions', group: 'Question type' },
+   MC: { name: 'Multiple-choice questions', group: 'Question type' },
+ },
  url: "https://huggingface.co/datasets/Skywork/CSVQA",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -35,12 +35,19 @@ const board: Leaderboard = {
     const asset = home.match(/\/assets\/index-[\w-]+\.js/)?.[0];
     if (!asset) throw new Error('no script bundle linked from the home page');
     const js = await fetchText(new URL(asset, PAGE).href);
-    const start = js.indexOf('km=JSON.parse(`');
-    if (start < 0) throw new Error('no configurations in the bundle');
-    const end = js.indexOf('`)', start);
-    // the JSON sits in a template literal: undo its escapes, never evaluate it
-    const configs = JSON.parse(js.slice(start + 'km=JSON.parse(`'.length, end).replace(/\\\\/g, '\\').replace(/\\`/g, '`')) as Record<string, Config>;
-    const date = js.match(/\bvm="(\d{4}-\d{2}-\d{2})"/)?.[1];
+    // Select the configurations by their schema, not a minifier's variable name.
+    let configs: Record<string, Config> | undefined;
+    let date: string | undefined;
+    for (const m of js.matchAll(/JSON\.parse\(`((?:\\.|[^`\\])*)`\)/g)) {
+      const value = JSON.parse(m[1].replace(/\\\\/g, '\\').replace(/\\`/g, '`'));
+      if (!value || Array.isArray(value) || typeof value !== 'object') continue;
+      const entries = Object.values(value) as Config[];
+      if (!entries.length || !entries.every(c => c?.tasks && c?.entry?.name)) continue;
+      configs = value;
+      date = js.slice(Math.max(0, m.index! - 120), m.index).match(/="(\d{4}-\d{2}-\d{2})",[^,=]+=\s*$/)?.[1];
+      break;
+    }
+    if (!configs) throw new Error('no configurations in the bundle');
     const rows: LeaderboardRow[] = [];
     for (const c of Object.values(configs)) {
       // Exclude the incomplete web-only cohort.

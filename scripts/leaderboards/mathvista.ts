@@ -1,7 +1,7 @@
 // MathVista (testmini, 1,000 problems). mathvista.github.io draws its leaderboard from
 // data/results/model_scores.js, a script that assigns one JSON object, score_table: per entry the model,
 // method (LLM, LMM, tool-augmented or reasoning), source link, date, ALL (the overall accuracy, 0 to 100)
-// and per-task scores. ALL is the score. The object is read as data (JSON after the assignment), never run.
+// and per-task scores. Keep the source link and the reasoning or tool method. ALL is the score. The object is read as data (JSON after the assignment), never run.
 // The human and random-chance baselines are dropped, and the medal emoji on the top three are removed.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -19,6 +19,20 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mathvista',
+  parts: {
+    FQA: { name: 'Figure question answering', group: 'Task type' },
+    GPS: { name: 'Geometry problem solving', group: 'Task type' },
+    MWP: { name: 'Math word problem', group: 'Task type' },
+    TQA: { name: 'Textbook question answering', group: 'Task type' },
+    VQA: { name: 'Visual question answering', group: 'Task type' },
+    ALG: { name: 'Algebraic', group: 'Domain' },
+    ARI: { name: 'Arithmetic', group: 'Domain' },
+    GEO: { name: 'Geometry', group: 'Domain' },
+    LOG: { name: 'Logical', group: 'Domain' },
+    NUM: { name: 'Numeric', group: 'Domain' },
+    SCI: { name: 'Scientific', group: 'Domain' },
+    STA: { name: 'Statistical', group: 'Domain' },
+  },
   harnesses: 'system',
   url: 'https://mathvista.github.io/#leaderboard',
   feed: `${FEED} (ALL, testmini)`,
@@ -43,7 +57,7 @@ const board: Leaderboard = {
       if (!model || typeof e.ALL !== 'number' || /human|random|frequent guess/i.test(model)) continue;
       const metrics = Object.fromEntries(Object.entries(e).filter(([key, value]) => key !== 'ALL' && typeof value === 'number' && Number.isFinite(value))) as Record<string, number>;
       const system = model.match(/^(DreamPRM|TextGrad) \(([^)]+)\)$/);
-      rows.push({ model: system?.[2] ?? model, harness: system?.[1], link: system && typeof e.Source === 'string' && e.Source.startsWith('https://') ? e.Source : undefined, score: e.ALL, date: /^\d{4}-\d\d-\d\d$/.test(e.Date ?? '') ? e.Date : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({ model: system?.[2] ?? model, harness: system?.[1], setting: e.Method?.startsWith('Reason') ? 'reasoning' : e.Method?.startsWith('Tool') ? 'tool-augmented' : undefined, link: typeof e.Source === 'string' && e.Source.startsWith('https://') ? e.Source : undefined, score: e.ALL, date: /^\d{4}-\d\d-\d\d$/.test(e.Date ?? '') ? e.Date : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no rows in score_table');
     return rows;

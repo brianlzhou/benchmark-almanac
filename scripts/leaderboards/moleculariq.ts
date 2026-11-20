@@ -4,7 +4,10 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { tables, text } from '../lib/html.ts';
 const feed='https://ml-jku-moleculariq-leaderboard.hf.space/config';
-const board:Leaderboard={benchmark:'moleculariq',url:'https://huggingface.co/spaces/ml-jku/molecularIQ_leaderboard',feed,
+const board:Leaderboard={benchmark:'moleculariq', parts: {
+  indexing: { name: 'Indexing', group: 'Task type' },
+  generation: { name: 'Generation', group: 'Task type' },
+},url:'https://huggingface.co/spaces/ml-jku/molecularIQ_leaderboard',feed,
  terms:'The authors publish this public Gradio leaderboard; the Almanac credits and links the original source.',
  async fetch():Promise<LeaderboardRow[]>{
   const d=await fetchJson<{components:{type:string;props:{value?:unknown}}[]}>(feed);let table:string|undefined;

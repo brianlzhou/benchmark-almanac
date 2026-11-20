@@ -6,7 +6,20 @@ import { fetchText } from '../lib/util.ts';
 import { tables, text } from '../lib/html.ts';
 const FEED = "https://lumos-jiateng.github.io/LMBuild/data/results.json";
 const board: Leaderboard = {
-  benchmark: "lmbuild", url: "https://lumos-jiateng.github.io/LMBuild/", feed: FEED,
+  benchmark: "lmbuild", parts: {
+  '1.1': { name: 'Connectivity', group: 'Dimension', note: 'Soundness component of the 12-score mean.' },
+  '1.2': { name: 'Collision', group: 'Dimension', note: 'Soundness component of the 12-score mean.' },
+  '1.3': { name: 'Stability', group: 'Dimension', note: 'Soundness component of the 12-score mean.' },
+  '2.1': { name: 'Geometry', group: 'Dimension', note: 'Affordance component of the 12-score mean.' },
+  '2.2': { name: 'Parts', group: 'Dimension', note: 'Affordance component of the 12-score mean.' },
+  '2.3': { name: 'Kinematics', group: 'Dimension', note: 'Affordance component of the 12-score mean.' },
+  '3.1': { name: 'Decomposition', group: 'Dimension', note: 'Design component of the 12-score mean.' },
+  '3.2': { name: 'Aesthetics', group: 'Dimension', note: 'Design component of the 12-score mean.' },
+  '3.3': { name: 'Alignment', group: 'Dimension', note: 'Design component of the 12-score mean.' },
+  'P.1': { name: 'Sequence', group: 'Dimension', note: 'Realization component of the 12-score mean.' },
+  'P.2': { name: 'Material', group: 'Dimension', note: 'Realization component of the 12-score mean.' },
+  'P.3': { name: 'Operability', group: 'Dimension', note: 'Realization component of the 12-score mean.' },
+}, url: "https://lumos-jiateng.github.io/LMBuild/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

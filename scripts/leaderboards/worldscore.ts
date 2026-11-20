@@ -9,6 +9,15 @@ import { num } from '../lib/html.ts';
 const FEED = "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard/raw/main/leaderboard.csv";
 const board: Leaderboard = {
   benchmark: "worldscore",
+  parts: {
+    CameraControl: { name: 'Camera control', group: 'Dimension' },
+    ObjectControl: { name: 'Object control', group: 'Dimension' },
+    ContentAlignment: { name: 'Content alignment', group: 'Dimension' },
+    DConsistency: { name: '3D consistency', group: 'Dimension' },
+    PhotometricConsistency: { name: 'Photometric consistency', group: 'Dimension' },
+    StyleConsistency: { name: 'Style consistency', group: 'Dimension' },
+    SubjectiveQuality: { name: 'Subjective quality', group: 'Dimension' },
+  },
   url: "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

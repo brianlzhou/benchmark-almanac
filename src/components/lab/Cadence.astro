@@ -1,0 +1,204 @@
+---
+// How often a lab releases models: a column per quarter since 2022 (or its first release), stacked by weights, with
+// open weights in the lab's color, closed in a lighter tint and unrecorded in gray. Drawn in HTML so text keeps its
+// size at every width. Every segment carries the shared tooltip with the models' names, and a legend names each kind.
+import ChartDownload from '../ChartDownload.astro';
+import { labCadence, labName, markColor, CADENCE_FROM, type Quarter } from '../../lib/model-insights.ts';
+import { niceTicks } from '../../lib/scale.ts';
+import { AS_OF, models } from '../../lib/data.ts';
+
+interface Props {
+  lab: string;
+}
+const { lab } = Astro.props;
+const name = labName(lab);
+const qs = labCadence(lab);
+const color = markColor(lab);
+const total = (q: Quarter) => q.open.length + q.closed.length + q.unknown.length;
+const all = qs.reduce((a, q) => a + total(q), 0);
+const show = qs.length >= 4 && all >= 3;
+const max = Math.max(1, ...qs.map(total));
+const ticks = niceTicks(0, max, 4).filter((t) => Number.isInteger(t));
+const top = Math.max(max, ticks.at(-1) ?? max);
+const kinds = [
+  { k: 'open' as const, label: 'Open weights', color },
+  // closed weights take a lighter tint only beside open ones, so a lab with one kind shows its own color
+  { k: 'closed' as const, label: 'Closed weights', color: qs.some((q) => q.open.length) ? `color-mix(in oklab, ${color} 38%, var(--bg))` : color },
+  { k: 'unknown' as const, label: 'Weights not recorded', color: 'repeating-linear-gradient(135deg, var(--ink-4) 0 2px, transparent 2px 5px)' },
+].filter((x) => qs.some((q) => q[x.k].length));
+const names = (xs: string[]) => (xs.length <= 6 ? xs.join(', ') : `${xs.slice(0, 5).join(', ')} and ${xs.length - 5} more`);
+const plural = (n: number) => `${n} model${n === 1 ? '' : 's'}`;
+
+// the finding: this year so far against last year, and how many had open weights
+const year = AS_OF.slice(0, 4);
+const prev = String(Number(year) - 1);
+const inYear = (y: string) => qs.filter((q) => q.key.startsWith(y));
+const sum = (xs: Quarter[], k?: 'open' | 'closed' | 'unknown') => xs.reduce((a, q) => a + (k ? q[k].length : total(q)), 0);
+const nNow = sum(inYear(year));
+const nPrev = sum(inYear(prev));
+const openNow = sum(inYear(year), 'open');
+const known = sum(inYear(year), 'open') + sum(inYear(year), 'closed');
+const lead = nPrev
+  ? `${name} released ${plural(nNow)} in ${year} so far, against ${nPrev} in ${prev}.`
+  : `${name} released ${plural(nNow)} in ${year} so far.`;
+const weights = !nNow || !known ? '' : openNow === 0 ? ` None had open weights.` : openNow === known ? ` All of them had open weights.` : ` ${openNow} of them had open weights.`;
+const caption = lead + weights;
+const older = models.filter((m) => m.lab === lab && (m.released ?? '9') < CADENCE_FROM).length;
+const yearAt = (q: Quarter, i: number) => (q.key.endsWith('Q1') || i === 0 ? q.key.slice(0, 4) : '');
+---
+
+{
+  show && (
+    <section>
+      <div class="sh">
+        <h2>How often does {name} release models?</h2>
+        <p>{caption}</p>
+      </div>
+      <ChartDownload credit="Source: the Benchmark Almanac model list" name={`${lab}-releases`} deck={`The models ${name} released each quarter since ${qs[0].label}, by whether their weights are published.`} yAxis="Models released">
+        <figure class="cd" aria-label={`${name}'s model releases each quarter`}>
+          <ul class="cd-key" aria-hidden="true">
+            {kinds.map((x) => (
+              <li>
+                <span class="sw" style={`background:${x.color}`} />
+                {x.label}
+              </li>
+            ))}
+          </ul>
+          <div class="cd-plot" role="img" aria-label={`${name}'s model releases each quarter since ${qs[0].label}`}>
+            <div class="cd-axis" aria-hidden="true">
+              {ticks.map((t) => (
+                <span style={`bottom:${((100 * t) / top).toFixed(1)}%`}>{t}</span>
+              ))}
+            </div>
+            <div class="cd-cols" style={`--n:${qs.length}`}>
+              {qs.map((q) => (
+                <div class:list={['cd-col', { partial: q.partial }]}>
+                  <div class="cd-stack" style={`height:${((100 * total(q)) / top).toFixed(1)}%`}>
+                    {kinds.map((x) =>
+                      q[x.k].length ? (
+                        <span style={`flex-grow:${q[x.k].length};background:${x.color}`} data-tv={`${plural(q[x.k].length)}, ${x.label.toLowerCase()}`} data-tn={`${q.label}${q.partial ? ' so far' : ''}`} data-ts={names(q[x.k])} />
+                      ) : null,
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div class="cd-x" style={`--n:${qs.length}`} aria-hidden="true">
+              {qs.map((q, i) => (
+                <span>{yearAt(q, i)}</span>
+              ))}
+            </div>
+          </div>
+          {older > 0 && <figcaption>{`${plural(older)} released before ${CADENCE_FROM} ${older === 1 ? 'is' : 'are'} left out.`}</figcaption>}
+        </figure>
+      </ChartDownload>
+    </section>
+  )
+}
+
+<style>
+  .cd {
+    margin: 0;
+  }
+  .cd-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .cd-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .cd-plot {
+    position: relative;
+    padding-left: 32px;
+  }
+  .cd-axis {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 180px;
+    pointer-events: none;
+  }
+  .cd-axis span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    translate: 0 50%;
+    font: 400 12px/1 var(--mono);
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cd-axis span::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid var(--grid);
+  }
+  .cd-cols {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 3px;
+    height: 180px;
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+  }
+  .cd-col {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+  .cd-stack {
+    width: 100%;
+    max-width: 34px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1px;
+  }
+  .cd-stack span {
+    flex-basis: 0;
+    min-height: 3px;
+  }
+  .cd-stack span:last-child {
+    border-radius: 3px 3px 0 0;
+  }
+  .cd-stack span:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .partial .cd-stack {
+    opacity: 0.6;
+  }
+  .cd-x {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 3px;
+    margin-top: 6px;
+  }
+  .cd-x span {
+    font: 400 12px/1 var(--mono);
+    color: var(--ink-3);
+    white-space: nowrap;
+    overflow: visible;
+  }
+  figcaption {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+</style>

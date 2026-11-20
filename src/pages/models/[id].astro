@@ -1,4 +1,5 @@
 ---
+import { evalAttrs } from '../../lib/eval-kind.ts';
 import { ECI_DECK, ECI_AXIS, SRI_DECK, RELEASE_AXIS, POOL_NOTES, CLOCK_NOTE } from '../../lib/figure-text.ts';
 import ChartDownload from '../../components/ChartDownload.astro';
 import { creditLine, ECI_CREDIT } from '../../lib/credits.ts';
@@ -16,6 +17,11 @@ import ClaimTable from '../../components/ClaimTable.astro';
 import { selfReported } from '../../lib/self-reported.ts';
 import { claimsForModel } from '../../lib/claims.ts';
 import { rivalOf } from '../../lib/compare-data.ts';
+import HeldLanes from '../../components/model/HeldLanes.astro';
+import Rivals from '../../components/model/Rivals.astro';
+import CostTable from '../../components/model/CostTable.astro';
+import Coverage from '../../components/model/Coverage.astro';
+import { eciThenNow } from '../../lib/model-insights.ts';
 
 export function getStaticPaths() {
   return featuredModels.map((m) => ({ params: { id: m.id } }));
@@ -77,6 +83,14 @@ const rival = rivalOf(m.id);
 const trail = [{ href: '/models/', label: 'Models' }, ...(ms.lab ? [{ href: `/labs/${ms.lab.id}/`, label: ms.lab.name }] : [])];
 // The page's headline finding, then what the page holds. Without a finding, modelLine gives only the name.
 const finding = modelLine(ms);
+// where it stood on the index the day it came out, against today
+const ord = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] ?? 'th'}`;
+const tn = eciThenNow(m.id);
+const eciLine = !tn
+  ? ''
+  : tn.then === 1
+    ? `When ${m.name} came out, no model released before it scored higher on Epoch AI's Capabilities Index. ${tn.now === 1 ? 'None has since.' : `Today it ranks ${ord(tn.now)} of ${tn.nowOf}.`}`
+    : `When ${m.name} came out, it ranked ${ord(tn.then)} of the ${tn.thenOf} models on Epoch AI's Capabilities Index released by then. Today it ranks ${ord(tn.now)} of ${tn.nowOf}.`;
 const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms.lab.name}` : ''}` : finding}. ${finding === m.name ? `Its scores on ${ms.results.length.toLocaleString('en-US')} ${ms.results.length === 1 ? 'benchmark' : 'benchmarks'}` : 'Its scores'}, its rank on each leaderboard${ms.eciRank ? `, its place on the Epoch Capabilities Index` : ''}, and what its model cards report.`;
 ---
 
@@ -112,6 +126,10 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
       <ModelCard id={m.id} hero />
     </header>
 
+    <HeldLanes id={m.id} />
+
+    <Rivals id={m.id} />
+
     {
       byArea.length > 0 && (
         <section>
@@ -131,7 +149,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
                     {rows.map((r) => {
                       const unit = r.benchmark.unit ?? '%';
                       return (
-                        <tr>
+                        <tr {...evalAttrs(r.benchmark)}>
                           <td><a href={`/benchmarks/${r.benchmark.id}/${isClaim(r.score) ? '?pool=all' : ''}`}>{r.benchmark.name}</a></td>
                           <td class="r">{fmt(r.score.value, unit)}</td>
                           <td class="bar-c">
@@ -158,6 +176,8 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
         </section>
       )
     }
+
+    <CostTable id={m.id} />
 
     {
       agentRows.length > 0 && (
@@ -210,6 +230,8 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
       )
     }
 
+    <Coverage id={m.id} />
+
     {
       myClaims.length > 0 && (
         <section>
@@ -227,7 +249,7 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
         <section>
           <div class="sh">
             <h2>{ms.lab?.name ?? 'The lab'}'s models over time</h2>
-            <p>{ms.lab?.name}'s models in color, against every other model on the Epoch Capabilities Index, by release date.</p>
+            <p>{eciLine || `${ms.lab?.name}'s models in color, against every other model on the Epoch Capabilities Index, by release date.`}</p>
           </div>
           <ChartDownload credit={creditLine([ECI_CREDIT])} deck={`${ms.lab?.name ?? 'The lab'}’s models in color, against every other model on the index. ${ECI_DECK}`} yAxis={ECI_AXIS} xAxis={RELEASE_AXIS} counts="Every model with a Capabilities Index score, at its release date." leaves="Models Epoch AI hasn’t scored.">
           <TimeScatter points={labPts} unit="index" label={`${ms.lab?.name} models on the Epoch Capabilities Index`} highlight={labIds} labelIds={[m.id, ...labIds.filter((x) => x !== m.id)]} legend={false} height={400} />
@@ -299,6 +321,16 @@ const metaDescription = `${finding === m.name ? `${m.name}${ms.lab ? ` from ${ms
     }
   </div>
 </Base>
+
+<script>
+  // "Show all": the rows past the first few wait hidden in their section
+  for (const b of document.querySelectorAll<HTMLButtonElement>('button[data-reveal]')) {
+    b.addEventListener('click', () => {
+      for (const r of b.closest('section')!.querySelectorAll<HTMLElement>('[data-reveal-row]')) r.hidden = false;
+      b.hidden = true;
+    });
+  }
+</script>
 
 <style>
   .split {

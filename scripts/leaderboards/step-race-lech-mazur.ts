@@ -19,12 +19,14 @@ const board: Leaderboard = {
     for (const r of await lechMazurTable(REPO, 'main', /^LLM Step-Game Leaderboard$/)) {
       const score = Number(r.mu);
       const sigma = Number(r.sigma);
-      const metrics:Record<string,number>={};
+      const metrics:Record<string,number>={ rank: Number(r.Rank) };
       for(const key of ['sigma','exposed','games','p-wins','ratio']){
         if(r[key]?.trim()&&Number.isFinite(Number(r[key])))metrics[key]=Number(r[key]);
       }
       if (r.Model && Number.isFinite(score))
-        rows.push({ ...lechMazurName(r.Model), score, metrics });
+        rows.push({ ...lechMazurName(r.Model), score, metrics, trials: metrics.games,
+          low: Number.isFinite(sigma) ? score - sigma : undefined,
+          high: Number.isFinite(sigma) ? score + sigma : undefined });
     }
     return rows;
   },

@@ -6,6 +6,11 @@ import { fetchText } from '../lib/util.ts';
 const FEED = 'https://huggingface.co/datasets/mercor/apex-agents/resolve/main/README.md';
 const board: Leaderboard = {
   benchmark: 'apex-agents',
+  parts: {
+    banking: { name: 'Banking', group: 'Domain' },
+    consulting: { name: 'Consulting', group: 'Domain' },
+    law: { name: 'Law', group: 'Domain' },
+  },
   url: 'https://huggingface.co/datasets/mercor/apex-agents#leaderboard-baselines',
   feed: FEED,
   terms: 'Mercor forbids scraping and training use; Benchmark Almanac credits and links Mercor as the source of these evaluation results.',

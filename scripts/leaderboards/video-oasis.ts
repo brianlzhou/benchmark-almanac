@@ -5,7 +5,13 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://limgeuntaekk.github.io/Video-Oasis/";
 const board: Leaderboard = {
-  benchmark: "video-oasis", url: "https://limgeuntaekk.github.io/Video-Oasis/", feed: FEED,
+  benchmark: "video-oasis", parts: {
+  'Fine-Grained Perception': { name: 'Fine-grained perception', group: 'Task type' },
+  'Spatial World': { name: 'Spatial world', group: 'Task type' },
+  'Temporal Dynamics': { name: 'Temporal dynamics', group: 'Task type' },
+  'Causal Reasoning': { name: 'Causal reasoning', group: 'Task type' },
+  'Global Narrative': { name: 'Global narrative', group: 'Task type' },
+}, url: "https://limgeuntaekk.github.io/Video-Oasis/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

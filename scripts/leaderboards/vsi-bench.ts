@@ -9,6 +9,16 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2412.14171";
 const board: Leaderboard = {
  benchmark: "vsi-bench",
+ parts: {
+   objectCount: { name: 'Object count', group: 'Task type' },
+   absoluteDistance: { name: 'Absolute distance', group: 'Task type' },
+   objectSize: { name: 'Object size', group: 'Task type' },
+   roomSize: { name: 'Room size', group: 'Task type' },
+   relativeDistance: { name: 'Relative distance', group: 'Task type' },
+   relativeDirection: { name: 'Relative direction', group: 'Task type' },
+   routePlan: { name: 'Route plan', group: 'Task type' },
+   approachOrder: { name: 'Approach order', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2412.14171",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -5,6 +5,16 @@ import { tables, text } from '../lib/html.ts';
 const FEED = "https://claw-swe-bench.github.io/";
 const board: Leaderboard = {
   benchmark: "claw-swe-bench", harnesses: 'system', reference: ['OpenClaw'], url: "https://claw-swe-bench.github.io/", feed: FEED,
+  parts: {
+    Java: { name: 'Java', group: 'Language' },
+    Go: { name: 'Go', group: 'Language' },
+    Rust: { name: 'Rust', group: 'Language' },
+    'JS/TS': { name: 'JS/TS', group: 'Language' },
+    'C/C++': { name: 'C/C++', group: 'Language' },
+    Ruby: { name: 'Ruby', group: 'Language' },
+    PHP: { name: 'PHP', group: 'Language' },
+    Python: { name: 'Python', group: 'Language' },
+  },
   terms: "Public official results, subject to the source repository license and host terms.",
   chart:{title:"Cost–Resolve Pareto",x:{key:"cost_usd",label:"Total API cost for Full-350",unit:"$",better:"lower",log:true},y:{key:"score",label:"Total Pass@1",unit:"%",better:"higher"}},
   async fetch() {

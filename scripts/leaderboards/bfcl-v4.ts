@@ -4,14 +4,26 @@
 // native function calling or "(Prompt)" for prompted calls, sometimes with a thinking flag; the mode goes
 // to `setting` together with the thinking flag. "Total Cost ($)" is the board's estimate for the entire
 // benchmark run, so `cost` is a run cost (costPer 'run'). "Latency Mean (s)" and "Latency 95th Percentile (s)"
-// are kept as metrics.latency and metrics.latencyP95.
+// are kept as metrics.latency and metrics.latencyP95. Read the task-family accuracies and format sensitivity.
 import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
 const FEED = 'https://gorilla.cs.berkeley.edu/data_overall.csv';
 
+const taskGroups: Record<string, string[]> = {
+  'Non-Live': ['Non-Live AST Acc', 'Non-Live Simple AST', 'Non-Live Multiple AST', 'Non-Live Parallel AST', 'Non-Live Parallel Multiple AST'],
+  Live: ['Live Acc', 'Live Simple AST', 'Live Multiple AST', 'Live Parallel AST', 'Live Parallel Multiple AST'],
+  'Multi Turn': ['Multi Turn Acc', 'Multi Turn Base', 'Multi Turn Miss Func', 'Multi Turn Miss Param', 'Multi Turn Long Context'],
+  'Web Search': ['Web Search Acc', 'Web Search Base', 'Web Search No Snippet'],
+  Memory: ['Memory Acc', 'Memory KV', 'Memory Vector', 'Memory Recursive Summarization'],
+  Detection: ['Relevance Detection', 'Irrelevance Detection'],
+};
+const parts = Object.fromEntries(Object.entries(taskGroups).flatMap(([group, columns]) =>
+  columns.map(name => [name, { name, group }])));
+
 const board: Leaderboard = {
   benchmark: 'bfcl-v4',
+  parts,
   url: 'https://gorilla.cs.berkeley.edu/leaderboard.html',
   feed: FEED,
   terms: 'Static CSV on the Gorilla project site; the gorilla repository (ShishirPatil/gorilla) is Apache-2.0.',
@@ -51,16 +63,24 @@ const board: Leaderboard = {
         // "Grok-4-1-fast-non-reasoning" / "-reasoning": xAI's two modes of one model
         const xai = name.match(/^(.*?)-(non-reasoning|reasoning)$/);
         const num = (v: string | undefined) => (v && Number.isFinite(Number(v)) ? Number(v) : undefined);
-        const latency = num(r['Latency Mean (s)']);
-        const latencyStd = num(r['Latency Standard Deviation (s)']);
-        const latencyP95 = num(r['Latency 95th Percentile (s)']);
+        const metrics: Record<string, number> = {};
+        const columns = {
+          Rank: 'rank', 'Latency Mean (s)': 'latency', 'Latency Standard Deviation (s)': 'latencyStd',
+          'Latency 95th Percentile (s)': 'latencyP95', 'Format Sensitivity Max Delta': 'formatSensitivityMaxDelta',
+          'Format Sensitivity Standard Deviation': 'formatSensitivityStd',
+        };
+        for (const [column, key] of [...Object.entries(columns), ...Object.keys(parts).map(key => [key, key])]) {
+          const value = num(r[column]?.replace(/%$/, ''));
+          if (value !== undefined) metrics[key] = value;
+        }
         return {
           model: xai ? xai[1] : name,
           score: parseFloat(r['Overall Acc']),
           setting: [xai ? xai[2] : thinking, mode ? (mode[2] === 'FC' ? 'native function calling' : 'prompted') : undefined].filter(Boolean).join('; ') || undefined,
           license: r.License || undefined,
           cost: num(r['Total Cost ($)']),
-          metrics: latency === undefined && latencyP95 === undefined && latencyStd === undefined ? undefined : { ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) },
+
+          metrics,
         };
       });
   },

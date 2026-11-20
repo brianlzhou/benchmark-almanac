@@ -1,5 +1,5 @@
 // Social IQa paper: development accuracy, matching the catalog note.
-// These static paper rows will not refresh. Test accuracy is a secondary metric. Context ablations are excluded.
+// These static paper rows will not refresh. Test accuracy is a secondary metric. BERT-large also has three input ablations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
@@ -7,6 +7,9 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/1904.09728";
 const board: Leaderboard = {
   benchmark: "siqa",
+  parts: {
+    test: { name: 'Test', group: 'Split' },
+  },
   url: "https://arxiv.org/html/1904.09728",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
@@ -14,7 +17,10 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const t = tables(await fetchText(FEED)).find(t => t.some(r => r[0]?.text === 'BERT-base'));
       if (!t) throw new Error('Social IQa results missing');
-      return t.filter(r => /^(GPT|BERT-base|BERT-large)$/.test(r[0]?.text)).map(r=>({model:r[0].text,score:num(r[1].text)!,metrics:{test:num(r[2].text)!}}));
+      const ablations = t.filter(r => r[0]?.text.startsWith('w/o ') && num(r[1]?.text) !== undefined)
+        .map(r => ({ model: 'BERT-large', setting: r[0].text, score: num(r[1].text)! }));
+      const main = t.filter(r => /^(GPT|BERT-base|BERT-large)$/.test(r[0]?.text)).map(r=>({model:r[0].text,score:num(r[1].text)!,metrics:{test:num(r[2].text)!}}));
+      return [...main, ...ablations];
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

@@ -35,6 +35,7 @@ const board: Leaderboard = {
   },
   async fetch() {
     const rows: LeaderboardRow[] = [];
+    board.parts = {};
     for (const r of parseCsv(await fetchText(FEED))) {
       const acc = Number(r.avg_acc);
       if (!r.display_name || !Number.isFinite(acc)) continue;
@@ -42,6 +43,16 @@ const board: Leaderboard = {
       const name = (r.model_slug || r.display_name.replace(/\s*\([^()]+\)\s*$/, '')).trim();
       const cost = Number(r.cost_per_run_usd);
       const tokens = Number(r.mean_total_output_tokens);
+      const metrics: Record<string, number> = {};
+      for (const [key, cell] of Object.entries(r)) {
+        if (!cell.trim() || !Number.isFinite(Number(cell))) continue;
+        if (key.endsWith('_acc') && key !== 'avg_acc') {
+          const task = key.slice(0, -4);
+          metrics[task] = Number(cell) * 100;
+          board.parts[task] = { name: task.replace(/_/g, ' '), group: 'Task' };
+        } else if (key === 'avg_acc_standard_error') metrics.standardError = Number(cell) * 100;
+        else if (key.startsWith('code_len_')) metrics[key] = Number(cell);
+      }
       rows.push({
         model: name,
         score: acc * 100,
@@ -49,6 +60,7 @@ const board: Leaderboard = {
         date: /^\d{4}-\d\d-\d\d$/.test(r.release_date ?? '') ? r.release_date : undefined,
         cost: Number.isFinite(cost) && cost > 0 ? cost : undefined,
         metrics: {
+          ...metrics,
           ...(Number.isFinite(tokens) && tokens > 0 ? { tokensPerCall: tokens } : {}),
           ...(r.exec_time_median_s?.trim() && Number.isFinite(Number(r.exec_time_median_s)) ? { time: Number(r.exec_time_median_s) } : {}),
         },

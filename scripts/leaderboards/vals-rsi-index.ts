@@ -17,6 +17,12 @@ const ROW =
 
 const board: Leaderboard = {
   benchmark: 'vals-rsi-index',
+  parts: {
+    task1: { name: 'Compression', group: 'Task type' },
+    task2: { name: 'LM training', group: 'Task type' },
+    task3: { name: 'Harness engineering', group: 'Task type' },
+    task4: { name: 'Post-training', group: 'Task type' },
+  },
   url: PAGE,
   feed: `${PAGE} (server-rendered task results; index = mean of the four task scores)`,
   terms: VALS_TERMS,

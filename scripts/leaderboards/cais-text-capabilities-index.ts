@@ -63,7 +63,7 @@ const EFFORT = /-(minimal|low|medium|high|xhigh|max)$/;
  * One dashboard index: the mean of `datasets` a model has (ids in `flip` count as 100 minus the score),
  * rounded to one decimal, as the dashboard table shows it.
  */
-export async function caisIndexRows(datasets: string[], flip: string[] = [], skip?: (m: CaisModel) => boolean): Promise<LeaderboardRow[]> {
+export async function caisIndexRows(datasets: string[], flip: string[] = [], skip?: (m: CaisModel) => boolean, keepParts = false): Promise<LeaderboardRow[]> {
   const models = await caisModels();
   const known = new Set(models.flatMap((m) => Object.keys(m.scores)));
   const missing = datasets.filter((d) => !known.has(d));
@@ -76,17 +76,22 @@ export async function caisIndexRows(datasets: string[], flip: string[] = [], ski
       .filter((x): x is number => x !== null);
     if (!xs.length) continue;
     const setting = m.id.match(EFFORT)?.[1] ?? (/-thinking/.test(m.id) ? 'thinking' : undefined);
-    rows.push({ model: m.name, score: Number((xs.reduce((a, b) => a + b, 0) / xs.length).toFixed(1)), setting });
+    const metrics = keepParts ? Object.fromEntries(datasets.flatMap(key => {
+      const score = m.scores[key];
+      return typeof score === 'number' ? [[key, flip.includes(key) ? 100 - score : score]] : [];
+    })) : undefined;
+    rows.push({ metrics, model: m.name, score: Number((xs.reduce((a, b) => a + b, 0) / xs.length).toFixed(1)), setting });
   }
   return rows;
 }
 
 const board: Leaderboard = {
   benchmark: 'cais-text-capabilities-index',
+  parts: { hle: "Humanity's Last Exam", textquests: 'TextQuests' },
   url: CAIS_PAGE,
   feed: `${CAIS_PAGE} (page JS chunk, mean of hle and textquests)`,
   terms: CAIS_TERMS,
   aliases: CAIS_ALIASES,
-  fetch: () => caisIndexRows(['hle', 'textquests']),
+  fetch: () => caisIndexRows(['hle', 'textquests'], [], undefined, true),
 };
 export default board;

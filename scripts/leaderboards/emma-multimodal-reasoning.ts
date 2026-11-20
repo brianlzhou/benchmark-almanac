@@ -7,6 +7,12 @@ import { num } from '../lib/html.ts';
 const FEED = "https://emma-benchmark.github.io/emma_leaderboard.json";
 const board: Leaderboard = {
   benchmark: "emma-multimodal-reasoning",
+  parts: {
+    math: { name: 'Math', group: 'Domain' },
+    physics: { name: 'Physics', group: 'Domain' },
+    chemistry: { name: 'Chemistry', group: 'Domain' },
+    coding: { name: 'Coding', group: 'Domain' },
+  },
   url: "https://emma-benchmark.github.io/emma_leaderboard.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

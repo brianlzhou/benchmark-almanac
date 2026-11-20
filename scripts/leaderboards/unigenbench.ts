@@ -8,6 +8,18 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://huggingface.co/spaces/CodeGoat24/UniGenBench_Leaderboard/resolve/main/leaderboard_data.json";
 const board: Leaderboard = {
  benchmark: "unigenbench",
+ parts: {
+   Style: { name: 'Style', group: 'Dimension' },
+   'World Knowledge': { name: 'World knowledge', group: 'Dimension' },
+   'Attribute-Overall': { name: 'Attribute', group: 'Dimension' },
+   'Action-Overall': { name: 'Action', group: 'Dimension' },
+   'Relationship-Overall': { name: 'Relationship', group: 'Dimension' },
+   'Compound-Overall': { name: 'Compound', group: 'Dimension' },
+   'Grammar-Overall': { name: 'Grammar', group: 'Dimension' },
+   'Layout-Overall': { name: 'Layout', group: 'Dimension' },
+   'Logical Reasoning': { name: 'Logical reasoning', group: 'Dimension' },
+   Text: { name: 'Text', group: 'Dimension' },
+ },
  url: "https://huggingface.co/spaces/CodeGoat24/UniGenBench_Leaderboard/resolve/main/leaderboard_data.json",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

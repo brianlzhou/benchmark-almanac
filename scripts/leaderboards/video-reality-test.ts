@@ -6,6 +6,15 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://video-reality-test.github.io/";
 const board: Leaderboard = {
  benchmark: "video-reality-test",
+ parts: {
+   'Veo3.1 Fast': { name: 'Veo3.1 Fast', group: 'Source model' },
+   Sora2: { name: 'Sora2', group: 'Source model' },
+   'Wan2.2 A14B': { name: 'Wan2.2 A14B', group: 'Source model' },
+   'Wan2.2 5B': { name: 'Wan2.2 5B', group: 'Source model' },
+   'Opensora V2': { name: 'Opensora V2', group: 'Source model' },
+   'Hunyuan Video': { name: 'Hunyuan Video', group: 'Source model' },
+   'Step Video': { name: 'Step Video', group: 'Source model' },
+ },
  url: "https://video-reality-test.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

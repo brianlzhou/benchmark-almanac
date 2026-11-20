@@ -7,6 +7,19 @@ const FEED = "https://daeyongkwon98.github.io/mustbench/data/leaderboard.json";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "mustbench",
+  parts: {
+    tsg_onset: { name: 'Temporal source grounding onset', group: 'Task type' },
+    tsg_offset: { name: 'Temporal source grounding offset', group: 'Task type' },
+    tsg: { name: 'Temporal source grounding', group: 'Task type' },
+    ltr: { name: 'Local transition recognition', group: 'Task type' },
+    tad_meteor: { name: 'Transition-aware description (METEOR)', group: 'Task type' },
+    tad_clap: { name: 'Transition-aware description (CLAP)', group: 'Task type' },
+    tad: { name: 'Transition-aware description', group: 'Task type' },
+    gto: { name: 'Global temporal ordering', group: 'Task type' },
+    mtr_iou: { name: 'Mood trajectory reasoning intersection over union', group: 'Task type' },
+    mtr_f1: { name: 'Mood trajectory reasoning F1', group: 'Task type' },
+    mtr: { name: 'Mood trajectory reasoning', group: 'Task type' },
+  },
   url: "https://daeyongkwon98.github.io/mustbench/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at daeyongkwon98.github.io; retain source attribution and follow the upstream terms.",

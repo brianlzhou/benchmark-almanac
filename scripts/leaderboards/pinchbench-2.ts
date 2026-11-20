@@ -21,12 +21,20 @@ interface Entry {
   average_cost_usd?: number | null;
   average_execution_time_seconds?: number | null;
   timestamp?: string;
+  weights?: string;
+  submission_count?: number;
+  rank?: number;
+  percentage?: number;
+  best_execution_time_seconds?: number | null;
+  best_cost_usd?: number | null;
+  value_score?: number | null;
+  cpst?: number | null;
 }
 
 const positive = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x) && x > 0;
 
 /** `extras` adds the average run cost (`cost`, per run) and the average run time (`metrics.time`, seconds). */
-export async function pinchRows(version: string, extras = false): Promise<LeaderboardRow[]> {
+export async function pinchRows(version: string, extras = false, details = false): Promise<LeaderboardRow[]> {
   const flight = nextFlight(await fetchText(pinchPage(version)));
   const shown = flight.match(/"currentVersion":"([^"]*)"/)?.[1];
   if (shown && shown !== version) throw new Error(`PinchBench served version ${shown}, not ${version}`);
@@ -39,16 +47,26 @@ export async function pinchRows(version: string, extras = false): Promise<Leader
     // "claude-opus-4.8-fast": Anthropic's fast output mode of the same model
     const fast = /^claude-.*-fast$/.test(model);
     if (fast) model = model.replace(/-fast$/, '');
+    const metrics: Record<string, number> = {};
+    if (extras && positive(e.average_execution_time_seconds)) metrics.time = e.average_execution_time_seconds;
+    if (details) {
+      for (const key of ['rank', 'percentage', 'best_execution_time_seconds', 'best_cost_usd', 'value_score', 'cpst'] as const) {
+        const value = e[key];
+        if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
+      }
+    }
     rows.push({
       model,
       score: e.average_score_percentage * 100,
       setting: fast ? 'fast mode' : undefined,
       harness: 'OpenClaw',
+      open: details && ['Open', 'Closed'].includes(e.weights ?? '') ? e.weights === 'Open' : undefined,
+      trials: details ? e.submission_count : undefined,
       date: e.timestamp?.slice(0, 10),
       ...(extras
         ? {
             cost: positive(e.average_cost_usd) ? e.average_cost_usd : undefined,
-            metrics: positive(e.average_execution_time_seconds) ? { time: e.average_execution_time_seconds } : undefined,
+            metrics: metrics,
           }
         : {}),
     });

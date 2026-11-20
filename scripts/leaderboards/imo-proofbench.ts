@@ -11,6 +11,11 @@ const URL = 'https://imobench.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'imo-proofbench',
+  parts: {
+    novel: { name: 'Novel', group: 'Split' },
+    imo2024: { name: 'IMO 2024', group: 'Split' },
+    usamo2025: { name: 'USAMO 2025', group: 'Split' },
+  },
   url: `${URL}#leaderboard`,
   feed: `${URL} (static HTML table "Latest Leaderboard", Advanced ProofBench)`,
   terms: 'Static GitHub Pages site; the IMO-Bench data in google-deepmind/superhuman is CC BY 4.0 and the page states no other terms.',

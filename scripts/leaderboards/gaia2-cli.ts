@@ -7,6 +7,12 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = 'https://huggingface.co/spaces/meta-agents-research-environments/leaderboard/resolve/main/app.py';
 const board: Leaderboard = {
   benchmark: 'gaia2-cli',
+  parts: {
+    search: { name: 'Search', group: 'Category' },
+    execution: { name: 'Execution', group: 'Category' },
+    adaptability: { name: 'Adaptability', group: 'Category' },
+    ambiguity: { name: 'Ambiguity', group: 'Category' },
+  },
   url: 'https://huggingface.co/spaces/meta-agents-research-environments/leaderboard',
   feed: `${FEED} (_GAIA2_CLI_DATA)`,
   terms: 'The official Meta Space is public; the almanac credits and links the authors, and the underlying ARE repository is MIT licensed.',

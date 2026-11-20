@@ -8,6 +8,14 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/njucckevin/SeeClick/main/readme.md";
 const board: Leaderboard = {
  benchmark: "screenspot",
+ parts: {
+   'Mobile Text': { name: 'Mobile text', group: 'Category' },
+   'Mobile Icon/Widget': { name: 'Mobile icon or widget', group: 'Category' },
+   'Desktop Text': { name: 'Desktop text', group: 'Category' },
+   'Desktop Icon/Widget': { name: 'Desktop icon or widget', group: 'Category' },
+   'Web Text': { name: 'Web text', group: 'Category' },
+   'Web Icon/Widget': { name: 'Web icon or widget', group: 'Category' },
+ },
  url: "https://github.com/njucckevin/SeeClick",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

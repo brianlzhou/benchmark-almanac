@@ -6,6 +6,9 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 const FEED = "https://askforalfred.com/leaderboard/leaderboard.html";
 const board: Leaderboard = {
   benchmark: "alfred",
+  parts: {
+    seenSuccess: { name: 'Seen rooms', group: 'Split' },
+  },
   url: "https://askforalfred.com/leaderboard/leaderboard.html",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

@@ -5,6 +5,11 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://cocodataset.org/leaderboard/bbox_dev2015.json";
 const board: Leaderboard = {
   benchmark: "coco",
+  parts: {
+    AP_small: { name: 'Small', group: 'Object size' },
+    AP_medium: { name: 'Medium', group: 'Object size' },
+    AP_large: { name: 'Large', group: 'Object size' },
+  },
   url: "https://cocodataset.org/#detection-leaderboard",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

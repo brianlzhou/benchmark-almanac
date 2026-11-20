@@ -6,6 +6,14 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://capgym.github.io/data/model_data.json";
 const board: Leaderboard = {
   benchmark: "cap-x-cap-bench",
+  parts: {
+    'Cube Lift': { name: 'Cube lift', group: 'Task type' },
+    'Cube Stack': { name: 'Cube stack', group: 'Task type' },
+    'Spill Wipe': { name: 'Spill wipe', group: 'Task type' },
+    'Peg Insert': { name: 'Peg insert', group: 'Task type' },
+    'Two Arm Lift': { name: 'Two arm lift', group: 'Task type' },
+    'Two Arm Handover': { name: 'Two arm handover', group: 'Task type' },
+  },
   url: "https://capgym.github.io/data/model_data.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

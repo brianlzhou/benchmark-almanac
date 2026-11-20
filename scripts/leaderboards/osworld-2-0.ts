@@ -33,6 +33,10 @@ interface Result {
   estimatedCostUsd?: number | null;
   costPerTaskUsd?: number | null;
   modelType?: string;
+  runCount?: number;
+  taskCount?: number;
+  binarySuccessThreshold?: number;
+  reproductionUrl?: string;
 }
 interface Data {
   defaultResultReleaseVersion?: string;
@@ -75,10 +79,17 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
           harness,
           verified: typeof r.official === 'boolean' ? r.official : undefined,
           agentOrg: harness ? r.company : undefined,
-          link: [r.trajectoryUrl, r.reproductionGuideUrl].find((url) => url?.startsWith('https://')),
-          cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / (data.datasetSize || 108) : undefined),
+          trials: r.runCount,
+          link: [r.trajectoryUrl, r.reproductionGuideUrl, r.reproductionUrl].find((url) => url?.startsWith('https://')),
+          cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / (r.taskCount || data.datasetSize || 108) : undefined),
           tokens: r.outputTokensPerTask ?? undefined,
-          metrics: typeof r.partialScore === 'number' ? { partial: r.partialScore } : undefined,
+          metrics: {
+            stepBudget: r.stepBudget ?? budget,
+            ...(typeof r.partialScore === 'number' ? { partial: r.partialScore } : {}),
+            ...(r.taskCount == null ? {} : { taskCount: r.taskCount }),
+            ...(r.binarySuccessThreshold == null ? {} : { binarySuccessThreshold: r.binarySuccessThreshold }),
+            ...(r.estimatedCostUsd == null ? {} : { runCostUsd: r.estimatedCostUsd }),
+          },
         });
       }
       return rows;

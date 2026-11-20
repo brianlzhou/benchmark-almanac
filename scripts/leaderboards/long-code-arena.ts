@@ -3,7 +3,12 @@ import type {Leaderboard} from './types.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 import {fetchText} from '../lib/util.ts';
 const FEED='https://huggingface.co/datasets/JetBrains-Research/lca-results/raw/main/aggregated/agg_results.jsonl';
-const board:Leaderboard={benchmark:'long-code-arena',url:'https://huggingface.co/spaces/JetBrains-Research/long-code-arena',feed:FEED,
+const board:Leaderboard={benchmark:'long-code-arena', parts: {
+  'Bug localization': { name: 'Bug localization', group: 'Task type' },
+  'Module summarization': { name: 'Module summarization', group: 'Task type' },
+  'Library-based CG': { name: 'Library-based code generation', group: 'Task type' },
+  CMG: { name: 'Commit message generation', group: 'Task type' },
+},url:'https://huggingface.co/spaces/JetBrains-Research/long-code-arena',feed:FEED,
  terms:'Public maker aggregate results; Hugging Face robots.txt permits the raw file. The project requires open-access publications for research using its GitHub-derived datasets.',
  aliases:{'GPT-o1':'o1'},
  async fetch(){

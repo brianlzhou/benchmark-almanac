@@ -10,6 +10,15 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2403.07718";
 const board: Leaderboard = {
  benchmark: "workarena",
+ parts: {
+   'Dashboard (4)': { name: 'Dashboard', group: 'Task type' },
+   'Form (5)': { name: 'Form', group: 'Task type' },
+   'Knowledge (1)': { name: 'Knowledge', group: 'Task type' },
+   'List-filter (6)': { name: 'List filter', group: 'Task type' },
+   'List-sort (6)': { name: 'List sort', group: 'Task type' },
+   'Menu (2)': { name: 'Menu', group: 'Task type' },
+   'Service catalog (9)': { name: 'Service catalog', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2403.07718",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

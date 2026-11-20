@@ -16,7 +16,9 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/uni-medical/GMAI-MMBench/main/README.md";
 const board: Leaderboard = {
-  benchmark: "gmai-mmbench", url: "https://github.com/uni-medical/GMAI-MMBench", feed: FEED,
+  benchmark: "gmai-mmbench", parts: {
+  validation: { name: 'Validation', group: 'Split' },
+}, url: "https://github.com/uni-medical/GMAI-MMBench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

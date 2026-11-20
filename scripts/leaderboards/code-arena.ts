@@ -2,16 +2,17 @@
 // 2025-11-12 on), overall category of the latest leaderboard. The helper lives in lmarena-elo.ts.
 // HTML and React go in the category switch. Image-to-WebDev is its own record (arena-image-to-webdev.ts). The
 // "webdev" category has every overall vote (the same vote count for each model) but a different rating,
-// and Arena doesn't say how it differs, so it stays out.
+// and stays a secondary view. Only the HTML and React prompt subsets are parts.
 import type { Leaderboard } from './types.ts';
 import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lmarena-elo.ts';
 
 const board: Leaderboard = {
   benchmark: 'code-arena',
+  parts: { 'cat:webdev-html': 'HTML', 'cat:webdev-react': 'React' },
   url: 'https://arena.ai/leaderboard/code/webdev',
   feed: arenaFeed('webdev', '*'),
   terms: ARENA_TERMS,
   aliases: ARENA_ALIASES,
-  fetch: () => arenaRowsByCategory('webdev', { skip: ['image_to_webdev', 'webdev'] }),
+  fetch: () => arenaRowsByCategory('webdev', { skip: ['image_to_webdev'] }),
 };
 export default board;

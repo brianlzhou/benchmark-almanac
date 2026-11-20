@@ -7,7 +7,19 @@ import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/cambridgeltl/xcopa/master/README.md";
 const board: Leaderboard = {
- benchmark: "xcopa", url: "https://github.com/cambridgeltl/xcopa", feed: FEED,
+ benchmark: "xcopa", parts: {
+  et: { name: 'Estonian', group: 'Language' },
+  ht: { name: 'Haitian Creole', group: 'Language' },
+  id: { name: 'Indonesian', group: 'Language' },
+  it: { name: 'Italian', group: 'Language' },
+  qu: { name: 'Southern Quechua', group: 'Language' },
+  sw: { name: 'Swahili', group: 'Language' },
+  ta: { name: 'Tamil', group: 'Language' },
+  th: { name: 'Thai', group: 'Language' },
+  tr: { name: 'Turkish', group: 'Language' },
+  vi: { name: 'Vietnamese', group: 'Language' },
+  zh: { name: 'Mandarin Chinese', group: 'Language' },
+}, url: "https://github.com/cambridgeltl/xcopa", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

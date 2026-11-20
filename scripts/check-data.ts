@@ -3,7 +3,7 @@
 //
 // usage: node scripts/check-data.ts
 import { existsSync } from 'node:fs';
-import { dataPath, readJson } from './lib/util.ts';
+import { dataPath, readJson, key } from './lib/util.ts';
 
 type Rec = Record<string, unknown> & { id: string; name: string };
 const labs = readJson<Rec[]>(dataPath('labs.json'));
@@ -52,6 +52,21 @@ const benchIds = unique('benchmark', benchmarks);
 unique('source', sources);
 
 for (const m of models) if (m.lab && !labIds.has(m.lab as string)) fail(`model ${m.id}: unknown lab ${m.lab}`);
+// a board alias must point at a model we have, on a board we read
+if (existsSync(dataPath('board-aliases.json'))) {
+  const ba = readJson<{ boards: Record<string, Record<string, string>> }>(dataPath('board-aliases.json')).boards;
+  const modelIds = new Set(models.map((m) => m.id as string));
+  for (const [board, map] of Object.entries(ba)) for (const [n, id] of Object.entries(map)) if (!modelIds.has(id)) fail(`board-aliases ${board}: "${n}" points at unknown model ${id}`);
+}
+// a name with a setting must name a setting, and must not also be a plain name of some model
+{
+  const plain = new Set(models.flatMap((m) => [m.name, m.id, ...((m.aliases as string[] | undefined) ?? [])].map((n) => key(n as string))));
+  for (const m of models)
+    for (const [n, v] of Object.entries((m.settingAliases as Record<string, string> | undefined) ?? {})) {
+      if (typeof v !== 'string' || !v.trim()) fail(`model ${m.id}: setting alias "${n}" has no setting`);
+      if (plain.has(key(n))) fail(`model ${m.id}: setting alias "${n}" is also a plain model name`);
+    }
+}
 for (const b of benchmarks) {
   if (b.category && !CATEGORIES.has(b.category as string)) fail(`benchmark ${b.id}: unknown category ${b.category}`);
   if (b.access && !ACCESS.has(b.access as string)) fail(`benchmark ${b.id}: unknown access ${b.access}`);
@@ -144,8 +159,10 @@ for (const d of systemCards) {
   const seen = new Set<string>();
   for (const r of d.results) {
     if (!benchIds.has(r.benchmark)) fail(`system card ${d.id}: unknown benchmark ${r.benchmark}`);
-    if (seen.has(r.benchmark)) fail(`system card ${d.id}: two results for ${r.benchmark}`);
-    seen.add(r.benchmark);
+    // one result per benchmark and measure: a document may give a pass rate and a partial-credit score
+    const rk = `${r.benchmark}|${(r as { measure?: string }).measure ?? ''}`;
+    if (seen.has(rk)) fail(`system card ${d.id}: two results for ${r.benchmark}${(r as { measure?: string }).measure ? ` (${(r as { measure?: string }).measure})` : ''}`);
+    seen.add(rk);
     if (!SECTIONS.has(r.section)) fail(`system card ${d.id}: unknown section ${r.section}`);
   }
 }
@@ -157,6 +174,71 @@ for (const e of epoch.eci) if (!modelIds.has(e.model)) fail(`eci: unknown model 
 for (const r of boards.rows) {
   if (!benchIds.has(r[0])) fail(`leaderboard row: unknown benchmark ${r[0]}`);
   if (!modelIds.has(r[1])) fail(`leaderboard row: unknown model ${r[1]}`);
+}
+
+// a benchmark's other measures (Benchmark.measures), the lab results that quote one, and the board columns that
+// hold one: every reference names a measure the benchmark defines
+{
+  const measuresOf = new Map<string, Set<string>>();
+  for (const b of benchmarks) {
+    const ms = (b as { measures?: { id?: string; name?: string; kind?: string; note?: string; unit?: string; better?: string }[] }).measures;
+    if (ms === undefined) continue;
+    const at = `benchmark ${b.id}: measures`;
+    if (!Array.isArray(ms) || !ms.length) { fail(`${at} must be a non-empty list`); continue; }
+    const ids = new Set<string>();
+    for (const m of ms) {
+      if (!m.id || !/^[a-z0-9][a-z0-9-]*$/.test(m.id)) fail(`${at}: bad id ${m.id}`);
+      if (ids.has(m.id ?? '')) fail(`${at}: duplicate id ${m.id}`);
+      ids.add(m.id ?? '');
+      if (!m.name) fail(`${at}: ${m.id} has no name`);
+      if (!['metric', 'part'].includes(m.kind ?? '')) fail(`${at}: ${m.id} kind must be metric or part`);
+      if (m.better !== undefined && !['higher', 'lower'].includes(m.better)) fail(`${at}: ${m.id} better must be higher or lower`);
+      for (const text of [m.name, m.note]) {
+        if (!text) continue;
+        if (/;/.test(text) || /\s[—–]\s|\s--\s/.test(text)) fail(`${at}: ${m.id} is off style`);
+        const uk = text.match(BRITISH);
+        if (uk) fail(`${at}: ${m.id} uses British spelling "${uk[0]}"`);
+      }
+    }
+    measuresOf.set(b.id, ids);
+  }
+  for (const c of [...cards, ...systemCards]) for (const r of c.results as { benchmark: string; measure?: string }[])
+    if (r.measure !== undefined && !measuresOf.get(r.benchmark)?.has(r.measure)) fail(`card ${c.id}: ${r.benchmark} has no measure ${r.measure}`);
+  const lbm = boards as unknown as { boards: Record<string, { measures?: Record<string, string> }> };
+  for (const [id, x] of Object.entries(lbm.boards))
+    for (const [key, mid] of Object.entries(x.measures ?? {}))
+      if (!measuresOf.get(id)?.has(mid)) fail(`board ${id}: column ${key} names unknown measure ${mid}`);
+}
+
+// the parts a board scores on their own (Leaderboard.parts): each names a metric key its rows keep, in site copy style
+{
+  const PART_UNITS = new Set(['%', 'score', 'elo', 'rating', 'index', 'speedup', 'usd', 'minutes', 'brier']);
+  const lbAll = boards as unknown as { boards: Record<string, { parts?: Record<string, { name?: string; group?: string; note?: string; unit?: string; better?: string }> }>; rows: unknown[][]; others?: unknown[][] };
+  const scored = new Map<string, Set<string>>();
+  for (const r of [...lbAll.rows, ...(lbAll.others ?? [])]) {
+    const m = r[8] as Record<string, number> | null | undefined;
+    if (!m) continue;
+    const s = scored.get(r[0] as string) ?? new Set<string>();
+    for (const k of Object.keys(m)) s.add(k);
+    scored.set(r[0] as string, s);
+  }
+  for (const [id, b] of Object.entries(lbAll.boards)) {
+    for (const [k, p] of Object.entries(b.parts ?? {})) {
+      const at = `board ${id}: part ${k}`;
+      if (!scored.get(id)?.has(k)) fail(`${at} is not a metric any row keeps`);
+      if (!p.name) fail(`${at} has no name`);
+      for (const [field, text] of [['name', p.name], ['group', p.group], ['note', p.note]] as const) {
+        if (!text) continue;
+        if (/;/.test(text)) fail(`${at}: ${field} has a semicolon`);
+        if (/\s[—–]\s|\s--\s/.test(text)) fail(`${at}: ${field} uses a dash as punctuation`);
+        // a part's name is the board's own label, often a proper name ("Grey's Anatomy"), so only our prose is checked
+        const uk = field === 'name' ? null : text.match(BRITISH);
+        if (uk) fail(`${at}: ${field} uses British spelling "${uk[0]}"`);
+      }
+      if (p.unit !== undefined && !PART_UNITS.has(p.unit)) fail(`${at}: unknown unit ${p.unit}`);
+      if (p.better !== undefined && !['higher', 'lower'].includes(p.better)) fail(`${at}: better must be higher or lower`);
+    }
+  }
 }
 
 // the info column (scripts/sync-leaderboards.ts): what a board says about an entry beyond its score
@@ -286,6 +368,64 @@ if (existsSync(arenaPath)) {
       if (lab && !labIds.has(lab)) fail(`arena-history.json: ${s.date} names unknown lab ${lab}`);
       if (!Number.isFinite(rating)) fail(`arena-history.json: ${s.date} ${name} has no rating`);
     }
+  }
+}
+
+// facets: every value is in the codebook, one-value facets hold one string, several-value facets a list, and
+// "none" or "unknown" stand alone. Views name only facets and values that exist.
+{
+  type FacetDef = { key: string; several: boolean; values?: { id: string }[]; codes?: string; named?: string[] };
+  const cb = readJson<{ facets: FacetDef[]; facts: { key: string; values: { id: string }[] }[] }>(dataPath('facets-codebook.json'));
+  const fx = readJson<{ benchmarks: Record<string, Record<string, unknown>> }>(dataPath('facets.json'));
+  const benchIds = new Set(benchmarks.map((b) => b.id as string));
+  const allowed = new Map(cb.facets.map((f) => [f.key, new Set((f.values ?? []).map((v) => v.id))]));
+  const LANG = /^(?:[a-z]{2,3}|mul|unknown)$/;
+  const okValue = (f: FacetDef, v: string) => {
+    if (f.codes === 'iso639') return LANG.test(v);
+    if (f.named && v.includes(':')) return f.named.includes(v.slice(0, v.indexOf(':'))) && v.slice(v.indexOf(':') + 1).trim().length > 0;
+    return allowed.get(f.key)!.has(v);
+  };
+  for (const [id, f] of Object.entries(fx.benchmarks)) {
+    if (!benchIds.has(id)) fail(`facets.json: unknown benchmark ${id}`);
+    for (const d of cb.facets) {
+      const v = f[d.key];
+      if (v === undefined) {
+        fail(`facets.json: ${id} has no ${d.key}`);
+        continue;
+      }
+      const vs = d.several ? v : [v];
+      if (d.several !== Array.isArray(v) || !(vs as unknown[]).length || (vs as unknown[]).some((x) => typeof x !== 'string')) {
+        fail(`facets.json: ${id}.${d.key} must be ${d.several ? 'a non-empty list' : 'one string'}`);
+        continue;
+      }
+      for (const x of vs as string[]) if (!okValue(d, x)) fail(`facets.json: ${id}.${d.key} has unknown value "${x}"`);
+      if ((vs as string[]).length > 1 && (vs as string[]).some((x) => x === 'none' || x === 'unknown')) fail(`facets.json: ${id}.${d.key} mixes none or unknown with other values`);
+    }
+    if (f.construct !== 'propensity' && Array.isArray(f.propensity) && f.propensity.some((x) => x !== 'none')) fail(`facets.json: ${id} names a behavior but does not measure a propensity`);
+    if (f.basedOn !== undefined && (!Array.isArray(f.basedOn) || !['version', 'method'].includes(f.basis as string) || (f.basedOn as string[]).some((c) => !benchIds.has(c) || c === id))) fail(`facets.json: ${id}.basedOn must list other benchmark ids, on a version or a method run`);
+    if (f.components !== undefined && (!Array.isArray(f.components) || !f.combines || (f.components as string[]).some((c) => !benchIds.has(c)))) fail(`facets.json: ${id}.components must list benchmark ids, on a benchmark that combines others`);
+    for (const d of cb.facts) {
+      const v = f[d.key];
+      if (v === undefined || v === null) continue;
+      const ok = new Set(d.values.map((x) => x.id));
+      for (const x of Array.isArray(v) ? v : [v]) if (!ok.has(x as string)) fail(`facets.json: ${id}.${d.key} has unknown value "${x}"`);
+    }
+  }
+  const untagged = benchmarks.filter((b) => !fx.benchmarks[b.id as string]).length;
+  if (untagged) warn.push(`facets.json: ${untagged} benchmarks have no facets yet`);
+  type Rule = { all?: Rule[]; any?: Rule[]; facet?: string; in?: string[] };
+  const checkRule = (view: string, r: Rule) => {
+    if (r.all || r.any) for (const x of r.all ?? r.any ?? []) checkRule(view, x);
+    else {
+      const d = cb.facets.find((f) => f.key === r.facet);
+      if (!d) return fail(`views.json: ${view} names unknown facet ${r.facet}`);
+      for (const v of r.in ?? []) if (!okValue(d, v) && !(d.key === 'subject' && /^[1-6]$/.test(v))) fail(`views.json: ${view} names unknown ${d.key} value "${v}"`);
+    }
+  };
+  const views = readJson<{ views: { id: string; name: string; note: string; rule: Rule }[] }>(dataPath('views.json'));
+  for (const v of views.views) {
+    if (!/^[a-z0-9-]+$/.test(v.id) || !v.name || !v.note) fail(`views.json: ${v.id} needs an id, a name and a note`);
+    checkRule(v.id, v.rule);
   }
 }
 

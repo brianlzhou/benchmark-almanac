@@ -4,7 +4,9 @@ import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 const FEED = 'https://huggingface.co/spaces/onyx-dot-app/EnterpriseRAG-Bench-Leaderboard/raw/main/data/final_display_data/leaderboard.csv';
 const board: Leaderboard = {
-  benchmark: 'enterpriserag-bench', url: 'https://huggingface.co/spaces/onyx-dot-app/EnterpriseRAG-Bench-Leaderboard', feed: FEED,
+  benchmark: 'enterpriserag-bench', parts: {
+  completeness: { name: 'Answer completeness', group: 'Dimension', note: 'The overall score averages per-question correctness multiplied by completeness.' },
+}, url: 'https://huggingface.co/spaces/onyx-dot-app/EnterpriseRAG-Bench-Leaderboard', feed: FEED,
   terms: 'Public official Hugging Face leaderboard data. The almanac credits Onyx and links the source.',
   async fetch() {
     const data = parseCsv(await fetchText(FEED));

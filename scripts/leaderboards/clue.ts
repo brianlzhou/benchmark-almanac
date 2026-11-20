@@ -5,7 +5,17 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const FEED = 'https://arxiv.org/html/2004.05986';
 const board: Leaderboard = {
-  benchmark: 'clue', url: FEED, feed: FEED,
+  benchmark: 'clue', parts: {
+  TNEWS: { name: 'TNEWS', group: 'Category' },
+  IFLYTEK: { name: 'IFLYTEK', group: 'Category' },
+  CLUEWSC2020: { name: 'CLUEWSC2020', group: 'Category' },
+  AFQMC: { name: 'AFQMC', group: 'Category' },
+  CSL: { name: 'CSL', group: 'Category' },
+  OCNLI: { name: 'OCNLI', group: 'Category' },
+  CMRC: { name: 'CMRC', group: 'Category' },
+  ChID: { name: 'ChID', group: 'Category' },
+  'C 3': { name: 'C3', group: 'Category' },
+}, url: FEED, feed: FEED,
   terms: 'The authors publish this paper on arXiv. Credit the CLUE authors for the reported baseline results.',
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t.some(r => r[0]?.text === 'Model' && r[1]?.text === 'Avg'));

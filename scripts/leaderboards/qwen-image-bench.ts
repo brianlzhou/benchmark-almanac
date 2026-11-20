@@ -9,6 +9,13 @@ const FEED = "https://huggingface.co/datasets/Qwen/Qwen-Image-Bench/raw/main/REA
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "qwen-image-bench",
+  parts: {
+    quality: { name: 'Quality', group: 'Dimension' },
+    aesthetics: { name: 'Aesthetics', group: 'Dimension' },
+    alignment: { name: 'Alignment', group: 'Dimension' },
+    real_world_fidelity: { name: 'Real world fidelity', group: 'Dimension' },
+    creative_generation: { name: 'Creative generation', group: 'Dimension' },
+  },
   url: "https://github.com/QwenLM/Qwen-Image-Bench",
   feed: FEED,
   terms: "Official results from the Qwen dataset card on Hugging Face. The almanac credits and links the source.",

@@ -15,7 +15,10 @@ const board: Leaderboard = {
   
   async fetch() {
     const out: LeaderboardRow[] = [];
-    for (const t of tables(await fetchText(FEED))) {
+    const all = tables(await fetchText(FEED));
+    const diagnostic = all.find(t => t[0]?.some(c => c.text === 'S1'));
+    const clean = (value: string) => value.replace(/[🏅🥇🥈🥉†‡*]/gu, '').trim();
+    for (const t of all) {
       const head = t[0]?.map(c => c.text) ?? [];
       if (!(head.includes('Avg(Strict)'))) continue;
       for (const r of t.slice(1)) {
@@ -27,6 +30,15 @@ const board: Leaderboard = {
           if (i === 1 || i === 4) continue;
           const v = num(r[i]?.text); if (v !== undefined) metrics[head[i]] = v;
         }
+        const secondary = diagnostic?.slice(1).find(v => clean(v[1]?.text ?? '') === name && v[3]?.text === r[3]?.text);
+        if (secondary && diagnostic) {
+          for (let j = 4; j < secondary.length; j++) {
+            const value = num(secondary[j].text);
+            if (value !== undefined) metrics[diagnostic[0][j].text] = value;
+          }
+        }
+        const rank = num(r[0]?.text);
+        if (rank !== undefined) metrics.rank = rank;
         out.push({ model: identity(name), score: score * 1, setting: undefined, metrics });
       }
     }

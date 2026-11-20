@@ -15,7 +15,9 @@ import { symbolsSvg, swarmSvg, SWARMS, heroHead, heroLede, printsHtml, printsHea
 import Crumbs from '../../components/Crumbs.astro';
 import TrendChart from '../../components/insights/TrendChart.astro';
 import InsightCards from '../../components/insights/InsightCards.astro';
-import { reportingTrend, claimTrend, carried, trendSeries, timeAxis, pct, CARRY_MIN, type Val } from '../../lib/insights.ts';
+import { reportingTrend, claimTrend, carried, launchLife, trendSeries, timeAxis, pct, CARRY_MIN, LIFE_MONTHS, LIFE_GRACE, type Val, type TSeries } from '../../lib/insights.ts';
+import { AS_OF } from '../../lib/data.ts';
+import { humanDate } from '../../lib/format.ts';
 import CarryList from '../../components/insights/CarryList.astro';
 import { POOL_CREDIT } from '../../lib/credits.ts';
 
@@ -124,6 +126,38 @@ const carryViews = [false, true].map((sf) => {
   const leadEx = others.filter((x) => x.carriers === 1 && x.labs[0].name === lead.name).slice(0, 2).map((x) => x.name);
   const lede = `Of the ${c.total} benchmarks named in ${word(CARRY_MIN)} or more releases since 2024, ${one.length} owe at least half of those releases to one lab, and ${two.length} more owe four in five to two labs. ${one.filter((x) => x.own).length} of the ones a single lab carries are its own. ${lead.name} carries the most that others made, ${lead.third}, among them ${leadEx.join(' and ')}.`;
   return { key: `rp-cv-${+sf}`, lede, others: others.slice(0, 20), all: c.list.slice(0, 20) };
+});
+
+// how long benchmarks stay in launch posts, by the year labs first named them, with and without safety evaluations
+// (the safety switch shows one)
+const lifeAxis = { min: 0, max: LIFE_MONTHS, ticks: [0, 3, 6, 9, 12, 15, 18, 21, 24].map((v) => ({ v, label: String(v) })), title: 'Months since a lab first named it' };
+const lifeCut = (() => {
+  const t = new Date(Date.parse(AS_OF));
+  t.setUTCMonth(t.getUTCMonth() - LIFE_GRACE);
+  return t.toISOString().slice(0, 10);
+})();
+const lifeViews = [false, true].map((sf) => {
+  const cs = launchLife(sf);
+  const lifeRamp = ['var(--ink-4)', 'var(--ink-3)', 'var(--ink-2)', 'var(--ink)'];
+  const series: TSeries[] = cs.map((co, k) => ({
+    key: co.year,
+    label: co.year,
+    color: lifeRamp[Math.max(0, lifeRamp.length - cs.length + k)],
+    pts: co.share.map((v, m) => ({
+      x: m,
+      y: v === null ? null : 100 * v,
+      tv: v === null ? undefined : pct(v),
+      tn: `Benchmarks first named in ${co.year}, ${m === 0 ? 'when first named' : `${m} month${m === 1 ? '' : 's'} later`}`,
+      ts: `Estimated share still named in launch posts, of the ${co.n} first named in ${co.year}`,
+    })),
+  }));
+  const thisYear = AS_OF.slice(0, 4);
+  const full = cs.filter((co) => co.year !== thisYear);
+  const a = full.at(-1)!;
+  const yearOn = a.share[12];
+  const cur = cs.find((co) => co.year === thisYear);
+  const lede = `Of the benchmarks labs first named in ${a.year}, ${pct(a.once / a.n)} appeared in only one release${yearOn != null ? `, and ${pct(yearOn)} were still being named a year later` : ''}.${cur ? ` Of those first named in ${cur.year} before ${humanDate(lifeCut).replace(/, \d{4}$/, '')}, ${pct(cur.once / cur.n)} have appeared in only one release.` : ''}`;
+  return { key: `rp-cv-${+sf}`, lede, series, n: cs.reduce((x, co) => x + co.n, 0) };
 });
 
 // lab numbers against independent runs, by the year of the lab's document
@@ -439,6 +473,27 @@ const trendViews = [false, true].flatMap((fr) =>
       }
     </section>
 
+    <section id="lifespan">
+      {
+        lifeViews.map((v) => (
+          <div class={`rp-cv ${v.key}`}>
+            <div class="sh">
+              <h2>How long do benchmarks stay in launch posts?</h2>
+              <p>{v.lede} This counts every lab, whatever the frontier switches say.</p>
+            </div>
+            <ChartDownload
+              credit={creditLine([LAUNCH_POSTS])}
+              name="how-long-benchmarks-stay-in-launch-posts"
+              deck="For the benchmarks labs first named in each year, the estimated share still being named in launch posts so many months later."
+              counts={`${v.n.toLocaleString('en-US')} benchmarks, with versions of a test as one. A benchmark has left once no release has named it for ${LIFE_GRACE} months.`}
+            >
+              <TrendChart series={v.series} x={lifeAxis} y={{ unit: '%' }} label="Share of benchmarks still named in launch posts, by months since a lab first named them" w={1120} h={380} nh={280} dots={false} legend />
+            </ChartDownload>
+          </div>
+        ))
+      }
+    </section>
+
     <section id="labs">
       <div class="sh">
         <h2 data-rp-prints-head>{printsHead(d, view)}</h2>
@@ -533,6 +588,11 @@ const trendViews = [false, true].flatMap((fr) =>
         <p>
           The charts over time count by half year from 2024. We have read far fewer launch posts from 2024 than from later years ({reportingTrend().releases[0]} from the first half of 2024, {Math.max(...reportingTrend().releases)} from the busiest half year since), so the
           earliest points rest on fewer releases. Hover a point to see how many. The latest half year isn't over yet, so its point is hollow.
+        </p>
+        <p>
+          A benchmark stays in launch posts until no release has named any version of it for {LIFE_GRACE} months. We can only tell that for benchmarks last named before {humanDate(lifeCut)}, so a benchmark
+          named since then counts as followed up to that day, and one first named since then doesn't count yet. Each line is a survival estimate, as for saturation on the <a href="/insights/evals/#saturation">evals page</a>,
+          and stops when fewer than 15 benchmarks are left to follow. The first year we read is 2024, so benchmarks labs had named before then and named again in 2024 count as first named in 2024.
         </p>
         <p>
           "Frontier models only" counts just the releases of a model that {FRONTIER_MODEL_BASIS}, from any lab. It uses Epoch AI's index, so a model Epoch hasn't scored doesn't count. Both switches can be on at once.

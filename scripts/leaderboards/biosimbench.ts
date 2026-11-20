@@ -6,6 +6,12 @@ import { jsLiteral } from '../lib/html.ts';
 const URL='https://www.celltype.com/biosimbench';
 interface Model {id:string;name:string;detail:string;group:string;regime:string;scores:Record<string,{v:number;ci?:number[]}>;legacy?:boolean;placeholder?:boolean}
 const board:Leaderboard={benchmark:'biosimbench',url:URL,feed:URL+' (app bundle response-prediction data)',
+parts: {
+  drugTransfer: { name: 'Drug transfer', group: 'Task type' },
+  drugResponse: { name: 'Drug response', group: 'Task type' },
+  cytokine: { name: 'Cytokine', group: 'Task type' },
+  crispri: { name: 'CRISPRi', group: 'Task type' },
+},
  terms:'CellType terms prohibit automated access and systematic collection; the Almanac credits CellType and links the source.',
  async fetch(){const html=await fetchText(URL);const src=html.match(/src="([^" ]*\/assets\/app-[^" ]+\.js)"/)?.[1];
  if(!src)throw new Error('BioSimBench app bundle missing');const js=await fetchText(new globalThis.URL(src,URL).href);

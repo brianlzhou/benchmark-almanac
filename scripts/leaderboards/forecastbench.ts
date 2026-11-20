@@ -10,7 +10,7 @@
 // https://github.com/forecastingresearch/forecastbench/blob/main/src/llm_forecaster/output.py .
 // It means zero-shot prompting with crowd forecasts as context, a whole-benchmark run configuration.
 // The Baseline leaderboard (no tools, no crowd forecasts) is a separate CSV and is not read here.
-// The Overall 95% CI column is kept as metrics.ciLow and ciHigh.
+// The three 95% intervals describe the Brier indices. The raw Brier scores have separate columns.
 // For duplicate external-system entries, keep the first published row in the default board.
 // Sample counts describe coverage, not a run configuration, and remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -55,6 +55,7 @@ const unspecified = (name: string) => /^(?:gpt4o|gpt4|gpt4turbo|gpt4v|gpt35turbo
 
 const board: Leaderboard = {
   benchmark: 'forecastbench',
+  parts: { brierDataset: 'Brier Dataset', brierMarket: 'Brier Market' },
   url: 'https://www.forecastbench.org/leaderboards/',
   feed: `${FEED} (all model systems, Brier Overall)`,
   terms: 'CSV in the forecastingresearch/forecastbench-datasets repository; the site and datasets are CC BY-SA 4.0.',
@@ -98,7 +99,35 @@ export async function fetchForecastRows(feed: string, metric: 'Overall' | 'Brier
       const key = `${r.Model}|${r.Team}`;
       if (seen.has(key)) continue;
       seen.add(key);
-      rows.push({ ...identity, score, metrics: { ...(r.Overall?.trim() ? {brierIndex: Number(r.Overall)} : {}), ...(metric === 'Overall' && ci ? { ciLow: Number(ci[1]), ciHigh: Number(ci[2]) } : {}), ...(r.N?.trim() && Number.isFinite(Number(r.N)) ? { questions: Number(r.N) } : {}) } });
+      const metrics: Record<string, number> = {};
+      const columns = {
+        Rank: 'rank', Overall: 'brierIndex', Dataset: 'datasetIndex', Market: 'marketIndex',
+        'Brier Dataset': 'brierDataset', 'Brier Market': 'brierMarket', 'Brier Overall': 'brierOverall',
+        N: 'questions', 'N dataset': 'datasetQuestions', 'N market': 'marketQuestions',
+        'Pct times № 1': 'pctRankedFirst', 'Pct times top 5%': 'pctRankedTop5', Peer: 'peer', BSS: 'brierSkillScore',
+      };
+      for (const [column, name] of Object.entries(columns)) {
+        if (column === metric && column === 'Brier Overall') continue;
+        if (r[column]?.trim() && Number.isFinite(Number(r[column]))) metrics[name] = Number(r[column]);
+      }
+      for (const [column, name] of [['Dataset', 'datasetIndex'], ['Market', 'marketIndex'], ['Overall', 'overallIndex']]) {
+        const interval = r[column + ' 95% CI']?.match(/\[\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*\]/);
+        if (interval) {
+          metrics[name + 'Low'] = Number(interval[1]);
+          metrics[name + 'High'] = Number(interval[2]);
+        }
+      }
+      for (const [column, name] of [['Supers > Forecaster?', 'supersBeatForecaster'], ['Forecaster > Public?', 'forecasterBeatsPublic']]) {
+        if (['Yes', 'No'].includes(r[column])) metrics[name] = Number(r[column] === 'Yes');
+        const value = r['p-val ' + column]?.trim();
+        if (value && Number.isFinite(Number(value))) metrics[name + 'P'] = Number(value);
+        if (value?.startsWith('<') && Number.isFinite(Number(value.slice(1)))) metrics[name + 'PBelow'] = Number(value.slice(1));
+      }
+      if (metric === 'Overall' && ci) {
+        metrics.ciLow = Number(ci[1]);
+        metrics.ciHigh = Number(ci[2]);
+      }
+      rows.push({ ...identity, score, submitter: r.Team, metrics });
     }
     return rows;
 }

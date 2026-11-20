@@ -7,6 +7,13 @@ const FEED = "https://arxiv.org/html/2402.17753";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "locomo",
+  parts: {
+    singleHop: { name: 'Single-hop', group: 'Task type' },
+    multiHop: { name: 'Multi-hop', group: 'Task type' },
+    temporal: { name: 'Temporal', group: 'Task type' },
+    openDomain: { name: 'Open domain', group: 'Task type' },
+    adversarial: { name: 'Adversarial', group: 'Task type' },
+  },
   url: "https://snap-research.github.io/locomo/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

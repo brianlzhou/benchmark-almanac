@@ -9,15 +9,15 @@
 // Sonnet). Stealth names (Polaris Alpha, Horizon Beta, Sherlock Dash Alpha) stay unmatched. Metrics keep
 // the half-width of the Path Length 95% interval (sum_chain_avg_ci, the board's error bars) as "ci" and the
 // average reasoning tokens per trial (avg_reasoning_tokens) as "reasoningTokens", the x-axis of the board's
-// "Reasoning Tokens vs Path Length" chart.
+// "Reasoning Tokens vs Path Length" chart. The rankings file supplies mean path length for each starting word.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
 const FEED = 'https://lisanbench.com/data/core.json';
 
 interface Data {
-  models: { id: string; full?: string; label: string; coverage?: { trials?: number }; output_tokens?: number; estimated_cost_usd?: number }[];
-  aggregated: { model: string; sum_chain_avg?: number; sum_chain_avg_ci?: [number, number] | null; avg_reasoning_tokens?: number | null }[];
+  models: { id: string; full?: string; label: string; coverage?: { trials?: number; words?: number }; input_tokens?: number; recorded_cost_usd?: number; output_tokens?: number; estimated_cost_usd?: number }[];
+  aggregated: { [key: string]: unknown; model: string; sum_chain_avg?: number; sum_chain_avg_ci?: [number, number] | null; avg_reasoning_tokens?: number | null }[];
 }
 
 const board: Leaderboard = {
@@ -65,6 +65,19 @@ const board: Leaderboard = {
   },
   async fetch() {
     const data = await fetchJson<Data>(FEED);
+    const ranking = await fetchJson<{ per_word: { model: string; word: string; avg_chain: number }[] }>(
+      new URL('rankings.json', FEED).href);
+    const byWord = new Map<string, Record<string, number>>();
+    const parts: NonNullable<Leaderboard['parts']> = {};
+    for (const entry of ranking.per_word) {
+      if (!entry.word || !Number.isFinite(entry.avg_chain)) continue;
+      const metrics = byWord.get(entry.model) ?? {};
+      const key = 'word_' + entry.word;
+      metrics[key] = entry.avg_chain;
+      parts[key] = { name: entry.word, group: 'Starting word' };
+      byWord.set(entry.model, metrics);
+    }
+    board.parts = parts;
     const byId = new Map(data.models.map((m) => [m.id, m]));
     const rows: LeaderboardRow[] = [];
     for (const a of data.aggregated) {
@@ -73,18 +86,29 @@ const board: Leaderboard = {
       const paren = m.label.match(/\s*\(([^)]*)\)$/);
       const trials = m.coverage?.trials;
       const name = paren ? m.label.slice(0, paren.index).trim() : m.label;
-      const metrics: Record<string, number> = {};
+      const metrics: Record<string, number> = { ...byWord.get(a.model) };
+      for (const key of ['sum_chain_max', 'sum_sparse_chain_avg', 'sum_sparsity_only_avg', 'avg_hardness', 'avg_validity', 'reasoning_measurements']) {
+        const value = a[key];
+        if (typeof value === 'number') metrics[key] = value;
+      }
+      const sparseCI = a.sum_sparse_chain_avg_ci;
+      if (Array.isArray(sparseCI) && sparseCI.length === 2 && sparseCI.every(Number.isFinite)) {
+        [metrics.sparseLow, metrics.sparseHigh] = sparseCI;
+      }
+      if (typeof m.coverage?.words === 'number') metrics.words = m.coverage.words;
+      if (trials && typeof m.input_tokens === 'number') metrics.inputTokens = m.input_tokens / trials;
+      if (typeof m.recorded_cost_usd === 'number') metrics.recordedRunCost = m.recorded_cost_usd;
       const ci = a.sum_chain_avg_ci;
       if (Array.isArray(ci) && ci.length === 2 && ci.every(Number.isFinite)) metrics.ci = (ci[1] - ci[0]) / 2;
       if (typeof a.avg_reasoning_tokens === 'number' && a.avg_reasoning_tokens >= 0) metrics.reasoningTokens = a.avg_reasoning_tokens;
       rows.push({
         // the instruct and thinking 2507 releases of Qwen3 235B share one label
         model: /qwen3-235b-a22b-thinking-2507/.test(m.full ?? '') ? 'Qwen3 235B A22B Thinking 2507' : name,
-        score: a.sum_chain_avg,
+        score: a.sum_chain_avg, trials,
         ...(Array.isArray(ci) && ci.length === 2 && ci.every(Number.isFinite) ? { low: ci[0], high: ci[1] } : {}),
         setting: paren?.[1].trim().toLowerCase() || undefined,
-        cost: trials && m.estimated_cost_usd ? m.estimated_cost_usd / trials : undefined,
-        tokens: trials && m.output_tokens ? m.output_tokens / trials : undefined,
+        cost: trials && typeof m.estimated_cost_usd === 'number' ? m.estimated_cost_usd / trials : undefined,
+        tokens: trials && typeof m.output_tokens === 'number' ? m.output_tokens / trials : undefined,
         ...(Object.keys(metrics).length ? { metrics } : {}),
       });
     }

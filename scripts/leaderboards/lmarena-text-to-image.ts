@@ -5,6 +5,16 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lm
 
 const board: Leaderboard = {
   benchmark: 'lmarena-text-to-image',
+  parts: {
+    'cat:3d_modeling': '3D modeling',
+    'cat:agentic': 'Agentic',
+    'cat:art': 'Art',
+    'cat:cartoon': 'Cartoon',
+    'cat:commercial_design': 'Commercial design',
+    'cat:photorealistic': 'Photorealistic',
+    'cat:portraits': 'Portraits',
+    'cat:text_rendering': 'Text rendering',
+  },
   url: 'https://arena.ai/leaderboard',
   feed: arenaFeed('text_to_image', '*'),
   terms: ARENA_TERMS,

@@ -7,6 +7,13 @@ const FEED = "https://arxiv.org/html/2408.06327";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "visualagentbench",
+  parts: {
+    omniGibson: { name: 'OmniGibson', group: 'Environment' },
+    minecraft: { name: 'Minecraft', group: 'Environment' },
+    mobile: { name: 'Mobile', group: 'Environment' },
+    webArenaLite: { name: 'WebArena Lite', group: 'Environment' },
+    css: { name: 'CSS', group: 'Environment' },
+  },
   url: "https://github.com/THUDM/VisualAgentBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

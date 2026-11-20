@@ -8,7 +8,19 @@ const PAGE='https://huggingface.co/spaces/Vchitect/VBench_Leaderboard';
 const FEED='https://vchitect-vbench-leaderboard.hf.space/config';
 interface Table {headers:string[];data:unknown[][]}
 export default {
- benchmark:'vbench-i2v',url:PAGE,feed:FEED,
+ benchmark:'vbench-i2v', parts: {
+  'I2V Score': { name: 'Image-to-video score', group: 'Dimension' },
+  'Quality Score': { name: 'Quality score', group: 'Dimension' },
+  'Video-Text Camera Motion': { name: 'Video-text camera motion', group: 'Dimension' },
+  'Video-Image Subject Consistency': { name: 'Video-image subject consistency', group: 'Dimension' },
+  'Video-Image Background Consistency': { name: 'Video-image background consistency', group: 'Dimension' },
+  'Subject Consistency': { name: 'Subject consistency', group: 'Dimension' },
+  'Background Consistency': { name: 'Background consistency', group: 'Dimension' },
+  'Motion Smoothness': { name: 'Motion smoothness', group: 'Dimension' },
+  'Dynamic Degree': { name: 'Dynamic degree', group: 'Dimension' },
+  'Aesthetic Quality': { name: 'Aesthetic quality', group: 'Dimension' },
+  'Imaging Quality': { name: 'Imaging quality', group: 'Dimension' },
+},url:PAGE,feed:FEED,
  terms:'Public Gradio configuration published by Vchitect; the VBench repository uses Apache-2.0, and the almanac credits and links the source.',
  async fetch(){
   const cfg=await fetchJson<{components:{type:string;props:{value?:Table}}[]}>(FEED);

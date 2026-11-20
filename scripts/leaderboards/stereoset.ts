@@ -5,7 +5,18 @@ import { fetchText } from '../lib/util.ts';
 import { tables, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/moinnadeem/StereoSet/master/code/predictions.txt";
 const board: Leaderboard = {
-  benchmark: "stereoset", url: "https://github.com/moinnadeem/StereoSet", feed: FEED,
+  benchmark: "stereoset", parts: {
+  intrasentence_gender: { name: 'Intrasentence gender', group: 'Category' },
+  intrasentence_profession: { name: 'Intrasentence profession', group: 'Category' },
+  intrasentence_race: { name: 'Intrasentence race', group: 'Category' },
+  intrasentence_religion: { name: 'Intrasentence religion', group: 'Category' },
+  intrasentence_overall: { name: 'Intrasentence', group: 'Split' },
+  intersentence_gender: { name: 'Intersentence gender', group: 'Category' },
+  intersentence_profession: { name: 'Intersentence profession', group: 'Category' },
+  intersentence_race: { name: 'Intersentence race', group: 'Category' },
+  intersentence_religion: { name: 'Intersentence religion', group: 'Category' },
+  intersentence_overall: { name: 'Intersentence', group: 'Split' },
+}, url: "https://github.com/moinnadeem/StereoSet", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

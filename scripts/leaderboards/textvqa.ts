@@ -7,14 +7,22 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/1904.08920";
 const board: Leaderboard = {
   benchmark: "textvqa",
+  parts: {
+    validation: { name: 'Validation', group: 'Split' },
+  },
   url: "https://arxiv.org/html/1904.08920",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      const t=tables(await fetchText(FEED)).find(t=>t[1]?.map(c=>c.text).join('|')==='Model|Vocab|Val|Test');
+      const source = tables(await fetchText(FEED));
+      const t=source.find(t=>t[1]?.map(c=>c.text).join('|')==='Model|Vocab|Val|Test');
       if(!t) throw new Error('TextVQA table missing');
-      return t.slice(2).filter(r=>r.length===4 && num(r[3].text)!==undefined).map(r=>({model:r[0].text==='+LoRRA'?'Pythia + LoRRA':r[0].text,setting:`vocabulary ${r[1].text}`,score:num(r[3].text)!,metrics:{validation:num(r[2].text)!}}));
+      const trained = t.slice(2).filter(r=>r.length===4 && num(r[3].text)!==undefined).map(r=>({model:r[0].text==='+LoRRA'?'Pythia + LoRRA':r[0].text,setting:`vocabulary ${r[1].text}`,score:num(r[3].text)!,metrics:{validation:num(r[2].text)!}}));
+      const heuristics = source.find(t => t[1]?.map(c => c.text).join('|') === 'Model|Val|Test');
+      const baselines = (heuristics ?? []).slice(2).filter(r => r.length === 3 && !/Human|\bUB$/.test(r[0].text) && num(r[2].text) !== undefined)
+        .map(r => ({ model: r[0].text, setting: 'heuristic baseline', score: num(r[2].text)!, metrics: { validation: num(r[1].text)! } }));
+      return [...trained, ...baselines];
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

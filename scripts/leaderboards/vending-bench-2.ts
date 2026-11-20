@@ -42,10 +42,18 @@ function toJson(literal: string): string {
 interface Run {
   final_value?: number;
   final_value_sem?: number;
+  final_value_std?: number;
+  final_value_ci95?: number;
+  final_value_geomean?: number;
+  final_value_geomean_n?: number;
+  num_final_values?: number;
+  num_epochs?: number;
 }
 
+interface Spend { cost?: number; tokens?: number; metrics: Record<string, number> }
+
 /** The vb2 runs and, by model, the cost and output tokens of one run, from the page's node and chunk modules. */
-async function load(): Promise<{ runs: Record<string, Run>; costs: Map<string, { cost?: number; tokens?: number }> }> {
+async function load(): Promise<{ runs: Record<string, Run>; costs: Map<string, Spend> }> {
   const html = await fetchText(PAGE);
   const nodes = [...new Set([...html.matchAll(/_app\/immutable\/(nodes\/[\w.-]+\.js)/g)].map((m) => m[1]))];
   const nodeJs = await Promise.all(nodes.map((n) => fetchText(BASE + n)));
@@ -72,12 +80,17 @@ async function load(): Promise<{ runs: Record<string, Run>; costs: Map<string, {
   }
   if (!runs) throw new Error('no module with runs.vb2 found');
   // "Claude Fable 5 - High":{provider:`Anthropic`,n:5,mean_cost:1369.26,...,avg_output_tokens:311605,...}
-  const costs = new Map<string, { cost?: number; tokens?: number }>();
+  const costs = new Map<string, Spend>();
   for (const js of [...nodeJs, ...chunks]) {
     for (const m of js.matchAll(/"([^"]+)":\{([^{}]*?\bmean_cost:[^{}]*)\}/g)) {
       const field = (k: string) => Number(m[2].match(new RegExp(`\\b${k}:(-?[\\d.]+)`))?.[1]);
       const [cost, tokens] = [field('mean_cost'), field('avg_output_tokens')];
-      costs.set(m[1], { cost: cost > 0 ? cost : undefined, tokens: tokens > 0 ? tokens : undefined });
+      const metrics: Record<string, number> = {};
+      for (const key of ['min_cost','max_cost','avg_input_tokens','price_per_mtok_in','price_per_mtok_out','n']) {
+        const value = field(key);
+        if (Number.isFinite(value)) metrics[key === 'n' ? 'pricedRuns' : key] = value;
+      }
+      costs.set(m[1], { metrics, cost: cost > 0 ? cost : undefined, tokens: tokens > 0 ? tokens : undefined });
     }
   }
   return { runs, costs };
@@ -116,14 +129,21 @@ const board: Leaderboard = {
       if (via) [model, setting] = [via[1], `via ${via[2]}`];
       // "Gemini 3.1 Pro Custom Tools": the same model with Andon's custom tool set
       if (/ Custom Tools$/.test(model)) [model, harness] = [model.replace(/ Custom Tools$/, ''), 'custom tools'];
-      rows.push({
+      const metrics: Record<string, number> = { ...spend?.metrics };
+      if (typeof r.final_value_sem === 'number') metrics.sem = metrics.stderr = r.final_value_sem;
+      for (const key of ['final_value_std', 'final_value_geomean', 'final_value_geomean_n'] as const) {
+        if (typeof r[key] === 'number') metrics[key] = r[key];
+      }
+      rows.push({ trials: r.num_final_values ?? r.num_epochs,
+        low: typeof r.final_value_ci95 === 'number' ? r.final_value - r.final_value_ci95 : undefined,
+        high: typeof r.final_value_ci95 === 'number' ? r.final_value + r.final_value_ci95 : undefined,
         model,
         score: r.final_value,
         setting,
         harness,
         cost: spend?.cost,
         tokens: spend?.tokens,
-        metrics: typeof r.final_value_sem === 'number' ? { sem: r.final_value_sem, stderr: r.final_value_sem } : undefined,
+        metrics,
       });
     }
     return rows;

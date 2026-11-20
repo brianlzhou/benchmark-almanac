@@ -10,6 +10,7 @@ import { labColor, agentTint } from '../lib/palette.ts';
 import { scoreBare, score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
 import { featuredIds } from '../lib/routes.ts';
+import { frontierAttrs } from '../lib/frontier.ts';
 
 interface Props {
   scores: Score[];
@@ -74,7 +75,7 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
           const label = s.system ? entryLabel(s) : (m?.name ?? s.name ?? s.model);
           const wk = whisker(s);
           return (
-            <li class:list={['col', { unlisted: !m }]}>
+            <li {...frontierAttrs(s.model)} class:list={['col', { unlisted: !m }]}>
               <a
                 href={href}
                 data-tv={fmt(s.value, unit)}
@@ -101,7 +102,7 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
   // the count of ranks in view, the arrows, and the fades at each scrolled edge
   for (const box of document.querySelectorAll<HTMLElement>('[data-cols]')) {
     const sc = box.querySelector<HTMLElement>('[data-cols-scroll]')!;
-    const cols = sc.querySelectorAll<HTMLElement>('.col');
+    const all = [...sc.querySelectorAll<HTMLElement>('.col')];
     const n = box.querySelector<HTMLElement>('[data-cols-range]');
     const prev = box.querySelector<HTMLButtonElement>('[data-cols-go="-1"]');
     const next = box.querySelector<HTMLButtonElement>('[data-cols-go="1"]');
@@ -109,6 +110,8 @@ const what = rows.some((s) => !s.model) ? 'entries' : 'models';
     let frame = 0;
     const update = () => {
       frame = 0;
+      // the site settings can hide columns (frontier labs or models only), so only the ones that show count
+      const cols = all.filter((c) => c.offsetParent !== null);
       const over = sc.scrollWidth > sc.clientWidth + 2;
       box.classList.toggle('scrolls', over);
       const start = sc.scrollLeft;

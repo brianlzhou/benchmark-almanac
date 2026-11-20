@@ -7,7 +7,13 @@ import { tables, num, text } from '../lib/html.ts';
 
 const PAGE = 'http://calvin.cs.uni-freiburg.de/';
 const board: Leaderboard = {
-  benchmark: 'calvin', url: PAGE, feed: PAGE,
+  benchmark: 'calvin', parts: {
+  chain1: { name: 'Chain 1', group: 'Difficulty' },
+  chain2: { name: 'Chain 2', group: 'Difficulty' },
+  chain3: { name: 'Chain 3', group: 'Difficulty' },
+  chain4: { name: 'Chain 4', group: 'Difficulty' },
+  chain5: { name: 'Chain 5', group: 'Difficulty' },
+}, url: PAGE, feed: PAGE,
   terms: 'The CALVIN authors publish this public HTML leaderboard, with attribution retained and no separate score reuse license stated.',
   async fetch() {
     const html = (await fetchText(PAGE)).replace(/<!--[\s\S]*?-->/g, '');

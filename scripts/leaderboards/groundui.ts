@@ -6,7 +6,11 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://ltzheng.github.io/agent-studio";
 const board: Leaderboard = {
- benchmark: "groundui", url: "https://ltzheng.github.io/agent-studio", feed: FEED,
+ benchmark: "groundui", parts: {
+  web: { name: 'Web', group: 'Environment' },
+  desktop: { name: 'Desktop', group: 'Environment' },
+  mobile: { name: 'Mobile', group: 'Environment' },
+}, url: "https://ltzheng.github.io/agent-studio", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:{'gpt-4o-2024-08-06':'gpt-4o-aug-2024','gpt-4o-2024-05-13':'gpt-4o-may-2024','gemini-1.5-pro-001':'gemini-1-5-pro-may-2024','gemini-1.5-flash-001':'gemini-1-5-flash-may-2024'},
  async fetch() {

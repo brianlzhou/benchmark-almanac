@@ -6,6 +6,10 @@ const FEED = "https://arxiv.org/html/2509.06266";
 import { paperRows, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "ego3d-bench",
+  parts: {
+    egoDistanceRMSE: { name: 'Ego distance', group: 'Task type' },
+    objectDistanceRMSE: { name: 'Object distance', group: 'Task type' },
+  },
   url: "https://raw.githubusercontent.com/vbdi/Ego3D-Bench/main/README.md",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

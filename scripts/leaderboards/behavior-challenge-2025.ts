@@ -5,7 +5,9 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = 'https://behavior.stanford.edu/challenge/archive/2025/leaderboard.html';
 const board: Leaderboard = {
-  benchmark: 'behavior-challenge-2025', url: URL, feed: URL,
+  benchmark: 'behavior-challenge-2025', parts: {
+  validationQScore: { name: 'Validation', group: 'Split' },
+}, url: URL, feed: URL,
   terms: 'The official BEHAVIOR archive publishes challenge results; source terms apply and the Almanac credits and links the source.',
   async fetch() {
     const table = tables(await fetchText(URL)).find(t=>t[0].some(c=>c.text.includes('Q Score')));

@@ -8,6 +8,7 @@ import { cards, systemCards, benchmarks, benchById, modelById, leaderboardScores
 import { SR_FIT, SR_RULES, srHeldOut, srVsEci, srBenchmarks, selfReported } from '../lib/self-reported.ts';
 import { claimPairs, claimStats, SAME_WITHIN } from '../lib/claims.ts';
 import { humanDate } from '../lib/format.ts';
+import { taggedCount as taggedN, AGREEMENT, FACETS } from '../lib/facets.ts';
 
 const boards = Object.keys(LEADERBOARDS).length;
 const held = srHeldOut();
@@ -101,7 +102,7 @@ const topBenches = srBenchmarks.slice(0, 16);
     </section>
 
     <section id="claims">
-      <h2>Lab claims next to leaderboards</h2>
+      <h2>How do claims and official scores differ?</h2>
       <p>
         The <a href="/claims/">claims page</a> pairs each lab's best number for its model with the same model's best row on the benchmark's own leaderboard. Where the benchmark has no leaderboard, it uses Epoch AI's score, but only for benchmarks Epoch runs itself, since the scores Epoch collects are often the lab's own. We have {n(claims.pairs)} pairs across {claims.benchmarks} benchmarks.
       </p>
@@ -171,10 +172,48 @@ const topBenches = srBenchmarks.slice(0, 16);
       </div>
     </section>
 
+    <section id="facets">
+      <h2>How we describe each benchmark</h2>
+      <p>
+        Besides its area and kind, each benchmark carries facets: thirteen questions about what it measures, what its tasks are about, what goes in and out, the conditions the model works under, and its upkeep. A facet answers one question only, and its values come from a widely used standard wherever one exists. Risks follow the EU General-Purpose AI Code of Practice and the MLCommons hazards that Llama Guard uses. Behaviors follow the Code’s list of model propensities. Subjects follow the OECD’s fields of research, languages follow ISO 639, and inputs and outputs follow Hugging Face’s modality tags. The facets without a standard are defined in <code>data/facets-codebook.json</code>.
+      </p>
+      <p>
+        Two facets say where a benchmark comes from. “Run by” separates benchmarks anyone can run, ones a host runs for everyone, and a model developer’s tests of its own models. “Based on” separates a benchmark’s own tasks from a version of a public benchmark and from a run of someone else’s method. A lab’s internal evaluation is a test it runs on its own models with its own tasks, such as a safety check reported only in a system card. A lab’s version of a public benchmark, such as GDPval v2 or a hard subset of SWE-bench Verified, and its run of a public method, such as its own fit of Epoch AI’s Capabilities Index, are not internal evaluations. The internal evaluations setting hides only the first kind. A benchmark that measures a propensity or was built for a risk counts as a safety evaluation.
+      </p>
+      <p>
+        Codex tags each benchmark from its record and its own documents. A second tagger codes a random sample on its own, and we publish the agreement on each facet. Two facets did not reach agreement in our first test, the occupations a benchmark draws on and how long its tasks take a person, so we record those only when a benchmark states them. {taggedN < benchmarks.length && `So far we have tagged ${taggedN.toLocaleString('en-US')} of ${benchmarks.length.toLocaleString('en-US')} benchmarks.`} <a href="/views/">Views</a> are saved filters over the facets, such as computer use or dangerous capabilities.
+      </p>
+      {AGREEMENT && (
+        <>
+          <p>
+            On a random sample of {AGREEMENT.n} benchmarks, a second tagger coded each one without seeing Codex’s tags. The table gives Krippendorff’s alpha for each facet. Content analysis treats 0.8 or more as reliable and 0.67 or more as good enough for tentative use.
+          </p>
+          <div class="table-wrap">
+            <table class="t">
+              <thead><tr><th>Facet</th><th class="r">Alpha</th><th class="r">Same value</th><th>Reading</th></tr></thead>
+              <tbody>
+                {FACETS.filter((f) => AGREEMENT!.facets[f.key]).map((f) => {
+                  const a = AGREEMENT!.facets[f.key];
+                  return (
+                    <tr>
+                      <td>{f.name}</td>
+                      <td class="r num">{a.alpha.toFixed(2)}</td>
+                      <td class="r num">{Math.round(a.exact * 100)}%</td>
+                      <td class="muted">{a.alpha >= 0.8 ? 'Reliable' : a.alpha >= 0.667 ? 'Tentative' : a.n < 20 ? 'Too few to judge' : 'Not yet reliable, so we don’t show it'}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </section>
+
     <section id="left-out">
       <h2>What we leave out</h2>
       <p>
-        We are currently unable to feature Artificial Analysis benchmarks due to their terms of service. A lab that quotes an Artificial Analysis number in its own launch post keeps it, credited to the lab. Every leaderboard we import is credited and linked on its benchmark's page. The <a href="/sources/">Sources page</a> lists what we read.
+        From Artificial Analysis we show only its index numbers: the Intelligence Index and its six Capability Indexes, read from its API with its permission. Its other benchmarks link to its site instead. A lab that quotes an Artificial Analysis number in its own launch post keeps it, credited to the lab. Every leaderboard we import is credited and linked on its benchmark's page. The <a href="/sources/">Sources page</a> lists what we read.
       </p>
     </section>
 

@@ -37,7 +37,7 @@ const pctOf = (v: number) => `${Math.round(100 * v)}%`;
           <div class:list={['sb-col', { partial: p.partial }]}>
             {cats.map((c, k) =>
               shares[k][i] > 0 ? (
-                <span class="seg" style={`flex-grow:${shares[k][i]};background:${c.color};color:${c.ink}`} data-tv={tips[k][i].tv} data-tn={tips[k][i].tn} data-ts={tips[k][i].ts}>
+                <span class="sb-seg" style={`flex-grow:${shares[k][i]};background:${c.color};color:${c.ink}`} data-tv={tips[k][i].tv} data-tn={tips[k][i].tn} data-ts={tips[k][i].ts}>
                   {shares[k][i] >= 0.12 && <span class="v">{pctOf(shares[k][i])}</span>}
                 </span>
               ) : null,
@@ -112,10 +112,10 @@ const pctOf = (v: number) => `${Math.round(100 * v)}%`;
     gap: 2px;
     min-width: 0;
   }
-  .sb-col .seg:last-child {
+  .sb-col .sb-seg:last-child {
     border-radius: 4px 4px 0 0;
   }
-  .seg {
+  .sb-seg {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,11 +125,11 @@ const pctOf = (v: number) => `${Math.round(100 * v)}%`;
     font-variant-numeric: tabular-nums;
     cursor: default;
   }
-  .seg:hover {
+  .sb-seg:hover {
     outline: 1.5px solid var(--ink);
     outline-offset: 1px;
   }
-  .sb-col.partial .seg {
+  .sb-col.partial .sb-seg {
     background-image: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in oklab, var(--bg) 22%, transparent) 6px 8px);
   }
   .sb-x {

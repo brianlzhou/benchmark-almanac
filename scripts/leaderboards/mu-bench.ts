@@ -23,6 +23,13 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mu-bench',
+  parts: {
+    'en-US': { name: 'en-US', group: 'Language', note: 'The source identifies this locale by its language tag.' },
+    'es-MX': { name: 'es-MX', group: 'Language', note: 'The source identifies this locale by its language tag.' },
+    'tr-TR': { name: 'tr-TR', group: 'Language', note: 'The source identifies this locale by its language tag.' },
+    'vi-VN': { name: 'vi-VN', group: 'Language', note: 'The source identifies this locale by its language tag.' },
+    'zh-CN': { name: 'zh-CN', group: 'Language', note: 'The source identifies this locale by its language tag.' },
+  },
   url: PAGE,
   feed: `${PAGE}assets/data-*.js (overall significantWer)`,
   terms: 'Static app data on GitHub Pages (no robots.txt rules); the μ-bench dataset is CC BY-NC 4.0 and the site states no other terms.',

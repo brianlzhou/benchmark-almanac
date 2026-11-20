@@ -9,6 +9,15 @@ const FEED = "https://suyoumo.github.io/bench/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "clawprobench",
+  parts: {
+    Capability: { name: 'Capability', group: 'Dimension' },
+    Planning: { name: 'Planning', group: 'Dimension' },
+    Safety: { name: 'Safety', group: 'Dimension' },
+    'Tool Use': { name: 'Tool use', group: 'Dimension' },
+    Constraints: { name: 'Constraints', group: 'Dimension' },
+    'Error Recovery': { name: 'Error recovery', group: 'Dimension' },
+    Synthesis: { name: 'Synthesis', group: 'Dimension' },
+  },
   url: "https://suyoumo.github.io/bench/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at suyoumo.github.io; retain source attribution and follow the upstream terms.",

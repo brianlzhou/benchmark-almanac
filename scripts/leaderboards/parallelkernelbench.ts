@@ -6,7 +6,19 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://www.together.ai/blog/parallelkernelbench";
 const board: Leaderboard = {
- benchmark: "parallelkernelbench", url: "https://www.together.ai/blog/parallelkernelbench", feed: FEED,
+ benchmark: "parallelkernelbench", parts: {
+  collective_primitive: { name: 'Collective primitive', group: 'Category' },
+  tensor_parallel: { name: 'Tensor parallel', group: 'Category' },
+  sequence_parallel: { name: 'Sequence parallel', group: 'Category' },
+  context_parallel: { name: 'Context parallel', group: 'Category' },
+  pipeline_parallel: { name: 'Pipeline parallel', group: 'Category' },
+  data_parallel: { name: 'Data parallel', group: 'Category' },
+  expert_parallel: { name: 'Expert parallel', group: 'Category' },
+  vocab_parallel: { name: 'Vocab parallel', group: 'Category' },
+  graph_parallel: { name: 'Graph parallel', group: 'Category' },
+  geometric_spatial: { name: 'Geometric spatial', group: 'Category' },
+  other: { name: 'Other', group: 'Category' },
+}, url: "https://www.together.ai/blog/parallelkernelbench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

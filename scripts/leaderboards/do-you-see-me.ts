@@ -9,7 +9,10 @@ import { tables, text } from '../lib/html.ts';
 
 const FEED = 'https://arxiv.org/html/2506.02022';
 const board: Leaderboard = {
-  benchmark: 'do-you-see-me', url: 'https://github.com/microsoft/Do-You-See-Me', feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'do-you-see-me', parts: {
+  acc2d: { name: '2D', group: 'Category' },
+  acc3d: { name: '3D', group: 'Category' },
+}, url: 'https://github.com/microsoft/Do-You-See-Me', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'O3 (2025-04-16)': 'o3', 'Phi-4-Multimodal-Instruct-5.7B': 'phi-4-multimodal' },
   async fetch() {
     const html = await paperHtml(FEED);

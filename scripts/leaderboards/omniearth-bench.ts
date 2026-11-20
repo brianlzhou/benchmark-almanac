@@ -4,7 +4,15 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = "https://omniearth-bench.github.io/";
 const board: Leaderboard = {
-  benchmark: "omniearth-bench", url: URL, feed: URL,
+  benchmark: "omniearth-bench", parts: {
+  crossSphere: { name: 'Cross sphere', group: 'Domain' },
+  atmosphere: { name: 'Atmosphere', group: 'Domain' },
+  lithosphere: { name: 'Lithosphere', group: 'Domain' },
+  oceansphere: { name: 'Oceansphere', group: 'Domain' },
+  cryosphere: { name: 'Cryosphere', group: 'Domain' },
+  biosphere: { name: 'Biosphere', group: 'Domain' },
+  humanActivities: { name: 'Human activities', group: 'Domain' },
+}, url: URL, feed: URL,
   terms: "CC BY-NC-SA 4.0 repository; no robots.txt on the maker site.",
   async fetch() {
     const table = tables(await fetchText(URL)).map(t => t.map(r => r.map(c => c.text))).find(t => t[0]?.some(c => c.includes("Avg.")));

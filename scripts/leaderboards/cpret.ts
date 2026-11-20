@@ -7,6 +7,12 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/coldchair/CPRet/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "cpret",
+  parts: {
+    textToCode: { name: 'Text to code', group: 'Task type' },
+    codeToCode: { name: 'Code to code', group: 'Task type' },
+    problemToDuplicate: { name: 'Problem to duplicate', group: 'Task type' },
+    simplifiedToFull: { name: 'Simplified to full', group: 'Task type' },
+  },
   url: "https://github.com/coldchair/CPRet",
   feed: FEED,
   terms: "CC BY-NC 4.0 README results, attributed to the makers; raw.githubusercontent.com has no robots.txt.",

@@ -4,7 +4,22 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { openaiSpecs, chartValues, chartTitle, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/introducing-life-sci-bench/';
 const board: Leaderboard = {
-  benchmark: 'lifescibench', url: PAGE, feed: `${PAGE} (embedded LifeSciBench overall and workflow charts)`, terms: OPENAI_TERMS,
+  benchmark: 'lifescibench', parts: {
+  'workflowScore:evidence': { name: 'evidence', group: 'Dimension' },
+  'workflowScore:analysis': { name: 'analysis', group: 'Dimension' },
+  'workflowScore:design': { name: 'design', group: 'Dimension' },
+  'workflowScore:reasoning': { name: 'reasoning', group: 'Dimension' },
+  'workflowScore:validation': { name: 'validation', group: 'Dimension' },
+  'workflowScore:Translation': { name: 'Translation', group: 'Dimension' },
+  'workflowScore:Scientific Communication': { name: 'Scientific Communication', group: 'Dimension' },
+  'workflowPassRate:evidence': { name: 'evidence', group: 'Dimension' },
+  'workflowPassRate:analysis': { name: 'analysis', group: 'Dimension' },
+  'workflowPassRate:design': { name: 'design', group: 'Dimension' },
+  'workflowPassRate:reasoning': { name: 'reasoning', group: 'Dimension' },
+  'workflowPassRate:validation': { name: 'validation', group: 'Dimension' },
+  'workflowPassRate:Translation': { name: 'Translation', group: 'Dimension' },
+  'workflowPassRate:Scientific Communication': { name: 'Scientific Communication', group: 'Dimension' },
+}, url: PAGE, feed: `${PAGE} (embedded LifeSciBench overall and workflow charts)`, terms: OPENAI_TERMS,
   async fetch() {
     const specs = await openaiSpecs(PAGE);
     const rows: LeaderboardRow[] = chartValues(specs, 'LifeSciBench Overall Scores').map(r => {

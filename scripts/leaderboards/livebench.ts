@@ -66,20 +66,28 @@ const board: Leaderboard = {
     await pause();
     const costs = new Map(parseCsv(await fetchText(`${base}/cost.csv`)).map(r => [r.model, r]));
     const date = `${release.slice(0, 4)}-${release.slice(4, 6)}-${release.slice(6)}`;
+    board.parts = Object.fromEntries(Object.keys(cats).map(name => [name, { name, group: 'Category' }]));
     const rows: LeaderboardRow[] = [];
     for (const r of table) {
       if (!r.model) continue;
+      const metrics: Record<string, number> = {};
       let sum = 0;
       let wsum = 0;
       for (const [cat, cols] of Object.entries(cats) as [string, string[]][]) {
         const vals = cols.map((c) => parseFloat(r[c])).filter((v) => !isNaN(v));
         if (!vals.length) continue;
         const w = Number((weights as Record<string, number>)[cat] ?? 1);
-        sum += (vals.reduce((a, b) => a + b, 0) / vals.length) * w;
+        metrics[cat] = vals.reduce((a, b) => a + b, 0) / vals.length;
+        sum += metrics[cat] * w;
         wsum += w;
       }
       if (!wsum) continue;
       const c = costs.get(r.model);
+      for (const [key, cell] of Object.entries(c ?? {})) {
+        if (key === 'model' || !cell.trim() || !Number.isFinite(Number(cell))) continue;
+        const metric = (Object.values(cats) as string[][]).some(cols => cols.includes(key)) ? 'suiteCost:' + key : key;
+        metrics[metric] = Number(cell);
+      }
       let dollars = 0, tasks = 0, output = 0, outputTasks = 0;
       for (const col of (Object.values(cats) as string[][]).flat()) {
         const count = Number(c?.[`nq_${col}`]);
@@ -90,8 +98,9 @@ const board: Leaderboard = {
       }
       const cost = tasks ? dollars / tasks : undefined;
       const tokens = outputTasks ? output / outputTasks : undefined;
+      if (cost !== undefined) metrics.cost = cost;
       rows.push({ model: r.model, score: Math.round((sum / wsum) * 100) / 100, setting: effort.get(r.model), date,
-        cost, tokens, metrics: cost !== undefined ? { cost } : undefined });
+        cost, tokens, metrics });
     }
     return rows;
   },

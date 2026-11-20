@@ -7,7 +7,24 @@ import { num } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/Abbey4799/CELLO/main/scores/";
 const board: Leaderboard = {
- benchmark: "cello", url: "https://github.com/Abbey4799/CELLO", feed: FEED,
+ benchmark: "cello", parts: {
+  extraction: { name: 'Extraction', group: 'Task type' },
+  Planning: { name: 'Planning', group: 'Task type' },
+  meta_prompt: { name: 'Meta prompt', group: 'Task type' },
+  brainstorming_single_round: { name: 'Brainstorming single round', group: 'Task type' },
+  writing_single_round: { name: 'Writing single round', group: 'Task type' },
+  keywords_extraction: { name: 'Keywords extraction', group: 'Task type' },
+  closed_qa: { name: 'Closed QA', group: 'Task type' },
+  Summarization: { name: 'Summarization', group: 'Task type' },
+  Structure: { name: 'Structure', group: 'Task type' },
+  brainstorming_multi_rounds: { name: 'Brainstorming multiple rounds', group: 'Task type' },
+  writing_multi_rounds: { name: 'Writing multiple rounds', group: 'Task type' },
+  Ave_complex_input: { name: 'Complex input', group: 'Category' },
+  format_score: { name: 'Format', group: 'Dimension' },
+  input_score: { name: 'Input', group: 'Dimension' },
+  task_score: { name: 'Task', group: 'Dimension' },
+  Ave_complex_ins: { name: 'Complex instruction', group: 'Category', note: 'Average across extraction, planning, meta prompt, single-round brainstorming, and single-round writing.' },
+}, url: "https://github.com/Abbey4799/CELLO", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

@@ -11,6 +11,7 @@ import SearchBox from '../components/SearchBox.astro';
 import CiteButton, { type CiteInfo } from '../components/CiteButton.astro';
 import SeoHead, { type Film } from '../components/SeoHead.astro';
 import { SITE_DESCRIPTION } from '../lib/site.ts';
+import { NAV_MENUS } from '../lib/nav-menus.ts';
 
 interface Props {
   title?: string;
@@ -52,36 +53,36 @@ const NAV: { id: string; label: string; links: { href: string; label: string; fo
   },
   {
     id: 'lead',
-    label: 'Who leads',
+    label: 'Who leads, and what labs report',
     links: [
       { href: '/leaders/', label: 'Leaders' },
       { href: '/models/', label: 'Models' },
-      { href: '/compare/', label: 'Compare', fold: true },
       { href: '/labs/', label: 'Labs' },
-      { href: '/build/', label: 'Index' },
+      { href: '/cards/', label: 'Model cards', fold: true },
     ],
   },
   {
     id: 'say',
-    label: 'What labs report, and trends over time',
+    label: 'Trends over time, and tools to explore the data',
     links: [
-      { href: '/cards/', label: 'Model cards', fold: true },
       { href: '/insights/', label: 'Insights', fold: true },
+      { href: '/playground/', label: 'Playground', fold: true },
     ],
   },
 ];
 const MORE = [
   { href: '/new/', label: 'New this month' },
-  { href: '/time-machine/', label: 'Time machine' },
+  { href: '/views/', label: 'Views' },
   { href: '/audits/', label: 'Audits' },
   { href: '/sources/', label: 'Sources' },
-  { href: '/sql/', label: 'Query with SQL' },
   { href: '/contribute/', label: 'Contribute' },
 ];
 // the same links in one list, for the footer
 const NAV_LINKS = NAV.flatMap((g) => g.links);
 const FOLDS = NAV_LINKS.filter((n) => n.fold);
-const current = (href: string) => path.startsWith(href) || (href === '/benchmarks/' && path.startsWith('/categories/'));
+// a tab with a preview menu (src/lib/nav-menus.ts) stays lit on every page under it
+const current = (href: string) =>
+  path.startsWith(href) || (href === '/benchmarks/' && path.startsWith('/categories/')) || !!NAV_MENUS[href]?.under.some((p) => path.startsWith(p));
 const moreOn = MORE.some((n) => current(n.href));
 const foldOn = FOLDS.some((n) => current(n.href));
 const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
@@ -120,11 +121,33 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           {
             NAV.map((g) => (
               <div class={`ng ng-${g.id}`} role="group" aria-label={g.label}>
-                {g.links.map((n) => (
-                  <a href={n.href} class:list={{ fold: n.fold, 'fold-m': n.fold === 'menu' }} aria-current={current(n.href) ? 'page' : undefined}>
-                    {n.label}
-                  </a>
-                ))}
+                {g.links.map((n) =>
+                  NAV_MENUS[n.href] ? (
+                    <div class:list={['nd', { fold: n.fold }]}>
+                      <a href={n.href} aria-current={current(n.href) ? 'page' : undefined} aria-haspopup="true">
+                        {n.label}
+                      </a>
+                      <div class="nd-p">
+                        <p class="nd-h">{NAV_MENUS[n.href].title}</p>
+                        <ul>
+                          {NAV_MENUS[n.href].items.map((it) => (
+                            <li>
+                              <a href={it.href} class="nd-i" aria-current={path.startsWith(it.href) ? 'page' : undefined}>
+                                <svg class="nd-art" width="64" height="40" viewBox="0 0 64 40" aria-hidden="true" set:html={it.art} />
+                                <span class="nd-n">{it.name}</span>
+                                <span class="nd-l">{it.line}</span>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ) : (
+                    <a href={n.href} class:list={{ fold: n.fold, 'fold-m': n.fold === 'menu' }} aria-current={current(n.href) ? 'page' : undefined}>
+                      {n.label}
+                    </a>
+                  ),
+                )}
               </div>
             ))
           }
@@ -193,7 +216,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
           <div>
             <h2>Explore</h2>
             <ul>
-              {[...NAV_LINKS.filter((n) => !n.fold && n.href !== '/build/'), { href: '/compare/', label: 'Compare models' }, { href: '/cards/', label: 'Model cards' }, { href: '/insights/', label: 'Insights' }, { href: '/build/', label: 'Build your own index' }, { href: '/time-machine/', label: 'Time machine' }, { href: '/new/', label: 'New this month' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
+              {[...NAV_LINKS.filter((n) => !n.fold), { href: '/cards/', label: 'Model cards' }, { href: '/insights/', label: 'Insights' }, { href: '/playground/', label: 'Playground' }, { href: '/compare/', label: 'Compare models' }, { href: '/build/', label: 'Build your own index' }, { href: '/progress/', label: 'Progress over time' }, { href: '/time-machine/', label: 'Time machine' }, { href: '/new/', label: 'New this month' }, { href: '/views/', label: 'Views' }, { href: '/audits/', label: 'Audits' }, { href: '/contribute/', label: 'Contribute' }]
                 .filter((n, i, xs) => xs.findIndex((y) => y.href === n.href) === i)
                 .map((n) => (
                   <li><a href={n.href}>{n.label}</a></li>
@@ -212,7 +235,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
             <h2>Method</h2>
             <ul>
               <li><a href="/methodology/">How we compare scores</a></li>
-              <li><a href="/claims/">Lab claims next to leaderboards</a></li>
+              <li><a href="/claims/">How do claims and official scores differ?</a></li>
               <li><a href="/about/#cataloged">What gets cataloged</a></li>
               <li><a href="/about/#data">Where the scores come from</a></li>
               <li><a href="/about/#labels">In use, fading, dropped</a></li>
@@ -227,7 +250,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
         </div>
       </div>
       <div class="page foot-base">
-        <p>Scores from Epoch AI and Arena are under CC BY 4.0, and scores from other leaderboards are under each board’s own terms.</p>
+        <p>Scores from Epoch AI and Arena are under CC BY 4.0, and scores from other leaderboards are under each board’s own terms. Intelligence Index numbers come from <a href="https://artificialanalysis.ai/">Artificial Analysis</a>, with its permission.</p>
         <p><a href="/about/#credits">Credits</a></p>
       </div>
     </footer>
@@ -335,6 +358,97 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
     color: var(--ink);
     background: var(--seg-on);
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
+  }
+  /* a tab with a preview menu: pointing at it, or tabbing to it, opens a panel of the pages under it, each a small
+     preview, a name and a few words (src/lib/nav-menus.ts). The tab itself still links to its page. */
+  .nd {
+    position: relative;
+    display: flex;
+  }
+  .nd-p {
+    position: absolute;
+    z-index: 60;
+    top: calc(100% + 12px);
+    right: -3px;
+    width: 400px;
+    padding: 10px;
+    border-radius: 14px;
+    background: var(--bg);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.16), 0 0 0 1px var(--line);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 140ms ease, transform 140ms ease, visibility 0s linear 140ms;
+  }
+  /* a bridge over the gap, so the panel stays open on the way down to it */
+  .nd-p::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -14px;
+    height: 14px;
+  }
+  .nd:hover .nd-p,
+  .nd:focus-within .nd-p {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .nd-h {
+    margin: 4px 8px 8px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .nd-p ul {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav .nd-p a.nd-i {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    row-gap: 2px;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--ink);
+    white-space: normal;
+    background: none;
+    box-shadow: none;
+  }
+  nav .nd-p a.nd-i:hover,
+  nav .nd-p a.nd-i[aria-current='page'] {
+    background: var(--panel);
+  }
+  .nd-art {
+    grid-row: 1 / 3;
+    border-radius: 8px;
+    background: var(--panel);
+  }
+  nav .nd-p a.nd-i:hover .nd-art,
+  nav .nd-p a.nd-i[aria-current='page'] .nd-art {
+    background: var(--bg);
+  }
+  .nd-n {
+    align-self: end;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nd-l {
+    align-self: start;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nd-p {
+      transition: none;
+    }
   }
   /* pages about the catalog: a quiet More menu at the right, with Submit as the one button */
   .ng-work {
@@ -446,6 +560,7 @@ const foldMenuOn = FOLDS.some((n) => n.fold === 'menu' && current(n.href));
   }
   @media (max-width: 1259px) {
     nav a.fold,
+    nav .nd.fold,
     .ng-say {
       display: none;
     }

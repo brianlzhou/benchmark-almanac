@@ -4,7 +4,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = "https://omi.health/research/note-eval";
 const board: Leaderboard = {
-  benchmark: "omi-soap-note-safety", url: URL, feed: URL,
+  benchmark: "omi-soap-note-safety", parts: {
+  safety: { name: 'Safety', group: 'Dimension' },
+  coverage: { name: 'Coverage', group: 'Dimension' },
+  generalist: { name: 'Generalist', group: 'Dimension' },
+  evidence: { name: 'Evidence', group: 'Dimension', note: 'Evidence accuracy supplies 70% of the safety dimension.' },
+}, url: URL, feed: URL,
   terms: "Public maker results, robots.txt allows this research path; no additional reading restrictions stated.",
   async fetch() {
     const table = tables(await fetchText(URL)).map(t => t.map(r => r.map(c => c.text))).find(t => t[0]?.some(c => c.includes("Composite")));

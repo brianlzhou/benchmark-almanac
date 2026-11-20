@@ -7,7 +7,19 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 const FEED = 'https://arxiv.org/html/2503.19990';
 const KEYS = ['height', 'adjacency', 'rotation', 'multiview', 'nextStep', 'dependency', 'rotationStat', 'position', 'backwards', 'ordering', 'outlier'];
 const board: Leaderboard = {
-  benchmark: 'lego-puzzles', url: 'https://github.com/Tangkexian/LEGO-Puzzles', feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'lego-puzzles', parts: {
+  height: { name: 'Height', group: 'Task type' },
+  adjacency: { name: 'Adjacency', group: 'Task type' },
+  rotation: { name: 'Rotation', group: 'Task type' },
+  multiview: { name: 'Multiview', group: 'Task type' },
+  nextStep: { name: 'Next step', group: 'Task type' },
+  dependency: { name: 'Dependency', group: 'Task type' },
+  position: { name: 'Position', group: 'Task type' },
+  backwards: { name: 'Backwards', group: 'Task type' },
+  ordering: { name: 'Ordering', group: 'Task type' },
+  outlier: { name: 'Outlier', group: 'Task type' },
+  rotationStat: { name: 'Rotation status', group: 'Task type' },
+}, url: 'https://github.com/Tangkexian/LEGO-Puzzles', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'GPT-o3': 'o3' },
   async fetch() {
     const table = (await paperTables(FEED)).find(t => t[0]?.[0]?.text === 'Models' && t[0]?.at(-1)?.text === 'Overall' && t.some(r => r[0]?.text === 'Proprietary'));

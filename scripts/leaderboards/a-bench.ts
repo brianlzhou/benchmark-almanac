@@ -11,6 +11,16 @@ const board: Leaderboard = {
   feed: `${OPENVLM_FEED} (ABench.Overall)`,
   terms: OPENVLM_TERMS,
   aliases: OPENVLM_ALIASES,
-  fetch: () => openvlmRows((e) => e.ABench?.Overall),
+  parts: {},
+  fetch: () => openvlmRows((e) => e.ABench?.Overall, e => {
+    const metrics: Record<string, number> = {};
+    for (const [key, value] of Object.entries(e.ABench ?? {})) {
+      if (!key.includes(' -> ') || !Number.isFinite(value)) continue;
+      const path = key.replace(/_/g, ' ').split(' -> ');
+      board.parts![key] = { name: path.pop()!, group: path.join(' / ') };
+      metrics[key] = value;
+    }
+    return metrics;
+  }),
 };
 export default board;

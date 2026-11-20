@@ -11,7 +11,11 @@ interface Run {
   pass_at: Record<string, number>;
 }
 const board: Leaderboard = {
-  benchmark: 'workspacebench-lite', url: PAGE,
+  benchmark: 'workspacebench-lite', parts: {
+  easy: { name: 'Easy', group: 'Difficulty' },
+  medium: { name: 'Medium', group: 'Difficulty' },
+  hard: { name: 'Hard', group: 'Difficulty' },
+}, url: PAGE,
   feed: 'https://workspace-bench.github.io/data/site-data.js (detailedRubricsResults.rows)',
   terms: 'The official public leaderboard publishes these results; the Almanac credits and links Workspace-Bench and preserves source attribution.',
   aliases: { 'Opus-4.7': 'claude-opus-4-7', 'Kimi-2.5': 'kimi-k2-5', 'Gemini-3.1-Pro': 'gemini-3-1-pro' },

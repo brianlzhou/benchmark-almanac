@@ -4,7 +4,12 @@ import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 const ROOT='https://futurex.live/';
 const unquote=(s:string)=>s.replace(/\\(u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|[\s\S])/g,(_,e:string)=>e.length>1?String.fromCharCode(parseInt(e.slice(1),16)):({n:'\n',t:'\t',r:'\r',b:'\b',f:'\f',v:'\v',0:'\0'} as Record<string,string>)[e]??e);
-const board:Leaderboard={benchmark:'futurex',url:ROOT+'futurex',feed:ROOT+' (archived FutureX route bundle)',
+const board:Leaderboard={benchmark:'futurex', parts: {
+  level1Score: { name: 'Level 1', group: 'Difficulty' },
+  level2Score: { name: 'Level 2', group: 'Difficulty' },
+  level3Score: { name: 'Level 3', group: 'Difficulty' },
+  level4Score: { name: 'Level 4', group: 'Difficulty' },
+},url:ROOT+'futurex',feed:ROOT+' (archived FutureX route bundle)',
  terms:'Public FutureX leaderboard. Benchmark Almanac credits the authors and links the source.',
  aliases:{'GPT-o4-mini':'o4-mini'},
  async fetch(){const html=await fetchText(ROOT);

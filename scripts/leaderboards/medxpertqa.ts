@@ -8,6 +8,12 @@ const FEED = "https://arxiv.org/html/2501.18362";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "medxpertqa",
+  parts: {
+    text: { name: 'Text', group: 'Modality' },
+    multimodal: { name: 'Multimodal', group: 'Modality' },
+    reasoning: { name: 'Reasoning', group: 'Task type' },
+    understanding: { name: 'Understanding', group: 'Task type' },
+  },
   url: "https://github.com/TsinghuaC3I/MedXpertQA",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

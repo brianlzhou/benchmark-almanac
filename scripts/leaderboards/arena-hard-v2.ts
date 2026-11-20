@@ -1,7 +1,7 @@
 // Arena-Hard v2.0 (LMArena). The arena-hard-auto README holds the leaderboard as console tables. The first,
 // "Hard Prompt, Style Control, and Gemini-2.5 as Judge (Official Configuration)", is the headline: win rate
 // (0 to 100) against the o3-mini baseline on the 500 hard prompts. The other two tables (GPT-4.1 judge, and
-// creative writing) are not read. The README's tables were last changed on 2025-05-01, so that date goes to
+// creative writing) supply secondary scores and bounds. The README's tables were last changed on 2025-05-01, so that date goes to
 // the resolver to pick the snapshots current then. Name suffixes such as "-high" (reasoning effort) and
 // "-thinking-16k" (thinking budget) become the setting. The table's "CI (%)" column, "(-0.8 / +0.9)", is
 // kept as the interval's bounds in metrics.ciLow and metrics.ciHigh.
@@ -32,6 +32,19 @@ const board: Leaderboard = {
     if (start < 0) throw new Error('official configuration table not found');
     const block = md.slice(start).match(/```console\n([\s\S]*?)```/)?.[1];
     if (!block) throw new Error('console table not found');
+    const secondary = new Map<string, Record<string, number>>();
+    for (const [label, section] of [['gpt41Judge', 'Hard Prompt, Style Control, and GPT-4.1 as Judge'], ['creativeWriting', 'Creative Writing, Ensemble GPT-4.1']]) {
+      const sectionStart = md.indexOf(section);
+      if (sectionStart < 0) continue;
+      const table = md.slice(sectionStart).match(/```console\n([\s\S]*?)```/)?.[1] ?? '';
+      for (const match of table.matchAll(/^\s*\d+\s+(\S+)\s+([\d.]+)\s+\(\s*([-+]?[\d.]+)\s*\/\s*([-+]?[\d.]+)\s*\)/gm)) {
+        const values = secondary.get(match[1]) ?? {};
+        values[label] = Number(match[2]);
+        values[label + 'Low'] = Number((values[label] + Number(match[3])).toFixed(1));
+        values[label + 'High'] = Number((values[label] + Number(match[4])).toFixed(1));
+        secondary.set(match[1], values);
+      }
+    }
     const rows: LeaderboardRow[] = [];
     for (const line of block.split('\n')) {
       const m = line.match(/^\s*\d+\s+(\S+)\s+([\d.]+)\s+\(\s*([-+]?[\d.]+)\s*\/\s*([-+]?[\d.]+)\s*\)/);
@@ -50,7 +63,7 @@ const board: Leaderboard = {
       const score = Number(m[2]);
       // the interval's ends, from the offsets "(-0.8 / +0.9)", rounded as the table rounds
       const metrics = { ciLow: Number((score + Number(m[3])).toFixed(1)), ciHigh: Number((score + Number(m[4])).toFixed(1)) };
-      rows.push({ model, setting, score, date: AS_OF, metrics });
+      rows.push({ model, setting, score, date: AS_OF, low: metrics.ciLow, high: metrics.ciHigh, metrics: { ...metrics, ...secondary.get(m[1]) } });
     }
     if (!rows.length) throw new Error('no rows in the official table');
     return rows;

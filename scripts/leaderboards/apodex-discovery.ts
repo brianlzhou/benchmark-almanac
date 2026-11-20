@@ -7,6 +7,14 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://www.discovertraces.ai/liveleaderboard/the-traces-leaderboard";
 const board: Leaderboard = {
  benchmark: "apodex-discovery", url: "https://www.discovertraces.ai/liveleaderboard/the-traces-leaderboard", feed: FEED,
+ parts: {
+   Tools: { name: 'Tools', group: 'Dimension' },
+   Repair: { name: 'Repair', group: 'Dimension' },
+   Alternatives: { name: 'Alternatives', group: 'Dimension' },
+   Coherence: { name: 'Coherence', group: 'Dimension' },
+   Evidence: { name: 'Evidence', group: 'Dimension' },
+   Scope: { name: 'Scope', group: 'Dimension' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

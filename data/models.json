@@ -304,7 +304,8 @@
     "tier": "flagship",
     "card": "https://cdn.openai.com/papers/gpt-4.pdf",
     "aliases": [
-      "GPT-4 (Mar 2023)"
+      "GPT-4 (Mar 2023)",
+      "gpt-4-0314"
     ],
     "epoch": "GPT-4 (Mar 2023)"
   },
@@ -465,7 +466,8 @@
     "released": "2023-06-13",
     "weights": "closed",
     "aliases": [
-      "GPT-3.5 Turbo (Jun 2023)"
+      "GPT-3.5 Turbo (Jun 2023)",
+      "gpt-3.5-turbo-0613"
     ],
     "epoch": "GPT-3.5 Turbo (Jun 2023)"
   },
@@ -637,7 +639,10 @@
     "lab": "anthropic",
     "released": "2023-08-09",
     "weights": "closed",
-    "epoch": "Claude Instant"
+    "epoch": "Claude Instant",
+    "aliases": [
+      "Claude Instant 1.2"
+    ]
   },
   {
     "id": "qwen-vl-chat",
@@ -972,7 +977,8 @@
     "released": "2023-11-06",
     "weights": "closed",
     "aliases": [
-      "GPT-3.5 Turbo (Nov 2023)"
+      "GPT-3.5 Turbo (Nov 2023)",
+      "gpt-3.5-turbo-1106"
     ],
     "epoch": "GPT-3.5 Turbo (Nov 2023)"
   },
@@ -984,7 +990,9 @@
     "released": "2023-11-06",
     "weights": "closed",
     "aliases": [
-      "GPT-4 Turbo (Nov 2023)"
+      "GPT-4 Turbo (Nov 2023)",
+      "gpt-4-1106-preview",
+      "gpt-4-turbo-1106"
     ],
     "epoch": "GPT-4 Turbo (Nov 2023)"
   },
@@ -994,7 +1002,10 @@
     "lab": "openai",
     "released": "2023-11-06",
     "weights": "closed",
-    "epoch": "GPT-4V"
+    "epoch": "GPT-4V",
+    "aliases": [
+      "gpt-4-1106-vision-preview"
+    ]
   },
   {
     "id": "whisper-large-v3",
@@ -1387,7 +1398,8 @@
     "released": "2024-01-25",
     "weights": "closed",
     "aliases": [
-      "GPT-3.5 Turbo (Jan 2024)"
+      "GPT-3.5 Turbo (Jan 2024)",
+      "gpt-3.5-turbo-0125"
     ],
     "epoch": "GPT-3.5 Turbo (Jan 2024)"
   },
@@ -1403,7 +1415,8 @@
     "aliases": [
       "GPT-4 Jan '24",
       "GPT-4 Turbo Preview (0125)",
-      "gpt-4-0125-preview"
+      "gpt-4-0125-preview",
+      "gpt-4-turbo-0125"
     ]
   },
   {
@@ -2460,7 +2473,8 @@
     "released": "2024-05-14",
     "weights": "closed",
     "aliases": [
-      "Gemini 1.5 Flash (May 2024)"
+      "Gemini 1.5 Flash (May 2024)",
+      "gemini-1.5-flash-001"
     ],
     "epoch": "Gemini 1.5 Flash (May 2024)"
   },
@@ -2475,7 +2489,8 @@
     "tier": "flagship",
     "card": "https://arxiv.org/abs/2403.05530v3",
     "aliases": [
-      "Gemini 1.5 Pro (May 2024)"
+      "Gemini 1.5 Pro (May 2024)",
+      "gemini-1.5-pro-001"
     ],
     "epoch": "Gemini 1.5 Pro (May 2024)"
   },
@@ -3220,7 +3235,8 @@
     "tier": "open-weights",
     "card": "https://arxiv.org/abs/2407.21783",
     "aliases": [
-      "Llama 3.1 405B"
+      "Llama 3.1 405B",
+      "LLAMA-405B"
     ],
     "epoch": "Llama 3.1-405B"
   },
@@ -3574,7 +3590,8 @@
     "released": "2024-08-27",
     "weights": "closed",
     "aliases": [
-      "Gemini 1.5 Flash (Sep 2024)"
+      "Gemini 1.5 Flash (Sep 2024)",
+      "gemini-1.5-flash-002"
     ],
     "epoch": "Gemini 1.5 Flash (Sep 2024)"
   },
@@ -3924,7 +3941,8 @@
     "released": "2024-09-24",
     "weights": "closed",
     "aliases": [
-      "Gemini 1.5 Pro (Sept 2024)"
+      "Gemini 1.5 Pro (Sept 2024)",
+      "gemini-1.5-pro-002"
     ],
     "epoch": "Gemini 1.5 Pro (Sept 2024)"
   },
@@ -4631,7 +4649,10 @@
     "lab": "qwen",
     "released": "2024-11-28",
     "weights": "open",
-    "epoch": "QwQ-32B-Preview"
+    "epoch": "QwQ-32B-Preview",
+    "aliases": [
+      "QwQ-Preview-32B"
+    ]
   },
   {
     "id": "intellect-1",
@@ -4901,7 +4922,8 @@
     "released": "2024-12-12",
     "weights": "closed",
     "aliases": [
-      "Grok-2 (Dec 2024)"
+      "Grok-2 (Dec 2024)",
+      "grok-2-1212"
     ],
     "epoch": "Grok-2 (Dec 2024)"
   },
@@ -5273,7 +5295,10 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-V3-0324",
-    "epoch": "DeepSeek-V3"
+    "epoch": "DeepSeek-V3",
+    "aliases": [
+      "DeepSeek-V3-1226"
+    ]
   },
   {
     "id": "eurus-2-7b-prime",
@@ -5409,7 +5434,10 @@
     "lab": "deepseek",
     "released": "2025-01-20",
     "weights": "open",
-    "epoch": "DeepSeek-R1-Distill-Qwen-32B"
+    "epoch": "DeepSeek-R1-Distill-Qwen-32B",
+    "aliases": [
+      "DeepSeek-distill-qwen-32B"
+    ]
   },
   {
     "id": "deepseek-r1-distill-qwen-7b",
@@ -5678,7 +5706,9 @@
     "tier": "small",
     "card": "https://openai.com/index/openai-o3-mini/",
     "aliases": [
-      "o3-mini (high)"
+      "o3-mini (high)",
+      "o3-mini (2025-01-31)",
+      "o3-mini_1.0"
     ],
     "epoch": "o3-mini"
   },
@@ -5693,7 +5723,8 @@
     "card": "https://openai.com/index/introducing-deep-research/",
     "aliases": [
       "deep research",
-      "o3-deep-research"
+      "o3-deep-research",
+      "o3-deep-research (2025-08)"
     ]
   },
   {
@@ -6155,7 +6186,9 @@
     "card": "https://ai.google.dev/gemma/docs/core/model_card_3",
     "epoch": "Gemma 3 27B",
     "aliases": [
-      "gemma-3-27b-it"
+      "gemma-3-27b-it",
+      "Gemma-3-27B-Inst",
+      "gemma-3-27b-it-hf"
     ]
   },
   {
@@ -6188,7 +6221,12 @@
     "lab": "google",
     "released": "2025-03-12",
     "weights": "open",
-    "epoch": "Gemma 3 12B"
+    "epoch": "Gemma 3 12B",
+    "aliases": [
+      "gemma-3-12b-it",
+      "Gemma-3-12B-Inst",
+      "Gemma-3-12B-instruct"
+    ]
   },
   {
     "id": "gemma-3-1b",
@@ -6196,7 +6234,10 @@
     "lab": "google",
     "released": "2025-03-12",
     "weights": "open",
-    "epoch": "Gemma 3 1B"
+    "epoch": "Gemma 3 1B",
+    "aliases": [
+      "gemma-3-1b-it"
+    ]
   },
   {
     "id": "gemma-3-4b",
@@ -6204,7 +6245,10 @@
     "lab": "google",
     "released": "2025-03-12",
     "weights": "open",
-    "epoch": "Gemma 3 4B"
+    "epoch": "Gemma 3 4B",
+    "aliases": [
+      "gemma-3-4b-it"
+    ]
   },
   {
     "id": "cohere-command-a",
@@ -6539,7 +6583,14 @@
     "weights": "open",
     "tier": "open-weights",
     "card": "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
-    "epoch": "Llama 4 Maverick"
+    "epoch": "Llama 4 Maverick",
+    "aliases": [
+      "Llama-4-17B-128E-Instruct",
+      "Llama-4-Maverick-17B-Instruct",
+      "Llama-4-Maverick-17B-128E-Instruct-FP8",
+      "llama-4-maverick-17b-128e-instruct",
+      "Llama-4-Maverick-17B"
+    ]
   },
   {
     "id": "llama-4-scout",
@@ -6547,7 +6598,14 @@
     "lab": "meta",
     "released": "2025-04-05",
     "weights": "open",
-    "epoch": "Llama 4 Scout"
+    "epoch": "Llama 4 Scout",
+    "aliases": [
+      "Llama-4-17B-16E-Instruct",
+      "Llama-4-Scout-109B-A17B-16E",
+      "Llama-4-Scout-17B-16E-Instruct",
+      "Llama 4 Scout 17B (unpinned)",
+      "Llama4-Scout-109B-A17B"
+    ]
   },
   {
     "id": "llama-3-1-nemotron-ultra-253b-v1",
@@ -6621,7 +6679,8 @@
     "weights": "closed",
     "epoch": "Grok-3 mini",
     "aliases": [
-      "Grok 3 Mini Beta"
+      "Grok 3 Mini Beta",
+      "Grok 3 Mini beta (unlisted snapshot)"
     ]
   },
   {
@@ -6634,7 +6693,11 @@
     "tier": "small",
     "card": "https://huggingface.co/moonshotai/Kimi-VL-A3B-Instruct",
     "aliases": [
-      "Kimi-VL-A3B-Instruct"
+      "Kimi-VL-A3B-Instruct",
+      "Kimi-VL-16B-A3B-Instruct",
+      "Kimi-VL-Instruct-16B",
+      "Kimi-VL-A3B-Instruct(16B)",
+      "KimiVL-16B-A3B"
     ]
   },
   {
@@ -6645,7 +6708,11 @@
     "released": "2025-04-10",
     "weights": "open",
     "tier": "small",
-    "card": "https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking"
+    "card": "https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking",
+    "aliases": [
+      "Kimi-VL-A3B-thinking(16B)",
+      "Kimi-VL-A3B-T"
+    ]
   },
   {
     "id": "seed-thinking-v1-5",
@@ -6787,7 +6854,12 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://openai.com/index/gpt-4-1/",
-    "epoch": "GPT-4.1"
+    "epoch": "GPT-4.1",
+    "aliases": [
+      "gpt-4.1 (2025-08)",
+      "GPT-4.1 (April)",
+      "gpt-4.1-2025-03-01-preview"
+    ]
   },
   {
     "id": "gpt-4-1-mini",
@@ -6855,7 +6927,18 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://openai.com/index/introducing-o3-and-o4-mini/",
-    "epoch": "o3"
+    "epoch": "o3",
+    "aliases": [
+      "gpt-o3",
+      "o3 (paper baseline)",
+      "o3-2025-03-01-preview",
+      "ChatGPT-o3",
+      "o3 (2025-08)"
+    ],
+    "settingAliases": {
+      "OpenAI-o3-high.code": "high",
+      "o3-high.code": "high"
+    }
   },
   {
     "id": "o4-mini",
@@ -6863,7 +6946,16 @@
     "lab": "openai",
     "released": "2025-04-16",
     "weights": "closed",
-    "epoch": "o4-mini"
+    "epoch": "o4-mini",
+    "aliases": [
+      "ChatGPT-o4-mini",
+      "o4-mini-2025-03-01-preview",
+      "o4-mini (2025-08)",
+      "o4-mini (paper baseline)"
+    ],
+    "settingAliases": {
+      "o4-mini-high-long": "high, long"
+    }
   },
   {
     "id": "ui-tars-1-5",
@@ -6889,7 +6981,11 @@
       "Gemini 2.5 Flash (Apr 2025)",
       "gemini-2.5-flash-preview-04-17 (default)"
     ],
-    "epoch": "Gemini 2.5 Flash (Apr 2025)"
+    "epoch": "Gemini 2.5 Flash (Apr 2025)",
+    "settingAliases": {
+      "Gemini 2.5 Flash Preview 24K": "24K thinking",
+      "Gemini 2.5 Flash Preview 4/17 (Nonthinking)": "non-thinking"
+    }
   },
   {
     "id": "pi0-5",
@@ -6987,9 +7083,14 @@
     "tier": "flagship",
     "card": "https://arxiv.org/abs/2505.09388",
     "aliases": [
-      "Qwen3-235B-A22B (Thinking)"
+      "Qwen3-235B-A22B (Thinking)",
+      "Qwen3-235B-A22B-FP8",
+      "Qwen3-23SB-A22B"
     ],
-    "epoch": "Qwen3-235B-A22B"
+    "epoch": "Qwen3-235B-A22B",
+    "settingAliases": {
+      "Qwen3 235B A22B diff, no think, Alibaba API": "non-thinking"
+    }
   },
   {
     "id": "qwen3-30b-a3b",
@@ -7005,7 +7106,13 @@
     "lab": "qwen",
     "released": "2025-04-28",
     "weights": "open",
-    "epoch": "Qwen3-32B"
+    "epoch": "Qwen3-32B",
+    "aliases": [
+      "Qwen3-32B (Instruct)"
+    ],
+    "settingAliases": {
+      "Qwen3-32B (think)": "thinking"
+    }
   },
   {
     "id": "qwen3-8b",
@@ -7179,7 +7286,8 @@
     "released": "2025-05-06",
     "weights": "closed",
     "aliases": [
-      "Gemini 2.5 Pro (May 2025)"
+      "Gemini 2.5 Pro (May 2025)",
+      "Gemini-2.5-Pro-05-06"
     ],
     "epoch": "Gemini 2.5 Pro (May 2025)"
   },
@@ -7302,7 +7410,10 @@
       "gemini-2.5-flash-preview-05-20 (24k think)",
       "gemini-2.5-flash-preview-05-20 (no think)"
     ],
-    "epoch": "Gemini 2.5 Flash (May 2025)"
+    "epoch": "Gemini 2.5 Flash (May 2025)",
+    "settingAliases": {
+      "Gemini-2.5-Flash-Thinking-05-20": "thinking"
+    }
   },
   {
     "id": "devstral-small-1-0",
@@ -7353,7 +7464,10 @@
     "lab": "anthropic",
     "released": "2025-05-22",
     "weights": "closed",
-    "epoch": "Claude Sonnet 4"
+    "epoch": "Claude Sonnet 4",
+    "settingAliases": {
+      "Claude-4-Sonnet-thinking-azure": "thinking"
+    }
   },
   {
     "id": "sarvam-m",
@@ -7408,7 +7522,10 @@
     "id": "deepseek-r1-0528-qwen3-8b",
     "name": "deepseek-r1-0528-qwen3-8b",
     "released": "2025-05-29",
-    "epoch": "deepseek-r1-0528-qwen3-8b"
+    "epoch": "deepseek-r1-0528-qwen3-8b",
+    "aliases": [
+      "DeepSeek R1 0528 Qwen3 8B (free)"
+    ]
   },
   {
     "id": "mimo-vl-7b-rl",
@@ -7562,7 +7679,8 @@
     "aliases": [
       "Gemini 2.5 Pro (GA)",
       "Gemini 2.5 Pro (Jun 2025)",
-      "gemini-2.5-pro-preview-06-05 (default think)"
+      "gemini-2.5-pro-preview-06-05 (default think)",
+      "Gemini-2.5-Pro-0605"
     ],
     "epoch": "Gemini 2.5 Pro (Jun 2025)"
   },
@@ -7753,7 +7871,11 @@
     "released": "2025-06-21",
     "weights": "open",
     "tier": "small",
-    "card": "https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking-2506"
+    "card": "https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking-2506",
+    "aliases": [
+      "Kimi-VL-16B-A3B-Thinking-2506",
+      "Kimi-VL-2506"
+    ]
   },
   {
     "id": "gemini-robotics-on-device",
@@ -7793,7 +7915,8 @@
     "card": "https://ai.google.dev/gemma/docs/gemma-3n/model_card",
     "aliases": [
       "Gemma 3n",
-      "Gemma 3n E4B IT"
+      "Gemma 3n E4B IT",
+      "Gemma 3n 4B"
     ]
   },
   {
@@ -8042,7 +8165,10 @@
     "lab": "xai",
     "released": "2025-07-09",
     "weights": "closed",
-    "epoch": "Grok 4"
+    "epoch": "Grok 4",
+    "aliases": [
+      "grok-4-0709"
+    ]
   },
   {
     "id": "phi-4-mini-flash-reasoning",
@@ -8150,7 +8276,10 @@
     "tier": "flagship",
     "card": "https://huggingface.co/moonshotai/Kimi-K2-Instruct",
     "aliases": [
-      "Kimi K2 (Jul 2025)"
+      "Kimi K2 (Jul 2025)",
+      "Kimi K2 Instruct",
+      "Kimi K2 (Jul '25)",
+      "Kimi-K2-2507"
     ],
     "epoch": "Kimi K2 (Jul 2025)"
   },
@@ -8285,7 +8414,11 @@
     "released": "2025-07-25",
     "weights": "open",
     "aliases": [
-      "Qwen3-235B-A22B-Instruct (Jul 2025)"
+      "Qwen3-235B-A22B-Instruct (Jul 2025)",
+      "Qwen3-235B-A22B-2507",
+      "Qwen3-235B-A22B-Instr-2507",
+      "Qwen3-235B-A22B-Instruct-2507-tput",
+      "qwen3-235b-a22b-instruct-2507"
     ],
     "epoch": "Qwen3-235B-A22B-Instruct (Jul 2025)"
   },
@@ -8301,7 +8434,9 @@
     "card": "https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507",
     "aliases": [
       "Qwen3-235B-A22B-Thinking (Jul 2025)",
-      "Qwen3-235B-A22B-Thinking-2507"
+      "Qwen3-235B-A22B-Thinking-2507",
+      "Qwen3-235B-Thinking-2507",
+      "Qwen3-235B-A22B-Thk-2507"
     ],
     "epoch": "Qwen3-235B-A22B-Thinking (Jul 2025)"
   },
@@ -8362,7 +8497,10 @@
     "released": "2025-07-29",
     "weights": "open",
     "aliases": [
-      "Qwen3-30B-A3B-Instruct (Jul 2025)"
+      "Qwen3-30B-A3B-Instruct (Jul 2025)",
+      "qwen3-30b-a3b-instruct-2507",
+      "Qwen3-30B-A3B-Instr-2507",
+      "Qwen3-30B-A3B-Ins."
     ],
     "epoch": "Qwen3-30B-A3B-Instruct (Jul 2025)"
   },
@@ -8387,7 +8525,9 @@
     "released": "2025-07-30",
     "weights": "open",
     "aliases": [
-      "Qwen3-30B-A3B-Thinking (Jul 2025)"
+      "Qwen3-30B-A3B-Thinking (Jul 2025)",
+      "qwen3-30b-a3b-thinking-2507",
+      "Qwen3-30B-A3B-Thk-2507"
     ],
     "epoch": "Qwen3-30B-A3B-Thinking (Jul 2025)"
   },
@@ -8428,7 +8568,9 @@
     "tier": "mid",
     "card": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct",
     "aliases": [
-      "Qwen3-Coder-30B-A3B-Instruct"
+      "Qwen3-Coder-30B-A3B-Instruct",
+      "Qwen3-Coder-30B-A3B",
+      "Qwen3-Coder-30B-A3B-Instr"
     ]
   },
   {
@@ -8440,7 +8582,11 @@
     "epoch": "Qwen3-Coder-480B-A35B",
     "aliases": [
       "Qwen-3-Coder",
-      "Qwen3 Coder"
+      "Qwen3 Coder",
+      "Qwen3 Coder 480B A35B Instruct",
+      "Qwen-3-Coder-480B",
+      "Qwen3 Coder 480B A35B (exacto)",
+      "Qwen3-Coder-480B-A35B-Instruct-FP8"
     ]
   },
   {
@@ -8485,7 +8631,10 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf",
-    "epoch": "Gemini 2.5 Deep Think"
+    "epoch": "Gemini 2.5 Deep Think",
+    "aliases": [
+      "gemini-2.5-deep-think-2025-08-01-webapp"
+    ]
   },
   {
     "id": "glm-4-5",
@@ -8532,7 +8681,14 @@
     "weights": "open",
     "tier": "mid",
     "card": "https://openai.com/index/introducing-gpt-oss/",
-    "epoch": "gpt-oss-120b"
+    "epoch": "gpt-oss-120b",
+    "aliases": [
+      "workers-ai/@cf/openai/gpt-oss-120b"
+    ],
+    "settingAliases": {
+      "GPT-OSS 120B (Med)": "medium",
+      "gpt-oss-120b (exacto)": "exacto"
+    }
   },
   {
     "id": "gpt-oss-20b",
@@ -8540,13 +8696,22 @@
     "lab": "openai",
     "released": "2025-08-05",
     "weights": "open",
-    "epoch": "gpt-oss-20b"
+    "epoch": "gpt-oss-20b",
+    "aliases": [
+      "workers-ai/@cf/openai/gpt-oss-20b"
+    ],
+    "settingAliases": {
+      "GPT-OSS 20B (Med)": "medium"
+    }
   },
   {
     "id": "qwen3-4b-instruct-2507",
     "name": "qwen3-4b-instruct-2507",
     "released": "2025-08-06",
-    "epoch": "qwen3-4b-instruct-2507"
+    "epoch": "qwen3-4b-instruct-2507",
+    "aliases": [
+      "Qwen3-4B-Instruct"
+    ]
   },
   {
     "id": "qwen3-4b-thinking-2507",
@@ -8571,7 +8736,18 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://openai.com/index/introducing-gpt-5/",
-    "epoch": "GPT-5"
+    "epoch": "GPT-5",
+    "aliases": [
+      "GPT-5 (Aug)",
+      "gpt-5-2025-03-01-preview",
+      "GPT-5-0807-global"
+    ],
+    "settingAliases": {
+      "GPT-5-minimal-think": "minimal",
+      "gpt-5-2025-08-07-high-reasoning-high-reasoning": "high",
+      "gpt-5-2025-08-07:minimal-reasoning": "minimal",
+      "OpenAI-GPT-5-high.code": "high"
+    }
   },
   {
     "id": "gpt-5-chat",
@@ -8593,7 +8769,13 @@
     "lab": "openai",
     "released": "2025-08-07",
     "weights": "closed",
-    "epoch": "GPT-5 mini"
+    "epoch": "GPT-5 mini",
+    "aliases": [
+      "gpt-5-mini-2025-03-01-preview"
+    ],
+    "settingAliases": {
+      "gpt-5-mini-2025-08-07:minimal-reasoning": "minimal"
+    }
   },
   {
     "id": "gpt-5-nano",
@@ -8601,7 +8783,10 @@
     "lab": "openai",
     "released": "2025-08-07",
     "weights": "closed",
-    "epoch": "GPT-5 nano"
+    "epoch": "GPT-5 nano",
+    "settingAliases": {
+      "gpt-5-nano-2025-08-07:minimal-reasoning": "minimal"
+    }
   },
   {
     "id": "mimo-vl-7b-rl-2508",
@@ -8678,7 +8863,10 @@
     "lab": "google",
     "released": "2025-08-14",
     "weights": "open",
-    "epoch": "Gemma 3 270M"
+    "epoch": "Gemma 3 270M",
+    "aliases": [
+      "gemma-3-270m-it"
+    ]
   },
   {
     "id": "gui-owl-32b",
@@ -9022,7 +9210,11 @@
     "tier": "flagship",
     "card": "https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905",
     "aliases": [
-      "Kimi K2-Instruct-0905"
+      "Kimi K2-Instruct-0905",
+      "Kimi K2 (Sep '25)",
+      "Kimi-K2-2509",
+      "kimi-k2-0905",
+      "Kimi K2 0905 Preview"
     ],
     "epoch": "Kimi K2 (Sep 2025)"
   },
@@ -9069,7 +9261,10 @@
     "released": "2025-09-11",
     "weights": "open",
     "tier": "mid",
-    "card": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking"
+    "card": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+    "aliases": [
+      "Qwen3-Next-80B-Thinking"
+    ]
   },
   {
     "id": "qwen3-next-80b-a3b-instruct",
@@ -9081,7 +9276,9 @@
     "tier": "mid",
     "card": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
     "aliases": [
-      "Qwen3-Next-80B-A3B-Instruct"
+      "Qwen3-Next-80B-A3B-Instruct",
+      "Qwen3-Next-80B-A3B-Instruct (Vertex MaaS)",
+      "Qwen3-Next-80B-A3B-Instruct (Vertex AI MaaS)"
     ]
   },
   {
@@ -9223,7 +9420,10 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1-Terminus",
-    "epoch": "DeepSeek-V3.1-Terminus"
+    "epoch": "DeepSeek-V3.1-Terminus",
+    "settingAliases": {
+      "DeepSeek V3.1 Terminus (exacto)": "exacto"
+    }
   },
   {
     "id": "qwen-image-edit-2509",
@@ -9242,7 +9442,11 @@
     "released": "2025-09-22",
     "weights": "open",
     "tier": "mid",
-    "card": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct"
+    "card": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct",
+    "aliases": [
+      "Qwen3-Omni-30B-A3B-Instruct",
+      "Qwen3-Omni-30B-A3B-I"
+    ]
   },
   {
     "id": "qwen3-coder-plus",
@@ -9258,7 +9462,11 @@
     "released": "2025-09-23",
     "weights": "open",
     "tier": "flagship",
-    "card": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Thinking"
+    "card": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Thinking",
+    "aliases": [
+      "Qwen3-VL-235B-A22B-T",
+      "Qwen3-VL-235B-Thinking"
+    ]
   },
   {
     "id": "qwen3-vl-235b-a22b-instruct",
@@ -9270,7 +9478,8 @@
     "tier": "flagship",
     "card": "https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct",
     "aliases": [
-      "Qwen3-VL-235B-A22B-Instruct"
+      "Qwen3-VL-235B-A22B-Instruct",
+      "Qwen3-VL-235B-Instruct"
     ]
   },
   {
@@ -9385,7 +9594,11 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp",
-    "epoch": "DeepSeek-V3.2-Exp"
+    "epoch": "DeepSeek-V3.2-Exp",
+    "settingAliases": {
+      "DeepSeek-V3.2-Exp (Chat)": "non-thinking",
+      "DeepSeek-V3.2-Exp (Reasoner)": "thinking"
+    }
   },
   {
     "id": "glm-4-6",
@@ -9429,7 +9642,8 @@
     "tier": "small",
     "card": "https://huggingface.co/Qwen/Qwen3-VL-30B-A3B-Instruct",
     "aliases": [
-      "Qwen3-VL-30B-A3B-Instruct"
+      "Qwen3-VL-30B-A3B-Instruct",
+      "Qwen 3 30B VL Instruct"
     ]
   },
   {
@@ -9550,7 +9764,11 @@
     "tier": "small",
     "card": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
     "aliases": [
-      "Qwen3-VL-8B-Instruct"
+      "Qwen3-VL-8B-Instruct",
+      "Qwen3-VL-8B (VLM)",
+      "Qwen3-vl-8B-Ins",
+      "Qwen3-VL Inst. (8B)",
+      "Qwen3-VL-Instruct-8B"
     ]
   },
   {
@@ -9563,7 +9781,9 @@
     "tier": "small",
     "card": "https://huggingface.co/Qwen/Qwen3-VL-8B-Thinking",
     "aliases": [
-      "Qwen3-VL-8B-Thinking"
+      "Qwen3-VL-8B-Thinking",
+      "Qwen3-VL-8B-Think",
+      "Qwen3-VL Think. (8B)"
     ]
   },
   {
@@ -9641,7 +9861,10 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
-    "epoch": "MiniMax-M2"
+    "epoch": "MiniMax-M2",
+    "aliases": [
+      "MiniMax M2 Stable"
+    ]
   },
   {
     "id": "granite-4-0-1b",
@@ -9753,7 +9976,8 @@
     "aliases": [
       "GPT-5.1 Instant",
       "gpt-5.1-instant",
-      "gpt-5.1-chat-latest"
+      "gpt-5.1-chat-latest",
+      "GPT-5.1 Chat"
     ]
   },
   {
@@ -9766,7 +9990,9 @@
     "tier": "flagship",
     "card": "https://openai.com/index/gpt-5-1-for-developers/",
     "aliases": [
-      "GPT-5.1 (high)"
+      "GPT-5.1 (high)",
+      "gpt-5.1 (2025-08)",
+      "gpt-5.1-2025-03-01-preview"
     ],
     "epoch": "GPT-5.1"
   },
@@ -9824,7 +10050,10 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Pro-Model-Card.pdf",
-    "epoch": "Gemini 3 Pro"
+    "epoch": "Gemini 3 Pro",
+    "aliases": [
+      "Gemini-3-Pro-Preview-Exp"
+    ]
   },
   {
     "id": "cogito-v2-1",
@@ -9848,7 +10077,10 @@
     "lab": "xai",
     "released": "2025-11-19",
     "weights": "closed",
-    "epoch": "Grok 4.1 Fast"
+    "epoch": "Grok 4.1 Fast",
+    "settingAliases": {
+      "Grok-4.1-FR": "reasoning"
+    }
   },
   {
     "id": "olmo-3-32b-think",
@@ -9941,7 +10173,12 @@
     "aliases": [
       "DeepSeek-V3.2 (Thinking)"
     ],
-    "epoch": "DeepSeek-V3.2"
+    "epoch": "DeepSeek-V3.2",
+    "settingAliases": {
+      "DeepSeek-V3.2-chat": "non-thinking",
+      "DeepSeek-V3.2-reasoner": "thinking",
+      "DeepSeek-V3.2-thinking-inner": "thinking"
+    }
   },
   {
     "id": "deepseek-v3-2-speciale",
@@ -10181,7 +10418,9 @@
     "tier": "flagship",
     "card": "https://openai.com/index/introducing-gpt-5-2/",
     "aliases": [
-      "GPT-5.2 Thinking"
+      "GPT-5.2 Thinking",
+      "gpt-5.2-2025-03-01-preview",
+      "GPT-5.2-1211-global"
     ],
     "epoch": "GPT-5.2"
   },
@@ -10206,7 +10445,10 @@
     "lab": "openai",
     "released": "2025-12-11",
     "weights": "closed",
-    "epoch": "GPT-5.2 Pro"
+    "epoch": "GPT-5.2 Pro",
+    "aliases": [
+      "gpt-5.2-pro (2026-02)"
+    ]
   },
   {
     "id": "olmo-3-1-32b-think",
@@ -10621,7 +10863,11 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/moonshotai/Kimi-K2.5",
-    "epoch": "Kimi K2.5"
+    "epoch": "Kimi K2.5",
+    "aliases": [
+      "kimi-for-coding-k2.5",
+      "kimi-k2p5"
+    ]
   },
   {
     "id": "sera-32b",
@@ -10783,7 +11029,10 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://www.anthropic.com/news/claude-opus-4-6",
-    "epoch": "Claude Opus 4.6"
+    "epoch": "Claude Opus 4.6",
+    "settingAliases": {
+      "claude-opus-4-6-1m": "1M context"
+    }
   },
   {
     "id": "gpt-5-3-codex",
@@ -10894,7 +11143,12 @@
     "tier": "flagship",
     "card": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
     "aliases": [
-      "Qwen3.5-397B-A17B"
+      "Qwen3.5-397B-A17B",
+      "Qwen 3.5 397B",
+      "Qwen3.5-39B-A17B",
+      "Qwen3.5-397B-A17B-FP8",
+      "Qwen3.5-397B (VLM)",
+      "Qwen3.5-397B-A13B"
     ],
     "epoch": "Qwen3.5 397B-A17B"
   },
@@ -10961,8 +11215,13 @@
     "card": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-plus",
     "aliases": [
       "Qwen3.5 Plus",
-      "qwen3.5-plus-2026-02-15"
-    ]
+      "qwen3.5-plus-2026-02-15",
+      "Qwen3.5 Plus 02-15"
+    ],
+    "settingAliases": {
+      "Qwen3.5-VL-Plus-Thinking": "thinking",
+      "Qwen3.5-VL-Plus-Instruct": "non-thinking"
+    }
   },
   {
     "id": "qwen-3-5-plus-hosted-397b-a17b",
@@ -10980,7 +11239,10 @@
     "weights": "closed",
     "tier": "mid",
     "card": "https://www.anthropic.com/news/claude-sonnet-4-6",
-    "epoch": "Claude Sonnet 4.6"
+    "epoch": "Claude Sonnet 4.6",
+    "settingAliases": {
+      "claude-sonnet-4-6-1m": "1M context"
+    }
   },
   {
     "id": "grok-4-20",
@@ -10988,7 +11250,21 @@
     "lab": "xai",
     "released": "2026-02-17",
     "weights": "closed",
-    "epoch": "Grok 4.20"
+    "epoch": "Grok 4.20",
+    "aliases": [
+      "Grok 4.20 Beta 1",
+      "Grok-4.2-Beta",
+      "Grok 4.20 (Preview) [xAI]",
+      "grok-4.20-beta",
+      "Grok 4.2"
+    ],
+    "settingAliases": {
+      "Grok 4.20 Beta (Reasoning, 0309)": "reasoning",
+      "grok-4.20-0309-reasoning": "reasoning",
+      "Grok 4.20 Reasoning Exp Beta 0304": "reasoning",
+      "grok-4.20-beta-0309-reasoning": "thinking",
+      "Grok 4.20 Non-Reasoning Exp Beta 0304": "non-thinking"
+    }
   },
   {
     "id": "tiny-aya-earth",
@@ -11055,7 +11331,13 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
-    "epoch": "Gemini 3.1 Pro"
+    "epoch": "Gemini 3.1 Pro",
+    "aliases": [
+      "gemini-3.1-pro (openrouter)"
+    ],
+    "settingAliases": {
+      "Gemini 3.1 Pro CT": "custom tools"
+    }
   },
   {
     "id": "mercury-2",
@@ -11089,7 +11371,8 @@
     "card": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-flash",
     "aliases": [
       "Qwen3.5-Flash",
-      "qwen3.5-flash"
+      "qwen3.5-flash",
+      "qwen3.5-flash-02-23"
     ]
   },
   {
@@ -11106,7 +11389,11 @@
     "lab": "qwen",
     "released": "2026-02-24",
     "weights": "open",
-    "epoch": "Qwen3.5-122B-A10B"
+    "epoch": "Qwen3.5-122B-A10B",
+    "aliases": [
+      "Qwen3.5-122B-A10B-FP8",
+      "Qwen3.5-122B"
+    ]
   },
   {
     "id": "qwen3-5-27b",
@@ -11114,7 +11401,10 @@
     "lab": "qwen",
     "released": "2026-02-24",
     "weights": "open",
-    "epoch": "Qwen3.5-27B"
+    "epoch": "Qwen3.5-27B",
+    "aliases": [
+      "Qwen3.5-VL-27B"
+    ]
   },
   {
     "id": "qwen3-5-2b",
@@ -11130,7 +11420,12 @@
     "lab": "qwen",
     "released": "2026-02-24",
     "weights": "open",
-    "epoch": "Qwen3.5-35B-A3B"
+    "epoch": "Qwen3.5-35B-A3B",
+    "aliases": [
+      "Qwen3.5 A3B",
+      "Qwen3.5-35B",
+      "Qwen3.5-VL-35B-A3B"
+    ]
   },
   {
     "id": "qwen3-5-4b",
@@ -11164,7 +11459,10 @@
     "weights": "closed",
     "tier": "small",
     "card": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
-    "epoch": "Gemini 3.1 Flash-Lite"
+    "epoch": "Gemini 3.1 Flash-Lite",
+    "aliases": [
+      "Gemini 3.1 FL"
+    ]
   },
   {
     "id": "gpt-5-3-instant",
@@ -11297,7 +11595,9 @@
     "card": "https://docs.x.ai/developers/model-capabilities/text/multi-agent",
     "aliases": [
       "Grok 4.20 Multi-Agent",
-      "Grok 4.20 Multi-agent"
+      "Grok 4.20 Multi-agent",
+      "Grok 4.20 Multi-Agent Beta (0309)",
+      "Grok 4.20 Multi-Agent Exp Beta 0304"
     ]
   },
   {
@@ -11595,7 +11895,12 @@
     "lab": "google",
     "released": "2026-04-02",
     "weights": "open",
-    "epoch": "Gemma 4 26B A4B"
+    "epoch": "Gemma 4 26B A4B",
+    "aliases": [
+      "gemma-4-26b-a4b-it",
+      "Gemma4 26B",
+      "gemma4 A4B"
+    ]
   },
   {
     "id": "gemma-4-31b-it",
@@ -11607,9 +11912,13 @@
     "tier": "open-weights",
     "card": "https://ai.google.dev/gemma/docs/core/model_card_4",
     "aliases": [
-      "Gemma 4 31B"
+      "Gemma 4 31B",
+      "Gemma 4 31B bf16"
     ],
-    "epoch": "Gemma 4 31B IT"
+    "epoch": "Gemma 4 31B IT",
+    "settingAliases": {
+      "Gemma 4 31B Std": "non-thinking"
+    }
   },
   {
     "id": "claude-mythos-preview",
@@ -11631,7 +11940,10 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/zai-org/GLM-5.1",
-    "epoch": "GLM-5.1"
+    "epoch": "GLM-5.1",
+    "aliases": [
+      "GLM-5.1-FP8"
+    ]
   },
   {
     "id": "swe-1-6",
@@ -11693,7 +12005,12 @@
     "lab": "qwen",
     "released": "2026-04-14",
     "weights": "open",
-    "epoch": "Qwen 3.6 35B-A3B"
+    "epoch": "Qwen 3.6 35B-A3B",
+    "aliases": [
+      "Qwen3.6-35B-A3B-FP8",
+      "qwen3.6-35b",
+      "Qwen3.6 A3B"
+    ]
   },
   {
     "id": "gemini-3-1-flash-tts",
@@ -11785,7 +12102,11 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/moonshotai/Kimi-K2.6",
-    "epoch": "Kimi K2.6"
+    "epoch": "Kimi K2.6",
+    "aliases": [
+      "Kimi-2.6",
+      "kimi-for-coding-k2.6"
+    ]
   },
   {
     "id": "qwen-3-6-max-preview",
@@ -11843,7 +12164,10 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://openai.com/index/introducing-gpt-5-5/",
-    "epoch": "GPT-5.5"
+    "epoch": "GPT-5.5",
+    "settingAliases": {
+      "gpt-5.5-2026-04-23-xhigh-reasoning-effort": "xhigh"
+    }
   },
   {
     "id": "gpt-5-5-pro",
@@ -11851,7 +12175,10 @@
     "lab": "openai",
     "released": "2026-04-23",
     "weights": "closed",
-    "epoch": "GPT-5.5 Pro"
+    "epoch": "GPT-5.5 Pro",
+    "aliases": [
+      "gpt-5.5-pro-pre-release"
+    ]
   },
   {
     "id": "grok-voice-think-fast-1",
@@ -11902,7 +12229,10 @@
     "lab": "deepseek",
     "released": "2026-04-24",
     "weights": "open",
-    "epoch": "DeepSeek-V4-Flash"
+    "epoch": "DeepSeek-V4-Flash",
+    "aliases": [
+      "DeepSeek V4 Flash 0423"
+    ]
   },
   {
     "id": "deepseek-v4-pro",
@@ -11914,7 +12244,9 @@
     "tier": "flagship",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
     "aliases": [
-      "DeepSeek-V4-Pro (Max)"
+      "DeepSeek-V4-Pro (Max)",
+      "DeepSeek V4 Pro 0423",
+      "DeepSeek V4 Pro Preview (unlisted preview)"
     ],
     "epoch": "DeepSeek-V4-Pro"
   },
@@ -12053,7 +12385,10 @@
     "lab": "openai",
     "released": "2026-05-05",
     "weights": "closed",
-    "epoch": "GPT-5.5 Instant"
+    "epoch": "GPT-5.5 Instant",
+    "aliases": [
+      "gpt-5.5-chat"
+    ]
   },
   {
     "id": "molmoact-2",
@@ -12206,7 +12541,10 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://www.anthropic.com/news/claude-opus-4-8",
-    "epoch": "Claude Opus 4.8"
+    "epoch": "Claude Opus 4.8",
+    "settingAliases": {
+      "Claude Opus 4.8 (Fast)": "fast"
+    }
   },
   {
     "id": "lfm2-5-8b-a1b",
@@ -12276,7 +12614,8 @@
     "tier": "flagship",
     "card": "https://www.minimax.io/blog/minimax-m3",
     "aliases": [
-      "MiniMax M3"
+      "MiniMax M3",
+      "MiniMax M3 (MXFP8)"
     ],
     "epoch": "MiniMax-M3"
   },
@@ -12327,7 +12666,10 @@
     "family": "GPT-Rosalind",
     "released": "2026-06-03",
     "weights": "closed",
-    "card": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"
+    "card": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+    "aliases": [
+      "GPT-5.5 Rosalind"
+    ]
   },
   {
     "id": "nemotron-3-ultra",
@@ -12427,7 +12769,11 @@
     "weights": "open",
     "tier": "mid",
     "card": "https://huggingface.co/moonshotai/Kimi-K2.7-Code",
-    "epoch": "Kimi K2.7 Code"
+    "epoch": "Kimi K2.7 Code",
+    "aliases": [
+      "Kimi K2.7",
+      "kimi-2.7-code"
+    ]
   },
   {
     "id": "glm-5-2",
@@ -12438,7 +12784,13 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/zai-org/GLM-5.2",
-    "epoch": "GLM-5.2"
+    "epoch": "GLM-5.2",
+    "aliases": [
+      "GLM-5.2 FP8"
+    ],
+    "settingAliases": {
+      "GLM-5.2-Fast": "fast"
+    }
   },
   {
     "id": "qwen-agentworld-35b-a3b",
@@ -12617,7 +12969,11 @@
     "lab": "openai",
     "released": "2026-07-09",
     "weights": "closed",
-    "epoch": "GPT-5.6 Luna"
+    "epoch": "GPT-5.6 Luna",
+    "settingAliases": {
+      "GPT 5.6 Luna Pro": "pro",
+      "gpt-5.6-luna-pro": "pro"
+    }
   },
   {
     "id": "gpt-5-6-sol",
@@ -12628,7 +12984,10 @@
     "weights": "closed",
     "tier": "flagship",
     "card": "https://openai.com/index/gpt-5-6/",
-    "epoch": "GPT-5.6 Sol"
+    "epoch": "GPT-5.6 Sol",
+    "aliases": [
+      "OpenAI ChatGPT 5.6 Sol"
+    ]
   },
   {
     "id": "gpt-5-6-sol-pro",
@@ -12642,7 +13001,10 @@
     "aliases": [
       "GPT-5.6 Sol Pro",
       "gpt-5.6-sol-pro"
-    ]
+    ],
+    "settingAliases": {
+      "gpt-5.6-sol_promax": "max"
+    }
   },
   {
     "id": "gpt-5-6-terra",
@@ -12960,7 +13322,10 @@
     "aliases": [
       "Qwen3.8-Max"
     ],
-    "epoch": "Qwen 3.8 Max"
+    "epoch": "Qwen 3.8 Max",
+    "settingAliases": {
+      "Qwen3.8-Max prime": "prime"
+    }
   },
   {
     "id": "lfm2-5-2-6b",
@@ -13144,7 +13509,10 @@
     "weights": "open",
     "tier": "flagship",
     "card": "https://huggingface.co/zai-org/GLM-5.3",
-    "epoch": "GLM-5.3"
+    "epoch": "GLM-5.3",
+    "settingAliases": {
+      "GLM-5.3 Prime": "prime"
+    }
   },
   {
     "id": "qwen-3-8-27b",
@@ -13152,7 +13520,12 @@
     "lab": "qwen",
     "released": "2026-08-14",
     "weights": "open",
-    "epoch": "Qwen 3.8 27B"
+    "epoch": "Qwen 3.8 27B",
+    "aliases": [
+      "Qwen3.8 27B (Chutes TEE)",
+      "QWEN3.8-27B-FP16",
+      "Qwen3.8-27B-FP8"
+    ]
   },
   {
     "id": "glm-5-3-flash",
@@ -13160,7 +13533,13 @@
     "lab": "zai",
     "released": "2026-08-20",
     "weights": "open",
-    "epoch": "GLM-5.3-Flash"
+    "epoch": "GLM-5.3-Flash",
+    "aliases": [
+      "Z.ai GLM-5.3 Flash BF16"
+    ],
+    "settingAliases": {
+      "GLM-5.3 FlashX": "FlashX"
+    }
   },
   {
     "id": "deepseek-v4-flash-vision-exp",
@@ -13170,7 +13549,11 @@
     "released": "2026-08-21",
     "weights": "open",
     "tier": "mid",
-    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp"
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+    "aliases": [
+      "DeepSeek V4 Flash Vision",
+      "DeepSeek V4 Flash Vision (experimental)"
+    ]
   },
   {
     "id": "granite-4-2-30b",
@@ -13375,7 +13758,8 @@
     "card": "https://openai.com/index/gpt-6-astra/",
     "aliases": [
       "GPT-6 Astra Pro",
-      "gpt-6-astra-pro"
+      "gpt-6-astra-pro",
+      "GPT-6-Pro"
     ]
   },
   {
@@ -13478,7 +13862,10 @@
     "released": "2026-09-15",
     "weights": "closed",
     "tier": "mid",
-    "card": "https://deepmind.google/models/model-cards/gemini-3-8-audio/"
+    "card": "https://deepmind.google/models/model-cards/gemini-3-8-audio/",
+    "aliases": [
+      "Gemini 3.8 Live Ext. Thinking"
+    ]
   },
   {
     "id": "qwen3-8-omni-flash",
@@ -13559,7 +13946,10 @@
     "lab": "openai",
     "released": "2026-09-22",
     "weights": "closed",
-    "epoch": "GPT-6 Luna"
+    "epoch": "GPT-6 Luna",
+    "settingAliases": {
+      "gpt-6-luna-pro": "pro"
+    }
   },
   {
     "id": "gpt-6-sol",
@@ -13570,7 +13960,11 @@
     "weights": "closed",
     "tier": "mid",
     "card": "https://openai.com/index/introducing-gpt-6-sol-and-luna/",
-    "epoch": "GPT-6 Sol"
+    "epoch": "GPT-6 Sol",
+    "settingAliases": {
+      "gpt-6-sol-pro": "pro",
+      "GPT 6 Sol Pro": "pro"
+    }
   },
   {
     "id": "ember-1",
@@ -13627,7 +14021,11 @@
     "weights": "closed",
     "tier": "mid",
     "card": "https://openai.com/index/introducing-gpt-6-1-sol/",
-    "epoch": "GPT-6.1 Sol"
+    "epoch": "GPT-6.1 Sol",
+    "settingAliases": {
+      "GPT 6.1 Sol Pro": "pro",
+      "GPT-6.1 Sol Pro": "pro"
+    }
   },
   {
     "id": "gemini-4-argon",
@@ -13758,7 +14156,10 @@
     "lab": "meta",
     "released": "2026-10-12",
     "weights": "closed",
-    "epoch": "Muse Wonder"
+    "epoch": "Muse Wonder",
+    "aliases": [
+      "Muse Wonder 1.0"
+    ]
   },
   {
     "id": "muse-wonder-full",
@@ -13835,7 +14236,10 @@
     "lab": "meta",
     "released": "2026-10-15",
     "weights": "open",
-    "epoch": "Muse Spark Open"
+    "epoch": "Muse Spark Open",
+    "aliases": [
+      "Muse-Spark-Open-816B-A42B"
+    ]
   },
   {
     "id": "nemotron-3-5-bolt-74b-a9b",
@@ -13940,7 +14344,13 @@
     "lab": "moonshot",
     "released": "2026-10-23",
     "weights": "open",
-    "epoch": "Kimi K3.1 Pro"
+    "epoch": "Kimi K3.1 Pro",
+    "aliases": [
+      "kimi-k3.1-pro-together"
+    ],
+    "settingAliases": {
+      "Kimi K3.1 Pro High Speed": "high speed"
+    }
   },
   {
     "id": "nemotron-3-5-bolt-e4b",
@@ -13962,7 +14372,10 @@
     "lab": "openai",
     "released": "2026-10-26",
     "weights": "closed",
-    "epoch": "GPT-6.1 Terra"
+    "epoch": "GPT-6.1 Terra",
+    "settingAliases": {
+      "GPT-6.1 Terra Pro": "pro"
+    }
   },
   {
     "id": "lfm3-1-7b",
@@ -13993,7 +14406,10 @@
     "lab": "google",
     "released": "2026-10-28",
     "weights": "closed",
-    "epoch": "Gemini 4 Carbon"
+    "epoch": "Gemini 4 Carbon",
+    "aliases": [
+      "Gemini 4 Carbon (early access)"
+    ]
   },
   {
     "id": "minicpm-ocr-1-0",
@@ -14245,6 +14661,15 @@
     "epoch": "Gemini 4 Hydrogen"
   },
   {
+    "id": "gemini-4-neon",
+    "name": "Gemini 4 Neon",
+    "lab": "google",
+    "family": "Gemini 4",
+    "released": "2026-11-18",
+    "weights": "closed",
+    "epoch": "Gemini 4 Neon"
+  },
+  {
     "id": "qwen4-max",
     "name": "Qwen4-Max",
     "lab": "qwen",
@@ -14291,16 +14716,10 @@
       "GPT 6.2 Sol",
       "gpt-6.2-sol",
       "Sol 6.2"
-    ]
-  },
-  {
-    "id": "gemini-4-neon",
-    "name": "Gemini 4 Neon",
-    "lab": "google",
-    "family": "Gemini 4",
-    "released": "2026-11-18",
-    "weights": "closed",
-    "epoch": "Gemini 4 Neon"
+    ],
+    "settingAliases": {
+      "GPT 6.2 Sol Pro": "pro"
+    }
   },
   {
     "id": "bagel",
@@ -14477,7 +14896,12 @@
     "id": "gemini-2-5-flash-image-preview-nano-banana",
     "name": "Gemini 2.5 Flash Image Preview (nano-banana)",
     "lab": "google",
-    "weights": "closed"
+    "weights": "closed",
+    "aliases": [
+      "Gemini 2.5 Flash Image (Nano Banana)",
+      "Gemini 2.5 Flash Image Gen (Nano Banana)",
+      "Gemini 2.5 Flash Image"
+    ]
   },
   {
     "id": "gemini-3-1-flash-image-nano-banana-2-web-search",
@@ -14489,19 +14913,32 @@
     "id": "gemini-3-1-flash-lite-image-nano-banana-2-lite",
     "name": "Gemini 3.1 Flash-Lite Image (nano-banana-2-lite)",
     "lab": "google",
-    "weights": "closed"
+    "weights": "closed",
+    "aliases": [
+      "Gemini 3.1 Flash Lite Image"
+    ]
   },
   {
     "id": "gemini-3-pro-image-nano-banana-pro-2k",
     "name": "Gemini 3 Pro Image (nano-banana-pro, 2K)",
     "lab": "google",
-    "weights": "closed"
+    "weights": "closed",
+    "aliases": [
+      "Gemini 3 Pro Image Gen 2K (Nano Banana Pro)"
+    ]
   },
   {
     "id": "gemini-3-pro-image-preview-nano-banana-pro",
     "name": "Gemini 3 Pro Image Preview (nano-banana-pro)",
     "lab": "google",
-    "weights": "closed"
+    "weights": "closed",
+    "aliases": [
+      "Gemini 3 Pro Image Preview",
+      "Gemini 3 Pro Image"
+    ],
+    "settingAliases": {
+      "Gemini 3 Pro Image Preview 2K": "2K output"
+    }
   },
   {
     "id": "gemini-nano-banana-2-1",
@@ -15444,7 +15881,9 @@
     "weights": "closed",
     "aliases": [
       "veo-3.1-audio",
-      "veo-3.1-audio-1080p"
+      "veo-3.1-audio-1080p",
+      "Veo 3.1-quality",
+      "Veo 3.1"
     ]
   },
   {
@@ -15454,7 +15893,8 @@
     "weights": "closed",
     "aliases": [
       "veo-3.1-fast-audio",
-      "veo-3.1-fast-audio-1080p"
+      "veo-3.1-fast-audio-1080p",
+      "Veo 3.1-fast"
     ]
   },
   {
@@ -15626,5 +16066,583 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
+  },
+  {
+    "id": "glm-4-9b-chat-1m",
+    "name": "GLM-4-9B-Chat-1M",
+    "lab": "zai",
+    "family": "GLM-4",
+    "released": "2024-06-04",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/zai-org/glm-4-9b-chat-1m"
+  },
+  {
+    "id": "gemma-3-27b-pt",
+    "name": "Gemma 3 27B PT",
+    "lab": "google",
+    "family": "Gemma 3",
+    "released": "2025-03-12",
+    "weights": "open",
+    "card": "https://huggingface.co/google/gemma-3-27b-pt",
+    "aliases": [
+      "gemma-3-27b-pt (base)"
+    ]
+  },
+  {
+    "id": "gemma-3-1b-pt",
+    "name": "Gemma 3 1B PT",
+    "lab": "google",
+    "family": "Gemma 3",
+    "released": "2025-03-12",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/google/gemma-3-1b-pt",
+    "aliases": [
+      "gemma-3-1b-pt (base)"
+    ]
+  },
+  {
+    "id": "gemma-3-4b-pt",
+    "name": "Gemma 3 4B PT",
+    "lab": "google",
+    "released": "2025-03-12",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/google/gemma-3-4b-pt",
+    "aliases": [
+      "gemma-3-4b-pt (base)"
+    ]
+  },
+  {
+    "id": "gemma-3-12b-pt",
+    "name": "Gemma 3 12B PT",
+    "lab": "google",
+    "released": "2025-03-12",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/google/gemma-3-12b-pt",
+    "aliases": [
+      "gemma-3-12b-pt (base)"
+    ]
+  },
+  {
+    "id": "kimina-prover-preview-distill-7b",
+    "name": "Kimina-Prover-Preview-Distill-7B",
+    "lab": "moonshot",
+    "released": "2025-04-10",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/project-numina/Kimina-Prover-Preview-Distill-7B",
+    "aliases": [
+      "Kimina-Prover-7B",
+      "Kimina-Prover-7B-Distill"
+    ]
+  },
+  {
+    "id": "qwen3-4b-base",
+    "name": "Qwen3-4B-Base",
+    "lab": "qwen",
+    "family": "Qwen3",
+    "released": "2025-04-28",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-4B-Base",
+    "aliases": [
+      "Qwen3-4B-Base (base)"
+    ]
+  },
+  {
+    "id": "qwen3-8b-base",
+    "name": "Qwen3-8B-Base",
+    "lab": "qwen",
+    "family": "Qwen3",
+    "released": "2025-04-28",
+    "weights": "open",
+    "card": "https://huggingface.co/Qwen/Qwen3-8B-Base",
+    "aliases": [
+      "Qwen3-8B-Base (base)"
+    ]
+  },
+  {
+    "id": "qwen3-14b-base",
+    "name": "Qwen3-14B-Base",
+    "lab": "qwen",
+    "family": "Qwen3",
+    "released": "2025-04-28",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/Qwen/Qwen3-14B-Base",
+    "aliases": [
+      "Qwen3-14B-Base (base)"
+    ]
+  },
+  {
+    "id": "gemini-2-5-flash-tts",
+    "name": "Gemini 2.5 Flash TTS",
+    "lab": "google",
+    "released": "2025-05-20",
+    "weights": "closed",
+    "card": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "aliases": [
+      "Google Gemini 2.5 Flash TTS"
+    ]
+  },
+  {
+    "id": "gemini-2-5-pro-tts",
+    "name": "Gemini 2.5 Pro TTS",
+    "lab": "google",
+    "family": "Gemini 2.5",
+    "released": "2025-05-20",
+    "weights": "closed",
+    "card": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "aliases": [
+      "Google Gemini 2.5 Pro TTS",
+      "gemini-2.5-pro-preview-tts"
+    ]
+  },
+  {
+    "id": "qwen3-reranker-8b",
+    "name": "Qwen3-Reranker-8B",
+    "lab": "qwen",
+    "family": "Qwen3",
+    "released": "2025-05-29",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-Reranker-8B"
+  },
+  {
+    "id": "qwen3-embedding-8b",
+    "name": "Qwen3-Embedding-8B",
+    "lab": "qwen",
+    "released": "2025-06-03",
+    "weights": "open",
+    "card": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+    "aliases": [
+      "Qwen3-Emb-8B"
+    ]
+  },
+  {
+    "id": "qwen3-reranker-4b",
+    "name": "Qwen3-Reranker-4B",
+    "lab": "qwen",
+    "released": "2025-06-03",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-Reranker-4B"
+  },
+  {
+    "id": "qwen3-embedding-0-6b",
+    "name": "Qwen3-Embedding-0.6B",
+    "lab": "qwen",
+    "released": "2025-06-03",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"
+  },
+  {
+    "id": "qwen3-embedding-4b",
+    "name": "Qwen3-Embedding-4B",
+    "lab": "qwen",
+    "released": "2025-06-03",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
+    "aliases": [
+      "Qwen3-Emb-4B"
+    ]
+  },
+  {
+    "id": "gemma-3n-e2b",
+    "name": "Gemma 3n E2B",
+    "lab": "google",
+    "family": "Gemma 3n",
+    "released": "2025-06-26",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/google/gemma-3n-E2B-it",
+    "aliases": [
+      "gemma-3n-E2B-it"
+    ]
+  },
+  {
+    "id": "o4-mini-deep-research",
+    "name": "o4-mini-deep-research",
+    "lab": "openai",
+    "released": "2025-06-26",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://developers.openai.com/api/docs/models/o4-mini-deep-research",
+    "aliases": [
+      "OpenAI o4-mini Deep Research"
+    ]
+  },
+  {
+    "id": "qwen3-coder-flash",
+    "name": "Qwen3-Coder-Flash",
+    "lab": "qwen",
+    "family": "Qwen3-Coder",
+    "released": "2025-07-29",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
+    "aliases": [
+      "qwen3-coder-flash-2025-07-28"
+    ]
+  },
+  {
+    "id": "gemma-3-270m-base",
+    "name": "Gemma 3 270M Base",
+    "lab": "google",
+    "released": "2025-08-14",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/google/gemma-3-270m"
+  },
+  {
+    "id": "qwen3-max-preview",
+    "name": "Qwen3-Max-Preview",
+    "lab": "qwen",
+    "family": "Qwen3",
+    "released": "2025-09-05",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+    "aliases": [
+      "Qwen3-Max-Preview (Instruct)"
+    ]
+  },
+  {
+    "id": "qwen3-omni-30b-a3b-thinking",
+    "name": "Qwen3-Omni-30B-A3B-Thinking",
+    "lab": "qwen",
+    "family": "Qwen3-Omni",
+    "released": "2025-09-15",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Thinking",
+    "aliases": [
+      "Qwen3-Omni-30B-A3B-T",
+      "Qwen3-Omni-Thinking (30B-A3B)"
+    ]
+  },
+  {
+    "id": "qwen3-tts-flash",
+    "name": "Qwen3-TTS-Flash",
+    "lab": "qwen",
+    "family": "Qwen3-TTS",
+    "released": "2025-09-16",
+    "weights": "closed",
+    "card": "https://www.alibabacloud.com/help/en/model-studio/qwen3-tts-flash"
+  },
+  {
+    "id": "qwen3-tts-flash-realtime",
+    "name": "Qwen3-TTS-Flash-Realtime",
+    "lab": "qwen",
+    "family": "Qwen3-TTS",
+    "released": "2025-09-16",
+    "weights": "closed",
+    "card": "https://www.alibabacloud.com/help/en/model-studio/qwen3-tts-flash-realtime"
+  },
+  {
+    "id": "gpt-realtime-mini",
+    "name": "GPT-Realtime mini",
+    "lab": "openai",
+    "family": "GPT-Realtime",
+    "released": "2025-10-06",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://developers.openai.com/api/docs/models/gpt-realtime-mini",
+    "version": "Oct 2025"
+  },
+  {
+    "id": "deepseek-ocr",
+    "name": "DeepSeek-OCR",
+    "lab": "deepseek",
+    "family": "DeepSeek-OCR",
+    "released": "2025-10-17",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-OCR"
+  },
+  {
+    "id": "gpt-oss-safeguard-120b",
+    "name": "gpt-oss-safeguard-120b",
+    "lab": "openai",
+    "family": "gpt-oss",
+    "released": "2025-10-29",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/openai/gpt-oss-safeguard-120b"
+  },
+  {
+    "id": "gpt-oss-safeguard-20b",
+    "name": "gpt-oss-safeguard-20b",
+    "lab": "openai",
+    "released": "2025-10-29",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/openai/gpt-oss-safeguard-20b",
+    "family": "gpt-oss"
+  },
+  {
+    "id": "kimi-linear-48b-a3b-instruct",
+    "name": "Kimi-Linear-48B-A3B-Instruct",
+    "lab": "moonshot",
+    "released": "2025-10-30",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/moonshotai/Kimi-Linear-48B-A3B-Instruct"
+  },
+  {
+    "id": "kimi-k2-thinking-turbo",
+    "name": "Kimi K2 Thinking Turbo",
+    "lab": "moonshot",
+    "family": "Kimi K2",
+    "released": "2025-11-06",
+    "weights": "closed",
+    "card": "https://forum.moonshot.ai/t/an-update-on-new-k2-models-and-new-pricing/104"
+  },
+  {
+    "id": "gpt-5-1-pro",
+    "name": "GPT-5.1 Pro",
+    "lab": "openai",
+    "family": "GPT-5",
+    "released": "2025-11-19",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+  },
+  {
+    "id": "gemini-2-5-flash-native-audio-dec-2025",
+    "name": "Gemini 2.5 Flash Native Audio Preview (December 2025)",
+    "lab": "google",
+    "released": "2025-12-12",
+    "weights": "closed",
+    "card": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025",
+    "aliases": [
+      "gemini-2.5-flash-native-audio-preview-12-2025"
+    ]
+  },
+  {
+    "id": "gpt-realtime-mini-dec-2025",
+    "name": "GPT-Realtime mini",
+    "lab": "openai",
+    "family": "GPT-Realtime",
+    "released": "2025-12-15",
+    "weights": "closed",
+    "tier": "small",
+    "card": "https://developers.openai.com/api/docs/models/gpt-realtime-mini",
+    "version": "Dec 2025",
+    "aliases": [
+      "gpt-realtime-mini-2025-12-15"
+    ]
+  },
+  {
+    "id": "qwen3-max-jan-2026",
+    "name": "Qwen3-Max-2026-01-23",
+    "lab": "qwen",
+    "family": "Qwen3",
+    "released": "2026-01-23",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+    "aliases": [
+      "qwen3-max-2026-01-23-thinking"
+    ]
+  },
+  {
+    "id": "minimax-m2-her",
+    "name": "MiniMax-M2-her",
+    "lab": "minimax",
+    "family": "MiniMax-M2",
+    "released": "2026-01-27",
+    "weights": "closed",
+    "card": "https://www.minimax.io/news/a-deep-dive-into-the-minimax-m2-her-2"
+  },
+  {
+    "id": "qwen3-5-35b-a3b-base",
+    "name": "Qwen3.5-35B-A3B-Base",
+    "lab": "qwen",
+    "released": "2026-02-24",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B-Base"
+  },
+  {
+    "id": "qwen3-5-9b-base",
+    "name": "Qwen3.5-9B-Base",
+    "lab": "qwen",
+    "released": "2026-02-26",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3.5-9B-Base",
+    "aliases": [
+      "Qwen3.5-9B-Base (base)"
+    ]
+  },
+  {
+    "id": "gemini-3-1-flash-image",
+    "name": "Gemini 3.1 Flash Image",
+    "lab": "google",
+    "released": "2026-02-26",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/ai/nano-banana-2/",
+    "aliases": [
+      "Gemini 3.1 Flash Image Gen (Nano Banana 2)",
+      "Nano Banana 2",
+      "Nano Banana 2 (Gemini 3.1 Flash Image Preview)"
+    ]
+  },
+  {
+    "id": "qwen3-5-4b-base",
+    "name": "Qwen3.5-4B-Base",
+    "lab": "qwen",
+    "family": "Qwen3.5",
+    "released": "2026-02-27",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3.5-4B-Base",
+    "aliases": [
+      "Qwen3.5-4B-Base (base)"
+    ]
+  },
+  {
+    "id": "qwen3-5-2b-base",
+    "name": "Qwen3.5-2B-Base",
+    "lab": "qwen",
+    "released": "2026-02-28",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3.5-2B-Base",
+    "aliases": [
+      "Qwen3.5-2B-Base (base)"
+    ]
+  },
+  {
+    "id": "qwen3-5-0-8b-base",
+    "name": "Qwen3.5-0.8B-Base",
+    "lab": "qwen",
+    "released": "2026-02-28",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/Qwen/Qwen3.5-0.8B-Base",
+    "aliases": [
+      "Qwen3.5-0.8B-Base (base)"
+    ]
+  },
+  {
+    "id": "qwen3-5-max-preview",
+    "name": "Qwen3.5-Max-Preview",
+    "lab": "qwen",
+    "family": "Qwen3.5",
+    "released": "2026-03-18",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://qwen.ai/blog?id=qwen3.5-max-preview"
+  },
+  {
+    "id": "gemini-3-1-flash-live",
+    "name": "Gemini 3.1 Flash Live",
+    "lab": "google",
+    "released": "2026-03-26",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-live/",
+    "settingAliases": {
+      "gemini-3.1-flash-live-preview-thinking-minimal": "minimal thinking",
+      "gemini-3.1-flash-live-preview-thinking-high": "high thinking"
+    },
+    "aliases": [
+      "gemini-3.1-flash-live-preview",
+      "Gemini 3.1 Live"
+    ]
+  },
+  {
+    "id": "gemma-4-e2b-base",
+    "name": "Gemma 4 E2B Base",
+    "lab": "google",
+    "family": "Gemma 4",
+    "released": "2026-03-31",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/google/gemma-4-E2B"
+  },
+  {
+    "id": "veo-3-1-lite",
+    "name": "Veo 3.1 Lite",
+    "lab": "google",
+    "released": "2026-03-31",
+    "weights": "closed",
+    "card": "https://blog.google/innovation-and-ai/technology/ai/veo-3-1-lite/"
+  },
+  {
+    "id": "gemma-4-e4b-base",
+    "name": "Gemma 4 E4B Base",
+    "lab": "google",
+    "family": "Gemma 4",
+    "released": "2026-03-31",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/google/gemma-4-E4B"
+  },
+  {
+    "id": "kimi-k2-6-code-preview",
+    "name": "Kimi K2.6 Code Preview",
+    "lab": "moonshot",
+    "family": "Kimi K2",
+    "released": "2026-04-14",
+    "weights": "closed",
+    "card": "https://github.com/MoonshotAI/kimi-cli/blob/main/CHANGELOG.md"
+  },
+  {
+    "id": "deepseek-v4-flash-base",
+    "name": "DeepSeek-V4-Flash-Base",
+    "lab": "deepseek",
+    "released": "2026-04-22",
+    "weights": "open",
+    "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Base"
+  },
+  {
+    "id": "gpt-realtime-whisper",
+    "name": "GPT-Realtime-Whisper",
+    "lab": "openai",
+    "family": "GPT-Realtime",
+    "released": "2026-05-07",
+    "weights": "closed",
+    "card": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper"
+  },
+  {
+    "id": "gpt-5-5-cyber",
+    "name": "GPT-5.5-Cyber",
+    "lab": "openai",
+    "family": "GPT-5",
+    "released": "2026-06-22",
+    "weights": "closed",
+    "tier": "flagship",
+    "card": "https://openai.com/index/daybreak-securing-the-world/"
+  },
+  {
+    "id": "gemini-3-8-live",
+    "name": "Gemini 3.8 Live",
+    "lab": "google",
+    "family": "Gemini 3.8 Audio",
+    "released": "2026-09-15",
+    "weights": "closed",
+    "tier": "mid",
+    "card": "https://deepmind.google/models/model-cards/gemini-3-8-audio/"
+  },
+  {
+    "id": "copilot-fusion",
+    "name": "Copilot Fusion",
+    "lab": "github",
+    "released": "2026-10-28",
+    "weights": "closed",
+    "router": true,
+    "card": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion/",
+    "aliases": [
+      "GitHub Copilot Fusion",
+      "Project HydraFusion"
+    ]
   }
 ]

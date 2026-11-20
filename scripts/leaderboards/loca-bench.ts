@@ -14,6 +14,15 @@ interface Board {
 
 const board: Leaderboard = {
   benchmark: 'loca-bench',
+  parts: {
+    accuracy8000: { name: '8K context', group: 'Difficulty' },
+    accuracy16000: { name: '16K context', group: 'Difficulty' },
+    accuracy32000: { name: '32K context', group: 'Difficulty' },
+    accuracy64000: { name: '64K context', group: 'Difficulty' },
+    accuracy96000: { name: '96K context', group: 'Difficulty' },
+    accuracy128000: { name: '128K context', group: 'Difficulty' },
+    accuracy256000: { name: '256K context', group: 'Difficulty' },
+  },
   url: URL,
   feed: `${URL} (script#leaderboard-data, accuracy board, 256K column)`,
   terms: 'Static GitHub Pages site; the data sits in the page itself and the page states no terms.',

@@ -14,6 +14,22 @@ const FEED = ghRaw(REPO, 'README.md', 'Evaluation');
 
 const board: Leaderboard = {
   benchmark: 'mme',
+  parts: {
+    Existence: { name: 'Existence', group: 'Task type' },
+    Position: { name: 'Position', group: 'Task type' },
+    Color: { name: 'Color', group: 'Task type' },
+    Poster: { name: 'Poster', group: 'Task type' },
+    Celebrity: { name: 'Celebrity', group: 'Task type' },
+    Scene: { name: 'Scene', group: 'Task type' },
+    Landmark: { name: 'Landmark', group: 'Task type' },
+    Artwork: { name: 'Artwork', group: 'Task type' },
+    OCR: { name: 'OCR', group: 'Task type' },
+    Cognition: { name: 'Cognition', group: 'Task type' },
+    'Commonsense Reasoning': { name: 'Commonsense reasoning', group: 'Task type' },
+    'Numerical Calculation': { name: 'Numerical calculation', group: 'Task type' },
+    'Text Translation': { name: 'Text translation', group: 'Task type' },
+    'Code Reasoning': { name: 'Code reasoning', group: 'Task type' },
+  },
   url: `https://github.com/${REPO}/tree/Evaluation`,
   feed: `${FEED} (Perception table, Score)`,
   terms: 'README tables in the Evaluation branch of the BradyFU/Awesome-Multimodal-Large-Language-Models GitHub repository, which states no license; scores are cited to the MME authors.',

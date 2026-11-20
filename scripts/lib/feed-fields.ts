@@ -119,6 +119,21 @@ export function storedKinds(rows: LeaderboardRow[]): Set<string> {
   return out;
 }
 
+/**
+ * Fields whose name matches a kind but that hold no fact about a run, found in the first full sync (2026-11-18):
+ * yes/no flags about other fields ("hasAgentName"), notes on the metric ("lower_is_better"), links to a model's or
+ * maker's own page ("canonicalUrl", "methodology_url"), and, on a board of bare models, the model's own maker
+ * ("organization"), which the model id already implies.
+ */
+export function noise(field: string, kind: string, stored: Set<string>): boolean {
+  const w = words(field);
+  if (/(^| )(has|is) /.test(w) && !/(^| )(is )?open$/.test(w)) return true;
+  if (/\b(is|higher|lower) better\b/.test(w)) return true;
+  if (kind === 'link' && !/\b(trajector(y|ies)|logs?|traces?|transcripts?|artifacts?|submissions?|runs?|results?|eval|evaluation|details|report)\b/.test(w)) return true;
+  if (kind === 'submitter or agent maker' && !stored.has('harness or agent') && !/\b(submitter|submitted by|team|author)\b/.test(w)) return true;
+  return false;
+}
+
 export interface Flag {
   field: string;
   kind: string;
@@ -141,6 +156,7 @@ export function review(rows: LeaderboardRow[], known: string[] | undefined, deci
   for (const [field, s] of seen) {
     if (decided.has(field)) continue;
     const kind = kindOf(field);
+    if (kind && noise(field, kind, stored)) continue;
     const share = s.total ? s.n / s.total : 1;
     if (kind && !stored.has(kind) && share >= 0.5) flags.push({ field, kind, why: 'not stored', share: Math.round(share * 100) / 100, ...(s.sample ? { sample: s.sample } : {}) });
     else if (known && !known.includes(field) && kind) flags.push({ field, kind, why: 'new', ...(s.sample ? { sample: s.sample } : {}) });

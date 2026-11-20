@@ -8,6 +8,12 @@ const FEED = "https://chartmuseum-leaderboard.github.io/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "chartmuseum",
+  parts: {
+    Visual: { name: 'Visual', group: 'Task type' },
+    Synthesis: { name: 'Synthesis', group: 'Task type' },
+    'Visual/Text': { name: 'Visual/text', group: 'Task type' },
+    Text: { name: 'Text', group: 'Task type' },
+  },
   url: "https://chartmuseum-leaderboard.github.io",
   feed: FEED,
   terms: "Public results published by the benchmark authors at chartmuseum-leaderboard.github.io; retain source attribution and follow the upstream terms.",

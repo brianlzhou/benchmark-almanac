@@ -7,6 +7,15 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MTEB%28eng%2C%20v1%29/scores";
 const board: Leaderboard = {
   benchmark: "mteb",
+  parts: {
+    PairClassification: { name: 'Pair classification', group: 'Task type' },
+    Classification: { name: 'Classification', group: 'Task type' },
+    Clustering: { name: 'Clustering', group: 'Task type' },
+    Retrieval: { name: 'Retrieval', group: 'Task type' },
+    Reranking: { name: 'Reranking', group: 'Task type' },
+    Summarization: { name: 'Summarization', group: 'Task type' },
+    STS: { name: 'Semantic textual similarity', group: 'Task type' },
+  },
   url: "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MTEB%28eng%2C%20v1%29/scores",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -8,6 +8,12 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/chuntianli666/CrossVid/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "crossvid",
+ parts: {
+   'C.Avg': { name: 'Comparative analysis', group: 'Task type' },
+   'T.Avg': { name: 'Temporal understanding', group: 'Task type' },
+   'M.Avg': { name: 'Multi-view reasoning', group: 'Task type' },
+   CCQA: { name: 'Comparative culinary QA', group: 'Task type' },
+ },
  url: "https://github.com/chuntianli666/CrossVid",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

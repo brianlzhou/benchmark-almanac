@@ -6,7 +6,11 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://mind-cube.github.io/";
 const board: Leaderboard = {
- benchmark: "mindcube", url: "https://mind-cube.github.io/", feed: FEED,
+ benchmark: "mindcube", parts: {
+  rotation: { name: 'Rotation', group: 'Task type' },
+  among: { name: 'Among', group: 'Task type' },
+  around: { name: 'Around', group: 'Task type' },
+}, url: "https://mind-cube.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

@@ -16,7 +16,10 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/BstWPY/WildGraphBench/main/README.md";
 const board: Leaderboard = {
-  benchmark: "wildgraphbench", url: "https://github.com/BstWPY/WildGraphBench", feed: FEED,
+  benchmark: "wildgraphbench", parts: {
+  'Single-fact Acc.': { name: 'Single-fact', group: 'Task type' },
+  'Multi-fact Acc.': { name: 'Multi-fact', group: 'Task type' },
+}, url: "https://github.com/BstWPY/WildGraphBench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

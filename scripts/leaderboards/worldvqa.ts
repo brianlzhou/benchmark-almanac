@@ -14,6 +14,16 @@ interface Model {
 }
 const board: Leaderboard = {
   benchmark: 'worldvqa',
+  parts: {
+    natureAccuracy: { name: 'Nature', group: 'Category' },
+    cultureAccuracy: { name: 'Culture', group: 'Category' },
+    objectsAccuracy: { name: 'Objects', group: 'Category' },
+    transportAccuracy: { name: 'Transport', group: 'Category' },
+    entertainmentAccuracy: { name: 'Entertainment', group: 'Category' },
+    brandsAccuracy: { name: 'Brands', group: 'Category' },
+    sportsAccuracy: { name: 'Sports', group: 'Category' },
+    geoAccuracy: { name: 'Geography', group: 'Category' },
+  },
   url: PAGE,
   feed: `${PAGE} (WORLD_VQA_MASTER_DATA)`,
   terms: 'The authors publish these results on their project page; the almanac credits and links WorldVQA. The dataset is Apache-2.0.',

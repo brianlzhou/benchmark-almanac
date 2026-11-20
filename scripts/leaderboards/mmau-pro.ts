@@ -6,6 +6,20 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://sonalkum.github.io/mmau-pro/results.json";
 const board: Leaderboard = {
  benchmark: "mmau-pro",
+ parts: {
+   sound: { name: 'Sound', group: 'Modality' },
+   music: { name: 'Music', group: 'Modality' },
+   speech: { name: 'Speech', group: 'Modality' },
+   sound_music: { name: 'Sound and music', group: 'Modality' },
+   speech_music: { name: 'Speech and music', group: 'Modality' },
+   speech_sound: { name: 'Speech and sound', group: 'Modality' },
+   sound_music_speech: { name: 'Sound, music and speech', group: 'Modality' },
+   spatial: { name: 'Spatial', group: 'Task type' },
+   voice: { name: 'Voice', group: 'Task type' },
+   multi_audio: { name: 'Multiple audio', group: 'Task type' },
+   open_ended: { name: 'Open ended', group: 'Task type' },
+   if: { name: 'Instruction following', group: 'Task type' },
+ },
  url: "https://github.com/sonalkum/MMAUPro",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

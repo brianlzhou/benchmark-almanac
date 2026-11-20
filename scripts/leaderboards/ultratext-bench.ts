@@ -5,7 +5,18 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/LINs-lab/UltraText_Bench/main/data/leaderboard.json";
 const board: Leaderboard = {
- benchmark: "ultratext-bench", url: "https://github.com/LINs-lab/UltraText_Bench", feed: FEED,
+ benchmark: "ultratext-bench", parts: {
+  fidelity: { name: 'Text fidelity', group: 'Dimension' },
+  clarity: { name: 'Text clarity', group: 'Dimension' },
+  spatial: { name: 'Spatial quality', group: 'Dimension' },
+  scene: { name: 'Scene quality', group: 'Dimension' },
+  L1_en: { name: 'Hard (English)', group: 'Split' },
+  L1_zh: { name: 'Hard (Chinese)', group: 'Split' },
+  L2_en: { name: 'Very hard (English)', group: 'Split' },
+  L2_zh: { name: 'Very hard (Chinese)', group: 'Split' },
+  L3_en: { name: 'Extreme (English)', group: 'Split' },
+  L3_zh: { name: 'Extreme (Chinese)', group: 'Split' },
+}, url: "https://github.com/LINs-lab/UltraText_Bench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:{'FLUX.1 [Dev]':'flux-1-dev','SD3.5 Large':'stable-diffusion-3-5-large'},
  async fetch() {

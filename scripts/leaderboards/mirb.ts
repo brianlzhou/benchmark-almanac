@@ -53,4 +53,10 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  knowledge: { name: 'Knowledge', group: 'Category' },
+  reasoning: { name: 'Reasoning', group: 'Category' },
+  perception: { name: 'Perception', group: 'Category' },
+  multiHop: { name: 'Multi-hop', group: 'Category' },
+};
 export default board;

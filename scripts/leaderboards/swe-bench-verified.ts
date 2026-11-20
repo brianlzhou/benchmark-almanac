@@ -2,6 +2,7 @@
 // repository (the page embeds the same array). The "Verified" board holds every submission, scored as
 // % resolved. The site's default view is the "Bash Only" preset, which is the Agent filter set to
 // mini-SWE-agent; those rows carry harness "mini-SWE-agent" here, and the other scaffolds keep their names.
+// Keep total cost, calls per instance and exact attempt counts. Complete Verified runs also give resolution rates by repository.
 // The Multilingual and Multimodal boards in the same file import sweBenchRows and SWE_BENCH_ALIASES from here.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -22,23 +23,27 @@ interface Result {
   trajs?: unknown;
   trajs_docent?: unknown;
   site?: string;
+  os_system?: boolean;
   os_model?: boolean | null;
   folder?: string;
   reasoning_effort: string | null;
   resolved: number;
   /** US dollars per task instance; "cost" is the total for all 500. */
   instance_cost?: number | null;
+  cost?: number | null;
+  instance_calls?: number | null;
+  per_instance_details?: Record<string, { resolved?: boolean }> | null;
   date: string;
   tags: string[];
 }
 
 /** Every submission on one board of leaderboards.json ("Verified", "Multilingual", "Multimodal", ...). */
-export async function sweBenchRows(name: string): Promise<LeaderboardRow[]> {
+export async function sweBenchRows(name: string, extraMetrics?: (details: NonNullable<Result['per_instance_details']>) => Record<string, number>): Promise<LeaderboardRow[]> {
   const data = await fetchJson<{ leaderboards: { name: string; results: Result[] }[] }>(SWE_BENCH_FEED);
-  const board = data.leaderboards.find((b) => b.name === name);
-  if (!board) throw new Error(`no ${name} board in leaderboards.json`);
+  const splitBoard = data.leaderboards.find((b) => b.name === name);
+  if (!splitBoard) throw new Error(`no ${name} board in leaderboards.json`);
   const out: LeaderboardRow[] = [];
-  for (const r of board.results) {
+  for (const r of splitBoard.results) {
     if (!r.model_display) continue;
     // "Multiple" marks a submission that uses several models: a blend, named by its first model. The tags list
     // every model ("Model: claude-sonnet-4-20250514").
@@ -48,7 +53,28 @@ export async function sweBenchRows(name: string): Promise<LeaderboardRow[]> {
     if (!model) continue;
     const path = typeof r.logs === 'string' ? r.logs : typeof r.trajs === 'string' ? r.trajs : undefined;
     const split = !path ? null : path.match(/^s3:\/\/swe-bench-submissions\/([\w-]+)\/([^/]+)\//);
+    const metrics: Record<string, number> = extraMetrics?.(r.per_instance_details ?? {}) ?? {};
+    if (typeof r.os_system === 'boolean') metrics.openSystem = Number(r.os_system);
+    if (typeof r.cost === 'number') metrics.totalCostUsd = r.cost;
+    if (typeof r.instance_calls === 'number') metrics.callsPerInstance = r.instance_calls;
+    const attempts = r.tags?.map((tag) => tag.match(/^System: Attempts - (\d+)$/)).find(Boolean);
+    const details = Object.entries(r.per_instance_details ?? {});
+    if (name === 'Verified' && details.length === 500 && details.every(([, v]) => typeof v.resolved === 'boolean')) {
+      const totals = new Map<string, { solved: number; tasks: number }>();
+      for (const [id, task] of details) {
+        const repo = id.replace(/-\d+$/, '').replace('__', '/');
+        const count = totals.get(repo) ?? { solved: 0, tasks: 0 };
+        count.tasks++;
+        if (task.resolved) count.solved++;
+        totals.set(repo, count);
+      }
+      for (const [repo, count] of totals) {
+        metrics[repo] = 100 * count.solved / count.tasks;
+        (board.parts ??= {})[repo] = { name: repo, group: 'Repository' };
+      }
+    }
     out.push({
+      metrics,
       model,
       score: Number(r.resolved),
       setting: r.reasoning_effort?.toLowerCase() || undefined,
@@ -57,7 +83,7 @@ export async function sweBenchRows(name: string): Promise<LeaderboardRow[]> {
       cost: r.instance_cost ?? undefined,
       agentOrg: r.agent_org?.trim() || undefined,
       verified: typeof r.checked === 'boolean' ? r.checked : typeof r.checked === 'string' && /^false\b/i.test(r.checked) ? false : undefined,
-      trials: r.tags?.includes('System: Attempts - 1') ? 1 : undefined,
+      trials: attempts ? Number(attempts[1]) : undefined,
       ...(multiple && new Set(tagged).size > 1 ? { models: tagged } : {}),
       link: typeof r.trajs_docent === 'string' && r.trajs_docent.startsWith('https://') ? r.trajs_docent : split ? `https://github.com/SWE-bench/experiments/tree/main/evaluation/${split[1]}/${split[2]}` : r.site?.startsWith('https://github.com/') ? r.site : undefined,
       ...(typeof r.os_model === 'boolean' ? { open: r.os_model } : {}),

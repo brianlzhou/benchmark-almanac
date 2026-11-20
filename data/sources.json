@@ -181,6 +181,18 @@
     "automated": true
   },
   {
+    "id": "harbor-registry",
+    "name": "Harbor official registry",
+    "by": "The Terminal-Bench team",
+    "url": "https://github.com/laude-institute/harbor",
+    "kind": "registry",
+    "cadence": "Several times a month",
+    "signal": "high",
+    "why": "The benchmarks the Terminal-Bench team adapted to run in Harbor, as its command-line tool lists them. Every entry is a published benchmark.",
+    "feed": "https://raw.githubusercontent.com/laude-institute/harbor/main/registry.json",
+    "automated": true
+  },
+  {
     "id": "prime-hub",
     "name": "Environments Hub",
     "by": "Prime Intellect",

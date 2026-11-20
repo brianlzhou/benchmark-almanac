@@ -13,6 +13,13 @@ const FEED = `${PAGE}exam_LEval_leaderboard.csv`;
 
 const board: Leaderboard = {
   benchmark: 'l-eval',
+  parts: {
+    coursera: { name: 'Coursera', group: 'Split' },
+    gsm100: { name: 'GSM100', group: 'Split' },
+    quality: { name: 'QuALITY', group: 'Split' },
+    tpo: { name: 'TOEFL Practice Online', group: 'Split' },
+    'topic_ret.': { name: 'Topic retrieval', group: 'Split' },
+  },
   url: PAGE,
   feed: `${FEED} (Exact Match tab, Avg)`,
   terms: 'CSV file on the L-Eval GitHub Pages site that the page loads (no robots.txt); the L-Eval repository is GPL-3.0.',

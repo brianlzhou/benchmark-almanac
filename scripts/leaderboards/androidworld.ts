@@ -38,8 +38,18 @@ const board: Leaderboard = {
       const date = month ? new Date(Date.UTC(Number(month[2]), Number(month[1]), 0)).toISOString().slice(0, 10) : undefined;
       // "pass@2 95.69, pass@3 97.41" in the pass@k column: metrics passAt2, passAt3
       const passAt = Object.fromEntries([...get(/^Success Rate \(pass@k\)$/).matchAll(/pass@(\d+)\s+([\d.]+)/g)].map((m) => [`passAt${m[1]}`, Number(m[2])]));
-      const metrics = Object.keys(passAt).length ? passAt : undefined;
-      rows.push({ model, score, harness: type === 'AI agent' ? get(/^Result Source$/) || undefined : undefined, date, metrics });
+      const metrics = passAt;
+      const rank = get(/^Rank$/), count = get(/^Number of trials$/);
+      if (/^\d+$/.test(rank)) metrics.rank = Number(rank);
+      const mark = get(/^Open\?$/);
+      const open = mark === '✔' ? true : mark === '✗' ? false : undefined;
+      if (type === 'AI agent' && open !== undefined) metrics.openAgent = Number(open);
+      const size = get(/^Model Size$/).match(/^(\d+(?:\.\d+)?)\s*B$/i);
+      const link = get(/^Trajectory submissions$/).match(/https?:\/\/[^\s,]+/)?.[0];
+      const setting = get(/^Screen Representation$/);
+      rows.push({ model, score, trials: /^\d+$/.test(count) ? Number(count) : undefined,
+        link, open: type === 'Model' ? open : undefined, params: size ? Number(size[1]) : undefined,
+        setting: setting && setting !== '-' ? setting : undefined, submitter: get(/^Result Source$/) || undefined, harness: type === 'AI agent' ? get(/^Result Source$/) || undefined : undefined, date, metrics });
     }
     if (!rows.length) throw new Error('no rows in the AndroidWorld sheet');
     return rows;

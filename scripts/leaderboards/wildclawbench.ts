@@ -2,7 +2,7 @@
 // are divided by the live task-count table; the comparison table already gives per-task cost and minutes.
 // Additional harness results remain separate from the OpenClaw leaderboard.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText } from '../lib/util.ts';
+import { fetchJson, fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 
@@ -30,6 +30,47 @@ const board: Leaderboard = {
     const score=num(r[index+2]);if(score===undefined)continue;
     rows.push({model:r[0],harness,score,cost:num(r[index+1]),metrics:{minutes:num(r[index])!,minutesPerTask:num(r[index])!}});
   }
+  const page = await fetchText('https://internlm.github.io/WildClawBench/');
+  const names = new Map([...page.matchAll(/\{id:\s*(\d+),\s*name:'([^']+)'/g)].map(m => [m[1], m[2]]));
+  const byModel = new Map(rows.filter(r => r.harness === 'OpenClaw').map(r => [r.model.toLowerCase(), r]));
+  board.parts = { mm: { name: 'Multimodal', group: 'Input' }, pt: { name: 'Pure text', group: 'Input' } };
+  const splits = page.match(/const SPLIT_SCORES=\{([\s\S]*?)\n\};/)?.[1] ?? '';
+  for (const match of splits.matchAll(/(\d+):\s*\{([^}]+)\}/g)) {
+    const row = byModel.get(names.get(match[1])?.toLowerCase() ?? '');
+    if (row) for (const cell of match[2].matchAll(/(\w+):\s*([\d.]+)/g)) (row.metrics ??= {})[cell[1]] = Number(cell[2]);
+  }
+  for (const category of page.matchAll(/id:'\d+', key:'([^']+)'[^}]*?name:'([^']+)'[^}]*?scores:\[([^\]]+)\]/g)) {
+    const [, key, name, scores] = category;
+    board.parts[key] = { name, group: 'Task category' };
+    for (const cell of scores.matchAll(/modelId:(\d+),\s*rate:\s*([\d.]+),\s*elapsed:\s*([\d.]+),\s*cost:\s*([\d.]+|null)/g)) {
+      const row = byModel.get(names.get(cell[1])?.toLowerCase() ?? '');
+      if (!row) continue;
+      const metrics = row.metrics ??= {};
+      metrics[key] = Number(cell[2]);
+      metrics[key + ':seconds'] = Number(cell[3]);
+      if (cell[4] !== 'null') metrics[key + ':usd'] = Number(cell[4]);
+    }
+  }
+  const repo = 'https://huggingface.co/datasets/internlm/WildClawBench-Trajectories';
+  const files = await fetchJson<{path: string}[]>(repo.replace('/datasets/', '/api/datasets/') + '/tree/main/data');
+  for (const f of files) {
+    if (!/^data\/openclaw-[\w.-]+\.jsonl$/.test(f.path)) continue;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const url = repo + '/resolve/main/' + f.path;
+    const body = await fetchText(url);
+    const runs = body.trim().split('\n').map(line => JSON.parse(line) as {model: string; task_id: string; score: number; output_tokens?: number; steps?: number; tool_calls?: number});
+    const row = byModel.get(runs[0]?.model.toLowerCase());
+    if (!row || runs.some(r => r.model !== runs[0].model) || new Set(runs.map(r => r.task_id)).size !== count) continue;
+    const metrics = row.metrics ??= {};
+    for (const key of ['output_tokens', 'steps', 'tool_calls'] as const) {
+      if (!runs.every(r => typeof r[key] === 'number')) continue;
+      const avg = runs.reduce((sum, r) => sum + r[key]!, 0) / runs.length;
+      if (key === 'output_tokens') row.tokens = avg;
+      else metrics['mean:' + key] = avg;
+    }
+    row.link = url;
+  }
+  for (const r of rows) if (typeof r.metrics?.minutesPerTask === 'number') r.metrics.latency = r.metrics.minutesPerTask * 60;
   return rows;
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

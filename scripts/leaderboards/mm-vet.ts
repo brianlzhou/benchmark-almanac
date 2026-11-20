@@ -1,9 +1,13 @@
 // MM-Vet: OpenCompass publishes MMVet.Overall in percent. Read the live public feed through the existing
-// OpenVLM reader, preserving evaluation dates and model settings instead of dropping unlisted models.
+// OpenVLM reader, including the six evaluated capabilities and the separately reported official total.
 import type { Leaderboard } from './types.ts';
 import { OPENVLM_FEED, OPENVLM_TERMS, openVlmRows } from './mmbench-en-v1-1.ts';
 const board: Leaderboard = {
   benchmark: 'mm-vet',
+  parts: {
+    Rec: 'Recognition', Ocr: 'OCR', Know: 'Knowledge', Gen: 'Language generation',
+    Spat: 'Spatial awareness', Math: 'Math',
+  },
   verified: 'marked verified by OpenCompass',
   host: 'OpenCompass', url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: OPENVLM_FEED, terms: OPENVLM_TERMS,

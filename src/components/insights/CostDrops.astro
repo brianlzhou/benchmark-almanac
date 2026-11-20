@@ -1,0 +1,269 @@
+---
+// What a top score costs, one row per board: on a log scale of dollars per task, the cheapest run that reached the
+// best score of a year ago among the models out then (a ring), and the cheapest run that reaches it now (a dot),
+// with how many times cheaper it got at the right. Drawn in HTML, so text keeps its size at every width. Every mark
+// carries the site's shared tooltip, and the legend names both marks. Rows past `limit` wait behind "Show all".
+import { usd } from '../../lib/effort.ts';
+import { fullDate } from '../../lib/format.ts';
+import type { CostDrop } from '../../lib/insights.ts';
+
+interface Props {
+  rows: CostDrop[];
+  /** The day a year ago that splits then from now. */
+  ago: string;
+  label: string;
+  limit?: number;
+}
+const { rows, ago, label, limit } = Astro.props;
+const costs = rows.flatMap((r) => [r.then.cost, r.now.cost]);
+const lo = Math.floor(Math.log10(Math.min(...costs)));
+const hi = Math.ceil(Math.log10(Math.max(...costs)));
+const at = (c: number) => ((Math.log10(c) - lo) / (hi - lo)) * 100;
+const ticks: { v: number; label: string }[] = [];
+for (let e = lo; e <= hi; e++) ticks.push({ v: 10 ** e, label: e >= 0 ? `$${(10 ** e).toLocaleString('en-US')}` : e === -1 ? '$0.10' : `$${(10 ** e).toFixed(-e)}` });
+const times = (f: number) => (f < 1.05 ? '1×' : f >= 10 ? `${Math.round(f)}×` : `${f.toFixed(1)}×`);
+const pts = (v: number) => `${Math.round(v * 10) / 10}%`;
+const hidden = limit !== undefined && rows.length > limit;
+---
+
+<figure class="cd" aria-label={label}>
+  <ul class="cd-key" aria-hidden="true">
+    <li><span class="cd-ring" />Cheapest run to the best score, among models out by {fullDate(ago)}</li>
+    <li><span class="cd-dot" />Cheapest run to that score now</li>
+  </ul>
+  <div class="cd-row cd-axis" aria-hidden="true">
+    <span>Cost per task, log scale</span>
+    <span class="cd-track">
+      {
+        ticks.map((t, i) => (
+          <span class:list={['cd-tick', { 'cd-alt': (ticks.length - 1 - i) % 2 === 1 }]} style={`left:${at(t.v)}%`}>
+            {t.label}
+          </span>
+        ))
+      }
+    </span>
+    <span class="cd-x">Cheaper by</span>
+  </div>
+  <ol class:list={['cd-list', { 'cd-cut': hidden }]}>
+    {
+      rows.map((r, i) => {
+        const a = at(r.now.cost);
+        const b = at(r.then.cost);
+        return (
+          <li class:list={['cd-row', { 'cd-extra': limit !== undefined && i >= limit }]}>
+            <a class="cd-n" href={`/benchmarks/${r.id}/`}>
+              {r.name}
+            </a>
+            <span class="cd-track">
+              {ticks.map((t) => (
+                <span class="cd-grid" style={`left:${at(t.v)}%`} />
+              ))}
+              <span class="cd-line" style={`left:${a}%;width:${Math.max(0, b - a)}%`} />
+              <span class="cd-m cd-ring" style={`left:${b}%`} data-tv={`${usd(r.then.cost)} a task`} data-tn={`${r.then.model}, ${pts(r.then.value)}`} data-ts={`The cheapest run to ${pts(r.bar)}, the best score among models out by ${fullDate(ago)}`} />
+              <span class="cd-m cd-dot" style={`left:${a}%`} data-tv={`${usd(r.now.cost)} a task`} data-tn={`${r.now.model}, ${pts(r.now.value)}`} data-ts={`The cheapest run to ${pts(r.bar)} now. ${r.models} models on this board have a priced run.`} />
+            </span>
+            <span class="cd-f num" data-tv={times(r.fall)} data-tn={`Cheaper by, on ${r.name}`} data-ts={`${usd(r.then.cost)} a task then, ${usd(r.now.cost)} now`}>
+              {times(r.fall)}
+            </span>
+          </li>
+        );
+      })
+    }
+  </ol>
+  {
+    hidden && (
+      <button type="button" class="cd-more" data-cd-more aria-expanded="false" data-dl-skip>
+        Show all {rows.length} boards
+      </button>
+    )
+  }
+</figure>
+
+<script>
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-cd-more]')) {
+    const list = b.previousElementSibling as HTMLElement;
+    const label = b.textContent!.trim();
+    b.addEventListener('click', () => {
+      const open = list.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+      b.textContent = open ? 'Show fewer' : label;
+      if (!open) list.scrollIntoView({ block: 'nearest' });
+    });
+  }
+</script>
+
+<style>
+  .cd {
+    margin: 0;
+  }
+  .cd-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  /* the mark centers on the label's first line, so a label that wraps on a phone keeps it beside its start */
+  .cd-key li {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .cd-key .cd-ring,
+  .cd-key .cd-dot {
+    position: static;
+    transform: none;
+    flex: none;
+    margin-top: calc((1lh - 11px) / 2);
+  }
+  .cd-list {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cd-cut:not(.open) > .cd-extra {
+    display: none;
+  }
+  .cd-row {
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr) 5.5rem;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .cd-axis {
+    margin-bottom: 4px;
+    color: var(--ink-3);
+    font-size: 12.5px;
+    line-height: 18px;
+  }
+  .cd-axis .cd-track {
+    height: 18px;
+  }
+  .cd-tick {
+    position: absolute;
+    top: 0;
+    line-height: 18px;
+    transform: translateX(-50%);
+    font: 11.5px var(--mono);
+    white-space: nowrap;
+  }
+  .cd-tick:first-child {
+    transform: none;
+  }
+  .cd-tick:last-child {
+    transform: translateX(-100%);
+  }
+  .cd-x {
+    text-align: right;
+  }
+  .cd-n {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .cd-n:hover {
+    text-decoration: underline;
+  }
+  .cd-track {
+    position: relative;
+    height: 22px;
+    min-width: 0;
+    margin: 0 6px;
+  }
+  .cd-grid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--grid);
+  }
+  .cd-line {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--ink-4);
+  }
+  .cd-ring,
+  .cd-dot {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .cd-ring {
+    border: 2px solid var(--ink-3);
+    background: var(--bg);
+  }
+  .cd-dot {
+    background: var(--ink);
+    box-shadow: 0 0 0 2px var(--bg);
+  }
+  .cd-m {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: default;
+  }
+  .cd-m::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+  }
+  .cd-m:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .cd-f {
+    text-align: right;
+    color: var(--ink);
+    font-weight: 500;
+    cursor: default;
+  }
+  @media (max-width: 860px) {
+    .cd-row {
+      grid-template-columns: minmax(0, 1fr) 4.5rem;
+      gap: 2px 12px;
+    }
+    .cd-row .cd-track {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .cd-axis > span:first-child {
+      display: none;
+    }
+    .cd-axis .cd-x {
+      display: none;
+    }
+    /* every other decade keeps its label, counted from the top one, so the labels never touch */
+    .cd-alt {
+      display: none;
+    }
+    .cd-list {
+      gap: 12px;
+    }
+  }
+  .cd-more {
+    margin-top: 14px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font: 500 13.5px/1 var(--sans);
+    cursor: pointer;
+  }
+  .cd-more:hover {
+    background: var(--panel);
+    color: var(--ink);
+  }
+</style>

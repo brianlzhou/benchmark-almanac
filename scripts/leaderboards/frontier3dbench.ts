@@ -9,6 +9,11 @@ import { tables, num } from '../lib/html.ts';
 const PAGE = 'https://lab.einsia.ai/frontier3dbench';
 const board: Leaderboard = {
   benchmark: 'frontier3dbench',
+  parts: {
+    l1: { name: 'Level 1', group: 'Difficulty' },
+    l2: { name: 'Level 2', group: 'Difficulty' },
+    l3: { name: 'Level 3', group: 'Difficulty' },
+  },
   url: PAGE,
   feed: `${PAGE} (Full results table, Total)`,
   terms: 'Einsia publishes this static results table and Apache-2.0 benchmark code; task assets retain their own licenses and attribution.',

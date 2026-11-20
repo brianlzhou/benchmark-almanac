@@ -3,7 +3,19 @@ import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const FEED = "https://huggingface.co/spaces/clemson-computing/VANTAGE-Bench-Leaderboard/raw/main/data/results.json";
 const board: Leaderboard = {
- benchmark: 'vantage-bench', url: "https://huggingface.co/spaces/clemson-computing/VANTAGE-Bench-Leaderboard", feed: FEED,
+ benchmark: 'vantage-bench', parts: {
+  spatial: { name: 'Spatial', group: 'Dimension' },
+  spatio_temporal: { name: 'Spatiotemporal', group: 'Dimension' },
+  temporal: { name: 'Temporal', group: 'Dimension' },
+  '2d_localization': { name: '2D localization', group: 'Task type' },
+  '2d_referring_expressions': { name: '2D referring expressions', group: 'Task type' },
+  '2d_spatial_pointing': { name: '2D spatial pointing', group: 'Task type' },
+  single_object_tracking: { name: 'Single object tracking', group: 'Task type' },
+  temporal_localization: { name: 'Temporal localization', group: 'Task type' },
+  dense_video_captioning: { name: 'Dense video captioning', group: 'Task type' },
+  event_verification: { name: 'Event verification', group: 'Task type' },
+  video_qa: { name: 'Video QA', group: 'Task type' },
+}, url: "https://huggingface.co/spaces/clemson-computing/VANTAGE-Bench-Leaderboard", feed: FEED,
  terms: 'Apache-2.0 project; Hugging Face robots.txt permits this public raw results path.',
  async fetch() {
   const data = await fetchJson<{models: ({name:string;overall:number;date_evaluated:string} & Record<string,unknown>)[]}>(FEED);

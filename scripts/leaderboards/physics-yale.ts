@@ -4,7 +4,15 @@ import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 import { num } from '../lib/html.ts';
 const FEED='https://raw.githubusercontent.com/yale-nlp/Physics/HEAD/README.md';
-const board:Leaderboard={benchmark:'physics-yale',url:'https://github.com/yale-nlp/Physics',feed:FEED,
+const board:Leaderboard={benchmark:'physics-yale', parts: {
+  Val: { name: 'Validation', group: 'Split' },
+  AMO: { name: 'Atomic physics', group: 'Domain' },
+  'E&M': { name: 'Electromagnetism', group: 'Domain' },
+  CM: { name: 'Classical mechanics', group: 'Domain' },
+  'Opt.': { name: 'Optics', group: 'Domain' },
+  QM: { name: 'Quantum mechanics', group: 'Domain' },
+  'Stats.': { name: 'Thermodynamics and statistical physics', group: 'Domain' },
+},url:'https://github.com/yale-nlp/Physics',feed:FEED,
  terms:'Official Yale NLP repository results; upstream licensing applies and the Almanac credits and links the source.',
  async fetch(){
   const table=markdownTables(await fetchText(FEED)).find(t=>t[0].includes('AMO')&&t[0].includes('Test'));

@@ -10,6 +10,13 @@ const FEED = `${PAGE}MathBench-A.csv`;
 
 const board: Leaderboard = {
   benchmark: 'mathbench-opencompass',
+  parts: {
+    Arithmetic: { name: 'Arithmetic', group: 'Difficulty' },
+    Primary: { name: 'Primary', group: 'Difficulty' },
+    Middle: { name: 'Middle', group: 'Difficulty' },
+    High: { name: 'High', group: 'Difficulty' },
+    College: { name: 'College', group: 'Difficulty' },
+  },
   url: PAGE,
   feed: `${FEED} (default Application Average)`,
   terms: 'Static CSV on the OpenCompass GitHub Pages site (no robots.txt); the MathBench repository is Apache-2.0.',

@@ -35,6 +35,14 @@ const board: Leaderboard = {
   feed: `${MD} (Task completion by model, 2D versus 3D, Where capability holds)`,
   terms: 'robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.',
   aliases: { Sol: 'gpt-5-6-sol', Terra: 'gpt-5-6-terra', Luna: 'gpt-5-6-luna' },
+  parts: {
+    d2: { name: '2D drafting', group: 'Modality', note: 'A complete Model Space drawing with geometry, dimensions, leaders, notes, center marks and centerlines. 21 tasks.' },
+    d3: { name: '3D modeling', group: 'Modality', note: 'True 3D geometry plus a complete layout sheet with every shown view and annotation. 29 tasks.' },
+    basic: { name: 'Basic', group: 'Difficulty', note: '10 tasks.' },
+    intermediate: { name: 'Intermediate', group: 'Difficulty', note: '12 tasks.' },
+    advanced: { name: 'Advanced', group: 'Difficulty', note: '14 tasks.' },
+    project: { name: 'Project', group: 'Difficulty', note: '14 tasks.' },
+  },
   async fetch() {
     const md = await fetchText(MD);
     const modality = new Map(table(md, '| Model | 2D | 3D').map((r) => [r[0], r.slice(1).map(pct)]));

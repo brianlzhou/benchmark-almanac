@@ -9,6 +9,14 @@ import { flatPaperTables } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://arxiv.org/html/2506.10481";
 const board: Leaderboard = {
  benchmark: "oibench",
+ parts: {
+   cpp: { name: 'C++', group: 'Language' },
+   java: { name: 'Java', group: 'Language' },
+   python: { name: 'Python', group: 'Language' },
+   javascript: { name: 'JavaScript', group: 'Language' },
+   english: { name: 'English', group: 'Language' },
+   chinese: { name: 'Chinese', group: 'Language' },
+ },
  url: "https://arxiv.org/html/2506.10481",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

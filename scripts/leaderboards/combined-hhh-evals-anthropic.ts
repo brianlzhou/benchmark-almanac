@@ -2,7 +2,12 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const API = 'https://api.github.com/repos/google/BIG-bench/contents/bigbench/benchmark_tasks/hhh_alignment/results';
 const board: Leaderboard = {
- benchmark: 'combined-hhh-evals-anthropic', url: 'https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/hhh_alignment', feed: API,
+ benchmark: 'combined-hhh-evals-anthropic', parts: {
+  Other: { name: 'Other', group: 'Dimension' },
+  Harms: { name: 'Harms', group: 'Dimension' },
+  Helpfulness: { name: 'Helpfulness', group: 'Dimension' },
+  Honesty: { name: 'Honesty', group: 'Dimension' },
+}, url: 'https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/hhh_alignment', feed: API,
  terms: 'Official public BIG-bench results. The almanac credits the benchmark authors and links the source.',
  async fetch() {
   const files = await fetchJson<{name: string; download_url: string}[]>(API);

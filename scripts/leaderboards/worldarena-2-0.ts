@@ -6,6 +6,22 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://worldarena-worldarena2-0.hf.space/gradio_api/call/reload_data";
 const board: Leaderboard = {
   benchmark: "worldarena-2-0",
+  parts: {
+    'Aesthetic Quality': { name: 'Aesthetic quality', group: 'Dimension' },
+    'Background Consistency': { name: 'Background consistency', group: 'Dimension' },
+    'Depth Accuracy': { name: 'Depth accuracy', group: 'Dimension' },
+    'Dynamic Degree': { name: 'Dynamic degree', group: 'Dimension' },
+    'Flow Score': { name: 'Flow score', group: 'Dimension' },
+    'Image Quality': { name: 'Image quality', group: 'Dimension' },
+    'Instruction Following': { name: 'Instruction following', group: 'Dimension' },
+    'Interaction Quality': { name: 'Interaction quality', group: 'Dimension' },
+    'JEPA Similarity': { name: 'JEPA similarity', group: 'Dimension' },
+    'Motion Smoothness': { name: 'Motion smoothness', group: 'Dimension' },
+    Perspectivity: { name: 'Perspectivity', group: 'Dimension' },
+    'Photometric Consistency': { name: 'Photometric consistency', group: 'Dimension' },
+    'Subject Consistency': { name: 'Subject consistency', group: 'Dimension' },
+    'Trajectory Accuracy': { name: 'Trajectory accuracy', group: 'Dimension' },
+  },
   url: "https://huggingface.co/spaces/WorldArena/WorldArena2.0",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

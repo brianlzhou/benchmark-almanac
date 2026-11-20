@@ -5,7 +5,20 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://worldexam.github.io/";
 const board: Leaderboard = {
-  benchmark: "worldexam", url: "https://worldexam.github.io/", feed: FEED,
+  benchmark: "worldexam", parts: {
+  Task: { name: 'Task', group: 'Dimension' },
+  General: { name: 'General', group: 'Dimension' },
+  'Subject Control': { name: 'Subject control', group: 'Dimension' },
+  'Terrain Interaction': { name: 'Terrain interaction', group: 'Dimension' },
+  'Object Interaction': { name: 'Object interaction', group: 'Dimension' },
+  'Social Interaction': { name: 'Social interaction', group: 'Dimension' },
+  'Physical Reaction': { name: 'Physical reaction', group: 'Dimension' },
+  'Goal Completion': { name: 'Goal completion', group: 'Dimension' },
+  'Subject Consistency': { name: 'Subject consistency', group: 'Dimension' },
+  'Motion Smoothness': { name: 'Motion smoothness', group: 'Dimension' },
+  'Aesthetic Quality': { name: 'Aesthetic quality', group: 'Dimension' },
+  'Imaging Quality': { name: 'Imaging quality', group: 'Dimension' },
+}, url: "https://worldexam.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

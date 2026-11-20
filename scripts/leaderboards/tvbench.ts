@@ -9,6 +9,18 @@ import { grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://arxiv.org/html/2410.07752";
 const board: Leaderboard = {
  benchmark: "tvbench",
+ parts: {
+   AC: { name: 'Action count', group: 'Task type' },
+   OC: { name: 'Object count', group: 'Task type' },
+   AS: { name: 'Action sequence', group: 'Task type' },
+   OS: { name: 'Object shuffle', group: 'Task type' },
+   ST: { name: 'Scene transition', group: 'Task type' },
+   AL: { name: 'Action localization', group: 'Task type' },
+   AA: { name: 'Action antonyms', group: 'Task type' },
+   UA: { name: 'Unexpected action', group: 'Task type' },
+   ES: { name: 'Egocentric sequence', group: 'Task type' },
+   MD: { name: 'Moving direction', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2410.07752",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -6,7 +6,11 @@ import { num, text } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/doc-doc/NExT-QA/main/README.md";
 const board: Leaderboard = {
- benchmark: "next-qa", url: "https://github.com/doc-doc/NExT-QA", feed: FEED,
+ benchmark: "next-qa", parts: {
+  causal: { name: 'Causal', group: 'Task type' },
+  temporal: { name: 'Temporal', group: 'Task type' },
+  descriptive: { name: 'Descriptive', group: 'Task type' },
+}, url: "https://github.com/doc-doc/NExT-QA", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

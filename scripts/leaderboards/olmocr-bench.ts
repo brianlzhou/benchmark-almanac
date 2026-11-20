@@ -8,6 +8,16 @@ const FEED = "https://raw.githubusercontent.com/allenai/olmocr/HEAD/README.md";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "olmocr-bench",
+  parts: {
+    ArXiv: { name: 'arXiv', group: 'Category' },
+    'Old scans math': { name: 'Old scans math', group: 'Category' },
+    Tables: { name: 'Tables', group: 'Category' },
+    'Old scans': { name: 'Old scans', group: 'Category' },
+    'Headers & footers': { name: 'Headers and footers', group: 'Category' },
+    'Multi column': { name: 'Multi column', group: 'Category' },
+    'Long tiny text': { name: 'Long tiny text', group: 'Category' },
+    Base: { name: 'Base', group: 'Category' },
+  },
   url: "https://github.com/allenai/olmocr",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

@@ -7,6 +7,10 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://mcgill-nlp.github.io/weblinx/leaderboard/";
 const board: Leaderboard = {
  benchmark: "weblinx",
+ parts: {
+   elementIoU: { name: 'Element', group: 'Task type', note: 'The element-action group uses intersection over union.' },
+   textF1: { name: 'Text', group: 'Task type', note: 'The text-action group uses F1.' },
+ },
  url: "https://mcgill-nlp.github.io/weblinx/leaderboard/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

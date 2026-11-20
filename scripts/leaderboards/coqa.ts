@@ -6,7 +6,10 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://stanfordnlp.github.io/coqa/";
 const board: Leaderboard = {
- benchmark: "coqa", url: "https://stanfordnlp.github.io/coqa/", feed: FEED,
+ benchmark: "coqa", parts: {
+  'in-domain F1': { name: 'In domain', group: 'Split' },
+  'out-of-domain F1': { name: 'Out of domain', group: 'Split' },
+}, url: "https://stanfordnlp.github.io/coqa/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

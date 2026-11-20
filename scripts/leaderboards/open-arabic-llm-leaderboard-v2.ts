@@ -36,6 +36,9 @@ export const oallFeed = (column: string) => `https://huggingface.co/datasets/${R
 interface Run {
   model: string;
   date: string;
+  link: string;
+  config?: { model_name?: string; model_size?: string; total_evaluation_time_secondes?: string; num_fewshot_seeds?: number };
+  results: Record<string, Record<string, number>>;
   scores: Partial<Record<OallTask, number>>;
 }
 
@@ -111,7 +114,7 @@ function runs(): Promise<Run[]> {
     for (const path of newest.values()) {
       // A failed or malformed file must fail the board. The sync then preserves its previous complete rows.
       const data = await (await oallResponse(FILE(path))).json() as {
-        config_general?: { model_name?: string };
+        config_general?: Run['config'];
         results?: Record<string, Record<string, number>>;
       };
       if (!data?.results || typeof data.results !== 'object') throw new Error(`OALL file has no results: ${path}`);
@@ -122,7 +125,7 @@ function runs(): Promise<Run[]> {
       }
       if (!Object.keys(scores).length) throw new Error(`OALL file has no recognized scores: ${path}`);
       const date = path.match(/results_(\d{4}-\d\d-\d\d)/)?.[1] ?? '';
-      out.push({ model: data.config_general?.model_name ?? path.split('/').slice(0, 2).join('/'), date, scores });
+      out.push({ model: data.config_general?.model_name ?? path.split('/').slice(0, 2).join('/'), date, scores, results: data.results, config: data.config_general, link: FILE(path) });
     }
     if (!out.length) throw new Error('no OALL results read');
     return out;
@@ -143,13 +146,38 @@ function name(repo: string): { model: string; setting?: string } {
 }
 
 /** Rows for one task column, or for "Average" (the mean of the tasks a run has, as the Space computes it). */
-export async function oallRows(column: OallTask | 'Average'): Promise<LeaderboardRow[]> {
+export async function oallRows(column: OallTask | 'Average', board?: Leaderboard): Promise<LeaderboardRow[]> {
   const rows: LeaderboardRow[] = [];
   for (const r of await runs()) {
     const values = Object.values(r.scores);
     const score = column === 'Average' ? (values.length ? values.reduce((a, b) => a + b, 0) / values.length : undefined) : r.scores[column];
     if (score === undefined) continue;
-    rows.push({ ...name(r.model), score, date: r.date || undefined });
+    const metrics: Record<string, number> = {};
+    if (board && column === 'Average') {
+      for (const [task, value] of Object.entries(r.scores)) {
+        metrics[task] = value;
+        (board.parts ??= {})[task] = { name: task, group: 'Benchmark' };
+      }
+      const seconds = Number(r.config?.total_evaluation_time_secondes);
+      if (Number.isFinite(seconds) && seconds > 0) metrics.evaluationSeconds = seconds;
+      const size = r.config?.model_size?.match(/^([\d.]+) GB$/);
+      if (size) metrics.modelSizeGB = Number(size[1]);
+      if (typeof r.config?.num_fewshot_seeds === 'number') metrics.fewshotSeeds = r.config.num_fewshot_seeds;
+    } else if (board && column !== 'Average') {
+      const [overall, measure] = OALL_TASKS[column];
+      const prefix = overall.split(':_average|')[0] + ':';
+      for (const [key, result] of Object.entries(r.results)) {
+        if (key !== overall && (!key.startsWith(prefix) || !key.endsWith('|0'))) continue;
+        const part = key === overall ? undefined : key.slice(prefix.length, -2);
+        if (part && typeof result[measure] === 'number') {
+          metrics[part] = result[measure] * 100;
+          (board.parts ??= {})[part] = { name: part, group: 'Subject' };
+        }
+        const stderr = result[measure + '_stderr'];
+        if (typeof stderr === 'number') metrics[part ? part + ' stderr' : 'stderr'] = stderr * 100;
+      }
+    }
+    rows.push({ ...name(r.model), score, date: r.date || undefined, ...(board ? { metrics, link: r.link } : {}) });
   }
   return rows;
 }
@@ -185,6 +213,6 @@ const board: Leaderboard = {
   feed: oallFeed('Average'),
   terms: OALL_TERMS,
   aliases: OALL_ALIASES,
-  fetch: () => oallRows('Average'),
+  fetch: () => oallRows('Average', board),
 };
 export default board;

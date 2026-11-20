@@ -7,6 +7,7 @@ const FEED = "https://benchmarkheaven.com/api/jevbench/latest";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "jevbench",
+  parts: { intelligence: 'Intelligence', calibration: 'Calibration' },
   url: "https://benchmarkheaven.com/jev-models",
   feed: FEED,
   terms: "Public results published by the benchmark authors at benchmarkheaven.com; retain source attribution and follow the upstream terms.",
@@ -21,8 +22,16 @@ const board: Leaderboard = {
       for (const [k, v] of Object.entries(r.axes ?? {})) if (typeof v === 'number') metrics[k] = v;
       if (typeof r.latency?.p50_s_measured === 'number') metrics.latency = r.latency.p50_s_measured;
       if (typeof r.composite_score === 'number') metrics.composite = r.composite_score;
+      for (const group of ['latency', 'decision_limit', 'capability'] as const) {
+        for (const [key, value] of Object.entries(r[group] ?? {})) {
+          if (typeof value === 'number') metrics[group + ':' + key] = value;
+        }
+      }
+      if (typeof r.rank === 'number') metrics.compositeRank = r.rank;
       const price = r.price?.usd_per_1000_decisions;
-      out.push({model: identity(r.name), score: r.capability.score, setting: [data.revision, r.board, r.capability.eligible ? 'capability ranked' : 'outside capability caps', r.listing, r.price?.kind].filter(Boolean).join('; '), cost: typeof price === 'number' ? price / 1000 : undefined, metrics});
+      out.push({model: identity(r.name), score: r.capability.score,
+        date: /^\d{4}-\d{2}-\d{2}$/.test(r.draw?.measured_on ?? '') ? r.draw.measured_on : undefined,
+        setting: [data.revision, r.board, r.capability.eligible ? 'capability ranked' : 'outside capability caps', r.listing, r.price?.kind].filter(Boolean).join('; '), cost: typeof price === 'number' ? price / 1000 : undefined, metrics});
     }
     if (!out.length) throw new Error('JevBench current capability results missing');
     return out;

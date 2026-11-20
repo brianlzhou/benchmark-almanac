@@ -8,6 +8,10 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://osu-nlp-group.github.io/AutoElicit/";
 const board: Leaderboard = {
  benchmark: "autoelicit",
+ parts: {
+   fromHaiku: { name: 'From Haiku', group: 'Split', note: 'Transferred prompts optimized against Haiku.' },
+   fromOpus: { name: 'From Opus', group: 'Split', note: 'Transferred prompts optimized against Opus.' },
+ },
  url: "https://osu-nlp-group.github.io/AutoElicit/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

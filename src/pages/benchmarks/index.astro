@@ -1,4 +1,7 @@
 ---
+import { evalAttrs } from '../../lib/eval-kind.ts';
+import { facetAttrs, facetWords } from '../../lib/facets.ts';
+import FacetFilters from '../../components/FacetFilters.astro';
 import SortHead from '../../components/SortHead.astro';
 import Base from '../../layouts/Base.astro';
 import LabMark from '../../components/LabMark.astro';
@@ -186,7 +189,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
         <label title="A model or human experts grade the output"><input type="radio" name="method" value="graded" data-key="method" />Graded <span class="n">{methodCount('graded')}</span></label>
         <label title="Predictions scored against what happens"><input type="radio" name="method" value="events" data-key="method" />Real events <span class="n">{methodCount('events')}</span></label>
       </div>
-      <div class="frow">
+      <div class="frow ctl-row">
         <input class="field grow" type="search" placeholder="Search benchmarks" aria-label="Search benchmarks" data-q />
         <button type="button" class="fbtn" aria-expanded="false" aria-controls="fpanel" data-fbtn>
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 3.5h11M3.5 7h7M5.5 10.5h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
@@ -200,6 +203,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
           <Dropdown filterKey="counted" label="Cited in launch posts and system cards" options={countedOptions} viewOnly />
         </div>
+        <FacetFilters items={rows.map((s) => ({ id: s.b.id, n: familySize(s.b) }))} />
         <span class="count muted" data-count>{benchmarkCount.toLocaleString('en-US')} benchmarks</span>
       </div>
 
@@ -255,6 +259,8 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
               return (
                 <>
                   <tr
+                    {...evalAttrs(s.b)}
+                    {...facetAttrs(s.b.id)}
                     class:list={{ fam: !!group }}
                     data-later={i >= 150 ? '' : undefined}
                     data-group={group}
@@ -265,7 +271,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                     data-status={s.status.replace(/ /g, '-')}
                     data-added={addedWindows(s)}
                     data-code={s.b.links?.repo ? 'yes' : ''}
-                    data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name)].join(' ').toLowerCase() || undefined}
+                    data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name), facetWords(s.b.id)].join(' ').trim().toLowerCase() || undefined}
                   >
                     <td class="nm">
                       <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
@@ -323,7 +329,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
                     const next = nextVersion(p.b.id);
                     const pkind = (p.b.subcategory ? SUB_BY_ID.get(p.b.subcategory)?.name : undefined) ?? CATEGORY_NAMES[p.b.category ?? 'other'] ?? 'Other';
                     return (
-                      <tr class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} hidden>
+                      <tr {...evalAttrs(p.b)} class:list={['ver', { last: i === prev.length - 1 }]} id={`v-${p.b.id}`} data-parent={group} hidden>
                         <td class="nm">
                           <span class="tree" aria-hidden="true" />
                           <a href={`/benchmarks/${p.b.id}/`}>{p.b.name}</a>
@@ -553,10 +559,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
     position: sticky;
     top: var(--bar-h);
     z-index: 6;
-    display: flex;
-    flex-wrap: wrap;
     gap: 8px;
-    align-items: center;
     margin: 12px calc(-1 * var(--gutter)) 8px;
     padding: 8px var(--gutter);
     background: var(--bg);
@@ -824,6 +827,7 @@ const lastAdded = lastAddedDate ? humanDate(lastAddedDate).replace(/, \d{4}$/, '
       display: inline-flex;
       align-items: center;
       gap: 7px;
+      height: var(--ctl-h);
       padding: 10px 13px;
       border: 0;
       border-radius: 9px;

@@ -7,6 +7,11 @@ const FEED = "https://arxiv.org/html/2506.05828";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "financereasoning",
+  parts: {
+    hard: { name: 'Hard', group: 'Difficulty' },
+    medium: { name: 'Medium', group: 'Difficulty' },
+    easy: { name: 'Easy', group: 'Difficulty' },
+  },
   url: "https://bupt-reasoning-lab.github.io/FinanceReasoning",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

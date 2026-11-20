@@ -1,0 +1,203 @@
+---
+// What a model costs on the leaderboards that publish a price: its best-scoring priced run on each, where that price
+// sits among every model's (a log track from the cheapest to the priciest, with the median), how it compares with
+// the median, and the cheapest model that comes close to its score for less. Prices compare only within a board.
+import ModelName from '../ModelName.astro';
+import { modelCosts, median, money, ratioWords, markColor, type CostRow } from '../../lib/model-insights.ts';
+import { modelById } from '../../lib/data.ts';
+import { score as fmt } from '../../lib/format.ts';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const m = modelById.get(id)!;
+const rows = modelCosts(id);
+const SHOWN = 10;
+const n = rows.length;
+const med = median(rows.map((r) => r.ratio));
+const alone = rows.filter((r) => !r.near).length;
+const caption = !n
+  ? ''
+  : `On the ${n === 1 ? 'one leaderboard that publishes' : `${n} leaderboards that publish`} a price, its best run ${n === 1 ? 'costs' : 'usually costs'} ${ratioWords(med)} the median model's. ${
+      alone === n ? `No model comes close to its score for less${n === 1 ? '' : ' on any of them'}.` : alone === 0 ? `${n === 1 ? 'There' : 'On every one'}, another model comes close to its score for less.` : `On ${alone} of them, no model comes close to its score for less.`
+    }`;
+const nm = (x: string) => modelById.get(x)?.name ?? x;
+// a point's place on a board's log price track, 0 to 100
+const at = (r: CostRow, c: number) => {
+  const lo = Math.log(r.field[0].cost);
+  const hi = Math.log(r.field.at(-1)!.cost);
+  return hi > lo ? ((Math.log(c) - lo) / (hi - lo)) * 100 : 50;
+};
+const times = (x: number) => `${x < 10 ? x.toFixed(1) : Math.round(x)}×`;
+const per = (r: CostRow) => (r.per === 'run' ? ' per run' : '');
+---
+
+{
+  n > 0 && (
+    <section data-cost>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>What does it cost to run?</h2>
+          <p>{caption}</p>
+        </div>
+        <button
+          type="button"
+          class="help-q"
+          aria-label="How we compare prices"
+          data-tn="How we compare prices"
+          data-ts="Each board's own price in US dollars, per task unless the board prices the whole run. We take each model's best-scoring run that has a price, and compare prices only within one board. Close means within two points on a percentage, or within 2% on another scale."
+          data-wide
+        >
+          ?
+        </button>
+      </div>
+      <div class="table-wrap">
+        <table class="t ck" style={`--c:${markColor(m.lab)}`}>
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th class="r ck-sc">Score</th>
+              <th class="r">Price</th>
+              <th class="ck-tr">From cheapest to priciest</th>
+              <th class="r ck-ra">Against the median</th>
+              <th>
+                <span class="ck-w">Close to its score for less</span>
+                <span class="ck-rx">Close for less</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => {
+              const unit = r.b.unit ?? '%';
+              return (
+                <tr hidden={i >= SHOWN} data-reveal-row>
+                  <td>
+                    <a href={`/benchmarks/${r.b.id}/`}>{r.b.name}</a>
+                  </td>
+                  <td class="r num ck-sc">{fmt(r.run.value, unit)}</td>
+                  <td class="r num nowrap">
+                    {money(r.run.cost!)}
+                    {per(r) && <span class="muted">{per(r)}</span>}
+                    <span class="ck-rx muted">{times(r.ratio)} the median</span>
+                  </td>
+                  <td class="ck-tr">
+                    <span class="ck-track">
+                      <i class="md" style={`left:${at(r, r.median).toFixed(1)}%`} data-tv={money(r.median)} data-tn="The median model's price" data-ts={`Of ${r.field.length} models with a price on ${r.b.name}`} />
+                      {r.near && <i class="nr" style={`left:${at(r, r.near.cost).toFixed(1)}%`} data-tv={money(r.near.cost)} data-tn={nm(r.near.model)} data-ts={`Scores ${fmt(r.near.value, unit)} on ${r.b.name}`} />}
+                      <i class="me" style={`left:${at(r, r.run.cost!).toFixed(1)}%`} data-tv={money(r.run.cost!)} data-tn={m.name} data-ts={`Number ${r.rank} of ${r.field.length} from the cheapest, scoring ${fmt(r.run.value, unit)}`} />
+                    </span>
+                  </td>
+                  <td class="r num nowrap ck-ra">{times(r.ratio)}</td>
+                  <td class="ck-nr">
+                    {r.near ? (
+                      <span class="ck-near">
+                        <ModelName id={r.near.model} size={14} />
+                        <span class="muted num nowrap">
+                          {fmt(r.near.value, unit)} for {money(r.near.cost)}
+                        </span>
+                      </span>
+                    ) : (
+                      <span class="muted">None</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {n > SHOWN && (
+        <button type="button" class="more-rows" data-reveal>
+          Show all {n}
+        </button>
+      )}
+    </section>
+  )
+}
+
+
+<style>
+  .ck td:first-child {
+    width: 24%;
+  }
+  .ck-tr {
+    width: 22%;
+  }
+  .ck-track {
+    position: relative;
+    display: block;
+    height: 16px;
+    background: linear-gradient(var(--line), var(--line)) 0 50% / 100% 2px no-repeat;
+  }
+  .ck-track i {
+    position: absolute;
+    top: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+  }
+  .ck-track .md {
+    width: 2px;
+    height: 14px;
+    border-radius: 1px;
+    background: var(--ink-3);
+  }
+  .ck-track .nr {
+    width: 9px;
+    height: 9px;
+    border: 1.5px solid var(--ink-2);
+    background: var(--bg);
+  }
+  .ck-track .me {
+    width: 12px;
+    height: 12px;
+    background: var(--c);
+    box-shadow: 0 0 0 2px var(--bg);
+  }
+  .ck-track i:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .ck-near {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 8px;
+  }
+  .ck-near .num {
+    font-size: 13px;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 900px) {
+    .ck-sc,
+    .ck-tr {
+      display: none;
+    }
+  }
+  .ck-rx {
+    display: none;
+  }
+  @media (max-width: 560px) {
+    .ck td:first-child {
+      width: auto;
+    }
+    .ck-ra,
+    .ck-w {
+      display: none;
+    }
+    .ck-rx {
+      display: block;
+      font-size: 12px;
+    }
+    .ck-near {
+      display: grid;
+      gap: 2px;
+    }
+    .ck th,
+    .ck td {
+      font-size: 13px;
+    }
+  }
+</style>

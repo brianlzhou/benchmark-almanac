@@ -276,7 +276,7 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
       </div>
       <div class="as-kl" data-k="level" set:html={levelKey(lv)} />
     </div>
-    <div class="as-ctl" data-dl-skip>
+    <div class="as-ctl ctl-row" data-dl-skip>
       {
         pair && (
           <div class="seg" role="group" aria-label="What to count">
@@ -527,10 +527,11 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
   .as [hidden] {
     display: none !important;
   }
+  /* the switches sit on the key's first line: both carry 13px text, so sharing a baseline centers them on it */
   .as-bar {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: first baseline;
     justify-content: space-between;
     gap: 12px 24px;
     margin-bottom: 10px;
@@ -557,9 +558,11 @@ const views = JSON.stringify({ heads, subs, hints }).replace(/</g, '\\u003c');
   .as-stack > .on {
     visibility: visible;
   }
+  /* the line in view comes last, so the head's last baseline, which a link beside it sits on, is its last line */
+  .sh .as-stack > .on {
+    order: 1;
+  }
   .as-ctl {
-    display: flex;
-    flex-wrap: wrap;
     gap: 8px 12px;
   }
   .as .as-pick {

@@ -59,4 +59,15 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  task2Average: { name: 'Task 2', group: 'Task type' },
+  conclusion: { name: 'Conclusion', group: 'Dimension' },
+  facts: { name: 'Facts', group: 'Dimension' },
+  reasoning: { name: 'Reasoning', group: 'Dimension' },
+  statute: { name: 'Statute', group: 'Dimension' },
+  task1: { name: 'Task 1', group: 'Task type' },
+  task3Average: { name: 'Task 3', group: 'Task type' },
+  plaintiff: { name: 'Plaintiff', group: 'Category' },
+  defendant: { name: 'Defendant', group: 'Category' },
+};
 export default board;

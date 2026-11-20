@@ -29,6 +29,9 @@ export interface ModelIndex {
 }
 
 /** One benchmark in a model's file. */
+/** A row's benchmark page: a measure row ("agents-last-exam-1-1~score") links to its benchmark. */
+export const pageOf = (id: string) => id.split('~')[0];
+
 export type FileRow = [
   id: string,
   name: string,
@@ -47,6 +50,8 @@ export type FileRow = [
   lab: number | null,
   /** 1 when the model's own launch posts or system cards report it. */
   cited: 0 | 1,
+  /** 1 for a lab's internal evaluation (src/lib/eval-kind.ts), which the site settings can hide. */
+  internal?: 0 | 1,
 ];
 
 export interface ModelFile {
@@ -492,13 +497,36 @@ export function table(res: Result, picks: ModelPick[], labs: Record<string, LabI
       const gap = r.unit === '%' ? r.gap.toFixed(1) : scoreBare(r.gap, r.unit);
       const isOpen = open.has(r.id);
       const hide = later ? ' hidden' : '';
-      const row = `<tr data-id="${esc(r.id)}" class="cmp-row${later ? ' later' : ''}${isOpen ? ' open' : ''}"${hide}><td class="bn"><span class="bw"><button type="button" class="cmp-dis" data-dis="${esc(r.id)}" aria-expanded="${isOpen}" aria-controls="cmp-d-${esc(r.id)}" aria-label="Show the bars for ${esc(r.name)}"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${areaSvg(r.area, 10)}<span class="bt"><a href="/benchmarks/${esc(r.id)}/">${esc(r.name)}</a>${unit}</span></span></td>${cells}<td class="r num muted">${r.labs}</td><td class="r num muted">${r.cited} of ${res.n}</td><td class="r num muted">${gap}</td></tr>`;
+      const row = `<tr data-id="${esc(r.id)}" class="cmp-row${later ? ' later' : ''}${isOpen ? ' open' : ''}"${hide}><td class="bn"><span class="bw"><button type="button" class="cmp-dis" data-dis="${esc(r.id)}" aria-expanded="${isOpen}" aria-controls="cmp-d-${esc(r.id)}" aria-label="Show the bars for ${esc(r.name)}"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${areaSvg(r.area, 10)}<span class="bt"><a href="/benchmarks/${esc(pageOf(r.id))}/">${esc(r.name)}</a>${unit}</span></span></td>${cells}<td class="r num muted">${r.labs}</td><td class="r num muted">${r.cited} of ${res.n}</td><td class="r num muted">${gap}</td></tr>`;
       const det = isOpen ? `<tr class="cmp-det${later ? ' later' : ''}" data-det="${esc(r.id)}" id="cmp-d-${esc(r.id)}"${hide}><td colspan="${cols}">${detail(r, picks, labs, res)}</td></tr>` : '';
       return row + det;
     })
     .join('');
   const more = !all && N > SHOW_ROWS ? `<button type="button" class="more-rows" data-all>Show all ${N.toLocaleString('en-US')} benchmarks</button>` : '';
   return `<div class="cmp-tbox"><table class="t cmp-t">${head}<tbody>${body}</tbody></table></div>${more}`;
+}
+
+/**
+ * The whole table as CSV, for the download menu: every kept benchmark (not only the rows on screen), in the table's
+ * order, with each picked model's score at full precision and where it came from, then Labs, Cited by and Gap.
+ */
+export function tableCsv(res: Result, picks: ModelPick[]): string {
+  const cell = (x: string | number) => {
+    const s = String(x);
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const head = ['Benchmark', 'Unit', 'Better', ...picks.flatMap((p) => [p.name, `${p.name} source`]), 'Labs reporting it', `Cited by these ${picks.length} models`, 'Gap', 'Page'];
+  const rows = res.rows.map((r) => [
+    r.name,
+    UNIT_NAME[r.unit] ?? r.unit,
+    r.better < 0 ? 'lower' : 'higher',
+    ...r.cells.flatMap((c) => [Number(c.v.toPrecision(6)), FROM_TITLE[c.from].replace(/^From an? /, '').replace(/^The lab’s own number$/, 'lab’s own number')]),
+    r.labs,
+    r.cited,
+    Number(r.gap.toPrecision(6)),
+    `https://www.benchmarkalmanac.com/benchmarks/${pageOf(r.id)}/`,
+  ]);
+  return [head, ...rows].map((r) => r.map(cell).join(',')).join('\n') + '\n';
 }
 
 // ---- one benchmark's bars ------------------------------------------------------------------------------
@@ -569,7 +597,7 @@ export function detail(r: Row, picks: ModelPick[], labs: Record<string, LabInfo>
         ? 'Lower is better, so the shortest bar leads.'
         : ''
       : `The axis runs over the range of every model’s best score here, in ${esc(UNIT_NAME[r.unit] ?? r.unit)}.${r.better < 0 ? ' Lower is better, so the shortest bar leads.' : ''}`;
-  return `<div class="cmp-detin"><p class="cmp-ds">${esc(rowSentence(r, picks, res.src))}</p><div class="cmp-dbars${r.unit === '%' ? ' pct' : ''}" role="img" aria-label="${esc(r.cells.map((c, i) => `${picks[i].name} ${score(c.v, r.unit)}`).join(', '))}">${bars}${bracket}<span></span><span class="cmp-dx">${ticks}</span><span></span></div><p class="cmp-dfoot">${scale ? `${scale} ` : ''}<a href="/benchmarks/${esc(r.id)}/">Open the ${esc(r.name)} page</a></p></div>`;
+  return `<div class="cmp-detin"><p class="cmp-ds">${esc(rowSentence(r, picks, res.src))}</p><div class="cmp-dbars${r.unit === '%' ? ' pct' : ''}" role="img" aria-label="${esc(r.cells.map((c, i) => `${picks[i].name} ${score(c.v, r.unit)}`).join(', '))}">${bars}${bracket}<span></span><span class="cmp-dx">${ticks}</span><span></span></div><p class="cmp-dfoot">${scale ? `${scale} ` : ''}<a href="/benchmarks/${esc(pageOf(r.id))}/">Open the ${esc(r.name)} page</a></p></div>`;
 }
 
 // ---- the Bars view -------------------------------------------------------------------------------------
@@ -608,7 +636,7 @@ export function barsView(res: Result, picks: ModelPick[], labs: Record<string, L
           return `<span class="cmp-bb" tabindex="${t}" data-tv="${esc(v)}" data-tn="${esc(picks[i].name)}" data-ts="${esc(`${r.name}. ${FROM_TITLE[c.from]}.`)}"><span class="cmp-bf" style="width:${at(c.v, dom).toFixed(2)}%;background:${col[i]}"></span>${i === lead || (lead < 0 && r.lead[0] === i) ? `<span class="cmp-bl num">${esc(v)}${r.lead.length > 1 ? ', tied' : ''}</span>` : ''}</span>`;
         })
         .join('');
-      return `<li class="cmp-bg${later ? ' later' : ''}" data-id="${esc(r.id)}"${later ? ' hidden' : ''}><span class="cmp-bn">${areaSvg(r.area, 10)}<span class="bt"><a href="/benchmarks/${esc(r.id)}/">${esc(r.name)}</a>${note ? `<span class="u">${esc(note)}</span>` : ''}</span></span><span class="cmp-bbs">${bars}</span></li>`;
+      return `<li class="cmp-bg${later ? ' later' : ''}" data-id="${esc(r.id)}"${later ? ' hidden' : ''}><span class="cmp-bn">${areaSvg(r.area, 10)}<span class="bt"><a href="/benchmarks/${esc(pageOf(r.id))}/">${esc(r.name)}</a>${note ? `<span class="u">${esc(note)}</span>` : ''}</span></span><span class="cmp-bbs">${bars}</span></li>`;
     })
     .join('');
   const more = !all && N > SHOW_ROWS ? `<button type="button" class="more-rows" data-all>Show all ${N.toLocaleString('en-US')} benchmarks</button>` : '';

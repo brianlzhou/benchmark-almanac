@@ -1,8 +1,7 @@
 // Reads both official tables and keeps category scores as metrics, never as separate overall scores.
 // Video-MMMU. videommmu.github.io is a static page with one leaderboard table: Overall accuracy, the
 // knowledge-gain delta, and the Perception, Comprehension and Adaptation tracks. Overall is the score. The
-// human baseline row (class human-row) is skipped. The header merges Overall and the delta in one cell; body
-// rows keep them apart, so Overall is the second body cell. Some rows (GPT-5-thinking, Gemini 2.5 Pro, o3) give only
+// human baseline row is skipped. Overall and the knowledge-gain delta share one cell. Some rows (GPT-5-thinking, Gemini 2.5 Pro, o3) give only
 // an overall score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -14,6 +13,11 @@ const README = 'https://raw.githubusercontent.com/EvolvingLMMs-Lab/VideoMMMU/HEA
 
 const board: Leaderboard = {
   benchmark: 'video-mmmu',
+  parts: {
+    perception: { name: 'Perception', group: 'Task type' },
+    comprehension: { name: 'Comprehension', group: 'Task type' },
+    adaptation: { name: 'Adaptation', group: 'Task type' },
+  },
   url: PAGE,
   feed: `${PAGE} + ${README} (Overall, union of official tables)`,
   terms: 'Static GitHub Pages site that states no license or terms; the VideoMMMU repository states no standard license.',
@@ -43,15 +47,20 @@ const board: Leaderboard = {
       const score = num(r[1]?.text);
       if (r[0]?.text && score !== undefined) {
         const metrics: Record<string, number> = {};
-        for (const [key, index] of [['knowledgeGain', 2], ['perception', 3], ['comprehension', 4], ['adaptation', 5]] as const) {
+        for (const [key, index] of [['perception', 2], ['comprehension', 3], ['adaptation', 4]] as const) {
           const value = num(r[index]?.text);
           if (value !== undefined) metrics[key] = value;
         }
-        rows.push({ model: r[0].text, score, ...(Object.keys(metrics).length ? { metrics } : {}) });
+        const gain = num(r[1].text.split('|')[1]);
+        if (gain !== undefined) metrics.knowledgeGain = gain;
+        const link = r[0].html.match(/href="(https?:\/\/[^"]+)"/)?.[1];
+        rows.push({ model: r[0].text, score, link, ...(Object.keys(metrics).length ? { metrics } : {}) });
       }
     });
     // The README adds Keye-VL before the project page. Merge by exact display name, retaining page rows.
-    const readme = markdownTables(await fetchText(README)).find(t => t[0]?.[0] === 'Model' && t[0]?.[1].startsWith('Overall'));
+    const markdown = await fetchText(README);
+    const links = new Map([...markdown.matchAll(/^\|\s*\[([^\]]+)\]\((https?:\/\/[^)]+)\)/gm)].map(match => [match[1], match[2]]));
+    const readme = markdownTables(markdown).find(t => t[0]?.[0] === 'Model' && t[0]?.[1].startsWith('Overall'));
     if (!readme) throw new Error('Video-MMMU README leaderboard missing');
     for (const r of readme.slice(1)) {
       const score = num(r[1]?.split('\\|')[0]);
@@ -61,7 +70,9 @@ const board: Leaderboard = {
         const value = num(r[index]);
         if (value !== undefined) metrics[key] = value;
       }
-      rows.push({ model: r[0], score, metrics });
+      const gain = num(r[1].split('|')[1]);
+      if (gain !== undefined) metrics.knowledgeGain = gain;
+      rows.push({ model: r[0], score, metrics, link: links.get(r[0]) });
     }
     return rows;
   },

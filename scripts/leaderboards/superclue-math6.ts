@@ -6,7 +6,10 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://www.CLUEbenchmarks.com/superclue_math6.html";
 const board: Leaderboard = {
- benchmark: "superclue-math6", url: "https://www.CLUEbenchmarks.com/superclue_math6.html", feed: FEED,
+ benchmark: "superclue-math6", parts: {
+  'weighted reasoning score': { name: 'Weighted reasoning', group: 'Dimension' },
+  'accuracy score': { name: 'Accuracy', group: 'Dimension' },
+}, url: "https://www.CLUEbenchmarks.com/superclue_math6.html", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  aliases: {'GPT_4_1106_Preview':'gpt-4-turbo-nov-2023'},

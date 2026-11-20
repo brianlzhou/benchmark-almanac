@@ -8,6 +8,20 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2606.20517";
 const board: Leaderboard = {
   benchmark: "multi-lcb",
+  parts: {
+    Python: { name: 'Python', group: 'Language' },
+    'C++': { name: 'C++', group: 'Language' },
+    Java: { name: 'Java', group: 'Language' },
+    Go: { name: 'Go', group: 'Language' },
+    JS: { name: 'JavaScript', group: 'Language' },
+    TS: { name: 'TypeScript', group: 'Language' },
+    'C#': { name: 'C#', group: 'Language' },
+    Rust: { name: 'Rust', group: 'Language' },
+    Ruby: { name: 'Ruby', group: 'Language' },
+    PHP: { name: 'PHP', group: 'Language' },
+    Kotlin: { name: 'Kotlin', group: 'Language' },
+    Scala: { name: 'Scala', group: 'Language' },
+  },
   url: "https://arxiv.org/html/2606.20517",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

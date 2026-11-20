@@ -2,7 +2,17 @@
 import type {Leaderboard} from './types.ts';
 import {fetchJson} from '../lib/util.ts';
 const FEED='https://kmetbench.github.io/data/leaderboard_table_1_source.json';
-const board:Leaderboard={benchmark:'k-metbench',url:'https://kmetbench.github.io/',feed:FEED,
+const board:Leaderboard={benchmark:'k-metbench', parts: {
+  korean_pct: { name: 'Korean specific', group: 'Split' },
+  text_pct: { name: 'Text', group: 'Modality' },
+  text_only_pct: { name: 'Text only', group: 'Modality' },
+  multimodal_pct: { name: 'Multimodal', group: 'Modality' },
+  part1_pct: { name: 'Weather analysis and forecast theory', group: 'Domain' },
+  part2_pct: { name: 'Meteorological observation methods', group: 'Domain' },
+  part3_pct: { name: 'Atmospheric dynamics', group: 'Domain' },
+  part4_pct: { name: 'Climatology', group: 'Domain' },
+  part5_pct: { name: 'Atmospheric physics', group: 'Domain' },
+},url:'https://kmetbench.github.io/',feed:FEED,
  terms:'MIT project; the project site has no robots.txt.',
  async fetch(){
   const d=await fetchJson<{rows:({display_model_name:string;accuracy_pct:number;timestamps:Record<string,string>} & Record<string,unknown>)[]}>(FEED);

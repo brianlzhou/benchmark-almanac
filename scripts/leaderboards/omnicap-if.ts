@@ -6,7 +6,13 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://nju-link.github.io/OmniCap-IF/";
 const board: Leaderboard = {
- benchmark: "omnicap-if", url: "https://nju-link.github.io/OmniCap-IF/", feed: FEED,
+ benchmark: "omnicap-if", parts: {
+  formatCSR: { name: 'Format', group: 'Category' },
+  contentCSR: { name: 'Content', group: 'Category' },
+  visualCSR: { name: 'Visual', group: 'Modality' },
+  audioCSR: { name: 'Audio', group: 'Modality' },
+  avCSR: { name: 'Audio-visual', group: 'Modality' },
+}, url: "https://nju-link.github.io/OmniCap-IF/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

@@ -6,6 +6,15 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MAEB%28v1%29/scores";
 const board: Leaderboard = {
   benchmark: "maeb",
+  parts: {
+    AudioReranking: { name: 'Audio reranking', group: 'Task type' },
+    AudioClassification: { name: 'Audio classification', group: 'Task type' },
+    Any2AnyRetrieval: { name: 'Any-to-any retrieval', group: 'Task type' },
+    AudioClustering: { name: 'Audio clustering', group: 'Task type' },
+    AudioPairClassification: { name: 'Audio pair classification', group: 'Task type' },
+    AudioMultilabelClassification: { name: 'Audio multilabel classification', group: 'Task type' },
+    AudioZeroshotClassification: { name: 'Audio zero-shot classification', group: 'Task type' },
+  },
   url: "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MAEB%28v1%29/scores",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

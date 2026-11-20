@@ -17,6 +17,10 @@ function markdownTables(source: string): string[][][] {
 const FEED = "https://raw.githubusercontent.com/8188zq/AutoLogi/main/README.md";
 const board: Leaderboard = {
   benchmark: "autologi", url: "https://raw.githubusercontent.com/8188zq/AutoLogi/main/README.md", feed: FEED,
+  parts: {
+    EN: { name: 'English', group: 'Language' },
+    CN: { name: 'Chinese', group: 'Language' },
+  },
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

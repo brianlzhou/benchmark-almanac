@@ -11,6 +11,14 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://audioarena.ai/api/leaderboard/runs?recent_per_group=20";
 const board: Leaderboard = {
   benchmark: "audio-arena-arcada",
+  parts: {
+    appointment_bench: { name: 'Appointment', group: 'Task type' },
+    assistant_bench: { name: 'Assistant', group: 'Task type' },
+    conversation_bench: { name: 'Conversation', group: 'Task type' },
+    event_bench: { name: 'Event', group: 'Task type' },
+    grocery_bench: { name: 'Grocery', group: 'Task type' },
+    product_bench: { name: 'Product', group: 'Task type' },
+  },
   url: "https://audioarena.ai/leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

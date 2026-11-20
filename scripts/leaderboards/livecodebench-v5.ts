@@ -3,10 +3,11 @@
 // v5 was current the page's default window ran from 2024-08-01 to 2025-02-01 (the "2408-2502" window labs
 // cite for v5), and that window is the score here, read through the helper in livecodebench-v6.ts.
 import type { Leaderboard } from './types.ts';
-import { LCB_ALIASES, LCB_FEED, LCB_PAGE, LCB_TERMS, lcbRows } from './livecodebench-v6.ts';
+import { LCB_PARTS, LCB_ALIASES, LCB_FEED, LCB_PAGE, LCB_TERMS, lcbRows } from './livecodebench-v6.ts';
 
 const board: Leaderboard = {
   benchmark: 'livecodebench-v5',
+  parts: { easy: LCB_PARTS.easy, medium: LCB_PARTS.medium, hard: LCB_PARTS.hard, leetcode: LCB_PARTS.leetcode, atcoder: LCB_PARTS.atcoder },
   url: LCB_PAGE,
   feed: `${LCB_FEED} (problems from 2024-08-01 to 2025-02-01)`,
   terms: LCB_TERMS,

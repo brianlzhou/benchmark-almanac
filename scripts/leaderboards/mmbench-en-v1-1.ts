@@ -5,7 +5,7 @@
 // split, which runs about a point apart. The live board on rank.opencompass.org.cn shows only the mean of
 // the English and Chinese test splits, so it is not read. The META time is the row date, so the resolver
 // picks the snapshot current then; "GPT-4o (0513, detail-high)" becomes GPT-4o dated 2024-05-13 with the
-// image detail level as the setting. The file is a snapshot (2025-09-17).
+// image detail level as the setting. Keep each capability score and the model metadata. The file is a snapshot (2025-09-17).
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -28,7 +28,36 @@ export const OPENVLM_ALIASES: Record<string, string> = {
   'ChatGPT-4o-latest': 'gpt-4o-mar-2025',
 };
 
-type Entry = { META?: { Method?: [string, string?]; Time?: string; Verified?: string; OpenSource?: string; Parameters?: string } } & Record<string, { Overall?: number } | undefined>;
+export const MMBENCH_PARTS = {
+  'AR': { name: 'Attribute reasoning', group: 'Capability' },
+  'Action Recognition': { name: 'Action Recognition', group: 'Task' },
+  'Attribute Comparison': { name: 'Attribute Comparison', group: 'Task' },
+  'Attribute Recognition': { name: 'Attribute Recognition', group: 'Task' },
+  'CP': { name: 'Coarse perception', group: 'Capability' },
+  'Celebrity Recognition': { name: 'Celebrity Recognition', group: 'Task' },
+  'FP-C': { name: 'Cross-instance fine-grained perception', group: 'Capability' },
+  'FP-S': { name: 'Single-instance fine-grained perception', group: 'Capability' },
+  'Function Reasoning': { name: 'Function Reasoning', group: 'Task' },
+  'Future Prediction': { name: 'Future Prediction', group: 'Task' },
+  'Identity Reasoning': { name: 'Identity Reasoning', group: 'Task' },
+  'Image Emotion': { name: 'Image Emotion', group: 'Task' },
+  'Image Quality': { name: 'Image Quality', group: 'Task' },
+  'Image Scene': { name: 'Image Scene', group: 'Task' },
+  'Image Style': { name: 'Image Style', group: 'Task' },
+  'Image Topic': { name: 'Image Topic', group: 'Task' },
+  'LR': { name: 'Logical reasoning', group: 'Capability' },
+  'Nature Relation': { name: 'Nature Relation', group: 'Task' },
+  'Object Localization': { name: 'Object Localization', group: 'Task' },
+  'Ocr': { name: 'Ocr', group: 'Task' },
+  'Physical Property Reasoning': { name: 'Physical Property Reasoning', group: 'Task' },
+  'Physical Relation': { name: 'Physical Relation', group: 'Task' },
+  'RR': { name: 'Relation reasoning', group: 'Capability' },
+  'Social Relation': { name: 'Social Relation', group: 'Task' },
+  'Spatial Relationship': { name: 'Spatial Relationship', group: 'Task' },
+  'Structuralized Imagetext Understanding': { name: 'Structuralized Imagetext Understanding', group: 'Task' },
+};
+
+type Entry = { META?: { Method?: [string, string?]; Time?: string; Verified?: string; OpenSource?: string; Parameters?: string } } & Record<string, Record<string, unknown> | undefined>;
 
 /** Rows for one OpenVLM.json benchmark key, scored by its Overall value. */
 export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
@@ -58,7 +87,12 @@ export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
       setting = setting ? `${setting}, cot` : 'cot';
     }
     const meta = e.META;
-    rows.push({ model, score, setting, date,
+    const metrics: Record<string, number> = {};
+    for (const [key, value] of Object.entries(e[benchKey] ?? {})) {
+      if (key !== 'Overall' && typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
+    }
+    rows.push({ model, score, setting, date, metrics,
+
       verified: meta?.Verified === 'Yes' ? true : meta?.Verified === 'No' ? false : undefined,
       open: meta?.OpenSource === 'Yes' ? true : meta?.OpenSource === 'No' ? false : undefined,
       params: /^\d+(?:\.\d+)?B$/.test(meta?.Parameters ?? '') ? parseFloat(meta!.Parameters!) : undefined,
@@ -70,6 +104,7 @@ export async function openVlmRows(benchKey: string): Promise<LeaderboardRow[]> {
 
 const board: Leaderboard = {
   benchmark: 'mmbench-en-v1-1',
+  parts: MMBENCH_PARTS,
   verified: 'marked verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${OPENVLM_FEED} (MMBench_TEST_EN_V11.Overall)`,

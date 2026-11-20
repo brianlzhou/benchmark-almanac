@@ -141,6 +141,11 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "streamingbench",
+  parts: {
+    realTime: { name: 'Real time visual understanding', group: 'Task type' },
+    omniSource: { name: 'Omni source understanding', group: 'Task type' },
+    contextual: { name: 'Context understanding', group: 'Task type' },
+  },
   url: "https://github.com/THUNLP-MT/StreamingBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

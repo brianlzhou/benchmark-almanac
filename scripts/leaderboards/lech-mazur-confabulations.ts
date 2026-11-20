@@ -11,6 +11,10 @@ const REPO = 'confabulations';
 
 const board: Leaderboard = {
   benchmark: 'lech-mazur-confabulations',
+  parts: {
+    confab: { name: 'Confabulation rate', note: 'Answers invented for unanswerable questions.' },
+    nonResponse: { name: 'Non-response rate', note: 'Missing answers on answerable questions.' },
+  },
   url: `https://github.com/lechmazur/${REPO}`,
   feed: `${ghRaw(`lechmazur/${REPO}`, 'README.md', 'master')} (50-50 Ranking leaderboard, Weighted)`,
   terms: LECH_MAZUR_TERMS(REPO),
@@ -20,7 +24,7 @@ const board: Leaderboard = {
     for (const r of await lechMazurTable(REPO, 'master', /^50-50 Ranking leaderboard$/)) {
       const score = Number(r.Weighted);
       const [confab, nonResponse] = [Number(r['Confab %']), Number(r['Non-Resp %'])];
-      const metrics = Number.isFinite(confab) && Number.isFinite(nonResponse) ? { confab, nonResponse } : undefined;
+      const metrics = Number.isFinite(confab) && Number.isFinite(nonResponse) ? { confab, nonResponse, rank: Number(r.Rank) } : undefined;
       if (r.Model && Number.isFinite(score)) rows.push({ ...lechMazurName(r.Model), score, metrics });
     }
     return rows;

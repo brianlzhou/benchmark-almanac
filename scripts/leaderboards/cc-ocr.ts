@@ -8,6 +8,12 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/AlibabaResearch/AdvancedLiterateMachinery/main/Benchmarks/CC-OCR/README.md";
 const board: Leaderboard = {
  benchmark: "cc-ocr",
+ parts: {
+   'Multi-Scene Text Reading': { name: 'Multi-scene text reading', group: 'Task type' },
+   'Multilingual Text Reading': { name: 'Multilingual text reading', group: 'Task type' },
+   'Document Parsing': { name: 'Document parsing', group: 'Task type' },
+   'Visual Information Extraction': { name: 'Visual information extraction', group: 'Task type' },
+ },
  url: "https://github.com/AlibabaResearch/AdvancedLiterateMachinery/tree/main/Benchmarks/CC-OCR",
  feed: FEED,
  aliases: {'gemini-1.5-pro-002': 'gemini-1-5-pro-sept-2024', 'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024'},

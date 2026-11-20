@@ -15,6 +15,7 @@ interface Row {
   harnessName?: string;
   taskResults: {
     benchmarkTaskSlug?: string;
+    taskVersion?: number;
     result?: { numericResult?: { value?: number; hasConfidenceInterval?: boolean; confidenceInterval?: number }; evaluationDate?: string };
   }[];
 }
@@ -32,7 +33,8 @@ const board: Leaderboard = {
     const { rows } = await fetchJson<{ rows: Row[] }>(FEED);
     const out: LeaderboardRow[] = [];
     for (const r of rows) {
-      const res = r.taskResults.find((t) => t.benchmarkTaskSlug?.includes('simpleqa-verified'))?.result;
+      const task = r.taskResults.find((t) => t.benchmarkTaskSlug?.includes('simpleqa-verified'));
+      const res = task?.result;
       const value = res?.numericResult?.value;
       if (value == null) continue;
       const ci = res?.numericResult?.hasConfidenceInterval ? res.numericResult.confidenceInterval : undefined;
@@ -42,7 +44,12 @@ const board: Leaderboard = {
         setting: r.modelVersionConfigName || undefined,
         harness: [r.agentName, r.harnessName].filter(Boolean).join(', ') || undefined,
         date: res?.evaluationDate?.slice(0, 10),
-        ...(ci ? { metrics: { ciLow: (value - ci) * 100, ciHigh: (value + ci) * 100 } } : {}),
+        low: ci != null ? (value - ci) * 100 : undefined,
+        high: ci != null ? (value + ci) * 100 : undefined,
+        metrics: {
+          ...(ci != null ? { ciLow: (value - ci) * 100, ciHigh: (value + ci) * 100 } : {}),
+          ...(task?.taskVersion != null ? { taskVersion: task.taskVersion } : {}),
+        },
       });
     }
     return out;

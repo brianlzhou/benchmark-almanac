@@ -50,4 +50,11 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  wellWritten: { name: 'Well written', group: 'Dimension' },
+  neutral: { name: 'Neutral', group: 'Dimension' },
+  broad: { name: 'Broad', group: 'Dimension' },
+  wikiCoverage: { name: 'Wiki coverage', group: 'Dimension' },
+  referenceAccuracy: { name: 'Reference accuracy', group: 'Dimension' },
+};
 export default board;

@@ -14,6 +14,14 @@ const URL = 'https://research.nvidia.com/labs/srl/projects/robolab/leaderboard.h
 
 const board: Leaderboard = {
   benchmark: 'robolab',
+  parts: {
+    simple: { name: 'Simple', group: 'Difficulty' },
+    moderate: { name: 'Moderate', group: 'Difficulty' },
+    complex: { name: 'Complex', group: 'Difficulty' },
+    relational: { name: 'Relational', group: 'Category' },
+    visual: { name: 'Visual', group: 'Category' },
+    procedural: { name: 'Procedural', group: 'Category' },
+  },
   url: URL,
   feed: `${URL} (leaderboard table, SR%)`,
   terms: 'Static public page; robots.txt allows it with a search=yes, ai-input=yes content signal, and the page states no further terms.',

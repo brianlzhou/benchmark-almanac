@@ -23,6 +23,9 @@ function badgeDate(s: string): string | undefined {
 
 const board: Leaderboard = {
   benchmark: 'bird-sql',
+  parts: {
+    developmentReported: { name: 'Development', group: 'Split' },
+  },
   harnesses: 'system',
   url: URL,
   feed: `${URL} (main leaderboard table, Test %)`,
@@ -33,13 +36,16 @@ const board: Leaderboard = {
     'Command A': 'cohere-command-a',
   },
   async fetch() {
-    const t = tables(await fetchText(URL)).find((rows) => {
+    const data = tables(await fetchText(URL));
+    const t = data.find((rows) => {
       const head = rows[0]?.map((c) => c.text) ?? [];
       return head.includes('Oracle Knowledge') && head.includes('Test (%)');
     });
     if (!t) throw new Error('BIRD main leaderboard table not found');
     const head = t[0].map((c) => c.text);
     const [iModel, iOracle, iTest] = [head.indexOf('Model'), head.indexOf('Oracle Knowledge'), head.indexOf('Test (%)')];
+    const efficiency = data.find(t => t[0]?.some(cell => cell.text === 'Oracle Knowledge') && t[0].at(-1)?.text === 'Test');
+    const bySubmission = new Map(efficiency?.slice(1).map(r => [JSON.stringify([r[0]?.text, r[iModel]?.text]), num(r.at(-1)?.text)]));
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       // the model cell is "Name<br><span class="affiliation">Team</span>..."
@@ -50,7 +56,7 @@ const board: Leaderboard = {
       const dev = num(r[head.indexOf('Dev (%)')]?.text);
       const submitter = text(r[iModel]?.html.match(/<span\b[^>]*class="affiliation"[^>]*>([\s\S]*?)<\/span\s*>/i)?.[1] ?? '') || undefined;
       const code = r[head.indexOf('Code')]?.html.match(/href="(https:\/\/[^"\s]+)"/i)?.[1];
-      const link = code && !/^https:\/\/(huggingface\.co|developers\.openai\.com)\//.test(code) ? code : undefined;
+      const link = code ?? r[iModel]?.html.match(/href=["'](https?:[^"']+)["']/)?.[1];
       const size = r[head.indexOf('Size')]?.text.match(/^(\d+(?:\.\d+)?)\s*([BM])(?:-(\d+(?:\.\d+)?)B-MoE)?$/i);
       const params = size ? Number(size[1]) / (size[2].toUpperCase() === 'M' ? 1000 : 1) : undefined;
       let harness: string | undefined;
@@ -59,10 +65,11 @@ const board: Leaderboard = {
       if (agent) { harness = agent[1].trim(); model = agent[2].trim(); }
       else if (flash) { harness = flash[1]; model = flash[2]; }
       else if (model === 'SFT CodeS-15B + SQLFixAgent') { harness = 'SQLFixAgent'; model = 'SFT CodeS-15B'; }
+      const rves = bySubmission.get(JSON.stringify([r[0]?.text, r[iModel]?.text]));
       rows.push({ model, score, date: badgeDate(r[0]?.text ?? ''),
         harness, submitter, link, params,
         setting: oracle ? undefined : 'without oracle knowledge',
-        metrics: { ...(dev === undefined ? {} : { developmentReported: dev }),
+        metrics: { ...(rves == null ? {} : { rewardBasedEfficiency: rves }), ...(dev === undefined ? {} : { developmentReported: dev }),
           ...(size?.[3] ? { activeParams: Number(size[3]) } : {}) },
       });
     }

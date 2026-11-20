@@ -6,7 +6,13 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 
 const PAGE = 'https://livesecbench.intokentech.cn/';
 const board: Leaderboard = {
-  benchmark: 'livesecbench', url: PAGE,
+  benchmark: 'livesecbench', parts: {
+  ethics: { name: 'Ethics', group: 'Domain' },
+  legality: { name: 'Legality', group: 'Domain' },
+  privacy: { name: 'Privacy', group: 'Domain' },
+  factuality: { name: 'Factuality', group: 'Domain' },
+  psychological_health: { name: 'Psychological health', group: 'Domain' },
+}, url: PAGE,
   feed: `${PAGE} (current Dataset distribution CSV, overall_score)`,
   terms: 'Intoken permits crawling under robots.txt and publishes this results CSV, with attribution retained and no separate score reuse license stated.',
   aliases: {

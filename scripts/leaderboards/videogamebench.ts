@@ -11,6 +11,17 @@ const URL = 'https://vgbench.com/';
 
 const board: Leaderboard = {
   benchmark: 'videogamebench',
+  parts: {
+    'The Need for Speed': { name: 'The Need for Speed', group: 'Environment' },
+    'The Incredible Machine': { name: 'The Incredible Machine', group: 'Environment' },
+    'Pokemon Crystal': { name: 'Pokemon Crystal', group: 'Environment' },
+    'Doom II': { name: 'Doom II', group: 'Environment' },
+    'Kirby\'s Dream Land (DX)': { name: 'Kirby\'s Dream Land (DX)', group: 'Environment' },
+    'Link\'s Awakening (DX)': { name: 'Link\'s Awakening (DX)', group: 'Environment' },
+    'Secret Game #1': { name: 'Secret Game #1', group: 'Environment' },
+    'Secret Game #2': { name: 'Secret Game #2', group: 'Environment' },
+    'Secret Game #3': { name: 'Secret Game #3', group: 'Environment' },
+  },
   url: URL,
   feed: `${URL} (Full leaderboard table, Overall Score)`,
   terms: 'Static project page; vgbench.com has no robots.txt and publishes no terms of use.',

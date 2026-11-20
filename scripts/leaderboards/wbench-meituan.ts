@@ -12,6 +12,13 @@ const URL = 'https://meituan-longcat.github.io/WBench/';
 
 const board: Leaderboard = {
   benchmark: 'wbench-meituan',
+  parts: {
+    Quality: { name: 'Quality', group: 'Dimension' },
+    Setting: { name: 'Setting', group: 'Dimension' },
+    Interaction: { name: 'Interaction', group: 'Dimension' },
+    Consistency: { name: 'Consistency', group: 'Dimension' },
+    Physical: { name: 'Physical', group: 'Dimension' },
+  },
   url: `${URL}#leaderboard`,
   feed: `${URL} (default Navi table, Average)`,
   terms: 'Static GitHub Pages site of the WBench project, which has no robots.txt; the WBench repository is MIT-licensed.',

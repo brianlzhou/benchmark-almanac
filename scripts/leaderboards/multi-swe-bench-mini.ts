@@ -6,6 +6,11 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json";
 const board: Leaderboard = {
   benchmark: "multi-swe-bench-mini",
+  parts: {
+    easy: { name: 'Easy', group: 'Difficulty' },
+    medium: { name: 'Medium', group: 'Difficulty' },
+    hard: { name: 'Hard', group: 'Difficulty' },
+  },
   url: "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -29,7 +29,8 @@ const sys = system && system !== 'Several models' ? system : undefined;
 const href = link && !blend && featuredIds.has(id) ? `/models/${id}/` : undefined;
 const extra = [m?.version, setting && setting !== 'unknown' ? setting : null].filter(Boolean).join(', ');
 const Tag = href ? 'a' : 'span';
-const title = unlisted ? `${name}: not in our model list` : sys ? `${sys}, an agent built around ${blend ?? m?.name ?? id}. Its score is not the model's own.` : blend ? `Uses several models: ${blend}` : undefined;
+const router = !!m?.router;
+const title = unlisted ? `${name}: not in our model list` : router ? `${m!.name} routes each request among other models. It is a system, not one trained model.` : sys ? `${sys}, an agent built around ${blend ?? m?.name ?? id}. Its score is not the model's own.` : blend ? `Uses several models: ${blend}` : undefined;
 ---
 
 <Tag class:list={['mn', { unlisted, sys: !!(sys || blend) }]} href={href} title={title}>
@@ -37,7 +38,7 @@ const title = unlisted ? `${name}: not in our model list` : sys ? `${sys}, an ag
   <span class="mn-t">
     {sys && <span class="mn-s">{sys}</span>}
     {sys && <span class="mn-p">{blend ? ' ' : ' + '}</span>}
-    <span class="mn-n">{blend ? (sys ? `(${blend})` : blend) : (m?.name ?? name ?? id)}</span>{extra && <span class="mn-x"> {extra}</span>}
+    <span class="mn-n">{blend ? (sys ? `(${blend})` : blend) : (m?.name ?? name ?? id)}</span>{extra && <span class="mn-x"> {extra}</span>}{router && <span class="mn-x mn-router"> router</span>}
     {verified && <span class="mn-v" title={verified} aria-label={verified}>✓</span>}
   </span>
 </Tag>

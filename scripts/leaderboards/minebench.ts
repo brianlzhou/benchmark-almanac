@@ -27,6 +27,9 @@ const board: Leaderboard = {
       if (!r.displayName || !Number.isFinite(r.eloRating)) continue;
       const metrics: Record<string, number> = {};
       for (const [k, v] of Object.entries(r)) if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      if (typeof r.stability === 'string') metrics['stability: ' + r.stability] = 1;
+      if (typeof r.hasBaseline24h === 'boolean') metrics.hasBaseline24h = Number(r.hasBaseline24h);
+      if (typeof r.movementVisible === 'boolean') metrics.movementVisible = Number(r.movementVisible);
       const b = r.benchmark;
       if (b) {
         for (const [k, v] of Object.entries(b)) if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;

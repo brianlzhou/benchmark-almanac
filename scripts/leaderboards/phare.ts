@@ -9,6 +9,12 @@ const URL = 'https://phare.giskard.ai/';
 
 const board: Leaderboard = {
   benchmark: 'phare',
+  parts: {
+    'Hallucination Resistance': { name: 'Hallucination resistance', group: 'Dimension' },
+    'Harm Resistance': { name: 'Harm resistance', group: 'Dimension' },
+    'Bias Resistance': { name: 'Bias resistance', group: 'Dimension' },
+    'Jailbreak Resistance': { name: 'Jailbreak resistance', group: 'Dimension' },
+  },
   url: URL,
   feed: `${URL} (static HTML table, Average Safety)`,
   terms: 'Static public page; the site publishes no robots.txt and no terms.',
@@ -33,7 +39,14 @@ const board: Leaderboard = {
       const score = num(r[iScore]?.text);
       const metrics:Record<string,number>={};
       for(let i=iScore+1;i<head.length;i++){const n=num(r[i]?.text);if(n!==undefined)metrics[head[i]]=n;}
-      if (model && score !== undefined) rows.push({ model, score, setting: off ? 'non-reasoning' : undefined, metrics });
+      const rank = num(r[head.indexOf('Rank')]?.text);
+      if (rank !== undefined) metrics.rank = rank;
+      const href = r[iModel]?.html.match(/href="(\/models\/[^"]+)"/)?.[1];
+      const via = /\sOR$/.test(r[iModel]?.text ?? '');
+      const size = model.match(/\b(\d+(?:\.\d+)?)B\b/i);
+      if (model && score !== undefined) rows.push({ model, score, metrics,
+        setting: [off ? 'non-reasoning' : undefined, via ? 'OpenRouter' : undefined].filter(Boolean).join(', ') || undefined,
+        params: size ? Number(size[1]) : undefined, link: href ? new globalThis.URL(href, URL).href : undefined });
     }
     return rows;
   },

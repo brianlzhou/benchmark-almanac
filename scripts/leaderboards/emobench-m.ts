@@ -7,6 +7,11 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/Emo-gml/EmoBench-M/main/README.md";
 const board: Leaderboard = {
  benchmark: "emobench-m",
+ parts: {
+   CEU: { name: 'Conversational emotion understanding', group: 'Dimension' },
+   SCEA: { name: 'Socially complex emotion analysis', group: 'Dimension' },
+   FER: { name: 'Foundational emotion recognition', group: 'Dimension' },
+ },
  url: "https://github.com/Emo-gml/EmoBench-M",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -18,12 +18,24 @@ const TYPE = /^(Specialized VLMs|General VLMs|Pipeline Tools|Expert VLMs|General
  * may be a rowspan (shorter rows) or sit beside the method in either order, so the method is the first cell
  * that is not a type label. Names in `skip` are left out.
  */
-export async function omnidocRows(feed: string, skip: string[] = [], identifyFamilies = false): Promise<LeaderboardRow[]> {
-  const t = tables(await fetchText(feed)).find((rows) => rows[0]?.some((c) => /^Overall/.test(c.text)) && rows[0]?.some((c) => c.text === 'Methods'));
+export async function omnidocRows(feed: string, skip: string[] = [], identifyFamilies = false, includeDetails = false): Promise<LeaderboardRow[]> {
+  const source = tables(await fetchText(feed));
+  const t = source.find((rows) => rows[0]?.some((c) => /^Overall/.test(c.text)) && rows[0]?.some((c) => c.text === 'Methods'));
   if (!t) throw new Error('end-to-end table not found');
   const head = t[0].map((c) => c.text);
   const iOverall = head.findIndex((h) => /^Overall/.test(h));
   if (iOverall !== 3 || head[2] !== 'Size') throw new Error(`unexpected columns: ${head.join(' | ')}`);
+  const metadata = new Map<string, { open?: boolean }>();
+  if (includeDetails) {
+    const methods = source.find(table => table[0]?.[2]?.text === 'Evaluation Version/Model Weights');
+    for (const row of methods?.slice(1) ?? []) {
+      for (let i = 0; i + 2 < row.length; i += 3) {
+        const href = (html: string) => html.match(/href="(https?:\/\/[^"]+)"/)?.[1];
+        const weights = href(row[i + 2].html);
+        metadata.set(row[i].text, { open: weights?.startsWith('https://huggingface.co/') ? true : undefined });
+      }
+    }
+  }
   const rows: LeaderboardRow[] = [];
   for (const r of t.slice(1)) {
     const full = r.length === head.length;
@@ -31,12 +43,21 @@ export async function omnidocRows(feed: string, skip: string[] = [], identifyFam
     let model = full ? (TYPE.test(cells[0]) ? cells[1] : cells[0]) : cells[0];
     const score = num(cells[full ? iOverall : iOverall - 1]);
     if (!model || TYPE.test(model) || score === undefined || skip.includes(model)) continue;
+    const method = model;
     if (identifyFamilies) {
       const size = cells[full ? 2 : 1];
       if (/^(Qwen2\.5-VL|InternVL3(?:\.5)?)$/.test(model) && /^\d+(?:\.\d+)?B$/.test(size)) model += `-${size}`;
       if (model === 'GPT-4o') model += ' (snapshot unspecified)';
     }
-    rows.push({ model, score });
+    if (!includeDetails) { rows.push({ model, score }); continue; }
+    const size = cells[full ? 2 : 1].match(/^(\d+(?:\.\d+)?)B$/i);
+    const metrics: Record<string, number> = {};
+    for (const [i, key] of ['textEdit', 'formulaCdm', 'tableTeds', 'tableTedsStructure', 'readOrderEdit'].entries()) {
+      const value = num(cells[iOverall + (full ? 1 : 0) + i]);
+      if (value !== undefined) metrics[key] = value;
+    }
+    if (metrics.textEdit !== undefined) metrics.textScore = 100 * (1 - metrics.textEdit);
+    rows.push({ model, score, metrics, params: size ? Number(size[1]) : undefined, ...(metadata.get(model) ?? metadata.get(method)) });
   }
   if (!rows.length) throw new Error(`no rows in ${feed}`);
   return rows;
@@ -44,6 +65,10 @@ export async function omnidocRows(feed: string, skip: string[] = [], identifyFam
 
 const board: Leaderboard = {
   benchmark: 'omnidocbench-1-5',
+  parts: {
+    textScore: { name: 'Text', note: 'One minus text edit distance, multiplied by 100.' },
+    formulaCdm: 'Formula CDM', tableTeds: 'Table TEDS',
+  },
   url: 'https://github.com/opendatalab/OmniDocBench/tree/v1_5#end-to-end-evaluation',
   feed: `${FEED} (end-to-end table, Overall)`,
   terms: 'README on the v1_5 branch of opendatalab/OmniDocBench, which is Apache-2.0.',
@@ -60,6 +85,6 @@ const board: Leaderboard = {
     // the 2025-10-28 update names the run Qwen3-VL-235B-A22B-Instruct
     'Qwen3-VL-235B': 'qwen3-vl-235b-a22b-instruct',
   },
-  fetch: () => omnidocRows(FEED, [], true),
+  fetch: () => omnidocRows(FEED, [], true, true),
 };
 export default board;

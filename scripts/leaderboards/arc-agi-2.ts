@@ -1,5 +1,5 @@
 // ARC-AGI-2 on the ARC Prize leaderboard. The page's chart and table load one pre-joined JSON file per
-// version from /media/data/leaderboard/; scores there are fractions of tasks solved (0 to 1).
+// version from /media/data/leaderboard/. Keep the result page and the cost in that version’s units.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -17,6 +17,7 @@ export interface ArcEval {
   costPerTask?: number | null;
   /** US dollars for the whole run, the x-axis on ARC-AGI-3, from about $200 to $50,000. */
   cost?: number | null;
+  resultsUrl?: string | null;
   display?: boolean;
 }
 
@@ -55,7 +56,8 @@ export async function arcRows(v: 'v2' | 'v3'): Promise<LeaderboardRow[]> {
       setting,
       harness,
       date: e.modelReleaseDate?.slice(0, 10),
-      cost: e.costPerTask ?? e.cost ?? undefined,
+      cost: (v === 'v3' ? e.cost : e.costPerTask) ?? undefined,
+      link: e.resultsUrl && /^(?:https?:\/\/|\/results\/)/.test(e.resultsUrl) ? new URL(e.resultsUrl, 'https://arcprize.org').href : undefined,
     });
   }
   return rows;

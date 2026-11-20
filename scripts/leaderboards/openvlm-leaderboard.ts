@@ -6,53 +6,12 @@
 // row date, and a "(0513, detail-high)" suffix becomes the snapshot date and the image detail setting, as in
 // mmbench.ts. The VCR and A-Bench importers read their own columns through openvlmRows. The file is a
 // snapshot whose newest rows date from 2025.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
+import type { Leaderboard } from './types.ts';
+import { OPENVLM_FEED, openvlmRows, type OpenVlmEntry } from '../lib/boards/openvlm.ts';
 
-// the host serves this file over plain HTTP only
-export const OPENVLM_FEED = 'http://opencompass.openxlab.space/assets/OpenVLM.json';
+export { OPENVLM_FEED, openvlmInfo, openvlmRows, type OpenVlmEntry } from '../lib/boards/openvlm.ts';
 export const OPENVLM_URL = 'https://huggingface.co/spaces/opencompass/open_vlm_leaderboard';
 export const OPENVLM_TERMS = "OpenCompass's published leaderboard data file, which the Apache-2.0 Space renders; the file states no license.";
-
-export type OpenVlmEntry = Record<string, Record<string, number> | undefined> & {
-  META?: { Method?: [string, string?]; Time?: string; Parameters?: string; Verified?: string; OpenSource?: string };
-};
-
-/** Keep only explicit board marks and numeric sizes. */
-export function openvlmInfo(meta: OpenVlmEntry['META']) {
-  const params = meta?.Parameters?.match(/^(\d+(?:\.\d+)?)B$/);
-  return {
-    verified: meta?.Verified === 'Yes' ? true : meta?.Verified === 'No' ? false : undefined,
-    open: meta?.OpenSource === 'Yes' ? true : meta?.OpenSource === 'No' ? false : undefined,
-    params: params ? Number(params[1]) : undefined,
-  };
-}
-
-let cache: Promise<Record<string, OpenVlmEntry>> | undefined;
-const load = () => (cache ??= fetchJson<{ results: Record<string, OpenVlmEntry> }>(OPENVLM_FEED).then((d) => d.results));
-
-/** One row per model whose `pick` returns a number, with the name, date and setting read as mmbench.ts does. */
-export async function openvlmRows(pick: (e: OpenVlmEntry) => number | undefined): Promise<LeaderboardRow[]> {
-  const rows: LeaderboardRow[] = [];
-  for (const e of Object.values(await load())) {
-    const score = pick(e);
-    let model = e.META?.Method?.[0]?.trim();
-    if (!model || typeof score !== 'number' || !Number.isFinite(score)) continue;
-    // the registry's only Reka Edge is the 2026 release, not the 2024 model on this board
-    if (/^RekaEdge$/i.test(model)) continue;
-    let date = e.META?.Time?.replace(/\//g, '-').replace(/-(\d)(?=-|$)/g, '-0$1');
-    let setting: string | undefined;
-    // "GPT-4o (0513, detail-high)": snapshot month and day, and the image detail level
-    const snap = model.match(/\s*\((\d\d)(\d\d), (detail-\w+)\)$/);
-    if (snap && date) {
-      date = `${date.slice(0, 4)}-${snap[1]}-${snap[2]}`;
-      setting = snap[3];
-      model = model.slice(0, snap.index).trim();
-    }
-    rows.push({ model, score, setting, date, ...openvlmInfo(e.META) });
-  }
-  return rows;
-}
 
 /** OpenCompass names the shared resolver cannot place (the same as mmbench.ts). */
 export const OPENVLM_ALIASES: Record<string, string> = {
@@ -66,31 +25,40 @@ export const OPENVLM_ALIASES: Record<string, string> = {
 
 const overall = (e: OpenVlmEntry, key: string, field = 'Overall') => e[key]?.[field];
 
-function avgScore(e: OpenVlmEntry): number | undefined {
+function scores(e: OpenVlmEntry) {
   const cn = overall(e, 'MMBench_TEST_CN_V11');
   const en = overall(e, 'MMBench_TEST_EN_V11');
   const ocr = overall(e, 'OCRBench', 'Final Score');
-  const parts = [
+  return {
+    mmbench:
     cn !== undefined && en !== undefined ? Number(((cn + en) / 2).toFixed(1)) : undefined,
-    overall(e, 'MMStar'),
-    overall(e, 'MMMU_VAL'),
-    overall(e, 'MathVista'),
-    ocr !== undefined ? ocr / 10 : undefined,
-    overall(e, 'AI2D'),
-    overall(e, 'HallusionBench'),
-    overall(e, 'MMVet'),
-  ];
-  if (parts.some((p) => typeof p !== 'number')) return undefined;
-  return Number(((parts as number[]).reduce((a, b) => a + b, 0) / parts.length).toFixed(1));
+    mmstar: overall(e, 'MMStar'),
+    mmmu: overall(e, 'MMMU_VAL'),
+    mathvista: overall(e, 'MathVista'),
+    ocrbench: ocr !== undefined ? ocr / 10 : undefined,
+    ai2d: overall(e, 'AI2D'),
+    hallusionbench: overall(e, 'HallusionBench'),
+    mmvet: overall(e, 'MMVet'),
+  };
+}
+
+function avgScore(e: OpenVlmEntry): number | undefined {
+  const values = Object.values(scores(e));
+  if (!values.every((v): v is number => typeof v === 'number')) return undefined;
+  return Number((values.reduce((a, b) => a + b, 0) / values.length).toFixed(1));
 }
 
 const board: Leaderboard = {
   benchmark: 'openvlm-leaderboard',
+  parts: {
+    mmbench: 'MMBench v1.1', mmstar: 'MMStar', mmmu: 'MMMU (validation)', mathvista: 'MathVista',
+    ocrbench: 'OCRBench', ai2d: 'AI2D', hallusionbench: 'HallusionBench', mmvet: 'MM-Vet',
+  },
   verified: 'marked verified by OpenCompass',
   url: OPENVLM_URL,
   feed: `${OPENVLM_FEED} (Avg Score over the eight default benchmarks)`,
   terms: OPENVLM_TERMS,
   aliases: OPENVLM_ALIASES,
-  fetch: () => openvlmRows(avgScore),
+  fetch: () => openvlmRows(avgScore, e => Object.fromEntries(Object.entries(scores(e)).filter((pair): pair is [string, number] => typeof pair[1] === 'number'))),
 };
 export default board;

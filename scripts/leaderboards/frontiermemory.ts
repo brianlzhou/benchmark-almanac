@@ -65,8 +65,12 @@ const board: Leaderboard = {
       const memory=attr(m[0],'data-tip-mem'), task=attr(m[0],'data-tip-task'), summary=attr(m[0],'data-tip-sub');
       const pair=memory.match(/^(.*?) \(([^)]+)\) in (.+)$/), t=task.match(/^(.*?) in (.+)$/);
       const score=numeric(summary.split('%')[0]); if(!pair || !t || score===undefined) continue;
-      if(pair[3]==='Letta Dream') continue; // Already represented by the corresponding chart point with cost.
       const sd=summary.match(/±([\d.]+) pp SD/);
+      if (pair[3] === 'Letta Dream') {
+        const match = rows.find(r => r.model === pair[1] && r.score === score && r.setting === `memory effort ${pair[2]}; task ${t[1]}`);
+        if (match && sd) (match.metrics ??= {}).standardDeviation = Number(sd[1]);
+        if (match) continue;
+      }
       rows.push({model:pair[1],score,setting:`memory effort ${pair[2]}; task ${t[1]}`,harness:`${pair[3]} / ${t[2]}`,metrics:sd?{standardDeviation:Number(sd[1])}:undefined});
     }
     if(!rows.length) throw new Error('No FrontierMemory chart results');

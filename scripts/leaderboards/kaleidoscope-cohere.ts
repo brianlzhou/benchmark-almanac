@@ -17,7 +17,10 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://huggingface.co/datasets/CohereLabs/kaleidoscope/resolve/main/README.md";
 const board: Leaderboard = {
-  benchmark: "kaleidoscope-cohere", url: "https://huggingface.co/datasets/CohereLabs/kaleidoscope/resolve/main/README.md", feed: FEED,
+  benchmark: "kaleidoscope-cohere", parts: {
+  multimodal: { name: 'Multimodal', group: 'Modality' },
+  text_only: { name: 'Text only', group: 'Modality' },
+}, url: "https://huggingface.co/datasets/CohereLabs/kaleidoscope/resolve/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

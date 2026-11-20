@@ -96,7 +96,8 @@ const nameOf = (k: string) =>
 export interface CatView {
   key: string;
   name: string;
-  group: CatGroup;
+  /** A CatGroup for an arena's categories, or the importer's own group name for a benchmark's parts. */
+  group: string;
   /** Each model's best rating in this category, best first. */
   board: Score[];
 }
@@ -120,5 +121,6 @@ export function arenaCategories(id: string): CatView[] {
     const key = full.slice(4);
     if (best.size >= 3) views.push({ key, name: nameOf(key), group: groupOf(key), board: [...best.values()].sort((a, b) => b.value - a.value) });
   }
-  return views.sort((a, b) => CAT_GROUPS.indexOf(a.group) - CAT_GROUPS.indexOf(b.group) || (ORDER.get(a.key) ?? 999) - (ORDER.get(b.key) ?? 999) || a.name.localeCompare(b.name));
+  const gi = (g: string) => (CAT_GROUPS as string[]).indexOf(g);
+  return views.sort((a, b) => gi(a.group) - gi(b.group) || (ORDER.get(a.key) ?? 999) - (ORDER.get(b.key) ?? 999) || a.name.localeCompare(b.name));
 }

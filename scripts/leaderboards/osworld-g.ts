@@ -5,7 +5,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = 'https://osworld-grounding.github.io/';
 const board: Leaderboard = {
-  benchmark: 'osworld-g', url: URL, feed: URL,
+  benchmark: 'osworld-g', parts: {
+  'Text Matching': { name: 'Text matching', group: 'Task type' },
+  'Element Recognition': { name: 'Element recognition', group: 'Task type' },
+  'Layout Understanding': { name: 'Layout understanding', group: 'Task type' },
+  'Fine-grained Manipulation': { name: 'Fine grained manipulation', group: 'Task type' },
+}, url: URL, feed: URL,
   terms: 'The official project website is CC BY-SA 4.0. Benchmark Almanac credits and links the source.',
   async fetch(): Promise<LeaderboardRow[]> {
     const ts = tables(await fetchText(URL));

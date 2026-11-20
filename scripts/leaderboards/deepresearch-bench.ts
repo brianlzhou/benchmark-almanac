@@ -15,6 +15,12 @@ const AGENT_ON_MODEL: Record<string, [string, string]> = {
 
 const board: Leaderboard = {
   benchmark: 'deepresearch-bench',
+  parts: {
+    comprehensiveness: { name: 'Comprehensiveness', group: 'Dimension' },
+    insight: { name: 'Insight', group: 'Dimension' },
+    instruction_following: { name: 'Instruction following', group: 'Dimension' },
+    readability: { name: 'Readability', group: 'Dimension' },
+  },
   url: 'https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard',
   feed: `${FEED} (overall_score; GPT-5.5 judge)`,
   terms: 'CSV in the muset-ai/DeepResearch-Bench-Leaderboard Hugging Face Space, licensed Apache-2.0.',

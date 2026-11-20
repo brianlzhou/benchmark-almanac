@@ -8,6 +8,13 @@ const FEED = "https://charxiv.github.io/data/val_result.csv";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "charxiv-dq",
+  parts: {
+    INEX: { name: 'Information extraction', group: 'Category' },
+    ENUM: { name: 'Enumeration', group: 'Category' },
+    PATT: { name: 'Pattern recognition', group: 'Category' },
+    CNTG: { name: 'Counting', group: 'Category' },
+    COMP: { name: 'Compositionality', group: 'Category' },
+  },
   url: "https://github.com/princeton-nlp/CharXiv",
   feed: FEED,
   terms: "Public results published by the benchmark authors at charxiv.github.io; retain source attribution and follow the upstream terms.",
@@ -24,7 +31,12 @@ const board: Leaderboard = {
       if (!name || /^(human|random)/i.test(name) || score === undefined) continue;
       const metrics: Record<string, number> = {};
       for (const k of ['INEX', 'ENUM', 'PATT', 'CNTG', 'COMP']) { const n = num(r[k]); if (n !== undefined) metrics[k] = n; }
-      rows.push({ model: identity(name), score, setting: 'validation; descriptive questions', metrics });
+      const size = r['Size [V/L] (B)']?.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+      if (size) {
+        metrics.visionParamsB = Number(size[1]);
+        metrics.languageParamsB = Number(size[2]);
+      }
+      rows.push({ open: r.Weight === 'Open' ? true : r.Weight === 'Proprietary' ? false : undefined, model: identity(name), score, setting: 'validation; descriptive questions', metrics });
     }
     if (!rows.length) throw new Error('CharXiv DQ scores missing');
     return rows;

@@ -2,12 +2,21 @@
 // exposed rating (the ranking and the score), uncertainty, wins and losses, win rate, apples, best length
 // and total cost. Model names use OpenRouter's "Maker: Model" form, and the maker prefix is dropped.
 // Ratings are only comparable within this board. The ±σ uncertainty and Win% are kept as metrics.sigma and
-// metrics.winRate. The Cost column totals a varying number of games per model, so it is kept as a total-cost metric, not cost per task.
+// metrics.winRate. The site’s statistics endpoint gives game counts including ties, cost totals and last game dates.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText } from '../lib/util.ts';
+import { fetchJson, fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
 
 const URL = 'https://snakebench.com/';
+
+interface ModelStats {
+  games_played: number;
+  total_cost: number;
+  ties: number;
+  elo_rating?: number;
+  last_game_time?: string;
+}
+const STATS = 'https://backend-copy-production-3ef7.up.railway.app/api/stats?simple=true';
 
 const board: Leaderboard = {
   benchmark: 'snakebench',
@@ -28,6 +37,7 @@ const board: Leaderboard = {
     const iScore = head.findIndex((h) => /^Rating/.test(h));
     const iSigma = head.findIndex((h) => /^±σ|Uncertainty/.test(h));
     const iWin = head.findIndex((h) => /^Win%/.test(h));
+    const stats = await fetchJson<{ aggregatedData: Record<string, ModelStats> }>(STATS);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       const name = r[iModel]?.text.replace(/^[^:]+:\s*/, '');
@@ -43,7 +53,24 @@ const board: Leaderboard = {
         const value=num(r[head.indexOf(label)]?.text);
         if(value!==undefined)metrics[label]=value;
       }
-      if (name && score !== undefined) rows.push({ model: name, score, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      const detail = stats.aggregatedData[r[iModel]?.text];
+      const best = num(r[head.indexOf('Best')]?.text);
+      const rank = num(r[head.indexOf('#')]?.text);
+      const mu = num(r[iScore]?.attrs.title);
+      if (best !== undefined) metrics.bestLength = best;
+      if (rank !== undefined) metrics.rank = rank;
+      if (mu !== undefined) metrics.mu = mu;
+      if (detail && Number.isFinite(detail.ties)) metrics.ties = detail.ties;
+      if (typeof detail?.elo_rating === 'number') metrics.eloRating = detail.elo_rating;
+      const trials = detail?.games_played;
+      const cost = trials && Number.isFinite(detail.total_cost) ? detail.total_cost / trials : undefined;
+      const time = Date.parse(detail?.last_game_time ?? '');
+      const href = r[iModel]?.html.match(/href="(\/models\/[^"]+)"/)?.[1];
+      if (name && score !== undefined) rows.push({
+        model: name, score, metrics, cost, trials,
+        date: Number.isFinite(time) ? new Date(time).toISOString().slice(0, 10) : undefined,
+        link: href ? new globalThis.URL(href.replace(/&amp;/g, '&'), URL).href : undefined,
+      });
     }
     return rows;
   },

@@ -12,6 +12,11 @@ const FEED = 'https://raw.githubusercontent.com/datalab-to/omni_parse_bench/main
 
 const board: Leaderboard = {
   benchmark: 'omniparsebench',
+  parts: {
+    text: { name: 'Text', group: 'Category' },
+    tables: { name: 'Tables', group: 'Category' },
+    layout: { name: 'Layout', group: 'Category' },
+  },
   url: 'https://github.com/datalab-to/omni_parse_bench',
   feed: `${FEED} (Results table, headline)`,
   terms: 'README table in the datalab-to/omni_parse_bench repository (code Apache-2.0); only the published numbers are read.',

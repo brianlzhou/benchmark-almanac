@@ -1,7 +1,10 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { readFileSync } from 'node:fs';
+import { closeSync, existsSync, openSync, readFileSync, statSync } from 'node:fs';
+import { spawn } from 'node:child_process';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 /** Under `astro dev` only, the pages scripts/og-film.ts films the link-preview videos from. */
 const ogFilm = {
@@ -10,6 +13,62 @@ const ogFilm = {
     /** @param {{ command: string, injectRoute: (route: { pattern: string, entrypoint: string }) => void }} options */
     'astro:config:setup': ({ command, injectRoute }) => {
       if (command === 'dev') injectRoute({ pattern: '/og-film/[scene]', entrypoint: './src/og-film/Film.astro' });
+    },
+  },
+};
+
+/**
+ * Under `astro dev` only: run the jobs listed in private/local-jobs.json on their timers while the dev server is up.
+ * The file is gitignored, so only a machine that has one runs anything. On macOS, launchd jobs can't read
+ * ~/Documents unless their shell has Full Disk Access, and a job started here inherits the terminal's access instead.
+ * Each job is { name, run: [command, ...args], every: minutes, out: log file, skipIfFresh?: file }. A job never
+ * starts while its last run is still going, and one with skipIfFresh waits while that file is newer than its
+ * interval, so a second dev server or a working launchd job doesn't double the work. ALMANAC_LOCAL_JOBS=0 turns
+ * them all off.
+ */
+const localJobs = {
+  name: 'local-jobs',
+  hooks: {
+    /** @param {{ command: string, logger: { info: (m: string) => void, warn: (m: string) => void } }} options */
+    'astro:config:setup': ({ command, logger }) => {
+      const list = new URL('./private/local-jobs.json', import.meta.url);
+      if (command !== 'dev' || process.env.ALMANAC_LOCAL_JOBS === '0' || !existsSync(list)) return;
+      // a config change restarts the dev server in the same process: stop the old timers, keep the busy marks
+      const g = /** @type {{ __localJobs?: { timers: NodeJS.Timeout[], busy: Set<string> } }} */ (globalThis);
+      const state = (g.__localJobs ??= { timers: [], busy: new Set() });
+      for (const t of state.timers.splice(0)) clearTimeout(t);
+      const root = fileURLToPath(new URL('./', import.meta.url));
+      /** @type {{ name: string, run: string[], every: number, out: string, skipIfFresh?: string }[]} */
+      let jobs;
+      try {
+        jobs = JSON.parse(readFileSync(list, 'utf8'));
+      } catch (e) {
+        logger.warn(`private/local-jobs.json is not valid JSON, so no local jobs run: ${e}`);
+        return;
+      }
+      for (const job of jobs) {
+        const tick = () => {
+          if (state.busy.has(job.name)) return;
+          const fresh = job.skipIfFresh && existsSync(join(root, job.skipIfFresh)) && Date.now() - statSync(join(root, job.skipIfFresh)).mtimeMs < job.every * 54_000;
+          if (fresh) return;
+          state.busy.add(job.name);
+          const out = openSync(join(root, job.out), 'a');
+          const done = () => {
+            state.busy.delete(job.name);
+            closeSync(out);
+          };
+          const child = spawn(job.run[0], job.run.slice(1), { cwd: root, stdio: ['ignore', out, out] });
+          // a command that can't start won't start next time either, so the job stays marked busy until a restart
+          child.on('error', (e) => {
+            logger.warn(`local job ${job.name} could not start, so it stops until the dev server restarts: ${e.message}`);
+            closeSync(out);
+          });
+          child.on('exit', done);
+        };
+        // the first run waits a minute, so a dev server restart doesn't start every job at once
+        state.timers.push(setTimeout(tick, 60_000).unref(), setInterval(tick, job.every * 60_000).unref());
+      }
+      logger.info(`local jobs: ${jobs.map((j) => `${j.name} every ${j.every} min`).join(', ')}`);
     },
   },
 };
@@ -61,7 +120,7 @@ export default defineConfig({
   // Reporting moved under Insights on 2026-11-17. Vercel sends the same redirect with the query kept (vercel.json).
   redirects: { '/reporting': '/insights/reporting/' },
   build: { inlineStylesheets: 'auto' },
-  integrations: [sitemap({ serialize: (item) => ({ ...item, lastmod: lastmodOf(item.url) }) }), ogFilm],
+  integrations: [sitemap({ serialize: (item) => ({ ...item, lastmod: lastmodOf(item.url) }) }), ogFilm, localJobs],
   fonts: [
     {
       provider: fontProviders.google(),

@@ -5,6 +5,10 @@ const FEED = "https://arxiv.org/html/2511.01295";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "unireditbench",
+  parts: {
+    realWorld: { name: 'Real world', group: 'Environment' },
+    gameWorld: { name: 'Game world', group: 'Environment' },
+  },
   url: "https://maplebb.github.io/UniREditBench/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -3,7 +3,11 @@ import type {Leaderboard} from './types.ts';
 import {fetchText} from '../lib/util.ts';
 import {jsonAfter} from '../lib/html.ts';
 const FEED='https://bytedance.github.io/safepyramid/data.js';
-const board:Leaderboard={benchmark:'safepyramid',url:'https://bytedance.github.io/safepyramid/',feed:FEED,
+const board:Leaderboard={benchmark:'safepyramid', parts: {
+  l0: { name: 'Level 0: individual rules', group: 'Difficulty' },
+  l1: { name: 'Level 1: rule dependencies', group: 'Difficulty' },
+  l2: { name: 'Level 2: novel frameworks', group: 'Difficulty' },
+},url:'https://bytedance.github.io/safepyramid/',feed:FEED,
  terms:'Apache-2.0 project; the maker site has no robots.txt. JavaScript data is parsed, never executed.',
  async fetch(){
   const d=jsonAfter<{overallPolicy:Record<string,{RMR:number[];'RMR@1.0':number[];RDR:number[];Refusal:number}>}>(await fetchText(FEED),'window.SP_DATA =');

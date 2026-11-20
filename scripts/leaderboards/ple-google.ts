@@ -13,6 +13,12 @@ const PAGE = 'https://ple-bench.com/leaderboard';
 
 const board: Leaderboard = {
   benchmark: 'ple-google',
+  parts: {
+    civil: { name: 'Civil engineering', group: 'Domain' },
+    structural: { name: 'Structural', group: 'Domain' },
+    electrical: { name: 'Electrical', group: 'Domain' },
+    mechanical: { name: 'Mechanical', group: 'Domain' },
+  },
   url: PAGE,
   feed: `${PAGE} (server-rendered matrix, overall test-set view)`,
   terms: 'Server-rendered page under the Google Terms of Service, which bar only automated access against robots.txt (it disallows just /api/); the dataset is CC BY 4.0 and the code Apache-2.0.',
@@ -36,17 +42,26 @@ const board: Leaderboard = {
       rows.push({
         model,
         harness,
-        setting:body[2]?body[1]+"; "+body[2]:undefined,
+        trials: 3,
+        setting: cell.includes('native harness:') ? 'native harness' : undefined,
         score: Number(score),
         cost: num(cost?.replace(/<[^>]+>/g, '').replace(/[^\d.]/g, ' ')),
-        metrics: minutes ? { latency: Number(minutes) * 60 } : undefined,
+        metrics: {
+          ...(minutes ? { latency: Number(minutes) * 60 } : {}),
+          ...(cell.match(/title="± ([\d.]+) across runs"/) ? { runSpread: Number(cell.match(/title="± ([\d.]+) across runs"/)![1]) } : {}),
+          ...(cost?.includes('≈') ? { estimatedCost: 1 } : {}),
+        },
       });
     }
     }
     for (const body of bodies.filter(b => b[1] === 'test' && b[2])) {
-      for (const m of body[0].matchAll(/<td\b[^>]*data-harness="([^"]+)"[^>]*data-model="([^"]+)"[^>]*data-score="([^"]+)"/g)) {
+      for (const m of body[0].matchAll(/<td\b[^>]*data-harness="([^"]+)"[^>]*data-model="([^"]+)"[^>]*data-score="([^"]+)"[^>]*>([\s\S]*?)<\/td>/g)) {
         const row = rows.find(r => r.harness === m[1] && r.model === m[2]);
-        if (row && Number.isFinite(Number(m[3]))) (row.metrics ??= {})[body[2]] = Number(m[3]);
+        if (!row || !Number.isFinite(Number(m[3]))) continue;
+        const metrics = row.metrics ??= {};
+        metrics[body[2]] = Number(m[3]);
+        const spread = m[4].match(/title="± ([\d.]+) across runs"/);
+        if (spread) metrics[body[2] + ':runSpread'] = Number(spread[1]);
       }
     }
     for (const row of rows) if (row.cost !== undefined) (row.metrics ??= {}).cost = row.cost;

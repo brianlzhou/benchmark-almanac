@@ -35,6 +35,17 @@ function quoted(s: string, from: number): string {
 
 const board: Leaderboard = {
   benchmark: 'artifactsbench',
+  parts: {
+    GAME: { name: 'Game development', group: 'Category' },
+    SVG: { name: 'SVG generation', group: 'Category' },
+    WEB: { name: 'Web applications', group: 'Category' },
+    SV: { name: 'Static visual', group: 'Interactivity' },
+    MMD: { name: 'Mild to moderate dynamics', group: 'Interactivity' },
+    HD: { name: 'High dynamics', group: 'Interactivity' },
+    II: { name: 'Intensive interactive', group: 'Interactivity' },
+    SI: { name: 'Simulation', group: 'Category' },
+    MS: { name: 'Management system', group: 'Category' },
+  },
   url: PAGE,
   feed: `${BASE}static/js/main.<hash>.js (data of the "latest" tab)`,
   terms: 'Static GitHub Pages site with no robots.txt and no terms; the ArtifactsBenchmark repository is public and the scores are cited to Tencent Hunyuan.',

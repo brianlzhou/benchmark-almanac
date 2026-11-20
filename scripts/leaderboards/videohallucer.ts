@@ -61,4 +61,10 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  objectRelation: { name: 'Object relation', group: 'Category' },
+  temporal: { name: 'Temporal', group: 'Category' },
+  extrinsicFact: { name: 'Extrinsic factual', group: 'Category' },
+  extrinsicNonfact: { name: 'Extrinsic nonfactual', group: 'Category' },
+};
 export default board;

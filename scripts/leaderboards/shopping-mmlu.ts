@@ -2,7 +2,12 @@
 import type {Leaderboard} from './types.ts';
 import {fetchJson} from '../lib/util.ts';
 const FEED='https://huggingface.co/spaces/KL4805/shopping_mmlu_leaderboard/raw/main/ShoppingMMLU_overall.json';
-const board:Leaderboard={benchmark:'shopping-mmlu',url:'https://huggingface.co/spaces/KL4805/shopping_mmlu_leaderboard',feed:FEED,
+const board:Leaderboard={benchmark:'shopping-mmlu', parts: {
+  'Shopping Concept Understanding': { name: 'Shopping concept understanding', group: 'Category' },
+  'Shopping Knowledge Reasoning': { name: 'Shopping knowledge reasoning', group: 'Category' },
+  'User Behavior Alignment': { name: 'User behavior alignment', group: 'Category' },
+  'Multi-lingual Abilities': { name: 'Multilingual abilities', group: 'Category' },
+},url:'https://huggingface.co/spaces/KL4805/shopping_mmlu_leaderboard',feed:FEED,
  terms:'Public maker results file; Hugging Face robots.txt permits this raw path. No additional reading restriction is stated.',
  async fetch(){const d=await fetchJson<{results:Record<string,Record<string,unknown>>}>(FEED);
  const keys=['Shopping Concept Understanding','Shopping Knowledge Reasoning','User Behavior Alignment','Multi-lingual Abilities'];

@@ -7,7 +7,7 @@
 // setting in several spellings ("claude-opus-4_thinking_16000", "claude-sonnet-4-6_thinking-high",
 // "grok-4-fast-non-reasoning", Bedrock prefixes like "meta.", the Cursor CLI as "cursor_cli_"); norm() turns
 // them into a model name, a setting and a harness. Each row also keeps the Elo's 95% margin ("ci") and the
-// table's Tokens column, completion tokens per move ("moveTokens"), in metrics.
+// table's completion tokens per move and trial count in games.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -91,6 +91,7 @@ const board: Leaderboard = {
         score: Number(elo.toFixed(1)),
         ...(Number.isFinite(ci) ? { low: Number(elo.toFixed(1)) - ci, high: Number(elo.toFixed(1)) + ci } : {}),
         date: r.min_game_date || undefined,
+        trials: metrics.total_games,
         cost: cost > 0 ? cost : undefined,
         ...(Object.keys(metrics).length ? { metrics } : {}),
       });

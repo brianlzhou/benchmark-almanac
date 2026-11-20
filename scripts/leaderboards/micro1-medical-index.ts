@@ -10,6 +10,11 @@ const PAGE = 'https://www.micro1.ai/benchmark/medical-index';
 
 const board: Leaderboard = {
   benchmark: 'micro1-medical-index',
+  parts: {
+    pathologybench: { name: 'RealmPathology', group: 'Split' },
+    wellnessbench: { name: 'WellnessBench', group: 'Split' },
+    pharmabench: { name: 'PharmaBench', group: 'Split' },
+  },
   url: PAGE,
   feed: `${PAGE} (inline leaderboard data "medical-index", the composite index)`,
   terms: MICRO1_TERMS,

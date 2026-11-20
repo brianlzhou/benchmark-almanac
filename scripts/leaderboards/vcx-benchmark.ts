@@ -11,7 +11,12 @@ type Row = { model: string; reasoning: string; tier: string; avgScore: number | 
   scores: Record<string, Suite | null>; latencyP50: number | null; costCentsPerMinute: number | null };
 const SUITES = ['instruction_following', 'hallucination', 'tool_calling', 'colloquial'];
 const board: Leaderboard = {
-  benchmark: 'vcx-benchmark', url: FEED, feed: FEED,
+  benchmark: 'vcx-benchmark', parts: {
+  instruction_following: { name: 'Instruction following', group: 'Task type' },
+  hallucination: { name: 'Hallucination', group: 'Task type' },
+  tool_calling: { name: 'Tool calling', group: 'Task type' },
+  colloquial: { name: 'Colloquial', group: 'Task type' },
+}, url: FEED, feed: FEED,
   terms: 'Retell terms prohibit scraping its Services; the almanac credits Retell AI and links the public benchmark source.',
   async fetch() {
     const raw = jsonAfter<Row[]>(nextFlight(await fetchText(FEED, {}, 1)), '"rows":');

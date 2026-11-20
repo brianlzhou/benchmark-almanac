@@ -7,6 +7,10 @@ const FEED = "https://arxiv.org/html/2508.05748";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "browsecomp-vl",
+  parts: {
+    level1: { name: 'Level 1', group: 'Difficulty' },
+    level2: { name: 'Level 2', group: 'Difficulty' },
+  },
   url: "https://raw.githubusercontent.com/Alibaba-NLP/DeepResearch/main/WebAgent/WebWatcher/README.md",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

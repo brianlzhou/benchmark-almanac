@@ -7,6 +7,14 @@ const FEED = "https://arxiv.org/html/2601.11044";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "agencybench",
+  parts: {
+    game: { name: 'Game development', group: 'Task type' },
+    frontend: { name: 'Front end', group: 'Task type' },
+    backend: { name: 'Back end', group: 'Task type' },
+    code: { name: 'Code', group: 'Task type' },
+    research: { name: 'Research', group: 'Task type' },
+    mcp: { name: 'MCP tool use', group: 'Task type' },
+  },
   url: "https://github.com/GAIR-NLP/AgencyBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

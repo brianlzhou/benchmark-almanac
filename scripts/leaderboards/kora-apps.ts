@@ -46,4 +46,10 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  onlineSafety: { name: 'Online safety', group: 'Category' },
+  physicalSexual: { name: 'Physical and sexual', group: 'Category' },
+  psychosocial: { name: 'Psychosocial', group: 'Category' },
+  learningDevelopment: { name: 'Learning and development', group: 'Category' },
+};
 export default board;

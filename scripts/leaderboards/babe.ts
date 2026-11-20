@@ -7,6 +7,10 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2602.05857";
 const board: Leaderboard = {
   benchmark: "babe",
+  parts: {
+    strongCorrelation: { name: 'Strong correlation', group: 'Category' },
+    weakCorrelation: { name: 'Weak correlation', group: 'Category' },
+  },
   url: "https://arxiv.org/html/2602.05857",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

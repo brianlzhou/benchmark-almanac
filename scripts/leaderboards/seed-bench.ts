@@ -9,6 +9,22 @@ const FEED = "https://huggingface.co/spaces/AILab-CVC/SEED-Bench_Leaderboard/res
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "seed-bench",
+  parts: {
+    'Avg. Img': { name: 'Image', group: 'Modality' },
+    'Avg. Video': { name: 'Video', group: 'Modality' },
+    'Scene Understanding': { name: 'Scene understanding', group: 'Task type' },
+    'Instance Identity': { name: 'Instance identity', group: 'Task type' },
+    'Instance Attribute': { name: 'Instance attribute', group: 'Task type' },
+    'Instance Location': { name: 'Instance location', group: 'Task type' },
+    'Instance Counting': { name: 'Instance counting', group: 'Task type' },
+    'Spatial Relation': { name: 'Spatial relation', group: 'Task type' },
+    'Instance Interaction': { name: 'Instance interaction', group: 'Task type' },
+    'Visual Reasoning': { name: 'Visual reasoning', group: 'Task type' },
+    'Text Recognition': { name: 'Text recognition', group: 'Task type' },
+    'Action Recognition': { name: 'Action recognition', group: 'Task type' },
+    'Action Prediction': { name: 'Action prediction', group: 'Task type' },
+    'Procedure Understanding': { name: 'Procedure understanding', group: 'Task type' },
+  },
   url: "https://huggingface.co/spaces/AILab-CVC/SEED-Bench_Leaderboard",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",

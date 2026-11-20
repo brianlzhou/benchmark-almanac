@@ -8,6 +8,12 @@ const FEED = "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard/resol
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "humaine",
+  parts: {
+    task_performance: { name: 'Task performance', group: 'Dimension' },
+    communication_style: { name: 'Communication style', group: 'Dimension' },
+    interaction_fluidity: { name: 'Interaction fluidity', group: 'Dimension' },
+    trust_ethics: { name: 'Trust and ethics', group: 'Dimension' },
+  },
   url: "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",

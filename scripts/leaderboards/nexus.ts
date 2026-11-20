@@ -13,6 +13,14 @@ const FEED = `${SPACE}/raw/main/app.py`;
 
 const board: Leaderboard = {
   benchmark: 'nexus',
+  parts: {
+    climate: { name: 'Climate', group: 'Task type' },
+    heldout_combined: { name: 'Held-out combined', group: 'Split' },
+    places_api: { name: 'Places API', group: 'Task type' },
+    virustotal: { name: 'VirusTotal', group: 'Task type' },
+    vt_multi_dependency: { name: 'VirusTotal multi dependency', group: 'Task type' },
+    vt_multi_disconnected: { name: 'VirusTotal multi disconnected', group: 'Task type' },
+  },
   url: SPACE,
   feed: `${FEED} (RESULTS, mean over the nine tasks)`,
   terms: 'Public Hugging Face Space, Apache-2.0 (README front matter); huggingface.co robots.txt allows Space files.',

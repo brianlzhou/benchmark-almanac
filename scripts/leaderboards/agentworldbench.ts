@@ -8,6 +8,15 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/QwenLM/Qwen-AgentWorld/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "agentworldbench",
+ parts: {
+   MCP: { name: 'MCP', group: 'Environment' },
+   Search: { name: 'Search', group: 'Environment' },
+   'Term.': { name: 'Terminal', group: 'Environment' },
+   SWE: { name: 'SWE', group: 'Environment' },
+   Android: { name: 'Android', group: 'Environment' },
+   Web: { name: 'Web', group: 'Environment' },
+   OS: { name: 'OS', group: 'Environment' },
+ },
  url: "https://github.com/QwenLM/Qwen-AgentWorld",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

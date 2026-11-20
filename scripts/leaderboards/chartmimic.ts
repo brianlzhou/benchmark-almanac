@@ -6,6 +6,14 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://chartmimic.github.io/static/data/benchmark.json";
 const board: Leaderboard = {
   benchmark: "chartmimic",
+  parts: {
+    Text: { name: 'Text', group: 'Dimension' },
+    Layout: { name: 'Layout', group: 'Dimension' },
+    Type: { name: 'Type', group: 'Dimension' },
+    Color: { name: 'Color', group: 'Dimension' },
+    Avg: { name: 'Low-level average', group: 'Dimension', note: 'Average of text, layout, type, and color scores.' },
+    'GPT-4o': { name: 'GPT-4o', group: 'Dimension', note: 'High-level visual similarity score, averaged with the low-level score for the overall score.' },
+  },
   url: "https://chartmimic.github.io/static/data/benchmark.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

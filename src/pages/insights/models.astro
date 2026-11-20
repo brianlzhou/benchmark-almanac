@@ -1,0 +1,209 @@
+---
+// How new models get tested: how much of what a lab names in a launch post anyone else has scored on the same
+// model, how much more others test, and how long a model stays in the top ten of Epoch AI's index. The series come
+// from src/lib/insights.ts.
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ChartDownload from '../../components/ChartDownload.astro';
+import TrendChart from '../../components/insights/TrendChart.astro';
+import SplitRows from '../../components/insights/SplitRows.astro';
+import InsightCards from '../../components/insights/InsightCards.astro';
+import { checkable, testedModels, stayGroups, frontierStays, pct, CHECK_FROM, STAY_FROM, STAY_MONTHS, type CheckSplit, type TSeries } from '../../lib/insights.ts';
+import { FRONTIER_MODEL_TOP, FRONTIER_LABS } from '../../lib/reporting-view.ts';
+import { creditLine, LAUNCH_POSTS, EPOCH_CREDIT, ECI_CREDIT } from '../../lib/credits.ts';
+import { AS_OF, LEADERBOARDS } from '../../lib/data.ts';
+import { humanDate } from '../../lib/format.ts';
+
+const word = (n: number) => ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][n] ?? String(n);
+const num = (n: number) => n.toLocaleString('en-US');
+const median = (a: number[]) => {
+  const s = [...a].sort((x, y) => x - y);
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2);
+};
+const SOURCES = creditLine([LAUNCH_POSTS, 'official leaderboards', EPOCH_CREDIT]);
+
+// how much of a launch post anyone else has scored on the same model, by lab
+const c = checkable();
+const share = (t: CheckSplit, k: 'run' | 'board' | 'none') => t[k] / t.named;
+const yearShares = c.years.map((y) => share(y, 'run'));
+const steady = Math.max(...yearShares) - Math.min(...yearShares) <= 0.03;
+const frontierRows = c.labs.filter((l) => l.id !== 'other');
+const most = frontierRows[0];
+const least = frontierRows.at(-1)!;
+const checkLede = `Of the benchmarks labs named in launch posts since ${CHECK_FROM}, an official leaderboard or Epoch AI has scored the same model on ${pct(share(c.total, 'run'))}${steady ? ', about the same share each year' : `, ${pct(yearShares.at(-1)!)} in ${c.years.at(-1)!.year} against ${pct(yearShares[0])} in ${c.years[0].year}`}. For another ${pct(share(c.total, 'board'))}, someone scores the benchmark but hasn't run that model.`;
+const checkLede2 = `${most.name}'s posts are the easiest to check, at ${pct(share(most, 'run'))}, and ${least.name}'s the hardest of the frontier labs, at ${pct(share(least, 'run'))}.`;
+const checkCats = [
+  { key: 'run', label: 'Scored by others on the same model', color: 'var(--ink)', ink: 'var(--bg)' },
+  { key: 'board', label: 'Scored by others, but not on this model', color: 'color-mix(in oklab, var(--ink) 38%, var(--bg))', ink: 'var(--ink)' },
+  { key: 'none', label: 'No independent score at all', color: 'color-mix(in oklab, var(--ink) 12%, var(--bg))', ink: 'var(--ink-2)' },
+];
+const checkRows = c.labs.map((l) => ({
+  name: l.name,
+  href: l.id === 'other' ? undefined : `/labs/${l.id}/`,
+  lab: l.id === 'other' ? undefined : l.id,
+  n: [l.run, l.board, l.none],
+  tips: checkCats.map((k) => ({
+    tv: pct(share(l, k.key as 'run')),
+    tn: `${l.name}: ${k.label.toLowerCase()}`,
+    ts: `${num(l[k.key as 'run'])} of the ${num(l.named)} benchmarks named in ${num(l.releases)} releases since ${CHECK_FROM}`,
+  })),
+  vals: [pct(share(l, 'run')), num(l.named)],
+}));
+
+// what others test beyond the launch post, for each frontier model of the past year
+const tm = testedModels();
+const namedOf = (m: (typeof tm)[number]) => m.labOnly + m.both;
+const indepOf = (m: (typeof tm)[number]) => m.both + m.indepOnly;
+const medNamed = median(tm.map(namedOf));
+const medIndep = median(tm.map(indepOf));
+const medBoth = median(tm.map((m) => m.both));
+const ratio = Math.round(medIndep / medNamed);
+const widest = [...tm].sort((a, b) => indepOf(b) - indepOf(a))[0];
+const since = `${Number(AS_OF.slice(0, 4)) - 1}${AS_OF.slice(4)}`;
+const beyondLede = `The ${tm.length} frontier models released since ${humanDate(since)} have independent scores on a median of ${medIndep} benchmarks, about ${word(ratio)} times the ${medNamed} in their launch posts. The two lists share a median of ${word(medBoth)}. ${widest.name} has the most independent scores, ${widest.both + widest.indepOnly}.`;
+const beyondCats = [
+  { key: 'lab', label: 'Only in the launch post', color: 'color-mix(in oklab, var(--ink) 45%, var(--bg))', ink: 'var(--bg)' },
+  { key: 'both', label: 'In the launch post and scored by others', color: 'var(--ink)', ink: 'var(--bg)' },
+  { key: 'indep', label: 'Only scored by others', color: 'color-mix(in oklab, var(--ink) 14%, var(--bg))', ink: 'var(--ink-2)' },
+];
+const beyondRows = tm.map((m) => ({
+  name: m.name,
+  href: `/models/${m.id}/`,
+  lab: m.lab,
+  n: [m.labOnly, m.both, m.indepOnly],
+  tips: [
+    { tv: `${m.labOnly}`, tn: `${m.name}: only in the launch post`, ts: `Benchmarks the lab named that no one else has scored on ${m.name}` },
+    { tv: `${m.both}`, tn: `${m.name}: in the launch post and scored by others`, ts: `Of the ${namedOf(m)} benchmarks the lab named, launched ${humanDate(m.date)}` },
+    { tv: `${m.indepOnly}`, tn: `${m.name}: only scored by others`, ts: `Benchmarks an official leaderboard or Epoch AI scored that the lab didn't name` },
+  ],
+  vals: [num(namedOf(m)), num(indepOf(m))],
+}));
+
+// how long a model stays in the index's top ten, by where it came in
+const groups = stayGroups();
+const groupColors = ['var(--ink)', 'var(--ink-3)', 'var(--ink-4)'];
+const staySeries: TSeries[] = groups.map((gr, k) => ({
+  key: gr.key,
+  label: gr.label,
+  color: groupColors[k],
+  step: true,
+  pts: gr.share.map((v, w) => ({
+    x: (w * 7) / 30.44,
+    y: v === null ? null : 100 * v,
+    tv: v === null ? undefined : pct(v),
+    tn: `${gr.label}, ${w === 0 ? 'on release day' : `${w} week${w === 1 ? '' : 's'} after release`}`,
+    ts: `Estimated share still in the top ${word(FRONTIER_MODEL_TOP)}, of the ${gr.n} models released since ${STAY_FROM} that came in at ${gr.ranks[0] === gr.ranks[1] ? 'number one' : `ranks ${gr.ranks[0]} to ${gr.ranks[1]}`}`,
+  })),
+}));
+// the axis runs to the even month past the longest curve
+const stayEnd = Math.min(STAY_MONTHS, 2 * Math.ceil((0.5 + Math.max(...staySeries.flatMap((se) => se.pts.filter((p) => p.y !== null).map((p) => p.x)))) / 2));
+const stayAxis = { min: 0, max: stayEnd, ticks: Array.from({ length: stayEnd + 1 }, (_, v) => ({ v, label: String(v) })), title: 'Months since release' };
+const [gFirst, gHigh, gLow] = groups;
+const months = (d: number) => Math.round(d / 30.44);
+const stayLede = `Since ${STAY_FROM}, a model that came in at number one on Epoch AI's Capabilities Index stayed in the top ${word(FRONTIER_MODEL_TOP)} for a median of ${gFirst.half} days, about ${word(months(gFirst.half ?? 0))} months. One that came in second to fifth stayed ${gHigh.half} days, and one that came in lower, ${gLow.half}.`;
+const followedStay = groups.reduce((a, gr) => a + gr.n, 0);
+const recentTops = frontierStays().filter((x) => x.rank === 1 && x.date >= AS_OF.slice(0, 4));
+
+const lede = `Labs named a median of ${medNamed} benchmarks for each frontier model of the past year, and others scored the same models on a median of ${medIndep}. Only ${pct(share(c.total, 'run'))} of what labs name has an independent run of the same model.`;
+---
+
+<Base title="How do new models get tested?" description="How much of a model's launch post anyone else has checked, how much more independent boards test, and how long a model stays at the frontier." crumbs={[{ href: '/insights/', label: 'Insights' }]}>
+  <div class="page md-page">
+    <header class="head">
+      <Crumbs items={[{ href: '/insights/', label: 'Insights' }]} />
+      <h1>How do new models get tested?</h1>
+      <p class="lede">{lede}</p>
+    </header>
+
+    <section id="checked">
+      <div class="sh-row">
+        <div class="sh">
+          <h2>How much of a launch post can anyone check?</h2>
+          <p>{checkLede} {checkLede2}</p>
+        </div>
+        <a class="more" href="/claims/">How do claims and official scores differ?</a>
+      </div>
+      <ChartDownload
+        credit={SOURCES}
+        name="how-much-of-a-launch-post-is-checked"
+        deck={`For each lab, the benchmarks its launch posts named since ${CHECK_FROM}, by whether an official leaderboard or Epoch AI scored the same model on them.`}
+        counts="Each benchmark a release names counts once, from the launch post and the documents published with it."
+        leaves="Safety, alignment, bio and cyber evaluations."
+      >
+        <SplitRows cats={checkCats} rows={checkRows} heads={['Checked', 'Named']} label={`Benchmarks each lab named in launch posts since ${CHECK_FROM}, by whether others scored the same model`} />
+      </ChartDownload>
+    </section>
+
+    <section id="beyond">
+      <div class="sh">
+        <h2>What do others test beyond the launch post?</h2>
+        <p>{beyondLede}</p>
+      </div>
+      <ChartDownload
+        credit={SOURCES}
+        name="what-others-test"
+        deck={`For each frontier model released since ${humanDate(since)}, the benchmarks its launch post named and the benchmarks official leaderboards or Epoch AI scored it on.`}
+        counts={`Models in the top ${word(FRONTIER_MODEL_TOP)} on Epoch AI's Capabilities Index the day their launch post came out.`}
+        leaves="Safety, alignment, bio and cyber evaluations, and agents others built around the model."
+      >
+        <SplitRows cats={beyondCats} rows={beyondRows} scale="count" heads={['Named', 'Others']} label="Benchmarks in each frontier model's launch post and benchmarks others scored it on" limit={15} more={`Show all ${tm.length} models`} />
+      </ChartDownload>
+    </section>
+
+    <section id="stay">
+      <div class="sh">
+        <h2>How long does a model stay at the frontier?</h2>
+        <p>{stayLede}</p>
+      </div>
+      <ChartDownload
+        credit={ECI_CREDIT}
+        name="how-long-models-stay-in-the-top-ten"
+        deck={`For the models released since ${STAY_FROM} that were in the top ${word(FRONTIER_MODEL_TOP)} on Epoch AI's Capabilities Index the day they came out, the estimated share still in it so many months later, by where they came in.`}
+        counts={`${followedStay} models that ranked in the top ${word(FRONTIER_MODEL_TOP)} among the models released by their own release day. A model leaves when ${word(FRONTIER_MODEL_TOP)} models released after it score higher.`}
+      >
+        <TrendChart series={staySeries} x={stayAxis} y={{ unit: '%' }} label={`Share of frontier models still in the top ${word(FRONTIER_MODEL_TOP)}, by months since release and where they came in`} w={1120} h={400} nh={300} dots={false} legend narrowEnds={false} />
+      </ChartDownload>
+    </section>
+
+    <section id="method">
+      <div class="sh">
+        <h2>How this is counted</h2>
+      </div>
+      <div class="md-method">
+        <p>
+          A launch post counts with the system cards, model cards and technical reports published with it, as on <a href="/insights/reporting/">What labs report</a>. A benchmark counts once per release, and
+          versions stay apart, so SWE-bench Verified and SWE-bench Pro are two benchmarks. Safety, alignment, bio and cyber evaluations are left out, since few labs publish them and few boards run them.
+        </p>
+        <p>
+          An independent score is one from a benchmark's official leaderboard, from Epoch AI's own runs, or from another board Epoch AI copied. It has to be the model itself. An agent someone else built
+          around the model doesn't count. We read {num(Object.keys(LEADERBOARDS).length)} leaderboards but not every one, and from Artificial Analysis we read only its index numbers. A benchmark that only boards we don't read have run counts as having no independent score.
+        </p>
+        <p>
+          The frontier labs are the {word(FRONTIER_LABS.length)} that the <a href="/insights/reporting/">reporting page</a> follows. Other labs are grouped. A frontier model is one in the top {word(FRONTIER_MODEL_TOP)} on Epoch AI's
+          Capabilities Index among the models out the day its launch post came out.
+        </p>
+        <p>
+          A model stays in the top {word(FRONTIER_MODEL_TOP)} until {word(FRONTIER_MODEL_TOP)} models released after it score higher on the index, counted by release date, so a model scored later still counts from the day
+          it came out. Models still in the top {word(FRONTIER_MODEL_TOP)} haven't left yet, so each line is a survival estimate, and a line stops when fewer than five models are left to follow. {recentTops.length > 0 && `Of the ${word(recentTops.length)} models that came in at number one in ${AS_OF.slice(0, 4)}, ${word(recentTops.filter((x) => x.still).length)} are still in the top ${word(FRONTIER_MODEL_TOP)}.`}
+        </p>
+      </div>
+    </section>
+
+    <section id="more-insights">
+      <div class="sh">
+        <h2>More insights</h2>
+      </div>
+      <InsightCards except="models" />
+    </section>
+  </div>
+</Base>
+
+<style>
+  .md-method {
+    display: grid;
+    gap: 14px;
+    max-width: 78ch;
+    color: var(--ink-2);
+  }
+</style>

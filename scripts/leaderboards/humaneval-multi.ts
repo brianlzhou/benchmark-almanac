@@ -17,7 +17,16 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-Coder/main/Evaluation/HumanEval/README.md";
 const board: Leaderboard = {
-  benchmark: "humaneval-multi", url: "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-Coder/main/Evaluation/HumanEval/README.md", feed: FEED,
+  benchmark: "humaneval-multi", parts: {
+  python: { name: 'Python', group: 'Language' },
+  'c++': { name: 'C++', group: 'Language' },
+  java: { name: 'Java', group: 'Language' },
+  php: { name: 'PHP', group: 'Language' },
+  ts: { name: 'TS', group: 'Language' },
+  'c#': { name: 'C#', group: 'Language' },
+  bash: { name: 'Bash', group: 'Language' },
+  js: { name: 'JS', group: 'Language' },
+}, url: "https://raw.githubusercontent.com/deepseek-ai/DeepSeek-Coder/main/Evaluation/HumanEval/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

@@ -7,6 +7,12 @@ const FEED = "https://arxiv.org/html/2507.01001";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "sciarena",
+  parts: {
+    naturalScience: { name: 'Natural science', group: 'Domain' },
+    healthcare: { name: 'Healthcare', group: 'Domain' },
+    humanities: { name: 'Humanities', group: 'Domain' },
+    engineering: { name: 'Engineering', group: 'Domain' },
+  },
   url: "https://sciarena.allen.ai/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -4,7 +4,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://internlm.github.io/OVO-S-Bench/";
 const board: Leaderboard = {
-  benchmark: "ovo-s-bench", url: "https://internlm.github.io/OVO-S-Bench/", feed: FEED,
+  benchmark: "ovo-s-bench", parts: {
+  L1: { name: 'Level 1', group: 'Difficulty' },
+  L2: { name: 'Level 2', group: 'Difficulty' },
+  L3: { name: 'Level 3', group: 'Difficulty' },
+  L4: { name: 'Level 4', group: 'Difficulty' },
+}, url: "https://internlm.github.io/OVO-S-Bench/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

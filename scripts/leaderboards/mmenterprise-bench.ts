@@ -16,7 +16,16 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/mlvlab/MMEnterprise-Bench/main/README.md";
 const board: Leaderboard = {
-  benchmark: "mmenterprise-bench", url: "https://github.com/mlvlab/MMEnterprise-Bench", feed: FEED,
+  benchmark: "mmenterprise-bench", parts: {
+  'Extr.': { name: 'Extraction', group: 'Task type' },
+  'Attr.': { name: 'Attribution', group: 'Task type' },
+  'Comp.': { name: 'Computation', group: 'Task type' },
+  'Cmpr.': { name: 'Comparison', group: 'Task type' },
+  'Interp.': { name: 'Interpretation', group: 'Task type' },
+  Cross: { name: 'Cross-source', group: 'Task type' },
+  'Temp.': { name: 'Temporal', group: 'Task type' },
+  'Unans.': { name: 'Unanswerability', group: 'Task type' },
+}, url: "https://github.com/mlvlab/MMEnterprise-Bench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

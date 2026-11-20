@@ -1,0 +1,270 @@
+---
+// Where a model held number one: a row per benchmark, its score at the top, a lane along time with every reign on the
+// benchmark's main board (this model's in its lab's color, the others in gray), and whether it still leads. Every
+// reign carries the shared tooltip, and the status column says in words what the colors show.
+import ChartDownload from '../ChartDownload.astro';
+import { modelHeld, median, markColor, type HeldRow } from '../../lib/model-insights.ts';
+import { modelById, benchById, AS_OF } from '../../lib/data.ts';
+import { labColor } from '../../lib/palette.ts';
+import { fullDate, monthYear, humanDate, yearFrac, score as fmt } from '../../lib/format.ts';
+import { timeTicks, yearLines } from '../../lib/scale.ts';
+import { sourcesCredit } from '../../lib/credits.ts';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const m = modelById.get(id)!;
+const rows = modelHeld(id);
+const SHOWN = 10;
+const nm = (x: string) => modelById.get(x)?.name ?? x;
+const live = (h: HeldRow) => h.now && (!h.stop || h.stop.why === 'closed');
+const nLive = rows.filter(live).length;
+const nStale = rows.filter((h) => h.now && !live(h)).length;
+const lost = rows.filter((h) => !h.now);
+const plural = (n: number, w: string) => `${n.toLocaleString('en-US')} ${w}${n === 1 ? '' : 's'}`;
+const lastLost = [...lost].sort((a, b) => b.lost!.date.localeCompare(a.lost!.date))[0];
+const caption = !rows.length
+  ? ''
+  : nLive
+    ? `${m.name} is number one on ${plural(nLive, 'benchmark')} today.${lost.length ? ` It also led ${lost.length} more before ${lost.length === 1 ? 'a newer model' : 'newer models'} passed it.` : ''}${nStale ? ` It still tops ${nStale} that nobody has tested since.` : ''}`
+    : `${m.name} led ${plural(rows.length, 'benchmark')} at some point, for a median of ${Math.round(median(rows.map((h) => h.days)))} days.${lastLost ? ` It last lost ${lastLost.b.name} to ${nm(lastLost.lost!.model)} on ${humanDate(lastLost.lost!.date)}.` : ''}${nStale ? ` It still tops ${nStale} that nobody has tested since.` : ''}`;
+
+// one time axis for every row: from a year before the model's first reign (or release) to today
+const first = [m.released, ...rows.map((h) => h.mine[0].start)].filter((d): d is string => !!d).sort()[0] ?? AS_OF;
+const earliest = rows.map((h) => h.row.reigns[0].start).sort()[0] ?? first;
+const t1 = yearFrac(AS_OF);
+const t0 = Math.max(yearFrac(earliest), Math.min(yearFrac(first) - 1, t1 - 1));
+const pos = (d: string) => Math.min(100, Math.max(0, ((yearFrac(d) - t0) / (t1 - t0)) * 100));
+const ticks = timeTicks(t0, t1, 6).filter((t) => pos(t.date) > 2 && pos(t.date) < 98);
+const grid = `--yl:${yearLines(ticks.map((t) => `${pos(t.date).toFixed(2)}%`))}`;
+const color = markColor(m.lab);
+
+function status(h: HeldRow): string {
+  if (!h.now) return `Lost to ${nm(h.lost!.model)}, ${fullDate(h.lost!.date)}`;
+  if (!h.stop) return 'Number one now';
+  if (h.stop.why === 'closed') return 'Number one now, past 85%';
+  if (h.stop.why === 'replaced' && h.row.replacedBy) return `On top when ${benchById.get(h.row.replacedBy.benchmark)?.name ?? 'a new version'} replaced it`;
+  return `On top, no new scores since ${monthYear(h.row.lastTested)}`;
+}
+const segs = (h: HeldRow) =>
+  h.row.reigns
+    .filter((g) => yearFrac(g.end) > t0)
+    .map((g) => {
+      const a = pos(g.start < earliest ? earliest : g.start);
+      const b = pos(g.end);
+      const own = g.model === id;
+      const v = g.steps.at(-1)!.value;
+      return {
+        own,
+        style: `left:${a.toFixed(2)}%;width:max(3px, ${(b - a).toFixed(2)}%)${own ? '' : `;--oc:${labColor(g.lab)}`}`,
+        tv: nm(g.model),
+        tn: g.end >= AS_OF ? `Number one since ${fullDate(g.start)}` : `Number one from ${fullDate(g.start)} to ${fullDate(g.end)}`,
+        ts: `${fmt(v)} on ${h.b.name}`,
+      };
+    });
+---
+
+{
+  rows.length > 0 && (
+    <section data-held>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Where has it been number one?</h2>
+          <p>{caption}</p>
+        </div>
+        <button
+          type="button"
+          class="help-q"
+          aria-label="Which benchmarks count"
+          data-tn="Which benchmarks count"
+          data-ts={`Percentage benchmarks with five or more models, where models from two or more labs have scores, from the source each benchmark's page leads with. A model takes the top spot on its release day for an independent run, or the day its lab's document came out, and keeps it until a later model scores higher.`}
+          data-wide
+        >
+          ?
+        </button>
+      </div>
+      <ChartDownload credit={sourcesCredit(rows.map((h) => h.row))} name={`${id}-number-one`} deck={`The benchmarks where ${m.name} held number one, with every model that held the top spot on each, along time.`} counts="Percentage benchmarks with five or more models from two or more labs, on the source each benchmark's page leads with." leaves="Arenas and other boards ranked by votes or matches.">
+        <ul class="hl-key" aria-hidden="true">
+          <li>
+            <span class="sw" style={`background:${color}`} />
+            {m.name} at number one
+          </li>
+          <li>
+            <span class="sw faint" />
+            Other models at number one, in their lab's color
+          </li>
+        </ul>
+        <div class="hl" style={`--c:${color}`}>
+          {rows.map((h, i) => (
+            <a class="hl-row" href={`/benchmarks/${h.b.id}/`} hidden={i >= SHOWN} data-reveal-row>
+              <span class="hl-n">{h.b.name}</span>
+              <span class="hl-v num">{fmt(h.best)}</span>
+              <span class="hl-lane" style={grid}>
+                {segs(h).map((s) => (
+                  <i class:list={{ own: s.own }} style={s.style} data-tv={s.tv} data-tn={s.tn} data-ts={s.ts} />
+                ))}
+              </span>
+              <span class:list={['hl-s', { on: h.now }]}>{status(h)}</span>
+            </a>
+          ))}
+          <div class="hl-row hl-axis" aria-hidden="true">
+            <span class="hl-n" />
+            <span class="hl-v" />
+            <span class="hl-lane">
+              {ticks.map((t) => (
+                <span class="hl-t" style={`left:${pos(t.date).toFixed(2)}%`}>
+                  {t.label}
+                </span>
+              ))}
+            </span>
+            <span class="hl-s" />
+          </div>
+        </div>
+      </ChartDownload>
+      {rows.length > SHOWN && (
+        <button type="button" class="more-rows" data-reveal>
+          Show all {rows.length}
+        </button>
+      )}
+    </section>
+  )
+}
+
+
+<style>
+  .hl-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .hl-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .sw.faint {
+    height: 6px;
+    background: color-mix(in oklab, var(--ink-4) 45%, var(--bg));
+  }
+  .hl {
+    display: grid;
+  }
+  .hl-row {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) 4.5rem minmax(0, 1fr) minmax(0, 17rem);
+    gap: 16px;
+    align-items: center;
+    min-height: 30px;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 140ms ease;
+  }
+  .hl-row[hidden] {
+    display: none;
+  }
+  a.hl-row:hover {
+    background: var(--hover);
+  }
+  .hl-n {
+    padding-left: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hl-v {
+    text-align: right;
+    font: 400 12.5px var(--mono);
+    color: var(--ink-2);
+  }
+  .hl-lane {
+    position: relative;
+    height: 22px;
+    background: linear-gradient(var(--grid), var(--grid)) 0 50% / 100% 1px no-repeat, var(--yl, none);
+  }
+  .hl-lane i {
+    position: absolute;
+    top: 7px;
+    height: 8px;
+    border-radius: 2px;
+    background: color-mix(in oklab, var(--oc, var(--ink-4)) 28%, var(--bg));
+    box-shadow: inset -1px 0 0 var(--bg);
+  }
+  .hl-lane i.own {
+    top: 3px;
+    height: 16px;
+    background: var(--c);
+    box-shadow: none;
+    z-index: 1;
+  }
+  .hl-lane i:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+    z-index: 2;
+  }
+  .hl-s {
+    font-size: 13px;
+    color: var(--ink-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hl-s.on {
+    color: var(--ink);
+  }
+  .hl-axis {
+    min-height: 24px;
+  }
+  .hl-axis .hl-lane {
+    background: none;
+    border-top: 1px solid var(--line);
+    height: 24px;
+  }
+  .hl-t {
+    position: absolute;
+    top: 8px;
+    translate: -50% 0;
+    font: 400 12px/1 var(--mono);
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    .hl {
+      gap: 10px;
+    }
+    .hl-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2px 12px;
+    }
+    .hl-lane {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .hl-s {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      padding-left: 4px;
+      font-size: 12.5px;
+    }
+    .hl-axis .hl-n,
+    .hl-axis .hl-v,
+    .hl-axis .hl-s {
+      display: none;
+    }
+    .hl-axis .hl-lane {
+      grid-row: 1;
+    }
+  }
+</style>

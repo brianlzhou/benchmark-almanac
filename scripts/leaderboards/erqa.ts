@@ -11,10 +11,10 @@ import { fetchText } from '../lib/util.ts';
 const SITE = 'https://www.embodied-arena.com';
 
 interface Bench {
-  $data: { code: string; default?: { property?: string }; properties: Record<string, { index: number }> };
+  $data: { code: string; default?: { property?: string }; properties: Record<string, { index: number; label: string }> };
 }
 interface Model {
-  $data: { name: string; opensource?: boolean; score?: { benchmark?: Record<string, { legacy?: (number | null)[] }> } };
+  $data: { name: string; size?: number[]; author?: string[]; website?: string; opensource?: boolean; score?: { benchmark?: Record<string, { legacy?: (number | null)[] }> } };
 }
 
 /** The `name=JSON.parse(...)` literal in the data chunk, read as data (single quotes or backticks). */
@@ -47,10 +47,20 @@ export async function embodiedArenaRows(code: string): Promise<LeaderboardRow[]>
   const prop = bench.$data.default?.property ?? 'Total';
   const col = bench.$data.properties[prop]?.index;
   if (col === undefined) throw new Error(`no ${prop} column for ${code}`);
+  const columns = Object.entries(bench.$data.properties).filter(([key]) => key !== prop);
+  if (code === 'erqa') board.parts = Object.fromEntries(columns.filter(([key]) => key !== 'PercentileRank').map(([key, spec]) => [key, spec.label]));
   const rows: LeaderboardRow[] = [];
   for (const { $data: m } of Object.values(models)) {
-    const v = m.score?.benchmark?.[id]?.legacy?.[col];
-    if (typeof v === 'number') rows.push({ model: m.name, score: v, open: typeof m.opensource === 'boolean' ? m.opensource : undefined });
+    const scores = m.score?.benchmark?.[id]?.legacy;
+    const v = scores?.[col];
+    if (typeof v !== 'number' || !scores) continue;
+    const metrics: Record<string, number> = {};
+    for (const [key, spec] of columns) {
+      const value = scores[spec.index];
+      if (typeof value === 'number') metrics[key] = value;
+    }
+    rows.push({ model: m.name, score: v, metrics, params: m.size?.length === 1 && m.size[0] > 0 ? m.size[0] : undefined,
+      open: typeof m.opensource === 'boolean' ? m.opensource : undefined });
   }
   if (!rows.length) throw new Error(`no ${code} scores`);
   return rows;

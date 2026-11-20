@@ -1,4 +1,21 @@
 {
   "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
-  "boards": {}
+  "boards": {
+    "artificial-analysis-intelligence-index": {
+      "artificial_analysis_intelligence_index_cost.cost_per_task": "ignore",
+      "artificial_analysis_intelligence_index_cost.total_cost": "ignore",
+      "pricing.price_1m_cache_hit_tokens": "ignore",
+      "pricing.price_1m_cache_write_tokens": "ignore",
+      "pricing.price_1m_input_tokens": "ignore",
+      "pricing.price_1m_output_tokens": "ignore",
+      "release_date": "ignore",
+      "performance.median_end_to_end_response_time_seconds": "ignore",
+      "performance_v3.mean_output_tokens_per_second": "ignore",
+      "performance_v3.mean_time_to_first_answer_token_seconds": "ignore",
+      "performance_v3.mean_time_to_first_token_seconds": "ignore",
+      "performance.median_output_tokens_per_second": "ignore",
+      "performance.median_time_to_first_answer_token_seconds": "ignore",
+      "performance.median_time_to_first_token_seconds": "ignore"
+    }
+  }
 }

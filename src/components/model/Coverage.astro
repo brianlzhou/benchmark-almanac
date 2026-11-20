@@ -1,0 +1,124 @@
+---
+// Who measured a model: its benchmarks split by whether an independent run has it (an official leaderboard, Epoch
+// AI's run, or a board Epoch AI copied), a claim does (its lab's own documents, or a report or paper Epoch AI
+// collected), or both. One bar to 100%, with a legend and the counts, and the independent sources in words below.
+import { coverage, markColor } from '../../lib/model-insights.ts';
+import { modelById, labById } from '../../lib/data.ts';
+import ChartDownload from '../ChartDownload.astro';
+import { POOL_CREDIT } from '../../lib/credits.ts';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const m = modelById.get(id)!;
+const c = coverage(id);
+const lab = m.lab ? (labById.get(m.lab)?.name ?? 'its lab') : 'its lab';
+const ind = c.both + c.indOnly;
+const caption =
+  c.claimOnly === 0
+    ? `Independent runs cover all ${c.total} of its benchmarks.`
+    : ind === 0
+      ? `No independent run has it yet. All ${c.total} of its scores are ${lab}'s own numbers or claims Epoch AI collected.`
+      : `Independent runs cover ${ind} of its ${c.total} benchmarks. For the other ${c.claimOnly}, we have only ${lab}'s own number or a claim Epoch AI collected.`;
+const color = markColor(m.lab);
+const segs = [
+  { k: 'both', n: c.both, label: 'An independent run and a claim', color, tn: 'Both', ts: `Benchmarks with an independent run and a number from ${lab} or a paper` },
+  { k: 'ind', n: c.indOnly, label: 'An independent run only', color: `color-mix(in oklab, ${color} 45%, var(--bg))`, tn: 'Independent only', ts: 'Benchmarks only an official leaderboard, Epoch AI or a board Epoch AI copied has scored' },
+  { k: 'claim', n: c.claimOnly, label: 'A claim only', color: 'var(--ink-4)', tn: 'Claims only', ts: `Benchmarks with only ${lab}'s own number, or a report or paper Epoch AI collected` },
+].filter((s) => s.n > 0);
+const pct = (n: number) => `${Math.round((100 * n) / c.total)}%`;
+const parts = [
+  c.lb && `official leaderboards scored it on ${c.lb}`,
+  c.epoch && `Epoch AI ran ${c.epoch}`,
+  c.via && `boards Epoch AI copied add ${c.via}`,
+].filter((x): x is string => !!x);
+const sources = parts.length ? `${parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0]}.`.replace(/^./, (x) => x.toUpperCase()) : '';
+---
+
+{
+  c.total >= 3 && (
+    <section>
+      <div class="sh">
+        <h2>Who measured it?</h2>
+        <p>{caption}</p>
+      </div>
+      <ChartDownload credit={POOL_CREDIT.all} name={`${id}-who-measured`} deck={`${m.name}'s benchmarks, by whether an independent run has scored it there, only a claim has, or both.`}>
+      <figure class="cv" aria-label={`${m.name}'s benchmarks by who measured them`}>
+        <ul class="cv-key">
+          {segs.map((s) => (
+            <li>
+              <span class="sw" style={`background:${s.color}`} />
+              {s.label}
+              <b class="num">{s.n}</b>
+            </li>
+          ))}
+        </ul>
+        <div class="cv-bar">
+          {segs.map((s) => (
+            <span style={`flex-grow:${s.n};background:${s.color}`} data-tv={`${s.n} (${pct(s.n)})`} data-tn={s.tn} data-ts={s.ts} />
+          ))}
+        </div>
+        {sources && <figcaption>{sources}</figcaption>}
+      </figure>
+      </ChartDownload>
+    </section>
+  )
+}
+
+<style>
+  .cv {
+    margin: 0;
+  }
+  .cv-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .cv-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .cv-key b {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .cv-bar {
+    display: flex;
+    gap: 2px;
+    height: 22px;
+  }
+  .cv-bar span {
+    flex-basis: 0;
+    min-width: 3px;
+  }
+  .cv-bar span:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  .cv-bar span:last-child {
+    border-radius: 0 5px 5px 0;
+  }
+  .cv-bar span:only-child {
+    border-radius: 5px;
+  }
+  .cv-bar span:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  figcaption {
+    margin-top: 12px;
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+</style>

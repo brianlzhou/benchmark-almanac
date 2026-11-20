@@ -15,7 +15,21 @@ const names: Record<string, string> = {
   'LLaMA 3.1-70B': 'LLaMA-3.1 70B',
 };
 const board: Leaderboard = {
-  benchmark: 'iheval', url: 'https://github.com/ytyz1307zzh/IHEval', feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'iheval', parts: {
+  ruleSingle: { name: 'Rule single', group: 'Task type' },
+  ruleMulti: { name: 'Rule multi', group: 'Task type' },
+  extraction: { name: 'Extraction', group: 'Task type' },
+  generation: { name: 'Generation', group: 'Task type' },
+  classification: { name: 'Classification', group: 'Task type' },
+  hijack: { name: 'Hijack', group: 'Task type' },
+  passwordExtraction: { name: 'Password extraction', group: 'Task type' },
+  toolIntrinsic: { name: 'Tool intrinsic', group: 'Task type' },
+  toolInjected: { name: 'Tool injected', group: 'Task type' },
+  rule: { name: 'Rule', group: 'Task type' },
+  task: { name: 'Task', group: 'Task type' },
+  safety: { name: 'Safety', group: 'Task type' },
+  tool: { name: 'Tool', group: 'Task type' },
+}, url: 'https://github.com/ytyz1307zzh/IHEval', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'Mistral Large 2 (2024-07)': 'mistral-large-2-jul-2024', 'gpt-3.5-turbo-0125': 'gpt-3-5-turbo-jan-2024' },
   async fetch() {
     const tables = await paperTables(FEED);

@@ -5,7 +5,14 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard-pro.csv";
 const board: Leaderboard = {
-  benchmark: "extractbench-pro", url: "https://github.com/run-llama/ExtractBench", feed: FEED,
+  benchmark: "extractbench-pro", parts: {
+  interpretation_rules: { name: 'Interpretation rules', group: 'Category' },
+  custom_terminology: { name: 'Custom terminology', group: 'Category' },
+  conditional_aggregation: { name: 'Conditional aggregation', group: 'Category' },
+  relational_diagrams: { name: 'Relational diagrams', group: 'Category' },
+  charts_and_maps: { name: 'Charts and maps', group: 'Category' },
+  long_single_pages: { name: 'Long single pages', group: 'Category' },
+}, url: "https://github.com/run-llama/ExtractBench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   aliases: { 'Gemini CLI (Gemini 4 Argon Medium)': 'gemini-4-argon' },
   async fetch() {

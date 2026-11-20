@@ -8,14 +8,14 @@ import { labColor } from './palette.ts';
 import { COLOR_MARKS, MONO_MARKS } from './marks.ts';
 import { featuredIds } from './routes.ts';
 import type { Benchmark, Score } from './types.ts';
+import { isCapabilityEval } from './eval-kind.ts';
+import { isComposite } from './facets.ts';
 import type { Payload, Preset } from './build-index.ts';
 
 /** A benchmark joins the builder when at least this many models have a score on it from one source. */
 export const MIN_MODELS = 8;
 /** A model joins when it has scores on at least this many of those benchmarks. */
 export const MIN_SCORES = 3;
-/** Areas left out of the presets: they measure risk, not capability, or fit nowhere. */
-const NOT_CAPABILITY = new Set(['safety', 'other']);
 
 const round = (v: number) => Math.round(v * 10) / 10;
 
@@ -99,7 +99,9 @@ function presets(p: Payload): Preset[] {
     if (!d.date || d.date < since) continue;
     for (const r of d.results) {
       const b = benchById.get(r.benchmark);
-      if (!b || NOT_CAPABILITY.has(areaOf(b.category))) continue;
+      // presets leave out tests of risk or behavior, tests that fit no area (src/lib/eval-kind.ts), and composite
+      // indexes, whose parts would count twice
+      if (!b || !isCapabilityEval(b) || isComposite(b.id)) continue;
       const f = famOf(r.benchmark);
       add(labsRecent, f, d.lab);
       if (d.date.startsWith(year)) {

@@ -24,6 +24,10 @@ interface Row {
 
 const board: Leaderboard = {
   benchmark: 'shadowbench',
+  parts: {
+    outline: { name: 'Outline', group: 'Dimension' },
+    iou: { name: 'IoU', group: 'Dimension', note: 'Overlap with the target shadow.' },
+  },
   url: 'https://huggingface.co/spaces/perpetual-research/shadowbench-explorer',
   feed: `${FEED} (score)`,
   terms: "The dataset's episodes and analysis are CC BY 4.0 and its code is MIT, per the dataset's LICENSE.md.",

@@ -8,6 +8,9 @@ import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/CMMMU-Benchmark/CMMMU/main/README.md";
 const board: Leaderboard = {
  benchmark: "cmmmu", url: "https://github.com/CMMMU-Benchmark/CMMMU", feed: FEED,
+ parts: {
+   validation: { name: 'Validation', group: 'Split' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

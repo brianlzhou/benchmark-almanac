@@ -16,7 +16,20 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://huggingface.co/datasets/2077AIDataFoundation/KINA/resolve/main/README.md";
 const board: Leaderboard = {
-  benchmark: "kina", url: "https://huggingface.co/datasets/2077AIDataFoundation/KINA/resolve/main/README.md", feed: FEED,
+  benchmark: "kina", parts: {
+  Agronomy: { name: 'Agronomy', group: 'Domain' },
+  Economics: { name: 'Economics', group: 'Domain' },
+  Education: { name: 'Education', group: 'Domain' },
+  Engineering: { name: 'Engineering', group: 'Domain' },
+  History: { name: 'History', group: 'Domain' },
+  Law: { name: 'Law', group: 'Domain' },
+  'Literature and Arts': { name: 'Literature and arts', group: 'Domain' },
+  Management: { name: 'Management', group: 'Domain' },
+  Medicine: { name: 'Medicine', group: 'Domain' },
+  Philosophy: { name: 'Philosophy', group: 'Domain' },
+  Science: { name: 'Science', group: 'Domain' },
+  'Social Science': { name: 'Social science', group: 'Domain' },
+}, url: "https://huggingface.co/datasets/2077AIDataFoundation/KINA/resolve/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

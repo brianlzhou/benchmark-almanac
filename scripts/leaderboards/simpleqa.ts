@@ -1,5 +1,5 @@
 // SimpleQA: correctness percentage from the official simple-evals README. The repository is deprecated,
-// but the importer reads its current head. Reasoning-effort configurations remain separate.
+// but the importer reads its current head. Keep the system prompt, tool mode, and reasoning effort for each configuration.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -21,7 +21,11 @@ const board: Leaderboard = {
     let model = r[0].replace(/\s*\[\^\d+\]/g, '').trim();
     const effort = model.match(/-(high|low)$/);
     if (effort) model = model.slice(0, -effort[0].length);
-    return {model, score: num(r[col])!, setting: effort?.[1] ?? (model==='o3-mini' ? 'medium' : undefined)};
+    const prompt = r[1].replace(/\s*\[\^\d+\]/g, '').trim();
+    const settings = [effort?.[1] ?? (model === 'o3-mini' ? 'medium' : undefined),
+      prompt && prompt !== 'n/a' ? `${prompt} system prompt` : undefined,
+      r[0].includes('[^10]') ? 'no tools' : undefined];
+    return { model, score: num(r[col])!, setting: settings.filter(Boolean).join(', ') || undefined };
   });
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

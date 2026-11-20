@@ -1,0 +1,84 @@
+---
+// The saved views (data/views.json): named filters over the facets, each with its own page.
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { benchmarks } from '../../lib/data.ts';
+import { VIEWS, inView, ruleText, taggedCount } from '../../lib/facets.ts';
+
+const rows = VIEWS.map((v) => {
+  const xs = benchmarks.filter((b) => inView(v, b.id));
+  return { v, n: xs.length, recent: xs.filter((b) => (b.released ?? '') >= '2026-07').length };
+}).sort((a, b) => b.n - a.n);
+// the fastest-growing view among those big enough for a share to mean something
+const top = rows.reduce((m, r) => (r.n >= 20 && r.recent / r.n > m.share ? { r, share: r.recent / r.n } : m), { r: rows[0], share: -1 });
+const trail = [{ href: '/benchmarks/', label: 'Benchmarks' }];
+---
+
+<Base title="Views" description="Saved views over the benchmark facets, such as computer use, CAD and dangerous capabilities." crumbs={trail}>
+  <div class="page">
+    <header class="head">
+      <Crumbs items={trail} />
+      <h1>Views</h1>
+      <p class="lede">
+        A view is a saved filter over the facets we tag on every benchmark, so anyone can see why a benchmark is in it.
+        {top.share > 0 && ` ${top.r.v.name} grows fastest: ${Math.round(100 * top.share)}% of its ${top.r.n} benchmarks came out since July.`}
+        {taggedCount < benchmarks.length && ` We have tagged ${taggedCount.toLocaleString('en-US')} of ${benchmarks.length.toLocaleString('en-US')} benchmarks so far, so counts are still rising.`}
+      </p>
+    </header>
+    <ul class="views">
+      {rows.map(({ v, n, recent }) => (
+        <li>
+          <a href={`/views/${v.id}/`}>
+            <span class="vn">{v.name}</span>
+            <span class="vc num">{n.toLocaleString('en-US')}</span>
+          </a>
+          <p>{v.note}</p>
+          <p class="rule">When {ruleText(v.rule)}.{recent > 0 && ` ${recent} since July.`}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .views {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .views li {
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .views a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .vn {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .views a:hover .vn {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .vc {
+    color: var(--ink-3);
+  }
+  .views p {
+    margin: 6px 0 0;
+    font-size: 13.5px;
+  }
+  .rule {
+    color: var(--ink-3);
+    font-size: 12.5px !important;
+  }
+</style>

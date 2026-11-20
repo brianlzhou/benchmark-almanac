@@ -8,6 +8,14 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://3dsrbench.github.io/";
 const board: Leaderboard = {
  benchmark: "3dsrbench", url: "https://3dsrbench.github.io/", feed: FEED,
+ parts: {
+   Height: { name: 'Height', group: 'Task type' },
+   Location: { name: 'Location', group: 'Task type' },
+   Orientation: { name: 'Orientation', group: 'Task type' },
+   'Multi-Object': { name: 'Multi object', group: 'Task type' },
+   common_view: { name: 'Common view', group: 'Category' },
+   uncommon_view: { name: 'Uncommon view', group: 'Category' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

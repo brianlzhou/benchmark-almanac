@@ -26,14 +26,19 @@ const board: Leaderboard = {
   feed: `${PAGE}assets/index-*.js (leaderboard literal, passed / n)`,
   terms: 'Public app bundle; apprenticebench.com has no robots.txt rules and states no terms.',
   async fetch() {
-    const html = await fetchText(PAGE);
+    const html = await fetchText(`${PAGE}leaderboard`);
     const src = html.match(/src="(\/assets\/index-[\w-]+\.js)"/)?.[1];
     if (!src) throw new Error('no bundle on the ApprenticeBench page');
     const js = await fetchText(new URL(src, PAGE).href);
-    const at = js.indexOf('[{model:"');
+    // The CUA tab now has its own array. Strings use backticks in the new bundle.
+    const marker = 'cua:[{modelId:';
+    const at = js.includes(marker) ? js.indexOf(marker) + 'cua:'.length : js.indexOf('[{model:"');
     if (at < 0) throw new Error('no leaderboard literal in the bundle');
     // the literal writes some fractions as ".77"; JSON needs the leading zero
-    const part = js.slice(at, at + 50_000).replace(/:\.(\d)/g, ':0.$1');
+    const part = js.slice(at, at + 50_000)
+      .replace(/`([^`\\]*)`/g, (_, value: string) => JSON.stringify(value))
+      .replace(/:!(0|1)/g, (_, value: string) => value === '0' ? ':true' : ':false')
+      .replace(/:\.(\d)/g, ':0.$1');
     const rows: LeaderboardRow[] = [];
     for (const r of jsLiteral<Run[]>(part, 0)) {
       if (!r.model || !(r.n > 0)) continue;

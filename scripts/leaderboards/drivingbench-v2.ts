@@ -17,6 +17,10 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (the results table for both courses in the page HTML)`,
   terms: 'robots.txt allows the site. DrivingBench is research software with no stated data license. Results are credited to the DrivingBench team.',
+  parts: {
+    courseA: { name: 'Course A', group: 'Course', note: 'The original layout: a left, a long right sweep, a left hairpin and a sharp right into the finish.' },
+    courseB: { name: 'Course B', group: 'Course', note: 'The second course on the same lot. Each course counts only its own three trials.' },
+  },
   async fetch() {
     const html = await fetchText(URL);
     // the first results table on the page is the general-purpose models on both courses

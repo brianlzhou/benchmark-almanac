@@ -44,6 +44,12 @@ const board: Leaderboard = {
   feed: `${MD} (Mean reward, Where the reward comes from, Every graded component, Cost and efficiency) and ${PAGE} (full model names in the reward-against-cost chart)`,
   terms: 'robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.',
   costPer: 'task',
+  parts: {
+    geometry: { name: 'Geometry', group: 'Area', note: 'Parts and placement, read from the STEP export. 45% of the reward.', unit: 'score' },
+    assembly: { name: 'Assembly function', group: 'Area', note: 'Ties, motion, lock-free mates and patterns, read from the native files. 30% of the reward.', unit: 'score' },
+    practice: { name: 'Part practice', group: 'Area', note: 'Flex, materials, sketches, holes and part patterns. 25% of the reward.', unit: 'score' },
+    ...Object.fromEntries(COMPONENTS.map(([k, name, group, note]) => [k, { name, group, note, unit: 'score' }])),
+  },
   async fetch() {
     const [md, html] = await Promise.all([fetchText(MD), fetchText(PAGE)]);
     // short name -> full name, through the color each label and chart point wears

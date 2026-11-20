@@ -5,6 +5,18 @@ import {jsLiteral} from '../lib/html.ts';
 const FEED = "https://gregxmhu.github.io/OccuBench-website/";
 const board: Leaderboard = {
  benchmark: "occubench",
+ parts: {
+   agri: { name: 'Agriculture', group: 'Industry' },
+   biz: { name: 'Business', group: 'Industry' },
+   comm: { name: 'Communication', group: 'Industry' },
+   edu: { name: 'Education', group: 'Industry' },
+   hlth: { name: 'Health', group: 'Industry' },
+   ind: { name: 'Industry', group: 'Industry' },
+   pub: { name: 'Public sector', group: 'Industry' },
+   sci: { name: 'Science', group: 'Industry' },
+   tech: { name: 'Technology', group: 'Industry' },
+   trans: { name: 'Transportation', group: 'Industry' },
+ },
  url: "https://gregxmhu.github.io/OccuBench-website/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

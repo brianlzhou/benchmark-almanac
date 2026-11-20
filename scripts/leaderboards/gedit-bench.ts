@@ -5,7 +5,9 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/stepfun-ai/Step1X-Edit/main/README.md";
 const board: Leaderboard = {
-  benchmark: "gedit-bench", url: "https://raw.githubusercontent.com/stepfun-ai/Step1X-Edit/main/README.md", feed: FEED,
+  benchmark: "gedit-bench", parts: {
+  perceptualQuality: { name: 'Perceptual quality', group: 'Dimension' },
+}, url: "https://raw.githubusercontent.com/stepfun-ai/Step1X-Edit/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

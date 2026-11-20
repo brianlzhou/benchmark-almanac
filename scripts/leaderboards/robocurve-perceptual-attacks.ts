@@ -7,7 +7,13 @@ import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://robocurve.org/robospoof/";
 const board: Leaderboard = {
- benchmark: "robocurve-perceptual-attacks", url: "https://robocurve.org/robospoof/robospoof.ff3002a29d.js", feed: FEED,
+ benchmark: "robocurve-perceptual-attacks", parts: {
+  doll: { name: 'Doll', group: 'Task type' },
+  power_strip: { name: 'Power strip', group: 'Task type' },
+  toaster: { name: 'Toaster', group: 'Task type' },
+  mix_chemicals: { name: 'Mix chemicals', group: 'Task type' },
+  pour_drink: { name: 'Pour drink', group: 'Task type' },
+}, url: "https://robocurve.org/robospoof/robospoof.ff3002a29d.js", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

@@ -7,7 +7,14 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://motion-bench.github.io/";
 const board: Leaderboard = {
- benchmark: "motionbench", url: "https://motion-bench.github.io", feed: FEED,
+ benchmark: "motionbench", parts: {
+  'MR (%)': { name: 'Motion recognition', group: 'Category' },
+  'LM (%)': { name: 'Location-related motion', group: 'Category' },
+  'CM (%)': { name: 'Camera motion', group: 'Category' },
+  'MO (%)': { name: 'Motion-related objects', group: 'Category' },
+  'AO (%)': { name: 'Action order', group: 'Category' },
+  'RC (%)': { name: 'Repetition count', group: 'Category' },
+}, url: "https://motion-bench.github.io", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

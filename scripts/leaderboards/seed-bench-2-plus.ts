@@ -1,6 +1,6 @@
 // SEED-Bench-2-Plus on OpenCompass's OpenVLM leaderboard. The public OpenVLM.json feed has one SEEDBench2_Plus
 // object per evaluated model; Overall is the mean accuracy across Charts, Maps and Webs, in percent. The three
-// category scores stay in metrics. This is the text-rich SEED-Bench-2-Plus set, not SEED-Bench-2.
+// category scores stay in metrics. Model labels supply image detail settings. This is the text-rich SEED-Bench-2-Plus set, not SEED-Bench-2.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { OPENVLM_FEED as FEED, openvlmInfo, type OpenVlmEntry } from './openvlm-leaderboard.ts';
@@ -12,6 +12,11 @@ interface Result {
 
 const board: Leaderboard = {
   benchmark: 'seed-bench-2-plus',
+  parts: {
+    chart: { name: 'Chart', group: 'Category' },
+    map: { name: 'Map', group: 'Category' },
+    web: { name: 'Web', group: 'Category' },
+  },
   verified: 'marked verified by OpenCompass',
   host: 'OpenCompass',
   url: 'https://huggingface.co/spaces/opencompass/open_vlm_leaderboard',
@@ -29,7 +34,8 @@ const board: Leaderboard = {
         const value = values?.[key];
         if (typeof value === 'number') metrics[key] = value;
       }
-      rows.push({ model: name.trim(), score: overall, metrics, ...openvlmInfo(result.META) });
+      const setting = name.match(/\b(detail-(?:high|low|auto))\b/i)?.[1];
+      rows.push({ model: name.trim(), setting, score: overall, metrics, ...openvlmInfo(result.META) });
     }
     if (!rows.length) throw new Error('no SEEDBench2_Plus rows in OpenVLM.json');
     return rows;

@@ -7,6 +7,9 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/sanjari-orb/warc-bench/main/README.md";
 const board: Leaderboard = {
  benchmark: "warc-bench",
+ parts: {
+   devSuccessRate: { name: 'Development', group: 'Split' },
+ },
  url: "https://github.com/sanjari-orb/warc-bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

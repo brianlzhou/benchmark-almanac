@@ -45,7 +45,8 @@ for (const doc of [...cards, ...systemCards]) {
   let used = false;
   for (const r of doc.results) {
     const b = benchById.get(r.benchmark);
-    if (!b || r.score === null || !PCT.test(r.unit ?? '')) continue;
+    // a number on another measure (a partial-credit score, one part) isn't the headline the site ranks
+    if (!b || r.score === null || r.measure || !PCT.test(r.unit ?? '')) continue;
     if ((b.unit ?? '%') !== '%' || b.better === 'lower' || LEFT_OUT_CATEGORIES.has(b.category ?? 'other')) continue;
     if (r.section && !SECTIONS.has(r.section)) continue;
     if (r.score < 0 || r.score > 100) continue;

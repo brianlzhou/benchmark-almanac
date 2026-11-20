@@ -20,9 +20,11 @@ interface Props {
   /** A dot on every point, not only where the reader hovers. */
   dots?: boolean;
   ends?: boolean;
+  /** Names at the line ends in the phone render too. Off for long names, which would squeeze the plot: the legend names the lines there. */
+  narrowEnds?: boolean;
   legend?: boolean;
 }
-const { series, x, y, label, w = 600, h = 300, nh = 240, dots = true, ends = true, legend = false } = Astro.props;
+const { series, x, y, label, w = 600, h = 300, nh = 240, dots = true, ends: endsWide = true, narrowEnds, legend = false } = Astro.props;
 
 const ys = series.flatMap((s) => s.pts.map((p) => p.y)).filter((v): v is number => v !== null);
 const yMin = y.min ?? 0;
@@ -41,6 +43,7 @@ const sizes = [
   { key: 'wide', W: w, H: h, font: 12.5 },
   { key: 'narrow', W: 380, H: nh, font: 11 },
 ].map((z) => {
+  const ends = z.key === 'narrow' ? (narrowEnds ?? endsWide) : endsWide;
   const nameW = !single && ends ? Math.max(...series.map((s) => s.label.length)) * z.font * 0.58 + 14 : 0;
   const pad = { l: 40, r: Math.max(single && ends ? 34 : 14, nameW), t: single && ends ? 24 : 14, b: x.title ? 46 : 28 };
   if (y.title) pad.l += 14;
@@ -82,7 +85,7 @@ const sizes = [
       while (names.some((n) => Math.abs(n.y - ny) < z.font + 2)) ny += z.font + 2;
       names.push({ s: l.s, x: X(last.x) + 8, y: ny });
     }
-  return { ...z, pad, X, Y, lines, names };
+  return { ...z, pad, X, Y, lines, names, ends };
 });
 ---
 
@@ -150,7 +153,7 @@ const sizes = [
           }),
         )}
         {single &&
-          ends &&
+          z.ends &&
           [z.lines[0].shown[0], z.lines[0].shown.at(-1)].map(
             (p, i) =>
               p && (

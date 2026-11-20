@@ -6,6 +6,12 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://ibm-research-vakra.hf.space/api/leaderboard";
 const board: Leaderboard = {
   benchmark: "vakra",
+  parts: {
+    api_chaining: { name: 'API chaining', group: 'Task type' },
+    tool_selection: { name: 'Tool selection', group: 'Task type' },
+    multihop: { name: 'Multi-hop', group: 'Task type' },
+    multiturn: { name: 'Multi-turn', group: 'Task type' },
+  },
   url: "https://ibm-research-vakra.hf.space/api/leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

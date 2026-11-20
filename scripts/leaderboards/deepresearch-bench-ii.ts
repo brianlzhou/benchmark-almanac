@@ -12,6 +12,11 @@ const FEED = 'https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderbo
 
 const board: Leaderboard = {
   benchmark: 'deepresearch-bench-ii',
+  parts: {
+    info_recall: { name: 'Information recall', group: 'Dimension' },
+    analysis: { name: 'Analysis', group: 'Dimension' },
+    presentation: { name: 'Presentation', group: 'Dimension' },
+  },
   url: 'https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard',
   feed: `${FEED} (current GPT-5.5 total_score)`,
   terms: 'CSV in the muset-ai/DeepResearch-Bench-Leaderboard Hugging Face Space, licensed Apache-2.0.',

@@ -4,7 +4,12 @@ import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://tongyi-mai.github.io/MobilePA-Bench/static/js/leaderboard_data.js";
 const board: Leaderboard = {
-  benchmark: "mobilepa-bench", url: "https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard", feed: FEED,
+  benchmark: "mobilepa-bench", parts: {
+  toolUse: { name: 'Tool use', group: 'Task type' },
+  memory: { name: 'Memory', group: 'Task type' },
+  skills: { name: 'Skills', group: 'Task type' },
+  subagent: { name: 'Subagent', group: 'Task type' },
+}, url: "https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard", feed: FEED,
   terms: 'Public maker results; the site has no robots.txt or additional restriction on reading these published values.',
   async fetch() {
     const source = await fetchText(FEED);

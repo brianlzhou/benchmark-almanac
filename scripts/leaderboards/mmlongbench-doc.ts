@@ -1,4 +1,4 @@
-// MMLongBench-Doc: the official Space JSON reports accuracy in percent. Model details retain the visual detail setting, modality, and parameter count. Monthly release labels are not treated as exact evaluation dates.
+// MMLongBench-Doc: the official Space JSON reports accuracy in percent. Model details retain the visual detail setting, modality, and parameter count. The MoE flag identifies mixture-of-experts models. Monthly release labels are not treated as exact evaluation dates.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -20,7 +20,10 @@ const board: Leaderboard = {
       open: typeof r.open_source === 'boolean' ? r.open_source : undefined,
       params: /([\d.]+)B total/i.test(r.params) ? Number(r.params.match(/([\d.]+)B total/i)![1]) : /^([\d.]+)B$/.test(r.params) ? Number(r.params.slice(0, -1)) : undefined,
       setting: `${r.modality}; ${r.params}${/ detail high$/.test(r.model) ? '; detail high' : ''}`,
-      metrics: r.params_b == null ? undefined : { activeParametersBillions: r.params_b, ...(r.moe ? { activeParams: r.params_b } : {}) },
+      metrics: {
+        ...(typeof r.moe === 'boolean' ? { mixtureOfExperts: Number(r.moe) } : {}),
+        ...(r.params_b == null ? {} : { activeParametersBillions: r.params_b, ...(r.moe ? { activeParams: r.params_b } : {}) }),
+      },
     }));
     if (!rows.length) throw new Error('MMLongBench-Doc leaderboard missing');
     return rows;

@@ -10,6 +10,18 @@ const FEED = "https://raw.githubusercontent.com/OpenLMLab/GAOKAO-Bench/main/READ
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "gaokao-bench",
+  parts: {
+    Chinese: { name: 'Chinese', group: 'Domain' },
+    'Eng.': { name: 'English', group: 'Domain' },
+    'Sci. Math': { name: 'Sciences mathematics', group: 'Domain' },
+    'Hum. Math': { name: 'Humanities mathematics', group: 'Domain' },
+    'Phys.': { name: 'Physics', group: 'Domain' },
+    'Chem.': { name: 'Chemistry', group: 'Domain' },
+    'Biol.': { name: 'Biology', group: 'Domain' },
+    'Poli.': { name: 'Politics', group: 'Domain' },
+    'Hist.': { name: 'History', group: 'Domain' },
+    'Geog.': { name: 'Geography', group: 'Domain' },
+  },
   url: "https://github.com/OpenLMLab/GAOKAO-Bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

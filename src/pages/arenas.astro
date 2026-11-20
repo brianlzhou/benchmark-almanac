@@ -9,6 +9,8 @@ import Base from '../layouts/Base.astro';
 import LabMark from '../components/LabMark.astro';
 import MiniBoard from '../components/MiniBoard.astro';
 import Dropdown, { type Option } from '../components/Dropdown.astro';
+import FacetFilters from '../components/FacetFilters.astro';
+import { facetAttrs, facetWords } from '../lib/facets.ts';
 import { allSummaries, modelById, monthsBetween, AS_OF, addedWindows, addedOptions } from '../lib/data.ts';
 import { AREAS, CATEGORY_NAMES, LEVELS, SUB_BY_ID, SUBCATEGORIES, RANKED_BY_PEOPLE_OR_MATCHES } from '../lib/taxonomy.ts';
 import { score as fmt, monthYear, humanDate } from '../lib/format.ts';
@@ -174,7 +176,7 @@ const ATIPS = {
           <label title={RANKED['head-to-head'].tip}><input type="radio" name="ranked" value="matches" data-key="ranked" />Ranked by matches <span class="n">{rankedCount('matches')}</span></label>
         </div>
       </div>
-      <div class="frow">
+      <div class="frow ctl-row">
         <input class="field grow" type="search" placeholder="Search arenas, makers or models" aria-label="Search arenas" data-q />
         <button type="button" class="fbtn" aria-expanded="false" aria-controls="fpanel" data-fbtn>
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 3.5h11M3.5 7h7M5.5 10.5h3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
@@ -188,6 +190,7 @@ const ATIPS = {
           <Dropdown filterKey="data" label="Data" options={dataOptions} />
           <Dropdown filterKey="code" label="Code" options={codeOptions} />
         </div>
+        <FacetFilters items={rows.map((s) => ({ id: s.b.id, n: famSize(s) }))} />
         <span class="count muted" data-count>{arenaCount} arenas</span>
       </div>
 
@@ -238,6 +241,7 @@ const ATIPS = {
                 return (
                   <>
                     <tr
+                      {...facetAttrs(s.b.id)}
                       class:list={{ fam: !!group }}
                       data-group={group}
                       data-n={famSize(s) > 1 ? famSize(s) : undefined}
@@ -248,7 +252,7 @@ const ATIPS = {
                       data-added={addedWindows(s)}
                       data-data={ACCESS[s.b.access ?? 'unknown']}
                       data-code={s.b.links?.repo ? 'yes' : ''}
-                      data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name)].join(' ').toLowerCase() || undefined}
+                      data-text={[...(s.b.aliases ?? []), ...prev.map((p) => p.b.name), facetWords(s.b.id)].join(' ').trim().toLowerCase() || undefined}
                     >
                       <td class="nm">
                         <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
@@ -546,10 +550,7 @@ const ATIPS = {
     position: sticky;
     top: var(--bar-h);
     z-index: 6;
-    display: flex;
-    flex-wrap: wrap;
     gap: 8px;
-    align-items: center;
     margin: 12px calc(-1 * var(--gutter)) 8px;
     padding: 8px var(--gutter);
     background: var(--bg);
@@ -857,6 +858,7 @@ const ATIPS = {
       display: inline-flex;
       align-items: center;
       gap: 7px;
+      height: var(--ctl-h);
       padding: 10px 13px;
       border: 0;
       border-radius: 9px;

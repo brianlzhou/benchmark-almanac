@@ -12,6 +12,9 @@ const PAGE = 'https://nyu-mll.github.io/quality/';
 
 const board: Leaderboard = {
   benchmark: 'quality',
+  parts: {
+    hardAccuracy: { name: 'Hard', group: 'Difficulty' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML table, test-set Accuracy)`,
   terms: 'Static GitHub Pages site of the QuALITY authors (no robots.txt, so nothing is disallowed); it publishes no terms.',

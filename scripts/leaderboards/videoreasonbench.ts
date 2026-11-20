@@ -8,6 +8,14 @@ const FEED = "https://llyx97.github.io/video_reason_bench/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "videoreasonbench",
+  parts: {
+    'Recall Order': { name: 'Recall order', group: 'Task type' },
+    'Recall Count': { name: 'Recall count', group: 'Task type' },
+    'Infer State': { name: 'Infer state', group: 'Task type' },
+    'Compare State': { name: 'Compare state', group: 'Task type' },
+    'Predict State': { name: 'Predict state', group: 'Task type' },
+    'Predict Operation': { name: 'Predict operation', group: 'Task type' },
+  },
   url: "https://llyx97.github.io/video_reason_bench/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at llyx97.github.io; retain source attribution and follow the upstream terms.",

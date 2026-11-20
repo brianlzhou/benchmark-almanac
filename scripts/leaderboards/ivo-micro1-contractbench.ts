@@ -11,6 +11,10 @@ const PAGE = 'https://www.micro1.ai/benchmark/ivo-micro1-contract-bench';
 
 const board: Leaderboard = {
   benchmark: 'ivo-micro1-contractbench',
+  parts: {
+    privateScore: { name: 'Private', group: 'Split' },
+    publicScore: { name: 'Public', group: 'Split' },
+  },
   url: PAGE,
   feed: `${PAGE} (inline leaderboard data "ivo-micro1-contract-bench", Pass score)`,
   terms: MICRO1_TERMS,

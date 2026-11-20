@@ -1,0 +1,492 @@
+---
+// The data audit for the whole catalog: how many benchmarks pass, warn or fail each check in src/lib/bench-audit.ts,
+// the problems that come up most, and every benchmark with its counts, linking to the audit on its page. Built
+// from the data at each build, so it follows every sync. The same audit is at /audits/data.json.
+import Base from '../../layouts/Base.astro';
+import Dropdown, { type Option } from '../../components/Dropdown.astro';
+import SortHead from '../../components/SortHead.astro';
+import AuditMark from '../../components/AuditMark.astro';
+import { allAudits, GROUPS, STATUS_WORD, worstCheck, linksChecked, ALL_CHECKS, type AuditStatus, type CheckTotal } from '../../lib/bench-audit.ts';
+import { benchById, benchSummary } from '../../lib/data.ts';
+import { AREAS, AREA_BY_ID } from '../../lib/taxonomy.ts';
+import { humanDate, count } from '../../lib/format.ts';
+
+const { audits, totals } = allAudits();
+const n = audits.length;
+const fmtN = (k: number) => k.toLocaleString('en-US');
+const withFail = audits.filter((a) => a.summary.fail > 0);
+const warnOnly = audits.filter((a) => !a.summary.fail && a.summary.warn > 0);
+const clean = audits.filter((a) => !a.summary.fail && !a.summary.warn);
+const problems = audits.reduce((k, a) => k + a.summary.fail, 0);
+const checked = linksChecked();
+const byFail = totals.filter((t) => t.fail > 0).sort((a, b) => b.fail - a.fail || a.label.localeCompare(b.label));
+const byWarn = totals.filter((t) => t.warn > 0).sort((a, b) => b.warn - a.warn || a.label.localeCompare(b.label));
+const areaOf = (id: string) => benchSummary(id).area;
+// the benchmarks behind each problem, most cited first, so the examples are the ones readers know
+const cited = (id: string) => benchSummary(id).cites.length + benchSummary(id).docCites.length;
+const examples = (key: string, st: AuditStatus) =>
+  audits
+    .filter((a) => a.checks.some((c) => c.key === key && c.status === st))
+    .sort((a, b) => cited(b.id) - cited(a.id) || a.id.localeCompare(b.id))
+    .slice(0, 4)
+    .map((a) => benchById.get(a.id)!);
+
+// the area where the largest share of records has a problem, for the table's caption
+const areaRows = AREAS.map((ar) => {
+  const xs = audits.filter((a) => areaOf(a.id) === ar.id);
+  return { ar, n: xs.length, fail: xs.filter((a) => a.summary.fail).length, warn: xs.filter((a) => a.summary.warn).length };
+}).filter((r) => r.n >= 20);
+const worstArea = [...areaRows].sort((a, b) => b.fail / b.n - a.fail / a.n)[0];
+
+// the table, with the most problems first, then the most warnings
+const rows = audits
+  .map((a) => ({ a, b: benchById.get(a.id)!, worst: worstCheck(a), area: areaOf(a.id) }))
+  .sort((x, y) => y.a.summary.fail - x.a.summary.fail || y.a.summary.warn - x.a.summary.warn || x.b.name.localeCompare(y.b.name));
+const worstOf = (a: (typeof audits)[number]) => (a.summary.fail ? 'fail' : a.summary.warn ? 'warn' : 'pass');
+const statusOptions: Option[] = [
+  { value: '', label: 'Any status' },
+  { value: 'fail', label: 'Has a problem', count: withFail.length },
+  { value: 'warn', label: 'Warnings, no problem', count: warnOnly.length },
+  { value: 'pass', label: 'Every check passes', count: clean.length },
+];
+const checkOptions: Option[] = [
+  { value: '', label: 'Any check' },
+  ...totals.filter((t) => t.warn + t.fail > 0).map((t) => ({ value: t.key, label: t.label, count: t.warn + t.fail })),
+];
+const areaOptions: Option[] = [{ value: '', label: 'All areas' }, ...AREAS.map((ar) => ({ value: ar.id, label: ar.name, count: audits.filter((a) => areaOf(a.id) === ar.id).length })).filter((o) => o.count)];
+const share = (t: CheckTotal, st: AuditStatus) => (t[st] / n) * 100;
+const SEGMENTS: AuditStatus[] = ['pass', 'warn', 'fail', 'info'];
+const top = byFail[0];
+const topWarn = byWarn[0];
+---
+
+<Base
+  title="Data audit"
+  description={ALL_CHECKS
+    ? `How complete and trustworthy our data is for each of the ${fmtN(n)} benchmarks we track: missing facts, failed leaderboard reads, numbers that don't add up and links that no longer work.`
+    : `How far to trust our numbers for each of the ${fmtN(n)} benchmarks we track: who scored it and how recently, how fresh our read of its leaderboard is, and how far labs' own numbers sit from independent runs.`}
+>
+  <AuditMark defs />
+  <div class="page da">
+    <header class="head">
+      <h1>Data audit</h1>
+      <p class="lede">
+        {ALL_CHECKS
+          ? 'We run the same checks on every benchmark record: what the record says, where its scores come from, how we read its leaderboard, whether its numbers agree, and whether its links still work. They run on each build, so they follow every sync. Each benchmark\'s page shows its own audit.'
+          : 'We run the same checks on every benchmark: how well we verified its record, who has scored it and how recently, how fresh our read of its leaderboard is, and how far labs\' own numbers sit from independent runs. They run on each build, so they follow every sync. Each benchmark\'s page shows its own audit.'}
+      </p>
+      <div class="facts">
+        <span><b>{fmtN(n)}</b> benchmarks</span>
+        <span><b>{totals.length}</b> checks</span>
+        <span><b>{fmtN(withFail.length)}</b> with a problem</span>
+        <span><b>{fmtN(warnOnly.length)}</b> with warnings only</span>
+        {ALL_CHECKS && <span>{checked ? `Links checked ${humanDate(checked)}` : 'Links not checked yet'}</span>}
+        <a href="/audits/data.json">Download as JSON</a>
+      </div>
+    </header>
+
+    {ALL_CHECKS && (<section>
+      <div class="sh">
+        <h2>What needs fixing first?</h2>
+        <p>
+          {top
+            ? `We found ${count(problems, 'problem')} on ${count(withFail.length, 'benchmark')}. The most common is ${top.problem}, on ${count(top.fail, 'benchmark')}.`
+            : 'We found no problems, only warnings and notes.'}
+        </p>
+      </div>
+      {byFail.length > 0 && (
+        <ol class="fix">
+          {byFail.map((t) => (
+            <li>
+              <div class="fix-h">
+                <span class="fix-st"><AuditMark st="fail" />{STATUS_WORD.fail}</span>
+                <a class="fix-n" href={`?flag=${t.key}#every`}>{t.label}</a>
+                <span class="fix-k num">{count(t.fail, 'benchmark')}</span>
+              </div>
+              <p class="fix-r">{t.rule}</p>
+              <p class="fix-x">
+                {examples(t.key, 'fail').map((b, i, xs) => (
+                  <>{i > 0 && (i === xs.length - 1 && t.fail <= 4 ? ' and ' : ', ')}<a href={`/benchmarks/${b.id}/#data-audit`}>{b.name}</a></>
+                ))}{t.fail > 4 && <span class="muted">{` and ${fmtN(t.fail - 4)} more`}</span>}
+              </p>
+            </li>
+          ))}
+        </ol>
+      )}
+    </section>)}
+
+    <section>
+      <div class="sh">
+        <h2>Where are the gaps?</h2>
+        <p>
+          {`${fmtN(clean.length)} of ${fmtN(n)} records pass every check that applies to them.`}
+          {topWarn && ` The most common warning is ${topWarn.problem}, on ${count(topWarn.warn, 'benchmark')}.`}
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table class="t tot">
+          <thead>
+            <tr>
+              <th class="c-name">Check</th>
+              <th class="bar-h">Share of benchmarks</th>
+              <th class="r c-n"><span class="th-st"><AuditMark st="pass" size={12} />Pass</span></th>
+              <th class="r c-n"><span class="th-st"><AuditMark st="warn" size={12} />Warning</span></th>
+              <th class="r c-n"><span class="th-st"><AuditMark st="fail" size={12} />Problem</span></th>
+              <th class="r c-n c-note"><span class="th-st"><AuditMark st="info" size={12} />Note</span></th>
+            </tr>
+          </thead>
+          {GROUPS.map((g) => {
+            const ts = totals.filter((t) => t.group === g.id);
+            return ts.length > 0 && (
+              <tbody>
+                <tr class="grp"><th colspan="6" scope="colgroup">{g.name}</th></tr>
+                {ts.map((t) => (
+                  <tr>
+                    <td>
+                      <a class="hint-l" href={t.warn + t.fail ? `?flag=${t.key}#every` : '#rules'} data-tn={t.label} data-ts={t.rule}>{t.label}</a>
+                    </td>
+                    <td class="bar">
+                      <span class="sb" role="img" aria-label={`${t.label}: ${fmtN(t.pass)} pass, ${fmtN(t.warn)} warnings, ${fmtN(t.fail)} problems, ${fmtN(t.info)} notes`}>
+                        {SEGMENTS.filter((st) => t[st] > 0).map((st) => (
+                          <i class={`sg sg-${st}`} style={`flex-grow: ${share(t, st).toFixed(3)}`} data-tv={`${fmtN(t[st])} ${st === 'pass' ? 'pass' : st === 'warn' ? (t[st] === 1 ? 'warning' : 'warnings') : st === 'fail' ? (t[st] === 1 ? 'problem' : 'problems') : (t[st] === 1 ? 'note' : 'notes')}`} data-tn={t.label} data-ts={`${share(t, st) < 1 ? '<1' : Math.round(share(t, st))}% of ${fmtN(n)} benchmarks`} />
+                        ))}
+                      </span>
+                    </td>
+                    <td class="r num">{fmtN(t.pass)}</td>
+                    <td class="r num">{t.warn ? fmtN(t.warn) : ''}</td>
+                    <td class="r num">{t.fail ? fmtN(t.fail) : ''}</td>
+                    <td class="r num muted c-note">{t.info ? fmtN(t.info) : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            );
+          })}
+        </table>
+      </div>
+    </section>
+
+    <section id="every">
+      <div class="sh">
+        <h2>Every benchmark</h2>
+        <p>
+          {worstArea && worstArea.fail > 0
+            ? `${worstArea.ar.name} has the largest share of records with a problem, ${fmtN(worstArea.fail)} of ${fmtN(worstArea.n)}.`
+            : `${fmtN(withFail.length)} records have a problem.`}
+        </p>
+      </div>
+      <div class="filters" data-filter="audit">
+        <input class="field grow" type="search" placeholder="Search benchmarks" aria-label="Search benchmarks" data-q />
+        <Dropdown filterKey="worst" label="Status" options={statusOptions} />
+        <Dropdown filterKey="flag" label="Check" options={checkOptions} search />
+        <Dropdown filterKey="area" label="Area" options={areaOptions} />
+        <span class="count muted" data-count>{fmtN(n)} benchmarks</span>
+      </div>
+      <div class="table-wrap">
+        <table class="t every" data-rows data-sort>
+          <thead>
+            <tr>
+              <SortHead class="c-bench">Benchmark</SortHead>
+              <SortHead class="ar c-area">Area</SortHead>
+              <SortHead class="r c-n">Problems</SortHead>
+              <SortHead class="r c-n">Warnings</SortHead>
+              <SortHead class="r c-pass">Pass</SortHead>
+              <th class="first-h" data-nosort>First to look at</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ a, b, worst, area }, i) => (
+              <tr
+                data-later={i >= 150 ? '' : undefined}
+                data-worst={worstOf(a)}
+                data-flag={a.checks.filter((c) => c.status === 'fail' || c.status === 'warn').map((c) => c.key).join(' ') || undefined}
+                data-area={area}
+                data-text={[b.id, ...(b.aliases ?? [])].join(' ').toLowerCase()}
+              >
+                <td class="nm"><a href={`/benchmarks/${b.id}/#data-audit`}>{b.name}</a></td>
+                <td class="muted ar">{AREA_BY_ID.get(area)?.name ?? ''}</td>
+                <td class:list={['r num', { hot: a.summary.fail > 0 }]} data-v={a.summary.fail}>{a.summary.fail || ''}</td>
+                <td class="r num" data-v={a.summary.warn}>{a.summary.warn || ''}</td>
+                <td class="r num muted nowrap c-pass" data-v={a.summary.checked ? (a.summary.pass / a.summary.checked).toFixed(4) : '0'}>{`${a.summary.pass} of ${a.summary.checked}`}</td>
+                <td class="first"><span class="clamp">{worst ? <><span class="fl">{worst.label}</span> <span class="fd">{worst.detail}</span></> : <span class="muted">Nothing to fix</span>}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="sh">
+        <h2>How we check</h2>
+        <p>Each check is one simple rule. A check that doesn't apply to a benchmark is a note, never a problem, so an in-house safety eval with no public board isn't failing for lacking one.</p>
+      </div>
+      <div class="rules">
+        {GROUPS.filter((g) => totals.some((t) => t.group === g.id)).map((g) => (
+          <div class="rg">
+            <h3>{g.name}</h3>
+            <dl>
+              {totals.filter((t) => t.group === g.id).map((t) => (
+                <div>
+                  <dt>{t.label}</dt>
+                  <dd>{t.rule}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))}
+      </div>
+      <p class="upd muted">
+        {ALL_CHECKS && 'The link check reads each link once, a few at a time, and skips x.com and twitter.com. '}Problems that published audits found in a benchmark itself are on <a href="/audits/">Audits</a>.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { wireFilter } from '../../scripts/filter.ts';
+  wireFilter('audit');
+</script>
+
+<style is:global>
+  /* global, under .da: scoped styles would put an attribute on each of the table's 3,555 rows and their cells */
+  .da .fix {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 22px;
+    max-width: 880px;
+  }
+  .da .fix-h {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+  }
+  .da .fix-st {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    align-self: center;
+  }
+  .da .fix-n {
+    font-size: 16.5px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .da .fix-n:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+  }
+  .da .fix-k {
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .da .fix-r {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--ink-3);
+  }
+  .da .fix-x {
+    margin-top: 6px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .da .th-st {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .da .tot {
+    table-layout: fixed;
+    min-width: 720px;
+  }
+  .da .tot .c-name {
+    width: 210px;
+  }
+  .da .tot .c-n {
+    width: 104px;
+  }
+  .da .tot .grp th {
+    padding: 26px 4px 8px;
+    font: 500 14px/1.2 var(--sans);
+    color: var(--ink);
+  }
+  .da .tot tbody:first-of-type .grp th {
+    padding-top: 6px;
+  }
+  .da .hint-l {
+    text-decoration: underline dotted var(--ink-4) !important;
+    text-underline-offset: 4px;
+  }
+  /* one 100% bar per check, a 2px gap between its parts */
+  .da .sb {
+    display: flex;
+    gap: 2px;
+    height: 10px;
+  }
+  .da .sg {
+    flex: 0 1 0;
+    min-width: 2px;
+    border-radius: 2px;
+  }
+  .da .sg-pass {
+    background: var(--status-good);
+  }
+  .da .sg-warn {
+    background: var(--status-warn);
+  }
+  .da .sg-fail {
+    background: var(--status-bad);
+  }
+  .da .sg-info {
+    background: var(--line);
+  }
+  .da .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .da .grow {
+    flex: 1 1 220px;
+  }
+  .da .count {
+    font-size: 13px;
+    margin-left: auto;
+  }
+  .da .every {
+    table-layout: fixed;
+    min-width: 760px;
+  }
+  .da .every .c-bench {
+    width: 26%;
+  }
+  .da .every .c-area {
+    width: 196px;
+  }
+  .da .every td.ar {
+    font-size: 13.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .da .every .c-n {
+    width: 92px;
+  }
+  .da .every .c-pass {
+    width: 90px;
+  }
+  .da .every .nm a {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .da .every td.hot {
+    color: var(--status-bad);
+    font-weight: 500;
+  }
+  .da .every .first-h {
+    padding-left: 24px;
+  }
+  .da .every td.first {
+    padding-left: 24px;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+  .da .every .fl {
+    color: var(--ink);
+  }
+  .da .every .fd {
+    color: var(--ink-3);
+  }
+  /* two lines at most: a failed read's error can run long, and the benchmark's page has it in full */
+  .da .every td.first > .clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .da .rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px 48px;
+  }
+  .da .rg h3 {
+    font-size: 21px;
+  }
+  .da .rg dl {
+    margin: 12px 0 0;
+    display: grid;
+    gap: 10px;
+  }
+  .da .rg dt {
+    font-weight: 500;
+    font-size: 14.5px;
+  }
+  .da .rg dd {
+    margin: 2px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .da .upd {
+    margin-top: 28px;
+    font-size: 14px;
+    max-width: 72ch;
+  }
+  @media (max-width: 720px) {
+    .da .fix-k {
+      margin-left: 0;
+      width: 100%;
+    }
+    /* auto layout on a phone: the hidden columns take no room */
+    .da .tot {
+      min-width: 0;
+      table-layout: auto;
+    }
+    .da .tot .c-name {
+      width: auto;
+    }
+    .da .tot .bar,
+    .da .tot .bar-h,
+    .da .tot .c-note {
+      display: none;
+    }
+    .da .tot .c-n {
+      width: 84px;
+    }
+    /* each row as a grid on a phone: the name and the two counts, then what to look at first on its own line */
+    .da .every {
+      min-width: 0;
+    }
+    .da .every thead,
+    .da .every tbody {
+      display: block;
+    }
+    .da .every tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 76px 76px;
+    }
+    .da .every tr[hidden] {
+      display: none;
+    }
+    .da .every .ar,
+    .da .every .c-pass,
+    .da .every .first-h {
+      display: none;
+    }
+    .da .every th.c-bench,
+    .da .every th.c-n {
+      width: auto !important;
+    }
+    .da .every td.first {
+      grid-column: 1 / -1;
+      padding: 0 4px 13px;
+      border-top: 0;
+    }
+  }
+</style>

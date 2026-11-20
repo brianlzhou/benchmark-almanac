@@ -8,6 +8,10 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/Mini-o3/Mini-o3/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "visualprobe",
+ parts: {
+   medium: { name: 'Medium', group: 'Difficulty' },
+   easy: { name: 'Easy', group: 'Difficulty' },
+ },
  url: "https://github.com/Mini-o3/Mini-o3",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

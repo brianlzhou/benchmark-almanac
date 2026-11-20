@@ -6,6 +6,12 @@ import { fetchText } from '../lib/util.ts';
 const FEED = "https://sites.research.google/xtreme/app.js";
 const board: Leaderboard = {
   benchmark: "xtreme",
+  parts: {
+    sentenceClassification: { name: 'Sentence classification', group: 'Task type' },
+    structuredPrediction: { name: 'Structured prediction', group: 'Task type' },
+    questionAnswering: { name: 'Question answering', group: 'Task type' },
+    sentenceRetrieval: { name: 'Sentence retrieval', group: 'Task type' },
+  },
   url: "https://sites.research.google/xtreme/app.js",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
