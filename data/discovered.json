@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17",
+  "updated": "2026-11-20",
   "items": [
     {
       "key": "ifbenchtest",
@@ -46,117 +46,6 @@
       "org": "Vals AI"
     },
     {
-      "key": "rsicontrolarena",
-      "name": "RSI Control Arena",
-      "title": "RSI Control Arena",
-      "url": "https://jack-clark.net/2026/11/16/import-ai-481-ai-sub-contractors-a-wet-lab-for-ai-and-subterfuge-during-development/",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Import AI",
-          "url": "https://jack-clark.net/2026/11/16/import-ai-481-ai-sub-contractors-a-wet-lab-for-ai-and-subterfuge-during-development/"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "2611.20218",
-      "name": "SWE-CoWork",
-      "title": "SWE-CoWork: Benchmarking Coding Agents as Digital Employees in Organizations",
-      "url": "https://huggingface.co/papers/2611.20218",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [
-        "hf",
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 8,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog",
-      "org": "Tokenwave.AI",
-      "repo": "https://github.com/TokenWave-AI/swe-cowork-bench",
-      "arxiv": "2611.20218",
-      "upvotes": 44,
-      "stars": 7
-    },
-    {
-      "key": "2611.20882",
-      "name": "Accelerate Bench",
-      "title": "Accelerate Bench: Evaluating Agents for Application-Level Program Optimization",
-      "url": "https://huggingface.co/papers/2611.20882",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [
-        "hf",
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog",
-      "org": "Tencent Hunyuan",
-      "repo": "https://github.com/AdAstraAbyssoque/accelerate-bench",
-      "arxiv": "2611.20882",
-      "upvotes": 16,
-      "stars": 1
-    },
-    {
-      "key": "ctimcq",
-      "name": "cti_mcq",
-      "title": "cti_mcq",
-      "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/register/cti_mcq",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "Inspect Evals",
-          "url": "https://github.com/UKGovernmentBEIS/inspect_evals"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "ltb",
-      "name": "ltb",
-      "title": "ltb",
-      "url": "https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/register/ltb",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "Inspect Evals",
-          "url": "https://github.com/UKGovernmentBEIS/inspect_evals"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
       "key": "monitorbenchgoalsandbagengineering",
       "name": "monitorbench-goal-sandbag-engineering",
       "title": "monitorbench-goal-sandbag-engineering",
@@ -199,27 +88,6 @@
       "decision": "catalog"
     },
     {
-      "key": "smbbench",
-      "name": "SMB Bench",
-      "title": "SMB Bench is a benchmark to evaluate AI agents on running the buying desk of a simulated produce wholesaler for a 90-day quarter, scored on profit against a fixed buying rule.",
-      "url": "https://oroagents.com/benchmarks/smb-bench",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "awesome-ai-leaderboard",
-          "url": "https://github.com/SAILResearch/awesome-ai-leaderboard"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
       "key": "mvhbenchacc",
       "name": "MVHBench ACC",
       "title": "MVHBench ACC",
@@ -241,48 +109,86 @@
       "decision": "catalog"
     },
     {
-      "key": "gradebench",
-      "name": "GradeBench",
-      "title": "GradeBench",
-      "url": "https://x.com/yoonseok_yang/status/2122375477537198582",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "AINews",
-          "url": "https://latent.space/p/ainews-perplexity-hits-a-1b-revenue-run-rate-up-4x-in-2026/"
-        }
+      "key": "visualcipherbench",
+      "name": "Visual Cipher Bench",
+      "title": "Einsia Lab launched Visual Cipher Bench, a 1,000-case benchmark that tests whether vision-language models can read text that has been visually obfuscated with U",
+      "url": "https://lab.einsia.ai/visual-cipher-bench/",
+      "first": "2026-11-18",
+      "last": "2026-11-19",
+      "feeds": [
+        "X (via Grok)"
       ],
+      "curated": [],
       "registries": [],
       "stageA": 5,
       "general": true,
       "niche": false,
-      "score": 11,
-      "decision": "catalog"
+      "score": 9,
+      "decision": "catalog",
+      "org": "Einsia",
+      "repo": "https://github.com/Einsia/Visual-Cipher-Bench",
+      "upvotes": 86
     },
     {
-      "key": "2611.15789",
-      "name": "VibePrevisBench",
-      "title": "VibePrevisBench: Evaluating Agentic Coding for 4D Scene Generation in Blender",
-      "url": "https://huggingface.co/papers/2611.15789",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
+      "key": "frontierbreach",
+      "name": "FrontierBreach",
+      "title": "PromptArmor released FrontierBreach, a benchmark of attack success rate on agentic enterprise workflows, including prompt injection that leads to ransomware, da",
+      "url": "https://www.promptarmor.com/frontier-breach",
+      "first": "2026-11-20",
+      "last": "2026-11-20",
       "feeds": [
-        "hf"
+        "X (via Grok)"
       ],
       "curated": [],
       "registries": [],
-      "stageA": 8,
+      "stageA": 5,
       "general": true,
       "niche": false,
-      "score": 9,
-      "decision": "catalog",
-      "org": "Kling-Keye",
-      "repo": "https://github.com/vibeprevisbench/vibeprevisbench",
-      "arxiv": "2611.15789",
-      "upvotes": 88,
-      "stars": 14
+      "score": 7,
+      "decision": "watch",
+      "org": "PromptArmor",
+      "upvotes": 1491
+    },
+    {
+      "key": "northstaragenteval",
+      "name": "Northstar Agent Eval",
+      "title": "Cohere Labs released Northstar Agent Eval, a new benchmark and leaderboard for long-horizon tool-using language agents.",
+      "url": "https://x.com/CohereLabs/status/1990623456789012345",
+      "first": "2026-11-19",
+      "last": "2026-11-19",
+      "feeds": [
+        "X (via Grok)"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "Cohere Labs",
+      "upvotes": 97
+    },
+    {
+      "key": "hpceval",
+      "name": "HPC-Eval",
+      "title": "A new paper introduced HPC-Eval, an agentic benchmark of 120 parallel-computing tasks that measures whether coding agents can write, compile, and run correct hi",
+      "url": "https://x.com/iScienceLuvr/status/2023872793471369546",
+      "first": "2026-11-19",
+      "last": "2026-11-19",
+      "feeds": [
+        "X (via Grok)"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "Independent researchers (arXiv)",
+      "arxiv": "2610.28259",
+      "upvotes": 21
     },
     {
       "key": "2611.17955",
@@ -329,29 +235,6 @@
       "arxiv": "2611.18442",
       "upvotes": 11,
       "stars": 0
-    },
-    {
-      "key": "2611.18130",
-      "name": "JFinBench",
-      "title": "JFinBench: A Continuously Refreshable Japanese Financial Benchmark from the Latest Certification Exams",
-      "url": "https://huggingface.co/papers/2611.18130",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 11,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "org": "Sakana AI",
-      "repo": "https://github.com/SakanaAI/JFinBench",
-      "arxiv": "2611.18130",
-      "upvotes": 7,
-      "stars": 6
     },
     {
       "key": "2611.20695",
@@ -432,25 +315,6 @@
       "score": 7,
       "decision": "watch",
       "org": "ritik12"
-    },
-    {
-      "key": "gulftexttosqlbench",
-      "name": "Gulf Text-to-SQL Bench",
-      "title": "usmanbilytica/gulf-text-to-sql-bench",
-      "url": "https://huggingface.co/datasets/usmanbilytica/gulf-text-to-sql-bench",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [
-        "Hugging Face datasets with results"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "org": "usmanbilytica"
     },
     {
       "key": "gridbattery",
@@ -673,26 +537,6 @@
       "repo": "https://github.com/Niklauseik/SPACE-training",
       "arxiv": "2611.12392",
       "stars": 0
-    },
-    {
-      "key": "2611.12175",
-      "name": "GeoMind",
-      "title": "GeoMind: A Benchmark for Spatial Understanding in Robotic Manipulation",
-      "url": "https://arxiv.org/abs/2611.12175",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/Notfound-JH/GEOMIND-benchmark",
-      "arxiv": "2611.12175"
     },
     {
       "key": "diiv1muscle",
@@ -1212,28 +1056,6 @@
       "stars": 4
     },
     {
-      "key": "2611.08369",
-      "name": "NPCBench",
-      "title": "NPCBench: A Clinical Apprenticeship Benchmark for Multimodal Care-Pathway Reasoning in Nasopharyngeal Carcinoma",
-      "url": "https://arxiv.org/abs/2611.08369",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv",
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "arxiv": "2611.08369",
-      "org": "InfiX.ai",
-      "upvotes": 2
-    },
-    {
       "key": "screenproof",
       "name": "ScreenProof",
       "title": "HMSSS55/ScreenProof",
@@ -1724,91 +1546,6 @@
       "stars": 2
     },
     {
-      "key": "solarquotebench",
-      "name": "solarquotebench",
-      "title": "Deterministically-graded RL environment for residential solar and battery quoting: eight task families, a PVGIS-backed oracle, and no LLM judge.",
-      "url": "https://app.primeintellect.ai/dashboard/environments/solar-sight/solarquotebench",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "Prime Intellect hub"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "org": "solar-sight",
-      "repo": "https://app.primeintellect.ai/dashboard/environments/solar-sight/solarquotebench",
-      "stars": 0
-    },
-    {
-      "key": "2611.01700",
-      "name": "MemHarmBench",
-      "title": "MemHarmBench: Evaluating Cross-Session Prompt Injection in Memory-Persistent AI Agents",
-      "url": "https://arxiv.org/abs/2611.01700",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 8,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/Kirito14IT/MemHarmBench",
-      "arxiv": "2611.01700",
-      "stars": 3
-    },
-    {
-      "key": "2610.38678",
-      "name": "AskStream",
-      "title": "AskStream: When and What to Ask Proactively under Uncertainty in Streaming Video Understanding",
-      "url": "https://huggingface.co/papers/2610.38678",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "org": "Chinese Academic of Science Institute of Automation",
-      "repo": "https://github.com/wanglu-cs/AskStream",
-      "arxiv": "2610.38678",
-      "upvotes": 11,
-      "stars": 13
-    },
-    {
-      "key": "2610.41885",
-      "name": "PrivacyTrace",
-      "title": "How Much Can Tool Calls Reveal About You? Privacy Leakage from Tool-Call Traces",
-      "url": "https://arxiv.org/abs/2610.41885",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/AI45Lab/PrivacyTrace",
-      "arxiv": "2610.41885"
-    },
-    {
       "key": "2610.40293",
       "name": "MAServeBench",
       "title": "MAServeBench: Benchmarking Multi-Agent LLM Serving Systems with Hierarchical Collaboration Workloads",
@@ -1832,26 +1569,64 @@
       "stars": 5
     },
     {
-      "key": "2610.36420",
-      "name": "SO-101 Bench",
-      "title": "SO-101 Bench: Accessible Spatial Manipulation",
-      "url": "https://huggingface.co/papers/2610.36420",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
+      "key": "efe98",
+      "name": "EFE-98",
+      "title": "Playground introduced EFE-98, a short public simulation benchmark sampled from Embodied First Exam that it says tracks real-robot rankings at about a tenth of t",
+      "url": "https://www.withplayground.ai/leaderboard/benchmarks/efe-98",
+      "first": "2026-11-20",
+      "last": "2026-11-20",
       "feeds": [
-        "hf"
+        "X (via Grok)"
       ],
       "curated": [],
       "registries": [],
       "stageA": 5,
-      "general": true,
-      "niche": true,
-      "score": 6,
+      "general": false,
+      "niche": false,
+      "score": 5,
       "decision": "watch",
-      "repo": "https://github.com/5hadytru/so101_bench",
-      "arxiv": "2610.36420",
-      "upvotes": 5,
-      "stars": 43
+      "org": "Playground",
+      "upvotes": 21
+    },
+    {
+      "key": "yakk",
+      "name": "YAKK",
+      "title": "hud introduced YAKK, a GPU-kernel checker and a 99-task kernel-optimization benchmark that rejects kernels whose outputs no honest implementation could have pro",
+      "url": "https://x.com/hud_evals/status/2123575956787085494",
+      "first": "2026-11-20",
+      "last": "2026-11-20",
+      "feeds": [
+        "X (via Grok)"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": false,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "org": "hud",
+      "upvotes": 22
+    },
+    {
+      "key": "sapienbench",
+      "name": "SapienBench",
+      "title": "Sapien AI introduced SapienBench, which scores models on pricing, margin, customer, and operations decisions made from real company data under each company's ow",
+      "url": "https://x.com/AryaGrayeli/status/2123463840968905195",
+      "first": "2026-11-20",
+      "last": "2026-11-20",
+      "feeds": [
+        "X (via Grok)"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": false,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "org": "Sapien AI",
+      "upvotes": 30
     },
     {
       "key": "2611.18429",
@@ -2070,25 +1845,6 @@
       "arxiv": "2611.20779"
     },
     {
-      "key": "2611.20535",
-      "name": "VAHBench",
-      "title": "VAHBench: A Harness Benchmark for Agentic Long-Video Generation",
-      "url": "https://arxiv.org/abs/2611.20535",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.20535"
-    },
-    {
       "key": "2611.20455",
       "name": "Embeddings vs. Grep",
       "title": "Embeddings vs. Grep: Rethinking the Dense Advantage in Code Search",
@@ -2144,25 +1900,6 @@
       "score": 5,
       "decision": "watch",
       "arxiv": "2611.20045"
-    },
-    {
-      "key": "2611.19643",
-      "name": "SG-LegalClarify",
-      "title": "SG-LegalClarify: A Large-Scale Benchmark for Legal Reasoning and Ambiguity Recognition in Singapore Law",
-      "url": "https://arxiv.org/abs/2611.19643",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.19643"
     },
     {
       "key": "2611.19525",
@@ -2471,25 +2208,6 @@
       "arxiv": "2611.14285"
     },
     {
-      "key": "2611.14122",
-      "name": "Hx2Dx",
-      "title": "Hx2Dx: From Anamnesis to Diagnosis - A Multimodal Arena for Conversational Clinical Reasoning in LLMs",
-      "url": "https://arxiv.org/abs/2611.14122",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.14122"
-    },
-    {
       "key": "2611.13994",
       "name": "BioXArena-Pro",
       "title": "BioXArena-Pro: a research-grade benchmark for autonomous biomedical machine learning agents",
@@ -2566,44 +2284,6 @@
       "arxiv": "2611.13667"
     },
     {
-      "key": "2611.13355",
-      "name": "DEPUTYBENCH",
-      "title": "DEPUTYBENCH: Evaluating Contextual Safety in Enterprise Agents",
-      "url": "https://arxiv.org/abs/2611.13355",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.13355"
-    },
-    {
-      "key": "2611.13183",
-      "name": "AgentScript-Eval",
-      "title": "AgentScript-Eval: Benchmarking LLMs and Agents for Code Generation in an Enterprise DSL",
-      "url": "https://arxiv.org/abs/2611.13183",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 10,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.13183"
-    },
-    {
       "key": "2611.13069",
       "name": "INTENT",
       "title": "INTENT: Out-of-Sample, Out-of-Time, and Cold-Start Evaluation on User Event Sequences",
@@ -2642,25 +2322,6 @@
       "arxiv": "2611.12856"
     },
     {
-      "key": "2611.12640",
-      "name": "TrialDesignBench",
-      "title": "TrialDesignBench: Benchmarking Language Models for Phase-I Trial Design Against Clinical Knowledge",
-      "url": "https://arxiv.org/abs/2611.12640",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 11,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.12640"
-    },
-    {
       "key": "2611.12557",
       "name": "WanderBench",
       "title": "WanderBench: Can World Models Explore Dynamic Worlds from Video?",
@@ -2697,25 +2358,6 @@
       "score": 5,
       "decision": "watch",
       "arxiv": "2611.12305"
-    },
-    {
-      "key": "2611.12118",
-      "name": "Joi-Bench-Task",
-      "title": "Joi-Bench-Task: Benchmarking Task Coordination in Full-duplex Voice Agents through Interactive Simulation",
-      "url": "https://arxiv.org/abs/2611.12118",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.12118"
     },
     {
       "key": "2611.12083",
@@ -2830,25 +2472,6 @@
       "score": 5,
       "decision": "watch",
       "arxiv": "2611.11796"
-    },
-    {
-      "key": "2611.11794",
-      "name": "ChemInsight",
-      "title": "ChemInsight: A Comprehensive Benchmark for Evaluating and Diagnosing Chemistry Understanding and Reasoning in Large Language Models",
-      "url": "https://arxiv.org/abs/2611.11794",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.11794"
     },
     {
       "key": "2611.11720",
@@ -3475,25 +3098,6 @@
       "org": "OrlaLabs"
     },
     {
-      "key": "2611.05340",
-      "name": "MedPhysBench",
-      "title": "MedPhysBench: A Benchmark for Evaluating Language Models on Medical Physics Calculations and Error Detection",
-      "url": "https://arxiv.org/abs/2611.05340",
-      "first": "2026-11-04",
-      "last": "2026-11-06",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.05340"
-    },
-    {
       "key": "2611.05223",
       "name": "PLANTEUR",
       "title": "PLANTEUR: A Crop-Type Segmentation Benchmark for Tropical Regions",
@@ -3568,25 +3172,6 @@
       "score": 5,
       "decision": "watch",
       "arxiv": "2611.04867"
-    },
-    {
-      "key": "2611.04813",
-      "name": "AgenticFinBench",
-      "title": "AgenticFinBench: Benchmarking Financial Agents on Diverse Tasks from Real-World Requests",
-      "url": "https://arxiv.org/abs/2611.04813",
-      "first": "2026-11-04",
-      "last": "2026-11-06",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.04813"
     },
     {
       "key": "2611.04687",
@@ -4067,44 +3652,6 @@
       "arxiv": "2611.02275"
     },
     {
-      "key": "2611.03982",
-      "name": "SLATE",
-      "title": "SLATE: A Large-Scale Benchmark for Long-Horizon API Selection in E-commerce Tool Use",
-      "url": "https://arxiv.org/abs/2611.03982",
-      "first": "2026-11-04",
-      "last": "2026-11-06",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.03982"
-    },
-    {
-      "key": "2611.03765",
-      "name": "VagueBench",
-      "title": "VagueBench: Benchmarking the Robustness of Embodied Agents on Ambient Context Illusions",
-      "url": "https://arxiv.org/abs/2611.03765",
-      "first": "2026-11-04",
-      "last": "2026-11-06",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.03765"
-    },
-    {
       "key": "2611.07194",
       "name": "SeVerus",
       "title": "SeVerus: Context-Aware, Gamified Benchmarking for Rust Verification",
@@ -4202,430 +3749,6 @@
       "decision": "watch",
       "sameNameAs": "macbench",
       "arxiv": "2611.01728"
-    },
-    {
-      "key": "2611.02132",
-      "name": "TSSDA",
-      "title": "TSSDA: An Autonomous Agent for Constructing a Time-Series Text-to-SQL Benchmark",
-      "url": "https://arxiv.org/abs/2611.02132",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.02132"
-    },
-    {
-      "key": "2611.01934",
-      "name": "TriPhysBench",
-      "title": "TriPhysBench: Evaluating Physical Intelligence for Embodied Agents",
-      "url": "https://arxiv.org/abs/2611.01934",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.01934"
-    },
-    {
-      "key": "2611.01843",
-      "name": "MEX",
-      "title": "MEX: The Musical Expectation Benchmark Suite",
-      "url": "https://arxiv.org/abs/2611.01843",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "repo": "https://github.com/musicperceptmodeling/mex",
-      "arxiv": "2611.01843",
-      "stars": 3
-    },
-    {
-      "key": "iwibench",
-      "name": "iwibench",
-      "title": "Weight-editing tasks with isolated target execution",
-      "url": "https://app.primeintellect.ai/dashboard/environments/chrisvoncsefalvay/iwibench",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "Prime Intellect hub"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "org": "chrisvoncsefalvay",
-      "repo": "https://app.primeintellect.ai/dashboard/environments/chrisvoncsefalvay/iwibench",
-      "stars": 1
-    },
-    {
-      "key": "reactionbench",
-      "name": "REACTIONBENCH",
-      "title": "Introducing REACTIONBENCH, a benchmark for multimodal models testing viewer reactions. With 31,834 synchronized clips, it challenges models to link emotional re",
-      "url": "https://bsky.app/profile/ai-firehose.column.social/post/3mzj34syabj2f",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "bluesky"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00050",
-      "upvotes": 0
-    },
-    {
-      "key": "2611.01145",
-      "name": "CivicBench",
-      "title": "CivicBench: A Benchmark and Memory Framework for Web-Based Civic Data Analytics",
-      "url": "https://arxiv.org/abs/2611.01145",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.01145"
-    },
-    {
-      "key": "2611.01125",
-      "name": "Benchmark Card",
-      "title": "What Does a Safety Label Measure? Auditing Situational-Safety Benchmarks for Multimodal LLMs",
-      "url": "https://arxiv.org/abs/2611.01125",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.01125"
-    },
-    {
-      "key": "2611.00755",
-      "name": "DuSE-Bench",
-      "title": "DuSE-Bench: Benchmarking Joint Reasoning over Evolving Dialogue and Documents",
-      "url": "https://arxiv.org/abs/2611.00755",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 10,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "repo": "https://github.com/JianfengGao7/DuSE-Bench",
-      "arxiv": "2611.00755"
-    },
-    {
-      "key": "2611.00749",
-      "name": "PeptSol",
-      "title": "PeptSol: A Translational Benchmark for Protected-Peptide Solubility in Drug Manufacturing",
-      "url": "https://arxiv.org/abs/2611.00749",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00749"
-    },
-    {
-      "key": "2611.00643",
-      "name": "NAS-Bench-201",
-      "title": "Selecting LLM-Generated Hypotheses Raises Truth Beyond What an LLM Panel Expects: A Pre-registered Study on NAS-Bench-201 and HPOBench",
-      "url": "https://arxiv.org/abs/2611.00643",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00643"
-    },
-    {
-      "key": "2611.00515",
-      "name": "AStockArena",
-      "title": "AStockArena: Beyond Returns, Can We Entrust Real Capital to the Decisions of Financial Agents?",
-      "url": "https://arxiv.org/abs/2611.00515",
-      "first": "2026-11-03",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 8,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00515"
-    },
-    {
-      "key": "2611.00383",
-      "name": "LF-VideoQA",
-      "title": "LF-VideoQA: Evaluating Long-Video Understanding with Long-Form Theory-of-Mind Questions",
-      "url": "https://arxiv.org/abs/2611.00383",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00383"
-    },
-    {
-      "key": "2611.00325",
-      "name": "SAC-Bench",
-      "title": "One Waveform, Two Stories: Benchmarking Speech-Acoustic Conflict in Audio-Language Models",
-      "url": "https://arxiv.org/abs/2611.00325",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00325"
-    },
-    {
-      "key": "2611.00287",
-      "name": "VerusWeave",
-      "title": "VerusWeave: A Benchmark for Proof Repair in Concurrent Verus Programs",
-      "url": "https://arxiv.org/abs/2611.00287",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00287"
-    },
-    {
-      "key": "2611.00191",
-      "name": "MemU-Bench",
-      "title": "MemU-Bench: Benchmarking GUI Agents on Long-Horizon User Interactions",
-      "url": "https://arxiv.org/abs/2611.00191",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.00191"
-    },
-    {
-      "key": "2610.42004",
-      "name": "TradeWar",
-      "title": "TradeWar: A Benchmark for Execution-Grounded Trade Negotiation with Adaptive LLM Agents",
-      "url": "https://arxiv.org/abs/2610.42004",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.42004"
-    },
-    {
-      "key": "2610.41704",
-      "name": "GraphNIAH",
-      "title": "GraphNIAH: A Benchmark for Long-Context Reasoning over Real-World Graphs",
-      "url": "https://arxiv.org/abs/2610.41704",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.41704"
-    },
-    {
-      "key": "2610.41396",
-      "name": "ProSearch",
-      "title": "ProSearch: Benchmarking Multi-Constraint Protocol Retrieval in Experimental Science",
-      "url": "https://arxiv.org/abs/2610.41396",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.41396"
-    },
-    {
-      "key": "2610.41292",
-      "name": "GSR-Bench",
-      "title": "From Transcription to Reformulation: Defining and Benchmarking Grounded Generative Speech Recognition",
-      "url": "https://arxiv.org/abs/2610.41292",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.41292"
-    },
-    {
-      "key": "2610.41272",
-      "name": "ANGLER",
-      "title": "ANGLER: Verifier-Grounded Benchmarking with an Adaptive Attacker for Web Agents",
-      "url": "https://arxiv.org/abs/2610.41272",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.41272"
-    },
-    {
-      "key": "2610.41232",
-      "name": "TRIDENT and SHAKTI",
-      "title": "TRIDENT and SHAKTI: A Framework and Benchmark for Hindi AI-Text Detection",
-      "url": "https://arxiv.org/abs/2610.41232",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.41232"
-    },
-    {
-      "key": "2610.41168",
-      "name": "ROSTrans",
-      "title": "ROSTrans: Empirically Benchmarking LLMs for ROS1-to-ROS2 Migration",
-      "url": "https://arxiv.org/abs/2610.41168",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2610.41168"
     }
   ],
   "seen": {

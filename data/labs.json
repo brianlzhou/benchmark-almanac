@@ -125,6 +125,16 @@
     ]
   },
   {
+    "id": "github",
+    "name": "GitHub",
+    "country": "US",
+    "url": "https://github.com/features/copilot",
+    "aliases": [
+      "GitHub",
+      "GitHub Copilot"
+    ]
+  },
+  {
     "id": "nvidia",
     "name": "NVIDIA",
     "country": "US",

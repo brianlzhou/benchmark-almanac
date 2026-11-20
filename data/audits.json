@@ -238,5 +238,26 @@
         "see": "gsm1k"
       }
     ]
+  },
+  {
+    "id": "epoch-ai-arc-agi-3-review-2026-10-30",
+    "title": "ARC-AGI-3 benchmark review",
+    "author": "Epoch AI",
+    "date": "2026-10-30",
+    "url": "https://epoch.ai/benchmarks/arc-agi-3/review",
+    "source": "write-up",
+    "findings": [
+      {
+        "benchmark": "arc-agi-3",
+        "problems": [
+          "harness-differences",
+          "underspecified-tasks"
+        ],
+        "summary": "Epoch AI rates ARC-AGI-3 Flawed. It reports that the Standard harness under-elicits models, dropping their reasoning after every action and trimming history at 175,000 characters, and that the score rewards action efficiency although models are only told to win. It also reports that the harness, prompt and leaderboard entries carry no version numbers, and that 19 leaderboard entries cost more than the stated $10,000 cap.",
+        "numbers": "GPT-6 Astra (max) scores 62.7% with the Standard harness and 98.6% with the Provider Adapter harness.",
+        "status": "open",
+        "quote": "The ‘Standard’ harness substantially under-elicits models."
+      }
+    ]
   }
 ]

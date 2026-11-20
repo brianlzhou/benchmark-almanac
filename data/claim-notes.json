@@ -474,5 +474,505 @@
       "https://raw.githubusercontent.com/X-PLUG/WritingBench/main/README.md",
       "https://huggingface.co/spaces/WritingBench/WritingBench/raw/main/app.py"
     ]
+  },
+  {
+    "model": "claude-opus-4-7",
+    "benchmark": "officeqa-pro",
+    "cause": "setup",
+    "reason": "Anthropic reports exact-match accuracy with adaptive thinking at max effort, averaged over five trials. Databricks reports its separate Claude Agent SDK evaluation over the Treasury Bulletin PDF corpus.",
+    "evidence": [
+      "https://assets.claude.com/037f06850df7fbe871e206dad004c3db5fd50340.pdf",
+      "https://raw.githubusercontent.com/databricks/officeqa/HEAD/README.md"
+    ]
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "Anthropic reports its result with tools enabled. Scale reports a separate model evaluation, so these results do not share the same tool configuration.",
+    "evidence": [
+      "https://www.anthropic.com/claude-haiku-5-5",
+      "https://labs.scale.com/leaderboard/humanitys_last_exam"
+    ]
+  },
+  {
+    "model": "gpt-5-4",
+    "benchmark": "openai-mrcr-v2",
+    "cause": "setup",
+    "reason": "OpenAI ran MRCR at xhigh reasoning in a research environment. The compared Context Arena result uses medium reasoning in an independent run.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-5-4/"
+    ]
+  },
+  {
+    "model": "muse-ember",
+    "benchmark": "gdp-pdf",
+    "cause": "setup",
+    "reason": "Meta quotes Artificial Analysis, which uses its own document preparation, harness, and judge. The board shows the separate Surge AI evaluation.",
+    "evidence": [
+      "https://research.meta.ai/blog/muse-ember",
+      "https://artificialanalysis.ai/evaluations/gdp-pdf"
+    ]
+  },
+  {
+    "model": "gpt-5-2",
+    "benchmark": "swe-bench-pro",
+    "cause": "setup",
+    "reason": "OpenAI reports its public-set evaluation at xhigh reasoning in a research environment. Scale runs the public set separately with SWE-agent.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-5-2/"
+    ]
+  },
+  {
+    "model": "o4-mini",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "OpenAI used its internal editing scaffold on 477 validated tasks, averaging four attempts for pass@1. The board uses mini-SWE-agent on SWE-bench Verified.",
+    "evidence": [
+      "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf"
+    ]
+  },
+  {
+    "model": "claude-opus-5-5",
+    "benchmark": "chartography",
+    "cause": "setup",
+    "reason": "Anthropic reports Chartography with tools at max effort. The compared board configuration evaluates chart responses without tools.",
+    "evidence": [
+      "https://www.anthropic.com/claude-opus-5-5",
+      "https://raw.githubusercontent.com/surge-ai/chartography/main/README.md",
+      "https://deepmind.google/models/evals-methodology/gemini-4-carbon"
+    ]
+  },
+  {
+    "model": "claude-opus-4-6",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "Anthropic used web search, web fetch, code execution, and context compaction at max effort. Scale reports its separate model evaluation.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-opus-4-6",
+      "https://labs.scale.com/leaderboard/humanitys_last_exam"
+    ]
+  },
+  {
+    "model": "claude-fable-5-1",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "Anthropic reports its evaluation with tools enabled. Scale reports a separate evaluation at xhigh reasoning.",
+    "evidence": [
+      "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "https://labs.scale.com/leaderboard/humanitys_last_exam"
+    ]
+  },
+  {
+    "model": "devstral-2",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Mistral reports its own SWE-bench Verified evaluation. The board result comes from a separate mini-SWE-agent run.",
+    "evidence": [
+      "https://mistral.ai/news/devstral-2-vibe-cli/",
+      "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+    ]
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "Anthropic reports its result with tools enabled. Scale reports a separate evaluation at xhigh reasoning.",
+    "evidence": [
+      "https://www.anthropic.com/claude-sonnet-5-5",
+      "https://labs.scale.com/leaderboard/humanitys_last_exam"
+    ]
+  },
+  {
+    "model": "gpt-5-4",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "OpenAI reports Humanity’s Last Exam with tools at xhigh reasoning. Scale reports a separate model evaluation.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-5-4/",
+      "https://labs.scale.com/leaderboard/humanitys_last_exam"
+    ]
+  },
+  {
+    "model": "gpt-5-2-codex",
+    "benchmark": "swe-bench-pro",
+    "cause": "setup",
+    "reason": "OpenAI reports its public-set result at xhigh reasoning. Scale runs the public set separately with SWE-agent.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-5-2-codex/",
+      "https://openai.com/index/introducing-gpt-5-3-codex/"
+    ]
+  },
+  {
+    "model": "gpt-5-4-pro",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "OpenAI reports GPT-5.4 Pro with tools at xhigh reasoning. Scale reports a separate model evaluation.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-5-4/",
+      "https://labs.scale.com/leaderboard/humanitys_last_exam"
+    ]
+  },
+  {
+    "model": "gpt-5-mini",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "OpenAI used its internal bash and patch scaffold on 477 tasks at maximum trained verbosity. The board uses mini-SWE-agent at medium reasoning.",
+    "evidence": [
+      "https://cdn.openai.com/gpt-5-system-card.pdf"
+    ]
+  },
+  {
+    "model": "claude-opus-4",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Anthropic sampled parallel attempts and used an internal scoring model to select a patch. The board uses mini-SWE-agent.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-4",
+      "https://www.swebench.com/"
+    ]
+  },
+  {
+    "model": "qwen3-5-2b",
+    "benchmark": "mmlu-pro",
+    "cause": "setup",
+    "reason": "Qwen reports 66.5% with thinking enabled. The board lists the self-reported 55.3% result from the model card's non-thinking mode.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen3.5-2B",
+      "https://huggingface.co/datasets/TIGER-Lab/mmlu_pro_leaderboard_submission/raw/main/results.csv"
+    ]
+  },
+  {
+    "model": "o3",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "OpenAI used an internal editing scaffold on 477 validated tasks, averaging four attempts for pass@1. The board uses mini-SWE-agent.",
+    "evidence": [
+      "https://openai.com/index/introducing-o3-and-o4-mini/",
+      "https://cdn.openai.com/pdf/2221c875-02dc-4789-800b-e7758f3722c1/o3-and-o4-mini-system-card.pdf"
+    ]
+  },
+  {
+    "model": "qwen3-5-2b",
+    "benchmark": "global-piqa",
+    "cause": "setup",
+    "reason": "Qwen used thinking mode with temperature 1.0 and top_p 0.95. The benchmark authors used LM Evaluation Harness with temperature 0.9, top_p 0.8, and a 2,048 token response limit.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen3.5-2B",
+      "https://raw.githubusercontent.com/mrlbenchmarks/global-piqa/main/eval_results/aggregated_by_split.csv",
+      "https://arxiv.org/html/2510.24081v2"
+    ]
+  },
+  {
+    "model": "chatgpt-agent",
+    "benchmark": "spreadsheetbench",
+    "cause": "setup",
+    "reason": "OpenAI reports 45.5% with direct access to the spreadsheet files. The board's 35.3% row excludes that access and lists the 45.5% result separately as ChatGPT Agent w/ .xlsx.",
+    "evidence": [
+      "https://openai.com/index/introducing-chatgpt-agent/",
+      "https://spreadsheetbench.github.io/data/leaderboard-v1-full.json"
+    ]
+  },
+  {
+    "model": "gpt-6-astra",
+    "benchmark": "sre-bench",
+    "cause": "setup",
+    "reason": "OpenAI reports its own pass@1 run with an output token budget curve. Vals evaluates agents in a shared shell loop with its reverse engineering toolkit.",
+    "evidence": [
+      "https://deploymentsafety.openai.com/gpt-6-astra/gpt-6-astra.pdf",
+      "https://www.vals.ai/benchmarks/srebench"
+    ]
+  },
+  {
+    "model": "tencent-hy4-preview",
+    "benchmark": "onemillion-bench",
+    "cause": "setup",
+    "reason": "Tencent ran OneMillionBench with tools in its internal agentic search harness. The board lists plain model runs.",
+    "evidence": [
+      "https://huggingface.co/tencent/Hy4-preview",
+      "https://huggingface.co/tencent/Hy4-preview/resolve/main/assets/benchmark-appendix.jpg"
+    ]
+  },
+  {
+    "model": "kimi-k2-5",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "Moonshot reports HLE with tools enabled. The board entry is a separate model evaluation and does not reproduce that tool enabled run.",
+    "evidence": [
+      "https://huggingface.co/moonshotai/Kimi-K2.5"
+    ]
+  },
+  {
+    "model": "qwen3-235b-a22b",
+    "benchmark": "creative-writing-v3",
+    "cause": "setup",
+    "reason": "Qwen evaluated thinking mode with temperature 0.6 and a presence penalty of 1.5. The live board reports its own separately generated and judged writing samples.",
+    "evidence": [
+      "https://arxiv.org/abs/2505.09388",
+      "https://arxiv.org/html/2505.09388"
+    ]
+  },
+  {
+    "model": "kimi-k2-jul-2025",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Moonshot used bash and editor tools for single attempt patches. The board uses mini-SWE-agent.",
+    "evidence": [
+      "https://huggingface.co/moonshotai/Kimi-K2-Instruct"
+    ]
+  },
+  {
+    "model": "gpt-4-mar-2023",
+    "benchmark": "humaneval",
+    "cause": "setup",
+    "reason": "OpenAI reports the March 2023 zero shot evaluation. EvalPlus identifies its 88.4 result as GPT-4 from May 2023 with prompting.",
+    "evidence": [
+      "https://cdn.openai.com/papers/gpt-4.pdf",
+      "https://evalplus.github.io/results.json"
+    ]
+  },
+  {
+    "model": "minimax-m2-1",
+    "benchmark": "terminal-bench-2-0",
+    "cause": "setup",
+    "reason": "MiniMax used Claude Code, removed timeout limits, and averaged four runs after fixing environment issues. The board uses Terminus 2.",
+    "evidence": [
+      "https://huggingface.co/MiniMaxAI/MiniMax-M2.1"
+    ]
+  },
+  {
+    "model": "claude-opus-4-7",
+    "benchmark": "humanitys-last-exam",
+    "cause": "setup",
+    "reason": "Anthropic used web search, web fetch, code execution, and max reasoning effort with a one million token cap. Scale reports a separate evaluation.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-opus-4-7",
+      "https://anthropic.com/claude-opus-4-7-system-card"
+    ]
+  },
+  {
+    "model": "claude-fable-5-2",
+    "benchmark": "arc-agi-3",
+    "cause": "setup",
+    "reason": "Anthropic quotes the Standard harness at high effort. The selected board score uses the Provider Adapter harness at high effort.",
+    "evidence": [
+      "https://assets.claude.com/27d60918d218125e7504bc7354c4b4626ec56b11.pdf"
+    ]
+  },
+  {
+    "model": "inkling-2-small",
+    "benchmark": "gdp-pdf",
+    "cause": "setup",
+    "reason": "Thinking Machines quotes Artificial Analysis results for GDP.pdf. The selected board score comes from Surge's own evaluation at xhigh effort.",
+    "evidence": [
+      "https://thinkingmachines.ai/news/inkling-2-small/"
+    ]
+  },
+  {
+    "model": "kimi-k3",
+    "benchmark": "zerobench",
+    "cause": "setup",
+    "reason": "Moonshot's 23.0 is the result without Python tools. The selected board result is its 41.0 run with Python tools.",
+    "evidence": [
+      "https://huggingface.co/moonshotai/Kimi-K3"
+    ]
+  },
+  {
+    "model": "claude-opus-4-6",
+    "benchmark": "mcp-atlas",
+    "cause": "setup",
+    "reason": "Anthropic reported its February evaluation. Scale later changed the judge, added tool retries, replaced the 20 turn limit with 100 tool calls, and rescored models.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-opus-4-6",
+      "https://www.anthropic.com/claude-opus-4-6-system-card",
+      "https://labs.scale.com/leaderboard/mcp_atlas"
+    ]
+  },
+  {
+    "model": "claude-sonnet-4-5",
+    "benchmark": "aime-2025",
+    "cause": "setup",
+    "reason": "Anthropic allowed Python execution and 64K reasoning tokens. The MathArena entry is its thinking model evaluation.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-sonnet-4-5",
+      "https://assets.claude.com/b175666ddfa1ba0bc123826dc2537e59e810c021.png"
+    ]
+  },
+  {
+    "model": "claude-sonnet-4",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Anthropic sampled parallel attempts and selected a patch with an internal scoring model. The board uses mini-SWE-agent.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-4"
+    ]
+  },
+  {
+    "model": "gpt-5-6-luna",
+    "benchmark": "genebench-pro",
+    "cause": "setup",
+    "reason": "OpenAI's launch table reports the xhigh-era Luna result at 10.8%. The board's Pro row is a separate higher reasoning setting.",
+    "evidence": [
+      "https://openai.com/index/gpt-5-6/"
+    ]
+  },
+  {
+    "model": "claude-fable-5-1",
+    "benchmark": "terminal-bench-science",
+    "cause": "setup",
+    "reason": "Anthropic used Claude Code in bare mode and averaged ten trials per task. The board score averages three trials per task.",
+    "evidence": [
+      "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "https://assets.claude.com/0339e6a7c5c7b87f5c07798616dc32c215d14235.pdf"
+    ]
+  },
+  {
+    "model": "qwen3-5-0-8b",
+    "benchmark": "mmlu-pro",
+    "cause": "setup",
+    "reason": "Qwen reports 42.3 with thinking enabled. The board's 29.7 matches the card's nonthinking result.",
+    "evidence": [
+      "https://huggingface.co/Qwen/Qwen3.5-0.8B"
+    ]
+  },
+  {
+    "model": "gpt-5-5",
+    "benchmark": "openai-mrcr-v2",
+    "cause": "setup",
+    "reason": "OpenAI ran the 128K to 256K bin at xhigh effort in its research environment. Context Arena reports independent production runs, with high effort selected here.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-5-5/"
+    ]
+  },
+  {
+    "model": "beam-1-0",
+    "benchmark": "world-class-bio-securebio",
+    "cause": "setup",
+    "reason": "Reflection scored three runs with a majority vote from three judge models. SecureBio describes grading each answer with one AI model.",
+    "evidence": [
+      "https://reflection.ai/documents/beam-model-tech-report",
+      "https://securebio.org/benchmarks/details/?benchmark=abc-bench"
+    ]
+  },
+  {
+    "model": "gpt-oss-20b",
+    "benchmark": "gpqa-diamond",
+    "cause": "setup",
+    "reason": "OpenAI reports its evaluation at high reasoning effort without tools. The paired Epoch score uses medium reasoning effort.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-oss/",
+      "https://arxiv.org/html/2508.10925"
+    ]
+  },
+  {
+    "model": "gpt-5-6-sol",
+    "benchmark": "automationbench",
+    "cause": "setup",
+    "reason": "OpenAI published its score before Zapier updated the tasks and evaluation framework in July 2026. The current board uses refreshed runs on AutomationBench 1.0.6.",
+    "evidence": [
+      "https://openai.com/index/gpt-5-6/",
+      "https://zapier.com/benchmarks",
+      "https://raw.githubusercontent.com/zapier/AutomationBench/main/CHANGELOG.md"
+    ]
+  },
+  {
+    "model": "claude-sonnet-4-5",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "Anthropic sampled multiple attempts and used regression tests and an internal scoring model to select a patch. The board uses mini-SWE-agent.",
+    "evidence": [
+      "https://www.anthropic.com/news/claude-sonnet-4-5"
+    ]
+  },
+  {
+    "model": "gpt-5-1",
+    "benchmark": "swe-bench-verified",
+    "cause": "setup",
+    "reason": "OpenAI used high reasoning effort and a harness with a JSON apply_patch tool. The board uses mini-SWE-agent at medium reasoning effort.",
+    "evidence": [
+      "https://openai.com/index/gpt-5-1-for-developers/"
+    ]
+  },
+  {
+    "model": "llama-3-1-70b",
+    "benchmark": "berkeley-function-calling-leaderboard-bfcl",
+    "cause": "setup",
+    "reason": "Meta reports BFCL V1 from July 2024. The board scores the current version, with more and harder categories.",
+    "evidence": [
+      "https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md"
+    ]
+  },
+  {
+    "model": "llama-3-1-8b",
+    "benchmark": "berkeley-function-calling-leaderboard-bfcl",
+    "cause": "setup",
+    "reason": "Meta reports BFCL V1 from July 2024. The board scores the current version, with more and harder categories.",
+    "evidence": [
+      "https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md"
+    ]
+  },
+  {
+    "model": "gemini-robotics-er-1-6",
+    "benchmark": "instrument-reading-google",
+    "cause": "setup",
+    "reason": "Google reports 93 on the ER 1.6 instrument reading evaluation with agentic vision. The ER 2 comparison chart reports 52.8 on generalized instrument reading.",
+    "evidence": [
+      "https://deepmind.google/blog/gemini-robotics-er-1-6/",
+      "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/ER_metrics_comparison_Chart.width-1200.format-webp.webp"
+    ]
+  },
+  {
+    "model": "gpt-6-1-sol",
+    "benchmark": "gdp-pdf",
+    "cause": "setup",
+    "reason": "The lab point is labeled high reasoning effort. Surge reports 51.6 at max reasoning effort. The launch article describes the effort comparison, but its text omits the individual high effort score.",
+    "evidence": [
+      "https://openai.com/index/introducing-gpt-6-1-sol/",
+      "https://surgehq.ai/benchmarks/gdp-pdf"
+    ]
+  },
+  {
+    "model": "falcon-h1r-7b",
+    "benchmark": "hmmt-2025",
+    "cause": "setup",
+    "reason": "Falcon estimated pass@1 from 16 responses per problem on the February tournament. MathArena averaged four responses per problem.",
+    "evidence": [
+      "https://falcon-lm.github.io/blog/falcon-h1r-7b/",
+      "https://matharena.ai/?comp=hmmt--hmmt_feb_2025",
+      "https://arxiv.org/html/2601.02346"
+    ]
+  },
+  {
+    "model": "gemma-2b",
+    "benchmark": "mbpp",
+    "cause": "setup",
+    "reason": "Google used a three shot prompt. EvalPlus evaluated the base model with greedy direct code completion on 399 sanitized tasks. Google does not identify the exact split for 29.2.",
+    "evidence": [
+      "https://arxiv.org/pdf/2403.08295v1",
+      "https://evalplus.github.io/leaderboard.html",
+      "https://evalplus.github.io/results.json"
+    ]
+  },
+  {
+    "model": "kimi-k3-1-pro",
+    "benchmark": "gdp-pdf",
+    "cause": "setup",
+    "reason": "Moonshot supplied page images resized to 1,152 pixels and interleaved them with extracted text. Surge’s published harness attaches the PDF itself and requests a single response without tools.",
+    "evidence": [
+      "https://www.kimi.com/blog/kimi-k3-1-pro",
+      "https://surgehq.ai/benchmarks/gdp-pdf",
+      "https://raw.githubusercontent.com/surge-ai/gdp-pdf/main/src/gdp_pdf/task.py"
+    ]
+  },
+  {
+    "model": "deepseek-v4-pro",
+    "benchmark": "matharena-apex-imo-usamo",
+    "cause": "setup",
+    "reason": "DeepSeek asked its max effort model for a rigorous proof. MathArena’s Apex configuration asks for a boxed final answer.",
+    "evidence": [
+      "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "https://matharena.ai/?comp=apex--apex_2025",
+      "https://arxiv.org/pdf/2606.19348"
+    ]
   }
 ]

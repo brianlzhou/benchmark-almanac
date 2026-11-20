@@ -1157,15 +1157,15 @@
       },
       {
         "benchmark": "humaneval",
-        "score": 41.5,
+        "score": null,
         "unit": "%",
-        "as_written": "HumanEval"
+        "as_written": "HumanEval 41.5 is the base Qwen1.5-72B, so it is not recorded for the chat model"
       },
       {
         "benchmark": "mbpp",
-        "score": 53.4,
+        "score": null,
         "unit": "%",
-        "as_written": "MBPP"
+        "as_written": "MBPP 53.4 is the base Qwen1.5-72B, so it is not recorded for the chat model"
       },
       {
         "benchmark": "big-bench-hard",
@@ -1643,6 +1643,7 @@
       },
       {
         "benchmark": "gpqa-diamond",
+        "measure": "maj32-5shot",
         "score": 59.5,
         "unit": "%",
         "as_written": "GPQA (Diamond) (Maj@32 5-shot CoT)"
@@ -2638,7 +2639,7 @@
         "as_written": "Multi-Translation"
       },
       {
-        "benchmark": "mmmlu",
+        "benchmark": "okapi-mmlu",
         "score": 78.0,
         "unit": "%",
         "as_written": "M-MMLU (5-shot)"
@@ -2669,6 +2670,7 @@
     "results": [
       {
         "benchmark": "gpqa-diamond",
+        "measure": "maj32-5shot",
         "score": 67.2,
         "unit": "%",
         "as_written": "GPQA (Diamond) (Maj@32 5-shot CoT)"
@@ -3652,7 +3654,7 @@
     "notes": "Addendum Tables 1-5 and 7 (text); Haiku-only Table 8 skipped. Best configuration recorded: OSWorld 50 steps (15 steps 14.9), MMLU 5-shot CoT (0-shot CoT 89.3), AIME 2024 Maj@64 (0-shot CoT 16.0). New in this card: SWE-bench Verified, TAU-bench, OSWorld, MMLU-Pro, AIME 2024, IFEval. 3.5 Haiku shared this release and has no separate card.",
     "results": [
       {
-        "benchmark": "osworld-verified",
+        "benchmark": "osworld",
         "score": 22.0,
         "unit": "%",
         "as_written": "OSWorld (screenshot only, 50 steps) Overall"
@@ -4301,15 +4303,15 @@
       },
       {
         "benchmark": "humaneval",
-        "score": 65.2,
+        "score": null,
         "unit": "%",
-        "as_written": "HumanEval (Pass@1)"
+        "as_written": "HumanEval (Pass@1) 65.2 is DeepSeek-V3-Base, in the base model table, so it is not recorded for the chat model"
       },
       {
         "benchmark": "mbpp",
-        "score": 75.4,
+        "score": null,
         "unit": "%",
-        "as_written": "MBPP (Pass@1)"
+        "as_written": "MBPP (Pass@1) 75.4 is DeepSeek-V3-Base, in the base model table, so it is not recorded for the chat model"
       },
       {
         "benchmark": "cruxeval",
@@ -5510,7 +5512,7 @@
   {
     "id": "deepseek-deepseek-v3-0324-2025-03-24",
     "lab": "deepseek",
-    "model": "deepseek-v3",
+    "model": "deepseek-v3-mar-2025",
     "date": "2025-03-24",
     "title": "DeepSeek-V3-0324 model card",
     "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3-0324",
@@ -5525,9 +5527,9 @@
       },
       {
         "benchmark": "gpqa-diamond",
-        "score": 68.4,
+        "score": 59.1,
         "unit": "%",
-        "as_written": "GPQA"
+        "as_written": "GPQA Diamond 59.1 (the original DeepSeek-V3 card. 68.4 is DeepSeek-V3-0324)"
       },
       {
         "benchmark": "aime-2024",
@@ -6623,6 +6625,7 @@
       },
       {
         "benchmark": "swe-bench-verified",
+        "measure": "multi-attempt",
         "score": 67.2,
         "unit": "%",
         "as_written": "SWE-bench verified, multiple attempts (single attempt = 59.6%)"
@@ -7313,9 +7316,9 @@
       },
       {
         "benchmark": "hmmt-2025",
-        "score": 100,
+        "score": null,
         "unit": "%",
-        "as_written": "HMMT Harvard-MIT mathematics tournament, GPT-5 pro (python)"
+        "as_written": "HMMT Harvard-MIT mathematics tournament, GPT-5 pro (python): 100% is GPT-5 Pro with Python, so it is not recorded for GPT-5"
       },
       {
         "benchmark": "gpqa-diamond",
@@ -7780,7 +7783,7 @@
         "as_written": "Visual reasoning MMMU (validation)"
       },
       {
-        "benchmark": "vals-finance-agent",
+        "benchmark": "vals-finance-agent-v1",
         "score": 55.3,
         "unit": "%",
         "as_written": "Financial analysis Finance Agent"
@@ -9206,7 +9209,7 @@
   {
     "id": "qwen-qwen3-max-thinking-2026-01-23",
     "lab": "qwen",
-    "model": "qwen3-max",
+    "model": "qwen3-max-jan-2026",
     "date": "2026-01-23",
     "title": "Pushing Qwen3-Max-Thinking Beyond its Limits (blog)",
     "url": "https://qwen.ai/blog?id=qwen3-max-thinking",
@@ -10997,6 +11000,7 @@
       },
       {
         "benchmark": "openai-mrcr-v2",
+        "measure": "8n-64k-128k",
         "score": 47.7,
         "unit": "%",
         "as_written": "OpenAI MRCR v2 8-needle, 64K-128K"
@@ -13973,6 +13977,7 @@
     "results": [
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 53.6,
         "unit": "%",
         "as_written": "Agents' Last Exam (Sol, xhigh, code mode)"
@@ -14711,6 +14716,7 @@
       },
       {
         "benchmark": "biomysterybench",
+        "measure": "human-solvable",
         "score": 90.1,
         "unit": "%",
         "as_written": "Best of Biology BioMysteryBench (hard) / Biology BioMysteryBench (human solved)"
@@ -14873,6 +14879,7 @@
       },
       {
         "benchmark": "androidbench",
+        "measure": "public-95",
         "score": 75.1,
         "unit": "%",
         "as_written": "AndroidBench"
@@ -14930,6 +14937,13 @@
         "score": 27.0,
         "unit": "%",
         "as_written": "Agents' Last Exam (Pass / Score) 27.0 / 52.4"
+      },
+      {
+        "benchmark": "agents-last-exam",
+        "score": 52.4,
+        "unit": "%",
+        "as_written": "Agents' Last Exam (Pass / Score) 27.0 / 52.4",
+        "measure": "score"
       },
       {
         "benchmark": "automationbench",
@@ -15130,7 +15144,7 @@
         "as_written": "QwenBlenderBench"
       },
       {
-        "benchmark": "parametric-cad-bench",
+        "benchmark": "parametric-cad-bench-v1",
         "score": null,
         "unit": "%",
         "as_written": "Parametric CAD Bench"
@@ -15911,6 +15925,7 @@
       },
       {
         "benchmark": "biomysterybench",
+        "measure": "human-solvable",
         "score": 88.8,
         "unit": "%",
         "as_written": "Best of BioMysteryBench, Human Solvable / BioMysteryBench, Human Difficult"
@@ -15959,6 +15974,7 @@
       },
       {
         "benchmark": "automationbench",
+        "measure": "public-v3",
         "score": 49.6,
         "unit": "%",
         "as_written": "AutomationBench (E2E business workflows)"
@@ -16031,6 +16047,7 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 59.3,
         "unit": "%",
         "as_written": "Agents' Last Exam"
@@ -16457,6 +16474,7 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 56.4,
         "unit": "%",
         "as_written": "Agents' Last Exam V1 (GPT-6 Sol max)"
@@ -17314,7 +17332,7 @@
         "as_written": "Virology Capabilities Test, accuracy 0.54, Grok 4.2 SA, Table 4"
       },
       {
-        "benchmark": "protocolqa-open-ended-xai",
+        "benchmark": "lab-bench-protocolqa",
         "score": 79.0,
         "unit": "%",
         "as_written": "ProtocolQA, accuracy 0.79, Grok 4.2 SA, Table 4"
@@ -17537,9 +17555,24 @@
       },
       {
         "benchmark": "atomic-challenges-irregular",
+        "measure": "vulnerability",
         "score": 97.0,
         "unit": "%",
         "as_written": "Atomic Challenges, vulnerability research and exploitation 97%, network attack simulation 98%, evasion 63%"
+      },
+      {
+        "benchmark": "atomic-challenges-irregular",
+        "score": 98,
+        "unit": "%",
+        "as_written": "Atomic Challenges, network attack simulation 98%",
+        "measure": "network"
+      },
+      {
+        "benchmark": "atomic-challenges-irregular",
+        "score": 63,
+        "unit": "%",
+        "as_written": "Atomic Challenges, evasion 63%",
+        "measure": "evasion"
       },
       {
         "benchmark": "expert-swe-openai",
@@ -17573,6 +17606,7 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 61.6,
         "unit": "%",
         "as_written": "Agents’ Last Exam, Muse Ember max reasoning"
@@ -18047,6 +18081,7 @@
       },
       {
         "benchmark": "mseb",
+        "measure": "speech-text-retrieval",
         "score": 73.9,
         "unit": "score",
         "as_written": "Gemini Embedding 2, speech to text MSEB mRR@10"
@@ -19840,6 +19875,13 @@
         "as_written": "Agents Last Exam (Pass@1 / Score) 19.5 / 41.4"
       },
       {
+        "benchmark": "agents-last-exam",
+        "score": 41.4,
+        "unit": "%",
+        "as_written": "Agents Last Exam (Pass@1 / Score) 19.5 / 41.4",
+        "measure": "score"
+      },
+      {
         "benchmark": "doubao-multi-turn-bench-bytedance",
         "score": 52.5,
         "unit": "%",
@@ -20927,6 +20969,7 @@
       },
       {
         "benchmark": "uno-bench",
+        "measure": "omni-mc",
         "score": 49.9,
         "unit": "%",
         "as_written": "UNO-Bench"
@@ -21356,6 +21399,13 @@
         "score": 24.3,
         "unit": "%",
         "as_written": "Agents' Last Exam Pass@1 24.3 Score 51.2"
+      },
+      {
+        "benchmark": "agents-last-exam",
+        "score": 51.2,
+        "unit": "%",
+        "as_written": "Agents' Last Exam Pass@1 24.3 Score 51.2",
+        "measure": "score"
       },
       {
         "benchmark": "toolathlon-verified",
@@ -21866,6 +21916,13 @@
         "score": 20.4,
         "unit": "%",
         "as_written": "Frontier agentic tasks Agents' Last Exam Pass@1 20.4 Score 42.9"
+      },
+      {
+        "benchmark": "agents-last-exam",
+        "score": 42.9,
+        "unit": "%",
+        "as_written": "Frontier agentic tasks Agents' Last Exam Pass@1 20.4 Score 42.9",
+        "measure": "score"
       },
       {
         "benchmark": "ifbench",
@@ -36981,11 +37038,11 @@
     "id": "upstage-solar-open-100b-2025-12-31",
     "lab": "upstage",
     "model": "solar-open-100b",
-    "date": "2025-12-31",
+    "date": "2026-01-05",
     "title": "Solar-Open-100B model card (Hugging Face)",
     "url": "https://huggingface.co/upstage/Solar-Open-100B",
     "tier": "open-weights",
-    "notes": "A 102.6B total, 12B active MoE trained from scratch, part of Korea's sovereign AI project. An early card revision set the official release for 2025-12-31. The technical report is arXiv 2601.07022. Not recorded: Ko-AIME 2024 (in-house) 80.3, Ko-IFEval 87.5 and Ko Arena Hard v2 (in-house) 79.9, which have no matching record.",
+    "notes": "A 102.6B total, 12B active MoE trained from scratch, part of Korea's sovereign AI project. An early card revision set the official release for 2025-12-31, with scores still marked to come. The scores first appeared in the January 5, 2026 revision, so the card is dated then. The technical report is arXiv 2601.07022. Not recorded: Ko-AIME 2024 (in-house) 80.3, Ko-IFEval 87.5 and Ko Arena Hard v2 (in-house) 79.9, which have no matching record.",
     "results": [
       {
         "benchmark": "kmmlu",
@@ -38399,6 +38456,7 @@
       },
       {
         "benchmark": "webtailbench",
+        "measure": "process-success",
         "score": 38.4,
         "unit": "%",
         "as_written": "WebTailBench"
@@ -39101,6 +39159,7 @@
       },
       {
         "benchmark": "ruler",
+        "measure": "128k",
         "score": 88.2,
         "unit": "%",
         "as_written": "RULER (non-reasoning)"
@@ -39449,6 +39508,7 @@
       },
       {
         "benchmark": "ifeval",
+        "measure": "instruction-loose",
         "score": 91.5,
         "unit": "%",
         "as_written": "IFEval"
@@ -39719,6 +39779,7 @@
       },
       {
         "benchmark": "agents-last-exam-1-1",
+        "measure": "score",
         "score": 77.4,
         "unit": "%",
         "as_written": "Agents' Last Exam v1.1 (Score)"
@@ -40547,6 +40608,7 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 50.89,
         "unit": "%",
         "as_written": "Agents' Last Exam (GPT-6 Luna max)"
@@ -41087,6 +41149,7 @@
     "results": [
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 50.4,
         "unit": "%",
         "as_written": "Agents' Last Exam"
@@ -41231,6 +41294,7 @@
       },
       {
         "benchmark": "openai-mrcr-v2",
+        "measure": "8n-256k-512k",
         "score": 89.6,
         "unit": "%",
         "as_written": "OpenAI MRCR v2 8-needle 256K-512K 89.6 (512K-1M 72.5)"
@@ -41273,6 +41337,7 @@
     "results": [
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 50.3,
         "unit": "%",
         "as_written": "Agents' Last Exam"
@@ -42239,6 +42304,7 @@
       },
       {
         "benchmark": "openai-mrcr-v2",
+        "measure": "8n-64k-128k",
         "score": 44.2,
         "unit": "%",
         "as_written": "OpenAI MRCR v2 8-needle 64K-128K"
@@ -43157,9 +43223,16 @@
       },
       {
         "benchmark": "flteval",
+        "measure": "pass-8",
         "score": 43.2,
         "unit": "score",
         "as_written": "FLTEval pass@8 43.2 (pass@1 28.9)"
+      },
+      {
+        "benchmark": "flteval",
+        "score": 28.9,
+        "unit": "score",
+        "as_written": "FLTEval pass@1 28.9"
       }
     ]
   },
@@ -43175,9 +43248,16 @@
     "results": [
       {
         "benchmark": "flteval",
+        "measure": "pass-16",
         "score": 31.9,
         "unit": "score",
         "as_written": "FLTEval score, Leanstral pass@16 (pass@1 21.9)"
+      },
+      {
+        "benchmark": "flteval",
+        "score": 21.9,
+        "unit": "score",
+        "as_written": "FLTEval score, Leanstral pass@1 21.9"
       }
     ]
   },
@@ -48113,9 +48193,16 @@
       },
       {
         "benchmark": "apex-accounting",
+        "measure": "pass-1",
         "score": 14.5,
         "unit": "%",
         "as_written": "Apex-Accounting v1.1 pass@1 (mean score 62.0)"
+      },
+      {
+        "benchmark": "apex-accounting",
+        "score": 62,
+        "unit": "%",
+        "as_written": "Apex-Accounting v1.1 mean score 62.0 (pass@1 14.5)"
       },
       {
         "benchmark": "vals-legal-index",
@@ -48359,6 +48446,7 @@
       },
       {
         "benchmark": "vals-tax-agent-bench",
+        "measure": "weighted",
         "score": 65.8,
         "unit": "%",
         "as_written": "Tax Agent Bench, 65.8%"
@@ -51767,12 +51855,14 @@
       },
       {
         "benchmark": "agents-last-exam-1-1",
+        "measure": "score",
         "score": 71.6,
         "unit": "%",
         "as_written": "Agents' Last Exam v1.1 (Score)"
       },
       {
         "benchmark": "automationbench",
+        "measure": "objective",
         "score": 76.1,
         "unit": "%",
         "as_written": "AutomationBench-AA"
@@ -52523,6 +52613,7 @@
     "results": [
       {
         "benchmark": "agents-last-exam-1-1",
+        "measure": "score",
         "score": 78.3,
         "unit": "%",
         "as_written": "Agents' Last Exam v1.1 (GPT-6.2 Astra Xhigh, 77.6 at Max)"
@@ -52625,6 +52716,7 @@
     "results": [
       {
         "benchmark": "agents-last-exam-1-1",
+        "measure": "score",
         "score": 73.0,
         "unit": "%",
         "as_written": "Agents' Last Exam v1.1 (GPT-6.2 Sol Max)"
@@ -52706,6 +52798,139 @@
         "score": 75.6,
         "unit": "%",
         "as_written": "PatchBench (GPT-6.2 Sol Max)"
+      }
+    ]
+  },
+  {
+    "id": "google-gemini-4-neon-2026-11-18",
+    "lab": "google",
+    "model": "gemini-4-neon",
+    "date": "2026-11-18",
+    "title": "Introducing Gemini 4 Neon (Google blog)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+    "tier": "mid",
+    "notes": "Scores come from the evaluation table image (gemini_4_neon_table), which matches the model card. The AA Coding Agent Index comes from the text and Gray Swan IPI from its chart (k=15 attempts). SWE-sweep is the mini-SWE harness score, and 39.0% with Google Antigravity as the harness. The AA Intelligence Index is at xhigh thinking. In Google's testing Neon refused 1.98% of Terminal-Bench 4.0 tasks, cheated on 0.0% of them, and took shortcuts on 2.45% of its coding cheating evaluation. Priced at $3 and $15 per million input and output tokens, with a 1M-token context. Neon for cyber goes to defenders in the Fairwind Program. Methodology is at deepmind.google/models/evals-methodology/gemini-4-neon.",
+    "results": [
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 61,
+        "unit": "index",
+        "as_written": "AA Index v5.0.1"
+      },
+      {
+        "benchmark": "vals-index",
+        "score": 70.9,
+        "unit": "%",
+        "as_written": "Vals Index v2.2"
+      },
+      {
+        "benchmark": "cursorbench-4-1",
+        "score": 65.4,
+        "unit": "%",
+        "as_written": "CursorBench 4.1 (Score)"
+      },
+      {
+        "benchmark": "terminal-bench-4-1",
+        "score": 65.2,
+        "unit": "%",
+        "as_written": "Terminal-bench 4.1 (Cheating adjusted accuracy)"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 46.2,
+        "unit": "%",
+        "as_written": "FrontierCode 2.0 (Main score), at the default high thinking level"
+      },
+      {
+        "benchmark": "swe-sweep",
+        "score": 12.8,
+        "unit": "%",
+        "as_written": "SWE-sweep (Mini-SWE harness). 39.0% with the provider harness, Google Antigravity"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 56.3,
+        "unit": "%",
+        "as_written": "AutomationBench"
+      },
+      {
+        "benchmark": "agents-last-exam-1-1",
+        "measure": "score",
+        "score": 75.8,
+        "unit": "%",
+        "as_written": "Agents' Last Exam v1.1"
+      },
+      {
+        "benchmark": "riemann-bench",
+        "score": 84.0,
+        "unit": "%",
+        "as_written": "RiemannBench"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 70.5,
+        "unit": "%",
+        "as_written": "Terminal-Bench-Science 0.1"
+      },
+      {
+        "benchmark": "hle-diamond",
+        "score": 71.3,
+        "unit": "%",
+        "as_written": "HLE-Diamond"
+      },
+      {
+        "benchmark": "mka",
+        "score": 56.5,
+        "unit": "%",
+        "as_written": "MKA (Climb WSR)"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 73.5,
+        "unit": "%",
+        "as_written": "Chartography"
+      },
+      {
+        "benchmark": "lvbench",
+        "score": 89.0,
+        "unit": "%",
+        "as_written": "LVBench"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 95.2,
+        "unit": "%",
+        "as_written": "GraphWalks (256k to 1M, BFS (F1))"
+      },
+      {
+        "benchmark": "cwe-bench-2",
+        "score": 70.7,
+        "unit": "%",
+        "as_written": "CWE-Bench v2"
+      },
+      {
+        "benchmark": "sec-bench-pro",
+        "score": 90.5,
+        "unit": "%",
+        "as_written": "SEC-bench Pro"
+      },
+      {
+        "benchmark": "webexploitbench",
+        "score": 51.26,
+        "unit": "%",
+        "as_written": "WebExploitBench v1.2 (51.26% in the text, 51.3% in the table)"
+      },
+      {
+        "benchmark": "artificial-analysis-coding-agent-index",
+        "score": 58.6,
+        "unit": "index",
+        "as_written": "Artificial Analysis Coding Agent Index, #1 overall (58.6), text"
+      },
+      {
+        "benchmark": "gray-swan-ipi-arena-benchmark",
+        "score": 0.0,
+        "unit": "%",
+        "as_written": "Gray Swan IPI, attack success rate at k=15 attempts 0.0% (lower is better), chart"
       }
     ]
   }

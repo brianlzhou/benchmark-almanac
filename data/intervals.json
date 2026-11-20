@@ -55,6 +55,14 @@
       "url": "https://roger-creus.github.io/agentick/board/",
       "quote": "Score 95% CI"
     },
+    "ai-gamestore": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "implied",
+      "url": "https://aigamestore.org/leaderboard",
+      "quote": "Median [95% CI]"
+    },
     "aime-2025": {
       "kind": "confidence interval",
       "level": 95,
@@ -1360,6 +1368,31 @@
       "says": "implied",
       "url": "https://github.com/neelnanda-io/nocot-bench",
       "quote": "each with its 95% interval and rank, and, where we measured it, the same model with filler tokens : the recipe used, the gain, the gain's 95% interval"
+    },
+    "olam-arena-codenames": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://olamlabs.ai/evaluations",
+      "quote": "<span class=\"ol-evci\" title=\"95% interval\">"
+    },
+    "olam-arena-risk": {
+      "kind": "confidence interval",
+      "level": 95,
+      "by": "importer",
+      "says": "stated",
+      "url": "https://olamlabs.ai/evaluations",
+      "quote": "<span class=\"ol-evci\" title=\"95% interval\">"
+    },
+    "olam-arena-social-poker": {
+      "kind": "confidence interval",
+      "level": 95,
+      "method": "percentile bootstrap over whole tables",
+      "by": "importer",
+      "says": "stated",
+      "url": "https://olamlabs.ai/research/multi-agent-arena",
+      "quote": "95% intervals are percentile bootstraps over whole-table resamples, refitting the full rating model each draw."
     },
     "pact-lech-mazur": {
       "kind": "confidence interval",
