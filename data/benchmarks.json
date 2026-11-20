@@ -63126,7 +63126,7 @@
     "scoring": "verified",
     "format": "code",
     "description": "Model solves the 2025 International Olympiad in Informatics tasks. Scored with official subtask points (max 600).",
-    "org": "IOI (problems); NVIDIA harness",
+    "org": "IOI (problems) and NVIDIA (harness)",
     "released": "2025-08",
     "access": "public",
     "note": "Contest problems are public. No single public LLM harness found.",
@@ -88559,7 +88559,7 @@
     "scoring": "verified",
     "format": "agent-task",
     "description": "Improve a small GPT training script to reach a target validation loss as fast as possible on fixed hardware.",
-    "org": "Keller Jordan (community); OpenAI and METR variants",
+    "org": "Keller Jordan (community), OpenAI and METR (variants)",
     "released": "2024-06",
     "links": {
       "repo": "https://github.com/KellerJordan/modded-nanogpt"
