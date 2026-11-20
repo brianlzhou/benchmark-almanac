@@ -1,0 +1,184 @@
+---
+// Head to head: a model against the models from other labs released within six months of it that it is most evenly
+// matched with, on each benchmark's main board. A row per rival: its name, a bar of wins, ties and losses (wins in
+// the model's lab color), the record in words, and a link to compare the two. Every segment carries the tooltip.
+import ChartDownload from '../ChartDownload.astro';
+import ModelName from '../ModelName.astro';
+import { headToHead, winShare, markColor, RIVAL_MIN, type Rival } from '../../lib/model-insights.ts';
+import { modelById } from '../../lib/data.ts';
+import { POOL_CREDIT } from '../../lib/credits.ts';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const m = modelById.get(id)!;
+const rows = headToHead(id);
+const nm = (x: string) => modelById.get(x)?.name ?? x;
+const top = rows[0];
+const low = rows.at(-1);
+const caption =
+  rows.length < 2
+    ? ''
+    : `${m.name} beats ${nm(top.model)} on ${top.wins} of the ${top.shared} benchmarks they share. ${
+        winShare(low!) < 0.5 ? `${nm(low!.model)} does best against it, ahead on ${low!.losses} of ${low!.shared}.` : `Its closest contest is with ${nm(low!.model)}, which is ahead on ${low!.losses} of ${low!.shared}.`
+      }`;
+const segs = (r: Rival) =>
+  [
+    { k: 'w', n: r.wins, color: markColor(m.lab), tv: `${r.wins} wins`, tn: `${m.name} scores higher`, ts: `On ${r.wins} of the ${r.shared} benchmarks both have scores on` },
+    { k: 't', n: r.ties, color: 'var(--line)', tv: `${r.ties} ${r.ties === 1 ? 'tie' : 'ties'}`, tn: 'The same score', ts: `On ${r.ties} of ${r.shared}` },
+    { k: 'l', n: r.losses, color: 'var(--ink-4)', tv: `${r.losses} ${r.losses === 1 ? 'loss' : 'losses'}`, tn: `${nm(r.model)} scores higher`, ts: `On ${r.losses} of the ${r.shared} benchmarks both have scores on` },
+  ].filter((s) => s.n > 0);
+---
+
+{
+  rows.length >= 2 && (
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>How does it do against its rivals?</h2>
+          <p>{caption}</p>
+        </div>
+        <button
+          type="button"
+          class="help-q"
+          aria-label="Which models are its rivals"
+          data-tn="Its rivals"
+          data-ts={`Models from other labs released within six months of it that share ${RIVAL_MIN} or more benchmarks with it, and at least a third as many as the one it shares most with. Of those, the six with the most even records. We compare the two on each benchmark's main leaderboard, the one its page leads with.`}
+          data-wide
+        >
+          ?
+        </button>
+      </div>
+      <ChartDownload credit={POOL_CREDIT.headline} name={`${id}-rivals`} deck={`${m.name} against models from other labs released within six months of it: on how many shared benchmarks each scores higher.`}>
+        <ul class="rv-key" aria-hidden="true">
+          <li>
+            <span class="sw" style={`background:${markColor(m.lab)}`} />
+            {m.name} higher
+          </li>
+          <li>
+            <span class="sw" style="background:var(--line)" />
+            Same score
+          </li>
+          <li>
+            <span class="sw" style="background:var(--ink-4)" />
+            Rival higher
+          </li>
+        </ul>
+        <ol class="rv" aria-label={`${m.name} against its rivals, wins and losses on shared benchmarks`}>
+          {rows.map((r) => (
+            <li>
+              <span class="rv-n">
+                <ModelName id={r.model} size={14} />
+              </span>
+              <span class="rv-bar">
+                {segs(r).map((s) => (
+                  <span class="rv-s" style={`flex-grow:${s.n};background:${s.color}`} data-tv={s.tv} data-tn={s.tn} data-ts={s.ts} />
+                ))}
+              </span>
+              <span class="rv-w">
+                {`${r.wins} ahead, ${r.losses} behind`}{r.ties > 0 && <span class="muted">{`, ${r.ties} tied`}</span>}
+              </span>
+              <a class="rv-c" href={`/compare/?m=${id},${r.model}`}>
+                Compare
+              </a>
+            </li>
+          ))}
+        </ol>
+      </ChartDownload>
+    </section>
+  )
+}
+
+<style>
+  .rv-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .rv-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .rv {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rv li {
+    display: grid;
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr) 13rem 4.5rem;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .rv-n {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .rv-bar {
+    display: flex;
+    gap: 2px;
+    height: 14px;
+  }
+  .rv-s {
+    flex-basis: 0;
+    min-width: 3px;
+  }
+  .rv-s:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  .rv-s:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+  .rv-s:only-child {
+    border-radius: 4px;
+  }
+  .rv-s:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .rv-w {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .rv-c {
+    font-size: 13px;
+    color: var(--ink-3);
+    text-align: right;
+  }
+  .rv-c:hover {
+    color: var(--ink);
+  }
+  @media (max-width: 760px) {
+    .rv {
+      gap: 14px;
+    }
+    .rv li {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 6px 12px;
+    }
+    .rv-bar {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .rv-c {
+      display: none;
+    }
+  }
+</style>

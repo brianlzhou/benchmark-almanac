@@ -18,6 +18,7 @@ import AuthorsWords from '../../components/AuthorsWords.astro';
 import abstractsJson from '../../../data/abstracts.json';
 import type { PaperAbstract, Score } from '../../lib/types.ts';
 import KnownIssues from '../../components/KnownIssues.astro';
+import BenchAudit from '../../components/BenchAudit.astro';
 import BoardChart from '../../components/BoardChart.astro';
 import ChartDownload from '../../components/ChartDownload.astro';
 import { creditLine, sourcesCredit, EPOCH_CREDIT, EPOCH_RUNS, LAB_CARDS } from '../../lib/credits.ts';
@@ -31,7 +32,9 @@ import { makerParts, makerId, makers } from '../../lib/makers.ts';
 import { isArena } from '../../lib/counts.ts';
 import { familyOf } from '../../lib/reigns.ts';
 import { benchmarks, benchSummary, benchById, cards, AS_OF, modelById, LEADERBOARDS, allSummaries, eciOrder, labPages, leaderboardScores, systemScores, unlistedScores, sourceLabel, fromName, entryLabel, bestPerModel, harnessOf, LAB_AGENT_IS_MODEL, inEntryView, INTERVALS, intervalName } from '../../lib/data.ts';
-import { poolViews, aheadElsewhere, firstPast } from '../../lib/pools.ts';
+import { poolViews, aheadElsewhere, firstPast, newerClaims } from '../../lib/pools.ts';
+import { frontierAttrs } from '../../lib/frontier.ts';
+import { progressFile } from '../../lib/progress-data.ts';
 import { AREA_BY_ID, CATEGORY_NAMES, SUB_BY_ID, LEVEL_BY_ID, SCORING_BY_ID, FORMAT_BY_ID, SECTION_NAMES, RANKED_BY_PEOPLE_OR_MATCHES } from '../../lib/taxonomy.ts';
 import { leaderLine, lifeLine, setAsOf } from '../../lib/findings.ts';
 import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt, count, repoName, hostname, shortNum } from '../../lib/format.ts';
@@ -39,9 +42,12 @@ import githubJson from '../../../data/github.json';
 import ClaimTable from '../../components/ClaimTable.astro';
 import ArenaCategories from '../../components/ArenaCategories.astro';
 import { arenaCategories } from '../../lib/arena-categories.ts';
+import { boardParts } from '../../lib/board-parts.ts';
+import FacetList from '../../components/FacetList.astro';
 import { claimsForBenchmark, claimStats } from '../../lib/claims.ts';
 import type { ChangeKind } from '../../lib/types.ts';
 import { SITE_NAME, CATALOG_ID } from '../../lib/site.ts';
+import { carried, saturationCohorts, pct as insightPct } from '../../lib/insights.ts';
 
 export function getStaticPaths() {
   return benchmarks.map((b) => ({ params: { id: b.id } }));
@@ -121,6 +127,8 @@ const CHANGE: Record<ChangeKind, string> = {
 const changes = [...(b.changes ?? [])].reverse();
 const changeDate = (d: string) => (d.length === 7 ? longMonthYear(`${d}-01`) : humanDate(d));
 const unit = b.unit ?? '%';
+// the benchmark has a record line the Progress page can plot next to others
+const hasProgress = !!progressFile(b.id);
 const area = AREA_BY_ID.get(s.area)!;
 const gh = (githubJson as Record<string, { stars?: number; archived?: boolean; license?: string | null; pushed?: string }>)[
   b.links?.repo ? repoName(b.links.repo) : ''
@@ -147,8 +155,9 @@ const reignFrom = opened > '2023-01-01' ? opened : '2023-01-01';
 const reignRows = (['leaderboard', 'epoch', 'collected', 'card'] as const)
   .map((src) => reignRow(b.id, src))
   .filter((r): r is NonNullable<typeof r> => r !== null && r.reigns.some((g) => g.end > reignFrom));
-const viaName = s.viaBoard[0] ? fromName(s.viaBoard[0]) : 'Another board';
-const ROW_NAME: Record<string, string> = { leaderboard: boardHost ? `${boardHost} leaderboard` : 'Own leaderboard', epoch: 'Epoch AI runs', collected: `${viaName}, via Epoch AI`, card: 'Lab claims' };
+// lowercase for use inside a sentence. A credit line capitalizes its first item itself, and the row label below does too.
+const viaName = s.viaBoard[0] ? fromName(s.viaBoard[0]) : 'another board';
+const ROW_NAME: Record<string, string> = { leaderboard: boardHost ? `${boardHost} leaderboard` : 'Own leaderboard', epoch: 'Epoch AI runs', collected: `${s.viaBoard[0] ? viaName : 'Another board'}, via Epoch AI`, card: 'Lab claims' };
 const ROW_TEXT: Record<string, string> = {
   leaderboard: boardIs,
   epoch: 'Epoch AI’s runs',
@@ -161,6 +170,23 @@ const pools = poolViews(b.id, reignFrom);
 const poolOn = pools.length > 1;
 const ahead = aheadElsewhere(b.id, (v) => fmt(v, unit));
 const past85 = firstPast(s, 85);
+// how fast it passed 85%, next to the benchmarks that came out the same year (the survival curves on /insights/evals/)
+const satPace = (() => {
+  if (!past85 || !b.released || !/^\d{4}-\d\d/.test(b.released)) return '';
+  const months = Math.round((Date.parse(past85.date) - Date.parse(`${b.released.slice(0, 7)}-15`)) / (30.44 * 864e5));
+  if (months <= 0) return 'Models released before it came out already scored that high.';
+  const c = saturationCohorts().find((x) => x.year === b.released!.slice(0, 4));
+  const share = c?.share[Math.min(months, c.share.length - 1)];
+  if (share == null) return `That was ${months} month${months === 1 ? '' : 's'} after its release.`;
+  return `That was ${months} month${months === 1 ? '' : 's'} after its release. By the same age, ${insightPct(share)} of the benchmarks from ${c!.year} had passed 85%.`;
+})();
+// one or two labs carry it: they account for most of the releases since 2024 that name it (/insights/reporting/#carried)
+const carry = carried(true).list.find((x) => x.fam === (b.family ?? b.id));
+const carryLine = !carry
+  ? ''
+  : carry.carriers === 1
+    ? ` ${carry.labs[0].name} accounts for ${carry.labs[0].n} of the ${carry.releases} releases that named it since 2024.`
+    : ` ${carry.labs[0].name} and ${carry.labs[1].name} account for ${carry.labs[0].n + carry.labs[1].n} of the ${carry.releases} releases that named it since 2024.`;
 // where each pool's count of leaders comes from, for the chart's title
 const POOL_WHERE: Record<string, string> = {
   headline: { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : 'on the official leaderboard', epoch: 'in Epoch AI’s runs', collected: `on ${viaName}`, card: 'in labs’ own numbers', claim: 'in collected claims' }[s.boardSource ?? 'card'] ?? '',
@@ -220,11 +246,25 @@ const entryViews =
       ]
     : [];
 const views = entryViews.length > 1 ? entryViews : [{ key: 'every', label: '', scores: s.shown, what: shownWhat, tip: '' }];
-// the pool the page opens on: whichever source view has the most entries, so a thin official board opens on every
-// score while a full one (Arena's, with entries outside our model list) stays as it is. Leader credit elsewhere
-// keeps the one-source rule.
+// the pool the page opens on: whichever independent view has the most entries, so a thin official board opens on
+// every independent run while a full one (Arena's, with entries outside our model list) stays as it is. The view
+// with labs' claims included opens only when it is all there is, so a lab's own number never leads by default.
+// Leader credit elsewhere keeps the one-source rule.
 const poolSize = (v: (typeof pools)[number]) => (v.pool === 'headline' ? views[0].scores.length : v.board.length);
-const defaultPool = poolOn ? [...pools].sort((a, c) => poolSize(c) - poolSize(a))[0].pool : 'headline';
+const openable = pools.filter((v) => v.pool !== 'all');
+// newer models that only their labs have numbers for: said under the switch while it shows independent runs, so a
+// board that stopped adding models never looks like the whole story
+const newer = pools.some((v) => v.pool === 'all') ? newerClaims(b.id) : { models: [] };
+const newerNote = (() => {
+  const xs = newer.models;
+  if (!xs.length || !newer.last) return '';
+  const who = s.boardSource === 'epoch' ? 'Epoch AI' : boardHost ? `${boardHost}’s leaderboard` : 'The official leaderboard';
+  const lastM = modelById.get(newer.last.model);
+  const lastDate = lastM?.released ? longMonthYear(lastM.released) : '';
+  const top = xs[0];
+  return `${who} hasn’t scored a model released after ${lastM?.name ?? newer.last.model}${lastDate ? ` (${lastDate})` : ''}. Labs report their own numbers for ${xs.length === 1 ? 'one newer model' : `${xs.length} newer models`}${xs.length > 1 ? ', such as' : ':'} ${modelById.get(top.model)?.name ?? top.model} at ${fmt(top.value, unit)}.`;
+})();
+const defaultPool = poolOn ? [...(openable.length ? openable : pools)].sort((a, c) => poolSize(c) - poolSize(a))[0].pool : 'headline';
 // the source views whose bars have intervals: each gets the error bars switch while it shows
 const hasIv = (xs: Score[]) => xs.some((x) => x.info?.low !== undefined && x.info?.high !== undefined);
 const wkPools = [...(views.some((v) => hasIv(v.scores)) ? ['headline'] : []), ...pools.slice(1).filter((v) => hasIv(v.board)).map((v) => v.pool)];
@@ -273,6 +313,8 @@ const arena = isArena(b);
 const home = arena ? '/arenas/' : '/benchmarks/';
 // an arena's ratings on the votes for one kind of prompt, when its board keeps them (Arena's do)
 const catViews = arenaCategories(b.id);
+// the parts of the test a board scores on their own (a subject, a language, a user group), when its importer names them
+const partViews = catViews.length ? [] : boardParts(b.id, b.better === 'lower' ? 'lower' : 'higher');
 const catOwner = (makerParts(b.org ?? '')[0]?.text ?? '').replace(/\s*\(.*\)\s*$/, '') || 'the arena';
 const trail = [
   { href: home, label: arena ? 'Arenas' : 'Benchmarks' },
@@ -365,69 +407,115 @@ const cite = {
           </a>
         )}
       </div>
-      {
-        poolOn && (
-          <div class="pool-switch">
-            <div class="seg" role="radiogroup" aria-label="Scores from">
-              {pools.map((v, k) => (
-                <label>
-                  <input type="radio" name="pool" value={v.pool} checked={v.pool === defaultPool} />
-                  {v.label}
-                </label>
-              ))}
-            </div>
-            <script is:inline define:vars={{ defaultPool }}>
-              // before the page below paints: a link with ?pool= picks that pool, so nothing jumps
-              (function () {
-                var box = document.querySelector('.pool-switch');
-                var q = new URLSearchParams(location.search).get('pool');
-                var pick = (q === 'headline' || q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
-                if (pick) pick.checked = true;
-                box.addEventListener('change', function (e) {
-                  var u = new URL(location.href);
-                  if (e.target.value === defaultPool) u.searchParams.delete('pool');
-                  else u.searchParams.set('pool', e.target.value);
-                  history.replaceState(history.state, '', u);
-                });
-              })();
-            </script>
-          </div>
-        )
-      }
-          {views.length > 1 && (
-            <div class="ent-ctl">
-              <div class="seg ent-switch" role="radiogroup" aria-label="Entries">
-                {views.map((v, k) => (
-                  <label data-tn={v.label} data-ts={v.tip}><input type="radio" name="entries" value={v.key} checked={k === 0} />{v.label}</label>
-                ))}
-              </div>
-              <button type="button" class="help-q" data-tn="What each view counts" data-ts={views.map((v) => `${v.label}. ${v.tip}`).join('\n\n')} data-wide>
-                <span aria-hidden="true">?</span>
-                <span class="sr">What each view counts. {views.map((v) => `${v.label}: ${v.tip}`).join(' ')}</span>
-              </button>
-            </div>
-          )}
-      {
-        ahead && (
-          <div class="pool-headline">
-            <p class="ahead">{ahead}</p>
-          </div>
-        )
-      }
-      {
-        family.length > 1 && (
-          <nav class="seg versions" aria-label="Versions">
-            {family.map((v) => (
-              <a href={`/benchmarks/${v.id}/`} aria-current={v.id === b.id ? 'page' : undefined}>
-                {v.version ?? v.name}
-                {v.released && <span class="vd"> {monthYear(v.released)}</span>}
-              </a>
-            ))}
-          </nav>
-        )
-      }
       <div class="intro">
         <div class="prose">
+          {
+            (poolOn || views.length > 1 || family.length > 1) && (
+              <div class="board-ctl ctl-row">
+                {family.length > 1 && (
+                  <details class="ver-dd" data-ver-dd>
+                    <summary>
+                      <span class="muted">Version</span> {b.version ?? b.name}
+                      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4l2.5 2.5L7.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    </summary>
+                    <ul class="ver-list">
+                      {family
+                        .slice()
+                        .reverse()
+                        .map((v) => (
+                          <li>
+                            <a href={`/benchmarks/${v.id}/`} aria-current={v.id === b.id ? 'page' : undefined}>
+                              <span>{v.version ?? v.name}</span>
+                              {v.released && <span class="vd">{monthYear(v.released)}</span>}
+                            </a>
+                          </li>
+                        ))}
+                    </ul>
+                  </details>
+                )}
+                {family.length > 1 && (
+                  <script is:inline>
+                    // the version menu closes when the reader clicks anywhere else
+                    document.addEventListener('click', function (e) {
+                      document.querySelectorAll('[data-ver-dd][open]').forEach(function (d) {
+                        if (!d.contains(e.target)) d.open = false;
+                      });
+                    });
+                  </script>
+                )}
+                {poolOn && (
+                  <div class="seg pool-switch" role="radiogroup" aria-label="Scores from">
+                    {pools.map((v) => (
+                      <label>
+                        <input type="radio" name="pool" value={v.pool} checked={v.pool === defaultPool} />
+                        {v.label}
+                      </label>
+                    ))}
+                  </div>
+                )}
+                {views.length > 1 && (
+                  <div class="ent-ctl ctl-row">
+                    <div class="seg ent-switch" role="radiogroup" aria-label="Entries">
+                      {views.map((v, k) => (
+                        <label data-tn={v.label} data-ts={v.tip}><input type="radio" name="entries" value={v.key} checked={k === 0} />{v.label}</label>
+                      ))}
+                    </div>
+                    <button type="button" class="help-q" data-tn="What each view counts" data-ts={views.map((v) => `${v.label}. ${v.tip}`).join('\n\n')} data-wide>
+                      <span aria-hidden="true">?</span>
+                      <span class="sr">What each view counts. {views.map((v) => `${v.label}: ${v.tip}`).join(' ')}</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
+          }
+          {newerNote && (
+            <p class="pool-note" data-pool-note>
+              {newerNote} <button type="button" class="pool-to" data-pool-to="all">Include claimed scores</button>
+            </p>
+          )}
+          {
+            ahead && (
+              <div class="pool-headline">
+                <p class="ahead">{ahead}</p>
+              </div>
+            )
+          }
+          {
+            poolOn && (
+              <script is:inline define:vars={{ defaultPool }}>
+                // before the page below paints: a link with ?pool= picks that pool, so nothing jumps
+                (function () {
+                  var box = document.querySelector('.pool-switch');
+                  var q = new URLSearchParams(location.search).get('pool');
+                  var pick = (q === 'headline' || q === 'independent' || q === 'all') && box.querySelector('input[name="pool"][value="' + q + '"]');
+                  if (pick) pick.checked = true;
+                  // the note about newer, claim-only models shows only while the claims are left out
+                  var note = document.querySelector('[data-pool-note]');
+                  var sync = function () {
+                    var on = box.querySelector('input[name="pool"]:checked');
+                    if (note) note.hidden = !!on && on.value === 'all';
+                  };
+                  sync();
+                  if (note)
+                    note.querySelector('[data-pool-to]').addEventListener('click', function () {
+                      var all = box.querySelector('input[name="pool"][value="all"]');
+                      if (all) {
+                        all.checked = true;
+                        all.dispatchEvent(new Event('change', { bubbles: true }));
+                      }
+                    });
+                  box.addEventListener('change', function (e) {
+                    var u = new URL(location.href);
+                    if (e.target.value === defaultPool) u.searchParams.delete('pool');
+                    else u.searchParams.set('pool', e.target.value);
+                    history.replaceState(history.state, '', u);
+                    sync();
+                  });
+                })();
+              </script>
+            )
+          }
           {b.description && <p class="lede">{proseDates(b.description)}</p>}
           {b.note && <p class="lede note">{proseDates(b.note)}</p>}
         </div>
@@ -481,6 +569,7 @@ const cite = {
               </div>
             )}
           </dl>
+          <FacetList id={b.id} arena={arena} />
           {
             (strongest || s.last || s.docCites.length > 0 || s.lastAdded || s.refreshed) && (
               <dl class="kv">
@@ -640,7 +729,7 @@ const cite = {
                 </div>
               ))}
             </div>
-            <div class="view-ctl">
+            <div class="view-ctl ctl-row">
               <div class="seg" role="radiogroup" aria-label="View">
                 <label><input type="radio" name="v-board" value="graph" checked />Bars</label>
                 <label><input type="radio" name="v-board" value="table" />Table</label>
@@ -745,7 +834,7 @@ const cite = {
                     </thead>
                     <tbody>
                       {v.scores.map((x, i) => (
-                        <tr>
+                        <tr {...frontierAttrs(x.model)}>
                           <td class="rank">{i + 1}</td>
                           <td>
                             <ModelName id={x.model} name={x.name} system={x.system} models={x.info?.models} verified={verifiedOf(x)} />
@@ -777,7 +866,7 @@ const cite = {
                   </thead>
                   <tbody>
                     {v.board.map((x, i) => (
-                      <tr>
+                      <tr {...frontierAttrs(x.model)}>
                         <td class="rank">{i + 1}</td>
                         <td><ModelName id={x.model} name={x.name} /></td>
                         <td class="r">{fmt(x.value, unit)}</td>
@@ -814,6 +903,7 @@ const cite = {
     }
 
     {catViews.length > 0 && <ArenaCategories views={catViews} overall={s.leaderboardBoard.length ? s.leaderboardBoard : s.board} unit={unit} arena={catOwner} />}
+    {partViews.length > 0 && <ArenaCategories kind="parts" views={partViews} overall={s.leaderboardBoard.length ? s.leaderboardBoard : s.board} unit={unit} arena={boardIs} />}
 
     {
       boardChart && boardChartViews.map(({ key, runs: boardChartRuns }) => boardChartRuns.length >= 4 && (
@@ -952,9 +1042,12 @@ const cite = {
     {
       s.nScores > 0 && (
         <section>
-          <div class="sh">
-            <h2>{past85 ? `${past85.who[0].toUpperCase()}${past85.who.slice(1)} passed 85% in ${longMonthYear(past85.date)}` : 'Scores over time'}</h2>
-            <p>All the scores we have, one dot each, so a model tested at several settings appears more than once.</p>
+          <div class="sh-row">
+            <div class="sh">
+              <h2>{past85 ? `${past85.who[0].toUpperCase()}${past85.who.slice(1)} passed 85% in ${longMonthYear(past85.date)}` : 'Scores over time'}</h2>
+              <p>{satPace && `${satPace} `}All the scores we have, one dot each, so a model tested at several settings appears more than once.</p>
+            </div>
+            {hasProgress && <a class="more" href={`/progress/?b=${b.id}`}>Plot with other benchmarks</a>}
           </div>
           <div class="ent-not-same"><ScoreChart s={s} /></div>
           {views.some((v) => v.key === 'same') && <div class="ent-same"><ScoreChart s={s} entries="same" /></div>}
@@ -967,7 +1060,7 @@ const cite = {
         <h2>{lifeLine(s)}</h2>
         <p>
           {s.cites.length > 0
-            ? 'Launch posts from every lab that has listed it, one tick per post. Tall colored ticks include it, and short gray ones leave it out.'
+            ? `Launch posts from every lab that has listed it, one tick per post. Tall colored ticks include it, and short gray ones leave it out.${carryLine}`
             : `We read the headline results of ${cards.length} launch posts from ${new Set(cards.map((c) => c.lab)).size} labs, and none of them list this benchmark.${s.docCites.length ? ' Some system cards do, below.' : ''}`}
         </p>
       </div>
@@ -1005,7 +1098,7 @@ const cite = {
                 : `${s.docCites.length} system cards report it, from ${count(s.docLabs.length, 'lab')}`}
             </h2>
             <p>
-              Besides launch posts, we read the system cards, model cards and technical reports labs publish with a release. They report far more, including safety and frontier-risk tests.
+              Besides launch posts, we read the system cards, model cards and technical reports labs publish with a release. They report far more, including safety and frontier-risk tests.{s.cites.length === 0 && carryLine}
             </p>
           </div>
           <div class="table-wrap cites">
@@ -1146,6 +1239,8 @@ const cite = {
         </section>
       )
     }
+
+    <BenchAudit id={b.id} />
   </div>
 </Base>
 
@@ -1165,19 +1260,78 @@ const cite = {
   .live:hover {
     background: var(--panel);
   }
-  .versions {
-    margin-top: 18px;
-    flex-wrap: wrap;
-    max-width: 100%;
+  /* the controls for the charts below (version, score source, entries): one row at the top of the left column,
+     so the facts on the right start level with it */
+  .board-ctl {
+    gap: 8px 10px;
+    margin-bottom: 14px;
+  }
+  .board-ctl .pool-switch,
+  .board-ctl .ent-ctl {
+    margin-top: 0;
+  }
+  .ver-dd {
+    position: relative;
+  }
+  .ver-dd > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: var(--ctl-h);
+    padding: 0 12px;
+    border-radius: 9px;
+    background: var(--panel);
+    font: 500 13px/1 var(--sans);
+    color: var(--ink);
+    white-space: nowrap;
+    cursor: pointer;
+    list-style: none;
+  }
+  .ver-dd > summary::-webkit-details-marker {
+    display: none;
+  }
+  .ver-dd > summary .muted {
+    color: var(--ink-3);
+  }
+  .ver-dd[open] > summary svg {
+    transform: rotate(180deg);
+  }
+  .ver-list {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 200px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px var(--line);
+  }
+  .ver-list a {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    color: var(--ink);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .ver-list a:hover,
+  .ver-list a[aria-current] {
+    background: var(--panel);
+  }
+  .ver-list a[aria-current] {
+    font-weight: 600;
   }
   .vd {
-    color: var(--ink-4);
+    color: var(--ink-3);
     font-weight: 400;
   }
-  @media (max-width: 640px) {
-    .vd {
-      display: none;
-    }
+  .prose > .pool-note {
+    margin: 0 0 14px;
   }
   .note {
     font-size: 16px;
@@ -1186,6 +1340,7 @@ const cite = {
   }
   /* the top of the page: what the test is on the left, the facts about it on the right */
   .intro {
+    margin-top: 26px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
     grid-template-rows: auto 1fr;
@@ -1411,11 +1566,8 @@ const cite = {
   .stats {
     margin-bottom: 96px;
   }
-  /* the board's view switch and its error bars switch, centered on one line */
+  /* the board's view switch and its error bars switch, centered on one line (.ctl-row) */
   .view-ctl {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 10px 20px;
   }
   .gap {

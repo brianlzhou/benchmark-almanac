@@ -1,0 +1,224 @@
+---
+// The data audit on a benchmark page: how complete and trustworthy our data on this benchmark is, as the checks in
+// src/lib/bench-audit.ts, grouped. A group with a warning or a problem opens, and the rest stay closed. Each
+// check's name carries its rule as a tooltip. Every status shows its mark and its word, never color alone.
+// The styles are global, each under .au.
+import AuditMark from './AuditMark.astro';
+import { auditOf, GROUPS, CHECKS, STATUS_WORD, worstCheck, linksChecked, ALL_CHECKS, type AuditStatus } from '../lib/bench-audit.ts';
+import { humanDate, count } from '../lib/format.ts';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const audit = auditOf(id);
+const worst = worstCheck(audit);
+const groups = GROUPS.map((g) => ({ ...g, checks: audit.checks.filter((c) => c.group === g.id) })).filter((g) => g.checks.length);
+const tally = (checks: { status: AuditStatus }[]) =>
+  (['fail', 'warn', 'pass', 'info'] as const)
+    .map((st) => ({ st, n: checks.filter((c) => c.status === st).length }))
+    .filter((x) => x.n)
+    .map((x) => ({ ...x, text: x.st === 'pass' ? `${x.n} pass` : count(x.n, STATUS_WORD[x.st].toLowerCase()) }));
+const checked = linksChecked();
+// under astro dev the localhost-only checks show too: their findings get their own clause, outside the public count
+const local = ALL_CHECKS ? audit.checks.filter((c) => !CHECKS[c.key].public) : [];
+const localIssues = [count(local.filter((c) => c.status === 'fail').length, 'problem'), count(local.filter((c) => c.status === 'warn').length, 'warning')].filter((t) => !t.startsWith('0 '));
+---
+
+<section class="au" id="data-audit" aria-labelledby="au-h">
+  <AuditMark defs />
+  <div class="sh">
+    <h2 id="au-h">Data audit</h2>
+    <p>
+      {audit.summary.text}.{worst && ` Look first at the ${worst.label} check. ${worst.detail}`}{local.length > 0 && ` The ${local.length} checks only on localhost have ${localIssues.length ? localIssues.join(' and ') : 'no warnings or problems'}.`}{' '}
+      <a href="/audits/data/">Every benchmark</a>
+    </p>
+  </div>
+  <div class="au-gs">
+    {groups.map((g) => {
+      const open = g.checks.some((c) => c.status === 'fail' || c.status === 'warn');
+      return (
+        <details class="au-g" open={open}>
+          <summary>
+            <span class="au-gn">{g.name}</span>
+            <span class="au-ts">
+              {tally(g.checks).map((t) => (
+                <span class="au-t">
+                  <AuditMark st={t.st} size={12} />
+                  {t.text}
+                </span>
+              ))}
+            </span>
+            <svg class="au-chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </summary>
+          <ul class="au-list">
+            {g.checks.map((c) => (
+              <li class:list={['au-row', `au-${c.status}`]}>
+                <span class="au-st">
+                  <AuditMark st={c.status} />
+                  {STATUS_WORD[c.status]}
+                </span>
+                <span class="au-l" tabindex="0" data-tn={c.label} data-ts={CHECKS[c.key].rule}>
+                  {c.label}
+                  {ALL_CHECKS && !CHECKS[c.key].public && <span class="au-local">Only on localhost</span>}
+                </span>
+                <span class="au-d">{c.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      );
+    })}
+  </div>
+  <p class="au-foot muted">
+    {ALL_CHECKS && (checked ? `Links checked ${humanDate(checked)}. ` : 'Links not checked yet. ')}
+    <a href="/audits/data/#rules">How we check</a>
+  </p>
+</section>
+
+<style is:global>
+  /* a check the public site leaves out, marked so the maintainer can tell under astro dev */
+  .au .au-local {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: var(--ink-3);
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 0 7px;
+    white-space: nowrap;
+    vertical-align: 1px;
+  }
+  /* global, under .au: scoped styles would put an attribute on each of the section's elements on 3,555 pages */
+  .au .au-gs {
+    border-top: 1px solid var(--line);
+    max-width: 980px;
+  }
+  .au .au-g {
+    border-bottom: 1px solid var(--line);
+  }
+  .au .au-g summary {
+    display: flex;
+    align-items: center;
+    gap: 8px 20px;
+    flex-wrap: wrap;
+    padding: 14px 4px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .au .au-g summary::-webkit-details-marker {
+    display: none;
+  }
+  .au .au-gn {
+    font-size: 15.5px;
+    font-weight: 500;
+    min-width: 180px;
+  }
+  .au .au-g summary:hover .au-gn {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-4);
+    text-underline-offset: 3px;
+  }
+  .au .au-ts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .au .au-t {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .au .au-chev {
+    margin-left: auto;
+    color: var(--ink-3);
+    transition: transform 140ms ease;
+  }
+  .au .au-g[open] .au-chev {
+    transform: rotate(180deg);
+  }
+  .au .au-list {
+    list-style: none;
+    margin: 0 0 14px;
+    padding: 0;
+  }
+  /* status, check name and finding: three columns with fixed tracks, so rows line up down the list */
+  .au .au-row {
+    display: grid;
+    grid-template-columns: 104px 190px minmax(0, 1fr);
+    gap: 4px 16px;
+    align-items: baseline;
+    padding: 9px 4px;
+    border-top: 1px solid var(--grid);
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+  .au .au-st {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--ink-2);
+    white-space: nowrap;
+    /* the mark sits on the text's middle while the row aligns by baseline */
+    align-self: start;
+    padding-top: 1px;
+  }
+  .au .au-info .au-st {
+    color: var(--ink-3);
+  }
+  .au .au-fail .au-st {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .au .au-l {
+    color: var(--ink);
+    text-decoration: underline dotted var(--ink-4);
+    text-underline-offset: 4px;
+    cursor: help;
+    justify-self: start;
+  }
+  .au .au-d {
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+  }
+  .au .au-info .au-d,
+  .au .au-pass .au-d {
+    color: var(--ink-3);
+  }
+  .au .au-foot {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .au .au-chev {
+      transition: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .au .au-gn {
+      min-width: 0;
+      width: 100%;
+    }
+    .au .au-chev {
+      position: absolute;
+      right: 4px;
+      top: 19px;
+    }
+    .au .au-g summary {
+      position: relative;
+      padding-right: 24px;
+    }
+    .au .au-row {
+      grid-template-columns: 96px minmax(0, 1fr);
+    }
+    .au .au-d {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

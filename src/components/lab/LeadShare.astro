@@ -1,0 +1,154 @@
+---
+// A lab's share of number one: the contested benchmark-days its models held the top spot, each half year since 2024,
+// over the benchmarks the Leaders page follows, as a line in the lab's color. Under it, the races it leads today.
+import ChartDownload from '../ChartDownload.astro';
+import ModelName from '../ModelName.astro';
+import TrendChart from '../insights/TrendChart.astro';
+import { labLead, labName } from '../../lib/model-insights.ts';
+import { timeAxis, pct, cap, type TSeries } from '../../lib/insights.ts';
+import { labColor } from '../../lib/palette.ts';
+import { benchById } from '../../lib/data.ts';
+import { fullDate, monthYear, score as fmt } from '../../lib/format.ts';
+import { POOL_CREDIT } from '../../lib/credits.ts';
+import { CLOCK_NOTE } from '../../lib/figure-text.ts';
+
+interface Props {
+  lab: string;
+}
+const { lab } = Astro.props;
+const L = labLead(lab);
+const name = labName(lab);
+const show = !!L && (Math.max(...L.share) >= 0.02 || L.leads.length > 0);
+const SHOWN = 8;
+const ordWord = (n: number) => ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'][n] ?? `number ${n}`;
+let caption = '';
+let series: TSeries[] = [];
+if (show && L) {
+  const last = L.periods.length - 1;
+  const now = L.share[last];
+  let lastOn = last;
+  while (lastOn > 0 && !(L.share[lastOn] > 0)) lastOn--;
+  const first =
+    now > 0
+      ? `${name} held number one on ${pct(now)} of contested benchmark-days in ${L.periods[last].name}, ${L.place[last] === 1 ? 'the most of any lab' : `${ordWord(L.place[last])} among labs`}.`
+      : `${name} last held number one in ${L.periods[lastOn].name}, on ${pct(L.share[lastOn])} of contested benchmark-days.`;
+  const second = L.leads.length
+    ? ` Its models lead ${L.leads.length} of the ${L.live} races still going on the Leaders page.`
+    : ` Its models lead none of the ${L.live} races still going on the Leaders page.`;
+  caption = first + second;
+  series = [
+    {
+      key: lab,
+      label: name,
+      color: labColor(lab),
+      pts: L.periods.map((p, i) => ({
+        x: p.x,
+        y: 100 * L.share[i],
+        tv: pct(L.share[i]),
+        tn: cap(p.name),
+        ts: `${L.place[i] ? `${cap(ordWord(L.place[i]))} among labs, ` : ''}${Math.round(L.days[i]).toLocaleString('en-US')} of ${Math.round(L.total[i]).toLocaleString('en-US')} contested benchmark-days, across ${L.benchmarks[i]} benchmarks`,
+        partial: p.partial,
+      })),
+    },
+  ];
+}
+---
+
+{
+  show && L && (
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>How often has {name} held number one?</h2>
+          <p>{caption}</p>
+        </div>
+        <a class="more" href="/leaders/">
+          Leaders by category
+        </a>
+      </div>
+      <ChartDownload credit={POOL_CREDIT.headline} name={`${lab}-number-one`} deck={`${name}'s share of the contested benchmark-days at number one, each half year.`} counts={CLOCK_NOTE} yAxis="Share of contested benchmark-days at number one">
+        <TrendChart series={series} x={timeAxis(2024)} y={{ min: 0, unit: '%' }} label={`${name}'s share of the contested benchmark-days at number one, each half year since 2024`} w={1120} h={260} nh={220} />
+      </ChartDownload>
+      {L.leads.length > 0 && (
+        <>
+          <h3 class="ls-h">What it leads today</h3>
+          <div class="table-wrap">
+            <table class="t ls">
+              <thead>
+                <tr>
+                  <th>Benchmark</th>
+                  <th>Model</th>
+                  <th class="r">Score</th>
+                  <th class="r">
+                    <span class="ls-w">Number one since</span>
+                    <span class="ls-n">Since</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {L.leads.map((x, i) => (
+                  <tr hidden={i >= SHOWN} data-reveal-row>
+                    <td>
+                      <a href={`/benchmarks/${x.benchmark}/`}>{benchById.get(x.benchmark)?.name ?? x.benchmark}</a>
+                    </td>
+                    <td>
+                      <ModelName id={x.model} size={14} />
+                    </td>
+                    <td class="r num">{fmt(x.value)}</td>
+                    <td class="r muted num nowrap">
+                      <span class="ls-w">{fullDate(x.since)}</span>
+                      <span class="ls-n">{monthYear(x.since)}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {L.leads.length > SHOWN && (
+            <button type="button" class="more-rows" data-reveal>
+              Show all {L.leads.length}
+            </button>
+          )}
+        </>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .more {
+    font-size: 14px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .ls-h {
+    margin: 40px 0 10px;
+    font-size: 21px;
+  }
+  .ls td:first-child {
+    width: 40%;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .ls-n {
+    display: none;
+  }
+  @media (max-width: 560px) {
+    .ls th:nth-child(3),
+    .ls td:nth-child(3),
+    .ls-w {
+      display: none;
+    }
+    .ls-n {
+      display: inline;
+    }
+    .ls td:first-child {
+      width: auto;
+    }
+    /* a long model name wraps instead of pushing the date off the screen */
+    .ls :global(.mn-t) {
+      white-space: normal;
+    }
+  }
+</style>

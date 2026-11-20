@@ -1,0 +1,545 @@
+---
+// Progress: up to eight benchmarks' best score so far on one chart, by the release date of the model that set each
+// record, with the leader named at each line's end. The data comes from progress-data.ts, the math and markup from
+// progress-view.ts, so the server render and the page script draw the same thing. The server draws the default
+// picks. A link with its own picks, range, source or title draws them once their files load.
+import ChartDownload from '../components/ChartDownload.astro';
+import Dropdown from '../components/Dropdown.astro';
+import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../lib/credits.ts';
+import Base from '../layouts/Base.astro';
+import { AS_OF } from '../lib/data.ts';
+import { progressFile, defaultPicks } from '../lib/progress-data.ts';
+import { seriesOf, rangeStart, chartSvg, legend, caption, chips, table, csv, SIZES, DEFAULT_STATE, RANGE_LABEL, RANGES, MAX_PICKS, type ProgressFile, type State } from '../lib/progress-view.ts';
+
+const ids = defaultPicks();
+const files = new Map(ids.map((id) => [id, progressFile(id)!]));
+const st: State = { b: ids, ...DEFAULT_STATE };
+const start = rangeStart(st.range, AS_OF, [...files.values()], st.pool);
+const series = seriesOf(st, files, start, AS_OF);
+const label = 'Best score so far on each benchmark, by model release date';
+const POOL_TEXT = { headline: 'Each benchmark’s main source', independent: 'Independent runs only', all: 'With labs’ own numbers' };
+---
+
+<Base title="Progress over time" description="Plot the best score so far on up to eight AI benchmarks at once, by the release date of the model that set each record.">
+  <div class="page pg-root" data-pg data-default={JSON.stringify(ids)} data-asof={AS_OF} data-files={JSON.stringify([...files.values()] as ProgressFile[])}>
+    <script is:inline>
+      // Before the first paint: a link with its own picks, range, source or title hides the default chart until its
+      // files load, so the default never flashes in its place. The page script removes the mark once it has drawn.
+      if (/[?&](b|range|pool|t)=/.test(location.search)) document.currentScript.parentElement.classList.add('pg-wait');
+    </script>
+    <header class="head">
+      <h1>Progress over time</h1>
+      <p class="lede">Pick up to eight benchmarks to see the best score on each, by the release date of the model that set it.</p>
+    </header>
+
+    <section class="pg-controls" data-wait>
+      <div class="pg-pick">
+        <h2 class="sr" id="pg-bench">Benchmarks</h2>
+        <div class="pg-box">
+          <ul class="pg-chips" aria-labelledby="pg-bench" data-chips set:html={chips(st, files, new Map()).replace(/<button type="button" class="pg-x"/g, '<button type="button" class="pg-x" disabled')} />
+          <input
+            class="pg-q"
+            type="search"
+            placeholder="Add a benchmark"
+            autocomplete="off"
+            spellcheck="false"
+            role="combobox"
+            aria-expanded="false"
+            aria-controls="pg-list"
+            aria-autocomplete="list"
+            aria-label="Add a benchmark"
+            data-q
+            disabled
+          />
+          <ul id="pg-list" class="pg-list" role="listbox" aria-label="Matching benchmarks" hidden data-list></ul>
+        </div>
+        <p class="pg-status" aria-live="polite" data-status></p>
+      </div>
+    </section>
+
+    <section class="pg-out" data-wait data-out>
+      <div class="sh-row pg-head">
+        <div class="sh">
+          <h2 class="pg-title">
+            <span data-pg-title contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="Chart title, click to rename">{st.title}</span>
+            <svg class="pg-pen" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true" data-dl-skip><path d="M11.2 2.3l2.5 2.5-8 8L2.6 13.4l.6-3.1z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /></svg>
+          </h2>
+          <p data-sub>{caption(series, st.range, start)}</p>
+        </div>
+        <div class="ctl-row pg-ctl" data-dl-skip>
+          <Dropdown filterKey="pg-range" label="Range" viewOnly value={st.range} options={RANGES.map((r) => ({ value: r, label: RANGE_LABEL[r] }))} />
+          <Dropdown filterKey="pg-pool" label="Scores from" viewOnly value={st.pool} options={(['headline', 'independent', 'all'] as const).map((p) => ({ value: p, label: POOL_TEXT[p] }))} />
+        </div>
+      </div>
+      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="progress" titleFrom="[data-pg-title]" deckFrom="[data-sub]" xAxis="Model release date" yAxis="Best score so far" counts="Each line steps up when a model released on that day beats every earlier score, from the source picked under Scores from. Filled dots are independent runs. Rings are a lab's own number." csv>
+        <ul class="pg-key" data-key set:html={legend(series)} />
+        <div class="pg-chart" data-chart set:html={SIZES.map((z) => chartSvg(series, start, AS_OF, z, label)).join('')} />
+        <textarea hidden aria-hidden="true" tabindex="-1" data-csv>{csv(series)}</textarea>
+      </ChartDownload>
+      <div class="pg-tbl" data-table set:html={table(series)} />
+      <p class="pg-note">Filled dots are independent runs. Rings are numbers a lab reports about its own model. A line ends at the newest model its source has scored.</p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { seriesOf, rangeStart, chartSvg, legend, caption, chips, table, csv, readState, writeState, esc, SIZES, DEFAULT_STATE, MAX_PICKS, type ProgressFile, type ProgressIndex, type IndexRow, type State, type Range, type Pool } from '../lib/progress-view.ts';
+
+  const root = document.querySelector<HTMLElement>('[data-pg]')!;
+  const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const asOf = root.dataset.asof!;
+  const defaults: string[] = JSON.parse(root.dataset.default ?? '[]');
+  const cache = new Map<string, ProgressFile>((JSON.parse(root.dataset.files ?? '[]') as ProgressFile[]).map((f) => [f.id, f]));
+  const fallback: State = { b: defaults, ...DEFAULT_STATE };
+  const ID = /^[a-z0-9][a-z0-9-]*$/;
+  let st = readState(location.search, fallback, (id) => ID.test(id));
+  let idx: ProgressIndex | null = null;
+  let seq = 0;
+  const status = (t: string) => ($('[data-status]').textContent = t);
+
+  async function getJson<T>(url: string): Promise<T> {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(String(r.status));
+    return r.json() as Promise<T>;
+  }
+  async function load(ids: string[]): Promise<void> {
+    const need = ids.filter((id) => !cache.has(id));
+    const got = await Promise.allSettled(need.map((id) => getJson<ProgressFile>(`/progress/b/${encodeURIComponent(id)}.json`)));
+    got.forEach((g, i) => {
+      if (g.status === 'fulfilled') cache.set(g.value.id, g.value);
+      else {
+        // a benchmark with no record line drops out, keeping the others' colors
+        st.b = st.b.map((x) => (x === need[i] ? null : x));
+        status(`${need[i]} has no record line to plot.`);
+      }
+    });
+  }
+  const names = () => new Map((idx?.rows ?? []).map((r) => [r[0], r[1]]));
+
+  function render() {
+    $('[data-chips]').innerHTML = chips(st, cache, names());
+    const n = st.b.filter(Boolean).length;
+    const q = $<HTMLInputElement>('[data-q]');
+    q.hidden = n >= MAX_PICKS;
+    q.placeholder = n ? 'Add another benchmark' : 'Add a benchmark';
+    for (const [sel, v] of [['[data-pg-range]', st.range], ['[data-pg-pool]', st.pool]] as const) {
+      const el = root.querySelector<HTMLSelectElement>(sel);
+      if (el && el.value !== v) {
+        el.value = v;
+        el.dispatchEvent(new Event('sync'));
+      }
+    }
+    const files = st.b.filter((id): id is string => !!id && cache.has(id)).map((id) => cache.get(id)!);
+    const start = rangeStart(st.range, asOf, files, st.pool);
+    const series = seriesOf(st, cache, start, asOf);
+    if (document.activeElement !== $('[data-pg-title]')) $('[data-pg-title]').textContent = st.title;
+    $('[data-sub]').textContent = caption(series, st.range, start);
+    $('[data-key]').innerHTML = legend(series);
+    $('[data-chart]').innerHTML = SIZES.map((z) => chartSvg(series, start, asOf, z, 'Best score so far on each benchmark, by model release date')).join('');
+    $('[data-table]').innerHTML = table(series);
+    $('[data-csv]').textContent = csv(series);
+    history.replaceState(null, '', writeState(st, fallback));
+    root.classList.remove('pg-wait');
+  }
+  async function update() {
+    const mine = ++seq;
+    await load(st.b.filter((x): x is string => !!x));
+    if (mine === seq) render();
+  }
+
+  // ---- the picker ------------------------------------------------------------------------------------
+  const q = $<HTMLInputElement>('[data-q]');
+  const list = $<HTMLUListElement>('[data-list]');
+  let options: IndexRow[] = [];
+  let active = -1;
+  const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  function matches(text: string): IndexRow[] {
+    const t = norm(text);
+    if (!t || !idx) return [];
+    const words = t.split(' ');
+    const picked = new Set(st.b);
+    const scored: { r: IndexRow; s: number }[] = [];
+    for (const r of idx.rows) {
+      if (picked.has(r[0])) continue;
+      const name = norm(r[1]);
+      const all = `${name} ${norm(r[2])} ${r[0].replace(/-/g, ' ')}`;
+      if (!words.every((w) => all.includes(w))) continue;
+      const s = name === t ? 0 : name.startsWith(t) ? 1 : ` ${name}`.includes(` ${words[0]}`) ? 2 : 3;
+      scored.push({ r, s });
+    }
+    return scored.sort((a, b) => a.s - b.s || b.r[5] - a.r[5]).slice(0, 8).map((x) => x.r);
+  }
+  function closeList() {
+    list.hidden = true;
+    q.setAttribute('aria-expanded', 'false');
+    q.removeAttribute('aria-activedescendant');
+  }
+  function showList() {
+    options = matches(q.value);
+    if (!q.value.trim()) return closeList();
+    active = options.length ? 0 : -1;
+    list.innerHTML = options.length
+      ? options.map((r, i) => `<li id="pg-o${i}" role="option" data-i="${i}" aria-selected="${i === active}"><span class="pg-oname">${esc(r[1])}</span><span class="pg-ometa">${esc([r[4], `${r[5]} models`, r[3] === '%' ? '' : r[3] === 'elo' ? 'Elo' : r[3]].filter(Boolean).join(', '))}</span></li>`).join('')
+      : '<li class="pg-none">No benchmark with a record line matches.</li>';
+    list.hidden = false;
+    q.setAttribute('aria-expanded', 'true');
+    if (active >= 0) q.setAttribute('aria-activedescendant', `pg-o${active}`);
+  }
+  async function ensureIndex() {
+    if (idx) return;
+    try {
+      idx = await getJson<ProgressIndex>('/progress/benchmarks.json');
+    } catch {
+      status('The benchmark list did not load. Reload the page to try again.');
+    }
+  }
+  async function add(r: IndexRow) {
+    // one chart has one scale, so every line must share the first one's unit
+    const unit = st.b.map((id) => (id ? cache.get(id)?.unit : undefined)).find(Boolean);
+    if (unit && r[3] !== unit) {
+      status(`${r[1]} is scored in ${r[3] === 'elo' ? 'Elo' : r[3]}, and these lines are in ${unit === '%' ? 'percent' : unit}. One chart has one scale, so remove the others to plot it.`);
+      return;
+    }
+    const free = st.b.indexOf(null);
+    if (free >= 0) st.b[free] = r[0];
+    else st.b.push(r[0]);
+    q.value = '';
+    closeList();
+    status('');
+    await update();
+    q.focus();
+  }
+  q.addEventListener('focus', ensureIndex);
+  q.addEventListener('input', async () => {
+    await ensureIndex();
+    showList();
+  });
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      if (!options.length) return;
+      e.preventDefault();
+      active = (active + (e.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
+      for (const li of list.querySelectorAll<HTMLElement>('[role="option"]')) li.setAttribute('aria-selected', String(Number(li.dataset.i) === active));
+      q.setAttribute('aria-activedescendant', `pg-o${active}`);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (options[active]) void add(options[active]);
+    } else if (e.key === 'Escape') closeList();
+  });
+  q.addEventListener('blur', () => window.setTimeout(closeList, 120));
+  list.addEventListener('pointerdown', (e) => {
+    const li = (e.target as HTMLElement).closest<HTMLElement>('[role="option"]');
+    if (!li) return;
+    e.preventDefault();
+    void add(options[Number(li.dataset.i)]);
+  });
+  root.querySelector('.pg-box')!.addEventListener('click', (e) => {
+    const x = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-x]');
+    if (x) {
+      st.b = st.b.map((id) => (id === x.dataset.x ? null : id));
+      while (st.b.length && st.b.at(-1) === null) st.b.pop();
+      status('');
+      render();
+      return;
+    }
+    if (!(e.target as HTMLElement).closest('a')) q.focus();
+  });
+
+  // ---- the switches and the title --------------------------------------------------------------------
+  root.addEventListener('change', (e) => {
+    const t = e.target as HTMLSelectElement;
+    if (t.matches('[data-pg-range]')) st.range = t.value as Range;
+    else if (t.matches('[data-pg-pool]')) st.pool = t.value as Pool;
+    else return;
+    render();
+  });
+  // the chart's title is its own text field: click it to rename the chart, Enter or a click away to keep it
+  const title = $<HTMLElement>('[data-pg-title]');
+  title.textContent = st.title;
+  title.addEventListener('input', () => {
+    st.title = (title.textContent ?? '').trim().slice(0, 120) || DEFAULT_STATE.title;
+    history.replaceState(null, '', writeState(st, fallback));
+  });
+  title.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === 'Escape') {
+      e.preventDefault();
+      title.blur();
+    }
+  });
+  title.addEventListener('blur', () => {
+    if (!(title.textContent ?? '').trim()) title.textContent = DEFAULT_STATE.title;
+  });
+  root.querySelector('.pg-pen')?.addEventListener('click', () => title.focus());
+
+  for (const el of root.querySelectorAll<HTMLInputElement | HTMLButtonElement>('[disabled]')) el.disabled = false;
+  if (root.classList.contains('pg-wait')) void update();
+</script>
+
+<style is:global>
+  .pg-root.pg-wait [data-wait] {
+    visibility: hidden;
+  }
+  .pg-root .head + .pg-controls {
+    margin-top: 4px;
+  }
+  .pg-root .pg-controls {
+    display: grid;
+    gap: 16px;
+  }
+  /* the picked benchmarks and the search field share one box, the way a token field works */
+  .pg-root .pg-box {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-height: 48px;
+    padding: 6px;
+    border-radius: 12px;
+    background: var(--panel);
+    cursor: text;
+  }
+  .pg-root .pg-box:focus-within {
+    box-shadow: 0 0 0 2px var(--focus);
+  }
+  .pg-root .pg-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pg-root .pg-chips:empty {
+    display: none;
+  }
+  .pg-root .pg-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    max-width: 100%;
+    padding: 5px 4px 5px 10px;
+    border-radius: 999px;
+    background: var(--bg);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  .pg-root .pg-chip a {
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .pg-root .pg-chip a:hover {
+    text-decoration: underline;
+  }
+  .pg-root .pg-dot {
+    flex: none;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 2px;
+    vertical-align: 0;
+  }
+  .pg-root .pg-x {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--ink-3);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .pg-root .pg-x:hover:not(:disabled),
+  .pg-root .pg-x:focus-visible {
+    background: var(--panel);
+    color: var(--ink);
+  }
+  .pg-root .pg-q {
+    flex: 1 1 12em;
+    min-width: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: 400 14.5px/1 var(--sans);
+    padding: 9px 8px;
+    outline: none;
+  }
+  .pg-root .pg-q::placeholder {
+    color: var(--ink-3);
+  }
+  .pg-root .pg-list {
+    position: absolute;
+    z-index: 30;
+    left: 0;
+    right: 0;
+    top: calc(100% + 6px);
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 0 0 1px var(--line);
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  .pg-root .pg-list [role='option'] {
+    display: grid;
+    padding: 7px 8px;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  .pg-root .pg-list [aria-selected='true'] {
+    background: var(--panel);
+  }
+  .pg-root .pg-oname {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+  .pg-root .pg-ometa,
+  .pg-root .pg-none {
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .pg-root .pg-none {
+    padding: 8px;
+  }
+  .pg-root .pg-status:empty {
+    display: none;
+  }
+  .pg-root .pg-status {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+
+  /* the chart's head: its title, which the reader can rename in place, and the range and source menus */
+  .pg-root .pg-head {
+    align-items: flex-start;
+  }
+  .pg-root .pg-ctl {
+    flex: none;
+    padding-top: 6px;
+  }
+  .pg-root .pg-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .pg-root [data-pg-title] {
+    border-radius: 6px;
+    outline: none;
+    cursor: text;
+  }
+  .pg-root [data-pg-title]:hover,
+  .pg-root [data-pg-title]:focus {
+    box-shadow: 0 0 0 6px var(--panel);
+    background: var(--panel);
+  }
+  .pg-root .pg-pen {
+    flex: none;
+    color: var(--ink-4);
+    cursor: pointer;
+  }
+  .pg-root .pg-title:hover .pg-pen {
+    color: var(--ink-2);
+  }
+  /* the chart */
+  .pg-root .pg-out {
+    margin-top: 40px;
+  }
+  .pg-root .pg-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .pg-root .pg-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .pg-root .pg-key .muted {
+    color: var(--ink-3);
+  }
+  .pg-root .pg-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .pg-root .pg-svg .grid {
+    stroke: var(--grid);
+    stroke-width: 1;
+  }
+  .pg-root .pg-svg .vgrid {
+    stroke: var(--grid);
+    stroke-width: 1;
+    opacity: 0.7;
+  }
+  .pg-root .pg-svg .axis {
+    stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+  .pg-root .pg-svg .tick {
+    font: 400 var(--f) / 1 var(--mono);
+    fill: var(--ink-3);
+  }
+  .pg-root .pg-line {
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+  .pg-root .pg-pt .hit {
+    fill: transparent;
+  }
+  .pg-root .pg-pt:hover .hit {
+    stroke: var(--ink);
+    stroke-width: 1.2;
+  }
+  .pg-root .pg-en {
+    font: 600 calc(var(--f) + 1px) / 1 var(--sans);
+    fill: var(--ink);
+  }
+  .pg-root .pg-el {
+    font: 400 var(--f) / 1 var(--sans);
+    fill: var(--ink-2);
+  }
+  .pg-root .only-narrow {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .pg-root .only-wide {
+      display: none;
+    }
+    .pg-root .only-narrow {
+      display: block;
+    }
+  }
+  .pg-root .pg-tbl {
+    margin-top: 28px;
+    overflow-x: auto;
+  }
+  .pg-root .pg-t td:first-child {
+    white-space: nowrap;
+  }
+  .pg-root .pg-t .pg-dot {
+    margin-right: 8px;
+  }
+  .pg-root .pg-note {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+</style>

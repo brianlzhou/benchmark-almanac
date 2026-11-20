@@ -7,7 +7,7 @@ import ChartDownload from '../components/ChartDownload.astro';
 import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../lib/credits.ts';
 import Base from '../layouts/Base.astro';
 import { compareIndex, compareFile, defaultPicks } from '../lib/compare-data.ts';
-import { compute, caption, chips, winsList, table, filterRow, legend, DEFAULT_STATE, MAX_PICKS, type ModelFile, type State } from '../lib/compare.ts';
+import { compute, caption, chips, winsList, table, tableCsv, filterRow, legend, DEFAULT_STATE, MAX_PICKS, type ModelFile, type State } from '../lib/compare.ts';
 
 const idx = compareIndex();
 const ids = defaultPicks();
@@ -56,7 +56,7 @@ const names = picks.map((p) => p.name);
           <ul id="cmp-list" class="cmp-list" role="listbox" aria-label="Matching models" hidden data-list></ul>
         </div>
       </div>
-      <div class="cmp-sw">
+      <div class="cmp-sw ctl-row">
         <h2 class="cmp-label" id="cmp-src">Scores from</h2>
         <div class="seg cmp-seg" role="radiogroup" aria-labelledby="cmp-src">
           <label><input type="radio" name="cmp-src" value="ind" disabled />Independent runs</label>
@@ -89,8 +89,9 @@ const names = picks.map((p) => p.name);
         <p>No shared benchmark matches these filters.</p>
         <button type="button" class="cmp-small" data-reset>Clear the filters</button>
       </div>
-      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="bars" showWhen={'input[name="cmp-view"][value="bars"]:checked'} deckFrom="@lede" counts="Every benchmark all the picked models have scores on, from the sources picked under Scores from." leaves="Benchmarks that any picked model hasn't been scored on.">
+      <ChartDownload credit={creditLine(['official leaderboards', EPOCH_CREDIT, LAB_CARDS])} name="comparison" label="Download" csv deckFrom="@lede" counts="Every benchmark all the picked models have scores on, from the sources picked under Scores from." leaves="Benchmarks that any picked model hasn't been scored on.">
         <div class="cmp-results" data-results set:html={table(res, picks, idx.labs, st, new Set())} />
+        <textarea hidden aria-hidden="true" tabindex="-1" data-csv>{tableCsv(res, picks)}</textarea>
         <p class="cmp-legend" data-legend set:html={legend(res, 'table')} />
       </ChartDownload>
       <div class="cmp-share">
@@ -113,7 +114,7 @@ const names = picks.map((p) => p.name);
 </Base>
 
 <script>
-  import { compute, caption, chips, winsList, table, barsView, detail, filterRow, legend, readState, writeState, esc, labMark, MAX_PICKS, DEFAULT_STATE, type ModelIndex, type ModelFile, type State, type Source, type Cited, type SortCol, type View, type ModelPick, type Result } from '../lib/compare.ts';
+  import { compute, caption, chips, winsList, table, tableCsv, barsView, detail, filterRow, legend, readState, writeState, esc, labMark, MAX_PICKS, DEFAULT_STATE, type ModelIndex, type ModelFile, type State, type Source, type Cited, type SortCol, type View, type ModelPick, type Result } from '../lib/compare.ts';
 
   const root = document.querySelector<HTMLElement>('[data-cmp]')!;
   const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
@@ -233,6 +234,7 @@ const names = picks.map((p) => p.name);
       const firstBars = st.view === 'bars' && !drawn;
       box.innerHTML = st.view === 'bars' ? barsView(res, picks, idx.labs, st, showAll) : table(res, picks, idx.labs, st, open, showAll);
       $('[data-legend]').innerHTML = legend(res, st.view);
+      $('[data-csv]').textContent = tableCsv(res, picks);
       $('[data-out]').removeAttribute('aria-busy');
       if (firstBars) {
         drawn = true;
@@ -512,9 +514,6 @@ const names = picks.map((p) => p.name);
     min-width: 0;
   }
   .cmp-root .cmp-sw {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 8px 12px;
   }
   .cmp-root .cmp-sw .cmp-label {
@@ -1009,17 +1008,19 @@ const names = picks.map((p) => p.name);
     box-shadow: none;
   }
   /* a lab's own number: a small ring after it. Other cells keep an empty slot, so the digits line up. */
+  /* a ring drawn as a border, not a shadow, so the downloaded table keeps it */
   .cmp-root .own {
     display: inline-block;
+    box-sizing: border-box;
     width: 6px;
     height: 6px;
     margin-left: 5px;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 1.3px var(--ink-3);
+    border: 1.3px solid var(--ink-3);
     vertical-align: 0.12em;
   }
   .cmp-root .own.no {
-    box-shadow: none;
+    border-color: transparent;
   }
 
   /* one row's bars */

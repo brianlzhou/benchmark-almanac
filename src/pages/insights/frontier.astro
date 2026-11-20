@@ -9,10 +9,11 @@ import TrendChart from '../../components/insights/TrendChart.astro';
 import ShareBars from '../../components/insights/ShareBars.astro';
 import ReignStrip from '../../components/insights/ReignStrip.astro';
 import InsightCards from '../../components/insights/InsightCards.astro';
-import { openGap, gapFinding, leadTrend, leadFinding, timeAxis, pct, arenaReigns, arenaYears, eciRecords, cap, type TSeries } from '../../lib/insights.ts';
+import { openGap, gapFinding, leadTrend, leadFinding, timeAxis, pct, arenaReigns, arenaYears, eciRecords, eciReigns, costDrops, costFinding, cap, COST_AGO, COST_MIN_MODELS, type TSeries } from '../../lib/insights.ts';
+import CostDrops from '../../components/insights/CostDrops.astro';
 import { ARENA } from '../../lib/time-machine.ts';
 import { labColor, onLabColor } from '../../lib/palette.ts';
-import { ECI_CREDIT, POOL_CREDIT } from '../../lib/credits.ts';
+import { ECI_CREDIT, POOL_CREDIT, creditLine } from '../../lib/credits.ts';
 import { ECI_DECK, CLOCK_NOTE } from '../../lib/figure-text.ts';
 import { fullDate, humanDate } from '../../lib/format.ts';
 
@@ -35,6 +36,15 @@ const ay = arenaYears(reigns);
 const ayNow = ay.at(-1)!;
 const ayPrev = ay.at(-2)!;
 const arenaLede = `${cap(word(ayNow.count))} models have held Arena's number one in ${ayNow.year} so far, for a median of ${Math.round(ayNow.median)} days each. In ${ayPrev.year}, ${word(ayPrev.count)} held it for a median of ${Math.round(ayPrev.median)} days. ${reigns.at(-1)!.name} is on top now.`;
+
+// the index's number one: each model that set a new best, by its release date
+const eReigns = eciReigns();
+const ey = arenaYears(eReigns);
+const [eNow, ePrev, eFirst] = [ey.at(-1)!, ey.at(-2)!, ey[0]];
+const indexLede = `${cap(word(eNow.count))} models have taken the top spot on Epoch AI’s Capabilities Index in ${eNow.year} so far, for a median of ${Math.round(eNow.median)} days each. In ${ePrev.year}, ${word(ePrev.count)} held it for a median of ${Math.round(ePrev.median)} days, and in ${eFirst.year}, ${word(eFirst.count)} for ${Math.round(eFirst.median)}.`;
+
+// what last year's best score costs now, on the boards that price each task
+const drops = costDrops();
 
 const by = (p: (typeof g)[number]) => `By ${fullDate(p.date)}`;
 const eciSeries: TSeries[] = [
@@ -92,6 +102,16 @@ const tips = t.labs.map((l, k) =>
       </ChartDownload>
     </section>
 
+    <section id="index-number-one">
+      <div class="sh">
+        <h2>How long does the index's number one last?</h2>
+        <p>{indexLede} {eReigns.at(-1)!.name} is on top now.</p>
+      </div>
+      <ChartDownload credit={ECI_CREDIT} name="index-number-one" deck="Each model that set a new best on Epoch AI's Capabilities Index, from its release date until a newer model scored higher.">
+        <ReignStrip reigns={eReigns} label="Each model that held the best capabilities index score, along time, in its lab's color" />
+      </ChartDownload>
+    </section>
+
     <section id="number-one">
       <div class="sh-row">
         <div class="sh">
@@ -111,6 +131,22 @@ const tips = t.labs.map((l, k) =>
       </ChartDownload>
     </section>
 
+    <section id="cost">
+      <div class="sh">
+        <h2>What does last year's best score cost now?</h2>
+        <p>{costFinding(drops)}</p>
+      </div>
+      <ChartDownload
+        credit={creditLine(['official leaderboards'])}
+        name="cost-of-last-years-best-score"
+        deck={`On each board that prices every task, the cheapest run to the best score among models out by ${fullDate(COST_AGO)}, then and now, in US dollars per task on a log scale.`}
+        counts={`Percentage benchmarks where higher is better, with priced runs of at least ${word(COST_MIN_MODELS)} models out by then and three released since. A run counts from its model's release date.`}
+        leaves="Boards that price whole runs, and agents built around a model."
+      >
+        <CostDrops rows={drops} ago={COST_AGO} limit={15} label="On each board, the cost per task of the cheapest run to last year's best score, then and now" />
+      </ChartDownload>
+    </section>
+
     <section id="method">
       <div class="sh">
         <h2>How this is counted</h2>
@@ -125,8 +161,17 @@ const tips = t.labs.map((l, k) =>
           closed model sets a new best, the gap grows a month at a time.
         </p>
         <p>
+          The index's number one is the model with the best score among the models released by each day. A model takes the top spot on its release date, even if Epoch AI scored it later, and holds it
+          until a model released after it scores higher.
+        </p>
+        <p>
           Number one counts the same benchmarks as the <a href="/leaders/">Leaders</a> page, from the source each benchmark’s page leads with. {CLOCK_NOTE} Labs that never held a tenth of a half year are grouped as
           other labs.
+        </p>
+        <p>
+          The cost comparison uses the {drops.length} leaderboards that list a cost per task for runs of at least {word(COST_MIN_MODELS)} models released by {humanDate(COST_AGO)} and three released since. On each one we take the best
+          score among models out by then, the cheapest run that reached it then, and the cheapest run that reaches it now, from any model at any setting. A run counts from its model's release date, at the
+          cost the board lists. Costs compare only within a board, since boards price runs their own way, so each row shows how many times cheaper the score got rather than one price.
         </p>
       </div>
     </section>

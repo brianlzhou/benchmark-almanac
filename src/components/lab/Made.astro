@@ -1,0 +1,110 @@
+---
+// The benchmarks a lab made, alone or with others, and how far they spread: how many models have a score, and how
+// many releases from other labs named each, against the lab's own. The ones others use most come first.
+import { labMade, labName } from '../../lib/model-insights.ts';
+import { makers } from '../../lib/makers.ts';
+import { monthYear } from '../../lib/format.ts';
+
+interface Props {
+  lab: string;
+}
+const { lab } = Astro.props;
+const name = labName(lab);
+const rows = labMade(lab);
+const SHOWN = 8;
+const taken = rows.filter((r) => r.others > 0);
+const top = taken[0];
+const count = (n: number) => `${n} benchmark${n === 1 ? '' : 's'}`;
+const caption = !rows.length
+  ? ''
+  : `${name} made or helped make ${count(rows.length)} we track.${
+      top
+        ? ` Other labs named ${taken.length === rows.length ? (rows.length === 1 ? 'it' : 'all of them') : `${taken.length} of them`} in their releases, ${top.s.b.name} most often, in ${top.others} release${top.others === 1 ? '' : 's'} from ${top.otherLabs.length} lab${top.otherLabs.length === 1 ? '' : 's'}.`
+        : ` No other lab has named ${rows.length === 1 ? 'it' : 'one of them'} in a release yet.`
+    }`;
+---
+
+{
+  rows.length > 0 && (
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>Which benchmarks has {name} made?</h2>
+          <p>{caption}</p>
+        </div>
+        {makers.has(lab) && (
+          <a class="more" href={`/makers/${lab}/`}>
+            Every benchmark it made
+          </a>
+        )}
+      </div>
+      <div class="table-wrap">
+        <table class="t md">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th class="r md-rel">Released</th>
+              <th class="r">
+                <span class="md-w">Models scored</span>
+                <span class="md-n">Models</span>
+              </th>
+              <th class="r">
+                <span class="md-w">Other labs' releases</span>
+                <span class="md-n">Other labs</span>
+              </th>
+              <th class="r md-own">Its own releases</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr hidden={i >= SHOWN} data-reveal-row>
+                <td>
+                  <a href={`/benchmarks/${r.s.b.id}/`}>{r.s.b.name}</a>
+                </td>
+                <td class="r muted num nowrap md-rel">{monthYear(r.s.b.released)}</td>
+                <td class="r num">{r.s.nScores || <span class="muted">0</span>}</td>
+                <td class="r num">{r.others ? <span data-tv={`${r.others} release${r.others === 1 ? '' : 's'}`} data-tn={`From ${r.otherLabs.length} other lab${r.otherLabs.length === 1 ? '' : 's'}`}>{r.others}</span> : <span class="muted">0</span>}</td>
+                <td class="r num md-own">{r.own || <span class="muted">0</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {rows.length > SHOWN && (
+        <button type="button" class="more-rows" data-reveal>
+          Show all {rows.length}
+        </button>
+      )}
+    </section>
+  )
+}
+
+<style>
+  .more {
+    font-size: 14px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .md td:first-child {
+    width: 46%;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  .md-n {
+    display: none;
+  }
+  @media (max-width: 640px) {
+    .md-rel,
+    .md-own,
+    .md-w {
+      display: none;
+    }
+    .md-n {
+      display: inline;
+    }
+    .md td:first-child {
+      width: auto;
+    }
+  }
+</style>

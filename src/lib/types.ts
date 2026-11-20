@@ -28,6 +28,10 @@ export interface Model {
   /** URL of the lab's own card for this model. */
   card?: string;
   aliases?: string[];
+  /** A router that picks or combines other models for each request (Copilot Fusion), not one trained model. */
+  router?: boolean;
+  /** Names that mean this model at one setting, mapped to that setting: "GLM-5.3 Prime" is GLM-5.3 served fast. */
+  settingAliases?: Record<string, string>;
   /** Model group name in Epoch AI's data. */
   epoch?: string;
 }
@@ -76,6 +80,14 @@ export interface Benchmark {
   changes?: BenchmarkChange[];
   unit?: string;
   better?: 'higher' | 'lower';
+  /** What the headline score measures, when the name alone doesn't say: "Pass rate", "Mean reward". */
+  metric?: string;
+  /**
+   * Other scores on this benchmark that labs or boards report beside the headline: another way to score the whole
+   * test (a partial-credit score, pass@3) or the headline's measure on one part of it (128K context). A lab result
+   * that quotes one names it (CardResult.measure), and is compared only with the same measure, never the headline.
+   */
+  measures?: Measure[];
   confidence?: Confidence;
   /** Epoch Difficulty Index: on the same scale as the Epoch Capabilities Index. */
   edi?: number;
@@ -83,6 +95,21 @@ export interface Benchmark {
 }
 
 export type ChangeKind = 'regrade' | 'grader' | 'subset' | 'harness' | 'scoring' | 'questions' | 'policy';
+
+/** A score on a benchmark other than its headline (Benchmark.measures). */
+export interface Measure {
+  /** A short id, unique within the benchmark: "score", "pass-3", "128k". */
+  id: string;
+  /** As the lab or board names it: "Score", "Pass@3", "128K context". */
+  name: string;
+  /** "metric" scores the whole test another way. "part" is the headline's measure on one part of the test. */
+  kind: 'metric' | 'part';
+  /** One sentence on what it counts, where the name doesn't say. */
+  note?: string;
+  /** Its unit and direction, when they differ from the benchmark's. */
+  unit?: string;
+  better?: 'higher' | 'lower';
+}
 
 export interface BenchmarkChange {
   date: string;
@@ -110,6 +137,12 @@ export interface CardResult {
   as_written?: string;
   /** System cards: where in the document the result sits (capabilities, safety, bio-chem, cyber...). */
   section?: string;
+  /**
+   * When the number is not the benchmark's headline score but another of its measures (Benchmark.measures), the
+   * measure's id. Such a result stays out of the headline charts and ranks, and is compared only with the same
+   * measure on the board.
+   */
+  measure?: string;
 }
 
 export interface Card {
@@ -159,6 +192,8 @@ export interface Score {
   /** For a collected score, the source Epoch AI names: a title or a link. */
   from?: string | null;
   card?: string;
+  /** For a score on another of the benchmark's measures than its headline: the measure's id (Benchmark.measures). */
+  measure?: string;
   /**
    * The leaderboard's own name for an entry that is not in data/models.json (a fine-tune, agent system, product
    * or older model). Such a score has an empty `model`, shows on its benchmark's board, and never counts toward

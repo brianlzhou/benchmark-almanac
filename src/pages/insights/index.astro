@@ -3,8 +3,8 @@
 // pages that look back in time. Every number is computed from src/lib/insights.ts.
 import Base from '../../layouts/Base.astro';
 import InsightCards from '../../components/insights/InsightCards.astro';
-import { reportingTrend, evalTrend, saturationCohorts, satCompareMonth, leadTrend, makerTrend, arenaYears, pct } from '../../lib/insights.ts';
-import { SATURATED } from '../../lib/data.ts';
+import { reportingTrend, evalTrend, saturationCohorts, satCompareMonth, leadTrend, makerTrend, arenaYears, launchLife, costDrops, checkable, pct, CHECK_FROM } from '../../lib/insights.ts';
+import { SATURATED, AS_OF } from '../../lib/data.ts';
 
 const word = (n: number) => ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'][n] ?? String(n);
 
@@ -24,12 +24,25 @@ const acad = mk.kinds.find((k) => k.id === 'academia')!;
 const evalOrgs = mk.kinds.find((k) => k.id === 'eval')!;
 const ay = arenaYears();
 const lead = lt.labs.map((l, k) => ({ l, s: lt.shares[k][lLast] })).filter((x) => x.l.id !== 'other').sort((a, b) => b.s - a.s)[0];
+// the newer pages: how long benchmarks stay in launch posts, what last year's best score costs now, how much of a
+// launch post others have checked
+const life = launchLife().filter((c) => c.year !== AS_OF.slice(0, 4)).at(-1)!;
+const falls = costDrops()
+  .map((d) => d.fall)
+  .sort((a, b) => a - b);
+const midFall = falls.length % 2 ? falls[falls.length >> 1] : (falls[(falls.length >> 1) - 1] + falls[falls.length >> 1]) / 2;
+const ck = checkable();
 
 const stats = [
   {
     v: pct(r.topTen[rLast].v!),
     l: `of benchmark mentions in launch posts went to the ten most named in ${r.periods[rLast].name}, down from ${pct(r.topTen[rFirst].v!)} in ${r.periods[rFirst].name}`,
     href: '/insights/reporting/#over-time',
+  },
+  {
+    v: pct(life.once / life.n),
+    l: `of the benchmarks labs first named in ${life.year} appeared in only one release`,
+    href: '/insights/reporting/#lifespan',
   },
   {
     v: pct(e.hidden[eLast].v!),
@@ -56,12 +69,23 @@ const stats = [
     l: `of contested benchmark-days at number one went to ${lead.l.name} in ${lt.periods[lLast].name}`,
     href: '/insights/frontier/#number-one',
   },
+  {
+    v: `${midFall >= 10 ? Math.round(midFall) : midFall.toFixed(1)}×`,
+    l: `cheaper to match the best score from a year ago, on the median leaderboard that prices each task`,
+    href: '/insights/frontier/#cost',
+  },
+  {
+    v: pct(ck.total.run / ck.total.named),
+    l: `of the benchmarks labs named in launch posts since ${CHECK_FROM} have an independent score of the same model`,
+    href: '/insights/models/#checked',
+  },
 ];
 
 const elsewhere = [
+  { href: '/progress/', name: 'Progress over time', what: 'Plot the best score so far on up to eight benchmarks at once, by the release date of the model that set each record.' },
   { href: '/time-machine/', name: 'Time machine', what: 'The almanac as it stood on any day since 2023, with who led the capabilities index and Arena.' },
   { href: '/leaders/', name: 'Leaders', what: 'Who held number one in each category, for how long, and who took benchmarks past 85%.' },
-  { href: '/claims/', name: 'Lab claims next to leaderboards', what: 'How the scores labs publish compare with independent runs of the same models.' },
+  { href: '/claims/', name: 'How do claims and official scores differ?', what: 'How the scores labs publish compare with independent runs of the same models.' },
   { href: '/cards/', name: 'Model cards', what: 'Every launch post and system card we read, and what labs feature by area each half year.' },
   { href: '/sql/', name: 'Query with SQL', what: 'Every score and date behind these charts, to query in the browser or download.' },
 ];

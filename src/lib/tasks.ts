@@ -98,7 +98,7 @@ const isPublic = (b: Benchmark) => b.access === 'public' || b.access === 'public
 /** A difficulty level describes who could do a test's tasks. It doesn't fit safety evaluations, indexes or votes. */
 const levelFits = (b: Benchmark) =>
   b.category !== 'safety-alignment' && b.category !== 'other' && b.scoring !== 'preference' && b.scoring !== 'head-to-head' && !/\bindex\b/i.test(b.name);
-/** Artificial Analysis's terms keep its numbers out of the almanac, so its boards never get importers. */
+/** Artificial Analysis allows only its index numbers, which its API importer reads, so its other boards never get importers. */
 const NO_IMPORT = /artificialanalysis\.ai/;
 
 /** The name key the data scripts use (scripts/lib/util.ts and the New page), so a cataloged find drops off. */

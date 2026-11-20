@@ -1,19 +1,23 @@
 ---
 // A model's card: who made it and when, its Epoch Capabilities Index with a strip that places it among
 // every scored model, its Self-Reported Index from the lab's own numbers, and three headline results with
-// their ranks. A model with no ECI score leads with the Self-Reported Index. Hairline frame, no fills.
+// their ranks. A model with no ECI score leads with the Self-Reported Index. With index="aa" the card leads with
+// Artificial Analysis's Intelligence Index instead, and the ECI drops to a quiet line. Hairline frame, no fills.
 import LabMark from './LabMark.astro';
 import { modelSummary, headlineResults, eciValues, labById } from '../lib/data.ts';
 import { labColor } from '../lib/palette.ts';
 import { monthYear, score as fmt } from '../lib/format.ts';
 import { featuredIds } from '../lib/routes.ts';
 import { selfReported } from '../lib/self-reported.ts';
+import { aaByModel, aaRank, aaValues } from '../lib/aa-index.ts';
 
 interface Props {
   id: string;
   hero?: boolean;
+  /** The index the card leads with. */
+  index?: 'eci' | 'aa';
 }
-const { id, hero = false } = Astro.props;
+const { id, hero = false, index = 'eci' } = Astro.props;
 const ms = modelSummary(id);
 const m = ms.m;
 const lab = m.lab ? labById.get(m.lab) : undefined;
@@ -24,6 +28,9 @@ const srTitle = sr ? `Fit to ${sr.n} scores the lab reported. 90% interval ${sr.
 const lo = eciValues[0] ?? 0;
 const hi = eciValues.at(-1) ?? 1;
 const at = (v: number) => `${Math.min(100, Math.max(0, ((v - lo) / (hi - lo)) * 100)).toFixed(2)}%`;
+const aa = aaByModel.get(id);
+const aaLead = index === 'aa' && !!aa;
+const aaAt = (v: number) => `${Math.min(100, Math.max(0, ((v - (aaValues[0] ?? 0)) / ((aaValues.at(-1) ?? 1) - (aaValues[0] ?? 0) || 1)) * 100)).toFixed(2)}%`;
 const href = !hero && featuredIds.has(id) ? `/models/${id}/` : undefined;
 const Tag = href ? 'a' : 'div';
 const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', small: 'Small', 'open-weights': 'Open model' };
@@ -43,7 +50,20 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
     </p>
   </div>
   {
-    ms.eci ? (
+    aaLead ? (
+      <div class="eci">
+        <div class="eci-row">
+          <span class="eci-v">{aa!.value.toFixed(1)}</span>
+          <span class="eci-r num">
+            #{aaRank(id)} <span class="muted">of {aaValues.length}</span>
+          </span>
+        </div>
+        <div class="eci-l">Artificial Analysis Intelligence Index</div>
+        <div class="rug aa" aria-hidden="true">
+          <b class="me" style={`left:${aaAt(aa!.value)}`} />
+        </div>
+      </div>
+    ) : ms.eci ? (
       <div class="eci">
         <div class="eci-row">
           <span class="eci-v">{ms.eci.eci.toFixed(1)}</span>
@@ -74,11 +94,29 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
     )
   }
   {
-    ms.eci && sr && (
-      <div class="sr" title={srTitle}>
-        <span class="sr-l">Self-Reported Index</span>
-        <span class="sr-v num">{sr.value.toFixed(1)}</span>
-        <span class="sr-r num">#{sr.rank} <span class="muted">of {selfReported.size}</span></span>
+    aaLead && ms.eci && (
+      <div class="ql">
+        <span class="ql-l">Epoch Capabilities Index</span>
+        <span class="ql-v num">{ms.eci.eci.toFixed(1)}</span>
+        <span class="ql-r num">#{ms.eciRank} <span class="muted">of {eciValues.length}</span></span>
+      </div>
+    )
+  }
+  {
+    !aaLead && aa && (
+      <div class="ql" title="Artificial Analysis's composite of nine evaluations it runs itself">
+        <span class="ql-l">AA Intelligence Index</span>
+        <span class="ql-v num">{aa.value.toFixed(1)}</span>
+        <span class="ql-r num">#{aaRank(id)} <span class="muted">of {aaValues.length}</span></span>
+      </div>
+    )
+  }
+  {
+    !aaLead && ms.eci && sr && (
+      <div class="ql" title={srTitle}>
+        <span class="ql-l">Self-Reported Index</span>
+        <span class="ql-v num">{sr.value.toFixed(1)}</span>
+        <span class="ql-r num">#{sr.rank} <span class="muted">of {selfReported.size}</span></span>
       </div>
     )
   }
@@ -176,8 +214,9 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
   .none .eci-l {
     margin-top: 0;
   }
-  /* the Self-Reported Index under the ECI: one quiet line, since it rests on numbers labs chose to show */
-  .sr {
+  /* the quiet lines under the headline index (the Self-Reported Index, and the other ranking index): one line each.
+     Not .sr, which is the site's screen-reader-only class and hid these lines */
+  .ql {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
     column-gap: 10px;
@@ -185,13 +224,13 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
     margin-top: -6px;
     font-size: 13px;
   }
-  .sr-l {
+  .ql-l {
     color: var(--ink-3);
   }
-  .sr-v {
+  .ql-v {
     font-weight: 500;
   }
-  .sr-r {
+  .ql-r {
     min-width: 4.4em;
     text-align: right;
     color: var(--ink-2);
@@ -203,6 +242,10 @@ const TIER: Record<string, string> = { flagship: 'Flagship', mid: 'Mid-size', sm
   }
   .rug {
     background: url(/eci-rug.svg) 0 5px / 100% 8px no-repeat;
+  }
+  /* the Intelligence Index has no distribution strip of its own: a hairline baseline stands in */
+  .rug.aa {
+    background: linear-gradient(var(--line), var(--line)) 0 8px / 100% 2px no-repeat;
   }
   .rug .ci {
     position: absolute;

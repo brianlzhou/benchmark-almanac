@@ -65,6 +65,21 @@ export function poolViews(id: string, from: string): PoolView[] {
   return out.length > 1 ? out : out.slice(0, 1);
 }
 
+/**
+ * Models newer than any an independent source has scored, that only their labs have numbers for: the board hasn't
+ * caught up with them. `last` is the newest model the independent sources did score. Empty when nothing is newer.
+ */
+export function newerClaims(id: string): { last?: Score; models: Score[] } {
+  const s = benchSummary(id);
+  const ind = [...s.leaderboardBoard, ...s.epochBoard, ...s.viaBoard];
+  if (!ind.length) return { models: [] };
+  const rel = (x: Score) => modelById.get(x.model)?.released ?? '';
+  const last = [...ind].sort((a, b) => rel(b).localeCompare(rel(a)))[0];
+  const scored = new Set(ind.map((x) => x.model));
+  const models = bestPerModel([...s.cardBoard, ...s.claimBoard], s.b).filter((x) => !scored.has(x.model) && rel(x) > rel(last));
+  return { last, models };
+}
+
 /** Who a score is from, as a phrase: "Epoch AI’s run of Claude Fable 5.2". */
 export function whose(x: Pick<Score, 'model' | 'source' | 'via' | 'from'>): string {
   const m = name(x.model);

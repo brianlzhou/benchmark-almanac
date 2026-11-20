@@ -7,6 +7,7 @@ import ModelCard from '../components/ModelCard.astro';
 import MiniBoard from '../components/MiniBoard.astro';
 import AreaShare from '../components/AreaShare.astro';
 import Lifecycle from '../components/Lifecycle.astro';
+import InsightCards from '../components/insights/InsightCards.astro';
 import HeroArt from '../components/HeroArt.astro';
 import AreaMark from '../components/AreaMark.astro';
 import SearchBox from '../components/SearchBox.astro';
@@ -16,6 +17,8 @@ import { mostReportedRows } from '../lib/leaders.ts';
 import { POOL_LABEL } from '../lib/pools.ts';
 import { allSummaries, benchmarks, cards, eciOrder, AS_OF, monthsBetween, SATURATED, benchById } from '../lib/data.ts';
 import { humanDate } from '../lib/format.ts';
+import IndexSwitch from '../components/IndexSwitch.astro';
+import { aaOrder, aaReady } from '../lib/aa-index.ts';
 import Criteria from '../components/Criteria.astro';
 import { REPO, SUBMIT_FORM } from '../lib/criteria.ts';
 import { SITE_NAME, SITE_DESCRIPTION, CATALOG_ID } from '../lib/site.ts';
@@ -162,17 +165,26 @@ const catalog = {
       </div>
     </header>
 
-    <section>
+    <section data-ix>
       <div class="sh-row">
         <div class="sh">
           <h2>Catching the frontier</h2>
-          <p>We rank models based on Epoch AI's Capabilities Index, an aggregate score from many benchmarks.</p>
+          <p class="ix-eci">We rank models based on <a href="https://epoch.ai/eci">Epoch AI's Capabilities Index</a>, an aggregate score from many benchmarks.</p>
+          {aaReady && <p class="ix-aa">We rank models based on <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">Artificial Analysis's Intelligence Index</a>, a composite of nine evaluations it runs itself.</p>}
+          {aaReady && <div class="ix-under"><IndexSwitch /></div>}
         </div>
         <a class="more" href="/models/">All models</a>
       </div>
-      <div class="grid3">
+      <div class="grid3 ix-eci">
         {eciOrder.slice(0, 6).map((id) => <ModelCard id={id} />)}
       </div>
+      {
+        aaReady && (
+          <div class="grid3 ix-aa">
+            {aaOrder.slice(0, 6).map((id) => <ModelCard id={id} index="aa" />)}
+          </div>
+        )
+      }
     </section>
 
     {
@@ -185,7 +197,7 @@ const catalog = {
                 We track the {crown.tests.length} most-cited benchmarks in model releases in the past year. {topTest} was the most cited, featured in {n(crown.tests[0].n)} releases.
               </p>
             </div>
-            <div class="crown-tools">
+            <div class="crown-tools ctl-row">
               <div class="seg" role="radiogroup" aria-label="Scores from">
                 {crownViews.map((v, k) => (
                   <label>
@@ -237,6 +249,17 @@ const catalog = {
       <ChartDownload {...lifeFigure}>
         <Lifecycle ids={life} />
       </ChartDownload>
+    </section>
+
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>How AI evaluation is changing</h2>
+          <p>We chart how each of these has changed since 2023, from the same launch posts and scores as the rest of the almanac.</p>
+        </div>
+        <a class="more" href="/insights/">All insights</a>
+      </div>
+      <InsightCards />
     </section>
 
     {
@@ -395,9 +418,6 @@ const catalog = {
     font-style: italic;
   }
   .crown-tools {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 10px 22px;
   }
   .hero-lede {

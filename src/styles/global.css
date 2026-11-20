@@ -363,6 +363,19 @@ section + section {
   flex: 1 1 480px;
   min-width: 0;
 }
+/* Controls beside a head sit on the bottom line. A text link sits on the baseline of the head's last line, the
+   caption's or the title's, so the two read as one line of text. */
+.sh-row > .sh,
+.sh-row > a {
+  align-self: last baseline;
+}
+/* a lone (?) stays beside the head on a phone too, instead of wrapping onto a line of its own */
+.sh-row:has(> .sh + .help-q:last-child) {
+  column-gap: 12px;
+}
+.sh-row > .sh:has(+ .help-q:last-child) {
+  flex-basis: 0;
+}
 
 /* one component, two renders: a desktop one and a phone one */
 .only-narrow {
@@ -416,7 +429,20 @@ section + section {
   color: var(--ink-2);
 }
 
-/* controls: gray panels, small text */
+/* controls: gray panels, small text. Every boxed control (a switch, a dropdown, a field, a button beside them) is
+   --ctl-h tall, so controls that share a row share a top, a bottom and a center. */
+:root {
+  --ctl-h: 36px;
+}
+/* one row of controls: switches, toggles, (?) buttons, dropdowns, fields and the text between them share one
+   vertical center and wrap cleanly onto the next line */
+.ctl-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-width: 0;
+}
 .seg {
   display: inline-flex;
   background: var(--panel);
@@ -429,7 +455,8 @@ section + section {
 .seg button {
   font: 500 13px/1 var(--sans);
   color: var(--ink-3);
-  padding: 8px 12px;
+  /* 13px of text and 8.5px above and below, inside the 3px rim: --ctl-h */
+  padding: 8.5px 12px;
   border-radius: 7px;
   cursor: pointer;
   text-decoration: none;
@@ -459,6 +486,8 @@ section + section {
   border: 0;
   border-radius: 9px;
   padding: 11px 14px;
+  /* a text input won't go below the font's own line height, so the height is set, not left to the padding */
+  height: var(--ctl-h);
   min-width: 0;
 }
 .field::placeholder {
@@ -530,11 +559,10 @@ select.field {
   flex-wrap: wrap;
   max-width: 100%;
 }
+/* a .ctl-row that never wraps, so the (?) stays beside the switch it explains */
 .ent-ctl {
-  display: flex;
-  align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
-  max-width: 100%;
   margin-top: 12px;
 }
 /* a small round (?) that explains the control beside it, through the shared tooltip */
@@ -830,7 +858,9 @@ table.t {
   color: var(--ink-2);
   white-space: nowrap;
 }
-.tag > .dot {
+.tag > .dot,
+.tag > .mark,
+.tag > svg {
   align-self: center;
 }
 .t td .tag {
@@ -1132,4 +1162,37 @@ table.t {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* a section with the index switch (src/components/IndexSwitch.astro) shows the parts for the index picked */
+.ix-under {
+  margin-top: 12px;
+}
+[data-ix]:has(input[name='ix'][value='aa']:checked) .ix-eci,
+[data-ix]:not(:has(input[name='ix'][value='aa']:checked)) .ix-aa {
+  display: none !important;
+}
+
+/* under a benchmark's "Scores from" switch: newer models that only their labs have numbers for */
+.pool-note {
+  margin-top: 10px;
+  max-width: 72ch;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.pool-note .pool-to {
+  font: inherit;
+  font-weight: 500;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--ink-4);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.pool-note .pool-to:hover {
+  text-decoration-color: currentColor;
 }

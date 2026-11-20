@@ -1,6 +1,6 @@
 ---
 // The one dropdown the site uses. A hidden native select keeps the value, so filter scripts read and set
-// it as before. On top sits a button and a listbox with nested options, counts, a check on the choice, a
+// it as before. With `multiple`, the reader can pick several options and the select holds them all. On top sits a button and a listbox with nested options, counts, a check on the choice, a
 // search box for long lists, and full keyboard support (src/scripts/dropdown.ts).
 
 export interface Option {
@@ -20,15 +20,22 @@ interface Props {
   wide?: boolean;
   /** Changes how the table shows its rows, not which rows show: the filter script leaves it alone. */
   viewOnly?: boolean;
+  /** The option chosen when the page loads, when it isn't the first. */
+  value?: string;
+  /**
+   * Lets the reader pick several options, any of which a row may match. The first option (value "") stands for
+   * none chosen. The panel stays open while the reader picks.
+   */
+  multiple?: boolean;
 }
-const { filterKey, label, options, search = false, wide = false, viewOnly = false } = Astro.props;
-const first = options[0];
+const { filterKey, label, options, search = false, wide = false, viewOnly = false, value, multiple = false } = Astro.props;
+const first = options.find((o) => o.value === value) ?? options[0];
 const id = `dd-${filterKey}`;
 ---
 
 <div class:list={['dd', { wide }]} data-dd data-view-only={viewOnly ? '' : undefined}>
-  <select class="dd-native" aria-hidden="true" tabindex="-1" {...{ [`data-${filterKey}`]: '' }}>
-    {options.map((o) => <option value={o.value}>{o.label}</option>)}
+  <select class="dd-native" aria-hidden="true" tabindex="-1" multiple={multiple} {...{ [`data-${filterKey}`]: '' }}>
+    {options.map((o) => <option value={o.value} selected={!multiple && o === first}>{o.label}</option>)}
   </select>
   <button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="false" aria-controls={`${id}-list`} aria-label={label}>
     <span class="dd-v">{first?.label}</span>
@@ -36,10 +43,10 @@ const id = `dd-${filterKey}`;
   </button>
   <div class="dd-p" hidden>
     {search && <input class="dd-s" type="search" placeholder={`Search ${label.toLowerCase()}`} aria-label={`Search ${label.toLowerCase()}`} autocomplete="off" />}
-    <ul class="dd-l" role="listbox" id={`${id}-list`} aria-label={label} tabindex="-1">
+    <ul class="dd-l" role="listbox" id={`${id}-list`} aria-label={label} aria-multiselectable={multiple ? 'true' : undefined} tabindex="-1">
       {
         options.map((o, i) => (
-          <li role="option" id={`${id}-${i}`} data-value={o.value} data-depth={o.depth ?? 0} aria-selected={i === 0 ? 'true' : 'false'}>
+          <li role="option" id={`${id}-${i}`} data-value={o.value} data-depth={o.depth ?? 0} aria-selected={o === first ? 'true' : 'false'}>
             <svg class="ck" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
               <path d="M3 7.5l2.5 2.5L11 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>

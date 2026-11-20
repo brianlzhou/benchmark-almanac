@@ -7,6 +7,7 @@ import { modelById, sourceLabel, isClaim, isRerun, entryLabel, LEADERBOARDS, int
 import { labColor, agentTint } from '../lib/palette.ts';
 import { score as fmt, monthYear } from '../lib/format.ts';
 import { niceMax, ratingFloor } from '../lib/scale.ts';
+import { frontierAttrs } from '../lib/frontier.ts';
 
 interface Props {
   scores: Score[];
@@ -50,7 +51,7 @@ const mark = (s: Score) => (s.info?.verified && LEADERBOARDS[s.benchmark]?.verif
 <ol class="bb" data-bb>
   {
     rows.map((s, i) => (
-      <li class:list={{ hi: !!s.model && s.model === highlight, later: more && i >= limit }}>
+      <li {...frontierAttrs(s.model)} class:list={{ hi: !!s.model && s.model === highlight, later: more && i >= limit }}>
         <span class="rk num">{i + 1}</span>
         <span class="who">
           <ModelName id={s.model} setting={s.setting} name={s.name} system={s.system} models={s.info?.models} verified={mark(s)} />

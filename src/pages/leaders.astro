@@ -238,7 +238,7 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
                     <h2>Who finishes benchmarks off?</h2>
                     <p data-co-cap>{coLine}</p>
                   </div>
-                  <div class="co-tools">
+                  <div class="co-tools ctl-row">
                     <div class="seg" role="radiogroup" aria-label="Saturated at">
                       {CLOSE_LEVELS.map((t, i) => (
                         <label>
@@ -532,11 +532,8 @@ const longest = eci?.reigns.filter((g) => g.start >= '2023-01-01').sort((a, b) =
       display: none;
     }
   }
-  /* the close-out threshold and area, side by side at the right of the title */
+  /* the close-out threshold and area, side by side at the right of the title (.ctl-row) */
   .co-tools {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 8px 12px;
   }
 </style>

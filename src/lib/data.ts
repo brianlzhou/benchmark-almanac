@@ -78,8 +78,20 @@ type Board = {
   harnesses?: 'system';
   /** What the board's verified mark means. */
   verified?: string;
+  /** The parts of the benchmark the board scores on their own, by metric key (scripts/leaderboards/types.ts). */
+  parts?: Record<string, BoardPart>;
+  /** Columns that hold another of the benchmark's measures: metric key -> measure id (Benchmark.measures). */
+  measures?: Record<string, string>;
   failed?: { date: string; error: string };
 };
+/** One part of a benchmark a board scores on its own: a subject, language, difficulty or user group. */
+export interface BoardPart {
+  name: string;
+  group?: string;
+  note?: string;
+  unit?: string;
+  better?: 'higher' | 'lower';
+}
 const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
@@ -353,9 +365,14 @@ function effortOf(text: string | undefined): string | null {
   return w ? `${w} effort` : null;
 }
 
-/** Card scores in the benchmark's own unit. A score in another unit (an Elo beside percentages) is left out. */
+/**
+ * Card scores in the benchmark's own unit, on its headline measure. A score in another unit (an Elo beside
+ * percentages) is left out, and so is a number on another of its measures (a partial-credit score beside a pass
+ * rate, one part of the test), which measureScores keeps.
+ */
 export const cardScores: Score[] = [...cards, ...systemCards].flatMap((c) =>
   c.results
+    .filter((r) => !r.measure)
     .filter((r) => r.score !== null && normUnit(r.unit) === (benchById.get(r.benchmark)?.unit ?? '%'))
     .filter((r) => normUnit(r.unit) !== '%' || ((r.score as number) >= 0 && (r.score as number) <= 100))
     .map((r) => ({
@@ -370,6 +387,36 @@ export const cardScores: Score[] = [...cards, ...systemCards].flatMap((c) =>
       card: c.id,
     })),
 );
+
+/** A benchmark's other measures (Benchmark.measures), by id. */
+export function measureOf(benchmark: string, id: string | undefined) {
+  return id ? benchById.get(benchmark)?.measures?.find((m) => m.id === id) : undefined;
+}
+/**
+ * Scores on a benchmark's other measures: the numbers labs report on them (a result's `measure`), and the board
+ * columns that hold them (a board's `measures`, metric key -> measure id). Each is in the measure's own unit.
+ */
+export const measureScores: Score[] = [
+  ...[...cards, ...systemCards].flatMap((c) =>
+    c.results.flatMap((r): Score[] => {
+      const m = measureOf(r.benchmark, r.measure);
+      const unit = m?.unit ?? benchById.get(r.benchmark)?.unit ?? '%';
+      if (!m || r.score === null || normUnit(r.unit) !== unit) return [];
+      return [{ benchmark: r.benchmark, model: c.model, value: r.score, unit, setting: effortOf(r.as_written), harness: null, date: c.date, source: 'card', card: c.id, measure: m.id }];
+    }),
+  ),
+  ...leaderboardScores.flatMap((s): Score[] => {
+    const cols = lb.boards[s.benchmark]?.measures;
+    if (!cols || !s.metrics) return [];
+    return Object.entries(cols).flatMap(([key, id]) => {
+      const m = measureOf(s.benchmark, id);
+      const v = s.metrics![key];
+      if (!m || !Number.isFinite(v)) return [];
+      const { metrics: _m, ...rest } = s;
+      return [{ ...rest, value: v, unit: m.unit ?? s.unit, measure: id }];
+    });
+  }),
+];
 
 function groupBy<T>(xs: T[], k: (x: T) => string): Map<string, T[]> {
   const m = new Map<string, T[]>();
@@ -673,8 +720,11 @@ export function addedOptions(rows: BenchSummary[]) {
 export interface ModelResult {
   benchmark: Benchmark;
   score: Score;
+  /** The model's place on the board its score comes from, or 0 when the score is a lab's own number on a benchmark that independent runs also score: a claim never ranks against those. */
   rank: number;
   of: number;
+  /** 'claims': ranked among labs' own numbers, the only scores the benchmark has. 'none': a lab's own number, not ranked. */
+  among?: 'claims' | 'none';
 }
 
 export interface ModelSummary {
@@ -697,13 +747,17 @@ export function modelSummary(id: string): ModelSummary {
   const results: ModelResult[] = [];
   for (const b of benchmarks) {
     const s = benchSummary(b.id);
+    // a lab's own number ranks only where labs' numbers are all the benchmark has. Where independent runs exist and
+    // haven't scored this model, its lab's number shows unranked, so a claim never reads as first place.
+    const independent = s.leaderboardBoard.length + s.epochBoard.length + s.viaBoard.length > 0;
     for (const board of [s.board, s.leaderboardBoard, s.epochBoard, s.viaBoard, s.cardBoard, s.claimBoard]) {
       if (!board.length) continue;
       const i = board.findIndex((x) => x.model === id);
-      if (i >= 0) {
-        results.push({ benchmark: b, score: board[i], rank: i + 1, of: board.length });
-        break;
-      }
+      if (i < 0) continue;
+      const claim = isClaim(board[i]);
+      if (claim && independent) results.push({ benchmark: b, score: board[i], rank: 0, of: 0, among: 'none' });
+      else results.push({ benchmark: b, score: board[i], rank: i + 1, of: board.length, ...(claim ? { among: 'claims' as const } : {}) });
+      break;
     }
   }
   const eci = eciByModel.get(id);

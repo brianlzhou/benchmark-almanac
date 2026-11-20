@@ -1,17 +1,18 @@
 ---
 // The Insights pages as cards: each one's title, its lead finding and a small chart of its lead series. The
 // overview lists all of them, and each page ends with the others.
-import { reportingTrend, evalTrend, openGap, reportingFinding, evalFinding, gapFinding } from '../../lib/insights.ts';
+import { reportingTrend, evalTrend, openGap, checkable, reportingFinding, evalFinding, gapFinding, CHECK_FROM } from '../../lib/insights.ts';
 
 interface Props {
   /** The page this sits on, left out of the list. */
-  except?: 'reporting' | 'evals' | 'frontier';
+  except?: 'reporting' | 'evals' | 'frontier' | 'models';
 }
 const { except } = Astro.props;
 
 type Line = { label: string; color: string; vals: (number | null)[]; fmt: (v: number) => string };
 const share = (v: number) => `${Math.round(100 * v)}%`;
 const gap = openGap();
+const ck = checkable();
 const all: { key: NonNullable<Props['except']>; href: string; title: string; finding: string; what: string; lines: Line[]; zero: boolean }[] = [
   {
     key: 'reporting',
@@ -43,8 +44,18 @@ const all: { key: NonNullable<Props['except']>; href: string; title: string; fin
     ],
     zero: false,
   },
+  {
+    key: 'models',
+    href: '/insights/models/',
+    title: 'How do new models get tested?',
+    finding: `Of the benchmarks labs named in launch posts since ${CHECK_FROM}, an official leaderboard or Epoch AI has scored the same model on ${share(ck.total.run / ck.total.named)}.`,
+    what: `Share of the benchmarks labs named that others scored on the same model, each year since ${CHECK_FROM}`,
+    lines: [{ label: '', color: 'var(--ink)', vals: ck.years.map((y) => y.run / y.named), fmt: share }],
+    zero: true,
+  },
 ];
 const cards = all.filter((c) => c.key !== except);
+// four cards sit two by two, so each title keeps to one line and the charts line up
 
 // a small line chart in a 300 by 84 box, with the last value named at the right
 const W = 300;
@@ -73,7 +84,7 @@ function spark(c: (typeof all)[number]) {
 }
 ---
 
-<ul class="ic" style={`--n:${cards.length}`}>
+<ul class="ic" style={`--n:${cards.length === 4 ? 2 : cards.length}`}>
   {
     cards.map((c) => (
       <li>

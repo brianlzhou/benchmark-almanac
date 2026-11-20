@@ -1,0 +1,218 @@
+---
+// One saved view (data/views.json): a named filter over the facets in data/facets.json. The page says what puts a
+// benchmark in the view, how fast the view grows, how much of it no model has passed, and lists its benchmarks.
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import LabMark from '../../components/LabMark.astro';
+import { evalAttrs } from '../../lib/eval-kind.ts';
+import { benchmarks, benchSummary, modelById, SATURATED } from '../../lib/data.ts';
+import { LEVEL_BY_ID, levelIndex } from '../../lib/taxonomy.ts';
+import { score as fmt, monthYear } from '../../lib/format.ts';
+import { isArena } from '../../lib/counts.ts';
+import { VIEWS, inView, ruleText, viewById } from '../../lib/facets.ts';
+
+export function getStaticPaths() {
+  return VIEWS.map((v) => ({ params: { id: v.id } }));
+}
+
+const view = viewById(Astro.params.id!)!;
+const all = benchmarks
+  .filter((b) => inView(view, b.id))
+  .map((b) => benchSummary(b.id))
+  .sort((a, b) => (b.b.released ?? '').localeCompare(a.b.released ?? '') || a.b.name.localeCompare(b.b.name));
+const arenas = all.filter((s) => isArena(s.b)).length;
+const scored = all.filter((s) => s.best && (s.b.unit ?? '%') === '%' && (s.b.better ?? 'higher') === 'higher');
+const open = scored.filter((s) => (s.best?.value ?? 0) < SATURATED);
+const openPct = scored.length ? Math.round((100 * open.length) / scored.length) : 0;
+
+// benchmarks by release half-year, from 2024 on, with everything earlier in one bar
+const halfOf = (m: string) => `${m.slice(0, 4)} ${Number(m.slice(5, 7)) <= 6 ? 'H1' : 'H2'}`;
+const HALVES = ['2024 H1', '2024 H2', '2025 H1', '2025 H2', '2026 H1', '2026 H2'];
+const byHalf = new Map<string, number>([['Earlier', 0], ...HALVES.map((h) => [h, 0] as [string, number])]);
+for (const s of all) {
+  const r = s.b.released;
+  if (!r) continue;
+  const h = halfOf(r);
+  byHalf.set(byHalf.has(h) ? h : 'Earlier', (byHalf.get(byHalf.has(h) ? h : 'Earlier') ?? 0) + 1);
+}
+const bars = [...byHalf.entries()];
+const maxBar = Math.max(1, ...bars.map(([, n]) => n));
+const [last, prev] = [byHalf.get('2026 H2') ?? 0, byHalf.get('2026 H1') ?? 0];
+const growth =
+  last > prev
+    ? `${last} were released since July, more than the ${prev} in the first half of 2026`
+    : last === prev
+      ? `${last} were released since July, as many as in the first half of 2026`
+      : `${last} were released since July, against ${prev} in the first half of 2026`;
+const rule = ruleText(view.rule);
+const STATUS: Record<string, string> = { 'in use': 'In use', fading: 'Fading', dropped: 'Dropped', 'system cards': 'System cards only', 'not in cards': 'Not in cards' };
+const trail = [
+  { href: '/benchmarks/', label: 'Benchmarks' },
+  { href: '/views/', label: 'Views' },
+];
+---
+
+<Base title={view.name} description={`${view.note} ${all.length} benchmarks, how fast they grow and how many no model has passed.`} crumbs={trail}>
+  <div class="page">
+    <header class="head">
+      <Crumbs items={trail} />
+      <h1>{view.name}</h1>
+      <p class="lede">
+        {view.note} We count {all.length} {all.length === 1 ? 'benchmark' : 'benchmarks'} here{arenas ? `, ${arenas} of them arenas` : ''}.
+        A benchmark belongs here when {rule}.
+      </p>
+    </header>
+
+    {
+      all.length > 0 && (
+        <section class="two">
+          <div>
+            <div class="sh">
+              <h2>How fast it grows</h2>
+              <p>{growth}.</p>
+            </div>
+            <ol class="bars" aria-label="Benchmarks released in each half-year">
+              {bars.map(([h, n]) => (
+                <li>
+                  <span class="bl">{h}</span>
+                  <span class="bt"><span class="bf" style={`width:${(100 * n) / maxBar}%`} /></span>
+                  <span class="bn num">{n}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          {scored.length >= 3 && (
+            <div>
+              <div class="sh">
+                <h2>How much is still open</h2>
+                <p>
+                  No model has passed {SATURATED}% on {open.length} of the {scored.length} benchmarks here that score in percent, {openPct}% of them.
+                </p>
+              </div>
+              <div class="meter" role="img" aria-label={`${openPct}% still open`}>
+                <span style={`width:${openPct}%`} />
+              </div>
+            </div>
+          )}
+        </section>
+      )
+    }
+
+    <section>
+      <div class="sh">
+        <h2>Every benchmark in this view</h2>
+        <p>Newest first. Facets come from each benchmark’s own documents, and <a href="/methodology/#facets">our methodology</a> says how we tag them.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="t" data-sort>
+          <thead>
+            <tr><th>Benchmark</th><th data-first="asc">Level</th><th>Released</th><th class="r">Best score</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            {all.map((s) => {
+              const lead = s.best ? modelById.get(s.best.model) : undefined;
+              return (
+                <tr {...evalAttrs(s.b)}>
+                  <td class="nm">
+                    <a href={`/benchmarks/${s.b.id}/`}>{s.b.name}</a>
+                    {s.b.description && <span class="desc">{s.b.description}</span>}
+                  </td>
+                  <td class="muted nowrap" data-v={s.b.level ? String(levelIndex(s.b.level)) : undefined}>{s.b.level ? LEVEL_BY_ID.get(s.b.level)?.name : ''}</td>
+                  <td class="muted nowrap" data-v={s.b.released ?? ''}>{s.b.released ? monthYear(s.b.released) : ''}</td>
+                  <td class="r nowrap" data-v={s.best && (s.b.unit ?? '%') === '%' ? String(s.best.value) : undefined}>
+                    {s.best && lead && (
+                      <span class="best">
+                        <LabMark lab={lead.lab} size={14} />
+                        {fmt(s.best.value, s.b.unit ?? '%')}
+                      </span>
+                    )}
+                  </td>
+                  <td class="nowrap">
+                    <span class:list={['tag', `status-${s.status.replace(/ /g, '-')}`]}>
+                      <span class="dot" />
+                      {STATUS[s.status]}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {all.length === 0 && <p class="muted">No benchmark is tagged into this view yet.</p>}
+    </section>
+  </div>
+</Base>
+
+<style>
+  .two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+  }
+  .bars {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .bars li {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 36px;
+    gap: 10px;
+    align-items: center;
+  }
+  .bl {
+    color: var(--ink-3);
+  }
+  .bt {
+    height: 10px;
+  }
+  .bf {
+    display: block;
+    height: 100%;
+    min-width: 2px;
+    border-radius: 0 4px 4px 0;
+    background: var(--ink-2);
+  }
+  .bn {
+    text-align: right;
+  }
+  .meter {
+    margin-top: 16px;
+    height: 12px;
+    border-radius: 6px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .meter span {
+    display: block;
+    height: 100%;
+    background: var(--ink-2);
+  }
+  .nm a {
+    font-weight: 500;
+  }
+  .desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--ink-3);
+    font-size: 13px;
+    max-width: 58ch;
+  }
+  .best {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    .two {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

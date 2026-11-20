@@ -14,6 +14,11 @@ import { labs, featuredModels, labPages, models, cards, systemCards, eciByModel,
 import { monthYear, fullDate, yearFrac } from '../../lib/format.ts';
 import { labColor } from '../../lib/palette.ts';
 import { yearTicks, yearLines } from '../../lib/scale.ts';
+import LeadShare from '../../components/lab/LeadShare.astro';
+import Cadence from '../../components/lab/Cadence.astro';
+import Carried from '../../components/lab/Carried.astro';
+import Made from '../../components/lab/Made.astro';
+import ClaimSplit from '../../components/lab/ClaimSplit.astro';
 
 export function getStaticPaths() {
   return labs.filter((l) => labPages.has(l.id)).map((l) => ({ params: { id: l.id } }));
@@ -119,6 +124,10 @@ const color = labColor(id);
       )
     }
 
+    <LeadShare lab={id!} />
+
+    <Cadence lab={id!} />
+
     {
       brag.length > 0 && (
         <section data-brag>
@@ -175,6 +184,12 @@ const color = labColor(id);
       )
     }
 
+    <Carried lab={id!} />
+
+    <Made lab={id!} />
+
+    <ClaimSplit lab={id!} />
+
     {
       cs.length > 0 && (
         <section>
@@ -221,6 +236,13 @@ const color = labColor(id);
 </Base>
 
 <script>
+  // "Show all": the rows past the first few wait hidden in their section
+  for (const b of document.querySelectorAll<HTMLButtonElement>('button[data-reveal]')) {
+    b.addEventListener('click', () => {
+      for (const r of b.closest('section')!.querySelectorAll<HTMLElement>('[data-reveal-row]')) r.hidden = false;
+      b.hidden = true;
+    });
+  }
   // the brag chart's pill: launch posts, system cards or all reports
   for (const sec of document.querySelectorAll<HTMLElement>('section[data-brag]')) {
     const cap = sec.querySelector<HTMLElement>('[data-brag-cap]');

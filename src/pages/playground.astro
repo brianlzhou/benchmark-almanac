@@ -1,0 +1,67 @@
+---
+// Playground: the almanac's interactive tools in one place, the ones where a reader picks what to see. Each tile
+// links to its tool. The header's Playground tab stays lit on every one of them (src/layouts/Base.astro).
+import Base from '../layouts/Base.astro';
+
+export const TOOLS = [
+  { href: '/compare/', name: 'Compare models', what: 'Put up to four models side by side on every benchmark they have all been scored on.' },
+  { href: '/build/', name: 'Build your own index', what: 'Pick the benchmarks and their weights, and see which model comes out on top.' },
+  { href: '/progress/', name: 'Progress over time', what: 'Plot the best score on up to eight benchmarks at once, by the release date of the model that set it.' },
+  { href: '/time-machine/', name: 'Time machine', what: 'See the benchmarks, models and leaders as they stood on any day since 2023.' },
+  { href: '/sql/', name: 'Query with SQL', what: 'Run SQL on every score, benchmark, model and lab document in your browser, or download the database.' },
+];
+---
+
+<Base title="Playground" description="Tools to explore the almanac's data yourself: compare models, build your own index, plot progress over time, travel back in time, or query it with SQL.">
+  <div class="page">
+    <header class="head">
+      <h1>Playground</h1>
+      <p class="lede">Tools to explore the data yourself. Each one works from the same scores as the rest of the almanac.</p>
+    </header>
+    <ul class="pg-tools">
+      {
+        TOOLS.map((t) => (
+          <li>
+            <a href={t.href}>
+              <span class="pg-tn">{t.name}</span>
+              <span class="pg-tw">{t.what}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .pg-tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pg-tools a {
+    display: grid;
+    gap: 8px;
+    height: 100%;
+    padding: 18px 20px 20px;
+    border-radius: 12px;
+    background: var(--panel);
+    color: var(--ink);
+    text-decoration: none;
+    transition: box-shadow 140ms ease;
+  }
+  .pg-tools a:hover {
+    box-shadow: inset 0 0 0 1px var(--ink-4);
+  }
+  .pg-tn {
+    font: 500 19px/1.25 var(--serif);
+  }
+  .pg-tw {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+</style>

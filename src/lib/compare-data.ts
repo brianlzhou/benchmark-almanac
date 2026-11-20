@@ -2,8 +2,9 @@
 // model with its best score on each benchmark from each source (/compare/m/<id>.json). The page fetches only the
 // files of the models it shows. Every model with a page of its own gets a file when it has any score. Models
 // without a page have too few scores to share more than a test or two with anything. The math is in compare.ts.
-import { benchmarks, labs, modelById, eciByModel, cards, systemCards, benchSummary, featuredModels, AS_OF } from './data.ts';
+import { benchmarks, labs, modelById, eciByModel, cards, systemCards, benchSummary, featuredModels, measureScores, AS_OF } from './data.ts';
 import { areaOf } from './taxonomy.ts';
+import { isInternalEval } from './eval-kind.ts';
 import { labColor } from './palette.ts';
 import { COLOR_MARKS, MONO_MARKS } from './marks.ts';
 import { FRONTIER } from './reporting-view.ts';
@@ -58,6 +59,44 @@ function build() {
       const i = ind.get(id);
       const l = lab.get(id);
       const row: FileRow = [b.id, b.name, area, b.unit ?? '%', sign, nLabs, r3(lo), r3(hi), i ? r3(i.v) : null, i?.from ?? '', l === undefined ? null : r3(l), cited.get(id)?.has(b.id) ? 1 : 0];
+      // the site settings can hide a lab's internal evaluation, so its rows say so
+      if (isInternalEval(b)) row[12] = 1;
+      let list = rowsBy.get(id);
+      if (!list) rowsBy.set(id, (list = []));
+      list.push(row);
+    }
+  }
+  // a benchmark's other measures, each its own row ("Agents' Last Exam v1.1 (Score)"): the board's column for it
+  // against labs' numbers on the same measure, never against the headline
+  const byMeasure = new Map<string, typeof measureScores>();
+  for (const s of measureScores) {
+    const k = `${s.benchmark}~${s.measure}`;
+    byMeasure.set(k, [...(byMeasure.get(k) ?? []), s]);
+  }
+  const benchOf = new Map(benchmarks.map((b) => [b.id, b]));
+  for (const [key, xs] of byMeasure) {
+    const [bid, mid] = key.split('~');
+    const b = benchOf.get(bid)!;
+    const m = b.measures!.find((x) => x.id === mid)!;
+    const unit = m.unit ?? b.unit ?? '%';
+    if (unit === 'usd') continue;
+    const sign = (m.better ?? b.better) === 'lower' ? -1 : 1;
+    const ind = new Map<string, number>();
+    const lab = new Map<string, number>();
+    for (const x of xs) {
+      const into = x.source === 'card' ? lab : ind;
+      const cur = into.get(x.model);
+      if (cur === undefined || sign * x.value > sign * cur) into.set(x.model, x.value);
+    }
+    const ids = [...new Set([...ind.keys(), ...lab.keys()])].filter((id) => featured.has(id));
+    if (!ids.length) continue;
+    const vals = [...ind.values(), ...lab.values()];
+    const s = benchSummary(bid);
+    const nLabs = new Set([...s.labs, ...s.docLabs]).size;
+    for (const id of ids) {
+      const i = ind.get(id);
+      const l = lab.get(id);
+      const row: FileRow = [key, `${b.name} (${m.name})`, areaOf(b.category), unit, sign, nLabs, r3(Math.min(...vals)), r3(Math.max(...vals)), i === undefined ? null : r3(i), i === undefined ? '' : 'b', l === undefined ? null : r3(l), cited.get(id)?.has(bid) ? 1 : 0];
       let list = rowsBy.get(id);
       if (!list) rowsBy.set(id, (list = []));
       list.push(row);

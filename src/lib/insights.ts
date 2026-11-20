@@ -2,17 +2,19 @@
 // the frontier have changed over time. Every series comes from the same data as the rest of the site. Each
 // function caches its result, since the overview page and a subpage both ask for it in one build.
 
-import { benchmarks, models, modelById, eciByModel, allSummaries, isPercent, AS_OF, SATURATED, labById } from './data.ts';
+import { benchmarks, models, modelById, eciByModel, allSummaries, isPercent, AS_OF, SATURATED, labById, cards, systemCards, benchById, leaderboardScores, epochScores, viaBoardScores, LEADERBOARDS } from './data.ts';
 import { ARENA } from './time-machine.ts';
 import { claimPairs } from './claims.ts';
 import { makerParts, makerId } from './makers.ts';
 import { makerKind, MAKER_KINDS, type MakerKind } from './maker-kinds.ts';
-import { reportingData, FIRST_YEAR } from './reporting.ts';
-import { FRONTIER } from './reporting-view.ts';
+import { reportingData, FIRST_YEAR, isFrontierRelease } from './reporting.ts';
+import { isSafetyEval } from './eval-kind.ts';
+import { FRONTIER, FRONTIER_MODEL_TOP } from './reporting-view.ts';
 import { leaderRows } from './leaders.ts';
 import { contestedDays } from './reigns.ts';
 import { AREAS, areaOf } from './taxonomy.ts';
 import { yearFrac } from './format.ts';
+import type { Score } from './types.ts';
 
 const DAY = 864e5;
 const ms = (d: string) => Date.parse(d.length === 4 ? `${d}-07-01` : d.length === 7 ? `${d}-15` : d);
@@ -641,3 +643,314 @@ export function trendSeries(o: {
     }),
   };
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// How new models get tested (/insights/models/). An independent score is one from an official leaderboard (the
+// model's own entry, not an agent built around it), Epoch AI's own runs, or a board Epoch AI copied.
+
+const indepByModel = memo(() => {
+  const m = new Map<string, Set<string>>();
+  for (const s of [...leaderboardScores, ...epochScores, ...viaBoardScores]) {
+    if (!s.model) continue;
+    const x = m.get(s.model) ?? new Set<string>();
+    x.add(s.benchmark);
+    m.set(s.model, x);
+  }
+  return m;
+});
+const indepBenches = memo(() => new Set([...indepByModel().values()].flatMap((x) => [...x])));
+/** Each launch post and the documents published with it, as one release: the model, the date, the benchmarks it names (safety evaluations left out). */
+const releasesNamed = memo(() => {
+  const docsFor = new Map<string, typeof systemCards>();
+  for (const d of systemCards) if (d.release) docsFor.set(d.release, [...(docsFor.get(d.release) ?? []), d]);
+  return cards
+    .map((c) => {
+      const ids = new Set<string>();
+      for (const doc of [c, ...(docsFor.get(c.id) ?? [])])
+        for (const r of doc.results) {
+          const b = benchById.get(r.benchmark);
+          if (b && !isSafetyEval(b)) ids.add(b.id);
+        }
+      return { id: c.id, lab: c.lab, model: c.model, date: c.date, ids };
+    })
+    .filter((r) => r.ids.size > 0);
+});
+
+export const CHECK_FROM = '2024';
+/** Benchmark mentions in launch posts, split by whether anyone else scored the same model on them. */
+export interface CheckSplit {
+  /** Mentions: each benchmark a release names, once per release. */
+  named: number;
+  /** An independent score of the same model. */
+  run: number;
+  /** An independent board or Epoch AI scores the benchmark, but not this model. */
+  board: number;
+  /** No independent score of any model. */
+  none: number;
+  releases: number;
+}
+export interface CheckRow extends CheckSplit {
+  id: string;
+  name: string;
+}
+export const checkable = memo(() => {
+  const indep = indepByModel();
+  const anyBoard = indepBenches();
+  const blank = (): CheckSplit => ({ named: 0, run: 0, board: 0, none: 0, releases: 0 });
+  const total = blank();
+  const years = new Map<string, CheckSplit>();
+  const labs = new Map<string, CheckSplit>();
+  for (const rel of releasesNamed()) {
+    if (rel.date < CHECK_FROM) continue;
+    const y = rel.date.slice(0, 4);
+    const lab = FRONTIER.has(rel.lab) ? rel.lab : 'other';
+    for (const t of [total, years.get(y) ?? years.set(y, blank()).get(y)!, labs.get(lab) ?? labs.set(lab, blank()).get(lab)!]) {
+      t.releases++;
+      for (const id of rel.ids) {
+        t.named++;
+        if (indep.get(rel.model)?.has(id)) t.run++;
+        else if (anyBoard.has(id)) t.board++;
+        else t.none++;
+      }
+    }
+  }
+  const labRows: CheckRow[] = [...labs.entries()]
+    .map(([id, t]) => ({ id, name: id === 'other' ? 'Other labs' : (labById.get(id)?.name ?? id), ...t }))
+    .sort((a, b) => (a.id === 'other' ? 1 : b.id === 'other' ? -1 : b.run / b.named - a.run / a.named));
+  const yearRows = [...years.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([year, t]) => ({ year, ...t }));
+  return { total, years: yearRows, labs: labRows };
+});
+
+/** For each frontier model of the past year that had a launch post: what its lab named, and what others scored it on. */
+export interface TestedModel {
+  id: string;
+  name: string;
+  lab: string;
+  date: string;
+  /** Benchmarks only the lab reported, both, and only others scored. */
+  labOnly: number;
+  both: number;
+  indepOnly: number;
+}
+export const testedModels = memo((): TestedModel[] => {
+  const indep = indepByModel();
+  const named = new Map<string, { ids: Set<string>; date: string; lab: string }>();
+  for (const rel of releasesNamed()) {
+    const e = named.get(rel.model) ?? { ids: new Set<string>(), date: rel.date, lab: rel.lab };
+    for (const id of rel.ids) e.ids.add(id);
+    if (rel.date < e.date) e.date = rel.date;
+    named.set(rel.model, e);
+  }
+  const since = `${Number(AS_OF.slice(0, 4)) - 1}${AS_OF.slice(4)}`;
+  return [...named.entries()]
+    .filter(([id, e]) => e.date > since && isFrontierRelease(id, e.date))
+    .map(([id, e]) => {
+      const mine = indep.get(id) ?? new Set<string>();
+      const both = [...e.ids].filter((b) => mine.has(b)).length;
+      return { id, name: modelById.get(id)?.name ?? id, lab: e.lab, date: e.date, labOnly: e.ids.size - both, both, indepOnly: mine.size - both };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date) || a.name.localeCompare(b.name));
+});
+
+// How long a frontier model stays at the frontier: from release, the days until ten models released later score
+// higher on Epoch AI's index, for the models in the top ten the day they came out (FRONTIER_MODEL_TOP, as the
+// reporting page's "Frontier models only" switch). Grouped by where a model came in, as a survival estimate
+// (Kaplan-Meier), since the models still in the top ten haven't left it yet.
+
+export const STAY_FROM = '2024';
+export const STAY_MONTHS = 12;
+const STAY_MIN_LEFT = 5;
+export interface StayModel {
+  id: string;
+  name: string;
+  lab: string;
+  date: string;
+  /** Rank among the models out by its release day, 1 for a new best. */
+  rank: number;
+  days: number;
+  /** Still in the top ten. */
+  still: boolean;
+}
+export interface StayGroup {
+  key: string;
+  label: string;
+  /** Ranks on release day, first and last. */
+  ranks: [number, number];
+  n: number;
+  /** Still in the top ten so many weeks after release, up to STAY_MONTHS, null where the curve has stopped. */
+  share: (number | null)[];
+  /** Days until half had left, when the curve gets there. */
+  half: number | null;
+}
+export const frontierStays = memo((): StayModel[] => {
+  const pts = models
+    .filter((m) => m.released && eciByModel.has(m.id))
+    .map((m) => ({ id: m.id, name: m.name, lab: m.lab ?? '', d: m.released!.length === 7 ? `${m.released}-15` : m.released!, e: eciByModel.get(m.id)!.eci }))
+    .filter((p) => p.d.length === 10)
+    .sort((a, b) => a.d.localeCompare(b.d));
+  const out: StayModel[] = [];
+  for (const p of pts) {
+    const above = pts.filter((q) => q.d <= p.d && q.e > p.e && q.id !== p.id).length;
+    if (above >= FRONTIER_MODEL_TOP) continue;
+    const later = pts.filter((q) => q.d > p.d && q.e > p.e);
+    const left = later[FRONTIER_MODEL_TOP - above - 1];
+    const end = left ? left.d : AS_OF;
+    out.push({ id: p.id, name: p.name, lab: p.lab, date: p.d, rank: above + 1, days: Math.round((Date.parse(end) - Date.parse(p.d)) / DAY), still: !left });
+  }
+  return out;
+});
+/** A survival curve in days: the share not yet gone at each day someone left, and the day half had. */
+function survival(xs: { days: number; gone: boolean }[]) {
+  const times = [...new Set(xs.filter((x) => x.gone).map((x) => x.days))].sort((a, b) => a - b);
+  const steps: [number, number][] = [];
+  let alive = 1;
+  let half: number | null = null;
+  for (const t of times) {
+    alive *= 1 - xs.filter((x) => x.gone && x.days === t).length / xs.filter((x) => x.days >= t).length;
+    steps.push([t, alive]);
+    if (half === null && alive <= 0.5) half = t;
+  }
+  return { at: (d: number) => steps.filter(([t]) => t <= d).at(-1)?.[1] ?? 1, half };
+}
+export const stayGroups = memo((): StayGroup[] => {
+  const xs = frontierStays().filter((s) => s.date >= STAY_FROM);
+  const groups: [string, string, number, number][] = [
+    ['first', 'Came in at number one', 1, 1],
+    ['high', 'Came in second to fifth', 2, 5],
+    ['low', `Came in sixth to ${FRONTIER_MODEL_TOP === 10 ? 'tenth' : `number ${FRONTIER_MODEL_TOP}`}`, 6, FRONTIER_MODEL_TOP],
+  ];
+  return groups.map(([key, label, a, b]) => {
+    const g = xs.filter((x) => x.rank >= a && x.rank <= b);
+    const sv = survival(g.map((x) => ({ days: x.days, gone: !x.still })));
+    const weeks = Math.floor((STAY_MONTHS * 30.44) / 7);
+    const share = Array.from({ length: weeks + 1 }, (_, w) => (w > 0 && g.filter((x) => x.days >= w * 7).length < STAY_MIN_LEFT ? null : sv.at(w * 7)));
+    return { key, label, ranks: [a, b] as [number, number], n: g.length, share, half: sv.half };
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// What a top score costs: on each board that prices its runs, the best score of any model out a year ago, what the
+// cheapest run to reach it cost then, and what the cheapest run to reach it costs now. A run counts from its
+// model's release date, at the cost the board lists, so the drop is what newer models (or cheaper settings) save.
+
+export const COST_MIN_MODELS = 5;
+/** The day a year before the data's last day, which splits then from now. */
+export const COST_AGO = `${Number(AS_OF.slice(0, 4)) - 1}${AS_OF.slice(4)}`;
+export interface CostDrop {
+  id: string;
+  name: string;
+  /** Models with a priced run. */
+  models: number;
+  /** The best score of a year ago: the bar both runs clear. */
+  bar: number;
+  then: { model: string; cost: number; value: number; date: string };
+  now: { model: string; cost: number; value: number; date: string };
+  /** Then's cost over now's: 1 when nothing cheaper has matched it. */
+  fall: number;
+}
+export const costDrops = memo((): CostDrop[] => {
+  const ago = COST_AGO;
+  const by = new Map<string, Score[]>();
+  for (const s of leaderboardScores) if (s.cost != null && s.cost > 0 && modelById.get(s.model)?.released) by.set(s.benchmark, [...(by.get(s.benchmark) ?? []), s]);
+  const out: CostDrop[] = [];
+  for (const [id, xs] of by) {
+    const b = benchById.get(id);
+    // boards that price a whole run of the test set (ARC-AGI-3, ProfBench) stay out, so every cost is one task's
+    if (!b || !isPercent(b.unit) || b.better === 'lower' || (LEADERBOARDS[id]?.costPer ?? 'task') !== 'task') continue;
+    const rel = (s: Score) => modelById.get(s.model)!.released!;
+    const then = xs.filter((s) => rel(s) <= ago);
+    const thenModels = new Set(then.map((s) => s.model)).size;
+    const newModels = new Set(xs.filter((s) => rel(s) > ago).map((s) => s.model)).size;
+    if (thenModels < COST_MIN_MODELS || newModels < 3) continue;
+    const bar = Math.max(...then.map((s) => s.value));
+    const cheapest = (rs: Score[]) => rs.filter((s) => s.value >= bar).sort((a, c) => a.cost! - c.cost! || c.value - a.value)[0];
+    const t = cheapest(then);
+    const n = cheapest(xs);
+    const run = (s: Score) => ({ model: modelById.get(s.model)?.name ?? s.model, cost: s.cost!, value: s.value, date: rel(s) });
+    out.push({ id, name: b.name, models: new Set(xs.map((s) => s.model)).size, bar, then: run(t), now: run(n), fall: t.cost! / n.cost! });
+  }
+  return out.sort((a, b) => b.models - a.models || a.name.localeCompare(b.name));
+});
+export function costFinding(ds = costDrops()): string {
+  const falls = ds.map((d) => d.fall);
+  const m = median(falls);
+  const tenfold = falls.filter((f) => f >= 10).length;
+  const big = [...ds].sort((a, b) => b.fall - a.fall)[0];
+  const times = (f: number) => (f >= 10 ? String(Math.round(f)) : (Math.round(f * 10) / 10).toFixed(1));
+  return `On the median board that prices each task, matching the best score from a year ago is ${times(m)} times cheaper now than it was then. It's at least ten times cheaper on ${word(tenfold)} of the ${ds.length} boards, and ${times(big.fall)} times cheaper on ${big.name}.`;
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Epoch AI's number one: each model that set a new best on the capabilities index, from its release date until the
+// next one, in the shape ReignStrip draws.
+
+export const eciReigns = memo((): ArenaReign[] => {
+  const recs = eciRecords().filter((r, i, a) => i === a.length - 1 || a[i + 1].d > r.d);
+  const out = recs.map((r, i) => {
+    const end = recs[i + 1]?.d ?? AS_OF;
+    return { name: r.name, lab: r.lab ?? '', start: r.d, end, days: Math.max(1, Math.round((Date.parse(end) - Date.parse(r.d)) / DAY)), current: i === recs.length - 1 };
+  });
+  return out;
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// How long benchmarks stay in launch posts: for the benchmark families labs first named in each year, the share
+// still being named so many months later. A family has left once no release has named it for LIFE_GRACE months, so
+// we can only tell up to LIFE_GRACE months ago: a family named since then counts as followed up to that day, and
+// one first named since then doesn't count yet (a survival estimate, as for saturation).
+
+export const LIFE_MONTHS = 24;
+export const LIFE_GRACE = 6;
+const LIFE_MIN_LEFT = 15;
+export interface LifeCohort {
+  year: string;
+  n: number;
+  /** Named in one release only, and not since. */
+  once: number;
+  share: (number | null)[];
+}
+/** With `safety`, safety evaluations count too. */
+export const launchLife = memoCited((safety): LifeCohort[] => {
+  const d = reportingData();
+  const fam = new Map<string, { first: string; last: string; rels: number }>();
+  for (const rel of d.rels) {
+    const seen = new Set<string>();
+    for (const [bi] of rel.r) {
+      const b = d.benches[bi];
+      if ((b.safety && !safety) || seen.has(b.fam)) continue;
+      seen.add(b.fam);
+      const e = fam.get(b.fam) ?? { first: rel.date, last: rel.date, rels: 0 };
+      if (rel.date < e.first) e.first = rel.date;
+      if (rel.date > e.last) e.last = rel.date;
+      e.rels++;
+      fam.set(b.fam, e);
+    }
+  }
+  const by = new Map<string, { dur: number; gone: boolean; once: boolean }[]>();
+  for (const e of fam.values()) {
+    const y = e.first.slice(0, 4);
+    const followed = monthsBetween(e.first, AS_OF) - LIFE_GRACE;
+    if (y < FIRST_YEAR || followed < 0) continue;
+    const gone = monthsBetween(e.last, AS_OF) > LIFE_GRACE;
+    by.set(y, [...(by.get(y) ?? []), { dur: gone ? monthsBetween(e.first, e.last) : followed, gone, once: gone && e.rels === 1 }]);
+  }
+  return [...by.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([year, xs]) => {
+      // share[m]: still named m months after the first mention. Through month m, the families followed are those
+      // whose last mention so far is at least m months after the first, and the ones that left are those gone since.
+      const share: (number | null)[] = [1];
+      let alive = 1;
+      for (let m = 0; m < LIFE_MONTHS; m++) {
+        const atRisk = xs.filter((x) => x.dur >= m);
+        if (atRisk.length < LIFE_MIN_LEFT) {
+          share.push(null);
+          continue;
+        }
+        alive *= 1 - atRisk.filter((x) => x.gone && x.dur < m + 1).length / atRisk.length;
+        share.push(alive);
+      }
+      return { year, n: xs.length, once: xs.filter((x) => x.once).length, share };
+    })
+    .filter((c) => c.share.filter((v) => v !== null).length > 3);
+});

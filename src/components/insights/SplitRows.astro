@@ -1,0 +1,259 @@
+---
+// Rows with one split bar each, for the Insights pages: a name, a bar cut into categories, and a value or two at the
+// right. With scale 'share' every bar fills its row (a 100% split). With 'count' the bars share one scale, so the
+// longest row fills it. Drawn in HTML, so text keeps its size at every width. Every segment carries the site's
+// shared tooltip (src/scripts/tips.ts), and a legend names every category, so color is never the only cue. Rows
+// past `limit` wait behind a "Show all" button.
+import LabMark from '../LabMark.astro';
+
+interface Tip {
+  tv: string;
+  tn: string;
+  ts?: string;
+}
+interface Row {
+  name: string;
+  href?: string;
+  /** The lab whose mark goes before the name. */
+  lab?: string;
+  /** How many fall in each category, in `cats` order. */
+  n: number[];
+  tips: Tip[];
+  /** The values at the right, one per column of `heads`. */
+  vals: string[];
+}
+interface Props {
+  cats: { key: string; label: string; color: string; ink: string }[];
+  rows: Row[];
+  scale?: 'share' | 'count';
+  /** Names for the value columns, shown above them. */
+  heads?: string[];
+  label: string;
+  limit?: number;
+  /** The button's words: "Show all 38 models". */
+  more?: string;
+}
+const { cats, rows, scale = 'share', heads, label, limit, more } = Astro.props;
+const total = (r: Row) => r.n.reduce((a, b) => a + b, 0);
+const max = Math.max(1, ...rows.map(total));
+const nv = Math.max(1, ...rows.map((r) => r.vals.length));
+// a 100% split shows each share big enough to hold it; counts stay in the tooltip and the columns at the right
+const shows = (r: Row, k: number) => scale === 'share' && r.n[k] / total(r) >= 0.12;
+const inner = (r: Row, k: number) => `${Math.round((100 * r.n[k]) / total(r))}%`;
+// rows without a mark keep the room for one when other rows have it, so the names line up
+const marks = rows.some((r) => r.lab);
+const hidden = limit !== undefined && rows.length > limit;
+---
+
+<figure class="spr" aria-label={label} style={`--nv:${nv}`}>
+  <ul class="spr-key" aria-hidden="true">
+    {
+      cats.map((c) => (
+        <li>
+          <span class="sw" style={`background:${c.color}`} />
+          {c.label}
+        </li>
+      ))
+    }
+  </ul>
+  {
+    heads && (
+      <div class="spr-row spr-head" aria-hidden="true">
+        <span />
+        <span />
+        <span class="spr-vals">
+          {heads.map((h) => (
+            <span>{h}</span>
+          ))}
+        </span>
+      </div>
+    )
+  }
+  <ol class:list={['spr-list', { 'spr-cut': hidden }]}>
+    {
+      rows.map((r, i) => (
+        <li class:list={['spr-row', { 'spr-x': limit !== undefined && i >= limit }]}>
+          <span class="spr-n">
+            {r.lab ? <LabMark lab={r.lab} size={15} /> : marks && <i class="spr-nomark" />}
+            {r.href ? <a href={r.href}>{r.name}</a> : <span>{r.name}</span>}
+          </span>
+          <span class="spr-track">
+            <span class="spr-bar" style={scale === 'count' ? `width:${((100 * total(r)) / max).toFixed(2)}%` : undefined}>
+              {cats.map((c, k) =>
+                r.n[k] > 0 ? (
+                  <span class="spr-s" style={`flex-grow:${r.n[k]};background:${c.color};color:${c.ink}`} data-tv={r.tips[k].tv} data-tn={r.tips[k].tn} data-ts={r.tips[k].ts}>
+                    {shows(r, k) && <span class="v">{inner(r, k)}</span>}
+                  </span>
+                ) : null,
+              )}
+            </span>
+          </span>
+          <span class="spr-vals num">
+            {r.vals.map((v) => (
+              <span>{v}</span>
+            ))}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  {
+    hidden && (
+      <button type="button" class="spr-more" data-spr-more aria-expanded="false" data-dl-skip>
+        {more ?? `Show all ${rows.length}`}
+      </button>
+    )
+  }
+</figure>
+
+<script>
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-spr-more]')) {
+    const list = b.previousElementSibling as HTMLElement;
+    const label = b.textContent!.trim();
+    b.addEventListener('click', () => {
+      const open = list.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+      b.textContent = open ? 'Show fewer' : label;
+      if (!open) list.scrollIntoView({ block: 'nearest' });
+    });
+  }
+</script>
+
+<style>
+  .spr {
+    margin: 0;
+  }
+  .spr-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .spr-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .spr-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .spr-cut:not(.open) > .spr-x {
+    display: none;
+  }
+  .spr-row {
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr) calc(var(--nv) * 4.5rem);
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .spr-head {
+    margin-bottom: 6px;
+    color: var(--ink-3);
+    font-size: 12.5px;
+  }
+  .spr-n {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .spr-n a,
+  .spr-n > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .spr-n a:hover {
+    text-decoration: underline;
+  }
+  .spr-n :global(.mark) {
+    flex: none;
+  }
+  .spr-nomark {
+    flex: none;
+    width: 15px;
+  }
+  .spr-track {
+    min-width: 0;
+  }
+  .spr-bar {
+    display: flex;
+    gap: 2px;
+    height: 20px;
+  }
+  .spr-s {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 0;
+    min-width: 2px;
+    font: 500 12px var(--sans);
+    font-variant-numeric: tabular-nums;
+    cursor: default;
+  }
+  .spr-s:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  .spr-s:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+  .spr-s:only-child {
+    border-radius: 4px;
+  }
+  .spr-s:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .spr-s .v {
+    pointer-events: none;
+  }
+  .spr-vals {
+    display: grid;
+    grid-template-columns: repeat(var(--nv), minmax(0, 1fr));
+    text-align: right;
+    color: var(--ink-2);
+  }
+  @media (max-width: 860px) {
+    .spr-row {
+      grid-template-columns: minmax(0, 1fr) calc(var(--nv) * 4rem);
+      gap: 4px 12px;
+    }
+    .spr-track {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+    .spr-head > span:nth-child(2) {
+      display: none;
+    }
+  }
+  .spr-more {
+    margin-top: 14px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink-2);
+    font: 500 13.5px/1 var(--sans);
+    cursor: pointer;
+  }
+  .spr-more:hover {
+    background: var(--panel);
+    color: var(--ink);
+  }
+</style>

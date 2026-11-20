@@ -11,11 +11,10 @@ import { COLOR_MARKS, MONO_MARKS } from './marks.ts';
 import { score as fmtScore } from './format.ts';
 import { AREAS, areaOf } from './taxonomy.ts';
 import type { Benchmark } from './types.ts';
+import { isSafetyEval } from './eval-kind.ts';
 import { FRONTIER, FRONTIER_LABS, FRONTIER_MODEL_TOP, type RData, type RLab, type RBench, type RRel } from './reporting-view.ts';
 
 export const FIRST_YEAR = '2024';
-/** Categories a capability count leaves out by default: they are mostly safety testing in system cards. */
-export const SAFETY_CATEGORIES = new Set(['safety-alignment', 'bio-chem', 'cyber']);
 
 const SHORT: Record<string, string> = { google: 'Google', 'thinking-machines': 'Thinking Machines' };
 const shortName = (id: string, name: string) =>
@@ -113,7 +112,8 @@ export function reportingData(): RData {
         org: b.org ?? '',
         fam: b.family ?? b.id,
         famName: b.family ? (famName.get(b.family) ?? b.name) : b.name,
-        safety: SAFETY_CATEGORIES.has(b.category ?? ''),
+        // safety testing, which a capability count leaves out by default (src/lib/eval-kind.ts)
+        safety: isSafetyEval(b),
         area: areaOf(b.category),
         makers: [...new Set(makerParts(b.org ?? '').map((p) => p.lab).filter((l): l is string => !!l))],
       });
@@ -129,7 +129,9 @@ export function reportingData(): RData {
       for (const r of doc.results) {
         if (!benchById.has(r.benchmark)) continue;
         const bi = bench(r.benchmark);
-        const s = r.score == null ? null : fmtScore(r.score, normUnit(r.unit));
+        // a number on another measure carries its name, so "75.8 (Score)" never reads as the headline
+        const mName = r.measure ? benchById.get(r.benchmark)?.measures?.find((m) => m.id === r.measure)?.name : undefined;
+        const s = r.score == null ? null : `${fmtScore(r.score, normUnit(r.unit))}${mName ? ` (${mName})` : ''}`;
         if (!seen.has(bi) || (seen.get(bi) == null && s != null)) seen.set(bi, s);
       }
     if (!seen.size) continue;

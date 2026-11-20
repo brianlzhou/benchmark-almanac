@@ -88,6 +88,15 @@ export const TABLES: Table[] = [
     ],
   },
   {
+    name: 'facets',
+    doc: 'Each benchmark’s facets, one row per value (data/facets.json): what it measures, its risk and behavior, subject, language, input, output, interaction, environment, item source, refresh and who runs it, plus the occupations and human time a benchmark states. Allowed values are in data/facets-codebook.json.',
+    cols: [
+      c('benchmark', 'TEXT', 'Benchmark id (benchmarks.id).'),
+      c('facet', 'TEXT', 'construct, risk, propensity, subject, language, input, output, interaction, environment, source, refresh, runner, occupations or humanTime.'),
+      c('value', 'TEXT', 'One value. Environments may name an app or game after a colon, as application:Blender. Subjects are OECD field codes such as 1.6, and languages ISO 639 codes.'),
+    ],
+  },
+  {
     name: 'boards',
     doc: 'The official leaderboards we read, one per benchmark, with the terms that apply to each.',
     cols: [
@@ -103,6 +112,7 @@ export const TABLES: Table[] = [
       c('unmatched', 'INTEGER', 'Board names we could not match to a model.'),
       c('cost_per', 'TEXT', 'What a cost covers: task, or run for the whole test set.'),
       c('chart', 'TEXT', 'The board’s own chart, as JSON.'),
+      c('parts', 'TEXT', 'The parts of the benchmark the board scores on their own, as JSON: metric key to name, group and unit. Each row keeps its part scores in scores.metrics under these keys.'),
       c('last_failed', 'TEXT', 'The day reading it last failed, if it did.'),
     ],
   },
@@ -261,6 +271,18 @@ export interface Example {
 }
 
 export const EXAMPLES: Example[] = [
+  {
+    id: 'apps-agents-drive',
+    label: 'Apps that agents drive',
+    sql: `-- Which named apps do benchmarks have models operate, and how many benchmarks use each?
+select substr(value, length('application:') + 1) as app, count(*) as benchmarks,
+  group_concat(b.name, ', ') as names
+from facets f join benchmarks b on b.id = f.benchmark
+where f.facet = 'environment' and f.value like 'application:%'
+group by app
+order by benchmarks desc, app
+limit 25`,
+  },
   {
     id: 'fable-vs-opus',
     label: 'Fable 5.2 against Opus 5.5',

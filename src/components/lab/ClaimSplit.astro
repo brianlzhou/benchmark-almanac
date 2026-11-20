@@ -1,0 +1,162 @@
+---
+// A lab's numbers next to independent runs of the same models (src/lib/claims.ts): two bars to 100%, the lab's
+// percentage pairs and every lab's, split into the lab's number higher, the same, and lower. Then the largest gaps.
+import ChartDownload from '../ChartDownload.astro';
+import ClaimTable from '../ClaimTable.astro';
+import { labPairs, claimStats, allClaimStats, labName, markColor } from '../../lib/model-insights.ts';
+import { creditLine, EPOCH_CREDIT, LAB_CARDS } from '../../lib/credits.ts';
+
+interface Props {
+  lab: string;
+}
+const { lab } = Astro.props;
+const name = labName(lab);
+const pairs = labPairs(lab);
+const st = claimStats(pairs);
+const all = allClaimStats();
+const show = st.pct >= 5;
+const share = (n: number, of: number) => (of ? n / of : 0);
+const pct = (v: number) => `${Math.round(100 * v)}%`;
+const gap = (v: number) => `${Math.abs(v) < 10 ? Math.abs(v).toFixed(1) : Math.round(Math.abs(v))} points`;
+const caption = !show
+  ? ''
+  : `We could check ${st.pct} of ${name}'s numbers against an independent run of the same model. ${pct(share(st.labHigher, st.pct))} were higher than the run, against ${pct(share(all.labHigher, all.pct))} across every lab, and the median gap where they differ is ${gap(st.medianGap)}${st.medianGap < 0 ? ' in the run’s favor' : ''}.`;
+const color = markColor(lab);
+const kinds = (s: typeof st, who: string) => [
+  { n: s.labHigher, color, tn: `${who}: the lab's number is higher`, label: "Lab's number higher" },
+  { n: s.same, color: 'var(--line)', tn: `${who}: the same, to rounding`, label: 'The same' },
+  { n: s.labLower, color: 'var(--ink-4)', tn: `${who}: the lab's number is lower`, label: "Lab's number lower" },
+];
+const bars = [
+  { who: name, s: st, segs: kinds(st, name) },
+  { who: 'Every lab', s: all, segs: kinds(all, 'Every lab') },
+];
+const top = pairs.slice(0, 6);
+---
+
+{
+  show && (
+    <section>
+      <div class="sh-row">
+        <div class="sh">
+          <h2>How do {name}'s numbers compare with independent runs?</h2>
+          <p>{caption}</p>
+        </div>
+        <a class="more" href="/claims/">
+          Every pair
+        </a>
+      </div>
+      <ChartDownload credit={creditLine([LAB_CARDS, 'official leaderboards', EPOCH_CREDIT])} name={`${lab}-claims`} deck={`${name}'s numbers for its own models next to an independent run of the same model on the same benchmark, against every lab's.`}>
+        <figure class="cs">
+          <ul class="cs-key" aria-hidden="true">
+            {bars[0].segs.map((x) => (
+              <li>
+                <span class="sw" style={`background:${x.color}`} />
+                {x.label}
+              </li>
+            ))}
+          </ul>
+          {bars.map((b) => (
+            <div class="cs-row">
+              <span class="cs-n">{b.who}</span>
+              <span class="cs-bar">
+                {b.segs
+                  .filter((x) => x.n > 0)
+                  .map((x) => (
+                    <span style={`flex-grow:${x.n};background:${x.color}`} data-tv={`${pct(share(x.n, b.s.pct))}, ${x.n} of ${b.s.pct}`} data-tn={x.tn} data-ts="Percentage benchmarks where we have the lab's number and an independent run of the same model" />
+                  ))}
+              </span>
+              <span class="cs-v num">{b.s.pct}</span>
+            </div>
+          ))}
+        </figure>
+      </ChartDownload>
+      <h3 class="cs-h">The largest gaps</h3>
+      <ClaimTable pairs={top} />
+    </section>
+  )
+}
+
+<style>
+  .more {
+    font-size: 14px;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .cs {
+    margin: 0;
+  }
+  .cs-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .cs-key li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .cs-row {
+    display: grid;
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr) 3rem;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+  }
+  .cs-row + .cs-row {
+    margin-top: 10px;
+  }
+  .cs-n {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cs-bar {
+    display: flex;
+    gap: 2px;
+    height: 16px;
+  }
+  .cs-bar span {
+    flex-basis: 0;
+    min-width: 3px;
+  }
+  .cs-bar span:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  .cs-bar span:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+  .cs-bar span:hover {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .cs-v {
+    text-align: right;
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+  .cs-h {
+    margin: 40px 0 10px;
+    font-size: 21px;
+  }
+  @media (max-width: 560px) {
+    .cs-row {
+      grid-template-columns: minmax(0, 1fr) 3rem;
+      gap: 4px 12px;
+    }
+    .cs-bar {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+</style>

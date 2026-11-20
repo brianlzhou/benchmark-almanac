@@ -31,7 +31,7 @@ const years = timeTicks(yearFrac(p.start), yearFrac(p.end));
     </header>
 
     <section class="tm-control" aria-label="Pick a day">
-      <div class="tm-pick">
+      <div class="tm-pick ctl-row">
         <button type="button" class="tm-step" data-step="-1" aria-label="A month earlier" disabled>←</button>
         <div class="tm-track">
           <input type="range" id="tm-range" min="0" max={span} value={defIndex} step="1" aria-label="Day" aria-valuetext={humanDate(p.def)} disabled />
@@ -251,11 +251,9 @@ const years = timeTicks(yearFrac(p.start), yearFrac(p.end));
     background: var(--bg);
     border-image: linear-gradient(var(--bg), var(--bg)) fill 0 / 0 / 0 100vmax;
   }
+  /* every item keeps 18px below it for the year labels, so the slider, the arrows and the date share a center */
   .tm-root .tm-pick {
-    display: flex;
-    align-items: center;
     gap: 12px;
-    flex-wrap: wrap;
   }
   .tm-root .tm-track {
     position: relative;
@@ -264,6 +262,8 @@ const years = timeTicks(yearFrac(p.start), yearFrac(p.end));
     padding-bottom: 18px;
   }
   .tm-root .tm-track input[type='range'] {
+    /* a block, so no line box around it adds height above the labels and lifts it off the arrows' center */
+    display: block;
     width: 100%;
     accent-color: var(--ink);
   }

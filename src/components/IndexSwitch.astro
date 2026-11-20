@@ -1,0 +1,24 @@
+---
+// The switch between the two ways to rank models: Epoch AI's Capabilities Index and Artificial Analysis's
+// Intelligence Index. It sits in a section marked data-ix, and global.css shows the section's .ix-eci or .ix-aa
+// parts by which one is checked. A link with ?index=aa opens on the Intelligence Index, and the site settings fill
+// that in for readers who chose it (src/layouts/Base.astro). The switch changes only its own page.
+---
+
+<div class="seg ix-switch" role="radiogroup" aria-label="Rank models by">
+  <label><input type="radio" name="ix" value="eci" checked />Epoch Capabilities Index</label>
+  <label><input type="radio" name="ix" value="aa" />AA Intelligence Index</label>
+</div>
+<script is:inline>
+  // before the page below paints: ?index=aa picks the Intelligence Index, so nothing jumps
+  (function () {
+    var box = document.currentScript.previousElementSibling;
+    if (new URLSearchParams(location.search).get('index') === 'aa') box.querySelector('input[value="aa"]').checked = true;
+    box.addEventListener('change', function (e) {
+      var u = new URL(location.href);
+      if (e.target.value === 'aa') u.searchParams.set('index', 'aa');
+      else u.searchParams.delete('index');
+      history.replaceState(history.state, '', u);
+    });
+  })();
+</script>
