@@ -32732,6 +32732,28 @@
         }
       }
     },
+    "medchembench-openai": {
+      "url": "https://cdn.openai.com/pdf/09c4ec60-a32e-4652-837b-1811368a3bb0/medchembench-paper.pdf",
+      "feed": "https://cdn.openai.com/pdf/09c4ec60-a32e-4652-837b-1811368a3bb0/medchembench-paper.pdf",
+      "terms": "OpenAI publishes the paper on its CDN. Tables S1 and S2 are credited to the authors (Li et al., OpenAI, 2026).",
+      "retrieved": "2026-11-20",
+      "rows": 61,
+      "unmatched": [],
+      "parts": {
+        "structure": {
+          "name": "Molecular structure (SMILES)"
+        },
+        "rationale": {
+          "name": "Scientific rationale"
+        },
+        "ranking": {
+          "name": "Ranking and candidate selection"
+        },
+        "numerical": {
+          "name": "Numerical prediction"
+        }
+      }
+    },
     "medhelm": {
       "url": "https://crfm.stanford.edu/helm/medhelm/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/medhelm/benchmark_output/releases/<newest>/groups/medhelm_scenarios.json (Accuracy: Mean win rate)",
@@ -841733,6 +841755,1348 @@
       "2022-11-28",
       null,
       null
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-2",
+      "none effort",
+      null,
+      26.8,
+      "2025-12-11",
+      null,
+      2300,
+      {
+        "structure": 1.051,
+        "rationale": 44.05,
+        "ranking": 35.44,
+        "numerical": 31.42
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 24.36,
+        "high": 29.28
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-2",
+      "low effort",
+      null,
+      29.51,
+      "2025-12-11",
+      null,
+      4170,
+      {
+        "structure": 1.163,
+        "rationale": 48.14,
+        "ranking": 38.44,
+        "numerical": 37.25
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 27.1,
+        "high": 32.01
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-2",
+      "medium effort",
+      null,
+      30.92,
+      "2025-12-11",
+      null,
+      11100,
+      {
+        "structure": 1.206,
+        "rationale": 51.57,
+        "ranking": 41.62,
+        "numerical": 37.21
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 28.32,
+        "high": 33.58
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-2",
+      "high effort",
+      null,
+      32.65,
+      "2025-12-11",
+      null,
+      20500,
+      {
+        "structure": 1.869,
+        "rationale": 54.52,
+        "ranking": 43.16,
+        "numerical": 38.09
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 30.24,
+        "high": 35.19
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-2",
+      "xhigh effort",
+      null,
+      37.83,
+      "2025-12-11",
+      null,
+      73400,
+      {
+        "structure": 8.735,
+        "rationale": 59.51,
+        "ranking": 46.81,
+        "numerical": 39.99
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 35.03,
+        "high": 40.72
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-4",
+      "none effort",
+      null,
+      30.27,
+      "2026-03-05",
+      null,
+      2660,
+      {
+        "structure": 1.117,
+        "rationale": 48.89,
+        "ranking": 37.07,
+        "numerical": 40.75
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 27.64,
+        "high": 32.93
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-4",
+      "low effort",
+      null,
+      32.45,
+      "2026-03-05",
+      null,
+      5180,
+      {
+        "structure": 1.77,
+        "rationale": 53.03,
+        "ranking": 41.61,
+        "numerical": 40.04
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 29.93,
+        "high": 35.04
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-4",
+      "medium effort",
+      null,
+      35.04,
+      "2026-03-05",
+      null,
+      12900,
+      {
+        "structure": 4.579,
+        "rationale": 55.89,
+        "ranking": 45.76,
+        "numerical": 40.48
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 32.36,
+        "high": 37.86
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-4",
+      "high effort",
+      null,
+      36.86,
+      "2026-03-05",
+      null,
+      21500,
+      {
+        "structure": 7.659,
+        "rationale": 56.75,
+        "ranking": 45.75,
+        "numerical": 40.2
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 34,
+        "high": 39.74
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-4",
+      "xhigh effort",
+      null,
+      39.24,
+      "2026-03-05",
+      null,
+      42400,
+      {
+        "structure": 11.67,
+        "rationale": 58.52,
+        "ranking": 47.88,
+        "numerical": 40.77
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 36.18,
+        "high": 42.52
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-5",
+      "none effort",
+      null,
+      35.31,
+      "2026-04-23",
+      null,
+      2380,
+      {
+        "structure": 7.405,
+        "rationale": 56.13,
+        "ranking": 43.14,
+        "numerical": 40.33
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 32.66,
+        "high": 38.14
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-5",
+      "low effort",
+      null,
+      38.29,
+      "2026-04-23",
+      null,
+      3140,
+      {
+        "structure": 9.941,
+        "rationale": 59.52,
+        "ranking": 47.32,
+        "numerical": 40.56
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 35.51,
+        "high": 41.22
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-5",
+      "medium effort",
+      null,
+      45.35,
+      "2026-04-23",
+      null,
+      8530,
+      {
+        "structure": 21.56,
+        "rationale": 64.82,
+        "ranking": 52.27,
+        "numerical": 43.09
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 42.2,
+        "high": 48.65
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-5",
+      "high effort",
+      null,
+      48.19,
+      "2026-04-23",
+      null,
+      18100,
+      {
+        "structure": 26,
+        "rationale": 66.99,
+        "ranking": 51.95,
+        "numerical": 45.96
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 44.95,
+        "high": 51.62
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-5",
+      "xhigh effort",
+      null,
+      49.26,
+      "2026-04-23",
+      null,
+      28700,
+      {
+        "structure": 28.7,
+        "rationale": 66.94,
+        "ranking": 52.78,
+        "numerical": 44.93
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 45.92,
+        "high": 52.77
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-luna",
+      "none effort",
+      null,
+      23.42,
+      "2026-07-09",
+      null,
+      1840,
+      {
+        "structure": 0.8389,
+        "rationale": 38.2,
+        "ranking": 29.65,
+        "numerical": 31.64
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 21,
+        "high": 25.93
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-luna",
+      "low effort",
+      null,
+      26.25,
+      "2026-07-09",
+      null,
+      2570,
+      {
+        "structure": 1.417,
+        "rationale": 42.39,
+        "ranking": 36.83,
+        "numerical": 34.64
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 23.91,
+        "high": 28.63
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-luna",
+      "medium effort",
+      null,
+      29.1,
+      "2026-07-09",
+      null,
+      4390,
+      {
+        "structure": 3.567,
+        "rationale": 46.73,
+        "ranking": 39.53,
+        "numerical": 35.17
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 26.66,
+        "high": 31.72
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-luna",
+      "high effort",
+      null,
+      35.8,
+      "2026-07-09",
+      null,
+      14100,
+      {
+        "structure": 11.51,
+        "rationale": 54.54,
+        "ranking": 43.09,
+        "numerical": 36.59
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 32.83,
+        "high": 39.04
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-luna",
+      "xhigh effort",
+      null,
+      38.42,
+      "2026-07-09",
+      null,
+      28900,
+      {
+        "structure": 15.31,
+        "rationale": 57.88,
+        "ranking": 43.58,
+        "numerical": 37.69
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 35.07,
+        "high": 41.84
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-luna",
+      "max effort",
+      null,
+      40.57,
+      "2026-07-09",
+      null,
+      53100,
+      {
+        "structure": 17.67,
+        "rationale": 60.63,
+        "ranking": 45.66,
+        "numerical": 38.59
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 37.12,
+        "high": 44.11
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-sol",
+      "none effort",
+      null,
+      37.37,
+      "2026-07-09",
+      null,
+      2040,
+      {
+        "structure": 9.501,
+        "rationale": 59.49,
+        "ranking": 45.11,
+        "numerical": 39.58
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 34.53,
+        "high": 40.31
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-sol",
+      "low effort",
+      null,
+      45.4,
+      "2026-07-09",
+      null,
+      3320,
+      {
+        "structure": 25.74,
+        "rationale": 64.04,
+        "ranking": 48.78,
+        "numerical": 38.63
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 41.81,
+        "high": 49.07
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-sol",
+      "medium effort",
+      null,
+      50.96,
+      "2026-07-09",
+      null,
+      6640,
+      {
+        "structure": 35.6,
+        "rationale": 68.04,
+        "ranking": 49.08,
+        "numerical": 40.73
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 47.24,
+        "high": 54.66
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-sol",
+      "high effort",
+      null,
+      55.96,
+      "2026-07-09",
+      null,
+      13100,
+      {
+        "structure": 43.79,
+        "rationale": 72.42,
+        "ranking": 50.5,
+        "numerical": 42.6
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 52.27,
+        "high": 59.57
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-sol",
+      "xhigh effort",
+      null,
+      58.23,
+      "2026-07-09",
+      null,
+      23500,
+      {
+        "structure": 47.31,
+        "rationale": 74.72,
+        "ranking": 50.01,
+        "numerical": 42.85
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 54.4,
+        "high": 61.93
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-sol",
+      "max effort",
+      null,
+      59.77,
+      "2026-07-09",
+      null,
+      41000,
+      {
+        "structure": 48.64,
+        "rationale": 76.41,
+        "ranking": 50.8,
+        "numerical": 44.46
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 56.09,
+        "high": 63.52
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-terra",
+      "none effort",
+      null,
+      29.25,
+      "2026-07-09",
+      null,
+      2170,
+      {
+        "structure": 1.642,
+        "rationale": 47.19,
+        "ranking": 39.49,
+        "numerical": 36.36
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 26.85,
+        "high": 31.74
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-terra",
+      "low effort",
+      null,
+      33.25,
+      "2026-07-09",
+      null,
+      4150,
+      {
+        "structure": 4.457,
+        "rationale": 53.17,
+        "ranking": 44.42,
+        "numerical": 37.17
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 30.46,
+        "high": 36.22
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-terra",
+      "medium effort",
+      null,
+      33.99,
+      "2026-07-09",
+      null,
+      5400,
+      {
+        "structure": 5.112,
+        "rationale": 54.25,
+        "ranking": 44.14,
+        "numerical": 38.46
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 31.08,
+        "high": 36.89
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-terra",
+      "high effort",
+      null,
+      37.01,
+      "2026-07-09",
+      null,
+      11300,
+      {
+        "structure": 8.924,
+        "rationale": 57.37,
+        "ranking": 47.79,
+        "numerical": 39.09
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 34,
+        "high": 40.1
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-terra",
+      "xhigh effort",
+      null,
+      41.19,
+      "2026-07-09",
+      null,
+      26700,
+      {
+        "structure": 17,
+        "rationale": 60.46,
+        "ranking": 48.69,
+        "numerical": 40.9
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 37.84,
+        "high": 44.51
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-5-6-terra",
+      "max effort",
+      null,
+      43.26,
+      "2026-07-09",
+      null,
+      63400,
+      {
+        "structure": 21.23,
+        "rationale": 61.3,
+        "ranking": 48.85,
+        "numerical": 41.75
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 39.89,
+        "high": 46.69
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-astra",
+      "low effort",
+      null,
+      72.61,
+      "2026-09-03",
+      null,
+      2720,
+      {
+        "structure": 71.83,
+        "rationale": 87.43,
+        "ranking": 47.61,
+        "numerical": 44.95
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 69.28,
+        "high": 75.91
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-astra",
+      "medium effort",
+      null,
+      80.02,
+      "2026-09-03",
+      null,
+      4680,
+      {
+        "structure": 89.13,
+        "rationale": 89.67,
+        "ranking": 49.16,
+        "numerical": 45.37
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 77.29,
+        "high": 82.69
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-astra",
+      "high effort",
+      null,
+      83.14,
+      "2026-09-03",
+      null,
+      10100,
+      {
+        "structure": 95.19,
+        "rationale": 90.49,
+        "ranking": 51.52,
+        "numerical": 45.36
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 80.65,
+        "high": 85.49
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-astra",
+      "xhigh effort",
+      null,
+      83.33,
+      "2026-09-03",
+      null,
+      14000,
+      {
+        "structure": 95.37,
+        "rationale": 91.05,
+        "ranking": 50.42,
+        "numerical": 47.02
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 80.71,
+        "high": 85.71
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-astra",
+      "max effort",
+      null,
+      83.83,
+      "2026-09-03",
+      null,
+      22900,
+      {
+        "structure": 95.97,
+        "rationale": 91.74,
+        "ranking": 50.44,
+        "numerical": 47.57
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 81.27,
+        "high": 86.2
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-luna",
+      "none effort",
+      null,
+      20.64,
+      "2026-09-22",
+      null,
+      2420,
+      {
+        "structure": 1.03,
+        "rationale": 30.15,
+        "ranking": 32.47,
+        "numerical": 31.18
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 18.31,
+        "high": 23.11
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-luna",
+      "low effort",
+      null,
+      21.16,
+      "2026-09-22",
+      null,
+      2550,
+      {
+        "structure": 1.787,
+        "rationale": 31.33,
+        "ranking": 33.08,
+        "numerical": 27.33
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 18.57,
+        "high": 23.86
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-luna",
+      "medium effort",
+      null,
+      27.64,
+      "2026-09-22",
+      null,
+      7370,
+      {
+        "structure": 5.629,
+        "rationale": 40.05,
+        "ranking": 42.38,
+        "numerical": 32.48
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 24.74,
+        "high": 30.54
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-luna",
+      "high effort",
+      null,
+      32.53,
+      "2026-09-22",
+      null,
+      15300,
+      {
+        "structure": 10.54,
+        "rationale": 46.6,
+        "ranking": 44.54,
+        "numerical": 36.67
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 29.41,
+        "high": 35.86
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-luna",
+      "xhigh effort",
+      null,
+      35.02,
+      "2026-09-22",
+      null,
+      24300,
+      {
+        "structure": 12.42,
+        "rationale": 50.94,
+        "ranking": 45.03,
+        "numerical": 37.85
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 31.64,
+        "high": 38.53
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-luna",
+      "max effort",
+      null,
+      40.1,
+      "2026-09-22",
+      null,
+      62100,
+      {
+        "structure": 20.2,
+        "rationale": 55.64,
+        "ranking": 45.51,
+        "numerical": 39.99
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 36.35,
+        "high": 43.88
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-sol",
+      "none effort",
+      null,
+      35.81,
+      "2026-09-22",
+      null,
+      1570,
+      {
+        "structure": 13.68,
+        "rationale": 51.21,
+        "ranking": 43.93,
+        "numerical": 43.53
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 32.47,
+        "high": 39.16
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-sol",
+      "low effort",
+      null,
+      46.19,
+      "2026-09-22",
+      null,
+      2550,
+      {
+        "structure": 35.05,
+        "rationale": 56.22,
+        "ranking": 47.69,
+        "numerical": 42.59
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 42.41,
+        "high": 49.93
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-sol",
+      "medium effort",
+      null,
+      55.13,
+      "2026-09-22",
+      null,
+      4910,
+      {
+        "structure": 51.87,
+        "rationale": 61.69,
+        "ranking": 48.78,
+        "numerical": 44.57
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 51.44,
+        "high": 58.79
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-sol",
+      "high effort",
+      null,
+      60.92,
+      "2026-09-22",
+      null,
+      9160,
+      {
+        "structure": 60.97,
+        "rationale": 67.06,
+        "ranking": 49.57,
+        "numerical": 45.05
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 57.29,
+        "high": 64.51
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-sol",
+      "xhigh effort",
+      null,
+      64.44,
+      "2026-09-22",
+      null,
+      15300,
+      {
+        "structure": 65.85,
+        "rationale": 71.61,
+        "ranking": 50.74,
+        "numerical": 43.5
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 60.72,
+        "high": 67.94
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-sol",
+      "max effort",
+      null,
+      69.07,
+      "2026-09-22",
+      null,
+      29900,
+      {
+        "structure": 72.78,
+        "rationale": 75.3,
+        "ranking": 51.63,
+        "numerical": 45.08
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 65.52,
+        "high": 72.38
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-sol",
+      "low effort",
+      null,
+      69.16,
+      "2026-09-29",
+      null,
+      2730,
+      {
+        "structure": 65.63,
+        "rationale": 84.28,
+        "ranking": 48.61,
+        "numerical": 45.6
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 65.62,
+        "high": 72.64
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-sol",
+      "medium effort",
+      null,
+      76.74,
+      "2026-09-29",
+      null,
+      4600,
+      {
+        "structure": 82.51,
+        "rationale": 87,
+        "ranking": 50.04,
+        "numerical": 45.5
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 73.69,
+        "high": 79.75
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-sol",
+      "high effort",
+      null,
+      81.09,
+      "2026-09-29",
+      null,
+      9890,
+      {
+        "structure": 92.18,
+        "rationale": 88.36,
+        "ranking": 50.76,
+        "numerical": 44.73
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 78.41,
+        "high": 83.58
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-sol",
+      "xhigh effort",
+      null,
+      81.99,
+      "2026-09-29",
+      null,
+      13700,
+      {
+        "structure": 93.7,
+        "rationale": 89.68,
+        "ranking": 50.39,
+        "numerical": 45.79
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 79.47,
+        "high": 84.37
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-sol",
+      "max effort",
+      null,
+      82.89,
+      "2026-09-29",
+      null,
+      20600,
+      {
+        "structure": 95.02,
+        "rationale": 90.02,
+        "ranking": 50.64,
+        "numerical": 46.76
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 80.52,
+        "high": 85.23
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-terra",
+      "none effort",
+      null,
+      52.98,
+      "2026-10-26",
+      null,
+      1650,
+      {
+        "structure": 45.31,
+        "rationale": 65.84,
+        "ranking": 51.07,
+        "numerical": 40.48
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 49.3,
+        "high": 56.75
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-terra",
+      "low effort",
+      null,
+      57.4,
+      "2026-10-26",
+      null,
+      2040,
+      {
+        "structure": 55.86,
+        "rationale": 64.11,
+        "ranking": 51.74,
+        "numerical": 40.58
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 53.85,
+        "high": 61.03
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-terra",
+      "medium effort",
+      null,
+      68.11,
+      "2026-10-26",
+      null,
+      3650,
+      {
+        "structure": 79.86,
+        "rationale": 66.35,
+        "ranking": 50.22,
+        "numerical": 41.69
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 65.1,
+        "high": 71.02
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-terra",
+      "high effort",
+      null,
+      72.7,
+      "2026-10-26",
+      null,
+      6190,
+      {
+        "structure": 88.52,
+        "rationale": 68.94,
+        "ranking": 52.11,
+        "numerical": 42.2
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 69.84,
+        "high": 75.41
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-terra",
+      "xhigh effort",
+      null,
+      75.1,
+      "2026-10-26",
+      null,
+      11400,
+      {
+        "structure": 92.18,
+        "rationale": 71.02,
+        "ranking": 51.78,
+        "numerical": 44.83
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 72.39,
+        "high": 77.74
+      }
+    ],
+    [
+      "medchembench-openai",
+      "gpt-6-1-terra",
+      "max effort",
+      null,
+      77.56,
+      "2026-10-26",
+      null,
+      33700,
+      {
+        "structure": 94.49,
+        "rationale": 75.25,
+        "ranking": 52.09,
+        "numerical": 45.55
+      },
+      {
+        "run": "2026-11-09",
+        "trials": 10,
+        "low": 74.98,
+        "high": 79.95
+      }
     ]
   ],
   "otherColumns": [

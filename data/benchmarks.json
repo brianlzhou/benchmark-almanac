@@ -77195,20 +77195,22 @@
     "category": "bio-chem",
     "subcategory": "bio-life-sciences",
     "level": "expert",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models answer chemistry questions from an OpenAI internal set, grouped with OpenAI's life science research evaluations. OpenAI has not published the task format.",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models work through 99 medicinal chemistry problems drawn from recent papers and patents. Each task mixes prose with structures, assay tables and plots, then asks for the program’s next decision.",
     "org": "OpenAI",
     "released": "2026-07",
     "links": {
-      "site": "https://openai.com/index/gpt-5-6/"
+      "site": "https://openai.com/index/gpt-5-6/",
+      "paper": "https://cdn.openai.com/pdf/09c4ec60-a32e-4652-837b-1811368a3bb0/medchembench-paper.pdf"
     },
     "access": "private",
-    "note": "Reported in the GPT-5.6 post (Sol 48.3%) and the GPT-6 Astra post (Astra 49.3%). OpenAI omits Claude Fable 5 and 5.1 because they refuse most questions. Format and scoring are guesses.",
+    "note": "OpenAI’s November 2026 paper scores eleven GPT models at every effort level, 61 runs in all. Exact checks grade structures and numbers, and model-graded rubrics grade reasoning. GPT-6 Astra at max effort leads with 83.83%. OpenAI’s launch posts left out Claude Fable 5 and 5.1, which refuse most questions.",
     "unit": "%",
     "better": "higher",
-    "confidence": "likely",
+    "confidence": "verified",
     "evidence": [
+      "https://cdn.openai.com/pdf/09c4ec60-a32e-4652-837b-1811368a3bb0/medchembench-paper.pdf",
       "https://web.archive.org/web/2026/https://openai.com/index/gpt-5-6/",
       "https://web.archive.org/web/2026/https://openai.com/index/gpt-6-astra/"
     ],
