@@ -16,6 +16,14 @@ interface Data {
 }
 const board: Leaderboard = {
   benchmark: 'sciences-last-exam',
+  parts: {
+    e2e: { name: 'End to end research', group: 'Task type' },
+    hd: { name: 'Hypothesis discovery', group: 'Task type' },
+    pp: { name: 'Protocol planning', group: 'Task type' },
+    sc: { name: 'Scientific computing', group: 'Task type' },
+    so: { name: 'Scientific software operation', group: 'Task type' },
+    eo: { name: 'Experiment observation', group: 'Task type' },
+  },
   url: PAGE,
   feed: `${PAGE} (current assets/data.*.js, leaderboard.results.all)`,
   terms: 'SLE publishes the public leaderboard and Apache-2.0 evaluation code; its contributor terms do not grant redistribution rights to submitted research materials.',

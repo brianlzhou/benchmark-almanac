@@ -6,6 +6,19 @@ const FEED = "https://arxiv.org/html/2406.07230";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "mm-niah",
+  parts: {
+    context1k: { name: '1k', group: 'Length' },
+    context2k: { name: '2k', group: 'Length' },
+    context4k: { name: '4k', group: 'Length' },
+    context8k: { name: '8k', group: 'Length' },
+    context12k: { name: '12k', group: 'Length' },
+    context16k: { name: '16k', group: 'Length' },
+    context24k: { name: '24k', group: 'Length' },
+    context32k: { name: '32k', group: 'Length' },
+    context40k: { name: '40k', group: 'Length' },
+    context48k: { name: '48k', group: 'Length' },
+    context64k: { name: '64k', group: 'Length' },
+  },
   url: "https://github.com/OpenGVLab/MM-NIAH",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

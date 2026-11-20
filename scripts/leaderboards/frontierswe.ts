@@ -6,7 +6,11 @@ import { nextFlight, jsonAfter } from '../lib/html.ts';
 const FEED = 'https://www.frontierswe.com/';
 interface Entry {traceHref?:string;model:string; harness:string; overall:number; avgCostUsd:number|null; avgTokensOut:number|null; avgTokensTotal:number|null; avgDurationSeconds:number|null; implementation:number; performance:number; research:number; costCaveat?:string|null}
 const board: Leaderboard = {
-  benchmark:'frontierswe',url:FEED,feed:FEED,
+  benchmark:'frontierswe', parts: {
+  implementation: { name: 'Implementation', group: 'Task type' },
+  performance: { name: 'Performance', group: 'Task type' },
+  research: { name: 'Research', group: 'Task type' },
+},url:FEED,feed:FEED,
   terms:'Public FrontierSWE root page allowed by robots.txt; results remain credited to FrontierSWE under the site terms.',
   chart:{title:'Score vs. cost',x:{key:'cost',label:'Mean cost per trial',unit:'$',better:'lower',log:true},y:{key:'score',label:'Mean@5 score',unit:'%',better:'higher'},note:'Mean score across tasks against mean cost per trial, using the leaderboard aggregation.'},
   async fetch(){

@@ -10,7 +10,8 @@ import { jsLiteral } from '../lib/html.ts';
 
 const PAGE = 'https://video-mme-v2.netlify.app/';
 
-interface Item {
+type Dimension = 'level1' | 'level2' | 'level3' | 'relevance' | 'logic' | 'avg_acc';
+interface Item extends Partial<Record<Dimension, [number | null, number | null]>> {
   name: string;
   type?: string;
   frames?: string;
@@ -19,6 +20,7 @@ interface Item {
 
 const board: Leaderboard = {
   benchmark: 'videomme-v2-with-subtitles',
+  parts: { level1: 'Level 1', level2: 'Level 2', level3: 'Level 3' },
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (inline leaderboardDataRaw, overall with subtitles)`,
   terms: 'Static page that states no terms; the Video-MME-v2 dataset card on Hugging Face is MIT.',
@@ -52,7 +54,14 @@ const board: Leaderboard = {
         mode = m[1] === 'Think' ? 'thinking' : 'non-thinking';
       }
       const frames = it.frames ? (/fps$/.test(it.frames) ? it.frames.replace('fps', ' fps') : `${it.frames} frames`) : undefined;
-      rows.push({ model, score, setting: [mode, frames].filter(Boolean).join(', ') || undefined });
+      const metrics: Record<string, number> = {};
+      for (const key of ['level1', 'level2', 'level3', 'relevance', 'logic', 'avg_acc'] as const) {
+        const value = it[key]?.[0];
+        if (typeof value === 'number') metrics[key] = value;
+      }
+      const size = model.match(/-(\d+(?:\.\d+)?)B\b/i);
+      rows.push({ model, score, metrics, params: size ? Number(size[1]) : undefined,
+        open: it.type === 'open' ? true : it.type === 'proprietary' ? false : undefined, setting: [mode, frames].filter(Boolean).join(', ') || undefined });
     }
     return rows;
   },

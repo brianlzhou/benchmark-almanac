@@ -16,6 +16,8 @@ const PAGE = 'https://mcpmark.ai/leaderboard';
 
 interface Overall {
   name: string;
+  rank?: number;
+  servicesSuccessRate?: Record<string, { avgSuccessRate?: number }>;
   actualModelName?: string;
   passAtOne?: { avg?: number; std?: number };
   passAtFour?: number;
@@ -25,7 +27,7 @@ interface Overall {
 }
 interface Server {
   serverName: string;
-  models: { model: string; total_tasks: number; per_run_output_tokens?: number }[];
+  models: { [key: string]: unknown; is_open_source_model?: boolean; model: string; total_tasks: number; per_run_output_tokens?: number }[];
 }
 
 /** The JSON array behind the last `"data":[` before `marker` in the payload. */
@@ -54,8 +56,17 @@ const board: Leaderboard = {
     const servers = arrayBefore<Server[]>(flight, '"avgPassRate"');
     const tasks = new Map<string, number>();
     const output = new Map<string, number>();
+    const details = new Map<string, Record<string, number>>();
+    const openness = new Map<string, boolean>();
     for (const s of servers)
       for (const m of s.models) {
+        const stats = details.get(m.model) ?? {};
+        for (const [key, value] of Object.entries(m)) {
+          if (typeof value !== 'number') continue;
+          stats[s.serverName + ': ' + key] = key.startsWith('pass') ? value * 100 : value;
+        }
+        details.set(m.model, stats);
+        if (typeof m.is_open_source_model === 'boolean') openness.set(m.model, m.is_open_source_model);
         tasks.set(m.model, (tasks.get(m.model) ?? 0) + m.total_tasks);
         output.set(m.model, (output.get(m.model) ?? 0) + (m.per_run_output_tokens ?? 0));
       }
@@ -67,14 +78,21 @@ const board: Leaderboard = {
       // "deepseek-v3-2-thinking", "deepseek-v3-2-chat": one model in two modes (the registry lists
       // "DeepSeek-V3.2 (Thinking)" as a plain alias, which would swallow the mode)
       const mode = r.name.match(/^(deepseek-.+)-(thinking|chat)$/);
-      const metrics: Record<string, number> = {};
+      const metrics: Record<string, number> = details.get(r.name) ?? {};
+      if (r.rank != null) metrics.rank = r.rank;
+      if (r.perRunCost != null) metrics.runCostUsd = r.perRunCost;
+      for (const [server, result] of Object.entries(r.servicesSuccessRate ?? {})) {
+        if (typeof result.avgSuccessRate !== 'number') continue;
+        metrics[server] = result.avgSuccessRate * 100;
+        (board.parts ??= {})[server] = { name: server, group: 'Server' };
+      }
       if (typeof r.passAtFour === 'number') metrics.passAt4 = r.passAtFour * 100;
       if (typeof r.passHatFour === 'number') metrics.pass4 = r.passHatFour * 100;
       if (typeof r.passAtOne?.std === 'number') metrics.std = r.passAtOne.std * 100;
       if (r.avgExecutionTime) metrics.time = r.avgExecutionTime;
       rows.push({
         model: mode ? mode[1] : r.name,
-        score: score * 100,
+        score: score * 100, trials: 4, open: openness.get(r.name),
         cost: n && r.perRunCost ? r.perRunCost / n : undefined,
         tokens: n && output.get(r.name) ? output.get(r.name)! / n : undefined,
         setting: mode ? (mode[2] === 'chat' ? 'non-thinking' : 'thinking') : r.name === 'deepseek-chat' ? 'non-thinking' : undefined,

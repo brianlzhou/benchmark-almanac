@@ -11,6 +11,10 @@ const FEED = ghRaw(REPO, 'docs/charts/datawrapper/ratings.csv');
 
 const board: Leaderboard = {
   benchmark: 'clocktower-bench',
+  parts: {
+    detection: { name: 'Detection', group: 'Task type' },
+    deception: { name: 'Deception', group: 'Task type' },
+  },
   url: 'https://clocktowerbench.com/',
   feed: `${FEED} (Elo)`,
   terms: 'The dwarkeshsp/clocktower repository is MIT licensed.',

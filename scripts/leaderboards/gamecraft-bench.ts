@@ -7,6 +7,12 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/tongxuluo/gamecraft-bench/main/README.md";
 const board: Leaderboard = {
  benchmark: "gamecraft-bench",
+ parts: {
+   mechanics: { name: 'Mechanics', group: 'Dimension' },
+   depth: { name: 'Depth', group: 'Dimension' },
+   visuals: { name: 'Visuals', group: 'Dimension' },
+   art: { name: 'Art', group: 'Dimension' },
+ },
  harnesses: 'system',
  url: "https://github.com/tongxuluo/gamecraft-bench",
  feed: FEED,

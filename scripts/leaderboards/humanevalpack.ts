@@ -8,6 +8,10 @@ const FEED = "https://raw.githubusercontent.com/bigcode-project/octopack/HEAD/vi
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "humanevalpack",
+  parts: {
+    fixing: { name: 'Fixing', group: 'Task type' },
+    explaining: { name: 'Explaining', group: 'Task type' },
+  },
   url: "https://github.com/bigcode-project/octopack",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

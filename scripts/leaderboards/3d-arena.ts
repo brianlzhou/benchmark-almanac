@@ -5,7 +5,10 @@ import { fetchJson } from '../lib/util.ts';
 const API='https://3d-arena-3d-arena.hf.space/api/leaderboard';
 interface Entry {name:string;score:number|null;votes:number;open_source:boolean}
 const board:Leaderboard={
-  benchmark:'3d-arena',url:'https://huggingface.co/spaces/3d-arena/3d-arena',feed:API+'?vote_type=all',
+  benchmark:'3d-arena', parts: {
+  renderRating: { name: 'Render', group: 'Dimension' },
+  topologyRating: { name: 'Topology', group: 'Dimension' },
+},url:'https://huggingface.co/spaces/3d-arena/3d-arena',feed:API+'?vote_type=all',
   terms:'Public 3D Arena API. The Space repository is MIT-licensed. The almanac credits and links the source.',
   async fetch():Promise<LeaderboardRow[]>{
     const all=await fetchJson<Entry[]>(API+'?vote_type=all');

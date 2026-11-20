@@ -65,4 +65,16 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  ar: { name: 'Arabic', group: 'Language' },
+  es: { name: 'Spanish', group: 'Language' },
+  fr: { name: 'French', group: 'Language' },
+  ko: { name: 'Korean', group: 'Language' },
+  th: { name: 'Thai', group: 'Language' },
+  vi: { name: 'Vietnamese', group: 'Language' },
+  pt: { name: 'Portuguese', group: 'Language' },
+  id: { name: 'Indonesian', group: 'Language' },
+  ja: { name: 'Japanese', group: 'Language' },
+  ru: { name: 'Russian', group: 'Language' },
+};
 export default board;

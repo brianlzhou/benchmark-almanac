@@ -62,7 +62,7 @@ function unpack(v: unknown): unknown {
 }
 
 /** The runs behind the page's chart, read as data; null when the page has neither the prop nor the file. */
-async function valsView(html: string): Promise<ValsView | null> {
+export async function valsView(html: string): Promise<ValsView | null> {
   // each chart on the page gets its own copy; the first holds the overall task, later ones may add others
   let view: ValsView | null = null;
   for (const [, raw] of html.matchAll(/props="(\{&quot;benchmarkView&quot;[^"]*)"/g)) {

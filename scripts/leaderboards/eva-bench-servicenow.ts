@@ -59,4 +59,9 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  'EVA-A_pass_airline': { name: 'Airline', group: 'Domain' },
+  'EVA-A_pass_medical_hr': { name: 'Medical HR', group: 'Domain' },
+  'EVA-A_pass_itsm': { name: 'Information technology service management', group: 'Domain' },
+};
 export default board;

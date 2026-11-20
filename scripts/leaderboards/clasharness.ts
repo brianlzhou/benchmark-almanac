@@ -61,4 +61,9 @@ const board: Leaderboard = {
     return [...rows.values()];
   },
 };
+board.parts = {
+  easy: { name: 'Easy', group: 'Difficulty' },
+  medium: { name: 'Medium', group: 'Difficulty' },
+  hard: { name: 'Hard', group: 'Difficulty' },
+};
 export default board;

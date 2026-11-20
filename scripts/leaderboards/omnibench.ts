@@ -5,7 +5,26 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://m-a-p.ai/OmniBench/leaderboard_data.json";
 const board: Leaderboard = {
- benchmark: "omnibench", url: "https://m-a-p.ai/OmniBench/leaderboard_data.json", feed: FEED,
+ benchmark: "omnibench", parts: {
+  speech: { name: 'Speech', group: 'Category' },
+  sound_event: { name: 'Sound event', group: 'Category' },
+  music: { name: 'Music', group: 'Category' },
+  action_and_activity: { name: 'Action and activity', group: 'Category' },
+  story_description: { name: 'Story description', group: 'Category' },
+  plot_inference: { name: 'Plot inference', group: 'Category' },
+  object_identification_and_description: { name: 'Object identification and description', group: 'Category' },
+  contextual_and_environmental_questions: { name: 'Contextual and environmental questions', group: 'Category' },
+  identity_and_relationship: { name: 'Identity and relationship', group: 'Category' },
+  text_and_symbols: { name: 'Text and symbols', group: 'Category' },
+  'sound event': { name: 'Sound event', group: 'Category' },
+  'action and activity': { name: 'Action and activity', group: 'Category' },
+  'story description': { name: 'Story description', group: 'Category' },
+  'plot inference': { name: 'Plot inference', group: 'Category' },
+  'object identification and description': { name: 'Object identification and description', group: 'Category' },
+  'contextual and environmental questions': { name: 'Contextual and environmental questions', group: 'Category' },
+  'identity and relationship': { name: 'Identity and relationship', group: 'Category' },
+  'text and symbols': { name: 'Text and symbols', group: 'Category' },
+}, url: "https://m-a-p.ai/OmniBench/leaderboard_data.json", feed: FEED,
  aliases: {'GPT4-o (0806)':'gpt-4o-aug-2024','GPT4-o-mini':'gpt-4o-mini','GPT-4V-0409':'gpt-4-turbo-apr-2024'},
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 

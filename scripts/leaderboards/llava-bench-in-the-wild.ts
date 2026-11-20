@@ -10,6 +10,11 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2304.08485";
 const board: Leaderboard = {
  benchmark: "llava-bench-in-the-wild",
+ parts: {
+   conversation: { name: 'Conversation', group: 'Task type' },
+   description: { name: 'Description', group: 'Task type' },
+   reasoning: { name: 'Complex reasoning', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2304.08485",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

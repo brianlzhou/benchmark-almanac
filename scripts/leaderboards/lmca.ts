@@ -1,4 +1,4 @@
-// LMCA conceptual argumentation score on the published 0–100 scale. Includes all effort settings and USD per response from the official cost chart.
+// LMCA conceptual argumentation score on the published 0–100 scale. Includes effort, cost per response, uncertainty and the reported mean and variance.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -21,7 +21,10 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (ci !== undefined) { metrics.ciLow = score - ci; metrics.ciHigh = score + ci; }
       if (cost !== undefined) metrics.cost = cost;
-      out.push({model: identity(r.base_model || r.model), score, setting: r.effort || undefined, cost, metrics});
+      const mean = num(r.lmca_mean), variance = num(r.lmca_variance);
+      if (mean !== undefined) metrics.mean = mean;
+      if (variance !== undefined) metrics.variance = variance;
+      out.push({model: identity(r.base_model || r.model), score, setting: r.effort || undefined, cost, metrics, low: metrics.ciLow, high: metrics.ciHigh});
     }
     if (!out.length) throw new Error('LMCA score column missing');
     return out;

@@ -6,7 +6,20 @@ import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://raw.githubusercontent.com/alexwarstadt/blimp/master/raw_results/summary/models_summary.jsonl";
 const board: Leaderboard = {
- benchmark: "blimp", url: "https://raw.githubusercontent.com/alexwarstadt/blimp/master/raw_results/summary/models_summary.jsonl", feed: FEED,
+ benchmark: "blimp", parts: {
+  anaphor_agreement: { name: 'Anaphor agreement', group: 'Category' },
+  argument_structure: { name: 'Argument structure', group: 'Category' },
+  binding: { name: 'Binding', group: 'Category' },
+  control_raising: { name: 'Control raising', group: 'Category' },
+  determiner_noun_agreement: { name: 'Determiner noun agreement', group: 'Category' },
+  ellipsis: { name: 'Ellipsis', group: 'Category' },
+  filler_gap_dependency: { name: 'Filler gap dependency', group: 'Category' },
+  irregular_forms: { name: 'Irregular forms', group: 'Category' },
+  island_effects: { name: 'Island effects', group: 'Category' },
+  quantifiers: { name: 'Quantifiers', group: 'Category' },
+  subject_verb_agreement: { name: 'Subject verb agreement', group: 'Category' },
+  npi_licensing: { name: 'Negative polarity item licensing', group: 'Category' },
+}, url: "https://raw.githubusercontent.com/alexwarstadt/blimp/master/raw_results/summary/models_summary.jsonl", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

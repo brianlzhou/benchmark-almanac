@@ -36,6 +36,17 @@ function quoted(s: string, from: number): string {
 
 const board: Leaderboard = {
   benchmark: 'artifactsbench-gemini-0506',
+  parts: {
+    GAME: { name: 'Game', group: 'Category' },
+    SVG: { name: 'SVG', group: 'Category' },
+    WEB: { name: 'Web', group: 'Category' },
+    SV: { name: 'Static visual', group: 'Interactivity' },
+    MMD: { name: 'Mild to moderate dynamics', group: 'Interactivity' },
+    HD: { name: 'High dynamics', group: 'Interactivity' },
+    II: { name: 'Intensive interactive', group: 'Interactivity' },
+    SI: { name: 'Simulation', group: 'Category' },
+    MS: { name: 'Management system', group: 'Category' },
+  },
   url: PAGE,
   feed: `${BASE}static/js/main.<hash>.js (data of the "history" tab)`,
   terms: 'Static GitHub Pages site with no robots.txt and no terms; the ArtifactsBenchmark repository is public and the scores are cited to Tencent Hunyuan.',

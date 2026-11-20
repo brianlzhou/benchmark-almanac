@@ -6,6 +6,9 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://medmcqa.github.io";
 const board: Leaderboard = {
  benchmark: "medmcqa",
+ parts: {
+   devAccuracy: { name: 'Development', group: 'Split' },
+ },
  url: "https://medmcqa.github.io",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -14,6 +14,9 @@ const FEED = ghRaw(REPO, 'README.md');
 
 const board: Leaderboard = {
   benchmark: 'mmlu-cf',
+  parts: {
+    validation: { name: 'Validation', group: 'Split' },
+  },
   url: `https://github.com/${REPO}`,
   feed: `${FEED} (Leaderboard table, MMLU-CF 5-shot Test)`,
   terms: 'README table in the microsoft/MMLU-CF GitHub repository, which is MIT-licensed.',
@@ -50,8 +53,17 @@ const board: Leaderboard = {
       const size = r[0].text.match(/(?:-|\()(\d+(?:\.\d+)?)B(?:-|\)|$)/i);
       const params = size ? Number(size[1]) : undefined;
       const validation5 = num(r[3]?.text), test0 = num(r[5]?.text), validation0 = num(r[6]?.text);
-      if (score !== undefined) rows.push({ model: r[0].text, params, score, date: '2024-12-01', setting: '5-shot test', metrics: validation5 === undefined ? undefined : {validation: validation5} });
-      if (test0 !== undefined) rows.push({ model: r[0].text, params, score: test0, date: '2024-12-01', setting: '0-shot test', metrics: validation0 === undefined ? undefined : {validation: validation0} });
+      const reference = num(r[1]?.text);
+      const metrics = (validation: number | undefined, column: number) => {
+        const result: Record<string, number> = {};
+        if (reference !== undefined) result.originalMmlu5Shot = reference;
+        if (validation !== undefined) result.validation = validation;
+        const delta = num(r[column]?.text);
+        if (delta !== undefined) result.testMinusValidation = delta;
+        return result;
+      };
+      if (score !== undefined) rows.push({ model: r[0].text, params, score, date: '2024-12-01', setting: '5-shot test', metrics: metrics(validation5, 4) });
+      if (test0 !== undefined) rows.push({ model: r[0].text, params, score: test0, date: '2024-12-01', setting: '0-shot test', metrics: metrics(validation0, 7) });
     }
     return rows;
   },

@@ -7,6 +7,13 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://huggingface.co/spaces/inception42/Leaderboards/resolve/main/assets/results/aragen_v3_results.json";
 const board: Leaderboard = {
   benchmark: "aragen",
+  parts: {
+    completeness: { name: 'Completeness', group: 'Dimension' },
+    conciseness: { name: 'Conciseness', group: 'Dimension' },
+    helpfulness: { name: 'Helpfulness', group: 'Dimension' },
+    honesty: { name: 'Honesty', group: 'Dimension' },
+    harmlessness: { name: 'Harmlessness', group: 'Dimension' },
+  },
   url: "https://huggingface.co/spaces/inception42/Leaderboards/resolve/main/assets/results/aragen_v3_results.json",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

@@ -2,7 +2,7 @@
 // scicode-bench/scicode-bench.github.io repository: one markdown table with the Main Problem Resolve Rate
 // (the ranking, bold) and the Subproblem rate (gray, the tie-breaker). The main-problem rate is the score.
 // The table has not changed since early 2025 (o3-mini is the newest model). The subproblem rate is kept as
-// metrics.subproblem.
+// metrics.subproblem. The board marks the top three positions with medals.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -47,7 +47,11 @@ const board: Leaderboard = {
       const effort = model.match(/-(low|medium|high)$/);
       if (effort) model = model.slice(0, effort.index);
       const subproblem = Number(cells[2]);
-      rows.push({ model, score, setting: effort?.[1], ...(cells[2] && Number.isFinite(subproblem) ? { metrics: { subproblem } } : {}) });
+      const metrics: Record<string, number> = {};
+      if (cells[2] && Number.isFinite(subproblem)) metrics.subproblem = subproblem;
+      const medal = ['🥇', '🥈', '🥉'].findIndex(symbol => cells[0].startsWith(symbol));
+      if (medal >= 0) metrics.rank = medal + 1;
+      rows.push({ model, score, setting: effort?.[1], metrics });
     }
     if (!rows.length) throw new Error('no rows in the SciCode leaderboard table');
     return rows;

@@ -4,11 +4,13 @@
 // kept the same 113 tasks and only fixed flaky tests, so the almanac keeps one record and reads the current board.
 // Each row also carries the table's ± (ci_half, as "ci95" in points), Steps (mean_agent_steps, "steps"), and the
 // artifact's pass@4 ("passAt4", %) and mean attempt time ("time", seconds). The board's chart plots the score
-// against cost, output tokens or agent steps; the steps view is declared here.
+// against cost, output tokens or agent steps. Keep the separate resource statistics and each attempt’s pass rate.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
 interface Row {
+  completed_by_attempt?: number[];
+  pass_rate_by_attempt?: number[];
   model: string;
   harness?: string;
   reasoning_effort?: string | null;
@@ -28,6 +30,20 @@ interface Row {
 
 const num = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 const round = (x: number, d: number) => Number(x.toFixed(d));
+
+function resourceMetrics(row: Row): Record<string, number> {
+  const metrics: Record<string, number> = {};
+  for (const [key, value] of Object.entries(row)) {
+    if (num(value) && /^(mean_|median_|n_(?:passed|attempted|tasks_)|ci_(?:passed|attempted))/.test(key)) metrics[key] = value;
+  }
+  row.pass_rate_by_attempt?.forEach((value, i) => {
+    if (num(value)) metrics[`attempt${i + 1}PassRate`] = value * 100;
+  });
+  row.completed_by_attempt?.forEach((value, i) => {
+    if (num(value)) metrics[`attempt${i + 1}Completed`] = value;
+  });
+  return metrics;
+}
 
 export function makeDeepSwe(benchmark: string, version: string): Leaderboard {
   const feed = `https://deepswe.datacurve.ai/artifacts/${version}/leaderboard-live.json`;
@@ -58,6 +74,7 @@ export function makeDeepSwe(benchmark: string, version: string): Leaderboard {
           cost: r.mean_cost_usd ?? undefined,
           tokens: r.mean_output_tokens ?? undefined,
           metrics: {
+            ...resourceMetrics(r),
             ...(num(r.ci_half) ? { ci95: round(r.ci_half * 100, 2) } : {}),
             ...(num(r.mean_agent_steps) ? { steps: round(r.mean_agent_steps, 1) } : {}),
             ...(num(r.pass_at_4) ? { passAt4: round(r.pass_at_4 * 100, 2) } : {}),

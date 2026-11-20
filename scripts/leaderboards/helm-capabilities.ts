@@ -139,13 +139,44 @@ function helmCosts(tables: Table[], column: string): Map<string, { latency?: num
   return out;
 }
 
-export async function helmRows(t: HelmTable): Promise<LeaderboardRow[]> {
+export async function helmRows(t: HelmTable, details = false, aggregate?: Leaderboard): Promise<LeaderboardRow[]> {
   const newest = await helmNewest(t.project, t.kind);
   const tables = await fetchJson<Table[]>(`${HELM_BUCKET}/${newest}groups/${t.group}.json`);
   const table = t.table ? tables.find((x) => x.title === t.table) : tables[0];
   const col = table?.header.findIndex((h) => h.value === t.column) ?? -1;
   if (!table || col < 0) throw new Error(`no "${t.column}" column in ${t.project} ${t.group}.json`);
   const costs = helmCosts(tables, t.column);
+  const scenario = t.column.split(' - ')[0];
+  const general = tables.find(table => table.title === 'General information');
+  const extra = new Map<string, Record<string, number>>();
+  if (aggregate) {
+    for (const source of tables) {
+      for (const row of source.rows) {
+        const model = String(row[0]?.value).trim();
+        const metrics = extra.get(model) ?? {};
+        for (const [j, h] of source.header.entries()) {
+          const value = row[j]?.value;
+          if (j === 0 || h.value === t.column || typeof value !== 'number') continue;
+          if (source === table) {
+            metrics[h.value] = value * (t.scale ?? 1);
+            (aggregate.parts ??= {})[h.value] = { name: h.value, group: 'Scenario' };
+          } else {
+            metrics[(source.title ?? '') + ': ' + h.value] = value;
+          }
+        }
+        extra.set(model, metrics);
+      }
+    }
+  } else if (details && general) {
+    for (const r of general.rows) {
+      const metrics: Record<string, number> = {};
+      for (const [j, h] of general.header.entries()) {
+        const value = r[j]?.value;
+        if (h.value.startsWith(scenario + ' - ') && typeof value === 'number') metrics[h.value.slice(scenario.length + 3)] = value;
+      }
+      extra.set(String(r[0]?.value).trim(), metrics);
+    }
+  }
   const rows: LeaderboardRow[] = [];
   for (const r of table.rows) {
     const score = r[col]?.value;
@@ -162,13 +193,21 @@ export async function helmRows(t: HelmTable): Promise<LeaderboardRow[]> {
     }
     const stamp = model.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
     const c = costs.get(String(r[0]?.value ?? '').trim());
+    const metrics = { ...extra.get(String(r[0]?.value).trim()), ...(c?.latency ? { latency: c.latency } : {}) } as Record<string, number>;
+    if (details && !t.table) {
+      for (const [j, header] of table.header.entries()) {
+        const value = r[j]?.value;
+        if (j !== col && typeof value === 'number') metrics[header.value] = value;
+      }
+    }
+    const tokens = c?.tokens ?? metrics['# output tokens'];
     rows.push({
       model,
       score: score * (t.scale ?? 1),
       setting: settings.join(', ') || undefined,
       date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined,
-      ...(c?.tokens ? { tokens: c.tokens } : {}),
-      ...(c?.latency ? { metrics: { latency: c.latency } } : {}),
+      ...(tokens != null ? { tokens } : {}),
+      metrics,
     });
   }
   if (!rows.length) throw new Error(`no scored rows in ${t.project} ${t.group}.json`);

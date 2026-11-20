@@ -75,4 +75,9 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  airline: { name: 'Airline', group: 'Domain' },
+  retail: { name: 'Retail', group: 'Domain' },
+  telecom: { name: 'Telecom', group: 'Domain' },
+};
 export default board;

@@ -8,6 +8,12 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/qizekun/OmniSpatial/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "omnispatial",
+ parts: {
+   'Dyn.': { name: 'Dynamic reasoning', group: 'Category' },
+   Interact: { name: 'Spatial interaction', group: 'Category' },
+   Logic: { name: 'Complex spatial logic', group: 'Category' },
+   'Persp.': { name: 'Perspective taking', group: 'Category' },
+ },
  url: "https://github.com/qizekun/OmniSpatial",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

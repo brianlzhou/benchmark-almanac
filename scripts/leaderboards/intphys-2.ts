@@ -8,6 +8,11 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2506.09849";
 const board: Leaderboard = {
   benchmark: "intphys-2",
+  parts: {
+    easy: { name: 'Easy', group: 'Difficulty' },
+    medium: { name: 'Medium', group: 'Difficulty' },
+    hard: { name: 'Hard', group: 'Difficulty' },
+  },
   url: "https://arxiv.org/html/2506.09849",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

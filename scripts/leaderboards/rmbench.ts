@@ -9,6 +9,19 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2603.01229";
 const board: Leaderboard = {
  benchmark: "rmbench",
+ parts: {
+   singleMemory: { name: 'Single memory', group: 'Difficulty' },
+   multiMemory: { name: 'Multi memory', group: 'Difficulty' },
+   'Observe and Pick Up': { name: 'Observe and pick up', group: 'Task type' },
+   'Rearrange Blocks': { name: 'Rearrange blocks', group: 'Task type' },
+   'Put Back Block': { name: 'Put back block', group: 'Task type' },
+   'Swap Blocks': { name: 'Swap blocks', group: 'Task type' },
+   'Swap T': { name: 'Swap T', group: 'Task type' },
+   'Battery Try': { name: 'Battery try', group: 'Task type' },
+   'Blocks Ranking Try': { name: 'Blocks ranking try', group: 'Task type' },
+   'Cover Blocks': { name: 'Cover blocks', group: 'Task type' },
+   'Press Button': { name: 'Press button', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2603.01229",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

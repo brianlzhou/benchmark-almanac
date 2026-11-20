@@ -10,6 +10,15 @@ const FEED = 'https://robodojo-benchmark.com/data/leaderboard.generated.json';
 
 const board: Leaderboard = {
   benchmark: 'robodojo',
+  parts: {
+    generalizationScore: { name: 'Generalization', group: 'Category' },
+    precisionScore: { name: 'Precision', group: 'Category' },
+    longHorizonScore: { name: 'Long horizon', group: 'Category' },
+    memoryScore: { name: 'Memory', group: 'Category' },
+    openScore: { name: 'Open', group: 'Category' },
+    generalizationStdScore: { name: 'Generalization standard', group: 'Category' },
+    generalizationRandScore: { name: 'Generalization randomized', group: 'Category' },
+  },
   url: PAGE,
   feed: `${FEED} (sim, average score)`,
   terms: 'Static JSON the board itself loads; robots.txt allows it (disallows only /internal/ and /login) and the RoboDojo repository is MIT-licensed.',

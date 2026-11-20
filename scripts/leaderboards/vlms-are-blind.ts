@@ -7,6 +7,15 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://vlmsareblind.github.io/";
 const board: Leaderboard = {
  benchmark: "vlms-are-blind",
+ parts: {
+   'Line Intersect': { name: 'Line intersect', group: 'Task type' },
+   'Two Circles': { name: 'Two circles', group: 'Task type' },
+   'Olympic Rings': { name: 'Olympic rings', group: 'Task type' },
+   Pentagon: { name: 'Pentagon', group: 'Task type' },
+   'Nested Squares': { name: 'Nested squares', group: 'Task type' },
+   Grid: { name: 'Grid', group: 'Task type' },
+   'Path Following': { name: 'Path following', group: 'Task type' },
+ },
  url: "https://vlmsareblind.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

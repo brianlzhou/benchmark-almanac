@@ -64,4 +64,16 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  academia: { name: 'Academia', group: 'Domain' },
+  advertising: { name: 'Advertising', group: 'Domain' },
+  education: { name: 'Education', group: 'Domain' },
+  economics: { name: 'Economics', group: 'Domain' },
+  talk: { name: 'Talk', group: 'Domain' },
+  'Presentation Fundamentals': { name: 'Presentation fundamentals', group: 'Dimension' },
+  'Visual Design and Layout': { name: 'Visual design and layout', group: 'Dimension' },
+  'Content Completeness': { name: 'Content completeness', group: 'Dimension' },
+  'Content Correctness': { name: 'Content correctness', group: 'Dimension' },
+  'Content Fidelity': { name: 'Content fidelity', group: 'Dimension' },
+};
 export default board;

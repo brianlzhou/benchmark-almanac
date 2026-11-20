@@ -6,7 +6,14 @@ import { tables, num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/OpenBMB/ToolBench/master/README.md";
 const board: Leaderboard = {
- benchmark: "toolbench", url: "https://github.com/OpenBMB/ToolBench", feed: FEED,
+ benchmark: "toolbench", parts: {
+  'I1-Inst.': { name: 'Single-tool unseen instructions', group: 'Split' },
+  'I1-Tool': { name: 'Single-tool unseen tools', group: 'Split' },
+  'I1-Cate.': { name: 'Single-tool unseen categories', group: 'Split' },
+  'I2-Inst.': { name: 'Intra-category multi-tool unseen instructions', group: 'Split' },
+  'I2-Cate.': { name: 'Intra-category multi-tool unseen categories', group: 'Split' },
+  'I3-Inst.': { name: 'Intra-collection multi-tool unseen instructions', group: 'Split' },
+}, url: "https://github.com/OpenBMB/ToolBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

@@ -10,6 +10,22 @@ const FEED = "https://cinerecon.github.io/assets/results.json";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "cinerecon",
+  parts: {
+    object_presence: { name: 'Object presence', group: 'Dimension' },
+    object_relation: { name: 'Object relation', group: 'Dimension' },
+    camera_position: { name: 'Camera position', group: 'Dimension' },
+    camera_target: { name: 'Camera target', group: 'Dimension' },
+    camera_translation: { name: 'Camera translation', group: 'Dimension' },
+    camera_zoom: { name: 'Camera zoom', group: 'Dimension' },
+    cut_count: { name: 'Cut count', group: 'Dimension' },
+    object_motion: { name: 'Object motion', group: 'Dimension' },
+    action_event: { name: 'Action event', group: 'Dimension' },
+    camera_rotation: { name: 'Camera rotation', group: 'Dimension' },
+    camera: { name: 'Camera', group: 'Dimension' },
+    static: { name: 'Static', group: 'Dimension' },
+    dynamic: { name: 'Dynamic', group: 'Dimension' },
+    object_appearance: { name: 'Object appearance', group: 'Dimension' },
+  },
   url: "https://cinerecon.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at cinerecon.github.io; retain source attribution and follow the upstream terms.",

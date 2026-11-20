@@ -9,6 +9,13 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 const FEED = "https://arxiv.org/html/2503.03803";
 const board: Leaderboard = {
  benchmark: "egolife-with-memory",
+ parts: {
+   entityLog: { name: 'Entity log', group: 'Task type' },
+   eventRecall: { name: 'Event recall', group: 'Task type' },
+   habitInsight: { name: 'Habit insight', group: 'Task type' },
+   relationMap: { name: 'Relation map', group: 'Task type' },
+   taskMaster: { name: 'Task master', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2503.03803",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

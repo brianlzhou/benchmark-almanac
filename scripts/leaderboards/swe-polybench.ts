@@ -13,6 +13,12 @@ const TAB = 'leaderboard-Full';
 
 const board: Leaderboard = {
   benchmark: 'swe-polybench',
+  parts: {
+    Java: { name: 'Java', group: 'Language' },
+    Python: { name: 'Python', group: 'Language' },
+    JavaScript: { name: 'JavaScript', group: 'Language' },
+    TypeScript: { name: 'TypeScript', group: 'Language' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML, Full table, Overall)`,
   terms: 'Static page on GitHub Pages; robots.txt allows it and the SWE-PolyBench repository is MIT-licensed.',

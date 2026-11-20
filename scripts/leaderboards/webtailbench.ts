@@ -18,7 +18,7 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/microsoft/fara/main/README.md";
 const board: Leaderboard = {
-  benchmark: "webtailbench", url: "https://github.com/microsoft/fara", feed: FEED,
+  benchmark: "webtailbench", measures: { processSuccess: 'process-success' }, url: "https://github.com/microsoft/fara", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

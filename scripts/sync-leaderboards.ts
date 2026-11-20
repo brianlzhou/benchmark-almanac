@@ -6,7 +6,9 @@
 // in `others`, which have no model record, it is the date the board gives, if any. A board that fails keeps its last rows, so one broken site never empties
 // the data.
 //
-// usage: node scripts/sync-leaderboards.ts [--only id,id] [--dry] [--allow-drop]
+// usage: node scripts/sync-leaderboards.ts [--only id,id] [--dry] [--allow-drop] [--parts-only] [--rematch]
+// --rematch reads no board either: it matches each board's stored unlisted entries again, so a model or alias added
+// to data/models.json (or to an importer) takes effect without fetching anything.
 // With --dry and SYNC_DUMP=<file>, each board's full rows, others and harness declarations are appended to that
 // file as one JSON line, so a change to an importer can be compared with the rows it gave before.
 import { readdirSync, existsSync, writeFileSync, appendFileSync } from 'node:fs';
@@ -15,7 +17,18 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, dataPath, readJson, today, bodyHooks } from './lib/util.ts';
 import { makeResolver } from './lib/models.ts';
-import type { Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
+import type { BoardPart, Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
+
+// a board's parts as stored: each declared part the rows actually score, written out in full
+function partsOf(board: Leaderboard, rows: Row[]): Record<string, BoardPart> | undefined {
+  const scored = new Set(rows.flatMap((r) => Object.keys(r[8] ?? {})));
+  const out = Object.entries(board.parts ?? {})
+    .filter(([k]) => scored.has(k))
+    .map(([k, p]): [string, BoardPart] => [k, typeof p === 'string' ? { name: p } : p]);
+  const missing = Object.keys(board.parts ?? {}).filter((k) => !scored.has(k));
+  if (missing.length) console.log(`    ${board.benchmark}: parts no row scores: ${missing.join(', ')}`);
+  return out.length ? Object.fromEntries(out) : undefined;
+}
 
 // benchmark, model, setting, harness, score, date, cost (US dollars per task), tokens (output tokens per task),
 // metrics (other numbers the board reports, such as latency) when it has any, and info (facts about the entry:
@@ -44,7 +57,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -55,7 +68,11 @@ const arg = (k: string) => {
   const i = process.argv.indexOf(k);
   return i > 0 ? process.argv[i + 1] : undefined;
 };
-const only = arg('--only')?.split(',');
+// --parts-only reads no board: it only refreshes each board's declared parts and measure columns from its
+// importer, so a new declaration shows without fetching anything
+const partsOnly = process.argv.includes('--parts-only');
+const rematch = process.argv.includes('--rematch');
+const only = partsOnly || rematch ? [] : arg('--only')?.split(',');
 const dry = process.argv.includes('--dry');
 
 const clean = (s: string | undefined) => s?.replace(/\s+/g, ' ').trim() || undefined;
@@ -100,6 +117,67 @@ const feedFields: Record<string, string[]> = existsSync(fieldsPath) ? readJson<{
 const fieldReview: Record<string, Flag[]> = existsSync(reviewPath) ? readJson<{ boards: Record<string, Flag[]> }>(reviewPath).boards : {};
 const decided: Record<string, Record<string, unknown>> = existsSync(decisionsPath) ? readJson<{ boards: Record<string, Record<string, unknown>> }>(decisionsPath).boards : {};
 const released = new Map(readJson<{ id: string; released?: string }[]>(dataPath('models.json')).map((m) => [m.id, m.released]));
+// names that mean one model on one board only, from reviews that read the board's own page (data/board-aliases.json)
+const boardAliases: Record<string, Record<string, string>> = existsSync(dataPath('board-aliases.json')) ? readJson<{ boards: Record<string, Record<string, string>> }>(dataPath('board-aliases.json')).boards : {};
+const aliasesOf = (board: Leaderboard) => ({ ...(boardAliases[board.benchmark] ?? {}), ...(board.aliases ?? {}) });
+
+// a board's measure columns as stored: each declared column the rows actually keep
+function measuresOf(board: Leaderboard, rows: Row[]): Record<string, string> | undefined {
+  const kept = new Set(rows.flatMap((r) => Object.keys(r[8] ?? {})));
+  const out = Object.entries(board.measures ?? {}).filter(([k]) => kept.has(k));
+  return out.length ? Object.fromEntries(out) : undefined;
+}
+
+// the stored rows and unlisted entries of one board, grouped once
+let byBoard: Map<string, Row[]> | undefined;
+function storedRows(id: string): Row[] {
+  if (!byBoard) {
+    byBoard = new Map();
+    for (const r of [...store.rows, ...(store.others ?? [])]) {
+      const list = byBoard.get(r[0]);
+      if (list) list.push(r);
+      else byBoard.set(r[0], [r]);
+    }
+  }
+  return byBoard.get(id) ?? [];
+}
+
+/**
+ * A row's setting: the board's own, else the one the name carried ("o3 (high)"). A setting that is part of the
+ * model's name ("GLM-5.3 Prime") joins the board's, so "GLM-5.3 Prime" at max never reads as GLM-5.3 at max.
+ */
+function settingOf(own: string | null | undefined, hit: { setting?: string; variant?: true }): string | null {
+  if (hit.variant && hit.setting && own && own !== hit.setting) return `${hit.setting}, ${own}`;
+  return own ?? hit.setting ?? null;
+}
+
+// --rematch: one board's stored unlisted entries that now resolve move to its rows, the way a fresh read would put
+// them: the model's release in the date column and the board's own date in info.run
+let rematched = 0;
+function rematchBoard(board: Leaderboard) {
+  const resolve = makeResolver(aliasesOf(board));
+  const moved: Row[] = [];
+  const left: Row[] = [];
+  for (const o of (store.others ?? []).filter((r) => r[0] === board.benchmark)) {
+    const hit = resolve(o[1], o[5] ?? undefined);
+    if (!hit) {
+      left.push(o);
+      continue;
+    }
+    const [, , setting, harness, score, date, cost, tokens, metrics, info] = o;
+    const i: Info = { ...(info ?? {}), ...(date ? { run: date } : {}) };
+    const extra = Object.keys(i).length ? [metrics ?? null, i] : metrics ? [metrics] : [];
+    moved.push([board.benchmark, hit.id, settingOf(setting, hit), harness, score, released.get(hit.id) ?? date ?? null, cost ?? null, tokens ?? null, ...extra] as Row);
+  }
+  if (!moved.length) return;
+  rematched += moved.length;
+  store.rows = store.rows.concat(moved);
+  store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(left);
+  const kept = store.boards[board.benchmark];
+  kept.rows = store.rows.filter((r) => r[0] === board.benchmark).length;
+  kept.unmatched = [...new Set(left.map((r) => r[1]))].sort();
+  console.log(`  ${board.benchmark}: ${moved.length} unlisted entries now match (${[...new Set(moved.map((r) => r[1]))].join(', ')})`);
+}
 
 const dir = join(ROOT, 'scripts', 'leaderboards');
 const files = readdirSync(dir).filter((f) => f.endsWith('.ts') && f !== 'types.ts');
@@ -126,14 +204,26 @@ for (const f of files) {
   if (!dry && kept) {
     if (board.host) kept.host = board.host;
     else delete kept.host;
+    // so are the parts it declares up front. Parts an importer sets inside fetch() wait for its next read.
+    if (board.parts) {
+      const parts = partsOf(board, storedRows(board.benchmark));
+      if (parts) kept.parts = parts;
+      else delete kept.parts;
+    }
+    if (board.measures) {
+      const measures = measuresOf(board, storedRows(board.benchmark));
+      if (measures) kept.measures = measures;
+      else delete kept.measures;
+    }
   }
+  if (rematch && !dry && kept) rematchBoard(board);
   if (only && !only.includes(board.benchmark) && !only.includes(f.replace(/\.ts$/, ''))) continue;
   if (!benchmarks.has(board.benchmark)) {
     console.log(`  ${f}: unknown benchmark ${board.benchmark}`);
     failed++;
     continue;
   }
-  const resolve = makeResolver(board.aliases ?? {});
+  const resolve = makeResolver(aliasesOf(board));
   try {
     begin();
     const raw = await board.fetch();
@@ -167,12 +257,12 @@ for (const f of files) {
       }
       // place the score at the model's release, like Epoch, so charts over time line up
       const date = released.get(hit.id) ?? r.date ?? null;
-      rows.push([board.benchmark, hit.id, r.setting ?? hit.setting ?? null, r.harness ?? null, score, date, cost, tokens, ...extra]);
+      rows.push([board.benchmark, hit.id, settingOf(r.setting, hit), r.harness ?? null, score, date, cost, tokens, ...extra]);
     }
     console.log(`  ${board.benchmark}: ${raw.length} rows, ${rows.length} matched${unmatched.size ? `, unmatched: ${[...unmatched].slice(0, 12).join(' | ')}` : ''}`);
     if (dry) {
       if (process.env.SYNC_DUMP)
-        appendFileSync(process.env.SYNC_DUMP, JSON.stringify({ board: board.benchmark, reference: board.reference, harnesses: board.harnesses, verified: board.verified, rows, others }) + '\n');
+        appendFileSync(process.env.SYNC_DUMP, JSON.stringify({ board: board.benchmark, reference: board.reference, harnesses: board.harnesses, verified: board.verified, parts: partsOf(board, [...rows, ...others]), rows, others }) + '\n');
       for (const r of rows.sort((a, b) => b[4] - a[4]).slice(0, 8)) console.log(`      ${r[4]}  ${r[1]}${r[2] ? ` (${r[2]})` : ''}${r[3] ? ` [${r[3]}]` : ''}${r[9] ? `  ${JSON.stringify(r[9]).slice(0, 160)}` : ''}`);
       continue;
     }
@@ -184,7 +274,9 @@ for (const f of files) {
       throw new Error(`${now} entries against ${before} last time; rerun with --allow-drop if the board really shrank`);
     store.rows = store.rows.filter((r) => r[0] !== board.benchmark).concat(rows);
     store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(others);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}) };
+    const parts = partsOf(board, [...rows, ...others]);
+    const measures = measuresOf(board, [...rows, ...others]);
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(measures ? { measures } : {}) };
   } catch (e) {
     failed++;
     const error = (e as Error).message;
@@ -228,6 +320,7 @@ if (!dry) {
     outPath,
     `{\n  "retrieved": ${JSON.stringify(store.retrieved)},\n  "boards": ${JSON.stringify(boards, null, 2).replace(/\n/g, '\n  ')},\n  "columns": ${JSON.stringify(store.columns)},\n  "rows": [\n${lines(store.rows)}\n  ],\n  "otherColumns": ${JSON.stringify(OTHER_COLUMNS)},\n  "others": [\n${lines(others)}\n  ]\n}\n`,
   );
+  if (rematch) console.log(`Rematch: ${rematched} unlisted entries now match a model.`);
   console.log(`Wrote ${store.rows.length} leaderboard scores and ${others.length} unlisted entries from ${Object.keys(store.boards).length} boards.${failed ? ` ${failed} failed.` : ''}`);
 }
 // a few boards fail on any day (sites go down). More than a tenth failing means something broader broke.

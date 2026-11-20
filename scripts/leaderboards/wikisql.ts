@@ -69,4 +69,7 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  devExecutionAccuracy: { name: 'Development', group: 'Split' },
+};
 export default board;

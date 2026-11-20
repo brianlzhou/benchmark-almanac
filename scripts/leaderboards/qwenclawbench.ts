@@ -6,7 +6,10 @@ import { jsonAfter } from '../lib/html.ts';
 const FEED = 'https://skylenage-ai.github.io/QwenClawBench-Leaderboard/';
 interface Entry { display_name: string; thinking_level?: string; mean_score: number; mean_auto_score: number; mean_llm_score: number; runs_per_task: number }
 const board: Leaderboard = {
-  benchmark: 'qwenclawbench', url: FEED, feed: FEED,
+  benchmark: 'qwenclawbench', parts: {
+  auto: { name: 'Automated checks', group: 'Dimension', note: 'Automated score used directly or as a component of hybrid grading.' },
+  llm: { name: 'LLM judge', group: 'Dimension', note: 'Rubric score used directly or as a gated component of hybrid grading.' },
+}, url: FEED, feed: FEED,
   terms: 'Public project leaderboard on GitHub Pages, subject to the project repository license and GitHub terms.',
   async fetch() {
     const html = await fetchText(FEED);

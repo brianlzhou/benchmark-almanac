@@ -2,6 +2,7 @@
 // static/data/osworld_verified_results.xlsx with SheetJS. One sheet row is one run. The page drops rows
 // without a numeric "Success rate", groups the rest by Model and Max steps, and shows the mean success rate
 // of each group; that mean is the score here. The xlsx is read with a small zip + XML reader (no dependency).
+// Average application success rates over the same runs and keep workbook run counts and configurations.
 //
 // Agentic frameworks name their model inside the Model cell ("Pointer Agent w/ Opus 4.7"): the part before
 // " w/ " becomes the harness. Frameworks that name no model, or several ("w/ Opus 4.5 + GPT-5"), stay
@@ -75,8 +76,15 @@ export function splitAgent(name: string): { model: string; harness?: string } {
   return extra ? { model: extra[1], harness: `${m[1]} ${extra[2]}` } : { model: m[2], harness: m[1] };
 }
 
+const parts = {
+  chrome: 'Chrome', gimp: 'GIMP', libreoffice_calc: 'LibreOffice Calc', libreoffice_impress: 'LibreOffice Impress',
+  libreoffice_writer: 'LibreOffice Writer', multi_apps: 'Multiple applications', os: 'Operating system',
+  thunderbird: 'Thunderbird', vlc: 'VLC', vs_code: 'VS Code',
+};
+
 const board: Leaderboard = {
   benchmark: 'osworld-verified',
+  parts,
   url: 'https://os-world.github.io/',
   feed: FEED,
   terms: 'Static file on the OSWorld project site; the OSWorld repository is Apache-2.0.',
@@ -89,28 +97,49 @@ const board: Leaderboard = {
     const res = await fetch(FEED, { headers: { 'user-agent': 'benchmark-almanac' }, signal: AbortSignal.timeout(60_000) });
     if (!res.ok) throw new Error(`${res.status} ${FEED}`);
     const sheet = readXlsx(Buffer.from(await res.arrayBuffer()));
-    const groups = new Map<string, { row: Record<string, string>; rates: number[]; date?: string }>();
+    const groups = new Map<string, { row: Record<string, string>; rates: number[]; runs: Record<string, string>[]; date?: string }>();
     for (const r of sheet) {
       const rate = parseFloat(r['Success rate']);
       if (!r.Model || Number.isNaN(rate)) continue;
       const k = `${r.Model}_${r['Max steps']}`;
-      const g = groups.get(k) ?? { row: r, rates: [] };
+      const g = groups.get(k) ?? { row: r, rates: [], runs: [] };
       g.rates.push(rate);
+      g.runs.push(r);
       const d = excelDate(r.Date);
       if (d && (!g.date || d > g.date)) g.date = d;
       groups.set(k, g);
     }
     const rows: LeaderboardRow[] = [];
-    for (const { row, rates, date } of groups.values()) {
+    for (const { row, rates, runs, date } of groups.values()) {
       let { model, harness } = splitAgent(row.Model.trim());
       // "claude-fable-5[1m]": the 1M-token context variant
       const ctx = model.match(/\[(\d+[km])\]$/i);
       if (ctx) model = model.slice(0, ctx.index);
       const steps = row['Max steps'] ? `${row['Max steps']} steps` : undefined;
+      const metrics: Record<string, number> = {};
+      for (const column of ['Success/Total', ...Object.keys(parts)]) {
+        const pairs = runs.map(run => run[column]?.trim().match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+)$/));
+        if (!pairs.every(pair => pair && Number(pair[2]) > 0)) continue;
+        const totals = pairs.map(pair => Number(pair![2]));
+        if (column === 'Success/Total') {
+          metrics.tasks = totals.reduce((a, b) => a + b, 0);
+          metrics.successes = pairs.reduce((sum, pair) => sum + Number(pair![1]), 0);
+        } else {
+          metrics[column] = pairs.reduce((sum, pair, index) => sum + 100 * Number(pair![1]) / totals[index], 0) / runs.length;
+        }
+      }
+      const modes = [
+        row['Approach type'],
+        row['Additional a11y tree used'] === 'Yes' ? 'accessibility tree' : undefined,
+        row['Additional coding-based action'] === 'Yes' ? 'coding-based actions' : undefined,
+        row['Multiple rollout'] === 'Yes' ? 'multiple rollouts' : undefined,
+      ];
       rows.push({
+        metrics, trials: rates.length, submitter: row.Institution || undefined,
+        link: /^https?:\/\//.test(row.PaperLink) ? row.PaperLink : undefined,
         model,
         score: rates.reduce((a, b) => a + b, 0) / rates.length,
-        setting: [ctx ? `${ctx[1].toUpperCase()} context` : undefined, steps].filter(Boolean).join(', ') || undefined,
+        setting: [ctx ? `${ctx[1].toUpperCase()} context` : undefined, steps, ...modes].filter(Boolean).join(', ') || undefined,
         harness,
         date,
       });

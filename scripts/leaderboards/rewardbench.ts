@@ -13,6 +13,8 @@ const FEED = 'https://huggingface.co/spaces/allenai/reward-bench/resolve/main/le
 
 const board: Leaderboard = {
   benchmark: 'rewardbench',
+  parts: { Chat: 'Chat', 'Chat Hard': 'Chat Hard', Safety: 'Safety', Reasoning: 'Reasoning',
+    'Prior Sets (0.5 weight)': 'Prior Sets (0.5 weight)' },
   url: 'https://huggingface.co/spaces/allenai/reward-bench',
   feed: `${FEED} (Score)`,
   terms: 'CSV in the allenai/reward-bench Hugging Face Space, licensed Apache-2.0.',
@@ -36,7 +38,13 @@ const board: Leaderboard = {
       if (!model || !Number.isFinite(score)) continue;
       // "openai/gpt-4o-2024-05-13": the date stamp picks the snapshot
       const stamp = model.match(/(20\d\d)-?(\d\d)-?(\d\d)$/);
-      rows.push({ model, score, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined });
+      const metrics: Record<string, number> = {};
+      for (const key of Object.keys(board.parts!)) {
+        if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
+      }
+      if (r['']?.trim() && Number.isFinite(Number(r['']))) metrics.rank = Number(r['']);
+      if (r.Model.includes('⚠')) metrics.suspectedContamination = 1;
+      rows.push({ model, score, metrics, setting: r['Model Type'] || undefined, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined });
     }
     return rows;
   },

@@ -21,15 +21,18 @@ const board: Leaderboard = {
     const scoreIndex = accuracy?.header.findIndex((h: any) => h.value === 'Mean win rate');
     const source = accuracy?.rows.filter((r: any) => typeof r[scoreIndex]?.value === 'number');
     if (!source || source.length !== rows.length) throw new Error('HELM Lite changed during resource join');
-    const general = tables.find(t => t.title === 'General information');
     for (let i = 0; i < rows.length; i++) {
       if (Math.abs(source[i][scoreIndex].value * 100 - rows[i].score) > 1e-8) throw new Error('HELM Lite score join mismatch');
-      const resource = general?.rows.find((r: any) => r[0]?.value === source[i][0]?.value);
       const metrics: Record<string, number> = {};
-      general?.header.forEach((h: any, j: number) => {
-        if (/ - # (?:prompt|output) tokens$/.test(h.value) && typeof resource?.[j]?.value === 'number') metrics[h.value] = resource[j].value;
-      });
-      // These are scenario-specific request counts. No unpublished whole-benchmark average is invented.
+      for (const table of tables) {
+        const record = table.rows.find((r: {value: unknown}[]) => r[0]?.value === source[i][0]?.value);
+        if (!record) continue;
+        for (const [j, header] of table.header.entries()) {
+          const key = header.value, value = record[j]?.value;
+          if (j === 0 || typeof value !== 'number' || (table === accuracy && j === scoreIndex)) continue;
+          metrics[key === 'Mean win rate' ? table.title + ' mean win rate' : key] = value;
+        }
+      }
       rows[i].metrics = {...rows[i].metrics, ...metrics};
     }
     return rows;

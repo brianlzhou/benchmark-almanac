@@ -6,6 +6,9 @@ const FEED = "https://arxiv.org/html/2609.36518";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "libero-max",
+  parts: {
+    liteDynamic: { name: 'Lite', group: 'Split', note: 'Dynamic success on the fixed 800-pair subset of LIBERO-MAX.' },
+  },
   url: "https://github.com/liberomax/LIBERO-MAX",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -46,4 +46,12 @@ const board: Leaderboard = {
     });
   },
 };
+board.parts = {
+  taskCompletion: { name: 'Task completion', group: 'Dimension' },
+  clinicalSafety: { name: 'Clinical safety', group: 'Dimension' },
+  workflowAccuracy: { name: 'Workflow accuracy', group: 'Dimension' },
+  triageQuality: { name: 'Triage quality', group: 'Dimension' },
+  clinicalHelpfulness: { name: 'Clinical helpfulness', group: 'Dimension' },
+  conversationalQuality: { name: 'Conversational quality', group: 'Dimension' },
+};
 export default board;

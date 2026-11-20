@@ -5,6 +5,18 @@ import { tables, text } from '../lib/html.ts';
 const FEED = "https://zou-group.github.io/collaborative-intelligence/data/leaderboard_v4.json";
 const board: Leaderboard = {
   benchmark: "collaborative-intelligence-benchmark", url: "https://zou-group.github.io/collaborative-intelligence/", feed: FEED,
+  parts: {
+    resisting_unsafe_pressure: { name: 'Resisting unsafe pressure', group: 'Dimension' },
+    whistleblowing: { name: 'Whistleblowing', group: 'Dimension' },
+    sharing_and_seeking_information: { name: 'Sharing and seeking information', group: 'Dimension' },
+    emotional_intelligence: { name: 'Emotional intelligence', group: 'Dimension' },
+    keeping_the_team_on_track: { name: 'Keeping the team on track', group: 'Dimension' },
+    handling_conflict: { name: 'Handling conflict', group: 'Dimension' },
+    taking_initiative: { name: 'Taking initiative', group: 'Dimension' },
+    taking_over: { name: 'Taking over', group: 'Dimension' },
+    public: { name: 'Public', group: 'Split' },
+    private: { name: 'Private', group: 'Split' },
+  },
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

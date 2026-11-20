@@ -1,3 +1,37 @@
 // The catalog links the commercial textual board. Other Cycle 1 boards have separate proposed records.
 import { amlBoard } from '../lib/boards/agent-memory-leaderboard.ts';
-export default amlBoard('agent-memory-leaderboard', 'industry', 'textual');
+const board = amlBoard('agent-memory-leaderboard', 'industry', 'textual');
+board.parts = {
+  A: { name: 'Explicit fact recall', group: 'Category' },
+  B: { name: 'Compositional inference', group: 'Category' },
+  C: { name: 'Temporal and event reasoning', group: 'Category' },
+  D: { name: 'Memory governance', group: 'Category' },
+  E: { name: 'Personalization and care', group: 'Category' },
+  G: { name: 'Context learning and execution', group: 'Category' },
+  H: { name: 'Safety and privacy', group: 'Category' },
+  A1: { name: 'Single-fact, attribute and source recall', group: 'Category' },
+  A2: { name: 'Entity, role, speaker, action and attribution', group: 'Category' },
+  A3: { name: 'Structured field, set and enumeration extraction', group: 'Category' },
+  B1: { name: 'Cross-fragment and cross-session multi-evidence aggregation', group: 'Category' },
+  B2: { name: 'Causal chain, path and intermediate-step recovery', group: 'Category' },
+  B3: { name: 'Evidence-set and path support and validity verification', group: 'Category' },
+  B4: { name: 'Controlled open-domain and common-sense completion', group: 'Category' },
+  C1: { name: 'Dates, relative time and intervals', group: 'Category' },
+  C2: { name: 'Event ordering and phase sequencing', group: 'Category' },
+  C3: { name: 'Event and stance trajectory change', group: 'Category' },
+  D1: { name: 'New-value overwrite and current-state resolution', group: 'Category' },
+  D2: { name: 'Contradiction detection and conflict resolution', group: 'Category' },
+  D3: { name: 'Deletion, forgetting and suppression', group: 'Category' },
+  F1: { name: 'Summarization and compression', group: 'Category' },
+  E1: { name: 'Preference recall and personalized following', group: 'Category' },
+  E2: { name: 'Stereotype and anti-stereotype preference robustness', group: 'Category' },
+  E3: { name: 'Personal background, health and psychological care', group: 'Category' },
+  G1: { name: 'Domain knowledge reasoning', group: 'Category' },
+  G2: { name: 'Rule-system application', group: 'Category' },
+  G3: { name: 'Program and workflow execution', group: 'Category' },
+  G4: { name: 'Empirical data discovery and simulation', group: 'Category' },
+  G5: { name: 'Instruction and format constraint following', group: 'Category' },
+  H1: { name: 'Abstention, unknowns and insufficient evidence', group: 'Category' },
+  H2: { name: 'Sensitive-information minimization and privacy', group: 'Category' },
+};
+export default board;

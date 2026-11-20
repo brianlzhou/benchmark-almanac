@@ -1,7 +1,7 @@
 // Humanity's Last Exam: lastexam.ai points to Scale's leaderboard (made with CAIS) for current results.
 // The page ships its rows as a JSON "entries" array inside the Next.js flight data in its script tags.
 // Each row keeps the board's "±" (confidenceInterval_upper) as metrics.ciLow and ciHigh, and its Calibration
-// Error column (calibrationError, in percent) as metrics.calibration.
+// Error column (calibrationError, in percent) as metrics.calibration. Preserve the interval bounds and published rank.
 import type { Leaderboard } from './types.ts';
 import { SCALE_TERMS, type ScaleEntry, effortBeforeDate, fetchScaleEntries, scaleFeed, scaleUrl } from '../lib/scale.ts';
 
@@ -45,10 +45,11 @@ const board: Leaderboard = {
         const half = Number(x.confidenceInterval_upper);
         const calibration = Number(x.calibrationError);
         const metrics = {
+          ...(typeof e.rank === 'number' ? { rank: e.rank } : {}),
           ...(half > 0 ? { ciLow: score - half, ciHigh: score + half } : {}),
           ...(x.calibrationError != null && Number.isFinite(calibration) ? { calibration } : {}),
         };
-        return { model, score, setting, date: e.createdAt?.slice(0, 10), ...(Object.keys(metrics).length ? { metrics } : {}) };
+        return { model, score, setting, low: metrics.ciLow, high: metrics.ciHigh, date: e.createdAt?.slice(0, 10), ...(Object.keys(metrics).length ? { metrics } : {}) };
       });
   },
 };

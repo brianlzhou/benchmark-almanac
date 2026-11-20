@@ -84,4 +84,17 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  alignment: { name: 'Alignment', group: 'Domain' },
+  biology: { name: 'Biology', group: 'Domain' },
+  'chip-design': { name: 'Chip design', group: 'Domain' },
+  cybersecurity: { name: 'Cybersecurity', group: 'Domain' },
+  finance: { name: 'Finance', group: 'Domain' },
+  'hardware-design': { name: 'Hardware design', group: 'Domain' },
+  legal: { name: 'Legal', group: 'Domain' },
+  'materials-science': { name: 'Materials science', group: 'Domain' },
+  rsi: { name: 'Recursive self-improvement', group: 'Domain' },
+  'quant-trading': { name: 'Quant trading', group: 'Domain' },
+  'software-engineering': { name: 'Software engineering', group: 'Domain' },
+};
 export default board;

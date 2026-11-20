@@ -11,6 +11,6 @@ const board: Leaderboard = {
   feed: oallFeed('AraTrust'),
   terms: OALL_TERMS,
   aliases: OALL_ALIASES,
-  fetch: () => oallRows('AraTrust'),
+  fetch: () => oallRows('AraTrust', board),
 };
 export default board;

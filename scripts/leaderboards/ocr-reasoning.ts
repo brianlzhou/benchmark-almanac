@@ -7,6 +7,14 @@ const FEED = "https://arxiv.org/html/2505.17163";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "ocr-reasoning",
+  parts: {
+    spatial: { name: 'Spatial', group: 'Category' },
+    numerical: { name: 'Numerical', group: 'Category' },
+    mathematical: { name: 'Mathematical', group: 'Category' },
+    enumerative: { name: 'Enumerative', group: 'Category' },
+    logical: { name: 'Logical', group: 'Category' },
+    multidisciplinary: { name: 'Multidisciplinary', group: 'Category' },
+  },
   url: "https://github.com/SCUT-DLVCLab/OCR-Reasoning",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

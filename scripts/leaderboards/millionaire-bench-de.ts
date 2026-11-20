@@ -34,7 +34,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const file of FILES) {
       const local = file.includes('local');
-      const { models } = await fetchJson<{ models: { model_name?: string; median_value?: number }[] }>(ghRaw(REPO, file));
+      const { models } = await fetchJson<{ models: { model_name?: string; median_value?: number; low_deviation_euros?: number; high_deviation_euros?: number; rank?: number; log_percentage?: number }[] }>(ghRaw(REPO, file));
       for (const m of models) {
         if (!m.model_name || typeof m.median_value !== 'number') continue;
         let model = m.model_name.trim().replace(/^(google|grok|openai|x-ai|anthropic|meta-llama|mistralai|qwen)_/i, '');
@@ -44,7 +44,14 @@ const board: Leaderboard = {
           model = model.replace(/-non-reasoning$/, '').replace(/^deepseek-chat-/, 'deepseek-');
           setting = 'non-thinking';
         }
-        rows.push({ model, score: m.median_value, setting });
+        const metrics: Record<string, number> = {};
+        for (const key of ['rank', 'log_percentage', 'low_deviation_euros', 'high_deviation_euros'] as const) {
+          const value = m[key];
+          if (typeof value === 'number') metrics[key] = value;
+        }
+        rows.push({ model, score: m.median_value, setting, metrics,
+          low: typeof m.low_deviation_euros === 'number' ? m.median_value - m.low_deviation_euros : undefined,
+          high: typeof m.high_deviation_euros === 'number' ? m.median_value + m.high_deviation_euros : undefined });
       }
     }
     return rows;

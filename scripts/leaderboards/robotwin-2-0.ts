@@ -16,6 +16,10 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'robotwin-2-0',
+  parts: {
+    cleanToClean: { name: 'Clean', group: 'Split' },
+    cleanToRandom: { name: 'Randomized', group: 'Split' },
+  },
   url: PAGE,
   feed: `${FEED} (default ranking avg = (easy_mean + hard_mean) / 2)`,
   terms: 'JSON file on the RoboTwin GitHub Pages site that the leaderboard page loads (no robots.txt); the page states no other terms.',

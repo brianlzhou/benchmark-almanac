@@ -28,6 +28,20 @@ const board: Leaderboard = {
           ? { setting: 'Claude Opus 4.8 fallback on refusals' } : {}),
       });
     }
+    let group: string | undefined;
+    const table = html.match(/<table\b[^>]*>[\s\S]*?<\/table>/)?.[0] ?? '';
+    for (const tr of table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)) {
+      const cells = [...tr[1].matchAll(/<td\b([^>]*)>([\s\S]*?)<\/td>/g)];
+      if (cells.length === 2 && cells[1][1].includes('colspan=')) group = text(cells[0][2]);
+      if (cells.length !== rows.length + 1) continue;
+      for (const [i, cell] of cells.slice(1).entries()) {
+        const match = cell[1].match(/title="([^"]+?) → ([^"]+): ([\d.]+)%"/);
+        if (!match || text(match[1]) !== rows[i].model) continue;
+        const occupation = text(match[2]);
+        (rows[i].metrics ??= {})[occupation] = Number(match[3]);
+        (board.parts ??= {})[occupation] = { name: text(cells[0][2]), group };
+      }
+    }
     if (!rows.length) throw new Error('no overall scores in the JobBench heatmap headers');
     return rows;
   },

@@ -57,7 +57,7 @@ export interface LeaderboardRow {
   tokens?: number;
   /**
    * Other numbers the board reports for the run, by a short key: "latency" in seconds, "pass3" as a percentage.
-   * A board's `chart` names the ones it plots.
+   * A board's `chart` names the ones it plots, and its `parts` names the ones that score a part of the benchmark.
    */
   metrics?: Record<string, number>;
 }
@@ -119,5 +119,32 @@ export interface Leaderboard {
    * Pages label the cost axis to match.
    */
   costPer?: 'task' | 'run';
+  /**
+   * The board's scores on parts of the benchmark, kept in each row's `metrics`: a subject, a language, a difficulty
+   * level, a task family, a user group. Keys are metric keys, and each names the part as the board does. A part is
+   * scored like the whole test, on a subset of its tasks, in the benchmark's unit (or the part's own `unit`). Costs,
+   * timings, intervals, vote counts and other measures of the same run are not parts. The benchmark page ranks
+   * models on each part in a switch. An importer whose parts come from the feed can set this inside `fetch()`.
+   */
+  parts?: Record<string, string | BoardPart>;
+  /**
+   * Columns that hold another of the benchmark's measures (Benchmark.measures in data/benchmarks.json): metric key
+   * -> measure id, such as { partial: 'score' } for a board whose "Score" column is the partial credit labs quote
+   * beside its pass rate. Lab numbers on that measure are then compared with this column, never the headline.
+   */
+  measures?: Record<string, string>;
   fetch(): Promise<LeaderboardRow[]>;
+}
+/** One part of a benchmark that a board scores on its own. */
+export interface BoardPart {
+  /** The part's name, as the board gives it: "Teen users", "Hard", "Python". */
+  name: string;
+  /** What kind of split it belongs to, when the board has several: "Difficulty", "Language", "User". */
+  group?: string;
+  /** One sentence on what the part holds, where its name doesn't say. */
+  note?: string;
+  /** The part's unit, when it isn't the benchmark's. */
+  unit?: string;
+  /** For a measure where lower is better, when the benchmark's own score is higher-better. */
+  better?: 'higher' | 'lower';
 }

@@ -4,7 +4,24 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md";
 const board: Leaderboard = {
-  benchmark: "hourvideo", url: "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md", feed: FEED,
+  benchmark: "hourvideo", parts: {
+  'Key Events/Objects': { name: 'Key events/objects', group: 'Task type' },
+  'Temporal Sequencing': { name: 'Temporal sequencing', group: 'Task type' },
+  'Compare/Contrast': { name: 'Compare/contrast', group: 'Task type' },
+  'Factual Recall': { name: 'Factual recall', group: 'Task type' },
+  'Sequence Recall': { name: 'Sequence recall', group: 'Task type' },
+  'Temporal Distance': { name: 'Temporal distance', group: 'Task type' },
+  Tracking: { name: 'Tracking', group: 'Task type' },
+  Relationship: { name: 'Relationship', group: 'Task type' },
+  Proximity: { name: 'Proximity', group: 'Task type' },
+  Layout: { name: 'Layout', group: 'Task type' },
+  Frequency: { name: 'Frequency', group: 'Task type' },
+  'Pre-requisites': { name: 'Prerequisites', group: 'Task type' },
+  Predictive: { name: 'Predictive', group: 'Task type' },
+  Causal: { name: 'Causal', group: 'Task type' },
+  'Room-to-Room': { name: 'Room-to-room', group: 'Task type' },
+  'Object Retrieval': { name: 'Object retrieval', group: 'Task type' },
+}, url: "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

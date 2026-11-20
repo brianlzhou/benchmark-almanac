@@ -33,6 +33,11 @@ const round = (x: number, d: number) => Math.round(x * 10 ** d) / 10 ** d;
 
 const board: Leaderboard = {
   benchmark: 'real2sim',
+  parts: {
+    visual: { name: 'Visual fidelity', group: 'Dimension' },
+    replay: { name: 'Replay', group: 'Dimension', unit: '%' },
+    policy: { name: 'Policy', group: 'Dimension', unit: '%' },
+  },
   url: `${SITE}#leaderboard`,
   feed: FEED,
   terms: 'The site states no terms of use and its robots.txt allows all agents. The DROID recordings keep their own license.',

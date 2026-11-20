@@ -1,5 +1,6 @@
 // InfographicVQA: Tables 5 and 6 report full-test ANLS for M4C and LayoutLM configurations.
 // ANLS fractions become percentages. Input features and pretraining describe whole-benchmark configurations.
+// The two validation scores and the M4C input token limit are separate metrics.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -19,7 +20,12 @@ const board: Leaderboard = {
       if(!t) throw new Error(`${model} table missing`);
       for(const r of t.slice(2)) {
         if(r.length!==8) throw new Error('InfographicVQA columns changed');
-        out.push({model,setting:r.slice(0,4).map(c=>c.text).join(', '),score:num(r[5].text)!*100,metrics:{accuracy:num(r[7].text)!}});
+        out.push({model,setting:r.slice(0,4).map(c=>c.text).join(', '),score:num(r[5].text)!*100,metrics:{
+          accuracy: num(r[7].text)!,
+          validationAccuracy: num(r[6].text)!,
+          validationAnls: num(r[4].text)! * 100,
+          ...(model === 'M4C' && num(r[3].text) !== null ? { ocrTokenLimit: num(r[3].text)! } : {}),
+        }});
       }
     }
     return out;

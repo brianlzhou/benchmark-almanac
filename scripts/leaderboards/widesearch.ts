@@ -34,12 +34,12 @@ const board: Leaderboard = {
       if (!r[0]?.text || score === undefined) continue;
       const pass4 = iPass4 >= 0 ? num(r[iPass4]?.text) : undefined;
       const metrics: Record<string, number> = pass4 !== undefined ? { passAt4: pass4 } : {};
-      for (const [label, key] of [['Row F1', 'rowF1'], ['Item F1', 'itemF1']]) {
+      for (const [label, key] of [['Row F1 (Avg@4)', 'rowF1'], ['Item F1 (Avg@4)', 'itemF1'], ['Row F1 (Max@4)', 'rowF1Max'], ['Item F1 (Max@4)', 'itemF1Max']]) {
         const index = head.findIndex((h) => h.startsWith(label));
         const value = index >= 0 ? num(r[index]?.text) : undefined;
         if (value !== undefined) metrics[key] = value;
       }
-      rows.push({ model: r[0].text, harness: r[1]?.text || undefined, score, metrics });
+      rows.push({ model: r[0].text, trials: 4, harness: r[1]?.text || undefined, score, metrics });
     }
     return rows;
   },

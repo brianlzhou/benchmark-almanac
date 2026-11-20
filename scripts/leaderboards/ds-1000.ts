@@ -8,6 +8,19 @@ const FEED = "https://api.github.com/repos/xlang-ai/DS-1000/git/trees/HEAD?recur
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "ds-1000",
+  parts: {
+    library_matplotlib: { name: 'Matplotlib', group: 'Category' },
+    library_numpy: { name: 'NumPy', group: 'Category' },
+    library_pandas: { name: 'pandas', group: 'Category' },
+    library_pytorch: { name: 'PyTorch', group: 'Category' },
+    library_scipy: { name: 'SciPy', group: 'Category' },
+    library_sklearn: { name: 'scikit-learn', group: 'Category' },
+    library_tensorflow: { name: 'TensorFlow', group: 'Category' },
+    'perturbation_difficult-rewrite': { name: 'Difficult rewrite', group: 'Category' },
+    perturbation_origin: { name: 'Original', group: 'Category' },
+    perturbation_semantic: { name: 'Semantic', group: 'Category' },
+    perturbation_surface: { name: 'Surface', group: 'Category' },
+  },
   url: "https://github.com/xlang-ai/DS-1000",
   feed: FEED,
   terms: "Public results published by the benchmark authors at api.github.com; retain source attribution and follow the upstream terms.",

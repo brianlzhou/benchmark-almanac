@@ -10,6 +10,17 @@ const FEED = "https://raw.githubusercontent.com/JUNJIE99/MLVU/main/README.md";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "mlvu",
+  parts: {
+    TR: { name: 'Topic reasoning', group: 'Task type' },
+    AR: { name: 'Anomaly recognition', group: 'Task type' },
+    NQA: { name: 'Needle QA', group: 'Task type' },
+    ER: { name: 'Ego reasoning', group: 'Task type' },
+    PQA: { name: 'Plot QA', group: 'Task type' },
+    SQA: { name: 'Sports QA', group: 'Task type' },
+    AO: { name: 'Action order', group: 'Task type' },
+    AC: { name: 'Action count', group: 'Task type' },
+    TQA: { name: 'Tutorial QA', group: 'Task type' },
+  },
   url: "https://github.com/JUNJIE99/MLVU",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

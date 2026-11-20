@@ -1,7 +1,8 @@
-// LegalBench as Vals AI runs it on vals.ai (its cost columns are token prices, so no per-task cost is kept),
-// read through the helper in vals-index.ts. LegalBench's own authors publish no live board.
+// Vals AI publishes LegalBench task scores, token prices, per-test costs, intervals and timing in its chart data.
 import type { Leaderboard } from './types.ts';
-import { VALS_ALIASES, VALS_TERMS, valsPage, valsRows } from './vals-index.ts';
+import { VALS_ALIASES, VALS_TERMS, valsPage } from './vals-index.ts';
+
+import { valsDetails } from '../lib/boards/vals-details.ts';
 
 const SLUG = 'legal_bench';
 
@@ -17,6 +18,6 @@ const board: Leaderboard = {
     'Qwen 2.5 Instruct Turbo (7B)': 'qwen2-5-7b',
     'Gemini 1.0 Pro 002': 'gemini-1-0-pro',
   },
-  fetch: () => valsRows(SLUG, { cost: null }),
+  fetch: () => valsDetails(board, SLUG, { cost: null }),
 };
 export default board;

@@ -33,6 +33,27 @@ export async function inspectEvals(r: Reader) {
   r.remember('inspect', dirs);
 }
 
+// Harbor's official registry: the datasets the Terminal-Bench team itself adapted and lists in its CLI
+// (registry.json in laude-institute/harbor). Unlike the open hub below, each entry is a published benchmark, so
+// every new one counts as a find on its own. The file also lists every task, so only names and descriptions are kept.
+export async function harborRegistry(r: Reader) {
+  type D = { name: string; version?: string; description?: string };
+  const list = await r.json<D[]>('https://raw.githubusercontent.com/laude-institute/harbor/main/registry.json', { timeout: 100_000 });
+  const latest = new Map<string, D>();
+  for (const d of list) latest.set(d.name, d);
+  const names = [...latest.keys()];
+  r.read(names.length);
+  for (const n of await r.fresh('harborRegistry', names)) {
+    const desc = latest.get(n)?.description ?? '';
+    const nm = hubName(n, desc);
+    r.add(
+      { key: key(nm), name: nm, title: desc.slice(0, 160) || nm, url: 'https://github.com/laude-institute/harbor/blob/main/registry.json', stageA: 5, general: true },
+      { registry: { source: 'Harbor official registry', url: 'https://github.com/laude-institute/harbor' } },
+    );
+  }
+  r.remember('harborRegistry', names);
+}
+
 export async function hfOfficial(r: Reader) {
   type D = { id: string };
   const list = await r.json<D[]>('https://huggingface.co/api/datasets?filter=benchmark:official&sort=createdAt&direction=-1&limit=100');

@@ -7,6 +7,11 @@ import { num } from '../lib/html.ts';
 const FEED = "https://worldmodelbench-team.github.io/leaderboard_data.json";
 const board: Leaderboard = {
   benchmark: "worldmodelbench",
+  parts: {
+    instruction: { name: 'Instruction following', group: 'Dimension' },
+    commonSense: { name: 'Common sense', group: 'Dimension' },
+    physics: { name: 'Physics adherence', group: 'Dimension' },
+  },
   url: "https://worldmodelbench-team.github.io/leaderboard_data.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -7,6 +7,11 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2401.00396";
 const board: Leaderboard = {
   benchmark: "ragtruth",
+  parts: {
+    qaF1: { name: 'QA', group: 'Task type' },
+    dataToTextF1: { name: 'Data to text', group: 'Task type' },
+    summarizationF1: { name: 'Summarization', group: 'Task type' },
+  },
   url: "https://arxiv.org/html/2401.00396",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

@@ -46,4 +46,14 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  outcome: { name: 'Outcome', group: 'Dimension' },
+  process: { name: 'Process', group: 'Dimension' },
+  eventAttribution: { name: 'Event attribution', group: 'Task type' },
+  hypotheticalReasoning: { name: 'Hypothetical reasoning', group: 'Task type' },
+  implicitInference: { name: 'Implicit inference', group: 'Task type' },
+  synopsis: { name: 'Synopsis', group: 'Task type' },
+  eventPrediction: { name: 'Event prediction', group: 'Task type' },
+  logicalLinkage: { name: 'Logical linkage', group: 'Task type' },
+};
 export default board;

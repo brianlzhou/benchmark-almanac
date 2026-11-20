@@ -9,6 +9,23 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2512.12772";
 const board: Leaderboard = {
  benchmark: "jointavbench",
+ parts: {
+   STL: { name: 'Speech-based timepoint localization', group: 'Task type' },
+   SPL: { name: 'Speaker spatial localization', group: 'Task type' },
+   SOOG: { name: 'Sounding object grounding', group: 'Task type' },
+   SOER: { name: 'Sound event recognition', group: 'Task type' },
+   SPER: { name: 'Speaker emotion recognition', group: 'Task type' },
+   MPTI: { name: 'Musical tone inference', group: 'Task type' },
+   VSSR: { name: 'Vision-speech sequence recognition', group: 'Task type' },
+   CSA: { name: 'Cross-scene association', group: 'Task type' },
+   MPO: { name: 'Multi-plot ordering', group: 'Task type' },
+   PTG: { name: 'Plot temporal grounding', group: 'Task type' },
+   AFA: { name: 'Audio function analysis', group: 'Task type' },
+   PDP: { name: 'Plot development prediction', group: 'Task type' },
+   AVDM: { name: 'Audio-visual detail memory', group: 'Task type' },
+   MESI: { name: 'Musical emotion shift inference', group: 'Task type' },
+   CRI: { name: 'Character relationship inference', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2512.12772",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

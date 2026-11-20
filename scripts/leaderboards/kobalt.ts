@@ -16,7 +16,12 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://huggingface.co/datasets/snunlp/KoBALT-700/resolve/main/README.md";
 const board: Leaderboard = {
-  benchmark: "kobalt", url: "https://huggingface.co/datasets/snunlp/KoBALT-700", feed: FEED,
+  benchmark: "kobalt", parts: {
+  Syntax: { name: 'Syntax', group: 'Category' },
+  Pragmatics: { name: 'Pragmatics', group: 'Category' },
+  Morphology: { name: 'Morphology', group: 'Category' },
+  Phonetics: { name: 'Phonetics', group: 'Category' },
+}, url: "https://huggingface.co/datasets/snunlp/KoBALT-700", feed: FEED,
   terms: "KoBALT dataset card is licensed CC BY-NC 4.0.",
   async fetch() {
     const source = await fetchText(FEED);

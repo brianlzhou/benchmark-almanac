@@ -5,7 +5,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://tiger-ai-lab.github.io/VideoEval-Pro/home_page.html";
 const board: Leaderboard = {
-  benchmark: "videoeval-pro", url: "https://tiger-ai-lab.github.io/VideoEval-Pro/home_page.html", feed: FEED,
+  benchmark: "videoeval-pro", parts: {
+  LP: { name: 'Local perception', group: 'Task type' },
+  LR: { name: 'Local reasoning', group: 'Task type' },
+  HP: { name: 'Holistic perception', group: 'Task type' },
+  HR: { name: 'Holistic reasoning', group: 'Task type' },
+}, url: "https://tiger-ai-lab.github.io/VideoEval-Pro/home_page.html", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

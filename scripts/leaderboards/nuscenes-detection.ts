@@ -3,7 +3,9 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const feed='https://www.nuscenes.org/detection.json';
-const board:Leaderboard={benchmark:'nuscenes-detection',url:'https://www.nuscenes.org/object-detection',feed,
+const board:Leaderboard={benchmark:'nuscenes-detection', parts: {
+  mAP: { name: 'Mean average precision', group: 'Dimension', note: 'This component has half of the total weight in nuScenes Detection Score.' },
+},url:'https://www.nuscenes.org/object-detection',feed,
  terms:'Motional publishes these leaderboard submissions on nuScenes. The Almanac credits and links the original board; dataset terms remain separate.',
  async fetch():Promise<LeaderboardRow[]>{
   const data=await fetchJson<any[]>(feed);const rows:LeaderboardRow[]=[];
@@ -12,7 +14,27 @@ const board:Leaderboard={benchmark:'nuscenes-detection',url:'https://www.nuscene
    if(!meta?.method_name||!Number.isFinite(result?.NDS))continue;
    const metrics:Record<string,number>={};for(const [k,v] of Object.entries(result)){if(typeof v==='number'&&Number.isFinite(v))metrics[k]=v;}
    const modes=['camera','lidar','radar','map','external'].filter(k=>d.meta[`use_${k}`]);
-   rows.push({model:meta.method_name,score:result.NDS,setting:`${modes.join(', ')}; submission ${meta.submission_id??meta.submitted_at}`,harness:meta.participant_team_name,date:/^\d{4}-\d{2}-\d{2}/.test(meta.submitted_at)?meta.submitted_at.slice(0,10):undefined,metrics});
+   const summary = d.metrics_summary ?? {};
+   for (const key of ['eval_time', 'run_time']) {
+     if (typeof summary[key] === 'number') metrics[key] = summary[key];
+   }
+   for (const [category, values] of Object.entries(summary) as [string, unknown][]) {
+     if (!['mean_dist_aps', 'label_aps', 'label_tp_errors', 'tp_errors', 'tp_scores'].includes(category) || !values || typeof values !== 'object') continue;
+     for (const [name, value] of Object.entries(values)) {
+       const key = category + ':' + name;
+       if (typeof value === 'number' && Number.isFinite(value)) {
+         metrics[key] = value;
+         if (category === 'tp_scores') board.parts![key] = { name, group: 'True positive score', note: 'Score component derived from the corresponding error.' };
+         if (category === 'mean_dist_aps') board.parts![key] = { name, group: 'Average precision by class' };
+       } else if (value && typeof value === 'object') {
+         for (const [field, number] of Object.entries(value)) {
+           if (typeof number === 'number' && Number.isFinite(number)) metrics[key + ':' + field] = number;
+         }
+       }
+     }
+   }
+   const link = typeof d.meta.summary === 'string' && d.meta.summary.startsWith('public/leaderboard/') ? new URL(d.meta.summary, feed).href : undefined;
+   rows.push({submitter: meta.participant_team_name, link, model:meta.method_name,score:result.NDS,setting:`${modes.join(', ')}; submission ${meta.submission_id??meta.submitted_at}`,harness:meta.participant_team_name,date:/^\d{4}-\d{2}-\d{2}/.test(meta.submitted_at)?meta.submitted_at.slice(0,10):undefined,metrics});
   }if(!rows.length)throw new Error('nuScenes detection results missing');return rows;
  }
 };export default board;

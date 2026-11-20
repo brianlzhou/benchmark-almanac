@@ -42,6 +42,22 @@ import { mdTables } from './big-bench-extra-hard.ts';
 
 const board: Leaderboard = {
   benchmark: 'blink',
+  parts: {
+    Counting: { name: "Counting", group: "Task type" },
+    Semantic_Correspondence: { name: "Semantic Correspondence", group: "Task type" },
+    Visual_Similarity: { name: 'Visual Similarity', group: 'Task type' },
+    Relative_Depth: { name: 'Relative Depth', group: 'Task type' },
+    Jigsaw: { name: 'Jigsaw', group: 'Task type' },
+    Art_Style: { name: 'Art Style', group: 'Task type' },
+    Functional_Correspondence: { name: 'Functional Correspondence', group: 'Task type' },
+    Spatial_Relation: { name: 'Spatial Relation', group: 'Task type' },
+    Object_Localization: { name: 'Object Localization', group: 'Task type' },
+    Visual_Correspondence: { name: 'Visual Correspondence', group: 'Task type' },
+    'Multi-view_Reasoning': { name: 'Multi-view Reasoning', group: 'Task type' },
+    Relative_Reflectance: { name: 'Relative Reflectance', group: 'Task type' },
+    Forensic_Detection: { name: 'Forensic Detection', group: 'Task type' },
+    IQ_Test: { name: 'IQ Test', group: 'Task type' },
+  },
   verified: 'verified by the BLINK host on EvalAI',
   url: 'https://eval.ai/web/challenges/challenge-page/2287/leaderboard/5658',
   feed: `${evalaiFeed(5658)} and https://raw.githubusercontent.com/zeyofu/BLINK_Benchmark/main/README.md (test split)`,
@@ -54,7 +70,7 @@ const board: Leaderboard = {
   // The README adds GPT-4o and GPT-4 Turbo after the EvalAI host submissions.
   // Keep the precise API rows and add those two published test results without assigning snapshots.
   async fetch() {
-    const rows = await evalaiRows(5658, 'Host_28919_Team', 0, 100, true);
+    const rows: LeaderboardRow[] = [];
     const md = await fetchText('https://raw.githubusercontent.com/zeyofu/BLINK_Benchmark/main/README.md');
     const t = mdTables(md).find(t => t.head.includes('Test (1,907)'));
     if (!t) throw new Error('BLINK README test table missing');
@@ -66,12 +82,13 @@ const board: Leaderboard = {
     }
     // Public participant methods are preserved as unlisted submissions, not attributed to
     // a foundation model from a free-text method name. The shared host-only reader stays unchanged.
-    type PublicEntry = Entry & { id: number; error?: unknown; leaderboard__schema?: {labels?: string[]} };
+    type PublicEntry = Entry & { id: number; submission__id?: number; error?: unknown; leaderboard__schema?: {labels?: string[]} };
     let next: string | null = evalaiFeed(5658);
     while (next) {
       const page: {next: string | null; results: PublicEntry[]} = await fetchJson(next);
       for (const e of page.results) {
-        if (e.submission__participant_team__team_name === 'Host_28919_Team' || e.error) continue;
+        const host = e.submission__participant_team__team_name === 'Host_28919_Team';
+        if (e.error || (host && !e.submission__method_name?.trim())) continue;
         const score = e.result?.[0];
         if (typeof score !== 'number' || !Number.isFinite(score) || score < 0 || score > 1) continue;
         const metrics: Record<string, number> = {};
@@ -79,7 +96,13 @@ const board: Leaderboard = {
           const value = e.result?.[i];
           if (i > 0 && typeof value === 'number' && Number.isFinite(value)) metrics[label] = value * 100;
         }
-        rows.push({model: `BLINK submission ${e.id}: ${e.submission__method_name?.trim() || e.submission__participant_team__team_name || 'unnamed'}`, score: score * 100, submitter: e.submission__participant_team__team_name, verified: e.submission__is_verified_by_host, date: e.submission__submitted_at?.slice(0,10), metrics});
+        if (typeof e.submission__id === 'number') metrics.submissionId = e.submission__id;
+        if (host) {
+          const model = e.submission__method_name!.trim().toLowerCase();
+          const val = t.rows.find(cells => cells[0].replace(/^[^A-Za-z]+/, '').trim().toLowerCase() === model);
+          if (val && Number.isFinite(Number(val[1]))) metrics.validation = Number(val[1]);
+        }
+        rows.push({model: host ? e.submission__method_name!.trim() : `BLINK submission ${e.id}: ${e.submission__method_name?.trim() || e.submission__participant_team__team_name || 'unnamed'}`, score: score * 100, submitter: e.submission__participant_team__team_name, verified: e.submission__is_verified_by_host, date: e.submission__submitted_at?.slice(0,10), metrics});
       }
       next = page.next;
     }

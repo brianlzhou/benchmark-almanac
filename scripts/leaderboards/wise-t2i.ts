@@ -59,4 +59,11 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  culture: { name: 'Culture', group: 'Domain' },
+  space: { name: 'Space', group: 'Domain' },
+  biology: { name: 'Biology', group: 'Domain' },
+  physics: { name: 'Physics', group: 'Domain' },
+  chemistry: { name: 'Chemistry', group: 'Domain' },
+};
 export default board;

@@ -7,7 +7,14 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 
 const FEED = 'https://arxiv.org/html/2310.20410';
 const board: Leaderboard = {
-  benchmark: 'followbench', url: 'https://github.com/yjiangcm/FollowBench', feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'followbench', parts: {
+  level1: { name: 'Level 1', group: 'Difficulty' },
+  level2: { name: 'Level 2', group: 'Difficulty' },
+  level3: { name: 'Level 3', group: 'Difficulty' },
+  level4: { name: 'Level 4', group: 'Difficulty' },
+  level5: { name: 'Level 5', group: 'Difficulty' },
+  zhHSR: { name: 'Chinese', group: 'Language' },
+}, url: 'https://github.com/yjiangcm/FollowBench', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'GPT-4-Preview-1106': 'gpt-4-turbo-nov-2023', 'GPT-3.5-Turbo-1106': 'gpt-3-5-turbo-nov-2023' },
   async fetch() {
     const all = await paperTables(FEED);

@@ -32,14 +32,24 @@ const board: Leaderboard = {
     return parse(await fetchText(FEED))
       // Keep older snapshots under explicit names instead of dropping them or matching newer releases.
       .filter((r) => r.model && Number.isFinite(Number(r.pass_rate_2)))
-      .map((r) => ({
+      .map((r) => {
+        const metrics: Record<string, number> = {};
+        for (const key of ['test_cases', 'total_tests', 'pass_num_1', 'pass_num_2', 'pass_rate_1', 'percent_cases_well_formed',
+          'error_outputs', 'num_malformed_responses', 'num_with_malformed_responses', 'user_asks', 'lazy_comments',
+          'syntax_errors', 'indentation_errors', 'exhausted_context_windows', 'test_timeouts']) {
+          if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
+        }
+        if (Number(r.seconds_per_case) > 0) metrics.latency = Number(r.seconds_per_case);
+        if (Number(r.total_cost) > 0) metrics.runCostUsd = Number(r.total_cost);
+        return {
         model: r.model === 'command-r-plus' ? 'Command R+ (April 2024)' : r.model === 'ollama/codestral' ? 'Codestral 22B (May 2024)' : r.model,
         score: Number(r.pass_rate_2),
         harness: r.edit_format ? `aider, ${r.edit_format} edits` : 'aider',
         date: /^\d{4}-\d\d-\d\d$/.test(r.date ?? '') ? r.date : undefined,
         cost: Number(r.total_cost) > 0 && Number(r.test_cases) > 0 ? Number(r.total_cost) / Number(r.test_cases) : undefined,
-        metrics: Number(r.seconds_per_case) > 0 ? { latency: Number(r.seconds_per_case) } : undefined,
-      }));
+        metrics,
+        };
+      });
   },
 };
 // An evaluation date does not establish a model snapshot. Preserve ambiguous names as unlisted entries.

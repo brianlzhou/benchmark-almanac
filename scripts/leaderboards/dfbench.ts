@@ -7,7 +7,14 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://depthfirst.com/research/dfbench";
 const board: Leaderboard = {
- benchmark: "dfbench", url: "https://depthfirst.com/research/dfbench", feed: FEED,
+ benchmark: "dfbench", parts: {
+  differentialRecall: { name: 'Differential analysis', group: 'Task type' },
+  Application: { name: 'Application', group: 'Category' },
+  'Low level': { name: 'Low level', group: 'Category' },
+  'Smart contract': { name: 'Smart contract', group: 'Category' },
+  'Single repo': { name: 'Single repo', group: 'Split' },
+  'Multi-repo': { name: 'Multi-repo', group: 'Split' },
+}, url: "https://depthfirst.com/research/dfbench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

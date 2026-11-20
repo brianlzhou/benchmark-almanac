@@ -7,6 +7,12 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2608.17271";
 const board: Leaderboard = {
   benchmark: "asi-bench",
+  parts: {
+    b1: { name: 'B1 full methodological guidance', group: 'Difficulty', note: 'The overall score averages the four information levels.' },
+    b2: { name: 'B2 method specified', group: 'Difficulty', note: 'The overall score averages the four information levels.' },
+    b3: { name: 'B3 autonomous method selection', group: 'Difficulty', note: 'The overall score averages the four information levels.' },
+    b4: { name: 'B4 autonomous method selection with distractors', group: 'Difficulty', note: 'The overall score averages the four information levels.' },
+  },
   url: "https://arxiv.org/html/2608.17271",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

@@ -1,12 +1,13 @@
 // MMBench (v1.0, English test split). OpenCompass, which made MMBench, publishes its VLM leaderboard data as
 // OpenVLM.json: per model a META block (display name, org, evaluation time, Verified) and one entry per
-// benchmark. MMBench_TEST_EN.Overall (CircularEval accuracy, 0 to 100) is the score. The META time is the
+// benchmark, including six capability scores. MMBench_TEST_EN.Overall (CircularEval accuracy, 0 to 100) is the score. The META time is the
 // row date, so the resolver picks the snapshot current then; "GPT-4o (0513, detail-high)" becomes GPT-4o
 // dated 2024-05-13 with the image detail level as the setting. The file is a snapshot (2025-09-17) whose
 // newest rows date from early 2025. Rows that OpenCompass did not run itself (META Verified "No") are shown
 // on the board too and are kept. MMBench v1.1 is in the same file but on its test split, while the
 // almanac's v1.1 record is the dev split, so it is not read.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
+import { MMBENCH_PARTS } from './mmbench-en-v1-1.ts';
 import { fetchJson } from '../lib/util.ts';
 
 // the host serves this file over plain HTTP only
@@ -14,11 +15,12 @@ const FEED = 'http://opencompass.openxlab.space/assets/OpenVLM.json';
 
 interface Entry {
   META?: { Method?: [string, string?]; Time?: string; Verified?: string; OpenSource?: string; Parameters?: string };
-  MMBench_TEST_EN?: { Overall?: number };
+  MMBench_TEST_EN?: Record<string, number>;
 }
 
 const board: Leaderboard = {
   benchmark: 'mmbench',
+  parts: Object.fromEntries(Object.entries(MMBENCH_PARTS).filter(([, part]) => part.group === 'Capability')),
   verified: 'verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${FEED} (MMBench_TEST_EN.Overall)`,
@@ -47,11 +49,13 @@ const board: Leaderboard = {
         setting = snap[3];
         model = model.slice(0, snap.index).trim();
       }
-      rows.push({ model, score, setting, date,
+      const metrics = Object.fromEntries(Object.entries(e.MMBench_TEST_EN ?? {})
+        .filter(([key, value]) => key !== 'Overall' && Number.isFinite(value)));
+      rows.push({ model, score, setting, date, metrics,
         verified: e.META?.Verified === 'Yes' ? true : e.META?.Verified === 'No' ? false : undefined,
         open: e.META?.OpenSource === 'Yes' ? true : e.META?.OpenSource === 'No' ? false : undefined,
         params: /^\d+(?:\.\d+)?B$/i.test(e.META?.Parameters ?? '') ? parseFloat(e.META!.Parameters!) : undefined,
-        link: e.META?.Method?.[1]?.startsWith('https://github.com/') ? e.META.Method[1] : undefined,
+
       });
     }
     return rows;

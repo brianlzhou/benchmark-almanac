@@ -7,6 +7,16 @@ import { jsonAfter } from '../lib/html.ts';
 const FEED = "https://discoailab.github.io/osworld-science-page/static/js/osciData.js";
 const board: Leaderboard = {
  benchmark: "osworld-science",
+ parts: {
+   med: { name: 'Medical imaging', group: 'Domain' },
+   bio: { name: 'Biology', group: 'Domain', note: 'The eight PyMOL and MNOVA tasks, excluding the separately scored EEGLAB tasks.' },
+   eeg: { name: 'EEGLAB', group: 'Domain', note: 'The ten EEG analysis tasks in EEGLAB.' },
+   chem: { name: 'Chemistry', group: 'Domain' },
+   stat: { name: 'Statistics', group: 'Domain' },
+   geo: { name: 'Geoscience', group: 'Domain' },
+   ling: { name: 'Linguistics', group: 'Domain' },
+   phys: { name: 'Physics', group: 'Domain' },
+ },
  url: "https://discoailab.github.io/osworld-science-page/static/js/osciData.js",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

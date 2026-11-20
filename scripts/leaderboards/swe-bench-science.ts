@@ -4,7 +4,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text, jsonAfter } from '../lib/html.ts';
 const FEED = "https://swescience.github.io/";
 const board: Leaderboard = {
-  benchmark: "swe-bench-science", url: "https://swescience.github.io/", feed: FEED,
+  benchmark: "swe-bench-science", parts: {
+  issue: { name: 'Issue driven', group: 'Task type' },
+  expert: { name: 'Expert exploratory', group: 'Task type' },
+  engineering: { name: 'Engineering', group: 'Task type' },
+  hard70: { name: 'HARD70', group: 'Split' },
+}, url: "https://swescience.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   chart:{title:"Pass@1 versus output tokens",x:{key:"outputTokens",label:"Mean output tokens per task",better:"lower",log:true},y:{key:"score",label:"Overall Pass@1",unit:"%",better:"higher"}},
   async fetch() {

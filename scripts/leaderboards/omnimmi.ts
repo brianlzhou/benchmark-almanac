@@ -5,7 +5,18 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const PAGE = 'https://omnimmi.github.io/';
 const board: Leaderboard = {
-  benchmark: 'omnimmi', url: PAGE, feed: `${PAGE} (avg. w/o P, video and audio-input tables)`,
+  benchmark: 'omnimmi', parts: {
+  'SG 1st': { name: 'Dynamic state grounding, first stage', group: 'Task type', note: 'Cumulative accuracy through the first stage.' },
+  'SG 2nd': { name: 'Dynamic state grounding, second stage', group: 'Task type', note: 'Cumulative accuracy through the second stage.' },
+  'SG 3rd': { name: 'Dynamic state grounding, third stage', group: 'Task type', note: 'Cumulative accuracy through the third stage.' },
+  'SG avg.': { name: 'Dynamic state grounding', group: 'Task type' },
+  'MD 1st': { name: 'Multi-turn dependency reasoning, first stage', group: 'Task type', note: 'Cumulative accuracy through the first stage.' },
+  'MD 2nd': { name: 'Multi-turn dependency reasoning, second stage', group: 'Task type', note: 'Cumulative accuracy through the second stage.' },
+  'MD 3rd': { name: 'Multi-turn dependency reasoning, third stage', group: 'Task type', note: 'Cumulative accuracy through the third stage.' },
+  'MD avg.': { name: 'Multi-turn dependency reasoning', group: 'Task type' },
+  AP: { name: 'Action prediction', group: 'Task type' },
+  SI: { name: 'Speaker identification', group: 'Task type' },
+}, url: PAGE, feed: `${PAGE} (avg. w/o P, video and audio-input tables)`,
   terms: 'The public OmniMMI project page publishes these results; the Almanac credits and links the source.',
   async fetch(): Promise<LeaderboardRow[]> {
     const ts = tables(await fetchText(PAGE)).map(t => t.map(r => r.map(c => c.text))).filter(t => t[0]?.at(-1) === 'avg. w/o P');

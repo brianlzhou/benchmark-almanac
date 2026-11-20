@@ -7,7 +7,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const FEED = 'https://arxiv.org/html/2607.02440';
 const board: Leaderboard = {
-  benchmark: 'evopolicygym', url: FEED, feed: FEED,
+  benchmark: 'evopolicygym', parts: {
+  'Gym/Box2D': { name: 'Gym/Box2D', group: 'Environment' },
+  MuJoCo: { name: 'MuJoCo', group: 'Environment' },
+  MiniGrid: { name: 'MiniGrid', group: 'Environment' },
+  'Robotics/Driving': { name: 'Robotics/driving', group: 'Environment' },
+}, url: FEED, feed: FEED,
   terms: 'The authors publish these historical results on arXiv. Credit the EvoPolicyGym authors.',
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Core16'));

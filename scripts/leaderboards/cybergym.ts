@@ -5,7 +5,7 @@
 // agent is the harness. Multi-model systems retain their constituent models.
 // Earlier variants listed as subRows inherit the parent's agent. The "dynamic" and "test-time mem."
 // features (setups the page can filter out) become the setting. Many rows are agent systems submitted by
-// their makers, and some scores come from lab model cards (the source column).
+// their makers. Some rows also publish the alternate aggregate score_x1.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -15,6 +15,7 @@ interface Row {
   agent?: string;
   model?: string;
   score_10?: number;
+  score_x1?: number;
   date?: string;
   trials?: number;
   source?: string;
@@ -52,7 +53,8 @@ const board: Leaderboard = {
       const blend = /^Multi-model \((.+)\)$/.exec(model)?.[1].split(',').map((s) => s.trim());
       const models = blend && blend.length > 1 ? blend : undefined;
       const link = r.source_url?.startsWith('https://') && !/^https:\/\/(?:huggingface\.co|www\.opensage-agent\.ai)\//.test(r.source_url) ? r.source_url : undefined;
-      rows.push({ model, models, submitter: unescape(r.source), trials: r.trials, link, harness: unescape(agent), score: r.score_10 * 100, setting: feats.join(', ') || undefined, date: r.date });
+      const metrics = typeof r.score_x1 === 'number' ? { scoreX1: 100 * r.score_x1 } : undefined;
+      rows.push({ model, models, metrics, submitter: unescape(r.source), trials: r.trials, link, harness: unescape(agent), score: r.score_10 * 100, setting: feats.join(', ') || undefined, date: r.date });
     };
     for (const r of level1) {
       if (r.trials !== 1 || r.hidden) continue;

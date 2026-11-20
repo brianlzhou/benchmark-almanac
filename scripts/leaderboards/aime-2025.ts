@@ -1,6 +1,8 @@
-// AIME 2025 (I and II, 30 final-answer problems) on MathArena, read through the helper in aime-2026.ts.
+// AIME 2025 (I and II, 30 final-answer problems) on MathArena, including input tokens, average retries, and rank.
 import type { Leaderboard } from './types.ts';
-import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage, matharenaRows } from './aime-2026.ts';
+import { MATHARENA_SPRING_2025_ALIASES, MATHARENA_TERMS, matharenaFeed, matharenaPage } from './aime-2026.ts';
+
+import { matharenaRows } from '../lib/boards/matharena.ts';
 
 const COMP = 'aime--aime_2025';
 

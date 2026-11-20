@@ -8,6 +8,10 @@ const FEED = "https://arxiv.org/html/2407.11325";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "reasonvos",
+  parts: {
+    referringJF: { name: 'Referring', group: 'Task type' },
+    reasoningJF: { name: 'Reasoning', group: 'Task type' },
+  },
   url: "https://github.com/cilinyan/VISA",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

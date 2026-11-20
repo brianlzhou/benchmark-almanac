@@ -10,6 +10,14 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2509.25160";
 const board: Leaderboard = {
  benchmark: "gsm8k-v",
+ parts: {
+   signboardIcon: { name: 'Signboard icon', group: 'Category' },
+   measurement: { name: 'Measurement', group: 'Category' },
+   physicalMetric: { name: 'Physical metric', group: 'Category' },
+   temporal: { name: 'Temporal', group: 'Category' },
+   ratioPercentage: { name: 'Ratio percentage', group: 'Category' },
+   other: { name: 'Other', group: 'Category' },
+ },
  url: "https://arxiv.org/html/2509.25160",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -9,6 +9,20 @@ const FEED = "https://arxiv.org/html/2406.09411";
 
 const board: Leaderboard = {
   benchmark: "muirbench",
+  parts: {
+    counting: { name: 'Counting', group: 'Task type' },
+    action: { name: 'Action', group: 'Task type' },
+    grounding: { name: 'Grounding', group: 'Task type' },
+    matching: { name: 'Matching', group: 'Task type' },
+    ordering: { name: 'Ordering', group: 'Task type' },
+    scene: { name: 'Scene', group: 'Task type' },
+    difference: { name: 'Difference', group: 'Task type' },
+    cartoon: { name: 'Cartoon', group: 'Task type' },
+    diagram: { name: 'Diagram', group: 'Task type' },
+    geographic: { name: 'Geographic', group: 'Task type' },
+    attribute: { name: 'Attribute', group: 'Task type' },
+    retrieval: { name: 'Retrieval', group: 'Task type' },
+  },
   url: "https://arxiv.org/abs/2406.09411",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
@@ -23,6 +37,13 @@ const board: Leaderboard = {
     const second = ts.find(t => t.some(r => r.some(c => c.text === 'Difference.')) && t.some(r => r[0]?.text.startsWith('GPT-4o')));
     if (!t || !second) throw new Error('MuirBench results tables missing');
     const clean = (s: string) => s.replace(/\s*\[\s*\d+\s*\]/g, '').replace(/^(Yi-VL-6B) 6$/, '$1');
+    let mode: string | undefined;
+    const modes = new Map<string, string>();
+    for (const row of t) {
+      const label = row[0]?.text ?? '';
+      if (/^(Single|Multi)-Image input/i.test(label)) mode = label.replace(/ multimodal LLMs.*/i, '');
+      else if (mode && row.length === 8) modes.set(clean(label), mode);
+    }
     const rows = t.filter(r => r.length === 8 && num(r[1]?.text) !== undefined && !/^(Human|Random)/.test(r[0].text)).map(r => {
       const model = clean(r[0].text);
       const metrics: Record<string, number> = {};
@@ -30,7 +51,8 @@ const board: Leaderboard = {
       const s = second.find(s => clean(s[0]?.text ?? '') === model);
       if (!s || s.length !== 7) throw new Error(`MuirBench secondary metrics missing for ${model}`);
       ['difference', 'cartoon', 'diagram', 'geographic', 'attribute', 'retrieval'].forEach((k, i) => {metrics[k] = num(s[i + 1].text)!;});
-      return {model: /^(GPT-4o|GPT-4-Turbo|Gemini Pro)$/.test(model) ? `${model} (snapshot unspecified)` : model, score: num(r[1].text)!, metrics};
+      const size = model.match(/(?:^|[ (\-])(\d+(?:\.\d+)?)B\b/i);
+      return {setting: modes.get(model), params: size ? Number(size[1]) : undefined, model: /^(GPT-4o|GPT-4-Turbo|Gemini Pro)$/.test(model) ? `${model} (snapshot unspecified)` : model, score: num(r[1].text)!, metrics};
     });
     if (rows.length !== 20) throw new Error(`MuirBench expected 20 rows, found ${rows.length}`);
     return rows;

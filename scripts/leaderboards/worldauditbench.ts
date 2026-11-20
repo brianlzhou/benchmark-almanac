@@ -7,6 +7,13 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://ucsb-nlp-chang.github.io/WorldAuditBench/assets/app.js";
 const board: Leaderboard = {
   benchmark: "worldauditbench",
+  parts: {
+    family1: { name: 'Static physics', group: 'Category' },
+    family2: { name: 'Interactive physics', group: 'Category' },
+    family3: { name: 'Spatial consistency', group: 'Category' },
+    family4: { name: 'Temporal consistency', group: 'Category' },
+    family5: { name: 'Semantic consistency', group: 'Category' },
+  },
   url: "https://ucsb-nlp-chang.github.io/WorldAuditBench/assets/app.js",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

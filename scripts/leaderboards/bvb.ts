@@ -49,9 +49,32 @@ const board: Leaderboard = {
 ,
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED);
-    const data = jsonAfter(source,'window.BVB_DATA =') as {name:string,overall:number,effort:string,harness:string,costUsd:number,runtimeMin:number,openWeight?:boolean,dualVqa:number,latentSim:number,layout:number,motion:number,tasks:Record<string,number>}[];
+    const data = jsonAfter(source,'window.BVB_DATA =') as {name:string,rank?:number,sceneCount?:number,renderedScenes?:number,costScenes?:number,costEstimate?:boolean,baselineComparable?:boolean,reportedEffort?:string,protocol?:string,overall:number,effort:string,harness:string,costUsd:number,runtimeMin:number,openWeight?:boolean,dualVqa:number,latentSim:number,layout:number,motion:number,tasks:Record<string,number>}[];
     if (!Array.isArray(data) || !data.length) throw new Error('BVB data missing');
-    return data.filter(r=>Number.isFinite(r.overall)).map(r=>({model:identity(r.name),score:r.overall,open:r.openWeight,setting:r.effort,harness:r.harness,cost:r.costUsd,metrics:{minutes:r.runtimeMin,...r.tasks,dualVqa:r.dualVqa,latentSimilarity:r.latentSim,layout:r.layout,motion:r.motion,cost:r.costUsd,latency:r.runtimeMin*60}}));
+    return data.filter(r => Number.isFinite(r.overall)).map(r => {
+      const metrics: Record<string, number> = { ...r.tasks, dualVqa: r.dualVqa, latentSimilarity: r.latentSim, layout: r.layout, motion: r.motion };
+      if (typeof r.runtimeMin === 'number') Object.assign(metrics, { minutes: r.runtimeMin, latency: r.runtimeMin * 60 });
+      if (typeof r.costUsd === 'number') metrics.cost = r.costUsd;
+      for (const key of ['rank', 'sceneCount', 'renderedScenes', 'costScenes', 'costEstimate', 'baselineComparable'] as const) {
+        if (r[key] != null) metrics[key] = Number(r[key]);
+      }
+      return { model: identity(r.name), score: r.overall, open: r.openWeight, harness: r.harness, cost: r.costUsd,
+        setting: [...new Set([r.effort, r.reportedEffort, r.protocol].filter(Boolean))].join(', ') || undefined, metrics };
+    });
   },
+};
+board.parts = {
+  dualVqa: { name: 'Dual VQA', group: 'Dimension' },
+  latentSimilarity: { name: 'Latent similarity', group: 'Dimension' },
+  layout: { name: 'Layout', group: 'Dimension' },
+  motion: { name: 'Motion', group: 'Dimension' },
+  object_counting: { name: 'Object counting', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  object_abs_distance: { name: 'Object absolute distance', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  object_size_estimation: { name: 'Object size estimation', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  room_size_estimation: { name: 'Room size estimation', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  object_rel_distance: { name: 'Object relative distance', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  object_rel_direction: { name: 'Object relative direction', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  route_planning: { name: 'Route planning', group: 'Task type', note: 'Dual VQA retention for this question type.' },
+  obj_appearance_order: { name: 'Object appearance order', group: 'Task type', note: 'Dual VQA retention for this question type.' },
 };
 export default board;

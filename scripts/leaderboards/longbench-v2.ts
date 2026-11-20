@@ -11,6 +11,11 @@ const URL = 'https://longbench2.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'longbench-v2',
+  parts: {
+    easy: { name: 'Easy', group: 'Difficulty' }, hard: { name: 'Hard', group: 'Difficulty' },
+    short: { name: 'Short', group: 'Length' }, medium: { name: 'Medium', group: 'Length' },
+    long: { name: 'Long', group: 'Length' },
+  },
   url: `${URL}#leaderboard`,
   feed: `${URL} (results table)`,
   terms: 'Static GitHub Pages project page with no stated terms; the LongBench repository is MIT-licensed.',
@@ -37,10 +42,18 @@ const board: Leaderboard = {
       const date = /^\d{4}-\d\d-\d\d$/.test(r[4].text) ? r[4].text : undefined;
       const size = r[2]?.text.match(/^(\d+(?:\.\d+)?)([BT])$/);
       const params = size ? Number(size[1]) * (size[2] === 'T' ? 1000 : 1) : undefined;
-      const plain = num(r[5].text);
-      const cot = num(r[6].text);
-      if (plain !== undefined) rows.push({ model, score: plain, date, params });
-      if (cot !== undefined) rows.push({ model, score: cot, setting: 'CoT', date, params });
+      const context = r[3].text.trim().match(/^(\d+(?:\.\d+)?)([KM])$/i);
+      for (const offset of [0, 1]) {
+        const score = num(r[5 + offset]?.text);
+        if (score === undefined) continue;
+        const metrics: Record<string, number> = {};
+        if (context) metrics.contextTokens = Number(context[1]) * (context[2].toUpperCase() === 'M' ? 1e6 : 1e3);
+        for (const [index, key] of ['easy', 'hard', 'short', 'medium', 'long'].entries()) {
+          const value = num(r[7 + index * 2 + offset]?.text);
+          if (value !== undefined) metrics[key] = value;
+        }
+        rows.push({ model, score, date, params, metrics, setting: offset ? 'CoT' : undefined });
+      }
     }
     return rows;
   },

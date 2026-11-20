@@ -10,6 +10,9 @@ const FEED = 'https://crux-eval.github.io/data.csv';
 
 const board: Leaderboard = {
   benchmark: 'cruxeval',
+  parts: {
+    inputPass1: { name: 'Input prediction', group: 'Task type' },
+  },
   verified: 'not marked as under verification by the board',
   url: 'https://crux-eval.github.io/leaderboard.html',
   feed: `${FEED} (o@1, CRUXEval-O pass@1)`,

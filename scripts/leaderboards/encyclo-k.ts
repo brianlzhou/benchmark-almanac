@@ -7,6 +7,19 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://encyclo-k.github.io/";
 const board: Leaderboard = {
   benchmark: "encyclo-k",
+  parts: {
+    law: { name: 'Law', group: 'Domain' },
+    sci: { name: 'Science', group: 'Domain' },
+    eng: { name: 'Engineering', group: 'Domain' },
+    lit: { name: 'Literature', group: 'Domain' },
+    med: { name: 'Medicine', group: 'Domain' },
+    hist: { name: 'History', group: 'Domain' },
+    econ: { name: 'Economics', group: 'Domain' },
+    agr: { name: 'Agriculture', group: 'Domain' },
+    edu: { name: 'Education', group: 'Domain' },
+    mgt: { name: 'Management', group: 'Domain' },
+    phil: { name: 'Philosophy', group: 'Domain' },
+  },
   url: "https://encyclo-k.github.io/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

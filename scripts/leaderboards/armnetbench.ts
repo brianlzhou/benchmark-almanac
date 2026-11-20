@@ -8,6 +8,20 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://armnet-dev.github.io/armnetbench-v0.1/";
 const board: Leaderboard = {
  benchmark: "armnetbench", url: "https://armnet-dev.github.io/armnetbench-v0.1/", feed: FEED,
+ parts: {
+   block_stack: { name: 'Block stack', group: 'Task type' },
+   ring_insert: { name: 'Ring insert', group: 'Task type' },
+   tool_insert: { name: 'Tool insert', group: 'Task type' },
+   tool_removal: { name: 'Tool removal', group: 'Task type' },
+   cable_clip: { name: 'Cable clip', group: 'Task type' },
+   cable_unclip: { name: 'Cable unclip', group: 'Task type' },
+   eye_drops_to_basket: { name: 'Eye drops to basket', group: 'Task type' },
+   eye_drops_to_shelf: { name: 'Eye drops to shelf', group: 'Task type' },
+   fold_tea_towel: { name: 'Fold tea towel', group: 'Task type' },
+   insert_candle: { name: 'Insert candle', group: 'Task type' },
+   open_lamp_door: { name: 'Open lamp door', group: 'Task type' },
+   transfer_cube: { name: 'Transfer cube', group: 'Task type' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

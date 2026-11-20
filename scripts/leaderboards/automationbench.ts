@@ -1,6 +1,6 @@
 // AutomationBench (Zapier). The Framer page renders the top ten configurations in HTML, but its page module
 // contains every ranked row behind "See more". Follow the current script_main route to the /benchmarks module
-// and read only literal [rank, model, percent, cost] tuples, without evaluating downloaded JavaScript.
+// and read its literal leaderboard rows, department results, price notes and model reports.
 // Check the expanded count against the HTML so a changed bundle cannot silently truncate the leaderboard.
 // Zapier's terms of service and acceptable use policy set no rule
 // against automated reading. The official score is the pass rate on Zapier's held-out private task set.
@@ -28,6 +28,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (current Framer page module, all ranked leaderboard rows)`,
   terms: "Static page on zapier.com; Zapier's terms of service and acceptable use policy do not restrict automated reading.",
+  parts: Object.fromEntries(['Sales', 'Marketing', 'Operations', 'Support', 'Finance', 'HR'].map(name => [name, { name, group: 'Department' }])),
   aliases: { 'Gemini 3.1 Pro (preview)': 'gemini-3-1-pro' },
   async fetch() {
     const html = await fetchText(PAGE);
@@ -38,6 +39,28 @@ const board: Leaderboard = {
     if (!page) throw new Error('AutomationBench page route missing');
     await new Promise((resolve) => setTimeout(resolve, 1100));
     const source = await fetchText(new URL(page, main).href);
+    const reports = [...source.matchAll(/\{label:`([^`]+)`,link:`(\/benchmarks\/[^`]+)`\}/g)];
+    const departments = new Map<string, Record<string, number>>();
+    for (const [, dept, winner, score, runner] of source.matchAll(/\[`([^`]+)`,`([^`]+ — [^`]+)`,`([\d.]+)%`,`([^`]+)`\]/g)) {
+      const save = (name: string, value: string) => {
+        const model = name.split(' — ')[0].trim();
+        const metrics = departments.get(model) ?? {};
+        metrics[dept] = Number(value);
+        departments.set(model, metrics);
+      };
+      save(winner, score);
+      const other = runner.match(/^(.+ — .+) \((?:tie at )?([\d.]+)%\)$/);
+      if (other) save(other[1], other[2]);
+    }
+    // The optional range column uses a Wilson interval with the task count and z value in the module.
+    const constants = source.match(/,\w+=(\d+),\w+=\{Sales:\d+,[^}]+\},\w+=[.\d]+,\w+=([.\d]+),\w+=\w+=>parseFloat/);
+    const promotional = new Map<string, number>();
+    const note = source.match(/ranking and Cost \/ task use standard list pricing\. ([^`]+)/)?.[1] ?? '';
+    for (const [, model, prices] of note.matchAll(/(?:^|\. )([^:$]+?): (\$[^`]*?)(?=\. [A-Z]|\.$|$)/g)) {
+      for (const [, amount, effort] of prices.matchAll(/\$([\d.]+)(?: \(([^)]+)\))?/g)) {
+        promotional.set(effort ? `${model} (${effort})` : model, Number(amount));
+      }
+    }
     const rows: LeaderboardRow[] = [];
     const ranked = [...source.matchAll(/\[(\d+),`([^`]+)`,`([\d.]+%)`,`(\$[\d.]+[\*†‡]?)`\]/g)];
     const more = html.match(/See (\d+) more/);
@@ -64,7 +87,29 @@ const board: Leaderboard = {
         }
       }
       const cost = parseFloat(price?.match(/^\$\s*([\d.]+)/)?.[1] ?? '');
-      rows.push({ model, score: parseFloat(score), setting, harness, cost: Number.isFinite(cost) && cost > 0 ? cost : undefined });
+      const metrics: Record<string, number> = { rank: Number(rank), ...departments.get(name) };
+      const promo = price.endsWith('*') ? promotional.get(name) ?? promotional.get(model) : undefined;
+      if (promo !== undefined) metrics.promotionalCostUsd = promo;
+      const cachedPrice = source.match(/DeepSeek V4 Flash at Fireworks rates: \$([\d.]+) \/ task uncached, \$([\d.]+) cached/);
+      if (price.endsWith('‡') && cachedPrice) {
+        metrics.uncachedCostUsd = Number(cachedPrice[1]);
+        metrics.cachedCostUsd = Number(cachedPrice[2]);
+      }
+      const report = reports.find(([, label]) => name === label || name.startsWith(label + ' ('));
+      const row: LeaderboardRow = { model, score: parseFloat(score), setting, harness, metrics,
+        link: report ? new URL(report[2], PAGE).href : undefined, cost: Number.isFinite(cost) && cost > 0 ? cost : undefined };
+      if (constants) {
+        const n = Number(constants[1]), z = Number(constants[2]), p = row.score / 100;
+        if (n > 0 && z > 0) {
+          const denominator = 1 + z * z / n;
+          const center = (p + z * z / (2 * n)) / denominator;
+          const half = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / denominator;
+          row.low = Number((Math.max(0, center - half) * 100).toFixed(1));
+          row.high = Number((Math.min(1, center + half) * 100).toFixed(1));
+          metrics.tasks = n;
+        }
+      }
+      rows.push(row);
     }
     if (!rows.length) throw new Error('no leaderboard rows found; the page layout may have changed');
     return rows;

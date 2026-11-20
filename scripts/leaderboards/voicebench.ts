@@ -5,7 +5,7 @@
 // retained as unlisted pipeline configurations. A trailing "(thinking)" becomes the setting through the shared resolver.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { text } from '../lib/html.ts';
+import { num, text } from '../lib/html.ts';
 
 const PAGE = 'https://matthewcym.github.io/VoiceBench/';
 
@@ -23,6 +23,8 @@ const board: Leaderboard = {
     const html = await fetchText(PAGE);
     const table = html.match(/<table\b[\s\S]*?<\/table>/)?.[0];
     if (!table) throw new Error('no leaderboard table on the VoiceBench page');
+    const dimensions = [...table.matchAll(/<th(?:\s[^>]*)?>([\s\S]*?)<\/th>/g)].map(m => text(m[1])).slice(2, -2);
+    board.parts = Object.fromEntries(dimensions.map((name, i) => [name, { name, group: 'Task', unit: i < 3 ? 'score' : '%' }]));
     const rows: LeaderboardRow[] = [];
     for (const m of table.matchAll(/<tr\b([^>]*\bdata-overall="([\d.]+)"[^>]*)>([\s\S]*?)<\/tr>/g)) {
       const arch = m[1].match(/data-arch="([^"]+)"/)?.[1];
@@ -31,7 +33,16 @@ const board: Leaderboard = {
       const model = text(name);
       // the Qwen3-Omni Thinking and Instruct releases share one registry record
       const mode = model.match(/^Qwen3-Omni-.*-(Thinking|Instruct)$/)?.[1];
-      rows.push({ model, harness: arch === 'cascaded' ? model : undefined, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
+      const metrics: Record<string, number> = {};
+      const cells = [...m[3].matchAll(/<td class="dim"[^>]*>([\s\S]*?)<\/td>/g)];
+      for (const [i, cell] of cells.entries()) {
+        const value = num(text(cell[1]));
+        if (value !== undefined && dimensions[i]) metrics[dimensions[i]] = value;
+      }
+      const rank = m[1].match(/data-rank="(\d+)"/);
+      if (rank) metrics.rank = Number(rank[1]);
+      const access = m[1].match(/data-open="([^"]+)"/)?.[1];
+      rows.push({ model, metrics, open: access === 'open' ? true : access === 'closed' ? false : undefined, harness: arch === 'cascaded' ? model : undefined, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
     }
     if (!rows.length) throw new Error('no rows in the VoiceBench table');
     return rows;

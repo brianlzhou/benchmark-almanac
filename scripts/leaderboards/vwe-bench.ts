@@ -6,6 +6,18 @@ const FEED = "https://arxiv.org/html/2608.15265";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "vwe-bench",
+  parts: {
+    theme: { name: 'Theme', group: 'Task type' },
+    themeElements: { name: 'Theme elements', group: 'Task type' },
+    blueprint: { name: 'Blueprint', group: 'Task type' },
+    distractor: { name: 'Distractor', group: 'Task type' },
+    preciseEdit: { name: 'Precise edit', group: 'Task type' },
+    fuzzyEdit: { name: 'Fuzzy edit', group: 'Task type' },
+    critique: { name: 'Critique', group: 'Task type' },
+    guidance: { name: 'Guidance', group: 'Task type' },
+    restatement: { name: 'Restatement', group: 'Task type' },
+    complex: { name: 'Complex', group: 'Task type' },
+  },
   url: "https://usail-hkust.github.io/VibeWorlding-Gym/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

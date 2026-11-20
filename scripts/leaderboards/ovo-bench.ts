@@ -7,6 +7,11 @@ const FEED = "https://arxiv.org/html/2501.05510";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "ovo-bench",
+  parts: {
+    realTime: { name: 'Real time understanding', group: 'Task type' },
+    backward: { name: 'Backward tracing', group: 'Task type' },
+    forward: { name: 'Forward active responding', group: 'Task type' },
+  },
   url: "https://joeleelyf.github.io/OVO-Bench/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

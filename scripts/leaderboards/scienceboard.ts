@@ -8,6 +8,14 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://qiushisun.github.io/ScienceBoard-Home/";
 const board: Leaderboard = {
   benchmark: "scienceboard",
+  parts: {
+    alg: { name: 'Algebra', group: 'Domain' },
+    bio: { name: 'Biochemistry', group: 'Domain' },
+    gis: { name: 'Geographic information systems', group: 'Domain' },
+    atp: { name: 'Theorem proving', group: 'Domain' },
+    ast: { name: 'Astronomy', group: 'Domain' },
+    doc: { name: 'Scientific documentation', group: 'Domain' },
+  },
   url: "https://qiushisun.github.io/ScienceBoard-Home/",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

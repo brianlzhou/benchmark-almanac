@@ -6,7 +6,10 @@ import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
 const FEED = "https://imobench.github.io/";
 const board: Leaderboard = {
-  benchmark: "imo-leanproofbench", url: "https://imobench.github.io/", feed: FEED,
+  benchmark: "imo-leanproofbench", parts: {
+  basic: { name: 'Basic', group: 'Difficulty' },
+  advanced: { name: 'Advanced', group: 'Difficulty' },
+}, url: "https://imobench.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

@@ -5,7 +5,12 @@ import { text } from '../lib/html.ts';
 
 const FEED = "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks";
 const board: Leaderboard = {
-  benchmark: "atomic-challenges-irregular",
+  benchmark: "atomic-challenges-irregular", measures: { vulnerability: 'vulnerability', network: 'network', evasion: 'evasion' },
+  parts: {
+    vulnerability: { name: 'Vulnerability research', group: 'Task type' },
+    network: { name: 'Network attack simulation', group: 'Task type' },
+    evasion: { name: 'Evasion', group: 'Task type' },
+  },
   url: "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

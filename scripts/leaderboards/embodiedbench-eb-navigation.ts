@@ -1,3 +1,11 @@
 // EmbodiedBench EB-Navigation. The score is the published environment average success rate (%); subsets stay metrics.
 import { embodiedbenchBoard } from '../lib/boards/embodiedbench.ts';
-export default embodiedbenchBoard("navigation");
+const board = embodiedbenchBoard("navigation");
+board.parts = {
+  base: { name: 'Base', group: 'Category' },
+  common: { name: 'Common', group: 'Category' },
+  complex: { name: 'Complex', group: 'Category' },
+  visual: { name: 'Visual', group: 'Category' },
+  long: { name: 'Long', group: 'Category' },
+};
+export default board;

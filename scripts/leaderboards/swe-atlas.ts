@@ -28,6 +28,8 @@ const board: Leaderboard = {
     // "GPT 5.3 (Codex)": GPT-5.3-Codex in the Codex harness (the page's text names "GPT 5.3 Codex")
     'GPT 5.3': 'gpt-5-3-codex',
   },
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), ci),
+  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), (name, entry) => ({
+    metrics: { ...ci(name, entry)?.metrics, elevatedRefusals: Number(name.marks.includes('*')) },
+  })),
 };
 export default board;

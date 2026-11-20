@@ -8,6 +8,21 @@ const FEED = "https://raw.githubusercontent.com/Lliar-liar/Daily-Omni/main/READM
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "daily-omni",
+  parts: {
+    'AV Align': { name: 'Audio visual alignment', group: 'Task type' },
+    Comparison: { name: 'Comparison', group: 'Task type' },
+    'Context Understanding': { name: 'Context understanding', group: 'Task type' },
+    'Event Sequence': { name: 'Event sequence', group: 'Task type' },
+    Inference: { name: 'Inference', group: 'Task type' },
+    Reasoning: { name: 'Reasoning', group: 'Task type' },
+    '30s': { name: '30 seconds', group: 'Split' },
+    '60s': { name: '60 seconds', group: 'Split' },
+    'Comp.': { name: 'Comparison', group: 'Task type' },
+    'Ctx. Und.': { name: 'Context understanding', group: 'Task type' },
+    'Evt. Seq.': { name: 'Event sequence', group: 'Task type' },
+    'Infer.': { name: 'Inference', group: 'Task type' },
+    'Reas.': { name: 'Reasoning', group: 'Task type' },
+  },
   url: "https://github.com/Lliar-liar/Daily-Omni",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

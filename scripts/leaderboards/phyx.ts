@@ -10,6 +10,14 @@ const FEED = "https://killthefullmoon.github.io/projects/PhyX/leaderboard_data.j
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "phyx",
+  parts: {
+    mechanics: { name: 'Mechanics', group: 'Domain' },
+    electromagnetism: { name: 'Electromagnetism', group: 'Domain' },
+    thermodynamics: { name: 'Thermodynamics', group: 'Domain' },
+    wavesAcoustics: { name: 'Waves and acoustics', group: 'Domain' },
+    optics: { name: 'Optics', group: 'Domain' },
+    modernPhysics: { name: 'Modern physics', group: 'Domain' },
+  },
   url: "https://killthefullmoon.github.io/projects/PhyX/index.html",
   feed: FEED,
   terms: "Public results published by the benchmark authors at killthefullmoon.github.io; retain source attribution and follow the upstream terms.",

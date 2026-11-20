@@ -6,7 +6,7 @@
 // with one split only have no headline score. Complete and Instruct are kept as metrics.
 // The page defines calcAverage as "parseFloat(((parseFloat(a) + parseFloat(b)) / 2).toFixed(1))"
 // and returns null if either part is null. Names such as "o1-2024-12-17 (temperature=1, reasoning=high)" carry the
-// sampling settings: the reasoning level becomes the setting and the rest is dropped.
+// sampling settings. Keep their temperature and reasoning mode with the prompt and prefill flags.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -17,12 +17,17 @@ export const bcbFeed = (hard: boolean) => `${BCB_PAGE}${hard ? 'results-hard.jso
 interface Entry {
   'pass@1'?: { complete?: number | null; instruct?: number | null };
   date?: string;
+  link?: string;
+  prompted?: boolean;
+  prefill?: boolean;
+  moe?: boolean;
   size?: number;
   act_param?: number;
 }
 
 export async function bigcodebenchRows(hard: boolean): Promise<LeaderboardRow[]> {
   const data = await fetchJson<Record<string, Entry>>(bcbFeed(hard));
+  const subset = hard ? undefined : await fetchJson<Record<string, Entry>>(bcbFeed(true));
   const rows: LeaderboardRow[] = [];
   for (const [name, e] of Object.entries(data)) {
     const { complete, instruct } = e['pass@1'] ?? {};
@@ -38,10 +43,16 @@ export async function bigcodebenchRows(hard: boolean): Promise<LeaderboardRow[]>
     }
     rows.push({
       model,
-      setting,
+      setting: [setting, paren?.[1].match(/temperature=[\d.]+/)?.[0],
+        typeof e.prompted === 'boolean' ? (e.prompted ? 'prompted' : 'unprompted') : undefined,
+        typeof e.prefill === 'boolean' ? (e.prefill ? 'prefill' : 'no prefill') : undefined].filter(Boolean).join('; ') || undefined,
+
       score: Number(((complete + instruct) / 2).toFixed(1)),
-      params: !hard && typeof e.size === 'number' && e.size > 0 ? e.size : undefined,
-      metrics: { complete, instruct, ...(!hard && typeof e.act_param === 'number' && e.act_param > 0 ? { activeParams: e.act_param } : {}) },
+      params: typeof e.size === 'number' && e.size > 0 ? e.size : undefined,
+      metrics: { complete, instruct, ...(typeof subset?.[name]?.['pass@1']?.complete === 'number' ? { hardComplete: subset[name]['pass@1']!.complete! } : {}),
+        ...(typeof subset?.[name]?.['pass@1']?.instruct === 'number' ? { hardInstruct: subset[name]['pass@1']!.instruct! } : {}),
+        ...(typeof e.moe === 'boolean' ? { mixtureOfExperts: Number(e.moe) } : {}),
+        ...(typeof e.act_param === 'number' && e.act_param > 0 ? { activeParams: e.act_param } : {}) },
       date: /^\d{4}-\d\d-\d\d$/.test(e.date ?? '') ? e.date : undefined,
     });
   }
@@ -97,6 +108,12 @@ const SKIP = new Set(['Command R+', 'Gemini-1.5-Pro-Exp-0801', 'Gemini-1.5-Pro-E
 
 const board: Leaderboard = {
   benchmark: 'bigcodebench',
+  parts: {
+    hardComplete: { name: 'Complete', group: 'Hard subset' },
+    hardInstruct: { name: 'Instruct', group: 'Hard subset' },
+    complete: { name: 'Complete', group: 'Split', note: 'Code completion score, averaged with Instruct for the headline.' },
+    instruct: { name: 'Instruct', group: 'Split', note: 'Instruction to code score, averaged with Complete for the headline.' },
+  },
   url: BCB_PAGE,
   feed: `${bcbFeed(false)} (mean of Complete and Instruct pass@1)`,
   terms: BCB_TERMS,

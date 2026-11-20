@@ -8,6 +8,14 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/THUNLP-MT/StableToolBench/master/README.md";
 const board: Leaderboard = {
  benchmark: "stabletoolbench",
+ parts: {
+   'I1 Inst': { name: 'Single tool: instruction', group: 'Split' },
+   'I1 Cat': { name: 'Single tool: category', group: 'Split' },
+   'I1 Tool': { name: 'Single tool: tool', group: 'Split' },
+   'I2 Cat': { name: 'Intra-category multiple tools: category', group: 'Split' },
+   'I2 Inst': { name: 'Intra-category multiple tools: instruction', group: 'Split' },
+   'I3 Inst': { name: 'Intra-collection multiple tools: instruction', group: 'Split' },
+ },
  url: "https://github.com/THUNLP-MT/StableToolBench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

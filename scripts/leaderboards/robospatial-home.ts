@@ -8,6 +8,12 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/chanhee-luke/RoboSpatial-Eval/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "robospatial-home",
+ parts: {
+   'VQA avg': { name: 'Visual question answering', group: 'Task type' },
+   'Context (pointing)': { name: 'Context (pointing)', group: 'Task type' },
+   'Configuration (VQA)': { name: 'Configuration', group: 'Task type' },
+   'Compatibility (VQA)': { name: 'Compatibility', group: 'Task type' },
+ },
  url: "https://github.com/chanhee-luke/RoboSpatial-Eval",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

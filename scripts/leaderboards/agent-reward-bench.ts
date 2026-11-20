@@ -2,7 +2,13 @@
 import type {Leaderboard} from './types.ts';
 import {fetchText} from '../lib/util.ts';
 const FEED='https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard/raw/main/results.jsonl';
-const board:Leaderboard={benchmark:'agent-reward-bench',url:'https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard',feed:FEED,
+const board:Leaderboard={benchmark:'agent-reward-bench', parts: {
+  AB: { name: 'AssistantBench', group: 'Split' },
+  VWA: { name: 'VisualWebArena', group: 'Split' },
+  WA: { name: 'WebArena', group: 'Split' },
+  Work: { name: 'WorkArena', group: 'Split' },
+  'Work++': { name: 'WorkArena++', group: 'Split' },
+},url:'https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard',feed:FEED,
  terms:'Apache-2.0 Space; Hugging Face robots.txt permits this public raw results path.',
  async fetch(){
   const data=(await fetchText(FEED)).trim().split(/\r?\n/).map(l=>JSON.parse(l) as Record<string,unknown>);

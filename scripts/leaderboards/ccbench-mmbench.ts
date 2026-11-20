@@ -3,19 +3,18 @@
 // CCBench.Overall (CircularEval accuracy, 0 to 100) is the score and the META time the row date.
 // "GPT-4o (0513, detail-high)" becomes GPT-4o dated 2024-05-13 with the image detail level as the setting,
 // as in mmbench.ts. The file is a snapshot whose newest rows date from early 2025.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchJson } from '../lib/util.ts';
+import type { Leaderboard } from './types.ts';
+import { openvlmRows } from '../lib/boards/openvlm.ts';
 
 // the host serves this file over plain HTTP only
 const FEED = 'http://opencompass.openxlab.space/assets/OpenVLM.json';
 
-interface Entry {
-  META?: { Method?: [string, string?]; Time?: string; Verified?: string; OpenSource?: string; Parameters?: string };
-  CCBench?: { Overall?: number };
-}
+const categories = ['Sketch Reasoning', 'Historical Figure', 'Calligraphy Painting', 'Scenery Building',
+  'Food Clothes', 'Cultural Relic', 'Traditional Show'];
 
 const board: Leaderboard = {
   benchmark: 'ccbench-mmbench',
+  parts: Object.fromEntries(categories.map(name => [name, name])),
   verified: 'marked verified by OpenCompass',
   url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: `${FEED} (CCBench.Overall)`,
@@ -29,28 +28,13 @@ const board: Leaderboard = {
     'InternVL2.5-78B': 'internvl2-5-78b',
     'InternVL2-40B': 'internvl2-40b',
   },
-  async fetch() {
-    const { results } = await fetchJson<{ results: Record<string, Entry> }>(FEED);
-    const rows: LeaderboardRow[] = [];
-    for (const e of Object.values(results)) {
-      const score = e.CCBench?.Overall;
-      let model = e.META?.Method?.[0]?.trim();
-      // the registry's only Reka Edge is the 2026 release, not the 2024 model on this board
-      if (!model || typeof score !== 'number' || /^RekaEdge$/i.test(model)) continue;
-      let date = e.META?.Time?.replace(/\//g, '-');
-      let setting: string | undefined;
-      const snap = model.match(/\s*\((\d\d)(\d\d), (detail-\w+)\)$/);
-      if (snap && date) {
-        date = `${date.slice(0, 4)}-${snap[1]}-${snap[2]}`;
-        setting = snap[3];
-        model = model.slice(0, snap.index).trim();
-      }
-      rows.push({ model, score, setting, date,
-        verified: e.META?.Verified === 'Yes' ? true : e.META?.Verified === 'No' ? false : undefined,
-        open: e.META?.OpenSource === 'Yes' ? true : e.META?.OpenSource === 'No' ? false : undefined,
-        params: /^\d+(?:\.\d+)?B$/.test(e.META?.Parameters ?? '') ? Number(e.META!.Parameters!.slice(0, -1)) : undefined });
+  fetch: () => openvlmRows(e => e.CCBench?.Overall, e => {
+    const metrics: Record<string, number> = {};
+    for (const key of categories) {
+      const value = e.CCBench?.[key];
+      if (typeof value === 'number') metrics[key] = value;
     }
-    return rows;
-  },
+    return metrics;
+  }),
 };
 export default board;

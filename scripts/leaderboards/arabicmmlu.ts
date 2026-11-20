@@ -11,6 +11,6 @@ const board: Leaderboard = {
   feed: oallFeed('ArabicMMLU'),
   terms: OALL_TERMS,
   aliases: OALL_ALIASES,
-  fetch: () => oallRows('ArabicMMLU'),
+  fetch: () => oallRows('ArabicMMLU', board),
 };
 export default board;

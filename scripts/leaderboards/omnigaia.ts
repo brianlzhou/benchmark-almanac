@@ -6,7 +6,20 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/RUC-NLPIR/OmniGAIA-Leaderboard/resolve/main/results.json";
 const board: Leaderboard = {
- benchmark: "omnigaia", url: "https://huggingface.co/spaces/RUC-NLPIR/OmniGAIA-Leaderboard/resolve/main/results.json", feed: FEED,
+ benchmark: "omnigaia", parts: {
+  sport: { name: 'Sport', group: 'Domain' },
+  art: { name: 'Art', group: 'Domain' },
+  movie: { name: 'Movie', group: 'Domain' },
+  food: { name: 'Food', group: 'Domain' },
+  easy: { name: 'Easy', group: 'Difficulty' },
+  hard: { name: 'Hard', group: 'Difficulty' },
+  geo: { name: 'Geography', group: 'Domain' },
+  tech: { name: 'Technology', group: 'Domain' },
+  hist: { name: 'History', group: 'Domain' },
+  fin: { name: 'Finance', group: 'Domain' },
+  sci: { name: 'Science', group: 'Domain' },
+  med: { name: 'Medium', group: 'Difficulty' },
+}, url: "https://huggingface.co/spaces/RUC-NLPIR/OmniGAIA-Leaderboard/resolve/main/results.json", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

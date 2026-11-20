@@ -8,6 +8,11 @@ import { tables, num } from '../lib/html.ts';
 const FEED = "https://huggingface.co/spaces/osunlp/Online_Mind2Web_Leaderboard/raw/main/human_Mind2Web-Online%20-%20Leaderboard_data.csv";
 const board: Leaderboard = {
   benchmark: "online-mind2web",
+  parts: {
+    easy: { name: 'Easy', group: 'Difficulty' },
+    medium: { name: 'Medium', group: 'Difficulty' },
+    hard: { name: 'Hard', group: 'Difficulty' },
+  },
   url: "https://huggingface.co/spaces/osunlp/Online_Mind2Web_Leaderboard",
   feed: FEED,
   harnesses: 'system',

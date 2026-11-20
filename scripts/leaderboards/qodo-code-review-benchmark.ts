@@ -1,12 +1,13 @@
-// qodo-code-review-benchmark: whole-benchmark scores transcribed on 2026-11-08.
+// qodo-code-review-benchmark: whole-benchmark scores transcribed on 2026-11-18.
 // Image: https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png
 // The current Qodo page publishes whole-benchmark F1 for seven code review systems. Backbone models are unspecified. This source is Qodo, not Fireworks.
 // Two separate visual passes agreed. A changed SHA-256 requires a new transcription.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-const FEED = "https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png (transcribed 2026-11-08)";
+const FEED = "https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png (transcribed 2026-11-18)";
 import { checkedImageRows } from '../lib/boards/transcribed-image.ts';
 const IMAGE = "https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png";
-const SHA256 = "e8e529079d799937bfe257905fac73260ac5b66c641df24a20c54808a1aa5b96";
+// the PNG a plain request gets, and the WebP a browser's Accept header gets: the same chart, checked 2026-11-18
+const SHA256 = ["e8e529079d799937bfe257905fac73260ac5b66c641df24a20c54808a1aa5b96", "0df5a78a17a1ba041b0e7c255f491fb723946904dc8e63bc1c3d730428084f6a"];
 const ROWS: LeaderboardRow[] = [
   {
     "model": "Qodo (code review system, backbone unspecified)",

@@ -9,6 +9,20 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2310.03302";
 const board: Leaderboard = {
  benchmark: "mlagentbench",
+ parts: {
+   imdb: { name: 'IMDb', group: 'Task type' },
+   'ogbn-arxiv': { name: 'ogbn-arxiv', group: 'Task type' },
+   'house-price': { name: 'House price', group: 'Task type' },
+   'spaceship-titanic': { name: 'Spaceship Titanic', group: 'Task type' },
+   'parkinsons-disease': { name: 'Parkinsons disease', group: 'Task type' },
+   fathomnet: { name: 'FathomNet', group: 'Task type' },
+   feedback: { name: 'Feedback', group: 'Task type' },
+   'identify-contrails': { name: 'Identify contrails', group: 'Task type' },
+   'llama-inference': { name: 'Llama inference', group: 'Task type' },
+   vectorization: { name: 'Vectorization', group: 'Task type' },
+   CLRS: { name: 'CLRS', group: 'Task type' },
+   BabyLM: { name: 'BabyLM', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2310.03302",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

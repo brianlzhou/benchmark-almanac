@@ -1,8 +1,8 @@
-import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 // MultiChallenge: both model-size tabs use the same conversations and percentage passed.
 // Read both tabs so the small-model roster is retained alongside the large-model roster.
+import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 import type { Leaderboard } from './types.ts';
-import { SCALE_ALIASES, SCALE_TERMS, scaleEntries, scaleFlight,  scaleUrl } from '../lib/scale.ts';
+import { SCALE_ALIASES, SCALE_TERMS, scaleEntries, scaleFlight, scaleUrl } from '../lib/scale.ts';
 
 const PAGE = scaleUrl('multichallenge');
 
@@ -18,7 +18,8 @@ const board: Leaderboard = {
   },
   async fetch() {
     const flight = await scaleFlight(PAGE);
-    return scaleRows([...scaleEntries(flight, 'large'), ...scaleEntries(flight, 'small')]);
+    return ['large', 'small'].flatMap(tab => scaleRows(scaleEntries(flight, tab), (_, entry) =>
+      typeof entry.rank === 'number' ? { metrics: { [tab + 'ModelRank']: entry.rank } } : undefined));
   },
 };
 export default board;

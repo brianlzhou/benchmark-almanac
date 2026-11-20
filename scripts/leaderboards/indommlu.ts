@@ -16,7 +16,13 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/fajri91/IndoMMLU/main/README.md";
 const board: Leaderboard = {
-  benchmark: "indommlu", url: "https://raw.githubusercontent.com/fajri91/IndoMMLU/main/README.md", feed: FEED,
+  benchmark: "indommlu", parts: {
+  'Social Science': { name: 'Social science', group: 'Domain' },
+  Humanities: { name: 'Humanities', group: 'Domain' },
+  STEM: { name: 'STEM', group: 'Domain' },
+  'Indonesian Lang.': { name: 'Indonesian language', group: 'Domain' },
+  'Local L. Culture': { name: 'Local languages and cultures', group: 'Domain' },
+}, url: "https://raw.githubusercontent.com/fajri91/IndoMMLU/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

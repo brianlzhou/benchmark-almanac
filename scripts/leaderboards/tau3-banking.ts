@@ -24,8 +24,13 @@ const board: Leaderboard = {
         const v = d?.[`pass_${k}`];
         if (typeof v === 'number') metrics[`pass${k}`] = v;
       }
+      const base = row(s, score);
+      const retrieval = d && 'retrieval_config' in d && typeof d.retrieval_config === 'string' ? d.retrieval_config : undefined;
+      const files = s as typeof s & { trajectory_files?: Record<string, string> };
+      const count = files.trajectory_files?.banking_knowledge?.match(/(\d+)trials/i)?.[1];
       rows.push({
-        ...row(s, score),
+        ...base, trials: base.trials ?? (count ? Number(count) : undefined),
+        setting: [base.setting, retrieval ? 'retrieval: ' + retrieval : undefined].filter(Boolean).join('; ') || undefined,
         cost: typeof d?.cost === 'number' && d.cost > 0 ? d.cost : undefined,
         metrics: Object.keys(metrics).length ? metrics : undefined,
       });

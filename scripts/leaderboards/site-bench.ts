@@ -4,7 +4,13 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://wenqi-wang20.github.io/SITE-Bench.github.io/";
 const board: Leaderboard = {
-  benchmark: "site-bench", url: "https://wenqi-wang20.github.io/SITE-Bench.github.io/", feed: FEED,
+  benchmark: "site-bench", parts: {
+  Loc: { name: 'Localization and positioning', group: 'Task type' },
+  '3D Inf': { name: '3D information understanding', group: 'Task type' },
+  MultiV: { name: 'Multi-view and cross-image reasoning', group: 'Task type' },
+  Rel: { name: 'Spatial relationship reasoning', group: 'Task type' },
+  Mov: { name: 'Movement prediction and navigation', group: 'Task type' },
+}, url: "https://wenqi-wang20.github.io/SITE-Bench.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

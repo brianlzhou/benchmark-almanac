@@ -4,7 +4,15 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://vlm-reasoning.github.io/VCR-Bench/";
 const board: Leaderboard = {
-  benchmark: "vcr-bench", url: "https://vlm-reasoning.github.io/VCR-Bench/", feed: FEED,
+  benchmark: "vcr-bench", parts: {
+  FTR: { name: 'Fundamental temporal reasoning', group: 'Task type' },
+  VTC: { name: 'Video temporal counting', group: 'Task type' },
+  VTG: { name: 'Video temporal grounding', group: 'Task type' },
+  VKR: { name: 'Video knowledge reasoning', group: 'Task type' },
+  TSR: { name: 'Temporal spatial reasoning', group: 'Task type' },
+  VPA: { name: 'Video plot analysis', group: 'Task type' },
+  TSG: { name: 'Temporal spatial grounding', group: 'Task type' },
+}, url: "https://vlm-reasoning.github.io/VCR-Bench/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

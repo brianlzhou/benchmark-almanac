@@ -5,7 +5,9 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://neulab.github.io/Pangea/";
 const board: Leaderboard = {
-  benchmark: "xmmmu", url: "https://neulab.github.io/Pangea/", feed: FEED,
+  benchmark: "xmmmu", parts: {
+  english: { name: 'English', group: 'Language' },
+}, url: "https://neulab.github.io/Pangea/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

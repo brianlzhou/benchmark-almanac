@@ -7,6 +7,10 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://codecap-bench.github.io/";
 const board: Leaderboard = {
  benchmark: "codecap-bench", url: "https://codecap-bench.github.io/", feed: FEED,
+ parts: {
+   dynamicRetention: { name: 'Dynamic retention', group: 'Dimension' },
+   staticRetention: { name: 'Static retention', group: 'Dimension' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

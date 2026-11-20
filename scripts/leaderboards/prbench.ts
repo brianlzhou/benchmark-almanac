@@ -5,7 +5,7 @@
 import type { Leaderboard } from './types.ts';
 import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
-const PAGE = scaleUrl('prbench-legal');
+const PAGE = scaleUrl('prbench');
 
 /** The page prints "61.50 ± 3.10": confidenceInterval_upper is the half-width around the score. */
 const ci = (_: unknown, e: ScaleEntry & { confidenceInterval_upper?: number | null }) => {
@@ -18,7 +18,7 @@ const ci = (_: unknown, e: ScaleEntry & { confidenceInterval_upper?: number | nu
 const board: Leaderboard = {
   benchmark: 'prbench',
   url: PAGE,
-  feed: scaleFeed(PAGE),
+  feed: scaleFeed(PAGE, 'legal'),
   terms: SCALE_TERMS,
   aliases: {
     ...SCALE_ALIASES,
@@ -26,6 +26,6 @@ const board: Leaderboard = {
     // the stable API id, the June 2025 release (the resolver would take the September preview)
     'gemini-2.5-flash': 'gemini-2-5-flash-jun-2025',
   },
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE), ci),
+  fetch: async () => scaleRows(await fetchScaleEntries(PAGE, 'legal'), ci),
 };
 export default board;

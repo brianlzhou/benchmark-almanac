@@ -8,6 +8,9 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/1811.00937";
 const board: Leaderboard = {
   benchmark: "commonsenseqa",
+  parts: {
+    conceptSplit: { name: 'Concept', group: 'Split' },
+  },
   url: "https://arxiv.org/html/1811.00937",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
@@ -15,7 +18,7 @@ const board: Leaderboard = {
   async fetch() {
     const t = tables(await fetchText(FEED)).find(t => t[0]?.some(c=>c.text==='Random split') && t[1]?.some(c=>c.text==='SANITY'));
     if (!t) throw new Error('CommonsenseQA test table missing');
-    return t.slice(2).filter(r=>r.length===5 && r[0].text!=='Human').map(r=>({model:r[0].text,score:num(r[1].text)!,metrics:{sanity:num(r[2].text)!,conceptSplit:num(r[3].text)!}}));
+    return t.slice(2).filter(r=>r.length===5 && r[0].text!=='Human').map(r=>({model:r[0].text,score:num(r[1].text)!,metrics:{sanity:num(r[2].text)!,conceptSplit:num(r[3].text)!,conceptSanity:num(r[4].text)!}}));
   },
 };
 

@@ -4,7 +4,11 @@ import {fetchText} from '../lib/util.ts';
 import {jsLiteral} from '../lib/html.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://udibarzi.github.io/varex-bench/';
-const board:Leaderboard={benchmark:'varex-bench',url:URL,feed:URL,
+const board:Leaderboard={benchmark:'varex-bench', parts: {
+  flat: { name: 'Flat', group: 'Category' },
+  nested: { name: 'Nested', group: 'Category' },
+  table: { name: 'Table', group: 'Category' },
+},url:URL,feed:URL,
  terms:'Public IBM Research project leaderboard; GitHub Pages robots.txt has no restriction on this path.',
  async fetch(){const html=await fetchText(URL);const start=html.indexOf('const models = [');if(start<0)throw new Error('Leaderboard data missing');
  const data=jsLiteral<{model:string;size:string;em:number;anls:number;flat:number;nested:number;table:number;perfect:number}[]>(html,html.indexOf('[',start));

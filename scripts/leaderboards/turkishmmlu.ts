@@ -6,7 +6,12 @@ import { num } from '../lib/html.ts';
 import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://raw.githubusercontent.com/ArdaYueksel/TurkishMMLU/main/README.md";
 const board: Leaderboard = {
- benchmark: "turkishmmlu", url: "https://github.com/ArdaYueksel/TurkishMMLU", feed: FEED,
+ benchmark: "turkishmmlu", parts: {
+  'Natural Sciences': { name: 'Natural sciences', group: 'Domain' },
+  Math: { name: 'Math', group: 'Domain' },
+  'Social Sciences and Humanities': { name: 'Social sciences and humanities', group: 'Domain' },
+  'Turkish L & L': { name: 'Turkish language and literature', group: 'Domain' },
+}, url: "https://github.com/ArdaYueksel/TurkishMMLU", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:{'Llama-3 70B-IT':'llama-3-70b','Llama-3 8B-IT':'llama-3-8b'},
  async fetch() {

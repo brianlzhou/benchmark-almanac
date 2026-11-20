@@ -60,4 +60,13 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  valueAccuracy: { name: 'Value accuracy', group: 'Dimension' },
+  faithfulness: { name: 'Faithfulness', group: 'Dimension' },
+  jsonPass: { name: 'JSON pass', group: 'Dimension' },
+  pathRecall: { name: 'Path recall', group: 'Dimension' },
+  structure: { name: 'Structure', group: 'Dimension' },
+  typeSafety: { name: 'Type safety', group: 'Dimension' },
+  perfect: { name: 'Perfect', group: 'Dimension' },
+};
 export default board;

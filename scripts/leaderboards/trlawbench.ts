@@ -54,4 +54,20 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  'anayasa-hukuku': { name: 'Constitutional law', group: 'Domain' },
+  'ceza-muhakemesi': { name: 'Criminal procedure', group: 'Domain' },
+  'icra-iflas': { name: 'Enforcement and bankruptcy', group: 'Domain' },
+  'idari-yargilama': { name: 'Administrative procedure', group: 'Domain' },
+  'is-hukuku': { name: 'Labor law', group: 'Domain' },
+  'vergi-hukuku': { name: 'Tax law', group: 'Domain' },
+  'medeni-hukuk': { name: 'Civil law', group: 'Domain' },
+  'ceza-genel': { name: 'Criminal law general provisions', group: 'Domain' },
+  'borclar-genel': { name: 'Law of obligations general provisions', group: 'Domain' },
+  'idare-hukuku': { name: 'Administrative law', group: 'Domain' },
+  'ceza-ozel': { name: 'Criminal law special provisions', group: 'Domain' },
+  'borclar-ozel': { name: 'Law of obligations special provisions', group: 'Domain' },
+  'medeni-usul': { name: 'Civil procedure', group: 'Domain' },
+  'ticaret-hukuku': { name: 'Commercial law', group: 'Domain' },
+};
 export default board;

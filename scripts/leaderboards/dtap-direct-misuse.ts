@@ -6,6 +6,22 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://decodingtrust-agent.com/traj-api/benchmark";
 const board: Leaderboard = {
  benchmark: "dtap-direct-misuse",
+ parts: {
+   workflow: { name: 'Workflow', group: 'Environment' },
+   crm: { name: 'CRM', group: 'Environment' },
+   'customer-service': { name: 'Customer service', group: 'Environment' },
+   travel: { name: 'Travel', group: 'Environment' },
+   coding: { name: 'Coding', group: 'Environment' },
+   browser: { name: 'Browser', group: 'Environment' },
+   research: { name: 'Research', group: 'Environment' },
+   'os-filesystem': { name: 'OS filesystem', group: 'Environment' },
+   windows: { name: 'Windows', group: 'Environment' },
+   macos: { name: 'macOS', group: 'Environment' },
+   finance: { name: 'Finance', group: 'Environment' },
+   legal: { name: 'Legal', group: 'Environment' },
+   telecom: { name: 'Telecom', group: 'Environment' },
+   medical: { name: 'Medical', group: 'Environment' },
+ },
  url: "https://decodingtrust-agent.com/leaderboard",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

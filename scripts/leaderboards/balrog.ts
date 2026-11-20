@@ -13,6 +13,14 @@ const unspecified = (name: string) => /^(?:gpt4o|gpt4|gpt4turbo|gpt4v|gpt35turbo
 
 const board: Leaderboard = {
   benchmark: 'balrog',
+  parts: {
+    BabyAI: { name: 'BabyAI', group: 'Environment' },
+    Crafter: { name: 'Crafter', group: 'Environment' },
+    TextWorld: { name: 'TextWorld', group: 'Environment' },
+    BabaIsAI: { name: 'BabaIsAI', group: 'Environment' },
+    MiniHack: { name: 'MiniHack', group: 'Environment' },
+    NetHack: { name: 'NetHack', group: 'Environment' },
+  },
   url: URL,
   feed: `${URL} (default LLM board, % Progress)`,
   terms: 'Static public page; the site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.',

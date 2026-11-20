@@ -8,6 +8,17 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://huggingface.co/spaces/lyx97/TempCompass/resolve/main/file/result.csv";
 const board: Leaderboard = {
  benchmark: "tempcompass",
+ parts: {
+   'Avg. Action': { name: 'Action', group: 'Category' },
+   'Avg. Direction': { name: 'Direction', group: 'Category' },
+   'Avg. Speed': { name: 'Speed', group: 'Category' },
+   'Avg. Event Order': { name: 'Event order', group: 'Category' },
+   'Avg. Attribute Change': { name: 'Attribute change', group: 'Category' },
+   'Avg. Multi-Choice': { name: 'Multiple choice', group: 'Task type' },
+   'Avg. Yes/No': { name: 'Yes/no', group: 'Task type' },
+   'Avg. Caption Matching': { name: 'Caption matching', group: 'Task type' },
+   'Avg. Caption Generation': { name: 'Caption generation', group: 'Task type' },
+ },
  url: "https://huggingface.co/spaces/lyx97/TempCompass/resolve/main/file/result.csv",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

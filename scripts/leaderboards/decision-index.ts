@@ -15,7 +15,18 @@ const FEED = 'https://huggingface.co/spaces/multimodalart/jev-decision-index/res
 
 interface Entry {
   name: string;
-  meta?: { kind?: string };
+  meta?: { kind?: string; served_params?: number; params_estimated?: boolean; params_from_name?: boolean; trained_bytes?: number };
+  completed?: number;
+  coverage?: number;
+  pending?: number;
+  latency_rows?: number;
+  results?: Record<string, unknown>;
+  benchmarks?: Record<string, unknown>;
+  categories?: { id: string }[];
+  counts?: Record<string, number>;
+  gaps?: Record<string, unknown>;
+  frozen_scores?: Record<string, number>;
+  v03?: { parts?: Record<string, number>; eq?: Record<string, number> };
   scores?: { balanced_skill?: number };
   latency?: { median?: number | null };
   calibration?: { ece?: number | null } | null;
@@ -23,6 +34,10 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'decision-index',
+  parts: {
+    'index:parts:same_skills': { name: 'Same skills', note: 'Weighted contribution from private same-skill tests.' },
+    'index:parts:new_domains': { name: 'New domains', note: 'Weighted contribution from private new-domain tests.' },
+  },
   url: 'https://huggingface.co/spaces/multimodalart/jev-decision-index',
   feed: `${FEED} (scores.balanced_skill)`,
   terms: 'JSON in the makers’ static Hugging Face space; the board’s dataset mirror (multimodalart/decision-index-leaderboard) is CC BY 4.0 and the evaluation kit MIT.',
@@ -34,7 +49,7 @@ const board: Leaderboard = {
     y: { key: 'score', label: 'Decision Index (Full)', better: 'higher' },
   },
   async fetch() {
-    const { models } = await fetchJson<{ models: Entry[] }>(FEED);
+    const { models, benchmarks } = await fetchJson<{ models: Entry[]; benchmarks: Record<string, { short: string }> }>(FEED);
     const rows: LeaderboardRow[] = [];
     for (const m of models) {
       const score = m.scores?.balanced_skill;
@@ -42,7 +57,28 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (typeof m.latency?.median === 'number' && m.latency.median > 0) metrics.latency = m.latency.median / 1000;
       if (typeof m.calibration?.ece === 'number') metrics.ece = m.calibration.ece * 100;
-      const extra = Object.keys(metrics).length ? { metrics } : {};
+      function numbers(prefix: string, value: unknown) {
+        if (typeof value === 'number' && Number.isFinite(value)) metrics[prefix] = value;
+        else if (value && typeof value === 'object' && !Array.isArray(value)) {
+          for (const [key, nested] of Object.entries(value)) numbers(prefix + ':' + key, nested);
+        }
+      }
+      for (const key of ['completed', 'coverage', 'pending', 'latency_rows', 'counts', 'gaps', 'scores', 'frozen_scores', 'calibration'] as const) numbers(key, m[key]);
+      numbers('index', m.v03);
+      for (const [key, value] of Object.entries(m.latency ?? {})) {
+        if (typeof value === 'number') metrics['latencySeconds:' + key] = value / 1000;
+      }
+      for (const category of m.categories ?? []) numbers('area:' + category.id, category);
+      for (const source of ['benchmarks', 'results'] as const) {
+        for (const [id, value] of Object.entries(m[source] ?? {})) numbers(source + ':' + (benchmarks[id]?.short ?? id), value);
+      }
+      for (const flag of ['params_estimated', 'params_from_name'] as const) {
+        const value = m.meta?.[flag];
+        if (typeof value === 'boolean') metrics[flag] = Number(value);
+      }
+      numbers('trainedBytes', m.meta?.trained_bytes);
+      const count = m.meta?.served_params;
+      const extra = { metrics, params: typeof count === 'number' && count > 0 ? count / 1e9 : undefined };
       // "Decider chat · Gemma-4-31B": an inference technique run on a stock model, kept like a harness
       const parts = m.meta?.kind === 'inference technique' ? m.name.split(' · ') : [];
       if (parts.length === 2) rows.push({ model: parts[1].replace(/\s*\([^)]*\)$/, '').trim(), harness: parts[0].trim(), score, ...extra });

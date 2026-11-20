@@ -4,7 +4,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = "https://alibaba-damo-academy.github.io/WorldOlympiad";
 const board: Leaderboard = {
-  benchmark: "worldolympiad", url: URL, feed: URL,
+  benchmark: "worldolympiad", parts: {
+  physical: { name: 'Physical', group: 'Dimension' },
+  consistency3d: { name: '3D consistency', group: 'Dimension' },
+  clip: { name: 'CLIP', group: 'Dimension' },
+  interaction: { name: 'Interaction', group: 'Dimension' },
+}, url: URL, feed: URL,
   terms: "The project site states MIT licensing; no robots.txt on the maker site.",
   async fetch() {
     const table = tables(await fetchText(URL)).map(t => t.map(r => r.map(c => c.text))).find(t => t[0]?.some(c => c.includes("Physical")));

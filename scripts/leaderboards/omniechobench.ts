@@ -7,6 +7,13 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/PKU-VaLuE-Lab/OmniEcho/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "omniechobench",
+  parts: {
+    cameraRotation: { name: 'Camera rotation', group: 'Task type' },
+    sourceDirection: { name: 'Source direction', group: 'Task type' },
+    localization3d: { name: '3D localization', group: 'Task type' },
+    sourceMotion: { name: 'Source motion', group: 'Task type' },
+    cognitiveMap: { name: 'Cognitive map', group: 'Task type' },
+  },
   url: "https://pku-value-lab.github.io/OmniEcho/leaderboard/",
   feed: FEED,
   terms: "Public maker README results; no additional reading restriction stated; raw.githubusercontent.com has no robots.txt.",

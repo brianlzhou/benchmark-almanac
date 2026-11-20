@@ -7,6 +7,10 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://tracelite.ai/data/leaderboard.json";
 const board: Leaderboard = {
   benchmark: "tracetrial-bench",
+  parts: {
+    agentScore: { name: 'Agent score', group: 'Dimension' },
+    harnessMacro: { name: 'Harness macro', group: 'Dimension' },
+  },
   url: "https://tracelite.ai/leaderboard.html",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

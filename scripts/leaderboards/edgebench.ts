@@ -9,6 +9,13 @@ const FEED = "https://raw.githubusercontent.com/ByteDance-Seed/EdgeBench/HEAD/RE
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "edgebench",
+  parts: {
+    scientific_ml: { name: 'Scientific machine learning', group: 'Domain' },
+    systems_se: { name: 'Systems software engineering', group: 'Domain' },
+    optimization: { name: 'Optimization', group: 'Domain' },
+    knowledge: { name: 'Knowledge', group: 'Domain' },
+    formal: { name: 'Formal', group: 'Domain' },
+  },
   url: "https://github.com/ByteDance-Seed/EdgeBench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

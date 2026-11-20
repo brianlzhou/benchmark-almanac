@@ -9,6 +9,12 @@ const FEED = "https://livemathematicianbench.github.io/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "livemathematicianbench",
+  parts: {
+    month_202603: { name: 'March 2026', group: 'Split' },
+    month_202604: { name: 'April 2026', group: 'Split' },
+    month_202605: { name: 'May 2026', group: 'Split' },
+    month_202606: { name: 'June 2026', group: 'Split' },
+  },
   url: "https://livemathematicianbench.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at livemathematicianbench.github.io; retain source attribution and follow the upstream terms.",

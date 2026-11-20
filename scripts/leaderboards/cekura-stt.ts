@@ -1,2 +1,7 @@
 import {cekuraBoard} from '../lib/boards/cekura.ts';
-export default cekuraBoard('cekura-stt','stt');
+const board = cekuraBoard('cekura-stt','stt');
+board.parts = {
+  publicWerPercent: { name: 'Public', group: 'Split' },
+  privateWerPercent: { name: 'Private', group: 'Split' },
+};
+export default board;

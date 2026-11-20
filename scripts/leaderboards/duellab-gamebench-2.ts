@@ -23,7 +23,24 @@ const board: Leaderboard = {
         const score = num(r[si]?.text); if (score === undefined) continue;
         const metrics: Record<string, number> = {};
         for (const [key, label] of [['costPerPlayer','Cost / player'],['strength','Strength'],['best','Best']]) { const v = num(r[head.indexOf(label)]?.text); if (v !== undefined) metrics[key] = v; }
-        out.push({model: identity(r[mi].text), score, setting: [head.includes('Score so far') ? 'pending' : 'ranked', r[head.indexOf('Reasoning')]?.text, r[head.indexOf('Why not ranked')]?.text].filter(Boolean).join('; '), metrics});
+        const byGame = r[head.indexOf('By game')]?.html.match(/aria-label="Per-game scores: ([^"]+)"/)?.[1] ?? '';
+        for (const m of byGame.matchAll(/(GB2-\d+):\s*([\d.]+)/g)) {
+          metrics[m[1]] = Number(m[2]);
+          (board.parts ??= {})[m[1]] = { name: m[1], group: 'Game' };
+        }
+        const wdl = r[head.indexOf('W / D / L')]?.text.match(/([\d,]+)\s*\/\s*([\d,]+)\s*\/\s*([\d,]+)/);
+        if (wdl) ['wins','draws','losses'].forEach((key, i) => { metrics[key] = Number(wdl[i + 1].replace(/,/g, '')); });
+        const coverage = r[head.indexOf('Opponents played')]?.attrs['data-coverage'];
+        if (coverage && Number.isFinite(Number(coverage))) metrics.opponentCoverage = Number(coverage) * 100;
+        const costText = r[head.indexOf('Cost / player')]?.html ?? '';
+        const observed = costText.match(/Based on (\d+) observed generation/);
+        const totalCost = costText.match(/total for recorded runs \$([\d.,]+)/i);
+        if (observed) metrics.pricedRuns = Number(observed[1]);
+        if (totalCost) metrics.totalCost = Number(totalCost[1].replace(/,/g, ''));
+        const codegen = r[head.indexOf('Codegen')]?.html.match(/([\d.]+)% worked first try, ([\d.]+)% worked after repair or resend, ([\d.]+)% failed across n=(\d+)/);
+        if (codegen) ['firstTry','afterRepair','failed','testedPrograms'].forEach((key, i) => { metrics[key] = Number(codegen[i + 1]); });
+        const link = r[mi].html.match(/href="(model-[^"]+)"/)?.[1];
+        out.push({link: link ? new URL(link, FEED).href : undefined, model: identity(r[mi].text), score, setting: [head.includes('Score so far') ? 'pending' : 'ranked', r[head.indexOf('Reasoning')]?.text, r[head.indexOf('Why not ranked')]?.text].filter(Boolean).join('; '), metrics});
       }
     }
     if (!out.length) throw new Error('DuelLab standings missing');

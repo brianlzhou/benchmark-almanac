@@ -17,6 +17,20 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'paperbenchx',
+  parts: {
+    '01-rf-antennas-and-arrays:all:full': { name: 'RF antennas and arrays', group: 'Domain' },
+    '02-rf-metasurfaces-and-scattering:all:full': { name: 'RF metasurfaces and scattering', group: 'Domain' },
+    '03-rf-filters-and-frequency-selective-surfaces:all:full': { name: 'RF filters and frequency selective surfaces', group: 'Domain' },
+    '04-integrated-photonic-devices:all:full': { name: 'Integrated photonic devices', group: 'Domain' },
+    '05-photonic-crystals-and-topological-photonics:all:full': { name: 'Photonic crystals and topological photonics', group: 'Domain' },
+    '06-optical-metasurfaces-gratings-and-plasmonics:all:full': { name: 'Optical metasurfaces gratings and plasmonics', group: 'Domain' },
+    '07-optical-computing-and-signal-processing:all:full': { name: 'Optical computing and signal processing', group: 'Domain' },
+    '08-optical-resonators-filters-and-tunable-devices:all:full': { name: 'Optical resonators filters and tunable devices', group: 'Domain' },
+    '09-computational-chemistry:all:full': { name: 'Computational chemistry', group: 'Domain' },
+    '10-computational-materials-science:all:full': { name: 'Computational materials science', group: 'Domain' },
+    '11-computational-biology-and-bioinformatics:all:full': { name: 'Computational biology and bioinformatics', group: 'Domain' },
+    '12-robotics-and-embodied-ai:all:full': { name: 'Robotics and embodied AI', group: 'Domain' },
+  },
   url: PAGE,
   feed: `${FEED} (module "all", all:full)`,
   terms: 'Static data script on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',

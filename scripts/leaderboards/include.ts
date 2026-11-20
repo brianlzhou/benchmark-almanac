@@ -43,7 +43,8 @@ const board: Leaderboard = {
         let model = clean(r[0] ?? "");
         if (/^(?:Qwen2\.5-(?:14|7)B|Llama-3\.1-8B|Gemma-7B|Mistral-7B)$/i.test(model)) model += ' (base)';
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
-        const row: LeaderboardRow = { model: identity(model), score: value * 1 };
+        const size = model.match(/-(\d+(?:\.\d+)?)B\b/i);
+        const row: LeaderboardRow = { model: identity(model), score: value, params: size ? Number(size[1]) : undefined };
         row.setting = "original-language instructions";
         rows.push(row);
       }
@@ -56,7 +57,8 @@ const board: Leaderboard = {
         let model = clean(r[0] ?? "");
         if (/^(?:Qwen2\.5-(?:14|7)B|Llama-3\.1-8B|Gemma-7B|Mistral-7B)$/i.test(model)) model += ' (base)';
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
-        const row: LeaderboardRow = { model: identity(model), score: value * 1 };
+        const size = model.match(/-(\d+(?:\.\d+)?)B\b/i);
+        const row: LeaderboardRow = { model: identity(model), score: value, params: size ? Number(size[1]) : undefined };
         row.setting = "English instructions";
         rows.push(row);
       }

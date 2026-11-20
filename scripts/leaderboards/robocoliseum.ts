@@ -17,8 +17,14 @@ interface Page {
 
 const board: Leaderboard = {
   benchmark: 'robocoliseum',
+  parts: {
+    instruction: { name: 'Instruction', group: 'Category' },
+    spatial: { name: 'Spatial', group: 'Category' },
+    manip: { name: 'Manipulation', group: 'Category' },
+    robust: { name: 'Robustness', group: 'Category' },
+  },
   url: 'https://robocoliseum.ai/leaderboard',
-  feed: `${API}?page=N&per-page=100 (overall score)`,
+  feed: `${API}?page=N&per-page=100&model_type=all (overall score)`,
   terms: "Public JSON the leaderboard page reads; robocoliseum.ai serves no robots.txt rules (the path returns the app) and publishes no terms for the board.",
   aliases: {
     'Muse Wonder 1.0': 'muse-wonder',
@@ -26,7 +32,7 @@ const board: Leaderboard = {
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (let page = 1; page <= 20; page++) {
-      const data = await fetchJson<Page>(`${API}?page=${page}&per-page=100`);
+      const data = await fetchJson<Page>(`${API}?page=${page}&per-page=100&model_type=all`);
       // "π₀.₅" to "pi0.5": the resolver's name key keeps ASCII letters and digits only
       const name = (n: string) => n.normalize('NFKC').replace(/π/g, 'pi');
       for (const e of data.items) {

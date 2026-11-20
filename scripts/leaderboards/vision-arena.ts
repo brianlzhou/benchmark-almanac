@@ -5,6 +5,17 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lm
 
 const board: Leaderboard = {
   benchmark: 'vision-arena',
+  parts: {
+    'cat:captioning': { name: 'Captioning', group: 'Task' },
+    'cat:chinese': { name: 'Chinese', group: 'Language' },
+    'cat:creative_writing_vision': { name: 'Creative writing (vision)', group: 'Task' },
+    'cat:diagram': { name: 'Diagram', group: 'Task' },
+    'cat:english': { name: 'English', group: 'Language' },
+    'cat:entity_recognition': { name: 'Entity recognition', group: 'Task' },
+    'cat:homework': { name: 'Homework', group: 'Task' },
+    'cat:humor': { name: 'Humor', group: 'Task' },
+    'cat:ocr': { name: 'OCR', group: 'Task' },
+  },
   url: 'https://arena.ai/leaderboard/chat/vision',
   feed: arenaFeed('vision_style_control', '*'),
   terms: ARENA_TERMS,

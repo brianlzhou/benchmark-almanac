@@ -8,6 +8,10 @@ const FEED = "https://arxiv.org/html/2312.14135";
 
 const board: Leaderboard = {
   benchmark: "v",
+  parts: {
+    attribute: { name: 'Attribute', group: 'Task type' },
+    spatial: { name: 'Spatial', group: 'Task type' },
+  },
   url: "https://vstar-seal.github.io/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

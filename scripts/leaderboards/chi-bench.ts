@@ -6,6 +6,11 @@ import { text } from '../lib/html.ts';
 const FEED = "https://www.actava.ai/benchmarks/leaderboards";
 const board: Leaderboard = {
  benchmark: "chi-bench",
+ parts: {
+   priorAuthorization: { name: 'Prior authorization', group: 'Task type' },
+   utilizationManagement: { name: 'Utilization management', group: 'Task type' },
+   careManagement: { name: 'Care management', group: 'Task type' },
+ },
  url: "https://www.actava.ai/benchmarks/leaderboards",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

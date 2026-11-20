@@ -6,6 +6,10 @@ import { fetchText } from '../lib/util.ts';
 const PAGE='https://evals.futuresearch.ai/';
 const unquote=(s:string)=>s.replace(/\\(u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|[\s\S])/g,(_,e:string)=>e.length>1?String.fromCharCode(parseInt(e.slice(1),16)):({n:'\n',t:'\t',r:'\r',b:'\b',f:'\f',v:'\v',0:'\0'} as Record<string,string>)[e]??e);
 const board:Leaderboard={benchmark:'btf-3',url:PAGE+'#btf3',feed:PAGE+' (current app/page bundle: pooled scores and forecast costs)',
+parts: {
+  binaryBrier: { name: 'Binary', group: 'Task type' },
+  numericRps: { name: 'Numeric', group: 'Task type' },
+},
  terms:'FutureSearch terms restrict automated extraction; Benchmark Almanac credits FutureSearch and links the source.',
  chart:{title:'Pooled score vs. forecast cost',note:'Score uses the full cohort. Cost is mean agent LLM spend per forecast on the August 2026 cohort.',x:{key:'cost',label:'Cost per forecast',unit:'$',better:'lower'},y:{key:'score',label:'Pooled score',better:'lower'}},
  async fetch():Promise<LeaderboardRow[]> {

@@ -2,7 +2,7 @@
 // the overall accuracy without and with subtitles (0 to 100), then short, medium and long video splits.
 // The page sorts by the with-subtitles overall; Epoch AI and many model cards report the frames-only score
 // instead, so both overalls are kept as separate rows with the variant as the setting. The model cell holds
-// the name (a link) above its organization; the Date column is passed on for snapshot matching.
+// the model link. Keep its language model size and the frame sampling used for each subtitle setting.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables, text } from '../lib/html.ts';
@@ -11,6 +11,11 @@ const PAGE = 'https://video-mme.github.io/home_page.html';
 
 const board: Leaderboard = {
   benchmark: 'video-mme',
+  parts: {
+    short: { name: 'Short', group: 'Length' },
+    medium: { name: 'Medium', group: 'Length' },
+    long: { name: 'Long', group: 'Length' },
+  },
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (static HTML table, Overall without and with subtitles)`,
   terms: 'Static GitHub Pages site that states no terms; the scores are cited to the Video-MME team.',
@@ -46,7 +51,20 @@ const board: Leaderboard = {
           const value = num(r[column + offset]?.text);
           if (value !== undefined) metrics[key] = value;
         }
-        rows.push({ model, score, setting, date, metrics });
+        const params = r[2]?.text.match(/^(\d+(?:\.\d+)?)B$/);
+        const experts = r[2]?.text.match(/^(\d+)[×x](\d+(?:\.\d+)?)B$/);
+        if (params) metrics.languageModelParamsB = Number(params[1]);
+        if (experts) {
+          metrics.experts = Number(experts[1]);
+          metrics.paramsPerExpertB = Number(experts[2]);
+        }
+        const frames = text(r[3]?.html.replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/gi, '') ?? '');
+        if (/^\d+$/.test(frames)) metrics.frames = Number(frames);
+        const fps = frames.match(/^(\d+(?:\.\d+)?) fps$/i);
+        if (fps) metrics.framesPerSecond = Number(fps[1]);
+        const sampling = /^\d+$/.test(frames) ? frames + ' frames' : frames;
+        const link = r[1]?.html.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1];
+        rows.push({ model, score, setting: [setting, sampling === '-' ? undefined : sampling].filter(Boolean).join(', '), date, link, metrics });
       }
     }
     return rows;

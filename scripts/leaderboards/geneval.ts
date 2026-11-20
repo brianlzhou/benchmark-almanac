@@ -6,7 +6,13 @@ import { num, text } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/djghosh13/geneval/main/README.md";
 const board: Leaderboard = {
- benchmark: "geneval", url: "https://github.com/djghosh13/geneval", feed: FEED,
+ benchmark: "geneval", parts: {
+  singleObject: { name: 'Single object', group: 'Task type' },
+  twoObjects: { name: 'Two objects', group: 'Task type' },
+  colors: { name: 'Colors', group: 'Task type' },
+  position: { name: 'Position', group: 'Task type' },
+  colorAttribution: { name: 'Color attribution', group: 'Task type' },
+}, url: "https://github.com/djghosh13/geneval", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

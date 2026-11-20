@@ -1,5 +1,5 @@
 // AGIEval: the official README publishes English, Chinese and all-task averages, with zero/few-shot
-// settings. Keep v1.1 AGIEval-all averages; language averages are metrics. Exclude v1.0.
+// settings. Keep v1.1 AGIEval-all averages; language averages are metrics and the Source column links the evaluation. Exclude v1.0.
 // Undated API names are marked unspecified so the resolver cannot assign a later snapshot.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -7,7 +7,10 @@ import { num } from '../lib/html.ts';
 
 const FEED = "https://raw.githubusercontent.com/ruixiangcui/AGIEval/main/README.md";
 const board: Leaderboard = {
- benchmark: "agieval", url: "https://github.com/ruixiangcui/AGIEval", feed: FEED,
+ benchmark: "agieval", parts: {
+  en: { name: 'English', group: 'Language' },
+  zh: { name: 'Chinese', group: 'Language' },
+}, url: "https://github.com/ruixiangcui/AGIEval", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {
@@ -20,7 +23,8 @@ for(const block of md.split(/^## /m).slice(1)) {
   const score=num(c[2]);if(score===undefined)continue;
   const old=c[0].endsWith('*');let model=c[0].replace(/\*$/,'').trim();
   if(/^(GPT-4o|GPT-3\.5-Turbo|Mistral 7b)$/i.test(model))model+=' [snapshot unspecified]';
-  rows.push({model,score,setting:`${old?'v1.0':'v1.1'}; ${setting}`});
+  const link = c[1].match(/\[Link\]\((https?:\/\/[^)]+)\)/i)?.[1];
+  rows.push({model,score,link,setting:`${old?'v1.0':'v1.1'}; ${setting}`});
  }
 }
 const overall=rows.filter(r=>/^v1\.1; AGIEval-all /.test(r.setting??''));

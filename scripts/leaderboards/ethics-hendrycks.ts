@@ -17,7 +17,19 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/hendrycks/ethics/master/README.md";
 const board: Leaderboard = {
-  benchmark: "ethics-hendrycks", url: "https://raw.githubusercontent.com/hendrycks/ethics/master/README.md", feed: FEED,
+  benchmark: "ethics-hendrycks", parts: {
+  Justice: { name: 'Justice', group: 'Category' },
+  Deontology: { name: 'Deontology', group: 'Category' },
+  'Virtue Ethics': { name: 'Virtue ethics', group: 'Category' },
+  Utilitarianism: { name: 'Utilitarianism', group: 'Category' },
+  Commonsense: { name: 'Commonsense', group: 'Category' },
+  hard: { name: 'Hard', group: 'Difficulty' },
+  hard_justice: { name: 'Hard justice', group: 'Category' },
+  hard_deontology: { name: 'Hard deontology', group: 'Category' },
+  hard_virtue_ethics: { name: 'Hard virtue ethics', group: 'Category' },
+  hard_utilitarianism: { name: 'Hard utilitarianism', group: 'Category' },
+  hard_commonsense: { name: 'Hard commonsense', group: 'Category' },
+}, url: "https://raw.githubusercontent.com/hendrycks/ethics/master/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

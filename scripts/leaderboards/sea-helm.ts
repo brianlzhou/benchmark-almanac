@@ -37,7 +37,22 @@ const board: Leaderboard = {
     const start = html.indexOf('seaRows:');
     const end = html.indexOf('],langRows:', start);
     if (start < 0 || end < 0) throw new Error('seaRows not found in the SEA-HELM page');
-    const runs: { model: string; reasoning: boolean; score: number; ci?: number; low?: number; high?: number }[] = [];
+    const languages: Record<string, string> = { my: 'Burmese', tl: 'Tagalog', id: 'Indonesian', ms: 'Malay', ta: 'Tamil', th: 'Thai', vi: 'Vietnamese' };
+    board.parts = Object.fromEntries(Object.entries(languages).map(([key, name]) => [key, { name, group: 'Language' }]));
+    const perLanguage = new Map<string, Record<string, number>>();
+    for (const chunk of html.slice(end + 2).split('],', 1)[0].split(/\$R\[\d+\]=\{/).slice(1)) {
+      const model = chunk.match(/,model:"([^"]+)"/)?.[1];
+      const lang = chunk.match(/,language:"([^"]+)"/)?.[1];
+      if (!model || !lang || !languages[lang]) continue;
+      const key = model + ':' + /isReasoning:1/.test(chunk);
+      const metrics = perLanguage.get(key) ?? {};
+      for (const [field, suffix] of [['mean', ''], ['ci95Lower', 'Low'], ['ci95Upper', 'High']]) {
+        const value = Number(chunk.match(new RegExp(',' + field + ':([\\d.]+)'))?.[1]);
+        if (Number.isFinite(value)) metrics[lang + suffix] = value;
+      }
+      perLanguage.set(key, metrics);
+    }
+    const runs: { raw: string; params?: number; model: string; reasoning: boolean; score: number; ci?: number; low?: number; high?: number }[] = [];
     for (const chunk of html.slice(start, end).split(/\$R\[\d+\]=\{/).slice(1)) {
       const model = chunk.match(/(?:^|,)model:"([^"]+)"/)?.[1];
       const mean = Number(chunk.match(/,mean:([\d.]+)/)?.[1]);
@@ -45,16 +60,16 @@ const board: Leaderboard = {
       const lo = Number(chunk.match(/,ci95Lower:([\d.]+)/)?.[1]);
       const hi = Number(chunk.match(/,ci95Upper:([\d.]+)/)?.[1]);
       const ci = Number.isFinite(lo) && Number.isFinite(hi) && hi >= lo ? (hi - lo) / 2 : undefined;
-      runs.push({ model: model.replace(/[-_](FP8|BF16|NVFP4|bf16|fp8)$/i, ''), reasoning: /isReasoning:1/.test(chunk), score: mean, ci, ...(ci !== undefined ? { low: lo, high: hi } : {}) });
+      const size = Number(chunk.match(/,modelSize:([\d.]+)/)?.[1]);
+      runs.push({ raw: model, params: Number.isFinite(size) ? size : undefined, model: model.replace(/[-_](FP8|BF16|NVFP4|bf16|fp8)$/i, ''), reasoning: /isReasoning:1/.test(chunk), score: mean, ci, ...(ci !== undefined ? { low: lo, high: hi } : {}) });
     }
     if (!runs.length) throw new Error('no SEA-HELM rows');
-    const both = new Set(runs.filter((r) => r.reasoning).map((r) => r.model).filter((m) => runs.some((r) => r.model === m && !r.reasoning)));
     return runs.map((r) => ({
       model: r.model,
-      low: r.low, high: r.high,
+      params: r.params, low: r.low, high: r.high,
       score: Math.round(r.score * 100) / 100,
-      setting: both.has(r.model) ? (r.reasoning ? 'thinking' : 'non-thinking') : undefined,
-      ...(r.ci !== undefined ? { metrics: { ci: r.ci } } : {}),
+      setting: r.reasoning ? 'thinking' : 'non-thinking',
+      metrics: { ...perLanguage.get(r.raw + ':' + r.reasoning), ...(r.ci !== undefined ? { ci: r.ci } : {}) },
     }));
   },
 };

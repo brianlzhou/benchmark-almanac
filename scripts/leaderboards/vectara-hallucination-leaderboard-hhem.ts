@@ -100,6 +100,8 @@ const board: Leaderboard = {
       const think = /-Think$/.test(model);
       if (think) model = model.replace(/-Think$/, '');
       const metrics: Record<string, number> = {};
+      const factualConsistency = num(r['Factual Consistency Rate']);
+      if (factualConsistency !== undefined) metrics.factualConsistency = factualConsistency;
       const answerRate = num(r['Answer Rate']);
       const summaryWords = num(r['Average Summary Length (Words)']);
       if (answerRate !== undefined) metrics.answerRate = answerRate;

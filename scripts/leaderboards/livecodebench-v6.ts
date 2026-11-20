@@ -5,7 +5,7 @@
 // so that window is the score here. livecodebench-v5.ts reads the same file with the v5 window. Models
 // released inside the window are flagged "contaminated" on the page but still scored, so they are kept.
 // A model's release_date in the file is its training cutoff, used for that flag, not a run date, so it is
-// not passed on (it would make the resolver pick the wrong snapshot). Dated names get aliases instead.
+// not passed on. Keep pass@1 by difficulty and platform within the selected window.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -14,8 +14,8 @@ export const LCB_PAGE = 'https://livecodebench.github.io/leaderboard.html';
 export const LCB_TERMS = 'Static JSON on the LiveCodeBench project site; the LiveCodeBench repository is MIT-licensed.';
 
 interface Data {
-  performances: { model: string; date: number; 'pass@1': number }[];
-  models: { model_repr: string }[];
+  performances: { model: string; date: number; difficulty: string; platform: string; 'pass@1': number }[];
+  models: { model_repr: string; link?: string }[];
 }
 
 /** Board names the shared resolver cannot place. */
@@ -33,15 +33,32 @@ export const LCB_ALIASES: Record<string, string> = {
 };
 
 /** Mean pass@1 per model over problems released on or after `start` and before `end` (YYYY-MM-DD). */
+export const LCB_PARTS = {
+  easy: { name: 'Easy', group: 'Difficulty' },
+  medium: { name: 'Medium', group: 'Difficulty' },
+  hard: { name: 'Hard', group: 'Difficulty' },
+  leetcode: { name: 'LeetCode', group: 'Platform' },
+  codeforces: { name: 'Codeforces', group: 'Platform' },
+  atcoder: { name: 'AtCoder', group: 'Platform' },
+};
+
 export async function lcbRows(start: string, end: string): Promise<LeaderboardRow[]> {
   const data = await fetchJson<Data>(LCB_FEED);
   const from = Date.parse(start);
   const to = Date.parse(end);
   const rows: LeaderboardRow[] = [];
   for (const m of data.models) {
-    const scores = data.performances.filter((p) => p.model === m.model_repr && p.date >= from && p.date < to).map((p) => p['pass@1']);
+    const problems = data.performances.filter((p) => p.model === m.model_repr && p.date >= from && p.date < to);
+    const scores = problems.map((p) => p['pass@1']);
     if (!scores.length) continue;
+    const metrics: Record<string, number> = { problems: scores.length };
+    for (const key of Object.keys(LCB_PARTS)) {
+      const subset = problems.filter((p) => p.difficulty === key || p.platform === key);
+      if (subset.length) metrics[key] = subset.reduce((sum, p) => sum + p['pass@1'], 0) / subset.length;
+    }
     rows.push({
+      metrics,
+
       model: m.model_repr.replace(/\(Med\)$/, '(Medium)'),
       score: Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1)),
     });
@@ -52,6 +69,7 @@ export async function lcbRows(start: string, end: string): Promise<LeaderboardRo
 
 const board: Leaderboard = {
   benchmark: 'livecodebench-v6',
+  parts: LCB_PARTS,
   url: LCB_PAGE,
   feed: `${LCB_FEED} (problems from 2024-08-01 to 2025-05-01)`,
   terms: LCB_TERMS,

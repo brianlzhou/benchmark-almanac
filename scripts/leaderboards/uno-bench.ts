@@ -6,7 +6,13 @@ import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://meituan-longcat.github.io/UNO-Bench/";
 const board: Leaderboard = {
-  benchmark: "uno-bench",
+  benchmark: "uno-bench", measures: { omniMC: 'omni-mc' },
+  parts: {
+    audio: { name: 'Audio', group: 'Modality' },
+    visual: { name: 'Visual', group: 'Modality' },
+    omniMC: { name: 'Omni multiple choice', group: 'Task type' },
+    omniMO: { name: 'Omni multi step open questions', group: 'Task type' },
+  },
   url: "https://meituan-longcat.github.io/UNO-Bench/",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

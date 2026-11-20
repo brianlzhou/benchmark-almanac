@@ -2,6 +2,9 @@
 // Score: published domain average. 
 import type { Leaderboard } from './types.ts';
 import { sourceBoard, trackRows } from '../lib/boards/dataprep-bench.ts';
-const board: Leaderboard = { benchmark: "dataprep-bench-law", url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,
+const board: Leaderboard = { benchmark: "dataprep-bench-law", parts: {
+  LegalBench_1: { name: 'LegalBench', group: 'Split' },
+  LexGLUE_2: { name: 'LexGLUE', group: 'Split' },
+}, url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,
  fetch: () => trackRows("; Law;", "; Law; downstream average") };
 export default board;

@@ -1,7 +1,6 @@
 // NYT Connections, extended version (Lech Mazur). The board is the markdown table under "Leaderboard: Extended
 // Version" in the lechmazur/nyt-connections README: models that completed all 940 puzzles, ranked by Score %
-// (0 to 100), which is the score. The "Newest 100 puzzles" and "Older models" tables are other views and are
-// not read. Names carry the reasoning effort in parentheses ("GPT-6 Astra (max reasoning)"), which the
+// (0 to 100), which is the score. The newest 100 puzzles form a part. Comparison tables supply run statistics. Names carry the reasoning effort in parentheses ("GPT-6 Astra (max reasoning)"), which the
 // resolver splits off as the setting. Two other spellings of a setting are split here: Anthropic's thinking
 // budget ("Claude Opus 4.6 Thinking 16K") and xAI's mode, bare or in parentheses ("Grok 4.1 Fast
 // Non-Reasoning", "Grok 4.20 0309 (Reasoning)"). Beta and experimental snapshots
@@ -78,15 +77,59 @@ const REPO = 'nyt-connections';
 
 const board: Leaderboard = {
   benchmark: 'nyt-connections-extended',
+  parts: { newest100: { name: 'Newest 100 puzzles', group: 'Puzzle date' } },
   url: `https://github.com/lechmazur/${REPO}`,
   feed: `${ghRaw(`lechmazur/${REPO}`, 'README.md', 'master')} (Leaderboard: Extended Version, Score %)`,
   terms: LECH_MAZUR_TERMS(REPO),
   aliases: LECH_MAZUR_ALIASES,
   async fetch() {
     const rows: LeaderboardRow[] = [];
-    for (const r of await lechMazurTable(REPO, 'master', /^Leaderboard: Extended Version$/)) {
+    const md = await fetchText(ghRaw('lechmazur/' + REPO, 'README.md', 'master'));
+    const tables = mdTables(md);
+    const full = tables.find(t => t.heading === 'Leaderboard: Extended Version');
+    if (!full) throw new Error('Extended Version table missing');
+    const newest = tables.find(t => t.heading.startsWith('Leaderboard: Newest 100'));
+    const recent = new Map((newest ? mdRecords(newest) : []).map(r => [r.Model, Number(r['Score %'])]));
+    const byName = new Map<string, LeaderboardRow>();
+    for (const r of mdRecords(full)) {
       const score = Number(r['Score %']);
-      if (r.Model && Number.isFinite(score)) rows.push({ ...lechMazurName(r.Model), score });
+      if (!r.Model || !Number.isFinite(score)) continue;
+      const metrics: Record<string, number> = { rank: Number(r.Rank), puzzles: Number(r['#Puzzles']) };
+      const subset = recent.get(r.Model);
+      if (subset != null && Number.isFinite(subset)) metrics.newest100 = subset;
+      const row = { ...lechMazurName(r.Model), score, metrics };
+      rows.push(row);
+      byName.set(r.Model, row);
+    }
+    const high = tables.find(t => t.head.includes('Standard-price cost/puzzle'));
+    for (const r of high ? mdRecords(high) : []) {
+      const row = byName.get(r['Model (high reasoning)'] + ' (high reasoning)');
+      if (!row) continue;
+      const price = r['Standard-price cost/puzzle'].match(/^\$([\d.]+)$/);
+      if (price) row.cost = Number(price[1]);
+      if (/^\d+$/.test(r['Fully solved'])) row.metrics!.fullySolved = Number(r['Fully solved']);
+    }
+    for (const t of tables.filter(t => t.head[0] === 'Metric')) {
+      for (const [col, name] of t.head.entries()) {
+        const row = byName.get(name) ?? byName.get('ByteDance ' + name);
+        if (!row) continue;
+        for (const cells of t.rows) {
+          const cell = cells[col]?.replace(/[$,]/g, '');
+          if (!cell || !Number.isFinite(Number(cell))) continue;
+          if (/^Estimated cost per/.test(cells[0])) row.cost = Number(cell);
+          if (cells[0] === 'Mean output tokens per priced response') row.tokens = Number(cell);
+          if (cells[0] === 'Fully solved, all 940 puzzles') row.metrics!.fullySolved = Number(cell);
+          if (cells[0] === 'Fully solved, newest 100 puzzles') row.metrics!.newest100Solved = Number(cell);
+          if (cells[0] === 'Estimated total cost') row.metrics!.estimatedTotalCost = Number(cell);
+        }
+      }
+    }
+    const gemini = md.match(/Neon's estimated cost per response is ([\d.]+)¢,[\s\S]{0,80}?Carbon's ([\d.]+)¢/);
+    if (gemini) {
+      for (const [name, cents] of [['Neon', gemini[1]], ['Carbon', gemini[2]]]) {
+        const row = byName.get('Gemini 4 ' + name + ' (high reasoning)');
+        if (row) row.cost = Number(cents) / 100;
+      }
     }
     return rows;
   },

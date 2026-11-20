@@ -10,6 +10,16 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 const FEED = "https://arxiv.org/html/2308.03688";
 const board: Leaderboard = {
  benchmark: "agentbench",
+ parts: {
+   os: { name: 'OS', group: 'Environment', unit: '%' },
+   database: { name: 'Database', group: 'Environment', unit: '%' },
+   knowledgeGraph: { name: 'Knowledge graph', group: 'Environment', unit: '%' },
+   cardGame: { name: 'Card game', group: 'Environment', unit: '%' },
+   lateralThinking: { name: 'Lateral thinking', group: 'Environment', unit: '%' },
+   houseHolding: { name: 'House holding', group: 'Environment', unit: '%' },
+   webShopping: { name: 'Web shopping', group: 'Environment', unit: '%' },
+   webBrowsing: { name: 'Web browsing', group: 'Environment', unit: '%' },
+ },
  url: "https://arxiv.org/html/2308.03688",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

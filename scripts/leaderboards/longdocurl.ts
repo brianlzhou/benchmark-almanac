@@ -8,6 +8,11 @@ const FEED = "https://raw.githubusercontent.com/dengc2023/LongDocURL/HEAD/README
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "longdocurl",
+  parts: {
+    Understanding: { name: 'Understanding', group: 'Task type' },
+    Reasoning: { name: 'Reasoning', group: 'Task type' },
+    Locating: { name: 'Locating', group: 'Task type' },
+  },
   url: "https://github.com/dengc2023/LongDocURL",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

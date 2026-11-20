@@ -1,11 +1,12 @@
 // MMMU-Pro (overall, the page's default sort) from the same leaderboard_data.json as MMMU, read through
 // the helper in mmmu.ts. The overall is the page's own column. The page does not say which option count
-// or vision setting each author-provided row used.
+// or vision setting each author-provided row used. Keep the Standard and Vision scores when reported.
 import type { Leaderboard } from './types.ts';
 import { MMMU_ALIASES, MMMU_FEED, MMMU_TERMS, mmmuRows } from './mmmu.ts';
 
 const board: Leaderboard = {
   benchmark: 'mmmu-pro',
+  parts: { original: { name: 'Standard', group: 'Format' }, vision: { name: 'Vision', group: 'Format' } },
   url: 'https://mmmu-benchmark.github.io/#leaderboard',
   feed: `${MMMU_FEED} (pro.overall)`,
   terms: MMMU_TERMS,

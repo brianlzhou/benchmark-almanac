@@ -6,6 +6,11 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/run-llama/ExtractBench/main/leaderboard.csv";
 const board: Leaderboard = {
  benchmark: "extractbench",
+ parts: {
+   Short: { name: 'Short', group: 'Difficulty' },
+   Medium: { name: 'Medium', group: 'Difficulty' },
+   Long: { name: 'Long', group: 'Difficulty' },
+ },
  url: "https://github.com/run-llama/ExtractBench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

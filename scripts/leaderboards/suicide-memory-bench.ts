@@ -7,7 +7,12 @@ import { jsonAfter, nextFlight } from '../lib/html.ts';
 const FEED='https://prosaicintelligence.ai/research/suicide-memory-bench';
 type SourceRow={model:string;score:number};
 const board:Leaderboard={
- benchmark:'suicide-memory-bench',url:FEED,feed:FEED,
+ benchmark:'suicide-memory-bench', parts: {
+  'scs-single': { name: 'Suicide Crisis Syndrome, single chat', group: 'Category' },
+  'scs-multi': { name: 'Suicide Crisis Syndrome, multiple chats', group: 'Category' },
+  'suicide-single': { name: 'Explicit suicidal statements, single chat', group: 'Category' },
+  'suicide-multi': { name: 'Explicit suicidal statements, multiple chats', group: 'Category' },
+},url:FEED,feed:FEED,
  terms:'The authors publish these scores on their public research page. Credit Prosaic Intelligence.',
  async fetch(){
   const flight=nextFlight(await fetchText(FEED));

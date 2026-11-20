@@ -17,6 +17,7 @@ interface AgentRow {
   category: string;
   cost_per_task_p50?: number | null;
   output_tokens_per_task_p50?: number | null;
+  rank?: number;
   observation_count?: number | null;
   leaderboard_publish_date?: string;
 }
@@ -30,6 +31,13 @@ async function agentRows(): Promise<AgentRow[]> {
 
 const board: Leaderboard = {
   benchmark: 'agent-arena',
+  parts: {
+    bash_reliability: { name: 'Bash reliability', group: 'Dimension' },
+    praise_complaint: { name: 'Praise and complaint', group: 'Dimension' },
+    steerability: { name: 'Steerability', group: 'Dimension' },
+    task_outcome_explicit: { name: 'Explicit task outcome', group: 'Dimension' },
+    tool_hallucination: { name: 'Tool hallucination', group: 'Dimension' },
+  },
   url: 'https://arena.ai/leaderboard/agent',
   feed: arenaFeed('agent'),
   terms: ARENA_TERMS,
@@ -68,10 +76,12 @@ const board: Leaderboard = {
         if(fin(signal.score))metrics[name]=pct(signal.score);
         if(fin(signal.score_ci_lower))metrics[name+'_ciLow']=pct(signal.score_ci_lower);
         if(fin(signal.score_ci_upper))metrics[name+'_ciHigh']=pct(signal.score_ci_upper);
+        if (fin(signal.session_count)) metrics[name + '_sessions'] = signal.session_count;
+        if (fin(signal.rank)) metrics[name + '_rank'] = signal.rank;
         if(fin(signal.observation_count))metrics[name+'_observations']=signal.observation_count;
       }
       return {
-        ...base,
+        ...base, low: metrics.ciLow, high: metrics.ciHigh,
         ...(Object.keys(metrics).length ? { metrics } : {}),
       };
     });

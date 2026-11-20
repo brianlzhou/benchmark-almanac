@@ -2,6 +2,10 @@
 // Score: T8 Overall recall (%). 
 import type { Leaderboard } from './types.ts';
 import { sourceBoard, trackRows } from '../lib/boards/omni-interactscope.ts';
-const board: Leaderboard = { benchmark: "omni-interactscope-proactive", url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,
+const board: Leaderboard = { benchmark: "omni-interactscope-proactive", parts: {
+  'T8-A': { name: 'Reminders', group: 'Task type' },
+  'T8-B': { name: 'Audiovisual questions', group: 'Task type' },
+  'T8-C': { name: 'Multi-step guidance', group: 'Task type' },
+}, url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,
  fetch: () => trackRows("^Proactive", "^Proactive;\\s*") };
 export default board;

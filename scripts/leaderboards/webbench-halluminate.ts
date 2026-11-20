@@ -6,6 +6,10 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://webbench.ai/assets/index-BZfRa_LN.js";
 const board: Leaderboard = {
   benchmark: "webbench-halluminate",
+  parts: {
+    read: { name: 'Read', group: 'Task type' },
+    write: { name: 'Write', group: 'Task type' },
+  },
   url: "https://webbench.ai/assets/index-BZfRa_LN.js",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

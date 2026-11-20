@@ -8,6 +8,17 @@ const FEED = "https://raw.githubusercontent.com/HiThink-Research/BizFinBench/HEA
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "bizfinbench",
+  parts: {
+    AEA: { name: 'Anomalous event attribution', group: 'Task type' },
+    FNC: { name: 'Financial numerical computation', group: 'Task type' },
+    FTR: { name: 'Financial time reasoning', group: 'Task type' },
+    FTU: { name: 'Financial tool usage', group: 'Task type' },
+    FQA: { name: 'Financial knowledge QA', group: 'Task type' },
+    FDD: { name: 'Financial data description', group: 'Task type' },
+    ER: { name: 'Emotion recognition', group: 'Task type' },
+    SP: { name: 'Stock price prediction', group: 'Task type' },
+    FNER: { name: 'Financial named entity recognition', group: 'Task type' },
+  },
   url: "https://github.com/HiThink-Research/BizFinBench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

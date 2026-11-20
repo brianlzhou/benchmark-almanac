@@ -10,6 +10,12 @@ const FEED = "https://omnivideobench.github.io/omnivideobench_home/static/data/l
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "omnivideobench",
+  parts: {
+    short: { name: 'Short', group: 'Length' },
+    medium: { name: 'Medium', group: 'Length' },
+    long: { name: 'Long', group: 'Length' },
+    ultraLong: { name: 'Ultra long', group: 'Length' },
+  },
   url: "https://omnivideobench.github.io/omnivideobench_home/static/data/leaderboard.js",
   feed: FEED,
   terms: "Public results published by the benchmark authors at omnivideobench.github.io; retain source attribution and follow the upstream terms.",

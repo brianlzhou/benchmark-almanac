@@ -60,4 +60,14 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  perceptionSemantics: { name: 'Perception semantics', group: 'Task type' },
+  perceptionPhonology: { name: 'Perception phonology', group: 'Task type' },
+  perceptionParalinguistics: { name: 'Perception paralinguistics', group: 'Task type' },
+  perception: { name: 'Perception', group: 'Task type' },
+  reasoningSemantics: { name: 'Reasoning semantics', group: 'Task type' },
+  reasoningPhonology: { name: 'Reasoning phonology', group: 'Task type' },
+  reasoningParalinguistics: { name: 'Reasoning paralinguistics', group: 'Task type' },
+  reasoning: { name: 'Reasoning', group: 'Task type' },
+};
 export default board;

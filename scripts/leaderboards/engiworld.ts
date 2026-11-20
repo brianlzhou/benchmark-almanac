@@ -10,6 +10,16 @@ const FEED = "https://engiworld.github.io/assets/main_results.csv";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "engiworld",
+  parts: {
+    cli: { name: 'CLI', group: 'Environment' },
+    gui: { name: 'GUI', group: 'Environment' },
+    selection: { name: 'Selection', group: 'Task type' },
+    image: { name: 'Image', group: 'Task type' },
+    quantitative: { name: 'Quantitative', group: 'Task type' },
+    single: { name: 'Single-software execution', group: 'Task type' },
+    multi: { name: 'Cross-software coordination', group: 'Task type' },
+    open: { name: 'Open-environment engineering', group: 'Task type' },
+  },
   url: "https://engiworld.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at engiworld.github.io; retain source attribution and follow the upstream terms.",

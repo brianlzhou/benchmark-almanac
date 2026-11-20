@@ -18,6 +18,7 @@ type Fields = Record<string, number | boolean>;
 interface ClawModel {
   name: string;
   fields: Fields;
+  tasks: Record<string, Fields>;
 }
 
 /** The latest release's models, split into the general board and the multimodal board. */
@@ -43,13 +44,18 @@ export async function clawModels(): Promise<{ date: string; general: ClawModel[]
     if (i < 0) throw new Error(`declaration of ${name} not found`);
     return mod.slice(starts[i].at, starts[i + 1]?.at ?? mod.length);
   };
-  const read = (src: string): ClawModel[] =>
-    [...src.matchAll(/\{id:"[^"]+",name:"([^"]+)",([\s\S]*?)task_results:/g)].map((m) => ({
-      name: m[1],
-      fields: Object.fromEntries(
-        [...m[2].matchAll(/(\w+):(-?\d*\.?\d+(?:e-?\d+)?|!0|!1)(?=[,}])/g)].map((f) => [f[1], f[2] === '!0' ? true : f[2] === '!1' ? false : Number(f[2])]),
-      ),
-    }));
+  const fields = (source: string): Fields => Object.fromEntries(
+    [...source.matchAll(/(\w+):(-?\d*\.?\d+(?:e-?\d+)?|!0|!1)(?=[,}])/g)].map(m =>
+      [m[1], m[2] === '!0' ? true : m[2] === '!1' ? false : Number(m[2])]));
+  const read = (src: string): ClawModel[] => {
+    const headers = [...src.matchAll(/\{id:"[^"]+",name:"([^"]+)",([\s\S]*?)task_results:\{/g)];
+    return headers.map((m, index) => {
+      const results = src.slice(m.index! + m[0].length, headers[index + 1]?.index ?? src.length);
+      const tasks = [...results.matchAll(/(?:^|,)"?([\w-]+)"?:\{(score:[^{}]*\})/g)];
+      return { name: m[1], fields: fields(m[2]),
+        tasks: Object.fromEntries(tasks.map(task => [task[1], fields(task[2])])) };
+    });
+  };
   return { date: latest[2], general: read(region(general)), multimodal: read(region(multi)) };
 }
 
@@ -66,7 +72,7 @@ const EXTRAS: [key: string, field: string, scale: number][] = [
 ];
 
 /** One row per model from the named board, scored by `field` times `scale`; `extras` adds the EXTRAS metrics. */
-export async function clawRows(board: 'general' | 'multimodal', field: string, scale: number, extras = false): Promise<LeaderboardRow[]> {
+export async function clawRows(board: 'general' | 'multimodal', field: string, scale: number, extras = false, details?: Leaderboard): Promise<LeaderboardRow[]> {
   const data = await clawModels();
   const rows: LeaderboardRow[] = [];
   for (const m of data[board]) {
@@ -81,7 +87,21 @@ export async function clawRows(board: 'general' | 'multimodal', field: string, s
         if (typeof e === 'number') metrics[k] = Number((e * x).toFixed(2));
       }
     }
-    rows.push({ model: m.name, score: Number((v * scale).toFixed(2)), date: data.date, ...(Object.keys(metrics).length ? { metrics } : {}) });
+    if (details) {
+      for (const [key, value] of Object.entries(m.fields)) {
+        if (typeof value !== 'number' || !(key === 'tasks_evaluated' || key === 'pass_rate' || /^(general|multi_turn)_/.test(key))) continue;
+        metrics[key] = /(?:completion|robustness|safety|score_std)/.test(key) ? value * 100 : value;
+      }
+      if (field !== 'avg_score' && typeof m.fields.avg_score === 'number') metrics.averageScore = m.fields.avg_score * 100;
+      for (const [task, values] of Object.entries(m.tasks)) {
+        for (const [stat, value] of Object.entries(values)) {
+          const key = 'task:' + task + (stat === 'score' ? '' : ':' + stat);
+          metrics[key] = typeof value === 'boolean' ? Number(value) * (stat === 'pass_all_3' && field === 'pass_all_3_rate' ? 100 : 1) : value * 100;
+          if ((field === 'avg_score' && stat === 'score') || (field === 'pass_all_3_rate' && stat === 'pass_all_3')) (details.parts ??= {})[key] = { name: task, group: 'Task' };
+        }
+      }
+    }
+    rows.push({ trials: details ? 3 : undefined, model: m.name, score: Number((v * scale).toFixed(2)), date: data.date, ...(Object.keys(metrics).length ? { metrics } : {}) });
   }
   if (!rows.length) throw new Error(`no ${field} values on the ${board} board`);
   return rows;
@@ -95,10 +115,17 @@ export const CLAW_ALIASES: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'claw-eval',
+  parts: {
+    general_score: { name: 'General', group: 'Task family' },
+    multi_turn_score: { name: 'Multi-turn', group: 'Task family' },
+    completion: { name: 'Completion', group: 'Dimension' },
+    robustness: { name: 'Robustness', group: 'Dimension' },
+    safety: { name: 'Safety', group: 'Dimension' },
+  },
   url: CLAW_SITE,
   feed: `${CLAW_FEED} (benchmarkData avg_score)`,
   terms: CLAW_TERMS,
   aliases: CLAW_ALIASES,
-  fetch: () => clawRows('general', 'avg_score', 100, true),
+  fetch: () => clawRows('general', 'avg_score', 100, true, board),
 };
 export default board;

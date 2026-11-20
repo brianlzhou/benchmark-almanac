@@ -6,7 +6,12 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://sierra-research.github.io/hyper-tau-bench/hyper-submissions/manifest.json";
 const board: Leaderboard = {
- benchmark: "tau-tau-bench", url: "https://sierra-research.github.io/hyper-tau-bench/", feed: FEED,
+ benchmark: "tau-tau-bench", parts: {
+  airline: { name: 'Airline', group: 'Domain' },
+  retail: { name: 'Retail', group: 'Domain' },
+  telecom: { name: 'Telecom', group: 'Domain' },
+  banking: { name: 'Banking', group: 'Domain' },
+}, url: "https://sierra-research.github.io/hyper-tau-bench/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

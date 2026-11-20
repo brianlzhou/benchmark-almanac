@@ -5,7 +5,7 @@
 // Tokens are total (input and output), not output tokens, so they are kept as metrics.totalTokens, not
 // tokens; pass@1 and pass^5 are kept as metrics.passAt1 and metrics.pass5. The page's results plot draws
 // pass@5 against total tokens per question on a log axis. The "externally reported" and "release" tables
-// are retained when they publish main-question pass@5, with their provenance in setting.
+// are retained when they publish main-question pass@5, with source links and published sampling counts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -47,7 +47,13 @@ const board: Leaderboard = {
       if (pass1 !== undefined) metrics.passAt1 = pass1;
       if (pass5 !== undefined) metrics.pass5 = pass5;
       if (total !== undefined) metrics.totalTokens = total;
-      rows.push({ model: r[0].text, score, cost: num(r[4]?.attrs['data-sort']), metrics: Object.keys(metrics).length ? metrics : undefined });
+      for (const [index, name] of [[1, 'previousPassAt1'], [2, 'previousPassAt5'], [3, 'previousPass5']] as const) {
+        const previous = num(r[index]?.attrs['data-prev']);
+        if (previous !== undefined) metrics[name] = previous;
+      }
+      if (r[1]?.text.includes('●')) metrics.passAt1Samples = 5;
+      if (r[1]?.text.includes('○')) metrics.passAt1Samples = 1;
+      rows.push({ model: r[0].text, score, trials: 5, cost: num(r[4]?.attrs['data-sort']), metrics: Object.keys(metrics).length ? metrics : undefined });
     }
     // The maker also publishes external reports and the original release evaluations. Never
     // substitute pass@1 or subquestion accuracy when a row lacks main-question pass@5.
@@ -62,7 +68,10 @@ const board: Leaderboard = {
       if (subquestions !== undefined) metrics.subquestionPassAt1 = subquestions;
       const qualifier = r[0].text.match(/\s*\(([^()]*(?:tools|reasoning|thinking|xhigh|max|high|medium|low)[^()]*)\)$/i);
       const model = qualifier ? r[0].text.slice(0, qualifier.index).trim() : r[0].text;
-      rows.push({ model, score, setting: `${qualifier ? qualifier[1] + '; ' : ''}externally reported: ${r[4]?.text ?? 'source unspecified'}${r[5]?.text && r[5].text !== '—' ? `; ${r[5].text}` : ''}`, metrics });
+      const source = r[4]?.html.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1];
+      const link = source && !/^https?:\/\/(?:[^/]+\.)?(?:twitter\.com|x\.com)(?:\/|$)/i.test(source) ? source : undefined;
+      const count = r[5]?.text.match(/\b(\d+)\s+(?:runs|samplings)\b/i);
+      rows.push({ model, score, link, trials: count ? Number(count[1]) : undefined, setting: `${qualifier ? qualifier[1] + '; ' : ''}externally reported: ${r[4]?.text ?? 'source unspecified'}${r[5]?.text && r[5].text !== '—' ? `; ${r[5].text}` : ''}`, metrics });
     }
     for (const r of release?.slice(2) ?? []) {
       const score = num(r[2]?.text);
@@ -72,9 +81,11 @@ const board: Leaderboard = {
         const value = num(r[index]?.text);
         if (value !== undefined) metrics[key] = value;
       }
+      const correct = num(r[5]?.text);
+      if (correct !== undefined) metrics.subquestionsCorrect = correct;
       const total = num(r[7]?.attrs['data-sort']);
       if (total !== undefined) metrics.totalTokens = total;
-      rows.push({ model: r[0].text, score, setting: 'original release evaluation', cost: num(r[6]?.attrs['data-sort'] ?? r[6]?.text), metrics });
+      rows.push({ model: r[0].text, score, trials: 5, setting: 'original release evaluation', cost: num(r[6]?.attrs['data-sort'] ?? r[6]?.text), metrics });
     }
     return rows;
   },

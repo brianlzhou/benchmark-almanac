@@ -34,6 +34,10 @@ const fin = (x: unknown): x is number => typeof x === 'number' && Number.isFinit
 
 const board: Leaderboard = {
   benchmark: 'vals-ai-detection-benchmark',
+  parts: {
+    human: { name: 'Human', group: 'Category' },
+    ai: { name: 'AI', group: 'Category' },
+  },
   url: PAGE,
   feed: `${PAGE} (chart data in the server-rendered Astro island props, tasks.overall)`,
   terms: VALS_TERMS,

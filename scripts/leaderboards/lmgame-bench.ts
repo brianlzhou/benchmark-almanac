@@ -11,6 +11,14 @@ const FEED = "https://huggingface.co/spaces/lmgame/lmgame_bench/raw/main/rank_da
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "lmgame-bench",
+  parts: {
+    norm_super_mario_bros: { name: 'Super Mario Bros.', group: 'Environment' },
+    norm_sokoban: { name: 'Sokoban', group: 'Environment' },
+    norm_2048: { name: '2048', group: 'Environment' },
+    norm_candy_crush: { name: 'Candy Crush', group: 'Environment' },
+    norm_tetris: { name: 'Tetris', group: 'Environment' },
+    norm_ace_attorney: { name: 'Ace Attorney', group: 'Environment' },
+  },
   url: "https://huggingface.co/spaces/lmgame/lmgame_bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",

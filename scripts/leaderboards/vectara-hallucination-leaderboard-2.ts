@@ -4,8 +4,7 @@
 // Answer Rate and average summary length. Model names are provider/model ids, some with the effort and a
 // date stamp ("openai/gpt-5.2-low-2025-12-11"), which the shared resolver splits. The old-dataset board
 // lives on a separate branch and is a different benchmark record. Answer Rate (0 to 100) and Average Summary
-// Length (words) are kept as metrics.answerRate and metrics.summaryWords. Factual Consistency Rate is 100
-// minus the score, so it is not kept.
+// Length (words) are kept as metrics.answerRate and metrics.summaryWords. The published Factual Consistency Rate is also retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -63,7 +62,8 @@ const board: Leaderboard = {
       const off = cells[0].match(/^(.*)-non-reasoning$/);
       const answerRate = head[3] === 'Answer Rate' ? num(cells[3]) : undefined;
       const summaryWords = /^Average Summary Length/.test(head[4] ?? '') ? num(cells[4]) : undefined;
-      const metrics = { ...(answerRate === undefined ? {} : { answerRate }), ...(summaryWords === undefined ? {} : { summaryWords }) };
+      const factualConsistency = num(cells[head.indexOf('Factual Consistency Rate')]);
+      const metrics = { ...(factualConsistency == null ? {} : { factualConsistency }), ...(answerRate === undefined ? {} : { answerRate }), ...(summaryWords === undefined ? {} : { summaryWords }) };
       rows.push({ model: off ? off[1] : cells[0], setting: off ? 'non-reasoning' : undefined, score, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;

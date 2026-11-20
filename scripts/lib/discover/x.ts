@@ -3,9 +3,10 @@
 // the benchmark launches of the scan window. Added 2026-11-06, after ShadowBench, DeepFinance and FrontierPhysics
 // launched on X and the scan missed them.
 //
-// It runs only where Grok Build is installed and signed in (a maintainer's computer), not in GitHub Actions, and costs about
-// $1.40 of Grok usage and 6 minutes a run. Grok answers in JSON against a schema. Every link it gives is fetched
-// before it counts, so a link Grok guessed is dropped, and the finds go to the review queue like any other feed.
+// It runs only where Grok Build is installed and signed in (a maintainer's computer), not in GitHub Actions. Since
+// 2026-11-18 a scan is three short Grok runs in parallel, each stopped after 9 minutes. Grok
+// answers in JSON against a schema. Every link it gives is fetched before it counts, so a link Grok guessed is
+// dropped, and the finds go to the review queue like any other feed.
 import { execFile } from 'node:child_process';
 import { existsSync, mkdtempSync, rmSync } from 'node:fs';
 import { homedir, tmpdir } from 'node:os';
@@ -49,8 +50,21 @@ const SCHEMA = {
   required: ['launches'],
 };
 
-export const xPrompt = (from: string, to: string) =>
-  `Search X for posts from ${from} through ${to} that announce a NEW AI benchmark, eval, or leaderboard for language models or AI agents: a launch by its makers, not commentary on an existing benchmark, and not a model or product launch. Run several searches with different wording, for example "new benchmark", "introducing" with "benchmark", "eval", "leaderboard" and "we're releasing", and check posts with at least 50 likes. For each launch, give the benchmark name, the organization, the URL of the announcing post, every non-X link in the post or its thread (paper, site, GitHub, Hugging Face), the post date, a one-sentence summary, and the like count. Return only launches you saw in actual posts. Do not guess links.`;
+// The search widened on 2026-11-18, after FrontierEE Bench (a company page and one post saying "Today we're
+// introducing FrontierEE Bench") launched on X and a scan that returned 3 launches missed it. Names often end in
+// "Bench" with no space, and small labs' posts have few likes, so the floor is 20. A Grok turn takes about 45 s, and
+// one run doing a dozen searches timed out, so three short runs share the work in parallel. A run that finishes
+// keeps its launches when another times out. A test on 2026-11-18 read 4 launches and found 2 new ones.
+const ASK = (from: string, to: string) =>
+  `Search X for posts from ${from} through ${to} that announce a NEW AI benchmark, eval, or leaderboard for language models or AI agents: a launch by its makers, not commentary on an existing benchmark, and not a model or product launch.`;
+const ANSWER =
+  'Check every post with at least 20 likes, from labs, universities and startups alike. Return every launch you find, up to 30. For each launch, give the benchmark name, the organization, the URL of the announcing post, every non-X link in the post or its thread (paper, site, GitHub, Hugging Face), the post date, a one-sentence summary, and the like count. Return only launches you saw in actual posts. Do not guess links.';
+export const X_SEARCHES = {
+  launches: 'Run four searches: "new benchmark", "introducing" with "benchmark", "today we\'re introducing" with "bench", and "we\'re releasing" with "eval".',
+  names: 'Run four searches: "leaderboard" with "models", "evals" with "frontier models", a new name ending in "Bench" (such as "FrontierEE Bench"), and "best model scored".',
+  fields: 'Run two searches, each pairing "benchmark" with a group of fields: "engineering OR hardware OR robotics OR science", and "medicine OR law OR finance OR security".',
+} as const;
+export const xPrompt = (from: string, to: string, part: keyof typeof X_SEARCHES = 'launches') => `${ASK(from, to)} ${X_SEARCHES[part]} ${ANSWER}`;
 
 /** The launches in Grok's JSON answer, without X links. */
 export function xLaunches(stdout: string): XLaunch[] {
@@ -67,34 +81,49 @@ export async function xGrok(r: Reader) {
     r.note('Grok Build is not installed here, so X was not searched');
     return;
   }
-  // an empty folder, so Grok has no project files or rules to read
-  const dir = mkdtempSync(join(tmpdir(), 'grok-x-'));
-  let stdout: string;
-  try {
-    ({ stdout } = await run(
-      bin,
-      [
-        '-p',
-        xPrompt(FROM, TODAY),
-        // search only: no shell, no file tools, no subagents
-        '--disallowed-tools',
-        'run_terminal_cmd,write,search_replace,read_file,grep,list_dir,Agent',
-        '--max-turns',
-        '16',
-        '--output-format',
-        'json',
-        '--json-schema',
-        JSON.stringify(SCHEMA),
-        '--no-auto-update',
-        '--cwd',
-        dir,
-      ],
-      { cwd: dir, signal: r.signal, timeout: 560_000, maxBuffer: 32 * 1024 * 1024 },
-    ));
-  } finally {
-    rmSync(dir, { recursive: true, force: true });
-  }
-  const launches = xLaunches(stdout);
+  // one Grok run per third of the search, in parallel. A run's launches count when another fails.
+  const ask = async (part: keyof typeof X_SEARCHES): Promise<XLaunch[]> => {
+    // an empty folder, so Grok has no project files or rules to read
+    const dir = mkdtempSync(join(tmpdir(), 'grok-x-'));
+    try {
+      const { stdout } = await run(
+        bin,
+        [
+          '-p',
+          xPrompt(FROM, TODAY, part),
+          // search only: no shell, no file tools, no subagents
+          '--disallowed-tools',
+          'run_terminal_cmd,write,search_replace,read_file,grep,list_dir,Agent',
+          '--max-turns',
+          '10',
+          '--output-format',
+          'json',
+          '--json-schema',
+          JSON.stringify(SCHEMA),
+          '--no-auto-update',
+          '--cwd',
+          dir,
+        ],
+        { cwd: dir, signal: r.signal, timeout: 540_000, maxBuffer: 32 * 1024 * 1024 },
+      );
+      return xLaunches(stdout);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  };
+  const parts = Object.keys(X_SEARCHES) as (keyof typeof X_SEARCHES)[];
+  const got = await Promise.allSettled(parts.map(ask));
+  got.forEach((g, i) => g.status === 'rejected' && r.note(`the ${parts[i]} search failed: ${String((g.reason as Error)?.message ?? g.reason).slice(0, 120)}`));
+  if (got.every((g) => g.status === 'rejected')) throw new Error('every X search failed');
+  const seenNames = new Map<string, XLaunch>();
+  for (const g of got)
+    if (g.status === 'fulfilled')
+      for (const l of g.value) {
+        const had = seenNames.get(key(l.name));
+        if (had) had.links = [...new Set([...had.links, ...l.links])];
+        else seenNames.set(key(l.name), l);
+      }
+  const launches = [...seenNames.values()];
   r.read(launches.length);
   for (const l of launches) {
     // the almanac never uses Artificial Analysis data, so its own benchmarks are not candidates

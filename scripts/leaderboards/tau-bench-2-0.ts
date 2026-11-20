@@ -5,6 +5,17 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json";
 const board: Leaderboard = {
   benchmark: "tau-bench-2-0",
+  parts: {
+    domain_airline: { name: 'Airline', group: 'Domain' },
+    domain_retail: { name: 'Retail', group: 'Domain' },
+    domain_telecom: { name: 'Telecom', group: 'Domain' },
+    language_en: { name: 'English', group: 'Language' },
+    language_es: { name: 'Spanish', group: 'Language' },
+    language_pt: { name: 'Portuguese', group: 'Language' },
+    language_hi: { name: 'Hindi', group: 'Language' },
+    language_zh: { name: 'Chinese', group: 'Language' },
+    language_ko: { name: 'Korean', group: 'Language' },
+  },
   url: "https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

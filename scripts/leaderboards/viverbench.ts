@@ -6,7 +6,24 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://omniverifier.github.io/";
 const board: Leaderboard = {
- benchmark: "viverbench", url: "https://omniverifier.github.io/", feed: FEED,
+ benchmark: "viverbench", parts: {
+  'IA-Point': { name: 'Point', group: 'Task type' },
+  'IA-Count': { name: 'Count', group: 'Task type' },
+  'SVE-Maze': { name: 'Maze', group: 'Task type' },
+  'SVE-Robot': { name: 'Robot', group: 'Task type' },
+  'SVE-GUI': { name: 'GUI', group: 'Task type' },
+  'STEM-Chart': { name: 'Chart', group: 'Task type' },
+  'STEM-LaTeX': { name: 'LaTeX', group: 'Task type' },
+  'CE-Obj': { name: 'Object', group: 'Task type' },
+  'CE-Attr': { name: 'Attribute', group: 'Task type' },
+  'CE-AbsP': { name: 'Abstract patterns', group: 'Task type' },
+  'OR-Spat': { name: 'Spatial', group: 'Task type' },
+  'OR-NSpt': { name: 'Non-spatial', group: 'Task type' },
+  'WD-SPhy': { name: 'Static physics', group: 'Task type' },
+  'WD-DPhy': { name: 'Dynamic physics', group: 'Task type' },
+  'IA-BBox': { name: 'Bounding box', group: 'Task type' },
+  'SVE-FLake': { name: 'FrozenLake', group: 'Task type' },
+}, url: "https://omniverifier.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  aliases: {'OpenAI o3':'o3','OpenAI o4-mini':'o4-mini','OpenAI o1':'o1','InternVL3.5 A28B':'internvl3-5-241b-a28b'},

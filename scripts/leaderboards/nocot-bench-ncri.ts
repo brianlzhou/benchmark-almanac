@@ -16,7 +16,17 @@ const board:Leaderboard={benchmark:'nocot-bench-ncri',url:'https://github.com/ne
    metrics.withFiller=filler;
    for(const [key,col] of Object.entries({fillerUplift:'ncri_filler_uplift',fillerUpliftLow:'ncri_filler_uplift_lo95',fillerUpliftHigh:'ncri_filler_uplift_hi95'})){const n=num(r[col]);if(n!==undefined)metrics[key]=n;}
   }
-  rows.push({model:r.model_id,score,setting,metrics});
+  if (r.in_ncri_chart) metrics.inChart = Number(r.in_ncri_chart === 'True');
+  if (r.ncri_filler_significant) metrics.fillerSignificant = Number(r.ncri_filler_significant === 'True');
+  rows.push({model:r.model_id,score,setting,low:metrics.ciLow,high:metrics.ciHigh,metrics});
+  if (filler !== undefined && r.ncri_uses_filler !== 'True' && r.ncri_filler_recipe) {
+    rows.push({
+      model: r.model_id,
+      score: filler,
+      setting: ['NCRI 15.2', r.ncri_filler_recipe, r.source].join('; '),
+      metrics: { usesFiller: 1 },
+    });
+  }
  }
  if(!rows.length)throw new Error('No NCRI scores');return rows;
 }};

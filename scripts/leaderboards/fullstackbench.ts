@@ -6,7 +6,20 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 
 const FEED = 'https://arxiv.org/html/2412.00535';
 const board: Leaderboard = {
-  benchmark: 'fullstackbench', url: 'https://github.com/bytedance/FullStackBench', feed: FEED,
+  benchmark: 'fullstackbench', parts: {
+  others: { name: 'Others', group: 'Domain' },
+  bp: { name: 'Basic programming', group: 'Domain' },
+  ap: { name: 'Advanced programming', group: 'Domain' },
+  se: { name: 'Software engineering', group: 'Domain' },
+  dp: { name: 'Data analysis', group: 'Domain' },
+  ma: { name: 'Mathematics', group: 'Domain' },
+  dw: { name: 'Desktop and web development', group: 'Domain' },
+  ml: { name: 'Machine learning', group: 'Domain' },
+  sc: { name: 'Scientific computing', group: 'Domain' },
+  db: { name: 'Database', group: 'Domain' },
+  mm: { name: 'Multimedia', group: 'Domain' },
+  os: { name: 'Operating system', group: 'Domain' },
+}, url: 'https://github.com/bytedance/FullStackBench', feed: FEED,
   terms: PAPER_TERMS,
   aliases: {
     'GPT 4o-0806': 'gpt-4o-aug-2024',

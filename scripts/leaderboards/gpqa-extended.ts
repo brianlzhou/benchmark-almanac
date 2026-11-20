@@ -8,7 +8,10 @@ import { tables, num } from '../lib/html.ts';
 const FEED='https://raw.githubusercontent.com/idavidrein/gpqa/main/GPQA_Analysis.ipynb';
 interface Notebook { cells: { source?: string[]; outputs?: { data?: { 'text/html'?: string[] | string } }[] }[] }
 const board:Leaderboard={
-  benchmark:'gpqa-extended',url:'https://github.com/idavidrein/gpqa',feed:FEED+' (saved full-set baseline table)',
+  benchmark:'gpqa-extended', parts: {
+  main: { name: 'Main', group: 'Split' },
+  diamond: { name: 'Diamond', group: 'Split' },
+},url:'https://github.com/idavidrein/gpqa',feed:FEED+' (saved full-set baseline table)',
   terms:'The GPQA repository publishes this analysis notebook under its MIT license. Benchmark Almanac credits and links the authors.',
   async fetch():Promise<LeaderboardRow[]> {
     const data=await fetchJson<Notebook>(FEED);

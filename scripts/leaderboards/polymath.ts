@@ -32,6 +32,9 @@ const board: Leaderboard = {
     const [t] = tables(await fetchText(PAGE));
     const head = t?.[0]?.map((c) => c.text);
     if (!head || head[1] !== 'Model' || head[3] !== 'Overall') throw new Error(`unexpected PolyMath header: ${head?.join(' | ')}`);
+    const languages = head.slice(4, -1);
+    const names = new Intl.DisplayNames(['en'], { type: 'language' });
+    board.parts = Object.fromEntries(languages.map(code => [code, { name: names.of(code) ?? code, group: 'Language' }]));
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
       const score = num(r[3]?.text);
@@ -53,7 +56,16 @@ const board: Leaderboard = {
         setting = effort[2];
       }
       const snapshot = /^\d{4}-\d\d-\d\d$/.test(r[2]?.text ?? '') ? r[2].text : undefined;
-      rows.push({ model, score, setting, date: snapshot });
+      const metrics: Record<string, number> = {};
+      for (const [index, code] of languages.entries()) {
+        const value = num(r[index + 4]?.text);
+        if (value !== undefined) metrics[code] = value;
+      }
+      const range = num(r.at(-1)?.text);
+      if (range !== undefined) metrics.languageRange = range;
+      const rank = num(r[0]?.text);
+      if (rank !== undefined) metrics.rank = rank;
+      rows.push({ metrics, model, score, setting, date: snapshot });
     }
     return rows;
   },

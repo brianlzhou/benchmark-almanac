@@ -50,4 +50,12 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  geometry: { name: 'Geometry', group: 'Domain' },
+  physics: { name: 'Physics', group: 'Domain' },
+  general: { name: 'General', group: 'Domain' },
+  gain: { name: 'Gain', group: 'Domain' },
+  probability: { name: 'Probability', group: 'Domain' },
+  other: { name: 'Other', group: 'Domain' },
+};
 export default board;

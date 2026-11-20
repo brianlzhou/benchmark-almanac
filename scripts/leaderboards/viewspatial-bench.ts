@@ -9,6 +9,15 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2505.21500";
 const board: Leaderboard = {
  benchmark: "viewspatial-bench",
+ parts: {
+   cameraRelativeDirection: { name: 'Camera relative direction', group: 'Task type' },
+   cameraObjectOrientation: { name: 'Camera object orientation', group: 'Task type' },
+   cameraAverage: { name: 'Camera view', group: 'Perspective' },
+   personObjectOrientation: { name: 'Person object orientation', group: 'Task type' },
+   personRelativeDirection: { name: 'Person relative direction', group: 'Task type' },
+   sceneSimulation: { name: 'Scene simulation', group: 'Task type' },
+   personAverage: { name: 'Person view', group: 'Perspective' },
+ },
  url: "https://arxiv.org/html/2505.21500",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

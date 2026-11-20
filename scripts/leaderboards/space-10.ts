@@ -7,6 +7,16 @@ const FEED = "https://arxiv.org/html/2506.07966";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "space-10",
+  parts: {
+    entity: { name: 'Entity', group: 'Category' },
+    scene: { name: 'Scene', group: 'Category' },
+    size: { name: 'Size', group: 'Category' },
+    orientation: { name: 'Orientation', group: 'Category' },
+    objectState: { name: 'Object state', group: 'Category' },
+    position: { name: 'Position', group: 'Category' },
+    functional: { name: 'Functional', group: 'Category' },
+    spatial: { name: 'Spatial', group: 'Category' },
+  },
   url: "https://github.com/VisionXLab/SpaCE-10",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -7,6 +7,17 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://datasets-server.huggingface.co/rows?dataset=jablonkagroup%2FChemBench-Results&config=default&split=2.0.2&offset=0&length=100";
 const board: Leaderboard = {
   benchmark: "chembench",
+  parts: {
+    'Analytical Chemistry': { name: 'Analytical chemistry', group: 'Domain' },
+    'Chemical Preference': { name: 'Chemical preference', group: 'Domain' },
+    'General Chemistry': { name: 'General chemistry', group: 'Domain' },
+    'Inorganic Chemistry': { name: 'Inorganic chemistry', group: 'Domain' },
+    'Materials Science': { name: 'Materials science', group: 'Domain' },
+    'Organic Chemistry': { name: 'Organic chemistry', group: 'Domain' },
+    'Physical Chemistry': { name: 'Physical chemistry', group: 'Domain' },
+    'Technical Chemistry': { name: 'Technical chemistry', group: 'Domain' },
+    'Toxicity and Safety': { name: 'Toxicity and safety', group: 'Domain' },
+  },
   url: "https://datasets-server.huggingface.co/rows?dataset=jablonkagroup%2FChemBench-Results&config=default&split=2.0.2&offset=0&length=100",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

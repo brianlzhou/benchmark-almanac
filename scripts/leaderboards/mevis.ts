@@ -5,7 +5,10 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/henghuiding/MeViS/main/README.md";
 const board: Leaderboard = {
-  benchmark: "mevis", url: "https://raw.githubusercontent.com/henghuiding/MeViS/main/README.md", feed: FEED,
+  benchmark: "mevis", parts: {
+  J: { name: 'Region similarity', group: 'Dimension' },
+  F: { name: 'Contour accuracy', group: 'Dimension' },
+}, url: "https://raw.githubusercontent.com/henghuiding/MeViS/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

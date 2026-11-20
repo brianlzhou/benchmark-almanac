@@ -5,7 +5,14 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = 'https://morse-500.github.io/';
 const board: Leaderboard = {
- benchmark: 'morse-500', url: URL, feed: URL,
+ benchmark: 'morse-500', parts: {
+  Abstract: { name: 'Abstract', group: 'Category' },
+  Math: { name: 'Math', group: 'Category' },
+  Physical: { name: 'Physical', group: 'Category' },
+  Planning: { name: 'Planning', group: 'Category' },
+  Spatial: { name: 'Spatial', group: 'Category' },
+  Temporal: { name: 'Temporal', group: 'Category' },
+}, url: URL, feed: URL,
  terms: 'Public author leaderboard. The Almanac credits the authors and links the source.',
  async fetch() {
   const t = tables(await fetchText(URL)).map(t=>t.map(r=>r.map(c=>c.text))).find(t=>t[0]?.includes('ALL'));

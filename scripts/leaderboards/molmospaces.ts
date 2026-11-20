@@ -11,6 +11,12 @@ import { num } from '../lib/html.ts';
 const FEED = "https://molmospaces.allen.ai/benchmark/data/index.json";
 const board: Leaderboard = {
   benchmark: "molmospaces",
+  parts: {
+    ms_pick: { name: 'Pick', group: 'Task type' },
+    ms_pick_place: { name: 'Pick and place', group: 'Task type' },
+    ms_open: { name: 'Open', group: 'Task type' },
+    ms_close: { name: 'Close', group: 'Task type' },
+  },
   url: "https://molmospaces.allen.ai/leaderboard/ms",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

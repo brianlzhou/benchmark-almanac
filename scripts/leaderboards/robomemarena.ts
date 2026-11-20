@@ -6,6 +6,11 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://robomemarena.github.io/leaderboard_data.json";
 const board: Leaderboard = {
   benchmark: "robomemarena",
+  parts: {
+    transfer: { name: 'Transfer', group: 'Task type' },
+    occlusion: { name: 'Occlusion', group: 'Task type' },
+    sequence: { name: 'Sequence', group: 'Task type' },
+  },
   url: "https://robomemarena.github.io/leaderboard_data.json",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

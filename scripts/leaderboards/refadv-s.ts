@@ -8,6 +8,11 @@ const FEED = "https://ref-adv.github.io/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "refadv-s",
+  parts: {
+    distractors2to3: { name: '2 to 3 distractors', group: 'Difficulty' },
+    distractors4to6: { name: '4 to 6 distractors', group: 'Difficulty' },
+    distractors7plus: { name: '7 or more distractors', group: 'Difficulty' },
+  },
   url: "https://ref-adv.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at ref-adv.github.io; retain source attribution and follow the upstream terms.",

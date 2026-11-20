@@ -16,7 +16,15 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/ddlbojack/mmar/main/README.md";
 const board: Leaderboard = {
-  benchmark: "mmar", url: "https://github.com/ddlbojack/mmar", feed: FEED,
+  benchmark: "mmar", parts: {
+  Sound: { name: 'Sound', group: 'Modality' },
+  Music: { name: 'Music', group: 'Modality' },
+  Speech: { name: 'Speech', group: 'Modality' },
+  'Sound-Music': { name: 'Sound and music', group: 'Modality' },
+  'Sound-Speech': { name: 'Sound and speech', group: 'Modality' },
+  'Music-Speech': { name: 'Music and speech', group: 'Modality' },
+  'Sound-Music-Speech': { name: 'Sound and music and speech', group: 'Modality' },
+}, url: "https://github.com/ddlbojack/mmar", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

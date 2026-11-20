@@ -8,6 +8,10 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/DreamMr/HR-Bench/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "hr-bench",
+ parts: {
+   accuracy4K: { name: '4K', group: 'Split' },
+   accuracy8K: { name: '8K', group: 'Split' },
+ },
  url: "https://github.com/DreamMr/HR-Bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -19,6 +19,10 @@ interface Result {
   model: string;
   effort?: string;
   date?: string;
+  completed_instances?: number;
+  timeouts?: number;
+  rank_headline?: number;
+  rank_completed?: number;
   resolved?: number;
   score_modes?: { headline?: { score?: number }; completed?: { score?: number } };
   projects?: { name: string; score?: number }[];
@@ -34,6 +38,10 @@ const key = (r: { agent?: string; model: string; effort?: string }) => `${r.agen
 
 const board: Leaderboard = {
   benchmark: 'sec-bench-pro',
+  parts: {
+    v8: { name: 'V8', group: 'Environment' },
+    firefox: { name: 'Firefox', group: 'Environment' },
+  },
   harnesses: 'system',
   verified: 'marked verified on the SEC-bench board',
   url: 'https://sec-bench.github.io',
@@ -63,6 +71,10 @@ const board: Leaderboard = {
       const score = r.score_modes?.headline?.score ?? r.resolved;
       if (typeof score !== 'number') continue;
       const metrics: Record<string, number> = {};
+      for (const key of ['completed_instances', 'timeouts', 'rank_headline', 'rank_completed'] as const) {
+        const value = r[key];
+        if (typeof value === 'number') metrics[key] = value;
+      }
       for (const p of r.projects ?? []) if (typeof p.score === 'number') metrics[p.name] = p.score;
       if (typeof r.score_modes?.completed?.score === 'number') metrics.completed = r.score_modes.completed.score;
       const t = totals.get(key(r));

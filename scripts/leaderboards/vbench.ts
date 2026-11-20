@@ -8,7 +8,25 @@ const PAGE='https://huggingface.co/spaces/Vchitect/VBench_Leaderboard';
 const FEED='https://vchitect-vbench-leaderboard.hf.space/config';
 interface Table {headers:string[];data:unknown[][]}
 export default {
- benchmark:'vbench',url:PAGE,feed:FEED,
+ benchmark:'vbench', parts: {
+  'Quality Score': { name: 'Quality score', group: 'Dimension' },
+  'subject consistency': { name: 'Subject consistency', group: 'Dimension' },
+  'background consistency': { name: 'Background consistency', group: 'Dimension' },
+  'temporal flickering': { name: 'Temporal flickering', group: 'Dimension' },
+  'motion smoothness': { name: 'Motion smoothness', group: 'Dimension' },
+  'dynamic degree': { name: 'Dynamic degree', group: 'Dimension' },
+  'aesthetic quality': { name: 'Aesthetic quality', group: 'Dimension' },
+  'imaging quality': { name: 'Imaging quality', group: 'Dimension' },
+  'object class': { name: 'Object class', group: 'Dimension' },
+  'multiple objects': { name: 'Multiple objects', group: 'Dimension' },
+  'human action': { name: 'Human action', group: 'Dimension' },
+  color: { name: 'Color', group: 'Dimension' },
+  'spatial relationship': { name: 'Spatial relationship', group: 'Dimension' },
+  scene: { name: 'Scene', group: 'Dimension' },
+  'appearance style': { name: 'Appearance style', group: 'Dimension' },
+  'temporal style': { name: 'Temporal style', group: 'Dimension' },
+  'overall consistency': { name: 'Overall consistency', group: 'Dimension' },
+},url:PAGE,feed:FEED,
  terms:'Public Gradio configuration published by Vchitect; the VBench repository uses Apache-2.0, and the almanac credits and links the source.',
  async fetch(){
   const cfg=await fetchJson<{components:{type:string;props:{value?:Table}}[]}>(FEED);

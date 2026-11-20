@@ -7,6 +7,17 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/microsoft/AVGen-Bench/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "avgen-bench",
+  parts: {
+    text: { name: 'Text', group: 'Dimension' },
+    face: { name: 'Face', group: 'Dimension' },
+    music: { name: 'Music', group: 'Dimension' },
+    speech: { name: 'Speech', group: 'Dimension' },
+    holistic: { name: 'Holistic', group: 'Dimension' },
+    visual: { name: 'Visual quality', group: 'Dimension', note: 'Raw 0 to 1 score, multiplied by 100 in the total.' },
+    audio: { name: 'Audio quality', group: 'Dimension', note: 'Production quality score, multiplied by 10 in the total.' },
+    lowPhysics: { name: 'Low-level kinematic plausibility', group: 'Dimension', note: 'Raw 0 to 5 score, multiplied by 20 in the total.' },
+    highPhysics: { name: 'High-level causal reasoning', group: 'Dimension' },
+  },
   url: "https://microsoft.github.io/AVGen-Bench/",
   feed: FEED,
   terms: "MIT repository; raw.githubusercontent.com has no robots.txt.",

@@ -11,6 +11,17 @@ const PAGE = 'https://99franklin.github.io/ocrbench_v2/';
 
 const board: Leaderboard = {
   benchmark: 'ocrbench-v2',
+  parts: {
+    Recognition: { name: 'Recognition', group: 'Task type' },
+    Referring: { name: 'Referring', group: 'Task type' },
+    Spotting: { name: 'Spotting', group: 'Task type' },
+    Extraction: { name: 'Extraction', group: 'Task type' },
+    Parsing: { name: 'Parsing', group: 'Task type' },
+    Calculation: { name: 'Calculation', group: 'Task type' },
+    Understanding: { name: 'Understanding', group: 'Task type' },
+    Reasoning: { name: 'Reasoning', group: 'Task type' },
+    chinese: { name: 'Chinese', group: 'Language' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML, newest round, default English Average)`,
   terms: 'Static GitHub Pages site that states no terms; the MultimodalOCR repository is MIT.',
@@ -40,10 +51,21 @@ const board: Leaderboard = {
         seen.add(`${languageIndex}|${model}`);
         if (languageIndex === 1) {
           const row = rows.find(r => r.model === model);
-          if (row) (row.metrics ??= {}).chinese = score;
+          if (row) {
+            const metrics = row.metrics ??= {};
+            metrics.chinese = score;
+            for (const [index, name] of head.slice(6).entries()) {
+              const value = num(r[index + 6]?.text);
+              if (value === undefined) continue;
+              metrics['chinese:' + name] = value;
+              board.parts!['chinese:' + name] = { name, group: 'Chinese task type' };
+            }
+          }
           continue;
         }
-        rows.push({ model, score, metrics: Object.fromEntries(head.slice(6).flatMap((h, j) => { const v = num(r[j + 6]?.text); return v === undefined ? [] : [[h, v]]; })), date: `${m[1]}-${m[2]}-28` });
+        const size = r[4]?.text.match(/^(\d+(?:\.\d+)?)\s*B$/i);
+        rows.push({ model, score, params: size ? Number(size[1]) : undefined,
+          open: r[3]?.text === 'Yes' ? true : r[3]?.text === 'No' ? false : undefined, metrics: Object.fromEntries(head.slice(6).flatMap((h, j) => { const v = num(r[j + 6]?.text); return v === undefined ? [] : [[h, v]]; })), date: `${m[1]}-${m[2]}-28` });
       }
       }
     });

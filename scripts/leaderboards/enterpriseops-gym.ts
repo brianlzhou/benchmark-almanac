@@ -9,6 +9,16 @@ const FEED = "https://raw.githubusercontent.com/ServiceNow/EnterpriseOps-Gym/mai
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "enterpriseops-gym",
+  parts: {
+    Teams: { name: 'Teams', group: 'Environment' },
+    Email: { name: 'Email', group: 'Environment' },
+    Calendar: { name: 'Calendar', group: 'Environment' },
+    HR: { name: 'HR', group: 'Environment' },
+    Drive: { name: 'Drive', group: 'Environment' },
+    Hybrid: { name: 'Hybrid', group: 'Environment' },
+    CSM: { name: 'Customer service management', group: 'Environment' },
+    ITSM: { name: 'IT service management', group: 'Environment' },
+  },
   url: "https://github.com/ServiceNow/EnterpriseOps-Gym",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

@@ -8,6 +8,16 @@ const FEED = "https://openmoss.github.io/FutureOmni/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "futureomni",
+  parts: {
+    cartoon: { name: 'Cartoon', group: 'Category' },
+    education: { name: 'Education', group: 'Category' },
+    emergency: { name: 'Emergency', group: 'Category' },
+    surveillance: { name: 'Surveillance', group: 'Category' },
+    dailyLife: { name: 'Daily life', group: 'Category' },
+    movie: { name: 'Movie', group: 'Category' },
+    game: { name: 'Game', group: 'Category' },
+    documentary: { name: 'Documentary', group: 'Category' },
+  },
   url: "https://openmoss.github.io/FutureOmni",
   feed: FEED,
   terms: "Public results published by the benchmark authors at openmoss.github.io; retain source attribution and follow the upstream terms.",

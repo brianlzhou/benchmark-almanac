@@ -113,4 +113,18 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = {
+  boundary: { name: 'Boundary', group: 'Category' },
+  continuity: { name: 'Continuity', group: 'Category' },
+  permanence: { name: 'Permanence', group: 'Category' },
+  spatiality: { name: 'Spatiality', group: 'Category' },
+  perceptualConstancy: { name: 'Perceptual constancy', group: 'Category' },
+  intuitivePhysics: { name: 'Intuitive physics', group: 'Category' },
+  perspective: { name: 'Perspective', group: 'Category' },
+  conservation: { name: 'Conservation', group: 'Category' },
+  hierarchy: { name: 'Hierarchy', group: 'Category' },
+  intentionality: { name: 'Intentionality', group: 'Category' },
+  mechanicalReasoning: { name: 'Mechanical reasoning', group: 'Category' },
+  toolUsing: { name: 'Tool using', group: 'Category' },
+};
 export default board;

@@ -7,6 +7,11 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://huggingface.co/datasets/MiniMaxAI/role-play-bench/resolve/main/README.md";
 const board: Leaderboard = {
  benchmark: "role-play-bench-minimax",
+ parts: {
+   worlds: { name: 'Worlds', group: 'Dimension' },
+   stories: { name: 'Stories', group: 'Dimension' },
+   preferences: { name: 'Preferences', group: 'Dimension' },
+ },
  url: "https://huggingface.co/datasets/MiniMaxAI/role-play-bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

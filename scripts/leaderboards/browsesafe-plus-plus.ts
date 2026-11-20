@@ -30,6 +30,9 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'browsesafe-plus-plus',
+  parts: {
+    answeredF1: { name: 'Answered only', group: 'Split' },
+  },
   url: 'https://browsesafe.perplexity.ai/',
   feed: `${FEED} (text board, Average view, F1)`,
   terms: 'Static JSON the BrowseSafe++ site publishes as raw results; the repository is MIT (the test inputs are licensed for evaluation only, and are not read).',

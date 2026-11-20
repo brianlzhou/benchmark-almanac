@@ -5,7 +5,16 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/insecure_code.json";
 const board: Leaderboard = {
- benchmark: "cyberseceval-instruct", url: "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/insecure_code.json", feed: FEED,
+ benchmark: "cyberseceval-instruct", parts: {
+  'C secure (%)': { name: 'C', group: 'Language' },
+  'C# secure (%)': { name: 'C#', group: 'Language' },
+  'C++ secure (%)': { name: 'C++', group: 'Language' },
+  'Java secure (%)': { name: 'Java', group: 'Language' },
+  'JavaScript secure (%)': { name: 'JavaScript', group: 'Language' },
+  'PHP secure (%)': { name: 'PHP', group: 'Language' },
+  'Python secure (%)': { name: 'Python', group: 'Language' },
+  'Rust secure (%)': { name: 'Rust', group: 'Language' },
+}, url: "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/insecure_code.json", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

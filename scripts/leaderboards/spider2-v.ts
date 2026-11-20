@@ -9,6 +9,12 @@ const FEED = "https://spider2-v.github.io/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "spider2-v",
+  parts: {
+    abstract: { name: 'Abstract', group: 'Split' },
+    verbose: { name: 'Verbose', group: 'Split' },
+    account: { name: 'Account', group: 'Split' },
+    non_account: { name: 'Non account', group: 'Split' },
+  },
   url: "https://spider2-v.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at spider2-v.github.io; retain source attribution and follow the upstream terms.",

@@ -12,6 +12,6 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
-  fetch: () => helmRows(TABLE),
+  fetch: () => helmRows(TABLE, true),
 };
 export default board;

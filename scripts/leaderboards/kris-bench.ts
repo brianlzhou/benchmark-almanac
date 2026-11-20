@@ -6,7 +6,18 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://yongliang-wu.github.io/kris_bench_project_page/";
 const board: Leaderboard = {
- benchmark: "kris-bench", url: "https://yongliang-wu.github.io/kris_bench_project_page/", feed: FEED,
+ benchmark: "kris-bench", parts: {
+  'Attribute Perception': { name: 'Attribute perception', group: 'Dimension' },
+  'Spatial Perception': { name: 'Spatial perception', group: 'Dimension' },
+  'Temporal Perception': { name: 'Temporal perception', group: 'Dimension' },
+  'Factual Knowledge': { name: 'Factual knowledge', group: 'Dimension' },
+  'Social Science': { name: 'Social science', group: 'Dimension' },
+  'Natural Science': { name: 'Natural science', group: 'Dimension' },
+  'Conceptual Knowledge': { name: 'Conceptual knowledge', group: 'Dimension' },
+  'Logical Reasoning': { name: 'Logical reasoning', group: 'Dimension' },
+  'Instruction Decomposition': { name: 'Instruction decomposition', group: 'Dimension' },
+  'Procedural Knowledge': { name: 'Procedural knowledge', group: 'Dimension' },
+}, url: "https://yongliang-wu.github.io/kris_bench_project_page/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

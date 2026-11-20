@@ -4,6 +4,14 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = "https://arxiv.org/html/2608.16812";
 const board: Leaderboard = {benchmark:"conceptedit-bench",url:URL,feed:URL,terms:PAPER_TERMS,
+parts: {
+  advanced: { name: 'Advanced', group: 'Category' },
+  object: { name: 'Object', group: 'Category' },
+  composition: { name: 'Composition', group: 'Category' },
+  global: { name: 'Global', group: 'Category' },
+  portrait: { name: 'Portrait', group: 'Category' },
+  text: { name: 'Text', group: 'Category' },
+},
  async fetch() {
   const table=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0]) === "[\"Model\",\"Advanced\",\"Object\",\"Compo.\",\"Global\",\"Portrait\",\"Text\",\"Overall\"]");
   if(!table)throw new Error('Reviewed overall table missing');

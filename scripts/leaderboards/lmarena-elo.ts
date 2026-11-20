@@ -5,7 +5,7 @@
 // hyparquet: one request an arena, where the dataset viewer's API took 100 rows a request and answered 429 to a
 // burst. The other Arena importers reuse arenaRows and arenaSubset.
 // Each row also keeps the score's 95% interval (rating_lower, rating_upper as metrics.ciLow, ciHigh) and its
-// vote count (metrics.votes), when the subset has them.
+// vote count, rank, variance and license when the subset has them. Preserve the bounds as interval fields.
 //
 // Arena also rates models on the votes for one kind of prompt: coding, math, a language, an industry. It tags each
 // battle with every category its prompt fits, so one vote counts in several, and the categories are views of the
@@ -113,6 +113,9 @@ interface ArenaRow {
   rating_lower?: number | null;
   rating_upper?: number | null;
   vote_count?: number | null;
+  variance?: number | null;
+  rank?: number | null;
+  license?: string | null;
   category: string;
   leaderboard_publish_date?: string;
 }
@@ -173,7 +176,10 @@ function toRow(row: ArenaRow): LeaderboardRow {
   const metrics: Record<string, number> = {};
   if (Number.isFinite(row.rating_lower) && Number.isFinite(row.rating_upper)) Object.assign(metrics, { ciLow: row.rating_lower, ciHigh: row.rating_upper });
   if (Number.isFinite(row.vote_count)) metrics.votes = row.vote_count!;
-  return { ...splitName(row.model_name.trim(), row.leaderboard_publish_date), score: rating(row)!, ...(Object.keys(metrics).length ? { metrics } : {}) };
+  if (typeof row.rank === 'number') metrics.rank = row.rank;
+  if (typeof row.variance === 'number') metrics.variance = row.variance;
+  return { ...splitName(row.model_name.trim(), row.leaderboard_publish_date), score: rating(row)!,
+    low: metrics.ciLow, high: metrics.ciHigh, license: row.license?.trim() || undefined, ...(Object.keys(metrics).length ? { metrics } : {}) };
 }
 
 /**
@@ -199,13 +205,17 @@ export async function arenaRows(config: string, category = 'overall'): Promise<L
 export async function arenaRowsByCategory(config: string, opts: { skip?: string[]; views?: Record<string, string> } = {}): Promise<LeaderboardRow[]> {
   const usable = (await arenaSubset(config)).filter((r) => r.model_name && Number.isFinite(rating(r)));
   const cats = new Map<string, Record<string, number>>();
-  const put = (name: string, key: string, v: number) => {
-    const m = cats.get(name.trim()) ?? {};
-    m[`cat:${key}`] = Math.round(v * 100) / 100;
-    cats.set(name.trim(), m);
+  const put = (r: ArenaRow, key: string) => {
+    const name = r.model_name.trim();
+    const m = cats.get(name) ?? {};
+    m[`cat:${key}`] = Math.round(rating(r)! * 100) / 100;
+    for (const [label, value] of Object.entries({ votes: r.vote_count, low: r.rating_lower, high: r.rating_upper, rank: r.rank, variance: r.variance })) {
+      if (typeof value === 'number') m[`${label}:${key}`] = value;
+    }
+    cats.set(name, m);
   };
-  for (const r of usable) if (r.category !== 'overall' && !opts.skip?.includes(r.category)) put(r.model_name, r.category, rating(r)!);
-  for (const [key, other] of Object.entries(opts.views ?? {})) for (const r of await arenaRaw(other)) put(r.model_name, key, rating(r)!);
+  for (const r of usable) if (r.category !== 'overall' && !opts.skip?.includes(r.category)) put(r, r.category);
+  for (const [key, other] of Object.entries(opts.views ?? {})) for (const r of await arenaRaw(other)) put(r, key);
   const overall = usable.filter((r) => r.category === 'overall');
   if (!overall.length) throw new Error(`no overall rows in ${config}`);
   return overall.map((r) => {
@@ -217,6 +227,35 @@ export async function arenaRowsByCategory(config: string, opts: { skip?: string[
 
 const board: Leaderboard = {
   benchmark: 'lmarena-elo',
+  parts: {
+    'cat:chinese': { name: 'Chinese', group: 'Language' },
+    'cat:coding': { name: 'Coding', group: 'Task' },
+    'cat:creative_writing': { name: 'Creative writing', group: 'Task' },
+    'cat:english': { name: 'English', group: 'Language' },
+    'cat:expert': { name: 'Expert', group: 'Task' },
+    'cat:french': { name: 'French', group: 'Language' },
+    'cat:german': { name: 'German', group: 'Language' },
+    'cat:hard_prompts': { name: 'Hard prompts', group: 'Task' },
+    'cat:hard_prompts_english': { name: 'Hard prompts in English', group: 'Task' },
+    'cat:industry_business_and_management_and_financial_operations': { name: 'Business and finance', group: 'Industry' },
+    'cat:industry_entertainment_and_sports_and_media': { name: 'Entertainment, sports and media', group: 'Industry' },
+    'cat:industry_legal_and_government': { name: 'Law and government', group: 'Industry' },
+    'cat:industry_life_and_physical_and_social_science': { name: 'Science', group: 'Industry' },
+    'cat:industry_mathematical': { name: 'Mathematics', group: 'Industry' },
+    'cat:industry_medicine_and_healthcare': { name: 'Medicine and healthcare', group: 'Industry' },
+    'cat:industry_software_and_it_services': { name: 'Software and IT', group: 'Industry' },
+    'cat:industry_writing_and_literature_and_language': { name: 'Writing and literature', group: 'Industry' },
+    'cat:instruction_following': { name: 'Instruction following', group: 'Task' },
+    'cat:japanese': { name: 'Japanese', group: 'Language' },
+    'cat:korean': { name: 'Korean', group: 'Language' },
+    'cat:longer_query': { name: 'Longer queries', group: 'Task' },
+    'cat:math': { name: 'Math', group: 'Task' },
+    'cat:multi_turn': { name: 'Multi-turn', group: 'Task' },
+    'cat:non_english': { name: 'Not English', group: 'Language' },
+    'cat:polish': { name: 'Polish', group: 'Language' },
+    'cat:russian': { name: 'Russian', group: 'Language' },
+    'cat:spanish': { name: 'Spanish', group: 'Language' },
+  },
   url: 'https://arena.ai/leaderboard/text',
   feed: arenaFeed('text_style_control', '*'),
   terms: ARENA_TERMS,

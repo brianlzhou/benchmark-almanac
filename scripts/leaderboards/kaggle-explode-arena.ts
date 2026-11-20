@@ -1,0 +1,13 @@
+// Kaggle Explode Arena (Kaggle Benchmarks, by kaggle): read through the helper in kaggle-game-arena.ts, Kaggle's documented
+// public leaderboard endpoint. The headline is the board's "Arena" column.
+import type { Leaderboard } from './types.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
+
+const board: Leaderboard = {
+  benchmark: 'kaggle-explode-arena',
+  url: 'https://www.kaggle.com/benchmarks/kaggle/explode-arena',
+  feed: kaggleFeed('kaggle', 'explode-arena'),
+  terms: KAGGLE_TERMS,
+  fetch: () => kaggleRowsWithBounds('kaggle', 'explode-arena', "Arena", 1),
+};
+export default board;

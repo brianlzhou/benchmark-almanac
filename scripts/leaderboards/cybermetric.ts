@@ -5,6 +5,11 @@ const FEED = "https://arxiv.org/html/2402.07688";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "cybermetric",
+  parts: {
+    accuracy80: { name: 'CyberMetric-80', group: 'Split' },
+    accuracy500: { name: 'CyberMetric-500', group: 'Split' },
+    accuracy2000: { name: 'CyberMetric-2000', group: 'Split' },
+  },
   url: "https://raw.githubusercontent.com/cybermetric/CyberMetric/main/README.md",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

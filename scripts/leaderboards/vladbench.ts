@@ -9,6 +9,18 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 const FEED = "https://arxiv.org/html/2503.21505";
 const board: Leaderboard = {
  benchmark: "vladbench",
+ parts: {
+   aspect1: { name: 'Road traffic signals', group: 'Category' },
+   aspect2: { name: 'Road passage provisions', group: 'Category' },
+   aspect3: { name: 'Background', group: 'Category' },
+   aspect4: { name: 'Foreground', group: 'Category' },
+   aspect5: { name: 'Signal element relation', group: 'Category' },
+   aspect6: { name: 'Lane element relation', group: 'Category' },
+   aspect7: { name: 'Intention judgment', group: 'Category' },
+   aspect8: { name: 'Behavior understanding', group: 'Category' },
+   aspect9: { name: 'Ego action reasoning', group: 'Category' },
+   aspect10: { name: 'Meta decision-making', group: 'Category' },
+ },
  url: "https://arxiv.org/html/2503.21505",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

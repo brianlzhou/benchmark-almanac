@@ -6,7 +6,12 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://scalerlab-judgebench.hf.space/config";
 const board: Leaderboard = {
- benchmark: "judgebench", url: "https://huggingface.co/spaces/ScalerLab/JudgeBench", feed: FEED,
+ benchmark: "judgebench", parts: {
+  knowledge: { name: 'Knowledge', group: 'Domain' },
+  reasoning: { name: 'Reasoning', group: 'Domain' },
+  math: { name: 'Math', group: 'Domain' },
+  coding: { name: 'Coding', group: 'Domain' },
+}, url: "https://huggingface.co/spaces/ScalerLab/JudgeBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

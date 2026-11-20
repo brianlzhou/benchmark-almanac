@@ -13,10 +13,11 @@ const PACKAGE = 'terminal-bench-science/terminal-bench-science';
 const NAME = 'v0-1-eval';
 
 interface Row {
+  rank?: number;
   status?: string;
   n_trials?: number;
   metadata: { agent_org?: Link; agent_display?: Link; model_display?: Link; reasoning_effort?: string; date?: string };
-  metrics: { accuracy?: number; tasks?: number; total_cost_usd?: number; total_tokens?: number; accuracy_stderr?: number };
+  metrics: { passes?: number; accuracy?: number; tasks?: number; total_cost_usd?: number; total_tokens?: number; accuracy_stderr?: number };
 }
 
 const board: Leaderboard = {
@@ -37,6 +38,9 @@ const board: Leaderboard = {
       if (!model || /^multiple$/i.test(model)) continue;
       const { accuracy, tasks, total_cost_usd: total, accuracy_stderr: sem, total_tokens: totalTokens } = r.metrics;
       const metrics: Record<string, number> = {};
+      if (typeof r.rank === 'number') metrics.rank = r.rank;
+      if (typeof r.metrics.passes === 'number') metrics.passes = r.metrics.passes;
+      if (typeof total === 'number') metrics.runCostUsd = total;
       if (typeof sem === 'number') { metrics.sem = sem; metrics.stderr = sem; }
       if (typeof tasks === 'number' && tasks > 0) metrics.trials = tasks;
       if (typeof totalTokens === 'number' && totalTokens >= 0) {

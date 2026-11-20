@@ -8,6 +8,13 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://InternScience.github.io/SGI-Page/";
 const board: Leaderboard = {
  benchmark: "sgi-bench",
+ parts: {
+   task1: { name: 'Deep research', group: 'Task type' },
+   task2: { name: 'Idea generation', group: 'Task type' },
+   task3: { name: 'Dry experiment', group: 'Task type' },
+   task4: { name: 'Wet experiment', group: 'Task type' },
+   task5: { name: 'Experimental reasoning', group: 'Task type' },
+ },
  url: "https://InternScience.github.io/SGI-Page/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

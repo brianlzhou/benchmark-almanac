@@ -7,7 +7,7 @@
 // shows the rubric times 5 as "Rubric Score" beside the Elo, and labs cite that 0 to 100 rubric figure (Qwen3
 // 84.6, Ring-1T 85.4), so the rubric times 5 is the score here. Elo is relative to the models on the board.
 // Metrics, the CSV columns the table shows unscaled: elo_score (`elo`), repetition_score (`repetition`) and
-// avg_length (`length`, characters). Slop and Style are shown rescaled in the page script and are not kept.
+// avg_length (characters), raw vocabulary complexity and raw slop score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -165,6 +165,8 @@ const board: Leaderboard = {
     eqbenchRows('creative_writing.js', 'leaderboardDataCreativeWritingV3', 'creative_writing_score', 5, {
       elo: 'elo_score',
       repetition: 'repetition_score',
+      vocabularyComplexity: 'vocab_complexity',
+      slopScore: 'slop_score',
       length: 'avg_length',
     }),
 };

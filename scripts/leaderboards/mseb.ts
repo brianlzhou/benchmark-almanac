@@ -8,6 +8,14 @@ const FEED = "https://google-mseb-leaderboard.hf.space/config";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "mseb",
+  parts: {
+    Transcription: { name: 'Transcription', group: 'Task type' },
+    Reasoning: { name: 'Reasoning', group: 'Task type' },
+    Classification: { name: 'Classification', group: 'Task type' },
+    Reranking: { name: 'Reranking', group: 'Task type' },
+    Retrieval: { name: 'Retrieval', group: 'Task type' },
+    Clustering: { name: 'Clustering', group: 'Task type' },
+  },
   url: "https://huggingface.co/spaces/google/mseb-leaderboard",
   feed: FEED,
   terms: "Public results published by the benchmark authors at google-mseb-leaderboard.hf.space; retain source attribution and follow the upstream terms.",

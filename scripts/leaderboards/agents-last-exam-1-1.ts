@@ -2,9 +2,7 @@
 // one row per harness, model and reasoning variant across both platforms (the page's "all" view), with
 // passRate (0 to 1, the default sort and the score), avgScore (partial credit), run count and total
 // output tokens. Output tokens per task are the total over the run count. The page writes harness keys
-// such as ale_claw as display names ("ALE-Claw"); the same names are used here. Cost is not published
-// (totalCostUsd is null). Metrics: avgScore as `partial` (the page's "Score" column, 0 to 100) and the
-// page's "Total Runtime" (totalDurationS) over the run count as `latency`, in seconds per task.
+// such as ale_claw as display names ("ALE-Claw"); the same names are used here. The feed gives task costs, token counts, durations and pass rates for Linux and Windows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -15,6 +13,10 @@ interface Row {
   model: string;
   harnessVariant?: string;
   runs?: number;
+  tasks?: number;
+  splitTasks?: number;
+  passes?: number;
+  totalInputTokens?: number | null;
   passRate?: number;
   avgScore?: number | null;
   totalDurationS?: number | null;
@@ -33,8 +35,18 @@ const HARNESS: Record<string, string> = {
 };
 const harnessName = (k: string) => HARNESS[k] ?? k.split('_').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
+function totals(row: Row, prefix = '') {
+  const metrics: Record<string, number> = {};
+  for (const key of ['runs', 'tasks', 'splitTasks', 'passes', 'totalDurationS', 'totalInputTokens', 'totalOutputTokens', 'totalCostUsd'] as const) {
+    const value = row[key];
+    if (typeof value === 'number') metrics[prefix + key] = value;
+  }
+  return metrics;
+}
+
 const board: Leaderboard = {
-  benchmark: 'agents-last-exam-1-1',
+  benchmark: 'agents-last-exam-1-1', measures: { partial: 'score' },
+  parts: { linux: { name: 'Linux', group: 'Platform' }, windows: { name: 'Windows', group: 'Platform' } },
   url: 'https://agents-last-exam.org/leaderboard',
   feed: FEED,
   terms: 'Public JSON endpoint the leaderboard page loads (robots.txt does not restrict it); the site states the dataset is CC BY 4.0 and the code Apache-2.0.',
@@ -45,11 +57,20 @@ const board: Leaderboard = {
     'minimax-m3-1-flash': 'minimax-m3-1-flash',
   },
   async fetch() {
-    const { rows } = await fetchJson<{ rows: Row[] }>(FEED);
+    const { rows, platforms } = await fetchJson<{ rows: Row[]; platforms?: Record<string, { rows: Row[] }> }>(FEED);
     const out: LeaderboardRow[] = [];
     for (const r of rows) {
       if (typeof r.passRate !== 'number') continue;
+      const metrics = totals(r);
+      for (const [platform, subset] of Object.entries(platforms ?? {})) {
+        const part = subset.rows.find(p => p.model === r.model && p.harness === r.harness && p.harnessVariant === r.harnessVariant);
+        if (!part) continue;
+        if (typeof part.passRate === 'number') metrics[platform] = part.passRate * 100;
+        if (typeof part.avgScore === 'number') metrics[platform + ':partial'] = part.avgScore * 100;
+        Object.assign(metrics, totals(part, platform + ':'));
+      }
       out.push({
+        trials: r.runs,
         model: r.model,
         score: r.passRate * 100,
         setting: r.harnessVariant?.replace(/^(?:thinking|reasoning)-/, '').split('_')[0] || undefined,
@@ -57,6 +78,7 @@ const board: Leaderboard = {
         tokens: r.totalOutputTokens && r.runs ? r.totalOutputTokens / r.runs : undefined,
         cost: r.totalCostUsd && r.runs ? r.totalCostUsd / r.runs : undefined,
         metrics: {
+          ...metrics,
           ...(typeof r.avgScore === 'number' ? { partial: r.avgScore * 100 } : {}),
           ...(r.totalDurationS && r.runs ? { latency: r.totalDurationS / r.runs } : {}),
         },

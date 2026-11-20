@@ -7,6 +7,13 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2609.01437";
 const board: Leaderboard = {
   benchmark: "harnessdev",
+  parts: {
+    swePro: { name: 'SWE-bench Pro', group: 'Category' },
+    terminalBench: { name: 'Terminal-Bench', group: 'Category' },
+    mleBench: { name: 'MLE-bench', group: 'Category' },
+    eqBench: { name: 'EQ-Bench', group: 'Category' },
+    browseComp: { name: 'BrowseComp', group: 'Category' },
+  },
   url: "https://arxiv.org/html/2609.01437",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

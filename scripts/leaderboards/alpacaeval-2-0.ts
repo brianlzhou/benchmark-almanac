@@ -50,12 +50,15 @@ const board: Leaderboard = {
       // plain "GPT-4" does not say which snapshot ran ("GPT-4 (06/13)" and "GPT-4 (03/14)" are separate rows)
       if (!r.name || !r.length_controlled_winrate.trim() || !Number.isFinite(score)) continue;
       const name = r.name.trim();
+      const metrics: Record<string, number> = {};
+      if (r.win_rate?.trim() && Number.isFinite(Number(r.win_rate))) metrics.winRate = Number(r.win_rate);
+      if (r.avg_length?.trim() && Number.isFinite(Number(r.avg_length))) metrics.length = Number(r.avg_length);
       const row: LeaderboardRow = {
         model: name === 'GPT-4' ? 'GPT-4 (snapshot unspecified)' : name,
-        score,
+        score, metrics,
         setting: r.filter || 'unclassified submission',
         verified: r.filter === 'verified' ? true : undefined,
-        link: r.samples?.startsWith('https://') ? r.samples : undefined,
+        link: r.samples?.startsWith('https://') ? r.samples : r.link?.startsWith('https://') ? r.link : undefined,
       };
       const aligner = name.match(/^Aligner 2B\+(.+)$/);
       const pair = name.match(/^PairRM 0\.4B\+(.+) \(best-of-16\)$/);

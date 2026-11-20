@@ -8,6 +8,14 @@ import { mdTables } from './big-bench-extra-hard.ts';
 const FEED = "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md";
 const board: Leaderboard = {
  benchmark: "aethercode", url: "https://huggingface.co/datasets/m-a-p/AetherCode/resolve/main/README.md", feed: FEED,
+ parts: {
+   '2024': { name: '2024', group: 'Split' },
+   '2025': { name: '2025', group: 'Split' },
+   Easy: { name: 'Easy', group: 'Difficulty' },
+   Medium: { name: 'Medium', group: 'Difficulty' },
+   Hard: { name: 'Hard', group: 'Difficulty' },
+   Extreme: { name: 'Extreme', group: 'Difficulty' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:{'DeepSeek-R1-0528':'deepseek-r1-may-2025','DeepSeek-V3-0324':'deepseek-v3-mar-2025'},
  async fetch() {

@@ -9,6 +9,19 @@ const FEED = "https://huggingface.co/datasets/nvidia/ChatRAG-Bench/raw/main/READ
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "chatrag-bench",
+  parts: {
+    doc2dial: { name: 'Doc2Dial', group: 'Split' },
+    quac: { name: 'QuAC', group: 'Split' },
+    qrecc: { name: 'QReCC', group: 'Split' },
+    coqa: { name: 'CoQA', group: 'Split' },
+    doqa: { name: 'DoQA', group: 'Split' },
+    convfinqa: { name: 'ConvFinQA', group: 'Split' },
+    sqa: { name: 'SQA', group: 'Split' },
+    topiocqa: { name: 'TopiOCQA', group: 'Split' },
+    hybridial_: { name: 'HybriDial', group: 'Split' },
+    inscit: { name: 'INSCIT', group: 'Split' },
+    average_exclude_hybridial_: { name: 'Excluding HybriDial', group: 'Split' },
+  },
   url: "https://huggingface.co/datasets/nvidia/ChatRAG-Bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",

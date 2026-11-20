@@ -11,6 +11,17 @@ const FEED = "https://alaya-lab.github.io/PROWBench/assets/leaderboard-data.js";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "prowbench",
+  parts: {
+    iou: { name: 'BBox IoU', group: 'Entity', note: 'Bounding-box intersection-over-union ratio.' },
+    isr: { name: 'Interaction success rate', group: 'Logic', note: 'Fraction of prescribed interactions successfully realized.', unit: 'score' },
+    lra: { name: 'Logic-render alignment', group: 'Logic', note: 'Fraction of action-timeline segments visibly depicted.', unit: 'score' },
+    gisr: { name: 'IoU-weighted interaction success rate', group: 'Logic', note: 'Interaction success weighted by BBox IoU.', unit: 'score' },
+    glra: { name: 'IoU-weighted logic-render alignment', group: 'Logic', note: 'Logic-render alignment weighted by BBox IoU.', unit: 'score' },
+    img: { name: 'Imaging quality', group: 'Quality', note: 'MUSIQ score.' },
+    aes: { name: 'Aesthetic quality', group: 'Quality', note: 'VBench-normalized LAION score.', unit: 'score' },
+    smooth: { name: 'Motion smoothness', group: 'Temporal', note: 'VBench score.', unit: 'score' },
+    clip: { name: 'CLIP-Score', group: 'Text', note: '100 times cosine similarity.' },
+  },
   url: "https://alaya-lab.github.io/PROWBench/assets/leaderboard-data.js?v=008053f95466",
   feed: FEED,
   terms: "Public results published by the benchmark authors at alaya-lab.github.io; retain source attribution and follow the upstream terms.",

@@ -4,7 +4,14 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
 const BASE='https://nlp.cs.unc.edu/data/jielei/tvqa/tvqa_public_html/files/';
-const board:Leaderboard={benchmark:'tvqa',url:'https://tvqa.cs.unc.edu/',feed:BASE+'leaderboard_data_without_ts.json',terms:'Public UNC TVQA leaderboard data, subject to the dataset and site terms.',async fetch(){
+const board:Leaderboard={benchmark:'tvqa', parts: {
+  castle: { name: 'Castle', group: 'TV show' },
+  friends: { name: 'Friends', group: 'TV show' },
+  house: { name: 'House', group: 'TV show' },
+  bbt: { name: 'The Big Bang Theory', group: 'TV show' },
+  grey: { name: 'Grey\'s Anatomy', group: 'TV show' },
+  himym: { name: 'How I Met Your Mother', group: 'TV show' },
+},url:'https://tvqa.cs.unc.edu/',feed:BASE+'leaderboard_data_without_ts.json',terms:'Public UNC TVQA leaderboard data, subject to the dataset and site terms.',async fetch(){
   const rows:LeaderboardRow[]=[];
   for(const split of ['without_ts','with_ts']) {
     const {data}=await fetchJson<{data:Array<{model_name:string;test_public_acc:string|number;val_acc:string|number;date?:string;test_public_additional?:Record<string,[number,number]>}>}>(BASE+`leaderboard_data_${split}.json`);

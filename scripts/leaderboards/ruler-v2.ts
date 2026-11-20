@@ -7,6 +7,13 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/NVIDIA-NeMo/Skills/main/docs/evaluation/long-context.md";
 const board: Leaderboard = {
  benchmark: "ruler-v2",
+ parts: {
+   '8192': { name: '8,192 tokens', group: 'Context length', note: 'One of the five length scores whose mean matches the published headline.' },
+   '16384': { name: '16,384 tokens', group: 'Context length', note: 'One of the five length scores whose mean matches the published headline.' },
+   '32768': { name: '32,768 tokens', group: 'Context length', note: 'One of the five length scores whose mean matches the published headline.' },
+   '65536': { name: '65,536 tokens', group: 'Context length', note: 'One of the five length scores whose mean matches the published headline.' },
+   '131072': { name: '131,072 tokens', group: 'Context length', note: 'One of the five length scores whose mean matches the published headline.' },
+ },
  url: "https://github.com/NVIDIA-NeMo/Skills/blob/main/docs/evaluation/long-context.md",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

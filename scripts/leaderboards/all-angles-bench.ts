@@ -8,6 +8,13 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://danielchyeh.github.io/All-Angles-Bench/";
 const board: Leaderboard = {
  benchmark: "all-angles-bench", url: "https://danielchyeh.github.io/All-Angles-Bench/", feed: FEED,
+ parts: {
+   'Attr.': { name: 'Attributes', group: 'Task type' },
+   'Cam. Pose': { name: 'Camera pose', group: 'Task type' },
+   'Manip.': { name: 'Object manipulation', group: 'Task type' },
+   'Rel. Dir.': { name: 'Relative direction', group: 'Task type' },
+   'Rel. Dist.': { name: 'Relative distance', group: 'Task type' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

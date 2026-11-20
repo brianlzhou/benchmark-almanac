@@ -16,7 +16,8 @@ const board: Leaderboard = {
   feed: `${URL} (Leipzig "Model scores" table, Correct Answer)`,
   terms: 'Server-rendered public page; the site serves no robots.txt (404) and publishes no terms.',
   async fetch(): Promise<LeaderboardRow[]> {
-    const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => c.text === 'Effort') && rows[0]?.some((c) => c.text === 'Correct Answer'));
+    const html = (await fetchText(URL)).replace(/<span\b[^>]*role="tooltip"[^>]*>[\s\S]*?<\/span>/g, '');
+    const t = tables(html).find((rows) => rows[0]?.some((c) => c.text === 'Effort') && rows[0]?.some((c) => c.text === 'Correct Answer'));
     if (!t) throw new Error('Leipzig model scores table not found');
     const h = t[0].map((c) => c.text);
     const [iModel, iEffort, iWeb, iCode, iScore] = ['Model Name', 'Effort', 'Web Search', 'Code Execution', 'Correct Answer'].map((k) => h.indexOf(k));
@@ -24,7 +25,7 @@ const board: Leaderboard = {
       const effort = (r[iEffort]?.text ?? '').split(/\s+/)[0]?.toLowerCase();
       const tools = [r[iWeb]?.text === '✓' ? 'web search' : '', r[iCode]?.text === '✓' ? 'code' : ''].filter(Boolean);
       const setting = [effort && effort !== 'default' ? effort : '', ...tools].filter(Boolean).join(', ');
-      return { model: (r[iModel]?.text ?? '').replace(/\*$/, ''), score: num(r[iScore]?.text) ?? NaN, setting: setting || undefined };
+      return { model: (r[iModel]?.attrs['data-value'] ?? r[iModel]?.text ?? '').replace(/\*$/, ''), score: num(r[iScore]?.text) ?? NaN, setting: setting || undefined };
     });
   },
 };

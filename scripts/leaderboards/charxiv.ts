@@ -1,7 +1,7 @@
 // CharXiv (reasoning questions, validation split). charxiv.github.io renders data/val_result.csv with
 // csv_to_html_table, sorted by its fourth column: the Reasoning "Overall" (the second "Overall" column is
 // the Descriptive split). Cards report the reasoning split, so that is the score here. The human and
-// random baselines (weight "N/A") are skipped. Not updated since April 2025.
+// random baselines are skipped. Keep the question scores, weights flag, and separate vision and language parameter counts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -9,6 +9,7 @@ const FEED = 'https://charxiv.github.io/data/val_result.csv';
 
 const board: Leaderboard = {
   benchmark: 'charxiv',
+  parts: Object.fromEntries(['TC', 'TG', 'NC', 'NG'].map(name => [name, { name, group: 'Reasoning question type' }])),
   url: 'https://charxiv.github.io/#leaderboard',
   feed: `${FEED} (Reasoning Overall)`,
   terms: 'Static CSV on the CharXiv GitHub Pages site, which states no terms; the CharXiv code is Apache-2.0 and the dataset CC BY-SA 4.0.',
@@ -43,7 +44,17 @@ const board: Leaderboard = {
     for (const r of parseCsv([named, ...rest].join('\n'))) {
       if (r.Weight === 'N/A') continue;
       const score = Number(r.Reasoning);
-      if (r.Model && Number.isFinite(score)) rows.push({ model: r.Model.trim(), score });
+      if (!r.Model || !Number.isFinite(score)) continue;
+      const metrics: Record<string, number> = {};
+      for (const key of ['TC', 'TG', 'NC', 'NG', 'Descriptive', 'INEX', 'ENUM', 'PATT', 'CNTG', 'COMP']) {
+        if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
+      }
+      const size = r['Size [V/L] (B)']?.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+      if (size) {
+        metrics.visionParamsB = Number(size[1]);
+        metrics.languageParamsB = Number(size[2]);
+      }
+      rows.push({ model: r.Model.trim(), score, metrics, open: r.Weight === 'Open' ? true : r.Weight === 'Proprietary' ? false : undefined });
     }
     return rows;
   },

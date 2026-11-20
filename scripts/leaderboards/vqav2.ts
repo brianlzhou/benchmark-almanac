@@ -12,6 +12,7 @@ const FEED = 'https://eval.ai/api/jobs/challenge_phase_split/2278/leaderboard/?p
 interface Entry {
   id?: number;
   submission__id?: number;
+  submission__participant_team__team_url?: string;
   submission__participant_team__team_name: string;
   submission__method_name?: string | null;
   submission__submitted_at?: string;
@@ -36,6 +37,12 @@ const TEAMS: Record<string, string | ((method: string) => string | undefined)> =
 
 const board: Leaderboard = {
   benchmark: 'vqav2',
+  verified: 'verified by the VQA challenge host',
+  parts: {
+    yesNo: { name: 'Yes/no', group: 'Task type' },
+    number: { name: 'Number', group: 'Task type' },
+    other: { name: 'Other', group: 'Task type' },
+  },
   url: PAGE,
   feed: `${FEED} (test-standard, overall)`,
   terms: 'Public EvalAI challenge API (eval.ai serves no robots.txt rules); the VQA annotations are CC BY 4.0.',
@@ -57,8 +64,10 @@ const board: Leaderboard = {
         const score = e.result?.[3];
         if (!Number.isFinite(score)) continue;
         const metrics: Record<string, number> = {};
+        if (typeof e.submission__id === 'number') metrics.submissionId = e.submission__id;
         ['yesNo', 'number', 'other'].forEach((key, i) => { if (Number.isFinite(e.result[i])) metrics[key] = e.result[i]; });
         rows.push({ model, score, date: e.submission__submitted_at?.slice(0, 10),
+
           submitter: team || undefined,
           verified: typeof e.submission__is_verified_by_host === 'boolean' ? e.submission__is_verified_by_host : undefined,
           setting: known ? undefined : `EvalAI submission ${e.submission__id ?? e.id ?? `${page}-${rows.length}`}`,

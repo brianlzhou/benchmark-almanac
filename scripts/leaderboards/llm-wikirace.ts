@@ -8,6 +8,10 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://llmwikirace.github.io/";
 const board: Leaderboard = {
  benchmark: "llm-wikirace",
+ parts: {
+   easy: { name: 'Easy', group: 'Difficulty' },
+   medium: { name: 'Medium', group: 'Difficulty' },
+ },
  url: "https://llmwikirace.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

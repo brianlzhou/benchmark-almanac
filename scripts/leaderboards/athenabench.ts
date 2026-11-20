@@ -82,4 +82,13 @@ const board: Leaderboard = {
     });
   },
 };
+board.parts = {
+  mini: { name: 'Mini', group: 'Split' },
+  CKT: { name: 'Cyber threat intelligence knowledge test', group: 'Task type' },
+  ATE: { name: 'Attack technique extraction', group: 'Task type' },
+  RCM: { name: 'Root cause mapping', group: 'Task type' },
+  RMS_F1: { name: 'Risk mitigation strategy', group: 'Task type' },
+  VSP: { name: 'Vulnerability severity prediction', group: 'Task type' },
+  TAA: { name: 'Threat actor attribution', group: 'Task type' },
+};
 export default board;

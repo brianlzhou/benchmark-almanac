@@ -2,7 +2,7 @@
 // model an MMMU-Pro overall, an MMMU validation overall and an MMMU test overall, as strings ("-" when
 // missing). Labs cite the validation split, so that column is the score here. Most rows are marked
 // source "author" (the page's asterisk: results provided by the model's authors). The human-expert and
-// random baselines are skipped. MMMU-Pro (mmmu-pro.ts) reads the same file through mmmuRows.
+// random baselines are skipped. Keep validation discipline scores and test scores. MMMU-Pro (mmmu-pro.ts) reads the same file through mmmuRows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -11,11 +11,20 @@ export const MMMU_TERMS =
   'Static JSON on the MMMU GitHub Pages site, which states no license or terms; the MMMU repository is Apache-2.0.';
 
 interface Row {
-  info: { name: string; date?: string; type: string; size?: string };
-  pro?: { overall?: string };
-  validation?: { overall?: string };
-  test?: { overall?: string };
+  info: { name: string; date?: string; type: string; size?: string; link?: string };
+  pro?: Record<string, string>;
+  validation?: Record<string, string>;
+  test?: Record<string, string>;
 }
+
+const disciplines = {
+  artDesign: 'Art and Design',
+  business: 'Business',
+  science: 'Science',
+  healthMedicine: 'Health and Medicine',
+  humanSocialSci: 'Humanities and Social Science',
+  techEng: 'Tech and Engineering',
+};
 
 /** "GPT-5.4 Thinking w/ tools" -> model "GPT-5.4", setting "thinking, with tools". */
 export function splitMmmuName(raw: string): { model: string; setting?: string } {
@@ -50,10 +59,30 @@ export async function mmmuRows(column: 'validation' | 'pro'): Promise<Leaderboar
     const size = r.info.size?.match(/^(\d+(?:\.\d+)?)B$/);
     // These rows report active sizes rather than total sizes.
     const activeSize = /^(?:Llama 4 |DeepSeek-VL2)|^Qwen3-VL 235B-A22B$/.test(r.info.name);
+    const metrics: Record<string, number> = {};
+    if (size && activeSize) metrics.activeParams = Number(size[1]);
+    if (column === 'pro') {
+      for (const key of ['original', 'vision']) {
+        const value = r.pro?.[key]?.trim();
+        if (value && Number.isFinite(Number(value))) metrics[key] = Number(value);
+      }
+    }
+    if (column === 'validation') {
+      for (const key of Object.keys(disciplines)) {
+        const value = r.validation?.[key]?.trim();
+        if (value && Number.isFinite(Number(value))) metrics[key] = Number(value);
+      }
+      for (const key of ['overall', ...Object.keys(disciplines)]) {
+        const value = r.test?.[key]?.trim();
+        if (value && Number.isFinite(Number(value))) metrics['test_' + key] = Number(value);
+      }
+    }
     rows.push({ ...splitMmmuName(r.info.name), score, date: r.info.date || undefined,
       open: r.info.type === 'open_source' ? true : r.info.type === 'proprietary' ? false : undefined,
       params: size && !activeSize ? Number(size[1]) : undefined,
-      metrics: size && activeSize ? { activeParams: Number(size[1]) } : undefined });
+
+      submitter: r[column]?.source === 'author' ? 'Model authors' : undefined,
+      metrics });
   }
   return rows;
 }
@@ -76,6 +105,7 @@ export const MMMU_ALIASES: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'mmmu',
+  parts: Object.fromEntries(Object.entries(disciplines).map(([key, name]) => [key, { name, group: 'Discipline' }])),
   url: 'https://mmmu-benchmark.github.io/#leaderboard',
   feed: `${MMMU_FEED} (validation.overall)`,
   terms: MMMU_TERMS,

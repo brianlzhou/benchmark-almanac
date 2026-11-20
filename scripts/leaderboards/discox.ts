@@ -7,7 +7,11 @@ import { tables, num } from '../lib/html.ts';
 
 const PAGE = 'https://randomtutu.github.io/DiscoX/';
 const board: Leaderboard = {
-  benchmark: 'discox', url: PAGE, feed: PAGE,
+  benchmark: 'discox', parts: {
+  accuracy: { name: 'Accuracy', group: 'Dimension' },
+  fluency: { name: 'Fluency', group: 'Dimension' },
+  appropriateness: { name: 'Appropriateness', group: 'Dimension' },
+}, url: PAGE, feed: PAGE,
   terms: 'The authors publish this public GitHub Pages table, with attribution retained and no separate score reuse license stated.',
   async fetch() {
     const table = tables(await fetchText(PAGE)).find(t => t.length > 1 && t[0][2]?.text === 'Overall' && t[0][3]?.text === 'Accuracy');

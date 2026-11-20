@@ -7,7 +7,7 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = 'https://simple-bench.com/static/js/leaderboard-data.js';
 
 const board: Leaderboard = {
-  benchmark: 'simplebench',
+  benchmark: 'simplebench', costPer: 'run',
   url: 'https://simple-bench.com/',
   feed: FEED,
   terms: 'Static data file of the public SimpleBench site; the site states no terms and its GitHub repo is MIT.',
@@ -46,15 +46,21 @@ const board: Leaderboard = {
     const listed = new Map<string, string>();
     for (const m of js.slice(js.indexOf('modelMeta')).matchAll(/^\s*"([^"]+)":\s*\{[^}]*released:\s*"([\d-]+)"/gm)) listed.set(m[1], m[2]);
     const metaAt = js.indexOf('modelMeta =');
-    const meta = metaAt < 0 ? {} : jsLiteral<Record<string, { input?: number; output?: number }>>(js, js.indexOf('{', metaAt));
+    const meta = metaAt < 0 ? {} : jsLiteral<Record<string, { input?: number; output?: number; tout?: number; cpr?: number; est?: boolean }>>(js, js.indexOf('{', metaAt));
     const rows: LeaderboardRow[] = [];
-    const re = /\{\s*rank:\s*"([^"]*)",\s*model:\s*"([^"]*)",\s*score:\s*"([\d.]+)%",\s*organization:\s*"[^"]*",\s*dateAdded:\s*(?:"([\d-]+)"|null)\s*\}/g;
+    const re = /\{\s*rank:\s*"([^"]*)",\s*model:\s*"([^"]*)",\s*score:\s*"([\d.]+)%",\s*organization:\s*"([^"]*)",\s*dateAdded:\s*(?:"([\d-]+)"|null)\s*\}/g;
+    const openEnded = js.match(/const openEndedData = (\[[\s\S]*?\]);/)?.[1] ?? '';
+    const other = new Map([...openEnded.matchAll(re)].map(m => [m[2], Number(m[3])]));
     for (const m of block.matchAll(re)) {
       if (m[1] === '-') continue; // human baselines
       // "o1-2024-12-17 (med)": the resolver knows "medium"
       const model = m[2].trim().replace(/\(med\)$/, '(medium)');
       const price = meta[m[2].trim()];
-      rows.push({ model, score: Number(m[3]), metrics: { ...(typeof price?.input === 'number' ? { priceIn: price.input } : {}), ...(typeof price?.output === 'number' ? { priceOut: price.output } : {}) }, date: m[4] ?? listed.get(m[2].trim()) });
+      const priced = !['GPT-OSS 120B', 'Grok 4.1 Fast'].includes(m[2]) && typeof price?.cpr === 'number';
+      rows.push({ model, cost: priced ? price.cpr : undefined,
+        score: Number(m[3]), metrics: { rank: parseInt(m[1]), ...(other.has(m[2]) ? { openEnded: other.get(m[2])! } : {}),
+          ...(priced && typeof price.tout === 'number' ? { reportedOutputTokens: price.tout } : {}),
+          ...(price?.est ? { estimatedPrice: 1 } : {}), ...(typeof price?.input === 'number' ? { priceIn: price.input } : {}), ...(typeof price?.output === 'number' ? { priceOut: price.output } : {}) }, date: m[5] ?? listed.get(m[2].trim()) });
     }
     if (!rows.length) throw new Error('no leaderboardData rows');
     return rows;

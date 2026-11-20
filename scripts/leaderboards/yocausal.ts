@@ -6,6 +6,12 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://www.youzhexie.me/papers/YoCausal/index.html";
 const board: Leaderboard = {
   benchmark: "yocausal",
+  parts: {
+    general: { name: 'General', group: 'Category' },
+    physics: { name: 'Physics', group: 'Category' },
+    human: { name: 'Human', group: 'Category' },
+    animal: { name: 'Animal', group: 'Category' },
+  },
   url: "https://www.youzhexie.me/papers/YoCausal/index.html",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

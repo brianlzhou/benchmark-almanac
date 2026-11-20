@@ -4,6 +4,15 @@ import type {Leaderboard} from './types.ts';
 import {fetchJson} from '../lib/util.ts';
 const FEED='https://huggingface.co/spaces/McGill-NLP/AfroBench/raw/main/data/leaderboard_json/afrobench_lite.json';
 const board:Leaderboard={benchmark:'afrobench-lite',url:'https://huggingface.co/spaces/McGill-NLP/AfroBench',feed:FEED,
+parts: {
+  Intent: { name: 'Intent', group: 'Task type' },
+  MMLU: { name: 'MMLU', group: 'Task type' },
+  Math: { name: 'Math', group: 'Task type' },
+  Topic: { name: 'Topic', group: 'Task type' },
+  NLI: { name: 'Natural language inference', group: 'Task type' },
+  'MT(en/fr-xx)': { name: 'Machine translation', group: 'Task type', note: 'Translation from English or French into the evaluated languages.' },
+  RC: { name: 'Reading comprehension', group: 'Task type' },
+},
  terms:'MIT Space; Hugging Face robots.txt permits the raw results path.',
  async fetch(){
   const data=await fetchJson<Record<string,Record<string,Record<string,number>>>>(FEED);

@@ -5,6 +5,10 @@ import { fetchText } from '../lib/util.ts';
 const FEED = "https://eurekabench.github.io/";
 const board: Leaderboard = {
  benchmark: "eurekabench",
+ parts: {
+   predictiveAccuracy: { name: 'Predictive accuracy', group: 'Dimension' },
+   scientificInsights: { name: 'Scientific insights', group: 'Dimension' },
+ },
  url: "https://eurekabench.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

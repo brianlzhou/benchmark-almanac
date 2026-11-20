@@ -5,7 +5,10 @@ import {fetchText} from '../lib/util.ts';
 import {tables,num} from '../lib/html.ts';
 const PAGE='https://competitions.codalab.org/competitions/29139';
 const FEED=PAGE+'/results/47908';
-export default {benchmark:'ref-youtube-vos',url:PAGE,feed:FEED,
+export default {benchmark:'ref-youtube-vos', parts: {
+  J: { name: 'Region Jaccard', group: 'Dimension' },
+  F: { name: 'Boundary F measure', group: 'Dimension' },
+},url:PAGE,feed:FEED,
  terms:'Public official competition results hosted by CodaLab; the almanac credits the Refer-YouTube-VOS organizers and links the source.',
  async fetch():Promise<LeaderboardRow[]> {
   const t=tables(await fetchText(FEED)).find(t=>t.some(r=>r.some(c=>c.text==='Overall')));

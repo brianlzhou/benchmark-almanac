@@ -7,6 +7,12 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2610.22350";
 const board: Leaderboard = {
   benchmark: "fde-gym",
+  parts: {
+    l0: { name: 'Level 0', group: 'Difficulty' },
+    l1: { name: 'Level 1', group: 'Difficulty' },
+    l2: { name: 'Level 2', group: 'Difficulty' },
+    l3: { name: 'Level 3', group: 'Difficulty' },
+  },
   url: "https://arxiv.org/html/2610.22350",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

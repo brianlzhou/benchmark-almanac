@@ -7,6 +7,18 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://scibench-ucla.github.io/data/results/model_scores.js";
 const board: Leaderboard = {
   benchmark: "scibench",
+  parts: {
+    atkins: { name: 'Physical chemistry', group: 'Textbook' },
+    chemmc: { name: 'Quantum chemistry (McQuarrie)', group: 'Textbook' },
+    quan: { name: 'Quantum chemistry (Levine)', group: 'Textbook' },
+    matter: { name: 'Physical chemistry, quanta, matter, and change', group: 'Textbook' },
+    fund: { name: 'Fundamentals of physics', group: 'Textbook' },
+    class: { name: 'Classical dynamics of particles and systems', group: 'Textbook' },
+    thermo: { name: 'Statistical thermodynamics', group: 'Textbook' },
+    diff: { name: 'Elementary differential equations and boundary value problems', group: 'Textbook' },
+    stat: { name: 'Probability and statistical inference', group: 'Textbook' },
+    calc: { name: 'Calculus: Early transcendentals', group: 'Textbook' },
+  },
   url: "https://scibench-ucla.github.io/data/results/model_scores.js",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

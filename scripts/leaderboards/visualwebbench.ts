@@ -9,6 +9,15 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2404.05955";
 const board: Leaderboard = {
  benchmark: "visualwebbench",
+ parts: {
+   caption: { name: 'Caption', group: 'Task type' },
+   webQA: { name: 'Web question answering', group: 'Task type' },
+   headingOCR: { name: 'Heading OCR', group: 'Task type' },
+   elementOCR: { name: 'Element OCR', group: 'Task type' },
+   elementGrounding: { name: 'Element grounding', group: 'Task type' },
+   actionPrediction: { name: 'Action prediction', group: 'Task type' },
+   actionGrounding: { name: 'Action grounding', group: 'Task type' },
+ },
  url: "https://arxiv.org/html/2404.05955",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -8,6 +8,17 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/MoonshotAI/PerceptionBench/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "perceptionbench-moonshot",
+ parts: {
+   Depth: { name: 'Depth', group: 'Task type' },
+   OCR: { name: 'OCR', group: 'Task type' },
+   VRel: { name: 'Visual relation', group: 'Task type' },
+   Attr: { name: 'Attribute', group: 'Task type' },
+   Loc: { name: 'Localization', group: 'Task type' },
+   Comp: { name: 'Comparison', group: 'Task type' },
+   FGR: { name: 'Fine-grained recognition', group: 'Task type' },
+   Ctx: { name: 'Contextual integration', group: 'Task type' },
+   Hallu: { name: 'Perception-related hallucination', group: 'Task type' },
+ },
  url: "https://github.com/MoonshotAI/PerceptionBench#leaderboard",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

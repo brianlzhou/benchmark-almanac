@@ -7,6 +7,14 @@ const FEED = "https://arxiv.org/html/2405.04520";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "naturalcodebench",
+  parts: {
+    zhPython: { name: 'Chinese Python', group: 'Language' },
+    zhJava: { name: 'Chinese Java', group: 'Language' },
+    zh: { name: 'Chinese', group: 'Language' },
+    enPython: { name: 'English Python', group: 'Language' },
+    enJava: { name: 'English Java', group: 'Language' },
+    en: { name: 'English', group: 'Language' },
+  },
   url: "https://github.com/THUDM/NaturalCodeBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

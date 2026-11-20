@@ -5,7 +5,7 @@ import { fetchText } from '../lib/util.ts';
 const PAGE = 'https://www.mercor.com/apex/apex-accounting-leaderboard/';
 interface Run {model_name: string; model_id: string; company?: string; effort?: string; score: Record<string, Record<string, number>>; error?: Record<string, Record<string, number>>}
 const board: Leaderboard = {
- benchmark: 'apex-accounting', url: PAGE, feed: `${PAGE} (__NEXT_DATA__.props.pageProps.leaderboard.rows)`,
+ benchmark: 'apex-accounting', measures: { 'pass-1': 'pass-1' }, url: PAGE, feed: `${PAGE} (__NEXT_DATA__.props.pageProps.leaderboard.rows)`,
  chart: {title: 'Cost vs. Performance', x: {key: 'costPerRun', label: 'Source cost per run', unit: '$', better: 'lower'}, y: {key: 'score', label: 'Mean score', unit: '%', better: 'higher'}, note: 'Mercor costPerRun values are preserved without assuming a per-task denominator.'},
  terms: 'Mercor terms prohibit scraping; the almanac credits Mercor and links the original source.',
  aliases: {'Muse Wonder 1.0': 'muse-wonder'},

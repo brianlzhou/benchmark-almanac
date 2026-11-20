@@ -6,6 +6,18 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores";
 const board: Leaderboard = {
   benchmark: "mieb",
+  parts: {
+    ImageClassification: { name: 'Image classification', group: 'Task type' },
+    DocumentUnderstanding: { name: 'Document understanding', group: 'Task type' },
+    Any2AnyRetrieval: { name: 'Any to any retrieval', group: 'Task type' },
+    ZeroShotClassification: { name: 'Zero shot classification', group: 'Task type' },
+    VisionCentricQA: { name: 'Vision centric question answering', group: 'Task type' },
+    Any2AnyMultilingualRetrieval: { name: 'Any to any multilingual retrieval', group: 'Task type' },
+    ImageClustering: { name: 'Image clustering', group: 'Task type' },
+    Compositionality: { name: 'Compositionality', group: 'Task type' },
+    'VisualSTS(eng)': { name: 'Visual semantic textual similarity, English', group: 'Task type' },
+    'VisualSTS(multi)': { name: 'Visual semantic textual similarity, multilingual', group: 'Task type' },
+  },
   url: "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

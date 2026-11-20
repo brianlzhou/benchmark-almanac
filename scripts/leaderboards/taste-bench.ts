@@ -7,6 +7,12 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/wbopan/tastebench/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "taste-bench",
+  parts: {
+    detourEngineering: { name: 'Detour engineering', group: 'Category' },
+    detourResearch: { name: 'Detour research', group: 'Category' },
+    parallelEngineering: { name: 'Parallel engineering', group: 'Category' },
+    parallelResearch: { name: 'Parallel research', group: 'Category' },
+  },
   url: "https://github.com/wbopan/tastebench#leaderboard",
   feed: FEED,
   terms: "MIT code and CC BY 4.0 data; public README results are not gated; raw.githubusercontent.com has no robots.txt.",

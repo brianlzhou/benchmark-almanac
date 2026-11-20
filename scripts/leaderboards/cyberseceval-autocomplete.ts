@@ -5,6 +5,16 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = 'https://huggingface.co/spaces/facebook/CyberSecEval/resolve/main/insecure_code.json';
 const board: Leaderboard = {
   benchmark: 'cyberseceval-autocomplete', url: 'https://huggingface.co/spaces/facebook/CyberSecEval', feed: FEED,
+  parts: {
+    C: { name: 'C', group: 'Language' },
+    'C#': { name: 'C#', group: 'Language' },
+    'C++': { name: 'C++', group: 'Language' },
+    Java: { name: 'Java', group: 'Language' },
+    JavaScript: { name: 'JavaScript', group: 'Language' },
+    PHP: { name: 'PHP', group: 'Language' },
+    Python: { name: 'Python', group: 'Language' },
+    Rust: { name: 'Rust', group: 'Language' },
+  },
   terms: 'Official Meta results in a public Hugging Face Space; upstream licensing applies and the Almanac credits and links the source.',
   async fetch() {
     const data = await fetchJson<Record<string, Record<string, {autocomplete_vunerable_percentage: number}>>>(FEED);

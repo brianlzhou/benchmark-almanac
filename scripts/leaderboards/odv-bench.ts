@@ -4,7 +4,23 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = 'https://happyzqy.github.io/StreamForest/';
 const board: Leaderboard = {
-  benchmark: 'odv-bench', url: URL, feed: URL,
+  benchmark: 'odv-bench', parts: {
+  staticAverage: { name: 'Static', group: 'Category' },
+  dynamicAverage: { name: 'Dynamic', group: 'Category' },
+  eventAverage: { name: 'Event', group: 'Category' },
+  RTP: { name: 'Real-time traffic perception', group: 'Category' },
+  HD: { name: 'Hallucination detection', group: 'Category' },
+  KIE: { name: 'Key information extraction', group: 'Category' },
+  TCD: { name: 'Traffic change detection', group: 'Category' },
+  DDM: { name: 'Driving decision-making', group: 'Category' },
+  PTM: { name: 'Past traffic memory', group: 'Category' },
+  AP: { name: 'Action prediction', group: 'Category' },
+  LP: { name: 'Location prediction', group: 'Category' },
+  DP: { name: 'Distance prediction', group: 'Category' },
+  RP: { name: 'Risk prediction', group: 'Category' },
+  RA: { name: 'Risk analysis', group: 'Category' },
+  ARA: { name: 'Accident reason answering', group: 'Category' },
+}, url: URL, feed: URL,
   terms: 'The official project website uses CC BY-SA 4.0. Benchmark Almanac credits and links the source.',
   async fetch(): Promise<LeaderboardRow[]> {
     const t = tables(await fetchText(URL)).find(t => t[0]?.some(c=>c.text==='Overall') && t[1]?.some(c=>c.text==='RTP'));

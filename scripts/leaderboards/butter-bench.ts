@@ -7,6 +7,14 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2510.21860";
 const board: Leaderboard = {
   benchmark: "butter-bench",
+  parts: {
+    search: { name: 'Search', group: 'Task type' },
+    infer: { name: 'Infer', group: 'Task type' },
+    absence: { name: 'Absence', group: 'Task type' },
+    wait: { name: 'Wait', group: 'Task type' },
+    plan: { name: 'Plan', group: 'Task type' },
+    e2e: { name: 'End-to-end', group: 'Task type' },
+  },
   url: "https://arxiv.org/html/2510.21860",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

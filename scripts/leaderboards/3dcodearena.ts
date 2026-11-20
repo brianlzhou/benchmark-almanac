@@ -4,6 +4,10 @@ import type { Leaderboard } from './types.ts';
 import { code3dRows } from '../lib/boards/3dcodearena.ts';
 const board: Leaderboard = {
   benchmark: '3dcodearena', url: 'https://www.3dcodebench.com/leaderboard',
+  parts: {
+    bt_elo_text: { name: 'Text', group: 'Modality' },
+    bt_elo_image: { name: 'Image', group: 'Modality' },
+  },
   feed: 'https://www.3dcodebench.com/leaderboard (models payload); https://www.3dcodebench.com/ (cost chart)',
   terms: 'Public 3DCodeBench results. No separate data license is stated on the leaderboard; the almanac credits and links the source.',
   aliases: { 'gemma-4-26b-a4b-it': 'gemma-4-26b-a4b' },

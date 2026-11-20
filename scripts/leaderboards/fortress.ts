@@ -30,8 +30,9 @@ const board: Leaderboard = {
   fetch: async () =>
     scaleRows(await fetchScaleEntries(PAGE), (_, e) => {
       const ors = Number(e.contaminationMessage?.match(/ORS score:\s*([\d.]+)/)?.[1]);
-      const metrics = { ...ci(e), ...(Number.isFinite(ors) ? { ors } : {}) };
-      return Object.keys(metrics).length ? { metrics } : undefined;
+      const bounds = ci(e);
+      const metrics = { ...bounds, ...(typeof e.rank === 'number' ? { rank: e.rank } : {}), ...(Number.isFinite(ors) ? { ors } : {}) };
+      return { metrics, low: bounds?.ciLow, high: bounds?.ciHigh, date: e.createdAt?.slice(0, 10) };
     }),
 };
 export default board;

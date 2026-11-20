@@ -6,7 +6,10 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard/resolve/main/leaderboard_data.json";
 const board: Leaderboard = {
- benchmark: "disbench", url: "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard", feed: FEED,
+ benchmark: "disbench", parts: {
+  intra_em: { name: 'Intra image', group: 'Category' },
+  inter_em: { name: 'Inter image', group: 'Category' },
+}, url: "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  aliases:{'Claude-Opus-4-5-20251101':'claude-opus-4-5','Claude-Sonnet-4-5-20250929':'claude-sonnet-4-5'},
  async fetch() {

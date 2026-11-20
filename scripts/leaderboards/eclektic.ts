@@ -1,8 +1,8 @@
 // ECLeKTic on Kaggle Benchmarks (Google). The "Score" task, the share of questions answered correctly in both
-// the source language and the target language (a fraction, shown 0 to 100), is the score. "Transfer Score" is a
-// breakdown. Read through the helper in kaggle-game-arena.ts.
+// the source language and the target language (a fraction, shown 0 to 100), is the score. "Transfer Score" measures transfer conditional on a correct source answer.
+// Keep both measures and their confidence intervals.
 import type { Leaderboard } from './types.ts';
-import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
+import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'eclektic',
@@ -10,6 +10,8 @@ const board: Leaderboard = {
   feed: kaggleFeed('google', 'eclektic'),
   terms: KAGGLE_TERMS,
   aliases: {},
-  fetch: () => kaggleRows('google', 'eclektic', 'Score', 100),
+  fetch: () => kaggleRowsWithBounds('google', 'eclektic', 'Score', 100, {
+    transferScore: { task: 'Transfer Score', scale: 100, interval: true },
+  }),
 };
 export default board;

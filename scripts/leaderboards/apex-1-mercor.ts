@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 const PAGE = 'https://www.mercor.com/apex/apex-v1-leaderboard/';
 interface Run {
-  model_name: string; effort?: string;
+  model_name: string; effort?: string; descriptors?: string[];
   score: Record<string, Record<string, number>>;
   error?: Record<string, Record<string, number>>;
   n_samples?: number;
@@ -27,7 +27,12 @@ const board: Leaderboard = {
         const ci = r.error?.['mean-score']?.[harness];
         if (typeof ci === 'number') metrics.ci95 = ci;
         if (typeof r.n_samples === 'number') metrics.samples = r.n_samples;
-        rows.push({ model: r.model_name, score, setting: r.effort, harness, metrics });
+        const pass = r.score['pass-1']?.[harness], passError = r.error?.['pass-1']?.[harness];
+        if (typeof pass === 'number') metrics.passAt1 = pass;
+        if (typeof passError === 'number') metrics.passAt1Error = passError;
+        const setting = [r.effort, ...(r.descriptors ?? [])].filter(Boolean).join(', ') || undefined;
+        rows.push({ model: r.model_name, score, setting, harness, metrics,
+          low: ci === undefined ? undefined : score - ci, high: ci === undefined ? undefined : score + ci });
       }
     }
     if (!rows.length) throw new Error('Mercor APEX-1 board has no Mean Score rows');

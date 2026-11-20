@@ -9,6 +9,10 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 const FEED = "https://arxiv.org/html/2408.01122";
 const board: Leaderboard = {
  benchmark: "cfbench",
+ parts: {
+   easyPSR: { name: 'Easy', group: 'Difficulty' },
+   hardPSR: { name: 'Hard', group: 'Difficulty' },
+ },
  url: "https://arxiv.org/html/2408.01122",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

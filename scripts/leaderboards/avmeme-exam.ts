@@ -7,6 +7,17 @@ import { jsonAfter } from '../lib/html.ts';
 const FEED = "https://avmemeexam.github.io/public/";
 const board: Leaderboard = {
   benchmark: "avmeme-exam",
+  parts: {
+    'Language Analysis': { name: 'Language analysis', group: 'Task type' },
+    'Contextual Inference': { name: 'Contextual inference', group: 'Task type' },
+    'Humor & Popularity': { name: 'Humor and popularity', group: 'Task type' },
+    'Usage & Application': { name: 'Usage and application', group: 'Task type' },
+    'World Knowledge': { name: 'World knowledge', group: 'Task type' },
+    Speech: { name: 'Speech', group: 'Category' },
+    Song: { name: 'Song', group: 'Category' },
+    Music: { name: 'Music', group: 'Category' },
+    'Sound Effect': { name: 'Sound effect', group: 'Category' },
+  },
   url: "https://avmemeexam.github.io/public/",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

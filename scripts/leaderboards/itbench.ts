@@ -9,6 +9,10 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'itbench',
+  parts: {
+    sre: { name: 'Site reliability engineering', group: 'Domain' },
+    finops: { name: 'FinOps', group: 'Domain' },
+  },
   url: 'https://www.kaggle.com/benchmarks/ibm-research/itbench',
   feed: kaggleFeed('ibm-research', 'itbench'),
   terms: KAGGLE_TERMS,

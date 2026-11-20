@@ -8,6 +8,15 @@ const FEED = "https://worldbench-vl.github.io/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "worldbench",
+  parts: {
+    Living: { name: 'Living', group: 'Category' },
+    Objects: { name: 'Objects', group: 'Category' },
+    Scenes: { name: 'Scenes', group: 'Category' },
+    Digital: { name: 'Digital', group: 'Category' },
+    Agents: { name: 'Agents', group: 'Category' },
+    'Acad.': { name: 'Academics', group: 'Category' },
+    DCT: { name: 'Documents, charts and tables', group: 'Category' },
+  },
   url: "https://worldbench-vl.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at worldbench-vl.github.io; retain source attribution and follow the upstream terms.",

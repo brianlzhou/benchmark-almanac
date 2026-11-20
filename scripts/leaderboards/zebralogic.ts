@@ -8,7 +8,12 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = 'https://huggingface.co/spaces/allenai/ZebraLogic/resolve/main/ZeroEval-main/result_dirs/zebra-grid.summary.json';
 
+const sizes = ['Small', 'Medium', 'Large', 'XL'];
+const difficulties = ['Easy', 'Hard'];
+
 interface Run {
+  [column: string]: string | number | undefined;
+  Mode?: string;
   Model: string;
   'Puzzle Acc': string;
   'Total Puzzles': number;
@@ -28,6 +33,9 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/allenai/ZebraLogic',
   feed: `${FEED} (Puzzle Acc)`,
   terms: "A results file committed in Ai2's public Space, read through Hugging Face's file endpoint; the ZeroEval code that writes it is Apache-2.0.",
+  parts: Object.fromEntries([...difficulties, ...sizes].map(name => [
+    name.toLowerCase(), { name, group: difficulties.includes(name) ? 'Difficulty' : 'Size' },
+  ])),
   aliases: {
     'deepseek-R1': 'deepseek-r1',
     'deepseek-v3': 'deepseek-v3',
@@ -77,7 +85,16 @@ const board: Leaderboard = {
       }
       if (unlisted) model += " (unlisted snapshot)";
       const effort = model.match(/^(o\d-mini)-\d{4}-\d\d-\d\d-(low|medium|high)$/);
-      rows.push({ model: effort ? effort[1] : model, setting: [effort?.[2] ?? setting, provider ? `provider: ${provider}` : undefined].filter(Boolean).join('; ') || undefined, trials: r.N_Mode === 'single' && r.N_Size === 1 ? 1 : undefined, score });
+      const metrics: Record<string, number> = { totalPuzzles: r['Total Puzzles'] };
+      const columns = [
+        ...[...difficulties, ...sizes].map(name => [name.toLowerCase(), name + ' Puzzle Acc']),
+        ['cellAccuracy', 'Cell Acc'], ['noAnswer', 'No answer'], ['reasonLength', 'Reason Lens'],
+      ];
+      for (const [key, column] of columns) {
+        const value = r[column];
+        if (value != null && String(value).trim() && Number.isFinite(Number(value))) metrics[key] = Number(value);
+      }
+      rows.push({ metrics, model: effort ? effort[1] : model, setting: [effort?.[2] ?? setting, r.Mode, provider ? `provider: ${provider}` : undefined].filter(Boolean).join('; ') || undefined, trials: r.N_Mode === 'single' && r.N_Size === 1 ? 1 : undefined, score });
     }
     if (!rows.length) throw new Error('no full runs in the summary');
     return rows;

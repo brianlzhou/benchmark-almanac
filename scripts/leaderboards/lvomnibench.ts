@@ -4,7 +4,15 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://kd-tao.github.io/LVOmniBench/";
 const board: Leaderboard = {
-  benchmark: "lvomnibench", url: "https://kd-tao.github.io/LVOmniBench/", feed: FEED,
+  benchmark: "lvomnibench", parts: {
+  Low: { name: 'Low', group: 'Difficulty' },
+  Medium: { name: 'Medium', group: 'Difficulty' },
+  High: { name: 'High', group: 'Difficulty' },
+  Understanding: { name: 'Understanding', group: 'Task type' },
+  Perception: { name: 'Perception', group: 'Task type' },
+  Inference: { name: 'Inference', group: 'Task type' },
+  Logical: { name: 'Logical', group: 'Task type' },
+}, url: "https://kd-tao.github.io/LVOmniBench/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

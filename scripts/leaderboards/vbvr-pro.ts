@@ -8,6 +8,10 @@ const FEED = "https://video-reason.com/?v=pro";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "vbvr-pro",
+  parts: {
+    'In-Domain': { name: 'In domain', group: 'Split' },
+    'Out-of-Domain': { name: 'Out of domain', group: 'Split' },
+  },
   url: "https://video-reason.com/?v=pro",
   feed: FEED,
   terms: "Public results published by the benchmark authors at video-reason.com; retain source attribution and follow the upstream terms.",

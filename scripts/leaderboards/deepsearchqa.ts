@@ -19,9 +19,9 @@ const board: Leaderboard = {
   },
   fetch: () =>
     kaggleRowsWithBounds('google', 'dsqa', 'Fully Correct', 100, {
-      f1: { task: 'F1', scale: 100 },
-      incorrect: { task: 'Fully Incorrect', scale: 100 },
-      excessive: { task: 'Correct w/ Excessive Answers', scale: 100 },
+      f1: { task: 'F1', scale: 100, interval: true },
+      incorrect: { task: 'Fully Incorrect', scale: 100, interval: true },
+      excessive: { task: 'Correct w/ Excessive Answers', scale: 100, interval: true },
     }),
 };
 export default board;

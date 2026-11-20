@@ -5,7 +5,12 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = 'https://fireworks.ai/specialized-intelligence-index/api/index.json';
 type Metric = {value:number|null; unit:string};
 const board: Leaderboard = {
-  benchmark: 'duetbench', url: 'https://fireworks.ai/specialized-intelligence-index/benchmarks/customer-support/duetbench-diagnosis', feed: FEED,
+  benchmark: 'duetbench', parts: {
+  taskOutcome: { name: 'Task outcome', group: 'Dimension' },
+  investigation: { name: 'Investigation', group: 'Dimension' },
+  toolUse: { name: 'Tool use', group: 'Dimension' },
+  communication: { name: 'Communication', group: 'Dimension' },
+}, url: 'https://fireworks.ai/specialized-intelligence-index/benchmarks/customer-support/duetbench-diagnosis', feed: FEED,
   terms: 'Fireworks terms restrict automated extraction. Benchmark Almanac credits Decagon and Fireworks and links the published source.',
   aliases: {'Claude 5 Sonnet':'claude-sonnet-5'},
   async fetch() {

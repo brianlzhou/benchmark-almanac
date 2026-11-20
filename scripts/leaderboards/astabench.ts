@@ -11,6 +11,12 @@ const FEED = "https://allenai-asta-bench-leaderboard.hf.space/config";
 
 const board: Leaderboard = {
   benchmark: "astabench",
+  parts: {
+    literature: { name: 'Literature understanding', group: 'Task type' },
+    code: { name: 'Code and execution', group: 'Task type' },
+    dataAnalysis: { name: 'Data analysis', group: 'Task type' },
+    discovery: { name: 'End-to-end discovery', group: 'Task type' },
+  },
   url: "https://huggingface.co/spaces/allenai/asta-bench-leaderboard",
   feed: FEED,
   terms: "Ai2 publishes the public Space data and evaluation logs. Robots rules permit its configuration endpoint.",

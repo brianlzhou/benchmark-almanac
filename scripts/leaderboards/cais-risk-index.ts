@@ -8,11 +8,19 @@ import { CAIS_ALIASES, CAIS_PAGE, CAIS_TERMS, caisIndexRows } from './cais-text-
 
 const board: Leaderboard = {
   benchmark: 'cais-risk-index',
+  parts: {
+    hle_calibration_error: 'HLE calibration error',
+    masks: { name: 'MASK', note: 'The index uses 100 minus the honesty score.' },
+    machiavelli: 'MACHIAVELLI',
+    textquests_harm: 'TextQuests Harm',
+  },
   url: CAIS_PAGE,
   feed: `${CAIS_PAGE} (page JS chunk, mean of art, 100 - refusal_avg, pct, hle_calibration_error, 100 - masks, machiavelli, textquests_harm)`,
   terms: CAIS_TERMS,
   aliases: CAIS_ALIASES,
-  fetch: () =>
-    caisIndexRows(['art', 'refusal_avg', 'pct', 'hle_calibration_error', 'masks', 'machiavelli', 'textquests_harm'], ['refusal_avg', 'masks']),
+  async fetch() {
+    const rows = await caisIndexRows(['art', 'refusal_avg', 'pct', 'hle_calibration_error', 'masks', 'machiavelli', 'textquests_harm'], ['refusal_avg', 'masks'], undefined, true);
+    return rows.map(row => ({ ...row, metrics: Object.fromEntries(Object.entries(row.metrics ?? {}).filter(([key]) => key in board.parts!)) }));
+  },
 };
 export default board;

@@ -8,6 +8,13 @@ const FEED = "https://raw.githubusercontent.com/haonan-li/CMMLU/master/README.md
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "cmmlu",
+  parts: {
+    STEM: { name: 'STEM', group: 'Domain' },
+    '人文学科': { name: 'Humanities', group: 'Domain' },
+    '社会科学': { name: 'Social sciences', group: 'Domain' },
+    '其他': { name: 'Other', group: 'Domain' },
+    '中国特定主题': { name: 'China specific topics', group: 'Domain' },
+  },
   url: "https://github.com/haonan-li/CMMLU",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
@@ -23,7 +30,8 @@ const board: Leaderboard = {
         if (!r[0] || /random|随机/i.test(r[0]) || score === undefined) continue;
         const metrics: Record<string, number> = {};
         t.head.slice(1, 6).forEach((h, i) => { const v = num(r[i + 1]); if (v !== undefined) metrics[h] = v; });
-        out.push({ model: identity(r[0]), score, setting: t.heading, metrics });
+        const size = r[0].match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:[- ]|$)/i);
+        out.push({ params: size ? Number(size[1]) : undefined, model: identity(r[0]), score, setting: t.heading, metrics });
       }
     }
     if (!out.length) throw new Error('CMMLU tables missing');

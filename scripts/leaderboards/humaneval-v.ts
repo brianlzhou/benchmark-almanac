@@ -35,15 +35,19 @@ const board: Leaderboard = {
   async fetch() {
     const data = await fetchJson<{ info: Record<string, string> }[]>(FEED);
     const rows: LeaderboardRow[] = [];
-    for (const { info } of data) {
-      const score = num(info['v2c-cot@1']);
-      if (!info.model || score === undefined) continue;
-      const pass3 = num(info['v2c-cot@3']);
-      rows.push({ model: info.model, score, ...(pass3 !== undefined ? { metrics: { passAt3: pass3 } } : {}) });
-    }
-    for(const {info} of data) for(const setting of ['v2c','v2t2c','v2t2c-4o']){
-      const score=num(info[setting+'@1']);if(!info.model||score===undefined)continue;
-      const pass3=num(info[setting+'@3']);rows.push({model:info.model,score,setting,...(pass3===undefined?{}:{metrics:{passAt3:pass3}})});
+    for (const setting of ['v2c-cot', 'v2c', 'v2t2c', 'v2t2c-4o']) {
+      for (const { info } of data) {
+        const score = num(info[setting + '@1']);
+        if (!info.model || score === undefined) continue;
+        const pass3 = num(info[setting + '@3']);
+        const size = info.model.match(/\b(\d+(?:\.\d+)?)B\b/i);
+        rows.push({
+          model: info.model, score, setting,
+          open: info.type === 'open_weight' ? true : info.type === 'proprietary' ? false : undefined,
+          params: size ? Number(size[1]) : undefined,
+          metrics: pass3 === undefined ? undefined : { passAt3: pass3 },
+        });
+      }
     }
     return rows;
   },

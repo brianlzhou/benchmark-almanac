@@ -25,6 +25,11 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'kor-bench',
+  parts: {
+    operation: { name: 'Operation', group: 'Task type' },
+    logic: { name: 'Logic', group: 'Task type' },
+    puzzle: { name: 'Puzzle', group: 'Task type' },
+  },
   url: 'https://kor-bench.github.io/',
   feed: `${FEED} (chat and base models)`,
   terms: 'Static JSON on a GitHub Pages project site with no robots.txt and no terms; the KOR-Bench repository is public and the scores are cited to the authors.',

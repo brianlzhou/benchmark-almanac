@@ -6,7 +6,10 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://ldbench.com/data/site.json";
 const board: Leaderboard = {
- benchmark: "librarydesignbench", url: "https://ldbench.com", feed: FEED,
+ benchmark: "librarydesignbench", parts: {
+  simplicity: { name: 'Simplicity', group: 'Dimension', note: 'Reported on a zero-to-one scale.' },
+  passRate: { name: 'Pass rate', group: 'Dimension', unit: '%' },
+}, url: "https://ldbench.com", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  chart:{title:'Library quality vs. design cost',x:{key:'cost',label:'Mean design cost per library',unit:'$',better:'lower'},y:{key:'score',label:'Library quality',unit:'score',better:'higher'}},
  async fetch() {

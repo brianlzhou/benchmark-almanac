@@ -6,7 +6,16 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://alpha-innovator.github.io/mmereasoning.github.io/";
 const board: Leaderboard = {
- benchmark: "mme-reasoning", url: "https://alpha-innovator.github.io/mmereasoning.github.io/", feed: FEED,
+ benchmark: "mme-reasoning", parts: {
+  Calculation: { name: 'Calculation', group: 'Task type' },
+  'Planning & Exploring': { name: 'Planning & exploring', group: 'Task type' },
+  'Pattern Analysis': { name: 'Pattern analysis', group: 'Task type' },
+  'Spatial & Temporal': { name: 'Spatial & temporal', group: 'Task type' },
+  'Casual Chain Analysis': { name: 'Casual chain analysis', group: 'Task type' },
+  Deductive: { name: 'Deductive', group: 'Task type' },
+  Inductive: { name: 'Inductive', group: 'Task type' },
+  Abductive: { name: 'Abductive', group: 'Task type' },
+}, url: "https://alpha-innovator.github.io/mmereasoning.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:{'Claude-4-Sonnet':'claude-sonnet-4','Seed1.5-VL':'seed-1-5-vl'},
  async fetch() {

@@ -10,6 +10,7 @@ const board: Leaderboard = {
  benchmark: "browsecomp-zh",
  url: "https://github.com/PALIN2018/BrowseComp-ZH",
  feed: FEED,
+ harnesses: 'system',
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
 
  async fetch(): Promise<LeaderboardRow[]> {
@@ -17,6 +18,10 @@ const board: Leaderboard = {
   const t = markdownTables(await fetchText(FEED)).find(t=>t[0].includes('Accuracy'));
   if (!t) throw new Error('BrowseComp-ZH table missing');
   return t.slice(1).filter(r=>num(r[4])!==undefined).map(r=>({model:r[0],score:num(r[4])!,
+    open: r[1] === 'Open-Source' ? true : r[1] === 'Closed-Source' ? false : undefined,
+    harness: r[1] === 'AI Search Product' ? r[0] : undefined,
+    agentOrg: r[1] === 'AI Search Product' ? r[6] : undefined,
+    params: /-(\d+(?:\.\d+)?)B\b/i.test(r[0]) ? Number(r[0].match(/-(\d+(?:\.\d+)?)B\b/i)![1]) : undefined,
     setting:`reasoning: ${r[2]}; browsing: ${r[3]}`,metrics:{calibrationError:num(r[5])!}}));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

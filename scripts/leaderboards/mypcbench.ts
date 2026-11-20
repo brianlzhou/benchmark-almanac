@@ -24,6 +24,14 @@ interface Model {
 
 const board: Leaderboard = {
   benchmark: 'mypcbench',
+  parts: {
+    aggregation_reporting: { name: 'Aggregation reporting', group: 'Task type' },
+    bounded_action: { name: 'Bounded action', group: 'Task type' },
+    cross_source_reconciliation: { name: 'Cross source reconciliation', group: 'Task type' },
+    multi_step_orchestration: { name: 'Multi step orchestration', group: 'Task type' },
+    pattern_inference: { name: 'Pattern inference', group: 'Task type' },
+    personal_lookup: { name: 'Personal lookup', group: 'Task type' },
+  },
   url: 'https://mypcbench.com/',
   feed: `${FEED} (perfect_rate)`,
   terms: 'JSON file the mypcbench.com page loads; robots.txt allows all paths and the site states no terms.',

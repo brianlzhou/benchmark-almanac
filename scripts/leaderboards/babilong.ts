@@ -11,6 +11,20 @@ const FEED = "https://huggingface.co/spaces/RMT-team/babilong/raw/main/data/lead
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "babilong",
+  parts: {
+    ctx_0k: { name: '0k context', group: 'Difficulty' },
+    ctx_1k: { name: '1k context', group: 'Difficulty' },
+    ctx_2k: { name: '2k context', group: 'Difficulty' },
+    ctx_4k: { name: '4k context', group: 'Difficulty' },
+    ctx_8k: { name: '8k context', group: 'Difficulty' },
+    ctx_16k: { name: '16k context', group: 'Difficulty' },
+    ctx_32k: { name: '32k context', group: 'Difficulty' },
+    ctx_64k: { name: '64k context', group: 'Difficulty' },
+    ctx_128k: { name: '128k context', group: 'Difficulty' },
+    ctx_512k: { name: '512k context', group: 'Difficulty' },
+    ctx_1M: { name: '1M context', group: 'Difficulty' },
+    ctx_10M: { name: '10M context', group: 'Difficulty' },
+  },
   url: "https://huggingface.co/spaces/RMT-team/babilong",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",

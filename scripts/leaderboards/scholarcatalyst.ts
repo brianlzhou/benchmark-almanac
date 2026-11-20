@@ -10,6 +10,9 @@ import { flatPaperTables } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://arxiv.org/html/2610.02202";
 const board: Leaderboard = {
  benchmark: "scholarcatalyst",
+ parts: {
+   subfieldRecall20: { name: 'Subfield-specific query', group: 'Task type', note: 'Recall@20 on the 687 subfield-specific queries.' },
+ },
  url: "https://arxiv.org/html/2610.02202",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

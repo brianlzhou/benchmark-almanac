@@ -7,6 +7,12 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://videosimpleqa.github.io/";
 const board: Leaderboard = {
  benchmark: "video-simpleqa",
+ parts: {
+   engineering: { name: 'Engineering', group: 'Domain' },
+   nature: { name: 'Nature', group: 'Domain' },
+   socialCultureArts: { name: 'Social culture and arts', group: 'Domain' },
+   societyActivities: { name: 'Society activities', group: 'Domain' },
+ },
  url: "https://videosimpleqa.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -17,18 +17,33 @@ const board:Leaderboard={benchmark:'runebench',url:ROOT,feed:ROOT+'results/skill
   const match=raw.match(/^\s*window\.COMBINED_DATA\s*=\s*([\s\S]*?);?\s*$/);
   if(!match||skills.length!==16||!Object.keys(names).length)throw new Error('RuneBench data schema changed');
   const data=JSON.parse(match[1]); const rows:LeaderboardRow[]=[];
+  board.parts = Object.fromEntries(skills.map(skill => [skill, { name: skill, group: 'Skill' }]));
   for(const [key,r] of Object.entries(data) as [string,any][]){
    if(!names[key]||skills.some(s=>!r[s]))continue;
    let sum=0,cost=0,count=0,input=0,output=0,turns=0,turnCount=0;
-   for(const s of skills){const d=r[s];sum+=Math.log1p(d.peakXpRate||0);
+   const metrics: Record<string, number> = {};
+   const dates: string[] = [];
+   const durations: number[] = [];
+   for(const s of skills){const d=r[s];
+    metrics[s] = Math.log1p(d.peakXpRate || 0);
+    sum += metrics[s];
+    for (const field of ['peakXpRate','finalXp','finalLevel','durationSeconds','sampleCount','toolCalls','trimmedSamples']) {
+      if (typeof d[field] === 'number') metrics[s + ':' + field] = d[field];
+    }
+    for (const [field, value] of Object.entries(d.tokenUsage ?? {})) {
+      if (typeof value === 'number') metrics[s + ':' + field] = value;
+    }
+    if (typeof d.durationSeconds === 'number') durations.push(d.durationSeconds);
+    if (typeof d.containerFinishedAt === 'string') dates.push(d.containerFinishedAt.slice(0, 10));
     if(d.tokenUsage?.costUsd!=null){cost+=d.tokenUsage.costUsd;count++;input+=d.tokenUsage.inputTokens||0;output+=d.tokenUsage.outputTokens||0;}
     const calls=d.toolCalls??(d.trajectory?.length?d.trajectory.filter((x:any)=>x.source==='tool').length:undefined);
     if(calls!==undefined){turns+=calls;turnCount++;}
    }
    const m=names[key].match(/^(.*?)(?: (xhigh|high|medium|low|max|fast))?$/)!;
-   rows.push({model:m[1],setting:['30 minutes',m[2]].filter(Boolean).join('; '),score:sum/skills.length,
+   if (durations.length) metrics.latency = durations.reduce((a,b) => a+b, 0) / durations.length;
+   rows.push({date: dates.sort().at(-1), model:m[1],setting:['30 minutes',m[2]].filter(Boolean).join('; '),score:sum/skills.length,
     cost:count?cost/count:undefined,tokens:count?output/count:undefined,
-    metrics:{skills:skills.length,...(count?{inputTokens:input/count,pricedRuns:count}:{}),...(turnCount?{toolCalls:turns/turnCount}:{})}});
+    metrics:{...metrics, skills:skills.length,...(count?{inputTokens:input/count,pricedRuns:count}:{}),...(turnCount?{toolCalls:turns/turnCount}:{})}});
   }
   if(!rows.length)throw new Error('RuneBench has no complete sweeps');return rows;
  }};
