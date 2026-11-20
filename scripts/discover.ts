@@ -20,7 +20,7 @@ import { ainews, zvi, importAi, epochSubstack, interconnects, semianalysis, dwar
 import { saveAudits } from './lib/discover/audits.ts';
 import { bluesky } from './lib/discover/social.ts';
 import { xGrok } from './lib/discover/x.ts';
-import { epochHub, inspectEvals, hfOfficial, harbor, primeHub, everyEvalEver, vlmevalkit, awesomeAiLeaderboard, awesomeCua, benchmarkList, hfBenchmarkResults } from './lib/discover/registries.ts';
+import { epochHub, inspectEvals, hfOfficial, harbor, harborRegistry, primeHub, everyEvalEver, vlmevalkit, awesomeAiLeaderboard, awesomeCua, benchmarkList, hfBenchmarkResults } from './lib/discover/registries.ts';
 import { vals, arena } from './lib/discover/leaderboards.ts';
 import { labs } from './lib/discover/labs.ts';
 
@@ -42,6 +42,7 @@ const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: num
   'epoch-hub': { run: epochHub, seconds: 150 },
   'inspect-evals': { run: inspectEvals },
   'harbor-hub': { run: harbor },
+  'harbor-registry': { run: harborRegistry },
   'prime-hub': { run: primeHub },
   'every-eval-ever': { run: everyEvalEver },
   'hf-official-benchmarks': { run: hfOfficial },

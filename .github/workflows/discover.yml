@@ -1,11 +1,12 @@
 name: Discover benchmarks and models
 
-# Every morning, after AINews and Hugging Face Daily Papers publish, read the feeds and refresh the review
+# Four times a day, read the feeds and refresh the review
 # queues in data/discovered.json (benchmarks), data/discovered-audits.json (possible audits of cataloged
 # benchmarks) and data/discovered-models.json (models). Changes go to one rolling pull request, which merges itself.
 on:
   schedule:
-    - cron: '30 10 * * *'
+    # every six hours, off the hour, so a find made in the morning is on /new/ the same day
+    - cron: '41 */6 * * *'
   workflow_dispatch:
 
 permissions:

@@ -1,16 +1,19 @@
 name: Sync scores
 
-# Every day, refresh official leaderboards, Epoch AI scores, GitHub repo facts and the paper abstracts of new
+# Twice a day, refresh official leaderboards, Epoch AI scores, GitHub repo facts and the paper abstracts of new
 # benchmarks. Changes go to one rolling pull request, so new models and benchmarks get a look before they
-# appear on the site.
+# appear on the site. The times sit off the hour, where GitHub delays scheduled runs least (runs set for 12:00
+# started five to nine hours late in November 2026), and a full run takes about two hours.
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '23 3 * * *'
+    - cron: '23 15 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 concurrency: sync
 
@@ -29,7 +32,20 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/sync-epoch.ts | tee sync.log
+      # Artificial Analysis's API needs a key; its index numbers come in with AA's permission (November 2026)
       - run: node scripts/sync-leaderboards.ts | tee -a sync.log
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+      # a busy server or a timeout often clears within minutes, so boards that failed get one more try
+      - name: Retry the boards that failed
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+        run: |
+          ids=$(node scripts/failed-boards.ts)
+          if [ -n "$ids" ]; then
+            sleep 180
+            node scripts/sync-leaderboards.ts --only "$ids" | tee -a sync.log
+          fi
       # the day each leaderboard row first appeared, for the time machine: compares the new scores with HEAD's
       - run: node scripts/first-seen.ts | tee -a sync.log
       # Arena's dated rating snapshots from its CC BY 4.0 dataset on Hugging Face; skips the download when unchanged
@@ -43,6 +59,21 @@ jobs:
           # optional: with an OpenReview account, papers that are only on OpenReview get their abstracts too
           OPENREVIEW_USERNAME: ${{ secrets.OPENREVIEW_USERNAME }}
           OPENREVIEW_PASSWORD: ${{ secrets.OPENREVIEW_PASSWORD }}
+      # the 150 catalog links checked longest ago, so all 7,000 or so are rechecked about every three weeks and the
+      # benchmark audits and the health issue below see dead links soon after they die
+      - run: node scripts/link-check.ts --oldest=150 | tee -a sync.log
+        timeout-minutes: 15
+        # a dead link is a finding for the audits, never a reason to hold back the day's scores
+        continue-on-error: true
+      # meaning search: embed only the benchmarks whose text changed, with the model cached between runs
+      - uses: actions/cache@v4
+        with:
+          path: .cache/transformers
+          key: embeddinggemma-2-onnx-fp32
+      - name: Embed new and changed benchmarks
+        run: |
+          npm i --no-save @huggingface/transformers@4.3.1
+          node scripts/embed.ts | tee -a sync.log
       - run: node scripts/check-data.ts
       - run: npm run build
       - name: Update the sync pull request
@@ -82,3 +113,13 @@ jobs:
           # scores go live without waiting for a maintainer. A conflict with main leaves the pull request open
           # for a person, and the next day's run rebuilds the branch from main.
           gh pr merge bot/sync --merge || echo "::warning::The sync pull request could not merge on its own. A maintainer needs to merge it."
+      # one rolling issue lists what needs a person: failing importers, fields the importers drop, finds ready for the
+      # catalog, possible audits and broken links. It is rewritten on every run, so it never needs closing.
+      - name: Update the data health issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/health-report.ts health.md
+          n=$(gh issue list --state open --search "Data health in:title" --json number,title -q '.[] | select(.title == "Data health") | .number' | head -1)
+          if [ -n "$n" ]; then gh issue edit "$n" --body-file health.md; else gh issue create --title "Data health" --body-file health.md; fi
