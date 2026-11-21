@@ -2434,7 +2434,7 @@
     "links": {
       "paper": "https://arxiv.org/abs/2602.14257",
       "repo": "https://github.com/Emanual20/adbench-leaderboard",
-      "leaderboard": "https://emanual20.github.io/adbench-leaderboard/"
+      "leaderboard": "https://github.com/Emanual20/adbench-leaderboard"
     },
     "access": "private",
     "note": "The public leaderboard snapshot and revised paper use different task counts. Queries remain private, so imports must retain the evaluation version.",
@@ -3729,8 +3729,8 @@
     "released": "2024-10",
     "links": {
       "repo": "https://github.com/ShishirPatil/gorilla",
-      "site": "https://agent-arena.com",
-      "leaderboard": "https://agent-arena.com/leaderboard"
+      "site": "https://github.com/ShishirPatil/gorilla/blob/main/agent-arena/README.md",
+      "leaderboard": "https://github.com/ShishirPatil/gorilla/blob/main/agent-arena/README.md"
     },
     "access": "public",
     "note": "Launched on 2024-10-04. Arena's own Agent Arena from 2026 is a different board with its own record.",
@@ -15156,9 +15156,9 @@
     "org": "Erick Fonseca and colleagues",
     "released": "2016-07",
     "links": {
-      "paper": "http://propor2016.di.fc.ul.pt/wp-content/uploads/2015/10/assin-overview.pdf",
+      "paper": "https://www.linguamatica.com/index.php/linguamatica/pt/article/view/v8n2-1",
       "repo": "https://github.com/erickrf/assin",
-      "site": "http://nilc.icmc.usp.br/assin/",
+      "site": "https://huggingface.co/datasets/nilc-nlp/assin",
       "dataset": "https://huggingface.co/datasets/nilc-nlp/assin"
     },
     "access": "public",
@@ -16379,7 +16379,7 @@
     "links": {
       "paper": "https://arxiv.org/abs/2505.16211",
       "repo": "https://github.com/JusperLee/AudioTrust",
-      "site": "https://cslikai.cn/AudioTrust/",
+      "site": "https://github.com/JusperLee/AudioTrust",
       "dataset": "https://huggingface.co/datasets/JusperLee/AudioTrust"
     },
     "access": "public",
@@ -20314,7 +20314,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
-      "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-calling-leaderboard/CHANGELOG.md",
+      "https://github.com/ShishirPatil/gorilla/blob/main/berkeley-function-call-leaderboard/CHANGELOG.md",
       "https://gorilla.cs.berkeley.edu/blogs/16_bfcl_v4_memory.html",
       "https://github.com/ShishirPatil/gorilla/pull/1160",
       "https://github.com/ShishirPatil/gorilla/pull/1231",
@@ -26641,8 +26641,7 @@
     "better": "lower",
     "confidence": "likely",
     "evidence": [
-      "https://dashboard.safe.ai/",
-      "https://dashboard.safe.ai/_next/static/chunks/b54cd971fa62ba4c.js"
+      "https://dashboard.safe.ai/"
     ],
     "added": "2026-11-01"
   },
@@ -26672,9 +26671,7 @@
     "better": "higher",
     "confidence": "likely",
     "evidence": [
-      "https://dashboard.safe.ai/",
-      "https://dashboard.safe.ai/_next/static/chunks/b54cd971fa62ba4c.js",
-      "https://dashboard.safe.ai/_next/static/chunks/2f7e4413f09fc746.js"
+      "https://dashboard.safe.ai/"
     ],
     "added": "2026-11-01"
   },
@@ -35234,7 +35231,7 @@
     "released": "2024-12",
     "links": {
       "paper": "https://arxiv.org/abs/2412.19437",
-      "site": "https://www.cms.org.cn/Home/comp/comp/cid/12.html"
+      "site": "https://www.cms.org.cn/competition.html"
     },
     "access": "unknown",
     "note": "DeepSeek built the eval set from the contest and did not release its prepared version or problem count.",
@@ -70810,8 +70807,7 @@
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://www.kaggle.com/benchmarks/kaggle/word-association",
-      "https://github.com/Kaggle/kaggle-environments/blob/master/kaggle_environments/envs/word_association/harness/main.py"
+      "https://www.kaggle.com/benchmarks/kaggle/word-association"
     ],
     "added": "2026-11-01"
   },
@@ -80653,7 +80649,7 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2403.05530v3",
-      "https://github.com/google-deepmind/eval_hub/tree/main/eval_hub/live_math"
+      "https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/live_math"
     ]
   },
   {
@@ -100466,7 +100462,7 @@
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://github.com/google-deepmind/eval_hub/tree/main/eval_hub/live_math"
+      "https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/live_math"
     ],
     "added": "2026-11-01"
   },
@@ -105570,8 +105566,8 @@
     "released": "2017-11",
     "links": {
       "paper": "https://link.springer.com/article/10.1007/s40264-018-0762-z",
-      "site": "http://bio-nlp.org/index.php/projects/39-nlp-challenges",
-      "dataset": "http://bio-nlp.org/dataset/made1"
+      "site": "https://web.archive.org/web/20241114120341/https://bio-nlp.org/index.php/projects/39-nlp-challenges",
+      "dataset": "https://web.archive.org/web/20221025161437/https://bio-nlp.org/dataset/made1/"
     },
     "access": "private",
     "note": "MultiADE kept the original test partition. Five-shot GPT-4 scored 64.4% F1 on adverse event mentions and 77.6% F1 on drug names.",
@@ -106580,7 +106576,7 @@
       "repo": "https://github.com/maniparena/maniparena-repo",
       "dataset": "https://huggingface.co/datasets/ManipArena/maniparena-dataset",
       "paper": "https://arxiv.org/abs/2603.28545",
-      "site": "https://maniparena.x2robot.com"
+      "site": "https://github.com/maniparena/maniparena-repo"
     },
     "access": "public",
     "note": "The host enters its own WALL-OSS-0.5, a conflict of interest. Paper snapshot on a single robot. Sim twin at github.com/maniparena/maniparena-sim.",
@@ -121012,7 +121008,7 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/pdf/2503.19786v1",
-      "https://github.com/google-deepmind/eval_hub/tree/main/eval_hub/mrcr_v2",
+      "https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/mrcr_v2",
       "https://arxiv.org/abs/2409.12640"
     ]
   },
@@ -121044,7 +121040,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
-      "https://github.com/google-deepmind/eval_hub/tree/main/eval_hub/mrcr_v2",
+      "https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/mrcr_v2",
       "https://huggingface.co/datasets/openai/mrcr"
     ]
   },
@@ -125656,9 +125652,9 @@
     "released": "2019-01",
     "links": {
       "repo": "https://github.com/google-research-datasets/natural-questions",
-      "leaderboard": "https://ai.google.com/research/NaturalQuestions",
+      "leaderboard": "https://web.archive.org/web/20261105025556/https://ai.google.com/research/NaturalQuestions/",
       "paper": "https://aclanthology.org/Q19-1026/",
-      "site": "https://ai.google.com/research/NaturalQuestions",
+      "site": "https://web.archive.org/web/20261105025556/https://ai.google.com/research/NaturalQuestions/",
       "dataset": "https://huggingface.co/datasets/google-research-datasets/natural_questions"
     },
     "access": "public",
@@ -125667,7 +125663,7 @@
     "confidence": "verified",
     "evidence": [
       "https://aclanthology.org/Q19-1026/",
-      "https://ai.google.com/research/NaturalQuestions",
+      "https://web.archive.org/web/20261105025556/https://ai.google.com/research/NaturalQuestions/",
       "https://github.com/google-research-datasets/natural-questions",
       "https://huggingface.co/datasets/google-research-datasets/natural_questions",
       "https://github.com/EleutherAI/lm-evaluation-harness/tree/d6de81643928d653435c431bae19945d41d32520/lm_eval/tasks/nq_open"
@@ -145660,7 +145656,7 @@
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://github.com/google-deepmind/eval_hub/tree/main/eval_hub/putnam_like"
+      "https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/putnam_like"
     ],
     "added": "2026-11-01"
   },
@@ -150706,7 +150702,7 @@
     "released": "2024-09",
     "links": {
       "repo": "https://github.com/redteaming-arena/redteam-arena",
-      "site": "https://redarena.ai"
+      "site": "https://github.com/redteaming-arena/redteam-arena"
     },
     "access": "public",
     "note": "Built with Pliny and the BASI community. About 8,000 people played in the first week. Arena notes that resistance trades off with controllability.",
@@ -153661,7 +153657,7 @@
     "confidence": "verified",
     "evidence": [
       "https://robocurve.org/opus-5-5-robodojo-rc-tier-1/",
-      "https://robocurve.org/all-runs/runs.2a44f77b200f.json"
+      "https://robocurve.org/all-runs/?leaderboard=datacenterbench"
     ]
   },
   {
@@ -153807,7 +153803,7 @@
       "https://arxiv.org/abs/2610.14043",
       "https://storage.googleapis.com/deepmind-media/gemini/gemini_4_safety_report.pdf",
       "https://robocurve.org/",
-      "https://robocurve.org/all-runs/runs.2a44f77b200f.json"
+      "https://robocurve.org/all-runs/?leaderboard=datacenterbench"
     ]
   },
   {
@@ -154194,7 +154190,7 @@
     "unit": "%",
     "confidence": "verified",
     "evidence": [
-      "https://microsoft.ai/pdf/MAI-Code-1-Flash-Model-Card.PDF"
+      "https://web.archive.org/web/20261024122152/https://microsoft.ai/pdf/MAI-Code-1-Flash-Model-Card.PDF"
     ]
   },
   {
@@ -158519,7 +158515,7 @@
     "org": "UniPat AI and Elorian",
     "released": "2026-10",
     "links": {
-      "paper": "https://github.com/UniPat-AI/ScienceVision/blob/main/paper/sciencevision.pdf",
+      "paper": "https://unipat.ai/benchmarks/ScienceVision",
       "repo": "https://github.com/UniPat-AI/ScienceVision",
       "site": "https://unipat.ai/blog/ScienceVision",
       "dataset": "https://huggingface.co/datasets/UnipatAI/ScienceVision",
@@ -158554,7 +158550,7 @@
     "links": {
       "paper": "https://arxiv.org/abs/2203.07540",
       "repo": "https://github.com/allenai/ScienceWorld",
-      "site": "https://sciworld.apps.allenai.org/"
+      "site": "https://github.com/allenai/ScienceWorld"
     },
     "access": "public",
     "note": "EMNLP 2022. Widely used with ALFWorld in agent papers. Repo has 401 stars.",
@@ -170452,7 +170448,7 @@
     "links": {
       "paper": "https://arxiv.org/abs/2105.01051",
       "repo": "https://github.com/s3prl/s3prl",
-      "site": "https://superbbenchmark.org/"
+      "site": "https://web.archive.org/web/20250321191123/https://www.superbbenchmark.org/"
     },
     "access": "public",
     "note": "SUPERB scores speech encoders such as wav2vec 2.0, HuBERT and WavLM, not end-to-end voice assistants. The 2,568 GitHub stars belong to the S3PRL toolkit that runs it. Each task keeps its own metric, so sources often report a few tasks, not one number.",
@@ -170461,7 +170457,7 @@
     "confidence": "verified",
     "evidence": [
       "https://arxiv.org/abs/2105.01051",
-      "https://superbbenchmark.org/",
+      "https://web.archive.org/web/20250321191123/https://www.superbbenchmark.org/",
       "https://github.com/s3prl/s3prl"
     ],
     "added": "2026-11-05"
@@ -183821,7 +183817,7 @@
       "repo": "https://github.com/google-research-datasets/tydiqa",
       "dataset": "https://huggingface.co/datasets/google-research-datasets/tydiqa",
       "paper": "https://arxiv.org/abs/2003.05002",
-      "leaderboard": "https://ai.google.com/research/tydiqa"
+      "leaderboard": "https://web.archive.org/web/20260521191545/https://ai.google.com/research/tydiqa/"
     },
     "access": "public+private-holdout",
     "note": "Model cards usually report the gold passage (GoldP) task.",
@@ -183830,7 +183826,7 @@
     "evidence": [
       "https://arxiv.org/abs/2003.05002",
       "https://github.com/google-research-datasets/tydiqa",
-      "https://ai.google.com/research/tydiqa"
+      "https://web.archive.org/web/20260521191545/https://ai.google.com/research/tydiqa/"
     ]
   },
   {
@@ -196990,7 +196986,7 @@
     "links": {
       "paper": "https://arxiv.org/abs/1911.09709",
       "repo": "https://github.com/rpryzant/neutralizing-bias",
-      "dataset": "http://bit.ly/bias-corpus"
+      "dataset": "https://github.com/rpryzant/neutralizing-bias"
     },
     "access": "public",
     "note": "Ashkinaze and colleagues used the corpus to test bias detection with GPT-4, ChatGPT 3.5, and Mistral Medium. Berkeley’s BIASCheck project also evaluated GPT-4 rewrites.",
@@ -197165,7 +197161,7 @@
     "org": "Robert West, Joelle Pineau, and Doina Precup",
     "released": "2009-07",
     "links": {
-      "paper": "http://infolab.stanford.edu/~west1/pubs/West-Pineau-Precup_IJCAI-09.pdf",
+      "paper": "https://ijcai.org/proceedings/2009/267",
       "dataset": "https://snap.stanford.edu/data/wikispeedia.html"
     },
     "access": "public",
@@ -201049,8 +201045,8 @@
     "links": {
       "paper": "https://arxiv.org/abs/2003.11080",
       "repo": "https://github.com/google-research/xtreme",
-      "site": "https://sites.research.google/xtreme",
-      "leaderboard": "https://sites.research.google/xtreme"
+      "site": "https://web.archive.org/web/20261009094815/https://sites.research.google/xtreme/",
+      "leaderboard": "https://web.archive.org/web/20261009094815/https://sites.research.google/xtreme/"
     },
     "access": "public",
     "note": "XTREME targets fine-tuned encoders such as mBERT and XLM-R, not prompted chat models. XTREME-R (2021) changes the task set and is a separate test. About 650 GitHub stars, and the repo was last pushed in 2023-01.",
@@ -201080,8 +201076,8 @@
     "links": {
       "paper": "https://arxiv.org/abs/2104.07412",
       "repo": "https://github.com/google-research/xtreme",
-      "site": "https://sites.research.google/xtreme",
-      "leaderboard": "https://sites.research.google/xtreme"
+      "site": "https://web.archive.org/web/20261009094815/https://sites.research.google/xtreme/",
+      "leaderboard": "https://web.archive.org/web/20261009094815/https://sites.research.google/xtreme/"
     },
     "access": "public",
     "note": "It shares the XTREME repository and leaderboard site. Like XTREME, it targets fine-tuned encoders, not prompted chat models.",
@@ -202240,6 +202236,32 @@
       "https://taubench.com/leaderboard",
       "https://github.com/sierra-research/tau2-bench/commit/d22d77f238177f11d01aa99791dbb2c2c98827c1",
       "https://github.com/sierra-research/tau2-bench/releases/tag/v1.0.1"
+    ]
+  },
+  {
+    "id": "mind2act-world",
+    "name": "Mind2Act World",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Embodied agents perform Mind, Act and closed-loop Mind2Act manipulation tasks in simulated scenes. The benchmark contains 30 tasks with three difficulty levels and two scene settings.",
+    "org": "Mind2Act-World",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.26444",
+      "repo": "https://github.com/Mind2Act/Mind2Act_World"
+    },
+    "access": "public",
+    "note": "The paper reports 180 task configurations across five application domains.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.26444",
+      "https://huggingface.co/papers/2611.26444",
+      "https://github.com/Mind2Act/Mind2Act_World"
     ]
   }
 ]

@@ -15556,6 +15556,11 @@
       "via": "An arXiv search led to the authors' paper."
     },
     {
+      "id": "mind2act-world",
+      "date": "2026-11-21",
+      "via": "The discovery job found its paper on Hugging Face Daily Papers, where it has 50 upvotes."
+    },
+    {
       "id": "mind2web",
       "date": "2026-11-01",
       "via": "inspect_evals ships mind2web, and lookup found no Mind2Web record."
@@ -28426,10 +28431,28 @@
       "date": "2026-11-20"
     },
     {
+      "name": "Arena Agent Capability",
+      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_capability",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "Arena agent signal boards (bash reliability, steerability, tool hallucination and others)",
       "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
       "reason": "Metrics of Agent Arena sessions, not separate arenas.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Arena Agent Task Outcome",
+      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_task_outcome",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
+      "date": "2026-11-21"
+    },
+    {
+      "name": "Arena Agent Tool Efficiency",
+      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_tool_efficiency",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
+      "date": "2026-11-21"
     },
     {
       "name": "Arena factuality score and AutoEval",
@@ -30214,6 +30237,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "DatingAppBench",
+      "url": "https://x.com/shaped/status/2120565783554400495",
+      "reason": "It is one dating app experiment with 15 profiles and five models, with no reusable test, leaderboard or other users.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "DCASE 2024 Acoustic-Based Traffic Monitoring",
       "url": "https://www.isca-archive.org/interspeech_2024/ghaffarzadegan24_interspeech.html",
       "reason": "criteria: The competition measures traffic volume from a fixed microphone array.",
@@ -30886,6 +30915,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "enterpriseops-automationbench",
+      "url": "https://hub.harborframework.com/datasets/servicenow-ai-org/enterpriseops-automationbench",
+      "reason": "The Harbor dataset page lists 100 workflow tasks, but no model results, leaderboard, paper or other users yet.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "EPSBench",
       "url": "https://arxiv.org/abs/2610.38293",
       "reason": "Georgia Tech paper on earnings forecasting with 149 firm-quarters and six models. 0 GitHub stars, 2 HF upvotes, no leaderboard and no outside users yet.",
@@ -31312,6 +31347,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Finance Agent v2.1 leaderboard",
+      "url": "https://huggingface.co/datasets/vals-ai/finance_agent_v2_1-leaderboard",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): vals-finance-agent-v2-1.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "Finance Search (Exa)",
       "url": "https://exa.ai/evals",
       "reason": "criteria: The available evidence does not establish an inclusion test.",
@@ -31474,6 +31515,12 @@
       "date": "2026-11-20"
     },
     {
+      "name": "ForceHarness",
+      "url": "https://huggingface.co/papers/2611.21099",
+      "reason": "A robotics control method paper. Its HiddenPhys tasks serve only its own evaluation.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "Forecasting Misaligned Behavior (Codex deployment simulation)",
       "url": null,
       "reason": "Already recorded for this release under benchmark id openai-deployment-simulation.",
@@ -31552,6 +31599,18 @@
       "date": "2026-11-20"
     },
     {
+      "name": "FullStackBench en",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-27B",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): fullstackbench.",
+      "date": "2026-11-21"
+    },
+    {
+      "name": "FullStackBench zh",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-27B",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): fullstackbench.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "g8967/snake",
       "url": "https://app.primeintellect.ai/dashboard/environments/g8967/snake",
       "reason": "This upload duplicates the Snake training implementation in prime:antim/snake.",
@@ -31604,6 +31663,12 @@
       "url": "https://doi.org/10.1145/3770855.3818847",
       "reason": "criteria: The test scores a classifier on NASA catalog indexing.",
       "date": "2026-11-20"
+    },
+    {
+      "name": "GDPPDFAA",
+      "url": "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/gdp_pdf_aa.py",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): gdp-pdf.",
+      "date": "2026-11-21"
     },
     {
       "name": "GEA North Africa Ecosystem Type Mapping",
@@ -32248,6 +32313,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "HallBench avg",
+      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): hallusionbench.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "HalluAudio",
       "url": "https://github.com/Feiyuzhao25/halluaudio",
       "reason": "New audio hallucination benchmark (2026-04) with 7 GitHub stars and no lab or leaderboard use found.",
@@ -32512,10 +32583,22 @@
       "date": "2026-11-01"
     },
     {
+      "name": "HoneyBench",
+      "url": "https://x.com/goodhart_labs/status/2120570580743471284",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): honeybench-v0-2-alpha.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "HorizonBench",
       "url": "https://arxiv.org/abs/2604.17283",
       "reason": "1 HF upvote and a brief AINews mention. Borderline.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "Hospital-bench",
+      "url": "https://x.com/omarsar0/status/2123813529245429868",
+      "reason": "The only source is a newsletter mention of one 48-task score, with no benchmark page, leaderboard or paper.",
+      "date": "2026-11-21"
     },
     {
       "name": "HouseholdBench",
@@ -34570,6 +34653,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "Legal Agent Benchmark",
+      "url": "https://thezvi.wordpress.com/2026/11/16/fable-5-2-is-the-new-bazooka/",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): harvey-lab-legal-agent-benchmark.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "LegalBench decision model evaluation (396 questions)",
       "url": "https://www.vals.ai/blogs/independent-evaluation-of-jev",
       "reason": "criteria: The record is a renamed subset of an existing benchmark and the brief excludes such copies.",
@@ -35590,6 +35679,24 @@
       "date": "2026-11-01"
     },
     {
+      "name": "MMBench-CN test",
+      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): mmbench-cn-v1-1.",
+      "date": "2026-11-21"
+    },
+    {
+      "name": "MMBench-EN test",
+      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): mmbench-en-v1-1.",
+      "date": "2026-11-21"
+    },
+    {
+      "name": "MMBench-V1.1 test",
+      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): mmbench-en-v1-1.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "MMI (facebook/mmi)",
       "url": "https://huggingface.co/datasets/facebook/mmi",
       "reason": "Gated with no public card or paper. Leaderboard has 3 entries. Recheck when Meta documents it.",
@@ -35630,6 +35737,12 @@
       "url": "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/mmsu.py",
       "reason": "misread name of mmsu",
       "date": "2026-11-15"
+    },
+    {
+      "name": "MMT-Bench test",
+      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): mmt-bench.",
+      "date": "2026-11-21"
     },
     {
       "name": "MMTB (Multimedia Terminal Bench)",
@@ -36112,6 +36225,12 @@
       "date": "2026-11-19"
     },
     {
+      "name": "Neon. Arena",
+      "url": "https://x.com/arena/status/2123192239761596566",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "NeonTreeEvaluation 1.0",
       "url": "https://github.com/weecology/NeonTreeEvaluation_package",
       "reason": "criteria: The task only scores detection of individual tree crowns.",
@@ -36272,6 +36391,12 @@
       "url": null,
       "reason": "The existing record already carries this evaluation under benchmark id(s): nv-chat-benchmark-nvidia.",
       "date": "2026-11-12"
+    },
+    {
+      "name": "NVbench-GT",
+      "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny",
+      "reason": "It appears only as an unranked reference row in one model card, with no leaderboard, established evaluator or other users.",
+      "date": "2026-11-21"
     },
     {
       "name": "NYU-Depth V2",
@@ -36458,6 +36583,12 @@
       "url": "https://api.zeroeval.com/leaderboard/benchmarks",
       "reason": "Lab in-house evals named in an OpenAI launch. Not verified on an OpenAI page.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "OpenAI MedChemBench",
+      "url": "https://x.com/OpenAI/status/2123856316187975756",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): medchembench-openai.",
+      "date": "2026-11-21"
     },
     {
       "name": "OpenApps (Meta)",
@@ -39952,6 +40083,12 @@
       "date": "2026-11-01"
     },
     {
+      "name": "TabBioMed",
+      "url": "https://arxiv.org/abs/2611.23779",
+      "reason": "It compares tabular learning methods on biomedical datasets, a narrow task outside general AI ability. It has 24 GitHub stars and 13 Hugging Face upvotes.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "TAC (animal welfare travel agent)",
       "url": "https://arxiv.org/abs/2606.18142",
       "reason": "2 HF upvotes, narrow.",
@@ -41644,6 +41781,18 @@
       "date": "2026-11-01"
     },
     {
+      "name": "WSC-Eval-TTS-easy",
+      "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): wenetspeech-chuan-eval.",
+      "date": "2026-11-21"
+    },
+    {
+      "name": "WSC-Eval-TTS-hard",
+      "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): wenetspeech-chuan-eval.",
+      "date": "2026-11-21"
+    },
+    {
       "name": "X2SBench",
       "url": "https://arxiv.org/abs/2609.29751",
       "reason": "criteria: The task measures recovery of crystal structures from one experimental modality.",
@@ -41744,6 +41893,12 @@
       "url": "https://thezvi.wordpress.com/",
       "reason": "Informal labels or one-off anecdotes in Zvi's roundups, not maintained benchmarks. SpireBench maps to Epoch SpireClimb.",
       "date": "2026-11-01"
+    },
+    {
+      "name": "τ²-Bench-Telecom",
+      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+      "reason": "The existing record already carries this evaluation under benchmark id(s): tau2-bench.",
+      "date": "2026-11-21"
     }
   ]
 }
