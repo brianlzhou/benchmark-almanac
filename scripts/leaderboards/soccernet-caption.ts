@@ -33,6 +33,16 @@ const board: Leaderboard = {
   "feed": "https://www.soccer-net.org/tasks/dense-video-captioning",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    Bleu_1: { name: 'BLEU-1', unit: 'score', better: 'higher' },
+    Bleu_2: { name: 'BLEU-2', unit: 'score', better: 'higher' },
+    Bleu_3: { name: 'BLEU-3', unit: 'score', better: 'higher' },
+    Bleu_4: { name: 'BLEU-4', unit: 'score', better: 'higher' },
+    ROUGE_L: { name: 'ROUGE-L', unit: 'score', better: 'higher' },
+    CIDEr: { name: 'Consensus-based Image Description Evaluation score', unit: 'score', better: 'higher' },
+    Recall: { name: 'Caption recall', unit: '%', better: 'higher' },
+    Precision: { name: 'Caption precision', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const html=await fetchText(FEED);

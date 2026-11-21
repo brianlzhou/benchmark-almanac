@@ -11,6 +11,10 @@ const board: Leaderboard = {
   url: 'https://aclanthology.org/2026.semeval-1.448/',
   feed,
   terms: 'The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/',
+  stats: {
+    accuracyWithinSD: { name: 'Accuracy within standard deviation', unit: '%', better: 'higher' },
+    spearman: { name: 'Spearman correlation', unit: 'score', better: 'higher' },
+  },
   harnesses: 'system',
   async fetch() {
     const paper = await pdfText(feed);

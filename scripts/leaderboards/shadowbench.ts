@@ -31,6 +31,7 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/perpetual-research/shadowbench-explorer',
   feed: `${FEED} (score)`,
   terms: "The dataset's episodes and analysis are CC BY 4.0 and its code is MIT, per the dataset's LICENSE.md.",
+  stats: { minutes: { name: 'Minutes per episode', unit: 'minutes', better: 'lower' } },
   chart: {title: 'Mean score against the cost of one episode', x: {key: 'cost', label: 'Cost per episode', unit: '$', better: 'lower'}, y: {key: 'score', label: 'Mean score', better: 'higher'}, note: 'Official score and cost plot across medium, high, and maximum reasoning effort.'},
   async fetch() {
     const { rows } = await fetchJson<{ rows: { row: Row }[] }>(FEED);

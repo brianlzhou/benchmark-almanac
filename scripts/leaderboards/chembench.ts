@@ -22,6 +22,7 @@ const board: Leaderboard = {
   feed: FEED,
   verified: 'Marked verified by ChemBench',
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { temperature: { name: 'Temperature', unit: 'score' } },
   
   aliases: {'gemini-2.5-flash-preview-04-17':'gemini-2-5-flash-apr-2025'},
   async fetch() {

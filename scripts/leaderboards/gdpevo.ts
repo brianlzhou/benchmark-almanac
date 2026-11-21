@@ -6,6 +6,12 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 
 const FEED = "https://raw.githubusercontent.com/Prism-Shadow/GDPevo/main/README.md";
 const board: Leaderboard = {
+ stats: {
+  rounds: { name: 'Rounds', unit: 'count' },
+  toolCalls: { name: 'Tool calls', unit: 'count' },
+  costChangePercent: { name: 'Cost change', unit: '%', better: 'lower' },
+  liftPoints: { name: 'Lift points', unit: 'score', better: 'higher' },
+ },
  benchmark: "gdpevo",
  harnesses: 'system',
  url: "https://github.com/Prism-Shadow/GDPevo",

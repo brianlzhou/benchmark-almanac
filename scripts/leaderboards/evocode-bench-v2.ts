@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: 'https://unipat.ai/benchmarks/EvoCode-Bench',
   feed: `${FEED} (Results table, Dataset score)`,
   terms: 'README table in the UniPat-AI/EvoCodeBench repository, licensed MIT.',
+  stats: { turns: { name: 'Average rounds', unit: 'count', better: 'lower', note: 'Average agent-tool interactions per reached round.' } },
   aliases: {
     'Doubao-Seed-2.1-Pro': 'seed-2-1-pro',
   },

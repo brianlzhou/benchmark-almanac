@@ -22,6 +22,17 @@ const board: Leaderboard = {
   feed: `${FEED} (leaderboard table, Overall Hallucination Rate)`,
   terms: 'README table in the vectara/FaithJudge repository, which has no license file; scores are cited to the FaithJudge authors.',
   parts: tasks,
+  stats: {
+    faithbenchSummarizationHallucinations: { name: 'FaithBench summarization hallucinations', unit: 'count', better: 'lower' },
+    faithbenchSummarizationExamples: { name: 'FaithBench summarization examples', unit: 'count' },
+    ragTruthSummarizationHallucinations: { name: 'RAGTruth summarization hallucinations', unit: 'count', better: 'lower' },
+    ragTruthSummarizationExamples: { name: 'RAGTruth summarization examples', unit: 'count' },
+    ragTruthQuestionAnsweringHallucinations: { name: 'RAGTruth question answering hallucinations', unit: 'count', better: 'lower' },
+    ragTruthQuestionAnsweringExamples: { name: 'RAGTruth question answering examples', unit: 'count' },
+    ragTruthDataToTextWritingHallucinations: { name: 'RAGTruth data-to-text hallucinations', unit: 'count', better: 'lower' },
+    ragTruthDataToTextWritingExamples: { name: 'RAGTruth data-to-text examples', unit: 'count' },
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+  },
   aliases: {
     'r1-0528': 'deepseek-r1-may-2025',
     'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025',

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Check the publisher’s terms and upstream data licenses at https://snowflake-ai-research.github.io/hybrid_leaderboard/ The robots URL returns HTML.",
   parts: { s2sql: 'Search to SQL', sql2s: 'SQL to search', parallel: 'Parallel' },
+  stats: { passAtK: { name: 'Pass@k', unit: '%', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<{ boards: { main: { defaultSplit: string; defaultAgg: string; defaultK: number; primaryMetric: string } }; entries: Entry[] }>(FEED);
     const { defaultSplit, defaultAgg, defaultK, primaryMetric } = data.boards.main;

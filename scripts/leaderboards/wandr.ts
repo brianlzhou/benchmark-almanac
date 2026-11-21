@@ -8,6 +8,17 @@ const feed = 'https://arxiv.org/html/2608.14747';
 export default {
   benchmark: 'wandr', static: 'paper', url: 'https://arxiv.org/abs/2608.14747', feed, harnesses: 'system',
   terms: 'arXiv robots.txt allows the HTML paper. Results are credited to the WANDR authors.',
+  stats: {
+    completed: { name: 'Completed tasks', unit: 'count' },
+    softPrecision: { name: 'Soft precision', unit: '%', better: 'higher' },
+    softRecall: { name: 'Soft recall', unit: '%', better: 'higher' },
+    hardPrecision: { name: 'Hard precision', unit: '%', better: 'higher' },
+    hardRecall: { name: 'Hard recall', unit: '%', better: 'higher' },
+    hardF1: { name: 'Hard F1', unit: '%', better: 'higher' },
+    medianLatency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    p90Latency: { name: '90th percentile latency', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+  },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const scores = tables.find(t => t[0]?.join('|') === 'System|Completed|Soft|Soft|Soft|Hard|Hard|Hard' &&

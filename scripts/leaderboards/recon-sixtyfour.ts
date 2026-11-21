@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (Table 1: Full results)`,
   terms: 'Sixtyfour publishes the benchmark results under its terms of service. https://www.sixtyfour.ai/legal/terms-of-service',
+  stats: { correct:{name:'Correct fields',unit:'count',better:'higher'}, wrong:{name:'Wrong fields',unit:'count'}, missing:{name:'Missing fields',unit:'count'} },
   parts: {
     precision: { name: 'Precision', unit: '%' },
     recall: { name: 'Recall', unit: '%' },

@@ -14,6 +14,11 @@ const board: Leaderboard = {
   headline: 'The score is the percentage of games the model won against Llama 3.3 70B opponents.',
   aliases: {'DeepSeek 3.1 Terminus': 'deepseek-v3-1-terminus', 'Mistral Small 24B': 'mistral-small-3', 'OLMo 3.1 32B': 'olmo-3-1-32b-instruct'},
   parts: {liberal: {name: 'Liberal', unit: '%'}, fascist: {name: 'Fascist', unit: '%'}, hitler: {name: 'Hitler', unit: '%'}},
+  stats: {
+    gsir: { name: 'Game-state impact rate', unit: 'score', better: 'higher', note: 'Impact of actions on the assigned team. Positive values benefit that team.' },
+    drr: { name: 'Deception retention rate', unit: '%', better: 'higher', note: 'Full-round retention of a deceptive role.' },
+    ria: { name: 'Role identification accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     // Python emits bare NaN for undefined pairwise tests outside the model results.
     const data = (await fetchText(feed)).replace(/(:\s*)NaN(?=\s*[,}])/g, '$1null');

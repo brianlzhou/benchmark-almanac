@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'sata-bench', url, feed, static: 'paper',
   terms: 'The paper is publicly available from Amazon Science. Cite the authors and follow the paper terms.',
   parts: {},
+  stats: { fpr: { name: 'False positive rate', unit: '%', better: 'lower' }, em: { name: 'Exact match', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, spd: { name: 'Selection probability divergence', unit: '%', better: 'lower' }, rstd: { name: 'Selection rank standard deviation', unit: '%', better: 'lower' }, rsd: { name: 'Relative selection deviation', unit: 'score', better: 'lower', note: 'Relative selection deviation as reported by the source.' }, ctdif: { name: 'Count difference', unit: 'count', better: 'lower' }, ctdifabs: { name: 'Absolute count difference', unit: 'count', better: 'lower' }, ctacc: { name: 'Count accuracy', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const paper = await pdfText(feed);
     const section = paper.split('Table 2: Performance comparison')[1]?.split('3.1   E VALUATION')[0];

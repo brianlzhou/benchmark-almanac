@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://dcase.community/challenge2023/task-foley-sound-synthesis-results",
   feed: "https://dcase.community/challenge2023/task-foley-sound-synthesis-results",
   terms: "The organizers publish the scores. The results page names no license for score reuse. https://dcase.community/challenge2023/task-foley-sound-synthesis-results DCASE robots.txt permits the results path.",
+  stats: { audioQuality: { name: 'Audio quality', unit: 'score', better: 'higher' }, categoryFit: { name: 'Category fit', unit: 'score', better: 'higher' }, diversity: { name: 'Diversity', unit: 'score', better: 'higher' }, fad: { name: 'Fréchet Audio Distance', unit: 'score', better: 'lower' } },
   async fetch() {
     const all = tables(await fetchText(this.url));
     const judged = all.filter(t => t[0]?.some(c => c.text.startsWith('Weighted Average Score')));

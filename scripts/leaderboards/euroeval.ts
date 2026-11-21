@@ -5,6 +5,8 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
 
 const FEED = "https://euroeval.com/leaderboards-csv/european_all_models.csv";
+const marginLanguages = ['Albanian','Belarusian','Bosnian','Bulgarian','Catalan','Croatian','Czech','Danish','Dutch','English','Estonian','Faroese','Finnish','French','German','Greek','Hungarian','Icelandic','Italian','Latvian','Lithuanian','Luxembourgish','Norwegian','Polish','Portuguese','Romanian','Serbian','Slovak','Slovene','Spanish','Swedish','Ukrainian'];
+const marginStats = Object.fromEntries(marginLanguages.map(language => [language + 'Margin', { name: language + ' rank score margin', unit: 'score' }]))
 
 function score(cell: string) {
   const m = cell?.trim().match(/^(\d+(?:\.\d+)?)\s*±\s*(\d+(?:\.\d+)?)$/);
@@ -17,6 +19,12 @@ const board: Leaderboard = {
   url: "https://euroeval.com/leaderboards/european",
   feed: FEED,
   terms: "The repository uses the MIT License for its software and documentation. The leaderboard does not specify separate data terms. https://github.com/EuroEval/EuroEval/blob/main/LICENSE",
+  stats: {
+    rank: { name: 'Rank', unit: 'count', better: 'lower' },
+    Context: { name: 'Context length', unit: 'tokens' },
+    Vocabulary: { name: 'Vocabulary size', unit: 'tokens' },
+    ...marginStats,
+  },
   aliases: {
     "Qwen/Qwen3.6-27B-FP8": "qwen3-6-27b",
     "Qwen/Qwen3.5-35B-A3B-FP8": "qwen3-5-35b-a3b",

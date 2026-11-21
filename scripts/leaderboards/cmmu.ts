@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://github.com/flageval-baai/CMMU",
   feed: FEED,
   terms: "The publisher displays results at https://github.com/flageval-baai/CMMU. I could not verify reuse terms. GitHub requests a one-second crawl delay.",
+  stats: { validation: { name: 'Validation average', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     return ['GPT-4', 'rules'].flatMap((judge) => {

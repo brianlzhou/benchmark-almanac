@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: "sec-bench", url: "https://sec-bench.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   verified: 'Marked Verified in the official SEC-bench table.',
+  stats: { patching: { name: 'Vulnerability patching score', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

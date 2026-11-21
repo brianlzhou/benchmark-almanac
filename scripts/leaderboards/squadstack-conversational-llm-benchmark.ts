@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/Squadstack/conversational-llm-benchmark#results",
   feed,
   terms: "SquadStack encourages publication of results. Its dataset card assigns separate licenses to verdicts and metadata and prohibits redistribution of conversations. Review reuse of the public aggregate table before importing. robots.txt allows the feed path.",
+  stats: { mandateMean: { name: 'Mean of four mandates', unit: '%', better: 'higher' }, ttftMedianMs: { name: 'Time to first token', unit: 'ms', better: 'lower' } },
   async fetch() {
     const header = ["#", "System", "Vendor", "Category", "Overall pass-rate", "95% CI", "Mean of 4 mandates", "Tied with #1", "Turns judged", "TTFT P50 (ms)"];
     const table = tables(await fetchText(feed)).map(table => table.map(row => row.map(cell => cell.text))).find(t => header.every((label, i) => t[0]?.[i] === label));

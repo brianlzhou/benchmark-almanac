@@ -1,11 +1,23 @@
 // COCO defaults to BBOX Dev (bbox_dev2015), ranked by AP averaged over IoU thresholds 0.50 through 0.95. Fractions become percentages. Segmentation and other years are separate views. Keep each team’s latest submission, its report and the COCO evaluation statistics for each object category.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow} from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://cocodataset.org/leaderboard/bbox_dev2015.json";
+const cocoCategories = 'person bicycle car motorcycle airplane bus train truck boat trafficLight fireHydrant stopSign parkingMeter bench bird cat dog horse sheep cow elephant bear zebra giraffe backpack umbrella handbag tie suitcase frisbee skis snowboard sportsBall kite baseballBat baseballGlove skateboard surfboard tennisRacket bottle wineGlass cup fork knife spoon bowl banana apple sandwich orange broccoli carrot hotDog pizza donut cake chair couch pottedPlant bed diningTable toilet tv laptop mouse remote keyboard cellPhone microwave oven toaster sink refrigerator book clock vase scissors teddyBear hairDrier toothbrush'.split(' ');
+const cocoSupercategories = 'person vehicle outdoor animal accessory sports kitchen food furniture electronic appliance indoor'.split(' ');
+const displayName = (key: string) => key.replace(/[A-Z]/g, (c) => ' ' + c.toLowerCase()).replace(/^./, (c) => c.toUpperCase());
+const cocoKey = (key: string) => key.replace(/^./, (c) => c.toUpperCase());
+const cocoParts = Object.fromEntries([...cocoCategories.map((key) => ['category' + cocoKey(key), { name: displayName(key), group: 'Object category' }]), ...cocoSupercategories.map((key) => ['supercategory' + cocoKey(key), { name: displayName(key), group: 'Object supercategory' }])]);
+const cocoSuffixes = ['', 'Ap50', 'Ap75', 'ApSmall', 'ApMedium', 'ApLarge', 'Ar1', 'Ar10', 'Ar100', 'ArSmall', 'ArMedium', 'ArLarge'];
+const cocoStats: Record<string, BoardStat> = Object.fromEntries([
+  ['AP_50','AP at IoU 0.50'],['AP_75','AP at IoU 0.75'],['AR_max_1','Average recall with one detection'],['AR_max_10','Average recall with ten detections'],['AR_max_100','Average recall with 100 detections'],['AR_small','Average recall for small objects'],['AR_medium','Average recall for medium objects'],['AR_large','Average recall for large objects'],
+  ...cocoCategories.flatMap((category) => cocoSuffixes.slice(1).map((suffix) => ['category' + cocoKey(category) + suffix, `Category ${displayName(category)} ${suffix.replace('Ap','AP ').replace('Ar','Average recall ')}`])),
+  ...cocoSupercategories.flatMap((category) => cocoSuffixes.slice(1).map((suffix) => ['supercategory' + cocoKey(category) + suffix, `Supercategory ${displayName(category)} ${suffix.replace('Ap','AP ').replace('Ar','Average recall ')}`])),
+].map(([key,name]) => [key, { name, unit: '%', better: 'higher' as const }]));
 const board: Leaderboard = {
   benchmark: "coco",
   parts: {
+    ...cocoParts,
     AP_small: { name: 'Small', group: 'Object size' },
     AP_medium: { name: 'Medium', group: 'Object size' },
     AP_large: { name: 'Large', group: 'Object size' },
@@ -13,6 +25,7 @@ const board: Leaderboard = {
   url: "https://cocodataset.org/#detection-leaderboard",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: cocoStats,
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 

@@ -9,6 +9,13 @@ const board: Leaderboard = {
   url: "https://www.geoguessbench.com/#leaderboard",
   feed,
   terms: "Code is MIT. The maker credits individual photos under CC BY-SA 4.0 and gives no separate terms for scores. https://github.com/Nutlope/geoguessbench#license The feed host returns no robots.txt.",
+  stats: {
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    countryAccuracy: { name: 'Country accuracy', unit: '%', better: 'higher' },
+    failures: { name: 'Parse failures', unit: 'count' },
+    bestGame: { name: 'Best game score', unit: 'score', better: 'higher', note: 'Highest points in a game, out of 25,000.' },
+    medianKm: { name: 'Median distance in kilometers', better: 'lower' },
+  },
   async fetch() {
     type Result = { name: string; mode: string; gameMean: number; gameCi: [number, number]; open: boolean; costPerGame: number;
       outTokMean: number; latencyMedianS: number; countryAcc: number; medianKm: number; parseFail: number; gameBest: number;

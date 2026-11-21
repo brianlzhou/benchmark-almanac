@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://github.com/albertogerli/bridge-llm-bench/blob/main/docs/bridgewinners_update_1.md",
   feed,
   terms: "The maker identifies the repository license as MIT in the README. The host has no robots.txt.",
+  stats: { saycReference: { name: 'Agreement with Standard American Yellow Card reference', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = markdownTables(await fetchText(feed));
     function rows(first: string, minimum: number) {

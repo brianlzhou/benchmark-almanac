@@ -17,6 +17,11 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML, official leaderboard table, pass@5)`,
   terms: 'Static GitHub Pages site that states no license or terms; the ZeroBench repository is MIT.',
+  stats: {
+    passAt1: { name: 'pass@1 score', unit: '%', better: 'higher' },
+    pass5: { name: 'pass^5 score', unit: '%', better: 'higher', note: 'Share of questions solved correctly in all five samplings.' },
+    subquestionPassAt1: { name: 'Subquestion pass@1 score', unit: '%', better: 'higher' },
+  },
   aliases: {
     'Claude 3.5 Sonnet v2': 'claude-3-5-sonnet-october-2024',
     'Claude Sonnet 3.7': 'claude-3-7-sonnet',

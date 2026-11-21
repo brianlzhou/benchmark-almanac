@@ -7,6 +7,7 @@ import { checked, grid, flatPaperTables } from '../lib/boards/arxiv-span-tables.
 const feed = 'https://arxiv.org/html/2508.05630';
 const board: Leaderboard = {
   benchmark: 'mosev2', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
+  stats: { regionSimilarity: {name:'Region similarity',unit:'%',better:'higher'}, modifiedBoundary: {name:'Modified boundary accuracy',unit:'%',better:'higher'}, fps: {name:'Frames per second',unit:'count',better:'higher'} },
   parts: { disappearance: 'Disappearance clips', reappearance: 'Reappearance clips' },
   async fetch() {
     const paper = await paperHtml(feed);

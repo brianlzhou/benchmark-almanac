@@ -9,6 +9,7 @@ const header = ["Model", "Dim", "Recall@2", "Recall@10", "Recall@100"];
 const board: Leaderboard = {
   benchmark: "limit", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2508.21038." ,
+  stats:{recallAt10:{name:'Recall@10',unit:'%',better:'higher'},recallAt100:{name:'Recall@100',unit:'%',better:'higher'}},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.join('|') === header.join('|'));

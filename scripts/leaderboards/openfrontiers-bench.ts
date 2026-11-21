@@ -15,6 +15,7 @@ const board: Leaderboard = {
   benchmark: 'openfrontiers-bench', static: 'paper', url: FEED, feed: FEED, terms: PAPER_TERMS,
   headline: 'The paper reports no overall score, so this is the plain mean of clean pass rates in conditions A, B and C.',
   parts: { A: 'A: closed-book', B: 'B: frozen retrieval', C: 'C: live web' },
+  stats: { aAll: { name: 'A items solved', unit: 'count' }, aClean: { name: 'A clean pass rate', unit: '%', better: 'higher' }, bAll: { name: 'B items solved', unit: 'count' }, bClean: { name: 'B clean pass rate', unit: '%', better: 'higher' }, cAll: { name: 'C items solved', unit: 'count' }, cClean: { name: 'C clean pass rate', unit: '%', better: 'higher' } },
   async fetch() {
     const table = grid(paperTables(await paperHtml(FEED))[2]);
     if (table[0]?.[0] !== '' || table[0]?.[2] !== 'A: closed-book') throw new Error('OpenFrontiers-Bench results table changed');

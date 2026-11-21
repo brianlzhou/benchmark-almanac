@@ -10,7 +10,7 @@ const domains = ['Biology', 'Chemistry', 'Material', 'Physics'];
 const board: Leaderboard = {
   benchmark: 'sciknoweval', url: feed, feed, static: 'paper',
   terms: 'The authors publish these tables under the license linked at https://arxiv.org/abs/2406.09098.',
-  parts: Object.fromEntries([...levels, ...domains].map(name => [name, {name, group: levels.includes(name) ? 'Level' : 'Domain'}])),
+  parts: Object.fromEntries([...levels, ...domains].map(name => [name, {name, group: levels.includes(name) ? 'Level' : 'Domain'}])), stats: { rank: { name: 'Rank', unit: 'count', better: 'lower' } },
   aliases: {'Claude-4-Sonnet':'claude-sonnet-4', 'Llama4-Scout':'llama-4-scout'},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

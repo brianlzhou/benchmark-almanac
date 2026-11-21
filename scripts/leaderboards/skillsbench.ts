@@ -45,6 +45,12 @@ const board: Leaderboard = {
   feed: `${FEED} (with_skills_score)`,
   terms: 'Hugging Face dataset benchflow/skillsbench-leaderboard, licensed Apache-2.0.',
   aliases: {},
+  stats: {
+    without_skills_score: { name: 'Without skills score', unit: '%', better: 'higher' },
+    skill_lift: { name: 'Skill lift', unit: '%', better: 'higher' },
+    normalized_gain: { name: 'Normalized gain', unit: '%', better: 'higher' },
+    without_selected_trials: { name: 'Without skills trials', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<Row[]>(FEED);
     const rows: LeaderboardRow[] = [];

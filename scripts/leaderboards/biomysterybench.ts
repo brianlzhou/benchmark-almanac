@@ -16,6 +16,7 @@ const board: Leaderboard = {
   reference: ['Vals AI'],
   aliases: { 'Gemini 3.1 Pro Preview (02/26)': 'gemini-3-1-pro' },
   terms: 'Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.',
+  stats: { time: { name: 'Time', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(FEED);
     const view = await valsView(html);

@@ -9,6 +9,15 @@ const board: Leaderboard = {
   url: 'https://aclanthology.org/2026.emnlp-main.2208/',
   feed: 'https://aclanthology.org/2026.emnlp-main.2208.pdf',
   terms: 'The paper is publicly available from ACL Anthology. https://aclanthology.org/2026.emnlp-main.2208/',
+  parts: {
+    RI: { name: 'Role inference', unit: '%' },
+    SJ: { name: 'Strategic judgment', unit: '%' },
+    DR: { name: 'Deception reasoning', unit: '%' },
+    PS: { name: 'Persuasive statements', unit: '%' },
+    CT: { name: 'Counterfactual trade-off', unit: '%' },
+    VA: { name: 'Vote alignment', unit: '%' },
+    OI: { name: 'Opponent-role inference', unit: '%' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return checked([
       ['GPT-5-nano', .282, .375, .238, .325, .332, .311, .379, .493],

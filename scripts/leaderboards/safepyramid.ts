@@ -9,6 +9,7 @@ const board:Leaderboard={benchmark:'safepyramid', parts: {
   l2: { name: 'Level 2: novel frameworks', group: 'Difficulty' },
 },url:'https://bytedance.github.io/safepyramid/',feed:FEED,
  terms:'Apache-2.0 project; the maker site has no robots.txt. JavaScript data is parsed, never executed.',
+ stats:{exact:{name:'Exact rule match rate',unit:'%',better:'higher'},rdr:{name:'Rule disagreement rate',unit:'%',better:'lower'},refusal:{name:'Refusal rate',unit:'%',better:'lower'}},
  async fetch(){
   const d=jsonAfter<{overallPolicy:Record<string,{RMR:number[];'RMR@1.0':number[];RDR:number[];Refusal:number}>}>(await fetchText(FEED),'window.SP_DATA =');
   const rows=Object.entries(d.overallPolicy).map(([model,r])=>({model,score:r.RMR[3],metrics:{l0:r.RMR[0],l1:r.RMR[1],l2:r.RMR[2],exact:r['RMR@1.0'][3],rdr:r.RDR[3],refusal:r.Refusal}}));

@@ -11,6 +11,13 @@ const board: Leaderboard = {
   feed,
   terms: "Use the first table for the expanded coding tasks. Roblox releases the repository under MIT. https://github.com/Roblox/open-game-eval/blob/main/LICENSE.txt The raw file host has no robots.txt.",
   reference: ['Roblox Studio Assistant'],
+  stats: {
+    'Pass@1': { name: 'Pass rate at one attempt', unit: '%', better: 'higher' },
+    'Pass@5': { name: 'Pass rate at five attempts', unit: '%', better: 'higher' },
+    'Cons@5': { name: 'Consistent pass@5', unit: '%', better: 'higher' },
+    'All@5': { name: 'All pass@5', unit: '%', better: 'higher' },
+    'Avg Tool Error Rate': { name: 'Average tool error rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const t = tables((await fetchText(feed)).split('## Expanded Eval Set (87 Evals)')[1] ?? '')[0];
     const cols = ['Pass@1', 'Pass@5', 'Cons@5', 'All@5', 'Avg Tool Error Rate'];

@@ -10,6 +10,7 @@ parts: {
   python: { name: 'Python', group: 'Language' },
   java: { name: 'Java', group: 'Language' },
 },
+stats: { cppPass8Rating: { name: 'C++ pass@8 rating', unit: 'rating', better: 'higher' } },
  terms:'CC-BY-4.0 benchmark data and public author results. The Almanac credits StepFun and links the source.',
  async fetch(){
  const t=markdownTables(await fetchText(PAGE+'/raw/main/README.md')).find(t=>t[0]?.some(h=>h.includes('C++ (avg@8)')));

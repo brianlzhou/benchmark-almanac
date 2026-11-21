@@ -15,6 +15,13 @@ const board: Leaderboard = {
     PHP: { name: 'PHP', group: 'Language' },
     Python: { name: 'Python', group: 'Language' },
   },
+  stats: {
+    avg_duration_s: { name: 'Average duration per task', unit: 'seconds', better: 'lower' },
+    avg_turns: { name: 'Average turns per task', unit: 'count', better: 'lower' },
+    cache_hit: { name: 'Cache hit rate', unit: '%', better: 'higher' },
+    time: { name: 'Average duration per submission', unit: 'seconds', better: 'lower' },
+    turns: { name: 'Average turns per submission', unit: 'count', better: 'lower' },
+  },
   terms: "Public official results, subject to the source repository license and host terms.",
   chart:{title:"Cost–Resolve Pareto",x:{key:"cost_usd",label:"Total API cost for Full-350",unit:"$",better:"lower",log:true},y:{key:"score",label:"Total Pass@1",unit:"%",better:"higher"}},
   async fetch() {

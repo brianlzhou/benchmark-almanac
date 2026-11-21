@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://linzhiqiu.github.io/papers/naturalbench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    questionAccuracy: { name: 'Question accuracy', unit: '%', better: 'higher' },
+    imageAccuracy: { name: 'Image accuracy', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const t = (await paperTables(FEED))[4];
     if (!t?.[1]?.some(c => c.text === 'G-Acc')) throw new Error('NaturalBench table changed');

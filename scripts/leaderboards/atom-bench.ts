@@ -13,8 +13,23 @@ const groups = [
   { columns: ['Motor SR', 'Motor PSR', 'Instr. SR', 'Instr. PSR'], keys: ['motor', 'motorPsr', 'instruction', 'instructionPsr'] },
   { columns: ['SR', 'PSR', 'AS', 'CFS'], keys: ['composition', 'compositionPsr', 'atomicScore', 'compositionalFailureShare'] },
 ];
+for (const robot of ['Franka Panda', 'Cobot Magic']) {
+  const prefix = robot === 'Franka Panda' ? 'franka_' : 'cobot_';
+  parts[prefix + 'motor'] = {name: robot + ': Motor Set', group: robot, unit:'%'};
+  parts[prefix + 'instruction'] = {name: robot + ': Instruction Set', group: robot, unit:'%'};
+  parts[prefix + 'composition'] = {name: robot + ': Composition Set', group: robot, unit:'%'};
+}
+const stats: Record<string, {name:string, unit:string, better:'higher'|'lower'}> = {};
+for (const robot of ['Franka Panda', 'Cobot Magic']) {
+  const prefix = robot === 'Franka Panda' ? 'franka_' : 'cobot_';
+  stats[prefix + 'motorPsr'] = {name: robot + ': Motor process success rate', unit:'%', better:'higher'};
+  stats[prefix + 'instructionPsr'] = {name: robot + ': Instruction process success rate', unit:'%', better:'higher'};
+  stats[prefix + 'compositionPsr'] = {name: robot + ': Composition process success rate', unit:'%', better:'higher'};
+  stats[prefix + 'atomicScore'] = {name: robot + ': Atomic success score', unit:'%', better:'higher'};
+  stats[prefix + 'compositionalFailureShare'] = {name: robot + ': Compositional failure share', unit:'%', better:'lower'};
+}
 const board: Leaderboard = {
-  benchmark: 'atom-bench', url: feed + '#results', feed, parts,
+  benchmark: 'atom-bench', url: feed + '#results', feed, parts, stats,
   terms: 'BAAI FlagEval publishes these results at https://flageval-baai.github.io/AtomBenchPage/. The authors retain their rights.',
   aliases: { 'Pi0.5': 'pi0-5', 'GROOT N1.6': 'gr00t-n1-6' },
   async fetch() {

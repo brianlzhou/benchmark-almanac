@@ -8,6 +8,7 @@ import { checked, flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.
 const feed = 'https://arxiv.org/html/2501.11733';
 const board: Leaderboard = {
   benchmark: 'mobile-eval-e', static: 'paper', url: feed, feed, harnesses: 'system',
+  stats: { actionAccuracy: {name:'Action accuracy',unit:'%',better:'higher'}, reflectionAccuracy: {name:'Reflection accuracy',unit:'%',better:'higher'}, terminationError: {name:'Termination error',unit:'%',better:'lower'}, reasoningSecondsPerOperation: {name:'Reasoning time per operation',unit:'seconds',better:'lower'}, totalSecondsPerOperation: {name:'Total time per operation',unit:'seconds',better:'lower'}, shortcutUsage: {name:'Shortcut usage',unit:'%',better:'lower'} },
   terms: 'Paper and license details at https://arxiv.org/abs/2501.11733.',
   aliases: { 'gpt-4o-2024-11-20': 'gpt-4o-nov-2024', 'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024' },
   async fetch() {

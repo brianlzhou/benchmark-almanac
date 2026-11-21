@@ -10,12 +10,22 @@ type Scores = { task_goal_completion: number, scenario_goal_completion: number, 
 type RecordRow = { llm: { name: string, tooltip: string }, method: {name: string}, url: string, date: string,
   test_normal: Record<string, Scores>, test_challenge: Record<string, Scores> };
 const splits = { test_normal: 'Test-Normal', test_challenge: 'Test-Challenge' } as const;
+const stats: Record<string, { name: string, unit: string, better?: 'higher' | 'lower' }> = {};
+for (const [key, label] of Object.entries(splits)) {
+  for (const level of ['all', 'level 1', 'level 2', 'level 3']) {
+    const prefix = level === 'all' ? key : key + '_' + level.replaceAll(' ', '');
+    const scope = level === 'all' ? label : label + ': ' + level;
+    stats[prefix + 'TGC'] = { name: scope + ' task goal completion', unit: '%', better: 'higher' };
+    stats[prefix + 'Interactions'] = { name: scope + ' interactions', unit: 'count' };
+  }
+}
 const board: Leaderboard = {
   benchmark: 'appworld', url: 'https://appworld.dev/appworld/leaderboard', feed, harnesses: 'system',
   terms: 'AppWorld publishes its leaderboard and submission rules at https://github.com/StonyBrookNLP/appworld-leaderboard.',
   headline: 'The board reports no combined score, so this is the plain mean of scenario goal completion on Test-Normal and Test-Challenge.',
   aliases: { 'gpt-4o-2024-05-13': 'gpt-4o-may-2024', 'gpt-4o-2024-08-06': 'gpt-4o-aug-2024',
     'gpt-4-turbo-2024-04-09': 'gpt-4-turbo-apr-2024', DeepSeekCoder: 'deepseek-coder-33b', 'gptoss-20b': 'gpt-oss-20b' },
+  stats,
   async fetch() {
     const data = await fetchJson<RecordRow[]>(feed);
     const parts: Record<string, string> = {};

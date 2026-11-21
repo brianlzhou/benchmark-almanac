@@ -39,7 +39,8 @@ const board: Leaderboard = {
   url: 'https://sec-bench.github.io',
   feed: `${FEED} (snapshot ${SNAPSHOT}, overall)`,
   terms: 'Static JSON on the SEC-bench GitHub Pages site, whose repository is Apache-2.0; the SEC-bench Pro repository is MIT.',
-  aliases: {}, parts:{}, verified:'Marked verified by SEC-bench',
+  stats: { inputTokens: { name: 'Input tokens per instance', unit: 'tokens' }, totalTokens: { name: 'Total tokens per instance', unit: 'tokens' }, verifiedPocs: { name: 'Verified proof of concepts', unit: 'count' }, solved: { name: 'Solved instances', unit: 'count' }, completedScore: { name: 'Completed-instance score', unit: '%', better: 'higher' }, latency: { name: 'Runtime per instance', unit: 'seconds', better: 'lower' }, toolCalls: { name: 'Tool calls per instance', unit: 'count' } },
+  aliases: {}, parts:{ v8: { name: 'V8', group: 'Project' }, firefox: { name: 'Firefox', group: 'Project' }, linux: { name: 'Linux', group: 'Project' } }, verified:'Marked verified by SEC-bench',
   async fetch() {
     const data = await fetchJson<{
       snapshots: Record<string, { leaderboards: { name:string; display_name:string; is_overall?: boolean; instances?: number; results: Result[] }[]; run_details?: Record<string, RunDetail> }>;

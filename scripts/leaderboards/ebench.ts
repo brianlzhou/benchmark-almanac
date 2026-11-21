@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
+  stats: { partialScore: { name: 'Partial score', unit: '%', better: 'higher' } },
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Val-Train') && t[0]?.some(c=>c.text==='Retention'));
     if(!t)throw new Error('EBench test table missing');

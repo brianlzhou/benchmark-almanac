@@ -8,6 +8,7 @@ const feed = "https://raw.githubusercontent.com/ATinyGreenCell/prompt-to-bench/m
 
 const board: Leaderboard = {
   benchmark: "prompt-to-bench-ho-16",
+  stats: { shareKept: { name: 'Share kept', unit: 'score', better: 'higher', note: 'Fraction of generated results retained, from 0 to 1.' } },
   url: "https://github.com/ATinyGreenCell/prompt-to-bench#67-new-tasks",
   feed,
   terms: "The author licenses the paper under CC BY 4.0. Separate model licenses apply to third-party outputs. The host has no robots.txt.",

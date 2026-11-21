@@ -7,6 +7,11 @@ import { jsonAfter, nextFlight } from '../lib/html.ts';
 const feed = "https://crazyrouter.com/experimental";
 const board: Leaderboard = {
   benchmark: "crazyrouter-ai-trading-arena",
+  stats: {
+    dailyReturnPct: { name: 'Daily return', unit: '%', better: 'higher' },
+    equityUsd: { name: 'Portfolio equity', unit: 'usd', better: 'higher' },
+    cashUsd: { name: 'Cash balance', unit: 'usd' },
+  },
   url: "https://crazyrouter.com/experimental",
   feed,
   terms: "The service terms cover the API platform. I found no separate license for leaderboard data. The site's robots.txt permits the public experiment page.",

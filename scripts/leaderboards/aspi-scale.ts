@@ -23,6 +23,9 @@ function readCell(s:string) {
 const board:Leaderboard={
   benchmark:'aspi-scale',url:feed,feed,static:'paper',terms:PAPER_TERMS,parts,
   headline:'The headline averages attack success across six conditions, giving each condition equal weight.',
+  stats: {
+    clarificationRate: { name: 'Clarification rate', unit: '%', note: 'Percentage of task groups in which the agent invokes ask_user.' },
+  },
   aliases:{'Opus 4.7':'claude-opus-4-7','Qwen3-235B':'qwen3-235b-a22b-instruct-jul-2025'},
   async fetch(){
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

@@ -12,6 +12,14 @@ const PAGE = 'https://oss-crs.openssf.org/crsbench/results';
 
 const board: Leaderboard = {
   benchmark: 'crsbench',
+  stats: {
+    cases: { name: 'Cases', unit: 'count' },
+    endToEndPassed: { name: 'End-to-end passed cases', unit: 'count' },
+    findRate: { name: 'Find rate', unit: '%', better: 'higher' },
+    fixRate: { name: 'Fix rate', unit: '%', better: 'higher' },
+    findCost: { name: 'Find cost per trial', unit: 'usd', better: 'lower' },
+    fixCost: { name: 'Fix cost per trial', unit: 'usd', better: 'lower' },
+  },
   url: PAGE,
   feed: `${PAGE} (static HTML, Find / Fix / End-to-End table, End-to-End)`,
   terms: 'Static OpenSSF project page; oss-crs.openssf.org has no robots.txt (404) and the OSS-CRS repository is MIT-licensed.',

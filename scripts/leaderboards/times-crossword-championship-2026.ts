@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'times-crossword-championship-2026', static: 'paper',
   url: feed + '#S5.T6', feed,
   terms: 'arXiv permits HTML retrieval with a 15-second crawl delay. The authors list the arXiv distribution license and give no license for the grids.',
+  stats: { cluesSolved: { name: 'Clues solved', unit: 'count', better: 'higher' }, clues: { name: 'Clues', unit: 'count' }, wrong: { name: 'Wrong answers', unit: 'count', better: 'lower' }, blank: { name: 'Blank answers', unit: 'count', better: 'lower' }, latency: { name: 'Median time', unit: 'seconds', better: 'lower' }, fastestSeconds: { name: 'Fastest time', unit: 'seconds', better: 'lower' }, slowestSeconds: { name: 'Slowest time', unit: 'seconds', better: 'lower' } },
   parts: { hard65k: { name: '65k, Hard 9', note: 'Nine draws on SF1, SF3, and Final under a 65k token cap.' } },
   async fetch() {
     const html = await paperHtml(feed);

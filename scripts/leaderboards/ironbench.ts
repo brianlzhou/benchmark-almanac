@@ -6,6 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 const feed = "https://cezman.github.io/ironharness/generations/2026-09-10-data.json";
 const board: Leaderboard = {
   benchmark: "ironbench",
+  stats: { totalDuration: { name: 'Total duration', unit: 'seconds', better: 'lower' }, totalIterations: { name: 'Total iterations', unit: 'count', better: 'lower' } },
   url: "https://cezman.github.io/ironharness/generations/2026-09-10.html",
   feed,
   terms: "The project uses the MIT license. The archived table dates to September 20 and reports the September 10 campaign. The site returned 404 for robots.txt.",

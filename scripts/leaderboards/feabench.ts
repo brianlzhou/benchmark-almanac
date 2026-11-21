@@ -15,6 +15,7 @@ function measurement(cell:string){
 }
 const board:Leaderboard={
   benchmark:'feabench',static:'paper',url,feed:url,terms:PAPER_TERMS,parts,
+  stats: { executability: { name: 'Executability', unit: '%', better: 'higher' }, modelTree: { name: 'Model tree score', unit: '%', better: 'higher' }, validTargets: { name: 'Valid targets', unit: 'count' } },
   headline:'The headline averages interface factuality on Gold and Large. This is the first physics metric the paper reports for both sets.',
   async fetch(){
     const ts=paperTables(await paperHtml(url)).map(grid);

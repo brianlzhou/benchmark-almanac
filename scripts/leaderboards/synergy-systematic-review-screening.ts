@@ -6,6 +6,7 @@ import { tables, num } from '../lib/html.ts';
 const feed = "https://67ailab.com/posts/spark-eval-04-l1-literature-screening/";
 const board: Leaderboard = {
   benchmark: 'synergy-systematic-review-screening',
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' }, sampleAgreement: { name: 'Sample agreement', unit: 'score', better: 'higher' }, workSaved: { name: 'Work saved', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' } },
   url: "https://67ailab.com/posts/spark-eval-04-l1-literature-screening/",
   feed,
   terms: "The host allows crawling. The publisher gives no separate reuse terms for the score table. https://67ailab.com/posts/spark-eval-04-l1-literature-screening/",

@@ -13,6 +13,13 @@ const board: Leaderboard = {
   terms: 'The authors publish Table II under the license at https://arxiv.org/abs/2412.02410.',
   headline: 'The paper reports no overall score, so this is the plain mean of compilation pass rates on its three datasets.',
   parts: Object.fromEntries(datasets.map(name => [name, { name }])),
+  stats: {
+    'LGF (SCL) average errors': { name: 'LGF average errors', unit: 'count', better: 'lower' },
+    'Competition (SCL) average errors': { name: 'Competition average errors', unit: 'count', better: 'lower' },
+    'OSCAT (ST) average errors': { name: 'OSCAT average errors', unit: 'count', better: 'lower' },
+    'Agents4PLC pass rate': { name: 'Agents4PLC pass rate', unit: '%', better: 'higher' },
+    'Agents4PLC validation rate': { name: 'Agents4PLC validation rate', unit: '%', better: 'higher' },
+  },
   aliases: { 'Llama-3.1-Instruct (8B)': 'llama-3-1-8b', 'Qwen2.5-Coder-Instruct (7B)': 'qwen2-5-coder-7b' },
   async fetch() {
     const table = paperTables(await paperHtml(url)).map(grid).find(t => t[0]?.join('|') === ['Baselines', ...[...datasets,'Agents4PLC (ST)'].flatMap(s => [s,s])].join('|'));

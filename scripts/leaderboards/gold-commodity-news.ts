@@ -11,6 +11,10 @@ const board: Leaderboard = {
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'The paper reports no overall score. The headline is the plain mean of F1 across the seven reported headline categories.',
   parts: Object.fromEntries(categories.map(name => [name,name])),
+  stats: Object.fromEntries(categories.flatMap(name => [
+    [name + ' Precision', {name: name + ' precision', unit: '%', better: 'higher' as const}],
+    [name + ' Recall', {name: name + ' recall', unit: '%', better: 'higher' as const}],
+  ])),
   async fetch() {
     const table = flatPaperTables(await paperHtml(feed)).map(grid)
       .find(t => JSON.stringify(t[0]?.slice(3)) === JSON.stringify(categories));

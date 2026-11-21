@@ -8,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/Libr-AI/do-not-answer/main/READM
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
+  stats: { gpt4: { name: 'GPT-4 refusal rate', unit: '%', better: 'higher' }, longformer: { name: 'Longformer refusal rate', unit: '%', better: 'higher' } },
   benchmark: "do-not-answer",
   url: "https://github.com/Libr-AI/do-not-answer",
   feed: FEED,

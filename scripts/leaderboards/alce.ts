@@ -8,6 +8,13 @@ const URL = 'https://arxiv.org/html/2305.14627';
 const board: Leaderboard = {
   benchmark: 'alce', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
   headline: 'The paper reports several metrics, so this leaderboard uses the ASQA citation-recall column as its headline.',
+  stats: {
+    mauve: { name: 'MAUVE', unit: 'score', better: 'higher' },
+    correctness: { name: 'Correctness', unit: '%', better: 'higher' },
+    citationPrecision: { name: 'Citation precision', unit: '%', better: 'higher' },
+    rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher' },
+    length: { name: 'Output length', unit: 'count' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(URL)).map(grid);
     const table = tables[19];

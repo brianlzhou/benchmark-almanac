@@ -8,6 +8,7 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/allenai/OpenBookQA/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "openbookqa",
+ stats: { devMean: { name: 'Development mean accuracy', unit: '%', better: 'higher' }, testBest: { name: 'Test best accuracy', unit: '%', better: 'higher' }, devBest: { name: 'Development best accuracy', unit: '%', better: 'higher' } },
  url: "https://github.com/allenai/OpenBookQA",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

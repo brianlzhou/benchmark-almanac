@@ -32,6 +32,7 @@ const board: Leaderboard = {
     language_TH: { name: 'Thai', group: 'Language' },
     language_ZH: { name: 'Simplified Chinese', group: 'Language' },
     'language_ZH-T': { name: 'Traditional Chinese', group: 'Language' },
+    language_NL: { name: 'Dutch', group: 'Language' },
   },
   url: 'https://huggingface.co/spaces/Delores-Lin/MDPBench-leaderboard',
   feed: `${FEED} (overall)`,

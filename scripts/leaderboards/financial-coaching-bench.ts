@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: valsPage(SLUG),
   feed: `${valsPage(SLUG)} (the page's results table, through the shared Vals reader)`,
   terms: VALS_TERMS,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   aliases: VALS_ALIASES,
   async fetch() {
     const rows = await valsRows(SLUG);

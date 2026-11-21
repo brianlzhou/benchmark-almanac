@@ -6,6 +6,7 @@ import { fetchText } from '../lib/util.ts';
 const feed = "https://web.archive.org/web/20260629220638id_/https://cursor.com/cursorbench";
 const board: Leaderboard = {
   benchmark: 'cursorbench-3-1',
+  stats: { steps: { name: 'Steps per task', unit: 'count', better: 'lower' } },
   url: "https://web.archive.org/web/20260629220638/https://cursor.com/cursorbench",
   feed,
   terms: "Cursor's robots.txt allows the leaderboard. Cursor's terms restrict automated extraction. The Internet Archive preserves this public Cursor table.",

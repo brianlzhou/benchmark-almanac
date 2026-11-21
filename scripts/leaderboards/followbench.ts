@@ -7,6 +7,7 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 
 const FEED = 'https://arxiv.org/html/2310.20410';
 const board: Leaderboard = {
+  stats: { ssr: { name: 'Success rate', unit: '%', better: 'higher' }, constraintLevel: { name: 'Constraint level', unit: 'score', better: 'higher' } },
   benchmark: 'followbench', static: 'paper', parts: {
   level1: { name: 'Level 1', group: 'Difficulty' },
   level2: { name: 'Level 2', group: 'Difficulty' },

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://www.kaggle.com/competitions/feedback-prize-english-language-learning/leaderboard",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host returns no robots.txt.",
+  stats: { submissions: { name: 'Submissions', unit: 'count' }, publicScore: { name: 'Public score', unit: 'score', better: 'lower' } },
   async fetch() {
     type Entry = { teamId: number; displayScore: string };
     type Team = { teamId: number; teamName: string; submissionCount: number; lastSubmissionDate?: string; solutionWriteUpUrl?: string };

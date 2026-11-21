@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://github.com/Eason-Li-AIS/DrafterBench#leaderboard",
   feed: FEED,
   terms: "The repository includes the leaderboard in its README and carries the MIT license. https://github.com/Eason-Li-AIS/DrafterBench GitHub requests a one-second crawl delay.",
+  stats: {
+    'Average tasks': { name: 'Average task score', unit: 'score', better: 'higher' },
+    'Comprehensive rewards': { name: 'Comprehensive reward score', unit: 'score', better: 'higher' },
+    ...Object.fromEntries(['Structured language','Unstructured language','Precise detail','Vague detail','Complete instruction','Incomplete (error) instruction','Single object','Multiple objects','Single operation','Multiple operations','Average tasks','Comprehensive rewards'].map(name => [name + ' variance', { name: name + ' variance', unit: 'score', better: 'lower' }])),
+  },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find((t) => t[0][0] === 'Metric');
     if (!table || table[0].length < 20 || !table.some(([key]) => key === 'Comprehensive rewards')) throw new Error('Incomplete DrafterBench table');

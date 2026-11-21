@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: `${URL}#results`,
   feed: `${URL} (ReAct and function-calling track tables, best Overall Success Rate per model)`,
   terms: 'Static GitHub Pages project site with no robots.txt and no terms; the MCP-Universe repository is Apache-2.0.',
+  stats: { steps: { name: 'Average steps', unit: 'count', better: 'lower' }, evaluator: { name: 'Average evaluator score', unit: '%', better: 'higher' } },
   aliases: {
     'Claude-4.0-Sonnet': 'claude-sonnet-4',
     'Claude-4.0-Opus': 'claude-opus-4',

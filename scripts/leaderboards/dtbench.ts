@@ -82,6 +82,7 @@ const board: Leaderboard = {
   feed: `${CRI_FEED} (100 * dtbench_accuracy)`,
   terms: CRI_TERMS,
   aliases: CRI_ALIASES,
+  stats: { dtbench: { name: 'DTBench score', unit: '%', better: 'higher' } },
   fetch: () => criColumn('dtbench_accuracy', { scale: 100, cost: 'dt_cost', includeEfforts: true, ci: 'dtbench_ci', ciCenter: 'dtbench', metrics: { dtbench: 'dtbench', dtbenchCi: 'dtbench_ci', attitudeEdt: 'attitude_edt' } }),
 };
 export default board;

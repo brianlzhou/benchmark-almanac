@@ -9,6 +9,7 @@ const feed = "https://raw.githubusercontent.com/lechmazur/pgg_bench/HEAD/README.
 
 const board: Leaderboard = {
   benchmark: "pgg-bench-lech-mazur",
+  stats: { avgFinalTokens: { name: 'Average final tokens', unit: 'tokens' } },
   url: "https://github.com/lechmazur/pgg_bench",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/pgg_bench. I could not verify reuse terms. The raw file host serves no robots.txt rules.",

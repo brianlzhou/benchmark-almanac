@@ -6,6 +6,7 @@ import { fetchText } from '../lib/util.ts';
 const FEED = 'https://raw.githubusercontent.com/debu-sinha/sycobench-600/main/README.md';
 const board: Leaderboard = {
   benchmark: 'sycobench-600', url: 'https://github.com/debu-sinha/sycobench-600', feed: FEED,
+  stats: { PRA_all: { name: 'Precision-recall area', unit: 'score', better: 'higher' }, Sel: { name: 'Selection rate', unit: 'score', better: 'higher' }, Stub_nc: { name: 'Non-compliant stub rate', unit: 'score', better: 'higher' }, Syco: { name: 'Sycophancy rate', unit: 'score', better: 'lower' } },
   terms: 'The repository is public under its stated license. Source attribution applies.',
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(FEED); const section = text.split('| Model | Acc |')[1]?.split('Definitions:')[0];

@@ -4,6 +4,23 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 const FEED = 'https://gradebench.com/data.js';
+const subjectColumns = ['Engineering', 'Chemistry', 'Mathematics', 'Physics', 'Statistics', 'Computer Science'];
+const drawingColumns = ['Graphs and plots', 'Chemical structures', 'Circuits and timing', 'Orbital and energy levels', 'Trees and graphs', 'Free-body', 'Ray diagrams'];
+const stats = Object.fromEntries([
+  ['worstOf5', { name: 'Worst of 5 runs', unit: '%', better: 'higher' }],
+  ['bestOf5', { name: 'Best of 5 runs', unit: '%', better: 'higher' }],
+  ...[...subjectColumns, 'Drawings', 'Written'].flatMap(name => [[`subjects_${name}_answers`, { name: `${name} answer count`, unit: 'count' }]]),
+  ...subjectColumns.flatMap(name => [
+    [`subjects_${name}_worstOf5`, { name: `${name} worst of five score`, unit: 'score', better: 'higher' }],
+    [`subjects_${name}_bestOf5`, { name: `${name} best of five score`, unit: 'score', better: 'higher' }],
+  ]),
+  ...drawingColumns.flatMap(name => [
+    [`drawings_${name}_answers`, { name: `${name} answer count`, unit: 'count' }],
+    [`drawings_${name}_worstOf5`, { name: `${name} worst of five score`, unit: 'score', better: 'higher' }],
+    [`drawings_${name}_bestOf5`, { name: `${name} best of five score`, unit: 'score', better: 'higher' }],
+  ]),
+  ['drawings_All drawings_answers', { name: 'All drawings answer count', unit: 'count' }],
+]);
 const board: Leaderboard = {
   benchmark: 'gradebench', parts: {
   subjects_Engineering: { name: 'Engineering', group: 'Domain' },
@@ -25,6 +42,7 @@ const board: Leaderboard = {
 }, url: 'https://gradebench.com/', feed: FEED,
   terms: 'GradeBench publishes this results file. Its robots.txt permits this path and the site states no separate scraping restriction. Source: GradeBench by Pensive.',
   aliases: { 'Muse Wonder': 'muse-wonder' },
+  stats,
   async fetch() {
     const source = await fetchText(FEED);
     const read = <T>(name: string): T => {

@@ -11,6 +11,13 @@ const board: Leaderboard = {
   system: { name: 'System', group: 'Task type' },
 }, url: URL, feed: URL + ' (leaderboard-data JSON)',
   terms: 'The WebsiteBench repository is Apache-2.0. The maker publishes score downloads and embedded JSON, and robots.txt permits the page. Source: WebsiteBench authors.',
+  stats: {
+    totalTokens: { name: 'Total tokens', unit: 'tokens' }, turns: { name: 'Turns', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' },
+    overall_passed: { name: 'Overall passed tasks', unit: 'count' }, overall_total: { name: 'Overall tasks', unit: 'count' },
+    request_passed: { name: 'Request passed tasks', unit: 'count' }, request_total: { name: 'Request tasks', unit: 'count' },
+    browser_passed: { name: 'Browser passed tasks', unit: 'count' }, browser_total: { name: 'Browser tasks', unit: 'count' },
+    system_passed: { name: 'System passed tasks', unit: 'count' }, system_total: { name: 'System tasks', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(URL);
     const raw = html.match(/id="leaderboard-data">([\s\S]*?)<\/script>/)?.[1];

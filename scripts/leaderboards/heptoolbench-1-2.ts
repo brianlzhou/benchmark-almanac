@@ -9,6 +9,11 @@ const board: Leaderboard = {
   url: "https://github.com/AadarshSingh0/HEPToolBench/blob/main/local_llm_benchmark/results/heptoolbench_v1_2_1_correction/paper_a/figure_data/fig1_leaderboard.csv",
   feed: FEED,
   terms: "The repository uses BSD 3-Clause. The file contains 42 deployments of 41 named models. https://github.com/AadarshSingh0/HEPToolBench/blob/main/LICENSE GitHub requests a one-second crawl delay.",
+  stats: {
+    passes: { name: 'Tasks passed', unit: 'count' },
+    tasks: { name: 'Tasks evaluated', unit: 'count' },
+    meanScore: { name: 'Mean score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const rows = parseCsv(await fetchText(FEED));
     if (rows.length < 42) throw new Error('Expected 42 scored deployments');

@@ -15,6 +15,14 @@ function numeric(s: string) {
 }
 const board: Leaderboard = {
   benchmark: 'aacr-bench', url: feed, feed, static: 'paper', terms: PAPER_TERMS, parts,
+  stats: {
+    avgComments: { name: 'Average comments per pull request', unit: 'count' },
+    recall: { name: 'Recall', unit: '%', better: 'higher' },
+    precision: { name: 'Precision', unit: '%', better: 'higher' },
+    lineRecall: { name: 'Line recall', unit: '%', better: 'higher' },
+    linePrecision: { name: 'Line precision', unit: '%', better: 'higher' },
+    lineF1: { name: 'Line F1', unit: '%', better: 'higher' },
+  },
   aliases: { 'Claude-4.5-Sonnet': 'claude-sonnet-4-5', 'Qwen-480B-Coder': 'qwen3-coder-480b-a35b' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

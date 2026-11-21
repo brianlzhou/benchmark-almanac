@@ -11,6 +11,7 @@ const header = ["Models", "Retrieved Chunk", "Ground-truth Chunk"];
 const board: Leaderboard = {
   benchmark: "multihop-rag", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2401.15391." ,
+  stats: { groundTruthChunkAccuracy: {name:'Ground-truth chunk accuracy',unit:'%',better:'higher'} },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[1]?.join('|') === header.join('|') && t[0]?.join('|') === 'Models|Accuracy|Accuracy');

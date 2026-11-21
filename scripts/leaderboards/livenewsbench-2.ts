@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: FEED,
   terms: 'The authors publish these results on the LiveNewsBench site. Results are credited to the LiveNewsBench authors.',
+  stats:{searches:{name:'Average searches',unit:'count',better:'lower'},clicks:{name:'Average clicks',unit:'count',better:'lower'}},
   async fetch() {
     const source = await fetchText(FEED);
     const data = jsLiteral<Record<string, Config>>(source, source.indexOf('{', source.indexOf('const resultsData')));

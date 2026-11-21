@@ -8,6 +8,7 @@ const feed = "https://embodiedcity.github.io/HandWorldBench/assets/results.json"
 const board: Leaderboard = {
   benchmark: 'handworldbench', url, feed,
   terms: "The authors do not specify separate terms for leaderboard scores on https://embodiedcity.github.io/HandWorldBench/#results" ,
+  stats: Object.fromEntries(['Ego','Simulated hands','Real robot'].flatMap(group => ['Visual quality','Hand fidelity','Appearance consistency','Instruction following','Physical consistency','Temporal coherence'].map(d => [`${group} · ${d}`, { name: `${group} ${d}`, unit: 'score', better: 'higher' }]))),
   async fetch() {
     type Entry = { name: string; score: number; dimensions: number[] };
     const data = await fetchJson<Record<string, Entry[]>>(feed);

@@ -7,6 +7,7 @@ const feed = 'https://raw.githubusercontent.com/pfnet-research/jfbench/main/READ
 
 const board: Leaderboard = {
   benchmark: 'jfbench',
+  stats: { constraints1: { name: 'Pass rate with one constraint', unit: '%', better: 'higher' }, constraints2: { name: 'Pass rate with two constraints', unit: '%', better: 'higher' }, constraints4: { name: 'Pass rate with four constraints', unit: '%', better: 'higher' }, constraints8: { name: 'Pass rate with eight constraints', unit: '%', better: 'higher' } },
   url: 'https://github.com/pfnet-research/jfbench',
   feed,
   terms: 'The repository is licensed under MIT. https://github.com/pfnet-research/jfbench/blob/main/LICENSE',

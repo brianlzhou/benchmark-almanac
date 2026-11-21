@@ -44,6 +44,12 @@ function panel(text: string, languages: boolean) {
 export default {
   benchmark: 'longaudiospan', static: 'paper', url: 'https://arxiv.org/abs/2608.26431', feed,
   terms: 'arXiv permits the PDF path in robots.txt. Results are credited to the LongAudioSpan authors.',
+  stats: {
+    accuracyAvg: { name: 'Average native multiple-choice accuracy', unit: '%', better: 'higher' },
+    rubricS: { name: 'Short rubric accuracy', unit: '%', better: 'higher' }, rubricM: { name: 'Medium rubric accuracy', unit: '%', better: 'higher' }, rubricL: { name: 'Long rubric accuracy', unit: '%', better: 'higher' }, rubricAvg: { name: 'Average rubric accuracy', unit: '%', better: 'higher' }, rubricEN: { name: 'English rubric accuracy', unit: '%', better: 'higher' }, rubricZH: { name: 'Chinese rubric accuracy', unit: '%', better: 'higher' },
+    chainS: { name: 'Short chain accuracy', unit: '%', better: 'higher' }, chainM: { name: 'Medium chain accuracy', unit: '%', better: 'higher' }, chainL: { name: 'Long chain accuracy', unit: '%', better: 'higher' }, chainAvg: { name: 'Average chain accuracy', unit: '%', better: 'higher' }, chainEN: { name: 'English chain accuracy', unit: '%', better: 'higher' }, chainZH: { name: 'Chinese chain accuracy', unit: '%', better: 'higher' },
+    audioLimitMinutes: { name: 'Audio limit', unit: 'minutes' },
+  },
   parts: { accuracyS: 'S', accuracyM: 'M', accuracyL: 'L', accuracyEN: 'English', accuracyZH: 'Chinese' },
   aliases: { 'GPT-5.4 (question-only)': 'gpt-5-4', 'GPT-5.4 (transcript)': 'gpt-5-4', 'GPT-5.4 (caption)': 'gpt-5-4' },
   async fetch() {

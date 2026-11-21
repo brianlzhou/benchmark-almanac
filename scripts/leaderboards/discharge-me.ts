@@ -6,6 +6,7 @@ const FEED = "https://docs.google.com/spreadsheets/d/1idtYUQv4Npr142mEDQngZ8fNLw
 const categories = ["BLEU", "ROUGE-1", "ROUGE-2", "ROUGE-L", "BERTScore", "Meteor", "AlignScore", "MEDCON"];
 
 const board: Leaderboard = {
+  stats: { BLEU: { name: 'BLEU', unit: 'score', better: 'higher' }, 'ROUGE-1': { name: 'ROUGE-1', unit: 'score', better: 'higher' }, 'ROUGE-2': { name: 'ROUGE-2', unit: 'score', better: 'higher' }, 'ROUGE-L': { name: 'ROUGE-L', unit: 'score', better: 'higher' }, BERTScore: { name: 'BERTScore', unit: 'score', better: 'higher' }, Meteor: { name: 'METEOR', unit: 'score', better: 'higher' }, AlignScore: { name: 'AlignScore', unit: 'score', better: 'higher' }, MEDCON: { name: 'MEDCON', unit: 'score', better: 'higher' } },
   benchmark: "discharge-me",
   url: "https://docs.google.com/spreadsheets/d/1idtYUQv4Npr142mEDQngZ8fNLwO9xOblC7Pjzli6fx4/edit?usp=sharing",
   feed: FEED,

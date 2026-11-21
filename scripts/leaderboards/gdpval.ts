@@ -3,8 +3,9 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { openaiSpecs, chartValues, OPENAI_TERMS } from '../lib/boards/openai.ts';
 const PAGE = 'https://openai.com/index/gdpval/';
+const stats = { wins: { name: 'Wins', unit: '%', better: 'higher' as const }, ties: { name: 'Ties', unit: '%', better: 'higher' as const } };
 const board: Leaderboard = {
-  benchmark: 'gdpval', url: PAGE, feed: `${PAGE} (embedded GDPval wins and ties chart)`, terms: OPENAI_TERMS,
+  benchmark: 'gdpval', url: PAGE, feed: `${PAGE} (embedded GDPval wins and ties chart)`, terms: OPENAI_TERMS, stats,
   async fetch() {
     const values = chartValues(await openaiSpecs(PAGE), 'GDPval win rate: performance on economically valuable tasks');
     const rows: LeaderboardRow[] = [];

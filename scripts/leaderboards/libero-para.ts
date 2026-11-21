@@ -6,6 +6,7 @@ const FEED = "https://cau-hai-lab.github.io/LIBERO-Para/";
 const board: Leaderboard = {
   benchmark: "libero-para", url: "https://cau-hai-lab.github.io/LIBERO-Para/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { goalSuccess:{name:'Goal success',unit:'%',better:'higher'}, drop:{name:'Success drop',unit:'%',better:'higher'}, PRIDE:{name:'PRIDE score',unit:'score',better:'higher'}, 'Overestimation (%)':{name:'Overestimation',unit:'%',better:'lower'}, 'Near-GT':{name:'Near ground truth',unit:'score',better:'higher'}, 'Far-GT':{name:'Far ground truth',unit:'score',better:'higher'}, 'Far-GT (%)':{name:'Far ground truth rate',unit:'%',better:'higher'} },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

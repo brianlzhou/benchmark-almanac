@@ -7,6 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://aclanthology.org/2023.acl-long.143/';
 const feed = 'https://aclanthology.org/2023.acl-long.143.pdf';
 const board: Leaderboard = {
+  stats: { better: { name: 'Better translations', unit: 'count' }, worse: { name: 'Worse translations', unit: 'count' }, insignificant: { name: 'Insignificant translations', unit: 'count' } },
   benchmark: 'crosssum', static: 'paper', url, feed,
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
   parts: { lase: { name: 'LaSE', unit: 'score' } },

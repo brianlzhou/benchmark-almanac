@@ -17,6 +17,7 @@ const board:Leaderboard={
   terms:'The project lists Apache 2.0 for code and CC BY-NC 4.0 for datasets at https://github.com/LimexAILab/FINESSE-Bench#license.',
   aliases:{'Mistral-Small-3.2-24B-Instruct-2506':'mistral-small-3-2'},
   parts:{...groups,...Object.fromEntries(datasetNames.map(n=>[n.replace(/\W/g,'_'),n]))},
+  // The source reports bootstrap interval bounds beside each part. Those bounds are not measures.
   async fetch(){
     const js=await fetchText(feed);
     const data=records<{model:string,metrics:Record<string,number>}[]>(js,'MODEL_DATA');

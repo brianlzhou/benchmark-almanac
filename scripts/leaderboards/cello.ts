@@ -26,6 +26,7 @@ const board: Leaderboard = {
   Ave_complex_ins: { name: 'Complex instruction', group: 'Category', note: 'Average across extraction, planning, meta prompt, single-round brainstorming, and single-round writing.' },
 }, url: "https://github.com/Abbey4799/CELLO", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { count_limit_score: { name: 'Count limit score', unit: '%' , better: 'higher' } },
 
  async fetch() {
 

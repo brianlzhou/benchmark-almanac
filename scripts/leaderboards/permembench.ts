@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark: "permembench", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2605.25535." ,
   parts: {"staticF1": "PerMem-Bench static", "dynamicF1": "PerMem-Bench dynamic"},
+  stats: { staticFNR: { name: 'Static false negative rate', unit: 'score', better: 'lower', note: 'False negative rate from 0 to 1 on the static split.' }, staticFPR: { name: 'Static false positive rate', unit: 'score', better: 'lower', note: 'False positive rate from 0 to 1 on the static split.' }, dynamicFNR: { name: 'Dynamic false negative rate', unit: 'score', better: 'lower', note: 'False negative rate from 0 to 1 on the dynamic split.' }, dynamicFPR: { name: 'Dynamic false positive rate', unit: 'score', better: 'lower', note: 'False positive rate from 0 to 1 on the dynamic split.' } },
   headline: "The headline is the plain mean of session-gating F1 on the static and dynamic splits.",
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

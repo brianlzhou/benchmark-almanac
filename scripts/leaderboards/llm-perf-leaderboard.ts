@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/optimum/llm-perf-leaderboard",
   feed,
   terms: "Check the publisher’s terms at https://huggingface.co/spaces/optimum/llm-perf-leaderboard Hugging Face allows the public Space in robots.txt.",
+  stats:{prefillSeconds:{name:'Prefill time',unit:'seconds',better:'lower'},tokensPerSecond:{name:'Decode speed',unit:'tokens/s',better:'higher'},memoryMB:{name:'Memory',unit:'millions'},tokensPerKwh:{name:'Tokens per kilowatt hour',unit:'tokens/s',better:'higher'}},
   async fetch() {
     type Table = { headers: string[]; data: (string | number | null)[][] };
     type Component = { type: string; props: { label?: string; value?: Table } };

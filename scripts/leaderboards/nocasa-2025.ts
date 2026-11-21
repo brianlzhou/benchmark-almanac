@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: 'https://www.codabench.org/competitions/6965/',
   feed,
   terms: 'The CodaBench page returns a challenge and its robots URL serves HTML. The organizers publish these test results in their challenge report on arXiv.',
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    mae: { name: 'Mean absolute error', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'System|UAR, %|ACC, %|MAE');
     if (!table || table.length < 5) throw new Error('Missing NOCASA test results');

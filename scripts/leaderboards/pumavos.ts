@@ -9,6 +9,10 @@ const feed = 'https://www.sota2.com/research/sota/video-object-segmentation-on-p
 const board: Leaderboard = {
   benchmark: 'pumavos', host: 'SOTA2 Research', url: feed, feed,
   terms: 'Public SOTA2 Research results credited to the linked papers. ' + feed,
+  stats: {
+    fps: { name: 'Frames per second', unit: 'score', better: 'higher' },
+    vramGB: { name: 'Video memory', unit: 'gb', better: 'lower' },
+  },
   parts: { f: 'F-Measure (F)', jf: 'J&F Score' },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t =>

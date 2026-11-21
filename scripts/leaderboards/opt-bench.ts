@@ -12,6 +12,14 @@ const board: Leaderboard = {
   headline: 'The paper reports no overall score, so the headline is the plain mean of Expert Gap on the ML and NP tracks.',
   reference: ['OPT-Agent'],
   parts: { ml: 'OPT-BENCH-ML Expert Gap', np: 'OPT-BENCH-NP Expert Gap' },
+  stats: {
+    mlWins: { name: 'Machine learning wins', unit: 'count' },
+    npWins: { name: 'Nondeterministic polynomial-time wins', unit: 'count' },
+    mlImprovementRate: { name: 'Machine learning improvement rate', unit: 'score', better: 'higher', note: 'Stored from the IR(w,w.o) ratio.' },
+    npBuggyRate: { name: 'Nondeterministic polynomial-time buggy rate', unit: 'score', better: 'lower', note: 'Stored from 0 to 1.' },
+    npBaselineBuggyRate: { name: 'Nondeterministic polynomial-time baseline buggy rate', unit: 'score', better: 'lower', note: 'Stored from 0 to 1.' },
+    npBaselineExpertGap: { name: 'Nondeterministic polynomial-time baseline expert gap', unit: 'score', note: 'Stored from 0 to 1.' },
+  },
   aliases: { 'gpt-o3-mini': 'o3-mini', 'Qwen3-235B-Thinking': 'qwen3-235b-a22b-thinking-jul-2025',
     'Qwen3-235B-Instruct': 'qwen3-235b-a22b-instruct-jul-2025', 'Internlm3-8b-instruct': 'internlm3-8b' },
   async fetch() {

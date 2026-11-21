@@ -27,6 +27,16 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (WORLD_VQA_MASTER_DATA)`,
   terms: 'The authors publish these results on their project page; the almanac credits and links WorldVQA. The dataset is Apache-2.0.',
+  stats: { fScore: { name: 'F-score', unit: '%', better: 'higher' },
+    nature: { name: 'Nature F-score', unit: '%', better: 'higher' }, natureNotAttempted: { name: 'Nature not attempted', unit: '%', better: 'lower' }, natureCorrectGivenAttempted: { name: 'Nature accuracy when attempted', unit: '%', better: 'higher' },
+    geo: { name: 'Geo F-score', unit: '%', better: 'higher' }, geoNotAttempted: { name: 'Geo not attempted', unit: '%', better: 'lower' }, geoCorrectGivenAttempted: { name: 'Geo accuracy when attempted', unit: '%', better: 'higher' },
+    culture: { name: 'Culture F-score', unit: '%', better: 'higher' }, cultureNotAttempted: { name: 'Culture not attempted', unit: '%', better: 'lower' }, cultureCorrectGivenAttempted: { name: 'Culture accuracy when attempted', unit: '%', better: 'higher' },
+    objects: { name: 'Objects F-score', unit: '%', better: 'higher' }, objectsNotAttempted: { name: 'Objects not attempted', unit: '%', better: 'lower' }, objectsCorrectGivenAttempted: { name: 'Objects accuracy when attempted', unit: '%', better: 'higher' },
+    transport: { name: 'Transport F-score', unit: '%', better: 'higher' }, transportNotAttempted: { name: 'Transport not attempted', unit: '%', better: 'lower' }, transportCorrectGivenAttempted: { name: 'Transport accuracy when attempted', unit: '%', better: 'higher' },
+    entertainment: { name: 'Entertainment F-score', unit: '%', better: 'higher' }, entertainmentNotAttempted: { name: 'Entertainment not attempted', unit: '%', better: 'lower' }, entertainmentCorrectGivenAttempted: { name: 'Entertainment accuracy when attempted', unit: '%', better: 'higher' },
+    brands: { name: 'Brands F-score', unit: '%', better: 'higher' }, brandsNotAttempted: { name: 'Brands not attempted', unit: '%', better: 'lower' }, brandsCorrectGivenAttempted: { name: 'Brands accuracy when attempted', unit: '%', better: 'higher' },
+    sports: { name: 'Sports F-score', unit: '%', better: 'higher' }, sportsNotAttempted: { name: 'Sports not attempted', unit: '%', better: 'lower' }, sportsCorrectGivenAttempted: { name: 'Sports accuracy when attempted', unit: '%', better: 'higher' },
+  },
   aliases: { 'x-ai_grok-4-fast-reasoning': 'grok-4-fast' },
   async fetch(): Promise<LeaderboardRow[]> {
     const source = jsonAfter<Model[]>((await fetchText(PAGE)).replace(/,\s*([}\]])/g, '$1'), 'const WORLD_VQA_MASTER_DATA =');

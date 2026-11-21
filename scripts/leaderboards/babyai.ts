@@ -12,6 +12,10 @@ function percent(cell: string) {
 const board: Leaderboard = {
   benchmark: 'babyai', host: 'AgentBoard', url: 'https://hkust-nlp.github.io/agentboard/static/leaderboard.html', feed,
   terms: 'AgentBoard publishes the benchmark results and configuration at https://github.com/hkust-nlp/AgentBoard.',
+  stats: {
+    progress: { name: 'Progress rate', unit: '%', better: 'higher' },
+    grounding: { name: 'Grounding rate', unit: '%', better: 'higher' },
+  },
   headline: 'AgentBoard reports the success rate across its 112 BabyAI episodes.',
   aliases: { Claude2: 'claude-2', 'Text-Davinci-003': 'davinci-003', 'CodeLlama-34b': 'codellama-34b-instruct',
     'Mistral-7b': 'mistral-7b-instruct-v0-2', 'DeepSeek-67b': 'deepseek-llm-67b' },

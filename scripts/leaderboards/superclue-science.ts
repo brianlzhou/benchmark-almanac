@@ -14,4 +14,5 @@ export default workbookBoard({
   parts: ["物理", "化学", "生物"],
   settings: ["使用方式"],
   metrics: {"reasoningLevel": "推理等级"},
+  stats: { reasoningLevel: { name: 'Reasoning level', unit: 'count' } },
 });

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://aclanthology.org/2026.arabicnlp-sharedtasks.16.pdf#page=6",
   feed: FEED,
   terms: "Table 6 lists ten teams. Table 7 gives track results and three baselines. ZHR has two scored entries. ACL Anthology lists CC BY 4.0. https://aclanthology.org/2026.arabicnlp-sharedtasks.16/ The ACL Anthology robots URL returns HTML.",
+  stats: { acc19: { name: 'Accuracy at 19 classes', unit: '%', better: 'higher' }, adjacentAcc19: { name: 'Adjacent accuracy at 19 classes', unit: '%', better: 'higher' }, distance: { name: 'Mean distance', unit: 'score', better: 'lower' }, acc7: { name: 'Accuracy at 7 classes', unit: '%', better: 'higher' }, acc5: { name: 'Accuracy at 5 classes', unit: '%', better: 'higher' }, acc3: { name: 'Accuracy at 3 classes', unit: '%', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(FEED);
     const table = paper.match(/Team +Track +QWK +Acc19 +±1 Acc19 +Dist +Acc7 +Acc5 +Acc3\n([\s\S]*?)Table 7: Official/);

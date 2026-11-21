@@ -17,6 +17,7 @@ const board: Leaderboard = {
     Music_Test: { name: 'Music test', group: 'Category' },
     'Speech_Test-mini': { name: 'Speech test-mini', group: 'Category' },
     Speech_Test: { name: 'Speech test', group: 'Category' },
+    'Avg_Test-mini': { name: 'Average test mini', group: 'Split' },
   },
   url: MMAU_PAGE,
   feed: `${MMAU_PAGE}leaderboard_data_v15_parsed.json (Avg, test-mini)`,

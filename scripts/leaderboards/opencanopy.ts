@@ -13,6 +13,8 @@ const board: Leaderboard = {
     RMSE: { name: 'Root mean squared error', unit: 'score', note: 'Height error in meters.', better: 'lower' },
     treeCoverage: { name: 'Tree coverage IoU', unit: '%', better: 'higher' },
   },
+  stats: { bias: { name: 'Height bias', unit: 'score', note: 'Mean signed canopy-height error in meters.' }
+  },
   async fetch() {
     const table = flatPaperTables(await paperHtml(url)).map(grid).find(t => t[0]?.join('|') === 'Model|pretraining|MAE|nMAE|RMSE|Bias|Tree cov.');
     if (!table) throw new Error('Missing OpenCanopy height prediction table');

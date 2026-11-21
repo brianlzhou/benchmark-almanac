@@ -15,6 +15,12 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (leaderboard table, Net worth (mean))`,
   terms: 'Server-rendered public page of andonlabs.com; the site publishes no terms of use or robots.txt, so the scores are cited to Andon Labs.',
+  stats: {
+    netWorthMin: { name: 'Minimum net worth', unit: 'usd', better: 'higher' },
+    unitsSold: { name: 'Units sold', unit: 'count', better: 'higher' },
+    unitsSoldMin: { name: 'Minimum units sold', unit: 'count', better: 'higher' },
+    daysToStall: { name: 'Days until sales stop', unit: 'count', better: 'higher' },
+  },
   aliases: {
     'Gemini 2.5 Pro (preview-03-25)': 'gemini-2-5-pro-mar-2025',
     // the paper (arXiv 2502.15840, February 2025) ran the then-current claude-3-5-sonnet-20241022

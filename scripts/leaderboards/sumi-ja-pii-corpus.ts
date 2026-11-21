@@ -12,6 +12,16 @@ const board: Leaderboard = {
   url: 'https://github.com/NagaYu/sumi',
   feed,
   terms: 'The Sumi repository is published under Apache License 2.0. https://github.com/NagaYu/sumi/blob/main/LICENSE',
+  stats: {
+    name: { name: 'Name F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for names, from 0 to 1.' },
+    address: { name: 'Address F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for addresses, from 0 to 1.' },
+    phone: { name: 'Phone F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for phone numbers, from 0 to 1.' },
+    birthDate: { name: 'Birth date F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for birth dates, from 0 to 1.' },
+    email: { name: 'Email F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for email addresses, from 0 to 1.' },
+    bankAccount: { name: 'Bank account F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for bank accounts, from 0 to 1.' },
+    myNumber: { name: 'My Number F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for Japanese My Number identifiers, from 0 to 1.' },
+    memberId: { name: 'Member ID F1', unit: 'score', better: 'higher', note: 'Entity-level F1 for member IDs, from 0 to 1.' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const section = source.split('## Evaluation — generalisation')[1]?.split('### Recall at a fixed false-positive budget')[0];

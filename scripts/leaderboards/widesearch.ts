@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, SR Avg@4)`,
   terms: 'Static GitHub Pages site that states no license or terms; the WideSearch repository is MIT.',
+  stats: { passAt4: {name: 'Pass@4', unit: '%', better: 'higher'}, rowF1: {name: 'Row F1', unit: '%', better: 'higher'}, itemF1: {name: 'Item F1', unit: '%', better: 'higher'} },
   aliases: {
     'OpenAI o3': 'o3',
     // the July 2025 model, the only Kimi K2 when the board was made

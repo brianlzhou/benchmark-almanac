@@ -6,6 +6,10 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const FEED = 'https://aclanthology.org/2020.emnlp-main.443.pdf';
 const board: Leaderboard = {
   benchmark: 'widget-captioning', static: 'paper', url: 'https://aclanthology.org/2020.emnlp-main.443/', feed: FEED,
+  stats: {
+    BLEU2: { name: 'BLEU-2', unit: 'score', better: 'higher' }, ROUGE: { name: 'ROUGE score', unit: 'score', better: 'higher' },
+    CIDEr: { name: 'CIDEr score', unit: 'score', better: 'higher' }, METEOR: { name: 'METEOR score', unit: 'score', better: 'higher' }, SPICE: { name: 'SPICE score', unit: 'score', better: 'higher' },
+  },
   terms: 'ACL Anthology papers are available under their stated publication terms. https://aclanthology.org/2020.emnlp-main.443/',
   headline: 'The paper reports several captioning metrics, so the headline is full-test BLEU-1, the first metric in Table 3.',
   async fetch() {

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/loveu-tgve/loveu-tgve-leaderboard",
   feed: FEED,
   terms: "The authors license the competition repository under Apache 2.0. The Space lists no separate score license. Five submission rows and two automatic baselines span two source files. https://github.com/showlab/loveu-tgve-2023/blob/main/LICENSE Hugging Face allows crawling.",
+  stats: { frameConsistency:{name:'Frame consistency',unit:'score',better:'higher'}, clipTextAlignment:{name:'Contrastive Language Image Pretraining text alignment',unit:'score',better:'higher'}, pickScore:{name:'PickScore',unit:'score',better:'higher'} },
   parts: { quality: 'Quality', structure: 'Structure', text: 'Text Alignment' },
   async fetch() {
     const source = await fetchText(FEED);

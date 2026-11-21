@@ -28,6 +28,7 @@ const board: Leaderboard = {
   url: 'https://agi-eval-official.github.io/FORTE/',
   feed: FEED,
   terms: 'Static JSON on the FORTE GitHub Pages site, which states no separate terms; the FORTE repository is MIT.',
+  stats: { passAt3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass3: { name: 'Pass^3', unit: '%', better: 'higher' } },
   aliases: {
     'Doubao Seed 2.0 Pro': 'seed-2-0-pro',
     'HY3 Preview': 'tencent-hy3-preview',

@@ -11,6 +11,9 @@ const board: Leaderboard = {
   url: "https://github.com/CommandCodeAI/slash-design-showcase/blob/main/subway-surfers/readme.md#scorecard",
   feed,
   terms: "The repository has no published score reuse license. The cost column includes estimates. https://github.com/CommandCodeAI/slash-design-showcase The feed host returns no robots.txt.",
+  stats: {
+    qualityPerDollar: { name: 'Quality per dollar', unit: 'score', better: 'higher' },
+  },
   parts: {"Spec fidelity": "Spec fidelity", "Collision": "Collision", "Architecture": "Architecture", "Resize robustness": "Resize robustness", "Polish": "Polish", "Offline-safe": "Offline-safe"},
   async fetch() {
     const required = ["Model", "Mean", "Spec fidelity", "Collision", "Architecture", "Resize robustness", "Polish", "Offline-safe"];

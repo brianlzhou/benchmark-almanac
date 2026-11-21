@@ -11,6 +11,10 @@ const ATTACKS = ['linf', 'ua2', 'jpeg', 'elastic', 'wood', 'glitch', 'kaleidosco
 const board: Leaderboard = {
   benchmark: 'imagenet-ua', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
   parts: Object.fromEntries(ATTACKS.slice(1).map((name) => [name, { name, group: 'Attack', unit: '%' }])),
+  stats: {
+    cleanAccuracy: { name: 'Clean accuracy', unit: '%', better: 'higher' },
+    linf: { name: 'L-infinity attack accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(URL)).map(grid);
     const table = tables.find((rows) => rows[0]?.[0] === 'Model' && rows[0]?.includes('UA2'));

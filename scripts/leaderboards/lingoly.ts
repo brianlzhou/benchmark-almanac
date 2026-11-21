@@ -13,6 +13,7 @@ export default {
   aliases: {'Claude Opus': 'claude-3-opus', 'GPT-4o (snapshot unspecified)': 'gpt-4o-may-2024',
     'GPT-4 (snapshot unspecified)': 'gpt-4-turbo-apr-2024', 'GPT-3.5': 'gpt-3-5-turbo-jan-2024'},
   parts: Object.fromEntries([...groups.slice(0, 2), ...groups.map(g => g + ' context gain')].map(name => [name, {name, unit: '%' as const}])),
+  stats:{studyApiSpendUsd:{name:'Study API spend',unit:'usd',better:'lower'}},
   async fetch() {
     const html = await paperHtml(feed);
     const table = (caption: string) => {

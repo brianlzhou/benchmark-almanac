@@ -23,6 +23,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (embedded clientRows leaderboard data)`,
   terms: 'Edison publishes these scores on the benchmark page without a separate score reuse license. Results are credited to Edison Scientific.',
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   fetch: async () => readRows(await fetchText(PAGE)),
 };
 

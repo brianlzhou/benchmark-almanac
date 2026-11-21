@@ -10,6 +10,10 @@ const board: Leaderboard = {
   benchmark:'alive-bench', static:'paper', url:feed, feed, parts:{},
   terms:'The authors publish Tables 4 and 5 on arXiv. https://arxiv.org/abs/2611.20956',
   headline:'The paper reports no combined score. The headline is Shopping kinesic cue recognition accuracy, its first measure.',
+  stats: {
+    shoppingKinesic:{name:'Shopping kinesic cue recognition',unit:'%',better:'higher'}, shoppingProxemic:{name:'Shopping proxemic cue recognition',unit:'%',better:'higher'}, shoppingAffect:{name:'Shopping affect recognition',unit:'%',better:'higher'}, shoppingIntent:{name:'Shopping intent recognition',unit:'%',better:'higher'}, shoppingRapport:{name:'Shopping rapport rating',unit:'score',better:'higher'}, shoppingPersuasion:{name:'Shopping persuasion rating',unit:'score',better:'higher'}, shoppingAttainment:{name:'Shopping attainment',unit:'%',better:'higher'}, shoppingDepth:{name:'Shopping depth rating',unit:'score',better:'higher'},
+    lgdKinesic:{name:'Leaderless discussion kinesic recognition',unit:'%',better:'higher'}, lgdProxemic:{name:'Leaderless discussion proxemic recognition',unit:'%',better:'higher'}, lgdAffect:{name:'Leaderless discussion affect recognition',unit:'%',better:'higher'}, lgdIntent:{name:'Leaderless discussion intent recognition',unit:'%',better:'higher'}, lgdRapport:{name:'Leaderless discussion rapport rating',unit:'score',better:'higher'}, lgdPersuasion:{name:'Leaderless discussion persuasion rating',unit:'score',better:'higher'}, lgdAttainment:{name:'Leaderless discussion attainment',unit:'%',better:'higher'}, lgdDepth:{name:'Leaderless discussion depth rating',unit:'score',better:'higher'},
+  },
   async fetch() {
     const html = await paperHtml(feed);
     const rows = new Map<string, LeaderboardRow>();

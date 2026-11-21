@@ -28,6 +28,9 @@ const board: Leaderboard = {
     'unlicensed/overallPassRate': { name: 'Unlicensed overall', group: 'Split' },
   },
   terms: 'The authors publish this JSON for the archived v1.0 page. Code is Apache-2.0 and data CC BY 4.0; the almanac credits and links the source.',
+  stats: {
+    runs: { name: 'Runs', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' }, splitTasks: { name: 'Split tasks', unit: 'count' }, latency: { name: 'Average time per run', unit: 'seconds', better: 'lower' }, inputTokens: { name: 'Input tokens per run', unit: 'tokens' },
+  },
   aliases: { 'anthropic-claude-fable-5': 'claude-fable-5', 'qwen-qwen3-7-max': 'qwen3-7-max' },
   async fetch(): Promise<LeaderboardRow[]> {
     const { rows } = await fetchJson<{ rows: Row[] }>(FEED);

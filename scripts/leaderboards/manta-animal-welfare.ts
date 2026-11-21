@@ -10,6 +10,10 @@ const board: Leaderboard = {
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   aliases: { 'Gemini Flash Lite': 'gemini-3-1-flash-lite' },
   parts: { T3: 'Turn 3', T4: 'Turn 4', T5: 'Turn 5' },
+  stats: {
+    AWMS: { name: 'Animal Welfare Moral Sensitivity', unit: 'score', better: 'higher', note: 'Spontaneous recognition of animal welfare stakes at Turn 1 on a 0 to 1 scale.' },
+    CCR: { name: 'Capitulation rate', unit: '%', better: 'lower', note: 'Share of conversations in which the model abandons or reverses its welfare position under pressure.' },
+  },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.join('|') === 'Model|AWMS|T3|T4|T5|CCR|Mean AWVS [95% CI]');

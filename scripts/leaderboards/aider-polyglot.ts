@@ -29,6 +29,9 @@ const board: Leaderboard = {
   aliases: {
     'gemini-2.5-pro-preview-06-05 (32k think)': 'gemini-2-5-pro-jun-2025',
   },
+  stats: {
+    latency: { name: 'Seconds per case', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     // a missing or zero value is unknown: the page leaves its cost cell blank for total_cost 0
     const num = (v?: string) => (v && Number(v) > 0 ? Number(v) : undefined);

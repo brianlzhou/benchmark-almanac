@@ -8,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/coastalcph/lex-glue/main/README.
 const board: Leaderboard = {
   benchmark: "lexglue", url: "https://github.com/coastalcph/lex-glue", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { macroF1:{name:'Macro F1',unit:'%',better:'higher'}, arithmetic_microF1:{name:'Arithmetic micro F1',unit:'%',better:'higher'}, arithmetic_macroF1:{name:'Arithmetic macro F1',unit:'%',better:'higher'}, geometric_microF1:{name:'Geometric micro F1',unit:'%',better:'higher'}, geometric_macroF1:{name:'Geometric macro F1',unit:'%',better:'higher'} },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

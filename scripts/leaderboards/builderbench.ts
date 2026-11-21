@@ -22,6 +22,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${BASE}tasks.json and one JSON file per task listed there`,
   terms: 'The leaderboard publishes JSON files from the MIT-licensed BuilderBench repository. Results are credited to the BuilderBench authors.',
+  stats: { progress: { name: 'Mean final progress', unit: '%', better: 'higher' } },
   aliases: {
     'gpt-5.2-2025-12-11': 'gpt-5-2',
     'gemini-3-flash-preview': 'gemini-3-flash',

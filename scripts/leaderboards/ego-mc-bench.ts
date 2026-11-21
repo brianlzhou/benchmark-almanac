@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://apratimbh.github.io/livecookv2/",
   feed,
   terms: "The project page gives no separate score reuse terms. https://apratimbh.github.io/livecookv2/ The feed host publishes robots.txt at https://apratimbh.github.io/robots.txt.",
+  stats: { instructionAccuracy: { name: 'Instruction accuracy', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: 'score', better: 'higher' }, recall: { name: 'Recall', unit: 'score', better: 'higher' }, bert: { name: 'BERTScore', unit: 'score', better: 'higher' }, rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const table of tables(await fetchText(feed))) {

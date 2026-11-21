@@ -10,6 +10,7 @@ const feed = 'https://harp-bench.vercel.app/';
 const board: Leaderboard = {
   benchmark: 'harp-bench', url: feed, feed,
   terms: 'Public author results at https://harp-bench.vercel.app/. The page lists no separate license for the tables.',
+  stats: { collision: { name: 'Collision rate', unit: '%', better: 'lower' }, within10cm: { name: 'Time within 10 cm', unit: '%', better: 'lower' }, timeWithin10cm: { name: 'Time below 10 cm', unit: '%', better: 'lower' }, minDistanceCm: { name: 'Minimum distance', unit: 'count', better: 'higher', note: 'Mean minimum distance in centimeters.' } },
   async fetch() {
     const data = tables((await fetchText(feed)).replaceAll('&pi;<sub>0</sub>', 'π0')).map(t => t.map(r => r.map(c => c.text)));
     const byTask = data.find(t => t[0][0] === 'Task');

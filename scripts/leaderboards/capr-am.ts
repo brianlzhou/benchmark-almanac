@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://github.com/AhmedHajAhmed/adage-benchmark/blob/main/results_am/evaluation_report.json",
   feed,
   terms: "The raw file host has no robots.txt. The makers release their code and derived data under the MIT license. https://github.com/AhmedHajAhmed/adage-benchmark/blob/main/LICENSE",
+  stats: { correct: { name: 'Correct answers', unit: 'count' }, items: { name: 'Test items', unit: 'count' }, invalid: { name: 'Invalid answers', unit: 'count' } },
   async fetch() {
     const data = await fetchJson<{ benchmark: string; split: string; models: Row[]; leaderboard: Row[] }>(feed);
     if (data.benchmark !== 'am_proverb_mcq' || data.split !== 'test' || data.models.length < 14 ||

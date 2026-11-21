@@ -7,6 +7,11 @@ const board: Leaderboard = {
   url: "https://www.axisspatial.com/arena/agent-index",
   feed: "https://www.axisspatial.com/arena/agent-index",
   terms: "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy Its robots.txt allows the ranking page.",
+  stats: {
+    textOnly: { name: 'Text-only index', unit: 'index', better: 'higher' },
+    textAndVision: { name: 'Text-and-vision index', unit: 'index', better: 'higher' },
+    turns: { name: 'Turns', unit: 'count', better: 'lower' },
+  },
   aliases: {
     'Nemotron 3.5 Super VL 120B':'nemotron-3-5-super-vl',
     'Nemotron 3 Nano Omni 30B':'nemotron-3-nano-omni-30b-a3b',

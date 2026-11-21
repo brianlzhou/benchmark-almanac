@@ -7,6 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = 'https://arxiv.org/html/2309.17024';
 const board: Leaderboard = {
   benchmark: 'holoassist-mistake-detection', static: 'paper',
+  stats:{correctPrecision:{name:'Correct precision',unit:'%',better:'higher'},correctRecall:{name:'Correct recall',unit:'%',better:'higher'},mistakePrecision:{name:'Mistake precision',unit:'%',better:'higher'},mistakeRecall:{name:'Mistake recall',unit:'%',better:'higher'}},
   url: 'https://arxiv.org/abs/2309.17024', feed: FEED,
   terms: 'The authors publish the paper under the arXiv terms of use. https://arxiv.org/abs/2309.17024',
   aliases: { TimeSformer: 'timesformer' },

@@ -16,6 +16,7 @@ const board: Leaderboard = {
     'cat:humor': { name: 'Humor', group: 'Task' },
     'cat:ocr': { name: 'OCR', group: 'Task' },
   },
+  stats: { votes: {name: 'Votes', unit: 'count', note: 'Number of arena votes used for the model ranking.'} },
   url: 'https://arena.ai/leaderboard/chat/vision',
   feed: arenaFeed('vision_style_control', '*'),
   terms: ARENA_TERMS,

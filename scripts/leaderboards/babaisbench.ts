@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: "babaisbench", url: "https://quesma.com/benchmarks/babaisbench/", feed: FEED,
   reference: ['Terminus-2'],
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { passAt3:{name:'Pass@3',unit:'%',better:'higher'}, turns:{name:'Turns',unit:'count',better:'lower'}, reportedOutputTokens:{name:'Reported output tokens',unit:'tokens'}, latency:{name:'Latency',unit:'seconds',better:'lower'}, steps:{name:'Steps',unit:'count',better:'lower'} },
   chart: {title:"Intro levels cost frontier",x:{key:"totalCost",label:"Total cost of 24 attempts",unit:"$",better:"lower",log:true},y:{key:"score",label:"pass@1",unit:"%",better:"higher"}},
   async fetch() {
     const source = await fetchText(FEED);

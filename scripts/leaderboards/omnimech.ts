@@ -9,6 +9,23 @@ const board: Leaderboard = {
   url: "https://www.omnieda.com/mech/#zeroshot-results",
   feed: FEED,
   terms: "The results page gives no score reuse license. https://www.omnieda.com/mech/ The site allows crawling.",
+  stats: {
+    cd: { name: 'Chamfer distance', unit: 'score', better: 'lower' },
+    siou: { name: 'Surface intersection over union', unit: 'score', better: 'higher' },
+    viou: { name: 'Volume intersection over union', unit: 'score', better: 'higher' },
+    fscore: { name: 'F-score', unit: 'score', better: 'higher' },
+    surfaceError: { name: 'Surface error', unit: 'score', better: 'lower' },
+    surfaceErrorPct: { name: 'Surface error percentage', unit: '%', better: 'lower' },
+    volumeError: { name: 'Volume error', unit: 'score', better: 'lower' },
+    volumeErrorPct: { name: 'Volume error percentage', unit: '%', better: 'lower' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+    passRate: { name: 'Pass rate', unit: '%', better: 'higher' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+    cadOps: { name: 'Computer-aided design operations', unit: 'count' },
+    selfStop: { name: 'Self stop rate', unit: '%', better: 'higher' },
+    iterations: { name: 'Iterations', unit: 'count' },
+  },
   async fetch() {
     const page = await fetchText(FEED);
     if (!page.includes("'Vol. err. % ↓','Time s ↓','Pass % ↑'")) throw new Error('Changed OmniMech columns');

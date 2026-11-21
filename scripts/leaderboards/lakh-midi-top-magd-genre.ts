@@ -8,6 +8,7 @@ const feed = 'https://repositori.upf.edu/bitstreams/4aef9065-3cec-4356-8d6f-3c08
 const board: Leaderboard = {
   benchmark: 'lakh-midi-top-magd-genre', static: 'paper', url: 'https://hdl.handle.net/10230/43405', feed,
   terms: 'Universitat Pompeu Fabra provides the paper under the terms listed at https://hdl.handle.net/10230/43405.',
+  stats: { f1: { name: 'F1 measure', unit: 'score', better: 'higher', note: 'F1 measure for the genre classification configuration, from 0 to 1.' }, accuracy: { name: 'Accuracy', unit: 'score', better: 'higher', note: 'Classification accuracy for the configuration, from 0 to 1.' }, patterns: { name: 'Pattern count', unit: 'count' } },
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.match(/topMAGD\s+MASD\s+Name\s+AUC ROC\s+F1 measure\s+Accuracy\s+AUC ROC\s+F1 measure\s+Accuracy\s+#patterns([\s\S]+?)Table 6:/);

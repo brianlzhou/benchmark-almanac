@@ -11,7 +11,7 @@ const board: Leaderboard = {
   feed: HELM_BUCKET + '/vhelm/benchmark_output/runs/<newest>/groups/unicorn.json',
   terms: 'Stanford publishes VHELM under the license at https://github.com/stanford-crfm/helm/blob/main/LICENSE.',
   headline: 'VHELM reports prefix quasi-exact match across OODCV-VQA and Sketchy-VQA. Its leaderboard omits their challenge variants.',
-  aliases: {...HELM_ALIASES, 'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025'}, parts: {},
+  aliases: {...HELM_ALIASES, 'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025'}, parts: {'OODCV-VQA': {name:'OODCV-VQA',unit:'%'}, 'Sketchy-VQA': {name:'Sketchy-VQA',unit:'%'}}, stats: {inputTokens:{name:'Input tokens',unit:'tokens'},outputTokens:{name:'Output tokens',unit:'tokens'}},
   async fetch() {
     const suite = await helmNewest('vhelm', 'runs');
     const tables = await fetchJson<Table[]>(HELM_BUCKET + '/' + suite + 'groups/unicorn.json');

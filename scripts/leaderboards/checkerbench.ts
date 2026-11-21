@@ -10,6 +10,16 @@ const board: Leaderboard = {
   benchmark: 'checkerbench', feed, url: feed, static: 'paper',
   terms: 'The authors publish the results under the terms linked at https://arxiv.org/abs/2610.07557.',
   parts: Object.fromEntries(languages.map(l => [l, {name: l, group: 'Language'}])),
+  stats: {
+    build: { name: 'Build pass rate', unit: '%', better: 'higher' },
+    differentialSuccess: { name: 'Differential success rate', unit: '%', better: 'higher' },
+    falsePositives: { name: 'False positives', unit: 'count', better: 'lower' },
+    warningCount: { name: 'Warnings', unit: 'count', better: 'lower' },
+    process: { name: 'Process pass rate', unit: '%', better: 'higher' },
+    semantic: { name: 'Semantic pass rate', unit: '%', better: 'higher' },
+    steps: { name: 'Steps', unit: 'count' },
+    toolCalls: { name: 'Tool calls', unit: 'count' },
+  },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[0]?.[0] === 'Model / System' && t[0][1]?.includes('Pass@1'));

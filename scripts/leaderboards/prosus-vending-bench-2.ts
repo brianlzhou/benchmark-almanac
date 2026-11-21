@@ -8,6 +8,7 @@ const feed = "https://raw.githubusercontent.com/ProsusAI/vending-bench/acb3bade0
 
 const board: Leaderboard = {
   benchmark: "prosus-vending-bench-2",
+  stats: { day: { name: 'Day', unit: 'count' }, finalBankEur: { name: 'Final bank in euros', unit: 'score', better: 'higher' } },
   url: "https://github.com/ProsusAI/vending-bench/blob/main/results/baselines/models-30d/README.md",
   feed,
   terms: "Prosus retains the five v2 scores and API costs under Apache 2.0. Only the historical table and chart remain from this batch. https://github.com/ProsusAI/vending-bench/blob/main/README.md The raw file host serves no robots.txt rules.",

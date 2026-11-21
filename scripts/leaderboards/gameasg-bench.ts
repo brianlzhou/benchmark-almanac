@@ -15,6 +15,10 @@ function success(value: string) {
 const board: Leaderboard = {
   benchmark: 'gameasg-bench', static: 'paper', url: feed, feed,
   parts: { l1: 'L1', l2: 'L2', p0: 'L2 P0', p1: 'L2 P1', p2: 'L2 P2' },
+  stats: {
+    gamesPassed: { name: 'Games passed', unit: 'count' }, artifactKB: { name: 'Artifact size', unit: 'count', note: 'Artifact size in kilobytes.' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' }, evaluated: { name: 'Evaluated games', unit: 'count' },
+  },
   terms: 'The authors publish these paper tables under the terms at https://arxiv.org/abs/2609.21293.',
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

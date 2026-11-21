@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://vl-rewardbench.github.io/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { overallAccuracy: { name: 'Overall accuracy', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     return paperRows(FEED, {"table": 1, "header": "Macro Average Accuracy", "score": 5, "width": 6, "min": 16, "metrics": {"overallAccuracy": 4, "general": 1, "hallucination": 2, "reasoning": 3}});
   },

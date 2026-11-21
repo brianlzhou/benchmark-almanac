@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: 'https://github.com/carlostoledo1891/cert-machine/tree/main/environments/verify_gym',
   feed,
   terms: 'The cert-machine repository is published under the MIT License. https://github.com/carlostoledo1891/cert-machine/blob/main/LICENSE',
+  stats: {
+    xx: { name: 'x to the x family reward', unit: 'score', better: 'higher' },
+    kroot: { name: 'Kth root family reward', unit: 'score', better: 'higher' },
+    poly: { name: 'Polynomial family reward', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchJson(feed) as { models?: Array<Record<string, unknown>> };
     if (!Array.isArray(source.models)) throw new Error('Missing Verify Gym model scorecard');

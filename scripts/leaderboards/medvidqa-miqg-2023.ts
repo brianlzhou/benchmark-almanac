@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/13546",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host returns no robots.txt.",
+  stats: { bleu: { name: 'BLEU', unit: 'score', better: 'higher' }, rouge2: { name: 'ROUGE-2', unit: 'score', better: 'higher' }, rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher' }, bertScore: { name: 'BERTScore', unit: 'score', better: 'higher' } },
   async fetch() {
     const source = await pdfText(feed);
     const block = source.match(/Team\s+RunID\s+BLEU\s+BLEU-4\s+ROUGE-2\s+ROUGE-L\s+BERTScore([\s\S]*?)Table 13:/)?.[1];

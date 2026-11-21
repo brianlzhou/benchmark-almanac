@@ -12,7 +12,9 @@ function enhance(root: HTMLElement) {
   const list = root.querySelector<HTMLElement>('.dd-l')!;
   const search = root.querySelector<HTMLInputElement>('.dd-s');
   const none = root.querySelector<HTMLElement>('.dd-none');
-  const items = [...list.querySelectorAll<HTMLLIElement>('li')];
+  const items = [...list.querySelectorAll<HTMLLIElement>('li[role="option"]')];
+  // group titles: a title hides while a search leaves none of the options under it
+  const heads = [...list.querySelectorAll<HTMLLIElement>('li.dd-h')];
   const multi = select.multiple;
   // the values a multiple select holds, leaving out the "none chosen" option
   const picked = () => new Set([...select.selectedOptions].map((o) => o.value).filter(Boolean));
@@ -78,6 +80,15 @@ function enhance(root: HTMLElement) {
   const filter = (q: string) => {
     const t = q.trim().toLowerCase();
     for (const li of items) li.hidden = !!t && !(li.textContent ?? '').toLowerCase().includes(t);
+    for (const h of heads) {
+      let n = h.nextElementSibling as HTMLLIElement | null;
+      let any = false;
+      while (n && !n.classList.contains('dd-h')) {
+        if (!n.hidden) any = true;
+        n = n.nextElementSibling as HTMLLIElement | null;
+      }
+      h.hidden = !any;
+    }
     if (none) none.hidden = visible().length > 0;
     setActive(0);
   };

@@ -19,6 +19,18 @@ const board: Leaderboard = {
   static: 'paper',
   url: 'https://google-deepmind.github.io/tecci/',
   feed: FEED,
+  stats: {
+    autoIF: { name: 'Autorater instruction following', unit: '%', better: 'higher' },
+    autoIC: { name: 'Autorater image consistency', unit: '%', better: 'higher' },
+    autoVQ: { name: 'Autorater visual quality', unit: '%', better: 'higher' },
+    autoOverall: { name: 'Autorater overall success rate', unit: '%', better: 'higher' },
+    humanIF: { name: 'Human instruction following', unit: '%', better: 'higher' },
+    humanIC: { name: 'Human image consistency', unit: '%', better: 'higher' },
+    humanVQ: { name: 'Human visual quality', unit: '%', better: 'higher' },
+    humanOverall: { name: 'Human overall success rate', unit: '%', better: 'higher' },
+    humanIRCSOverall: { name: 'Human Instruction Rich Challenge Set success rate', unit: '%', better: 'higher' },
+    humanGGISOverall: { name: 'Human Gemini Generated Instruction Set success rate', unit: '%', better: 'higher' },
+  },
   terms: 'The paper is available from arXiv under its access terms. The annotations and images use CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
   async fetch() {
     const paper = await pdfText(FEED);

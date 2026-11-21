@@ -34,6 +34,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The Flex-RSI site publishes this JSON without a separate score reuse license. The robots.txt URL returned a GitHub error page. Results are credited to Flex-RSI with a link to the leaderboard.',
   parts: {},
+  stats: { tasks: { name: 'Tasks completed', unit: 'count' }, firstPlaces: { name: 'First-place finishes', unit: 'count', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<Results>(FEED);
     if (data.tasks.length < 24) throw new Error('Flex-RSI: missing tasks');

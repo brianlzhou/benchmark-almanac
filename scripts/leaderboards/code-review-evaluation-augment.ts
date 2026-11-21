@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: "code-review-evaluation-augment",
   url: "https://www.augmentcode.com/blog/we-benchmarked-7-ai-code-review-tools-on-real-world-prs-here-are-the-results",
   feed: FEED,
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   terms: "Reuse terms unverified at https://www.augmentcode.com/blog/we-benchmarked-7-ai-code-review-tools-on-real-world-prs-here-are-the-results The site allows all paths in robots.txt.",
   async fetch() {
     const table = tables(await fetchText(FEED)).find((rows) =>

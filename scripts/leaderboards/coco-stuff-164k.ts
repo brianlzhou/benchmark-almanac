@@ -10,6 +10,10 @@ const feed = base + 'deeplabv3/README.md';
 const board: Leaderboard = {
   benchmark:'coco-stuff-164k', host:'MMSegmentation', url:'https://github.com/open-mmlab/mmsegmentation/tree/main/configs', feed,
   terms:'MMSegmentation uses Apache 2.0. https://github.com/open-mmlab/mmsegmentation/blob/main/LICENSE',
+  stats:{
+    memoryGB:{name:'Memory usage',unit:'gb',note:'Model memory usage in gigabytes.'},
+    framesPerSecond:{name:'Inference speed',unit:'score',better:'higher',note:'Frames processed per second.'},
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const [i,family] of families.entries()) {

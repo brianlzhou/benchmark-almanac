@@ -9,6 +9,11 @@ const feed = 'https://raw.githubusercontent.com/huggingface/pytorch-image-models
 const board: Leaderboard = {
   benchmark: 'imagenet-1k', host: 'timm', url: 'https://github.com/huggingface/pytorch-image-models/tree/main/results', feed,
   terms: 'The repository uses Apache 2.0 at https://github.com/huggingface/pytorch-image-models/blob/main/LICENSE.',
+  stats: {
+    top5: {name:'Top-5 accuracy',unit:'%',better:'higher'},
+    top1Error: {name:'Top-1 error',unit:'%',better:'lower'},
+    top5Error: {name:'Top-5 error',unit:'%',better:'lower'},
+  },
   async fetch() {
     const entries = parseCsv(await fetchText(feed));
     const expected = ['model', 'img_size', 'top1', 'top1_err', 'top5', 'top5_err', 'param_count', 'crop_pct', 'interpolation'];

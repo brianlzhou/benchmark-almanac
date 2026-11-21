@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The dataset uses CC BY-NC 4.0. Hugging Face robots.txt allows the feed.",
   parts: { campaign: 'Campaign', evidence: 'Evidence', envelope: 'Envelope' },
+  stats: { calibrationMse: { name: 'Calibration mean squared error', unit: 'score', better: 'lower' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, tasks: { name: 'Tasks', unit: 'count' }, totalCostUsd: { name: 'Total cost', unit: 'usd', better: 'lower' } },
   async fetch() {
     const entries = parseCsv(await fetchText(feed));
     if (entries.length < 12) throw new Error('Missing EJBench models');

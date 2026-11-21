@@ -5,6 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 import { tables, text } from '../lib/html.ts';
 const feed='https://ml-jku-moleculariq-leaderboard.hf.space/config';
 const board:Leaderboard={benchmark:'moleculariq', parts: {
+ counting: { name: 'Counting', group: 'Task type' },
   indexing: { name: 'Indexing', group: 'Task type' },
   generation: { name: 'Generation', group: 'Task type' },
 },url:'https://huggingface.co/spaces/ml-jku/molecularIQ_leaderboard',feed,

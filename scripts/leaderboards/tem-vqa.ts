@@ -7,6 +7,11 @@ const board: Leaderboard = {
   url: "https://github.com/SemiMIRTLab/ATOMIC#results",
   feed: "https://raw.githubusercontent.com/SemiMIRTLab/ATOMIC/59d850598aaaeece8c172a8bf683835c590919c8/README.md",
   terms: "The repository has an Apache 2.0 license. The authors distribute figure reconstruction metadata and identify publisher terms for the source images. https://github.com/SemiMIRTLab/ATOMIC/blob/main/LICENSE The raw GitHub host returned 404 for robots.txt.",
+  stats: {
+    bleu1: { name: "BLEU-1", unit: "%", better: "higher" },
+    rougeL: { name: "ROUGE-L", unit: "%", better: "higher" },
+    meteor: { name: "METEOR", unit: "%", better: "higher" },
+  },
   async fetch() {
     const t = markdownTables(await fetchText(this.feed)).find(t => t[0].includes('AWC'));
     if (!t || t.length < 12 || t[0].join('|') !== 'Model|BLEU-1|ROUGE-L|METEOR|AWC|MCQ Accuracy') throw new Error('Missing TEM-VQA ranking');

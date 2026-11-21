@@ -42,6 +42,9 @@ const board: Leaderboard = {
   terms: "The host returns a missing page for robots.txt. The runner repository uses the MIT License. https://raw.githubusercontent.com/thevertexlab/MuTheoryEval/main/LICENSE",
   host: 'MuTheoryEval',
   costPer: 'run',
+  stats: {
+    questions: { name: 'Questions', unit: 'count' }, seed: { name: 'Random seed', unit: 'count' }, elapsedSeconds: { name: 'Elapsed time', unit: 'seconds', better: 'lower' }, total_completion_tokens: { name: 'Completion tokens', unit: 'tokens' }, total_prompt_tokens: { name: 'Prompt tokens', unit: 'tokens' }, total_thinking_tokens: { name: 'Thinking tokens', unit: 'tokens' }, avg_thinking_tokens_per_q: { name: 'Average thinking tokens per question', unit: 'tokens', better: 'lower' },
+  },
   async fetch() {
     return musicResults(board, 'cmi_bench', 3);
   },

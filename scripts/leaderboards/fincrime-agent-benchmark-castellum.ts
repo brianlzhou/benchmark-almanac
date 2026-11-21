@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://www.castellum.ai/financial-crime-agent-benchmark",
   feed: FEED,
   terms: "Castellum.AI restricts reproduction of its product. Its leaderboard gives no separate reuse grant. https://www.castellum.ai/terms-of-service The generic robots rules exclude search and account paths.",
+  stats: { con: { name: 'Confusion rate', unit: '%', better: 'lower' }, miss: { name: 'Miss rate', unit: '%', better: 'lower' } },
   parts, reference: ['Standalone'], harnesses: 'system',
   async fetch() {
     const page = await fetchText(FEED);

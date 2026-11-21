@@ -18,7 +18,7 @@ function table(section: string) {
   }));
 }
 const board: Leaderboard = {
-  benchmark: 'dare-bench', url, feed, parts: Object.fromEntries(labels.map(label => [label, label])),
+  benchmark: 'dare-bench', url, feed, parts: Object.fromEntries([...labels.map(label => [label, label]), ...labels.map(label => ['released' + label, {name: label, group: 'Released subset'}])]),
   terms: 'The repository releases its non-database files under Apache 2.0. https://github.com/Snowflake-Labs/dare-bench#license',
   aliases: { 'GPT-o4-mini': 'o4-mini', 'Claude-Sonnet-3.7': 'claude-3-7-sonnet', 'Claude-Sonnet-4': 'claude-sonnet-4' },
   async fetch() {

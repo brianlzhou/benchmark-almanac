@@ -1,18 +1,23 @@
 // The source reports no overall score. The headline is the plain mean of the 6 parts, computed by this importer.
 // RSIBench-Data evaluates researcher agents that generate training data for a fixed target model.
 // The official site lists each selected checkpoint's score, wall time and Tinker cost for each benchmark.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow } from './types.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 import { tables } from '../lib/html.ts';
 import { fetchText } from '../lib/util.ts';
 
 const feed = 'https://rsibench.co/data/';
 const parts = ['SWE-bench Verified', 'SWE-bench Multilingual', 'SWE-bench Pro', 'GPQA Diamond', 'AIME 2026', 'Terminal-Bench 2.0'];
+const stats: Record<string, BoardStat> = Object.fromEntries(parts.flatMap(p => [
+  [p + ' time (h)', {name: p + ' time', unit: 'hours', better: 'lower'}],
+  [p + ' Tinker cost ($)', {name: p + ' Tinker cost', unit: 'usd', better: 'lower'}],
+])) as Record<string, BoardStat>;
 const board: Leaderboard = {
   benchmark: 'rsibench-data', url: feed + '#official-results', feed,
   terms: 'The project repository links CC BY-NC 4.0. https://creativecommons.org/licenses/by-nc/4.0/',
   headline: 'The official table reports no combined score, so this is the plain mean of six benchmark scores.',
   parts: Object.fromEntries(parts.map(p => [p, p])),
+  stats,
   aliases: { 'Opus-4.8': 'claude-opus-4-8', 'Sonnet-5': 'claude-sonnet-5' },
   costPer: 'run',
   async fetch() {

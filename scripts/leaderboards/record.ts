@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at sheng-z.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: { EM: { name: 'Exact match', unit: '%', better: 'higher' } },
   
   async fetch() {
     const out: LeaderboardRow[] = [];

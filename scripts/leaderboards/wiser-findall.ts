@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'wiser-findall',
   url: 'https://parallel.ai/products/findall',
   feed: FEED,
+  stats: { cpm: { name: 'Cost per million results', unit: 'usd', better: 'lower' } },
   terms: 'Parallel publishes this comparison and its WISER-FindAll methodology on the public product page. https://parallel.ai/products/findall',
   async fetch() {
     const text = await fetchText(FEED);

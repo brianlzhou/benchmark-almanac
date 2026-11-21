@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark:'group-binary-search-riedl', url:'https://github.com/riedlc/AI-GBS',feed,static:'paper',
   terms:'The author publishes Table A2 at https://arxiv.org/abs/2510.05174.',
   aliases:{'Qwen3':'qwen3-235b-a22b-instruct-jul-2025'},
+  stats:{groupsWithSignificantDifferentiation:{name:'Groups with significant differentiation',unit:'%',note:'Percentage of groups with statistically significant differentiation.'}},
   async fetch() {
     const t=paperTables(await paperHtml(feed)).map(grid).find(t=>t[1]?.[0]==='Group Performance');
     if (!t || t[0].join('|')!=='|Llama-3.1-8B|Llama-3.1-70B|Gemini 2.0 flash|Qwen3') throw new Error('Missing group performance table');

@@ -30,6 +30,7 @@ const board: Leaderboard = {
   "url": "https://github.com/NVIDIA/When2Call",
   "feed": "https://raw.githubusercontent.com/NVIDIA/When2Call/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+  stats: { accuracy: {name: 'Accuracy', unit: '%', better: 'higher'}, toolHallucination: {name: 'Tool hallucination rate', unit: '%', better: 'lower'}, normalizedAccuracy: {name: 'Normalized accuracy', unit: '%', better: 'higher'} },
   "aliases": {
     "GPT-4-Turbo-04-09": "gpt-4-turbo-apr-2024",
     "Llama 3.2 1B Instruct": "llama-3-2-1b",

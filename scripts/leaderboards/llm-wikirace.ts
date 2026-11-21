@@ -15,6 +15,7 @@ const board: Leaderboard = {
  url: "https://llmwikirace.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats:{tokensPerStep:{name:'Tokens per step',unit:'tokens',better:'lower'}},
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

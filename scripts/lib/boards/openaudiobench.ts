@@ -33,6 +33,11 @@ const board: Leaderboard = {
   },
 };
 export const sourceBoard = board;
+export const OPENAUDIO_STATS = {
+  alpacaEvalScore: { name: 'AlpacaEval score', unit: 'score', better: 'higher' as const },
+  triviaQAScore: { name: 'TriviaQA score', unit: 'score', better: 'higher' as const },
+  webQuestionsScore: { name: 'Web Questions score', unit: 'score', better: 'higher' as const },
+};
 
 // Each child record selects one complete test set. Remaining settings describe its run.
 export async function trackRows(select: string, remove: string): Promise<LeaderboardRow[]> {

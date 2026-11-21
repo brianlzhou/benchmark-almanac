@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: 'prism-multi-turn-coding-augment', url: PAGE, feed: PAGE,
   terms: 'Augment publishes these results in its article. The page does not state separate score reuse terms.',
   static: 'paper', headline: 'Average overall score in Augment Prism multi-turn coding evaluation.',
+  stats: { costPerTask: { name: 'Cost per task', unit: 'usd', better: 'lower' } },
   async fetch() {
     const t = tables(await fetchText(PAGE)).find(x => x[0]?.[0]?.text === 'Model' && x[0]?.[1]?.text.includes('Avg overall score'));
     if (!t || t.length < 8) throw new Error('Augment Prism overall table missing');

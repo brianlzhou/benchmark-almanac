@@ -10,6 +10,7 @@ const board: Leaderboard = {
   terms: 'The authors publish the paper under the terms at https://arxiv.org/abs/2611.08914.',
   aliases: { Astra: 'gpt-6-astra', 'Luna 6': 'gpt-6-luna', 'Sonnet 5': 'claude-sonnet-5' },
   parts: { hazards: 'Hazards', requests: 'Requests', entry: 'Entry', wellbeing: 'Wellbeing', chores: 'Chores', alertGroups: 'Alert groups' },
+  stats: { seed0Passed: { name: 'Seed 0 passed tasks', unit: 'count' }, seed1Passed: { name: 'Seed 1 passed tasks', unit: 'count' }, skillCostPercent: { name: 'Skill cost', unit: '%', better: 'lower' }, failureFailed: { name: 'Failed alerts', unit: 'count' }, failureOver: { name: 'Over alerts', unit: 'count' }, failureUnder: { name: 'Under alerts', unit: 'count' }, failureEvidence: { name: 'Evidence failures', unit: 'count' }, failurePhysical: { name: 'Physical failures', unit: 'count' }, failureReport: { name: 'Report failures', unit: 'count' }, failureLimit: { name: 'Limit failures', unit: 'count' } },
   async fetch() {
     const all = flatPaperTables(await paperHtml(feed)).map(grid);
     const results = all.find(t => t[0].join('|') === 'Model|Passed (seed 0, 1)|Balanced %|Hazards %|Requests %|Entry %|Wellbeing %|Chores %|Alert groups %|Skill cost %|USD (total)');

@@ -11,6 +11,10 @@ const board: Leaderboard = {
  url: "https://github.com/phenixace/S2-TOMG-Bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   '#Parameters (B)': { name: 'Model size', unit: 'billions', note: 'Number of model parameters in billions.' },
+   '$\\overline{S\\!R}$ (%)': { name: 'Unweighted success rate', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

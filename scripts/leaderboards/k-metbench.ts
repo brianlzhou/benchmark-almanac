@@ -2,7 +2,7 @@
 import type {Leaderboard} from './types.ts';
 import {fetchJson} from '../lib/util.ts';
 const FEED='https://kmetbench.github.io/data/leaderboard_table_1_source.json';
-const board:Leaderboard={benchmark:'k-metbench', parts: {
+const board:Leaderboard={benchmark:'k-metbench', stats: { geo_pct: { name: 'Geography accuracy', unit: '%', better: 'higher' }, reasoning_pct: { name: 'Reasoning accuracy', unit: '%', better: 'higher' }, reasoningRubric: { name: 'Reasoning rubric score', unit: 'score', better: 'higher' } }, parts: {
   korean_pct: { name: 'Korean specific', group: 'Split' },
   text_pct: { name: 'Text', group: 'Modality' },
   text_only_pct: { name: 'Text only', group: 'Modality' },

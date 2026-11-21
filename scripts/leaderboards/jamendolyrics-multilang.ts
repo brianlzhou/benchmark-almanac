@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'The authors publish Table 3 at https://arxiv.org/abs/2306.07744.',
   parts: Object.fromEntries(Object.entries(languages).map(([key, name]) =>
     [key, { name, unit: 'score', better: 'lower', note: 'Average absolute error in seconds.' }])),
+  stats: { pco: {name: 'Percentage of correct onsets', unit: '%', better: 'higher'} },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.join('|') === '||All|All|EN|ES|DE|FR');
     if (!table || table[1].join('|') !== 'Model|Data|AAE|PCO|AAE|AAE|AAE|AAE') throw new Error('Missing multilingual results');

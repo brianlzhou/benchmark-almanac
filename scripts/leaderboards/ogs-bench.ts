@@ -9,6 +9,24 @@ const board: Leaderboard = {
   feed,
   terms: "The leaderboard dataset metadata lists Apache 2.0. The results directory links one JSON document per model. The host permits crawling.",
   parts: {}, costPer: 'run',
+  stats: {
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    meanLatency: { name: 'Mean latency', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    format: { name: 'Format score', unit: '%', better: 'higher' },
+    vocabulary: { name: 'Vocabulary score', unit: '%', better: 'higher' },
+    sensory: { name: 'Sensory score', unit: '%', better: 'higher' },
+    composition: { name: 'Composition score', unit: '%', better: 'higher' },
+    pairing: { name: 'Pairing score', unit: '%', better: 'higher' },
+    explanation: { name: 'Explanation score', unit: '%', better: 'higher' },
+    risk: { name: 'Risk score', unit: '%', better: 'higher' },
+    structured_output: { name: 'Structured output score', unit: '%', better: 'higher' },
+    regional: { name: 'Regional score', unit: '%', better: 'higher' },
+    dietary: { name: 'Dietary score', unit: '%', better: 'higher' },
+    safety: { name: 'Safety score', unit: '%', better: 'higher' },
+    nutrition: { name: 'Nutrition score', unit: '%', better: 'higher' },
+    menu_engineering: { name: 'Menu engineering score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const match = html.match(/<script[^>]*id="lb-data"[^>]*>([\s\S]*?)<\/script>/);

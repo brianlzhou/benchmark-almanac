@@ -17,6 +17,7 @@ export default {
   benchmark: 'superclue-auto', url, feed, terms: 'Public author-published results at ' + url,
   headline: 'The README reports no overall score. The headline is the plain mean of its four capability scores.',
   parts: Object.fromEntries([...parts,'第一轮','第二轮'].map(k => [k,k])),
+  stats: { '分数差异': {name: 'Score difference', unit: 'score'} },
   async fetch() {
     const md = await fetchText(feed);
     const [abilities, rounds] = (md.split('### SuperCLUE-Auto四大能力与应用')[1] ?? '').split('### SuperCLUE-Auto第一二轮得分分解表');

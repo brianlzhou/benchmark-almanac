@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/22159/results/37744",
   feed,
   terms: "CodaLab publishes scores by username. The results page gives no score reuse license. https://codalab.lisn.upsaclay.fr/competitions/22159/results/37744 The robots URL returns an HTML error page.",
+  stats: {
+    precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    entries: { name: 'Entries', unit: 'count' },
+  },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[1]?.map(c => c.text).join('|') === '#|User|Entries|Date of Last Entry|F1|P|R');
     const rows = t?.filter(c => /^\d+$/.test(c[0]?.text)) ?? [];

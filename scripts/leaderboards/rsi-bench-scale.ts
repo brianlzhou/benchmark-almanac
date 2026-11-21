@@ -16,6 +16,9 @@ const board: Leaderboard = {
   terms:
     "robots.txt on rsi-benchmark.com allows /tasks; the site links Scale's website terms (August 2021), which limit use to supported browsers for internal purposes. The almanac imports Scale's boards with credit and a link.",
   aliases: {},
+  stats: {
+    best: { name: 'Best run score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(PAGE)).find((t) => t[0]?.some((c) => c.text === 'mean'));
     if (!table) throw new Error('no leaderboard table on the page');

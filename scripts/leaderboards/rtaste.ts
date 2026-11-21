@@ -9,6 +9,13 @@ const url = 'https://github.com/ArtKanke/rTaste';
 const feed = 'https://raw.githubusercontent.com/ArtKanke/rTaste/HEAD/README.md';
 const board: Leaderboard = {
   benchmark: 'rtaste', url, feed, terms: 'The authors release the data under CC BY 4.0. https://github.com/ArtKanke/rTaste#license',
+  stats: {
+    beyondNonObvious: {name: 'Beyond the paper, non-obvious', unit: 'count', better: 'higher'},
+    informativeEvidence: {name: 'Informative evidence', unit: '%', better: 'higher', note: 'Percentage of sound experiments with informative evidence.'},
+    registeredEventOccurred: {name: 'Registered event occurred', unit: '%', better: 'higher', note: 'Percentage of sound experiments where the registered event occurred.'},
+    soundValuableNewPer100USD: {name: 'Sound, valuable and new per $100', unit: 'count', better: 'higher'},
+    seedPapers: {name: 'Seed papers', unit: 'count'},
+  },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0][0] === 'Model (SR / RT)');
     if (!table || table[0].slice(1).join('|') !== 'Sound, valuable and new, of five|Beyond the paper, non obvious|Informative evidence, % of sound|Registered event occurred, % of sound|Sound, valuable and new per $100') throw new Error('Missing rTaste Results columns');

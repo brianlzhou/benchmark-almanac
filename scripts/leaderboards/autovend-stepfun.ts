@@ -10,6 +10,14 @@ export default {
   benchmark: 'autovend-stepfun', url: feed, feed, static: 'paper',
   terms: 'The paper and license are linked at https://arxiv.org/abs/2610.36980',
   headline: 'The score is mean final net assets, in thousands of yuan, over three runs.',
+  stats: {
+    Assortment: { name: 'Assortment quality', unit: 'score', better: 'higher', note: 'Expected gross profit compared with a heuristic reference mix under common conditions, from 0 to 1.' },
+    'Waste Rate': { name: 'Waste rate', unit: '%', better: 'lower', note: 'Inventory loss divided by valid sales cost plus loss, including expiry and early disposal.' },
+    'Pricing Regret': { name: 'Pricing regret', unit: 'cny', better: 'lower', note: 'Expected gross-profit shortfall in CNY per machine per day from a price-search reference.' },
+    'Shelf Utilization': { name: 'Shelf utilization', unit: '%', better: 'higher', note: 'Mean fraction of capacity occupied by unexpired stock before sales across sites and days.' },
+    'Tool Calls': { name: 'Tool calls', unit: 'count' },
+    'API Efficiency': { name: 'API efficiency', unit: 'cny', better: 'higher', note: 'Net-asset growth in CNY per US dollar of estimated API cost.' },
+  },
   async fetch() {
     const t = flatPaperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[1]?.startsWith('Net Assets'));
     const expected = ['Model','Net Assets','Std',...keys.slice(1)];

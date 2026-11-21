@@ -9,6 +9,9 @@ const board: Leaderboard = {
   url: "https://www.ai-fpl.com/#standings",
   feed,
   terms: "The organizer publishes the standings. I found no reuse license on its rules or gameweek report. The site's robots.txt disallows /wp-json/.",
+  stats: {
+    weeklyPoints: { name: 'Weekly points', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     type Entry = { player_name: string; entry_name: string; total: number; event_total: number; entry: number };
     const { standings } = await fetchJson<{ standings: { has_next: boolean; results: Entry[] } }>(feed);

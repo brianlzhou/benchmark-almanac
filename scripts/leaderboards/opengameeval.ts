@@ -12,6 +12,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Roblox archives 24 model rows for the 47 coding tasks. The optional debugging column uses a separate suite. The repository uses MIT. https://github.com/Roblox/open-game-eval/blob/main/LICENSE.txt GitHub requests a one-second crawl delay.",
   reference: ['Roblox Studio Assistant'], parts: { 'Debug Pass@1': 'Debug Evals' },
+  stats: {
+    passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+    'Cons@5': { name: 'Consistent pass@5', unit: '%', better: 'higher' },
+    pass5: { name: 'All pass@5', unit: '%', better: 'higher' },
+    'Avg Tool Error Rate': { name: 'Average tool error rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[1]?.[0]?.text === 'Pass@1');
     const columns = ['Pass@1','Pass@5','Cons@5','All@5','Avg Tool Error Rate','Debug Pass@1'];

@@ -14,6 +14,9 @@ const board: Leaderboard = {
   url: "https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
   feed: FEED,
   terms: "The authors do not specify separate terms for leaderboard scores on https://nashnovaresearch.github.io/AgenticFinBench/#leaderboard",
+  stats: {
+    latency: { name: 'Time per run', unit: 'seconds', better: 'lower' }, baseline: { name: 'Baseline quality', unit: '%', better: 'higher' }, delta: { name: 'Difference from baseline', unit: '%', better: 'higher' }, baselineRank: { name: 'Baseline rank', unit: 'count' }, claims: { name: 'Claims', unit: 'count' }, questions: { name: 'Questions', unit: 'count' }, responseHallucination: { name: 'Response hallucination rate', unit: '%', better: 'lower' }, claimHallucination: { name: 'Claim hallucination rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<{ models: Entry[]; configuration_count: number }>(FEED);
     if (data.models.length < 18 || data.models.length !== data.configuration_count) throw new Error('Incomplete manuscript results');

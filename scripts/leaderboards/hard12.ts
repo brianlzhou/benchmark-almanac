@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'hard12', url, feed: url,
   terms: 'Public All Runs table on the author’s website.',
   aliases: { 'Opus 5.5': 'claude-opus-5-5', 'Haiku 5.5': 'claude-haiku-5-5' },
+  stats: { pass3: { name: 'Pass at 3', unit: '%', better: 'higher' }, passAll3: { name: 'Pass all 3', unit: '%', better: 'higher' }, latency: { name: 'Time per task', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const html = await fetchText(url);
     const table = tables(html).find(t => t[0]?.map(c => c.text).join('|') === 'Setup|Type|pass@1|pass@3|pass-all-3|$/task|Time/task');

@@ -7,6 +7,10 @@ const feed = 'https://raw.githubusercontent.com/aliyun/cflue/HEAD/README.md';
 const parts: Record<string, BoardPart> = {};
 const knowledge = ['Acc', 'Weighted-F1', 'BLEU-1', 'BLEU-4', 'ROUGE-1', 'ROUGE-2', 'ROUGE-L'];
 const application = ['Fin_TC accuracy', 'Fin_MT en2zh BLEU-4', 'Fin_MT en2zh COMET', 'Fin_MT zh2en BLEU-4', 'Fin_MT zh2en COMET', 'Fin_RE F1', 'Fin_RC ROUGE-L', 'Fin_TG ROUGE-L', 'Application average'];
+for (const [name, group] of [...knowledge.map(name => [name, 'Knowledge assessment'] as const), ...application.map(name => [name, 'Application assessment'] as const)]) {
+  const key = name.replace(/[^A-Za-z0-9]/g, '');
+  parts[key] = { name, group, unit: name === 'Acc' || name.endsWith('accuracy') ? '%' : 'score', better: 'higher' };
+}
 function table(text: string, section: string) {
   const chunk = text.split('### ' + section + '\n')[1]?.split(/\n##/)[0];
   if (!chunk) throw new Error('Missing ' + section);

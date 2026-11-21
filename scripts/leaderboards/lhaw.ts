@@ -20,6 +20,11 @@ export default {
   headline: 'The paper gives no overall pass@3, so the headline is the plain mean of the three domain scores.',
   parts: Object.fromEntries(domains.flatMap(domain => percentages.map((metric, i) =>
     [key(domain, metric), {name: domain + ': ' + ['Pass@3', 'Checkpoint progress', 'Original pass@3', 'Original checkpoint progress', 'Ask rate'][i], unit: '%' as const}]))),
+  stats: Object.fromEntries(domains.flatMap(domain => [
+    [key(domain, 'questionsPerTrajectory'), {name: domain + ': Questions per trajectory', unit: 'count'}],
+    [key(domain, 'passGainPerQuestion'), {name: domain + ': Pass gain per question', unit: 'score', better: 'higher', note: 'Gain from the ask_user tool, from 0 to 1.'}],
+    [key(domain, 'checkpointGainPerQuestion'), {name: domain + ': Checkpoint gain per question', unit: 'score', better: 'higher', note: 'Gain from the ask_user tool, from 0 to 1.'}],
+  ])),
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[1]?.join('|') ===
       'Data|Model|Pass@3|Ckpt|Ask%|Avg/Traj|Score|Gain/Q|Score|Gain/Q');

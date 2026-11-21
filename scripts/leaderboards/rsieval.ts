@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2307.15266." ,
   parts: {"presence": "Presence", "quantity": "Quantity", "color": "Color", "absolutePosition": "Absolute position", "relativePosition": "Relative position", "areaComparison": "Area comparison", "roadDirection": "Road direction", "image": "Image", "scene": "Scene", "reasoning": "Reasoning"},
   headline: "The headline is accuracy across all 936 visual questions. The authors grade captions separately.",
+  stats: { quantityRelativeError: { name: 'Quantity relative error', unit: '%', better: 'lower' } },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.join('|') === header.join('|'));

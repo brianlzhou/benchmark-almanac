@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'lakera-b3-backbone-breaker-benchmark',
   url: PAGE,
   feed: `${PAGE}assets/index-<hash>.js (leaderboard array, vulnerabilityScore)`,
+  stats: { vulnerability: { name: 'Vulnerability', unit: '%', better: 'lower', note: 'Mean successful-attack fraction across 30 threat snapshots.' } },
   terms: 'Public project page of an ICLR 2026 paper; b3.lakera.ai serves no robots.txt (404) and states no terms.',
   aliases: {
     'R1 0528': 'deepseek-r1-may-2025',

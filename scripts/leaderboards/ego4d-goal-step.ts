@@ -13,6 +13,7 @@ const board: Leaderboard = {
   benchmark: 'ego4d-goal-step', url: 'https://eval.ai/web/challenges/challenge-page/2188/leaderboard/5405', feed,
   terms: 'The Ego4D challenge terms apply. https://eval.ai/web/challenges/challenge-page/2188/overview',
   verified: 'verified by the EvalAI host',
+  stats: { recall1IoU05: { name: 'Recall at 1 prediction, IoU 0.5', unit: '%', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<{ results: Entry[]; count: number; next: string | null }>(feed);
     if (data.next || data.results.length !== data.count) throw new Error('Incomplete grounding board');

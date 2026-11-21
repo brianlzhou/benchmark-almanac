@@ -14,6 +14,12 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2104.05938",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  rouge2: { name: 'ROUGE-2 F1', unit: '%', better: 'higher' }, rougeL: { name: 'ROUGE-L F1', unit: '%', better: 'higher' },
+  productRouge2: { name: 'Product ROUGE-2 F1', unit: '%', better: 'higher' }, productRougeL: { name: 'Product ROUGE-L F1', unit: '%', better: 'higher' },
+  academicRouge2: { name: 'Academic ROUGE-2 F1', unit: '%', better: 'higher' }, academicRougeL: { name: 'Academic ROUGE-L F1', unit: '%', better: 'higher' },
+  committeeRouge2: { name: 'Committee ROUGE-2 F1', unit: '%', better: 'higher' }, committeeRougeL: { name: 'Committee ROUGE-L F1', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const all=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text)));

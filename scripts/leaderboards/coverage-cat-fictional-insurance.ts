@@ -15,6 +15,17 @@ type Cohort = { models: Model[], tracks: Track[] };
 const board: Leaderboard = {
   benchmark: 'coverage-cat-fictional-insurance', url, feed, parts, costPer: 'run',
   terms: 'Coverage Cat publishes aggregate results under its site terms. https://www.coveragecat.com/terms-of-service',
+  stats:{
+    discoveryScheduled:{name:'Find missing facts scheduled attempts',unit:'count'},
+    discoverySuccesses:{name:'Find missing facts successes',unit:'count'},
+    discoveryMedianCallMs:{name:'Find missing facts median call time',unit:'ms',better:'lower'},
+    source_qaScheduled:{name:'Read documents scheduled attempts',unit:'count'},
+    source_qaSuccesses:{name:'Read documents successes',unit:'count'},
+    source_qaMedianCallMs:{name:'Read documents median call time',unit:'ms',better:'lower'},
+    workflowScheduled:{name:'Complete a workflow scheduled attempts',unit:'count'},
+    workflowSuccesses:{name:'Complete a workflow successes',unit:'count'},
+    workflowMedianCallMs:{name:'Complete a workflow median call time',unit:'ms',better:'lower'},
+  },
   async fetch() {
     const data = await fetchJson<Cohort & { cohort: { trials: number }, publication: {
       model_extension_v1: { models: Model[], primary: { tracks: Track[] } } } }>(feed);

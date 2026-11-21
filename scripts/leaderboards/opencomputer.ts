@@ -8,6 +8,11 @@ const FEED = "https://echo0715.github.io/OpenComputer/";
 const board: Leaderboard = {
  benchmark: "opencomputer", url: "https://echo0715.github.io/OpenComputer/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+  OSWorld: { name: 'OSWorld benchmark score', unit: '%', better: 'higher' },
+  averageReward: { name: 'Average reward', unit: 'score', better: 'higher' },
+  steps: { name: 'Steps', unit: 'count' },
+ },
 
  async fetch() {
 const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Avg. Reward'));if(!t)throw new Error('No leaderboard');return t.slice(1).map(r=>({model:r[1].text.replace(/ Best$/,''),score:num(r[3].text)!,metrics:{OSWorld:num(r[2].text)!,averageReward:num(r[4].text)!,steps:num(r[5].text)!}}));

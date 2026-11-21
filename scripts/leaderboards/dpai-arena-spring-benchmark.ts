@@ -14,6 +14,7 @@ const PAGE = 'https://dpaia.dev/';
 
 
 const board: Leaderboard = {
+  stats: { durationMinutes: { name: 'Duration', unit: 'minutes', better: 'lower' } },
   benchmark: 'dpai-arena-spring-benchmark',
   url: PAGE,
   feed: PAGE + ' (current scoreboard bundle)',

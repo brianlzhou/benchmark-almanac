@@ -13,6 +13,9 @@ const board: Leaderboard = {
   aliases: { 'Nemotron-3-Nano-Omni-30B': 'nemotron-3-nano-omni-30b-a3b' },
   headline: 'The authors report four separate scores from 1 to 5. The headline is their plain mean on the main evaluation.',
   parts: { answer: 'Answer', hallucination: 'Hallucination', divergence: 'Divergence', conciseness: 'Conciseness' },
+  stats: {
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+  },
   async fetch() {
     const script = await fetchText(feed);
     if (!/cols\s*=\s*\[1,2,5,3,4\]/.test(script)) throw new Error('Changed displayed column order');

@@ -9,6 +9,7 @@ const PAGE = 'https://inferencebench.ai/';
 const FEED = 'https://inferencebench.ai/script.js?v=20261119-2';
 const board: Leaderboard = {
   benchmark: 'inferencebench',
+  stats: { prefill: { name: 'Prefill speedup', unit: 'speedup', better: 'higher' }, decode: { name: 'Decode speedup', unit: 'speedup', better: 'higher' }, throughput: { name: 'Throughput speedup', unit: 'speedup', better: 'higher' }, allInOne: { name: 'All-in-one speedup', unit: 'speedup', better: 'higher' }, sem: { name: 'Speedup standard error', unit: 'speedup', better: 'lower' } },
   url: `${PAGE}#leaderboard`,
   feed: FEED,
   terms: 'The public page and JavaScript feed publish the leaderboard. No separate score-reuse license is stated, and the site has no robots.txt.',

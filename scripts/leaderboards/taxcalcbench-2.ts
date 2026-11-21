@@ -21,6 +21,7 @@ interface Summary {
 
 const board: Leaderboard = {
   benchmark: 'taxcalcbench-2',
+  stats: { runtime: { name: 'Runtime', unit: 'seconds', better: 'lower' }, time: { name: 'Runtime including web search', unit: 'seconds', better: 'lower' } },
   url: TCB_PAGE,
   feed: `${TCB_FEED} (edition v2, strict)`,
   terms: TCB_TERMS,

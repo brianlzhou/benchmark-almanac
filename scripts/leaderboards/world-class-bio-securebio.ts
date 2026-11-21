@@ -6,6 +6,7 @@ import { num, text } from '../lib/html.ts';
 import { sbFacts, sbCharts, SB_ALIASES } from './hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 const board: Leaderboard = {
+ stats: { refusals: { name: 'Refusal rate', unit: '%', better: 'lower' }, reasoningBudget: { name: 'Reasoning budget', unit: 'tokens' } },
  benchmark: "world-class-bio-securebio",
  url: "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
  feed: FEED,

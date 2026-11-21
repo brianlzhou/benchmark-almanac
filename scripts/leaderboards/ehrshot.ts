@@ -21,12 +21,12 @@ function value(cell: Result | undefined, setting: string) {
 const board: Leaderboard = {
   benchmark: 'ehrshot', url: 'https://ehrshot.stanford.edu/', feed,
   terms: 'The EHRSHOT team publishes its leaderboard and terms at https://som-shahlab.github.io/ehrshot-website/.',
-  parts: {}, headline: 'The board averages AUROC across all 28 clinical prediction tasks.',
+  parts: Object.fromEntries('ICU Admission|Long LOS|30-day Readmission|Anemia|Hyponatremia|Thrombocytopenia|Hyperkalemia|Hypoglycemia|Acute MI|Lupus|Hyperlipidemia|Hypertension|Celiac|Pancreatic Cancer|Lung Opacity|Pleural Effusion|Consolidation|Pleural Other|Pneumothorax|Edema|Enlarged Cardiomediastinum|Cardiomegaly|Support Devices|Fracture|Pneumonia|Lung Lesion|Atelectasis|No Finding'.split('|').flatMap(name => [[name, { name }], [name + ' AUPRC', { name: name + ' AUPRC', unit: 'score', better: 'higher' }]])), stats: { auprc: { name: 'Mean area under the precision recall curve', unit: 'score', better: 'higher', note: 'Mean area under the precision recall curve across the clinical prediction tasks, from 0 to 1.' } }, headline: 'The board averages AUROC across all 28 clinical prediction tasks.',
   async fetch() {
     const data = await fetchJson<Data>(feed);
     const tasks = Object.values(data.taskGroups).flat();
     if (tasks.length !== 28 || !data.individual.auprc || !data.kValues.length) throw new Error('Missing EHRSHOT tasks or metrics');
-    for (const [group, names] of Object.entries(data.taskGroups)) for (const name of names) board.parts![name] = { name, group };
+    for (const [group, names] of Object.entries(data.taskGroups)) for (const name of names) { board.parts![name] = { name, group }; board.parts![name + ' AUPRC'] = { name: name + ' AUPRC', group, unit: 'score', better: 'higher' }; }
     const rows: LeaderboardRow[] = [];
     for (const model of data.models) {
       for (const setting of ['All labels', 'Few-shot average', ...data.kValues.map(String)]) {

@@ -14,6 +14,7 @@ function percent(value:string) {
 const board: Leaderboard = {
   benchmark:'functional-math',url:'https://arxiv.org/abs/2402.19450',feed,
   terms:'The authors publish their report data in their GPL-3.0 repository. GitHub serves the archive on its public raw-file host.',
+  stats:{staticAccuracy:{name:'Static accuracy',unit:'%',better:'higher'},reasoningGap:{name:'Reasoning gap',unit:'score'},staticHallucination:{name:'Static hallucination rate',unit:'%',better:'lower'},functionalHallucination:{name:'Functional hallucination rate',unit:'%',better:'lower'},functionalCoverage:{name:'Functional coverage',unit:'%',better:'higher'},fractionTested:{name:'Fraction functionally tested',unit:'%'}},
   async fetch() {
     const archive = Buffer.from(await fetchBytes(feed));
     const read = (filename:string) => parseCsv(execFileSync('tar',['-xzOf','-','data_files/'+filename],{input:archive,encoding:'utf8'}));

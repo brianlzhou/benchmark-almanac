@@ -31,6 +31,7 @@ const board: Leaderboard = {
   "feed": FEED,
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { samples: { name: 'Samples', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const data = markdownTables(source);

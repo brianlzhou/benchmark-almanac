@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://hex.tech/databench/",
   feed,
   terms: "Hex's robots.txt allows the board. Hex's terms apply. Results are credited to Hex.",
+  stats: { latency: { name: 'Median latency', unit: 'ms', better: 'lower' } },
   async fetch() {
     const flight = nextFlight(await fetchText(feed));
     const rows = jsonAfter<{ model: string; score: string; costPerTaskValue: number; tokensPerTaskValue: number; medianLatencyValue: number }[]>(flight, '"rows":');

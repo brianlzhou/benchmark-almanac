@@ -10,7 +10,7 @@ const board: Leaderboard = {
   benchmark: 'crosswordbench-leng', feed, url: feed, static: 'paper',
   terms: 'The paper and its license are available at https://arxiv.org/abs/2504.00043.',
   headline: 'The headline averages word correctness across the five puzzle sets.',
-  parts: Object.fromEntries(puzzles.map(p => [p, p])),
+  parts: { ...Object.fromEntries(puzzles.map(p => [p, p])), 'English 7x7 LCR':'English 7x7 letter completion rate', 'English 7x7 ICR':'English 7x7 intersection completion rate', 'English 14x14 LCR':'English 14x14 letter completion rate', 'English 14x14 ICR':'English 14x14 intersection completion rate', 'Chinese ICR':'Chinese intersection completion rate', 'English Simple ICR':'English Simple intersection completion rate', 'CommonSenseQA ICR':'CommonSenseQA intersection completion rate' },
   aliases: { 'GPT-4o-2024-11-20': 'gpt-4o-nov-2024', 'Pixtral-Large-Instruct-2411': 'pixtral-large',
     'DeepSeek-R1 (snapshot unspecified)': 'deepseek-r1', 'Gemini 2.0 Flash': 'gemini-2-0-flash-feb-2025' },
   async fetch() {

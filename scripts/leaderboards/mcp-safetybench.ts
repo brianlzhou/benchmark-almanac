@@ -11,6 +11,7 @@ for (const name of domains) {
   parts[name + ' TSR'] = { name, group: 'Task success' };
   parts[name + ' ASR'] = { name, group: 'Attack success', better: 'lower' };
 }
+parts.ASR = { name: 'Overall attack success', group: 'Attack success', better: 'lower' };
 const board: Leaderboard = {
   benchmark: 'mcp-safetybench', feed, url: feed, static: 'paper', parts,
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',

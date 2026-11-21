@@ -9,6 +9,9 @@ const feed = 'https://build-arena.github.io/';
 const parts = { transport: 'Transport', support: 'Support', lift: 'Lift' };
 const board: Leaderboard = {
   benchmark: 'buildarena', url: feed + '#leaderboard', feed, parts,
+  stats: {
+    samplesPerTask: { name: 'Samples per task', unit: 'count' },
+  },
   terms: 'The authors release BuildArena under CC BY-NC 4.0. https://github.com/AI4Science-WestlakeU/BuildArena/blob/main/LICENSE',
   aliases: { 'grok4-0709': 'grok-4', 'doubao-seed-1-6-250615': 'doubao-seed-1-6', 'deepseek-chat (DeepSeek-V3.1)': 'deepseek-v3-1', 'claude-sonnet-4-20250514': 'claude-sonnet-4' },
   async fetch() {

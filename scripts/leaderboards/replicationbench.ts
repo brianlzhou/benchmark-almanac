@@ -7,6 +7,10 @@ const feed = 'https://arxiv.org/html/2510.24591';
 const board: Leaderboard = {
   benchmark: 'replicationbench', url: feed, feed, static: 'paper',
   terms: 'The authors publish Table 2 under the terms linked at https://arxiv.org/abs/2510.24591.',
+  stats: {
+    bestOfN: { name: 'Best-of-N score', unit: '%', better: 'higher' }, difficultyWeighted: { name: 'Difficulty-weighted score', unit: '%', better: 'higher' },
+    tasksCompleted: { name: 'Tasks completed', unit: '%', better: 'higher' }, medianTokens: { name: 'Median tokens', unit: 'tokens', better: 'lower' }, medianRuntimeMinutes: { name: 'Median runtime', unit: 'minutes', better: 'lower' },
+  },
   aliases: {'Gemini 2.5': 'gemini-2-5-pro-may-2025', 'Sonnet 3.7': 'claude-3-7-sonnet', 'Sonnet 4': 'claude-sonnet-4', 'Sonnet 4.5': 'claude-sonnet-4-5'},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

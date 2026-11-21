@@ -9,6 +9,12 @@ const feed = 'https://arxiv.org/html/2506.00343';
 const board: Leaderboard = {
   benchmark: 'inaturalist-sounds', url: feed, feed, static: 'paper',
   terms: 'The authors publish Table 2 at https://arxiv.org/abs/2506.00343.',
+  stats: {
+    mAP: {name: 'Mean average precision', unit: '%', better: 'higher'},
+    mF1: {name: 'Mean F1', unit: '%', better: 'higher'},
+    top1: {name: 'Top-1 accuracy', unit: '%', better: 'higher'},
+    top5: {name: 'Top-5 accuracy', unit: '%', better: 'higher'},
+  },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.slice(0, 4).join('|') === 'Model|ML|MT|iNatSounds test' && t[1]?.slice(3, 7).join('|') === 'mAP|mF1|Top1|Top5');

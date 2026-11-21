@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'Arize AI publishes the comparison on its website. https://arize.com/blog/decision-model-benchmark/',
   aliases: { 'OpenAI Decisions': 'gpt-6-luna' },
   parts: { hallucination: 'Hallucination (RAGTruth)', evaluators: 'Evaluators (Phoenix suites)', routing: 'Routing' },
+  stats:{routingCorrect:{name:'Correct routing choices',unit:'count'},routingCases:{name:'Routing cases',unit:'count'},calibrationError:{name:'Calibration error',unit:'score',better:'lower'},ragLatencyP50Seconds:{name:'RAG latency p50',unit:'seconds',better:'lower'},ragCostPerThousandUsd:{name:'RAG cost per 1,000',unit:'usd',better:'lower'}},
   async fetch() {
     const header = 'Model|Hallucination (RAGTruth)|Evaluators (Phoenix suites)|Routing|Calibration error|Latency (p50, RAGTruth)|Cost per 1,000 (RAGTruth)';
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === header);

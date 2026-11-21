@@ -10,6 +10,13 @@ const board: Leaderboard = {
   benchmark: 'seeing-what-execution-needs', feed, url: feed, static: 'paper',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: Object.fromEntries(tasks.map(t => [t, t])),
+  stats: {
+    target: {name: 'Target success', unit: '%', better: 'higher'},
+    wrong: {name: 'Wrong selection rate', unit: '%', better: 'lower'},
+    selectivity: {name: 'View selectivity', unit: '%', better: 'higher'},
+    collision: {name: 'Collision rate', unit: '%', better: 'lower'},
+    postFail: {name: 'Post-failure rate', unit: '%', better: 'lower'},
+  },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[1]?.slice(0,6).join('|') === 'Methods|' + tasks.join('|'));

@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: 'https://xbench.org/<build>/index-*.js (results array with score, perTaskSd, time, cost, turns)',
   terms: 'Data shipped in the public xbench.org bundle; robots.txt allows all paths and the site states no terms.',
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, turns: { name: 'Turns', unit: 'count' } },
   // "Qwen 3.6" could be several Qwen 3.6 models, so it is left unmatched
   aliases: {},
   async fetch() {

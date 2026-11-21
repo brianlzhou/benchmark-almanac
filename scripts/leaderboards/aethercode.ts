@@ -17,6 +17,10 @@ const board: Leaderboard = {
    Extreme: { name: 'Extreme', group: 'Difficulty' },
  },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+   passAt2: { name: 'pass@2', unit: '%', better: 'higher' },
+   passAt4: { name: 'pass@4', unit: '%', better: 'higher' },
+ },
 aliases:{'DeepSeek-R1-0528':'deepseek-r1-may-2025','DeepSeek-V3-0324':'deepseek-v3-mar-2025'},
  async fetch() {
 

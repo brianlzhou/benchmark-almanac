@@ -28,6 +28,9 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'Apache-2.0 repository file on GitHub.',
   aliases: {},
+  stats: {
+    latency: { name: 'Seconds per case', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     return parse(await fetchText(FEED))
       // Keep older snapshots under explicit names instead of dropping them or matching newer releases.

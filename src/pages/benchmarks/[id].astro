@@ -41,6 +41,7 @@ import { monthYear, fullDate, humanDate, longMonthYear, proseDates, score as fmt
 import githubJson from '../../../data/github.json';
 import ClaimTable from '../../components/ClaimTable.astro';
 import ArenaCategories from '../../components/ArenaCategories.astro';
+import BoardMeasures from '../../components/BoardMeasures.astro';
 import { arenaCategories } from '../../lib/arena-categories.ts';
 import { boardParts } from '../../lib/board-parts.ts';
 import FacetList from '../../components/FacetList.astro';
@@ -916,6 +917,7 @@ const cite = {
 
     {catViews.length > 0 && <ArenaCategories views={catViews} overall={s.leaderboardBoard.length ? s.leaderboardBoard : s.board} unit={unit} arena={catOwner} />}
     {partViews.length > 0 && <ArenaCategories kind="parts" views={partViews} overall={s.leaderboardBoard.length ? s.leaderboardBoard : s.board} unit={unit} arena={boardIs} />}
+    {official && <BoardMeasures benchmark={b.id} unit={unit} better={b.better ?? 'higher'} boardName={boardIs} />}
 
     {
       boardChart && boardChartViews.map(({ key, runs: boardChartRuns }) => boardChartRuns.length >= 4 && (

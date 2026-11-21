@@ -14,6 +14,8 @@ const board: Leaderboard = {
   benchmark: 'narrativebench', url, feed,
   terms: 'The authors publish the score matrix and source-specific licenses. https://github.com/isle-dev/Narrative-Bench-NeurIPS-2026',
   aliases: { "Command A (03-2025)": "cohere-command-a", "Qwen3.5 0.8B IT": "qwen3-5-0-8b", "Qwen3.5 9B IT": "qwen3-5-9b" },
+  parts: { NI: { name: 'Narrative inclusion', unit: '%' }, NE: { name: 'Narrative exclusion', unit: '%' }, MNI: { name: 'Multilingual narrative inclusion', unit: '%' }, BP: { name: 'Background passage recall', unit: '%' }, DP: { name: 'Document passage recall', unit: '%' } },
+  stats: { recallGap: { name: 'Recall gap', unit: 'score', better: 'lower' }, queryGap: { name: 'Query gap', unit: 'score', better: 'lower' }, targetGap: { name: 'Target gap', unit: 'score', better: 'lower' }, bpOmission: { name: 'Background passage omission', unit: '%', better: 'lower' }, dpOmission: { name: 'Document passage omission', unit: '%', better: 'lower' }, violations: { name: 'Language violations', unit: 'count', better: 'lower' }, NICases: { name: 'Narrative inclusion cases', unit: 'count' }, NECases: { name: 'Narrative exclusion cases', unit: 'count' }, MNICases: { name: 'Multilingual narrative inclusion cases', unit: 'count' }, BPCases: { name: 'Background passage cases', unit: 'count' }, DPCases: { name: 'Document passage cases', unit: 'count' } },
   async fetch() {
     const { columns, rows } = await fetchJson<Source>(feed);
     if (columns.map(c => c.label).join() !== 'NI F1,NE F1,MNI recall,BP recall,DP recall,Abs. recall gap,Query gap,Target gap,BP omit.,DP omit.,LVol')

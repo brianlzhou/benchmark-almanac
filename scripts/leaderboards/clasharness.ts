@@ -33,6 +33,7 @@ const board: Leaderboard = {
   "feed": "https://raw.githubusercontent.com/google-research/CLASHarness/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { meanCheckScore: { name: 'Mean check score', unit: 'score', better: 'higher' }, reportedCostUsd: { name: 'Reported cost', unit: 'usd', better: 'lower' }, reportedTokens: { name: 'Reported tokens', unit: 'tokens' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = tables(await fetchText(FEED));
     const rows = new Map<string,LeaderboardRow>();

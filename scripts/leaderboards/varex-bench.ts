@@ -9,6 +9,7 @@ const board:Leaderboard={benchmark:'varex-bench', parts: {
   nested: { name: 'Nested', group: 'Category' },
   table: { name: 'Table', group: 'Category' },
 },url:URL,feed:URL,
+ stats:{anls:{name:'Average normalized Levenshtein similarity',unit:'score',better:'higher'},perfect:{name:'Perfect match rate',unit:'%',better:'higher'}},
  terms:'Public IBM Research project leaderboard; GitHub Pages robots.txt has no restriction on this path.',
  async fetch(){const html=await fetchText(URL);const start=html.indexOf('const models = [');if(start<0)throw new Error('Leaderboard data missing');
  const data=jsLiteral<{model:string;size:string;em:number;anls:number;flat:number;nested:number;table:number;perfect:number}[]>(html,html.indexOf('[',start));

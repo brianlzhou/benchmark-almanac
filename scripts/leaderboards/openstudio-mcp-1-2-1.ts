@@ -8,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/NatLabRockies/openstudio-mcp/dev
 
 const board: Leaderboard = {
   benchmark: "openstudio-mcp-1-2-1",
+  stats: { routing: { name: 'Routing accuracy', unit: '%', better: 'higher' }, gap: { name: 'Score gap', unit: '%', better: 'lower' }, medianSubstitutedSeconds: { name: 'Median substituted seconds', unit: 'seconds', better: 'lower' } },
   url: "https://github.com/NatLabRockies/openstudio-mcp/blob/develop/docs/testing/llm-test-benchmark.md#current-baseline--outcome-graded-matrix-at-a-600-s-completion-budget-2026-08",
   feed: FEED,
   terms: "The repository license permits redistribution with notices and naming conditions. It does not specify separate terms for the scores. https://github.com/NatLabRockies/openstudio-mcp/blob/develop/LICENSE.txt GitHub requests a one-second crawl delay.",

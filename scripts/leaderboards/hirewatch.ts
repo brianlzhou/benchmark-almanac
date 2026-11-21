@@ -8,6 +8,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2611.24970';
 const board: Leaderboard = {
   benchmark:'hirewatch', static:'paper',url:feed,feed,terms:PAPER_TERMS + ' https://arxiv.org/licenses/',
+  stats:{delta:{name:'Selection rate change',unit:'%',better:'lower'},filteredTrials:{name:'Filtered trials',unit:'count'}},
   aliases:{'Haiku 3.5':'claude-3-5-haiku','Haiku 4.5':'claude-haiku-4-5','Sonnet 4.6':'claude-sonnet-4-6',
     'Opus 4.7':'claude-opus-4-7','Llama 3.3 70B':'llama-3-3-70b-instruct','Llama 4 Mav':'llama-4-maverick',
     'Qwen3 235B':'qwen3-235b-a22b','DeepSeek V3 (snapshot unspecified)':'deepseek-v3-mar-2025',

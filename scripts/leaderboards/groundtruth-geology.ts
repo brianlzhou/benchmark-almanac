@@ -19,6 +19,13 @@ const board: Leaderboard = {
   feed,
   terms: "The leaderboard metadata specifies MIT. The submissions dataset does not state a separate license. https://www.eigenform.ai/benchmark/ Eigenform allows crawling.",
   costPer: 'run',
+  stats: {
+    total: { name: 'Total rubric points', unit: 'score', better: 'higher' },
+    toolCalls: { name: 'Tool calls', unit: 'count' },
+    medianLatency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    generationCost: { name: 'Generation cost', unit: 'usd', better: 'lower' },
+    judgingCost: { name: 'Judging cost', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const source = (await fetchText(feed)).match(/<script[^>]*id="data"[^>]*>([\s\S]*?)<\/script>/)?.[1];
     if (!source) throw new Error('Missing full results');

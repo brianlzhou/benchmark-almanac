@@ -8,6 +8,11 @@ const feed = 'https://arxiv.org/html/2602.22971';
 export default {
   benchmark: 'spm-bench', url: feed, feed, static: 'paper',
   terms: 'The paper and its license are linked at https://arxiv.org/abs/2602.22971',
+  stats: {
+    EM: { name: 'Exact match', unit: 'score', better: 'higher' },
+    SPC: { name: 'Standard partial credit', unit: 'score', better: 'higher' },
+    delta: { name: 'Standard partial credit to strict imperfection F1 gap', unit: 'score', note: 'Absolute difference between Standard Partial Credit and Strict Imperfection Penalty F1.' },
+  },
   aliases: { 'gpt-5.2-1211-global': 'gpt-5-2', 'gpt-5.1-1113-global': 'gpt-5-1',
     'gemini-2.5-flash-image-preview': 'gemini-2-5-flash-image-preview-nano-banana' },
   async fetch() {

@@ -12,6 +12,16 @@ const board: Leaderboard = {
   url: PAGE,
   feed: FEED,
   terms: 'The project repository is Apache 2.0 licensed. The dashboard has no robots.txt, and the results are credited to SLAI-AITP.',
+  stats: {
+    ebgs: { name: 'Geometric mean speedup', unit: 'speedup', better: 'higher' },
+    taskPassRate: { name: 'Task pass rate', unit: '%', better: 'higher' },
+    gateRate: { name: 'Correctness gate', unit: '%', better: 'higher' },
+    candidatePassRate: { name: 'Candidate pass rate', unit: '%', better: 'higher' },
+    speedupMean: { name: 'Mean speedup', unit: 'speedup', better: 'higher' },
+    tokensTotalK: { name: 'Cumulative tokens', unit: 'thousands' },
+    roundsMedian: { name: 'LLM rounds', unit: 'count', better: 'lower', note: 'Median number of LLM rounds.' },
+    wallTimeMedianS: { name: 'Wall time', unit: 'seconds', better: 'lower', note: 'Median wall-clock time.' },
+  },
   aliases: {
     'gpt-5.6-terra': 'gpt-5-6-terra',
     'glm-5.3': 'glm-5-3',

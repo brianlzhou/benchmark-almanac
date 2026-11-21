@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.llm-soccerarena.com/laliga",
   feed: FEED,
   terms: "The repository uses the MIT license. I found no separate license for reusing published scores. https://github.com/jonas-srd/world_cup_LLM_rank/blob/main/LICENSE The site's robots.txt publishes content signals.",
+  stats:{exact:{name:'Exact score forecasts',unit:'count',better:'higher'},pending:{name:'Pending forecasts',unit:'count'}},
   async fetch() {
     const standings = jsonAfter<Standing[]>(nextFlight(await fetchText(FEED)), '"competition":"la-liga","locale":"en","leaderboard":');
     if (standings.length < 7) throw new Error('Missing La Liga models');

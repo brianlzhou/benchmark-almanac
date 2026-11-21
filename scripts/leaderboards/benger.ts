@@ -9,6 +9,7 @@ const parts = { benchathon: 'Benchathon', zjs: 'ZJS', doctrinal: 'Doctrinal Prin
 const board: Leaderboard = {
   benchmark: 'benger', url: feed, feed, parts,
   terms: 'The BenGER dataset uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
+  stats:{benchathonCount:{name:'Benchathon cases',unit:'count'},benchathonPassRate:{name:'Benchathon pass rate',unit:'%',better:'higher'},zjsCount:{name:'ZJS cases',unit:'count'},zjsPassRate:{name:'ZJS pass rate',unit:'%',better:'higher'},doctrinalCount:{name:'Doctrinal Principles cases',unit:'count'},doctrinalPassRate:{name:'Doctrinal Principles pass rate',unit:'%',better:'higher'},doctrinalDecisionAccuracy:{name:'Doctrinal decision accuracy',unit:'%',better:'higher'}},
   aliases: { 'Qwen3-235B-A22B-Thinking-2507': 'qwen3-235b-a22b-thinking-jul-2025' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

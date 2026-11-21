@@ -17,6 +17,14 @@ const board: Leaderboard = {
   benchmark: 'swe-pair', url, feed,
   terms: 'Evaligo Labs links the public results download directly from the leaderboard.',
   parts: { hard: 'Hard', public: 'Public', private: 'Private' },
+  stats: {
+    cost_per_solved_task: { name: 'Cost per solved task', unit: 'usd', better: 'lower' },
+    steps: { name: 'Steps', unit: 'count', better: 'lower' },
+    average_total_tokens: { name: 'Average total tokens', unit: 'tokens' },
+    tasks: { name: 'Tasks', unit: 'count' },
+    attempts_per_task: { name: 'Attempts per task', unit: 'count', better: 'lower' },
+    pass_at_k: { name: 'Pass@k', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{ entries: Record<string, Entry> }>(feed);
     const entries = Object.values(data.entries);

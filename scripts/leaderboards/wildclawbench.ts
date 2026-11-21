@@ -12,6 +12,10 @@ const board: Leaderboard = {
  url: "https://github.com/InternLM/WildClawBench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   minutes: { name: 'Total time per task', unit: 'minutes', better: 'lower' },
+   minutesPerTask: { name: 'Average minutes per task', unit: 'minutes', better: 'lower' },
+ },
 
  aliases: {'Muse Glimmer 30B':'muse-glimmer'},
  async fetch(): Promise<LeaderboardRow[]> {

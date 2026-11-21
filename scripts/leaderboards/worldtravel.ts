@@ -7,6 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2602.08367";
 const board: Leaderboard = {
+  stats: { violation: { name: 'Constraint violation', unit: '%', better: 'lower' }, optimality: { name: 'Feasible optimality', unit: '%', better: 'higher' } },
   benchmark: "worldtravel", static: 'paper',
   url: "https://arxiv.org/html/2602.08367",
   feed: FEED,

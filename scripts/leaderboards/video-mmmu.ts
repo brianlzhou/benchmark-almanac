@@ -21,6 +21,9 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} + ${README} (Overall, union of official tables)`,
   terms: 'Static GitHub Pages site that states no license or terms; the VideoMMMU repository states no standard license.',
+  stats: {
+    knowledgeGain: { name: 'Knowledge gain', unit: '%', better: 'higher', note: 'Normalized improvement after video learning over the remaining pre-video error.' },
+  },
   aliases: {
     'GPT-5-thinking': 'gpt-5',
     'OpenAI O3': 'o3',

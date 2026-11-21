@@ -14,6 +14,7 @@ const board: Leaderboard = {
   host: 'Vals AI',
   aliases: { ...VALS_ALIASES, "GPT 4o (2024-08-06)": "gpt-4o-aug-2024", "GPT 4o (2024-11-20)": "gpt-4o-nov-2024", "Qwen 2.5 Instruct Turbo (72B)": "qwen2-5-72b", "together/mistralai/Mixtral-8x22B-Instruct-v0.1": "mixtral-8x22b", 'Llama 3.3 Nemotron Super (Thinking)': 'llama-3-3-nemotron-super-49b-v1', 'Llama 3.3 Nemotron Super (Nonthinking)': 'llama-3-3-nemotron-super-49b-v1' },
   parts,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const html = await fetchText(this.url);
     const table = tables(html)[0];

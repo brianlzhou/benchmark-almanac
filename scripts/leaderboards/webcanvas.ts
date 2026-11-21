@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://github.com/iMeanAI/WebCanvas",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
+  stats: { completion: {name: 'Task completion', unit: '%', better: 'higher'}, usdEfficiencyScore: {name: 'USD efficiency score', unit: 'score', better: 'higher'}, efficiencyScore: {name: 'Efficiency score', unit: 'score', better: 'higher'} },
   aliases: {"gpt-3.5-turbo-0125": "gpt-3-5-turbo-jan-2024", "GPT-4o-2024-05-13": "gpt-4o-may-2024"},
   
   async fetch() {

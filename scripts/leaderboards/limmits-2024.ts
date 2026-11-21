@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://sites.google.com/view/limmits24/results",
   feed: FEED,
   terms: "Nine entries appear in the Track 1 naturalness table. Tracks 2 and 3 each have seven. The site identifies no score reuse license. https://sites.google.com/view/limmits24/results The Google Sites page publicly embeds the score drawings.",
+  stats: { similarity: { name: 'Speaker similarity', unit: 'rating', better: 'higher' } },
   async fetch() {
     const page = await fetchText(FEED);
     const links = [...page.matchAll(/<iframe[^>]*src="(https:\/\/docs\.google\.com\/drawings\/d\/[\w-]+)\/preview/g)].map(m => m[1] + '/export/pdf');

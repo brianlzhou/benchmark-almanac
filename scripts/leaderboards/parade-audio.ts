@@ -13,6 +13,10 @@ const board: Leaderboard = {
   feed: HELM_BUCKET + '/audio/benchmark_output/runs/<newest>/groups/parade.json',
   terms: 'Stanford publishes HELM under the terms at https://github.com/stanford-crfm/helm/blob/main/LICENSE.',
   aliases: corebench.aliases,
+  stats: {
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+  },
   async fetch() {
     const prefix = await helmNewest('audio', 'runs');
     const tables = await fetchJson<Table[]>(HELM_BUCKET + '/' + prefix + 'groups/parade.json');

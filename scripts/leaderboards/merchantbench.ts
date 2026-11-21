@@ -6,6 +6,7 @@ import { fetchText } from '../lib/util.ts';
 const URL='https://air.1688.com/kapp/next1688/merchantbench/';
 const board:Leaderboard={benchmark:'merchantbench',url:URL,feed:URL+' (current page bundle)',
  terms:'Public MerchantBench research leaderboard. Benchmark Almanac credits Alibaba and links the source.',
+ stats:{finalAssets:{name:'Final assets',unit:'thousands',note:'Final net assets in thousands of RMB.'},gmv:{name:'Gross merchandise value',unit:'thousands'},profitMargin:{name:'Profit margin',unit:'%',better:'higher'},orders:{name:'Orders',unit:'count'},fines:{name:'Fines',unit:'count',better:'lower'},rating:{name:'Customer rating',unit:'rating',better:'higher'},anomalyRate:{name:'Anomaly rate',unit:'%',better:'lower'},activeListings:{name:'Active listings',unit:'count'},swr:{name:'Success win rate',unit:'%',better:'higher'},toolCalls:{name:'Tool calls',unit:'count',better:'lower'}},
  async fetch():Promise<LeaderboardRow[]>{const html=await fetchText(URL);
   const scripts=[...new Set([...html.matchAll(/<script[^>]+src="([^"]+\.js)"/g)].map(m=>m[1]))];
   for(const url of scripts){await new Promise(r=>setTimeout(r,1100));const js=await fetchText(url);

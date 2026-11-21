@@ -1,0 +1,401 @@
+---
+// Every number a benchmark's board publishes for each entry, not only the headline score: the parts, the other
+// measures (a lie rate, an agent preference, a broken-promise rate), cost and tokens. One row per entry, its best run
+// on the board's headline score, so every measure in a row comes from the same run. Three views over the same rows:
+// rank entries by any one measure, compare them all in a sortable table, or plot any two against each other.
+// Measures come with a name, unit and direction from the importer (`parts`, `stats`, `chart` axes, `measures`). A
+// measure the importer stored without one shows a name made from its key and no direction.
+import { LEADERBOARDS, leaderboardScores, systemScores, unlistedScores, modelById, entryLabel, benchById, labById } from '../lib/data.ts';
+import Dropdown from './Dropdown.astro';
+import { labColor, agentTint } from '../lib/palette.ts';
+import type { Score } from '../lib/types.ts';
+
+interface Props {
+  benchmark: string;
+  /** The headline score's unit and direction, from the benchmark record. */
+  unit: string;
+  better: 'higher' | 'lower';
+  /** How the page names the board: "the benchmark's own leaderboard", "Vals AI's leaderboard". */
+  boardName: string;
+}
+const { benchmark, unit, better, boardName } = Astro.props;
+const board = LEADERBOARDS[benchmark];
+
+interface Measure {
+  key: string;
+  name: string;
+  unit: string;
+  better?: 'higher' | 'lower';
+  group: 'Headline' | 'Parts' | 'Other measures' | 'Not yet labeled';
+  note?: string;
+}
+// intervals and spreads describe another number, so they are never a measure of their own
+const SKIP = /^(low|high|lo|hi|lower|upper|ci\d*|ciLow|ciHigh|stderr|std|sd|se|var|variance|rankLow|rankHigh)$|^(low|high|lo|hi|lower|upper|ci\d*|stderr|std|sd|se|var|variance)[:_\s-]|(^|[_\s:-])(lo|hi|low|high|lower|upper|ci\d*|se|sd|std|stderr|var|variance)$|[a-zA-Z0-9](Lo|Hi|Low|High|Lower|Upper|Ci\d*|Se|Sd|Std|Stderr|Var|Variance|LowerBound|UpperBound)$/;
+const human = (k: string) => {
+  const s = k.replace(/[_-]+/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([a-zA-Z])(\d)/g, '$1 $2').trim().toLowerCase();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
+// each entry's best run on the headline score
+const all: Score[] = [...leaderboardScores, ...systemScores, ...unlistedScores].filter((s) => s.benchmark === benchmark);
+const best = new Map<string, Score>();
+for (const s of all) {
+  const k = entryLabel(s);
+  const had = best.get(k);
+  if (!had || (better === 'lower' ? s.value < had.value : s.value > had.value)) best.set(k, s);
+}
+const runs = [...best.values()];
+
+// every key some run carries, with how many entries have it
+const seen = new Map<string, number>();
+for (const s of runs) {
+  if (Number.isFinite(s.cost ?? NaN) && (s.cost ?? 0) > 0) seen.set('cost', (seen.get('cost') ?? 0) + 1);
+  if (Number.isFinite(s.tokens ?? NaN) && (s.tokens ?? 0) > 0) seen.set('tokens', (seen.get('tokens') ?? 0) + 1);
+  for (const [k, v] of Object.entries(s.metrics ?? {})) if (Number.isFinite(v) && !SKIP.test(k)) seen.set(k, (seen.get(k) ?? 0) + 1);
+}
+
+const parts = board?.parts ?? {};
+const stats = (board as { stats?: Record<string, { name: string; unit?: string; better?: 'higher' | 'lower'; note?: string }> } | undefined)?.stats ?? {};
+const axes = [board?.chart?.x, board?.chart?.y].filter(Boolean) as { key: string; label: string; unit?: string; better?: 'higher' | 'lower' }[];
+const benchMeasures = benchById.get(benchmark)?.measures ?? [];
+// the headline keeps the board's own name for it when the board's chart gives one ("Mean SoS share")
+const headName = axes.find((a) => a.key === 'score')?.label ?? (/^(rating|elo)$/i.test(unit) ? 'Rating' : 'Headline score');
+const measures: Measure[] = [{ key: 'score', name: headName, unit, better, group: 'Headline' }];
+for (const [k, n] of seen) {
+  if (n < 3) continue;
+  const p = parts[k];
+  const st = stats[k];
+  const ax = axes.find((a) => a.key === k);
+  const bm = board?.measures?.[k] ? benchMeasures.find((m) => m.id === board.measures![k]) : undefined;
+  if (k === 'cost') measures.push({ key: k, name: 'Cost per task', unit: 'usd', better: 'lower', group: 'Other measures' });
+  else if (k === 'tokens') measures.push({ key: k, name: 'Output tokens per task', unit: 'tokens', better: 'lower', group: 'Other measures' });
+  else if (p) measures.push({ key: k, name: p.name, unit: p.unit ?? unit, better: p.better ?? better, group: 'Parts', note: p.note });
+  else if (st) measures.push({ key: k, name: st.name, unit: st.unit ?? '', better: st.better, group: 'Other measures', note: st.note });
+  else if (bm) measures.push({ key: k, name: bm.name, unit: bm.unit ?? unit, better: bm.better ?? better, group: 'Other measures', note: bm.note });
+  else if (ax) measures.push({ key: k, name: ax.label, unit: ax.unit ?? '', better: ax.better, group: 'Other measures' });
+  else measures.push({ key: k, name: human(k), unit: '', group: 'Not yet labeled' });
+}
+// an unlabeled key whose every value is 0 or 1 is a yes-or-no flag ("insufficient samples"), not a measure
+const flag = (k: string) => runs.every((s) => { const v = s.metrics?.[k]; return v === undefined || v === 0 || v === 1; });
+for (let i = measures.length - 1; i >= 0; i--) if (measures[i].group === 'Not yet labeled' && flag(measures[i].key)) measures.splice(i, 1);
+const ORDER = ['Headline', 'Parts', 'Other measures', 'Not yet labeled'];
+measures.sort((a, b) => ORDER.indexOf(a.group) - ORDER.indexOf(b.group));
+
+const rows = runs.map((s) => {
+  const m = s.model ? modelById.get(s.model) : undefined;
+  const tint = !!s.system && !!m && (s.info?.models?.length ?? 0) < 2;
+  const color = !m ? 'var(--lab-other)' : s.system ? (tint ? agentTint(m.lab) : 'var(--lab-other)') : labColor(m.lab);
+  const v: Record<string, number> = {};
+  for (const ms of measures) {
+    const x = ms.key === 'score' ? s.value : ms.key === 'cost' ? s.cost : ms.key === 'tokens' ? s.tokens : s.metrics?.[ms.key];
+    if (x !== undefined && x !== null && Number.isFinite(x)) v[ms.key] = x;
+  }
+  return { n: entryLabel(s), s: s.setting ?? '', lab: m && !s.system ? m.lab : '', c: color, listed: !!m && !s.system, v };
+});
+const labs = [...new Set(rows.flatMap((r) => (r.lab ? [r.lab] : [])))].map((id) => ({ id, name: labById.get(id)?.name ?? id }));
+// the dropdowns list measures under their group's title
+const options = ORDER.flatMap((g) => {
+  const ms = measures.filter((m) => m.group === g);
+  return ms.length ? [{ value: `#${g}`, label: g, heading: true }, ...ms.map((m) => ({ value: m.key, label: m.name }))] : [];
+});
+const second = measures.find((m) => m.group !== 'Headline' && m.group !== 'Parts') ?? measures[1];
+const search = measures.length > 10;
+const show = measures.length >= 3 && rows.length >= 3;
+const json = JSON.stringify({ measures, rows }).replace(/</g, '\\u003c');
+const nOther = measures.filter((m) => m.group === 'Other measures' || m.group === 'Not yet labeled').length;
+const nParts = measures.filter((m) => m.group === 'Parts').length;
+const unlabeled = measures.filter((m) => m.group === 'Not yet labeled').length;
+const what = [
+  'the headline score',
+  nParts ? `${nParts} ${nParts === 1 ? 'part' : 'parts'} of the test` : '',
+  nOther ? `${nOther} other ${nOther === 1 ? 'measure' : 'measures'}` : '',
+].filter(Boolean);
+const listed = what.length > 2 ? `${what.slice(0, -1).join(', ')} and ${what.at(-1)}` : what.join(' and ');
+const intro =
+  `${boardName.charAt(0).toUpperCase()}${boardName.slice(1)} publishes ${measures.length} numbers for each entry: ${listed}. ` +
+  'Rank entries by any one, compare them all in the table, or plot any two. Each row is the entry’s best run on the headline score.' +
+  (unlabeled
+    ? ` ${unlabeled} ${unlabeled === 1 ? 'measure has' : 'measures have'} no label from the importer yet, so ${unlabeled === 1 ? 'it shows' : 'they show'} the board’s own key and no direction.`
+    : '');
+---
+
+{
+  show && (
+    <section class="views msr" data-msr>
+      <div class="sh">
+        <h2>Everything the board measures</h2>
+        <p>{intro}</p>
+      </div>
+      <div class="ctl-row msr-ctl">
+        <div class="seg" role="group" aria-label="View">
+          <button type="button" data-msr-view="rank" aria-pressed="true">Ranking</button>
+          <button type="button" data-msr-view="table" aria-pressed="false">Table</button>
+          <button type="button" data-msr-view="plot" aria-pressed="false">Plot</button>
+        </div>
+        <div class="msr-pick" data-msr-for="rank">
+          <span>Measure</span>
+          <Dropdown filterKey="msr-rank" label="Measure" viewOnly search={search} value="score" options={options} />
+        </div>
+        <div class="msr-pick" data-msr-for="plot" hidden>
+          <span>X</span>
+          <Dropdown filterKey="msr-x" label="X axis" viewOnly search={search} value={second?.key ?? 'score'} options={options} />
+        </div>
+        <div class="msr-pick" data-msr-for="plot" hidden>
+          <span>Y</span>
+          <Dropdown filterKey="msr-y" label="Y axis" viewOnly search={search} value="score" options={options} />
+        </div>
+        <button type="button" class="msr-tog" data-msr-for="plot" data-msr-logx aria-pressed="false" hidden>Log X</button>
+        <button type="button" class="msr-tog" data-msr-for="plot" data-msr-logy aria-pressed="false" hidden>Log Y</button>
+      </div>
+      <p class="msr-note" data-msr-note></p>
+      <div class="msr-pane" data-msr-pane="rank"><ol class="msr-bars" data-msr-bars></ol><button type="button" class="msr-more" data-msr-more hidden></button></div>
+      <div class="msr-pane" data-msr-pane="table" hidden><div class="msr-scroll"><table class="msr-table" data-msr-table></table></div></div>
+      <div class="msr-pane" data-msr-pane="plot" hidden>
+        <div class="msr-plot" data-msr-plot><div class="msr-tip" data-msr-tip hidden></div></div>
+        {labs.length > 0 && (
+          <ul class="msr-legend">
+            {labs.map((l) => (
+              <li><i style={`background:${labColor(l.id)}`} />{l.name}</li>
+            ))}
+            <li><i style="background:var(--lab-other)" />not in our model list</li>
+          </ul>
+        )}
+      </div>
+      <script type="application/json" data-msr-data set:html={json} />
+    </section>
+  )
+}
+
+<script>
+  type M = { key: string; name: string; unit: string; better?: 'higher' | 'lower'; group: string; note?: string };
+  type R = { n: string; s: string; lab: string; c: string; listed: boolean; v: Record<string, number> };
+  const fmt = (x: number, unit: string) => {
+    const a = Math.abs(x);
+    // three significant digits at most, with no trailing zeros, so a count of 9 reads 9 and not 9.00
+    const t = a >= 1000 ? Math.round(x).toLocaleString('en-US') : a === 0 ? '0' : String(+x.toPrecision(a >= 100 ? 4 : 3));
+    return unit === '%' ? `${t}%` : unit === 'usd' || unit === '$' ? `$${t}` : t;
+  };
+  // decimals for a measure: none when every value is whole, else enough for its typical size, so a column lines up
+  const places = new Map<string, number>();
+  const placesOf = (m: M, rows: R[]) => {
+    if (places.has(m.key)) return places.get(m.key)!;
+    const v = rows.map((r) => r.v[m.key]).filter((x) => x !== undefined).map(Math.abs).sort((a, b) => a - b);
+    const mid = v[Math.floor(v.length / 2)] ?? 0;
+    const p = v.every((x) => Number.isInteger(x)) ? 0 : mid >= 100 ? 0 : mid >= 10 ? 1 : mid >= 1 ? 2 : 3;
+    places.set(m.key, p);
+    return p;
+  };
+  const fmtCol = (x: number, m: M, rows: R[]) => {
+    const p = placesOf(m, rows);
+    const t = x.toLocaleString('en-US', { minimumFractionDigits: p, maximumFractionDigits: p });
+    return m.unit === '%' ? `${t}%` : m.unit === 'usd' || m.unit === '$' ? `$${t}` : t;
+  };
+  // how each unit reads after a measure's name. A count or a plain score needs none, since the name says what it is.
+  const UNIT_WORDS: Record<string, string> = {
+    '%': '%', usd: 'US dollars', $: 'US dollars', s: 'seconds', seconds: 'seconds', ms: 'milliseconds', min: 'minutes', minutes: 'minutes',
+    h: 'hours', hours: 'hours', tokens: 'tokens', 'tokens/s': 'tokens per second', 'usd-per-mtok': 'US dollars per million tokens', cny: 'yuan',
+    thousands: 'thousands', millions: 'millions', billions: 'billions', gb: 'GB', count: '', score: '',
+  };
+  // no unit when the name already says it ("Rating", not "Rating (rating)")
+  const unitLabel = (m: M) => {
+    const w = m.unit in UNIT_WORDS ? UNIT_WORDS[m.unit] : m.unit;
+    return w && !m.name.toLowerCase().includes(w.toLowerCase()) ? ` (${w})` : '';
+  };
+  for (const root of document.querySelectorAll<HTMLElement>('[data-msr]')) {
+    const { measures, rows } = JSON.parse(root.querySelector('[data-msr-data]')!.textContent!) as { measures: M[]; rows: R[] };
+    const byKey = new Map(measures.map((m) => [m.key, m]));
+    const q = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const rankSel = q<HTMLSelectElement>('[data-msr-rank]');
+    const xSel = q<HTMLSelectElement>('[data-msr-x]');
+    const ySel = q<HTMLSelectElement>('[data-msr-y]');
+    const note = q<HTMLElement>('[data-msr-note]');
+    let view = 'rank';
+    let showAll = false;
+
+    // ranking: entries with a value, best first when the direction is known, else largest first
+    const drawRank = () => {
+      const m = byKey.get(rankSel.value)!;
+      const have = rows.filter((r) => m.key in r.v);
+      const dir = m.better === 'lower' ? 1 : -1;
+      have.sort((a, b) => dir * (a.v[m.key] - b.v[m.key]));
+      const vals = have.map((r) => r.v[m.key]);
+      const lo = Math.min(0, ...vals);
+      const hi = Math.max(...vals);
+      const span = hi - lo || 1;
+      const top = showAll ? have : have.slice(0, 15);
+      q<HTMLOListElement>('[data-msr-bars]').innerHTML = top
+        .map((r, i) => {
+          const w = Math.max(1.5, ((r.v[m.key] - lo) / span) * 100);
+          return `<li><span class="msr-rk">${i + 1}</span><span class="msr-nm${r.listed ? '' : ' un'}" title="${r.n}${r.s ? ` (${r.s})` : ''}"><i style="background:${r.c}"></i>${r.n}${r.s ? `<em>${r.s}</em>` : ''}</span><span class="msr-bar"><b style="width:${w}%;background:${r.c}"></b></span><span class="msr-v">${fmtCol(r.v[m.key], m, rows)}</span></li>`;
+        })
+        .join('');
+      const more = q<HTMLButtonElement>('[data-msr-more]');
+      more.hidden = have.length <= 15;
+      more.textContent = showAll ? 'Show the top 15' : `Show all ${have.length}`;
+      note.textContent = `${m.name}${unitLabel(m)}: ${m.better ? (m.better === 'lower' ? 'lower is better.' : 'higher is better.') : 'direction not declared, so the largest value is first.'} ${have.length} of ${rows.length} entries have it.${m.note ? ` ${m.note}` : ''}`;
+    };
+
+    // table: every measure a column, sorted by any of them
+    let sortKey = 'score';
+    let sortDir = measures[0].better === 'lower' ? 1 : -1;
+    const drawTable = () => {
+      const sorted = [...rows].sort((a, b) => {
+        const x = a.v[sortKey], y = b.v[sortKey];
+        if (x === undefined) return 1;
+        if (y === undefined) return -1;
+        return sortDir * (x - y);
+      });
+      const head = `<thead><tr><th class="msr-first">Entry</th>${measures.map((m) => `<th><button type="button" data-sort="${m.key}" title="${m.better ? (m.better === 'lower' ? 'Lower is better' : 'Higher is better') : 'Direction not declared'}">${m.name}${unitLabel(m)}${sortKey === m.key ? (sortDir < 0 ? ' ▾' : ' ▴') : ''}</button></th>`).join('')}</tr></thead>`;
+      const body = sorted
+        .map((r) => `<tr><th class="msr-first${r.listed ? '' : ' un'}"><span class="msr-en"><i style="background:${r.c}"></i>${r.n}${r.s ? `<em>${r.s}</em>` : ''}</span></th>${measures.map((m) => `<td>${m.key in r.v ? fmtCol(r.v[m.key], m, rows) : '<span class="msr-na">–</span>'}</td>`).join('')}</tr>`)
+        .join('');
+      q<HTMLTableElement>('[data-msr-table]').innerHTML = head + `<tbody>${body}</tbody>`;
+      note.textContent = `${rows.length} entries and ${measures.length} measures. Select a column name to sort by it.`;
+    };
+    root.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-sort]');
+      if (!b) return;
+      const k = b.dataset.sort!;
+      if (k === sortKey) sortDir = -sortDir;
+      else {
+        sortKey = k;
+        sortDir = byKey.get(k)!.better === 'lower' ? 1 : -1;
+      }
+      drawTable();
+    });
+
+    // plot: any two measures, one point per entry that has both
+    const plot = q<HTMLElement>('[data-msr-plot]');
+    const tip = q<HTMLElement>('[data-msr-tip]');
+    const nice = (lo: number, hi: number, n = 5) => {
+      const step0 = (hi - lo) / n || 1;
+      const p = 10 ** Math.floor(Math.log10(step0));
+      const step = [1, 2, 2.5, 5, 10].map((k) => k * p).find((s) => s >= step0) ?? step0;
+      const out: number[] = [];
+      for (let v = Math.ceil(lo / step) * step; v <= hi + step * 1e-9; v += step) out.push(+v.toPrecision(12));
+      return out;
+    };
+    const drawPlot = () => {
+      const mx = byKey.get(xSel.value)!, my = byKey.get(ySel.value)!;
+      const logX = q('[data-msr-logx]').getAttribute('aria-pressed') === 'true', logY = q('[data-msr-logy]').getAttribute('aria-pressed') === 'true';
+      const pts = rows.filter((r) => mx.key in r.v && my.key in r.v && (!logX || r.v[mx.key] > 0) && (!logY || r.v[my.key] > 0));
+      // drawn at the box's real width, so text keeps its size
+      const W = Math.max(320, plot.clientWidth || 760), H = Math.round(Math.min(460, Math.max(300, W * 0.5))), L = 64, Rm = 24, T = 30, B = 46;
+      const tx = (v: number) => (logX ? Math.log10(v) : v), ty = (v: number) => (logY ? Math.log10(v) : v);
+      const xs = pts.map((r) => tx(r.v[mx.key])), ys = pts.map((r) => ty(r.v[my.key]));
+      let [x0, x1] = [Math.min(...xs), Math.max(...xs)], [y0, y1] = [Math.min(...ys), Math.max(...ys)];
+      const padX = (x1 - x0) * 0.06 || 1, padY = (y1 - y0) * 0.08 || 1;
+      x0 -= padX; x1 += padX; y0 -= padY; y1 += padY;
+      const sx = (v: number) => L + ((tx(v) - x0) / (x1 - x0)) * (W - L - Rm);
+      const sy = (v: number) => H - B - ((ty(v) - y0) / (y1 - y0)) * (H - T - B);
+      const ticks = (a: number, b: number, log: boolean) => (log ? nice(a, b).map((t) => 10 ** t) : nice(a, b));
+      const gx = ticks(x0, x1, logX).filter((t) => tx(t) >= x0 && tx(t) <= x1);
+      const gy = ticks(y0, y1, logY).filter((t) => ty(t) >= y0 && ty(t) <= y1);
+      // the best few on Y get a name, so the chart reads without hovering
+      const labelled = new Set([...pts].sort((a, b) => (my.better === 'lower' ? 1 : -1) * (a.v[my.key] - b.v[my.key])).slice(0, 5).map((r) => r.n + r.s));
+      const svg = pts.length < 2
+        ? `<p class="msr-empty">Fewer than two entries have both ${mx.name.toLowerCase()} and ${my.name.toLowerCase()}.</p>`
+        : `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${my.name} against ${mx.name}">
+          ${gy.map((t) => `<line x1="${L}" x2="${W - Rm}" y1="${sy(t)}" y2="${sy(t)}" class="g"/><line x1="${L - 5}" x2="${L}" y1="${sy(t)}" y2="${sy(t)}" class="axl"/><text x="${L - 9}" y="${sy(t) + 4}" class="tk" text-anchor="end">${fmt(t, my.unit)}</text>`).join('')}
+          ${gx.map((t) => `<line y1="${T}" y2="${H - B}" x1="${sx(t)}" x2="${sx(t)}" class="g"/><line y1="${H - B}" y2="${H - B + 5}" x1="${sx(t)}" x2="${sx(t)}" class="axl"/><text y="${H - B + 19}" x="${sx(t)}" class="tk" text-anchor="middle">${fmt(t, mx.unit)}</text>`).join('')}
+          <line x1="${L}" x2="${L}" y1="${T}" y2="${H - B}" class="axl"/>
+          <line x1="${L}" x2="${W - Rm}" y1="${H - B}" y2="${H - B}" class="axl"/>
+          <text x="${(L + W - Rm) / 2}" y="${H - 8}" class="ax" text-anchor="middle">${mx.name}${unitLabel(mx)}${mx.better ? (mx.better === 'lower' ? ', lower is better' : ', higher is better') : ''}</text>
+          <text x="${L - 8}" y="14" class="ax" text-anchor="start">${my.name}${unitLabel(my)}${my.better ? (my.better === 'lower' ? ', lower is better' : ', higher is better') : ''}</text>
+          ${pts.map((r, i) => `<circle cx="${sx(r.v[mx.key])}" cy="${sy(r.v[my.key])}" r="5.5" fill="${r.c}" class="pt" data-i="${i}"/>`).join('')}
+          ${pts.filter((r) => labelled.has(r.n + r.s)).map((r) => { const x = sx(r.v[mx.key]); const right = x > W * 0.72; return `<text x="${right ? x - 9 : x + 9}" y="${sy(r.v[my.key]) + 4}" class="lb" text-anchor="${right ? 'end' : 'start'}">${r.n}</text>`; }).join('')}
+        </svg>`;
+      plot.innerHTML = svg;
+      plot.querySelector('svg')?.setAttribute('width', String(W));
+      plot.appendChild(tip);
+      plot.querySelectorAll<SVGCircleElement>('.pt').forEach((c) => {
+        const r = pts[+c.dataset.i!];
+        const on = () => {
+          tip.hidden = false;
+          tip.innerHTML = `<strong>${r.n}</strong>${r.s ? `<em>${r.s}</em>` : ''}<span>${mx.name}: ${fmt(r.v[mx.key], mx.unit)}</span><span>${my.name}: ${fmt(r.v[my.key], my.unit)}</span>`;
+          const box = plot.getBoundingClientRect(), p = c.getBoundingClientRect();
+          tip.style.left = `${Math.min(p.left - box.left + 12, box.width - 220)}px`;
+          tip.style.top = `${p.top - box.top - 10}px`;
+        };
+        c.addEventListener('mouseenter', on);
+        c.addEventListener('focus', on);
+        c.addEventListener('mouseleave', () => (tip.hidden = true));
+      });
+      note.textContent = `${pts.length} of ${rows.length} entries have both measures. Hover a point for its values.`;
+    };
+
+    const draw = () => (view === 'rank' ? drawRank() : view === 'table' ? drawTable() : drawPlot());
+    root.querySelectorAll<HTMLButtonElement>('[data-msr-view]').forEach((b) =>
+      b.addEventListener('click', () => {
+        view = b.dataset.msrView!;
+        root.querySelectorAll<HTMLButtonElement>('[data-msr-view]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        root.querySelectorAll<HTMLElement>('[data-msr-pane]').forEach((p) => (p.hidden = p.dataset.msrPane !== view));
+        root.querySelectorAll<HTMLElement>('[data-msr-for]').forEach((p) => (p.hidden = p.dataset.msrFor !== view));
+        draw();
+      }),
+    );
+    rankSel.addEventListener('change', () => { showAll = false; drawRank(); });
+    q<HTMLButtonElement>('[data-msr-more]').addEventListener('click', () => { showAll = !showAll; drawRank(); });
+    for (const el of [xSel, ySel]) el.addEventListener('change', drawPlot);
+    for (const b of [q('[data-msr-logx]'), q('[data-msr-logy]')])
+      b.addEventListener('click', () => {
+        b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+        drawPlot();
+      });
+    window.addEventListener('resize', () => {
+      if (view === 'plot') drawPlot();
+    });
+    draw();
+  }
+</script>
+
+<style is:global>
+  .msr [hidden] { display: none !important; }
+  .msr-ctl { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 14px 0 6px; }
+  .msr-pick { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; color: var(--ink-3); }
+  /* a toggle in the dropdown's own look: the panel color, darker while on */
+  .msr-tog { font: 400 14px/1 var(--sans); color: var(--ink-2); background: var(--panel); border: 0; border-radius: 9px; padding: 11px 14px; cursor: pointer; transition: background-color 140ms ease; }
+  .msr-tog:hover { background: var(--line); }
+  .msr-tog[aria-pressed='true'] { background: var(--ink); color: var(--bg); }
+  /* the component's script tag sits between this section and the next, so the site's section + section gap misses it */
+  .msr + script + section { margin-top: 104px; }
+  @media (max-width: 720px) { .msr + script + section { margin-top: 72px; } }
+  .msr-note { font-size: 13px; color: var(--ink-3); margin: 6px 0 12px; min-height: 1.4em; max-width: 72ch; }
+  .msr-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .msr-bars li { display: grid; grid-template-columns: 28px minmax(140px, 260px) 1fr 84px; gap: 10px; align-items: center; font-size: 14px; }
+  .msr-rk { font-family: var(--mono); font-size: 12px; color: var(--ink-4); text-align: right; }
+  .msr-nm { display: flex; gap: 8px; align-items: center; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .msr-nm i, .msr-table .msr-first i, .msr-legend i { flex: none; width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .msr-nm em, .msr-first em, .msr-tip em { font-style: normal; color: var(--ink-3); font-size: 12px; margin-left: 6px; }
+  .msr-nm.un, .msr-first.un { color: var(--ink-3); }
+  .msr-bar { height: 10px; background: var(--panel); border-radius: 3px; overflow: hidden; }
+  .msr-bar b { display: block; height: 100%; border-radius: 0 4px 4px 0; }
+  .msr-v { font-family: var(--mono); font-size: 13px; text-align: right; }
+  .msr-more { margin-top: 10px; font-size: 13px; background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 10px; color: var(--ink-2); cursor: pointer; }
+  .msr-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+  .msr-table { border-collapse: collapse; font-size: 13px; width: max-content; min-width: 100%; }
+  .msr-table th, .msr-table td { padding: 6px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+  .msr-table td { font-family: var(--mono); font-size: 12.5px; }
+  .msr-table thead th { position: sticky; top: 0; background: var(--bg); font-weight: 500; vertical-align: bottom; }
+  .msr-table thead button { all: unset; cursor: pointer; color: var(--ink-2); max-width: 150px; white-space: normal; display: inline-block; text-align: right; }
+  .msr-table .msr-first { text-align: left; position: sticky; left: 0; background: var(--bg); font-weight: 400; }
+  .msr-en { display: inline-flex; gap: 8px; align-items: center; }
+  .msr-na { color: var(--ink-4); }
+  .msr-plot { position: relative; }
+  .msr-plot svg { max-width: 100%; height: auto; display: block; }
+  .msr-plot .g { stroke: var(--grid); stroke-width: 1; }
+  .msr-plot .axl { stroke: var(--ink-3); stroke-width: 1; }
+  .msr-plot .tk { font: 11px var(--mono); fill: var(--ink-3); }
+  .msr-plot .ax { font: 12px var(--sans); fill: var(--ink-2); }
+  .msr-plot .lb { font: 12px var(--sans); fill: var(--ink-2); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; }
+  .msr-plot .pt { stroke: var(--bg); stroke-width: 2px; cursor: pointer; }
+  .msr-plot .pt:hover { stroke: var(--ink); }
+  .msr-tip { position: absolute; z-index: 2; pointer-events: none; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px; font-size: 12.5px; display: grid; gap: 2px; box-shadow: 0 6px 18px rgb(0 0 0 / 0.08); min-width: 160px; transform: translateY(-100%); }
+  .msr-empty { color: var(--ink-3); font-size: 14px; padding: 40px 0; }
+  .msr-legend { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--ink-3); }
+  .msr-legend li { display: inline-flex; gap: 6px; align-items: center; }
+  @media (max-width: 640px) {
+    .msr-bars li { grid-template-columns: 22px minmax(90px, 1fr) 70px; }
+    .msr-bar { display: none; }
+  }
+</style>

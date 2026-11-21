@@ -10,6 +10,7 @@ const board: Leaderboard = {
   terms: 'The authors retain copyright under the CVF open-access terms at https://openaccess.thecvf.com/.',
   headline: 'The paper reports no overall score, so this is the plain mean of its eight mean average precision scores.',
   parts: Object.fromEntries(parts.map(name => [name, name])),
+  stats: Object.fromEntries(parts.map(name => [name + ' mP@10', { name: name + ' mean precision at 10', unit: '%', better: 'higher' }])),
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.split(/Method\s+ROxf\s+ROxf\+R1M\s+RPar\s+RPar\+R1M\s+ROxf\s+ROxf\+R1M\s+RPar\s+RPar\+R1M/)[1]?.split('Table 5. Performance evaluation')[0];

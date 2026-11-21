@@ -22,6 +22,14 @@ const board: Leaderboard = {
   benchmark: 'climatecheck-2026', url: 'https://aclanthology.org/2026.nslp-1.6/', feed,
   terms: 'ACL Anthology provides this paper under its publication terms. https://aclanthology.org/faq/copyright/',
   harnesses: 'system',
+  stats: {
+    recallAt2: { name: 'Recall@2', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    recallAt5: { name: 'Recall@5', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    bpref: { name: 'Binary preference', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    f1: { name: 'F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+  },
   parts: { retrieval: 'Abstract retrieval', verification: 'Claim verification', narrative: 'Disinformation narrative classification' },
   async fetch() {
     const text = await pdfText(feed);

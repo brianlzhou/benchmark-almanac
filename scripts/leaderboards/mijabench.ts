@@ -15,6 +15,10 @@ const board: Leaderboard = {
   aliases: { gpt_4o_mini_text: 'gpt-4o-mini', 'gemini_2.0_flash': 'gemini-2-0-flash-feb-2025',
     'Qwen3-1.7B-FP8': 'qwen3-1-7b', 'Qwen3-4B-FP8': 'qwen3-4b', 'Qwen3-8B-FP8': 'qwen3-8b', 'Qwen3-32B-FP8': 'qwen3-32b' },
   parts: { english: 'English', portuguese: 'Portuguese' },
+  stats: {
+    defended: { name: 'Defended attempts', unit: 'count' },
+    prompts: { name: 'Prompts evaluated', unit: 'count' },
+  },
   async fetch() {
     const files = (await fetchJson<{ type: string, path: string }[]>(feed)).filter(f => f.type === 'file' && f.path.endsWith('.parquet'));
     if (!files.length) throw Error('Missing MiJaBench verdict files');

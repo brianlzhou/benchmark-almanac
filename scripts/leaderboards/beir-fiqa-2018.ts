@@ -9,6 +9,12 @@ const board: Leaderboard = {
   url: "https://leaderboard.mteb.org/tasks/FiQA2018",
   feed,
   terms: "Both hosts allow this path in robots.txt. MTEB publishes results under CC0 1.0. https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
+  stats: {
+    embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+    maxTokens: { name: 'Maximum tokens', unit: 'tokens' },
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+    memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Model memory usage stored in megabytes.' },
+  },
   async fetch() {
     return taskScores(feed, 'FiQA2018', 'ndcg_at_10', 295);
   },

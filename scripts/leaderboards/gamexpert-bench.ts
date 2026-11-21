@@ -12,6 +12,11 @@ type Track = { columns: string[]; rows: (string|number)[][] };
 const board: Leaderboard = {
   benchmark: 'gamexpert-bench', url, feed, terms: 'The authors publish the scores on their project website. ' + url,
   parts: { gen: 'GameGen', fix: 'GameFix', opt: 'GameOpt' },
+  stats: {
+    cliff: { name: 'Cliff score', unit: 'score', better: 'lower' }, completeness: { name: 'Completeness score', unit: '%', better: 'higher' }, richness: { name: 'Richness score', unit: '%', better: 'higher' },
+    playerExperience: { name: 'Player experience score', unit: '%', better: 'higher' }, visual: { name: 'Visual score', unit: '%', better: 'higher' }, gameplay: { name: 'Gameplay score', unit: '%', better: 'higher' },
+    level: { name: 'Level score', unit: '%', better: 'higher' }, balance: { name: 'Balance score', unit: '%', better: 'higher' }, art: { name: 'Art score', unit: '%', better: 'higher' }, ui: { name: 'UI score', unit: '%', better: 'higher' }, audio: { name: 'Audio score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const start = source.indexOf('const leaderboards = {');

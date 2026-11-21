@@ -10,7 +10,7 @@ const board: Leaderboard = {
   benchmark: "llm-fantasy-football-arena-classic",
   url: "https://arena.wildcardlabs.tech/",
   feed: FEED,
-  terms: "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The robots file permits reference use and bars AI training.",
+  terms: "The methodology describes the custom harness and gives no explicit license for reusing results. https://arena.wildcardlabs.tech/methodology The robots file permits reference use and bars AI training.", stats:{leagueRank:{name:'League rank',unit:'count',better:'lower'},wins:{name:'Wins',unit:'count',better:'higher'},losses:{name:'Losses',unit:'count',better:'lower'},pointsFor:{name:'Points for',unit:'score',better:'higher'},pointsAgainst:{name:'Points against',unit:'score',better:'lower'}},
   async fetch() {
     const rows = [];
     for (const slug of ['classic-trades','classic-no-trades']) {

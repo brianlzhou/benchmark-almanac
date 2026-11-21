@@ -5,7 +5,11 @@ import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables,num } from '../lib/html.ts';
 const URL='https://snorkel.ai/leaderboard/continual-learning-bench/';
-const board:Leaderboard={benchmark:'continual-learning-bench',costPer:'run',url:URL,feed:URL,
+const continualStats: Record<string,{name:string;unit:string;better?:'higher'|'lower'}> = { gain:{name:'Aggregate gain',unit:'score',better:'higher'} };
+for (const [key,name] of [['blindSpectrumMonitoring','Blind spectrum monitoring'],['codebaseAdaptation','Codebase adaptation'],['cohortStudies','Cohort studies'],['databaseExploration','Database exploration'],['exploitablePoker','Exploitable poker'],['salesPrediction','Sales prediction']]) {
+  continualStats[key+'Gain']={name:name+' gain',unit:'score',better:'higher'}; continualStats[key+'Cost']={name:name+' cost',unit:'usd',better:'lower'}; continualStats[key+'Runs']={name:name+' runs',unit:'count'};
+}
+const board:Leaderboard={benchmark:'continual-learning-bench',costPer:'run',url:URL,feed:URL,stats:continualStats,
  terms:'Snorkel terms prohibit automated extraction and republication; Benchmark Almanac credits Snorkel AI and links the source.',
  chart:{title:'Aggregate reward vs. average evaluation cost',x:{key:'evaluationCost',label:'Average evaluation cost',unit:'$',better:'lower'},y:{key:'score',label:'Aggregate reward',better:'higher'}},
  async fetch(){

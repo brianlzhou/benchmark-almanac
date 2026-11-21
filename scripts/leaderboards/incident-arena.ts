@@ -7,6 +7,7 @@ interface Entry { name: string; effort: string; score: number; ci: number[]; n: 
 
 const board: Leaderboard = {
   benchmark: "incident-arena",
+  stats: { latency: { name: 'Latency per incident set', unit: 'seconds', better: 'lower', note: 'Elapsed time for the full incident run.' } },
   url: "https://incident-arena.com/",
   feed: FEED,
   terms: "The site offers a results download. I found no separate data license at https://incident-arena.com/ The robots URL returns 404.",

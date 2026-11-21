@@ -16,6 +16,10 @@ const board: Leaderboard = {
   url: 'https://github.com/vectara/hallucination-leaderboard',
   feed: `${FEED} (table between the LEADERBOARD markers)`,
   terms: 'README table in the vectara/hallucination-leaderboard repository, licensed Apache-2.0.',
+  stats: {
+    answerRate: { name: 'Answer rate', unit: '%', better: 'higher' },
+    summaryWords: { name: 'Average summary length', unit: 'count' },
+  },
   aliases: {
     'meta-llama/Llama-3.3-70B-Instruct-Turbo': 'llama-3-3-70b-instruct',
     'meta-llama/Llama-4-Scout-17B-16E-Instruct': 'llama-4-scout',

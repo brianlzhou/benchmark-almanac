@@ -17,6 +17,12 @@ const board: Leaderboard = {
   url: `${URL}?benchmark=individual-tax#individual-tax`,
   feed: `${URL} (results table, Accuracy)`,
   terms: 'Server-rendered public page; robots.txt allows all paths and the site publishes no terms.',
+  stats: {
+    latency: { name: 'Time per return', unit: 'seconds', better: 'lower' },
+    recall: { name: 'Recall', unit: '%', better: 'higher' },
+    precision: { name: 'Precision', unit: '%', better: 'higher' },
+    totalTokens: { name: 'Total tokens per return', unit: 'tokens' },
+  },
   aliases: {},
   chart: {
     title: 'Performance, cost & time',

@@ -12,6 +12,10 @@ const board: Leaderboard = {
   benchmark: 'astromlab-1', static: 'paper', url: feed, feed,
   terms: 'The authors publish the tables through arXiv under its distribution terms. https://arxiv.org/licenses/nonexclusive-distrib/1.0/',
   parts: Object.fromEntries([...topics, ...abilities].map(name => [name, { name, group: topics.includes(name) ? 'Subfield' : 'Tested ability' }])),
+  stats: {
+    costPer100kTokens: { name: 'Cost per 100,000 tokens', unit: 'usd', better: 'lower' },
+    costPer3bTokens: { name: 'Cost per 3 billion tokens', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const rows = new Map<string, LeaderboardRow>();

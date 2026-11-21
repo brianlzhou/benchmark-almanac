@@ -6,12 +6,17 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://raw.githubusercontent.com/rmsaqachallenge/rmsaqa-code/HEAD/README.md';
 const categories = ['SC', 'SL', 'TD', 'SR', 'TR', 'AP'];
 const parts: Record<string, BoardPart> = {};
+const stats = {
+  stage1: { name: 'Stage 1 accuracy', unit: '%', better: 'higher' as const },
+  rawStage2: { name: 'Raw Stage 2 accuracy', unit: '%', better: 'higher' as const },
+  groundedStage2: { name: 'Grounded Stage 2 accuracy', unit: '%', better: 'higher' as const },
+};
 for (const category of categories) {
   parts['raw' + category] = { name: category, group: 'Raw Stage 2' };
   parts['grounded' + category] = { name: category, group: 'Grounded Stage 2' };
 }
 export default {
-  benchmark: 'rms-aqa', url: 'https://rmsaqachallenge.github.io/', feed, parts,
+  benchmark: 'rms-aqa', url: 'https://rmsaqachallenge.github.io/', feed, parts, stats,
   terms: 'The challenge authors publish Table 1 in their public repository. https://github.com/rmsaqachallenge/rmsaqa-code#results',
   async fetch() {
     const table = paperTables(await fetchText(feed)).map(grid).find(t => t[0]?.[0] === 'System' && t[0]?.[10]?.startsWith('Grounded Stage-2'));

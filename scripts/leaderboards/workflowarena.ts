@@ -22,6 +22,7 @@ type ScoreRow = [string, string, ...number[]];
 
 const board: Leaderboard = {
   benchmark: 'workflowarena',
+  stats: { continuousScore: { name: 'Continuous score', unit: 'score', better: 'higher' }, workflowCalls: { name: 'Workflow calls', unit: 'count', better: 'lower' }, workersPerWorkflow: { name: 'Workers per workflow', unit: 'count', better: 'lower' } },
   url: PAGE,
   feed: FEED,
   terms: 'The project publishes source-specific licenses and attribution in NOTICE.md. robots.txt allows all paths. https://github.com/Einsia/WorkflowArena/blob/main/NOTICE.md',

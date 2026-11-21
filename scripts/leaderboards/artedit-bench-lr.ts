@@ -13,6 +13,7 @@ const board:Leaderboard={
   parts:Object.fromEntries(languages.flatMap(l=>columns.map(k=>[l+k,{name:l+': '+k,unit:'score' as const,
     better:k==='L1'||k==='L2'?'lower' as const:'higher' as const,
     note:k==='L1'?'Reported L1 multiplied by 100.':k==='L2'?'Reported L2 multiplied by 1,000.':undefined}]))),
+  stats:Object.fromEntries(columns.map(k=>[k,{name:k==='L1'?'L1 loss':k==='L2'?'L2 loss':k==='SC'?'Semantic consistency':k==='PQ'?'Perceptual quality':'Overall rating',unit:'score',better:k==='L1'||k==='L2'?'lower':'higher'}])),
   aliases:{'Nano-Banana':'gemini-2-5-flash-image-preview-nano-banana','FLUX-1-Kontext':'flux-1-kontext-dev'},
   async fetch(){
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

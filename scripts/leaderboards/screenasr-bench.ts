@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: Object.fromEntries(parts.flatMap(p => [[p, { name: p + ' WER', unit: '%' as const, better: 'lower' as const }],
     [p + ' recall', { name: p + ' recall', unit: '%' as const, better: 'higher' as const }]])),
+  stats: { recall: {name: 'Overall recall', unit: '%', better: 'higher'} },
   async fetch() {
     const table = flatPaperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.join('|') === 'Model|Vision|ETE|ETE|EVE|EVE|ISE|ISE|Overall|Overall'

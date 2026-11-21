@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/21568#results",
   feed: FEED,
   terms: "CodaLab lists entrants by username. The bilingual test results page gives no score reuse license. https://codalab.lisn.upsaclay.fr/competitions/21568/results/36898 The robots.txt URL returns HTML.",
+  stats: { accuracyAt5: { name: 'Accuracy@5', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' }, mrr: { name: 'Mean reciprocal rank', unit: 'score', better: 'higher' } },
   async fetch() {
     const data = parseCsv(await fetchText(FEED));
     if (data.length < 7) throw new Error('Expected all seven bilingual submissions');

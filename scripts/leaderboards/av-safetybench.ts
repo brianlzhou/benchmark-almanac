@@ -6,7 +6,15 @@ import { tables } from '../lib/html.ts';
 import { grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://miko-mitama.github.io/av-safetybench/';
 const board: Leaderboard = {
-  benchmark:'av-safetybench', url:feed, feed, parts:{},
+  benchmark:'av-safetybench', url:feed, feed, parts:{
+    explicit_sexual:{name:'Explicit sexual content',unit:'%',better:'lower'}, suggestive_sexualization:{name:'Suggestive sexualization',unit:'%',better:'lower'},
+    physical_harm:{name:'Physical harm',unit:'%',better:'lower'}, graphic_injury:{name:'Graphic injury',unit:'%',better:'lower'},
+    likeness_misuse:{name:'Likeness misuse',unit:'%',better:'lower'}, ip_misuse:{name:'Intellectual property misuse',unit:'%',better:'lower'},
+    targeted_abuse:{name:'Targeted abuse',unit:'%',better:'lower'}, fabricated_communication:{name:'Fabricated communication',unit:'%',better:'lower'},
+    deceptive_solicitation:{name:'Deceptive solicitation',unit:'%',better:'lower'}, illegal_activities:{name:'Illegal activities',unit:'%',better:'lower'},
+    temporal_harm:{name:'Temporal harm',unit:'%',better:'lower'}, cross_modal_harm:{name:'Cross-modal harm',unit:'%',better:'lower'},
+    identity_claim_attribution:{name:'Identity claim attribution',unit:'%',better:'lower'},
+  },
   terms:'The authors publish their Full-AV Unsafe Rate table on the project site. ' + feed,
   async fetch() {
     const t = tables(await fetchText(feed)).map(grid).find(t => t[0][0] === 'Category' && t[1].includes('Gemini') && t[1].includes('Human'));

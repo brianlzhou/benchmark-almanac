@@ -27,6 +27,7 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2411.00836",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: { worstCase: { name: 'Worst-case accuracy', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const ts=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text)));

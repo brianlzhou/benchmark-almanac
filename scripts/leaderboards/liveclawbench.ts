@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (leaderboard table)`,
   terms: 'Static GitHub Pages site with no robots.txt and no terms; the scores are cited to the LiveClawBench authors.',
+  stats:{best:{name:'Best score',unit:'%',better:'higher'}},
   aliases: {},
   fetch: () =>
     tableRows(URL, {

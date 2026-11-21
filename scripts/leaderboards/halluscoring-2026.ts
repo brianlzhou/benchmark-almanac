@@ -12,6 +12,7 @@ const systems: Record<string,string> = {
 };
 const board: Leaderboard = {
   benchmark:'halluscoring-2026', url:feed, feed, terms:'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
+  stats: { questionsDev: { name: 'Questions development AUC-ROC', unit: '%', better: 'higher' }, questionsDevMacroF1: { name: 'Questions development macro F1', unit: '%', better: 'higher' }, questionsMacroF1: { name: 'Questions test macro F1', unit: '%', better: 'higher' }, modelsDev: { name: 'Models development AUC-ROC', unit: '%', better: 'higher' }, modelsDevMacroF1: { name: 'Models development macro F1', unit: '%', better: 'higher' }, modelsMacroF1: { name: 'Models test macro F1', unit: '%', better: 'higher' } },
   parts: { questions:'Generalize Across Questions', models:'Generalize Across Models', islamicAssisted:'Islamic Knowledge: Assisted',
     islamicBlind:'Islamic Knowledge: Blind', generalAssisted:'General Culture: Assisted', generalBlind:'General Culture: Blind' },
   async fetch() {

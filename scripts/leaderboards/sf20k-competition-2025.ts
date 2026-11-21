@@ -10,6 +10,9 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/SLoMO-Workshop/SF20KCompetition",
   feed,
   terms: "The public endpoint accepts POST with {\"lb\":\"private\"} for final rankings. The count includes teams with positive final accuracy. The rules give no separate score reuse terms. https://slomo-workshop-sf20kcompetition.hf.space/rules The feed host returns no robots.txt.",
+  stats: {
+    judgeScore: { name: 'Judge score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const { response } = await fetchJson<{ response: string }>(feed, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lb: 'private' }),

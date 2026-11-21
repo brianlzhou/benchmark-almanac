@@ -12,6 +12,10 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'coin-game'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: {
+    tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' },
+    costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' },
+  },
   fetch: () => kaggleRows('kaggle', 'coin-game', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn', scale: 0.01 } }),
 };
 export default board;

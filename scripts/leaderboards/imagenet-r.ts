@@ -9,6 +9,14 @@ const feed = 'https://raw.githubusercontent.com/huggingface/pytorch-image-models
 const board: Leaderboard = {
   benchmark: 'imagenet-r', host: 'timm', url: 'https://github.com/huggingface/pytorch-image-models/tree/main/results', feed,
   terms: 'The repository uses Apache 2.0 at https://github.com/huggingface/pytorch-image-models/blob/main/LICENSE.',
+  stats: {
+    top5: {name:'Top-5 accuracy',unit:'%',better:'higher'},
+    top1Error: {name:'Top-1 error',unit:'%',better:'lower'},
+    top5Error: {name:'Top-5 error',unit:'%',better:'lower'},
+    top1Diff: {name:'Top-1 accuracy difference',unit:'score',note:'Difference between ImageNet-R and ImageNet-1K top-1 accuracy.'},
+    top5Diff: {name:'Top-5 accuracy difference',unit:'score',note:'Difference between ImageNet-R and ImageNet-1K top-5 accuracy.'},
+    rankDiff: {name:'Rank difference',unit:'score',note:'Difference between the model rank on ImageNet-R and ImageNet-1K.'},
+  },
   async fetch() {
     const entries = parseCsv(await fetchText(feed));
     const expected = ['model', 'img_size', 'top1', 'top1_err', 'top5', 'top5_err', 'param_count', 'crop_pct', 'interpolation', 'top1_diff', 'top5_diff', 'rank_diff'];

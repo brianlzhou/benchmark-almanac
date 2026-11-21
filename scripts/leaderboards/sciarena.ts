@@ -16,6 +16,10 @@ const board: Leaderboard = {
   url: "https://sciarena.allen.ai/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    battles: { name: 'Battles', unit: 'count' },
+    costPer100Calls: { name: 'Cost per 100 calls', unit: 'usd', better: 'lower' },
+  },
   aliases: {
     'Claude-4.1-Opus': 'claude-opus-4-1', 'Claude-4-Opus': 'claude-opus-4',
     'Claude-4-Sonnet': 'claude-sonnet-4',

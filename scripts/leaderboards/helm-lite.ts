@@ -6,6 +6,11 @@ import type { Leaderboard } from './types.ts';
 import { HELM_BUCKET, helmNewest, HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 
 const TABLE: HelmTable = { project: 'lite', group: 'core_scenarios', table: 'Accuracy', column: 'Mean win rate', scale: 100 };
+const SCENARIOS = ['NarrativeQA', 'NaturalQuestions (open-book)', 'NaturalQuestions (closed-book)', 'OpenbookQA', 'MMLU', 'MATH', 'GSM8K', 'LegalBench', 'MedQA', 'WMT 2014'];
+const stats = Object.fromEntries(SCENARIOS.flatMap((scenario) => [
+  [`${scenario} - # prompt tokens`, { name: scenario === 'WMT 2014' ? 'Workshop on Machine Translation 2014 prompt tokens' : `${scenario} prompt tokens`, unit: 'tokens' }],
+  [`${scenario} - # output tokens`, { name: scenario === 'WMT 2014' ? 'Workshop on Machine Translation 2014 output tokens' : `${scenario} output tokens`, unit: 'tokens' }],
+]));
 
 const board: Leaderboard = {
   benchmark: 'helm-lite',
@@ -13,6 +18,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  stats,
   async fetch() {
     const rows = await helmRows(TABLE);
     const newest = await helmNewest('lite');

@@ -22,6 +22,7 @@ const board: Leaderboard = {
   url: 'https://xbench.org/agi/agentif',
   feed: XBENCH_API + PATH,
   terms: XBENCH_TERMS,
+  stats: { latency: { name: 'Average latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const { data } = await xbenchApi<{ data: Entry[] }>(PATH);
     const rows: LeaderboardRow[] = [];

@@ -6,6 +6,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = 'https://arxiv.org/html/2002.06071';
 const board: Leaderboard = {
+  stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' }, devF1: { name: 'Development F1', unit: '%', better: 'higher' }, devExactMatch: { name: 'Development exact match', unit: '%', better: 'higher' } },
   benchmark: 'fquad', static: 'paper',
   url: 'https://arxiv.org/abs/2002.06071', feed: FEED,
   terms: 'The authors publish the paper under the arXiv terms of use. https://arxiv.org/abs/2002.06071',

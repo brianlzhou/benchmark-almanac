@@ -6,6 +6,12 @@ const FEED = "https://huggingface.co/datasets/microsoft/kitab/resolve/main/READM
 const board: Leaderboard = {
   benchmark: "kitab", url: "https://huggingface.co/datasets/microsoft/kitab", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    irrelevant: { name: 'Irrelevant answers', unit: '%', better: 'lower' },
+    satisfied: { name: 'Satisfied answers', unit: '%', better: 'higher' },
+    unsatisfied: { name: 'Unsatisfied answers', unit: '%', better: 'lower' },
+    completeness: { name: 'Completeness', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source).map(t => t.map(r => r.map(c => c.text)));

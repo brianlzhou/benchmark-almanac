@@ -14,6 +14,7 @@ const board: Leaderboard = {
   benchmark: 'evoarena', url: feed, feed,
   terms: 'The makers publish the results and say the repository license is pending. https://github.com/Aiden0526/EvoArena#license',
   headline: 'The headline is mean step accuracy across the three domains, as shown in the project overview.',
+  stats: { chainAccuracy: { name: 'Chain accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const main = tables(await fetchText(feed)).map(grid).find(t => t[0]?.join('|') === 'Benchmark|Agent|Model|Step Base|Step +EvoMem|Step Δ|Chain Base|Chain +EvoMem|Chain Δ');
     if (!main) throw new Error('Missing EvoArena results');

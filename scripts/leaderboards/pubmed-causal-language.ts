@@ -5,7 +5,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {pdfText} from '../lib/boards/pdf-text.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const feed='https://aclanthology.org/D19-1473.pdf';
-const board:Leaderboard={benchmark:'pubmed-causal-language',url:'https://aclanthology.org/D19-1473/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',async fetch(){
+const board:Leaderboard={benchmark:'pubmed-causal-language',url:'https://aclanthology.org/D19-1473/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',stats:{precision:{name:'Precision',unit:'%',better:'higher'},recall:{name:'Recall',unit:'%',better:'higher'},accuracy:{name:'Accuracy',unit:'%',better:'higher'}},async fetch(){
  const p=await pdfText(feed); const block=p.slice(p.indexOf('Precision Recall Accuracy F1'),p.indexOf('Table 4: Model performance'));
  if(!block.includes('BioBERT')) throw new Error('Table 4 missing');
  const rows:LeaderboardRow[]=[];

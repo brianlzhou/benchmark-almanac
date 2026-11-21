@@ -14,6 +14,13 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2410.09024",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  refusal: { name: 'Refusal rate', unit: '%', better: 'higher', note: 'Average refusals judged semantically on harmful behaviors.' },
+  conditionalHarm: { name: 'Non-refusal harm score', unit: 'score', better: 'lower', note: 'Average harm score on generations where no refusal is detected.' },
+  benign: { name: 'Benign behavior score', unit: 'score', better: 'higher', note: 'Score on benign behaviors without an attack.' },
+  comparisonAgentRefusal: { name: 'Agent-task refusal rate', unit: '%', better: 'higher', note: 'Refusal rate on agent tasks in the comparison table.' },
+  comparisonChatRefusal: { name: 'Chat-only refusal rate', unit: '%', better: 'higher', note: 'Refusal rate on chat-only tasks in the comparison table.' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const ts=flatPaperTables(await fetchText(FEED)).map(grid);const t=ts.find(t=>t[1]?.join('|')==='Model|Attack|Harm Score|Refusals|Non-refusal Harm Score|Non-refusal Score');

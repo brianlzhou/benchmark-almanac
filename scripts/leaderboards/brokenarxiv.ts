@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   aliases: MATHARENA_ALIASES,
   async fetch() {
     // The shared reader excludes estimated aggregates and keeps only observed overall results.

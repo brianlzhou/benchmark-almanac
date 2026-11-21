@@ -4,7 +4,7 @@ import {fetchText} from '../lib/util.ts';
 import {text} from '../lib/html.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://www.uibench.ai/';
-const board:Leaderboard={benchmark:'ui-bench',harnesses:'system',url:URL,feed:URL,
+const board:Leaderboard={benchmark:'ui-bench',harnesses:'system',url:URL,feed:URL,stats:{winRate:{name:'Win rate',unit:'%',better:'higher'}},
  terms:'Public maker results; robots.txt does not restrict this page. No additional reading restriction is stated.',
  async fetch(){const html=await fetchText(URL);const rows=[];
  for(const m of html.matchAll(/<div class="font-semibold mb-1">([^<]+)<\/div><div>Rating \(μ\):([\s\S]*?)<div class="absolute top-full/g)){

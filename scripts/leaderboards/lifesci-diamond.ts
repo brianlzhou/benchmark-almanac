@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: 'https://github.com/arcainc/lifesci-diamond',
   feed: FEED,
   terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+  stats:{graded:{name:'Graded tasks',unit:'count'},tasks:{name:'Tasks',unit:'count'},passes:{name:'Passes',unit:'count',better:'higher'},meanGraded:{name:'Mean on graded tasks',unit:'%',better:'higher'}},
   reference: ['API'],
   harnesses: 'system',
   aliases: { 'meta/muse-wonder-1.0': 'muse-wonder' },

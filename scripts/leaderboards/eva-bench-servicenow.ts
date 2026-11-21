@@ -27,12 +27,36 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 
 
 const FEED = "https://servicenow.github.io/eva/";
+const evaDomains = { airline: 'Airline', itsm: 'ITSM', medical_hr: 'Medical HR' };
+const evaMeasures = {
+  'EVA-A_mean': 'EVA-A mean', 'EVA-A_pass_at_k': 'EVA-A pass@k', 'EVA-A_pass_power_k': 'EVA-A pass power k',
+  'EVA-X_mean': 'EVA-X mean', 'EVA-X_pass': 'EVA-X pass@1', 'EVA-X_pass_at_k': 'EVA-X pass@k', 'EVA-X_pass_power_k': 'EVA-X pass power k',
+  task_completion: 'Task completion', agent_speech_fidelity: 'Agent speech fidelity', faithfulness: 'Faithfulness', turn_taking: 'Turn taking', conciseness: 'Conciseness', conversation_progression: 'Conversation progression', response_speed: 'Response speed',
+};
+const evaDomainStats = Object.fromEntries(Object.entries(evaMeasures).flatMap(([key, label]) => Object.entries(evaDomains).map(([domain, domainName]) => [`${key}_${domain}`, { name: `${label}, ${domainName}`, unit: key === 'response_speed' ? 'seconds' : 'score', better: key === 'response_speed' ? 'lower' : 'higher' }])));
 const board: Leaderboard = {
   "benchmark": "eva-bench-servicenow",
   "url": "https://servicenow.github.io/eva/",
   "feed": "https://servicenow.github.io/eva/",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
+  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+  stats: {
+    'EVA-A_mean': { name: 'EVA-A mean', unit: 'score', better: 'higher', note: 'Mean quality score from 0 to 1.' },
+    'EVA-A_pass': { name: 'EVA-A pass@1', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    'EVA-A_pass_at_k': { name: 'EVA-A pass@k', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    'EVA-A_pass_power_k': { name: 'EVA-A pass power k', unit: 'score', better: 'higher', note: 'Pass power score from 0 to 1.' },
+    'EVA-X_mean': { name: 'EVA-X mean', unit: 'score', better: 'higher', note: 'Mean quality score from 0 to 1.' },
+    'EVA-X_pass': { name: 'EVA-X pass@1', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    'EVA-X_pass_at_k': { name: 'EVA-X pass@k', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    'EVA-X_pass_power_k': { name: 'EVA-X pass power k', unit: 'score', better: 'higher', note: 'Pass power score from 0 to 1.' },
+    task_completion: { name: 'Task completion', unit: 'score', better: 'higher', note: 'Completion score from 0 to 1.' },
+    agent_speech_fidelity: { name: 'Agent speech fidelity', unit: 'score', better: 'higher', note: 'Fidelity score from 0 to 1.' },
+    faithfulness: { name: 'Faithfulness', unit: 'score', better: 'higher', note: 'Faithfulness score from 0 to 1.' },
+    turn_taking: { name: 'Turn taking', unit: 'score', better: 'higher', note: 'Turn-taking score from 0 to 1.' },
+    conciseness: { name: 'Conciseness', unit: 'score', better: 'higher', note: 'Conciseness score from 0 to 1.' },
+    conversation_progression: { name: 'Conversation progression', unit: 'score', better: 'higher', note: 'Progression score from 0 to 1.' },
+    response_speed: { name: 'Response speed', unit: 'seconds', better: 'lower' },
+    ...evaDomainStats,
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const page = await fetchText(FEED);
     const src = page.match(/src="(\.\/assets\/index-[^"]+\.js)"/)?.[1];

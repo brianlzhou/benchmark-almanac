@@ -3,6 +3,7 @@ import type { LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText, parseCsv } from '../util.ts';
 import { num } from '../html.ts';
 export const GENAI_BASE='https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena/resolve/main/arena_elo/results/latest/';
+export const GENAI_STATS = { fullVoteElo: { name: 'Full vote Elo', unit: 'elo', better: 'higher' as const } };
 export async function genaiRows(track:string):Promise<LeaderboardRow[]> {
   const rows:LeaderboardRow[]=[];
   for(const r of parseCsv(await fetchText(GENAI_BASE+track+'_leaderboard.csv'))){

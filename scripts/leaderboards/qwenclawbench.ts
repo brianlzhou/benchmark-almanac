@@ -11,6 +11,7 @@ const board: Leaderboard = {
   llm: { name: 'LLM judge', group: 'Dimension', note: 'Rubric score used directly or as a gated component of hybrid grading.' },
 }, url: FEED, feed: FEED,
   terms: 'Public project leaderboard on GitHub Pages, subject to the project repository license and GitHub terms.',
+  stats: { runsPerTask: { name: 'Runs per task', unit: 'count' } },
   async fetch() {
     const html = await fetchText(FEED);
     if (!html.includes('qwenclawbench-v1.1-100')) throw new Error('QwenClawBench version changed');

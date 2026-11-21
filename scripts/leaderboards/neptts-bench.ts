@@ -10,6 +10,7 @@ const feed = 'https://raw.githubusercontent.com/Ampixa/neptts-bench/HEAD/README.
 const board: Leaderboard = {
   benchmark: 'neptts-bench', static: 'paper', url: 'https://github.com/Ampixa/neptts-bench', feed,
   terms: 'MIT covers the software. Source-specific terms cover other materials: https://github.com/Ampixa/neptts-bench#license.',
+  stats: { ratings: { name: 'Ratings', unit: 'count' } },
   aliases: { 'gemini-2.5-flash-preview-tts': 'gemini-2-5-flash-tts' },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0]?.join('|') === 'System|Human MOS|95% CI|Ratings');

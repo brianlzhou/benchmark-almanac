@@ -20,6 +20,7 @@ const board: Leaderboard = {
   url: 'https://baxbench.com/',
   feed: `${DATA('{none,generic,specific}')} (sec_pass_1)`,
   terms: 'Static JSON on the BaxBench GitHub Pages site, which states no terms; the BaxBench repository and dataset are MIT.',
+  stats: { correct:{name:'Correct',unit:'%',better:'higher'} },
   aliases: {
     // "DeepSeek V3 03-24" is listed apart, so plain "DeepSeek V3" is the December 2024 model
     'DeepSeek V3': 'deepseek-v3',

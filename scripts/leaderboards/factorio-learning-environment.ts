@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (productionScore)`,
   terms: 'JSON file on the FLE GitHub Pages site that the leaderboard page loads (no robots.txt); the FLE repository is MIT-licensed.',
+  stats: { milestones: { name: 'Milestones', unit: 'count', better: 'higher' }, automation: { name: 'Automation milestones', unit: 'count', better: 'higher' }, labSuccess: { name: 'Lab-task success rate', unit: '%', better: 'higher' } },
   aliases: {
     'Claude 3.5-Sonnet': 'claude-3-5-sonnet-october-2024',
     'Gemini-2-Flash': 'gemini-2-0-flash-feb-2025',

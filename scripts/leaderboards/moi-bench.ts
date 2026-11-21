@@ -7,6 +7,7 @@ import { checked, grid, flatPaperTables } from '../lib/boards/arxiv-span-tables.
 const feed = 'https://arxiv.org/html/2610.37599';
 const board: Leaderboard = {
   benchmark: 'moi-bench', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
+  stats: { coverage: {name:'Coverage',unit:'score',better:'higher',note:'Fraction of benchmark prompts covered, from 0 to 1.'} },
   async fetch() {
     const paper = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/g, '');
     const tables = flatPaperTables(paper).map(grid);

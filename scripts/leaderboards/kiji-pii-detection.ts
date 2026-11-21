@@ -9,6 +9,19 @@ const board: Leaderboard = {
   url: "https://www.piiarena.com/datasets/kiji-en",
   feed: FEED,
   terms: "PII Arena licenses its original publication material under MIT. Dataiku licenses the source under Apache 2.0. https://github.com/Quakeer444/pii-arena/blob/main/README.md PII Arena robots.txt allows the feed.",
+  stats: {
+    gold: { name: 'Gold annotations', unit: 'count' },
+    hit: { name: 'Detected annotations', unit: 'count', better: 'higher' },
+    hidden: { name: 'Fully hidden annotations', unit: 'count', better: 'higher' },
+    rawHidden: { name: 'Raw fully hidden annotations', unit: 'count', better: 'higher' },
+    tp: { name: 'True-positive characters', unit: 'count', better: 'higher' },
+    fp: { name: 'False-positive characters', unit: 'count', better: 'lower' },
+    fn: { name: 'False-negative characters', unit: 'count', better: 'lower' },
+    positiveRows: { name: 'Rows with annotations', unit: 'count' },
+    residualRows: { name: 'Rows with residual personally identifiable information', unit: 'count', better: 'lower' },
+    detected: { name: 'Detection rate', unit: '%', better: 'higher' },
+    charF1: { name: 'Character F1', unit: 'score', better: 'higher', note: 'Character F1 is stored from 0 to 1.' },
+  },
   async fetch() {
     const detectors = parseCsv(await fetchText(FEED)).filter(r => r.dataset === 'kiji-en' && r.train === 'false' && r.system.startsWith('model:'));
     if (detectors.length < 41) throw new Error('Missing Kiji detectors');

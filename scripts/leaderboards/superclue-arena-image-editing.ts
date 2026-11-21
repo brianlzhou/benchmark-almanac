@@ -17,6 +17,7 @@ interface ArenaEntry {
 export function arenaBoard(benchmark: string, url: string, feed: string, minimum: number, aliases: Record<string, string> = {}): Leaderboard {
   return {
     benchmark, url, feed, terms: SC_TERMS, aliases,
+    stats: { battles: { name: 'Battles', unit: 'count', note: 'Pairwise comparisons used to calculate the model rating.' } },
     async fetch() {
       arenaPage ??= scChunk('ArenaPage-');
       const prefix = new URL(feed).pathname.split('/').pop()!.split('-')[0];

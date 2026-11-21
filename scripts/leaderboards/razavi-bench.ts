@@ -17,6 +17,7 @@ const board: Leaderboard = {
   feed,
   terms: "The authors allow citation and publication of separately produced aggregate results. Redistributing their published scores requires prior written permission. The host returned no readable robots.txt rules.",
   parts: { part1: 'Part 1', part2: 'Part 2' },
+  stats: { totalTokens: { name: 'Total tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' } },
   costPer: 'run',
   async fetch() {
     const { models } = await fetchJson<{ models: Model[] }>(feed);

@@ -9,6 +9,24 @@ const feed = 'https://raw.githubusercontent.com/lx709/VRSBench/main/README.md';
 const board: Leaderboard = {
   benchmark: 'vrsbench', url: 'https://github.com/lx709/VRSBench#visual-question-answering-performance', feed,
   terms: 'The authors release VRSBench text annotations under https://creativecommons.org/licenses/by/4.0/',
+  stats: {
+    'BLEU-1': { name: 'BLEU-1', unit: '%', better: 'higher' },
+    'BLEU-2': { name: 'BLEU-2', unit: '%', better: 'higher' },
+    'BLEU-3': { name: 'BLEU-3', unit: '%', better: 'higher' },
+    'BLEU-4': { name: 'BLEU-4', unit: '%', better: 'higher' },
+    METEOR: { name: 'METEOR', unit: '%', better: 'higher' },
+    ROUGE_L: { name: 'ROUGE-L', unit: '%', better: 'higher' },
+    CIDEr: { name: 'CIDEr', unit: '%', better: 'higher' },
+    CLAIR: { name: 'CLAIR', unit: 'score', better: 'higher', note: 'GPT-based caption evaluation score from 0 to 1.' },
+    Avg_L: { name: 'Average caption word length', unit: 'count' },
+    'Acc@0.5 (Unique)': { name: 'Grounding accuracy at IoU 0.5 unique', unit: '%', better: 'higher' },
+    'Acc@0.7 (Unique)': { name: 'Grounding accuracy at IoU 0.7 unique', unit: '%', better: 'higher' },
+    'Acc@0.5 (Non Unique)': { name: 'Grounding accuracy at IoU 0.5 non-unique', unit: '%', better: 'higher' },
+    'Acc@0.7 (Non Unique)': { name: 'Grounding accuracy at IoU 0.7 non-unique', unit: '%', better: 'higher' },
+    'Acc@0.5 (All)': { name: 'Grounding accuracy at IoU 0.5 all', unit: '%', better: 'higher' },
+    'Acc@0.7 (All)': { name: 'Grounding accuracy at IoU 0.7 all', unit: '%', better: 'higher' },
+    All: { name: 'Visual question answering accuracy', unit: '%', better: 'higher' },
+  },
   headline: 'The authors give no combined score. The headline is accuracy over all visual questions in Table 3.',
   async fetch() {
     const md = (await fetchText(feed)).replace(/^Mini-Gemini\s*\|/gm,'| Mini-Gemini |');

@@ -23,6 +23,7 @@ const board: Leaderboard = {
     'deepseek-coder-33B-instruct': 'deepseek-coder-33b',
     'CodeLlama-34B-Instruct-hf': 'codellama-34b-instruct',
   },
+  stats: { Debug: { name: 'Debug score', unit: 'score', better: 'higher' }, Translation: { name: 'Translation score', unit: 'score', better: 'higher' }, Switch: { name: 'Switch score', unit: 'score', better: 'higher' }, 'Polishment Score': { name: 'Polishment score', unit: 'score', better: 'higher' } },
   fetch: () => fetchCodeEditorRows(),
 };
 export async function fetchCodeEditorRows(index = 0): Promise<LeaderboardRow[]> {

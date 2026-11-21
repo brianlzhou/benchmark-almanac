@@ -41,6 +41,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (chart data in the server-rendered Astro island props, tasks.overall)`,
   terms: VALS_TERMS,
+  stats: { latency: { name: 'Mean latency per document', unit: 'seconds', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(PAGE);
     const raw = [...html.matchAll(/props="(\{&quot;benchmarkView&quot;[^"]*)"/g)][0]?.[1];

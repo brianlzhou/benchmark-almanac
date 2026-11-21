@@ -11,6 +11,12 @@ const board: Leaderboard = {
   url: "https://github.com/AgenticDataBench/AgenticDataBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    steps: { name: 'Steps', unit: 'count', better: 'lower' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens', better: 'lower' },
+    successfulSteps: { name: 'Success steps', unit: '%', better: 'higher' },
+    finishRate: { name: 'Finish rate', unit: '%', better: 'higher' },
+  },
   chart: { title: 'Score versus cost', x: {key: 'costPerTask', label: 'Cost per task', unit: '$', better: 'lower'}, y: {key: 'score', label: 'Score', unit: '%', better: 'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts=await paperTables(FEED), total=ts[3]?.find(r=>r[0]?.text==='Total');

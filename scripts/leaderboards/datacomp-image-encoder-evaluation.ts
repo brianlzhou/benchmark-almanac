@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'datacomp-image-encoder-evaluation', url, feed: url,
   terms: 'DataComp publishes the entries under the competition rules at https://www.datacomp.ai/dcclip/.',
   parts: { imageNet: 'ImageNet accuracy' },
+  stats:{datasetSize:{name:'Dataset size',unit:'count',note:'Number of training images in the submitted dataset.'}},
   async fetch() {
     const page = await fetchText(url);
     if (!page.includes("fetch('data/' + track + '_' + scale + '.tsv')") ||

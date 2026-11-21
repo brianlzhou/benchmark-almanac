@@ -7,6 +7,7 @@ const feed = "https://huggingface.co/datasets/GSMA/leaderboard/resolve/main/lead
 
 const board: Leaderboard = {
   benchmark: 'teletables', url, feed,
+  stats: { standardError: { name: 'Standard error', unit: '%', note: 'Standard error of the TeleTables accuracy.' } },
   terms: "GSMA lists the leaderboard dataset under Apache 2.0. https://huggingface.co/datasets/GSMA/leaderboard" ,
   host: 'GSMA Open Telco Leaderboard',
   aliases: {

@@ -13,6 +13,7 @@ interface Run {
 const board: Leaderboard = {
   benchmark: 'ramen-bench', url: 'https://bitbin.de/ramen-bench/', feed,
   terms: 'Public ratings API and per-run manifests linked by the Ramen Bench site.',
+  stats: { votes: { name: 'Votes', unit: 'count' }, seconds: { name: 'Wall time', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const registry = await fetchJson<{ runs: string[] }>(base + 'registry.json');
     const ratings = await fetchJson<{ runId: string; average: number; count: number }[]>(feed);

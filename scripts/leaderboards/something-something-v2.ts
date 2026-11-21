@@ -8,6 +8,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://www.sota2.com/research/sota/video-classification-on-something-something-v2';
 const board: Leaderboard = {
   benchmark: 'something-something-v2', host: 'SOTA2 Research', url: feed, feed,
+  stats: { top5: {name: 'Top-5 accuracy', unit: '%', better: 'higher'} },
   terms: 'SOTA2 Research publishes this public comparison and links each result to its paper. https://www.sota2.com/research/sota/video-classification-on-something-something-v2',
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Method|Links|Top-1 Acc|Top-5 Acc|Average Accuracy');

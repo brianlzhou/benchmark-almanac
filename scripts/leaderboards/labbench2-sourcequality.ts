@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://advances.edisonscientific.com/benchmarks/labbench2/sourcequality/",
   feed: FEED,
   terms: "The page provides a public score table. Check its source for license details. https://advances.edisonscientific.com/benchmarks/labbench2/sourcequality/ The robots URL returns HTML.",
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.[4]?.text.startsWith('Average score'));
     const columns = ['#', 'Model', 'Variant', 'Mode', 'Average score', 'Average output tokens', 'Avg. dur', 'Date'];

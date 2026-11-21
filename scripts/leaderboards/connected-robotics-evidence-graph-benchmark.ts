@@ -11,6 +11,11 @@ const percent = (value: string) => Number((100 * numberCell(value)).toFixed(4));
 const board: Leaderboard = {
   benchmark: 'connected-robotics-evidence-graph-benchmark', feed, url: feed,
   terms: 'The CREG team publishes the leaderboard under the MIT license. https://creg-bench.github.io/results/',
+  stats:{
+    strictStateAcc:{name:'Strict state accuracy',unit:'%',better:'higher'},
+    grounding:{name:'Grounding',unit:'%',better:'higher'},
+    strictValid:{name:'Strict validity',unit:'%',better:'higher'},
+  },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') ===
       '#|System|Condition|Trajectory score ▼|95% CI|Strict state acc.|Grounding|Strict valid');

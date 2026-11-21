@@ -11,6 +11,10 @@ const board: Leaderboard = {
   url: "https://github.com/AGI-Eval-Official/FORTE-MM/blob/main/docs/leaderboard.md",
   feed,
   terms: "The report is public. Results licensing remains unverified at https://github.com/AGI-Eval-Official/FORTE-MM. The raw file host returns 404 for robots.txt.",
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher', note: 'Percentage of tasks with at least one successful run among three runs.' },
+    pass3: { name: 'Pass^3', unit: '%', better: 'higher', note: 'Percentage of tasks with three successful runs out of three.' },
+  },
   aliases: { 'claude-5-opus': 'claude-opus-5', 'claude-4.8-opus': 'claude-opus-4-8', 'deepseek-4.1-flash': 'deepseek-v4-1-flash' },
   async fetch() {
     const expected = ["Rank", "Model", "Avg@3", "Pass@3", "Pass^3"];

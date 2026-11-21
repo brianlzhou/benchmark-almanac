@@ -8,6 +8,14 @@ import { paperHtml, numberCell } from '../lib/boards/arxiv-throttled.ts';
 const feed = 'https://arxiv.org/html/2610.19138';
 const board: Leaderboard = {
   benchmark: 'ma-bench', url: feed, feed, static: 'paper',
+  stats: {
+    briefs: { name: 'Briefs', unit: 'count' },
+    geminiJudge: { name: 'Gemini judge score', unit: '%', better: 'higher' },
+    correct: { name: 'Correct rate', unit: '%', better: 'higher' },
+    passed: { name: 'Passed rate', unit: '%', better: 'higher' },
+    wrongMoves: { name: 'Wrong moves', unit: 'count', better: 'lower' },
+    criticallyDetrimental: { name: 'Critically detrimental moves', unit: 'count', better: 'lower' },
+  },
   terms: 'Scale AI publishes the benchmark results under CC BY 4.0 at https://huggingface.co/datasets/ScaleAI/MA-Bench.',
   async fetch() {
     const header = ['MODEL', 'BRIEFS', 'SCORE (95% CI)', 'GEMINI JUDGE', 'CORRECT %', 'PASSED %', 'WRONG MOVES (CD)'];

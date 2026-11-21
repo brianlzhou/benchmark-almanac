@@ -30,6 +30,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2605.28065v1',
   feed: FEED,
   terms: 'The authors publish this arXiv paper under its access terms. https://info.arxiv.org/help/license/index.html',
+  stats: { passRuns: { name: 'Passing runs', unit: 'count' }, anyPass: { name: 'Runs with any pass', unit: 'count' }, majorityPass: { name: 'Runs with majority pass', unit: 'count' }, allPass: { name: 'Runs with all passes', unit: 'count' }, costUsd: { name: 'Run cost', unit: 'usd', better: 'lower' }, turns: { name: 'Average turns', unit: 'count' } },
   async fetch() {
     const paper = await pdfText(FEED);
     if (!paper.includes('Table 2: Deterministic final-answer performance') || !paper.includes('Gemini 3.5 Flash / Pi')) throw new Error('SpatialBench-Long original Table 2 missing');

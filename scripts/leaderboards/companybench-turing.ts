@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://bench.turing.com/companybench/leaderboard/",
   feed: FEED,
   terms: "The publisher gives no reuse license on the benchmark page. https://bench.turing.com/companybench/leaderboard/ The robots.txt URL serves site HTML.",
+  stats: { toolCalls: { name: 'Tool calls', unit: 'count', better: 'lower' } },
   async fetch() {
     const html = await fetchText(FEED);
     const parts: Record<string, string> = {};

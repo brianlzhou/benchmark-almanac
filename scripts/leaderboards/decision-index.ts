@@ -38,6 +38,9 @@ const board: Leaderboard = {
     'index:parts:same_skills': { name: 'Same skills', note: 'Weighted contribution from private same-skill tests.' },
     'index:parts:new_domains': { name: 'New domains', note: 'Weighted contribution from private new-domain tests.' },
   },
+  stats: {
+    ece: { name: 'Expected calibration error', unit: 'score', better: 'lower', note: 'Calibration error, stored in percentage points.' },
+  },
   url: 'https://huggingface.co/spaces/multimodalart/jev-decision-index',
   feed: `${FEED} (scores.balanced_skill)`,
   terms: 'JSON in the makers’ static Hugging Face space; the board’s dataset mirror (multimodalart/decision-index-leaderboard) is CC BY 4.0 and the evaluation kit MIT.',

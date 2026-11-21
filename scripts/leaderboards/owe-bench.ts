@@ -16,6 +16,10 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (__NEXT_DATA__.props.pageProps.leaderboard.rows)`,
   terms: 'Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.',
+  stats: {
+    best8: { name: 'Best of eight attempts', unit: '%', better: 'higher' },
+    elo: { name: 'Elo rating', unit: 'elo', better: 'higher' },
+  },
   // the board uses short names ("Opus 5.5", "Beam", "Inkling")
   aliases: {
     'Opus 5.5': 'claude-opus-5-5',

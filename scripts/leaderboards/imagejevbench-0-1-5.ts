@@ -14,6 +14,12 @@ const board: Leaderboard = {
   aliases: { 'GPT-6 Luna (low reasoning effort)': 'gpt-6-luna' },
   parts: { core: 'Core', everyday_photo: 'Everyday photo', publicAccuracy: {name: 'Public accuracy', unit: '%'},
     sealedAccuracy: {name: 'Sealed accuracy', unit: '%'} },
+  stats: {
+    matchedGap: { name: 'Matched gap', unit: 'score', better: 'lower' },
+    medianLatency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    p95Latency: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
+    intelligence: { name: 'Intelligence', unit: 'score', better: 'higher' }, calibration: { name: 'Calibration', unit: 'score', better: 'higher' }, speed: { name: 'Speed', unit: 'score', better: 'higher' }, cost: { name: 'Cost axis', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const d = await fetchJson<{ revision: string, n_systems: number, ranking: Result[] }>(feed);
     if (d.revision !== 'v0.1.5' || d.ranking.length !== d.n_systems || d.n_systems < 50) throw new Error('Invalid v0.1.5 ranking');

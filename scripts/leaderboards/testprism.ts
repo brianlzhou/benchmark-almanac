@@ -11,6 +11,14 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2610.12289",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: {
+    RAR: { name: 'Reference acceptance rate', unit: '%', better: 'higher' },
+    VAR: { name: 'Verifier acceptance rate', unit: '%', better: 'higher' },
+    IRR: { name: 'Instruction recovery rate', unit: '%', better: 'higher' },
+    H: { name: 'Helpfulness', unit: '%', better: 'higher' },
+    coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+    EC: { name: 'Error consistency', unit: '%', better: 'higher' },
+  },
   
   async fetch() {
     const all=tables(await fetchText(FEED));const results=all.filter(t=>t[0]?.some(c=>c.text==='Joint') && t[1]?.some(c=>c.text==='JSF'));

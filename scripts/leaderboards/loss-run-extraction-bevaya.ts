@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://www.bevaya.ai/benchmarks",
   feed: "https://www.bevaya.ai/benchmarks",
   terms: "Bevaya grants internal business use. Other uses require written authorization. https://www.bevaya.ai/legal/terms-and-conditions robots.txt allows the benchmark.",
+  stats: { latency:{name:'Latency',unit:'seconds',better:'lower'}, pct_perfect:{name:'Perfect extraction rate',unit:'%',better:'higher'}, micro_acc:{name:'Micro accuracy',unit:'%',better:'higher'}, pct_perfect_claims:{name:'Perfect claims rate',unit:'%',better:'higher'}, micro_acc_claims:{name:'Claims micro accuracy',unit:'%',better:'higher'}, pct_perfect_policy:{name:'Perfect policy rate',unit:'%',better:'higher'}, micro_acc_policy:{name:'Policy micro accuracy',unit:'%',better:'higher'}, cost_mean:{name:'Mean cost',unit:'usd',better:'lower'}, cost_mean_claims:{name:'Mean claims cost',unit:'usd',better:'lower'}, cost_mean_policy:{name:'Mean policy cost',unit:'usd',better:'lower'}, lat_mean:{name:'Mean latency',unit:'seconds',better:'lower'}, lat_mean_claims:{name:'Mean claims latency',unit:'seconds',better:'lower'}, lat_mean_policy:{name:'Mean policy latency',unit:'seconds',better:'lower'}, n_samples:{name:'Sample count',unit:'count'} },
   parts: { macro_acc_claims:"Claims",macro_acc_policy:"Policy" },
   async fetch() {
     const html = await fetchText(this.url);

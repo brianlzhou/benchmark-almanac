@@ -11,6 +11,10 @@ const board: Leaderboard = {
   terms: 'The authors publish the paper on arXiv. https://arxiv.org/licenses/',
   headline: 'The paper reports no whole-game score, so this is the Unmasked Wolf percentage, the success-related Seer measure.',
   parts: { unmaskedWolf: 'Unmasked Wolf' },
+  stats: {
+    revealsPerGame: { name: 'Reveals per game', unit: 'count' }, firstRevealRound: { name: 'First reveal round', unit: 'count', better: 'lower' },
+    believed: { name: 'Believed rate', unit: '%', better: 'higher' }, backfired: { name: 'Backfired rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const text = await pdfText(feed);
     const section = text.split('Seer Reveals')[1]?.split('Table 1: Seer performance')[0];

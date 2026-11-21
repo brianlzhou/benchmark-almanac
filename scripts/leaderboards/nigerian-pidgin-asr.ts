@@ -7,6 +7,7 @@ const feed = 'https://raw.githubusercontent.com/amina-mardiyyah/asr-nigerian-pid
 const board: Leaderboard = {
   benchmark: 'nigerian-pidgin-asr', url: 'https://amina-mardiyyah.github.io/asr-nigerian-pidgin/', feed, static: 'paper',
   terms: 'The authors publish the poster and model comparison at https://amina-mardiyyah.github.io/asr-nigerian-pidgin/.',
+  stats: { validationWer: { name: 'Validation word error rate', unit: '%', better: 'lower' } },
   async fetch() {
     const block = (await pdfText(feed)).split('Model Comparison: Validation and Test WER')[1]?.split('*feature encoder')[0];
     if (!block || !/XLSR-53 \(Our[\s\S]*Wav2vec Base[\s\S]*Nemo[\s\S]*XLSR-53 English/.test(block)) throw new Error('Missing model comparison');

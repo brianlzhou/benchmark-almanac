@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2405.09747';
 const board: Leaderboard = {
   benchmark: 'nifty-market-movement', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2405.09747.',
+  stats: { f1: { name: 'F1 score', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' } },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const tables = flatPaperTables(html).map(grid);

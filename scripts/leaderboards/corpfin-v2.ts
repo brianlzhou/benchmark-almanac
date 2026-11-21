@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
+  stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   fetch: () => valsDetails(board, SLUG, { cost: null }),
 };
 export default board;

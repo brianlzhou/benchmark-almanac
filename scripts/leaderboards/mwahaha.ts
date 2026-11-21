@@ -21,6 +21,7 @@ const systems: Record<string,[string,string,string[]?]> = {
 const board: Leaderboard = {
   benchmark:'mwahaha',url:url+'results.html',feed:url+'scores/a-en.json',
   terms:'The organizers publish the attributed competition results. '+url+'results.html',
+  stats: Object.fromEntries(tracks.map(key => [key+'Battles', { name: key.toUpperCase()+' battles', unit: 'count' }])),
   parts:{'a-en':'Task A: English','a-es':'Task A: Spanish','a-zh':'Task A: Chinese',b1:'Task B1',b2:'Task B2'},harnesses:'system',
   async fetch() {
     const data = new Map<string,LeaderboardRow>();

@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://euroeval.com/leaderboards/estonian",
   feed,
   terms: "EuroEval publishes its code under MIT. TalTech lists CC BY 4.0 for the source dataset. The scoreboard gives no separate score license. https://github.com/EuroEval/EuroEval https://huggingface.co/datasets/TalTechNLP/ERRnews The feed host publishes robots.txt at https://euroeval.com/robots.txt.",
+  stats: {
+    chrf4: { name: 'Character n-gram F4 score', unit: 'score', better: 'higher' },
+    scored: { name: 'Scored items', unit: 'count' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const start = source.indexOf('Rank,Model,');

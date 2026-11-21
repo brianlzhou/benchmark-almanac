@@ -10,6 +10,12 @@ const board: Leaderboard = {
   feed,
   terms: "The site has no robots file. The dataset card lists CC BY 4.0. The results page gives no separate license for its table. https://huggingface.co/datasets/harvardairobotics/VISTA",
   parts: { Scene: 'Scene', 'Q&A': 'Q&A', Guidance: 'Guidance' },
+  stats: {
+    EG: {name: 'Ease of grounding', unit: 'score', better: 'higher', note: 'Rubric component rated on a five-point scale.'},
+    AC: {name: 'Answer correctness', unit: 'score', better: 'higher', note: 'Rubric component rated on a five-point scale.'},
+    TC: {name: 'Task completion', unit: 'score', better: 'higher', note: 'Rubric component rated on a five-point scale.'},
+    ACom: {name: 'Answer completeness', unit: 'score', better: 'higher', note: 'Rubric component rated on a five-point scale.'},
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Model|Size|Score|Rubric components|Response type');
     const keys = ['EG','AC','TC','ACom','Scene','Q&A','Guidance'];

@@ -13,6 +13,12 @@ const board: Leaderboard = {
   feed,
   terms: "The authors license repository documentation under Apache 2.0 and benchmark data under CC BY-NC 4.0. https://github.com/209-Tongji/HCSU/blob/main/Benchmark/README.md The raw file host has no robots.txt rules.",
   parts: { bei: 'Bei (Stone Rubbing) Acc', tie: 'Tie (Ink Manuscript) Acc' },
+  stats: {
+    beiTerminology: { name: 'Bei terminology score', unit: 'score', better: 'higher' },
+    beiRichness: { name: 'Bei richness score', unit: 'score', better: 'higher' },
+    tieTerminology: { name: 'Tie terminology score', unit: 'score', better: 'higher' },
+    tieRichness: { name: 'Tie richness score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const ts = markdownTables(await fetchText(feed));
     const styles = ts.find(t => t[0].includes('Avg. Acc'));

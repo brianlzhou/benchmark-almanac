@@ -8,6 +8,7 @@ const feed = 'https://huggingface.co/spaces/PisaBench/pisa-bench-leaderboard/raw
 interface Entry { model: string; avg: number; delta_non_en: number; link?: string; scores: Record<string, {mean: number; std: number}> }
 const board: Leaderboard = {
   benchmark: 'pisa-bench', parts, url: 'https://huggingface.co/spaces/PisaBench/pisa-bench-leaderboard', feed,
+  stats: { deltaNonEnglish: { name: 'Non-English delta', unit: '%', note: 'Difference between non-English and English performance, in percentage points.' } },
   terms: 'The authors publish the Space under the platform terms at https://huggingface.co/terms-of-service.',
   aliases: { 'Qwen2.5-VL-3B-Instruct': 'qwen2-5-vl-3b', 'Qwen2.5-VL-7B-Instruct': 'qwen2-5-vl-7b', 'Qwen2.5-VL-72B-Instruct': 'qwen2-5-vl-72b' },
   async fetch() {

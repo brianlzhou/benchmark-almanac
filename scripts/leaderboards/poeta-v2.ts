@@ -7,6 +7,7 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const feed = "https://raw.githubusercontent.com/PoETaV2/PoETaV2/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "poeta-v2", url: "https://github.com/PoETaV2/PoETaV2#poeta-v2-leaderboard", feed,
+  stats: { computeCost: { name: 'Compute cost', unit: 'score', better: 'lower' } },
   terms: "The benchmark authors publish this leaderboard in their public project README.",
   async fetch() {
     const source = await fetchText(feed);

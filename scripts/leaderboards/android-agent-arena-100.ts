@@ -15,6 +15,9 @@ const board: Leaderboard = {
     ['sr' + name, { name, group: 'Success Rate (SR)' }],
     ['esar' + name, { name, group: 'Essential State Achieved Rate (ESAR)' }],
   ])),
+  stats: {
+    overallEsar: { name: 'Overall essential state achieved rate', unit: '%', better: 'higher' },
+  },
   aliases: { 'Qwen2.5-VL': 'qwen2-5-vl-7b' },
   async fetch() {
     const table = tables(await fetchText(FEED)).find((t) => t[0]?.[2]?.text === 'Overall SR');

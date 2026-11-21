@@ -10,7 +10,12 @@ const board: Leaderboard = {
   url: "https://www.relayforge.tools/mandos/",
   feed: FEED,
   terms: "RelayForge marks Run 003 CC BY 4.0. The site publishes content signals in robots.txt.",
-  parts: { synthetic: 'Synthetic controls' },
+  parts: {
+    synthetic: 'Synthetic controls',
+    'ANOR-001': 'ANOR-001', 'ANOR-002': 'ANOR-002', 'ANOR-003': 'ANOR-003', 'ANOR-004': 'ANOR-004',
+    'ANOR-005': 'ANOR-005', 'ANOR-006': 'ANOR-006', 'ANOR-007': 'ANOR-007',
+    'SYNTH-001': 'SYNTH-001', 'SYNTH-002': 'SYNTH-002', 'SYNTH-003': 'SYNTH-003', 'SYNTH-004': 'SYNTH-004',
+  },
   async fetch() {
     const table = tables(await fetchText(FEED))[0]?.map(row => row.map(c => c.text));
     const incidents = table?.filter(r => /^ANOR-\d+/.test(r[0]));

@@ -8,6 +8,7 @@ const FEED = "https://fudanselab-classeval.github.io/pass_at_k_result_H.json";
 const board: Leaderboard = {
  benchmark: "classeval", url: "https://fudanselab-classeval.github.io/leaderboard.html", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { class_partial_success: { name: 'Class partial success', unit: '%', better: 'higher' }, fun_partial_success: { name: 'Function partial success', unit: '%', better: 'higher' }, fun_success: { name: 'Function success', unit: '%', better: 'higher' }, passAt3: { name: 'Class pass at 3', unit: '%', better: 'higher' }, passAt5: { name: 'Class pass at 5', unit: '%', better: 'higher' } },
 
  async fetch() {
 const data=await fetchJson<Record<string,Record<string,Record<string,number>>>>(FEED);const rows:LeaderboardRow[]=[];

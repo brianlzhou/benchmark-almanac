@@ -36,6 +36,7 @@ const board: Leaderboard = {
   feed: `${EVALPLUS_FEED} (pass@1 humaneval+)`,
   terms: EVALPLUS_TERMS,
   aliases: EVALPLUS_ALIASES,
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   fetch: () => evalplusRows('humaneval+'),
 };
 export default board;

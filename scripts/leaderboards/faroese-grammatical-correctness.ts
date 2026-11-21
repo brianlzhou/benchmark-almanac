@@ -6,6 +6,7 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const feed = "https://aclanthology.org/2026.lrec-main.354.pdf";
 const board: Leaderboard = {
   benchmark: 'faroese-grammatical-correctness', static: 'paper',
+  stats: { positionBias: { name: 'Positional bias', unit: 'score', note: 'Bias toward the first or second answer position, where negative values favor position 1.' } },
   url: "https://aclanthology.org/2026.lrec-main.354.pdf",
   feed,
   terms: "ACL Anthology returns a missing page for robots.txt. Table 4, grammatical correctness accuracy only. The university lists the paper under CC BY. The authors supply the datasets on request. https://www.pure.fo/en/publications/of-words-and-meaning-a-grammatical-and-semantic-benchmark-for-far/",

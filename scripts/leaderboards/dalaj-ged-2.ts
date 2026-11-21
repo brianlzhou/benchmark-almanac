@@ -47,6 +47,7 @@ export async function superlimRows(task: string | undefined, minimum: number, pe
 }
 
 const board: Leaderboard = {
+ stats: { N: { name: 'Test items', unit: 'count' }, accuracy: { name: 'Accuracy', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' }, alpha: { name: 'Krippendorff alpha', unit: 'score', better: 'higher' }, f1: { name: 'F1', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' } },
   benchmark: "dalaj-ged-2",
   url: "https://lab.kb.se/leaderboard/results",
   feed,

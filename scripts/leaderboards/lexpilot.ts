@@ -16,6 +16,7 @@ for (const [idx, name] of tracks.entries()) {
 }
 const board: Leaderboard = {
   benchmark: 'lexpilot', static: 'paper', url, feed: url, terms: PAPER_TERMS, parts,
+  stats:{completeAccuracy:{name:'Complete case accuracy',unit:'%',better:'higher'},underspecifiedAccuracy:{name:'Underspecified case accuracy',unit:'%',better:'higher'}},
   headline: 'The paper reports separate consultation tasks. The headline is macro F1 for Legal Completeness Assessment, expressed as a percentage.',
   async fetch() {
     const tables = flatPaperTables(await paperHtml(url)).map(grid);

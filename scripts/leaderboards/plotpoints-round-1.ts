@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://plotlightstudios.com/plotpoints/leaderboard?round=1&test=elo",
   feed,
   terms: "PlotPoints labels its public results CC BY 4.0. The repository and Hugging Face dataset list CC BY-NC 4.0. https://plotlightstudios.com/plotpoints https://huggingface.co/datasets/lazyweasel/roleplay-bench The site disallows /api/ in robots.txt.",
+  stats: { votes: { name: 'Votes', unit: 'count' }, sfw: { name: 'SFW votes', unit: 'count' }, nsfw: { name: 'NSFW votes', unit: 'count' } },
   async fetch(){
     const d=await fetchJson<{test:string;models:Model[]}>(feed);
     const ranked=d.models.filter(r=>typeof r.elo==='number');

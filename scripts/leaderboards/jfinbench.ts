@@ -12,6 +12,7 @@ const parts = { CPA: 'CPA', Tax: 'Tax accountant', FP: 'FP', Counter: 'Counter s
 
 const board: Leaderboard = {
   benchmark: "jfinbench",
+  stats: { turns: { name: 'Mean turns', unit: 'count', better: 'lower' }, medianTurns: { name: 'Median turns', unit: 'count', better: 'lower' } },
   url: "https://pub.sakana.ai/jfinbench/#leaderboard",
   feed: FEED,
   terms: "The leaderboard page gives no separate reuse license. https://pub.sakana.ai/jfinbench/#leaderboard",

@@ -6,6 +6,7 @@ import type { Leaderboard } from './types.ts';
 import { HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 
 const TABLE: HelmTable = { project: 'classic', group: 'core_scenarios', table: 'Accuracy', column: 'Mean win rate', scale: 100 };
+const OUTPUT_TOKEN_SCENARIOS = ['MMLU', 'BoolQ', 'NarrativeQA', 'NaturalQuestions (closed-book)', 'NaturalQuestions (open-book)', 'QuAC', 'TruthfulQA', 'CNN/DailyMail', 'XSUM', 'IMDB', 'CivilComments', 'RAFT', 'HellaSwag', 'OpenbookQA', 'MS MARCO (regular)', 'MS MARCO (TREC)'];
 
 const board: Leaderboard = {
   benchmark: 'helm-classic',
@@ -13,6 +14,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  stats: Object.fromEntries(OUTPUT_TOKEN_SCENARIOS.map(name => [`${name} output tokens`, { name: `${name} output tokens`, unit: 'tokens' }])),
   fetch: () => helmWithScenarioTokens(TABLE),
 };
 export default board;

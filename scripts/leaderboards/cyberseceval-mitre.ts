@@ -3,7 +3,7 @@
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const FEED='https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/mitre.json';
-const board:Leaderboard={benchmark:'cyberseceval-mitre', parts: {
+const board:Leaderboard={benchmark:'cyberseceval-mitre', stats: { prompts: { name: 'Prompts', unit: 'count' } }, parts: {
   Collection: { name: 'Collection', group: 'Task type' },
   Discovery: { name: 'Discovery', group: 'Task type' },
   Evasion: { name: 'Evasion', group: 'Task type' },

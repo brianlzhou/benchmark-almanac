@@ -28,6 +28,7 @@ const board: Leaderboard = {
   benchmark: 'frontier-agentic-stem-turing', url, feed: 'https://labs.turing.com/assets/index-BZIruKnx.js',
   terms: 'The robots.txt URL serves the app. Turing gives no separate reuse license on the benchmark page.',
   reference: ['Terminus-2'],
+  stats: { passed: { name: 'Rollouts passed', unit: 'count' }, steps: { name: 'Mean steps', unit: 'count' }, toolCalls: { name: 'Mean tool calls', unit: 'count' }, latency: { name: 'Runtime', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const page = await turingPage(url, 'frontier-agentic-stem');
     const results = table(page, 'Model","Pass rate');

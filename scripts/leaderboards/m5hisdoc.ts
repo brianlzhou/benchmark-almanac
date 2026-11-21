@@ -31,6 +31,7 @@ const board: Leaderboard = {
   feed,
   terms: "Table 4 includes seven cropped-line baselines. The paper gives no separate reuse license for its table. https://arxiv.org/pdf/2608.07917#page=13 arXiv permits PDF access and requests a 15-second crawl delay.",
   host: 'TongGuOCR',
+  stats: { CR: { name: 'Character recognition rate', unit: '%', better: 'higher' }, NED: { name: 'Normalized edit distance', unit: '%', better: 'lower' }, F1: { name: 'F1 score', unit: '%', better: 'higher' }, P: { name: 'Precision', unit: '%', better: 'higher' }, R: { name: 'Recall', unit: '%', better: 'higher' }, BLEU: { name: 'BLEU', unit: '%', better: 'higher' }, 'RO-ED': { name: 'Reading-order edit distance', unit: '%', better: 'lower' } },
   fetch: () => recognitionTable(feed,13,'Table 4: Performance comparison',34),
 };
 export default board;

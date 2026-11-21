@@ -13,6 +13,19 @@ const n = (s: string) => Number(s.replace(/[$,]/g, ''));
 const board: Leaderboard = {
   benchmark: 'simreadybench-nv100', url: url + '#leaderboard', feed,
   terms: 'Public result tables on the HCLTech Robotics dataset card. The card links separate NVIDIA asset terms.',
+  stats: {
+    'Optional criteria (%)': { name: 'Optional criteria passed', unit: '%', better: 'higher', note: 'Percentage of optional checks passed.' },
+    'Visual %': { name: 'Visual fidelity', unit: '%', better: 'higher' },
+    'Kinematic %': { name: 'Kinematic fidelity', unit: '%', better: 'higher' },
+    'pass@1 %': { name: 'pass@1', unit: '%', better: 'higher', note: 'Percentage of assets passing all mandatory checks in one attempt.' },
+    'pass@3 %': { name: 'pass@3', unit: '%', better: 'higher', note: 'Probability of at least one pass in three attempts.' },
+    'pass^3 %': { name: 'pass^3', unit: '%', better: 'higher', note: 'Probability that all three sampled attempts pass, averaged per object.' },
+    'Tokens/asset': { name: 'Tokens per asset', unit: 'tokens' },
+    'Inference $/asset': { name: 'Inference cost per asset', unit: 'usd', better: 'lower' },
+    '$/formal point': { name: 'Cost per formal point', unit: 'usd', better: 'lower' },
+    'Trial min/asset': { name: 'Trial time per asset', unit: 'minutes', better: 'lower' },
+    latency: { name: 'Latency per asset', unit: 'seconds', better: 'lower' },
+  },
   aliases: { 'NVIDIA Nemotron 3.5 Super VL': 'nemotron-3-5-super-vl', 'ChatGPT 6.1 Sol': 'gpt-6-1-sol', 'ChatGPT 6.1 Terra': 'gpt-6-1-terra', 'ChatGPT 6.2 Astra': 'gpt-6-2-astra' },
   async fetch() {
     const tables = markdownTables(await fetchText(feed));

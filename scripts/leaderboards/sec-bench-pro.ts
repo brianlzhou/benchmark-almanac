@@ -47,6 +47,7 @@ const board: Leaderboard = {
   url: 'https://sec-bench.github.io',
   feed: `${FEED} (snapshot ${SNAPSHOT}, overall)`,
   terms: 'Static JSON on the SEC-bench GitHub Pages site, whose repository is Apache-2.0; the SEC-bench Pro repository is MIT.',
+  stats: { completed_instances: { name: 'Completed instances', unit: 'count' }, timeouts: { name: 'Timeouts', unit: 'count' }, completedRank: { name: 'Completed-score rank', unit: 'count', better: 'lower' }, completed: { name: 'Completed-instance score', unit: '%', better: 'higher' }, time: { name: 'Runtime per instance', unit: 'seconds', better: 'lower' }, toolCalls: { name: 'Tool calls per instance', unit: 'count' } },
   aliases: {},
   async fetch() {
     const data = await fetchJson<{

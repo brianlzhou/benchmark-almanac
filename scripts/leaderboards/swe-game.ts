@@ -7,11 +7,16 @@ import { tables } from '../lib/html.ts';
 
 const feed = 'https://raw.githubusercontent.com/Charly-chan/SWE-Game/HEAD/README.md';
 const tracks = ['Brief-to-Game', 'GDD-to-Game', 'Skeleton Completion', 'Bug Repair', 'Godot-to-Unity Porting'];
+const trackParts = ['Brief-to-Game: Mech.', 'Brief-to-Game: Content', 'Brief-to-Game: Play.', 'Brief-to-Game: VLM',
+  'GDD-to-Game: Mech.', 'GDD-to-Game: Content', 'GDD-to-Game: Play.', 'GDD-to-Game: VLM',
+  'Skeleton Completion: Mech.', 'Skeleton Completion: Content', 'Skeleton Completion: Play.', 'Skeleton Completion: Scaffold', 'Skeleton Completion: VLM',
+  'Bug Repair: Restoration', 'Bug Repair: Retained routes', 'Bug Repair: Preservation contracts', 'Bug Repair: Validity gates',
+  'Godot-to-Unity Porting: Mech.', 'Godot-to-Unity Porting: Play.', 'Godot-to-Unity Porting: Structure', 'Godot-to-Unity Porting: Visual', 'Godot-to-Unity Porting: Stability'];
 const board: Leaderboard = {
   benchmark: 'swe-game', url: 'https://github.com/Charly-chan/SWE-Game#main-results', feed, static: 'paper',
   terms: 'The project repository uses Apache 2.0. https://github.com/Charly-chan/SWE-Game/blob/main/LICENSE',
   headline: 'The authors report no overall score, so this is the plain mean of the five track totals.',
-  parts: Object.fromEntries(tracks.map(t => [t,t])),
+  parts: Object.fromEntries([...tracks, ...trackParts].map(t => [t, {name: t, unit: '%', better: 'higher'}])),
   aliases: { Opus5: 'claude-opus-5' },
   async fetch() {
     const source = await fetchText(feed);

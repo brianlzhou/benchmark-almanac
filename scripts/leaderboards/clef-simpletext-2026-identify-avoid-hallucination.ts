@@ -16,6 +16,13 @@ const identities: Record<string, string> = {
 const board: Leaderboard = {
   benchmark: 'clef-simpletext-2026-identify-avoid-hallucination', url: feed, feed,
   terms: 'The organizers publish this paper under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
+  stats: {
+    precision: { name: 'Document precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    recall: { name: 'Document recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sentenceF1: { name: 'Sentence F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sentencePrecision: { name: 'Sentence precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sentenceRecall: { name: 'Sentence recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+  },
   parts: { detection: 'Task 2.1 Detecting Overgeneration' },
   async fetch() {
     const paper = await pdfText(feed);

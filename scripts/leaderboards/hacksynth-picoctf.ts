@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'hacksynth-picoctf', static: 'paper', url: feed, feed, reference: ['HackSynth'],
   terms: 'The authors publish Table I under the paper terms at https://arxiv.org/abs/2412.01778.',
   parts: Object.fromEntries(categories.map(name => [name.split(' ')[0].toLowerCase(), name])),
+  stats: { minutes: { name: 'Elapsed time', unit: 'minutes', better: 'lower' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[1] === 'PicoCTF Benchmark');
     const header = ['All (120)', ...categories, 'Speed'];

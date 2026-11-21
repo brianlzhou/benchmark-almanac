@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: PAPER_TERMS,
   aliases: {"Pixtral Large 2411": "pixtral-large", "Mistral-small3.1-24b": "mistral-small-3-1"},
+  stats: {
+    ra5: { name: 'Relaxed accuracy at 5', unit: '%', better: 'higher' },
+    ra10: { name: 'Relaxed accuracy at 10', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));
     const main = tables.find(t => t[0]?.[1] === 'Parameters' && t[0][2]?.startsWith('EM (%)'));

@@ -9,6 +9,19 @@ const board: Leaderboard = {
   url: "https://dcase.community/challenge2024/task-sound-scene-synthesis-results",
   feed,
   terms: "DCASE robots.txt allows the results page and restricts image and theme paths. The page gives no separate score reuse license.",
+  parts: {
+    '1_0': { name: 'Foreground Fit average score', group: 'Foreground Fit' },
+    '2_0': { name: 'Background Fit average score', group: 'Background Fit' },
+    '3_0': { name: 'Audio Quality average score', group: 'Audio Quality' },
+  },
+  stats: {
+    'evaluationFAD (PANNs)': { name: 'Evaluation Fréchet Audio Distance with PANNs', unit: 'score', better: 'lower' },
+    'evaluationFAD (CLAP)': { name: 'Evaluation Fréchet Audio Distance with CLAP', unit: 'score', better: 'lower' },
+    'evaluationFAD (VGGish)': { name: 'Evaluation Fréchet Audio Distance with VGGish', unit: 'score', better: 'lower' },
+    'developmentFAD (PANNs)': { name: 'Development Fréchet Audio Distance with PANNs', unit: 'score', better: 'lower' },
+    'developmentFAD (CLAP)': { name: 'Development Fréchet Audio Distance with CLAP', unit: 'score', better: 'lower' },
+    'developmentFAD (VGGish)': { name: 'Development Fréchet Audio Distance with VGGish', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const all = tables(await fetchText(feed));
     const scores = all.find(t => t[0].some(c => c.text === 'Weighted Average Score'));

@@ -7,6 +7,7 @@ import { tables } from '../lib/html.ts';
 const feed = "https://docaifabric.com/benchmarks/";
 
 const board: Leaderboard = {
+  stats: { rank: { name: 'Rank', unit: 'count', better: 'lower' }, classification: { name: 'Classification accuracy', unit: '%', better: 'higher' }, hallucinationRate: { name: 'Hallucination rate', unit: '%', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   benchmark: "docai-fabric-document-ai-benchmark-arena",
   url: "https://docaifabric.com/benchmarks/",
   feed,

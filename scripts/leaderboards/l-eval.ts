@@ -23,6 +23,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (Exact Match tab, Avg)`,
   terms: 'CSV file on the L-Eval GitHub Pages site that the page loads (no robots.txt); the L-Eval repository is GPL-3.0.',
+  stats: { maxContextK: { name: 'Maximum context length', unit: 'thousands', note: 'Maximum context length in thousands of tokens.' } },
   aliases: {
     'claude1.3-100k': 'claude-1-3',
     'turbo-16k-0613': 'gpt-3-5-turbo-jun-2023',

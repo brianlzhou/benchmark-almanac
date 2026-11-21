@@ -8,6 +8,15 @@ const feed = 'https://proceedings.neurips.cc/paper_files/paper/2022/file/cae73a9
 const board: Leaderboard = {
   benchmark: 'ddxplus', static: 'paper', url: feed, feed,
   terms: 'NeurIPS publishes the authors’ paper under its proceedings terms. https://proceedings.neurips.cc/',
+  stats:{
+    interactionLength:{name:'Interaction length',unit:'count'},
+    gtpaAt1:{name:'Ground truth pathology accuracy at one',unit:'%',better:'higher'},
+    gtpa:{name:'Ground truth pathology accuracy',unit:'%',better:'higher'},
+    per:{name:'Patient evidence recall',unit:'%',better:'higher'},
+    ddr:{name:'Differential diagnosis recall',unit:'%',better:'higher'},
+    ddp:{name:'Differential diagnosis precision',unit:'%',better:'higher'},
+    ddf1:{name:'Differential diagnosis F1',unit:'%',better:'higher'},
+  },
   async fetch() {
     const paper = await pdfText(feed);
     const match = paper.match(/Method\s+Diff\s+IL\s+GTPA@1\s+GTPA\s+PER\s+DDR\s+DDP\s+DDF1([\s\S]*?)5\s+Conclusion/);

@@ -11,6 +11,7 @@ const labels = subjects.flatMap(s => (s === 'Overall' ? ['S1','S2','S3','Pobj','
 const board: Leaderboard = {
   benchmark: 'omniphys', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: { testMini: 'Test-Mini', ...Object.fromEntries(labels.map(l => [l.replace(' ',''), l])) },
+  stats: { drop: { name: 'Full-set to Test-Mini drop', unit: '%', better: 'lower' } },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const summary = tables.find(t => t[0]?.join('|') === 'Model|Full Set|Test-Mini|Drop');

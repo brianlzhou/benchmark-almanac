@@ -7,6 +7,10 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const feed = "https://raw.githubusercontent.com/homerquan/GomokuBench/main/README.md";
 
 const board: Leaderboard = {
+ stats: {
+  losses: { name: 'Losses', unit: 'count', better: 'lower' },
+  lossMoves: { name: 'Moves in losses', unit: 'count', better: 'lower' },
+ },
   benchmark: "gomokubench-homer-quan",
   url: "https://github.com/homerquan/GomokuBench#current-leaderboard",
   feed,

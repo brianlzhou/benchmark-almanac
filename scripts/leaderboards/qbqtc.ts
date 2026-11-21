@@ -10,6 +10,13 @@ const board: Leaderboard = {
   url: "https://github.com/CLUEbenchmark/QBQTC",
   feed: FEED,
   terms: "The publisher displays results at https://github.com/CLUEbenchmark/QBQTC. I could not verify reuse terms. GitHub requests a one-second crawl delay.",
+  stats: {
+    accuracy: { name: "Accuracy", unit: "%", better: "higher" },
+    devF1: { name: "Development F1", unit: "%", better: "higher" },
+    devAccuracy: { name: "Development accuracy", unit: "%", better: "higher" },
+    trainF1: { name: "Training F1", unit: "%", better: "higher" },
+    trainAccuracy: { name: "Training accuracy", unit: "%", better: "higher" },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find(t => t[0][0] === '模型' && t[0][3]?.includes('test_public'));
     if (!table || table.length < 4) throw new Error('Missing QBQTC baseline comparison');

@@ -12,6 +12,7 @@ const feed = 'https://novelty-bench.github.io/leaderboard_data.json';
 const board: Leaderboard = {
   benchmark: 'noveltybench', url: 'https://novelty-bench.github.io/', feed, harnesses: 'system',
   terms: 'The authors publish the board and its definitions at https://novelty-bench.github.io/.',
+  stats: { distinct10: { name: 'Distinct answers at 10 samples', unit: 'count', }, utility10v1: { name: 'Utility at 10 samples, version 1', unit: 'score', better: 'higher' }, distinct10v1: { name: 'Distinct answers at 10 samples, version 1', unit: 'count' } },
   aliases: {...HELM_ALIASES, 'command-r-plus-08-2024': 'command-r-plus', 'claude-3-5-sonnet-v2@20241022': 'claude-3-5-sonnet-october-2024'},
   async fetch() {
     const {models} = await fetchJson<{models: Entry[]}>(feed);

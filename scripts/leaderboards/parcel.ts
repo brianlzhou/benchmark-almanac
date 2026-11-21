@@ -6,5 +6,6 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = 'https://arxiv.org/html/2610.10971';
 const board: Leaderboard = { benchmark: 'parcel', static: 'paper', url: FEED, feed: FEED, terms: PAPER_TERMS,
+  stats: { macroF1: { name: 'Macro F1', unit: '%', better: 'higher' }, supportedPrecision: { name: 'Supported precision', unit: '%', better: 'higher' }, supportedRecall: { name: 'Supported recall', unit: '%', better: 'higher' }, refutedPrecision: { name: 'Refuted precision', unit: '%', better: 'higher' }, refutedRecall: { name: 'Refuted recall', unit: '%', better: 'higher' }, notFoundPrecision: { name: 'Not found precision', unit: '%', better: 'higher' }, notFoundRecall: { name: 'Not found recall', unit: '%', better: 'higher' } },
   async fetch() { const t=grid(paperTables(await paperHtml(FEED))[2]); if(t[0]?.[1]!=='Overall Accuracy') throw new Error('PARCEL table changed'); const rows=t.slice(2).filter(r=>r[0]).map(r=>({model:r[0],score:Number(r[1])*100,metrics:{macroF1:Number(r[2])*100,supportedF1:Number(r[3])*100,refutedF1:Number(r[6])*100,notFoundF1:Number(r[9])*100}})); return checked(rows,7); }
 }; export default board;

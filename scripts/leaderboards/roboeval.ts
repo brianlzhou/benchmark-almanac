@@ -10,6 +10,21 @@ const board: Leaderboard = {
   url: "https://robo-eval.github.io/static/data/leaderboard_global.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: {
+    tp: { name: 'Task progression', unit: 'score', better: 'higher', note: 'Completed stages divided by the number of stages, stored from 0 to 1.' },
+    bavd: { name: 'Bimanual arm velocity difference', better: 'lower' },
+    bgvd: { name: 'Bimanual gripper vertical difference', better: 'lower' },
+    cpl: { name: 'Total Cartesian path length', better: 'lower' },
+    ct: { name: 'Completion time', unit: 'seconds', better: 'lower' },
+    ecc: { name: 'Environment collision count', unit: 'count', better: 'lower' },
+    jpl: { name: 'Total joint path length', better: 'lower' },
+    mcj: { name: 'Average Cartesian jerk', better: 'lower' },
+    mjj: { name: 'Average joint jerk', better: 'lower' },
+    opl: { name: 'Total orientation path length', better: 'lower' },
+    scc: { name: 'Self-collision count', unit: 'count', better: 'lower' },
+    sc: { name: 'Slip count', unit: 'count', better: 'lower' },
+    tl: { name: 'Control steps', unit: 'count', better: 'lower' },
+  },
   
   async fetch() {
     const data=await fetchJson<any[]>(FEED);

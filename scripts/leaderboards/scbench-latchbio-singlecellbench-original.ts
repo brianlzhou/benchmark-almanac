@@ -7,6 +7,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2602.09063v1';
 const board: Leaderboard = {
   benchmark: 'scbench-latchbio-singlecellbench-original', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
+  stats: { latencySeconds: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const table = paperTables(await paperHtml(URL)).map(grid).find((rows) => rows[0]?.join('|') === 'Model|Provider|Accuracy (%)|95% CI|Latency (s)');
     if (!table) throw new Error('scBench overall model table missing');

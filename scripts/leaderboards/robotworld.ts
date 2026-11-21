@@ -13,6 +13,13 @@ const board: Leaderboard = {
   url: "https://robotworldai.github.io/",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: {
+    steps: { name: 'Mean steps per task', unit: 'count', better: 'lower' },
+    minutes: { name: 'Mean minutes per task', unit: 'minutes', better: 'lower' },
+    scored: { name: 'Scored tasks', unit: 'count' },
+    registered: { name: 'Registered tasks', unit: 'count' },
+    totalTokens: { name: 'Mean total tokens per task', unit: 'tokens' },
+  },
   chart: {title:'Success rate versus cost',x:{key:'cost',label:'Mean recorded task cost',unit:'$',better:'lower'},y:{key:'score',label:'Success rate',unit:'%',better:'higher'}},
   async fetch() {
     const d = await fetchJson(FEED) as any;

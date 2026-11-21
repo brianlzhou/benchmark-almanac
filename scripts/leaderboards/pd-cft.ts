@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'pd-cft', static: 'paper', url: 'https://arxiv.org/abs/1607.02250', feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/1607.02250',
   headline: 'The paper reports no overall score, so this is the plain mean of its four accuracy parts.',
+  parts: { peopleDailyValid: 'People Daily validation', peopleDailyTest: 'People Daily test', cftTestAuto: 'Children’s Fairy Tale automatic test', cftTestHuman: 'Children’s Fairy Tale human test' },
   async fetch() {
     const text = await pdfText(feed);
     const start = text.indexOf('People Daily      Children’s Fairy Tale');

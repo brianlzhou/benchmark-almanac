@@ -12,6 +12,7 @@ const board: Leaderboard = {
   'Non-supporting citation': { name: 'Non-supporting citation', group: 'Category' },
 }, url: "https://www.vals.ai/benchmarks/claimbench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { latency: { name: 'Latency per claim', unit: 'seconds', better: 'lower' }, Overall: { name: 'Overall category accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

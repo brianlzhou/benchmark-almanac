@@ -42,6 +42,7 @@ const board: Leaderboard = {
   url: URL,
   feed: FEED,
   terms: TERMS,
+  stats: { responses: { name: 'Responses', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' } },
   fetch: async () => readRows(await fetchText(FEED)),
 };
 

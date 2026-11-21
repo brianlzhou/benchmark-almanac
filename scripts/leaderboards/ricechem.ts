@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2404.14316';
 const board: Leaderboard = {
   benchmark: 'ricechem', feed, url: feed, static: 'paper',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'From 0 to 1.' }, recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'From 0 to 1.' } },
   aliases: { 'Gemma 7B 1.1 IT': 'gemma-1-1-7b-it', 'GPT3.5': 'gpt-3-5-turbo-jan-2024' },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

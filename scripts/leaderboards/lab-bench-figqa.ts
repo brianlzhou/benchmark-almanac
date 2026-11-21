@@ -12,6 +12,7 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2407.10362",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {precision:{name:"Precision",unit:"%",better:"higher"},coverage:{name:"Coverage",unit:"%",better:"higher"}},
 
  async fetch(): Promise<LeaderboardRow[]> {
 const ts=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text))).filter(t=>t[0]?.includes('claude-3-5-sonnet-20240620'));

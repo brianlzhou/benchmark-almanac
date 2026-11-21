@@ -25,6 +25,13 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (elo)`,
   terms: 'Public JSON endpoint the leaderboard page itself calls; ocrarena.ai serves no robots.txt and publishes no terms.',
+  stats: {
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    votes: { name: 'Votes', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+  },
   aliases: {
     // "Gemini 3 Preview": the November 2025 Gemini 3 Pro preview
     'Gemini 3': 'gemini-3-pro',

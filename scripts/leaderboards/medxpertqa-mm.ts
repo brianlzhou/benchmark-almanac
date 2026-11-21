@@ -11,6 +11,7 @@ const URL = 'https://medxpertqa.github.io/';
 const board: Leaderboard = {
   benchmark: 'medxpertqa-mm',
   parts: { Reasoning: 'Reasoning', Understanding: 'Understanding' },
+  stats: { publishedTableRank: { name: 'Published table rank', unit: 'count' } },
   url: URL,
   feed: `${URL} (static HTML table, MM subset, Avg)`,
   terms: 'Static GitHub Pages site; the MedXpertQA repository is MIT-licensed and the page states no other terms.',

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: 'https://github.com/DerOeko/prime-environments/tree/gutenberg_env/environments/gutenberg_env',
   feed,
   terms: 'The source README is published in the Prime Environments repository under its repository license. https://github.com/DerOeko/prime-environments/blob/gutenberg_env/LICENSE',
+  stats: { averageToolCalls: { name: 'Average tool calls', unit: 'count', better: 'lower' } },
   async fetch() {
     const source = await fetchText(feed);
     const section = source.split('## Benchmark Results')[1]?.split('## Design Choices')[0];

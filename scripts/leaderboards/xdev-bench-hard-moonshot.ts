@@ -75,6 +75,11 @@ const board: Leaderboard = {
   url: "https://www.kimi.com/blog/kimi-k3-1-pro",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    averageSuccessRate: { name: 'Average success rate', unit: '%', better: 'higher' },
+    inputTokensPerSuccess: { name: 'Input tokens per success', unit: 'tokens', better: 'lower' },
+    outputTokensPerSuccess: { name: 'Output tokens per success', unit: 'tokens', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return checkedImageRows(IMAGE, SHA256, ROWS);
   },

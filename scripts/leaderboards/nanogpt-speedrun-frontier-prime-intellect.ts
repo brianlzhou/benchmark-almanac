@@ -10,6 +10,7 @@ interface Run { name?: string; label?: string; record?: number; cost?: number; t
 const board: Leaderboard = {
   benchmark: 'nanogpt-speedrun-frontier-prime-intellect', url: PAGE, feed: FEED,
   terms: 'Prime Intellect publishes these experiment results in the public research page bundle. Separate score reuse terms are not stated.',
+  stats: { calls: { name: 'Optimization calls', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const match = source.match(/JSON\.parse\('(\{[\s\S]*?\})'\)/);

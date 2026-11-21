@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://speko.com/blog/gpt-realtime-2-1-mini-fastest",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://speko.com/robots.txt.",
+  stats: {
+    task: { name: 'Task score', unit: '%', better: 'higher' }, instruction: { name: 'Instruction score', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    audioInputUsdPerMillionTokens: { name: 'Audio input price', unit: 'usd-per-mtok', better: 'lower' }, audioOutputUsdPerMillionTokens: { name: 'Audio output price', unit: 'usd-per-mtok', better: 'lower' }, audioUsdPerMinute: { name: 'Audio price per minute', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)))
       .find(([h]) => h && ['Model', 'Conv. latency (p50)', 'Task', 'Instruction', 'Audio price'].every(k => h.includes(k)));

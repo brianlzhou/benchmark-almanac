@@ -10,6 +10,20 @@ const board: Leaderboard = {
   url: "https://oddbit.ai/peer-arena/",
   feed,
   terms: "The maker offers downloadable game logs. The methodology gives no explicit reuse license. https://oddbit.ai/peer-arena/about/ The site publishes crawler-specific restrictions in robots.txt.",
+  stats: {
+    humbleRating: { name: 'Humble rating', unit: 'rating', better: 'higher', note: 'Bradley Terry rating counting wins where the winner did not vote for itself.' },
+    selfVoteRate: { name: 'Self vote rate', unit: 'score', note: 'Share of games in which a model voted for itself, from 0 to 1.' },
+    gamesPlayed: { name: 'Games played', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count' },
+    tieWins: { name: 'Tie wins', unit: 'count' },
+    stalemates: { name: 'Stalemates', unit: 'count' },
+    winRate: { name: 'Win rate', unit: 'score', better: 'higher', note: 'Share of games won, from 0 to 1.' },
+    position1: { name: 'Position 1 win rate', unit: 'score', better: 'higher', note: 'Win rate for the first position, from 0 to 1.' },
+    position2: { name: 'Position 2 win rate', unit: 'score', better: 'higher', note: 'Win rate for the second position, from 0 to 1.' },
+    position3: { name: 'Position 3 win rate', unit: 'score', better: 'higher', note: 'Win rate for the third position, from 0 to 1.' },
+    position4: { name: 'Position 4 win rate', unit: 'score', better: 'higher', note: 'Win rate for the fourth position, from 0 to 1.' },
+    position5: { name: 'Position 5 win rate', unit: 'score', better: 'higher', note: 'Win rate for the fifth position, from 0 to 1.' },
+  },
   async fetch(){
     const page=await fetchText(feed);
     const raw=page.match(/<astro-island\b[^>]*component-url="[^"]*\/Leaderboard\.[^"]+"[^>]* props="([^"]*)"/)?.[1];

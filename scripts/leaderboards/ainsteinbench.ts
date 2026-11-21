@@ -17,6 +17,7 @@ const board: Leaderboard = {
     MD: { name: 'Molecular dynamics', group: 'Domain' },
     QC: { name: 'Quantum chemistry', group: 'Domain' },
   },
+  stats: { CI: { name: 'Confidence interval', unit: 'score', note: 'Reported confidence interval value for the overall resolved percentage.' } },
   url: "https://arxiv.org/html/2512.21373",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

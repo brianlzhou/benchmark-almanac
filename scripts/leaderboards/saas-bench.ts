@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (results table, RS column)`,
   terms: 'Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',
+  stats: { steps: { name: 'Steps per task', unit: 'count' }, toolCalls: { name: 'Tool calls per task', unit: 'count' } },
   aliases: {
     'Opus 5': 'claude-opus-5',
   },

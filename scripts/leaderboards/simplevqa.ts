@@ -10,6 +10,17 @@ const FEED = "https://arxiv.org/html/2502.13059";
 const board: Leaderboard = {
  benchmark: "simplevqa", static: 'paper',
  parts: { chinese: { name: 'Chinese', group: 'Language' }, english: { name: 'English', group: 'Language' } },
+ stats: {
+   notAttempted: {name: 'Not attempted', unit: '%', better: 'lower'},
+   incorrect: {name: 'Incorrect', unit: '%', better: 'lower'},
+   correctGivenAttempted: {name: 'Correct given attempted', unit: '%', better: 'higher'},
+   fScore: {name: 'F-score', unit: '%', better: 'higher'},
+   LS: {name: 'Logic and Science F-score', unit: '%', better: 'higher'}, OIR: {name: 'Object Identification Recognition F-score', unit: '%', better: 'higher'},
+   TE: {name: 'Time and Event F-score', unit: '%', better: 'higher'}, PE: {name: 'Person and Emotion F-score', unit: '%', better: 'higher'},
+   LB: {name: 'Location and Building F-score', unit: '%', better: 'higher'}, TP: {name: 'Text Processing F-score', unit: '%', better: 'higher'},
+   QPR: {name: 'Quantity and Position Relationship F-score', unit: '%', better: 'higher'}, AC: {name: 'Art and Culture F-score', unit: '%', better: 'higher'},
+   OAR: {name: 'Object Attributes Recognition F-score', unit: '%', better: 'higher'},
+ },
  url: "https://arxiv.org/html/2502.13059",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -12,6 +12,10 @@ const board: Leaderboard = {
   feed: `${OLAM_PAGE} (the Risk charts in the page's HTML)`,
   terms: OLAM_TERMS,
   ...OLAM_HARNESS,
+  stats: {
+    gambleRate: { name: 'Gamble rate', unit: '%', note: 'The share of attacks judged to be gambles. Olam Labs does not define it further.' },
+    twoFacedRate: { name: 'Two-faced rate', unit: '%', note: 'A rate graded over talking windows. Olam Labs does not define it further.' },
+  },
   fetch: () => olamRows('warpath-share', { gambleRate: 'warpath-gamble-rate', twoFacedRate: 'warpath-two-faced' }),
 };
 export default board;

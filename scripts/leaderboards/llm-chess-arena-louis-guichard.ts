@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://chess.louisguichard.fr/leaderboard",
   feed,
   terms: "The robots file includes content signals. The repository uses the MIT license. The scoreboard gives no separate terms for its scores. https://github.com/louisguichard/llm-chess-arena/blob/main/LICENSE.txt",
+  stats:{wins:{name:'Win rate',unit:'%',better:'higher'},draws:{name:'Draw rate',unit:'%'},losses:{name:'Loss rate',unit:'%',better:'lower'},secondsPerMove:{name:'Seconds per move',unit:'seconds',better:'lower'},eurosPerGame:{name:'Cost per game',better:'lower'}},
   aliases: { 'Qwen3 30B': 'qwen3-30b-a3b' },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === '#|Player|ELO|Games|W/D/L|Time/Move|Cost/Game');

@@ -10,6 +10,9 @@ const board: Leaderboard = {
   benchmark: 'arena-expert', url: 'https://arena.ai/leaderboard/chat/text/expert', feed: FEED,
   terms: 'Hugging Face publishes the Arena Expert battle dataset under its provider terms. Results are credited to Arena.',
   static: 'paper', headline: 'Bradley-Terry ratings computed from the 5,128 expert prompt battles in the published dataset.',
+  stats: {
+    battles: { name: 'Battles', unit: 'count' },
+  },
   async fetch() {
     const rows = await parquetReadObjects({ file: await fetchBytes(FEED) }) as any[];
     const counts = new Map<string, number>();

@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark:'epic-kitchens-100-action-anticipation', url, feed,
   terms:'The organizers publish the test scores under the challenge terms at ' + url + '#learn_the_details-terms_and_conditions.',
   parts:Object.fromEntries(parts.filter(p => p !== 'Overall Action').map(p => [p,p])),
+  stats: { 'Overall Action': { name: 'Overall action recall', unit: '%', better: 'higher' } },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.[0].text === 'Test Set (Mean Top-5 Recall)');
     if (!t || t[1].slice(-3).map(c=>c.text).join('|') !== 'Overall (%)|Unseen (%)|Tail (%)' ||

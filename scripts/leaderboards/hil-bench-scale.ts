@@ -6,6 +6,7 @@ import { scaleRowsWithInterval } from './swe-bench-pro.ts';
 const board: Leaderboard = {
   benchmark: 'hil-bench-scale', url: 'https://labs.scale.com/leaderboard/hil', feed: 'https://labs.scale.com/leaderboard/hil',
   terms: SCALE_TERMS, aliases: SCALE_ALIASES,
+  stats: { rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
   async fetch() {
     const rows = scaleRowsWithInterval(await fetchScaleEntries(this.url), (name) => {
       if (name.model.endsWith(' (*public set only)')) return { model: name.model.replace(' (*public set only)',''), setting: 'public set only' };

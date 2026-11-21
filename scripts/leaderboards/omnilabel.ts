@@ -19,6 +19,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The organizers link three evaluation tracks without specifying reuse rights for the scores. https://www.omnilabel.org/challenge/open-leaderboard",
   parts: Object.fromEntries(parts.map(k => [k,k])),
+  stats: { entries: { name: 'Entries', unit: 'count' } },
   harnesses: 'system',
   async fetch() {
     const results: LeaderboardRow[] = [];

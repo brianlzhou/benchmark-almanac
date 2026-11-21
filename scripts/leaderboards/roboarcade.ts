@@ -14,6 +14,9 @@ type Run = { model: string; interface: string; average_score: number; saturation
 const board: Leaderboard = {
   benchmark: 'roboarcade', url: page, feed: page,
   terms: 'RoboARCade publishes the leaderboard and its JSON assets without a separate score license.',
+  stats: {
+    saturation: { name: 'Saturation', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(page);
     const table = tables(html).find(t => t[0]?.[4]?.text.startsWith('Success (%)'));

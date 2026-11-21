@@ -10,6 +10,9 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
+  stats: {
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower', note: 'Mean time per test.' },
+  },
   chart: {title:'Search score vs. cost',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Score',unit:'%',better:'higher'}},
   fetch: () => valsRows(SLUG, { score: 'Score', cost: 'Cost/Task', harness: 'Search Tool' }),
 };

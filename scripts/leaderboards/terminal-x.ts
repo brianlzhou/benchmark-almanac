@@ -13,6 +13,13 @@ const suites = [
 ];
 const board: Leaderboard = {
   benchmark: 'terminal-x', url: feed, feed, parts, terms: 'UniPat AI publishes its results at https://unipat.ai/blog/TerminalX.',
+  stats: {
+    depthTurns: {name: 'DeepTerminalBench turns', unit: 'count'}, depthOutputTokens: {name: 'DeepTerminalBench output tokens', unit: 'tokens'},
+    iterationTurns: {name: 'EvoCode-Bench turns', unit: 'count'}, iterationOutputTokens: {name: 'EvoCode-Bench output tokens', unit: 'tokens'},
+    singleRound: {name: 'Single-round completion', unit: '%', better: 'higher'}, multiTurnCompletion: {name: 'Multi-turn completion', unit: '%', better: 'higher'},
+    evolutionTurns: {name: 'RoadmapBench turns', unit: 'count'}, evolutionOutputTokens: {name: 'RoadmapBench output tokens', unit: 'tokens'},
+    roadmapCompletion: {name: 'Roadmap completion', unit: 'score', better: 'higher', note: 'Completion rate stored from 0 to 1.'},
+  },
   headline: 'UniPat reports no overall score, so this is the plain mean of its three suite percentages under their respective evaluation protocols.',
   async fetch() {
     const all = tables(await fetchText(feed));

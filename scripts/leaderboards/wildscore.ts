@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://thevertexlab.github.io/MuTheoryEval/",
   feed,
   terms: "The host has no robots file. The runner repository uses the MIT License. https://raw.githubusercontent.com/thevertexlab/MuTheoryEval/main/LICENSE",
+  stats: { questions: {name: 'Questions', unit: 'count'}, seed: {name: 'Seed', unit: 'count'}, total_prompt_tokens: {name: 'Total prompt tokens', unit: 'tokens'}, total_completion_tokens: {name: 'Total completion tokens', unit: 'tokens'}, elapsedSeconds: {name: 'Elapsed time', unit: 'seconds', better: 'lower'}, total_thinking_tokens: {name: 'Total thinking tokens', unit: 'tokens'}, avg_thinking_tokens_per_q: {name: 'Average thinking tokens per question', unit: 'tokens'} },
   host: 'MuTheoryEval',
   costPer: 'run',
   async fetch() {

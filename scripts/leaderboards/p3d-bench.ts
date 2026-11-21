@@ -15,6 +15,11 @@ const board: Leaderboard = {
   benchmark: 'p3d-bench', url, feed: url,
   headline: 'The board reports no overall score, so the headline is the plain mean of its three task scores.',
   terms: 'The project publishes its code under MIT and credits the upstream dataset licenses at https://github.com/SpatiaOS/P3D-Bench#license.',
+  stats: {
+    assembly1: { name: 'Assembly cost per generation', unit: 'usd', better: 'lower' },
+    text1: { name: 'Text cost per generation', unit: 'usd', better: 'lower' },
+    image1: { name: 'Image cost per generation', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(url);
     const asset = html.match(/src="([^"]*\/assets\/index-[^"]+\.js)"/)?.[1];

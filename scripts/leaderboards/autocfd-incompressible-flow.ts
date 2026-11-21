@@ -9,6 +9,7 @@ const feed = 'https://raw.githubusercontent.com/YYgroup/AutoCFD/HEAD/assets/base
 const board: Leaderboard = {
   benchmark:'autocfd-incompressible-flow',static:'paper',url:'https://github.com/YYgroup/AutoCFD',feed,
   terms:'The authors publish this comparison figure and credit the work to the AutoCFD team. https://github.com/YYgroup/AutoCFD',
+  stats:{passAt1:{name:'Pass at 1',unit:'%',better:'higher'},steps:{name:'Steps',unit:'count',better:'lower'},totalTokens:{name:'Total tokens',unit:'tokens'}},
   aliases:{'Qwen2.5-72B-Instruct':'qwen2-5-72b','Llama3.3-70B-Instruct':'llama-3-3-70b'},
   async fetch() {
     const rows = await chartRows(feed,'17c5214413ac39e8292da4809ef6cf88776e7a2cb2bc7257c45b6427a252d4fb',[

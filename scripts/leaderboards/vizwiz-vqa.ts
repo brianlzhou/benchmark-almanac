@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/1802.08218",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { CIDEr: {name: 'Image description consensus score', unit: 'score', better: 'higher'}, BLEU: {name: 'Bilingual evaluation score', unit: 'score', better: 'higher'}, METEOR: {name: 'Translation ordering score', unit: 'score', better: 'higher'} },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.map(c=>c.text).join('|')==='Method|Acc|CIDEr|BLEU|METEOR');

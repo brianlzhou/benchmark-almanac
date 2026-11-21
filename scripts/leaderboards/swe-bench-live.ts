@@ -21,6 +21,7 @@ const board: Leaderboard = {
   url: `${SITE}/`,
   feed: `${SITE}/reports-0605.jsonl (set "lite")`,
   terms: 'Static file on GitHub Pages that the page loads; robots.txt allows it and the SWE-bench-Live repository is MIT-licensed.',
+  stats: { resolved: { name: 'Resolved tasks', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' } },
   aliases: {
     'Claude-4.6-Opus': 'claude-opus-4-6',
     'Claude-4.8-Opus': 'claude-opus-4-8',

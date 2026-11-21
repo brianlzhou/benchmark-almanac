@@ -22,6 +22,10 @@ const board: Leaderboard = {
     mathInteraction: 'Math Interaction', mathOutcome: { name: 'Math Outcome', unit: '%' },
     docInteraction: 'Doc Interaction', docOutcome: 'Doc Outcome',
   },
+  stats: {
+    mathTurns: { name: 'Math turns', unit: 'count' },
+    docTurns: { name: 'Document turns', unit: 'count' },
+  },
   async fetch() {
     const config = await fetchJson(FEED) as { components: { type: string; props: { value?: Table } }[] };
     const table = config.components.find(c => c.type === 'dataframe' && c.props.value?.headers?.includes('Math Turns'))?.props.value;

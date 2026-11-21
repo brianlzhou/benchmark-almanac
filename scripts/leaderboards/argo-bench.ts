@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://argo-bench.com#leaderboard",
   feed: FEED,
   terms: "The repository uses Apache 2.0 for code and CC BY 4.0 for the question cards and warehouse data. https://github.com/TextQLLabs/Argo-Bench",
+  stats: {
+    solved: { name: 'Tasks solved', unit: '%', better: 'higher' },
+    steps: { name: 'Steps per task', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.some(c => c.text.includes('Cost / task')));
     const headers = ['Model','Score','Solved','Cost / task','Tokens / task','Steps / task'];

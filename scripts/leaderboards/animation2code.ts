@@ -10,6 +10,10 @@ const feed = 'https://anya-ji.github.io/animation2code-website/';
 const board: Leaderboard = {
   benchmark: 'animation2code', url: feed, feed,
   terms: 'The project website uses CC BY-SA 4.0. https://creativecommons.org/licenses/by-sa/4.0/',
+  stats: {
+    temporal: { name: 'Temporal similarity', unit: 'score', better: 'higher' },
+    executionPercent: { name: 'Executable programs', unit: '%', better: 'higher', note: 'Percentage of generated programs that execute.' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t =>
       t[0]?.map(c => c.text).join('|') === 'Setting / Model|FPS|Exec (%)|Appearance|Temporal');

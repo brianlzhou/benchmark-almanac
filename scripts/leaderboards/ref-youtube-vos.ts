@@ -8,6 +8,8 @@ const FEED=PAGE+'/results/47908';
 export default {benchmark:'ref-youtube-vos', parts: {
   J: { name: 'Region Jaccard', group: 'Dimension' },
   F: { name: 'Boundary F measure', group: 'Dimension' },
+}, stats: {
+  entries: { name: 'Entries', unit: 'count', note: 'Number of entries submitted for the run.' },
 },url:PAGE,feed:FEED,
  terms:'Public official competition results hosted by CodaLab; the almanac credits the Refer-YouTube-VOS organizers and links the source.',
  async fetch():Promise<LeaderboardRow[]> {

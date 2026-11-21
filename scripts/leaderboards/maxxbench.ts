@@ -2,9 +2,15 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const url='https://maxxbench.unlap.ai/';
+const stats = {
+  estimatedBenchMaxxing: { name: 'Estimated benchmark maxxing', unit: 'score' },
+  steps: { name: 'Steps', unit: 'count' },
+  reportedTokens: { name: 'Reported tokens', unit: 'tokens' },
+} as const;
 export default {
   benchmark:'maxxbench',url,feed:url,
   terms:'The makers publish this public results table; robots.txt has no restrictions and no separate extraction terms are stated.',
+  stats,
   async fetch():Promise<LeaderboardRow[]> {
     const t=tables(await fetchText(url)).find(t=>t[0]?.some(c=>c.text.includes('MaxxBench Score')));
     if(!t || t[0].length!==5)throw new Error('MaxxBench results columns changed');

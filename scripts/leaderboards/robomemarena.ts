@@ -15,6 +15,13 @@ const board: Leaderboard = {
   url: "https://robomemarena.github.io/leaderboard_data.json",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    componentSuccess: { name: 'Component success rate', unit: '%', better: 'higher' },
+    transferComponentSuccess: { name: 'Transfer component success rate', unit: '%', better: 'higher' },
+    occlusionComponentSuccess: { name: 'Occlusion component success rate', unit: '%', better: 'higher' },
+    countingComponentSuccess: { name: 'Counting component success rate', unit: '%', better: 'higher' },
+    sequenceComponentSuccess: { name: 'Sequence component success rate', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const data = await fetchJson<any>(FEED);

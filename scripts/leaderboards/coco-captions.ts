@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://cocodataset.org/#captions-leaderboard",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { Bleu_1: { name: 'BLEU-1', unit: 'score', better: 'higher' }, Bleu_2: { name: 'BLEU-2', unit: 'score', better: 'higher' }, Bleu_3: { name: 'BLEU-3', unit: 'score', better: 'higher' }, Bleu_4: { name: 'BLEU-4', unit: 'score', better: 'higher' }, METEOR: { name: 'METEOR', unit: 'score', better: 'higher' }, ROUGE_L: { name: 'ROUGE-L', unit: 'score', better: 'higher' }, SPICE: { name: 'SPICE', unit: 'score', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 

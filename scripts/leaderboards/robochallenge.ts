@@ -14,6 +14,9 @@ const board: Leaderboard = {
   url: 'https://robochallenge.ai/leaderboard',
   feed: `${FEED} (success_ratio)`,
   terms: 'Static JSON the public leaderboard page loads; robochallenge.ai serves no robots.txt rules (the path returns the app) and states no terms for the board.',
+  stats: {
+    progress: { name: 'Progress score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{ display_name: string; success_ratio: number; score?: number }[]>(FEED);
     return data.map(

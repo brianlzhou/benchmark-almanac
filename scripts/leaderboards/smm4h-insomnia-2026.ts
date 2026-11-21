@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The public results page gives no separate score license. CodaBench serves HTML for robots.txt. The overview reports the final scores.",
   parts: { 'Label F1': 'Label F1', 'Exact F1': 'Exact F1', 'Partial F1': 'Partial F1' },
+  stats: { precision: { name: 'Overall precision', unit: 'score', better: 'higher', note: 'Precision stored from 0 to 1.' }, recall: { name: 'Overall recall', unit: 'score', better: 'higher', note: 'Recall stored from 0 to 1.' } },
   async fetch() {
     const text = await pdfText(feed);
     const section = text.match(/Team\s+Subtask 1\s+Subtask 2\s+System Summary([\s\S]+?)Table 3: System performance/)?.[1] ?? '';

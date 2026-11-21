@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: kaggleFeed('google', 'facts-search/versions/2'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: { searches: { name: 'Average searches', unit: 'count', better: 'lower' }, hedging: { name: 'Hedging rate', unit: '%', better: 'lower' }, attempted: { name: 'Attempted accuracy', unit: '%', better: 'higher' }, f1: { name: 'F1', unit: '%', better: 'higher' } },
   fetch: () =>
     kaggleRows('google', 'facts-search/versions/2', 'Score', 100, {
       searches: { task: 'Average Searches' },

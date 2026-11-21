@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: feed,
   feed,
   terms: PAPER_TERMS + ' https://info.arxiv.org/help/license/index.html',
+  stats: { fScore: { name: 'F score', unit: '%', better: 'higher' }, accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const header = ["MODELS","FScore","B. Acc","Acc","Recall","FScore","B. Acc","Acc","Recall"];

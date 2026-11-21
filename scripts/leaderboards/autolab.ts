@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://autolab.moe/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at autolab.moe; retain source attribution and follow the upstream terms.",
+  stats: { 'best@3':{name:'Best@3',unit:'score',better:'higher'} },
   aliases: {},
   
   async fetch() {

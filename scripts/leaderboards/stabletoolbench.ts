@@ -19,6 +19,9 @@ const board: Leaderboard = {
  url: "https://github.com/THUNLP-MT/StableToolBench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   fac: { name: 'Final-answer correctness', unit: '%', better: 'higher', note: 'Evaluation that considers final answers only.' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

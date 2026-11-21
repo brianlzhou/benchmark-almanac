@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/english_proverbs/results",
   feed: FEED,
   terms: "The directory contains 51 score files for 39 model variants after collapsing temperature settings. The repository license is Apache 2.0. https://github.com/google/BIG-bench/blob/main/LICENSE GitHub lists crawl limits and the raw file host has no robots.txt.",
+  stats: { calibration_multiple_choice_brier_score: { name: 'Calibration multiple-choice Brier score', unit: 'brier', better: 'lower' }, expected_calibration_error: { name: 'Expected calibration error', unit: 'score', better: 'lower' }, normalized_aggregate_score: { name: 'Normalized aggregate score', unit: 'score', better: 'higher' }, weighted_log_probabilities: { name: 'Weighted log probabilities', unit: 'score', better: 'higher' }, weighted_probabilities: { name: 'Weighted probabilities', unit: 'score', better: 'higher' } },
   async fetch() {
     const index = await fetchText(FEED);
     const files = new Set([...index.matchAll(/"path":"(bigbench\/benchmark_tasks\/english_proverbs\/results\/scores_[^"/]+\.json)"/g)].map(m => m[1]));

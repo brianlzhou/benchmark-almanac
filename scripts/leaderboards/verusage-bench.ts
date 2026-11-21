@@ -15,6 +15,7 @@ interface Data {
   }[];
 }
 const board: Leaderboard = {
+  stats: { solved: { name: 'Solved tasks', unit: 'count' }, total: { name: 'Total tasks', unit: 'count' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, AL: { name: 'Alignment', unit: '%', better: 'higher' }, AC: { name: 'Accuracy', unit: '%', better: 'higher' }, IR: { name: 'Instruction following', unit: '%', better: 'higher' }, MA: { name: 'Memory accuracy', unit: '%', better: 'higher' }, NO: { name: 'No-op handling', unit: '%', better: 'higher' }, NR: { name: 'Noise robustness', unit: '%', better: 'higher' }, OS: { name: 'Outcome success', unit: '%', better: 'higher' }, ST: { name: 'State tracking', unit: '%', better: 'higher' }, VE: { name: 'Verification', unit: '%', better: 'higher' } },
   benchmark: 'verusage-bench',
   url: 'https://microsoft.github.io/verus-proof-synthesis/',
   feed: FEED,

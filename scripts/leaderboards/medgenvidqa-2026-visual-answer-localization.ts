@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.codabench.org/competitions/14015/",
   feed,
   terms: "The organizers publish the task overview in the ACL Anthology. The host has no robots.txt.",
+  stats: { iou03: { name: 'Intersection over union at 0.3', unit: '%', better: 'higher' }, iou05: { name: 'Intersection over union at 0.5', unit: '%', better: 'higher' }, meanIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' } },
   async fetch() {
     const doc = await pdfText(feed);
     const table = doc.match(/Rank\s+Team\s+Run\/Model\s+IoU@0\.3\s+IoU@0\.5\s+IoU@0\.7\s+mIoU([\s\S]*?)Table 5:/)?.[1];

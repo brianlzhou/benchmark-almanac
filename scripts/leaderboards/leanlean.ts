@@ -13,6 +13,18 @@ const board: Leaderboard = {
   url: "https://matharena.ai/?comp=leanlean--oct26",
   feed,
   terms: "The MathArena repository uses the MIT license. Board reuse terms need review at https://matharena.ai/ The robots.txt URL serves HTML.",
+  stats: {
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    averageRetries: { name: 'Average retries', unit: 'count', better: 'lower' },
+    latency: { name: 'Average time', unit: 'seconds', better: 'lower' },
+    'Dead code': { name: 'Dead code change', unit: '%', note: 'Percentage-point change attributed to dead code.' },
+    'Deleted declarations': { name: 'Deleted declarations change', unit: '%', note: 'Percentage-point change attributed to deleted declarations.' },
+    'Proof rewrite': { name: 'Proof rewrite change', unit: '%', note: 'Percentage-point change attributed to proof rewrites.' },
+    'Automation rewrite': { name: 'Automation rewrite change', unit: '%', note: 'Percentage-point change attributed to automation rewrites.' },
+    'New definition savings': { name: 'New definition savings change', unit: '%', note: 'Percentage-point change attributed to new definition savings.' },
+    'Syntax optimization': { name: 'Syntax optimization change', unit: '%', note: 'Percentage-point change attributed to syntax optimization.' },
+    'Added declarations': { name: 'Added declarations change', unit: '%', note: 'Percentage-point change attributed to added declarations.' },
+  },
   async fetch() {
     const {table} = await fetchJson<{table:string}>(matharenaFeed('leanlean--oct26'));
     const t = tables(table)[0], head = t[0].map(c=>c.text);

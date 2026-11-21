@@ -19,6 +19,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,
+  stats: { ors: { name: 'Over-refusal score', unit: '%', better: 'lower' } },
   aliases: {
     ...SCALE_ALIASES,
     'nemotron-3-ultra-nvfp4': 'nemotron-3-ultra',

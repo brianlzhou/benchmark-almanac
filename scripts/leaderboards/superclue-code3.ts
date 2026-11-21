@@ -9,6 +9,10 @@ const feed = "https://raw.githubusercontent.com/CLUEbenchmark/SuperCLUE-Code3/HE
 const board: Leaderboard = {
   benchmark: 'superclue-code3', url, feed,
   terms: "The repository publishes comparison results. The README does not specify separate reuse terms for these scores. https://github.com/CLUEbenchmark/SuperCLUE-Code3" ,
+  stats: {
+    unweighted: { name: 'Unweighted score', unit: '%', better: 'higher' },
+    instructionFollowing: { name: 'Instruction following rate', unit: '%', better: 'higher' },
+  },
   aliases: { 'ChatGLM3-6B-Chat': 'chatglm3-6b' },
   parts: { easy:'初级难度', medium:'中级难度', hard:'高级难度' },
   async fetch() {

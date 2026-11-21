@@ -22,6 +22,7 @@ const board: Leaderboard = {
   headline: 'Vals AI reports no overall score, so the headline is the plain mean of its three risk-area failure rates.',
   terms: 'Vals AI reserves all rights on its public benchmark page. https://www.vals.ai/benchmarks/mental-health',
   parts: { urgent: 'Urgent safety', health: 'Health advice', relationships: 'Relationship boundaries' },
+  stats: {conversations:{name:'Conversations',unit:'count'},scenarios:{name:'Scenarios',unit:'count'}},
   async fetch() {
     const html = await fetchText(url);
     const component = await asset(url, html.match(/component-url="([^"]*\/MentalHealthResults\.[^"]+)"/)?.[1]);

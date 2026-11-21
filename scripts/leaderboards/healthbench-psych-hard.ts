@@ -9,6 +9,12 @@ const board: Leaderboard = {
   url: "https://github.com/mindbench-ai/healthbench-psych/blob/main/eval/runs/matrix_healthbench-psych-hard-v1.csv",
   feed: FEED,
   terms: "MindBench.ai uses the MIT license. Vendored HealthBench materials retain their original MIT terms. https://github.com/mindbench-ai/healthbench-psych#license The raw file host has no robots.txt.",
+  stats: {
+    'claude-haiku-4-5-20251001': { name: 'Claude Haiku judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
+    'gemini-2.5-flash': { name: 'Gemini judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
+    'gpt-4.1-2025-04-14': { name: 'Generative pre-trained transformer 4.1 judge score', unit: 'score', better: 'higher', note: 'Clipped mean score from 0 to 1.' },
+    prompts: { name: 'Prompts', unit: 'count' },
+  },
   async fetch() {
     const records = parseCsv(await fetchText(FEED));
     const byModel = new Map<string, Record<string, number>>();

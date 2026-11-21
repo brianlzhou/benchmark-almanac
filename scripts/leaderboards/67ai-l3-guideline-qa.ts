@@ -11,6 +11,10 @@ const board: Leaderboard = {
   terms: '67AI Lab publishes these scores without separate reuse terms. Its robots.txt permits the page.',
   aliases: { 'Opus 5.5': 'claude-opus-5-5' },
   parts: { retrieved: 'Correct when right passage retrieved', abstention: 'Correct abstention' },
+  stats: {
+    worstRunWrongDoses: { name: 'Wrong doses in worst run', unit: 'count', better: 'lower' },
+    deltaVsOpus: { name: 'Difference versus Opus', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(url)).find(t => t[0]?.[1]?.text === 'Fully correct');
     const headers = ['Model', 'Fully correct', 'Correct when right passage retrieved', 'Correct abstention', 'Wrong doses, worst run', 'Δ vs Opus', 'Verdict'];

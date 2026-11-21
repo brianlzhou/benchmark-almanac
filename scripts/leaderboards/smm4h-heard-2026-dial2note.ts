@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.codabench.org/competitions/14194",
   feed,
   terms: "The organizers publish the final scores in their ACL Anthology workshop paper. The competition and its robots.txt route returned a bot challenge.",
+  stats: { bleu: { name: 'BLEU', unit: 'score', better: 'higher', note: 'BLEU score stored from 0 to 1.' }, rouge1: { name: 'ROUGE-1', unit: 'score', better: 'higher', note: 'ROUGE-1 score stored from 0 to 1.' }, rouge2: { name: 'ROUGE-2', unit: 'score', better: 'higher', note: 'ROUGE-2 score stored from 0 to 1.' }, rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher', note: 'ROUGE-L score stored from 0 to 1.' }, meteor: { name: 'METEOR', unit: 'score', better: 'higher', note: 'METEOR score stored from 0 to 1.' } },
   async fetch(){
     const pdf=await pdfText(feed);
     const table=pdf.split(/Team\s+Avg\s+BLEU\s+ROUGE-1\s+ROUGE-2\s+ROUGE-L\s+METEOR\s+System Summary/)[1]?.split('Table 4:')[0];

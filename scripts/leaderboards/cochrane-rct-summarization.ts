@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2008.11293';
 const board: Leaderboard = {
   benchmark: 'cochrane-rct-summarization', feed, url: feed, static: 'paper',
   terms: 'The authors publish the evaluation under the terms linked at https://arxiv.org/abs/2008.11293.',
+  stats: {devRougeL:{name:'Development ROUGE-L',unit:'score',better:'higher'},relevanceAbove2:{name:'Relevance above 2',unit:'%',better:'higher'},fluencyAbove3:{name:'Fluency above 3',unit:'%',better:'higher'},factualityAbove3:{name:'Factuality above 3',unit:'%',better:'higher'}},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[0]?.slice(4).join('|') === 'ROUGE-L ( dev )|ROUGE-L ( test )');

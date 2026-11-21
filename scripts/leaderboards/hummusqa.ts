@@ -10,6 +10,12 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2603.27877',
   feed: FEED,
   terms: PAPER_TERMS,
+  stats: {
+    consistency: { name: 'Consistency', unit: '%', better: 'higher' },
+    lowConsistency: { name: 'Low difficulty consistency', unit: '%', better: 'higher' },
+    mediumConsistency: { name: 'Medium difficulty consistency', unit: '%', better: 'higher' },
+    highConsistency: { name: 'High difficulty consistency', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));
     const main = tables.find(t => t[0]?.includes('Consistency (%)') && t[1]?.[1] === 'All');

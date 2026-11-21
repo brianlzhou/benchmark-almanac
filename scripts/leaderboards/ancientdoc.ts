@@ -10,6 +10,20 @@ const parts = { ocr: 'Page-level OCR', translation: 'Vernacular Translation', re
 const board: Leaderboard = {
   benchmark: 'ancientdoc', url: 'https://bytedance.github.io/AncientDoc/#results', feed, parts,
   terms: 'The ACL Anthology publishes the paper under its copyright policy at https://aclanthology.org/faq/copyright/.',
+  stats: {
+    cer: { name: 'Character error rate', unit: 'score', better: 'lower' },
+    precision: { name: 'Character precision', unit: 'score', better: 'higher' },
+    recall: { name: 'Character recall', unit: 'score', better: 'higher' },
+    f1: { name: 'Character F1', unit: 'score', better: 'higher' },
+    reasoningChrF: { name: 'Reasoning CHRF++', unit: 'score', better: 'higher' },
+    reasoningBsF1: { name: 'Reasoning BERTScore F1', unit: 'score', better: 'higher' },
+    knowledgeChrF: { name: 'Knowledge CHRF++', unit: 'score', better: 'higher' },
+    knowledgeBsF1: { name: 'Knowledge BERTScore F1', unit: 'score', better: 'higher' },
+    translationChrF: { name: 'Translation CHRF++', unit: 'score', better: 'higher' },
+    translationBsF1: { name: 'Translation BERTScore F1', unit: 'score', better: 'higher' },
+    variantChrF: { name: 'Variant CHRF++', unit: 'score', better: 'higher' },
+    variantBsF1: { name: 'Variant BERTScore F1', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const pdf = await pdfText(feed);
     const main = pdf.split('Table 2: Evaluation on page-level OCR.');

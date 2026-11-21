@@ -4,6 +4,10 @@ import type { LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
 import { jsonAfter, num } from '../html.ts';
 export const MUSIC_TERMS = 'Music Arena terms prohibit automated access without written permission; the almanac credits and links the source under its owner-directed import policy.';
+export const MUSIC_STATS = {
+  votes: { name: 'Votes', unit: 'count' },
+  realTimeFactor: { name: 'Real-time factor', unit: 'score', better: 'lower' as const, note: 'Generation time divided by audio duration.' },
+};
 export async function musicRows(track: 'instrumental' | 'vocal'): Promise<LeaderboardRow[]> {
   const html = await fetchText('https://music-arena.org/');
   const config = jsonAfter<{components: {type:string;props: {label?:string;value?: {headers:string[];data:unknown[][]}}}[]}>(html, 'window.gradio_config =');

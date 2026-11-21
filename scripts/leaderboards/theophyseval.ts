@@ -11,6 +11,7 @@ const agents = [
 const board: Leaderboard = {
   benchmark: 'theophyseval', url: feed, feed, static: 'paper', costPer: 'run',
   terms: 'The researchers publish the tables under the paper terms at https://arxiv.org/abs/2610.16733.',
+  stats: { solved: { name: 'Solved problems', unit: 'count', better: 'higher' }, inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' }, outputTokens: { name: 'Output tokens', unit: 'tokens', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens', better: 'lower' } },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const grades = tables.find(t => t[0]?.[0] === 'Problem' && t.at(-1)?.[0] === 'Solved');

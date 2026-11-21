@@ -23,6 +23,10 @@ const board: Leaderboard = {
   url: "https://engiworld.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at engiworld.github.io; retain source attribution and follow the upstream terms.",
+  stats: {
+    turns: { name: 'Turns', unit: 'count' },
+    outputTokensPerTurn: { name: 'Output tokens per turn', unit: 'tokens' },
+  },
   aliases: {},
   chart:{title:'EngiScore versus API cost',x:{key:'cost',label:'Mean API cost per task',unit:'$',better:'lower'},y:{key:'score',label:'EngiScore',unit:'%',better:'higher'},note:'Overall evaluation across 306 tasks, including unsuccessful runs.'},
   async fetch() {

@@ -9,6 +9,10 @@ const board: Leaderboard = {
   benchmark:'colder', url:'https://github.com/mohsenfayyaz/ColDeR#-leaderboard-', feed,
   terms:'Public results credited to the ColDeR authors. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service',
   headline:'The leaderboard ranks models by accuracy on the foil task, the default ColDeR evaluation.',
+  stats:{
+    pairedTStatistic:{name:'Paired t-test statistic',unit:'score'},
+    pValueUpperExclusive:{name:'P-value upper bound',unit:'score',note:'Published upper-exclusive p-value threshold.'},
+  },
   async fetch() {
     const source = await fetchText(feed);
     const body = source.match(/^\| Model\s*\| Accuracy \| Paired t-Test Statistic \| p-value \|\s*\n[^\n]+\n((?:\|[^\n]+\n?)+)/m)?.[1];

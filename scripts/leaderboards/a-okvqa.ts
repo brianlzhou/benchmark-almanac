@@ -8,7 +8,12 @@ const feed = 'https://arxiv.org/html/2206.01718';
 export default {
   benchmark: 'a-okvqa', url: feed, feed, static: 'paper',
   terms: 'The authors link the license at https://arxiv.org/abs/2206.01718',
-  parts: { mc: 'Multiple Choice', da: 'Direct Answer' },
+  parts: {
+    mc: 'Multiple Choice',
+    da: 'Direct Answer',
+    mcValidation: { name: 'Multiple-choice validation accuracy', unit: '%', better: 'higher' },
+    daValidation: { name: 'Direct-answer validation accuracy', unit: '%', better: 'higher' },
+  },
   headline: 'The paper reports no overall score. The headline is the plain mean of the multiple-choice and direct-answer test accuracies.',
   async fetch() {
     const ts = paperTables(await paperHtml(feed)).map(grid).filter(t =>

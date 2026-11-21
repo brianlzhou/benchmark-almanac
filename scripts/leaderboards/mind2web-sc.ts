@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2406.09187';
 const board: Leaderboard = {
   benchmark: 'mind2web-sc', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2406.09187.',
+  stats: { lpp: {name:'Label precision',unit:'%',better:'higher'}, lpr: {name:'Label recall',unit:'%',better:'higher'}, fra: {name:'False refusal accuracy',unit:'%',better:'higher'}, ea: {name:'Execution accuracy',unit:'%',better:'higher'} },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.[7] === 'SeeAct on Mind2Web-SC' && t[1]?.slice(7).join('|') === 'LPA|LPP|LPR|EA|FRA');

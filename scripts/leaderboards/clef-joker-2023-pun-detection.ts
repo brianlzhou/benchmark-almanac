@@ -19,6 +19,7 @@ const runs: [string, string, string, string?][] = [
 const board: Leaderboard = {
   benchmark: 'clef-joker-2023-pun-detection', url: feed, feed, parts,
   terms: 'The authors publish the overview under CC BY 4.0. https://ceur-ws.org/Vol-3497/paper-149.pdf',
+  stats: Object.fromEntries(['en','fr','es'].flatMap(language => [['' + language + 'Precision', language.toUpperCase() + ' precision'], [language + 'Recall', language.toUpperCase() + ' recall'], [language + 'Accuracy', language.toUpperCase() + ' accuracy']]).map(([key, name]) => [key, { name, unit: '%', better: 'higher' }])),
   async fetch() {
     const pdf = await pdfText(feed);
     const results = new Map<string, Record<string, number>>();

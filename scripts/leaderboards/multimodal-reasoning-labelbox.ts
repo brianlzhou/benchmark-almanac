@@ -10,6 +10,13 @@ const board: Leaderboard = {
   url: "https://labelbox.com/leaderboards/multimodal-reasoning/",
   feed: FEED,
   terms: "Labelbox links its terms of service and provides no separate leaderboard license. https://docs.labelbox.com/page/terms-of-service The robots rules exclude CGI and PDF paths.",
+  stats: {
+    win_rate: { name: 'Win rate', unit: '%', better: 'higher' },
+    avg_clarity: { name: 'Average clarity', unit: 'score', better: 'higher', note: 'Average rating for how well spatial relationships with other objects are described.' },
+    avg_distances: { name: 'Average distance rating', unit: 'score', better: 'higher', note: 'Average rating for how well relative distances and proportions are conveyed.' },
+    total_matches: { name: 'Total matches', unit: 'count' },
+    trueskill_rating: { name: 'TrueSkill rating', unit: 'rating', better: 'higher' },
+  },
   async fetch() {
     const data = await labelboxData(FEED, 'multimodal-reasoning');
     if (data.overall.length < 8 || Object.keys(data.info).length < 4) throw new Error('Missing multimodal standings');

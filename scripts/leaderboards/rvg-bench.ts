@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: 'The authors publish the results alongside the CC BY-NC-SA 4.0 annotations. https://huggingface.co/datasets/fyrisk159/RVG-Bench',
   headline: 'The score is overall mean intersection over union, expressed as a percentage.',
   parts: Object.fromEntries(Object.entries(names).map(([key,name]) => [key,{name,unit:'%'}])),
+  stats: { recallAtIoU03: {name: 'Recall at IoU 0.3', unit: '%', better: 'higher'} },
   async fetch() {
     const table = tables(await fetchText(feed)).map(grid).find(t => t[0][12] === 'Overall' &&
       t[1]?.join('|') === 'Model|Input|Caus|Seq|Ref|Char|Anom|Symb|Comp|Ord|Overall|mIoU|mIoU|IoU@0.3');

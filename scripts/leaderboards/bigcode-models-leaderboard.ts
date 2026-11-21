@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard",
   feed: FEED,
   terms: "Check the publisher’s terms at https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard Hugging Face allows crawling in robots.txt.",
+  stats: { averageScore: { name: 'Average score', unit: '%', better: 'higher' }, languages: { name: 'Languages', unit: 'count' }, peakMemoryMb: { name: 'Peak memory', unit: 'count' }, sequenceLength: { name: 'Sequence length', unit: 'tokens' }, throughput: { name: 'Throughput', unit: 'tokens/s', better: 'higher' }, throughputBatch50: { name: 'Throughput at batch size 50', unit: 'tokens/s', better: 'higher' } },
   parts: Object.fromEntries(languages.map((name) => [name, { name, group: 'Language' }])),
   async fetch() {
     const data = parseCsv(await fetchText(FEED));

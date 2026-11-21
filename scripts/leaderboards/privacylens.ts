@@ -12,6 +12,11 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2409.00138",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  probing: { name: 'Probing accuracy', unit: '%', better: 'higher' },
+  conditionalLeakage: { name: 'Conditional leakage rate', unit: '%', better: 'lower' },
+  helpfulness: { name: 'Helpfulness', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(grid).find(t=>t[0]?.[1]==='Basic Prompt');if(!t)throw new Error('PrivacyLens table missing');const rows:LeaderboardRow[]=[];

@@ -6,6 +6,7 @@ const feed = 'https://aclanthology.org/2025.acl-long.659.pdf';
 const board: Leaderboard = {
   benchmark: 'dress-essay-scoring', static: 'paper', url: 'https://aclanthology.org/2025.acl-long.659/', feed,
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
+  stats: { content: { name: 'Content score', unit: 'score', better: 'higher' }, language: { name: 'Language score', unit: 'score', better: 'higher' }, organization: { name: 'Organization score', unit: 'score', better: 'higher' } },
   async fetch() {
     const text = await pdfText(feed);
     if (!/ArTS \(Do et al\., 2024\)[\s\S]{0,180}?0\.690/.test(text) || !/Llama 3\.1 8B \(Grattafiori et al\., 2024\)[\s\S]{0,180}?0\.691/.test(text)) throw new Error('Missing DREsS Table 3');

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   fetch: () => matharenaRows(COMP),
 };
 export default board;

@@ -18,6 +18,14 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The page lists copyright for Vals AI and gives no reuse license. https://www.vals.ai/benchmarks/inference_provider",
   parts,
+  stats: {
+    latency: { name: 'Latency per test', unit: 'ms', better: 'lower' },
+    firstTokenMedian: { name: 'Time to first token median', unit: 'seconds', better: 'lower' },
+    firstTokenP95: { name: 'Time to first token P95', unit: 'seconds', better: 'lower' },
+    firstAnswerMedian: { name: 'Time to first answer median', unit: 'seconds', better: 'lower' },
+    firstAnswerP95: { name: 'Time to first answer P95', unit: 'seconds', better: 'lower' },
+    generationMedian: { name: 'Generation speed median', unit: 'tokens/s', better: 'higher' },
+  },
   async fetch() {
     const view = await valsView(await fetchText(FEED));
     const tasks = view?.tasks as Record<string, Record<string, Run>> | undefined;

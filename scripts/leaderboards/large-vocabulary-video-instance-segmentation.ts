@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'The authors publish Table 2 on arXiv under the terms at https://arxiv.org/abs/2304.01715.',
   parts: { base: 'Test AP (base categories)', novel: 'Test AP (novel categories)',
     val: 'Validation AP', valBase: 'Validation AP (base categories)', valNovel: 'Validation AP (novel categories)' },
+  stats:{fps:{name:'Frames per second',unit:'count',better:'higher'}},
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(rows =>
       rows[0]?.join('|') === 'Method|Backbone|Val|Val|Val|Test|Test|Test|fps');

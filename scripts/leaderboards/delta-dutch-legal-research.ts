@@ -6,6 +6,7 @@ import { tables, num } from '../lib/html.ts';
 const feed = "https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark";
 
 const board: Leaderboard = {
+  stats: { criteria: { name: 'Criteria score', unit: '%', better: 'higher' }, form: { name: 'Form score', unit: 'score', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   benchmark: "delta-dutch-legal-research",
   url: "https://www.legalbenchmarks.ai/research/delta-dutch-legal-research-benchmark",
   feed,

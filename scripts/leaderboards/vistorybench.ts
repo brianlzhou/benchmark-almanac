@@ -29,6 +29,7 @@ const board: Leaderboard = {
   terms: 'The project licenses the benchmark code and results under MIT. https://vistorybench.github.io/#about',
   headline: 'The Full leaderboard reports overall rank across 80 stories. A lower rank is better.',
   parts: Object.fromEntries(Object.entries(ranks).map(([key, label]) => [key, { name: label.replace('_rank', ' rank'), better: 'lower', unit: 'score' }])),
+  stats: Object.fromEntries(Object.entries(measures).map(([key,label]) => [key, {name: label, unit: 'score', better: 'higher'}])),
   async fetch() {
     const ranking = fullTable(await fetchText(feed), ['overall_rank', ...Object.values(ranks)]);
     await new Promise(resolve => setTimeout(resolve, 1050));

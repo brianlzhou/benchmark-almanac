@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (page chunk object "b" for reasoning high; flight-data ResultsView table for reasoning max)`,
   terms: 'Public CAIS blog page; lastexam.ai serves no robots.txt (the path returns 404) and publishes no terms page.',
+  stats: { tokenRequests: { name: 'Token measurement requests', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(PAGE);
     const rows: LeaderboardRow[] = [];

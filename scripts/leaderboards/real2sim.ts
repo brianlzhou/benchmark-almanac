@@ -41,6 +41,7 @@ const board: Leaderboard = {
   url: `${SITE}#leaderboard`,
   feed: FEED,
   terms: 'The site states no terms of use and its robots.txt allows all agents. The DROID recordings keep their own license.',
+  stats: { semantic: { name: 'Semantic fidelity', unit: 'score', better: 'higher', note: 'Semantic fidelity measured with DINOv2, from 0 to 1.' } },
   async fetch() {
     const js = await fetchText(FEED);
     const summary = array<Summary[]>(js, 'SUMMARY');

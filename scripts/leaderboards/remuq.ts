@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: feed,
   feed,
   terms: PAPER_TERMS + ' https://info.arxiv.org/help/license/index.html',
+  stats: { precisionAt1: { name: 'Precision at 1', unit: '%', better: 'higher' }, recallAt5: { name: 'Recall at 5', unit: '%', better: 'higher' }, recallAt10: { name: 'Recall at 10', unit: '%', better: 'higher' }, recallAt20: { name: 'Recall at 20', unit: '%', better: 'higher' }, recallAt50: { name: 'Recall at 50', unit: '%', better: 'higher' }, recallAt100: { name: 'Recall at 100', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const header = 'Model|Dataset|KB-Size|MRR@5|P@5|R@5|R@10|R@20|R@50|R@100';

@@ -7,6 +7,7 @@ const FEED = 'https://arxiv.org/html/2510.12798';
 
 const board: Leaderboard = {
   benchmark: 'dense-200-bbox', static: 'paper',
+  stats: { f1At95: { name: 'F1 at 95% precision', unit: '%', better: 'higher' }, meanF1: { name: 'Mean F1', unit: '%', better: 'higher' } },
   url: 'https://arxiv.org/abs/2510.12798',
   feed: FEED,
   terms: PAPER_TERMS,

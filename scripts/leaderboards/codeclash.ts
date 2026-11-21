@@ -15,6 +15,7 @@ const board: Leaderboard = {
   aliases: {
     'Grok Code Fast': 'grok-code-fast-1',
   },
+  stats: { ratingMargin: { name: 'Rating margin', unit: 'rating' } },
   async fetch() {
     const table=tables(await fetchText(URL)).find(t=>t[0]?.some(c=>c.text==='ELO'));
     if(!table)throw new Error('CodeClash Elo table missing');

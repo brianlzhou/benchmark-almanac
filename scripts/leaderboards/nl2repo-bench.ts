@@ -3,7 +3,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2512.12730';
 const board: Leaderboard = {
-  benchmark: 'nl2repo-bench', static: 'paper', parts: {
+  benchmark: 'nl2repo-bench', static: 'paper', stats: { fullyPassedTasks: { name: 'Fully passed tasks', unit: 'count' }, meanTurns: { name: 'Mean interaction turns', unit: 'count' }, stdTurns: { name: 'Standard deviation of turns', unit: 'count' }, maxTurns: { name: 'Maximum interaction turns', unit: 'count' } }, parts: {
   easy: { name: 'Easy', group: 'Difficulty' },
   medium: { name: 'Medium', group: 'Difficulty' },
   hard: { name: 'Hard', group: 'Difficulty' },

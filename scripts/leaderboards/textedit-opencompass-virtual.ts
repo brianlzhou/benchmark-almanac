@@ -2,7 +2,7 @@
 // Score: Full judged Avg. 
 import type { Leaderboard } from './types.ts';
 import { sourceBoard, trackRows } from '../lib/boards/textedit-opencompass.ts';
-const board: Leaderboard = { benchmark: "textedit-opencompass-virtual", parts: {
+const board: Leaderboard = { benchmark: "textedit-opencompass-virtual", stats: { Avg: { name: 'Average score', unit: 'score', better: 'higher' }, OA: { name: 'Overall accuracy', unit: 'score', better: 'higher' }, OP: { name: 'Object preservation', unit: 'score', better: 'higher' }, OR: { name: 'Object replacement', unit: 'score', better: 'higher' }, F1: { name: 'F1 score', unit: 'score', better: 'higher' }, NED: { name: 'Normalized edit distance', unit: 'score', better: 'higher' }, CLIP: { name: 'CLIP similarity', unit: 'score', better: 'higher' }, AES: { name: 'Aesthetic score', unit: 'score', better: 'higher' } }, parts: {
   TA: { name: 'Text accuracy', group: 'Dimension' },
   TP: { name: 'Text preservation', group: 'Dimension' },
   SI: { name: 'Scene integrity', group: 'Dimension' },

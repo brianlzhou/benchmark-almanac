@@ -7,6 +7,7 @@ import { SUPERGLUE_ALIASES, SUPERGLUE_TERMS } from './superglue.ts';
 const DB='https://mtl-sentence-representations.firebaseio.com/superglue/';
 const board:Leaderboard={
  verified: 'approved for publication by SuperGLUE administrators',
+ stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' } },
  benchmark:'multirc',url:'https://super.gluebenchmark.com/leaderboard',feed:DB+'resultsVisibility.json',terms:SUPERGLUE_TERMS,aliases:SUPERGLUE_ALIASES,
  async fetch(){
   let first=true;

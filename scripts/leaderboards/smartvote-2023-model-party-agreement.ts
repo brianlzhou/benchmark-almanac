@@ -1,15 +1,20 @@
 // The source reports no overall score. The headline is the plain mean of the 6 parts, computed by this importer.
 // Each part measures a model's agreement with one Swiss party on the 2023 Smartvote questionnaire.
 // The authors' results JSON includes confidence intervals for each party separately.
-import type { Leaderboard } from './types.ts';
+import type { BoardPart, Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://raw.githubusercontent.com/joelbarmettlerUZH/swiss-llm-bias-analysis/HEAD/results/paper/smartvote_agreement_scores.json';
-const parties = { sp: 'SP', greens: 'Grüne', glp: 'GLP', centre: 'Die Mitte', fdp: 'FDP', svp: 'SVP' };
+const parties = { sp: {name: 'SP', unit: '%', better: 'higher'}, greens: {name: 'Grüne', unit: '%', better: 'higher'}, glp: {name: 'GLP', unit: '%', better: 'higher'}, centre: {name: 'Die Mitte', unit: '%', better: 'higher'}, fdp: {name: 'FDP', unit: '%', better: 'higher'}, svp: {name: 'SVP', unit: '%', better: 'higher'} } as const satisfies Record<string, BoardPart>;
 type Agreement = { agreement: number; ci_lower: number; ci_upper: number; n_politicians: number };
 const board: Leaderboard = {
   benchmark: 'smartvote-2023-model-party-agreement', url: 'https://github.com/joelbarmettlerUZH/swiss-llm-bias-analysis', feed, parts: parties,
+  stats: {
+    spPoliticians: {name: 'SP politicians', unit: 'count'}, greensPoliticians: {name: 'Grüne politicians', unit: 'count'},
+    glpPoliticians: {name: 'GLP politicians', unit: 'count'}, centrePoliticians: {name: 'Die Mitte politicians', unit: 'count'},
+    fdpPoliticians: {name: 'FDP politicians', unit: 'count'}, svpPoliticians: {name: 'SVP politicians', unit: 'count'},
+  },
   aliases: {
     "Mistral 7B v0.1": "mistral-7b-instruct-v0-1",
     "Claude 3 Haiku": "claude-3-haiku",
@@ -45,10 +50,10 @@ const board: Leaderboard = {
     const rows = Object.values(data.results.models).flatMap(r => {
       const metrics: Record<string, number> = {};
       let total = 0;
-      for (const [key, party] of Object.entries(parties)) {
-        const result = r.agreements[party];
+      for (const [key, part] of Object.entries(parties)) {
+        const result = r.agreements[part.name];
         if (!result) return [];
-        if (![result.agreement, result.ci_lower, result.ci_upper, result.n_politicians].every(Number.isFinite)) throw new Error('Invalid agreement for ' + party);
+        if (![result.agreement, result.ci_lower, result.ci_upper, result.n_politicians].every(Number.isFinite)) throw new Error('Invalid agreement for ' + part.name);
         metrics[key] = result.agreement;
         metrics[key + 'Low'] = result.ci_lower;
         metrics[key + 'High'] = result.ci_upper;

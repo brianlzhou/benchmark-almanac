@@ -33,6 +33,7 @@ const board: Leaderboard = {
   "url": "https://gdpx.semianalysis.com/",
   "feed": "https://gdpx.semianalysis.com/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
+  "stats": { "cost": { "name": "Average cost per task", "unit": "usd", "better": "lower" }, "outputTokens": { "name": "Average output tokens", "unit": "tokens", "better": "lower" } },
   "chart": {
     "title": "Cost vs. Performance Pareto Frontier",
     "x": {

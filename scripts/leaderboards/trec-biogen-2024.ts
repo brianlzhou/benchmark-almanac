@@ -6,6 +6,7 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const FEED = 'https://www.databricks.com/karl.pdf';
 const board: Leaderboard = {
   benchmark: 'trec-biogen-2024', url: 'https://trec.nist.gov/data/biogen2024.html', feed: FEED,
+  stats: { browseCompPlus: { name: 'BrowseComp-Plus score', unit: '%', better: 'higher' } },
   terms: 'Databricks publishes the comparison in its public KARL paper. https://www.databricks.com/karl.pdf',
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(FEED);

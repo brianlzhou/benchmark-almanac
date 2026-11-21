@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (all pass@1 settings, with matching pass@3 metrics)`,
   terms: 'Static JSON on the HumanEval-V GitHub Pages site, which has no robots.txt; the repository states no license, so only the published numbers are read.',
+  stats: { passAt3: { name: 'Pass@3', unit: '%', better: 'higher' } },
   aliases: {
     'Claude 3.5 Sonnet (1022)': 'claude-3-5-sonnet-october-2024',
     'GPT-4o (0806)': 'gpt-4o-aug-2024',

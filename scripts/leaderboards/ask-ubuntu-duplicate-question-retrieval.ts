@@ -7,6 +7,12 @@ const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/AskUbuntuDupQue
 const board: Leaderboard = {
   benchmark:'ask-ubuntu-duplicate-question-retrieval', url:'https://mteb-leaderboard.hf.space/tasks/AskUbuntuDupQuestions', feed, host:'MTEB',
   terms:'MTEB releases the model results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats: {
+    embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+    maxTokens: { name: 'Maximum tokens', unit: 'tokens' },
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+    memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' },
+  },
   async fetch() {
     return checked(await taskScores(feed,'AskUbuntuDupQuestions','map_at_1000',256),256);
   },

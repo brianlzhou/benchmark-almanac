@@ -10,6 +10,9 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (the page's results table, through the shared Vals reader)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
+  stats: {
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const rows = await valsRows(SLUG);
     if (rows.length < 3) throw new Error(`RollerCoasterTycoonBench: ${rows.length} models, expected at least 3`);

@@ -10,6 +10,7 @@ const parts = { A: 'Reaction-type recognition', B: 'Structure generation in cont
 const board: Leaderboard = {
   benchmark: 'cheminsight', static: 'paper', feed, url: feed, parts,
   terms: 'The authors publish Table 1 under the terms at https://arxiv.org/abs/2611.11794.',
+  stats: { depth: { name: 'Depth score', unit: 'score', better: 'higher' } },
   aliases: { 'Qwen3-235B-A22B-Thinking-2507': 'qwen3-235b-a22b-thinking-jul-2025' },
   async fetch() {
     const header = ['Model','Inference Mode','Scope Score','Depth Score',...Object.keys(parts)];

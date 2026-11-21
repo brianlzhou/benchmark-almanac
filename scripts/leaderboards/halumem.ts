@@ -1,18 +1,20 @@
 // The source reports no overall score. The headline is the plain mean of the 2 parts, computed by this importer.
 // HaluMem tests memory systems. Its README ranks memory extraction F1 first and gives separate Medium and Long results.
 // Entries identify the memory system itself. GPT-4o judges outputs and generates answers for the separate QA task.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow} from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://raw.githubusercontent.com/MemTensor/HaluMem/HEAD/README.md';
 const splits = ['HaluMem-Medium','HaluMem-Long'];
 const names = ['Recall','Weighted recall','Target precision','Accuracy','False memory resistance','F1','Updating correct','Updating hallucination','Updating omission','QA correct','QA hallucination','QA omission'];
+const haluStats:Record<string,BoardStat>=Object.fromEntries([...splits.flatMap(split=>names.map(name=>[split+' '+name,{name:split.replace('HaluMem-','HaluMem ')+' '+name,unit:'%',better:/hallucination|omission/i.test(name)?'lower' as const:'higher' as const}])), ...splits.flatMap(split=>['Target precision','Accuracy'].map(name=>[split+' '+name+' count',{name:split.replace('HaluMem-','HaluMem ')+' '+name.toLowerCase()+' count',unit:'count'}]))]);
 const board: Leaderboard = {
   benchmark:'halumem', url:'https://github.com/MemTensor/HaluMem#-leaderboard', feed,
   terms:'CC BY-NC-ND 4.0: https://spdx.org/licenses/CC-BY-NC-ND-4.0.html',
   headline:'The leaderboard prioritizes memory extraction F1. The headline is the plain mean of F1 on HaluMem-Medium and HaluMem-Long.',
   parts:Object.fromEntries(splits.map(name=>[name,name+' F1'])),
+  stats:haluStats,
   async fetch() {
     const readme = (await fetchText(feed)).replace(/<!--[\s\S]*?-->/g,'');
     const bySplit = splits.map(split => {

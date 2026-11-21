@@ -50,6 +50,11 @@ const board: Leaderboard = {
     practice: { name: 'Part practice', group: 'Area', note: 'Flex, materials, sketches, holes and part patterns. 25% of the reward.', unit: 'score' },
     ...Object.fromEntries(COMPONENTS.map(([k, name, group, note]) => [k, { name, group, note, unit: 'score' }])),
   },
+  stats: {
+    medianTurns: { name: 'Median turns', unit: 'count', better: 'lower' },
+    medianHours: { name: 'Median hours', unit: 'hours', better: 'lower' },
+    timeLimitHit: { name: 'Time-limit hits', unit: 'count' },
+  },
   async fetch() {
     const [md, html] = await Promise.all([fetchText(MD), fetchText(PAGE)]);
     // short name -> full name, through the color each label and chart point wears

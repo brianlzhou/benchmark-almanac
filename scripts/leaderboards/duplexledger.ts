@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2610.27581';
 const interaction = ['RCR', 'cFD', 'Early', 'Pre-end', 'Win-Intr.', 'Stop@0.8', 'Stop (s)'];
 const memory = ['Resp.', 'Latest', 'Stale', 'D-Adopt', 'D-Rej.', 'Final'];
 const parts: Record<string,BoardPart> = {};
+for (const name of [...interaction.slice(1, 6), ...memory]) parts[name] = { name, group: name === 'Resp.' || name === 'Latest' || name === 'Stale' || name === 'D-Adopt' || name === 'D-Rej.' || name === 'Final' ? 'Memory fidelity' : 'Full-duplex interaction' };
 const board: Leaderboard = {
   benchmark: 'duplexledger', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/', parts,
   headline: 'The paper reports no overall score, so the headline is conditional full-duplex success on realized challenges.',

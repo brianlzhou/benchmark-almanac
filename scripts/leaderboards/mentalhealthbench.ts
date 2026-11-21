@@ -16,6 +16,7 @@ function figure(text: string, from: string, to: string, cols: number): Map<strin
 const board: Leaderboard = {
   benchmark: 'mentalhealthbench', static: 'paper', url: URL, feed: URL + ' (Figures 5, 7, 10 and 11, PDF text layer)',
   terms: 'OpenAI publishes this technical report for public reading. The CDN has no robots.txt restriction on this path. Numeric results are attributed to the report authors.',
+  stats: { penaltyBurden: { name: 'Normalized penalty burden', unit: '%', better: 'higher', note: 'Negative rubric points incurred, normalized by total possible positive points.' }, positivePointsAchieved: { name: 'Positive points achieved', unit: '%', better: 'higher', note: 'Positive rubric points earned as a fraction of total possible positive points.' } },
   // the paper's breakdowns of the same task-clipped score: by acuity (Figure 7), by user profile (Figure 10) and
   // on the tasks with prior user context (Figure 11). Its per-axis scores (Figure 8) are signed contributions, not parts.
   parts: {

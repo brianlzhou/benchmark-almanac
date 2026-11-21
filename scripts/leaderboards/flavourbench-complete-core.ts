@@ -16,6 +16,7 @@ const board: Leaderboard = {
   feed,
   terms: "Hugging Face allows this file in robots.txt. The authors license derived scores and prompts under CC BY 4.0. Provider responses retain their original terms. https://raw.githubusercontent.com/josefchen/flavourbench/main/LICENSES.md",
   parts: { constraint: 'Constraint', pairing: 'Pairing', substitution: 'Substitution', panel1: 'Panel 1', panel2: 'Panel 2' },
+  stats: { group: { name: 'Statistical rank group', unit: 'count' }, rank: { name: 'Point estimate rank', unit: 'count', better: 'lower' }, standardError: { name: 'Standard error', unit: 'score', better: 'lower' }, completed: { name: 'Completed tasks', unit: 'count' }, scheduled: { name: 'Scheduled tasks', unit: 'count' }, valid: { name: 'Valid scored tasks', unit: 'count' }, parseable: { name: 'Parseable tasks', unit: 'count' }, maxOutputTokens: { name: 'Maximum output tokens', unit: 'tokens' } },
   aliases: { 'Command A': 'cohere-command-a', 'Mistral Large 3 2512': 'mistral-large-3', Hy3: 'tencent-hy3' },
   async fetch() {
     const entries = (await fetchText(feed)).trim().split(/\r?\n/).map(s => JSON.parse(s) as Entry);

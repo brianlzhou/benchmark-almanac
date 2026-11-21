@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: { frames: { name: 'Video frames', unit: 'count' } },
   
   async fetch() {
     const source=await fetchText(FEED);const out:LeaderboardRow[]=[];

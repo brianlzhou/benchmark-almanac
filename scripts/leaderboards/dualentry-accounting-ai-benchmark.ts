@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://www.dualentry.com/benchmark",
   feed,
   terms: "DualEntry prohibits scraping and requires prior written permission for redistribution. Keep this link for reference. robots.txt allows the feed path.",
+  stats: { consistency: { name: 'Consistency', unit: '%', better: 'higher' }, costPerRun: { name: 'Cost per run', unit: 'usd', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const page = await fetchText(feed);
     const detail = new Map<string, { cost: number; metrics: Record<string, number> }>();

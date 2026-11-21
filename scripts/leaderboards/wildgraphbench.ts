@@ -21,6 +21,7 @@ const board: Leaderboard = {
   'Multi-fact Acc.': { name: 'Multi-fact', group: 'Task type' },
 }, url: "https://github.com/BstWPY/WildGraphBench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { Recall: {name: 'Recall score', unit: '%', better: 'higher'}, Precision: {name: 'Precision score', unit: '%', better: 'higher'}, F1: {name: 'F1 score', unit: '%', better: 'higher'} },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

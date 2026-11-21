@@ -9,6 +9,12 @@ const board: Leaderboard = {
   url: "https://github.com/boczkakaroly/ai-and-data-projects/blob/main/hungarian-riddles-benchmark/readme.md",
   feed,
   terms: "The raw file host has no robots.txt. The original pilot permits reuse with credit. The Hugging Face riddle dataset lists MIT. https://github.com/boczkakaroly/ai-and-data-projects/tree/main/hungarian-riddles-benchmark and https://huggingface.co/datasets/boczkakaroly/hungarian-riddles-benchmark",
+  stats: {
+    factual: { name: 'Factuality', unit: '%', better: 'higher' },
+    justification: { name: 'Justification quality', unit: '%', better: 'higher' },
+    language: { name: 'Language quality', unit: '%', better: 'higher' },
+    hallucination: { name: 'Hallucination rate', unit: '%', better: 'lower' },
+  },
   aliases: { 'GPT-5 Deep Search': 'gpt-5' },
   async fetch() {
     const source = await fetchText(feed);

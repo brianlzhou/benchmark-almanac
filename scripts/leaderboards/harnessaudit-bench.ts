@@ -20,6 +20,13 @@ const board: Leaderboard = {
 }, url: "https://harnessaudit.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  aliases:{'ChatGPT-5.4':'gpt-5-4'},
+ stats: {
+  L2_avg: { name: 'Execution fidelity', unit: 'score', better: 'higher', note: 'Average of action validity and task completion.' },
+  ST20: { name: 'Stability at 20 percent stress', unit: 'score', better: 'higher' },
+  ST40: { name: 'Stability at 40 percent stress', unit: 'score', better: 'higher' },
+  ST60: { name: 'Stability at 60 percent stress', unit: 'score', better: 'higher' },
+  Overall: { name: 'Overall safety score', unit: 'score', better: 'higher' },
+ },
  async fetch() {
 const html=await fetchText(FEED);const at=html.indexOf('const MODELS =');if(at<0)throw new Error('No model array');const d=jsLiteral<any[]>(html,html.indexOf('[',at));return d.map(r=>({model:r.name.replace(/ \((CC|Codex)\)$/,''),harness:r.group,score:r.Overall,metrics:Object.fromEntries(Object.entries(r).filter(([,v])=>typeof v==='number')) as Record<string,number>}));
  },

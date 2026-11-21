@@ -10,6 +10,7 @@ const board: Leaderboard = {
  url: "https://www.grayswan.ai/blog/uk-aisi-x-gray-swan-agent-red-teaming-challenge-results-snapshot",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { breaks: { name: 'Breaks', unit: 'count' }, chats: { name: 'Chats', unit: 'count' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

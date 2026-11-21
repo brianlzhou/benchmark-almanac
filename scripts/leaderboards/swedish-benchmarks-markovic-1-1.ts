@@ -13,6 +13,12 @@ const board: Leaderboard = {
   url: "https://markovic.com/swedish_benchmark_V1.1.html",
   feed,
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
+  stats: {
+    coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+    accuracy: { name: 'Average accuracy', unit: '%', better: 'higher' },
+    latencySeconds: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    invalidPredictions: { name: 'Invalid predictions', unit: 'count' },
+  },
   async fetch() {
     const data = jsonAfter<{ leaderboard: Row[]; benchmarks: {id: string; label: string}[] }>(await fetchText(feed), 'const dashboard = ');
     if (data.leaderboard.length < 23 || data.benchmarks.length < 13) throw new Error('Incomplete Swedish suite');

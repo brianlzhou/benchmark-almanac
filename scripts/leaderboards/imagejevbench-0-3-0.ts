@@ -15,6 +15,15 @@ const board: Leaderboard = {
   terms: "Benchmark Heaven, ImageJevBench v0.3.0, CC BY 4.0. Accessed 2026-11-20. The site allows these paths in robots.txt. Source SHA-256: 373ac5b62a7bc353e9de1a252e94df3a1545bc36e85f3ae23b58105b75dfde11.",
   aliases: { 'GPT-6 Luna via OpenAI Decisions (OpenAI)': 'gpt-6-luna', 'GPT-6 Luna (low reasoning effort)': 'gpt-6-luna' },
   parts: { publicAccuracy: {name: 'Public accuracy', unit: '%'}, sealedAccuracy: {name: 'Sealed accuracy', unit: '%'} },
+  stats: {
+    capability: { name: 'Capability', unit: 'score', better: 'higher' },
+    intelligence: { name: 'Intelligence', unit: 'score', better: 'higher' },
+    calibration: { name: 'Calibration', unit: 'score', better: 'higher' },
+    speed: { name: 'Speed', unit: 'score', better: 'higher' },
+    costAxis: { name: 'Cost axis', unit: 'score', better: 'lower' },
+    p50Latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    p95Latency: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const release = await fetchJson<{version: string, rows: Entry[]}>(feed);
     const ranked = release.rows.filter(r => r.ranked);

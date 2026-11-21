@@ -12,6 +12,7 @@ type Entry = {
 const board: Leaderboard = {
   benchmark: 'spatial-pathfinding-reasoning-challenge', url: 'https://sparc.gipplab.org/#leaderboard', feed,
   terms: 'The project uses MIT. https://github.com/lkaesberg/SPaRC/blob/main/LICENSE',
+  stats: { invalidPathRate: {name: 'Invalid path rate', unit: '%', better: 'lower'}, steps: {name: 'Average steps', unit: 'count'} },
   aliases: { 'Mistral Small 3.2 24B': 'mistral-small-3-2', 'R1 Distill 32B': 'deepseek-r1-distill-qwen-32b', 'R1 70B': 'deepseek-r1-distill-llama-70b' },
   parts: Object.fromEntries([1, 2, 3, 4, 5].map(n => ['level' + n, 'Level ' + n])),
   async fetch() {

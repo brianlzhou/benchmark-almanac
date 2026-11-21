@@ -57,6 +57,7 @@ const board: Leaderboard = {
   feed: `${URL} (agents JSON in the page's script chunks: overall.avg3, costs and times per rollout)`,
   terms: 'Server-rendered public page; the site has no robots.txt restrictions and no terms.',
   aliases: {},
+  stats: { minutes: { name: 'Minutes per rollout', unit: 'minutes', better: 'lower' }, steps: { name: 'Steps per rollout', unit: 'count' }, passAt3: { name: 'Pass@3', unit: '%', better: 'higher' } },
   chart: {
     title: 'Agent Performance',
     note: 'Overall pass rate against the average agent wall-clock time per rollout, on a log scale; the board marks the Pareto frontier.',

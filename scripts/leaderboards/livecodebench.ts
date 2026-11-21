@@ -8,6 +8,7 @@ import { fetchJson } from '../lib/util.ts';
 import { LCB_FEED, LCB_PAGE, LCB_TERMS, LCB_ALIASES, LCB_PARTS } from './livecodebench-v6.ts';
 const board: Leaderboard = {
   parts: LCB_PARTS,
+  stats:{problems:{name:'Problems',unit:'count'}},
   benchmark: 'livecodebench', url: LCB_PAGE, feed: LCB_FEED, terms: LCB_TERMS, aliases: LCB_ALIASES,
   async fetch() {
     const data = await fetchJson<{ models: {model_repr: string; link?: string}[]; performances: {model: string; date: number; platform: string; difficulty: string; 'pass@1': number}[] }>(LCB_FEED);

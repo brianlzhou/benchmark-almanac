@@ -12,6 +12,7 @@ const keys = [...Object.keys(parts), 'totalType', 'totalSR'];
 export default {
   benchmark: 'os-kairos', static: 'paper', url, feed: url, parts,
   terms: 'The authors publish Table 2 on arXiv. https://arxiv.org/abs/2503.16465',
+  stats: { totalType: { name: 'Total action type accuracy', unit: '%', better: 'higher' }, totalSR: { name: 'Total step success rate', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = paperTables(await paperHtml(url)).map(grid);
     const header = ['Models', 'API', 'SCROLL', 'PRESS', 'STOP', 'CLICK', 'CLICK', 'TYPE', 'TYPE', 'Total', 'Total', 'TSR'];

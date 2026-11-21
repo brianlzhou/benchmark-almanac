@@ -29,6 +29,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (inline script#rrb-data JSON, rows[].pass_rate)`,
   terms: 'Static page on Accio\'s public object storage (no robots.txt); the page states no terms and releases its task replicas under an open license.',
+  stats: { capacity: { name: 'Average capacity', unit: '%', better: 'higher' }, steps: { name: 'Average steps', unit: 'count', better: 'lower' }, latency: { name: 'Average task latency', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Average total tokens', unit: 'tokens', better: 'lower' } },
   chart:{title:'Pass rate vs. task cost',x:{key:'cost',label:'Average task cost',unit:'$',better:'lower'},y:{key:'score',label:'Pass rate',unit:'%',better:'higher'}},
   async fetch() {
     const html = await fetchText(PAGE);

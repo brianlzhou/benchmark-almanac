@@ -22,6 +22,7 @@ const board: Leaderboard = {
    vectorization: { name: 'Vectorization', group: 'Task type' },
    CLRS: { name: 'CLRS', group: 'Task type' },
    BabyLM: { name: 'BabyLM', group: 'Task type' },
+   cifar10: { name: 'CIFAR-10', group: 'Task type' },
  },
  url: "https://arxiv.org/html/2310.03302",
  feed: FEED,

@@ -14,6 +14,11 @@ const board: Leaderboard = {
   feed: `${OLAM_PAGE} (the Diplomacy charts in the page's HTML)`,
   terms: OLAM_TERMS,
   ...OLAM_HARNESS,
+  stats: {
+    brokenPromiseRate: { name: 'Broken promise rate', unit: '%', better: 'lower', note: 'How often the model breaks its promises to allies, graded from its transcript.' },
+    gullibility: { name: 'Gullibility', unit: '%', better: 'lower', note: 'How often the model believes a false promise and suffers for it.' },
+    skepticism: { name: 'Skepticism', unit: '%', note: 'The share of promises made to the model that it believed. Olam Labs calls neither direction better.' },
+  },
   chart: {
     title: 'Share vs. broken promises',
     x: { key: 'brokenPromiseRate', label: 'Broken promise rate', unit: '%', better: 'lower' },

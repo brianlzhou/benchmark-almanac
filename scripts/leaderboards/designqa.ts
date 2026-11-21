@@ -8,6 +8,7 @@ const segments = { retrievalF1BoW: 'Retrieval', compilationF1Rules: 'Compilation
   presenceACC: 'Presence', dimensionACC: 'Dimension', functionalPerformanceACC: 'Functional Performance' };
 
 const board: Leaderboard = {
+  stats: { dimensionBleu: { name: 'Dimension BLEU', unit: 'score', better: 'higher' }, dimensionRouge: { name: 'Dimension ROUGE', unit: 'score', better: 'higher' }, functionalPerformanceBleu: { name: 'Functional performance BLEU', unit: 'score', better: 'higher' }, functionalPerformanceRouge: { name: 'Functional performance ROUGE', unit: 'score', better: 'higher' } },
   benchmark: "designqa",
   url: "https://design-qa.github.io/#leaderboardStart",
   feed: FEED,

@@ -11,7 +11,8 @@ const pct=(x:number|undefined)=>x===undefined?undefined:Math.round(x*1000)/10;
 const board: Leaderboard = {
  benchmark:'firecrawl-devdex', url:'https://www.firecrawl.dev/benchmarks/devdex', feed:FEED,
  terms:'The repository is MIT licensed. Results are credited to Firecrawl with a link to the repository.',
- parts:{ repoRecall:{name:'Repo recall@10',group:'Track recall'}, fixRecall:{name:'Issue or PR recall@10',group:'Track recall'}, docsRecall:{name:'Docs recall@10',group:'Track recall'}, repoMrr:{name:'Repo MRR@10',group:'Track MRR'}, fixMrr:{name:'Issue or PR MRR@10',group:'Track MRR'}, docsMrr:{name:'Docs MRR@10',group:'Track MRR'} },
+ stats:{ repoScored:{name:'Repo scored items',unit:'count'},repoDeadFrac:{name:'Repo dead fraction',unit:'%',better:'lower'},fixScored:{name:'Issue or pull request scored items',unit:'count'},fixDeadFrac:{name:'Issue or pull request dead fraction',unit:'%',better:'lower'},docsScored:{name:'Docs scored items',unit:'count'},docsDeadFrac:{name:'Docs dead fraction',unit:'%',better:'lower'} },
+ parts:{ repoRecall:{name:'Repo recall@10',group:'Track recall'}, fixRecall:{name:'Issue or pull request recall@10',group:'Track recall'}, docsRecall:{name:'Docs recall@10',group:'Track recall'}, repoMrr:{name:'Repo MRR@10',group:'Track MRR'}, fixMrr:{name:'Issue or pull request MRR@10',group:'Track MRR'}, docsMrr:{name:'Docs MRR@10',group:'Track MRR'} },
  async fetch(){
   const d=await fetchJson<Data>(FEED); if(!d.systems||Object.keys(d.systems).length<9) throw new Error('DevDex: fewer than nine systems');
   const rows:LeaderboardRow[]=[];

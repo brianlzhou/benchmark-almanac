@@ -11,6 +11,15 @@ const board: Leaderboard = {
   aliases: { 'OpenAI gpt-4o-mini-tts': 'gpt-4o-mini-tts' },
   parts: { naturalness: 'Naturalness', intelligibility: 'Intelligibility', voiceQuality: 'Voice quality' },
   costPer: 'run',
+  stats: {
+    clips: { name: 'Audio clips', unit: 'count' },
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    latencyP95: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
+    meanRTF: { name: 'Mean real-time factor', unit: 'speedup', better: 'lower' },
+    failures: { name: 'Failures', unit: 'count', better: 'lower' },
+    cer: { name: 'Character error rate', unit: '%', better: 'lower' },
+    wer: { name: 'Word error rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const all = tables(await fetchText(url)).map(t => t.map(r => r.map(c => c.text)));
     function table(...header: string[]) {

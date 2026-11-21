@@ -22,6 +22,14 @@ const board: Leaderboard = {
   text_only: { name: 'Text only', group: 'Modality' },
 }, url: "https://huggingface.co/datasets/CohereLabs/kaleidoscope/resolve/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    formatError: { name: 'Format error rate', unit: '%', better: 'lower' },
+    validAccuracy: { name: 'Valid accuracy', unit: '%', better: 'higher' },
+    multimodal_formatError: { name: 'Multimodal format error rate', unit: '%', better: 'lower' },
+    multimodal_validAccuracy: { name: 'Multimodal valid accuracy', unit: '%', better: 'higher' },
+    text_only_formatError: { name: 'Text only format error rate', unit: '%', better: 'lower' },
+    text_only_validAccuracy: { name: 'Text only valid accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

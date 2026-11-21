@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://ceur-ws.org/Vol-4038/paper_220.pdf#page=7",
   feed,
   terms: "The organizers publish Table 2 in their report under CC BY 4.0. https://ceur-ws.org/Vol-4038/paper_220.pdf CEUR-WS robots.txt permits this volume.",
+  stats: { manual: { name: 'Manual acceptance', unit: '%', better: 'higher' }, identical: { name: 'Identical translations', unit: '%', better: 'higher' } },
   async fetch() {
     const text = await pdfText(feed);
     const table = text.match(/run ID\s+automatic\s+manual\s+identical\s*\n([\s\S]*?)\n\s*\n/)?.[1];

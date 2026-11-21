@@ -11,6 +11,7 @@ const board: Leaderboard = {
  parts: {
    'Attr.': { name: 'Attributes', group: 'Task type' },
    'Cam. Pose': { name: 'Camera pose', group: 'Task type' },
+   'Count.': { name: 'Counting', group: 'Task type' },
    'Manip.': { name: 'Object manipulation', group: 'Task type' },
    'Rel. Dir.': { name: 'Relative direction', group: 'Task type' },
    'Rel. Dist.': { name: 'Relative distance', group: 'Task type' },

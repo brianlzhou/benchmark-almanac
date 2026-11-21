@@ -14,6 +14,7 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   chart: VALS_LATENCY_CHART,
+  stats: { turns: { name: 'Turns per test', unit: 'count', better: 'lower' } },
   aliases: VALS_ALIASES,
   fetch: () => valsDetails(board, SLUG, { tasks: { weightedPass: 'weighted_pass' } }),
 };

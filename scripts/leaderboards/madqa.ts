@@ -33,6 +33,7 @@ const board: Leaderboard = {
   url: `https://huggingface.co/spaces/${SPACE}`,
   feed: `${LIST} (eval/reevaluated_results/*/*_results_*.json, newest per model)`,
   terms: 'Result files in the public MADQA leaderboard Space, which states no license; scores are cited to the MADQA authors.',
+  stats: { docF1:{name:'Document F1',unit:'%',better:'higher'}, kuiper:{name:'Kuiper effort statistic',unit:'score',better:'lower'} },
   aliases: {
     // the API's gemini-2.5-flash, the June 2025 GA model (runs from January 2026)
     'Gemini 2.5 Flash': 'gemini-2-5-flash-jun-2025',

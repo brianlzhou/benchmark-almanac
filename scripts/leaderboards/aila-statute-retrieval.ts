@@ -4,6 +4,13 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/tasks/AILAStatutes/scores";
 
+export const MTEB_MODEL_STATS = {
+  activeParamsB: { name: 'Active parameters', unit: 'billions' },
+  embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+  maxTokens: { name: 'Maximum tokens', unit: 'tokens' },
+  memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' },
+} as const;
+
 interface TaskRow {
   score: number;
   model: { name: string; url?: string; openWeights?: boolean; license?: string; totalParamsB?: number;
@@ -31,6 +38,7 @@ const board: Leaderboard = {
   url: "https://mteb-leaderboard.hf.space/tasks/AILAStatutes",
   feed: FEED,
   terms: "MTEB publishes its results dataset under CC0 1.0. https://huggingface.co/datasets/mteb/results The Space allows crawling in robots.txt.",
+  stats: MTEB_MODEL_STATS,
   async fetch() {
     return taskScores(FEED, 'AILAStatutes', 'ndcg_at_10', 270);
   },

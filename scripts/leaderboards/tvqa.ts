@@ -11,7 +11,12 @@ const board:Leaderboard={benchmark:'tvqa', parts: {
   bbt: { name: 'The Big Bang Theory', group: 'TV show' },
   grey: { name: 'Grey\'s Anatomy', group: 'TV show' },
   himym: { name: 'How I Met Your Mother', group: 'TV show' },
-},url:'https://tvqa.cs.unc.edu/',feed:BASE+'leaderboard_data_without_ts.json',terms:'Public UNC TVQA leaderboard data, subject to the dataset and site terms.',async fetch(){
+},url:'https://tvqa.cs.unc.edu/',feed:BASE+'leaderboard_data_without_ts.json',terms:'Public UNC TVQA leaderboard data, subject to the dataset and site terms.',stats:{
+ validationAccuracy:{name:'Validation accuracy',unit:'%',better:'higher'},
+ bbtTestExamples:{name:'The Big Bang Theory test examples',unit:'count'},castleTestExamples:{name:'Castle test examples',unit:'count'},friendsTestExamples:{name:'Friends test examples',unit:'count'},greyTestExamples:{name:"Grey's Anatomy test examples",unit:'count'},himymTestExamples:{name:'How I Met Your Mother test examples',unit:'count'},houseTestExamples:{name:'House test examples',unit:'count'},overallTestExamples:{name:'Overall test examples',unit:'count'},
+ bbtValidationAccuracy:{name:'The Big Bang Theory validation accuracy',unit:'%',better:'higher'},castleValidationAccuracy:{name:'Castle validation accuracy',unit:'%',better:'higher'},friendsValidationAccuracy:{name:'Friends validation accuracy',unit:'%',better:'higher'},greyValidationAccuracy:{name:"Grey's Anatomy validation accuracy",unit:'%',better:'higher'},himymValidationAccuracy:{name:'How I Met Your Mother validation accuracy',unit:'%',better:'higher'},houseValidationAccuracy:{name:'House validation accuracy',unit:'%',better:'higher'},
+ bbtValidationExamples:{name:'The Big Bang Theory validation examples',unit:'count'},castleValidationExamples:{name:'Castle validation examples',unit:'count'},friendsValidationExamples:{name:'Friends validation examples',unit:'count'},greyValidationExamples:{name:"Grey's Anatomy validation examples",unit:'count'},himymValidationExamples:{name:'How I Met Your Mother validation examples',unit:'count'},houseValidationExamples:{name:'House validation examples',unit:'count'},overallValidationExamples:{name:'Overall validation examples',unit:'count'},
+},async fetch(){
   const rows:LeaderboardRow[]=[];
   for(const split of ['without_ts','with_ts']) {
     const {data}=await fetchJson<{data:Array<{model_name:string;test_public_acc:string|number;val_acc:string|number;date?:string;author?:string;institution?:string;val_additional?:Record<string,[number,number]>;test_public_additional?:Record<string,[number,number]>}>}>(BASE+`leaderboard_data_${split}.json`);

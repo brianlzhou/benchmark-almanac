@@ -7,6 +7,10 @@ interface Entry { model: string; modality: string; metrics: { acc?: number; std_
 const board: Leaderboard = {
   benchmark: 'superchem', url: 'https://superchem.pku.edu.cn/leaderboard', feed: FEED,
   terms: 'Official SUPERChem public leaderboard JSON; the dataset is MIT licensed. Benchmark Almanac credits and links the source.',
+  stats: {
+    std_acc: { name: 'Accuracy standard deviation', unit: 'score' },
+    rpf: { name: 'Reasoning path fidelity', unit: 'score', better: 'higher' },
+  },
   aliases: {'qwen3-235b-a22b-instruct-2507': 'qwen3-235b-a22b-instruct-jul-2025'},
   async fetch() {
     const data = await fetchJson<{ llm_overall_metrics: Entry[] }>(FEED);

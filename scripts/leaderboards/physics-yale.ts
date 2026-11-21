@@ -4,7 +4,7 @@ import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
 import { num } from '../lib/html.ts';
 const FEED='https://raw.githubusercontent.com/yale-nlp/Physics/HEAD/README.md';
-const board:Leaderboard={benchmark:'physics-yale', parts: {
+const board:Leaderboard={benchmark:'physics-yale', stats:{Val:{name:'Validation accuracy',unit:'%',better:'higher'}}, parts: {
   AMO: { name: 'Atomic physics', group: 'Domain' },
   'E&M': { name: 'Electromagnetism', group: 'Domain' },
   CM: { name: 'Classical mechanics', group: 'Domain' },

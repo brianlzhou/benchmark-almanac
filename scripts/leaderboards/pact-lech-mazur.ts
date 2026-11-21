@@ -16,6 +16,12 @@ const board: Leaderboard = {
   feed: `${ghRaw(`lechmazur/${REPO}`, 'README.md')} (Latest Model-Family Leaderboard Table, PACT Bilateral Rating)`,
   terms: LECH_MAZUR_TERMS(REPO),
   aliases: LECH_MAZUR_ALIASES,
+  stats: {
+    profit: { name: 'Average profit per round', unit: 'usd', better: 'higher' },
+    cmsPoints: { name: 'Composite Model Score points', unit: 'count' },
+    games: { name: 'Games played', unit: 'count' },
+    opponents: { name: 'Opponents', unit: 'count' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const r of await lechMazurTable(REPO, 'main', /Latest Model-Family Leaderboard Table/)) {

@@ -11,6 +11,10 @@ export default {
   temporal: { name: 'Temporal', group: 'Task type' },
   free: { name: 'Free', group: 'Task type' },
 },url:'https://arxiv.org/abs/1906.02467',feed,terms:PAPER_TERMS,
+  stats: {
+    wups09: { name: 'WUPS at 0.9 threshold', unit: '%', better: 'higher' },
+    wups0: { name: 'WUPS at 0 threshold', unit: '%', better: 'higher' },
+  },
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
     const t=ts.find(t=>t[1]?.includes('All') && t[1].includes('WUPS@0.9'));

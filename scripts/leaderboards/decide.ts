@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: 'https://benchmark.tazolabs.com/leaderboard',
   feed: FEED,
   terms: 'The DECIDE repository licenses evaluator and website source under MIT; private recordings and annotations are excluded from that license.',
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, runCost: { name: 'Run cost', unit: 'usd', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, voice: { name: 'Voice family score', unit: '%', better: 'higher' }, business: { name: 'Business family score', unit: '%', better: 'higher' }, tools: { name: 'Tools family score', unit: '%', better: 'higher' }, routing: { name: 'Routing family score', unit: '%', better: 'higher' }, turns: { name: 'Turns', unit: 'count', better: 'lower' } },
   chart: {
     title: 'DECIDE efficiency–latency Pareto frontier',
     x: { key: 'latencyIndex', label: 'Normalized latency', unit: 'index', better: 'lower' },

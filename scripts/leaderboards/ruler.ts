@@ -15,6 +15,7 @@ const board: Leaderboard = {
   '128K': { name: '128K', group: 'Length' },
 }, url: 'https://github.com/NVIDIA/RULER', feed: FEED,
   terms: 'Public NVIDIA RULER repository results, subject to the repository license and GitHub terms.',
+  stats: { 'Avg.': { name: 'Average accuracy', unit: '%', better: 'higher' }, 'wAvg. (inc)': { name: 'Weighted average accuracy increasing', unit: '%', better: 'higher' }, 'wAvg. (dec)': { name: 'Weighted average accuracy decreasing', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const section = source.slice(source.indexOf('|Models|'), source.indexOf('## ✅ Updates'));

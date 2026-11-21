@@ -11,6 +11,14 @@ import { fetchText } from '../util.ts';
 
 const PAGE = 'https://geobench.org/';
 
+const COUNTRIES = ['Argentina', 'Australia', 'Bangladesh', 'Bhutan', 'Brazil', 'Bulgaria', 'Cambodia', 'Canada', 'Colombia', 'Croatia', 'Denmark', 'Ecuador', 'Eswatini', 'Finland', 'France', 'Germany', 'Greece', 'Guatemala', 'Hungary', 'India', 'Indonesia', 'Ireland', 'Israel', 'Italy', 'Japan', 'Kazakhstan', 'Kenya', 'Kyrgyzstan', 'Latvia', 'Lithuania', 'Malaysia', 'Mexico', 'Mongolia', 'Montenegro', 'New Zealand', 'Peru', 'Philippines', 'Puerto Rico', 'Qatar', 'Russia', 'Réunion', 'Senegal', 'Slovakia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Tunisia', 'Türkiye', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States'];
+
+const countryParts = Object.fromEntries(COUNTRIES.map((country) => [`country:${country}`, { name: country, group: 'Country' }]));
+const countryStats = Object.fromEntries(COUNTRIES.flatMap((country) => [
+  [`country:${country}:locations`, { name: `${country} locations`, unit: 'count' }],
+  [`country:${country}:points`, { name: `${country} points`, unit: 'score', better: 'higher' }],
+]));
+
 
 interface Row {
   model: string;
@@ -44,7 +52,19 @@ const unquote = (s: string) =>
   );
 
 export function geobenchBoard(benchmark: string, test: string): Leaderboard { return {
-  benchmark, costPer: 'run', parts: {},
+  benchmark, costPer: 'run', parts: countryParts,
+  stats: {
+    points: { name: 'Average GeoGuessr score', unit: 'score', better: 'higher' },
+    n: { name: 'Locations', unit: 'count' },
+    refusal_rate: { name: 'Refusal rate', unit: 'score', better: 'lower', note: 'Share of locations refused, from 0 to 1.' },
+    average_distance_km: { name: 'Average distance', unit: 'score', better: 'lower', note: 'Average distance from the correct location, in kilometers.' },
+    median_distance_km: { name: 'Median distance', unit: 'score', better: 'lower', note: 'Median distance from the correct location, in kilometers.' },
+    median_score: { name: 'Median GeoGuessr score', unit: 'score', better: 'higher' },
+    runInputTokens: { name: 'Run input tokens', unit: 'tokens' },
+    runOutputTokens: { name: 'Run output tokens', unit: 'tokens' },
+    max_tokens: { name: 'Maximum output tokens', unit: 'tokens' },
+    ...countryStats,
+  },
   url: PAGE,
   feed: `${PAGE}assets/index-*.js (JSON.parse data in the current bundle, all published maps)`,
   terms: 'Data shipped in the public geobench.org bundle; the site states no terms and the GeoBench repository is MIT.',

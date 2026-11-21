@@ -24,6 +24,7 @@ const board: Leaderboard = {
   feed: `${HELM_BUCKET}/capabilities/benchmark_output/releases/<newest>/groups/ifeval.json`,
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  stats: { latency: { name: 'Observed inference time', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const release = await helmNewest('capabilities');
     const [table] = await fetchJson<Table[]>(`${HELM_BUCKET}/${release}groups/ifeval.json`);

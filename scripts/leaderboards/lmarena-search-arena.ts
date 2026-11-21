@@ -10,6 +10,8 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lm
 
 const board: Leaderboard = {
   benchmark: 'lmarena-search-arena',
+  stats: { votes: { name: 'Votes', unit: 'count' } },
+  parts: { 'cat:factuality': 'Factuality' },
   url: 'https://arena.ai/leaderboard',
   feed: arenaFeed('search_style_control'),
   terms: ARENA_TERMS,

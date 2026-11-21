@@ -15,6 +15,12 @@ const board: Leaderboard = {
   url: `${URL}#Leaderboard`,
   feed: `${URL} (static HTML table, Cross-Scenarios Avg@4)`,
   terms: 'Static GitHub Pages site; the VitaBench repository (meituan-longcat/vitabench) is MIT-licensed and the page states no other terms.',
+  stats: {
+    passAt4: {name: 'Cross-scenarios pass@4', unit: '%', better: 'higher'}, pass4: {name: 'Cross-scenarios pass^4', unit: '%', better: 'higher'}, reasoningGroupRank: {name: 'Reasoning group rank', unit: 'count'},
+    'Delivery Avg@4': {name: 'Delivery average at 4', unit: '%', better: 'higher'}, 'Delivery Pass@4': {name: 'Delivery pass@4', unit: '%', better: 'higher'}, 'Delivery Pass^4': {name: 'Delivery pass^4', unit: '%', better: 'higher'},
+    'In-store Avg@4': {name: 'In-store average at 4', unit: '%', better: 'higher'}, 'In-store Pass@4': {name: 'In-store pass@4', unit: '%', better: 'higher'}, 'In-store Pass^4': {name: 'In-store pass^4', unit: '%', better: 'higher'},
+    'OTA Avg@4': {name: 'Online travel agency average at 4', unit: '%', better: 'higher'}, 'OTA Pass@4': {name: 'Online travel agency pass@4', unit: '%', better: 'higher'}, 'OTA Pass^4': {name: 'Online travel agency pass^4', unit: '%', better: 'higher'},
+  },
   aliases: {
     'Claude-4.5-Opus': 'claude-opus-4-5',
     'Claude-4.5-Sonnet': 'claude-sonnet-4-5',

@@ -8,6 +8,7 @@ const feed = 'https://aclanthology.org/D19-1332.pdf';
 const board: Leaderboard = {
   benchmark: 'mc-taco', static: 'paper', url: 'https://aclanthology.org/D19-1332/', feed,
   terms: 'The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/',
+  stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.split(/System\s+F1\s+EM/)[1]?.split('Table 2: Summary')[0];

@@ -8,6 +8,10 @@ const feed = 'https://arxiv.org/html/2608.18752';
 const board: Leaderboard = {
   benchmark: 'greekbarretrieval', static: 'paper', url: feed, feed,
   terms: 'The authors publish the paper under the terms at https://arxiv.org/abs/2608.18752.',
+  stats:{
+    ndcg100:{name:'nDCG@100',unit:'score',better:'higher'}, recall10:{name:'Recall@10',unit:'score',better:'higher'}, recall100:{name:'Recall@100',unit:'score',better:'higher'}, map100:{name:'MAP@100',unit:'score',better:'higher'},
+    callsPerQuery:{name:'Calls per query',unit:'count'}, secondsPerQuery:{name:'Time per query',unit:'seconds',better:'lower'}, totalTokens:{name:'Total tokens',unit:'tokens'}, retrievalPoolCost:{name:'Retrieval pool cost',unit:'usd',better:'lower'},
+  },
   aliases: { 'Qwen3-8B': 'qwen3-embedding-8b', 'Qwen3-4B': 'qwen3-embedding-4b', 'Qwen3-0.6B': 'qwen3-embedding-0-6b' },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

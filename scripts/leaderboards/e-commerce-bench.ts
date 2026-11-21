@@ -18,6 +18,9 @@ const board: Leaderboard = {
   aliases: {
     'Qwen3.5-Plus': 'qwen-3-5-plus-hosted-397b-a17b',
   },
+  stats: {
+    toolCalls: { name: 'Tool calls', unit: 'count', better: 'lower' }, steps: { name: 'Steps', unit: 'count', better: 'lower' }, turns: { name: 'Turns', unit: 'count', better: 'lower' }, csePlus: { name: 'Bargaining range share', unit: 'score', better: 'higher' }, badSpendPercent: { name: 'Bad spend', unit: '%', better: 'lower' }, drawdownOverPeak: { name: 'Drawdown over peak', unit: 'score', better: 'lower', note: 'Fraction of peak total assets lost, stored from 0 to 1.' }, yuanPerToolCall: { name: 'Yuan per tool call', unit: 'cny', better: 'lower' }, controllableReturnPp: { name: 'Controllable return', unit: 'score', better: 'lower' }, anchorRatio: { name: 'Anchor ratio', unit: 'score', better: 'lower' }, bankruptRuns: { name: 'Bankrupt runs', unit: 'count' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const trials = /five episodes each/i.test(source) ? 5 : undefined;

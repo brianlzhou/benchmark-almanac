@@ -32,6 +32,16 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Data file of the author's public GitHub Pages site, which states no license or terms.",
   aliases: {},
+  stats: {
+    meanFinalBest: { name: 'Mean final best score', unit: '%', better: 'higher' }, totalTokens: { name: 'Total tokens', unit: 'tokens' },
+    ...Object.fromEntries(['shapesGeneralize','splashGeneralize','mysteryBox','mysteryBoxNohints','shipDetect','shipTune','reactionRates','reactionRatesNohints','scanStitch','scanStitchNohints','shatteredPrior','shatteredPriorNohints','nightSchool','todPipelineNohints','weirdmlBonanza'].flatMap(key => [
+      [`${key}FinalBest`, { name: `${key} final best score`, unit: '%', better: 'higher' }],
+      [`${key}Trials`, { name: `${key} trials`, unit: 'count' }],
+      [`${key}Cost`, { name: `${key} mean API cost`, unit: 'usd', better: 'lower' }],
+      [`${key}OutputTokens`, { name: `${key} output tokens`, unit: 'tokens' }],
+      [`${key}TotalTokens`, { name: `${key} total tokens`, unit: 'tokens' }],
+    ])),
+  },
   async fetch() {
     const { models, configurations } = await fetchJson<{ models: Model[]; configurations:{id:string;name:string;hint_mode?:string}[] }>(FEED);
     board.parts = {};

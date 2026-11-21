@@ -8,6 +8,8 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2606.01869';
 const board: Leaderboard = {
   benchmark: 'worldcoder-bench', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
+  parts: { simulation: { name: 'Simulation', group: 'Scenario', unit: '%', better: 'higher' }, rendering: { name: 'Rendering', group: 'Scenario', unit: '%', better: 'higher' }, app: { name: 'Application', group: 'Scenario', unit: '%', better: 'higher' } },
+  stats: { aCov: { name: 'Action coverage', unit: '%', better: 'higher' }, sCov: { name: 'State coverage', unit: '%', better: 'higher' }, tCov: { name: 'Transition coverage', unit: '%', better: 'higher' } },
   async fetch() {
     const table = paperTables(await paperHtml(URL)).map(grid).find(rows => rows[0]?.[0] === 'Model' && rows[0]?.[1]?.includes('V-Cov'));
     if (!table) throw new Error('WorldCoder Table 1 missing');

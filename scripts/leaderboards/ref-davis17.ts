@@ -7,6 +7,7 @@ const url = 'https://suhwan-cho.github.io/FindTrack/';
 export default {
   benchmark: 'ref-davis17', url, feed: url, host: 'FindTrack',
   terms: 'The FindTrack authors publish their comparison and reference the original methods. https://suhwan-cho.github.io/FindTrack/',
+  stats: { jaccard: { name: 'Jaccard index', unit: '%', better: 'higher' }, boundaryF: { name: 'Boundary F-measure', unit: '%', better: 'higher' } },
   async fetch() {
     const t = paperTables(await fetchText(url)).map(grid).find(g => g[0]?.includes('Ref-DAVIS17'));
     if (!t) throw new Error('Missing FindTrack comparison');

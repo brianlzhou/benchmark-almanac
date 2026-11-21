@@ -27,6 +27,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mobileworld',
+  stats: { maxSteps: { name: 'Maximum steps', unit: 'count' }, historyImages: { name: 'History images', unit: 'count' } },
   parts: {
     guiOnly: { name: 'GUI only', group: 'Task type' },
     userInteraction: { name: 'User interaction', group: 'Task type' },

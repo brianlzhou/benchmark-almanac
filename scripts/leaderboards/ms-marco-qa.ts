@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {fetchText} from '../lib/util.ts';
 import {tables,text} from '../lib/html.ts';
 const URL='https://microsoft.github.io/msmarco/';
-const board:Leaderboard={benchmark:'ms-marco-qa',url:URL,feed:URL,
+const board:Leaderboard={benchmark:'ms-marco-qa',stats:{bleu1:{name:'BLEU-1',unit:'score',better:'higher'}},url:URL,feed:URL,
  terms:'Public Microsoft leaderboard on GitHub Pages; robots.txt does not restrict this page. Links to X are never followed.',
  async fetch(){const t=tables(await fetchText(URL)).find(t=>t[0]?.some(c=>c.text==='Rouge-L'));if(!t)throw new Error('QA leaderboard missing');
  const out=new Map<string,LeaderboardRow>();for(const c of t.slice(1)){

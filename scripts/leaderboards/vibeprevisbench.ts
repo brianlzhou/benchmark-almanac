@@ -3,7 +3,29 @@ import { fetchJson } from '../lib/util.ts';
 const URL = 'https://vibeprevisbench.github.io/';
 const FEED = URL + 'data/results.json';
 const board: Leaderboard = {
-  benchmark: 'vibeprevisbench', parts: {
+  benchmark: 'vibeprevisbench', stats: {
+    tasks: { name: 'Tasks', unit: 'count' }, fails: { name: 'Failed tasks', unit: 'count' },
+    avg_rounds: { name: 'Average rounds', unit: 'count' }, avg_tool_calls: { name: 'Average tool calls', unit: 'count' },
+    avg_in_tok: { name: 'Average input tokens', unit: 'tokens' }, avg_out_tok: { name: 'Average output tokens', unit: 'tokens' },
+    avg_wall_min: { name: 'Average wall time', unit: 'minutes', better: 'lower' },
+    total: { name: 'Total score', unit: '%', better: 'higher' },
+    avg_rounds_total: { name: 'Average rounds (Total)', unit: 'count' }, avg_tool_calls_total: { name: 'Average tool calls (Total)', unit: 'count' },
+    inputTokens: { name: 'Average input tokens (Total)', unit: 'tokens' }, outputTokens: { name: 'Average output tokens (Total)', unit: 'tokens' },
+    avg_wall_min_total: { name: 'Average wall time (Total)', unit: 'minutes', better: 'lower' }, fails_total: { name: 'Failed tasks (Total)', unit: 'count' },
+    avg_rounds_text: { name: 'Average rounds (Text)', unit: 'count' }, avg_tool_calls_text: { name: 'Average tool calls (Text)', unit: 'count' }, avg_in_tok_text: { name: 'Average input tokens (Text)', unit: 'tokens' }, avg_out_tok_text: { name: 'Average output tokens (Text)', unit: 'tokens' }, avg_wall_min_text: { name: 'Average wall time (Text)', unit: 'minutes', better: 'lower' }, fails_text: { name: 'Failed tasks (Text)', unit: 'count' },
+    avg_rounds_media: { name: 'Average rounds (Media)', unit: 'count' }, avg_tool_calls_media: { name: 'Average tool calls (Media)', unit: 'count' }, avg_in_tok_media: { name: 'Average input tokens (Media)', unit: 'tokens' }, avg_out_tok_media: { name: 'Average output tokens (Media)', unit: 'tokens' }, avg_wall_min_media: { name: 'Average wall time (Media)', unit: 'minutes', better: 'lower' }, fails_media: { name: 'Failed tasks (Media)', unit: 'count' },
+    avg_rounds_video: { name: 'Average rounds (Video)', unit: 'count' }, avg_tool_calls_video: { name: 'Average tool calls (Video)', unit: 'count' }, avg_in_tok_video: { name: 'Average input tokens (Video)', unit: 'tokens' }, avg_out_tok_video: { name: 'Average output tokens (Video)', unit: 'tokens' }, avg_wall_min_video: { name: 'Average wall time (Video)', unit: 'minutes', better: 'lower' }, fails_video: { name: 'Failed tasks (Video)', unit: 'count' },
+    avg_rounds_image: { name: 'Average rounds (Image)', unit: 'count' }, avg_tool_calls_image: { name: 'Average tool calls (Image)', unit: 'count' }, avg_in_tok_image: { name: 'Average input tokens (Image)', unit: 'tokens' }, avg_out_tok_image: { name: 'Average output tokens (Image)', unit: 'tokens' }, avg_wall_min_image: { name: 'Average wall time (Image)', unit: 'minutes', better: 'lower' }, fails_image: { name: 'Failed tasks (Image)', unit: 'count' },
+    avg_rounds_continuation: { name: 'Average rounds (Continuation)', unit: 'count' }, avg_tool_calls_continuation: { name: 'Average tool calls (Continuation)', unit: 'count' }, avg_in_tok_continuation: { name: 'Average input tokens (Continuation)', unit: 'tokens' }, avg_out_tok_continuation: { name: 'Average output tokens (Continuation)', unit: 'tokens' }, avg_wall_min_continuation: { name: 'Average wall time (Continuation)', unit: 'minutes', better: 'lower' }, fails_continuation: { name: 'Failed tasks (Continuation)', unit: 'count' },
+    rule: { name: 'Rule score', unit: '%', better: 'higher' }, vlm: { name: 'VLM judge score', unit: '%', better: 'higher' },
+    cost_total: { name: 'Average cost per task (reported)', unit: 'usd', better: 'lower' }, cost_sum_total: { name: 'Total cost', unit: 'usd', better: 'lower' },
+    cost_text: { name: 'Average cost per Text task', unit: 'usd', better: 'lower' }, cost_sum_text: { name: 'Total cost (Text)', unit: 'usd', better: 'lower' },
+    cost_media: { name: 'Average cost per Media task', unit: 'usd', better: 'lower' }, cost_sum_media: { name: 'Total cost (Media)', unit: 'usd', better: 'lower' },
+    cost_video: { name: 'Average cost per Video task', unit: 'usd', better: 'lower' }, cost_sum_video: { name: 'Total cost (Video)', unit: 'usd', better: 'lower' },
+    cost_image: { name: 'Average cost per Image task', unit: 'usd', better: 'lower' }, cost_sum_image: { name: 'Total cost (Image)', unit: 'usd', better: 'lower' },
+    cost_continuation: { name: 'Average cost per Continuation task', unit: 'usd', better: 'lower' }, cost_sum_continuation: { name: 'Total cost (Continuation)', unit: 'usd', better: 'lower' },
+    cost: { name: 'Average cost per task', unit: 'usd', better: 'lower' },
+  }, parts: {
   text: { name: 'Text', group: 'Modality' },
   media: { name: 'Media', group: 'Modality' },
   video: { name: 'Video', group: 'Modality' },

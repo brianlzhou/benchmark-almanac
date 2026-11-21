@@ -9,6 +9,13 @@ const board: Leaderboard = {
   url: "https://hkust-knowcomp.github.io/AdaExploreBench/assets/data/site-data.json?v=20261019-02",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    change_rec: { name: 'Change recommendation score', unit: 'score', better: 'higher' },
+    ea: { name: 'Exploration accuracy', unit: 'score', better: 'higher' },
+    factor_rec: { name: 'Factor recommendation score', unit: 'score', better: 'higher' },
+    probes: { name: 'Probes', unit: 'count' },
+    reprobes: { name: 'Reprobes', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any>(FEED);return d.leaderboard.settings.flatMap((s:any)=>s.rows.map((r:any)=>({model:r.model,setting:s.label,score:r.ca,metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>k!=='ca'&&typeof v==='number'))})));

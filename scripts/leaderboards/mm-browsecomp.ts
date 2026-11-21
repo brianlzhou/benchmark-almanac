@@ -8,6 +8,13 @@ import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const categories = ['media', 'technology', 'society', 'geography', 'academics'];
 const board: Leaderboard = {
   benchmark: "mm-browsecomp", static: 'paper',
+  stats: {
+    strictAccuracy: { name: 'Strict accuracy', unit: '%', better: 'higher' },
+    checklistScore: { name: 'Checklist score', unit: '%', better: 'higher' },
+    textChecklist: { name: 'Text checklist score', unit: '%', better: 'higher' },
+    visualChecklist: { name: 'Visual checklist score', unit: '%', better: 'higher' },
+    ...Object.fromEntries(categories.map(category => [`${category}Strict`, { name: `${category[0].toUpperCase() + category.slice(1)} strict accuracy`, unit: '%', better: 'higher' }]))
+  },
   parts: Object.fromEntries(categories.map(key => [key, {name: key[0].toUpperCase() + key.slice(1), group: 'Category'}])),
   url: "https://github.com/MMBrowseComp/MM-BrowseComp",
   feed: FEED,

@@ -3,6 +3,7 @@ import type {Leaderboard} from './types.ts';
 import {fetchText} from '../lib/util.ts';
 const URL='https://loopsbench.ai/';
 const board:Leaderboard={benchmark:'loopsbench',url:URL,feed:URL+'assets/index-*.js (result data)',
+ stats:{baseResolved:{name:'Base resolved rate',unit:'%',better:'higher'},baseUnitPass:{name:'Base unit pass rate',unit:'%',better:'higher'},unitPass:{name:'Loop unit pass rate',unit:'%',better:'higher'},depth:{name:'Loop depth',unit:'count'},tokensMillions:{name:'Tokens',unit:'millions'}},
  terms:'Public maker results; the site has no robots.txt or additional restriction on reading the published results.',
  aliases:{'DeepSeek-V4P':'deepseek-v4-pro','Kimi-2.6':'kimi-k2-6'},
  async fetch(){

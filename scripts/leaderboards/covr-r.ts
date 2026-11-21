@@ -7,6 +7,7 @@ const feed = 'https://arxiv.org/html/2603.20190';
 const board: Leaderboard = {
   benchmark: 'covr-r', static: 'paper', feed, url: feed,
   terms: 'The authors publish the evaluation under the terms listed at https://arxiv.org/abs/2603.20190.',
+  stats: {recallAt5:{name:'Recall@5',unit:'%',better:'higher'},recallAt10:{name:'Recall@10',unit:'%',better:'higher'},recallAt50:{name:'Recall@50',unit:'%',better:'higher'},reasoningScore:{name:'Reasoning score',unit:'score',better:'higher'},reasoningSE:{name:'Reasoning score standard error',unit:'score'}},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[1]?.slice(4).join('|') === 'Backbone|Frames|R@1|R@5|R@10|R@50|score');

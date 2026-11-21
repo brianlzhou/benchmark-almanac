@@ -6,7 +6,7 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 const url = 'https://arxiv.org/html/2610.10047';
 const labels = ['Aes.','Img.','Subj.','Reg.','Text','X-shot','Struct.','Exec.','Content','Gme','Motion','Trans.','Temp.','BG Audio','Script','Attr.','Creat.','Narr.'];
-const parts:Record<string,BoardPart> = {};
+const parts:Record<string,BoardPart> = Object.fromEntries(labels.map(label => [label.replace(/[^a-z0-9]/gi,''), {name:label, unit:'score'}]));
 const board:Leaderboard = {
   benchmark:'adspark-bench',static:'paper',url,feed:url,terms:PAPER_TERMS,parts,
   aliases:{'Seedance 2.0':'dreamina-seedance-2-0'},

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://datawrapper.dwcdn.net/asTAD/14/",
   feed,
   terms: "Datawrapper permits this chart path. The Washington Post publishes the chart under its terms of service. I found no open data license for the chart. https://www.washingtonpost.com/terms-of-service/",
+  stats: { unspecified: {name: 'Unspecified answer rate', unit: '%', better: 'lower'}, wrong: {name: 'Wrong answer rate', unit: '%', better: 'lower'} },
   async fetch() {
     const source = await fetchText(feed);
     const records = parseCsv(source);

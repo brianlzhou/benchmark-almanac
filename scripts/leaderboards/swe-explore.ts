@@ -8,6 +8,7 @@ const feed = 'https://raw.githubusercontent.com/Qiushao-E/SWE-Explore-Bench/HEAD
 const board: Leaderboard = {
   benchmark: 'swe-explore', url: 'https://github.com/Qiushao-E/SWE-Explore-Bench', feed,
   terms: 'The repository publishes the chart under its project terms. https://github.com/Qiushao-E/SWE-Explore-Bench',
+  stats: { hitReg: { name: 'Hit rate at regression', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, hitFile: { name: 'Hit rate at file', unit: '%', better: 'higher' }, ndcg: { name: 'nDCG', unit: '%', better: 'higher' }, recallAt500: { name: 'Recall at 500', unit: '%', better: 'higher' }, fuh: { name: 'File usefulness heuristic', unit: '%', better: 'higher' }, contextEfficiency: { name: 'Context efficiency', unit: '%', better: 'higher' }, noiseReg: { name: 'Noise regression', unit: '%', better: 'lower' } },
   async fetch() {
     return checked((await chartRows(feed, '162208f7d482d648b3c26c1367bcde34931e7fc2ac6219ac8a9bcc00e2aa7d54', [
       { model: 'GPT-5.4', score: 19.4, metrics: { hitReg: 51.6, precision: 54.2, recall: 15.4, hitFile: 65.5, ndcg: 90.5, recallAt500: 15.4, fuh: 92.7, contextEfficiency: 77.1, noiseReg: 25.8 } },

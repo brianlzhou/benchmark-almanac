@@ -12,6 +12,10 @@ const board: Leaderboard = {
   url: "https://aaivu.github.io/KuralHub/benchmark.html",
   feed,
   terms: "The repository licenses code and documentation under MIT. The source datasets retain their own licenses. https://github.com/aaivu/KuralHub#license The host serves no robots.txt rules.",
+  stats: {
+    macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
+    weightedF1: { name: 'Weighted F1', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const ts = tables(await fetchText(feed));
     const table = ts.find(t=>t[0].map(c=>c.text).join('|') === 'Family|Checkpoint|Params|Accuracy|Macro-F1|Weighted-F1');

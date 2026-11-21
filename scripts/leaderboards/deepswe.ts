@@ -5,7 +5,7 @@
 // Each row also carries the table's ± (ci_half, as "ci95" in points), Steps (mean_agent_steps, "steps"), and the
 // artifact's pass@4 ("passAt4", %) and mean attempt time ("time", seconds). The board's chart plots the score
 // against cost, output tokens or agent steps. Keep the separate resource statistics and each attempt’s pass rate.
-import type { Leaderboard } from './types.ts';
+import type { BoardStat, Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
 interface Row {
@@ -54,12 +54,19 @@ function resourceMetrics(row: Row): Record<string, number> {
 
 export function makeDeepSwe(benchmark: string, version: string): Leaderboard {
   const feed = `https://deepswe.datacurve.ai/artifacts/${version}/leaderboard-live.json`;
+  const stats: Record<string, BoardStat> = {
+    n_passed: { name: 'Passed attempts', unit: 'count' }, n_attempted: { name: 'Attempted runs', unit: 'count' }, n_tasks_attempted: { name: 'Tasks attempted', unit: 'count' }, n_tasks_passed_any: { name: 'Tasks passed at least once', unit: 'count' },
+    ci_passed: { name: 'Passed attempts used for interval', unit: 'count' }, ci_attempted: { name: 'Attempted runs used for interval', unit: 'count' }, mean_cost_usd: { name: 'Mean cost per attempt', unit: 'usd', better: 'lower' }, median_cost_usd: { name: 'Median cost per attempt', unit: 'usd', better: 'lower' },
+    inputTokens: { name: 'Mean input tokens', unit: 'tokens', better: 'lower' }, median_input_tokens: { name: 'Median input tokens', unit: 'tokens', better: 'lower' }, outputTokens: { name: 'Mean output tokens', unit: 'tokens', better: 'lower' }, median_output_tokens: { name: 'Median output tokens', unit: 'tokens', better: 'lower' }, mean_cache_tokens: { name: 'Mean cache tokens', unit: 'tokens', better: 'lower' },
+    mean_duration_seconds: { name: 'Mean attempt duration', unit: 'seconds', better: 'lower' }, median_duration_seconds: { name: 'Median duration', unit: 'seconds', better: 'lower' }, median_agent_steps: { name: 'Median agent steps', unit: 'count', better: 'lower' }, median_peak_context_tokens: { name: 'Median peak context tokens', unit: 'tokens', better: 'lower' }, median_output_tokens_to_pass: { name: 'Median output tokens for passed attempts', unit: 'tokens', better: 'lower' }, passAt4: { name: 'Pass@4', unit: '%', better: 'higher' }, time: { name: 'Mean duration including all attempts', unit: 'seconds', better: 'lower' }, mean_uncached_input_tokens: { name: 'Mean uncached input tokens', unit: 'tokens', better: 'lower' }, median_uncached_input_tokens: { name: 'Median uncached input tokens', unit: 'tokens', better: 'lower' }, cachedTokens: { name: 'Mean cached input tokens', unit: 'tokens', better: 'lower' }, median_cache_read_tokens: { name: 'Median cached input tokens', unit: 'tokens', better: 'lower' }, mean_cache_write_tokens: { name: 'Mean cache write tokens', unit: 'tokens', better: 'lower' }, median_cache_write_tokens: { name: 'Median cache write tokens', unit: 'tokens', better: 'lower' }, reasoningTokens: { name: 'Mean reasoning tokens', unit: 'tokens', better: 'lower' }, median_reasoning_tokens: { name: 'Median reasoning tokens', unit: 'tokens', better: 'lower' }, mean_compute_units: { name: 'Mean compute units', unit: 'count', better: 'lower' }, median_compute_units: { name: 'Median compute units', unit: 'count', better: 'lower' }, attempt1PassRate: { name: 'Attempt 1 pass rate', unit: '%', better: 'higher' }, attempt2PassRate: { name: 'Attempt 2 pass rate', unit: '%', better: 'higher' }, attempt3PassRate: { name: 'Attempt 3 pass rate', unit: '%', better: 'higher' }, attempt4PassRate: { name: 'Attempt 4 pass rate', unit: '%', better: 'higher' }, attempt1Completed: { name: 'Attempt 1 completed tasks', unit: 'count' }, attempt2Completed: { name: 'Attempt 2 completed tasks', unit: 'count' }, attempt3Completed: { name: 'Attempt 3 completed tasks', unit: 'count' }, attempt4Completed: { name: 'Attempt 4 completed tasks', unit: 'count' },
+  };
   return {
     benchmark,
     url: 'https://deepswe.datacurve.ai/',
     feed,
     terms: 'Static JSON artifact on the DeepSWE site (robots.txt allows it); the deep-swe repository is Apache-2.0.',
     aliases: {},
+    stats,
     chart: {
       title: 'DeepSWE score and agent steps',
       note: 'Each point is one harness, model and reasoning effort; steps are the mean agent steps per task attempt.',

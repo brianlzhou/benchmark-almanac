@@ -28,6 +28,7 @@ function readTable(paper: string, number: number) {
 export default {
   benchmark: 'nova-63', static: 'paper', url: 'https://aclanthology.org/2025.emnlp-main.364/', feed,
   terms: 'ACL Anthology licenses this 2025 paper under CC BY 4.0. Its robots.txt returned 404.',
+  stats: { questionAverage: { name: 'Question average accuracy', unit: '%', better: 'higher' }, secondaryDisciplineAverage: { name: 'Secondary discipline average accuracy', unit: '%', better: 'higher' } },
   parts: Object.fromEntries(languages.map(key => [key, { name: key, group: 'Language' }])),
   aliases: {
     'Aya-8B': 'aya-expanse-8b', 'Aya-32B': 'aya-expanse-32b',

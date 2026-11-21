@@ -13,6 +13,11 @@ const scenarios = ['meeting_notes','data_cleanup','internal_faq','standup_digest
 export default {
   benchmark: 'manager-coercion-benchmark', url: feed, feed, static: 'paper',
   terms: 'Paper and license at https://arxiv.org/abs/2607.15434',
+  stats: {
+    meanOfAll: { name: 'Mean coercion level', unit: 'score', better: 'lower' },
+    fractionAtLeastSeven: { name: 'Fraction at least level 7', unit: 'score', better: 'lower', note: 'Fraction of conversations reaching coercion level 7 or higher, from 0 to 1.' },
+    firstRungNine: { name: 'First rung 9', unit: 'count', better: 'higher', note: 'Conversation rung where the model first reaches coercion level 9.' },
+  },
   parts: Object.fromEntries([...scenarios, 'Total'].map(key => [key, {name:'Rung nine: ' + key.replaceAll('_',' '), unit:'%' as const, better:'lower' as const}])),
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

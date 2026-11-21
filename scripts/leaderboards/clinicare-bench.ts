@@ -8,6 +8,17 @@ const board: Leaderboard = {
   url: "https://labs.scale.com/papers/clinicare-bench",
   feed,
   terms: "Scale allows the public paper page in robots.txt and restricts use through its terms. Results are credited to the paper authors.",
+  stats: {
+    macF1: { name: 'Macro F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    defectFree: { name: 'Defect-free accuracy', unit: '%', better: 'higher' },
+    gap: { name: 'Accuracy gap', unit: '%', better: 'lower', note: 'Difference in percentage points between accuracy and defect-free accuracy.' },
+    process: { name: 'Process adherence', unit: '%', better: 'higher' },
+    overCommit: { name: 'Over-commitment rate', unit: '%', better: 'lower' },
+    overAbstain: { name: 'Over-abstention rate', unit: '%', better: 'lower' },
+    ece: { name: 'Expected calibration error', unit: 'score', better: 'lower', note: 'Reported from 0 to 1.' },
+    turns: { name: 'Turns', unit: 'count', better: 'lower' },
+    tools: { name: 'Tools used', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const report = await pdfText(feed);
     const table = report.split('System               Acc Mac-F1')[1]?.split('No system exceeds')[0];

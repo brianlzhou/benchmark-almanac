@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: 'https://www.kaggle.com/benchmarks/google/dsqa',
   feed: `${kaggleFeed('google', 'dsqa')} (Fully Correct)`,
   terms: KAGGLE_TERMS,
+  stats: { f1: { name: 'F1', unit: '%', better: 'higher' }, incorrect: { name: 'Fully incorrect', unit: '%', better: 'lower' }, excessive: { name: 'Correct with excessive answers', unit: '%', better: 'higher' } },
   aliases: {
     'Gemini 3.1 Pro Preview': 'gemini-3-1-pro',
     // the stable gemini-2.5-flash, the June 2025 release (not the September preview)

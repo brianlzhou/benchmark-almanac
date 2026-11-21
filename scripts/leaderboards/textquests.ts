@@ -7,6 +7,7 @@ import { fetchText } from '../lib/util.ts';
 const PAGE='https://www.textquests.ai/';
 const board:Leaderboard={benchmark:'textquests',url:PAGE,feed:PAGE+' (current page bundle, harm per 100 steps)',
  terms:'The public project page publishes these paper results. The TextQuests repository is MIT licensed.',
+ stats:{progress:{name:'Progress',unit:'%',better:'higher'},completedGames:{name:'Completed games',unit:'count'}},
  async fetch(){
   const html=await fetchText(PAGE);
   const src=html.match(/\/_next\/static\/chunks\/app\/page-[\w]+\.js[^"]*/)?.[0];

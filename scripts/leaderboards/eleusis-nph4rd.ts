@@ -11,6 +11,12 @@ const board: Leaderboard = {
   url: feed,
   feed,
   static: 'paper',
+  stats: {
+    soloSolveRate: { name: 'Solo solve rate', unit: '%', better: 'higher' },
+    independentSolveRate: { name: 'Independent solve rate', unit: '%', better: 'higher' },
+    cooperativeSolves: { name: 'Cooperative solves', unit: 'count', better: 'higher' },
+    episodes: { name: 'Episodes', unit: 'count' },
+  },
   terms: 'The results article is published by nphard.io and its linked repository uses the repository license. https://github.com/PrimeIntellect-ai/residency-environments GitHub requests a one-second crawl delay.',
   async fetch() {
     const source = await fetchText(feed);

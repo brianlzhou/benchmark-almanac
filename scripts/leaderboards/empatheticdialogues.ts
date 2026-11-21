@@ -9,6 +9,7 @@ const feed = 'https://aclanthology.org/P19-1534.pdf';
 const board: Leaderboard = {
   benchmark:'empatheticdialogues', static:'paper', url, feed, terms:'ACL Anthology publication terms apply. https://aclanthology.org/faq/copyright/',
   parts: { relevance:'Relevance', fluency:'Fluency' },
+  stats: { empathy: { name: 'Empathy', unit: 'score', better: 'higher', note: 'Human rating on a 1 to 5 scale.' } },
   async fetch() {
     const paper = await pdfText(feed);
     const section = paper.match(/Model\s+Candidate\s+Empathy\s+Relevance\s+Fluency\n([\s\S]*?)\n\s*Gold Response/);

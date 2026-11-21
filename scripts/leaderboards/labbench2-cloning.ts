@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: PAGE,
   terms: 'Edison publishes this leaderboard without an explicit score reuse license.',
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const html = await fetchText(PAGE);
     const rows: LeaderboardRow[] = [];

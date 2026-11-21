@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/PhalaCloud/legal-citation-leaderboard",
   feed: FEED,
   terms: "The Hugging Face Space declares the MIT License. https://huggingface.co/spaces/PhalaCloud/legal-citation-leaderboard",
+  stats: { hallucinationRate: { name: 'Hallucination rate', unit: '%', better: 'lower', note: 'Percentage of generated legal citations classified as hallucinations.' } },
   parts: { cat1: 'Citation Retrieval', cat2: 'Citation Completion', cat3: 'Citation Error Detection',
     'cat4-1': 'Case Matching', 'cat4-2': 'Case Verification & Correction' },
   aliases: {"deepseek/deepseek-chat-v3.1":"deepseek-v3-1"},

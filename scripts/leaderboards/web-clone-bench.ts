@@ -12,6 +12,7 @@ import { num, tables } from '../lib/html.ts';
 const PAGE = 'https://plato.so/research/web-clone-bench/';
 
 const board: Leaderboard = {
+  stats: { latency: {name: 'Latency', unit: 'ms', better: 'lower'}, steps: {name: 'Steps', unit: 'count', better: 'lower'} },
   benchmark: 'web-clone-bench',
   url: PAGE,
   feed: `${PAGE} (static HTML table "All efforts", full)`,

@@ -24,6 +24,7 @@ const board: Leaderboard = {
   url: 'https://gso-bench.github.io/',
   feed: FEED,
   terms: 'Static JSON on the GSO project site; the GSO repository is MIT-licensed.',
+  stats: { hackAdjusted: { name: 'Hack-adjusted score', unit: '%', better: 'higher', note: 'Score after the reward-hacking penalty.' } },
   aliases: {
     'Claude Sonnet 3.5 V2': 'claude-3-5-sonnet-october-2024',
     'Claude Sonnet 3.7': 'claude-3-7-sonnet',

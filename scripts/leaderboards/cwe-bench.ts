@@ -12,6 +12,7 @@ const URL = 'https://cwe-bench.com/v1';
 
 const board: Leaderboard = {
   benchmark: 'cwe-bench',
+  stats: { passAt4: { name: 'Programmatic pass@4', unit: '%', better: 'higher' } },
   url: URL,
   feed: `${URL} (leaderboard table, Programmatic Pass@1)`,
   terms: 'Static public page; robots.txt allows every agent and invites crawling, citing and quoting, and the site publishes no terms.',

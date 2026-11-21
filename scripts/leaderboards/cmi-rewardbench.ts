@@ -8,6 +8,9 @@ const feed = 'https://arxiv.org/html/2603.00610';
 const musicality = ['pamLCC', 'pamSRCC', 'pamKtau', 'musicEvalLCC', 'musicEvalSRCC', 'musicEvalKtau', 'arenaACC', 'prefACC'];
 const alignment = ['alignmentLCC', 'alignmentSRCC', 'alignmentKtau', 'text', 'textLyrics', 'textAudio', 'textLyricsAudio', 'withoutAudio', 'withAudio'];
 const parts: Record<string, BoardPart> = {};
+for (const [key, name] of Object.entries({ pamSRCC: 'PAM Spearman correlation', pamKtau: 'PAM Kendall tau', musicEvalSRCC: 'MusicEval Spearman correlation', musicEvalKtau: 'MusicEval Kendall tau', alignmentSRCC: 'PAM alignment Spearman correlation', alignmentKtau: 'PAM alignment Kendall tau' })) {
+  parts[key] = { name, unit: 'score', group: key.startsWith('alignment') ? 'Alignment' : 'Musicality' };
+}
 for (const [key, name] of Object.entries({
   pamLCC: 'PAM LCC', musicEvalLCC: 'MusicEval LCC', arenaACC: 'Music Arena accuracy', prefACC: 'CMI-Pref accuracy',
   alignmentLCC: 'PAM alignment LCC', text: 'Text–Music', textLyrics: 'Text and lyrics',

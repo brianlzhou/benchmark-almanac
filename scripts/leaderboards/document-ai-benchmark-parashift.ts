@@ -6,6 +6,7 @@ import { tables, num } from '../lib/html.ts';
 const feed = "https://parashift.ai/en/document-ai-benchmark/";
 
 const board: Leaderboard = {
+  stats: { documentsPerSecond: { name: 'Documents per second', unit: 'count', better: 'higher' } },
   benchmark: "document-ai-benchmark-parashift",
   url: "https://parashift.ai/en/document-ai-benchmark/",
   feed,

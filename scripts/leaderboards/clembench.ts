@@ -14,6 +14,12 @@ const board: Leaderboard = {
   url: "https://clembench.github.io/leaderboard.html",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: {
+    languages: { name: 'Languages evaluated', unit: 'count' },
+    totalCost: { name: 'Total cost', unit: 'usd', better: 'lower' },
+    totalInputTokens: { name: 'Input tokens', unit: 'tokens' },
+    totalOutputTokens: { name: 'Output tokens', unit: 'tokens' },
+  },
   
   async fetch() {
     const rows = parseCsv(await fetchText(FEED));

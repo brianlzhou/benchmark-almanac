@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://ceur-ws.org/Vol-4038/paper_219.pdf#page=16",
   feed: FEED,
   terms: "The authors publish the results table under CC BY 4.0. https://ceur-ws.org/Vol-4038/paper_219.pdf#page=1 CEUR-WS robots.txt permits the published volume.",
+  stats: {
+    count: { name: 'Translations evaluated', unit: 'count' },
+    success: { name: 'Successful translations', unit: 'count' },
+    '%': { name: 'Successful translation rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const paper = await pdfText(FEED);
     const section = paper.split("Task 2 results in terms of the number of successful translations (manual evaluation)")[1]?.split("Table 8")[0];

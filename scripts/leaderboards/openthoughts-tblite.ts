@@ -32,6 +32,12 @@ const board: Leaderboard = {
   "feed": "https://www.openthoughts.ai/blog/openthoughts-tblite",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    uncertainty: { name: 'Reported uncertainty', unit: '%'},
+    tb2Score: { name: 'Terminal-Bench 2 score', unit: '%', better: 'higher' },
+    benchmarkRuntimeMinutes: { name: 'Benchmark runtime', unit: 'minutes', better: 'lower' },
+    tb2RuntimeMinutes: { name: 'Terminal-Bench 2 runtime', unit: 'minutes', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const data=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text)));

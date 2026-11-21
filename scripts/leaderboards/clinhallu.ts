@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://github.com/alibaba-damo-academy/ClinHallu",
   feed: FEED,
   terms: "Apache-2.0 repository; raw.githubusercontent.com has no robots.txt.",
+  stats: {
+    visualHallucination: { name: 'Visual hallucination rate', unit: '%', better: 'lower' },
+    knowledgeHallucination: { name: 'Knowledge hallucination rate', unit: '%', better: 'lower' },
+    reasoningHallucination: { name: 'Reasoning hallucination rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find(t => t[0]?.includes("Avg Acc\u2191"));
     if (!table) throw new Error('Published overall results table is missing');

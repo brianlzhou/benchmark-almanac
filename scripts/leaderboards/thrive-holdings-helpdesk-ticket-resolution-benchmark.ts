@@ -22,6 +22,7 @@ const board: Leaderboard = {
     x: { key: 'minutes', label: 'Minutes per ticket', unit: 'min', better: 'lower' },
     y: { key: 'score', label: 'Pass rate', unit: '%', better: 'higher' },
   },
+  stats: { correct:{name:'Correct tickets',unit:'count'}, failed:{name:'Failed tickets',unit:'count'}, graded:{name:'Graded tickets',unit:'count'}, latency:{name:'Latency per ticket',unit:'seconds',better:'lower'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(`${SITE}/`);
     const path = html.match(/\/assets\/home-[\w-]+\.js/)?.[0];

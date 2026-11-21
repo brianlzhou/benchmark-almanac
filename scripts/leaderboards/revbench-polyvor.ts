@@ -6,6 +6,9 @@ import { harborFeed, harborRows, harborTerms } from './browser-use-linkedin.ts';
 const board: Leaderboard = {
   benchmark: 'revbench-polyvor', url: 'https://hub.harborframework.com/datasets/polyvorlabs/revbench?tab=leaderboard',
   feed: harborFeed, terms: harborTerms, reference: ['Klyrune'],
+  stats: {
+    passed: { name: 'Puzzles passed', unit: 'count', better: 'higher' },
+  },
   async fetch() {
     const rows = await harborRows('polyvorlabs/revbench', 'revbench', 3);
     return rows.map(({ metadata, metrics }) => {

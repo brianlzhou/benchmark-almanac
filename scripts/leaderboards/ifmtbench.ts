@@ -11,6 +11,10 @@ const board: Leaderboard = {
   singleIF: { name: 'Single constraint', group: 'Difficulty' },
   multiIF: { name: 'Multiple constraints', group: 'Difficulty' },
 }, url: 'https://github.com/Tencent-Hunyuan/Hy-MT2', feed: FEED, terms: PAPER_TERMS,
+  stats: {
+    singleXComet: { name: 'Single constraint xCOMET', unit: 'score', better: 'higher' },
+    multiXComet: { name: 'Multiple constraint xCOMET', unit: 'score', better: 'higher' },
+  },
   aliases: { 'gemma4 E2B': 'gemma-4-e2b-it', 'gemma4 E4B': 'gemma-4-e4b-it', 'gemma4 31B': 'gemma-4-31b-it' },
   async fetch() {
     const table = (await paperTables(FEED)).find(t => t[1]?.[1]?.text === 'S-IF' && t[1]?.[3]?.text === 'M-IF');

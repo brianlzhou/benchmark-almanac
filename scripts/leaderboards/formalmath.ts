@@ -6,6 +6,7 @@ const FEED = "https://sphere-ai-lab.github.io/FormalMATH/";
 const board: Leaderboard = {
   benchmark: "formalmath", url: "https://sphere-ai-lab.github.io/FormalMATH/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { samplingBudget: { name: 'Sampling budget', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

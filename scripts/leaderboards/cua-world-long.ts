@@ -11,6 +11,7 @@ const PAGE = 'https://cmu-l3.github.io/gym-anything/';
 
 const board: Leaderboard = {
   benchmark: 'cua-world-long',
+  stats: { avgScore: { name: 'Average score', unit: 'score', better: 'higher', note: 'Mean checklist points from 0 to 100.' } },
   url: PAGE,
   feed: `${PAGE} (static HTML table, Pass Rate)`,
   terms: 'Static project page on GitHub Pages (no robots.txt); the page states no terms.',

@@ -13,6 +13,7 @@ import { text } from '../lib/html.ts';
 const SITE = 'https://vibench.ai';
 
 const board: Leaderboard = {
+  stats: { planPass: { name: 'Plan pass rate', unit: '%', better: 'higher' }, minutes: { name: 'Build time', unit: 'minutes', better: 'lower' } },
   benchmark: 'vibench-2',
   url: `${SITE}/`,
   feed: `${SITE}/assets/main-<hash>.js (SII leaderboard rows, data-pass)`,

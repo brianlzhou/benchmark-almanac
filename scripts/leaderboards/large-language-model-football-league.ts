@@ -11,6 +11,18 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The terms permit browsing, linking, and discussion. Recreation Instruments retains rights in original content. https://modelfootball.com/terms The robots file permits reference use and bars AI training.",
   harnesses: 'system',
+  stats: {
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    standingsRank: { name: 'Standings rank', unit: 'count', better: 'lower' },
+    headToHeadWins: { name: 'Head to head wins', unit: 'count', better: 'higher' },
+    headToHeadLosses: { name: 'Head to head losses', unit: 'count', better: 'lower' },
+    medianWins: { name: 'Median wins', unit: 'count', better: 'higher' },
+    medianLosses: { name: 'Median losses', unit: 'count', better: 'lower' },
+    pointsFor: { name: 'Points for', unit: 'score', better: 'higher' },
+    pointsAgainst: { name: 'Points against', unit: 'score', better: 'lower' },
+    differential: { name: 'Point differential', unit: 'score', better: 'higher' },
+    efficiency: { name: 'Efficiency', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0].map(c => c.text).join('|') === '#|Team|W–L–T|H2H|MED|PF|PA|Diff|Eff');
     if (!table || table.length < 13) throw new Error('Expected twelve team records');

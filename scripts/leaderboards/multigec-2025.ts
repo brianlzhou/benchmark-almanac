@@ -1,7 +1,7 @@
 // The source reports no overall score. The headline is the plain mean of the 12 parts, computed by this importer.
 // MultiGEC's first track ranks minimal grammatical edits by ERRANT F0.5. The second track ranks different outputs by Scribendi.
 // For languages with several corpora the board publishes an Average table.
-import type { Leaderboard } from './types.ts';
+import type { BoardStat, Leaderboard } from './types.ts';
 import { tables, text } from '../lib/html.ts';
 import { fetchText } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
@@ -12,10 +12,18 @@ const systems = [
   { model: 'LLaMA 3', models: ['LLaMA 3', 'XLM-RoBERTa'], team: 'Lattice' },
   { model: 'Llama 3.1 8B Instruct', team: 'baseline' },
 ];
+const languageNames: Record<string, string> = { czech: 'Czech', english: 'English', estonian: 'Estonian', german: 'German', greek: 'Greek', icelandic: 'Icelandic', italian: 'Italian', latvian: 'Latvian', russian: 'Russian', slovene: 'Slovene', swedish: 'Swedish', ukrainian: 'Ukrainian' };
+const metricStats: Record<string, BoardStat> = Object.fromEntries(Object.entries(languageNames).flatMap(([key, language]) => [
+  [key + 'Gleu', { name: language + ' generalized language evaluation understanding', unit: '%', better: 'higher' as const }],
+  [key + 'Precision', { name: language + ' precision', unit: '%', better: 'higher' }],
+  [key + 'Recall', { name: language + ' recall', unit: '%', better: 'higher' }],
+  [key + 'Scribendi', { name: language + ' Scribendi score', unit: 'score', better: 'higher' }],
+]));
 const board: Leaderboard = {
   benchmark: 'multigec-2025', url: feed, feed,
   terms: 'The organizers publish terms for MultiGEC. https://spraakbanken.github.io/multigec-2025/terms_of_use.html',
   aliases: { 'Llama 3.1 8B Instruct': 'llama-3-1-8b', 'Gemma 2 9B': 'gemma-2-9b' },
+  stats: metricStats,
   async fetch() {
     const html = await fetchText(feed);
     const languages = [...html.matchAll(/<h2 id="([^"]+)">([^<]+)<\/h2>([\s\S]*?)(?=<h2 |\s*<\/article>)/g)];

@@ -32,6 +32,7 @@ const board: Leaderboard = {
     // Meta's Muse Wonder, version 1.0 (the Full tier is named "Muse Wonder Full")
     'Muse Wonder 1.0': 'muse-wonder',
   },
+  stats: { steps: { name: 'Steps', unit: 'count', better: 'lower' } },
   chart: {
     title: 'Benchmark score versus per-task metrics',
     note: 'The board switches the x-axis between cost, tokens, steps and time. This is its Time view: mean seconds per attempt.',

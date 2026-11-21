@@ -9,6 +9,7 @@ const board: Leaderboard = {
   validationQScore: { name: 'Validation', group: 'Split' },
 }, url: URL, feed: URL,
   terms: 'The official BEHAVIOR archive publishes challenge results; source terms apply and the Almanac credits and links the source.',
+  stats: { validationSuccess:{name:'Validation success rate',unit:'%',better:'higher'}, testSuccess:{name:'Test success rate',unit:'%',better:'higher'} },
   async fetch() {
     const table = tables(await fetchText(URL)).find(t=>t[0].some(c=>c.text.includes('Q Score')));
     if (!table) throw new Error('BEHAVIOR 2025 table missing');

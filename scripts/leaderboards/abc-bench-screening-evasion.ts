@@ -33,6 +33,7 @@ const board: Leaderboard = {
   "feed": "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { refusalPercent: { name: 'Refusal rate', unit: '%', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED);
     const rows = new Map<string, LeaderboardRow>();

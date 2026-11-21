@@ -18,6 +18,7 @@ const snapshots: Record<string, string> = {
 const board: Leaderboard = {
   benchmark: 'm-ifeval', url, feed, terms: 'Apache License 2.0 at ' + url + '/blob/main/LICENSE.txt.',
   parts: { spanish: 'Spanish', french: 'French', japanese: 'Japanese' },
+  stats: {originalEnglish:{name:'Original English instruction-following evaluation',unit:'%',better:'higher'}},
   aliases: { 'Meta-Llama-3.1-8B-Instruct': 'llama-3-1-8b', 'Mistral-7B-Instruct-v0.3': 'mistral-7b-v0-3',
     'claude-3-5-sonnet-20240620': 'claude-3-5-sonnet', 'o1-preview-2024-09-12': 'o1-preview',
     'o1-mini-2024-09-12': 'o1-mini', 'gpt-4o-2024-08-06': 'gpt-4o-aug-2024', 'gpt-4o-mini-2024-07-18': 'gpt-4o-mini',

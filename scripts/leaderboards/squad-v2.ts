@@ -9,6 +9,7 @@ const FEED = "https://rajpurkar.github.io/SQuAD-explorer/";
 const board: Leaderboard = {
  benchmark: "squad-v2", url: "https://rajpurkar.github.io/SQuAD-explorer/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' }, tiedRank: { name: 'Tied rank', unit: 'rating', better: 'lower' } },
 
  async fetch() {
 

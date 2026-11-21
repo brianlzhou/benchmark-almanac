@@ -10,6 +10,19 @@ const board: Leaderboard = {
   benchmark: 'projecttest', url: feed, feed, static: 'paper',
   terms: 'The paper and its license are available at https://arxiv.org/abs/2502.06556.',
   headline: 'The paper reports no overall score, so this is the plain mean of correctness rates for Python, Java and JavaScript.',
+  // Table 2's caption defines the columns: ER is the executability rate, LC and BC are line and branch coverage,
+  // #Tests is the average number of tests per project
+  stats: Object.fromEntries(
+    languages.flatMap((language) =>
+      Object.entries({
+        ER: { name: 'executability rate', unit: '%', better: 'higher' as const, note: 'The share of generated unit tests that run.' },
+        LC: { name: 'line coverage', unit: '%', better: 'higher' as const },
+        BC: { name: 'branch coverage', unit: '%', better: 'higher' as const },
+        '#Tests': { name: 'tests per project', unit: 'count', note: 'The average number of unit tests generated for each project.' },
+        '#Correct': { name: 'correct tests per project', unit: 'count', note: 'The average number of generated unit tests that pass, for each project.' },
+      }).map(([key, s]) => [`${language} ${key}`, { ...s, name: `${language} ${s.name}` }]),
+    ),
+  ),
   aliases: {'CodeQwen1.5': 'codeqwen1-5-7b', 'DeepSeek-Coder': 'deepseek-coder-6-7b', 'GPT-o1': 'o1', 'Gemini-3.0-Pro': 'gemini-3-pro'},
   parts: Object.fromEntries(languages.map(language => [language + ' CR', language])),
   async fetch() {

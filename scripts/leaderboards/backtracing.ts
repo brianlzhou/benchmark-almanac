@@ -10,6 +10,7 @@ const board: Leaderboard = {
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/', static: 'paper',
   headline: 'The paper reports no overall score, so this is the plain mean of top-one accuracy across Lecture, News Article and Conversation.',
   parts: { lecture: 'Lecture top-one accuracy', newsArticle: 'News Article top-one accuracy', conversation: 'Conversation top-one accuracy' },
+  stats: { lectureTop3: { name: 'Lecture top-three accuracy', unit: '%', better: 'higher' }, newsArticleTop3: { name: 'News Article top-three accuracy', unit: '%', better: 'higher' }, conversationTop3: { name: 'Conversation top-three accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const p = await pdfText(feed);
     if (!p.includes('Bi-Encoder (all-MiniLM)') || !p.includes('gpt-3.5-turbo-16k')) throw new Error('Backtracing Table 2 missing');

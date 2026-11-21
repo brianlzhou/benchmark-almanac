@@ -10,7 +10,7 @@ parts: {
   binaryBrier: { name: 'Binary', group: 'Task type' },
   numericRps: { name: 'Numeric', group: 'Task type' },
 },
- terms:'FutureSearch terms restrict automated extraction; Benchmark Almanac credits FutureSearch and links the source.',
+ terms:'FutureSearch terms restrict automated extraction; Benchmark Almanac credits FutureSearch and links the source.', stats:{nBinary:{name:'Binary questions',unit:'count'},nNumeric:{name:'Numeric questions',unit:'count'}},
  chart:{title:'Pooled score vs. forecast cost',note:'Score uses the full cohort. Cost is mean agent LLM spend per forecast on the August 2026 cohort.',x:{key:'cost',label:'Cost per forecast',unit:'$',better:'lower'},y:{key:'score',label:'Pooled score',better:'lower'}},
  async fetch():Promise<LeaderboardRow[]> {
   const html=await fetchText(PAGE);const src=html.match(/src="([^\"]*\/app\/page-[^\"]+\.js)"/)?.[1];if(!src)throw new Error('FutureSearch page bundle missing');

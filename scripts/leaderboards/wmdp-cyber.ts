@@ -11,6 +11,10 @@ const board: Leaderboard = {
   url: "https://www.wmdp.ai",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    mmlu: { name: 'MMLU accuracy', unit: '%', better: 'higher' },
+    mtBench: { name: 'MT-Bench score', unit: 'score', better: 'higher', note: 'Fluency score from MT-Bench.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const t = (await paperTables(FEED)).find(t => t[0]?.some(c => c.text === 'Method') && t.some(r => r.some(c => c.text === 'zephyr-7b')));
     if (!t) throw new Error('WMDP unlearning table missing');

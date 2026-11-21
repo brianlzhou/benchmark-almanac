@@ -17,6 +17,12 @@ const board: Leaderboard = {
   'C 3': { name: 'C3', group: 'Category' },
 }, url: FEED, feed: FEED,
   terms: 'The authors publish this paper on arXiv. Credit the CLUE authors for the reported baseline results.',
+  stats: {
+    pretrainingBatchSize: { name: 'Pretraining batch size', unit: 'count' },
+    pretrainingSteps: { name: 'Pretraining steps', unit: 'count' },
+    pretrainingTokens: { name: 'Pretraining tokens', unit: 'tokens' },
+    vocabularySize: { name: 'Vocabulary size', unit: 'count' },
+  },
   async fetch() {
     const all = tables(await fetchText(FEED));
     const configs = all.find(t=>t[0]?.some(c=>c.text==='Training Steps'));

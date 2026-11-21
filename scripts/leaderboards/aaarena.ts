@@ -7,7 +7,35 @@ const feed = 'https://arxiv.org/html/2610.12341';
 const board: Leaderboard = {
   benchmark: 'aaarena', static: 'paper', url: feed, feed,
   terms: 'The authors publish Tables 2 and 9 on arXiv. https://arxiv.org/abs/2610.12341',
-  parts: {}, aliases: {'Opus5.5': 'claude-opus-5-5', 'GPT6-sol': 'gpt-6-sol'},
+  parts: {
+    Pacman: { name: 'Pacman', unit: 'elo', better: 'higher' },
+    SnakeGo: { name: 'SnakeGo', unit: 'elo', better: 'higher' },
+    Rollman: { name: 'Rollman', unit: 'elo', better: 'higher' },
+    MoneCraft: { name: 'MoneCraft', unit: 'elo', better: 'higher' },
+    AntWar: { name: 'AntWar', unit: 'elo', better: 'higher' },
+    LostSpace: { name: 'LostSpace', unit: 'elo', better: 'higher' },
+    AquaWar: { name: 'AquaWar', unit: 'elo', better: 'higher' },
+    Generals: { name: 'Generals', unit: 'elo', better: 'higher' },
+    Dorado: { name: 'Dorado', unit: 'elo', better: 'higher' },
+    Miracle: { name: 'Miracle', unit: 'elo', better: 'higher' },
+    LOTA: { name: 'LOTA', unit: 'elo', better: 'higher' },
+    AntWar2: { name: 'AntWar2', unit: 'elo', better: 'higher' },
+  }, aliases: {'Opus5.5': 'claude-opus-5-5', 'GPT6-sol': 'gpt-6-sol'},
+  stats: {
+    benchmarkTokens: { name: 'Benchmark tokens', unit: 'tokens' },
+    PacmanRank: { name: 'Pacman rank', unit: 'count', better: 'lower' },
+    SnakeGoRank: { name: 'SnakeGo rank', unit: 'count', better: 'lower' },
+    RollmanRank: { name: 'Rollman rank', unit: 'count', better: 'lower' },
+    MoneCraftRank: { name: 'MoneCraft rank', unit: 'count', better: 'lower' },
+    AntWarRank: { name: 'AntWar rank', unit: 'count', better: 'lower' },
+    LostSpaceRank: { name: 'LostSpace rank', unit: 'count', better: 'lower' },
+    AquaWarRank: { name: 'AquaWar rank', unit: 'count', better: 'lower' },
+    GeneralsRank: { name: 'Generals rank', unit: 'count', better: 'lower' },
+    DoradoRank: { name: 'Dorado rank', unit: 'count', better: 'lower' },
+    MiracleRank: { name: 'Miracle rank', unit: 'count', better: 'lower' },
+    LOTARank: { name: 'LOTA rank', unit: 'count', better: 'lower' },
+    AntWar2Rank: { name: 'AntWar2 rank', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t.at(-1)?.[0].startsWith('Gold medals'));

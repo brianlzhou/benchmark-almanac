@@ -10,6 +10,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: PAPER_TERMS,
   aliases: { 'Nova 1 Premier': 'amazon-nova-premier' },
+  stats: {
+    successes: {name: 'Successful transfer attacks', unit: 'count'},
+    attempts: {name: 'Transfer attack attempts', unit: 'count'},
+  },
   async fetch() {
     const html = await paperHtml(FEED);
     const figure = html.match(/<figure id="S4.F6"[\s\S]*?<\/figure>/)?.[0];

@@ -25,6 +25,8 @@ const board: Leaderboard = {
   'contextual and environmental questions': { name: 'Contextual and environmental questions', group: 'Category' },
   'identity and relationship': { name: 'Identity and relationship', group: 'Category' },
   'text and symbols': { name: 'Text and symbols', group: 'Category' },
+  count_and_quantity: { name: 'Count and quantity', group: 'Category' },
+  'count and quantity': { name: 'Count and quantity', group: 'Category' },
 }, url: "https://m-a-p.ai/OmniBench/leaderboard_data.json", feed: FEED,
  aliases: {'GPT4-o (0806)':'gpt-4o-aug-2024','GPT4-o-mini':'gpt-4o-mini','GPT-4V-0409':'gpt-4-turbo-apr-2024'},
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',

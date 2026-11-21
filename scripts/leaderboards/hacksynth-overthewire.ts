@@ -8,7 +8,7 @@ const feed = 'https://arxiv.org/html/2412.01778';
 const categories = ['General (35)','Crypto (10)','Web (31)','Bin (4)'];
 const board: Leaderboard = {
   benchmark:'hacksynth-overthewire', static:'paper', url:feed, feed, terms:PAPER_TERMS + ' https://arxiv.org/licenses/',
-  parts:Object.fromEntries(categories.map(name => [name,name])), reference:['HackSynth'],
+  parts:Object.fromEntries(categories.map(name => [name,name])), stats:{minutes:{name:'Completion time',unit:'minutes',better:'lower'}}, reference:['HackSynth'],
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[9] === 'OverTheWire Benchmark' &&
       JSON.stringify(t[1]?.slice(9)) === JSON.stringify(['All (80)', ...categories, 'Speed']));

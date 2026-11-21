@@ -7,6 +7,12 @@ import { jsonAfter } from '../lib/html.ts';
 const FEED = "https://huggingface.co/spaces/CohereLabsCommunity/CulturalRiddles/raw/main/index.html";
 const board: Leaderboard = {
   benchmark: "culturalriddles",
+  stats: {
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+    evaluatedCommunities: { name: 'Evaluated communities', unit: 'count' },
+    evaluatedRiddles: { name: 'Evaluated riddles', unit: 'count' },
+    exactMatch: { name: 'Exact match', unit: '%', better: 'higher' },
+  },
   url: "https://huggingface.co/spaces/CohereLabsCommunity/CulturalRiddles/raw/main/index.html",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

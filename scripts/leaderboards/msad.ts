@@ -7,9 +7,13 @@ import { checked, grid } from '../lib/boards/arxiv-span-tables.ts';
 import { numberCell } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://msad-dataset.github.io/';
+const anomalyTypes = ['Assault','Explosion','Fighting','Fire','ObjectFalling','PeopleFalling','Robbery','Shooting','TrafficAccident','Vandalism','WaterIncident'];
+const scenarios = ['Frontdoor','Highway','Mall','Office','Park','Parkinglot','PedestrianSt','Restaurant','Road','Shop','Sidewalk','StreetHighview','Train','Warehouse'];
+const breakdownStats = Object.fromEntries([...anomalyTypes, ...scenarios].map(name => [name + 'AP', {name: name + ' average precision', unit: '%', better: 'higher'}]));
 const board: Leaderboard = {
-  benchmark: 'msad', url: feed, feed, parts: {},
+  benchmark: 'msad', url: feed, feed, parts: Object.fromEntries([...anomalyTypes.map(name => [name, {name, group:'Anomaly type'}]), ...scenarios.map(name => [name, {name, group:'Scenario'}])]),
   terms: 'The makers publish the aggregate comparison tables at https://msad-dataset.github.io/.',
+  stats: { averagePrecision: { name: 'Average precision', unit: '%', better: 'higher' }, ...breakdownStats },
   async fetch() {
     const results = tables(await fetchText(feed)).map(grid).filter(t => t[0]?.[0] === 'Training set');
     if (results.length !== 2) throw new Error('Missing MSAD breakdowns');

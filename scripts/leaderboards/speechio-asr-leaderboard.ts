@@ -14,6 +14,9 @@ const board: Leaderboard = {
   url: "https://github.com/SpeechColab/Leaderboard#5-latest-results",
   feed: FEED,
   terms: "The January 2025 table lists seven public systems and one private system. The repository does not state reuse terms at https://github.com/SpeechColab/Leaderboard.",
+  stats: {
+    resultYearMonth: { name: 'Result year and month', note: 'Year and month shown in the source Date column, stored as YYYYMM.' },
+  },
   async fetch() {
     const page = (await fetchText(FEED)).split('## 5. Latest Results')[1];
     if (!page) throw new Error('Missing SpeechIO results');

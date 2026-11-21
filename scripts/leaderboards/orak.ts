@@ -10,6 +10,11 @@ const board: Leaderboard = {
  url: "https://krafton-ai.github.io/orak-leaderboard/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ parts: {
+  '2048': '2048', StreetFighterIII: 'Street Fighter III', Supermario: 'Super Mario', AceAttorney: 'Ace Attorney',
+  HerStory: 'Her Story', Pokémon: 'Pokémon', DarkestDun: 'Darkest Dungeon', MineCraft: 'Minecraft',
+  StardewValley: 'Stardew Valley', StarCraftII: 'StarCraft II', SlayTheSpire: 'Slay the Spire', BabaIsYou: 'Baba Is You',
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

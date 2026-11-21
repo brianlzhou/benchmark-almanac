@@ -20,6 +20,12 @@ const board: Leaderboard = {
  url: "https://discoailab.github.io/osworld-science-page/static/js/osciData.js",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   binaryAccuracy: { name: 'Binary accuracy', unit: '%', better: 'higher' },
+   taskCount: { name: 'Task count', unit: 'count' },
+   usageTaskCount: { name: 'Tasks with usage data', unit: 'count' },
+   outputTokens: { name: 'Output tokens', unit: 'tokens' },
+ },
  chart:{title:'Partial score versus task cost',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Partial score',unit:'%',better:'higher'}},
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

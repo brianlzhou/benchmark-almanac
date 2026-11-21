@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed: `${galileoFeed('results_v1.csv')} (Model Avg)`,
   terms: GALILEO_TERMS,
   aliases: GALILEO_ALIASES,
+  stats: { priceIn: { name: 'Input cost per million tokens', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output cost per million tokens', unit: 'usd-per-mtok', better: 'lower' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     const parts: NonNullable<Leaderboard['parts']> = {};

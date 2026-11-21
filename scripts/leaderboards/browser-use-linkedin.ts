@@ -42,6 +42,7 @@ const board: Leaderboard = {
   url: 'https://hub.harborframework.com/datasets/lowgular/browser-use-linkedin?tab=leaderboard',
   feed: harborFeed,
   terms: harborTerms,
+  stats: { correctness: { name: 'Correctness', unit: 'score', better: 'higher' }, correctness_pct: { name: 'Correctness percentage', unit: '%', better: 'higher' }, cost_of_pass_usd: { name: 'Cost of pass', unit: 'usd', better: 'lower' }, cost_per_reliable_answer_usd: { name: 'Cost per reliable answer', unit: 'usd', better: 'lower' }, cost_per_task_usd: { name: 'Cost per task', unit: 'usd', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, runs_per_task: { name: 'Runs per task', unit: 'count' }, score: { name: 'Score', unit: 'score', better: 'higher' }, seconds_per_task: { name: 'Seconds per task', unit: 'seconds', better: 'lower' }, trials: { name: 'Trials', unit: 'count' } },
   harnesses: 'system',
   async fetch() {
     const rows = await harborRows('lowgular/browser-use-linkedin', 'v0-2-4', 21);

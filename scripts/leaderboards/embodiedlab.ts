@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark:'embodiedlab', url:'https://github.com/HexaFuture/EmbodiedLab#leaderboard', feed,
   terms:'Apache License 2.0. https://github.com/HexaFuture/EmbodiedLab/blob/main/LICENSE',
   parts:{Determination:'Determination', Basic:'Basic', Advanced:'Advanced', Optimization:'Optimization'},
+  stats: { inputTokens: { name: 'Input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, attainment: { name: 'Attainment', unit: 'score', better: 'higher', note: 'Fraction of experiments attained, from 0 to 1.' }, All: { name: 'All success rate', unit: '%', better: 'higher' }, 'All process score': { name: 'All process score', unit: 'score', better: 'higher' }, 'Determination process score': { name: 'Determination process score', unit: 'score', better: 'higher' }, 'Basic process score': { name: 'Basic process score', unit: 'score', better: 'higher' }, 'Advanced process score': { name: 'Advanced process score', unit: 'score', better: 'higher' }, 'Optimization process score': { name: 'Optimization process score', unit: 'score', better: 'higher' } },
   async fetch() {
     const section = (await fetchText(feed)).split('## Leaderboard\n')[1]?.split('## Getting started')[0];
     if (!section) throw new Error('Missing EmbodiedLab leaderboard');

@@ -13,6 +13,7 @@ const board: Leaderboard = {
   benchmark: 'kornat', url, feed, terms: 'The Space lists MIT at ' + url + '/blob/main/README.md.',
   headline: 'The leaderboard reports no overall score, so this is the plain mean of Social Values and Common Knowledge.',
   parts: { social: 'Social Values', knowledge: 'Common Knowledge', ...Object.fromEntries(subjects.map(s => [s, s])) },
+  stats: {asva:{name:'Agreement on social value alignment',unit:'%',better:'higher'},nsva:{name:'Non-agreement on social value alignment',unit:'%',better:'higher'},refusalPct:{name:'Refusal rate',unit:'%',better:'lower'}},
   verified: 'Organizers ran the model with the official harness.',
   async fetch() {
     const config = await fetchJson<{components: {type: string; props: {value: Table}}[]}>(feed);

@@ -12,6 +12,7 @@ const names = new Intl.DisplayNames('en', { type: 'language' });
 const board: Leaderboard = {
   benchmark: 'mtop', static: 'paper', url, feed,
   terms: 'ACL Anthology copyright policy: https://aclanthology.org/faq/copyright/.',
+  stats: { enIntentAccuracy: { name: 'English intent accuracy', unit: '%', better: 'higher' }, enSlotF1: { name: 'English slot F1', unit: '%', better: 'higher' }, esIntentAccuracy: { name: 'Spanish intent accuracy', unit: '%', better: 'higher' }, esSlotF1: { name: 'Spanish slot F1', unit: '%', better: 'higher' }, frIntentAccuracy: { name: 'French intent accuracy', unit: '%', better: 'higher' }, frSlotF1: { name: 'French slot F1', unit: '%', better: 'higher' }, deIntentAccuracy: { name: 'German intent accuracy', unit: '%', better: 'higher' }, deSlotF1: { name: 'German slot F1', unit: '%', better: 'higher' }, hiIntentAccuracy: { name: 'Hindi intent accuracy', unit: '%', better: 'higher' }, hiSlotF1: { name: 'Hindi slot F1', unit: '%', better: 'higher' }, thIntentAccuracy: { name: 'Thai intent accuracy', unit: '%', better: 'higher' }, thSlotF1: { name: 'Thai slot F1', unit: '%', better: 'higher' } },
   headline: 'The paper averages exact match across the five non-English target languages.',
   parts: Object.fromEntries(languages.map(k => [k, {name: names.of(k)!, group: 'Language'}])),
   async fetch() {

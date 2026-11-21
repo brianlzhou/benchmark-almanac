@@ -47,6 +47,10 @@ const board: Leaderboard = {
     }
   }
 ,
+  stats: {
+    minutes: { name: 'Runtime in minutes', unit: 'minutes', better: 'lower' },
+    latency: { name: 'Runtime in seconds', unit: 'seconds', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED);
     const data = jsonAfter(source,'window.BVB_DATA =') as {name:string,rank?:number,sceneCount?:number,renderedScenes?:number,costScenes?:number,costEstimate?:boolean,baselineComparable?:boolean,reportedEffort?:string,protocol?:string,overall:number,effort:string,harness:string,costUsd:number,runtimeMin:number,openWeight?:boolean,dualVqa:number,latentSim:number,layout:number,motion:number,tasks:Record<string,number>}[];

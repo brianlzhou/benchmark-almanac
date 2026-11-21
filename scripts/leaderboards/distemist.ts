@@ -10,6 +10,12 @@ const feed = 'https://participants-area.bioasq.org/results/DisTEMIST/';
 const board: Leaderboard = {
   benchmark: 'distemist', url: feed, feed, parts: { entities: 'Disease recognition', linking: 'Disease linking' },
   terms: 'Copyright BioASQ Challenge. https://participants-area.bioasq.org/results/DisTEMIST/',
+  stats: {
+    entitiesPrecision: { name: 'Disease recognition precision', unit: 'score', better: 'higher', note: 'Micro-precision for disease recognition, from 0 to 1.' },
+    entitiesRecall: { name: 'Disease recognition recall', unit: 'score', better: 'higher', note: 'Micro-recall for disease recognition, from 0 to 1.' },
+    linkingPrecision: { name: 'Disease linking precision', unit: 'score', better: 'higher', note: 'Micro-precision for disease linking, from 0 to 1.' },
+    linkingRecall: { name: 'Disease linking recall', unit: 'score', better: 'higher', note: 'Micro-recall for disease linking, from 0 to 1.' },
+  },
   async fetch() {
     const result = tables(await fetchText(feed)).filter(t => t[0]?.map(c => c.text).join('|') === 'Team Name|System name|MiP|MiR|MiF1');
     if (result.length !== 2) throw new Error('Expected both BioASQ result tables');

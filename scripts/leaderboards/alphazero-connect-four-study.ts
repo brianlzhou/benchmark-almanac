@@ -18,6 +18,15 @@ const board: Leaderboard = {
   benchmark: 'alphazero-connect-four-study', feed, url: 'https://github.com/jsherwood00/C4AI',
   terms: 'The authors publish the tournament release on GitHub, https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   aliases: { 'Opus 4.7': 'claude-opus-4-7', 'Opus 4.6': 'claude-opus-4-6' },
+  stats: {
+    bestRating: { name: 'Best Bradley-Terry rating', unit: 'rating', better: 'higher' },
+    trainingSeconds: { name: 'Training time', unit: 'seconds', better: 'lower' },
+    wins: { name: 'Wins', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+    draws: { name: 'Draws', unit: 'count' },
+    winsAsFirst: { name: 'Wins as first player', unit: 'count' },
+    gamesAsFirst: { name: 'Games as first player', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<Results>(feed);
     if (data.metadata.anchor_rating !== 2000) throw new Error('Changed rating anchor');

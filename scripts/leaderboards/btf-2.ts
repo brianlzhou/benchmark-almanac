@@ -4,7 +4,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL='https://evals.futuresearch.ai/';
 const board:Leaderboard={benchmark:'btf-2',url:URL,feed:URL+' (BTF-2 Brier accuracy table)',
- terms:'Official FutureSearch results; source terms apply and the Almanac credits and links the source.',
+ terms:'Official FutureSearch results; source terms apply and the Almanac credits and links the source.', stats:{calibration:{name:'Calibration',unit:'brier',better:'lower'},refinement:{name:'Refinement',unit:'brier',better:'lower'}},
  async fetch(){const t=tables(await fetchText(URL)).find(t=>t[0].some(c=>c.text==='Calibration'));
  if(!t)throw new Error('BTF-2 table missing');return t.slice(1).map(r=>{
  let model=r[0].text.replace(/ Agent$/,'');if(model.startsWith('Opus '))model='Claude '+model;

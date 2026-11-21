@@ -10,6 +10,11 @@ const board: Leaderboard = {
   feed,
   terms: "See the dataset license at https://huggingface.co/datasets/daloopa/financial-retrieval The publisher displays the chart publicly and its robots.txt is linked at https://daloopa.com/robots.txt.",
   aliases: { 'GPT-5 Thinking': 'gpt-5', 'Claude (Opus 4.1)': 'claude-opus-4-1' },
+  stats: {
+    tolerance1: { name: 'Accuracy within ±1%', unit: '%', better: 'higher' },
+    tolerance5: { name: 'Accuracy within ±5%', unit: '%', better: 'higher' },
+    tolerance20: { name: 'Accuracy within ±20%', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const row = (model: string, harness: string, score: number, one: number, five: number, twenty: number): LeaderboardRow => ({
       model, harness, score, metrics: { tolerance1: one, tolerance5: five, tolerance20: twenty },

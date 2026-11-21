@@ -20,6 +20,23 @@ const board: Leaderboard = {
   benchmark: 'enterprise-bench-l1-l2',
   url: 'https://hub.harborframework.com/datasets/Enterprise-Bench/l1-l2-bench?tab=leaderboard',
   feed: harborFeed, terms: harborTerms, harnesses: 'system', costPer: 'run',
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    n_trials: { name: 'Trials', unit: 'count' },
+    pass_at_2: { name: 'pass@2', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    pass_at_3: { name: 'pass@3', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    pass_at_4: { name: 'pass@4', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    pass_at_5: { name: 'pass@5', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    pass_at_8: { name: 'pass@8', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    pass_at_10: { name: 'pass@10', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    total_tokens: { name: 'Total tokens', unit: 'tokens' },
+    output_tokens: { name: 'Output tokens', unit: 'tokens' },
+    cached_input_tokens: { name: 'Cached input tokens', unit: 'tokens' },
+    uncached_input_tokens: { name: 'Uncached input tokens', unit: 'tokens' },
+    total_cost_usd: { name: 'Total run cost', unit: 'usd', better: 'lower' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+    avg_trial_duration_sec: { name: 'Average trial duration', unit: 'seconds', better: 'lower' },
+  },
   aliases: { 'GLM-5.3 (LiteLLM → Baseten)': 'glm-5-3' },
   async fetch() {
     const rows = await harborRows('Enterprise-Bench/l1-l2-bench', 'main', 34);

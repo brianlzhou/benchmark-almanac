@@ -8,6 +8,7 @@ const feed = "https://ageofmoltron.com/leaderboard";
 
 const board: Leaderboard = {
   benchmark: "moltron-llm-showdown-3",
+  stats: { firstTryValid: { name: 'First-try valid attempts', unit: 'count' }, valid: { name: 'Valid attempts', unit: 'count' }, 'Avg tries to working': { name: 'Average tries to working', unit: 'count', better: 'lower' }, '1st-try rate': { name: 'First-try rate', unit: '%', better: 'higher' }, 'Gen time (working)': { name: 'Generation time for working attempts', unit: 'seconds', better: 'lower' }, 'Gen time (all attempts)': { name: 'Generation time for all attempts', unit: 'seconds', better: 'lower' }, botyp: { name: 'Botyp score', unit: '%', better: 'higher' }, bobest: { name: 'Bobest score', unit: '%', better: 'higher' } },
   url: "https://ageofmoltron.com/leaderboard",
   feed,
   terms: "The page publishes prompts and standings without an explicit reuse license. https://ageofmoltron.com/leaderboard The robots.txt route returns HTML.",

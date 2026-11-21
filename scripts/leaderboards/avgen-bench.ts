@@ -17,6 +17,8 @@ const board: Leaderboard = {
     audio: { name: 'Audio quality', group: 'Dimension', note: 'Production quality score, multiplied by 10 in the total.' },
     lowPhysics: { name: 'Low-level kinematic plausibility', group: 'Dimension', note: 'Raw 0 to 5 score, multiplied by 20 in the total.' },
     highPhysics: { name: 'High-level causal reasoning', group: 'Dimension' },
+    avSync: { name: 'Audio-visual synchronization', group: 'Dimension' },
+    lipSync: { name: 'Lip synchronization', group: 'Dimension' },
   },
   url: "https://microsoft.github.io/AVGen-Bench/",
   feed: FEED,

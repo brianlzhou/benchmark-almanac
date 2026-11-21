@@ -13,11 +13,37 @@ const tasks: [string,string,number][] = [
   ['long_context','Question answering',1], ['tool_use','Multiple functions',1],
   ['general_trans','General translation',1], ['domain_trans_avg','Domain translation',1],
 ];
+const languageCodes = ['en','cs','de','es','fr','ru','sr','bn','zh','ja','ko','ar','th','hu','vi','sw','te'];
+const translationPairs = ['cs','de','es','fr','ru','sr','bn','zh','ja','ko','ar','th','hu','vi','sw','te'];
+const staticParts: Record<string,BoardPart> = {};
+for (const [file,title] of tasks) {
+  if (file === 'general_trans') {
+    for (const direction of ['En to X','X to En']) {
+      const key = `General translation: ${direction}`;
+      staticParts[key] = { name: key, unit: 'score' };
+      for (const lang of translationPairs) staticParts[`${key}: ${direction === 'En to X' ? 'en->' + lang : lang + '->en'}`] = { name: `${key}: ${direction === 'En to X' ? 'en to ' + lang : lang + ' to en'}`, unit: 'score' };
+    }
+  } else if (file === 'domain_trans_avg') {
+    for (const metric of ['En to X spBLEU','X to En spBLEU','En to X TER','X to En TER','En to X xComet','X to En xComet']) {
+      const key = `Domain translation: ${metric}`;
+      staticParts[key] = { name: key, unit: 'score', ...(metric.endsWith('TER') ? { better: 'lower' as const } : { better: 'higher' as const }) };
+      for (const lang of translationPairs) {
+        const pair = metric.startsWith('En') ? `en->${lang}` : `${lang}->en`;
+        staticParts[`${key}: ${pair}`] = { name: `${key}: ${pair.replace('->',' to ')}`, unit: 'score', ...(metric.endsWith('TER') ? { better: 'lower' as const } : { better: 'higher' as const }) };
+      }
+    }
+  } else {
+    const key = title;
+    staticParts[key] = { name: key, unit: file === 'model_based' ? '%' : '%' };
+    for (const lang of languageCodes) staticParts[`${key}: ${lang}`] = { name: `${key}: ${lang}`, unit: '%' };
+  }
+}
 
 const board: Leaderboard = {
   benchmark: 'benchmax', url: repo, feed: base + 'rule_based.csv',
   terms: 'MIT license at https://github.com/CONE-MT/BenchMAX/blob/HEAD/LICENSE.',
   headline: 'The authors report no overall score. The headline is rule-based instruction following, the first task in their main table.',
+  parts: staticParts,
   aliases: { 'DeepSeek-V3 671B':'deepseek-v3', 'InternLM2.5 20B':'internlm2-5-20b-chat', 'gpt-4o-mini-2024-07-18':'gpt-4o-mini', 'gpt-4o-2024-08-06':'gpt-4o-aug-2024' },
   async fetch() {
     const results = new Map<string,LeaderboardRow>();

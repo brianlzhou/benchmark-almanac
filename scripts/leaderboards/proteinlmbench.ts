@@ -7,6 +7,7 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2406.05540';
 const board: Leaderboard = {
   benchmark: 'proteinlmbench', static: 'paper', url: 'https://arxiv.org/abs/2406.05540', feed, terms: PAPER_TERMS,
+  stats: { inferenceMinutes: { name: 'Inference time', unit: 'minutes', better: 'lower' } },
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

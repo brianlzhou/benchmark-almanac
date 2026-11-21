@@ -10,6 +10,10 @@ const feed = url;
 const board: Leaderboard = {
   benchmark: 'adqa-bench', url, feed,
   terms: "DCASE robots.txt allows the results page and restricts images and theme assets. DCASE gives no separate score license.",
+  stats: {
+    devAccuracy: { name: 'Development accuracy', unit: '%', better: 'higher' },
+    difference: { name: 'Difference from evaluation accuracy', unit: '%', better: 'higher' },
+  },
   aliases: { 'Baseline_Qwen3-Omni-30B': 'qwen3-omni-30b-a3b' },
   async fetch() {
     const all = tables(await fetchText(feed));

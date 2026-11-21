@@ -6,6 +6,7 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 const root = 'https://huggingface.co/spaces/Itaykhealth/K-QA/raw/main/';
 const board: Leaderboard = {
   benchmark: 'k-qa', url: 'https://huggingface.co/spaces/Itaykhealth/K-QA', feed: root + 'app.py',
+  stats: { hallucinationRate: { name: 'Contradiction rate', unit: '%', better: 'lower' }, answered: { name: 'Answered questions', unit: 'count', better: 'higher' } },
   terms: 'The authors publish the Hugging Face Space under the MIT license.',
   async fetch() {
     const app = await fetchText(this.feed);

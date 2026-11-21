@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: `${PAGE}#/leaderboard`,
   feed: `${PAGE} (inline "const models" literal, rate)`,
   terms: 'Static project page on GitHub Pages (no robots.txt rules); the site states no terms.',
+  stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' } },
   aliases: {
     'Qwen 3.5 397B': 'qwen3-5-397b-a17b',
   },

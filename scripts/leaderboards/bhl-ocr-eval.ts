@@ -13,6 +13,14 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard",
   feed: FEED,
   terms: "The repository lists MIT for code and CC BY 3.0 for reference transcriptions. https://github.com/finebooks/bhl-ocr-eval",
+  stats: {
+    pages: { name: 'Pages', unit: 'count' },
+    cer_dip: { name: 'Digitization-induced CER', unit: '%', better: 'lower' },
+    recall: { name: 'Recall', unit: '%', better: 'higher' },
+    overx: { name: 'Oversegmentation rate', unit: '%', better: 'lower' },
+    loop: { name: 'Loop rate', unit: '%', better: 'lower' },
+    furn: { name: 'Furnishings rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const data = jsonAfter<Result[]>(await fetchText(FEED),'const DATA=');
     if (data.length < 26) throw new Error('Incomplete BHL OCR table');

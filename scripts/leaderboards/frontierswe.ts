@@ -12,6 +12,7 @@ const board: Leaderboard = {
   research: { name: 'Research', group: 'Task type' },
 },url:FEED,feed:FEED,
   terms:'Public FrontierSWE root page allowed by robots.txt; results remain credited to FrontierSWE under the site terms.',
+  stats:{cost:{name:'Mean cost per trial',unit:'usd',better:'lower'},latency:{name:'Mean duration',unit:'seconds',better:'lower'},best5:{name:'Best score over five trials',unit:'%',better:'higher'},worst5:{name:'Worst score over five trials',unit:'%',better:'higher'}},
   chart:{title:'Score vs. cost',x:{key:'cost',label:'Mean cost per trial',unit:'$',better:'lower',log:true},y:{key:'score',label:'Mean@5 score',unit:'%',better:'higher'},note:'Mean score across tasks against mean cost per trial, using the leaderboard aggregation.'},
   async fetch(){
     const entries=jsonAfter<{abs:{mean:Entry[];best:Entry[];worst:Entry[]}}>(nextFlight(await fetchText(FEED)),'"entries":').abs;

@@ -28,6 +28,13 @@ const board: Leaderboard = {
   terms:
     'Public, unauthenticated Harbor Hub endpoint behind the site, under the Harbor Hub Terms of Service; the site robots.txt disallows only its own /api/ proxy, and the repository is Apache-2.0.',
   aliases: {},
+  stats: {
+    passes: { name: 'Passes', unit: 'count' },
+    runCostUsd: { name: 'Run cost', unit: 'usd', better: 'lower' },
+    trials: { name: 'Trials', unit: 'count' },
+    runTotalTokens: { name: 'Run total tokens', unit: 'tokens' },
+    totalTokens: { name: 'Total tokens per trial', unit: 'tokens' },
+  },
   async fetch() {
     const body = JSON.stringify({ package: PACKAGE, name: NAME });
     const res = JSON.parse(await fetchText(HARBOR_FEED, { method: 'POST', headers: { 'content-type': 'application/json' }, body })) as { rows: Row[] };

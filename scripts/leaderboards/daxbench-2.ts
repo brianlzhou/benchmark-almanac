@@ -6,6 +6,7 @@ const FEED = "https://www.daxbench.com/";
 const board: Leaderboard = {
   benchmark: "daxbench-2", url: "https://www.daxbench.com/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, syntax: { name: 'Syntax accuracy', unit: '%', better: 'higher' }, completed: { name: 'Completed tasks', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

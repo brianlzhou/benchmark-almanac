@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://github.com/lechmazur/deception",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/deception. I could not verify reuse terms. The raw host serves no robots.txt rules.",
+  stats: { vulnerability: { name: 'Vulnerability score', unit: 'score', better: 'lower' } },
   aliases: LECH_MAZUR_ALIASES,
   async fetch() {
     const tables = markdownTables(await fetchText(feed));

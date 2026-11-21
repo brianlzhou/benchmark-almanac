@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: 'https://aclanthology.org/2023.acl-long.753/',
   static: 'paper',
   terms: 'ACL Anthology papers are available under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
+  stats: { constraintViolations: { name: 'Constraint violations', unit: 'count', better: 'lower' }, idF1: { name: 'Identification F1', unit: '%', better: 'higher' }, tupleF1: { name: 'Tuple F1', unit: '%', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(feed);
     const section = paper.split('Table 1: Performance of V-D I SC O M AT')[0].split('13472').at(-1);

@@ -1,10 +1,12 @@
 // StudyArena's Next.js payload publishes separate text, image and audio rankings.
 // Keep the model directory link, published token rates, and timing percentiles in seconds.
-import type { LeaderboardRow } from '../../leaderboards/types.ts';
+import type { BoardStat, LeaderboardRow} from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
 import { nextFlight, jsonAfter } from '../html.ts';
 interface Entry {model:string;label:string;score?:number;rating?:number;games?:number;ballots?:number;[key:string]:unknown}
 export const STUDY_TERMS='Public StudyArena leaderboard page. Site terms apply. The almanac credits and links the source.';
+export const STUDY_STATS: Record<string, BoardStat> ={rating:{name:'Elo rating',unit:'rating',better:'higher'},games:{name:'Games played',unit:'count'},wins:{name:'Wins',unit:'count'},losses:{name:'Losses',unit:'count'},ties:{name:'Ties',unit:'count'},winRate:{name:'Win rate',unit:'score',better:'higher',note:'Stored from 0 to 1.'},delta7d:{name:'Seven-day rating change',unit:'rating'},delta30d:{name:'Thirty-day rating change',unit:'rating'},percentile:{name:'Percentile',unit:'score',better:'higher',note:'Stored from 0 to 1.'}};
+export const STUDY_TEXT_STATS: Record<string, BoardStat> ={wins:STUDY_STATS.wins,losses:STUDY_STATS.losses,ties:STUDY_STATS.ties,winRate:STUDY_STATS.winRate,delta7d:STUDY_STATS.delta7d,delta30d:STUDY_STATS.delta30d,score:{name:'Elo score',unit:'rating',better:'higher'},ballots:{name:'Ballots',unit:'count'},allBad:{name:'All-bad outcomes',unit:'count'},answers:{name:'Answers',unit:'count'},timed:{name:'Timed responses',unit:'count'},medianDurationMs:{name:'Median response duration',unit:'ms',better:'lower'},p25DurationMs:{name:'25th percentile response duration',unit:'ms',better:'lower'},p75DurationMs:{name:'75th percentile response duration',unit:'ms',better:'lower'},medianFirstEventMs:{name:'Median first-event time',unit:'ms',better:'lower'},medianAnswerChars:{name:'Median answer characters',unit:'count'},medianOutputTokens:{name:'Median output tokens',unit:'tokens'},completionRate:{name:'Completion rate',unit:'score',better:'higher',note:'Stored from 0 to 1.'},flagRate:{name:'Flag rate',unit:'score',better:'lower',note:'Stored from 0 to 1.'}};
 export async function studyRows(kind:'text'|'image'|'audio'):Promise<LeaderboardRow[]>{
   const url='https://studyarena.com/leaderboard'+(kind==='text'?'':'/'+kind);
   const payload=nextFlight(await fetchText(url));

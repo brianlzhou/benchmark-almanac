@@ -16,6 +16,11 @@ const board: Leaderboard = {
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
  aliases: { 'Kimi-K2-0905': 'kimi-k2-sep-2025' },
+ stats: {
+  lossRate: { name: 'Loss rate', unit: '%', better: 'lower' },
+  tieRate: { name: 'Tie rate', unit: '%' },
+  totalTokensPerRound: { name: 'Total tokens per round', unit: 'tokens' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 return checked(await chartRows("https://huggingface.co/datasets/zai-org/CC-Bench-trajectories/resolve/v1.1/assets/winrate_and_token_usage.jpg", "50f264551901933ae21fa5496a0f5c7516e47a0c78f44f98d748d5c24f8a0175", [

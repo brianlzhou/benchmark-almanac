@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: "https://www.loop.com/article/introducing-the-long-horizon-auditbench-for-supply-chain-ai",
   feed,
   terms: "Loop reserves all rights. Its article reports relative inference costs. The host returned no readable robots.txt rules.",
+  stats: { relativeCostPerAudit: { name: 'Relative cost per audit', unit: 'speedup', better: 'lower' }, relativeCostPerCorrectAudit: { name: 'Relative cost per correct audit', unit: 'speedup', better: 'lower' } },
   async fetch() {
     const page = await fetchText(board.url);
     for (const figure of figures) {

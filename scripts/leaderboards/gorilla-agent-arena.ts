@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: 'https://www.agent-arena.com/leaderboard',
   feed,
   terms: 'Gorilla publishes the leaderboard client under Apache 2.0. https://github.com/ShishirPatil/gorilla/blob/main/LICENSE',
+  stats:{votes:{name:'Votes',unit:'count'},votePercentage:{name:'Vote percentage',unit:'%',better:'higher'}},
   aliases: {
     'llama-3.1-8B-instruct': 'llama-3-1-8b',
     'llama-3.1-70B-instruct': 'llama-3-1-70b',

@@ -9,6 +9,12 @@ const board: Leaderboard = {
   benchmark: 'fquad-2', static: 'paper', url: feed, feed,
   terms: 'The authors publish this paper under the terms listed at https://arxiv.org/abs/2109.13209.',
   parts: { hasAnswerF1: 'F1 has ans' },
+  stats: {
+    exactMatch: { name: 'Exact match', unit: '%', better: 'higher' },
+    noAnswerF1: { name: 'No answer F1', unit: '%', better: 'higher' },
+    noAnswerPrecision: { name: 'No answer precision', unit: '%', better: 'higher' },
+    noAnswerRecall: { name: 'No answer recall', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const baseline = tables.find(t => t[0].join('|') === 'Model|Dataset|EM|F1|F1 has ans|NoAns F1|NoAns P|NoAns R');

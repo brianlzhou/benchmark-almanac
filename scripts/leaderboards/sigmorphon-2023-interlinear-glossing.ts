@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://github.com/sigmorphon/2023glossingST/blob/main/results.md",
   feed: "https://raw.githubusercontent.com/sigmorphon/2023glossingST/main/results.md",
   terms: "The organizers license code under Apache 2.0 and list separate licenses for each dataset. They specify no separate license for the results table at https://github.com/sigmorphon/2023glossingST#licensing. The raw GitHub host returned 404 for robots.txt.",
+  stats: { morphemeAccuracy: { name: 'Morpheme accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = markdownTables(await fetchText(this.feed));
     if (tables.length !== 4) throw new Error('Expected two tracks and two metrics');

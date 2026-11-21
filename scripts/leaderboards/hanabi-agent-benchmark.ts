@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The dataset uses CC BY 4.0. Credit the authors and indicate changes. https://huggingface.co/datasets/realset/hanabi-agent-bench/blob/main/LICENSE The feed host publishes robots.txt at https://huggingface.co/robots.txt.",
   parts: {"seed101": "Seed 101", "seed102": "Seed 102", "seed103": "Seed 103", "seed104": "Seed 104"},
+  stats: { deckExhausted: { name: 'Decks exhausted', unit: 'count' }, livesExhausted: { name: 'Lives exhausted', unit: 'count' } },
   async fetch() {
     const source = await fetchText(feed);
     const records = parseCsv(source);

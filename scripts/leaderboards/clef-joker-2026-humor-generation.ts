@@ -26,6 +26,11 @@ const board: Leaderboard = {
   benchmark:'clef-joker-2026-humor-generation',url:'https://www.joker-project.com/2026/leaderboards/',feed,
   terms:'The JOKER lab publishes the final results at https://www.joker-project.com/2026/leaderboards/. Source attribution applies.',
   parts:{en:'English', es:'Spanish', fr:'French'},
+  stats:{
+    enBattles:{name:'English battles',unit:'count'},
+    esBattles:{name:'Spanish battles',unit:'count'},
+    frBattles:{name:'French battles',unit:'count'},
+  },
   async fetch() {
     const runs = new Map<string,LeaderboardRow>();
     for (const item of parseCsv(await fetchText(feed))) {

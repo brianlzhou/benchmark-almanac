@@ -32,6 +32,9 @@ const board: Leaderboard = {
   "feed": "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard/resolve/main/data/results.jsonl",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    successRate: { name: 'Success rate', unit: '%', better: 'higher', note: 'Percentage of the 100 challenge tasks completed successfully.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
 
     return (await fetchText(FEED)).split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line)).filter(r=>Number.isFinite(r.q_score)).map(r=>{

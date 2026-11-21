@@ -9,6 +9,13 @@ const board: Leaderboard = {
   url: "https://theaggregate.ai/benchmark?slug=the-aggregate-chart-recall",
   feed,
   terms: "Credit The Aggregate when quoting or charting scores. Bulk republication requires written permission. https://theaggregate.ai/terms The feed host publishes robots.txt at https://theaggregate.ai/robots.txt.",
+  stats: {
+    shape: { name: 'Shape correlation', unit: 'score', better: 'higher' },
+    valid: { name: 'Valid answers', unit: 'count' },
+    charts: { name: 'Charts scored', unit: 'count' },
+    monthsPerChart: { name: 'Months per chart', unit: 'count' },
+    outputTokenLimit: { name: 'Output token limit', unit: 'tokens' },
+  },
   aliases: { "DeepSeek V4.1 Flash (1017)": "deepseek-v4-1-flash-1017" },
   async fetch() {
     type Model = { name: string; mean_log10_rmse: number; mean_log10_pearson: number;

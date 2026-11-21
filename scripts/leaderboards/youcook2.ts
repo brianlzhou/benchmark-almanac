@@ -8,6 +8,11 @@ import { num } from '../lib/html.ts';
 const feed='https://raw.githubusercontent.com/LuoweiZhou/YouCook2-Leaderboard/master/README.md';
 const board:Leaderboard={benchmark:'youcook2',url:'https://github.com/LuoweiZhou/YouCook2-Leaderboard',feed,
  terms:'The authors publish these results in their public repository; the Almanac credits and links the original source.',
+ stats: {
+  'B@3': { name: 'BLEU-3 score', unit: 'score', better: 'higher' },
+  'B@4': { name: 'BLEU-4 score', unit: 'score', better: 'higher' },
+  M: { name: 'METEOR score', unit: 'score', better: 'higher' },
+ },
  async fetch():Promise<LeaderboardRow[]>{
   const s=(await fetchText(feed)).split('## Video Captioning')[1]?.split('## Dense Video Description')[0];
   if(!s)throw new Error('YouCook2 captioning section missing');

@@ -14,6 +14,7 @@ const board: Leaderboard = {
   'Robotics/Driving': { name: 'Robotics/driving', group: 'Environment' },
 }, url: FEED, feed: FEED,
   terms: 'The authors publish these historical results on arXiv. Credit the EvoPolicyGym authors.',
+  stats: { Budget: { name: 'Episode budget', unit: 'count' }, Wins: { name: 'Wins recorded', unit: 'count' }, 'Top-2': { name: 'Top-two finishes', unit: 'count' } },
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Core16'));
     if (!t) throw new Error('Core16 aggregate table missing');

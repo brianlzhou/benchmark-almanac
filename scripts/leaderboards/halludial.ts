@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed,
   terms: "The authors link their public paper from the repository. arXiv permits access to its HTML articles and requests paced reads.",
   parts: { hallucination: 'Hallucinatory F1', nonHallucination: 'Non-Hallucinatory F1', spontaneous: 'Spontaneous Hallucination Scenario', induced: 'Induced Hallucination Scenario' },
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await fetchText(feed);
     function table(id: string) {

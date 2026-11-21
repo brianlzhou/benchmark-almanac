@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://zindi.africa/competitions/your-voice-your-device-your-language-challenge/leaderboard",
   feed,
   terms: "Zindi returns no robots file and Hugging Face allows crawling. The five published entries identify teams. Private WER is a fraction. The dataset card states CC BY-SA 4.0. https://huggingface.co/datasets/sartifyllc/kiswahili-asr-challenge-eval",
+  stats: {
+    publicWer: { name: 'Public word error rate', unit: '%', better: 'lower' },
+    submissions: { name: 'Submissions', unit: 'count' },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0].join('|') === 'Rank|User / Team|Affiliation|Public WER|Private WER|Submissions');
     if (!table || table.length < 6) throw new Error('Missing Kiswahili ASR standings');

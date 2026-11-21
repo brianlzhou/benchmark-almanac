@@ -15,6 +15,12 @@ const board: Leaderboard = {
   headline: 'The papers report no overall score, so the headline is the plain mean of F1-RadGraph across the four test sets.',
   aliases: { T5: 't5-base' },
   parts: { iiiOpen: 'MIMIC-III test set', iiiHidden: 'MIMIC-III hidden test set', cxrOpen: 'MIMIC-CXR test set', cxrHidden: 'MIMIC-CXR hidden test set' },
+  stats: {
+    iiiOpenBLEU4: { name: 'MIMIC-III open BLEU4', unit: '%', better: 'higher' }, iiiOpenROUGEL: { name: 'MIMIC-III open ROUGE-L', unit: '%', better: 'higher' }, iiiOpenBertScore: { name: 'MIMIC-III open BERTScore', unit: '%', better: 'higher' },
+    iiiHiddenBLEU4: { name: 'MIMIC-III hidden BLEU4', unit: '%', better: 'higher' }, iiiHiddenROUGEL: { name: 'MIMIC-III hidden ROUGE-L', unit: '%', better: 'higher' }, iiiHiddenBertScore: { name: 'MIMIC-III hidden BERTScore', unit: '%', better: 'higher' },
+    cxrOpenBLEU4: { name: 'MIMIC-CXR open BLEU4', unit: '%', better: 'higher' }, cxrOpenROUGEL: { name: 'MIMIC-CXR open ROUGE-L', unit: '%', better: 'higher' }, cxrOpenBertScore: { name: 'MIMIC-CXR open BERTScore', unit: '%', better: 'higher' }, cxrOpenF1CheXbert: { name: 'MIMIC-CXR open F1 CheXbert', unit: '%', better: 'higher' },
+    cxrHiddenBLEU4: { name: 'MIMIC-CXR hidden BLEU4', unit: '%', better: 'higher' }, cxrHiddenROUGEL: { name: 'MIMIC-CXR hidden ROUGE-L', unit: '%', better: 'higher' }, cxrHiddenBertScore: { name: 'MIMIC-CXR hidden BERTScore', unit: '%', better: 'higher' }, cxrHiddenF1CheXbert: { name: 'MIMIC-CXR hidden F1 CheXbert', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const knowlab = await pdfText(feed);
     const tables = Array.from(knowlab.matchAll(/Models\s+BLEU4\s+RougeL\s+Bertscore\s+(?:F1-CheXbert\s+)?F1-RadGraph([^]*?)Table [34]: MIMIC-(?:III|CXR) test results/g), m => m[1]);

@@ -5,6 +5,7 @@ import {markdownTables} from '../lib/boards/github-markdown.ts';
 import {num} from '../lib/html.ts';
 const FEED='https://raw.githubusercontent.com/yeyuxin777/baoyan-agent-benchmark/HEAD/README.md';
 const board:Leaderboard={benchmark:'graduate-admissions-agent-benchmark',url:'https://github.com/yeyuxin777/baoyan-agent-benchmark',feed:FEED,
+ stats:{tasks:{name:'Tasks',unit:'count'},completed:{name:'Completed tasks',unit:'count'}},
  terms:'MIT software documentation and CC BY 4.0 original tasks; raw.githubusercontent.com has no robots.txt.',
  aliases:{'GPT Sol 6.1':'gpt-6-1-sol','GPT Astra 6':'gpt-6-astra'},
  async fetch(){

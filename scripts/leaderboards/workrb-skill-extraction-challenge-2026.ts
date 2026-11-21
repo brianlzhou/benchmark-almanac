@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://workrb.techwolf.ai/challenges/recsys-hr-2026.html#results",
   feed,
   terms: "Participants consented to public scores. The organizers specify CC BY 4.0 for graded annotations. The workshop host permits crawling and arXiv permits HTML with a 15-second crawl delay.",
+  stats: { backbones: { name: 'Backbones', unit: 'count' } },
   parts: { House:'House', Tech:'Tech', TechWolf:'TechWolf', SkillSkape:'SkillSkape', SkillNorm:'SkillNorm' },
   async fetch() {
     const data = tables(await fetchText(feed));

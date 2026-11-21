@@ -109,6 +109,16 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${BASE}chunks/<hash>.js (the runs.vb2 data module the page imports) and nodes/<n>.<hash>.js (mean_cost per run)`,
   terms: 'Public static asset of andonlabs.com; the site publishes no terms of use or robots.txt, so the scores are cited to Andon Labs.',
+  stats: {
+    min_cost: { name: 'Minimum cost per run', unit: 'usd', better: 'lower' },
+    max_cost: { name: 'Maximum cost per run', unit: 'usd', better: 'lower' },
+    avg_input_tokens: { name: 'Average input tokens', unit: 'tokens' },
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+    pricedRuns: { name: 'Priced runs', unit: 'count' },
+    final_value_geomean: { name: 'Geometric mean final value', unit: 'usd', better: 'higher' },
+    final_value_geomean_n: { name: 'Geometric mean sample count', unit: 'count' },
+  },
   aliases: {
     // the registry names the hosted Qwen 3.5 Plus by its weights
     'Qwen 3.5 Plus': 'qwen-3-5-plus-hosted-397b-a17b',

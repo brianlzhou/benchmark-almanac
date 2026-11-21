@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed: page,
   terms: 'The project page credits its content under CC BY-SA 4.0.',
   harnesses: 'system',
+  stats: { recallAt10:{name:'Recall@10',unit:'%',better:'higher'}, indexHours:{name:'Indexing time',unit:'hours',better:'lower'} },
   aliases: { 'Gemini 2.5 Flash': 'gemini-2-5-flash-jun-2025' },
   async fetch() {
     const html = await fetchText(page);

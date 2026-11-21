@@ -8,6 +8,7 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://arxiv.org/html/2604.13055';
 const board: Leaderboard = {
   benchmark: 'malt-freelancer-project-matching', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  stats: { datasets: { name: 'Datasets evaluated', unit: 'count' } },
   aliases: { 'Qwen3-Embed (0.6B)': 'qwen3-embedding-0-6b' },
   async fetch() {
     const table = paperTables(await paperHtml(url)).map(grid).find(t => t[0].join('|') === 'Model|SRec|ORec|SIRec|CRec|JNorm|SNorm|SExtr|All');

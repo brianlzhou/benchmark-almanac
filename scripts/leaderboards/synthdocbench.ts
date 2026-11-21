@@ -8,6 +8,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2607.10400';
 const board: Leaderboard = {
   benchmark: 'synthdocbench', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
+  stats: { chart: { name: 'Chart reading accuracy', unit: '%', better: 'higher' }, complex: { name: 'Complex reasoning accuracy', unit: '%', better: 'higher' }, crossModal: { name: 'Cross modal accuracy', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const tables = paperTables(await paperHtml(URL)).map(grid);
     const table = tables.find((rows) => rows.some((row) => row.includes('SynthDocBench (Ours)')));

@@ -10,6 +10,7 @@ const classes = ['Background', 'Building', 'Road', 'Water', 'Barren', 'Forest', 
 const board: Leaderboard = {
   benchmark: 'loveda', static: 'paper', url, feed: url, terms: PAPER_TERMS,
   parts: Object.fromEntries(classes.map(name => [name, name])),
+  stats: { fps: { name: 'Inference speed', unit: 'count', better: 'higher', note: 'Inference speed in frames per second.' } },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(url)).map(grid);
     const main = tables.find(t => t[1]?.join('|') === ['Method', 'Backbone', ...classes, 'mIoU (%)', 'Speed (FPS)'].join('|'));

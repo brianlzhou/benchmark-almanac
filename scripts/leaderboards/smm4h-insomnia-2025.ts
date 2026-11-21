@@ -10,6 +10,7 @@ const board: Leaderboard = {
   terms: 'The paper credits copyright to AAAI. ' + feed,
   headline: 'The organizers report three separate tasks and rank the table by binary classification F1.',
   parts: {rules: 'Subtask 2A F1', evidence: 'Subtask 2B ROUGE-L F1'},
+  stats: { precision: { name: 'Binary classification precision', unit: 'score', better: 'higher', note: 'Precision stored from 0 to 1.' }, recall: { name: 'Binary classification recall', unit: 'score', better: 'higher', note: 'Recall stored from 0 to 1.' }, rulesPrecision: { name: 'Rule classification precision', unit: 'score', better: 'higher', note: 'Precision stored from 0 to 1.' }, rulesRecall: { name: 'Rule classification recall', unit: 'score', better: 'higher', note: 'Recall stored from 0 to 1.' }, evidencePrecision: { name: 'Evidence extraction precision', unit: 'score', better: 'higher', note: 'Precision stored from 0 to 1.' }, evidenceRecall: { name: 'Evidence extraction recall', unit: 'score', better: 'higher', note: 'Recall stored from 0 to 1.' } },
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.split('Table 4: System summaries')[0].split('Table 3: System summaries').at(-1);

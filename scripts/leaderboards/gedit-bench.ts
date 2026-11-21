@@ -5,6 +5,11 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/stepfun-ai/Step1X-Edit/main/README.md";
 const board: Leaderboard = {
+ stats: {
+  qwenSemanticConsistency: { name: 'Qwen semantic consistency', unit: 'score', better: 'higher' },
+  qwenPerceptualQuality: { name: 'Qwen perceptual quality', unit: 'score', better: 'higher' },
+  qwenOverall: { name: 'Qwen overall score', unit: 'score', better: 'higher' },
+ },
   benchmark: "gedit-bench", parts: {
   semanticConsistency: { name: 'Semantic consistency', group: 'Dimension' },
   perceptualQuality: { name: 'Perceptual quality', group: 'Dimension' },

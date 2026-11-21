@@ -11,6 +11,7 @@ const board: Leaderboard = {
   parts: {
     challengeF1: { name: 'Challenge', group: 'Split' },
   },
+  stats: { testExactMatch: { name: 'Test exact match', unit: '%', better: 'higher' }, challengeExactMatch: { name: 'Challenge exact match', unit: '%', better: 'higher' } },
   url: "https://ymcui.com/cmrc2018/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at ymcui.com; retain source attribution and follow the upstream terms.",

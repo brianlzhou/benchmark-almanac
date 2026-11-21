@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark:'fashion-iq', url:'https://leaderboard.mteb.org/tasks/' + task, feed, host:'MTEB',
   headline:'MTEB reports test-set nDCG at 10, shown as a percentage.',
   terms:'MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats: { embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, activeParamsB: { name: 'Active parameters', unit: 'billions' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' } },
   async fetch() {
     const rows = await taskScores(feed, task, 'ndcg_at_10', 44, 100);
     return checked(rows.filter(r=>r.model !== 'mteb/baseline-random-encoder'),44);

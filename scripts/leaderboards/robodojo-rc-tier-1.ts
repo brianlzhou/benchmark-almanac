@@ -36,6 +36,14 @@ const board: Leaderboard = {
   url: `${PAGE}?leaderboard=capability&benchmark=${BENCHMARK}`,
   feed: `${PAGE}runs.<hash>.json (trials on the capability and Pareto boards)`,
   terms: 'Public run export of robocurve.org; robots.txt allows all paths (content signals: search yes, AI training no) and the site states no other terms.',
+  stats: {
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+    calls: { name: 'Tool calls', unit: 'count' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    cachedTokens: { name: 'Cached input tokens', unit: 'tokens' },
+    cacheWriteTokens: { name: 'Cache write tokens', unit: 'tokens' },
+    reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' },
+  },
   chart: {
     title: 'Robotics Capabilities vs Time',
     note: 'Mean score against wall-clock time per task attempt, 120 attempts per configuration; robot policies (VLAs) always run to their 3,600-step cap.',

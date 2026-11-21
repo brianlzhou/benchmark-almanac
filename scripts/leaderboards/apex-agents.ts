@@ -14,6 +14,11 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/datasets/mercor/apex-agents#leaderboard-baselines',
   feed: FEED,
   terms: 'Mercor forbids scraping and training use; Benchmark Almanac credits and links Mercor as the source of these evaluation results.',
+  stats: {
+    passAt8: { name: 'Pass at 8', unit: '%', better: 'higher' },
+    pass8: { name: 'Pass^8', unit: '%', better: 'higher' },
+    meanScore: { name: 'Mean rubric score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const md = await fetchText(FEED);
     const section = md.match(/## Leaderboard baselines([\s\S]*?)(?:\n## |$)/)?.[1];

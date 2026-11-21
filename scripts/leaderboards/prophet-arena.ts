@@ -25,6 +25,10 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (leaderboard table, Arena score)`,
   terms: 'Server-rendered public page; robots.txt allows all paths for generic agents with a search=yes, ai-train=no content signal, and the site publishes no terms.',
+  stats: {
+    ece: { name: 'Expected calibration error', unit: 'score', better: 'lower', note: 'Calibration error where 0 is perfect.' },
+    avgReturn: { name: 'Average return', unit: '%', better: 'higher', note: 'Simulated betting return, with 100 as break-even.' },
+  },
   aliases: {
     'Hunyuan Hy3': 'tencent-hy3',
   },

@@ -21,6 +21,7 @@ const board: Leaderboard = {
   feed,
   terms: "The site has no robots file. Tencent gives the repository a custom license with a territorial limitation for the European Union. I found no separate grant on the leaderboard. https://github.com/Tencent/workbuddy-bench/blob/main/LICENSE",
   aliases: suite.aliases,
+  stats: { avgTurns: { name: 'Average turns', unit: 'count', better: 'lower' }, inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' } },
   parts: { rule_checks: 'Rule checks', llm_judge: 'LLM Judge' },
   async fetch() {
     const data = await fetchText(feed);

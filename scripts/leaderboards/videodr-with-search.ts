@@ -16,6 +16,7 @@ interface Config {
 }
 
 const board: Leaderboard = {
+ stats: { thinkCalls: { name: 'Thinking calls', unit: 'count' }, searchCalls: { name: 'Search calls', unit: 'count' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   benchmark: 'videodr-with-search',
   url: 'https://videodr-benchmark.github.io/#/home',
   feed: FEED,

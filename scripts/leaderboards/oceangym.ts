@@ -7,8 +7,9 @@ import { tables } from '../lib/html.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://oceangpt.github.io/OceanGym/';
+const oceanTasks = ['ShallowLocate the robot','ShallowLocate the oil drums','ShallowLocate the electrical box','ShallowSearch for a sunken ship','ShallowSearch for the aircraft','ShallowInspect oil pipe','ShallowInspect the wind turbine','ShallowDocking','ShallowAverage','DeepLocate oil drums','DeepSearch for a sunken ship','DeepInspect the oil pipe','DeepInspect the wind turbine','DeepAverage'];
 const board: Leaderboard = {
-  benchmark: 'oceangym', url: feed, feed, parts: {},
+  benchmark: 'oceangym', url: feed, feed, parts: Object.fromEntries(oceanTasks.map(name => [name.replace(/[^A-Za-z0-9]/g,''), name])),
   terms: 'The OceanGym authors publish aggregate results at https://oceangpt.github.io/OceanGym/.',
   headline: 'The site reports separate environment averages, so the headline is the plain mean of its 12 decision tasks.',
   async fetch() {

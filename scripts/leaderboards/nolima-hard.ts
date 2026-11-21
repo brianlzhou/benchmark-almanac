@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'nolima-hard', url: 'https://github.com/adobe-research/NoLiMa#nolima-hard-results', feed,
   terms: 'Adobe Research License. https://github.com/adobe-research/NoLiMa/blob/main/LICENSE',
   headline: 'Plain mean of accuracy at 4K, 8K, 16K, and 32K context lengths.', parts,
+  stats: { baseScore: { name: 'Base score', unit: 'score', better: 'higher', note: 'Short-context reference score excluded from the NoLiMa-Hard mean.' } },
   aliases: { 'GPT-o3': 'o3', 'GPT-o1': 'o1', 'GPT-o4 Mini': 'o4-mini', 'GPT-o3 Mini': 'o3-mini',
     'GPT-4o': 'gpt-4o-nov-2024', 'Llama 3.3 70B': 'llama-3-3-70b-instruct', 'Gemini 2.5 Flash': 'gemini-2-5-flash-may-2025' },
   async fetch() {

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   feed,
   terms: "Both hosts allow crawling. Multiply strict_instruction_accuracy by 100 for percent accuracy. The Space lists no license for its scores. https://huggingface.co/spaces/MCINext/mizan-llm-leaderboard/blob/main/README.md",
   aliases: {"Llama-3.2-1B-Instruct": "llama-3-2-1b", "Llama-3.2-3B-Instruct": "llama-3-2-3b", "Mistral-Small-3.1-24B-Instruct-2503": "mistral-small-3-1", "c4ai-command-r-plus": "command-r-plus"},
+  stats: { strict_prompt_accuracy: { name: 'Strict prompt accuracy', unit: '%', better: 'higher' }, loose_prompt_accuracy: { name: 'Loose prompt accuracy', unit: '%', better: 'higher' }, loose_instruction_accuracy: { name: 'Loose instruction accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const lines = (await fetchText(feed)).trim().split(/\r?\n/);
     if (lines.length < 45) throw new Error('Incomplete Persian IFEval standings');

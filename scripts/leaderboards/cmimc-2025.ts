@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: matharenaPage(COMP),
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   aliases: MATHARENA_SPRING_2025_ALIASES,
   fetch: () => matharenaRows(COMP),
 };

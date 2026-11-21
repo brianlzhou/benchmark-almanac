@@ -17,6 +17,11 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2601.15224",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  macroPrc: { name: 'Macro precision', unit: '%', better: 'higher' },
+  macroAfrr: { name: 'Macro answer-free response rate', unit: '%', better: 'higher' },
+  microNse: { name: 'Micro normalized score error', unit: '%', better: 'lower' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(grid).find(t=>t[0]?.[10]==='Macro Avg');if(!t)throw new Error('Progress-Bench macro table missing');

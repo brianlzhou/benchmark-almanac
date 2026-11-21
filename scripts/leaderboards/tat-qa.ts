@@ -8,6 +8,7 @@ const FEED = "https://nextplusplus.github.io/TAT-QA/";
 const board: Leaderboard = {
  benchmark: "tat-qa", url: "https://nextplusplus.github.io/TAT-QA/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' } },
 
  async fetch() {
 const t=tables(await fetchText(FEED)).find(t=>t[0]?.[4]?.text==='F1');if(!t)throw new Error('Missing TAT-QA table');const rows:LeaderboardRow[]=[];

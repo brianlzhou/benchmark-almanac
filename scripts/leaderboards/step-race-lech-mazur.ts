@@ -14,6 +14,12 @@ const board: Leaderboard = {
   feed: `${ghRaw(`lechmazur/${REPO}`, 'README.md')} (LLM Step-Game Leaderboard, mu)`,
   terms: LECH_MAZUR_TERMS(REPO),
   aliases: LECH_MAZUR_ALIASES,
+  stats: {
+    exposed: { name: 'Exposed rating', unit: 'score', better: 'higher' },
+    games: { name: 'Games played', unit: 'count' },
+    'p-wins': { name: 'Partial wins', unit: 'count', note: 'Wins including fractional credit for ties.' },
+    ratio: { name: 'Partial win ratio', unit: 'score', better: 'higher', note: 'Partial wins divided by games, from 0 to 1.' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const r of await lechMazurTable(REPO, 'main', /^LLM Step-Game Leaderboard$/)) {

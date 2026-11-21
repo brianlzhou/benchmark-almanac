@@ -8,6 +8,9 @@ const feed = 'https://sycophanticmath.ai/static/js/index.js';
 const board: Leaderboard = {
   benchmark: 'brokenmath', url: 'https://sycophanticmath.ai/', feed,
   terms: 'The authors publish the project code under Apache 2.0. https://github.com/insait-institute/broken-math',
+  stats: {
+    utility: { name: 'Utility rate', unit: '%', better: 'higher', note: 'Rate of useful responses in the project results.' },
+  },
   aliases: { 'DeepSeek-R1-Qwen3-8B': 'deepseek-r1-0528-qwen3-8b' },
   async fetch() {
     const js = await fetchText(feed);

@@ -6,6 +6,7 @@ const FEED = "https://baxbench.com/static/data/leaderboard_data_abb_easy.json";
 const board: Leaderboard = {
   benchmark: "autobaxbench", url: "https://baxbench.com/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { passAt1:{name:'Pass@1',unit:'%',better:'higher'}, insecureAmongCorrect:{name:'Insecure among correct',unit:'%',better:'lower'} },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/12388#results",
   feed: FEED,
   terms: "CodaLab lists entrants by username. The test results page gives no score reuse license. https://codalab.lisn.upsaclay.fr/competitions/12388/results/19799 The robots URL returns HTML.",
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher' }, recall: { name: 'Recall', unit: 'score', better: 'higher' }, submissionId: { name: 'Submission ID', unit: 'count' } },
   async fetch() {
     const rows = parseCsv(await fetchText(FEED));
     if (rows.length < 10) throw new Error('Expected ten CodaLab submissions');

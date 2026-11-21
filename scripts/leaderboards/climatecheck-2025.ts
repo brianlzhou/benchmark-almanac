@@ -11,6 +11,14 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The paper is published by the Association for Computational Linguistics. https://aclanthology.org/2025.sdp-1.24/ The table is credited to the authors.',
   headline: 'The paper ranks claim verification by the sum of F1 and retrieval Recall@10.',
+  stats: {
+    recall2: { name: 'Recall@2', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    recall5: { name: 'Recall@5', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    recall10: { name: 'Recall@10', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    bpref: { name: 'Binary preference', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+  },
   aliases: {
     'Gemini 2.5': 'gemini-2-5-pro-mar-2025',
     'GPT-4.1': 'gpt-4-1',

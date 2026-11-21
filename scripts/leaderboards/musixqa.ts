@@ -11,6 +11,12 @@ const board: Leaderboard = {
   headline: 'The paper reports no overall score, so this is the mean GPT-graded accuracy across four sheet music tasks.',
   aliases: { 'Phi-3-V': 'phi-3-vision-128k-instruct' },
   parts: { ocr: 'OCR', omr: 'OMR', layout: 'Layout', chord: 'Chord' },
+  stats: {
+    ocrPNLS: {name: 'OCR partial normalized Levenshtein similarity', unit: 'score', better: 'higher'},
+    omrPNLS: {name: 'OMR partial normalized Levenshtein similarity', unit: 'score', better: 'higher'},
+    layoutPNLS: {name: 'Layout partial normalized Levenshtein similarity', unit: 'score', better: 'higher'},
+    chordPNLS: {name: 'Chord partial normalized Levenshtein similarity', unit: 'score', better: 'higher'},
+  },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const tables = paperTables(html).map(grid);

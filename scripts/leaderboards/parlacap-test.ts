@@ -15,6 +15,12 @@ const board: Leaderboard = {
   feed, terms: 'The authors publish their results under the GitHub Terms of Service, https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   headline: 'The authors report no overall score, so this is the plain mean of macro F1 across four languages.',
   parts: languages,
+  stats: {
+    RSMicroF1: { name: 'Serbian micro F1', unit: 'score', better: 'higher', note: 'Micro-averaged F1 stored as a fraction from 0 to 1.' },
+    ENMicroF1: { name: 'English micro F1', unit: 'score', better: 'higher', note: 'Micro-averaged F1 stored as a fraction from 0 to 1.' },
+    HRMicroF1: { name: 'Croatian micro F1', unit: 'score', better: 'higher', note: 'Micro-averaged F1 stored as a fraction from 0 to 1.' },
+    BAMicroF1: { name: 'Bosnian micro F1', unit: 'score', better: 'higher', note: 'Micro-averaged F1 stored as a fraction from 0 to 1.' },
+  },
   aliases: { 'gemma3:27b': 'gemma-3-27b', 'llama4:scout': 'llama-4-scout', 'llama3.3:latest': 'llama-3-3-70b-instruct',
     'qwen3:32b': 'qwen3-32b', 'deepseek-r1:14b': 'deepseek-r1-distill-qwen-14b', 'mistralai/mistral-medium-3.1': 'mistral-medium-3-1',
     'mistralai/mistral-small-3.2-24b-instruct': 'mistral-small-3-2', 'gpt-5-mini-2025-08-07': 'gpt-5-mini', 'gpt-5-nano-2025-08-07': 'gpt-5-nano' },

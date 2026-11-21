@@ -5,6 +5,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 import type { Leaderboard } from './types.ts';
 
 const source = fireworksBoard('pwnbench-v0-1', 'offensive/pwnbench-v0-1');
+source.stats = { cost_per_task: { name: 'Cost per task', unit: 'usd', better: 'lower' }, k: { name: 'Attempt count', unit: 'count' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, mediumPrecision: { name: 'Medium-severity precision', unit: '%', better: 'higher' }, mediumRecall: { name: 'Medium-severity recall', unit: '%', better: 'higher' } };
 export default {
   ...source, host: 'Fireworks AI',
   terms: 'Fireworks publishes the Novee results under https://fireworks.ai/terms-of-service',

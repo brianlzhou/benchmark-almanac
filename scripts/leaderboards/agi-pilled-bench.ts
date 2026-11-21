@@ -26,6 +26,7 @@ const board: Leaderboard = {
   url: 'https://agi-pilled-bench.adamholter.chatgpt.site/',
   feed: FEED,
   terms: 'The site publishes data.json and states no separate reuse license. Results are credited to Adam Holter with a link to the source.',
+  stats: { neverRate: { name: 'Never happened rate', unit: '%', better: 'lower' }, scored: { name: 'Scored responses', unit: 'count' }, responses: { name: 'Responses', unit: 'count' } },
   parts: {
     doneRate: { name: 'Done forecast rate', group: 'Forecast details', note: 'Share of forecasts that say a milestone already happened.' },
     aiAloneRate: { name: 'AI alone rate', group: 'Forecast details', note: 'Share of forecasts that say AI achieved the milestone without human help.' },

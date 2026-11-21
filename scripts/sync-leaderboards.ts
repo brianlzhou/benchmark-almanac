@@ -57,7 +57,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; stats?: Leaderboard['stats']; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -125,6 +125,17 @@ const aliasesOf = (board: Leaderboard) => ({ ...(boardAliases[board.benchmark] ?
 function measuresOf(board: Leaderboard, rows: Row[]): Record<string, string> | undefined {
   const kept = new Set(rows.flatMap((r) => Object.keys(r[8] ?? {})));
   const out = Object.entries(board.measures ?? {}).filter(([k]) => kept.has(k));
+  return out.length ? Object.fromEntries(out) : undefined;
+}
+
+// an interval bound or a spread describes another number, so it is never a measure of its own (BoardMeasures.astro
+// skips the same keys)
+const SPREAD = /^(low|high|lo|hi|lower|upper|ci\d*|ciLow|ciHigh|stderr|std|sd|se|var|variance|rankLow|rankHigh)$|^(low|high|lo|hi|lower|upper|ci\d*|stderr|std|sd|se|var|variance)[:_\s-]|(^|[_\s:-])(lo|hi|low|high|lower|upper|ci\d*|se|sd|std|stderr|var|variance)$|[a-zA-Z0-9](Lo|Hi|Low|High|Lower|Upper|Ci\d*|Se|Sd|Std|Stderr|Var|Variance|LowerBound|UpperBound)$/;
+
+// a board's other measures as stored: each declared stat the rows actually keep, leaving out parts and spreads
+function statsOf(board: Leaderboard, rows: Row[], parts: Record<string, unknown> | undefined): Leaderboard['stats'] {
+  const kept = new Set(rows.flatMap((r) => Object.keys(r[8] ?? {})));
+  const out = Object.entries(board.stats ?? {}).filter(([k]) => (kept.has(k) || k === 'cost' || k === 'tokens') && !(parts && k in parts) && !SPREAD.test(k));
   return out.length ? Object.fromEntries(out) : undefined;
 }
 
@@ -222,11 +233,17 @@ for (const f of files) {
     if (board.static) kept.static = board.static;
     else delete kept.static;
     // so are the parts it declares up front. Parts an importer sets inside fetch() wait for its next read.
+    // A refresh only adds or renames: parts an importer sets inside fetch() aren't declared here, so the stored ones
+    // stay until its next read rewrites them all.
     if (board.parts) {
-      const parts = partsOf(board, storedRows(board.benchmark));
-      if (parts) kept.parts = parts;
+      const parts = { ...(kept.parts ?? {}), ...(partsOf(board, storedRows(board.benchmark)) ?? {}) };
+      if (Object.keys(parts).length) kept.parts = parts;
       else delete kept.parts;
     }
+    // and the other measures it labels, once the parts are settled
+    const stats = statsOf(board, storedRows(board.benchmark), kept.parts);
+    if (stats) kept.stats = stats;
+    else delete kept.stats;
     if (board.measures) {
       const measures = measuresOf(board, storedRows(board.benchmark));
       if (measures) kept.measures = measures;
@@ -293,8 +310,9 @@ for (const f of files) {
     store.rows = store.rows.filter((r) => r[0] !== board.benchmark).concat(rows);
     store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(others);
     const parts = partsOf(board, [...rows, ...others]);
+    const stats = statsOf(board, [...rows, ...others], parts);
     const measures = measuresOf(board, [...rows, ...others]);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(measures ? { measures } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(stats ? { stats } : {}), ...(measures ? { measures } : {}) };
   } catch (e) {
     failed++;
     const error = (e as Error).message;

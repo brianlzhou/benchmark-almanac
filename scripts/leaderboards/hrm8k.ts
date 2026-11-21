@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: PAPER_TERMS,
   aliases: {"Llama-3.1-70B-Instruct": "llama-3-1-70b"},
+  stats: {
+    elo: { name: 'Elo rating', unit: 'elo', better: 'higher' },
+    tokenConsumption: { name: 'Token consumption', unit: 'tokens', better: 'lower' },
+  },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));
     const scoreTables = tables.filter(t => t[0]?.join('|') === 'Model|GSM8K|MATH|Omni-MATH|MMMLU|KSM|Avg.');

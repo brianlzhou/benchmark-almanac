@@ -137,6 +137,7 @@ const board: Leaderboard = {
   url: BS_PAGE,
   feed: `${BS_PAGE}data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)`,
   terms: BS_TERMS,
+  stats: { accepted: { name: 'Accepted responses', unit: 'count' }, answered: { name: 'Answered responses', unit: 'count' }, cachedTokens: { name: 'Cached tokens', unit: 'tokens' }, clear: { name: 'Clear pushback rate', unit: '%', better: 'higher' }, greenRate: { name: 'Green rate', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, meanJudgeScore: { name: 'Mean judge score', unit: 'score', better: 'higher' }, partial: { name: 'Partial responses', unit: 'count' }, publishedCsvRank: { name: 'Published CSV rank', unit: 'count', better: 'lower' }, questions: { name: 'Questions', unit: 'count' }, reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' }, redRate: { name: 'Red rate', unit: 'score', better: 'lower', note: 'Stored as a fraction from 0 to 1.' }, refusalRate: { name: 'Refusal rate', unit: 'score', better: 'lower', note: 'Stored as a fraction from 0 to 1.' }, refusals: { name: 'Refusals', unit: 'count' }, tokensPerSecond: { name: 'Tokens per second', unit: 'tokens/s', better: 'higher' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
   aliases: BS_ALIASES,
   async fetch() {
     const parts = {};

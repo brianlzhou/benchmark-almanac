@@ -8,6 +8,11 @@ const feed = 'https://raw.githubusercontent.com/cooperbench/user.skill/benchmark
 const board: Leaderboard = {
   benchmark: 'userbench-developer-simulation', url: 'https://userbench.vercel.app', feed,
   terms: 'The authors link the public website source. The website has no robots.txt and the raw source permits this path.',
+  stats: {
+    exact: { name: 'Exact agreement', unit: '%', better: 'higher' },
+    chance: { name: 'Chance baseline', unit: '%', better: 'higher' },
+    cacheHit: { name: 'Cache hit rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const file = ts.createSourceFile('results.tsx', await fetchText(feed), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
     const objects = new Map<string, ts.Expression>();

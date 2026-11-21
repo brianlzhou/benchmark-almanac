@@ -10,6 +10,11 @@ const board: Leaderboard = {
   benchmark: 'summscreenfd', host: 'SOTA2 Research', url: feed, feed,
   terms: 'SOTA2 publishes and credits each source on its comparison page. https://www.sota2.com/research/sota/document-summarization-on-summscreenfd-test',
   headline: 'The score is ROUGE-1 on the ForeverDreaming test set.',
+  stats: {
+    rouge2: {name: 'ROUGE-2', unit: '%', better: 'higher'},
+    rougeL: {name: 'ROUGE-L', unit: '%', better: 'higher'},
+    bertScoreF1: {name: 'BERTScore F1', unit: '%', better: 'higher'},
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Method|Links|ROUGE-1|ROUGE-2|ROUGE-L|BERTScore F1|ROUGE Geometric Mean');
     if (!table) throw new Error('SummScreenFD leaderboard columns changed');

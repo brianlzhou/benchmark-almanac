@@ -11,6 +11,13 @@ const board: Leaderboard = {
   'Temporal Consistency': { name: 'Temporal consistency', group: 'Dimension' },
 }, url: "https://evalcrafter.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    latency: { name: 'Generation latency', unit: 'seconds', better: 'lower' }, width: { name: 'Video width', unit: 'count' }, height: { name: 'Video height', unit: 'count' }, fps: { name: 'Frames per second', unit: 'count' }, videoSeconds: { name: 'Video duration', unit: 'seconds' },
+    VQA_A: { name: 'VQA action score', unit: 'score', better: 'higher' }, VQA_T: { name: 'VQA temporal score', unit: 'score', better: 'higher' }, IS: { name: 'Inception score', unit: 'score', better: 'higher' }, 'CLIP-Temp': { name: 'CLIP temporal score', unit: 'score', better: 'higher' },
+    'Warping Error': { name: 'Warping error', unit: 'score', better: 'lower' }, 'Face Consistency': { name: 'Face consistency', unit: 'score', better: 'higher' }, 'Action-Score': { name: 'Action score', unit: 'score', better: 'higher' }, 'Motion AC-Score': { name: 'Motion accuracy score', unit: 'score', better: 'higher' },
+    'Flow-Score': { name: 'Flow score', unit: 'score', better: 'higher' }, 'CLIP-Score': { name: 'CLIP score', unit: 'score', better: 'higher' }, 'BLIP-BLUE': { name: 'BLIP BLEU score', unit: 'score', better: 'higher' }, 'SD-Score': { name: 'Semantic distance score', unit: 'score', better: 'higher' },
+    'Detection-Score': { name: 'Detection score', unit: 'score', better: 'higher' }, 'Color-Score': { name: 'Color score', unit: 'score', better: 'higher' }, 'Count-Score': { name: 'Count score', unit: 'score', better: 'higher' }, 'OCR-Score': { name: 'OCR score', unit: 'score', better: 'higher' }, 'Celebrity ID Score': { name: 'Celebrity identification score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

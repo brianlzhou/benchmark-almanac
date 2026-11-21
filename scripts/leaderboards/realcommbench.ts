@@ -9,6 +9,7 @@ const feed = 'https://wwwwwli.github.io/RealComm/';
 const board: Leaderboard = {
   benchmark: 'realcommbench', url: feed, feed,
   terms: 'The authors publish these tables on their project site. Release terms are described at https://github.com/AmphionTeam/RealComm.',
+  stats: { digitalEER: { name: 'Digital equal error rate', unit: '%', better: 'lower' }, increase: { name: 'Equal error rate increase', unit: '%', better: 'lower', note: 'Increase from digital to real-call conditions, in percentage points.' } },
   async fetch() {
     const source = tables(await fetchText(feed)).map(grid);
     const zero = source.find(t => t[0].join('|') === 'Detector|Digital|Call|ΔEER (pp)');

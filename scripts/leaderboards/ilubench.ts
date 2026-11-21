@@ -16,6 +16,14 @@ const board: Leaderboard = {
   url: "https://uche.uuamni.com/ilubench",
   feed,
   terms: "The dataset card specifies CC BY 4.0. The live feed reports rubric versions and scoring provenance. Current model rows lack paired cultural correctness scores. https://huggingface.co/datasets/UUAMNI/ilubench Neither host publishes crawler restrictions at robots.txt.",
+  stats: {
+    scored: { name: 'Language-scored prompts', unit: 'count' },
+    humanScored: { name: 'Human-scored prompts', unit: 'count' },
+    pending: { name: 'Pending cultural scores', unit: 'count' },
+    register_switch_partial: { name: 'Partial register switch share', unit: '%', better: 'lower' },
+    register_switch_full: { name: 'Full register switch share', unit: '%', better: 'lower' },
+    registerScored_machine_llm: { name: 'Machine or LLM register-scored prompts', unit: 'count' },
+  },
   async fetch() {
     const d = await fetchJson<{models: Record<string,Entry>; rule_version: number}>(feed);
     const rows = Object.entries(d.models).map(([model, r]) => {

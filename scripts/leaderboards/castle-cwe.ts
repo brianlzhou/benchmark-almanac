@@ -7,6 +7,11 @@ const feed = 'https://arxiv.org/html/2503.09433';
 const board: Leaderboard = {
   benchmark: 'castle-cwe', static: 'paper', url: feed, feed,
   terms: 'The authors make their aggregate results available through arXiv. https://arxiv.org/abs/2503.09433',
+  stats: {
+    truePositive: { name: 'True positives', unit: 'count' }, trueNegative: { name: 'True negatives', unit: 'count' },
+    falsePositive: { name: 'False positives', unit: 'count' }, falseNegative: { name: 'False negatives', unit: 'count' },
+    precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+  },
   aliases: { 'GPT-o3 Mini': 'o3-mini', 'Chat GPT-o1': 'o1', 'DeepSeek R1 (snapshot unspecified)': 'deepseek-r1',
     'QWEN 2.5CI (32B)': 'qwen2-5-coder-32b-instruct', 'GPT-4o Mini (snapshot unspecified)': 'gpt-4o-mini',
     'Gemma 2 (9B)': 'gemma-2-9b', 'LLAMA 3.1 (8B)': 'llama-3-1-8b' },

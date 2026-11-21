@@ -8,6 +8,7 @@ const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/EuroSAT/scores'
 const board: Leaderboard = {
   benchmark: 'eurosat', url: 'https://leaderboard.mteb.org/tasks/EuroSAT', feed, host: 'MTEB',
   terms: 'MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' } },
   async fetch() {
     const all = await taskScores(feed, 'EuroSAT', 'accuracy', 58, 100);
     const rows = all.filter(r => r.model !== 'mteb/baseline-random-encoder')

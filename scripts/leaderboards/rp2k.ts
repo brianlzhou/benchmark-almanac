@@ -10,7 +10,7 @@ const board: Leaderboard = {
   benchmark: 'rp2k', static: 'paper', url: 'https://arxiv.org/abs/2006.12634', feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2006.12634',
   headline: 'The paper reports Top-1 first, so this is the overall Top-1 accuracy column.',
-  parts: { top1: 'Top-1 accuracy', top5: 'Top-5 accuracy' },
+  parts: { top1: 'Top-1 accuracy', top5: 'Top-5 accuracy', dairies: 'Dairies Top-1', dairiesTop5: 'Dairies Top-5', liquors: 'Liquors Top-1', liquorsTop5: 'Liquors Top-5', beers: 'Beers Top-1', beersTop5: 'Beers Top-5', cosmetics: 'Cosmetics Top-1', cosmeticsTop5: 'Cosmetics Top-5', nonAlcoholDrinks: 'Non-alcohol drinks Top-1', nonAlcoholDrinksTop5: 'Non-alcohol drinks Top-5', seasonings: 'Seasonings Top-1', seasoningsTop5: 'Seasonings Top-5', tobacco: 'Tobacco Top-1', tobaccoTop5: 'Tobacco Top-5' },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
     if (!text.includes('All                        384,311      95.18% 99.01%')) throw new Error('RP2K overall classification row missing');

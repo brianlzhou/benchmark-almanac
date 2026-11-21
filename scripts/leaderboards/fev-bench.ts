@@ -10,6 +10,7 @@ const feed = "https://autogluon-fev-bench.hf.space/";
 const board: Leaderboard = {
   benchmark: 'fev-bench', url, feed,
   terms: "The Space lists apache-2.0 for its repository. https://huggingface.co/spaces/autogluon/fev-bench/blob/main/README.md" ,
+  stats: { skillScore: { name: 'Skill score', unit: 'score', better: 'higher' }, runtimePer100: { name: 'Inference time per 100 forecasts', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const browser = await chromium.launch({channel:'chrome'});
     try {

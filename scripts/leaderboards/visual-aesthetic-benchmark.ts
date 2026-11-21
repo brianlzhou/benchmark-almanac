@@ -13,6 +13,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at vab.bakelab.ai; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    Artwork: {name: 'Artwork accuracy', unit: '%', better: 'higher'},
+    Illustration: {name: 'Illustration accuracy', unit: '%', better: 'higher'},
+    Photography: {name: 'Photography accuracy', unit: '%', better: 'higher'},
+    tb1: {name: 'Top and bottom 1 accuracy', unit: '%', better: 'higher', note: 'Accuracy when the model selects the top-ranked or bottom-ranked item.'},
+  },
   
   async fetch() {
     const t = tables(await fetchText(FEED)).find(t => t[0]?.some(c => c.text === 'Artwork'));

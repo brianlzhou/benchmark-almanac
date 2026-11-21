@@ -5,6 +5,24 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = "https://arxiv.org/html/2608.04682";
 const board: Leaderboard = {benchmark:"active-swe", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
  reference:["Claude Code"], parts:{simple:{name:"Simple",group:"Difficulty"},hard:{name:"Hard",group:"Difficulty"}},
+ stats:{
+  localizationRecall:{name:"Localization recall",unit:"%",better:"higher"},
+  localizationPrecision:{name:"Localization precision",unit:"%",better:"higher"},
+  potentialCount:{name:"Potential bug test count",unit:"count"},
+  testValidity:{name:"Test validity",unit:"%",better:"higher",note:"Percentage of generated tests that exhibit fail-to-pass behavior."},
+  revealed:{name:"Potential bugs revealed",unit:"%",better:"higher",note:"Percentage of potential bugs supported by valid test evidence."},
+  simpleRecall:{name:"Simple recall",unit:"%",better:"higher"},
+  simplePrecision:{name:"Simple precision",unit:"%",better:"higher"},
+  simplePotentialCount:{name:"Simple potential bug test count",unit:"count"},
+  simpleTestValidity:{name:"Simple test validity",unit:"%",better:"higher"},
+  simpleRevealed:{name:"Simple potential bugs revealed",unit:"%",better:"higher"},
+  hardRecall:{name:"Hard recall",unit:"%",better:"higher"},
+  hardPrecision:{name:"Hard precision",unit:"%",better:"higher"},
+  hardSubResolved:{name:"Hard subtask resolved rate",unit:"%",better:"higher"},
+  hardPotentialCount:{name:"Hard potential bug test count",unit:"count"},
+  hardTestValidity:{name:"Hard test validity",unit:"%",better:"higher"},
+  hardRevealed:{name:"Hard potential bugs revealed",unit:"%",better:"higher"},
+ },
  async fetch() {
   const tables=paperTables(await paperHtml(URL)).map(grid);
   const table=tables.find(t=>JSON.stringify(t[0]) === "[\"Model\",\"Recorded\",\"Recorded\",\"Recorded\",\"Potential\",\"Potential\",\"Potential\"]" && JSON.stringify(t[1]) === "[\"Model\",\"LR\",\"LP\",\"Resolved\",\"Count\",\"TV\",\"Revealed\"]");

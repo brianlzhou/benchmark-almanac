@@ -10,6 +10,11 @@ const url = 'https://github.com/VDIGPKU/HiDrive';
 const feed = 'https://raw.githubusercontent.com/VDIGPKU/HiDrive/HEAD/README.md';
 const board: Leaderboard = {
   benchmark: 'hidrive', url, feed,
+  stats: {
+    routeCompletion: { name: 'Route completion', unit: '%', better: 'higher' },
+    legalScore: { name: 'Legal score', unit: '%', better: 'higher' },
+    ethicsScore: { name: 'Ethics score', unit: '%', better: 'higher' },
+  },
   terms: 'The authors permit academic research use and require authorization for commerce at https://github.com/VDIGPKU/HiDrive#license.',
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0].join('|') === 'Method|Overall DS|RC|LS|ES');

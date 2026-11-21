@@ -10,7 +10,7 @@ const board: Leaderboard = {
   simplicity: { name: 'Simplicity', group: 'Dimension', note: 'Reported on a zero-to-one scale.' },
   passRate: { name: 'Pass rate', group: 'Dimension', unit: '%' },
 }, url: "https://ldbench.com", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ terms: 'The benchmark authors publish this public feed; their source license and site terms apply.', stats:{problemCost:{name:'Implementation problem cost',unit:'usd',better:'lower'},scoreSE:{name:'Score standard error',unit:'score'},complete:{name:'Complete cells',unit:'count'},total:{name:'Total cells',unit:'count'}},
  chart:{title:'Library quality vs. design cost',x:{key:'cost',label:'Mean design cost per library',unit:'$',better:'lower'},y:{key:'score',label:'Library quality',unit:'score',better:'higher'}},
  async fetch() {
 const d=await fetchJson<any>(FEED);return d.design.rows.map((r:any)=>({model:r.model==='DeepSeek V4 Pro'?r.model+' [snapshot unspecified]':r.model,harness:r.harness,score:r.score.mean*100,cost:r.libraryCost?.mean,setting:'Library design; equal task weights',metrics:{cost:r.libraryCost?.mean,problemCost:r.problemCost?.mean,scoreLow:r.score.lo*100,scoreHigh:r.score.hi*100,scoreSE:r.score.se*100,passRate:r.passRate.mean*100,simplicity:r.simplicity.mean,complete:r.cells.complete,total:r.cells.total}}));

@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2610.26828';
 const board: Leaderboard = {
   benchmark: 'wildawm-validation', url: 'https://github.com/MSR-Orchard/WildAWM', feed, static: 'paper',
   terms: 'The authors publish the benchmark paper on arXiv. https://arxiv.org/licenses/',
+  parts: { onlineMind2Web: { name: 'OnlineMind2Web', group: 'Benchmark', unit: '%', better: 'higher' }, qwenClawBench: { name: 'QwenClawBench', group: 'Benchmark', unit: '%', better: 'higher' }, openScienceVenture: { name: 'Open Science Venture', group: 'Benchmark', unit: '%', better: 'higher' }, validation: { name: 'Validation', group: 'Benchmark', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0].join('|') === 'Model|O2W|QCB|OSV|Val.|Avg.');

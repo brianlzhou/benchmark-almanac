@@ -32,6 +32,7 @@ const board: Leaderboard = {
   "feed": "https://contextbench.github.io/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { passAt1: { name: 'Pass@1', unit: '%', better: 'higher' }, contextF1: { name: 'Context F1', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' }, efficiency: { name: 'Efficiency', unit: 'score', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const data = tables(source);

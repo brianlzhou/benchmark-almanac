@@ -11,6 +11,9 @@ const board: Leaderboard = {
   feed,
   terms: "Use the five populated Soapies scores for the 391-clip isiXhosa and English subset. The repository uses the MIT license. The recordings are for research only. The raw file host has no robots.txt.",
   host: 'isiXhosa Speech AI',
+  stats: {
+    wer: { name: 'Word error rate', unit: '%', better: 'lower', note: 'Percentage of words transcribed incorrectly.' },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0]?.[3]?.startsWith('Soapies test'));
     if (!table || table[0][0] !== 'Model') throw new Error('Missing Soapies results');

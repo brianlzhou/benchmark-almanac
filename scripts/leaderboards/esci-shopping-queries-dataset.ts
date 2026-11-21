@@ -22,6 +22,7 @@ const board: Leaderboard = {
   terms: 'AIcrowd publishes challenge results subject to https://www.aicrowd.com/pages/terms-of-use.',
   headline: 'The competition ranks three tasks separately. The headline is private-test nDCG on the first task, query-product ranking.',
   parts,
+  stats: { rankingPublic: { name: 'Public ranking nDCG', unit: 'score', better: 'higher', note: 'Public-test nDCG from 0 to 1.' }, classificationPublic: { name: 'Public classification micro F1', unit: 'score', better: 'higher', note: 'Public-test micro F1 from 0 to 1.' }, substitutePublic: { name: 'Public substitute identification micro F1', unit: 'score', better: 'higher', note: 'Public-test micro F1 from 0 to 1.' } },
   async fetch() {
     const scores = new Map<string, Record<string, number>>();
     for (const [i, key] of Object.keys(parts).entries()) {

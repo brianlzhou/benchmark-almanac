@@ -32,6 +32,12 @@ const board: Leaderboard = {
   "feed": "https://togetherbench.com",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    pass2: { name: 'Pass@2', unit: '%', better: 'higher' },
+    judge: { name: 'Judge score', unit: 'score', better: 'higher' },
+    corrections: { name: 'Corrections', unit: 'count', note: 'Number of corrections made during the task.' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const source=await fetchText(FEED);const rows:LeaderboardRow[]=[];
     for(const part of source.split(/<div class="lbb-grid lbb-row">/).slice(1)){

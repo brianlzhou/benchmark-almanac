@@ -9,8 +9,21 @@ const levels=[5,10,15,20,25];
 const rates=['Success rate','Sub-problem resolution rate','Discovery rate'];
 const errors=['Missing required parameter','Wrong node type','Wrong call format'];
 const parts:Record<string,BoardPart>={drop:{name:'Success rate drop',unit:'%',better:'lower'}};
+const stats: Record<string, {name:string, unit?:string, better?:'higher'|'lower'}> = {};
+for (const level of levels) {
+  const group = 'Difficulty-' + level;
+  parts['d' + level + 'SR'] = {name:'Success rate', group, unit:'%', better:'higher'};
+  parts['d' + level + 'Sub'] = {name:'Sub-problem resolution rate', group, unit:'%', better:'higher'};
+  parts['d' + level + 'Disc'] = {name:'Discovery rate', group, unit:'%', better:'higher'};
+  if (level < 25) {
+    stats['d' + level + 'error0'] = {name:'Missing required parameter errors, difficulty ' + level, unit:'count', better:'lower'};
+    stats['d' + level + 'error1'] = {name:'Wrong node type errors, difficulty ' + level, unit:'count', better:'lower'};
+    stats['d' + level + 'error2'] = {name:'Wrong call format errors, difficulty ' + level, unit:'count', better:'lower'};
+    stats['d' + level + 'calls'] = {name:'Tool calls per instance, difficulty ' + level, unit:'count'};
+  }
+}
 const board:Leaderboard={
-  benchmark:'agentescapebench',static:'paper',url,feed:url,terms:PAPER_TERMS,parts,
+  benchmark:'agentescapebench',static:'paper',url,feed:url,terms:PAPER_TERMS,parts,stats,
   headline:'The paper gives no overall score across all five difficulty levels, so this is the plain mean of their success rates.',
   async fetch(){
     const ts=paperTables(await paperHtml(url)).map(grid);
@@ -35,8 +48,8 @@ const board:Leaderboard={
         }
         rates.forEach((name,j)=>add(['SR','Sub','Disc'][j],name,cells[3*i+j],'%','higher'));
         if (i<4){
-          errors.forEach((name,j)=>add('error'+j,name,e[1+5*j+i],'score','lower'));
-          add('calls','Tool calls per instance',c[i+1],'score','lower');
+          errors.forEach((name,j)=>{ const key='d'+level+'error'+j; if (!/^\d+(?:\.\d+)?$/.test(e[1+5*j+i])) throw new Error('Invalid '+name); metrics[key]=Number(e[1+5*j+i]); });
+          const key='d'+level+'calls'; if (!/^\d+(?:\.\d+)?$/.test(c[i+1])) throw new Error('Invalid tool calls'); metrics[key]=Number(c[i+1]);
         }
       }
       rows.push({model,metrics,score:levels.reduce((s,d)=>s+metrics['d'+d+'SR'],0)/5});

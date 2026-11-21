@@ -11,6 +11,11 @@ const board: Leaderboard = {
   benchmark: 'hx2dx-arena', url: feed, feed, static: 'paper',
   terms: 'The authors publish the verdict table at https://arxiv.org/abs/2611.14122.',
   aliases: { 'GPT Luna 6': 'gpt-6-luna', 'Gemma 3 27B IT': 'gemma-3-27b' },
+  stats: {
+    correct: { name: 'Correct diagnoses', unit: 'count', better: 'higher' },
+    partial: { name: 'Partially correct diagnoses', unit: 'count', better: 'higher' },
+    incorrect: { name: 'Incorrect diagnoses', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const html = await paperHtml(feed);
     const table = paperTables(html).map(grid).find(t => t[0]?.join('|') === 'Model|Correct|Partially correct|Incorrect');

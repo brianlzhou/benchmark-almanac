@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://markovic.com/swedish_benchmark_V1.html",
   feed,
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. https://markovic.com/swedish_benchmark_V1.html The feed host publishes robots.txt at https://markovic.com/robots.txt.",
+  stats: {
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+    invalid: { name: 'Invalid predictions', unit: 'count' },
+  },
   aliases: {"google_gemma-4-31b": "gemma-4-31b-it", "qwen_qwen3.6-27b": "qwen3-6-27b", "qwen_qwen3.6-35b-a3b": "qwen-3-6-35b-a3b", "google_gemma-4-26b-a4b": "gemma-4-26b-a4b", "openai_gpt-oss-120b": "gpt-oss-120b", "nvidia_nemotron-3-super": "nemotron-3-super", "openai_gpt-oss-20b": "gpt-oss-20b", "google_gemma-3-27b": "gemma-3-27b", "meta_llama-3.3-70b": "llama-3-3-70b", "zai-org_glm-4.7-flash": "glm-4-7-flash", "mistral-small-4-119b-2603": "mistral-small-4"},
   async fetch() {
     type Result = { model: string; overall_score: number; avg_latency_seconds: number; coverage: number; invalid_predictions: number;

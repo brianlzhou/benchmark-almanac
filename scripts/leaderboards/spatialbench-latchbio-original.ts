@@ -7,6 +7,11 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2512.21907v1';
 const board: Leaderboard = {
   benchmark: 'spatialbench-latchbio-original', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
+  stats: {
+    steps: { name: 'Steps', unit: 'count' },
+    latencySeconds: { name: 'Latency', unit: 'seconds', better: 'lower' },
+    costUsd: { name: 'Cost', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const table = paperTables(await paperHtml(URL)).map(grid).find((rows) => rows[0]?.join('|') === 'Model|Accuracy (%)|Steps|Latency (s)|Cost (USD)');
     if (!table) throw new Error('SpatialBench aggregate model table missing');

@@ -5,6 +5,7 @@ import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://video-reality-test.github.io/";
 const board: Leaderboard = {
+ stats: { reviewerRank: { name: 'Reviewer rank', unit: 'rating', better: 'lower' } },
  benchmark: "video-reality-test",
  parts: {
    'Veo3.1 Fast': { name: 'Veo3.1 Fast', group: 'Source model' },

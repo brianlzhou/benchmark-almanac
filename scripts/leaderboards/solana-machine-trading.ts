@@ -10,6 +10,10 @@ type Release = { scores: { tasks: Record<string, { models: Record<string, { skil
 const board: Leaderboard = {
   benchmark: 'solana-machine-trading', url, feed,
   terms: 'The benchmark repository publishes this release file under its MIT license. https://github.com/lgalabru/machine-trading/blob/main/LICENSE',
+  stats: {
+    reward: { name: 'Reward', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+    tasks: { name: 'Tasks', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const release = await fetchJson<Release>(feed);
     const grouped = new Map<string, { skills: number[]; rewards: number[]; trials: number }>();

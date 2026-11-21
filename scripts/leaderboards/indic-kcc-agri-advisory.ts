@@ -11,6 +11,12 @@ const board: Leaderboard = {
   feed,
   terms: "The repository applies MIT to code. Authors flag the Mistral Small 3.1 24B result. See the Results and License sections. The raw file host has no robots.txt.",
   parts: { english: 'English', indic: 'Indic average' },
+  stats: {
+    naturalness: { name: 'Naturalness', unit: 'score', better: 'higher' },
+    groundedness: { name: 'Groundedness', unit: 'score', better: 'higher' },
+    safety: { name: 'Safety', unit: 'score', better: 'higher' },
+    parseRate: { name: 'Parse rate', unit: 'score', better: 'higher', note: 'Fraction of outputs that the evaluator parsed successfully, from 0 to 1.' },
+  },
   async fetch() {
     const tables = markdownTables(await fetchText(feed));
     const overall = tables.find(t => t[0]?.join('|') === '#|model|params|correctness|naturalness|groundedness|safety|parse OK');

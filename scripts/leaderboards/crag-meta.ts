@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2406.04744';
 const board: Leaderboard = {
   benchmark: 'crag-meta', url: feed, feed, static: 'paper',
   terms: 'The authors distribute the paper under the arXiv perpetual non-exclusive license. https://arxiv.org/licenses/nonexclusive-distrib/1.0/',
+  stats: {accuracy:{name:'Answer accuracy',unit:'%',better:'higher'},hallucination:{name:'Hallucination rate',unit:'%',better:'lower'},missing:{name:'Missing answer rate',unit:'%',better:'lower'},perfect:{name:'Perfect answer rate',unit:'%',better:'higher'},acceptable:{name:'Acceptable answer rate',unit:'%',better:'higher'},latency:{name:'Latency',unit:'seconds',better:'lower'}},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const automatic = tables.find(t => t[0]?.join('|') === '|Model|Accuracy (%)|Hallucination (%)|Missing (%)|Truthfulness (%)');

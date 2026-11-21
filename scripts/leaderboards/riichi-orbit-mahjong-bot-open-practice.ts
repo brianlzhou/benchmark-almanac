@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://note.com/doui_lab/n/n0eb198d80d28",
   feed,
   terms: "The maker gives no reuse license in the results post. https://note.com/doui_lab/n/n0eb198d80d28 The feed host publishes robots.txt at https://note.com/robots.txt.",
+  stats: {
+    firstPlace: { name: 'First-place rate', unit: '%', better: 'higher' },
+    fourthPlace: { name: 'Fourth-place rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const article = text(await fetchText(feed));
     const count = article.match(/各モデルの出場数は([\d,]+)半荘/);

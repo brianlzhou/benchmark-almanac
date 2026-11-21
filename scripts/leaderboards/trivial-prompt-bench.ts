@@ -13,8 +13,15 @@ type Run = {model:string;total:number|null;n_runs:number;n_errors:number;llm:num
 const fields = { total:'Total cost', llm:'LLM API cost', waiting:'Waiting cost', avg_latency:'Average latency (seconds)',
   p95_latency:'95th percentile latency (seconds)', avg_tokens_out:'Output tokens per run', n_errors:'Errors',
   n_runs:'Runs',reward:'Reward',tool_calls:'Tool calls' } as const;
+const stats: Record<string, import('./types.ts').BoardStat> = Object.fromEntries(['commit', 'hi', 'thankyou', 'wtf'].flatMap(prompt => Object.entries(fields).filter(([key]) => key !== 'reward' || prompt === 'commit').map(([key, name]) => {
+  const cost = ['total', 'llm', 'waiting'].includes(key);
+  const unit = cost ? 'usd' : key.includes('latency') ? 'seconds' : ['avg_tokens_out'].includes(key) ? 'tokens' : key === 'reward' ? 'score' : 'count';
+  const better = key === 'reward' ? 'higher' : ['total', 'llm', 'waiting', 'avg_latency', 'p95_latency'].includes(key) ? 'lower' : undefined;
+  return [prompt + key, {name: prompt + ' ' + name.toLowerCase(), unit, ...(better ? {better: better as 'higher' | 'lower'} : {})}];
+})));
 const board: Leaderboard = {
   benchmark:'trivial-prompt-bench',url:'https://github.com/QuesmaOrg/trival-prompt-bench/blob/main/report.html',feed,parts,
+  stats,
   aliases: {
     'openrouter/openai/gpt-5.4-mini': 'gpt-5-4-mini',
     'openrouter/google/gemini-3.5-flash': 'gemini-3-5-flash',

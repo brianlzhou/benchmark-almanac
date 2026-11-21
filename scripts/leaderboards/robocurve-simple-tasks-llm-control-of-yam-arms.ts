@@ -16,6 +16,7 @@ const board: Leaderboard = {
   parts: Object.fromEntries(Object.entries(tasks).flatMap(([k,group]) =>
     [['Rate','Completion rate','%'],['Stage','Mean stage','score'],['Output','Output tokens per run','score'],
       ['Cost','Estimated cost per run','usd'],['Time','Minutes per run','minutes']].map(([s,name,unit]) => [k+s,{group,name,unit}]))),
+  stats: { outputTokens: { name: 'Output tokens per run', unit: 'tokens' } },
   async fetch() {
     const t = tables(await fetchText(url)).find(t => t[0].map(c => c.text).join('|') ===
       'Task|Model|Mean stage|Completions|Rate|Output tokens/run|Est. cost/run|Minutes/run');

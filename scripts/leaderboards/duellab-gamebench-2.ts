@@ -12,6 +12,11 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at benchmarks.duellab.org; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    costPerPlayer: { name: 'Cost per player', unit: 'usd', better: 'lower' },
+    strength: { name: 'Strength', unit: 'score', better: 'higher' },
+    best: { name: 'Best score', unit: 'score', better: 'higher' },
+  },
   
   async fetch() {
     const out: LeaderboardRow[] = [];

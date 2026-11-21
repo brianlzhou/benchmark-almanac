@@ -8,6 +8,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2404.06996';
 const board: Leaderboard = {
   benchmark: 'xnlieu', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
+  parts: { xnlieuMt: { name: 'XNLIeu MT', group: 'Dataset', unit: '%', better: 'higher', note: 'Accuracy on the machine-translated XNLIeu dataset.' } },
   async fetch() {
     const tables = paperTables(await paperHtml(URL)).map(grid);
     const resultTables = tables.filter(t => t.some(r => r.includes('XNLIeu')) && t.some(r => r.some(c => /IXAmBERT|Latxa/.test(c))) && !t.some(r => r.includes('native')));

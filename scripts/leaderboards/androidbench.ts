@@ -14,6 +14,10 @@ const board: Leaderboard = {
   terms: ANDROID_TERMS,
   aliases: {},
   costPer: 'run',
+  stats: {
+    runHours: { name: 'Average run time', unit: 'hours', better: 'lower' },
+    latency: { name: 'Average latency per task', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const { head, rows: body } = await androidBenchTable(/^Model$/, /^Score/);
     const col = (re: RegExp) => head.findIndex((h) => re.test(h));

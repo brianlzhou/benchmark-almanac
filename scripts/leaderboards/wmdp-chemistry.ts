@@ -6,6 +6,7 @@ import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2403.03218';
 export default {
  benchmark:'wmdp-chemistry', static: 'paper',url:'https://arxiv.org/abs/2403.03218',feed,terms:PAPER_TERMS,
+ stats:{biology:{name:'WMDP biology accuracy',unit:'%',better:'higher'},cyber:{name:'WMDP cyber accuracy',unit:'%',better:'higher'},mmlu:{name:'MMLU accuracy',unit:'%',better:'higher'},mtBench:{name:'MT-Bench score',unit:'score',better:'higher'}},
  async fetch():Promise<LeaderboardRow[]> {
   const ts=flatPaperTables(await paperHtml(feed)).map(grid);
   const t=ts.find(t=>t[1]?.[4]==='Chem');

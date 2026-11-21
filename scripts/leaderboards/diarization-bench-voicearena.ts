@@ -8,6 +8,7 @@ interface System {id:string;name:string;variant:string;type:number}
 interface Summary {der:number[];jer:number[];missed:number;falseAlarm:number;confusion:number}
 
 const board: Leaderboard = {
+  stats: { jer: { name: 'Diarization error rate', unit: '%', better: 'lower' }, missed: { name: 'Missed speech', unit: '%', better: 'lower' }, falseAlarm: { name: 'False alarm speech', unit: '%', better: 'lower' }, confusion: { name: 'Speaker confusion', unit: '%', better: 'lower' }, countCorrect: { name: 'Correct speaker count', unit: '%', better: 'higher' }, sessions: { name: 'Sessions', unit: 'count' }, minutes: { name: 'Audio minutes', unit: 'minutes' } },
   benchmark: "diarization-bench-voicearena",
   url: "https://voicearena.com/diarization-bench",
   feed,

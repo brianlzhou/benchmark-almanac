@@ -24,6 +24,7 @@ const board: Leaderboard = {
     grocery_bench: { name: 'Grocery', group: 'Task type' },
     product_bench: { name: 'Product', group: 'Task type' },
   },
+  stats: { turns:{name:'Turns scored',unit:'count'} },
   url: "https://audioarena.ai/leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

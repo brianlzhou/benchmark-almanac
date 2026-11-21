@@ -29,6 +29,7 @@ const mean = (v: number[]) => v.length ? Math.round(v.reduce((a,b)=>a+b,0)/v.len
 const FEED = "https://huggingface.co/api/spaces/VLM2Vec/MMEB-Leaderboard";
 const board: Leaderboard = {
   "benchmark": "mmeb-v3",
+  stats: { textMissing: { name: 'Missing text datasets', unit: 'count' }, imageMissing: { name: 'Missing image datasets', unit: 'count' }, visdocMissing: { name: 'Missing visual document datasets', unit: 'count' }, videoMissing: { name: 'Missing video datasets', unit: 'count' }, audioMissing: { name: 'Missing audio datasets', unit: 'count' }, agentMissing: { name: 'Missing agent datasets', unit: 'count' }, missingDatasets: { name: 'Missing datasets', unit: 'count' }, totalDatasets: { name: 'Total datasets', unit: 'count' } },
   "url": "https://huggingface.co/spaces/VLM2Vec/MMEB-Leaderboard",
   "feed": "https://huggingface.co/api/spaces/VLM2Vec/MMEB-Leaderboard",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."

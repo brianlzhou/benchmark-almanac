@@ -7,6 +7,32 @@ import { tables } from '../lib/html.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://circuitsense-benchmark.github.io/';
 const parts: Record<string, string> = {};
+for (const [key, name] of Object.entries({
+  PerceptionComponentDetec: 'Perception: Component detection',
+  PerceptionConnectionIdent: 'Perception: Connection identification',
+  PerceptionFunctionClass: 'Perception: Function classification',
+  DesignSchematiclevel: 'Design: Schematic-level accuracy',
+  DesignBlocklevel: 'Design: Block-level accuracy',
+  DesignHierarchicalDesign: 'Design: Hierarchical design accuracy',
+  CuratedanalysisMultipleChoiceFormatLevel0Resistor: 'Curated analysis: Multiple-choice format, level 0 resistor',
+  CuratedanalysisMultipleChoiceFormatLevel1RLC: 'Curated analysis: Multiple-choice format, level 1 RLC',
+  CuratedanalysisMultipleChoiceFormatLevel2SmallSignal: 'Curated analysis: Multiple-choice format, level 2 small signal',
+  CuratedanalysisMultipleChoiceFormatLevel3Transistor: 'Curated analysis: Multiple-choice format, level 3 transistor',
+  CuratedanalysisMultipleChoiceFormatLevel4Block: 'Curated analysis: Multiple-choice format, level 4 block',
+  CuratedanalysisMultipleChoiceFormatOverallAccuracy: 'Curated analysis: Multiple-choice format, overall accuracy',
+  CuratedanalysisOpenendedformatLevel0Resistor: 'Curated analysis: Open-ended format, level 0 resistor',
+  CuratedanalysisOpenendedformatLevel1RLC: 'Curated analysis: Open-ended format, level 1 RLC',
+  CuratedanalysisOpenendedformatLevel2SmallSignal: 'Curated analysis: Open-ended format, level 2 small signal',
+  CuratedanalysisOpenendedformatLevel3Transistor: 'Curated analysis: Open-ended format, level 3 transistor',
+  CuratedanalysisOpenendedformatLevel4Block: 'Curated analysis: Open-ended format, level 4 block',
+  CuratedanalysisOpenendedformatOverallAccuracy: 'Curated analysis: Open-ended format, overall accuracy',
+  SyntheticanalysisLevel0Resistor: 'Synthetic analysis: Level 0 resistor',
+  SyntheticanalysisLevel1RLC: 'Synthetic analysis: Level 1 RLC',
+  SyntheticanalysisLevel2SmallSignal: 'Synthetic analysis: Level 2 small signal',
+  SyntheticanalysisLevel4Block: 'Synthetic analysis: Level 4 block',
+  SyntheticanalysisLevel5System: 'Synthetic analysis: Level 5 system',
+  SyntheticanalysisOverall: 'Synthetic analysis: Overall accuracy',
+})) parts[key] = name;
 const groups = ['Perception', 'Design', 'Curated analysis', 'Synthetic analysis'];
 const board: Leaderboard = {
   benchmark: 'circuitsense', url: feed, feed, parts,

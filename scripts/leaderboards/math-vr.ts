@@ -12,7 +12,8 @@ const PAGE = 'https://math-vr.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'math-vr',
-  parts: {textAc: {name: 'Text (AC)', group: 'Modality'}, multimodalAc: {name: 'Multimodal (AC)', group: 'Modality'}},
+  parts: {textAc: {name: 'Text (AC)', group: 'Modality'}, multimodalAc: {name: 'Multimodal (AC)', group: 'Modality'}, textPs: {name: 'Text (PS)', group: 'Modality'}, multimodalPs: {name: 'Multimodal (PS)', group: 'Modality'}},
+  stats: { ps: { name: 'Overall process score', unit: '%', better: 'higher' } },
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (static HTML table, Overall (AC))`,
   terms: 'Static project page on GitHub Pages (no robots.txt rules); the HKU-MMLab/Math-VR-CodePlot-CoT repository states no license.',

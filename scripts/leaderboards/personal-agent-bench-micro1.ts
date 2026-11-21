@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.micro1.ai/personal-agent-bench",
   feed,
   terms: "The public report gives no reuse license for scores. The site robots.txt lists its sitemap.",
+  stats: { trustedCompletion: { name: 'Trusted completion', unit: '%', better: 'higher' } },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Standing|Assistant|Task completion|Trusted completion');
     if (!table || table.length < 7) throw new Error('Missing assistant standings');

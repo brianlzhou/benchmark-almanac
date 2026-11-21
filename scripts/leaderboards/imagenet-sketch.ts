@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'imagenet-sketch', url: 'https://github.com/huggingface/pytorch-image-models/blob/main/results/results-sketch.csv',
   feed, host: 'PyTorch Image Models',
   terms: 'PyTorch Image Models uses Apache-2.0. https://github.com/huggingface/pytorch-image-models/blob/main/LICENSE',
+  stats: { top5: { name: 'Top-5 accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const records = parseCsv(await fetchText(feed));
     const required = ['model', 'img_size', 'top1', 'top5', 'param_count', 'crop_pct', 'interpolation'];

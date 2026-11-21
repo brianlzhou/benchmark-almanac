@@ -23,6 +23,14 @@ export default {
     { key: 'spearman', name: 'Spearman correlation', unit: 'score' },
     { key: 'pearson', name: 'Pearson correlation', unit: 'score' },
   ].map(({ key, ...part }) => [key, part])),
+  stats: {
+    mae: {name: 'Mean absolute error', unit: 'score', better: 'lower'},
+    rmse: {name: 'Root mean square error', unit: 'score', better: 'lower'},
+    bias: {name: 'Bias', unit: 'score'},
+    wape: {name: 'Weighted absolute percentage error', unit: '%', better: 'lower'},
+    smape: {name: 'Symmetric mean absolute percentage error', unit: '%', better: 'lower'},
+    successful: {name: 'Successful responses', unit: 'count'},
+  },
   async fetch() {
     const report = await fetchText(feed);
     const sections = report.split(/^### /m);

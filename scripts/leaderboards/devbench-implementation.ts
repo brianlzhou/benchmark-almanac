@@ -3,6 +3,7 @@
 import type { Leaderboard } from './types.ts';
 import { sourceBoard, trackRows } from '../lib/boards/devbench.ts';
 const board: Leaderboard = { benchmark: "devbench-implementation", url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,
+ stats: { unitPass: { name: 'Unit-test pass rate', unit: '%', better: 'higher' } },
  fetch: () => trackRows("^Implementation acceptance pass$", "^.*$") };
 const readRows = board.fetch;
 board.fetch = async () => (await readRows()).map(r => r.model === 'GPT-3.5-Turbo' ? {...r, model: r.model + ' (snapshot unspecified)'} : r);

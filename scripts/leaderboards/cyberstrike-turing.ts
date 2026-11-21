@@ -5,6 +5,7 @@ import { fetchText } from '../lib/util.ts';
 const feed = "https://labs.turing.com/assets/index-BZIruKnx.js";
 
 const board: Leaderboard = {
+ stats: { known: { name: 'Known findings', unit: 'count' }, maybe: { name: 'Maybe findings', unit: 'count' }, unknown: { name: 'Unknown findings', unit: 'count' }, refused: { name: 'Refused tasks', unit: 'count' } },
   benchmark: "cyberstrike-turing",
   url: "https://labs.turing.com/benchmarks/cyberstrike",
   feed,

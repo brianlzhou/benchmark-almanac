@@ -7,6 +7,7 @@ const FEED = "https://benchmarkheaven.com/api/jevbench/latest";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "jevbench",
+  stats: { speed: { name: 'Speed', unit: 'score', better: 'higher' }, cost: { name: 'Cost per decision', unit: 'usd', better: 'lower' }, latency: { name: 'Latency per decision', unit: 'seconds', better: 'lower' }, composite: { name: 'Composite score', unit: 'score', better: 'higher' } },
   parts: { intelligence: 'Intelligence', calibration: 'Calibration' },
   url: "https://benchmarkheaven.com/jev-models",
   feed: FEED,

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://theaggregate.ai/benchmark?slug=the-aggregate-inversion-and-execution-ladder",
   feed,
   terms: "Credit The Aggregate when quoting scores. Bulk republication requires written permission. https://theaggregate.ai/terms The feed host publishes robots.txt at https://theaggregate.ai/robots.txt.",
+  stats: { items: { name: 'Items', unit: 'count' } },
   async fetch() {
     return aggregateRows(feed, 'inversion-ladder', 27);
   },

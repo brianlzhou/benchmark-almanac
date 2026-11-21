@@ -10,6 +10,13 @@ const board: Leaderboard = {
   benchmark: "vigil3d", static: 'paper',
   url: "https://www.codabench.org/competitions/9829/",
   feed,
+  stats: {
+    'Acc@25': {name: 'Accuracy at 25 IoU', unit: '%', better: 'higher', note: 'Accuracy using ground-truth or predicted boxes at an intersection over union threshold of 0.25.'},
+    'Acc@50': {name: 'Accuracy at 50 IoU', unit: '%', better: 'higher', note: 'Accuracy using ground-truth or predicted boxes at an intersection over union threshold of 0.50.'},
+    'F1/GT': {name: 'F1 with ground-truth boxes', unit: '%', better: 'higher'},
+    'F1@25': {name: 'F1 at 25 IoU', unit: '%', better: 'higher'},
+    'F1@50': {name: 'F1 at 50 IoU', unit: '%', better: 'higher'},
+  },
   terms: "The authors publish baseline scores in their arXiv paper. arXiv permits HTML access with a 15-second crawl delay. Codabench serves a challenge.",
   async fetch(){
     const all=tables(await fetchText(feed)).map(t=>t.map(r=>r.map(c=>c.text)));

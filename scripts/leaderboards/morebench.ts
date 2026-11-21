@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2510.16380';
 const board: Leaderboard = {
   benchmark: 'morebench', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2510.16380.',
+  stats: { lengthChars: {name:'Response length',unit:'count'}, hard: {name:'Hard score',unit:'%',better:'higher'} },
   aliases: {
     'Qwen3-235B-A22B-Thinking-2507': 'qwen3-235b-a22b-thinking-jul-2025',
     'Qwen3-30B-A3B-Thinking-2507': 'qwen3-30b-a3b-thinking-jul-2025',

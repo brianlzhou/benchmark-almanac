@@ -11,6 +11,15 @@ const board: Leaderboard = {
   benchmark: 'fpl-2026-agentic-fpga-backend-optimization', url, feed,
   terms: "Xilinx publishes the contest results on GitHub Pages. The site provides no applicable robots rules or separate score license.",
   parts: {},
+  stats: {
+    'amd-mini-isp': { name: 'AMD Mini-ISP rank', unit: 'count', better: 'lower' }, 'amd-mini-ispScore': { name: 'AMD Mini-ISP score', unit: 'score', better: 'higher' },
+    'finn-radioml': { name: 'FINN RadioML rank', unit: 'count', better: 'lower' }, 'finn-radiomlScore': { name: 'FINN RadioML score', unit: 'score', better: 'higher' },
+    'fir-symmetric': { name: 'FIR Symmetric rank', unit: 'count', better: 'lower' }, 'fir-symmetricScore': { name: 'FIR Symmetric score', unit: 'score', better: 'higher' },
+    'fir-transposed': { name: 'FIR Transposed rank', unit: 'count', better: 'lower' }, 'fir-transposedScore': { name: 'FIR Transposed score', unit: 'score', better: 'higher' },
+    'rosetta-3d-render': { name: 'Rosetta 3D-Render rank', unit: 'count', better: 'lower' }, 'rosetta-3d-renderScore': { name: 'Rosetta 3D-Render score', unit: 'score', better: 'higher' },
+    'rosetta-digit-rec': { name: 'Rosetta Digit-Rec rank', unit: 'count', better: 'lower' }, 'rosetta-digit-recScore': { name: 'Rosetta Digit-Rec score', unit: 'score', better: 'higher' },
+    'vtr-mcml': { name: 'VTR MCML rank', unit: 'count', better: 'lower' }, 'vtr-mcmlScore': { name: 'VTR MCML score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const page = (await fetchText(feed)).split('<h2 id="beta-submission-results')[0];
     const prize = tables(page).find(t => t[0]?.[2]?.text === 'Mean rank');

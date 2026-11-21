@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://plotlightstudios.com/plotpoints/leaderboard?round=2",
   feed,
   terms: "PlotPoints labels its public results CC BY 4.0. The repository and Hugging Face dataset list CC BY-NC 4.0. https://plotlightstudios.com/plotpoints https://huggingface.co/datasets/lazyweasel/roleplay-bench robots.txt disallows /api/.",
+  stats: { votes: { name: 'Votes', unit: 'count' }, costPer1m: { name: 'Cost per million tokens', unit: 'usd', better: 'lower' }, latencySeconds: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     type Model = { name: string, access: string, multiturnElo?: number, multiturnPm: number, multiturnVotes: number, costPer1m?: number, latencyMs?: number };
     const d = await fetchJson<{test: string, models: Model[]}>(feed);

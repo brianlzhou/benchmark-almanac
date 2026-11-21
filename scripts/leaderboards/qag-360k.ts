@@ -13,6 +13,7 @@ for (const [tag, name] of Object.entries(names)) {
 }
 export default {
   benchmark: 'qag-360k', static: 'paper', url, feed: url, parts,
+  stats: { textAA: { name: 'Text answer accuracy', unit: '%', better: 'higher' }, textOA: { name: 'Text overall accuracy', unit: '%', better: 'higher' }, visualmIoU: { name: 'Visual mean IoU', unit: '%', better: 'higher' }, visualoIoU: { name: 'Visual overall IoU', unit: '%', better: 'higher' } },
   headline: 'The headline is overall textual answer accuracy on QAG-360K.',
   terms: 'The authors publish their benchmark under CC BY-NC 4.0. https://github.com/like413/VisTA#license',
   async fetch() {

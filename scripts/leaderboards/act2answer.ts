@@ -20,6 +20,10 @@ const board: Leaderboard = {
     living_world: { name: 'Living world', group: 'Category' },
   },
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    time: { name: 'Evaluation time', unit: 'seconds', better: 'lower' },
+    counting: { name: 'Counting score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const marker = 'var models = ';

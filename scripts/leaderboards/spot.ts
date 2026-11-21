@@ -8,6 +8,11 @@ const feed = 'https://arxiv.org/pdf/2505.11855';
 const board: Leaderboard = {
   benchmark: 'spot', feed, url: 'https://arxiv.org/abs/2505.11855', static: 'paper',
   terms: 'The authors publish the paper on arXiv. https://arxiv.org/licenses/',
+  stats: {
+    recall: {name: 'Recall', unit: '%', better: 'higher'},
+    passAt1: {name: 'Pass@1', unit: '%', better: 'higher'},
+    passAt4: {name: 'Pass@4', unit: '%', better: 'higher'},
+  },
   headline: 'Table 2 lists precision first, the percentage of model-flagged errors that match a documented error.',
   aliases: { 'o3 (2025-04-16)': 'o3', 'GPT-4.1 (2025-04-14)': 'gpt-4-1',
     'Gemini-2.5-Pro (preview-03-25)': 'gemini-2-5-pro-mar-2025', 'Gemini-2.0-Flash-Lite (001)': 'gemini-2-0-flash-lite',

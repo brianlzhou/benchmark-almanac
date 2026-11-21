@@ -8,6 +8,7 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://arxiv.org/html/2007.08124';
 const board: Leaderboard = {
   benchmark: 'logiqa', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  parts:{dev:{name:'English development',unit:'%'},chineseDev:{name:'Chinese development',unit:'%'}},
   async fetch() {
     const tables = paperTables(await paperHtml(url)).map(grid);
     const main = tables.find(t => t[0].join('').replaceAll(' ', '').includes('LogiQALogiQAChineseLogiQAChineseLogiQA'));

@@ -13,6 +13,7 @@ const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const secs = (t: string) => t.split(':').reduce((a, x) => a * 60 + Number(x), 0);
 
 const board: Leaderboard = {
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   benchmark: 'drivingbench-v2',
   url: URL,
   feed: `${URL} (the results table for both courses in the page HTML)`,

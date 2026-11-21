@@ -9,6 +9,7 @@ const columns = ['UMT-FVD↓', 'UMTScore↑', 'MTScore↑', 'CHScore↑', 'GPT4o
 const board: Leaderboard = {
   benchmark: 'chronomagic-bench', url, feed,
   terms: 'The authors publish their leaderboard Space under Apache 2.0.',
+  stats: { 'UMT-FVD↓': { name: 'Unmasked Teacher Fréchet video distance', unit: 'score', better: 'lower' }, 'UMTScore↑': { name: 'Unmasked Teacher score', unit: 'score', better: 'higher' }, 'GPT4o-MTScore↑': { name: 'GPT-4o metamorphic score', unit: 'score', better: 'higher' }, 'CHScore↑': { name: 'ChronoMagic score', unit: 'score', better: 'higher' } },
   async fetch() {
     const records = parseCsv(await fetchText(feed));
     if (records.length < 14) throw new Error('Incomplete ChronoMagic-Bench table');

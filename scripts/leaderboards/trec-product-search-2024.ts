@@ -14,6 +14,11 @@ const retrievers: Record<string, string[]> = {
 };
 const board: Leaderboard = {
   benchmark: 'trec-product-search-2024', feed, url: feed, static: 'paper',
+  stats: {
+    ndcg20: { name: 'nDCG at 20', unit: 'score', better: 'higher' }, ndcg100: { name: 'nDCG at 100', unit: 'score', better: 'higher' },
+    precision5: { name: 'Precision at 5', unit: 'score', better: 'higher' }, precision100: { name: 'Precision at 100', unit: 'score', better: 'higher' },
+    map: { name: 'Mean average precision', unit: 'score', better: 'higher' },
+  },
   terms: 'NIST hosts the authors’ proceedings paper under the terms at https://www.nist.gov/disclaimer.',
   async fetch() {
     const paper = await pdfText(feed);

@@ -4,7 +4,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, text, num } from '../lib/html.ts';
 const URL = 'https://longshot.cvmbzuai.com/leaderboard';
 const board: Leaderboard = {
-  benchmark: 'longshotbench', parts: {
+  benchmark: 'longshotbench', stats: { activeParams: { name: 'Active parameters', unit: 'billions' } }, parts: {
   Visual: { name: 'Visual', group: 'Modality' },
   Audio: { name: 'Audio', group: 'Modality' },
   Speech: { name: 'Speech', group: 'Modality' },

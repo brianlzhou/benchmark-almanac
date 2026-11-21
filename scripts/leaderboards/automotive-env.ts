@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: 'https://automotive-env.github.io/#results', feed: FEED,
   terms: 'The repository uses Apache License 2.0. https://github.com/MadMax3366/Automotive_Env_Neurips2026/blob/master/LICENSE',
   headline: 'The source reports no overall score, so this is the plain mean of its four success-rate parts.',
+  stats: { secondsPerTask:{name:'Time per task',unit:'seconds',better:'lower'}, secondsPerStep:{name:'Time per step',unit:'seconds',better:'lower'}, steps:{name:'Steps',unit:'count',better:'lower'} },
   parts: {
     generalExplicit: { name: 'General Explicit SR', group: 'Task subset', unit: '%' },
     generalImplicit: { name: 'General Implicit SR', group: 'Task subset', unit: '%' },

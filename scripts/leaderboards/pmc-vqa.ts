@@ -6,6 +6,7 @@ import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2305.10415';
 export default {
   benchmark:'pmc-vqa', static: 'paper',url:'https://arxiv.org/abs/2305.10415',feed,terms:PAPER_TERMS,
+  stats: { blankingBleu1: { name: 'Blanking BLEU-1', unit: '%', better: 'higher' }, blankingAccuracy: { name: 'Blanking accuracy', unit: '%', better: 'higher' } },
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
     const t=ts.find(t=>t[0]?.join('|')==='Method|Language Backbone|Vision Backbone|Choice|Blanking|Blanking' && t[1]?.[4]==='ACC');

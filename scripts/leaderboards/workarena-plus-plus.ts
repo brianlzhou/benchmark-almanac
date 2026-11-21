@@ -8,7 +8,7 @@ const board: Leaderboard = {
   benchmark: 'workarena-plus-plus', url: feed, feed, static: 'paper',
   terms: 'The authors publish the results on arXiv. https://arxiv.org/licenses/nonexclusive-distrib/1.0/',
   headline: 'The paper reports no overall WorkArena++ success rate, so this is the plain mean of L2 and L3.',
-  parts: { L2: 'WorkArena L2', L3: 'WorkArena L3' },
+  parts: { L2: 'WorkArena L2', L3: 'WorkArena L3', L2InformationRetrieval: { name: 'Information retrieval', group: 'WorkArena L2', unit: '%', better: 'higher' }, L2SophisticatedMemorization: { name: 'Sophisticated memorization', group: 'WorkArena L2', unit: '%', better: 'higher' } },
   aliases: { 'gpt-3.5-turbo-1106': 'gpt-3-5-turbo-nov-2023', 'meta-llama-3-70B-instruct': 'llama-3-70b', 'open-mixtral-8x22b': 'mixtral-8x22b' },
   async fetch() {
     const t = paperTables(await paperHtml(feed)).map(grid).find(t => t[0].includes('Agent Curriculum') && t[1].includes('(full benchmark)'));

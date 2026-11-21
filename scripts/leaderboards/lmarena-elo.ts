@@ -227,6 +227,8 @@ export async function arenaRowsByCategory(config: string, opts: { skip?: string[
 const board: Leaderboard = {
   benchmark: 'lmarena-elo',
   parts: {
+    'cat:exclude_ties': { name: 'Excluding ties', group: 'Task' },
+    'cat:factuality': { name: 'Factuality', group: 'Task' },
     'cat:chinese': { name: 'Chinese', group: 'Language' },
     'cat:coding': { name: 'Coding', group: 'Task' },
     'cat:creative_writing': { name: 'Creative writing', group: 'Task' },
@@ -254,6 +256,11 @@ const board: Leaderboard = {
     'cat:polish': { name: 'Polish', group: 'Language' },
     'cat:russian': { name: 'Russian', group: 'Language' },
     'cat:spanish': { name: 'Spanish', group: 'Language' },
+  },
+  stats: {
+    votes: { name: 'Votes', unit: 'count' },
+    variance: { name: 'Rating variance', unit: 'score' },
+    ...Object.fromEntries(['coding','creative_writing','english','exclude_ties','hard_prompts','hard_prompts_english','industry_entertainment_and_sports_and_media','industry_life_and_physical_and_social_science','industry_mathematical','industry_software_and_it_services','industry_writing_and_literature_and_language','instruction_following','math','multi_turn','non_english','chinese','industry_business_and_management_and_financial_operations','industry_legal_and_government','industry_medicine_and_healthcare','expert','french','german','japanese','korean','longer_query','polish','russian','spanish','factuality'].flatMap(key => [[`votes:${key}`, { name: `${key.replaceAll('_', ' ')} votes`, unit: 'count' }], [`rank:${key}`, { name: `${key.replaceAll('_', ' ')} rank`, unit: 'rating', better: 'lower' }], [`variance:${key}`, { name: `${key.replaceAll('_', ' ')} rating variance`, unit: 'score' }]])),
   },
   url: 'https://arena.ai/leaderboard/text',
   feed: arenaFeed('text_style_control', '*'),

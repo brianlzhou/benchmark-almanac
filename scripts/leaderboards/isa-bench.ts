@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'isa-bench', url: feed, feed, static: 'paper',
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2609.22878",
   aliases:{'Phi-4 14B':'phi-4','DeepSeek-R1 32B':'deepseek-r1-distill-qwen-32b','Qwen3-Coder 30B':'qwen3-coder-30b-a3b-instruct'},
+  stats:{solveAt1:{name:'Total solved at first attempt',unit:'%',better:'higher'},solvedAt5:{name:'Total solved within five attempts',unit:'count',better:'higher'}},
   parts:Object.fromEntries(tasks.flatMap(k=>['solve@1','solve@5'].map(m=>[k+' '+m,{name:k+' '+m,unit:'%' as const}]))),
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: 'https://witnessbench.ai/',
   feed: `${FEED} (oae_l20)`,
   terms: 'CSV the witnessbench.ai page loads; robots.txt allows all paths and the site states no terms.',
+  stats: { actions: { name: 'Actions per beaten level', unit: 'count', better: 'lower' } },
   aliases: {
     // the only Muse Glimmer in the registry
     'Muse Glimmer 30B': 'muse-glimmer',

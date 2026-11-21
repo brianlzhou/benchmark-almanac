@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2409.12126';
 const board: Leaderboard = {
   benchmark: 'linguini', static: 'paper', url: 'https://arxiv.org/abs/2409.12126', feed, terms: PAPER_TERMS,
   aliases: { 'qwen-1.5-110b-it':'qwen1-5-110b', 'gpt-4':'gpt-4-turbo-jan-2024','gpt-4o':'gpt-4o-may-2024','gpt-4-turbo':'gpt-4-turbo-apr-2024','llama-3-70b-it':'llama-3-70b','llama-2-70b-it':'llama-2-70b','mistral-0.1-8x7b':'mixtral-8x7b' },
+  stats:{chrF:{name:'chrF score',unit:'score',better:'higher'}},
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

@@ -12,6 +12,14 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2403.03163",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  block: { name: "Block-match score", unit: "%", better: "higher" },
+  text: { name: "Text score", unit: "%", better: "higher" },
+  position: { name: "Position score", unit: "%", better: "higher" },
+  color: { name: "Color score", unit: "%", better: "higher" },
+  simulatedWinRate: { name: "Simulated win rate", unit: "%", better: "higher" },
+  annotatedWinOrTieRate: { name: "Annotated win or tie rate", unit: "%", better: "higher" },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const all=tables(await fetchText(FEED)).map(grid);

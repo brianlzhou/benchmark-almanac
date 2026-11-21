@@ -13,6 +13,20 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Gorgias publishes aggregate rankings and restricts access to transcripts. The repository provides no license for score reuse. https://github.com/gorgias/ai-agent-benchmark The public scoreboard is allowed in robots.txt.",
   parts: { shopping: 'Shopping', support: 'Support' },
+  stats: {
+    shopping_quality: { name: 'Shopping quality', unit: '%', better: 'higher' },
+    shopping_automation: { name: 'Shopping automation rate', unit: '%', better: 'higher' },
+    shopping_latency: { name: 'Shopping full answer', unit: 'seconds', better: 'lower' },
+    shopping_ttft: { name: 'Shopping first signal', unit: 'seconds', better: 'lower' },
+    shopping_conversations: { name: 'Shopping conversations', unit: 'count' },
+    shopping_stores: { name: 'Shopping stores', unit: 'count' },
+    support_quality: { name: 'Support quality', unit: '%', better: 'higher' },
+    support_automation: { name: 'Support automation rate', unit: '%', better: 'higher' },
+    support_latency: { name: 'Support full answer', unit: 'seconds', better: 'lower' },
+    support_ttft: { name: 'Support first signal', unit: 'seconds', better: 'lower' },
+    support_conversations: { name: 'Support conversations', unit: 'count' },
+    support_stores: { name: 'Support stores', unit: 'count' },
+  },
   async fetch() {
     const data = jsonAfter<{ overall: Overall[]; shopping: Lane[]; support: Lane[] }>(await fetchText(FEED), 'var FJB=');
     if (data.overall.length < 13) throw new Error('Missing vendor rankings');

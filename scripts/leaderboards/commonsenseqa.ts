@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/1811.00937",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { sanity: { name: 'SANITY accuracy', unit: '%', better: 'higher' } },
   
   async fetch() {
     const t = tables(await fetchText(FEED)).find(t => t[0]?.some(c=>c.text==='Random split') && t[1]?.some(c=>c.text==='SANITY'));

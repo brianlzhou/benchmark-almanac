@@ -13,6 +13,14 @@ const board: Leaderboard = {
   benchmark: 'rtlscout-bench-2', url, feed,
   terms: "Felix Arnold publishes RTL Scout leaderboard data under CC BY 4.0. The GitHub Pages host provides no applicable robots rules.",
   parts: {},
+  stats: {
+    reduction: { name: 'Cell reduction', unit: '%', better: 'higher' }, headroom: { name: 'Headroom', unit: '%', better: 'higher' }, frozenHeadroom: { name: 'Frozen headroom', unit: '%', better: 'higher' }, runtime: { name: 'Runtime per design', unit: 'seconds', better: 'lower' },
+    'tpu-adp': { name: 'TPU average design points', unit: 'count' }, 'tpu-adpReduction': { name: 'TPU cell reduction', unit: '%', better: 'higher' }, 'tpu-adpTrials': { name: 'TPU trials', unit: 'count' },
+    'jpeg-adp': { name: 'JPEG average design points', unit: 'count' }, 'jpeg-adpReduction': { name: 'JPEG cell reduction', unit: '%', better: 'higher' }, 'jpeg-adpTrials': { name: 'JPEG trials', unit: 'count' },
+    'pdpu-adp': { name: 'PDPU average design points', unit: 'count' }, 'pdpu-adpReduction': { name: 'PDPU cell reduction', unit: '%', better: 'higher' }, 'pdpu-adpTrials': { name: 'PDPU trials', unit: 'count' },
+    'fpmul-adp': { name: 'FPMUL average design points', unit: 'count' }, 'fpmul-adpReduction': { name: 'FPMUL cell reduction', unit: '%', better: 'higher' }, 'fpmul-adpTrials': { name: 'FPMUL trials', unit: 'count' },
+    'alu-adp': { name: 'ALU average design points', unit: 'count' }, 'alu-adpReduction': { name: 'ALU cell reduction', unit: '%', better: 'higher' }, 'alu-adpTrials': { name: 'ALU trials', unit: 'count' },
+  },
   async fetch() {
     const d = jsonAfter<{suite: string, overall: {tasks: {task: string, title: string}[], rows: Run[], n_complete: number}}>(await fetchText(feed), 'window.RTLSCOUT_DATA =');
     const { tasks, rows, n_complete } = d.overall;

@@ -6,8 +6,14 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const feed = 'https://arxiv.org/html/2508.12291';
 const ratings = {Frame: ['Overall','False Alarm','Miss','High Value','Sharpness'], Sequence: ['Overall','Dynamic Consistency','Cumulate Precipitation','High Value Retain']};
 const assessments = ['BLEU','BERTScore','ROUGE_L','METEOR','GPT4Score'];
+const partLabels = Object.fromEntries([
+  ...(['Frame', 'Sequence'] as const).flatMap(domain => [
+    ...ratings[domain].map(name => [domain + ' rating ' + name, {name, group: domain + ' rating', unit: '%'}]),
+    ...assessments.map(name => [domain + ' assessment ' + name, {name, group: domain + ' assessment', unit: 'score'}]),
+  ]),
+]);
 const board: Leaderboard = {
-  benchmark: 'rqa-70k', url: feed, feed, static: 'paper', parts: {}, aliases: {'Claude3.7 sonnet': 'claude-3-7-sonnet'},
+  benchmark: 'rqa-70k', url: feed, feed, static: 'paper', parts: partLabels, aliases: {'Claude3.7 sonnet': 'claude-3-7-sonnet'},
   terms: 'The authors publish the paper under the terms linked at https://arxiv.org/abs/2508.12291.',
   headline: 'The paper reports separate rating and assessment metrics. The headline is overall frame-rating accuracy from Table 2.',
   async fetch() {

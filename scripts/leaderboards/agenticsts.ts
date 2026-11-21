@@ -13,6 +13,9 @@ function game(model: string, setting: string, wins: string, mean: string, harnes
 const board: Leaderboard = {
   benchmark: 'agenticsts', url:'https://github.com/AlayaLab/AgenticSTS',feed,
   terms:'The agent code uses Apache 2.0. https://github.com/AlayaLab/AgenticSTS/blob/HEAD/AgenticSTS/LICENSE',
+  stats: {
+    meanScore: { name: 'Mean score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const readme = (await fetchText(feed)).replaceAll('**','');
     const results = (await fetchText(root + 'AgenticSTS/docs/experiments/competitor_comparison/RESULTS.md')).replaceAll('**','');

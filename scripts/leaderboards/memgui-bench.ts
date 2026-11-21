@@ -13,6 +13,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The index lists 22 end-to-end agents and seven workflows. Some rows include cost per step. The benchmark repository uses MIT. Separate leaderboard terms were not stated. https://github.com/lgy0404/MemGUI-Bench/blob/master/LICENSE The robots URL returns HTML.",
   harnesses: 'system',
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    easy_p3: { name: 'Easy pass@3', unit: '%', better: 'higher' }, easy_irr: { name: 'Easy interaction success', unit: '%', better: 'higher' }, medium_p3: { name: 'Medium pass@3', unit: '%', better: 'higher' }, medium_irr: { name: 'Medium interaction success', unit: '%', better: 'higher' }, hard_p3: { name: 'Hard pass@3', unit: '%', better: 'higher' }, hard_irr: { name: 'Hard interaction success', unit: '%', better: 'higher' },
+    app1_p3: { name: 'App 1 pass@3', unit: '%', better: 'higher' }, app1_irr: { name: 'App 1 interaction success', unit: '%', better: 'higher' }, app2_p3: { name: 'App 2 pass@3', unit: '%', better: 'higher' }, app2_irr: { name: 'App 2 interaction success', unit: '%', better: 'higher' }, app3_p3: { name: 'App 3 pass@3', unit: '%', better: 'higher' }, app3_irr: { name: 'App 3 interaction success', unit: '%', better: 'higher' }, app4_p3: { name: 'App 4 pass@3', unit: '%', better: 'higher' }, app4_irr: { name: 'App 4 interaction success', unit: '%', better: 'higher' },
+    shortTerm_irr: { name: 'Short-term interaction success', unit: '%', better: 'higher' }, shortTerm_mtpr: { name: 'Short-term mean task progress rate', unit: 'score', better: 'higher' }, shortTerm_timePerStep: { name: 'Short-term time per step', unit: 'seconds', better: 'lower' }, longTerm_frr: { name: 'Long-term failure recovery rate', unit: '%', better: 'higher' }, longTerm_timePerStep: { name: 'Long-term time per step', unit: 'seconds', better: 'lower' }, shortTerm_stepRatio: { name: 'Short-term step ratio', unit: 'score', better: 'lower' }, shortTerm_costPerStep: { name: 'Short-term cost per step', unit: 'usd', better: 'lower' }, longTerm_stepRatio: { name: 'Long-term step ratio', unit: 'score', better: 'lower' }, longTerm_costPerStep: { name: 'Long-term cost per step', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const index = await fetchJson<{agents:string[]}>(FEED);
     if (index.agents.length < 29) throw new Error('Expected 29 MemGUI systems');

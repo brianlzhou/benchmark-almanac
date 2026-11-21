@@ -26,6 +26,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 
 const FEED = "https://raw.githubusercontent.com/patrick-tssn/VideoHallucer/main/README.md";
 const board: Leaderboard = {
+ stats: { semanticDetail: { name: 'Semantic detail', unit: '%', better: 'higher' } },
   "benchmark": "videohallucer",
   "url": "https://github.com/patrick-tssn/VideoHallucer",
   "feed": "https://raw.githubusercontent.com/patrick-tssn/VideoHallucer/main/README.md",

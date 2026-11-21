@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2605.25240';
 export default {
   benchmark: 'judgmentbench', url: feed, feed, static: 'paper',
   terms: 'Paper and license at https://arxiv.org/abs/2605.25240',
+  stats:{protocolDifference:{name:'Protocol win-rate difference',unit:'%'}},
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0].join('|') === String.raw`Evaluator|\bar{W}^{CJ}|\bar{W}^{rub}|\widehat{D}_{W}`);

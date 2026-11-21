@@ -5,6 +5,7 @@ import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2501.01257";
 const board:Leaderboard={benchmark:"codeelo", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
+ stats:{passAt1:{name:'Pass@1',unit:'%',better:'higher'},passAt2:{name:'Pass@2',unit:'%',better:'higher'},passAt4:{name:'Pass@4',unit:'%',better:'higher'},passAt8:{name:'Pass@8',unit:'%',better:'higher'}},
  async fetch(){
  const t=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0])==="[\"Model\",\"\",\"Elo Rating\",\"Elo Rating\",\"Elo Rating\",\"Elo Rating\",\"Elo Rating\",\"Pass Rate for\",\"Pass Rate for\",\"Pass Rate for\",\"Pass @\",\"Pass @\",\"Pass @\",\"Pass @\"]");
  if(!t)throw new Error('Reviewed results table missing');const out:LeaderboardRow[]=[];

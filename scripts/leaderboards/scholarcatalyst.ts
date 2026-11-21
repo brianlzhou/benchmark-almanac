@@ -13,6 +13,18 @@ const board: Leaderboard = {
  parts: {
    subfieldRecall20: { name: 'Subfield-specific query', group: 'Task type', note: 'Recall@20 on the 687 subfield-specific queries.' },
  },
+ stats: {
+   toolCalls: {name: 'Tool calls', unit: 'count'},
+   backboneCalls: {name: 'Backbone calls', unit: 'count'},
+   totalCost: {name: 'Total cost', unit: 'usd', better: 'lower'},
+   latency: {name: 'Median latency', unit: 'seconds', better: 'lower'},
+   subfieldNdcg20: {name: 'Subfield nDCG@20', unit: 'score', better: 'higher'},
+   subfieldRecall5: {name: 'Subfield recall@5', unit: '%', better: 'higher'},
+   subfieldRecall100: {name: 'Subfield recall@100', unit: '%', better: 'higher'},
+   ndcg20: {name: 'nDCG@20', unit: 'score', better: 'higher'},
+   recall5: {name: 'Recall@5', unit: '%', better: 'higher'},
+   recall100: {name: 'Recall@100', unit: '%', better: 'higher'},
+ },
  url: "https://arxiv.org/html/2610.02202",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

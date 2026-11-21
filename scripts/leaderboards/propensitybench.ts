@@ -6,6 +6,7 @@ import { scaleRowsWithInterval } from './swe-bench-pro.ts';
 const board: Leaderboard = {
   benchmark: 'propensitybench', url: 'https://labs.scale.com/leaderboard/propensitybench', feed: 'https://labs.scale.com/leaderboard/propensitybench',
   terms: SCALE_TERMS, aliases: SCALE_ALIASES,
+  stats: { rank: { name: 'Rank', unit: 'count' } },
   async fetch() {
     const rows = scaleRowsWithInterval(await fetchScaleEntries(this.url));
     if (rows.length < 14) throw new Error('Incomplete Scale leaderboard');

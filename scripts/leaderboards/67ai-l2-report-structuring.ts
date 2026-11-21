@@ -10,6 +10,12 @@ const board: Leaderboard = {
   url: "https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
   feed,
   terms: "The publisher allows this path in robots.txt. The publisher gives no separate reuse terms for the score table. https://67ailab.com/posts/spark-eval-05-l2-report-structuring/",
+  stats: {
+    validJson: { name: 'Valid JSON rate', unit: '%', better: 'higher' },
+    contradictionRecall: { name: 'Contradiction recall', unit: 'score', better: 'higher', note: 'Share of contradictions caught.' },
+    falseAlarmRate: { name: 'False alarm rate', unit: 'score', better: 'lower' },
+    decodeTokensPerSecond: { name: 'Decode tokens per second', unit: 'tokens/s', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.[1]?.text === 'Field F1');
     const headers = ['Model', 'Field F1', 'Valid JSON', 'Contradictions caught', 'False alarms', 'Decode tok/s', '$ / 1k reports', 'Verdict'];

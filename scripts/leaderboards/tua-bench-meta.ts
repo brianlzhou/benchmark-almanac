@@ -9,6 +9,11 @@ const board: Leaderboard = {
  harnesses: 'system',
  benchmark: "tua-bench-meta", url: "https://github.com/facebookresearch/TUA-Bench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+   passAt1: { name: 'Pass@1', unit: '%', better: 'higher' },
+   passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+   pass5: { name: 'All five pass', unit: '%', better: 'higher', note: 'Percentage of runs where all five attempts passed.' },
+ },
 
  async fetch() {
 const t=mdTables(await fetchText(FEED)).find(t=>t.head.includes('Success Rate'));if(!t)throw new Error('Missing TUA results');const rows:LeaderboardRow[]=[];

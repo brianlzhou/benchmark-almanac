@@ -16,6 +16,7 @@ const board: Leaderboard = {
   aliases: {
     'Gemini Pro 3.1': 'gemini-3-1-pro',
   },
+  stats: { passAt3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass3: { name: 'Pass^3', unit: '%', better: 'higher' }, steps: { name: 'Turns', unit: 'count', better: 'lower' } },
   async fetch() {
     const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => /^Pass@1/.test(c.text)));
     if (!t) throw new Error('PhysicianBench table not found');

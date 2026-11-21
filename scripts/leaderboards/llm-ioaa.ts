@@ -18,6 +18,10 @@ for (const exam of exams) {
 }
 const board: Leaderboard = {
   benchmark: 'llm-ioaa', static: 'paper', url, feed: url, terms: PAPER_TERMS, parts,
+  stats:Object.fromEntries(exams.flatMap(exam => years.flatMap(year => [
+    [exam + year + 'MedianPct', {name: exam + ' ' + year + ' score versus median', unit: '%'}],
+    [exam + year + 'Rank', {name: exam + ' ' + year + ' rank', unit: 'count', better: 'lower'}],
+  ]))),
   headline: 'The paper reports no overall score, so this is the plain mean of the theory and data analysis exam scores.',
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(url));

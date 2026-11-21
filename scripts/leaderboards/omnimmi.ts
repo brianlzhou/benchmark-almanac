@@ -18,6 +18,7 @@ const board: Leaderboard = {
   SI: { name: 'Speaker identification', group: 'Task type' },
 }, url: PAGE, feed: `${PAGE} (avg. w/o P, video and audio-input tables)`,
   terms: 'The public OmniMMI project page publishes these results; the Almanac credits and links the source.',
+  stats: { PT: { name: 'Proactivity task score', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts = tables(await fetchText(PAGE)).map(t => t.map(r => r.map(c => c.text))).filter(t => t[0]?.at(-1) === 'avg. w/o P');
     if (ts.length !== 2) throw new Error('OmniMMI video/audio tables changed');

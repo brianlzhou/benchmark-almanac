@@ -34,6 +34,7 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/HuggingAI4Engineering/cadgenbench-leaderboard',
   feed: `${FEED} (aggregate_score, all completed submissions)`,
   terms: 'Hugging Face dataset HuggingAI4Engineering/cadgenbench-submissions, licensed CC BY 4.0.',
+  stats: { validityRate: { name: 'Validity rate', unit: '%', better: 'higher' } },
   aliases: {},
   async fetch() {
     const rows: LeaderboardRow[] = [];

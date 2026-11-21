@@ -5,6 +5,7 @@ const URL = 'https://arxiv.org/html/2511.07685';
 const board: Leaderboard = {
   benchmark: 'researchrubrics', static: 'paper', url: URL, feed: URL + ' (overall compliance scores)', terms: PAPER_TERMS,
   harnesses: 'system',
+  stats: { binary: { name: 'Binary rubric score', unit: '%', better: 'higher' } },
   async fetch() {
     const t = inlinePaperTables(await paperHtml(URL)).find(t => t[0]?.join('|') === 'Model|Ternary|Binary');
     if (!t || t.length < 4) throw new Error('ResearchRubrics compliance table missing');

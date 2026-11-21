@@ -25,6 +25,9 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE}assets/index-*.js (leaderboard literal, passed / n)`,
   terms: 'Public app bundle; apprenticebench.com has no robots.txt rules and states no terms.',
+  stats: {
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+  },
   async fetch() {
     const html = await fetchText(`${PAGE}leaderboard`);
     const src = html.match(/src="(\/assets\/index-[\w-]+\.js)"/)?.[1];

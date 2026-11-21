@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: SPACE,
   feed: `${FEED} (over refusal %)`,
   terms: 'Public Hugging Face Space, Apache-2.0 (README front matter and LICENSE); huggingface.co robots.txt allows Space files.',
+  stats: { toxicAcceptance: { name: 'Toxic acceptance rate', unit: '%', better: 'lower' } },
   aliases: {
     'GPT-4o': 'gpt-4o-may-2024',
     'GPT-4-0125-preview': 'gpt-4-turbo-jan-2024',

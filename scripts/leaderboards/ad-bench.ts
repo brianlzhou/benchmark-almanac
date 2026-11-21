@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://emanual20.github.io/adbench-leaderboard/",
   feed: FEED,
   terms: "Public maker README, no additional use restriction stated; raw.githubusercontent.com has no robots.txt.",
+  stats: { passAt1: { name: 'Pass@1', unit: '%', better: 'higher' } },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find(t => t[0]?.includes("Pass@1"));
     if (!table) throw new Error('Published overall results table is missing');

@@ -9,6 +9,13 @@ const board: Leaderboard = {
   url: "https://rotomarena.org/benchmarks/rotom-gen9-bench/",
   feed,
   terms: "The robots file publishes content signals. RotomArena dedicates its ratings and match data to CC0. Smogon teams and Pokémon assets have separate rights. https://rotomarena.org/credits/",
+  stats: {
+    wins: { name: 'Wins', unit: 'count', better: 'higher' },
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    hallucination: { name: 'Hallucinations', unit: 'count', better: 'lower' },
+    tokensPerTurn: { name: 'Tokens per turn', unit: 'tokens' },
+  },
   async fetch() {
     const page = await fetchText(feed);
     const source = page.match(/<table\b[^>]*>[\s\S]*?Tokens \/ turn[\s\S]*?<\/table>/)?.[0];

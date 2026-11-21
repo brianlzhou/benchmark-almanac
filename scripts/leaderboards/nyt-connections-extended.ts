@@ -82,6 +82,11 @@ const board: Leaderboard = {
   feed: `${ghRaw(`lechmazur/${REPO}`, 'README.md', 'master')} (Leaderboard: Extended Version, Score %)`,
   terms: LECH_MAZUR_TERMS(REPO),
   aliases: LECH_MAZUR_ALIASES,
+  stats: {
+    puzzles: { name: 'Puzzles', unit: 'count' },
+    fullySolved: { name: 'Fully solved puzzles', unit: 'count' },
+    newest100Solved: { name: 'Newest 100 puzzles solved', unit: 'count' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     const md = await fetchText(ghRaw('lechmazur/' + REPO, 'README.md', 'master'));

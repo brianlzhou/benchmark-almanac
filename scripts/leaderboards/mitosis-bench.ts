@@ -12,6 +12,7 @@ const num = (s: string) => Number(s.replace(/[^\d.]/g, ''));
 
 const board: Leaderboard = {
   benchmark: 'mitosis-bench',
+  stats: { passAt2: { name: 'Pass@2', unit: '%', better: 'higher' }, passAt3: { name: 'Pass@3', unit: '%', better: 'higher' }, passAt4: { name: 'Pass@4', unit: '%', better: 'higher' }, passAt5: { name: 'Pass@5', unit: '%', better: 'higher' }, callsPerAttempt: { name: 'Model calls per attempt', unit: 'count', better: 'lower' }, requests: { name: 'Requests', unit: 'count' }, reasoningTokensPerRequest: { name: 'Reasoning tokens per request', unit: 'tokens', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   url: PAGE,
   feed: `${PAGE} (section 4: the pass@k chart and its caption, the attempts chart and the requests table)`,
   terms: 'A personal project page with no stated data license and no robots.txt restriction. Results are credited to Dylan Tirandaz.',

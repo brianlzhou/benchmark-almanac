@@ -22,6 +22,10 @@ const board: Leaderboard = {
    open_lamp_door: { name: 'Open lamp door', group: 'Task type' },
    transfer_cube: { name: 'Transfer cube', group: 'Task type' },
  },
+ stats: {
+   rollouts: { name: 'Rollouts', unit: 'count' },
+   demonstrations: { name: 'Demonstrations', unit: 'count' },
+ },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

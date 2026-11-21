@@ -12,6 +12,12 @@ interface Entry {
 const board: Leaderboard = {
   benchmark: 'aishell-4', host: 'SOTA2 Research', url: feed, feed,
   terms: 'SOTA2 Research publishes and credits the originating papers on its public benchmark page. ' + feed,
+  stats: {
+    CER: { name: 'Character error rate', unit: '%', better: 'lower' },
+    'Delta cpCER': { name: 'Delta cpCER', unit: '%', better: 'lower', note: 'Difference between cpCER and CER.' },
+    DER: { name: 'Diarization error rate', unit: '%', better: 'lower' },
+    tcpCER: { name: 'tcpCER', unit: '%', better: 'lower', note: 'Character error rate with time-constrained speaker assignment.' },
+  },
   async fetch() {
     const data = nextFlight(await fetchText(feed));
     const start = data.indexOf('"results":{"benchmarkId"');

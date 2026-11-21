@@ -11,6 +11,11 @@ const FEED = 'https://raw.githubusercontent.com/shmsw25/FActScore/main/README.md
 const board: Leaderboard = {
   benchmark: 'factscore', url: 'https://github.com/shmsw25/FActScore', feed: FEED,
   terms: 'The FActScore authors publish these results in their public repository, with attribution and repository license requirements retained.',
+  stats: {
+    respondPercent: { name: 'Response rate', unit: '%', better: 'higher' },
+    facts: { name: 'Facts per response', unit: 'count', better: 'higher' },
+    retrievalLlamaNpm: { name: 'FActScore retrieval plus Llama probability', unit: '%', better: 'higher' },
+  },
   // The README links these exact weight repositories.
   aliases: { 'Dolly 12B': 'dolly-2-0-12b', 'StableLM tuned 7B': 'stablelm-tuned-alpha-7b' },
   async fetch() {

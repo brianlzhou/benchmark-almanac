@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://www.micro1.ai/benchmark/realm-financial",
   feed: FEED,
   terms: "The public report gives no reuse license for scores. The robots file lists a sitemap and no path restrictions.",
+  stats: { meanScore: { name: 'Mean score', unit: 'score', better: 'higher' } },
   async fetch() {
     const page = await fetchText(FEED), marker = 'window.benchmarks_data["finance"] = ';
     const pos = page.indexOf(marker);

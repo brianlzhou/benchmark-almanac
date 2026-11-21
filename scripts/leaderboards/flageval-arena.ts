@@ -20,6 +20,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: FEED,
   terms: 'The official FlagEval Arena feed does not state separate score reuse terms. Results are credited to FlagEval.',
+  stats: { battles: { name: 'Battles', unit: 'count' } },
   async fetch() {
     const data = await fetchJson<Entry[]>(FEED);
     if (data.length !== 36) throw new Error(`FlagEval Arena: ${data.length} rows, expected 36`);

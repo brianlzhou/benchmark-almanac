@@ -5,9 +5,16 @@ import { fetchJson } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://whalesong-zrs.github.io/RoughCut-Bench-Project-Page/';
 const feed = url + 'data/leaderboards.json';
+const parts = {
+  visual_annotation_set1_precision: { name: 'Precision', group: 'Visual Annotation: Visual Set-1' }, visual_annotation_set1_recall: { name: 'Recall', group: 'Visual Annotation: Visual Set-1' }, visual_annotation_set1_f1: { name: 'F1', group: 'Visual Annotation: Visual Set-1' }, visual_annotation_set1_avgIou: { name: 'Avg. IoU', group: 'Visual Annotation: Visual Set-1' }, visual_annotation_set1_tau: { name: "Kendall's τ", group: 'Visual Annotation: Visual Set-1' },
+  visual_annotation_set2_precision: { name: 'Precision', group: 'Visual Annotation: Visual Set-2' }, visual_annotation_set2_recall: { name: 'Recall', group: 'Visual Annotation: Visual Set-2' }, visual_annotation_set2_f1: { name: 'F1', group: 'Visual Annotation: Visual Set-2' }, visual_annotation_set2_avgIou: { name: 'Avg. IoU', group: 'Visual Annotation: Visual Set-2' }, visual_annotation_set2_tau: { name: "Kendall's τ", group: 'Visual Annotation: Visual Set-2' },
+  visual_quality_set1_ordering: { name: 'Ordering', group: 'Visual Quality: Visual Set-1' }, visual_quality_set1_redundancy: { name: 'Redundancy', group: 'Visual Quality: Visual Set-1' }, visual_quality_set1_overall: { name: 'Overall', group: 'Visual Quality: Visual Set-1' }, visual_quality_set1_human: { name: 'Human Score', group: 'Visual Quality: Visual Set-1' },
+  visual_quality_set2_ordering: { name: 'Ordering', group: 'Visual Quality: Visual Set-2' }, visual_quality_set2_requirement: { name: 'Requirement', group: 'Visual Quality: Visual Set-2' }, visual_quality_set2_redundancy: { name: 'Redundancy', group: 'Visual Quality: Visual Set-2' }, visual_quality_set2_overall: { name: 'Overall', group: 'Visual Quality: Visual Set-2' }, visual_quality_set2_human: { name: 'Human Score', group: 'Visual Quality: Visual Set-2' },
+  speech_cleanup_all_imP: { name: 'IM P', group: 'Speech Cleanup: All Speech Cases' }, speech_cleanup_all_imR: { name: 'IM R', group: 'Speech Cleanup: All Speech Cases' }, speech_cleanup_all_imF1: { name: 'IM F1', group: 'Speech Cleanup: All Speech Cases' }, speech_cleanup_all_rmSuccess: { name: 'RM→R Succ.', group: 'Speech Cleanup: All Speech Cases' }, speech_cleanup_all_dP: { name: 'D P', group: 'Speech Cleanup: All Speech Cases' }, speech_cleanup_all_dR: { name: 'D R', group: 'Speech Cleanup: All Speech Cases' }, speech_cleanup_all_dF1: { name: 'D F1', group: 'Speech Cleanup: All Speech Cases' },
+};
 type SetData = {id: string, label: string, defaultSort: string, columns: {key: string, label: string}[], rows: {model: string, [key: string]: string | number}[]};
 const board: Leaderboard = {
-  benchmark: 'roughcut-bench', url, feed, parts: {},
+  benchmark: 'roughcut-bench', url, feed, parts,
   terms: 'The authors publish the results on the project website. ' + url,
   headline: 'The project reports no combined score and ranks its first table by Visual Set-1 F1.',
   aliases: {'Gemini 3.0 Pro': 'gemini-3-pro', 'Seed-2.0-Lite': 'seed-2-0-lite'},

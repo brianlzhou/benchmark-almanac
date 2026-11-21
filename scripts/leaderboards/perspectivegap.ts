@@ -19,6 +19,14 @@ const board: Leaderboard = {
   benchmark: 'perspectivegap', url, feed, terms: 'The authors license the Space under MIT. ' + url + '/blob/main/README.md',
   parts: {role_assignment_pct: 'Role-fragment assignment', prompt_writing_pct: 'Prompt writing',
     ...Object.fromEntries(Object.entries(topologies).map(([key, name]) => [key, {name, group: 'Topology'}]))},
+  stats: {
+    combined_pass: { name: 'Combined passed cases', unit: 'count' },
+    combined_total: { name: 'Combined total cases', unit: 'count' },
+    role_assignment_pass: { name: 'Role-assignment passed cases', unit: 'count' },
+    role_assignment_total: { name: 'Role-assignment total cases', unit: 'count' },
+    prompt_writing_pass: { name: 'Prompt-writing passed cases', unit: 'count' },
+    prompt_writing_total: { name: 'Prompt-writing total cases', unit: 'count' },
+  },
   async fetch() {
     const all = parseCsv(await fetchText(feed));
     const topology = parseCsv(await fetchText(data + 'topology_combined_top12.csv'));

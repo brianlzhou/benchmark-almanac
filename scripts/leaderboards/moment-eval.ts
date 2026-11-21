@@ -7,6 +7,7 @@ const feed = "https://moment.corestudio.io/";
 
 const board: Leaderboard = {
   benchmark: "moment-eval",
+  stats: { totalTokens: { name: 'Total tokens', unit: 'tokens' }, inferenceSeconds: { name: 'Inference time', unit: 'seconds', better: 'lower' }, validTasks: { name: 'Valid tasks', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' }, toolCalls: { name: 'Tool calls', unit: 'count' }, calculator: { name: 'Calculator calls', unit: 'count' }, execute_python: { name: 'Python execution calls', unit: 'count' } },
   url: "https://moment.corestudio.io/",
   feed,
   terms: "CORE studio gives a copyright notice and no explicit score reuse license. https://moment.corestudio.io/ The robots.txt route returns a 404 page.",

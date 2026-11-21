@@ -35,6 +35,26 @@ function scores(section: string, label: string) {
 const board: Leaderboard = {
   benchmark: 'clef-simpletext-2025-simplify-scientific-text', url: feed, feed,
   terms: 'The paper uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
+  stats: {
+    sentenceBLEU: { name: 'Sentence BLEU', unit: '%', better: 'higher' },
+    documentBLEU: { name: 'Document BLEU', unit: '%', better: 'higher' },
+    sentenceFKGL: { name: 'Sentence Flesch-Kincaid grade level', unit: 'score', better: 'lower' },
+    documentFKGL: { name: 'Document Flesch-Kincaid grade level', unit: 'score', better: 'lower' },
+    sentenceCompressionRatio: { name: 'Sentence compression ratio', unit: 'index' },
+    documentCompressionRatio: { name: 'Document compression ratio', unit: 'index' },
+    sentenceSentenceSplits: { name: 'Sentence sentence splits', unit: 'index' },
+    documentSentenceSplits: { name: 'Document sentence splits', unit: 'index' },
+    sentenceLevenshteinSimilarity: { name: 'Sentence Levenshtein similarity', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    documentLevenshteinSimilarity: { name: 'Document Levenshtein similarity', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sentenceExactCopies: { name: 'Sentence exact copies', unit: 'score', note: 'Reported from 0 to 1.' },
+    documentExactCopies: { name: 'Document exact copies', unit: 'score', note: 'Reported from 0 to 1.' },
+    sentenceAdditionsProportion: { name: 'Sentence additions proportion', unit: 'score', note: 'Reported from 0 to 1.' },
+    documentAdditionsProportion: { name: 'Document additions proportion', unit: 'score', note: 'Reported from 0 to 1.' },
+    sentenceDeletionsProportion: { name: 'Sentence deletions proportion', unit: 'score', note: 'Reported from 0 to 1.' },
+    documentDeletionsProportion: { name: 'Document deletions proportion', unit: 'score', note: 'Reported from 0 to 1.' },
+    sentenceLexicalComplexityScore: { name: 'Sentence lexical complexity score', unit: 'score', better: 'lower' },
+    documentLexicalComplexityScore: { name: 'Document lexical complexity score', unit: 'score', better: 'lower' },
+  },
   parts: { sentence: 'Sentence-level simplification', document: 'Document-level simplification' },
   async fetch() {
     const paper = await pdfText(feed);

@@ -27,6 +27,7 @@ const board: Leaderboard = {
     logic: 'Logic',
     creativity: 'Creativity',
   },
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const t = tables(await fetchText(URL)).find((t) => t[0]?.map((c) => c.text).join('|') === HEADER);
     if (!t) throw new Error('KradleBench models table missing or its columns changed');

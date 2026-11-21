@@ -12,6 +12,11 @@ const board: Leaderboard = {
   headline: 'The paper reports no overall score, so this is the plain mean of open-ended success and multiple-choice accuracy.',
   parts: {open: 'Open-ended response', mcq: '4-option MCQ', openImmediate: {name:'Immediate',group:'Open-ended response'}, openLongTerm: {name:'Long-Term',group:'Open-ended response'},
     mcqImmediate: {name:'Immediate',group:'4-option MCQ'}, mcqLongTerm: {name:'Long-Term',group:'4-option MCQ'}},
+  stats: {
+    criteriaImmediate: { name: 'Immediate criterion satisfaction', unit: '%', better: 'higher' },
+    criteriaLongTerm: { name: 'Long-term criterion satisfaction', unit: '%', better: 'higher' },
+    criteriaOverall: { name: 'Overall criterion satisfaction', unit: '%', better: 'higher' },
+  },
   aliases: {'Qwen 3.5-397B': 'qwen3-5-397b-a17b'},
   async fetch() {
     const html = await paperHtml(feed);

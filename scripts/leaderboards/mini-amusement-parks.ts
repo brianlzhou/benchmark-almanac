@@ -5,6 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 const feed = "https://maps.skyfall.ai/leaderboard/__data.json";
 const board: Leaderboard = {
   benchmark: 'mini-amusement-parks',
+  stats: { durationSeconds: { name: 'Duration', unit: 'seconds', better: 'lower' } },
   url: "https://maps.skyfall.ai/leaderboard",
   feed,
   terms: "Cloudflare robots.txt disallows several named bots. Skyfall licenses the simulator under MIT and gives no separate license for leaderboard scores.",

@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: 'https://aiagribench.org/smallholders',
   feed: 'https://aiagribench.org/api/leaderboard?variant=smallholders',
   terms,
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, completeness: { name: 'Completeness', unit: '%', better: 'higher' }, conciseness: { name: 'Conciseness', unit: '%', better: 'higher' }, relevance: { name: 'Relevance', unit: '%', better: 'higher' } },
   fetch: () => agribenchRows(board, 13),
 };
 export default board;

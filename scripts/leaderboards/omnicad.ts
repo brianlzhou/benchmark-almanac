@@ -12,6 +12,9 @@ export default {
   benchmark: 'omnicad', url: feed + '#direct-results', feed,
   terms: 'Public results published by the authors at ' + feed,
   headline: 'The tables report no overall score. The headline is ID-NR, their first accuracy measure.',
+  stats: {
+    'ID-NR': { name: 'Identification without retrieval accuracy', unit: '%', better: 'higher' }, 'ID-R': { name: 'ID-R accuracy', unit: '%', better: 'higher' }, 'Pos@10': { name: 'Position at 10 accuracy', unit: '%', better: 'higher' }, 'Rot@10': { name: 'Rotation at 10 accuracy', unit: '%', better: 'higher' }, CDᵢ: { name: 'Chamfer distance', better: 'lower' }, PA: { name: 'Part accuracy', unit: '%', better: 'higher' }, PairF1: { name: 'Pair F1', unit: '%', better: 'higher' }, TypeAcc: { name: 'Type accuracy', unit: '%', better: 'higher' }, GSim: { name: 'Geometric similarity', unit: '%', better: 'higher' }, 'C-Free': { name: 'Constraint-free score', unit: '%', better: 'higher' }, SCD: { name: 'Shape consistency distance', better: 'lower' }, PosErr: { name: 'Position error', better: 'lower' }, RT: { name: 'Runtime', unit: 'seconds', better: 'lower' }, PR: { name: 'Precision-recall score', unit: '%', better: 'higher' }, steps: { name: 'Steps', unit: 'count', better: 'lower' },
+  },
   aliases: { 'LLaMA4 Maverick': 'llama-4-maverick' },
   async fetch() {
     const grids = tables(await fetchText(feed)).map(grid);

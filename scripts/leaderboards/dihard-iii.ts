@@ -20,6 +20,10 @@ const board: Leaderboard = {
   terms: 'The organizers publish results under the challenge terms at https://dihardchallenge.github.io/dihard3/#plan.',
   headline: 'The leaderboard ranks systems by diarization error rate on the core evaluation set.',
   parts: { fullDER: { name: 'Full set DER', better: 'lower' } },
+  stats: {
+    coreJER: { name: 'Core set JER', unit: '%', better: 'lower', note: 'Jaccard error rate on the core evaluation set.' },
+    fullJER: { name: 'Full set JER', unit: '%', better: 'lower', note: 'Jaccard error rate on the full evaluation set.' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const rows: LeaderboardRow[] = [];

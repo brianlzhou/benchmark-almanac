@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: "https://livemathematicianbench.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at livemathematicianbench.github.io; retain source attribution and follow the upstream terms.",
+  stats:{correct:{name:'Correct answers',unit:'count',better:'higher'},total:{name:'Total questions',unit:'count'}},
   aliases: {},
   
   async fetch() {

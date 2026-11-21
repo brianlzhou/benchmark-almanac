@@ -10,6 +10,15 @@ const board: Leaderboard = {
   benchmark: "viseditbench-tikz",
   url: "https://viseditbench.github.io/#leaderboard",
   feed,
+  stats: {
+    imageIA: {name: 'Image instruction adherence', unit: 'score', better: 'higher', note: 'Image-level instruction adherence rated on a five-point scale.'},
+    imageCP: {name: 'Image content preservation', unit: 'score', better: 'higher', note: 'Image-level content preservation rated on a five-point scale.'},
+    imageDR: {name: 'Image design quality', unit: 'score', better: 'higher', note: 'Image-level design quality rated on a five-point scale.'},
+    compilationFailureRate: {name: 'Compilation failure rate', unit: '%', better: 'lower'},
+    codeIA: {name: 'Code instruction adherence', unit: 'score', better: 'higher'},
+    codeCP: {name: 'Code content preservation', unit: 'score', better: 'higher'},
+    codeOES: {name: 'Overall edit score', unit: 'score', better: 'higher', note: 'Holistic score combining code-level instruction adherence and content preservation.'},
+  },
   terms: "The website uses CC BY-SA 4.0. The host has no robots.txt.",
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[1]?.map(c => c.text.split(' ')[0]).join('|') === 'Model|IA|CP|DR|FSR|CFR|IA|CP|OES');

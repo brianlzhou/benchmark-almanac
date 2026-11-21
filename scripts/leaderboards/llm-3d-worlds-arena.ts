@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://3d-arena-llm-3d-worlds-arena.hf.space/arena?view=leaderboard",
   feed: FEED,
   terms: "The protocol publishes aggregate ratings and lists component licenses by system. It gives no separate ratings license. https://huggingface.co/spaces/3d-arena/llm-3d-worlds-arena/blob/main/docs/3D-WORLD-ARENA.md",
+  stats:{votes:{name:'Votes',unit:'count'},coverage:{name:'Coverage',unit:'%'},bothPoorRate:{name:'Both poor rate',unit:'score',better:'lower',note:'Both poor rate is stored from 0 to 1.'}},
   async fetch() {
     const data = await fetchJson<{track: string; rows: Result[]}>(FEED);
     if (data.track !== 'llm' || data.rows.length < 24) throw new Error('Incomplete LLM arena track');

@@ -8,6 +8,12 @@ const languages=['Python','C++','Java','JavaScript','Go'];
 const board: Leaderboard = {
   benchmark:'humaneval-x',static:'paper',url:feed,feed,terms:PAPER_TERMS+' https://arxiv.org/licenses/',
   parts:Object.fromEntries(languages.map(k=>[k,k])),
+  stats: {
+    passAt1: { name: 'pass@1', unit: '%', better: 'higher' },
+    passAt10: { name: 'pass@10', unit: '%', better: 'higher' },
+    passAt100: { name: 'pass@100', unit: '%', better: 'higher' },
+    ...Object.fromEntries(languages.flatMap(lang => [10, 100].map(k => [lang + 'PassAt' + k, { name: lang + ' pass@' + k, unit: '%', better: 'higher' }]))),
+  },
   async fetch() {
     const t=flatPaperTables(await paperHtml(feed)).map(grid).find(t=>t[0]?.[0]==='Language' && t[0]?.[1]==='Metric' && t.at(-1)?.[0]==='Average');
     if (!t) throw Error('Missing multilingual generation results');

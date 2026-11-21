@@ -12,6 +12,18 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/perplexity-ai/q2d-chunk-leaderboard",
   feed: FEED,
   terms: "The Space lists mit for its repository. https://huggingface.co/spaces/perplexity-ai/q2d-chunk-leaderboard/blob/main/README.md",
+  stats: {
+    'nDCG@10': { name: 'Normalized discounted cumulative gain at 10', unit: 'score', better: 'higher' },
+    'nDCG@10 Paraphrased': { name: 'nDCG@10 paraphrased', unit: 'score', better: 'higher' },
+    'nDCG@10 Indirect': { name: 'nDCG@10 indirect', unit: 'score', better: 'higher' },
+    'nDCG@10 Scenario': { name: 'nDCG@10 scenario', unit: 'score', better: 'higher' },
+    'Document@10': { name: 'Document recall@10', unit: 'score', better: 'higher' },
+    'Evidence@10': { name: 'Evidence recall@10', unit: 'score', better: 'higher' },
+    'In-doc Evid.@10': { name: 'In-document evidence recall@10', unit: 'score', better: 'higher' },
+    'All-Evid.@10': { name: 'All evidence recall@10', unit: 'score', better: 'higher' },
+    'α-nDCG@10': { name: 'Alpha-nDCG@10', unit: 'score', better: 'higher' },
+    'Tokens to coverage ↓': { name: 'Tokens to coverage', unit: 'tokens', better: 'lower' },
+  },
   async fetch() {
     const config = await fetchJson<{ components: Component[] }>(FEED);
     const frames = config.components.filter(c => c.type === 'dataframe').map(c => c.props.value);

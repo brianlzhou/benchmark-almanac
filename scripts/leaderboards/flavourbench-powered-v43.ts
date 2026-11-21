@@ -29,6 +29,7 @@ const board: Leaderboard = {
     "Anthropic: Claude Fable 5": "claude-fable-5"
 },
   parts: { constraint: 'Constraint', cultural_composition: 'Cultural composition', pairing: 'Pairing', substitution: 'Substitution' },
+  stats: { completed: { name: 'Completed tasks', unit: 'count' }, completion_rate: { name: 'Completion rate', unit: 'score', better: 'higher', note: 'Fraction of eligible responses that complete the task, stored from 0 to 1.' }, parseable: { name: 'Parseable tasks', unit: 'count' }, parseable_rate: { name: 'Parseable task rate', unit: 'score', better: 'higher', note: 'Fraction of responses that parse successfully, stored from 0 to 1.' }, scheduled: { name: 'Scheduled tasks', unit: 'count' }, standardError: { name: 'Standard error', unit: 'score', better: 'lower' } },
   async fetch() {
     type Entry = { eligible: boolean; model_name: string; flavourbench_score: number; score_pointwise_95_ci: number[];
       score_simultaneous_95_ci: number[]; bootstrap_rank_95_interval: number[]; score_standard_error: number;

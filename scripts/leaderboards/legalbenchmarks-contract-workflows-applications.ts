@@ -20,6 +20,7 @@ export async function applicationRows(key: 'draftingData' | 'extractionData', mi
 const board: Leaderboard = {
   benchmark: 'legalbenchmarks-contract-workflows-applications',
   url: applicationsUrl, feed: applicationsUrl, terms: applicationsTerms, harnesses: 'system',
+  stats: { form: { name: 'Form score', unit: 'rating', better: 'higher', note: 'Application usefulness score shown with the contract-workflow pass rate.' } },
   fetch: () => applicationRows('draftingData', 10),
 };
 export default board;

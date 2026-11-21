@@ -8,6 +8,10 @@ const feed = 'https://arxiv.org/html/2602.12247';
 const domains = ['Credit','Research','Resumes','Sports','SEC 10-K/Q'];
 const percent = (cell:string) => numberCell(cell.replace(/%$/, '')) / 100;
 const board: Leaderboard = {
+  stats: {
+    validDocuments: { name: 'Valid documents', unit: 'count' }, validAccuracy: { name: 'Valid document accuracy', unit: 'score', better: 'higher' },
+    'Credit fields passed': { name: 'Credit fields passed', unit: 'count' }, 'Credit fields evaluated': { name: 'Credit fields evaluated', unit: 'count' }, 'Research fields passed': { name: 'Research fields passed', unit: 'count' }, 'Research fields evaluated': { name: 'Research fields evaluated', unit: 'count' }, 'Resumes fields passed': { name: 'Resumes fields passed', unit: 'count' }, 'Resumes fields evaluated': { name: 'Resumes fields evaluated', unit: 'count' }, 'Sports fields passed': { name: 'Sports fields passed', unit: 'count' }, 'Sports fields evaluated': { name: 'Sports fields evaluated', unit: 'count' }, 'SEC 10-K/Q fields evaluated': { name: 'SEC 10-K/Q fields evaluated', unit: 'count' }, Overall: { name: 'Overall failure rate', unit: 'score', better: 'lower' }, 'Overall fields passed': { name: 'Overall fields passed', unit: 'count' }, 'Overall fields evaluated': { name: 'Overall fields evaluated', unit: 'count' }, 'Empty response': { name: 'Empty response failures', unit: 'count' }, 'Trailing comma': { name: 'Trailing comma failures', unit: 'count' }, 'PDF page limit': { name: 'PDF page limit failures', unit: 'count' }, 'Truncated JSON': { name: 'Truncated JSON failures', unit: 'count' }, 'Total failures': { name: 'Total failures', unit: 'count' },
+  },
   benchmark: 'extract-bench-contextual', url: feed, feed, static: 'paper',
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2602.12247",
   parts: Object.fromEntries(domains.map(d => [d, d])),

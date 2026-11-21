@@ -10,6 +10,7 @@ const parts={'tic-tac-toe':'Tic-tac-toe',gomoku:'Gomoku','connect-four':'Connect
 const board:Leaderboard={
   benchmark:'llm-game-benchmark',url:base,feed,parts,
   terms:'The authors publish their terms at https://github.com/research-outcome/LLM-Game-Benchmark/blob/main/LICENSE.',
+  stats:{Disqualifications1st:{name:'First-player disqualifications',unit:'count'},Disqualifications2nd:{name:'Second-player disqualifications',unit:'count'},Draws:{name:'Draws in completed games',unit:'count'},InvalidMoves1st:{name:'First-player invalid moves',unit:'count'},InvalidMoves2nd:{name:'Second-player invalid moves',unit:'count'},TotalMoves1st:{name:'First-player total moves',unit:'count'},TotalMoves2nd:{name:'Second-player total moves',unit:'count'}},
   aliases:{'anthropic.claude-3-5-sonnet-20240620-v1:0':'claude-3-5-sonnet','anthropic.claude-3-sonnet-20240229-v1:0':'claude-3-sonnet','meta.llama3-70b-instruct-v1:0':'llama-3-70b'},
   async fetch(){
     const combined=await fetchJson<Record<string,string|number>[]>(feed);

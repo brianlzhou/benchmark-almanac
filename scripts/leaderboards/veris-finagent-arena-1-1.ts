@@ -12,6 +12,11 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
   parts: { aml: 'AML Bench', treasury: 'TreasuryQA Bench', findesk: 'FinDesk-Bench' },
+  stats: {
+    quality: { name: 'Quality', unit: 'score', better: 'higher' },
+    basketUsd: { name: 'Three-task basket cost', unit: 'usd', better: 'lower' },
+    costPenalty: { name: 'Cost penalty', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.[3]?.text.startsWith('Index'));
     const headers = ['#', 'Agent', 'Harness', 'Index', 'Quality', 'AML Bench', 'TreasuryQA Bench', 'FinDesk-Bench', 'Basket', 'Cost penalty'];

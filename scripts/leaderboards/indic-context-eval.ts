@@ -5,6 +5,7 @@ import { parseCsv, fetchText } from '../lib/util.ts';
 const FEED = "https://raw.githubusercontent.com/AI4Bharat/IndicContextEval/main/results/paper_results.csv";
 const board: Leaderboard = {
   benchmark: "indic-context-eval",
+  stats: { neer: { name: 'Named entity error rate', unit: '%', better: 'lower', note: 'Percentage of named entities that are missing or incorrect.' } },
   url: "https://github.com/AI4Bharat/IndicContextEval/blob/main/results/paper_results.csv",
   feed: FEED,
   terms: "Word error is capped at 200% per utterance. Named entity error measures missing or incorrect names. The dataset uses CC BY 4.0. https://huggingface.co/datasets/ai4bharat/IndicContextEval The raw file host has no robots.txt.",

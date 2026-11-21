@@ -117,6 +117,7 @@ export default {
     metrics: true,
     subsets: true,
   }),
+  stats: { passRate: { name: 'Raw pass rate', unit: '%', better: 'higher' }, latency: { name: 'Duration', unit: 'seconds', better: 'lower' }, toolCalls: { name: 'Tool calls', unit: 'count' }, steps: { name: 'Agent steps', unit: 'count' }, ote: { name: 'Output-token equivalent', unit: 'tokens' } },
   // the harder and larger subsets, kept as metrics on each main row
   parts: {
     extended: { name: 'Extended', group: 'Split', note: 'The 150-task set. The headline score is on the main 100.' },

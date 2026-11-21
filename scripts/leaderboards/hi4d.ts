@@ -7,6 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://openaccess.thecvf.com/content/CVPR2023/papers/Yin_Hi4D_4D_Instance_Segmentation_of_Close_Human_Interaction_CVPR_2023_paper.pdf';
 const board: Leaderboard = {
   benchmark: 'hi4d', static: 'paper', url: 'https://yifeiyin04.github.io/Hi4D/', feed,
+  stats: { MVE: { name: 'Mean vertex error', unit: 'score', better: 'lower', note: 'Mean vertex error in millimeters.' }, NMJE: { name: 'Normalized mean joint error', unit: 'score', better: 'lower', note: 'Mean joint position error normalized by the F1 score, in millimeters.' }, NMVE: { name: 'Normalized mean vertex error', unit: 'score', better: 'lower', note: 'Mean vertex error normalized by the F1 score, in millimeters.' }, F1: { name: 'F1 score', unit: 'score', better: 'higher' }, PCDR: { name: 'Percentage of correct depth relations', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, CD: { name: 'Contact distance', unit: 'score', better: 'lower', note: 'Distance between contact correspondences, in millimeters.' } },
   terms: 'The Computer Vision Foundation provides open access to the authors’ paper at https://openaccess.thecvf.com/CVPR2023.',
   headline: 'The headline is mean per-joint position error in millimeters, the first measure in the SMPL estimation table.',
   async fetch() {

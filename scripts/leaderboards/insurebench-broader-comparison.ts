@@ -5,6 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 const feed = "https://insurebench.insure-thing.com/decision-models/data.json";
 const board: Leaderboard = {
   benchmark: 'insurebench-broader-comparison',
+  stats: { latency: { name: 'Latency per task', unit: 'seconds', better: 'lower' }, correct: { name: 'Correct findings', unit: 'count', better: 'higher' }, findings: { name: 'Total findings', unit: 'count' }, packets: { name: 'Text packets', unit: 'count' }, unknownCharges: { name: 'Unknown charges', unit: 'count', better: 'lower' } },
   url: "https://insurebench.insure-thing.com/decision-models",
   feed,
   terms: "InsureThing allows crawling in robots.txt. Its copyright notice gives no separate reuse license for the aggregate results.",

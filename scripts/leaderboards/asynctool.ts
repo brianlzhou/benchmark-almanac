@@ -8,6 +8,15 @@ const splits = {similar2: 'SIMILAR#2', similar3: 'SIMILAR#3', cross2: 'CROSS#2',
 const board: Leaderboard = {
   benchmark: 'asynctool', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
   parts: Object.fromEntries(Object.entries(splits).map(([key,name]) => [key, {name, group: 'Task combination'}])),
+  stats: {
+    function: { name: 'Function F1', unit: '%', better: 'higher', note: 'F1 score for matching the model’s function results with ground truth.' },
+    parameter: { name: 'Parameter F1', unit: '%', better: 'higher', note: 'F1 score for matching the model’s parameter results with ground truth.' },
+    subtaskCharacter: { name: 'Subtask path match', unit: '%', better: 'higher', note: 'Path matching at the subtask level.' },
+    subtaskEnvironment: { name: 'Subtask environment match', unit: '%', better: 'higher', note: 'Matching multiple execution result environments at the subtask level.' },
+    subtaskAccuracy: { name: 'Subtask accuracy', unit: '%', better: 'higher' },
+    taskCharacter: { name: 'Task path match', unit: '%', better: 'higher', note: 'Path matching at the task level.' },
+    taskEnvironment: { name: 'Task environment match', unit: '%', better: 'higher', note: 'Matching multiple execution result environments at the task level.' },
+  },
   async fetch() {
     const page = await paperHtml(URL);
     const figures = new Map<string, string[][]>();

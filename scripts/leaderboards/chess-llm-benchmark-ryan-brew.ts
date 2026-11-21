@@ -12,6 +12,7 @@ const board: Leaderboard = {
     'phi4:14b': 'phi-4', 'deepseek-r1:7b': 'deepseek-r1-distill-qwen-7b',
     'deepseek-r1:14b': 'deepseek-r1-distill-qwen-14b',
   },
+  stats: { legalMoves: { name: 'Legal moves', unit: 'count' }, meanClampedCpl: { name: 'Mean clamped centipawn loss', unit: 'score', better: 'lower' }, medianClampedCpl: { name: 'Median clamped centipawn loss', unit: 'score', better: 'lower' } },
   async fetch() {
     const rows = parseCsv(await fetchText(feed));
     if (rows.length < 22) throw new Error('Missing chess model standings');

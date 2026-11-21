@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: 'https://quesma.com/benchmarks/binaryaudit/',
   feed: 'https://quesma.com/benchmarks/binaryaudit/ (ranking bars, passed over total runs; scatter-chart data for cost, time and false positive rate)',
   terms: QUESMA_TERMS,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   aliases: {},
   costPer: 'run',
   chart: {

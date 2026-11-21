@@ -8,6 +8,7 @@ const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/FeedbackQARetri
 export default {
   benchmark: 'feedbackqa', feed, url:'https://mteb-leaderboard.hf.space/tasks/FeedbackQARetrieval', host:'MTEB',
   terms:'MTEB releases these scores under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' } },
   async fetch() {
     return checked(await taskScores(feed,'FeedbackQARetrieval','precision_at_1',15,100),15);
   },

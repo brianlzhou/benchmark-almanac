@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed,
   terms: "Credit The Aggregate when quoting or charting scores. Bulk republication requires written permission. https://theaggregate.ai/terms robots.txt allows the feed path.",
   costPer: 'run',
+  stats: { predictions:{name:'Predictions',unit:'count'}, answered:{name:'Answered predictions',unit:'count'}, asked:{name:'Questions asked',unit:'count'}, imputed:{name:'Imputed predictions',unit:'count'}, totalTokens:{name:'Total tokens',unit:'tokens'}, winVsAggregate:{name:'Win rate vs The Aggregate',unit:'%',better:'higher'} },
   async fetch() {
     const { months } = await fetchJson<{ months: Month[] }>(feed);
     const month = months.find(m => m.ranked ?? ((m.n_common_cells ?? m.n_cells) >= (m.min_ranked_cells ?? 50)));

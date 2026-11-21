@@ -6,6 +6,7 @@ import { fetchText } from '../lib/util.ts';
 const feed = "https://futuremirex.com/mirex/wiki/2026:Music_Performance_Difficulty_Prediction_Results";
 const board: Leaderboard = {
   benchmark: 'mirex-2026-music-performance-difficulty-prediction',
+  stats: { latency: { name: 'Average time per song', unit: 'seconds', better: 'lower' } },
   url: "https://futuremirex.com/mirex/wiki/2026:Music_Performance_Difficulty_Prediction_Results",
   feed,
   terms: "The mirror has no robots file. The wiki lists the GNU Free Documentation License 1.2 for its content. https://futuremirex.com/mirex/wiki/2026:Music_Performance_Difficulty_Prediction_Results",

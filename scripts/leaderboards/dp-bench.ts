@@ -27,6 +27,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 
 const FEED = "https://huggingface.co/datasets/upstage/dp-bench/resolve/main/README.md";
 const board: Leaderboard = {
+  stats: { teds: { name: 'Tree edit distance similarity', unit: '%', better: 'higher' }, tedsStructure: { name: 'Structural tree edit distance similarity', unit: '%', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   "benchmark": "dp-bench",
   "url": "https://huggingface.co/datasets/upstage/dp-bench",
   "feed": "https://huggingface.co/datasets/upstage/dp-bench/resolve/main/README.md",

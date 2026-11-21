@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed,
   terms: "The publisher displays results at https://factory.com/news/code-review-benchmark. I could not verify reuse terms. Its robots.txt allows the article.",
   aliases: { 'Opus 4.6': 'claude-opus-4-6', 'Sonnet 4.6': 'claude-sonnet-4-6', 'Opus 4.7': 'claude-opus-4-7' },
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, dollarsPerF1Point: { name: 'Dollars per F1 point', unit: 'usd', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens', better: 'lower' } },
   async fetch() {
     const all = tables(await fetchText(feed));
     const ranking = all.find(t => t[0]?.some(c => c.text.includes('Stdev')));

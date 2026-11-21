@@ -6,10 +6,13 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 
 const feed = 'https://arxiv.org/html/2306.05836';
 const measures = ['F1','Precision','Recall','Accuracy'];
+const relationTypes = ['Is-Parent', 'Is-Ancestor', 'Is-Child', 'Is-Descendant', 'Has-Collider', 'Has-Confounder'];
 const board: Leaderboard = {
   benchmark:'corr2cause', url:feed, feed, static:'paper',
   terms:'Results credited to Zhijing Jin and colleagues. https://arxiv.org/abs/2306.05836',
   aliases:{'GPT-3 Davinci':'gpt-3-175b-davinci','GPT-3 Instruct (text-davinci-002)':'davinci-002','GPT-3 Instruct (text-davinci-003)':'davinci-003'},
+  stats:{ precision:{name:'Precision',unit:'%',better:'higher'}, recall:{name:'Recall',unit:'%',better:'higher'}, accuracy:{name:'Accuracy',unit:'%',better:'higher'} },
+  parts:Object.fromEntries(relationTypes.flatMap(relation => measures.slice(1).map(measure => [`${relation}: ${measure}`, { name:`${relation}: ${measure}`, unit:'%' }]))),
   async fetch() {
     const html = await paperHtml(feed);
     // The paper nests the fine-tuning panels inside a larger figure. Read each panel's own tabular element.

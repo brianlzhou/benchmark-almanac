@@ -29,6 +29,17 @@ const board: Leaderboard = {
     'Qwen3 235B A22B Instruct 2507':'qwen3-235b-a22b-instruct-jul-2025',
     'Nano Banana (Gemini 2.5 Flash Image)':'gemini-2-5-flash-image-preview-nano-banana',
   },
+  stats: {
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    'total cost (USD)': { name: 'Total cost', unit: 'usd', better: 'lower' },
+    wins: { name: 'Wins', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+    Apples: { name: 'Apples collected', unit: 'count', better: 'higher' },
+    bestLength: { name: 'Best snake length', unit: 'count', better: 'higher' },
+    mu: { name: 'TrueSkill mean', unit: 'rating', better: 'higher' },
+    ties: { name: 'Ties', unit: 'count' },
+    eloRating: { name: 'Elo rating', unit: 'elo', better: 'higher' },
+  },
   async fetch() {
     const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => /^Rating/.test(c.text)));
     if (!t) throw new Error('SnakeBench table not found');

@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'five-in-a-row'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: {
+    tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' },
+    costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' },
+  },
   fetch: () =>
     kaggleRowsWithBounds('kaggle', 'five-in-a-row', 'Score', 1, { tokensPerTurn: { task: 'Avg. Tokens/Turn' }, costPerTurn: { task: 'Avg. Cost/Turn' } }),
 };

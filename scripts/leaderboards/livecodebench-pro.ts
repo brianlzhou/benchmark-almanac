@@ -11,6 +11,7 @@ const board: Leaderboard = {
   medium: { name: 'Medium', group: 'Difficulty' },
   easy: { name: 'Easy', group: 'Difficulty' },
 }, url: URL, feed: URL + ' (paper Elo rating)', terms: PAPER_TERMS,
+  stats:{percentile:{name:'Percentile',unit:'%',better:'higher'},outputTokens:{name:'Output tokens',unit:'tokens',better:'lower'}},
   aliases: {'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025', 'gemini-2.5-flash-preview-04-17': 'gemini-2-5-flash-apr-2025'},
   async fetch() {
     const ts = inlinePaperTables(await paperHtml(URL));

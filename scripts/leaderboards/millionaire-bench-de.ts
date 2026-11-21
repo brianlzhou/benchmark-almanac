@@ -13,6 +13,10 @@ const FILES = ['leaderboard/leaderboard_cloud.json', 'leaderboard/leaderboard_lo
 
 const board: Leaderboard = {
   benchmark: 'millionaire-bench-de',
+  stats: {
+    poolRank: { name: 'Pool rank', unit: 'count', better: 'lower' },
+    log_percentage: { name: 'Log percentage', unit: '%', better: 'higher' },
+  },
   url: 'https://koray.at/millionaire-bench/',
   feed: `${ghRaw(REPO, FILES[0])} and ${FILES[1]} (median_value)`,
   terms: 'Leaderboard files in the ikiruneo/millionaire-bench GitHub repository, which states no license; scores are cited to the author.',

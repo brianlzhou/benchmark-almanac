@@ -14,6 +14,11 @@ const board: Leaderboard = {
   benchmark: 'agent-diff', static: 'paper', url: feed, feed,
   terms: 'The authors publish the benchmark results on arXiv. https://arxiv.org/abs/2602.11224',
   parts: Object.fromEntries(services.map(s => [s,s])),
+  stats: {
+    passRate: { name: 'Pass rate', unit: '%', better: 'higher' },
+    scorePerDollar: { name: 'Score per dollar', unit: 'score', better: 'higher', note: 'Overall benchmark score divided by US dollar cost.' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+  },
   aliases: {'devstral-2512': 'devstral-2', 'kimi-k2-0905': 'kimi-k2-sep-2025'},
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[1]?.join('|') === ['Model',...services,'Overall','Pass (%)','Cost ($)','Tokens','Score/$','Rank'].join('|'));

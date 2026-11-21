@@ -7,6 +7,7 @@ const feed = "https://raw.githubusercontent.com/lechmazur/persuasion/HEAD/README
 
 const board: Leaderboard = {
   benchmark: "persuasion-lech-mazur",
+  stats: { susceptibility: { name: 'Persuasion susceptibility', unit: 'score', better: 'lower' } },
   url: "https://github.com/lechmazur/persuasion",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/persuasion. I could not verify reuse terms. The raw file host has no robots.txt.",

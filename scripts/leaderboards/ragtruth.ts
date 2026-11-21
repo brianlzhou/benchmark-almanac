@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2401.00396",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const s=(await fetchText(FEED)).replace(/<annotation\b[\s\S]*?<\/annotation>/g,'');

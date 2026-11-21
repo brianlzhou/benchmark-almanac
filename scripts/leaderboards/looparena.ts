@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
   aliases: {},
+  parts: { type_i: 'Type I', type_ii: 'Type II' },
   
   async fetch() {
     const t=mdTables(await fetchText(FEED)).find(t=>t.head.includes('Type I accuracy'));if(!t)throw new Error('LoopArena table missing');const out:LeaderboardRow[]=[];

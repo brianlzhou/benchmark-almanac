@@ -17,6 +17,10 @@ const board: Leaderboard = {
   url: "https://www.youzhexie.me/papers/YoCausal/index.html",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    cci: {name: 'Causality Cognition Index', unit: 'score', better: 'higher', note: 'Difference in RSI between causal and non-causal subsets.'},
+    normalizedCci: {name: 'Normalized Causality Cognition Index', unit: '%', better: 'higher'},
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 

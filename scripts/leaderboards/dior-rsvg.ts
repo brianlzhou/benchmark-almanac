@@ -7,6 +7,7 @@ import { checked, flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.
 const feed = 'https://arxiv.org/html/2210.12634';
 const board: Leaderboard = {
   benchmark: 'dior-rsvg',
+  stats: { 'Pr@0.6': { name: 'Precision at IoU 0.6', unit: '%', better: 'higher' }, 'Pr@0.7': { name: 'Precision at IoU 0.7', unit: '%', better: 'higher' }, 'Pr@0.8': { name: 'Precision at IoU 0.8', unit: '%', better: 'higher' }, 'Pr@0.9': { name: 'Precision at IoU 0.9', unit: '%', better: 'higher' }, meanIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' }, cumIoU: { name: 'Cumulative intersection over union', unit: '%', better: 'higher' } },
   url: 'https://github.com/ZhanYang-nwpu/RSVG-pytorch',
   feed,
   static: 'paper',

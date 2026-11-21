@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.aisi.gov.uk/blog/how-do-frontier-ai-agents-perform-in-multi-step-cyber-attack-scenarios",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { maximumSteps: { name: 'Average steps completed', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const t=(await paperTables(FEED)).find(t=>t[0]?.some(c=>c.text.includes('The Last Ones')));
     if(!t)throw new Error('AISI headline table missing');

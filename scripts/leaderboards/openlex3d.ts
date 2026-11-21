@@ -1,16 +1,28 @@
 // The source reports no overall score. The headline is the plain mean of the 3 parts, computed by this importer.
 // OpenLex3D tests indoor 3D representations. Table 2 leads with top-five synonym frequency on three datasets.
 // The paper treats other label categories as errors. Tables 3 and 4 separately report set ranking and object retrieval.
-import type { Leaderboard, BoardPart } from './types.ts';
+import type { BoardStat, Leaderboard, BoardPart} from './types.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 import { paperHtml, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://arxiv.org/html/2503.19764';
 const datasets = ['Replica','ScanNet++','HM3D'];
+const stats: Record<string, BoardStat> = Object.fromEntries(datasets.flatMap((dataset) => [
+  [`${dataset}Mean ranking score`, { name: `${dataset} mean ranking score`, unit: 'score', better: 'higher' as const }],
+  [`${dataset}Synonym inlier rate`, { name: `${dataset} synonym inlier rate`, unit: 'score', better: 'higher', note: 'Rate stored from 0 to 1.' }],
+  [`${dataset}Synonym penalty`, { name: `${dataset} synonym penalty`, unit: 'score', better: 'lower' }],
+  [`${dataset}Depiction and visually similar inlier rate`, { name: `${dataset} depiction and visually similar inlier rate`, unit: 'score', better: 'higher', note: 'Rate stored from 0 to 1.' }],
+  [`${dataset}Depiction and visually similar underscoring penalty`, { name: `${dataset} underscoring penalty`, unit: 'score', better: 'lower' }],
+  [`${dataset}Depiction and visually similar overscoring penalty`, { name: `${dataset} overscoring penalty`, unit: 'score', better: 'lower' }],
+  [`${dataset} mAP`, { name: `${dataset} mean average precision`, unit: '%', better: 'higher' }],
+  [`${dataset} AP50`, { name: `${dataset} average precision at 50% IoU`, unit: '%', better: 'higher' }],
+  [`${dataset} AP25`, { name: `${dataset} average precision at 25% IoU`, unit: '%', better: 'higher' }],
+]));
 const categories = ['Synonyms','Depictions','Visually similar','Clutter','Missing','Incorrect'];
 const board: Leaderboard = {
   benchmark:'openlex3d', static:'paper', feed, url:'https://openlex3d.github.io/',
+  stats,
   terms:PAPER_TERMS + ' https://arxiv.org/abs/2503.19764',
   headline:'The headline is the plain mean of top-five synonym frequency on Replica, ScanNet++ and HM3D.',
   async fetch() {

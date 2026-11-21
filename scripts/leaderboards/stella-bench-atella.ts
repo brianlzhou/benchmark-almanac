@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://leaderboard.atella.ai/",
   feed,
   terms: "The leaderboard gives no reuse license. The site returns 404 for robots.txt.",
+  stats: { unhelpfulPct: { name: 'Unhelpful response rate', unit: '%', better: 'lower' }, conversations: { name: 'Conversations', unit: 'count' } },
   async fetch(){
     const d=await fetchJson<{models:Run[]}>(feed);const runs=d.models.filter(r=>r.ranked);
     if(runs.length<12) throw new Error('Missing current STELLA runs');

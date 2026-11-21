@@ -11,6 +11,14 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The organizers publish system scores without a stated score reuse license on the results page. https://xacle.org/2026/results.html The robots URL returns HTML.",
   parts: { valSRCC: 'Validation SRCC' },
+  stats: {
+    testLCC: { name: 'Test linear correlation coefficient', unit: 'score', better: 'higher' },
+    valLCC: { name: 'Validation linear correlation coefficient', unit: 'score', better: 'higher' },
+    testKTAU: { name: 'Test Kendall tau', unit: 'score', better: 'higher' },
+    valKTAU: { name: 'Validation Kendall tau', unit: 'score', better: 'higher' },
+    testMSE: { name: 'Test mean squared error', unit: 'score', better: 'lower' },
+    valMSE: { name: 'Validation mean squared error', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<{ metrics: string[]; groups: Group[] }>(FEED);
     const required = ['SRCC', 'LCC', 'KTAU', 'MSE'];

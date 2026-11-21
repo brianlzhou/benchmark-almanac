@@ -1,8 +1,8 @@
 // Models prepare training data for the science domain. The score is the published downstream average after backbone training.
 // Score: published domain average. 
 import type { Leaderboard } from './types.ts';
-import { sourceBoard, trackRows } from '../lib/boards/dataprep-bench.ts';
-const board: Leaderboard = { benchmark: "dataprep-bench-science", parts: {
+import { sourceBoard, trackRows, dataprepStats } from '../lib/boards/dataprep-bench.ts';
+const board: Leaderboard = { benchmark: "dataprep-bench-science", stats: dataprepStats(['MMLU-STEM_8','MMLU-Pro_9','GPQA_10','SuperGPQA_11','ChemBench_12','PIQA_13','SciBench_14'], ['LegalBench_1','LexGLUE_2','Avg_3','MedCaseR._4','MedMCQA_5','MedR-Bench_6','Avg_7','Avg_15']), parts: {
   'MMLU-STEM_8': { name: 'MMLU-STEM', group: 'Split' },
   'MMLU-Pro_9': { name: 'MMLU-Pro', group: 'Split' },
   GPQA_10: { name: 'GPQA', group: 'Split' },

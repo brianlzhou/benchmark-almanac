@@ -25,6 +25,20 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (leaderboard table, SR%)`,
   terms: 'Static public page; robots.txt allows it with a search=yes, ai-input=yes content signal, and the page states no further terms.',
+  stats: {
+    taskScore: { name: 'Task score', unit: 'score', better: 'higher' },
+    eeSpeed: { name: 'End-effector speed', better: 'lower' },
+    simple_score: { name: 'Simple task score', unit: 'score', better: 'higher' },
+    moderate_score: { name: 'Moderate task score', unit: 'score', better: 'higher' },
+    complex_score: { name: 'Complex task score', unit: 'score', better: 'higher' },
+    relational_score: { name: 'Relational task score', unit: 'score', better: 'higher' },
+    visual_score: { name: 'Visual task score', unit: 'score', better: 'higher' },
+    procedural_score: { name: 'Procedural task score', unit: 'score', better: 'higher' },
+    episodes: { name: 'Episodes', unit: 'count' },
+    successes: { name: 'Successful episodes', unit: 'count', better: 'higher' },
+    actionHorizonSteps: { name: 'Action horizon steps', unit: 'count' },
+    eeSparc: { name: 'End-effector path efficiency' },
+  },
   aliases: {},
   async fetch() {
     const rows = await tableRows(URL, { model: /^Policy$/i, score: /^SR%$/i, harness: /^Type$/i, metrics: { taskScore: /^Score$/i, eeSpeed: /^EE Speed$/i } });

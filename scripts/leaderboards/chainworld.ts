@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'chainworld', static: 'paper', feed, url: feed,
   aliases: { 'Kimi 2.5': 'kimi-k2-5' },
   terms: 'Scale AI publishes the paper under the terms at https://labs.scale.com/papers/chainworld.',
+  stats: { taskSuccess: { name: 'Task success rate', unit: '%', better: 'higher' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.join() === ',Chain completion,Chain completion,Task success,Task success');
     if (table?.[1].join() !== 'Model,Single,Multi,Single,Multi') throw new Error('Missing ChainWorld protocol columns');

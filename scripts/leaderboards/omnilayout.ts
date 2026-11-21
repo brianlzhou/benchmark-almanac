@@ -9,6 +9,23 @@ const board: Leaderboard = {
   url: "https://www.omnieda.com/#leaderboard",
   feed,
   terms: "The results page gives no score reuse license. https://www.omnieda.com/ The site allows crawling in robots.txt.",
+  stats: {
+    OO: { name: 'Out of order', unit: 'score', better: 'higher' },
+    OoB: { name: 'Out of bounds', unit: 'score', better: 'higher' },
+    RT: { name: 'Routing time', unit: 'seconds', better: 'lower' },
+    'P-Pass': { name: 'Placement pass rate', unit: '%', better: 'higher' },
+    HPWL: { name: 'Half perimeter wire length', unit: 'score', better: 'lower' },
+    NC: { name: 'Net count', unit: 'count' },
+    NS: { name: 'Net score', unit: 'score', better: 'higher' },
+    PRWL: { name: 'Placement routed wire length', unit: 'score', better: 'lower' },
+    RR: { name: 'Routing success rate', unit: 'score', better: 'higher' },
+    '#Vias': { name: 'Vias', unit: 'count' },
+    'R-Pass': { name: 'Routing pass rate', unit: '%', better: 'higher' },
+    'Sch.': { name: 'Schematic score', unit: 'score', better: 'higher' },
+    'Ref.': { name: 'Reference score', unit: 'score', better: 'higher' },
+    'E2E Pass': { name: 'End to end pass rate', unit: '%', better: 'higher' },
+    steps: { name: 'Steps', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const rows: LeaderboardRow[] = [];

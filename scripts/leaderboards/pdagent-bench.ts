@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://fenggev56.github.io/PDAGENT-BENCH/",
   feed: FEED,
   terms: "The leaderboard repository lists no license. The open dataset has mixed upstream terms. https://huggingface.co/datasets/fenggev566/PDAgent-Bench_open#licensing The host has no published robots directives at /robots.txt.",
+  stats: { foundational_p5_best: { name: 'Foundational Knowledge best pass@5', unit: '%', better: 'higher' }, root_cause_p5_best: { name: 'Root-Cause Analysis best pass@5', unit: '%', better: 'higher' }, report_p5_best: { name: 'Report Comprehension best pass@5', unit: '%', better: 'higher' } },
   parts: {
   "foundational_p1": {
     "name": "Foundational Knowledge pass@1",

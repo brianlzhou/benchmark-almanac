@@ -7,9 +7,25 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2601.21448';
 const tasks = ['Verilog generation', 'Python reference model generation', 'Verilog debugging'];
 const parts: Record<string, BoardPart> = {};
+for (const [task, categories] of [
+  ['Verilog generation', ['CPU IP', 'Non-Self-Contained', 'Self-Contained', 'Average']],
+  ['Python reference model generation', ['CPU IP', 'Non-Self-Contained', 'Self-Contained', 'Average']],
+  ['Verilog debugging', ['Arithmetic Bug', 'Assignment Bug', 'State Machine Bug', 'Timing Bug', 'Average']],
+] as const) {
+  for (const category of categories) {
+    for (const pass of ['1', '5', '10']) {
+      const key = (task + category + 'pass' + pass).replace(/[^a-z0-9]/gi, '');
+      parts[key] = { name: `${task}: ${category} pass@${pass}`, group: task, unit: '%' };
+    }
+  }
+}
 const board: Leaderboard = {
   benchmark: 'chipbench', url: feed, feed, static: 'paper', parts,
   terms: 'The authors publish the tables through arXiv. https://arxiv.org/abs/2601.21448',
+  stats: {
+    verilogInputTokens: { name: 'Verilog input tokens', unit: 'tokens' }, verilogOutputTokens: { name: 'Verilog output tokens', unit: 'tokens' },
+    verilogCost: { name: 'Verilog generation cost', unit: 'usd', better: 'lower' }, verilogCostPerPass: { name: 'Verilog cost per pass', unit: 'usd', better: 'lower' },
+  },
   headline: 'The paper reports no overall score, so the headline is the plain mean of pass@1 across its three tasks.',
   aliases: { 'DeepSeek-Coder': 'deepseek-v2-5-sep-2024', 'Claude 4.5 Haiku': 'claude-haiku-4-5', 'Claude 4.5 Opus': 'claude-opus-4-5', 'Claude 4.5 Sonnet': 'claude-sonnet-4-5',
     'DeepSeek-R1 (snapshot unspecified)': 'deepseek-r1', 'Gemini 2.5 Pro (snapshot unspecified)': 'gemini-2-5-pro-jun-2025',

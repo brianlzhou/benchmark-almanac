@@ -4,11 +4,12 @@ import type { Leaderboard, LeaderboardRow, BoardPart } from './types.ts';
 import { pdfText } from '../lib/boards/pdf-text.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://aclanthology.org/2025.emnlp-main.249.pdf';
-const parts: Record<string,BoardPart> = {};
+const parts: Record<string,BoardPart> = Object.fromEntries(Array.from({length:6}, (_, i) => [`level${i+1}`, {name:`Level ${i+1}`, group:'Success rate', unit:'%', better:'higher'}]));
 const board: Leaderboard = {
   benchmark:'collab-overcooked', url:'https://aclanthology.org/2025.emnlp-main.249/', feed, static:'paper', parts,
   terms:'ACL Anthology distributes the authors’ paper under its publication terms. https://aclanthology.org/faq/copyright/',
   headline:'The paper gives no overall score, so this is the plain mean of success rates at its six complexity levels.',
+  stats: Object.fromEntries(Array.from({length:6}, (_, i) => [`level${i+1}Progress`, {name:`Level ${i+1} progress completeness`, unit:'%', better:'higher'}])),
   aliases:{ 'GPT-3.5-turbo (snapshot unspecified)': 'gpt-3-5-turbo-jan-2024' },
   async fetch() {
     const pdf = await pdfText(feed);

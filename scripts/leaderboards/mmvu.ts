@@ -22,6 +22,7 @@ const lastDay = (ym: string) => {
 
 const board: Leaderboard = {
   benchmark: 'mmvu',
+  parts: { testOverall: { name: 'Test overall', group: 'Split' } },
   url: 'https://mmvu-benchmark.github.io/#leaderboard',
   feed: `${FEED} (validation overall)`,
   terms: 'Static JSON on the MMVU GitHub Pages site, which states no terms; the MMVU dataset on Hugging Face is Apache-2.0.',

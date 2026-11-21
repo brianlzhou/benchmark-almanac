@@ -13,6 +13,11 @@ const board: Leaderboard = {
   benchmark: 'refav', url: 'https://eval.ai/web/challenges/challenge-page/2662/leaderboard/6908', feed,
   terms: 'EvalAI serves this public challenge leaderboard for the organizers.',
   harnesses: 'system', verified: 'Verified by the challenge organizers',
+  stats: {
+    hotaTrack: { name: 'Higher Order Tracking Accuracy track', unit: '%', better: 'higher' },
+    timestampBA: { name: 'Timestamp boundary accuracy', unit: '%', better: 'higher' },
+    logBA: { name: 'Log boundary accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     let next: string | null = feed;

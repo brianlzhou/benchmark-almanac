@@ -16,6 +16,10 @@ const board: Leaderboard = {
     'MiMo-V2.6-Pro-1T-A42B': 'mimo-v2-6-pro',
   },
   parts: { l1: 'Level 1 · Retrieval & grounding', l2: 'Level 2 · Basic understanding', l3: 'Level 3 · Complex reasoning' },
+  stats: {
+    overallCG: { name: 'Overall content grounding', unit: '%', better: 'higher' }, overallBG: { name: 'Overall background grounding', unit: '%', better: 'higher' }, l1CG: { name: 'Level 1 content grounding', unit: '%', better: 'higher' }, l1BG: { name: 'Level 1 background grounding', unit: '%', better: 'higher' },
+    l2CG: { name: 'Level 2 content grounding', unit: '%', better: 'higher' }, l2BG: { name: 'Level 2 background grounding', unit: '%', better: 'higher' }, l3CG: { name: 'Level 3 content grounding', unit: '%', better: 'higher' }, l3BG: { name: 'Level 3 background grounding', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const data = jsonAfter<{models: {name: string; type: string; scores: Record<string, number[]>}[]}>(await fetchText(feed), 'window.EVAOMNI =');
     const models = data.models.filter(m => m.type !== 'human');

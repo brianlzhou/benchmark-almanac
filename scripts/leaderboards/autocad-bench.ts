@@ -44,6 +44,7 @@ const board: Leaderboard = {
     advanced: { name: 'Advanced', group: 'Difficulty', note: '14 tasks.' },
     project: { name: 'Project', group: 'Difficulty', note: '14 tasks.' },
   },
+  stats: { completedTasks:{name:'Completed tasks',unit:'count'}, mouseShare:{name:'Mouse share',unit:'%',better:'lower'}, actionsPerTurn:{name:'Actions per turn',unit:'count',better:'lower'} },
   async fetch() {
     const md = await fetchText(MD);
     const modality = new Map(table(md, '| Model | 2D | 3D').map((r) => [r[0], r.slice(1).map(pct)]));

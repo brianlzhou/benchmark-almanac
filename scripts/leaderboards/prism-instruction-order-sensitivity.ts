@@ -9,6 +9,14 @@ const board: Leaderboard = {
   benchmark: 'prism-instruction-order-sensitivity', url: 'https://github.com/bleymambwe/PRISM/tree/main/experiments/iteration-19-crossfamily',
   feed: base + '{llama,qwen}_transfer_report.txt', costPer: 'run',
   terms: 'The authors license the experiment results under CC BY 4.0 at https://github.com/bleymambwe/PRISM/blob/main/LICENSE-ARTIFACTS.',
+  stats: {
+    bestOrderingAccuracy: { name: 'Best-ordering accuracy', unit: '%', better: 'higher' },
+    orderingMean: { name: 'Mean ordering accuracy', unit: '%', better: 'higher' },
+    orderingCount: { name: 'Ordering count', unit: 'count' },
+    questions: { name: 'Question count', unit: 'count' },
+    orderingStd: { name: 'Ordering accuracy standard deviation', unit: '%' },
+    experimentApiCalls: { name: 'Experiment API calls', unit: 'count' },
+  },
   aliases: { 'qwen/qwen3-30b-a3b-instruct-2507': 'qwen3-30b-a3b-instruct-jul-2025' },
   async fetch() {
     const rows = new Map<string, LeaderboardRow>();

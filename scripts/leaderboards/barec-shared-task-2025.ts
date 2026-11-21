@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://aclanthology.org/2025.arabicnlp-sharedtasks.34.pdf#page=13",
   feed,
   terms: "Table 11 ranks 16 strict sentence systems. The organizers flag two entrants that trained on development data. ACL Anthology lists CC BY 4.0. ACL Anthology returned 404 for robots.txt.",
+  stats: { acc19: { name: 'Accuracy at 19 classes', unit: '%', better: 'higher' }, withinOne: { name: 'Accuracy within one class', unit: '%', better: 'higher' }, distance: { name: 'Mean distance', unit: 'score', better: 'lower' }, acc7: { name: 'Accuracy at 7 classes', unit: '%', better: 'higher' }, acc5: { name: 'Accuracy at 5 classes', unit: '%', better: 'higher' }, acc3: { name: 'Accuracy at 3 classes', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await pdfText(feed);
     const caption = 'Table 11: Performance of participating teams in the strict track in the sentence-level task.';

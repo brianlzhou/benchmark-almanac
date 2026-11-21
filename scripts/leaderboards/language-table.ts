@@ -10,6 +10,7 @@ const feed = 'https://arxiv.org/html/2210.06407v1/ablations-combined.svg';
 const board: Leaderboard = {
   benchmark: 'language-table', url: 'https://arxiv.org/html/2210.06407#S6.F6', feed, static: 'paper',
   terms: 'Google Research publishes Figure 6 in the benchmark paper at https://arxiv.org/abs/2210.06407.',
+  stats: {success:{name:'Success rate',unit:'score',better:'higher',note:'Stored from 0 to 1.'}},
   async fetch() {
     const svg = await paperHtml(feed);
     if (createHash('sha256').update(svg).digest('hex') !== '13c8fcb63b4409d5c585115cfede0d3d628b2e5cbc6fb4078043a2378111237f') throw new Error('Language-Table Figure 6 changed');

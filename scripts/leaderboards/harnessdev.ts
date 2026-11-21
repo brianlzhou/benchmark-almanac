@@ -16,6 +16,14 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2609.01437",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    sweProTokensPerHarness: { name: 'SWE-bench Pro tokens per harness', unit: 'tokens' },
+    terminalBenchTokensPerHarness: { name: 'Terminal-Bench tokens per harness', unit: 'tokens' },
+    mleBench: { name: 'Machine learning engineering benchmark score', unit: '%', better: 'higher' },
+    mleBenchTokensPerHarness: { name: 'Machine learning engineering benchmark tokens per harness', unit: 'tokens' },
+    eqBenchTokensPerHarness: { name: 'Emotional intelligence benchmark tokens per harness', unit: 'tokens' },
+    browseCompTokensPerHarness: { name: 'BrowseComp tokens per harness', unit: 'tokens' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const html = (await fetchText(FEED)).replace(/<annotation\b[\s\S]*?<\/annotation>/g, '');

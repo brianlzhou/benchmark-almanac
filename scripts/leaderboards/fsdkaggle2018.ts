@@ -10,6 +10,7 @@ const feed = 'https://dcase.community/challenge2018/task-general-purpose-audio-t
 const board: Leaderboard = {
   benchmark: 'fsdkaggle2018', url: feed, feed,
   terms: 'DCASE publishes the competition results. Dataset license terms are listed at https://zenodo.org/records/2552860.',
+  stats: { publicMap3: { name: 'Public mAP@3', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' } },
   async fetch() {
     const all = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)));
     const ranking = all.find(t => t[0][4] === 'mAP@3 (Private leaderboard)*' && t[0][5] === 'mAP@3 (Public leaderboard)');

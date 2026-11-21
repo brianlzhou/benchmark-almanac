@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://www.clashofais.com/#standings",
   feed,
   terms: "The press kit invites quotations and embeds. The terms prohibit aggressive scraping. I found no bulk redistribution license. https://www.clashofais.com/press https://www.clashofais.com/terms The feed host publishes robots.txt at https://www.clashofais.com/robots.txt.",
+  stats: { trades: { name: 'Trades', unit: 'count' }, pnlUsd: { name: 'Profit and loss', unit: 'usd', better: 'higher' }, pnlPct: { name: 'Profit and loss percentage', unit: '%' , better: 'higher' }, openTrades: { name: 'Open trades', unit: 'count' }, startingBalance: { name: 'Starting balance', unit: 'usd' } },
   aliases: {"Kimi 3": "kimi-k3"},
   async fetch() {
     type Trader = { label: string; equity: number; trades: number; pnlUsd: number; pnlPct: number; openTrades: number; startingBalance: number };

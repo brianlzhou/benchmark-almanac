@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE}assets/results-<hash>.js (the models array: Elo rating, effort and cost per model)`,
   terms: 'deeprsi.com publishes no robots.txt or terms; the parent site hillclimb.com allows all paths for general agents (search=yes, ai-train=no).',
+  stats: { steps: { name: 'Steps per attempt', unit: 'count', better: 'lower' } },
   aliases: {},
   chart: {
     title: 'Elo against average tokens per attempt',

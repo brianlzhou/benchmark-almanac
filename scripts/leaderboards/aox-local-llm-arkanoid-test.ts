@@ -11,6 +11,13 @@ const board: Leaderboard = {
   url: "https://www.aox.cz/bench/arkanoid/",
   feed,
   terms: "The scoreboard does not state a reuse license. robots.txt allows the feed path.",
+  stats: {
+    firstPassSeconds: { name: 'First pass time', unit: 'seconds', better: 'lower' },
+    secondPassSeconds: { name: 'Second pass time', unit: 'seconds', better: 'lower' },
+    latency: { name: 'Total latency', unit: 'seconds', better: 'lower' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+    firstPassScore: { name: 'First pass score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const groups = tables(await fetchText(feed)).filter(t => t[0]?.[8]?.text === 'Rubric (11 items)');
     const rows = groups.flatMap(t => t.slice(1).map(c => {

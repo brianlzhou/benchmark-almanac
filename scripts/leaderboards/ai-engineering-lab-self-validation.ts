@@ -9,6 +9,19 @@ const board: Leaderboard = {
   url: "https://github.com/jgerstmayr/AI-engineering-lab/tree/main/logsAgent",
   feed: FEED,
   terms: "The repository uses BSD 3-Clause. https://github.com/jgerstmayr/AI-engineering-lab/blob/main/LICENSE GitHub requests a one-second crawl delay. Table 5 is credited to the authors.",
+  stats: {
+    runtimeMinutes: { name: 'Evaluation runtime', unit: 'minutes', better: 'lower' },
+    totalGeneratedTokens: { name: 'Total generated tokens', unit: 'tokens', better: 'lower' },
+    tokensPerSecond: { name: 'Tokens per second', unit: 'tokens/s', better: 'higher' },
+    correctCases: { name: 'Correct cases score', unit: 'score', better: 'higher', note: 'Average score for correct mechanical models, from 0 to 1.' },
+    fpr: { name: 'False positive rate', unit: 'score', better: 'lower', note: 'Incorrect models accepted as valid, from 0 to 1.' },
+    tpr: { name: 'True positive rate', unit: 'score', better: 'higher', note: 'Correct models identified as correct, from 0 to 1.' },
+    tp: { name: 'True positives', unit: 'count' },
+    fn: { name: 'False negatives', unit: 'count' },
+    fp: { name: 'False positives', unit: 'count' },
+    tn: { name: 'True negatives', unit: 'count' },
+    undecidable: { name: 'Non-decidable cases', unit: 'count' },
+  },
   aliases: { 'Phi4-Q4': 'phi-4', 'Llama3.1-70B-HF': 'llama-3-1-70b', 'Qwen2.5-32B-Q4': 'qwen2-5-32b', 'Qwen2.5-72B-HF': 'qwen2-5-72b' },
   async fetch() {
     const paper = await pdfText(FEED);

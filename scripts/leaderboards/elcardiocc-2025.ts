@@ -13,6 +13,7 @@ const board: Leaderboard = {
   benchmark: 'elcardiocc-2025', url: feed, feed, harnesses: 'system',
   terms: 'BioASQ publishes the shared task results. https://participants-area.bioasq.org/results/ElCardioCC/',
   parts: { ner: 'Named Entity Recognition', el: 'Entity Linking', mlc: 'Multi-Label Classification' },
+  stats: { nerRecall: { name: 'Named entity recognition recall', unit: 'score', better: 'higher', note: 'Recall from 0 to 1.' }, nerPrecision: { name: 'Named entity recognition precision', unit: 'score', better: 'higher', note: 'Precision from 0 to 1.' }, elRecall: { name: 'Entity linking recall', unit: 'score', better: 'higher', note: 'Recall from 0 to 1.' }, elPrecision: { name: 'Entity linking precision', unit: 'score', better: 'higher', note: 'Precision from 0 to 1.' }, mlcRecall: { name: 'Multi-label classification recall', unit: 'score', better: 'higher', note: 'Recall from 0 to 1.' }, mlcPrecision: { name: 'Multi-label classification precision', unit: 'score', better: 'higher', note: 'Precision from 0 to 1.' } },
   async fetch() {
     const t = tables(await fetchText(feed)).map(table => table.map(row => row.map(c => c.text)));
     const headings = ['Team Name', 'System', 'R', 'P', 'F1'];

@@ -14,6 +14,7 @@ const board:Leaderboard = {
   terms:'The authors license result files under CC BY 4.0. https://github.com/zhaochangpeng-csu/GenPuzzle#license',
   aliases:{'doubao-seedream-5-0-pro-260628':'seedream-5-0-pro','openai:gpt-image@2':'gpt-image-2'},
   parts:Object.fromEntries(tracks.map(name => [name,{name,unit:'score' as const}])),
+  stats: { microOverall: { name: 'Micro overall score', unit: 'score', better: 'higher' }, totalCount: { name: 'Total puzzles', unit: 'count' }, ...Object.fromEntries(tracks.map(name => [name + ' count', { name: name + ' puzzles', unit: 'count' }])) },
   async fetch() {
     const lines = (await fetchText(feed)).split(/\r?\n/).filter(l => l.startsWith('|'));
     const cells = (line:string) => line.trim().split('|').slice(1,-1).map(s => s.trim().replace(' · ',': '));

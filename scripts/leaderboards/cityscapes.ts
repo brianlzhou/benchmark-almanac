@@ -12,6 +12,7 @@ const identified: Record<number,string> = { 1786:'DSNet', 7635:'DeepLabv3+ decod
 const board: Leaderboard = {
   benchmark:'cityscapes', url, feed,
   terms:'The Cityscapes team publishes this table at https://www.cityscapes-dataset.com/benchmarks/. Dataset terms are at https://www.cityscapes-dataset.com/license/.',
+  stats: { latency: { name: 'Runtime', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const {data} = await fetchJson<{data:Entry[]}>(feed);
     const parts: Record<string,BoardPart> = { iiouclass:{name:'iIoU class'}, ioucategory:{name:'IoU category'}, iioucategory:{name:'iIoU category'} };

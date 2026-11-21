@@ -4,6 +4,7 @@ import type { Leaderboard } from './types.ts';
 import { rampArray, rampBundle, rampTerms } from './accounting-autocoding-ramp.ts';
 
 const board: Leaderboard = {
+  stats: { unsureRateMultiple: { name: 'Unsure rate multiple', unit: 'score' }, disagreementRateMultiple: { name: 'Disagreement rate multiple', unit: 'score' } },
   benchmark: 'policy-agent-ramp', url: 'https://builders.ramp.com/post/financial-benchmarks', feed: 'https://builders.ramp.com/post/financial-benchmarks', terms: rampTerms,
   async fetch() {
     const runs = rampArray<{name:string, normDisagreement:number, normUnsure:number}>(await rampBundle(), 'normDisagreement',33);

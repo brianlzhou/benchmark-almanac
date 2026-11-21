@@ -7,6 +7,7 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://longvideobench.github.io/";
 const board: Leaderboard = {
  benchmark: "longvideobench",
+ stats: { maxFrames: { name: 'Maximum frames', unit: 'count' } },
  parts: {
    'Test 8s-15s': { name: 'Test 8 to 15 seconds', group: 'Split' },
    'Test 15s-60s': { name: 'Test 15 to 60 seconds', group: 'Split' },

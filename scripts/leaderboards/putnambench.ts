@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (default Lean-with-answer solved percentage)`,
   terms: 'Static JSON on the PutnamBench GitHub Pages site (robots.txt allows all); the PutnamBench repository releases its problems under Apache 2.0 (Lean, Isabelle) and MIT (Rocq).',
+  stats: { solved: { name: 'Problems solved', unit: 'count', better: 'higher' }, denominator: { name: 'Problems in split', unit: 'count' } },
   aliases: {
     'gemini-2.5-pro-exp-0325': 'gemini-2-5-pro-mar-2025',
     'gemini-2.0-flash-thinking-121': 'gemini-2-0-flash-thinking-jan-2025',

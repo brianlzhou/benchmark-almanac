@@ -4,7 +4,10 @@ import type { Leaderboard, BoardPart } from './types.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 import { pdfText } from '../lib/boards/pdf-text.ts';
 const feed = 'https://openaccess.thecvf.com/content_CVPR_2019/papers/Tang_COIN_A_Large-Scale_Dataset_for_Comprehensive_Instructional_Video_Analysis_CVPR_2019_paper.pdf';
-const parts: Record<string, BoardPart> = {};
+const parts: Record<string, BoardPart> = Object.fromEntries([
+  ...Array.from({length: 5}, (_, i) => [`mAP${i + 1}`, {name: `Mean average precision at IoU 0.${i + 1}`}]),
+  ...Array.from({length: 5}, (_, i) => [`mAR${i + 1}`, {name: `Mean average recall at IoU 0.${i + 1}`}]),
+]);
 export default {
   benchmark:'coin-instructional-video-analysis',static:'paper',url:'https://coin-dataset.github.io/',feed,parts,
   terms:'CVF Open Access, https://openaccess.thecvf.com/content_CVPR_2019/html/Tang_COIN_A_Large-Scale_Dataset_for_Comprehensive_Instructional_Video_Analysis_CVPR_2019_paper.html',

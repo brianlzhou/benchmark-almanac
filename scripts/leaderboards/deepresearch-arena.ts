@@ -7,6 +7,7 @@ import { checked, grid, flatPaperTables } from '../lib/boards/arxiv-span-tables.
 
 const feed = 'https://arxiv.org/html/2509.01396';
 const board: Leaderboard = {
+  stats: { enKSR:{name:'English knowledge search rate',unit:'%',better:'higher'}, zhKSR:{name:'Chinese knowledge search rate',unit:'%',better:'higher'}, enKCR:{name:'English knowledge citation rate',unit:'%',better:'higher'}, zhKCR:{name:'Chinese knowledge citation rate',unit:'%',better:'higher'}, enKOR:{name:'English knowledge organization rate',unit:'%',better:'higher'}, zhKOR:{name:'Chinese knowledge organization rate',unit:'%',better:'higher'}, enTokens:{name:'English tokens',unit:'tokens'}, zhTokens:{name:'Chinese tokens',unit:'tokens'}, enReferences:{name:'English references',unit:'count'}, zhReferences:{name:'Chinese references',unit:'count'} },
   benchmark: 'deepresearch-arena', feed, url: feed, static: 'paper',
   terms: 'The authors publish Table 3 under the terms linked at https://arxiv.org/abs/2509.01396.',
   headline: 'The headline averages the English and Chinese ACE checklist scores that the paper compares across models.',

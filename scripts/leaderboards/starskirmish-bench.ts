@@ -27,6 +27,7 @@ const board: Leaderboard = {
   costPer: 'run',
   url: PAGE,
   feed: `${FEED} (SCORES, COSTS, PRACTICE, RUNS)`,
+  stats: { runMin: { name: 'Minimum run win rate', unit: '%', better: 'higher' }, runMax: { name: 'Maximum run win rate', unit: '%', better: 'higher' } },
   terms: 'Static data module on starskirmish.com; robots.txt allows all paths and the site publishes no terms of use.',
   chart: {
     title: 'Win Rates vs. Practice Against Strong Bots',

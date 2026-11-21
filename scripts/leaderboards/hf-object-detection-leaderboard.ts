@@ -11,6 +11,18 @@ const board: Leaderboard = {
   feed,
   terms: "See the publisher’s Space and each upstream dataset license at https://huggingface.co/spaces/hf-vision/object_detection_leaderboard Hugging Face allows the public Space in robots.txt.",
   parts: { 'AP-S': 'AP-S', 'AP-M': 'AP-M', 'AP-L': 'AP-L' },
+  stats: {
+    AP: { name: 'Average precision', unit: '%', better: 'higher' },
+    'AP@.50': { name: 'Average precision at IoU 0.50', unit: '%', better: 'higher' },
+    'AP@.75': { name: 'Average precision at IoU 0.75', unit: '%', better: 'higher' },
+    AR1: { name: 'Average recall at 1 detection', unit: '%', better: 'higher' },
+    AR10: { name: 'Average recall at 10 detections', unit: '%', better: 'higher' },
+    AR100: { name: 'Average recall at 100 detections', unit: '%', better: 'higher' },
+    'AR-S': { name: 'Average recall for small objects', unit: '%', better: 'higher' },
+    'AR-M': { name: 'Average recall for medium objects', unit: '%', better: 'higher' },
+    'AR-L': { name: 'Average recall for large objects', unit: '%', better: 'higher' },
+    'FPS(*)': { name: 'Frames per second', unit: 'count', better: 'higher' },
+  },
   async fetch() {
     type Table = {headers?: string[], data?: (string | null)[][]};
     const config = await fetchJson<{components: {props: {value?: Table}}[]}>(feed);

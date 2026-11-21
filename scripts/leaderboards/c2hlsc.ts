@@ -12,6 +12,11 @@ const board: Leaderboard = {
   terms: 'The authors publish the results under their repository license. https://github.com/Lucaz97/c2hlsc/blob/main/LICENSE',
   headline: 'The repository reports each program separately, so this is the mean success rate across ten programs.',
   parts: Object.fromEntries(tasks.map(name => [name, name])),
+  stats: {
+    inputTokensPerSuccess: { name: 'Input tokens per successful program', unit: 'tokens', better: 'lower' },
+    outputTokensPerSuccess: { name: 'Output tokens per successful program', unit: 'tokens', better: 'lower' },
+    costPerSuccess: { name: 'Cost per successful program', unit: 'usd', better: 'lower' },
+  },
   aliases: { 'GPT-4o mini (snapshot unspecified)': 'gpt-4o-mini', 'GPT-4o mini': 'gpt-4o-mini', 'claude-3-5-sonnet-20240620': 'claude-3-5-sonnet' },
   async fetch() {
     const rows: LeaderboardRow[] = [];

@@ -9,7 +9,7 @@ const feed = 'https://aclanthology.org/2025.naacl-long.357.pdf';
 const contrasts = ['H vs. M', 'E vs. M', 'H vs. E', 'L vs. M', 'H vs. L', 'G vs. M', 'H vs. G'];
 const categories = ['Generation', 'Open QA', 'Summarize', 'Rewrite', 'Closed QA'];
 const methods = ['Log Probability', 'Rank', 'Log-Rank', 'Entropy', 'DetectLLM Likelihood Log-Rank Ratio', 'DetectLLM Normalized Perturbed Log-Rank', 'DetectGPT'];
-const parts: Record<string, string> = {};
+const parts: Record<string, string> = Object.fromEntries([...contrasts.map(c => [c.replace(/[^A-Za-z0-9]/g, ''), c]), ...categories.flatMap(category => contrasts.map(c => [(category + ': ' + c).replace(/[^A-Za-z0-9]/g, ''), category + ': ' + c]))]);
 const board: Leaderboard = {
   benchmark: 'beemo', url: 'https://aclanthology.org/2025.naacl-long.357/', feed, static: 'paper', parts,
   terms: 'The published paper is available from ACL Anthology under its publication terms. https://aclanthology.org/faq/copyright/',

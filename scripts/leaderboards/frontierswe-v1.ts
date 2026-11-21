@@ -10,6 +10,7 @@ interface Entry { model: string; harness: string; overall: number; dominance: nu
 const board: Leaderboard = {
   benchmark: 'frontierswe-v1', url: PAGE, feed: PAGE,
   terms: 'FrontierSWE allows the exact public /v1 page under robots.txt, with results credited to the publisher under its site terms.',
+  stats: { avgRank: { name: 'Average rank', unit: 'rating', better: 'lower' }, implementationRank: { name: 'Implementation rank', unit: 'rating', better: 'lower' }, performanceRank: { name: 'Performance rank', unit: 'rating', better: 'lower' }, researchRank: { name: 'Research rank', unit: 'rating', better: 'lower' } },
   async fetch() {
     // Refuse redirects so a future trailing-slash redirect cannot enter the disallowed /v1/ path.
     const entries = jsonAfter<{ mean: Entry[] }>(nextFlight(await fetchText(PAGE, { redirect: 'error' })), '"entries":').mean;

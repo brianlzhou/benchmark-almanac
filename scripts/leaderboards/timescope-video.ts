@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'timescope-video', url: PAGE, feed: FEED,
   terms: 'The TimeScope Space is licensed Apache 2.0 and publishes this CSV.',
   parts: Object.fromEntries(['2min', '3min', '5min', '10min', '20min', '30min', '60min', '120min', '180min', '300min', '480min'].map((name) => [name, { name, group: 'Video duration', unit: '%' }])),
+  stats: { '1min':{name:'1 minute',unit:'%',better:'higher'} },
   async fetch() {
     const rows = parseCsv(await fetchText(FEED));
     const headers = Object.keys(rows[0] ?? {});

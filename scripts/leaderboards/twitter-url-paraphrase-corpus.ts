@@ -6,6 +6,7 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const FEED = 'https://aclanthology.org/D17-1126.pdf';
 const board: Leaderboard = {
   benchmark: 'twitter-url-paraphrase-corpus', static: 'paper', url: 'https://aclanthology.org/D17-1126/', feed: FEED,
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher' }, recall: { name: 'Recall', unit: 'score', better: 'higher' } },
   terms: 'ACL Anthology papers are available under their stated publication terms. https://aclanthology.org/D17-1126/',
   async fetch() {
     const paper = await pdfText(FEED);

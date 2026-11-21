@@ -12,6 +12,15 @@ const board: Leaderboard = {
   feed,
   terms: "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
   parts: { solvable: 'Solvable tasks', correctRejection: 'Correct rejection' },
+  stats: {
+    impossibleAnswered: { name: 'Impossible answered', unit: 'count' },
+    solvableRefused: { name: 'Solvable refused', unit: 'count' },
+    latency: { name: 'Time per task', unit: 'seconds', better: 'lower' },
+    uncachedInput: { name: 'Uncached input', unit: 'tokens' },
+    cachedInput: { name: 'Cached input', unit: 'tokens' },
+    output: { name: 'Output', unit: 'tokens' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+  },
   host: 'Axis Spatial',
   aliases: index.aliases,
   async fetch() {

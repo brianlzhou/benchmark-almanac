@@ -30,6 +30,11 @@ const board: Leaderboard = {
     publicAccuracy: { name: 'Public Set Accuracy', unit: '%' },
     wholeAccuracy: { name: 'Whole Set Accuracy', unit: '%' },
   },
+  stats: {
+    latencyP50: { name: 'Latency P50', unit: 'seconds', better: 'lower' },
+    latencyP95: { name: 'Latency P95', unit: 'seconds', better: 'lower' },
+    costPer1000: { name: 'Cost per 1,000 questions', unit: 'usd', better: 'lower' },
+  },
   fetch: async (): Promise<LeaderboardRow[]> => {
     const data = await fetchJson<Summary>(FEED);
     if (!Array.isArray(data.results) || data.results.length < 5) throw new Error('PWS-Decisions: baseline results missing');

@@ -10,6 +10,7 @@ const board: Leaderboard = {
  url: "https://cg-bench.github.io/leaderboard/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { publishedTableRank: { name: 'Published table rank', unit: 'count' }, llmParams: { name: 'Language model parameters', unit: 'billions' }, clueFrames: { name: 'Clue frames', unit: 'count' }, longFrames: { name: 'Long-video frames', unit: 'count' }, clueAccuracy: { name: 'Clue accuracy', unit: '%', better: 'higher' }, longAccuracy: { name: 'Long-video accuracy', unit: '%', better: 'higher' }, mIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' }, recallAtIoU: { name: 'Recall at intersection over union', unit: '%', better: 'higher' }, accuracyAtIoU: { name: 'Accuracy at intersection over union', unit: '%', better: 'higher' }, CRR: { name: 'Correct response rate', unit: '%', better: 'higher' }, openEndedAccuracy: { name: 'Open-ended accuracy', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

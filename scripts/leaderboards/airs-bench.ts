@@ -18,6 +18,10 @@ const FEED = "https://raw.githubusercontent.com/facebookresearch/airs-bench/main
 const board: Leaderboard = {
   benchmark: "airs-bench", url: "https://raw.githubusercontent.com/facebookresearch/airs-bench/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    seeds: { name: 'Seeds', unit: 'count' },
+    uncertainty: { name: 'Score uncertainty', unit: 'score' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

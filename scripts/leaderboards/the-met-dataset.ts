@@ -13,6 +13,7 @@ const board: Leaderboard = {
   static: 'paper',
   headline: 'The paper reports ACC on Met queries alongside GAP measures, so ACC is the headline score.',
   terms: PAPER_TERMS,
+  stats: { GAP: { name: 'Global average precision', unit: 'score', better: 'higher' }, 'GAP -': { name: 'Global average precision on Met queries', unit: 'score', better: 'higher' } },
   async fetch() {
     const tables = (await paperTables(await paperHtml(feed))).map(grid);
     const table = tables.find(rows => JSON.stringify(rows[0]) === '["Net","GAP","GAP -","ACC"]');

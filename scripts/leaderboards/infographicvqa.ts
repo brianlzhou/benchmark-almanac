@@ -9,6 +9,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2104.12756";
 const board: Leaderboard = {
   benchmark: "infographicvqa", static: 'paper',
+  stats: { accuracy: { name: 'Test average normalized Levenshtein similarity', unit: '%', better: 'higher' } },
   url: "https://arxiv.org/html/2104.12756",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

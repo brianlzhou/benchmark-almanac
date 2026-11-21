@@ -8,6 +8,12 @@ const board: Leaderboard = {
   benchmark: 'agentscript-eval', static: 'paper', url: feed, feed,
   terms: 'The authors publish these results on arXiv. https://arxiv.org/abs/2611.13183',
   parts: { authoring: 'Authoring', debugging: 'Debugging', optimization: 'Optimization' },
+  stats: {
+    compile: { name: 'Compile rate', unit: '%', better: 'higher' },
+    partial: { name: 'Pass rate', unit: '%', better: 'higher' },
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+    passAt3: { name: 'pass@3', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const ts = paperTables(await paperHtml(feed)).map(grid);
     function table(header: string) {

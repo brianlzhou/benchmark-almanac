@@ -9,6 +9,7 @@ const board: Leaderboard = {
  benchmark: "geneval", parts: {
   singleObject: { name: 'Single object', group: 'Task type' },
   twoObjects: { name: 'Two objects', group: 'Task type' },
+  counting: { name: 'Counting', group: 'Task type' },
   colors: { name: 'Colors', group: 'Task type' },
   position: { name: 'Position', group: 'Task type' },
   colorAttribution: { name: 'Color attribution', group: 'Task type' },

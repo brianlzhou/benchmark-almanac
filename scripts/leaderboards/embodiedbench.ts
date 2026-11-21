@@ -14,6 +14,12 @@ const board: Leaderboard = {
   benchmark: 'embodiedbench', url, feed: url + 'website/data/eb_alfred_total_benchmark.json',
   terms: 'The authors publish the board at https://embodiedbench.github.io/ and give attribution in the benchmark repository.',
   headline: 'The headline averages the four environment success rates reported by the leaderboard.',
+  parts: Object.fromEntries([
+    ['EB-ALFRED','EB-ALFRED'],['eb_alfred_base','EB-ALFRED: Base'],['eb_alfred_common','EB-ALFRED: Common'],['eb_alfred_complex','EB-ALFRED: Complex'],['eb_alfred_visual','EB-ALFRED: Visual'],['eb_alfred_spatial','EB-ALFRED: Spatial'],['eb_alfred_long','EB-ALFRED: Long horizon'],
+    ['EB-Habitat','EB-Habitat'],['eb_habitat_base','EB-Habitat: Base'],['eb_habitat_common','EB-Habitat: Common'],['eb_habitat_complex','EB-Habitat: Complex'],['eb_habitat_visual','EB-Habitat: Visual'],['eb_habitat_spatial','EB-Habitat: Spatial'],['eb_habitat_long','EB-Habitat: Long horizon'],
+    ['EB-Navigation','EB-Navigation'],['eb_nav_base','EB-Navigation: Base'],['eb_nav_common','EB-Navigation: Common'],['eb_nav_complex','EB-Navigation: Complex'],['eb_nav_visual','EB-Navigation: Visual'],['eb_nav_long','EB-Navigation: Long horizon'],
+    ['EB-Manipulation','EB-Manipulation'],['eb_mani_base','EB-Manipulation: Base'],['eb_mani_common','EB-Manipulation: Common'],['eb_mani_complex','EB-Manipulation: Complex'],['eb_mani_visual','EB-Manipulation: Visual'],['eb_mani_spatial','EB-Manipulation: Spatial'],['eb_mani_long','EB-Manipulation: Long horizon'],
+  ].map(([key,name]) => [key, { name, unit: '%' }])),
   aliases: {
     'GPT-4o-mini (snapshot unspecified)': 'gpt-4o-mini', 'Gemini-2.0-flash': 'gemini-2-0-flash-dec-2024',
     'Claude-3.5-Sonnet (snapshot unspecified)': 'claude-3-5-sonnet-october-2024',
@@ -21,7 +27,6 @@ const board: Leaderboard = {
     'Qwen2-VL-72B-Ins': 'qwen2-vl-72b-instruct', 'Qwen2-VL-7B-Ins': 'qwen2-vl-7b-instruct',
     'Qwen2.5-VL-72B-Ins': 'qwen2-5-vl-72b', 'Qwen2.5-VL-7B-Ins': 'qwen2-5-vl-7b',
   },
-  parts: {},
   async fetch() {
     const models = new Map<string, Record<string, number>>();
     for (const [file, prefix, name] of environments) {

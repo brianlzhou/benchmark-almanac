@@ -7,6 +7,7 @@ import { text } from '../lib/html.ts';
 
 const feed = "https://dosimeteraudit.org/benchmark";
 const board: Leaderboard = {
+  stats: { officialSources: { name: 'Official sources', unit: 'count' }, flagged: { name: 'Flagged claims', unit: 'count', better: 'lower' }, responses: { name: 'Responses', unit: 'count' }, unitedStatesOfficialSources: { name: 'United States official sources', unit: 'count' }, germanyOfficialSources: { name: 'Germany official sources', unit: 'count' } },
   benchmark: 'dosimeter-ai-disinformation-benchmark',
   url: "https://dosimeteraudit.org/benchmark",
   feed,

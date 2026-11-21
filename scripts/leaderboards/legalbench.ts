@@ -18,6 +18,7 @@ const board: Leaderboard = {
     'Qwen 2.5 Instruct Turbo (7B)': 'qwen2-5-7b',
     'Gemini 1.0 Pro 002': 'gemini-1-0-pro',
   },
+  stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   fetch: () => valsDetails(board, SLUG, { cost: null }),
 };
 export default board;

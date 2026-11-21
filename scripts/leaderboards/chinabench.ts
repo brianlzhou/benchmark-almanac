@@ -19,6 +19,7 @@ const board: Leaderboard = {
     culture: { name: 'Cultural Instinct', group: 'Axis' },
     party: { name: 'Communism Index', group: 'Axis' },
   },
+  stats: { pass1: { name: 'Pass at 1', unit: '%', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<{ k?: number; generated_at?: string; leaderboard?: Array<Record<string, unknown>> }>(FEED);
     if (data.k !== 3 || !data.generated_at || !Array.isArray(data.leaderboard) || data.leaderboard.length < 8) throw new Error('ChinaBench: unexpected results shape');

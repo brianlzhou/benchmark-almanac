@@ -8,6 +8,7 @@ const count = (s: string) => { const n = num(s); return n === undefined ? undefi
 const board: Leaderboard = {
   benchmark: 'atlas-finance', url: PAGE, feed: PAGE,
   terms: 'Handshake terms restrict automated extraction. Benchmark Almanac credits Handshake and links the original source.',
+  stats: { ciMargin:{name:'95% confidence interval margin',unit:'score'}, passAt3:{name:'Pass@3',unit:'%',better:'higher'}, rubric:{name:'Rubric score',unit:'%',better:'higher'} },
   chart: { title: 'Pass rate versus task cost', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Pass rate', unit: '%', better: 'higher' } },
   async fetch() {
     const t = tables(await fetchText(PAGE)).find(t => t[0]?.some(c => c.text === 'Pass Rate'));

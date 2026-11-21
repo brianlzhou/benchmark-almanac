@@ -8,6 +8,11 @@ const feed = "https://localsearchbench.github.io/#leaderboard";
 
 const board: Leaderboard = {
   benchmark: "local-search-bench-meituan",
+  stats: {
+    'Avg. tool calls': { name: 'Average tool calls', unit: 'count', better: 'lower' },
+    'Avg. rounds': { name: 'Average rounds', unit: 'count', better: 'lower' },
+    Completeness: { name: 'Completeness score', unit: '%', better: 'higher' }, Fluency: { name: 'Fluency score', unit: '%', better: 'higher' }, Faithfulness: { name: 'Faithfulness score', unit: '%', better: 'higher' }, Safety: { name: 'Safety score', unit: '%', better: 'higher' }, 'Action Relevance': { name: 'Action relevance', unit: '%', better: 'higher' }, 'Evidence Sufficiency': { name: 'Evidence sufficiency', unit: '%', better: 'higher' }, 'Causal Coherence': { name: 'Causal coherence', unit: '%', better: 'higher' }, 'Search Efficiency': { name: 'Search efficiency', unit: '%', better: 'higher' },
+  },
   url: "https://localsearchbench.github.io/#leaderboard",
   feed,
   terms: "The repository publishes the same standings under the MIT license and requests attribution to LocalSearchBench. The host has no robots.txt.",

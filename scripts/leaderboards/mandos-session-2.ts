@@ -9,6 +9,13 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/relayforge-ai/mandos/blob/main/leaderboard_session2.md",
   feed,
   terms: "Hugging Face allows crawling. RelayForge licenses published runs under CC BY 4.0. https://huggingface.co/datasets/relayforge-ai/mandos",
+  stats: {
+    passed: { name: 'Passed scenarios', unit: 'count' },
+    fail: { name: 'Failed scenarios', unit: 'count' },
+    minimum_pass: { name: 'Minimum pass', unit: 'count' },
+    full_pass: { name: 'Full pass', unit: 'count' },
+    exceptional: { name: 'Exceptional', unit: 'count' },
+  },
   aliases: {"claude-sonnet-46-or": "claude-sonnet-4-6", "deepseek-r1-or": "deepseek-r1", "kimi-cloud": "kimi-k2-6", "llama-33-70b-or": "llama-3-3-70b", "openai-gpt4o-mini": "gpt-4o-mini"},
   async fetch() {
     const data = await fetchJson<{matrix: {logical_models: string[]}; score_rates: {by_model: Record<string, Rate>}}>(feed);

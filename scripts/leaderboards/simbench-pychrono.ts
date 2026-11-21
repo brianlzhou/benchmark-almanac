@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed,
   terms: "The lab licenses the repository under BSD 3-Clause and the archived runs under CC BY 4.0. https://github.com/uwsbel/ChronoBench/blob/paper-ieee-access-2026/LICENSE https://zenodo.org/records/20974275 The feed host returns no robots.txt.",
   aliases: { "claude-4-sonnet": "claude-sonnet-4" },
+  stats: {
+    ref: { name: 'Reference score', unit: 'score', better: 'higher' },
+    doc: { name: 'Documentation score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)))
       .find(([h]) => h && ['#', 'Model', 'Ref+Doc', 'Ref', 'Doc', 'Weights'].every(c => h.includes(c)));

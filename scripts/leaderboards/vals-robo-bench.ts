@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   costPer: 'run',
+  stats: { latency: { name: 'Latency per test', unit: 'seconds', better: 'lower' }, tasks: { name: 'Tasks in run', unit: 'count' } },
   chart: {title:'Accuracy vs. whole-run API cost',note:'Estimated API cost covers all 24 tasks, not one task.',x:{key:'cost',label:'API cost for 24-task run',unit:'$',better:'lower'},y:{key:'score',label:'Accuracy',unit:'%',better:'higher'}},
   aliases: VALS_ALIASES,
   fetch: async () => (await valsRows(SLUG, { cost: 'Est. API cost' })).map(r=>({...r,metrics:{...r.metrics,...(r.cost!==undefined?{cost:r.cost}:{}),tasks:24}})),

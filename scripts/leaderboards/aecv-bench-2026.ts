@@ -14,6 +14,13 @@ const pct = (x: number) => Number((x * 100).toFixed(4));
 const board: Leaderboard = {
   benchmark: 'aecv-bench-2026', url: site + '#results', feed: site,
   terms: 'AECFoundry publishes its results at https://aecv-bench.com/#results. The authors retain their rights.',
+  stats: {
+    meanMape: { name: 'Mean absolute percentage error', unit: '%', better: 'lower', note: 'Mean absolute percentage error for object counting.' },
+    doorMape: { name: 'Door counting error', unit: '%', better: 'lower', note: 'Mean absolute percentage error for door counts.' },
+    windowMape: { name: 'Window counting error', unit: '%', better: 'lower', note: 'Mean absolute percentage error for window counts.' },
+    bedroomMape: { name: 'Bedroom counting error', unit: '%', better: 'lower', note: 'Mean absolute percentage error for bedroom counts.' },
+    toiletMape: { name: 'Toilet counting error', unit: '%', better: 'lower', note: 'Mean absolute percentage error for toilet counts.' },
+  },
   parts: {
     counting: 'Object Counting', qa: 'Document QA', door: 'Door', window: 'Window', bedroom: 'Bedroom', toilet: 'Toilet',
     spatial: 'Spatial Reasoning', ocr: 'OCR & Text', compare: 'Comparative Questions', count: 'Instance Counting',

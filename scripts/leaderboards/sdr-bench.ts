@@ -9,7 +9,7 @@ const sectors = ['Tech.', 'Mfg.', 'Energy', 'IT'];
 const board: Leaderboard = {
   benchmark: 'sdr-bench', url, feed: url,
   terms: 'Public results on the study website, which links CC BY-SA 4.0.',
-  parts: Object.fromEntries(sectors.map(s => [s, s])),
+  parts: Object.fromEntries([...sectors.map(s => [s, s]), ['Health. Emails (<$1B)', { name: 'Health emails below 1 billion dollars', group: 'Task type' }], ['Tech. Emails (>$10B)', { name: 'Tech emails above 10 billion dollars', group: 'Task type' }], ['Sales Calls', { name: 'Sales calls', group: 'Task type' }]]),
   async fetch() {
     const t = tables(await fetchText(url)).find(t => t[0]?.[1]?.text === 'SDR-Bench Success Stories');
     if (!t || ![...sectors, 'Agg.'].every((s, i) => s === t[1][i].text)) throw new Error('Missing SDR-Bench columns');

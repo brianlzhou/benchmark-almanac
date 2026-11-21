@@ -7,6 +7,7 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://arxiv.org/html/2112.12672';
 const board: Leaderboard = {
   benchmark: 'laymaker-mtsamples', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  stats:{success:{name:'Successful judgments',unit:'count'},failure:{name:'Failed judgments',unit:'count'},equal:{name:'Equal judgments',unit:'count'},neither:{name:'Neither judgments',unit:'count'},unchanged:{name:'Unchanged judgments',unit:'count'},bleu:{name:'BLEU',unit:'score',better:'higher'},sari:{name:'SARI',unit:'score',better:'higher'},g1:{name:'G1 score',unit:'%',better:'higher'},g2:{name:'G2 score',unit:'%',better:'higher'},g3:{name:'G3 score',unit:'%',better:'higher'},meaning:{name:'Meaning score',unit:'%',better:'higher'}},
   async fetch() {
     const tables = paperTables(await paperHtml(url)).map(grid);
     const main = tables.find(t => t[0].join('|') === '|S|F|E|N|U|SG');

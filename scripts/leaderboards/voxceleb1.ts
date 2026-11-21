@@ -7,6 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://www.robots.ox.ac.uk/~vgg/publications/2017/Nagrani17/nagrani17.pdf';
 const board: Leaderboard = {
   benchmark: 'voxceleb1', feed, url: feed, static: 'paper',
+  stats: { top5: { name: 'Top-5 accuracy', unit: '%', better: 'higher' } },
   terms: 'The authors publish their paper at Oxford. https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html',
   async fetch() {
     const text = await pdfText(feed);

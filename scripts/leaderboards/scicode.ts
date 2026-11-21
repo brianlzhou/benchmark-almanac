@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: 'https://scicode-bench.github.io/leaderboard/',
   feed: FEED,
   terms: 'Markdown file in the scicode-bench/scicode-bench.github.io repository, which has no license; the SciCode repository is Apache-2.0.',
+  stats: { subproblem: { name: 'Subproblem resolve rate', unit: '%', better: 'higher' }, medalRank: { name: 'Medal rank', unit: 'count', better: 'lower' } },
   aliases: {
     'OpenAI o1-preview': 'o1-preview',
     'OpenAI o1-mini': 'o1-mini',

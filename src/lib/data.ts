@@ -86,6 +86,8 @@ type Board = {
   verified?: string;
   /** The parts of the benchmark the board scores on their own, by metric key (scripts/leaderboards/types.ts). */
   parts?: Record<string, BoardPart>;
+  /** The board's other numbers for each run, with names, units and directions (scripts/leaderboards/types.ts). */
+  stats?: Record<string, { name: string; unit?: string; better?: 'higher' | 'lower'; note?: string }>;
   /** Columns that hold another of the benchmark's measures: metric key -> measure id (Benchmark.measures). */
   measures?: Record<string, string>;
   failed?: { date: string; error: string };

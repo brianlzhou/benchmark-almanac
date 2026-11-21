@@ -12,6 +12,12 @@ const board: Leaderboard = {
   host: 'MTEB',
   feed,
   terms: 'MTEB publishes the results under CC0 1.0 at https://huggingface.co/datasets/mteb/results.',
+  stats: {
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+    embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+    maxTokens: { name: 'Maximum tokens', unit: 'tokens' },
+    memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' },
+  },
   async fetch() {
     const rows = await taskScores(feed, task, 'accuracy', 194, 100);
     return checked(rows.filter(r => r.model !== 'mteb/baseline-random-encoder'), 193);

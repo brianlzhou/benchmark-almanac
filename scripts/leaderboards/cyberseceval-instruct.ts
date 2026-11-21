@@ -5,7 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/insecure_code.json";
 const board: Leaderboard = {
- benchmark: "cyberseceval-instruct", parts: {
+ benchmark: "cyberseceval-instruct", stats: { trials: { name: 'Trials', unit: 'count' }, ...Object.fromEntries(['C','C#','C++','Java','JavaScript','PHP','Python','Rust'].map(l=>[l+' trials',{name:l+' trials',unit:'count'}])) }, parts: {
   'C secure (%)': { name: 'C', group: 'Language' },
   'C# secure (%)': { name: 'C#', group: 'Language' },
   'C++ secure (%)': { name: 'C++', group: 'Language' },

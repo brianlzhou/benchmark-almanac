@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2412.19437",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' } },
   aliases: {"DeepSeek-V2-0506": "deepseek-v2-moe-236b-may-2024", "DeepSeek-V2.5-0905": "deepseek-v2-5-sep-2024", "Llama-3.1-405B-Instruct": "llama-3-1-405b", "Claude-3.5-Sonnet-1022": "claude-3-5-sonnet-october-2024", "GPT-4o-0513": "gpt-4o-may-2024", "DeepSeek-V3 (December 2024)": "deepseek-v3"},
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {

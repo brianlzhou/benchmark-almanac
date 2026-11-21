@@ -9,6 +9,24 @@ const board: Leaderboard = {
   benchmark: 'afrihate', url: feed, feed, static: 'paper',
   terms: 'CC BY 4.0. https://arxiv.org/abs/2501.08284v1',
   parts: Object.fromEntries(languages.map(lang => [lang, { name: lang, group: 'Language' }])),
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    amhAccuracy: { name: 'Amharic accuracy', unit: '%', better: 'higher' },
+    aryAccuracy: { name: 'Moroccan Arabic accuracy', unit: '%', better: 'higher' },
+    arqAccuracy: { name: 'Algerian Arabic accuracy', unit: '%', better: 'higher' },
+    hauAccuracy: { name: 'Hausa accuracy', unit: '%', better: 'higher' },
+    iboAccuracy: { name: 'Igbo accuracy', unit: '%', better: 'higher' },
+    kinAccuracy: { name: 'Kinyarwanda accuracy', unit: '%', better: 'higher' },
+    oroAccuracy: { name: 'Oromo accuracy', unit: '%', better: 'higher' },
+    pcmAccuracy: { name: 'Nigerian Pidgin accuracy', unit: '%', better: 'higher' },
+    somAccuracy: { name: 'Somali accuracy', unit: '%', better: 'higher' },
+    swaAccuracy: { name: 'Swahili accuracy', unit: '%', better: 'higher' },
+    tirAccuracy: { name: 'Tigrinya accuracy', unit: '%', better: 'higher' },
+    twiAccuracy: { name: 'Twi accuracy', unit: '%', better: 'higher' },
+    xhoAccuracy: { name: 'Xhosa accuracy', unit: '%', better: 'higher' },
+    yorAccuracy: { name: 'Yoruba accuracy', unit: '%', better: 'higher' },
+    zulAccuracy: { name: 'Zulu accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const samples = (t: string[][], offset: number) => t[0].slice(offset, -1).join() === languages.join() && t[0].at(-1)?.toLowerCase() === 'avg.';

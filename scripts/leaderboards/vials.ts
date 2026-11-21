@@ -14,6 +14,7 @@ const board: Leaderboard = {
   Other: { name: 'Other', group: 'Category' },
   'Cell Count. / Quant.': { name: 'Cell counting and quantification', group: 'Category' },
 }, url: URL, feed: URL + ' (original 161-task VIALS, Table 4 and A1)', terms: PAPER_TERMS,
+  stats: { totalTokens: { name: 'Total tokens', unit: 'tokens' }, gain: { name: 'Tool-assisted accuracy gain', unit: '%', better: 'higher', note: 'Absolute accuracy improvement from direct VLM to the tool-assisted agent.' } },
   async fetch() {
     const ts = inlinePaperTables(await paperHtml(URL));
     const t = ts.find(t => t[0]?.[2] === 'Direct VLM');

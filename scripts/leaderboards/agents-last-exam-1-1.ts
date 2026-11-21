@@ -50,6 +50,7 @@ const board: Leaderboard = {
   url: 'https://agents-last-exam.org/leaderboard',
   feed: FEED,
   terms: 'Public JSON endpoint the leaderboard page loads (robots.txt does not restrict it); the site states the dataset is CC BY 4.0 and the code Apache-2.0.',
+  stats: { latency: { name: 'Average time per run', unit: 'seconds', better: 'lower' } },
   aliases: {
     'deepseek-deepseek-v4-1-flash-1017': 'deepseek-v4-1-flash-1017',
     'kimi-3.1-pro': 'kimi-k3-1-pro',

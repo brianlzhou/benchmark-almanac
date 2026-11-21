@@ -2,7 +2,7 @@
 // Score: published application Avg.. 
 import type { Leaderboard } from './types.ts';
 import { sourceBoard, trackRows } from '../lib/boards/cflue.ts';
-const board: Leaderboard = { benchmark: "cflue-application", parts: {
+const board: Leaderboard = { benchmark: "cflue-application", stats: { 'Avg._9': { name: 'Application average', unit: '%', better: 'higher' } }, parts: {
   'Fin_MT en2zh_2': { name: 'Machine translation English to Chinese', group: 'Task type', note: 'BLEU-4 component of the application average.' },
   '-_3': { name: 'Machine translation English to Chinese (COMET)', group: 'Task type', note: 'COMET component of the application average.' },
   'Fin_MT zh2en_4': { name: 'Machine translation Chinese to English', group: 'Task type', note: 'BLEU-4 component of the application average.' },

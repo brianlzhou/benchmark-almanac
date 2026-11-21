@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'bench4hls', static: 'paper', url: feed, feed,
   terms: 'The authors publish Table II under the terms on https://arxiv.org/abs/2601.19941.',
   parts: {compilation: 'Compilation pass@1', simulation: 'Simulation pass@1'},
+  stats: { compilationPassAt5:{name:'Compilation pass@5',unit:'%',better:'higher'}, compilationPassAt10:{name:'Compilation pass@10',unit:'%',better:'higher'}, simulationPassAt5:{name:'Simulation pass@5',unit:'%',better:'higher'}, simulationPassAt10:{name:'Simulation pass@10',unit:'%',better:'higher'}, passAt5:{name:'Overall pass@5',unit:'%',better:'higher'}, passAt10:{name:'Overall pass@10',unit:'%',better:'higher'} },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.includes('Synthesis Status'));
     if (!table || [1,4,7].map(i => table[0][i]).join() !== 'Compilation Status,Simulation Status,Synthesis Status'

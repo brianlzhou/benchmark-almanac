@@ -9,6 +9,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const url = 'https://arxiv.org/html/2308.14089';
 const board: Leaderboard = {
   benchmark: 'medalign', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  stats: { winRate: {name:'Win rate',unit:'score',better:'higher',note:'Rate from 0 to 1.'}, meanRank: {name:'Mean rank',unit:'rating',better:'lower'}, contextTokens: {name:'Context length',unit:'tokens'} },
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(url));
     const main = tables.find(t => t[0].join('|') === 'Model|Context|Correct \\uparrow|WR \\uparrow|Rank \\downarrow');

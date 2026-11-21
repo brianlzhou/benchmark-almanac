@@ -11,6 +11,17 @@ const board: Leaderboard = {
   benchmark: 'videoscore-bench-2', url: feed, feed, static: 'paper',
   terms: 'arXiv terms apply to the authors’ paper. https://info.arxiv.org/help/license/index.html',
   parts: { visual: 'Visual Quality', align: 'Text Alignment', phy: 'Physical/Common-sense Consistency' },
+  stats: {
+    avg: { name: 'Average exact accuracy', unit: '%', better: 'higher' },
+    relaxedVisual: { name: 'Visual relaxed accuracy', unit: '%', better: 'higher', note: 'Accuracy where prediction and human score differ by at most one.' },
+    relaxedAlign: { name: 'Alignment relaxed accuracy', unit: '%', better: 'higher', note: 'Accuracy where prediction and human score differ by at most one.' },
+    relaxedPhy: { name: 'Physical relaxed accuracy', unit: '%', better: 'higher', note: 'Accuracy where prediction and human score differ by at most one.' },
+    relaxedAvg: { name: 'Average relaxed accuracy', unit: '%', better: 'higher', note: 'Accuracy where prediction and human score differ by at most one.' },
+    plccVisual: { name: 'Visual Pearson correlation', unit: 'score', better: 'higher' },
+    plccAlign: { name: 'Alignment Pearson correlation', unit: 'score', better: 'higher' },
+    plccPhy: { name: 'Physical Pearson correlation', unit: 'score', better: 'higher' },
+    plccAvg: { name: 'Average Pearson correlation', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0][0] === 'VideoScore-Bench-v2' &&
       keys.every((_, i) => t[0][i + 1] === ['Accuracy', 'Relaxed Accuracy', 'PLCC'][Math.floor(i / 4)] &&

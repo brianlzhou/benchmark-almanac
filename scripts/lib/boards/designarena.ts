@@ -27,6 +27,22 @@ export const DA_TERMS =
 
 const BASE = 'https://www.designarena.ai';
 
+export const DA_STATS_FULL = {
+  winRate: { name: 'Win rate', unit: '%', better: 'higher' as const },
+  battles: { name: 'Battles', unit: 'count' },
+  generationSeconds: { name: 'Generation time', unit: 'seconds', better: 'lower' as const },
+  costCount: { name: 'Priced generations', unit: 'count' },
+};
+export const DA_STATS_TIME = {
+  winRate: DA_STATS_FULL.winRate,
+  battles: DA_STATS_FULL.battles,
+  generationSeconds: DA_STATS_FULL.generationSeconds,
+};
+export const DA_STATS_BASIC = {
+  winRate: DA_STATS_FULL.winRate,
+  battles: DA_STATS_FULL.battles,
+};
+
 export interface DaBoard {
   arenaType: 'models' | 'agents' | 'builders';
   category: string;

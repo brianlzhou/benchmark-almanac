@@ -10,6 +10,23 @@ const board: Leaderboard = {
   url: "https://www.omnieda.com/routing/#leaderboard",
   feed,
   terms: "The results page gives no score reuse license. https://www.omnieda.com/routing/ The site allows crawling.",
+  stats: {
+    NRR: { name: 'Net routability rate', unit: '%', better: 'higher' },
+    PRR: { name: 'Pad-pair routability rate', unit: '%', better: 'higher' },
+    Open: { name: 'Open nets', unit: '%', better: 'lower' },
+    PShort: { name: 'Pad short nets', unit: '%', better: 'lower' },
+    NShort: { name: 'Net short nets', unit: '%', better: 'lower' },
+    Total: { name: 'Total violations', unit: 'count', better: 'lower' },
+    'Clr.': { name: 'Clearance violations', unit: 'count', better: 'lower' },
+    'Dist.': { name: 'Distance violations', unit: 'count', better: 'lower' },
+    Polygon: { name: 'Polygon outputs', unit: '%', better: 'higher', note: 'Outputs with a copper pour.' },
+    TWL: { name: 'Routed-wire centerline length', unit: 'score', better: 'lower' },
+    '#Vias': { name: 'Vias', unit: 'count' },
+    '#Layers': { name: 'Routing layers', unit: 'count' },
+    PR: { name: 'Pass rate', unit: 'score', better: 'higher', note: 'Fraction of expected inputs producing valid output.' },
+    RT: { name: 'Runtime', unit: 'seconds', better: 'lower' },
+    steps: { name: 'Steps', unit: 'count' },
+  },
   async fetch() {
     const one = await fetchText(feed);
     await new Promise(resolve=>setTimeout(resolve,1000));

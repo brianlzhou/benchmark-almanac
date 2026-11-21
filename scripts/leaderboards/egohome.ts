@@ -37,6 +37,7 @@ const board: Leaderboard = {
     y: { key: 'score', label: 'Subtask score', better: 'higher' },
     note: 'The card plots each system’s subtask score against what one hour of video costs to annotate.',
   },
+  stats: { handAction: { name: 'Hand action score', unit: 'score', better: 'higher' }, handCaption: { name: 'Hand caption score', unit: 'score', better: 'higher' }, handBox: { name: 'Hand box score', unit: 'score', better: 'higher' } },
   async fetch() {
     const md = await fetchText(FEED);
     const lines = md.split('\n');

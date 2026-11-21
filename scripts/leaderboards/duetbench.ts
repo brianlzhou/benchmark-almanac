@@ -31,5 +31,8 @@ const board: Leaderboard = {
     if (!rows.length) throw new Error('DuetBench Diagnosis scores missing');
     return rows;
   },
+  stats: {
+    cost_per_task: { name: 'Cost per task', unit: 'usd', better: 'lower' }, duration_per_task: { name: 'Duration per task', unit: 'seconds', better: 'lower' }, elo: { name: 'Elo rating', unit: 'elo', better: 'higher' }, completionRate: { name: 'Completion rate', unit: '%', better: 'higher' }, battles: { name: 'Battles', unit: 'count' }, distinctCases: { name: 'Distinct cases', unit: 'count' }, stalenessDays: { name: 'Staleness days', unit: 'count' }, uncachedInput: { name: 'Uncached input tokens', unit: 'tokens' }, cachedInput: { name: 'Cached input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, cachedTokens: { name: 'Cached tokens', unit: 'tokens' }, inputTokens: { name: 'Input tokens', unit: 'tokens' },
+  },
 };
 export default board;

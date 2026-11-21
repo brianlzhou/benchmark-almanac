@@ -26,6 +26,7 @@ const identity = (name: string) => /^(?:gpt4o|gpt4|gpt4turbo|gpt4v|gpt35turbo|ge
 
 const FEED = "https://vrbench.github.io/";
 const board: Leaderboard = {
+  stats: { counting: {name: 'Counting accuracy', unit: '%', better: 'higher'} },
   "benchmark": "vrbench",
   "url": "https://vrbench.github.io/",
   "feed": "https://vrbench.github.io/",

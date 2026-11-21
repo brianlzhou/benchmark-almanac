@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://developers.databricks.com/ai-index",
   feed,
   terms: "The publisher displays results at https://developers.databricks.com/ai-index. I could not verify reuse terms. The site allows this path in robots.txt.",
+  stats: { latency: { name: 'Average latency', unit: 'seconds', better: 'lower' }, turns: { name: 'Average turns', unit: 'count', better: 'lower' } },
   aliases: { 'Gemini Argon 4': 'gemini-4-argon' },
   chart: { title: 'Cost per Task vs Quality', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Pass rate', unit: '%' } },
   async fetch() {

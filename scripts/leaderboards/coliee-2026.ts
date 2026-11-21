@@ -21,6 +21,7 @@ const entries: Record<string, {model:string, models?:string[]}> = {
 const board: Leaderboard = {
   benchmark:'coliee-2026',url:feed,feed,harnesses:'system',
   terms:'COLIEE publishes the official results at https://coliee.org/COLIEE2026/results/task1 and credits the submitting teams.',
+  stats:{precision:{name:'Precision',unit:'%',better:'higher'},recall:{name:'Recall',unit:'%',better:'higher'}},
   async fetch() {
     const table = tables(await fetchText(feed)).find(t=>t[0]?.map(c=>c.text).join('|')==='Team|Run|F1|Precision|Recall');
     if (!table) throw new Error('Missing Task 1 result columns');

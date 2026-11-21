@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://www.codabench.org/competitions/13991",
   feed: FEED,
   terms: "No score reuse license verified. CodaBench serves a challenge to the API request. The organizers publish the final table through ACL Anthology.",
+  stats: { relaxedF1: { name: 'Relaxed F1', unit: 'score', better: 'higher', note: 'F1 with relaxed span matching, stored from 0 to 1.' } },
   async fetch() {
     const paper = await pdfText(FEED);
     const section = paper.split(/Team\s+Strict F1\s+Relaxed F1\s+System Summary/)[1]?.split('Table 7:')[0];

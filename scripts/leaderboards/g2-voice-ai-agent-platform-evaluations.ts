@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://ai.g2.com/evaluations/categories/voice",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://getbluejay.ai/robots.txt.",
+  stats:{'Task success':{name:'Task success rate',unit:'%',better:'higher'},'WER, clean':{name:'Word error rate, clean',unit:'%',better:'lower'},'Latency, median':{name:'Median latency',unit:'ms',better:'lower'},'Latency, p95':{name:'95th percentile latency',unit:'ms',better:'lower'}},
   async fetch() {
     const required = ["Platform", "Score / 100"];
     const table = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)))

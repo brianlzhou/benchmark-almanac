@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'omnilingua-audiomc', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2611.04390.',
   parts: { EN: 'English', ZH: 'Chinese', JA: 'Japanese', ES: 'Spanish', FR: 'French', RU: 'Russian', DE: 'German', IT: 'Italian', TH: 'Thai', VI: 'Vietnamese' },
+  stats: { rubric: { name: 'Rubric success', unit: '%', better: 'higher' }, ENRubric: { name: 'English rubric success', unit: '%', better: 'higher' }, ZHRubric: { name: 'Chinese rubric success', unit: '%', better: 'higher' }, JARubric: { name: 'Japanese rubric success', unit: '%', better: 'higher' }, ESRubric: { name: 'Spanish rubric success', unit: '%', better: 'higher' }, FRRubric: { name: 'French rubric success', unit: '%', better: 'higher' }, RURubric: { name: 'Russian rubric success', unit: '%', better: 'higher' }, DERubric: { name: 'German rubric success', unit: '%', better: 'higher' }, ITRubric: { name: 'Italian rubric success', unit: '%', better: 'higher' }, THRubric: { name: 'Thai rubric success', unit: '%', better: 'higher' }, VIRubric: { name: 'Vietnamese rubric success', unit: '%', better: 'higher' }, range: { name: 'Language success range', unit: '%', note: 'Difference between the maximum and minimum language instance success rates, in percentage points.' } },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const tables = paperTables(html).map(grid);

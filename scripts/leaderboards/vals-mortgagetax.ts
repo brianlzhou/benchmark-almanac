@@ -8,6 +8,7 @@ const board: Leaderboard = {
  url: "https://www.vals.ai/benchmarks/mortgage_tax",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' } },
  aliases:Object.fromEntries(Object.entries(VALS_ALIASES).filter(([k])=>k!=='GPT 4o')),
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await valsDetails(board, "mortgage_tax", {cost: null});

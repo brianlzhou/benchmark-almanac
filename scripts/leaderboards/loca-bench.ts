@@ -14,6 +14,7 @@ interface Board {
 
 const board: Leaderboard = {
   benchmark: 'loca-bench',
+  stats: { average: { name: 'Average accuracy', unit: '%', better: 'higher' } },
   parts: {
     accuracy8000: { name: '8K context', group: 'Difficulty' },
     accuracy16000: { name: '16K context', group: 'Difficulty' },

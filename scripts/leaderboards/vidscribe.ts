@@ -17,6 +17,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Noncommercial research use only. The authors say that the generated videos and scores also remain subject to provider terms. https://huggingface.co/datasets/Vicky0720/VidScribe#data-notes-and-terms",
   parts,
+  stats: { task_balanced_overall: {name: 'Task balanced overall', unit: '%', better: 'higher', note: 'Average percentage across the four VidScribe metric groups on the released half.'} },
   aliases: {
     "Seedance 2.5": "dreamina-seedance-2-5"
   },

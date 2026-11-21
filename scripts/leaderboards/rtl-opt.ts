@@ -9,6 +9,11 @@ const board: Leaderboard = {
   url: "https://github.com/ArmmyC/RTLBench/blob/main/reports/baseline_v0.1_public_rtl_benchmarks.md#rtl-opt-behavior-preserving-optimization",
   feed,
   terms: "The repository gives no explicit license for redistributing the score table. https://github.com/ArmmyC/RTLBench The feed host returns no robots.txt.",
+  stats: {
+    syntax_pass_rate: { name: 'Syntax pass rate', unit: '%', better: 'higher' }, functional_pass_rate: { name: 'Functional pass rate', unit: '%', better: 'higher' },
+    equivalence_pass_rate: { name: 'Equivalence pass rate', unit: '%', better: 'higher' }, improved_equiv_passing_tasks: { name: 'Improved equivalence passing tasks', unit: 'count' },
+    average_generic_cell_ratio_among_equiv_passing: { name: 'Average generic cell ratio', unit: 'score', better: 'higher' },
+  },
   aliases: {"qwen36-27b": "qwen3-6-27b", "qwen36-35b-a3b": "qwen-3-6-35b-a3b", "qwen25-coder-32b": "qwen2-5-coder-32b-instruct"},
   async fetch() {
     const records = parseCsv(await fetchText(feed)).filter(r => r.benchmark === "rtlopt" && r.baseline === 'baseline_v0_1');

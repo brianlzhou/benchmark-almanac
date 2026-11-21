@@ -10,6 +10,11 @@ const board: Leaderboard = {
   benchmark: 'clge', static: 'paper', url: 'https://github.com/CLUEbenchmark/CLGE', feed: FEED,
   terms: 'The CLGE repository is publicly available. The repository does not state a separate data license. https://github.com/CLUEbenchmark/CLGE',
   headline: 'The repository reports no overall CLGE score, so this is the CSL Rouge-L column published first in its baseline table.',
+  stats: {
+    rouge1: { name: 'ROUGE-1', unit: 'score', better: 'higher', note: 'Overlap of unigrams between generated and reference text.' },
+    rouge2: { name: 'ROUGE-2', unit: 'score', better: 'higher', note: 'Overlap of bigrams between generated and reference text.' },
+    bleu: { name: 'BLEU', unit: 'score', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(FEED);
     const start = text.indexOf('|         模型');

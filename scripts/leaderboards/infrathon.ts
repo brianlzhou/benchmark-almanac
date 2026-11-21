@@ -23,6 +23,7 @@ interface Results {
 const board: Leaderboard = {
   benchmark: 'infrathon', url, feed: url,
   terms: 'The authors publish Infrathon under the PolyForm Noncommercial License at https://github.com/InfrathonX/Infrathon/blob/HEAD/LICENSE.',
+  stats:{wins:{name:'Wins',unit:'count'},firstValidHours:{name:'First valid submission time',unit:'hours',better:'lower'},visibleOutputTokens:{name:'Visible output tokens',unit:'tokens'},actions:{name:'Actions',unit:'count'}},
   async fetch() {
     const page = await fetchText(url);
     const src = page.match(/<script\s+src="([^"]*data\/infrathon\.js[^"]*)"/)?.[1];

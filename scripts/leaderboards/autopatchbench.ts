@@ -12,6 +12,10 @@ const board: Leaderboard = {
  url: "https://engineering.fb.com/wp-content/uploads/2025/04/AutoPatchBench-image-2.png?w=1024",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  fuzzingPass: { name: 'Fuzzing pass rate', unit: '%', better: 'higher' },
+  patchValid: { name: 'Valid patch rate', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 return checked(await chartRows("https://engineering.fb.com/wp-content/uploads/2025/04/AutoPatchBench-image-2.png?w=1024", "915a3b857475c5677ebe1847ecd434e4b4d494cd8adf0536f4c6282d0dda576f", [

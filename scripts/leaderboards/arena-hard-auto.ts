@@ -8,6 +8,9 @@ const board: Leaderboard = {
   benchmark: 'arena-hard-auto', url: 'https://github.com/Arena-OSS/arena-hard-auto', feed: FEED,
   terms: 'The official Arena-OSS/arena-hard-auto repository publishes these archived results under its repository license.',
   aliases:{'claude-3-5-sonnet-20240620':'claude-3-5-sonnet','claude-3-5-sonnet-20241022':'claude-3-5-sonnet-october-2024','gemini-1.5-flash-api-0514':'gemini-1-5-flash-may-2024','gemini-1.5-pro-api-0514':'gemini-1-5-pro-may-2024'},
+  stats: {
+    styleControlledWinRate: { name: 'Style-controlled win rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const md = await fetchText(FEED);
     const blocks = [...md.matchAll(/```console\s*([\s\S]*?)```/g)];

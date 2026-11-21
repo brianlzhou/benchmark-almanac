@@ -11,6 +11,14 @@ const systems: Record<string, string> = { THIVLVC: 'gemini-3-flash', UppsalaNLP:
 const board: Leaderboard = {
   benchmark: 'evalatin-2026', url: 'https://circse.github.io/LT4HALA/2026/EvaLatin.html', feed,
   terms: 'The organizers publicly distribute the official ranking in the shared task repository. https://github.com/CIRCSE/LT4HALA/tree/master/2026/data_and_doc',
+  stats: {
+    poetryCLASWithoutSubtypes: { name: 'Poetry complete labeled attachment score without subtypes', unit: '%', better: 'higher' },
+    poetryLASWithSubtypes: { name: 'Poetry labeled attachment score with subtypes', unit: '%', better: 'higher' },
+    poetryLASWithoutSubtypes: { name: 'Poetry labeled attachment score without subtypes', unit: '%', better: 'higher' },
+    proseCLASWithoutSubtypes: { name: 'Prose complete labeled attachment score without subtypes', unit: '%', better: 'higher' },
+    proseLASWithSubtypes: { name: 'Prose labeled attachment score with subtypes', unit: '%', better: 'higher' },
+    proseLASWithoutSubtypes: { name: 'Prose labeled attachment score without subtypes', unit: '%', better: 'higher' },
+  },
   parts: { poetry: 'Poetry', prose: 'Prose' },
   async fetch() {
     const pdf = await pdfText(feed);

@@ -6,6 +6,7 @@ import { fetchText } from '../lib/util.ts';
 const ROOT='https://maxbittker.github.io/runebench/';
 const board:Leaderboard={benchmark:'runebench',url:ROOT,feed:ROOT+'results/skills-30m/_data.js',
  terms:'Public RuneBench results. Benchmark Almanac credits Websim and links the source.',
+ stats:{skills:{name:'Skills evaluated',unit:'count'},inputTokens:{name:'Input tokens',unit:'tokens'},pricedRuns:{name:'Priced skill runs',unit:'count'},toolCalls:{name:'Tool calls per skill',unit:'count'}},
  aliases:{'Beam 1.0 501B':'beam-1-0','Qwen3.5 35B':'qwen3-5-35b-a3b','Mistral Large 4 (open weights)':'mistral-large-4-le-chonk','Codex CLI 5.3':'gpt-5-3-codex'},
  chart:{title:'Skill performance vs cost',x:{key:'cost',label:'Mean cost per skill run',unit:'$',better:'lower',log:true},y:{key:'score',label:'Mean ln(1 + peak XP/min)',better:'higher'}},
  async fetch():Promise<LeaderboardRow[]>{

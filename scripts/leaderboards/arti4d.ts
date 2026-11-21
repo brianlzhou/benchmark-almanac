@@ -11,6 +11,11 @@ const board: Leaderboard = {
   headline: 'The paper reports no overall type accuracy, so the headline is the plain mean of accuracy on prismatic and revolute joints.',
   parts: { prismatic: 'Prismatic', revolute: 'Revolute', easyPrismatic: 'Easy prismatic', easyRevolute: 'Easy revolute',
     hardPrismatic: 'Hard prismatic', hardRevolute: 'Hard revolute' },
+  stats: {
+    prismaticAngleDegrees: { name: 'Prismatic axis-angle error', unit: 'score', better: 'lower', note: 'Axis-angle error in degrees for prismatic joints.' },
+    revoluteAngleDegrees: { name: 'Revolute axis-angle error', unit: 'score', better: 'lower', note: 'Axis-angle error in degrees for revolute joints.' },
+    revoluteDistanceMeters: { name: 'Revolute positional error', unit: 'score', better: 'lower', note: 'Positional error in meters for revolute joints.' },
+  },
   async fetch() {
     const ts = paperTables(await paperHtml(feed)).map(grid);
     const main = ts.find(t => t[0][0] === 'Method' && t[1]?.slice(-2).join() === 'Prismatic,Revolute' && t.some(r => r[0] === 'Ditto'));

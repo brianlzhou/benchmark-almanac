@@ -7,6 +7,7 @@ const FEED = "https://huggingface.co/spaces/lmsys/mt-bench/resolve/main/data/mt_
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "mt-bench",
+  stats: { judgments: { name: 'Judgments', unit: 'count' } },
   parts: {
     turn1: { name: 'Turn 1', group: 'Split' },
     turn2: { name: 'Turn 2', group: 'Split' },

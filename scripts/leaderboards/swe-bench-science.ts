@@ -3,8 +3,9 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, text, jsonAfter } from '../lib/html.ts';
 const FEED = "https://swescience.github.io/";
-const board: Leaderboard = {
-  benchmark: "swe-bench-science", parts: {
+ const board: Leaderboard = {
+  benchmark: "swe-bench-science", stats: { inputTokens: { name: 'Input tokens', unit: 'tokens' } }, parts: {
+  public: { name: 'Public', group: 'Split' }, private: { name: 'Private', group: 'Split' }, fail2Pass: { name: 'Fail to pass', group: 'Outcome' }, pass2Pass: { name: 'Pass to pass', group: 'Outcome' }, overall: { name: 'Overall', group: 'Split' },
   issue: { name: 'Issue driven', group: 'Task type' },
   expert: { name: 'Expert exploratory', group: 'Task type' },
   engineering: { name: 'Engineering', group: 'Task type' },

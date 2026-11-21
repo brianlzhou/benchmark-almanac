@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://www.asciibench.com/leaderboard",
   feed,
   terms: "The site serves HTML at robots.txt. The about page describes voting and privacy. It gives no reuse license for the drawings or scores. https://www.asciibench.com/about",
+  stats: {
+    votes: { name: 'Votes', unit: 'count', note: 'Blind human votes on the model’s ASCII art.' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Rank|Model|Score|95% CI|Votes|Win rate');
     if (!table || table.length < 14) throw new Error('Missing rated ASCII Bench models');

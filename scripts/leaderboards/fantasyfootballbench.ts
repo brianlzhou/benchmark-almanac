@@ -9,6 +9,11 @@ const board: Leaderboard = {
   url: "https://github.com/aryatschand/FantasyFootballBench/blob/main/data/simulations/simulation_20251020_174956/season_results/final_standings_2024.csv",
   feed: FEED,
   terms: "The repository identifies SportsData.io as the source of proprietary NFL data. https://github.com/aryatschand/FantasyFootballBench GitHub requests a one-second crawl delay.",
+  stats: {
+    losses: { name: 'Losses', unit: 'count', better: 'lower' },
+    ties: { name: 'Ties', unit: 'count' },
+    pointsFor: { name: 'Points for', unit: 'count', better: 'higher' },
+  },
   async fetch() {
     const records = parseCsv(await fetchText(FEED));
     if (records.length < 10) throw new Error('Expected ten fantasy football teams');

@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed: `${EVALPLUS_FEED} (pass@1 mbpp)`,
   terms: EVALPLUS_TERMS,
   aliases: EVALPLUS_ALIASES,
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   fetch: async () => (await evalplusRows('mbpp')).map((r) => ({ ...r, setting: ['EvalPlus subset, original tests', r.setting].filter(Boolean).join(', ') })),
 };
 export default board;

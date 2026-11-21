@@ -8,6 +8,7 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-checkers',
+  stats: { tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' }, costPerTurn: { name: 'Average cost per turn in USD', unit: 'usd', better: 'lower' }, costPerTurnUnspecifiedUnit: { name: 'Average cost per turn in unspecified units', unit: 'score', better: 'lower', note: 'The source does not state the currency unit.' } },
   url: 'https://www.kaggle.com/benchmarks/kaggle/checkers',
   feed: kaggleFeed('kaggle', 'checkers'),
   terms: KAGGLE_TERMS,

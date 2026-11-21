@@ -34,6 +34,15 @@ const board: Leaderboard = {
   url: "https://markovic.com/swedish_benchmark_V1.1.html",
   feed,
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
+  stats: {
+    rawTaskScore: { name: 'Raw task score', unit: 'score', better: 'higher', note: 'Raw task quality score from 0 to 1 before latency adjustment.' },
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    examples: { name: 'Examples', unit: 'count' },
+    correct: { name: 'Correct predictions', unit: 'count' },
+    validPredictions: { name: 'Valid predictions', unit: 'count' },
+    validRate: { name: 'Valid prediction rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     return swedishTask(feed, 'new_synonym_benchmark', 23);
   },

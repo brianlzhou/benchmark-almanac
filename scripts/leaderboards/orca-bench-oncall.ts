@@ -14,6 +14,10 @@ const board: Leaderboard = {
   terms: 'Apache License 2.0. https://github.com/ORCA-bench/ORCA-bench/blob/main/LICENSE',
   headline: 'RCA Accuracy (Medium) on incident tasks, the official leaderboard ranking metric.',
   parts: { medium: 'RCA Accuracy (Medium)', hard: 'RCA Accuracy (Hard)' }, reference: ['Terminus 2'],
+  stats: {
+    hallucinationRate: { name: 'Hallucination rate', unit: '%', better: 'lower', note: 'Incident reports that name a root cause matching none of the plausible causes.' },
+    wholeRunTokens: { name: 'Total tokens', unit: 'tokens' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const file of await fetchJson<Entry[]>(feed)) {

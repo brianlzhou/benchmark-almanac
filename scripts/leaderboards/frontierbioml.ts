@@ -28,6 +28,7 @@ const board: Leaderboard = {
   url: SITE,
   feed: `${FEED} (window.FBML_DATA, every run)`,
   terms: 'The site states no terms of use and has no robots.txt. It names data/data.js as the source of its raw scores.',
+  stats: { failed: { name: 'Failed runs', unit: 'count' }, refused: { name: 'Refused runs', unit: 'count' }, medianCost: { name: 'Median run cost', unit: 'usd', better: 'lower' } },
   chart: {
     title: 'Score against time',
     x: { key: 'minutes', label: 'Median agent minutes per run', unit: 'minutes', better: 'lower' },

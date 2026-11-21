@@ -16,6 +16,15 @@ const parts = {
 const names = ['Generalization', 'Data Eff.', 'Rep. Learn.', 'Cont. Learn.', 'Causality', 'Robust. & Rel.', 'Privacy', 'Fair. & Bias'];
 const board: Leaderboard = {
   benchmark: 'fml-bench', static: 'paper', url: feed, feed, parts,
+  stats: {
+    explorationDiversity: { name: 'Exploration diversity', unit: 'count', better: 'higher' },
+    stepSuccessRate: { name: 'Step success rate', unit: 'score', better: 'higher', note: 'Rate stored from 0 to 1.' },
+    stepCompletionRate: { name: 'Step completion rate', unit: 'score', better: 'higher', note: 'Rate stored from 0 to 1.' },
+    totalTokens: { name: 'Total tokens', unit: 'millions', better: 'lower' },
+    tokensPerStep: { name: 'Tokens per step', unit: 'millions', better: 'lower' },
+    totalHours: { name: 'Total time', unit: 'hours', better: 'lower' },
+    minutesPerStep: { name: 'Time per step', unit: 'minutes', better: 'lower' },
+  },
   headline: 'The paper reports no overall score. The headline shows Generalization, the first task in Table 2.',
   terms: 'The authors publish this paper on arXiv under the terms at https://arxiv.org/abs/2510.10472.',
   aliases: { 'Opus-4.1': 'claude-opus-4-1', 'G2.5-Pro': 'gemini-2-5-pro-jun-2025' },

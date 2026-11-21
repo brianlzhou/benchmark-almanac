@@ -11,6 +11,7 @@ const feed='https://huggingface.co/datasets/la-leaderboard/results';
 const board:Leaderboard={
   benchmark:'eusreading',url:'https://huggingface.co/spaces/la-leaderboard/la-leaderboard',feed,host:'La Leaderboard',
   terms:'The results dataset uses Apache 2.0. '+feed,
+  stats:{evaluationSeconds:{name:'Evaluation time',unit:'seconds',better:'lower'},energyKwh:{name:'Energy use',unit:'count',better:'lower',note:'Energy use in kilowatt-hours.'},co2Kg:{name:'Carbon emissions',unit:'count',better:'lower',note:'Carbon emissions in kilograms.'}},
   aliases:{ 'HuggingFaceTB/SmolLM2-1.7B':'smollm2-1-7b','HuggingFaceTB/SmolLM2-1.7B-Instruct':'smollm2-1-7b-instruct',
     '01-ai/Yi-1.5-9B-Chat':'yi-1-5-9b-chat','Qwen/Qwen3-8B-Base':'qwen3-8b-base','Qwen/Qwen2.5-1.5B':'qwen2-5-1-5b',
     'Qwen/Qwen2.5-3B':'qwen2-5-3b','deepseek-ai/DeepSeek-R1-Distill-Qwen-7B':'deepseek-r1-distill-qwen-7b',

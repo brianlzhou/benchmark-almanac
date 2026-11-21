@@ -14,6 +14,16 @@ const board: Leaderboard = {
   terms: 'The authors publish FoamBench V2 results and request attribution. https://nithinsomu.github.io/cfdllmbench_v2/#data',
   aliases: { 'Opus 5.5': 'claude-opus-5-5', 'Llama 4 Maverick 17B Instruct': 'llama-4-maverick' },
   parts: { basic: 'Basic', advanced: 'Advanced' },
+  stats: {
+    basic_M_exec: { name: 'Basic execution score', unit: '%', better: 'higher' },
+    basic_M_struct: { name: 'Basic structural score', unit: '%', better: 'higher' },
+    basic_M_file: { name: 'Basic file score', unit: '%', better: 'higher' },
+    basic_M_NMSE: { name: 'Basic normalized mean squared error', unit: '%', better: 'lower' },
+    advanced_M_exec: { name: 'Advanced execution score', unit: '%', better: 'higher' },
+    advanced_M_struct: { name: 'Advanced structural score', unit: '%', better: 'higher' },
+    advanced_M_file: { name: 'Advanced file score', unit: '%', better: 'higher' },
+    advanced_M_NMSE: { name: 'Advanced normalized mean squared error', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const block = html.match(/<script type="application\/json" id="bench-data">([\s\S]*?)<\/script>/);

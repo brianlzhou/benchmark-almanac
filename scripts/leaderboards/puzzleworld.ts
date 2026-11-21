@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: "puzzleworld", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2506.06211." ,
   parts: {"textAcc": "Text answer accuracy", "textStep": "Text stepwise accuracy", "visualAcc": "Visual answer accuracy", "visualStep": "Visual stepwise accuracy", "structuredAcc": "Structured answer accuracy", "structuredStep": "Structured stepwise accuracy"},
+  stats: { stepwiseAccuracy: { name: 'Overall stepwise accuracy', unit: '%', better: 'higher' } },
   aliases: {"GPT-o3": "o3"},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

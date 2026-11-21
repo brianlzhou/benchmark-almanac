@@ -15,6 +15,7 @@ const board: Leaderboard = {
   headline: 'The board ranks policies separately for each robot. The headline is the Franka Open track rating, which the board shows first.',
   parts: { frankaOpen: 'Franka Open', frankaFine: { name: 'Franka Fine-tune: Full success', unit: '%' },
     frankaProgress: { name: 'Franka Fine-tune: Progress', unit: '%' } },
+  stats: { wins: { name: 'Wins', unit: 'count' }, losses: { name: 'Losses', unit: 'count' }, ties: { name: 'Ties', unit: 'count' }, fineTrials: { name: 'Fine-tune trials', unit: 'count' } },
   async fetch() {
     const { board: ratings } = await fetchJson<{board: Rating[]}>(feed);
     const { board: fine } = await fetchJson<{board: Fine[]}>(url + 'api/leaderboard?track=fine-tuning');

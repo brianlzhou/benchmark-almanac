@@ -12,6 +12,7 @@ const board: Leaderboard = {
    staticRetention: { name: 'Static retention', group: 'Dimension' },
  },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { videoSuccess: { name: 'Video success', unit: '%', better: 'higher' }, visualSimilarity: { name: 'Visual similarity', unit: 'score', better: 'higher' }, spatioTemporalIoU: { name: 'Spatiotemporal IoU', unit: '%', better: 'higher' } },
 
  async fetch() {
 const t=tables(await fetchText(FEED))[0]; if(!t?.[0]?.some(c=>c.text==='Harness'))throw new Error('Missing main table');

@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    finalIoU: { name: 'Final intersection over union', unit: 'score', better: 'higher', note: 'Final intersection over union, stored from 0 to 1.' },
+    steps: { name: 'Steps per task', unit: 'count', better: 'lower' },
+  },
   chart: {title:'Cost and performance',x:{key:'cost',label:'Mean API cost',unit:'$',better:'lower',log:true},y:{key:'score',label:'Success rate',unit:'%',better:'higher'},note:'Full 100-task paper estimates at published uncached prices; internal agent workflows included.'},
   async fetch() {
     const paper = await fetchJson<any>(FEED);

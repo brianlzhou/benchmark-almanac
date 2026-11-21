@@ -21,6 +21,10 @@ const readFrame = `
 const board: Leaderboard = {
   benchmark: 'metabench', url, feed, parts,
   aliases: { 'mistralai/Mixtral-8x22B-Instruct-v0.1': 'mixtral-8x22b' },
+  stats: {
+    rawAverage: { name: 'Raw average', unit: 'score', better: 'higher', note: 'Unadjusted average score reconstructed from the selected benchmark questions.' },
+    originalLeaderboard: { name: 'Original leaderboard score', unit: 'score', better: 'higher', note: 'Original Open LLM Leaderboard score reported for the model.' },
+  },
   terms: 'The authors publish the fitted results under CC BY-NC-SA 4.0 at https://github.com/adkipnis/metabench/blob/main/LICENSE.',
   async fetch() {
     const bytes = Buffer.from(await fetchBytes(feed));

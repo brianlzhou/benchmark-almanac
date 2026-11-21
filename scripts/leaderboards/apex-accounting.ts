@@ -8,6 +8,9 @@ const board: Leaderboard = {
  benchmark: 'apex-accounting', measures: { passAt1: 'pass-1' }, url: PAGE, feed: `${PAGE} (__NEXT_DATA__.props.pageProps.leaderboard.rows)`,
  chart: {title: 'Cost vs. Performance', x: {key: 'costPerRun', label: 'Source cost per run', unit: '$', better: 'lower'}, y: {key: 'score', label: 'Mean score', unit: '%', better: 'higher'}, note: 'Mercor costPerRun values are preserved without assuming a per-task denominator.'},
  terms: 'Mercor terms prohibit scraping; the almanac credits Mercor and links the original source.',
+ stats: {
+  tokensPerRun: { name: 'Tokens per run', unit: 'tokens' },
+ },
  aliases: {'Muse Wonder 1.0': 'muse-wonder'},
  async fetch() {
   const html = await fetchText(PAGE);

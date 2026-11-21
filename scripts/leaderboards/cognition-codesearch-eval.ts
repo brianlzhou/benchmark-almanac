@@ -14,6 +14,11 @@ const board: Leaderboard = {
   feed: `${IMAGE} (transcribed 2026-11-20)`,
   terms: 'Cognition publishes this results table in its article. Attribution and source licensing apply.',
   static: 'paper',
+  stats: {
+    f05Lines: { name: 'Line F0.5', unit: 'score', better: 'higher' },
+    outputTokensPerSecond: { name: 'Output tokens per second', unit: 'tokens/s', better: 'higher' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return checked(await chartRows(IMAGE, 'b3d48f4ce160c02942267f9242b3f82c8cc10820c4e8ae4d8efd0595ed5f7635', [
       { model: 'SWE-grep', score: 0.66, metrics: { f05Lines: 0.44, outputTokensPerSecond: 2858, latency: 2.79 } },

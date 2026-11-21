@@ -6,6 +6,7 @@ import { tables } from '../lib/html.ts';
 
 const FEED = "https://dosimeteraudit.org/research/election-day-ai-poisoning-germany";
 const board: Leaderboard = {
+  stats: { stateOrPravdaCount: { name: 'State or Pravda sources', unit: 'count', better: 'lower' }, linked: { name: 'Linked claims', unit: 'count' }, official: { name: 'Official claims', unit: 'count' }, withoutCitations: { name: 'Claims without citations', unit: 'count', better: 'lower' }, combined: { name: 'Combined sources', unit: 'count' }, meanCitations: { name: 'Mean citations', unit: 'count', better: 'higher' }, distinctDomains: { name: 'Distinct domains', unit: 'count' } },
   benchmark: "dosimeter-german-election-day-2026",
   url: "https://dosimeteraudit.org/research/election-day-ai-poisoning-germany",
   feed: FEED,

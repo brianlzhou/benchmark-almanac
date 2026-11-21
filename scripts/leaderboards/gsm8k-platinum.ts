@@ -8,6 +8,7 @@ const FEED = PAGE + 'errors/errors_gsm8k_full.json';
 const board: Leaderboard = {
   benchmark: 'gsm8k-platinum', url: PAGE, feed: FEED,
   terms: 'MIT publishes the result inspector publicly. Source licenses apply. The Almanac credits and links the source.',
+  stats: { errors: { name: 'Errors', unit: 'count' }, questions: { name: 'Questions', unit: 'count' } },
   aliases: {
     'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024',
     'gemini-2.0-flash-thinking-01-21': 'gemini-2-0-flash-thinking-jan-2025',

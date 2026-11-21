@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'ai-battle-arena', url, feed,
   terms: "The project repository uses the MIT License. The site's robots.txt URL returns HTML.",
   parts: {},
+  stats: { arenaElo: { name: 'Arena Elo', unit: 'elo', better: 'higher' }, holdem_tournament: { name: 'Holdem tournament Elo', unit: 'elo', better: 'higher' }, match_tournament: { name: 'Match tournament Elo', unit: 'elo', better: 'higher' }, blackjack: { name: 'Blackjack score', unit: 'score', better: 'higher' }, leduc: { name: 'Leduc Elo', unit: 'elo', better: 'higher' }, blotto: { name: 'Blotto Elo', unit: 'elo', better: 'higher' }, connect4: { name: 'Connect Four Elo', unit: 'elo', better: 'higher' }, gomoku: { name: 'Gomoku Elo', unit: 'elo', better: 'higher' } },
   async fetch() {
     const page = await fetchText(feed);
     const rows = [...page.matchAll(/<tr data-score='([\d.]+)' data-elo='([\d.]+)'>([\s\S]*?)<\/tr>/g)].map(m => {

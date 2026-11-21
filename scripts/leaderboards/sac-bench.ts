@@ -9,6 +9,14 @@ const board: Leaderboard = {
   headline: 'The paper reports no overall score. The headline is recording-level balanced accuracy on Event Presence.',
   aliases: {'Qwen3-Omni': 'qwen3-omni-30b-a3b'},
   parts: {presence: 'Event Presence (balanced accuracy)', identity: 'Event Identity (accuracy)', order: 'Temporal Order (accuracy)'},
+  stats: {
+    presenceGap: {name: 'Event Presence conflict gap', unit: '%', better: 'lower', note: 'Percentage-point gap between compatible and conflict conditions.'},
+    presenceSFR: {name: 'Event Presence speech-following rate', unit: '%'},
+    identityGap: {name: 'Event Identity conflict gap', unit: '%', better: 'lower', note: 'Percentage-point gap between compatible and conflict conditions.'},
+    identitySFR: {name: 'Event Identity speech-following rate', unit: '%'},
+    orderGap: {name: 'Temporal Order conflict gap', unit: '%', better: 'lower', note: 'Percentage-point gap between compatible and conflict conditions.'},
+    orderSFR: {name: 'Temporal Order speech-following rate', unit: '%'},
+  },
   terms: 'The authors publish their results under the terms linked at https://arxiv.org/abs/2611.00325.',
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0].join('|') === 'Model|Audio-only|Compatible|Conflict|Gap|SFR');

@@ -14,6 +14,7 @@ const URL = 'https://swtbench.com/';
 
 const board: Leaderboard = {
   benchmark: 'swt-bench',
+  stats: { coverageDelta: { name: 'Coverage delta', unit: 'score', better: 'higher', note: 'Change in test coverage after applying the patch.' } },
   url: URL,
   feed: `${URL} (default Lite table, Unit Test and Script modes, S)`,
   terms: 'Static public page; the site content is CC BY-SA 4.0 and robots.txt is absent.',

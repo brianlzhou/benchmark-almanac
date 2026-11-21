@@ -31,6 +31,13 @@ const board: Leaderboard = {
   "feed": "https://maveryn.github.io/cti-bench/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    rcmAccuracy: { name: 'CWE root-cause mapping accuracy', unit: '%', better: 'higher' },
+    vspMeanAbsoluteDeviation: { name: 'CVSS vector prediction mean absolute deviation', unit: 'score', better: 'lower' },
+    ateMacroF1: { name: 'ATT&CK technique extraction macro F1', unit: 'score', better: 'higher', note: 'Macro F1 from 0 to 1.' },
+    taaCorrect: { name: 'Threat actor attribution correct accuracy', unit: '%', better: 'higher' },
+    taaPlausible: { name: 'Threat actor attribution plausible accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const data = tables(source).map(t => t.map(r => r.map(c => c.text)));

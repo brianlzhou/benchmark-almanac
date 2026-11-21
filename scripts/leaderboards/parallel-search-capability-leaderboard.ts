@@ -48,6 +48,10 @@ const board: Leaderboard = {
   url: URL,
   feed: FEED,
   terms: TERMS,
+  stats: {
+    latency: { name: 'Response time', unit: 'seconds', better: 'lower' },
+    withoutSearch: { name: 'Score without search', unit: 'score', better: 'higher' },
+  },
   chart: {
     title: 'Search Intelligence versus search lift',
     x: { key: 'lift', label: 'Lift from search', unit: 'score', better: 'higher' },

@@ -14,6 +14,7 @@ const board: Leaderboard = {
   terms: 'The authors publish this paper and code publicly. Cite the Recipe1M authors and follow the source terms. http://pic2recipe.csail.mit.edu/',
   headline: 'The paper reports no overall score, so this is the im2recipe R@1 column, which it presents first.',
   parts: { im2recipeR1: 'im2recipe R@1', recipe2imR1: 'recipe2im R@1' },
+  stats: { im2recipeR5: { name: 'im2recipe R@5', unit: '%', better: 'higher' }, im2recipeR10: { name: 'im2recipe R@10', unit: '%', better: 'higher' }, im2recipeMedianRank: { name: 'im2recipe median rank', unit: 'count', better: 'lower' }, recipe2imR5: { name: 'recipe2im R@5', unit: '%', better: 'higher' }, recipe2imR10: { name: 'recipe2im R@10', unit: '%', better: 'higher' }, recipe2imMedianRank: { name: 'recipe2im median rank', unit: 'count', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const paper = await pdfText(FEED);
     const table = paper.match(/random ranking[\s\S]*?joint emb\. \+ semantic[\s\S]*?Table 2:/)?.[0];

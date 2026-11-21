@@ -9,6 +9,18 @@ const board: Leaderboard = {
  url: "https://nju-link.github.io/CoVEBench/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+  IFS: { name: 'Instruction following score', unit: '%', better: 'higher' },
+  VRS: { name: 'Video realism score', unit: '%', better: 'higher' },
+  VQR: { name: 'Comprehensive quality', unit: 'score', better: 'higher' },
+  AES: { name: 'Aesthetics', unit: 'score', better: 'higher' },
+  MSM: { name: 'Motion smoothness', unit: 'score', better: 'higher' },
+  TQ: { name: 'Technical quality', unit: 'score', better: 'higher' },
+  SEM: { name: 'Semantic consistency', unit: '%', better: 'higher' },
+  SSIM: { name: 'Structural fidelity', unit: 'score', better: 'higher' },
+  MF: { name: 'Motion fidelity', unit: 'score', better: 'higher' },
+  SRC: { name: 'Static region consistency', unit: 'score', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

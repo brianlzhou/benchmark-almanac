@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.llm-soccerarena.com/bundesliga",
   feed: FEED,
   terms: "The repository uses the MIT license. I found no separate license for reusing published scores. https://github.com/jonas-srd/world_cup_LLM_rank/blob/main/LICENSE The site's robots.txt publishes content signals.",
+  stats:{exact:{name:'Exact score forecasts',unit:'count',better:'higher'},pending:{name:'Pending forecasts',unit:'count'}},
   aliases: { 'Mistral Large 2512': 'mistral-large-3' },
   async fetch() {
     const standings = jsonAfter<Standing[]>(nextFlight(await fetchText(FEED)), '"competition":"bundesliga","locale":"en","leaderboard":');

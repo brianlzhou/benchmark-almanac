@@ -24,6 +24,9 @@ const board: Leaderboard = {
   url: "https://agi-eval-official.github.io/amemgym",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    UB: { name: 'Upper bound', unit: '%', better: 'higher', note: 'Upper-bound baseline score reported by the benchmark.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const page=await fetchText(FEED);const src=page.match(/src="([^" ]*assets\/index-[^" ]+\.js)"/);if(!src)throw new Error('AMemGym bundle missing');await new Promise(r=>setTimeout(r,1100));const s=await fetchText(new URL(src[1],FEED+'/').href);

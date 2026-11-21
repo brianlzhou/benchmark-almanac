@@ -11,6 +11,14 @@ const board: Leaderboard = {
   feed,
   terms: "The leaderboard Space carries the Apache 2.0 license. robots.txt allows the feed path.",
   host: "TuRTLe",
+  stats: {
+    'Syntax (STX)': { name: 'Syntax', unit: '%', better: 'higher' },
+    'Functionality (FNC)': { name: 'Functionality', unit: '%', better: 'higher' },
+    'Synthesis (SYN)': { name: 'Synthesis', unit: '%', better: 'higher' },
+    Power: { name: 'Power score', unit: '%', better: 'higher' },
+    Performance: { name: 'Performance score', unit: '%', better: 'higher' },
+    Area: { name: 'Area score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     return turtleColumns(feed, 'VerilogEval S2R', 'Functionality (FNC)', 45);
   },

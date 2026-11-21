@@ -8,6 +8,12 @@ import { fetchText } from '../lib/util.ts';
 const PAGE = 'https://cua.ai/cuabench/leaderboard';
 const board: Leaderboard = {
   benchmark: 'cua-bench-eda-kicad', url: PAGE, feed: PAGE,
+  stats: {
+    fullPass: { name: 'Full passes', unit: 'count', better: 'higher' },
+    partialPass: { name: 'Partial passes', unit: 'count', better: 'higher' },
+    tasks: { name: 'Tasks', unit: 'count' },
+    meanReward: { name: 'Mean reward', unit: 'score', better: 'higher' },
+  },
   terms: 'Cua allows this page in robots.txt. Its terms at https://cua.ai/terms-of-service give no separate score license.',
   async fetch() {
     const table = tables(await fetchText(PAGE)).find(t => t[0].some(c => c.text === 'Mean reward'));

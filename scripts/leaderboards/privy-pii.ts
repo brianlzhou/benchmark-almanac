@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The site allows crawling. PII Arena licenses its original publication material under MIT. https://github.com/Quakeer444/pii-arena/blob/main/README.md",
   host: 'PII Arena',
+  stats: { anyOverlap: { name: 'Any overlap', unit: '%', better: 'higher' }, extraMasking: { name: 'Extra masking', unit: '%', better: 'lower' }, charF1: { name: 'Character F1', unit: 'score', better: 'higher' } },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Detector|Family|Fully hidden ↑|Detected / any overlap ↑|Extra masking ↓|Char F1 ↑');
     if (!table || table.length < 41) throw new Error('Missing Privy detector results');

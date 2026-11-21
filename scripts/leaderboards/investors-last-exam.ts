@@ -8,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/Prophetlab/Investor-Last-Exam/HE
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "investors-last-exam",
+  stats: { 'Cumulative return': { name: 'Cumulative return percentage', unit: '%', better: 'higher' }, 'Excess vs. always long (pp)': { name: 'Excess versus always long', unit: '%', better: 'higher' }, 'Maximum drawdown': { name: 'Maximum drawdown percentage', unit: '%', better: 'lower' } },
   parts: {
     'Forecast & Model': { name: 'Forecast and model', group: 'Dimension' },
     'Realized forecast outcomes': { name: 'Realized forecast outcomes', group: 'Dimension', note: 'Task-normalized credit on point, interval, probability, and market-outcome criteria, averaged over applicable tasks.' },

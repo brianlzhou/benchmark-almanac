@@ -13,6 +13,12 @@ const board: Leaderboard = {
     l2: { name: 'Level 2', group: 'Difficulty' },
     l3: { name: 'Level 3', group: 'Difficulty' },
   },
+  stats: {
+    utility: { name: 'Utility', unit: 'score', better: 'higher' },
+    costPenalty: { name: 'Cost penalty', unit: 'score', better: 'lower' },
+    resolved: { name: 'Resolved tasks', unit: 'count' },
+    belowZero: { name: 'Tasks below zero', unit: 'count' },
+  },
   url: "https://arxiv.org/html/2610.22350",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

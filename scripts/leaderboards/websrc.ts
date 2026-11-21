@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://x-lance.github.io/WebSRC/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at x-lance.github.io; retain source attribution and follow the upstream terms.",
+  stats: { F1: {name: 'F1 score', unit: '%', better: 'higher'}, POS: {name: 'Point-of-sale accuracy', unit: '%', better: 'higher'} },
   aliases: {},
   
   async fetch() {

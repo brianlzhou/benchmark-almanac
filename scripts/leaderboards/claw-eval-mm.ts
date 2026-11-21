@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed: `${CLAW_FEED} (multimodalModels avg_score)`,
   terms: CLAW_TERMS,
   aliases: CLAW_ALIASES,
+  stats: { pass3: { name: 'Pass at 3', unit: '%', better: 'higher' }, passAt3: { name: 'Pass at 3 coverage', unit: '%', better: 'higher' }, completion: { name: 'Completion', unit: '%', better: 'higher' }, robustness: { name: 'Robustness', unit: '%', better: 'higher' }, safety: { name: 'Safety', unit: '%', better: 'higher' } },
   fetch: () => clawRows('multimodal', 'avg_score', 100, true),
 };
 export default board;

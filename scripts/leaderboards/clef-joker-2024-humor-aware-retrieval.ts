@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://ceur-ws.org/Vol-3740/paper-165.pdf#page=7",
   feed: FEED,
   terms: "The authors publish this results table under CC BY 4.0. https://ceur-ws.org/Vol-3740/paper-165.pdf#page=1 CEUR-WS robots.txt permits the published volume.",
+  stats: Object.fromEntries(columns.map(key => [key, { name: ({map:'Mean average precision',ndcg:'Normalized discounted cumulative gain',R5:'Recall at 5',R10:'Recall at 10',R100:'Recall at 100',R1000:'Recall at 1000',bpref:'Binary preference',MRR:'Mean reciprocal rank',P1:'Precision at 1',P5:'Precision at 5',P10:'Precision at 10'} as Record<string,string>)[key], unit: 'score', better: 'higher' }])),
   async fetch() {
     const paper = await pdfText(FEED);
     const section = paper.split("Results on the test data. (Boldface indicates the best result per metric.)")[1]?.split("4. Results")[0];

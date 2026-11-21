@@ -20,6 +20,10 @@ const board: Leaderboard = {
   url: 'https://github.com/vectara/hallucination-leaderboard/tree/hhem-2.3-old-dataset',
   feed: `${FEED} (Hallucination Rate)`,
   terms: 'README table on a branch of the vectara/hallucination-leaderboard repository, licensed Apache-2.0.',
+  stats: {
+    answerRate: { name: 'Answer rate', unit: '%', better: 'higher' },
+    summaryWords: { name: 'Average summary length', unit: 'count' },
+  },
   // instruct and chat checkpoints map to the registry's one record per family
   aliases: {
     'Gemini-2.0-Flash-001': 'gemini-2-0-flash-feb-2025',

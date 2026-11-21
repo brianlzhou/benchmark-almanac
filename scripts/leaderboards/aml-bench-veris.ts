@@ -13,6 +13,11 @@ const board: Leaderboard = {
   feed,
   terms: "Veris reserves all rights. Its dataset metadata points to https://veris.ai/terms-and-conditions. I found no public board reuse grant. Robots.txt allows the leaderboard path.",
   parts: { singleTurn: 'Single-turn', multiTurn: 'Multi-turn' },
+  stats: {
+    pass3: { name: 'Pass cubed', unit: '%', better: 'higher', note: 'Pass³ success rate reported by the benchmark.' },
+    askedOnMultiTurn: { name: 'Asked on multi-turn', unit: 'count' },
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.[0]?.text === 'Agent');
     const labels = ['Agent','pass@1','95% CI','pass³','Single-turn','Multi-turn','Asked on multi-turn','$/task','Harness'];

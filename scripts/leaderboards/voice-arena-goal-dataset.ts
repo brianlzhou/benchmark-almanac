@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: 'voice-arena-goal-dataset', static: 'paper', url: 'https://huggingface.co/datasets/VoiceArena/Goal-Dataset_en_in', feed: FEED,
   terms: 'The dataset card is released under its stated Hugging Face terms and cites the Voice Arena paper. https://huggingface.co/datasets/VoiceArena/Goal-Dataset_en_in',
   headline: 'The paper reports Task and Humanness accuracy, so this headline uses the Task column.',
+  stats: { humanness: {name: 'Humanness accuracy', unit: '%', better: 'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(FEED);
     const section = text.split('Pairwise accuracy (%) on pairs with a majority label')[1]?.split('## Notes')[0];

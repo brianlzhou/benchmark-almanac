@@ -12,6 +12,11 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    Pass: { name: 'Passed tasks', unit: 'count' },
+    Refusals: { name: 'Refused tasks', unit: 'count' },
+    'Other non-responses': { name: 'Other non-responses count', unit: 'count' },
+  },
   
   async fetch() {
     const out: LeaderboardRow[] = [];

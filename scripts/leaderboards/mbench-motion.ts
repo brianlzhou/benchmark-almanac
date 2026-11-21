@@ -7,6 +7,9 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/wruisi/MBench_leaderboard",
   feed: "https://huggingface.co/api/spaces/wruisi/MBench_leaderboard/tree/main/eval_results",
   terms: "The Space card lists cc without a specific Creative Commons license. https://huggingface.co/spaces/wruisi/MBench_leaderboard/blob/main/README.md The public Hub files are readable. Hugging Face allows the feed in robots.txt.",
+  stats: {
+    motion_condition_consistency: { name: 'Motion condition consistency', unit: 'score', better: 'higher', note: 'Score from 0 to 1.' }, jitter_degree: { name: 'Jitter degree', unit: 'score', better: 'lower' }, dynamic_degree: { name: 'Dynamic degree', unit: 'score', better: 'higher' }, foot_floating: { name: 'Foot floating', unit: 'score', better: 'lower' }, foot_sliding: { name: 'Foot sliding', unit: 'score', better: 'lower' }, body_penetration: { name: 'Body penetration', unit: 'score', better: 'lower' }, pose_quality: { name: 'Pose quality', unit: 'score', better: 'higher' }, ground_penetration: { name: 'Ground penetration', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const files: {path:string,type:string}[] = JSON.parse(await fetchText(this.feed));
     const rows = [];

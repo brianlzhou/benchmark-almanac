@@ -20,6 +20,7 @@ const board: Leaderboard = {
     cer:{name:'Character error rate',unit:'%',better:'lower'},htr:{name:'Hallucination trigger rate',unit:'%',better:'lower'},
     ahl:{name:'Average hallucination length',unit:'score',better:'lower',note:'Characters per nonempty output.'},
   },
+  stats:{totalChars:{name:'Total characters',unit:'count'}},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[1]?.[1] === 'Fidelity' && t[1]?.[7]?.startsWith('LLM-Score') && t[1]?.[8]?.startsWith('CER'));

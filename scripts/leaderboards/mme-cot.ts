@@ -12,6 +12,7 @@ const PAPER_DATE = '2025-02-13';
 
 const board: Leaderboard = {
   benchmark: 'mme-cot',
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, robustness: { name: 'Robustness', unit: 'score', better: 'higher' }, stability: { name: 'Stability', unit: 'score', better: 'higher' }, efficacy: { name: 'Efficacy', unit: 'score', better: 'higher' }, efficiency: { name: 'Efficiency', unit: '%', better: 'higher' }, relevanceRate: { name: 'Relevance rate', unit: '%', better: 'higher' }, reflectionQuality: { name: 'Reflection quality', unit: 'score', better: 'higher' } },
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (static HTML table, CoT Quality F1 Score)`,
   terms: 'Static GitHub Pages project page (no robots.txt, so nothing is disallowed); it publishes no terms.',

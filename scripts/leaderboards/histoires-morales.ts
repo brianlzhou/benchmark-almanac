@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'histoires-morales', static: 'paper', url: feed, feed,
   terms: 'The authors publish the paper under the terms listed at https://arxiv.org/abs/2501.17117.',
   aliases: { 'Mistral-instruct': 'mistral-7b-instruct-v0-1', 'Mistral-base': 'mistral-7b-v0-1' },
+  stats: { normalizedAccuracy: { name: 'Length-normalized accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const t = flatPaperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.join('|') === 'Model|English|English|French|French');
     if (!t || t[1].join('|') !== 'Model|Acc.|Acc.norm.|Acc.|Acc.norm.') throw new Error('Missing French multiple-choice accuracies');

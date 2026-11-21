@@ -6,6 +6,7 @@ const FEED = "https://joonv2.github.io/DrawingVQA/static/leaderboard/leaderboard
 const fields = ['R1', 'R2', 'R3', 'VP', 'K', 'R', 'OCR', 'Adm.', 'EI', 'LU', 'DR', 'SU', 'QTO', 'Comp.'];
 
 const board: Leaderboard = {
+  stats: { Overall: { name: 'Overall accuracy', unit: '%', better: 'higher' } },
   benchmark: "drawingvqa",
   url: "https://joonv2.github.io/DrawingVQA/static/leaderboard/leaderboard.html",
   feed: FEED,

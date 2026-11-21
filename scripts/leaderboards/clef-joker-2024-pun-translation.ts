@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: "https://ceur-ws.org/Vol-3740/paper-167.pdf#page=5",
   feed: FEED,
   terms: "The authors publish this results table under CC BY 4.0. https://ceur-ws.org/Vol-3740/paper-167.pdf#page=1 CEUR-WS robots.txt permits this volume.",
+  stats: { references: { name: 'References', unit: 'count' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, f1: { name: 'F1', unit: '%', better: 'higher' }, translations: { name: 'Translated texts', unit: 'count' }, bleu: { name: 'BLEU', unit: 'score', better: 'higher' }, bleu1: { name: 'BLEU-1', unit: 'score', better: 'higher' }, bleu2: { name: 'BLEU-2', unit: 'score', better: 'higher' }, bleu3: { name: 'BLEU-3', unit: 'score', better: 'higher' }, bleu4: { name: 'BLEU-4', unit: 'score', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(FEED);
     const bleu = paper.split('BLEU results for pun translation from English into French (test data)')[1]?.split('Table 3')[0];

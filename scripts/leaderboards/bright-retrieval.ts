@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://brightbenchmark.github.io/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { longRecall1: { name: 'Long-document recall@1', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const boards=tables((await fetchText(FEED)).replace(/<!--[\s\S]*?-->/g,'')).filter(t=>t[0]?.some(c=>c.text==='Retriever'));

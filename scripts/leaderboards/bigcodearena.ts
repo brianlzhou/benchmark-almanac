@@ -6,6 +6,7 @@ const BASE = 'https://bigcode-arena.hf.space/gradio_api/call/update_ranking_disp
 const board: Leaderboard = {
   benchmark: 'bigcodearena', url: 'https://huggingface.co/spaces/bigcode/arena', feed: BASE,
   terms: 'Public BigCodeArena leaderboard callback. Hugging Face and repository terms apply. The almanac credits and links the source.',
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   aliases: {
     'qwen3-235b-a22b-thinking-2507': 'qwen3-235b-a22b-thinking-jul-2025',
     'qwen3-235b-a22b-instruct-2507': 'qwen3-235b-a22b-instruct-jul-2025',

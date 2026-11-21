@@ -13,6 +13,9 @@ interface Run {
 const board: Leaderboard = {
   benchmark: 'apex-swe', url: PAGE, feed: `${PAGE} (__NEXT_DATA__.props.pageProps.leaderboardData)`,
   terms: 'Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.',
+  stats: {
+    samples: { name: 'Samples', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(PAGE);
     const payload = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/)?.[1];

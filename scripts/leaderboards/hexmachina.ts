@@ -10,6 +10,7 @@ const models: Record<string, string> = { GPT: 'GPT-5-mini', Claude: 'Claude 3.7 
 const board: Leaderboard = {
   benchmark: 'hexmachina', static: 'paper', url: feed, feed, harnesses: 'system',
   terms: 'The authors publish their results under the paper terms at https://arxiv.org/abs/2506.04651.',
+  stats: { victoryPoints: { name: 'Victory points', unit: 'score', better: 'higher' }, victoryPointsUncertainty: { name: 'Victory points uncertainty', unit: 'score' }, games: { name: 'Games played', unit: 'count' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0].join('|') === 'Player|Model|Win Rate|Victory Points');
     if (!table) throw new Error('Missing Catan player results');

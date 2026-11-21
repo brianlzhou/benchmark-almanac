@@ -7,6 +7,7 @@ const FEED = "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc/resolve/m
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "mmlongbench-doc",
+  stats: { activeParametersBillions: { name: 'Active parameters from parameter field', unit: 'billions' }, activeParams: { name: 'Active parameters from params_b', unit: 'billions' } },
   url: "https://huggingface.co/spaces/OpenIXCLab/mmlongbench-doc",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",

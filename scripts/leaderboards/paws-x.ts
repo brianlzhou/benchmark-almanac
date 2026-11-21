@@ -12,6 +12,16 @@ const board: Leaderboard = {
   feed,
   terms: PAPER_TERMS + ' https://info.arxiv.org/help/license/index.html',
   parts: {"en":"English","fr":"French","es":"Spanish","de":"German","zh":"Chinese","ja":"Japanese","ko":"Korean"},
+  stats: {
+    aucPr: { name: 'Average precision recall area', unit: '%', better: 'higher' },
+    enAucPr: { name: 'English average precision recall area', unit: '%', better: 'higher' },
+    frAucPr: { name: 'French average precision recall area', unit: '%', better: 'higher' },
+    esAucPr: { name: 'Spanish average precision recall area', unit: '%', better: 'higher' },
+    deAucPr: { name: 'German average precision recall area', unit: '%', better: 'higher' },
+    zhAucPr: { name: 'Chinese average precision recall area', unit: '%', better: 'higher' },
+    jaAucPr: { name: 'Japanese average precision recall area', unit: '%', better: 'higher' },
+    koAucPr: { name: 'Korean average precision recall area', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const languages = ['en', 'fr', 'es', 'de', 'zh', 'ja', 'ko'];

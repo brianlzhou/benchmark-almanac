@@ -17,6 +17,12 @@ const configurations = [
 const board: Leaderboard = {
   benchmark: 'clef-simpletext-2026-simplify-scientific-text', url: feed, feed, harnesses: 'system',
   terms: 'The authors publish this workshop paper under the license on its first page. ' + feed,
+  stats: {
+    sentenceBLEU: { name: 'Sentence BLEU', unit: '%', better: 'higher' },
+    sentenceFKGL: { name: 'Sentence Flesch-Kincaid grade level', unit: 'score', better: 'lower' },
+    documentBLEU: { name: 'Document BLEU', unit: '%', better: 'higher' },
+    documentFKGL: { name: 'Document Flesch-Kincaid grade level', unit: 'score', better: 'lower' },
+  },
   parts: { sentence: 'Sentence-level text simplification', document: 'Document-level text simplification' },
   async fetch() {
     const paper = await pdfText(feed);

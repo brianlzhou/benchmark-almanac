@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: 'preference-asr', static: 'paper', url: feed, feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2606.29534',
   parts: { standard: 'Standard WER', preference: 'Preference-aware WER' },
+  stats: { overallInstruction: { name: 'Overall instruction score', unit: '%', better: 'higher' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.join('|') === 'Model|WER Eval|Normalization|Normalization|Entities|Entities|Disfluencies|Disfluencies|Case|Case|Standard|Standard|Overall|Overall');
     if (!table) throw new Error('Preference-ASR results table missing');

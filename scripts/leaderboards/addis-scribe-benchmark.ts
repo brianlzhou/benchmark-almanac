@@ -12,6 +12,12 @@ const board: Leaderboard = {
   feed,
   terms: "Eight systems on 150 Afaan Oromo clips. The transcript file includes eleven operating modes. The benchmark archive lists CC BY-SA 4.0. https://huggingface.co/datasets/addisai/addis-scribe-benchmark The feed host publishes robots.txt at https://huggingface.co/robots.txt.",
   parts: {"Male": "Male", "Female": "Female"},
+  stats: {
+    cer: { name: 'Character error rate', unit: '%', better: 'lower' },
+    processingSeconds: { name: 'Processing per audio minute', unit: 'seconds', better: 'lower' },
+    firstWordsSeconds: { name: 'Time to first words', unit: 'seconds', better: 'lower' },
+    finalSeconds: { name: 'Time to finish after stopping', unit: 'seconds', better: 'lower' },
+  },
   aliases: {"Google Gemini 4 Argon": "gemini-4-argon"},
   async fetch() {
     const required = ["System", "WER", "Male", "Female"];

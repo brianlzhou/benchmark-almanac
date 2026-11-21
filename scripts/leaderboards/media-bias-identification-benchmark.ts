@@ -8,6 +8,7 @@ const feed = 'https://raw.githubusercontent.com/Media-Bias-Group/MBIB/main/basel
 const board: Leaderboard = {
   benchmark: 'media-bias-identification-benchmark', feed, url: 'https://github.com/Media-Bias-Group/MBIB/tree/main/baseline',
   terms: 'GPL 3.0. https://github.com/Media-Bias-Group/MBIB/blob/main/LICENSE',
+  stats: { microF1: { name: 'Micro F1', unit: 'score', better: 'higher', note: 'Final micro-averaged F1 across the eight media bias identification tasks.' } },
   async fetch() {
     const source = (await fetchText(feed)).split('## Result analysis')[1];
     const [detail, final] = (source ?? '').split('This results into the following final MBIB scores:');

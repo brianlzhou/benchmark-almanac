@@ -8,6 +8,12 @@ const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/Banking77Classi
 const board: Leaderboard = {
   benchmark: 'banking77', url: 'https://mteb-leaderboard.hf.space/tasks/Banking77Classification', feed, host: 'MTEB',
   terms: 'MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats: {
+    embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+    maxTokens: { name: 'Maximum tokens', unit: 'tokens' },
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+    memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' },
+  },
   async fetch() {
     return checked(await taskScores(feed, 'Banking77Classification', 'accuracy', 272, 100), 272);
   },

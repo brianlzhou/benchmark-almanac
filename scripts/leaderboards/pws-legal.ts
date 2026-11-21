@@ -28,6 +28,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The benchmark is private and the public article provides its reported result table. Results are credited to Parallel Web Systems.',
   headline: 'Answer accuracy on 238 held-out legal questions',
+  stats: { costPer1000Questions: { name: 'Cost per 1,000 questions', unit: 'usd', better: 'lower' } },
   fetch: async () => (await readResults(await fetchText(FEED))).map((r): LeaderboardRow => ({
     model: r.label,
     score: r.y,

@@ -7,6 +7,7 @@ const feed = 'https://iolai.org/leaderboard.json';
 interface Submission { team: string; score: number; exact_match: number; chrf: number; explanation_rate: number; datetime: string }
 const board: Leaderboard = {
   benchmark: 'iol-ai-2026', url: 'https://iolai.org/#final-leaderboard', feed,
+  stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' }, chrF: { name: 'Character F-score', unit: '%', better: 'higher' }, explanationRate: { name: 'Explanation rate', unit: '%', better: 'higher' } },
   terms: 'Public competition results from the organizers of IOL-AI 2026.',
   harnesses: 'system',
   async fetch() {

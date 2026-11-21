@@ -22,6 +22,13 @@ const board: Leaderboard = {
   url: 'https://github.com/adamholter/buttonbench/blob/main/README.md',
   feed: FEED,
   terms: 'The repository is MIT licensed. Results are credited to Adam Holter with a link to the repository.',
+  stats: {
+    correct: { name: 'Correct tests', unit: 'count' },
+    incorrect: { name: 'Incorrect tests', unit: 'count' },
+    totalTests: { name: 'Total tests', unit: 'count' },
+    latency: { name: 'Average test duration', unit: 'seconds', better: 'lower' },
+    tokensPerSecond: { name: 'Token throughput', unit: 'tokens/s', better: 'higher' },
+  },
   chart: { title: 'Resistance against average cost per test', x: { key: 'cost', label: 'Average cost per test', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Resistance success rate', unit: '%', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<{ rankings?: Entry[] }>(FEED);

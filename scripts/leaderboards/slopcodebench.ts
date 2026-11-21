@@ -16,6 +16,12 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (server-rendered table, Iso Solve)`,
   terms: 'Server-rendered public page; scbench.ai serves no robots.txt (the path returns a 404 page) and publishes no terms.',
+  stats: {
+    strictSolve: { name: 'Strict solve rate', unit: '%', better: 'higher' },
+    coreSolve: { name: 'Core solve rate', unit: '%', better: 'higher' },
+    erosion: { name: 'Code erosion', unit: 'score', better: 'lower', note: 'Fraction of complexity mass in high-complexity functions.' },
+    verbosity: { name: 'Code verbosity', unit: 'score', better: 'lower', note: 'Union of flagged and clone lines divided by lines of code.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(URL);
     const t = tables(html).find((rows) => rows[0]?.some((c) => /^Iso Solve/.test(c.text)));

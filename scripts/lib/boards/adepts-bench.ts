@@ -55,6 +55,13 @@ const board: Leaderboard = {
   },
 };
 export const sourceBoard = board;
+export const ADEPTS_STATS = {
+  taskSuccess: { name: 'Task success rate', unit: '%', better: 'higher' },
+  attackSuccess: { name: 'Attack success rate', unit: '%', better: 'lower' },
+  falseRefusal: { name: 'False refusal rate', unit: '%', better: 'lower' },
+  disambiguationF1: { name: 'Disambiguation F1', unit: '%', better: 'higher' },
+  severityError: { name: 'Severity calibration error', unit: 'score', better: 'lower', note: 'Mean per-component absolute error on obviousness and consequence scores, from 0 to 4.' },
+} as const;
 
 // Each child record selects one complete test set. Remaining settings describe its run.
 export async function trackRows(select: string, remove: string): Promise<LeaderboardRow[]> {

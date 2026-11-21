@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'nlvr2', url, feed,
   terms: "The lab publishes a static results table. The page does not specify reuse terms for the scores. https://lil.nlp.cornell.edu/nlvr/" ,
   parts: {dev:'Dev. (Acc)', publicTest:'Test-P (Acc)'},
+  stats: { consistency: { name: 'Test-U consistency', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await fetchText(feed);
     const section = html.split('<h2>NLVR2 Leaderboard</h2>')[1]?.split('<h2>')[0];

@@ -8,6 +8,7 @@ const FEED = 'https://agi-eval.org/commWebApi/model/rank/dataList';
 const board: Leaderboard = {
   benchmark: 'agi-eval-community-text-to-image', url: URL, feed: FEED,
   terms: 'The AGI-Eval publisher provides this ranking API publicly. Read the endpoint for attribution and reuse terms.',
+  stats: { subjectiveAccuracy: { name: 'Subjective accuracy', unit: 'score', better: 'higher' }, objectiveAccuracy: { name: 'Objective accuracy', unit: 'score', better: 'higher' } },
   async fetch() {
     const body = { modality: 'MULTIMODAL_MODEL', modelType: 'TEXT_TO_IMAGE', rankType: 'PRIVATE', rankMonth: '2026/11', limit: 100 };
     const data = await fetchJson<{ rescode: number; data?: { modelRankList?: Array<{ name: string; projectList: Array<{ project: string; score: string }> }> } }>(FEED, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'mmgenre', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2607.06986.',
   headline: 'The headline is SingMOS, the first whole-benchmark synthesis quality measure in Table 1.',
+  stats: { singMOSPro: {name:'SingPro',unit:'score',better:'higher'}, ssqa: {name:'Singing synthesis quality assessment',unit:'score',better:'higher'}, cer: {name:'Character error rate',unit:'score',better:'lower',note:'Stored from 0 to 1.'} },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const tables = paperTables(html).map(grid);

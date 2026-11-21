@@ -27,6 +27,7 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/datasets/IntelligenceLab/LHTB-leaderboard',
   feed: FEED,
   terms: 'Hugging Face dataset IntelligenceLab/LHTB-leaderboard, licensed Apache-2.0.',
+  stats: { solved95: { name: 'Tasks solved at 95%', unit: '%', better: 'higher' }, strictPass: { name: 'Strict pass rate', unit: '%', better: 'higher' } },
   aliases: {
     'GPT-5.6-sol': 'gpt-5-6-sol',
     'Doubao Seed 2.1 Pro': 'seed-2-1-pro',

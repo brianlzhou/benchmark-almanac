@@ -21,6 +21,10 @@ const board: Leaderboard = {
     pftOverall: {name: 'PFT Overall', unit: '%'}, vqtAction: {name: 'VQT Action', unit: '%'},
     vqtClip: {name: 'VQT CLIP', unit: 'score'}, vqtJudge: {name: 'VQT VLM-judge', unit: 'score'},
   },
+  stats: {
+    pftAverage: {name: 'Program functionality test average', unit: '%', better: 'higher'},
+    pftPerfect: {name: 'Program functionality test perfect', unit: '%', better: 'higher'},
+  },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0].join('|') === columns.join('|'));
     if (!table) throw new Error('Missing InteractScience experiment columns');

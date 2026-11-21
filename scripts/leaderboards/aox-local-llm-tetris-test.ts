@@ -10,6 +10,12 @@ const board: Leaderboard = {
   url: "https://www.aox.cz/bench/tetris/",
   feed,
   terms: "The scoreboard does not state a reuse license. https://www.aox.cz/bench/tetris/ The feed host publishes robots.txt at https://www.aox.cz/robots.txt.",
+  stats: {
+    P1: { name: 'First pass time', unit: 'seconds', better: 'lower' },
+    P2: { name: 'Second pass time', unit: 'seconds', better: 'lower' },
+    Total: { name: 'Total time', unit: 'seconds', better: 'lower' },
+    Tokens: { name: 'Total tokens', unit: 'tokens' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const table of tables(await fetchText(feed))) {

@@ -5,7 +5,12 @@ import { fetchText } from '../lib/util.ts';
 import { tables, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/moinnadeem/StereoSet/master/code/predictions.txt";
 const board: Leaderboard = {
-  benchmark: "stereoset", parts: {
+  benchmark: "stereoset", stats: {
+    Count: { name: 'Evaluated examples count', unit: 'count' },
+    'LM Score': { name: 'Language model score', unit: '%', better: 'higher', note: 'Mean likelihood of selecting related sentences over unrelated sentences.' },
+    'SS Score': { name: 'Stereotype score', unit: '%', note: 'Percentage of stereotype choices among stereotype and anti-stereotype sentences. A score of 50 indicates balance.' },
+    'ICAT Score': { name: 'ICAT score', unit: '%', better: 'higher', note: 'Composite of language model quality and stereotype score, with 50 as the balanced stereotype target.' },
+  }, parts: {
   intrasentence_gender: { name: 'Intrasentence gender', group: 'Category' },
   intrasentence_profession: { name: 'Intrasentence profession', group: 'Category' },
   intrasentence_race: { name: 'Intrasentence race', group: 'Category' },

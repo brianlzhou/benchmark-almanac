@@ -13,12 +13,15 @@ const tasks: Record<string, string> = {
   hls_edit_zero_shot__dataflow: 'Dataflow Refactoring',
   hls_edit_zero_shot__loop_tile: 'Loop Tiling',
 };
+const hlsMetricNames={pass_compile:'Compile pass rate',pass_parse:'Parse pass rate',pass_synth:'Synthesis pass rate',pass_tb:'Testbench pass rate'};
+const hlsStats=Object.fromEntries(Object.values(tasks).flatMap(task=>['1','5'].flatMap(k=>Object.entries(hlsMetricNames).map(([metric,name])=>[task+'/'+metric+'/'+k,{name:(task === 'HLS Code Generation' ? 'High-level synthesis generation' : task.length>35 ? task.slice(0,30)+'…' : task)+' '+name+' at '+k,unit:'%',better:'higher'}]))).concat([['passAt5',{name:'Mean parse pass rate at 5',unit:'%',better:'higher'}]]));
 const board: Leaderboard = {
   benchmark: 'hls-eval', url: 'https://github.com/sharc-lab/hls-eval',
   feed: root + 'hls_gen_zero_shot__main/data/pass_rates.csv',
   terms: 'The repository uses AGPL-3.0. https://github.com/sharc-lab/hls-eval/blob/HEAD/LICENSE',
   headline: 'The headline is the plain mean of parseability at one attempt across the five code generation and editing tasks.',
   parts: Object.fromEntries(Object.values(tasks).map(name => [name, name])),
+  stats: hlsStats,
   aliases: { 'Qwen/Qwen2.5-Coder-32B-Instruct': 'qwen2-5-coder-32b-instruct', 'deepseek-ai/DeepSeek-V3': 'deepseek-v3' },
   async fetch() {
     const models = new Map<string, Record<string, number>>();

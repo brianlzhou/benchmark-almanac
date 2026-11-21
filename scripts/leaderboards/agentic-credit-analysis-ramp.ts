@@ -11,6 +11,12 @@ const board: Leaderboard = {
   benchmark: 'agentic-credit-analysis-ramp', url, feed,
   terms: 'Ramp publishes the chart in its engineering article. https://ramp.com/terms-of-service',
   parts: { pnl: 'P&L', balanceSheet: 'Balance sheet' },
+  stats: {
+    pnlPrecision: { name: 'P&L precision', unit: '%', better: 'higher' },
+    pnlRecall: { name: 'P&L recall', unit: '%', better: 'higher' },
+    balanceSheetPrecision: { name: 'Balance sheet precision', unit: '%', better: 'higher' },
+    balanceSheetRecall: { name: 'Balance sheet recall', unit: '%', better: 'higher' },
+  },
   harnesses: 'system',
   async fetch() {
     const bundle = await fetchText(feed);

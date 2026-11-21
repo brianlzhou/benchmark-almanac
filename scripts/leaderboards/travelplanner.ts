@@ -13,6 +13,14 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2402.01622",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+   validationDelivery: {name: 'Validation delivery', unit: '%', better: 'higher'}, validationCommonsenseMicro: {name: 'Validation commonsense micro', unit: '%', better: 'higher'},
+   validationCommonsenseMacro: {name: 'Validation commonsense macro', unit: '%', better: 'higher'}, validationHardMicro: {name: 'Validation hard micro', unit: '%', better: 'higher'},
+   validationHardMacro: {name: 'Validation hard macro', unit: '%', better: 'higher'}, validationFinal: {name: 'Validation final pass rate', unit: '%', better: 'higher'},
+   delivery: {name: 'Delivery pass rate', unit: '%', better: 'higher'}, commonsenseMicro: {name: 'Commonsense micro pass rate', unit: '%', better: 'higher'},
+   commonsenseMacro: {name: 'Commonsense macro pass rate', unit: '%', better: 'higher'}, hardMicro: {name: 'Hard micro pass rate', unit: '%', better: 'higher'},
+   hardMacro: {name: 'Hard macro pass rate', unit: '%', better: 'higher'},
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const published = flatPaperTables(await fetchText(FEED)).map(grid);

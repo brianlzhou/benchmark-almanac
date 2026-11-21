@@ -27,6 +27,11 @@ const board: Leaderboard = {
   benchmark: 'ladder-robotics',
   url: PAGE,
   feed: `${PAGE} (inline JSON #lb-data, systems[].mean)`,
+  stats: {
+    pm: { name: 'Success margin', unit: 'score', note: 'The source reports the plus-or-minus success margin in points.' },
+    progress: { name: 'Subgoals done', unit: '%', better: 'higher' },
+    costSuccess: { name: 'Cost per completed task', unit: 'usd', better: 'lower' },
+  },
   chart:{title:'Success versus episode cost',x:{key:'cost',label:'Cost per episode',unit:'$',better:'lower'},y:{key:'score',label:'Success',unit:'%',better:'higher'}},
   terms: 'Public leaderboard page; robots.txt allows all paths and the site states no terms.',
   async fetch() {

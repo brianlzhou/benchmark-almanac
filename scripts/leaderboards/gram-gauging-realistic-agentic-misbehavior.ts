@@ -10,6 +10,11 @@ const judges = ['Sabotage Degree','Scheming Reasoning','Verbalized Evaluation Aw
 export default {
   benchmark:'gram-gauging-realistic-agentic-misbehavior', static: 'paper', url:'https://arxiv.org/html/2605.30322v1',feed,terms:PAPER_TERMS,
   aliases:{'Gemini 3.0 Pro Preview':'gemini-3-pro','Gemini 3.1 Pro Preview':'gemini-3-1-pro'},
+  stats: Object.fromEntries(judges.flatMap(judge => Array.from({length: 5}, (_, k) => [
+    judge + ' ' + (2 * k + 1) + '–' + (2 * k + 2),
+    {name: judge + ' ' + (2 * k + 1) + '–' + (2 * k + 2), unit: '%' as const,
+      note: 'Share of responses in this judge-score bucket.'},
+  ]))),
   async fetch() {
     const svg = await paperHtml(feed);
     const pattern = /d="M([\d.]+) ([\d.]+)H[\d.]+(?:V([\d.]+)H| )[\d.]+Z" fill="(#[\da-f]+)" fill-opacity=".85"/g;

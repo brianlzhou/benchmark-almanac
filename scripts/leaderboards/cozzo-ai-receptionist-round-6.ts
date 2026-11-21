@@ -12,6 +12,9 @@ const parts = { quote: 'Quote $189', quoteReadback: 'Quote read-back', booking: 
 const board: Leaderboard = {
   benchmark: 'cozzo-ai-receptionist-round-6', url: feed, feed, parts,
   terms: 'Cozzo publishes its results under its site terms. https://cozzo.io/terms',
+  stats:{
+    quoteTrials:{name:'Quote trials',unit:'count'}, quoteReadbackTrials:{name:'Quote read-back trials',unit:'count'}, bookingTrials:{name:'Booking trials',unit:'count'}, triageTrials:{name:'Triage trials',unit:'count'}, afterHoursTrials:{name:'After-hours trials',unit:'count'}, interruptTrials:{name:'Interruption trials',unit:'count'}, medianReplyMs:{name:'Median reply time',unit:'ms',better:'lower'}, turns:{name:'Turns',unit:'count'}, talkOvers:{name:'Talk-overs',unit:'count'},
+  },
   async fetch() {
     const header = ['Vendor', ...Object.values(parts), 'Median ms (turns)', 'Talk-overs'];
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === header.join('|'));

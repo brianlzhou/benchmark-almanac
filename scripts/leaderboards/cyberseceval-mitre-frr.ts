@@ -4,6 +4,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, text } from '../lib/html.ts';
 const FEED = "https://huggingface.co/spaces/facebook/CyberSecEval/raw/main/trr_frr_tradeoff_helpfulness.json";
 const board: Leaderboard = {
+ stats: { violationRate: { name: 'Violation rate', unit: '%', better: 'lower' } },
   benchmark: "cyberseceval-mitre-frr", url: "https://huggingface.co/spaces/facebook/CyberSecEval", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {

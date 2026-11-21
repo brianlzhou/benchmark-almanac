@@ -20,7 +20,17 @@ const board: Leaderboard = {
   url: "https://github.com/cladbrain/cladbench#results",
   feed,
   terms: "The raw file host has no robots.txt. CladBrain licenses the code and dataset under Apache 2.0. https://github.com/cladbrain/cladbench#licence-and-source-material",
-  parts: { settled: 'Settled', live: 'Live policy', foundation: 'Foundation', practitioner: 'Practitioner', expert: 'Expert' },
+  parts: {
+    settled: 'Settled', live: 'Live policy', foundation: 'Foundation', practitioner: 'Practitioner', expert: 'Expert',
+    category01: 'UK Building Regs Q&A', category02: 'EPC Trajectory', category03: 'IFC Entity Reasoning',
+    category04: 'BMS Sensor Anomaly', category05: 'Retrofit Prioritization', category06: 'BREEAM Credit Eligibility',
+    category07: 'Thermal Comfort Diagnosis', category08: 'CIBSE Technical Q&A', category09: 'Material/Product Spec',
+    category10: 'Energy Bill Anomaly', category11: 'Net Zero Pathway', category12: 'Regulatory Cliff-Edge',
+  },
+  stats: {
+    claudeMarked: { name: 'Claude-marked score', unit: 'score', better: 'higher', note: 'Mean score marked by Claude.' },
+    items: { name: 'Items', unit: 'count' },
+  },
   async fetch() {
     const tables = markdownTables(await fetchText(feed));
     const overall = tables.find(t => t[0].join('|') === 'Rank|Model|Score|95% CI|Claude-marked|n');

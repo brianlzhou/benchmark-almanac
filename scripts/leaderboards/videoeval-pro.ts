@@ -5,6 +5,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://tiger-ai-lab.github.io/VideoEval-Pro/home_page.html";
 const board: Leaderboard = {
+ stats: { llmParamsB: { name: 'LLM parameters', unit: 'billions' }, mcq: { name: 'Multiple-choice accuracy', unit: '%', better: 'higher' }, mcqLP: { name: 'Multiple-choice local perception', unit: '%', better: 'higher' }, mcqLR: { name: 'Multiple-choice local reasoning', unit: '%', better: 'higher' }, mcqHP: { name: 'Multiple-choice holistic perception', unit: '%', better: 'higher' }, mcqHR: { name: 'Multiple-choice holistic reasoning', unit: '%', better: 'higher' }, mcqGap: { name: 'Multiple-choice accuracy gap', unit: '%', better: 'higher' } },
   benchmark: "videoeval-pro", parts: {
   LP: { name: 'Local perception', group: 'Task type' },
   LR: { name: 'Local reasoning', group: 'Task type' },

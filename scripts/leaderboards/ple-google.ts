@@ -22,6 +22,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (server-rendered matrix, overall test-set view)`,
   terms: 'Server-rendered page under the Google Terms of Service, which bar only automated access against robots.txt (it disallows just /api/); the dataset is CC BY 4.0 and the code Apache-2.0.',
+  stats: { latency: { name: 'Latency', unit: 'minutes', better: 'lower' } },
   chart: { title: 'Score versus cost per task', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Score', better: 'higher' } },
   aliases: {
     'GPT 6 Astra': 'gpt-6-astra',

@@ -34,6 +34,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (Next.js page payload, Verified overall table)`,
   terms: 'Data embedded in the public mcpmark.ai page (robots.txt allows all paths, no terms page); the MCPMark repository is Apache-2.0.',
+  stats: { time: { name: 'Average execution time', unit: 'seconds', better: 'lower' } },
   aliases: {
     'qwen-3-coder-plus': 'qwen3-coder-480b-a35b',
     'kimi-k2-0711': 'kimi-k2-jul-2025',

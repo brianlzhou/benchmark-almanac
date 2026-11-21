@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: "https://agenticvbench.com/leaderboard",
   feed: FEED,
   terms: "Public results published by the benchmark authors at agenticvbench.com; retain source attribution and follow the upstream terms.",
+  stats: { reportedUncertainty: { name: 'Reported uncertainty', unit: '%', note: 'Published uncertainty around the average task score.' } },
   aliases: {},
   
   async fetch() {

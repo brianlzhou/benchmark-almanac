@@ -10,6 +10,11 @@ const feed = 'https://api.github.com/repos/' + path;
 const board: Leaderboard = {
   benchmark: 'chronos-benchmark-ii', url: 'https://github.com/autogluon/fev/tree/main/benchmarks/chronos_zeroshot/results', feed,
   terms: 'Apache License 2.0. https://github.com/autogluon/fev/blob/main/LICENSE',
+  stats: {
+    relativeWQL: { name: 'Relative weighted quantile loss', unit: 'score', better: 'lower' },
+    inferenceSeconds: { name: 'Inference time', unit: 'seconds', better: 'lower' },
+    trainingOverlapDatasets: { name: 'Training-overlap datasets', unit: 'count' },
+  },
   async fetch() {
     const files = await fetchJson<{name:string,download_url:string}[]>(feed);
     const all = new Map<string, Map<string,Record<string,string>>>();

@@ -10,6 +10,7 @@ const tasks = ['pos', 'ner', 'wsd', 'pr', 'cr', 'nli', 'sa', 'ald', 'qa'];
 const board: Leaderboard = {
   benchmark: 'dutch-model-benchmark', static: 'paper', url: 'https://aclanthology.org/2023.emnlp-main.447/', feed: FEED,
   terms: 'ACL Anthology terms. https://aclanthology.org/faq/copyright/',
+  stats: Object.fromEntries([['ald','Abusive language detection'],['cr','Causal reasoning'],['ner','Named entity recognition'],['nli','Natural language inference'],['pos','Part of speech tagging'],['pr','Pronoun resolution'],['qa','Question answering'],['sa','Sentiment analysis'],['wsd','Word sense disambiguation']].map(([k,name]) => [k, { name, unit: '%', better: 'higher' }])),
   async fetch() {
     const text = await pdfText(FEED);
     const section = text.split('Model               RER')[1]?.split('Table 2:')[0];

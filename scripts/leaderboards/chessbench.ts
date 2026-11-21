@@ -5,6 +5,7 @@ import {paperHtml, PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables, grid, checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://arxiv.org/html/2402.04494';
 const board: Leaderboard={benchmark:'chessbench', static:'paper', url:'https://github.com/google-deepmind/searchless_chess', feed:URL, terms:PAPER_TERMS,
+  stats:{ puzzleAccuracy:{name:'Puzzle accuracy',unit:'%',better:'higher',note:'Percentage of puzzles whose entire solution action sequence matches.'}, tournamentElo:{name:'Tournament Elo',unit:'elo',better:'higher',note:'BayesElo rating from an internal tournament between agents.'} },
   async fetch(){
     const table=paperTables(await paperHtml(URL)).map(grid).find(t=>t.some(r=>r.includes('Puzzle Acc. (%)')));
     if(!table) throw new Error('ChessBench Table 1 missing');

@@ -9,6 +9,11 @@ const board: Leaderboard = {
   url: "https://hipe-eval.github.io/HIPE-OCRepair-2026/results",
   feed: FEED,
   terms: "The evaluation repository uses AGPL 3.0. It does not list separate terms for the ranking file. https://github.com/hipe-eval/HIPE-OCRepair-2026-eval/blob/main/LICENSE The robots URL returns HTML.",
+  stats: {
+    preference: { name: 'Overall preference', unit: 'score', better: 'higher' },
+    testSets: { name: 'Test sets scored', unit: 'count' },
+    totalTestSets: { name: 'Total test sets', unit: 'count' },
+  },
   async fetch() {
     const [header, ...lines] = (await fetchText(FEED)).trim().split(/\r?\n/);
     if (header !== 'rank\tsystem\toverall_cmer\toverall_cmer_lo\toverall_cmer_hi\toverall_pref\toverall_pref_lo\toverall_pref_hi\tn_test_sets\tn_total_test_sets' || lines.length < 8) throw new Error('Changed HIPE rankings');

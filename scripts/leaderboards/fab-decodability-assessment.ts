@@ -30,6 +30,7 @@ const board: Leaderboard = {
   url: "https://www.fab-ai.org/benchmarks?benchmark=DA-sw&benchmarkType=foundational-literacy&cost=10&dataset=&modelMode=default&models=%5B%5D&pageView=table",
   feed,
   terms: "Fab AI marks the leaderboard as all rights reserved. robots.txt allows the feed path.",
+  stats: { items: { name: 'Items', unit: 'count' } },
   async fetch() {
     return fabAccuracy(feed, 'DA-sw', 32);
   },

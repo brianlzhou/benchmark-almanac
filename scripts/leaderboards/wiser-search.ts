@@ -19,6 +19,7 @@ function readResults(markdown: string): Result[] {
 }
 const board: Leaderboard = {
   benchmark: 'wiser-search', url: PAGE, feed: FEED,
+  stats: { costPerQueryCents: { name: 'Cost per query', unit: 'usd', better: 'lower' } },
   terms: 'The benchmark is public and the article provides its reported result arrays. Results are credited to Parallel Web Systems.',
   headline: 'Answer accuracy on the blended WISER-Fresh and WISER-Atomic test set',
   fetch: async () => (await readResults(await fetchText(FEED))).map((r): LeaderboardRow => ({ model: r.label, score: r.y, metrics: { costPerQueryCents: r.x } })),

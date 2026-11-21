@@ -25,6 +25,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/nvidia/ChatRAG-Bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
+  stats: { answerability_avg_both: { name: 'Answerability average', unit: '%', better: 'higher' }, answerability_avg_doqa: { name: 'DoQA answerability average', unit: '%', better: 'higher' }, answerability_avg_quac: { name: 'QuAC answerability average', unit: '%', better: 'higher' }, answerability_doqa_no_: { name: 'DoQA unanswerable score', unit: '%', better: 'higher' }, answerability_doqa_yes_: { name: 'DoQA answerable score', unit: '%', better: 'higher' }, answerability_quac_no_: { name: 'QuAC unanswerable score', unit: '%', better: 'higher' }, answerability_quac_yes_: { name: 'QuAC answerable score', unit: '%', better: 'higher' } },
   aliases: {"Llama3-instruct-70b": "llama-3-70b", "GPT-4-0613": "gpt-4-jun-2023", "GPT-3.5-turbo-0613": "gpt-3-5-turbo-jun-2023"},
   
   async fetch() {

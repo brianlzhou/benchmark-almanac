@@ -16,6 +16,7 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'monthly-swebench',
+  stats: { turns: { name: 'Turns', unit: 'count', better: 'lower' }, maxTurns: { name: 'Maximum turns', unit: 'count' }, turnsCompleted: { name: 'Completed turns', unit: 'count' }, completed: { name: 'Completed tasks', unit: 'count' }, passed: { name: 'Passed tasks', unit: 'count' }, timeoutCount: { name: 'Timeouts', unit: 'count' }, timeoutTurnsCompleted: { name: 'Completed timeout turns', unit: 'count' }, unfinishedCount: { name: 'Unfinished tasks', unit: 'count' }, timeoutTurnsMin: { name: 'Minimum timeout turns', unit: 'count' }, timeoutTurnsMedian: { name: 'Median timeout turns', unit: 'count' }, timeoutTurnsAvg: { name: 'Average timeout turns', unit: 'count' }, timeoutTurnsMax: { name: 'Maximum timeout turns', unit: 'count' }, timeoutLimitSecondsMin: { name: 'Minimum timeout limit', unit: 'seconds' }, timeoutLimitSecondsMedian: { name: 'Median timeout limit', unit: 'seconds' }, timeoutLimitSecondsAvg: { name: 'Average timeout limit', unit: 'seconds' }, timeoutLimitSecondsMax: { name: 'Maximum timeout limit', unit: 'seconds' } },
   parts: {
     bug_fix: { name: 'Bug fix', group: 'Task type' },
     non_bug_fix: { name: 'Non bug fix', group: 'Task type' },

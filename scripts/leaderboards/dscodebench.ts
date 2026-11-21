@@ -14,6 +14,12 @@ const board: Leaderboard = {
   benchmark:'dscodebench',static:'paper',url,feed:url,terms:PAPER_TERMS,
   aliases:{'DeepSeek-Coder-V2-Lite-Instruct(15.7B)':'deepseek-coder-v2-lite-instruct'},
   parts:Object.fromEntries(libraries.map(k=>[k,k])),
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    correct: { name: 'Average correct count', unit: 'count' },
+    partiallyCorrect: { name: 'Average partially correct count', unit: 'count' },
+    wrong: { name: 'Average wrong count', unit: 'count' },
+  },
   async fetch(){
     const html=await paperHtml(url);
     const ts=paperTables(html).map(grid);

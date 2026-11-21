@@ -7,6 +7,7 @@ const feed = 'https://arxiv.org/html/2605.20873';
 const board: Leaderboard = {
   benchmark: 'planningbench-tencent', static: 'paper', url: feed, feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: { avgPass: 'Avg-pass' },
+  stats: { rank: { name: 'Rank', unit: 'count', note: 'Model rank in the PlanningBench table.' } },
   aliases: { 'Hy3-Preview': 'tencent-hy3-preview', 'Seed-2.0-pro': 'doubao-seed-2-0-pro',
     'Gemini-3-1-pro': 'gemini-3-1-pro', 'Qwen3-30b-moe': 'qwen3-30b-a3b' },
   async fetch() {

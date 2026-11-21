@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2604.13058',
   feed: FEED,
   terms: PAPER_TERMS,
+  stats:{},
   aliases: {"Qwen3-VL-2B-IT": "qwen3-vl-2b-instruct", "Qwen3-VL-4B-IT": "qwen3-vl-4b-instruct", "Qwen3-VL-8B-IT": "qwen3-vl-8b-instruct", "Qwen3-VL-30B-A3B-IT": "qwen3-vl-30b-a3b-instruct", "Qwen3-VL-32B-IT": "qwen3-vl-32b-instruct", "Qwen3-VL-235B-A22B-IT": "qwen3-vl-235b-a22b-instruct"},
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));

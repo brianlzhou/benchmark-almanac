@@ -9,6 +9,7 @@ const board: Leaderboard = {
  harnesses: 'system',
  benchmark: "data-agent-benchmark", url: "https://github.com/ucbepic/DataAgentBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { trials: { name: 'Trials', unit: 'count' } },
 
  async fetch() {
 const md=await fetchText(FEED);

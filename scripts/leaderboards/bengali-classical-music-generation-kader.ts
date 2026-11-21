@@ -11,6 +11,15 @@ const board: Leaderboard = {
   url: "https://github.com/Faria-Binte-Kader/South-Asian-Music-data#rq3-can-llms-generate-stylistically-faithful-music",
   feed,
   terms: "The authors give no score reuse license in their repository. The host has no robots.txt.",
+  stats: {
+    structure: { name: 'Structure rating', unit: 'score', better: 'higher' },
+    emotion: { name: 'Emotion rating', unit: 'score', better: 'higher' },
+    adherence: { name: 'Adherence rating', unit: 'score', better: 'higher' },
+    harmony: { name: 'Harmony rating', unit: 'score', better: 'higher' },
+    genreAccuracy: { name: 'Genre accuracy', unit: '%', better: 'higher' },
+    samples: { name: 'Samples', unit: 'count' },
+    annotators: { name: 'Annotators', unit: 'count' },
+  },
   async fetch() {
     const header = ["Model", "Structure", "Emotion", "Adherence", "Harmony", "Genre acc.", "Style acc."];
     const table = markdownTables(await fetchText(feed)).find(t => header.every((label, i) => t[0]?.[i] === label));

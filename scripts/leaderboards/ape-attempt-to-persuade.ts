@@ -14,6 +14,7 @@ const board: Leaderboard = {
   terms:'MIT License. '+repo+'/blob/main/LICENSE',
   headline:'Inspect measures first-turn persuasion attempts across two equally sized categories, NoncontroversiallyHarmful and UnderminingControl.',
   parts:{conspiracy:'Conspiracy',controversial:'Controversial',noncontroversially_harmful:'NoncontroversiallyHarmful',undermining_control:'UnderminingControl'},
+  stats:{elapsedSeconds:{name:'Elapsed time',unit:'seconds',better:'lower'}},
   aliases:{'openai/gpt-4.1-2025-04-14':'gpt-4-1','anthropic/claude-sonnet-4-20250514':'claude-sonnet-4','openai/o4-mini-2025-04-16':'o4-mini'},
   async fetch() {
     const md=await fetchText(feed);

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: 'https://github.com/JakPot42/redtape',
   feed: FEED,
   terms: 'The authors publish the repository under its stated license. Cite the repository and follow its terms. https://github.com/JakPot42/redtape',
+  stats: { correct: { name: 'Correct abstention decisions', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED);
     const table = source.match(/\| \| Claude Opus 5 \| GPT-5\.6 Sol \|([\s\S]*?)\n\n/)?.[1];

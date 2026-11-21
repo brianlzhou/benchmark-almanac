@@ -6,6 +6,7 @@ import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2312.14115';
 export default {
   benchmark:'lingoqa', static: 'paper',url:'https://arxiv.org/abs/2312.14115',feed,terms:PAPER_TERMS,
+  stats:{frames:{name:'Frames',unit:'count'},bleu:{name:'BLEU',unit:'score',better:'higher'},meteor:{name:'METEOR',unit:'score',better:'higher'},cider:{name:'CIDEr',unit:'score',better:'higher'},humanScore:{name:'Human score',unit:'score',better:'higher'}},
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
     const t=ts.find(t=>t[0]?.includes('No. Frames') && t[0].includes('Lingo-J'));

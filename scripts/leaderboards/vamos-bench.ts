@@ -12,6 +12,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
   harnesses: 'system',
+  stats: {
+    connect: { name: 'Connection rate', unit: '%', better: 'higher' },
+    latencySeconds: { name: 'Latency', unit: 'seconds', better: 'lower' },
+    turns: { name: 'Turns per call', unit: 'count' },
+    bargeInsPerCall: { name: 'Barge-ins per call', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.[0]?.text === 'Voice agent');
     const headers = ['Voice agent', 'Task completion', 'Connect', 'Latency', 'Turns', 'Barge-in/call', 'Cost', 'STT', 'LLM', 'TTS'];

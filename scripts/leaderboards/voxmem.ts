@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: "https://github.com/swagshaw/voxmem",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
+  stats: { '#': {name: 'Rank', unit: 'count'}, Semantics: {name: 'Semantics score', unit: '%', better: 'higher'} },
   aliases: {},
   
   async fetch() {

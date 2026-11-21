@@ -7,6 +7,7 @@ import { tables } from '../lib/html.ts';
 const page = 'https://wojak-bench.dev.pion.dev/';
 const board: Leaderboard = {
   benchmark: 'wojak-bench-3d', url: page + '#leaderboard', feed: page,
+  stats: { winShare: { name: 'Win share', unit: '%', better: 'higher' }, votes: { name: 'Votes', unit: 'count' }, wins: { name: 'Wins', unit: 'count' }, ties: { name: 'Ties', unit: 'count' }, losses: { name: 'Losses', unit: 'count' } },
   terms: 'The voting page gives no score reuse license. Its robots.txt explains content signals and lists no disallowed paths.',
   async fetch() {
     const table = tables(await fetchText(page)).find(t => t[0].map(c => c.text).join('|') === '#|model|rating|win share|w/t/l|votes');

@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: scaleFeed(PAGE),
   terms: SCALE_TERMS,
+  stats: { calibration: { name: 'Calibration error', unit: '%', better: 'lower' } },
   aliases: {
     // effort words are split off before these are looked up ("-thinking-max" -> max)
     'claude-opus-4-6-thinking': 'claude-opus-4-6',

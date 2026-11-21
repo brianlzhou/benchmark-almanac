@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://mbzuai-nlp.github.io/SAHM/leaderboard.html",
   feed: FEED,
   terms: "The repository declares Apache License 2.0. https://github.com/mbzuai-nlp/SAHM",
+  stats: { openEndedMean: { name: 'Open-ended mean score', unit: 'score', better: 'higher' }, 'ROUGE-1': { name: 'ROUGE-1', unit: '%', better: 'higher' }, 'ROUGE-2': { name: 'ROUGE-2', unit: '%', better: 'higher' }, 'ROUGE-L': { name: 'ROUGE-L', unit: '%', better: 'higher' } },
   parts: Object.fromEntries([...mcq.map(k => [k, k]), ...qa.map(k => [k, { name: k, unit: 'score' }])]),
   async fetch() {
     const [unified, summary, adaptation] = tables(await fetchText(FEED));

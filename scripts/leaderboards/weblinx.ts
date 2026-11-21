@@ -13,7 +13,7 @@ const board: Leaderboard = {
  },
  url: "https://mcgill-nlp.github.io/weblinx/leaderboard/",
  feed: FEED,
- terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.", stats: { intentMatch: {name: 'Intent match', unit: '%', better: 'higher'} },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

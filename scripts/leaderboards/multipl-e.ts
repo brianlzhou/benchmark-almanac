@@ -19,6 +19,7 @@ const board: Leaderboard = {
   swift: { name: 'Swift', group: 'Language' },
 }, url: 'https://huggingface.co/spaces/bigcode/multilingual-code-evals', feed: FEED,
   terms: 'Public BigCode Space results, subject to its repository license and Hugging Face terms.',
+  stats: { 'Throughput (tokens/s)': { name: 'Throughput', unit: 'tokens/s', better: 'higher' } },
   async fetch() {
     const rows = parseCsv(await fetchText(FEED)).filter(r => r.Model && r['Average score']?.trim() && Number.isFinite(Number(r['Average score'])));
     if (!rows.length) throw new Error('No MultiPL-E scores');

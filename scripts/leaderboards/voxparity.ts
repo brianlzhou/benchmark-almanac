@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/bhavikmangla/voxparity-leaderboard",
   feed: FEED,
   terms: "The Space declares CC BY 4.0 in https://huggingface.co/spaces/bhavikmangla/voxparity-leaderboard/blob/main/README.md.",
+  stats: { cueCredit: {name: 'Cue credit', unit: 'score', better: 'higher'}, items: {name: 'Items', unit: 'count'}, observations: {name: 'Observations', unit: 'count'}, bothRight: {name: 'Both right rate', unit: 'score', better: 'higher'}, holmP: {name: 'Holm p-value', unit: 'score', better: 'lower'}, probe: {name: 'Probe score', unit: 'score', better: 'higher'}, probeAnswers: {name: 'Probe answers', unit: 'count'} },
   aliases: {"Qwen2.5-Omni-7B (local)":"qwen2-5-omni-7b","Phi-4-multimodal (local, MLX bf16)":"phi-4-multimodal","Nemotron-3-Nano-Omni":"nemotron-3-nano-omni-30b-a3b"},
   async fetch() {
     const data = await fetchJson<{ rows: Entry[]; counts: { contestants: number; twin_bearing: number } }>(FEED);

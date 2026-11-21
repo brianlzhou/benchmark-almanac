@@ -17,7 +17,7 @@ function markdownTables(source: string): string[][][] {
 }
 const FEED = "https://raw.githubusercontent.com/rubenpt91/MP-DocVQA-Framework/master/readme.md";
 const board: Leaderboard = {
-  benchmark: "mp-docvqa", url: "https://raw.githubusercontent.com/rubenpt91/MP-DocVQA-Framework/master/readme.md", feed: FEED,
+  benchmark: "mp-docvqa", stats: { APPA: { name: 'Average precision per answer', unit: '%', better: 'higher' }, parametersMillions: { name: 'Parameters', unit: 'millions' } }, url: "https://raw.githubusercontent.com/rubenpt91/MP-DocVQA-Framework/master/readme.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

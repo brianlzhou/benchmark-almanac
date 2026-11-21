@@ -7,9 +7,18 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://voicearena.com/full-duplex-bench';
 const languages = ['Indian English', 'Hindi', 'Bengali', 'Punjabi', 'Gujarati', 'Marathi', 'Kannada', 'Telugu', 'Tamil', 'Malayalam'];
 const keys = ['pauseSr', 'turnSr', 'turnLatency', 'bcSr', 'bcJsd', 'bcFreq', 'intSr', 'intLatency', 'intRating', 'avgSr', 'rank'];
+const metricNames: Record<string, { name: string; unit: string; better?: 'higher'|'lower'; note?: string }> = {
+  pauseSr: { name: 'Pause success rate', unit: '%', better: 'higher' }, turnSr: { name: 'Turn success rate', unit: '%', better: 'higher' },
+  turnLatency: { name: 'Turn latency', unit: 'seconds', better: 'lower' }, bcSr: { name: 'Backchannel success rate', unit: '%', better: 'higher' },
+  bcJsd: { name: 'Backchannel Jensen Shannon divergence', unit: 'score', better: 'lower' }, bcFreq: { name: 'Backchannel frequency', unit: 'score', note: 'Frequency measured on a 0 to 1 scale.' },
+  intSr: { name: 'Interruption success rate', unit: '%', better: 'higher' }, intLatency: { name: 'Interruption latency', unit: 'seconds', better: 'lower' },
+  intRating: { name: 'Interruption rating', unit: 'rating', better: 'higher' }, rank: { name: 'Language rank', unit: 'count', better: 'lower' },
+};
+const stats = Object.fromEntries(languages.flatMap(language => Object.entries(metricNames).map(([key, value]) => [language.replaceAll(' ', '') + '_' + key, { ...value, name: language + ' ' + value.name }])));
 const board: Leaderboard = {
   benchmark: 'full-duplex-bench-voicearena', url: feed, feed, terms: 'Voice Arena publishes its public leaderboard at https://voicearena.com/full-duplex-bench.',
   parts: Object.fromEntries(languages.map(name => [name.replaceAll(' ', ''), name])),
+  stats,
   headline: 'Voice Arena reports no cross-language score, so this is the plain mean of its ten language success rates.',
   async fetch() {
     const html = await fetchText(feed);

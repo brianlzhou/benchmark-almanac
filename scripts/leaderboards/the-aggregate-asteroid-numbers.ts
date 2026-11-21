@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://theaggregate.ai/benchmark?slug=the-aggregate-asteroid-numbers",
   feed,
   terms: "Credit The Aggregate when quoting or charting scores. Bulk republication requires written permission. https://theaggregate.ai/terms robots.txt allows the feed path.",
+  stats: { items: { name: 'Items', unit: 'count' } },
   async fetch() {
     const rows = await aggregateRows(feed, 'asteroid-numbers', 10);
     // The module dates the whole campaign, without giving an evaluation date for each model.

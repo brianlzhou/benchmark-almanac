@@ -10,6 +10,12 @@ const board: Leaderboard = {
   feed,
   terms: "The site allows crawling. Questflow limits platform use to personal, noncommercial, or qualifying internal business use. I found no separate public data license. https://docs.questflow.ai/terms-of-use",
   parts: { FINANCIAL: 'Financial Analysis', MARKET_SIGNAL: 'Market & Signal' },
+  stats: {
+    partial: { name: 'Partial pass rate', unit: '%', better: 'higher' },
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    meanToolCalls: { name: 'Mean tool calls', unit: 'count' },
+    tasks: { name: 'Tasks', unit: 'count' },
+  },
   aliases: { 'MiniMax M3.1 Flash (free)': 'minimax-m3-1-flash' },
   async fetch() {
     const html = await fetchText(feed);

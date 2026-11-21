@@ -13,6 +13,17 @@ const board: Leaderboard = {
     'openai/gpt-4o-mini-2024-07-18':'gpt-4o-mini','mistralai/mistral-large-2512':'mistral-large-3',
     'mistralai/Mistral-Medium-3.5-128B':'mistral-medium-3-5','qwen/qwen3-235b-a22b-thinking-2507':'qwen3-235b-a22b-thinking-jul-2025',
     'Microsoft/Phi-4-mini-instruct':'phi-4-mini','qwen3-next-80b-a3b-instruct':'qwen3-next-80b-a3b-instruct'},
+  stats:{
+    judgeGPT:{name:'GPT-oss judge score',unit:'score',better:'higher'},
+    judgeQwen:{name:'Qwen3.6 judge score',unit:'score',better:'higher'},
+    judgeDeepSeek:{name:'DeepSeek-V4 judge score',unit:'score',better:'higher'},
+    legalReferenceSimilarity:{name:'Legal reference similarity',unit:'score',better:'higher',note:'Jaccard overlap of unique law and section references.'},
+    recitationGP:{name:'Article recitation ROUGE-L F1 on GPBam laws',unit:'%',better:'higher'},
+    recitationCited:{name:'Article recitation ROUGE-L F1 on most-cited laws',unit:'%',better:'higher'},
+    inputTokens:{name:'Input tokens',unit:'tokens'},
+    outputTokens:{name:'Output tokens',unit:'tokens'},
+    goldNormsCited:{name:'Gold norms cited by the essay',unit:'%',better:'higher'},
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const models = tables.find(t=>t[0].join('|')==='Family|Identifier|Short name|Size|Serving');
