@@ -9,6 +9,7 @@ type BioC = { documents: { passages: { text?: string }[] }[] }[];
 const board: Leaderboard = {
   benchmark: 'plaba', static: 'paper', url: 'https://www.nature.com/articles/s41597-022-01920-3', feed: FEED,
   terms: 'The paper is CC BY 4.0. https://creativecommons.org/licenses/by/4.0/ Source attribution applies.',
+  stats: { rouge1: { name: 'ROUGE-1', unit: 'score', better: 'higher' }, rouge2: { name: 'ROUGE-2', unit: 'score', better: 'higher' }, rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher' }, bleu4: { name: 'BLEU-4', unit: 'score', better: 'higher' }, bertScoreF1: { name: 'BERTScore F1', unit: 'score', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const body = await fetchJson<BioC>(FEED);
     const text = body.flatMap(c => c.documents.flatMap(d => d.passages.map(p => p.text ?? ''))).join('\n');

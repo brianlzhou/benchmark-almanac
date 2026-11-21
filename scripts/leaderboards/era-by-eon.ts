@@ -10,6 +10,11 @@ const board: Leaderboard = {
   benchmark: "era-by-eon", static: 'paper',
   url: "https://arxiv.org/html/2609.09853",
   feed: FEED,
+  stats: {
+    wrong: { name: 'Wrong answers', unit: 'count', better: 'lower' },
+    falseAbstention: { name: 'False abstentions', unit: 'count', better: 'lower' },
+    noAnswer: { name: 'No answers', unit: 'count', better: 'lower' },
+  },
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {

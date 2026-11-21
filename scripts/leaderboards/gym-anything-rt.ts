@@ -32,6 +32,7 @@ const board: Leaderboard = {
   "feed": "https://gym-anything.github.io/gym-anything-rt/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { nonRealTimePass: { name: 'Non-real-time pass rate', unit: '%', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const t=tables(await fetchText(FEED)).find(t=>t[0].some(c=>c.text==='Real-time'));

@@ -1,6 +1,6 @@
 // AgentCLUE tests how models use tools in multi-turn conversations.
 // SuperCLUE ranks the models by 总分 and publishes the task scores in the same workbook.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchBytes, fetchText } from '../lib/util.ts';
 import { readXlsx, SC_ALIASES, SC_SITE, SC_TERMS } from './superclue.ts';
 
@@ -23,6 +23,7 @@ interface WorkbookBoard {
   trials?: number;
   metrics?: Record<string, string>;
   percentages?: string[];
+  stats?: Record<string, BoardStat>;
 }
 
 function numberCell(value: string): number | undefined {
@@ -72,6 +73,7 @@ export async function loadWorkbook(feed: string, folder?: string) {
 export function workbookBoard(config: WorkbookBoard, load = loadWorkbook): Leaderboard {
   const { benchmark, url, feed } = config;
   const parts: NonNullable<Leaderboard['parts']> = {};
+  const stats: NonNullable<Leaderboard['stats']> = { ...(config.stats ?? {}) };
   const counters: Record<string, string> = {
     '平均每题耗时(秒)': 'latency', '平均每题运行时间(秒)': 'latency',
     '平均每题成本(元)': 'costPerTaskCny', '平均每题价格(元)': 'costPerTaskCny',
@@ -83,16 +85,65 @@ export function workbookBoard(config: WorkbookBoard, load = loadWorkbook): Leade
   let otherCount = 0;
   const fields = (names: string[], group?: string) => names.map(name => {
     const metric = counters[name.normalize('NFKC').replace(/\s/g, '')];
-    if (metric) return [metric, name] as const;
-    if (name.endsWith('回复率')) return [`responseRate${++otherCount}`, name] as const;
+    if (metric) {
+      const labels: Record<string, BoardStat> = {
+        latency: { name: 'Average time per question', unit: 'seconds', better: 'lower' },
+        costPerTaskCny: { name: 'Average cost per question', unit: 'cny', better: 'lower' },
+        retrievalLatency: { name: 'Average retrieval time per question', unit: 'seconds', better: 'lower' },
+        reasoningLatency: { name: 'Average reasoning time per question', unit: 'seconds', better: 'lower' },
+        generatedVideos: { name: 'Generated videos', unit: 'count' },
+        validEvaluations: { name: 'Valid evaluations', unit: 'count' },
+        completeResponseRate: { name: 'Complete response rate', unit: '%', better: 'higher' },
+        truncationRate: { name: 'Truncation rate', unit: '%', better: 'lower' },
+        noResponseRate: { name: 'No response rate', unit: '%', better: 'lower' },
+        completionRate: { name: 'Evaluation completion rate', unit: '%', better: 'higher' },
+        totalTokens: { name: 'Total tokens', unit: 'tokens' },
+        steps: { name: 'Average steps per question', unit: 'count' },
+        inputTokens: { name: 'Input tokens', unit: 'tokens' },
+        cachedTokens: { name: 'Cached input tokens', unit: 'tokens' },
+        questions: { name: 'Questions', unit: 'count' },
+        timeouts: { name: 'Timeouts', unit: 'count', better: 'lower' },
+        cacheHitFraction: { name: 'Cache hit fraction', unit: 'score', better: 'higher', note: 'Fraction of input tokens served from cache, from 0 to 1.' },
+        reasoningLevel: { name: 'Reasoning level', unit: 'count' },
+        completedQuestions: { name: 'Completed questions', unit: 'count' },
+      };
+      if (!stats[metric] && labels[metric]) stats[metric] = labels[metric];
+      return [metric, name] as const;
+    }
+    if (name.endsWith('回复率')) {
+      const key = `responseRate${++otherCount}`;
+      stats[key] = { name: name.replace(/回复率$/, ' response rate'), unit: '%', better: 'higher' };
+      return [key, name] as const;
+    }
     const key = `part${Object.keys(parts).length + 1}`;
     parts[key] = { name, group, ...(name.endsWith('↓') ? { better: 'lower', unit: '%' } : {}), ...(config.percentages?.includes(name) ? { unit: '%' } : {}) };
     return [key, name] as const;
   });
   const main = fields(config.parts);
   const details = (config.details ?? []).map(detail => ({ ...detail, fields: fields(detail.parts, detail.sheet) }));
+  const metricLabels: Record<string, BoardStat> = {
+    latency: { name: 'Average time per question', unit: 'seconds', better: 'lower' },
+    costPerTaskCny: { name: 'Average cost per question', unit: 'cny', better: 'lower' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    cachedTokens: { name: 'Cached input tokens', unit: 'tokens' },
+    questions: { name: 'Questions', unit: 'count' },
+    timeouts: { name: 'Timeouts', unit: 'count', better: 'lower' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+    completedQuestions: { name: 'Completed questions', unit: 'count' },
+    reasoningLevel: { name: 'Reasoning level', unit: 'count' },
+    run1: { name: 'First run score', unit: 'score' },
+    run2: { name: 'Second run score', unit: 'score' },
+    run3: { name: 'Third run score', unit: 'score' },
+    steps: { name: 'Average steps per question', unit: 'count' },
+    cacheHitFraction: { name: 'Cache hit fraction', unit: 'score', better: 'higher', note: 'Fraction of input tokens served from cache, from 0 to 1.' },
+  };
+  // a time in minutes is stored as `latency` in seconds (see fetch), so its label goes on `latency`
+  for (const key of Object.keys(config.metrics ?? {})) {
+    const stored = key === 'latencyMinutes' ? 'latency' : key;
+    if (!stats[stored] && metricLabels[stored]) stats[stored] = metricLabels[stored];
+  }
   return {
-    benchmark, url, feed, parts, terms: SC_TERMS,
+    benchmark, url, feed, parts, stats, terms: SC_TERMS,
     ...(config.harness ? { harnesses: 'system' } : {}),
     ...(config.fixedHarness ? { reference: [config.fixedHarness] } : {}),
     aliases: { ...SC_ALIASES, ...config.aliases },

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The benchmark repository uses BSD 3-Clause. The separate results site lists no score license. https://github.com/NLR-Theseus/cfdllmbench/blob/main/LICENSE The results site returns a 404 page for robots.txt.",
   aliases: { 'Haiku 3.5': 'claude-3-5-haiku' },
+  stats: { correct: { name: 'Correct answers', unit: 'count', better: 'higher' } },
   async fetch() {
     const { paper_models, v2_models } = await cfdResults(FEED);
     if (paper_models.length < 6 || v2_models.length < 6) throw new Error('Incomplete CFDQuery series');

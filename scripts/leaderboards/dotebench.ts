@@ -6,6 +6,7 @@ import { tables } from '../lib/html.ts';
 const feed = "https://raw.githubusercontent.com/studio-dots-ai/doteBench/HEAD/README.md";
 
 const board: Leaderboard = {
+  stats: { allSuccess: { name: 'All-success rate', unit: '%', better: 'higher' }, sim: { name: 'Similarity', unit: 'score', better: 'higher' }, duration: { name: 'Duration', unit: 'seconds', better: 'lower' }, pitch: { name: 'Pitch error', unit: 'score', better: 'lower' } },
   benchmark: "dotebench",
   url: "https://github.com/studio-dots-ai/doteBench#reference-results",
   feed,

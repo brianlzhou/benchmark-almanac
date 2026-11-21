@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://www.futurehouse.org/research-announcements/lab-bench-measuring-capabilities-of-language-models-for-biology-research",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, coverage: { name: 'Coverage', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts = tables(await fetchText(FEED)).filter(t => t[0]?.some(c => c.text === 'claude-3-5-sonnet-20240620'));
     if (ts.length !== 3) throw new Error('LAB-Bench accuracy, precision and coverage tables missing');

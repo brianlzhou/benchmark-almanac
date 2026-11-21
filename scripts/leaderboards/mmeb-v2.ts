@@ -4,7 +4,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { text, num } from '../lib/html.ts';
 const FEED='https://huggingface.co/spaces/TIGER-Lab/MMEB-Leaderboard/resolve/main/rankings/mmeb_ranking.csv';
-const board:Leaderboard={benchmark:'mmeb-v2', parts: {
+const board:Leaderboard={benchmark:'mmeb-v2', stats: { 'Model Size(B)': { name: 'Model size', unit: 'billions' } }, parts: {
   'Image-Overall': { name: 'Image', group: 'Modality' },
   'Video-Overall': { name: 'Video', group: 'Modality' },
   'Visdoc-Overall': { name: 'Visual document', group: 'Modality' },

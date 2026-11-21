@@ -46,7 +46,16 @@ with zipfile.ZipFile(io.BytesIO(sys.stdin.buffer.read())) as book:
 `;
 const board: Leaderboard = {
   benchmark: 'finmteb', url, feed, terms: 'The makers publish the board on Hugging Face. https://huggingface.co/terms-of-service',
-  parts: { en: 'English', zh: 'Chinese' },
+  parts: {
+    en: 'English', zh: 'Chinese',
+    en_STS: { name: 'Semantic textual similarity', group: 'English' }, zh_STS: { name: 'Semantic textual similarity', group: 'Chinese' },
+    en_Classification: { name: 'Classification', group: 'English' }, zh_Classification: { name: 'Classification', group: 'Chinese' },
+    en_Retrieval: { name: 'Retrieval', group: 'English' }, zh_Retrieval: { name: 'Retrieval', group: 'Chinese' },
+    en_Clustering: { name: 'Clustering', group: 'English' }, zh_Clustering: { name: 'Clustering', group: 'Chinese' },
+    en_Reranking: { name: 'Reranking', group: 'English' }, zh_Reranking: { name: 'Reranking', group: 'Chinese' },
+    en_Sum: { name: 'Summarization', group: 'English' }, zh_Sum: { name: 'Summarization', group: 'Chinese' },
+    en_PairClassification: { name: 'Pair classification', group: 'English' }, zh_PairClassification: { name: 'Pair classification', group: 'Chinese' },
+  },
   async fetch() {
     const rows = JSON.parse(execFileSync('python3', ['-c', reader], { input: Buffer.from(await fetchBytes(feed)), encoding: 'utf8' })) as LeaderboardRow[];
     const tasks: Record<string,string> = { STS:'STS', Classification:'Classification', Retrieval:'Retrieval', Clustering:'Clustering', Reranking:'Reranking', Sum:'Summarization', PairClassification:'Pair Classification' };

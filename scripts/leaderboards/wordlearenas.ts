@@ -29,6 +29,10 @@ const board: Leaderboard = {
   "Smollm2 135m": "smollm2-135m"
 },
   parts: { wordle: 'Wordle', fibble: 'Fibble', fibble2: 'Fibble²', fibble3: 'Fibble³', fibble4: 'Fibble⁴', fibble5: 'Fibble⁵' },
+  stats: {
+    ...Object.fromEntries(['wordle','fibble','fibble2','fibble3','fibble4','fibble5'].flatMap(key => [[`${key}Games`, { name: `${key} games played`, unit: 'count' }], [`${key}Wins`, { name: `${key} wins`, unit: 'count' }], [`${key}Attempts`, { name: `${key} average attempts`, unit: 'count', better: 'lower' }], [`${key}Latency`, { name: `${key} latency`, unit: 'seconds', better: 'lower' }]])),
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     type Run = { model_display: string; flags: string[]; games_played: number; wins: number; win_rate: number; avg_latency_ms: number; avg_attempts: number | null; timestamp: string };
     const { arenas } = await fetchJson<{ arenas: Record<string, Record<string,Run>> }>(FEED);

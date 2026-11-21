@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2305.10971',
   feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2305.10971',
+  stats: { excludingEnglish: { name: 'Average excluding English', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
     if (!text.includes('Table 3: Baseline result using classical machine learning')) throw new Error('NollySenti Table 3 missing');

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://ludobench.com/games/hokm/history",
   feed,
   terms: "The terms allow Ludobench to publish anonymized match records. They give no third-party license for standings. robots.txt allows the feed path.",
+  stats: { rank:{name:'Rank',unit:'count'}, won:{name:'Games won',unit:'count'}, lost:{name:'Games lost',unit:'count'}, points:{name:'Points',unit:'count',better:'higher'} },
   async fetch() {
     const header = ["#", "Player", "Played", "Won", "Drawn", "Lost", "Win %", "Points"];
     const table = tables(await fetchText(feed)).map(table => table.map(row => row.map(cell => cell.text))).find(t => header.every((label, i) => t[0]?.[i] === label));

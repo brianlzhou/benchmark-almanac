@@ -11,6 +11,7 @@ const feed = url + '/technical-report';
 const board: Leaderboard = {
   benchmark: 'frontiercad', url, feed, parts: { parts: 'Parts', assemblies: 'Assemblies' },
   terms: 'Normal Research publishes aggregate results in its technical report. https://normal.ai/research/frontiercad/technical-report',
+  stats: { partsPassed: { name: 'Parts passed', unit: 'count' }, partsScored: { name: 'Parts scored', unit: 'count' }, assembliesPassed: { name: 'Assemblies passed', unit: 'count' }, assembliesScored: { name: 'Assemblies scored', unit: 'count' } },
   async fetch() {
     const html = await fetchText(feed);
     const groups = tables(html).filter(t => t[0]?.map(c => c.text).join() === 'Model and setting,Scored,Mean,Passed');

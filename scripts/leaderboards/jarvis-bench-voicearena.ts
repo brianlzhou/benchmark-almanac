@@ -8,6 +8,7 @@ interface Entry { model: string; slug: string; domain: string; naturalnessElo: n
 
 const board: Leaderboard = {
   benchmark: "jarvis-bench-voicearena",
+  stats: { taskElo: { name: 'Task Elo', unit: 'elo' }, naturalnessWinRate: { name: 'Naturalness win rate', unit: '%', better: 'higher' }, taskWinRate: { name: 'Task win rate', unit: '%', better: 'higher' }, votes: { name: 'Votes', unit: 'count' }, 'General conversations votes': { name: 'General conversation votes', unit: 'count' }, 'General conversations task Elo': { name: 'General conversation task Elo', unit: 'elo' }, 'Airlines votes': { name: 'Airlines conversation votes', unit: 'count' }, 'Airlines task Elo': { name: 'Airlines conversation task Elo', unit: 'elo' } },
   url: "https://voicearena.com/jarvis-bench",
   feed: FEED,
   terms: "Voice Arena links its site terms. https://voicearena.com/terms Voice Arena permits the public pages in robots.txt.",

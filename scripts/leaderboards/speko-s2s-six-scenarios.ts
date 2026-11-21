@@ -11,6 +11,9 @@ const board: Leaderboard = {
   url: "https://speko.com/benchmarks/s2s",
   feed,
   terms: "Speko publishes its benchmark JSON under CC BY 4.0. Credit Speko and identify changes. robots.txt allows the feed path.",
+  stats: {
+    action: { name: 'Action score', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, early: { name: 'Early-call rate', unit: '%', better: 'lower' }, reliab: { name: 'Reliability', unit: '%', better: 'higher' }, cap: { name: 'Capability score', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }, lat: { name: 'Latency', unit: 'ms', better: 'lower' }, answer: { name: 'Answer latency', unit: 'ms', better: 'lower' }, inputPricePerMillion: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, outputPricePerMillion: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, costPerMinute: { name: 'Cost per minute', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<{ boards: { id: string; meta: string; rows: Entry[] }[] }>(feed);
     const board = data.boards.find(b => b.id === 's2s');

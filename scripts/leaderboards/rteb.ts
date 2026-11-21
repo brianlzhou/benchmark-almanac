@@ -33,6 +33,12 @@ const board: Leaderboard = {
   "feed": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/RTEB%28beta%29/scores",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    completedTasks: { name: 'Completed tasks', unit: 'count' }, totalTasks: { name: 'Total tasks', unit: 'count' },
+    activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum context tokens', unit: 'tokens' },
+    embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, zeroShotPct: { name: 'Zero-shot percentage', unit: '%' },
+    opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
       const data = await fetchJson<{
         benchmarkName: string; tasks: string[];

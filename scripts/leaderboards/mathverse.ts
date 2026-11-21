@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: `${URL}#leaderboard`,
   feed: `${URL} (results table, ALL accuracy and CoT-E)`,
   terms: 'Static GitHub Pages project page with no stated terms; the MathVerse repository is MIT-licensed.',
+  stats: { cotE: { name: 'CoT-E score', unit: '%', better: 'higher', note: 'GPT-4 grades the reasoning steps.' } },
   aliases: {},
   async fetch() {
     const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => c.text === 'ALL'));

@@ -8,6 +8,7 @@ const feed='https://huggingface.co/allenai/Llama-3.1-Tulu-3-70B/raw/main/README.
 export default {
  benchmark:'tulu-3-safety-eval-ai2',url:'https://huggingface.co/allenai/Llama-3.1-Tulu-3-70B',feed,
  terms:'The public maker model card is readable under Hugging Face robots.txt. Its Llama 3.1 license governs the weights, which this importer does not download.',
+ stats:{tasks:{name:'Safety tasks',unit:'count'}},
  aliases:{'GPT 4o (11-24)':'gpt-4o-nov-2024','Tülu 3 8B':'llama-3-1-tulu-3-8b','Tülu 3 70B':'tulu-3-tulu-3-70b','Tülu 3 405B':'tulu-3-405b'},
  async fetch():Promise<LeaderboardRow[]> {
   const rows:LeaderboardRow[]=[];

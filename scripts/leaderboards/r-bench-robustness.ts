@@ -23,6 +23,9 @@ const board: Leaderboard = {
  url: "https://github.com/Q-Future/R-Bench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   relative: { name: 'Relative robustness', unit: '%', better: 'higher', note: 'Stability of model outputs between reference and distorted images.' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

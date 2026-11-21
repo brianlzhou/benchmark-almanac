@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: bbeh.url,
   feed: bbeh.feed,
   terms: bbeh.terms,
+  stats: { harmonic: { name: 'Harmonic mean', unit: 'score', better: 'higher' } },
   aliases: bbeh.aliases,
   async fetch(): Promise<LeaderboardRow[]> {
     const rows = await bbeh.fetch();

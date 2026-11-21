@@ -9,6 +9,11 @@ const board: Leaderboard = {
   feed,
   terms: "CEUR-WS robots.txt allows this volume. The authors publish the report under CC BY 4.0.",
   aliases: { llama: "llama-3-1-8b" },
+  stats: {
+    refs: { name: 'Reference matches', unit: '%', better: 'higher' },
+    alter: { name: 'Valid alternative translations', unit: '%', better: 'higher' },
+    copy: { name: 'Untranslated outputs', unit: '%', better: 'lower' },
+  },
 
   async fetch() {
     const report = await pdfText(feed);

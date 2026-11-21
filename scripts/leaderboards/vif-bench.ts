@@ -8,6 +8,7 @@ const criteria = ['Text Instruction Following','Reference Consistency','Visual I
 const board: Leaderboard = {
   benchmark: 'vif-bench', url: feed, feed, static: 'paper',
   terms: 'The authors publish the tables under the terms at https://arxiv.org/abs/2609.37709.',
+  stats: { alternateJudge: { name: 'Qwen3-VL judge average', unit: 'score', better: 'higher', note: 'Average across the six visual instruction following criteria from the independent Qwen3-VL judge.' } },
   aliases: { 'Qwen-Image-2511': 'qwen-image-edit-2511', 'Qwen-Image-2509': 'qwen-image-edit-2509', 'Nano Banana': 'gemini-2-5-flash-image-preview-nano-banana' },
   async fetch() {
     const header = ['Model', ...criteria, 'Avg.'].join('|');

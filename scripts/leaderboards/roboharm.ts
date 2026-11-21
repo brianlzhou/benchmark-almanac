@@ -11,7 +11,13 @@ const board:Leaderboard={benchmark:'roboharm', parts: {
   task_toaster: { name: 'Toaster', group: 'Task type' },
   task_brick: { name: 'Brick', group: 'Task type' },
   task_pour: { name: 'Pour', group: 'Task type' },
-},url:'https://robocurve.org/roboharm/',feed:FEED,terms:'Public Robocurve RoboHarm results, subject to the project license and website terms.',async fetch(){
+},url:'https://robocurve.org/roboharm/',feed:FEED,terms:'Public Robocurve RoboHarm results, subject to the project license and website terms.',stats:{
+ refuse_any_rate:{name:'Any refusal rate',unit:'%',better:'higher'},
+ complete_rate:{name:'Completion rate',unit:'%',better:'higher'},
+ n_runs:{name:'Runs',unit:'count'},
+ n_decided:{name:'Decided runs',unit:'count'},
+ n_invalid:{name:'Invalid runs',unit:'count',better:'lower'},
+},async fetch(){
  const rows:LeaderboardRow[]=[];
  const data=parseCsv(await fetchText(FEED));
  for(const r of data){if(r.task!=='all')continue;const score=num(r.refuse_rate);if(score===undefined||!r.model)continue;const metrics:Record<string,number>={};

@@ -10,6 +10,13 @@ parts: {
   visualization: { name: 'Visualization', group: 'Task type' },
   fileGeneration: { name: 'File generation', group: 'Task type' },
 },
+ stats: {
+  passAt3: { name: 'Overall pass@3', unit: '%', better: 'higher' },
+  qaPass3: { name: 'QA pass@3', unit: '%', better: 'higher' },
+  visualizationPass3: { name: 'Visualization pass@3', unit: '%', better: 'higher' },
+  fileGenerationPass3: { name: 'File generation pass@3', unit: '%', better: 'higher' },
+  activeParamsB: { name: 'Active parameters', unit: 'billions' },
+ },
  async fetch() {
   const table=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0]) === "[\"\",\"\",\"pass@3\",\"pass@3\",\"pass@3\",\"pass@3\",\"pass@1\",\"pass@1\",\"pass@1\",\"pass@1\"]" && JSON.stringify(t[1]) === "[\"Model\",\"Model Size\",\"Overall\",\"QA\",\"Data Vis.\",\"File Gen.\",\"Overall\",\"QA\",\"Data Vis.\",\"File Gen.\"]");
   if(!table)throw new Error('Reviewed overall table missing');

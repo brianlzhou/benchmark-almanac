@@ -18,6 +18,7 @@ const board: Leaderboard = { benchmark: 'textvbench', static: 'paper', url: FEED
   terms: 'arXiv permits these HTML paths under robots.txt. Results are attributed to the paper authors.',
   headline: 'The paper reports no combined score, so this is the T2V TextVScore track, which the paper presents first.',
   parts: { spatial: { name: 'Spatial', group: 'T2V' }, temporal: { name: 'Temporal', group: 'T2V' }, ref2v: { name: 'Ref2V TextVScore', group: 'Track' } },
+  stats: { extra: { name: 'TextVScore', unit: 'score', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const start = source.indexOf('T2V: prompt-specified text'); const end = source.indexOf('Ref2V: reference text preservation');

@@ -9,6 +9,12 @@ const FEED = "https://q-ivd.github.io/";
 const board: Leaderboard = {
  benchmark: "qivd", url: "https://q-ivd.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+  BERT: { name: 'BERTScore', unit: '%', better: 'higher' },
+  METEOR: { name: 'METEOR score', unit: '%', better: 'higher' },
+  BLEU: { name: 'BLEU score', unit: '%', better: 'higher' },
+  'ROUGE-L': { name: 'ROUGE-L score', unit: '%', better: 'higher' },
+ },
 
  async fetch() {
 

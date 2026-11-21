@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.faintasy.football/standings",
   feed,
   terms: "The league identifies third-party marks and photos. Its rules page gives no separate results license. https://www.faintasy.football/about The robots.txt path serves HTML.",
+  stats: { standingsRank: { name: 'Standings rank', unit: 'count', better: 'lower' }, losses: { name: 'Losses', unit: 'count', better: 'lower' }, pointsFor: { name: 'Points for', unit: 'score', better: 'higher' }, pointsAgainst: { name: 'Points against', unit: 'score', better: 'lower' }, remainingBudget: { name: 'Remaining budget', unit: 'count' }, efficiency: { name: 'Lineup efficiency', unit: '%', better: 'higher' } },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === '#|Team|Record|PF|PA|FAAB|Lineup eff.');
     if (!t || t.length < 11) throw new Error('Missing fAIntasy standings');

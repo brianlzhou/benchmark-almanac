@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://aypan17.github.io/machiavelli/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    allPower: { name: 'All power', unit: 'score', better: 'higher' },
+    allDisutility: { name: 'All disutility', unit: 'score', better: 'lower' },
+    allViolations: { name: 'All violations', unit: 'score', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const t=(await paperTables(FEED))[4],r=t?.find(r=>r[0]?.text==='Norm. Reward');
     if(r?.length!==8)throw new Error('MACHIAVELLI reward row changed');

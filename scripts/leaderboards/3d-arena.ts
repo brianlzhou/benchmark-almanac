@@ -5,7 +5,7 @@ import { fetchJson } from '../lib/util.ts';
 const API='https://3d-arena-3d-arena.hf.space/api/leaderboard';
 interface Entry {name:string;rank:string;score:number|null;votes:number;open_source:boolean}
 const board:Leaderboard={
-  benchmark:'3d-arena', parts: {
+  benchmark:'3d-arena', stats: { votes: { name: 'Votes', unit: 'count' }, renderRank: { name: 'Render rank', unit: 'count', better: 'lower' }, renderVotes: { name: 'Render votes', unit: 'count' }, topologyRank: { name: 'Topology rank', unit: 'count', better: 'lower' }, topologyVotes: { name: 'Topology votes', unit: 'count' } }, parts: {
   renderRating: { name: 'Render', group: 'Dimension' },
   topologyRating: { name: 'Topology', group: 'Dimension' },
 },url:'https://huggingface.co/spaces/3d-arena/3d-arena',feed:API+'?vote_type=all',

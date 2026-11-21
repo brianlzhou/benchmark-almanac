@@ -9,6 +9,16 @@ const board: Leaderboard = {
   url: "https://benchmarks.roark.ai/benchmarks",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://benchmarks.roark.ai/robots.txt.",
+  stats: {
+    value: { name: 'Value score', unit: 'score', better: 'higher' },
+    task: { name: 'Task completion', unit: '%', better: 'higher' },
+    tool_use: { name: 'Tool use', unit: '%', better: 'higher' },
+    ttfw: { name: 'Time to first word', unit: 'seconds', better: 'lower' },
+    lat: { name: 'Response time', unit: 'seconds', better: 'lower' },
+    turn: { name: 'Barge-in handling', unit: '%', better: 'higher' },
+    budget: { name: 'Turn budget', unit: 'count' },
+    cost_task: { name: 'Cost per task', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     type Entry = { stack: number; value: number; interval: [number, number] | null; sample: string };
     type Stack = { key: string; name: string };

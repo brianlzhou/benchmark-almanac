@@ -7,6 +7,7 @@ import { tables, text } from '../lib/html.ts';
 const url = 'https://drugtargetworld.vercel.app/';
 const headers = ['#', 'Model', 'Overall', 'Target ID', 'Phenotype', 'Direction', 'Best', 'Cost/ep', 'Serving'];
 const board: Leaderboard = {
+  stats: { best: { name: 'Best score', unit: 'score', better: 'higher' } },
   benchmark: 'drugtargetworld', url, feed: url,
   terms: 'Public project leaderboard. The authors release the project under the MIT license.',
   parts: { target: 'Target ID', phenotype: 'Phenotype', direction: 'Direction' },

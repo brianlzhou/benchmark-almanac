@@ -11,6 +11,7 @@ type Run = {model: string, metrics: Record<string, {value: number, unit: string}
   raw: {reasoning: string, ci: {lo: number, hi: number, runs: number}}};
 const board: Leaderboard = {
   ...source, host: 'Fireworks AI',
+  stats: { run1: { name: 'Run 1 score', unit: '%', better: 'higher' }, run2: { name: 'Run 2 score', unit: '%', better: 'higher' }, run3: { name: 'Run 3 score', unit: '%', better: 'higher' }, secondsPerTask: { name: 'Duration per task', unit: 'seconds', better: 'lower' } },
   terms: 'Fireworks publishes these Epiq evaluations under https://fireworks.ai/terms-of-service.',
   async fetch() {
     const data = await fetchJson<{benchmarks: {id: string, result_count: number, headline_metric: {unit: string, key: string}, results: Run[]}[]}>(source.feed);

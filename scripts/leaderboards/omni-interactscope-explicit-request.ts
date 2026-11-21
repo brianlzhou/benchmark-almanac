@@ -7,6 +7,7 @@ const board: Leaderboard = { benchmark: "omni-interactscope-explicit-request", p
   T2: { name: 'Event notification', group: 'Task type' },
   T3: { name: 'Risk and error interjection', group: 'Task type' },
   T4: { name: 'Cumulative-state tracking', group: 'Task type' },
+  'T5 †': { name: 'Temporal conditions', group: 'Task type', note: 'Respond when a condition about time is met.' },
   T6: { name: 'Nonverbal and workflow cues', group: 'Task type' },
   T7: { name: 'Continuous responses', group: 'Task type' },
 }, url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,

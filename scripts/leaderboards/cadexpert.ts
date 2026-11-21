@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2512.23333';
 const board: Leaderboard = {
   benchmark: 'cadexpert', static: 'paper', url: feed, feed,
   terms: 'The paper uses the arXiv perpetual non-exclusive license. https://arxiv.org/abs/2512.23333',
+  stats:{meanCD:{name:'Mean Chamfer distance',unit:'score',better:'lower'},medianCD:{name:'Median Chamfer distance',unit:'score',better:'lower'},executionRate:{name:'Execution rate',unit:'%',better:'higher'}},
   aliases: { 'GPT5-Mini': 'gpt-5-mini', 'Phi-3.5-Vision': 'phi-3-5-vision-instruct' },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t =>

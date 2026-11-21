@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://www.kaggle.com/competitions/asap-aes/leaderboard",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host returns no robots.txt.",
+  stats: {
+    submissions: { name: 'Submission count', unit: 'count' },
+    publicScore: { name: 'Public leaderboard score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     type Entry = { teamId: number; displayScore: string };
     type Team = { teamId: number; teamName: string; submissionCount: number; lastSubmissionDate?: string; solutionWriteUpUrl?: string };

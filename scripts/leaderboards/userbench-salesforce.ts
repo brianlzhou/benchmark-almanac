@@ -7,6 +7,11 @@ const feed = 'https://aclanthology.org/2026.emnlp-main.772.pdf';
 const board: Leaderboard = {
   benchmark: 'userbench-salesforce', url: 'https://aclanthology.org/2026.emnlp-main.772/', feed, static: 'paper',
   terms: 'ACL Anthology publishes the paper under the terms at https://aclanthology.org/2026.emnlp-main.772/.',
+  stats: {
+    bestExistRate: { name: 'Best existence rate', unit: 'score', better: 'higher' }, correctExistRate: { name: 'Correct existence rate', unit: 'score', better: 'higher' },
+    validSearch: { name: 'Valid search rate', unit: '%', better: 'higher' }, validAction: { name: 'Valid action rate', unit: '%', better: 'higher' },
+    elicited: { name: 'Elicited preference rate', unit: '%', better: 'higher' }, active: { name: 'Active preference rate', unit: '%', better: 'higher' }, passive: { name: 'Passive preference rate', unit: '%', better: 'higher' },
+  },
   aliases: { 'Claude-4-Sonnet': 'claude-sonnet-4' },
   async fetch() {
     const paper = await pdfText(feed);

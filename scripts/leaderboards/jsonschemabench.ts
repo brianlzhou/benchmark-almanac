@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'jsonschemabench', url: sheet + '/edit', feed,
   terms: 'The authors publish this spreadsheet through their leaderboard repository. https://github.com/epfl-dlab/jsonschemabench-leaderboard',
   parts: { Easy: 'Easy', Medium: 'Medium', Hard: 'Hard' },
+  stats: { EasyUncertainty:{name:'Easy schema compliance uncertainty',unit:'%',note:'Uncertainty percentage reported in parentheses.'},MediumUncertainty:{name:'Medium schema compliance uncertainty',unit:'%',note:'Uncertainty percentage reported in parentheses.'},HardUncertainty:{name:'Hard schema compliance uncertainty',unit:'%',note:'Uncertainty percentage reported in parentheses.'}, EasyValidity:{name:'Easy JSON validity',unit:'%',better:'higher'}, MediumValidity:{name:'Medium JSON validity',unit:'%',better:'higher'}, HardValidity:{name:'Hard JSON validity',unit:'%',better:'higher'}, EasyValidityUncertainty:{name:'Easy JSON validity uncertainty',unit:'%',note:'Uncertainty percentage reported in parentheses.'}, MediumValidityUncertainty:{name:'Medium JSON validity uncertainty',unit:'%',note:'Uncertainty percentage reported in parentheses.'}, HardValidityUncertainty:{name:'Hard JSON validity uncertainty',unit:'%',note:'Uncertainty percentage reported in parentheses.'} },
   aliases: { 'Qwen/Qwen2.5-Coder-3B-Instruct': 'qwen2-5-coder-3b-instruct' },
   async fetch() {
     const csv = await fetchText(feed);

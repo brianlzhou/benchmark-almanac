@@ -25,6 +25,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (rating)`,
   terms: 'Public JSON endpoint the leaderboard page itself calls; voxelbench.ai serves no robots.txt and publishes no terms (its AI-visitor note covers voting only).',
+  stats: { gamesPlayed: {name: 'Games played', unit: 'count'}, wins: {name: 'Wins', unit: 'count'}, losses: {name: 'Losses', unit: 'count'}, ties: {name: 'Ties', unit: 'count'}, winRate: {name: 'Win rate', unit: '%', better: 'higher'}, priceIn: {name: 'Input price', unit: 'usd-per-mtok', better: 'lower'}, priceOut: {name: 'Output price', unit: 'usd-per-mtok', better: 'lower'} },
   aliases: {
     'DeepSeek V4 Flash (July 2026)': 'deepseek-v4-flash-0731',
   },

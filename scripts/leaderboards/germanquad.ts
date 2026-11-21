@@ -8,6 +8,7 @@ const feed = 'https://euroeval.com/leaderboards/german';
 export default {
   benchmark:'germanquad',url:feed,feed,host:'EuroEval',
   terms:'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
+  stats:{exactMatch:{name:'Exact match',unit:'%',better:'higher'},scored:{name:'Scored examples',unit:'count'}},
   aliases: {
     'nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16':'nemotron-3-nano-4b',
     'meta-llama/Llama-2-70b-hf':'llama-2-70b',

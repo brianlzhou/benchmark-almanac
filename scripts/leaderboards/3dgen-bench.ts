@@ -10,6 +10,7 @@ const feed = "https://3dtopia-3dgen-arena.hf.space/config";
 const board: Leaderboard = {
   benchmark: '3dgen-bench', url, feed,
   terms: "The leaderboard page gives no separate reuse license. https://huggingface.co/spaces/ZhangYuhan/3DGen-Arena" ,
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   async fetch() {
     type Table = { headers: string[]; data: (string | number)[][] };
     type Component = { type: string; props: { label?: string; value?: Table | string } };

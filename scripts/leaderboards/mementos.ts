@@ -9,7 +9,7 @@ const board: Leaderboard = {
   benchmark: 'mementos', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2401.10529.',
   headline: 'The paper reports no overall score, so this is the plain mean of object and behavior F1 across three domains, in percent.',
-  parts: {},
+  parts: Object.fromEntries(['Daily-life','Robotics','Comics'].flatMap(d => ['Object Recall','Object Precision','Object F1','Behavior Recall','Behavior Precision','Behavior F1'].map(m => [d.replace('-','') + m.replace(' ',''), {name:d+' '+m, unit:'%'}]))),
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[1]?.join('|') === 'Domain|Input type|Model|Recall|Precision|F1|Recall|Precision|F1');

@@ -6,6 +6,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/file/6ea9ab1baa0efb9e19094440c317e21b-Paper-round1.pdf';
 const board: Leaderboard = {
+  stats: { precisionAt80Recall: { name: 'Precision at 80% recall', unit: '%', better: 'higher' }, precisionAt90Recall: { name: 'Precision at 90% recall', unit: '%', better: 'higher' } },
   benchmark: 'cuad', url: feed, feed, static: 'paper',
   terms: 'Table 2 is credited to Hendrycks and colleagues in the NeurIPS proceedings. https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/6ea9ab1baa0efb9e19094440c317e21b-Abstract-round1.html',
   async fetch() {

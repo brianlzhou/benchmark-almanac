@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://wenjieshu.github.io/SolveEdit-project-page/#leaderboard",
   feed: FEED,
   terms: "The authors do not specify separate terms for leaderboard scores on https://wenjieshu.github.io/SolveEdit-project-page/#leaderboard",
+  stats: {
+    required: { name: 'Required score', unit: 'score', better: 'higher' },
+    damage: { name: 'Damage score', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0].map(c => c.text).join('|') === 'Rank|Model|Type|Required R ↑|Damage D ↓|SolveScore ↑');
     if (!table || table.length < 12) throw new Error('Missing SolveEdit scores');

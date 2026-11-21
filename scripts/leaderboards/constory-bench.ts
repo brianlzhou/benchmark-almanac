@@ -30,6 +30,7 @@ const board: Leaderboard = {
   "feed": "https://raw.githubusercontent.com/Picrew/ConStory-Bench/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { averageWords: { name: 'Average words', unit: 'count' }, evaluatedStories: { name: 'Evaluated stories', unit: 'count' } },
   async fetch() {
     const source = await fetchText(FEED);
     const data = markdownTables(source);

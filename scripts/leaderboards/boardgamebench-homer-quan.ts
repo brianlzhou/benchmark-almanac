@@ -10,6 +10,14 @@ const board: Leaderboard = {
   url: "https://github.com/homerquan/BoardGameBench#benchmark-results",
   feed,
   terms: "The repository uses the MIT License. https://github.com/homerquan/BoardGameBench/blob/main/LICENSE The feed host returns no robots.txt.",
+  stats: {
+    games: { name: 'Games played', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+    forfeits: { name: 'Forfeits', unit: 'count' },
+    raw: { name: 'Raw score', unit: 'score', better: 'higher' },
+    normalized: { name: 'Normalized score', unit: 'score', better: 'higher' },
+  },
   aliases: {"Muse Glimmer 30B NVFP4 + DFlash on Spark": "muse-glimmer", "Inkling Small (Free)": "inkling-small", "LFM 2.5 2.6B (Free)": "lfm2-5-2-6b", "Nemotron 3 Super (Ollama)": "nemotron-3-super"},
   async fetch() {
     const result = (await fetchText(feed)).split('## Benchmark Results')[1]?.split('## Quick Start')[0];

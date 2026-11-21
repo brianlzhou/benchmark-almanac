@@ -15,6 +15,7 @@ const board: Leaderboard = {
     detection: { name: 'Detection', group: 'Task type' },
     deception: { name: 'Deception', group: 'Task type' },
   },
+  stats: { games: { name: 'Games played', unit: 'count' } },
   url: 'https://clocktowerbench.com/',
   feed: `${FEED} (Elo)`,
   terms: 'The dwarkeshsp/clocktower repository is MIT licensed.',

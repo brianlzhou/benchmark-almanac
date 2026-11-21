@@ -8,6 +8,7 @@ const PAGE = 'https://cursor.com/cursorbench';
 const MODEL = /key:"([^"]+)",version:"[^"]+",label:"([^"]+)"[^\[{}]*,runs:\[([^\]]+)\]/g;
 const board: Leaderboard = {
   benchmark: 'cursorbench-4-1', url: PAGE, feed: `${PAGE} (current chart data chunk)`,
+  stats: { steps: { name: 'Steps per task', unit: 'count', better: 'lower' } },
   terms: 'Cursor permits the public chart path in robots.txt. Its terms prohibit automated extraction. Benchmark Almanac credits and links Cursor as the source of these benchmark results.',
   chart: {
     title: 'CursorBench score by average cost per task',

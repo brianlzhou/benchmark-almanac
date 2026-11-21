@@ -241,6 +241,39 @@ for (const r of boards.rows) {
   }
 }
 
+// a board's other measures (Leaderboard.stats): each names a metric key its rows keep that isn't a part, in site copy style
+{
+  const STAT_UNITS = new Set(['%', 'score', 'elo', 'rating', 'index', 'speedup', 'usd', 'minutes', 'brier', 'count', 'seconds', 'ms', 'hours', 'tokens', 'tokens/s', 'usd-per-mtok', 'cny', 'thousands', 'millions', 'billions', 'gb']);
+  const lbAll = boards as unknown as { boards: Record<string, { parts?: Record<string, unknown>; stats?: Record<string, { name?: string; note?: string; unit?: string; better?: string }> }>; rows: unknown[][]; others?: unknown[][] };
+  const scored = new Map<string, Set<string>>();
+  for (const r of [...lbAll.rows, ...(lbAll.others ?? [])]) {
+    const m = r[8] as Record<string, number> | null | undefined;
+    if (!m) continue;
+    const s = scored.get(r[0] as string) ?? new Set<string>();
+    for (const k of Object.keys(m)) s.add(k);
+    scored.set(r[0] as string, s);
+  }
+  // cost and tokens have their own columns, so a stat may name them without a metric
+  const ownColumns = new Set(['cost', 'tokens']);
+  for (const [id, b] of Object.entries(lbAll.boards)) {
+    for (const [k, st] of Object.entries(b.stats ?? {})) {
+      const at = `board ${id}: stat ${k}`;
+      if (!ownColumns.has(k) && !scored.get(id)?.has(k)) fail(`${at} is not a metric any row keeps`);
+      if (b.parts && k in b.parts) fail(`${at} is also a part`);
+      if (!st.name) fail(`${at} has no name`);
+      for (const [field, text] of [['name', st.name], ['note', st.note]] as const) {
+        if (!text) continue;
+        if (/;/.test(text)) fail(`${at}: ${field} has a semicolon`);
+        if (/\s[—–]\s|\s--\s/.test(text)) fail(`${at}: ${field} uses a dash as punctuation`);
+        const uk = field === 'name' ? null : text.match(BRITISH);
+        if (uk) fail(`${at}: ${field} uses British spelling "${uk[0]}"`);
+      }
+      if (st.unit !== undefined && !STAT_UNITS.has(st.unit)) fail(`${at}: unknown unit ${st.unit}`);
+      if (st.better !== undefined && !['higher', 'lower'].includes(st.better)) fail(`${at}: better must be higher or lower`);
+    }
+  }
+}
+
 // the info column (scripts/sync-leaderboards.ts): what a board says about an entry beyond its score
 {
   const INFO_KEYS = new Set(['submitter', 'agentOrg', 'verified', 'models', 'run', 'link', 'trials', 'low', 'high', 'open', 'license', 'params']);

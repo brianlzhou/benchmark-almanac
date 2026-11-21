@@ -13,6 +13,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
   parts: { clear: 'Clear', veryBlurry: 'Very blurry' },
+  stats: {
+    pass3: { name: 'Pass@3', unit: '%', better: 'higher', note: 'Percentage of tasks solved on all three repeats.' },
+    medianMinutes: { name: 'Median minutes per attempt', unit: 'minutes', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.[1]?.text.startsWith('pass@1'));
     const expected = ['Agent', 'pass@1', 'pass', 'Clear', 'Very blurry', '$/task', 'Harness'];

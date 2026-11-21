@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://cheryou.github.io/autoresearchbench.github.io/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { latency:{name:'Latency',unit:'seconds',better:'lower'}, totalTokens:{name:'Total tokens',unit:'tokens'}, turns:{name:'Turns',unit:'count'}, toolCalls:{name:'Tool calls',unit:'count'}, wideIoU:{name:'Wide research IoU',unit:'%',better:'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const s=await fetchText(FEED);const read=(k:string)=>jsLiteral<any[]>(s,s.indexOf('[',s.indexOf('const '+k+' =')));

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2601.08689',
   headline: 'The paper reports no overall score, so this is the Knowledge QA accuracy with chain of thought, its first ranked measure.',
   parts: { knowledgeQA: 'Knowledge QA accuracy', reasoning: 'Reasoning accuracy' },
+  stats: { executionRate: { name: 'Execution rate', unit: '%', better: 'higher' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[1] === 'Knowledge QA (Acc.%)' && t[1]?.[0] === 'Model');
     if (!table) throw new Error('QuantEval results table missing');

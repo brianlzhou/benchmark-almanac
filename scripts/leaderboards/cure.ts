@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'The authors publish the tables under the terms linked at https://arxiv.org/abs/2412.06954.',
   headline: 'The headline averages NDCG@10 across English, French and Spanish queries retrieving English passages.',
   parts: { en: 'English to English', fr: 'French to English', es: 'Spanish to English' },
+  stats: { enRecallAt100: { name: 'English recall at 100', unit: 'score', better: 'higher' }, frRecallAt100: { name: 'French recall at 100', unit: 'score', better: 'higher' }, esRecallAt100: { name: 'Spanish recall at 100', unit: 'score', better: 'higher' } },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid).filter(t =>
       t[0]?.slice(1).join('|') === 'NDCG@10|NDCG@10|NDCG@10|Recall@100|Recall@100|Recall@100' &&

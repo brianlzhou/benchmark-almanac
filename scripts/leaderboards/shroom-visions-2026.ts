@@ -22,6 +22,12 @@ const board: Leaderboard = {
   terms: 'Organizers publish the standings under the GitHub Terms of Service, https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   aliases: { 'Qwen3.5-VL 4B': 'qwen3-5-4b', 'Qwen3.5-VL-397B': 'qwen3-5-397b-a17b' },
   parts: languages, harnesses: 'system',
+  stats: {
+    ENCor: {name: 'English correlation', unit: 'score', better: 'higher'}, ENIoU: {name: 'English IoU', unit: 'score', better: 'higher'},
+    FRCor: {name: 'French correlation', unit: 'score', better: 'higher'}, FRIoU: {name: 'French IoU', unit: 'score', better: 'higher'},
+    ITCor: {name: 'Italian correlation', unit: 'score', better: 'higher'}, ITIoU: {name: 'Italian IoU', unit: 'score', better: 'higher'},
+    ZHCor: {name: 'Chinese correlation', unit: 'score', better: 'higher'}, ZHIoU: {name: 'Chinese IoU', unit: 'score', better: 'higher'},
+  },
   headline: 'The organizers report no overall score, so this is the plain mean of labeled correlation across four languages.',
   async fetch() {
     const text = (await fetchText(feed)).split('### Final Leaderboard')[1];

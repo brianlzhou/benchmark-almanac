@@ -16,6 +16,7 @@ const board: Leaderboard = {
   feed: FEED,
   aliases: { "deepseek-chat-v3-0324": "deepseek-v3-mar-2025" },
   terms: "The consortium requires explicit permission for commercial use. https://ansh-ankul.github.io/AI-Agribench-Blog-Post/#faq The robots.txt URL serves HTML.",
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, completeness: { name: 'Completeness', unit: '%', better: 'higher' }, conciseness: { name: 'Conciseness', unit: '%', better: 'higher' }, relevance: { name: 'Relevance', unit: '%', better: 'higher' } },
   async fetch() {
     const { evaluations, scores } = await fetchJson<{ evaluations: Evaluation[]; scores: Score[] }>(FEED);
     const runs = new Map(evaluations.filter((e) => e.subject_model.endsWith('**')).map((e) => [e.id, e]));

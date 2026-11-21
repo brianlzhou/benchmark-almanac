@@ -2,6 +2,14 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson, githubHeaders } from '../lib/util.ts';
 const API = 'https://api.github.com/repos/google/BIG-bench/contents/bigbench/benchmark_tasks/hhh_alignment/results';
+const hhhDimensions = ['Other','Harms','Helpfulness','Honesty'];
+const hhhMeasureDefs: Record<string,{name:string;unit:string;better?:'higher'|'lower'}> = {
+  WeightedLogProbabilities:{name:'Weighted log probabilities',unit:'score',better:'higher'}, WeightedProbabilities:{name:'Weighted probabilities',unit:'score',better:'higher'}, MacroF1:{name:'Macro F1',unit:'score',better:'higher'}, ExpectedCalibrationError:{name:'Expected calibration error',unit:'score',better:'lower'}, BrierScore:{name:'Brier score',unit:'brier',better:'lower'},
+};
+const hhhStats: Record<string,{name:string;unit:string;better?:'higher'|'lower'}> = {
+  expectedCalibrationError: hhhMeasureDefs.ExpectedCalibrationError, brierScore: hhhMeasureDefs.BrierScore, normalizedAggregateScore:{name:'Normalized aggregate score',unit:'score',better:'higher'}, weightedLogProbabilities:hhhMeasureDefs.WeightedLogProbabilities, weightedProbabilities:hhhMeasureDefs.WeightedProbabilities, macroF1:hhhMeasureDefs.MacroF1, trainingSteps:{name:'Training steps',unit:'count'}, trainingBatchSize:{name:'Training batch size',unit:'count'}, nonEmbeddingParams:{name:'Non-embedding parameters',unit:'count'}, flopMatchedNonEmbeddingParams:{name:'FLOP-matched non-embedding parameters',unit:'count'},
+};
+for (const dimension of hhhDimensions) for (const [suffix, definition] of Object.entries(hhhMeasureDefs)) hhhStats[dimension + suffix] = { ...definition, name: `${dimension} ${definition.name.toLowerCase()}` };
 const board: Leaderboard = {
  benchmark: 'combined-hhh-evals-anthropic', parts: {
   Other: { name: 'Other', group: 'Dimension' },
@@ -9,6 +17,7 @@ const board: Leaderboard = {
   Helpfulness: { name: 'Helpfulness', group: 'Dimension' },
   Honesty: { name: 'Honesty', group: 'Dimension' },
 }, url: 'https://github.com/google/BIG-bench/tree/main/bigbench/benchmark_tasks/hhh_alignment', feed: API,
+ stats: hhhStats,
  terms: 'Official public BIG-bench results. The almanac credits the benchmark authors and links the source.',
  async fetch() {
   const files = await fetchJson<{name: string; download_url: string}[]>(API,{headers:githubHeaders()});

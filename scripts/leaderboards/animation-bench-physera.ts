@@ -19,6 +19,9 @@ const board: Leaderboard = {
   benchmark: 'animation-bench-physera', url: page + '#leaderboard', feed: page,
   terms: 'Physera allows the research page in robots.txt and gives no score reuse license.',
   reference: [harness],
+  stats: {
+    taskWins: { name: 'Tasks won', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(page);
     const all = tables(html);

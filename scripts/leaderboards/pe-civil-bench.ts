@@ -6,7 +6,7 @@ import {fetchText} from '../lib/util.ts';
 import {tables,num} from '../lib/html.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://komal-blkmmb.github.io/PE_CIVIL_BENCH/';
-const board:Leaderboard={benchmark:'pe-civil-bench',url:URL,feed:URL,terms:'The benchmark site publishes these results. https://komal-blkmmb.github.io/PE_CIVIL_BENCH/',static:'paper',async fetch(){
+const board:Leaderboard={benchmark:'pe-civil-bench',url:URL,feed:URL,terms:'The benchmark site publishes these results. https://komal-blkmmb.github.io/PE_CIVIL_BENCH/',static:'paper',stats:{mcq:{name:'Multiple-choice accuracy',unit:'%',better:'higher'},oe:{name:'Open-ended numerical accuracy',unit:'%',better:'higher'}},async fetch(){
  const ts=tables(await fetchText(URL));
  const t=ts.find(x=>x.some(r=>r.some(c=>c.text==='Agentic RAG')));
  if(!t) throw new Error('Agentic RAG results table missing');

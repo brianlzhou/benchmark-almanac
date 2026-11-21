@@ -12,6 +12,14 @@ const board: Leaderboard = {
  parts: {
    easyPSR: { name: 'Easy', group: 'Difficulty' },
    hardPSR: { name: 'Hard', group: 'Difficulty' },
+   easyCSR: { name: 'Easy constraint satisfaction rate', group: 'Difficulty', unit: '%' },
+   easyISR: { name: 'Easy instruction satisfaction rate', group: 'Difficulty', unit: '%' },
+   hardCSR: { name: 'Hard constraint satisfaction rate', group: 'Difficulty', unit: '%' },
+   hardISR: { name: 'Hard instruction satisfaction rate', group: 'Difficulty', unit: '%' },
+ },
+ stats: {
+   fullCSR: { name: 'Full-set constraint satisfaction rate', unit: '%', better: 'higher' },
+   fullISR: { name: 'Full-set instruction satisfaction rate', unit: '%', better: 'higher' },
  },
  url: "https://arxiv.org/html/2408.01122",
  feed: FEED,

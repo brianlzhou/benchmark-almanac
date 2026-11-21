@@ -21,6 +21,7 @@ const board: Leaderboard = {
   url: "https://110.238.108.113/",
   feed: FEED,
   terms: "The live arena gives no reuse terms. Eleven scored configurations represent ten distinct model names on 2026-11-20. https://baibizhe.github.io/gamearena/ The arena serves no robots.txt.",
+  stats: { generationSuccess: { name: 'Generation success rate', unit: '%', better: 'higher' }, priceRmb: { name: 'Average price', unit: 'cny', better: 'lower' }, latency: { name: 'Average time per task', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const data = await fetchJson<Ratings>(FEED);
     const rows = Object.keys(data.official_rank).filter((id) => data.official_rank[id] != null).map((id) => {

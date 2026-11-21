@@ -9,6 +9,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The repository uses the MIT license. It excludes the game ROM. https://raw.githubusercontent.com/VibeCodyH/pokebench/main/LICENSE The host has no published robots directives at /robots.txt.",
   costPer: 'run',
+  stats: { turns: { name: 'Turns', unit: 'count', better: 'lower' }, seconds: { name: 'Seconds', unit: 'seconds', better: 'lower' }, inputTokens: { name: 'Input tokens', unit: 'tokens' } },
   parts: {
   "left_house": {
     "name": "Left the house",

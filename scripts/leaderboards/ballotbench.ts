@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://ballotbench.com",
   feed: "https://ballotbench.com",
   terms: "BallotBench disallows crawlers during forecasting. The public election page credits Thoughtful Lab and specifies no separate score license.",
+  stats: { called:{name:'Called races',unit:'count'}, favoriteWon:{name:'Favorite won',unit:'count'} },
   async fetch() {
     const page = await fetchText(this.url);
     const state = JSON.parse(page.match(/<script id="election-data" type="application\/json">([\s\S]*?)<\/script>/)?.[1] || '');

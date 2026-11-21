@@ -10,6 +10,11 @@ const board: Leaderboard = {
   feed,
   terms: "The framework uses MIT. Dataset licenses vary by source, including noncommercial terms. The authors give no separate leaderboard license. https://huggingface.co/datasets/lizhangmai/ICLayout-Bench#licensing The feed host returns no robots.txt.",
   parts: { public: "Public", private: "Private" },
+  stats: {
+    validity: { name: 'Validity', unit: '%', better: 'higher' },
+    privateCost: { name: 'Private cost per task', unit: 'usd', better: 'lower' },
+    privateTokens: { name: 'Private output tokens', unit: 'tokens' },
+  },
   async fetch() {
     type Result = { key: string; model: string; harness: string; effort: string; score: number; cost: number; output_tokens: number; validity: number };
     type Set = { models: Result[] };

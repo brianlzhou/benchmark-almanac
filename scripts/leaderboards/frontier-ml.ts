@@ -12,6 +12,7 @@ interface Entry {
 }
 const board: Leaderboard = {
   benchmark: 'frontier-ml', url, feed: url, terms: 'Public scores published by Induction Labs on FrontierML.',
+  stats: { walletSpend: { name: 'Compute spend', unit: 'usd', better: 'lower' }, modelCost: { name: 'API cost', unit: 'usd', better: 'lower' }, seconds: { name: 'Training time', unit: 'seconds', better: 'lower' }, steps: { name: 'Training steps', unit: 'count' }, graded: { name: 'Tasks graded', unit: 'count' }, total: { name: 'Total tasks', unit: 'count' }, zeros: { name: 'Zero scores', unit: 'count' } },
   async fetch() {
     const entries = jsonAfter<Entry[]>(nextFlight(await fetchText(url)), '"entries":');
     if (entries.length < 57) throw new Error('Missing FrontierML wallet results');

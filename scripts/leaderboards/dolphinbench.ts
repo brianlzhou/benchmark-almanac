@@ -16,6 +16,7 @@ interface Config {
   runs_url?: string;
 }
 const board: Leaderboard = {
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   benchmark: 'dolphinbench',
   url: PAGE,
   feed: FEED,

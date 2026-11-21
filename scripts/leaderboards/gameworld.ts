@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (original Overall PG panels and main README fine-control PG)`,
   terms: 'Static project page on GitHub Pages (no robots.txt); the page invites new results and states no terms.',
+  stats: { 'success rate (%)': { name: 'Success rate', unit: '%', better: 'higher' }, 'runs per task': { name: 'Runs per task', unit: 'count' } },
   aliases: {
     'OpenAI-Computer-Use': 'computer-use-preview-2025-03-11',
   },

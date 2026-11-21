@@ -16,6 +16,7 @@ const board: Leaderboard = {
   feed: `${URL} (server-rendered table "Current evals", Success Rate)`,
   terms: 'Server-rendered public page on nextjs.org (Vercel); the site publishes no robots.txt and the Vercel terms do not restrict reading it.',
   aliases: {},
+  stats: { latency: { name: 'Average duration', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const [t] = tables(await fetchText(URL)).filter((rows) => rows[0]?.some((c) => c.text === 'Success Rate'));
     if (!t) throw new Error('Next.js evals table not found');

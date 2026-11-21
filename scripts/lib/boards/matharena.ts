@@ -2,6 +2,13 @@
 import type { LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchJson } from '../util.ts';
 
+export const MATHARENA_STATS = {
+  inputTokens: { name: 'Input tokens per answer', unit: 'tokens' },
+  activeParams: { name: 'Active parameters', unit: 'billions' },
+  latency: { name: 'Average time per answer', unit: 'seconds', better: 'lower' },
+  averageRetries: { name: 'Average retries', unit: 'count', better: 'lower' },
+} as const;
+
 export const matharenaFeed = (comp: string) => `https://matharena.ai/competition_tables/${comp}`;
 const text = (s: string) =>
   s

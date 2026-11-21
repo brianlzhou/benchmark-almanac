@@ -8,6 +8,12 @@ const feed = 'https://arxiv.org/html/2611.10304';
 const board: Leaderboard = {
   benchmark: 'longtail-swe', static: 'paper', url: feed, feed,
   terms: 'The authors publish Tables 1 and 2 under the terms at https://arxiv.org/abs/2611.10304.',
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    pass3: { name: 'All-3 success rate', unit: '%', better: 'higher', note: 'Percentage of tasks solved successfully on all three attempts.' },
+    totalTokens: { name: 'Mean total tokens', unit: 'tokens' },
+    steps: { name: 'Mean steps', unit: 'count' },
+  },
   aliases: { 'Opus 5.5': 'claude-opus-5-5', 'GPT 6.1 Sol': 'gpt-6-1-sol', 'GPT 5.6 Sol': 'gpt-5-6-sol',
     'GPT 5.6 Luna': 'gpt-5-6-luna', 'Qwen 3.6 27B': 'qwen3-6-27b' },
   async fetch() {

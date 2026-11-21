@@ -1,12 +1,15 @@
 // The source reports no overall score. The headline is the plain mean of the 4 parts, computed by this importer.
 // GutBrainIE evaluates named entities, links and relations in biomedical abstracts.
 // The official rankings use micro F1. The overview describes the component models of these four complete pipelines.
-import type { Leaderboard } from './types.ts';
+import type { BoardStat, Leaderboard } from './types.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 import { tables } from '../lib/html.ts';
 import { fetchText } from '../lib/util.ts';
 const feed='https://hereditary.dei.unipd.it/challenges/gutbrainie/2026/';
 const parts={ner:'NER',nerd:'NERD',mention:'Mention-level RE',concept:'Concept-level RE'};
+const metricLabels={MacroP:'Macro precision',MacroR:'Macro recall',MacroF1:'Macro F1',MicroP:'Micro precision',MicroR:'Micro recall'};
+const gutNames={ner:'Named entity recognition',nerd:'Named entity recognition and disambiguation',mention:'Mention-level relation extraction',concept:'Concept-level relation extraction'};
+const gutStats:Record<string,BoardStat>=Object.fromEntries(Object.keys(parts).flatMap(part=>Object.entries(metricLabels).map(([metric,name])=>[part+metric,{name:gutNames[part as keyof typeof gutNames]+' '+name,unit:'score',better:'higher' as const,note:'Score from 0 to 1.'}])));
 const systems=[
   {submitter:'Organizers',run:'BASELINE',models:['NuNERZero','PubMedBERT','ATLOP']},
   {submitter:'TEXA',run:'1',models:['GLiNER','ATLOP']},
@@ -14,7 +17,7 @@ const systems=[
   {submitter:'GutHub',run:'01',models:['XGBoost','GLiNER','PubMedBERT','BioLinkBERT','BioELECTRA','BioClinical ModernBERT','OpenMed-NER','SapBERT']},
 ];
 const board:Leaderboard={
-  benchmark:'gutbrainie-2026',url:feed+'#six',feed,parts,harnesses:'system',
+  benchmark:'gutbrainie-2026',url:feed+'#six',feed,parts,harnesses:'system',stats:gutStats,
   terms:'The CLEF organizers publish the rankings at https://hereditary.dei.unipd.it/challenges/gutbrainie/2026/ and describe the systems at https://ceur-ws.org/Vol-4283/paper5.pdf.',
   async fetch(){
     const html=await fetchText(feed);

@@ -17,6 +17,7 @@ function data<T>(html: string, variable: string): T {
 const board: Leaderboard = {
   benchmark: 'general-bench', url: feed, feed, terms: 'General-Level reserves copyright on its full Scope-A leaderboard. https://generalist.top/leaderboard-scope-a',
   parts: { image: 'Image', video: 'Video', audio: 'Audio', threeD: '3D' },
+  stats: { level3: { name: 'Level 3 synergy score', unit: 'score', better: 'higher' }, level4: { name: 'Level 4 synergy score', unit: 'score', better: 'higher' } },
   aliases: {
     'Qwen2-Audio-Instruct': 'qwen2-audio-7b-instruct', 'LLaVA-NeXT-34B': 'llava-v1-6-34b', 'LLaVA-One-Vision-72B': 'llava-onevision-72b', 'Gemma-2-9b-it': 'gemma-2-9b',
     'Meta-Llama-3.1-8B-Instruct': 'llama-3-1-8b', 'Qwen2.5-7B-Instruct': 'qwen2-5-7b',

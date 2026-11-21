@@ -37,6 +37,13 @@ const board: Leaderboard = {
     pattern_inference: { name: 'Pattern inference', group: 'Task type' },
     personal_lookup: { name: 'Personal lookup', group: 'Task type' },
   },
+  stats: {
+    tasks: { name: 'Tasks', unit: 'count' },
+    perfect: { name: 'Perfect tasks', unit: 'count' },
+    rubric: { name: 'Rubric score', unit: '%', better: 'higher' },
+    trajEff: { name: 'Trajectory efficiency', unit: 'score', better: 'higher' },
+    steps: { name: 'Average steps per task', unit: 'count' },
+  },
   url: 'https://mypcbench.com/',
   feed: `${FEED} (perfect_rate)`,
   terms: 'JSON file the mypcbench.com page loads; robots.txt allows all paths and the site states no terms.',

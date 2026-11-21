@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: `${SITE}/leaderboard.html`,
   feed: `${FEED} (time.prediction all@1)`,
   terms: 'Static JSON on GitHub Pages that the leaderboard loads; robots.txt allows it and the BigOBench repository is CC BY-NC 4.0.',
+  stats: { bestAt1: { name: 'Best@1', unit: '%', better: 'higher' }, passAt1: { name: 'Pass@1', unit: '%', better: 'higher' } },
   aliases: {
     'Qwen2.5-Coder 32B': 'qwen2-5-coder-32b-instruct',
     'DeepSeekV3 671B': 'deepseek-v3',

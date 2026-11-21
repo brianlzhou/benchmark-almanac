@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://sites.google.com/view/limmits25/results",
   feed,
   terms: "Google Sites allows this public results path. Six entries appear in the Track 1 naturalness table. Tracks 2 and 3 have three and one. The site identifies no score reuse license. https://sites.google.com/view/limmits25/results",
+  stats: { speakerSimilarity: { name: 'Speaker similarity', unit: 'rating', better: 'higher' } },
   async fetch() {
     const page = await fetchText(feed);
     const rows = [];

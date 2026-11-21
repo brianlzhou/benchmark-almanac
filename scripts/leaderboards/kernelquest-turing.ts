@@ -12,6 +12,19 @@ const board: Leaderboard = {
   feed,
   terms: "The publisher gives no reuse license on the benchmark page. https://labs.turing.com/benchmarks/kernelquest Its robots.txt route serves the app.",
   harnesses: 'system',
+  stats: {
+    passingRuns: { name: 'Passing runs', unit: 'count', better: 'higher' },
+    stableTasks: { name: 'Stable tasks', unit: 'count' },
+    intermittentTasks: { name: 'Intermittent tasks', unit: 'count' },
+    unknownTasks: { name: 'Unknown tasks', unit: 'count' },
+    majoritySolvedTasks: { name: 'Majority-solved tasks', unit: 'count' },
+    meanReward: { name: 'Mean reward', unit: 'score', better: 'higher', note: 'Mean reward is stored from 0 to 1.' },
+    geoSpeedup: { name: 'Geometric mean speedup', unit: 'speedup', better: 'higher' },
+    coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+    timeouts: { name: 'Timeouts', unit: 'count', better: 'lower' },
+    medianAgentMinutes: { name: 'Median agent time', unit: 'minutes', better: 'lower' },
+    latency: { name: 'Mean latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(board.url);
     const path = html.match(/src="(\/assets\/index-[\w-]+\.js)"/)?.[1];

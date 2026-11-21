@@ -7,6 +7,7 @@ interface Entry { model_name: string; score_pct: number; correct: number; total_
 
 const board: Leaderboard = {
   benchmark: "iuk-1-3",
+  stats: { correct: { name: 'Correct answers', unit: 'count', better: 'higher' }, questions: { name: 'Questions', unit: 'count' }, meanScore: { name: 'Mean question score', unit: '%', better: 'higher' } },
   url: "https://huggingface.co/datasets/ryan-relayforge/iuk-benchmark/blob/main/results/v1.3/RESULTS_v1.3.md",
   feed: FEED,
   terms: "RelayForge licenses the results under CC BY 4.0. https://huggingface.co/datasets/ryan-relayforge/iuk-benchmark/blob/main/LICENSE Hugging Face allows crawling.",

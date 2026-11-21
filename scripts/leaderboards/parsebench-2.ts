@@ -11,6 +11,7 @@ export default {
   Forms: { name: 'Forms', group: 'Dimension' },
 },url:'https://parsebench.ai',feed,
   terms:'LlamaIndex publishes this downloadable CSV in the public ParseBench repository; robots.txt permits the raw file path.',
+  stats: { Cost_Per_Page: { name: 'Cost per page', unit: 'usd', better: 'lower' } },
   verified:'marked verified in the ParseBench 2 results CSV',
   async fetch():Promise<LeaderboardRow[]> {
     const rows=parseCsv(await fetchText(feed)).map(r=>{

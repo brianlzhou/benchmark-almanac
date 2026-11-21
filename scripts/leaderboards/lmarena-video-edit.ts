@@ -5,6 +5,7 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRows } from './lmarena-elo.
 
 const board: Leaderboard = {
   benchmark: 'lmarena-video-edit',
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   url: 'https://arena.ai/leaderboard',
   feed: arenaFeed('video_edit'),
   terms: ARENA_TERMS,

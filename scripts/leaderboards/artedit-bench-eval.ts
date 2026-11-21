@@ -7,6 +7,7 @@ const feed = 'https://arxiv.org/html/2511.23002';
 const board: Leaderboard = {
   benchmark:'artedit-bench-eval', static:'paper', url:feed, feed,
   terms:'The authors publish Table 2 on arXiv. https://arxiv.org/abs/2511.23002',
+  stats:{plcc:{name:'Pearson linear correlation coefficient',unit:'score',better:'higher'}},
   async fetch() {
     const tables = paperTables((await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi,'')).map(grid);
     const table = tables.find(t => t[0][0] === 'Method' && t[0][1]?.startsWith('SRCC') && t[0][2]?.startsWith('PLCC'));

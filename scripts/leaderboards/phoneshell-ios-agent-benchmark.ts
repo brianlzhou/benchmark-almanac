@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://blolabel.ai/#leaderboard",
   feed,
   terms: "The dataset card lists Apache 2.0 for the downloadable results. https://huggingface.co/datasets/blolabel/phoneshell-bench The feed host publishes robots.txt at https://blolabel.ai/robots.txt.",
+  stats: { steps: { name: 'Average steps', unit: 'count', better: 'lower' }, latency: { name: 'Average time', unit: 'seconds', better: 'lower' }, passed: { name: 'Passed tasks', unit: 'count' } },
   async fetch() {
     const required = ["Model", "Pass rate"];
     const table = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)))

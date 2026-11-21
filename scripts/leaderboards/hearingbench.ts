@@ -11,6 +11,15 @@ const board: Leaderboard = {
   url: PAGE,
   feed: PAGE,
   terms: 'The page links the source datasets and gives no separate benchmark license. Results are credited to Adam Holter and HearingBench.',
+  stats: {
+    everyday: { name: 'Everyday sounds correct', unit: 'count', better: 'higher' },
+    everydayNearMisses: { name: 'Everyday sounds near misses', unit: 'count' },
+    instrument: { name: 'Instrument sounds correct', unit: 'count', better: 'higher' },
+    instrumentNearMisses: { name: 'Instrument sounds near misses', unit: 'count' },
+    vocal: { name: 'Vocal sounds correct', unit: 'count', better: 'higher' },
+    vocalNearMisses: { name: 'Vocal sounds near misses', unit: 'count' },
+    words: { name: 'Words correct', unit: 'count', better: 'higher' },
+  },
   aliases: {
     'Gemini 4 Carbon': 'gemini-4-carbon',
     'Gemini 4 Neon': 'gemini-4-neon',

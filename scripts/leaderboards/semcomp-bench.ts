@@ -32,6 +32,7 @@ const board: Leaderboard = {
   "feed": "https://semcomp-bench.github.io/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { generationReliability: { name: 'Generation reliability', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const html=await fetchText(FEED);const rows:LeaderboardRow[]=[];

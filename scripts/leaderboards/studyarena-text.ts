@@ -1,6 +1,6 @@
 import { setTimeout as delay } from 'node:timers/promises'
 import type { Leaderboard } from './types.ts'
-import { studyRows, STUDY_TERMS } from '../lib/boards/studyarena.ts'
+import { studyRows, STUDY_TERMS, STUDY_TEXT_STATS } from '../lib/boards/studyarena.ts'
 
 const PAGE = 'https://studyarena.com/leaderboard'
 
@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: PAGE,
   terms: STUDY_TERMS,
+  stats: STUDY_TEXT_STATS,
   async fetch() {
     try {
       return await studyRows('text')

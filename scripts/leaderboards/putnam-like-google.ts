@@ -5,6 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED='https://codeload.github.com/google-deepmind/eval_hub/tar.gz/refs/heads/master';
 const board:Leaderboard={benchmark:'putnam-like-google',url:'https://github.com/google-deepmind/eval_hub/tree/master/eval_hub/putnam_like',feed:FEED,
  terms:'Public Google DeepMind eval_hub graded samples. Benchmark Almanac credits Google DeepMind and links the source.',
+ stats:{problems:{name:'Problems',unit:'count'},totalPoints:{name:'Total points',unit:'score',better:'higher',note:'Sum of grades from 0 to 10 across the 96 problems.'}},
  aliases:{'gemini-2.5-flash-04-17':'gemini-2-5-flash-apr-2025','gemini-2.5-pro-03-25':'gemini-2-5-pro-mar-2025','sonnet-3.7':'claude-3-7-sonnet'},
  async fetch():Promise<LeaderboardRow[]>{
   const res=await fetch(FEED,{headers:{'user-agent':'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)'},signal:AbortSignal.timeout(120000)});

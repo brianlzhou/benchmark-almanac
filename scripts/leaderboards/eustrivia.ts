@@ -11,6 +11,7 @@ const feed = 'https://huggingface.co/datasets/la-leaderboard/results';
 export default {
   benchmark: 'eustrivia', feed, url:'https://huggingface.co/spaces/la-leaderboard/la-leaderboard', host:'La Leaderboard',
   terms:'The results dataset uses Apache 2.0. ' + feed,
+  stats:{energyKwh:{name:'Energy use',unit:'count',better:'lower',note:'Energy use in kilowatt-hours.'},co2Kg:{name:'Carbon emissions',unit:'count',better:'lower',note:'Carbon emissions in kilograms.'},evaluationSeconds:{name:'Evaluation time',unit:'seconds',better:'lower'}},
   aliases: {
     '01-ai/Yi-1.5-9B-Chat':'yi-1-5-9b-chat', 'HuggingFaceTB/SmolLM2-1.7B-Instruct':'smollm2-1-7b-instruct',
     'HuggingFaceTB/SmolLM2-1.7B':'smollm2-1-7b', 'Qwen/Qwen2.5-1.5B':'qwen2-5-1-5b',

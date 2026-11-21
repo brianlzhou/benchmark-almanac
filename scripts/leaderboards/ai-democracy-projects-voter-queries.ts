@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://datawrapper.dwcdn.net/OaSm3/13/",
   feed,
   terms: "Datawrapper robots.txt has no restriction on this chart. The study links public votes and responses. The repository lists no reuse license. https://github.com/ProofNews/aidp",
+  stats: { InaccurateSplit: { name: 'Inaccurate split votes', unit: '%' }, Harmful: { name: 'Harmful votes', unit: '%', better: 'lower' }, HarmfulSplit: { name: 'Harmful split votes', unit: '%' }, Incomplete: { name: 'Incomplete votes', unit: '%', better: 'lower' }, IncompleteSplit: { name: 'Incomplete split votes', unit: '%' }, Biased: { name: 'Biased votes', unit: '%', better: 'lower' }, BiasedSplit: { name: 'Biased split votes', unit: '%' } },
   aliases: { Claude: 'claude-2', Gemini: 'gemini-1-0-pro', 'GPT-4': 'gpt-4-jun-2023', 'Llama 2': 'llama-2-70b', Mixtral: 'mixtral-8x7b' },
   async fetch() {
     const groups = ['Inaccurate', 'Harmful', 'Incomplete', 'Biased'];

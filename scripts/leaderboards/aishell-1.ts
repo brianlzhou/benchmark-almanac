@@ -6,6 +6,9 @@ const URL = 'https://arxiv.org/html/1709.05522';
 const board: Leaderboard = {
   benchmark: 'aishell-1', static: 'paper', parts: {
   devCER: { name: 'Development', group: 'Split' },
+  iosCER: { name: 'iOS character error rate', unit: '%', better: 'lower' },
+  androidCER: { name: 'Android character error rate', unit: '%', better: 'lower' },
+  thchs30CER: { name: 'THCHS-30 character error rate', unit: '%', better: 'lower' },
 }, url: URL, feed: URL + ' (test-set CER, lower is better)', terms: PAPER_TERMS,
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(URL));

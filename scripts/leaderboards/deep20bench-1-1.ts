@@ -5,6 +5,7 @@ const URL='https://deep20bench.com/editions/1.1/results/';
 interface Row {is_latest:boolean;rank:number|null;model:{display_name:string;reasoning_effort:string};question_score:string;completed_at:string;guesser_cost_per_episode_usd:string;success_rate:string;question_score_confidence_interval:{lower:string;upper:string};contract:{compliance_rate:string}}
 const board:Leaderboard={benchmark:'deep20bench-1-1',url:URL,feed:URL+' (deep20-page-state JSON)',
  terms:'Published data is CC BY 4.0; the site robots.txt permits this edition path. Software has a separate PolyForm Noncommercial license.',
+ stats:{solved:{name:'Success rate',unit:'%',better:'higher'},compliance:{name:'Contract compliance',unit:'%',better:'higher'}},
  async fetch(){
   const html=await fetchText(URL);const m=html.match(/<script id="deep20-page-state" type="application\/json">([\s\S]*?)<\/script>/);
   if(!m)throw new Error('Page state missing');

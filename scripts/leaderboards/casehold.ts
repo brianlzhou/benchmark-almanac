@@ -11,6 +11,10 @@ const board: Leaderboard = {
   url: "https://github.com/reglab/casehold",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    pretrainingSteps: { name: 'Pretraining steps', unit: 'count' },
+    vocabularySize: { name: 'Vocabulary size', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const t=(await paperTables(FEED))[4],r=t?.find(r=>r[0]?.text.startsWith('CaseHOLD'));
     if(r?.length!==6)throw new Error('CaseHOLD results changed');

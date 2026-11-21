@@ -9,6 +9,7 @@ const url = 'https://dylantirandaz.com/projects.html/periapicalbench/';
 const board: Leaderboard = {
   benchmark: 'periapical-lesions-bench', url, feed: url,
   terms: 'Public results table credited to Dylan Tirandaz.',
+  stats: { pass2: { name: 'Pass@2', unit: '%', better: 'higher' }, pass3: { name: 'Pass@3', unit: '%', better: 'higher' }, meanReward: { name: 'Mean reward', unit: 'score', better: 'higher' } },
   async fetch() {
     const t = tables(await fetchText(url)).find(t => t[0]?.map(c => c.text).join('|') === 'Model|pass@1|pass@2|pass@3|Mean reward|Cost per attempt');
     if (!t || t.length < 9) throw new Error('Incomplete periapical benchmark table');

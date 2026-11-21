@@ -69,9 +69,24 @@ function latencyMetrics(script:string,row:Entry):Record<string,number>{
   return {};
 }
 export function voiceArena(language:string,slug:string):Leaderboard{
+  const stats: NonNullable<Leaderboard['stats']> = { votes: { name: 'Votes', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' } };
+  if (language === 'US English') for (const prefix of ['', 'window7d_', 'window30d_']) {
+    stats[prefix + 'ttfaP50Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}Median time to first audio`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'ttfaMeanMs'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}Mean time to first audio`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'ttfaP75Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}75th percentile time to first audio`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'ttfaP95Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}95th percentile time to first audio`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'ttfaP99Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}99th percentile time to first audio`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'genP50Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}Median generation time`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'genMeanMs'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}Mean generation time`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'genP75Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}75th percentile generation time`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'genP95Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}95th percentile generation time`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'genP99Ms'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}99th percentile generation time`.trim(), unit: 'ms', better: 'lower' };
+    stats[prefix + 'charsPerSecP50'] = { name: `${prefix ? prefix.replace('_', ' ') : ''}Median characters per second`.trim(), unit: 'count', better: 'higher' };
+  }
   return {
     benchmark:'voicearena-'+slug,url:SITE+'/tts-leaderboard/'+slug,feed:SITE+'/tts-leaderboard/'+slug,
     terms:'Public Voice Arena leaderboard and anonymous read API. Site terms apply. The almanac credits and links the source.',
+    stats,
     ...(language==='US English'?{chart:{title:'Quality vs Speed',x:{key:'ttfaP50Ms',label:'Median time to first audio',unit:'ms',better:'lower' as const},y:{key:'score',label:'Elo',better:'higher' as const},note:'Published US English latency summaries use the default 1-day measurement window.'}}:{}),
     async fetch():Promise<LeaderboardRow[]>{
       const data=await source();

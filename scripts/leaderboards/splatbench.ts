@@ -4,7 +4,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const feed='https://huggingface.co/spaces/perpetual-research/splatbench-explorer/raw/main/media/splatbench/summary.json';
 const board:Leaderboard={benchmark:'splatbench',url:'https://huggingface.co/spaces/perpetual-research/splatbench-explorer',feed,
- terms:"The dataset's episodes and analysis are CC BY 4.0 and its code is MIT. The Almanac credits and links Perpetual Research.",
+ terms:"The dataset's episodes and analysis are CC BY 4.0 and its code is MIT. The Almanac credits and links Perpetual Research.", stats:{minutes:{name:'Runtime',unit:'minutes',better:'lower'}},
  async fetch():Promise<LeaderboardRow[]>{
   const d=await fetchJson<{tasks:unknown[];models:Record<string,{label:string;mean:number;ci95:number[];usd:number;minutes:number}>}>(feed);
   if(d.tasks.length!==30)throw new Error('SplatBench headline task set changed');

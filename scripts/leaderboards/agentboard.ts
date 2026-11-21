@@ -27,6 +27,10 @@ const board: Leaderboard = {
   url: "https://hkust-nlp.github.io/agentboard/static/leaderboard.html",
   feed: FEED,
   terms: "Public results published by the benchmark authors at hkust-nlp.github.io; retain source attribution and follow the upstream terms.",
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    grounding: { name: 'Grounding', unit: '%', better: 'higher' },
+  },
   aliases: {},
   
   async fetch() {

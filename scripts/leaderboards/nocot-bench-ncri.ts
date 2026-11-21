@@ -4,7 +4,9 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
 const FEED='https://raw.githubusercontent.com/neelnanda-io/nocot-bench/main/scores_all.csv';
-const board:Leaderboard={benchmark:'nocot-bench-ncri',url:'https://github.com/neelnanda-io/nocot-bench',feed:FEED,terms:'Public NoCoT-Bench results subject to the source repository license and GitHub terms.',async fetch(){
+const board:Leaderboard={benchmark:'nocot-bench-ncri',url:'https://github.com/neelnanda-io/nocot-bench',feed:FEED,terms:'Public NoCoT-Bench results subject to the source repository license and GitHub terms.',stats:{
+  withFiller:{name:'NCRI score with filler',unit:'index',better:'higher'}, fillerUplift:{name:'Filler uplift',unit:'index',better:'higher'},
+},async fetch(){
  const csv=parseCsv(await fetchText(FEED)),rows:LeaderboardRow[]=[];
  for(const r of csv){
   const score=num(r.ncri);if(!r.model_id||score===undefined)continue;

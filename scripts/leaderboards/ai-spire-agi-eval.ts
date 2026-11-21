@@ -25,6 +25,7 @@ const charts = [
 const board: Leaderboard = {
   benchmark: 'ai-spire-agi-eval', url, feed: url,
   terms: 'AGI-Eval publishes the charts on CSDN without a reuse license. The article robots.txt allows the results page.',
+  stats: { attempt1: { name: 'Floor reached on attempt 1', unit: 'count' }, attempt2: { name: 'Floor reached on attempt 2', unit: 'count' }, attempt3: { name: 'Floor reached on attempt 3', unit: 'count' }, attempt4: { name: 'Floor reached on attempt 4', unit: 'count' }, attempt5: { name: 'Floor reached on attempt 5', unit: 'count' }, attempt6: { name: 'Floor reached on attempt 6', unit: 'count' }, attempt7: { name: 'Floor reached on attempt 7', unit: 'count' }, attempt8: { name: 'Floor reached on attempt 8', unit: 'count' }, attempt9: { name: 'Floor reached on attempt 9', unit: 'count' } },
   async fetch() {
     const page = await fetchText(url);
     const rows: LeaderboardRow[] = [];

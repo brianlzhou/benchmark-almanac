@@ -14,6 +14,7 @@ function interval(cell: string) {
 const board: Leaderboard = {
   benchmark: 'norregel', url: repo + '/blob/HEAD/docs/RESULTS_V2.md', feed,
   terms: 'The results document uses CC BY 4.0. ' + repo + '/blob/HEAD/LICENSE-docs',
+  stats: { answers: { name: 'Answers', unit: 'count' }, series: { name: 'Series', unit: 'count' }, outdated: { name: 'Outdated answers', unit: '%', better: 'lower' }, error: { name: 'Incorrect answers', unit: '%', better: 'lower' }, uninterpreted: { name: 'Uninterpreted answers', unit: '%', better: 'lower' } },
   aliases: { 'claude-haiku-4-5-20251001': 'claude-haiku-4-5', 'claude-opus-4-5-20251101': 'claude-opus-4-5',
     'gemma-4-26b-a4b-it': 'gemma-4-26b-a4b' },
   async fetch() {

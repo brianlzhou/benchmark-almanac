@@ -28,6 +28,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (current Framer page module, all ranked leaderboard rows)`,
   terms: "Static page on zapier.com; Zapier's terms of service and acceptable use policy do not restrict automated reading.",
+  stats: { tasks:{name:'Tasks',unit:'count'}, promotionalCostUsd:{name:'Promotional cost per task',unit:'usd',better:'lower'} },
   parts: Object.fromEntries(['Sales', 'Marketing', 'Operations', 'Support', 'Finance', 'HR'].map(name => [name, { name, group: 'Department' }])),
   aliases: { 'Gemini 3.1 Pro (preview)': 'gemini-3-1-pro' },
   async fetch() {

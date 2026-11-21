@@ -9,6 +9,15 @@ const board: Leaderboard = {
   url: "https://dubesor.de/chess/chess-leaderboard",
   feed: FEED,
   terms: "The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/ The text snapshot is allowed by robots.txt.",
+  stats: {
+    wins: { name: 'Wins', unit: 'count' }, draws: { name: 'Draws', unit: 'count' }, losses: { name: 'Losses', unit: 'count' },
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, blunderRate: { name: 'Blunder rate', unit: '%', better: 'lower' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' }, material: { name: 'Material balance', unit: 'score', better: 'higher' },
+    turns: { name: 'Turns', unit: 'count' }, tokensPerMove: { name: 'Tokens per move', unit: 'tokens' },
+    secondsPerMove: { name: 'Seconds per move', unit: 'seconds', better: 'lower' },
+    legalReasoning: { name: 'Legal reasoning rate', unit: '%', better: 'higher' }, legalContinuation: { name: 'Legal continuation rate', unit: '%', better: 'higher' },
+    legal: { name: 'Legal move rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const rows = [];

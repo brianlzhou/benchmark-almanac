@@ -10,6 +10,7 @@ type Results = Record<string,Record<string,number>>;
 
 const board: Leaderboard = {
   benchmark: "mlrc-bench",
+  stats: { absoluteAverage: { name: 'Absolute improvement over baseline', unit: 'score', better: 'higher' } },
   url: "https://huggingface.co/spaces/launch/MLRC_Bench",
   feed: FEED,
   terms: "The Space declares CC BY 4.0 in https://huggingface.co/spaces/launch/MLRC_Bench/blob/main/README.md.",

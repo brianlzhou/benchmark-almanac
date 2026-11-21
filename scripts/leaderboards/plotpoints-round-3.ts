@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://plotlightstudios.com/plotpoints/leaderboard?round=3",
   feed: FEED,
   terms: "PlotPoints labels its public results CC BY 4.0. The repository and Hugging Face dataset list CC BY-NC 4.0. https://plotlightstudios.com/plotpoints https://huggingface.co/datasets/lazyweasel/roleplay-bench The robots file disallows /api/.",
+  stats: { votes: { name: 'Votes', unit: 'count' }, prior: { name: 'Prior Elo', unit: 'elo' }, deltaVsPrior: { name: 'Elo change from prior', unit: 'elo' }, judge: { name: 'Judge score', unit: 'score', better: 'higher' } },
   async fetch() {
     const rows = [];
     for (const track of ['standard','nsfw']) {

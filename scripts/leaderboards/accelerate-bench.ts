@@ -8,6 +8,13 @@ interface Task {id: string; name: string; area: string; rewards_percent: (number
 const board: Leaderboard = {
   benchmark:'accelerate-bench', url, feed,
   terms:'The authors publish this downloadable results file; robots.txt has no restrictions and the project page states no separate extraction terms.',
+  stats: {
+    referenceScore: { name: 'Reference score', unit: 'score', better: 'higher' },
+    geometricMeanSpeedup: { name: 'Geometric mean speedup', unit: 'speedup', better: 'higher' },
+    accuracy125: { name: 'Accuracy at 1.25', unit: '%', better: 'higher' },
+    accuracy2: { name: 'Accuracy at 2', unit: '%', better: 'higher' },
+    stoppedTasks: { name: 'Stopped tasks', unit: 'count' },
+  },
   async fetch():Promise<LeaderboardRow[]> {
     const d=await fetchJson<{models:Entry[]; tasks:Task[]}>(feed);
     const tasks = d.tasks.map(task => ({

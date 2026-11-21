@@ -10,6 +10,14 @@ const board: Leaderboard = {
   benchmark: 'duobench', url: feed, feed,
   terms: 'The authors publish these simulation results at https://duobench.github.io/.',
   headline: 'The project reports no overall score, so the headline averages the success rates on its 11 simulation tasks.',
+  stats: Object.fromEntries([
+    'Hinge-Chest Final progress', 'Spring-Door Final progress', 'Spring-Door: box + door pass rate',
+    'Pour-Marbles Final progress', 'Carry-Pot Final progress', 'Carry-Pot: grasp + lift pass rate',
+    'Ball-Maze Final progress', 'Ball-Maze: ball to goal pass rate', 'Block-Balance Final progress',
+    'Join-Blocks Final progress', 'Transfer-Cube Final progress', 'Transfer-Cube: pick cube pass rate',
+    'Transfer-Gate Final progress', 'Transfer-Gate: pick box pass rate', 'Transfer-Reorient Final progress',
+    'Transfer-Reorient: insert pass rate', 'Bin-Sort Final progress', 'Bin-Sort: pick 2nd pass rate',
+  ].map(key => [key, { name: key, unit: 'score', better: 'higher', note: 'Success or progress value from 0 to 1.' }])),
   async fetch() {
     const html = (await fetchText(feed)).replaceAll('&pi;<sub>0.5</sub>', 'π0.5');
     const table = tables(html).find(t => t[0]?.map(c => c.text).join('|') === 'Task|ACT|π0.5|X-VLA');

@@ -9,6 +9,7 @@ const board: Leaderboard = {
  url: "https://improofbench.math.ethz.ch/questions/leaderboard/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats:{totalQuestions:{name:'Total questions',unit:'count'},observedQuestions:{name:'Observed questions',unit:'count'},estimatedQuestions:{name:'Estimated questions',unit:'count'},coverage:{name:'Coverage',unit:'score',better:'higher',note:'Coverage is stored from 0 to 1.'}},
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

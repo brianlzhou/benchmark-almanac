@@ -10,6 +10,7 @@ const board: Leaderboard = {
   terms: 'NeurIPS publishes the authors’ paper. https://proceedings.neurips.cc/paper_files/paper/2024/hash/3ac952d0264ef7a505393868a70a46b6-Abstract-Datasets_and_Benchmarks_Track.html',
   headline: 'The headline averages the mean harmfulness ratings of the GPT4 and Llama2 medical request groups. Lower is better.',
   parts: { gpt4: 'MedSafety-Eval-GPT4', llama2: 'MedSafety-Eval-Llama2' },
+  stats: { gpt4Count: { name: 'GPT-4 request count', unit: 'count' }, llama2Count: { name: 'Llama 2 request count', unit: 'count' } },
   async fetch() {
     const pdf = await pdfText(feed);
     const caption = 'Figure 5: Harmfulness score raw distributions';

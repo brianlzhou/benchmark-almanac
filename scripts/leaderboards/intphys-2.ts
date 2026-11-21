@@ -8,6 +8,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2506.09849";
 const board: Leaderboard = {
   benchmark: "intphys-2", static: 'paper',
+  stats: { heldOut: { name: 'Held-out accuracy', unit: '%', better: 'higher' } },
   parts: {
     easy: { name: 'Easy', group: 'Difficulty' },
     medium: { name: 'Medium', group: 'Difficulty' },

@@ -13,6 +13,11 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  stats: {
+    'Image2LaTeX - # prompt tokens': { name: 'Image2LaTeX prompt tokens', unit: 'tokens' }, 'Image2LaTeX - # output tokens': { name: 'Image2LaTeX output tokens', unit: 'tokens' },
+    'Image2webpage - # prompt tokens': { name: 'Image2webpage prompt tokens', unit: 'tokens' }, 'Image2webpage - # output tokens': { name: 'Image2webpage output tokens', unit: 'tokens' },
+    'Image2musicsheet - # prompt tokens': { name: 'Image2musicsheet prompt tokens', unit: 'tokens' }, 'Image2musicsheet - # output tokens': { name: 'Image2musicsheet output tokens', unit: 'tokens' },
+  },
   async fetch(){
  const rows=await helmRows(TABLE);const latest=await helmNewest('image2struct','runs');const ts=await fetchJson<any[]>('https://storage.googleapis.com/crfm-helm-public/'+latest+'groups/core_scenarios.json');
  const scored=ts[0].rows.filter((r:any[])=>typeof r[1]?.value==='number');const info=ts.find(t=>t.title==='General information');

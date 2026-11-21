@@ -18,6 +18,15 @@ const FEED = "https://raw.githubusercontent.com/sylinrl/TruthfulQA/main/README.m
 const board: Leaderboard = {
   benchmark: "truthfulqa", url: "https://github.com/sylinrl/TruthfulQA", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    '% info': { name: 'Informativeness', unit: '%', better: 'higher' },
+    '% true (GPT-judge)': { name: 'Truthfulness', unit: '%', better: 'higher' },
+    BLEU: { name: 'BLEU similarity score', unit: 'score', better: 'higher' },
+    BLEURT: { name: 'BLEURT similarity score', unit: 'score', better: 'higher' },
+    MC1: { name: 'Multiple-choice single-true accuracy', unit: 'score', better: 'higher', note: 'Accuracy when one answer is correct and the model selects the highest-probability answer.' },
+    MC2: { name: 'Multiple-choice multi-true score', unit: 'score', better: 'higher', note: 'Normalized probability mass assigned to all correct answers.' },
+    ROUGE: { name: 'ROUGE similarity score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

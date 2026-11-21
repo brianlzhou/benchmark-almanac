@@ -15,6 +15,7 @@ const board: Leaderboard = {
   'Con. & Oc.': { name: 'Contact and occlusion', group: 'Task type' },
   'Spa. Cont.': { name: 'Spatial containment', group: 'Task type' },
 }, url: URL, feed: URL + ' (Table 2 overall accuracy)', terms: PAPER_TERMS,
+  stats: { mIoU: { name: 'Mean intersection over union', unit: 'score', better: 'higher', note: 'Mean intersection over union between predicted and ground-truth object regions.' } },
   aliases: {'Gemini-2.5-Flash-0520': 'gemini-2-5-flash-may-2025', 'GPT-4o-1120': 'gpt-4o-nov-2024', 'Gemini-2.5-Pro-0605': 'gemini-2-5-pro-jun-2025', 'o3-0416': 'o3'},
   async fetch() {
     const t = inlinePaperTables(await paperHtml(URL)).find(t => t[1]?.[1] === 'Overall' && t[1]?.[2] === 'mIoU');

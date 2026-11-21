@@ -9,6 +9,7 @@ const FEED = "https://vlmsarebiased.github.io";
 const board: Leaderboard = {
  benchmark: "vlmsarebiased", url: "https://vlmsarebiased.github.io", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { original: {name: 'Original prompt accuracy', unit: '%', better: 'higher'} },
  aliases: {'Sonnet-3.7':'claude-3-7-sonnet'},
  async fetch() {
 

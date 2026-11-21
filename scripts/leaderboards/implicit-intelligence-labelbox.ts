@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "Labelbox links its terms of service and provides no separate leaderboard license. https://docs.labelbox.com/page/terms-of-service Its robots.txt restrictions cover CGI and PDF paths.",
   parts: { implicit_reasoning: 'Implicit Reasoning', catastrophic_risk: 'Catastrophic Risk', privacy_security: 'Privacy & Security', accessibility: 'Accessibility' },
+  stats: { nss: { name: 'Normalized scenario score', unit: 'score', better: 'higher' }, steps: { name: 'Steps', unit: 'count' } },
   async fetch() {
     type Entry = Record<string, unknown> & { label: string; variant?: string; spr: number; spr_ci: number; nss: number; nss_ci: number; steps: number };
     const entries: Entry[] = (await labelboxData(feed, 'implicit-intelligence')).models;

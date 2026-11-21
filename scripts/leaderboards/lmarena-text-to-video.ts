@@ -24,6 +24,7 @@ const VIDEO_ALIASES: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'lmarena-text-to-video',
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   url: 'https://arena.ai/leaderboard',
   feed: arenaFeed('text_to_video'),
   terms: ARENA_TERMS,

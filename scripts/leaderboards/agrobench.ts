@@ -7,7 +7,10 @@ const feed = 'https://arxiv.org/html/2507.20519';
 const parts = {DID:'Disease identification', DMN:'Disease management', PID:'Pest identification', WID:'Weed identification',
   CMN:'Crop management', MQA:'Machine QA', TM:'Traditional methods'};
 const board: Leaderboard = {
-  benchmark:'agrobench', static:'paper', url:feed, feed, parts,
+  benchmark:'agrobench', static:'paper', url:feed, feed, parts: {
+    ...parts,
+    humanValidationSubset: { name: 'Human validation subset accuracy', unit: '%', better: 'higher' },
+  },
   terms:'The authors publish Tables 2 and 3 on arXiv. https://arxiv.org/abs/2507.20519',
   aliases:{'GPT-4o (snapshot unspecified)':'gpt-4o-aug-2024','GPT-4o mini (snapshot unspecified)':'gpt-4o-mini','EMU2Chat':'emu2-chat',
     'Gemini1.5-Flash (snapshot unspecified)':'gemini-1-5-flash-may-2024', 'Gemini1.5-Pro (snapshot unspecified)':'gemini-1-5-pro-may-2024',

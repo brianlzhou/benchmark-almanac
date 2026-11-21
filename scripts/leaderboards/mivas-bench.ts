@@ -10,6 +10,7 @@ type Entry = { name: string; slug: string; model: string; by_industry: Record<st
 
 const board: Leaderboard = {
   benchmark: "mivas-bench",
+  stats: { combined: { name: 'Combined score', unit: '%', better: 'higher' }, pass_at_1: { name: 'Pass@1', unit: '%', better: 'higher' }, tools: { name: 'Tool success rate', unit: '%', better: 'higher' }, handoff: { name: 'Handoff success rate', unit: '%', better: 'higher' }, hangup_db: { name: 'Hang-up quality', unit: 'score', better: 'higher' }, latency_ms: { name: 'Latency', unit: 'ms', better: 'lower' }, p90_latency_ms: { name: '90th percentile latency', unit: 'ms', better: 'lower' }, duration_s: { name: 'Duration', unit: 'seconds', better: 'lower' }, turns: { name: 'Turns', unit: 'count', better: 'lower' }, cost_per_hour_usd: { name: 'Cost per hour', unit: 'usd', better: 'lower' } },
   url: "https://research.getbluejay.ai/benchmarks/mivas/leaderboard",
   feed,
   terms: "Bluejay Labs publishes the leaderboard on its research site. No separate score license is stated. robots.txt allows the feed path.",

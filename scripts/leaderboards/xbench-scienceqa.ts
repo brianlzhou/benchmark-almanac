@@ -54,6 +54,12 @@ const board: Leaderboard = {
   url: 'https://xbench.org/agi/scienceqa',
   feed: XBENCH_API + PATH,
   terms: XBENCH_TERMS,
+  stats: {
+    priceIn: { name: 'Input pricing per million tokens', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output pricing per million tokens', unit: 'usd-per-mtok', better: 'lower' },
+    bestOf5: { name: 'Best of 5 score', unit: '%', better: 'higher', note: 'Score from the best of five sampled answers.' },
+    latency: { name: 'Time cost per task', unit: 'seconds', better: 'lower', note: 'Time required for one task.' },
+  },
   aliases: XBENCH_ALIASES,
   async fetch() {
     const { data } = await xbenchApi<{ data: Entry[] }>(PATH);

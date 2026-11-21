@@ -18,10 +18,16 @@ function minutes(s: string): number {
   return Math.round((h * 60 + m + sec / 60) * 100) / 100;
 }
 
-export function valsSmithBoard(benchmark: string, repo: string): Leaderboard {
+export function valsSmithBoard(benchmark: string, repo: string, tokensAvailable = true): Leaderboard {
   const url = `https://www.vals.ai/vals-smith/${repo}`;
   return {
     benchmark,
+    stats: {
+      passed: { name: 'Tests passed', unit: 'count' },
+      tests: { name: 'Tests', unit: 'count' },
+      ...(tokensAvailable ? { totalTokens: { name: 'Total tokens', unit: 'tokens' } } : {}),
+      minutes: { name: 'Duration', unit: 'minutes', better: 'lower' },
+    },
     url,
     feed: url,
     host: 'Vals AI',

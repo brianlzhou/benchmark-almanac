@@ -12,6 +12,12 @@ const board: Leaderboard = {
   url: feed + '#S6.T3',
   feed,
   terms: 'The authors publish the paper under the terms listed at https://arxiv.org/abs/2311.13743.',
+  stats: {
+    sharpeRatio: { name: 'Sharpe ratio', unit: 'score', better: 'higher' },
+    dailyVolatility: { name: 'Daily volatility', unit: '%', better: 'lower' },
+    annualizedVolatility: { name: 'Annualized volatility', unit: '%', better: 'lower' },
+    maxDrawdown: { name: 'Maximum drawdown', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const table = inlinePaperTables(await paperHtml(feed)).find(t => t[0].includes('Llama2-70b-chat'));
     const labels = ['Metric', 'Cumulative Return (%)', 'Sharpe Ratio', 'Daily Volatility (%)', 'Annualized Volatility (%)', 'Max Drawdown (%)'];

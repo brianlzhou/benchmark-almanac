@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: 'The authors posted this paper under the arXiv publication terms, https://arxiv.org/licenses/nonexclusive-distrib/1.0/.',
   headline: 'The paper reports no combined score, so this is the plain mean of F1 across its three subtasks.',
   parts: { A: 'Subtask A', B: 'Subtask B', C: 'Subtask C' }, harnesses: 'system',
+  stats: Object.fromEntries(['A','B','C'].flatMap(k => [[k+'Precision',{name:'Subtask '+k+' precision',unit:'score',better:'higher',note:'Rate from 0 to 1.'}],[k+'Recall',{name:'Subtask '+k+' recall',unit:'score',better:'higher',note:'Rate from 0 to 1.'}]])),
   async fetch() {
     const html = await paperHtml(feed);
     const tables = paperTables(html).map(grid).filter(t => t[0]?.slice(0, 4).join('|') === 'Team|P|R|F1');

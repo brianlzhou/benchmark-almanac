@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://scale.com/showdown",
   feed: "https://static.scale.com/uploads/654197dc94d34f66c0f5184e/SEAL_Showdown_Tech_Report.pdf",
   terms: "Scale grants access through supported browsers for internal use. https://scale.com/legal/terms The old Showdown URL redirects to Scale Labs. Scale allows the page in robots.txt. Its report host returned 403 for robots.txt.",
+  stats: { rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
   aliases: SCALE_ALIASES,
   async fetch() {
     const report = await pdfText(this.feed);

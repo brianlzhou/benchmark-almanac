@@ -20,6 +20,13 @@ const board: Leaderboard = {
   aliases: {
     'kimi-k2.5': 'kimi-k2-5',
   },
+  stats: {
+    latency: { name: 'Average time per task', unit: 'seconds', better: 'lower' },
+    tasks: { name: 'Tasks', unit: 'count' },
+    tasks_passed: { name: 'Tasks passed', unit: 'count' },
+    boltz_budget: { name: 'Boltz budget', unit: 'count' },
+    admet_budget: { name: 'ADMET budget', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(PAGE);
     const chunks = [...new Set([...html.matchAll(/\/_next\/static\/chunks\/[^"?]+\.js/g)].map((m) => m[0]))];

@@ -69,6 +69,7 @@ const board: Leaderboard = {
   url: `https://github.com/${REPO}/blob/main/leaderboard.md`,
   feed: `${FEED} (BBEH harmonic mean)`,
   terms: 'Markdown file in the google-deepmind/bbeh GitHub repository, which is Apache-2.0.',
+  stats: { micro: { name: 'Micro average', unit: 'score', better: 'higher' } },
   aliases: {
     'Llama 3.1 8b Instruct': 'llama-3-1-8b',
     'Distill R1 Qwen 32b': 'deepseek-r1-distill-qwen-32b',

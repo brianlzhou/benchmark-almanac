@@ -10,6 +10,7 @@ type Result = { model: string, score: number, dev: number, date?: string, link?:
 const board: Leaderboard = {
   benchmark: 'sciencebenchmark-sql', url, feed,
   terms: "The organizers state no score reuse license. The robots.txt URL returns HTML.",
+  stats: { dev: { name: 'Development accuracy', unit: '%', better: 'higher' }, CORDISDev: { name: 'CORDIS dataset development accuracy', unit: '%', better: 'higher' }, SDSSDev: { name: 'Sloan Digital Sky Survey development accuracy', unit: '%', better: 'higher' }, OncoMxDev: { name: 'OncoMX development accuracy', unit: '%', better: 'higher' } },
   parts: { CORDIS: 'CORDIS', SDSS: 'SDSS', OncoMx: 'OncoMX' },
   async fetch() {
     const page = await fetchText(feed);

@@ -5,7 +5,7 @@
 // matharenaRows from this file. Besides cost and output tokens per answer, each row keeps the table's
 // rank, input tokens, average retries, time per answer and the accuracy interval.
 import type { Leaderboard } from './types.ts';
-import { matharenaFeed, matharenaRows } from '../lib/boards/matharena.ts';
+import { MATHARENA_STATS, matharenaFeed, matharenaRows } from '../lib/boards/matharena.ts';
 
 export { matharenaFeed, matharenaRows };
 export const matharenaPage = (comp: string) => `https://matharena.ai/?comp=${comp}`;
@@ -48,6 +48,7 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: MATHARENA_ALIASES,
+  stats: MATHARENA_STATS,
   fetch: () => matharenaRows(COMP),
 };
 export default board;

@@ -20,6 +20,7 @@ const board: Leaderboard = {
  url: "https://gregxmhu.github.io/OccuBench-website/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { robustnessRatio: { name: 'Robustness ratio', unit: 'score', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

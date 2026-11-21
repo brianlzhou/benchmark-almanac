@@ -6,6 +6,7 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const feed = "https://arxiv.org/pdf/2607.23808";
 const board: Leaderboard = {
   benchmark: 'indic-diarbench', static: 'paper',
+  stats: { cpWER: { name: 'Concatenated minimum-permutation word error rate', unit: '%', better: 'lower' }, WDER: { name: 'Word diarization error rate', unit: '%', better: 'lower' }, miss: { name: 'Missed detection error', unit: '%', better: 'lower' }, falseAlarm: { name: 'False alarm error', unit: '%', better: 'lower' }, confusion: { name: 'Speaker confusion error', unit: '%', better: 'lower' } },
   url: "https://arxiv.org/pdf/2607.23808",
   feed,
   terms: "arXiv allows PDF access and specifies a 15-second crawl delay. Table 3 reports duration-weighted error rates. Figure 2 shows which languages each system covers. The dataset uses CC BY 4.0. https://huggingface.co/datasets/sarvamai/indic-diarbench",

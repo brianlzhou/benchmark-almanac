@@ -31,6 +31,10 @@ const board: Leaderboard = {
   "feed": "https://quac.ai/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    heqq: { name: 'Human equivalence question score', unit: '%', better: 'higher', note: 'Percentage of questions where the model meets or exceeds human F1.' },
+    heqd: { name: 'Human equivalence dialogue score', unit: '%', better: 'higher', note: 'Percentage of dialogues where the model meets or exceeds human F1 on every question.' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const data = tables(source).map(t => t.map(r => r.map(c => c.text)));

@@ -7,6 +7,16 @@ const feed = "https://d2i4i33c3shekq.cloudfront.net/v1/leaderboard/latest.json";
 
 const board: Leaderboard = {
   benchmark: 'cref-forecasting', url, feed,
+  stats: {
+    coverageSamples: { name: 'Coverage samples', unit: '%', better: 'higher' },
+    coverageWeight: { name: 'Coverage weight', unit: '%', better: 'higher' },
+    mase_marginal_win_rate: { name: 'Mean absolute scaled error marginal win rate', unit: '%', better: 'higher' },
+    mase_skill_score: { name: 'Mean absolute scaled error skill score', unit: '%', better: 'higher' },
+    mase_win_rate: { name: 'Mean absolute scaled error win rate', unit: '%', better: 'higher' },
+    sql_marginal_win_rate: { name: 'SQL marginal win rate', unit: '%', better: 'higher' },
+    sql_skill_score: { name: 'SQL skill score', unit: '%', better: 'higher' },
+    sql_win_rate: { name: 'SQL win rate', unit: '%', better: 'higher' },
+  },
   terms: "The Space lists Apache 2.0 for code. The archived dataset has custom terms. https://doi.org/10.7910/DVN/B4OOJK" ,
   async fetch() {
     type Metric = {skill_score:number|null; win_rate:number|null; marginal_win_rate:number|null};

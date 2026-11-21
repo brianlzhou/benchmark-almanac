@@ -7,6 +7,12 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2512.18470';
 const board: Leaderboard = {
   benchmark: 'swe-evo', static: 'paper', url: 'https://arxiv.org/abs/2512.18470', feed, terms: PAPER_TERMS,
+  stats: {
+    apply: { name: 'Apply rate', unit: '%', better: 'higher' },
+    fix: { name: 'Fix rate', unit: '%', better: 'higher' },
+    failToPass: { name: 'Fail-to-pass test rate', unit: '%', better: 'higher' },
+    passToPass: { name: 'Pass-to-pass test rate', unit: '%', better: 'higher' },
+  },
   reference: ['OpenHands','SWE-agent'],
   aliases: { 'gpt-5-08-07':'gpt-5', 'gpt-5-mini-08-07':'gpt-5-mini', 'gpt-5-nano-08-07':'gpt-5-nano', 'deepseek-v3p2':'deepseek-v3-2', 'deepseek-v3p1':'deepseek-v3-1', 'glm-4p7':'glm-4-7', 'glm-4p5':'glm-4-5', 'kimi-k2p5':'kimi-k2-5', 'gpt-4o-2024-11-20':'gpt-4o-nov-2024' },
   async fetch() {

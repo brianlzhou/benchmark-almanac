@@ -6,6 +6,7 @@ import { paperTables,grid,checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed='https://arxiv.org/html/2502.12206';
 const board:Leaderboard={
   benchmark:'instrumentaleval',static:'paper',feed,url:feed,terms:PAPER_TERMS+' https://arxiv.org/licenses/',
+  stats:{Total:{name:'Overall instrumental goal rate',unit:'%',better:'lower'}},
   async fetch(){
     const gs=paperTables(await paperHtml(feed)).map(grid);
     const main=gs.find(t=>t[0]?.includes('Gemini 2.0 FTE.') && t.at(-1)?.[0]==='Total');

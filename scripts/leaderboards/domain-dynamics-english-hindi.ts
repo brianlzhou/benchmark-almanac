@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://github.com/sohamb37/wmt24-test-suite/blob/main/bleu_scores.csv",
   feed: FEED,
   terms: "The CSV contains six domain scores per system. The repository lists no reuse license. https://github.com/sohamb37/wmt24-test-suite The ACL Anthology robots URL returns HTML.",
+  stats: Object.fromEntries(['comet','human','EducationComet','EducationHuman','GeneralComet','GeneralHuman','JudicialComet','JudicialHuman','LiteratureComet','LiteratureHuman','NoisyComet','NoisyHuman','ReviewComet','ReviewHuman'].map(k => [k, { name: k === 'comet' ? 'COMET score' : k === 'human' ? 'Human evaluation rating' : k.replace(/([a-z])([A-Z])/g, '$1 $2'), unit: 'score', better: 'higher' }])),
   parts: { Education: 'Education', General: 'General', Judicial: 'Judicial', Literature: 'Literature', Noisy: 'Noisy', Review: 'Review' },
   async fetch() {
     const paper = await pdfText(FEED);

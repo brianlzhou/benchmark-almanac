@@ -14,6 +14,10 @@ const board: Leaderboard = {
     'Gemini-2.0 Flash Thinking':'gemini-2-0-flash-thinking-jan-2025','DeepSeek-V3 (snapshot unspecified)':'deepseek-v3',
     'DeepSeek-R1 (snapshot unspecified)':'deepseek-r1'},
   parts:Object.fromEntries(lengths.map(name=>[name,name+' tokens'])),
+  stats: {
+    weightedIncreasing: { name: 'Weighted increasing accuracy', unit: '%', better: 'higher' },
+    weightedDecreasing: { name: 'Weighted decreasing accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const t = paperTables(await paperHtml(feed)).map(grid).find(t=>t[0]?.[1]==='Constant Information Amount (2k)' &&
       t[0]?.[9]?.includes('Constant Information Density') && t[1]?.[6]==='Avg.' && t[1]?.[14]==='Avg.');

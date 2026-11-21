@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://synopticonresearch.com/settlerbench/",
   feed,
   terms: "The Season One page gives no reuse license. robots.txt allows the feed path.",
+  stats: { wins: { name: 'Wins', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' }, victoryPoints: { name: 'Victory points', unit: 'score', better: 'higher' }, trades: { name: 'Trades per game', unit: 'count' }, messages: { name: 'Messages per game', unit: 'count' }, tokensPerGame: { name: 'Tokens per game', unit: 'tokens' } },
   async fetch() {
     const data = jsonAfter<{ divisions: Record<string, { rows: Entry[] }> }>(await fetchText(feed), 'const D=');
     const rows = data.divisions['All models'].rows;

@@ -8,6 +8,7 @@ const feed = "https://www.axisspatial.com/arena/evaluations/insar-snow";
 
 const board: Leaderboard = {
   benchmark: "insar-snow-axis-spatial",
+  stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' }, uncachedInput: { name: 'Uncached input tokens', unit: 'tokens' }, cachedInput: { name: 'Cached input tokens', unit: 'tokens' }, output: { name: 'Output tokens', unit: 'tokens' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
   url: "https://www.axisspatial.com/arena/evaluations/insar-snow",
   feed,
   terms: "Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",

@@ -17,6 +17,11 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/ProlificAI/humaine-leaderboard",
   feed: FEED,
   terms: "Public results published by the benchmark authors at huggingface.co; retain source attribution and follow the upstream terms.",
+  stats: {
+    p_best: { name: 'Probability of being best', unit: 'score', better: 'higher', note: 'Probability that the model ranks first in the fitted comparison model.' },
+    expected_rank: { name: 'Expected rank', unit: 'count', better: 'lower' },
+    total_comparisons: { name: 'Total comparisons', unit: 'count' },
+  },
   aliases: {
     'qwen3-235b-a22b-2507': 'qwen3-235b-a22b-instruct-jul-2025',
     'deepseek-chat-v3-0324': 'deepseek-v3-mar-2025',

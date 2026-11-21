@@ -16,6 +16,22 @@ const board: Leaderboard = {
   feed: "https://labs.ramp.com/accountingbench",
   terms: "Ramp links its terms at https://ramp.com/legal/ramp-labs-terms. I could not verify a data reuse license. Ramp Labs serves its application HTML at /robots.txt.",
   reference: ["Mercor Archipelago"],
+  stats: {
+    taskCount: { name: 'Tasks', unit: 'count' }, episodeCount: { name: 'Episodes', unit: 'count' },
+    passAt1: { name: 'Pass@1', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    passAt3: { name: 'Pass@3', unit: 'score', better: 'higher', note: 'Pass rate from 0 to 1.' },
+    passPower3: { name: 'Pass^3', unit: 'score', better: 'higher', note: 'Probability that all three attempts pass, from 0 to 1.' },
+    retryUplift: { name: 'Retry uplift', unit: 'score', better: 'higher', note: 'Improvement from retries, from 0 to 1.' },
+    inconsistencyRate: { name: 'Inconsistency rate', unit: 'score', better: 'lower', note: 'Rate of inconsistent outcomes, from 0 to 1.' },
+    meanCriteriaAt3: { name: 'Mean criteria score at 3', unit: 'score', better: 'higher', note: 'Mean rubric reward after three attempts, from 0 to 1.' },
+    meanCost: { name: 'Mean cost', unit: 'usd', better: 'lower' }, totalCost: { name: 'Total cost', unit: 'usd', better: 'lower' },
+    costPerTask: { name: 'Cost per task', unit: 'usd', better: 'lower' }, costPerPass: { name: 'Cost per pass', unit: 'usd', better: 'lower' },
+    meanDurationMinutes: { name: 'Mean duration', unit: 'minutes', better: 'lower' }, medianDurationMinutes: { name: 'Median duration', unit: 'minutes', better: 'lower' }, p90DurationMinutes: { name: 'P90 duration', unit: 'minutes', better: 'lower' },
+    meanToolCalls: { name: 'Mean tool calls', unit: 'count' }, medianToolCalls: { name: 'Median tool calls', unit: 'count' }, p90ToolCalls: { name: 'P90 tool calls', unit: 'count' },
+    meanTurns: { name: 'Mean turns', unit: 'count' }, medianTurns: { name: 'Median turns', unit: 'count' }, p90Turns: { name: 'P90 turns', unit: 'count' },
+    meanInputTokens: { name: 'Mean input tokens', unit: 'tokens' }, medianInputTokens: { name: 'Median input tokens', unit: 'tokens' }, meanOutputTokens: { name: 'Mean output tokens', unit: 'tokens' }, medianOutputTokens: { name: 'Median output tokens', unit: 'tokens' }, meanTotalTokens: { name: 'Mean total tokens', unit: 'tokens' }, medianTotalTokens: { name: 'Median total tokens', unit: 'tokens' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(this.url);
     const entry = html.match(/src="(\/assets\/main-[\w-]+\.js)"/)?.[1];

@@ -11,6 +11,7 @@ const board:Leaderboard={benchmark:'futurex', parts: {
   level4Score: { name: 'Level 4', group: 'Difficulty' },
 },url:ROOT+'futurex',feed:ROOT+' (archived FutureX route bundle)',
  terms:'Public FutureX leaderboard. Benchmark Almanac credits the authors and links the source.',
+ stats:{numberOfEvents:{name:'Number of events',unit:'count'},level_1_num_events:{name:'Level 1 events',unit:'count'},level_2_num_events:{name:'Level 2 events',unit:'count'},level_3_num_events:{name:'Level 3 events',unit:'count'},level_4_num_events:{name:'Level 4 events',unit:'count'}},
  aliases:{'GPT-o4-mini':'o4-mini'},
  async fetch(){const html=await fetchText(ROOT);
   const path=html.match(/static\/js\/async\/__subPage\/futurex\/page\.[\w]+\.js/)?.[0];

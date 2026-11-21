@@ -11,6 +11,7 @@ const rows: LeaderboardRow[] = [
 const board: Leaderboard = {
   benchmark: 'cross-mr', static: 'paper', url: 'https://aclanthology.org/2024.emnlp-main.456/', feed: FEED,
   terms: 'The paper is publicly available from ACL Anthology. Cite the paper and follow ACL terms.',
+  stats: { averageConsistency: { name: 'Average consistency', unit: 'score', better: 'higher', note: 'Reported from 0 to 100.' } },
   parts: { attributes: 'Attributes consistency', relationships: 'Relationships consistency', events: 'Events consistency', personality: 'Personality consistency' },
   async fetch() { if (!(await pdfText(FEED)).includes('Table 2: Results of different LLMs')) throw new Error('Table 2 missing'); return checked(rows, 18); },
 };

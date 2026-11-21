@@ -13,6 +13,11 @@ const board: Leaderboard = {
   headline: 'The paper uses different scoring scales across games. The headline is reward on Cramped Room, its first Overcooked layout.',
   parts: { ...Object.fromEntries(layouts.map(name => [name, name])), Hanabi: 'Hanabi',
     capture: { name: 'Capture Rate', unit: '%' }, escape: { name: 'Escape Rate', unit: '%' } },
+  stats:{captureTurns:{name:'Average turns to capture',unit:'count'},escapeTurns:{name:'Average turns to escape',unit:'count'},
+    ...Object.fromEntries([...layouts, 'Hanabi'].map(name => [name + ' uncertainty', {
+      name: name + ' reward uncertainty', unit: 'score' as const,
+      note: 'Absolute uncertainty shown after the source value.'
+    }]))},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const overcooked = tables.find(t => t[0]?.join('|') === 'Agent|CR|AA|Ring|FC|CC');

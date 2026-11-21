@@ -7,6 +7,7 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2510.15501';
 export default {
   benchmark: 'deceptionbench', static: 'paper', url: 'https://arxiv.org/abs/2510.15501', feed,
+  stats: { thoughtDeceptionRate: { name: 'Thought deception rate', unit: '%', better: 'lower' } },
   terms: 'arXiv robots.txt allows the HTML paper. Results are credited to the DeceptionBench authors.',
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

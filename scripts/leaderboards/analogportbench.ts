@@ -12,6 +12,10 @@ const board: Leaderboard = {
   feed,
   terms: "The makers publish their code and result files in an MIT licensed repository. https://github.com/saeidrajabii/AnalogPortBench/blob/main/LICENSE The feed host publishes robots.txt at https://saeidrajabii.github.io/robots.txt.",
   parts: {"t1g1": "T1 G1", "t1g2": "T1 G2", "t1g3": "T1 G3", "t2g1": "T2 G1", "t2g2": "T2 G2", "t2g3": "T2 G3", "t3g1": "T3 G1", "t3g2": "T3 G2", "t3g3": "T3 G3"},
+  stats: {
+    flagged: { name: 'Infeasible specifications flagged', unit: '%', better: 'higher', note: 'Share of infeasible specifications correctly flagged as infeasible.' },
+    falseAlarms: { name: 'False alarm rate', unit: '%', better: 'lower', note: 'Share of feasible specifications incorrectly flagged as infeasible.' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const table = tables(source).find(t => t[0]?.some(c => c.text.includes('Solved in 3 tries')));

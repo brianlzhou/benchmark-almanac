@@ -24,6 +24,12 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/1902.09506",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    validity: { name: 'Validity', unit: '%', better: 'higher', note: 'Answers that fall within the question scope.' },
+    plausibility: { name: 'Plausibility', unit: '%', better: 'higher', note: 'Answers that are reasonable for the question subject.' },
+    consistency: { name: 'Consistency', unit: '%', better: 'higher', note: 'Accuracy over questions entailed by correctly answered questions.' },
+    distribution: { name: 'Distribution', unit: 'score', better: 'lower', note: 'Chi-square match between true and predicted answer distributions.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const t=tables(await fetchText(FEED)).find(t=>t[0]?.[0]?.text==='Metric'&&t.some(r=>r[0]?.text==='Accuracy'));if(!t)throw new Error('GQA table missing');const a=t.find(r=>r[0]?.text==='Accuracy')!;return a.slice(1).map((c,i)=>({model:t[0][i+1].text,score:num(c.text)!,metrics:Object.fromEntries(t.slice(1).filter(r=>r[0]?.text!=='Accuracy'&&num(r[i+1]?.text)!==undefined).map(r=>[r[0].text.toLowerCase(),num(r[i+1].text)!]))}));

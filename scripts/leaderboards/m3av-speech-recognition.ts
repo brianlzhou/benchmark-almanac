@@ -8,6 +8,7 @@ const feed = 'https://aclanthology.org/2024.acl-long.489.pdf';
 const board: Leaderboard = {
   benchmark: 'm3av-speech-recognition', url: 'https://aclanthology.org/2024.acl-long.489/', feed, static: 'paper',
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
+  stats: { cer: { name: 'Character error rate', unit: '%', better: 'lower' }, bwer: { name: 'Biasing word error rate', unit: '%', better: 'lower', note: 'Rare word errors divided by total rare words, including rare-word insertions.' } },
   async fetch() {
     const p = await pdfText(feed);
     if (!p.includes('Table 5: Evaluation results on ASR and CASR tasks')) throw new Error('M3AV Table 5 missing');

@@ -22,6 +22,10 @@ const board: Leaderboard = {
     'GPT-6 Astra': 'gpt-6-astra',
     'GPT-6 Luna': 'gpt-6-luna',
   },
+  stats: {
+    rawBlue: { name: 'Raw-prompt blue share', unit: '%', better: 'lower' }, rawOrange: { name: 'Raw-prompt orange share', unit: '%', better: 'lower' }, rawRed: { name: 'Raw-prompt red share', unit: '%', better: 'lower' }, rawWords: { name: 'Raw-prompt words', unit: 'count', better: 'lower' }, rawMissing: { name: 'Raw-prompt missing words', unit: 'count', better: 'lower' },
+    simpleBlue: { name: 'Simple-prompt blue share', unit: '%', better: 'lower' }, simpleOrange: { name: 'Simple-prompt orange share', unit: '%', better: 'lower' }, simpleRed: { name: 'Simple-prompt red share', unit: '%', better: 'lower' }, simpleWords: { name: 'Simple-prompt words', unit: 'count', better: 'lower' }, simpleMissing: { name: 'Simple-prompt missing words', unit: 'count', better: 'lower' },
+  },
   chart: {
     title: 'Clutter against prompt variant',
     x: { key: 'simpleClutter', label: 'Simple-prompt clutter', unit: '%', better: 'lower' },

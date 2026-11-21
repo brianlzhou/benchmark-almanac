@@ -10,6 +10,10 @@ const parts = { economic:'Economic', military:'Military', scientific:'Scientific
 type Game = { admissible: boolean | null; agentModel: string; evalTrack: string; dimensionScores: string; score: number; outcome: string; gameId: string };
 export default {
   benchmark: 'civbench-civilization-vi', url: 'https://huggingface.co/datasets/civbench/civbench-v1', feed, parts,
+  stats: {
+    gameScore: { name: 'Game score', unit: 'score', better: 'higher' },
+    wins: { name: 'Wins', unit: 'count' },
+  },
   terms: 'CC BY 4.0, https://huggingface.co/datasets/civbench/civbench-v1/blob/main/LICENSE',
   headline: 'This is the mean overall dimension score across each model’s admissible pilot games, rounded as in the dashboard.',
   async fetch() {

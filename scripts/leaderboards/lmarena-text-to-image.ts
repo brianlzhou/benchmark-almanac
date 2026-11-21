@@ -5,6 +5,7 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lm
 
 const board: Leaderboard = {
   benchmark: 'lmarena-text-to-image',
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   parts: {
     'cat:3d_modeling': '3D modeling',
     'cat:agentic': 'Agentic',

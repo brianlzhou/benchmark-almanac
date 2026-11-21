@@ -4,6 +4,13 @@ import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2607.14541";
 const board:Leaderboard={benchmark:"atrex-bench", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,aliases:{},
+ stats:{
+  compile:{name:'Compile pass rate',unit:'%',better:'higher'}, correct:{name:'Correctness pass rate',unit:'%',better:'higher'}, flyDSL:{name:'FlyDSL adoption',unit:'%',better:'higher'},
+  torchCompileSpeedup:{name:'Speedup versus torch.compile',unit:'speedup',better:'higher'}, productionSpeedup:{name:'Speedup versus production kernel',unit:'speedup',better:'higher'},
+  correctOperators:{name:'Correct operators',unit:'count'}, tokensPerCorrectOperator:{name:'Tokens per correct operator',unit:'tokens'},
+  compileExceptions:{name:'Compile exceptions',unit:'count'}, compileTimeouts:{name:'Compile timeouts',unit:'count'}, compileStructure:{name:'Compile structure failures',unit:'count'},
+  runtimeNumeric:{name:'Runtime numeric mismatches',unit:'count'}, runtimeTimeouts:{name:'Runtime timeouts',unit:'count'}, runtimeExceptions:{name:'Runtime exceptions',unit:'count'}, slow:{name:'Correct but slow kernels',unit:'count'}, totalFailures:{name:'Total failures',unit:'count'},
+ },
  async fetch(){const ts=paperTables(await paperHtml(URL)).map(grid);const t=ts.find(t=>JSON.stringify(t[0])==="[\"\",\"Pass rate (%)\",\"Pass rate (%)\",\"Pass rate (%)\",\"Roofline\",\"vs. baseline (\\\\times)\",\"vs. baseline (\\\\times)\"]");
  if(!t)throw new Error('Reviewed results table missing');const out:LeaderboardRow[]=[];
  const volume = ts.find(table => table[0]?.[0] === 'Cand.' && table[0][1] === 'Out (M)');

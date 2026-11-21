@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://skyeval.com/sla/arena/happyworld",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { votes: { name: 'Votes', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' } },
   
   async fetch() {
     const html=await fetchText(FEED);

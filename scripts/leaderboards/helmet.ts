@@ -20,6 +20,7 @@ const board: Leaderboard = {
  url: "https://princeton-nlp.github.io/HELMET/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { contextWindowK: { name: 'Context window', unit: 'thousands' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

@@ -6,6 +6,7 @@ import { jsLiteral } from '../lib/html.ts';
 
 const FEED = "https://world-in-world.github.io/subpages/leaderboard.html";
 const board: Leaderboard = {
+  stats: { generationQuality: { name: 'Generation quality', unit: 'score', better: 'higher' } },
   benchmark: "world-in-world",
   url: "https://world-in-world.github.io/subpages/leaderboard.html",
   feed: FEED,

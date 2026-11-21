@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed,
   terms: "Harvey publishes both charts in its launch article. Its robots.txt allows the article. No separate chart license is stated.",
   parts: { transactional: 'Transactional', litigation: 'Litigation' },
+  stats: { sourceScore: { name: 'Source score', unit: '%', better: 'higher' }, transactionalSource: { name: 'Transactional source score', unit: '%', better: 'higher' }, litigationSource: { name: 'Litigation source score', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await fetchText(feed);
     const base = 'https://cdn.sanity.io/images/07s0r5r6/production/';

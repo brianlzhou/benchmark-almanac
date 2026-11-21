@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'The paper and its license are available at https://arxiv.org/abs/2507.11216.',
   headline: 'The paper reports no overall accuracy, so this is the plain mean of ambiguous and disambiguated context accuracy.',
   parts: { ambiguous:'Ambiguous context accuracy', disambiguated:'Disambiguated context accuracy' },
+  stats: { biasAmb:{name:'Ambiguous-context bias estimate',unit:'score'}, biasDis:{name:'Disambiguated-context bias estimate',unit:'score'} },
   aliases: { 'Mistral-v0.3 7B base':'mistral-7b-v0-3', 'Gemma-3 1B base':'gemma-3-1b-pt', 'Gemma-3 4B base':'gemma-3-4b-pt', 'Gemma-3 12B base':'gemma-3-12b-pt',
     'Gemma-3 1B instruct':'gemma-3-1b','Gemma-3 4B instruct':'gemma-3-4b','Gemma-3 12B instruct':'gemma-3-12b',
     'Llama-3.1 8B instruct':'llama-3-1-8b','Qwen2.5 1.5B instruct':'qwen2-5-1-5b','Qwen2.5 3B instruct':'qwen2-5-3b','Qwen2.5 7B instruct':'qwen2-5-7b' },

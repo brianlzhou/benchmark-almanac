@@ -25,6 +25,7 @@ const board: Leaderboard = {
   terms: 'The results dataset is published under Apache License 2.0. https://huggingface.co/datasets/open-cn-llm-leaderboard/EmbodiedVerse_results',
   headline: "The leaderboard's Average is the arithmetic mean of its ten dataset overall scores.",
   parts: Object.fromEntries(Object.entries(partNames).map(([key, name]) => [key, { name, group: 'Dataset', unit: '%' }])),
+  stats: { Perception: { name: 'Perception', unit: '%', better: 'higher' }, SpatialReasoning: { name: 'Spatial reasoning', unit: '%', better: 'higher' }, Prediction: { name: 'Prediction', unit: '%', better: 'higher' }, Planning: { name: 'Planning', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const files = await fetchJson<{ path: string }[]>(TREE);
     const byModel = new Map<string, string[]>();

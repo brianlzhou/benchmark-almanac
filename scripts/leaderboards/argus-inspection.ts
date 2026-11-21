@@ -6,7 +6,12 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 const url='https://arxiv.org/html/2506.14805';
 const groups=['Basic','Deceptive'];
+const domains=['Fire and Combustion','Food and Water','Electricity and Chemical','Emergency and Medical','Weather and Nature','Road Safety','Outdoor Protection','Indoor Security','Wildlife and Environment','Relationships and Survive'];
 const parts:Record<string,BoardPart>={};
+for (const group of groups) {
+  domains.forEach((name, i) => { parts[group + String(i + 1).padStart(2, '0')] = { name, group, unit: 'score' }; });
+  parts[group + 'Overall'] = { name: 'Overall', group, unit: 'score' };
+}
 const board:Leaderboard={
   benchmark:'argus-inspection',static:'paper',url,feed:url,terms:PAPER_TERMS,parts,
   headline:'The authors give separate overall scores for basic and deceptive questions, so this is their plain mean.',

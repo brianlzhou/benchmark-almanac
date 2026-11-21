@@ -9,6 +9,20 @@ const board: Leaderboard = {
   url: "https://www.codabench.org/competitions/11859/",
   feed,
   terms: "Table 3 reports five team systems and three baselines. ACL Anthology lists CC BY 4.0. ACL Anthology returned 404 for robots.txt.",
+  stats: {
+    includedCaseDER: { name: 'Diacritization error rate, case endings included', unit: '%', better: 'lower' },
+    includedCaseWER: { name: 'Word error rate, case endings included', unit: '%', better: 'lower' },
+    includedCaseSER: { name: 'Sentence error rate, case endings included', unit: '%', better: 'lower' },
+    includedNoCaseDER: { name: 'Diacritization error rate, case endings omitted', unit: '%', better: 'lower' },
+    includedNoCaseWER: { name: 'Word error rate, case endings omitted', unit: '%', better: 'lower' },
+    includedNoCaseSER: { name: 'Sentence error rate, case endings omitted', unit: '%', better: 'lower' },
+    excludedCaseDER: { name: 'Diacritization error rate, no-diacritic chars excluded', unit: '%', better: 'lower' },
+    excludedCaseWER: { name: 'Word error rate, no-diacritic chars excluded', unit: '%', better: 'lower' },
+    excludedCaseSER: { name: 'Sentence error rate, no-diacritic chars excluded', unit: '%', better: 'lower' },
+    excludedNoCaseDER: { name: 'Diacritization error rate, both exclusions', unit: '%', better: 'lower' },
+    excludedNoCaseWER: { name: 'Word error rate, both exclusions', unit: '%', better: 'lower' },
+    excludedNoCaseSER: { name: 'Sentence error rate, both exclusions', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const doc = await pdfText(feed);
     const end = doc.indexOf('Table 3: Test set results for participant systems');

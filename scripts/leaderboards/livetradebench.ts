@@ -10,6 +10,7 @@ const board: Leaderboard = {
   terms: "The authors publish these results under the terms of the source. https://arxiv.org/abs/2511.03628",
   aliases: {"Claude-Sonnet-3.7":"claude-3-7-sonnet","GPT-o3":"o3","Qwen3-235B-A22B-Instruct":"qwen3-235b-a22b-instruct-jul-2025","Qwen3-235B-A22B-Thinking":"qwen3-235b-a22b-thinking-jul-2025","Qwen2.5-72B-Instruct":"qwen2-5-72b","Llama3.3-70B-Instruct-Turbo":"llama-3-3-70b-instruct"},
   parts: {"stock":"U.S. Stock Market","polymarket":"Polymarket Prediction Market"},
+  stats:{stockSharpe:{name:'U.S. stock market Sharpe ratio',unit:'score',better:'higher'},stockMaxDrawdown:{name:'U.S. stock market maximum drawdown',unit:'%',better:'lower'},stockWinRate:{name:'U.S. stock market win rate',unit:'%',better:'higher'},stockVolatility:{name:'U.S. stock market volatility',unit:'%',better:'lower'},polymarketSharpe:{name:'Polymarket Sharpe ratio',unit:'score',better:'higher'},polymarketMaxDrawdown:{name:'Polymarket maximum drawdown',unit:'%',better:'lower'},polymarketWinRate:{name:'Polymarket win rate',unit:'%',better:'higher'},polymarketVolatility:{name:'Polymarket volatility',unit:'%',better:'lower'}},
   async fetch() {
     const matrices = paperTables(await paperHtml(feed)).map(grid);
     const table = matrices.find(rows => rows[1]?.join('|') === "|CR\\uparrow|SR\\uparrow|MDD\\downarrow|WR\\uparrow|\\sigma\\downarrow|CR\\uparrow|SR\\uparrow|MDD\\downarrow|WR\\uparrow|\\sigma\\downarrow");

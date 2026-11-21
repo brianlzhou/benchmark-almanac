@@ -7,6 +7,7 @@ const FEED = 'https://openaccess.thecvf.com/content/ICCV2023/papers/Hu_Beyond_On
 const board: Leaderboard = {
   benchmark: 'ref-zom', static: 'paper', url: 'https://openaccess.thecvf.com/content/ICCV2023/html/Hu_Beyond_One-to-One_Rethinking_the_Referring_Image_Segmentation_ICCV_2023_paper.html', feed: FEED,
   terms: 'The paper is provided under the Computer Vision Foundation open-access terms. https://openaccess.thecvf.com/content/ICCV2023/html/Hu_Beyond_One-to-One_Rethinking_the_Referring_Image_Segmentation_ICCV_2023_paper.html',
+  stats: { mIoU: { name: 'Mean intersection over union', unit: '%', better: 'higher' }, accuracy: { name: 'One-to-zero accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const text = await pdfText(FEED);
     const section = text.split('Table 2: Comparisons with some representative methods on')[1]?.split('Table 3:')[0];

@@ -10,6 +10,7 @@ const FEED = "https://iosworld.io/leaderboard/";
 const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -]?Turbo)?|GPT-3[.-]5(?:-Turbo)?|ChatGPT|Gemini[ -]1[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]5[ -](?:Pro|Flash)|Gemini[ -]2[.-]0[ -]Flash|Claude[ -]?3[.-]5[ -]Sonnet|DeepSeek[ -](?:R1|V3))$/i.test(name) ? `${name} (snapshot unspecified)` : name;
 const board: Leaderboard = {
   benchmark: "iosworld",
+  stats: { steps: { name: 'Steps', unit: 'count', better: 'lower' } },
   parts: {
     single: { name: 'Single app', group: 'Environment' },
     multi: { name: 'Multi app', group: 'Environment' },

@@ -7,6 +7,11 @@ const board: Leaderboard = {
   benchmark: 'enterpriserag-bench', parts: {
   completeness: { name: 'Answer completeness', group: 'Dimension', note: 'The overall score averages per-question correctness multiplied by completeness.' },
 }, url: 'https://huggingface.co/spaces/onyx-dot-app/EnterpriseRAG-Bench-Leaderboard', feed: FEED,
+  stats: {
+    correctness: { name: 'Answer correctness', unit: '%', better: 'higher' },
+    recall: { name: 'Retrieval recall', unit: '%', better: 'higher' },
+    invalid_extra_docs: { name: 'Invalid extra documents', unit: '%', better: 'lower' },
+  },
   terms: 'Public official Hugging Face leaderboard data. The almanac credits Onyx and links the source.',
   async fetch() {
     const data = parseCsv(await fetchText(FEED));

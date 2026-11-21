@@ -9,6 +9,13 @@ const identity=(r:Entry)=>r.providerSlug+'|'+r.modelName;
 const board:Leaderboard={
   benchmark:'speecharena',url:URL,feed:URL,
   terms:'Public Speech Arena leaderboard page. Site terms apply. The almanac credits and links the source.',
+  stats: {
+    matches: { name: 'Matches', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    bradleyTerry: { name: 'Bradley-Terry rating', unit: 'rating', better: 'higher' },
+  },
   async fetch():Promise<LeaderboardRow[]>{
     const raw=jsonAfter<Entry[]>(nextFlight(await fetchText(URL)),'"initialData":');
     await new Promise(r=>setTimeout(r,1050));

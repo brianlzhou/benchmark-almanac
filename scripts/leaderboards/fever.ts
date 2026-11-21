@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/1803.05355",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { labelAccuracy: { name: 'Label accuracy', unit: '%', better: 'higher' } },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[1]?.some(c=>c.text.includes('NoScoreEv')));

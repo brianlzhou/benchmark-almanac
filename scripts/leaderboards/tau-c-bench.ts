@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'arXiv permits this paper PDF under its standard terms.',
   headline: 'The paper reports no overall score, so this is the plain mean of Airline, Retail and Telecom pass^1 scores.',
   parts: { airline: 'Airline pass^1', retail: 'Retail pass^1', telecom: 'Telecom pass^1' },
+  stats: { airlinePass3: { name: 'Airline pass at 3', unit: '%', better: 'higher' } },
   async fetch() {
     const text = await pdfText(FEED);
     const section = text.split('Main Results: Performance')[1]?.split('Experimental Setup')[0];

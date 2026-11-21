@@ -9,6 +9,7 @@ const feed = "https://huggingface.co/spaces/AtlaAI/judge-arena/resolve/main/data
 const board: Leaderboard = {
   benchmark: 'atla-judge-arena', url, feed,
   terms: "The Space does not state a license for the leaderboard results. https://huggingface.co/spaces/AtlaAI/judge-arena/blob/main/README.md" ,
+  stats: { votes:{name:'Votes',unit:'count'} },
   aliases: {
     'Meta Llama 3.3 70B Instruct Turbo': 'llama-3-3-70b-instruct',
     'Qwen 2.5 72B Instruct Turbo': 'qwen2-5-72b',

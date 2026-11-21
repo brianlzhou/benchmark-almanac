@@ -9,6 +9,15 @@ const board: Leaderboard = {
   url: "https://hwebench.com/",
   feed,
   terms: "The site returns an HTML error page for robots.txt. The authors' repository uses Apache 2.0.",
+  stats: {
+    completed: { name: 'Completed runs', unit: 'count' },
+    attempted: { name: 'Attempted runs', unit: 'count' },
+    delta: { name: 'Change from baseline', unit: '%' },
+    mean: { name: 'Mean score', unit: 'score', better: 'higher' },
+    std: { name: 'Standard deviation', unit: 'score' },
+    area: { name: 'Four-input lookup table area', unit: 'count', better: 'lower' },
+    frequency: { name: 'Maximum frequency', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === '#|Model|Reps|Best|Δ%|Mean ± std|Area (LUT4)|Fmax (MHz)');
     if (!table) throw new Error('Missing V1 leaderboard');

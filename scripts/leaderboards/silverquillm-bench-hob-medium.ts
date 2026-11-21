@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://snowfoxbuilds.com/silverquillm#results",
   feed,
   terms: "Snowfox permits crawling in robots.txt. The repository uses MIT for software and documentation and gives no separate results license.",
+  stats: {
+    minimumPassRate: { name: 'Minimum pass rate', unit: '%', better: 'higher' },
+    maximumPassRate: { name: 'Maximum pass rate', unit: '%', better: 'higher' },
+  },
   costPer: 'run',
   async fetch() {
     const html = await fetchText(feed);

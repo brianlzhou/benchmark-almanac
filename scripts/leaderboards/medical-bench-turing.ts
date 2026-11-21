@@ -10,6 +10,7 @@ interface Entry { display_name?: string; reasoning_effort?: string; score?: numb
 const board: Leaderboard = {
   benchmark: 'medical-bench-turing', url: PAGE, feed: FEED,
   terms: 'Turing publishes this clinical benchmark leaderboard on its public page. Separate score reuse terms are not stated.',
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, toolCalls: { name: 'Tool calls', unit: 'count', better: 'lower' } },
   async fetch() {
     const data = await fetchJson<{ leaderboard?: Entry[] }>(FEED);
     const rows: LeaderboardRow[] = (data.leaderboard ?? []).flatMap((entry) => {

@@ -17,6 +17,16 @@ const parts = { motionEasy: 'Motion Control: Easy', motionMedium: 'Motion Contro
   materialEasy: 'Material Handling: Easy', materialMedium: 'Material Handling: Medium', materialHard: 'Material Handling: Hard' };
 const board: Leaderboard = {
   benchmark: 'plcworld', url: site + '#results', feed, parts, harnesses: 'system',
+  stats: {
+    safetyViolationRate: { name: 'Safety violation rate', unit: '%', better: 'lower' },
+    executionGap: { name: 'Execution gap', unit: '%', better: 'lower', note: 'Execution gap from the local submission profile.' },
+    motionEasySVR: { name: 'Motion control easy safety violation rate', unit: '%', better: 'lower' },
+    motionMediumSVR: { name: 'Motion control medium safety violation rate', unit: '%', better: 'lower' },
+    motionHardSVR: { name: 'Motion control hard safety violation rate', unit: '%', better: 'lower' },
+    materialEasySVR: { name: 'Material handling easy safety violation rate', unit: '%', better: 'lower' },
+    materialMediumSVR: { name: 'Material handling medium safety violation rate', unit: '%', better: 'lower' },
+    materialHardSVR: { name: 'Material handling hard safety violation rate', unit: '%', better: 'lower' },
+  },
   terms: 'The authors publish this release on GitHub under https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   async fetch() {
     const manifest = await fetchJson<Manifest>(feed);

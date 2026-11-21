@@ -11,6 +11,12 @@ const board: Leaderboard = {
   url: 'https://simple-bench.com/',
   feed: FEED,
   terms: 'Static data file of the public SimpleBench site; the site states no terms and its GitHub repo is MIT.',
+  stats: {
+    openEnded: { name: 'Open-ended score', unit: '%', better: 'higher' },
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+    reportedOutputTokens: { name: 'Reported output tokens', unit: 'tokens', better: 'lower' },
+  },
   aliases: {
     // dateAdded 2026-06-10, the day after Claude Fable 5 shipped
     'Claude Fable': 'claude-fable-5',

@@ -5,6 +5,34 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://arxiv.org/html/2407.08473';
+const chipParts = {
+  'Logic: Johnson_Counter': {name: 'Johnson Counter', group: 'Logic benchmark', unit: '%'},
+  'Logic: alu': {name: 'ALU', group: 'Logic benchmark', unit: '%'},
+  'Logic: edge_detect': {name: 'Edge detect', group: 'Logic benchmark', unit: '%'},
+  'Logic: freq_div': {name: 'Frequency divider', group: 'Logic benchmark', unit: '%'},
+  'Logic: mux': {name: 'Multiplexer', group: 'Logic benchmark', unit: '%'},
+  'Logic: parallel2serial': {name: 'Parallel to serial', group: 'Logic benchmark', unit: '%'},
+  'Logic: pulse_detect': {name: 'Pulse detect', group: 'Logic benchmark', unit: '%'},
+  'Logic: right_shifter': {name: 'Right shifter', group: 'Logic benchmark', unit: '%'},
+  'Logic: serial2parallel': {name: 'Serial to parallel', group: 'Logic benchmark', unit: '%'},
+  'Logic: width_8to16': {name: '8 to 16 bit width converter', group: 'Logic benchmark', unit: '%'},
+  'Arithmetic: accu': {name: 'Accumulator', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: adder_16bit': {name: '16 bit adder', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: add_16bit_csa': {name: '16 bit carry-save adder', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: adder_8bit': {name: '8 bit adder', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: multi_booth': {name: 'Booth multiplier', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: multi_pipe_4bit': {name: '4 bit pipelined multiplier', group: 'Arithmetic benchmark', unit: '%'},
+  'Arithmetic: multipipe_8bit': {name: '8 bit pipelined multiplier', group: 'Arithmetic benchmark', unit: '%'},
+  'Advanced: 1x2nocpe': {name: '1x2 NOC PE', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 1x4systolic': {name: '1x4 systolic', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 2x2systolic': {name: '2x2 systolic', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: fsm': {name: 'FSM', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: macpe': {name: 'MAC PE', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: statemachine': {name: 'State machine', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 5state_fsm': {name: '5 state FSM', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 3state_fsm': {name: '3 state FSM', group: 'Advanced benchmark', unit: '%'},
+  'Advanced: 4state_fsm': {name: '4 state FSM', group: 'Advanced benchmark', unit: '%'},
+} as const;
 function percent(s:string) {
   if (!/^\d+(?:\.\d+)?%$/.test(s)) throw new Error('Invalid ChipGPTV percentage: '+s);
   return parseFloat(s);
@@ -12,7 +40,7 @@ function percent(s:string) {
 const board: Leaderboard = {
   benchmark:'chipgptv', static:'paper', url, feed:url,
   terms:'The authors publish these tables under the license at https://arxiv.org/abs/2407.08473.',
-  parts:{syntax:'Syntax success rate'},
+  parts:{syntax:'Syntax success rate', ...chipParts},
   async fetch() {
     const tables = paperTables(await paperHtml(url)).map(grid);
     const labels = ['GPT4-V (V+T)','GPT4 (T)','GPT4-V (V)','LLaVa (V+T)','Llama (T)','LLaVa(V)'];

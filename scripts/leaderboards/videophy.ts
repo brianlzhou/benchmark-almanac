@@ -26,6 +26,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 
 const FEED = "https://raw.githubusercontent.com/Hritikbansal/videophy/main/README.md";
 const board: Leaderboard = {
+ stats: { semanticAdherence: { name: 'Semantic adherence', unit: '%', better: 'higher' }, physicalCommonsense: { name: 'Physical commonsense', unit: '%', better: 'higher' }, automaticMean: { name: 'Automatic mean', unit: '%', better: 'higher' }, automaticPhysical: { name: 'Automatic physical score', unit: '%', better: 'higher' }, automaticSemantic: { name: 'Automatic semantic score', unit: '%', better: 'higher' } },
   "benchmark": "videophy",
   "url": "https://github.com/Hritikbansal/videophy",
   "feed": "https://raw.githubusercontent.com/Hritikbansal/videophy/main/README.md",

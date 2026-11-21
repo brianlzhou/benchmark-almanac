@@ -6,6 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/ViDoRe%28v3%29/scores";
 const board: Leaderboard = {
+ stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', better: 'lower', note: 'Memory usage in megabytes.' }, zeroShotPct: { name: 'Zero-shot score', unit: '%', better: 'higher' } },
  benchmark: "vidore-v3", parts: {
   Vidore3PharmaceuticalsRetrieval: { name: 'Pharmaceuticals', group: 'Domain' },
   Vidore3EnergyRetrieval: { name: 'Energy', group: 'Domain' },

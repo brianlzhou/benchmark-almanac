@@ -29,6 +29,9 @@ const board: Leaderboard = {
     'Claude 4.5 Sonnet': 'claude-sonnet-4-5',
     'Kimi K2-0905': 'kimi-k2-sep-2025',
   },
+  stats: {
+    correctness: { name: 'Patch correctness', unit: '%', better: 'higher', note: 'Share of patches that pass the tests.' },
+  },
   async fetch() {
     const data = await fetchJson<Entry[]>(FEED);
     const rows: LeaderboardRow[] = [];

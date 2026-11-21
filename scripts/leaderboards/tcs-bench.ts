@@ -6,6 +6,7 @@ const feed = 'https://arxiv.org/html/2608.09538';
 const board: Leaderboard = {
   benchmark: 'tcs-bench', url: feed, feed, static: 'paper',
   terms: 'The paper authors publish Tables 1 and 2 under the terms linked at https://arxiv.org/abs/2608.09538.',
+  stats: { solved: { name: 'Problems solved', unit: 'count', better: 'higher', note: 'Number solved out of 300 problems.' } },
   aliases: { 'Opus 5': 'claude-opus-5' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

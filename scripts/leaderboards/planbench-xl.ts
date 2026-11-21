@@ -12,6 +12,13 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2606.22388",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  egtPrecision: { name: 'Executed ground-truth datatype precision', unit: '%', better: 'higher', note: 'Fraction of unique datatypes from executed tool calls that belong to the ground-truth datatype set.' },
+  turns: { name: 'Average turns', unit: 'count', note: 'Average interaction turns per query.' },
+  meanEDT: { name: 'Mean explored datatypes', unit: 'count', note: 'Average number of new datatypes uncovered through retrieval beyond each query’s initial input datatypes.' },
+  scRatio: { name: 'Search-to-call ratio', unit: 'score', note: 'Tool-retrieval to tool-call turn ratio.' },
+  itcr: { name: 'Invalid tool call rate', unit: '%', better: 'lower', note: 'Fraction of structurally or procedurally invalid tool calls.' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text))).find(t=>t[0]?.includes('Task Completion'));

@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://bench.turing.com/odysseys-mega/leaderboard/",
   feed: FEED,
   terms: "The publisher gives no reuse license on the benchmark page. https://bench.turing.com/odysseys-mega/leaderboard/ The robots URL returns HTML.",
+  stats: {
+    rubricScore: { name: 'Rubric score', unit: '%', better: 'higher' },
+    steps: { name: 'Average steps', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(FEED);
     const parts: Record<string,string> = {};

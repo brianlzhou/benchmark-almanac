@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://www.newsguardtech.com/special-reports/chatgpt-and-gemini-readily-produce-false-audio-claims-while-alexa-declines/",
   feed,
   terms: "NewsGuard publishes the chart and keeps the underlying False Claim Fingerprints database proprietary. The report gives no score reuse license. https://www.newsguardtech.com/special-reports/chatgpt-and-gemini-readily-produce-false-audio-claims-while-alexa-declines/ The feed host publishes robots.txt at https://www.newsguardtech.com/robots.txt.",
+  stats: {
+    repeated: { name: 'Repeated false claims', unit: 'count', better: 'lower' },
+    prompts: { name: 'Prompts tested', unit: 'count' },
+  },
   async fetch() {
     const article = text(await fetchText(feed));
     const rows: LeaderboardRow[] = [];

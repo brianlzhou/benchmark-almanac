@@ -7,6 +7,14 @@ const url='https://benchcad.com/leaderboard.html';
 export function benchcadCore(version:'2.0'|'2.1'):Leaderboard {
  return {benchmark:`benchcad-${version.replace('.','-')}`,url,feed:`${url} (BenchCAD ${version} Core tables)`,
   terms:'BenchCAD publishes these public tables, including credited vendor results; the Almanac credits BenchCAD and links its source.',
+  stats:{
+   harnessTableRank:{name:'Harness table rank',unit:'count',better:'lower'},
+   cost:{name:'Cost per case',unit:'usd',better:'lower'},
+   ...(version==='2.0'?{
+    totalTokens:{name:'Total tokens',unit:'tokens',note:'Total output tokens used for one case.'},
+    latency:{name:'Time per case',unit:'seconds',better:'lower'},
+   }:{}),
+  },
   async fetch():Promise<LeaderboardRow[]> {
    const html=await fetchText(url);const rows:LeaderboardRow[]=[];
    const sections=version==='2.1'

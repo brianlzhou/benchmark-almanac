@@ -15,6 +15,16 @@ const board: Leaderboard = {
   'I3-Inst.': { name: 'Intra-collection multi-tool unseen instructions', group: 'Split' },
 }, url: "https://github.com/OpenBMB/ToolBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ // the README's second table: each run's win rate against ChatGPT with ReACT, overall and on each split
+ stats: {
+  winRate: { name: 'Win rate against ChatGPT ReACT', unit: '%', better: 'higher' },
+  winI1Inst: { name: 'Win rate, single-tool unseen instructions', unit: '%', better: 'higher' },
+  winI1Tool: { name: 'Win rate, single-tool unseen tools', unit: '%', better: 'higher' },
+  winI1Cate: { name: 'Win rate, single-tool unseen categories', unit: '%', better: 'higher' },
+  winI2Inst: { name: 'Win rate, intra-category multi-tool unseen instructions', unit: '%', better: 'higher' },
+  winI2Cate: { name: 'Win rate, intra-category multi-tool unseen categories', unit: '%', better: 'higher' },
+  winI3Inst: { name: 'Win rate, intra-collection multi-tool unseen instructions', unit: '%', better: 'higher' },
+ },
 
  async fetch() {
 const ts=mdTables(await fetchText(FEED)).filter(t=>t.head[0]==='Method'&&t.head.at(-1)==='Average');if(ts.length!==2)throw new Error('Expected pass/win tables');const rows:LeaderboardRow[]=[];

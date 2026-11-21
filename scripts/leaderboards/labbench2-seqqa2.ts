@@ -9,6 +9,7 @@ const FEED = "https://advances.edisonscientific.com/benchmarks/labbench2/seqqa2/
 const board: Leaderboard = {
  benchmark: "labbench2-seqqa2", url: "https://advances.edisonscientific.com/benchmarks/labbench2/seqqa2/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
 
  async fetch() {
 const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text.startsWith('Average score')));if(!t)throw new Error('Missing SeqQA2 table');const rows:LeaderboardRow[]=[];

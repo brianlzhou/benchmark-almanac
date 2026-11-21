@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: `${PAGE} (inline leaderboard data "pharma-bench", Pass rate)`,
   terms: MICRO1_TERMS,
   aliases: MICRO1_ALIASES,
+  stats: { meanScore: { name: 'Mean score', unit: '%', better: 'higher' } },
   async fetch() {
     const rows = await micro1Data(PAGE, 'pharma-bench');
     await new Promise(resolve => setTimeout(resolve, 1100));

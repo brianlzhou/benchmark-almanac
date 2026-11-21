@@ -10,6 +10,7 @@ const board: Leaderboard = {
  url: "https://www.vals.ai/benchmarks/vals_index_v2",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
  aliases: Object.fromEntries(Object.entries(VALS_ALIASES).filter(([name])=>name!=='GPT 4o')),
  chart:{title:'Accuracy versus cost',x:{key:'cost',label:'Cost per test',unit:'$',better:'lower',log:true},y:{key:'score',label:'Accuracy',unit:'%',better:'higher'}},
  async fetch(): Promise<LeaderboardRow[]> {

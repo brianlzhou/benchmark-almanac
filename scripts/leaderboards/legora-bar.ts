@@ -21,6 +21,11 @@ interface Data {
 
 const board: Leaderboard = {
   benchmark: 'legora-bar',
+  stats: {
+    costIndex: { name: 'Cost per case versus average', unit: 'index', better: 'lower' },
+    timeIndex: { name: 'Median time per case versus average', unit: 'index', better: 'lower' },
+    grounding: { name: 'Citation grounding versus average', unit: 'index', better: 'higher' },
+  },
   parts: {
     'practice=all&jurisdiction=all&work=family:analyse_answer&taskLength=short+medium+long:quality': { name: 'Analyze and answer', group: 'Task type' },
     'practice=all&jurisdiction=all&work=family:compare&taskLength=short+medium+long:quality': { name: 'Compare', group: 'Task type' },
@@ -139,5 +144,39 @@ const board: Leaderboard = {
     }));
     return rows;
   },
+};
+
+const extraParts = {
+  'practice=area:m_and_a&jurisdiction=all&work=all&taskLength=short+medium+long:quality': { name: 'M&A', group: 'Domain' },
+  'practice=area:m_and_a&jurisdiction=all&work=family:analyse_answer&taskLength=short+medium+long:quality': { name: 'M&A: analyze and answer', group: 'Category' },
+  'practice=area:m_and_a&jurisdiction=all&work=family:compare&taskLength=short+medium+long:quality': { name: 'M&A: compare', group: 'Category' },
+  'practice=area:m_and_a&jurisdiction=all&work=family:draft&taskLength=short+medium+long:quality': { name: 'M&A: draft', group: 'Category' },
+  'practice=area:m_and_a&jurisdiction=all&work=family:edit&taskLength=short+medium+long:quality': { name: 'M&A: edit', group: 'Category' },
+  'practice=area:m_and_a&jurisdiction=all&work=family:extract&taskLength=short+medium+long:quality': { name: 'M&A: extract', group: 'Category' },
+    'practice=area:ip_and_tech&jurisdiction=all&work=all&taskLength=short+medium+long:quality': { name: 'Intellectual property and technology', group: 'Domain' },
+  'practice=area:ip_and_tech&jurisdiction=all&work=family:edit&taskLength=short+medium+long:quality': { name: 'Intellectual property and technology: edit', group: 'Category' },
+  'practice=area:ip_and_tech&jurisdiction=all&work=family:extract&taskLength=short+medium+long:quality': { name: 'Intellectual property and technology: extract', group: 'Category' },
+  'practice=area:pe_and_vc&jurisdiction=all&work=all&taskLength=short+medium+long:quality': { name: 'Private equity and venture capital', group: 'Domain' },
+  'practice=area:pe_and_vc&jurisdiction=all&work=family:draft&taskLength=short+medium+long:quality': { name: 'Private equity and venture capital: draft', group: 'Category' },
+  'practice=area:pe_and_vc&jurisdiction=all&work=family:extract&taskLength=short+medium+long:quality': { name: 'Private equity and venture capital: extract', group: 'Category' },
+  'practice=area:esg&jurisdiction=all&work=all&taskLength=short+medium+long:quality': { name: 'Environmental, social and governance', group: 'Domain' },
+  'practice=area:esg&jurisdiction=all&work=family:review&taskLength=short+medium+long:quality': { name: 'Environmental, social and governance: review', group: 'Category' },
+};
+board.parts = { ...board.parts, ...extraParts };
+board.stats = {
+  ...board.stats,
+  ...Object.fromEntries(Object.entries(board.parts).flatMap(([key, part]) => {
+    const name = typeof part === 'string' ? part : part.name;
+    const short = name.length > 35 ? name.slice(0, 35).trimEnd() : name;
+    const base = key.slice(0, -':quality'.length);
+    const work = key.match(/work=([^&]+)/)?.[1] ?? 'overall';
+    const suffix = work === 'all' ? 'overall' : work.replaceAll('_', ' ');
+    const label = (text: string) => text.length > 60 ? text.slice(0, 60).trimEnd() : text;
+    return [
+      [`${base}:cost`, { name: label(`${short} ${suffix} cost`), unit: 'index', better: 'lower' }],
+      [`${base}:medianTime`, { name: label(`${short} ${suffix} time`), unit: 'index', better: 'lower' }],
+      [`${base}:grounding`, { name: label(`${short} ${suffix} grounding`), unit: 'index', better: 'higher' }],
+    ];
+  })),
 };
 export default board;

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'medhallu', url: feed, feed,
   terms: 'Public results credited to the MedHallu authors at https://medhallu.github.io/.',
   parts: {easy: 'Easy F1', medium: 'Med F1', hard: 'Hard F1'},
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Precision of hallucination detection predictions, reported from 0 to 1.' } },
   aliases: {'Gemma-2-2b-Instruct': 'gemma-2-2b-it'},
   async fetch() {
     const table = tables(await fetchText(feed)).map(grid).find(t => t[0]?.includes('Without Knowledge'));

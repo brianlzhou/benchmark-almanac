@@ -13,6 +13,7 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2505.11842",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {asr:{name:'Attack success rate',unit:'%',better:'lower'},VC:{name:'Violence and cruelty',unit:'score',better:'lower'},NC:{name:'Non-consensual content',unit:'score',better:'lower'},SC:{name:'Sexual content',unit:'score',better:'lower'},CSE:{name:'Child sexual exploitation',unit:'score',better:'lower'},Def:{name:'Defamation',unit:'score',better:'lower'},SA:{name:'Self-harm',unit:'score',better:'lower'},Pvy:{name:'Privacy',unit:'score',better:'lower'},IP:{name:'Intellectual property',unit:'score',better:'lower'},IW:{name:'Illegal weapons',unit:'score',better:'lower'},Hate:{name:'Hate',unit:'score',better:'lower'},SSh:{name:'Sexual harassment',unit:'score',better:'lower'},SCrime:{name:'Serious crime',unit:'score',better:'lower'},Elec:{name:'Election manipulation',unit:'score',better:'lower'}},
 
  async fetch(): Promise<LeaderboardRow[]> {
 const raw=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Query Type')&&t[1]?.some(c=>c.text==='RJScore'));

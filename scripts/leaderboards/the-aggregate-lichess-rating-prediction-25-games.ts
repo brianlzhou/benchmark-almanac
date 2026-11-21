@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "Credit The Aggregate when quoting scores. Bulk republication requires written permission. https://theaggregate.ai/terms The feed host publishes robots.txt at https://theaggregate.ai/robots.txt.",
   costPer: 'run',
+  stats: { games:{name:'Games',unit:'count'}, estimates:{name:'Rating estimates',unit:'count'}, rmse:{name:'Root mean squared error',unit:'score',better:'lower'}, bias:{name:'Prediction bias',unit:'score'}, pearson:{name:'Pearson correlation',unit:'score',better:'higher'}, spearman:{name:'Spearman correlation',unit:'score',better:'higher'}, outputTokenLimit:{name:'Output token limit',unit:'tokens'} },
   async fetch() {
     type Model = { display_name: string; cost_usd: number; reasoning_effort: string; run_end: string; max_tokens: number;
       summary: { mae: number; mae_game_bootstrap_95_interval: [number, number]; games: number; player_estimates: number;

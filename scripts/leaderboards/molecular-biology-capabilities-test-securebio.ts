@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 import {sbFacts, sbCharts,SB_ALIASES} from './hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 const board: Leaderboard = {
- benchmark: "molecular-biology-capabilities-test-securebio", url: "https://securebio.org/benchmarks/", feed: FEED,
+ benchmark: "molecular-biology-capabilities-test-securebio", stats: { refusalRate: { name: 'Refusal rate', unit: '%', better: 'lower' } }, url: "https://securebio.org/benchmarks/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:SB_ALIASES,
  async fetch() {

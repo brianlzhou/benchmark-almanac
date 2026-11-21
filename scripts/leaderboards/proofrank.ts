@@ -10,6 +10,7 @@ export default {
   benchmark: 'proofrank', url, feed: url, parts,
   headline: 'MathArena reports no combined Elo, so this is the mean of the five proof-quality ratings.',
   terms: 'MathArena publishes this results table and its methodology. https://matharena.ai/proofrank/',
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' } },
   aliases: { 'Kimi-K2.5-Think': 'kimi-k2-5' },
   async fetch() {
     const header = ['Model', 'Conciseness', 'Comp. Ease', 'Cognitive Simplicity', 'Diversity', 'Adaptivity', 'Accuracy'];

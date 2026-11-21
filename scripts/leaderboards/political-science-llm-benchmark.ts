@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (row labels and mean F1 values)`,
   terms: 'Figure file on a personal academic site; robots.txt allows every path and the site states no terms.',
+  stats: { texts: { name: 'Texts', unit: 'count' }, inputTokens: { name: 'Input tokens', unit: 'tokens' } },
   chart: { title: 'Cost and performance', note: 'Source costs include conservative usage-based estimates. Values are per text classified.', x: { key: 'cost', label: 'Cost per text', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Mean F1', unit: '%', better: 'higher' } },
   aliases: {
     // the registry keeps one record per Qwen size, without the chat or instruct variant

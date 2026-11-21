@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The raw file host has no robots.txt. The ADAGE repository includes an MIT license. The source task retains its own terms. https://github.com/AhmedHajAhmed/adage-benchmark/blob/main/LICENSE",
   host: 'ADAGE',
+  stats: { items: { name: 'Items', unit: 'count' }, invalid: { name: 'Invalid responses', unit: 'count', better: 'lower' }, normalized: { name: 'Normalized score', unit: 'score', better: 'higher' } },
   async fetch() {
     const { leaderboard } = await fetchJson<{leaderboard: Entry[]}>(feed);
     if (leaderboard.length < 8) throw new Error('Incomplete ePiC leaderboard');

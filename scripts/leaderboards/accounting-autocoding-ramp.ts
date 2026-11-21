@@ -25,6 +25,10 @@ export function rampArray<T>(bundle: string, firstField: string, minimum: number
 }
 const board: Leaderboard = {
   benchmark: 'accounting-autocoding-ramp', url: rampPage, feed: rampPage, terms: rampTerms,
+  stats: {
+    top3: { name: 'Top 3 accuracy', unit: '%', better: 'higher' },
+    relativeMedianLatency: { name: 'Relative median latency', unit: 'speedup', better: 'lower' },
+  },
   async fetch() {
     const rows = rampArray<{ name: string; top1Norm: number; top3Norm: number; p50Nx: number }>(await rampBundle(), 'top1Norm', 21);
     return rows.map(r => {

@@ -7,6 +7,7 @@ import { tables, text, num } from '../lib/html.ts';
 const feed = 'https://wxj630.github.io/terminal-bench-math-modeling/';
 const board: Leaderboard = {
   benchmark: 'tb-mathmodel', url: feed, feed, costPer: 'run',
+  stats: { robust: { name: 'Robust O-Eval', unit: 'score', better: 'higher' }, artifacts: { name: 'Artifacts', unit: 'count' }, costRMB: { name: 'Cost', unit: 'cny', better: 'lower' }, gated: { name: 'Hard-gated O-Eval', unit: 'score', better: 'higher' }, gatedRobust: { name: 'Hard-gated Robust baseline-to-outstanding score', unit: 'score', better: 'higher' }, gates: { name: 'Hard gates passed', unit: 'count' } },
   terms: 'The benchmark authors publish their scores and costs on the project page.',
   async fetch() {
     const all = tables(await fetchText(feed));

@@ -9,6 +9,7 @@ const feed = "https://raw.githubusercontent.com/lechmazur/position_bias/HEAD/REA
 
 const board: Leaderboard = {
   benchmark: "position-bias-lech-mazur",
+  stats: { firstPick: { name: 'First-shown pick', unit: '%', better: 'higher' }, firstLift: { name: 'First lift', unit: 'score', better: 'higher' }, coverage: { name: 'Decisive pair coverage', unit: '%', better: 'higher' }, ratingBonus: { name: 'Rating bonus', unit: 'score', better: 'higher' } },
   url: "https://github.com/lechmazur/position_bias",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/position_bias. I could not verify reuse terms. The raw file host serves no robots.txt rules.",

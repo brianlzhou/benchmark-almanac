@@ -21,6 +21,8 @@ const board: Leaderboard = {
   Causal: { name: 'Causal', group: 'Task type' },
   'Room-to-Room': { name: 'Room-to-room', group: 'Task type' },
   'Object Retrieval': { name: 'Object retrieval', group: 'Task type' },
+  Duration: { name: 'Duration', group: 'Task type' },
+  Counterfactual: { name: 'Counterfactual', group: 'Task type' },
 }, url: "https://raw.githubusercontent.com/keshik6/HourVideo/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {

@@ -9,6 +9,16 @@ const board: Leaderboard = {
   url: "https://www.cluebenchmarks.com/kgclue.html",
   feed,
   terms: "The publisher displays results at https://github.com/CLUEbenchmark/KgCLUE. I could not verify reuse terms. The official leaderboard host has no robots.txt.",
+  stats: {
+    EM_All: { name: 'Exact match, all', unit: '%', better: 'higher' },
+    EM_S: { name: 'Exact match, subject', unit: '%', better: 'higher' },
+    EM_P: { name: 'Exact match, predicate', unit: '%', better: 'higher' },
+    EM_O: { name: 'Exact match, object', unit: '%', better: 'higher' },
+    F1_All: { name: 'F1, all', unit: '%', better: 'higher' },
+    F1_S: { name: 'F1, subject', unit: '%', better: 'higher' },
+    F1_P: { name: 'F1, predicate', unit: '%', better: 'higher' },
+    F1_O: { name: 'F1, object', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     const ids = new Set<string>();

@@ -9,6 +9,7 @@ const labels = ['delay score', 'throughput score', 'collision score', 'low-TTC s
   'speed SD score', 'peak loss score', 'energy score', 'failure fraction', 'total score'];
 const board: Leaderboard = {
   benchmark: 'ego2flow', url: feed, feed, static: 'paper',
+  stats: { 'failure fraction': { name: 'Failure fraction', unit: 'score', better: 'lower' } },
   terms: 'The authors publish the paper and its terms at https://arxiv.org/abs/2611.17720.',
   parts: Object.fromEntries(labels.slice(0, 8).map(name => [name, { name, unit: 'score', note: 'Normalized from 0 to 1.' }])),
   async fetch() {

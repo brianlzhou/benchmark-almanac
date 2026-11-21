@@ -11,6 +11,14 @@ const board: Leaderboard = {
   benchmark: 'tritonbench', static: 'paper', url: feed, feed,
   terms: 'The authors publish Tables 3 and 4 under the license on the arXiv record. https://arxiv.org/abs/2502.14752',
   parts: {G: 'TritonBench-G', T: 'TritonBench-T'},
+  stats: {
+    'G Similarity': { name: 'TritonBench-G similarity', unit: '%', better: 'higher' },
+    'G Call Accuracy': { name: 'TritonBench-G call accuracy', unit: '%', better: 'higher' },
+    'G Speed Up': { name: 'TritonBench-G speedup', unit: 'speedup', better: 'higher' },
+    'G GPU Efficiency': { name: 'TritonBench-G GPU efficiency', unit: '%', better: 'higher' },
+    'T Call Accuracy': { name: 'TritonBench-T call accuracy', unit: '%', better: 'higher' },
+    'T Speed Up': { name: 'TritonBench-T speedup', unit: 'speedup', better: 'higher' },
+  },
   aliases: {'GPT-4o-0806':'gpt-4o-aug-2024','Claude-3.5-Sonnet-0620':'claude-3-5-sonnet','GPT-o1-2024-12-17':'o1','DeepSeek-R1 (snapshot unspecified)':'deepseek-r1'},
   headline: 'The paper reports no overall score, so this is the plain mean of execution accuracy on TritonBench-G and TritonBench-T.',
   async fetch() {

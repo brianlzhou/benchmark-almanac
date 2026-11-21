@@ -8,6 +8,10 @@ const feed = "https://raw.githubusercontent.com/lechmazur/generalization/HEAD/RE
 const board: Leaderboard = {
   benchmark: "thematic-generalization-v2", url: "https://github.com/lechmazur/generalization#cross-family-hard-subset-leaderboard", feed,
   terms: "Public results published in Lech Mazur’s project README.",
+  stats: {
+    top1Accuracy: { name: 'Top-1 accuracy', unit: '%', better: 'higher' },
+    cases: { name: 'Cases', unit: 'count' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const all = markdownTables(source);

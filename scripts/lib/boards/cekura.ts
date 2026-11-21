@@ -18,7 +18,21 @@ const terms='Cekura publishes benchmark methods and results. The almanac credits
 export function cekuraBoard(benchmark:string,kind:string):Leaderboard{
  const paths:Record<string,string>={agent:'speech-to-speech',real:'speech-to-speech/real-calls',turn:'speech-to-speech/turn-bench',stt:'stt',tts:'text-to-speech',workflows:'voice-agent-workflows',production:'experiments/production-voice-agents'};
  const url='https://benchmarks.cekura.ai/'+paths[kind];
- return {benchmark,url,feed:url+' (embedded published results)',terms,
+ const stats:Leaderboard['stats'] = kind==='agent'||kind==='real' ? {
+  ...(kind==='agent'?{latency:{name:'Time to first token',unit:'seconds',better:'lower'}}:{}),passAt1:{name:'Pass@1',unit:'%',better:'higher'},taskSuccessPercent:{name:'Task success rate',unit:'%',better:'higher'},
+  responseMedianMs:{name:'Median response latency',unit:'ms',better:'lower'},responseP95Ms:{name:'95th percentile response latency',unit:'ms',better:'lower'},
+  costPerMinuteUsd:{name:'Cost per minute',unit:'usd',better:'lower'},
+  ...(kind==='real'?{elo:{name:'Elo rating',unit:'elo',better:'higher'},HearingPercent:{name:'Hearing',unit:'%',better:'higher'},'Turn TakingPercent':{name:'Turn taking',unit:'%',better:'higher'},'Task HandlingPercent':{name:'Task handling',unit:'%',better:'higher'},SpeakingPercent:{name:'Speaking',unit:'%',better:'higher'}}:{}),
+ } : kind==='stt' ? {
+  latency:{name:'Time to first token',unit:'seconds',better:'lower'},firstTextMedianMs:{name:'First text latency',unit:'ms',better:'lower'},finalTextMedianMs:{name:'Final text latency',unit:'ms',better:'lower'},
+  priceUsdPerHour:{name:'Cost per hour',unit:'usd',better:'lower'},failed:{name:'Failed clips',unit:'count'},clipsIncluded:{name:'Clips included',unit:'count'},
+ } : kind==='tts' ? {
+  hardPartsPercent:{name:'Hard parts word error rate',unit:'%',better:'lower'},naturalnessMean1to5:{name:'Naturalness rating',unit:'rating',better:'higher'},firstAudioMedianMs:{name:'Time to first audio',unit:'ms',better:'lower'},priceUsdPerMillionChars:{name:'Cost per million characters',unit:'usd',better:'lower'},
+  'werPercent_nova-3':{name:'WER with Nova-3',unit:'%',better:'lower'},'werPercent_whisper-1':{name:'WER with Whisper-1',unit:'%',better:'lower'},
+ } : kind==='turn' ? {
+  cleanResponseMedianMs:{name:'Clean median response latency',unit:'ms',better:'lower'},telephoneResponseMedianMs:{name:'Telephone median response latency',unit:'ms',better:'lower'},'noise-10dbResponseMedianMs':{name:'Noise 10 dB median response latency',unit:'ms',better:'lower'},'noise-20dbResponseMedianMs':{name:'Noise 20 dB median response latency',unit:'ms',better:'lower'},reverbResponseMedianMs:{name:'Reverb median response latency',unit:'ms',better:'lower'},dropoutsResponseMedianMs:{name:'Dropouts median response latency',unit:'ms',better:'lower'},
+ } : undefined;
+ return {benchmark,url,feed:url+' (embedded published results)',terms,...(stats?{stats}:{}),
  ...(kind==='agent'||kind==='real'?{chart:{title:'Reliability vs. cost per call',x:{key:'cost',label:'Cost per call',unit:'$',better:'lower' as const},y:{key:'score',label:'Pass³',unit:'%',better:'higher' as const}}}:{}),
  async fetch():Promise<LeaderboardRow[]>{
  let rows:LeaderboardRow[]=[];

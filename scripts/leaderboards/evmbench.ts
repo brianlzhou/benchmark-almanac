@@ -9,6 +9,7 @@ const modes = ['Detect','Patch','Exploit'];
 const board: Leaderboard = {
   benchmark:'evmbench', url:'https://openai.com/index/introducing-evmbench/', feed, static:'paper',
   terms:'OpenAI and Paradigm publish Table 9 in their paper. https://openai.com/policies/terms-of-use/',
+  stats: Object.fromEntries(['Detect High','Detect Low','Exploit High','Exploit Low','Patch High','Patch Low'].map(k => [k, { name: k + ' score', unit: '%', better: 'higher' }])),
   headline:'The paper reports no overall score, so the headline is the plain mean of its Detect, Patch and Exploit percentages.',
   parts:Object.fromEntries(modes.map(m => [m,m])),
   async fetch() {

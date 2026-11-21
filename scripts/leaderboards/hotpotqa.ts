@@ -10,6 +10,13 @@ const board: Leaderboard = {
   url: "https://hotpotqa.github.io/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    answerEM: { name: 'Answer exact match', unit: '%', better: 'higher' },
+    answerF1: { name: 'Answer F1', unit: '%', better: 'higher' },
+    supportEM: { name: 'Supporting fact exact match', unit: '%', better: 'higher' },
+    supportF1: { name: 'Supporting fact F1', unit: '%', better: 'higher' },
+    jointEM: { name: 'Joint exact match', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Joint'));

@@ -20,6 +20,12 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/inception42/Leaderboards/resolve/main/assets/results/aragen_v3_results.json",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    totalEntries: { name: 'Total entries', unit: 'count' },
+    successfulEntries: { name: 'Successful entries', unit: 'count', better: 'higher' },
+    failedEntries: { name: 'Failed entries', unit: 'count', better: 'lower' },
+    time: { name: 'Run time', unit: 'seconds', better: 'lower' },
+  },
   aliases: {"Mistral-Small-24B-Instruct-2501":"mistral-small-3", "Ministral-8B-Instruct-2410":"ministral-8b", "Mistral-Large-Instruct-2411":"mistral-large-2-nov-2024", "Magistral-Small-2509":"magistral-small-1-2", "Mistral-Small-4-119B-2603":"mistral-small-4", "gemini-2.5-pro-preview-05-06": "gemini-2-5-pro-may-2025", "Llama-3.1-8B-Instruct": "llama-3-1-8b", "Llama-3.1-70B-Instruct": "llama-3-1-70b", "Meta-Llama-3-70B-Instruct": "llama-3-70b", "Meta-Llama-3-8B-Instruct": "llama-3-8b", "Llama-3.2-1B-Instruct": "llama-3-2-1b", "Llama-3.2-3B-Instruct": "llama-3-2-3b"},
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {

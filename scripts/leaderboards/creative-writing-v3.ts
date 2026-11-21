@@ -157,6 +157,11 @@ export async function eqbenchRows(file: string, variable: string, column: string
 
 const board: Leaderboard = {
   benchmark: 'creative-writing-v3',
+  stats: {
+    elo: { name: 'Elo rating', unit: 'elo', better: 'higher' },
+    length: { name: 'Average response length', unit: 'count' },
+    repetition: { name: 'Repetition score', unit: 'score', better: 'lower' },
+  },
   url: 'https://eqbench.com/creative_writing.html',
   feed: `${eqbenchFeed('creative_writing.js', 'leaderboardDataCreativeWritingV3')} creative_writing_score x 5`,
   terms: EQBENCH_TERMS,

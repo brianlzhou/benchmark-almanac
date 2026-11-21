@@ -20,6 +20,11 @@ const board: Leaderboard = {
   terms: 'MIT license. https://github.com/InternLM/RNGBench/blob/HEAD/LICENSE',
   headline: 'The board reports no overall score, so this is the plain mean of its two single-player game scores.',
   parts: { pairs: 'Matching Pairs', maze: '3D Maze' },
+  stats: {
+    parseFailure: { name: 'Parse failure rate', unit: '%', better: 'lower' }, invalidAction: { name: 'Invalid action rate', unit: '%', better: 'lower' }, responsesPerPair: { name: 'Responses per pair', unit: 'count', better: 'lower' },
+    success: { name: 'Maze success rate', unit: '%', better: 'higher' }, explore: { name: 'Maze exploration rate', unit: '%', better: 'higher' }, walls: { name: 'Walls encountered', unit: 'count' }, efficiency: { name: 'Maze efficiency', unit: '%', better: 'higher' },
+    duelWinRate: { name: 'Duel win rate', unit: '%', better: 'higher' }, duelWins: { name: 'Duel wins', unit: 'count' }, duelTies: { name: 'Duel ties', unit: 'count' }, duelLosses: { name: 'Duel losses', unit: 'count' }, duelScore: { name: 'Duel score', unit: '%', better: 'higher' }, duelElo: { name: 'Duel Elo', unit: 'elo', better: 'higher' },
+  },
   async fetch() {
     const main = (await fetchText(feed)).split('## Main Results')[1]?.split('### October')[0];
     if (!main) throw new Error('Missing main results');

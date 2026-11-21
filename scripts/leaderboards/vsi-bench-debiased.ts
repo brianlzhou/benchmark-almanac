@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://vision-x-nyu.github.io/test-set-training/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    blindScore: { name: 'Blind score', unit: '%', better: 'higher', note: 'Score averaged over questions with vision disabled.' },
+    visionBlindGap: { name: 'Vision-blind gap', unit: '%', note: 'Vision score minus blind score, averaged over questions.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return paperRows(FEED, {"table": 8, "header": "Debiased", "score": 5, "width": 9, "min": 7, "metrics": {"blindScore": 6, "visionBlindGap": 7}});
   },

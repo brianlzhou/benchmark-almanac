@@ -20,6 +20,11 @@ const board: Leaderboard = {
   terms: "Voice Arena links its site terms. https://voicearena.com/terms The public results path is readable.",
   aliases: { 'Drama 3': 'fish-audio-drama-3' },
   parts: { Short: 'Short', Medium: 'Medium', Long: 'Long', F: 'Female', M: 'Male' },
+  stats: {
+    fooled: { name: 'Listeners fooled', unit: 'count' },
+    medianDecisionSec: { name: 'Median decision time', unit: 'seconds', better: 'lower' },
+    ttfaMs: { name: 'Time to first audio', unit: 'ms', better: 'lower' },
+  },
   async fetch() {
     const script = await fetchText(FEED);
     const modelStart = script.search(/\[\{id:"[^"]+",model:"/);

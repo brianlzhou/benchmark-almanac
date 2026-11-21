@@ -15,6 +15,7 @@ interface Data {
 }
 
 const board: Leaderboard = {
+  stats: { passed: { name: 'Scenarios passed', unit: 'count', better: 'higher' }, scenarios: { name: 'Scenarios', unit: 'count' } },
   benchmark: 'dictatorship-eval',
   url: 'https://www.dictatoreval.org/',
   feed: `${FEED} (resistance_by_level, passed / total)`,

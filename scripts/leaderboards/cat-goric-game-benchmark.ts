@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: 'https://github.com/felladrin/cat-goric-game-benchmark',
   feed,
   terms: 'The repository is licensed under MIT. https://github.com/felladrin/cat-goric-game-benchmark/blob/main/license.txt',
+  stats: { levelsCleared: { name: 'Levels cleared', unit: 'count', better: 'higher' }, deaths: { name: 'Deaths', unit: 'count', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(feed);
     const start = text.indexOf('| Rank | Model | Params | pass@1 | pass@5 | Levels cleared | Deaths |');

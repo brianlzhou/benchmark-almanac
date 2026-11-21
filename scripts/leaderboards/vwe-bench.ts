@@ -18,6 +18,9 @@ const board: Leaderboard = {
     restatement: { name: 'Restatement', group: 'Task type' },
     complex: { name: 'Complex', group: 'Task type' },
   },
+  stats: {
+    humanEvaluation: { name: 'Human Pass@1', unit: '%', better: 'higher', note: 'Holistic human pass rate requiring physical feasibility, intent fulfillment, ecological plausibility, and no response hallucination.' },
+  },
   url: "https://usail-hkust.github.io/VibeWorlding-Gym/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

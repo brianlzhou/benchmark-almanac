@@ -12,6 +12,10 @@ const board: Leaderboard = {
   benchmark: 'assin-2', url, feed,
   terms: 'The ASSIN 2 organizers publish the official results sheet. https://sites.google.com/view/assin2',
   parts: { entailment: 'Entailment F1', similarity: 'Similarity Pearson correlation' },
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    mse: { name: 'Mean squared error', unit: 'score', better: 'lower' },
+  },
   harnesses: 'system',
   async fetch() {
     const csv = await fetchText(feed);

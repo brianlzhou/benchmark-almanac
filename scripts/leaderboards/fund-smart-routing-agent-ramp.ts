@@ -6,6 +6,7 @@ import { jsLiteral } from '../lib/html.ts';
 
 const board: Leaderboard = {
   benchmark: 'fund-smart-routing-agent-ramp', url: 'https://builders.ramp.com/post/financial-benchmarks', feed: 'https://builders.ramp.com/post/financial-benchmarks', terms: rampTerms,
+  stats:{overrideRateMultiple:{name:'Override rate multiple',unit:'score',better:'lower'}},
   async fetch() {
     const js = await rampBundle();
     const start = [...js.matchAll(/\[\{name:"[^"]+",provider:"[^"]+",rateNx:[\d.]+\}/g)];

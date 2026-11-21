@@ -9,6 +9,7 @@ import { numberCell } from '../lib/boards/arxiv-throttled.ts';
 const feed = 'https://raw.githubusercontent.com/maritaca-ai/oab-bench/HEAD/README.md';
 const board: Leaderboard = {
   benchmark: 'oab-bench', url: 'https://github.com/maritaca-ai/oab-bench#results', feed,
+  stats: { examsPassed: { name: 'Exams passed', unit: 'count', better: 'higher' }, exams: { name: 'Exams', unit: 'count' }, passingRate: { name: 'Passing rate', unit: '%', better: 'higher' } },
   terms: 'Apache License 2.0: https://github.com/maritaca-ai/oab-bench/blob/main/LICENSE.',
   aliases: { 'Qwen3.5-35B': 'qwen3-5-35b-a3b', 'Qwen3.5-397B': 'qwen3-5-397b-a17b' },
   async fetch() {

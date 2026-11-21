@@ -6,6 +6,7 @@ import { nextFlight, jsonAfter } from '../lib/html.ts';
 const feed = "https://www.deta.studio/leaderboard";
 
 const board: Leaderboard = {
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, credits: { name: 'Credits', unit: 'count', better: 'lower' } },
   benchmark: "deta-studio-construction-takeoff",
   url: "https://www.deta.studio/leaderboard",
   feed,

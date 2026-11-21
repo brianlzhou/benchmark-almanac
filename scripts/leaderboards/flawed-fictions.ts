@@ -7,6 +7,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2504.11900';
 const columns = ['Accuracy', 'Precision', 'Recall', 'F1-score', 'CEEval-Pos', 'CEEval-Full'];
 const board: Leaderboard = {
+  stats: { 'CEEval-Full': { name: 'Causal error evaluation full score', unit: 'score', better: 'higher' } },
   benchmark: 'flawed-fictions', static: 'paper', feed, url: feed,
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   aliases: { 'DeepSeek-R1-Qwen-32B': 'deepseek-r1-distill-qwen-32b', 'DeepSeek-R1-Qwen-14B': 'deepseek-r1-distill-qwen-14b' },

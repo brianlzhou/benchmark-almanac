@@ -13,6 +13,7 @@ interface Entry {
 const board: Leaderboard = {
   benchmark: 'kinetics-600', host: 'SOTA2 Research', url: feed, feed,
   terms: 'SOTA2 Research links each published result to its source paper at ' + feed,
+  stats: {top5:{name:'Top-5 accuracy',unit:'%',better:'higher'}},
   async fetch() {
     const data = nextFlight(await fetchText(feed));
     const start = data.indexOf('"results":{"benchmarkId"');

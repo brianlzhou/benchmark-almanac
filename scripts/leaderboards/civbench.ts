@@ -21,6 +21,7 @@ const board: Leaderboard = {
   aliases: {
     'Opus-5.5': 'claude-opus-5-5',
   },
+  stats: { avg_cached_input: { name: 'Average cached input tokens', unit: 'tokens' }, avg_input: { name: 'Average input tokens', unit: 'tokens' }, player_games: { name: 'Player games', unit: 'count' }, token_complete_player_games: { name: 'Token-complete player games', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(PAGE);
     const usage=parseCsv(await fetchText(PAGE+"assets/perf_usage_efficiency/usage_vs_rating.csv"));

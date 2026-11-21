@@ -4,6 +4,7 @@ import type { Leaderboard } from './types.ts';
 import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRows } from './lmarena-elo.ts';
 
 const board: Leaderboard = {
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   benchmark: 'document-arena',
   url: 'https://arena.ai/leaderboard/chat/document',
   feed: arenaFeed('document_style_control'),

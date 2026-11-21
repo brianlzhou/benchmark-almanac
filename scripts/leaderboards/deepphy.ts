@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2508.05405';
 const environments = ['PHYRE', 'I-PHYRE', 'Kinetix', 'Pooltool', 'Angry Birds', 'Cut the Rope'];
 const board: Leaderboard = {
   benchmark: 'deepphy', url: feed, feed, static: 'paper', terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
+  stats: { 'PHYRE Average Attempts': { name: 'PHYRE average attempts', unit: 'count', better: 'lower' }, 'I-PHYRE Average Attempts': { name: 'I-PHYRE average attempts', unit: 'count', better: 'lower' }, 'Pooltool Average Attempts': { name: 'Pooltool average attempts', unit: 'count', better: 'lower' }, 'Angry Birds Total Stars': { name: 'Angry Birds total stars', unit: 'count', better: 'higher' }, 'Cut the Rope Total Stars': { name: 'Cut the Rope total stars', unit: 'count', better: 'higher' } },
   headline: 'The headline averages success rates across the six environments at their published attempt limits.',
   parts: Object.fromEntries(environments.map(name => [name, name])),
   aliases: { 'GPT-4-Vision-Preview':'gpt-4v','GPT-o3-0416':'o3','GPT-o4-mini-0416':'o4-mini',

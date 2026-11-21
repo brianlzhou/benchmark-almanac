@@ -8,6 +8,7 @@ const FEED = "https://nextplusplus.github.io/TAT-DQA/";
 const board: Leaderboard = {
  benchmark: "tat-dqa", url: "https://nextplusplus.github.io/TAT-DQA/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' } },
 
  async fetch() {
 

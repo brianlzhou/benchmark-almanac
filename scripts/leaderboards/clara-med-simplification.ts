@@ -7,6 +7,7 @@ const feed = 'https://aclanthology.org/2024.lrec-main.1216.pdf';
 const board: Leaderboard = {
   benchmark: 'clara-med-simplification', static: 'paper', url: 'https://aclanthology.org/2024.lrec-main.1216/', feed,
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
+  stats: { Rouge1: { name: 'ROUGE-1', unit: 'score', better: 'higher' }, Rouge2: { name: 'ROUGE-2', unit: 'score', better: 'higher' }, RougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher' }, BLEU: { name: 'BLEU', unit: 'score', better: 'higher' } },
   async fetch() {
     const text = await pdfText(feed);
     if (!/BERTIN\s+41\.89\s+23\.19\s+35\.60\s+43\.07\s+15\.75/.test(text) || !/mBART\s+48\.82\s+31\.04\s+43\.96\s+50\.93\s+22\.90/.test(text)) throw new Error('Missing CLARA-MeD Table 3');

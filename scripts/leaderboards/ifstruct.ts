@@ -12,6 +12,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at www.liquid.ai; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    'StructEval†': { name: 'StructEval score', unit: '%', better: 'higher' },
+    'Structured Output Benchmark (Text)*': { name: 'Structured Output Benchmark score', unit: '%', better: 'higher' },
+  },
   
   async fetch() {
     const out: LeaderboardRow[] = [];

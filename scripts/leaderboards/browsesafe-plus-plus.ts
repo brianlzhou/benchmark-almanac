@@ -39,6 +39,7 @@ const board: Leaderboard = {
   url: 'https://browsesafe.perplexity.ai/',
   feed: `${FEED} (text board, Average view, F1)`,
   terms: 'Static JSON the BrowseSafe++ site publishes as raw results; the repository is MIT (the test inputs are licensed for evaluation only, and are not read).',
+  stats: { accessibilityAccuracy: { name: 'Accessibility accuracy', unit: '%', better: 'higher' }, accessibilityFpr: { name: 'Accessibility false-positive rate', unit: '%', better: 'lower' }, activeParams: { name: 'Active parameters', unit: 'billions' }, fpr: { name: 'False-positive rate', unit: '%', better: 'lower' }, htmlAccuracy: { name: 'HTML accuracy', unit: '%', better: 'higher' }, htmlFpr: { name: 'HTML false-positive rate', unit: '%', better: 'lower' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, latencySamples: { name: 'Latency samples', unit: 'count' }, markdownAccuracy: { name: 'Markdown accuracy', unit: '%', better: 'higher' }, markdownFpr: { name: 'Markdown false-positive rate', unit: '%', better: 'lower' }, priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' } },
   aliases: {
     'GPT-OSS 20B': 'gpt-oss-20b',
     'Mistral NeMo': 'mistral-nemo',

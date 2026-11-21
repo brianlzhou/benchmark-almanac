@@ -7,9 +7,11 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 import { numberCell } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://arxiv.org/html/2502.16357';
+const fields = ['Public','Environmental Law','Administrative Law','Constitutional Law','Energy Law','Public Finance Law','Financial Law','Tax Law','Criminal Law','Administrative Procedure Law','Civil Procedure Law','Criminal Procedure Law','Labor Procedure Law','Urban Planning Law','Private','Contract Law','Family Law','Law of Obligations','Property Law','Succession Law','Commercial Law','Banking Law','Maritime Law','Corporate Law','Securities Law','Transportation Law','Aviation Law','Insolvency Law','Private International Law','Labor Law','Public Private Competition Law','Public International','EU and Community'];
 const board: Leaderboard = {
   benchmark: 'legalbench-pt', url: 'https://github.com/deep-spin/LegalBench.PT', feed, static: 'paper',
   terms: 'The authors publish the paper and dataset under their listed repository and anthology terms.',
+  parts: {...Object.fromEntries(fields.map(name => [name.replace(/[^A-Za-z0-9]+(.)?/g, (_, c) => c?.toUpperCase() ?? ''), {name, unit:'%' as const}])), ...Object.fromEntries(['Multiple-choice','Cloze tasks','Case analysis','True/False','Multiple selection','Matching questions'].map((name,i) => ['type'+(i+1), {name, unit:'%' as const}]))},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const overall = tables.find(t => t[0]?.join('|') === 'Fields of Law|GPT- 4o|GPT- 4o-mini|Claude- 3-Opus|Claude- 3.5-Sonnet|Llama- 3.1-8B|Llama- 3.1-70B|Llama- 3.1-405B|Mixtral- 8x7B');

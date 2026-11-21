@@ -9,6 +9,9 @@ const board: Leaderboard = {
   feed: arenaFeed('webdev', 'image_to_webdev'),
   terms: ARENA_TERMS,
   aliases: ARENA_ALIASES,
+  stats: {
+    votes: { name: 'Votes', unit: 'count' },
+  },
   fetch: () => arenaRows('webdev', 'image_to_webdev'),
 };
 export default board;

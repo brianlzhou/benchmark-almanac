@@ -11,6 +11,10 @@ const board: Leaderboard = {
   url: "https://note.com/doui_lab/n/n4e733f1f6be9",
   feed,
   terms: "The maker gives no reuse license in the results post. robots.txt allows the feed path.",
+  stats: {
+    firstPlaceRate: { name: 'First-place rate', unit: '%', better: 'higher' },
+    fourthPlaceRate: { name: 'Fourth-place rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const page = text(await fetchText(feed));
     const rounds = page.match(/第1戦：([\s\S]+?)第2戦：([\s\S]+?)まとめ/);

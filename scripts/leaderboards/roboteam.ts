@@ -6,9 +6,15 @@ import { text } from '../lib/html.ts';
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 const feed = 'https://arxiv.org/html/2611.22138';
 const pct = (n: number) => 100 * n / 36;
+const stats = {
+  tasksCompleted: { name: 'Tasks completed', unit: 'count' }, totalTimeHours: { name: 'Total time', unit: 'hours', better: 'lower' as const }, inputTokens: { name: 'Input tokens per task', unit: 'tokens' }, outputTokens: { name: 'Output tokens per task', unit: 'tokens' }, cachedPercent: { name: 'Cached input percentage', unit: '%' },
+  timeHoursMedian: { name: 'Median time per task', unit: 'hours', better: 'lower' as const }, timeHoursP25: { name: '25th percentile time per task', unit: 'hours', better: 'lower' as const }, timeHoursP75: { name: '75th percentile time per task', unit: 'hours', better: 'lower' as const },
+  messagesMedian: { name: 'Median messages per task', unit: 'count' }, messagesP25: { name: '25th percentile messages per task', unit: 'count' }, messagesP75: { name: '75th percentile messages per task', unit: 'count' }, toolCallsMedian: { name: 'Median tool calls per task', unit: 'count' }, toolCallsP25: { name: '25th percentile tool calls per task', unit: 'count' }, toolCallsP75: { name: '75th percentile tool calls per task', unit: 'count' },
+  atomicFailurePercentMedian: { name: 'Median atomic failure percentage', unit: '%', better: 'lower' as const }, atomicFailurePercentP25: { name: '25th percentile atomic failure percentage', unit: '%' }, atomicFailurePercentP75: { name: '75th percentile atomic failure percentage', unit: '%' }, failedGrasps: { name: 'Failed grasps', unit: 'count' }, grasps: { name: 'Grasps', unit: 'count' }, failedGraspPercent: { name: 'Failed grasp percentage', unit: '%', better: 'lower' as const },
+};
 const board: Leaderboard = {
   benchmark: 'roboteam', url: feed, feed, static: 'paper', aliases: {'opus-5.5': 'claude-opus-5-5'},
-  terms: 'The paper is available under the terms linked at https://arxiv.org/abs/2611.22138.',
+  terms: 'The paper is available under the terms linked at https://arxiv.org/abs/2611.22138.', stats,
   async fetch() {
     const html = await paperHtml(feed);
     const source = paperTables(html).map(grid);

@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark: 'longbanana', url: url + '#leaderboard', feed, harnesses: 'system',
   terms: 'The project licenses its code and documentation under MIT. https://github.com/KlingAIResearch/LongBanana/blob/main/LICENSE',
   aliases: { 'Seedream 4': 'seedream-4-0', 'Nano Banana 2': 'gemini-3-1-flash-image' },
+  stats: {p70:{name:'Pass rate at 70% checklist threshold',unit:'%',better:'higher'}},
   parts: { topo: 'Scene Composition', appr: 'Visual Appearance', reason: 'Reference Reasoning',
     scc: 'Semantic Coverage & Consistency', rgc: 'Relational Graph Consistency', lac: 'Layout Arrangement Consistency',
     gac: 'Global Appearance Conditioning', lab: 'Local Appearance Binding', ahc: 'Appearance Harmonization & Coherence',

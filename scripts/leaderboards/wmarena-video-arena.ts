@@ -8,7 +8,8 @@ const board: Leaderboard = {
   benchmark: "wmarena-video-arena",
   url: "https://wmarena.com/leaderboard",
   feed,
-  terms: "WMArena’s public terms summary permits using anonymous votes for rankings. It gives no explicit score reuse license. https://wmarena.com/leaderboard robots.txt disallows /api/.",
+  stats: { votes: { name: 'Votes', unit: 'count' } },
+ terms: "WMArena’s public terms summary permits using anonymous votes for rankings. It gives no explicit score reuse license. https://wmarena.com/leaderboard robots.txt disallows /api/.",
   aliases: {
     "Seedance 1.0 Pro": "seedance-v1-pro",
   },

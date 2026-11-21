@@ -30,6 +30,20 @@ const board: Leaderboard = {
   task18_finalProfit: { name: 'Task 18', group: 'Task type' },
 }, url: URL, feed: FEED,
   terms: 'ORO publishes these results under CC BY 4.0 for comparisons and audits. Hugging Face robots.txt permits the raw paths. No restricted grader data is read.',
+  stats: {
+    validRuns: { name: 'Valid runs', unit: 'count' },
+    plannedRuns: { name: 'Planned runs', unit: 'count' },
+    tasks: { name: 'Tasks', unit: 'count' },
+    simulatedDays: { name: 'Simulated days', unit: 'count' },
+    changedMarginScore: { name: 'Changed-quarter margin score', unit: 'score', better: 'higher' },
+    ownMargin: { name: 'Own margin', unit: 'score', better: 'higher', note: 'Net value growth as a share of the business sales potential.' },
+    changedCost: { name: 'Changed-quarter cost', unit: 'usd', better: 'lower' },
+    controlMarginScore: { name: 'Control margin score', unit: 'score', better: 'higher' },
+    activeMinusControl: { name: 'Active minus control', unit: 'score', better: 'higher' },
+    maxOutputTokens: { name: 'Maximum output tokens per call', unit: 'tokens' },
+    profit_all: { name: 'Profit per quarter', unit: 'usd', better: 'higher', note: 'Mean profit over the 18 benchmark tasks.' },
+    ...Object.fromEntries(Array.from({length: 91}, (_, day) => [`profit_day${day}`, { name: `Profit on day ${day}`, unit: 'usd', better: 'higher' }])),
+  },
   aliases: {'Muse Wonder 1.0': 'muse-wonder'},
   async fetch() {
     const d = await fetchJson<{board: {models: {key: string; name: string; runs: number; profitUsd: Record<string, number>; costPerRunUsd: number; dailyUsd: number[]; byTask: number[][]}[]}}>(FEED);

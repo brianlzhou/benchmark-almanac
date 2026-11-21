@@ -33,6 +33,7 @@ const board: Leaderboard = {
   terms: "The site allows this data path and restricts query URLs in robots.txt. The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/",
   aliases: { 'gemma-2-27b-it': 'gemma-2-27b', 'mistral-large-3-2512': 'mistral-large-3',
     'nemotron-3-ultra-550b-a55b': 'nemotron-3-ultra' },
+  stats: { puzzles: { name: 'Puzzles', unit: 'count' }, firstTry: { name: 'Solved on first try', unit: '%', better: 'higher' }, failed: { name: 'Failed puzzles', unit: '%', better: 'lower' }, partial: { name: 'Partially solved puzzles', unit: '%', better: 'higher' }, legal: { name: 'Legal move rate', unit: '%', better: 'higher' }, recovered: { name: 'Recovered puzzles', unit: '%', better: 'higher' }, secondsPerCall: { name: 'Seconds per call', unit: 'seconds', better: 'lower' }, tokensPerCall: { name: 'Tokens per call', unit: 'tokens', better: 'lower' } },
   async fetch() {
     const { puzzles: p } = await fetchJson<{puzzles: Puzzles}>(feed);
     const required = ['puzzle_id','player','suite','outcome','cost','completion_tokens','time_ms','api_calls','plies_correct','plies_total','illegal','strikes','date'];

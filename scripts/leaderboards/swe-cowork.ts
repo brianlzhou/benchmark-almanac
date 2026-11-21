@@ -6,6 +6,10 @@ const url='https://tokenwave-ai.github.io/swe-cowork-page';
 export default {
   benchmark:'swe-cowork',url,feed:url,
   terms:'The authors publish this table on their project page; robots.txt has no restrictions and no separate extraction terms are stated.',
+  stats: {
+    f2p: { name: 'New behavior pass rate', unit: '%', better: 'higher', note: 'Fraction of tests for new behavior that pass.' },
+    p2p: { name: 'Existing behavior pass rate', unit: '%', better: 'higher', note: 'Fraction of existing-behavior tests that continue to pass.' },
+  },
   async fetch():Promise<LeaderboardRow[]> {
     const t=tables(await fetchText(url)).find(t=>t[0]?.some(c=>c.text.startsWith('Full-task pass')));
     if(!t || t[0].length!==5)throw new Error('SWE-CoWork results columns changed');

@@ -19,6 +19,7 @@ function readResults(markdown: string): Result[] {
 }
 const board: Leaderboard = {
   benchmark: 'wiser-atomic', url: PAGE, feed: FEED,
+  stats: { costPer1000Questions: { name: 'Cost per 1,000 questions', unit: 'usd', better: 'lower' } },
   terms: 'The benchmark is private and the public article provides its reported result arrays. Results are credited to Parallel Web Systems.',
   headline: 'Answer accuracy on 121 customer-inspired web-research questions',
   fetch: async () => (await readResults(await fetchText(FEED))).map((r): LeaderboardRow => ({ model: r.label, score: r.y, metrics: { costPer1000Questions: r.x } })),

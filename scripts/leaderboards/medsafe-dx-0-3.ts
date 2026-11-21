@@ -6,6 +6,7 @@ type Value = {value:number;ci:[number,number]};
 const board: Leaderboard = {
  benchmark:'medsafe-dx-0-3', url:'https://github.com/cortico-health/MedSafe-Dx', feed:FEED,
  terms:'CC BY-NC-ND 4.0 repository; factual headline results are attributed in their published units; raw.githubusercontent.com has no robots.txt.',
+ stats:{underEscalation:{name:'Under-escalation rate',unit:'%',better:'lower'},overEscalation:{name:'Over-escalation rate',unit:'%',better:'lower'}},
  async fetch() {
   const d = await fetchJson<{headline_within_condition:{headline_cases:number;rows:Record<string,Record<string,Value>>}}>(FEED);
   if(d.headline_within_condition.headline_cases !== 900) throw new Error('v0.3 case count changed');

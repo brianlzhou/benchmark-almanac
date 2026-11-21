@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://github.com/lechmazur/divergent",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/divergent. I could not verify reuse terms. The raw file host has no robots.txt.",
+  stats: { repeatedWords: { name: 'Repeated words', unit: '%', better: 'lower' } },
   async fetch() {
     const all = markdownTables(await fetchText(feed));
     const scores = all.find(t => t[0]?.join('|') === 'Model|Score');

@@ -8,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/zai-org/ComplexFuncBench/main/RE
 const board: Leaderboard = {
  benchmark: "complexfuncbench", url: "https://github.com/zai-org/ComplexFuncBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { callAccuracy: { name: 'Call accuracy', unit: '%', better: 'higher' }, completeness: { name: 'Completeness', unit: '%', better: 'higher' }, correctness: { name: 'Correctness', unit: '%', better: 'higher' } },
 aliases:{'Claude-3.5-Sonnet (20241022)':'claude-3-5-sonnet-october-2024','GPT-4o (2024-08-06)':'gpt-4o-aug-2024','GPT-4-Turbo (2024-04-09)':'gpt-4-turbo-apr-2024','Claude-3.5-Haiku (20241022)':'claude-3-5-haiku'},
  async fetch() {
 

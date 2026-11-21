@@ -11,6 +11,13 @@ const board: Leaderboard = {
     'gemini-1.5-pro-001':'gemini-1-5-pro-may-2024','gemini-1.5-flash-001':'gemini-1-5-flash-may-2024','gemini-1.5-pro-002':'gemini-1-5-pro-sept-2024',
     'gemini-1.5-flash-002':'gemini-1-5-flash-sep-2024','gemini-2.0-flash-exp':'gemini-2-0-flash-dec-2024','gemini-2.0-flash-001':'gemini-2-0-flash-feb-2025',
     'gpt-4o-2024-11-20':'gpt-4o-nov-2024'},
+  stats:{
+    '# eval':{name:'Evaluation examples',unit:'count'},
+    '# prompt tokens':{name:'Prompt tokens (reported)',unit:'tokens'},
+    '# output tokens':{name:'Output tokens (reported)',unit:'tokens'},
+    inputTokens:{name:'Input tokens per request',unit:'tokens'},
+    outputTokens:{name:'Output tokens per request',unit:'tokens'},
+  },
   async fetch() {
     const rows = await helmRows(table,true);
     for (const row of rows) {

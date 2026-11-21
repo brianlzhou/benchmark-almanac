@@ -22,6 +22,20 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (sim, average score)`,
   terms: 'Static JSON the board itself loads; robots.txt allows it (disallows only /internal/ and /login) and the RoboDojo repository is MIT-licensed.',
+  stats: {
+    successRate: { name: 'Average success rate', unit: '%', better: 'higher' },
+    averageScore: { name: 'Average score', unit: '%', better: 'higher' },
+    averageSuccessRate: { name: 'Average dimension success rate', unit: '%', better: 'higher' },
+    sftScore: { name: 'Supervised fine-tuning score', unit: '%', better: 'higher' },
+    sftSuccessRate: { name: 'Supervised fine-tuning success rate', unit: '%', better: 'higher' },
+    generalizationSuccessRate: { name: 'Generalization success rate', unit: '%', better: 'higher' },
+    precisionSuccessRate: { name: 'Precision success rate', unit: '%', better: 'higher' },
+    longHorizonSuccessRate: { name: 'Long-horizon success rate', unit: '%', better: 'higher' },
+    memorySuccessRate: { name: 'Memory success rate', unit: '%', better: 'higher' },
+    openSuccessRate: { name: 'Open success rate', unit: '%', better: 'higher' },
+    generalizationStdSuccessRate: { name: 'Generalization standard success rate', unit: '%', better: 'higher' },
+    generalizationRandSuccessRate: { name: 'Generalization randomized success rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{ sim: { model: string; team?: string; score: number; successRate?: number; dimensions?: Record<string, {score?: number; successRate?: number}>; genSplits?: Record<string, {score?: number; successRate?: number}> }[] }>(FEED);
     const rows: LeaderboardRow[] = [];

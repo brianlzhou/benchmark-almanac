@@ -57,6 +57,7 @@ const board: Leaderboard = {
   url: 'https://aiagribench.org/leaderboard',
   feed: 'https://aiagribench.org/api/leaderboard?variant=main',
   terms,
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, completeness: { name: 'Completeness', unit: '%', better: 'higher' }, conciseness: { name: 'Conciseness', unit: '%', better: 'higher' }, relevance: { name: 'Relevance', unit: '%', better: 'higher' }, postCutoff_completeness: { name: 'Post-cutoff completeness', unit: '%', better: 'higher' }, postCutoff_conciseness: { name: 'Post-cutoff conciseness', unit: '%', better: 'higher' }, postCutoff_relevance: { name: 'Post-cutoff relevance', unit: '%', better: 'higher' } },
   aliases: { 'deepseek-chat-v3-0324': 'deepseek-v3-mar-2025', 'mistral-large-2411': 'mistral-large-2-nov-2024' },
   fetch: () => agribenchRows(board, 25),
 };

@@ -1,7 +1,7 @@
 // Design Arena: website builder products. People vote between two anonymous results, and the score is the board's Elo.
 // Read through scripts/lib/boards/designarena.ts, which explains the feed, the effort settings and the terms.
 import type { Leaderboard } from './types.ts';
-import { DA_ALIASES, DA_TERMS, daFeed, daRows, type DaBoard } from '../lib/boards/designarena.ts';
+import { DA_ALIASES, DA_TERMS, DA_STATS_BASIC, daFeed, daRows, type DaBoard } from '../lib/boards/designarena.ts';
 
 const BOARD: DaBoard = { arenaType: 'builders', category: 'website' };
 
@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: daFeed(BOARD),
   terms: DA_TERMS,
   aliases: DA_ALIASES,
+  stats: DA_STATS_BASIC,
   fetch: () => daRows(BOARD),
 };
 export default board;

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.spirebench.com/blog/trial-v0-results",
   feed,
   terms: "The repository includes an MIT license. https://github.com/hiKareeem/ClaudePlaysTheSpire/blob/main/LICENSE The feed host returns no robots.txt.",
+  stats: { maxFloor: { name: 'Maximum floor', unit: 'count', better: 'higher' }, meanTotalTokens: { name: 'Mean total tokens', unit: 'tokens', better: 'lower' }, meanHours: { name: 'Mean wall time', unit: 'hours', better: 'lower' } },
   async fetch() {
     const required = ["Model", "Median Floor"];
     const table = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)))

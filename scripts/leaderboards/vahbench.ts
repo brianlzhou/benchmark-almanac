@@ -7,6 +7,7 @@ const models: Record<string,string> = { 'DS-F': 'deepseek-v4-flash', 'DS-V': 'de
 const board: Leaderboard = {
   benchmark: 'vahbench', static: 'paper', url: feed, feed, harnesses: 'system',
   terms: 'The authors publish Table 2 under the terms linked at https://arxiv.org/abs/2611.20535.',
+  stats: { completeness: { name: 'Mean completeness', unit: 'score', better: 'higher' }, quality: { name: 'Mean quality', unit: 'score', better: 'higher' } },
   parts: { B1: 'The Woman Behind the Numbers', B2: 'Terms of the Borrowed Vow', B3: 'The Algorithm Knows My Name', B4: 'The Nineteenth Floor', B5: 'The Last Clause' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid).filter(t => t[0]?.join('|') === 'Model|B1|B2|B3|B4|B5|\\bar{C}|\\bar{Q}|\\bar{S}');

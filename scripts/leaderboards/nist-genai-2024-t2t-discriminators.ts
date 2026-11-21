@@ -12,6 +12,13 @@ const board: Leaderboard = {
   benchmark: 'nist-genai-2024-t2t-discriminators',
   url, feed,
   terms: 'NIST permits copying unmarked public information with credit. Separate agreements govern the evaluation inputs. The site robots.txt disallows all paths.',
+  stats: {
+    'AUC@FPR=0.1': { name: 'Area under ROC at false-positive rate 0.1', unit: 'score', better: 'higher', note: 'Area under the receiver operating characteristic curve from 0 to 1.' },
+    Brier: { name: 'Brier score', unit: 'brier', better: 'lower' },
+    EER: { name: 'Equal error rate', unit: 'score', better: 'lower', note: 'Equal error rate from 0 to 1.' },
+    'TNR@FNR=0.1': { name: 'True-negative rate at false-negative rate 0.1', unit: 'score', better: 'higher', note: 'True-negative rate from 0 to 1.' },
+    'TPR@FPR=0.1': { name: 'True-positive rate at false-positive rate 0.1', unit: 'score', better: 'higher', note: 'True-positive rate from 0 to 1.' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const [index, id] of tables.entries()) {

@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (DeepTerminalBench table, Pass@1)`,
   terms: 'Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',
+  stats: { turns: { name: 'Average turns per task', unit: 'count', better: 'lower' } },
   async fetch() {
     const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => c.text === 'Pass@1') && rows[0]?.some((c) => c.text === 'Model'));
     if (!t) throw new Error('DeepTerminalBench table not found');

@@ -12,6 +12,16 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2311.07397",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  chair: { name: 'CHAIR', unit: '%', better: 'lower', note: 'Frequency of hallucinatory objects in generated responses.' },
+  coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+  hallucination: { name: 'Hallucination rate', unit: '%', better: 'lower', note: 'Proportion of responses with hallucinations.' },
+  cognition: { name: 'Cognition score', unit: '%', better: 'lower' },
+  accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+  precision: { name: 'Precision', unit: '%', better: 'higher' },
+  recall: { name: 'Recall', unit: '%', better: 'higher' },
+  f1: { name: 'F1', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text))).find(t=>t[0]?.includes('AMBER Score'));

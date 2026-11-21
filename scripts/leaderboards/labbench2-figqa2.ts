@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at advances.edisonscientific.com; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text.includes('Average score')));if(!t)throw new Error('FigQA2 table missing');

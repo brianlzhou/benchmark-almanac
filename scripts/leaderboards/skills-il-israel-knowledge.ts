@@ -17,6 +17,13 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The organizers offer a download. Site terms restrict copying, automated collection and commercial use. The MIT license applies to individual skills. https://agentskills.co.il/en/terms The robots file permits the leaderboard and its download.",
   parts: { tax: 'Tax', employment: 'Employment', btl: 'National Insurance', consumer: 'Consumer', documents: 'Documents' },
+  stats: {
+    right: { name: 'Right answers', unit: 'count' },
+    wrong: { name: 'Wrong answers', unit: 'count' },
+    abstain: { name: 'Abstentions', unit: 'count' },
+    uplift: { name: 'Skill uplift', unit: '%', better: 'higher' },
+    passesAsHuman: { name: 'Passes as human', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(FEED);
     const flight = nextFlight(html);

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://caliperbench.com/",
   feed: FEED,
   terms: "The scoreboard embeds its data in the page and gives no separate reuse license. https://caliperbench.com/ The robots URL returns the scoreboard HTML.",
+  stats: { rank: { name: 'Published rank', unit: 'count', better: 'lower' }, context_length: { name: 'Context length', unit: 'tokens' } },
   parts: { rp_score_v3: 'RP', erp_score_v3: 'ERP', drp_score_v3: 'DRP', combined_v3: 'Combined RP' },
   aliases: {
     "Claude Fable 5.2 (Anthropic)": "claude-fable-5-2",

@@ -9,6 +9,14 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/flowers-team/StickToYourRoleLeaderboard/raw/main/static/leaderboard.csv",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    cardinal: { name: 'Cardinal score', unit: 'score', better: 'higher', note: 'Cardinal consistency score from 0 to 1.' },
+    roStability: { name: 'Role order stability', unit: 'score', better: 'higher', note: 'Stability of the model’s role ordering from 0 to 1.' },
+    stress: { name: 'Stress', unit: 'score', better: 'lower' },
+    cfi: { name: 'Comparative fit index', unit: 'score', better: 'higher' },
+    srmr: { name: 'Standardized root mean square residual', unit: 'score', better: 'lower' },
+    rmsea: { name: 'Root mean square error of approximation', unit: 'score', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       return parseCsv(await fetchText(FEED)).map(r=>({model:r.Model,score:Number(r['Ordinal (Win rate)']),metrics:{cardinal:Number(r['Cardinal (Score)']),roStability:Number(r['RO Stability']),stress:Number(r.Stress),cfi:Number(r.CFI),srmr:Number(r.SRMR),rmsea:Number(r.RMSEA)}}));

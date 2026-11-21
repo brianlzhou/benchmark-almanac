@@ -9,6 +9,7 @@ const FEED = "https://ewang26.github.io/HorizonMath/";
 const board: Leaderboard = {
  benchmark: "horizonmath", url: "https://ewang26.github.io/HorizonMath/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats:{solved:{name:'Problems solved',unit:'count'},problems:{name:'Problems evaluated',unit:'count'},calibrationSolved:{name:'Calibration problems solved',unit:'count'},unsolvedTierSolutions:{name:'Accepted unsolved-tier solutions',unit:'count'}},
 
  async fetch() {
 

@@ -15,6 +15,13 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The authors publish this public Hugging Face CSV, with attribution retained and no separate score reuse license stated.',
   aliases: { 'Minicpm-V 2.6': 'minicpm-v-2-6' },
+  stats: {
+    'Text Recognition': { name: 'Text recognition correct answers', unit: 'count' },
+    'Scene Text-Centric VQA': { name: 'Scene text centric VQA correct answers', unit: 'count' },
+    'Doc-Oriented VQA': { name: 'Document oriented VQA correct answers', unit: 'count' },
+    KIE: { name: 'Key information extraction correct answers', unit: 'count' },
+    HMER: { name: 'Handwritten math expression recognition answers', unit: 'count' },
+  },
   async fetch() {
     const source = parseCsv(await fetchText(FEED));
     if (!source.length || !('Final Score' in source[0])) throw new Error('OCRBench Final Score column missing');

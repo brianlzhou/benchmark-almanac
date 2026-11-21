@@ -10,6 +10,10 @@ const board: Leaderboard = {
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'The paper reports no overall score, so this is the plain mean of test macro F1 for argument type and agent.',
   parts: { argumentType: 'Argument Type', agent: 'Agent' },
+  stats: {
+    argumentDev: { name: 'Argument type development F1', unit: '%', better: 'higher' },
+    agentDev: { name: 'Agent development F1', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const table = flatPaperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.slice(1).join('|') === 'Argument Type|Argument Type|Agent|Agent' && t[1]?.slice(1).join('|') === 'Dev|Test|Dev|Test');

@@ -32,6 +32,7 @@ const board: Leaderboard = {
   url: 'https://github.com/latchbio/scbench-long',
   feed: FEED,
   terms: 'The authors publish the paper and repository under Apache License 2.0. https://www.apache.org/licenses/LICENSE-2.0',
+  stats: { passRuns: { name: 'Passing runs', unit: 'count' }, anyPass: { name: 'Runs with any pass', unit: 'count' }, majorityPass: { name: 'Runs with majority pass', unit: 'count' }, allPass: { name: 'Runs with all passes', unit: 'count' } },
   async fetch() {
     const paper = await pdfText(FEED);
     if (!paper.includes('Table 2: Main verifiable results') || !paper.includes('Claude Opus 4.8 / Claude Code')) throw new Error('scBench-Long original Table 2 missing');

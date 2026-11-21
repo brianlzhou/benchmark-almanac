@@ -13,6 +13,9 @@ const board: Leaderboard = {
   feed,
   terms: "The repository has no published score reuse license. The cost column includes estimates. The host has no robots.txt.",
   parts: Object.fromEntries(criteria.map(c => [c, c])),
+  stats: {
+    qualityPerDollar: { name: 'Quality per dollar', unit: 'score', better: 'higher', note: 'Mean quality score divided by generation cost in US dollars.' },
+  },
   reference: ['Command Code'],
   aliases: { 'DeepSeek': 'deepseek-v4-pro', 'Opus 5': 'claude-opus-5', 'Fable 5': 'claude-fable-5' },
   async fetch() {

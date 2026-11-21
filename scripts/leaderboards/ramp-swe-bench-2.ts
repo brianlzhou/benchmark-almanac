@@ -16,6 +16,7 @@ const board: Leaderboard = {
   terms: RAMP_TERMS,
   reference: ['mini-SWE-agent'],
   harnesses: 'system',
+  stats: { latency: { name: 'Mean latency per task', unit: 'seconds', better: 'lower' }, toolCalls: { name: 'Mean tool calls per task', unit: 'count', better: 'lower' }, inputTokens: { name: 'Input tokens per task', unit: 'tokens' }, reasoningTokens: { name: 'Reasoning tokens per task', unit: 'tokens' }, tasks: { name: 'Tasks', unit: 'count' } },
   chart: { title: 'Score versus spend', x: { key: 'cost', label: 'Mean cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Resolved', unit: '%', better: 'higher' } },
   async fetch() {
     const bash = await rampRows(BASH, { ci95: true, minRows: 15 });

@@ -68,6 +68,13 @@ const board:Leaderboard={
   benchmark:'anes-survey-item-associations',url:'https://osf.io/skbqm/',feed, host:'Jamie Cummins',static:'paper',
   terms:'Study 2 replication data on OSF. https://osf.io/skbqm/',
   parts:{sensitivity:'Excluding age, gender and race'},
+  stats: {
+    meanAbsoluteDifference: { name: 'Mean absolute difference', unit: 'score', better: 'lower', note: 'Mean absolute difference between human and simulated directed Cramer’s V associations, from 0 to 1.' },
+    completeCases: { name: 'Complete cases', unit: 'count' },
+    validPairs: { name: 'Valid association pairs', unit: 'count' },
+    sensitivityMae: { name: 'Sensitivity mean absolute difference', unit: 'score', better: 'lower', note: 'Mean absolute difference for the eight-item sensitivity check, from 0 to 1.' },
+    sensitivityCases: { name: 'Sensitivity complete cases', unit: 'count' },
+  },
   async fetch() {
     const csv=new TextDecoder().decode(await fetchBytes(feed,{},2,120_000));
     const configs=new Map<string,Config>();

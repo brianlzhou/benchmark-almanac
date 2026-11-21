@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'multi-lexsum', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2206.10883.',
   headline: 'The paper reports no overall score, so this is the mean ROUGE-2 F1 across long, short, and tiny summaries.',
+  stats: Object.fromEntries(['long','short','tiny'].flatMap(k => [[k+'R1',{name:k+' ROUGE-1 F1',unit:'%',better:'higher'}],[k+'RL',{name:k+' ROUGE-L F1',unit:'%',better:'higher'}],[k+'BERTScore',{name:k+' BERTScore',unit:'score',better:'higher'}],[k+'Words',{name:k+' summary words',unit:'count'}]])),
   parts: { long: 'Long summary', short: 'Short summary', tiny: 'Tiny summary' },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');

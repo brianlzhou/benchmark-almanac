@@ -40,6 +40,7 @@ const board: Leaderboard = {
     'kimi-k2-0905': 'kimi-k2-sep-2025',
   },
   costPer: 'run',
+  stats: { tasks: { name: 'Tasks', unit: 'count' }, tasksPassed: { name: 'Tasks passed', unit: 'count' }, attemptsPassed: { name: 'Attempts passed', unit: 'count', better: 'higher' }, totalInferenceSeconds: { name: 'Inference time', unit: 'seconds', better: 'lower' }, totalCommandSeconds: { name: 'Command execution time', unit: 'seconds', better: 'lower' }, finalContextTokens: { name: 'Final context tokens', unit: 'tokens', better: 'lower' }, secondsPerCompletedTask: { name: 'Seconds per completed task', unit: 'seconds', better: 'lower' }, passAt1: { name: 'Pass@1', unit: '%', better: 'higher' } },
   chart: {
     title: 'CompileBench Speed',
     note: 'Share of tasks passed within three attempts against the total time across tasks, with the Pareto frontier.',

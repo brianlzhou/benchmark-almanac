@@ -1,11 +1,16 @@
 // CoreCodeBench evaluates code generation on atomic and composite repository tasks.
 // The paper reports six accuracy-rate parts for each task type and no overall column.
 // This importer stores the plain mean of the six published rates.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardPart, Leaderboard, LeaderboardRow} from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = 'https://arxiv.org/html/2507.05281';
+const parts: Record<string, BoardPart> = Object.fromEntries([
+  ['AtomicOverallAC', 'Atomic overall accuracy'], ['AtomicOverallRate', 'Atomic overall pass rate'], ['AtomicDevelopmentAC', 'Atomic development accuracy'], ['AtomicDevelopmentRate', 'Atomic development pass rate'], ['AtomicBugFixAC', 'Atomic bug-fix accuracy'], ['AtomicBugFixRate', 'Atomic bug-fix pass rate'], ['AtomicTDDAC', 'Atomic test-driven development accuracy'], ['AtomicTDDRate', 'Atomic test-driven development pass rate'],
+  ['CompositeOverallAC', 'Composite overall accuracy'], ['CompositeOverallRate', 'Composite overall pass rate'], ['CompositeDevelopmentAC', 'Composite development accuracy'], ['CompositeDevelopmentRate', 'Composite development pass rate'], ['CompositeBugFixRate', 'Composite bug-fix pass rate'], ['CompositeTDDAC', 'Composite test-driven development accuracy'], ['CompositeTDDRate', 'Composite test-driven development pass rate'],
+].map(([key, name]) => [key, { name, unit: '%', better: 'higher' as const }]));
 const board: Leaderboard = { benchmark: 'corecodebench', static: 'paper', url: FEED, feed: FEED, terms: PAPER_TERMS,
+ parts,
  headline: 'The paper reports no overall score, so this is the plain mean of its six atomic and composite task rates.',
  async fetch(): Promise<LeaderboardRow[]> {
   const tables = paperTables(await paperHtml(FEED)).map(grid).filter(t => t[0]?.[1] === 'Model');

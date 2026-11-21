@@ -20,6 +20,7 @@ const board: Leaderboard = {
   url: `${SITE}/rwe-bench`,
   feed: `${FEED} (window.RWE.models, pass1)`,
   terms: 'Data file the public page loads; robots.txt allows / for all user agents except named AI crawlers (content signal use=reference, ai-train=no).',
+  stats: { passAt2: { name: 'Pass at 2', unit: '%', better: 'higher' }, passAt3: { name: 'Pass at 3', unit: '%', better: 'higher' }, passAt4: { name: 'Pass at 4', unit: '%', better: 'higher' }, passAt5: { name: 'Pass at 5', unit: '%', better: 'higher' } },
   chart: {
     title: 'Average pass rate against cost or time per run',
     note: 'Figure 2 with time on the x axis: each point is one model in its harness, and the Pareto frontier joins the models no other passes more for less time.',

@@ -9,6 +9,11 @@ const board: Leaderboard = {
   url: "https://aclanthology.org/2026.wmt-main.91.pdf",
   feed,
   terms: "Table 2 ranks human construction accuracy. The JSON contains individual judgments. The repository lists no license. ACL Anthology returned 404 for robots.txt.",
+  stats: {
+    translations: { name: 'Translations', unit: 'count' }, evaluated: { name: 'Evaluated translations', unit: 'count' }, ratings: { name: 'Ratings', unit: 'count' },
+    meaningPreserved: { name: 'Meaning preserved', unit: '%', better: 'higher' }, meaningWidth: { name: 'Meaning interval width', unit: '%' },
+    translationAccuracy: { name: 'Translation accuracy', unit: '%', better: 'higher' }, translationWidth: { name: 'Translation interval width', unit: '%' },
+  },
   async fetch() {
     const doc = await pdfText(feed);
     const end = doc.indexOf('Table 2: An overview of all models');

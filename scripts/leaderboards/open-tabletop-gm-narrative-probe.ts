@@ -11,6 +11,12 @@ const board: Leaderboard = {
   feed,
   terms: "The author gives no separate license for the results table in this post. https://www.reddit.com/r/LocalLLaMA/comments/1spfz31/i_tested_8_llms_as_tabletop_gms_a_27b_model_beat/ Reddit disallows general crawling. The author’s repository declares AGPL-3.0-or-later.",
   parts:{atmosphere:'atmosphere',npc_craft:'npc_craft',gm_craft:'gm_craft'},
+  stats: {
+    PASS: { name: 'Pass cases', unit: 'count' },
+    WARN: { name: 'Warning cases', unit: 'count' },
+    FAIL: { name: 'Failed cases', unit: 'count', better: 'lower' },
+    latency: { name: 'Average case latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch(){
     const files = (await fetchJson<{download_url:string;html_url:string;name:string}[]>(feed, { headers: githubHeaders() })).filter(f=>f.name.endsWith('.json'));
     if(files.length !== 8) throw new Error('Expected eight original probe runs');

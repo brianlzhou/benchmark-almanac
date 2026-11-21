@@ -4,6 +4,7 @@ import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2504.10514";
 const board:Leaderboard={benchmark:"colorbench", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
+ stats:{robustness:{name:'Robustness',unit:'%',better:'higher'}},
  async fetch(){
  const t=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0])==="[\"\",\"Color Perception\",\"Color Perception\",\"Color Perception\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"Color Reasoning\",\"P & R\",\"Robustness\"]");
  if(!t)throw new Error('Reviewed results table missing');const out:LeaderboardRow[]=[];

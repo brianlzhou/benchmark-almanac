@@ -21,6 +21,11 @@ const board: Leaderboard = {
     perturbation_semantic: { name: 'Semantic', group: 'Category' },
     perturbation_surface: { name: 'Surface', group: 'Category' },
   },
+  stats: {
+    tasks: { name: 'Tasks', unit: 'count' },
+    library_matplotlibCount: { name: 'Matplotlib tasks', unit: 'count' }, library_numpyCount: { name: 'NumPy tasks', unit: 'count' }, library_pandasCount: { name: 'pandas tasks', unit: 'count' }, library_pytorchCount: { name: 'PyTorch tasks', unit: 'count' }, library_scipyCount: { name: 'SciPy tasks', unit: 'count' }, library_sklearnCount: { name: 'scikit-learn tasks', unit: 'count' }, library_tensorflowCount: { name: 'TensorFlow tasks', unit: 'count' },
+    'perturbation_difficult-rewriteCount': { name: 'Difficult rewrite tasks', unit: 'count' }, perturbation_originCount: { name: 'Original perturbation tasks', unit: 'count' }, perturbation_semanticCount: { name: 'Semantic perturbation tasks', unit: 'count' }, perturbation_surfaceCount: { name: 'Surface perturbation tasks', unit: 'count' },
+  },
   url: "https://github.com/xlang-ai/DS-1000",
   feed: FEED,
   terms: "Public results published by the benchmark authors at api.github.com; retain source attribution and follow the upstream terms.",

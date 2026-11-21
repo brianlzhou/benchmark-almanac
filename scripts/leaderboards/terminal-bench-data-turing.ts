@@ -11,6 +11,11 @@ const board: Leaderboard = {
   feed,
   terms: "The publisher gives no reuse license on the benchmark page. https://labs.turing.com/benchmarks/terminal-bench The robots URL returns the application shell.",
   reference: ['Terminus-2'], parts: { 'Scientific Computing':'Scientific Computing', 'Machine Learning':'Machine Learning', 'Data Analysis':'Data Analysis' },
+  stats: {
+    steps: { name: 'Steps', unit: 'count' },
+    toolCalls: { name: 'Tool calls', unit: 'count' },
+    wallMinutes: { name: 'Wall time', unit: 'minutes', better: 'lower' },
+  },
   async fetch() {
     const body = (await fetchText(feed)).split('slug:"terminal-bench",name:"Terminal-Bench Data"')[1] ?? '';
     const tag = 'kind:"results",rows:';

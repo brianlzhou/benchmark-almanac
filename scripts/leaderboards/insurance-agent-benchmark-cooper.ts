@@ -4,6 +4,7 @@ import { fetchText } from "../lib/util.ts";
 import { num, tables } from "../lib/html.ts";
 const board: Leaderboard = {
   benchmark: "insurance-agent-benchmark-cooper",
+  stats: { estimatedRunCost: { name: 'Estimated run cost', unit: 'usd', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, p95Seconds: { name: '95th percentile latency', unit: 'seconds', better: 'lower' }, fieldF1: { name: 'Field F1', unit: '%', better: 'higher' }, hallucinationRate: { name: 'Hallucination rate', unit: '%', better: 'lower' }, reliability: { name: 'Reliability', unit: '%', better: 'higher' }, failures: { name: 'Failures', unit: 'count', better: 'lower' } },
   url: "https://www.askcooper.ai/labs/insurance-agent-benchmark",
   feed: "https://www.askcooper.ai/labs/insurance-agent-benchmark",
   terms: "Cooper limits use to personal, noncommercial purposes and prohibits scraping. https://www.askcooper.ai/terms Its robots.txt allows the report.",

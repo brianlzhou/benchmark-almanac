@@ -11,6 +11,7 @@ const board: Leaderboard = {
   Rel: { name: 'Spatial relationship reasoning', group: 'Task type' },
   Mov: { name: 'Movement prediction and navigation', group: 'Task type' },
 }, url: "https://wenqi-wang20.github.io/SITE-Bench.github.io/", feed: FEED,
+  stats: { Count: { name: 'Task count', unit: 'count' } },
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

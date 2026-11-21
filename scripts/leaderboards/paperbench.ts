@@ -9,6 +9,7 @@ const FEED = "https://raw.githubusercontent.com/openai/frontier-evals/main/proje
 const board: Leaderboard = {
  benchmark: "paperbench", url: "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { reportedUncertainty: { name: 'Reported uncertainty', unit: 'score', note: 'Reported uncertainty in the PaperBench score, stored from 0 to 1.' } },
 
  async fetch() {
 

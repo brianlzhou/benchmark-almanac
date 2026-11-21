@@ -20,6 +20,12 @@ const board: Leaderboard = {
     'Qwen3 (30B-A3B)': 'qwen3-30b-a3b', 'Qwen3 (235B-A22B)': 'qwen3-235b-a22b',
     'DeepSeek R1 (snapshot unspecified)': 'deepseek-r1',
   },
+  stats: {
+    ENEasyAlgebraConsensus: { name: 'English easy algebra consensus', unit: '%', better: 'higher' }, ENEasyCombinatoricsConsensus: { name: 'English easy combinatorics consensus', unit: '%', better: 'higher' }, ENEasyConsensus: { name: 'English easy consensus', unit: '%', better: 'higher' }, ENEasyGeometryConsensus: { name: 'English easy geometry consensus', unit: '%', better: 'higher' }, ENEasyNumbertheoryConsensus: { name: 'English easy number theory consensus', unit: '%', better: 'higher' },
+    ENHardAlgebraConsensus: { name: 'English hard algebra consensus', unit: '%', better: 'higher' }, ENHardCombinatoricsConsensus: { name: 'English hard combinatorics consensus', unit: '%', better: 'higher' }, ENHardConsensus: { name: 'English hard consensus', unit: '%', better: 'higher' }, ENHardGeometryConsensus: { name: 'English hard geometry consensus', unit: '%', better: 'higher' }, ENHardNumbertheoryConsensus: { name: 'English hard number theory consensus', unit: '%', better: 'higher' },
+    ZHEasyAlgebraConsensus: { name: 'Chinese easy algebra consensus', unit: '%', better: 'higher' }, ZHEasyCombinatoricsConsensus: { name: 'Chinese easy combinatorics consensus', unit: '%', better: 'higher' }, ZHEasyConsensus: { name: 'Chinese easy consensus', unit: '%', better: 'higher' }, ZHEasyGeometryConsensus: { name: 'Chinese easy geometry consensus', unit: '%', better: 'higher' }, ZHEasyNumbertheoryConsensus: { name: 'Chinese easy number theory consensus', unit: '%', better: 'higher' },
+    ZHHardAlgebraConsensus: { name: 'Chinese hard algebra consensus', unit: '%', better: 'higher' }, ZHHardCombinatoricsConsensus: { name: 'Chinese hard combinatorics consensus', unit: '%', better: 'higher' }, ZHHardConsensus: { name: 'Chinese hard consensus', unit: '%', better: 'higher' }, ZHHardGeometryConsensus: { name: 'Chinese hard geometry consensus', unit: '%', better: 'higher' }, ZHHardNumbertheoryConsensus: { name: 'Chinese hard number theory consensus', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await paperHtml(feed);
     const figures = [...html.matchAll(/<figure\b[\s\S]*?<\/figure>/gi)];

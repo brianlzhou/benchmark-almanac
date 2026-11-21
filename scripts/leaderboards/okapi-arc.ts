@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2307.16039';
 const board: Leaderboard = {
   benchmark: 'okapi-arc', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2307.16039.',
+  parts: { 'High-Resource': { name: 'High-resource languages', group: 'Resource level' }, 'Medium-Resource': { name: 'Medium-resource languages', group: 'Resource level' }, 'Low-Resource': { name: 'Low-resource languages', group: 'Resource level' } },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const tables = flatPaperTables(html).map(grid);

@@ -18,6 +18,7 @@ const board: Leaderboard = {
  url: "https://InternScience.github.io/SGI-Page/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { stepLevelAccuracy: { name: 'Step-level accuracy', unit: '%', better: 'higher' }, ideaEffectiveness: { name: 'Idea effectiveness', unit: '%', better: 'higher' }, ideaNovelty: { name: 'Idea novelty', unit: '%', better: 'higher' }, ideaDetail: { name: 'Idea detail', unit: '%', better: 'higher' }, ideaFeasibility: { name: 'Idea feasibility', unit: '%', better: 'higher' }, dryPass5: { name: 'Dry experiment pass at 5', unit: '%', better: 'higher' }, dryPass3: { name: 'Dry experiment pass at 3', unit: '%', better: 'higher' }, dryPass1: { name: 'Dry experiment pass at 1', unit: '%', better: 'higher' }, dryExecutionSeconds: { name: 'Dry experiment execution time', unit: 'seconds', better: 'lower' }, drySer: { name: 'Dry experiment success execution rate', unit: '%', better: 'higher' }, wetSs: { name: 'Wet experiment success score', unit: '%', better: 'higher' }, wetPa: { name: 'Wet experiment pass accuracy', unit: '%', better: 'higher' }, reasoningValidity: { name: 'Reasoning validity', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

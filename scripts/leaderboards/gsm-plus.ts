@@ -11,6 +11,7 @@ function number(value: string): number {
 }
 
 const board: Leaderboard = {
+  stats:{gsm8k:{name:'GSM8K accuracy',unit:'%',better:'higher'},pdr:{name:'Perturbation degradation rate',unit:'%',better:'lower'},asp:{name:'Answer sensitivity percentage',unit:'%',better:'higher'}},
   benchmark: 'gsm-plus', static: 'paper',
   url: 'https://arxiv.org/abs/2402.19255',
   feed: FEED,

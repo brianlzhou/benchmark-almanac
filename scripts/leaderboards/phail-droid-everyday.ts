@@ -38,6 +38,7 @@ const board: Leaderboard = {
   url: `${PHAIL_PAGE}benchmark/droid`,
   feed: `${PHAIL_PAGE} (server-rendered table, "DROID: Everyday tasks" Reliability)`,
   terms: PHAIL_TERMS,
+  stats: { episodes: { name: 'Episodes', unit: 'count' } },
   aliases: {
     // the model page names the DROID run as GR00T N1.7 DROID
     'GR00T': 'gr00t-n1-7',

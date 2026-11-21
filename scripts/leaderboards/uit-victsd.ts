@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: "uit-victsd", feed, url: feed, static: 'paper',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: {"constructiveness": "Constructiveness", "toxicity": "Toxicity"},
+  stats: {constructivenessAccuracy:{name:'Constructiveness accuracy',unit:'%',better:'higher'},toxicityAccuracy:{name:'Toxicity accuracy',unit:'%',better:'higher'}},
   headline: "The paper reports no overall F1, so this is the plain mean of constructive and toxic speech F1.",
   async fetch() {
     const paper = await paperHtml(feed);

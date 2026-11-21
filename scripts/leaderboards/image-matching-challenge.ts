@@ -14,6 +14,10 @@ const board: Leaderboard = {
   terms: 'The Image Matching Challenge organizers publish the 2021 results. https://www.cs.ubc.ca/research/image-matching-challenge/2021/leaderboard/',
   parts: Object.fromEntries(keys.map((k, i) => [k, { name: i % 2 ? 'Multiview' : 'Stereo',
     group: groups[Math.floor(i / 2)], note: 'Mean Average Accuracy at 10 degrees', unit: 'score', better: 'higher' }])),
+  stats: Object.fromEntries(keys.map((k, i) => [k + 'Rank', {
+    name: groups[Math.floor(i / 2)] + ' ' + (i % 2 ? 'multiview' : 'stereo') + ' rank',
+    unit: 'count', better: 'lower', note: 'Published rank for this dataset and task combination.'
+  }])),
   async fetch() {
     const html = await fetchText(url);
     const rows: LeaderboardRow[] = [];

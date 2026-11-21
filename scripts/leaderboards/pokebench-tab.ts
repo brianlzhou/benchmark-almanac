@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed,
   terms: "The site's robots file publishes content signals. The repository uses the MIT license. It excludes the game ROM. https://raw.githubusercontent.com/VibeCodyH/pokebench/main/LICENSE",
   costPer: 'run',
+  stats: { turns: { name: 'Turns', unit: 'count', better: 'lower' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, elapsedSeconds: { name: 'Elapsed time', unit: 'seconds', better: 'lower' }, left_house_turn: { name: 'Turn left the house', unit: 'count', better: 'lower' }, got_starter_turn: { name: 'Turn got a starter', unit: 'count', better: 'lower' }, route_1_turn: { name: 'Turn reached Route 1', unit: 'count', better: 'lower' }, viridian_city_turn: { name: 'Turn reached Viridian City', unit: 'count', better: 'lower' }, got_parcel_turn: { name: 'Turn got parcel', unit: 'count', better: 'lower' }, got_pokedex_turn: { name: 'Turn got Pokédex', unit: 'count', better: 'lower' }, viridian_forest_turn: { name: 'Turn reached Viridian Forest', unit: 'count', better: 'lower' }, pewter_city_turn: { name: 'Turn reached Pewter City', unit: 'count', better: 'lower' }, pewter_gym_turn: { name: 'Turn reached Pewter Gym', unit: 'count', better: 'lower' }, beat_brock_turn: { name: 'Turn beat Brock', unit: 'count', better: 'lower' } },
   async fetch() {
     const runs = (await fetchJson<Run[]>(feed)).filter(r => r.category === 'tab');
     if (runs.length < 41) throw new Error('Missing TAB runs');

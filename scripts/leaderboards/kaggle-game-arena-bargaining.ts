@@ -7,6 +7,7 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-ar
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-bargaining',
+  stats: { tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' }, costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' } },
   url: 'https://www.kaggle.com/benchmarks/kaggle/bargaining',
   feed: kaggleFeed('kaggle', 'bargaining'),
   terms: KAGGLE_TERMS,

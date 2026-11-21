@@ -13,6 +13,20 @@ const board: Leaderboard = {
   terms: "Aider's repository uses Apache 2.0. The raw GitHub host returns 404 for robots.txt, and aider.chat lists its sitemap.",
   aliases: { 'DeepSeek Chat V2.5': 'deepseek-v2-5-sep-2024', 'gpt-4-turbo-2024-04-09 (udiff)': 'gpt-4-turbo-apr-2024', 'gpt-4-turbo-2024-04-09 (diff)': 'gpt-4-turbo-apr-2024',
     'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024' },
+  stats: {
+    test_cases: { name: 'Test cases', unit: 'count' },
+    percent_cases_well_formed: { name: 'Well formed cases', unit: '%', better: 'higher' },
+    error_outputs: { name: 'Error outputs', unit: 'count' },
+    num_malformed_responses: { name: 'Malformed responses', unit: 'count', better: 'lower' },
+    user_asks: { name: 'User asks', unit: 'count' },
+    lazy_comments: { name: 'Lazy comments', unit: 'count', better: 'lower' },
+    syntax_errors: { name: 'Syntax errors', unit: 'count', better: 'lower' },
+    indentation_errors: { name: 'Indentation errors', unit: 'count', better: 'lower' },
+    exhausted_context_windows: { name: 'Exhausted context windows', unit: 'count', better: 'lower' },
+    latency: { name: 'Seconds per case', unit: 'seconds', better: 'lower' },
+    total_cost: { name: 'Total run cost', unit: 'usd', better: 'lower', note: 'Total US dollar cost reported for the complete refactoring run.' },
+    num_with_malformed_responses: { name: 'Runs with malformed responses', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const runs = parse(await fetchText(feed)) as Record<string, string | number>[];
     if (!Array.isArray(runs) || runs.length < 14) throw new Error('Missing Aider refactoring runs');

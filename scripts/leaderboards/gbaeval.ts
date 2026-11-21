@@ -28,7 +28,20 @@ const board: Leaderboard = {
   url: 'https://gbaeval.com/leaderboard/',
   feed: `${FEED} (overall)`,
   terms: 'Public JSON behind the leaderboard page; gbaeval.com robots.txt allows all paths and the site states no terms.',
-  parts: {},
+  parts: {
+    audio: { name: 'Audio', group: 'Section', better: 'higher' },
+    gameAudio: { name: 'Game audio', group: 'Audio', better: 'higher' },
+    psg: { name: 'PSG', group: 'Audio', better: 'higher' },
+    procedural: { name: 'Procedural', group: 'Section', better: 'higher' },
+    cpu: { name: 'CPU', group: 'Procedural', better: 'higher' },
+    dma: { name: 'DMA', group: 'Procedural', better: 'higher' },
+    haltIrq: { name: 'Halt IRQ', group: 'Procedural', better: 'higher' },
+    memory: { name: 'Memory', group: 'Procedural', better: 'higher' },
+    timer: { name: 'Timer', group: 'Procedural', better: 'higher' },
+    replay: { name: 'Replay', group: 'Section', better: 'higher' },
+    gameplay: { name: 'Gameplay', group: 'Replay', better: 'higher' },
+  },
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, time: { name: 'Grading time', unit: 'seconds', better: 'lower' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, checkpoints: { name: 'Checkpoints', unit: 'count' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const e of await fetchJson<Entry[]>(FEED)) {

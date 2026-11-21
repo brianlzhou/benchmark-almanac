@@ -7,6 +7,7 @@ const board: Leaderboard = {
   benchmark: "legacy-bench", url: "https://factory.com/news/legacy-bench-specialized-intelligence-index", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   chart: {title:"Legacy-Bench score versus cost per task",x:{key:"cost",label:"Cost per task",unit:"$",better:"lower"},y:{key:"score",label:"Pass@1",unit:"%",better:"higher"}},
+  stats: { latency: { name: "Duration", unit: "seconds", better: "lower" } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

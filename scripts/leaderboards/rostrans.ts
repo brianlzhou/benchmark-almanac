@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: "rostrans", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2610.41168." ,
   parts: {"interface": "Interface", "behavior": "Behavior", "system": "System"},
+  stats: { passAt3: { name: 'Pass at 3', unit: '%', better: 'higher' }, passAt5: { name: 'Pass at 5', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.join('|') === header.join('|') && t[1]?.slice(-3).join('|') === 'Intf.|Behav.|Sys.');

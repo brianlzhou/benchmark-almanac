@@ -17,6 +17,12 @@ const board: Leaderboard = {
   terms: 'Static public page; the site has no robots.txt and no terms, and the o11y-bench repository (grafana/o11y-bench) is public.',
   aliases: {},
   chart:{title:'Pass^3 vs. cost',x:{key:'cost',label:'Cost per trial',unit:'$',better:'lower'},y:{key:'score',label:'Pass^3',unit:'%',better:'higher'}},
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    totalTokens: { name: 'Total tokens per trial', unit: 'tokens' },
+    solved: { name: 'Solved trials', unit: 'count' },
+    tasks: { name: 'Tasks', unit: 'count' },
+  },
   async fetch(){
     const html = await fetchText(URL);
     const attrs = new Map([...html.matchAll(/<tr\b([^>]*data-rank="(\d+)"[^>]*)>/g)].map(m =>

@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: 'ACL Anthology copyright policy: https://aclanthology.org/faq/copyright/.',
   headline: 'The headline is the plain mean of the answer coverage scores for NitiBench-CCL and NitiBench-Tax.',
   parts: { ccl: 'NitiBench-CCL', tax: 'NitiBench-Tax' },
+  stats: Object.fromEntries(['cclRetrievalRecall','cclCitationRecall','cclCitationPrecision','cclCitationF1','cclContradiction','taxRetrievalRecall','taxCitationRecall','taxCitationPrecision','taxCitationF1','taxContradiction'].map(key => [key, { name: key.replace(/^ccl/, 'Corporate and commercial law ').replace(/^tax/, 'Tax ').replace(/([a-z])([A-Z])/g, '$1 $2'), unit: 'score', better: key.endsWith('Contradiction') ? 'lower' : 'higher', note: 'Stored from 0 to 1.' }])),
   async fetch() {
     const pdf = await pdfText(feed);
     const end = pdf.indexOf('Table 3: Effect of LLM configuration on end-to-end performance');

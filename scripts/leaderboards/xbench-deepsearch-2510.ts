@@ -21,6 +21,11 @@ const board: Leaderboard = {
   url: 'https://xbench.org/agi/aisearch',
   feed: XBENCH_API + PATH,
   terms: XBENCH_TERMS,
+  stats: {
+    reportedPriceUSD: { name: 'Reported query price', unit: 'usd', better: 'lower', note: 'Dollar amount shown in the source cost column.' },
+    latencyMin: { name: 'Minimum query time', unit: 'seconds', better: 'lower', note: 'Lower bound of the source time range, converted from minutes.' },
+    latencyMax: { name: 'Maximum query time', unit: 'seconds', better: 'lower', note: 'Upper bound of the source time range, converted from minutes.' },
+  },
   aliases: {
     // the GPT-5 Pro model in ChatGPT, run in August 2025
     'ChatGPT-5-Pro': 'gpt-5-pro',

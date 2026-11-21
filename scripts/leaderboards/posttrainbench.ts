@@ -82,12 +82,18 @@ function parseAgentInfo(js: string): Record<string, AgentInfo> {
 }
 
 const FILES: Record<string, string> = { v1: 'scores-v1.js', 'v1.1': 'scores.js', 'v1.2': 'scores-v1.2.js' };
+const PART_BASES = ['Qwen3-1.7B-Base', 'Qwen3-4B-Base', 'SmolLM3-3B-Base', 'gemma-3-4b-pt'];
+const PART_TASKS = ['aime2025', 'arenahardwriting', 'bfcl', 'gpqamain', 'gsm8k', 'healthbench', 'humaneval'];
 
 export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): Leaderboard {
   const feed = SITE + FILES[version];
   return {
     benchmark,
-    parts: {},
+    parts: Object.fromEntries(PART_BASES.flatMap((base) => PART_TASKS.map((task) => [`${base}: ${task}`, { name: task, group: base }]))),
+    stats: {
+      runtimeTrials: { name: 'Runtime trials', unit: 'count' },
+      ...(version === 'v1' ? { runtimeSeconds: { name: 'Average runtime', unit: 'seconds', better: 'lower', note: 'Average time spent post-training, converted from hours.' } } : {}),
+    },
     harnesses: 'system',
     verified: 'reviewed by PostTrainBench',
     url: version === 'v1.2' ? SITE : `${SITE}?version=${version}`,

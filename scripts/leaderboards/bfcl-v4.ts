@@ -27,6 +27,11 @@ const board: Leaderboard = {
   url: 'https://gorilla.cs.berkeley.edu/leaderboard.html',
   feed: FEED,
   terms: 'Static CSV on the Gorilla project site; the gorilla repository (ShishirPatil/gorilla) is Apache-2.0.',
+  stats: {
+    latency: { name: 'Mean latency', unit: 'seconds', better: 'lower' },
+    latencyP95: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
+    formatSensitivityMaxDelta: { name: 'Format sensitivity max delta', unit: '%', better: 'lower' },
+  },
   costPer: 'run',
   aliases: {
     'Grok-4-0709': 'grok-4',

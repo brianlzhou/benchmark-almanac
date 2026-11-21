@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/enviroscientist/EnviroExam#leaderboard",
   feed: FEED,
   terms: "The dataset card specifies MIT. Its two score tables repeat identical rows. Check against the paper before import. https://huggingface.co/datasets/enviroscientist/EnviroExam Hugging Face allows crawling in robots.txt. Scores are credited to the EnviroExam authors.",
+  stats: { '1-cv': { name: 'One minus coefficient of variation', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' }, cv: { name: 'Coefficient of variation', unit: 'score', better: 'lower', note: 'Reported from 0 to 1.' }, mean: { name: 'Mean score', unit: '%', better: 'higher' } },
   async fetch() {
     const card = tables(await fetchText(board.url)).find((t) => t[0].at(-1)?.text === 'M*(1-cv)');
     if (!card || card.length !== 32) throw new Error('Expected 31 EnviroExam model labels');

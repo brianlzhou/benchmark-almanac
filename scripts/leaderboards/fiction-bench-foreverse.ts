@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: 'CC BY 4.0, Foreverse Research. https://github.com/foreverseapp/webnovel-continuation-bench#benchmark-card',
   headline: 'Plain mean of four blind review ranks across two genres, lower is better.',
   parts: { p303: 'Xuanhuan p303', p404: 'Xuanhuan p404', p505: 'Court romance p505', p606: 'Court romance p606' },
+  stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, usdPer10kChars: { name: 'Price per 10,000 characters', unit: 'usd', better: 'lower' } },
   async fetch() {
     const input = await fetchJson<{models: Entry[]; testedAt: string}>(feed);
     return checked(input.models.map(m => {

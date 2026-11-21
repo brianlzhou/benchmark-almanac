@@ -19,6 +19,7 @@ type Encoder = Scores & { label: string; per_act: Record<string, Scores & {count
 const board: Leaderboard = {
   benchmark: 'indicipr-qa', url, feed, parts,
   terms: 'The authors describe research and educational use at ' + url + '#indicipr-qa.',
+  stats: { exactMatch:{name:'Exact match',unit:'%',better:'higher'}, charF1:{name:'Character F1',unit:'%',better:'higher'}, questions:{name:'Questions',unit:'count'}, ...Object.fromEntries(Object.entries(parts).flatMap(([key,name])=>[[key+'ExactMatch',{name:name+' exact match',unit:'%',better:'higher'}],[key+'CharF1',{name:name+' character F1',unit:'%',better:'higher'}],[key+'Count',{name:name+' questions',unit:'count'}]])) },
   async fetch() {
     const [report, card] = await Promise.all([
       fetchJson<{test_records: number; results_summary: Encoder[]}>(feed), fetchText(url + '/raw/main/README.md'),

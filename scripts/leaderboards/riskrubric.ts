@@ -11,6 +11,9 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "No feed or reuse license verified. The publisher explains the outage at https://riskrubric.ai/post/announcing-riskrubric. The robots URL returns HTML.",
   parts: { transparency:'Transparency', reliability:'Reliability', security:'Security', privacy:'Privacy', safety_societal:'Safety and societal risk', excessive_agency:'Excessive agency' },
+  stats: {
+    confidence: { name: 'Assessment confidence', unit: 'rating' },
+  },
   async fetch() {
     const rows = [], seen = new Set<string>();
     const url = new URL(FEED);

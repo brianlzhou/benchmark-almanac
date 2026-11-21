@@ -1,6 +1,6 @@
 // Game Arena ranks Atomic Chess configurations by its published +/- Wins column.
 // The variant feed also reports Elo, games played and error rate.
-import type { Leaderboard } from './types.ts';
+import type { BoardStat, Leaderboard} from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 interface GameEntry {
   game_variant: string; model_name: string; win_diff: number; elo_rating: number; games_played: number; error_rate: number;
@@ -24,6 +24,7 @@ export const gameAliases = {
   'accounts/fireworks/models/llama-v3p3-70b-instruct': 'llama-3-3-70b-instruct',
   'claude-opus-4-1@20250805': 'claude-opus-4-1', 'claude-sonnet-4@20250514': 'claude-sonnet-4',
 };
+export const gameStats: Record<string, BoardStat> = { elo: { name: 'Elo', unit: 'elo', better: 'higher' }, errorRate: { name: 'Error rate', unit: '%', better: 'lower' } };
 
 const FEED = "https://game-arena.ai/data/leaderboard/chess-atomic.json";
 const board: Leaderboard = {
@@ -32,6 +33,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The standings list no score reuse license. https://game-arena.ai/leaderboard/chess-atomic The robots URL returns HTML.",
   aliases: gameAliases,
+  stats: gameStats,
   async fetch() {
     return gameRows(FEED, 'chess-atomic', 15);
   },

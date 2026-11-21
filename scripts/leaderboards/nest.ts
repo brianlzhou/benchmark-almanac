@@ -10,6 +10,10 @@ const board: Leaderboard = {
   benchmark: 'nest', url, feed,
   terms: "The authors do not specify separate terms for leaderboard scores on https://laubravo.github.io/nest_website/#leaderboard" ,
   parts: { ctx: 'Contextual', beh: 'Behavioral', inter: 'Interpersonal' },
+  stats: {
+    sim: { name: 'Open description similarity', unit: 'score', better: 'higher', note: 'Similarity score on a 0 to 3 scale for open interaction descriptions.' },
+    rec: { name: 'Open description recall', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const source = html.match(/const RESULTS\s*=\s*(\[[\s\S]*?\]);/);

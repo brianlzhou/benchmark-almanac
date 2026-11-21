@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://github.com/lechmazur/debate",
   feed: FEED,
   terms: "The publisher displays results at https://github.com/lechmazur/debate. I could not verify reuse terms. GitHub requests a one-second crawl delay.",
+  stats: { matchups: { name: 'Matchups', unit: 'count' } },
   async fetch() {
     const all = markdownTables(await fetchText(FEED));
     const rank = all.find(t => t[0].join('|') === 'Rank|Model|BT|Matchups');

@@ -13,6 +13,21 @@ const board: Leaderboard = {
   url: "https://alavico.github.io/sts-bench-results/",
   feed,
   terms: "The runner uses MIT. The separate results repository lists no license. The host has no robots.txt.",
+  stats: {
+    wins: { name: 'Wins', unit: 'count', better: 'higher', note: 'Outright wins out of attempted runs.' },
+    median_floor: { name: 'Median floor', unit: 'score', better: 'higher' },
+    best_floor: { name: 'Best floor', unit: 'score', better: 'higher', note: 'Deepest floor reached in one run.' },
+    skip_rate: { name: 'Card skip rate', unit: 'score', note: 'Card rewards declined out of card-reward decisions, from 0 to 1.' },
+    potion_use_rate: { name: 'Potion use rate', unit: 'score', note: 'Potions used out of potions acquired, from 0 to 1.' },
+    gold_spent_ratio: { name: 'Gold spent ratio', unit: 'score', note: 'Gold spent out of starting gold plus gold earned, from 0 to 1.' },
+    invalid_rate: { name: 'Invalid decision rate', unit: 'score', better: 'lower', note: 'Decisions with at least one rejected action out of all decisions, from 0 to 1.' },
+    forced_rate: { name: 'Forced action rate', unit: 'score', note: 'Forced actions per decision, from 0 to 1.' },
+    lookups_per_decision: { name: 'Observation lookups per decision', unit: 'count' },
+    latency_p50_ms: { name: 'Median latency', unit: 'ms', better: 'lower', note: 'Median model response time per decision.' },
+    mean_prompt_tokens: { name: 'Input tokens', unit: 'tokens' },
+    mean_completion_tokens: { name: 'Output tokens', unit: 'tokens' },
+    cost_per_run: { name: 'Cost per run', unit: 'usd', better: 'lower', note: 'Mean estimated dollar cost per attempted run.' },
+  },
   async fetch() {
     const { configs } = jsonAfter<{ configs: Config[] }>(await fetchText(feed), 'id="data">');
     if (configs.length < 27) throw new Error('Incomplete campaign results');

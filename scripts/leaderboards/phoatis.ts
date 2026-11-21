@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: 'https://doi.org/10.21437/Interspeech.2021-618',
   feed: FEED,
   terms: 'The ISCA paper is publicly available for research use. Source attribution and the paper license apply.',
+  stats: { intentAccuracy: { name: 'Intent accuracy', unit: '%', better: 'higher' }, slotF1: { name: 'Slot F1', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(FEED);
     const rows: LeaderboardRow[] = [];

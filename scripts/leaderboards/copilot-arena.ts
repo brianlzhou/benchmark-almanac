@@ -8,6 +8,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://cdn.sanity.io/images/ybjf12mv/migration/567510dd78425d6434eb23188a340d8b4b449b45-1426x748.jpg';
 const board: Leaderboard = {
   benchmark:'copilot-arena', url:'https://arena.ai/blog/copilot-arena/', feed,
+  stats: { latency: { name: 'Median latency', unit: 'seconds', better: 'lower' } },
   terms:'Arena publishes the chart with its dated leaderboard analysis. https://arena.ai/terms-of-use/',
   aliases:{ 'Deepseek V2.5':'deepseek-v2-5-sep-2024', 'Claude Sonnet 3.5 (06/20)':'claude-3-5-sonnet',
     'GPT-4o (08/06)':'gpt-4o-aug-2024', 'GPT-4o-mini (07/18)':'gpt-4o-mini',

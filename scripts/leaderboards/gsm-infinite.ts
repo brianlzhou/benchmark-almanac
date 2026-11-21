@@ -8,6 +8,11 @@ const board: Leaderboard = {
   benchmark: 'gsm-infinite', url: 'https://infiniailab-gsm-infinite-leaderboard.hf.space',
   feed: root + 'zero_context.csv', terms: 'Public leaderboard files from the authors’ Hugging Face Space.',
   parts: { Symbolic: 'Symbolic', Medium: 'Medium', Hard: 'Hard', '8K': '8K', '16K': '16K', '32K': '32K' },
+  stats: {
+    '1st<50% op': { name: 'First operation below 50% accuracy', unit: 'count', better: 'lower' },
+    '1st<10% op': { name: 'First operation below 10% accuracy', unit: 'count', better: 'lower' },
+    'Avg. Acc op≤30': { name: 'Average accuracy through 30 operations', unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const mode of ['zero', 'long']) {

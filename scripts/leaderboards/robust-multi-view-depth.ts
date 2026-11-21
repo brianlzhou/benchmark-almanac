@@ -16,6 +16,7 @@ const board: Leaderboard = {
   benchmark: 'robust-multi-view-depth', url: feed, feed, static: 'paper',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: Object.fromEntries(sets.map(s => [s, s])),
+  stats: { inlierRatio: { name: 'Average inlier ratio', unit: '%', better: 'higher' }, runtimeSeconds: { name: 'Runtime', unit: 'seconds', better: 'lower' }, ...Object.fromEntries(sets.map(s => [s + ' inlier ratio', { name: s + ' inlier ratio', unit: '%', better: 'higher' }])) },
   async fetch() {
     const table = flatPaperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.join('|') === 'Approach|GT|GT|Align|KITTI|KITTI|ScanNet|ScanNet|ETH3D|ETH3D|DTU|DTU|T&T|T&T|Average|Average|Average'

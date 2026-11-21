@@ -12,6 +12,7 @@ const board: Leaderboard = {
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2606.02404",
   parts:{synthetic:{name:'Synthetic pass@1',unit:'%'},calibration:{name:'Calibration error',unit:'%',better:'lower'},
     ...Object.fromEntries(categories.map(name=>[name,{name,unit:'%' as const}]))},
+  stats:{correctTrials:{name:'Correct-answer trials',unit:'count'},correctMeanCalls:{name:'Mean calls for correct answers',unit:'count',better:'lower'},wrongTrials:{name:'Wrong-answer trials',unit:'count'},wrongMeanCalls:{name:'Mean calls for wrong answers',unit:'count',better:'lower'}},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const t=tables.find(t=>t[0]?.includes('Synthetic subset') && t[1]?.[2]==='Pass@1 Acc.');

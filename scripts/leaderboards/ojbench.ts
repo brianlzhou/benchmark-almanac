@@ -20,6 +20,11 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (inline rawData array, C++ pass@1)`,
   terms: 'Static GitHub Pages site that states no license or terms; the OJBench repository is AGPL-3.0 (code).',
+  stats: {
+    pyPass1: { name: 'Python pass@1', unit: '%', better: 'higher' },
+    pyPass8: { name: 'Python pass@8', unit: '%', better: 'higher' },
+    cppPass8: { name: 'C++ pass@8', unit: '%', better: 'higher' },
+  },
   aliases: {
     // keyed without the effort so the resolver keeps "thinking" as the setting
     'Kimi-2.5': 'kimi-k2-5',

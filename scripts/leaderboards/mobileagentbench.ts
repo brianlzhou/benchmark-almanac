@@ -12,6 +12,13 @@ const board: Leaderboard = {
   benchmark: 'mobileagentbench', static: 'paper', url: 'https://mobileagentbench.github.io/', feed,
   terms: 'The authors publish Table 2 under the paper terms linked at https://arxiv.org/abs/2406.08184.',
   harnesses: 'system', aliases: { CogAgent: 'cogagent-18b' },
+  stats: {
+    stepEfficiency: { name: 'Minimum action steps', unit: 'count', better: 'lower', note: 'Minimum number of steps on successful tasks, excluding failures.' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower', note: 'Average time spent before and after one action.' },
+    tokens: { name: 'Tokens', unit: 'tokens', note: 'LLM input and output tokens estimated with the GPT-4V token standard.' },
+    falseNegativeRate: { name: 'False negative rate', unit: 'score', better: 'lower', note: 'Fraction of failed tasks that the agent ends early and incorrectly marks as failed.' },
+    falsePositiveRate: { name: 'False positive rate', unit: 'score', better: 'lower', note: 'Fraction of successful tasks that the agent incorrectly marks as successful.' },
+  },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[0] === 'Agent');
     const columns = ['Agent', 'SR', 'SE', 'Latency (s)', 'Tokens', 'FN Rate', 'FP Rate'];

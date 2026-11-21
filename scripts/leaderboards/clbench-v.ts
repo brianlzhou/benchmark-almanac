@@ -5,7 +5,18 @@ import { paperHtml, numberCell } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2607.25294';
 const datasets = ['Insight-O3','ReasonMap-Short','ReasonMap-Long','ReasonMap-Plus','ZeroBench','CourtSI','MIRBench','Pix2Fact','MMLongBench-Pic','BrowseComp-V3','Financial Report ROE','PRISMM-Bench','CL-Bench-Table','Paper Conclusion'];
-const parts: Record<string, BoardPart> = {};
+const parts: Record<string, BoardPart> = {
+  level0: {name: 'L0 Grounding', group: 'Capability level'},
+  level1: {name: 'L1 Information', group: 'Capability level'},
+  level2: {name: 'L2 Knowledge', group: 'Capability level'},
+  O3: {name: 'Insight-O3', group: 'Subdataset'}, RMapS: {name: 'ReasonMap-Short', group: 'Subdataset'},
+  RMapL: {name: 'ReasonMap-Long', group: 'Subdataset'}, RMapPlus: {name: 'ReasonMap-Plus', group: 'Subdataset'},
+  ZB: {name: 'ZeroBench', group: 'Subdataset'}, CourtSI: {name: 'CourtSI', group: 'Subdataset'},
+  MIR: {name: 'MIRBench', group: 'Subdataset'}, Pix2Fact: {name: 'Pix2Fact', group: 'Subdataset'},
+  MMLPic: {name: 'MMLongBench-Pic', group: 'Subdataset'}, Browse: {name: 'BrowseComp-V3', group: 'Subdataset'},
+  Finance: {name: 'Financial Report ROE', group: 'Subdataset'}, PRISMM: {name: 'PRISMM-Bench', group: 'Subdataset'},
+  CL: {name: 'CL-Bench-Table', group: 'Subdataset'}, Paper: {name: 'Paper Conclusion', group: 'Subdataset'},
+};
 const percent = (c: string) => Number((numberCell(c) * 100).toFixed(4));
 const board: Leaderboard = {
   benchmark: 'clbench-v', url: feed, feed, static: 'paper', parts,

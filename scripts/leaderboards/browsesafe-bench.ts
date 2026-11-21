@@ -32,6 +32,7 @@ const board: Leaderboard = {
   "feed": "https://huggingface.co/datasets/perplexity-ai/browsesafe-bench/resolve/main/README.md",
   "terms": "The original BrowseSafe-Bench dataset card declares the MIT license."
 ,
+  stats: { balancedAccuracy: { name: 'Balanced accuracy', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, refusals: { name: 'Refusals', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const t = markdownTables(await fetchText(FEED)).find(t => t[0].includes('F1 Score'));

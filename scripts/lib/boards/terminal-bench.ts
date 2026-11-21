@@ -3,6 +3,20 @@ import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
 
 export const HARBOR_FEED = 'https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read';
+export const TERMINAL_BENCH_STATS = {
+  ci95: { name: '95% confidence interval half-width', unit: '%', note: 'Half-width of the 95% confidence interval around accuracy.' },
+  passAt2: { name: 'Pass@2', unit: '%', better: 'higher' },
+  passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+  passAt4: { name: 'Pass@4', unit: '%', better: 'higher' },
+  passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+  rewardHacks: { name: 'Reward hacks', unit: 'count', better: 'lower' },
+  runCachedInputTokens: { name: 'Cached input tokens', unit: 'tokens' },
+  runUncachedInputTokens: { name: 'Uncached input tokens', unit: 'tokens' },
+  runOutputTokens: { name: 'Output tokens', unit: 'tokens' },
+  runTotalTokens: { name: 'Total tokens', unit: 'tokens' },
+  runCostUsd: { name: 'Run cost', unit: 'usd', better: 'lower' },
+  successes: { name: 'Successes', unit: 'count' },
+} as const;
 const FEED = HARBOR_FEED;
 
 export type Link = string | { label?: string; url?: string };

@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2608.09802';
 const parts = {Py: 'Python', Java: 'Java', TS: 'TypeScript', Go: 'Go', C: 'C', 'C++': 'C++', Rust: 'Rust'};
 const board: Leaderboard = {
   benchmark: 'swe-bench-promax', static: 'paper', url: feed, feed, parts,
+  stats: { steps: { name: 'Average steps', unit: 'count', better: 'lower' } },
   terms: 'The authors publish Table 3 under the license on the arXiv record. https://arxiv.org/abs/2608.09802',
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.slice(1,5).join('|') === 'Overall|Avg. Steps|Avg. Cost|Per-Language Resolve Rate');

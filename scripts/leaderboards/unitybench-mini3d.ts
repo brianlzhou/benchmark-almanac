@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://unitybench.github.io/unitybench-mini3d/#results",
   feed: FEED,
   terms: "Unity reports 36 model and harness combinations. The project page and repository do not state score reuse terms. https://github.com/Unity-China/UnityBench-Mini3D The robots URL returns HTML.",
+  stats: { minutesPerTask: { name: 'Minutes per task', unit: 'minutes', better: 'lower' } },
   parts: { ui: 'User interface', animation: 'Animation', editor: 'Editor operations', scene: 'Scene construction',
     vfx: 'Particles & shaders', physics: 'Physics', misc: 'Miscellaneous', easy: 'Easy', medium: 'Medium', hard: 'Hard' },
   async fetch() {

@@ -12,6 +12,14 @@ const board: Leaderboard = {
   terms: "The organizers label the Space Apache 2.0. The dialect table covers 21 team systems. The two competition tracks each cover 17. https://huggingface.co/spaces/TuwaiqAcademy/AISA-ArabicFC-Shared-Task Hugging Face robots.txt allows these files.",
   parts: { msa: 'MSA', gulf: 'Gulf', egyptian: 'Egyptian', levantine: 'Levantine', maghrebi: 'Maghrebi',
     core: 'Track A · Core', reasoning: 'Track B · Reasoning' },
+  stats: {
+    gap: { name: 'Track gap', unit: 'score', better: 'lower', note: 'Difference between the track scores, from 0 to 1.' },
+    core_fnacc: { name: 'Core Functionality Accuracy', unit: 'score', better: 'higher', note: 'Core track FNACC score from 0 to 1.' },
+    core_argem: { name: 'Core Argument Match', unit: 'score', better: 'higher', note: 'Core track ARGEM score from 0 to 1.' },
+    reasoning_fnacc: { name: 'Reasoning Functionality Accuracy', unit: 'score', better: 'higher', note: 'Reasoning track FNACC score from 0 to 1.' },
+    reasoning_argem: { name: 'Reasoning Argument Match', unit: 'score', better: 'higher', note: 'Reasoning track ARGEM score from 0 to 1.' },
+    reasoning_thinkrate: { name: 'Reasoning think rate', unit: 'score', better: 'higher', note: 'Reasoning track think rate from 0 to 1.' },
+  },
   async fetch() {
     const byTeam = new Map<string, LeaderboardRow>();
     function score(row: Record<string, string>, key: string): number {

@@ -11,6 +11,11 @@ const board: Leaderboard = {
   headline: 'Table 4 lists text-to-image MRR first, so this is the full-benchmark text-to-image MRR.',
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2401.13478',
   parts: { txtToImg: 'Text to image MRR', imgToTxt: 'Image to text MRR' },
+  stats: {
+    'Alltxt→imgMRR': { name: 'All text to image MRR', unit: '%', better: 'higher' }, 'Alltxt→imgHits@10': { name: 'All text to image Hits@10', unit: '%', better: 'higher' }, 'Allimg→txtMRR': { name: 'All image to text MRR', unit: '%', better: 'higher' }, 'Allimg→txtHits@10': { name: 'All image to text Hits@10', unit: '%', better: 'higher' },
+    'Figuretxt→imgMRR': { name: 'Figure text to image MRR', unit: '%', better: 'higher' }, 'Figuretxt→imgHits@10': { name: 'Figure text to image Hits@10', unit: '%', better: 'higher' }, 'Figureimg→txtMRR': { name: 'Figure image to text MRR', unit: '%', better: 'higher' }, 'Figureimg→txtHits@10': { name: 'Figure image to text Hits@10', unit: '%', better: 'higher' },
+    'Tabletxt→imgMRR': { name: 'Table text to image MRR', unit: '%', better: 'higher' }, 'Tabletxt→imgHits@10': { name: 'Table text to image Hits@10', unit: '%', better: 'higher' }, 'Tableimg→txtMRR': { name: 'Table image to text MRR', unit: '%', better: 'higher' }, 'Tableimg→txtHits@10': { name: 'Table image to text Hits@10', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
     if (!text.includes('Table 4: The main results of SciMMIR benchmark')) throw new Error('SciMMIR Table 4 missing');

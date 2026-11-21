@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://www.fab-ai.org/benchmarks?benchmark=global&benchmarkType=asr-assessment&dataset=&modelMode=default&models=%5B%5D&pageView=table&price=10",
   feed,
   terms: "Fab AI marks the leaderboard as all rights reserved. robots.txt allows the feed path.",
+  stats: { pricePerMillion: { name: 'Price per million tokens', unit: 'usd', better: 'lower' }, global_WER: { name: 'Word error rate', unit: '%', better: 'lower' }, global_MER: { name: 'Mistake error rate', unit: '%', better: 'lower' } },
   async fetch() {
     const html = (await fetchText(feed)).replace(/("(?:[^"\\]|\\.)*")|([:,])(-?)\.(\d+)/g,
       (all, quoted, prefix, sign, digits) => quoted ?? prefix + sign + '0.' + digits);

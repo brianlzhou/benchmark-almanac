@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: 'https://ai.onestruction.com/leaderboard/en/benchmarks/bim/',
   feed: 'https://ai.onestruction.com/leaderboard/en/benchmarks/bim/',
   terms: constructionTerms,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   host: 'ONESTRUCTION',
   reference: ['pi'],
   fetch() { return constructionRows(this.url); },

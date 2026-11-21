@@ -9,6 +9,7 @@ const FEED='https://vchitect-vbench-leaderboard.hf.space/config';
 interface Table {headers:string[];data:unknown[][]}
 export default {
  benchmark:'vbench', parts: {
+  'Semantic Score': { name: 'Semantic score', group: 'Dimension' },
   'Quality Score': { name: 'Quality score', group: 'Dimension' },
   'subject consistency': { name: 'Subject consistency', group: 'Dimension' },
   'background consistency': { name: 'Background consistency', group: 'Dimension' },

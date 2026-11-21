@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: URL,
   feed: URL,
   terms: 'Bespoke Labs publishes the report and leaderboard. The tasks and harness code are Apache-2.0. https://github.com/bespokelabsai/multi-agent-coordination-bench',
+  stats: { singleAgent:{name:'Single-agent score',unit:'score',better:'higher'}, moreAgentsGain:{name:'Gain from more agents',unit:'score',better:'higher'}, coordinationGain:{name:'Gain from coordination',unit:'score',better:'higher'}, uncoordinated:{name:'Uncoordinated team score',unit:'score',better:'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(URL);
     const chart = html.slice(html.indexOf('class="gs-name"'), html.indexOf('class="gs-axis"'));

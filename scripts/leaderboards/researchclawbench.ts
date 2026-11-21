@@ -22,6 +22,9 @@ const board: Leaderboard = {
   url: 'https://internscience.github.io/ResearchClawBench-Home/',
   feed: `${FEED} (Pass@1)`,
   terms: 'Static JSON on the ResearchClawBench GitHub Pages site, which states no separate terms; the repository is MIT.',
+  stats: {
+    time: { name: 'Time per task', unit: 'seconds', better: 'lower' },
+  },
   aliases: {
     // "Codex GPT-5.6-Sol": the model run inside Codex
     'Codex GPT-5.6-Sol': 'gpt-5-6-sol',

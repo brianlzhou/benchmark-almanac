@@ -8,6 +8,10 @@ const feed = 'https://openaccess.thecvf.com/content_ECCV_2018/papers/Hang_Zhao_T
 const board: Leaderboard = {
   benchmark: 'music-instrument-separation', url: feed, feed, static: 'paper',
   terms: 'CVF provides the ECCV paper at https://openaccess.thecvf.com/content_ECCV_2018/html/Hang_Zhao_The_Sound_of_ECCV_2018_paper.html.',
+  stats: {
+    sir: { name: 'Signal-to-interference ratio', better: 'higher' },
+    sar: { name: 'Signal-to-artifact ratio', better: 'higher' },
+  },
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.match(/NMF DeepConvSep Spectral\s+Ratio Mask\s+Binary Mask([\s\S]*?)Table 1\. Model performances/)?.[1];

@@ -9,7 +9,7 @@ const columns = ['Tool SR','P-SR','O-SR','L-SR','C-SR','Root Score','Leaf SR','R
 const board: Leaderboard = {
   benchmark: 'gta-2', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: { 'P-SR':'Perception', 'O-SR':'Operation', 'L-SR':'Logic', 'C-SR':'Creativity',
-    'Leaf SR':'Leaf success rate', 'Tool SR':'Tool success rate', 'Root Score':{ name:'Root Score',unit:'score'} },
+    'Leaf SR':'Leaf success rate', 'Tool SR':'Tool success rate', 'Root Score':{ name:'Root Score',unit:'score'}, 'Root SR':{name:'Root success rate',unit:'%'} },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[1]?.includes('Deliverable-Centric') &&
       JSON.stringify(t[1]?.slice(1)) === JSON.stringify(columns));

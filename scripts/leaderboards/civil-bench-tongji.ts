@@ -9,7 +9,7 @@ const board: Leaderboard = {
   url: "https://specialist.opencompass.org.cn/CivilBench",
   feed: FEED,
   terms: "OpenCompass displays an all rights reserved notice. I found no separate license for the score file. https://specialist.opencompass.org.cn/CivilBench The site's robots.txt disallows assets and JSON on its own host.",
-  parts: {},
+  parts: Object.fromEntries(['安全工程','消防工程师','核安全工程师','安全工程师','工程管理与建造','造价工程师','咨询工程师','建造师','测绘与地理信息','测绘案例分析','测绘管理与法律法规','测绘综合能力','建筑与结构设计','注册结构工程师','注册建筑师','城乡规划师','土木工程','岩土','水利水电工程','道路工程','公共基础','环境工程','案例分析','相关法律法规','技术方法','技术导则与标准'].map(name => [name, { name, unit: '%', better: 'higher' }])),
   async fetch() {
     const data = await fetchJson<Record<string, Record<string, string | number>[]>>(FEED);
     const full = data['综合得分'];

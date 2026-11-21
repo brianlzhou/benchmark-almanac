@@ -42,6 +42,16 @@ const board: Leaderboard = {
   feed: arenaFeed('agent'),
   terms: ARENA_TERMS,
   aliases: ARENA_ALIASES,
+  stats: {
+    sessions: { name: 'Sessions', unit: 'count' },
+    observations: { name: 'Observations', unit: 'count' },
+    outputTokensPerTaskMedian: { name: 'Median output tokens per task', unit: 'tokens' },
+    bash_reliability_observations: { name: 'Bash reliability observations', unit: 'count' },
+    praise_complaint_observations: { name: 'Praise and complaint observations', unit: 'count' },
+    steerability_observations: { name: 'Steerability observations', unit: 'count' },
+    task_outcome_explicit_observations: { name: 'Explicit task outcome observations', unit: 'count' },
+    tool_hallucination_observations: { name: 'Tool hallucination observations', unit: 'count' },
+  },
   // Arena's own Pareto view plots the score against cost per task, with the median (p50) as its default cost
   chart: {
     title: 'Score against cost per task',

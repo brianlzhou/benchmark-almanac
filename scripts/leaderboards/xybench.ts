@@ -7,6 +7,7 @@ const feed = 'https://arxiv.org/html/2609.06842';
 const board: Leaderboard = {
   benchmark: 'xybench', url: feed, feed, static: 'paper',
   terms: 'The authors publish this table on arXiv. https://arxiv.org/licenses/nonexclusive-distrib/1.0/',
+  stats: { sSolution: { name: 'S-solution presence', unit: 'score', better: 'higher', note: 'Rate from 0 to 1 for including a solution to the stated request.' }, iSolution: { name: 'I-solution presence', unit: 'score', better: 'higher', note: 'Rate from 0 to 1 for including a solution to the underlying request.' }, misconceptionIdentification: { name: 'Misconception identification', unit: 'score', better: 'higher', note: 'Rate from 0 to 1 for identifying the stated-intended request mismatch.' }, fullyPragmatic: { name: 'Fully pragmatic response', unit: 'score', better: 'higher', note: 'Rate from 0 to 1 for identifying the misconception and addressing the underlying goal.' }, fullyCooperative: { name: 'Fully cooperative response', unit: 'score', better: 'higher', note: 'Rate from 0 to 1 for addressing both stated and underlying requests.' } },
   aliases: { 'Claude Sonnet 4.6': 'claude-sonnet-4-6', 'Gemini 3.1 Pro': 'gemini-3-1-pro', 'Qwen3.5-9B': 'qwen3-5-9b', 'DeepSeek-V4 Pro': 'deepseek-v4-pro' },
   async fetch() {
     const t = paperTables(await paperHtml(feed)).map(grid).find(t => t[0].includes('Fully') && t[2]?.[1] === 'Model');

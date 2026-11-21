@@ -10,6 +10,15 @@ const board: Leaderboard = {
   url: "https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results#MUSDB-ALT",
   feed,
   terms: "The MIREX wiki lists GNU Free Documentation License 1.2 unless otherwise noted. https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results The wiki returns 404 for robots.txt.",
+  stats: {
+    CER: { name: 'Character error rate', unit: '%', better: 'lower' },
+    WER: { name: 'Word error rate', unit: '%', better: 'lower' },
+    "WER'": { name: "Word error rate prime", unit: '%', better: 'lower' },
+    'F-score (P)': { name: 'Punctuation F-score', unit: '%', better: 'higher' },
+    'F-score (L)': { name: 'Line-break F-score', unit: '%', better: 'higher' },
+    'F-score (S)': { name: 'Section-break F-score', unit: '%', better: 'higher' },
+    inferenceRealTimeFactor: { name: 'Inference real-time factor', unit: 'speedup', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const systems = tables(html)[0];

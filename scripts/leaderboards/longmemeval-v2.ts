@@ -19,6 +19,7 @@ const board: Leaderboard = {
   benchmark: 'longmemeval-v2', feed, url, parts, harnesses: 'system',
   terms: 'The authors publish the leaderboard on GitHub Pages under https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   headline: 'The leaderboard reports accuracy for each tier separately, so this is the plain mean of Small and Medium accuracy.',
+  stats:{smallLatency:{name:'Small query latency',unit:'seconds',better:'lower'},mediumLatency:{name:'Medium query latency',unit:'seconds',better:'lower'}},
   async fetch() {
     const script = await fetchText(feed);
     const list = script.match(/const leaderboardEntries\s*=\s*\[([\s\S]*?)\n\];/)?.[1];

@@ -18,6 +18,7 @@ for (const [key, name] of [['read', 'Read speech'], ['spontaneous', 'Spontaneous
 const board: Leaderboard = {
   benchmark: 'madasr-2', url, feed: feeds[0], parts,
   terms: 'The MADASR organizers publish the final results on the challenge leaderboard. https://sites.google.com/view/respinasrchallenge2025/leaderboard',
+  stats:{readWER:{name:'Read speech word error rate',unit:'%',better:'lower'},readLID:{name:'Read speech language identification error rate',unit:'%',better:'lower'},spontaneousWER:{name:'Spontaneous speech word error rate',unit:'%',better:'lower'},spontaneousLID:{name:'Spontaneous speech language identification error rate',unit:'%',better:'lower'}},
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const [i, feed] of feeds.entries()) {

@@ -8,6 +8,7 @@ const feed = 'https://www.microsoft.com/en-us/research/wp-content/uploads/2024/0
 const board: Leaderboard = {
   benchmark: 'droidtask', feed, url: 'https://autodroid-sys.github.io/', static: 'paper', harnesses: 'system',
   terms: 'The authors publish the ACM paper through Microsoft Research at https://doi.org/10.1145/3636534.3649379.',
+  stats: { actionAccuracy: { name: 'Action accuracy', unit: '%', better: 'higher' } },
   parts: { Click: 'Click action accuracy', Input: 'Input action accuracy', Scroll: 'Scroll action accuracy', Complete: 'Completion decision accuracy' },
   async fetch() {
     const paper = await pdfText(feed);

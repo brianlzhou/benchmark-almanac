@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static efficiency chart plus live script aggregate objects)`,
   terms: 'Public Bespoke Labs page; benchmarks.bespokelabs.ai serves no robots.txt (404) and the page states no reuse limits.',
+  stats: { submissions:{name:'Mean submissions per task',unit:'count'}, validation:{name:'Validation area under AutoResearch curve',unit:'score',better:'higher'}, final:{name:'Final area under AutoResearch curve',unit:'score',better:'higher'}, gap:{name:'Validation to test gap',unit:'score',better:'lower'}, elo:{name:'Elo',unit:'elo',better:'higher'}, tasks:{name:'Tasks',unit:'count'} },
   chart: {
     title: 'API cost vs. test AUARC',
     note: 'Mean API cost and mean test AUARC across the evaluated tasks.',

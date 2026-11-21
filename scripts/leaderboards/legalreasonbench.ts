@@ -17,6 +17,12 @@ const board: Leaderboard = {
   feed: `${PAGE} (static HTML results table, Mean)`,
   terms: MICRO1_TERMS,
   aliases: MICRO1_ALIASES,
+  stats: {
+    median: { name: 'Median score', unit: '%', better: 'higher' },
+    bestOf3: { name: 'Best@3 score', unit: '%', better: 'higher' },
+    turns: { name: 'Turns', unit: 'count', better: 'lower' },
+    toolCalls: { name: 'Tool calls', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const rows = await micro1Rows(PAGE, 'Mean', { Median: 'median', 'best@3': 'bestOf3', '95% CI': 'ci' });
     const html = await fetchText(PAGE);

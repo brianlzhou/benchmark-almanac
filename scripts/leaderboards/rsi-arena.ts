@@ -10,6 +10,22 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2610.33624",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    gpuHours: { name: 'GPU hours', unit: 'hours' },
+    trainingCost: { name: 'Training cost', unit: 'usd', better: 'lower' },
+    jobs: { name: 'Training jobs', unit: 'count' },
+    nominations: { name: 'Nominations', unit: 'count' },
+    benchmarkProgress: { name: 'Benchmark progress', unit: '%', better: 'higher' },
+    medianAnswerTokens: { name: 'Median answer tokens', unit: 'tokens' },
+    stage2MedianAnswerTokens: { name: 'Stage 2 median answer tokens', unit: 'tokens' },
+    unadjustedRating: { name: 'Unadjusted rating', unit: 'rating' },
+    stage2Rating: { name: 'Stage 2 rating', unit: 'rating' },
+    stage2UnadjustedRating: { name: 'Stage 2 unadjusted rating', unit: 'rating' },
+    stage2GpuHours: { name: 'Stage 2 GPU hours', unit: 'hours' },
+    stage2TrainingCost: { name: 'Stage 2 training cost', unit: 'usd', better: 'lower' },
+    stage2Jobs: { name: 'Stage 2 training jobs', unit: 'count' },
+    stage2Nominations: { name: 'Stage 2 nominations', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const published = tables(await fetchText(FEED));

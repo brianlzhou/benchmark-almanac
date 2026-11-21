@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, Win rate)`,
   terms: 'Static report page; bw.swerdlow.dev robots.txt allows /report, and the site publishes no terms.',
+  stats: { apm: { name: 'Actions per minute', unit: 'count', better: 'higher' }, losses: { name: 'Losses', unit: 'count' }, wins: { name: 'Wins', unit: 'count' } },
   aliases: {
     // "Codex Astra" is GPT-6 Astra in Codex; "Codex 5.6 Sol" is GPT-5.6 Sol
     Astra: 'gpt-6-astra',

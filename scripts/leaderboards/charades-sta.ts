@@ -11,6 +11,11 @@ const board: Leaderboard = {
  url: "https://github.com/jiyanggao/TALL",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+  'R@1,IoU=0.7': { name: 'Recall at 1, IoU 0.7', unit: '%', better: 'higher' },
+  'R@5,IoU=0.5': { name: 'Recall at 5, IoU 0.5', unit: '%', better: 'higher' },
+  'R@5,IoU=0.7': { name: 'Recall at 5, IoU 0.7', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

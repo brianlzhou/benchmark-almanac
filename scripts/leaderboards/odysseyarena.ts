@@ -1,12 +1,12 @@
 // OdysseyArena-Lite tests agents in four interactive environments. The authors report success rates for three and investment returns for AI Trading.
 // The leaderboard puts Turn On Lights first. Use its average success across four trials as the headline and retain every environment.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { sourceBoard } from '../lib/boards/odysseyarena.ts';
+import { sourceBoard, ODYSSEY_STATS } from '../lib/boards/odysseyarena.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const parts = { turnOnLights: 'Turn On Lights', aiTrading: 'AI Trading return', energyDispatch: 'Energy Dispatch', repoSystem: 'Repo System' };
 const board: Leaderboard = {
-  benchmark: 'odysseyarena', url: sourceBoard.url, feed: sourceBoard.feed, parts,
+  benchmark: 'odysseyarena', url: sourceBoard.url, feed: sourceBoard.feed, parts, stats: { turnOnLightsPassAt4: ODYSSEY_STATS.turnOnLightsPassAt4, energyDispatchPassAt4: ODYSSEY_STATS.energyDispatchPassAt4, repoSystemPassAt4: ODYSSEY_STATS.repoSystemPassAt4, bestReturnAt4: ODYSSEY_STATS.bestReturnAt4 },
   aliases: { 'Gemini 3 Pro Preview': 'gemini-3-pro' },
   terms: 'The authors publish the Lite leaderboard and metric definitions at https://yayayacc.github.io/Odyssey-Home/.',
   headline: 'The board reports no overall score. The headline is Turn On Lights average success over four trials, the first column.',

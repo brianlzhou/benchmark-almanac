@@ -8,6 +8,7 @@ const feed = "https://raw.githubusercontent.com/CommandCodeAI/slash-design-showc
 
 const board: Leaderboard = {
   benchmark: "pixel-art-space-shooter-command-code",
+  stats: { qualityPerDollar: { name: 'Quality per dollar', unit: 'score', better: 'higher', note: 'Mean quality score divided by generation cost in US dollars.' } },
   url: "https://github.com/CommandCodeAI/slash-design-showcase/blob/main/pixel-art-space-shooter/readme.md#scorecard",
   feed,
   terms: "The repository has no published score reuse license. The cost column includes estimates. https://github.com/CommandCodeAI/slash-design-showcase The feed host returns no robots.txt.",

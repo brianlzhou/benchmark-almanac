@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://www.kaggle.com/competitions/feedback-prize-2021/leaderboard",
   feed,
   terms: "Kaggle's competition terms apply. The host has no robots.txt.",
+  stats: { submissions: { name: 'Submissions', unit: 'count' }, publicScore: { name: 'Public score', unit: 'score', better: 'higher' } },
   async fetch() {
     type Entry = { teamId: number; displayScore: string };
     type Team = { teamId: number; teamName: string; submissionCount: number; lastSubmissionDate?: string; solutionWriteUpUrl?: string };

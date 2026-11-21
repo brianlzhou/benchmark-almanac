@@ -10,7 +10,7 @@ const board: Leaderboard = {
   url: "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
   feed,
   terms: "Both hosts allow crawling. family:terminology uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md",
-  parts: {},
+  parts: { 'Textile Terms': 'Textile Terms', 'Textile Terms: abbreviation': 'Textile Terms: Abbreviation', 'Textile Terms: meaning': 'Textile Terms: Meaning', 'Flora & Fauna': 'Flora and Fauna', 'Flora & Fauna: Fuglar': 'Flora and Fauna: Birds', 'Flora & Fauna: Gróður': 'Flora and Fauna: Plants', 'Flora & Fauna: Sjávardýr': 'Flora and Fauna: Marine Animals', 'Flora & Fauna: Smádýr': 'Flora and Fauna: Small Animals' },
   aliases: { 'Llama 3.1 70B Instruct': 'llama-3-1-70b', 'Llama 3.1 8B Instruct': 'llama-3-1-8b' },
   async fetch() {
     const data = await fetchJson<{models: Model[]}>(feed);

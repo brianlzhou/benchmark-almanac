@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
   costPer: 'run',
+  stats: { latency: { name: 'Latency per test', unit: 'seconds', better: 'lower' } },
   fetch: () => valsRows(SLUG, { cost: 'Est. API cost' }),
 };
 export default board;

@@ -19,6 +19,13 @@ const board: Leaderboard = {
   benchmark: 'enterpriseclawbench',
   url: PAGE,
   feed: `${FEED} (combos[].primaryScore)`,
+  stats: {
+    time: { name: 'Average time per task', unit: 'seconds', better: 'lower' },
+    turns: { name: 'Average turns', unit: 'count', better: 'lower' },
+    latency: { name: 'Median time per task', unit: 'seconds', better: 'lower' },
+    'run cost (RMB)': { name: 'Run cost', unit: 'cny', better: 'lower' },
+    'cost per completed task (RMB)': { name: 'Cost per completed task', unit: 'cny', better: 'lower' },
+  },
   terms: 'Static data file on the project site (GitHub Pages, no robots.txt rules); the site states no terms.',
   chart: {
     title: 'Score vs Runtime',

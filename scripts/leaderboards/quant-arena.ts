@@ -11,6 +11,13 @@ const board: Leaderboard = {
   url: PAGE,
   feed: PAGE + ' (Iterative research leaderboard)',
   terms: 'Einsia publishes these results on its public research site. The Almanac credits and links the table.',
+  stats: {
+    oosReturn: { name: 'Out-of-sample return', unit: '%', better: 'higher' },
+    excess: { name: 'Excess return', unit: '%', better: 'higher' },
+    rankIC: { name: 'Rank information coefficient', unit: 'score', better: 'higher' },
+    oosSharpe: { name: 'Out-of-sample Sharpe ratio', unit: 'score', better: 'higher' },
+    oosDrawdown: { name: 'Out-of-sample maximum drawdown', unit: '%', better: 'higher' },
+  },
   parts: {
     inSample: { name: 'In-sample', group: 'Split' },
     outOfSample: { name: 'Out-of-sample', group: 'Split' },

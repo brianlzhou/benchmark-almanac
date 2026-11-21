@@ -8,6 +8,13 @@ const feed = 'https://openaccess.thecvf.com/content_ICCV_2017/papers/Krishna_Den
 const board: Leaderboard = {
   benchmark: 'activitynet-captions', static: 'paper', url: 'https://cs.stanford.edu/people/ranjaykrishna/densevid/', feed,
   terms: 'CVF provides the author manuscript for open access. https://openaccess.thecvf.com/ICCV2017',
+  stats: {
+    bleu2: { name: 'BLEU-2', unit: 'score', better: 'higher' },
+    bleu3: { name: 'BLEU-3', unit: 'score', better: 'higher' },
+    bleu4: { name: 'BLEU-4', unit: 'score', better: 'higher' },
+    meteor: { name: 'METEOR', unit: 'score', better: 'higher' },
+    cider: { name: 'CIDEr', unit: 'score', better: 'higher' },
+  },
   headline: 'The headline is BLEU-1 with ground-truth event proposals, the first column in Table 1.',
   async fetch() {
     const section = (await pdfText(feed)).split('with GT proposals')[1]?.split('Table 1:')[0];

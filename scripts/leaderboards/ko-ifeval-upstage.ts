@@ -13,6 +13,10 @@ const board: Leaderboard = {
     promptStrict: "Prompt-level strict accuracy",
     instructionStrict: "Instruction-level strict accuracy",
   },
+  stats: {
+    promptLoose: { name: 'Prompt-level loose accuracy', unit: '%', better: 'higher' },
+    instructionLoose: { name: 'Instruction-level loose accuracy', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const manifest = await fetchJson<any>(FEED);
     if (!Array.isArray(manifest.siblings)) throw new Error("Missing results manifest");

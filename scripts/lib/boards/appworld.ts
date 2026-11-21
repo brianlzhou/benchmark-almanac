@@ -14,6 +14,16 @@ export function appworldBoard(track: Track): Leaderboard {
     benchmark: `appworld-${track}`,
     url: 'https://appworld.dev/appworld/leaderboard', feed: FEED,
     terms: 'The authors publish this public results feed; source licensing and attribution requirements apply.',
+    stats: {
+      scenarioGoalCompletion: {
+        name: 'Scenario goal completion', unit: '%', better: 'higher',
+        note: 'Percentage of scenarios where the agent passes every evaluation test for every task variant in the scenario.',
+      },
+      interactions: {
+        name: 'Environment interactions per task', unit: 'count',
+        note: 'Average number of environment interactions, or code executions, per task.',
+      },
+    },
     async fetch() {
       const rows: LeaderboardRow[] = [];
       const split = track === 'test-normal' ? 'test_normal' : 'test_challenge';

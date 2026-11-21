@@ -8,6 +8,7 @@ const feed = 'https://euroeval.com/leaderboards/french';
 export default {
   benchmark:'orangesum',url:feed,feed,host:'EuroEval',
   terms:'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
+  stats: { chrf4: { name: 'Character n-gram F-score at order 4', unit: 'score', better: 'higher' }, scored: { name: 'Scored examples', unit: 'count' } },
   aliases: {
     "HuggingFaceTB/SmolLM2-135M": "smollm2-135m",
     "HuggingFaceTB/SmolLM2-360M": "smollm2-360m",

@@ -16,6 +16,11 @@ const board: Leaderboard = {
   terms: 'The project publishes the evaluation code under MIT. https://github.com/step-out/Duplex-MPE/blob/HEAD/LICENSE',
   headline: 'The site reports no overall score, so this is the plain mean of its four scored capabilities.',
   parts: Object.fromEntries(columns.slice(0,4).map(k => [k,k])),
+  stats: {
+    'Response presence': { name: 'Response presence', unit: '%', better: 'higher' },
+    'Window response': { name: 'Window response', unit: '%', better: 'higher' },
+    yieldEligibleEvents: { name: 'Yield-eligible events', unit: 'count' },
+  },
   async fetch() {
     const page = await fetchText(url);
     const table = tables(page.replace(/<br\s*\/?>/gi,' ')).find(t => t[1]?.[0]?.text === 'Model');

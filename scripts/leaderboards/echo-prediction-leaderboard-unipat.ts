@@ -28,6 +28,7 @@ const board: Leaderboard = {
     // Grok 4.20 was in beta when Echo added it (2026-03-16)
     'Grok-4.2-beta': 'grok-4-20',
   },
+  stats: { battles: { name: 'Battles', unit: 'count' }, resolvedCount: { name: 'Resolved cases', unit: 'count' } },
   async fetch() {
     const res = await fetchJson<{ success: boolean; data: Ranking[] }>(FEED);
     if (!res.success || !Array.isArray(res.data)) throw new Error('unexpected Echo rankings response');

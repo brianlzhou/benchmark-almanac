@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/treble-technologies/ffasr",
   feed,
   terms: "See the publisher’s Space and each upstream dataset license at https://huggingface.co/spaces/treble-technologies/ffasr Hugging Face allows the public Space in robots.txt.",
+  stats: { RTFx: { name: 'Real-time factor', unit: 'speedup', better: 'lower' }, FFAS: { name: 'Far-field ASR score', unit: 'score', better: 'higher' } },
   async fetch() {
     const origin = new URL(feed).origin;
     type Dependency = { id: number; inputs: number[]; targets: [number, string][] };

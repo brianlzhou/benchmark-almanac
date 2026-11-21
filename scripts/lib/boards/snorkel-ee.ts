@@ -5,6 +5,10 @@ import { fetchJson } from '../util.ts';
 export function snorkelEE(benchmark: string, slug: string, feedName: string): Leaderboard {
   const feed = `https://snorkel.ai/benchmark-data/${feedName}.json`;
   return { benchmark, url: `https://snorkel.ai/leaderboard/${slug}/`, feed,
+    stats: {
+      passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+      costFiveAttempts: { name: 'Cost for five attempts', unit: 'usd', better: 'lower' },
+    },
     terms: 'Snorkel website terms prohibit automated extraction and republication; the almanac credits Snorkel AI and links the source.',
     aliases: { 'Nemotron 3 Ultra 550B': 'nemotron-3-ultra', 'Gemini Flash 3.8': 'gemini-3-8-flash' },
     chart: { title: 'Pass@1 vs. cost per trial', x: { key: 'cost', label: 'Cost per trial', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' } },

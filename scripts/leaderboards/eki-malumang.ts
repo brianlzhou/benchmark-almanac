@@ -10,6 +10,11 @@ const board: Leaderboard = {
   benchmark: "eki-malumang",
   url: "https://xn--mdupuu-pxaa.eki.ee/benchmark/trivia_et_3",
   feed,
+  stats: {
+    items: { name: 'Items', unit: 'count' },
+    exactCorrect: { name: 'Exactly correct answers', unit: 'count', better: 'higher' },
+    judgeCorrect: { name: 'Judge accepted answers', unit: 'count', better: 'higher' },
+  },
   terms: "EKI licenses the score data under CC BY 4.0. The host has no robots.txt.",
   async fetch() {
     const summary = parseCsv(await fetchText(feed)).filter(r => r.trivia_et_3?.trim());

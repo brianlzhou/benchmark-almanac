@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://the-agent-company.com/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { partialScore:{name:'Partial score',unit:'%',better:'higher'}, steps:{name:'Steps',unit:'count'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const page=await fetchText(FEED);const path=page.match(/src="([^" ]*main\.[^" ]+\.js)"/)?.[1];

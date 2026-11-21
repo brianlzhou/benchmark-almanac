@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at uncertainty2019.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: { taskCount: { name: 'Tasks', unit: 'count' }, attemptCount: { name: 'Attempts', unit: 'count' }, rc0Attempts: { name: 'Attempts with zero retries', unit: 'count' }, rc1Attempts: { name: 'Attempts with one retry', unit: 'count' }, rc2Attempts: { name: 'Attempts with two retries', unit: 'count' }, rc3Attempts: { name: 'Attempts with three retries', unit: 'count' }, rc4Attempts: { name: 'Attempts with four retries', unit: 'count' }, rc4AtLeastOnceTaskPercent: { name: 'Tasks solved at least once with four retries', unit: '%', better: 'higher' }, rc4AllThreeTaskPercent: { name: 'Tasks solved three times with four retries', unit: '%', better: 'higher' } },
   
   async fetch() {
     const d=jsonAfter<any>(await fetchText(FEED),'window.PCB_DATA =');

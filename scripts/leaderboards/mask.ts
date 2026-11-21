@@ -6,6 +6,7 @@ import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2503.03750';
 export default {
  benchmark:'mask', static: 'paper',url:'https://arxiv.org/abs/2503.03750',feed,terms:PAPER_TERMS,
+ stats:{honest:{name:'Honesty rate',unit:'%',better:'higher'},accuracy:{name:'Accuracy',unit:'%',better:'higher'},honestAt10:{name:'Honesty at 10',unit:'%',better:'higher'},lieAt10:{name:'Lie rate at 10',unit:'%',better:'lower'}},
  aliases:{'grok-2-1212':'grok-2-dec-2024'},
  async fetch():Promise<LeaderboardRow[]> {
   const ts=flatPaperTables(await paperHtml(feed)).map(grid);

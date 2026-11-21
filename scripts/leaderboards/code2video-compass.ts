@@ -1,14 +1,16 @@
 // The default Overall view ranks by Avg. Rank, lower is better. The page states: "Avg. Rank averages per-metric ranks across all 15 models, excluding Operational metrics (ES and TC); ties receive average ranks." This reader follows app.js. TC is API output tokens per attempted task, including reasoning.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow} from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://code2video-compass.github.io/benchmark-data.js?v=55";
+const compassStats: Record<string, BoardStat> = Object.fromEntries([['ES','Execution success'],['TC','Token consumption'],['TQ','Technical quality'],['AQ','Aesthetic quality'],['MS','Motion smoothness'],['L-TVA','Local temporal video alignment'],['G-TVA','Global temporal video alignment'],['PF','Perceptual fidelity'],['SF','Structural fidelity'],['SA','Sequence alignment'],['AF','Appearance fidelity'],['MF','Motion fidelity'],['IF','Instruction following'],['NC','Content coherence'],['VD','Visual design'],['MT','Motion quality'],['VE','Viewer engagement']].map(([key,name])=>[key,{name,unit:key==='TC'?'tokens':'score',better:'higher' as const}]));
 const board: Leaderboard = {
   benchmark: "code2video-compass",
   url: "https://code2video-compass.github.io/benchmark-data.js?v=55",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: compassStats,
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 

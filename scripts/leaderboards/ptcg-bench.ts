@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://ddhua.tech/ptcg-bench/",
   feed,
   terms: "The authors license the project under MIT and reserve third party rights in Pokémon assets. The page gives no separate standings license. https://github.com/zjunet/PTCG-Bench The site returns 404 for robots.txt.",
+  stats: {
+    wins: { name: 'Wins', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Rank|Agent|Family|Rating|Deviation|Record|Win Rate|AVG. Cost');
     if (!t || t.length < 13) throw new Error('Missing PTCG standings');

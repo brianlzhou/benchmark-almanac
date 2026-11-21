@@ -18,6 +18,9 @@ const FEED = "https://raw.githubusercontent.com/zion-zion-zion/VDE-Bench/main/RE
 const board: Leaderboard = {
   benchmark: "vdebench", url: "https://raw.githubusercontent.com/zion-zion-zion/VDE-Bench/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    globalScore: { name: 'Global score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

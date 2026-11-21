@@ -6,6 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://retrieval-infused-reasoning-sandbox.github.io/";
 const board: Leaderboard = {
+ stats: { retrievalLoss: { name: 'Retrieval loss', unit: 'score', better: 'lower' } },
  benchmark: "der2-bench", url: "https://retrieval-infused-reasoning-sandbox.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 

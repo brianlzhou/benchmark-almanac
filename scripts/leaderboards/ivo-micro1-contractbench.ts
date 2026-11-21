@@ -11,6 +11,7 @@ const PAGE = 'https://www.micro1.ai/benchmark/ivo-micro1-contract-bench';
 
 const board: Leaderboard = {
   benchmark: 'ivo-micro1-contractbench',
+  stats: { completionRate: { name: 'Completion rate', unit: '%', better: 'higher' }, minutes: { name: 'Minutes per completed rollout', unit: 'minutes', better: 'lower' } },
   parts: {
     privateScore: { name: 'Private', group: 'Split' },
     publicScore: { name: 'Public', group: 'Split' },

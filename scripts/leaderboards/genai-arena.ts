@@ -8,6 +8,7 @@ const FEED = "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena/resolve/main/a
 const board: Leaderboard = {
  benchmark: "genai-arena", url: "https://huggingface.co/spaces/TIGER-Lab/GenAI-Arena", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { fullVoteElo: { name: 'Arena Elo rating (full)', unit: 'elo', better: 'higher' } },
 
  async fetch() {
 const rows:LeaderboardRow[]=[];

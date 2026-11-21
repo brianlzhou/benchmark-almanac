@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: "https://snap-research.github.io/locomo/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { retrievalRecall: { name: 'Retrieval recall', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts=await paperTables(FEED), t=ts[1];
     if(!t?.[0]?.some(c=>c.text==='Answer Prediction (F1)')) throw new Error('LoCoMo QA table changed');

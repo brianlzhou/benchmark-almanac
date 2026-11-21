@@ -11,6 +11,11 @@ const board: Leaderboard = {
   url: "https://evalatro.dev/",
   feed,
   terms: "The runner package declares ISC. I found no separate license for submitted scores. The host returned no readable robots.txt rules.",
+  stats: {
+    attempts: { name: 'Attempts', unit: 'count' }, completed: { name: 'Completed games', unit: 'count' }, incomplete: { name: 'Incomplete games', unit: 'count' },
+    stdevScore: { name: 'Score standard deviation', unit: 'score' }, avgAnte: { name: 'Average ante', unit: 'score' }, stdevAnte: { name: 'Ante standard deviation', unit: 'score' }, maxAnte: { name: 'Maximum ante', unit: 'score' },
+    avgMoney: { name: 'Average money', unit: 'score', better: 'higher' }, illegalRate: { name: 'Illegal move rate', unit: '%', better: 'lower' }, latency: { name: 'Average duration', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const { leaderboard } = await fetchJson<{ leaderboard: Entry[] }>(feed);
     const scored = leaderboard.filter(r => r.scored > 0);

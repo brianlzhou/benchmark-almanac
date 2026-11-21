@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2402.07844';
 const board: Leaderboard = {
   benchmark: 'mercury-code-efficiency', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2402.07844.',
+  stats: { gap: {name:'Efficiency gap',unit:'score',better:'lower',note:'Difference between correctness and efficiency scores, from 0 to 1.'}, pass: {name:'Overall pass rate',unit:'%',better:'higher'}, passEasy: {name:'Easy pass rate',unit:'%',better:'higher'}, passMedium: {name:'Medium pass rate',unit:'%',better:'higher'}, passHard: {name:'Hard pass rate',unit:'%',better:'higher'} },
   parts: {easy: 'Easy', medium: 'Medium', hard: 'Hard'},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

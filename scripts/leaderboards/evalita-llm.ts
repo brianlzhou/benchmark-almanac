@@ -13,6 +13,7 @@ const board: Leaderboard = {
   benchmark:'evalita-llm', url:'https://huggingface.co/spaces/evalitahf/evalita_llm_leaderboard', feed,
   terms:'The official leaderboard uses Apache 2.0. https://huggingface.co/spaces/evalitahf/evalita_llm_leaderboard/blob/main/README.md',
   parts:Object.fromEntries(tasks.map(k => [k,k])),
+  stats:Object.fromEntries(tasks.flatMap(k => [['' + k + ' Prompt Average', {name:k + ' prompt average', unit:'%', better:'higher'}], [k + ' Best Prompt', {name:k + ' best prompt', unit:'%', better:'higher'}], [k + ' Best Prompt Id', {name:k + ' best prompt ID', unit:'count'}]])),
   aliases:{'Mistral-Large-Instruct-2411':'mistral-large-2-nov-2024', 'Llama-3.1-Tulu-3-70B':'tulu-3-tulu-3-70b',
     'Mistral-Small-24B-Instruct-2501':'mistral-small-3', 'Phi-3.5-mini-instruct':'phi-3-5-mini',
     'gemma-3-270m':'gemma-3-270m-base','InternVL3_5-8B':'internvl3-5-8b'},

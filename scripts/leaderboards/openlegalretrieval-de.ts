@@ -12,7 +12,7 @@ interface Result {
 }
 const board: Leaderboard = {
   benchmark: 'openlegalretrieval-de', url: space, feed,
-  parts: {},
+  parts: { t1: 'Task 1', t2: 'Task 2', t3: 'Task 3', t4: 'Task 4', t5: 'Task 5', t6: 'Task 6', t7: 'Task 7' },
   host: 'VAGO Solutions',
   terms: "VAGO licenses the task data under ODbL 1.0. GerLayQA and GerDaLIRSmall have separate terms. The README gives no separate license for scores. https://github.com/VAGOsolutions/german-legal-embedding-leaderboard Hugging Face allows crawling.",
   async fetch() {

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://assistantbench.github.io",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { answerRate:{name:'Answer rate',unit:'%',better:'higher'}, precision:{name:'Precision',unit:'%',better:'higher'}, exactMatch:{name:'Exact match',unit:'%',better:'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const t=tables(await fetchText(FEED)).find(t=>t[0]?.[0]?.text==='Model'&&t[0]?.[1]?.text==='Accuracy');if(!t)throw new Error('AssistantBench table missing');return t.slice(1).filter(r=>r.length===5).map(r=>({model:'GPT-4 Turbo (snapshot unspecified)',harness:r[0].text,score:num(r[1].text)!,metrics:{answerRate:num(r[2].text)!,precision:num(r[3].text)!,exactMatch:num(r[4].text)!}}));

@@ -8,6 +8,9 @@ const feed = 'https://arxiv.org/html/2611.03839';
 const board: Leaderboard = {
   benchmark: 'pianobench', url: feed, feed, static: 'paper',
   terms: 'The authors publish Table 1 under the terms linked at https://arxiv.org/abs/2611.03839.',
+  stats: {
+    gainOverNoMusic: { name: 'Gain over no music', unit: '%', better: 'higher', note: 'Percentage-point gain over accuracy with no music.' },
+  },
   aliases: {'Qwen 3 Omni 30B-A3B (thinking)': 'qwen3-omni-30b-a3b-thinking',
     'Qwen 3 Omni 30B-A3B (non-thinking)': 'qwen3-omni-30b-a3b', 'Gemma 4 12B': 'gemma-4-12b-it'},
   async fetch() {

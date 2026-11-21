@@ -5,7 +5,12 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2410.05340';
-const parts: Record<string, string> = {};
+const parts: Record<string, string> = {
+  Simple: 'Simple',
+  ModerateComplex: 'Moderate complexity',
+  Complex: 'Complex',
+  VeryComplex: 'Very complex',
+};
 function pair(s: string) {
   const m = /^([\d.]+) \(([\d.]+)\)$/.exec(s);
   if (!m) throw new Error('Expected median and IQR');
@@ -14,6 +19,11 @@ function pair(s: string) {
 const board: Leaderboard = {
   benchmark: 'cadprompt', url: feed, feed, static: 'paper', parts,
   terms: 'The authors publish their evaluation in the paper. https://arxiv.org/abs/2410.05340',
+  stats: {
+    iogt: { name: 'Intersection over the ground truth', unit: 'score', better: 'higher', note: 'Bounding-box intersection area divided by the ground-truth area.' },
+    hausdorff: { name: 'Hausdorff distance', unit: 'score', better: 'lower' },
+    compileRate: { name: 'Compile rate', unit: '%', better: 'higher', note: 'Percentage of generated CAD programs that compile successfully.' },
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const t = tables.find(t => t[0][1] === 'Feedback Mechanism' && t[0][3]?.startsWith('Point Cloud') && t.some(r=>r[0].startsWith('CodeLlama:')));

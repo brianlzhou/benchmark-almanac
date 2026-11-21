@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/5062#results",
   feed,
   terms: "The competition lists its terms as to be announced. Its test CSV identifies entrants by username. https://codalab.lisn.upsaclay.fr/competitions/5062 The feed host returns no robots.txt.",
+  stats: { mcc: { name: 'Matthews correlation coefficient', unit: 'score', better: 'higher' } },
   async fetch() {
     const source = await fetchText(feed);
     const records = parseCsv(source);

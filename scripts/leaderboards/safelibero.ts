@@ -13,6 +13,10 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2512.11891",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  collisionAvoidance: {name: 'Collision avoidance rate', unit: '%', better: 'higher'},
+  executionSteps: {name: 'Execution steps', unit: 'count'},
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(grid).find(t=>t[0]?.[1]==='Translational Action Space Only');if(!t)throw new Error('SafeLIBERO table missing');const avg=t.find(r=>r[0]==='Average');if(!avg)throw new Error('SafeLIBERO average missing');const rows:LeaderboardRow[]=[];

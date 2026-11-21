@@ -8,6 +8,7 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/MoonshotAI/PerceptionBench/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "perceptionbench-moonshot",
+ stats: { Count: { name: 'Item count', unit: 'count' }, '#': { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
  parts: {
    Depth: { name: 'Depth', group: 'Task type' },
    OCR: { name: 'OCR', group: 'Task type' },

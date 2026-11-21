@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://aclanthology.org/2023.wmt-1.3.pdf#page=7",
   feed: FEED,
   terms: "Table 3 ranks primary systems and baselines within separate groups. ACL publishes the paper under CC BY 4.0. https://aclanthology.org/faq/copyright/ The robots URL returns HTML.",
+  stats: {
+    'd-BLEU': { name: 'd-BLEU', unit: 'score', better: 'higher' }, groupRank: { name: 'Group rank', unit: 'count', better: 'lower' },
+    BLEU: { name: 'BLEU', unit: 'score', better: 'higher' }, chrF: { name: 'chrF', unit: 'score', better: 'higher' }, COMET: { name: 'COMET', unit: 'score', better: 'higher' }, TER: { name: 'TER', unit: 'score', better: 'lower' },
+  },
   async fetch() {
     const pdf = await pdfText(FEED);
     const human = pdf.split(/Type\s+System\s+MQM\s+Rank/)[1]?.split('Table 3:')[0];

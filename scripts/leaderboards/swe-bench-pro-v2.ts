@@ -17,6 +17,7 @@ const board: Leaderboard = {
   feed: scaleFeed(PAGE, TAB),
   terms: SCALE_TERMS,
   aliases: { ...SCALE_ALIASES },
+  stats: { tiedRank: { name: 'Tied rank', unit: 'count' } },
   fetch: async () => scaleRows(await fetchScaleEntries(PAGE, TAB), (_, e) =>
     typeof e.rank === 'number' ? { metrics: { tiedRank: e.rank } } : undefined),
 };

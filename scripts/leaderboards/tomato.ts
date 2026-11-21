@@ -40,6 +40,7 @@ const board: Leaderboard = {
     'LLaVA-Video-72B': 'llava-video-72b-qwen2',
     'LLaVA-Video-7B': 'llava-video-7b-qwen2',
   },
+  stats: { rotation:{name:'Rotation accuracy',unit:'%',better:'higher'}, direction:{name:'Direction accuracy',unit:'%',better:'higher'}, velocityFrequency:{name:'Velocity frequency accuracy',unit:'%',better:'higher'}, shapeTrend:{name:'Shape trend accuracy',unit:'%',better:'higher'}, visualCues:{name:'Visual cues accuracy',unit:'%',better:'higher'}, actionCount:{name:'Action count accuracy',unit:'%',better:'higher'} },
   async fetch() {
     const t = axTable(await fetchText(PAGE), TABLE);
     const head = t[0] ?? [];

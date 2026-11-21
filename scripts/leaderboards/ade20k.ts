@@ -10,6 +10,11 @@ const headers = ['Architecture', 'MultiScale Testing', 'Mean IoU', 'Pixel Accura
 const board: Leaderboard = {
   benchmark: 'ade20k', feed, url: 'https://github.com/CSAILVision/semantic-segmentation-pytorch#performance',
   terms: 'MIT CSAIL uses BSD 3-Clause, https://github.com/CSAILVision/semantic-segmentation-pytorch/blob/master/LICENSE.',
+  stats: {
+    meanIoU: { name: 'Mean intersection over union', unit: 'score', better: 'higher' },
+    pixelAccuracy: { name: 'Pixel accuracy', unit: '%', better: 'higher' },
+    fps: { name: 'Inference speed', unit: 'count', better: 'higher', note: 'Frames processed per second.' },
+  },
   async fetch() {
     const source = (await fetchText(feed)).split('## Performance:')[1]?.split('</table>')[0];
     if (!source || Array.from(source.matchAll(/<th\b[^>]*>(.*?)<\/th>/g), m => text(m[1])).join('|') !== headers.join('|'))

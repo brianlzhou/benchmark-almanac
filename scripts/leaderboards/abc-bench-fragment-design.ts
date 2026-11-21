@@ -5,6 +5,7 @@ import { ABC_FEED, ABC_TERMS, ABC_ALIASES, abcRows } from '../lib/boards/secureb
 const board: Leaderboard = {
   benchmark: 'abc-bench-fragment-design', url: ABC_FEED, feed: ABC_FEED,
   terms: ABC_TERMS, aliases: ABC_ALIASES,
+  stats: { refusalPercent: { name: 'Refusal rate', unit: '%', better: 'lower' } },
   fetch: () => abcRows('fragment-design'),
 };
 export default board;

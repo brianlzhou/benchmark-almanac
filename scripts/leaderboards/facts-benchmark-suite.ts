@@ -17,6 +17,7 @@ const board: Leaderboard = {
   feed: kaggleFeed('google', 'facts'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: { components: { name: 'Components reported', unit: 'count' } },
   async fetch() {
     const rows = await kaggleRows('google', 'facts', 'Average', 100, {
       grounding: { task: 'Grounding Score', scale: 100 },

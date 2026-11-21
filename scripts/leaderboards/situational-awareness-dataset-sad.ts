@@ -26,6 +26,10 @@ const board: Leaderboard = {
     'gpt-4o': 'gpt-4o-may-2024',
     'claude-instant-1.2': 'claude-instant',
   },
+  stats: {
+    randomChance: { name: 'Random chance', unit: '%', better: 'higher' },
+    upperBaseline: { name: 'Upper baseline', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows = parseCsv(await fetchText(FEED));
     if (!rows[0] || !('variant' in rows[0])) throw new Error('unexpected SAD CSV header');

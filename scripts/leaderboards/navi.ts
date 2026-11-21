@@ -13,6 +13,16 @@ const board: Leaderboard = {
   terms: 'The authors publish their results under the terms linked at https://arxiv.org/abs/2306.09109.',
   headline: 'The headline averages Precision@0.2 on multiview and in-the-wild image pairs.',
   parts: { multiviewPrecision: 'Multiview', wildPrecision: 'In-the-wild' },
+  stats: {
+    multiviewDenseRecall15px: { name: 'Multiview dense recall at 15px', unit: '%', better: 'higher' },
+    wildDenseRecall15px: { name: 'In-the-wild dense recall at 15px', unit: '%', better: 'higher' },
+    multiviewAuc5: { name: 'Multiview AUC at 5px', unit: '%', better: 'higher' },
+    wildAuc5: { name: 'In-the-wild AUC at 5px', unit: '%', better: 'higher' },
+    multiviewAuc10: { name: 'Multiview AUC at 10px', unit: '%', better: 'higher' },
+    wildAuc10: { name: 'In-the-wild AUC at 10px', unit: '%', better: 'higher' },
+    multiviewAuc20: { name: 'Multiview AUC at 20px', unit: '%', better: 'higher' },
+    wildAuc20: { name: 'In-the-wild AUC at 20px', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const table = flatPaperTables(await paperHtml(feed)).map(grid).find(t =>
       t[1]?.[0] === 'Method' && t[1].length === 6 && header.every((h, i) => t[1][i + 1].startsWith(h)));

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://dosimeteraudit.org/research/ai-chatbots-us-midterms-2026",
   feed,
   terms: "Dosimeter licenses the answers, lists, and documentation under CC BY 4.0. The site permits the study page in robots.txt. The raw file host has no robots.txt.",
+  stats: { cited: { name: 'Answers with Kremlin sources', unit: 'count' } },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0]?.join('|') === 'Assistant|Answers with Kremlin sources');
     if (!table || table.length < 11) throw new Error('Missing Dosimeter results');

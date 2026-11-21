@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://github.com/Michael-Andrzejewski/balatro-bench/blob/master/bench-results.md",
   feed,
   terms: "The repository lists no license. https://github.com/Michael-Andrzejewski/balatro-bench The feed host returns no robots.txt.",
+  stats: {
+    bestHand: { name: 'Best single hand', unit: 'count', better: 'higher' },
+    rank: { name: 'Rank', unit: 'count', better: 'lower' },
+  },
   aliases: {"Sol / GPT-5.6": "gpt-5-6-sol", "Wake / Fable 5.1": "claude-fable-5-1"},
   async fetch() {
     const source = await fetchText(feed);

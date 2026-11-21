@@ -12,6 +12,7 @@ const FEED = `${PAGE}/resolve/main/sorted_score_list.json`;
 
 const board: Leaderboard = {
   benchmark: 'k-sort-arena',
+  stats: { mu: { name: 'Mean rating', unit: 'rating' }, votes: { name: 'Votes', unit: 'count' } },
   url: PAGE,
   feed: `${FEED} (Score, the μ − 3σ rating)`,
   terms: 'JSON file in the public, MIT-licensed K-Sort Arena Space repository that the leaderboard tab reads.',

@@ -117,6 +117,7 @@ const board: Leaderboard = {
   url: BCB_PAGE,
   feed: `${bcbFeed(false)} (mean of Complete and Instruct pass@1)`,
   terms: BCB_TERMS,
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   aliases: BCB_ALIASES,
   fetch: () => bigcodebenchRows(false),
 };

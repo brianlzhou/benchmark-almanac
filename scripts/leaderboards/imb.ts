@@ -12,6 +12,7 @@ const board: Leaderboard = {
   terms: 'The IMB project specifies CC BY-NC-ND 4.0 at https://github.com/PRAISELab-PicusLab/IMB#-license.',
   headline: 'The paper gives no combined score. This is BERTScore precision on the open-ended IMB-QA track, expressed as a percentage.',
   parts: { openQA: { name: 'IMB-QA', unit: '%', note: 'BERTScore precision as a percentage.' } },
+  stats: Object.fromEntries(columns.map(name => [name, { name: name === 'BERTScore P' ? 'BERTScore precision' : name === 'BERTScore R' ? 'BERTScore recall' : name, unit: 'score', better: 'higher', note: 'Stored from 0 to 1.' }])),
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.join('|') === ['Model', 'Fine-Tuned', ...columns].join('|'));
     if (!table) throw new Error('Missing IMB-QA comparison');

@@ -16,6 +16,10 @@ const board: Leaderboard = {
   terms: 'The authors publish the paper under the terms at https://arxiv.org/abs/2503.18129v1.',
   headline: 'The paper reports no overall score, so this is the plain mean of full-match rates on solvable and unsolvable tasks.',
   parts: Object.fromEntries(groups.map(([key, name]) => [key, name])),
+  stats: {
+    runInputTokens: { name: 'Input tokens', unit: 'tokens' }, runOutputTokens: { name: 'Output tokens', unit: 'tokens' },
+    ...Object.fromEntries(groups.flatMap(([key]) => [[key + 'NoMatch', { name: key + ' no match rate', unit: '%', better: 'higher' }], [key + 'PartialMatch', { name: key + ' partial match rate', unit: '%', better: 'higher' }], [key + 'LengthDifference', { name: key + ' length difference', unit: 'score', better: 'lower' }]])),
+  },
   aliases: {
     'Sonnet 3.7': 'claude-3-7-sonnet', 'Sonnet 3.5': 'claude-3-5-sonnet-october-2024', 'Haiku 3.5': 'claude-3-5-haiku',
     'GPT-4o (snapshot unspecified)': 'gpt-4o-aug-2024', 'GPT-4o mini (snapshot unspecified)': 'gpt-4o-mini',

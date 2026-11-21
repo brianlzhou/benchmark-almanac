@@ -5,6 +5,7 @@ import { tables, num } from '../lib/html.ts';
 const URL='https://evals.futuresearch.ai/';
 const board:Leaderboard={benchmark:'deep-research-bench-futuresearch',url:URL+'#drb',feed:URL,
  terms:'Official FutureSearch results; source terms apply and the Almanac credits and links the source.',
+ stats:{latency:{name:'Runtime',unit:'seconds',better:'lower'}},
  chart:{title:'Research score vs. cost',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Score',better:'higher'}},
  async fetch(){
   const html=await fetchText(URL);const t=tables(html).find(t=>t[0].some(c=>c.text==='Runtime (s)'));

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://dcase.community/challenge2024/task-language-queried-audio-source-separation-results",
   feed,
   terms: "The evaluation dataset lists CC BY 4.0. The results page gives no separate score license. The site's robots.txt allows the results page.",
+  stats: { ovl: { name: 'Overall quality', unit: 'score', better: 'higher' }, rel: { name: 'Relevance', unit: 'score', better: 'higher' }, sdr: { name: 'Source to distortion ratio', unit: 'score', better: 'higher' }, sdri: { name: 'Source to distortion ratio improvement', unit: 'score', better: 'higher' }, siSdr: { name: 'Scale-invariant source to distortion ratio', unit: 'score', better: 'higher' }, devSdr: { name: 'Development source to distortion ratio', unit: 'score', better: 'higher' }, devSdri: { name: 'Development source to distortion ratio improvement', unit: 'score', better: 'higher' }, devSiSdr: { name: 'Development scale-invariant source to distortion ratio', unit: 'score', better: 'higher' } },
   async fetch() {
     const data = tables(await fetchText(feed));
     const subjective = data.find(t => t[1]?.slice(-3).map(c => c.text).join('|') === 'Average Score|OVL Score|REL Score');

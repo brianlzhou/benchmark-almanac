@@ -18,6 +18,7 @@ const board: Leaderboard = {
     response: { name: 'Response quality', group: 'Dimension' },
     adaptation: { name: 'Conversational adaptation', group: 'Dimension' },
   },
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, stopTimeSeconds: { name: 'Stop time', unit: 'seconds', better: 'lower' }, phoneLines: { name: 'Phone lines', unit: 'count' } },
   async fetch() {
     const table = tables(await fetchText(PAGE)).find(t => t[0]?.some(c => c.text === 'Quality score / 100'))
     if (!table) throw new Error('Cekura voice quality table missing')

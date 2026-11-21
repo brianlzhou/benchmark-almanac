@@ -4,7 +4,7 @@ import {fetchText} from '../lib/util.ts';
 import { tables } from '../lib/html.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const FEED="https://omi.health/research/stt-benchmark";
-const board:Leaderboard={benchmark:"omi-medical-speech-benchmark",url:FEED,feed:FEED,
+const board:Leaderboard={benchmark:"omi-medical-speech-benchmark",url:FEED,feed:FEED,stats:{latency:{name:'Latency',unit:'seconds',better:'lower'},latencyP95:{name:'95th percentile latency',unit:'seconds',better:'lower'},wer:{name:'Word error rate',unit:'%',better:'lower'},drugErrors:{name:'Drug errors',unit:'%',better:'lower'},doseF1:{name:'Dose F1',unit:'%',better:'higher'}},
  terms:'Public maker results. The source robots.txt permits this public path or is absent. No additional restriction on reading these results is stated.',
  async fetch(){const ts=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text)));const out:LeaderboardRow[]=[];
 for(const [i,t] of ts.filter(t=>t[0]?.includes('Medical WER ↓')).entries())for(const c of t.slice(1)){

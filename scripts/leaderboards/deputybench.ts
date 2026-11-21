@@ -15,6 +15,14 @@ const board: Leaderboard = {
   benchmark:'deputybench',static:'paper',url,feed:url,terms:PAPER_TERMS,
   aliases:{'Gemini 4':'gemini-4-argon','Seed 2.1 Pro':'doubao-seed-2-1-pro','Seed 2.1 Turbo':'doubao-seed-2-1-turbo'},
   parts:{safety:'Safety',completion:'Completion'},
+  stats:{
+    inputTokens:{name:'Input tokens',unit:'tokens'},
+    outputTokens:{name:'Output tokens',unit:'tokens'},
+    totalTokens:{name:'Total tokens',unit:'tokens'},
+    toolCalls:{name:'Tool calls',unit:'count'},
+    timeSeconds:{name:'Time per run',unit:'seconds',better:'lower'},
+    roundTokens:{name:'Round total tokens',unit:'tokens'},
+  },
   async fetch() {
     const tables=inlinePaperTables(await paperHtml(url));
     const result=tables.find(t=>t[0]?.join('|')==='Model|Safety|Completion|PSR');

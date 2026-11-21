@@ -11,6 +11,11 @@ export default {
   terms: 'The paper and license are at https://arxiv.org/abs/2605.00119',
   headline: 'The headline is Task 1 multiple-choice accuracy averaged over the equally sized MSA and dialect sets. The paper scores translation and dialect steering separately.',
   parts: Object.fromEntries(keys.map(k => [k,k])),
+  stats: {
+    'MSA to Dialect: ALDi':{name:'MSA to dialect ALDi',unit:'score',better:'higher'},'MSA to Dialect: BLEU':{name:'MSA to dialect BLEU',unit:'score',better:'higher'},'MSA to Dialect: BERTScore':{name:'MSA to dialect BERTScore',unit:'score',better:'higher'},'MSA to Dialect: Adequacy':{name:'MSA to dialect adequacy',unit:'score',better:'higher'},'MSA to Dialect: Fluency':{name:'MSA to dialect fluency',unit:'score',better:'higher'},'MSA to Dialect: Register':{name:'MSA to dialect register',unit:'score',better:'higher'},'MSA to Dialect: Terminology':{name:'MSA to dialect terminology',unit:'score',better:'higher'},'MSA to Dialect: Overall':{name:'MSA to dialect overall rating',unit:'score',better:'higher'},
+    'Dialect to MSA: ALDi':{name:'Dialect to MSA ALDi',unit:'score',better:'higher'},'Dialect to MSA: BLEU':{name:'Dialect to MSA BLEU',unit:'score',better:'higher'},'Dialect to MSA: BERTScore':{name:'Dialect to MSA BERTScore',unit:'score',better:'higher'},'Dialect to MSA: Adequacy':{name:'Dialect to MSA adequacy',unit:'score',better:'higher'},'Dialect to MSA: Fluency':{name:'Dialect to MSA fluency',unit:'score',better:'higher'},'Dialect to MSA: Register':{name:'Dialect to MSA register',unit:'score',better:'higher'},'Dialect to MSA: Terminology':{name:'Dialect to MSA terminology',unit:'score',better:'higher'},'Dialect to MSA: Overall':{name:'Dialect to MSA overall rating',unit:'score',better:'higher'},
+    'Steering: MSA judge':{name:'MSA steering judge score',unit:'score',better:'higher'},'Steering: MSA dialect accuracy':{name:'MSA dialect accuracy',unit:'score',better:'higher'},'Steering: Dialect judge':{name:'Dialect steering judge score',unit:'score',better:'higher'},'Steering: Dialect accuracy':{name:'Dialect accuracy',unit:'score',better:'higher'},
+  },
   async fetch() {
     const ts = paperTables(await paperHtml(feed)).map(grid);
     const table = ts.find(t => t[0]?.includes('Context: None') && t[0]?.includes('Context: Region + Country') && t[2]?.[1] === 'Acc');

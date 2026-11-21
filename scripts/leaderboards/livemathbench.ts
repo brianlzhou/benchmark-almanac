@@ -7,6 +7,7 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/open-compass/GPassK/main/README.md";
 const board: Leaderboard = {
  benchmark: "livemathbench",
+ stats: { Greedy: { name: 'Greedy pass rate', unit: '%', better: 'higher' }, 'G-Pass@16_0.5': { name: 'G-Pass@16 at threshold 0.5', unit: '%', better: 'higher' }, 'G-Pass@16_0.75': { name: 'G-Pass@16 at threshold 0.75', unit: '%', better: 'higher' }, 'G-Pass@16_1.0': { name: 'G-Pass@16 at threshold 1.0', unit: '%', better: 'higher' } },
  url: "https://github.com/open-compass/GPassK",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

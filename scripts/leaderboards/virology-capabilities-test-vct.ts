@@ -17,6 +17,7 @@ const board: Leaderboard = {
   benchmark: 'virology-capabilities-test-vct',
   url: PAGE,
   feed: `${PAGE} (static HTML table, Accuracy)`,
+  stats: { expertPercentile: {name: 'Expert percentile', unit: '%', better: 'higher', note: 'Share of expert virologists the model outscores.'} },
   terms: 'Static page on securebio.org (robots.txt allows it; content signals: search yes, AI training no); SecureBio asks that reuse cite Goetting et al.',
   aliases: {
     'GPT-4.5 Preview': 'gpt-4-5',

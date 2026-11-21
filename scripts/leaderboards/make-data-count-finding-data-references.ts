@@ -17,6 +17,7 @@ const board: Leaderboard = {
   benchmark: 'make-data-count-finding-data-references', feed,
   url: 'https://www.kaggle.com/competitions/make-data-count-finding-data-references/leaderboard',
   terms: 'Kaggle competition rules apply. https://www.kaggle.com/competitions/make-data-count-finding-data-references/rules',
+  stats:{publicScore:{name:'Public-test F1',unit:'score',better:'higher',note:'Stored from 0 to 1.'}},
   harnesses: 'system', aliases: { 'Qwen2.5-7B-Instruct': 'qwen2-5-7b', 'Qwen2.5-32B-Instruct': 'qwen2-5-32b' },
   async fetch() {
     const data = await fetchJson<{ teams: Team[]; privateLeaderboard: Result[]; publicLeaderboard: Result[] }>(feed, {

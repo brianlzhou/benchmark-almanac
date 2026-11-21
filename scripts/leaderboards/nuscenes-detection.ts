@@ -7,6 +7,16 @@ const board:Leaderboard={benchmark:'nuscenes-detection', parts: {
   mAP: { name: 'Mean average precision', group: 'Dimension', note: 'This component has half of the total weight in nuScenes Detection Score.' },
 },url:'https://www.nuscenes.org/object-detection',feed,
  terms:'Motional publishes these leaderboard submissions on nuScenes. The Almanac credits and links the original board; dataset terms remain separate.',
+ stats: {
+  mATE: { name: 'Mean average translation error', unit: 'score', better: 'lower' },
+  mASE: { name: 'Mean average scale error', unit: 'score', better: 'lower' },
+  mAOE: { name: 'Mean average orientation error', unit: 'score', better: 'lower' },
+  mAVE: { name: 'Mean average velocity error', unit: 'score', better: 'lower' },
+  mAAE: { name: 'Mean average attribute error', unit: 'score', better: 'lower' },
+  NDS: { name: 'nuScenes Detection Score', unit: 'score', better: 'higher' },
+  'Mean PKL': { name: 'Mean planning and kinematics likelihood', unit: 'score', better: 'lower' },
+  'Median PKL': { name: 'Median planning and kinematics likelihood', unit: 'score', better: 'lower' },
+ },
  async fetch():Promise<LeaderboardRow[]>{
   const data=await fetchJson<any[]>(feed);const rows:LeaderboardRow[]=[];
   for(const d of data){

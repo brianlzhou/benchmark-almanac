@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2404.07611';
 const board: Leaderboard = {
   benchmark: 'noticia', url: feed, feed, static: 'paper',
   terms: 'The authors publish the paper under the terms linked at https://arxiv.org/abs/2404.07611.',
+  stats: { averageSummaryWords: { name: 'Average summary words', unit: 'count', note: 'Average number of words in each generated news summary.' } },
   async fetch() {
     const html = await paperHtml(feed);
     const table = html.match(/<figure\b[^>]*id="A6\.T8"[^>]*>([\s\S]*?)<\/figure>/)?.[1];

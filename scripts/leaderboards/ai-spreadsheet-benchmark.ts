@@ -11,6 +11,11 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/rowshq/aispreadsheetbenchmark",
   feed: FEED,
   terms: "Public Hugging Face dataset card; its robots.txt permits this raw card path.",
+  stats: {
+    passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    dynamic: { name: 'Dynamic output rate', unit: '%', better: 'higher' },
+    seconds: { name: 'Mean time', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find(t => t[0]?.includes("Pass@1"));
     if (!table) throw new Error('Published overall results table is missing');

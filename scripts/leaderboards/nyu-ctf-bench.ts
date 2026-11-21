@@ -11,6 +11,17 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at nyu-llm-ctf.github.io; retain source attribution and follow the upstream terms.",
   aliases: {"gpt-3.5-turbo-1106": "gpt-3-5-turbo-nov-2023", "gpt-4-1106-preview": "gpt-4-turbo-nov-2023"},
+  stats: {
+    solved: { name: 'Solved challenges', unit: 'count' },
+    total: { name: 'Total challenges', unit: 'count' },
+    passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+    'solved:crypto': { name: 'Crypto challenges solved', unit: 'count' },
+    'solved:forensics': { name: 'Forensics challenges solved', unit: 'count' },
+    'solved:misc': { name: 'Miscellaneous challenges solved', unit: 'count' },
+    'solved:pwn': { name: 'Pwn challenges solved', unit: 'count' },
+    'solved:rev': { name: 'Reverse engineering challenges solved', unit: 'count' },
+    'solved:web': { name: 'Web challenges solved', unit: 'count' },
+  },
   
   async fetch() {
     const data = await fetchJson<{dataset: Record<string,number>; submissions: any[]}>(FEED);

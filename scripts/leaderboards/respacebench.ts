@@ -12,7 +12,7 @@ const parts = {
   t9: 'Temporal successor', reasoning: 'Reasoning',
 };
 const board: Leaderboard = {
-  benchmark: 'respacebench', url: 'https://arxiv.org/abs/2611.21485', feed, static: 'paper', parts,
+  benchmark: 'respacebench', url: 'https://arxiv.org/abs/2611.21485', feed, static: 'paper', parts, stats: { rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' } },
   terms: 'The paper license is linked at https://arxiv.org/abs/2611.21485.',
   aliases: {'Qwen3-VL-8B':'qwen3-vl-8b-instruct','GLM-4.6V-106B':'glm-4-6v','GLM-4.6V-Flash-9B':'glm-4-6v-flash'},
   async fetch() {

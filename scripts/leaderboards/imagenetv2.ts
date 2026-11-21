@@ -13,6 +13,7 @@ export default {
   terms: 'Paper and license at https://arxiv.org/abs/1902.10811',
   headline: 'The paper reports no overall accuracy, so the headline is the plain mean of top-1 accuracy on its three test sets.',
   parts: Object.fromEntries(names.map(name => [name, {name, unit: '%' as const}])),
+  stats: Object.fromEntries(names.flatMap(name => [name + ' low', name + ' high'].map(key => [key, { name: key.includes(' low') ? name + ' lower confidence bound' : name + ' upper confidence bound', unit: '%', note: '95% confidence interval bound for the reported accuracy.' }]))),
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const models = new Map<string, Record<string, number>>();

@@ -5,6 +5,7 @@ import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2404.01933';
 const board: Leaderboard = {
+  stats: { precision:{name:'Precision',unit:'%',better:'higher'}, recall:{name:'Recall',unit:'%',better:'higher'} },
   benchmark: 'assembly101-o', static: 'paper', url: feed, feed,
   terms: 'The CVPR authors publish the table on arXiv. https://arxiv.org/abs/2404.01933',
   async fetch() {

@@ -1,15 +1,18 @@
 // The 2024 JOKER humor classification task ranks submitted runs by overall test accuracy.
 // Tables 3 and 4 give overall results and per-class precision, recall and F1 in the organizers’ report.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow } from './types.ts';
 import { pdfText } from '../lib/boards/pdf-text.ts';
 
 const feed = "https://ceur-ws.org/Vol-3740/paper-166.pdf";
+const classParts = Object.fromEntries(['SD','WS','EX','IR','SC','AID'].map(k => [k, k + ' F1']));
 
 const board: Leaderboard = {
   benchmark: "clef-joker-2024-humor-classification", static: 'paper',
   url: "https://ceur-ws.org/Vol-3740/paper-166.pdf#page=6",
   feed,
   terms: "The authors publish this results table under CC BY 4.0. https://ceur-ws.org/Vol-3740/paper-166.pdf#page=1 CEUR-WS robots.txt permits this volume.",
+  parts: classParts,
+  stats: Object.fromEntries([...['macroPrecision','macroRecall','macroF1','weightedPrecision','weightedRecall','weightedF1', 'SDPrecision','SDRecall','WSPrecision','WSRecall','EXPrecision','EXRecall','IRPrecision','IRRecall','SCPrecision','SCRecall','AIDPrecision','AIDRecall'].map(key => [key, { name: key.replace(/^(SD|WS|EX|IR|SC|AID)(Precision|Recall)$/, '$1 class $2').replace(/([a-z])([A-Z])/g, '$1 $2'), unit: '%', better: 'higher' as const }]), ['instancesAttempted', { name: 'Instances attempted', unit: 'count' }]] as [string, BoardStat][]),
   async fetch() {
     const text = await pdfText(feed);
     function readTable(n: number, width: number) {

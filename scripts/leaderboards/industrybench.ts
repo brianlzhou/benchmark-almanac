@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark: 'industrybench', url: feed, feed, static: 'paper',
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2605.10267",
   aliases:{'Kimi-k2.5-1T-A32B':'kimi-k2-5','GLM-5-744B-A40B':'glm-5','MiniMax-M2.5-230B-A10B':'minimax-m2-5'},
+  stats:{rawMean:{name:'Raw mean',unit:'score',better:'higher',note:'Mean score before safety adjustment on a 0 to 3 scale.'},perfect:{name:'Perfect answer rate',unit:'%',better:'higher'},pass:{name:'Pass rate',unit:'%',better:'higher'}},
   parts:Object.fromEntries([...capabilities,...industries,...languages].map(name=>[name,{name,unit:'%' as const}])),
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

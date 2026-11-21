@@ -9,6 +9,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://jailbreakbench.github.io/tables/table_open_source.html";
 const board: Leaderboard = {
   benchmark: "jailbreakbench",
+  stats: { averageQueries: { name: 'Average queries', unit: 'count', better: 'lower' } },
   url: "https://jailbreakbench.github.io/",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -61,6 +61,7 @@ export function makeOsworld2(benchmark: string, release: string): Leaderboard {
     url: 'https://osworld-v2.xlang.ai/',
     feed: `${FEED} (releaseVersion ${release}, full set)`,
     terms: 'Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.',
+    stats: { partial: { name: 'Partial score', unit: '%', better: 'higher' } },
     aliases: ALIASES,
     async fetch() {
       const data = await fetchJson<Data>(FEED);

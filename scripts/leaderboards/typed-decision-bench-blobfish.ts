@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://blobfish.ai/leaderboard/typed-decision-bench",
   feed,
   terms: "The benchmark page links the source and gives no blanket license for results. https://blobfish.ai/leaderboard robots.txt allows the report path.",
+  stats: {
+    items: { name: 'Items', unit: 'count' }, answered: { name: 'Answered items', unit: 'count' }, skipped: { name: 'Skipped items', unit: 'count' }, truncated: { name: 'Truncated items', unit: 'count' }, correct: { name: 'Correct decisions', unit: 'count' },
+    decisionScore: { name: 'Decision score', unit: '%', better: 'higher' }, accuracy: { name: 'Accuracy', unit: 'score', better: 'higher', note: 'Accuracy from 0 to 1.' },
+  },
   async fetch() {
     type Scores = Record<string, number | string | null> & {decisionScore:number};
     type Run = {system:{name:string,model:string,licence?:string}, harness:string, finishedAt:string, aggregate:Scores, suites:Record<string,Scores>, provenanceHref?:string};

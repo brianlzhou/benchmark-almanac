@@ -120,6 +120,7 @@ const board: Leaderboard = {
   feed: `${PAGE} (static HTML results table, Mean)`,
   terms: MICRO1_TERMS,
   aliases: MICRO1_ALIASES,
+  stats: { reasoningTokens:{name:'Reasoning tokens',unit:'tokens'}, turns:{name:'Turns',unit:'count'}, minutes:{name:'Minutes',unit:'minutes',better:'lower'}, bestOf3:{name:'Best of 3',unit:'%',better:'higher'}, passAt3:{name:'Pass@3',unit:'%',better:'higher'} },
   fetch: () => micro1Rows(PAGE, 'Mean', { '95% CI': 'ci', 'Best of 3': 'bestOf3', 'Pass@3': 'passAt3' }, true),
 };
 export default board;

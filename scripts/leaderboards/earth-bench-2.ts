@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: "Axis Spatial excludes picture questions from this agent ranking. Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
   host: 'Axis Spatial',
   aliases: index.aliases,
+  stats: { latency: { name: 'Mean time per task', unit: 'seconds', better: 'lower' }, uncachedInput: { name: 'Uncached input tokens', unit: 'tokens' }, output: { name: 'Output tokens', unit: 'tokens' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, cachedInput: { name: 'Cached input tokens', unit: 'tokens' } },
   async fetch() {
     const all = tables(await fetchText(feed));
     const byColumn = (column: string) => {

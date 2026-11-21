@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2210.03849",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { programAccuracy: { name: 'Program accuracy', unit: '%', better: 'higher' } },
   
   async fetch() {
     const ts=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text)));

@@ -1,15 +1,17 @@
 // MemEye publishes the full evaluation matrix for four backbones in appendix tables 16 through 19.
 // The score is converted from a fraction to percent. Avg. exact match remains a metric. Memory methods remain harnesses.
 // These are the paper's static results and will not refresh with new model releases.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+import type { BoardStat, Leaderboard, LeaderboardRow} from './types.ts';
 import { num } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2605.15128";
 import { paperTables } from '../lib/boards/arxiv-nested-tables.ts';
+const stats: Record<string, BoardStat> = Object.fromEntries(['exactMatch','bleu1',...['Y1','Y2','Y3'].flatMap(y=>['X1','X2','X3','X4'].flatMap(x=>[`exactMatch${y}${x}`,`bleu1${y}${x}`]))].map(key=>[key,{name:key==='exactMatch'?'Exact match':key==='bleu1'?'BLEU-1':key.replace(/^(exactMatch|bleu1)(Y\d)(X\d)$/,(match,metric,y,x)=>`${metric==='exactMatch'?'Exact match':'BLEU-1'} ${y} ${x}`),unit:'%',better:'higher' as const}]));
 const board: Leaderboard = {
   benchmark: "memeye", static: 'paper',
   url: "https://minghokwok.github.io/MemEye/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats,
   async fetch(): Promise<LeaderboardRow[]> {
     const tables = await paperTables(FEED);
     const models = ['GPT-5.4-mini', 'GPT-4.1-nano', 'Qwen3-VL-8B-Instruct', 'gemini-2.5-flash-lite'];

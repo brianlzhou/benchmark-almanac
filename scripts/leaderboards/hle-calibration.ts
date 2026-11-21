@@ -6,6 +6,7 @@ const URL='https://scale.com/blog/o3-o4-mini-calibration';
 const board: Leaderboard={
   benchmark:'hle-calibration',url:URL,feed:URL,
   terms:'Scale terms restrict automated extraction. Benchmark Almanac credits Scale AI and links the official source.',
+  stats:{accuracy:{name:'Accuracy',unit:'%',better:'higher'},confidence:{name:'Confidence',unit:'%'}},
   async fetch():Promise<LeaderboardRow[]> {
     const t=tables(await fetchText(URL)).find(t=>t[0]?.[1]?.text==='Accuracy (%) — Higher is better');
     if(!t)throw new Error('HLE calibration table missing');

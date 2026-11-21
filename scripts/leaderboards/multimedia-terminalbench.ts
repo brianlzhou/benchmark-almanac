@@ -5,9 +5,11 @@ import { paperHtml, numberCell } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/html/2605.10966';
+const mmtbCategories = ['AudioVisualAlignment','CrossFileComparison','MusicUnderstanding','NonSpeechAudio','OnScreenText','ReferenceResolution','SpatialReasoning','SpeakerVoiceIdentity','SpeechProsody','SpeechUnderstanding','TemporalLocalization','VisualPerception','MediaProduction','PerformanceCoaching','EnterpriseCompliance','PersonalEducation','OperationsResearch'];
 const board: Leaderboard = {
   benchmark: 'multimedia-terminalbench', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2605.10966.',
+  stats: { partial: {name:'Partial success rate',unit:'%',better:'higher'}, totalTokens: {name:'Total tokens',unit:'tokens'}, secondsPerTask: {name:'Seconds per task',unit:'seconds',better:'lower'}, ...Object.fromEntries(mmtbCategories.flatMap(key => [[key+'Partial',{name:key.replace(/([a-z])([A-Z])/g,'$1 $2')+' partial success rate',unit:'%',better:'higher'}],[key+'Cost',{name:key.replace(/([a-z])([A-Z])/g,'$1 $2')+' cost',unit:'usd',better:'lower'}]])) },
   harnesses: 'system',
   aliases: { 'Qwen3.5-122B': 'qwen3-5-122b-a10b', 'Sonnet-4.6': 'claude-sonnet-4-6' },
   async fetch() {

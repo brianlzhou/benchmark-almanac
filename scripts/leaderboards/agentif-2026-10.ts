@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML, first leaderboard table, data-csr)`,
   terms: 'Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.',
+  stats: { isr: { name: 'Instruction success rate', unit: '%', better: 'higher' } },
   aliases: {
     'Nemotron-Nano-9B-v2': 'nvidia-nemotron-nano-9b-v2',
   },

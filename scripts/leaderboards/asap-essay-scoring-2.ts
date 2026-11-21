@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://www.kaggle.com/competitions/learning-agency-lab-automated-essay-scoring-2/leaderboard",
   feed,
   terms: "Kaggle's competition terms apply. The host has no robots.txt.",
+  stats: {
+    submissions: { name: 'Submission count', unit: 'count' },
+    publicScore: { name: 'Public leaderboard score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     type Entry = { teamId: number; displayScore: string };
     type Team = { teamId: number; teamName: string; submissionCount: number; lastSubmissionDate?: string; solutionWriteUpUrl?: string };

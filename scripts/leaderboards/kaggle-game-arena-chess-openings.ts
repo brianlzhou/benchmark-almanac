@@ -6,6 +6,7 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRows } from './kaggle-game-arena.ts';
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-chess-openings',
+  stats: { tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' }, costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' } },
   url: 'https://www.kaggle.com/benchmarks/kaggle/chess-text-openings',
   feed: kaggleFeed('kaggle', 'chess-text-openings'),
   terms: KAGGLE_TERMS,

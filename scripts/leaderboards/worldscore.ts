@@ -19,6 +19,7 @@ const board: Leaderboard = {
     StyleConsistency: { name: 'Style consistency', group: 'Dimension' },
     SubjectiveQuality: { name: 'Subjective quality', group: 'Dimension' },
   },
+  stats: { WorldScoreDynamic: { name: 'WorldScore dynamic', unit: '%', better: 'higher' }, MotionAccuracy: { name: 'Motion accuracy', unit: '%', better: 'higher' }, MotionMagnitude: { name: 'Motion magnitude', unit: '%', better: 'higher' }, MotionSmoothness: { name: 'Motion smoothness', unit: '%', better: 'higher' } },
   url: "https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

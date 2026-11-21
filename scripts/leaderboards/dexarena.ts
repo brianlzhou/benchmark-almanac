@@ -6,7 +6,7 @@ const url = "https://sipair-elastic.github.io/DexArena-website/leaderboard/";
 const feed = "https://sipair-elastic.github.io/DexArena-website/assets/results/paper-results.json";
 
 const board: Leaderboard = {
-  benchmark: 'dexarena', url, feed,
+  benchmark: 'dexarena', url, feed, stats: { episodesPerTask: { name: 'Episodes per task', unit: 'count' } },
   terms: "The authors do not specify separate terms for leaderboard scores on https://sipair-elastic.github.io/DexArena-website/leaderboard/" ,
   async fetch() {
     type Value = {mean: number; std?: number};

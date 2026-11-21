@@ -12,6 +12,22 @@ const board: Leaderboard = {
   feed,
   terms: "The makers license the website and the dataset under CC BY 4.0. The host has no robots.txt.",
   parts: { functionality: 'Functionality', manufacturability: 'Manufacturability', assemblability: 'Assemblability' },
+  stats: {
+    judged: { name: 'Judged configurations', unit: 'count' },
+    cases: { name: 'Test cases', unit: 'count' },
+    sandbox: { name: 'Sandbox success', unit: '%', better: 'higher', note: 'Share of generated scripts that execute without error.' },
+    watertight: { name: 'Watertight geometry', unit: '%', better: 'higher' },
+    manifold: { name: 'Manifold geometry', unit: '%', better: 'higher' },
+    self_int_free: { name: 'Self-intersection free', unit: '%', better: 'higher' },
+    overlap_free: { name: 'Overlap free', unit: '%', better: 'higher' },
+    geom_valid: { name: 'Geometric validity', unit: '%', better: 'higher' },
+    functional: { name: 'Functional design intent', unit: '%', better: 'higher' },
+    robust: { name: 'Robust design intent', unit: '%', better: 'higher' },
+    well_toleranced: { name: 'Well-toleranced design', unit: '%', better: 'higher' },
+    manufacturable: { name: 'Manufacturable design', unit: '%', better: 'higher' },
+    assembly_ready: { name: 'Assembly-ready design', unit: '%', better: 'higher' },
+    connectable: { name: 'Connectable design', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const { rows } = await fetchJson<{ rows: Entry[] }>(feed);
     if (rows.length < 15) throw new Error('Missing MUSE configurations');

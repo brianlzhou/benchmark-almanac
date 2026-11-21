@@ -27,6 +27,16 @@ const board: Leaderboard = {
     simpleAccuracy: { name: 'Simple solution accuracy', group: 'Query difficulty', unit: '%' },
     hardAccuracy: { name: 'Hard solution accuracy', group: 'Query difficulty', unit: '%' },
   },
+  stats: {
+    simpleExactMatch: { name: 'Simple exact match', unit: '%', better: 'higher' },
+    hardExactMatch: { name: 'Hard exact match', unit: '%', better: 'higher' },
+    simpleToolInclusion: { name: 'Simple tool inclusion', unit: '%', better: 'higher' },
+    hardToolInclusion: { name: 'Hard tool inclusion', unit: '%', better: 'higher' },
+    simpleTrajectorySatisfaction: { name: 'Simple trajectory satisfaction', unit: 'score', better: 'higher', note: 'Mean trajectory satisfaction score on simple queries.' },
+    hardTrajectorySatisfaction: { name: 'Hard trajectory satisfaction', unit: 'score', better: 'higher', note: 'Mean trajectory satisfaction score on hard queries.' },
+    sequentialExactMatch: { name: 'Sequential exact match', unit: '%', better: 'higher' },
+    sequentialAccuracy: { name: 'Sequential accuracy', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return values.map(([model, simpleAcc, hardAcc, simpleEm, hardEm, simpleInclusion, hardInclusion, simpleTrajSatisfy, hardTrajSatisfy, sequentialEm, sequentialAcc]) => ({
       model,

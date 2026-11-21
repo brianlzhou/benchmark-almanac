@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: "https://tracelite.ai/leaderboard.html",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { taskPass: { name: 'Task pass rate', unit: '%', better: 'higher' }, harnessMicro: { name: 'Harness micro score', unit: '%', better: 'higher' }, clean: { name: 'Clean runs', unit: '%', better: 'higher' }, link: { name: 'Link score', unit: '%', better: 'higher' }, abs: { name: 'Absolute score', unit: '%', better: 'higher' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
   chart:{title:'Cost and overall performance',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Overall score',unit:'%',better:'higher'},note:'Costs exclude judge calls and discarded runs.'},
   async fetch() {
     const data=await fetchJson<any[]>(FEED);

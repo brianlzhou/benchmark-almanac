@@ -14,6 +14,11 @@ const board: Leaderboard = {
   avCSR: { name: 'Audio-visual', group: 'Modality' },
 }, url: "https://nju-link.github.io/OmniCap-IF/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+  overallISR: { name: 'Overall instruction following score', unit: '%', better: 'higher' },
+  formatISR: { name: 'Format instruction following score', unit: '%', better: 'higher' },
+  contentISR: { name: 'Content instruction following score', unit: '%', better: 'higher' },
+ },
 
  async fetch() {
 

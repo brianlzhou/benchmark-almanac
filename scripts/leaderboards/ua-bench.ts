@@ -19,6 +19,11 @@ const board: Leaderboard = {
   benchmark: 'ua-bench', feed, url: 'https://sunzhe12.github.io/ua-bench/', static: 'paper',
   terms: 'The paper is available under the license linked at https://arxiv.org/abs/2610.16942.',
   parts: { detectionPulse: 'Detection pulse', communicationWaveform: 'Communication waveform', shipNoise: 'Ship-radiated noise' },
+  stats: {
+    l1Accuracy: { name: 'Level 1 accuracy', unit: '%', better: 'higher' }, l2Accuracy: { name: 'Level 2 accuracy', unit: '%', better: 'higher' },
+    macroF1: { name: 'Macro F1', unit: 'score', better: 'higher', note: 'Macro-averaged F1 across the hierarchical classes.' },
+    l2GivenL1: { name: 'Level 2 accuracy given level 1', unit: '%', better: 'higher' }, l3GivenL2: { name: 'Level 3 accuracy given level 2', unit: '%', better: 'higher' },
+  },
   aliases: { 'Voxtral-Small-24B-2507': 'voxtral-small' },
   async fetch() {
     const text = await pdfText(feed);

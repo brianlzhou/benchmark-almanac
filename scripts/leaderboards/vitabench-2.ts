@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (thinking and non-thinking tables, all memory settings Avg@4)`,
   terms: 'Static GitHub Pages project page with no robots.txt and no terms; the scores are cited to the VitaBench authors.',
+  stats: { fullContextRank: {name: 'Full context rank', unit: 'count'}, passAt4: {name: 'Full context pass@4', unit: '%', better: 'higher'}, pass4: {name: 'Full context pass^4', unit: '%', better: 'higher'} },
   aliases: {
     'Claude-4.5-Sonnet': 'claude-sonnet-4-5',
   },

@@ -39,6 +39,7 @@ function interaction(o: Interaction | undefined): Record<string, number> | undef
 
 const board: Leaderboard = {
   benchmark: 'tau-voice',
+  stats: { interrupts: { name: 'Interruptions', unit: '%', better: 'lower' }, latency: { name: 'Response latency', unit: 'seconds', better: 'lower' }, responsiveness: { name: 'Responsiveness', unit: '%', better: 'higher' }, selectivity: { name: 'Selectivity', unit: '%', better: 'higher' } },
   harnesses: 'system',
   reference: ['Cascaded baseline'],
   url: 'https://taubench.com/leaderboard?benchmark=voice',

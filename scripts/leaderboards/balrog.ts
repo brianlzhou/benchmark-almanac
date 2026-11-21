@@ -25,6 +25,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (default LLM board, % Progress)`,
   terms: 'Static public page; the site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.',
+  stats: { progressSpread:{name:'Progress spread',unit:'score'}, BabyAISpread:{name:'BabyAI spread',unit:'score'}, CrafterSpread:{name:'Crafter spread',unit:'score'}, TextWorldSpread:{name:'TextWorld spread',unit:'score'}, BabaIsAISpread:{name:'BabaIsAI spread',unit:'score'}, MiniHackSpread:{name:'MiniHack spread',unit:'score'}, NetHackSpread:{name:'NetHack spread',unit:'score'} },
   aliases: {
     'Gemini-1.5-Pro-002': 'gemini-1-5-pro-sept-2024',
     'Gemini-1.5-Flash-002': 'gemini-1-5-flash-sep-2024',

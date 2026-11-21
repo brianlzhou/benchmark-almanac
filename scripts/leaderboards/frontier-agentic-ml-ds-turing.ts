@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The publisher gives no reuse license on the benchmark page. https://labs.turing.com/benchmarks/frontier-agentic-ml-ds The robots URL serves the app. The reported interval is one pooled standard error. Luna cost uses an internal rate.",
   reference: ['Terminus-2'],
+  stats: { latency: { name: 'Runtime', unit: 'seconds', better: 'lower' }, steps: { name: 'Mean steps', unit: 'count' }, toolCalls: { name: 'Mean tool calls', unit: 'count' } },
   async fetch() {
     const page = await turingPage(board.url, 'frontier-agentic-ml-ds');
     const table = page.match(/kind:"results",rows:(\[.*?\]),note:/)?.[1];

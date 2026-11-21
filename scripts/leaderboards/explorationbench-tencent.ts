@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: SITE,
   feed: `${FEED} (EB.leaderboard.code, M4)`,
   terms: 'Generated data script on explorationbench.com; robots.txt allows general agents (content signals: search yes, AI training no, use reference) and the site publishes no terms of use.',
+  stats: { m0: { name: 'Best@3 accuracy before exploration', unit: '%', better: 'higher' }, mean3: { name: 'Mean@3 accuracy', unit: '%', better: 'higher' }, worst3: { name: 'Worst trajectory accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     type Row = { m: string; r?: string; m4?: number; m0?: number; mean?: number; worst?: number };
     const lb = jsonAfter<Record<string, { rows: Row[] }>>(await fetchText(FEED), 'EB.leaderboard =');

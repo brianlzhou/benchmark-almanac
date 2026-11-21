@@ -8,6 +8,7 @@ const feed = 'https://euroeval.com/leaderboards/faroese';
 export default {
   benchmark:'foqa',url:feed,feed,host:'EuroEval',
   terms:'EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval',
+  stats:{exactMatch:{name:'Exact match',unit:'%',better:'higher'},scored:{name:'Scored examples',unit:'count'}},
   aliases: {
   "google/gemma-3-27b-pt": "gemma-3-27b-pt",
   "Qwen/Qwen3-Next-80B-A3B-Instruct": "qwen3-next-80b-a3b-instruct",

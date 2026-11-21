@@ -18,6 +18,13 @@ const board: Leaderboard = {
   url: "https://github.com/GAIR-NLP/AgencyBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    averageScore: { name: 'Average score', unit: '%', better: 'higher' },
+    attempts: { name: 'Attempts per scenario', unit: 'count' },
+    totalTokensPerScenario: { name: 'Tokens per scenario', unit: 'tokens', better: 'lower' },
+    secondsPerScenario: { name: 'Time per scenario', unit: 'seconds', better: 'lower' },
+    turnsPerScenario: { name: 'Turns per scenario', unit: 'count' },
+  },
   aliases: { 'Claude-4.5-Opus': 'claude-opus-4-5', 'Claude-4.5-Sonnet': 'claude-sonnet-4-5' },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts=await paperTables(FEED),t=ts[4];

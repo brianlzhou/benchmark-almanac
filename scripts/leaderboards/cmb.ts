@@ -6,6 +6,12 @@ import { paperHtml, numberCell } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2308.08833';
 const parts: Record<string, BoardPart> = {};
+for (const aspect of ['Fluency', 'Relevance', 'Completeness', 'Proficiency', 'Average']) {
+  parts['clinical' + aspect] = { name: 'CMB-Clin: ' + aspect, unit: 'score', group: 'CMB-Clin', note: 'GPT-4 rating on a five-point scale.' };
+}
+for (const name of ['Physician', 'Nurse', 'Pharmacist', 'Technician', 'Disciplines', 'Graduate Entrance Exam']) {
+  parts[name.replaceAll(' ', '')] = { name, unit: '%', group: 'CMB-Exam' };
+}
 const clinicalNames: Record<string,string> = {
   'Yi-34B-Chat':'Yi-34B','Qwen-72B-Chat':'Qwen-72B','Baichuan2-13B-Chat':'Baichuan2-13B','Internlm-Chat-20B':'Internlm-20B',
   'Deepseek-llm-67B-Chat':'Deepseekllm-67B','Mixtral-8x7B-32kseqlen':'Mixtral-8x7B','DISC-MedLLM-13B':'DISC-MedLLM',

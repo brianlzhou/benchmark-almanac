@@ -19,6 +19,20 @@ const board: Leaderboard = {
   headline: 'The headline is F1 for posthoc detection, which the organizers identify as the main task.',
   benchmark: 'clef-simpletext-2025-identify-avoid-hallucination',
   url: feed, feed, terms: 'CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
+  stats: {
+    posthocCount: { name: 'Posthoc examples', unit: 'count' },
+    posthocAccuracy: { name: 'Posthoc accuracy', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    posthocPrecision: { name: 'Posthoc precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    posthocRecall: { name: 'Posthoc recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    posthocAUROC: { name: 'Posthoc area under ROC curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    posthocAUPRC: { name: 'Posthoc area under precision-recall curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sourcedCount: { name: 'Sourced examples', unit: 'count' },
+    sourcedAccuracy: { name: 'Sourced accuracy', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sourcedPrecision: { name: 'Sourced precision', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sourcedRecall: { name: 'Sourced recall', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sourcedAUROC: { name: 'Sourced area under ROC curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+    sourcedAUPRC: { name: 'Sourced area under precision-recall curve', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' },
+  },
   parts: { posthoc: 'Posthoc detection', sourced: 'Detection with sources', ...categories },
   async fetch() {
     const paper = await pdfText(feed);

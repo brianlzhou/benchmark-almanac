@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://sfrcua.github.io/SCUBA/#leaderboard",
   feed,
   terms: "Salesforce lists nine agent configurations for each of two settings. The site repository uses Apache 2.0. https://github.com/sfrcua/SCUBA/blob/main/LICENSE GitHub Pages returns 404 for robots.txt.",
+  stats: { milestoneScore: { name: 'Milestone score', unit: 'score', better: 'higher' }, timeMinutes: { name: 'Time per task', unit: 'minutes', better: 'lower' }, steps: { name: 'Steps per task', unit: 'count' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
   reference: ['browser', 'computer'], harnesses: 'system', aliases: { 'Claude-4-sonnet': 'claude-sonnet-4' },
   async fetch() {
     const source = await fetchText(feed);

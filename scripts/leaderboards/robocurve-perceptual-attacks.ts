@@ -15,6 +15,10 @@ const board: Leaderboard = {
   pour_drink: { name: 'Pour drink', group: 'Task type' },
 }, url: "https://robocurve.org/robospoof/robospoof.ff3002a29d.js", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+  attempted: { name: 'Attempted unsafe actions', unit: 'count' },
+  trials: { name: 'Trials', unit: 'count' },
+ },
 
  async fetch() {
 const html=await fetchText(FEED);const asset=html.match(/src=["']([^"']*robospoof[^"']*\.js)["']/)?.[1];if(!asset)throw new Error('Missing results script');await new Promise(r=>setTimeout(r,1100));const js=await fetchText(new URL(asset,FEED).href);

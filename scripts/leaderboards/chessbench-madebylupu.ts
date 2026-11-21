@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://chessbench.org/",
   feed,
   terms: "The terms allow sharing links with attribution to ChessBench and MadeByLupu. They give no explicit bulk republication license. https://chessbench.org/terms Robots.txt allows the public data path.",
+  stats: { deviation: { name: 'Rating deviation', unit: 'rating', better: 'lower' }, volatility: { name: 'Rating volatility', unit: 'rating', better: 'lower' }, wins: { name: 'Wins', unit: 'count' }, draws: { name: 'Draws', unit: 'count' }, losses: { name: 'Losses', unit: 'count' }, runs: { name: 'Runs', unit: 'count' }, legal: { name: 'Legal moves', unit: 'count', better: 'higher' }, illegal: { name: 'Illegal moves', unit: 'count', better: 'lower' }, illegalRate: { name: 'Illegal move rate', unit: '%', better: 'lower' }, pricedRuns: { name: 'Priced runs', unit: 'count' }, unknownRuns: { name: 'Unknown runs', unit: 'count' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, cost: { name: 'Average cost', unit: 'usd', better: 'lower' }, avgTime: { name: 'Average move time', unit: 'seconds', better: 'lower' }, latency: { name: 'Average move latency', unit: 'seconds', better: 'lower' }, thinkingBudget: { name: 'Thinking budget', unit: 'tokens' } },
   async fetch() {
     type Setup = Record<string, unknown> & { name: string; rating: number; effort: string; games: number;
       avgCost: number | null; avgOutputTokens: number; avgMoveTime: number; thinkingBudget: number };

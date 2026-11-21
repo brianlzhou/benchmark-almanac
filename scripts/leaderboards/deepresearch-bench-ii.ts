@@ -17,6 +17,10 @@ const board: Leaderboard = {
     analysis: { name: 'Analysis', group: 'Dimension' },
     presentation: { name: 'Presentation', group: 'Dimension' },
   },
+  stats: {
+    blocked_rate: { name: 'Blocked rate', unit: '%', better: 'lower' },
+    valid_tasks: { name: 'Valid tasks', unit: 'count' },
+  },
   url: 'https://huggingface.co/spaces/muset-ai/DeepResearch-Bench-Leaderboard',
   feed: `${FEED} (current GPT-5.5 total_score)`,
   terms: 'CSV in the muset-ai/DeepResearch-Bench-Leaderboard Hugging Face Space, licensed Apache-2.0.',

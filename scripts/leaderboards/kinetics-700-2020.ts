@@ -14,6 +14,7 @@ const board:Leaderboard={
   benchmark:'kinetics-700-2020',host:'MTEB',url:'https://leaderboard.mteb.org/tasks/Kinetics700V',feed:base+'Kinetics700V/scores',
   terms:'CC0 1.0: https://huggingface.co/datasets/mteb/results',
   headline:'MTEB measures accuracy on its sample of the official test split, capped at about 16 clips per action class.',
+  stats: {activeParamsB:{name:'Active parameters',unit:'billions'},embeddingDim:{name:'Embedding dimension',unit:'count'},maxTokens:{name:'Maximum tokens',unit:'tokens'},memoryUsageMb:{name:'Memory usage',unit:'count',note:'Memory usage in megabytes.'}},
   async fetch(){
     const rows:LeaderboardRow[]=[];
     for(const [task,setting,minimum] of tasks){

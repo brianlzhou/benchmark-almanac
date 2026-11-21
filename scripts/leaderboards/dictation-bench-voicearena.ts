@@ -5,6 +5,7 @@ import { fetchText, parseCsv } from '../lib/util.ts';
 const feed = "https://voicearena.com/assets/DictationBench-KRKI1jcW.js";
 
 const board: Leaderboard = {
+  stats: { amend: { name: 'Amendments', unit: 'score', better: 'lower' }, cleanDrafts: { name: 'Clean drafts', unit: 'count', better: 'higher' }, clips: { name: 'Clips', unit: 'count' } },
   benchmark: "dictation-bench-voicearena",
   url: "https://voicearena.com/dictation-bench",
   feed,

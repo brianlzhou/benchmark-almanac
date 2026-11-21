@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://teaching-clip-to-count.github.io/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { meanDeviation: { name: 'Mean deviation', unit: 'score', better: 'lower', note: 'Mean absolute deviation between predicted and true object counts.' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const all = tables(await fetchText(FEED));
     const t = all.find(t => t.some(r => r[0]?.text.startsWith('Mean deviation')));

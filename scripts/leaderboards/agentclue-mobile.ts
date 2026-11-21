@@ -11,8 +11,9 @@ export default workbookBoard({
   model: "底层模型",
   score: "总分",
   minimum: 6,
+  stats: { stepsPerTask: { name: 'Average steps per task', unit: 'count', better: 'lower' } },
   parts: ["简单任务得分", "中等任务得分", "困难任务得分", "端到端完成率", "复杂意图拆解与动态规划", "多模态GUI感知与理解", "跨应用全链路执行"],
-  metrics: {"steps": "平均每题步数"},
+  metrics: {"stepsPerTask": "平均每题步数"},
   harness: "产品",
   percentages: ["端到端完成率"],
 });

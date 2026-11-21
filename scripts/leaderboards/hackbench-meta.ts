@@ -12,6 +12,7 @@ const board: Leaderboard = {
  url: "https://arxiv.org/html/2610.38882",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const t=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text))).find(t=>t[0]?.join('|').replace(/\s/g,'')==='Model|Precision|Recall|F1');

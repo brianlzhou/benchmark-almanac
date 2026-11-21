@@ -11,6 +11,7 @@ const columns: Record<string, number> = {"SealQA": 2, "MultihopRAG": 3, "Musique
 const board: Leaderboard = {
   benchmark: "noisybench", url: feed, feed, static: 'paper',
   terms: "The authors publish this table under the terms linked at https://arxiv.org/abs/2601.07226." ,
+  stats: { relativeChange: { name: 'Relative change', unit: '%', note: 'Percentage change in the harmonic mean compared with the same model without distractors.' } },
   parts: {"SealQA": "SealQA", "MultihopRAG": "MultihopRAG", "Musique": "Musique", "BBEH-Mini": "BBEH-Mini", "AIME25": "AIME25", "GPQA": "GPQA", "SA": "SA", "SI": "SI", "BBQ": "BBQ", "TR": "TR", "TA": "TA"},
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

@@ -21,6 +21,7 @@ type System = Record<typeof numeric[number], number> & { key: string, table: str
   cost: {usd_per_1000: number}, robustness: Record<string, {acc: number | null}> };
 const board: Leaderboard = {
   benchmark: 'audiojevbench', url, feed,
+  stats: { Capability:{name:'Capability score',unit:'%',better:'higher'}, Intelligence:{name:'Intelligence score',unit:'%',better:'higher'}, I_public:{name:'Public intelligence',unit:'score',better:'higher'}, I_sealed:{name:'Sealed intelligence',unit:'score',better:'higher'}, Calibration:{name:'Calibration score',unit:'%',better:'higher'}, Speed:{name:'Speed score',unit:'%',better:'higher'}, Cost:{name:'Cost score',unit:'%',better:'higher'}, gap:{name:'Robustness gap',unit:'score',better:'lower'}, p50_s:{name:'Median latency',unit:'seconds',better:'lower'}, p95_s:{name:'95th percentile latency',unit:'seconds',better:'lower'}, p50_adj_s:{name:'Adjusted median latency',unit:'seconds',better:'lower'}, p95_adj_s:{name:'Adjusted 95th percentile latency',unit:'seconds',better:'lower'}, n_latency:{name:'Latency samples',unit:'count'}, n_items_scored:{name:'Items scored',unit:'count'} },
   terms: "Benchmark Heaven allows this path in robots.txt. Its code uses MIT and the page gives no separate audio score license. The raw file host publishes no robots.txt.",
   parts: Object.fromEntries(Object.entries(slices).map(([k, name]) => [k, { name, unit: '%' }])),
   async fetch() {

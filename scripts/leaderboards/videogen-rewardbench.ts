@@ -15,6 +15,7 @@ function round2(value: number) {
   return Number(value.toFixed(2));
 }
 const board: Leaderboard = {
+ stats: { with_tie: { name: 'Overall preference with ties', unit: '%', better: 'higher' }, without_tie: { name: 'Overall preference without ties', unit: '%', better: 'higher' } },
   benchmark: 'videogen-rewardbench', url, feed,
   terms: "The Hugging Face Space declares the MIT License. Hugging Face allows these paths in robots.txt.",
   parts: Object.fromEntries(Object.entries(labels).flatMap(([key,name]) =>

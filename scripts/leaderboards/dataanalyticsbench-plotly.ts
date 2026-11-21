@@ -29,6 +29,7 @@ const board: Leaderboard = {
   feed: `${PAGE} (server-rendered results table)`,
   terms: 'Plotly allows public content on plotly.com to be used for training and AI search. No separate score-reuse license is stated for this table.',
   costPer: 'run',
+  stats: { accuracyPercent: { name: 'Accuracy', unit: '%', better: 'higher' }, costPerRun: { name: 'Cost per run', unit: 'usd', better: 'lower' }, tokensExam: { name: 'Tokens per exam', unit: 'tokens', better: 'lower' }, medianSeconds: { name: 'Median seconds per question', unit: 'seconds', better: 'lower' }, meanSeconds: { name: 'Mean seconds per question', unit: 'seconds', better: 'lower' }, totalMinutes: { name: 'Total exam time', unit: 'minutes', better: 'lower' } },
   reference: ['Plotly Studio Embedded'],
   aliases: {
     'Hy4 flash': 'tencent-hy4-preview',

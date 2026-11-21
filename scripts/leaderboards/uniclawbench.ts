@@ -26,6 +26,10 @@ const board: Leaderboard = {
   aliases: {
     'qwen3.5-plus': 'qwen-3-5-plus-hosted-397b-a17b',
   },
+  stats: {
+    avgScore: { name: 'Average attempt score', unit: '%', better: 'higher' },
+    latency: { name: 'Average runtime', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const { rows } = await fetchJson<{ rows: Attempt[] }>(FEED);
     const groups = new Map<string, { n: number; pass: number; tok: number; toks: number; score: number; ms: number; mss: number }>();

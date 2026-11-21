@@ -15,6 +15,7 @@ export default {
   terms: 'The authors publish their aggregate tables on arXiv. https://arxiv.org/abs/2610.01780',
   headline: 'The headline is persona reconstruction F1 across ten participants, expressed as a percentage.',
   parts: { personaF1: 'Persona reconstruction F1', profileF1: 'Profile reconstruction F1' },
+  stats: { precision: { name: 'Persona precision', unit: '%', better: 'higher' }, recall: { name: 'Persona recall', unit: '%', better: 'higher' }, runAgreement: { name: 'Run agreement', unit: '%', better: 'higher' }, profilePrecision: { name: 'Profile precision', unit: '%', better: 'higher' }, profileRecall: { name: 'Profile recall', unit: '%', better: 'higher' }, personaCallsPerRun: { name: 'Persona calls per run', unit: 'count' }, personaTokensPerRun: { name: 'Persona tokens per run', unit: 'tokens' }, personaOutputTokensPerRun: { name: 'Persona output tokens per run', unit: 'tokens' }, profileCallsPerRun: { name: 'Profile calls per run', unit: 'count' }, profileTokensPerRun: { name: 'Profile tokens per run', unit: 'tokens' }, profileOutputTokensPerRun: { name: 'Profile output tokens per run', unit: 'tokens' } },
   async fetch() {
     const tables = paperTables(await paperHtml(url)).map(grid);
     const main = tables.find(t => t[0]?.join('|') === 'System|F1|Precision|Recall|Tokens processed|Run agreement');

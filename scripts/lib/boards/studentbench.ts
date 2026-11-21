@@ -2,7 +2,7 @@
 import type {Leaderboard,LeaderboardRow} from '../../leaderboards/types.ts';import {fetchJson} from '../util.ts';
 const FEED='https://raw.githubusercontent.com/Handshake-AI-Research/studentbench/main/verification/figure_expected.json';
 export function studentBoard(benchmark:string,kind:string,scope='combined'):Leaderboard{
- return {benchmark,url:'https://joinhandshake.com/research/benchmarks/studentbench/',feed:FEED,terms:'Handshake terms restrict bulk collection and republication. The almanac credits Handshake AI and links its published aggregate results.',
+ return {benchmark,url:'https://joinhandshake.com/research/benchmarks/studentbench/',feed:FEED,terms:'Handshake terms restrict bulk collection and republication. The almanac credits Handshake AI and links its published aggregate results.',stats:{participants:{name:'Participants',unit:'count'},medianResponseSeconds:{name:'Median response time',unit:'seconds',better:'lower'}},
  ...(kind==='learning'?{chart:{title:'Learning gain vs. session cost',x:{key:'cost',label:'Mean session cost',unit:'$',better:'lower' as const},y:{key:'score',label:'Learning gain',unit:'percentage points',better:'higher' as const}}}:{}),
  async fetch():Promise<LeaderboardRow[]>{
   const d=await fetchJson<any>(FEED);const data=(input:string)=>{const c=d.checks.find((c:any)=>c.input===input);if(!c)throw new Error('StudentBench aggregate missing '+input);return c.expected;};

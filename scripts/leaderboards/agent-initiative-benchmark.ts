@@ -6,6 +6,14 @@ const URL = 'https://deepnote.com/research/benchmark';
 const board: Leaderboard = {
   benchmark: 'agent-initiative-benchmark', url: URL, feed: URL + ' (50-task leaderboard)',
   terms: 'Deepnote publishes the benchmark documentation under Apache-2.0 and PageMantle under CC BY 4.0. Robots.txt allows the research page. Source: Deepnote.',
+  stats: {
+    perfectTasks: { name: 'Perfect tasks', unit: 'count' },
+    zeroTasks: { name: 'Zero-score tasks', unit: 'count' },
+    helped: { name: 'Helped tasks', unit: 'count' },
+    stayedSilent: { name: 'Stayed-silent tasks', unit: 'count' },
+    secondsPerTask: { name: 'Seconds per task', unit: 'seconds', better: 'lower' },
+    toolCallsPerTask: { name: 'Tool calls per task', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const t = tables(await fetchText(URL)).find(t => t[0]?.some(c => c.text === '10 / 10') && t[0]?.some(c => c.text === 'Cost / task'));
     if (!t) throw new Error('Deepnote full leaderboard missing');

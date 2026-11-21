@@ -9,6 +9,9 @@ const board: Leaderboard = {
  benchmark: "vct-v2-securebio", url: "https://securebio.org/benchmarks/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 aliases:SB_ALIASES,
+ stats: {
+  refusalRate: { name: 'Refusal rate', unit: '%', better: 'lower' },
+ },
  async fetch() {
 
 const charts=(await sbCharts()).filter(c=>/Model performance on VCT-v2$/.test(c.title));if(!charts.length)throw new Error('VCT-v2 chart missing');const rows=new Map<string,LeaderboardRow>();

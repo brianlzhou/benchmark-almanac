@@ -13,6 +13,13 @@ const board: Leaderboard = {
     distractors4to6: { name: '4 to 6 distractors', group: 'Difficulty' },
     distractors7plus: { name: '7 or more distractors', group: 'Difficulty' },
   },
+  stats: {
+    iou075: { name: 'Accuracy at IoU 0.75', unit: '%', better: 'higher' },
+    iou09: { name: 'Accuracy at IoU 0.9', unit: '%', better: 'higher' },
+    delta2to3: { name: 'Accuracy change for 2 to 3 distractors', unit: '%', note: 'Change from overall accuracy at IoU 0.5.' },
+    delta4to6: { name: 'Accuracy change for 4 to 6 distractors', unit: '%', note: 'Change from overall accuracy at IoU 0.5.' },
+    delta7plus: { name: 'Accuracy change for 7 or more distractors', unit: '%', note: 'Change from overall accuracy at IoU 0.5.' },
+  },
   url: "https://ref-adv.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at ref-adv.github.io; retain source attribution and follow the upstream terms.",

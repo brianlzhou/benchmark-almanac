@@ -6,7 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://sierra-research.github.io/hyper-tau-bench/hyper-submissions/manifest.json";
 const board: Leaderboard = {
- benchmark: "tau-tau-bench", parts: {
+ benchmark: "tau-tau-bench", stats: { buildTimeMinutes: { name: 'Build time', unit: 'minutes', better: 'lower' }, serveCreditRatio: { name: 'Serve credit ratio', unit: 'score', better: 'higher' } }, parts: {
   airline: { name: 'Airline', group: 'Domain' },
   retail: { name: 'Retail', group: 'Domain' },
   telecom: { name: 'Telecom', group: 'Domain' },

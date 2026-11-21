@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://sig-edu.org/sharedtask/2023#phase-2-evaluation",
   feed: "https://sig-edu.org/sharedtask/2023#phase-2-evaluation",
   terms: "The rankings list system runs, including two GPT-4 runs. Cambridge licenses the dialogue data for noncommercial research and education. The results page gives no separate license. https://github.com/anaistack/bea-2023-shared-task The site lists a sitemap in robots.txt.",
+  stats: { P:{name:'Precision',unit:'score',better:'higher'}, R:{name:'Recall',unit:'score',better:'higher'}, F1:{name:'F1',unit:'score',better:'higher'}, updown:{name:'Up-down agreement',unit:'score',better:'higher'}, 'human vs rand':{name:'Human versus random',unit:'score',better:'higher'}, 'human vs machine':{name:'Human versus machine',unit:'score',better:'higher'}, 'final (avg)':{name:'Final average',unit:'score',better:'higher'}, 'final (best)':{name:'Final best',unit:'score',better:'higher'} },
   // The submissions closed May 5, before the June GPT-4 release.
   aliases: {'GPT-4':'gpt-4-mar-2023'},
   async fetch() {

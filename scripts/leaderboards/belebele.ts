@@ -8,6 +8,10 @@ const feed = 'https://arxiv.org/html/2308.16884';
 const board: Leaderboard = {
   benchmark: 'belebele', static: 'paper', url: feed + '#S3.T2', feed,
   terms: 'arXiv permits HTML retrieval with a 15-second crawl delay. The table credits Bandarkar and colleagues.',
+  stats: {
+    above50: { name: 'Languages at least 50% accuracy', unit: '%', better: 'higher', note: 'Proportion of the 122 languages for which the model performs at least 50% accuracy.' },
+    above70: { name: 'Languages at least 70% accuracy', unit: '%', better: 'higher', note: 'Proportion of the 122 languages for which the model performs at least 70% accuracy.' },
+  },
   aliases: { 'Llama 1 7B': 'llama-7b', 'Llama 1 13B': 'llama-13b', 'Llama 2 base 70B': 'llama-2-70b' },
   async fetch() {
     const html = await paperHtml(feed);

@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2412.04141';
 const board: Leaderboard = {
   benchmark: 'relytoolbench', static: 'paper', url: 'https://arxiv.org/abs/2412.04141', feed, terms: PAPER_TERMS,
   aliases: { 'Llama3.1 (8B)': 'llama-3-1-8b', 'Qwen2.5 (7B)': 'qwen2-5-7b' },
+  stats: { Overall: { name: 'Overall reliable pass rate', unit: '%', better: 'higher' }, ...Object.fromEntries(['I1 Instruction','I2 Category','I3 Instruction','Overall'].flatMap(k => [[k+' Tool Hallu',{name:k+' tool hallucination rate',unit:'%',better:'lower'}],[k+' Tool Num',{name:k+' tool call count',unit:'count'}],[k+' Utility',{name:k+' utility',unit:'score',better:'higher'}],[k+' PR',{name:k+' pass rate',unit:'%',better:'higher'}]])) },
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

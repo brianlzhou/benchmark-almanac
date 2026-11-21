@@ -10,6 +10,9 @@ const board: Leaderboard = {
   url: "https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    averageActions: { name: 'Action count', unit: 'count', note: 'Average number of browser actions used for each question.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const ts=await paperTables(FEED),t=ts[2];if(!t?.[0]?.some(c=>c.text==='Overall'))throw new Error('WebWalkerQA table changed');
     const rows:LeaderboardRow[]=[];let model='';

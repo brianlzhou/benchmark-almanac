@@ -7,6 +7,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/html/2611.13246';
 const board: Leaderboard = {
+  stats: { runCI: { name: 'Run confidence interval', unit: 'score' }, fullCreditRunsPercent: { name: 'Full-credit runs', unit: '%', better: 'higher' }, tasksAnyFull: { name: 'Tasks with any full-credit run', unit: 'count' }, tasksAllFull: { name: 'Tasks with all full-credit runs', unit: 'count' }, steps: { name: 'Steps', unit: 'count' }, medianContainerMinutes: { name: 'Median container time', unit: 'minutes', better: 'lower' }, tasks: { name: 'Tasks', unit: 'count' } },
   benchmark: 'expertcrowd-swe', url: feed, feed, reference: ['HUD'],
   terms: 'Results are credited to Toptal ExpertCrowd under the paper terms. https://arxiv.org/abs/2611.13246',
   async fetch() {

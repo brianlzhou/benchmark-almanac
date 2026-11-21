@@ -23,6 +23,7 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'mu-bench',
+  stats: { wer: { name: 'Word error rate', unit: '%', better: 'lower' }, significantWer: { name: 'Significant word error rate', unit: '%', better: 'lower' }, completeP50Seconds: { name: 'Completion latency p50', unit: 'seconds', better: 'lower' }, completeP95Seconds: { name: 'Completion latency p95', unit: 'seconds', better: 'lower' }, roundTripP50Seconds: { name: 'Round-trip latency p50', unit: 'seconds', better: 'lower' }, roundTripP95Seconds: { name: 'Round-trip latency p95', unit: 'seconds', better: 'lower' }, latencyP95: { name: 'Latency p95', unit: 'seconds', better: 'lower' } },
   parts: {
     'en-US': { name: 'en-US', group: 'Language', note: 'The source identifies this locale by its language tag.' },
     'es-MX': { name: 'es-MX', group: 'Language', note: 'The source identifies this locale by its language tag.' },

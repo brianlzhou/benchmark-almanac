@@ -8,6 +8,13 @@ const feed = 'https://arxiv.org/html/2505.15216';
 const board: Leaderboard = {
   benchmark: 'bountybench', static: 'paper', url: feed, feed, harnesses: 'system',
   terms: 'Stanford publishes the aggregate evaluation results on arXiv. https://arxiv.org/abs/2505.15216',
+  stats: {
+    detectBounty: { name: 'Detect bounty value', unit: 'usd', better: 'higher', note: 'Combined dollar value of successful vulnerability detections.' },
+    detectTokenCost: { name: 'Detect token cost', unit: 'usd', better: 'lower' },
+    exploitTokenCost: { name: 'Exploit token cost', unit: 'usd', better: 'lower' },
+    patchBounty: { name: 'Patch bounty value', unit: 'usd', better: 'higher', note: 'Combined dollar value of successful vulnerability patches.' },
+    patchTokenCost: { name: 'Patch token cost', unit: 'usd', better: 'lower' },
+  },
   headline: 'The paper reports no overall score, so this is the plain mean of success rates for Detect, Exploit and Patch.',
   parts: { detect: 'Detect', exploit: 'Exploit', patch: 'Patch' },
   aliases: { 'Gemini 2.5 Pro Preview (03-25)': 'gemini-2-5-pro-mar-2025', 'DeepSeek-R1 (snapshot unspecified)': 'deepseek-r1' },

@@ -9,6 +9,7 @@ const board: Leaderboard = {
    predictiveAccuracy: { name: 'Predictive accuracy', group: 'Dimension' },
    scientificInsights: { name: 'Scientific insights', group: 'Dimension' },
  },
+ stats: { constraintFailures: { name: 'Constraint failures', unit: 'count', better: 'lower' } },
  url: "https://eurekabench.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'avps-360', static: 'paper', url, feed: url,
   terms: 'Author results published under the license listed at https://arxiv.org/abs/2610.40480.',
   parts: Object.fromEntries(keys.slice(1).map(name => [name,{name}])),
+  stats: { AP: { name: 'Average precision', unit: 'score', better: 'higher' } },
   async fetch() {
     const table = paperTables(await paperHtml(url)).map(grid).find(t => t[0]?.join('|') === ['Method','Audio Enc',...keys].join('|'));
     if (!table) throw new Error('Table 2 result columns missing');

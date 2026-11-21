@@ -8,6 +8,10 @@ const feed = 'https://arxiv.org/html/2412.09582';
 const board: Leaderboard = {
   benchmark: 'neptune', static: 'paper', url: 'https://arxiv.org/abs/2412.09582', feed, terms: PAPER_TERMS,
   aliases: { 'GPT-4o': 'gpt-4o-may-2024', 'Gemini-1.5-pro-002': 'gemini-1-5-pro-sept-2024', 'MiniCPM-v': 'minicpm-v-2-6' },
+  stats: {
+    gem: { name: 'Gemma Equivalence Metric score', unit: '%', better: 'higher', note: 'Gemma Equivalence Metric for open-ended answers on Neptune.' },
+    mmhGem: { name: 'Multimodal human-annotated Gemma metric score', unit: '%', better: 'higher', note: 'Gemma Equivalence Metric on the multimodal human-annotated subset.' },
+  },
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

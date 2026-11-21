@@ -31,6 +31,7 @@ const board: Leaderboard = {
   "feed": "https://hmwang2002.github.io/release/internsvg/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { textTokens: { name: 'Text prompt tokens', unit: 'tokens' }, ssim: { name: 'SSIM', unit: 'score', better: 'higher' }, lpips: { name: 'LPIPS', unit: 'score', better: 'lower' }, psnr: { name: 'PSNR', unit: 'score', better: 'higher' }, textFid: { name: 'Text FID', unit: 'score', better: 'lower' }, textFidC: { name: 'Conditional text Fréchet Inception Distance', unit: 'score', better: 'lower' }, textClipT2I: { name: 'Text Contrastive Language Image Pretraining text to image', unit: 'score', better: 'higher' }, textClipI2I: { name: 'Text Contrastive Language Image Pretraining image to image', unit: 'score', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const data = tables(source).map(t => t.map(r => r.map(c => c.text)));

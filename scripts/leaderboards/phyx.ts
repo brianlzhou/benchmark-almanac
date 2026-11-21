@@ -11,6 +11,7 @@ const identity = (name: string) => /^(?:GPT[ -]?4o(?:[ -]?mini)?|GPT[ -]?4(?:[ -
 const board: Leaderboard = {
   benchmark: "phyx",
   parts: {
+  
     mechanics: { name: 'Mechanics', group: 'Domain' },
     electromagnetism: { name: 'Electromagnetism', group: 'Domain' },
     thermodynamics: { name: 'Thermodynamics', group: 'Domain' },
@@ -22,6 +23,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at killthefullmoon.github.io; retain source attribution and follow the upstream terms.",
   aliases: {"GPT-o4-mini": "o4-mini", "GPT-o3-mini": "o3-mini", "Kimi-VL-A3B-Instruct-2.8B": "kimi-vl-a3b-instruct"},
+  stats: { fullText: { name: 'Full text score', unit: 'score', better: 'higher' }, textMinimal: { name: 'Minimal text score', unit: 'score', better: 'higher' }, mc: { name: 'Multiple-choice score', unit: '%', better: 'higher' }, mc_fullText: { name: 'Multiple-choice full text score', unit: '%', better: 'higher' }, mc_textMinimal: { name: 'Multiple-choice minimal text score', unit: '%', better: 'higher' } },
   
   async fetch() {
     type Entry = { info: { name: string; type: string; size?: string; link?: string; date?: string }; pro: Record<string, string>; validation: Record<string, string>; test: Record<string, string> };

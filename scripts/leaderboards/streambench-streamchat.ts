@@ -7,6 +7,18 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2501.13468';
 const board: Leaderboard = {
   benchmark: 'streambench-streamchat', static: 'paper', url: 'https://arxiv.org/abs/2501.13468', feed, terms: PAPER_TERMS,
+  stats: {
+    'OS score': { name: 'Object search score', unit: 'score', better: 'higher' },
+    'LM score': { name: 'Long-term memory search score', unit: 'score', better: 'higher' },
+    'SM score': { name: 'Short-term memory search score', unit: 'score', better: 'higher' },
+    'CI score': { name: 'Conversational interaction score', unit: 'score', better: 'higher' },
+    'KG score': { name: 'Knowledge-based question answering score', unit: 'score', better: 'higher' },
+    'SF score': { name: 'Simple factual score', unit: 'score', better: 'higher' },
+    quality: { name: 'Semantic correctness score', unit: 'score', better: 'higher' },
+    coherence: { name: 'Coherence fluctuation', unit: 'score', better: 'lower' },
+    fps: { name: 'Frames per second', unit: 'count', better: 'higher' },
+    latency: { name: 'Request processing delay', unit: 'seconds', better: 'lower' },
+  },
   aliases: { LongVA:'longva-7b', 'InternLM-XCP2.5':'internlm-xcomposer2-5-7b', 'MiniCMP-v2.6':'minicpm-v-2-6', 'Video-LLaVA':'video-llava-7b' },
   async fetch() {
     const html = await paperHtml(feed);

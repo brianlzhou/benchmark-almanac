@@ -7,6 +7,7 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = "https://arxiv.org/html/2511.02872";
 
 export default {
+  stats: { pass1: { name: 'pass@1', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' }, pass2: { name: 'pass@2', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' }, pass4: { name: 'pass@4', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' }, pass8: { name: 'pass@8', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' }, pass16: { name: 'pass@16', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' }, pass32: { name: 'pass@32', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' }, pass64: { name: 'pass@64', unit: 'score', better: 'higher', note:'Stored from 0 to 1.' } },
   benchmark: "fate-h", static: 'paper', url: "https://arxiv.org/abs/2511.02872", feed,
   terms: "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://creativecommons.org/licenses/by/4.0/.",
   async fetch() {

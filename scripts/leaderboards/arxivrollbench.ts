@@ -12,6 +12,12 @@ const board: Leaderboard = {
   benchmark: 'arxivrollbench', url: 'https://arxivroll.moreoverai.com', feed,
   aliases: { 'deepseek/deepseek-chat-v3.1': 'deepseek-v3-1' },
   terms: 'The makers publish their leaderboard under GitHub’s terms at https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
+  stats: {
+    coverage: { name: 'Answer coverage', unit: '%', better: 'higher' },
+    rawAccuracy: { name: 'Raw accuracy', unit: '%', better: 'higher' },
+    validAnswers: { name: 'Valid answers', unit: 'count' },
+    totalItems: { name: 'Total items', unit: 'count' },
+  },
   async fetch() {
     const results = await fetchJson<Record<string, { __summary: Summary }>>(feed);
     const rows: LeaderboardRow[] = [];

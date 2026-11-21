@@ -15,6 +15,7 @@ const groups = [
 const board: Leaderboard = {
   benchmark: 'lmentry', static: 'paper', feed, url: 'https://aclanthology.org/2023.findings-acl.666/',
   terms: 'The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/',
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, robustness: { name: 'Robustness', unit: '%', better: 'higher', note: 'Average robustness across the LMentry tasks.' } },
   aliases: { 'GPT-3 0.35B': 'gpt-3-medium', 'GPT-3 1.3B': 'gpt-3-xl-babbage',
     'GPT-3 6.7B': 'gpt-3-6-7b', 'GPT-3 175B': 'gpt-3-175b-davinci', 'InstructGPT 0.35B': 'instructgpt-350m',
     'InstructGPT 6.7B': 'instructgpt-6b', TextDavinci002: 'davinci-002' },

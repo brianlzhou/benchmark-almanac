@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://pku-liang.github.io/hwe-bench/?version=v1.0",
   feed,
   terms: "The host returns HTML for robots.txt. The authors publish HWE-Bench under Apache 2.0.",
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Precision is stored from 0 to 1.' } },
   costPer: 'run',
   async fetch() {
     const { benchmark, models } = await fetchJson<{ benchmark: { total: number; repos: { id: string; name: string; cases: number }[] };

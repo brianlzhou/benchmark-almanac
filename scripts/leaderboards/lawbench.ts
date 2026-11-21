@@ -10,6 +10,7 @@ const board:Leaderboard={
   benchmark:'lawbench',url:'https://github.com/open-compass/LawBench',feed:root+'zero_shot/results.csv',
   terms:'LawBench repository terms: https://github.com/open-compass/LawBench#license',
   parts:Object.fromEntries(taskIds.map(k=>[k,'Task '+k])),
+  stats:Object.fromEntries(taskIds.map(k=>[k+' abstention',{name:'Task '+k+' abstention rate',unit:'%',better:'lower'}])),
   aliases:{'GPT-3.5-turbo-0613':'gpt-3-5-turbo-jun-2023','chatglm2-6b-hf':'chatglm2-6b','internlm-7b-hf':'internlm-7b','mpt-7b-hf':'mpt-7b','qwen-7b-hf':'qwen-7b'},
   async fetch(){
     const rows:LeaderboardRow[]=[];

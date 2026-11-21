@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: 'https://www.firecrawl.dev/benchmarks/company-enrichment',
   feed: FEED,
   terms: 'The repository publishes its code and data terms. Results are credited to Firecrawl with a link to the repository.',
+  stats: { coverage: { name: 'Coverage', unit: '%', better: 'higher' }, accuracyWhenAnswered: { name: 'Accuracy when answered', unit: '%', better: 'higher' } },
   parts: {
     hq: { name: 'Headquarters', group: 'Common fields' },
     employees: { name: 'Employees', group: 'Common fields' },

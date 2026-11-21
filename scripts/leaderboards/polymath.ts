@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, Overall)`,
   terms: 'Static GitHub Pages site that states no license or terms; the PolyMath dataset card on Hugging Face is Apache-2.0.',
+  stats: { languageRange: { name: 'Language range', unit: 'count' } },
   aliases: {
     'Gemini-2.5-pro': 'gemini-2-5-pro-mar-2025',
     'Deepseek-R1': 'deepseek-r1',

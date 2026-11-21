@@ -9,6 +9,12 @@ const board: Leaderboard = {
   benchmark: 'cirr', url: 'https://mteb-leaderboard.hf.space/tasks/CIRRIT2IRetrieval', feed, host: 'MTEB',
   headline: 'MTEB reports test-set nDCG at 10, shown here as a percentage.',
   terms: 'MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats: {
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+    embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+    maxTokens: { name: 'Maximum tokens', unit: 'tokens' },
+    memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' },
+  },
   async fetch() {
     return checked(await taskScores(feed, 'CIRRIT2IRetrieval', 'ndcg_at_10', 52, 100), 52);
   },

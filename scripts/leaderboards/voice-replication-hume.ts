@@ -17,6 +17,7 @@ const board: Leaderboard = {
     accent: { name: 'Accent', group: 'Reference type' },
   },
   terms: 'The Space is Apache-2.0. Its backing dataset is private, while the public Space renders the leaderboard table. https://huggingface.co/spaces/HumeAI/voice-replication-leaderboard',
+  stats: { quality: {name: 'Quality', unit: 'score', better: 'higher'}, naturalness: {name: 'Naturalness', unit: 'score', better: 'higher'}, titanet: {name: 'TitaNet similarity', unit: 'score', better: 'higher'}, differentPerson: {name: 'Different-person similarity', unit: 'score', better: 'lower'} },
   async fetch() {
     let html = await fetchText(PAGE);
     for (const [from, to] of [['\\u003c', '<'], ['\\u003e', '>'], ['\\u0027', "'"], ['\\u0026', '&']] as const) html = html.replaceAll(from, to);

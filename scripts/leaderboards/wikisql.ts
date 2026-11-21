@@ -31,6 +31,7 @@ const board: Leaderboard = {
   "feed": "https://raw.githubusercontent.com/salesforce/WikiSQL/master/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { devLogicalFormAccuracy: {name: 'Development logical-form accuracy', unit: '%', better: 'higher'}, testLogicalFormAccuracy: {name: 'Test logical-form accuracy', unit: '%', better: 'higher'} },
   async fetch() {
     const source = await fetchText(FEED);
     const data = markdownTables(source);

@@ -158,9 +158,14 @@ export interface Leaderboard {
 export interface BoardStat {
   /** The measure's name, as readers should see it: "Lie rate", "Agent preference". */
   name: string;
-  /** One of the catalog's units ('%', 'score', 'elo', 'rating', 'usd', 'minutes', ...), or 'count' or 'tokens'. */
+  /**
+   * One of: '%', 'score', 'elo', 'rating', 'index', 'speedup', 'usd', 'minutes', 'brier', 'count', 'seconds', 'ms',
+   * 'hours', 'tokens', 'tokens/s', 'usd-per-mtok' (US dollars per million tokens), 'cny' (yuan), 'thousands', 'millions', 'billions'
+   * (a count stored in thousands, millions or billions, as for parameters), 'gb'.
+   * scripts/check-data.ts rejects any other.
+   */
   unit?: string;
-  /** Which way is better. Leave it out only when the board itself says neither is. */
+  /** Which way is better. Leave it out when the source doesn't say and the measure itself doesn't make it plain. */
   better?: 'higher' | 'lower';
   /** One sentence on what it counts, where the name doesn't say. */
   note?: string;

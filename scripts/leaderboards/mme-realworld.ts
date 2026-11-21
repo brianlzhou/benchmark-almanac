@@ -19,6 +19,8 @@ const board: Leaderboard = {
    perceptionMO: { name: 'Monitoring perception', group: 'Task type' },
    reasoningDT: { name: 'Diagram and table reasoning', group: 'Task type' },
    reasoningMO: { name: 'Monitoring reasoning', group: 'Task type' },
+   perceptionClassAverage: { name: 'Perception class average', group: 'Class' },
+   reasoningClassAverage: { name: 'Reasoning class average', group: 'Class' },
  },
  url: "https://mme-realworld.github.io/home_page.html",
  feed: FEED,

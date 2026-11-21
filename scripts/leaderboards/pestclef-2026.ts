@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://www.kaggle.com/competitions/pest-clef-2026/leaderboard",
   feed: FEED,
   terms: "Kaggle ranks teams. The organizers do not specify a reuse license for the Kaggle scores in their report. https://ceur-ws.org/Vol-4283/paper319.pdf The robots URL returns HTML.",
+  stats: { submissions: { name: 'Submissions', unit: 'count' }, publicF1: { name: 'Public F1', unit: 'score', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<{privateLeaderboard:Entry[]; publicLeaderboard:Entry[]; teams:Team[]}>(FEED, {
       method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({competitionId:125000}) });

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2408.00714',
   headline: 'Table 5 lists the one-click SA-23 average first, so this is its one-click mIoU.',
   parts: { sa23All: 'SA-23 all datasets', sa23Image: 'SA-23 image datasets', sa23Video: 'SA-23 video datasets', newVideo: '14 new video datasets' },
+  stats: { click5: { name: 'Five-click mIoU', unit: '%', better: 'higher' }, sa23ImageClick5: { name: 'SA-23 image five-click mIoU', unit: '%', better: 'higher' }, sa23VideoClick5: { name: 'SA-23 video five-click mIoU', unit: '%', better: 'higher' }, newVideoClick5: { name: 'New-video five-click mIoU', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
     if (!text.includes('Table 5 Zero-shot accuracy on the Segment Anything (SA) task across 37 datasets')) throw new Error('SA-37 Table 5 missing');

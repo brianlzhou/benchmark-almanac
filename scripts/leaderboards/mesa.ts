@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'mesa', feed, url: feed,
   terms: 'The authors publish the tables on their project site. https://pairlab.github.io/MESA/',
   headline: 'The headline averages the published single-arm MESA and bimanual BiMESA success rates.',
+  stats: Object.fromEntries(['MESA-ID','MESA-Spatial','MESA-Instance','MESA-Composite','MESA-Category','MESA Avg.','BiMESA-ID','BiMESA-Spatial','BiMESA-Instance','BiMESA-Composite','BiMESA-Category','BiMESA Avg.'].map(label => [label.replace(' Avg.','Avg')+'LanguageFollowing', {name: label.replace(' Avg.',' average')+' language following rate', unit:'%', better:'higher'}])),
   aliases: { 'π0': 'pi0', 'π0.5': 'pi0-5', FAST: 'pi0-fast' },
   async fetch() {
     const html = (await fetchText(feed)).replaceAll('&pi;', 'π').replaceAll('&ndash;', '–');

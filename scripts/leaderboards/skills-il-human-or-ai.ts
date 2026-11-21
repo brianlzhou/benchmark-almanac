@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://agentskills.co.il/en/leaderboard",
   feed,
   terms: "Read the Passes as human column. The factual results export omits this measure. The organizers offer a download. Site terms restrict copying, automated collection and commercial use. The MIT license applies to individual skills. https://agentskills.co.il/en/terms The site's robots.txt disallows named AI crawlers.",
+  stats: { saidHuman: { name: 'Said human', unit: 'count' } },
   async fetch() {
     const html = await fetchText(feed), flight = nextFlight(html);
     const stats = jsonAfter<{ author: string; guesses: number; saidHuman: number }[]>(flight.slice(flight.indexOf('"stats":[{"author"')), '"stats":');

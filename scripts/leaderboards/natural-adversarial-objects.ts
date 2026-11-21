@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'natural-adversarial-objects', static: 'paper', url: 'https://labs.scale.com/papers/natural-adversarial-objects', feed,
   terms: PAPER_TERMS + ' https://arxiv.org/abs/2111.04204',
   parts: { inDistribution: 'mAP without out-of-distribution objects' },
+  stats: { meanAverageRecall: { name: 'Mean average recall', unit: '%', better: 'higher' } },
   async fetch() {
     const table = inlinePaperTables(await paperHtml(feed)).find(t => t[0]?.slice(4).join('|') === 'NAO|NAO|NAO');
     if (!table || table[1].slice(1).join('|') !== 'Params|mAP|mAP|mAP|mAR|mAP w/o out-of-distribution') {

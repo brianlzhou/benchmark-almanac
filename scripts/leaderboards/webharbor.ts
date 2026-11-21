@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: `${PAGE}#results`,
   feed: `${PAGE} (chart-data JSON, testset.verifier)`,
   terms: 'AIMING Lab publishes the project page and benchmark repository; no separate license for the embedded results was found.',
+  stats: { judge: {name: 'Judge score', unit: '%', better: 'higher'}, agreement: {name: 'Agreement', unit: '%', better: 'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(PAGE);
     const raw = html.match(/<script\b[^>]*id="chart-data"[^>]*>([\s\S]*?)<\/script>/)?.[1];

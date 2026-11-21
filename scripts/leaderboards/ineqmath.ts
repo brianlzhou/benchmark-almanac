@@ -17,6 +17,7 @@ function markdownTables(source: string): string[][][] {
 const FEED = "https://raw.githubusercontent.com/lupantech/ineqmath/main/README.md";
 const board: Leaderboard = {
   benchmark: "ineqmath", url: "https://raw.githubusercontent.com/lupantech/ineqmath/main/README.md", feed: FEED,
+  stats: { 'Answer Acc': { name: 'Answer accuracy', unit: '%', better: 'higher' }, 'Step Acc (NAE)': { name: 'Step accuracy, no answer extraction', unit: '%', better: 'higher' }, 'Step Acc (NCE)': { name: 'Step accuracy, numerical consistency', unit: '%', better: 'higher' }, 'Step Acc (NLG)': { name: 'Step accuracy, natural language generation', unit: '%', better: 'higher' }, 'Step Acc (NTC)': { name: 'Step accuracy, numerical theorem checking', unit: '%', better: 'higher' } },
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

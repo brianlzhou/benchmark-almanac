@@ -8,6 +8,13 @@ const feed = 'https://navitallabs.com/labs/navital-gym/leaderboard';
 const board: Leaderboard = {
   benchmark: 'navital-gym', url: feed, feed,
   terms: 'Public leaderboard from Navital Labs with links to each published run.',
+  stats: {
+    solved: { name: 'Solved tasks', unit: 'count' },
+    tasks: { name: 'Tasks tried', unit: 'count' },
+    strictPass1: { name: 'Strict pass@1', unit: '%', better: 'higher' },
+    passAll: { name: 'Pass rate across all tasks', unit: '%', better: 'higher' },
+    badFormatRate: { name: 'Bad-format rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const table = tables(html).find(t => t[0]?.[1]?.text === 'Solved' && t[1]?.at(-1)?.html.includes('/runs/upi-'));

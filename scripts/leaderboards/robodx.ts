@@ -18,6 +18,7 @@ const board: Leaderboard = {
   terms: 'The author publishes the paper under the license linked at https://arxiv.org/abs/2611.23816.',
   aliases: {'Haiku 5.5':'claude-haiku-5-5','Sonnet 5.5':'claude-sonnet-5-5','Opus 5.5':'claude-opus-5-5'},
   parts: {singles:'Singles', pairs:'Pairs', mainRun:'Main run', supplementary:'Supplementary pairs'},
+  stats: { behaviorPass: { name: 'Behavior pass rate', unit: '%', better: 'higher' }, fullRepairPairs: { name: 'Full repair pairs rate', unit: '%', better: 'higher' } },
   async fetch() {
     const table = inlinePaperTables(await paperHtml(feed)).find(t => t[0].join('|') === header.join('|'));
     if (!table) throw new Error('Missing RoboDx all-tasks repair table');

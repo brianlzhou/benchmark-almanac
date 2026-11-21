@@ -11,6 +11,7 @@ const board: Leaderboard = {
   benchmark: 'harness-bench-fast', url: repo + '/blob/' + revision + '/README.md#results', feed,
   terms: 'MIT License, AI Forever. ' + repo + '/blob/' + revision + '/LICENSE',
   harnesses: 'system',
+  stats: { passed: { name: 'Passed tasks', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' } },
   async fetch() {
     const source = await fetchText(feed);
     const header = '| # | Date | Runner | Model | Harness adapt | Result | % |';

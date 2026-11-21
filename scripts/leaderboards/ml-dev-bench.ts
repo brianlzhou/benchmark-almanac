@@ -8,7 +8,8 @@ const feed = 'https://arxiv.org/html/2502.00964';
 const board: Leaderboard = {
   benchmark: 'ml-dev-bench', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2502.00964.',
-  parts: {},
+  stats: { tasksSolved: {name:'Tasks solved',unit:'count'}, tasks: {name:'Tasks evaluated',unit:'count'} },
+  parts: { DatasetHandling: 'Dataset Handling', APIIntegration: 'API Integration', ModelTraining: 'Model Training', Debugging: 'Debugging', ModelImplementation: 'Model Implementation' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.join('|') === 'Category|ReAct-Sonnet|OH-Sonnet|OH-Gemini|Aide-4o|ReAct-4o');

@@ -21,6 +21,10 @@ const images = [
 const board: Leaderboard = {
   benchmark: 'pieverse-agent-prediction-arena', url: report, feed: base + images[0].file,
   terms: 'Pieverse published the performance report on Binance Square. https://www.binance.com/en/terms',
+  stats: {
+    dailyChange: { name: 'Daily change', unit: '%', better: 'higher' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+  },
   aliases: { 'Kimi K2': 'kimi-k2-sep-2025' },
   async fetch() {
     const rows: LeaderboardRow[] = [];

@@ -15,6 +15,10 @@ const runs = [
 const board: Leaderboard = {
   benchmark: 'clef-joker-2026-humor-aware-retrieval', url: feed, feed,
   terms: 'The organizers publish the overview under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
+  stats: Object.fromEntries(['englishNdcg5','englishNdcg10','englishNdcg100','englishMrr','englishPrecision10','hinglishNdcg5','hinglishNdcg10','hinglishNdcg100','hinglishMrr','hinglishPrecision10'].map(key => {
+    const metric = key.replace(/^(english|hinglish)/, '').replace('Ndcg', 'NDCG@').replace('Mrr', 'MRR').replace('Precision10', 'P@10');
+    return [key, { name: `${key.startsWith('english') ? 'English' : 'Hinglish'} ${metric}`, unit: 'score', better: 'higher' }];
+  })),
   parts: { english: 'English', hinglish: 'Hinglish' }, harnesses: 'system',
   async fetch() {
     const paper = await pdfText(feed);

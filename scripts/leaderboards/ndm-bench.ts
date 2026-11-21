@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark: 'ndm-bench', static: 'paper', url: feed, feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'The paper reports no overall agreement percentage, so this is the plain mean of five-run agreement across its four domains.',
   parts: Object.fromEntries(keys.map((k,i) => [k, domains[i]])),
+  stats: { escalationAlpha: { name: 'Escalation agreement alpha', unit: 'score', better: 'higher' }, armsControlAlpha: { name: 'Arms control agreement alpha', unit: 'score', better: 'higher' }, nonProliferationAlpha: { name: 'Non-proliferation agreement alpha', unit: 'score', better: 'higher' }, proliferationAlpha: { name: 'Proliferation agreement alpha', unit: 'score', better: 'higher' } },
   aliases: { 'Llama 4 Maverick-17B Instruct': 'llama-4-maverick', 'Gemini 3.1 Pro Preview': 'gemini-3-1-pro',
     'Qwen3-235B': 'qwen3-235b-a22b-instruct-jul-2025', 'ERNIE 4.5-300B': 'ernie-4-5-300b-a47b' },
   async fetch() {

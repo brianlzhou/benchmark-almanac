@@ -10,6 +10,13 @@ const board: Leaderboard = {
   url: "https://mana.land/docs/rp-bench",
   feed,
   terms: "Mana requires express authorization to scrape, copy, or distribute service content. The site's robots.txt permits the public page and disallows /api/.",
+  stats: {
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    refusalRate: { name: 'Refusal rate', unit: '%', better: 'lower' },
+    votes: { name: 'Votes', unit: 'count' },
+    responses: { name: 'Responses', unit: 'count' },
+    refusals: { name: 'Refusals', unit: 'count' },
+  },
   async fetch() {
     type Entry = { name: string; score: number; ci: number; win_rate: number; refusal_rate: number; votes: number; provisional: boolean; responses: number; refusals: number };
     const { rows } = jsonAfter<{ rows: Entry[] }>(nextFlight(await fetchText(feed)), '"initialData":');

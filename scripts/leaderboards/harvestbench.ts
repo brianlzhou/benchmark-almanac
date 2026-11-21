@@ -10,6 +10,7 @@ const board:Leaderboard = {
   terms:'The HarvestBench implementation uses MIT. https://github.com/CompassionML/harvestbench/blob/main/LICENSE',
   parts:{neutralContinuePct:{name:'Neutral briefing animal continue rate',unit:'%',better:'lower'},
     hayContinuePct:{name:'Hay continue rate',unit:'%'},rockContinuePct:{name:'Rock continue rate',unit:'%',better:'lower'}},
+  stats:{animalEncounters:{name:'Animal encounters',unit:'count'},neutralEncounters:{name:'Neutral encounters',unit:'count'},killedPerShift:{name:'Animals killed per shift',unit:'count'},cropsPerShift:{name:'Crops per shift',unit:'count'},neighborsPerShift:{name:'Neighbors per shift',unit:'count'},thinkTokensPerCall:{name:'Thinking tokens per call',unit:'tokens'}},
   async fetch() {
     const page = await fetchText(feed);
     const bundle = page.match(/<script\b[^>]*src="([^"]*\/assets\/index-[^"]+\.js)"/)?.[1];

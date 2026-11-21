@@ -44,6 +44,10 @@ const board: Leaderboard = {
   feed: `${FEED} (releaseVersion ${RELEASE}, ${SCOPE} set)`,
   terms: 'Static JSON on the OSWorld 2.0 project site; the OSWorld-V2 repository is Apache-2.0.',
   aliases: ALIASES,
+  stats: {
+    partial: { name: 'Partial score', unit: '%', better: 'higher' },
+    stepBudget: { name: 'Step budget', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<{ defaultResultReleaseVersion?: string; defaultStepBudget?: number; results: Result[] }>(FEED);
     const budget = data.defaultStepBudget ?? 500;

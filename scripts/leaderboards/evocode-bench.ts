@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (original MT@4 table)`,
   terms: 'Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.',
+  stats: { turns: { name: 'Average turns', unit: 'count', better: 'lower', note: 'Average agent turns per task across its rounds.' } },
   aliases: {
     'Doubao-Seed-2.0-Pro': 'seed-2-0-pro',
     'Xiaomi-MiMo-V2.5-Pro': 'mimo-v2-5-pro',

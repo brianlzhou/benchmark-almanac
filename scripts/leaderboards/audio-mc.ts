@@ -31,6 +31,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (the text and audio variants in the page's Next.js flight data)`,
   terms: `${SCALE_TERMS} The Almanac credits and links the source.`,
+  stats: { outputModeRank:{name:'Output mode rank',unit:'count',better:'lower'} },
   aliases: {
     ...SCALE_ALIASES,
     'Qwen3-Omni-30B-A3B-Instruct': 'qwen3-omni-30b-a3b',

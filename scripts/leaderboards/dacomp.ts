@@ -6,11 +6,14 @@ import { paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { checked, paperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/html/2512.04324';
+const deNames = ['Architecture', 'Implementation CFS', 'Implementation Max-CFS@8', 'Implementation CS', 'Implementation Max-CS@8', 'Evolution CFS', 'Evolution Max-CFS@8', 'Evolution SR@8', 'DE Score'];
+const daNames = ['Completeness', 'Accuracy', 'Insightfulness', 'Readability', 'Analytical Depth', 'Visualization', 'DA Score'];
+const parts = Object.fromEntries([...deNames, ...deNames.map(n => 'Chinese ' + n), ...daNames, ...daNames.map(n => 'Chinese ' + n)].map(name => [name, { name, unit:'%' }]));
 const board: Leaderboard = {
   benchmark: 'dacomp', feed, url: feed, static: 'paper',
   terms: 'The paper and its license are available at https://arxiv.org/abs/2512.04324.',
   headline: 'The headline weights the engineering and analysis scores by their task counts, 110 and 100.',
-  parts: {},
+  parts,
   async fetch() {
     const html = await paperHtml(feed);
     const results = new Map<string, Record<string, number>>();

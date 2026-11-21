@@ -2,8 +2,16 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 const FEED = "https://zou-group.github.io/collaborative-intelligence/data/leaderboard_v4.json";
+const ciStats: Record<string, {name:string; unit:string; better?:'higher'|'lower'}> = {
+  baseline:{name:'Baseline score',unit:'%',better:'higher'}, alone:{name:'Alone score',unit:'%',better:'higher'}, strict:{name:'Strict score',unit:'%',better:'higher'}, teamworkLoss:{name:'Teamwork loss',unit:'%',better:'lower'}, gated:{name:'Gated scenarios',unit:'count'}, scenarios:{name:'Scenarios',unit:'count'},
+};
+for (const [key,name] of [['resisting_unsafe_pressure','Resisting unsafe pressure'],['whistleblowing','Whistleblowing'],['sharing_and_seeking_information','Sharing and seeking information'],['emotional_intelligence','Emotional intelligence'],['keeping_the_team_on_track','Keeping the team on track'],['handling_conflict','Handling conflict'],['taking_initiative','Taking initiative'],['taking_over','Taking over']]) {
+  ciStats[key+'Strict']={name:name+' strict score',unit:'%',better:'higher'}; ciStats[key+'Alone']={name:name+' alone score',unit:'%',better:'higher'}; ciStats[key+'Baseline']={name:name+' baseline score',unit:'%',better:'higher'};
+  ciStats[key+'Gated']={name:name+' gated scenarios',unit:'count'}; ciStats[key+'Complete']={name:name+' completed scenarios',unit:'count'}; ciStats[key+'Scenarios']={name:name+' scenarios',unit:'count'}; ciStats[key+'Refused']={name:name+' refused scenarios',unit:'count'};
+}
 const board: Leaderboard = {
   benchmark: "collaborative-intelligence-benchmark", url: "https://zou-group.github.io/collaborative-intelligence/", feed: FEED,
+  stats: ciStats,
   verified: 'Marked verified by the Collaborative Intelligence benchmark',
   parts: {
     resisting_unsafe_pressure: { name: 'Resisting unsafe pressure', group: 'Dimension' },

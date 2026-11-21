@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://github.com/stevemaughan/chess-engine-benchmark#results-so-far",
   feed: FEED,
   terms: "The repository lists no score reuse license. https://github.com/stevemaughan/chess-engine-benchmark The raw file host has no robots.txt.",
+  stats: { gameScore: { name: 'Game score', unit: '%', better: 'higher' } },
   aliases: { 'Astra 6': 'gpt-6-astra' },
   async fetch() {
     const source = await fetchText(FEED);

@@ -18,6 +18,10 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, test-set Accuracy)`,
   terms: 'Static GitHub Pages site of the QuALITY authors (no robots.txt, so nothing is disallowed); it publishes no terms.',
+  stats: {
+    satScore: { name: 'SAT-style score', unit: 'score', better: 'higher' },
+    hardSatScore: { name: 'Hard SAT-style score', unit: 'score', better: 'higher' },
+  },
   aliases: {
     // "Long-context GPT-3.5 (gpt-3.5-turbo-16k) as of January 2024": the 16k alias then served the 0613 snapshot
     'Long-context GPT-3.5 (gpt-3.5-turbo-16k) as of January 2024': 'gpt-3-5-turbo-jun-2023',

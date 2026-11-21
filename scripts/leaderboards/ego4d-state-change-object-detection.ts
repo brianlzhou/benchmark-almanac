@@ -14,6 +14,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "EvalAI gives entry and award terms. Ego4D requires a separate agreement for its recordings and annotations. https://eval.ai/api/challenges/challenge/1632 EvalAI serves no robots rules for the leaderboard.",
   verified: 'verified by the challenge host on EvalAI',
+  stats: { ap50: { name: 'Average precision at IoU 50', unit: '%', better: 'higher' }, ap75: { name: 'Average precision at IoU 75', unit: '%', better: 'higher' } },
   async fetch() {
     const data = await fetchJson<{count: number; results: Entry[]}>(FEED + '?page_size=500');
     if (data.count < 5 || data.count !== data.results.length) throw new Error('Incomplete Ego4D leaderboard');

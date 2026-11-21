@@ -8,6 +8,7 @@ const board: Leaderboard = {
  url: "https://qfbench.com/_next/static/chunks/61f73a6a71588000.js",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { passAt3: { name: 'Pass@3', unit: '%', better: 'higher' }, tasks: { name: 'Tasks', unit: 'count' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

@@ -20,6 +20,15 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (leaderboard.shared.views.standard; default view)`,
   terms: 'Static JSON the site itself loads; robots.txt allows all paths and the site states no other terms.',
+  stats: {
+    overall: { name: 'Overall solve rate', unit: '%', better: 'higher' },
+    privileged: { name: 'Privileged solve rate', unit: '%', better: 'higher' },
+    realtime: { name: 'Real-time solve rate', unit: '%', better: 'higher' },
+    solved: { name: 'Tests solved', unit: 'count' },
+    tests: { name: 'Tests', unit: 'count' },
+    attempted: { name: 'Tests attempted', unit: 'count' },
+    minutes: { name: 'Minutes per attempt', unit: 'minutes', better: 'lower' },
+  },
   aliases: { 'Kimi 3.1 Pro': 'kimi-k3-1-pro' },
   async fetch() {
     const exam = await fetchJson<Exam>(FEED);

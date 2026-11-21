@@ -28,6 +28,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 const FEED = "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md";
 const board: Leaderboard = {
   "benchmark": "tau2-bench-verified",
+  stats: { reportedCost: { name: 'Reported cost', unit: 'usd', better: 'lower' }, scorePerDollar: { name: 'Score per dollar', unit: 'score', better: 'higher' }, runInputTokens: { name: 'Run input tokens', unit: 'tokens' }, runOutputTokens: { name: 'Run output tokens', unit: 'tokens' }, runTotalTokens: { name: 'Run total tokens', unit: 'tokens' } },
   costPer: 'run',
   "url": "https://github.com/amazon-agi/tau2-bench-verified",
   "feed": "https://raw.githubusercontent.com/amazon-agi/tau2-bench-verified/main/README.md",

@@ -7,6 +7,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2309.08793';
 const columns = ['Precision', 'Recall', 'F1-Score', 'Accuracy'];
 const board: Leaderboard = {
+  stats: { PrecisionSubscript: { name: 'Precision subscript', unit: 'count' }, RecallSubscript: { name: 'Recall subscript', unit: 'count' }, 'F1-Score': { name: 'F1 score', unit: '%', better: 'higher' }, 'F1-ScoreSubscript': { name: 'F1 score subscript', unit: 'count' }, AccuracySubscript: { name: 'Accuracy subscript', unit: 'count' } },
   benchmark: 'fin-fact', static: 'paper', feed, url: feed,
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   aliases: { 'Mistral(8x7b)': 'mixtral-8x7b', 'Claude3-Opus': 'claude-3-opus' },

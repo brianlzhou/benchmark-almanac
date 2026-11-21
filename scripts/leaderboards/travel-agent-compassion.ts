@@ -21,6 +21,7 @@ const board: Leaderboard = {
   benchmark: 'travel-agent-compassion', url: url + '/tac', feed,
   terms: 'The site disallows crawling /api/ in robots.txt and prohibits ingestion into model training corpora.',
   aliases: { 'Gemini 2.5 Flash': 'gemini-2-5-flash-jun-2025' },
+  stats: { completionRate: { name: 'Completion rate', unit: '%', better: 'higher' } },
   async fetch() {
     const results = await fetchJson<Result[]>(feed);
     if (results.length < 72) throw new Error('Expected at least 72 TAC prompt results');

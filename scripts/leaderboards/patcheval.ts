@@ -12,6 +12,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    passed: { name: 'Patches passed', unit: 'count', better: 'higher' },
+    tasks: { name: 'Tasks', unit: 'count' },
+  },
   
   async fetch() {
     const t = mdTables(await fetchText(FEED)).find(t => t.head.join('|') === 'Agent|Model|Pass@1');

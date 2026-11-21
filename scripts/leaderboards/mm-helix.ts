@@ -5,6 +5,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://mm-helix.github.io/";
 const board: Leaderboard = {
   benchmark: "mm-helix", parts: {
+    Games: { name: 'Games', group: 'Task' },
   Puzzles: { name: 'Puzzles', group: 'Task type' },
   Algorithms: { name: 'Algorithms', group: 'Task type' },
   Graphs: { name: 'Graphs', group: 'Task type' },

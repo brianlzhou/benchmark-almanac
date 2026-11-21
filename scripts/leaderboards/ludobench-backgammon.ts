@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://ludobench.com/leaderboards",
   feed,
   terms: "The terms allow Ludobench to publish anonymized match records. They give no third-party license for standings. https://ludobench.com/terms The feed host publishes robots.txt at https://ludobench.com/robots.txt.",
+  stats: { latency:{name:'Think time',unit:'seconds',better:'lower'} },
   async fetch() {
     const page = await fetchText(feed);
     const fragment = page.match(/<table\b[^>]*>(?:(?!<\/table>)[\s\S])*?Backgammon(?:(?!<\/table>)[\s\S])*?<\/table>/i)?.[0];

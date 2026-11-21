@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: "The terms restrict redistribution of ContractorOS material. They give no explicit license for benchmark scores. https://www.contractoros.build/terms/ Robots.txt permits public benchmark pages.",
   parts: { counts: 'Counts', measured: 'Measured', electrical: 'Performing arts centre electrical', plumbing: 'Supermarket plumbing' },
   aliases: { "Mistral Large 2512": "mistral-large-3" },
+  stats: { lines: { name: 'Lines', unit: 'count' }, countsLines: { name: 'Counted lines', unit: 'count' }, measuredLines: { name: 'Measured lines', unit: 'count' }, flagged: { name: 'Flagged lines', unit: 'count' }, declined: { name: 'Declined lines', unit: 'count' } },
   async fetch() {
     const source = tables(await fetchText(feed));
     const rows: LeaderboardRow[] = [];

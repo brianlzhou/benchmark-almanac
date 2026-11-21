@@ -5,6 +5,11 @@ import { jsLiteral } from '../lib/html.ts';
 const FEED = "https://tencent.github.io/ElephantBench/script.js";
 const board: Leaderboard = {
   benchmark: "elephantbench", url: "https://tencent.github.io/ElephantBench/", feed: FEED,
+  stats: {
+    partial: { name: 'Partial-answer rate', unit: '%', better: 'higher' },
+    failure: { name: 'Failure rate', unit: '%', better: 'lower' },
+    knowledge: { name: 'Knowledge score', unit: '%', better: 'higher' },
+  },
   terms: 'Public maker results; the site has no robots.txt or additional restriction on reading these published values.',
   async fetch() {
     const source = await fetchText(FEED);

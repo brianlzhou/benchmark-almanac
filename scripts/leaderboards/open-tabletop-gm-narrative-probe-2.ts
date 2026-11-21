@@ -7,6 +7,7 @@ const feed = "https://raw.githubusercontent.com/Bobby-Gray/open-tabletop-gm/main
 
 const board: Leaderboard = {
   benchmark: "open-tabletop-gm-narrative-probe-2",
+  stats: { IRA: { name: 'Inter-rater agreement', unit: 'score' }, autoPass: { name: 'Automatic checks passed', unit: 'count', better: 'higher' }, autoWarn: { name: 'Automatic checks with warnings', unit: 'count', better: 'lower' }, autoFail: { name: 'Automatic checks failed', unit: 'count', better: 'lower' } },
   url: "https://github.com/Bobby-Gray/open-tabletop-gm/blob/main/docs/LLM-GUIDE.md#narrative-quality-probe-v2-april-2026",
   feed,
   terms: "The repository uses AGPL-3.0-or-later. The guide gives no separate license for model outputs. https://github.com/Bobby-Gray/open-tabletop-gm#license GitHub requests a one-second crawl delay.",

@@ -7,6 +7,7 @@ const FEED = "https://holiday-robot.github.io/FlashDexRetarget/";
 const board: Leaderboard = {
   benchmark: "flashdexretarget-50-motion-benchmark", url: "https://holiday-robot.github.io/FlashDexRetarget/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { sr_mt_obj: { name: 'Strict retargeting success', unit: '%', better: 'higher' }, sr_mt: { name: 'Retargeting success', unit: '%', better: 'higher' }, poseErrorMm: { name: 'Pose error', unit: 'score', better: 'lower' }, rotationErrorRad: { name: 'Rotation error', unit: 'score', better: 'lower' }, gpuHours: { name: 'GPU hours', unit: 'hours', better: 'lower' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

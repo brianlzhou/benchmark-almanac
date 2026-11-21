@@ -13,6 +13,10 @@ const board: Leaderboard = {
   terms: VALS_TERMS,
   chart: VALS_LATENCY_CHART,
   aliases: VALS_ALIASES,
+  stats: {
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+  },
   fetch: () => valsRows(SLUG, { cost: null }),
 };
 export default board;

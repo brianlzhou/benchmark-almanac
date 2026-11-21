@@ -7,6 +7,7 @@ const board: Leaderboard = {
   benchmark: "composite-bench", url: URL, feed: URL,
   costPer: 'run',
   terms: "Public maker results, robots.txt allows all agents; no additional reading restrictions stated.",
+  stats: { meanReward: { name: 'Mean reward', unit: 'score', better: 'higher' }, nppLadder: { name: 'NPP ladder score', unit: 'score', better: 'higher' }, runCost: { name: 'Run cost', unit: 'usd', better: 'lower' } },
   async fetch() {
     const all = tables(await fetchText(URL)).map(t => t.map(r => r.map(c => c.text)));
     const table = all.find(t => t[0]?.some(c => c.includes("Macro success")));

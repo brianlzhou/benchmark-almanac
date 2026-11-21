@@ -16,6 +16,10 @@ const board: Leaderboard = {
    Scope: { name: 'Scope', group: 'Dimension' },
  },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+   '% policy refusal': { name: 'Policy refusal rate', unit: '%', better: 'lower' },
+   '% incomplete': { name: 'Incomplete rate', unit: '%', better: 'lower' },
+ },
 
  async fetch() {
 const t=tables(await fetchText(FEED)).find(t=>t[0]?.at(-1)?.text==='Overall');if(!t)throw new Error('Missing TRACES table');const rows:LeaderboardRow[]=[];

@@ -12,6 +12,7 @@ type Run = {n_total: number, n_matched: number, result_accuracy: number, executi
 const board: Leaderboard = {
   benchmark: 'powercodebench', url: 'https://github.com/huiwxing/PowerCodeBench', feed: root + 'reactive_comparison.json',
   terms: 'The authors publish the data under CC BY 4.0. https://github.com/huiwxing/PowerCodeBench/blob/HEAD/LICENSE',
+  stats: { executionRate: { name: 'Execution rate', unit: '%', better: 'higher' }, correct: { name: 'Correct results', unit: 'count' }, inputTokens: { name: 'Input tokens per task', unit: 'tokens', better: 'lower' } },
   aliases: {'Llama-3.1-405B-Instruct': 'llama-3-1-405b', 'Llama-3.1-70B-Instruct': 'llama-3-1-70b', 'Llama-3.1-8B-Instruct': 'llama-3-1-8b'},
   parts: {},
   async fetch() {

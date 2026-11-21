@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at bench.flashinfer.ai; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: { resolvedPercent: { name: 'Resolved workloads', unit: '%', better: 'higher' }, workloads: { name: 'Workloads', unit: 'count' } },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text.startsWith('Avg Speedup')));if(!t)throw new Error('FlashInfer leaderboard missing');

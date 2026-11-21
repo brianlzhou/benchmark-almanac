@@ -5,8 +5,20 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 import { sourceBoard } from '../lib/boards/textedit-opencompass.ts';
 
+const metricLabels: Record<string, {name: string; unit: string; better: 'higher'}> = {
+  TA: {name: 'Text accuracy', unit: 'score', better: 'higher'}, TP: {name: 'Text preservation', unit: 'score', better: 'higher'},
+  SI: {name: 'Scene integrity', unit: 'score', better: 'higher'}, LR: {name: 'Local realism', unit: 'score', better: 'higher'},
+  VC: {name: 'Visual coherence', unit: 'score', better: 'higher'}, OA: {name: 'OCR accuracy', unit: 'score', better: 'higher'},
+  OP: {name: 'OCR precision', unit: 'score', better: 'higher'}, OR: {name: 'OCR recall', unit: 'score', better: 'higher'},
+  F1: {name: 'OCR F1', unit: 'score', better: 'higher'}, NED: {name: 'Normalized edit distance', unit: 'score', better: 'higher'},
+  CLIP: {name: 'CLIPScore', unit: 'score', better: 'higher'}, AES: {name: 'Aesthetic score', unit: 'rating', better: 'higher'},
+};
+const stats = Object.fromEntries(['Real', 'Virtual'].flatMap(split => Object.entries(metricLabels).map(([key, value]) => [split + ': ' + key, {...value, name: split + ' ' + value.name.toLowerCase()}])));
+
 const board: Leaderboard = {
   ...sourceBoard,
+  parts: {Real: {name: 'Real images'}, Virtual: {name: 'Virtual images'}},
+  stats,
   aliases: { "Nano Banana Pro": "gemini-3-pro-image-preview-nano-banana-pro" },
   terms: 'OpenCompass publishes the score tables at ' + sourceBoard.url,
   headline: 'The README reports no overall score. The headline is the plain mean of the Real and Virtual judged averages on the full benchmark.',

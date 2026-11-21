@@ -4,7 +4,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { sbFacts, sbCharts, SB_PAGE, SB_TERMS, SB_ALIASES } from './hpct-v2-securebio.ts';
 import { text } from '../lib/html.ts';
-const board:Leaderboard={benchmark:'human-pathogen-capabilities-test-securebio',url:SB_PAGE,feed:SB_PAGE,terms:SB_TERMS,aliases:SB_ALIASES,async fetch(){
+const board:Leaderboard={benchmark:'human-pathogen-capabilities-test-securebio',url:SB_PAGE,feed:SB_PAGE,terms:SB_TERMS,aliases:SB_ALIASES,stats:{refusalRate:{name:'Refusal rate',unit:'%',better:'lower'}},async fetch(){
  const rows=new Map<string,LeaderboardRow>();
  for(const c of (await sbCharts()).filter(c=>/Model performance on HPCT$/.test(c.title)))for(const h of c.hovers){
   const lines=h.split(/<br\s*\/?\s*>/i).map(text).filter(Boolean);

@@ -6,6 +6,12 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/html/2505.24785';
 const board: Leaderboard = {
+  stats: {
+    Design: { name: 'Design score', unit: 'score', better: 'higher' }, Implementation: { name: 'Implementation score', unit: 'score', better: 'higher' }, Execution: { name: 'Execution score', unit: 'score', better: 'higher' },
+    'Executable implementation': { name: 'Executable implementation score', unit: 'score', better: 'higher' }, Conclusion: { name: 'Conclusion score', unit: 'score', better: 'higher' },
+    'All correct': { name: 'All correct rate', unit: 'score', better: 'higher' }, 'All executable': { name: 'All executable rate', unit: 'score', better: 'higher' },
+    'Execution checked': { name: 'Execution checked count', unit: 'count' }, minutes: { name: 'Minutes', unit: 'minutes', better: 'lower' },
+  },
   benchmark:'exp-bench', url:'https://huggingface.co/datasets/Just-Curieous/EXP-Bench', feed, static:'paper',
   terms:'The authors publish Tables 1, 6 and 9 in https://arxiv.org/abs/2505.24785.',
   async fetch() {

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://texttron.github.io/BrowseComp-Plus/",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { calibrationError: { name: 'Calibration error', unit: 'score', better: 'lower' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, searchCalls: { name: 'Search calls', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const s=await fetchText(FEED); const block=s.match(/const fallbackData\s*=\s*(\[[\s\S]*?\n\s*\]);/);

@@ -12,6 +12,12 @@ export default {
   benchmark: 'agent-island', url: 'https://www.agentisland.ai/', feed,
   aliases: { "nvidia/nemotron-3-ultra-550b-a55b": "nemotron-3-ultra", "cohere/command-a": "cohere-command-a", "cohere/command-r-plus-08-2024": "command-r-plus" },
   terms: 'The authors publish the ranking and game logs in their public bucket at https://storage.googleapis.com/agent-island/',
+  stats: {
+    median: { name: 'Median skill', unit: 'score', better: 'higher', note: 'Posterior median skill normalized by the top model’s median skill.' },
+    upperQuartile: { name: 'Upper quartile skill', unit: 'score', better: 'higher', note: '75th percentile skill normalized by the top model’s median skill.' },
+    mean: { name: 'Mean skill', unit: 'score', better: 'higher', note: 'Posterior mean skill normalized by the top model’s median skill.' },
+    wins: { name: 'Wins', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<{ timestamp: string, rankings: Run[] }>(feed);
     const runs = data.rankings.filter(r => r.games_played >= 10);

@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (static HTML results table, Best-run cash)`,
   terms: 'Static project page; ceobench.com serves no robots.txt (the path returns the page) and publishes no terms.',
+  stats: { bankruptcies: { name: 'Bankruptcies', unit: 'count', better: 'lower' }, maxSurvivalDays: { name: 'Maximum survival days', unit: 'count', better: 'higher' }, meanSurvivalDays: { name: 'Mean survival days', unit: 'count', better: 'higher' }, survivalDaysSpread: { name: 'Survival days spread', unit: 'count', better: 'lower' }, turnsPerWeek: { name: 'Turns per week', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => c.text === 'Best-run cash'));
     if (!t) throw new Error('CEO-Bench results table not found');

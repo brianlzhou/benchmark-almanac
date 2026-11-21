@@ -17,6 +17,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'The benchmark repository is MIT licensed. The hosted page returned its HTML at robots.txt, so this importer reads the generated JSON index from GitHub.',
   costPer: 'run',
+  stats: { solved:{name:'Tasks solved',unit:'count'}, tasks:{name:'Tasks',unit:'count'}, timePerTask:{name:'Time per task',unit:'seconds',better:'lower'}, triesPerTask:{name:'Tries per task',unit:'count'}, outputTokens:{name:'Output tokens',unit:'tokens'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<Index>(FEED);
     if (!data.tasks?.length || !data.configs?.length || !data.runs?.length) throw new Error('RedstoneBench index is incomplete');

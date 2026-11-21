@@ -18,6 +18,7 @@ const FEED = "https://raw.githubusercontent.com/lechmazur/writing/master/README.
 const board: Leaderboard = {
   benchmark: "lech-mazur-creative-writing", url: "https://raw.githubusercontent.com/lechmazur/writing/master/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { winChance: { name: 'Win chance', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

@@ -7,6 +7,7 @@ const feed = 'https://aclanthology.org/2022.lrec-1.260.pdf';
 const board: Leaderboard = {
   benchmark: 'ddisco', static: 'paper', url: 'https://aclanthology.org/2022.lrec-1.260/', feed,
   terms: 'ACL Anthology terms apply. https://aclanthology.org/faq/copyright/',
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' }, precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   async fetch() {
     const text = await pdfText(feed);
     if (!/Text\s+daBERT\s+0\.65\s+0\.61\s+0\.65\s+0\.62/.test(text) || !/Text\s+XLM-R\s+0\.66\s+0\.63\s+0\.66\s+0\.63/.test(text)) throw new Error('Missing DDisCo Table 3');

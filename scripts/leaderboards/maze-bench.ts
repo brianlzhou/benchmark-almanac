@@ -29,6 +29,7 @@ function checkpoint(e: Entry, field: BudgetField, limit: number) {
 const board: Leaderboard = {
   benchmark: 'maze-bench', url, feed, costPer: 'run',
   terms: 'Public Maze Bench leaderboard manifest and score checkpoints published by the authors.',
+  stats: { gemsAvailable: { name: 'Gems available', unit: 'count' }, rooms: { name: 'Rooms', unit: 'count' }, moves: { name: 'Moves', unit: 'count' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, latency: { name: 'Run latency', unit: 'seconds', better: 'lower' } },
   aliases: { 'muse-wonder-full-1.0': 'muse-wonder-full', 'nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B': 'nemotron-3-ultra' },
   async fetch() {
     const manifest = await fetchJson<{ parts: string[]; leaderboards: Board[] }>(feed);

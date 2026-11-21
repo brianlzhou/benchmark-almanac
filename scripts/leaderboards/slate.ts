@@ -14,6 +14,14 @@ function number(s: string) {
 }
 const board: Leaderboard = {
   benchmark: 'slate', feed, url: feed, static: 'paper', parts,
+  stats: {
+    d1: {name: 'Linguistic knowledge validity', unit: 'score', better: 'higher'},
+    d2: {name: 'Cognitive-pedagogical design', unit: 'score', better: 'higher'},
+    visualAidCompleteness: {name: 'Visual aid completeness', unit: '%', better: 'higher'},
+    post: {name: 'Posttest accuracy', unit: '%', better: 'higher'},
+    near: {name: 'Near-transfer accuracy', unit: '%', better: 'higher'},
+    far: {name: 'Far-transfer accuracy', unit: '%', better: 'higher'},
+  },
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'Table 3 ranks models by D4 gain, the change in learner accuracy from pretest to posttest in percentage points.',
   async fetch() {

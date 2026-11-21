@@ -7,6 +7,12 @@ const board: Leaderboard = {
   url: "https://pku-liang.github.io/hwe-bench/",
   feed: "https://pku-liang.github.io/hwe-bench/scores-v1.1.json",
   terms: "The author repository uses Apache License 2.0. https://raw.githubusercontent.com/pku-liang/hwe-bench/main/LICENSE The project host serves no robots.txt.",
+  stats: {
+    precision: { name: 'Precision', unit: '%', better: 'higher' },
+    inputTokensTotal: { name: 'Total input tokens', unit: 'tokens' },
+    cachedTokensTotal: { name: 'Total cached tokens', unit: 'tokens' },
+    outputTokensTotal: { name: 'Total output tokens', unit: 'tokens' },
+  },
   costPer: "run",
   async fetch() {
     const {benchmark,models} = JSON.parse(await fetchText(this.feed));

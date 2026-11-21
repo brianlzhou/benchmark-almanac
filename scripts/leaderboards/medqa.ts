@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   fetch: () => helmRows(TABLE, true),
 };
 export default board;

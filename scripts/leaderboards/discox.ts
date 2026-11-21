@@ -7,6 +7,7 @@ import { tables, num } from '../lib/html.ts';
 
 const PAGE = 'https://randomtutu.github.io/DiscoX/';
 const board: Leaderboard = {
+  stats: { zhEnAccuracy: { name: 'Chinese to English accuracy', unit: '%', better: 'higher' }, zhEnFluency: { name: 'Chinese to English fluency', unit: 'score', better: 'higher' }, zhEnAppropriateness: { name: 'Chinese to English appropriateness', unit: 'score', better: 'higher' }, enZhAccuracy: { name: 'English to Chinese accuracy', unit: '%', better: 'higher' }, enZhFluency: { name: 'English to Chinese fluency', unit: 'score', better: 'higher' }, enZhAppropriateness: { name: 'English to Chinese appropriateness', unit: 'score', better: 'higher' }, directionDifference: { name: 'Direction difference', unit: 'score', better: 'lower' } },
   benchmark: 'discox', parts: {
   academic: {name: 'Academic papers', group: 'Domain'},
   humanities: {name: 'Humanities', group: 'Domain'},

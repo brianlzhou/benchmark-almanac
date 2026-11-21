@@ -6,6 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://huggingface.co/spaces/RUC-NLPIR/DISBench-Leaderboard/resolve/main/leaderboard_data.json";
 const board: Leaderboard = {
+  stats: { overall_em: { name: 'Overall exact match', unit: '%', better: 'higher' }, overall_f1: { name: 'Overall F1', unit: '%', better: 'higher' }, intra_f1: { name: 'Intra-document F1', unit: '%', better: 'higher' }, inter_f1: { name: 'Inter-document F1', unit: '%', better: 'higher' } },
  benchmark: "disbench", parts: {
   intra_em: { name: 'Intra image', group: 'Category' },
   inter_em: { name: 'Inter image', group: 'Category' },

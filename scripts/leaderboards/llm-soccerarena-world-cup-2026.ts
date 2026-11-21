@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://www.llm-soccerarena.com/",
   feed,
   terms: "The repository uses the MIT license. I found no separate reuse license for the published scores. The site's robots.txt publishes content signals.",
+  stats:{exact:{name:'Exact score forecasts',unit:'count',better:'higher'},meanBrier:{name:'Mean Brier score',unit:'brier',better:'lower'}},
   aliases: { 'Mistral Large 2512': 'mistral-large-3' },
   async fetch() {
     const runs = new Map<string, { model: string; setting: string; score: number; matches: Set<string>; exact: number; brier: number }>();

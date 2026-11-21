@@ -7,6 +7,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://openaccess.thecvf.com/content_cvpr_2018/papers/Van_Horn_The_INaturalist_Species_CVPR_2018_paper.pdf';
 const board: Leaderboard = {
   benchmark: 'inaturalist-2017', static: 'paper', url: 'https://github.com/visipedia/inat_comp/tree/master/2017', feed,
+  stats: { validationTop5: { name: 'Validation top-5 accuracy', unit: '%', better: 'higher' }, publicTestTop5: { name: 'Public test top-5 accuracy', unit: '%', better: 'higher' }, top5: { name: 'Private test top-5 accuracy', unit: '%', better: 'higher' } },
   terms: 'The Computer Vision Foundation provides open access to the paper at https://openaccess.thecvf.com/CVPR2018.',
   async fetch() {
     const pdf = await pdfText(feed);

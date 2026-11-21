@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://labs.ramp.com/llm-games/",
   feed,
   terms: "The host returns HTML for robots.txt. Ramp Labs links its terms and gives no separate data reuse license.",
+  stats:{points:{name:'Tournament points',unit:'score',better:'higher'},games:{name:'Games played',unit:'count'}},
   aliases: { Gemini25Flash: 'gemini-2-5-flash-jun-2025', Gemini25Pro: 'gemini-2-5-pro-jun-2025' },
   async fetch() {
     const html = await fetchText(feed);

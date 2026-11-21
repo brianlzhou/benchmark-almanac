@@ -12,6 +12,11 @@ const board: Leaderboard = {
   feed,
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions The public leaderboard path is allowed in robots.txt.",
   harnesses:'system',
+  stats: {
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+    turns: { name: 'Turns per call', unit: 'count' },
+    bargeInPerCall: { name: 'Barge-ins per call', unit: 'count', better: 'lower' },
+  },
   async fetch(){
     const t=tables(await fetchText(feed)).find(t=>t[0].map(c=>c.text).join('|')==='Voice agent|Task completion|Latency|Turns|Barge-in/call|Cost|Type|Model');
     if(!t || t.length<21) throw new Error('Incomplete voice agent standings');

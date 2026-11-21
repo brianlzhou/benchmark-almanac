@@ -114,6 +114,7 @@ export const ALIASES: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'tau2-bench',
+  stats: { pass2: { name: 'Pass@2', unit: '%', better: 'higher' }, pass3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass4: { name: 'Pass@4', unit: '%', better: 'higher' } },
   parts: { retail: { name: 'Retail', group: 'Domain' }, airline: { name: 'Airline', group: 'Domain' }, telecom: { name: 'Telecom', group: 'Domain' } },
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: `${BASE}/manifest.json (legacy_submissions)`,

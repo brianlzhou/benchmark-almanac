@@ -22,6 +22,7 @@ const board: Leaderboard = {
   url: 'https://vla-arena.github.io/#leaderboard',
   feed: `${BASE}/models.json and ${BASE}/<model>.json (sr, Average L0+L1+L2)`,
   terms: 'Static JSON on GitHub Pages; robots.txt allows every path and the VLA-Arena repository is Apache-2.0.',
+  stats: { cc: {name: 'Cumulative safety cost', unit: 'score', better: 'lower', note: 'Average cumulative safety cost across suites and difficulty levels.'} },
   aliases: {
     'GR00T-N1.6': 'gr00t-n1-6',
     'GR00T-N1.7': 'gr00t-n1-7',

@@ -11,6 +11,7 @@ const parts = {K_CK:'K-CK', K_PK:'K-PK', K_total:'Knowledge', S_PF:'S-PF', S_UC:
   S_total:'Skills', A_ES:'A-ES', A_IS:'A-IS', A_NE:'A-NE', A_DD:'A-DD', A_total:'Attitude'};
 const board: Leaderboard = {
   benchmark:'eduvideobench', url, feed, parts,
+  stats: { blockRate: { name: 'Block rate', unit: 'score', better: 'lower', note: 'Fraction of generations blocked by the safety gate, from 0 to 1.' } },
   terms: 'The authors plan to release scores under CC BY 4.0. https://anonymous.4open.science/r/EduVideoBench-anonymous-D5F2/README.md',
   async fetch() {
     const rows = parseCsv(await fetchText(feed)).map(row => {

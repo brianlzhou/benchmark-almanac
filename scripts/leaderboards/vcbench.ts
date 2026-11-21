@@ -11,6 +11,7 @@ interface Item { name: string; description: string }
 interface List { '@id': string; numberOfItems: number; itemListElement: Item[] }
 const board: Leaderboard = {
   benchmark: 'vcbench', url: feed, feed,
+  stats: {inputTokens:{name:'Input tokens per founder',unit:'tokens'},outputTokens:{name:'Output tokens per founder',unit:'tokens'},precision:{name:'Precision',unit:'%',better:'higher'},recall:{name:'Recall',unit:'%',better:'higher'}},
   terms: 'Vela Research publishes and maintains the public leaderboard. https://vcbench.com/',
   chart: { title: 'Accuracy versus cost', x: { key: 'costPerThousand', label: 'Cost per 1,000 founders', unit: '$', better: 'lower' },
     y: { key: 'score', label: 'F0.5', unit: '%' }, note: 'The chart uses the cost per 1,000 founders shown by VCBench, including its estimates.' },

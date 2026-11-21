@@ -11,6 +11,12 @@ const board: Leaderboard = {
   url: "https://bili-sakura.github.io/RSCC/",
   feed,
   terms: "The authors license the results page under CC BY-SA 4.0. The xBD images have separate research use terms. The host has no robots.txt.",
+  stats: {
+    rouge: { name: 'ROUGE', unit: '%', better: 'higher' },
+    meteor: { name: 'METEOR score', unit: '%', better: 'higher' },
+    bert: { name: 'BERT score', unit: '%', better: 'higher' },
+    averageWords: { name: 'Average words', unit: 'count' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[1]?.[4]?.text === 'ST5-SCS(%)↑');
     if (!table || table.length < 32 || !['ROUGE(%)↑', 'METEOR(%)↑', 'BERT(%)↑'].every((h,i) => table[1][i+1].text === h)) throw new Error('Missing RSCC standings');

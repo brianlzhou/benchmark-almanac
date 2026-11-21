@@ -5,6 +5,7 @@ import { fetchText } from '../lib/util.ts';
 import { nextFlight } from '../lib/html.ts';
 const feed = "https://veteval.ai/leaderboard";
 const board: Leaderboard = {
+  stats: { index_raw: { name: 'Raw safety index', unit: 'index', better: 'higher' }, harm_per_1000: { name: 'Harmful outputs per 1,000', unit: 'count', better: 'lower' }, safety_coverage: { name: 'Safety coverage', unit: 'score', better: 'higher' }, safety_gate_multiplier: { name: 'Safety gate multiplier', unit: 'score', better: 'higher' }, consistency_multiplier: { name: 'Consistency multiplier', unit: 'score', better: 'higher' }, floor_multiplier: { name: 'Floor multiplier', unit: 'score', better: 'higher' }, rating: { name: 'Rating', unit: 'rating', better: 'higher' }, latency_seconds: { name: 'Latency', unit: 'seconds', better: 'lower' }, reliability: { name: 'Reliability', unit: 'score', better: 'higher' } },
   benchmark: 'veteval',
   url: "https://veteval.ai/leaderboard",
   feed,

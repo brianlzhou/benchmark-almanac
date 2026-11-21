@@ -6,6 +6,7 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 const FEED = "https://aclanthology.org/2025.wmt-1.57.pdf";
 const board: Leaderboard = {
   benchmark: "iitp-legal-english-hindi", static: 'paper',
+  stats: { meteor: { name: 'METEOR score', unit: 'score', better: 'higher' }, ter: { name: 'Translation edit rate', unit: 'score', better: 'lower' }, chrf: { name: 'chrF++ score', unit: 'score', better: 'higher' }, bertScore: { name: 'BERTScore', unit: 'score', better: 'higher' }, comet: { name: 'COMET score', unit: 'score', better: 'higher' }, human: { name: 'Human score', unit: '%', better: 'higher' } },
   url: "https://aclanthology.org/2025.wmt-1.57.pdf#page=4",
   feed: FEED,
   terms: "ACL publishes the organizers' WMT 2025 report. Its robots URL returns HTML. The original authors retain rights to the dataset.",

@@ -15,6 +15,10 @@ const board: Leaderboard = {
     newOriginal: { name: 'AW app', group: 'New AnyAppBench templates' },
     newNew: { name: 'New apps', group: 'New AnyAppBench templates' },
   },
+  stats: {
+    awDelta: { name: 'AW app transfer gap', unit: '%', note: 'New-app success minus AW-app success, in percentage points, for AW-inherited templates.' },
+    newDelta: { name: 'New template transfer gap', unit: '%', note: 'New-app success minus AW-app success, in percentage points, for new AnyAppBench templates.' },
+  },
   async fetch() {
     const text = await fetchText(feed);
     const data = text.match(/^window\.AAB_LEADERBOARD = (.+);$/m);

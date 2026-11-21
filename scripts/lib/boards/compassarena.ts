@@ -9,6 +9,7 @@ interface Response {success:boolean;data:{totalModels:number;totalVotes:number;l
 export function compassArena(multimodal=false):Leaderboard{
  return {benchmark:multimodal?'compassarena-multimodal':'compassarena',url:'https://rank.opencompass.org.cn/leaderboard-arena'+(multimodal?'-multimodal':''),feed:API,
   terms:'Public CompassArena ranking API. The site offers research use with limited safeguards. The almanac credits and links the source.',
+  stats:{votes:{name:'Votes',unit:'count'},upperBoundRank:{name:'Upper bound rank',unit:'count',better:'lower'},...(multimodal?{}:{rankChange:{name:'Rank change',unit:'count'}}),poolModels:{name:'Models in pool',unit:'count'},poolVotes:{name:'Votes in pool',unit:'count'}},
   aliases:{'Qwen3.7 Max':'qwen3-7-max','GPT-4.1-20250414':'gpt-4-1','GPT-5-2025-08-07':'gpt-5','Claude 3.5 Sonnet 20241022':'claude-3-5-sonnet-october-2024'},
   async fetch():Promise<LeaderboardRow[]>{
    const response=await fetchJson<Response>(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({rankingType:multimodal?1:0})});

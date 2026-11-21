@@ -16,6 +16,9 @@ const board: Leaderboard = {
   url: "https://github.com/wbopan/tastebench#leaderboard",
   feed: FEED,
   terms: "MIT code and CC BY 4.0 data; public README results are not gated; raw.githubusercontent.com has no robots.txt.",
+  stats: {
+    unparsed: { name: 'Unparsed presentations', unit: 'count', note: 'Presentations that could not be parsed and count as wrong.' },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find(t => t[0]?.includes("Average"));
     if (!table) throw new Error('Published overall results table is missing');

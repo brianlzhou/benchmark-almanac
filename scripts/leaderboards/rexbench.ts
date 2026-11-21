@@ -8,6 +8,10 @@ const feed = "https://rexbench.com/";
 const board: Leaderboard = {
   benchmark: "rexbench", url: "https://rexbench.com/", feed,
   terms: "The project page releases the data under MIT and Apache 2.0.",
+  stats: {
+    executionSuccess: { name: 'Execution success', unit: '%', better: 'higher' },
+    fileRecall: { name: 'File recall', unit: '%', better: 'higher' },
+  },
   aliases: {"claude_4.5_opus": "claude-opus-4-5", "claude_4_sonnet": "claude-sonnet-4", "claude_3.7_sonnet": "claude-3-7-sonnet", "gpt5": "gpt-5"},
   async fetch() {
     const source = await fetchText(feed);

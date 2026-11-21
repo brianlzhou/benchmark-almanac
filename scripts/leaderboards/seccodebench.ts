@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://alibaba.github.io/sec-code-bench",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { passRate: { name: 'Pass rate', unit: '%', better: 'higher' }, cases: { name: 'Test cases', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any>(FEED);

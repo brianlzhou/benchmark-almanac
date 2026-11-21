@@ -10,6 +10,14 @@ const board: Leaderboard = {
   url: "https://www.afterquery.com/blog/storebench#evaluation-results",
   feed,
   terms: "The main table includes 13 models and separate human and scripted references. AfterQuery claims copyright in its site content. The MIT license covers the repository. https://www.afterquery.com/terms robots.txt permits crawling.",
+  stats: {
+    passRate: { name: 'Pass rate', unit: '%', better: 'higher', note: 'Percentage of evaluation tasks passed.' },
+  },
+  parts: {
+    Business: { name: 'Business', unit: 'score', better: 'higher', note: 'Financial performance after settlement, normalized against scripted baselines and clipped to 0 to 1.' },
+    Reliability: { name: 'Reliability', unit: 'score', better: 'higher', note: 'On-time shipping and returns, including penalties for cancellations and automatic platform shipments.' },
+    Continuity: { name: 'Continuity', unit: 'score', better: 'higher', note: 'Continuity of store operations across the long-horizon evaluation.' },
+  },
   async fetch() {
     const all = tables(await fetchText(feed));
     const main = all.find(t => t[0]?.[2]?.text.startsWith('Pass rate'));

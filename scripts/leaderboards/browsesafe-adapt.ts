@@ -9,6 +9,7 @@ const board:Leaderboard={
    answer: { name: 'Answer', group: 'Task type' },
  },
  terms:'Public static results from Perplexity. The repository is MIT licensed. The almanac credits and links the source.',
+ stats:{ adapted:{name:'Adapted score',unit:'score',better:'higher'}, seed:{name:'Seed',unit:'count'} },
  async fetch(){
  const data=await fetchJson<{boards:{id:string;rows:{model:string;[key:string]:unknown}[]}[]}>(FEED);
  const source=data.boards.find(b=>b.id==="adaptive");if(!source)throw new Error('BrowseSafe board missing');

@@ -71,4 +71,46 @@ board.parts = {
   outcomeScore: { name: 'Outcome', group: 'Dimension', note: 'Raw 0 to 1 outcome score contributes 60% of the composite.', unit: 'score' },
   efficiencyScore: { name: 'Efficiency', group: 'Dimension', note: 'Normalized efficiency against fixed baselines contributes 15% of the composite.', unit: 'score' },
 };
+board.stats = {
+  passRate: { name: 'Pass rate', unit: 'score', better: 'higher', note: 'Fraction of scheduled workflows that passed, from 0 to 1.' },
+  medianLatencySeconds: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+  medianOutputTokens: { name: 'Median output tokens', unit: 'tokens' },
+  medianInputTokens: { name: 'Median input tokens', unit: 'tokens' },
+  avgDurationSeconds: { name: 'Average duration', unit: 'seconds', better: 'lower' },
+  scoredRuns: { name: 'Scored runs', unit: 'count' },
+  allVariantsPassRate: { name: 'All variants pass rate', unit: 'score', better: 'higher', note: 'Fraction of workflow variants that passed, from 0 to 1.' },
+  costPerSuccessfulWorkflow: { name: 'Cost per successful workflow', unit: 'usd', better: 'lower' },
+  medianCachedInputTokens: { name: 'Median cached input tokens', unit: 'tokens' },
+  totalToolCalls: { name: 'Total tool calls', unit: 'count' },
+  scheduledRuns: { name: 'Scheduled runs', unit: 'count' },
+  passedRuns: { name: 'Passed runs', unit: 'count' },
+  successfulTasks: { name: 'Successful tasks', unit: 'count' },
+  latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+  collateralChanges: { name: 'Collateral changes', unit: 'count', better: 'lower' },
+  missedEscalations: { name: 'Missed escalations', unit: 'count', better: 'lower' },
+  unnecessaryEscalations: { name: 'Unnecessary escalations', unit: 'count', better: 'lower' },
+  prematureFinalization: { name: 'Premature finalization rate', unit: 'score', better: 'lower' },
+  requiredCallOmitted: { name: 'Required call omission rate', unit: 'score', better: 'lower' },
+  requiredCallMisordered: { name: 'Required call misordering rate', unit: 'score', better: 'lower' },
+  retryAbandoned: { name: 'Abandoned retry rate', unit: 'score', better: 'lower' },
+  requiredWriteMissing: { name: 'Required write omission rate', unit: 'score', better: 'lower' },
+  wrongHumanHandoff: { name: 'Wrong human handoff rate', unit: 'score', better: 'lower' },
+  minRamGb: { name: 'Minimum RAM', unit: 'gb' },
+};
+const fractionStat = (name: string, better: 'higher' | 'lower' = 'higher') => ({ name, unit: 'score', better, note: 'Stored as a fraction from 0 to 1.' } as const);
+for (const [key, name] of [['marketing', 'Marketing'], ['sales', 'Sales'], ['revops', 'RevOps'], ['operations', 'Operations'], ['finance', 'Finance']]) {
+  board.stats[`${key}_outcome`] = fractionStat(`${name} outcome score`);
+  board.stats[`${key}_passRate`] = fractionStat(`${name} pass rate`);
+  board.stats[`${key}_scoredRuns`] = { name: `${name} scored runs`, unit: 'count' };
+}
+const capabilityNames: Record<string, string> = {
+  multiSystemReconciliation: 'Multi-system reconciliation', toolDataflow: 'Tool dataflow', optimisticConcurrency: 'Optimistic concurrency', transientRecovery: 'Transient recovery', approvalHandoff: 'Approval handoff', safeWrites: 'Safe writes', multiSystemReasoning: 'Multi-system reasoning', exactToolDataflow: 'Exact tool dataflow', policyRetrieval: 'Policy retrieval', unnecessaryEscalationAvoidance: 'Unnecessary escalation avoidance', freshnessWindow: 'Freshness window', stripeEvidence: 'Stripe evidence', salesforceEvidence: 'Salesforce evidence', safeEscalation: 'Safe escalation', entityConsistency: 'Entity consistency', docusignEvidence: 'DocuSign evidence', hubspotEvidence: 'HubSpot evidence', approvalThreshold: 'Approval threshold', varianceThreshold: 'Variance threshold', apolloEvidence: 'Apollo evidence', sourceAgreement: 'Source agreement', crossSystemValidation: 'Cross-system validation', promptInjectionResistance: 'Prompt injection resistance', analytics: 'Analytics', contentControls: 'Content controls', riskHandoff: 'Risk handoff', ga4Evidence: 'GA4 evidence', contentfulEvidence: 'Contentful evidence', inventoryReasoning: 'Inventory reasoning', idempotency: 'Idempotency', multiSystemFulfillment: 'Multi-system fulfillment', exceptionHandling: 'Exception handling', versionedWrites: 'Versioned writes', safePartialAction: 'Safe partial action', netsuiteEvidence: 'NetSuite evidence', shipbobEvidence: 'ShipBob evidence', identityResolution: 'Identity resolution', safeMerge: 'Safe merge', crossSystemRouting: 'Cross-system routing', enrichment: 'Enrichment', policyPrecedence: 'Policy precedence', humanEscalation: 'Human escalation', shopifyEvidence: 'Shopify evidence', dealDesk: 'Deal desk', approvalBoundaries: 'Approval boundaries', toolSelection: 'Tool selection', accountHierarchy: 'Account hierarchy', forbiddenActionAvoidance: 'Forbidden action avoidance',
+};
+for (const [key, name] of Object.entries(capabilityNames)) {
+  board.stats[`${key}Score`] = fractionStat(`${name} score`);
+  board.stats[`${key}Runs`] = { name: `${name} runs`, unit: 'count' };
+  board.stats[`${key}ScoredRuns`] = { name: `${name} scored runs`, unit: 'count' };
+  board.stats[`${key}PassRate`] = fractionStat(`${name} pass rate`);
+  board.stats[`${key}Cost`] = { name: `${name} cost`, unit: 'usd', better: 'lower' };
+}
 export default board;

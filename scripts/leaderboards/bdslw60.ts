@@ -11,6 +11,9 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2402.08635',
   feed,
   terms: 'The authors publish these tables on arXiv under the terms listed at https://arxiv.org/abs/2402.08635.',
+  stats: {
+    avgCV: { name: 'Average cross-validation accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const text = await pdfText(feed);
     const rows: LeaderboardRow[] = [];

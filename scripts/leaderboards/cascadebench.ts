@@ -11,6 +11,10 @@ const discovery = 'Discovery Agent';
 const board: Leaderboard = {
   benchmark: 'cascadebench', static: 'paper', feed, url: feed,
   terms: 'The authors publish the paper under the terms linked at https://arxiv.org/abs/2605.12178.',
+  stats: {
+    tableFieldIoU: { name: 'Table-field intersection over union', unit: '%', better: 'higher' },
+    firstStepIoU: { name: 'First-step intersection over union', unit: '%', better: 'higher' },
+  },
   parts: { T1: 'T1: Schema-deterministic', T2: 'T2: Rule-composable', T3: 'T3: Execution-inferred' },
   aliases: { 'Sonnet 4.6': 'claude-sonnet-4-6', 'Opus 4.6': 'claude-opus-4-6' },
   async fetch() {

@@ -6,6 +6,7 @@ import { text } from '../lib/html.ts';
 const BASE='https://cribl.io/leaderboard-s3',PREFIX='secIT-1.0';
 const board:Leaderboard={benchmark:'secit-bench',url:'https://cribl.io/ai-research-lab/secitbench/',feed:BASE+'/'+PREFIX+'/runs/*/run.json',
  terms:'Cribl website terms prohibit automated extraction; the Almanac credits Cribl and links the original source.',
+ stats:{inputTokens:{name:'Input tokens',unit:'tokens'},latency:{name:'Latency',unit:'seconds',better:'lower'},scenarios:{name:'Scenarios',unit:'count'}},
  chart:{title:'Accuracy vs. cost',x:{key:'cost',label:'Estimated cost per rollout',unit:'$',better:'lower'},y:{key:'score',label:'Accuracy',unit:'%',better:'higher'}},
  async fetch(){
   const catalog=await fetchJson<{models:Record<string,{displayName:string}>}>(BASE+'/'+PREFIX+'/models.json');

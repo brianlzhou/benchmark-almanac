@@ -23,6 +23,20 @@ const board: Leaderboard = {
   url: 'https://benchmarks.bio/results/v1/',
   feed: `${FEED} (capabilitiesLeaderboard)`,
   terms: 'JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.',
+  stats: {
+    benchmarksCovered: { name: 'Benchmarks covered', unit: 'count' },
+    benchmarksPossible: { name: 'Benchmarks possible', unit: 'count' },
+  },
+  parts: {
+    'txbench-abdev': { name: 'TxBench-Antibody-Development', group: 'Therapeutics' },
+    'biosecbench-respvirus-surveillance': { name: 'BioSecBench-RespiratoryVirus-Surveillance', group: 'Biosecurity' },
+    'biosecbench-respvirus-countermeasures': { name: 'BioSecBench-RespiratoryVirus-Countermeasures', group: 'Biosecurity' },
+    rarediseasebench: { name: 'RareDiseaseBench', group: 'Applications' },
+    tissuemicroscopybench: { name: 'TissueMicroscopyBench', group: 'Bioscience' },
+    neurosciencebench: { name: 'NeuroscienceBench', group: 'Bioscience' },
+    'biosecbench-refusal': { name: 'BioSecBench-Refusal', group: 'Biosecurity' },
+    'biosecbench-structure': { name: 'BioSecBench-Structure', group: 'Biosecurity' },
+  },
   aliases: {
     // the only Nemotron 3 Ultra in the registry (550B total, 55B active)
     'Nemotron 3 Ultra 550B A55B': 'nemotron-3-ultra',

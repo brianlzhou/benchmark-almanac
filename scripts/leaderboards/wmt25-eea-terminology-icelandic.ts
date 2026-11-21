@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://github.com/steinst/WMT25_EEA_test_suite/blob/main/evaluation/automatic/EEA_automatic_evaluation_results.tsv",
   feed,
   terms: "Automatic term accuracy uses 413 occurrences across 256 sentences. The repository lists no reuse license. GitHub lists crawler restrictions and the media host returns 404 for robots.txt.",
+  stats: { termsCorrect: { name: 'Terms correct', unit: 'count' }, termsTotal: { name: 'Terms tested', unit: 'count' }, sentencesCorrect: { name: 'Sentences correct', unit: 'count' }, sentencesTotal: { name: 'Sentences tested', unit: 'count' } },
   parts: {"sentence":"Sentence accuracy"},
   async fetch() {
     const source = await fetchText(feed);

@@ -6,6 +6,7 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = 'https://arxiv.org/html/2410.05229';
 
 const board: Leaderboard = {
+  stats:{gsm8kFull:{name:'GSM8K full accuracy',unit:'%',better:'higher'},gsm8k100:{name:'GSM8K 100-example accuracy',unit:'%',better:'higher'}},
   benchmark: 'gsm-symbolic', static: 'paper',
   url: 'https://arxiv.org/abs/2410.05229',
   feed: FEED,

@@ -17,6 +17,11 @@ const ROWS:[string,number,number,number,number,number,number][]=[
 ];
 export default {benchmark:'assetopsbench',url:'https://github.com/IBM/AssetOpsBench',feed:IMAGE,
  terms:'IBM publishes this chart in its public AssetOpsBench README; the almanac credits IBM and links the source.',
+ stats:{
+  dataRetrievalAccuracy:{name:'Data retrieval accuracy',unit:'%',better:'higher'}, resultVerification:{name:'Result verification',unit:'%',better:'higher'},
+  actionSequence:{name:'Action sequence',unit:'%',better:'higher'}, clarityJustification:{name:'Clarity and justification',unit:'%',better:'higher'},
+  hallucinationRate:{name:'Hallucination rate',unit:'%',better:'lower'},
+ },
  async fetch(){
   const response=await fetch(IMAGE,{headers:{'user-agent':'benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac)'},signal:AbortSignal.timeout(30000)});
   if(!response.ok)throw new Error(`AssetOps chart HTTP ${response.status}`);

@@ -9,6 +9,10 @@ type Entry = { model: string; paper_url?: string; metrics: Record<string, string
 const board: Leaderboard = {
   benchmark: 'ade-corpus', host: 'Code with Papers', feed: url + '.json', url,
   terms: 'Papers with Code archive, modified by Syntology, CC BY-SA 4.0. https://codewithpapers.app/attribution',
+  stats: {
+    strictF1: { name: 'Strict relation extraction F1', unit: 'score', better: 'higher', note: 'Macro-F1 for exact relation extraction, from 0 to 1.' },
+    entityF1: { name: 'Entity recognition F1', unit: 'score', better: 'higher', note: 'Macro-F1 for named entity recognition, from 0 to 1.' },
+  },
   async fetch() {
     const data = await fetchJson<{ dataset: { name: string }; metrics: string[]; rows: Entry[] }>(board.feed);
     if (data.dataset.name !== 'Adverse Drug Events (ADE) Corpus' || data.metrics[0] !== 'RE+ Macro F1') throw new Error('Missing ADE relation extraction leaderboard');

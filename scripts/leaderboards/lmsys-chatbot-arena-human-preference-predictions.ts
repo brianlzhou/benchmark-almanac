@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (competitionId ${COMPETITION_ID})`,
   terms: 'The source gives no verified license for third-party score reuse. Kaggle terms of use apply.',
+  stats: { submissions: { name: 'Submissions', unit: 'count' }, publicScore: { name: 'Public log loss', unit: 'score', better: 'lower' } },
   async fetch() {
     const data = await fetchJson<Response>(FEED, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ competitionId: COMPETITION_ID }) });
     const standings = data.privateLeaderboard;

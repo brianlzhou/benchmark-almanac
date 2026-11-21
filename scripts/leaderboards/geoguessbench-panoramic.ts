@@ -13,6 +13,14 @@ const board: Leaderboard = {
   feed,
   terms: "The project page gives no score reuse terms. Its GitHub link opens the GitHub homepage. The host has no robots.txt.",
   costPer: 'run',
+  stats: {
+    countryAccuracy: { name: 'Country accuracy', unit: '%', better: 'higher' },
+    confidence: { name: 'Confidence', unit: '%', better: 'higher' },
+    calibrationError: { name: 'Expected calibration error', unit: 'score', better: 'lower', note: 'Expected Calibration Error for confidence calibration, from 0 to 1.' },
+    latency: { name: 'Speed', unit: 'seconds', better: 'lower' },
+    predictions: { name: 'Predictions', unit: 'count' },
+    distanceKm: { name: 'Average distance in kilometers', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const runs = jsonAfter<Run[]>(nextFlight(html), '"runs":');

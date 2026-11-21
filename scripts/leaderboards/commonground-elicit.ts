@@ -10,6 +10,20 @@ const board: Leaderboard = {
   benchmark: 'commonground-elicit', url: 'https://github.com/doctor-gonzo/commonground-envs/blob/master/docs/evaluation-report-0.6.0.md', feed,
   terms: 'Apache 2.0. https://github.com/doctor-gonzo/commonground-envs/blob/master/LICENSE',
   parts: { find: 'Find', ask: 'Ask' }, aliases: { 'Kimi K2 Instruct': 'kimi-k2-sep-2025', 'Qwen3 30B A3B Instruct': 'qwen3-30b-a3b-instruct-jul-2025' },
+  stats: {
+    findZeroRewardTasks: { name: 'Find zero-reward tasks', unit: 'count' },
+    askZeroRewardTasks: { name: 'Ask zero-reward tasks', unit: 'count' },
+    findRecovered: { name: 'Find recovered tasks', unit: 'count' },
+    askRecovered: { name: 'Ask recovered tasks', unit: 'count' },
+    find_localization: { name: 'Find localization', unit: 'score', better: 'higher' },
+    find_type: { name: 'Find type', unit: 'score', better: 'higher' },
+    find_diagnosis: { name: 'Find diagnosis', unit: 'score', better: 'higher' },
+    find_relation: { name: 'Find relation', unit: 'score', better: 'higher' },
+    ask_format: { name: 'Ask format', unit: 'score', better: 'higher' },
+    ask_grounding: { name: 'Ask grounding', unit: 'score', better: 'higher' },
+    ask_stance: { name: 'Ask stance', unit: 'score', better: 'higher' },
+    ask_top_1_selection: { name: 'Ask top one selection', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const report = await fetchText(feed);
     const table = report.split('| Task | Model | Run ID | Reward mean ± rollout SD | 95% clustered bootstrap CI |')[1]?.split('\n\n')[0];

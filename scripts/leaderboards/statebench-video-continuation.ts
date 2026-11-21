@@ -10,6 +10,10 @@ const measures = ['SES', 'SC', 'HR', 'SCS'];
 const board: Leaderboard = {
   benchmark: 'statebench-video-continuation', feed, url: feed, static: 'paper',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
+  stats: {
+    SES: {name: 'State Exposure Score', unit: '%', better: 'higher', note: 'Measures completion of the requested state-exposing or state-updating action.'},
+    SCS: {name: 'State Consistency Score', unit: '%', better: 'higher', note: 'Measures conditional state consistency on exposure-positive samples.'},
+  },
   parts: Object.fromEntries(levels.flatMap(l => measures.map(m => [l + ': ' + m, { name: l + ': ' + m,
     better: m === 'HR' ? 'lower' : 'higher' }]))),
   async fetch() {

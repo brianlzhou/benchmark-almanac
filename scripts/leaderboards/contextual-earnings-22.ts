@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark:'contextual-earnings-22', url:'https://github.com/argmaxinc/OpenBench/blob/main/BENCHMARKS.md#keyword-recognition', feed,
   terms:'The OpenBench repository publishes the tables under its license. https://github.com/argmaxinc/OpenBench/blob/main/LICENSE',
   aliases: {'Whisper OSS (large-v3-turbo)':'whisper-large-v3-turbo','Argmax (qwen3-asr-1.7b)':'qwen3-asr-1-7b'},
+  stats:{precision:{name:'Precision',unit:'score',better:'higher',note:'Rate stored from 0 to 1.'},recall:{name:'Recall',unit:'score',better:'higher',note:'Rate stored from 0 to 1.'},f1:{name:'F1',unit:'score',better:'higher',note:'Rate stored from 0 to 1.'}},
   async fetch() {
     const section = (await fetchText(feed)).split('# Keyword Recognition\n')[1];
     if (!section) throw new Error('Missing keyword recognition chapter');

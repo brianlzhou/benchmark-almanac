@@ -10,6 +10,7 @@ export default {
   benchmark: "ref-l4", static: 'paper', url: "https://arxiv.org/abs/2406.16866", feed,
   terms: "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://arxiv.org/licenses/nonexclusive-distrib/1.0/.",
   parts: {"Val": "Val", "Test": "Test", small: "Small Size", medium: "Medium Size", large: "Large Size"},
+  stats: { acc50: { name: 'Accuracy at IoU 0.5', unit: '%', better: 'higher' }, acc75: { name: 'Accuracy at IoU 0.75', unit: '%', better: 'higher' }, acc90: { name: 'Accuracy at IoU 0.9', unit: '%', better: 'higher' }, smallAcc50: { name: 'Small size accuracy at IoU 0.5', unit: '%', better: 'higher' }, mediumAcc50: { name: 'Medium size accuracy at IoU 0.5', unit: '%', better: 'higher' }, largeAcc50: { name: 'Large size accuracy at IoU 0.5', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await paperHtml(feed);
     const tables = flatPaperTables(html.replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '')).map(grid);

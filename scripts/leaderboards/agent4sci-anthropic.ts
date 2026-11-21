@@ -7,6 +7,9 @@ const feed = 'https://arxiv.org/html/2610.28763';
 const board: Leaderboard = {
   benchmark: 'agent4sci-anthropic', static: 'paper', url: feed, feed,
   terms: 'The paper uses the arXiv perpetual non-exclusive license. https://arxiv.org/abs/2610.28763',
+  stats: {
+    ATATAbsolute:{name:'ATAT absolute score',unit:'score'}, CarbonGlobeAbsolute:{name:'CarbonGlobe absolute score',unit:'score'}, CheMixHubAbsolute:{name:'CheMixHub absolute score',unit:'score'}, CosmoBenchAbsolute:{name:'CosmoBench absolute score',unit:'score'}, DARTEvalAbsolute:{name:'DARTEval absolute score',unit:'score'}, ESCAPEAbsolute:{name:'ESCAPE absolute score',unit:'score'}, GEOBench2Absolute:{name:'GEOBench2 absolute score',unit:'score'}, gRNAdeAbsolute:{name:'gRNAde absolute score',unit:'score'}, GTPBDAbsolute:{name:'GTPBD absolute score',unit:'score'}, LITHOSAbsolute:{name:'LITHOS absolute score',unit:'score'}, MarsBenchAbsolute:{name:'MarsBench absolute score',unit:'score'}, MassSpecGymAbsolute:{name:'MassSpecGym absolute score',unit:'score'}, MOTIVEAbsolute:{name:'MOTIVE absolute score',unit:'score'}, NeuroGraphAbsolute:{name:'NeuroGraph absolute score',unit:'score'}, PFDeltaAbsolute:{name:'PFDelta absolute score',unit:'score'}, ProteinGymAbsolute:{name:'ProteinGym absolute score',unit:'score'}, SRCACO2Absolute:{name:'SRCA CO2 absolute score',unit:'score'}, TIDMADAbsolute:{name:'TIDMAD absolute score',unit:'score'}, TreeFinderAbsolute:{name:'TreeFinder absolute score',unit:'score'}, UniSiteAbsolute:{name:'UniSite absolute score',unit:'score'},
+  },
   async fetch() {
     const data = paperTables(await paperHtml(feed)).map(grid);
     const parts: Record<string, string> = {};

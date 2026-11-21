@@ -6,6 +6,7 @@ import { text } from '../lib/html.ts';
 const feed = "https://itzi.app/benchmarks/roleplay";
 const board: Leaderboard = {
   benchmark: 'itzi-roleplay-local-robustness',
+  stats: { medianSeconds: { name: 'Median episode duration', unit: 'seconds', better: 'lower' }, p95Seconds: { name: '95th percentile episode duration', unit: 'seconds', better: 'lower' } },
   url: "https://itzi.app/benchmarks/roleplay",
   feed,
   terms: "The robots file explains content signals and lists no blocked paths. Itzi protects its original site materials. Run costs are estimates calculated at public rates. https://itzi.app/terms",

@@ -6,6 +6,7 @@ import {jsLiteral,nextFlight} from '../lib/html.ts';
 const URL='https://rn-evals.vercel.app/';
 const board:Leaderboard={benchmark:'react-native-evals',costPer:'run',url:URL,feed:URL,
  terms:'Public Callstack results; robots.txt does not restrict this page.',
+ stats:{tokens:{name:'Tokens',unit:'tokens'},totalCostUSD:{name:'Total cost',unit:'usd',better:'lower'}},
  async fetch(){const s=await fetchText(URL);const f=nextFlight(s);
  const mark=f.indexOf('"models":[{');if(mark<0)throw new Error('Model data missing');
  const models=jsLiteral<{id:string;label:string;solverModel:string;overallScorePct:number;tokensUsed:number;costUsd:number|null}[]>(f,f.indexOf('[',mark));

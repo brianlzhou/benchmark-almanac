@@ -14,6 +14,11 @@ const board: Leaderboard = {
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (static HTML table, Rank, lower is better)`,
   terms: 'Static project page on GitHub Pages (no robots.txt rules); the site states no terms.',
+  stats: {
+    finalReturn: { name: 'Final return', unit: '%', better: 'higher' },
+    maxDrawdown: { name: 'Maximum drawdown', unit: '%', better: 'lower' },
+    sortino: { name: 'Sortino ratio', unit: 'score', better: 'higher' },
+  },
   aliases: {
     // the instruct-only and thinking-only Qwen3 checkpoints are the July 2025 (2507) releases
     'Qwen3-235B-Ins': 'qwen3-235b-a22b-instruct-jul-2025',

@@ -9,6 +9,26 @@ const feed = 'https://arxiv.org/html/2605.23271v1';
 const board: Leaderboard = {
   benchmark:'evalverse', static:'paper', url:feed, feed, terms:PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline:'The paper reports no overall score, so the headline averages the expert pairwise win ratios across all 18 dimensions.',
+  stats: {
+    'Machine Character': { name: 'Machine character win ratio', unit: 'score', better: 'higher' },
+    'Machine Scene': { name: 'Machine scene win ratio', unit: 'score', better: 'higher' },
+    'Machine Consistency': { name: 'Machine consistency win ratio', unit: 'score', better: 'higher' },
+    'Machine Action': { name: 'Machine action win ratio', unit: 'score', better: 'higher' },
+    'Machine Expression': { name: 'Machine expression win ratio', unit: 'score', better: 'higher' },
+    'Machine Composition': { name: 'Machine composition win ratio', unit: 'score', better: 'higher' },
+    'Machine Pacing': { name: 'Machine pacing win ratio', unit: 'score', better: 'higher' },
+    'Machine Lens': { name: 'Machine lens win ratio', unit: 'score', better: 'higher' },
+    'Machine Visual Quality': { name: 'Machine visual quality win ratio', unit: 'score', better: 'higher' },
+    'Machine Chromaticity': { name: 'Machine chromaticity win ratio', unit: 'score', better: 'higher' },
+    'Machine Lighting': { name: 'Machine lighting win ratio', unit: 'score', better: 'higher' },
+    'Machine Materiality': { name: 'Machine materiality win ratio', unit: 'score', better: 'higher' },
+    'Machine Grounding': { name: 'Machine grounding win ratio', unit: 'score', better: 'higher' },
+    'Machine Progression': { name: 'Machine progression win ratio', unit: 'score', better: 'higher' },
+    'Machine Logic': { name: 'Machine logic win ratio', unit: 'score', better: 'higher' },
+    'Machine Rhythm': { name: 'Machine rhythm win ratio', unit: 'score', better: 'higher' },
+    'Machine Vocal': { name: 'Machine vocal win ratio', unit: 'score', better: 'higher' },
+    'Machine Soundscape': { name: 'Machine soundscape win ratio', unit: 'score', better: 'higher' },
+  },
   aliases:{ 'Seedance 2.0':'dreamina-seedance-2-0','Happy Horse 1.0':'happyhorse-1-0' },
   async fetch() {
     const html = await paperHtml(feed);

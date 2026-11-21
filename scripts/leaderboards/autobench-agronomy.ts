@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/AutoBench/AutoBench-Leaderboard",
   feed: FEED,
   terms: "The Space declares the MIT license. The agronomy run has its own results CSV. https://huggingface.co/spaces/AutoBench/AutoBench-Leaderboard Hugging Face allows crawling in robots.txt.",
+  stats: { iterations:{name:'Iterations',unit:'count'}, latency:{name:'Average answer duration',unit:'seconds',better:'lower'}, p99Latency:{name:'99th percentile answer duration',unit:'seconds',better:'lower'}, failRate:{name:'Failure rate',unit:'%',better:'lower'} },
   async fetch() {
     const records = parseCsv((await fetchText(FEED)).trimStart());
     if (records.length < 40) throw new Error('Expected forty AutoBench models');

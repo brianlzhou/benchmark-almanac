@@ -17,6 +17,10 @@ interface Task {
 const board: Leaderboard = {
   benchmark: 'rsi-inference-bench', url: 'https://rsi-inference.com', feed,
   terms: 'The repository uses the Apple Sample Code License. The leaderboard domain returns 404 for robots.txt.',
+  stats: {
+    steps: { name: 'Mean steps', unit: 'count', better: 'lower' },
+    hours: { name: 'Mean run hours', unit: 'hours', better: 'lower' },
+  },
   async fetch() {
     const html = (await fetchText(feed)).replace(/([:,\[])(-?)\.(\d)/g, (_, prefix, sign, digit) => prefix + sign + '0.' + digit);
     const { agents } = jsonAfter<{agents: Agent[]}>(html, 'window.OV=');

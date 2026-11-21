@@ -7,6 +7,7 @@ const PAGE='https://last-translation-benchmark.vilda.net/leaderboard-results';
 const API='https://last-translation-benchmark.vilda.net/api/leaderboard/results';
 export default {benchmark:'last-translation-benchmark',url:PAGE,feed:`${API}?mode=blind&subset=LTBv1-eval (also mode=oracle)`,
  terms:'The official site restricts automated access in robots.txt; the almanac credits the Last Translation Benchmark authors and links the original source.',
+ stats:{paramsUpperBoundB:{name:'Parameter upper bound',unit:'billions'}},
  async fetch():Promise<LeaderboardRow[]> {
   const rows:LeaderboardRow[]=[];
   for(const mode of ['blind','oracle']){

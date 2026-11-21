@@ -17,6 +17,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at a3-bench.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    AAUI: { name: 'Anchor Attractor Utilization Index', unit: 'score', better: 'higher', note: 'Effective usage of memory.' },
+    reportedTokenTotal: { name: 'Total reported tokens', unit: 'tokens' },
+  },
   
   async fetch() {
     const html=await fetchText(FEED);const out:LeaderboardRow[]=[];let index=0;

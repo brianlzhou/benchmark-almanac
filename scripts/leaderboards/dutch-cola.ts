@@ -6,7 +6,7 @@ import {fetchText, parseCsv} from '../lib/util.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 
 const PAGE = 'https://euroeval.com/datasets/dutch';
-const board: Leaderboard = {benchmark: 'dutch-cola', url: PAGE, feed: PAGE, terms: 'EuroEval public leaderboard. https://euroeval.com/faq/', async fetch() {
+const board: Leaderboard = {benchmark: 'dutch-cola', url: PAGE, feed: PAGE, terms: 'EuroEval public leaderboard. https://euroeval.com/faq/', stats: { macroF1: { name: 'Macro F1', unit: '%', better: 'higher' } }, async fetch() {
   const page = await fetchText(PAGE);
   const assets = [...page.matchAll(/(?:src|href)="\/assets\/([^"?]+\.js)"/g)].map(m => m[1]);
   const candidates = [...new Set(assets)].filter(x => x.startsWith('index-'));

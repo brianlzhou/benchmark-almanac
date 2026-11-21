@@ -42,6 +42,7 @@ const board: Leaderboard = {
   url: "https://www.fab-ai.org/benchmarks?benchmark=CDPK&cost=10&models=%5B%5D&pageView=table",
   feed,
   terms: "Fab AI marks the leaderboard as all rights reserved. The code repository has an MIT license. robots.txt allows the feed path.",
+  stats: { items: { name: 'Items', unit: 'count' }, badFormat: { name: 'Bad-format answers', unit: 'count', better: 'lower' } },
   async fetch() {
     return pedagogy(feed, 'CDPK', 283);
   },

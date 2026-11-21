@@ -18,6 +18,13 @@ const html=await fetchText(FEED); const data=jsLiteral<any[]>(html,html.indexOf(
  },
 };
 export const sourceBoard = board;
+export const ODYSSEY_STATS = {
+  passAt4: { name: 'Pass at 4', unit: '%', better: 'higher' as const, note: 'Success rate when the agent gets four trials.' },
+  turnOnLightsPassAt4: { name: 'Turn On Lights pass at 4', unit: '%', better: 'higher' as const },
+  energyDispatchPassAt4: { name: 'Energy Dispatch pass at 4', unit: '%', better: 'higher' as const },
+  repoSystemPassAt4: { name: 'Repo System pass at 4', unit: '%', better: 'higher' as const },
+  bestReturnAt4: { name: 'AI Trading return at 4', unit: '%', better: 'higher' as const, note: 'Average return relative to initial capital over four trials.' },
+};
 
 // Each child record selects one complete test set. Remaining settings describe its run.
 export async function trackRows(select: string, remove: string): Promise<LeaderboardRow[]> {

@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2105.05209',
   feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2105.05209',
+  stats: { character: { name: 'Character accuracy', unit: '%', better: 'higher' }, word: { name: 'Word accuracy', unit: '%', better: 'higher' }, vocalization: { name: 'Vocalization accuracy', unit: '%', better: 'higher' }, oovWord: { name: 'Out-of-vocabulary word accuracy', unit: '%', better: 'higher' }, oovVocalization: { name: 'Out-of-vocabulary vocalization accuracy', unit: '%', better: 'higher' } },
   headline: 'The paper reports no overall score, so this is the plain mean of its four document-level accuracy parts.',
   parts: {
     decisionAccuracy: 'Decision accuracy',

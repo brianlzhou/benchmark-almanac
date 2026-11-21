@@ -26,6 +26,10 @@ const board: Leaderboard = {
     y: { key: 'score', label: 'Share flagged', unit: '%', better: 'lower' },
     note: 'A chat is flagged when at least one critical safety check receives a fail rating.',
   },
+  stats: {
+    flaggedChats: { name: 'Flagged chats', unit: 'count', note: 'Chats with at least one critical safety check rated as a fail.' },
+    conversations: { name: 'Conversations', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const table = tables(await fetchText(PAGE)).find((t) => t[0]?.map((c) => c.text).join('|') === 'Model|Flagged chats|Share flagged|Range across scenario mixes');
     if (!table || table.length < 10) throw new Error('Vals teen safety results table missing');

@@ -31,6 +31,15 @@ const board: Leaderboard = {
 };
 export const sourceBoard = board;
 
+export const MOL_GENERATION_STATS = {
+  'BLEU↑': { name: 'BLEU', unit: 'score', better: 'higher' as const },
+  'Levenshtein↓': { name: 'Levenshtein distance', unit: 'score', better: 'lower' as const },
+  'RDK FTS↑': { name: 'RDKit fingerprint similarity', unit: 'score', better: 'higher' as const },
+  'MACC FTS↑': { name: 'MACCS fingerprint similarity', unit: 'score', better: 'higher' as const, note: 'Similarity from MACCS fingerprints.' },
+  'Morgan FTS↑': { name: 'Morgan fingerprint similarity', unit: 'score', better: 'higher' as const, note: 'Similarity from Morgan fingerprints.' },
+  'Validity↑': { name: 'Validity', unit: 'score', better: 'higher' as const, note: 'Fraction of generated molecules that are valid.' },
+};
+
 // Each child record selects one complete test set. Remaining settings describe its run.
 export async function trackRows(select: string, remove: string): Promise<LeaderboardRow[]> {
  const rows = (await sourceBoard.fetch()).filter(r => new RegExp(select).test(r.setting ?? "")).map(r => ({...r, setting: (r.setting ?? "").replace(new RegExp(remove), "").replace(/^;\s*|;\s*$/g, "").trim() || undefined}));

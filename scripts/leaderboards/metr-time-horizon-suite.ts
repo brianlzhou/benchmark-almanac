@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'metr-time-horizon-suite', url: 'https://metr.org/time-horizons/', feed,
   terms: 'METR publishes these chart downloads at https://metr.org/time-horizons/ and lists repository terms at https://github.com/METR/eval-analysis-public/blob/main/LICENSE.',
   aliases: METR_ALIASES,
+  stats: { p80: { name: '80% success time horizon', unit: 'minutes', better: 'higher', note: 'Task length in human minutes at which the agent reaches 80% success.' } },
   async fetch() {
     const rows = await metrRows(feed);
     return checked(rows.map(row => ({...row, setting: 'Time Horizon 1.0', low: row.metrics?.ciLow, high: row.metrics?.ciHigh})), 31);

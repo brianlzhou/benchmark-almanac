@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/snapwre/amharic-asr-benchmark",
   feed,
   terms: "Dataset.ET labels the benchmark CC BY 4.0. Preserve the three training-data categories. The JSON file contains character error rates for all 16 models. https://huggingface.co/datasets/snapwre/amharic-asr-benchmark The feed host publishes robots.txt at https://huggingface.co/robots.txt.",
+  stats: {
+    wer: { name: 'Word error rate', unit: '%', better: 'lower' },
+    speed: { name: 'Realtime speed', unit: 'speedup', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const rows: LeaderboardRow[] = [];

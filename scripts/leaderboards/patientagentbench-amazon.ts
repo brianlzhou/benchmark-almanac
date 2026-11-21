@@ -32,6 +32,14 @@ const board: Leaderboard = {
   "feed": "https://raw.githubusercontent.com/amazon-science/PatientAgentBench/main/README.md",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    taskCompletionPercent: { name: 'Task completion percentage', unit: '%', better: 'higher' },
+    clinicalSafetyPercent: { name: 'Clinical safety percentage', unit: '%', better: 'higher' },
+    workflowAccuracyPercent: { name: 'Workflow accuracy percentage', unit: '%', better: 'higher' },
+    triageQualityPercent: { name: 'Triage quality percentage', unit: '%', better: 'higher' },
+    clinicalHelpfulnessPercent: { name: 'Clinical helpfulness percentage', unit: '%', better: 'higher' },
+    conversationalQualityPercent: { name: 'Conversational quality percentage', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const t = markdownTables(await fetchText(FEED)).find(t => t[0].includes('Aggregate'));

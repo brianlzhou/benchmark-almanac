@@ -27,6 +27,9 @@ const board: Leaderboard = {
   url: 'https://robocoliseum.ai/leaderboard',
   feed: `${API}?page=N&per-page=100&model_type=all (overall score)`,
   terms: "Public JSON the leaderboard page reads; robocoliseum.ai serves no robots.txt rules (the path returns the app) and publishes no terms for the board.",
+  stats: {
+    elapsedRunSeconds: { name: 'Elapsed run time', unit: 'seconds', better: 'lower' },
+  },
   aliases: {
     'Muse Wonder 1.0': 'muse-wonder',
   },

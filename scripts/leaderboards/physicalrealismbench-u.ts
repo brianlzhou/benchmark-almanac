@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://reka.ai/labs/research/physicalrealismbench-attributable-physical-realism-evaluation-for-video-world-models",
   feed,
   terms: "The old leaderboard and its robots.txt redirect to Reka. Reka's terms apply to the public research article and its attributed Table 4.",
+  stats: { classF1: { name: 'Classification F1', unit: '%', better: 'higher' }, drop: { name: 'Performance drop', unit: '%', better: 'lower' } },
   async fetch() {
     const values: [string, string, number, number, number][] = [
       ['GPT-5.5', 'Frames', 60.8, 66.5, 5.7], ['GPT-5', 'Frames', 41.5, 48.5, 6.9],

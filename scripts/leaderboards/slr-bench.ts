@@ -15,6 +15,11 @@ type Result = {
 };
 const board: Leaderboard = {
   benchmark: 'slr-bench', url: space, feed, parts, costPer: 'run',
+  stats: {
+    basicShortcuts: {name: 'Basic shortcuts', unit: 'count'}, easyShortcuts: {name: 'Easy shortcuts', unit: 'count'},
+    mediumShortcuts: {name: 'Medium shortcuts', unit: 'count'}, hardShortcuts: {name: 'Hard shortcuts', unit: 'count'},
+    syntax: {name: 'Syntax score', unit: '%', better: 'higher'}, runTokens: {name: 'Run tokens', unit: 'tokens'},
+  },
   aliases: { 'Cascade-2 30B': 'nemotron-cascade-2-30b-a3b', 'Llama-3.1-Nemotron 253B': 'llama-3-1-nemotron-ultra-253b-v1' },
   terms: 'The makers publish SLR-Bench under CC BY 4.0 at https://huggingface.co/datasets/AIML-TUDA/SLR-Bench.',
   async fetch() {

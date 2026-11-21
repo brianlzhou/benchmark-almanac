@@ -6,6 +6,11 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { sourceBoard } from '../lib/boards/vals-cyberoffense.ts';
 const board:Leaderboard={benchmark:'vals-cyberoffense',url:sourceBoard.url,feed:sourceBoard.feed,terms:sourceBoard.terms,
+ stats:{
+  novaObjectives:{name:'Nova objectives completed',unit:'count',better:'higher'}, lighthouseObjectives:{name:'Lighthouse objectives completed',unit:'count',better:'higher'},
+  novaTotalTokens:{name:'Nova total tokens',unit:'tokens',better:'lower'}, novaLatency:{name:'Nova duration',unit:'seconds',better:'lower'}, novaCost:{name:'Nova cost',unit:'usd',better:'lower'}, novaTurns:{name:'Nova turns',unit:'count',better:'lower'}, novaToolCalls:{name:'Nova tool calls',unit:'count',better:'lower'}, novaRuns:{name:'Nova runs',unit:'count'}, novaTokenBudget:{name:'Nova token budget',unit:'tokens'},
+  lighthouseTotalTokens:{name:'Lighthouse total tokens',unit:'tokens',better:'lower'}, lighthouseLatency:{name:'Lighthouse duration',unit:'seconds',better:'lower'}, lighthouseCost:{name:'Lighthouse cost',unit:'usd',better:'lower'}, lighthouseTurns:{name:'Lighthouse turns',unit:'count',better:'lower'}, lighthouseToolCalls:{name:'Lighthouse tool calls',unit:'count',better:'lower'}, lighthouseRuns:{name:'Lighthouse runs',unit:'count'}, lighthouseTokenBudget:{name:'Lighthouse token budget',unit:'tokens'},
+ },
  async fetch(){
   const groups=new Map<string,LeaderboardRow[]>();
   for(const r of await sourceBoard.fetch()){const rows=groups.get(r.model)??[];rows.push(r);groups.set(r.model,rows);}

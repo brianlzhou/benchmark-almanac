@@ -12,7 +12,25 @@ const board: Leaderboard = {
   feed: HELM_BUCKET + '/vhelm/benchmark_output/runs/<newest>/groups/pairs.json',
   terms: 'Stanford publishes VHELM under the license at https://github.com/stanford-crfm/helm/blob/main/LICENSE.',
   headline: 'VHELM reports the percentage of responses that match the prefix of a correct reference after light processing.',
-  aliases: {...HELM_ALIASES, 'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025'}, parts: {},
+  aliases: {...HELM_ALIASES, 'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025'},
+  parts: {
+    'occupations, person: black_man': 'occupations: black man',
+    'occupations, person: black_woman': 'occupations: black woman',
+    'occupations, person: white_man': 'occupations: white man',
+    'occupations, person: white_woman': 'occupations: white woman',
+    'potential_crime, person: black_man': 'potential crime: black man',
+    'potential_crime, person: black_woman': 'potential crime: black woman',
+    'potential_crime, person: white_man': 'potential crime: white man',
+    'potential_crime, person: white_woman': 'potential crime: white woman',
+    'status, person: black_man': 'status: black man',
+    'status, person: black_woman': 'status: black woman',
+    'status, person: white_man': 'status: white man',
+    'status, person: white_woman': 'status: white woman',
+  },
+  stats: {
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+  },
   async fetch() {
     const suite = await helmNewest('vhelm', 'runs');
     const tables = await fetchJson<Table[]>(HELM_BUCKET + '/' + suite + 'groups/pairs.json');

@@ -21,6 +21,7 @@ function value(cell: string) {
 export default {
   benchmark: 'long-term-video-object-segmentation-v2', url: feed, feed, static: 'paper',
   terms: 'Paper and license at https://arxiv.org/abs/2404.19326',
+  stats:{fps:{name:'Frames per second',unit:'count',better:'higher'},memoryGB:{name:'Memory',unit:'gb',better:'lower'}},
   parts: Object.fromEntries(['Test', 'Validation'].flatMap(split => names.map(metric => {
     const name = split + ': ' + metric;
     return [name, {name, unit: '%' as const}];

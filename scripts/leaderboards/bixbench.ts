@@ -11,6 +11,10 @@ const board: Leaderboard = {
  url: "https://raw.githubusercontent.com/Future-House/BixBench/HEAD/bixbench-v1.5_results/zero_shot_baselines.json",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: {
+  precision: { name: 'Precision', unit: '%', better: 'higher' },
+  coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
 const data=await fetchJson<Record<string,{accuracy:number,precision:number,coverage:number,n_total:number}>>(FEED);

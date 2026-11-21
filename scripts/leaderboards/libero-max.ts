@@ -7,6 +7,7 @@ import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
   benchmark: "libero-max", static: 'paper',
   parts: {
+    baseSuccess: { name: 'Base', group: 'Split' },
     liteDynamic: { name: 'Lite', group: 'Split', note: 'Dynamic success on the fixed 800-pair subset of LIBERO-MAX.' },
   },
   url: "https://github.com/liberomax/LIBERO-MAX",

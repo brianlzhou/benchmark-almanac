@@ -15,6 +15,7 @@ const board: Leaderboard = {
   'Single repo': { name: 'Single repo', group: 'Split' },
   'Multi-repo': { name: 'Multi-repo', group: 'Split' },
 }, url: "https://depthfirst.com/research/dfbench", feed: FEED,
+ stats: { Precision: { name: 'Precision', unit: '%', better: 'higher' }, F1: { name: 'F1', unit: '%', better: 'higher' } },
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {

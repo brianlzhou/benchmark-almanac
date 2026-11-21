@@ -19,6 +19,7 @@ interface Vvb {
 }
 
 const board: Leaderboard = {
+  stats: { meanDelivered: { name: 'Mean delivered score', unit: 'score', better: 'higher' }, delivered: { name: 'Delivered rate', unit: '%', better: 'higher' }, pass: { name: 'Pass rate', unit: '%', better: 'higher' } },
   benchmark: 'vibevideobench',
   harnesses: 'system',
   url: `${PAGE}#leaderboard`,

@@ -27,6 +27,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (current assets/data.*.js, leaderboard.results.all)`,
   terms: 'SLE publishes the public leaderboard and Apache-2.0 evaluation code; its contributor terms do not grant redistribution rights to submitted research materials.',
+  stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' } },
   chart: {
     title: 'Capability vs. cost',
     x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' },

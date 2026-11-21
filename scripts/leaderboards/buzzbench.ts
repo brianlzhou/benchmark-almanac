@@ -10,6 +10,9 @@ const board: Leaderboard = {
   url: 'https://eqbench.com/buzzbench.html',
   feed: `${eqbenchFeed('buzzbench.js', 'leaderboardDataBuzzbench')} score`,
   terms: EQBENCH_TERMS,
+  stats: {
+    length: { name: 'Average response length', unit: 'count' },
+  },
   aliases: {...EQBENCH_ALIASES, 'gemini-2.5-pro-preview-03-25': 'gemini-2-5-pro-mar-2025'},
   fetch: () => eqbenchRows('buzzbench.js', 'leaderboardDataBuzzbench', 'score', 1, { ciLow: 'c95_lower', ciHigh: 'c95_upper', length: 'avg_length' }),
 };

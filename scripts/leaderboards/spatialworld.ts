@@ -7,7 +7,7 @@ const feed = 'https://arxiv.org/html/2606.09669';
 const board: Leaderboard = {
   benchmark: 'spatialworld', static: 'paper', url: feed, feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2606.09669',
-  parts: { daily: 'Daily', work: 'Work', entertainment: 'Entertainment', travel: 'Travel', social: 'Social' },
+  parts: { daily: 'Daily', work: 'Work', entertainment: 'Entertainment', travel: 'Travel', social: 'Social', digitalEntertainment: 'Digital' },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[0] === 'Model' && t[1]?.[5] === 'Social');
     if (!table) throw new Error('SpatialWorld results table missing');

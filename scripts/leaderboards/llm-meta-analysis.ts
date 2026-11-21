@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://67ailab.com/posts/spark-eval-07-l4-trial-extraction/",
   feed,
   terms: "The publisher allows crawling. The publisher gives no separate reuse terms for the score table. https://67ailab.com/posts/spark-eval-07-l4-trial-extraction/",
+  stats:{filled:{name:'Cells the key fills',unit:'%' ,better:'higher'},wholeRow:{name:'Whole row right',unit:'%',better:'higher'},missing:{name:'Missing cells',unit:'%',better:'lower'},extra:{name:'Extra cells',unit:'%',better:'lower'},wrong:{name:'Wrong cells',unit:'%',better:'lower'}},
   host: '67AI Lab',
   aliases: { 'Opus 5.5': 'claude-opus-5-5', 'Nemotron 3.5 30B-A3B': 'nemotron-3-5-lightning-30b-a3b' },
   async fetch() {

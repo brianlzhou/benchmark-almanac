@@ -9,6 +9,7 @@ const FEED = 'https://arxiv.org/html/2307.16039';
 const board: Leaderboard = {
   benchmark: 'okapi-hellaswag', static: 'paper', url: FEED, feed: FEED, terms: PAPER_TERMS,
   headline: 'The paper reports an Average accuracy across its 26 translated languages.',
+  parts: { 'High-Resource': { name: 'High-resource languages', group: 'Resource level' }, 'Medium-Resource': { name: 'Medium-resource languages', group: 'Resource level' }, 'Low-Resource': { name: 'Low-resource languages', group: 'Resource level' } },
   async fetch() {
     const table = grid(paperTables(await paperHtml(FEED))[3]);
     const header = table[0];

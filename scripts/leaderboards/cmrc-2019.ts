@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://ymcui.com/cmrc2019/",
   feed,
   terms: "The organizers license the dataset under CC BY-SA 4.0. The ranking page gives no separate score reuse terms. The site's robots.txt lists a sitemap and no disallow rules.",
+  stats: { qac: { name: 'Question-level accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const html = await fetchText(feed);
     // The page omits closing row tags on the ranked entries.

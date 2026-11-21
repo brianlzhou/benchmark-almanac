@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: 'https://huggingface.co/spaces/meta-agents-research-environments/leaderboard',
   feed: `${FEED} (_GAIA2_CLI_DATA)`,
   terms: 'The official Meta Space is public; the almanac credits and links the authors, and the underlying ARE repository is MIT licensed.',
+  stats: { time: { name: 'Time score', unit: 'score', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const marker = source.indexOf('_GAIA2_CLI_DATA =');

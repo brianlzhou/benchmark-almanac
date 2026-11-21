@@ -6,6 +6,7 @@ const FEED = "https://quantsightbench.com/data.js";
 const board: Leaderboard = {
   benchmark: "quantsightbench", url: "https://quantsightbench.com/", feed: FEED,
   terms: 'Public maker results; the site has no robots.txt or additional restriction on reading these published values.',
+  stats: { coverage: { name: 'Coverage', unit: 'score', better: 'higher', note: 'Coverage from 0 to 1.' } },
   async fetch() {
     const source = await fetchText(FEED);
     const marker = source.indexOf('const LEADERBOARD_DATA =');

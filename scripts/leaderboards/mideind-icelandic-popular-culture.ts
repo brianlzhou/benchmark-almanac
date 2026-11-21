@@ -10,7 +10,7 @@ const board: Leaderboard = {
   url: "https://mideind-icelandic-llm-leaderboard.static.hf.space/",
   feed,
   terms: "Both hosts allow crawling. family:recall uses a 0 to 1 scale in the feed. The 102 configurations cover 60 model names. Credit Miðeind under CC BY 4.0. https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/README.md",
-  parts: {},
+  parts: { 'Song Lyrics': 'Song Lyrics', 'Song Lyrics: Barnalög': 'Song Lyrics: Children’s Songs', 'Song Lyrics: Dægurlög': 'Song Lyrics: Popular Songs', 'Song Lyrics: Eurovision': 'Song Lyrics: Eurovision', 'Song Lyrics: Jólalög': 'Song Lyrics: Christmas Songs', 'Song Lyrics: Leikhús': 'Song Lyrics: Theater', 'Song Lyrics: Popplög': 'Song Lyrics: Pop', 'Song Lyrics: Rapp': 'Song Lyrics: Rap', 'Song Lyrics: Sjómannalög': 'Song Lyrics: Sailor Songs', 'Song Lyrics: Trúarleg lög': 'Song Lyrics: Religious Songs', 'Song Lyrics: Ættjarðarlög/þjóðvísur': 'Song Lyrics: National Songs and Ballads', 'Song Lyrics: Þungarokk': 'Song Lyrics: Heavy Metal', 'Famous Phrases': 'Famous Phrases', 'Famous Phrases: Almennt': 'Famous Phrases: General', 'Famous Phrases: Kvikmyndir': 'Famous Phrases: Films', 'Famous Phrases: Þættir': 'Famous Phrases: Television' },
   aliases: { 'Llama 3.1 70B Instruct': 'llama-3-1-70b', 'Llama 3.1 8B Instruct': 'llama-3-1-8b' },
   async fetch() {
     const data = await fetchJson<{models: Model[]}>(feed);

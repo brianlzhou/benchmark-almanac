@@ -13,6 +13,10 @@ const board: Leaderboard = {
   feed,
   terms: "I found no reuse terms for the score file in the repository. The summary reports six models across five prompts and two puzzle sets. The host has no robots.txt.",
   parts: { human80: 'Human subset (80 puzzles)' },
+  stats: {
+    standardDeviation: { name: 'Standard deviation', unit: '%', better: 'lower' },
+    human80StandardDeviation: { name: 'Human subset standard deviation', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<Record<string, Record<string, Result>>>(feed);
     if (Object.keys(data).length < 6) throw new Error('Missing CREATE models');

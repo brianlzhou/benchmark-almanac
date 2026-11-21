@@ -11,6 +11,11 @@ const board: Leaderboard = {
   url: "https://github.com/laiyao1/AnalogCoder#evaluation-of-llms",
   feed,
   terms: "The makers license the repository under MIT. The host has no robots.txt.",
+  stats: {
+    solved: { name: 'Circuits solved', unit: 'count' },
+    pass1: { name: 'Pass@1', unit: '%', better: 'higher' },
+    pass5: { name: 'Pass@5', unit: '%', better: 'higher' },
+  },
   aliases: {
     'Mixtral-8×7B': 'mixtral-8x7b', 'Codestral-22B': 'codestral', 'Phi3-14B': 'phi-3-medium-14b',
     'DeepSeek-V2-Coder': 'deepseek-coder-v2-236b', 'DeepSeek-V2-Chat': 'deepseek-v2-moe-236b-may-2024',

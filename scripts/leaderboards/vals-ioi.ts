@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: { ...VALS_ALIASES, 'Grok Code Fast': 'grok-code-fast-1' },
+  stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' } },
   chart: { title: 'Accuracy against latency', x: { key: 'latency', label: 'Latency per test', unit: 's', better: 'lower', log: true }, y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' } },
   fetch: () => valsRows(SLUG, { cost: null }),
 };

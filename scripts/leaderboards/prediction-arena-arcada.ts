@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://www.predictionarena.ai/",
   feed,
   terms: "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://www.predictionarena.ai/robots.txt.",
+  stats: { cash: { name: 'Cash', unit: 'usd', better: 'higher' }, pnl: { name: 'Profit and loss', unit: 'usd', better: 'higher' }, returnPct: { name: 'Return', unit: '%', better: 'higher' }, sharpe: { name: 'Sharpe ratio', unit: 'score', better: 'higher' }, trades: { name: 'Trades', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' }, biggestWin: { name: 'Biggest win', unit: 'usd', better: 'higher' }, biggestLoss: { name: 'Biggest loss', unit: 'usd', better: 'higher' } },
   async fetch() {
     type Agent = { model_id: string; account_value: number; cash_balance: number; total_pnl: number; return_percentage: number; sharpe_ratio: number; total_bets_count: number; biggest_win: number; biggest_loss?: number; max_loss?: number; win_rate: number };
     const kalshi = await fetchJson<Agent[]>(feed);

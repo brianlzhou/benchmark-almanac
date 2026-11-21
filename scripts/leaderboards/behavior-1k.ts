@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/behavior-1k/2026-challenge-leaderboard/raw/main/data/results.jsonl",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { successRate:{name:'Success rate',unit:'%',better:'higher'} },
   
   async fetch() {
     const data=(await fetchText(FEED)).trim().split('\n').map(s=>JSON.parse(s));

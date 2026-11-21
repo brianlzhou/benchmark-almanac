@@ -126,6 +126,7 @@ const board: Leaderboard = {
   feed: `${CLAW_FEED} (benchmarkData avg_score)`,
   terms: CLAW_TERMS,
   aliases: CLAW_ALIASES,
+  stats: { pass3: { name: 'Pass at 3', unit: '%', better: 'higher' }, passAt3: { name: 'Pass at 3 coverage', unit: '%', better: 'higher' } },
   fetch: () => clawRows('general', 'avg_score', 100, true, board),
 };
 export default board;

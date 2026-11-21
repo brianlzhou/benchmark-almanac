@@ -5,6 +5,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2611.14364';
 const board: Leaderboard = { benchmark: 'are-bench', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
+  stats: { csr: { name: 'Compound success rate', unit: '%', better: 'higher' } },
   async fetch() {
     const tables = paperTables(await paperHtml(URL)).map(grid);
     const table = tables.find(t => t.some(r => r.some(c => c.includes('Overall ISR'))));

@@ -9,6 +9,13 @@ const board: Leaderboard = {
   url: "https://www.aecbench.com/leaderboard",
   feed,
   terms: "The site serves HTML for robots.txt. The benchmark code uses the MIT license. The results page gives no separate reuse license.",
+  stats: {
+    completion: { name: 'Completion rate', unit: 'score', better: 'higher', note: 'Completion rate from 0 to 1.' },
+    completeTrials: { name: 'Completed trials', unit: 'count' },
+    failedTrials: { name: 'Failed trials', unit: 'count', better: 'lower' },
+    latency: { name: 'Mean duration', unit: 'seconds', better: 'lower' },
+    p95Latency: { name: '95th percentile duration', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const page = nextFlight(await fetchText(feed));
     const count = jsonAfter<{ models: number }>(page, '"runStatus":').models;

@@ -10,6 +10,11 @@ const board: Leaderboard = {
  url: "https://huggingface.co/datasets/opendatalab/CiteVQA",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+  'Rec.': { name: 'Recall', unit: '%', better: 'higher' },
+  'Rel.': { name: 'Relevance', unit: '%', better: 'higher' },
+  'Ans.': { name: 'Answer accuracy', unit: '%', better: 'higher' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

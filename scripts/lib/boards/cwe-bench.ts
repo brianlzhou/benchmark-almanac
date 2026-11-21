@@ -8,6 +8,9 @@ export function cweV2(benchmark: string, subset: 'all' | 'public' | 'heldout'): 
     benchmark, url: 'https://cwe-bench.com/#leaderboard',
     feed: `https://cwe-bench.com/ (v2 ${subset} table data attributes)`,
     terms: 'Collinear AI publishes the public results and Apache-2.0 dataset; the Almanac credits and links the source.',
+    stats: {
+      passAt4: { name: 'Pass@4', unit: '%', better: 'higher', note: 'Share of tasks solved within four rollouts under the deterministic programmatic verifier.' },
+    },
     aliases: { 'DeepSeek-V4.1-Flash (1017)': 'deepseek-v4-1-flash-1017', 'Qwen3.8-Max (0902)': 'qwen3-8-max-0902' },
     ...(subset === 'all' ? { chart: {
       title: 'Pass@1 and average cost per rollout',

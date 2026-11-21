@@ -21,6 +21,7 @@ const board: Leaderboard = {
     EN: { name: 'English', group: 'Language' },
     CN: { name: 'Chinese', group: 'Language' },
   },
+  stats: { ENUncertainty:{name:'English uncertainty',unit:'score',better:'lower'}, CNUncertainty:{name:'Chinese uncertainty',unit:'score',better:'lower'} },
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://leililab.github.io/susvibes-leaderboard/submissions/index.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { functionalPass1: { name: 'Functional pass@1', unit: 'score', better: 'higher', note: 'Percentage of tasks with functional and secure solutions, from 0 to 1.' } },
   
   verified: 'Marked Official Submission by the benchmark team.',
   aliases: {'Claude 4 Sonnet':'claude-sonnet-4'},

@@ -8,6 +8,7 @@ const feed = "https://3d-arena-3d-world-arena.hf.space/api/v2/leaderboard?track=
 const board: Leaderboard = {
   benchmark: '3d-worlds-arena', url, feed,
   terms: "The protocol publishes aggregate ratings and lists component licenses by system. It gives no separate ratings license. https://huggingface.co/spaces/3d-arena/3d-world-arena/blob/main/docs/3D-WORLD-ARENA.md" ,
+  stats: { votes: { name: 'Votes', unit: 'count' }, coverage: { name: 'Coverage', unit: 'count' }, bothPoorRate: { name: 'Both poor rate', unit: 'score', better: 'lower', note: 'Rate of comparisons where both generated results were poor, from 0 to 1.' } },
   async fetch() {
     type Entry = {name: string; score: number; confidence_95: number[]; votes: number; coverage: number; both_poor_rate: number;
       representation: string; access_class: string; license: string};

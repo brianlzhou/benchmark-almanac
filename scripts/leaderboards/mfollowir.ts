@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'mfollowir', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2501.19264.',
   parts: {persian: 'Persian', chinese: 'Chinese', russian: 'Russian'},
+  stats: { ndcg20: {name:'Average nDCG@20',unit:'score',better:'higher'}, persianNdcg20: {name:'Persian nDCG@20',unit:'score',better:'higher'}, chineseNdcg20: {name:'Chinese nDCG@20',unit:'score',better:'higher'}, russianNdcg20: {name:'Russian nDCG@20',unit:'score',better:'higher'} },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const results = tables.filter(t => t[1]?.join('|') === '|Model|nDCG@20||p-MRR|nDCG@20||p-MRR|nDCG@20||p-MRR|nDCG@20|p-MRR');

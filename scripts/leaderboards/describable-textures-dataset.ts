@@ -8,6 +8,7 @@ const feed = 'https://openaccess.thecvf.com/content_cvpr_2014/papers/Cimpoi_Desc
 export default {
   benchmark: 'describable-textures-dataset', url: feed, feed, static: 'paper',
   terms: 'CVF Open Access, copyright retained by the authors or rights holders. https://openaccess.thecvf.com/',
+  stats: { mAPStd: { name: 'Mean average precision standard deviation', unit: 'score' } },
   parts: { mAP: { name: 'Mean average precision', unit: '%' } },
   async fetch() {
     const paper = await pdfText(feed);

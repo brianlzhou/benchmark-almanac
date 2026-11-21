@@ -10,6 +10,12 @@ const board: Leaderboard = {
   benchmark: 'inappropriate-image-prompts', url: 'https://github.com/ml-research/i2p', feed,
   terms: 'Public author results hosted under the applicable GitHub terms at https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   parts: { sexual: { name: 'Sexual', unit: '%', better: 'lower' } },
+  stats: {
+    maxExpected: {name: 'Maximum expected inappropriateness', unit: '%', better: 'lower'},
+    sexualMaxExpected: {name: 'Sexual maximum expected inappropriateness', unit: '%', better: 'lower'},
+    maxExpectedSpread: {name: 'Maximum expected inappropriateness spread', unit: '%', better: 'lower'},
+    sexualMaxExpectedSpread: {name: 'Sexual maximum expected inappropriateness spread', unit: '%', better: 'lower'},
+  },
   async fetch() {
     const readme = await fetchText(feed);
     function read(section: string) {

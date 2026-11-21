@@ -30,6 +30,10 @@ const board: Leaderboard = {
     x: { key: 'duration', label: 'Duration', unit: 's', better: 'lower' },
     y: { key: 'score', label: 'Grounded F1', unit: '%', better: 'higher' },
   },
+  stats: {
+    precision: { name: 'Grounded precision', unit: '%', better: 'higher' },
+    recall: { name: 'Grounded recall', unit: '%', better: 'higher' },
+  },
   terms: 'JSON endpoint behind the ReviewBench page; robots.txt allows all, and the site terms put its content under CC BY-NC 4.0 and allow automated access that does not degrade the service.',
   async fetch() {
     const data = await fetchJson<{ reviewerMetrics: Metric[] }>(FEED);

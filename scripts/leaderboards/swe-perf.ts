@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://swe-perf.github.io/performances.json",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: {
+    apply: { name: 'Patch application rate', unit: '%', better: 'higher' },
+    correctness: { name: 'Patch correctness', unit: '%', better: 'higher' },
+  },
   
   async fetch() {
     const data=(await fetchJson<any>(FEED)).performances;const out:LeaderboardRow[]=[];const seen=new Set<string>();

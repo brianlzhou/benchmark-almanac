@@ -6,6 +6,7 @@ import { tables, num, jsLiteral } from '../lib/html.ts';
 const url='https://fireworks.ai/specialized-intelligence-index/benchmarks/accounting-and-tax/dayjob-accounting';
 const board:Leaderboard={benchmark:'dayjob-accounting',url,feed:`${url} (Accounting table and DAYJOB source tuples)`,
  terms:'Fireworks and Surge AI restrict automated extraction; the Almanac credits both publishers and links the original board.',
+ stats:{surgeRecordedCost:{name:'Recorded Surge cost',unit:'usd',better:'lower'},inputTokens:{name:'Input tokens',unit:'tokens',better:'lower'},cachedTokens:{name:'Cached tokens',unit:'tokens',better:'lower'},reasoningTokens:{name:'Reasoning tokens',unit:'tokens',better:'lower'}},
  aliases:{'Muse Wonder 1.0':'muse-wonder','Hy4 Preview':'tencent-hy4-preview'},
  chart:{title:'Accounting score versus cost',x:{key:'cost',label:'Model cost per task at board pricing',unit:'$',better:'lower'},y:{key:'score',label:'Pass@1 at 95%',unit:'%',better:'higher'}},
  async fetch():Promise<LeaderboardRow[]>{

@@ -27,6 +27,7 @@ const board: Leaderboard = {
   benchmark: 'clef-joker-2023-pun-location-and-interpretation', url: feed, feed,
   terms: 'The authors publish the paper under CC BY 4.0. https://creativecommons.org/licenses/by/4.0/',
   parts: { en: 'Pun location (English)', fr: 'Pun location (French)', es: 'Pun location (Spanish)', interpretation: 'Pun interpretation (English)' },
+  stats: { enCount: { name: 'English examples', unit: 'count' }, frCount: { name: 'French examples', unit: 'count' }, esCount: { name: 'Spanish examples', unit: 'count' }, interpretationCount: { name: 'Interpretation examples', unit: 'count' }, enAttempted: { name: 'English attempted accuracy', unit: '%', better: 'higher' }, frAttempted: { name: 'French attempted accuracy', unit: '%', better: 'higher' }, esAttempted: { name: 'Spanish attempted accuracy', unit: '%', better: 'higher' }, interpretationAttempted: { name: 'Interpretation attempted accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(feed);
     const location = paper.split('Results for Task 2.1 (pun location) on the test data')[1]?.split('\f')[0];

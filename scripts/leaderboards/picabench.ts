@@ -5,6 +5,7 @@ import { tables } from '../lib/html.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const FEED="https://picabench.github.io";
 const board:Leaderboard={benchmark:"picabench",url:FEED,feed:FEED,
+ stats:{consistency:{name:"Physical consistency",unit:"%",better:"higher"}},
  terms:'Public maker results. The source robots.txt permits this public path or is absent. No additional restriction on reading these results is stated.',
  async fetch(){const ts=tables(await fetchText(FEED)).map(t=>t.map(r=>r.map(c=>c.text)));const out:LeaderboardRow[]=[];
 const t=ts.find(t=>t[0]?.includes('Overall'));if(!t)throw new Error('Overall table missing');

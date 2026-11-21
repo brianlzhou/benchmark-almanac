@@ -4,6 +4,7 @@ import { tables, num } from '../lib/html.ts';
 
 const URL='https://macroscope.com/benchmark';
 const board:Leaderboard={benchmark:'macroscopebench',url:URL,feed:URL,
+ stats:{recall:{name:'Recall',unit:'%',better:'higher'},precision:{name:'Precision',unit:'%',better:'higher'},signalNoise:{name:'Signal-to-noise ratio',unit:'score',better:'higher'},latency:{name:'Latency',unit:'seconds',better:'lower'}},
  terms:'Macroscope terms restrict automated extraction; the Almanac credits Macroscope and links the original source.',
  chart:{title:'Score vs. inference cost',x:{key:'cost',label:'Cost per code review',unit:'$',better:'lower'},y:{key:'score',label:'Score',better:'higher'}},
  async fetch(){

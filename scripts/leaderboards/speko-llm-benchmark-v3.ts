@@ -11,6 +11,17 @@ const board: Leaderboard = {
   url: "https://speko.com/benchmarks/llm",
   feed,
   terms: "Speko publishes its benchmark JSON under CC BY 4.0. Credit Speko and identify changes. robots.txt allows the feed path.",
+  stats: {
+    stall: { name: 'Stall rate', unit: '%', better: 'lower' }, fabric: { name: 'Fabrication rate', unit: '%', better: 'lower' },
+    deadair: { name: 'Dead-air rate', unit: '%', better: 'lower' }, toolsilence: { name: 'Tool silence rate', unit: '%', better: 'lower' },
+    refusal: { name: 'Refusal rate', unit: '%', better: 'lower' }, toolarg: { name: 'Tool argument error rate', unit: '%', better: 'lower' },
+    placeholder: { name: 'Placeholder rate', unit: '%', better: 'lower' }, ttft: { name: 'Time to first token', unit: 'ms', better: 'lower' },
+    cost: { name: 'Cost per call', unit: 'usd', better: 'lower' }, consistency: { name: 'Consistency', unit: '%', better: 'higher' },
+    realcall: { name: 'Real-call success rate', unit: '%', better: 'higher' }, leak: { name: 'Information leak rate', unit: '%', better: 'lower' },
+    'realcall:scheduling': { name: 'Scheduling success rate', unit: '%', better: 'higher' }, 'realcall:orders': { name: 'Orders success rate', unit: '%', better: 'higher' },
+    'realcall:intake': { name: 'Intake success rate', unit: '%', better: 'higher' }, 'realcall:payments': { name: 'Payments success rate', unit: '%', better: 'higher' },
+    'realcall:frontdesk': { name: 'Front-desk success rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{ boards: { id: string; rows: Entry[] }[] }>(feed);
     const rows = data.boards.find(b => b.id === 'llm')?.rows.filter(r => Number.isFinite(r.cells.task?.s));

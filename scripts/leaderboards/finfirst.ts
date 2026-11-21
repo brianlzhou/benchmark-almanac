@@ -5,6 +5,7 @@ import { numberCell, paperHtml } from '../lib/boards/arxiv-throttled.ts';
 import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2609.25192';
 const board: Leaderboard = {
+  stats: { atomic: { name: 'Atomic pass rate', unit: '%', better: 'higher' }, loose: { name: 'Loose pass rate', unit: '%', better: 'higher' }, rounds: { name: 'Rounds', unit: 'count' }, toolCalls: { name: 'Tool calls', unit: 'count' }, maxToolCalls: { name: 'Maximum tool calls', unit: 'count' }, wrongUnsupported: { name: 'Wrong unsupported answers', unit: 'count' }, wrongPartial: { name: 'Wrong partial answers', unit: 'count' }, correctPartial: { name: 'Correct partial answers', unit: 'count' }, correctTraceable: { name: 'Correct traceable answers', unit: 'count' }, notApplicable: { name: 'Not applicable answers', unit: 'count' }, ucr: { name: 'Unsupported correct rate', unit: '%', better: 'lower' } },
   benchmark:'finfirst', url:'https://huggingface.co/datasets/inclusionAI/FinFIRST', feed, static:'paper',
   terms:'The authors release the benchmark under Apache 2.0. https://huggingface.co/datasets/inclusionAI/FinFIRST',
   parts:{raw:'Raw-information',source:'Source verification',computation:'Computation & answer'},

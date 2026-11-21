@@ -14,6 +14,12 @@ function chart(paper: string, title: string) {
 const board: Leaderboard = {
   benchmark: 'dri-factum-sri-lanka-local-elections-2025', static: 'paper', feed, url: feed,
   terms: 'Democracy Reporting International and Factum publish the election audit. ' + feed,
+  stats: {
+    biased: { name: 'Biased political answers', unit: '%' },
+    falseOrMisleading: { name: 'False or misleading answers', unit: '%' },
+    noInformation: { name: 'No information answers', unit: '%' },
+    partiallyCorrect: { name: 'Partially correct answers', unit: '%' },
+  },
   headline: 'The report gives no overall score, so this is the plain mean of procedural accuracy and political neutrality.',
   parts: {correct: 'Correct electoral answers', unbiased: 'Unbiased political answers'},
   async fetch() {

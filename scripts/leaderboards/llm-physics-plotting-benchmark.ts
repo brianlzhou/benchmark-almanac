@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://gordonwatts.github.io/hep-data-llm/",
   feed: FEED,
   terms: "The MIT license covers repository software and documentation. The report embeds trial data and counts model configurations. https://github.com/gordonwatts/hep-data-llm/blob/main/LICENSE.txt The robots URL returns HTML.",
+  stats:{passed:{name:'Passed trials',unit:'count',better:'higher'},timePerGoodTrial:{name:'Time per good trial',unit:'seconds',better:'lower'},costPerGoodTrial:{name:'Cost per good trial',unit:'usd',better:'lower'}},
   async fetch() {
     const page = await fetchText(FEED);
     const trials = jsonAfter<Trial[]>(page, 'const reportRecords=');

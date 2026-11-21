@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/21886",
   feed,
   terms: "The competition terms permit public release of participant scores. CodaLab serves HTML at robots.txt and the workshop proceedings return 404.",
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Precision stored from 0 to 1.' }, recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Recall stored from 0 to 1.' } },
   async fetch(){
     const pdf=await pdfText(feed);
     const table=pdf.split(/Team\s+F1\s+P\s+R\s+System Summary/)[1]?.split('Table 1:')[0];

@@ -5,8 +5,15 @@ import { checked, flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://arxiv.org/html/2409.11414';
+const stats = Object.fromEntries([
+  ['cells', {name: 'Geometric mean cells', unit: 'count', better: 'lower'}],
+  ['wireRatio', {name: 'Wire ratio', unit: 'score', better: 'lower'}],
+  ['cellRatio', {name: 'Cell ratio', unit: 'score', better: 'lower'}],
+  ...Array.from({length: 14}, (_, i) => ['case' + (i + 1) + ' cells', 'Cell count, test case ' + (i + 1)]),
+].map(([key, value]) => [key, typeof value === 'string' ? {name: value, unit: 'count', better: 'lower'} : value]));
 const board: Leaderboard = {
   benchmark: 'rtlrewriter-small', feed, url: feed, static: 'paper',
+  stats,
   headline: 'The headline is the geometric mean wire count on the 14 short circuits in Table 4.',
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   async fetch() {

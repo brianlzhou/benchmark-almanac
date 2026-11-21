@@ -9,6 +9,7 @@ const FEED = 'https://aclanthology.org/D18-1295.pdf';
 const board: Leaderboard = {
   benchmark: 'dcs-2018-sanskrit-word-segmentation', static: 'paper', url: 'https://aclanthology.org/D18-1295/', feed: FEED,
   terms: 'ACL Anthology terms. https://aclanthology.org/faq/copyright/',
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, f1: { name: 'F1', unit: '%', better: 'higher' } },
   async fetch() {
     const text = await pdfText(FEED);
     const section = text.split('Comparison with other models')[1]?.split('Table 3:')[0];

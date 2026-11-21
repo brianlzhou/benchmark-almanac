@@ -10,6 +10,7 @@ const board: Leaderboard = {
  url: "https://foodtruckbench.com",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { netWorthUnrounded:{name:'Unrounded net worth',unit:'usd',better:'higher'}, revenue:{name:'Revenue',unit:'usd',better:'higher'}, profit:{name:'Profit',unit:'usd',better:'higher'}, foodWaste:{name:'Food waste',unit:'count',better:'lower'}, roi:{name:'Return on investment',unit:'score',better:'higher'}, margin:{name:'Net profit margin',unit:'%',better:'higher'}, balance:{name:'Cash balance',unit:'usd',better:'higher'}, expenses:{name:'Expenses',unit:'usd',better:'lower'}, daysPlayed:{name:'Days played',unit:'count'}, servingsPerDay:{name:'Servings per day',unit:'count',better:'higher'}, medianServingsSold:{name:'Median servings sold',unit:'count',better:'higher'}, averageRevenue:{name:'Average revenue',unit:'usd',better:'higher'}, averageProfit:{name:'Average profit',unit:'usd',better:'higher'}, averageFoodWaste:{name:'Average food waste',unit:'count',better:'lower'}, averageServingsPerDay:{name:'Average servings per day',unit:'count',better:'higher'}, efficiencyRatio:{name:'Efficiency ratio',unit:'score',better:'higher'}, activeParams:{name:'Active parameters',unit:'billions'}, toolCalls:{name:'Tool calls',unit:'count',better:'lower'} },
  aliases: {
   'Muse Glimmer 30B': 'muse-glimmer',
   'Nemotron-3 Ultra 550B': 'nemotron-3-ultra',

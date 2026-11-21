@@ -9,6 +9,10 @@ import { markdownTables } from '../lib/boards/github-markdown.ts';
 const FEED = "https://raw.githubusercontent.com/tianyi-lab/HallusionBench/HEAD/README.md";
 const board: Leaderboard = {
  benchmark: "hallusionbench",
+ stats: {
+  'Question Pair Acc': { name: 'Question pair accuracy', unit: '%', better: 'higher' },
+  'Figure Acc': { name: 'Figure accuracy', unit: '%', better: 'higher' },
+ },
  parts: {
    'Easy Question Acc': { name: 'Easy', group: 'Difficulty' },
    'Hard Question Acc': { name: 'Hard', group: 'Difficulty' },

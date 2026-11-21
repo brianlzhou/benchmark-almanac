@@ -8,6 +8,7 @@ const feed = 'https://openaccess.thecvf.com/content/ICCV2023/papers/Ding_MOSE_A_
 const board: Leaderboard = {
   benchmark: 'mose', static: 'paper', url: 'https://henghuiding.github.io/MOSE/MOSEv1/', feed,
   terms: 'CVF makes the ICCV paper available under the terms at https://openaccess.thecvf.com/menu.',
+  stats: { regionSimilarity: { name: 'Region similarity', unit: 'score', better: 'higher' }, contourAccuracy: { name: 'Contour accuracy', unit: 'score', better: 'higher' } },
   async fetch() {
     const pdf = await pdfText(feed);
     const mask = pdf.split('Table 3. Comparisons of state-of-the-art semi-supervised methods')[1]?.split('3.3. Evaluation Metrics')[0];

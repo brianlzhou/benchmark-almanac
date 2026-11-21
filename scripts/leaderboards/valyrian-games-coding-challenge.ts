@@ -19,6 +19,14 @@ const board: Leaderboard = {
     'Together-ai:Qwen/Qwen3-235B-A22B-Thinking-2507':'qwen3-235b-a22b-thinking-jul-2025',
     'Mistral:magistral-medium-2506':'magistral-medium-1-0', 'Mistral:devstral-medium-2507':'devstral-medium'
   },
+  stats: {
+    conservative_rating: { name: 'Conservative rating', unit: 'rating', better: 'higher' },
+    games_played: { name: 'Games played', unit: 'count' },
+    wins: { name: 'Wins', unit: 'count' },
+    draws: { name: 'Draws', unit: 'count' },
+    losses: { name: 'Losses', unit: 'count' },
+    avg_tokens_per_second: { name: 'Average tokens per second', unit: 'tokens/s', better: 'higher' },
+  },
   async fetch() {
     type Run = Record<string,number> & {name:string};
     const d = await fetchJson<{models:Run[]}>(feed);

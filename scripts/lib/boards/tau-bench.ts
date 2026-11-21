@@ -10,6 +10,11 @@ export function tauBenchBoard(track: 'retail' | 'airline'): Leaderboard {
   const domain = track === 'retail' ? 'Retail' : 'Airline';
   return {
     benchmark: `tau-bench-${track}`, url: 'https://github.com/sierra-research/tau-bench', feed: FEED,
+    stats: {
+      pass2: { name: 'Pass@2', unit: '%', better: 'higher' },
+      pass3: { name: 'Pass@3', unit: '%', better: 'higher' },
+      pass4: { name: 'Pass@4', unit: '%', better: 'higher' },
+    },
     terms: 'The authors publish these original task results under the source repository license and host terms.',
     aliases: { 'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024', 'claude-3-5-sonnet-20240620': 'claude-3-5-sonnet' },
     async fetch() {

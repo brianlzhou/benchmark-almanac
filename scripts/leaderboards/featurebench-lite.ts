@@ -8,6 +8,7 @@ const board: Leaderboard = {
  harnesses: 'system',
  benchmark: "featurebench-lite", url: "https://github.com/LiberCoders/FeatureBench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { resolved: { name: 'Fully resolved tasks', unit: '%', better: 'higher' } },
 
  async fetch() {
 const t=mdTables(await fetchText(FEED)).find(t=>t.head.includes('%PASSED'));if(!t)throw new Error('Missing FeatureBench table');const rows:LeaderboardRow[]=[];

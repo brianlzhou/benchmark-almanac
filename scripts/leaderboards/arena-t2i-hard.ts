@@ -8,6 +8,7 @@ const categories=['3D modeling','Art','Cartoon','Commercial design','Photorealis
 const board:Leaderboard={
   benchmark:'arena-t2i-hard',url:'https://banyuanhao.github.io/Arena-T2I-Hard-Page/',feed,static:'paper',terms:PAPER_TERMS,
   parts:Object.fromEntries([...categories,'Gemini-3-Pro (243 prompts)','GPT-5.4 (243 prompts)'].map(c=>[c,c])),
+  stats:{dpg:{name:'Dependency prompt grounding',unit:'score',better:'higher'},dsg:{name:'Dependency satisfaction grounding',unit:'score',better:'higher'},rank:{name:'Leaderboard rank',unit:'count',better:'lower'},arenaRank:{name:'Arena rank',unit:'count',better:'lower'},arenaScore:{name:'Arena score',unit:'score',better:'higher'}},
   aliases:{'gemini-3-pro-image-preview-2k':'gemini-3-pro-image-nano-banana-pro-2k','gpt-image-1.5-high-fidelity':'gpt-image-1-5',
     'gemini-2.5-flash-image (nano-banana)':'gemini-2-5-flash-image-preview-nano-banana','imagen-4.0-ultra-generate-001':'imagen-4-ultra-generate-001',
     'imagen-4.0-generate-001':'imagen-4-generate-001','hunyuan-image-3.0-fal':'hunyuanimage-3-0','ideogram-v3-quality':'ideogram-3-0'},

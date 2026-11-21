@@ -8,6 +8,11 @@ const feed = 'https://raw.githubusercontent.com/ethz-spylab/AutoAdvExBench/HEAD/
 const board: Leaderboard = {
   benchmark: 'autoadvexbench', url: 'https://github.com/ethz-spylab/AutoAdvExBench', feed,
   terms: 'Public results from the authors, hosted under GitHub’s terms. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service',
+  stats: {
+    defensesDefeated: { name: 'Defenses defeated', unit: 'count' },
+    defensesEvaluated: { name: 'Defenses evaluated', unit: 'count' },
+    meanRobustAccuracy: { name: 'Mean robust accuracy', unit: '%', better: 'higher' },
+  },
   aliases: { 'Sonnet 3.7': 'claude-3-7-sonnet' },
   async fetch() {
     const text = (await fetchText(feed)).split('Summarized Briefly:')[1]?.split('You can view')[0];

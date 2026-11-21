@@ -10,6 +10,10 @@ const board: Leaderboard = {
   headline: 'The paper reports no overall score, so this is the plain mean of mean SDR in decibels on its two mixture tests.',
   terms: 'The authors publish these results under the terms linked at https://arxiv.org/abs/2212.07065.',
   parts: {music: {name: 'MUSIC+', note: 'Mean SDR in decibels.'}, vgg: {name: 'VGGSound-Clean+', note: 'Mean SDR in decibels.'}},
+  stats: {
+    musicMedian: { name: 'MUSIC+ median SDR', unit: 'score', better: 'higher', note: 'Median signal-to-distortion ratio in decibels.' },
+    vggMedian: { name: 'VGGSound-Clean+ median SDR', unit: 'score', better: 'higher', note: 'Median signal-to-distortion ratio in decibels.' },
+  },
   async fetch() {
     const t = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[3] === 'MUSIC +' && t[0][5] === 'VGGSound-Clean +');
     if (!t || t[1][3] !== 'Mean SDR' || t[1][5] !== 'Mean SDR') throw new Error('Missing mixture SDR columns');

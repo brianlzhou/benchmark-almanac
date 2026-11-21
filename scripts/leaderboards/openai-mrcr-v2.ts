@@ -17,6 +17,7 @@ const board: Leaderboard = {
   url: 'https://contextarena.ai/?needles=8&mode=full&showExtra=true',
   feed: `${FEED} (bin ${BIN})`,
   terms: 'Context Arena publishes this independently run leaderboard and its API feed. The almanac credits and links Context Arena.',
+  stats: { samples: { name: 'Bin samples', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<{ needles: number; mode: string; leaderboard: Entry[] }>(FEED);
     if (data.needles !== 8 || data.mode !== 'full') throw new Error('Context Arena MRCR feed is not the 8-needle full board');

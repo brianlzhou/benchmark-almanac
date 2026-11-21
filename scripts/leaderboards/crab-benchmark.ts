@@ -6,6 +6,7 @@ import { num, text, tables } from '../lib/html.ts';
 const FEED = "https://crab.camel-ai.org/";
 const board: Leaderboard = {
  benchmark: "crab-benchmark",
+ stats: { successRate: { name: 'Success rate', unit: '%', better: 'higher' } },
  url: "https://crab.camel-ai.org/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

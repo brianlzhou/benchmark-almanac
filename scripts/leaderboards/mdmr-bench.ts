@@ -14,7 +14,10 @@ const board: Leaderboard = {
   benchmark: 'mdmr-bench', feed, url,
   terms: 'The authors publish this public README under GitHub’s terms at https://docs.github.com/en/site-policy/github-terms/github-terms-of-service.',
   aliases: { 'FLUX.2': 'flux-2-dev', 'Qwen-Image-Edit': 'qwen-image-edit-2511' },
-  parts: Object.fromEntries([...dimensions, ...tasks].map(name => [name, { name, group: dimensions.includes(name) ? 'Dimension' : 'Task' }])),
+  parts: Object.fromEntries([...dimensions, ...tasks, 'taskOverall'].map(name => [name, {
+    name: name === 'taskOverall' ? 'Overall task score' : name,
+    group: name === 'taskOverall' || tasks.includes(name) ? 'Task' : 'Dimension',
+  }])),
   async fetch() {
     const grids = tables(await fetchText(feed)).map(t => t.map(r => r.map(c => c.text)));
     const results = new Map<string, LeaderboardRow>();

@@ -18,6 +18,15 @@ const FEED = "https://raw.githubusercontent.com/WildVision-AI/WildVision-Bench/m
 const board: Leaderboard = {
   benchmark: "wildvision-bench", url: "https://raw.githubusercontent.com/WildVision-AI/WildVision-Bench/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: {
+    'Win Rate': { name: 'Win rate', unit: '%', better: 'higher' },
+    Reward: { name: 'Reward score', unit: 'score', better: 'higher' },
+    'Much Better': { name: 'Much better count', unit: 'count' },
+    Better: { name: 'Better count', unit: 'count' },
+    Tie: { name: 'Tie count', unit: 'count' },
+    Worse: { name: 'Worse count', unit: 'count' },
+    'Much Worse': { name: 'Much worse', unit: 'count' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

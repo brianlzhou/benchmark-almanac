@@ -15,6 +15,11 @@ const board: Leaderboard = {
   benchmark: 'unicode-competitive-coding', feed, url: feed, static: 'paper',
   terms: 'arXiv terms apply to the authors’ results. https://info.arxiv.org/help/license/index.html',
   parts: { easy: 'Easy', medium: 'Medium', hard: 'Hard' },
+  stats: {
+    deltaRand: { name: 'Pass@1 change without random tests', unit: '%', note: 'Overall Pass@1 minus Pass@1 without randomly generated tests.' },
+    deltaAdv: { name: 'Pass@1 change without adversarial tests', unit: '%', note: 'Overall Pass@1 minus Pass@1 without adversarially generated tests.' },
+    deltaCorn: { name: 'Pass@1 change without corner tests', unit: '%', note: 'Overall Pass@1 minus Pass@1 without corner-generated tests.' },
+  },
   aliases: { 'deepseek-chat-v3.1': 'deepseek-v3-1', 'deepseek-v3.1': 'deepseek-v3-1', 'qwen-2.5-32b-coder': 'qwen2-5-coder-32b' },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => headers.every((h, i) => t[1]?.[i] === h));

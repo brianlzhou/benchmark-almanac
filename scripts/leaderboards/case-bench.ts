@@ -8,6 +8,10 @@ const feed = 'https://arxiv.org/html/2501.14940';
 const board: Leaderboard = {
   benchmark: 'case-bench', url: feed, feed, static: 'paper',
   terms: 'Tables credited to the authors. https://proceedings.mlr.press/v267/sun25ab.html',
+  stats: {
+    pcc: { name: 'Pearson correlation coefficient', unit: '%', better: 'higher', note: 'Agreement between human and language-model safety ratings, reported on a 0 to 100 scale.' },
+    bce: { name: 'Binary cross-entropy', unit: 'score', better: 'lower', note: 'Cross-entropy between human and language-model safety ratings.' },
+  },
   aliases: { 'Claude-3.5-sonnet (snapshot unspecified)': 'claude-3-5-sonnet',
     'Llama-3-70B-Instruct': 'llama-3-70b', 'Llama-3-8B-Instruct': 'llama-3-8b',
     'Llama-3.1-8B-Instruct': 'llama-3-1-8b', 'Mixtral 8x7B Instruct': 'mixtral-8x7b' },

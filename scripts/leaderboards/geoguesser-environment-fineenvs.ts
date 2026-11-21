@@ -10,6 +10,12 @@ const board: Leaderboard = {
   benchmark: 'geoguesser-environment-fineenvs',
   url: 'https://huggingface.co/spaces/FineEnvs/geoguesser-article', feed: FEED,
   terms: 'FineEnvs publishes this public Hugging Face Space results file, with attribution retained under the Space terms.',
+  stats: {
+    turns: { name: 'Turns', unit: 'count' },
+    within25: { name: 'Within 25 kilometers', unit: 'count', note: 'Number of tasks with a prediction within 25 kilometers.' },
+    within200: { name: 'Within 200 kilometers', unit: 'count', note: 'Number of tasks with a prediction within 200 kilometers.' },
+    median_km: { name: 'Median distance in kilometers', better: 'lower' },
+  },
   async fetch() {
     const source = await fetchJson<Entry[]>(FEED);
     if (!source.length || source.some(r => !r.name || !Number.isFinite(r.reward))) throw new Error('GeoGuesser reward rows missing');

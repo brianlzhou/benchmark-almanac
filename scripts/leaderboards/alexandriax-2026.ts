@@ -17,6 +17,9 @@ const board: Leaderboard = {
   benchmark: 'alexandriax-2026', url: feed, feed,
   terms: 'Public competition results credited to the AlexandriaX organizers. https://alexandriax.dlnlp.ai/leaderboard.html',
   harnesses: 'system',
+  stats: {
+    chrFpp: { name: 'chrF++', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const rows: LeaderboardRow[] = [];

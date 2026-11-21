@@ -20,6 +20,7 @@ const board: Leaderboard = {
   Huggingface: { name: 'Hugging Face', group: 'Environment' },
   'Wolfram Alpha': { name: 'Wolfram Alpha', group: 'Environment' },
 }, url: URL, feed: URL + ' (GPT-4V-judged overall success rate)', terms: PAPER_TERMS,
+  stats: { judgeRuns: { name: 'Judge runs', unit: 'count', note: 'Number of GPT-4V judge runs used for the reported score.' } },
   async fetch() {
     const t = inlinePaperTables(await paperHtml(URL)).find(t => t[0]?.[1] === 'Allrecipes');
     if (!t) throw new Error('WebVoyager result table missing');

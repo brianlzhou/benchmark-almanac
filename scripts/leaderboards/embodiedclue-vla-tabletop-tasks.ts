@@ -14,6 +14,11 @@ const board: Leaderboard = {
     embedded: { name: '转化中文（embed）', unit: '%' },
     basic: '基础能力得分', adaptation: '中文适配度得分',
   },
+  stats: {
+    steps: { name: 'Average steps', unit: 'count' },
+    reward: { name: 'Average task reward', unit: 'score', better: 'higher' },
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const book = readXlsx(Buffer.from(await fetchBytes(feed)));
     function table(sheet: string, columns: string[]) {

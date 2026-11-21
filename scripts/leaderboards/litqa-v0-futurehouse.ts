@@ -7,6 +7,7 @@ const FEED = "https://raw.githubusercontent.com/Future-House/LitQA/main/README.m
 
 const board: Leaderboard = {
   benchmark: "litqa-v0-futurehouse",
+  stats: { correct: { name: 'Correct answers', unit: 'count', better: 'higher' }, incorrect: { name: 'Incorrect answers', unit: 'count', better: 'lower' }, unsure: { name: 'Unsure answers', unit: 'count', better: 'lower' }, precision: { name: 'Precision', unit: '%', better: 'higher' } },
   url: "https://github.com/Future-House/LitQA",
   feed: FEED,
   terms: "The page provides a public score table. Check its source for license details. https://github.com/Future-House/LitQA GitHub requests a one-second crawl delay.",

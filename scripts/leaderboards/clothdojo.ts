@@ -13,6 +13,11 @@ const board: Leaderboard = {
   parts: {
     flatten: { name: 'Flatten', group: 'Task', unit: '%' },
     fold: { name: 'Fold', group: 'Task', unit: '%' },
+    Flattening: {name: 'Flattening', group: 'Flatten task', unit: '%'}, Flattening1: {name: 'Flattening level 1', group: 'Flatten task', unit: '%'},
+    Flattening2: {name: 'Flattening level 2', group: 'Flatten task', unit: '%'}, Flattening3: {name: 'Flattening level 3', group: 'Flatten task', unit: '%'},
+    Flattening4: {name: 'Flattening level 4', group: 'Flatten task', unit: '%'}, Folding: {name: 'Folding', group: 'Fold task', unit: '%'},
+    Folding1: {name: 'Folding level 1', group: 'Fold task', unit: '%'}, Folding2: {name: 'Folding level 2', group: 'Fold task', unit: '%'},
+    Folding3: {name: 'Folding level 3', group: 'Fold task', unit: '%'}, Folding4: {name: 'Folding level 4', group: 'Fold task', unit: '%'},
   },
   async fetch() {
     const tables = paperTables(await paperHtml(FEED)).map(grid);

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://dimitrismallis.github.io/cadtests/#results",
   feed,
   terms: "The project licenses its website under CC BY-SA 4.0. The dataset card states MIT. https://dimitrismallis.github.io/cadtests/ https://huggingface.co/datasets/dimitrismallis/CADTestBench The feed host publishes robots.txt at https://dimitrismallis.github.io/robots.txt.",
+  stats: { invalid: { name: 'Invalid outputs', unit: '%', better: 'lower' }, requirements: { name: 'Requirements passed', unit: '%', better: 'higher' } },
   aliases: {"Claude-4.6-Sonnet": "claude-sonnet-4-6"},
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Method|Planner|Detailed|Abstract');

@@ -7,9 +7,11 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://huggingface.co/spaces/Zoe/GS-QA-Leaderboard';
 const feed = url + '/raw/main/data/results.json';
 type Result = { system_label: string; task: string; output_family: string; n: number; accuracy: number | null; parsed_f1: number | null; parsed_recall: number | null };
-const parts: Record<string, BoardPart> = {};
+const parts: Record<string, BoardPart> = Object.fromEntries(['area','count','direction','distance','entity_name','length','location','raster_focal','raster_global','raster_local','raster_overall','raster_zonal'].map(key => [key, { name: key.replaceAll('_', ' '), unit: '%' }]));
+const questionFamilies = ['area','count','direction','distance','entity_name','length','location','raster_focal','raster_global','raster_local','raster_overall','raster_zonal'];
 const board: Leaderboard = {
   benchmark: 'gs-qa-2', url, feed, parts, harnesses: 'system',
+  stats: Object.fromEntries(questionFamilies.map(key => [key + 'Questions', { name: key.replaceAll('_', ' ') + ' questions', unit: 'count' }])),
   terms: 'The authors provide these leaderboard results for reuse. https://huggingface.co/spaces/Zoe/GS-QA-Leaderboard',
   async fetch() {
     const rows = new Map<string, LeaderboardRow>();

@@ -10,6 +10,10 @@ const blocks = (cell: Cell) => (cell.content ?? []).map(b => (b.children ?? []).
 const board: Leaderboard = {
   benchmark: 'atlas-finance-1-1', url: URL, feed: `${URL} (__NEXT_DATA__ benchmarkResultsContent)`,
   terms: 'Handshake terms restrict automated extraction; the almanac credits Handshake AI Research and links the source.',
+  stats: {
+    ciMargin: { name: '95% confidence interval margin', unit: 'score' }, passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+    rubricScore: { name: 'Rubric score', unit: '%', better: 'higher' }, latency: { name: 'Time per task', unit: 'seconds', better: 'lower' }, inputTokens: { name: 'Input tokens', unit: 'tokens' },
+  },
   chart: { title: 'Pass rate versus cost per attempt', x: { key: 'cost', label: 'Cost per attempt', unit: '$', better: 'lower' }, y: { key: 'score', label: 'Pass rate', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(URL);

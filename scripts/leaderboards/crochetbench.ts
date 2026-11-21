@@ -9,6 +9,7 @@ const FEED = 'https://aclanthology.org/2026.acl-long.604.pdf';
 const board: Leaderboard = {
   benchmark: 'crochetbench', static: 'paper', url: 'https://aclanthology.org/2026.acl-long.604/', feed: FEED,
   terms: 'ACL Anthology terms. https://aclanthology.org/faq/copyright/',
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, instructionSelection: { name: 'Instruction selection', unit: '%', better: 'higher' }, bleu: { name: 'BLEU', unit: 'score', better: 'higher' }, rougeL: { name: 'ROUGE-L', unit: 'score', better: 'higher' }, chrf: { name: 'chrF score', unit: 'score', better: 'higher' } },
   async fetch() {
     const text = await pdfText(FEED);
     const section = text.split('Model                               Size   Stitch Recognition')[1]?.split('Table 2:')[0];

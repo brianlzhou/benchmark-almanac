@@ -4,6 +4,8 @@ import type { Leaderboard } from './types.ts';
 import { HELM_BUCKET, helmNewest, HELM_ALIASES, HELM_TERMS, helmFeed, helmRows, type HelmTable } from './helm-capabilities.ts';
 
 const TABLE: HelmTable = { project: 'medhelm', group: 'medhelm_scenarios', table: 'Accuracy', column: 'Mean win rate', scale: 100 };
+const tokenScenarios = ['MedCalc-Bench', 'CLEAR', 'MTSamples', 'Medec', 'EHRSHOT', 'HeadQA', 'Medbullets', 'MedQA', 'MedMCQA', 'MedAlign', 'ADHD-Behavior', 'ADHD-MedEffects', 'DischargeMe', 'ACI-Bench', 'MTSamples Procedures', 'MIMIC-RRS', 'MIMIC-BHC', 'NoteExtract', 'MedicationQA', 'PatientInstruct', 'MedDialog', 'MedConfInfo', 'MEDIQA', 'MentalHealth', 'ProxySender', 'PrivacyDetection', 'PubMedQA', 'EHRSQL', 'BMT-Status', 'RaceBias', 'N2C2-CT', 'MedHallu', 'HospiceReferral', 'ClinicReferral', 'CDI-QA', 'ENT-Referral'];
+const tokenStats = Object.fromEntries(tokenScenarios.flatMap(s => [[`${s} - # prompt tokens`, { name: `${s} prompt tokens`, unit: 'tokens' }], [`${s} - # output tokens`, { name: `${s} output tokens`, unit: 'tokens' }]]));
 
 const board: Leaderboard = {
   benchmark: 'medhelm',
@@ -11,6 +13,7 @@ const board: Leaderboard = {
   feed: helmFeed(TABLE),
   terms: HELM_TERMS,
   aliases: HELM_ALIASES,
+  stats: tokenStats,
   async fetch() {
     const rows = await helmRows(TABLE);
     const newest = await helmNewest('medhelm');

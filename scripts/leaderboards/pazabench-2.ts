@@ -8,7 +8,10 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/microsoft/paza-bench",
   feed,
   terms: "The Space uses MIT. Its default score tables aggregate model families. Source recordings have separate licenses. Both hosts permit crawling.",
-  parts: { wer: 'Word error rate', rtfx: { name: 'Inverse real-time factor', unit: 'speedup', better: 'higher' } },
+  parts: {
+    wer: 'Word error rate', rtfx: { name: 'Inverse real-time factor', unit: 'speedup', better: 'higher' },
+    Acholi: 'Acholi', 'Adamawa Fulfulde': 'Adamawa Fulfulde', Afrikaans: 'Afrikaans', Akan: 'Akan', Amharic: 'Amharic', Arabic: 'Arabic', Baatonum: 'Baatonum', Bafut: 'Bafut', Bankon: 'Bankon', Basaa: 'Basaa', 'Borgu Fulfulde': 'Borgu Fulfulde', 'Chadian Arabic': 'Chadian Arabic', Dagaare: 'Dagaare', Dagbani: 'Dagbani', Dholuo: 'Dholuo', Dioula: 'Dioula', Ekoti: 'Ekoti', Ewe: 'Ewe', Fongbe: 'Fongbe', Fula: 'Fula', Hausa: 'Hausa', Igbo: 'Igbo', Ikposo: 'Ikposo', Kabyle: 'Kabyle', Kalenjin: 'Kalenjin', Kamba: 'Kamba', Kanuri: 'Kanuri', "Kidaw'ida": "Kidaw'ida", Kikuyu: 'Kikuyu', Kinyarwanda: 'Kinyarwanda', Lingala: 'Lingala', Luganda: 'Luganda', Maasai: 'Maasai', Malagasy: 'Malagasy', Mbo: 'Mbo', 'Northern Sotho': 'Northern Sotho', Nyanja: 'Nyanja', Nyankole: 'Nyankole', Nyungwe: 'Nyungwe', Oromo: 'Oromo', Sesotho: 'Sesotho', Setswana: 'Setswana', Shona: 'Shona', Sidamo: 'Sidamo', Soga: 'Soga', Somali: 'Somali', Sukuma: 'Sukuma', Swahili: 'Swahili', Swati: 'Swati', Tamazight: 'Tamazight', Tigre: 'Tigre', Tigrinya: 'Tigrinya', Tshivenda: 'Tshivenda', Twi: 'Twi', Umbundu: 'Umbundu', Wolaytta: 'Wolaytta', Wolof: 'Wolof', Xhosa: 'Xhosa', Xitsonga: 'Xitsonga', Yoruba: 'Yoruba', Zulu: 'Zulu',
+  },
   async fetch() {
     const event = JSON.parse(await fetchText(feed, { method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ data: [[], [], [], 'Individual models', [], 'All'] }) }));

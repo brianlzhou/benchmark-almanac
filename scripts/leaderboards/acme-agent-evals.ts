@@ -11,6 +11,16 @@ const board: Leaderboard = {
   url: "https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/",
   feed,
   terms: "The publisher displays results at https://arize.com/blog/what-we-learned-testing-7-models-under-the-same-agent-harness/. I could not verify reuse terms. The robots.txt permits this article.",
+  stats: {
+    examples: { name: 'Examples', unit: 'count' },
+    outputQuality: { name: 'Output quality', unit: '%', better: 'higher' },
+    efficiency: { name: 'Efficiency', unit: '%', better: 'higher' },
+    latencyScore: { name: 'Latency score', unit: '%', better: 'higher' },
+    toolAdherence: { name: 'Tool adherence', unit: '%', better: 'higher' },
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
+    avgToolCalls: { name: 'Average tool calls', unit: 'count', better: 'lower' },
+    runnerErrors: { name: 'Runner errors', unit: 'count', better: 'lower' },
+  },
   aliases: { 'Sonnet 4.6': 'claude-sonnet-4-6', 'Sonnet 4.5': 'claude-sonnet-4-5', 'Sonnet 4.0': 'claude-sonnet-4' },
   async fetch() {
     const source = tables(await fetchText(feed));

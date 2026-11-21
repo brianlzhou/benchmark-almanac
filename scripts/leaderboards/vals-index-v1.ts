@@ -10,6 +10,7 @@ const board: Leaderboard = {
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
  aliases: Object.fromEntries(Object.entries(VALS_ALIASES).filter(([name])=>name!=='GPT 4o')),
+ stats: { latency: { name: 'Latency per test', unit: 'seconds', better: 'lower' } },
  chart:{title:'Accuracy versus cost',x:{key:'cost',label:'Cost per test',unit:'$',better:'lower',log:true},y:{key:'score',label:'Accuracy',unit:'%',better:'higher'}},
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

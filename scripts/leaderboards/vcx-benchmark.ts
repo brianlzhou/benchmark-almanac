@@ -18,6 +18,10 @@ const board: Leaderboard = {
   colloquial: { name: 'Colloquial', group: 'Task type' },
 }, url: FEED, feed: FEED,
   terms: 'Retell terms prohibit scraping its Services; the almanac credits Retell AI and links the public benchmark source.',
+  stats: {
+    latencyMs: { name: 'Latency', unit: 'ms', better: 'lower' },
+    dollarsPerMinute: { name: 'Dollars per minute', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const raw = jsonAfter<Row[]>(nextFlight(await fetchText(FEED, {}, 1)), '"rows":');
     const rows: LeaderboardRow[] = [];

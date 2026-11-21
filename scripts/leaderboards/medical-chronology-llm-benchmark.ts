@@ -7,6 +7,7 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/superinsight/superinsight-ai-benchmark/HEAD/benchmark_presentation_v2.md";
 const board: Leaderboard = {
   benchmark: "medical-chronology-llm-benchmark",
+  stats: { hallucinationA: { name: 'Hallucination score A', unit: '%', better: 'higher' }, hallucinationB: { name: 'Hallucination score B', unit: '%', better: 'higher' }, hallucinationC: { name: 'Hallucination score C', unit: '%', better: 'higher' }, hallucinationD: { name: 'Hallucination score D', unit: '%', better: 'higher' }, hallucinationE: { name: 'Hallucination score E', unit: '%', better: 'higher' }, hallucinationF: { name: 'Hallucination score F', unit: '%', better: 'higher' }, goldenCPrecision: { name: 'Golden C precision', unit: '%', better: 'higher' }, goldenCRecall: { name: 'Golden C recall', unit: '%', better: 'higher' }, goldenCF1: { name: 'Golden C F1', unit: '%', better: 'higher' }, goldenCFalsePositive: { name: 'Golden C false positives', unit: 'count', better: 'lower' }, goldenCMay: { name: 'Golden C may errors', unit: 'count', better: 'lower' } },
   parts: {
     semantic: { name: 'Semantic', group: 'Dimension' },
     f1: { name: 'F1', group: 'Dimension' },

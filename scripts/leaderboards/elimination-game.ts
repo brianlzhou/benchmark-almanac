@@ -13,6 +13,9 @@ const board: Leaderboard = {
   url: `https://github.com/lechmazur/${REPO}`,
   feed: `${ghRaw(`lechmazur/${REPO}`, 'README.md')} (Elimination Game Leaderboard, TrueSkill mu)`,
   terms: LECH_MAZUR_TERMS(REPO),
+  stats: {
+    games: { name: 'Games played', unit: 'count' },
+  },
   aliases: LECH_MAZUR_ALIASES,
   async fetch() {
     const rows: LeaderboardRow[] = [];

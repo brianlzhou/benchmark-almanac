@@ -6,6 +6,7 @@ import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://videosimpleqa.github.io/";
 const board: Leaderboard = {
+ stats: { llmParamsB: { name: 'LLM parameters', unit: 'billions' }, correct: { name: 'Correct answers', unit: '%', better: 'higher' }, incorrect: { name: 'Incorrect answers', unit: '%', better: 'lower' }, notAttempted: { name: 'Not attempted', unit: '%', better: 'lower' }, correctGivenAttempted: { name: 'Correct given attempted', unit: '%', better: 'higher' }, fScore: { name: 'F score', unit: '%', better: 'higher' } },
  benchmark: "video-simpleqa",
  parts: {
    engineering: { name: 'Engineering', group: 'Domain' },

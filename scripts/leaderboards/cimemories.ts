@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2511.14937',
   feed: FEED,
   terms: PAPER_TERMS,
+  stats: { completeness: { name: 'Completeness', unit: '%', better: 'higher' } },
   aliases: {"Mistal-7B Instruct v0.3": "mistral-7b-v0-3", "Claude-4 Sonnet": "claude-sonnet-4", "Llama-3.3 70B Instruct": "llama-3-3-70b", "Qwen-3 32B": "qwen3-32b"},
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));

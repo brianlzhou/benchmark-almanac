@@ -16,6 +16,7 @@ const board: Leaderboard = {
     USC: { name: 'USC', unit: '%', better: 'lower' },
     CV: { name: 'CV', unit: '%', better: 'lower' },
   },
+  stats: { micro: { name: 'Micro word error rate', unit: '%', better: 'lower' } },
   async fetch() {
     return (await uzbekScores()).map(({ scores, ...entry }) => {
       const { macro, ...metrics } = scores;

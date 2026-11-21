@@ -9,6 +9,9 @@ const splits = ['Unseen topic','Unseen question'];
 const parts = Object.fromEntries(splits.flatMap(s=>measures.map(m=>[s+m,s+': '+m])));
 const board: Leaderboard = {
   benchmark:'anah',url:feed,feed,static:'paper',terms:PAPER_TERMS,parts,
+  stats: {
+    accuracy:{name:'Accuracy',unit:'%',better:'higher'}, rougeL:{name:'ROUGE-L',unit:'%',better:'higher'}, bertScore:{name:'BERTScore',unit:'%',better:'higher'}, pre4:{name:'4-gram precision',unit:'%',better:'higher'},
+  },
   async fetch() {
     const ts = flatPaperTables(await paperHtml(feed)).map(grid);
     const main = ts.find(t=>t[0].map(c=>c.split(' ')[0]).join('|')==='Model|F1|ACC|R|BERT|Pre4');

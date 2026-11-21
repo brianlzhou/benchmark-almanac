@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: "mind-the-gap", static: 'paper', url: feed, feed,
   terms: 'The authors publish the paper under the license listed at https://arxiv.org/abs/2610.39955.',
   headline: 'The paper gives no overall score. Prioritization measures how well descriptions cover salient visual events.',
+  stats: { Prioritization: {name:'Prioritization score',unit:'score',better:'higher'} },
   parts: { NoRedundancy: 'No Redundancy', OnScreenText: 'On-Screen Text',
     Timeliness: {name: 'Timeliness', unit: 'score', better: 'lower', note: 'Seconds.'},
     AudioOverlaps: {name: 'Audio Overlaps', unit: 'score', better: 'lower', note: 'Seconds.'},

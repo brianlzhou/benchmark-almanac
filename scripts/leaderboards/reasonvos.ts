@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: "https://github.com/cilinyan/VISA",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { robustness: { name: 'Robustness score', unit: 'score', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const t=(await paperTables(FEED))[5];if(!t?.[0]?.some(c=>c.text==='overall'))throw new Error('ReVOS overall table changed');
     const rows=t.filter(r=>r.length===12&&num(r[10].text)!==undefined).map(r=>({model:paperModel(r[0].text)+' / '+r[1].text,score:num(r[10].text)!,metrics:{referringJF:num(r[4].text)!,reasoningJF:num(r[7].text)!,robustness:num(r[11].text)!}}));

@@ -49,6 +49,11 @@ const board: Leaderboard = {
  url: "https://github.com/facebookresearch/AbstentionBench",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   precision: { name: 'Precision', unit: '%', better: 'higher' },
+   recall: { name: 'Recall', unit: '%', better: 'higher' },
+   datasets: { name: 'Datasets', unit: 'count' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

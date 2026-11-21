@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed,
   terms: "Tencent limits the released materials to academic use. The score table has no separate reuse grant. https://raw.githubusercontent.com/Tencent/SongBench/main/LICENSE.txt GitHub requests a one-second crawl delay.",
   parts: Object.fromEntries(['Melody','Arrangement','Musicality','Vocal','Instrument','Mixing','Structure'].map(k => [k,k])),
+  stats: { songEval: { name: 'SongEval', unit: 'score', better: 'higher' } },
   async fetch() {
     const names = Object.keys(board.parts!);
     const t = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === ['Model', ...names, 'Mean (Ours)', 'SongEval'].join('|'));

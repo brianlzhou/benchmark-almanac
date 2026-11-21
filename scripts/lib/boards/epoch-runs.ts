@@ -3,6 +3,22 @@
 import { fetchText, parseCsv } from '../util.ts';
 import type { LeaderboardRow } from '../../leaderboards/types.ts';
 export const EPOCH_RUNS_FEED = 'https://epoch.ai/data/benchmarks.csv';
+export const EPOCH_SCORE_STATS = {
+  meanScore: { name: 'Mean score', unit: '%', better: 'higher' as const },
+  'scorer:proof_scorer': { name: 'Proof scorer score', unit: '%', better: 'higher' as const },
+  'scorer:verification_code': { name: 'Verification code score', unit: '%', better: 'higher' as const },
+  'scorer:furniture_score/accuracy': { name: 'Furniture assembly accuracy', unit: '%', better: 'higher' as const },
+  'scorer:win_rate/all': { name: 'Win rate', unit: '%', better: 'higher' as const },
+  'scorerSpread:proof_scorer': { name: 'Proof scorer spread', unit: '%' },
+  'scorerSpread:verification_code': { name: 'Verification code spread', unit: '%' },
+  'scorerSpread:furniture_score/accuracy': { name: 'Furniture assembly accuracy spread', unit: '%' },
+  'scorerSpread:win_rate/all': { name: 'Win rate spread', unit: '%' },
+  'Training compute (FLOP)': { name: 'Training compute', unit: 'count' },
+  'Training compute cost (2023 USD)': { name: 'Training compute cost', unit: 'usd', better: 'lower' as const },
+  'Training dataset size (datapoints)': { name: 'Training dataset size', unit: 'count' },
+  'Hardware quantity': { name: 'Hardware quantity', unit: 'count' },
+  activeParams: { name: 'Active parameters', unit: 'billions' },
+};
 export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
   const rows: LeaderboardRow[] = [];
   for (const r of parseCsv(await fetchText(EPOCH_RUNS_FEED))) {

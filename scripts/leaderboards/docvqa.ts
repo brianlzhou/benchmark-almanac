@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: RRC,
   feed: `${RRC} + ${FEED}`,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { accuracy: { name: 'Accuracy', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const ts=tables(await fetchText(FEED));

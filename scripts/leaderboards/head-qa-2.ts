@@ -11,6 +11,7 @@ const board: Leaderboard = {
   terms: 'The authors publish their results under the paper terms at https://arxiv.org/abs/2511.15355.',
   headline: 'The paper reports no overall accuracy, so this is the plain mean of its English and Spanish accuracies.',
   parts: { en: 'English', es: 'Spanish' },
+  stats: { enExamScore: { name: 'English exam score', unit: 'score', better: 'higher' }, esExamScore: { name: 'Spanish exam score', unit: 'score', better: 'higher' }, enUnanswered: { name: 'English unanswered rate', unit: '%', better: 'lower' }, esUnanswered: { name: 'Spanish unanswered rate', unit: '%', better: 'lower' } },
   async fetch() {
     const all = flatPaperTables(await paperHtml(feed)).map(grid);
     const tables = all.filter(t => t[0]?.[2] === 'English (en)' && t[0].includes('Spanish (es)'));

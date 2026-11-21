@@ -11,6 +11,7 @@ const board: Leaderboard = {
   'accuracy score': { name: 'Accuracy', group: 'Dimension' },
 }, url: "https://www.CLUEbenchmarks.com/superclue_math6.html", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { 'reasoning level': { name: 'Reasoning level', unit: 'count' } },
 
  aliases: {'GPT_4_1106_Preview':'gpt-4-turbo-nov-2023'},
  async fetch() {

@@ -12,6 +12,10 @@ const board: Leaderboard = {
   url,
   feed,
   terms: 'MIT License. https://github.com/jigonyoo/duplicate-side-effect-desk/blob/main/LICENSE',
+  stats: {
+    perfectRollouts: { name: 'Perfect rollouts', unit: 'count', better: 'higher', note: 'Evaluation rollouts with the perfect reward.' },
+    duplicatePayments: { name: 'Duplicate payments', unit: 'count', better: 'lower', note: 'Payments made more than once for the same refund.' },
+  },
   async fetch() {
     const text = await fetchText(feed);
     const rows = [

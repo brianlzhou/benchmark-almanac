@@ -9,6 +9,7 @@ const board: Leaderboard = {
   feed,
   terms: "Ricotoma publishes scores and cost estimates. The dashboard gives no reuse license. The site permits crawling.",
   costPer: 'run',
+  stats: { seriesWins: { name: 'Series wins', unit: 'count' }, seriesLosses: { name: 'Series losses', unit: 'count' }, gameWins: { name: 'Game wins', unit: 'count' }, gameLosses: { name: 'Game losses', unit: 'count' }, calls: { name: 'Calls', unit: 'count' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, cachedInputTokens: { name: 'Cached input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' }, reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' }, totalTokens: { name: 'Total tokens', unit: 'tokens' }, paidCalls: { name: 'Paid calls', unit: 'count' }, paidTotalTokens: { name: 'Paid total tokens', unit: 'tokens' }, paidEstimatedCostUsd: { name: 'Estimated paid cost', unit: 'usd', better: 'lower' } },
   async fetch() {
     type Entry = { name:string; status:string; rating:number; ciLow:number; ciHigh:number; reasoningLevels:string[];
       seriesWins:number; seriesLosses:number; gameWins:number; gameLosses:number; estimatedCostUsd:number|null;

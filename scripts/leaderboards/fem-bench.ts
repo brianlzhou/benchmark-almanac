@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://github.com/elejeune11/FEM-bench#results",
   feed,
   terms: "The raw file host has no robots.txt. The authors publish the score tables in the MIT licensed repository. https://github.com/elejeune11/FEM-bench/blob/main/LICENSE",
+  stats: {
+    jointTestSuccess: { name: 'Joint test success rate', unit: '%', better: 'higher', note: 'Percentage of generated tests that pass the reference and fail all known-broken implementations.' },
+    anyOfFive: { name: 'Tasks solved with any success', unit: '%', better: 'higher' },
+    allFive: { name: 'Tasks solved with five of five success', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const tables = markdownTables(source);

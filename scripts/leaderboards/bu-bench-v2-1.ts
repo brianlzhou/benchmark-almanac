@@ -6,7 +6,7 @@ import {fetchText} from '../lib/util.ts';
 import {tables,num,text} from '../lib/html.ts';
 const URL='https://browser-use.com/benchmarks/agents';
 export default {benchmark:'bu-bench-v2-1',url:URL,feed:URL,
- terms:'Browser Use terms prohibit automated scraping and data mining; the almanac credits Browser Use and links the source.',
+ terms:'Browser Use terms prohibit automated scraping and data mining; the almanac credits Browser Use and links the source.', stats:{medianMinutes:{name:'Median minutes',unit:'minutes',better:'lower'},medianMinutesDifferentRunners:{name:'Median minutes on different runners',unit:'minutes',better:'lower'}},
  chart:{title:'Score vs. cost per task',x:{key:'cost',label:'Cost per task',unit:'$',log:true,better:'lower'},y:{key:'score',label:'Score',unit:'score',better:'higher'}},
  async fetch():Promise<LeaderboardRow[]> {
   const html=await fetchText(URL);

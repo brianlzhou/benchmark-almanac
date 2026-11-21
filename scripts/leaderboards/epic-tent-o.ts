@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2404.01933';
 
 const board: Leaderboard = {
   benchmark: 'epic-tent-o', url: feed, feed, static: 'paper',
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   terms: "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2404.01933",
   harnesses: 'system', aliases: {'LLAMA':'llama-2-7b'},
   async fetch() {

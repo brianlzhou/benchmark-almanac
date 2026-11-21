@@ -10,6 +10,16 @@ const board: Leaderboard = {
   url: "https://github.com/GAIK-project/finnish-asr#the-ajokortti-clip",
   feed,
   terms: "26 table rows. Count alternate decoding methods for the same checkpoint once. Use the original Helsinki reference for this table. Credit GAIK under CC BY 4.0. https://github.com/GAIK-project/finnish-asr#licences-attribution-and-credits The raw host returns 404 for robots.txt.",
+  stats: {
+    wer: { name: 'Word error rate', unit: '%', better: 'lower' },
+    cer: { name: 'Character error rate', unit: '%', better: 'lower' },
+    claude: { name: 'Claude judge points', unit: 'count', better: 'lower', note: 'Meaning-error points assigned by the Claude judge.' },
+    gemini: { name: 'Gemini judge points', unit: 'count', better: 'lower', note: 'Meaning-error points assigned by the Gemini judge.' },
+    claudeNames: { name: 'Names correct by Claude', unit: 'count', better: 'higher', note: 'Names and terms judged correct out of 14.' },
+    geminiNames: { name: 'Names correct by Gemini', unit: 'count', better: 'higher', note: 'Names and terms judged correct out of 14.' },
+    werMin: { name: 'Minimum word error rate', unit: '%', better: 'lower' },
+    werMax: { name: 'Maximum word error rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const article = await fetchText(feed);
     const t = markdownTables(article).find(t => t[0]?.join('|') === 'Model|Type|WER %|CER %|Claude pts|Gemini pts|Names (Claude / Gemini)');

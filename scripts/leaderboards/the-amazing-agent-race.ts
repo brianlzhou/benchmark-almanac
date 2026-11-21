@@ -9,6 +9,10 @@ const feed = 'https://minnesotanlp.github.io/the-amazing-agent-race/';
 const board: Leaderboard = {
   benchmark: 'the-amazing-agent-race', feed, url: feed,
   terms: 'The authors release the project under the MIT License. https://github.com/minnesotanlp/the-amazing-agent-race/blob/main/LICENSE.md',
+  stats: {
+    pitStopVisitRate: {name: 'Pit stop visit rate', unit: '%', better: 'higher'},
+    roadblockCompletionRate: {name: 'Roadblock completion rate', unit: '%', better: 'higher'},
+  },
   aliases: {'Sonnet 4': 'claude-sonnet-4'},
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Configuration|FA|PVR (Nav.)|RCR (Tool)');

@@ -7,6 +7,11 @@ const board: Leaderboard = {
   url: "https://hwebench.com/v2.html",
   feed: "https://raw.githubusercontent.com/FeSens/auto-arch-tournament/v2/research/runs/EXP-2026-09-28-v2-main/analysis_final.json",
   terms: "The author repository uses Apache License 2.0. https://raw.githubusercontent.com/FeSens/auto-arch-tournament/main/LICENSE The project site has no robots.txt.",
+  stats: {
+    coreMark: { name: 'CoreMark score', unit: 'score', better: 'higher' },
+    fmaxMHz: { name: 'Maximum frequency', unit: 'score', better: 'higher' },
+    areaLUT4: { name: 'Four-input lookup table area', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const table = tables(await fetchText(this.url)).find(t => t[0]?.[1]?.text === 'Held-out iter/s');
     const result = JSON.parse(await fetchText(this.feed));

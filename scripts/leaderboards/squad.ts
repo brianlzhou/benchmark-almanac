@@ -11,6 +11,7 @@ const board: Leaderboard = {
  url: "https://rajpurkar.github.io/SQuAD-explorer/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

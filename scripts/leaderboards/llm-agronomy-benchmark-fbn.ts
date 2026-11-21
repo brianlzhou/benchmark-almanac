@@ -8,6 +8,7 @@ const feed = "https://raw.githubusercontent.com/gbstox/agronomy_llm_benchmarking
 
 const board: Leaderboard = {
   benchmark: "llm-agronomy-benchmark-fbn",
+  stats: { usdPerMillionTokens: { name: 'Price per million tokens', unit: 'usd-per-mtok', better: 'lower' }, 'Image Disease': { name: 'Image disease accuracy', unit: '%', better: 'higher' }, 'Image Pest': { name: 'Image pest accuracy', unit: '%', better: 'higher' }, 'Image Weed': { name: 'Image weed accuracy', unit: '%', better: 'higher' } },
   url: "https://github.com/gbstox/agronomy_llm_benchmarking#leaderboard",
   feed,
   terms: "The repository metadata lists no license. https://github.com/gbstox/agronomy_llm_benchmarking The raw file host has no robots.txt.",

@@ -7,6 +7,7 @@ const feed = "https://raw.githubusercontent.com/ATinyGreenCell/prompt-to-bench/H
 
 const board: Leaderboard = {
   benchmark: "prompt-to-bench-16",
+  stats: { minutesPerTask: { name: 'Minutes per task', unit: 'minutes', better: 'lower' }, 'Mean best score': { name: 'Mean best score across attempts', unit: 'score', better: 'higher', note: 'Score from 0 to 1.' }, 'Tokens/s': { name: 'Tokens per second', unit: 'tokens/s', better: 'higher' }, 'Median reasoning per reply (characters)': { name: 'Median reasoning per reply', unit: 'count', better: 'lower', note: 'Median number of reasoning characters in one reply.' } },
   url: "https://github.com/ATinyGreenCell/prompt-to-bench#65-larger-open-models-on-an-npu-box",
   feed,
   terms: "The author licenses the paper under CC BY 4.0. Separate model licenses apply to third-party outputs. https://github.com/ATinyGreenCell/prompt-to-bench/blob/main/LICENSE The feed host returns no robots.txt.",

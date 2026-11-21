@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://arxiv.org/html/2604.27865",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    finalBankrollGBP: { name: 'Final bankroll in British pounds' },
+    averageBets: { name: 'Average bets', unit: 'count' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const signedNum=(s:string)=>num(s.replace(/[−–]/g,'-').replace(/-\s+(?=\d)/g,'-'));

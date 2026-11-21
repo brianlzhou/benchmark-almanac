@@ -7,6 +7,7 @@ const PAGE='https://www.linuxarena.ai/';
 const board:Leaderboard={
   benchmark:'linuxarena',url:PAGE,feed:`${PAGE}_next/static/chunks/*.js (successful-sabotage chart)`,
   terms:'Public LinuxArena chart data. Benchmark Almanac credits and links the source.',
+  stats:{tasks:{name:'Tasks',unit:'count'},sideTaskSuccess:{name:'Side task success',unit:'%',better:'higher'}},
   async fetch():Promise<LeaderboardRow[]> {
     const html=await fetchText(PAGE);
     const scripts=[...new Set([...html.matchAll(/<script[^>]*src="([^\"]+)"/g)].map(m=>m[1]).filter(s=>s.startsWith('/_next/')))];

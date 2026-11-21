@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://trec.nist.gov/pubs/trec34/appendices/trec2025-product-search.html",
   feed,
   terms: "NIST disallows /results and allows the proceedings appendix. NIST requires context and a link to the proceedings. Its agreement restricts advertising and named comparisons. https://trec.nist.gov/noads.html",
+  stats: {
+    map: { name: 'Mean average precision', unit: 'score', better: 'higher', note: 'Mean average precision from 0 to 1.' },
+    recall1000: { name: 'Recall at 1,000', unit: 'score', better: 'higher', note: 'Recall at 1,000 results from 0 to 1.' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === 'Runtag|Org|ndcg_0=0,1=0,2=1,3=10|map|recall_1000');
     if (!table || table.length < 22) throw new Error('Missing TREC search runs');

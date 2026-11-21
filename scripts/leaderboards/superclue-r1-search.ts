@@ -13,5 +13,6 @@ export default workbookBoard({
   minimum: 10,
   parts: ["基础检索能力", "分析推理能力"],
   metrics: {"latency": "平均耗时（秒/题）"},
+  stats: { latency: { name: 'Average time per question', unit: 'seconds', better: 'lower' } },
   details: [{"sheet": "基础检索能力榜单", "model": "名称", "parts": ["文化生活", "时政新闻", "经济生活"]}, {"sheet": "分析推理能力榜单", "model": "名称", "parts": ["推理计算", "数据检索与分析", "分析排序"]}, {"sheet": "回复率榜单", "model": "名称", "parts": ["完整回复率(%)", "截断率(%)", "无回复率(%)"]}, {"sheet": "平均耗时榜单", "model": "名称", "parts": ["基础检索能力平均耗时（秒/题）", "分析推理能力平均耗时（秒/题）"]}],
 });

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://github.com/AhmedHajAhmed/adage-benchmark/blob/main/results_ja/evaluation_report.json",
   feed,
   terms: "The makers release their code and derived data under the MIT license. The raw file host has no robots.txt.",
+  stats: { correct: { name: 'Correct answers', unit: 'count' }, items: { name: 'Test items', unit: 'count' } },
   async fetch() {
     type Result = { model: string; strategy: string; accuracy: number; n_correct: number; n_invalid: number; n_items: number };
     const data = await fetchJson<{ benchmark: string; split: string; models: Result[] }>(feed);

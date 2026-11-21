@@ -9,6 +9,7 @@ const FEED = "https://www.reactbench.com/";
 const board: Leaderboard = {
  benchmark: "reactbench", url: "https://www.reactbench.com/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats:{trials:{name:'Trials',unit:'count'},scored:{name:'Scored cases',unit:'count'},testsOnly:{name:'Tests-only pass rate',unit:'%',better:'higher'}},
 chart:{title:'ReactBench score vs. cost',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Pass rate',unit:'%',better:'higher'}},
  async fetch() {
 const flight=nextFlight(await fetchText(FEED));const rows:LeaderboardRow[]=[];

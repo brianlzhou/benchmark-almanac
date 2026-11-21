@@ -7,6 +7,7 @@ const board: Leaderboard = {
   url: "https://nbharathik.github.io/bibimbap/#results",
   feed: "https://nbharathik.github.io/bibimbap/#results",
   terms: "The authors license the project website under CC BY-SA 4.0. The table reports the original paper's baselines. https://nbharathik.github.io/bibimbap/ robots.txt allows this page.",
+  stats: { standardDeviation: { name: 'Standard deviation', unit: 'score' } },
   async fetch() {
     const tabs = tables(await fetchText(this.url));
     const main = tabs.find(t => t[0]?.at(-1)?.text === 'Overall Score');

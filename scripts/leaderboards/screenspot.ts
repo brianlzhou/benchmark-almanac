@@ -19,6 +19,9 @@ const board: Leaderboard = {
  url: "https://github.com/njucckevin/SeeClick",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: {
+   'Model Size': { name: 'Model size', unit: 'billions', note: 'Number of model parameters in billions.' },
+ },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const t = markdownTables(await fetchText(FEED)).find(t=>t[0].includes('Mobile Text'));

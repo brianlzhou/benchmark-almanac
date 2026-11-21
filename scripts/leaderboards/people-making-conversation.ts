@@ -15,6 +15,12 @@ const board: Leaderboard = {
     turnLatency: { name: 'Turn-end latency', unit: 'score', note: 'Milliseconds.', better: 'lower' },
     censored: { name: 'Censored turn ends', better: 'lower' }, tokenF1: 'Token F1', cosine: 'Cosine',
     conversationRecall: 'Conversation recall at 120 s', factRecall: 'Fact recall at 120 s' },
+  stats: {
+    silent: { name: 'Silent pause share', unit: 'score', better: 'higher', note: 'Fraction of pause points at which the system stayed silent, stored from 0 to 1.' },
+    pauseLatency: { name: 'Pause takeover latency', unit: 'ms', better: 'lower', note: 'Time from pause start to the first word.' },
+    durationRatio: { name: 'Response duration ratio', unit: 'score', note: 'Response duration divided by the human reply duration.' },
+    wordRatio: { name: 'Response word ratio', unit: 'score', note: 'Response word count divided by the human reply word count.' },
+  },
   aliases: { 'gpt-realtime-2025-08-28': 'gpt-realtime' },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

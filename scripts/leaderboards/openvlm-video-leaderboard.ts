@@ -18,6 +18,7 @@ const board: Leaderboard = {
   feed,
   terms: "The Space publishes its loader at https://huggingface.co/spaces/opencompass/openvlm_video_leaderboard/tree/main. Results licensing requires separate verification. Hugging Face allows crawling. The results host denies access to robots.txt.",
   aliases:OPENVLM_ALIASES,verified:'marked verified by OpenCompass',
+  stats: { avgScore: { name: 'Average score', unit: 'score', better: 'higher' } },
   async fetch(){
     const all=Object.values((await fetchJson<{results:Record<string,OpenVlmEntry>}>(feed)).results);
     const rows:LeaderboardRow[]=[];board.parts={};

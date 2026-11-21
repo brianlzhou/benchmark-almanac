@@ -9,6 +9,7 @@ const board: Leaderboard = {
   terms: 'The paper is available from the authors for research use. https://ugentt2k.github.io/papers/2022/decorte2022recsyshr.pdf',
   headline: 'The paper reports no overall score, so this is the plain mean of the TECH and HOUSE MRR scores.',
   parts: { TECH: { name: 'TECH' }, HOUSE: { name: 'HOUSE' } },
+  stats: { TECH_RP5: { name: 'TECH R-precision at 5', unit: '%', better: 'higher' }, TECH_RP10: { name: 'TECH R-precision at 10', unit: '%', better: 'higher' }, HOUSE_RP5: { name: 'HOUSE R-precision at 5', unit: '%', better: 'higher' }, HOUSE_RP10: { name: 'HOUSE R-precision at 10', unit: '%', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(FEED);
     const table = paper.split(/TECH\s+HOUSE\s*\n\s*MRR\s+RP@5\s+RP@10\s+MRR\s+RP@5\s+RP@10/)[1]?.split(/Table 3/)[0];

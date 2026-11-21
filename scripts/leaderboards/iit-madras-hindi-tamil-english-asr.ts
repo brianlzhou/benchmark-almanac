@@ -21,6 +21,11 @@ const board: Leaderboard = {
   benchmark:'iit-madras-hindi-tamil-english-asr', url:feed, feed,
   terms:'IIT Madras publishes the final competition standings. ' + feed,
   parts:Object.fromEntries(languages.map(l => [l,{name:l,unit:'%',better:'lower' as const}])),
+  stats:{
+    EnglishSubmissions:{name:'English submissions',unit:'count'},
+    HindiSubmissions:{name:'Hindi submissions',unit:'count'},
+    TamilSubmissions:{name:'Tamil submissions',unit:'count'},
+  },
   async fetch() {
     const html = await fetchText(feed);
     const blocks = [...html.matchAll(/data-code="([^"]+)"/g)].map(m =>

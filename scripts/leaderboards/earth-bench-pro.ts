@@ -9,6 +9,7 @@ const feed = 'https://arxiv.org/html/2609.12533';
 const headers = ['LLM-as- Judge','ROUGE-L','EM','Efficiency','TAO','TIO','TEM','Param.'];
 const keys = ['judge','rougeL','em','efficiency','tao','tio','tem','param'];
 const board: Leaderboard = {
+  stats:{judge:{name:'Judge score',unit:'score',better:'higher'},efficiency:{name:'Efficiency',unit:'score',better:'higher'}},
   benchmark: 'earth-bench-pro', static: 'paper', url: feed, feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   harnesses: 'system', headline: 'The headline is judged answer accuracy on the 248 Open-World Execution questions.',
   aliases: { 'Claude-4.6-sonnet':'claude-sonnet-4-6', 'Gemma-4 (E4B-it)':'gemma-4-e4b-it', 'Gemma-4 (26B-A4B-it)':'gemma-4-26b-a4b' },

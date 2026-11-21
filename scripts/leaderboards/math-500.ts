@@ -19,6 +19,11 @@ const board: Leaderboard = {
     'DeepSeek V3 (03/24/2025)': 'deepseek-v3-mar-2025',
   },
   terms: 'Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.',
+  stats: {
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(FEED);
     const raw = html.match(/props="(\{&quot;benchmarkView&quot;[^"]*)"/)?.[1];

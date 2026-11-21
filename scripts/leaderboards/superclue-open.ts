@@ -13,6 +13,13 @@ const board: Leaderboard = {
   url: "https://github.com/CLUEbenchmark/SuperCLUE-Open",
   feed: FEED,
   terms: "The repository publishes comparison results. The README does not specify separate reuse terms for these scores. https://github.com/CLUEbenchmark/SuperCLUE-Open",
+  stats: {
+    win: { name: 'Wins', unit: 'count', better: 'higher' },
+    loss: { name: 'Losses', unit: 'count', better: 'lower' },
+    tie: { name: 'Ties', unit: 'count' },
+    winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+    lossRate: { name: 'Loss rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const tables = markdownTables(await fetchText(FEED));
     const ranked = tables.find(t => t[0].join('|') === '排名|Model|Score|Win|Loss|Tie|Win_rate(%)|Loss_rate(%)');

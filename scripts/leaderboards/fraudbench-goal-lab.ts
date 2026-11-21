@@ -6,6 +6,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2611.12167';
 const board: Leaderboard = {
+  stats: { binaryFraudRate: { name: 'Binary fraud rate', unit: '%', better: 'lower' }, openFraudRate: { name: 'Open fraud rate', unit: '%', better: 'lower' }, agenticFraudRate: { name: 'Agentic fraud rate', unit: '%', better: 'lower' } },
   benchmark: 'fraudbench-goal-lab', static: 'paper', url: URL, feed: URL, terms: PAPER_TERMS,
   headline: 'The paper reports no overall fraud rate, so this is the plain mean of its binary, open, and agentic fraud rates.',
   async fetch() {

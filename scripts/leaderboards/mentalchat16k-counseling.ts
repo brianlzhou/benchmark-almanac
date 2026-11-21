@@ -7,7 +7,8 @@ const feed = "https://arxiv.org/html/2503.13509";
 const board: Leaderboard = {
   benchmark: "mentalchat16k-counseling", static: 'paper', url: feed, feed,
   terms: 'The authors publish the paper under the license listed at https://arxiv.org/abs/2503.13509.',
-  parts: {},
+  stats: { humanRank: {name:'Human rank',unit:'rating',better:'higher'} },
+  parts: Object.fromEntries(Array.from({length:14}, (_,i) => ['criterion'+(i+1), 'Criterion '+(i+1)])),
   aliases: { LLaMA2: 'llama-2-7b', 'Mistral-Instruct-V0.2': 'mistral-7b-instruct-v0-2', 'Mistral-V0.1': 'mistral-7b-v0-1', 'Zephyr-Alpha': 'zephyr-7b-alpha' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);

@@ -6,6 +6,7 @@ import {jsLiteral} from '../lib/html.ts';
 const FEED = "https://meta-interactiveworld.github.io/assets/results.js?v=23";
 const board: Leaderboard = {
  benchmark: "interactivebench",
+ stats: { completionRate: { name: 'Completion rate', unit: '%', better: 'higher' } },
  parts: {
    'capability Objects': { name: 'Objects', group: 'Dimension' },
    'capability Spatial': { name: 'Spatial', group: 'Dimension' },

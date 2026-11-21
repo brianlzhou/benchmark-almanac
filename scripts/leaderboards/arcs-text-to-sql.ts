@@ -11,6 +11,9 @@ const board: Leaderboard = {
   benchmark: 'arcs-text-to-sql', url, feed,
   terms: "The ARCS dataset uses CC BY 4.0. The page gives no separate score license. Neither host publishes applicable robots rules.",
   parts: { recall: 'Full Recall', perfect: 'Perfect', disamb: 'EX disamb' },
+  stats: {
+    delta: { name: 'Execution accuracy change', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === '#|Method|Full Recall|Perfect|EX disamb|EX e2e|ΔEX|Cost ($)');
     if (!table || table.length < 30) throw new Error('Incomplete ARCS leaderboard');

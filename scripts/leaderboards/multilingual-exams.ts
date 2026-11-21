@@ -9,6 +9,13 @@ const SOURCES = [{url: FEED, release: 'Qwen2.5'}, {url: 'https://qwenlm.github.i
 const board: Leaderboard = {
   benchmark: 'multilingual-exams', url: FEED, feed: FEED,
   terms: 'Public Qwen release-report tables, attributed to the Qwen authors; no separate results license is stated.',
+  stats: {
+    nonEmbParamsB: { name: 'Non-embedding parameters', unit: 'billions' },
+    layers: { name: 'Transformer layers', unit: 'count' },
+    contextLengthK: { name: 'Context length', unit: 'thousands', note: 'Maximum context length in thousands of tokens.' },
+    generationLengthK: { name: 'Generation length', unit: 'thousands', note: 'Maximum generation length in thousands of tokens.' },
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const source of SOURCES) {

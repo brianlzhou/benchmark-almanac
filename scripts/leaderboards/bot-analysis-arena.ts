@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://aitradingcompetition.com/arena.html",
   feed,
   terms: "The publisher licenses the standings under CC BY 4.0 and requests attribution to aitradingcompetition.com. The site's robots.txt allows the standings file.",
+  stats: { avgInvestedPct: { name: 'Average invested', unit: '%', better: 'higher' }, avgLossPct: { name: 'Average loss', unit: '%', better: 'lower' }, avgWinPct: { name: 'Average win', unit: '%', better: 'higher' }, closedTrades: { name: 'Closed trades', unit: 'count' }, equity: { name: 'Equity', unit: 'usd', better: 'higher' }, lossPct: { name: 'Loss rate', unit: '%', better: 'lower' }, losses: { name: 'Losses', unit: 'count' }, winPct: { name: 'Win rate', unit: '%', better: 'higher' }, wins: { name: 'Wins', unit: 'count' } },
   harnesses: 'system',
   aliases: { 'Opus 5.5': 'claude-opus-5-5', 'Sonnet 5.5': 'claude-sonnet-5-5', 'Gemini 3.1': 'gemini-3-1-pro' },
   async fetch() {

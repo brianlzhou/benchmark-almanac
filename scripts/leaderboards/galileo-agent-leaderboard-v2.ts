@@ -58,6 +58,13 @@ const board: Leaderboard = {
   feed: `${galileoFeed('results_v2.csv')} (Avg AC)`,
   terms: GALILEO_TERMS,
   aliases: GALILEO_ALIASES,
+  stats: { tsq: { name: 'Tool selection quality', unit: '%', better: 'higher' }, latency: { name: 'Average session duration', unit: 'seconds', better: 'lower' }, turns: { name: 'Average turns', unit: 'count' }, priceIn: { name: 'Input price per million tokens', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price per million tokens', unit: 'usd-per-mtok', better: 'lower' }, inputCost: { name: 'Average input cost', unit: 'usd', better: 'lower' }, outputCost: { name: 'Average output cost', unit: 'usd', better: 'lower' },
+    bankingTsq: { name: 'Banking tool selection quality', unit: '%', better: 'higher' }, bankingCost: { name: 'Banking average cost', unit: 'usd', better: 'lower' }, bankingLatency: { name: 'Banking average duration', unit: 'seconds', better: 'lower' }, bankingTurns: { name: 'Banking average turns', unit: 'count' },
+    healthcareTsq: { name: 'Healthcare tool selection quality', unit: '%', better: 'higher' }, healthcareCost: { name: 'Healthcare average cost', unit: 'usd', better: 'lower' }, healthcareLatency: { name: 'Healthcare average duration', unit: 'seconds', better: 'lower' }, healthcareTurns: { name: 'Healthcare average turns', unit: 'count' },
+    insuranceTsq: { name: 'Insurance tool selection quality', unit: '%', better: 'higher' }, insuranceCost: { name: 'Insurance average cost', unit: 'usd', better: 'lower' }, insuranceLatency: { name: 'Insurance average duration', unit: 'seconds', better: 'lower' }, insuranceTurns: { name: 'Insurance average turns', unit: 'count' },
+    investmentTsq: { name: 'Investment tool selection quality', unit: '%', better: 'higher' }, investmentCost: { name: 'Investment average cost', unit: 'usd', better: 'lower' }, investmentLatency: { name: 'Investment average duration', unit: 'seconds', better: 'lower' }, investmentTurns: { name: 'Investment average turns', unit: 'count' },
+    telecomTsq: { name: 'Telecom tool selection quality', unit: '%', better: 'higher' }, telecomCost: { name: 'Telecom average cost', unit: 'usd', better: 'lower' }, telecomLatency: { name: 'Telecom average duration', unit: 'seconds', better: 'lower' }, telecomTurns: { name: 'Telecom average turns', unit: 'count' },
+  },
   parts: { banking: 'Banking', healthcare: 'Healthcare', insurance: 'Insurance', investment: 'Investment', telecom: 'Telecom' },
   chart: {
     title: 'Speed vs Accuracy Trade-off',

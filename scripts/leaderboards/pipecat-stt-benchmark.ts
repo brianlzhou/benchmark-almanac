@@ -28,6 +28,7 @@ const board: Leaderboard = {
   feed: `${PAGE} (the server-rendered results table)`,
   terms: 'The benchmark repository uses BSD-2-Clause and its dataset uses CC BY 4.0. Results are credited to Pipecat.',
   headline: 'Pooled semantic word error rate from 1,000 realtime clips',
+  stats: { transcripts: { name: 'Transcripts', unit: 'count' }, perfect: { name: 'Perfect transcripts', unit: 'count', better: 'higher' }, werMean: { name: 'Mean word error rate', unit: '%', better: 'lower' }, ttfsP50: { name: 'Time to first speech P50', unit: 'ms', better: 'lower' }, ttfsP95: { name: 'Time to first speech P95', unit: 'ms', better: 'lower' }, ttfsP99: { name: 'Time to first speech P99', unit: 'ms', better: 'lower' } },
   fetch: async () => {
     const html = await fetchText(PAGE);
     const table = html.match(/<table[^>]*>[\s\S]*?<thead>[\s\S]*?<\/thead>[\s\S]*?<tbody>([\s\S]*?)<\/tbody>[\s\S]*?<\/table>/i)?.[1];

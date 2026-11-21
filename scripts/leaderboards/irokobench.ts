@@ -9,6 +9,7 @@ const feed = "https://arxiv.org/html/2406.03368";
 
 const board: Leaderboard = {
   benchmark: "irokobench", static: 'paper',
+  stats: { englishAverage: { name: 'English average', unit: '%', better: 'higher' }, frenchAverage: { name: 'French average', unit: '%', better: 'higher' } },
   url: "https://9jabench.com/",
   feed,
   terms: "The authors publish the main results in their public paper. The arXiv HTML article is publicly accessible.",

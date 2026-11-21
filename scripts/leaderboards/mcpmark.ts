@@ -30,6 +30,33 @@ interface Server {
   models: { [key: string]: unknown; is_open_source_model?: boolean; model: string; total_tasks: number; per_run_output_tokens?: number }[];
 }
 
+const serverNames = ['filesystem', 'github', 'notion', 'playwright', 'postgres'];
+const serverStats: Record<string, { name: string; unit: string; better?: 'higher' | 'lower' }> = {};
+for (const server of serverNames) {
+  const label = server[0].toUpperCase() + server.slice(1);
+  Object.assign(serverStats, {
+    [`${server}: total_tasks`]: { name: `${label} total tasks`, unit: 'count' },
+    [`${server}: total_agent_execution_time`]: { name: `${label} total agent execution time`, unit: 'seconds', better: 'lower' },
+    [`${server}: total_input_tokens`]: { name: `${label} total input tokens`, unit: 'tokens' },
+    [`${server}: total_output_tokens`]: { name: `${label} total output tokens`, unit: 'tokens' },
+    [`${server}: total_tokens`]: { name: `${label} total tokens`, unit: 'tokens' },
+    [`${server}: total_turns`]: { name: `${label} total turns`, unit: 'count' },
+    [`${server}: avg_agent_execution_time`]: { name: `${label} average agent execution time`, unit: 'seconds', better: 'lower' },
+    [`${server}: avg_input_tokens`]: { name: `${label} average input tokens`, unit: 'tokens' },
+    [`${server}: avg_output_tokens`]: { name: `${label} average output tokens`, unit: 'tokens' },
+    [`${server}: avg_total_tokens`]: { name: `${label} average total tokens`, unit: 'tokens' },
+    [`${server}: avg_turns`]: { name: `${label} average turns`, unit: 'count' },
+    [`${server}: per_run_input_tokens`]: { name: `${label} input tokens per run`, unit: 'tokens' },
+    [`${server}: per_run_output_tokens`]: { name: `${label} output tokens per run`, unit: 'tokens' },
+    [`${server}: per_run_cost`]: { name: `${label} cost per run`, unit: 'usd', better: 'lower' },
+    [`${server}: pass@1`]: { name: `${label} Pass@1`, unit: '%', better: 'higher' },
+    [`${server}: pass@4`]: { name: `${label} Pass@4`, unit: '%', better: 'higher' },
+    [`${server}: pass^4`]: { name: `${label} Pass^4`, unit: '%', better: 'higher' },
+    [`${server}: pass@1std`]: { name: `${label} Pass@1 standard deviation`, unit: '%' },
+    [`${server}: rank`]: { name: `${label} rank`, unit: 'count', better: 'lower' },
+  });
+}
+
 /** The JSON array behind the last `"data":[` before `marker` in the payload. */
 function arrayBefore<T>(flight: string, marker: string): T {
   const at = flight.indexOf(marker);
@@ -43,6 +70,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (Next.js page payload, legacy overall table)`,
   terms: 'Data embedded in the public mcpmark.ai page (robots.txt allows all paths, no terms page); the MCPMark repository is Apache-2.0.',
+  stats: { runCostUsd: { name: 'Run cost', unit: 'usd', better: 'lower' }, passAt4: { name: 'Pass@4', unit: '%', better: 'higher' }, pass4: { name: 'Pass^4', unit: '%', better: 'higher' }, time: { name: 'Average time per task', unit: 'seconds', better: 'lower' }, ...serverStats },
   aliases: {
     'qwen-3-coder-plus': 'qwen3-coder-480b-a35b',
     'kimi-k2-0711': 'kimi-k2-jul-2025',

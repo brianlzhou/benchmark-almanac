@@ -9,7 +9,7 @@ const url = 'https://github.com/LisaAnne/LocalizingMoments';
 const feed = 'https://raw.githubusercontent.com/LisaAnne/LocalizingMoments/HEAD/README.md';
 const board: Leaderboard = {
   benchmark: 'didemo', url, feed, terms: 'The authors specify the BSD 2-Clause license. ' + url + '#license',
-  parts: { rank5: 'Test Rank@5', miou: 'Test mIoU', valRank1: 'Validation Rank@1', valRank5: 'Validation Rank@5', valMiou: 'Validation mIoU' },
+  parts: { rank1: { name: 'Test Rank@1', unit: '%', better: 'higher' }, rank5: { name: 'Test Rank@5', unit: '%', better: 'higher' }, miou: { name: 'Test mIoU', unit: '%', better: 'higher' }, valRank1: { name: 'Validation Rank@1', unit: '%', better: 'higher' }, valRank5: { name: 'Validation Rank@5', unit: '%', better: 'higher' }, valMiou: { name: 'Validation mIoU', unit: '%', better: 'higher' } },
   async fetch() {
     const readme = await fetchText(feed);
     const table = readme.split('| | Rank@1 | Rank@5 | mIOU |')[1]?.split('**Training**')[0];

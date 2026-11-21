@@ -7,6 +7,7 @@ const feed = 'https://arxiv.org/html/2405.03446';
 const board: Leaderboard = {
   benchmark: 'sevenllm', static: 'paper', url: feed, feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2405.03446',
+  stats: { understandingAverage: { name: 'Understanding average', unit: '%', better: 'higher' }, generationAverage: { name: 'Generation average', unit: '%', better: 'higher' } },
   parts: { understandingEnglish: 'Understanding English', generationEnglish: 'Generation English', understandingChinese: 'Understanding Chinese', generationChinese: 'Generation Chinese' },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.[0] === 'Model' && t[0]?.[9] === 'Avg.');

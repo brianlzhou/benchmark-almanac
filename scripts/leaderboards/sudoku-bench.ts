@@ -7,6 +7,12 @@ import { flatPaperTables, grid } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2505.16135';
 const board: Leaderboard = {
   benchmark: 'sudoku-bench', static: 'paper', url: 'https://arxiv.org/abs/2505.16135', feed, terms: PAPER_TERMS,
+  stats: {
+    '4×4 correct placements': { name: '4×4 multi-step correct placements', unit: 'count', better: 'higher' },
+    '6×6 correct placements': { name: '6×6 multi-step correct placements', unit: 'count', better: 'higher' },
+    '9×9 correct placements': { name: '9×9 multi-step correct placements', unit: 'count', better: 'higher' },
+    'All correct placements': { name: 'All multi-step correct placements', unit: 'count', better: 'higher' },
+  },
   aliases: { 'Qwen 3.235B A22B':'qwen3-235b-a22b', 'Qwen 3.30B A3B':'qwen3-30b-a3b', 'Qwen QwQ 32B':'qwq-32b', 'DeepSeek R1':'deepseek-r1' },
   async fetch() {
     const html = await paperHtml(feed);

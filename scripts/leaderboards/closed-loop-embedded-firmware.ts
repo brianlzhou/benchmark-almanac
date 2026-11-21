@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://github.com/jgcarrasco/closed_loop_evaluation_agents_embedded/blob/main/artifacts/evaluations/paper_closed_loop_eval_420/official_summary_by_model_mode.csv",
   feed: FEED,
   terms: "The repository lists no license. The authors release the paper under CC BY 4.0. https://arxiv.org/abs/2610.11447 The raw file host has no robots.txt.",
+  stats: { passed: { name: 'Runs passed', unit: 'count', better: 'higher' } },
   async fetch() {
     const text = await fetchText(FEED);
     const expected = ["model_name", "mode", "pass_count", "run_count", "pass_rate_pct"];

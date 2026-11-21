@@ -7,6 +7,7 @@ const feed = 'https://arxiv.org/html/2510.06186';
 const board: Leaderboard = {
   benchmark: 'recode-h', static: 'paper', url: feed, feed,
   terms: 'The authors publish Table 2 under the terms linked at https://arxiv.org/abs/2510.06186.',
+  stats: { mrr: { name: 'Mean reciprocal rank', unit: 'score', better: 'higher', note: 'From 0 to 1.' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, codeBLEU: { name: 'CodeBLEU', unit: 'score', better: 'higher', note: 'From 0 to 1.' }, codeBERT: { name: 'CodeBERT similarity', unit: 'score', better: 'higher', note: 'From 0 to 1.' } },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[1]?.join('|') === 'Model|Feedback Level|MRR|Recall|Test Case|CodeBLEU|CodeBERT');
     if (!table) throw new Error('Missing Table 2 metrics');

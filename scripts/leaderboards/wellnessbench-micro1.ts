@@ -38,6 +38,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML results table, Primary pass)`,
   terms: MICRO1_TERMS,
+  stats: { critical: {name: 'Critical failure rate', unit: '%', better: 'lower'}, abandoned: {name: 'Abandoned rate', unit: '%', better: 'lower'}, missedSupport: {name: 'Missed support rate', unit: '%', better: 'lower'}, time: {name: 'Wall time', unit: 'seconds', better: 'lower'} },
   aliases: MICRO1_ALIASES,
   async fetch() {
     const rows = await micro1Rows(PAGE, 'Primary pass', {

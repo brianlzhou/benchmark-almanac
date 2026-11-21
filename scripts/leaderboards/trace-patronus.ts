@@ -17,6 +17,7 @@ const rates: [string, number, number, number, number][] = [
 const board: Leaderboard = {
   benchmark: 'trace-patronus', static: 'paper', feed, url: 'https://proceedings.mlr.press/v306/deshpande26a.html',
   terms: 'The published paper credits the authors and links its license. https://proceedings.mlr.press/v306/deshpande26a.html',
+  stats: { matchRate: { name: 'Match rate', unit: '%', better: 'higher' } },
   aliases: {'DeepSeek-3.2': 'deepseek-v3-2'},
   async fetch() {
     const rows = rates.flatMap(([model, isolated, isolatedMatch, contrastive, contrastiveMatch]) => {

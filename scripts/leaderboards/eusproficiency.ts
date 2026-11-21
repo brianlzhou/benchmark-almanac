@@ -9,6 +9,7 @@ const raw = 'https://raw.githubusercontent.com/hitz-zentroa/latxa/main/';
 const board: Leaderboard = {
   benchmark: 'eusproficiency', url: 'https://github.com/hitz-zentroa/latxa/tree/main/evaluation/results', feed,
   terms: 'The results repository uses MIT. https://github.com/hitz-zentroa/latxa/blob/main/LICENSE',
+  stats: { inputTokens: { name: 'Input tokens', unit: 'tokens' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
   aliases: { 'Llama-2-13b-hf': 'llama-2-13b', 'Llama-2-70b-hf': 'llama-2-70b', 'Llama-2-7b-hf': 'llama-2-7b',
     'gpt-4-0125-preview': 'gpt-4-turbo-jan-2024', 'gpt-3.5-turbo-0125': 'gpt-3-5-turbo-jan-2024', 'gpt-4-0613': 'gpt-4-jun-2023' },
   async fetch() {

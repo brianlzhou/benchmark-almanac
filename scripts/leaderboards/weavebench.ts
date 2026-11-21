@@ -25,6 +25,7 @@ const identity = (name: string) => /^(?:gpt[- ]?4o|gpt[- ]?4|gpt[- ]?4[- ]turbo|
 
 const FEED = "https://raw.githubusercontent.com/weavebench/WeaveBench/main/README.md";
 const board: Leaderboard = {
+  stats: { meanScore: {name: 'Mean score', unit: 'score', better: 'higher'} },
   "benchmark": "weavebench",
   "url": "https://github.com/weavebench/WeaveBench",
   "feed": "https://raw.githubusercontent.com/weavebench/WeaveBench/main/README.md",

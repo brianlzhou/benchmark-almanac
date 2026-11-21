@@ -15,6 +15,15 @@ const board: Leaderboard = {
   url: 'https://github.com/Tencent/WeVisOne-VL',
   feed: URL,
   terms: PAPER_TERMS,
+  stats: {
+    weRefRejection: { name: 'WeRef-Bench rejection rate', unit: '%', better: 'higher', note: 'Correct rejection rate on absent-target questions.' },
+    prRejection: { name: 'PR-Bench rejection rate', unit: '%', better: 'higher', note: 'Correct rejection rate on absent-target questions.' },
+    prMean: { name: 'PR-Bench mean F1', unit: '%', better: 'higher' },
+    humanRef: { name: 'HumanRef mean F1', unit: '%', better: 'higher' },
+    refAdv: { name: 'Ref-Adv mean F1', unit: '%', better: 'higher' },
+    dvg: { name: 'DVG mean F1', unit: '%', better: 'higher' },
+    refL4: { name: 'Ref-L4 mean F1', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const table = (await paperTables(URL))[14];
     if (!table?.some(row => row.some(cell => cell.text === 'WeRef-Bench'))) throw new Error('WeRef-Bench Table 3 missing');

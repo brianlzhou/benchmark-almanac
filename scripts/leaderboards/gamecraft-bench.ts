@@ -13,6 +13,10 @@ const board: Leaderboard = {
    visuals: { name: 'Visuals', group: 'Dimension' },
    art: { name: 'Art', group: 'Dimension' },
  },
+ stats: {
+   inputTokens: { name: 'Input tokens', unit: 'tokens' },
+   cacheTokensTotal: { name: 'Cache tokens total', unit: 'tokens' },
+ },
  harnesses: 'system',
  url: "https://github.com/tongxuluo/gamecraft-bench",
  feed: FEED,

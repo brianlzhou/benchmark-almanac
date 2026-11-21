@@ -15,6 +15,9 @@ type Submission = { id: string; cardData: { dataset_info: { splits: { name: stri
 const board: Leaderboard = {
   benchmark: 'partiprompts', url: 'https://huggingface.co/spaces/OpenGenAI/parti-prompts-leaderboard', feed,
   host: 'Open Parti Prompts', terms: 'Public human preference submissions on Hugging Face. https://huggingface.co/terms-of-service',
+  stats: {
+    votes: { name: 'Votes', unit: 'count' },
+  },
   async fetch() {
     const prompts = await fetchText('https://huggingface.co/datasets/nateraw/parti-prompts/resolve/main/PartiPrompts.tsv');
     const [header, ...lines] = prompts.trimEnd().split(/\r?\n/);

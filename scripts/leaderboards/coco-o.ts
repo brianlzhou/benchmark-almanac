@@ -13,6 +13,11 @@ function num(cell:string) {
 const board: Leaderboard = {
   benchmark:'coco-o', url:feed, feed, static:'paper',
   terms:'Results credited to Xiaofeng Mao and colleagues. https://arxiv.org/abs/2307.12730',
+  stats: {
+    coco: { name: 'COCO mAP', unit: '%', better: 'higher' },
+    effectiveRobustness: { name: 'Effective robustness', unit: '%', better: 'higher' },
+    fps: { name: 'Frames per second', unit: 'count', better: 'higher' },
+  },
   parts:Object.fromEntries(domains.map(name=>[name,{name,unit:'%'}])),
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed,
   terms: "The site has no robots file. The repository uses the MIT license. Select the newt rows. The JSON stores accuracy as a fraction and averages across test images. https://github.com/Imageomics/biobench/blob/main/LICENSE",
   host: 'BioBench',
+  stats: {
+    resolution: { name: 'Image resolution', unit: 'count', note: 'Input image resolution in pixels.' },
+    bootstrapMean: { name: 'Bootstrap mean accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{models: Model[]; results: Result[]}>(feed);
     const models = new Map(data.models.map(m => [m.ckpt, m]));

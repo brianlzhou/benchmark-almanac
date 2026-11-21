@@ -16,6 +16,7 @@ const board: Leaderboard = {
   benchmark: 'riosworld', url: feed, feed,
   terms: 'The project website uses CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/.',
   headline: 'The headline averages the risk goal intention rate across all 13 scenarios for each model.',
+  stats: { completion: { name: 'Completion rate', unit: '%', better: 'higher' } },
   parts: Object.fromEntries(groups.flat().flatMap(name => [
     [name, {name, group: 'Risk goal intention', better: 'lower' as const}],
     [name + ' completion', {name: name + ' completion', group: 'Risk goal completion', better: 'lower' as const}],

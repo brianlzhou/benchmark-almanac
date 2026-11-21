@@ -13,6 +13,7 @@ function metric(cell: string) {
 }
 const board: Leaderboard = {
   benchmark: 'lakh-midi-masd-style', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  stats:{f1Measure:{name:'F1 measure',unit:'score',better:'higher',note:'Stored from 0 to 1.'},accuracy:{name:'Accuracy',unit:'score',better:'higher',note:'Stored from 0 to 1.'},patterns:{name:'Patterns',unit:'count'},folds:{name:'Cross-validation folds',unit:'count'}},
   async fetch() {
     const table = paperTables(await paperHtml(url)).map(grid).find(t => t[0]?.[4] === 'MASD' && t[0][6] === 'MASD');
     if (table?.[1].slice(4).join('|') !== 'AUC ROC|F1 measure|Accuracy|#patterns') throw new Error('Missing MASD columns');

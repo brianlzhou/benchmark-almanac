@@ -8,6 +8,7 @@ export default {
   benchmark: 'reportbench', url: 'https://github.com/ByteDance-BandAI/ReportBench#evaluation-results', feed,
   headline: 'The headline is reference precision, the first measure in the authors’ comparison.',
   terms: 'ReportBench uses Apache 2.0. https://www.apache.org/licenses/LICENSE-2.0',
+  stats: { recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Recall stored as a fraction from 0 to 1.' }, averageRefs: { name: 'Average references', unit: 'count' }, citationMatchRate: { name: 'Citation match rate', unit: '%', better: 'higher' }, citedStatements: { name: 'Cited statements', unit: 'count' }, uncitedAccuracy: { name: 'Uncited accuracy', unit: '%', better: 'higher' }, uncitedStatements: { name: 'Uncited statements', unit: 'count' } },
   aliases: { 'claude4-sonnet': 'claude-sonnet-4' },
   async fetch() {
     const block = (await fetchText(feed)).split('## Evaluation Results')[1]?.split('*Table 1.')[0];

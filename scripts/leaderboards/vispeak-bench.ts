@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2503.12769',
   feed: FEED,
   terms: PAPER_TERMS,
+  stats: { timeAll: { name: 'Overall time accuracy', unit: '%', better: 'higher' }, textAll: { name: 'Overall text score', unit: 'score', better: 'higher', note: 'Overall text score on a five-point scale.' } },
   aliases: {"InternVL-2.5": "internvl2-5-8b"},
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));

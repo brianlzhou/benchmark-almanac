@@ -11,7 +11,13 @@ const board: Leaderboard = {
   benchmark: 'trail-patronus', url, feed: source('swe'),
   terms: 'Hugging Face hosts the public TRAIL Space under its terms. https://huggingface.co/terms-of-service',
   headline: 'The leaderboard ranks SWE and GAIA separately, so the headline is the plain mean of their joint accuracies.',
-  parts: { swe: 'TRAIL-SWE', gaia: 'TRAIL-GAIA' },
+  parts: { swe: {name: 'TRAIL-SWE', unit: 'score'}, gaia: {name: 'TRAIL-GAIA', unit: 'score'} },
+  stats: {
+    sweCategoricalF1: {name: 'TRAIL-SWE categorical F1', unit: 'score', better: 'higher', note: 'Score stored from 0 to 1.'},
+    sweLocationAccuracy: {name: 'TRAIL-SWE location accuracy', unit: 'score', better: 'higher', note: 'Score stored from 0 to 1.'},
+    gaiaCategoricalF1: {name: 'TRAIL-GAIA categorical F1', unit: 'score', better: 'higher', note: 'Score stored from 0 to 1.'},
+    gaiaLocationAccuracy: {name: 'TRAIL-GAIA location accuracy', unit: 'score', better: 'higher', note: 'Score stored from 0 to 1.'},
+  },
   aliases: {
     'Gemini-2.5-Pro-Preview-05-06': 'gemini-2-5-pro-may-2025', 'Gemini-2.5-Flash-Preview-04-17': 'gemini-2-5-flash-apr-2025',
     'Llama-4-Maverick-17B-128E-Instruct': 'llama-4-maverick', 'Llama-4-Scout-17B-16E-Instruct': 'llama-4-scout',

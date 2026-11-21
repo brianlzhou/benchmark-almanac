@@ -61,6 +61,7 @@ const board: Leaderboard = {
   feed: `${FEED} (window.FDB_OURS.models)`,
   terms: 'robots.txt allows the site. Contra Labs states no data license. Results are credited to Contra Labs and BenchFlow.',
   measures: { winRate: 'win-rate' },
+  stats: { winRate: { name: 'Win rate', unit: '%', better: 'higher' }, games: { name: 'Games', unit: 'count' }, cost: { name: 'Cost per run', unit: 'usd', better: 'lower' } },
   aliases: { 'Muse Wonder': 'muse-wonder', 'Qwen3.8 Max': 'qwen-3-8-max' },
   async fetch() {
     const js = await fetchText(FEED);

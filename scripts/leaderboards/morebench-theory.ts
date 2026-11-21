@@ -8,8 +8,9 @@ const feed = 'https://arxiv.org/html/2510.16380';
 const board: Leaderboard = {
   benchmark: 'morebench-theory', static: 'paper', url: feed, feed,
   terms: 'The authors publish this table under the terms listed at https://arxiv.org/abs/2510.16380.',
+  stats: { lengthChars: {name:'Response length',unit:'count'}, lengthControlledScore: {name:'Length-controlled score',unit:'%',better:'higher'} },
   aliases: {'Qwen3-235B-A22B-Thinking-2507': 'qwen3-235b-a22b-thinking-jul-2025', 'Qwen3-30B-A3B-Thinking-2507': 'qwen3-30b-a3b-thinking-jul-2025'},
-  parts: {},
+  parts: { Gauthierian: 'Gauthierian', Scanlonian: 'Scanlonian', Benthamite: 'Benthamite', Aristotelian: 'Aristotelian', Kantian: 'Kantian' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const results = tables.filter(t => t[0]?.join('|') === 'Model|Gauthierian|Scanlonian|Benthamite|Aristotelian|Kantian|Overall|Length|Overall-LC');

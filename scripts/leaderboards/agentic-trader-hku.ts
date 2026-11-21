@@ -9,6 +9,9 @@ const board: Leaderboard = {
   url: "https://trade-agent-aiel-hku.com/",
   feed,
   terms: "HKU displays a copyright notice. I found no data reuse license on the leaderboard. The site returned 404 for robots.txt.",
+  stats: {
+    capital_usd: { name: 'Starting capital', unit: 'usd' }, final_nav_usd: { name: 'Final net asset value', unit: 'usd', better: 'higher' }, total_return_pct: { name: 'Total return', unit: '%', better: 'higher' }, return_days: { name: 'Return days', unit: 'count' }, realized_pnl_usd: { name: 'Realized profit and loss', unit: 'usd', better: 'higher' }, unrealized_pnl_usd: { name: 'Unrealized profit and loss', unit: 'usd', better: 'higher' }, margin_ratio_pct: { name: 'Margin ratio', unit: '%', better: 'higher' }, max_drawdown_pct: { name: 'Maximum drawdown', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<{ leaderboard_rows: Record<string, unknown>[] }>(feed);
     if (data.leaderboard_rows?.length < 11) throw new Error('Missing trader standings');

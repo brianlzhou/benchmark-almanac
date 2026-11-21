@@ -12,6 +12,7 @@ const board: Leaderboard = {
   Reasoning: { name: 'Reasoning', group: 'Category' },
 }, url: "https://sgp-bench.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { Semantics: { name: 'Semantics accuracy', unit: '%', better: 'higher' }, Count: { name: 'Count accuracy', unit: '%', better: 'higher' } },
 aliases:{'GPT-4o-2024-08-06':'gpt-4o-aug-2024','GPT-4o-2024-05-13':'gpt-4o-may-2024'},
  async fetch() {
 

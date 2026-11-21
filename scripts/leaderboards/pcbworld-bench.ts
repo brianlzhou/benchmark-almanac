@@ -12,6 +12,17 @@ const board: Leaderboard = {
   terms: 'The authors publish Table 3 under the terms linked at https://arxiv.org/abs/2607.05915.',
   headline: 'The paper reports no overall score, so this is the plain mean of the clean-pass fractions on D2, D3-A and D3-B.',
   parts: Object.fromEntries(splits.map(name => [name, {name, note: 'Fraction of boards with a clean pass.'}])),
+  stats: {
+    D2Potential: { name: 'D2 potential gain', unit: 'score', better: 'higher' },
+    D2Routability: { name: 'D2 routability', unit: 'score', better: 'higher', note: 'Fraction of target connections successfully routed, stored from 0 to 1.' },
+    D2Seconds: { name: 'D2 wallclock time', unit: 'seconds', better: 'lower' },
+    'D3-APotential': { name: 'D3-A potential gain', unit: 'score', better: 'higher' },
+    'D3-ARoutability': { name: 'D3-A routability', unit: 'score', better: 'higher', note: 'Fraction of target connections successfully routed, stored from 0 to 1.' },
+    'D3-ASeconds': { name: 'D3-A wallclock time', unit: 'seconds', better: 'lower' },
+    'D3-BPotential': { name: 'D3-B potential gain', unit: 'score', better: 'higher' },
+    'D3-BRoutability': { name: 'D3-B routability', unit: 'score', better: 'higher', note: 'Fraction of target connections successfully routed, stored from 0 to 1.' },
+    'D3-BSeconds': { name: 'D3-B wallclock time', unit: 'seconds', better: 'lower' },
+  },
   aliases: {'Qwen3.5-397B': 'qwen3-5-397b-a17b'},
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0][5] === 'D3-A (99 Boards)' && t[0][9] === 'D3-B (10 Boards)');

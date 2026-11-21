@@ -10,6 +10,7 @@ const board: Leaderboard = {
   'IC SWE (Full)': { name: 'IC SWE full', group: 'Task type' },
   'SWE Manager (Full)': { name: 'SWE manager full', group: 'Task type' },
 }, url: URL, feed: URL + ' (SWE-Lancer Full pass@1)', terms: PAPER_TERMS,
+  stats: { dollarsEarned: { name: 'Dollars earned', unit: 'usd', better: 'higher' }, totalPayout: { name: 'Total payout', unit: 'usd' }, earnRate: { name: 'Earn rate', unit: '%', better: 'higher' }, icDollarsEarned: { name: 'Independent contractor dollars earned', unit: 'usd', better: 'higher' }, icTotalPayout: { name: 'Independent contractor total payout', unit: 'usd' }, icEarnRate: { name: 'Independent contractor earn rate', unit: '%', better: 'higher' }, managerDollarsEarned: { name: 'Manager dollars earned', unit: 'usd', better: 'higher' }, managerTotalPayout: { name: 'Manager total payout', unit: 'usd' }, managerEarnRate: { name: 'Manager earn rate', unit: '%', better: 'higher' } },
   aliases: {'claude-3-5-sonnet-20240620': 'claude-3-5-sonnet'},
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(URL));

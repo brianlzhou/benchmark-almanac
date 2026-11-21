@@ -26,6 +26,7 @@ const board: Leaderboard = {
   aliases: {
     'Qwen3-Coder-30B': 'qwen3-coder-30b-a3b-instruct',
   },
+  stats: { tasks: { name: 'Tasks', unit: 'count' }, passed: { name: 'Tasks passed', unit: 'count' }, tasksWithTrajectory: { name: 'Tasks with trajectory', unit: 'count' }, tasksWithConflict: { name: 'Tasks with conflict', unit: 'count' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const feed of FEEDS) {

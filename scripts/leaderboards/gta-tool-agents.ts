@@ -15,6 +15,16 @@ const board: Leaderboard = {
   url: 'https://open-compass.github.io/GTA/',
   feed: `${FEED} (AnsAcc)`,
   terms: 'CSV in the Apache-2.0 open-compass/GTA GitHub repository, also served by its GitHub Pages project page.',
+  stats: {
+    instAcc: { name: 'Instruction-following accuracy', unit: '%', better: 'higher' },
+    toolAcc: { name: 'Tool selection accuracy', unit: '%', better: 'higher' },
+    argAcc: { name: 'Argument name accuracy', unit: '%', better: 'higher' },
+    summAcc: { name: 'Final answer summary accuracy', unit: '%', better: 'higher' },
+    pF1: { name: 'Perception tool-selection F1', unit: '%', better: 'higher' },
+    oF1: { name: 'Operation tool-selection F1', unit: '%', better: 'higher' },
+    lF1: { name: 'Logic tool-selection F1', unit: '%', better: 'higher' },
+    cF1: { name: 'Creativity tool-selection F1', unit: '%', better: 'higher' },
+  },
   aliases: {
     'claude3-opus': 'claude-3-opus',
     'gpt-4-1106-preview': 'gpt-4-turbo-nov-2023',

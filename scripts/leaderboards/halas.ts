@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2606.23048';
 const names = ['Whisper large v2', 'Whisper large v3', 'Whisper large v3 Turbo', 'Crisper Whisper', 'Canary-1B', 'Canary-1B-Flash', 'Parakeet-TDT version 2'];
 const board: Leaderboard = {
   benchmark: 'halas', url: feed, feed, static: 'paper',
+  stats:{annotatedErrors:{name:'Annotated errors',unit:'count'},loopingRate:{name:'Looping rate',unit:'%',better:'lower'},wordErrorRate:{name:'Word error rate',unit:'%',better:'lower'},top10:{name:'Top 10 accuracy',unit:'%',better:'higher'},top30:{name:'Top 30 accuracy',unit:'%',better:'higher'}},
   terms: 'The authors publish Table 2 at https://arxiv.org/abs/2606.23048.',
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.join('|') === 'Model|Wv2|Wv3|Wv3T|CrW|Can|CanF|Par|Average');

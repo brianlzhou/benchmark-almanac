@@ -7,6 +7,7 @@ const board: Leaderboard = {
   knowledge: { name: 'Knowledge', group: 'Task type' },
   reasoning: { name: 'Reasoning', group: 'Task type' },
 }, url: URL, feed: URL + ' (all-question accuracy)', terms: PAPER_TERMS,
+  stats: { instructionFollowing: {name:'Instruction following',unit:'%',better:'higher'} },
   async fetch() {
     const t = inlinePaperTables(await paperHtml(URL)).find(t => t[0]?.[4] === 'IFR');
     if (!t || t.length < 5) throw new Error('MuchoMusic results missing');

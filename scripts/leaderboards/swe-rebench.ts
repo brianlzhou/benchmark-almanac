@@ -21,6 +21,11 @@ const board: Leaderboard = {
   feed: `${URL} (default window table)`,
   terms: 'Server-rendered public page; robots.txt allows all paths and the site publishes no terms.',
   aliases: {},
+  stats: {
+    passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+    totalTokens: { name: 'Tokens per problem', unit: 'tokens', better: 'lower' },
+    stderr: { name: 'Standard error', unit: '%', note: 'Standard error of the resolved rate across runs.' },
+  },
   async fetch() {
     const html = await fetchText(URL);
     const t = tables(html).find((x) => x[0]?.some((c) => /^Resolved Rate/.test(c.text)));

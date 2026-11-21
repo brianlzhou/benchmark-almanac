@@ -9,6 +9,10 @@ const feed = 'https://arxiv.org/html/2601.08510';
 const board: Leaderboard = {
   benchmark: 'stage-cross-scene-narrative-evolution-reasoning', static: 'paper', url: feed, feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2601.08510',
+  stats: {
+    passAt5: { name: 'Pass@5', unit: '%', better: 'higher', note: 'Percentage of questions with at least one correct answer among five generations.' },
+    averageAccuracy: { name: 'Average accuracy', unit: '%', better: 'higher', note: 'Average correctness across five generations.' },
+  },
   headline: 'Table 3 lists Hybrid RAG first, so this is its average accuracy on the full Task II release.',
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await paperHtml(feed);

@@ -28,6 +28,7 @@ const board: Leaderboard = {
   feed: `${URL} (static HTML, execution table, Test)`,
   terms: 'Static page on GitHub Pages; robots.txt allows it and the Spider data is CC BY-SA 4.0.',
   aliases: {},
+  stats: { exactMatch: { name: 'Exact match accuracy', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const all = tables(await fetchText(URL));
     const rows: LeaderboardRow[] = [];

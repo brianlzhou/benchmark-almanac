@@ -9,6 +9,7 @@ const platforms = ['Mobile', 'Desktop', 'Web'];
 const board: Leaderboard = {
   benchmark: 'os-critic-bench', static: 'paper', url: feed, feed,
   terms: 'The authors publish Table 1 on arXiv under the terms linked at https://arxiv.org/abs/2512.16295.',
+  stats: { f1: { name: 'Overall F1', unit: '%', better: 'higher' } },
   parts: Object.fromEntries(platforms.flatMap(name => [
     [name, {name: name + ' accuracy', unit: '%' as const}],
     [name + 'F1', {name: name + ' F1', unit: '%' as const}],

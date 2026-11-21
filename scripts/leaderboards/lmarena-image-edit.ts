@@ -5,6 +5,8 @@ import { ARENA_ALIASES, ARENA_TERMS, arenaFeed, arenaRowsByCategory } from './lm
 
 const board: Leaderboard = {
   benchmark: 'lmarena-image-edit',
+  stats: { votes: { name: 'Votes', unit: 'count' } },
+  parts: { 'cat:agentic': 'Agentic', 'cat:multi_image_edit': 'Multi-image edit', 'cat:multi_image_edit_agentic': 'Multi-image edit agentic' },
   url: 'https://arena.ai/leaderboard',
   feed: arenaFeed('image_edit', '*'),
   terms: ARENA_TERMS,

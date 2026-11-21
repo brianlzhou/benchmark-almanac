@@ -9,6 +9,13 @@ const board: Leaderboard = {
   benchmark: 'dualchem', static: 'paper',
   url: 'https://scale.com/blog/dualchem-evaluating-ai-models-dual-use-chemistry-risks', feed: FEED,
   terms: 'Scale AI publishes the paper under its stated terms. Table 4 is credited to the authors.',
+  stats: {
+    answeredAccuracy: { name: 'Accuracy with refusals counted as incorrect', unit: '%', better: 'higher' },
+    refusalRate: { name: 'Refusal rate', unit: '%', better: 'lower' },
+    webSearchAccuracy: { name: 'Web search accuracy with refusals counted as incorrect', unit: '%', better: 'higher' },
+    webSearchAnsweredAccuracy: { name: 'Web search accuracy on answered questions', unit: '%', better: 'higher' },
+    webSearchRefusalRate: { name: 'Web search refusal rate', unit: '%', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(FEED);
     const section = text.split('Table 4. Per-model accuracy')[1]?.split('Table 5. Dual-use')[0];

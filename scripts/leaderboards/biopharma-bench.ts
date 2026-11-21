@@ -9,6 +9,7 @@ const FEED = "https://eval.raycaster.ai/benchmarks/biopharma-bench/";
 const board: Leaderboard = {
  benchmark: "biopharma-bench", url: "https://eval.raycaster.ai/benchmarks/biopharma-bench/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, passAt1: { name: 'Pass@1', unit: '%', better: 'higher' }, passAt1Margin: { name: 'Pass@1 margin', unit: '%' }, steps: { name: 'Steps', unit: 'count' }, toolCalls: { name: 'Tool calls', unit: 'count' } },
  aliases:{'Muse Wonder 1.0':'muse-wonder'},
  chart:{title:'Mean rubric score vs. cost',x:{key:'cost',label:'Mean task cost',unit:'$',better:'lower'},y:{key:'score',label:'Mean rubric score',unit:'%',better:'higher'}},
  async fetch() {

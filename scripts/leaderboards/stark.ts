@@ -7,6 +7,7 @@ const FEED = "https://huggingface.co/spaces/snap-stanford/stark-leaderboard/reso
 const board: Leaderboard = {
   benchmark: "stark", url: "https://huggingface.co/spaces/snap-stanford/stark-leaderboard", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { hit5: { name: 'Hit at 5', unit: '%', better: 'higher' }, recall20: { name: 'Recall at 20', unit: '%', better: 'higher' }, mrr: { name: 'Mean reciprocal rank', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

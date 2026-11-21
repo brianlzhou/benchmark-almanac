@@ -10,6 +10,13 @@ const board: Leaderboard = {
   url: "https://varworkshop.github.io/challenges/",
   feed,
   terms: "The workshop page gives no separate score reuse terms. https://varworkshop.github.io/challenges/ The feed host publishes robots.txt at https://varworkshop.github.io/robots.txt.",
+  stats: {
+    precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Precision from 0 to 1.' },
+    recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Recall from 0 to 1.' },
+    f1: { name: 'F1', unit: 'score', better: 'higher', note: 'F1 score from 0 to 1.' },
+    bert: { name: 'BERT score', unit: 'score', better: 'higher', note: 'BERT score from 0 to 1.' },
+    rougeL: { name: 'ROUGE-L score', unit: 'score', better: 'higher', note: 'ROUGE-L score from 0 to 1.' },
+  },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const table of tables(await fetchText(feed))) {

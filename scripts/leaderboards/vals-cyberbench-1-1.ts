@@ -12,6 +12,7 @@ const board: Leaderboard = {
   terms: VALS_TERMS,
   chart: VALS_LATENCY_CHART,
   aliases: VALS_ALIASES,
+  stats: { turns: { name: 'Turns per test', unit: 'count', better: 'lower' } },
   fetch: () => valsRows(SLUG),
 };
 export default board;

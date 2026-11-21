@@ -11,6 +11,13 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The challenge website lists CC BY-SA 4.0. Its robots URL returns HTML.",
   parts: { interaction: 'Interaction Prediction' },
+  stats: {
+    ap50: { name: 'AP50', unit: '%', better: 'higher' },
+    axis: { name: 'AP50 axis', unit: '%', better: 'higher' },
+    origin: { name: 'AP50 origin', unit: '%', better: 'higher' },
+    interactionSubmissions: { name: 'Interaction submissions', unit: 'count' },
+    submissions: { name: 'Submissions', unit: 'count' },
+  },
   async fetch() {
     const [movable, interaction] = tables(await fetchText(FEED)).map(table => table.map(row => row.map(c => c.text)));
     if (movable?.[0].join('|') !== 'Rank|Team|AP50 axis+origin ↑|AP50 ↑|AP50 axis ↑|AP50 origin ↑|# Subs' ||

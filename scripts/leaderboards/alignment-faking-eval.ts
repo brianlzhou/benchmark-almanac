@@ -10,6 +10,11 @@ const pct = (v: string) => numberCell(v.replace(/%$/, ''));
 export default {
   benchmark: 'alignment-faking-eval', static: 'paper', url: 'https://arxiv.org/abs/2412.14093', feed,
   terms: 'arXiv robots.txt allows the HTML paper. The authors publish the compliance gaps.',
+  stats: {
+    alignmentFakingReasoning: { name: 'Alignment-faking reasoning', unit: '%' },
+    trainingRefusal: { name: 'Training refusal rate', unit: '%' },
+    unmonitoredRefusal: { name: 'Unmonitored refusal rate', unit: '%' },
+  },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[1]?.length === 5 && t[1][4] === 'compliance gap');

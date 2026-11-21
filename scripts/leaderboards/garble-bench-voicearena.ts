@@ -13,6 +13,10 @@ const board: Leaderboard = {
     transactional: { name: 'Transactional task completion', group: 'Domain', unit: 'score' },
     conversational: { name: 'Conversational task completion', group: 'Domain', unit: 'score' },
   },
+  stats: {
+    transactionalTaskCompletion: { name: 'Transactional task completion', unit: 'score', better: 'higher', note: 'Fraction completed, from 0 to 1.' }, conversationalTaskCompletion: { name: 'Conversational task completion', unit: 'score', better: 'higher', note: 'Fraction completed, from 0 to 1.' },
+    entityFidelity: { name: 'Entity fidelity', unit: 'score', better: 'higher', note: 'Fraction of entities preserved, from 0 to 1.' }, functionFloorTransactional: { name: 'Transactional function floor', unit: 'score', better: 'higher', note: 'Fraction meeting the transactional function floor, from 0 to 1.' }, functionFloorConversational: { name: 'Conversational function floor', unit: 'score', better: 'higher', note: 'Fraction meeting the conversational function floor, from 0 to 1.' },
+  },
   aliases: { 'GLM-4.7 Flash': 'glm-4-7', 'Qwen3 30B-A3B': 'qwen3-30b-a3b', 'Qwen3 32B': 'qwen3-32b' },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = [

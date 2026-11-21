@@ -26,6 +26,14 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at alaya-lab.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    cerr: { name: 'Center error', better: 'lower', note: 'Image-diagonal-normalized distance.' },
+    rot: { name: 'Camera rotation error', better: 'lower', note: 'Camera rotation error in degrees.' },
+    trans: { name: 'Camera translation error', better: 'lower', note: 'Normalized trajectory distance.' },
+    cammc: { name: 'Camera motion control', better: 'lower', note: 'Normalized pose matrix distance.' },
+    warp: { name: 'Warp error', better: 'lower', note: 'Temporal warp error in the paper table units of 10^-3.' },
+    cases: { name: 'Cases', unit: 'count' },
+  },
   
   async fetch() {
     const d=jsonAfter<any>(await fetchText(FEED),'const data =');const out:LeaderboardRow[]=[];

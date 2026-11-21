@@ -15,6 +15,7 @@ const board: Leaderboard = {
 }, url: PAGE,
   feed: `${PAGE} (current Dataset distribution CSV, overall_score)`,
   terms: 'Intoken permits crawling under robots.txt and publishes this results CSV, with attribution retained and no separate score reuse license stated.',
+  stats:{rankChange:{name:'Rank change',unit:'count'}},
   aliases: {
     'Kimi-K2-0711': 'kimi-k2-jul-2025',
     'mistralai/mistral-large-2411': 'mistral-large-2-nov-2024',

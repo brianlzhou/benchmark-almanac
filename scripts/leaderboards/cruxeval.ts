@@ -10,6 +10,10 @@ const FEED = 'https://crux-eval.github.io/data.csv';
 
 const board: Leaderboard = {
   benchmark: 'cruxeval',
+  stats: {
+    inputPass5: { name: 'Input prediction pass@5', unit: '%', better: 'higher' },
+    passAt5: { name: 'Output prediction pass@5', unit: '%', better: 'higher' },
+  },
   parts: {
     inputPass1: { name: 'Input prediction', group: 'Task type' },
   },

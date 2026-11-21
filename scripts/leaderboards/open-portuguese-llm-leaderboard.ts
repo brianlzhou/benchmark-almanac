@@ -10,6 +10,10 @@ const feed = "https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard/r
 const board: Leaderboard = {
   benchmark: 'open-portuguese-llm-leaderboard', url, feed,
   terms: "The Space declares Apache 2.0. https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard/blob/main/README.md" ,
+  stats: {
+    npm: { name: 'Normalized performance mean', unit: '%', better: 'higher', note: 'Mean task score normalized against each task baseline.' },
+    evalTime: { name: 'Evaluation time', unit: 'seconds', better: 'lower' },
+  },
   aliases: {
     "Claude 3.7 Sonnet (2025-02-19)": "claude-3-7-sonnet",
     "GPT 5 Mini (2025-08-07)": "gpt-5-mini",

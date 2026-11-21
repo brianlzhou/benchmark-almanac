@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/HPAI-BSC/TuRTLe-Leaderboard",
   feed,
   terms: "The leaderboard Space carries the Apache 2.0 license. robots.txt allows the feed path.",
+  stats: { 'AVG (STX)': { name: 'Average syntax pass rate', unit: '%', better: 'higher' }, 'AVG (EQV)': { name: 'Average equivalence pass rate', unit: '%', better: 'higher' } },
   async fetch() {
     const records = parseCsv((await fetchText(feed)).trim()).filter(r => r.Model !== 'Space');
     if (records.length < 14) throw new Error('Missing RuC runs');

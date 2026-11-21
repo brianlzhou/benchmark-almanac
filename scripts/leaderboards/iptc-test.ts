@@ -26,6 +26,7 @@ export async function classificationScores(feed: string, dataset: string, minimu
 
 const board: Leaderboard = {
   benchmark: "iptc-test",
+  stats: { microF1: { name: 'Micro F1', unit: 'score', better: 'higher', note: 'Reported from 0 to 1.' } },
   url: "https://github.com/TajaKuzman/Benchmarking-Text-Classification-on-South-Slavic/tree/main/IPTC-NewsTopic-Benchmark",
   feed: FEED,
   terms: "The score repository states no reuse license for this board. The original development repository is separate. https://github.com/TajaKuzman/Benchmarking-Text-Classification-on-South-Slavic/tree/main/IPTC-NewsTopic-Benchmark GitHub requests a one-second crawl delay.",

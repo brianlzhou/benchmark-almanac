@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (feasibility_pct)`,
   terms: 'Static CSV on the project site; robots.txt allows all paths and the OR-License repository is Apache-2.0.',
+  stats: { daq: { name: 'Decision-adjusted quality', unit: '%', better: 'higher' } },
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const r of parseCsv(await fetchText(FEED))) {

@@ -9,6 +9,11 @@ const board: Leaderboard = {
   url: "https://admin.xbench-ai.com/api/deepsearch2510?populate[Leaderboard][populate]=company",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    reportedPriceUSD: { name: 'Reported query price', unit: 'usd', better: 'lower', note: 'Dollar amount shown in the source cost column.' },
+    latencyMin: { name: 'Minimum query time', unit: 'seconds', better: 'lower', note: 'Lower bound of the source time range, converted from minutes.' },
+    latencyMax: { name: 'Maximum query time', unit: 'seconds', better: 'lower', note: 'Upper bound of the source time range, converted from minutes.' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 

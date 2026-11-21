@@ -33,6 +33,7 @@ const board: Leaderboard = {
   "feed": "https://www.betaspacestudio.com/en/resources/trlawbench",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { accuracyPercent: { name: 'Accuracy', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const source = await fetchText(FEED); let payload = '';
     for (const m of source.matchAll(/self\.__next_f\.push\((\[.*?)\)<\/script>/g)) {

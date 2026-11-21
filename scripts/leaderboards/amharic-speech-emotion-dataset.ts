@@ -13,6 +13,13 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Filter the CSV by dataset ASED. The repository applies MIT to code and documentation. Individual datasets retain their terms. https://github.com/aaivu/KuralHub The site returns a 404 page for robots.txt.",
   parts: Object.fromEntries(emotions.map((name) => [name, { name, group: 'Emotion F1', unit: '%' }])),
+  stats: {
+    val_accuracy: { name: 'Validation accuracy', unit: '%', better: 'higher' },
+    test_macro_precision: { name: 'Test macro precision', unit: '%', better: 'higher' },
+    test_macro_recall: { name: 'Test macro recall', unit: '%', better: 'higher' },
+    test_macro_f1: { name: 'Test macro F1', unit: '%', better: 'higher' },
+    test_weighted_f1: { name: 'Test weighted F1', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const runs = parseCsv(await fetchText(FEED)).filter((r) => r.language === 'Amharic' && r.dataset === 'ASED');
     if (runs.length < 11) throw new Error('Expected at least 11 ASED runs');

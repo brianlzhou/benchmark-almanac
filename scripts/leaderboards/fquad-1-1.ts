@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2002.06071v2';
 const board: Leaderboard = {
   benchmark: 'fquad-1-1', static: 'paper', url: feed + '#S7.T9', feed,
   terms: 'The authors publish the revised paper under CC BY 4.0.',
+  stats: { exactMatch: { name: 'Exact match', unit: '%', better: 'higher' }, devF1: { name: 'Development F1', unit: '%', better: 'higher' }, devExactMatch: { name: 'Development exact match', unit: '%', better: 'higher' } },
   async fetch() {
     const data = tables(await fetchText(feed)).filter(t => t[0]?.[1]?.text === 'FQuAD1.1-test' && t[1]?.[0]?.text === 'Model');
     if (data.length !== 2) throw new Error('Expected both FQuAD 1.1 test tables');

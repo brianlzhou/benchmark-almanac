@@ -9,6 +9,12 @@ const feed = "https://huggingface.co/spaces/zai-org/RPC-Bench/raw/main/data/lead
 const board: Leaderboard = {
   benchmark: 'rpc-bench', url, feed,
   terms: "The Hugging Face Space declares Apache License 2.0. https://huggingface.co/spaces/zai-org/RPC-Bench" ,
+  stats: {
+    Conciseness: { name: 'Conciseness score', unit: 'score', better: 'higher' },
+    Correctness: { name: 'Correctness score', unit: 'score', better: 'higher' },
+    Completeness: { name: 'Completeness score', unit: 'score', better: 'higher' },
+    'F1-like': { name: 'F1-like score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const data = parseCsv(await fetchText(feed));
     const measures = ['Conciseness', 'Correctness', 'Completeness', 'F1-like', 'Informativeness'];

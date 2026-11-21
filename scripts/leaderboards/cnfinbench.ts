@@ -11,7 +11,12 @@ const board: Leaderboard = {
   feed,
   terms: "The publisher links the board at https://cnfinbench.opencompass.org.cn/home. Separate results licensing remains unverified. The site serves the app shell at robots.txt.",
   aliases: { 'doubao-seed-2-1-pro-260628': 'doubao-seed-2-1-pro' },
+  stats: { totalCompletionTokens: { name: 'Completion tokens', unit: 'tokens' } },
   parts: {
+    researchDueDiligenceDim: 'Research due diligence',
+    financialModelDim: 'Financial modeling',
+    bankComplianceDim: 'Bank compliance',
+    quantPortfolioDim: 'Quantitative portfolio',
     "finProKnowledgeDim": "金融专业知识问答",
     "finBasicsDim": "Fin_Basics\n（Accuracy）",
     "finCertExamsDim": "Fin_Cert_Exams\n（Accuracy）",

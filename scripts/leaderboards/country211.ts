@@ -7,6 +7,7 @@ const feed = 'https://raw.githubusercontent.com/mlfoundations/open_clip/main/doc
 export default {
   benchmark:'country211',url:'https://github.com/mlfoundations/open_clip/blob/main/docs/openclip_results.csv',feed,host:'OpenCLIP',
   terms:'OpenCLIP license, https://github.com/mlfoundations/open_clip/blob/main/LICENSE',
+  stats:{billionFlops:{name:'FLOPs',unit:'billions',note:'Floating-point operations per image inference, stored in billions.'}},
   async fetch() {
     const records = parseCsv(await fetchText(feed));
     if (!records[0] || !['name','pretrained','Country211','params (M)','FLOPs (B)'].every(k => k in records[0])) throw new Error('Missing OpenCLIP columns');

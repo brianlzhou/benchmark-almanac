@@ -7,6 +7,7 @@ const feed='https://arxiv.org/html/2504.12516';
 export default {
   benchmark:'browsecomp', static: 'paper',url:'https://arxiv.org/abs/2504.12516',feed,terms:PAPER_TERMS,harnesses:'system',
   aliases:{"OpenAI o1": "o1"},
+  stats:{ calibrationError:{ name:'Calibration error', unit:'%', better:'lower', note:'Difference between the model’s confidence and the likelihood that its answer is correct.' } },
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
     const t=ts.find(t=>t[0]?.join('|')==='Model|Accuracy (%)|Calibration Error (%)');

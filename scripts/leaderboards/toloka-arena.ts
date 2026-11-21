@@ -14,6 +14,7 @@ const board: Leaderboard = {
   terms: "Public results published by the benchmark authors at toloka.ai; retain source attribution and follow the upstream terms.",
   aliases: {},
   
+  stats: { pass1:{name:'Pass@1',unit:'%',better:'higher'} },
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='pass^1'));if(!t)throw new Error('Toloka baseline table missing');const out:LeaderboardRow[]=[];
     for(const r of t.slice(1))for(let i=1;i<3;i++){const score=num(r[i]?.text);if(score!==undefined)out.push({model:identity(r[0].text.replace(/ \(xhigh\)$/i,'')),score,setting:'Launch baseline; '+t[0][i].text+(/xhigh/i.test(r[0].text)?'; xhigh reasoning':'')});}return out.filter(r=>r.setting?.includes('; pass^5')).map(r=>{

@@ -12,6 +12,7 @@ const board: Leaderboard = {
   benchmark: 'odysseybench', static: 'paper', feed, url: feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'The paper reports no overall success rate, so this is the plain mean of the OdysseyBench+ and OdysseyBench-Neo overall percentages.',
   aliases: { 'DS.-Distill-Qwen-32b': 'deepseek-r1-distill-qwen-32b', 'Qwen-3-32b': 'qwen3-32b' },
+  stats: { PlusContextTokens: { name: 'OdysseyBench+ context tokens', unit: 'tokens' }, NeoContextTokens: { name: 'OdysseyBench-Neo context tokens', unit: 'tokens' } },
   parts: Object.fromEntries(tracks.flatMap(track => columns.map((c,i) =>
     [track + i, (track === 'Plus' ? 'OdysseyBench+' : 'OdysseyBench-Neo') + ' ' + c]))),
   async fetch() {

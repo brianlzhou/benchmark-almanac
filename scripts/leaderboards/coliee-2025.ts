@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'coliee-2025', url: feed, feed,
   terms: 'COLIEE publishes these standings under its competition rules. https://coliee.org/COLIEE2025/rules',
   parts: { retrieval: 'Case Law Retrieval' }, harnesses: 'system',
+  stats: { precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' } },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Team|File|F1|Precision|Recall');
     if (!table) throw new Error('COLIEE Task 1 results missing');

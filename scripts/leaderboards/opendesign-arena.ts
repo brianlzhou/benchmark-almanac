@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (inline JSON #model-rankings-data, score)`,
   terms: 'Public page; open-design.ai robots.txt allows all agents except /og/, and the page states no reuse limits for the rankings.',
+  stats: { ttft: { name: 'Time to first token', unit: 'seconds', better: 'lower' } },
   chart: {
     title: 'Model efficiency',
     note: 'Average score against mean completion time per artifact; the page can also plot cache hit rate and token use.',

@@ -8,6 +8,7 @@ import { ALIASES, TERMS, loadTau, overall, overallExtras, row } from './tau2-ben
 
 const board: Leaderboard = {
   benchmark: 'tau3-bench',
+  stats: { pass2: { name: 'Pass@2', unit: '%', better: 'higher' }, pass3: { name: 'Pass@3', unit: '%', better: 'higher' }, pass4: { name: 'Pass@4', unit: '%', better: 'higher' } },
   url: 'https://taubench.com/leaderboard?benchmark=core',
   feed: 'https://sierra-tau-bench-public.s3.us-west-2.amazonaws.com/submissions/manifest.json (submissions)',
   terms: TERMS,

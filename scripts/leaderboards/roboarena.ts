@@ -19,6 +19,11 @@ const board: Leaderboard = {
   feed: `${FEED} (all rated policies, official status at ${OFFICIAL_EVALS} A/B evals)`,
   terms: 'Public JSON API that the RoboArena leaderboard page reads (the API host has no robots.txt and states no terms); the RoboArena repository is MIT-licensed.',
   verified: 'At least 100 RoboArena A/B evaluations',
+  stats: {
+    uptimeSamples: { name: 'Uptime samples', unit: 'count' },
+    uptimeWindowHours: { name: 'Uptime window', unit: 'hours' },
+    evaluations: { name: 'Evaluations', unit: 'count' },
+  },
   aliases: {
     // DROID fine-tunes released with openpi
     pi05_droid: 'pi0-5',

@@ -12,6 +12,12 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at gym-anything.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    'Easier Success': { name: 'Easier subset success rate', unit: '%', better: 'higher' },
+    'Easier subset Arms': { name: 'Easier subset arms success rate', unit: '%', better: 'higher' },
+    'Easier subset Mobile': { name: 'Easier subset mobile success rate', unit: '%', better: 'higher' },
+    'Easier subset Humanoid': { name: 'Easier subset humanoid success rate', unit: '%', better: 'higher' },
+  },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Test Reward'));if(!t)throw new Error('RoboWorld table missing');const h=t[0].map(c=>c.text);

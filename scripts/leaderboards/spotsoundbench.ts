@@ -8,6 +8,10 @@ const board: Leaderboard = {
   url: "https://loiesun.github.io/spotsound/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    recallIoU03: { name: 'Recall at IoU 0.3', unit: '%', better: 'higher' },
+    recallIoU05: { name: 'Recall at IoU 0.5', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return paperRows(FEED, {"table": 6, "header": "SpotSound-Bench", "score": 9, "width": 13, "min": 10, "metrics": {"recallIoU03": 7, "recallIoU05": 8}});
   },

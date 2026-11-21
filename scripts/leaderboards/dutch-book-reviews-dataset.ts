@@ -16,6 +16,10 @@ export default {
     'mistralai/Mistral-Small-3.2-24B-Instruct-2506':'mistral-small-3-2',
   },
   headline:'EuroEval reports Matthews correlation on its DBRD-mini test split, scaled by 100.',
+  stats: {
+    macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
+    scored: { name: 'Scored examples', unit: 'count' },
+  },
   async fetch() {
     const page = await fetchText(feed);
     const script = page.match(/<script\b[^>]*src="([^"]*\/index-[^"]+\.js)"/)?.[1];

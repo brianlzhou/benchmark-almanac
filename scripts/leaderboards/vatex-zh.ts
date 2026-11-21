@@ -31,6 +31,11 @@ const board: Leaderboard = {
   "feed": "https://eric-xw.github.io/vatex-website/captioning.html",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    bleu4: { name: 'BLEU-4', unit: '%', better: 'higher' },
+    meteor: { name: 'METEOR', unit: '%', better: 'higher' },
+    rougeL: { name: 'ROUGE-L', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const data = tables(source).map(t => t.map(r => r.map(c => c.text)));

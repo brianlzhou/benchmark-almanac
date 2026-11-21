@@ -10,6 +10,12 @@ const board: Leaderboard = {
   url: "https://markovic.com/swedish_benchmark_V1.1.html",
   feed,
   terms: "The dashboard embeds the scores in its HTML and gives no separate reuse license. robots.txt allows the feed path.",
+  stats: {
+    rawTaskScore: { name: 'Raw task score', unit: 'score', better: 'higher' }, accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    latency: { name: 'Average latency', unit: 'seconds', better: 'lower' }, examples: { name: 'Examples', unit: 'count' },
+    correct: { name: 'Correct predictions', unit: 'count' }, validPredictions: { name: 'Valid predictions', unit: 'count' },
+    validRate: { name: 'Valid prediction rate', unit: '%', better: 'higher' }, secondaryScore: { name: 'Secondary score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     return swedishTask(feed, 'sveaknow_culture', 23);
   },

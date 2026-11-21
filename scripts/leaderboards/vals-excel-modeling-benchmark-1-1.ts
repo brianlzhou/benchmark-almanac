@@ -14,6 +14,7 @@ const board: Leaderboard = {
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
   chart: VALS_LATENCY_CHART,
+  stats: { totalTokens: { name: 'Total tokens per test', unit: 'tokens' }, turns: { name: 'Turns per test', unit: 'count', better: 'lower' } },
   async fetch() {
     const rows = await valsRows(SLUG);
     await new Promise(resolve=>setTimeout(resolve,1000));

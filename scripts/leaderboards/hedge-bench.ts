@@ -4,6 +4,7 @@ import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2606.03918";
 const board:Leaderboard={benchmark:"hedge-bench", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
+ stats:{coverage:{name:'Coverage',unit:'%',better:'higher'},accuracy:{name:'Accuracy',unit:'%',better:'higher'},trial1Passes:{name:'Trial 1 passes',unit:'count'},trial2Passes:{name:'Trial 2 passes',unit:'count'},trial3Passes:{name:'Trial 3 passes',unit:'count'},turns:{name:'Turns',unit:'count',better:'lower'},penalty:{name:'Penalty',unit:'score',better:'lower'},reportTokens:{name:'Report tokens',unit:'tokens'},cites:{name:'Citations',unit:'count'},files:{name:'Files',unit:'count'},density:{name:'Evidence density',unit:'score',better:'higher'},objections:{name:'Objections',unit:'count'}},
  async fetch(){const ts=paperTables(await paperHtml(URL)).map(grid);const t=ts.find(t=>JSON.stringify(t[0])==="[\"Model\",\"Effort\",\"T1\",\"T2\",\"T3\",\"Joint (%)\",\"Coverage (%)\",\"Accuracy (%)\"]");
  if(!t)throw new Error('Reviewed results table missing');const out:LeaderboardRow[]=[];
  const resource = ts.find(t => t[0][1] === 'Output tokens');

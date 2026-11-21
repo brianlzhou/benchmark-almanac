@@ -7,6 +7,7 @@ import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://tarsier-vlm.github.io/";
 const board: Leaderboard = {
+  stats: { overallF1: { name: 'Overall F1', unit: '%', better: 'higher' }, overallP: { name: 'Overall precision', unit: '%', better: 'higher' }, overallR: { name: 'Overall recall', unit: '%', better: 'higher' }, LMP: { name: 'Long-term memory precision', unit: '%', better: 'higher' }, LMR: { name: 'Long-term memory recall', unit: '%', better: 'higher' }, AMP: { name: 'Audio memory precision', unit: '%', better: 'higher' }, AMR: { name: 'Audio memory recall', unit: '%', better: 'higher' }, STP: { name: 'Short-term memory precision', unit: '%', better: 'higher' }, STR: { name: 'Short-term memory recall', unit: '%', better: 'higher' }, YTP: { name: 'Your task precision', unit: '%', better: 'higher' }, YTR: { name: 'Your task recall', unit: '%', better: 'higher' }, TTP: { name: 'Task transfer precision', unit: '%', better: 'higher' }, TTR: { name: 'Task transfer recall', unit: '%', better: 'higher' }, llmParamsB: { name: 'Model parameters', unit: 'billions' } },
  benchmark: "dream-1k",
  parts: {
    LMF1: { name: 'Live-action movies', group: 'Category' },

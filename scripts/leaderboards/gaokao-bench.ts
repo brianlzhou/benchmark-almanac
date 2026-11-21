@@ -25,6 +25,7 @@ const board: Leaderboard = {
   url: "https://github.com/OpenLMLab/GAOKAO-Bench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
+  stats: { subjective: { name: 'Subjective overall score', unit: '%', better: 'higher' } },
   aliases: {},
   
   async fetch() {

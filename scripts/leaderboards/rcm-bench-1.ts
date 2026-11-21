@@ -32,6 +32,11 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${FEED} (weightedScore)`,
   terms: 'Results JSON that Commure links for download from the benchmark page; eng.commure.com serves no robots.txt and states no terms for it.',
+  stats: {
+    cases: { name: 'Cases', unit: 'count' }, totalTrials: { name: 'Total trials', unit: 'count' }, passedTrials: { name: 'Passed trials', unit: 'count', better: 'higher' },
+    priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, priceCachedIn: { name: 'Cached input price', unit: 'usd-per-mtok', better: 'lower' },
+    estimatedRunCost: { name: 'Estimated run cost', unit: 'usd', better: 'lower' }, pricedSubtotal: { name: 'Priced attempts subtotal', unit: 'usd', better: 'lower' }, pricedAttempts: { name: 'Priced attempts', unit: 'count' }, engineCompletedTrials: { name: 'Engine-completed trials', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<{ runs: Run[]; trialsPerCase: number; flows: { id: string; label: string }[] }>(FEED);
     const flows = data.flows.map(flow => ({key: flow.id.replace(/_(.)/g, (_, c: string) => c.toUpperCase()), name: flow.label}));

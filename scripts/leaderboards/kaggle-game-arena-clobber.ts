@@ -12,6 +12,11 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'clobber'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: {
+    tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' },
+    costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' },
+    costPerTurnUnspecifiedUnit: { name: 'Average cost per turn in source units', note: 'The source does not state the currency unit.' },
+  },
   fetch: () => kaggleRowsWithBounds('kaggle', 'clobber', 'Score', 1, {tokensPerTurn: {task: 'Avg. Tokens/Turn'}, costPerTurnUnspecifiedUnit: {task: 'Avg. Cost/Turn'}}),
 };
 export default board;

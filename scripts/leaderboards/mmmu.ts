@@ -105,6 +105,7 @@ export const MMMU_ALIASES: Record<string, string> = {
 
 const board: Leaderboard = {
   benchmark: 'mmmu',
+  stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
   parts: Object.fromEntries(Object.entries(disciplines).map(([key, name]) => [key, { name, group: 'Discipline' }])),
   url: 'https://mmmu-benchmark.github.io/#leaderboard',
   feed: `${MMMU_FEED} (validation.overall)`,

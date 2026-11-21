@@ -7,6 +7,9 @@ const URL = 'https://arena.ai/blog/factuality-in-arena';
 const board: Leaderboard = {
   benchmark: 'arena-search-factuality', url: URL, feed: URL,
   terms: 'Arena publishes the embedded ranking data in this public research article. Preserve Arena attribution and terms.',
+  stats: {
+    humanRating: { name: 'Human rating', unit: 'rating' },
+  },
   async fetch() {
     const html = await fetchText(URL);
     const match = html.match(/const ARENAS = (\{.*?\});/s);

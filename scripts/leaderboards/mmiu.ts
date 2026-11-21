@@ -58,6 +58,7 @@ const board: Leaderboard = {
   '3DCR': { name: '3D CAD recognition', group: 'Task type' },
   VidCap: { name: 'Video captioning', group: 'Task type' },
   '3DIR': { name: '3D indoor recognition', group: 'Task type' },
+  STD: { name: 'STD', group: 'Task type' },
 }, url: "https://mmiu-bench.github.io/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://mage-bench.com/season/2/rankings",
   feed,
   terms: "The host serves HTML for robots.txt. MageBench licenses its code and data under MIT.",
+  stats: { games:{name:'Games played',unit:'count'}, winRate:{name:'Win rate',unit:'%',better:'higher'}, blunderIndex:{name:'Blunder index',unit:'score',better:'lower'} },
   aliases: { "Qwen3 235B": "qwen3-235b-a22b-instruct-jul-2025" },
 
   async fetch() {

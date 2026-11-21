@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://nithinsomu.github.io/cfdllmbench_v2/#results",
   feed,
   terms: "The benchmark repository uses BSD 3-Clause. The separate results site lists no score license. https://github.com/NLR-Theseus/cfdllmbench/blob/main/LICENSE The raw GitHub host serves no robots.txt.",
+  stats: { executionRate: { name: 'Execution rate', unit: '%', better: 'higher' }, nmseScore: { name: 'Normalized mean squared error score', unit: '%', better: 'higher' }, convergenceRate: { name: 'Convergence rate', unit: '%', better: 'higher' } },
   aliases: { 'Llama 4 Maverick 17B Instruct': 'llama-4-maverick' },
   async fetch() {
     const html = await fetchText(feed);

@@ -12,6 +12,9 @@ const board: Leaderboard = {
   benchmark: 'barc-bench', static: 'paper', url, feed: url,
   terms: 'The authors publish the results under the license listed at https://arxiv.org/abs/2610.32024.',
   parts: Object.fromEntries(subsets.map(name => [name,{name}])),
+  stats: {
+    pass5: { name: 'All-safe rate across five rollouts', unit: '%', better: 'higher', note: 'A task is all-safe only when all five rollouts avoid the defined unsafe action.' },
+  },
   aliases: { 'Fable 5.1': 'claude-fable-5-1', 'DS4 Pro': 'deepseek-v4-pro' },
   async fetch() {
     const table = paperTables(await paperHtml(url)).map(grid).find(t => t[0]?.join('|') === header.join('|'));

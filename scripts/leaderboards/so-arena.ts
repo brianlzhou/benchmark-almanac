@@ -15,6 +15,15 @@ type Model = {
 const tierNames: Record<string, string> = { E: 'Easy', M: 'Medium', H: 'Hard', V: 'Very hard', All: 'All' };
 const board: Leaderboard = {
   benchmark: 'so-arena', url, feed,
+  stats: {
+    R: {name: 'Reliability', unit: '%', better: 'higher', note: 'Geometric mean of stability and non-degeneracy.'},
+    S: {name: 'Stability', unit: 'score', better: 'higher'}, N: {name: 'Non-degeneracy', unit: 'score', better: 'higher'},
+    latencyMs: {name: 'Mean latency', unit: 'ms', better: 'lower'}, latencyP90Ms: {name: '90th percentile latency', unit: 'ms', better: 'lower'},
+    latencyP99Ms: {name: '99th percentile latency', unit: 'ms', better: 'lower'},
+    originalOrderAccuracy: {name: 'Original order accuracy', unit: '%', better: 'higher'},
+    minOrderAccuracy: {name: 'Minimum order accuracy', unit: '%', better: 'higher'},
+    maxOrderAccuracy: {name: 'Maximum order accuracy', unit: '%', better: 'higher'},
+  },
   terms: 'SO-Arena publishes its annotations under CC BY 4.0 and its code under MIT. https://github.com/holdrain/SO-Arena#licence',
   async fetch() {
     const data = await fetchJson<{ domains: { id: string; name: string }[]; models: Model[] }>(feed);

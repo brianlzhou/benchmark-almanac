@@ -17,6 +17,10 @@ const board: Leaderboard = {
   feed: FEED,
   terms: 'CSV in the tatsu-lab/alpaca_eval GitHub repository, which is Apache-2.0.',
   verified: 'Tagged verified in the AlpacaEval 1.0 leaderboard',
+  stats: {
+    lcWinRate: { name: 'Length-controlled win rate', unit: '%', better: 'higher' },
+    length: { name: 'Average output length', unit: 'count', note: 'Average output length in characters.' },
+  },
   aliases: {
     'GPT-4 Preview (11/06)': 'gpt-4-turbo-nov-2023',
     'GPT-4 (03/14)': 'gpt-4-mar-2023',

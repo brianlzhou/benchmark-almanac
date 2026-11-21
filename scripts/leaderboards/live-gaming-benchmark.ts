@@ -12,6 +12,16 @@ const board: Leaderboard = {
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   headline: 'The headline is the overall Closed Captions win rate against Gemini 2.5 Pro, in percent.',
   parts: Object.fromEntries(scenarios.slice(0, 3).map(s => [s + ' CC', { name: s, unit: '%' }])),
+  stats: {
+    'Overall CC': { name: 'Overall caption win rate', unit: '%', better: 'higher' },
+    ...Object.fromEntries(scenarios.flatMap(s => [
+      [s + ' LiveU', { name: s + ' LiveU score', unit: 'score', better: 'higher' }],
+      [s + ' FinalQ', { name: s + ' final quality score', unit: 'score', better: 'higher' }],
+      [s + ' TimeDiff', { name: s + ' response time difference', unit: 'seconds', better: 'lower' }],
+      [s + ' PAUC', { name: s + ' partial area under the curve', unit: 'score', better: 'higher' }],
+      [s + ' F1', { name: s + ' F1 score', unit: '%', better: 'higher' }],
+    ])),
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const byModel = new Map<string, Record<string, number>>();

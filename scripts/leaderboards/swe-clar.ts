@@ -19,6 +19,7 @@ const FEED = "https://raw.githubusercontent.com/upwork/SWE-Clar/master/README.md
 const board: Leaderboard = {
   benchmark: "swe-clar", url: "https://github.com/upwork/SWE-Clar", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  stats: { clarification: { name: 'Clarification score', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

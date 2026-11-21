@@ -16,6 +16,7 @@ const board: Leaderboard = {
     knowledge: { name: 'Knowledge', group: 'Domain' },
     formal: { name: 'Formal', group: 'Domain' },
   },
+  stats: { games: { name: 'Games', unit: 'count' } },
   url: "https://github.com/ByteDance-Seed/EdgeBench",
   feed: FEED,
   terms: "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",

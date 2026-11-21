@@ -5,6 +5,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2503.01619';
 const board: Leaderboard = {
+  stats: { passAt3: { name: 'pass@3', unit: '%', better: 'higher' }, passAt5: { name: 'pass@5', unit: '%', better: 'higher' } },
   benchmark: 'flame-react-eval', static: 'paper', url: URL, feed: URL + ' (Table 1 pass@1)', terms: PAPER_TERMS,
   aliases: {"LLaVA-Qwen2-72B-OV": "llava-onevision-72b", "LLaVA-Qwen2-7B-OV": "llava-onevision-7b"},
   async fetch() {

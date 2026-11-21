@@ -30,7 +30,7 @@ interface Measure {
   note?: string;
 }
 // intervals and spreads describe another number, so they are never a measure of their own
-const SKIP = /^(low|high|ciLow|ciHigh|stderr|std|rankLow|rankHigh|.*(Low|High|Ci|Stderr|Std))$/;
+const SKIP = /^(low|high|lo|hi|lower|upper|ci\d*|ciLow|ciHigh|stderr|std|sd|se|var|variance|rankLow|rankHigh)$|^(low|high|lo|hi|lower|upper|ci\d*|stderr|std|sd|se|var|variance)[:_\s-]|(^|[_\s:-])(lo|hi|low|high|lower|upper|ci\d*|se|sd|std|stderr|var|variance)$|[a-zA-Z0-9](Lo|Hi|Low|High|Lower|Upper|Ci\d*|Se|Sd|Std|Stderr|Var|Variance|LowerBound|UpperBound)$/;
 const human = (k: string) => {
   const s = k.replace(/[_-]+/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([a-zA-Z])(\d)/g, '$1 $2').trim().toLowerCase();
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -75,6 +75,9 @@ for (const [k, n] of seen) {
   else if (ax) measures.push({ key: k, name: ax.label, unit: ax.unit ?? '', better: ax.better, group: 'Other measures' });
   else measures.push({ key: k, name: human(k), unit: '', group: 'Not yet labeled' });
 }
+// an unlabeled key whose every value is 0 or 1 is a yes-or-no flag ("insufficient samples"), not a measure
+const flag = (k: string) => runs.every((s) => { const v = s.metrics?.[k]; return v === undefined || v === 0 || v === 1; });
+for (let i = measures.length - 1; i >= 0; i--) if (measures[i].group === 'Not yet labeled' && flag(measures[i].key)) measures.splice(i, 1);
 const ORDER = ['Headline', 'Parts', 'Other measures', 'Not yet labeled'];
 measures.sort((a, b) => ORDER.indexOf(a.group) - ORDER.indexOf(b.group));
 
@@ -170,7 +173,7 @@ const intro =
     const a = Math.abs(x);
     // three significant digits at most, with no trailing zeros, so a count of 9 reads 9 and not 9.00
     const t = a >= 1000 ? Math.round(x).toLocaleString('en-US') : a === 0 ? '0' : String(+x.toPrecision(a >= 100 ? 4 : 3));
-    return unit === '%' ? `${t}%` : unit === 'usd' ? `$${t}` : t;
+    return unit === '%' ? `${t}%` : unit === 'usd' || unit === '$' ? `$${t}` : t;
   };
   // decimals for a measure: none when every value is whole, else enough for its typical size, so a column lines up
   const places = new Map<string, number>();
@@ -185,11 +188,19 @@ const intro =
   const fmtCol = (x: number, m: M, rows: R[]) => {
     const p = placesOf(m, rows);
     const t = x.toLocaleString('en-US', { minimumFractionDigits: p, maximumFractionDigits: p });
-    return m.unit === '%' ? `${t}%` : m.unit === 'usd' ? `$${t}` : t;
+    return m.unit === '%' ? `${t}%` : m.unit === 'usd' || m.unit === '$' ? `$${t}` : t;
+  };
+  // how each unit reads after a measure's name. A count or a plain score needs none, since the name says what it is.
+  const UNIT_WORDS: Record<string, string> = {
+    '%': '%', usd: 'US dollars', $: 'US dollars', s: 'seconds', seconds: 'seconds', ms: 'milliseconds', min: 'minutes', minutes: 'minutes',
+    h: 'hours', hours: 'hours', tokens: 'tokens', 'tokens/s': 'tokens per second', 'usd-per-mtok': 'US dollars per million tokens', cny: 'yuan',
+    thousands: 'thousands', millions: 'millions', billions: 'billions', gb: 'GB', count: '', score: '',
   };
   // no unit when the name already says it ("Rating", not "Rating (rating)")
-  const unitLabel = (m: M) =>
-    m.unit === '%' ? ' (%)' : m.unit === 'usd' ? ' (US dollars)' : m.unit && m.unit !== 'score' && !m.name.toLowerCase().includes(m.unit.toLowerCase()) ? ` (${m.unit})` : '';
+  const unitLabel = (m: M) => {
+    const w = m.unit in UNIT_WORDS ? UNIT_WORDS[m.unit] : m.unit;
+    return w && !m.name.toLowerCase().includes(w.toLowerCase()) ? ` (${w})` : '';
+  };
   for (const root of document.querySelectorAll<HTMLElement>('[data-msr]')) {
     const { measures, rows } = JSON.parse(root.querySelector('[data-msr-data]')!.textContent!) as { measures: M[]; rows: R[] };
     const byKey = new Map(measures.map((m) => [m.key, m]));

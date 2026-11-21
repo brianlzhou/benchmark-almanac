@@ -8,6 +8,7 @@ import { KAGGLE_TERMS, kaggleFeed, kaggleRowsWithBounds } from './kaggle-game-ar
 
 const board: Leaderboard = {
   benchmark: 'kaggle-game-arena-chess',
+  stats: { tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' }, costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' } },
   url: 'https://www.kaggle.com/benchmarks/kaggle/chess-text',
   feed: kaggleFeed('kaggle', 'chess-text'),
   terms: KAGGLE_TERMS,

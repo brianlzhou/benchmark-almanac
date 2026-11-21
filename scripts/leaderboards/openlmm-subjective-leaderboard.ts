@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed,
   terms: "The Space publishes its loader at https://huggingface.co/spaces/opencompass/openlmm_subjective_leaderboard/tree/main. Results licensing requires separate verification. Hugging Face robots.txt permits the public Space.",
   parts: { creationReward: 'Creation_MMBench reward', creationVfs: 'Creation_MMBench VFS', 'MIA-Bench': 'MIA-Bench', 'MM-IFEval': 'MM-IFEval', MMAlignBench: 'MMAlignBench', MMVet: 'MMVet', WildVision: 'WildVision' },
+  stats: { 'Avg Rank': { name: 'Average rank', unit: 'rating', better: 'lower' } },
   aliases: {
     "GPT-4o (1120, detail-high)": "gpt-4o-nov-2024",
     "GPT-4o (0806, detail-high)": "gpt-4o-aug-2024",

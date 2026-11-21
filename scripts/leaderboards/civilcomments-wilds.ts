@@ -9,6 +9,12 @@ const feed = 'https://wilds.stanford.edu/leaderboard/';
 const board: Leaderboard = {
   benchmark: 'civilcomments-wilds', url: feed + '#civilcomments', feed,
   terms: 'The WILDS team publishes and attributes each submission at https://wilds.stanford.edu/leaderboard/.',
+  stats: {
+    rank: { name: 'Leaderboard rank', unit: 'count', better: 'lower' },
+    valAvg: { name: 'Validation average accuracy', unit: '%', better: 'higher' },
+    valWorstGroup: { name: 'Validation worst-group accuracy', unit: '%', better: 'higher' },
+    testAvg: { name: 'Test average accuracy', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const section = html.split('<h3 id="civilcomments">')[1]?.split('<h3')[0];

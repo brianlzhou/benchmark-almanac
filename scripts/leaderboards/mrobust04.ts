@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2209.13738';
 const board: Leaderboard = {
   benchmark: 'mrobust04', url: feed, feed, static: 'paper',
   terms: 'Paper and license details at https://arxiv.org/abs/2209.13738.',
+  stats: Object.fromEntries(Object.entries({en:'English',fr:'French',pt:'Portuguese',it:'Italian',id:'Indonesian',ru:'Russian',es:'Spanish',de:'German',zh:'Chinese'}).map(([lang,name]) => ['ndcgPrime_'+lang, {name: name + ' nDCG prime',unit:'score',better:'higher'}]).concat([['ndcgPrime',{name:'Average nDCG prime',unit:'score',better:'higher'}]])),
   parts: { en: 'English', fr: 'French', pt: 'Portuguese', it: 'Italian', id: 'Indonesian',
     ru: 'Russian', es: 'Spanish', de: 'German', zh: 'Chinese' },
   async fetch() {

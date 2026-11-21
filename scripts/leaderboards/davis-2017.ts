@@ -11,6 +11,10 @@ const feed = base + 'global_eval_test-dev_2017.js';
 const board: Leaderboard = {
   benchmark: 'davis-2017', feed, url: 'https://davischallenge.org/davis2017/soa_compare.html',
   terms: 'The DAVIS Challenge publishes the scores and credits each method. https://davischallenge.org/davis2017/soa_compare.html',
+  stats:{
+    Jmean:{name:'Region overlap mean',unit:'%',better:'higher',note:'Mean J measure for region overlap.'}, Jrecall:{name:'Region overlap recall',unit:'%',better:'higher'}, Jdecay:{name:'Region overlap decay',unit:'%',better:'lower'},
+    Fmean:{name:'Boundary accuracy mean',unit:'%',better:'higher',note:'Mean F measure for boundary accuracy.'}, Frecall:{name:'Boundary accuracy recall',unit:'%',better:'higher'}, Fdecay:{name:'Boundary accuracy decay',unit:'%',better:'lower'},
+  },
   async fetch() {
     const data = jsonAfter<Record<string, Record<string,string>> & {techniques: string[]}>(await fetchText(feed), 'var global_eval_test_dev_2017 =');
     await new Promise(resolve => setTimeout(resolve, 1000));

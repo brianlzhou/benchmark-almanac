@@ -32,6 +32,7 @@ const board: Leaderboard = {
   "feed": "https://gamehorizon-suite.github.io/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { onlineShortHorizon: { name: 'Short-horizon success rate', unit: '%', better: 'higher' }, onlineLongHorizon: { name: 'Long-horizon success rate', unit: '%', better: 'higher' }, onlineCausal: { name: 'Causal success rate', unit: '%', better: 'higher' }, onlineThematic: { name: 'Thematic success rate', unit: '%', better: 'higher' }, onlineShortHorizonPassed: { name: 'Short-horizon tasks passed', unit: 'count' }, onlineShortHorizonTotal: { name: 'Short-horizon tasks', unit: 'count' }, onlineLongHorizonPassed: { name: 'Long-horizon tasks passed', unit: 'count' }, onlineLongHorizonTotal: { name: 'Long-horizon tasks', unit: 'count' }, onlineCausalPassed: { name: 'Causal tasks passed', unit: 'count' }, onlineCausalTotal: { name: 'Causal tasks', unit: 'count' }, onlineThematicPassed: { name: 'Thematic tasks passed', unit: 'count' }, onlineThematicTotal: { name: 'Thematic tasks', unit: 'count' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = tables(await fetchText(FEED));
     const rows = new Map<string,LeaderboardRow>();

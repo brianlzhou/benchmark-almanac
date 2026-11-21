@@ -19,6 +19,13 @@ const board: Leaderboard = {
   url: 'https://github.com/HuanzhiMao/BFCL-Result',
   feed: `${FEED} (last V3 copy of the leaderboard)`,
   terms: "A BFCL maintainer's public archive of the leaderboard files (HuanzhiMao/BFCL-Result), Apache-2.0.",
+  stats: {
+    'Non-live rank': { name: 'Non-live category rank', unit: 'count', better: 'lower' },
+    'Live rank': { name: 'Live category rank', unit: 'count', better: 'lower' },
+    'Multi-turn rank': { name: 'Multi-turn category rank', unit: 'count', better: 'lower' },
+    latency: { name: 'Mean latency', unit: 'seconds', better: 'lower' },
+    latencyP95: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
+  },
   aliases: {
     ...v4.aliases,
     // names that carry their snapshot date, which the resolver reads as a later snapshot

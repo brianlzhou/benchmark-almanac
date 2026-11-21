@@ -9,6 +9,7 @@ const pct = (s: string) => numberCell(s.replace(/%$/, ''));
 const board: Leaderboard = {
   benchmark: 'swe-lancer-manager', static: 'paper', url: 'https://arxiv.org/abs/2502.12115', feed,
   terms: 'arXiv robots.txt permits the HTML paper. The results are credited to OpenAI.',
+  stats: { dollarsEarned: { name: 'Dollars earned', unit: 'usd', better: 'higher' }, totalPayout: { name: 'Total payout', unit: 'usd' }, earnRate: { name: 'Earn rate', unit: '%', better: 'higher' } },
   aliases: { 'GPT-4o': 'gpt-4o-aug-2024', '3.5 Sonnet': 'claude-3-5-sonnet', 'Deepseek-R1': 'deepseek-r1' },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);

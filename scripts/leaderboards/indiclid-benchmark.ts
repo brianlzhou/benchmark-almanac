@@ -9,6 +9,7 @@ const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/IndicLangClassi
 const board: Leaderboard = {
   benchmark: 'indiclid-benchmark', url: 'https://leaderboard.mteb.org/tasks/' + task, feed, host: 'MTEB',
   terms: 'MTEB publishes its results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
+  stats:{activeParamsB:{name:'Active parameters',unit:'billions'},embeddingDim:{name:'Embedding dimension',unit:'count'},maxTokens:{name:'Maximum tokens',unit:'tokens'},memoryUsageMb:{name:'Memory usage',unit:'count',note:'Memory usage in megabytes.'}},
   async fetch() {
     const rows = await taskScores(feed, task, 'accuracy', 196, 100);
     return checked(rows.filter(r => r.model !== 'mteb/baseline-random-encoder'), 195);

@@ -9,6 +9,11 @@ const board: Leaderboard = {
   benchmark: "legal-consent-sweep", url: "https://hub.harborframework.com/datasets/doe/legal-consent-sweep?tab=leaderboard", feed,
   terms: "Public results published by the task author on Harbor Hub.",
   aliases: {"Sol 6.1": "gpt-6-1-sol"},
+  stats: {
+    trial1: { name: "Trial 1 score", unit: "score", better: "higher", note: "Score from the first counted consent-review trial." },
+    trial2: { name: "Trial 2 score", unit: "score", better: "higher", note: "Score from the second counted consent-review trial." },
+    trial3: { name: "Trial 3 score", unit: "score", better: "higher", note: "Score from the third counted consent-review trial." },
+  },
   async fetch() {
     const source = await fetchText(feed);
     const all = tables(source).map(t => t.map(row => row.map(c => c.text)));

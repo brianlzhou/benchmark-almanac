@@ -8,6 +8,12 @@ const feed = 'https://arxiv.org/html/2404.14412';
 const board: Leaderboard = {
   benchmark: 'cmd-ad-eval', static: 'paper', feed, url: feed,
   terms: 'The authors publish these results at https://www.robots.ox.ac.uk/~vgg/research/autoad/index.html.',
+  stats: {
+    recallAt1of5: { name: 'Recall at 1 of 5', unit: '%', better: 'higher' },
+    critic: { name: 'CRITIC', unit: 'score', better: 'higher' },
+    gpt35Judge: { name: 'GPT-3.5 LLM-AD-Eval', unit: 'score', better: 'higher', note: 'Language-model judgment on a 0 to 5 scale.' },
+    llama2Judge: { name: 'Llama 2 LLM-AD-Eval', unit: 'score', better: 'higher', note: 'Language-model judgment on a 0 to 5 scale.' },
+  },
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[0]?.includes('CMD-AD-Eval') && t[0].includes('MAD-Eval'));
     if (!table || table[0][1] !== 'CMD-AD-Eval' || table[1].slice(1,4).join() !== 'CIDEr,R@1/5,CRITIC'

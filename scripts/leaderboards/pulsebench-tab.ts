@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://huggingface.co/datasets/pulse-ai/PulseBench-Tab",
   feed: FEED,
   terms: "CC BY-NC-ND 4.0 dataset; factual published result values are attributed without changing their units; Hugging Face robots.txt permits the raw card.",
+  stats: {
+    coverage: { name: "Coverage", unit: "%", better: "higher", note: "Percentage of the 1,820 benchmark samples for which the provider produced output." },
+    perfect: { name: "Perfect tables", unit: "count", better: "higher", note: "Number of tables with a perfect T-LAG output." },
+  },
   async fetch() {
     const table = markdownTables(await fetchText(FEED)).find(t => t[0]?.includes("T-LAG Score"));
     if (!table) throw new Error('Published overall results table is missing');

@@ -32,6 +32,10 @@ const board: Leaderboard = {
   url: URL,
   feed: FEED,
   terms: TERMS,
+  stats: {
+    accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
+    correctPerDollar: { name: 'Correct answers per dollar', unit: 'count', better: 'higher' },
+  },
   chart: {
     title: 'Accuracy versus cost',
     x: { key: 'costPer1000', label: 'Cost per 1,000 questions', unit: 'usd', better: 'lower' },

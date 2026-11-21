@@ -14,6 +14,12 @@ interface Entry { name: string; harness: string; reasoning: string; best_progres
 const board: Leaderboard = {
   benchmark: 'drivingbench', url: feed, feed, costPer: 'run', harnesses: 'model',
   terms: 'DrivingBench publishes the results as research software with no stated data license. ' + feed,
+  stats: {
+    inputTokens: { name: 'Input tokens', unit: 'tokens' }, outputTokens: { name: 'Output tokens', unit: 'tokens' },
+    attempt1: { name: 'Attempt 1 progress', unit: '%', better: 'higher' }, attempt1Seconds: { name: 'Attempt 1 duration', unit: 'seconds', better: 'lower' }, attempt1Commands: { name: 'Attempt 1 commands', unit: 'count' },
+    attempt2: { name: 'Attempt 2 progress', unit: '%', better: 'higher' }, attempt2Seconds: { name: 'Attempt 2 duration', unit: 'seconds', better: 'lower' }, attempt2Commands: { name: 'Attempt 2 commands', unit: 'count' },
+    attempt3: { name: 'Attempt 3 progress', unit: '%', better: 'higher' }, attempt3Seconds: { name: 'Attempt 3 duration', unit: 'seconds', better: 'lower' }, attempt3Commands: { name: 'Attempt 3 commands', unit: 'count' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const rows: LeaderboardRow[] = [];

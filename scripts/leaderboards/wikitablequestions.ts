@@ -8,6 +8,11 @@ const feed = 'https://aclanthology.org/P15-1142.pdf';
 const board: Leaderboard = {
   benchmark: 'wikitablequestions', url: 'https://ppasupat.github.io/WikiTableQuestions/', feed, static: 'paper',
   terms: 'The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/',
+  parts: {
+    devAccuracy: { name: 'Development accuracy', unit: '%', better: 'higher' },
+    devOracle: { name: 'Development oracle score', unit: '%', better: 'higher' },
+    testOracle: { name: 'Test oracle score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const text = await pdfText(feed);
     const table = text.match(/dev\s+test\s+Operation[^\f]+?Table 5: Accuracy \(acc\) and oracle scores \(ora\)/)?.[0];

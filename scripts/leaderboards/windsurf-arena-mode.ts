@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'windsurf-arena-mode', url: PAGE, feed: FEED,
   terms: 'Devin publishes this final Arena Mode comparison in its public leaderboard bundle. Separate score reuse terms are not stated.',
   headline: 'The leaderboard ranks models by ELO rating from Arena Mode usage.',
+  stats: { speed: { name: 'Model speed', unit: 'speedup', better: 'higher' } },
   async fetch() {
     const js = await fetchText(FEED);
     const rows: LeaderboardRow[] = [];

@@ -13,6 +13,13 @@ interface Stats {
 const board: Leaderboard = {
   benchmark: 'tetrisbench', url: 'https://tetrisbench.com/tetrisbench/', feed,
   terms: 'The public comparison page reads this endpoint without authentication.',
+  stats: {
+    wins: { name: 'Wins', unit: 'count' }, losses: { name: 'Losses', unit: 'count' },
+    'wins vs Claude Fable 5': { name: 'Wins vs Claude Fable 5', unit: 'count' }, 'losses vs Claude Fable 5': { name: 'Losses vs Claude Fable 5', unit: 'count' },
+    'wins vs Kimi K3': { name: 'Wins vs Kimi K3', unit: 'count' }, 'losses vs Kimi K3': { name: 'Losses vs Kimi K3', unit: 'count' },
+    'wins vs GPT-5.6 Sol': { name: 'Wins vs GPT-5.6 Sol', unit: 'count' }, 'losses vs GPT-5.6 Sol': { name: 'Losses vs GPT-5.6 Sol', unit: 'count' },
+    'wins vs Claude Opus 4.8': { name: 'Wins vs Claude Opus 4.8', unit: 'count' }, 'losses vs Claude Opus 4.8': { name: 'Losses vs Claude Opus 4.8', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<Stats>(feed);
     if (!data.ok || data.models.length < 4) throw new Error('Incomplete TetrisBench results');

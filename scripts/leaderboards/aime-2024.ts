@@ -9,6 +9,9 @@ const board: Leaderboard = {
   feed: "https://www.vals.ai/benchmarks/aime",
   terms: "The page identifies https://creativecommons.org/licenses/by/4.0/ as its dataset license. Vals allows the benchmark in robots.txt.",
   host: "Vals AI",
+  stats: {
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   aliases: { ...VALS_ALIASES, "GPT 4o (2024-08-06)": "gpt-4o-aug-2024", "GPT 4o (2024-11-20)": "gpt-4o-nov-2024", "Llama 3.3 Nemotron Super (Thinking)": "llama-3-3-nemotron-super-49b-v1", "Llama 3.3 Nemotron Super (Nonthinking)": "llama-3-3-nemotron-super-49b-v1" },
   async fetch() {
     const html = await fetchText(this.url);

@@ -13,6 +13,7 @@ const board: Leaderboard = {
   parts: {binary:'Binary balanced accuracy', mcc:{name:'Binary MCC',unit:'score'}, raw:'Binary merged accuracy',
     mcq:'MCQ accuracy', frq:{name:'FRQ score',unit:'score',note:'Judge score from 0 to 10.'},
     dateScore:{name:'Date score',unit:'score',note:'Date prediction score from 0 to 1.'}},
+  stats:{binaryItems:{name:'Binary items',unit:'count'},mcqItems:{name:'Multiple-choice questions',unit:'count'},frqItems:{name:'Free-response questions',unit:'count'},dateItems:{name:'Date items',unit:'count'}},
   async fetch() {
     const rows = parseCsv(await fetchText(feed)).map(row => {
       const value = (key: string) => {

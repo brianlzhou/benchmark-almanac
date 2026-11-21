@@ -9,6 +9,10 @@ const board: Leaderboard = {
   benchmark: 'psychethicsbench', static: 'paper',
   url: 'https://aclanthology.org/2026.findings-acl.1971/', feed: FEED,
   terms: 'The ACL Anthology paper is publicly available. Source attribution and the ACL Anthology terms apply.',
+  parts: {
+    aussieSmcqEm: 'Aussie SMCQ exact match', aussieMmcqEm: 'Aussie MMCQ exact match', aussieTotalEm: 'Aussie total exact match', aussieTotalPc: 'Aussie total partial credit',
+    globalSmcqEm: 'Global SMCQ exact match', globalMmcqEm: 'Global MMCQ exact match', globalTotalPc: 'Global total partial credit',
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(FEED);
     const start = text.indexOf('M ODEL ↓');

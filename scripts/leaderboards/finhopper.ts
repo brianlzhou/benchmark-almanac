@@ -8,6 +8,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 const feed = 'https://arxiv.org/html/2610.26036';
 const hops = ['1hop', '2hop', '3hop', '4hop', '5hop', '6hop'];
 const board: Leaderboard = {
+  stats: { secondsPerQuery: { name: 'Seconds per query', unit: 'seconds', better: 'lower' } },
   benchmark: 'finhopper', static: 'paper', url: feed, feed,
   terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   aliases: { 'Claude-4.5-Sonnet': 'claude-sonnet-4-5', 'Doubao-seed-1-8-251215': 'seed-1-8' },

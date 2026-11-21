@@ -23,6 +23,9 @@ const board: Leaderboard = {
     'GLM-5.2 max': 'glm-5-2',
     'Kimi K3 max': 'kimi-k3',
   },
+  stats: {
+    wallTime: { name: 'Wall time', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const data = await fetchJson<Data>(FEED);
     if (!Array.isArray(data.configs) || data.configs.length < 11) throw new Error('SWE-Serve: missing configuration rows');

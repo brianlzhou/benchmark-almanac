@@ -24,6 +24,7 @@ const board: Leaderboard = {
     'Ministral-8B-it': 'ministral-8b',
     'Qwen3-235B': 'qwen3-235b-a22b',
   },
+  stats: { mcq: { name: 'Multiple choice accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const ts=tables(await fetchText(PAGE));const rows:LeaderboardRow[]=[];
     for(const kind of ['Judge Scores on Open Questions','Accuracy on Multiple-Choice Questions']){

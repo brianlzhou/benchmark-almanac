@@ -13,6 +13,10 @@ const board: Leaderboard = {
   benchmark: 'med-halt', static: 'paper', feed, url: 'https://aclanthology.org/2023.conll-1.21/',
   aliases: { 'Text-Davinci': 'davinci-003' },
   terms: 'The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/',
+  stats: {
+    ReasoningFCTPointwise: { name: 'Reasoning false confidence pointwise score', unit: 'score', better: 'higher' }, ReasoningFakePointwise: { name: 'Reasoning Fake pointwise score', unit: 'score', better: 'higher' }, ReasoningNotaPointwise: { name: 'Reasoning Nota pointwise score', unit: 'score', better: 'higher' }, ReasoningAverage: { name: 'Reasoning average accuracy', unit: '%', better: 'higher' }, ReasoningAveragePointwise: { name: 'Reasoning average pointwise score', unit: 'score', better: 'higher' },
+    IRPmid2TitlePointwise: { name: 'Pmid to title pointwise score', unit: 'score', better: 'higher' }, IRTitle2PubmedlinkPointwise: { name: 'Title to PubMed link pointwise score', unit: 'score', better: 'higher' }, IRAbstract2PubmedlinkPointwise: { name: 'Abstract to PubMed link pointwise score', unit: 'score', better: 'higher' }, IRPubmedlink2TitlePointwise: { name: 'PubMed link to title pointwise score', unit: 'score', better: 'higher' }, MemoryAverage: { name: 'Memory average accuracy', unit: '%', better: 'higher' }, MemoryAveragePointwise: { name: 'Memory average pointwise score', unit: 'score', better: 'higher' },
+  },
   headline: 'The headline is the unweighted mean of accuracy across the three reasoning tests and four memory tests.',
   parts: Object.fromEntries(groups.flatMap(g => g.tasks.map(name => [name.replaceAll(' ', ''), { name, group: g.label }]))),
   async fetch() {

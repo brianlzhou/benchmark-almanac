@@ -11,7 +11,16 @@ type Result = { model: { name: string, openWeights: boolean | null, license: str
 const board: Leaderboard = {
   benchmark: 'bright-pro', url, feed,
   terms: "MTEB publishes its results under CC0 1.0. The leaderboard and API allow crawling in robots.txt.",
-  parts: {},
+  stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, zeroShotPct: { name: 'Zero-shot percentage', unit: '%', better: 'higher' } },
+  parts: {
+    BrightProEconomicsRetrieval: { name: 'Economics retrieval', group: 'Task' },
+    BrightProSustainableLivingRetrieval: { name: 'Sustainable living retrieval', group: 'Task' },
+    BrightProRoboticsRetrieval: { name: 'Robotics retrieval', group: 'Task' },
+    BrightProEarthScienceRetrieval: { name: 'Earth science retrieval', group: 'Task' },
+    BrightProStackoverflowRetrieval: { name: 'Stack Overflow retrieval', group: 'Task' },
+    BrightProBiologyRetrieval: { name: 'Biology retrieval', group: 'Task' },
+    BrightProPsychologyRetrieval: { name: 'Psychology retrieval', group: 'Task' },
+  },
   async fetch() {
     const d = await fetchJson<{ benchmarkName: string, tasks: string[], rows: Result[] }>(feed);
     if (d.benchmarkName !== 'BRIGHT-Pro' || d.tasks.length < 7 || d.rows.length < 20) throw new Error('Incomplete BRIGHT-Pro ranking');

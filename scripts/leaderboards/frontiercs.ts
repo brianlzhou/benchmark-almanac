@@ -38,6 +38,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML: "Version 1.0 single attempt" Score@1 and "Version 1.0 agents" Score)`,
   terms: 'Static project page; robots.txt allows every path and the FrontierCS site and repository are MIT-licensed.',
+  stats: { avg5: { name: 'Average score over five attempts', unit: 'score', better: 'higher' }, score5: { name: 'Score over five attempts', unit: 'score', better: 'higher' }, elo: { name: 'Elo', unit: 'elo', better: 'higher' }, steps: { name: 'Average steps', unit: 'count' }, toolCalls: { name: 'Average tool calls', unit: 'count' }, totalTokens: { name: 'Average total tokens', unit: 'tokens' } },
   aliases: {
     'DeepSeek 3.2': 'deepseek-v3-2',
     'Kimi K2.6': 'kimi-k2-6',

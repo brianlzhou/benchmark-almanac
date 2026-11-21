@@ -7,6 +7,7 @@ const board: Leaderboard = {
   benchmark: 'sb10k', static: 'paper', url: 'https://aclanthology.org/W17-1106/', feed: FEED,
   terms: 'ACL Anthology papers are available under their stated publication terms. https://aclanthology.org/W17-1106/',
   parts: { testCorpus: { name: 'Test corpus', group: 'Evaluation setting' } },
+  stats: { F1pos: { name: 'Positive-class F1', unit: '%', better: 'higher' }, F1neg: { name: 'Negative-class F1', unit: '%', better: 'higher' }, F1neutral: { name: 'Neutral-class F1', unit: '%', better: 'higher' } },
   async fetch() {
     const paper = await pdfText(FEED);
     const section = paper.split(/Classifier\s+Training Corpus\s+Test Corpus\s+F1pos\s+F1neg\s+F1neutral\s+F1/)[1]?.split(/Table 2:/)[0];

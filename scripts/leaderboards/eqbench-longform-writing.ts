@@ -10,7 +10,13 @@ const chapters = Array.from({ length: 8 }, (_, i) => 'chapter' + (i + 1));
 
 const board: Leaderboard = {
   benchmark: 'eqbench-longform-writing',
-  parts: Object.fromEntries(chapters.map((key, i) => [key, { name: 'Chapter ' + (i + 1), group: 'Chapter', unit: 'points' }])),
+  parts: Object.fromEntries(chapters.map((key, i) => [key, { name: 'Chapter ' + (i + 1), group: 'Chapter', unit: 'score' }])),
+  stats: {
+    length: { name: 'Average chapter length', unit: 'count' },
+    vocab: { name: 'Vocabulary complexity', unit: 'score', better: 'higher' },
+    slop: { name: 'Slop score', unit: 'score', better: 'lower' },
+    repetition: { name: 'Repetition score', unit: 'score', better: 'lower' },
+  },
   url: 'https://eqbench.com/creative_writing_longform.html',
   feed: `${eqbenchFeed('creative_writing_longform.js', 'leaderboardDataLongformV3')} overall_score_100`,
   terms: EQBENCH_TERMS,

@@ -13,6 +13,11 @@ const board: Leaderboard = {
   aliases: { 'FLUX.1 Kontext': 'flux-1-kontext-dev' },
   terms: 'The ABACUS authors use CC BY 4.0, https://github.com/CEA-LIST/ABACUS/blob/HEAD/LICENSE.',
   parts: Object.fromEntries(operations.flatMap(op => tiers.map(tier => [op + tier, op + ': ' + tier]))),
+  stats: {
+    countFidelity: { name: 'Count fidelity', unit: 'score', better: 'higher' },
+    sceneConsistency: { name: 'Scene consistency', unit: 'score', better: 'higher' },
+    conservation: { name: 'Conservation', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const tables = markdownTables(await fetchText(feed));
     const main = tables.find(t => t[0].join('|') === 'Model|Type|Count fidelity|Scene consistency|Conservation|Score');

@@ -10,6 +10,11 @@ const board: Leaderboard = {
   feed,
   terms: "The site has no robots file. The site identifies an MIT license. The authors release the human ratings under CC BY 4.0. https://huggingface.co/datasets/elinorpd/overtonbench",
   parts: { modelslant: 'ModelSlant', prism: 'PRISM' },
+  stats: {
+    weighted: { name: 'Weighted OvertonScore', unit: 'score', better: 'higher' },
+    modelslantWeighted: { name: 'Weighted ModelSlant score', unit: 'score', better: 'higher' },
+    prismWeighted: { name: 'Weighted PRISM evaluation score', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const page = await fetchText(feed);
     const labels = new Map([...page.matchAll(/"([^"]+)"\s*:\s*\{\s*display:\s*"([^"]+)"/g)].map(m => [m[1], m[2]]));

@@ -12,6 +12,12 @@ const board: Leaderboard = {
     shortMultipleBinary: { name: 'Short', group: 'Split' },
     longMultipleBinary: { name: 'Long', group: 'Split' },
   },
+  stats: {
+    overallBinary: { name: 'Overall binary accuracy', unit: '%', better: 'higher' },
+    shortBinary: { name: 'Short binary accuracy', unit: '%', better: 'higher' },
+    longBinary: { name: 'Long binary accuracy', unit: '%', better: 'higher' },
+    captionSimilarity: { name: 'Caption similarity', unit: '%', better: 'higher' },
+  },
   url: "https://temporalbench.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at temporalbench.github.io; retain source attribution and follow the upstream terms.",

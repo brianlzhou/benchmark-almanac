@@ -6,6 +6,7 @@ interface Run { model?: string; extractor?: string; generator?: string; method: 
 const feed = "https://raw.githubusercontent.com/HaningZS/moose-ifs/0592e1134fce7e3577c85e99e62c674acccc4cfd/results/derived/main_tables.json";
 const board: Leaderboard = {
   benchmark: 'moosebench',
+  stats: { exec_rate: { name: 'Execution rate', unit: 'score', better: 'higher', note: 'Execution rate is stored from 0 to 1.' }, good_exec: { name: 'Good execution rate', unit: 'score', better: 'higher', note: 'Good execution rate is stored from 0 to 1.' }, false_exec: { name: 'False execution rate', unit: 'score', better: 'lower', note: 'False execution rate is stored from 0 to 1.' }, parse_rate: { name: 'Parse rate', unit: 'score', better: 'higher', note: 'Parse rate is stored from 0 to 1.' }, error_count: { name: 'Errors', unit: 'count', better: 'lower' } },
   url: "https://github.com/HaningZS/moose-ifs/blob/main/results/derived/main_tables.json",
   feed,
   terms: "GitHub requests a one-second crawl delay and the raw host has no robots file. The repository uses the MIT License. The authors request citation of the source paper for dataset use. https://github.com/HaningZS/moose-ifs/blob/main/LICENSE",

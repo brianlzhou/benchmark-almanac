@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://github.com/lechmazur/bazaar",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/bazaar. I could not verify reuse terms. The raw GitHub host returns 404 for robots.txt.",
+  stats: { avgCSA: { name: 'Average conditional surplus alpha', unit: 'score', better: 'higher' } },
   aliases: { "Microsoft Phi-4": "phi-4", "Baidu Ernie 4.5 300B A47B": "ernie-4-5-300b-a47b" },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0].join('|') === 'Model|μ|σ|games|avg_csa');

@@ -11,6 +11,7 @@ const board:Leaderboard={benchmark:'long-code-arena', parts: {
 },url:'https://huggingface.co/spaces/JetBrains-Research/long-code-arena',feed:FEED,
  terms:'Public maker aggregate results; Hugging Face robots.txt permits the raw file. The project requires open-access publications for research using its GitHub-derived datasets.',
  aliases:{'GPT-o1':'o1'},
+ stats: {'CI builds repair':{name:'Continuous-integration builds repair',unit:'score',better:'higher',note:'Score for repairing continuous-integration builds.'}},
  async fetch(){
   const data=(await fetchText(FEED)).trim().split(/\r?\n/).map(line=>JSON.parse(line) as Record<string,unknown>);
   const rows=data.map(r=>({model:String(r.Model),score:Number(r['Mean Score']),metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>k!=='Mean Score'&&typeof v==='number')) as Record<string,number>}));

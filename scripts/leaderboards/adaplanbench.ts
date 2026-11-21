@@ -8,6 +8,14 @@ const board: Leaderboard = {
   url: "https://github.com/JiayuJeff/AdaPlanBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: {
+    validPlanRate: { name: 'Valid plan rate', unit: '%', better: 'higher' },
+    turns: { name: 'Average turns', unit: 'count' },
+    awrv: { name: 'Average world repeated violations', unit: 'count', better: 'lower' },
+    aurv: { name: 'Average user repeated violations', unit: 'count', better: 'lower' },
+    atwc: { name: 'Average triggered world constraints', unit: 'score' },
+    atuc: { name: 'Average triggered user constraints', unit: 'score' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     return paperRows(FEED, {"table": 8, "header": "Outcome", "score": 1, "width": 8, "min": 10, "metrics": {"validPlanRate": 2, "turns": 3, "awrv": 4, "aurv": 5, "atwc": 6, "atuc": 7}});
   },

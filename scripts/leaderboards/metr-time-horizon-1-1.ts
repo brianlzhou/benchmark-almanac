@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: METR_TERMS,
   aliases: METR_ALIASES,
+  stats: { p80: { name: '80% time horizon', unit: 'minutes', better: 'higher' } },
   fetch: () => metrRows(FEED),
 };
 export default board;

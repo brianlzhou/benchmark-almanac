@@ -15,6 +15,7 @@ const names: Record<string,string> = { 'claude-opus-5-5':'Opus 5.5', 'claude-son
 const agents: Record<string,string> = { 'claude-code':'Claude Code', codex:'Codex', opencode:'OpenCode', grok:'Grok Build' };
 const board: Leaderboard = {
   benchmark: 'supabase-evals', url, feed: url, parts,
+  stats: { seconds: { name: 'Average run time', unit: 'seconds', better: 'lower' } },
   terms: 'The Supabase Evals project publishes the data underlying its public benchmark page.',
   async fetch() {
     const html = await fetchText(url);

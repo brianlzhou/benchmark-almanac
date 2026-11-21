@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://datawrapper.dwcdn.net/4h8Jh/2/",
   feed: FEED,
   terms: "The Brennan Center lists no separate score license. Datawrapper robots.txt permits this chart.",
+  stats: { accepted: { name: 'Accepted prompts', unit: 'count' } },
   async fetch() {
     const records = parseCsv(await fetchText(FEED));
     const value = '# | % of prompts accepted/generated';

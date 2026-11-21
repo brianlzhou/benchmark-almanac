@@ -15,6 +15,7 @@ const board: Leaderboard = {
   harnesses: 'system',
   reference: ['GLEE LLM benchmark'],
   parts: {bargaining: 'Bargaining', negotiation: 'Negotiation', persuasion: 'Persuasion'},
+  stats: { gamesPlayed: { name: 'Games played', unit: 'count' }, rank: { name: 'Rank', unit: 'count', better: 'lower' } },
   async fetch() {
     const results = (await fetchJson<Player[]>(FEED)).filter(p => ['agent','llm'].includes(p.player_type));
     if (results.length < 503) throw new Error('Incomplete GLEE final snapshot');

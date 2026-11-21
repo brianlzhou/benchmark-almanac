@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://blog.lai.so/ts-bench/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { totalSeconds: { name: 'Total runtime', unit: 'seconds', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Solved'));
     if(!t)throw new Error('ts-bench historical table missing');

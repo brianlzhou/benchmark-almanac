@@ -12,6 +12,11 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public results published by the benchmark authors at simuverity.github.io; retain source attribution and follow the upstream terms.",
   aliases: {},
+  stats: {
+    delivered: { name: 'Delivered rate', unit: '%', better: 'higher' },
+    executable: { name: 'Executable rate', unit: '%', better: 'higher' },
+    graderPass: { name: 'Grader pass rate', unit: '%', better: 'higher' },
+  },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='G pass'));if(!t)throw new Error('SimuVerity table missing');

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
+  stats: { latency: { name: 'Latency per hand', unit: 'seconds', better: 'lower' } },
   fetch: () => valsRows(SLUG, { score: 'TrueSkill Rating', cost: 'Cost / Hand' }),
 };
 export default board;

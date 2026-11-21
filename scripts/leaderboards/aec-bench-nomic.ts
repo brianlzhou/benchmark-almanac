@@ -30,6 +30,7 @@ const board: Leaderboard = {
   terms: constructionTerms,
   host: 'ONESTRUCTION',
   reference: ['pi'],
+  stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' } },
   fetch() { return constructionRows(this.url); },
 };
 export default board;

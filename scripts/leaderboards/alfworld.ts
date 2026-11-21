@@ -13,6 +13,10 @@ function percent(value: string) {
 const board: Leaderboard = {
   benchmark: 'alfworld', host: 'AgentBoard', feed, url: 'https://hkust-nlp.github.io/agentboard/static/leaderboard.html',
   terms: 'AgentBoard publishes its evaluations at https://github.com/hkust-nlp/AgentBoard.',
+  stats: {
+    progress: { name: 'Progress rate', unit: '%', better: 'higher' },
+    grounding: { name: 'Grounding rate', unit: '%', better: 'higher' },
+  },
   aliases: { Claude2: 'claude-2', 'Text-Davinci-003': 'davinci-003', 'CodeLlama-34b': 'codellama-34b-instruct', 'Mistral-7b': 'mistral-7b-instruct-v0-2',
     'DeepSeek-67b': 'deepseek-llm-67b' },
   async fetch() {

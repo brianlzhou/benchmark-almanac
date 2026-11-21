@@ -8,6 +8,10 @@ const FEED = "https://turnbench.sesame.com/";
 const board: Leaderboard = {
  benchmark: "turnbench", url: "https://turnbench.sesame.com/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+   falsePositiveRate: { name: 'False positive rate', unit: '%', better: 'lower' },
+   latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+ },
 
  async fetch() {
 const html=await fetchText(FEED);const rows:LeaderboardRow[]=[];

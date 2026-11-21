@@ -12,6 +12,12 @@ const board: Leaderboard = {
   url: "https://github.com/Roblox/open-game-eval/blob/main/LLM_LEADERBOARD.md#debug-eval-leaderboard",
   feed,
   terms: "Use the second table for the debugging tasks. Roblox releases the repository under MIT. https://github.com/Roblox/open-game-eval/blob/main/LICENSE.txt The raw host serves no robots.txt rules.",
+  stats: {
+    passAt5: { name: 'Pass@5', unit: '%', better: 'higher' },
+    cons5: { name: 'Consistent pass@5', unit: '%', better: 'higher' },
+    pass5: { name: 'All pass@5', unit: '%', better: 'higher' },
+    toolErrors: { name: 'Average tool error rate', unit: '%', better: 'lower' },
+  },
   async fetch(){
     const section=(await fetchText(feed)).split('## Debug Eval Leaderboard')[1];
     const table=section && tables(section)[0];

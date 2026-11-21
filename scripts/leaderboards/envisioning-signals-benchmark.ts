@@ -12,6 +12,14 @@ const board: Leaderboard = {
   feed,
   terms: "Envisioning licenses its repository under MIT. The leaderboard does not specify separate terms for its hosted score file. robots.txt allows the feed path.",
   parts: {"healthcare-regulated-ai": "AI in regulated healthcare", "fintech-stablecoin-rails": "Stablecoin payment rails", "energy-grid-electrification": "Grid + electrification", "geopolitics-tech-blocs": "Tech-bloc formation", "ai-infrastructure-scaling": "AI infrastructure scaling", "retail-genai-commerce": "GenAI-native commerce"},
+  stats: {
+    verifiability: { name: 'Verifiability', unit: '%', better: 'higher' },
+    specificity: { name: 'Specificity', unit: '%', better: 'higher' },
+    currency: { name: 'Currency', unit: '%', better: 'higher' },
+    coverage: { name: 'Coverage', unit: '%', better: 'higher' },
+    n_signals_total: { name: 'Total signals', unit: 'count' },
+    n_briefs: { name: 'Briefs', unit: 'count' },
+  },
   async fetch() {
     const { scores } = await fetchJson<{ scores: Entry[] }>(feed);
     if (scores.length < 47) throw new Error('Incomplete Envisioning leaderboard');

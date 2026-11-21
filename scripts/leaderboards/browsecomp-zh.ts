@@ -12,6 +12,7 @@ const board: Leaderboard = {
  feed: FEED,
  harnesses: 'system',
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { calibrationError: { name: 'Calibration error', unit: '%', better: 'lower' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

@@ -13,6 +13,7 @@ const board: Leaderboard = {
   aliases: { Baseline_Qwen2_Audio: 'qwen2-audio-7b-instruct', Baseline_Kimi_Audio: 'kimi-audio-7b-instruct',
     Baseline_Gemini_2_0: 'gemini-2-0-flash-feb-2025' },
   parts: { part1: 'Part 1 Accuracy', part2: 'Part 2 Accuracy', part3: 'Part 3 Accuracy' },
+  stats: { devAverage: { name: 'Development average accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const page = await fetchText(feed);
     const reports = new Map<string, string>();

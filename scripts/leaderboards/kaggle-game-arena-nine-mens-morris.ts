@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'nine-mens-morris'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: {
+    tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' },
+    costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' },
+  },
   fetch: () => kaggleRowsWithBounds('kaggle', 'nine-mens-morris'),
 };
 export default board;

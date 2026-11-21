@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'head-qa', url: url + '#leaderboard-general', feed: url,
   terms: 'Public result tables credited to the HEAD-QA authors. The project’s reuse conditions refer to the exam documents.',
   parts: Object.fromEntries(disciplines.map(d => [d, d])),
+  stats: Object.fromEntries(['points', ...disciplines.map(d => `${d} Points`)].map(k => [k, { name: k === 'points' ? 'Total points' : `${k.replace(' Points', '')} points`, unit: 'score', better: 'higher' }])),
   async fetch() {
     const html = await fetchText(url);
     const tableAt = (id: string) => {

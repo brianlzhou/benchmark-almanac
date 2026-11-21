@@ -8,6 +8,22 @@ const FEED = "https://collinear-ai.github.io/yc-bench/";
 const board: Leaderboard = {
  benchmark: "yc-bench", url: "https://collinear-ai.github.io/yc-bench/", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+   bankruptRuns: {name: 'Bankrupt runs', unit: 'count', better: 'lower'},
+   runs: {name: 'Runs', unit: 'count'},
+   'funds:2025-01': {name: 'Funds in January 2025', unit: 'usd'},
+   'funds:2025-02': {name: 'Funds in February 2025', unit: 'usd'},
+   'funds:2025-03': {name: 'Funds in March 2025', unit: 'usd'},
+   'funds:2025-04': {name: 'Funds in April 2025', unit: 'usd'},
+   'funds:2025-05': {name: 'Funds in May 2025', unit: 'usd'},
+   'funds:2025-06': {name: 'Funds in June 2025', unit: 'usd'},
+   'funds:2025-07': {name: 'Funds in July 2025', unit: 'usd'},
+   'funds:2025-08': {name: 'Funds in August 2025', unit: 'usd'},
+   'funds:2025-09': {name: 'Funds in September 2025', unit: 'usd'},
+   'funds:2025-10': {name: 'Funds in October 2025', unit: 'usd'},
+   'funds:2025-11': {name: 'Funds in November 2025', unit: 'usd'},
+   'funds:2025-12': {name: 'Funds in December 2025', unit: 'usd'},
+ },
 
  async fetch() {
 

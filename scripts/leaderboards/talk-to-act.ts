@@ -7,6 +7,7 @@ import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://arxiv.org/html/2611.17549';
 const board: Leaderboard = {
   benchmark: 'talk-to-act', static: 'paper', url: feed, feed,
+  stats: { actionPrecision: { name: 'Action precision', unit: '%', better: 'higher' }, actionRecall: { name: 'Action recall', unit: '%', better: 'higher' }, actionF1: { name: 'Action F1', unit: '%', better: 'higher' }, actionAccuracy: { name: 'Action accuracy', unit: '%', better: 'higher' } },
   terms: 'The authors publish Table I under the license on the arXiv record. https://arxiv.org/abs/2611.17549',
   aliases: {'Gemma4:E2B': 'gemma-4-e2b-it', 'Gemma4:E4B': 'gemma-4-e4b-it'},
   async fetch() {

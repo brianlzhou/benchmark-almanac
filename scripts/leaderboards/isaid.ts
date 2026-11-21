@@ -6,6 +6,7 @@ import { paperTables,grid,checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed='https://arxiv.org/html/1905.12886';
 const board:Leaderboard={
   benchmark:'isaid',static:'paper',url:feed,feed,terms:PAPER_TERMS+' https://arxiv.org/licenses/',
+  stats:{AP:{name:'Average precision',unit:'%',better:'higher'}},
   async fetch(){
     const gs=paperTables(await paperHtml(feed)).map(grid);
     const overall=gs.find(t=>t[0]?.join('|')==='Method|AP|AP_{50}|AP_{75}|AP_{S}|AP_{M}|AP_{L}');

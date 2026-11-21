@@ -9,6 +9,14 @@ const board: Leaderboard = {
   terms: 'The authors publish the benchmark and these results at https://arxiv.org/abs/2212.13138.',
   headline: 'The paper reports no overall score, so the headline is accuracy on the four-option MedQA exam, the first dataset in its comparison.',
   parts: {medqa: {name: 'MedQA (4 options)', unit: '%'}, medmcqa: {name: 'MedMCQA', unit: '%'}, pubmedqa: {name: 'PubMedQA', unit: '%'}},
+  stats: {
+    Clinicalknowledge: {name: 'Clinical knowledge', unit: '%', better: 'higher'},
+    Medicalgenetics: {name: 'Medical genetics', unit: '%', better: 'higher'},
+    Anatomy: {name: 'Anatomy', unit: '%', better: 'higher'},
+    Professionalmedicine: {name: 'Professional medicine', unit: '%', better: 'higher'},
+    Collegebiology: {name: 'College biology', unit: '%', better: 'higher'},
+    Collegemedicine: {name: 'College medicine', unit: '%', better: 'higher'},
+  },
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const rows: LeaderboardRow[] = [];

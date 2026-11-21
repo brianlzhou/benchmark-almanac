@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://sites.google.com/view/asr-challenge/leaderboard",
   feed,
   terms: "Eight entries in the open track. The organizer gives no score reuse license. https://sites.google.com/view/asr-challenge/leaderboard The feed host publishes robots.txt at https://sites.google.com/robots.txt.",
+  stats: { submissions: { name: 'Submissions', unit: 'count' } },
   async fetch() {
     const page = await fetchText(feed);
     const rows: LeaderboardRow[] = [];

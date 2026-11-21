@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "The terms require written permission to redistribute VISOR data. They give no separate score license. https://codalab.lisn.upsaclay.fr/competitions/9969#learn_the_details-terms_and_conditions The robots URL returns HTML.",
   parts: { side: 'Hand+Side', contact: 'Hand+Contact', object: 'Object', handObject: 'Hand+Object' },
+  stats: { entries: { name: 'Entries', unit: 'count' } },
   async fetch() {
     const table = tables(await fetchText(FEED))[0];
     const cols = table?.[2];

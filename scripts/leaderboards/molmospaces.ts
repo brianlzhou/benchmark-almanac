@@ -11,6 +11,7 @@ import { num } from '../lib/html.ts';
 const FEED = "https://molmospaces.allen.ai/benchmark/data/index.json";
 const board: Leaderboard = {
   benchmark: "molmospaces",
+  stats: { taskTypesReported: { name: 'Task types reported', unit: 'count' } },
   parts: {
     ms_pick: { name: 'Pick', group: 'Task type' },
     ms_pick_place: { name: 'Pick and place', group: 'Task type' },

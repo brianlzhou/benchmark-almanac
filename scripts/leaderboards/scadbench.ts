@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://scadbench.com/#leaderboard",
   feed,
   terms: "The site gives no explicit score reuse license. https://scadbench.com/ The feed host publishes robots.txt at https://scadbench.com/robots.txt.",
+  stats: { matchups: { name: 'Matchups', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' } },
   async fetch() {
     type Entry = { name: string; elo: number; winRate: string; matchups: number; avgCost: number };
     const { leaderboard } = await fetchJson<{ leaderboard: Entry[] }>(feed);

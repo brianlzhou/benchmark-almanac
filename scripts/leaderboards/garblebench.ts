@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: FEED,
   terms: 'The GarbleBench page publishes data.json without a separate reuse license. Results are credited to Adam Holter and the GarbleBench project.',
+  stats:{breaks:{name:'Break point',unit:'count',better:'lower'},latency:{name:'Latency',unit:'seconds',better:'lower'},tokens:{name:'Output tokens',unit:'tokens',better:'lower'}},
   aliases: {
     'GPT-6.1 Sol': 'gpt-6-1-sol',
     'GPT-6.1 Terra': 'gpt-6-1-terra',

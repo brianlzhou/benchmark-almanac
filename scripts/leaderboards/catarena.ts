@@ -23,6 +23,14 @@ const board: Leaderboard = {
   terms: 'Public results credited to the CATArena organizers. https://catarena.ai/leaderboard',
   harnesses: 'system', reference: ['Minimal'],
   parts: Object.fromEntries(Object.entries(measures).map(([key, [name, note, unit]]) => [key, { name, note, unit, better: 'higher' }])),
+  stats: {
+    gomokuRank: { name: 'Gomoku rank', unit: 'count', better: 'lower' },
+    holdemRank: { name: 'Holdem rank', unit: 'count', better: 'lower' },
+    oibench_5Rank: { name: 'OIBench-5 rank', unit: 'count', better: 'lower' },
+    swe_perf_10Rank: { name: 'SWE-Perf-10 rank', unit: 'count', better: 'lower' },
+    pommermanRank: { name: 'Pommerman rank', unit: 'count', better: 'lower' },
+    tetrisRank: { name: 'Tetris rank', unit: 'count', better: 'lower' },
+  },
   async fetch() {
     const games = await fetchJson<Game[]>(feed);
     const rows = new Map<string, LeaderboardRow>();

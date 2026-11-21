@@ -4,7 +4,7 @@ import type {Leaderboard} from './types.ts';
 import {fetchText} from '../lib/util.ts';
 const FEED='https://eico.so/_next/static/chunks/0dz27nhmwuqc_.js';
 const board:Leaderboard={benchmark:'founder-bench-eico',url:'https://eico.so/founder-bench',feed:FEED,
- terms:'Public maker results; robots.txt permits the results and static assets. No additional reading restriction is stated.',
+ terms:'Public maker results; robots.txt permits the results and static assets. No additional reading restriction is stated.', stats:{adImpressions:{name:'Ad impressions',unit:'count'},siteVisitors:{name:'Site visitors',unit:'count'},adSpendUSD:{name:'Ad spend',unit:'usd',better:'lower'}},
  aliases:{'accounts/fireworks/models/glm-5p2':'glm-5-2'},
  async fetch(){const s=await fetchText(FEED);const models=new Map<string,{score:number;impressions:number;traffic:number;spendCents:number;n:number}>();
  for(const m of s.matchAll(/\{co:"[^"\n]+",model:"([^"\n]+)",impr:(\d+),clicks:\d+,spendCents:(\d+),tasks:\d+,sent:\d+,opened:\d+,leads:\d+,traffic:(\d+)\}/g)){

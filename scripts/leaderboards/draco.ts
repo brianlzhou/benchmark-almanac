@@ -6,6 +6,7 @@ import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2602.11685';
 export default {
   benchmark:'draco', static: 'paper',url:'https://arxiv.org/abs/2602.11685',feed,terms:PAPER_TERMS,
+  stats:{passRate:{name:'Pass rate',unit:'%',better:'higher'},inputTokens:{name:'Input tokens',unit:'tokens'},latency:{name:'Latency',unit:'seconds',better:'lower'}},
   harnesses:'system', reference:['Anthropic search and code tools'],
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed,
   terms: "The dataset uses CC BY 4.0. I found no separate license for the HTML score table. The update date comes from the page header. The site's robots.txt publishes content signals.",
   parts: { behavior: 'Behavior and Trait Extraction', conservation: 'Conservation and Threat Analysis', document: 'Document Interpretation', hallucination: 'Hallucination Resistance', technology: 'Marine Technology Understanding', spatial: 'Spatial Reasoning', species: 'Species Comprehension' },
+  stats: { mean: { name: 'Mean across tasks', unit: '%', better: 'higher' } },
   aliases: { 'InternVL-2.5': 'internvl2-5-4b', 'InternVL-2': 'internvl2-8b', 'InternVL-2.5 (26B)': 'internvl2-5-26b', 'InternVL-3': 'internvl3-38b', 'Claude-3.7-Sonnet-Vision': 'claude-3-7-sonnet' },
   async fetch() {
     const data = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Model|# Params.|B&TE|C&TA|DI|HR|MTU|SR|SC|Avg.|Total');

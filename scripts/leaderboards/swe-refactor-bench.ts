@@ -17,6 +17,12 @@ const board: Leaderboard = {
   aliases: {
     'dsv4-flash': 'deepseek-v4-flash',
   },
+  stats: {
+    accepted: { name: 'Accepted runs', unit: 'count' },
+    blind: { name: 'Blind runs', unit: 'count' },
+    broken: { name: 'Broken runs', unit: 'count' },
+    runs: { name: 'Runs', unit: 'count' },
+  },
   async fetch() {
     const source = await fetchText(URL);
     const boards = tables(source).filter((t) => {

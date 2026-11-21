@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://baromeeter.tartunlp.ai",
   feed,
   terms: "The default score table has 55 visible rows. The terms discuss licensing conversation data but give no explicit score reuse license. https://baromeeter.tartunlp.ai The feed host publishes robots.txt at https://baromeeter.tartunlp.ai/robots.txt.",
+  stats: { votes: { name: 'Votes', unit: 'count' } },
   async fetch() {
     type Component = { props: { elem_id?: string; value?: { headers: string[]; data: (string | number)[][] } } };
     const config = await fetchJson<{components: Component[]}>(feed);

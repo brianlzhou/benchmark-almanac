@@ -10,6 +10,15 @@ const board: Leaderboard = {
   url: "https://github.com/lechmazur/sycophancy",
   feed: FEED,
   terms: "The publisher displays results at https://github.com/lechmazur/sycophancy. I could not verify reuse terms. GitHub requests a one-second crawl delay.",
+  stats: {
+    conditional: { name: 'Conditional sycophancy', unit: '%', better: 'lower', note: 'Sycophancy among cases where the model answers both affective views.' },
+    decisiveCoverage: { name: 'Decisive coverage', unit: '%', better: 'higher', note: 'Share of cases where the model takes a side on both opposite views.' },
+    stripped: { name: 'Stripped sycophancy', unit: '%', better: 'lower' },
+    insufficient: { name: 'Insufficient responses', unit: '%', better: 'lower' },
+    contrarian: { name: 'Contrarian rate', unit: '%', better: 'lower', note: 'Responses that reject both opposing narrators.' },
+    covered: { name: 'Covered cases', unit: 'count' },
+    expected: { name: 'Expected cases', unit: 'count' },
+  },
   async fetch() {
     const tables = markdownTables(await fetchText(FEED));
     const main = tables.find(t => t[0].join('|') === 'Rank|Model|Coverage|Sycophancy|Conditional|Decisive Coverage|Stripped|Insufficient');

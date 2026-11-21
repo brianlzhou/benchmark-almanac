@@ -22,6 +22,7 @@ const board: Leaderboard = {
   url: "https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/",
   feed: FEED,
   terms: "The repository uses Apache License 2.0. Individual scientific tasks retain their original licenses. https://github.com/SKYLENAGE-AI/Sci-Agent-Exam",
+  stats: { programmatic: { name: 'Programmatic score', unit: '%', better: 'higher' }, llmJudge: { name: 'LLM judge score', unit: '%', better: 'higher' }, pass95: { name: 'Pass rate at 95 percent threshold', unit: '%', better: 'higher' }, turns: { name: 'Turns per task', unit: 'count' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, medianCost: { name: 'Median cost per task', unit: 'usd', better: 'lower' }, costPerPoint: { name: 'Cost per score point', unit: 'usd', better: 'lower' } },
   async fetch() {
     const data = jsonAfter<Data>(await fetchText(FEED), 'const DATA =');
     const categories = [...data.fields, ...data.task_types].filter(c => c.key !== 'overall');

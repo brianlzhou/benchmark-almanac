@@ -8,6 +8,7 @@ const board: Leaderboard = {
   benchmark: 'wisesight-sentiment',
   url: 'https://github.com/PyThaiNLP/classification-benchmarks#wisesight-sentiment',
   feed: FEED,
+  stats: { privateAccuracy: { name: 'Private accuracy', unit: '%', better: 'higher' } },
   terms: 'The README is published under Apache License 2.0 by PyThaiNLP. Wisesight Sentiment is public-domain data. Source attribution applies.',
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(FEED);

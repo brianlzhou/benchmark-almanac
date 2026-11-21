@@ -18,6 +18,10 @@ const board: Leaderboard = {
   url: 'https://artifactarena.ai/',
   feed: `${FEED} (entries, elo)`,
   terms: 'Static snapshot on artifactarena.ai; robots.txt disallows only /api/ and /film, and the project is MIT-licensed with a request to credit and cite it.',
+  stats: {
+    wins: { name: 'Wins', unit: 'count' }, losses: { name: 'Losses', unit: 'count' }, draws: { name: 'Draws', unit: 'count' },
+    games: { name: 'Games', unit: 'count' }, winRate: { name: 'Win rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<Snapshot>(FEED);
     return data.entries.map((e): LeaderboardRow => ({ model: e.modelSlug, score: e.elo, harness: e.conditionLabel,

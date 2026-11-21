@@ -27,6 +27,11 @@ const board: Leaderboard = {
   url: "https://www.legalbenchmarks.ai/leaderboard/models",
   feed: FEED,
   terms: "The publisher displays results at https://www.legalbenchmarks.ai/leaderboard/models. I could not verify reuse terms. The site allows all paths in robots.txt.",
+  stats: {
+    criteriaPassRate: { name: 'Criteria pass rate', unit: '%', better: 'higher' },
+    form: { name: 'Form score', unit: '%', better: 'higher' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     return legalModels(FEED, 'draftingData', 27);
   },

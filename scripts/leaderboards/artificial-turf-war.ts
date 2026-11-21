@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://www.artificialturfwar.com/",
   feed: FEED,
   terms: "The terms identify third-party data and trademarks. They give no explicit license for reusing standings. https://www.artificialturfwar.com/terms The site permits the home page and disallows /api/ in robots.txt.",
+  stats: {
+    standing: { name: 'Standing', unit: 'count', better: 'lower' }, losses: { name: 'Losses', unit: 'count' },
+    pointsFor: { name: 'Points for', unit: 'score', better: 'higher' }, allPlayWins: { name: 'All-play wins', unit: 'count' },
+    allPlayLosses: { name: 'All-play losses', unit: 'count' },
+  },
   async fetch() {
     const table = tables(await fetchText(FEED)).find((rows) =>
       rows[0]?.slice(0, 5).map((c) => c.text).join('|') === '#|Team|Record|All-play|Points for');

@@ -7,7 +7,7 @@ const FEED = 'https://arxiv.org/html/2107.07903';
 const board: Leaderboard = { benchmark: 'te-ca', static: 'paper', url: FEED, feed: FEED,
   terms: 'arXiv permits these HTML paths under robots.txt. Results are attributed to the paper authors.',
   headline: 'The paper reports no overall score, so this is the NERC F1 column, which appears first in its main results table.',
-  parts: { nerc: { name: 'NERC', group: 'Task' }, pos: { name: 'POS', group: 'Task' }, sts: { name: 'STS', group: 'Task' }, tc: { name: 'TC', group: 'Task' } },
+  parts: { nerc: { name: 'NERC', group: 'Task' }, pos: { name: 'POS', group: 'Task' }, sts: { name: 'STS', group: 'Task' }, tc: { name: 'TC', group: 'Task' }, viquiEm: { name: 'ViquiQuAD exact match', group: 'Question answering' }, viquiF1: { name: 'ViquiQuAD F1', group: 'Question answering' }, xquadEm: { name: 'XQuAD-ca exact match', group: 'Question answering' }, xquadF1: { name: 'XQuAD-ca F1', group: 'Question answering' } },
   async fetch() {
     const ts = tables(await paperHtml(FEED));
     const t = ts.find(t => t[0]?.[0]?.text === 'model' && t[0]?.some(c => c.text === 'NERC'));

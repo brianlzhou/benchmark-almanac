@@ -23,6 +23,12 @@ const board: Leaderboard = {
   feed: XBENCH_API + PATH,
   terms: XBENCH_TERMS,
   aliases: XBENCH_ALIASES,
+  stats: {
+    average: { name: 'Average rubric score', unit: '%', better: 'higher' },
+    priceIn: { name: 'Input price per million tokens', unit: 'usd-per-mtok', better: 'lower' },
+    priceOut: { name: 'Output price per million tokens', unit: 'usd-per-mtok', better: 'lower' },
+    value: { name: 'Economic value of passed tasks', unit: 'usd', better: 'higher' },
+  },
   async fetch() {
     const { data } = await xbenchApi<{ data: Entry[] }>(PATH);
     const rows: LeaderboardRow[] = [];

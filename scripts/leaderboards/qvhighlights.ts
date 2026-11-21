@@ -6,6 +6,7 @@ import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2107.09609';
 export default {
  benchmark:'qvhighlights', static: 'paper',url:'https://arxiv.org/abs/2107.09609',feed,terms:PAPER_TERMS,
+ stats: { r1IoU07: { name: 'Recall at one IoU 0.7', unit: '%', better: 'higher' }, mapIoU05: { name: 'Mean average precision at IoU 0.5', unit: '%', better: 'higher' }, mapIoU075: { name: 'Mean average precision at IoU 0.75', unit: '%', better: 'higher' }, mapAverage: { name: 'Mean average precision', unit: '%', better: 'higher' }, highlightMap: { name: 'Highlight mean average precision', unit: '%', better: 'higher' }, highlightHit1: { name: 'Highlight hit at one', unit: '%', better: 'higher' } },
  async fetch():Promise<LeaderboardRow[]> {
   const ts=flatPaperTables(await paperHtml(feed)).map(grid);
   const t=ts.find(t=>t[0]?.[1]==='Moment Retrieval' && t[2]?.[1]==='@0.5');

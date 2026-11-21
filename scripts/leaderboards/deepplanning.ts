@@ -11,6 +11,12 @@ const board: Leaderboard = {
    travelAcc: { name: 'Travel planning', group: 'Task type' },
    shoppingAcc: { name: 'Shopping planning', group: 'Task type' },
  },
+ stats: {
+   travelCS: { name: 'Travel constraint satisfaction', unit: '%', better: 'higher' },
+   travelPS: { name: 'Travel planning score', unit: '%', better: 'higher' },
+   travelComp: { name: 'Travel completion', unit: '%', better: 'higher' },
+   shoppingMatch: { name: 'Shopping match score', unit: '%', better: 'higher' },
+ },
  url: "https://qwenlm.github.io/Qwen-Agent/en/benchmarks/deepplanning/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",

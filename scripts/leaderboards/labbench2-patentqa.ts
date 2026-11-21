@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://advances.edisonscientific.com/benchmarks/labbench2/patentqa/",
   feed,
   terms: "The public benchmark page gives no separate score license. Its robots.txt URL serves HTML.",
+  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t=>t[0]?.map(c=>c.text.replace(/[↕↓↑]/g,'').trim()).join('|') === '#|Model|Variant|Mode|Average score|Average output tokens|Avg. dur|Date');
     if (!t || t.length < 11) throw new Error('Missing PatentQA configurations or columns');

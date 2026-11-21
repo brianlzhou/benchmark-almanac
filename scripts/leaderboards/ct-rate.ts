@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'ct-rate', static: 'paper', feed, url: 'https://www.nature.com/articles/s41551-025-01599-y/figures/4',
   terms: 'The figure is subject to the rights statement at https://www.nature.com/articles/s41551-025-01599-y#rightslink.',
   headline: 'The headline is mean AUROC on the internal CT-RATE validation set, expressed as a percentage.',
+  stats:{f1:{name:'F1',unit:'%',better:'higher'},accuracy:{name:'Accuracy',unit:'%',better:'higher'},precision:{name:'Precision',unit:'%',better:'higher'}},
   async fetch() {
     return checked(await chartRows(feed, '3c98a728d7b5c3182156a01a2e961788bc96f93306a6795ef72364d511fa4163', [
       { model: 'CT-Net', score: 62.9, metrics: { f1: 65.7, accuracy: 61.7, precision: 26.3 } },

@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2408.04682',
   feed: FEED,
   terms: PAPER_TERMS,
+  stats: { averageTurns: { name: 'Average turns', unit: 'count', better: 'lower' } },
   aliases: {"C4AI-Command R+": "command-r-plus", "Mistral-7B-Instruct-v0.3": "mistral-7b-v0-3"},
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));

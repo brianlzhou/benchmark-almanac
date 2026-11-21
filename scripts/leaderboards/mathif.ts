@@ -14,6 +14,7 @@ const board: Leaderboard = {
   url: `https://github.com/${REPO}#leaderboard`,
   feed: `${FEED} (Leaderboard tables, HAcc)`,
   terms: 'README tables in the TingchenFu/MathIF GitHub repository, which states no license; scores are cited to the MathIF authors.',
+  stats: { SAcc: { name: 'Soft accuracy', unit: '%', better: 'higher' }, Correctness: { name: 'Correctness with constraints', unit: '%', better: 'higher' } },
   aliases: {},
   async fetch() {
     const rows: LeaderboardRow[] = [];

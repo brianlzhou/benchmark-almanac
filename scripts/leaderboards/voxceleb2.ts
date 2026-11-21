@@ -10,6 +10,13 @@ const board: Leaderboard = {
   benchmark: 'voxceleb2', host: 'AHELM', url: 'https://crfm.stanford.edu/helm/audio/latest/#/groups/voxceleb2',
   feed: helmFeed(table), aliases: corebench.aliases,
   terms: 'Stanford publishes HELM under Apache 2.0. https://github.com/stanford-crfm/helm/blob/main/LICENSE',
+  stats: {
+    '# eval': { name: 'Evaluation examples', unit: 'count' },
+    '# prompt tokens': { name: 'Prompt tokens', unit: 'tokens' },
+    '# output tokens': { name: 'Generated tokens', unit: 'tokens' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens' },
+    outputTokens: { name: 'Output tokens', unit: 'tokens' },
+  },
   async fetch() {
     const rows = await helmRows(table, true);
     for (const row of rows) {

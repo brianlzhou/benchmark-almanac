@@ -7,6 +7,14 @@ const feed = 'https://openaccess.thecvf.com/content/ICCV2025/papers/Gong_SA-LUT_
 const board: Leaderboard = {
   benchmark: 'pst50', url: feed, feed, static: 'paper',
   terms: 'The authors retain copyright under the CVF open-access terms at https://openaccess.thecvf.com/.',
+  stats: {
+    psnr: { name: 'Peak signal-to-noise ratio', unit: 'score', better: 'higher' },
+    ssim: { name: 'Structural similarity', unit: 'score', better: 'higher' },
+    hCorr: { name: 'Histogram correlation', unit: 'score', better: 'higher' },
+    inferenceSeconds: { name: 'Inference time', unit: 'seconds', better: 'lower' },
+    lutGenerationSeconds: { name: 'Look-up table generation time', unit: 'seconds', better: 'lower' },
+    lutApplicationSeconds: { name: 'Look-up table application time', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.split(/Method\s+LPIPS ↓ PSNR \S+ SSIM \S+ H-Corr \S+ Inference Time \(s\)/)[1]?.split('5. Experiments')[0];

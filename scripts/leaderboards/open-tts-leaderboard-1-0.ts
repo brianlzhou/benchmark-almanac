@@ -7,9 +7,16 @@ import { text } from '../lib/html.ts';
 const feed = 'https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard';
 const languages = ["🇬🇧 English", "🇨🇳 Chinese", "🇫🇷 French", "🇪🇸 Spanish", "🇩🇪 German", "🇮🇹 Italian", "🇯🇵 Japanese", "🇰🇷 Korean", "🇷🇺 Russian", "🇭🇰 Cantonese", "🇵🇹 Portuguese", "🇳🇱 Dutch", "🇵🇱 Polish", "🇨🇿 Czech", "🇷🇴 Romanian", "🇬🇷 Greek", "🇫🇮 Finnish", "🇹🇷 Turkish", "🇸🇦 Arabic", "🇮🇳 Hindi", "🇮🇩 Indonesian", "🇹🇭 Thai", "🇻🇳 Vietnamese", "🇮🇷 Persian"];
 const datasets = ["Seed-TTS", "CV3-Eval", "MiniMax", "Neyshekar"];
-export function ttsRelease(benchmark:string,version:string,langCount:number,datasetCount:number,minimum:number):Leaderboard {
+export function ttsRelease(benchmark:string,version:string,langCount:number,datasetCount:number,minimum:number,includeUtmos=false):Leaderboard {
  const board:Leaderboard={benchmark,feed,url:'https://huggingface.co/spaces/hf-audio/open_tts_leaderboard',
    terms:'Hugging Face allows crawling. The Space and source datasets retain their respective licenses.',
+   stats:{
+     'Average RTFx ⬆️':{name:'Average real-time factor',unit:'speedup',better:'higher'},
+     'Average SIM ⬆️':{name:'Average speaker similarity',unit:'score',better:'higher'},
+     ...(includeUtmos?{'UTMOS (en) ⬆️':{name:'UTMOS for English',unit:'score',better:'higher'}}:{}),
+     cloningModeRank:{name:'Voice cloning rank',unit:'count',better:'lower'},
+     languagesScored:{name:'Languages scored',unit:'count'},
+   },
    async fetch(){
      const rows:LeaderboardRow[]=[];
      board.parts={};

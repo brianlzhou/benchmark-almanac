@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: 'https://pcbbench.org/',
   feed,
   terms: 'ProtoFlow publishes the PCBBench pilot data on its public benchmark site. https://pcbbench.org/',
+  stats: {
+    passedTasks: { name: 'Passed tasks', unit: 'count' },
+    validTasks: { name: 'Valid tasks', unit: 'count' },
+  },
   async fetch() {
     const source = await fetchJson(feed) as { models?: Array<Record<string, unknown>> };
     if (!Array.isArray(source.models)) throw new Error('Missing PCBBench pilot models');

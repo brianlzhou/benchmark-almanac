@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2402.09369';
 const groups = ['All Culture', 'High Resource', 'Mid Resource', 'Low Resource'];
 const measures = ['P', 'R', 'F'];
 const board: Leaderboard = {
+  stats: { AllCultureP:{name:'All-culture precision',unit:'%',better:'higher'}, AllCultureR:{name:'All-culture recall',unit:'%',better:'higher'}, AllCultureF:{name:'All-culture F1',unit:'%',better:'higher'}, HighResourceP:{name:'High-resource precision',unit:'%',better:'higher'}, HighResourceR:{name:'High-resource recall',unit:'%',better:'higher'}, MidResourceP:{name:'Mid-resource precision',unit:'%',better:'higher'}, MidResourceR:{name:'Mid-resource recall',unit:'%',better:'higher'}, LowResourceP:{name:'Low-resource precision',unit:'%',better:'higher'}, LowResourceR:{name:'Low-resource recall',unit:'%',better:'higher'} },
   benchmark: 'cultureatlas', url: feed, feed, static: 'paper', terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   aliases: { 'Vicuna 13B': 'vicuna-13b-v1-3' },
   parts: Object.fromEntries(groups.slice(1).map(name => [name.replace(' ', '') + 'F', name])),

@@ -12,6 +12,7 @@ const board: Leaderboard = {
   url: "https://theaggregate.ai/benchmark?slug=the-aggregate-lichess-pairwise-strength-25-pairs",
   feed,
   terms: "Credit The Aggregate when quoting scores. Bulk republication requires written permission. https://theaggregate.ai/terms robots.txt allows the feed path.",
+  stats: { items:{name:'Items',unit:'count'}, correct:{name:'Correct predictions',unit:'count'}, baselineAccuracy:{name:'Baseline accuracy',unit:'%',better:'higher'}, invalidConfidence:{name:'Invalid confidence estimates',unit:'count'}, consistentReversals:{name:'Consistent reversals',unit:'count'} },
   async fetch() {
     const data = await fetchJson<{ models: Entry[]; primary_pairs: number }>(feed);
     if (data.models.length < 19) throw new Error('Incomplete Lichess standings');

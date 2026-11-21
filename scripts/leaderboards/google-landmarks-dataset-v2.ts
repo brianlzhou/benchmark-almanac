@@ -10,7 +10,7 @@ const board: Leaderboard = {
   benchmark: 'google-landmarks-dataset-v2', static: 'paper', url: feed, feed,
   headline: 'The paper reports no overall score, so this is the plain mean of recognition micro-average precision and retrieval mAP@100.',
   terms: 'Paper terms at https://arxiv.org/abs/2004.01804. Google licenses dataset annotations under CC BY 4.0.',
-  parts: { recognition: 'Recognition', retrieval: 'Retrieval' },
+  parts: { recognition: 'Recognition', retrieval: 'Retrieval', recognitionValidation: { name: 'Recognition validation', group: 'Recognition' }, retrievalValidation: { name: 'Retrieval validation', group: 'Retrieval' } },
   async fetch() {
     const html = (await paperHtml(feed)).replace(/<cite\b[^>]*>[\s\S]*?<\/cite>/gi, '');
     const figures = html.match(/<figure\b[^>]*class="ltx_table[^"]*"[^>]*>[\s\S]*?<\/figure>/g) ?? [];

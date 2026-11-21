@@ -16,12 +16,16 @@ function markdownTables(source: string): string[][][] {
   return out;
 }
 const FEED = "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md";
+const finevalParts = Object.fromEntries([
+  ['Finance','Finance'], ['Economy','Economy'], ['Accounting','Accounting'], ['Certificate','Certificate'], ['FTC','Financial Text Classification'], ['FSA','Financial Sentiment Analysis'], ['RE','Relation Extraction'], ['FEE','Financial Event Extraction'], ['NEE','Negative Entity Extraction'], ['CEE','Causal Event Extraction'], ['FTS','Financial Text Summarization'], ['FCP','Financial Customer Portrait'], ['MSR','Marketing Scripts Recommendation'], ['IA','Investment Advice'], ['App','Application Security'], ['Cryp','Cryptography'], ['MA','Malware Analysis'], ['MS','Memory Security'], ['NS','Network Security'], ['Pent','Penetration Testing'], ['Reve','Reverse Engineering'], ['Soft','Software Security'], ['Syst','System Security'], ['Vul','Vulnerability'], ['WS','Web Security'], ['COT','Chain of Thought'], ['RAG','Retrieval Augmented Generation'], ['FT','Financial tasks'], ['MC','Multi-turn conversation'], ['MD','Multi-document question and answer'], ['API-I','API invocation'], ['API-R','API retrieval'],
+].map(([key, name]) => [key.toLowerCase().replace(/-(.)/g, (_, c) => c.toUpperCase()), { name, group: 'Task' }]));
 const board: Leaderboard = {
   benchmark: "fineval", parts: {
   'Financial Academic': { name: 'Financial academic', group: 'Category' },
   'Financial Industry': { name: 'Financial industry', group: 'Category' },
   'Financial Security': { name: 'Financial security', group: 'Category' },
   'Financial Agent': { name: 'Financial agent', group: 'Category' },
+  ...finevalParts,
 }, url: "https://raw.githubusercontent.com/SUFE-AIFLM-Lab/FinEval/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {

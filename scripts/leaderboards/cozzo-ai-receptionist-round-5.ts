@@ -7,10 +7,22 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://cozzo.io/benchmarks/round-5';
 const industries = ['Roofing', 'Gym', 'Coaching'];
-const parts: Record<string, BoardPart> = {};
+const parts: Record<string, BoardPart> = {
+  RoofingQuote:{name:'Quote',group:'Roofing',unit:'%'}, RoofingBooking:{name:'Booking',group:'Roofing',unit:'%'}, RoofingReadback:{name:'Readback',group:'Roofing',unit:'%'}, RoofingTriage:{name:'Triage',group:'Roofing',unit:'%'}, RoofingAfterhours:{name:'Afterhours',group:'Roofing',unit:'%'},
+  GymQuote:{name:'Quote',group:'Gym',unit:'%'}, GymBooking:{name:'Booking',group:'Gym',unit:'%'}, GymTriage:{name:'Triage',group:'Gym',unit:'%'}, GymAfterhours:{name:'Afterhours',group:'Gym',unit:'%'},
+  CoachingQuote:{name:'Quote',group:'Coaching',unit:'%'}, CoachingBooking:{name:'Booking',group:'Coaching',unit:'%'}, CoachingTriage:{name:'Triage',group:'Coaching',unit:'%'}, CoachingAfterhours:{name:'Afterhours',group:'Coaching',unit:'%'},
+};
+const stats: NonNullable<Leaderboard['stats']> = {};
+for (const industry of industries) {
+  stats[industry + 'MedianReplyMs'] = { name: industry + ' median reply time', unit: 'ms', better: 'lower' };
+  stats[industry + 'Replies'] = { name: industry + ' replies', unit: 'count' };
+  stats[industry + 'InterruptionSeconds'] = { name: industry + ' interruption time', unit: 'seconds', better: 'lower' };
+  for (const key of (industry === 'Roofing' ? ['Quote', 'Booking', 'Readback', 'Triage', 'Afterhours'] : ['Quote', 'Booking', 'Triage', 'Afterhours'])) stats[industry + key + 'Calls'] = { name: industry + ' ' + key.toLowerCase() + ' calls', unit: 'count' };
+}
 const board: Leaderboard = {
   benchmark: 'cozzo-ai-receptionist-round-5', url: feed, feed, parts, harnesses: 'system',
   terms: 'Cozzo publishes the results under its site terms. https://cozzo.io/terms',
+  stats,
   async fetch() {
     const all = tables(await fetchText(feed));
     if (all.length !== 4 || !all[3][0][1].text.includes('Roofing (ms)')) throw new Error('Missing Cozzo comparison tables');

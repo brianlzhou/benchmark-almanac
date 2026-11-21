@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://1stproof.org/third-batch.html",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
+  stats: { totalCorrect: { name: 'Total correct', unit: 'count', better: 'higher' }, exposition: { name: 'Exposition', unit: 'score', better: 'higher' }, attribution: { name: 'Attribution', unit: 'score', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const tex=await fetchText(FEED);
     const ts=[...tex.matchAll(/\\begin\{table\}[\s\S]*?\\end\{table\}/g)].map(m=>m[0]);

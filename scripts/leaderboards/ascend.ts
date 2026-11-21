@@ -8,6 +8,7 @@ const feed = 'https://arxiv.org/html/2112.06223';
 export default {
   benchmark: 'ascend', url: feed, feed, static: 'paper',
   terms: 'The paper and license are at https://arxiv.org/abs/2112.06223',
+  stats:{'Test CER':{name:'Test character error rate',unit:'%',better:'lower'},'Validation MER':{name:'Validation mixed error rate',unit:'%',better:'lower'},'Validation CER':{name:'Validation character error rate',unit:'%',better:'lower'}},
   async fetch() {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t => t[1]?.join('|') === 'Pre-training language|MER (%)|CER (%)|MER (%)|CER (%)');
     if (!table || table[0].slice(1).join('|') !== 'Validation|Validation|Test|Test') throw new Error('Missing Table 12');

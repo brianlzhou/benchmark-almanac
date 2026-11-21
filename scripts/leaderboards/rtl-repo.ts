@@ -30,6 +30,7 @@ const board: Leaderboard = {
   feed,
   terms: "The leaderboard Space carries the Apache 2.0 license. robots.txt allows the feed path.",
   host: "TuRTLe",
+  stats: { EM: { name: 'Exact match', unit: '%', better: 'higher' } },
   async fetch() {
     return turtleColumns(feed, 'RTL-Repo', 'EM', 25);
   },

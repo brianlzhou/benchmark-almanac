@@ -7,6 +7,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json";
 const board: Leaderboard = {
   benchmark: "multi-swe-bench-mini",
+  stats: { resolved: { name: 'Resolved tasks', unit: 'count' }, resolvedEasy: { name: 'Resolved easy tasks', unit: 'count' }, resolvedMedium: { name: 'Resolved medium tasks', unit: 'count' }, resolvedHard: { name: 'Resolved hard tasks', unit: 'count' } },
   verified: 'Marked verified by Multi-SWE-bench',
   parts: {
     easy: { name: 'Easy', group: 'Difficulty' },

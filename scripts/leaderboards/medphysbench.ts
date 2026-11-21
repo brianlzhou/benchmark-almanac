@@ -12,6 +12,10 @@ const board: Leaderboard = {
   parts: { worksheetDetection: 'Worksheet check detection', resultDetection: 'Result check detection',
     worksheetFalseAlarms: { name: 'Worksheet check false alarms', unit: '%', better: 'lower' },
     resultFalseAlarms: { name: 'Result check false alarms', unit: '%', better: 'lower' } },
+  stats: {
+    calculationItems: { name: 'Calculation items', unit: 'count', note: 'Number of medical physics calculation items in the evaluated set.' },
+    accuracyAmongCompleted: { name: 'Accuracy among completed items', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const table = (await fetchText(feed)).split('<!-- results:start -->')[1]?.split('<!-- results:end -->')[0];
     if (!table?.includes('| Model | Weights | Calculation (%) | 95% CI | Worksheet check: detected / false alarms (%) | Result check: detected / false alarms (%) |')) throw new Error('Missing Results columns');

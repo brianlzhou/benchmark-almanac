@@ -10,6 +10,8 @@ const board: Leaderboard = {
  url: "https://mathcanvas.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ parts: { Algebra: 'Algebra', 'Analytic Geom.': 'Analytic Geometry', 'Calc & Vector': 'Calculus and Vector', 'Plane Geom.': 'Plane Geometry', 'Solid Geom.': 'Solid Geometry', 'Stats.': 'Statistics', 'Transf. Geom.': 'Transformation Geometry', 'Trig.': 'Trigonometry' },
+ stats: { weighted: { name: 'Weighted score', unit: '%', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

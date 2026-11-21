@@ -18,8 +18,17 @@ const board: Leaderboard = {
   graph_parallel: { name: 'Graph parallel', group: 'Category' },
   geometric_spatial: { name: 'Geometric spatial', group: 'Category' },
   other: { name: 'Other', group: 'Category' },
+  fsdp_zero: { name: 'FSDP zero', group: 'Category' },
 }, url: "https://www.together.ai/blog/parallelkernelbench", feed: FEED,
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
+ stats: {
+  tasks: { name: 'Tasks', unit: 'count' },
+  passed: { name: 'Tasks passed', unit: 'count' },
+  passAt3: { name: 'Pass@3', unit: '%', better: 'higher' },
+  fast1Percent: { name: 'Faster-than-reference rate', unit: '%', better: 'higher' },
+  fast1Count: { name: 'Faster-than-reference tasks', unit: 'count' },
+  fast1At3: { name: 'Faster-than-reference pass@3', unit: '%', better: 'higher' },
+ },
 
  async fetch() {
     const t = tables(await fetchText(FEED)).find(t => t[0]?.[0]?.text === 'Category');

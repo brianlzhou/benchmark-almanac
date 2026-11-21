@@ -11,6 +11,12 @@ export default workbookBoard({
   model: "模型名称",
   score: "总分",
   minimum: 6,
+  // the board gives time in minutes, and agentclue.ts stores it as `latency` in seconds
+  stats: {
+    costPerTaskCny: { name: 'Average cost per question', unit: 'cny', better: 'lower' },
+    latency: { name: 'Average time per question', unit: 'seconds', better: 'lower' },
+    totalTokens: { name: 'Average tokens per question', unit: 'tokens' },
+  },
   metrics: { costPerTaskCny: "平均每题成本（元）", latencyMinutes: "平均每题耗时（分钟）", totalTokens: "平均每题token消耗" },
   parts: ["外卖点单", "电商零售", "电子政务", "购票服务", "电信领域"],
 });

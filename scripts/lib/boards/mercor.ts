@@ -6,6 +6,7 @@ interface Row { model_name: string; model_id: string; effort?: string; score: Re
 export function mercorExtended(benchmark: string, slug: string): Leaderboard {
   const url = `https://www.mercor.com/apex/mercor-extended/${slug}/`;
   return { benchmark, url, feed: `${url} (__NEXT_DATA__.props.pageProps.leaderboardData, held-out scores only)`,
+    stats: { samples: { name: 'Samples', unit: 'count' } },
     terms: 'Mercor terms prohibit automated scraping; the almanac credits Mercor and links the original source.',
     aliases: { 'Muse Wonder 1.0': 'muse-wonder', 'Kimi K2.7 Code': 'kimi-k2-7-code' },
     async fetch(): Promise<LeaderboardRow[]> {

@@ -18,6 +18,7 @@ const board: Leaderboard = {
   url: "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MAEB%28v1%29/scores",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: { activeParamsB:{name:'Active parameters',unit:'billions'}, maxTokens:{name:'Maximum tokens',unit:'tokens'}, embeddingDim:{name:'Embedding dimensions',unit:'count'}, zeroShotPct:{name:'Zero-shot percentage',unit:'%',better:'higher'}, opennessScore:{name:'Openness score',unit:'score',better:'higher'}, meanTaskType:{name:'Mean task-type score',unit:'%',better:'higher'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const data = await fetchJson<{
@@ -76,4 +77,5 @@ const board: Leaderboard = {
     return rows;
   },
 };
+board.parts = { ...board.parts, ...Object.fromEntries(['vehicleSoundClustering','mInDS14','commonVoiceMini21T2ARetrieval','gTZANGenre','sIBFLEURS','speechCommandsZeroshotv002','voxCelebSA','voxPopuliAccentPairClassification','iEMOCAPGender','beijingOpera','fSD2019Kaggle','jamAltLyricA2TRetrieval','nMSQAPairClassification','birdCLEF','commonLanguageAgeDetection','fleursT2ARetrieval','cREMADClustering','jamAltArtistA2ARetrieval','ravdessZeroshot','cREMAD','voxPopuliGenderClustering','voxPopuliLanguageID','cREMADPairClassification','mridinghamTonic','gTZANAudioReranking','mACST2ARetrieval','gigaSpeechT2ARetrieval','urbanSound8KT2ARetrieval','spokenSQuADT2ARetrieval','clothoT2ARetrieval','benchmarkVariantAudioOnly'].map(key => [key, { name: key, group: 'Task' }])) };
 export default board;

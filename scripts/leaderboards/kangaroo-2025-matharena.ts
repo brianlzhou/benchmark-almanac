@@ -11,6 +11,10 @@ const board: Leaderboard = {
   feed: matharenaFeed(COMP),
   terms: MATHARENA_TERMS,
   aliases: { ...MATHARENA_ALIASES, 'Qwen3-VL-235B Instruct': 'qwen3-vl-235b-a22b-instruct' },
+  stats: {
+    activeParams: { name: 'Active parameters', unit: 'billions' },
+    latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  },
   fetch: () => matharenaRows(COMP),
 };
 export default board;

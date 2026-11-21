@@ -5,6 +5,11 @@ import { fetchText } from '../lib/util.ts';
 const feed = "https://www.mercor.com/apex/oss-benchmarks/oss-cvdp-leaderboard/";
 const board: Leaderboard = {
   benchmark: 'cvdp',
+  stats: {
+    meanScore: { name: 'Mean score', unit: 'score', better: 'higher' },
+    meanScoreMargin: { name: 'Mean score margin', unit: 'score', better: 'lower' },
+    samples: { name: 'Samples', unit: 'count' },
+  },
   url: "https://www.mercor.com/apex/oss-benchmarks/oss-cvdp-leaderboard/",
   feed,
   terms: "Mercor's robots.txt allows the public page. Mercor restricts scraping and copying under its terms. Results are credited to Mercor.",

@@ -13,6 +13,11 @@ const board: Leaderboard = {
   benchmark: 'clocktower-radio',
   url: PAGE,
   feed: `${PAGE} (static HTML leaderboard table, Rating)`,
+  stats: {
+    goodWin: { name: 'Good-side win rate', unit: '%', better: 'higher' },
+    evilWin: { name: 'Evil-side win rate', unit: '%', better: 'higher' },
+    tokensPerAction: { name: 'Output tokens per action', unit: 'tokens', better: 'lower' },
+  },
   terms: "robots.txt allows all paths to general agents and sets the content signal use=reference, ai-train=no; one request per sync, scores cited to the site.",
   async fetch() {
     const html = await fetchText(PAGE);

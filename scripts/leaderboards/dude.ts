@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: RRC,
   feed: `${RRC} + ${FEED}`,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
+  stats: { ece: { name: 'Expected calibration error', unit: '%', better: 'lower' }, aurc: { name: 'Area under the risk coverage curve', unit: 'score', better: 'lower' } },
   
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.[0]?.text==='Model' && t[0]?.some(c=>/^ANLS/.test(c.text)) && t[0]?.some(c=>/^ECE/.test(c.text)));

@@ -17,6 +17,11 @@ const board: Leaderboard = {
   url: OPENVLM_URL,
   feed: OPENVLM_FEED,
   verified: 'marked verified by OpenCompass',
+  stats: {
+    acc: { name: 'Accuracy', unit: '%', better: 'higher' },
+    precision: { name: 'Precision', unit: '%', better: 'higher' },
+    recall: { name: 'Recall', unit: '%', better: 'higher' },
+  },
   terms: 'The Space declares Apache 2.0. Hugging Face permits the page in robots.txt. The feed states no data license and its host returns HTTP 403 for robots.txt.',
   aliases: {
     ...OPENVLM_ALIASES,

@@ -13,6 +13,12 @@ const board: Leaderboard = {
   feed: kaggleFeed('kaggle', 'ultimate-tic-tac-toe'),
   terms: KAGGLE_TERMS,
   aliases: {},
+  stats: {
+    turnTokens: { name: 'Average tokens per turn from source task', unit: 'tokens' },
+    tokensPerTurn: { name: 'Average tokens per turn', unit: 'tokens' },
+    costPerTurn: { name: 'Average cost per turn', unit: 'usd', better: 'lower' },
+    costPerTurnUnspecifiedUnit: { name: 'Average cost per turn in source units', note: 'The source does not state the currency unit.' },
+  },
   fetch: () => kaggleRows('kaggle', 'ultimate-tic-tac-toe', 'Score', 1, { turnTokens: { task: 'Avg. Tokens/Turn' }, costPerTurnUnspecifiedUnit: { task: 'Avg. Cost/Turn' } }),
 };
 export default board;

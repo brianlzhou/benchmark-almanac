@@ -12,6 +12,7 @@ const board: Leaderboard = {
   feed: `${valsPage(SLUG)} (server-rendered leaderboard table)`,
   terms: VALS_TERMS,
   aliases: VALS_ALIASES,
+  stats: { inputTokensTotal: { name: 'Total input tokens', unit: 'tokens', better: 'lower' }, outputTokensTotal: { name: 'Total output tokens', unit: 'tokens', better: 'lower' }, reasoningTokensTotal: { name: 'Total reasoning tokens', unit: 'tokens', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   fetch: () => valsDetails(board, SLUG),
 };
 export default board;

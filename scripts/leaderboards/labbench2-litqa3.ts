@@ -9,6 +9,7 @@ const board: Leaderboard = {
  url: "https://advances.edisonscientific.com/benchmarks/labbench2/litqa3/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

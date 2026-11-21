@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://codalab.lisn.upsaclay.fr/competitions/22203",
   feed,
   terms: "The public results page gives no separate score license. CodaLab serves an HTML error page for robots.txt. The organizers publish the results in the workshop proceedings.",
+  stats: { strictF1: { name: 'Strict F1', unit: 'score', better: 'higher', note: 'F1 with exact span matching, stored from 0 to 1.' }, tokenLevelF1: { name: 'Token-level F1', unit: 'score', better: 'higher', note: 'Token-level F1, stored from 0 to 1.' } },
   async fetch() {
     const doc = await pdfText(feed);
     const table = doc.match(/Team\s+Relaxed F1\s+Strict F1\s+Token-level F1\s+System Summary([\s\S]+?)Table 2: System summary/)?.[1] ?? '';

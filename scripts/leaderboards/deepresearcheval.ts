@@ -32,6 +32,13 @@ const board: Leaderboard = {
   "feed": "https://infinity-ailab.github.io/deep_research_eval/",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: {
+    statements: { name: 'Statements', unit: 'count' },
+    right: { name: 'Correct statements', unit: 'count' },
+    wrong: { name: 'Wrong statements', unit: 'count' },
+    unknown: { name: 'Unknown statements', unit: 'count' },
+    factualityPercent: { name: 'Factuality', unit: '%', better: 'higher' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
 
     const data = tables(await fetchText(FEED)).map(t => t.map(r => r.map(c => c.text)));

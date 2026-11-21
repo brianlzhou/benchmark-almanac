@@ -10,6 +10,18 @@ const board: Leaderboard = {
   url: "https://linghuazhang01.github.io/RetailBench/#leaderboard",
   feed,
   terms: "The results file gives its generation date and includes a separate scripted oracle. The authors release RetailBench under the MIT license. https://github.com/linghuazhang01/RetailBench/blob/main/LICENSE The host lists a sitemap and no crawler restrictions.",
+  stats: {
+    days: { name: 'Days survived', unit: 'count', better: 'higher' },
+    totalSales: { name: 'Total sales', unit: 'count', better: 'higher' },
+    soldSkusPerDay: { name: 'Sold stock-keeping units per day', unit: 'count', better: 'higher' },
+    returnRatio: { name: 'Return ratio', unit: 'score', better: 'lower', note: 'Fraction of sales returned, stored from 0 to 1.' },
+    expiredRatio: { name: 'Expired inventory ratio', unit: 'score', better: 'lower', note: 'Fraction of inventory that expired, stored from 0 to 1.' },
+    stockoutRatio: { name: 'Stockout ratio', unit: 'score', better: 'lower', note: 'Fraction of store days with stockouts, stored from 0 to 1.' },
+    totalToolsPerDay: { name: 'Tool calls per day', unit: 'count' },
+    tokensPerDay: { name: 'Tokens per day', unit: 'tokens' },
+    networthGapToHeuristic: { name: 'Net worth gap to heuristic', unit: 'usd', better: 'lower' },
+    salesGapToHeuristic: { name: 'Sales gap to heuristic', unit: 'count', better: 'lower' },
+  },
   async fetch(){
     const d=await fetchJson<{benchmark:{llmModels:number;environment:string};leaderboard:Run[]}>(feed);
     const rows=d.leaderboard.filter(r=>r.type==='llm');

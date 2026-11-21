@@ -24,6 +24,11 @@ const board: Leaderboard = {
   url: 'https://tiger-ai-lab.github.io/StructEval/',
   feed: `${FEED} (metrics.overall)`,
   terms: 'JSON file on the StructEval GitHub Pages site that the page loads; the page content is CC BY-SA 4.0.',
+  stats: {
+    examples: { name: 'Examples', unit: 'count', note: 'Number of evaluation examples in the run.' },
+    renderRate: { name: 'Render score', unit: '%', better: 'higher', note: 'Percentage of generated outputs that load or render without syntax errors.' },
+    activeParamsB: { name: 'Active parameters', unit: 'billions' },
+  },
   parts: {
     renderable: {name: 'Renderable', group: 'Format'}, nonRenderable: {name: 'Non-renderable', group: 'Format'},
     tGeneration: {name: 'Text generation', group: 'Task'}, tConversion: {name: 'Text conversion', group: 'Task'},

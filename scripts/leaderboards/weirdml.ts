@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: 'https://htihle.github.io/weirdml_v2.html',
   feed: `${FEED} (avg_acc)`,
   terms: "CSV on the author's public GitHub Pages site, which states no license or terms.",
+  stats: { code_len_p10: {name: 'Code length 10th percentile', unit: 'tokens', better: 'lower'}, code_len_p50: {name: 'Code length median', unit: 'tokens', better: 'lower'}, code_len_p90: {name: 'Code length 90th percentile', unit: 'tokens', better: 'lower'}, time: {name: 'Median execution time', unit: 'seconds', better: 'lower'} },
   chart: {
     title: 'Average accuracy against output tokens',
     note: 'Average total output tokens per response (reasoning plus completion) against average accuracy over all tasks.',

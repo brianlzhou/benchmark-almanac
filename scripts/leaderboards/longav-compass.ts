@@ -18,7 +18,11 @@ const board: Leaderboard = {
   static: 'paper',
   headline: 'The paper reports no overall score, so this is the mean event fulfillment score across its three tasks.',
   aliases: {'Seedance 2.0': 'dreamina-seedance-2-0'},
-  parts: {},
+  parts: Object.fromEntries(tasks.flatMap(task => [
+    [task, {name: 'Event fulfillment', group: task, unit: 'score'}],
+    ...common.map(name => [task + name.replace(/[^a-z0-9]/gi, ''), {name: name.replace('IV_{1}', 'IV1'), group: task, unit: 'score'}]),
+    ...(task === 'I2AV' ? [['I2AVIV1', {name: 'IV1', group: task, unit: 'score'}], ['I2AVImgAlign', {name: 'Image alignment', group: task, unit: 'score'}]] : []),
+  ])),
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const models = new Map<string, Record<string, number>>();

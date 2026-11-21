@@ -72,6 +72,7 @@ const board: Leaderboard = {
   feed,
   aliases: fabAliases,
   terms: "Fab AI marks the leaderboard as all rights reserved. The code repository has an MIT license. robots.txt allows the feed path.",
+  stats: { badFormat: { name: 'Bad-format answers', unit: 'count', better: 'lower' } },
   async fetch() {
     return fabCore(board, feed, 'SEND', 275);
   },

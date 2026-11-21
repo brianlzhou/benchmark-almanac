@@ -5,7 +5,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {pdfText} from '../lib/boards/pdf-text.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 const feed='https://aclanthology.org/2023.emnlp-main.920.pdf';
-const board:Leaderboard={benchmark:'poemsum',url:'https://aclanthology.org/2023.emnlp-main.920/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',async fetch(){
+const board:Leaderboard={benchmark:'poemsum',url:'https://aclanthology.org/2023.emnlp-main.920/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',stats:{rouge2:{name:'ROUGE-2',unit:'score',better:'higher'},rougeL:{name:'ROUGE-L',unit:'score',better:'higher'},bertScore:{name:'BERTScore',unit:'score',better:'higher'}},async fetch(){
  const p=await pdfText(feed); const block=p.slice(Math.max(0,p.search(/Model\s+R1\s+R2\s+RL\s+BS/)-100),p.indexOf('Table 2: Performance of different Models'));
  if(!block.includes('T5') || !block.includes('mT5')) throw new Error('PoemSum table missing');
  const rows:LeaderboardRow[]=[];

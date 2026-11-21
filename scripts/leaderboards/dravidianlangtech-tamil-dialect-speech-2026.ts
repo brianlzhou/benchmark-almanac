@@ -13,6 +13,7 @@ const classifiers: Record<string, string> = {
 const board: Leaderboard = {
   benchmark: 'dravidianlangtech-tamil-dialect-speech-2026', url: feed, feed, harnesses: 'system',
   terms: 'ACL Anthology publishes this workshop paper. https://aclanthology.org/2026.dravidianlangtech-1.9/',
+  stats: { precision: { name: 'Precision', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' }, recall: { name: 'Recall', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' } },
   parts: { classification: 'Dialect Classification', asr: { name: 'Dialect-aware ASR', unit: 'score', better: 'lower', note: 'Word error rate' } },
   async fetch() {
     const paper = await pdfText(feed);

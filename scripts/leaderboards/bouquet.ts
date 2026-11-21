@@ -35,6 +35,7 @@ const board: Leaderboard = {
   "feed": "https://huggingface.co/api/spaces/facebook/bouquet",
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
+  stats: { chrfpp: { name: 'chrF++', unit: 'score', better: 'higher' }, glotlid_score: { name: 'GlotLID score', unit: 'score', better: 'higher' }, glotlid_x_metricx: { name: 'GlotLID × MetricX', unit: 'score', better: 'higher' }, metricx: { name: 'MetricX', unit: 'score', better: 'lower' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const index = await fetchJson<{siblings: {rfilename: string}[]}>(FEED);
     const files = index.siblings.map(f => f.rfilename).filter(f => /^data\/mt_benchmark\/[^/]+\/scores\.csv$/.test(f));

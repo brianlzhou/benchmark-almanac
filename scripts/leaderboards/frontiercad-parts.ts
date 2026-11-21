@@ -3,5 +3,10 @@
 import type { Leaderboard } from './types.ts';
 import { sourceBoard, trackRows } from '../lib/boards/frontiercad.ts';
 const board: Leaderboard = { benchmark: "frontiercad-parts", url: sourceBoard.url, feed: sourceBoard.feed, terms: sourceBoard.terms, aliases: sourceBoard.aliases,
+ stats: {
+  scheduled: { name: 'Scheduled tasks', unit: 'count' },
+  scored: { name: 'Scored tasks', unit: 'count' },
+  passRate: { name: 'Pass rate', unit: 'score', better: 'higher', note: 'Fraction of tasks passed, stored from 0 to 1.' },
+ },
  fetch: () => trackRows("^Parts;", "^Parts;\\s*") };
 export default board;

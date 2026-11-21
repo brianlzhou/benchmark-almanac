@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://huggingface.co/spaces/RadNLP/RadNLP2024_FormalRun_Japanese_MainTask",
   feed,
   terms: "The competition rules describe scores and registration. They give no score reuse license. https://radnlp-radnlp2024-formalrun-japanese-maintask.hf.space/rules The Space host returns 404 for robots.txt.",
+  stats: {
+    'Joint accuracy (fine)': { name: 'Joint accuracy fine', unit: '%', better: 'higher', note: 'Accuracy requiring all tumor, node and metastasis labels to match at fine granularity.' },
+    'Joint accuracy (coarse)': { name: 'Joint accuracy coarse', unit: '%', better: 'higher', note: 'Accuracy requiring all tumor, node and metastasis labels to match at coarse granularity.' },
+  },
   parts: Object.fromEntries(['T accuracy (fine)', 'N accuracy (fine)', 'M accuracy (fine)', 'T accuracy (coarse)', 'N accuracy (coarse)', 'M accuracy (coarse)'].map(k => [k, k])),
   async fetch() {
     const d = await fetchJson<{response: string}>(feed, {method: 'POST', headers: {'content-type':'application/json'}, body: JSON.stringify({lb:'private'})});

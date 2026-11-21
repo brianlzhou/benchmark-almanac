@@ -19,6 +19,7 @@ const board: Leaderboard = {
  url: "https://vlmsareblind.github.io/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { 'Circled Letter': {name: 'Circled letter accuracy', unit: '%', better: 'higher'} },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {

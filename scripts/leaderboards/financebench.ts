@@ -13,6 +13,7 @@ const percent = (s: string) => {
   return Number(match[1]);
 };
 const board: Leaderboard = {
+  stats: { incorrect: { name: 'Incorrect answers', unit: 'count', better: 'lower' }, failed: { name: 'Failed answers', unit: 'count', better: 'lower' } },
   benchmark: 'financebench', static: 'paper', url: 'https://github.com/patronus-ai/financebench', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'Llama2 70B Chat': 'llama-2-70b' },
   async fetch() {

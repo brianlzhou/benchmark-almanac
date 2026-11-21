@@ -10,7 +10,12 @@ const board: Leaderboard = {
   benchmark: 'occluded-video-instance-segmentation', static: 'paper',
   url: 'https://arxiv.org/abs/2102.01558', feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2102.01558',
-  parts: { ap50: 'AP50', ap75: 'AP75', ar1: 'AR1', ar10: 'AR10', slight: 'Slight occlusion AP', moderate: 'Moderate occlusion AP', heavy: 'Heavy occlusion AP' },
+  parts: {
+    ap50: 'AP50', ap75: 'AP75', ar1: 'AR1', ar10: 'AR10', slight: 'Slight occlusion AP', moderate: 'Moderate occlusion AP', heavy: 'Heavy occlusion AP',
+    validation_ap: 'Validation AP', validation_ap50: 'Validation AP50', validation_ap75: 'Validation AP75', validation_ar1: 'Validation AR1', validation_ar10: 'Validation AR10',
+    validation_slightlyOccluded: 'Validation slight occlusion AP', validation_moderatelyOccluded: 'Validation moderate occlusion AP', validation_heavilyOccluded: 'Validation heavy occlusion AP',
+    slightlyOccluded: 'Slight occlusion AP', moderatelyOccluded: 'Moderate occlusion AP', heavilyOccluded: 'Heavy occlusion AP',
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
     if (!text.includes('Table 2: Overall results of state-of-the-art methods on the OVIS dataset')) throw new Error('OVIS Table 2 missing');

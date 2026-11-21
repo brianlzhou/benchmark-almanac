@@ -17,6 +17,7 @@ const board: Leaderboard = {
     'Llama 3.3 70B': 'llama-3-3-70b-instruct', 'Gemini 1.5 Flash': 'gemini-1-5-flash-sep-2024',
   },
   parts: Object.fromEntries(lengths.map(n => ['k'+n, { name: n+'K', group: n <= 32 ? 'Standard lengths' : 'Extended lengths' }])),
+  stats: { base: { name: 'Base score', unit: 'score', better: 'higher' }, threshold: { name: 'Base score threshold', unit: 'score' }, effectiveLengthK: { name: 'Effective context length', unit: 'thousands', better: 'higher' }, effectiveLengthBelow1K: { name: 'Effective context length below 1K', unit: 'count' }, claimedLengthK: { name: 'Claimed context length', unit: 'thousands' } },
   async fetch() {
     const section = (await fetchText(feed)).split('## Results\n')[1]?.trim().split(/\n\s*\n/)[0];
     if (!section || !section.includes('Effective Length') || !/1K\s*\|\s*2K\s*\|\s*4K\s*\|\s*8K\s*\|\s*16K\s*\|\s*32K\s*\|\s*64K\*\s*\|\s*128K\*/.test(section))

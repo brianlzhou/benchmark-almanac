@@ -25,6 +25,9 @@ const board: Leaderboard = {
   url: 'https://gluebenchmark.com/leaderboard',
   feed: `${DB}/leaderboard/glue.json (newest snapshot, Firebase REST), task RTE accuracy`,
   terms: 'gluebenchmark.com robots.txt sets no rules (content-signal comments only); the Firebase host robots.txt allows *.json; the site publishes no terms.',
+  stats: {
+    sharedParamsB: { name: 'Shared parameters', unit: 'billions' },
+  },
   aliases: {
     // the T5 team's entry is the 11B model
     T5: 't5-11b',

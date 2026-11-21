@@ -9,6 +9,7 @@ const board:Leaderboard={benchmark:'prmbench', static: 'paper', parts: {
   soundness: { name: 'Soundness', group: 'Dimension' },
   sensitivity: { name: 'Sensitivity', group: 'Dimension' },
 },url:URL,feed:URL,terms:PAPER_TERMS,
+ stats: { nr: { name: 'No reasoning error rate', unit: '%', better: 'lower' }, ncl: { name: 'No clear label error rate', unit: '%', better: 'lower' }, es: { name: 'Easy step error rate', unit: '%', better: 'lower' }, sc: { name: 'Shortcut error rate', unit: '%', better: 'lower' }, dc: { name: 'Direction confusion error rate', unit: '%', better: 'lower' }, ps: { name: 'Partial solution error rate', unit: '%', better: 'lower' }, dr: { name: 'Distraction error rate', unit: '%', better: 'lower' }, ms: { name: 'Missing step error rate', unit: '%', better: 'lower' } },
  async fetch(){const t=inlinePaperTables(await paperHtml(URL)).find(t=>t[0]?.[1]==='Overall'&&t[0]?.length===14);if(!t)throw new Error('Reviewed overall table missing');const out:LeaderboardRow[]=[];
  let open: boolean | undefined;
  let setting: string | undefined;

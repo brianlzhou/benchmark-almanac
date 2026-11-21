@@ -11,6 +11,10 @@ const board:Leaderboard={
   feed:urlFor(tasks[0]),host:'MTEB',terms:'MTEB releases its results under CC0 1.0. https://huggingface.co/datasets/mteb/results',
   headline:'Mean pairwise mean reciprocal rank across Robust04, News21 and Core17, on the MTEB scale from -1 to 1.',
   parts:Object.fromEntries(tasks.map(t=>[t,t+' p-MRR'])),
+  stats: {
+    activeParamsB: { name: 'Active parameters', unit: 'billions' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' },
+    maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', note: 'Memory usage in megabytes.' },
+  },
   async fetch(){
     const models=new Map<string,LeaderboardRow>();
     for(const [i,task] of tasks.entries()){

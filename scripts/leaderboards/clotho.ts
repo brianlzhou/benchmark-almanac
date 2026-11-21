@@ -11,6 +11,17 @@ type Entry = { methodName:string, methodOriginPaperId:string|null, reportPaperId
 const board: Leaderboard = {
   benchmark: 'clotho', host:'SOTA2 Research', url:feed, feed,
   terms:'SOTA2 credits each result to its reporting paper on the public board. ' + feed,
+  stats: {
+    METEOR: { name: 'METEOR', unit: 'score', better: 'higher' },
+    SPICE: { name: 'SPICE', unit: 'score', better: 'higher' },
+    SPIDEr: { name: 'SPIDEr', unit: 'score', better: 'higher' },
+    FENSE: { name: 'FENSE', unit: 'score', better: 'higher' },
+    'BLEU-1': { name: 'BLEU-1', unit: 'score', better: 'higher' },
+    'BLEU-2': { name: 'BLEU-2', unit: 'score', better: 'higher' },
+    'BLEU-3': { name: 'BLEU-3', unit: 'score', better: 'higher' },
+    'BLEU-4': { name: 'BLEU-4', unit: 'score', better: 'higher' },
+    'ROUGE-L': { name: 'ROUGE-L', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const flight = nextFlight(await fetchText(feed));
     const start = flight.indexOf('"results":{"benchmarkId"');

@@ -6,6 +6,7 @@ const url='https://github.com/halachabench/halacha-bench-results';
 const feed='https://raw.githubusercontent.com/halachabench/halacha-bench-results/HEAD/README.md';
 export default {
   benchmark:'halachabench',url,feed,
+  stats:{worstOf3:{name:'Worst of three score',unit:'%',better:'higher'}},
   terms:'The authors publish these provisional scores in their public results repository; the raw README path is allowed by robots.txt. No separate results-use restriction is stated.',
   async fetch():Promise<LeaderboardRow[]> {
     const t=markdownTables(await fetchText(feed)).find(t=>t[0].join('|')==='#|Model|Score|95% interval|Worst of 3|How it ran');

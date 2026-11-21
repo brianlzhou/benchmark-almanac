@@ -8,6 +8,7 @@ type Run = { model: string; metrics: Record<string, Metric>; raw?: { reasoning?:
 const board: Leaderboard = {
   benchmark: 'dayjob-law', url: 'https://fireworks.ai/specialized-intelligence-index/benchmarks/legal/dayjob-law', feed: FEED,
   terms: 'Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and benchmark owner Surge AI and links the source.',
+  stats:{reasoningTokens:{name:'Reasoning tokens',unit:'tokens',better:'lower'},uncachedInput:{name:'Uncached input tokens',unit:'tokens',better:'lower'},cachedTokens:{name:'Cached tokens',unit:'tokens',better:'lower'},recordedOutput:{name:'Recorded output tokens',unit:'tokens',better:'lower'},runTotalTokens:{name:'Total run tokens',unit:'tokens',better:'lower'},surgeCostPerTask:{name:'Surge cost per task',unit:'usd',better:'lower'}},
   aliases: { 'Muse Wonder 1.0': 'muse-wonder' },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<{ benchmarks: { id: string; last_updated: string; headline_metric: { unit: string }; results: Run[] }[] }>(FEED);

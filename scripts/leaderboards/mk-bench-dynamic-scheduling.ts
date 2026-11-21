@@ -13,6 +13,7 @@ const models: Record<string, string> = {
 const board: Leaderboard = {
   benchmark: 'mk-bench-dynamic-scheduling', url: feed, feed, static: 'paper',
   terms: 'The authors publish the paper under the license linked at https://arxiv.org/abs/2508.01724.',
+  stats: { avgRank: {name:'Average rank',unit:'rating',better:'lower'} },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const detail = tables.find(t => t[0][0] === 'Instance' && t[2]?.[0] === 'MK01');

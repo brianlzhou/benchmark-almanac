@@ -27,6 +27,11 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Reference only. The terms prohibit automated extraction and require written permission for commercial reuse. The board uses different denominators for text and vision models. https://www.idiom.dk/da/vilkaar The general robots rules allow the benchmark page.",
   parts: { mc: 'Multiple Choice', fillblank: 'Fill in the Blanks', 'definition-writing': 'Definition Writing', translation: 'Translation', context: 'Context', match: 'Match', image: 'Image' },
+  stats: {
+    total: { name: 'Questions attempted', unit: 'count' },
+    correct: { name: 'Questions correct', unit: 'count' },
+    skipped: { name: 'Questions skipped', unit: 'count' },
+  },
   async fetch() {
     const file = ts.createSourceFile('data.js', await fetchText(FEED), ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
     const initializers = file.statements.filter(ts.isVariableStatement).flatMap(s => [...s.declarationList.declarations].map(d => d.initializer));

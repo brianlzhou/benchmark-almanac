@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: URL,
   feed: `${URL} (Table 1)`,
   terms: 'Public research page. robots.txt allows /research/ and the site publishes no terms for it.',
+  stats: { functional: { name: 'Functional pass rate', unit: '%', better: 'higher' }, gds: { name: 'Clean layout pass rate', unit: '%', better: 'higher', note: 'Share of tasks that produce a clean GDS layout.' }, ppa: { name: 'Power, performance, and area', unit: '%', better: 'higher' } },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(URL);
     const t = tables(html).find((rows) => rows[0]?.some((c) => /^score$/i.test(c.text)) && rows[0]?.some((c) => /functional/i.test(c.text)));

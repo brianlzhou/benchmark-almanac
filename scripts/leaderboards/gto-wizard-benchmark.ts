@@ -14,6 +14,10 @@ interface Entry {
 const board: Leaderboard = {
   benchmark: 'gto-wizard-benchmark', url: 'https://benchmark.gtowizard.com/', feed,
   terms: 'The GTO Wizard Benchmark terms apply at https://benchmark.gtowizard.com/terms.',
+  stats: {
+    rawWinRate: { name: 'Raw win rate', unit: 'score', better: 'higher' }, chipsWon: { name: 'Chips won or lost', unit: 'score', better: 'higher' },
+    allHandsChips: { name: 'All-hands chips', unit: 'score', better: 'higher' }, chanceCorrection: { name: 'Chance correction', unit: 'score', better: 'higher' }, actionCorrection: { name: 'Action correction', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const entries = await fetchJson<Entry[]>(feed);
     return checked(entries.map(e => {

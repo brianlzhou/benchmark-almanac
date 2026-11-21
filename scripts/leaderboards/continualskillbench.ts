@@ -12,6 +12,13 @@ const board: Leaderboard = {
   terms:'The authors publish the benchmark under Apache 2.0. https://github.com/gtynnn060110-hash/continual-skill-bench-final/blob/main/LICENSE',
   headline:'The paper reports no overall score, so this is the plain mean of raw rewards across five equally sized domains, expressed as a percentage.',
   parts:Object.fromEntries(domains.map(d => [d,d])),
+  stats:{
+    'Law EM':{name:'Law exact match',unit:'%',better:'higher'}, 'Law Prog.':{name:'Law programming reward',unit:'%',better:'higher'}, 'Law Rubric':{name:'Law rubric reward',unit:'%',better:'higher'}, 'Law Norm.':{name:'Law normalized reward',unit:'%',better:'higher'},
+    'Finance EM':{name:'Finance exact match',unit:'%',better:'higher'}, 'Finance F1':{name:'Finance F1',unit:'%',better:'higher'}, 'Finance Num.':{name:'Finance numeric reward',unit:'%',better:'higher'}, 'Finance Prog.':{name:'Finance programming reward',unit:'%',better:'higher'}, 'Finance Rubric':{name:'Finance rubric reward',unit:'%',better:'higher'}, 'Finance Norm.':{name:'Finance normalized reward',unit:'%',better:'higher'},
+    'Healthcare EM':{name:'Healthcare exact match',unit:'%',better:'higher'}, 'Healthcare Prog.':{name:'Healthcare programming reward',unit:'%',better:'higher'}, 'Healthcare Rubric':{name:'Healthcare rubric reward',unit:'%',better:'higher'}, 'Healthcare Norm.':{name:'Healthcare normalized reward',unit:'%',better:'higher'},
+    'Office EM':{name:'Office exact match',unit:'%',better:'higher'}, 'Office Num.':{name:'Office numeric reward',unit:'%',better:'higher'}, 'Office Prog.':{name:'Office programming reward',unit:'%',better:'higher'}, 'Office Rubric':{name:'Office rubric reward',unit:'%',better:'higher'}, 'Office Norm.':{name:'Office normalized reward',unit:'%',better:'higher'},
+    'Math EM':{name:'Math exact match',unit:'%',better:'higher'}, 'Math Num.':{name:'Math numeric reward',unit:'%',better:'higher'}, 'Math Prog.':{name:'Math programming reward',unit:'%',better:'higher'}, 'Math Rubric':{name:'Math rubric reward',unit:'%',better:'higher'}, 'Math Norm.':{name:'Math normalized reward',unit:'%',better:'higher'},
+  },
   async fetch() {
     const html = await paperHtml(feed);
     const rows: LeaderboardRow[] = [];

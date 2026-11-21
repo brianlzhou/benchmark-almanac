@@ -8,7 +8,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://jaaackhongggg.github.io/WorldSense";
 const board: Leaderboard = {
- benchmark: "worldsense-omnimodal", parts: {
+ benchmark: "worldsense-omnimodal", stats: { Games: { name: 'Games played', unit: 'count' } }, parts: {
   'Tech & Science': { name: 'Tech & science', group: 'Domain' },
   'Culture & Politics': { name: 'Culture & politics', group: 'Domain' },
   'Daily Life': { name: 'Daily life', group: 'Domain' },

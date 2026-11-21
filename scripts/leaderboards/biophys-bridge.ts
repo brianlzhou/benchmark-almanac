@@ -9,6 +9,7 @@ const board: Leaderboard = {
   benchmark: 'biophys-bridge', static: 'paper', feed, url: feed,
   terms: 'The authors release reports under CC BY 4.0. https://github.com/qyxu1994/BioPhys-Bridge#license',
   parts: { derivation: 'Derivation', discrepancy: 'Discrepancy', mechanism: 'Mechanism', 'next experiment': 'Next experiment' },
+  stats:{answerTokenF1:{name:'Answer token F1',unit:'score',better:'higher'},emptyEID:{name:'Empty evidence-ID outputs',unit:'count',better:'lower'}},
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t => t[0]?.join('|') === 'Model|Provider|Evidence-ID F1|Answer token F1|Empty EID outputs');

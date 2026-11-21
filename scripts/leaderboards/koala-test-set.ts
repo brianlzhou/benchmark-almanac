@@ -15,6 +15,10 @@ const board: Leaderboard = {
   static: 'paper',
   terms: 'The chart is published in the BAIR Koala article for research use. https://bair.berkeley.edu/blog/2023/04/03/koala/ The article requests research use of the test set.',
   parts: { alpacaTestSet: 'Alpaca Test Set' },
+  stats: {
+    tied: { name: 'Tied preference judgments', unit: '%', note: 'Human judgments that rated the two responses equally.' },
+    worse: { name: 'Worse preference judgments', unit: '%', better: 'lower', note: 'Human judgments that preferred Koala-All over the named model.' },
+  },
   async fetch() {
     const image = Buffer.from(await fetchBytes(feed));
     if (createHash('sha256').update(image).digest('hex') !== IMAGE_SHA256) throw new Error('Koala results chart changed');

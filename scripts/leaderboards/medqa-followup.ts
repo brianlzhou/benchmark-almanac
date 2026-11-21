@@ -11,6 +11,17 @@ const board: Leaderboard = {
   benchmark: 'medqa-followup', url, feed,
   terms: 'Public Plotly chart published by the MedQA robustness study authors.',
   aliases: { 'anthropic_claude-opus-4-5-20251101': 'claude-opus-4-5', 'gemini_gemini-3-pro-preview': 'gemini-3-pro' },
+  stats: {
+    'Authority Prior': { name: 'Authority prior change', unit: 'score' }, 'Authority Prior flip rate': { name: 'Authority prior flip rate', unit: '%', better: 'lower' },
+    'Autograder Prior': { name: 'Autograder prior change', unit: 'score' }, 'Autograder Prior flip rate': { name: 'Autograder prior flip rate', unit: '%', better: 'lower' },
+    'Commitment Alignment': { name: 'Commitment alignment change', unit: 'score' }, 'Commitment Alignment flip rate': { name: 'Commitment alignment flip rate', unit: '%', better: 'lower' },
+    'Recency Prior': { name: 'Recency prior change', unit: 'score' }, 'Recency Prior flip rate': { name: 'Recency prior flip rate', unit: '%', better: 'lower' },
+    'Social Proof Prior': { name: 'Social proof prior change', unit: 'score' }, 'Social Proof Prior flip rate': { name: 'Social proof prior flip rate', unit: '%', better: 'lower' },
+    'RAG-Style': { name: 'RAG-style change', unit: 'score' }, 'RAG-Style flip rate': { name: 'RAG-style flip rate', unit: '%', better: 'lower' },
+    'Alternative': { name: 'Alternative change', unit: 'score' }, 'Alternative flip rate': { name: 'Alternative intervention flip rate', unit: '%', better: 'lower' },
+    'Edge Case': { name: 'Edge case change', unit: 'score' }, 'Edge Case flip rate': { name: 'Edge case flip rate', unit: '%', better: 'lower' },
+    Average: { name: 'Average change', unit: 'score' }, 'Average flip rate': { name: 'Average intervention flip rate', unit: '%', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const plot = html.lastIndexOf('Plotly.newPlot(');

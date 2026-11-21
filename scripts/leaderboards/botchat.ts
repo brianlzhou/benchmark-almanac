@@ -10,6 +10,7 @@ const board: Leaderboard = {
   url: "https://open-compass.github.io/BotChat/",
   feed,
   terms: "The publisher links the board at https://open-compass.github.io/BotChat/. Separate results licensing remains unverified. The raw GitHub host and project site return 404 for robots.txt.",
+  stats: { elo16: { name: 'Elo at 16 turns', unit: 'elo', better: 'higher' }, elo8: { name: 'Elo at 8 turns', unit: 'elo', better: 'higher' }, uniEval16: { name: 'Uni-Eval at 16 turns', unit: 'score', better: 'higher' }, uniEval8: { name: 'Uni-Eval at 8 turns', unit: 'score', better: 'higher' }, utteranceTokens: { name: 'Utterance tokens', unit: 'tokens' } },
   aliases: { "Internlm-20B-Chat": "internlm-chat-20b" },
   async fetch() {
     const entries = parseCsv((await fetchText(feed)).replace(/^\uFEFF/, ''));

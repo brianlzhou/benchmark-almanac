@@ -14,6 +14,7 @@ const teams: Record<string, string[]> = {
 const board: Leaderboard = {
   benchmark: 'dravidianlangtech-2026-multilevel-political-memes', url: feed, feed, harnesses: 'system',
   terms: 'The ACL Anthology publishes the paper under its copyright policy. https://aclanthology.org/faq/copyright/',
+  stats: { malayalamStanceF1: { name: 'Malayalam stance F1', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' }, malayalamTargetF1: { name: 'Malayalam target F1', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' }, tamilStanceF1: { name: 'Tamil stance F1', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' }, tamilTargetF1: { name: 'Tamil target F1', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' } },
   parts: { tamil: 'Tamil', malayalam: 'Malayalam' },
   async fetch() {
     const paper = await pdfText(feed);

@@ -7,6 +7,10 @@ const FEED = 'https://raw.githubusercontent.com/nagu-io/agent-settlement-bench/m
 const board: Leaderboard = {
   benchmark: 'agent-settlement-bench', url: 'https://github.com/nagu-io/agent-settlement-bench', feed: FEED,
   terms: 'The repository is public under its stated license. Source attribution applies.',
+  stats: {
+    criticalFailRate: { name: 'Critical failure rate', unit: '%', better: 'lower' },
+    riskWeightedFail: { name: 'Risk-weighted failure rate', unit: '%', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(FEED); const sec = text.split('## Result Snapshot')[1]?.split('## Mental Model')[0]; if (!sec) throw new Error('AgentSettlementBench table missing');
     const rows: LeaderboardRow[] = [];

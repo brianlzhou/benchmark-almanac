@@ -15,6 +15,7 @@ const board: Leaderboard = {
   url: 'https://arxiv.org/abs/2606.03829',
   feed: FEED,
   terms: PAPER_TERMS,
+  stats:{answerAccuracy:{name:'Answer accuracy',unit:'%',better:'higher'},rubricCriteria:{name:'Rubric criteria score',unit:'%',better:'higher'}},
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(FEED));
     const table = tables.find(t => t[0]?.[0] === "Model" && t[0]?.[1] === "Rubric score" && t[0]?.[2] === "Answer acc." && t[0]?.[3] === "Rubric criteria");

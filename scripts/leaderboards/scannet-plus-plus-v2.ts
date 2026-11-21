@@ -13,6 +13,7 @@ const board: Leaderboard = {
   url: "https://kaldir.vc.in.tum.de/scannetpp/benchmark/nvs_iphone",
   feed: FEED,
   terms: "The dataset agreement limits data use to noncommercial research. It does not separately license leaderboard scores. https://kaldir.vc.in.tum.de/scannetpp/static/scannetpp-terms-of-use.pdf https://kaldir.vc.in.tum.de/scannetpp/benchmark/nvs_iphone",
+  stats: { 'PSNR (RAW)': { name: 'Raw PSNR', unit: 'score', better: 'higher' }, 'SSIM (RAW)': { name: 'Raw SSIM', unit: 'score', better: 'higher' }, 'LPIPS (RAW)': { name: 'Raw LPIPS', unit: 'score', better: 'lower' }, 'PSNR (CC)': { name: 'Color-corrected PSNR', unit: 'score', better: 'higher' }, 'SSIM (CC)': { name: 'Color-corrected SSIM', unit: 'score', better: 'higher' }, 'LPIPS (CC)': { name: 'Color-corrected LPIPS', unit: 'score', better: 'lower' } },
   async fetch() {
     const table = tables((await fetchText(FEED)).replace(/<!--[\s\S]*?-->/g,'')).find(t => t[0]?.[0]?.text === 'Methods');
     if (!table || table[0].map(c=>c.text).join('|') !== columns.join('|') || !table[0][5].html.replace(/<!--[\s\S]*?-->/g,'').includes('bi-sort-down')) throw new Error('Unexpected ScanNet++ columns or default ranking');

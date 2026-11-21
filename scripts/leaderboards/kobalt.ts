@@ -23,6 +23,7 @@ const board: Leaderboard = {
   Phonetics: { name: 'Phonetics', group: 'Category' },
 }, url: "https://huggingface.co/datasets/snunlp/KoBALT-700", feed: FEED,
   terms: "KoBALT dataset card is licensed CC BY-NC 4.0.",
+  stats: { Semantics: { name: 'Semantics accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const source = await fetchText(FEED);
     const all = markdownTables(source);

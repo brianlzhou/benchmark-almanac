@@ -8,6 +8,15 @@ const feed='https://arxiv.org/html/2602.13964';
 export default {
  benchmark:'hle-verified', static: 'paper', parts: {
   revisedSubsetAccuracy: { name: 'Revised subset', group: 'Split' },
+}, stats: {
+  calibrationError:{name:'Revised full calibration error',unit:'%',better:'lower'},
+  rawHleAccuracy:{name:'Raw HLE accuracy',unit:'%',better:'higher'},
+  rawCalibrationError:{name:'Raw full calibration error',unit:'%',better:'lower'},
+  accuracyChange:{name:'Full accuracy change',unit:'%',better:'higher'},
+  rawSubsetAccuracy:{name:'Raw subset accuracy',unit:'%',better:'higher'},
+  rawSubsetCalibrationError:{name:'Raw subset calibration error',unit:'%',better:'lower'},
+  subsetAccuracyChange:{name:'Subset accuracy change',unit:'%',better:'higher'},
+  revisedSubsetCalibrationError:{name:'Revised subset calibration error',unit:'%',better:'lower'},
 },url:'https://arxiv.org/abs/2602.13964',feed,terms:PAPER_TERMS,
  async fetch():Promise<LeaderboardRow[]> {
   const t=inlinePaperTables(await paperHtml(feed)).find(t=>t[1]?.[3]==='Revised: HLE-Verified Full');

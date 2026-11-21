@@ -4,6 +4,7 @@ import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2605.07024";
 const board:Leaderboard={benchmark:"delulu", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
+ stats:{exactMatch:{name:'Exact match',unit:'%',better:'higher'},editSimilarity:{name:'Edit similarity',unit:'score',better:'higher'},codeBleu:{name:'CodeBLEU',unit:'score',better:'higher'},hallucinationRate:{name:'Hallucination rate',unit:'%',better:'lower'}},
  parts: {import: {name: 'Import', group: 'Hallucination type'}, method: {name: 'Method', group: 'Hallucination type'},
    parameter: {name: 'Parameter', group: 'Hallucination type'}, undefinedVariable: {name: 'Undef. Var.', group: 'Hallucination type'}},
  async fetch(){

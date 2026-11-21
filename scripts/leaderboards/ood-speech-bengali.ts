@@ -10,6 +10,10 @@ const board: Leaderboard = {
   url: "https://www.kaggle.com/competitions/bengaliai-speech/leaderboard",
   feed,
   terms: "Kaggle's robots URL returns HTML. Table 2 compares two systems on the paper partitions by domain. Kaggle has a separate private ranking. The paper does not state a score reuse license. https://arxiv.org/pdf/2305.09688",
+  stats: {
+    publicWer: { name: 'Public word error rate', unit: '%', better: 'lower' },
+    submissions: { name: 'Submissions', unit: 'count' },
+  },
   async fetch() {
     const data = await fetchJson<{privateLeaderboard: Entry[]; publicLeaderboard: Entry[]; teams: Team[]}>(feed, {
       method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({competitionId: 52324}) });

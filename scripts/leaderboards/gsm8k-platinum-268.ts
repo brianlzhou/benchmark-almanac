@@ -3,7 +3,7 @@ import {fetchText} from '../lib/util.ts';
 import {jsLiteral} from '../lib/html.ts';
 import full from './gsm8k-platinum.ts';
 const PAGE='http://platinum-bench.csail.mit.edu/';
-const board:Leaderboard={benchmark:'gsm8k-platinum-268',url:PAGE,feed:PAGE+' (matrix bundle)',aliases:{...full.aliases,'gemini-2.5-pro-exp-03-25':'gemini-2-5-pro-mar-2025'},terms:'Official MIT result matrix. The Almanac credits and links the source.',async fetch(){
+const board:Leaderboard={benchmark:'gsm8k-platinum-268',url:PAGE,feed:PAGE+' (matrix bundle)',aliases:{...full.aliases,'gemini-2.5-pro-exp-03-25':'gemini-2-5-pro-mar-2025'},terms:'Official MIT result matrix. The Almanac credits and links the source.',stats:{errors:{name:'Errors',unit:'count'},questions:{name:'Questions',unit:'count'}},async fetch(){
  const html=await fetchText(PAGE);
  for(const src of [...new Set([...html.matchAll(/<script[^>]+src="([^"]+\.js)"/g)].map(m=>m[1]))]){
   await new Promise(r=>setTimeout(r,1050));const s=await fetchText(new URL(src,PAGE).href),at=s.indexOf('gsm8k:['),names=s.indexOf(',o=[');

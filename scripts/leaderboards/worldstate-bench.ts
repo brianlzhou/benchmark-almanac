@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: "The project states no separate terms for the scores. Its GitHub Pages host provides no applicable robots rules.",
   aliases: { 'Wan2.2 A14B': 'wan2-2-i2v-a14b' },
   harnesses: 'system',
+  stats: { endFollow: { name: 'End follow', unit: '%', better: 'higher' }, twinContrast: { name: 'Twin contrast', unit: '%', better: 'higher' }, strict: { name: 'Strict', unit: '%', better: 'higher' }, cntAbsent: { name: 'Count absent', unit: '%', better: 'higher' }, pairStrict: { name: 'Pair strict', unit: '%', better: 'higher' } },
   async fetch() {
     const page = await fetchText(feed);
     const table = tables(page.match(/<table id="results-table">[\s\S]*?<\/table>/)?.[0] ?? '')[0];

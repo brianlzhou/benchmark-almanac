@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://bimbench.com/?experiment=revit-eaves-002",
   feed,
   terms: "BIM Bench allows its public datasets in robots.txt and disallows /api. The methodology gives no explicit reuse license.",
+  stats: { cachedInput: { name: 'Cached input tokens', unit: 'tokens' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, ratings: { name: 'Ratings', unit: 'rating' }, steps: { name: 'Steps', unit: 'count' }, voters: { name: 'Voters', unit: 'count' } },
   async fetch() {
     const data = await fetchJson<{ id: string; models: { id: string; name: string }[]; runs: {
       id: string; model: string; effort: string; pdf: string; elapsedSeconds: number; costUsd: number; steps: number;

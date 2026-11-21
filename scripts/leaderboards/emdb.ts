@@ -10,6 +10,15 @@ const measures = ['MPJPE','MPJPE-PA','MVE','MVE-PA','MPJAE','MPJAE-PA','Jitter']
 const board: Leaderboard = {
   benchmark: 'emdb', url: 'https://eth-ait.github.io/emdb/', feed, static: 'paper',
   terms: 'The authors publish their paper on the EMDB project site, which uses CC BY-SA 4.0. https://eth-ait.github.io/emdb/',
+  stats: {
+    Jitter: { name: 'Motion jitter', unit: 'score', better: 'lower', note: 'Reported in units of 10 m s^-3.' },
+    MPJAE: { name: 'Mean per-joint angular error', unit: 'score', better: 'lower', note: 'Degrees.' },
+    'MPJAE-PA': { name: 'Procrustes aligned mean per-joint angular error', unit: 'score', better: 'lower', note: 'Degrees.' },
+    MPJPE: { name: 'Mean per-joint position error', unit: 'score', better: 'lower', note: 'Millimeters.' },
+    'MPJPE-PA': { name: 'Procrustes aligned mean per-joint position error', unit: 'score', better: 'lower', note: 'Millimeters.' },
+    MVE: { name: 'Mean vertex error', unit: 'score', better: 'lower', note: 'Millimeters.' },
+    'MVE-PA': { name: 'Procrustes aligned mean vertex error', unit: 'score', better: 'lower', note: 'Millimeters.' },
+  },
   headline: 'Table 3 ranks models by aligned joint position error on EMDB 1, measured in millimeters.',
   async fetch() {
     const paper = await pdfText(feed);

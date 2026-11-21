@@ -28,6 +28,10 @@ const board: Leaderboard = {
   },
   harnesses: 'system',
   reference: ['Terminus 2'],
+  stats: {
+    partial: { name: 'Mean partial score', unit: '%', better: 'higher', note: 'Mean uncalibrated partial score across trials.' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens', note: 'Mean total tokens used per trial.' },
+  },
   async fetch() {
     const { js } = await swemBundle();
     const at = js.search(/\[\{rank:`Ref`,id:`oracle`/);

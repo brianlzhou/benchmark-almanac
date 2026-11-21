@@ -40,6 +40,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (Next.js page payload: leaderboard and agents)`,
   terms: 'Data embedded in the public page (robots.txt allows it and disallows only /api/ and /unlock); Snorkel publishes no terms for the site.',
+  stats: { pass3: { name: 'Pass all three', unit: '%', better: 'higher' }, passAt3: { name: 'Pass at 3', unit: '%', better: 'higher' }, steps: { name: 'Steps per task', unit: 'count' } },
   aliases: {
     // anthropic/claude-horchata-eap, which the page names Opus 5
     'Opus 5': 'claude-opus-5',

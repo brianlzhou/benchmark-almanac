@@ -10,6 +10,11 @@ const board: Leaderboard = {
   url: "https://yhenon.github.io/surface-evolver-llm-eval/assets/charts/performance.html",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
+  stats: {
+    passRate: { name: 'Pass rate', unit: '%', better: 'higher' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' },
+    runs: { name: 'Runs', unit: 'count' },
+  },
   chart: {"title": "Surface Evolver score versus cost", "x": {"key": "cost", "label": "Mean cost per task", "unit": "$", "better": "lower"}, "y": {"key": "score", "label": "Mean score", "unit": "%", "better": "higher"}},
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {

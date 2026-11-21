@@ -30,6 +30,11 @@ const board: Leaderboard = {
   feed,
   terms: "The chart gives no reuse license. The separate round dataset lists MIT. The host has no robots.txt.",
   parts: { easy: { name: 'Easy', unit: '%' }, medium: { name: 'Medium', unit: '%' }, hard: { name: 'Hard', unit: '%' } },
+  stats: {
+    wordPercentile: { name: 'Word percentile', unit: '%', better: 'higher' },
+    possibleWords: { name: 'Possible words', unit: 'count' },
+    medianTurnSeconds: { name: 'Median turn time', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     return checkedImageRows(feed, 'faa19b14fa87349500740711dd206deaf7045aa3cd730bc010d6cfd1db47fd6f',
       standings.map(([model, score, wordPercentile, easy, medium, hard, possibleWords, medianTurnSeconds]) => ({

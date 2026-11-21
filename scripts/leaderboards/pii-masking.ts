@@ -8,6 +8,7 @@ const board: Leaderboard = {
   url: "https://app.primeintellect.ai/dashboard/environments/adamlucek/pii-masking/evals",
   feed: primeFeed(env),
   terms: primeTerms,
+  stats: { exact_match_reward: { name: 'Exact match reward', unit: 'score', better: 'higher' }, format_reward_func: { name: 'Format reward', unit: 'score', better: 'higher' }, pii_count_reward: { name: 'PII count reward', unit: 'score', better: 'higher' } },
   fetch() { return primeRows(this.url, env, 1, 7); },
 };
 export default board;

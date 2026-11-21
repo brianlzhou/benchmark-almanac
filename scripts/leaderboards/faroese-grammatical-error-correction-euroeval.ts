@@ -9,6 +9,10 @@ const board: Leaderboard = {
   url: "https://euroeval.com/leaderboards/faroese",
   feed: FEED,
   terms: "Use the grammatical correction column. It has 248 test runs for 245 models and 183 validation runs. The source corpus restricts redistribution. https://mtd.setur.fo/resource/villugrunnur/ EuroEval robots.txt allows the leaderboard and bundle.",
+  stats: {
+    scored: { name: 'Scored examples', unit: 'count' },
+    failures: { name: 'Failures', unit: 'count', better: 'lower' },
+  },
   aliases: {"mistralai/Mistral-Small-3.2-24B-Instruct-2506": "mistral-small-3-2", "mistralai/Mistral-Small-3.1-24B-Instruct-2503": "mistral-small-3-1"},
   async fetch() {
     const bundle = await fetchText(FEED);

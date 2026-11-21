@@ -33,6 +33,7 @@ const board: Leaderboard = {
     'together/mistralai/Mixtral-8x22B-Instruct-v0.1': 'mixtral-8x22b',
   },
   parts,
+  stats: { priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
   async fetch() {
     const html = await fetchText(this.url);
     const table = tables(html)[0];

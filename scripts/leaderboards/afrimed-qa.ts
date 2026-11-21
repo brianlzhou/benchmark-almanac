@@ -8,6 +8,12 @@ const FEED = 'https://raw.githubusercontent.com/intron-innovation/AfriMed-QA/mas
 const board: Leaderboard = {
   benchmark: 'afrimed-qa', url: 'https://github.com/intron-innovation/AfriMed-QA#model-performance-metrics', feed: FEED,
   terms: 'Public author-published results in the AfriMed-QA repository. Benchmark Almanac credits the AfriMed-QA team and links the source.',
+  stats: {
+    usmle: { name: 'United States Medical Licensing Examination accuracy', unit: '%', better: 'higher' },
+    afrimed_experts: { name: 'AfriMed experts accuracy', unit: '%', better: 'higher' },
+    afr_mcq: { name: 'AfriMed multiple-choice accuracy', unit: '%', better: 'higher' },
+    afr_saq_bertscore: { name: 'AfriMed short-answer BERTScore', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const text = await fetchText(FEED);
     const section = text.split('## No Explanation (MCQ - Accuracy, SAQ BertScore)')[1]?.split('## With Explanations')[0];

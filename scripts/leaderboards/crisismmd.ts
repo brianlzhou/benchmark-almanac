@@ -10,6 +10,14 @@ const models = { Text: 'CNN', Image: 'VGG16', 'Text + Image': 'Multimodal' };
 const board: Leaderboard = {
   benchmark: 'crisismmd', static: 'paper', url: feed, feed,
   terms: 'The authors publish these baseline tables in the ISCRAM proceedings. ' + feed,
+  stats: {
+    informativenessPrecision: { name: 'Informativeness precision', unit: '%', better: 'higher' },
+    informativenessRecall: { name: 'Informativeness recall', unit: '%', better: 'higher' },
+    informativenessF1: { name: 'Informativeness F1 score', unit: '%', better: 'higher' },
+    humanitarianPrecision: { name: 'Humanitarian precision', unit: '%', better: 'higher' },
+    humanitarianRecall: { name: 'Humanitarian recall', unit: '%', better: 'higher' },
+    humanitarianF1: { name: 'Humanitarian F1 score', unit: '%', better: 'higher' },
+  },
   parts: { informativeness: 'Informativeness', humanitarian: 'Humanitarian' },
   headline: 'The headline averages accuracy on informativeness and humanitarian classification for examples with matching text and image labels.',
   async fetch() {

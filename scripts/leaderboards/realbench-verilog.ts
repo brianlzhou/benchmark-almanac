@@ -9,7 +9,7 @@ const feed = 'https://arxiv.org/pdf/2507.16200';
 const board: Leaderboard = {
   benchmark: 'realbench-verilog', static: 'paper', url: 'https://arxiv.org/abs/2507.16200', feed,
   terms: 'The authors publish the results in the arXiv paper. https://arxiv.org/abs/2507.16200',
-  parts: { syntaxAt1: 'Syntax pass@1', syntaxAt5: 'Syntax pass@5', funcAt1: 'Functional pass@1', funcAt5: 'Functional pass@5', formalAt1: 'Formal pass@1', formalAt5: 'Formal pass@5' },
+  parts: { syntaxAt1: 'Syntax pass@1', syntaxAt5: 'Syntax pass@5', funcAt1: 'Functional pass@1', funcAt5: 'Functional pass@5', formalAt1: 'Formal pass@1', formalAt5: 'Formal pass@5', moduleSyntax: 'Module syntax pass@1', moduleSyntaxAt5: 'Module syntax pass@5', moduleFunction: 'Module functional pass@1', moduleFunctionAt5: 'Module functional pass@5', moduleFormal: 'Module formal pass@1', moduleFormalAt5: 'Module formal pass@5', systemSyntax: 'System syntax pass@1', systemSyntaxAt5: 'System syntax pass@5' },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await pdfText(feed);
     if (!text.includes('RealBench-\n                    func@1')) throw new Error('RealBench module table missing');

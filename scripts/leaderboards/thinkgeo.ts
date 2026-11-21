@@ -13,6 +13,7 @@ const board: Leaderboard = {
   feed,
   terms: "The agent can use code. Axis Spatial restricts the tasks to outputs its checks can verify. Axis Spatial permits reuse of scores and charts with credit and a link to the source page. https://www.axisspatial.com/arena/methodology/data-policy The public evaluation page is allowed in robots.txt.",
   host:'Axis Spatial',aliases:index.aliases,
+  stats: { uncachedInput:{name:'Uncached input tokens',unit:'tokens'}, cachedInput:{name:'Cached input tokens',unit:'tokens'}, output:{name:'Output tokens',unit:'tokens'}, totalTokens:{name:'Total tokens',unit:'tokens'}, uncachedInputCost:{name:'Uncached input cost',unit:'usd',better:'lower'}, cachedInputCost:{name:'Cached input cost',unit:'usd',better:'lower'}, outputCost:{name:'Output cost',unit:'usd',better:'lower'}, unsplitCost:{name:'Unsplit cost',unit:'usd',better:'lower'}, normalizedTimeSeconds:{name:'Normalized time',unit:'seconds',better:'lower'} },
   async fetch(){
     const all=tables(await fetchText(feed));
     const byColumn=(col:string)=>new Map(all.filter(t=>t[0].some(c=>c.text===col)).flatMap(t=>t.slice(1).map(r=>[r[0].text,r] as const)));

@@ -6,9 +6,12 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://www.repository.cam.ac.uk/bitstreams/346885c7-a7f7-4560-8f77-9ade6e923408/download';
 const models = ['Qwen-2.5-Coder-32B', 'GPT-4.1-nano', 'Gemini-2.5-Flash', 'DeepSeek-V3', 'GPT-4.1', 'Claude-3.7-Sonnet', 'GPT-5'];
+const analogParts = Object.fromEntries(Array.from({ length: 29 }, (_, i) => [`task${i + 1}PassAt5`, `Task ${i + 1} pass@5`]));
 const board: Leaderboard = {
   benchmark: 'analogcoder-pro', feed, url: 'https://doi.org/10.1109/TCAD.2026.3673493', static: 'paper',
   terms: 'The University of Cambridge hosts the authors’ manuscript. https://www.repository.cam.ac.uk/handle/1810/400930',
+  parts: analogParts,
+  stats: { passAt5: { name: 'Pass at 5', unit: '%', better: 'higher' }, solved: { name: 'Solved tasks', unit: 'count' } },
   aliases: { 'Qwen-2.5-Coder-32B': 'qwen2-5-coder-32b' },
   async fetch() {
     const paper = await pdfText(feed);

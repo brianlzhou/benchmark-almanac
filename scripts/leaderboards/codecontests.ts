@@ -12,6 +12,10 @@ const board: Leaderboard = {
   benchmark:'codecontests', host:'SOTA2 Research', harnesses:'system', url:feed, feed,
   terms:'SOTA2 attributes each result to its reporting paper. ' + feed,
   aliases:{'Llama3.1-70B-Instruct':'llama-3-1-70b','Llama3.1-8B-Instruct':'llama-3-1-8b','Gemma3-27B-it':'gemma-3-27b'},
+  stats:{
+    passAt2:{name:'Pass@2',unit:'%',better:'higher'},
+    passAt5:{name:'Pass@5',unit:'%',better:'higher'},
+  },
   async fetch(){
     const data = nextFlight(await fetchText(feed));
     const start = data.indexOf('"results":{"benchmarkId"');

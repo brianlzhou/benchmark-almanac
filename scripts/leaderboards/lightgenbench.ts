@@ -8,6 +8,7 @@ import { checked, grid, paperTables } from '../lib/boards/arxiv-span-tables.ts';
 const url = 'https://arxiv.org/html/2610.39038';
 const board: Leaderboard = {
   benchmark: 'lightgenbench', static: 'paper', url, feed: url, terms: PAPER_TERMS,
+  stats:{mae:{name:'Mean absolute error',unit:'score',better:'lower'},psnr:{name:'Peak signal-to-noise ratio',unit:'score',better:'higher'},precision:{name:'Precision',unit:'score',better:'higher',note:'Rate from 0 to 1.'},recall:{name:'Recall',unit:'score',better:'higher',note:'Rate from 0 to 1.'},f1:{name:'F1',unit:'score',better:'higher',note:'Rate from 0 to 1.'},maskMae:{name:'Mask mean absolute error',unit:'score',better:'lower'},maskPsnr:{name:'Mask peak signal-to-noise ratio',unit:'score',better:'higher'},meanRank:{name:'Mean rank',unit:'count',better:'lower'},firstPlacePct:{name:'First-place rate',unit:'%',better:'higher'}},
   async fetch() {
     const tables = paperTables(await paperHtml(url)).map(grid);
     const main = tables.find(t => t[0][1]?.startsWith('IoU') && t[0][2]?.startsWith('MAE') && t[0][3]?.startsWith('PSNR'));

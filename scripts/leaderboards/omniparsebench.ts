@@ -20,6 +20,7 @@ const board: Leaderboard = {
   url: 'https://github.com/datalab-to/omni_parse_bench',
   feed: `${FEED} (Results table, headline)`,
   terms: 'README table in the datalab-to/omni_parse_bench repository (code Apache-2.0); only the published numbers are read.',
+  stats: { refusals: { name: 'Refusals', unit: 'count', better: 'lower' } },
   async fetch() {
     const md = await fetchText(FEED);
     const lines = md.slice(md.indexOf('## Results')).split('\n').filter((l) => l.startsWith('|'));

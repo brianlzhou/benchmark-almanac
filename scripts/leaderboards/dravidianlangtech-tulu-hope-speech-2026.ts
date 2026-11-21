@@ -13,6 +13,20 @@ const board: Leaderboard = {
   static: 'paper',
   benchmark: 'dravidianlangtech-tulu-hope-speech-2026', url: feed, feed,
   terms: 'ACL Anthology copyright and licensing. https://aclanthology.org/faq/copyright/',
+  stats: {
+    toneAccuracy: { name: 'Tone accuracy', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    toneMacroF1: { name: 'Tone macro F1', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    toneMacroPrecision: { name: 'Tone macro precision', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    toneMacroRecall: { name: 'Tone macro recall', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    toneRank: { name: 'Tone rank', unit: 'count', better: 'lower' },
+    toneWeightedPrecision: { name: 'Tone weighted precision', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    typeAccuracy: { name: 'Type accuracy', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    typeMacroF1: { name: 'Type macro F1', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    typeMacroPrecision: { name: 'Type macro precision', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    typeMacroRecall: { name: 'Type macro recall', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+    typeRank: { name: 'Type rank', unit: 'count', better: 'lower' },
+    typeWeightedPrecision: { name: 'Type weighted precision', unit: 'score', better: 'higher', note: 'Reported as a fraction from 0 to 1.' },
+  },
   headline: 'Plain mean of the macro F1 scores on hope tone and hope type.', parts,
   async fetch() {
     const paper = await pdfText(feed);

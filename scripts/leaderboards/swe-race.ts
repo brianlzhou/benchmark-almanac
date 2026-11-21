@@ -10,6 +10,14 @@ const parts = { hard: 'Hard', public: 'Public', private: 'Private', composite: '
 const board: Leaderboard = {
   benchmark: 'swe-race', url: 'https://labs.evaligo.com/swe-race', feed, parts, reference: ['BenchGen'],
   terms: 'Evaligo links the public results JSON from its benchmark page.',
+  stats: {
+    costPerSolved: { name: 'Cost per solved task', unit: 'usd', better: 'lower' },
+    steps: { name: 'Steps', unit: 'count', better: 'lower' },
+    tasks: { name: 'Tasks', unit: 'count' },
+    attemptsPerTask: { name: 'Attempts per task', unit: 'count', better: 'lower' },
+    passAtK: { name: 'Pass@k', unit: '%', better: 'higher' },
+    tokensPerAttempt: { name: 'Tokens per attempt', unit: 'tokens', better: 'lower' },
+  },
   async fetch() {
     const d = await fetchJson<{ benchmark: string; models: Record<string,{ name: string; views: Record<string,Result> }> }>(feed);
     if (d.benchmark !== 'SWE-Race' || Object.keys(d.models).length < 3) throw new Error('Missing SWE-Race models');

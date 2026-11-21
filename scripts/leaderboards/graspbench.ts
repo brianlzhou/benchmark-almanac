@@ -7,6 +7,14 @@ const feed = 'https://arxiv.org/html/2611.07651';
 const board: Leaderboard = {
   benchmark:'graspbench', url:'https://github.com/bk-poudel/GraspBench', feed, static:'paper',
   terms:'The authors publish the results in https://arxiv.org/abs/2611.07651.',
+  stats:{
+    successful:{name:'Successful scenarios',unit:'count'},
+    missing:{name:'Missing outputs',unit:'count'},
+    candidateMean:{name:'Mean candidates',unit:'count'},
+    candidateMedian:{name:'Median candidates',unit:'count'},
+    ikMax:{name:'Maximum inverse-kinematics iterations',unit:'count'},
+    successGivenRecord:{name:'Success among returned records',unit:'%',better:'higher'},
+  },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const main = tables.find(t=>t[0].join('|')==='Method|Success n/540 (%)|95% int. (%)|Missing|Cand. mean/med.|IK max');

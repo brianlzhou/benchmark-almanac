@@ -10,6 +10,9 @@ const board: Leaderboard = {
   url: "https://aichallenge.hcmus.edu.vn/shrec-2025/smart3droom#h.a8wvullqsccv_l",
   feed,
   terms: "The organizers claim copyright on the results page. The paper permits academic access to the dataset. https://aichallenge.hcmus.edu.vn/shrec-2025/smart3droom The competition host returns 404 for robots.txt.",
+  stats: {
+    recallAt1: { name: 'Recall at 1', unit: 'score', better: 'higher', note: 'Fraction of queries whose correct object is ranked first, stored from 0 to 1.' },
+  },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === 'Team|R@1|R@5|R@10|MRR');
     if (!t || t.length < 6) throw new Error('Missing ROOMELSA finalists');

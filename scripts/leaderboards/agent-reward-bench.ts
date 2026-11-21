@@ -10,6 +10,7 @@ const board:Leaderboard={benchmark:'agent-reward-bench', parts: {
   'Work++': { name: 'WorkArena++', group: 'Split' },
 },url:'https://huggingface.co/spaces/McGill-NLP/agent-reward-bench-leaderboard',feed:FEED,
  terms:'Apache-2.0 Space; Hugging Face robots.txt permits this public raw results path.',
+ stats: { Recall: { name: 'Recall score', unit: '%', better: 'higher' }, F1: { name: 'F1 score', unit: '%', better: 'higher' } },
  async fetch(){
   const data=(await fetchText(FEED)).trim().split(/\r?\n/).map(l=>JSON.parse(l) as Record<string,unknown>);
   const rows=data.filter(r=>r.Judge!=='Rule-based').map(r=>{

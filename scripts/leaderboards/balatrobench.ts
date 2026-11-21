@@ -26,6 +26,7 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${CDN}/<latest version>/default/leaderboard.json (avg_round)`,
   terms: 'JSON files on the CDN the balatrobench.com page reads; balatrobench.com robots.txt allows all and the site states no terms; the coder/balatrobench repository is MIT-licensed.',
+  stats: { inputTokens:{name:'Input tokens',unit:'tokens'}, toolCalls:{name:'Tool calls',unit:'count'}, successfulCalls:{name:'Successful calls',unit:'count'}, errorCalls:{name:'Error calls',unit:'count'}, failedCalls:{name:'Failed calls',unit:'count'}, latency:{name:'Latency',unit:'seconds',better:'lower'}, wins:{name:'Wins',unit:'count'}, completed:{name:'Completed runs',unit:'count'}, inputTokensPerCall:{name:'Input tokens per call',unit:'tokens'}, outputTokensPerCall:{name:'Output tokens per call',unit:'tokens'}, costPerCall:{name:'Cost per call',unit:'usd',better:'lower'}, secondsPerCall:{name:'Seconds per call',unit:'seconds',better:'lower'} },
   async fetch(): Promise<LeaderboardRow[]> {
     const manifest = await fetchJson<{ versions: { version: string; latest?: boolean }[] }>(`${CDN}/manifest.json`);
     const version = manifest.versions.find((v) => v.latest)?.version ?? manifest.versions.at(-1)?.version;
