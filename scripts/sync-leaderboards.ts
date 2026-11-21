@@ -57,7 +57,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; stats?: Leaderboard['stats']; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -219,6 +219,8 @@ for (const f of files) {
     // and so is how it makes the headline score
     if (board.headline) kept.headline = board.headline;
     else delete kept.headline;
+    if (board.stats && Object.keys(board.stats).length) kept.stats = board.stats;
+    else delete kept.stats;
     if (board.static) kept.static = board.static;
     else delete kept.static;
     // so are the parts it declares up front. Parts an importer sets inside fetch() wait for its next read.
@@ -294,7 +296,7 @@ for (const f of files) {
     store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(others);
     const parts = partsOf(board, [...rows, ...others]);
     const measures = measuresOf(board, [...rows, ...others]);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(measures ? { measures } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(board.stats && Object.keys(board.stats).length ? { stats: board.stats } : {}), ...(measures ? { measures } : {}) };
   } catch (e) {
     failed++;
     const error = (e as Error).message;

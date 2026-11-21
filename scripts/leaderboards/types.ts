@@ -139,6 +139,13 @@ export interface Leaderboard {
    */
   parts?: Record<string, string | BoardPart>;
   /**
+   * The board's other numbers for each run, kept in each row's `metrics`: a behavior rate, a preference, a count,
+   * latency. Unlike parts, they measure the same run in another way rather than one slice of the test. Each gets a
+   * name, a unit and a direction, so the benchmark page can rank entries by it, show it in the measures table and
+   * plot it ("Everything the board measures").
+   */
+  stats?: Record<string, BoardStat>;
+  /**
    * Columns that hold another of the benchmark's measures (Benchmark.measures in data/benchmarks.json): metric key
    * -> measure id, such as { partial: 'score' } for a board whose "Score" column is the partial credit labs quote
    * beside its pass rate. Lab numbers on that measure are then compared with this column, never the headline.
@@ -147,6 +154,18 @@ export interface Leaderboard {
   fetch(): Promise<LeaderboardRow[]>;
 }
 /** One part of a benchmark that a board scores on its own. */
+/** One of a board's other numbers (`Leaderboard.stats`). */
+export interface BoardStat {
+  /** The measure's name, as readers should see it: "Lie rate", "Agent preference". */
+  name: string;
+  /** One of the catalog's units ('%', 'score', 'elo', 'rating', 'usd', 'minutes', ...), or 'count' or 'tokens'. */
+  unit?: string;
+  /** Which way is better. Leave it out only when the board itself says neither is. */
+  better?: 'higher' | 'lower';
+  /** One sentence on what it counts, where the name doesn't say. */
+  note?: string;
+}
+
 export interface BoardPart {
   /** The part's name, as the board gives it: "Teen users", "Hard", "Python". */
   name: string;

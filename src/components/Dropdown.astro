@@ -9,6 +9,8 @@ export interface Option {
   /** Nesting level: 0 for top-level options, 1 and 2 for children. */
   depth?: number;
   count?: number;
+  /** A group title in the list, shown above the options under it. The reader can't pick it. */
+  heading?: boolean;
 }
 
 interface Props {
@@ -29,13 +31,14 @@ interface Props {
   multiple?: boolean;
 }
 const { filterKey, label, options, search = false, wide = false, viewOnly = false, value, multiple = false } = Astro.props;
-const first = options.find((o) => o.value === value) ?? options[0];
+const pickable = options.filter((o) => !o.heading);
+const first = pickable.find((o) => o.value === value) ?? pickable[0];
 const id = `dd-${filterKey}`;
 ---
 
 <div class:list={['dd', { wide }]} data-dd data-view-only={viewOnly ? '' : undefined}>
   <select class="dd-native" aria-hidden="true" tabindex="-1" multiple={multiple} {...{ [`data-${filterKey}`]: '' }}>
-    {options.map((o) => <option value={o.value} selected={!multiple && o === first}>{o.label}</option>)}
+    {pickable.map((o) => <option value={o.value} selected={!multiple && o === first}>{o.label}</option>)}
   </select>
   <button type="button" class="dd-b" aria-haspopup="listbox" aria-expanded="false" aria-controls={`${id}-list`} aria-label={label}>
     <span class="dd-v">{first?.label}</span>
@@ -45,7 +48,9 @@ const id = `dd-${filterKey}`;
     {search && <input class="dd-s" type="search" placeholder={`Search ${label.toLowerCase()}`} aria-label={`Search ${label.toLowerCase()}`} autocomplete="off" />}
     <ul class="dd-l" role="listbox" id={`${id}-list`} aria-label={label} aria-multiselectable={multiple ? 'true' : undefined} tabindex="-1">
       {
-        options.map((o, i) => (
+        options.map((o, i) => o.heading ? (
+          <li role="presentation" class="dd-h">{o.label}</li>
+        ) : (
           <li role="option" id={`${id}-${i}`} data-value={o.value} data-depth={o.depth ?? 0} aria-selected={o === first ? 'true' : 'false'}>
             <svg class="ck" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
               <path d="M3 7.5l2.5 2.5L11 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -172,6 +177,16 @@ const id = `dd-${filterKey}`;
   }
   .dd-l li[data-depth='0'] .ol {
     font-weight: 500;
+  }
+  .dd-l li.dd-h {
+    cursor: default;
+    padding: 10px 10px 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-4);
+  }
+  .dd-l li.dd-h:first-child {
+    padding-top: 4px;
   }
   .dd-l li.active {
     background: var(--hover);

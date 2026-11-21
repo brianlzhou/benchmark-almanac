@@ -117162,7 +117162,8 @@
         "numerical": {
           "name": "Numerical prediction"
         }
-      }
+      },
+      "static": "paper"
     },
     "medconceptsqa": {
       "url": "https://github.com/nadavlab/MedConceptsQA#leaderboard",
@@ -139981,7 +139982,7 @@
       "url": "https://olamlabs.ai/evaluations#greatpowers",
       "feed": "https://olamlabs.ai/evaluations (the Diplomacy charts in the page's HTML)",
       "terms": "Public evaluations page. robots.txt allows it and closes /api/ except /api/poker/leaderboard. The site states no data license. Results are credited to Olam Labs.",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-21",
       "rows": 16,
       "unmatched": [],
       "chart": {
@@ -140002,29 +140003,98 @@
       },
       "reference": [
         "Pi"
-      ]
+      ],
+      "stats": {
+        "brokenPromiseRate": {
+          "name": "Broken promise rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "How often the model breaks its promises to allies, graded from its transcript."
+        },
+        "gullibility": {
+          "name": "Gullibility",
+          "unit": "%",
+          "better": "lower",
+          "note": "How often the model believes a false promise and suffers for it."
+        },
+        "skepticism": {
+          "name": "Skepticism",
+          "unit": "%",
+          "note": "The share of promises made to the model that it believed. Olam Labs calls neither direction better."
+        }
+      }
     },
     "olam-arena-risk": {
       "url": "https://olamlabs.ai/evaluations#warpath",
       "feed": "https://olamlabs.ai/evaluations (the Risk charts in the page's HTML)",
       "terms": "Public evaluations page. robots.txt allows it and closes /api/ except /api/poker/leaderboard. The site states no data license. Results are credited to Olam Labs.",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-21",
       "rows": 16,
       "unmatched": [],
       "reference": [
         "Pi"
-      ]
+      ],
+      "stats": {
+        "gambleRate": {
+          "name": "Gamble rate",
+          "unit": "%",
+          "note": "The share of attacks judged to be gambles. Olam Labs does not define it further."
+        },
+        "twoFacedRate": {
+          "name": "Two-faced rate",
+          "unit": "%",
+          "note": "A rate graded over talking windows. Olam Labs does not define it further."
+        }
+      }
     },
     "olam-arena-social-poker": {
       "url": "https://olamlabs.ai/evaluations#poker",
       "feed": "https://olamlabs.ai/api/poker/leaderboard (the rating, intervals and table results) and https://olamlabs.ai/evaluations (the lie rate and agent preference charts)",
       "terms": "Public evaluations page. robots.txt allows it and closes /api/ except /api/poker/leaderboard. The site states no data license. Results are credited to Olam Labs.",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-21",
       "rows": 34,
       "unmatched": [],
       "reference": [
         "Pi"
-      ]
+      ],
+      "stats": {
+        "lieRate": {
+          "name": "Lie rate",
+          "unit": "count",
+          "better": "lower",
+          "note": "Deliberate lies in table talk per 10,000 turns, graded from each agent’s transcript."
+        },
+        "agentPreference": {
+          "name": "Agent preference",
+          "unit": "score",
+          "better": "higher",
+          "note": "The mean 1 to 10 rating other agents gave the model after a game."
+        },
+        "bbPerHand": {
+          "name": "Big blinds won per hand",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tableWinRate": {
+          "name": "Table win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "netBb": {
+          "name": "Net big blinds won",
+          "unit": "score",
+          "better": "higher"
+        },
+        "netChipsPerTable": {
+          "name": "Net chips per table",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tables": {
+          "name": "Tables played",
+          "unit": "count"
+        }
+      }
     },
     "olmocr-bench": {
       "url": "https://github.com/allenai/olmocr",
@@ -269571,40 +269641,40 @@
     ["olam-arena-risk","claude-opus-5-5",null,"Pi",26.6,"2026-09-22",null,null,{"gambleRate":8.1,"twoFacedRate":3.7},{"run":"2026-09-26","low":16.4,"high":38.7}],
     ["olam-arena-risk","gpt-6-luna",null,"Pi",9.4,"2026-09-22",null,null,{"gambleRate":9.7,"twoFacedRate":10.5},{"run":"2026-09-26","low":4.3,"high":14.9}],
     ["olam-arena-risk","gpt-6-sol",null,"Pi",34.3,"2026-09-22",null,null,{"gambleRate":5.4,"twoFacedRate":17},{"run":"2026-09-26","low":21.9,"high":47}],
-    ["olam-arena-social-poker","gemini-3-1-pro",null,"Pi",1495,"2026-02-19",null,null,{"bbPerHand":0.18,"tableWinRate":9.7,"tables":883},{"run":"2026-08-21","low":1477,"high":1509}],
-    ["olam-arena-social-poker","gpt-5-5",null,"Pi",1521,"2026-04-23",null,null,{"bbPerHand":0.138,"tableWinRate":18.6,"tables":593,"agentPreference":8.19},{"run":"2026-08-21","low":1493,"high":1544}],
-    ["olam-arena-social-poker","deepseek-v4-flash",null,"Pi",1476,"2026-04-24",null,null,{"bbPerHand":0.111,"tableWinRate":7,"tables":718,"lieRate":37},{"run":"2026-08-21","low":1453,"high":1493}],
-    ["olam-arena-social-poker","deepseek-v4-pro",null,"Pi",1500,"2026-04-24",null,null,{"bbPerHand":0.257,"tableWinRate":16.7,"tables":544,"lieRate":9,"agentPreference":7.97},{"run":"2026-08-21","low":1476,"high":1521}],
-    ["olam-arena-social-poker","gemini-3-5-flash",null,"Pi",1496,"2026-05-19",null,null,{"bbPerHand":0.148,"tableWinRate":7.5,"tables":884},{"run":"2026-08-21","low":1477,"high":1510}],
-    ["olam-arena-social-poker","claude-opus-4-8",null,"Pi",1518,"2026-05-28",null,null,{"bbPerHand":-0.075,"tableWinRate":17.3,"tables":491,"lieRate":80,"agentPreference":7.99},{"run":"2026-08-21","low":1492,"high":1538}],
-    ["olam-arena-social-poker","nemotron-3-ultra",null,"Pi",1468,"2026-06-04",null,null,{"bbPerHand":-0.258,"tableWinRate":15,"tables":301},{"run":"2026-08-21","low":1439,"high":1495}],
-    ["olam-arena-social-poker","claude-fable-5",null,"Pi",1553,"2026-06-09",null,null,{"bbPerHand":0.354,"tableWinRate":27,"tables":707,"lieRate":164,"agentPreference":8.17},{"run":"2026-08-21","low":1529,"high":1572}],
-    ["olam-arena-social-poker","glm-5-2",null,"Pi",1492,"2026-06-16",null,null,{"bbPerHand":-0.115,"tableWinRate":16.2,"tables":536,"lieRate":28,"agentPreference":8.01},{"run":"2026-08-21","low":1466,"high":1512}],
-    ["olam-arena-social-poker","claude-sonnet-5",null,"Pi",1509,"2026-06-30",null,null,{"bbPerHand":0.419,"tableWinRate":12.3,"tables":914},{"run":"2026-08-21","low":1487,"high":1523}],
-    ["olam-arena-social-poker","grok-4-5",null,"Pi",1487,"2026-07-08",null,null,{"bbPerHand":-0.073,"tableWinRate":17.5,"tables":200,"agentPreference":7.74},{"run":"2026-08-21","low":1451,"high":1525}],
-    ["olam-arena-social-poker","gpt-5-6-luna",null,"Pi",1486,"2026-07-09",null,null,{"bbPerHand":0.472,"tableWinRate":10.9,"tables":358,"agentPreference":7.69},{"run":"2026-08-21","low":1460,"high":1510}],
-    ["olam-arena-social-poker","gpt-5-6-sol",null,"Pi",1534,"2026-07-09",null,null,{"bbPerHand":0.177,"tableWinRate":19.7,"tables":361,"agentPreference":7.71},{"run":"2026-08-21","low":1504,"high":1557}],
-    ["olam-arena-social-poker","gpt-5-6-terra",null,"Pi",1511,"2026-07-09",null,null,{"bbPerHand":0.184,"tableWinRate":16.5,"tables":528,"agentPreference":7.77},{"run":"2026-08-21","low":1487,"high":1529}],
-    ["olam-arena-social-poker","muse-spark-1-1",null,"Pi",1504,"2026-07-09",null,null,{"bbPerHand":-0.012,"tableWinRate":16,"tables":200,"lieRate":12},{"run":"2026-08-21","low":1469,"high":1541}],
-    ["olam-arena-social-poker","kimi-k3",null,"Pi",1495,"2026-07-16",null,null,{"bbPerHand":-0.293,"tableWinRate":21.5,"tables":200,"lieRate":40,"agentPreference":7.95},{"run":"2026-08-21","low":1454,"high":1531}],
-    ["olam-arena-social-poker","gemini-3-5-flash-lite",null,"Pi",1461,"2026-07-21",null,null,{"bbPerHand":-0.273,"tableWinRate":8,"tables":100},{"run":"2026-08-21","low":1416,"high":1501}],
-    ["olam-arena-social-poker","gemini-3-6-flash",null,"Pi",1489,"2026-07-21",null,null,{"bbPerHand":0.054,"tableWinRate":12,"tables":100},{"run":"2026-08-21","low":1445,"high":1534}],
-    ["olam-arena-social-poker","claude-opus-5",null,"Pi",1518,"2026-07-24",null,null,{"bbPerHand":-0.117,"tableWinRate":19.5,"tables":200,"lieRate":163,"agentPreference":8.27},{"run":"2026-08-21","low":1484,"high":1554}],
-    ["olam-arena-social-poker","grok-4-6",null,"Pi",1499,"2026-08-12",null,null,{"bbPerHand":0.11,"tableWinRate":19,"tables":100,"agentPreference":7.87},{"run":"2026-08-21","low":1451,"high":1546}],
-    ["olam-arena-social-poker","gemini-3-7-flash",null,"Pi",1468,"2026-08-13",null,null,{"bbPerHand":-0.28,"tableWinRate":10,"tables":100},{"run":"2026-08-21","low":1425,"high":1507}],
-    ["olam-arena-social-poker","glm-5-3",null,"Pi",1492,"2026-08-14",null,null,{"bbPerHand":-0.186,"tableWinRate":18,"tables":100,"lieRate":54,"agentPreference":7.86},{"run":"2026-08-21","low":1433,"high":1542}],
-    ["olam-arena-social-poker","glm-5-3-flash",null,"Pi",1520,"2026-08-20",null,null,{"bbPerHand":0.323,"tableWinRate":19.5,"tables":200,"lieRate":30},{"run":"2026-08-21","low":1490,"high":1557}],
-    ["olam-arena-social-poker","claude-fable-5-1",null,"Pi",1494,"2026-09-01",null,null,{"bbPerHand":-0.161,"tableWinRate":24,"tables":100,"lieRate":76,"agentPreference":8.26},{"run":"2026-08-21","low":1445,"high":1555}],
-    ["olam-arena-social-poker","gemini-3-8-flash",null,"Pi",1479,"2026-09-02",null,null,{"bbPerHand":0.083,"tableWinRate":8,"tables":100},{"run":"2026-08-21","low":1443,"high":1520}],
-    ["olam-arena-social-poker","muse-spark-1-3",null,"Pi",1494,"2026-09-02",null,null,{"bbPerHand":-0.437,"tableWinRate":9,"tables":100,"lieRate":18},{"run":"2026-08-21","low":1447,"high":1535}],
-    ["olam-arena-social-poker","gpt-6-astra",null,"Pi",1550,"2026-09-03",null,null,{"bbPerHand":0.429,"tableWinRate":15,"tables":200},{"run":"2026-08-21","low":1522,"high":1582}],
-    ["olam-arena-social-poker","deepseek-v4-1-flash",null,"Pi",1515,"2026-09-09",null,null,{"bbPerHand":0.098,"tableWinRate":13,"tables":100,"lieRate":116,"agentPreference":8.33},{"run":"2026-08-21","low":1473,"high":1561}],
-    ["olam-arena-social-poker","grok-4-7",null,"Pi",1508,"2026-09-21",null,null,{"bbPerHand":-0.207,"tableWinRate":15,"tables":100,"lieRate":34},{"run":"2026-08-21","low":1463,"high":1549}],
-    ["olam-arena-social-poker","claude-opus-5-5",null,"Pi",1506,"2026-09-22",null,null,{"bbPerHand":-0.032,"tableWinRate":17,"tables":200,"lieRate":39,"agentPreference":7.84},{"run":"2026-08-21","low":1467,"high":1539}],
-    ["olam-arena-social-poker","gpt-6-luna",null,"Pi",1521,"2026-09-22",null,null,{"bbPerHand":0.292,"tableWinRate":19,"tables":100},{"run":"2026-08-21","low":1471,"high":1568}],
-    ["olam-arena-social-poker","gpt-6-sol",null,"Pi",1542,"2026-09-22",null,null,{"bbPerHand":0.278,"tableWinRate":18,"tables":100},{"run":"2026-08-21","low":1501,"high":1586}],
-    ["olam-arena-social-poker","claude-sonnet-5-5",null,"Pi",1526,"2026-09-28",null,null,{"bbPerHand":-0.167,"tableWinRate":19,"tables":200},{"run":"2026-08-21","low":1490,"high":1564}],
-    ["olam-arena-social-poker","gpt-6-1-sol",null,"Pi",1543,"2026-09-29",null,null,{"bbPerHand":0.144,"tableWinRate":19,"tables":100},{"run":"2026-08-21","low":1492,"high":1591}],
+    ["olam-arena-social-poker","gemini-3-1-pro",null,"Pi",1495,"2026-02-19",null,null,{"bbPerHand":0.18,"tableWinRate":9.7,"tables":883,"netChipsPerTable":149.7},{"run":"2026-08-21","low":1477,"high":1509}],
+    ["olam-arena-social-poker","gpt-5-5",null,"Pi",1521,"2026-04-23",null,null,{"bbPerHand":0.138,"tableWinRate":18.6,"tables":593,"netChipsPerTable":91.8,"agentPreference":8.19},{"run":"2026-08-21","low":1493,"high":1544}],
+    ["olam-arena-social-poker","deepseek-v4-flash",null,"Pi",1476,"2026-04-24",null,null,{"bbPerHand":0.111,"tableWinRate":7,"tables":718,"netChipsPerTable":96.5,"lieRate":37},{"run":"2026-08-21","low":1453,"high":1493}],
+    ["olam-arena-social-poker","deepseek-v4-pro",null,"Pi",1500,"2026-04-24",null,null,{"bbPerHand":0.257,"tableWinRate":16.7,"tables":544,"netChipsPerTable":305.4,"lieRate":9,"agentPreference":7.97},{"run":"2026-08-21","low":1476,"high":1521}],
+    ["olam-arena-social-poker","gemini-3-5-flash",null,"Pi",1496,"2026-05-19",null,null,{"bbPerHand":0.148,"tableWinRate":7.5,"tables":884,"netChipsPerTable":197.6},{"run":"2026-08-21","low":1477,"high":1510}],
+    ["olam-arena-social-poker","claude-opus-4-8",null,"Pi",1518,"2026-05-28",null,null,{"bbPerHand":-0.075,"tableWinRate":17.3,"tables":491,"netChipsPerTable":-3.6,"lieRate":80,"agentPreference":7.99},{"run":"2026-08-21","low":1492,"high":1538}],
+    ["olam-arena-social-poker","nemotron-3-ultra",null,"Pi",1468,"2026-06-04",null,null,{"bbPerHand":-0.258,"tableWinRate":15,"tables":301,"netChipsPerTable":-275.9},{"run":"2026-08-21","low":1439,"high":1495}],
+    ["olam-arena-social-poker","claude-fable-5",null,"Pi",1553,"2026-06-09",null,null,{"bbPerHand":0.354,"tableWinRate":27,"tables":707,"netChipsPerTable":354.2,"lieRate":164,"agentPreference":8.17},{"run":"2026-08-21","low":1529,"high":1572}],
+    ["olam-arena-social-poker","glm-5-2",null,"Pi",1492,"2026-06-16",null,null,{"bbPerHand":-0.115,"tableWinRate":16.2,"tables":536,"netChipsPerTable":-110.6,"lieRate":28,"agentPreference":8.01},{"run":"2026-08-21","low":1466,"high":1512}],
+    ["olam-arena-social-poker","claude-sonnet-5",null,"Pi",1509,"2026-06-30",null,null,{"bbPerHand":0.419,"tableWinRate":12.3,"tables":914,"netChipsPerTable":309.7},{"run":"2026-08-21","low":1487,"high":1523}],
+    ["olam-arena-social-poker","grok-4-5",null,"Pi",1487,"2026-07-08",null,null,{"bbPerHand":-0.073,"tableWinRate":17.5,"tables":200,"netChipsPerTable":-72.6,"agentPreference":7.74},{"run":"2026-08-21","low":1451,"high":1525}],
+    ["olam-arena-social-poker","gpt-5-6-luna",null,"Pi",1486,"2026-07-09",null,null,{"bbPerHand":0.472,"tableWinRate":10.9,"tables":358,"netChipsPerTable":594.4,"agentPreference":7.69},{"run":"2026-08-21","low":1460,"high":1510}],
+    ["olam-arena-social-poker","gpt-5-6-sol",null,"Pi",1534,"2026-07-09",null,null,{"bbPerHand":0.177,"tableWinRate":19.7,"tables":361,"netChipsPerTable":163,"agentPreference":7.71},{"run":"2026-08-21","low":1504,"high":1557}],
+    ["olam-arena-social-poker","gpt-5-6-terra",null,"Pi",1511,"2026-07-09",null,null,{"bbPerHand":0.184,"tableWinRate":16.5,"tables":528,"netChipsPerTable":146,"agentPreference":7.77},{"run":"2026-08-21","low":1487,"high":1529}],
+    ["olam-arena-social-poker","muse-spark-1-1",null,"Pi",1504,"2026-07-09",null,null,{"bbPerHand":-0.012,"tableWinRate":16,"tables":200,"netChipsPerTable":-12,"lieRate":12},{"run":"2026-08-21","low":1469,"high":1541}],
+    ["olam-arena-social-poker","kimi-k3",null,"Pi",1495,"2026-07-16",null,null,{"bbPerHand":-0.293,"tableWinRate":21.5,"tables":200,"netChipsPerTable":-293,"lieRate":40,"agentPreference":7.95},{"run":"2026-08-21","low":1454,"high":1531}],
+    ["olam-arena-social-poker","gemini-3-5-flash-lite",null,"Pi",1461,"2026-07-21",null,null,{"bbPerHand":-0.273,"tableWinRate":8,"tables":100,"netChipsPerTable":-272.9},{"run":"2026-08-21","low":1416,"high":1501}],
+    ["olam-arena-social-poker","gemini-3-6-flash",null,"Pi",1489,"2026-07-21",null,null,{"bbPerHand":0.054,"tableWinRate":12,"tables":100,"netChipsPerTable":53.8},{"run":"2026-08-21","low":1445,"high":1534}],
+    ["olam-arena-social-poker","claude-opus-5",null,"Pi",1518,"2026-07-24",null,null,{"bbPerHand":-0.117,"tableWinRate":19.5,"tables":200,"netChipsPerTable":-117.1,"lieRate":163,"agentPreference":8.27},{"run":"2026-08-21","low":1484,"high":1554}],
+    ["olam-arena-social-poker","grok-4-6",null,"Pi",1499,"2026-08-12",null,null,{"bbPerHand":0.11,"tableWinRate":19,"tables":100,"netChipsPerTable":110.3,"agentPreference":7.87},{"run":"2026-08-21","low":1451,"high":1546}],
+    ["olam-arena-social-poker","gemini-3-7-flash",null,"Pi",1468,"2026-08-13",null,null,{"bbPerHand":-0.28,"tableWinRate":10,"tables":100,"netChipsPerTable":-280.3},{"run":"2026-08-21","low":1425,"high":1507}],
+    ["olam-arena-social-poker","glm-5-3",null,"Pi",1492,"2026-08-14",null,null,{"bbPerHand":-0.186,"tableWinRate":18,"tables":100,"netBb":-186.1,"netChipsPerTable":-186.1,"lieRate":54,"agentPreference":7.86},{"run":"2026-08-21","low":1433,"high":1542}],
+    ["olam-arena-social-poker","glm-5-3-flash",null,"Pi",1520,"2026-08-20",null,null,{"bbPerHand":0.323,"tableWinRate":19.5,"tables":200,"netBb":645.8,"netChipsPerTable":322.9,"lieRate":30},{"run":"2026-08-21","low":1490,"high":1557}],
+    ["olam-arena-social-poker","claude-fable-5-1",null,"Pi",1494,"2026-09-01",null,null,{"bbPerHand":-0.161,"tableWinRate":24,"tables":100,"netBb":-160.7,"netChipsPerTable":-160.7,"lieRate":76,"agentPreference":8.26},{"run":"2026-08-21","low":1445,"high":1555}],
+    ["olam-arena-social-poker","gemini-3-8-flash",null,"Pi",1479,"2026-09-02",null,null,{"bbPerHand":0.083,"tableWinRate":8,"tables":100,"netBb":82.5,"netChipsPerTable":82.5},{"run":"2026-08-21","low":1443,"high":1520}],
+    ["olam-arena-social-poker","muse-spark-1-3",null,"Pi",1494,"2026-09-02",null,null,{"bbPerHand":-0.437,"tableWinRate":9,"tables":100,"netBb":-437.2,"netChipsPerTable":-437.2,"lieRate":18},{"run":"2026-08-21","low":1447,"high":1535}],
+    ["olam-arena-social-poker","gpt-6-astra",null,"Pi",1550,"2026-09-03",null,null,{"bbPerHand":0.429,"tableWinRate":15,"tables":200,"netBb":859,"netChipsPerTable":429.5},{"run":"2026-08-21","low":1522,"high":1582}],
+    ["olam-arena-social-poker","deepseek-v4-1-flash",null,"Pi",1515,"2026-09-09",null,null,{"bbPerHand":0.098,"tableWinRate":13,"tables":100,"netBb":98.3,"netChipsPerTable":98.3,"lieRate":116,"agentPreference":8.33},{"run":"2026-08-21","low":1473,"high":1561}],
+    ["olam-arena-social-poker","grok-4-7",null,"Pi",1508,"2026-09-21",null,null,{"bbPerHand":-0.207,"tableWinRate":15,"tables":100,"netBb":-207,"netChipsPerTable":-207,"lieRate":34},{"run":"2026-08-21","low":1463,"high":1549}],
+    ["olam-arena-social-poker","claude-opus-5-5",null,"Pi",1506,"2026-09-22",null,null,{"bbPerHand":-0.032,"tableWinRate":17,"tables":200,"netBb":-63.7,"netChipsPerTable":-31.9,"lieRate":39,"agentPreference":7.84},{"run":"2026-08-21","low":1467,"high":1539}],
+    ["olam-arena-social-poker","gpt-6-luna",null,"Pi",1521,"2026-09-22",null,null,{"bbPerHand":0.292,"tableWinRate":19,"tables":100,"netBb":291.6,"netChipsPerTable":291.6},{"run":"2026-08-21","low":1471,"high":1568}],
+    ["olam-arena-social-poker","gpt-6-sol",null,"Pi",1542,"2026-09-22",null,null,{"bbPerHand":0.278,"tableWinRate":18,"tables":100,"netBb":278.5,"netChipsPerTable":278.5},{"run":"2026-08-21","low":1501,"high":1586}],
+    ["olam-arena-social-poker","claude-sonnet-5-5",null,"Pi",1526,"2026-09-28",null,null,{"bbPerHand":-0.167,"tableWinRate":19,"tables":200,"netBb":-333.1,"netChipsPerTable":-166.6},{"run":"2026-08-21","low":1490,"high":1564}],
+    ["olam-arena-social-poker","gpt-6-1-sol",null,"Pi",1543,"2026-09-29",null,null,{"bbPerHand":0.144,"tableWinRate":19,"tables":100,"netBb":143.9,"netChipsPerTable":143.9},{"run":"2026-08-21","low":1492,"high":1591}],
     ["olmocr-bench","deepseek-ocr",null,null,75.7,"2025-10-17",null,null,{"ArXiv":77.2,"Old scans math":73.6,"Tables":80.2,"Old scans":33.3,"Headers & footers":96.1,"Multi column":66.4,"Long tiny text":79.4,"Base":99.8},{"low":74.7,"high":76.7}],
     ["olymmath","deepseek-r1",null,null,46.35,"2025-01-20",null,null,{"ENHardAlgebra":30,"ENHardAlgebraConsensus":40,"ENHardGeometry":25.5,"ENHardGeometryConsensus":32,"ENHardNumbertheory":18.5,"ENHardNumbertheoryConsensus":24,"ENHardCombinatorics":4,"ENHardCombinatoricsConsensus":4,"ENHard":19.5,"ENHardConsensus":25,"ENEasyAlgebra":90.5,"ENEasyAlgebraConsensus":100,"ENEasyGeometry":82.2,"ENEasyGeometryConsensus":97,"ENEasyNumbertheory":94.2,"ENEasyNumbertheoryConsensus":100,"ENEasyCombinatorics":60.8,"ENEasyCombinatoricsConsensus":72.4,"ENEasy":79.6,"ENEasyConsensus":91,"ZHHardAlgebra":20,"ZHHardAlgebraConsensus":24,"ZHHardGeometry":25,"ZHHardGeometryConsensus":28,"ZHHardNumbertheory":17,"ZHHardNumbertheoryConsensus":16,"ZHHardCombinatorics":1.5,"ZHHardCombinatoricsConsensus":0,"ZHHard":15.9,"ZHHardConsensus":17,"ZHEasyAlgebra":79.5,"ZHEasyAlgebraConsensus":96,"ZHEasyGeometry":74.6,"ZHEasyGeometryConsensus":84.8,"ZHEasyNumbertheory":88.5,"ZHEasyNumbertheoryConsensus":92.3,"ZHEasyCombinatorics":49.6,"ZHEasyCombinatoricsConsensus":55.2,"ZHEasy":70.4,"ZHEasyConsensus":80},{"trials":8}],
     ["olymmath","deepseek-r1-distill-qwen-1-5b",null,null,6.875,"2025-01-20",null,null,{"ENHardAlgebra":1.9,"ENHardAlgebraConsensus":0,"ENHardGeometry":1.8,"ENHardGeometryConsensus":0,"ENHardNumbertheory":1.8,"ENHardNumbertheoryConsensus":0,"ENHardCombinatorics":0.4,"ENHardCombinatoricsConsensus":0,"ENHard":1.5,"ENHardConsensus":0,"ENEasyAlgebra":20.8,"ENEasyAlgebraConsensus":40,"ENEasyGeometry":12.6,"ENEasyGeometryConsensus":21.2,"ENEasyNumbertheory":32.6,"ENEasyNumbertheoryConsensus":61.5,"ENEasyCombinatorics":8.2,"ENEasyCombinatoricsConsensus":24.1,"ENEasy":16,"ENEasyConsensus":32,"ZHHardAlgebra":1.8,"ZHHardAlgebraConsensus":0,"ZHHardGeometry":1.3,"ZHHardGeometryConsensus":0,"ZHHardNumbertheory":1.1,"ZHHardNumbertheoryConsensus":0,"ZHHardCombinatorics":0,"ZHHardCombinatoricsConsensus":0,"ZHHard":1,"ZHHardConsensus":0,"ZHEasyAlgebra":13.7,"ZHEasyAlgebraConsensus":20,"ZHEasyGeometry":6.3,"ZHEasyGeometryConsensus":9.1,"ZHEasyNumbertheory":20.9,"ZHEasyNumbertheoryConsensus":30.8,"ZHEasyCombinatorics":2.6,"ZHEasyCombinatoricsConsensus":0,"ZHEasy":9,"ZHEasyConsensus":12},{"trials":64}],
