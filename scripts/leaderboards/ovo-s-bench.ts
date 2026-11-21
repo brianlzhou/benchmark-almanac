@@ -17,7 +17,8 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     const t=all.find(t=>t[0]?.includes("L4")&&t[0]?.includes("Overall"));if(!t)throw new Error("Missing OVO-S table");let group="";
     for(const r of t.slice(1)){if(r.length===1){group=r[0];continue;}const score=num(r[6]);if(score===undefined||/^(Random|Human)/i.test(r[0]))continue;
-    let model=r[0];const control=model.match(/^Text-Only \((.+)\)$/);if(control)model=control[1];else if(/^\d/.test(r[1])&&!model.includes(r[1]))model+="-"+r[1];rows.push({model,score,setting:control?"text-only":undefined,metrics:{L1:num(r[2])!,L2:num(r[3])!,L3:num(r[4])!,L4:num(r[5])!}}); }
+    let model=r[0];const control=model.match(/^Text-Only \((.+)\)$/);if(control)model=control[1];else if(/^\d/.test(r[1])&&!model.includes(r[1]))model+="-"+r[1];const size=r[1].match(/^(\d+(?:\.\d+)?)B/);const active=r[1].match(/-A([\d.]+)B/);const effective=r[1].match(/^E([\d.]+)B/);
+    rows.push({model,score,params:size ? Number(size[1]) : undefined,open:group.startsWith('Open-source') ? true : group.startsWith('Closed-source') ? false : undefined,setting:control?"text-only":undefined,metrics:{...(active ? {activeParams:Number(active[1])} : {}),...(effective ? {effectiveParams:Number(effective[1])} : {}),L1:num(r[2])!,L2:num(r[3])!,L3:num(r[4])!,L4:num(r[5])!}}); }
     if (!rows.length) throw new Error("No ovo-s-bench score rows");
     return rows;
   },

@@ -65,8 +65,6 @@ const board: Leaderboard = {
         const latencyStd = num(r['Latency Standard Deviation (s)']);
         const latencyP95 = num(r['Latency 95th Percentile (s)']);
         const metrics: Record<string, number> = { ...splitRows.get(r.Model), ...(latencyStd === undefined ? {} : { latencyStd }), ...(latency === undefined ? {} : { latency }), ...(latencyP95 === undefined ? {} : { latencyP95 }) };
-        const rank = num(r.Rank);
-        if (rank !== undefined) metrics.rank = rank;
         for (const [name, raw] of Object.entries(r)) {
           if (name === 'Overall Acc' || !/^\d+(?:\.\d+)?%$/.test(raw)) continue;
           metrics[name] = parseFloat(raw);

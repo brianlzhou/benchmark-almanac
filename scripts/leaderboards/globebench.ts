@@ -1,4 +1,4 @@
-// GlobeBench task-success percentages for the twenty evaluated model systems; pooled cross-model aggregate excluded.
+// GlobeBench task-success percentages for the twenty evaluated model systems and their serving settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -25,11 +25,12 @@ const board: Leaderboard = {
         if (!name || /^(?:human|random|oracle|All 20)(?:\b|$)/i.test(name) || score === undefined) continue;
         const metrics: Record<string, number> = {};
         for (let i = 0; i < t.head.length; i++) {
-          if (i === (1) || i === (3)) continue;
+          if (t.head[i] === 'Rank' || i === (1) || i === (3)) continue;
           const value = num(r[i]);
           if (value !== undefined) metrics[t.head[i]] = value;
         }
-        out.push({ model: identity(name), score: score * 1, setting: 'Released binary leaderboard; primary settings (retries may vary): ' + (serving?.rows.find(r => r[0].split(',').some(n => name === n.trim() || name === 'Claude ' + n.trim() || name.includes('Digital World Model') && n.trim() === 'DWM'))?.[2] ?? 'see source serving settings'), metrics });
+        const config = serving?.rows.find(r => r[0].split(',').some(n => name === n.trim() || name === 'Claude ' + n.trim() || name.includes('Digital World Model') && n.trim() === 'DWM'));
+        out.push({ model: identity(name), score: score * 1, setting: 'Released binary leaderboard; primary settings (retries may vary): ' + (config ? `${config[2]}; ${config[1]}; output budget ${config[3]}` : 'see source serving settings'), metrics });
       }
     }
     if (!out.length) throw new Error("globebench: no score rows in the expected tables");

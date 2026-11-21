@@ -1,5 +1,5 @@
 // GameHorizon official overall offline score, with three tiers retained.
-// Online evaluation metrics are attached where published; repeated responsive rows are deduplicated.
+// Online evaluation tables give success rates and counts for each task group.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text, tables, num } from '../lib/html.ts';
@@ -45,7 +45,17 @@ const board: Leaderboard = {
     }
     for (const t of data.filter(t=>t[0]?.some(c=>c.text==='Online Rank'))) for(const r of t.slice(1)) {
       const row=rows.get(r[1]?.text);if(!row)continue;
-      for(const [key,col] of [['onlineShortHorizon',3],['onlineLongHorizon',4],['onlineCausal',5],['onlineThematic',6]] as const){const n=num(r[col]?.text);if(n!==undefined)row.metrics![key]=n;}
+      const metrics = row.metrics!;
+      for (const [key, col] of [['onlineShortHorizon', 3], ['onlineLongHorizon', 4], ['onlineCausal', 5], ['onlineThematic', 6]] as const) {
+        const cell = r[col]?.text;
+        const rate = num(cell);
+        if (rate !== undefined) metrics[key] = rate;
+        const counts = cell?.match(/\((\d+)\s*\/\s*(\d+)\)/);
+        if (counts) {
+          metrics[key + 'Passed'] = Number(counts[1]);
+          metrics[key + 'Total'] = Number(counts[2]);
+        }
+      }
     }
     if (!rows.size) throw new Error('GameHorizon table missing');
     return [...rows.values()];

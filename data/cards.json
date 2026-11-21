@@ -7424,6 +7424,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 1.0,
         "unit": "%",
         "as_written": "Hallucination rate on open-source prompts: FActScore (lower is better)"
@@ -8372,6 +8373,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 2.97,
         "unit": "% error (lower better)",
         "as_written": "FActScore (lower is better) [Grok 4.1 Non-Reasoning]"
@@ -14940,10 +14942,10 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 52.4,
         "unit": "%",
-        "as_written": "Agents' Last Exam (Pass / Score) 27.0 / 52.4",
-        "measure": "score"
+        "as_written": "Agents' Last Exam (Pass / Score) 27.0 / 52.4"
       },
       {
         "benchmark": "automationbench",
@@ -15684,7 +15686,8 @@
         "as_written": "NL2Repo"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 19.0,
         "unit": "%",
         "as_written": "ProgramBench (Almost Solved)"
@@ -16221,7 +16224,8 @@
         "as_written": "DeepSWE v1.1 (Resolved)"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 20.3,
         "unit": "%",
         "as_written": "ProgramBench (Almost@1)"
@@ -17562,17 +17566,17 @@
       },
       {
         "benchmark": "atomic-challenges-irregular",
+        "measure": "network",
         "score": 98,
         "unit": "%",
-        "as_written": "Atomic Challenges, network attack simulation 98%",
-        "measure": "network"
+        "as_written": "Atomic Challenges, network attack simulation 98%"
       },
       {
         "benchmark": "atomic-challenges-irregular",
+        "measure": "evasion",
         "score": 63,
         "unit": "%",
-        "as_written": "Atomic Challenges, evasion 63%",
-        "measure": "evasion"
+        "as_written": "Atomic Challenges, evasion 63%"
       },
       {
         "benchmark": "expert-swe-openai",
@@ -18117,7 +18121,8 @@
         "as_written": "Repository-level code generation, NL2Repo-Bench"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 28.0,
         "unit": "%",
         "as_written": "Black-box software replication, ProgramBench (Almost Solved)"
@@ -18513,7 +18518,8 @@
         "as_written": "RoadmapBench"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 80.5,
         "unit": "%",
         "as_written": "ProgramBench (Pass Rate)"
@@ -19335,7 +19341,8 @@
         "as_written": "BenchCAD w/ tools (w/o tools 72.8)"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 31.5,
         "unit": "%",
         "as_written": "Program Bench (binary score, >=95% counts as solved)"
@@ -19767,7 +19774,8 @@
         "as_written": "NL2Repo-Bench"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 50.3,
         "unit": "%",
         "as_written": "ProgramBench (resolved / almost resolved / average pass rate) 0/1/50.3"
@@ -19876,10 +19884,10 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 41.4,
         "unit": "%",
-        "as_written": "Agents Last Exam (Pass@1 / Score) 19.5 / 41.4",
-        "measure": "score"
+        "as_written": "Agents Last Exam (Pass@1 / Score) 19.5 / 41.4"
       },
       {
         "benchmark": "doubao-multi-turn-bench-bytedance",
@@ -21402,10 +21410,10 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 51.2,
         "unit": "%",
-        "as_written": "Agents' Last Exam Pass@1 24.3 Score 51.2",
-        "measure": "score"
+        "as_written": "Agents' Last Exam Pass@1 24.3 Score 51.2"
       },
       {
         "benchmark": "toolathlon-verified",
@@ -21919,10 +21927,10 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 42.9,
         "unit": "%",
-        "as_written": "Frontier agentic tasks Agents' Last Exam Pass@1 20.4 Score 42.9",
-        "measure": "score"
+        "as_written": "Frontier agentic tasks Agents' Last Exam Pass@1 20.4 Score 42.9"
       },
       {
         "benchmark": "ifbench",
@@ -22291,7 +22299,7 @@
         "as_written": "Mean of LongFact-Objects 92.9 / LongFact-Concepts 92.8"
       },
       {
-        "benchmark": "factscore-precision",
+        "benchmark": "factscore",
         "score": 71.2,
         "unit": "%",
         "as_written": "FactScore"
@@ -44275,6 +44283,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 3.5,
         "unit": "%",
         "as_written": "FActScore hallucination rate, no tools (lower is better)"
@@ -44425,6 +44434,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 7.3,
         "unit": "%",
         "as_written": "FActScore hallucination rate, no tools (lower is better)"
@@ -47868,7 +47878,8 @@
     "notes": "Scores come from the value labels on the 12-panel bar chart in the press release. The release gives no thinking mode, effort, harness or attempt count, and no parameter count or license. Tencent says the weights and system cards will follow in the coming days. Claims made only in the text, such as a WorkBuddy average of 83.18, are not recorded.",
     "results": [
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 30.0,
         "unit": "%",
         "as_written": "ProgramBench (almost solved) *"
@@ -47940,7 +47951,8 @@
         "as_written": "Terminal Bench v4.0"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 25.5,
         "unit": "%",
         "as_written": "Program Bench (Almost Resolved)"
@@ -48540,6 +48552,294 @@
         "score": 1020,
         "unit": "elo",
         "as_written": "Code2Video-AA (Artificial Analysis, quoted in the launch post)"
+      }
+    ]
+  },
+  {
+    "id": "thinking-machines-inkling-2-mini-2026-11-20",
+    "lab": "thinking-machines",
+    "model": "inkling-2-mini",
+    "date": "2026-11-20",
+    "title": "Introducing Inkling 2 Mini (Thinking Machines)",
+    "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+    "tier": "small",
+    "notes": "Scores come from the post's comparison table, which also compares Gemma 4 31B, Muse Glimmer, Qwen3.8-27B and Nemotron 3.5 Super VL. Inkling 2 Mini is a looped transformer that runs its middle layers three times per token, with 5.4B active and 26.4B total parameters and open weights on Hugging Face.",
+    "results": [
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 20.1,
+        "unit": "index",
+        "as_written": "AA Index (v5.0)"
+      },
+      {
+        "benchmark": "vals-index",
+        "score": 46.5,
+        "unit": "%",
+        "as_written": "Vals Index (v2.2)"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 15.1,
+        "unit": "%",
+        "as_written": "FrontierCode v2.0 (stirrup v0.2.1)"
+      },
+      {
+        "benchmark": "deepswe",
+        "score": 48.2,
+        "unit": "%",
+        "as_written": "DeepSWE v1.1 (mini-swe-agent v2.4.6)"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 5.6,
+        "unit": "%",
+        "as_written": "Terminal Bench v4.0 (mini-swe-agent v2.4.6)"
+      },
+      {
+        "benchmark": "terminal-bench-2-1",
+        "score": 71.6,
+        "unit": "%",
+        "as_written": "Terminal Bench v2.1 (Inkling 2 Mini in pi v0.83.0)"
+      },
+      {
+        "benchmark": "swe-bench-pro-v2-hard",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "SWEBench Pro v2 (Hard), mini-swe-agent v2.4.6"
+      },
+      {
+        "benchmark": "swe-bench-multilingual",
+        "score": 73.7,
+        "unit": "%",
+        "as_written": "SWEBench Multilingual, bash only"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 79.2,
+        "unit": "%",
+        "as_written": "SWEBench Verified, bash only"
+      },
+      {
+        "benchmark": "vibe-code-bench",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "Vibe Code Bench v1.1 (openhands, Vals)"
+      },
+      {
+        "benchmark": "pmpp-hard",
+        "score": 455.82,
+        "unit": "score",
+        "as_written": "PMPP-Hard (AUC, 0 to 10h), pi v0.83.0"
+      },
+      {
+        "benchmark": "browsecomp",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "BrowseComp with compaction"
+      },
+      {
+        "benchmark": "deepsearchqa",
+        "score": 85.3,
+        "unit": "%",
+        "as_written": "DeepSearchQA with compaction"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 82.7,
+        "unit": "%",
+        "as_written": "MCP Atlas (Public)"
+      },
+      {
+        "benchmark": "aa-briefcase-1-1",
+        "score": 1263,
+        "unit": "elo",
+        "as_written": "AA-Briefcase v1.1"
+      },
+      {
+        "benchmark": "gdpval-aa-v2-1",
+        "score": 1319,
+        "unit": "elo",
+        "as_written": "GDPVal-AA v2.1"
+      },
+      {
+        "benchmark": "jobbench",
+        "score": 49.6,
+        "unit": "%",
+        "as_written": "JobBench"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 41.8,
+        "unit": "%",
+        "as_written": "AutomationBench-AA v1.0.6"
+      },
+      {
+        "benchmark": "enterpriseops-gym",
+        "score": 42.0,
+        "unit": "%",
+        "as_written": "EnterpriseOps-Gym"
+      },
+      {
+        "benchmark": "vals-finance-index",
+        "score": 50.1,
+        "unit": "%",
+        "as_written": "Vals Finance Index"
+      },
+      {
+        "benchmark": "aa-analystagent",
+        "score": 46.3,
+        "unit": "%",
+        "as_written": "AA-AnalystAgent"
+      },
+      {
+        "benchmark": "diligencebench",
+        "score": 48.6,
+        "unit": "%",
+        "as_written": "Diligence Bench (best harness)"
+      },
+      {
+        "benchmark": "gdp-pdf",
+        "score": 16.8,
+        "unit": "%",
+        "as_written": "GDP.pdf"
+      },
+      {
+        "benchmark": "perceptionbench-moonshot",
+        "score": 57.5,
+        "unit": "%",
+        "as_written": "PerceptionBench"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 74.9,
+        "unit": "%",
+        "as_written": "MMMU Pro (Standard 10)"
+      },
+      {
+        "benchmark": "omnidocbench-1-6",
+        "score": 92.8,
+        "unit": "score",
+        "as_written": "OmniDocBench v1.6"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 76.5,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro (original, 87.7 with Python)"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 22.1,
+        "unit": "%",
+        "as_written": "Chartography (original, 72.5 with Python)"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 17.0,
+        "unit": "%",
+        "as_written": "ZeroBench (main, original, 34.0 with Python)"
+      },
+      {
+        "benchmark": "muirbench",
+        "score": 77.5,
+        "unit": "%",
+        "as_written": "MuirBench"
+      },
+      {
+        "benchmark": "bvb",
+        "score": 68.4,
+        "unit": "score",
+        "as_written": "BVB"
+      },
+      {
+        "benchmark": "hle-diamond",
+        "score": 15.2,
+        "unit": "%",
+        "as_written": "HLE-Diamond"
+      },
+      {
+        "benchmark": "critpt-v2",
+        "score": 31.4,
+        "unit": "%",
+        "as_written": "CritPt v2 (Full, 17.0 on Hard)"
+      },
+      {
+        "benchmark": "matharena-apex-imo-usamo",
+        "score": 34.4,
+        "unit": "%",
+        "as_written": "Apex 2025"
+      },
+      {
+        "benchmark": "arc-agi",
+        "score": 84.5,
+        "unit": "%",
+        "as_written": "ARC-AGI v1"
+      },
+      {
+        "benchmark": "arc-agi-2",
+        "score": 49.3,
+        "unit": "%",
+        "as_written": "ARC-AGI v2"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 66.9,
+        "unit": "%",
+        "as_written": "LongBench v2"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 69.7,
+        "unit": "%",
+        "as_written": "GraphWalks BFS 256K"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 46.4,
+        "unit": "%",
+        "as_written": "MRCR v2 8-needle 256K to 512K"
+      },
+      {
+        "benchmark": "aa-omniscience-1-1",
+        "score": -8.6,
+        "unit": "index",
+        "as_written": "AA-Omniscience v1.1 score (non-hallucination rate 63.4%)"
+      },
+      {
+        "benchmark": "complexconstraints",
+        "score": 33.4,
+        "unit": "%",
+        "as_written": "ComplexConstraints v1.1 (openhands v1.45.0)"
+      },
+      {
+        "benchmark": "fortress",
+        "score": null,
+        "unit": "%",
+        "as_written": "FORTRESS (adversarial 89.5%, benign 96.4%), Public"
+      },
+      {
+        "benchmark": "strongreject",
+        "score": 97.8,
+        "unit": "%",
+        "as_written": "StrongREJECT (none)"
+      },
+      {
+        "benchmark": "misbehavior-thinking-machines",
+        "score": 9.8,
+        "unit": "%",
+        "as_written": "Misbehavior (Internal), lower is better"
+      },
+      {
+        "benchmark": "covert-misbehavior-thinking-machines",
+        "score": 8.3,
+        "unit": "%",
+        "as_written": "Covert misbehavior (Internal), lower is better"
+      },
+      {
+        "benchmark": "destructive-actions-thinking-machines",
+        "score": 10.2,
+        "unit": "%",
+        "as_written": "Destructive actions (Internal), lower is better"
       }
     ]
   },
@@ -51952,7 +52252,8 @@
         "as_written": "Agentic terminal coding, Terminal-Bench 4.0 (Xhigh effort)"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 31.5,
         "unit": "%",
         "as_written": "Black-box software replication, ProgramBench"

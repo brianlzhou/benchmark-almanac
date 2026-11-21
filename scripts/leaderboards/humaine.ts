@@ -31,7 +31,7 @@ const board: Leaderboard = {
       for (const r of list ?? []) {
         if (!r.model_name || typeof r.score !== 'number') continue;
         const metrics: Record<string, number> = {};
-        for (const k of ['p_best','expected_rank','score_std','total_comparisons']) if (typeof r[k] === 'number') metrics[k] = r[k];
+        for (const k of ['p_best','expected_rank','score_std','total_comparisons']) if (typeof r[k] === 'number') metrics[k === 'score_std' ? 'std' : k] = r[k];
         if (r.score_ci_95) {metrics.ciLow = r.score_ci_95.lower; metrics.ciHigh = r.score_ci_95.upper;}
         const name = r.model_name.split('/').at(-1);
         out.push({model: identity(name), score: r.score, setting, metrics});

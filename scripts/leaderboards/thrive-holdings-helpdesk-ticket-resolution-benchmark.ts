@@ -27,15 +27,17 @@ const board: Leaderboard = {
     const path = html.match(/\/assets\/home-[\w-]+\.js/)?.[0];
     if (!path) throw new Error('home bundle not found');
     const js = await fetchText(`${SITE}${path}`);
-    const re = /\{model:"([^"]+)",reasoning:"([^"]*)",correct:\d+,failed:\d+,graded:(\d+),score:([\d.]+),cost:([\d.]*)(?:,minutes:([\d.]+))?/g;
+    const re = /\{model:"([^"]+)",reasoning:"([^"]*)",correct:(\d+),failed:(\d+),graded:(\d+),score:([\d.]+),cost:([\d.]*)(?:,minutes:([\d.]+))?/g;
     const rows: LeaderboardRow[] = [];
     for (const m of js.matchAll(re)) {
       rows.push({
         model: m[1],
-        score: Number(m[4]),
+        score: Number(m[6]),
         setting: m[2] || undefined,
-        cost: m[5] ? Number(m[5]) : undefined,
-        ...(m[6] ? { metrics: { minutes: Number(m[6]) } } : {}),
+        cost: m[7] ? Number(m[7]) : undefined,
+        metrics: {correct: Number(m[3]), failed: Number(m[4]), graded: Number(m[5]),
+          ...(m[8] ? {minutes: Number(m[8]), latency: Number(m[8]) * 60} : {}),
+        },
       });
     }
     if (rows.length < 10) throw new Error(`only ${rows.length} helpdesk rows found`);

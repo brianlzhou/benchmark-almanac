@@ -9,6 +9,7 @@ const board: Leaderboard = {
   parts: {
     transfer: { name: 'Transfer', group: 'Task type' },
     occlusion: { name: 'Occlusion', group: 'Task type' },
+    counting: { name: 'Counting', group: 'Task type' },
     sequence: { name: 'Sequence', group: 'Task type' },
   },
   url: "https://robomemarena.github.io/leaderboard_data.json",
@@ -16,7 +17,19 @@ const board: Leaderboard = {
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      const d=await fetchJson<any>(FEED);return d.entries.filter((r:any)=>r.protocol==='Simulation').map((r:any)=>({model:r.method,score:r.overall_tsr,metrics:{componentSuccess:r.overall_csr,transfer:r.transfer_tsr,occlusion:r.occlusion_tsr,counting:r.counting_tsr,sequence:r.sequence_tsr}}));
+      const data = await fetchJson<any>(FEED);
+      return data.entries.filter((r: any) => r.protocol === 'Simulation').map((r: any) => ({
+        model: r.method,
+        score: r.overall_tsr,
+        agentOrg: r.affiliation || undefined,
+        models: r.vlm && r.vlm !== '-' && r.vla && r.vla !== '-' ? [r.vlm, r.vla] : undefined,
+        metrics: {
+          componentSuccess: r.overall_csr,
+          transfer: r.transfer_tsr, occlusion: r.occlusion_tsr, counting: r.counting_tsr, sequence: r.sequence_tsr,
+          transferComponentSuccess: r.transfer_csr, occlusionComponentSuccess: r.occlusion_csr,
+          countingComponentSuccess: r.counting_csr, sequenceComponentSuccess: r.sequence_csr,
+        },
+      }));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

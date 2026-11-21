@@ -13,7 +13,7 @@ const PAGE = 'https://arxiv.org/html/2508.09101v1';
 const DATE = '2025-08-12';
 
 const board: Leaderboard = {
-  benchmark: 'autocodebench-tencent',
+  benchmark: 'autocodebench-tencent', static: 'paper',
   url: 'https://autocodebench.github.io/',
   feed: `${PAGE} (main results table, Average)`,
   terms: 'arXiv robots.txt allows /html (crawl delay 15 s; one request per sync); the paper is CC0.',

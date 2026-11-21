@@ -1,0 +1,4 @@
+// WenetSpeech-Chuan-Eval measures Sichuanese automatic speech recognition error.
+// The paper's ASR table reports average CER across WSC-Eval-ASR and MagicData; lower is better.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml} from '../lib/boards/arxiv-throttled.ts';import {tables,num} from '../lib/html.ts';
+const FEED='https://arxiv.org/html/2509.18004';const board:Leaderboard={benchmark:'wenetspeech-chuan-eval',static:'paper',url:FEED,feed:FEED,terms:'arXiv permits these HTML paths under robots.txt. Results are attributed to the paper authors.',async fetch(){const t=tables(await paperHtml(FEED))[2];if(!t)throw new Error('Missing WenetSpeech ASR table');const out:LeaderboardRow[]=[];for(const r of t.slice(3)){const model=r[0]?.text.trim();const score=num(r[7]?.text??'');if(model&&score!==undefined)out.push({model,score})}if(out.length<2)throw new Error('Too few WenetSpeech rows');return out;}};export default board;

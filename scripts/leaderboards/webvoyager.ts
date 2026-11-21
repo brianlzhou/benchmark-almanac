@@ -3,7 +3,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/2401.13919';
 const board: Leaderboard = {
-  benchmark: 'webvoyager', parts: {
+  benchmark: 'webvoyager', static: 'paper', parts: {
   Allrecipes: { name: 'Allrecipes', group: 'Environment' },
   Amazon: { name: 'Amazon', group: 'Environment' },
   Apple: { name: 'Apple', group: 'Environment' },
@@ -27,7 +27,7 @@ const board: Leaderboard = {
     const selected = t.slice(split + 2).filter(r => r[0].includes('∗') && !r[0].includes('Text-only'));
     if (selected.length !== 3) throw new Error('WebVoyager backbone rows changed');
     return selected.map(r => {
-      const metrics: Record<string, number> = {judgeRuns: 3, scoreStdDev: parseFloat(r[8].split('±')[1])};
+      const metrics: Record<string, number> = {judgeRuns: 3, std: parseFloat(r[8].split('±')[1])};
       const first = t.slice(1, split).find(x => x[0] === r[0])!;
       for (let i = 1; i < 9; i++) metrics[t[0][i]] = parseFloat(first[i]);
       for (let i = 1; i < 8; i++) metrics[[t[split][i],t[split + 1][i]].filter((s,j,a)=>a.indexOf(s)===j).join(' ')] = parseFloat(r[i]);

@@ -4,7 +4,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2402.07688";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "cybermetric",
+  benchmark: "cybermetric", static: 'paper',
   parts: {
     accuracy80: { name: 'CyberMetric-80', group: 'Split' },
     accuracy500: { name: 'CyberMetric-500', group: 'Split' },

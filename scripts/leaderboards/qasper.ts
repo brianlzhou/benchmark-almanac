@@ -5,7 +5,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2105.03011';
 export default {
- benchmark:'qasper', parts: {
+ benchmark:'qasper', static: 'paper', parts: {
   spanF1: { name: 'Span', group: 'Task type' },
   abstractiveF1: { name: 'Abstractive', group: 'Task type' },
 },url:'https://arxiv.org/abs/2105.03011',feed,terms:PAPER_TERMS,

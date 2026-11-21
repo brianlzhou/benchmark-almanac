@@ -8,11 +8,12 @@ const FEED = "https://sec-bench.github.io/";
 const board: Leaderboard = {
   benchmark: "sec-bench", url: "https://sec-bench.github.io/", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
+  verified: 'Marked Verified in the official SEC-bench table.',
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
-    const ts=all.filter(t=>t[0]?.includes("System")&&t[0]?.includes("Score"));if(ts.length!==2)throw new Error("Expected original SEC-bench task tables");for(const [j,t] of ts.entries())for(const r of t.slice(1)){const score=num(r[2]);if(score===undefined)continue;const parts=r[1].replace(/\s+Verified$/,"").split(" + ");rows.push({model:parts.slice(1).join(" + "),harness:parts[0],score,setting:j===0?"PoC generation":"vulnerability patching",date:r[4]});}
+    const ts=all.filter(t=>t[0]?.includes("System")&&t[0]?.includes("Score"));if(ts.length!==2)throw new Error("Expected original SEC-bench task tables");for(const [j,t] of ts.entries())for(const r of t.slice(1)){const score=num(r[2]);if(score===undefined)continue;const parts=r[1].replace(/\s+Verified$/,"").split(" + ");rows.push({model:parts.slice(1).join(" + "),harness:parts[0],score,setting:j===0?"PoC generation":"vulnerability patching",date:r[4],agentOrg:r[3] || undefined,verified:/\sVerified$/.test(r[1]) || undefined});}
     if (!rows.length) throw new Error("No sec-bench score rows");
     return rows.filter(r=>r.setting==='PoC generation').map(r=>{
       const patch=rows.find(x=>x.model===r.model&&x.harness===r.harness&&x.setting==='vulnerability patching');

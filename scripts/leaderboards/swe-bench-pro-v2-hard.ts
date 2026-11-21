@@ -1,4 +1,5 @@
 import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
+// The published ranking assigns ties to different resolve rates.
 // SWE-Bench Pro V2 Hard: the "hard" tab (SWE-Bench Pro V2 HARD) of Scale's SWE-Bench Pro V2 board, the tab the
 // page opens on. The score is the resolve rate in percent. Names carry the harness and effort. The board's
 // ± interval is kept as metrics.ciLow and ciHigh.
@@ -23,6 +24,8 @@ const board: Leaderboard = {
   feed: scaleFeed(PAGE, TAB),
   terms: SCALE_TERMS,
   aliases: { ...SCALE_ALIASES },
-  fetch: async () => scaleRows(await fetchScaleEntries(PAGE, TAB), (_, e) => (ci(e) ? { metrics: ci(e) } : undefined)),
+  fetch: async () => scaleRows(await fetchScaleEntries(PAGE, TAB), (_, e) => ({
+    metrics: { ...ci(e), ...(typeof e.rank === 'number' ? { tiedRank: e.rank } : {}) },
+  })),
 };
 export default board;

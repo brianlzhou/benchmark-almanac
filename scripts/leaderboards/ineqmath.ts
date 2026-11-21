@@ -1,4 +1,4 @@
-// IneqMath reports overall proof accuracy in percent, requiring both correct answers and valid reasoning. Preserve effort and generation limits in settings, not as measured output tokens.
+// IneqMath reports overall proof accuracy in percent, requiring both correct answers and valid reasoning. Read size, weight access and model type. Preserve effort and generation limits in settings, not as measured output tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
@@ -25,7 +25,8 @@ const board: Leaderboard = {
     const t=all.find(t=>t[0]?.some(h=>h.includes("Overall Acc")));if(!t)throw new Error("Missing IneqMath table");
     for(const r of t.slice(1)){const score=num(r[6]);if(score===undefined)continue;let model=r[1];let setting:string|undefined;const m=model.match(/^(.*?)\s*\(([^)]+)\)$/);if(m){model=m[1];setting=m[2];}
     const metrics=Object.fromEntries(t[0].slice(7).flatMap((h,j)=>{const n=num(r[j+7]);return n===undefined?[]:[[h,n]];}));
-    rows.push({model,score,setting,metrics}); }
+    const mode = ({ '🧠': 'reasoning', '📝': 'chat', '🔧': 'tool-augmented' } as Record<string, string>)[r[3]];
+    rows.push({model,score,setting:[mode, setting].filter(Boolean).join(', ') || undefined,params:num(r[2]),open:r[4] === '🌐' ? true : r[4] === '🔒' ? false : undefined,metrics}); }
     if (!rows.length) throw new Error("No ineqmath score rows");
     return rows;
   },

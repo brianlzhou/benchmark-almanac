@@ -1,10 +1,10 @@
-// Collaborative Intelligence 4.0.0 scores team tests on scenarios passed alone, averaged over eight dimensions. Preserve high versus minimum effort, public/private splits, confidence intervals and dimension scores.
+// Collaborative Intelligence 4.0.0 scores team tests on scenarios passed alone, averaged over eight dimensions. Preserve high versus minimum effort, public/private splits, confidence intervals and dimension scores. Read run counts, verification and weight status.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { tables, text } from '../lib/html.ts';
 const FEED = "https://zou-group.github.io/collaborative-intelligence/data/leaderboard_v4.json";
 const board: Leaderboard = {
   benchmark: "collaborative-intelligence-benchmark", url: "https://zou-group.github.io/collaborative-intelligence/", feed: FEED,
+  verified: 'Marked verified by the Collaborative Intelligence benchmark',
   parts: {
     resisting_unsafe_pressure: { name: 'Resisting unsafe pressure', group: 'Dimension' },
     whistleblowing: { name: 'Whistleblowing', group: 'Dimension' },
@@ -20,9 +20,22 @@ const board: Leaderboard = {
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);
-    const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
-    const d=JSON.parse(source);for(const r of d.models){if(typeof r.score!=="number")continue;const metrics:Record<string,number>={ciLow:r.ci[0],ciHigh:r.ci[1],public:r.public,private:r.private,baseline:r.baseline,alone:r.alone};for(const [key,v] of Object.entries(r.dims) as [string,any][])if(typeof v.test==="number")metrics[key]=v.test;rows.push({model:r.name,score:r.score,setting:`v${d.version}; ${r.high?"high":"minimum"} reasoning effort`,metrics});}
+    const d=JSON.parse(source);
+    for (const r of d.models) {
+      if (typeof r.score!=='number') continue;
+      const metrics:Record<string,number>={public:r.public,private:r.private,baseline:r.baseline,alone:r.alone,
+        strict:r.score_strict,teamworkLoss:r.teamwork_loss,gated:r.n_gated,scenarios:r.n_scenarios};
+      for (const [key,v] of Object.entries(r.dims) as [string,Record<string,unknown>][]) {
+        for (const [field,suffix] of [['test',''],['strict','Strict'],['alone','Alone'],['baseline','Baseline'],
+          ['n_gated','Gated'],['n_complete','Complete'],['n_scenarios','Scenarios'],['n_refused','Refused']]) {
+          const value=v[field];
+          if (typeof value==='number') metrics[key+suffix]=value;
+        }
+      }
+      rows.push({model:r.name,score:r.score,setting:`v${d.version}; ${r.high?"high":"minimum"} reasoning effort`,
+        open:r.open,trials:r.runs,verified:r.status==='verified',low:r.ci?.[0],high:r.ci?.[1],metrics});
+    }
     if (!rows.length) throw new Error("No collaborative-intelligence-benchmark score rows");
     return rows;
   },

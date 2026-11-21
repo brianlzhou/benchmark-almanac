@@ -50,7 +50,7 @@ const board: Leaderboard = {
           const task = key.slice(0, -4);
           metrics[task] = Number(cell) * 100;
           board.parts[task] = { name: task.replace(/_/g, ' '), group: 'Task' };
-        } else if (key === 'avg_acc_standard_error') metrics.standardError = Number(cell) * 100;
+        } else if (key === 'avg_acc_standard_error') metrics.stderr = Number(cell) * 100;
         else if (key.startsWith('code_len_')) metrics[key] = Number(cell);
       }
       rows.push({

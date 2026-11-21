@@ -24,7 +24,7 @@ const board: Leaderboard = {
   return t.slice(2).filter(r=>num(r[8]?.text)!==undefined).map(r=>({
     model:text(r[1].html.split(/<p\b/)[0]),score:num(r[8].text)!,
     setting:'source release month '+r[3].text,
-    metrics:Object.fromEntries(['correct','incorrect','notAttempted','correctGivenAttempted','fScore','engineering','nature','socialCultureArts','societyActivities'].map((h,i)=>[h,num(r[i+4].text)!]))
+    metrics:{...(/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? {llmParamsB:Number.parseFloat(r[2].text)} : {}), ...Object.fromEntries(['correct','incorrect','notAttempted','correctGivenAttempted','fScore','engineering','nature','socialCultureArts','societyActivities'].map((h,i)=>[h,num(r[i+4].text)!]))}
   }));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

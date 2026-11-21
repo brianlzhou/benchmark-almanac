@@ -1,5 +1,5 @@
 // Terminal-Bench 2.1 (announced 2026-05-06): a separate registry package with its own "main" board.
-// Includes the published token totals, reward hacks and rank for each run.
+// Includes the published pass@k, run token totals and reward hacks for each run.
 import { makeTerminalBench } from '../lib/boards/terminal-bench.ts';
 
 export default makeTerminalBench({

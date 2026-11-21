@@ -92,7 +92,10 @@ export function geobenchBoard(benchmark: string, test: string): Leaderboard { re
       const metrics: Record<string, number> = {};
       if (typeof r.average_score === 'number') metrics.points = r.average_score;
       for (const key of ['n', 'temperature', 'max_tokens', 'input_tokens', 'output_tokens', 'refusal_rate', 'average_distance_km', 'median_distance_km', 'median_score'] as const) {
-        if (typeof r[key] === 'number') metrics[key] = r[key];
+        if (typeof r[key] === 'number') {
+          const name = key === 'input_tokens' ? 'runInputTokens' : key === 'output_tokens' ? 'runOutputTokens' : key;
+          metrics[name] = r[key];
+        }
       }
       for (const c of r.countries ?? []) {
         const key = 'country:' + c.country;

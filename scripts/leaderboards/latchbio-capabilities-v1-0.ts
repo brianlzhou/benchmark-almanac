@@ -3,7 +3,7 @@
 // of the V1 benchmarks' macro-mean pass rates (0 to 100), which is the score. The harness (Pi, Claude
 // Code, Codex, Grok Build) is kept. "Claude Opus 5.5*" rows are modelVariant LSVP, Anthropic's
 // safety-filter-exempt variant, reported next to the standard run; the asterisk is dropped and the variant
-// becomes the setting. Legacy V0 (/results/v0/) is a different, non-comparable series and is not read.
+// becomes the setting. The feed identifies the included benchmarks and the coverage of each score. Legacy V0 (/results/v0/) is a different, non-comparable series and is not read.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -14,31 +14,12 @@ interface Row {
   harness?: string;
   overallScorePct?: number;
   modelVariant?: string | null;
+  benchmarkCoverage?: string;
   scores?: Record<string, number>;
 }
 
 const board: Leaderboard = {
   benchmark: 'latchbio-capabilities-v1-0',
-  parts: {
-    oncologybench: { name: 'OncologyBench', group: 'Category' },
-    spatialbench: { name: 'SpatialBench', group: 'Category' },
-    'spatialbench-long': { name: 'SpatialBench Long', group: 'Category' },
-    scbench: { name: 'scBench', group: 'Category' },
-    'scbench-long': { name: 'scBench Long', group: 'Category' },
-    epibench: { name: 'EpiBench', group: 'Category' },
-    variantbench: { name: 'VariantBench', group: 'Category' },
-    metagenomics: { name: 'Metagenomics', group: 'Category' },
-    'biosecbench-surveillance': { name: 'BioSecBench surveillance', group: 'Category' },
-    functionbench: { name: 'FunctionBench', group: 'Category' },
-    rarediseasebench: { name: 'RareDiseaseBench', group: 'Category' },
-    tissuemicroscopybench: { name: 'TissueMicroscopyBench', group: 'Category' },
-    neurosciencebench: { name: 'NeuroscienceBench', group: 'Category' },
-    'biosecbench-refusal': { name: 'BioSecBench refusal', group: 'Category' },
-    'biosecbench-structure': { name: 'BioSecBench structure', group: 'Category' },
-    'txbench-ab': { name: 'TxBench Antibody discovery', group: 'Category' },
-    'txbench-pp': { name: 'TxBench Preclinical pharmacology', group: 'Category' },
-    'txbench-od': { name: 'TxBench Oligo discovery', group: 'Category' },
-  },
   url: 'https://benchmarks.bio/results/v1/',
   feed: `${FEED} (capabilitiesLeaderboard)`,
   terms: 'JSON that benchmarks.bio publishes for machine use (llms.txt); robots.txt allows all paths and the site states no license.',
@@ -47,17 +28,26 @@ const board: Leaderboard = {
     'Nemotron 3 Ultra 550B A55B': 'nemotron-3-ultra',
   },
   async fetch() {
-    const data = await fetchJson<{ resultVersion?: string; capabilitiesLeaderboard: Row[] }>(FEED);
+    const data = await fetchJson<{ resultVersion?: string; benchmarks: {id: string; label: string; category: string; assessment: string; excludeFromOverall: boolean}[]; capabilitiesLeaderboard: Row[] }>(FEED);
     if (data.resultVersion && data.resultVersion !== 'v1') throw new Error(`unexpected result version ${data.resultVersion}`);
+    board.parts = Object.fromEntries(data.benchmarks
+      .filter(b => b.assessment === 'capabilities' && !b.excludeFromOverall)
+      .map(b => [b.id, {name: b.label, group: b.category}]));
     const rows: LeaderboardRow[] = [];
     for (const r of data.capabilitiesLeaderboard) {
       if (typeof r.overallScorePct !== 'number') continue;
+      const metrics = Object.fromEntries(Object.entries(r.scores ?? {}).filter(([, value]) => Number.isFinite(value)));
+      const coverage = r.benchmarkCoverage?.match(/^(\d+)\/(\d+)$/);
+      if (coverage) {
+        metrics.benchmarksCovered = Number(coverage[1]);
+        metrics.benchmarksPossible = Number(coverage[2]);
+      }
       rows.push({
         model: r.model.replace(/\*+$/, '').trim(),
         score: r.overallScorePct,
         harness: r.harness || undefined,
         setting: r.modelVariant || undefined,
-        metrics: r.scores ? Object.fromEntries(Object.entries(r.scores).filter(([, value]) => Number.isFinite(value))) : undefined,
+        metrics,
       });
     }
     return rows;

@@ -57,7 +57,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -179,6 +179,18 @@ function rematchBoard(board: Leaderboard) {
   console.log(`  ${board.benchmark}: ${moved.length} unlisted entries now match (${[...new Set(moved.map((r) => r[1]))].join(', ')})`);
 }
 
+// A fixed source (a paper's results table) gains no models, so a full sync reads it once in each 30-day cycle, on a
+// day set by its id so the reads spread across the month, or when 45 days have passed since its last read. Reading
+// every paper on every run would cost an hour or more, since arXiv asks for 15 seconds between requests.
+const dayNumber = (d: string) => Math.floor(Date.parse(d) / 86_400_000);
+function readsStaticToday(id: string, retrieved: string | undefined): boolean {
+  if (!retrieved) return true;
+  const now = dayNumber(today());
+  const age = now - dayNumber(retrieved);
+  const slot = [...id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) % 30;
+  return age >= 45 || (age >= 1 && now % 30 === slot);
+}
+
 const dir = join(ROOT, 'scripts', 'leaderboards');
 const files = readdirSync(dir).filter((f) => f.endsWith('.ts') && f !== 'types.ts');
 let failed = 0;
@@ -204,6 +216,11 @@ for (const f of files) {
   if (!dry && kept) {
     if (board.host) kept.host = board.host;
     else delete kept.host;
+    // and so is how it makes the headline score
+    if (board.headline) kept.headline = board.headline;
+    else delete kept.headline;
+    if (board.static) kept.static = board.static;
+    else delete kept.static;
     // so are the parts it declares up front. Parts an importer sets inside fetch() wait for its next read.
     if (board.parts) {
       const parts = partsOf(board, storedRows(board.benchmark));
@@ -218,6 +235,7 @@ for (const f of files) {
   }
   if (rematch && !dry && kept) rematchBoard(board);
   if (only && !only.includes(board.benchmark) && !only.includes(f.replace(/\.ts$/, ''))) continue;
+  if (!only && kept && board.static && !readsStaticToday(board.benchmark, kept.retrieved)) continue;
   if (!benchmarks.has(board.benchmark)) {
     console.log(`  ${f}: unknown benchmark ${board.benchmark}`);
     failed++;
@@ -276,7 +294,7 @@ for (const f of files) {
     store.others = (store.others ?? []).filter((r) => r[0] !== board.benchmark).concat(others);
     const parts = partsOf(board, [...rows, ...others]);
     const measures = measuresOf(board, [...rows, ...others]);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(measures ? { measures } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(measures ? { measures } : {}) };
   } catch (e) {
     failed++;
     const error = (e as Error).message;

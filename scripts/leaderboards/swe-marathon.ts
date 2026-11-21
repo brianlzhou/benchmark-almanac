@@ -3,8 +3,8 @@
 // per agent and model, pass1 (pass@1 over 100 trials, 0 to 100, the ranking), the mean trial cost in US
 // dollars and token counts. pass1 is the score. The Oracle and NOP reference rows are skipped, and the
 // scaffold (agent) name, without its version, is the harness. Metrics: partialAvg, the mean uncalibrated
-// partial score (0 to 100), as `partial`, and tokAvg, the mean tokens of all kinds per trial in millions (not
-// output tokens alone), as `tokensM`. The v1.1 board is swe-marathon-1-1.ts.
+// partial score (0 to 100), as `partial`. The board reports mean total tokens per trial in millions.
+// The importer converts that value to tokens. The v1.1 board is swe-marathon-1-1.ts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { SWEM_PAGE, SWEM_TERMS, backtickLiteral, swemBundle } from './swe-marathon-1-1.ts';
 
@@ -38,7 +38,7 @@ const board: Leaderboard = {
       if (e.ref || typeof e.pass1 !== 'number') continue;
       const metrics: Record<string, number> = {};
       if (typeof e.partialAvg === 'number') metrics.partial = e.partialAvg;
-      if (typeof e.tokAvg === 'number') metrics.tokensM = e.tokAvg;
+      if (typeof e.tokAvg === 'number') metrics.totalTokens = e.tokAvg * 1_000_000;
       rows.push({
         model: e.name,
         score: e.pass1,

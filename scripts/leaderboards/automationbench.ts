@@ -87,7 +87,7 @@ const board: Leaderboard = {
         }
       }
       const cost = parseFloat(price?.match(/^\$\s*([\d.]+)/)?.[1] ?? '');
-      const metrics: Record<string, number> = { rank: Number(rank), ...departments.get(name) };
+      const metrics: Record<string, number> = { ...departments.get(name) };
       const promo = price.endsWith('*') ? promotional.get(name) ?? promotional.get(model) : undefined;
       if (promo !== undefined) metrics.promotionalCostUsd = promo;
       const cachedPrice = source.match(/DeepSeek V4 Flash at Fireworks rates: \$([\d.]+) \/ task uncached, \$([\d.]+) cached/);

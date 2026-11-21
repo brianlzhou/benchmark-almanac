@@ -5,7 +5,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2403.01469';
 export default {
- benchmark:'kormedmcqa', parts: {
+ benchmark:'kormedmcqa', static: 'paper', parts: {
   doctor: { name: 'Doctor', group: 'Domain' },
   nurse: { name: 'Nurse', group: 'Domain' },
   pharmacist: { name: 'Pharmacist', group: 'Domain' },

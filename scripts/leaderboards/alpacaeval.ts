@@ -2,7 +2,7 @@
 // from the repository's docs/data_AlpacaEval/alpaca_eval_gpt4_leaderboard.csv: name, length-controlled win
 // rate, win rate, average length, link, samples and a filter tag (minimal, verified, community). The win
 // rate (0 to 100) is the 1.0 headline and the score. AlpacaEval 2.0 has its own record and file. Each row also
-// carries the length-controlled win rate ("lcWinRate", %) and the average output length ("length", characters).
+// links to the sample outputs and retains the board’s verified mark. It also carries the length-controlled win rate ("lcWinRate", %) and the average output length ("length", characters).
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -16,6 +16,7 @@ const board: Leaderboard = {
   url: 'https://tatsu-lab.github.io/alpaca_eval/',
   feed: FEED,
   terms: 'CSV in the tatsu-lab/alpaca_eval GitHub repository, which is Apache-2.0.',
+  verified: 'Tagged verified in the AlpacaEval 1.0 leaderboard',
   aliases: {
     'GPT-4 Preview (11/06)': 'gpt-4-turbo-nov-2023',
     'GPT-4 (03/14)': 'gpt-4-mar-2023',
@@ -35,7 +36,10 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (r.length_controlled_winrate && Number.isFinite(lc)) metrics.lcWinRate = lc;
       if (length > 0) metrics.length = length;
-      rows.push({ model: AMBIGUOUS.has(r.name.trim()) ? `${r.name.trim()} (snapshot unspecified)` : r.name.trim(), score, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({ model: AMBIGUOUS.has(r.name.trim()) ? `${r.name.trim()} (snapshot unspecified)` : r.name.trim(), score,
+        link: /^https?:\/\//i.test(r.samples) ? r.samples : undefined,
+        verified: r.filter === 'verified' ? true : undefined,
+        ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no rows in the AlpacaEval 1.0 CSV');
     return rows;

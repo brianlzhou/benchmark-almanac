@@ -1,7 +1,7 @@
 // GSO (Global Software Optimization). gso-bench.github.io builds its table from assets/leaderboard.json:
 // one entry per run with model, scaffold, setting (Opt@1 or Opt@10), reasoning effort and score, the
-// percentage of tasks where the agent matched the expert speedup. Opt@1 is the headline; the two Opt@10
-// rows are a best-of-ten metric and are left out so the scores stay comparable. The board's "Hack-Adjusted"
+// percentage of tasks where the agent matched the expert speedup. Opt@1 is the headline. Matching Opt@10 scores are metrics.
+// Each row names its submitting organization. The board's "Hack-Adjusted"
 // column (score_hack_control: the score after a penalty for reward hacking) is kept as metrics.hackAdjusted.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -11,6 +11,7 @@ const FEED = 'https://gso-bench.github.io/assets/leaderboard.json';
 interface Entry {
   name: string;
   scaffold?: string;
+  submission_org_name?: string;
   setting?: string;
   score: number;
   score_hack_control?: number | null;
@@ -33,14 +34,20 @@ const board: Leaderboard = {
     const { models } = await fetchJson<{ models: Entry[] }>(FEED);
     return models
       .filter((m) => (m.setting ?? 'Opt@1') === 'Opt@1')
-      .map((m) => ({
-        model: m.name,
-        score: Number(m.score),
-        setting: m.reasoning_effort?.toLowerCase() || undefined,
-        harness: m.scaffold,
-        date: m.date,
-        ...(typeof m.score_hack_control === 'number' ? { metrics: { hackAdjusted: m.score_hack_control } } : {}),
-      }));
+      .map((m) => {
+        const ten = models.find(other => other.setting === 'Opt@10' && other.name === m.name &&
+          other.scaffold === m.scaffold && other.reasoning_effort === m.reasoning_effort &&
+          other.date === m.date && other.submission_org_name === m.submission_org_name);
+        const metrics: Record<string, number> = {};
+        if (typeof m.score_hack_control === 'number') metrics.hackAdjusted = m.score_hack_control;
+        if (ten) metrics.optAt10 = Number(ten.score);
+        if (typeof ten?.score_hack_control === 'number') metrics.hackAdjustedAt10 = ten.score_hack_control;
+        return {
+          model: m.name, score: Number(m.score), harness: m.scaffold,
+          setting: m.reasoning_effort?.toLowerCase() || undefined,
+          date: m.date, submitter: m.submission_org_name, metrics,
+        };
+      });
   },
 };
 export default board;

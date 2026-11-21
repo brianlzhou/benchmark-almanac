@@ -10,5 +10,6 @@
   { "id": "kimi-code", "name": "Kimi Code", "aliases": ["kimi-code", "kimi_code", "Kimi-Code"], "maker": "moonshot", "kind": "agent" },
   { "id": "cursor-cli", "name": "Cursor CLI", "aliases": ["cursor_cli"], "maker": "cursor", "kind": "agent" },
   { "id": "devin", "name": "Devin", "aliases": ["Devin CLI"], "maker": "cognition", "kind": "agent" },
-  { "id": "arca", "name": "Arca", "aliases": [], "maker": "Arca", "kind": "agent", "url": "https://arca.inc/" }
+  { "id": "arca", "name": "Arca", "aliases": [], "maker": "Arca", "kind": "agent", "url": "https://arca.inc/" },
+  { "id": "opencode", "name": "OpenCode", "aliases": ["opencode", "Open Code"], "maker": "SST", "kind": "agent", "url": "https://opencode.ai/" }
 ]

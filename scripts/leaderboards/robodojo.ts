@@ -23,7 +23,7 @@ const board: Leaderboard = {
   feed: `${FEED} (sim, average score)`,
   terms: 'Static JSON the board itself loads; robots.txt allows it (disallows only /internal/ and /login) and the RoboDojo repository is MIT-licensed.',
   async fetch() {
-    const data = await fetchJson<{ sim: { model: string; score: number; successRate?: number; dimensions?: Record<string, {score?: number; successRate?: number}>; genSplits?: Record<string, {score?: number; successRate?: number}> }[] }>(FEED);
+    const data = await fetchJson<{ sim: { model: string; team?: string; score: number; successRate?: number; dimensions?: Record<string, {score?: number; successRate?: number}>; genSplits?: Record<string, {score?: number; successRate?: number}> }[] }>(FEED);
     const rows: LeaderboardRow[] = [];
     for (const r of data.sim ?? []) if (r.model && Number.isFinite(r.score)) {
       const metrics: Record<string, number> = {};
@@ -32,7 +32,7 @@ const board: Leaderboard = {
         if (Number.isFinite(value.score)) metrics[`${key}Score`] = value.score!;
         if (Number.isFinite(value.successRate)) metrics[`${key}SuccessRate`] = value.successRate!;
       }
-      rows.push({ model: r.model.trim(), score: r.score, metrics });
+      rows.push({ model: r.model.trim(), submitter: r.team?.trim() || undefined, score: r.score, metrics });
     }
     if (rows.length < 10) throw new Error(`only ${rows.length} RoboDojo rows`);
     return rows;

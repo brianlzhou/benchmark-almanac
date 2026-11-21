@@ -6,7 +6,7 @@ const URL = 'https://arxiv.org/html/2505.00681';
 const clean = (s: string) => s.replace(/\s*\[\s*\d+\s*\]/g, '').trim();
 const names: Record<string, string> = {'Qwen2.5-VL': 'Qwen2.5-VL-72B', 'VideoLLaMA3': 'VideoLLaMA3-7B', 'Claude3.5 Sonnet v2': 'claude-3-5-sonnet-20241022', 'GPT-4o': 'gpt-4o-2024-08-06'};
 const board: Leaderboard = {
-  benchmark: 'minerva-video', url: URL, feed: URL + ' (Table 4 MCQ accuracy, Table 8 settings, Table 9 reasoning metrics)', terms: PAPER_TERMS,
+  benchmark: 'minerva-video', static: 'paper', url: URL, feed: URL + ' (Table 4 MCQ accuracy, Table 8 settings, Table 9 reasoning metrics)', terms: PAPER_TERMS,
   aliases: {'claude-3-5-sonnet-20241022': 'claude-3-5-sonnet-october-2024'},
   async fetch() {
     const ts = inlinePaperTables(await paperHtml(URL));

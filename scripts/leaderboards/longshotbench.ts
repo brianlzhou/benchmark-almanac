@@ -29,11 +29,10 @@ const board: Leaderboard = {
       const size = r[2].text.match(/^(\d+(?:\.\d+)?)(B|T)/);
       const active = r[2].text.match(/\((\d+(?:\.\d+)?)B active\)/);
       const mode = model.endsWith('-T') ? 'thinking' : model.endsWith('-I') ? 'instruct' : undefined;
-      const rank = num(r[0].text);
       return {model, score, open: /Closed-source API/i.test(r[1].text) ? false : /open.source/i.test(r[1].text) ? true : undefined,
         setting: [`input: ${r[3].text}`, mode].filter(Boolean).join(', '), harness: /Agentic Systems/.test(r[1].text) ? model : undefined,
         params: size ? Number(size[1]) * (size[2] === 'T' ? 1000 : 1) : undefined,
-        metrics: {...(rank !== undefined ? {rank} : {}), ...Object.fromEntries(r.slice(5).map((c, i) => [t[1][i + 5].text, num(c.text)]).filter((e): e is [string, number] => typeof e[1] === 'number')),
+        metrics: {...Object.fromEntries(r.slice(5).map((c, i) => [t[1][i + 5].text, num(c.text)]).filter((e): e is [string, number] => typeof e[1] === 'number')),
           ...(active ? {activeParams: Number(active[1])} : {})}};
     });
     if (rows.length < 3) throw new Error('LongShOT has fewer than three models');

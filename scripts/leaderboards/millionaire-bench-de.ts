@@ -47,7 +47,7 @@ const board: Leaderboard = {
         const metrics: Record<string, number> = {};
         for (const key of ['rank', 'log_percentage', 'low_deviation_euros', 'high_deviation_euros'] as const) {
           const value = m[key];
-          if (typeof value === 'number') metrics[key] = value;
+          if (typeof value === 'number') metrics[key === 'rank' ? 'poolRank' : key] = value;
         }
         rows.push({ model, score: m.median_value, setting, metrics,
           low: typeof m.low_deviation_euros === 'number' ? m.median_value - m.low_deviation_euros : undefined,

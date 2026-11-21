@@ -19,6 +19,7 @@ const board: Leaderboard = {
     'Motion Smoothness': { name: 'Motion smoothness', group: 'Dimension' },
     Perspectivity: { name: 'Perspectivity', group: 'Dimension' },
     'Photometric Consistency': { name: 'Photometric consistency', group: 'Dimension' },
+    semanticAlignment: { name: 'Semantic Alignment', group: 'Dimension' },
     'Subject Consistency': { name: 'Subject consistency', group: 'Dimension' },
     'Trajectory Accuracy': { name: 'Trajectory accuracy', group: 'Dimension' },
   },
@@ -30,7 +31,7 @@ const board: Leaderboard = {
 
 const event=await fetchJson<any>(FEED,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:[]})});if(!/^[a-f0-9]+$/.test(event.event_id))throw new Error('Missing Gradio event');
 await new Promise(r=>setTimeout(r,1100));const s=await fetchText(`${FEED}/${event.event_id}`);const m=s.match(/event: complete\r?\ndata: (.+)/);if(!m)throw new Error('Gradio results incomplete');const data=JSON.parse(m[1]);const t=tables(data[3])[0]?.map(r=>r.map(c=>c.text));if(!t||!t[0][1].includes('EWMScore'))throw new Error('Track 1 headline changed');
-return t.slice(1).map(r=>({model:r[0],score:num(r[1])!,metrics:Object.fromEntries(r.slice(3).map((v,i)=>[t[0][i+3],num(v)]).filter(([,v])=>v!==undefined))}));
+return t.slice(1).map(r=>({model:r[0],score:num(r[1])!,metrics:Object.fromEntries(r.slice(3).map((v,i)=>[t[0][i+3] === 'Semantic Alignment' ? 'semanticAlignment' : t[0][i+3],num(v)]).filter(([,v])=>v!==undefined))}));
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

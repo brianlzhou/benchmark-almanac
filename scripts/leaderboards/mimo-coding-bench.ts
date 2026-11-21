@@ -1,5 +1,5 @@
 // MiMo Coding Bench: the original V2.5-Pro launch evaluation.
-// This is distinct from MiMo Code Bench in the V2.6 report. Published score keys join the page’s model labels.
+// This is distinct from MiMo Code Bench in the V2.6 report. Join scores to model names, parameter counts and open-weight flags.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -17,7 +17,20 @@ const board: Leaderboard = {
     const models=Object.fromEntries([...block.matchAll(/id:\s*'([^']+)',\s*name:\s*'([^']+)'/g)].map(m=>[m[1],m[2]]));
     const scores=s.match(/name: 'MiMo Coding Bench',[\s\S]*?scores:\s*\{([^}]+)\}/)?.[1];
     if(!scores)throw new Error('MiMo Coding Bench scores missing');
-    return [...scores.matchAll(/(\w+):\s*([\d.]+)/g)].map(m=>({model:models[m[1]],score:Number(m[2])}));
+    const specs = new Map<string, { open: boolean; params?: number; metrics?: Record<string, number> }>();
+    const list = s.match(/const fbModels = \[([\s\S]*?)\];/)?.[1] ?? '';
+    for (const match of list.matchAll(/\{[^{}]*name:\s*'([^']+)'([^{}]*)\}/g)) {
+      const open = match[2].match(/\bos:\s*(true|false)/);
+      if (!open) continue;
+      const size = match[2].match(/params:\s*'([\d.]+)([TB])\s*\/\s*([\d.]+)B'/);
+      specs.set(match[1], {
+        open: open[1] === 'true',
+        ...(size ? {params: Number(size[1]) * (size[2] === 'T' ? 1000 : 1), metrics: {activeParamsB: Number(size[3])}} : {}),
+      });
+    }
+    return [...scores.matchAll(/(\w+):\s*([\d.]+)/g)].map(m => ({
+      model: models[m[1]], score: Number(m[2]), ...specs.get(models[m[1]]),
+    }));
   },
 };
 

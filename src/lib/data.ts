@@ -8,7 +8,9 @@ import resourcesJson from '../../data/resources.json';
 import cardsJson from '../../data/cards.json';
 import systemCardsJson from '../../data/system-cards.json';
 import epochJson from '../../data/scores/epoch.json';
-import leaderboardsJson from '../../data/scores/leaderboards.json';
+// Imported as text, not as JSON: the dev server turns a JSON object into a literal module, and past about 30 MB it
+// cannot parse that, so every page fails. One string parses fine, and the dev server still reloads when it changes.
+import leaderboardsText from '../../data/scores/leaderboards.json?raw';
 import harnessesJson from '../../data/harnesses.json';
 import intervalsJson from '../../data/intervals.json';
 import type { Benchmark, Card, Harness, Lab, Model, Resource, Score, ScoreInfo } from './types.ts';
@@ -67,6 +69,10 @@ type Board = {
   feed: string;
   terms: string;
   host?: string;
+  /** How the importer made the headline score when the source gives no overall score. */
+  headline?: string;
+  /** 'paper' when the scores come from a fixed table in the benchmark's paper. */
+  static?: 'paper';
   retrieved: string;
   rows: number;
   unmatched: string[];
@@ -92,7 +98,7 @@ export interface BoardPart {
   unit?: string;
   better?: 'higher' | 'lower';
 }
-const lb = leaderboardsJson as unknown as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
+const lb = JSON.parse(leaderboardsText) as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
 

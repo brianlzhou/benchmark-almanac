@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2410.13886";
 import { paperTables } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "browserart",
+  benchmark: "browserart", static: 'paper',
   url: "https://github.com/scaleapi/browser-art",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

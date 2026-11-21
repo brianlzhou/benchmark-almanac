@@ -8,7 +8,7 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 
 const FEED = "https://arxiv.org/html/2503.21505";
 const board: Leaderboard = {
- benchmark: "vladbench",
+ benchmark: "vladbench", static: 'paper',
  parts: {
    aspect1: { name: 'Road traffic signals', group: 'Category' },
    aspect2: { name: 'Road passage provisions', group: 'Category' },

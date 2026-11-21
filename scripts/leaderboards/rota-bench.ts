@@ -21,7 +21,7 @@ const board: Leaderboard = {
       const priced = paper.api_costs.find((v:any) => key(v.method) === key(r.method));
       const agent = /^(ReAct|Magentic)$/.test(r.method);
       const backbone = agent ? raw?.source_files?.map((s:string) => s.match(/agent(?:_continuation)?[\\/]([^\\/]+)[\\/]/)?.[1]).find(Boolean) : undefined;
-      const metrics: Record<string,number> = {finalIoU:r.values[1],meanSteps:r.values[2]};
+      const metrics: Record<string,number> = {finalIoU:r.values[1],steps:r.values[2]};
       const cost = priced?.total_usd != null && priced.tasks > 0 ? priced.total_usd / priced.tasks : undefined;
       if(cost !== undefined) metrics.cost=cost;
       return {model: identity(backbone || r.method), score:r.values[0],setting:'Full 100-task test; paper results',harness:agent?r.method:undefined,cost,tokens:raw?.completion_tokens != null ? raw.completion_tokens/raw.completed : undefined,metrics};

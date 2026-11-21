@@ -8,7 +8,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2504.07957";
 const board: Leaderboard = {
- benchmark: "mm-ifeval",
+ benchmark: "mm-ifeval", static: 'paper',
  parts: {
    compose: { name: 'Compose level', group: 'Task type' },
    perception: { name: 'Perception level', group: 'Task type' },

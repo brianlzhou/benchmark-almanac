@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2504.13914';
 export default {
-  benchmark:'beyond-aime',url:'https://arxiv.org/abs/2504.13914',feed,terms:PAPER_TERMS,
+  benchmark:'beyond-aime', static: 'paper',url:'https://arxiv.org/abs/2504.13914',feed,terms:PAPER_TERMS,
   aliases:{"OpenAI o3-mini": "o3-mini"},
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

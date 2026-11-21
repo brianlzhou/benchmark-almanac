@@ -3,7 +3,7 @@
 // bills passed out of 100, cost and tokens per task. The board ranks by cumulative success rate, passed / n,
 // which is the score as a percent. The bundle name is hashed, so it is found in the page first; the
 // literal is read as data, never run. Cost is per task, as the board reports it. The board's tokens per task
-// count all types (cache reads, fresh input, cache writes and output), not output tokens, so they are kept as totalTokensPerTask metrics.
+// count all types (cache reads, fresh input, cache writes and output), not output tokens, so they are kept as totalTokens metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
@@ -48,7 +48,7 @@ const board: Leaderboard = {
         setting: r.effort,
         harness: r.harness,
         cost: r.cost,
-        metrics:typeof r.tokens==='number'?{totalTokensPerTask:r.tokens}:undefined,
+        metrics:typeof r.tokens==='number'?{totalTokens:r.tokens}:undefined,
       });
     }
     return rows;

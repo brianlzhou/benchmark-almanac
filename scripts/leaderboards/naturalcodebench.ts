@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2405.04520";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "naturalcodebench",
+  benchmark: "naturalcodebench", static: 'paper',
   parts: {
     zhPython: { name: 'Chinese Python', group: 'Language' },
     zhJava: { name: 'Chinese Java', group: 'Language' },

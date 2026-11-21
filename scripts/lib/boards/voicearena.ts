@@ -82,7 +82,7 @@ export function voiceArena(language:string,slug:string):Leaderboard{
         if(r.language!==language&&!(NEW_LANGUAGES.has(language)&&r.language===language+'__hold'))continue;
         if(!r.model||!Number.isFinite(r.elo)||r.samples<=0)continue;
         const metrics:Record<string,number>={};
-        for(const [key,value] of Object.entries({ci:r.ci,votes:r.samples,winRate:Number(r.win_rate),rank:r.rank,rankLow:r.range_low,rankHigh:r.range_high}))if(Number.isFinite(value))metrics[key]=value;
+        for(const [key,value] of Object.entries({ci:r.ci,votes:r.samples,winRate:Number(r.win_rate),rankLow:r.range_low,rankHigh:r.range_high}))if(Number.isFinite(value))metrics[key]=value;
         if(language==='US English')Object.assign(metrics,latencyMetrics(data.latency,r));
         rows.push({model:r.model,score:r.elo,metrics});
       }

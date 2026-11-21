@@ -1,0 +1,6 @@
+// BertaQA tests question answering over Basque and English web knowledge.
+// The headline is global accuracy in percent, with local accuracy and the local-global gap as metrics.
+// This importer reads Table 2 of the benchmark paper.
+import type {Leaderboard} from './types.ts'; import {paperTables} from '../lib/boards/arxiv-nested-tables.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2406.07302';
+const board:Leaderboard={benchmark:'bertaqa',static:'paper',url:URL,feed:URL,terms:'The authors publish the paper publicly at https://arxiv.org/abs/2406.07302.',async fetch(){const t=await paperTables(URL).then(x=>x[1]);if(!t)throw new Error('BertaQA Table 2 missing');const out=[];let parent='';for(const r of t.slice(1)){const raw=r[0].text;if(!raw||raw==='Random'||raw==='Average')continue;if(!/^\d|^(?:4 Turbo|Sonnet|Opus|13B|70B|8B|14B|72B|9B|34B|7B|47B)$/.test(raw))parent=raw;const model=/^\d|^(?:4 Turbo|Sonnet|Opus|13B|70B|8B|14B|72B|9B|34B|7B|47B)$/.test(raw)?`${parent} ${raw}`:raw;const local=Number(r[2]?.text),global=Number(r[3]?.text),gap=Number(r[4]?.text);if(Number.isFinite(global))out.push({model,score:global,metrics:{local,gap}})}return checked(out,10)}};export default board;

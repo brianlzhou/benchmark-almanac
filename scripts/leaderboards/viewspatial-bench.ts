@@ -8,7 +8,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2505.21500";
 const board: Leaderboard = {
- benchmark: "viewspatial-bench",
+ benchmark: "viewspatial-bench", static: 'paper',
  parts: {
    cameraRelativeDirection: { name: 'Camera relative direction', group: 'Task type' },
    cameraObjectOrientation: { name: 'Camera object orientation', group: 'Task type' },

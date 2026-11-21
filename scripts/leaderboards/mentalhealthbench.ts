@@ -14,7 +14,7 @@ function figure(text: string, from: string, to: string, cols: number): Map<strin
   return out;
 }
 const board: Leaderboard = {
-  benchmark: 'mentalhealthbench', url: URL, feed: URL + ' (Figures 5, 7, 10 and 11, PDF text layer)',
+  benchmark: 'mentalhealthbench', static: 'paper', url: URL, feed: URL + ' (Figures 5, 7, 10 and 11, PDF text layer)',
   terms: 'OpenAI publishes this technical report for public reading. The CDN has no robots.txt restriction on this path. Numeric results are attributed to the report authors.',
   // the paper's breakdowns of the same task-clipped score: by acuity (Figure 7), by user profile (Figure 10) and
   // on the tasks with prior user context (Figure 11). Its per-axis scores (Figure 8) are signed contributions, not parts.

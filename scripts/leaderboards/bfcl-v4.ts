@@ -65,7 +65,7 @@ const board: Leaderboard = {
         const num = (v: string | undefined) => (v && Number.isFinite(Number(v)) ? Number(v) : undefined);
         const metrics: Record<string, number> = {};
         const columns = {
-          Rank: 'rank', 'Latency Mean (s)': 'latency', 'Latency Standard Deviation (s)': 'latencyStd',
+          'Latency Mean (s)': 'latency', 'Latency Standard Deviation (s)': 'latencyStd',
           'Latency 95th Percentile (s)': 'latencyP95', 'Format Sensitivity Max Delta': 'formatSensitivityMaxDelta',
           'Format Sensitivity Standard Deviation': 'formatSensitivityStd',
         };

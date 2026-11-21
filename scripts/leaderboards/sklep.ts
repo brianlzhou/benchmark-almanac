@@ -1,0 +1,5 @@
+// skLEP tests Slovak language models across ten language-understanding tasks.
+// The headline score is the paper's unweighted average absolute task score.
+// This importer reads Table 5 from the ACL Anthology PDF.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {pdfText} from '../lib/boards/pdf-text.ts';import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const feed='https://aclanthology.org/2025.findings-acl.1371.pdf';const board:Leaderboard={benchmark:'sklep',url:'https://aclanthology.org/2025.findings-acl.1371/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',async fetch(){const p=await pdfText(feed),b=p.slice(p.indexOf('Model                   AVG'),p.indexOf('Table 5: Task-specific scores'));if(!b.includes('SlovakBERT'))throw new Error('skLEP table missing');const rows:LeaderboardRow[]=[];for(const m of b.matchAll(/^\s{1,2}([A-Za-z0-9-]+)\s+(-?\d+\.\d+)\s+(\d+\.\d+)/gm))rows.push({model:m[1],score:Number(m[3])});return checked(rows,10)}};export default board;

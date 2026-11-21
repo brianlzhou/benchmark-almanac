@@ -18,7 +18,7 @@ function numbers(c: string[]) {
   return { score: numberCell(c[1]), tokens: numberCell(c[3]), cost: c[4] === '-' ? undefined : numberCell(c[4]), metrics };
 }
 const board: Leaderboard = {
-  benchmark: 'gittaskbench', url: 'https://github.com/QuantaAlpha/GitTaskBench', feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'gittaskbench', static: 'paper', url: 'https://github.com/QuantaAlpha/GitTaskBench', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'DeepSeek-V3-0324': 'deepseek-v3-mar-2025' },
   async fetch() {
     const all = await paperTables(FEED);

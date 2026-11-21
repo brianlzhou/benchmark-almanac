@@ -12,7 +12,7 @@ const PAGE = 'https://arxiv.org/html/2510.26768v1';
 const DATE = '2025-10-31';
 
 const board: Leaderboard = {
-  benchmark: 'amo-bench',
+  benchmark: 'amo-bench', static: 'paper',
   url: 'https://amo-bench.github.io/',
   feed: `${PAGE} (main results table, AMO-Bench column)`,
   terms: 'arXiv robots.txt allows /html (crawl delay 15 s; one request per sync); the AMO-Bench repository is MIT-licensed.',

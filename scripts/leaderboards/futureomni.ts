@@ -33,7 +33,7 @@ const board: Leaderboard = {
       if (!name || score === undefined) continue;
       const metrics: Record<string, number> = {};
       ['cartoon', 'education', 'emergency', 'surveillance', 'dailyLife', 'movie', 'game', 'documentary'].forEach((k, i) => { const n = num(r[i + 4]?.text); if (n !== undefined) metrics[k] = n; });
-      rows.push({ model: identity(name), score, setting: `${r[3].text}; size ${r[2].text}`, metrics });
+      rows.push({ model: identity(name), score, params: num(r[2].text), setting: `${r[3].text}; size ${r[2].text}`, metrics });
     }
     if (!rows.length) throw new Error('FutureOmni scores missing');
     return rows;

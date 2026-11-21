@@ -6,8 +6,9 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2407.01370";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "summhay",
+  benchmark: "summhay", static: 'paper',
   parts: {
+    citation: { name: 'Citation', group: 'Dimension' },
     coverage: { name: 'Coverage', group: 'Dimension' },
   },
   url: "https://github.com/salesforce/summary-of-a-haystack",

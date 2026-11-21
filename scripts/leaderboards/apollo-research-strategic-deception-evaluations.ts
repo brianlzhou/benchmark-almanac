@@ -9,7 +9,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2509.15541";
 const board: Leaderboard = {
- benchmark: "apollo-research-strategic-deception-evaluations",
+ benchmark: "apollo-research-strategic-deception-evaluations", static: 'paper',
  url: "https://arxiv.org/html/2509.15541",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

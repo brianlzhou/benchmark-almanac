@@ -1,5 +1,5 @@
 // RoboChallenge Table30 v2. Score is the official 0–100 partial-credit rubric score.
-// Policy submission labels remain system identities; success percentages and submitted task counts remain metrics.
+// The board publishes submitters and task weights. Policy submission labels remain system identities; success percentages and submitted task counts remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -33,11 +33,14 @@ const board: Leaderboard = {
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
   async fetch(): Promise<LeaderboardRow[]> {
-    const data = await fetchJson<{display_name:string,user_name:string,score:number,success_ratio:number,task_count:number,is_multi_task_model:boolean,last_submit_time:string,task_results:{task_id:string,score:number,success_ratio:number}[]}[]>(FEED);
+    const data = await fetchJson<{display_name:string,user_name:string,score:number,success_ratio:number,task_count:number,is_multi_task_model:boolean,last_submit_time:string,last_running_end_time?:string,company_name?:string,task_results:{task_id:string,score:number,success_ratio:number,weight?:number}[]}[]>(FEED);
     return data.filter(r=>Number.isFinite(r.score)).map(r=>{
       const metrics: Record<string,number> = {successPercent:r.success_ratio*100,taskCount:r.task_count};
-      for (const t of r.task_results ?? []) {if (Number.isFinite(t.score)) metrics[`task_${t.task_id}`]=t.score;}
-      return {model:r.display_name || r.user_name,score:r.score,setting:r.is_multi_task_model ? 'multi-task policy':'single-task policies',date:r.last_submit_time?.slice(0,10),metrics};
+      for (const t of r.task_results ?? []) {if (Number.isFinite(t.score)) metrics[`task_${t.task_id}`]=t.score;
+        if(Number.isFinite(t.success_ratio)) metrics[`successPct_${t.task_id}`]=100*t.success_ratio;
+        if(typeof t.weight==='number') metrics[`weight_${t.task_id}`]=t.weight;
+      }
+      return {model:r.display_name || r.user_name,score:r.score,setting:r.is_multi_task_model ? 'multi-task policy':'single-task policies',submitter:r.user_name || undefined,agentOrg:r.company_name || undefined,date:(r.last_running_end_time || r.last_submit_time)?.slice(0,10),metrics};
     });
   },
 };

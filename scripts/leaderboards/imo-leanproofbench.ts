@@ -3,7 +3,7 @@
 // Basic/advanced table scores are subsets. Do not synthesize overall scores for the other systems.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { text } from '../lib/html.ts';
+import { tables, text } from '../lib/html.ts';
 const FEED = "https://imobench.github.io/";
 const board: Leaderboard = {
   benchmark: "imo-leanproofbench", parts: {
@@ -13,12 +13,27 @@ const board: Leaderboard = {
   terms: "Public official results, subject to the source repository license and host terms.",
   async fetch() {
     const source = await fetchText(FEED);
-    const section = text(source.split('<section id="imo-leanproofbench">')[1]?.split('</section>')[0] ?? '');
+    const html = source.split('<section id="imo-leanproofbench">')[1]?.split('</section>')[0] ?? '';
+    const section = text(html);
+    const subjectRates: Record<string, number> = {};
+    for (const [index, table] of tables(html).filter(t => t[0]?.[0]?.text === 'Method').entries()) {
+      const difficulty = ['Basic', 'Advanced'][index];
+      const result = table.find(r => r[0].text === 'LEAP (Agentic Prover)');
+      if (!difficulty || !result) continue;
+      table[0].forEach((cell, i) => {
+        const subject = cell.text.match(/^(Algebra|Combinatorics|Number Theory|Geometry) \((\d+)\)$/);
+        const solved = result[i]?.text;
+        if (!subject || !solved || !/^\d+$/.test(solved)) return;
+        const key = difficulty.toLowerCase() + subject[1].replaceAll(' ', '');
+        subjectRates[key] = Number(solved) * 100 / Number(subject[2]);
+        board.parts![key] = { name: subject[1], group: difficulty };
+      });
+    }
     const rows: LeaderboardRow[] = [];
     const gemini = section.match(/Gemini 3\.1 Pro solving only ([\d.]+)% overall \(([\d.]+)% on basic and ([\d.]+)% on advanced/);
     const leap = section.match(/With LEAP,[\s\S]*?overall solve rate of ([\d.]+)%[\s\S]*?solving ([\d.]+)% of the Basic subset and ([\d.]+)% of the Advanced/);
     if (gemini) rows.push({model: 'Gemini 3.1 Pro', score: Number(gemini[1]), setting: 'one-shot', metrics:{basic:Number(gemini[2]),advanced:Number(gemini[3])}});
-    if (leap) rows.push({model: 'LEAP (Agentic Prover)', harness: 'LEAP', score: Number(leap[1]), metrics:{basic:Number(leap[2]),advanced:Number(leap[3])}});
+    if (leap) rows.push({model: 'LEAP (Agentic Prover)', harness: 'LEAP', link: html.match(/href="(https:\/\/github\.com\/[^\"]+\/leap\/solutions)"/)?.[1], score: Number(leap[1]), metrics:{...subjectRates,basic:Number(leap[2]),advanced:Number(leap[3])}});
     if (!gemini || !leap) throw new Error('Published IMO-LeanProofBench overall rates missing');
     if (!rows.length) throw new Error("No imo-leanproofbench score rows");
     return rows;

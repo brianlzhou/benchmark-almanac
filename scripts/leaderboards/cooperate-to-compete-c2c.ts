@@ -1,36 +1,37 @@
-// C2C: the page's Overall Player Strength chart publishes signed Plackett-Luce strengths as HTML text.
-// Keep the Human row as an unlisted reference. Reasoning and non-reasoning Grok runs are separate settings.
-// The chart's adjacent source comments spell out the abbreviated Grok and Gemini model names.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText } from '../lib/util.ts';
-import { text, num } from '../lib/html.ts';
+// Figure 1c of the authors' paper prints the same seven coefficients as the project page.
+import type { Leaderboard } from './types.ts'
+import { fetchText } from '../lib/util.ts'
 
-const PAGE = 'https://negotiationgame.io/c2c/';
+const PAGE = 'https://arxiv.org/html/2604.25088v1#S1.F1'
+const FIGURE = 'https://arxiv.org/html/2604.25088v1/main_c.svg'
+
 const board: Leaderboard = {
-  benchmark: 'cooperate-to-compete-c2c', url: PAGE, feed: PAGE,
-  terms: 'The authors publish this public HTML results chart, with attribution retained and no separate score reuse license stated.',
-  aliases: { 'Gemini Flash Lite': 'gemini-3-1-flash-lite' },
+  benchmark: 'cooperate-to-compete-c2c', static: 'paper',
+  url: PAGE,
+  feed: FIGURE,
+  terms: 'The Almanac credits the authors and links their published figure.',
+  aliases: { 'Gemini 3.1 Flash Lite': 'gemini-3-1-flash-lite' },
   async fetch() {
-    const html = await fetchText(PAGE);
-    const start = html.indexOf('<h4>Overall Player Strength</h4>');
-    if (start < 0) throw new Error('C2C strength chart missing');
-    const section = html.slice(start).split('</section>')[0];
-    const rows: LeaderboardRow[] = [];
-    for (const part of section.split('<div class="pl-row">').slice(1)) {
-      const label = part.match(/<div class="pl-label">([\s\S]*?)<\/div>/)?.[1];
-      const value = part.match(/<div class="pl-val"[^>]*>([\s\S]*?)<\/div>/)?.[1];
-      const score = num(value?.replace(/&minus;|−/g, '-'));
-      if (!label || score === undefined) continue;
-      let model = text(label);
-      let setting: string | undefined;
-      if (/^Grok 4\.1 \((?:reason\.|no reas\.)\)$/.test(model)) {
-        setting = model.includes('no reas.') ? 'non-reasoning' : 'reasoning';
-        model = 'Grok 4.1 Fast';
-      }
-      rows.push({ model, setting, score });
+    const svg = await fetchText(FIGURE)
+    // arXiv stores each printed character with its baseline. Join characters on the same line.
+    const lines = new Map<number, string>()
+    for (const m of svg.matchAll(/<use data-text="([^"]*)"[^>]*?transform="matrix\([^)]*,([\d.]+)\)"/g)) {
+      const y = Number(m[2])
+      lines.set(y, (lines.get(y) ?? '') + m[1])
     }
-    if (!rows.length) throw new Error('C2C strength rows missing');
-    return rows;
+    if (![...lines.values()].includes('Player Strength (Plackett-Luce Coefficients)')) throw new Error('C2C figure changed')
+    const scores = [...lines].filter(([, value]) => /^-?\d+\.\d{3}$/.test(value)).sort(([a], [b]) => a - b)
+    if (scores.length !== 7) throw new Error('Expected seven printed coefficients in C2C Figure 1c')
+    // The row labels can wrap. Pair their lines with the score between the neighboring row midpoints.
+    return scores.map(([y, value], i) => {
+      const top = (y + (scores[i - 1]?.[0] ?? 2 * y - scores[1][0])) / 2
+      const bottom = (y + (scores[i + 1]?.[0] ?? 2 * y - scores[i - 1][0])) / 2
+      const label = [...lines].filter(([line, s]) => line > top && line < bottom && line !== y && /[a-z]/i.test(s))
+        .sort(([a], [b]) => a - b).map(([, s]) => s).join(' ')
+      if (!label) throw new Error('C2C coefficient has no player label')
+      const [, model, setting] = label.match(/^(.+?)(?: \((non-reasoning|reasoning)\))?$/)!
+      return { model, setting, score: Number(value) }
+    })
   },
-};
-export default board;
+}
+export default board

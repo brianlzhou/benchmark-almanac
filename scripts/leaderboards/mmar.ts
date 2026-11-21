@@ -1,4 +1,4 @@
-// MMAR: Avg is audio reasoning accuracy in percent. Preserve reported model sizes, caption scaffolds and all sound/music/speech mixture accuracies; exclude random guessing.
+// MMAR: Avg is audio reasoning accuracy in percent. Preserve open-weight marks, reported model sizes, caption scaffolds and all sound/music/speech mixture accuracies; exclude random guessing.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
@@ -31,7 +31,7 @@ const board: Leaderboard = {
     const all = markdownTables(source);
     const rows: LeaderboardRow[] = [];
     const table=all.find(t=>t[0].includes("Sound-Music-Speech"));if(!table)throw new Error("Missing MMAR leaderboard");
-    for(const r of table.slice(1)){const score=num(r[3]);if(score===undefined||/Random Guess/i.test(r[0]))continue;let model=r[0].replace(/[🏅🥇🥈🥉]/gu,"").trim();let harness:string|undefined;if(model.startsWith("Caption + ")){model=model.slice(10);harness="Caption";}rows.push({model:model+(r[1]&&r[1]!=="-"?` (${r[1]})`:""),score,harness,metrics:Object.fromEntries(table[0].slice(4).flatMap((h,j)=>{const n=num(r[j+4]);return n===undefined?[]:[[h,n]];}))});}
+    for(const r of table.slice(1)){const score=num(r[3]);if(score===undefined||/Random Guess/i.test(r[0]))continue;let model=r[0].replace(/[🏅🥇🥈🥉]/gu,"").trim();let harness:string|undefined;if(model.startsWith("Caption + ")){model=model.slice(10);harness="Caption";}rows.push({model:model+(r[1]&&r[1]!=="-"?` (${r[1]})`:""),score,harness,params:/^[\d.]+B$/i.test(r[1]) ? num(r[1]) : undefined,open:r[2] === '✅' ? true : r[2] === '❌' ? false : undefined,metrics:Object.fromEntries(table[0].slice(4).flatMap((h,j)=>{const n=num(r[j+4]);return n===undefined?[]:[[h,n]];}))});}
     if (!rows.length) throw new Error("No mmar score rows");
     return rows;
   },

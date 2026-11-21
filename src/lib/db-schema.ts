@@ -104,6 +104,8 @@ export const TABLES: Table[] = [
       c('url', 'TEXT', 'The page people read.'),
       c('feed', 'TEXT', 'The file or endpoint we read.'),
       c('host', 'TEXT', 'Who runs the board, when it isn’t the benchmark’s makers.'),
+      c('headline', 'TEXT', 'How the importer made the headline score, when the source gives no overall score.'),
+      c('paper', 'INTEGER', '1 when the scores come from a fixed table in the benchmark’s paper, which gains no newer models.'),
       c('terms', 'TEXT', 'The terms that apply to reading and reusing it.'),
       c('license', 'TEXT', 'A Creative Commons license the terms name, when there is one.'),
       c('noncommercial', 'INTEGER', '1 when the terms allow only non-commercial use.'),

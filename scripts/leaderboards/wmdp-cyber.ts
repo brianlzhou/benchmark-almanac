@@ -7,7 +7,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2403.03218";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "wmdp-cyber",
+  benchmark: "wmdp-cyber", static: 'paper',
   url: "https://www.wmdp.ai",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

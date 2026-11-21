@@ -5,7 +5,7 @@
 // hyparquet: one request an arena, where the dataset viewer's API took 100 rows a request and answered 429 to a
 // burst. The other Arena importers reuse arenaRows and arenaSubset.
 // Each row also keeps the score's 95% interval (rating_lower, rating_upper as metrics.ciLow, ciHigh) and its
-// vote count, rank, variance and license when the subset has them. Preserve the bounds as interval fields.
+// vote count, variance and license when the subset has them. Preserve the bounds as interval fields.
 //
 // Arena also rates models on the votes for one kind of prompt: coding, math, a language, an industry. It tags each
 // battle with every category its prompt fits, so one vote counts in several, and the categories are views of the
@@ -176,7 +176,6 @@ function toRow(row: ArenaRow): LeaderboardRow {
   const metrics: Record<string, number> = {};
   if (Number.isFinite(row.rating_lower) && Number.isFinite(row.rating_upper)) Object.assign(metrics, { ciLow: row.rating_lower, ciHigh: row.rating_upper });
   if (Number.isFinite(row.vote_count)) metrics.votes = row.vote_count!;
-  if (typeof row.rank === 'number') metrics.rank = row.rank;
   if (typeof row.variance === 'number') metrics.variance = row.variance;
   return { ...splitName(row.model_name.trim(), row.leaderboard_publish_date), score: rating(row)!,
     low: metrics.ciLow, high: metrics.ciHigh, license: row.license?.trim() || undefined, ...(Object.keys(metrics).length ? { metrics } : {}) };

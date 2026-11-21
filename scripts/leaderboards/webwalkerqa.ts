@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2501.07572";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "webwalkerqa",
+  benchmark: "webwalkerqa", static: 'paper',
   url: "https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

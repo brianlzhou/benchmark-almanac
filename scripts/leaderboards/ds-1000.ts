@@ -1,7 +1,7 @@
 // DS-1000: published overall mean pass rate, converted from fraction to percent.
-// Library and perturbation pass rates remain metrics on the overall row. Generated code is never executed.
+// Read result-file links and counts beside the library and perturbation pass rates.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { fetchText, fetchJson } from '../lib/util.ts';
+import { fetchText, fetchJson, githubHeaders } from '../lib/util.ts';
 
 const FEED = "https://api.github.com/repos/xlang-ai/DS-1000/git/trees/HEAD?recursive=1";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.
@@ -27,15 +27,16 @@ const board: Leaderboard = {
   aliases: {"gpt-3.5-turbo-0125": "gpt-3-5-turbo-jan-2024", "gpt-3.5-turbo-0613": "gpt-3-5-turbo-jun-2023", "gpt-4-0613": "gpt-4-jun-2023", "gpt-4-turbo-2024-04-09": "gpt-4-turbo-apr-2024"},
   
   async fetch() {
-    const tree=await fetchJson<any>(FEED);if(tree.truncated)throw new Error('DS-1000 result tree truncated');const out:LeaderboardRow[]=[];
+    const tree=await fetchJson<any>(FEED, { headers: githubHeaders() });if(tree.truncated)throw new Error('DS-1000 result tree truncated');const out:LeaderboardRow[]=[];
     for(const f of tree.tree){if(!/^results\/[^/]+-result\.txt$/.test(f.path))continue;
       const model=f.path.slice('results/'.length).replace(/-result\.txt$/,'');
       await new Promise(resolve => setTimeout(resolve, 1100));
       const source=await fetchText('https://raw.githubusercontent.com/xlang-ai/DS-1000/HEAD/'+f.path);const score=source.match(/^mean\s+([\d.]+)/m);const count=source.match(/^count\s+([\d.]+)/m);
       if (!score) continue;
-      const row: LeaderboardRow = {model, score:Number(score[1])*100, metrics:count?{tasks:Number(count[1])}:{}};
+      const link='https://github.com/xlang-ai/DS-1000/blob/'+tree.sha+'/'+f.path;
+      const row: LeaderboardRow = {model, link, score:Number(score[1])*100, metrics:count?{tasks:Number(count[1])}:{}};
       out.push(row);
-      let group='';for(const line of source.split(/\r?\n/)){if(line.trim()==='library')group='Library';if(line.trim()==='perturbation_type')group='Perturbation';const m=line.match(/^([A-Za-z][\w-]*)\s+(\d+)\s+([\d.]+)\s*$/);if(group&&m)row.metrics![group.toLowerCase()+'_'+m[1].toLowerCase()]=Number(m[3])*100;}
+      let group='';for(const line of source.split(/\r?\n/)){if(line.trim()==='library')group='Library';if(line.trim()==='perturbation_type')group='Perturbation';const m=line.match(/^([A-Za-z][\w-]*)\s+(\d+)\s+([\d.]+)\s*$/);if(group&&m){const key=group.toLowerCase()+'_'+m[1].toLowerCase();row.metrics![key]=Number(m[3])*100;row.metrics![key+'Count']=Number(m[2]);}}
     }if(!out.length)throw new Error('DS-1000 result files missing');return out;
   },
 };

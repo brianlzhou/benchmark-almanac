@@ -1,0 +1,4 @@
+// Unsatz tests scientific system discovery across 80 generated worlds.
+// The importer reads the paper's solved-world table and uses solved percentage as the headline.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2611.03713';const board:Leaderboard={benchmark:'unsatz',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,async fetch(){const t=grid(paperTables(await paperHtml(URL))[7]);if(!t||t[1]?.[0]!=='Model')throw Error('Unsatz table missing');const rows:LeaderboardRow[]=[];for(const r of t.slice(2)){const model=r[0],m=String(r[1]).match(/(\d+)\/80/);if(!model||!m)continue;rows.push({model,score:100*Number(m[1])/80,metrics:{solved:Number(m[1]),median:Number(r[8]),invalid:Number(r[9]),truncated:Number(r[10])}});}return checked(rows,8);}};export default board;

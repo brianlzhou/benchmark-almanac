@@ -6,7 +6,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2506.07966";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "space-10",
+  benchmark: "space-10", static: 'paper',
   parts: {
     entity: { name: 'Entity', group: 'Category' },
     scene: { name: 'Scene', group: 'Category' },

@@ -31,6 +31,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # importers that read a paper's PDF (scripts/lib/boards/pdf-text.ts) need Poppler's pdftotext
+      - run: sudo apt-get install -y --no-install-recommends poppler-utils
       - run: node scripts/sync-epoch.ts | tee sync.log
       # Artificial Analysis's API needs a key; its index numbers come in with AA's permission (November 2026)
       - run: node scripts/sync-leaderboards.ts | tee -a sync.log

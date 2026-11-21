@@ -1,3 +1,4 @@
+// The headline is pass@1. The feed also reports pass@5.
 // Fixed published track and version. Domain scores remain supporting metrics.
 import { stateBoard } from '../lib/boards/microsoft-state.ts';
 const board = stateBoard('state-bench','main','0.8.0');

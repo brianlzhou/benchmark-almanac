@@ -1,0 +1,7 @@
+// SPY tests personally identifiable information detection in legal and medical synthetic text.
+// The source reports no overall score. The headline is the plain mean of 14 entity-domain F1 parts.
+// This importer reads Table 3 from the ACL Anthology paper and keeps each F1 part in metrics.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const feed='https://aclanthology.org/2025.naacl-srw.23.pdf';const entities=['Name','Email','Username','URL','ID','Phone','Address'];const parts=Object.fromEntries(['Legal Questions','Medical Consultations'].flatMap(d=>entities.map(e=>[d+e,d+': '+e])));
+const vals:Record<string,number[]>={Llama3:[66.7,90.1,62.7,88.3,74.2,89.1,87.1,67.6,91.8,69.6,87.5,82.6,89.9,93.2],DeBERTa:[90.2,95.5,94.0,96.7,94.8,92.8,91.3,87.8,98.5,93.8,98.2,97.5,95.0,92.1]};
+const board:Leaderboard={benchmark:'spy-pii-detection',url:'https://aclanthology.org/2025.naacl-srw.23/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',headline:'The source reports no overall score, so this is the plain mean of its 14 entity-domain F1 scores.',parts,async fetch(){return checked(Object.entries(vals).map(([model,v])=>{const metrics:Record<string,number>={};v.forEach((n,i)=>metrics[['Legal Questions','Medical Consultations'][Math.floor(i/7)]+entities[i%7]]=n);return {model,score:v.reduce((a,b)=>a+b,0)/v.length,metrics}}),2)}};export default board;

@@ -1,7 +1,7 @@
 // SnakeBench. snakebench.com is server-rendered (Next.js) with one HTML table of every model: TrueSkill
 // exposed rating (the ranking and the score), uncertainty, wins and losses, win rate, apples, best length
 // and total cost. Model names use OpenRouter's "Maker: Model" form, and the maker prefix is dropped.
-// Ratings are only comparable within this board. The ±σ uncertainty and Win% are kept as metrics.sigma and
+// Ratings are only comparable within this board. The ±σ uncertainty and Win% are kept as metrics.std and
 // metrics.winRate. The site’s statistics endpoint gives game counts including ties, cost totals and last game dates.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson, fetchText } from '../lib/util.ts';
@@ -44,7 +44,7 @@ const board: Leaderboard = {
       const score = num(r[iScore]?.text);
       const sigma = iSigma >= 0 ? num(r[iSigma]?.text) : undefined;
       const winRate = iWin >= 0 ? num(r[iWin]?.text) : undefined;
-      const metrics:Record<string,number> = { ...(sigma === undefined ? {} : { sigma }), ...(winRate === undefined ? {} : { winRate }) };
+      const metrics:Record<string,number> = { ...(sigma === undefined ? {} : { std: sigma }), ...(winRate === undefined ? {} : { winRate }) };
       const totalCost=num(r[head.indexOf('Cost')]?.text);
       if(totalCost!==undefined)metrics['total cost (USD)']=totalCost;
       const wl=r[head.indexOf('W/L')]?.text.match(/(\d+)\s*\/\s*(\d+)/);
@@ -55,10 +55,8 @@ const board: Leaderboard = {
       }
       const detail = stats.aggregatedData[r[iModel]?.text];
       const best = num(r[head.indexOf('Best')]?.text);
-      const rank = num(r[head.indexOf('#')]?.text);
       const mu = num(r[iScore]?.attrs.title);
       if (best !== undefined) metrics.bestLength = best;
-      if (rank !== undefined) metrics.rank = rank;
       if (mu !== undefined) metrics.mu = mu;
       if (detail && Number.isFinite(detail.ties)) metrics.ties = detail.ties;
       if (typeof detail?.elo_rating === 'number') metrics.eloRating = detail.elo_rating;

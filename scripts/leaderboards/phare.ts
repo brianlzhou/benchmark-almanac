@@ -39,8 +39,6 @@ const board: Leaderboard = {
       const score = num(r[iScore]?.text);
       const metrics:Record<string,number>={};
       for(let i=iScore+1;i<head.length;i++){const n=num(r[i]?.text);if(n!==undefined)metrics[head[i]]=n;}
-      const rank = num(r[head.indexOf('Rank')]?.text);
-      if (rank !== undefined) metrics.rank = rank;
       const href = r[iModel]?.html.match(/href="(\/models\/[^"]+)"/)?.[1];
       const via = /\sOR$/.test(r[iModel]?.text ?? '');
       const size = model.match(/\b(\d+(?:\.\d+)?)B\b/i);

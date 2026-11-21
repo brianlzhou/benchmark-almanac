@@ -23,7 +23,7 @@ const ablations: Record<string, [string, number]> = {
 };
 const splits = ['chart', 'dashboard', 'infographic', 'normal', 'unanswerable', 'noParagraph', 'withParagraph'];
 const board: Leaderboard = {
-  benchmark: "chartqa-pro",
+  benchmark: "chartqa-pro", static: 'paper',
   parts: {
     chart: { name: 'Chart', group: 'Chart type' },
     dashboard: { name: 'Dashboard', group: 'Chart type' },

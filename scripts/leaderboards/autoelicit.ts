@@ -19,7 +19,7 @@ const board: Leaderboard = {
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
 const ts=tables(await fetchText(FEED)); const rows:LeaderboardRow[]=[];
-for(const r of ts[1])if(r.length===4&&num(r[3].text)!==undefined)rows.push({model:r[0].text,score:num(r[3].text)!,setting:'3 runs',harness:'AutoElicit',metrics:{fromHaiku:num(r[1].text)!,fromOpus:num(r[2].text)!}});
+for(const r of ts[1])if(r.length===4&&num(r[3].text)!==undefined)rows.push({model:r[0].text,score:num(r[3].text)!,setting:'3 runs',trials:3,harness:'AutoElicit',metrics:{fromHaiku:num(r[1].text)!,fromOpus:num(r[2].text)!}});
 return rows;
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

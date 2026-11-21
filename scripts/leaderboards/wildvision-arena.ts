@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2406.11069";
 const board: Leaderboard = {
-  benchmark: "wildvision-arena",
+  benchmark: "wildvision-arena", static: 'paper',
   url: "https://arxiv.org/html/2406.11069",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

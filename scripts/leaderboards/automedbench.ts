@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2606.01961";
-const board:Leaderboard={benchmark:"automedbench",url:URL,feed:URL,terms:PAPER_TERMS,aliases:{"Opus 4.6": "claude-opus-4-6", "ChatGPT-5.4": "gpt-5-4", "Qwen3.5": "qwen3-5-397b-a17b"},
+const board:Leaderboard={benchmark:"automedbench", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,aliases:{"Opus 4.6": "claude-opus-4-6", "ChatGPT-5.4": "gpt-5-4", "Qwen3.5": "qwen3-5-397b-a17b"},
 parts: {
   segmentation: { name: 'Segmentation', group: 'Task type' },
   enhancement: { name: 'Enhancement', group: 'Task type' },

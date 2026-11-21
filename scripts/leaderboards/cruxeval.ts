@@ -2,7 +2,7 @@
 // prediction (o@1, o@5) and input prediction (i@1, i@5), pass@1 and pass@5 in percent. The output table comes
 // first and CRUXEval-O pass@1 is the figure model cards cite most, so o@1 is the score. A "+cot" suffix
 // marks a chain-of-thought run and becomes the setting. Notes such as "(n=3)" (samples per problem) and
-// "(under verification)" are dropped from the name. The output table's o@5 is kept as metrics.pass5.
+// "(under verification)" supply trial counts and verification status. The output table's o@5 (pass@5) is kept as metrics.passAt5.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -31,9 +31,10 @@ const board: Leaderboard = {
       if (cot) model = model.replace(/\+cot$/i, '');
       // plain "gpt-4o" does not say which snapshot ran, and the resolver would pick the newest; retain it as an unlisted entry
       if (model === 'gpt-4o') model += ' (snapshot unspecified)';
-      const pass5 = r['o@5'] ? Number(r['o@5']) : NaN;
+      const passAt5 = r['o@5'] ? Number(r['o@5']) : NaN;
       const size = model.match(/(?:^|[- ])(\d+(?:\.\d+)?)b(?:$|[- ])/i);
-      rows.push({ model, score, params: size ? Number(size[1]) : undefined, verified: /under verification/.test(r.Model) ? false : undefined, setting: cot ? 'CoT' : undefined, metrics: { ...(Number.isFinite(pass5) ? { pass5 } : {}), ...(Number.isFinite(Number(r['i@1'])) ? { inputPass1: Number(r['i@1']) } : {}), ...(r['i@5'] && Number.isFinite(Number(r['i@5'])) ? { inputPass5: Number(r['i@5']) } : {}) } });
+      const samples = r.Model.match(/\(n=(\d+)\)/);
+      rows.push({ model, score, trials: samples ? Number(samples[1]) : undefined, params: size ? Number(size[1]) : undefined, verified: /under verification/.test(r.Model) ? false : undefined, setting: cot ? 'CoT' : undefined, metrics: { ...(Number.isFinite(passAt5) ? { passAt5 } : {}), ...(Number.isFinite(Number(r['i@1'])) ? { inputPass1: Number(r['i@1']) } : {}), ...(r['i@5'] && Number.isFinite(Number(r['i@5'])) ? { inputPass5: Number(r['i@5']) } : {}) } });
     }
     if (!rows.length) throw new Error('no rows in data.csv');
     return rows;

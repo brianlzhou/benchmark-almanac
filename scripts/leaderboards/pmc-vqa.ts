@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2305.10415';
 export default {
-  benchmark:'pmc-vqa',url:'https://arxiv.org/abs/2305.10415',feed,terms:PAPER_TERMS,
+  benchmark:'pmc-vqa', static: 'paper',url:'https://arxiv.org/abs/2305.10415',feed,terms:PAPER_TERMS,
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
     const t=ts.find(t=>t[0]?.join('|')==='Method|Language Backbone|Vision Backbone|Choice|Blanking|Blanking' && t[1]?.[4]==='ACC');

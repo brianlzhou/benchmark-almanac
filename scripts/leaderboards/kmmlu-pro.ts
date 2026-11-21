@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2507.08924';
 const board: Leaderboard = {
-  benchmark:'kmmlu-pro',url:'https://arxiv.org/abs/2507.08924',feed,terms:PAPER_TERMS,
+  benchmark:'kmmlu-pro', static: 'paper',url:'https://arxiv.org/abs/2507.08924',feed,terms:PAPER_TERMS,
   aliases:{"GPT-4.1 mini (2025-04-14)": "gpt-4-1-mini", "GPT-4.1 (2025-04-14)": "gpt-4-1", "o3-mini (2025-01-31)": "o3-mini", "o4-mini (2025-04-16)": "o4-mini", "Gemma 3 12B IT": "gemma-3-12b", "C4AI Command A": "cohere-command-a", "Mistral Small 3.1 Instruct": "mistral-small-3-1", "Llama-4-Scout-17B-16E-Instruct": "llama-4-scout", "Llama-4-Maverick-17B-128E-Instruct": "llama-4-maverick"},
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

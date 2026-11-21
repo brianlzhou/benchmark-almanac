@@ -3,7 +3,7 @@ import type {Leaderboard} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://arxiv.org/html/1909.02164v5';
-const board:Leaderboard={benchmark:'tabfact', parts: {
+const board:Leaderboard={benchmark:'tabfact', static: 'paper', parts: {
   validation: { name: 'Validation', group: 'Split' },
   simple: { name: 'Simple', group: 'Difficulty' },
   complex: { name: 'Complex', group: 'Difficulty' },

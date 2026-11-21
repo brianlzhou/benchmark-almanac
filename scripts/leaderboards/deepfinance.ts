@@ -30,7 +30,7 @@ const board: Leaderboard = {
   chart: {
     title: 'Score vs. tokens',
     note: 'Mean rubric score against all tokens a run used per task, on a log scale.',
-    x: { key: 'tokensTotal', label: 'Tokens per task', better: 'lower', log: true },
+    x: { key: 'totalTokens', label: 'Tokens per task', better: 'lower', log: true },
     y: { key: 'score', label: 'Mean rubric score', unit: '%', better: 'higher' },
   },
   async fetch() {
@@ -45,7 +45,7 @@ const board: Leaderboard = {
       const id = `${model}|${effort}`;
       const row = runs.get(id) ?? { model, setting: effort, score: Number(score), date: '2026-11-05', harness: HARNESS.find(([re]) => re.test(model))?.[1], metrics: { ciLow: Number(lo), ciHigh: Number(hi) } };
       if (cost) row.cost = Number(cost);
-      if (tok) row.metrics.tokensTotal = Number(tok) * (mult === 'M' ? 1e6 : 1e3);
+      if (tok) row.metrics.totalTokens = Number(tok) * (mult === 'M' ? 1e6 : 1e3);
       runs.set(id, row);
     }
     const rows = [...runs.values()];

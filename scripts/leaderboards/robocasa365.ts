@@ -1,3 +1,4 @@
+// Keep named submitters, dated submission records and explicit open-source checks.
 // RoboCasa365. robocasa.ai/leaderboard (GitHub Pages, built from github.com/robocasa-benchmark/leaderboard)
 // carries the standard-track board as a static HTML table: per policy the type, submitter, Overall
 // (the board's weighted success score and its ranking) and success rates on atomic-seen, composite-seen and
@@ -31,7 +32,10 @@ const board: Leaderboard = {
       const score = num(r[iOverall]?.text);
       if (model && score !== undefined){
         const metrics:Record<string,number>={};for(const key of ['Atomic-Seen','Composite-Seen','Composite-Unseen']){const v=num(r[head.indexOf(key)]?.text);if(v!==undefined)metrics[key]=v;}
-        rows.push({model,score,setting:'type '+r[head.indexOf('Type')]?.text,metrics});
+        const link = r[iModel].html.match(/href="(https:\/\/[^"]+\/submissions_md\/[^"]+)"/)?.[1];
+        const date = link?.match(/(\d{4})_(\d{2})_(\d{2})\.md$/)?.slice(1).join('-');
+        rows.push({model,score,link,date,submitter:r[head.indexOf('Submitter')]?.text || undefined,
+          open:r[head.indexOf('Open Source')]?.text === '✓' ? true : undefined,setting:'type '+r[head.indexOf('Type')]?.text,metrics});
       }
     }
     return rows;

@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2509.06266";
 import { paperRows, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "ego3d-bench",
+  benchmark: "ego3d-bench", static: 'paper',
   parts: {
     egoDistanceRMSE: { name: 'Ego distance', group: 'Task type' },
     objectDistanceRMSE: { name: 'Object distance', group: 'Task type' },

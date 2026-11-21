@@ -41,7 +41,7 @@ const board: Leaderboard = {
       const metrics=row.metrics??={};
       for(const label of ['Recall','Precision']){const value=num(cells[head.indexOf(label)]?.text);if(value!==undefined)metrics[label.toLowerCase()]=value;}
       const usage=cells[head.findIndex(h=>/^Tokens per return/.test(h))]?.text.match(/^([\d.]+)\s*([kKmM]?)$/);
-      if(usage)metrics.totalTokensPerReturn=Number(usage[1])*({k:1000,m:1000000}[usage[2].toLowerCase()]??1);
+      if(usage)metrics.totalTokens=Number(usage[1])*({k:1000,m:1000000}[usage[2].toLowerCase()]??1);
       const price=cells[head.findIndex(h=>/^Cost per return/.test(h))]?.text;const value=num(price);if(value!==undefined)row.cost=value*(price?.includes('¢')?0.01:1);
     }
     return rows;

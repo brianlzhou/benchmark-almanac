@@ -1,6 +1,6 @@
 // MathBench (OpenCompass). open-compass.github.io/MathBench/ fills its table with PapaParse from two CSVs,
 // MathBench-A.csv (application questions) and MathBench-T.csv (theory). The page opens on MathBench-A sorted
-// by Average, the mean over five stages. Use this default Application view only,
+// with model access and specialization. It ranks by Average, the mean over five stages. Use this default Application view only,
 // because no combined Application/Theory score is published. The results date from the 2024 paper (ACL Findings), so dated API names get snapshot aliases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
@@ -39,7 +39,10 @@ const board: Leaderboard = {
         const score=r.Average?.trim()?Number(r.Average):NaN;
         if(!r.Model||!Number.isFinite(score))continue;
         const metrics:Record<string,number>={};for(const [k,v]of Object.entries(r)){if(k==='Model'||k==='Average'||!v.trim())continue;const n=Number(v);if(Number.isFinite(n))metrics[k]=n;}
-        rows.push({model:r.Model.trim(),score,metrics});
+        const size = r.Model.match(/(?:^|[-_ ])(\d+(?:\.\d+)?)B(?:[-_ ]|$)/i);
+        rows.push({model:r.Model.trim(),score,metrics,params:size ? Number(size[1]) : undefined,
+          open:r.opensourced === 'TRUE' ? true : r.opensourced === 'FALSE' ? false : undefined,
+          setting:r.mathLM === 'TRUE' ? 'math LM' : undefined});
       }
     }
     if (rows.length < 20) throw new Error(`only ${rows.length} MathBench rows`);

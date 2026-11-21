@@ -1,4 +1,5 @@
 // Overall Pass@3 on the published repository task version, not the revised paper.
+// The README reports pass@1 alongside the pass@3 headline.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
@@ -18,7 +19,7 @@ const board: Leaderboard = {
       const score = num(cells[4]);
       if (score === undefined || !cells[1]) continue;
       const metrics: Record<string, number> = {};
-      for (const [column, key] of [[3, "pass1"]] as const) {
+      for (const [column, key] of [[3, "passAt1"]] as const) {
         const value = num(cells[column]);
         if (value !== undefined) metrics[key] = value;
       }

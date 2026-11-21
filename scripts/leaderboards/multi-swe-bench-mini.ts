@@ -1,3 +1,4 @@
+// Read verified marks, result directories and resolved task counts alongside difficulty scores.
 // Multi-SWE-bench mini: All-language resolvedRate on the 400-task mini set, as a percent.
 // Only the All view supplies rows. Difficulty slices remain metrics. Exact repeated entries are deduplicated.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -6,6 +7,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://raw.githubusercontent.com/multi-swe-bench/experiments/refs/heads/dist/leaderboard-mini.json";
 const board: Leaderboard = {
   benchmark: "multi-swe-bench-mini",
+  verified: 'Marked verified by Multi-SWE-bench',
   parts: {
     easy: { name: 'Easy', group: 'Difficulty' },
     medium: { name: 'Medium', group: 'Difficulty' },
@@ -16,13 +18,18 @@ const board: Leaderboard = {
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    type R={name:string,resolvedRate:number,resolvedEasyRate:number,resolvedMediumRate:number,resolvedHardRate:number,date:string,verified:boolean};
+    type R={name:string,resolvedRate:number,resolvedEasyRate:number,resolvedMediumRate:number,resolvedHardRate:number,date:string,verified:boolean;path?:string;resolved:number;resolvedEasy:number;resolvedMedium:number;resolvedHard:number};
     const d=await fetchJson<{name:string,data:{name:string,results:R[]}[]}[]>(FEED);
     const all=d.find(r=>r.name==='All');if(!all)throw new Error('All view missing');
     const out=new Map<string,LeaderboardRow>();
     for(const group of all.data)for(const r of group.results){
       const [harness,...parts]=r.name.split(' + ');const model=parts.length?parts.join(' + '):r.name;
       const row:LeaderboardRow={model,score:r.resolvedRate*100,harness:parts.length?harness:undefined,setting:r.verified?'verified':'self-reported',date:r.date,metrics:{easy:r.resolvedEasyRate*100,medium:r.resolvedMediumRate*100,hard:r.resolvedHardRate*100}};
+      row.verified = r.verified;
+      if (r.path) row.link = new URL(r.path, 'https://github.com/multi-swe-bench/experiments/tree/main/evaluation/').href;
+      for (const key of ['resolved', 'resolvedEasy', 'resolvedMedium', 'resolvedHard'] as const) {
+        if (typeof r[key] === 'number') row.metrics![key] = r[key];
+      }
       const key=JSON.stringify([row.model,row.harness,row.setting]);
       if(out.has(key)&&out.get(key)!.score!==row.score)throw new Error('Conflicting duplicate mini result');out.set(key,row);
     }return [...out.values()];

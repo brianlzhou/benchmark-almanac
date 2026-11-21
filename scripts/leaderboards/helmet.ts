@@ -1,5 +1,5 @@
 // HELMET: Average is the published aggregate score on a 0–100 scale.
-// Use the official page’s selected default, 128k input. Seven task categories stay in metrics.
+// Read the five published input lengths, seven task categories, parameter counts and context-window sizes.
 // Context-window capacity is not measured output-token usage and is not imported as tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
@@ -12,6 +12,7 @@ const board: Leaderboard = {
    Recall: { name: 'Recall', group: 'Task type' },
    RAG: { name: 'RAG', group: 'Task type' },
    ICL: { name: 'ICL', group: 'Task type' },
+   Cite: { name: 'Generation with citations', group: 'Task type' },
    'Re-rank': { name: 'Re-ranking', group: 'Task type' },
    LongQA: { name: 'Long QA', group: 'Task type' },
    Summ: { name: 'Summarization', group: 'Task type' },
@@ -23,12 +24,14 @@ const board: Leaderboard = {
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
   const rows:LeaderboardRow[]=[];
-  for(const size of ['128k']) {
+  for(const size of ['128k', '64k', '32k', '16k', '8k']) {
     if(rows.length)await new Promise(resolve=>setTimeout(resolve,1100));
     for(const r of parseCsv(await fetchText(FEED.replace('128k.csv',size+'.csv')))) {
       const score=num(r.Average);if(!r.Model||score===undefined)continue;
       rows.push({model:r.Model,score,setting:`input=${size}`,
-        metrics:Object.fromEntries(['Recall','RAG','ICL','Cite','Re-rank','LongQA','Summ'].filter(k=>num(r[k])!==undefined).map(k=>[k,num(r[k])!]))});
+        params:num(r['# Params (B)']),
+        metrics:{...(num(r['Context Window (K)']) !== undefined ? {contextWindowK:num(r['Context Window (K)'])!} : {}),
+          ...Object.fromEntries(['Recall','RAG','ICL','Cite','Re-rank','LongQA','Summ'].filter(k=>num(r[k])!==undefined).map(k=>[k,num(r[k])!]))}});
     }
   }
   return rows;

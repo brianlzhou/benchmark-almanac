@@ -1,5 +1,5 @@
 // MIEB lite: current default Mean(TaskType), scaled to the displayed 0-to-100 score.
-// Only rows with a published whole-benchmark aggregate qualify. Task-type scores remain metrics.
+// Only rows with a published whole-benchmark aggregate qualify. The feed also gives individual task scores, model metadata and context capacity.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -24,7 +24,25 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any>(FEED);
-      return d.rows.filter((r:any)=>typeof r.meanTaskType==='number').map((r:any)=>({model:r.model.name.replace(/^[^/]+\//,''),score:r.meanTaskType*100,metrics:Object.fromEntries(Object.entries(r.scoresByTaskType).filter(([,v])=>typeof v==='number').map(([k,v])=>[k,(v as number)*100]))}));
+      return d.rows.filter((r:any)=>typeof r.meanTaskType==='number').map((r:any) => {
+        const metrics: Record<string, number> = {};
+        for (const [key, value] of Object.entries(r.scoresByTaskType)) {
+          if (typeof value === 'number') metrics[key] = value * 100;
+        }
+        for (const [name, value] of Object.entries(r.scoresByTask ?? {})) {
+          if (typeof value !== 'number') continue;
+          const key = 'task' + name;
+          metrics[key] = value * 100;
+          board.parts![key] = { name, group: 'Task' };
+        }
+        for (const key of ['zeroShotPct','activeParamsB','embeddingDim','maxTokens']) {
+          if (typeof r[key] === 'number') metrics[key] = r[key];
+        }
+        if (typeof r.model.memoryUsageMb === 'number') metrics.memoryUsageMb = r.model.memoryUsageMb;
+        if (typeof r.meanTask === 'number') metrics.meanTask = r.meanTask * 100;
+        return {model:r.model.name.replace(/^[^/]+\//,''),score:r.meanTaskType*100,metrics,
+          params:r.totalParamsB ?? undefined,open:r.model.openWeights ?? undefined,license:r.model.license ?? undefined};
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

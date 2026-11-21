@@ -5,7 +5,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = 'https://arxiv.org/html/2404.07972';
 const board: Leaderboard = {
-  benchmark: 'osworld', parts: {
+  benchmark: 'osworld', static: 'paper', parts: {
   os: { name: 'OS', group: 'Category' },
   office: { name: 'Office', group: 'Category' },
   daily: { name: 'Daily', group: 'Category' },

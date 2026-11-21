@@ -1,4 +1,4 @@
-// Archived 2025 held-out Q-score, converted from fraction to percent.
+// Read the held-out Q-score, submitting team, affiliation and submission report.
 // Team names identify evaluated systems and remain unlisted. Validation-only submissions are not test results.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -21,7 +21,9 @@ const board: Leaderboard = {
         const n = num(r[i].text); if (n !== undefined) metrics[key] = n*100;
       }
       const date = r[9].text.replace(/^(\d{4})(\d\d)(\d\d)$/, '$1-$2-$3');
-      rows.push({model: `${r[1].text} (BEHAVIOR 2025 team)`, score:score*100, setting:r[3].text, date, metrics});
+      const urls = [...r[4].html.matchAll(/href="(https?:\/\/[^"]+)"/g)].map(m=>m[1]);
+      const link = urls.find(u=>u.startsWith('https://arxiv.org/')) ?? urls[0];
+      rows.push({submitter:r[1].text, agentOrg:r[2].text === 'Independent' ? undefined : r[2].text || undefined, link, model: `${r[1].text} (BEHAVIOR 2025 team)`, score:score*100, setting:r[3].text, date, metrics});
     }
     if (!rows.length) throw new Error('No held-out BEHAVIOR 2025 scores');
     return rows;

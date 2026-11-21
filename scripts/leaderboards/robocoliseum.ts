@@ -1,3 +1,4 @@
+// Keep the submitting account and elapsed seconds from submission to completion.
 // RoboColiseum (AgiBot Genie Sim 3.0 challenge). robocoliseum.ai is a single-page app that reads its own
 // JSON API: /api/challenge/leaderboard/overall lists every submission with an overall score (0 to 1, the
 // mean of the instruction, spatial, manipulation and robustness boards) and its submit time. The overall
@@ -11,7 +12,7 @@ import { fetchJson } from '../lib/util.ts';
 const API = 'https://robocoliseum.ai/api/challenge/leaderboard/overall';
 
 interface Page {
-  items: { model_name: string; score: number; submit_time?: string; boards?: { board: string; score?: number }[] }[];
+  items: { model_name: string; score: number; submit_time?: string; finish_time?: string; username?: string; boards?: { board: string; score?: number }[] }[];
   total_pages: number;
 }
 
@@ -39,7 +40,12 @@ const board: Leaderboard = {
         const metrics = Object.fromEntries(
           (e.boards ?? []).filter((b) => b.board && typeof b.score === 'number').map((b) => [b.board, Number((b.score! * 100).toFixed(2))]),
         );
-        rows.push({ model: name(e.model_name), score: e.score * 100, date: e.submit_time?.slice(0, 10), ...(Object.keys(metrics).length ? { metrics } : {}) });
+        if (e.submit_time && e.finish_time) {
+          const start = Date.parse(e.submit_time.replace(' ', 'T') + 'Z');
+          const end = Date.parse(e.finish_time.replace(' ', 'T') + 'Z');
+          if (Number.isFinite(end - start) && end >= start) metrics.elapsedRunSeconds = (end - start) / 1000;
+        }
+        rows.push({ submitter: e.username || undefined, model: name(e.model_name), score: e.score * 100, date: e.submit_time?.slice(0, 10), ...(Object.keys(metrics).length ? { metrics } : {}) });
       }
       if (page >= data.total_pages) break;
     }

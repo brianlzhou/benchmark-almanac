@@ -2,7 +2,8 @@
 // /static/data/coop/index.json (agents without git) and /static/data/coop_git/index.json (with git): per
 // configuration a display name and the cooperative success rate on the 652 cooperative tasks (passed /
 // total, the board's ranking). That rate is the score. The display name carries the agent framework in
-// brackets ("Gemini 3 Flash (SDK + Git)"): no bracket means OpenHands, "SDK" the OpenHands SDK and
+// Keep the published task counts and count the available traces and conflicts per configuration.
+// The display name uses brackets ("Gemini 3 Flash (SDK + Git)"): no bracket means OpenHands, "SDK" the OpenHands SDK and
 // "Mini-SWE" mini-SWE-agent; it becomes the harness, with "+ git" when git access was on.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -13,7 +14,8 @@ const FRAMEWORK: Record<string, string> = { SDK: 'OpenHands SDK', 'Mini-SWE': 'm
 
 interface Index {
   modelDisplayNames: Record<string, string>;
-  stats: Record<string, { rate?: number }>;
+  stats: Record<string, { rate?: number; total: number; passed: number }>;
+  tasks: {results: Record<string, {hasConflict?: boolean}>; hasTrajectory?: Record<string,boolean>}[];
 }
 
 const board: Leaderboard = {
@@ -36,7 +38,11 @@ const board: Leaderboard = {
         const git = parts.some((p) => /^git$/i.test(p));
         const fw = parts.find((p) => !/^git$/i.test(p));
         const harness = `${fw ? (FRAMEWORK[fw] ?? fw) : 'OpenHands'}${git ? ' + git' : ''}`;
-        rows.push({ model: m ? m[1] : name, harness, score: s.rate });
+        rows.push({ model: m ? m[1] : name, harness, score: s.rate, metrics: {
+          tasks: s.total, passed: s.passed,
+          tasksWithTrajectory: d.tasks.filter(task => task.hasTrajectory?.[key] === true).length,
+          tasksWithConflict: d.tasks.filter(task => task.results[key]?.hasConflict === true).length,
+        } });
       }
     }
     return rows;

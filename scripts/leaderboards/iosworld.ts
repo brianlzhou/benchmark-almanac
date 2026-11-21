@@ -32,13 +32,13 @@ const board: Leaderboard = {
       if(r.length===10)model=r.shift()!.replace(/\s+(Anthropic|OpenAI|Google|Moonshot|Alibaba).*$/,'');
       if(r.length!==9)continue;
       const mode=r[0];
-      for(const [i,label] of [[1,'Single (27)'],[3,'Multi (60)'],[5,'Memory (46)'],[7,'Overall (133)']] as const){const score=num(r[i]);if(score===undefined)continue;const steps=num(r[i+1]);out.push({model:identity(model),score,harness:mode,setting:label,metrics:steps===undefined?{}:{meanSteps:steps}});}
+      for(const [i,label] of [[1,'Single (27)'],[3,'Multi (60)'],[5,'Memory (46)'],[7,'Overall (133)']] as const){const score=num(r[i]);if(score===undefined)continue;const steps=num(r[i+1]);out.push({model:identity(model),score,harness:mode,setting:label,metrics:steps===undefined?{}:{steps:steps}});}
     }
     const sys=ts.find(t=>t[0]?.some(c=>c.text==='Full-pass rate'));
     for(const r of sys?.slice(1)??[]){const score=num(r[2]?.text);if(score===undefined)continue;out.push({model:r[0].text.replace(/^Droidrun · mobile-harness\s*/,'').replace(/Evaluation details$/,'').trim(),score,harness:'Droidrun · mobile-harness',setting:`Full-pass protocol; judge ${r[1].text}; ${r[3].text}`,metrics:{meanScore:num(r[4].text)!}});}
     return out.filter(r=>r.setting==='Overall (133)'||r.setting?.startsWith('Full-pass protocol')).map(r=>{
       if(r.setting==='Overall (133)')return {...r,setting:undefined,metrics:{...r.metrics,...Object.fromEntries(out.filter(x=>x.model===r.model&&x.harness===r.harness&&x!==r).flatMap(x=>{
-        const key=x.setting!.split(' ')[0].toLowerCase();return [[key,x.score],...(x.metrics?.meanSteps===undefined?[]:[[key+'_steps',x.metrics.meanSteps]])];
+        const key=x.setting!.split(' ')[0].toLowerCase();return [[key,x.score],...(x.metrics?.steps===undefined?[]:[[key+'_steps',x.metrics.steps]])];
       }))}};
       const solved=r.setting?.match(/; (\d+) \/ (\d+)$/);
       return {...r,setting:r.setting?.replace(/; \d+ \/ \d+$/,''),metrics:{...r.metrics,...(solved?{solved:Number(solved[1]),tasks:Number(solved[2])}:{})}};

@@ -1,0 +1,6 @@
+// INQUISITIVE tests generating useful questions from highlighted text in news articles.
+// The headline is the human-evaluation validity rate, with relatedness, answeredness and salience in metrics.
+// This importer reads Table 6 of the benchmark paper.
+import type {Leaderboard,LeaderboardRow} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://aclanthology.org/2020.emnlp-main.530.pdf';
+const board:Leaderboard={benchmark:'inquisitive',url:'https://aclanthology.org/2020.emnlp-main.530/',feed:FEED,static:'paper',terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',async fetch(){const t=await pdfText(FEED);const s=t.split('Table 6: Human evaluation results')[0].split('Model              Valid').at(-1);if(!s)throw new Error('INQUISITIVE Table 6 missing');const rows:LeaderboardRow[]=[];for(const m of s.matchAll(/(Span|Span\+Sentence|Inquirer|Inquirer\+SQuAD|Sentence\+Context|Inquirer Pipeline)\s+([.\d]+)\s+([.\d-]+)\s+([.\d-]+)\s+([.\d-]+)/gm))rows.push({model:m[1],score:Number(m[2])*100,metrics:{related:Number(m[3])*100,answered:Number(m[4])*100,salience:Number(m[5])}});return checked(rows,6);}};export default board;

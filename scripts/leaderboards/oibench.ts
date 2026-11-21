@@ -8,7 +8,7 @@ import { grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 import { flatPaperTables } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://arxiv.org/html/2506.10481";
 const board: Leaderboard = {
- benchmark: "oibench",
+ benchmark: "oibench", static: 'paper',
  parts: {
    cpp: { name: 'C++', group: 'Language' },
    java: { name: 'Java', group: 'Language' },

@@ -1,5 +1,6 @@
 // IPI Bench (General Analysis): one-query attack success rate on all 34 workplace tasks,
 // in percent, lower is better. Figure 1 reports the reviewed results in a static ARIA table.
+// Keep the one-query interval and the report disposition percentages.
 // The other whole-benchmark attack budgets are metrics, not extra headline rows. Clean-run
 // objective scores, costs and total tokens describe un-attacked workflows, so their distinct
 // denominators stay explicit in metrics; they are not attack-run cost or output-token fields.
@@ -23,9 +24,21 @@ const board: Leaderboard = {
     const html = await fetchText(PAGE);
     const figure = html.match(/<div class="lbd" role="table" aria-label="Attack success rate by model"[\s\S]*?<\/figure>/)?.[0];
     if (!figure) throw new Error('IPI Bench headline table missing');
-    const clean = tables(html).find(t => t[0]?.map(c => c.text).join('|') === 'Model|Main objective score|Cost|Total tokens');
+    const all = tables(html);
+    const clean = all.find(t => t[0]?.map(c => c.text).join('|') === 'Model|Main objective score|Cost|Total tokens');
     if (!clean) throw new Error('IPI Bench clean workflow table missing');
     const cleanByModel = new Map(clean.slice(1).map(r => [r[0].text,r]));
+    const dispositions = new Map<string, Record<string, number>>();
+    for (const table of all.filter(t => t[0]?.[1]?.text === 'Presented as verified or approved')) {
+      for (const row of table.slice(1)) {
+        const metrics: Record<string, number> = {};
+        for (const [index, key] of ['presentedAsVerified', 'mentionedWithoutComment', 'flaggedForReview', 'notMentioned', 'misrepresented'].entries()) {
+          const value = num(row[index + 1]?.text);
+          if (value !== undefined) metrics[key] = value;
+        }
+        dispositions.set(row[0].text, metrics);
+      }
+    }
     const out: LeaderboardRow[] = [];
     for (const match of figure.matchAll(/<div class="lbd-row" role="row">([\s\S]*?)<\/div>/g)) {
       const tr = match[1];
@@ -34,7 +47,7 @@ const board: Leaderboard = {
       if (!model || values.length !== 3) throw new Error('IPI Bench invalid headline row');
       const score = Number(values[0][1]);
       const margin = Number(values[0][2]);
-      const metrics: Record<string, number> = { ciLow: Math.max(0,score-margin), ciHigh: Math.min(100,score+margin),
+      const metrics: Record<string, number> = { ...dispositions.get(model),
         asr11: Number(values[1][1]), asrIterative: Number(values[2][1]) };
       const c = cleanByModel.get(model);
       if (c) {
@@ -43,7 +56,7 @@ const board: Leaderboard = {
         if (cost !== undefined) metrics.cleanCost = cost;
         if (tok) metrics.cleanTotalTokens = Number(tok[1]) * (tok[2].toUpperCase() === 'M' ? 1e6 : 1e3);
       }
-      out.push({ model, score, setting: 'medium effort; one-query attack', metrics });
+      out.push({ model, score, low: Math.max(0, score - margin), high: Math.min(100, score + margin), setting: 'medium effort; one-query attack', metrics });
     }
     if (!out.length) throw new Error('IPI Bench has no rows');
     return out;

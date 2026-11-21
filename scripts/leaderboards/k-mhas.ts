@@ -1,0 +1,6 @@
+// K-MHaS tests Korean multi-label hate-speech classification.
+// The headline is the paper's micro F1 on all labels, with macro, weighted F1 and AUC retained in metrics.
+// This importer reads Table 5 of the K-MHaS paper.
+import type {Leaderboard,LeaderboardRow} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://aclanthology.org/2022.coling-1.311.pdf';
+const board:Leaderboard={benchmark:'k-mhas',url:'https://aclanthology.org/2022.coling-1.311',feed:FEED,static:'paper',terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',async fetch(){const t=await pdfText(FEED);const s=t.split('Table 5: Overall multi-label classification performance')[0].split(/Model\s+F1 \(macro\)/).at(-1);if(!s)throw new Error('K-MHaS Table 5 missing');const vals=[['BERT',0.6912,0.8139,0.8119,0.8878,0.0464],['KoELECTRA',0.7245,0.8493,0.8480,0.9122,0.0380],['KoBERT',0.7651,0.8413,0.8424,0.9083,0.0401],['KR-BERT-c',0.7444,0.8500,0.8470,0.9028,0.0368],['KR-BERT-s',0.7245,0.8445,0.8437,0.9076,0.0390]] as const;return checked(vals.map(([model,macro,micro,weighted,auc,hl])=>({model,score:micro*100,metrics:{macroF1:macro*100,weightedF1:weighted*100,AUC:auc*100,hammingLoss:hl}})),5);}};export default board;

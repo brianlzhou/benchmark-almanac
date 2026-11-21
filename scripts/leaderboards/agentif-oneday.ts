@@ -1,6 +1,6 @@
 // AgentIF-OneDay (xbench AGI Tracking series). The board at xbench.org/agi/agentif reads /api/task-ifs from
 // the xbench Strapi API (see xbench-scienceqa.ts) with the page's own query: per tested agent product the
-// overall score (0 to 100, the ranking), mean latency and evaluation date. The board tests agent products
+// overall score (0 to 100, the ranking), agent maker, mean latency and evaluation date. The board tests agent products
 // (AutoClaw, Manus, Genspark, ChatGPT Agent, MiniMax Agent); every row is passed on and the resolver keeps
 // the ones with a model record. avgLatency, the board's "Avg Latency (s)" column, is kept as metrics.latency.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -10,6 +10,7 @@ const PATH = 'task-ifs?sort=overallScore:desc&pagination[limit]=100&populate=com
 
 interface Entry {
   product?: string;
+  company?: { name?: string } | null;
   overallScore?: number;
   /** seconds per task, the board's "Avg Latency (s)" */
   avgLatency?: number;
@@ -28,7 +29,7 @@ const board: Leaderboard = {
       const model = e.product?.trim();
       if (!model || typeof e.overallScore !== 'number') continue;
       const metrics = typeof e.avgLatency === 'number' ? { latency: e.avgLatency } : undefined;
-      rows.push({ model, score: e.overallScore, date: e.evaluationDate, metrics });
+      rows.push({ model, score: e.overallScore, date: e.evaluationDate, agentOrg: e.company?.name?.trim() || undefined, metrics });
     }
     return rows;
   },

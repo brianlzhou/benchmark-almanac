@@ -1,5 +1,5 @@
 // FinEval: the published Overall Ranking weighted average covers all four textual domains
-// described by this benchmark record. Component domains are metrics; zero-shot is the setting.
+// described by this benchmark record. The domain and task tables supply part scores, and Size gives billions of parameters.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
@@ -28,14 +28,40 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = markdownTables(source);
     const rows: LeaderboardRow[] = [];
-    const labels:Record<string,string>={Finance:"academic",FTC:"industry-understanding",FTS:"industry-generation",App:"security",COT:"agent","Financial Academic":"weighted text overall",Limit:"multimodal"};
-    for(const t of all){const h=t[0];if(h[0]!=="Model"&&h[0]!=="Rank")continue;
-      const ranked=h[0]==="Rank";const setting=ranked&&h[2]==="Total Score"?"financial rigor release":labels[h[2]];if(setting!=="weighted text overall")continue;
-      const scoreIndex=ranked?2:h.length-1;const modelIndex=ranked?1:0;
-      for(const r of t.slice(1)){const score=num(r[scoreIndex]);if(score===undefined)continue;let model=r[modelIndex];
-        if(ranked)model=model.replace(/^(Ant Group|DeepSeek|Alibaba|Zhipu AI|Shanghai AI Lab|OpenAI|Meta AI)\s+/,"");
-        const metrics=Object.fromEntries(h.flatMap((name,j)=>{if(j===scoreIndex||j<=modelIndex||name==="Size"||name==="Limit")return [];const n=num(r[j]);return n===undefined?[]:[[name,n]];}));
-        rows.push({model,score,setting:"zero-shot",metrics});
+    const groups: Record<string, string> = {
+      Finance: 'Financial Academic', FTC: 'Industry Understanding', FTS: 'Industry Generation',
+      App: 'Financial Security', COT: 'Financial Agent',
+    };
+    const details = new Map<string, Record<string, number>>();
+    for (const [header, ...entries] of all) {
+      const group = groups[header[2]];
+      if (header[0] !== 'Model' || !group) continue;
+      for (const cells of entries) {
+        const model = cells[0].toLowerCase();
+        const scores = details.get(model) ?? {};
+        for (let i = 2; i < header.length - 1; i++) {
+          const name = header[i];
+          const key = name.toLowerCase().replace(/-(.)/g, (_, c: string) => c.toUpperCase());
+          const value = num(cells[i]);
+          if (value === undefined) continue;
+          scores[key] = value;
+          board.parts![key] = { name, group };
+        }
+        details.set(model, scores);
+      }
+    }
+    for (const [header, ...entries] of all) {
+      if (header[0] !== 'Model' || header.at(-1) !== 'Weighted Average') continue;
+      for (const cells of entries) {
+        const score = num(cells.at(-1));
+        if (score === undefined) continue;
+        const model = cells[0];
+        const metrics = { ...details.get(model.toLowerCase()) };
+        for (let i = 2; i < header.length - 1; i++) {
+          const value = num(cells[i]);
+          if (value !== undefined) metrics[header[i]] = value;
+        }
+        rows.push({ model, score, params: num(cells[1]), setting: 'zero-shot', metrics });
       }
     }
     if (!rows.length) throw new Error("No fineval score rows");

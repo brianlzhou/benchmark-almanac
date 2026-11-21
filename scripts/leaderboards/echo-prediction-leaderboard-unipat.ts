@@ -2,7 +2,7 @@
 // own JSON endpoint, /api/v2/rankings?category=Overall: per model the Elo score from pairwise battles on
 // resolved forecasting questions, the margin, battle and resolved counts. The Overall Elo is the score.
 // The "Market" row (Polymarket prices, provider "system") is a human baseline and is skipped.
-// The ± the page prints after the score (eloMargin, in Elo points) is kept as metrics.margin.
+// The ± the page prints after the score (eloMargin, in Elo points) sets the lower and upper score bounds.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -13,6 +13,10 @@ interface Ranking {
   provider?: string;
   eloScore?: number;
   eloMargin?: number;
+  battles?: number;
+  resolvedCount?: number;
+  rankUp?: number;
+  rankDown?: number;
 }
 
 const board: Leaderboard = {
@@ -30,8 +34,16 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const r of res.data) {
       if (r.provider !== 'official' || typeof r.eloScore !== 'number') continue;
-      const margin = typeof r.eloMargin === 'number' && r.eloMargin > 0 ? r.eloMargin : undefined;
-      rows.push({ model: r.modelName, score: r.eloScore, metrics: margin ? { margin } : undefined });
+      const margin = typeof r.eloMargin === 'number' && r.eloMargin >= 0 ? r.eloMargin : undefined;
+      const metrics: Record<string, number> = {};
+      for (const key of ['battles','resolvedCount'] as const) {
+        const value = r[key];
+        if (typeof value === 'number') metrics[key] = value;
+      }
+      if (typeof r.rankUp === 'number') metrics.rankLow = r.rankUp;
+      if (typeof r.rankDown === 'number') metrics.rankHigh = r.rankDown;
+      rows.push({model: r.modelName, score: r.eloScore, metrics,
+        low: margin === undefined ? undefined : r.eloScore-margin, high: margin === undefined ? undefined : r.eloScore+margin});
     }
     return rows;
   },

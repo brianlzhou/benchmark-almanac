@@ -18,7 +18,7 @@ const board: Leaderboard = {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='pass^1'));if(!t)throw new Error('Toloka baseline table missing');const out:LeaderboardRow[]=[];
     for(const r of t.slice(1))for(let i=1;i<3;i++){const score=num(r[i]?.text);if(score!==undefined)out.push({model:identity(r[0].text.replace(/ \(xhigh\)$/i,'')),score,setting:'Launch baseline; '+t[0][i].text+(/xhigh/i.test(r[0].text)?'; xhigh reasoning':'')});}return out.filter(r=>r.setting?.includes('; pass^5')).map(r=>{
       const other=out.find(x=>x.model===r.model&&x.setting===r.setting!.replace('pass^5','pass^1'));
-      return {...r,setting:r.setting!.replace('; pass^5',''),metrics:other?{'pass^1':other.score}:undefined};
+      return {...r,setting:r.setting!.replace('; pass^5',''),metrics:other?{pass1:other.score}:undefined};
     });
   },
 };

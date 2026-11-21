@@ -1,5 +1,5 @@
 // PatientAgentBench: published aggregate clinical-agent score on its original 1–5 scale.
-// Six dimensions retain their means and bracketed percentages separately.
+// Explicit sizes come from model labels. Six dimensions retain their means and bracketed percentages separately.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -42,7 +42,8 @@ const board: Leaderboard = {
         const m = r[i+3]?.match(/([\d.]+)\s*\[(\d+)%\]/);
         if (m) { metrics[key] = Number(m[1]); metrics[`${key}Percent`] = Number(m[2]); }
       }
-      return {model: identity(r[1]), score:numeric(r[2])!, metrics};
+      const size = r[1].match(/-(\d+(?:\.\d+)?)B\b/i);
+      return {model: identity(r[1]), params:size ? Number(size[1]) : undefined, score:numeric(r[2])!, metrics};
     });
   },
 };

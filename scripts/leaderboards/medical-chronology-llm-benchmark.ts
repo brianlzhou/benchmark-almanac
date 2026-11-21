@@ -1,4 +1,4 @@
-// Overall composite over six datasets and three rounds.
+// Overall composite over six datasets and three rounds, with dataset-level hallucination scores and Golden C diagnostics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
@@ -8,6 +8,7 @@ const FEED = "https://raw.githubusercontent.com/superinsight/superinsight-ai-ben
 const board: Leaderboard = {
   benchmark: "medical-chronology-llm-benchmark",
   parts: {
+    semantic: { name: 'Semantic', group: 'Dimension' },
     f1: { name: 'F1', group: 'Dimension' },
     formatting: { name: 'Formatting', group: 'Dimension' },
     chronology: { name: 'Chronology', group: 'Dimension' },
@@ -18,7 +19,8 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Apache-2.0 repository; raw.githubusercontent.com has no robots.txt.",
   async fetch() {
-    const table = markdownTables(await fetchText(FEED)).find(t => t[0]?.includes("Composite"));
+    const tables = markdownTables(await fetchText(FEED));
+    const table = tables.find(t => t[0]?.includes("Composite"));
     if (!table) throw new Error('Published overall results table is missing');
     const out: LeaderboardRow[] = [];
     for (const cells of table.slice(1)) {
@@ -29,7 +31,19 @@ const board: Leaderboard = {
         const value = num(cells[column]);
         if (value !== undefined) metrics[key] = value;
       }
-      out.push({ model: cells[0].replace(/[†‡]/g, ""), setting: cells[0].includes("†") ? "Nebius FP16" : cells[0].includes("‡") ? "Nebius FP4" : undefined, score, metrics });
+      for (const [header, keys] of [
+        ['A', ['hallucinationA', 'hallucinationB', 'hallucinationC', 'hallucinationD', 'hallucinationE', 'hallucinationF']],
+        ['P', ['goldenCPrecision', 'goldenCRecall', 'goldenCF1', 'goldenCFalsePositive', 'goldenCFalseNegative', 'goldenCMay']],
+      ] as const) {
+        const breakdown = tables.find(t => t[0]?.[0] === 'Model' && t[0]?.[1] === header);
+        const row = breakdown?.slice(1).find(r => r[0] === cells[0]);
+        if (!row) continue;
+        for (const [i, key] of keys.entries()) {
+          const value = num(row[i + 1]);
+          if (value !== undefined) metrics[key] = value;
+        }
+      }
+      out.push({ model: cells[0].replace(/[†‡]/g, ""), setting: cells[0].includes("†") ? "Nebius FP16" : cells[0].includes("‡") ? "Nebius FP4" : undefined, score, trials: 3, metrics });
     }
     if (out.length < 3) throw new Error(`Only ${out.length} model rows`);
     return out;

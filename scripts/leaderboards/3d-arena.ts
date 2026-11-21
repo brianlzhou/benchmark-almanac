@@ -1,9 +1,9 @@
 // The official All-votes leaderboard publishes an aggregate across rendering and topology votes.
-// Retain both task-specific ratings as metrics. Never compute a maximum across the two tasks.
+// Read the published votes, task ratings and open-source marks.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const API='https://3d-arena-3d-arena.hf.space/api/leaderboard';
-interface Entry {name:string;score:number|null;votes:number;open_source:boolean}
+interface Entry {name:string;rank:string;score:number|null;votes:number;open_source:boolean}
 const board:Leaderboard={
   benchmark:'3d-arena', parts: {
   renderRating: { name: 'Render', group: 'Dimension' },
@@ -23,9 +23,10 @@ const board:Leaderboard={
       const metrics:Record<string,number>={votes:r.votes,openSource:Number(r.open_source)};
       for(const kind of ['render','topology']){
         const s=slices[kind].get(r.name);
+        if(s&&/^\d+$/.test(s.rank))metrics[kind+'Rank']=Number(s.rank);
         if(s&&typeof s.score==='number') {metrics[kind+'Rating']=s.score;metrics[kind+'Votes']=s.votes;}
       }
-      rows.push({model:r.name,score:r.score,metrics});
+      rows.push({model:r.name,score:r.score,open:r.open_source,metrics});
     }
     if(!rows.length)throw new Error('3D Arena aggregate ratings missing');
     return rows;

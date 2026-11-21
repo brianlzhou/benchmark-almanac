@@ -8,7 +8,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2603.01229";
 const board: Leaderboard = {
- benchmark: "rmbench",
+ benchmark: "rmbench", static: 'paper',
  parts: {
    singleMemory: { name: 'Single memory', group: 'Difficulty' },
    multiMemory: { name: 'Multi memory', group: 'Difficulty' },

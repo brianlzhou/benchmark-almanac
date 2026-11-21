@@ -1,6 +1,6 @@
 // RTEB beta: the published meanTask (nDCG@10), converted to percent, is the score.
 // Require all benchmark tasks. Incomplete submissions never receive an overall row.
-// Model embedding dimensions and prompt settings remain in the original configuration label.
+// Keep the model metadata, embedding configuration and task scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -34,17 +34,52 @@ const board: Leaderboard = {
   "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
 ,
   async fetch(): Promise<LeaderboardRow[]> {
-    const data = await fetchJson<{benchmarkName:string,tasks:string[],rows:{model:{name:string},scoresByTask:Record<string,number|null>,meanTask:number|null}[]}>(FEED);
-    if (data.benchmarkName !== 'RTEB(beta)' || !data.tasks.length) throw new Error('Unexpected RTEB response');
-    const rows: LeaderboardRow[] = [];
-    for (const r of data.rows) {
-      const entries = data.tasks.flatMap(task => typeof r.scoresByTask[task] === 'number' && Number.isFinite(r.scoresByTask[task]) ? [[task,r.scoresByTask[task]] as const] : []);
-      const metrics = {completedTasks:entries.length,totalTasks:data.tasks.length};
-
-      if (entries.length === data.tasks.length && typeof r.meanTask === 'number' && Number.isFinite(r.meanTask)) rows.push({model:r.model.name,score:r.meanTask*100,setting:'RTEB beta; all tasks',metrics});
-    }
-    if (!rows.length) throw new Error('No RTEB task scores');
-    return rows;
+      const data = await fetchJson<{
+        benchmarkName: string; tasks: string[];
+        rows: {
+          model: {name: string; openWeights?: boolean; license?: string; opennessScore?: number};
+          meanTask: number; meanTaskType?: number; meanPrivate?: number; meanPublic?: number;
+          activeParamsB?: number; totalParamsB?: number; maxTokens?: number; embeddingDim?: number; zeroShotPct?: number;
+          scoresByTaskType: Record<string, number>; scoresByTask?: Record<string, number>;
+          scoresByCustomGroup?: Record<string, Record<string, number>>;
+        }[];
+      }>(FEED);
+      if (data.benchmarkName !== 'RTEB(beta)' || !data.tasks.length) throw new Error('Unexpected RTEB response');
+      const parts = board.parts ?? {};
+      const keyOf = (label: string) => label.replace(/^[A-Z]/, c => c.toLowerCase())
+        .replace(/[^a-zA-Z0-9]+(.)?/g, (_, c: string | undefined) => c?.toUpperCase() ?? '');
+      const result = data.rows.filter(r => Number.isFinite(r.meanTask) && data.tasks.every(task => Number.isFinite(r.scoresByTask?.[task]))).map(r => {
+        const metrics: Record<string, number> = {completedTasks: data.tasks.length, totalTasks: data.tasks.length};
+        for (const [key, value] of Object.entries(r.scoresByTaskType)) {
+          if (Number.isFinite(value)) metrics[key] = value * 100;
+        }
+        const addPart = (name: string, value: number, group: string, key: string) => {
+          if (!Number.isFinite(value)) return;
+          metrics[key] = value * 100;
+          parts[key] = {name, group};
+        };
+        for (const [name, value] of Object.entries(r.scoresByTask ?? {})) addPart(name, value, 'Task', keyOf(name));
+        for (const [group, scores] of Object.entries(r.scoresByCustomGroup ?? {})) {
+          for (const [name, value] of Object.entries(scores)) addPart(name, value, group, keyOf(group + ' ' + name));
+        }
+        for (const [key, value] of Object.entries({
+          activeParamsB: r.activeParamsB, maxTokens: r.maxTokens, embeddingDim: r.embeddingDim,
+          zeroShotPct: r.zeroShotPct, opennessScore: r.model.opennessScore,
+        })) {
+          if (typeof value === 'number' && Number.isFinite(value) && value >= 0) metrics[key] = value;
+        }
+        if (typeof r.meanTaskType === 'number') metrics.meanTaskType = r.meanTaskType * 100;
+        if (typeof r.meanPublic === 'number') addPart('Public', r.meanPublic, 'Split', 'meanPublic');
+        if (typeof r.meanPrivate === 'number') addPart('Private', r.meanPrivate, 'Split', 'meanPrivate');
+        return {
+          model: r.model.name, setting: 'RTEB beta; all tasks', score: r.meanTask * 100, metrics,
+          params: r.totalParamsB ?? undefined, open: r.model.openWeights ?? undefined,
+          license: r.model.license || undefined,
+        };
+      });
+      board.parts = parts;
+      if (!result.length) throw new Error('No RTEB task scores');
+      return result;
   },
 };
 export default board;

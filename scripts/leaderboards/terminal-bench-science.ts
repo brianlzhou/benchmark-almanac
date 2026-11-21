@@ -4,7 +4,7 @@
 // public Harbor Hub endpoint that the Terminal-Bench importers use (see terminal-bench-4-0.ts). Metrics
 // per row: accuracy (0 to 100, the score), trial count ("tasks"), total cost and total tokens for the run.
 // Cost per task is the total cost over the trial count. Total tokens include input, so they stay in metrics as run totals and totals per task.
-// accuracy_stderr, the standard error the board prints as "+/- 3.2%", is kept as metrics.sem (points).
+// accuracy_stderr, the standard error the board prints as "+/- 3.2%", is kept as metrics.stderr (points).
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { HARBOR_FEED, label, type Link } from './terminal-bench-4-0.ts';
@@ -38,14 +38,13 @@ const board: Leaderboard = {
       if (!model || /^multiple$/i.test(model)) continue;
       const { accuracy, tasks, total_cost_usd: total, accuracy_stderr: sem, total_tokens: totalTokens } = r.metrics;
       const metrics: Record<string, number> = {};
-      if (typeof r.rank === 'number') metrics.rank = r.rank;
       if (typeof r.metrics.passes === 'number') metrics.passes = r.metrics.passes;
       if (typeof total === 'number') metrics.runCostUsd = total;
-      if (typeof sem === 'number') { metrics.sem = sem; metrics.stderr = sem; }
+      if (typeof sem === 'number') metrics.stderr = sem;
       if (typeof tasks === 'number' && tasks > 0) metrics.trials = tasks;
       if (typeof totalTokens === 'number' && totalTokens >= 0) {
-        metrics.tokensTotal = totalTokens;
-        if (tasks && tasks > 0) metrics.tokensTotalPerTask = totalTokens / tasks;
+        metrics.runTotalTokens = totalTokens;
+        if (tasks && tasks > 0) metrics.totalTokens = totalTokens / tasks;
       }
       out.push({
         model,

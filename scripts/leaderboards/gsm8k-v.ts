@@ -9,7 +9,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2509.25160";
 const board: Leaderboard = {
- benchmark: "gsm8k-v",
+ benchmark: "gsm8k-v", static: 'paper',
  parts: {
    signboardIcon: { name: 'Signboard icon', group: 'Category' },
    measurement: { name: 'Measurement', group: 'Category' },

@@ -1,0 +1,1405 @@
+{
+  "note": "Each benchmark's launch post on X and the engagement X showed on it when we read it, by benchmark id. Grok Build finds the post (private/audits/traction-2026-11-20/), and FxTwitter's public mirror of post stats (api.fxtwitter.com) confirms it exists and gives the counts. We never read x.com directly. Counts grow after we read them, so each entry keeps its read date.",
+  "benchmarks": {
+    "3lm": {
+      "x": {
+        "url": "https://x.com/TIIuae/status/1951251578888855721",
+        "author": "@TIIuae",
+        "posted": "2025-08-01",
+        "views": 305,
+        "likes": 2,
+        "reposts": 0,
+        "replies": 4,
+        "quotes": 0,
+        "bookmarks": 2,
+        "read": "2026-11-20"
+      }
+    },
+    "ace-mercor": {
+      "x": {
+        "url": "https://x.com/mercor/status/1998450306791997923",
+        "author": "@mercor",
+        "posted": "2025-12-09",
+        "views": 10020,
+        "likes": 42,
+        "reposts": 10,
+        "replies": 1,
+        "quotes": 2,
+        "bookmarks": 8,
+        "read": "2026-11-20"
+      }
+    },
+    "adaexplorebench": {
+      "x": {
+        "url": "https://x.com/RuiWangRory/status/2112388542462915019",
+        "author": "@RuiWangRory",
+        "posted": "2026-10-20",
+        "views": 656,
+        "likes": 11,
+        "reposts": 5,
+        "replies": 1,
+        "quotes": 1,
+        "bookmarks": 2,
+        "read": "2026-11-20"
+      }
+    },
+    "appworld": {
+      "x": {
+        "url": "https://x.com/harsh3vedi/status/1818311843976233198",
+        "author": "@harsh3vedi",
+        "posted": "2024-07-30",
+        "views": 58590,
+        "likes": 87,
+        "reposts": 28,
+        "replies": 4,
+        "quotes": 7,
+        "bookmarks": 48,
+        "read": "2026-11-20"
+      }
+    },
+    "arena-hard-v2": {
+      "x": {
+        "url": "https://x.com/LiTianleli/status/1915469005495951411",
+        "author": "@LiTianleli",
+        "posted": "2025-04-24",
+        "views": 31231,
+        "likes": 203,
+        "reposts": 31,
+        "replies": 4,
+        "quotes": 4,
+        "bookmarks": 46,
+        "read": "2026-11-20"
+      }
+    },
+    "arxivmath": {
+      "x": {
+        "url": "https://x.com/j_dekoninck/status/2019086337396310228",
+        "author": "@j_dekoninck",
+        "posted": "2026-02-04",
+        "views": 24564,
+        "likes": 188,
+        "reposts": 23,
+        "replies": 10,
+        "quotes": 4,
+        "bookmarks": 74,
+        "read": "2026-11-20"
+      }
+    },
+    "automationbench": {
+      "x": {
+        "url": "https://x.com/wadefoster/status/2046214612685590798",
+        "author": "@wadefoster",
+        "posted": "2026-04-20",
+        "views": 36390,
+        "likes": 131,
+        "reposts": 21,
+        "replies": 17,
+        "quotes": 12,
+        "bookmarks": 137,
+        "read": "2026-11-20"
+      }
+    },
+    "autoresearch": {
+      "x": {
+        "url": "https://x.com/hooeem/status/2030720614752039185",
+        "author": "@hooeem",
+        "posted": "2026-03-08",
+        "views": 613278,
+        "likes": 3077,
+        "reposts": 341,
+        "replies": 63,
+        "quotes": 26,
+        "bookmarks": 8046,
+        "read": "2026-11-20"
+      }
+    },
+    "berkeley-function-calling-leaderboard-bfcl": {
+      "x": {
+        "url": "https://x.com/shishirpatil_/status/1778485140257452375",
+        "author": "@shishirpatil_",
+        "posted": "2024-04-11",
+        "views": 58376,
+        "likes": 198,
+        "reposts": 49,
+        "replies": 6,
+        "quotes": 17,
+        "bookmarks": 139,
+        "read": "2026-11-20"
+      }
+    },
+    "bfcl-v4": {
+      "x": {
+        "url": "https://x.com/shishirpatil_/status/1946020557205770696",
+        "author": "@shishirpatil_",
+        "posted": "2025-07-18",
+        "views": 11919,
+        "likes": 55,
+        "reposts": 12,
+        "replies": 6,
+        "quotes": 2,
+        "bookmarks": 25,
+        "read": "2026-11-20"
+      }
+    },
+    "binaryaudit": {
+      "x": {
+        "url": "https://x.com/pmigdal/status/2021244382800760873",
+        "author": "@pmigdal",
+        "posted": "2026-02-10",
+        "views": 232635,
+        "likes": 1417,
+        "reposts": 174,
+        "replies": 72,
+        "quotes": 37,
+        "bookmarks": 914,
+        "read": "2026-11-20"
+      }
+    },
+    "bioriskeval": {
+      "x": {
+        "url": "https://x.com/UdariMadhu/status/1991921721755185593",
+        "author": "@UdariMadhu",
+        "posted": "2025-11-21",
+        "views": 5557,
+        "likes": 31,
+        "reposts": 8,
+        "replies": 2,
+        "quotes": 2,
+        "bookmarks": 8,
+        "read": "2026-11-20"
+      }
+    },
+    "blink": {
+      "x": {
+        "url": "https://x.com/XingyuFu2/status/1781368539213082683",
+        "author": "@XingyuFu2",
+        "posted": "2024-04-19",
+        "views": 105911,
+        "likes": 405,
+        "reposts": 123,
+        "replies": 9,
+        "quotes": 5,
+        "bookmarks": 203,
+        "read": "2026-11-20"
+      }
+    },
+    "bright-retrieval": {
+      "x": {
+        "url": "https://x.com/hongjin_su/status/1814299949326311626",
+        "author": "@hongjin_su",
+        "posted": "2024-07-19",
+        "views": 79218,
+        "likes": 194,
+        "reposts": 57,
+        "replies": 4,
+        "quotes": 7,
+        "bookmarks": 108,
+        "read": "2026-11-20"
+      }
+    },
+    "brokenarxiv": {
+      "x": {
+        "url": "https://x.com/j_dekoninck/status/2032458037823483953",
+        "author": "@j_dekoninck",
+        "posted": "2026-03-13",
+        "views": 86529,
+        "likes": 808,
+        "reposts": 113,
+        "replies": 32,
+        "quotes": 20,
+        "bookmarks": 251,
+        "read": "2026-11-20"
+      }
+    },
+    "browsecomp": {
+      "x": {
+        "url": "https://x.com/OpenAI/status/1910393421652520967",
+        "author": "@OpenAI",
+        "posted": "2025-04-10",
+        "views": 933687,
+        "likes": 4239,
+        "reposts": 479,
+        "replies": 153,
+        "quotes": 67,
+        "bookmarks": 1114,
+        "read": "2026-11-20"
+      }
+    },
+    "browsecomp-zh": {
+      "x": {
+        "url": "https://x.com/PalinZhou/status/1920477350149378255",
+        "author": "@PalinZhou",
+        "posted": "2025-05-08",
+        "views": 16,
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0,
+        "read": "2026-11-20"
+      }
+    },
+    "burger": {
+      "x": {
+        "url": "https://x.com/hkz222/status/2116282964434985112",
+        "author": "@hkz222",
+        "posted": "2026-10-30",
+        "views": 7047,
+        "likes": 79,
+        "reposts": 19,
+        "replies": 7,
+        "quotes": 3,
+        "bookmarks": 24,
+        "read": "2026-11-20"
+      }
+    },
+    "cascadebench": {
+      "x": {
+        "url": "https://x.com/patricebechard/status/2054600566135775432",
+        "author": "@patricebechard",
+        "posted": "2026-05-13",
+        "views": 2283,
+        "likes": 14,
+        "reposts": 6,
+        "replies": 1,
+        "quotes": 4,
+        "bookmarks": 0,
+        "read": "2026-11-20"
+      }
+    },
+    "charxiv": {
+      "x": {
+        "url": "https://x.com/zwcolin/status/1812650435808792731",
+        "author": "@zwcolin",
+        "posted": "2024-07-15",
+        "views": 16667,
+        "likes": 72,
+        "reposts": 19,
+        "replies": 1,
+        "quotes": 3,
+        "bookmarks": 23,
+        "read": "2026-11-20"
+      }
+    },
+    "chronomagic-bench": {
+      "x": {
+        "url": "https://x.com/AdinaYakup/status/1806409038743171191",
+        "author": "@AdinaYakup",
+        "posted": "2024-06-27",
+        "views": 2575,
+        "likes": 34,
+        "reposts": 7,
+        "replies": 1,
+        "quotes": 0,
+        "bookmarks": 6,
+        "read": "2026-11-20"
+      }
+    },
+    "claw-eval": {
+      "x": {
+        "url": "https://x.com/alexandr_wang/status/2045348588734066794",
+        "author": "@alexandr_wang",
+        "posted": "2026-04-18",
+        "views": 107614,
+        "likes": 801,
+        "reposts": 52,
+        "replies": 50,
+        "quotes": 7,
+        "bookmarks": 79,
+        "read": "2026-11-20"
+      }
+    },
+    "codeeditorbench": {
+      "x": {
+        "url": "https://x.com/GeZhang86038849/status/1776079076861817341",
+        "author": "@GeZhang86038849",
+        "posted": "2024-04-05",
+        "views": 9361,
+        "likes": 70,
+        "reposts": 18,
+        "replies": 2,
+        "quotes": 3,
+        "bookmarks": 34,
+        "read": "2026-11-20"
+      }
+    },
+    "cooperbench": {
+      "x": {
+        "url": "https://x.com/_Hao_Zhu/status/2016541779236184397",
+        "author": "@_Hao_Zhu",
+        "posted": "2026-01-28",
+        "views": 91380,
+        "likes": 258,
+        "reposts": 60,
+        "replies": 17,
+        "quotes": 18,
+        "bookmarks": 165,
+        "read": "2026-11-20"
+      }
+    },
+    "copilot-arena": {
+      "x": {
+        "url": "https://x.com/arena/status/1846604894402498766",
+        "author": "@arena",
+        "posted": "2024-10-16",
+        "views": 158206,
+        "likes": 472,
+        "reposts": 72,
+        "replies": 10,
+        "quotes": 28,
+        "bookmarks": 233,
+        "read": "2026-11-20"
+      }
+    },
+    "crmarena": {
+      "x": {
+        "url": "https://x.com/steeve__huang/status/1853864706378801196",
+        "author": "@steeve__huang",
+        "posted": "2024-11-05",
+        "views": 35424,
+        "likes": 137,
+        "reposts": 44,
+        "replies": 2,
+        "quotes": 7,
+        "bookmarks": 123,
+        "read": "2026-11-20"
+      }
+    },
+    "dacomp": {
+      "x": {
+        "url": "https://x.com/fangyu_lei/status/1998458208160198714",
+        "author": "@fangyu_lei",
+        "posted": "2025-12-09",
+        "views": 3148,
+        "likes": 23,
+        "reposts": 12,
+        "replies": 18,
+        "quotes": 1,
+        "bookmarks": 3,
+        "read": "2026-11-20"
+      }
+    },
+    "dsbench": {
+      "x": {
+        "url": "https://x.com/wyu_nd/status/1835469391426973898",
+        "author": "@wyu_nd",
+        "posted": "2024-09-16",
+        "views": 23514,
+        "likes": 141,
+        "reposts": 28,
+        "replies": 10,
+        "quotes": 5,
+        "bookmarks": 92,
+        "read": "2026-11-20"
+      }
+    },
+    "explorationbench-tencent": {
+      "x": {
+        "url": "https://x.com/TencentHunyuan/status/2105288808929558891",
+        "author": "@TencentHunyuan",
+        "posted": "2026-09-30",
+        "views": 72748,
+        "likes": 431,
+        "reposts": 45,
+        "replies": 14,
+        "quotes": 14,
+        "bookmarks": 195,
+        "read": "2026-11-20"
+      }
+    },
+    "facts-benchmark-suite": {
+      "x": {
+        "url": "https://x.com/GoogleDeepMind/status/1998831084277313539",
+        "author": "@GoogleDeepMind",
+        "posted": "2025-12-10",
+        "views": 141484,
+        "likes": 1093,
+        "reposts": 110,
+        "replies": 43,
+        "quotes": 12,
+        "bookmarks": 247,
+        "read": "2026-11-20"
+      }
+    },
+    "functional-math": {
+      "x": {
+        "url": "https://x.com/_saurabh/status/1763626711407816930",
+        "author": "@_saurabh",
+        "posted": "2024-03-01",
+        "views": 486711,
+        "likes": 1156,
+        "reposts": 215,
+        "replies": 42,
+        "quotes": 62,
+        "bookmarks": 974,
+        "read": "2026-11-20"
+      }
+    },
+    "gdpval-aa-v2": {
+      "x": {
+        "url": "https://x.com/ArtificialAnlys/status/2066700136018071841",
+        "author": "@ArtificialAnlys",
+        "posted": "2026-06-16",
+        "views": 309522,
+        "likes": 1474,
+        "reposts": 147,
+        "replies": 97,
+        "quotes": 70,
+        "bookmarks": 488,
+        "read": "2026-11-20"
+      }
+    },
+    "gorilla-agent-arena": {
+      "x": {
+        "url": "https://x.com/shishirpatil_/status/1837205152132153803",
+        "author": "@shishirpatil_",
+        "posted": "2024-09-20",
+        "views": 33068,
+        "likes": 199,
+        "reposts": 39,
+        "replies": 9,
+        "quotes": 6,
+        "bookmarks": 141,
+        "read": "2026-11-20"
+      }
+    },
+    "hourvideo": {
+      "x": {
+        "url": "https://x.com/keshigeyan/status/1863652813668225040",
+        "author": "@keshigeyan",
+        "posted": "2024-12-02",
+        "views": 111596,
+        "likes": 183,
+        "reposts": 50,
+        "replies": 3,
+        "quotes": 10,
+        "bookmarks": 96,
+        "read": "2026-11-20"
+      }
+    },
+    "humanitys-last-exam": {
+      "x": {
+        "url": "https://x.com/hendrycks/status/1882433928407241155",
+        "author": "@hendrycks",
+        "posted": "2025-01-23",
+        "views": 1104285,
+        "likes": 4598,
+        "reposts": 731,
+        "replies": 198,
+        "quotes": 277,
+        "bookmarks": 2300,
+        "read": "2026-11-20"
+      }
+    },
+    "ifbench": {
+      "x": {
+        "url": "https://x.com/allen_ai/status/1940833394025279857",
+        "author": "@allen_ai",
+        "posted": "2025-07-03",
+        "views": 47567,
+        "likes": 306,
+        "reposts": 48,
+        "replies": 4,
+        "quotes": 11,
+        "bookmarks": 145,
+        "read": "2026-11-20"
+      }
+    },
+    "imo-answerbench": {
+      "x": {
+        "url": "https://x.com/lmthang/status/1985760224612057092",
+        "author": "@lmthang",
+        "posted": "2025-11-04",
+        "views": 188449,
+        "likes": 694,
+        "reposts": 111,
+        "replies": 12,
+        "quotes": 15,
+        "bookmarks": 315,
+        "read": "2026-11-20"
+      }
+    },
+    "ineqmath": {
+      "x": {
+        "url": "https://x.com/lupantech/status/1932866286427779586",
+        "author": "@lupantech",
+        "posted": "2025-06-11",
+        "views": 56797,
+        "likes": 209,
+        "reposts": 52,
+        "replies": 12,
+        "quotes": 6,
+        "bookmarks": 127,
+        "read": "2026-11-20"
+      }
+    },
+    "kor-bench": {
+      "x": {
+        "url": "https://x.com/GeZhang86038849/status/1847122931320869154",
+        "author": "@GeZhang86038849",
+        "posted": "2024-10-18",
+        "views": 5300,
+        "likes": 53,
+        "reposts": 14,
+        "replies": 3,
+        "quotes": 0,
+        "bookmarks": 34,
+        "read": "2026-11-20"
+      }
+    },
+    "libero-para": {
+      "x": {
+        "url": "https://x.com/HuggingPapers/status/2041553220028232082",
+        "author": "@HuggingPapers",
+        "posted": "2026-04-07",
+        "views": 1316,
+        "likes": 17,
+        "reposts": 4,
+        "replies": 2,
+        "quotes": 0,
+        "bookmarks": 8,
+        "read": "2026-11-20"
+      }
+    },
+    "lisanbench": {
+      "x": {
+        "url": "https://x.com/scaling01/status/1928510435164037342",
+        "author": "@scaling01",
+        "posted": "2025-05-30",
+        "views": 105921,
+        "likes": 641,
+        "reposts": 68,
+        "replies": 57,
+        "quotes": 31,
+        "bookmarks": 289,
+        "read": "2026-11-20"
+      }
+    },
+    "lmarena-search-arena": {
+      "x": {
+        "url": "https://x.com/arena/status/1902036561119899983",
+        "author": "@arena",
+        "posted": "2025-03-18",
+        "views": 60914,
+        "likes": 470,
+        "reposts": 74,
+        "replies": 16,
+        "quotes": 12,
+        "bookmarks": 124,
+        "read": "2026-11-20"
+      }
+    },
+    "longbench-v2": {
+      "x": {
+        "url": "https://x.com/realYushiBai/status/1869946577349132766",
+        "author": "@realYushiBai",
+        "posted": "2024-12-20",
+        "views": 8856,
+        "likes": 38,
+        "reposts": 9,
+        "replies": 1,
+        "quotes": 6,
+        "bookmarks": 12,
+        "read": "2026-11-20"
+      }
+    },
+    "lvbench": {
+      "x": {
+        "url": "https://x.com/Zai_org/status/1802532751838769351",
+        "author": "@Zai_org",
+        "posted": "2024-06-17",
+        "views": 794,
+        "likes": 16,
+        "reposts": 2,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 5,
+        "read": "2026-11-20"
+      }
+    },
+    "mathif": {
+      "x": {
+        "url": "https://x.com/yafuly/status/1925753754961236006",
+        "author": "@yafuly",
+        "posted": "2025-05-23",
+        "views": 9330,
+        "likes": 95,
+        "reposts": 19,
+        "replies": 6,
+        "quotes": 2,
+        "bookmarks": 56,
+        "read": "2026-11-20"
+      }
+    },
+    "mathvista": {
+      "x": {
+        "url": "https://x.com/arankomatsuzaki/status/1709380140717809992",
+        "author": "@arankomatsuzaki",
+        "posted": "2023-10-04",
+        "views": 10560,
+        "likes": 94,
+        "reposts": 26,
+        "replies": 0,
+        "quotes": 1,
+        "bookmarks": 28,
+        "read": "2026-11-20"
+      }
+    },
+    "mcp-atlas": {
+      "x": {
+        "url": "https://x.com/scale_AI/status/2002099826163601655",
+        "author": "@scale_AI",
+        "posted": "2025-12-19",
+        "views": 5013,
+        "likes": 32,
+        "reposts": 6,
+        "replies": 1,
+        "quotes": 1,
+        "bookmarks": 10,
+        "read": "2026-11-20"
+      }
+    },
+    "mcpmark": {
+      "x": {
+        "url": "https://x.com/Alibaba_Qwen/status/1965457023438651532",
+        "author": "@Alibaba_Qwen",
+        "posted": "2025-09-09",
+        "views": 84077,
+        "likes": 706,
+        "reposts": 65,
+        "replies": 20,
+        "quotes": 6,
+        "bookmarks": 103,
+        "read": "2026-11-20"
+      }
+    },
+    "merchantbench": {
+      "x": {
+        "url": "https://x.com/dair_ai/status/2084413007514550720",
+        "author": "@dair_ai",
+        "posted": "2026-08-03",
+        "views": 7954,
+        "likes": 70,
+        "reposts": 12,
+        "replies": 7,
+        "quotes": 2,
+        "bookmarks": 59,
+        "read": "2026-11-20"
+      }
+    },
+    "mind2web-2": {
+      "x": {
+        "url": "https://x.com/ysu_nlp/status/1938652377403236574",
+        "author": "@ysu_nlp",
+        "posted": "2025-06-27",
+        "views": 41467,
+        "likes": 224,
+        "reposts": 51,
+        "replies": 3,
+        "quotes": 14,
+        "bookmarks": 132,
+        "read": "2026-11-20"
+      }
+    },
+    "mixeval": {
+      "x": {
+        "url": "https://x.com/NiJinjie/status/1798182749049852411",
+        "author": "@NiJinjie",
+        "posted": "2024-06-05",
+        "views": 95946,
+        "likes": 241,
+        "reposts": 65,
+        "replies": 30,
+        "quotes": 12,
+        "bookmarks": 143,
+        "read": "2026-11-20"
+      }
+    },
+    "mmart-bench": {
+      "x": {
+        "url": "https://x.com/ling_yunlong/status/1940010865627103419",
+        "author": "@ling_yunlong",
+        "posted": "2025-07-01",
+        "views": 5839,
+        "likes": 31,
+        "reposts": 12,
+        "replies": 3,
+        "quotes": 2,
+        "bookmarks": 7,
+        "read": "2026-11-20"
+      }
+    },
+    "mmeb": {
+      "x": {
+        "url": "https://x.com/WenhuChen/status/1844577017930694984",
+        "author": "@WenhuChen",
+        "posted": "2024-10-11",
+        "views": 19246,
+        "likes": 149,
+        "reposts": 41,
+        "replies": 4,
+        "quotes": 3,
+        "bookmarks": 77,
+        "read": "2026-11-20"
+      }
+    },
+    "mmlongbench-doc": {
+      "x": {
+        "url": "https://x.com/mayubo2333/status/1811015423921639855",
+        "author": "@mayubo2333",
+        "posted": "2024-07-10",
+        "views": 14035,
+        "likes": 65,
+        "reposts": 16,
+        "replies": 2,
+        "quotes": 4,
+        "bookmarks": 41,
+        "read": "2026-11-20"
+      }
+    },
+    "multichallenge": {
+      "x": {
+        "url": "https://x.com/summeryue0/status/1887202616939323745",
+        "author": "@summeryue0",
+        "posted": "2025-02-05",
+        "views": 15501,
+        "likes": 26,
+        "reposts": 5,
+        "replies": 3,
+        "quotes": 1,
+        "bookmarks": 1,
+        "read": "2026-11-20"
+      }
+    },
+    "nanogpt-speedrun": {
+      "x": {
+        "url": "https://x.com/kellerjordan0/status/1798863559243513937",
+        "author": "@kellerjordan0",
+        "posted": "2024-06-06",
+        "views": 129093,
+        "likes": 992,
+        "reposts": 68,
+        "replies": 14,
+        "quotes": 4,
+        "bookmarks": 715,
+        "read": "2026-11-20"
+      }
+    },
+    "needle-in-a-haystack": {
+      "x": {
+        "url": "https://x.com/GregKamradt/status/1722386725635580292",
+        "author": "@GregKamradt",
+        "posted": "2023-11-08",
+        "views": 1478001,
+        "likes": 3787,
+        "reposts": 606,
+        "replies": 199,
+        "quotes": 197,
+        "bookmarks": 2217,
+        "read": "2026-11-20"
+      }
+    },
+    "nl2repo-bench": {
+      "x": {
+        "url": "https://x.com/GeZhang86038849/status/2000781002554380298",
+        "author": "@GeZhang86038849",
+        "posted": "2025-12-16",
+        "views": 1442,
+        "likes": 17,
+        "reposts": 12,
+        "replies": 1,
+        "quotes": 0,
+        "bookmarks": 4,
+        "read": "2026-11-20"
+      }
+    },
+    "olympicarena": {
+      "x": {
+        "url": "https://x.com/Z_Huang_02/status/1803773623108518072",
+        "author": "@Z_Huang_02",
+        "posted": "2024-06-20",
+        "views": 12515,
+        "likes": 20,
+        "reposts": 3,
+        "replies": 1,
+        "quotes": 5,
+        "bookmarks": 12,
+        "read": "2026-11-20"
+      }
+    },
+    "omnigaia": {
+      "x": {
+        "url": "https://x.com/XiaoxiLi0111/status/2027285816947753209",
+        "author": "@XiaoxiLi0111",
+        "posted": "2026-02-27",
+        "views": 2308,
+        "likes": 18,
+        "reposts": 6,
+        "replies": 4,
+        "quotes": 0,
+        "bookmarks": 7,
+        "read": "2026-11-20"
+      }
+    },
+    "oncologybench": {
+      "x": {
+        "url": "https://x.com/kenbwork/status/2110071571713061145",
+        "author": "@kenbwork",
+        "posted": "2026-10-13",
+        "views": 40191,
+        "likes": 388,
+        "reposts": 45,
+        "replies": 26,
+        "quotes": 9,
+        "bookmarks": 300,
+        "read": "2026-11-20"
+      }
+    },
+    "opencomputer": {
+      "x": {
+        "url": "https://x.com/Mikewei_nlp/status/2057477767201984557",
+        "author": "@Mikewei_nlp",
+        "posted": "2026-05-21",
+        "views": 2031,
+        "likes": 6,
+        "reposts": 1,
+        "replies": 2,
+        "quotes": 1,
+        "bookmarks": 2,
+        "read": "2026-11-20"
+      }
+    },
+    "openrsi-index": {
+      "x": {
+        "url": "https://x.com/OpenRSI/status/2102831770458890626",
+        "author": "@OpenRSI",
+        "posted": "2026-09-23",
+        "views": 136487,
+        "likes": 233,
+        "reposts": 59,
+        "replies": 18,
+        "quotes": 32,
+        "bookmarks": 180,
+        "read": "2026-11-20"
+      }
+    },
+    "orak": {
+      "x": {
+        "url": "https://x.com/dongmin_park11/status/1930792235836346427",
+        "author": "@dongmin_park11",
+        "posted": "2025-06-06",
+        "views": 11441,
+        "likes": 72,
+        "reposts": 22,
+        "replies": 2,
+        "quotes": 3,
+        "bookmarks": 20,
+        "read": "2026-11-20"
+      }
+    },
+    "osworld": {
+      "x": {
+        "url": "https://x.com/TianbaoX/status/1778781521253667267",
+        "author": "@TianbaoX",
+        "posted": "2024-04-12",
+        "views": 69981,
+        "likes": 250,
+        "reposts": 64,
+        "replies": 8,
+        "quotes": 19,
+        "bookmarks": 105,
+        "read": "2026-11-20"
+      }
+    },
+    "osworld-2-0": {
+      "x": {
+        "url": "https://x.com/XLangNLP/status/2070517498974253269",
+        "author": "@XLangNLP",
+        "posted": "2026-06-26",
+        "views": 175087,
+        "likes": 454,
+        "reposts": 109,
+        "replies": 16,
+        "quotes": 40,
+        "bookmarks": 196,
+        "read": "2026-11-20"
+      }
+    },
+    "osworld-verified": {
+      "x": {
+        "url": "https://x.com/TianbaoX/status/1954939485881594123",
+        "author": "@TianbaoX",
+        "posted": "2025-08-11",
+        "views": 58796,
+        "likes": 159,
+        "reposts": 32,
+        "replies": 21,
+        "quotes": 5,
+        "bookmarks": 34,
+        "read": "2026-11-20"
+      }
+    },
+    "panda-cvl": {
+      "x": {
+        "url": "https://x.com/StepFun_ai/status/2102454115473510643",
+        "author": "@StepFun_ai",
+        "posted": "2026-09-22",
+        "views": 20287,
+        "likes": 343,
+        "reposts": 37,
+        "replies": 23,
+        "quotes": 2,
+        "bookmarks": 194,
+        "read": "2026-11-20"
+      }
+    },
+    "phyx": {
+      "x": {
+        "url": "https://x.com/HuiShen_umich/status/1926287100132925504",
+        "author": "@HuiShen_umich",
+        "posted": "2025-05-24",
+        "views": 1157,
+        "likes": 14,
+        "reposts": 5,
+        "replies": 9,
+        "quotes": 1,
+        "bookmarks": 1,
+        "read": "2026-11-20"
+      }
+    },
+    "pretraingym": {
+      "x": {
+        "url": "https://x.com/HuNtEr_J1324/status/2112544367650947554",
+        "author": "@HuNtEr_J1324",
+        "posted": "2026-10-20",
+        "views": 30475,
+        "likes": 357,
+        "reposts": 30,
+        "replies": 19,
+        "quotes": 9,
+        "bookmarks": 260,
+        "read": "2026-11-20"
+      }
+    },
+    "programbench": {
+      "x": {
+        "url": "https://x.com/jyangballin/status/2051829957199011974",
+        "author": "@jyangballin",
+        "posted": "2026-05-06",
+        "views": 4513,
+        "likes": 45,
+        "reposts": 8,
+        "replies": 4,
+        "quotes": 2,
+        "bookmarks": 9,
+        "read": "2026-11-20"
+      }
+    },
+    "qwen-image-bench": {
+      "x": {
+        "url": "https://x.com/ModelScope2022/status/2059924120121323787",
+        "author": "@ModelScope2022",
+        "posted": "2026-05-28",
+        "views": 15355,
+        "likes": 75,
+        "reposts": 12,
+        "replies": 4,
+        "quotes": 4,
+        "bookmarks": 56,
+        "read": "2026-11-20"
+      }
+    },
+    "reactbench": {
+      "x": {
+        "url": "https://x.com/alexgshaw/status/2077439213939949716",
+        "author": "@alexgshaw",
+        "posted": "2026-07-15",
+        "views": 17298,
+        "likes": 119,
+        "reposts": 11,
+        "replies": 13,
+        "quotes": 2,
+        "bookmarks": 55,
+        "read": "2026-11-20"
+      }
+    },
+    "remote-labor-index": {
+      "x": {
+        "url": "https://x.com/hendrycks/status/1983564538781082084",
+        "author": "@hendrycks",
+        "posted": "2025-10-29",
+        "views": 429758,
+        "likes": 1012,
+        "reposts": 186,
+        "replies": 100,
+        "quotes": 79,
+        "bookmarks": 626,
+        "read": "2026-11-20"
+      }
+    },
+    "rwe-bench": {
+      "x": {
+        "url": "https://x.com/XploreAi/status/2115108667418964246",
+        "author": "@XploreAi",
+        "posted": "2026-10-27",
+        "views": 168681,
+        "likes": 1238,
+        "reposts": 151,
+        "replies": 90,
+        "quotes": 62,
+        "bookmarks": 752,
+        "read": "2026-11-20"
+      }
+    },
+    "scienceagentbench": {
+      "x": {
+        "url": "https://x.com/ziruch__/status/1843472037894926378",
+        "author": "@ziruch__",
+        "posted": "2024-10-08",
+        "views": 51679,
+        "likes": 118,
+        "reposts": 39,
+        "replies": 5,
+        "quotes": 5,
+        "bookmarks": 55,
+        "read": "2026-11-20"
+      }
+    },
+    "scrabblebench": {
+      "x": {
+        "url": "https://x.com/sunnymbala/status/1954949651460919739",
+        "author": "@sunnymbala",
+        "posted": "2025-08-11",
+        "views": 57383,
+        "likes": 209,
+        "reposts": 14,
+        "replies": 14,
+        "quotes": 5,
+        "bookmarks": 77,
+        "read": "2026-11-20"
+      }
+    },
+    "screenspot-pro": {
+      "x": {
+        "url": "https://x.com/ysu_nlp/status/1882618596863717879",
+        "author": "@ysu_nlp",
+        "posted": "2025-01-24",
+        "views": 925,
+        "likes": 6,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0,
+        "bookmarks": 0,
+        "read": "2026-11-20"
+      }
+    },
+    "spider-2": {
+      "x": {
+        "url": "https://x.com/XLangNLP/status/1865896912555225587",
+        "author": "@XLangNLP",
+        "posted": "2024-12-08",
+        "views": 40569,
+        "likes": 93,
+        "reposts": 40,
+        "replies": 3,
+        "quotes": 8,
+        "bookmarks": 55,
+        "read": "2026-11-20"
+      }
+    },
+    "stark": {
+      "x": {
+        "url": "https://x.com/ShirleyYXWu/status/1784970920383402433",
+        "author": "@ShirleyYXWu",
+        "posted": "2024-04-29",
+        "views": 83871,
+        "likes": 216,
+        "reposts": 53,
+        "replies": 1,
+        "quotes": 8,
+        "bookmarks": 136,
+        "read": "2026-11-20"
+      }
+    },
+    "swe-marathon": {
+      "x": {
+        "url": "https://x.com/rishi_desai2/status/2062930906818769356",
+        "author": "@rishi_desai2",
+        "posted": "2026-06-05",
+        "views": 835616,
+        "likes": 700,
+        "reposts": 67,
+        "replies": 48,
+        "quotes": 37,
+        "bookmarks": 288,
+        "read": "2026-11-20"
+      }
+    },
+    "swe-marathon-1-1": {
+      "x": {
+        "url": "https://x.com/rishi_desai2/status/2087216551653146706",
+        "author": "@rishi_desai2",
+        "posted": "2026-08-11",
+        "views": 4959,
+        "likes": 62,
+        "reposts": 8,
+        "replies": 3,
+        "quotes": 1,
+        "bookmarks": 17,
+        "read": "2026-11-20"
+      }
+    },
+    "terminal-bench-2-0": {
+      "x": {
+        "url": "https://x.com/alexgshaw/status/1986911106108211461",
+        "author": "@alexgshaw",
+        "posted": "2025-11-07",
+        "views": 164053,
+        "likes": 447,
+        "reposts": 72,
+        "replies": 29,
+        "quotes": 38,
+        "bookmarks": 189,
+        "read": "2026-11-20"
+      }
+    },
+    "toolathlon": {
+      "x": {
+        "url": "https://x.com/junxian_he/status/1983834164727312391",
+        "author": "@junxian_he",
+        "posted": "2025-10-30",
+        "views": 44802,
+        "likes": 172,
+        "reposts": 27,
+        "replies": 6,
+        "quotes": 12,
+        "bookmarks": 59,
+        "read": "2026-11-20"
+      }
+    },
+    "travelplanner": {
+      "x": {
+        "url": "https://x.com/ysu_nlp/status/1754365367294562680",
+        "author": "@ysu_nlp",
+        "posted": "2024-02-05",
+        "views": 74677,
+        "likes": 155,
+        "reposts": 36,
+        "replies": 3,
+        "quotes": 8,
+        "bookmarks": 97,
+        "read": "2026-11-20"
+      }
+    },
+    "ts-bench": {
+      "x": {
+        "url": "https://x.com/gosrum/status/1962112473512951818",
+        "author": "@gosrum",
+        "posted": "2025-08-31",
+        "views": 26512,
+        "likes": 98,
+        "reposts": 19,
+        "replies": 3,
+        "quotes": 4,
+        "bookmarks": 46,
+        "read": "2026-11-20"
+      }
+    },
+    "vals-medscribe": {
+      "x": {
+        "url": "https://x.com/ValsAI/status/2024534170350059963",
+        "author": "@ValsAI",
+        "posted": "2026-02-19",
+        "views": 1150,
+        "likes": 8,
+        "reposts": 2,
+        "replies": 1,
+        "quotes": 2,
+        "bookmarks": 0,
+        "read": "2026-11-20"
+      }
+    },
+    "vgi-bench": {
+      "x": {
+        "url": "https://x.com/XuanHe21/status/2093029571343839603",
+        "author": "@XuanHe21",
+        "posted": "2026-08-27",
+        "views": 20798,
+        "likes": 20,
+        "reposts": 1,
+        "replies": 6,
+        "quotes": 3,
+        "bookmarks": 4,
+        "read": "2026-11-20"
+      }
+    },
+    "videophy": {
+      "x": {
+        "url": "https://x.com/hbXNov/status/1798803363473064203",
+        "author": "@hbXNov",
+        "posted": "2024-06-06",
+        "views": 34097,
+        "likes": 94,
+        "reposts": 40,
+        "replies": 3,
+        "quotes": 6,
+        "bookmarks": 30,
+        "read": "2026-11-20"
+      }
+    },
+    "vinoground": {
+      "x": {
+        "url": "https://x.com/MuCai7/status/1842034084891271482",
+        "author": "@MuCai7",
+        "posted": "2024-10-04",
+        "views": 16530,
+        "likes": 128,
+        "reposts": 27,
+        "replies": 2,
+        "quotes": 1,
+        "bookmarks": 73,
+        "read": "2026-11-20"
+      }
+    },
+    "visualpuzzles": {
+      "x": {
+        "url": "https://x.com/yueqi_song/status/1912510869491101732",
+        "author": "@yueqi_song",
+        "posted": "2025-04-16",
+        "views": 83267,
+        "likes": 238,
+        "reposts": 42,
+        "replies": 17,
+        "quotes": 8,
+        "bookmarks": 141,
+        "read": "2026-11-20"
+      }
+    },
+    "vlabench": {
+      "x": {
+        "url": "https://x.com/Joey_zh_/status/1872021219597578734",
+        "author": "@Joey_zh_",
+        "posted": "2024-12-25",
+        "views": 3477,
+        "likes": 34,
+        "reposts": 10,
+        "replies": 2,
+        "quotes": 2,
+        "bookmarks": 5,
+        "read": "2026-11-20"
+      }
+    },
+    "vlmsarebiased": {
+      "x": {
+        "url": "https://x.com/anh_ng8/status/1929682381683712340",
+        "author": "@anh_ng8",
+        "posted": "2025-06-02",
+        "views": 16576,
+        "likes": 80,
+        "reposts": 14,
+        "replies": 10,
+        "quotes": 5,
+        "bookmarks": 24,
+        "read": "2026-11-20"
+      }
+    },
+    "voicecodebench": {
+      "x": {
+        "url": "https://x.com/yiz_be_building/status/2094470162095431934",
+        "author": "@yiz_be_building",
+        "posted": "2026-08-31",
+        "views": 49875,
+        "likes": 101,
+        "reposts": 16,
+        "replies": 8,
+        "quotes": 3,
+        "bookmarks": 65,
+        "read": "2026-11-20"
+      }
+    },
+    "wbench-meituan": {
+      "x": {
+        "url": "https://x.com/Meituan_LongCat/status/2059658634829996047",
+        "author": "@Meituan_LongCat",
+        "posted": "2026-05-27",
+        "views": 3970,
+        "likes": 47,
+        "reposts": 7,
+        "replies": 3,
+        "quotes": 4,
+        "bookmarks": 20,
+        "read": "2026-11-20"
+      }
+    },
+    "we-math": {
+      "x": {
+        "url": "https://x.com/Richard_qrq/status/1807965633570824218",
+        "author": "@Richard_qrq",
+        "posted": "2024-07-02",
+        "views": 10656,
+        "likes": 29,
+        "reposts": 10,
+        "replies": 6,
+        "quotes": 3,
+        "bookmarks": 28,
+        "read": "2026-11-20"
+      }
+    },
+    "webdev-arena": {
+      "x": {
+        "url": "https://x.com/aryanvichare10/status/1866561638712881172",
+        "author": "@aryanvichare10",
+        "posted": "2024-12-10",
+        "views": 219033,
+        "likes": 554,
+        "reposts": 83,
+        "replies": 31,
+        "quotes": 18,
+        "bookmarks": 402,
+        "read": "2026-11-20"
+      }
+    },
+    "weblinx": {
+      "x": {
+        "url": "https://x.com/sivareddyg/status/1755799365031965140",
+        "author": "@sivareddyg",
+        "posted": "2024-02-09",
+        "views": 74639,
+        "likes": 249,
+        "reposts": 69,
+        "replies": 7,
+        "quotes": 10,
+        "bookmarks": 137,
+        "read": "2026-11-20"
+      }
+    },
+    "wmt24-plus-plus": {
+      "x": {
+        "url": "https://x.com/_danieldeutsch/status/1892264183053300185",
+        "author": "@_danieldeutsch",
+        "posted": "2025-02-19",
+        "views": 6932,
+        "likes": 89,
+        "reposts": 24,
+        "replies": 3,
+        "quotes": 3,
+        "bookmarks": 26,
+        "read": "2026-11-20"
+      }
+    },
+    "xbench": {
+      "x": {
+        "url": "https://x.com/nicochristie/status/2096284789766819924",
+        "author": "@nicochristie",
+        "posted": "2026-09-05",
+        "views": 16705,
+        "likes": 100,
+        "reposts": 4,
+        "replies": 17,
+        "quotes": 5,
+        "bookmarks": 41,
+        "read": "2026-11-20"
+      }
+    }
+  }
+}

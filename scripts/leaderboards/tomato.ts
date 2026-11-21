@@ -3,7 +3,7 @@
 // reads Table 7 from arxiv.org/html (pinned to v2, so the numbers cannot shift) and takes the "All" column,
 // accuracy on all 1,484 questions with 16 frames unless the model reads video directly. Baseline rows
 // (human, random, frequent choice) are dropped. A static paper table, so rows carry the v2 date. Snapshot
-// aliases follow the paper's Table 9 checkpoints.
+// Table 7 supplies the task scores and weight-access classes. Snapshot aliases follow the paper's Table 9 checkpoints.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
@@ -25,10 +25,11 @@ function axTable(html: string, id: string): string[][] {
 }
 
 const board: Leaderboard = {
-  benchmark: 'tomato',
+  benchmark: 'tomato', static: 'paper',
   url: 'https://github.com/yale-nlp/TOMATO#2-leaderboard',
   feed: `${PAGE} (Table 7, All column)`,
   terms: 'arXiv robots.txt allows /html (crawl delay 15 s; one request per sync); the TOMATO repository carries no license, so only the published numbers are read.',
+  parts: {},
   aliases: {
     'GPT-4o': 'gpt-4o-aug-2024',
     'Claude 3.5 Sonnet': 'claude-3-5-sonnet',
@@ -46,15 +47,26 @@ const board: Leaderboard = {
     if (head[0] !== 'Model' || iAll < 0) throw new Error(`unexpected TOMATO header: ${head.join(' | ')}`);
     const rows: LeaderboardRow[] = [];
     let baselines = false;
+    let open: boolean | undefined;
     for (const r of t.slice(1)) {
       if (r.length === 1) {
         baselines = /baseline/i.test(r[0]);
+        open = /open-source/i.test(r[0]) ? true : /proprietary/i.test(r[0]) ? false : undefined;
         continue;
       }
       const model = r[0].replace(/[‡∗*†]/g, '').trim();
       const score = num(r[iAll]);
       if (baselines || !model || score === undefined) continue;
-      rows.push({ model, score, date: DATE });
+      const metrics: Record<string,number> = {};
+      for(let j=1;j<iAll;j++){
+        const label=head[j];
+        const key=label.toLowerCase().replace(/[^a-z0-9]+(.)/g,(_,c:string)=>c.toUpperCase());
+        const value=num(r[j]);
+        if(value===undefined)continue;
+        board.parts![key]={name:label,group:'Task type'};
+        metrics[key]=value;
+      }
+      rows.push({ model, score, open,params:num(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B\b/i)?.[1]),date: DATE,metrics });
     }
     return rows;
   },

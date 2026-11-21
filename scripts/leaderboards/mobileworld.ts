@@ -1,3 +1,4 @@
+// Keep the configured step limit and number of images in the agent history.
 // MobileWorld (Tongyi Lab). The board at tongyi-mai.github.io/MobileWorld reads leaderboard.json: per
 // system the success rate (0 to 100) on the GUI-only, user-interaction and MCP subsets. Every row has a
 // GUI-only result but many lack the other two. Match the page's Overall column, which counts missing
@@ -16,6 +17,7 @@ interface Entry {
   traj_file?: string;
   date?: string;
   max_steps?: number;
+  num_images_in_history?: number | null;
   runs?: number;
   agent_type?: string;
   gui_only?: number | null;
@@ -56,7 +58,9 @@ const board: Leaderboard = {
         link: r.traj_file ? new URL(r.traj_file, FEED).href : undefined,
         trials: typeof r.runs === 'number' && r.runs > 0 ? r.runs : undefined,
         date: r.date,
-              metrics: {
+        metrics: {
+                ...(typeof r.max_steps === 'number' ? {maxSteps: r.max_steps} : {}),
+                ...(typeof r.num_images_in_history === 'number' ? {historyImages: r.num_images_in_history} : {}),
                 guiOnly: r.gui_only,
                 ...(typeof r.user_int === 'number' ? { userInteraction: r.user_int } : {}),
                 ...(typeof r.mcp === 'number' ? { mcp: r.mcp } : {}),

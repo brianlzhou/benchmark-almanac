@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2607.16609";
-const board:Leaderboard={benchmark:'oct-bench', parts: {
+const board:Leaderboard={benchmark:'oct-bench', static: 'paper', parts: {
   perception: { name: 'Perception', group: 'Task type' },
   cognition: { name: 'Cognition', group: 'Task type' },
   reasoning: { name: 'Reasoning', group: 'Task type' },

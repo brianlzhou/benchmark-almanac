@@ -6,7 +6,7 @@ const URL = 'https://arxiv.org/html/2507.02833';
 // Training variants are separate models. Never credit IF-RLVR fine-tunes to their base models.
 const names: Record<string, string> = {'Tülu -sft': 'Llama-3.1-Tulu-3-8B-SFT', 'Tülu -DPO': 'Llama-3.1-Tulu-3-8B-DPO', 'Tülu': 'Llama-3.1-Tulu-3-8B'};
 const board: Leaderboard = {
-  benchmark: 'ifbench', url: URL, feed: URL + ' (Tables 2, 3, 5, 6 and 7)', terms: PAPER_TERMS,
+  benchmark: 'ifbench', static: 'paper', url: URL, feed: URL + ' (Tables 2, 3, 5, 6 and 7)', terms: PAPER_TERMS,
   parts: Object.fromEntries(['count', 'format', 'words', 'sent.'].map(k => [k, { name: k === 'sent.' ? 'Sentence' : k, group: 'Constraint type' }])),
   async fetch() {
     const tables = flatPaperTables(await paperHtml(URL)).map(grid);

@@ -3,7 +3,7 @@
 // rather than the page's top ten. Pass rate (share of tasks that pass the rubric, 0 to 100) is the page's
 // sort and the score. Rows typed "Base" are the plain model runs, the only type the board shows. The board's
 // other two columns go in `metrics`: the average rubric score ("average", %) and the economic value of the
-// passed tasks ("value", US dollars, from economicValue).
+// passed tasks ("value", US dollars, from economicValue). Keep the model’s input and output list prices.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { XBENCH_ALIASES, XBENCH_API, XBENCH_TERMS, xbenchApi } from './xbench-scienceqa.ts';
 
@@ -14,7 +14,7 @@ interface Entry {
   passRate?: number;
   average?: number | null;
   economicValue?: string | number | null;
-  model?: { name?: string; releaseDate?: string };
+  model?: { name?: string; pricingInput?: number; pricingOutput?: number };
 }
 
 const board: Leaderboard = {
@@ -31,13 +31,14 @@ const board: Leaderboard = {
       if (!model || typeof e.passRate !== 'number') continue;
       const metrics: Record<string, number> = {};
       if (typeof e.average === 'number') metrics.average = e.average;
+      if (typeof e.model?.pricingInput === 'number') metrics.priceIn = e.model.pricingInput;
+      if (typeof e.model?.pricingOutput === 'number') metrics.priceOut = e.model.pricingOutput;
       const value = Number(e.economicValue);
       if (e.economicValue != null && e.economicValue !== '' && Number.isFinite(value)) metrics.value = value;
       rows.push({
         model,
         score: e.passRate,
         setting: e.type && e.type !== 'Base' ? e.type : undefined,
-        date: e.model?.releaseDate,
         ...(Object.keys(metrics).length ? { metrics } : {}),
       });
     }

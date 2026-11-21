@@ -1,12 +1,12 @@
 // UK AISI and CAISI: Table 1 reports average steps completed on The Last Ones, the entire 32-step range.
-// Token budgets are whole-range configurations. Maximum steps remain metrics. Cooling Tower is a different range.
+// Token budgets are whole-range configurations. Run counts supply trials. Maximum steps remain metrics. Cooling Tower is a different range.
 // These are the paper's static results and will not refresh with new model releases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2603.11214";
 import { paperTables } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "uk-aisi-caisi-enterprise-network-range",
+  benchmark: "uk-aisi-caisi-enterprise-network-range", static: 'paper',
   url: "https://www.aisi.gov.uk/blog/how-do-frontier-ai-agents-perform-in-multi-step-cyber-attack-scenarios",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
@@ -18,7 +18,7 @@ const board: Leaderboard = {
     for(let r of t.slice(2)){
       if(r.length===8){model=names[r[0].text];r=r.slice(2);}if(r.length!==6||!model)throw new Error('AISI table structure changed');
       const budget=r[2].text.match(/^(\d+)@(\d+)M$/);if(!budget)throw new Error('AISI budget missing');
-      rows.push({model,score:num(r[0].text)!,setting:budget[2]+'M token budget',metrics:{maximumSteps:num(r[1].text)!,runs:Number(budget[1])}});
+      rows.push({model,score:num(r[0].text)!,setting:budget[2]+'M token budget',trials:Number(budget[1]),metrics:{maximumSteps:num(r[1].text)!}});
     }if(rows.length!==12)throw new Error('AISI expected twelve configurations');return rows;
   },
 };

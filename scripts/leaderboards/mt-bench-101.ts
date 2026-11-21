@@ -4,7 +4,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2402.14762";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "mt-bench-101",
+  benchmark: "mt-bench-101", static: 'paper',
   parts: {
     contextMemory: { name: 'Context memory', group: 'Task type' },
     separateInput: { name: 'Separate input', group: 'Task type' },

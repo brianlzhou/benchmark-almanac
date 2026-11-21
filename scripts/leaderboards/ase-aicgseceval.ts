@@ -4,7 +4,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { tables } from '../lib/html.ts';
 const URL = 'https://arxiv.org/html/2508.18106';
 const board: Leaderboard = {
-  benchmark: 'ase-aicgseceval', url: URL, feed: URL + ' (overall weighted score)', terms: PAPER_TERMS,
+  benchmark: 'ase-aicgseceval', static: 'paper', url: URL, feed: URL + ' (overall weighted score)', terms: PAPER_TERMS,
   parts: {
     security: { name: 'Security', group: 'Dimension' },
     quality: { name: 'Quality', group: 'Dimension' },

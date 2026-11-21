@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/1906.02467';
 export default {
-  benchmark:'activitynet-qa', parts: {
+  benchmark:'activitynet-qa', static: 'paper', parts: {
   motion: { name: 'Motion', group: 'Task type' },
   spatial: { name: 'Spatial', group: 'Task type' },
   temporal: { name: 'Temporal', group: 'Task type' },

@@ -4,7 +4,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/1903.00161';
 const board: Leaderboard = {
-  benchmark: 'drop', url: URL, feed: URL + ' (main results, test F1)', terms: PAPER_TERMS,
+  benchmark: 'drop', static: 'paper', url: URL, feed: URL + ' (main results, test F1)', terms: PAPER_TERMS,
   async fetch() {
     const tables = inlinePaperTables(await paperHtml(URL));
     const t = tables.find(t => t[0]?.join('|') === 'Method|Dev|Dev|Test|Test');

@@ -1,10 +1,11 @@
-// FoodTruck Bench ranks models by median-run net worth in dollars. The live page serializes the full model list behind its initial ten visible rows.
+// FoodTruck Bench ranks models by median-run net worth in dollars. The live board also publishes API costs per run, model sizes, and operating results.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAfter } from '../lib/html.ts';
 
 const FEED = "https://foodtruckbench.com/";
 const board: Leaderboard = {
+ costPer: "run",
  benchmark: "foodtruck-bench",
  url: "https://foodtruckbench.com",
  feed: FEED,
@@ -19,7 +20,26 @@ const board: Leaderboard = {
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
 const html=await fetchText(FEED);const stream=[...html.matchAll(/self\.__next_f\.push\((\[1,[\s\S]*?\])\)<\/script>/g)].map(m=>JSON.parse(m[1])[1]).join('');const models=jsonAfter<any[]>(stream,'"models":');if(!models)throw new Error('FoodTruck models missing');
-return models.filter(r=>r.display_name&&typeof r.median_net_worth==='number').map(r=>({model:r.display_name,score:Math.round(r.median_net_worth),setting:'median run; 30 days',metrics:{netWorthUnrounded:r.median_net_worth,runs:r.total_runs,revenue:r.median_revenue,profit:r.median_profit,foodWaste:r.median_food_waste,roi:r.median_roi}}));
+return models.filter(r=>r.display_name&&typeof r.median_net_worth==='number').map(r=>({model: r.display_name, score: Math.round(r.median_net_worth), setting: 'median run; 30 days',
+  cost: r.avg_api_cost ?? undefined, params: r.params_total_b ?? undefined,
+  open: r.weights === 'open' ? true : r.weights === 'closed' ? false : undefined,
+  metrics: Object.fromEntries(Object.entries({
+    netWorthUnrounded: r.median_net_worth, revenue: r.median_revenue, profit: r.median_profit,
+    foodWaste: r.median_food_waste, roi: r.median_roi,
+    margin: typeof r.primary_net_profit_margin === 'number' ? r.primary_net_profit_margin * 100 : undefined,
+    balance: r.primary_cash_balance,
+    expenses: r.primary_total_expenses,
+    daysPlayed: r.primary_days_played,
+    servingsPerDay: r.primary_servings_per_day,
+    medianServingsSold: r.median_servings_sold,
+    averageRevenue: r.avg_revenue,
+    averageProfit: r.avg_profit,
+    averageFoodWaste: r.avg_food_waste,
+    averageServingsPerDay: r.avg_servings_per_day,
+    efficiencyRatio: r.efficiency_ratio,
+    activeParams: r.params_active_b,
+    toolCalls: r.tool_usage?.total_tool_calls,
+  }).filter((entry): entry is [string, number] => typeof entry[1] === 'number'))}));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.map(r => ({...r, setting: / NVFP4$/.test(r.model) ? `${r.setting}; NVFP4` : r.setting, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));

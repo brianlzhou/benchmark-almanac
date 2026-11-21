@@ -3,7 +3,7 @@
 // monthly snapshot ("2026-06"), per model the pass@1 over that month's ~100 tasks, the agent and turn counts.
 // Each month is a new task set. Keep only the latest Overall month; category scores are metrics. pass@1 (0 to 100) is the score and the agent (OpenHands, Terminus-2) the
 // harness. Unranked rows without a pass@1 are skipped. Names carry the effort ("GPT-5.5-High"), which the
-// resolver splits off. avgTurns (OpenHands iterations per task, the page's Avg Turns) is kept as metrics.turns.
+// resolver splits off. Keep the published completion counts and timeout statistics. avgTurns (OpenHands iterations per task, the page's Avg Turns) is kept as metrics.turns.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
@@ -11,7 +11,7 @@ import { jsLiteral } from '../lib/html.ts';
 const URL = 'https://unipat.ai/benchmarks/MonthlySWEBench';
 
 interface Data {
-  data: Record<string, { snapshots: Record<string, { modelName: string; passAt1?: number; agent?: string; avgTurns?: number | null; avgEp?: number | null }[]> }>;
+  data: Record<string, { snapshots: Record<string, { [key: string]: unknown; modelName: string; passAt1?: number; agent?: string; avgTurns?: number | null; avgEp?: number | null }[]> }>;
 }
 
 const board: Leaderboard = {
@@ -44,6 +44,12 @@ const board: Leaderboard = {
           const effort=r.modelName.match(/-(High|XHigh|Max|Adaptive|Thinking)$/i);
           const turns=r.avgTurns ?? r.avgEp;
           const metrics:Record<string,number> = typeof turns==='number'?{turns}:{};
+          for (const key of ['maxTurns', 'turnsCompleted', 'completed', 'passed', 'timeoutCount', 'timeoutTurnsMin',
+            'timeoutTurnsMedian', 'timeoutTurnsAvg', 'timeoutTurnsMax', 'timeoutTurnsCompleted', 'timeoutLimitSecondsMin',
+            'timeoutLimitSecondsMedian', 'timeoutLimitSecondsAvg', 'timeoutLimitSecondsMax', 'unfinishedCount']) {
+            const value = r[key];
+            if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
+          }
           for(const [name, group] of Object.entries(data.data)){if(name==='Overall')continue;const sub=group.snapshots[month]?.find(x=>x.modelName===r.modelName&&x.agent===r.agent);if(typeof sub?.passAt1==='number')metrics[name.toLowerCase().replace(/[^a-z]+/g,'_')]=sub.passAt1;}
           rows.push({model:effort?r.modelName.slice(0,effort.index):r.modelName,score:r.passAt1,harness:r.agent,setting:[month,effort?.[1].toLowerCase()].filter(Boolean).join('; '),metrics});
         }

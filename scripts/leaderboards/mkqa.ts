@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2007.15207.pdf";
-const board:Leaderboard={benchmark:'mkqa', parts: {
+const board:Leaderboard={benchmark:'mkqa', static: 'paper', parts: {
   englishF1: { name: 'English', group: 'Language' },
 },url:URL,feed:URL,terms:PAPER_TERMS,
  async fetch(){const t=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0])==="[\"Retriever\",\"Reader\",\"Translation\",\"Translation\",\"Retrieval Metrics\",\"Answerable Metrics\",\"Answerable Metrics\",\"End-to-End Metrics\",\"End-to-End Metrics\"]");if(!t)throw new Error('Reviewed table missing');const out:LeaderboardRow[]=[];

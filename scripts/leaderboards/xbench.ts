@@ -15,8 +15,35 @@ const board: Leaderboard = {
   async fetch() {
     const d=await fetchJson(FEED) as any;
     if(!Array.isArray(d.sentiment?.models))throw new Error('Missing model sentiment');
-    return d.sentiment.models.filter((r:any)=>r.firsthand?.n>0 && typeof r.firsthand.net_sentiment==='number').map((r:any)=>({model:r.model,score:r.firsthand.net_sentiment*100,
-      date:d.window.end.slice(0,10),metrics:{votes:r.firsthand.n,positive:r.firsthand.positive,negative:r.firsthand.negative,mixed:r.firsthand.mixed}}));
+    board.parts = {};
+    type Counts = {n:number;positive:number;negative:number;mixed:number;net_sentiment:number|null};
+    return d.sentiment.models.filter((r:any)=>r.firsthand?.n>0 && typeof r.firsthand.net_sentiment==='number').map((r:any)=>{
+      const metrics:Record<string,number> = {votes:r.firsthand.n,positive:r.firsthand.positive,negative:r.firsthand.negative,mixed:r.firsthand.mixed};
+      const add = (key:string, counts:Counts) => {
+        if (!counts?.n || typeof counts.net_sentiment !== 'number') return;
+        metrics[key] = counts.net_sentiment * 100;
+        metrics[key+'Votes'] = counts.n;
+        metrics[key+'Positive'] = counts.positive;
+        metrics[key+'Negative'] = counts.negative;
+        metrics[key+'Mixed'] = counts.mixed;
+      };
+      add('allExpressed', r.all_expressed);
+      add('endorsements', r.endorsements);
+      for (const [name, counts] of Object.entries(r.dimensions ?? {}) as [string,Counts][]) {
+        const key = 'dimension' + name[0].toUpperCase() + name.slice(1);
+        add(key, counts);
+        if (key in metrics) board.parts![key] = {name,group:'Dimension'};
+      }
+      for (const week of d.window.weeks ?? []) {
+        const key = 'week' + week.id.replace(/^w/,'');
+        add(key, r.by_window?.[week.id]);
+        if (key in metrics) board.parts![key] = {name:String(week.label).replace(/\s*[–—-]\s*/g, ' to '),group:'Week'};
+      }
+      for (const [name,count] of Object.entries(r.tasks ?? {})) {
+        if (typeof count === 'number') metrics[name+'Mentions'] = count;
+      }
+      return {model:r.model,score:r.firsthand.net_sentiment*100,date:d.window.end.slice(0,10),metrics};
+    });
   },
 };
 

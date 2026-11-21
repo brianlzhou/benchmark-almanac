@@ -1,5 +1,5 @@
 // ChartMimic: the maker’s Overall column combines the reported high-level and low-level evaluation.
-// The public chart already publishes Overall, so no new aggregate is computed.
+// The Params column gives disclosed model sizes in billions.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -20,7 +20,7 @@ const board: Leaderboard = {
   
   async fetch() {
     const data=await fetchJson<Record<string,string|number>[]>(FEED);
-    const out=data.filter(r=>typeof r.Overall==='number').map(r=>({model:String(r.Model),score:Number(r.Overall),metrics:Object.fromEntries(['Exec_Rate','Text','Layout','Type','Color','Avg','GPT-4o'].filter(k=>typeof r[k]==='number').map(k=>[k,Number(r[k])]))}));
+    const out=data.filter(r=>typeof r.Overall==='number').map(r=>({model:String(r.Model),score:Number(r.Overall),params:/^\d+(?:\.\d+)?B$/.test(String(r.Params))?parseFloat(String(r.Params)):undefined,metrics:Object.fromEntries(['Exec_Rate','Text','Layout','Type','Color','Avg','GPT-4o'].filter(k=>typeof r[k]==='number').map(k=>[k,Number(r[k])]))}));
     if(!out.length)throw new Error('ChartMimic Overall missing');return out;
   },
 };

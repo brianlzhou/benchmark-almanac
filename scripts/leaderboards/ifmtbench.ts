@@ -7,7 +7,7 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 
 const FEED = 'https://arxiv.org/html/2605.28218';
 const board: Leaderboard = {
-  benchmark: 'ifmtbench', parts: {
+  benchmark: 'ifmtbench', static: 'paper', parts: {
   singleIF: { name: 'Single constraint', group: 'Difficulty' },
   multiIF: { name: 'Multiple constraints', group: 'Difficulty' },
 }, url: 'https://github.com/Tencent-Hunyuan/Hy-MT2', feed: FEED, terms: PAPER_TERMS,

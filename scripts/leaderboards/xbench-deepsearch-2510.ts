@@ -9,6 +9,7 @@ const PATH = 'deepsearch2510?populate[Leaderboard][populate]=company';
 
 interface Entry {
   product?: string;
+  company?: {name?:string};
   score?: number;
   evaluationDate?: string;
   cost?: string;
@@ -38,12 +39,15 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (price) metrics.reportedPriceUSD = Number(price[1]);
       if (time) {
+        if (!time[2]) metrics.latency = Number(time[1]) * 60;
         metrics.latencyMin = Number(time[1]) * 60;
         metrics.latencyMax = Number(time[2] ?? time[1]) * 60;
       }
       rows.push({
         model: /\d/.test(e.product) ? (mode ? e.product.slice(0, mode.index).trim() : e.product.trim()) : `${e.product.trim()} (product; model unspecified)`,
         score: e.score,
+        agentOrg: e.company?.name,
+        cost: e.cost?.trim() === 'Free' ? 0 : undefined,
         setting: mode ? mode[1].toLowerCase() : undefined,
         date: e.evaluationDate,
         metrics,

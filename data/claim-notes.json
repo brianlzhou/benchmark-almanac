@@ -299,13 +299,14 @@
   },
   {
     "model": "claude-opus-5",
-    "benchmark": "programbench-tests-passed",
+    "benchmark": "programbench",
     "cause": "setup",
     "reason": "The lab used five million-token episodes on 166 filtered tasks, while the board evaluates mini-SWE-agent on the full benchmark.",
     "evidence": [
       "https://assets.claude.com/ceaf5c7ff2783855203fde8208ec311252dced5b.pdf",
       "https://programbench.com/"
-    ]
+    ],
+    "measure": "tests-passed"
   },
   {
     "model": "devstral-small-1-1",

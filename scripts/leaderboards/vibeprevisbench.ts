@@ -200,7 +200,10 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = data.models.map(r => {
       const metrics: Record<string, number> = {tasks: data.n.total};
       for (const [k, v] of Object.entries(r)) {
-        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+        if (typeof v === 'number' && Number.isFinite(v) && k !== 'rank') {
+          const key = k === 'avg_in_tok_total' ? 'inputTokens' : k === 'avg_out_tok_total' ? 'outputTokens' : k;
+          metrics[key] = v;
+        }
         if (v && typeof v === 'object' && !Array.isArray(v)) {
           for (const [dim, score] of Object.entries(v)) if (typeof score === 'number' && Number.isFinite(score)) metrics[`${k}_${dim}`] = score;
         }

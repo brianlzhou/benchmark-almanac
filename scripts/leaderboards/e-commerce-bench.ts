@@ -3,7 +3,7 @@
 // assets over the ¥100,000 opening balance, as the primary score; the table gives mean final assets in
 // thousands of yuan, so the score is that figure divided by 100 (1,431 ¥k is a multiplier of 14.31).
 // The table's std ¥k (over the five episodes, divided by 100 like the score), Tool calls and Turns (per episode)
-// are kept as metrics.sd, metrics.toolCalls and metrics.turns.
+// are kept alongside the cash-flow, negotiation and bankruptcy measures.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables } from '../lib/html.ts';
@@ -37,11 +37,17 @@ const board: Leaderboard = {
       // "Qwen3.8-Max-Preview" ranks apart from the released Qwen3.8-Max, so the preview stays visible
       const preview = /-Preview$/i.test(r[0].text);
       const [sd, calls, turns] = [iSd, iCalls, iTurns].map((i) => (i >= 0 ? num(r[i]?.text) : undefined));
-      const metrics = {
-        ...(sd !== undefined ? { sd: sd / 100, std: sd / 100 } : {}),
+      const metrics:Record<string,number> = {
+        ...(sd !== undefined ? { std: sd / 100 } : {}),
         ...(calls !== undefined ? { toolCalls: calls, steps: calls } : {}),
         ...(turns !== undefined ? { turns } : {}),
       };
+      for (const [prefix,key] of [['CSE','csePlus'],['BadSpend','badSpendPercent'],['Drawdown','drawdownOverPeak'],
+        ['¥ per tool call','yuanPerToolCall'],['Controllable return','controllableReturnPp'],['AnchorRatio','anchorRatio'],
+        ['Bankrupt runs','bankruptRuns']]) {
+        const v=num(r[head.findIndex(h=>h.startsWith(prefix))]?.text);
+        if(v!==undefined) metrics[key]=v;
+      }
       rows.push({
         model: r[0].text.replace(/-Preview$/i, ''),
         score: assets / 100, open, trials,

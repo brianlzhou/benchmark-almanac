@@ -1,5 +1,5 @@
 // PaperBench: use full PaperBench replication scores in percent. Code-Dev is a different evaluation and is excluded.
-// Agent names become harnesses; reasoning effort and explicit time limits become settings. The reported
+// Run counts become trials. Agent names become harnesses, and reasoning effort and explicit time limits become settings. The reported
 // plus/minus value is preserved without assuming it is a confidence interval. Undated API names stay unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -21,7 +21,7 @@ for(const b of md.split(/^### /m).slice(1)) {
   let model=m[2];const effort=model.match(/-(high|medium|low)$/)?.[1];if(effort)model=model.replace(/-(high|medium|low)$/,'');
   if(/^(gpt-4o|claude-3\.5-sonnet|gemini-2\.0-flash)$/i.test(model))model+=' [snapshot unspecified]';
   const uncertainty=num(c[1].split('±')[1]);
-  rows.push({model,score,harness:m[1],setting:[title.replace(' Results',''),effort,m[3]].filter(Boolean).join('; '),date:c[3],metrics:{runs:Number(c[2]),...(uncertainty===undefined?{}:{reportedUncertainty:uncertainty})}});
+  rows.push({model,score,harness:m[1],setting:[title.replace(' Results',''),effort,m[3]].filter(Boolean).join('; '),date:c[3],trials:Number(c[2]),metrics:{...(uncertainty===undefined?{}:{reportedUncertainty:uncertainty})}});
  }
 }
 if(!rows.length)throw new Error('No PaperBench results');return rows;

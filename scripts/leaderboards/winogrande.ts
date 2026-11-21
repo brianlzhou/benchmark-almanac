@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1907.10641";
 const board: Leaderboard = {
-  benchmark: "winogrande",
+  benchmark: "winogrande", static: 'paper',
 
   url: "https://arxiv.org/html/1907.10641",
   feed: FEED,

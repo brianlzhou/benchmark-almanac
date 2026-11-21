@@ -1,0 +1,5 @@
+// UHGEval tests hallucination detection and selective evaluation on generated news continuations.
+// The source has no overall score, so the headline is discriminative-keyword average accuracy.
+// This importer reads Table 4 from the paper HTML and keeps the other evaluation columns as metrics.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://arxiv.org/html/2311.15296';const num=(s:string)=>Number(s.replace(/\s/g,'').replace('%',''));const board:Leaderboard={benchmark:'uhgeval',static:'paper',url:FEED,feed:FEED,terms:PAPER_TERMS,headline:'The paper reports no overall score, so this is discriminative-keyword average accuracy.',async fetch(){const t=grid(paperTables(await paperHtml(FEED))[3]);const rows=t.slice(1).filter(r=>r[0]).map(r=>({model:r[0],score:num(r[1]),metrics:{keywordCount:Number(r[2]),keywordValid:Number(r[3]),sentenceAccuracy:num(r[4]),sentenceValid:Number(r[5]),selectiveAccuracy:num(r[6]),selectiveValid:Number(r[7])}}));return checked(rows,10);}};export default board;

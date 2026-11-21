@@ -17,8 +17,8 @@ const board: Leaderboard = {
   const t = markdownTables(await fetchText(FEED)).find(t=>t[0].some(h=>h.includes('overline')));
   if (!t) throw new Error('tomg-bench table missing');
   const rows = t.slice(1).filter(r=>r[1] && !/human|random/i.test(r[1]) && num(r[4])!==undefined).map(r=>({
-    model:r[1], score:num(r[4])!*1, 
-    metrics:Object.fromEntries(t[0].map((h,i)=>[h, i!==1 && i!==4 ? num(r[i]) : undefined]).filter((p): p is [string,number]=>typeof p[1]==='number')),
+    model:r[1], score:num(r[4])!, params:num(r[2]),
+    metrics:Object.fromEntries(t[0].map((h,i)=>[h, h!=='Rank' && i!==1 && i!==4 ? num(r[i]) : undefined]).filter((p): p is [string,number]=>typeof p[1]==='number')),
   }));
   if (!rows.length) throw new Error('tomg-bench has no scored rows');
   return rows;

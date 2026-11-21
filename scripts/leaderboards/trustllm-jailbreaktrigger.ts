@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2401.05561";
 const board: Leaderboard = {
-  benchmark: "trustllm-jailbreaktrigger",
+  benchmark: "trustllm-jailbreaktrigger", static: 'paper',
   parts: {
     qbb: { name: 'Questions about bad behavior', group: 'Category' },
     itc: { name: 'Instructions for toxic content', group: 'Category' },

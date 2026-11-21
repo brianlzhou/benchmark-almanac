@@ -9,7 +9,7 @@ import { tables, text } from '../lib/html.ts';
 
 const FEED = 'https://arxiv.org/html/2506.02022';
 const board: Leaderboard = {
-  benchmark: 'do-you-see-me', parts: {
+  benchmark: 'do-you-see-me', static: 'paper', parts: {
   acc2d: { name: '2D', group: 'Category' },
   acc3d: { name: '3D', group: 'Category' },
 }, url: 'https://github.com/microsoft/Do-You-See-Me', feed: FEED, terms: PAPER_TERMS,

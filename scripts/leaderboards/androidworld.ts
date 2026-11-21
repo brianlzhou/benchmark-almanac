@@ -39,8 +39,7 @@ const board: Leaderboard = {
       // "pass@2 95.69, pass@3 97.41" in the pass@k column: metrics passAt2, passAt3
       const passAt = Object.fromEntries([...get(/^Success Rate \(pass@k\)$/).matchAll(/pass@(\d+)\s+([\d.]+)/g)].map((m) => [`passAt${m[1]}`, Number(m[2])]));
       const metrics = passAt;
-      const rank = get(/^Rank$/), count = get(/^Number of trials$/);
-      if (/^\d+$/.test(rank)) metrics.rank = Number(rank);
+      const count = get(/^Number of trials$/);
       const mark = get(/^Open\?$/);
       const open = mark === '✔' ? true : mark === '✗' ? false : undefined;
       if (type === 'AI agent' && open !== undefined) metrics.openAgent = Number(open);

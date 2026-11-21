@@ -42,7 +42,7 @@ const board: Leaderboard = {
       for (const key of Object.keys(board.parts!)) {
         if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
       }
-      if (r['']?.trim() && Number.isFinite(Number(r['']))) metrics.rank = Number(r['']);
+      if (r['']?.trim() && Number.isFinite(Number(r['']))) metrics.sourceRowIndex = Number(r['']);
       if (r.Model.includes('⚠')) metrics.suspectedContamination = 1;
       rows.push({ model, score, metrics, setting: r['Model Type'] || undefined, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined });
     }

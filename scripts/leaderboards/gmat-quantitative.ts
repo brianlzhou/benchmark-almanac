@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2407.21783v3";
 const board: Leaderboard = {
-  benchmark: "gmat-quantitative",
+  benchmark: "gmat-quantitative", static: 'paper',
   url: "https://arxiv.org/html/2407.21783v3",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

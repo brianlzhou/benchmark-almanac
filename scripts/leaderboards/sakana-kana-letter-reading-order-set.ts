@@ -5,7 +5,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2606.21228v2";
 const board: Leaderboard = {
-  benchmark: "sakana-kana-letter-reading-order-set",
+  benchmark: "sakana-kana-letter-reading-order-set", static: 'paper',
   url: "https://arxiv.org/html/2606.21228v2",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

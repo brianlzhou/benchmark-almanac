@@ -58,7 +58,7 @@ const board: Leaderboard = {
       const price = meta[m[2].trim()];
       const priced = !['GPT-OSS 120B', 'Grok 4.1 Fast'].includes(m[2]) && typeof price?.cpr === 'number';
       rows.push({ model, cost: priced ? price.cpr : undefined,
-        score: Number(m[3]), metrics: { rank: parseInt(m[1]), ...(other.has(m[2]) ? { openEnded: other.get(m[2])! } : {}),
+        score: Number(m[3]), metrics: { ...(other.has(m[2]) ? { openEnded: other.get(m[2])! } : {}),
           ...(priced && typeof price.tout === 'number' ? { reportedOutputTokens: price.tout } : {}),
           ...(price?.est ? { estimatedPrice: 1 } : {}), ...(typeof price?.input === 'number' ? { priceIn: price.input } : {}), ...(typeof price?.output === 'number' ? { priceOut: price.output } : {}) }, date: m[5] ?? listed.get(m[2].trim()) });
     }

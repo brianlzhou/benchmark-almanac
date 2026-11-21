@@ -1,0 +1,4 @@
+// Legal Opinion Sentiment Classification evaluates negative, neutral and positive legal opinions.
+// Table 2 reports accuracy for four model configurations.
+import type {Leaderboard,LeaderboardRow} from './types.ts'; import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts'; import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://arxiv.org/html/2011.00318'; const board:Leaderboard={benchmark:'legal-opinion-sentiment-classification',static:'paper',url:FEED,feed:FEED,terms:PAPER_TERMS,async fetch():Promise<LeaderboardRow[]>{const t=paperTables(await paperHtml(FEED)).map(grid)[1];if(!t||t[1]?.[10]!=='Accuracy')throw new Error('Legal sentiment table missing');const rows=t.slice(2).filter(r=>r.length>=10).map(r=>({model:r[0],score:Number(r[10])*100,metrics:{negativeF1:Number(r[3])*100,neutralF1:Number(r[6])*100,positiveF1:Number(r[9])*100}}));return checked(rows,4)}};export default board;

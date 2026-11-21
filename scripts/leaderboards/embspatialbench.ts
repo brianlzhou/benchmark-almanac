@@ -4,7 +4,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/2406.05756';
 const board: Leaderboard = {
-  benchmark: 'embspatialbench', url: URL, feed: URL + ' (generation and likelihood on the complete benchmark)', terms: PAPER_TERMS,
+  benchmark: 'embspatialbench', static: 'paper', url: URL, feed: URL + ' (generation and likelihood on the complete benchmark)', terms: PAPER_TERMS,
   aliases: {"LLaVA-1.6 7B": "llava-v1-6-vicuna-7b"},
   async fetch() {
     const ts = inlinePaperTables(await paperHtml(URL));

@@ -3,7 +3,7 @@
 // The board ranks by perfect rate, which is the score. Some rows are self-reported by their makers (the
 // file marks them). They appear on the board and are kept, with the agent interface as the harness. The other
 // two metrics the board reports, the rubric score ("rubric", %) and trajectory efficiency ("trajEff"), and the
-// mean steps per task ("steps") go in `metrics`.
+// source link, weight status and task counts are retained. The mean steps per task ("steps") go in `metrics`.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -11,6 +11,11 @@ const FEED = 'https://mypcbench.com/data/leaderboard.json';
 
 interface Model {
   model: string;
+  weights?: string;
+  vendor?: string;
+  n?: number;
+  perfect?: number;
+  source_url?: string;
   max_steps?: number;
   self_reported?: boolean;
   protocol_note?: string;
@@ -42,12 +47,13 @@ const board: Leaderboard = {
     for (const m of models) {
       if (!m.model || typeof m.perfect_rate !== 'number') continue;
       const metrics: Record<string, number> = {};
-      for (const [k, v] of [['rubric', m.rubric_score], ['trajEff', m.traj_eff], ['steps', m.avg_steps]] as const) {
+      for (const [k, v] of [['tasks', m.n], ['perfect', m.perfect], ['rubric', m.rubric_score], ['trajEff', m.traj_eff], ['steps', m.avg_steps]] as const) {
         if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
       }
       for (const [key, value] of Object.entries(m.per_category ?? {})) if (Number.isFinite(value)) metrics[key] = value;
       const setting = [m.max_steps && `${m.max_steps} steps`, m.protocol_note || (m.self_reported ? 'Self-reported' : undefined)].filter(Boolean).join('; ') || undefined;
-      rows.push({ setting, model: m.model.trim(), score: m.perfect_rate, harness: m.agent_interface || undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({ setting, open: m.weights === 'open' ? true : ['closed','unreleased'].includes(m.weights ?? '') ? false : undefined,
+        link: m.self_reported ? m.source_url : undefined, submitter: m.self_reported ? m.vendor : undefined, model: m.model.trim(), score: m.perfect_rate, harness: m.agent_interface || undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

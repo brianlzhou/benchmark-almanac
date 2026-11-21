@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2408.06327";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "visualagentbench",
+  benchmark: "visualagentbench", static: 'paper',
   parts: {
     omniGibson: { name: 'OmniGibson', group: 'Environment' },
     minecraft: { name: 'Minecraft', group: 'Environment' },

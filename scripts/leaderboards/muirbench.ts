@@ -8,7 +8,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2406.09411";
 
 const board: Leaderboard = {
-  benchmark: "muirbench",
+  benchmark: "muirbench", static: 'paper',
   parts: {
     counting: { name: 'Counting', group: 'Task type' },
     action: { name: 'Action', group: 'Task type' },

@@ -7,7 +7,7 @@ import { text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2501.18362";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "medxpertqa",
+  benchmark: "medxpertqa", static: 'paper',
   parts: {
     text: { name: 'Text', group: 'Modality' },
     multimodal: { name: 'Multimodal', group: 'Modality' },

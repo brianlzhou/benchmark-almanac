@@ -1,5 +1,5 @@
 // CorpBench Work v1.3: official composite score, with mean USD cost per task.
-// Median output tokens and latency stay supporting metrics, not mean output-token fields.
+// Keep median token counts separate from means, with scored runs, local model sizes and capability measures.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -47,8 +47,23 @@ const board: Leaderboard = {
       for (const [department, values] of Object.entries(m.departmentScores ?? {})) {
         for (const [key, value] of Object.entries(values as object)) if (typeof value === 'number') metrics[`${department}_${key}`] = value;
       }
+      for(const key of ['allVariantsPassRate','costPerSuccessfulWorkflow','medianCachedInputTokens','totalToolCalls',
+        'scheduledRuns','passedRuns','successfulTasks','providerFailures']) if(Number.isFinite(m[key])) metrics[key]=m[key];
+      if(Number.isFinite(m.avgDurationSeconds)) metrics.latency=m.avgDurationSeconds;
+      if(Number.isFinite(m.localSpecs?.minRamGb)) metrics.minRamGb=m.localSpecs.minRamGb;
+      for(const [name,value] of Object.entries({...m.safety,...m.failureRates})) {
+        if(typeof value==='number') metrics[name.replace(/-(.)/g,(_,c:string)=>c.toUpperCase())]=value;
+      }
+      for(const cap of data.capabilityScores ?? []) {
+        if(cap.modelId!==m.modelId) continue;
+        const dimension=cap.dimension.replace(/-(.)/g,(_:string,c:string)=>c.toUpperCase());
+        for(const [field,suffix] of [['averageScore','Score'],['runs','Runs'],['scoredRuns','ScoredRuns'],
+          ['passRate','PassRate'],['totalCostUsd','Cost']]) {
+          if(Number.isFinite(cap[field])) metrics[dimension+suffix]=cap[field];
+        }
+      }
       const setting = [data.title, m.localSpecs?.quantization, m.localSpecs?.contextLength && `context ${m.localSpecs.contextLength}`].filter(Boolean).join('; ');
-      return { model: identity(m.modelId.replace(/^[^/]+\//, '')), score: m.corpBenchScore, setting, harness: m.localSpecs?.runtime ?? 'CorpBench', cost: m.costPerTask, metrics };
+      return { model: identity(m.modelId.replace(/^[^/]+\//, '')), score: m.corpBenchScore, trials:m.scoredRuns, params:m.localSpecs?.parametersB, setting, harness: m.localSpecs?.runtime ?? 'CorpBench', cost: m.costPerTask, metrics };
     });
   },
 };

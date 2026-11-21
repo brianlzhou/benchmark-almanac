@@ -8,7 +8,7 @@ import { num, text, tables } from '../lib/html.ts';
 
 const FEED = "https://mistral.ai/news/leanstral/";
 const board: Leaderboard = {
- benchmark: "flteval", measures: { 'pass@2': 'pass-2', 'pass@4': 'pass-4', 'pass@8': 'pass-8', 'pass@16': 'pass-16' },
+ benchmark: "flteval", measures: { passAt2: 'pass-2', passAt4: 'pass-4', passAt8: 'pass-8', passAt16: 'pass-16' },
  costPer: 'run',
  url: "https://mistral.ai/news/leanstral/",
  feed: FEED,
@@ -28,7 +28,7 @@ const board: Leaderboard = {
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.filter(r => r.setting === 'pass@1').map(r => ({...r,setting:undefined,cost:r.metrics!.runCost,
     metrics:{...r.metrics,...Object.fromEntries(result.filter(x => x.model===r.model && x.setting!=='pass@1')
-      .flatMap(x => [[x.setting!,x.score],[`${x.setting}_cost`,x.metrics!.runCost]]))}, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));
+      .flatMap(x => [[x.setting!.replace('pass@','passAt'),x.score],[`${x.setting}_cost`,x.metrics!.runCost]]))}, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));
  },
 };
 export default board;

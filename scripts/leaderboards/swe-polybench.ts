@@ -48,7 +48,28 @@ const board: Leaderboard = {
       const paren = name.match(/^(.*?)\s*\(([^)]+)\)$/);
       const plus = name.match(/^(.*?)\s+\+\s+(.+)$/);
       const [harness, model] = paren && !/^v\d/.test(paren[2]) ? [paren[1], paren[2]] : plus ? [plus[1], plus[2]] : [undefined, name];
-      if (score !== undefined) rows.push({ model, score, harness, date, setting: TAB.replace('leaderboard-',''), metrics: Object.fromEntries([2,3,4,5].flatMap(i=>{const v=num(r[i]?.text);return v===undefined?[]:[[header[i].text,v]];})) });
+      if (score === undefined) continue;
+      const metrics: Record<string, number> = {};
+      for (const [i, cell] of header.entries()) {
+        const column = cell.attrs['data-sort'] ?? '';
+        const value = num(r[i]?.text);
+        if (value === undefined || column === 'resolved') continue;
+        if (column.startsWith('resolved_') && i >= 2 && i <= 5) metrics[cell.text] = value;
+        else if (/^(resolved_|file_|node_)/.test(column)) {
+          const key = column.replace(/_(.)/g, (_, c: string) => c.toUpperCase());
+          metrics[key] = value;
+          if (column.startsWith('resolved_')) {
+            const name = column.slice(9).replaceAll('_', ' ').replace(/func\b/, 'function');
+            board.parts![key] = {name, group: 'Patch complexity'};
+          }
+        }
+      }
+      const org = r[header.findIndex(c => c.text === 'Org')]?.html ?? '';
+      const affiliations = [['/u/172139148?', 'Aider AI'], ['/u/166046056?', 'SWE-agent'],
+        ['brand.illinois.edu/', 'University of Illinois'], ['Amazon_Web_Services_Logo', 'Amazon Web Services'], ['ibm-logo.png', 'IBM']];
+      const agentOrg = affiliations.find(([image]) => org.includes(image))?.[1];
+      const logs = r[header.findIndex(c => c.text === 'Logs')]?.html.match(/href="([^"]+)"/)?.[1];
+      rows.push({model, score, harness, date, agentOrg, link: logs, setting: TAB.replace('leaderboard-',''), metrics});
     }
     }
     return rows;

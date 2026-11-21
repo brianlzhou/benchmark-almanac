@@ -8,7 +8,7 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 
 const FEED = "https://arxiv.org/html/2409.00138";
 const board: Leaderboard = {
- benchmark: "privacylens",
+ benchmark: "privacylens", static: 'paper',
  url: "https://arxiv.org/html/2409.00138",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -94,8 +94,6 @@ const board: Leaderboard = {
         if (value !== undefined) metrics[head[i]] = value;
       }
       const link = r[2]?.html.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1]?.replace(/&amp;/g, '&');
-      const rank = num(r[0]?.text);
-      if (rank !== undefined) metrics.rank = rank;
       rows.push({ ...parsed, score, date, link, submitter: /\(3rd-party eval/i.test(name) ? 'Third-party evaluation' : undefined, open: openNames.has(parsed.model) ? true : undefined, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;

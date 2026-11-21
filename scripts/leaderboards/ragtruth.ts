@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2401.00396";
 const board: Leaderboard = {
-  benchmark: "ragtruth",
+  benchmark: "ragtruth", static: 'paper',
   parts: {
     qaF1: { name: 'QA', group: 'Task type' },
     dataToTextF1: { name: 'Data to text', group: 'Task type' },

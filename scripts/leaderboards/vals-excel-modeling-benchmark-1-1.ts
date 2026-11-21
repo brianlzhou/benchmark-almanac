@@ -1,4 +1,4 @@
-// Tokens / Test combines input and output; retain it as totalTokensPerTest, not output-only tokens.
+// Tokens / Test combines input and output tokens for one task.
 // Vals Excel Modeling Benchmark v1.1 (not comparable with v1.0, says Vals) on vals.ai, read through the helper in vals-index.ts.
 import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
@@ -23,7 +23,7 @@ const board: Leaderboard = {
     for (const r of t.slice(1)) {
       const row=rows.find(row=>row.model===r[model]?.text); if(!row)continue;
       const value=r[token]?.text.trim() ?? '';const n=num(value);
-      if(n!==undefined) row.metrics={...row.metrics,totalTokensPerTest:n*(/m$/i.test(value)?1e6:/k$/i.test(value)?1e3:1)};
+      if(n!==undefined) row.metrics={...row.metrics,totalTokens:n*(/m$/i.test(value)?1e6:/k$/i.test(value)?1e3:1)};
     }
     return rows;
   },

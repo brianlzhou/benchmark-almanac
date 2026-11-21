@@ -9,7 +9,7 @@ import { tables, num } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2210.09261";
 
 const board: Leaderboard = {
-  benchmark: "big-bench-hard",
+  benchmark: "big-bench-hard", static: 'paper',
   parts: {
     nlp: { name: 'NLP', group: 'Task type' },
     algorithmic: { name: 'Algorithmic', group: 'Task type' },

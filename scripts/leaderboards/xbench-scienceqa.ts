@@ -2,7 +2,7 @@
 // places, and both are read here as data, never run: a public Strapi API at admin.xbench-ai.com (base URL
 // and query strings named in the site bundle), and literal arrays inside the bundle for the older boards.
 // ScienceQA reads /api/scienceqas with the page's own query (ranked rows only): per model the score (mean
-// accuracy, 0 to 100, the ranking), best of N, reasoning effort and evaluation date. "BoN (N=5)" is kept as
+// accuracy, 0 to 100, the ranking), best of N, reasoning effort (including default) and evaluation date. "BoN (N=5)" is kept as
 // metrics.bestOf5 and "Time cost (s)" (timeCost) as metrics.latency. Other xbench importers use xbenchApi
 // and xbenchArray from this file.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -61,7 +61,7 @@ const board: Leaderboard = {
     for (const e of data) {
       const model = e.model?.name?.trim();
       if (!model || typeof e.score !== 'number') continue;
-      const effort = e.reasoning_effort && e.reasoning_effort !== 'default' ? e.reasoning_effort : undefined;
+      const effort = e.reasoning_effort?.trim() || undefined;
       const metrics: Record<string, number> = {};
       if (typeof e.model?.pricingInput === 'number') metrics.priceIn = e.model.pricingInput;
       if (typeof e.model?.pricingOutput === 'number') metrics.priceOut = e.model.pricingOutput;

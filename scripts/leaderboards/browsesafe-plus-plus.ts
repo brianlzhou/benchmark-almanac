@@ -9,6 +9,7 @@
 // Claude Fable 5.1 (all) counts refusals as flags and is its only headline row.
 // Answered-only F1 stays in metrics. The board gives refusals as a range, so coverageLow and coverageHigh
 // preserve the complementary percentage range. They are bounds, not an estimated exact coverage.
+// Keep per-view detection metrics, pricing, token counts and open-weight sizes from the efficiency table.
 // Fine-tuned guards are preserved as unlisted rows. Screenshot and adaptive-attack results are separate tasks.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -25,12 +26,14 @@ interface Row {
 }
 interface Data {
   boards: { id: string; rows: Row[]; notes?: string[] }[];
-  efficiency?: { models?: Record<string, { cost_usd_per_1k_pages?: number; tokens_out?: number; latency_s?: number }> };
+  efficiency?: { models?: Record<string, { cost_usd_per_1k_pages?: number; tokens_out?: number; latency_s?: number; tokens_in?: number; price_in_per_m?: number; price_out_per_m?: number; latency_n?: number; open_weights?: boolean; params_b?: number; active_params_b?: number }> };
 }
 
 const board: Leaderboard = {
   benchmark: 'browsesafe-plus-plus',
   parts: {
+    htmlF1: {name:'HTML', group:'Text view'}, markdownF1: {name:'Markdown', group:'Text view'},
+    accessibilityF1: {name:'Accessibility tree', group:'Text view'},
     answeredF1: { name: 'Answered only', group: 'Split' },
   },
   url: 'https://browsesafe.perplexity.ai/',
@@ -66,6 +69,17 @@ const board: Leaderboard = {
         return v.length === VIEWS.length ? v.reduce((a, b) => a + b, 0) / v.length : undefined;
       };
       const metrics: Record<string, number> = {};
+      for (const view of VIEWS) {
+        for (const [source,suffix] of [['f1','F1'],['acc','Accuracy'],['fpr','Fpr']] as const) {
+          const v=r[view]?.[source];
+          if (typeof v==='number') metrics[view+suffix]=v;
+        }
+      }
+      for (const [source,key] of [['tokens_in','inputTokens'],['price_in_per_m','priceIn'],
+        ['price_out_per_m','priceOut'],['latency_n','latencySamples'],['active_params_b','activeParams']] as const) {
+        const v=eff?.[source];
+        if (typeof v==='number') metrics[key]=v;
+      }
       if (variant?.[1] === 'all') {
         const answered = text.rows.find((x) => x.model === `${model} (answered)`);
         const answeredF1 = VIEWS.map((v) => answered?.[v]?.f1);
@@ -91,7 +105,7 @@ const board: Leaderboard = {
         model,
         score: f1.reduce((a, b) => a + b, 0) / f1.length,
         cost: eff?.cost_usd_per_1k_pages ? eff.cost_usd_per_1k_pages / 1000 : undefined,
-        tokens: eff?.tokens_out,
+        tokens: eff?.tokens_out, open:eff?.open_weights, params:eff?.params_b,
         metrics: Object.keys(metrics).length ? metrics : undefined,
       });
     }

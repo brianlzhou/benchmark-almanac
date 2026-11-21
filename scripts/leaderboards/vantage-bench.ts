@@ -4,6 +4,7 @@ import { fetchJson } from '../lib/util.ts';
 const FEED = "https://huggingface.co/spaces/clemson-computing/VANTAGE-Bench-Leaderboard/raw/main/data/results.json";
 const board: Leaderboard = {
  benchmark: 'vantage-bench', parts: {
+  semantic: { name: 'Semantic', group: 'Dimension' },
   spatial: { name: 'Spatial', group: 'Dimension' },
   spatio_temporal: { name: 'Spatiotemporal', group: 'Dimension' },
   temporal: { name: 'Temporal', group: 'Dimension' },
@@ -17,9 +18,13 @@ const board: Leaderboard = {
   video_qa: { name: 'Video QA', group: 'Task type' },
 }, url: "https://huggingface.co/spaces/clemson-computing/VANTAGE-Bench-Leaderboard", feed: FEED,
  terms: 'Apache-2.0 project; Hugging Face robots.txt permits this public raw results path.',
+ verified: 'Marked verified by VANTAGE-Bench.',
  async fetch() {
   const data = await fetchJson<{models: ({name:string;overall:number;date_evaluated:string} & Record<string,unknown>)[]}>(FEED);
   const rows = data.models.filter(r => Number.isFinite(r.overall)).map(r => ({model:r.name, score:r.overall, date:r.date_evaluated,
+   params: typeof r.params === 'string' && /^\d+(?:\.\d+)?B$/.test(r.params) ? Number.parseFloat(r.params) : undefined,
+   open:r.type === 'open' ? true : r.type === 'closed' ? false : undefined,
+   verified:typeof r.verified === 'boolean' ? r.verified : undefined,
    metrics:Object.fromEntries(Object.entries(r).filter(([k,v]) => k !== 'overall' && typeof v === 'number')) as Record<string,number>}));
   if(rows.length < 3 || rows.some(r=>!Number.isFinite(r.score))) throw new Error('Invalid overall results');
   return rows;

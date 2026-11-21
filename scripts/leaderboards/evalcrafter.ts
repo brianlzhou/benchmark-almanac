@@ -1,4 +1,4 @@
-// EvalCrafter ranks video models by Final Sum Score, the sum of four learned quality scores. Model-version dates belong to model identities, not benchmark settings; preserve each component and do not equate this native score to a percentage.
+// EvalCrafter ranks video models by Final Sum Score, the sum of four learned quality scores. Model-version dates belong to model identities, not benchmark settings; read component scores, generation time, model properties and per-measure scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
@@ -15,9 +15,36 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
     const speed = all.find(t => t[0]?.includes('Generation Speed'));
-    const timing = new Map((speed?.slice(1) ?? []).map(r => [`${r[0].toLowerCase()}|${r[1].replace(/^20/, '')}`, r[7]]));
+    const key=(r:string[])=>[r[0].replace(/^VideoCrafter V0\.9 \(Floor33\)$/,'Floor33').toLowerCase(),r[1].replace(/^20/,'')].join('|');
+    const properties=new Map(speed?.slice(1).map(r=>[key(r),r]));
+    const details=all.find(t=>t[0]?.includes('Warping Error'));
+    const scores=new Map(details?.slice(1).map(r=>[key(r),r]));
     const rows: LeaderboardRow[] = [];
-    const t=all.find(t=>t[0]?.includes("Final Sum Score"));if(!t)throw new Error("Missing EvalCrafter table");for(const r of t.slice(1)){const score=num(r[6]);if(score===undefined)continue;const metrics:Record<string,number>={};for(let i=2;i<6;i++)metrics[t[0][i]]=num(r[i])!;const duration=timing.get(`${r[0].toLowerCase()}|${r[1].replace(/^20/, '')}`)?.match(/^(\d+(?:\.\d+)?)\s*(min|s)$/);if(duration)metrics[duration[2]==='min'?'minutes':'time']=Number(duration[1]);rows.push({model:`${r[0]} (${r[1]})`,score,metrics});}
+    const t=all.find(t=>t[0]?.includes("Final Sum Score"));
+    if(!t) throw new Error("Missing EvalCrafter table");
+    for (const r of t.slice(1)) {
+      const score=num(r[6]); if(score===undefined) continue;
+      const metrics:Record<string,number>={};
+      for(let i=2;i<6;i++) metrics[t[0][i]]=num(r[i])!;
+      const info=properties.get(key(r));
+      let open:boolean|undefined;
+      if(info) {
+        if (info[5]==='✅' || info[5]==='-') open=info[5]==='✅';
+        const duration=info[7].match(/^([\d.]+)\s*(min|s)(\+?)$/);
+        if(duration) metrics[duration[3]?'minimumLatency':'latency']=Number(duration[1])*(duration[2]==='min'?60:1);
+        const resolution=info[3].match(/^(\d+)x(\d+)$/);
+        if(resolution) {metrics.width=Number(resolution[1]);metrics.height=Number(resolution[2]);}
+        metrics.fps=num(info[4])!;
+        metrics.videoSeconds=num(info[6])!;
+        metrics.motionControl=Number(info[8]==='✅');
+        metrics.cameraControl=Number(info[9]==='✅');
+      }
+      const detail=scores.get(key(r));
+      if(details && detail) for(let i=2;i<details[0].length;i++) {
+        const value=num(detail[i]); if(value!==undefined) metrics[details[0][i]]=value;
+      }
+      rows.push({model:r[0]+' ('+r[1]+')',score,open,metrics});
+    }
     if (!rows.length) throw new Error("No evalcrafter score rows");
     return rows;
   },

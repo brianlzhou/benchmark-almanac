@@ -1,4 +1,4 @@
-// CTI-REALM published mean reward, converted from 0–1 to percent. Keep standard error and confidence intervals on the percentage scale.
+// CTI-REALM published mean reward, converted from 0–1 to percent. Read the initial single-epoch results, with errors and intervals on the percentage scale.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables, text } from '../lib/html.ts';
@@ -11,6 +11,7 @@ const board: Leaderboard = {
   url: "https://ukgovernmentbeis.github.io/inspect_evals/evals/cti_realm/index.html",
   feed: FEED,
   terms: "Public results published by the benchmark authors at ukgovernmentbeis.github.io; retain source attribution and follow the upstream terms.",
+  reference: ['Inspect'],
   aliases: {},
   
   async fetch() {
@@ -19,9 +20,9 @@ const board: Leaderboard = {
     return t.slice(1).flatMap(r => {
       const score = num(r[2]?.text); if (score === undefined) return [];
       const metrics: Record<string,number> = {};
-      const se = num(r[3]?.text); if (se !== undefined) metrics.stderr = metrics.standardError = se*100;
-      const ci = r[4]?.text.match(/\[([\d.]+),\s*([\d.]+)\]/); if (ci) {metrics.ciLow=Number(ci[1])*100;metrics.ciHigh=Number(ci[2])*100;}
-      return [{model: identity(r[0].text.replace(/ \((?:high|medium|low)\)$/, '')), setting: r[0].text.match(/\((high|medium|low)\)$/)?.[1], score: score*100, ...(ci ? {low: metrics.ciLow, high: metrics.ciHigh} : {}), metrics}];
+      const se = num(r[3]?.text); if (se !== undefined) metrics.stderr = se*100;
+      const ci = r[4]?.text.match(/\[([\d.]+),\s*([\d.]+)\]/);
+      return [{model: identity(r[0].text.replace(/ \((?:high|medium|low)\)$/, '')), setting: r[0].text.match(/\((high|medium|low)\)$/)?.[1], score: score*100, trials:1, harness:"Inspect", ...(ci ? {low: Number(ci[1])*100, high: Number(ci[2])*100} : {}), metrics}];
     });
   },
 };

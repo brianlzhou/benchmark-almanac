@@ -25,7 +25,7 @@ export default {
     const d = jsonAfter<{table: ({agent: string; effort: string; A: number; G: number; F: number} & Record<string, unknown>)[]}>(await fetchText(feed), 'window.SB_RESULTS=');
     const rows = d.table.map(r => ({
       model: r.agent, setting: `L0; ${r.effort} effort`, score: (r.A + r.G + r.F) / 3,
-      metrics: Object.fromEntries(Object.entries(r).filter((x): x is [string, number] => typeof x[1] === 'number')),
+      metrics: Object.fromEntries(Object.entries(r).filter((x): x is [string, number] => typeof x[1] === 'number').map(([key, value]) => [key === 'rank' ? 'publishedSceneRank' : key, value])),
     }));
     if (rows.length < 3 || rows.some(r => !Number.isFinite(r.score))) throw new Error('3DSceneBench full-suite rows missing');
     return rows;

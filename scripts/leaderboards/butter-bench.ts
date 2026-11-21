@@ -1,12 +1,12 @@
 // Butter-Bench paper: published Avg completion percentage across all tasks.
-// These static paper rows will not refresh. End-to-end completion and intermediate tasks remain metrics.
+// The authors report five trials per model-task combination. End-to-end completion and intermediate tasks remain metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2510.21860";
 const board: Leaderboard = {
-  benchmark: "butter-bench",
+  benchmark: "butter-bench", static: 'paper',
   parts: {
     search: { name: 'Search', group: 'Task type' },
     infer: { name: 'Infer', group: 'Task type' },
@@ -20,7 +20,7 @@ const board: Leaderboard = {
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      const t=tables(await fetchText(FEED)).find(t=>t[0]?.[0]?.text==='Task:'&&t[0]?.at(-1)?.text==='Avg');if(!t)throw new Error('Butter results missing');return t.slice(1).filter(r=>r.length===8).map(r=>({model:r[0].text,score:num(r[7].text)!,metrics:Object.fromEntries(t[0].slice(1,7).map((k,i)=>[k.text.toLowerCase(),num(r[i+1].text)!]))}));
+      const t=tables(await fetchText(FEED)).find(t=>t[0]?.[0]?.text==='Task:'&&t[0]?.at(-1)?.text==='Avg');if(!t)throw new Error('Butter results missing');return t.slice(1).filter(r=>r.length===8).map(r=>({model:r[0].text,trials:r[0].text==='Human'?undefined:5,score:num(r[7].text)!,metrics:Object.fromEntries(t[0].slice(1,7).map((k,i)=>[k.text.toLowerCase(),num(r[i+1].text)!]))}));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

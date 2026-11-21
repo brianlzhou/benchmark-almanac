@@ -9,7 +9,7 @@ const PAGE='https://surgehq.ai/benchmarks/chartography';
 interface Point {label:string;x:number;y:number}
 export default {
  benchmark:'chartography',url:PAGE,feed:`${PAGE} (primary table and linked chartography-charts.js)`,terms:SURGE_TERMS,aliases:SURGE_ALIASES,
- chart:{title:'Score vs. generated tokens',x:{key:'generatedTokens',label:'Generated tokens per trial',better:'lower',log:true},y:{key:'score',label:'Score (pass@1)',unit:'%',better:'higher'},note:'The published Pareto chart snapshot is separate from the current leaderboard.'},
+ chart:{title:'Score vs. generated tokens',x:{key:'outputTokens',label:'Generated tokens per trial',better:'lower',log:true},y:{key:'score',label:'Score (pass@1)',unit:'%',better:'higher'},note:'The published Pareto chart snapshot is separate from the current leaderboard.'},
  async fetch(){
   const page=await fetchText(PAGE); const rows=surgeRows(page);
   const src=page.match(/<script[^>]+src="([^"]*chartography-charts\.js)"/)?.[1];
@@ -27,7 +27,7 @@ export default {
    const key=`${p.label}|${p.y}`;
    const n=surgeName(p.label.replace(/^(Opus|Sonnet|Fable) /,'Claude $1 '));
    const r=plot.get(key)??{...n,score:p.y*100,setting:`Pareto chart; ${n.setting ?? 'effort unspecified'}`};
-   r.tokens=p.x;r.metrics={generatedTokens:p.x};plot.set(key,r);
+   r.tokens=p.x;r.metrics={outputTokens:p.x};plot.set(key,r);
   }
   const trials = titles?.cost?.desc?.match(/(\d+) trials per model/)?.[1];
   if(trials)for(const row of plot.values())row.trials=Number(trials);

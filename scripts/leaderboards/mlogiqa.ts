@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2411.09116";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "mlogiqa",
+  benchmark: "mlogiqa", static: 'paper',
   url: "https://huggingface.co/datasets/Qwen/P-MMEval",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

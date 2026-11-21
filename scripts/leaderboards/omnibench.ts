@@ -1,3 +1,4 @@
+// Read each result date and source, the model size and the board’s open-source classification.
 // OmniBench: overall accuracy in percent for each of four input conditions. Preserve all numeric
 // category scores and model-size labels. Missing values remain missing, not zero.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -30,12 +31,16 @@ const board: Leaderboard = {
 
  async fetch() {
 
-type Entry={info:{name:string;size:string;date?:string}} & Record<string,any>;
+type Entry={info:{name:string;size:string;date?:string;type?:string;source_type?:string;source_link?:string}} & Record<string,any>;
 const data=await fetchJson<{leaderboardData:Entry[]}>(FEED);const rows:LeaderboardRow[]=[];
 for(const r of data.leaderboardData)for(const setting of ['image-audio','textual_image','textual_audio','textual_image-audio']){
  const v=r[setting];if(typeof v?.overall!=='number')continue;let model=r.info.name;if(r.info.size&&r.info.size!=='-'&&!model.includes(r.info.size))model+=' '+r.info.size;
  if(/^(GPT-4o|GPT-4|Gemini[- ]1\.5[- ](?:Pro|Flash))$/i.test(model))model+=' [snapshot unspecified]';
- rows.push({model,score:v.overall,setting,metrics:Object.fromEntries(Object.entries(v).filter(([k,n])=>k!=='overall'&&typeof n==='number')) as Record<string,number>});}
+ const size = r.info.size?.match(/^([\d.]+)B$/i);
+ rows.push({model,score:v.overall,setting,date:r.info.date,link:r.info.source_link,
+   open:r.info.type?.startsWith('open_source') ? true : r.info.type?.startsWith('proprietary') ? false : undefined,
+   params:size ? Number(size[1]) : undefined,submitter:r.info.source_type === 'OmniBench' ? 'OmniBench' : undefined,
+   metrics:Object.fromEntries(Object.entries(v).filter(([k,n])=>k!=='overall'&&typeof n==='number')) as Record<string,number>});}
 if(!rows.length)throw new Error('No OmniBench results');return rows;
  },
 };

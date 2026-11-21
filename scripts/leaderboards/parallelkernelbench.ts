@@ -35,7 +35,7 @@ const board: Leaderboard = {
       const fast = total[3+m*2]?.text.split('→').map(num);
       if (pass?.[0] === undefined || pass[1] === undefined || fast?.[0] === undefined || fast[1] === undefined)
         throw new Error('Invalid total sampling counts');
-      const metrics: Record<string, number> = {tasks:n, passed:pass[0], 'pass@3':pass[1]/n*100,
+      const metrics: Record<string, number> = {tasks:n, passed:pass[0], passAt3:pass[1]/n*100,
         fast1Percent:fast[0]/n*100, fast1Count:fast[0], fast1At3:fast[1]/n*100};
       for (const r of t.slice(2)) {
         if (r === total) continue;

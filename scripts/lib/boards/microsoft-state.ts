@@ -1,3 +1,4 @@
+// The STATE leaderboard reports pass@5 and the standard deviation of pass@1.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
 import { jsLiteral } from '../html.ts';
@@ -11,8 +12,8 @@ export function stateBoard(benchmark:string,track:string,version:string):Leaderb
  const entries=jsLiteral<Entry[]>(js,start).filter(e=>e.track===track&&e.benchmarkVersion===version);
  const rows:LeaderboardRow[]=[];for(const e of entries){if(typeof e.metrics.overallPassAt1!=='number')continue;
  const metrics:Record<string,number>={};
- for(const [k,v] of Object.entries({pass5:e.metrics.passAt5,std:e.metrics.overallPassAt1Std,ux:e.metrics.meanUxScore}))if(typeof v==='number')metrics[k]=v;
- for(const [k,v] of Object.entries(e.metrics))if(typeof v==='number')metrics[k]=v;
+ for(const [k,v] of Object.entries({std:e.metrics.overallPassAt1Std,ux:e.metrics.meanUxScore}))if(typeof v==='number')metrics[k]=v;
+ for(const [k,v] of Object.entries(e.metrics))if(typeof v==='number' && k!=='overallPassAt1Std')metrics[k==='overallPassAt1'?'passAt1':k]=v;
  for(const [domain,values] of Object.entries((e.metrics.domains||{}) as Record<string,Record<string,unknown>>))for(const [k,v] of Object.entries(values))if(typeof v==='number')metrics[domain+':'+k]=v;
  const [model,memory]=e.model.split(' + ');
  rows.push({model,score:e.metrics.overallPassAt1,setting:e.reasoningLabel&&e.reasoningLabel!=='default'?e.reasoningLabel:undefined,harness:memory||e.agent||undefined,submitter:e.organization,verified:e.verificationStatus==='verified',date:e.submissionDate,cost:typeof e.metrics.costPerTask==='number'?e.metrics.costPerTask:undefined,metrics});}

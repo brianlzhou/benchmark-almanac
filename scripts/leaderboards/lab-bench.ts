@@ -7,7 +7,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2407.10362";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "lab-bench",
+  benchmark: "lab-bench", static: 'paper',
   url: "https://www.futurehouse.org/research-announcements/lab-bench-measuring-capabilities-of-language-models-for-biology-research",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

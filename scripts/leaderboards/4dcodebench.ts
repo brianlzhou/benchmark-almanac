@@ -1,4 +1,5 @@
 // 4DCodeBench: published overall score across all 200 scenes, including penalties for missing renders.
+// Read open-weight marks, rendered scene counts and real and synthetic scene statistics.
 // The source defines overall as the mean of five reconstruction families. Costs and output tokens are means per task.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -20,7 +21,28 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any>(FEED); await new Promise(r=>setTimeout(r,1100)); const registry=await fetchJson<any>('https://4dcodebench.com/models.json');
-      return d.models.map((r:any)=>{const m=registry.models.find((m:any)=>m.key===r.run);if(!m)throw new Error('Unknown model run '+r.run);return {model:m.name,setting:m.effort||undefined,harness:r.harness,score:r.overall,cost:r.cost_usd,tokens:r.out_tokens,metrics:Object.fromEntries(Object.entries({...r.families,elo:r.elo,humanElo:r.human_elo,totalTokens:r.tokens,cost:r.cost_usd,steps:r.steps}).filter(([,v])=>typeof v==='number'&&Number.isFinite(v)))};});
+      return d.models.map((r:any) => {
+        const model = registry.models.find((m:any) => m.key === r.run);
+        if (!model) throw new Error('Unknown model run ' + r.run);
+        const metrics: Record<string,number> = {
+          ...r.families, elo:r.elo, humanElo:r.human_elo, totalTokens:r.tokens, cost:r.cost_usd,
+          steps:r.steps, rendered:r.rendered,
+        };
+        for (const split of ['real', 'synthetic']) {
+          const stats = r.by_split?.[split];
+          if (!stats) continue;
+          metrics[split+'Elo'] = stats.elo;
+          metrics[split+'HumanElo'] = stats.human_elo;
+          metrics[split+'Vqa'] = stats.vqa;
+          metrics[split+'Cost'] = stats.cost_usd;
+          metrics[split+'TotalTokens'] = stats.tokens;
+        }
+        return {
+          model:model.name, open:model.open, setting:model.effort || undefined, harness:r.harness,
+          score:r.overall, cost:r.cost_usd, tokens:r.out_tokens,
+          metrics:Object.fromEntries(Object.entries(metrics).filter(([,v]) => Number.isFinite(v))),
+        };
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

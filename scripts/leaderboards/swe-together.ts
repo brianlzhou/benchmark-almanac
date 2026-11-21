@@ -1,5 +1,5 @@
 // SWE-Together pass@1 percentage. Output plus reasoning tokens and API dollars are per task.
-// The site uses the opencode harness with two trials; pass-squared, judge, corrections, and time remain metrics.
+// The site uses the opencode harness with two trials. Pass^2 requires both trials to succeed.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text, num } from '../lib/html.ts';
@@ -39,7 +39,7 @@ const board: Leaderboard = {
       const value=(key:string)=>text(block.match(new RegExp(`class="[^"]*${key}[^"]*">([\\s\\S]*?)<\\/(?:span|div)>`))?.[1]??'');
       const model=value('lbb-name');const score=numeric(value('lbb-p1'));if(!model||score===undefined)continue;
       const metrics:Record<string,number>={};
-      for(const [key,cls,scale] of [['passSquared','lbb-p2',1],['judge','c-judge',1],['corrections','c-corr',1],['latency','c-min',60]] as const){const n=numeric(value(cls));if(n!==undefined)metrics[key]=n*scale;}
+      for(const [key,cls,scale] of [['pass2','lbb-p2',1],['judge','c-judge',1],['corrections','c-corr',1],['latency','c-min',60]] as const){const n=numeric(value(cls));if(n!==undefined)metrics[key]=n*scale;}
       const cost=numeric(value('c-usd'));const tokenText=value('c-tok');const t=num(tokenText);const tokens=t===undefined?undefined:t*(/k$/i.test(tokenText)?1000:/m$/i.test(tokenText)?1e6:1);
       rows.push({model:identity(model),score,harness:'opencode',cost,tokens,metrics});
     }

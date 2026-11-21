@@ -3,7 +3,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = "https://arxiv.org/html/1705.04146";
-const board: Leaderboard = {benchmark:"aqua-rat",url:URL,feed:URL,terms:PAPER_TERMS,
+const board: Leaderboard = {benchmark:"aqua-rat", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
  async fetch() {
   const table=paperTables(await paperHtml(URL)).map(grid).find(t=>JSON.stringify(t[0]) === "[\"Model\",\"Perplexity\",\"BLEU\",\"Accuracy\"]");
   if(!table)throw new Error('Reviewed overall table missing');

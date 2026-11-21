@@ -23,10 +23,28 @@ const board: Leaderboard = {
     const t = tables(await fetchText(PAGE)).find((rows) => rows[0]?.[0]?.text === 'Model' && rows[0]?.[1]?.text === 'Overall');
     if (!t) throw new Error('video leaderboard table not found');
     const rows: LeaderboardRow[] = [];
-    for (const r of t.slice(1)) {
+    const parts: NonNullable<Leaderboard['parts']> = {};
+    let open: boolean | undefined;
+    for (const r of t.slice(2)) {
+      if (r.length === 1) {
+        open = /open source/i.test(r[0].text) ? true : r[0].text === 'Commercial' ? false : undefined;
+        continue;
+      }
       const score = num(r[1]?.text);
-      if (r.length > 2 && r[0]?.text && score !== undefined) rows.push({ model: r[0].text, score });
+      if (!r[0]?.text || score === undefined) continue;
+      const metrics: Record<string, number> = {};
+      for (const [i, header] of t[1].entries()) {
+        const group = t[0][2 + Math.floor(i / 4)]?.text;
+        const value = num(r[i + 2]?.text);
+        if (!group || value === undefined) continue;
+        const average = header.text === 'Avg.';
+        const key = group[0].toLowerCase() + group.slice(1).replaceAll(' ', '') + (average ? '' : header.text);
+        metrics[key] = value;
+        parts[key] = {name: average ? group : header.text, group: average ? 'Task group' : group};
+      }
+      rows.push({model: r[0].text, score, open, metrics});
     }
+    board.parts = parts;
     return rows;
   },
 };

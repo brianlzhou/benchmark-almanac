@@ -1,0 +1,9 @@
+// HyDRA-Bench measures end-to-end accuracy for agents that interleave SQL and retrieval tools.
+// This importer reads Table 2 of the paper and uses Accavg as the headline score.
+import type {Leaderboard,LeaderboardRow} from './types.ts';
+import {pdfText} from '../lib/boards/pdf-text.ts';
+import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://www2.cs.uh.edu/~fyan/Paper/Feng-COLM26.pdf';
+const vals:[string,string,number,number,number,number,number][]=[['GPT-4o','',0.3045,0.3039,0.3989,0.4824,0.5457],['GPT-4.1','',0.3734,0.3779,0.4638,0.5390,0.6015],['GPT-5','',0.3842,0.3870,0.4614,0.5275,0.5786],['Claude-Sonnet-4.5','',0.3510,0.3478,0.4143,0.4689,0.5061],['Claude-Opus-4.5','',0.5056,0.5097,0.5615,0.5991,0.6284],['Qwen3-4B','',0.1396,0.1338,0.2026,0.2794,0.3399],['Qwen3-8B','',0.1402,0.1393,0.2165,0.2913,0.3704],['Qwen3-14B','',0.2056,0.2070,0.2992,0.3878,0.4674],['Qwen3-32B','',0.2703,0.2742,0.3609,0.4523,0.5267],['Qwen3-4B','GRPO',0.4391,0.4341,0.5295,0.6003,0.6537],['Qwen3-4B','TRACE-GRPO',0.4633,0.4634,0.5588,0.6245,0.6814],['Qwen3-8B','GRPO',0.4851,0.4812,0.5710,0.6383,0.6874],['Qwen3-8B','TRACE-GRPO',0.5391,0.5374,0.6189,0.6830,0.7289]];
+const board:Leaderboard={benchmark:'hydra-bench-snowflake',static:'paper',url:'https://huggingface.co/datasets/Snowflake/HyDRA-Bench',feed:FEED,terms:'The paper is publicly available. Cite the paper and follow its terms.',parts:{bestAt1:'Best@1',bestAt2:'Best@2',bestAt4:'Best@4',bestAt8:'Best@8'},async fetch(){const b=await pdfText(FEED);if(!b.includes('Table 2: Main results on HyDRA-Bench'))throw new Error('Table 2 missing');return checked(vals.map(([model,setting,score,b1,b2,b4,b8])=>({model,setting:setting||undefined,score:score*100,metrics:{bestAt1:b1*100,bestAt2:b2*100,bestAt4:b4*100,bestAt8:b8*100}})),13)}};
+export default board;

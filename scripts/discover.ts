@@ -35,7 +35,7 @@ const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: num
   dwarkesh: { run: dwarkesh },
   'prime-intellect-blog': { run: primeBlog },
   bluesky: { run: bluesky, seconds: 120 },
-  x: { run: xGrok, seconds: 600 },
+  x: { run: xGrok, seconds: 900 },
   'hf-daily-papers': { run: hfDailyPapers },
   arxiv: { run: arxiv, seconds: 150 },
   'openreview-eval-track': { run: openreview, seconds: 120 },

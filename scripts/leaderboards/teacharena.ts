@@ -1,0 +1,4 @@
+// TeachArena evaluates language models on source-grounded teaching workflows across three stages.
+// The importer reads the paper's overall leaderboard score, the unweighted mean of the three stages.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2605.14322';const board:Leaderboard={benchmark:'teacharena',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,async fetch(){const t=grid(paperTables(await paperHtml(URL))[5]);if(!t)throw Error('TeachArena table missing');const rows=t.slice(1).map(r=>({model:r[1],score:Number(r[5]),metrics:{stage1:Number(r[2]),stage2:Number(r[3]),stage3:Number(r[4])}}));return checked(rows.filter(r=>r.model&&Number.isFinite(r.score)),17);}};export default board;

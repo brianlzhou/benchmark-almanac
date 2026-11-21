@@ -5,7 +5,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2511.01846';
 const board: Leaderboard = {
-  benchmark: 'imo-answerbench', parts: {
+  benchmark: 'imo-answerbench', static: 'paper', parts: {
   Algebra: { name: 'Algebra', group: 'Domain' },
   Combinatorics: { name: 'Combinatorics', group: 'Domain' },
   Geometry: { name: 'Geometry', group: 'Domain' },

@@ -1,0 +1,5 @@
+// USIM evaluates vision-language-action policies on underwater navigation and manipulation tasks.
+// The paper's online table reports overall success rate across 700 trials for four named policies.
+import type { Leaderboard, LeaderboardRow } from './types.ts'; import { fetchText } from '../lib/util.ts';
+const FEED='https://arxiv.org/html/2510.07869';
+const board:Leaderboard={benchmark:'usim-underwater-robot-tasks',static:'paper',url:FEED,feed:FEED,terms:'The paper authors publish these results in the arXiv HTML table.',async fetch(){const src=await fetchText(FEED);const block=src.slice(src.indexOf('id="S4.T4"'),src.indexOf('id="S4.T4"')+25000).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');const names=['OpenVLA','π 0.5','GR00T N1.5','U0 (Ours)'];const out:LeaderboardRow[]=[];for(const name of names){const i=block.indexOf(name);if(i<0)continue;const m=block.slice(i,i+3000).match(/(\d+\.\d+)%\s*\((\d+\/700)\)/);if(!m)continue;out.push({model:name,score:Number(m[1]),trials:700})}if(out.length<2)throw new Error('Missing USIM online result rows');return out;}};export default board;

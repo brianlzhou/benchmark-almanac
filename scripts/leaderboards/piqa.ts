@@ -1,6 +1,6 @@
 // PIQA (Physical Interaction QA). The AI2 board at leaderboard.allenai.org no longer resolves, so this reads
 // the PIQA Leaderboard table on the authors' own page, yonatanbisk.com/piqa/, a static HTML table of test
-// accuracy, rank, team, baseline configuration and paper or repository link. Human and random reference rows (no rank), the majority-class baseline are skipped. Anonymous model submissions remain unlisted. The table
+// accuracy, team, baseline configuration and paper or repository link. Human and random reference rows (no rank), the majority-class baseline are skipped. Anonymous model submissions remain unlisted. The table
 // has not changed since 2020, so most entries are BERT-era systems that have no record in data/models.json.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -36,7 +36,6 @@ const board: Leaderboard = {
         score,
         submitter,
         link: href,
-        metrics: { rank: Number(r[0].text) },
         setting: /^Baseline\s+/.test(institution) ? institution.slice(9) : /^Zero-shot/i.test(model) ? 'zero-shot' : undefined,
         ...(blend ? {
           setting: 'zero-shot',

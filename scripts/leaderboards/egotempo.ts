@@ -4,7 +4,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2503.13646';
 const board: Leaderboard = {
-  benchmark: 'egotempo', parts: {
+  benchmark: 'egotempo', static: 'paper', parts: {
   AS: { name: 'Action sequence', group: 'Task type' },
   AC: { name: 'Action counting', group: 'Task type' },
   TE: { name: 'Temporal event ordering', group: 'Task type' },

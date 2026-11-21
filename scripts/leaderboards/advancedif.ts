@@ -1,10 +1,12 @@
+// Table 3 reports the average and three category scores for each model and reasoning mode.
 import type { Leaderboard } from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2511.10507';
 const board: Leaderboard = {
-  benchmark: 'advancedif', parts: {
+  benchmark: 'advancedif', static: 'paper', parts: {
+  CIF: { name: 'Single-turn Complex IF', group: 'Category' },
   CC: { name: 'Carried context', group: 'Category' },
   SS: { name: 'System steerability', group: 'Category' },
 }, url: URL, feed: URL + ' (Table 3 average)', terms: PAPER_TERMS,

@@ -3,7 +3,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/2507.07999';
 const board: Leaderboard = {
-  benchmark: 'treebench', parts: {
+  benchmark: 'treebench', static: 'paper', parts: {
   Attributes: { name: 'Attributes', group: 'Task type' },
   Material: { name: 'Material', group: 'Task type' },
   OCR: { name: 'OCR', group: 'Task type' },

@@ -1,0 +1,4 @@
+// WorldSimBench evaluates video generators in open-ended embodied scenarios.
+// The importer reads the paper's overall open-ended accuracy table.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2410.18072';const board:Leaderboard={benchmark:'worldsimbench',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,async fetch(){const t=grid(paperTables(await paperHtml(URL))[6]);const rows=t.slice(1).map(r=>({model:r[0],score:Number(r[8]),metrics:{bc:Number(r[1]),fc:Number(r[2]),ia:Number(r[3]),sa:Number(r[4]),vc:Number(r[5]),tj:Number(r[6]),ei:Number(r[7])}}));return checked(rows.filter(r=>r.model&&Number.isFinite(r.score)),6);}};export default board;

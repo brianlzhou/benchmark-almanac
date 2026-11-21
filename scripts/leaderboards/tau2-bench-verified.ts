@@ -65,7 +65,7 @@ const board: Leaderboard = {
       const row = rows.find(x => x.model === model && x.setting === setting);
       if (!row) continue;
       row.metrics ??= {};
-      for (const [key, col] of [['reportedCost', 6], ['scorePerDollar', 7], ['inputTokensTotal', 3], ['outputTokensTotal', 4], ['tokensTotal', 5]] as const) {
+      for (const [key, col] of [['reportedCost', 6], ['scorePerDollar', 7], ['runInputTokens', 3], ['runOutputTokens', 4], ['runTotalTokens', 5]] as const) {
         const value = parseFloat(r[col].replace(/[$,]/g, '')) * (/M$/.test(r[col]) ? 1e6 : 1);
         if (Number.isFinite(value)) row.metrics[key] = value;
       }

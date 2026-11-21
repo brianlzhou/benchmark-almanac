@@ -1,0 +1,42 @@
+// Dubesor rates chess games in mixed, reasoning and continuation modes. Read the official text snapshot for each rating, uncertainty and per-game cost.
+import type { Leaderboard } from './types.ts';
+import { fetchText } from '../lib/util.ts';
+import { markdownTables } from '../lib/boards/github-markdown.ts';
+
+const FEED = "https://dubesor.de/chess/chess-leaderboard-llm.txt";
+const board: Leaderboard = {
+  benchmark: "dubesor-ai-chess",
+  url: "https://dubesor.de/chess/chess-leaderboard",
+  feed: FEED,
+  terms: "The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/ The text snapshot is allowed by robots.txt.",
+  async fetch() {
+    const source = await fetchText(FEED);
+    const rows = [];
+    for (const setting of ['Mixed Modes', 'Reasoning', 'Continuation']) {
+      const section = source.split('## Detailed Player Statistics: 5+ games, ' + setting + ' (')[1]?.split('## ')[0];
+      const count = Number(section?.match(/^(\d+) models\)/)?.[1]);
+      const table = markdownTables(section ?? '')[0];
+      if (!count || table?.length !== count + 1 || table[0].join('|') !== '#|Model|Elo|Cost|Games|W-D-L|Acc|Blunder|WR|Mat|Turns|Tok|Spd|Legal') throw new Error('Incomplete Dubesor ' + setting);
+      for (const [, name, elo, cost, games, wdl, ...stats] of table.slice(1)) {
+        if (['maia5-1500', 'random-mover', 'Human'].includes(name) || elo === '-') continue;
+        const rating = elo.match(/^(\d+)(?: ±(\d+))?$/);
+        if (!rating || !Number(games)) throw new Error('Invalid Elo for ' + name);
+        const score = Number(rating[1]);
+        const spread = Number(rating[2]);
+        const [wins, draws, losses] = wdl.split('-').map(Number);
+        const metrics: Record<string, number> = { wins, draws, losses };
+        ['accuracy','blunderRate','winRate','material','turns','tokensPerMove','secondsPerMove'].forEach((key, i) => {
+          if (stats[i] !== '-') metrics[key] = parseFloat(stats[i]);
+        });
+        stats[7].split(' / ').forEach((v, i) => {
+          if (v !== '-') metrics[setting === 'Mixed Modes' ? (i ? 'legalContinuation' : 'legalReasoning') : 'legal'] = parseFloat(v);
+        });
+        rows.push({ model: name.replace(/ ˟$/, ''), setting, score, trials: Number(games), metrics,
+          ...(Number.isFinite(spread) ? { low: score - spread, high: score + spread } : {}),
+          ...(cost.includes('$') ? { cost: Number(cost.replace(/^~?\$/, '')) } : {}) });
+      }
+    }
+    return rows;
+  },
+};
+export default board;

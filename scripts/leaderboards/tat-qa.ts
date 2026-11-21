@@ -11,7 +11,7 @@ const board: Leaderboard = {
 
  async fetch() {
 const t=tables(await fetchText(FEED)).find(t=>t[0]?.[4]?.text==='F1');if(!t)throw new Error('Missing TAT-QA table');const rows:LeaderboardRow[]=[];
-for(const r of t.slice(1)){const model=r[1]?.text,score=num(r[4]?.text);if(!model||/Human Performance/i.test(model)||score===undefined)continue;const em=num(r[3]?.text);rows.push({model,score,metrics:em===undefined?undefined:{exactMatch:em}});}return rows;
+for(const r of t.slice(1)){const model=r[1]?.text,score=num(r[4]?.text);if(!model||/Human Performance/i.test(model)||score===undefined)continue;const em=num(r[3]?.text);const stamp=Date.parse(r[5]?.text+' UTC');const size=model.match(/(?:\(|-|\s)(\d+(?:\.\d+)?)B\)?$/i);rows.push({model,score,date:Number.isFinite(stamp)?new Date(stamp).toISOString().slice(0,10):undefined,submitter:r[2]?.text && r[2].text!=='-' ? r[2].text:undefined,params:size?Number(size[1]):undefined,metrics:em===undefined?undefined:{exactMatch:em}});}return rows;
  },
 };
 export default board;

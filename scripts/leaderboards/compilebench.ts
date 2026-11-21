@@ -8,7 +8,7 @@
 // The page's two Pareto charts read their own inline data (`const dataJson = "..."`, also read as JSON): the
 // "CompileBench Cost" chart's total_cost, the US dollars of one pass over all tasks, is kept as `cost`
 // (costPer 'run'), and the "CompileBench Speed" chart's total_time, its seconds, as metrics.time. Attempts
-// passed (attempts_passed_rate, pass@1) is kept as metrics.pass1 (0 to 100).
+// passed (pass@1), task counts, attempt counts, timing components and final context tokens are metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsonAt } from '../lib/html.ts';
@@ -19,7 +19,7 @@ const MARK = 'const data = [{"model":';
 interface Entry {
   model?: string;
   tasks_passed_rate?: number;
-  attempts_passed_rate?: number;
+  attempts_passed_rate?: number; tasks_total?:number; tasks_passed?:number; attempts_total?:number; attempts_passed?:number;
 }
 
 /** model_name -> the x value of one of the page's scatter charts (chart-cost or chart-time). */
@@ -52,18 +52,29 @@ const board: Leaderboard = {
     if (at < 0) throw new Error('CompileBench ranking data not found');
     const costs = chartData(html, 'chart-cost', 'total_cost');
     const times = chartData(html, 'chart-time', 'total_time');
+    const costAt=html.indexOf('const costs = [');
+    const details=new Map(costAt<0 ? [] : jsonAt<{model:string; total_llm_inference_seconds:number;
+      total_command_execution_seconds:number;total_final_context_tokens:number}[]>(html,costAt+'const costs = '.length).map(r=>[r.model,r]));
     const rows: LeaderboardRow[] = [];
     for (const e of jsonAt<Entry[]>(html, at + MARK.indexOf('['))) {
       if (!e.model || typeof e.tasks_passed_rate !== 'number') continue;
       const budget = e.model.match(/-thinking-(\d+k)$/);
+      const d=details.get(e.model);
+      const metrics:Record<string,number>={};
+      for (const [key,value] of Object.entries({tasks:e.tasks_total,tasksPassed:e.tasks_passed,attemptsPassed:e.attempts_passed,
+        totalInferenceSeconds:d?.total_llm_inference_seconds,totalCommandSeconds:d?.total_command_execution_seconds,
+        finalContextTokens:d?.total_final_context_tokens})) if (typeof value==='number') metrics[key]=value;
+      const time=times.get(e.model);
+      if (time!==undefined && e.tasks_passed) metrics.secondsPerCompletedTask=time/e.tasks_passed;
       rows.push({
         model: budget ? e.model.slice(0, budget.index) : e.model,
+        trials:e.attempts_total,
         score: e.tasks_passed_rate * 100,
         setting: budget ? `thinking ${budget[1]}` : undefined,
         cost: costs.get(e.model),
-        metrics: {
+        metrics: { ...metrics,
           ...(times.has(e.model) ? { time: times.get(e.model)! } : {}),
-          ...(typeof e.attempts_passed_rate === 'number' ? { pass1: e.attempts_passed_rate * 100 } : {}),
+          ...(typeof e.attempts_passed_rate === 'number' ? { passAt1: e.attempts_passed_rate * 100 } : {}),
         },
       });
     }

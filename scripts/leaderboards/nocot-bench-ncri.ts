@@ -9,7 +9,7 @@ const board:Leaderboard={benchmark:'nocot-bench-ncri',url:'https://github.com/ne
  for(const r of csv){
   const score=num(r.ncri);if(!r.model_id||score===undefined)continue;
   const metrics:Record<string,number>={ranked:r.ncri_ranked==='True'?1:0,usesFiller:r.ncri_uses_filler==='True'?1:0};
-  for(const [key,col] of Object.entries({ciLow:'ncri_lo95',ciHigh:'ncri_hi95',rank:'ncri_rank'})){const n=num(r[col]);if(n!==undefined)metrics[key]=n;}
+  for(const [key,col] of Object.entries({ciLow:'ncri_lo95',ciHigh:'ncri_hi95'})){const n=num(r[col]);if(n!==undefined)metrics[key]=n;}
   const setting='NCRI 15.2; '+(r.ncri_uses_filler==='True'?r.ncri_filler_recipe:'no filler')+'; '+r.source;
   const filler=num(r.ncri_with_filler);
   if(filler!==undefined&&r.ncri_uses_filler!=='True'){

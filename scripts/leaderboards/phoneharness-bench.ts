@@ -4,7 +4,7 @@ import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {checked} from '../lib/boards/arxiv-span-tables.ts';
 import {paperTables,grid} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2606.14832";
-const board:Leaderboard={benchmark:'phoneharness-bench', parts: {
+const board:Leaderboard={benchmark:'phoneharness-bench', static: 'paper', parts: {
   device: { name: 'Device', group: 'Task type' },
   singleApp: { name: 'Single app', group: 'Task type' },
   toolAssisted: { name: 'Tool assisted', group: 'Task type' },

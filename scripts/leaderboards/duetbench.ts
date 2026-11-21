@@ -14,7 +14,7 @@ const board: Leaderboard = {
   terms: 'Fireworks terms restrict automated extraction. Benchmark Almanac credits Decagon and Fireworks and links the published source.',
   aliases: {'Claude 5 Sonnet':'claude-sonnet-5'},
   async fetch() {
-    const d = await fetchJson<{benchmarks:{id:string; results:{model:string; provider:string; metrics:Record<string,Metric>}[]}[]}>(FEED);
+    const d = await fetchJson<{benchmarks:{id:string; results:{model:string; provider:string; raw?:{ci?:{lo:number;hi:number}}; metrics:Record<string,Metric>}[]}[]}>(FEED);
     const t = d.benchmarks.find(b => b.id === 'customer-support/duetbench-diagnosis');
     if (!t) throw new Error('DuetBench Diagnosis board missing');
     const rows: LeaderboardRow[] = [];
@@ -23,7 +23,10 @@ const board: Leaderboard = {
       if (typeof score !== 'number' || !Number.isFinite(score)) continue;
       const metrics: Record<string, number> = {};
       for (const [k,v] of Object.entries(r.metrics)) if (k !== 'score' && typeof v.value === 'number') metrics[k] = v.value;
-      rows.push({model:r.model, score, setting:r.provider.split('·').slice(1).join('·').trim() || undefined, cost:r.metrics.cost_per_task?.value ?? undefined, tokens:r.metrics.outputTokens?.value ?? undefined, metrics});
+      if (Number.isFinite(metrics.duration_per_task)) metrics.latency = metrics.duration_per_task;
+      if (Number.isFinite(metrics.cachedInput)) metrics.cachedTokens = metrics.cachedInput;
+      if (Number.isFinite(metrics.uncachedInput) && Number.isFinite(metrics.cachedInput)) metrics.inputTokens = metrics.uncachedInput + metrics.cachedInput;
+      rows.push({model:r.model, score, low:r.raw?.ci?.lo, high:r.raw?.ci?.hi, setting:r.provider.split('·').slice(1).join('·').trim() || undefined, cost:r.metrics.cost_per_task?.value ?? undefined, tokens:r.metrics.outputTokens?.value ?? undefined, metrics});
     }
     if (!rows.length) throw new Error('DuetBench Diagnosis scores missing');
     return rows;

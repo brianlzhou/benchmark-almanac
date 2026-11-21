@@ -1,7 +1,7 @@
 // JailbreakBench reports attack success rate over its harmful-behavior set.
 // Attack method, defense and threat model are whole-benchmark configurations, not task subsets.
 // The catalog's benign behaviors are used for other metrics, not the ASR denominator.
-// Artifact links identify Vicuna v1.5 and Llama 2 Chat snapshots. Undated closed models stay unlisted.
+// The source separates open and closed models. Artifact links identify Vicuna v1.5 and Llama 2 Chat snapshots. Undated closed models stay unlisted.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
@@ -26,7 +26,7 @@ const board: Leaderboard = {
         if(model==='Llama-2-7B' && html.includes('llama-2-7b-chat-hf'))model='Llama-2-7B-Chat';
         if(/^(GPT-4|GPT-3.5-Turbo)$/i.test(model))model+=' (snapshot unspecified)';
         const queries=num(c[7]);
-        out.push({model,score,setting:'Defense: '+c[2]+'; '+c[5],harness:c[4],
+        out.push({model,score,open:i===0,link:r[9]?.html.match(/href="(https?:\/\/[^"]+)"/)?.[1],setting:'Defense: '+c[2]+'; '+c[5],harness:c[4],
           ...(queries===undefined?{}:{metrics:{averageQueries:queries*(/k/i.test(c[7])?1000:1)}})});
       }
     }

@@ -13,7 +13,7 @@ export async function catRows(game:string, metric:string):Promise<LeaderboardRow
     // Harness-only entries and undated model families stay unlisted.
     if (/^(?:OpenAI Codex|GPT Codex|Claude Code|Qwen Code(?: CLI)?|Gemini CLI)$/i.test(model)) model+=' [base model unspecified]';
     if (/^(?:Qwen 3 Coder|Gemini 2.5 Pro|Doubao Seed 1.6)$/i.test(model)) model+=' [variant unspecified]';
-    return {model,score:r.score,setting:m?.[2].toLowerCase(),metrics:{rank:r.rank}};
+    return {model,score:r.score,setting:m?.[2].toLowerCase()};
   });
   if(!rows.length)throw new Error(`CATArena ${game} empty`);
   return rows;

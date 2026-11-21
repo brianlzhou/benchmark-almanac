@@ -5,7 +5,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2403.03218';
 export default {
- benchmark:'wmdp-chemistry',url:'https://arxiv.org/abs/2403.03218',feed,terms:PAPER_TERMS,
+ benchmark:'wmdp-chemistry', static: 'paper',url:'https://arxiv.org/abs/2403.03218',feed,terms:PAPER_TERMS,
  async fetch():Promise<LeaderboardRow[]> {
   const ts=flatPaperTables(await paperHtml(feed)).map(grid);
   const t=ts.find(t=>t[1]?.[4]==='Chem');

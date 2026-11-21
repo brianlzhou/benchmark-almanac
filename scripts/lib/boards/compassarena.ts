@@ -16,7 +16,7 @@ export function compassArena(multimodal=false):Leaderboard{
    const d=response.data,rows:LeaderboardRow[]=[];
    for(const r of d.rankings){
     if(!r.model||!Number.isFinite(r.eloRating))continue;
-    const metrics:Record<string,number>={votes:r.votes,rank:r.rankingElo,rankUB:r.rankingUB,rankChange:r.rankingChanges,poolModels:d.totalModels,poolVotes:d.totalVotes};
+    const metrics:Record<string,number>={votes:r.votes,upperBoundRank:r.rankingUB,rankChange:r.rankingChanges,poolModels:d.totalModels,poolVotes:d.totalVotes};
     const ci=r.eloCI95?.match(/^\+(\d+(?:\.\d+)?)\/-([\d.]+)$/);
     if(ci){metrics.ciLow=r.eloRating-Number(ci[2]);metrics.ciHigh=r.eloRating+Number(ci[1]);}
     rows.push({model:r.model,score:r.eloRating,date:d.lastUpdate,metrics});

@@ -4,7 +4,7 @@
 // (0 to 100). The harness column is the agent; $/CKPT, the cost of one checkpoint (the unit the agent
 // solves), is the cost. Strict Solve, Erosion and Verbosity are kept in metrics as "strictSolve", "erosion"
 // and "verbosity". Additional published runs come from the serialized data prop.
-// Harness versions belong to the harness; published rank is a metric, not a setting.
+// Harness versions belong to the harness.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, jsonAfter } from '../lib/html.ts';
@@ -60,7 +60,7 @@ const board: Leaderboard = {
       const existing = originalRows.findIndex((x,i) => !used.has(i) && x.model === r.model && x.harness === r.agent && x.setting === effort && x.score === score);
       if (existing >= 0) { used.add(existing); rows[existing].harness=[r.agent,r.agentVersion].filter(Boolean).join(' '); continue; }
       rows.push({model:r.model,score,harness:[r.agent,r.agentVersion].filter(Boolean).join(' '),setting:effort,
-        cost:r.cost_per_checkpoint,metrics:{publishedRank:r.rank,strictSolve:r.pct_checkpoints_solved,coreSolve:r.pct_checkpoints_core_solved,erosion:r.erosion_mean,verbosity:r.verbosity_mean}});
+        cost:r.cost_per_checkpoint,metrics:{strictSolve:r.pct_checkpoints_solved,coreSolve:r.pct_checkpoints_core_solved,erosion:r.erosion_mean,verbosity:r.verbosity_mean}});
     }
     const seen=new Set<string>();return rows.filter(r=>{const key=JSON.stringify([r.model,r.harness,r.setting]);if(seen.has(key))return false;seen.add(key);return true;});
   },

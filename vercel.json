@@ -6,6 +6,21 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/benchmarks/factscore-precision/",
+      "destination": "/benchmarks/factscore/",
+      "permanent": true
+    },
+    {
+      "source": "/benchmarks/programbench-almost/",
+      "destination": "/benchmarks/programbench/",
+      "permanent": true
+    },
+    {
+      "source": "/benchmarks/programbench-tests-passed/",
+      "destination": "/benchmarks/programbench/",
+      "permanent": true
+    },
+    {
       "source": "/reporting/",
       "destination": "/insights/reporting/",
       "permanent": true

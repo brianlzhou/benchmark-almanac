@@ -22,13 +22,7 @@ const board: Leaderboard = {
         const name = r[1]?.replace(/[*†‡]/g, '').trim();
         const score = num(r[2]);
         if (!name || /^(?:human|random|oracle)(?:\b|$)/i.test(name) || score === undefined) continue;
-        const metrics: Record<string, number> = {};
-        for (let i = 0; i < t.head.length; i++) {
-          if (i === (1) || i === (2)) continue;
-          const value = num(r[i]);
-          if (value !== undefined) metrics[t.head[i]] = value;
-        }
-        out.push({ model: identity(name), score: score * 1, metrics });
+        out.push({ model: identity(name), score: score * 1 });
       }
     }
     if (!out.length) throw new Error("mmt-bench: no score rows in the expected tables");

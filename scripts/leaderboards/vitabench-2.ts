@@ -2,7 +2,7 @@
 // non-thinking models, each with a two-row header: # | Model | Full Context | Agentic Memory | RAG Memory,
 // then Avg@4 | Pass@4 | Pass^4 under each memory setting. The page sorts by Avg@4 with full context (a
 // fraction, shown here as 0 to 100), which is the score. The table a row comes from becomes the setting.
-// Full context Pass@4 and Pass^4 are kept as metrics.pass4 and metrics.passHat4 (0 to 100).
+// Full context Pass@4 and Pass^4 are kept as metrics.passAt4 and metrics.pass4 (0 to 100).
 // Agentic Memory and RAG Memory are separate harness rows with the same published metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -32,7 +32,7 @@ const board: Leaderboard = {
         const pass4 = t[1]?.[1]?.text === 'Pass@4' ? num(r[offset+1]?.text) : undefined;
         const passHat4 = t[1]?.[2]?.text === 'Pass^4' ? num(r[offset+2]?.text) : undefined;
         const rank = num(r[0]?.text);
-        const metrics = { ...(rank !== undefined ? { fullContextRank: rank } : {}), ...(pass4 === undefined ? {} : { pass4: pass4 * 100 }), ...(passHat4 === undefined ? {} : { passHat4: passHat4 * 100 }) };
+        const metrics = { ...(rank !== undefined ? { fullContextRank: rank } : {}), ...(pass4 === undefined ? {} : { passAt4: pass4 * 100 }), ...(passHat4 === undefined ? {} : { pass4: passHat4 * 100 }) };
         rows.push({ model: r[1].text, score: score * 100, trials: 4, harness, setting: k === 0 ? 'thinking' : 'non-thinking', ...(Object.keys(metrics).length ? { metrics } : {}) });
         }
       }

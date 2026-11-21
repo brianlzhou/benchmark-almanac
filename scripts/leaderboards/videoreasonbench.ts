@@ -1,4 +1,4 @@
-// VideoReasonBench: overall video reasoning accuracy in percent from the official table. Retain six reasoning-category accuracies, thinking status, and explicitly reported model sizes; exclude human and section-header rows.
+// VideoReasonBench: overall video reasoning accuracy in percent from the official table. Retain six reasoning-category accuracies, thinking status, open weights and active parameter counts in billions. We exclude human and section-header rows.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables, text } from '../lib/html.ts';
@@ -26,16 +26,24 @@ const board: Leaderboard = {
     for (const t of tables(await fetchText(FEED))) {
       const head = t[0]?.map(c => c.text) ?? [];
       if (!(head.includes('Predict Operation'))) continue;
+      let open: boolean | undefined;
       for (const r of t.slice(1)) {
+        if (r.length === 1) {
+          if (r[0].text === 'Open-source Models') open = true;
+          if (r[0].text === 'Proprietary Models') open = false;
+          continue;
+        }
         const name = (/^(Qwen2.5-VL|InternVL3|LLaVA-Video|LLaVA-OneVision)$/.test(r[0]?.text) ? r[0].text + '-' + r[1].text : r[0]?.text)?.replace(/[🏅🥇🥈🥉†‡*]/gu, '').trim();
         const score = num(r[9]?.text);
         if (!name || /^(?:human|random|oracle)(?:\b|$)/i.test(name) || score === undefined) continue;
         const metrics: Record<string, number> = {};
+        const size = r[1]?.text.match(/^(\d+(?:\.\d+)?)B$/);
+        if (size) metrics.activeParamsB = Number(size[1]);
         for (let i = 3; i < Math.min(head.length, r.length); i++) {
           if (i === 0 || i === 9) continue;
           const v = num(r[i]?.text); if (v !== undefined) metrics[head[i]] = v;
         }
-        out.push({ model: identity(name), score: score * 1, setting: r[2]?.text === '✓' ? 'thinking' : 'non-thinking', metrics });
+        out.push({ model: identity(name), open, score: score * 1, setting: r[2]?.text === '✓' ? 'thinking' : 'non-thinking', metrics });
       }
     }
     if (!out.length) throw new Error("videoreasonbench: expected score table missing");

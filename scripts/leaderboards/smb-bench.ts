@@ -1,3 +1,4 @@
+// Profit over 18 tasks, with per-quarter cost, margin diagnostics and the configured per-call output limit.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson, fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
@@ -34,11 +35,21 @@ const board: Leaderboard = {
     const d = await fetchJson<{board: {models: {key: string; name: string; runs: number; profitUsd: Record<string, number>; costPerRunUsd: number; dailyUsd: number[]; byTask: number[][]}[]}}>(FEED);
     const ts = markdownTables(await fetchText(CARD));
     const configs = ts.find(t => t[0]?.some(c => /served|model id/i.test(c)));
+    const margin = ts.find(t=>t[0]?.includes('Own margin'));
+    const controls = ts.find(t=>t[0]?.includes('Active minus control'));
     const builds = ts.find(t => t[0]?.includes('Harness build'));
     const rows: LeaderboardRow[] = d.board.models.map(r => {
       const config = configs?.find(x => x[0] === r.key);
       const build = builds?.find(x => x[0].replace(' (high)', '') === r.name) ?? builds?.find(x => x[0] === 'The first nine models');
       const metrics: Record<string, number> = {validRuns: r.runs, plannedRuns: 54, tasks: 18, simulatedDays: 90};
+      const changed = margin?.find(x=>x[1]===r.key);
+      const control = controls?.find(x=>x[0]===r.key);
+      const diagnostics = {changedMarginScore:changed?.[2],ownMargin:changed?.[4],changedCost:changed?.[6],
+        controlMarginScore:control?.[1],activeMinusControl:control?.[4],maxOutputTokens:config?.[3]};
+      for (const [key, cell] of Object.entries(diagnostics)) {
+        const value = Number(cell?.replaceAll(',',''));
+        if (cell?.trim() && Number.isFinite(value)) metrics[key]=value;
+      }
       for (const [k, v] of Object.entries(r.profitUsd)) metrics[`profit_${k}`] = v;
       r.dailyUsd.forEach((v, i) => metrics[`profit_day${i}`] = v);
       r.byTask.forEach((v, i) => metrics[`task${i + 1}_finalProfit`] = v.at(-1)!);

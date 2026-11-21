@@ -23,10 +23,14 @@ const board: Leaderboard = {
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {
-type R={model:{name:string;modelType?:string};meanTask:number;scoresByTask:Record<string,number>;meanPublic?:number;meanPrivate?:number;experiments?:Record<string,unknown>;embeddingDim?:number};
+type R={model:{name:string;modelType?:string;openWeights?:boolean;license?:string;opennessScore?:number;memoryUsageMb?:number};totalParamsB?:number;activeParamsB?:number;maxTokens?:number;zeroShotPct?:number;meanTask:number;scoresByTask:Record<string,number>;meanPublic?:number;meanPrivate?:number;experiments?:Record<string,unknown>;embeddingDim?:number};
 const data=await fetchJson<{rows:R[]}>(FEED);const rows:LeaderboardRow[]=[];
 for(const r of data.rows){if(!r.model?.name||!Number.isFinite(r.meanTask))continue;const metrics:Record<string,number>=Object.fromEntries(Object.entries(r.scoresByTask).filter(([,v])=>Number.isFinite(v)));if(Number.isFinite(r.meanPublic))metrics.public=r.meanPublic!;if(Number.isFinite(r.meanPrivate))metrics.private=r.meanPrivate!;
- rows.push({model:r.model.name,score:r.meanTask,setting:['NDCG@10',r.model.modelType,r.embeddingDim?'embedding dimensions '+r.embeddingDim:undefined,r.experiments?JSON.stringify(r.experiments):undefined].filter(Boolean).join('; '),metrics});}return rows;
+ for (const [key,value] of Object.entries({activeParamsB:r.activeParamsB, maxTokens:r.maxTokens, embeddingDim:r.embeddingDim,
+   zeroShotPct:r.zeroShotPct, opennessScore:r.model.opennessScore, memoryUsageMb:r.model.memoryUsageMb})) {
+   if (typeof value === 'number' && Number.isFinite(value) && value >= 0) metrics[key] = value;
+ }
+ rows.push({model:r.model.name,params:r.totalParamsB ?? undefined,open:r.model.openWeights ?? undefined,license:r.model.license || undefined,score:r.meanTask,setting:['NDCG@10',r.model.modelType,r.embeddingDim?'embedding dimensions '+r.embeddingDim:undefined,r.experiments?JSON.stringify(r.experiments):undefined].filter(Boolean).join('; '),metrics});}return rows;
  },
 };
 export default board;

@@ -10,7 +10,7 @@ const board: Leaderboard = {
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
 
  async fetch() {
-const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Avg. Reward'));if(!t)throw new Error('No leaderboard');return t.slice(1).map(r=>({model:r[1].text.replace(/ Best$/,''),score:num(r[3].text)!,metrics:{OSWorld:num(r[2].text)!,averageReward:num(r[4].text)!,averageSteps:num(r[5].text)!}}));
+const t=tables(await fetchText(FEED)).find(t=>t[0]?.some(c=>c.text==='Avg. Reward'));if(!t)throw new Error('No leaderboard');return t.slice(1).map(r=>({model:r[1].text.replace(/ Best$/,''),score:num(r[3].text)!,metrics:{OSWorld:num(r[2].text)!,averageReward:num(r[4].text)!,steps:num(r[5].text)!}}));
  },
 };
 export default board;

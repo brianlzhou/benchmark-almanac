@@ -38,7 +38,7 @@ const board: Leaderboard = {
           }
         }
         const rank = num(r[0]?.text);
-        if (rank !== undefined) metrics.rank = rank;
+        if (rank !== undefined) metrics.publishedTableRank = rank;
         out.push({ model: identity(name), score: score * 1, setting: undefined, metrics });
       }
     }

@@ -24,7 +24,7 @@ const board: Leaderboard = {
     for (const r of await lechMazurTable(REPO, 'master', /^50-50 Ranking leaderboard$/)) {
       const score = Number(r.Weighted);
       const [confab, nonResponse] = [Number(r['Confab %']), Number(r['Non-Resp %'])];
-      const metrics = Number.isFinite(confab) && Number.isFinite(nonResponse) ? { confab, nonResponse, rank: Number(r.Rank) } : undefined;
+      const metrics = Number.isFinite(confab) && Number.isFinite(nonResponse) ? { confab, nonResponse } : undefined;
       if (r.Model && Number.isFinite(score)) rows.push({ ...lechMazurName(r.Model), score, metrics });
     }
     return rows;

@@ -13,7 +13,7 @@ const percent = (s: string) => {
   return Number(match[1]);
 };
 const board: Leaderboard = {
-  benchmark: 'financebench', url: 'https://github.com/patronus-ai/financebench', feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'financebench', static: 'paper', url: 'https://github.com/patronus-ai/financebench', feed: FEED, terms: PAPER_TERMS,
   aliases: { 'Llama2 70B Chat': 'llama-2-70b' },
   async fetch() {
     const table = (await paperTables(FEED)).find(t => t[0]?.map(c => c.text).join('|') === 'Model|Configuration|Correct answer|Incorrect answer|Failed to answer|Total');

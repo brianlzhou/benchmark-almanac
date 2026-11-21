@@ -5,7 +5,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2203.10244';
 export default {
-  benchmark:'chartqa', parts: {
+  benchmark:'chartqa', static: 'paper', parts: {
   human: { name: 'Human written', group: 'Split' },
   ...Object.fromEntries(['Bar', 'Line', 'Pie'].map(name => [name, { name, group: 'Chart type' }])),
   ...Object.fromEntries(['Data Retrieval', 'Visual', 'Compositional', 'Visual Compositional'].map(name => [

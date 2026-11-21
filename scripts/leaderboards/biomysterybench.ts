@@ -39,9 +39,9 @@ const board: Leaderboard = {
       const output = matched?.avg_output_tokens ?? (measured && matched?.token_totals?.output_tokens != null ? matched.token_totals.output_tokens / measured : undefined);
       const total = r[headers.indexOf('Tokens / Test')]?.text.match(/^([\d.,]+)([kKmM]?)$/);
       const metrics: Record<string, number> = {};
-      if (total) metrics.totalTokensPerTest = Number(total[1].replace(/,/g, '')) * ({ k: 1e3, m: 1e6 }[total[2].toLowerCase()] ?? 1);
+      if (total) metrics.totalTokens = Number(total[1].replace(/,/g, '')) * ({ k: 1e3, m: 1e6 }[total[2].toLowerCase()] ?? 1);
       if (time !== undefined) metrics.time = time;
-      if (matched?.stderr != null) metrics.standardError = matched.stderr;
+      if (matched?.stderr != null) metrics.stderr = matched.stderr;
       return name && value !== undefined ? [{ model: name, score: value, setting: 'Vals AI harness, v11 full set', cost: num(r[cost]?.text), harness: 'Vals AI', trials: 3, tokens: output, metrics }] : [];
     });
     if (!rows.length) throw new Error('BioMysteryBench Vals rows missing');

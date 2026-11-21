@@ -39,7 +39,10 @@ const board: Leaderboard = {
         const value=c[head.indexOf(key)];const n=value && /\d/.test(value)?num(value):undefined;
         if(n!==undefined)metrics[key]=n;
       }
-      rows.push({ metrics, model: c[iName].replace(/\s*[†‡*]+$/, '').trim(), score, cost: perK !== undefined ? perK / 1000 : undefined });
+      const size = c[head.indexOf('parameters')]?.match(/([\d.]+)\s*([MB])\b/i);
+      const weights = c[head.indexOf('weights')];
+      rows.push({ metrics, params: size ? Number(size[1]) / (size[2].toUpperCase() === 'M' ? 1000 : 1) : undefined,
+        open: weights === 'open' ? true : weights === 'closed' ? false : undefined, model: c[iName].replace(/\s*[†‡*]+$/, '').trim(), score, cost: perK !== undefined ? perK / 1000 : undefined });
     }
     return rows;
   },

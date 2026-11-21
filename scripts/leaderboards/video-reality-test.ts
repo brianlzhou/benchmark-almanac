@@ -30,7 +30,7 @@ const board: Leaderboard = {
     if (!audio) previousModel = model;
     if (!model) throw new Error('Audio row without preceding model');
     return {model, setting:audio ? 'audio enabled' : undefined, score:num(r[8].text)!,
-    metrics:Object.fromEntries(t[0].map((h,i)=>[h.text,i!==0 && i!==8?num(r[i]?.text):undefined]).filter((p):p is [string,number]=>typeof p[1]==='number'))
+    metrics:Object.fromEntries(t[0].map((h,i)=>[h.text === 'Rank' ? 'reviewerRank' : h.text,i!==0 && i!==8?num(r[i]?.text):undefined]).filter((p):p is [string,number]=>typeof p[1]==='number'))
   };});
   if(!rows.length) throw new Error('video-reality-test has no scored rows');
   return rows;
