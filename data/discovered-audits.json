@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "items": [
     {
       "key": "https://arxiv.org/abs/2611.21315",
@@ -25,7 +25,7 @@
       "source": "AINews",
       "date": "2026-11-17",
       "first": "2026-11-17",
-      "last": "2026-11-19",
+      "last": "2026-11-20",
       "benchmarks": [
         "linuxarena"
       ],
@@ -41,7 +41,7 @@
       "source": "arXiv",
       "date": "2026-11-17",
       "first": "2026-11-18",
-      "last": "2026-11-19",
+      "last": "2026-11-20",
       "benchmarks": [
         "llm-aggrefact"
       ],
