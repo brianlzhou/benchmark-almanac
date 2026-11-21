@@ -2,72 +2,6 @@
   "updated": "2026-11-21",
   "items": [
     {
-      "key": "arenaagentcapability",
-      "name": "Arena Agent Capability",
-      "title": "Arena Agent Capability (Arena leaderboard subset agent_capability)",
-      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_capability",
-      "first": "2026-11-20",
-      "last": "2026-11-20",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "Arena",
-          "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_capability"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 15,
-      "decision": "catalog",
-      "org": "LMArena"
-    },
-    {
-      "key": "arenaagenttaskoutcome",
-      "name": "Arena Agent Task Outcome",
-      "title": "Arena Agent Task Outcome (Arena leaderboard subset agent_task_outcome)",
-      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_task_outcome",
-      "first": "2026-11-20",
-      "last": "2026-11-20",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "Arena",
-          "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_task_outcome"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 15,
-      "decision": "catalog",
-      "org": "LMArena"
-    },
-    {
-      "key": "arenaagenttoolefficiency",
-      "name": "Arena Agent Tool Efficiency",
-      "title": "Arena Agent Tool Efficiency (Arena leaderboard subset agent_tool_efficiency)",
-      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_tool_efficiency",
-      "first": "2026-11-20",
-      "last": "2026-11-20",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "Arena",
-          "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_tool_efficiency"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 15,
-      "decision": "catalog",
-      "org": "LMArena"
-    },
-    {
       "key": "ifbenchtest",
       "name": "IFBench_test",
       "title": "allenai/IFBench_test",
@@ -88,29 +22,6 @@
       "score": 15,
       "decision": "catalog",
       "org": "allenai"
-    },
-    {
-      "key": "enterpriseopsautomationbench",
-      "name": "enterpriseops-automationbench",
-      "title": "100 stateful enterprise workflow tasks.",
-      "url": "https://hub.harborframework.com/datasets/servicenow-ai-org/enterpriseops-automationbench",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "Harbor Hub",
-          "url": "https://hub.harborframework.com/datasets/servicenow-ai-org/enterpriseops-automationbench"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 13,
-      "decision": "catalog",
-      "org": "servicenow-ai-org",
-      "repo": "https://hub.harborframework.com/datasets/servicenow-ai-org/enterpriseops-automationbench"
     },
     {
       "key": "safeteenteenmentalhealthandsafety",
@@ -135,348 +46,10 @@
       "org": "Vals AI"
     },
     {
-      "key": "tau2benchtelecom",
-      "name": "τ²-Bench-Telecom",
-      "title": "τ²-Bench-Telecom",
-      "url": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "MiniMax-M2 model card",
-          "url": "https://huggingface.co/MiniMaxAI/MiniMax-M2"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "nvbenchgt",
-      "name": "NVbench-GT",
-      "title": "NVbench-GT",
-      "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Ming-3.0-tts-tiny model card",
-          "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny"
-        },
-        {
-          "source": "Ming-3.0-tts-0.5B model card",
-          "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "wscevalttseasy",
-      "name": "WSC-Eval-TTS-easy",
-      "title": "WSC-Eval-TTS-easy",
-      "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Ming-3.0-tts-tiny model card",
-          "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny"
-        },
-        {
-          "source": "Ming-3.0-tts-0.5B model card",
-          "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "wscevalttshard",
-      "name": "WSC-Eval-TTS-hard",
-      "title": "WSC-Eval-TTS-hard",
-      "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Ming-3.0-tts-tiny model card",
-          "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-tiny"
-        },
-        {
-          "source": "Ming-3.0-tts-0.5B model card",
-          "url": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "datingappbench",
-      "name": "DatingAppBench",
-      "title": "DatingAppBench",
-      "url": "https://x.com/shaped/status/2120565783554400495",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Don't Worry About the Vase",
-          "url": "https://thezvi.wordpress.com/2026/11/19/ai-195-opening-bell/"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "2611.26444",
-      "name": "Mind2Act World",
-      "title": "Mind2Act World: A Diagnostic Benchmark for Embodied Mind, Physical Action, and Mind-Action Composition in Robotic Manipulation",
-      "url": "https://huggingface.co/papers/2611.26444",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [
-        "hf",
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog",
-      "org": "Mind2Act-World",
-      "repo": "https://github.com/Mind2Act/Mind2Act_World",
-      "arxiv": "2611.26444",
-      "upvotes": 45,
-      "stars": 28
-    },
-    {
-      "key": "mmbenchentest",
-      "name": "MMBench-EN test",
-      "title": "MMBench-EN test",
-      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen2-VL-2B-Instruct model card",
-          "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "mmbenchcntest",
-      "name": "MMBench-CN test",
-      "title": "MMBench-CN test",
-      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen2-VL-2B-Instruct model card",
-          "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "mmbenchv11test",
-      "name": "MMBench-V1.1 test",
-      "title": "MMBench-V1.1 test",
-      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen2-VL-2B-Instruct model card",
-          "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "mmtbenchtest",
-      "name": "MMT-Bench test",
-      "title": "MMT-Bench test",
-      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen2-VL-2B-Instruct model card",
-          "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "hallbenchavg",
-      "name": "HallBench avg",
-      "title": "HallBench avg",
-      "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen2-VL-2B-Instruct model card",
-          "url": "https://huggingface.co/Qwen/Qwen2-VL-2B-Instruct"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "fullstackbenchen",
-      "name": "FullStackBench en",
-      "title": "FullStackBench en",
-      "url": "https://huggingface.co/Qwen/Qwen3.5-27B",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen3.5-27B model card",
-          "url": "https://huggingface.co/Qwen/Qwen3.5-27B"
-        },
-        {
-          "source": "Qwen3.5-35B-A3B model card",
-          "url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "fullstackbenchzh",
-      "name": "FullStackBench zh",
-      "title": "FullStackBench zh",
-      "url": "https://huggingface.co/Qwen/Qwen3.5-27B",
-      "first": "2026-11-20",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Qwen3.5-27B model card",
-          "url": "https://huggingface.co/Qwen/Qwen3.5-27B"
-        },
-        {
-          "source": "Qwen3.5-35B-A3B model card",
-          "url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
       "key": "agentarenaindex",
       "name": "Agent Arena Index",
       "title": "Agent Arena Index",
       "url": "https://x.com/arena/status/2123894102496555446",
-      "first": "2026-11-21",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "AINews",
-          "url": "https://latent.space/p/ainews-riemann-hypothesis-proved-twice-independently/"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "hospitalbench",
-      "name": "Hospital-bench",
-      "title": "Hospital-bench",
-      "url": "https://x.com/omarsar0/status/2123813529245429868",
-      "first": "2026-11-21",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "AINews",
-          "url": "https://latent.space/p/ainews-riemann-hypothesis-proved-twice-independently/"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "openaimedchembench",
-      "name": "OpenAI MedChemBench",
-      "title": "OpenAI MedChemBench",
-      "url": "https://x.com/OpenAI/status/2123856316187975756",
       "first": "2026-11-21",
       "last": "2026-11-21",
       "feeds": [],
@@ -515,48 +88,6 @@
       "decision": "catalog"
     },
     {
-      "key": "legalagent",
-      "name": "Legal Agent Benchmark",
-      "title": "Legal Agent Benchmark",
-      "url": "https://thezvi.wordpress.com/2026/11/16/fable-5-2-is-the-new-bazooka/",
-      "first": "2026-11-19",
-      "last": "2026-11-19",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Don't Worry About the Vase",
-          "url": "https://thezvi.wordpress.com/2026/11/16/fable-5-2-is-the-new-bazooka/"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "honeybench",
-      "name": "HoneyBench",
-      "title": "HoneyBench",
-      "url": "https://x.com/goodhart_labs/status/2120570580743471284",
-      "first": "2026-11-19",
-      "last": "2026-11-19",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "Don't Worry About the Vase",
-          "url": "https://thezvi.wordpress.com/2026/11/16/fable-5-2-is-the-new-bazooka/"
-        }
-      ],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
       "key": "monitorbenchgoalsandbagengineering",
       "name": "monitorbench-goal-sandbag-engineering",
       "title": "monitorbench-goal-sandbag-engineering",
@@ -575,114 +106,6 @@
       "general": true,
       "niche": false,
       "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "gdppdfaa",
-      "name": "GDPPDFAA",
-      "title": "GDPPDFAA in VLMEvalKit",
-      "url": "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/gdp_pdf_aa.py",
-      "first": "2026-11-17",
-      "last": "2026-11-17",
-      "feeds": [],
-      "curated": [],
-      "registries": [
-        {
-          "source": "VLMEvalKit",
-          "url": "https://github.com/open-compass/VLMEvalKit/blob/main/vlmeval/dataset/gdp_pdf_aa.py"
-        }
-      ],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 11,
-      "decision": "catalog"
-    },
-    {
-      "key": "2611.21099",
-      "name": "ForceHarness",
-      "title": "ForceHarness: Turning Force into Action and Physics for Frozen Frontier Models",
-      "url": "https://huggingface.co/papers/2611.21099",
-      "first": "2026-11-18",
-      "last": "2026-11-21",
-      "feeds": [
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 9,
-      "decision": "catalog",
-      "org": "Show Lab",
-      "repo": "https://github.com/showlab/ForceHarness",
-      "arxiv": "2611.21099",
-      "upvotes": 45,
-      "stars": 48
-    },
-    {
-      "key": "2611.23779",
-      "name": "TabBioMed",
-      "title": "TabBioMed: A Large-Scale Benchmark for Biomedical Tabular Learning",
-      "url": "https://arxiv.org/abs/2611.23779",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [
-        "arxiv",
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 9,
-      "decision": "catalog",
-      "repo": "https://github.com/AI-sandbox/TabBioMed",
-      "arxiv": "2611.23779",
-      "stars": 23,
-      "org": "TabBioMed",
-      "upvotes": 12
-    },
-    {
-      "key": "financeagentv21leaderboard",
-      "name": "Finance Agent v2.1 leaderboard",
-      "title": "vals-ai/finance_agent_v2_1-leaderboard",
-      "url": "https://huggingface.co/datasets/vals-ai/finance_agent_v2_1-leaderboard",
-      "first": "2026-11-19",
-      "last": "2026-11-19",
-      "feeds": [
-        "Hugging Face datasets with results"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 9,
-      "decision": "catalog",
-      "org": "vals-ai"
-    },
-    {
-      "key": "neonarena",
-      "name": "Neon. Arena",
-      "title": "Neon. Arena",
-      "url": "https://x.com/arena/status/2123192239761596566",
-      "first": "2026-11-19",
-      "last": "2026-11-21",
-      "feeds": [],
-      "curated": [
-        {
-          "source": "AINews",
-          "url": "https://latent.space/p/ainews-gemini-4-neon-gdm-s-opus-sol-contender/"
-        }
-      ],
-      "registries": [],
-      "stageA": 4,
-      "general": true,
-      "niche": false,
-      "score": 8,
       "decision": "catalog"
     },
     {
@@ -816,8 +239,8 @@
       "org": "Yonsei University",
       "repo": "https://github.com/jhxcho/voda",
       "arxiv": "2611.21383",
-      "upvotes": 31,
-      "stars": 18
+      "upvotes": 32,
+      "stars": 24
     },
     {
       "key": "2611.25005",
@@ -882,7 +305,7 @@
       "decision": "watch",
       "repo": "https://github.com/dengzhe-hou/S1CogBench",
       "arxiv": "2611.00911",
-      "upvotes": 2,
+      "upvotes": 4,
       "stars": 0
     },
     {
@@ -905,7 +328,7 @@
       "org": "NAVER AI Lab",
       "repo": "https://github.com/naver-ai/unfinished-bench",
       "arxiv": "2611.17460",
-      "upvotes": 8,
+      "upvotes": 9,
       "stars": 1
     },
     {
@@ -8068,6 +7491,29 @@
       "zonos2_technical_report"
     ],
     "hfBenchmarkResults": [
+      "pratikgx/bison-1-m5-pro-mac-mini-bench",
+      "pratikgx/groundhog-1-m5-pro-mac-mini-bench",
+      "zhaochenyang20/full-duplex-bench",
+      "unknownBrain/IMTB-20Hz",
+      "pratikgx/inkling-2-mini-m5-pro-mac-mini-tuning",
+      "d4x1/TRACE",
+      "BowenLuai/MMAU",
+      "jdbillio/ai-document-review-benchmark",
+      "JackChew/readproof-bench",
+      "HughieHu/deeplitsearch-bench",
+      "ma-pmo/jira-release-snapshots",
+      "flagline/message-moderation-eval",
+      "jasonzhuyansen/backlink-spam-doorway-domains-2026",
+      "jasonzhuyansen/indie-saas-payments-benchmark-2026",
+      "liaoyanqing666/Railbound-Bench",
+      "CC3369/NextUnit-Bench",
+      "GenData-Research/experiment-selection-v01b",
+      "alvi77/EGAL-Benchmark-1000",
+      "sarvamai/samvaad-bench-v2.1",
+      "WangyUQing12/PRISM-Dataset",
+      "w3joe/hypercast-multilayer-10ds-benchmark",
+      "Swindl/S1Arena-MM",
+      "divy123/sequential-router-v2",
       "SakanaAI/coffeebench-trajectories",
       "meshllm/skippy-inference-qualification",
       "youkijiudai/mcb-memory-decisions",
@@ -8100,7 +7546,6 @@
       "lance-format/winogrande-lance",
       "codesentineldata/capr-combat-amputation-prosthetic-rehabilitation",
       "trl-lib/asyncgrpo-stable-bench-runs",
-      "ma-pmo/jira-release-snapshots",
       "ma-pmo/jira-release-readiness",
       "ma-pmo/jira-release-slip",
       "raybell-md/maryland-bill-hearings",
@@ -8110,12 +7555,12 @@
       "convergent-robotics/saydo",
       "SirGrokkius/verimath-reason-v1-sample",
       "KCB1/SoftBench",
-      "divy123/sequential-router-v2",
       "donatas-t/impossible-lcb-verified",
       "danielrosehill/Microphone-Benchmarks",
       "avantium-app/european-trades-field-service-software-2026",
       "kairosmaterial/Magbench",
       "w3joe/hypercast-tslib15-multi-benchmark",
+      "PeterDAI/NoPeBench",
       "pratikgx/depth-pro-2-m5-pro-mac-mini-bench",
       "lance-format/openai-humaneval-lance",
       "lance-format/mbpp-lance",
@@ -8211,6 +7656,7 @@
       "joyboseroy/indus-sequences-nulls",
       "Sy-SU/OOD-Test-v2",
       "SaggyD2981/decision-model-order-invariance-benchmark",
+      "EmbodiedCity/HandWorldBench",
       "ArashNasr/anyrag-results",
       "ArashNasr/anyrag-benchmark",
       "jby20180901/BenchForge-alfred",

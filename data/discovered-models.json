@@ -14,7 +14,7 @@
           "url": "https://huggingface.co/tencent/Hy4-flash"
         },
         {
-          "source": "Hugging Face trending (#5)",
+          "source": "Hugging Face trending (#3)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/tencent/Hy4-flash"
         },
@@ -239,7 +239,7 @@
           "url": "https://huggingface.co/internlm/Sage-S2.1-Flash"
         },
         {
-          "source": "Hugging Face trending (#35)",
+          "source": "Hugging Face trending (#39)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/internlm/Sage-S2.1-Flash"
         }
@@ -373,7 +373,7 @@
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
         },
         {
-          "source": "Hugging Face trending (#26)",
+          "source": "Hugging Face trending (#24)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
         }
@@ -736,7 +736,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#56)",
+          "source": "Hugging Face trending (#63)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/IFM/PAN2"
         }
@@ -758,7 +758,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#9)",
+          "source": "Hugging Face trending (#14)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
         }
@@ -771,6 +771,28 @@
       "license": "apache-2.0",
       "likes": 454,
       "lab": "sensetime"
+    },
+    {
+      "key": "wemmvideo35ba3b",
+      "name": "WeMM-Video-35BA3B",
+      "url": "https://huggingface.co/tencent/WeMM-Video-35BA3B",
+      "first": "2026-11-21",
+      "last": "2026-11-21",
+      "sources": [
+        {
+          "source": "Hugging Face trending (#121)",
+          "kind": "hf-trending",
+          "url": "https://huggingface.co/tencent/WeMM-Video-35BA3B"
+        }
+      ],
+      "score": 5,
+      "org": "tencent",
+      "created": "2026-11-17",
+      "params": 36.2,
+      "weights": "open",
+      "license": "apache-2.0",
+      "likes": 26,
+      "lab": "tencent"
     },
     {
       "key": "sensenovaloop9bpreview",
@@ -1107,6 +1129,28 @@
       "lab": "tencent"
     },
     {
+      "key": "d12b",
+      "name": "d1-2B",
+      "url": "https://huggingface.co/LiquidAI/d1-2B",
+      "first": "2026-11-04",
+      "last": "2026-11-21",
+      "sources": [
+        {
+          "source": "Hugging Face trending (#58)",
+          "kind": "hf-trending",
+          "url": "https://huggingface.co/LiquidAI/d1-2B"
+        }
+      ],
+      "score": 4,
+      "org": "LiquidAI",
+      "created": "2026-10-24",
+      "params": 1.9,
+      "weights": "open",
+      "license": "lfm1.0",
+      "likes": 336,
+      "lab": "liquid-ai"
+    },
+    {
       "key": "haru4b",
       "name": "Haru-4B",
       "url": "https://huggingface.co/higurashi-ai/Haru-4B",
@@ -1114,7 +1158,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#6)",
+          "source": "Hugging Face trending (#8)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/higurashi-ai/Haru-4B"
         }
@@ -1135,7 +1179,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#40)",
+          "source": "Hugging Face trending (#45)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/speridlabs/idol"
         }
@@ -1155,7 +1199,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#16)",
+          "source": "Hugging Face trending (#9)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6"
         }
@@ -1176,7 +1220,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#10)",
+          "source": "Hugging Face trending (#5)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/inworld/voice-isolator"
         }
@@ -1196,7 +1240,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#24)",
+          "source": "Hugging Face trending (#28)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
         }
@@ -1228,28 +1272,6 @@
       "weights": "open",
       "license": "apache-2.0",
       "likes": 982
-    },
-    {
-      "key": "d12b",
-      "name": "d1-2B",
-      "url": "https://huggingface.co/LiquidAI/d1-2B",
-      "first": "2026-11-04",
-      "last": "2026-11-18",
-      "sources": [
-        {
-          "source": "Hugging Face trending (#78)",
-          "kind": "hf-trending",
-          "url": "https://huggingface.co/LiquidAI/d1-2B"
-        }
-      ],
-      "score": 4,
-      "org": "LiquidAI",
-      "created": "2026-10-24",
-      "params": 1.9,
-      "weights": "open",
-      "license": "lfm1.0",
-      "likes": 319,
-      "lab": "liquid-ai"
     },
     {
       "key": "matterseek",
@@ -43864,7 +43886,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#49)",
+          "source": "Hugging Face trending (#50)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
         }
@@ -50725,7 +50747,7 @@
       "last": "2026-11-21",
       "sources": [
         {
-          "source": "Hugging Face trending (#18)",
+          "source": "Hugging Face trending (#11)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/maxwell-model/Maxwell-V1-Flash"
         }
