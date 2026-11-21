@@ -10,6 +10,7 @@ const SETTING = 'Open LLM Leaderboard harness, raw accuracy';
 const board: Leaderboard = {
   benchmark: 'musr',
   host: 'Hugging Face',
+  verified: 'Marked as an official provider by the Open LLM Leaderboard.',
   url: 'https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard',
   feed: 'https://huggingface.co/datasets/open-llm-leaderboard/contents/resolve/main/data/train-00000-of-00001.parquet (MUSR Raw, model makers only)',
   terms: 'Public results dataset published by the board on Hugging Face, read through the dataset viewer API.',
@@ -25,6 +26,7 @@ const board: Leaderboard = {
         return { model: openLlmModel(r), metrics, open: true,
           params: r['#Params (B)'] > 0 ? r['#Params (B)'] : undefined,
           license: r['Hub License'] && r['Hub License'] !== 'unknown' ? r['Hub License'] : undefined,
+          verified: r['Official Providers'] === true,
           link: r.resultUrl,
           score: r['MUSR Raw'] * 100, setting: precision ? `${SETTING}, ${precision}` : SETTING, date: r['Submission Date'] || undefined };
       });

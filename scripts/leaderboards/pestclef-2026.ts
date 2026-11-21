@@ -4,7 +4,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://www.kaggle.com/api/i/competitions.LeaderboardService/GetLeaderboard";
 interface Entry { teamId: number; rank?: number; displayScore: string }
-interface Team { teamId:number; teamName:string; submissionCount:number }
+interface Team { teamId:number; teamName:string; submissionCount:number; lastSubmissionDate?: string }
 
 const board: Leaderboard = {
   benchmark: "pestclef-2026",
@@ -22,7 +22,8 @@ const board: Leaderboard = {
       if (!team?.teamName || !r.displayScore || !Number.isFinite(score)) throw new Error('Incomplete PestCLEF score');
       const metrics: Record<string,number> = { submissions: team.submissionCount };
       if (pub?.displayScore) metrics.publicF1 = Number(pub.displayScore);
-      return { model: team.teamName, submitter: team.teamName, score, metrics };
+      const date = team.lastSubmissionDate?.slice(0, 10);
+      return { model: team.teamName, submitter: team.teamName, score, ...(date ? { date } : {}), metrics };
     });
   },
 };

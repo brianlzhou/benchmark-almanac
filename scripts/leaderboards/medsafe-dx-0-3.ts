@@ -12,6 +12,7 @@ const board: Leaderboard = {
   if(d.headline_within_condition.headline_cases !== 900) throw new Error('v0.3 case count changed');
   const rows=Object.entries(d.headline_within_condition.rows).filter(([k])=>k.endsWith('|4aj')).map(([key,r])=>({
    model:key.split('|')[0], setting:'v0.3 full, prompt 4aj', score:r.score_z_bal.value,
+   low:r.score_z_bal.ci[0], high:r.score_z_bal.ci[1],
    metrics:{ciLow:r.score_z_bal.ci[0],ciHigh:r.score_z_bal.ci[1],underEscalation:r.U.value,overEscalation:r.O.value}
   }));
   if(rows.length<3)throw new Error('No v0.3 headline rows');return rows;

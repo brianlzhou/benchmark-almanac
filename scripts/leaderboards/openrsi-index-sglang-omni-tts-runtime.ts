@@ -25,11 +25,12 @@ const board: Leaderboard = {
     const runs = archive.submissions.filter(run => run.segment === 'Continuation')
     const scored = runs.filter(run => run.official_reward !== null)
     if (scored.length !== 1) throw new Error('Expected one official continuation reward in the OpenRSI archive')
-    const { complete, official_reward: score, throughput_qps: throughput } = scored[0]
+    const { complete, official_reward: score, throughput_qps: throughput, feedback_created_unix: feedbackCreated } = scored[0] as Submission & { feedback_created_unix?: number | null }
     if (!complete || typeof score !== 'number' || !Number.isFinite(score) ||
         typeof throughput !== 'number' || !Number.isFinite(throughput)) throw new Error('Invalid OpenRSI continuation result')
+    const date = typeof feedbackCreated === 'number' ? new Date(feedbackCreated * 1000).toISOString().slice(0, 10) : undefined
     return [{ model: 'GPT-6 Astra', harness: 'Codex', setting: 'xhigh; Continuation; archived continuation protocol, not v5',
-      score, metrics: { requestsPerSecond: throughput, submissions: runs.length } }]
+      score, date, metrics: { requestsPerSecond: throughput, submissions: runs.length } }]
   },
 }
 export default board

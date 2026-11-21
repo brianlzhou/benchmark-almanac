@@ -14,13 +14,17 @@ const board: Leaderboard = {
   async fetch() {
     const tables = flatPaperTables(await paperHtml(feed)).map(grid);
     const table = tables.find(t => t[0]?.at(-1) === 'ALL EDGES' && t[3]?.at(-1) === 'n=483');
-    if (!table || table[1].slice(1).join('|') !== [...parts.map(k => k.endsWith('overall') ? 'Overall' : k),'Overall'].join('|')) throw new Error('Missing edge accuracy columns');
+    const intervals = tables.find(t => t[0]?.join('|') === 'Model|Accuracy (%)|95% CI');
+    if (!table || !intervals || table[1].slice(1).join('|') !== [...parts.map(k => k.endsWith('overall') ? 'Overall' : k),'Overall'].join('|')) throw new Error('Missing edge accuracy columns');
+    const intervalByModel = new Map(intervals.slice(1).map(([model,,ci]) => [model.toLowerCase(), ci]));
     const rows: LeaderboardRow[] = [];
     for (const [label,...values] of table.slice(4)) {
       if (label.endsWith('baseline')) continue;
       if (values.length !== parts.length + 1) throw new Error('Incomplete edge accuracy row');
       const model = label.replace(/^\[1pt\/2pt\]\s*/, '');
-      rows.push({model,score:numberCell(values.at(-1)!),metrics:Object.fromEntries(parts.map((k,i) => [k,numberCell(values[i])]))});
+      const ci = intervalByModel.get(model.toLowerCase())?.match(/^([\d.]+)[–-]([\d.]+)$/);
+      if (!ci) throw new Error('Missing confidence interval for ' + model);
+      rows.push({model,score:numberCell(values.at(-1)!),low:Number(ci[1]),high:Number(ci[2]),metrics:Object.fromEntries(parts.map((k,i) => [k,numberCell(values[i])]))});
     }
     return checked(rows,44);
   },

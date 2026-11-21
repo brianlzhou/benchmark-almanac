@@ -8,14 +8,15 @@ const feed = 'https://arxiv.org/html/2601.15728';
 const board: Leaderboard = {
   benchmark: 'bird-python', static: 'paper', url: feed, feed,
   terms: 'The authors publish these tables in their paper. https://arxiv.org/abs/2601.15728',
+  verified: 'The paper marks rows that use verified references.',
   parts: { simple: 'Simple', moderate: 'Moderate', challenging: 'Challenging' },
   async fetch() {
     const tables = paperTables(await paperHtml(feed)).map(grid);
     const rows: LeaderboardRow[] = [];
-    function add(model: string, setting: string, cells: string[]) {
+    function add(model: string, setting: string, cells: string[], verified = false) {
       if (cells.length !== 4 || !cells.every(c => /^\d+(?:\.\d+)?$/.test(c))) throw new Error('Invalid pandas accuracy');
       const [simple, moderate, challenging, score] = cells.map(Number);
-      rows.push({model, score, setting, metrics: {simple, moderate, challenging}});
+      rows.push({model, score, setting, ...(verified ? {verified: true} : {}), metrics: {simple, moderate, challenging}});
     }
     for (const type of ['Verified', 'Setting']) {
       const table = tables.find(([header]) => header?.includes(type) && header.includes('Code Generation Accuracy (%)'));
@@ -28,7 +29,7 @@ const board: Leaderboard = {
           const sizeRow = table[i+1];
           if (sizeRow?.[2] !== '✗') throw new Error('Missing paired reference row');
           const size = sizeRow[0].match(/^\((\d+B)\)$/)?.[1];
-          add(row[0] + (size ? '-' + size : ''), 'Standard', row.slice(offset,offset+4));
+          add(row[0] + (size ? '-' + size : ''), 'Standard', row.slice(offset,offset+4), true);
         }
         if (type === 'Setting' && row[1] === 'LCF') add(row[0], 'Logical clarifications', row.slice(offset,offset+4));
       }

@@ -64,7 +64,8 @@ const board: Leaderboard = {
         if (fps) metrics.framesPerSecond = Number(fps[1]);
         const sampling = /^\d+$/.test(frames) ? frames + ' frames' : frames;
         const link = r[1]?.html.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1];
-        rows.push({ model, score, setting: [setting, sampling === '-' ? undefined : sampling].filter(Boolean).join(', '), date, link, metrics });
+        rows.push({ model, score, setting: [setting, sampling === '-' ? undefined : sampling].filter(Boolean).join(', '), date, link,
+          params: params ? Number(params[1]) : experts ? Number(experts[1]) * Number(experts[2]) : undefined, metrics });
       }
     }
     return rows;

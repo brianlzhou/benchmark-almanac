@@ -23,8 +23,12 @@ const board: Leaderboard = {
     const ci=find('95% CI half-width'), think=find('Think Final'), cap=find('S&T'), ind=find('Mach.'), lang=find('VI');
     const pct=(s:string)=>numberCell(s)*100/3;
     const rows:LeaderboardRow[]=[];
+    let open = false;
     for(const [rank,model,perfect,pass,raw,,final] of main.slice(1)){
-      if(!/^\d+$/.test(rank)) continue;
+      if(!/^\d+$/.test(rank)) {
+        open = rank === 'Open-source Dense' || rank === 'Open-source MoE';
+        continue;
+      }
       const interval=ci.find(r=>r[1]===model);
       if(!interval || interval[2]!==final) throw new Error('Missing score interval: '+model);
       const width=Number(interval[3].match(/\d+\.\d+$/)?.[0]);
@@ -37,7 +41,7 @@ const board: Leaderboard = {
         labels.forEach((k,i)=>{metrics[k]=pct(r[i+1]);});
       }
       const score=pct(final);
-      rows.push({model,setting:'Non-thinking',score,low:score-100*width/3,high:score+100*width/3,metrics});
+      rows.push({model,setting:'Non-thinking',score,low:score-100*width/3,high:score+100*width/3,metrics,open:open ? true : undefined});
     }
     for(const [model,,final] of think.slice(1))rows.push({model,setting:'Thinking',score:pct(final)});
     return checked(rows,30);

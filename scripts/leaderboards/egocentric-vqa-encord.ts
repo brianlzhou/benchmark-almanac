@@ -16,7 +16,11 @@ const board: Leaderboard = {
       const model = row[0]?.text.trim();
       const value = row[2]?.text.match(/([0-9]+(?:\.[0-9]+)?)\s*\(95% CI\s*([0-9.]+)\s*to\s*([0-9.]+)\)/);
       if (!model || !value) throw new Error('Encord leaderboard row changed');
-      rows.push({ model, score: Number(value[1]), low: Number(value[2]), high: Number(value[3]) });
+      const weights = row[3]?.text ?? '';
+      const params = weights.match(/([0-9]+(?:\.[0-9]+)?)B parameters/i);
+      rows.push({ model, score: Number(value[1]), low: Number(value[2]), high: Number(value[3]),
+        open: /\bOpen\b/i.test(weights) ? true : /\bProprietary\b/i.test(weights) ? false : undefined,
+        params: params ? Number(params[1]) : undefined });
     }
     if (rows.length < 2) throw new Error('Encord leaderboard has too few rows');
     return rows;

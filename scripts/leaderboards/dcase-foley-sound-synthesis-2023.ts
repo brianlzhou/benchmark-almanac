@@ -6,6 +6,7 @@ const board: Leaderboard = {
   benchmark: "dcase-foley-sound-synthesis-2023",
   url: "https://dcase.community/challenge2023/task-foley-sound-synthesis-results",
   feed: "https://dcase.community/challenge2023/task-foley-sound-synthesis-results",
+  verified: 'official DCASE challenge ranking',
   terms: "The organizers publish the scores. The results page names no license for score reuse. https://dcase.community/challenge2023/task-foley-sound-synthesis-results DCASE robots.txt permits the results path.",
   stats: { audioQuality: { name: 'Audio quality', unit: 'score', better: 'higher' }, categoryFit: { name: 'Category fit', unit: 'score', better: 'higher' }, diversity: { name: 'Diversity', unit: 'score', better: 'higher' }, fad: { name: 'Fréchet Audio Distance', unit: 'score', better: 'lower' } },
   async fetch() {
@@ -26,7 +27,7 @@ const board: Leaderboard = {
         const fad = screened[i].find(row => row[1]?.text === r[1].text);
         if (fad?.[6]?.text) metrics.fad = Number(fad[6].text);
         if (!r[4].text || !Object.values(metrics).every(Number.isFinite) || !Number.isFinite(Number(r[4].text))) throw new Error('Invalid listener rating');
-        return {model:r[1].text,setting:i === 0 ? 'Track A' : 'Track B',score:Number(r[4].text),metrics};
+        return {model:r[1].text,setting:i === 0 ? 'Track A' : 'Track B',score:Number(r[4].text),verified:Boolean(r[3]?.text.trim()),metrics};
       });
     });
   },

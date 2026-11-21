@@ -15,10 +15,13 @@ export default {
     const table = paperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0][1] === 'Method' && t[0].slice(2).map(s=>s.replace('\\uparrow','')).join('|') === names.join('|'));
     if (!table) throw new Error('Missing EVF-Bench comparison columns');
+    let type = '';
     return checked(table.slice(1).map(c => {
+      if (c[0]) type = c[0];
       if (c.length !== 8 || !c.slice(2).every(v=>v.endsWith('%'))) throw new Error('Incomplete EVF-Bench scores');
       const values = c.slice(2).map(v=>numberCell(v.slice(0,-1)));
       return {model:c[1], score:values.reduce((a,b)=>a+b,0)/names.length,
+        open:type === 'Open-source' ? true : type === 'Commercial' ? false : undefined,
         metrics:Object.fromEntries(names.map((key,i)=>[key,values[i]]))};
     }),10);
   },

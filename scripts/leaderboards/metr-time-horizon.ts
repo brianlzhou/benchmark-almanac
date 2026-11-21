@@ -55,7 +55,7 @@ export async function metrRows(feed: string): Promise<LeaderboardRow[]> {
     rows.push({
       model: names.get(base) ?? names.get(key) ?? base.replace(/_/g, '-'),
       score: Number(p50[1]),
-      ...(feed === metrFeed('1_1') && ciLow !== undefined && ciHigh !== undefined ? { low: ciLow, high: ciHigh } : {}),
+      ...(ciLow !== undefined && ciHigh !== undefined ? { low: ciLow, high: ciHigh } : {}),
       harness: agent && agent !== 'null' ? agent : undefined,
       date: block.match(/^ {4}release_date:\s*([\d-]+)/m)?.[1],
       ...(Object.keys(metrics).length ? { metrics } : {}),

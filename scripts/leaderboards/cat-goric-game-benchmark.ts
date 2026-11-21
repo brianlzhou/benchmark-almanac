@@ -23,8 +23,10 @@ const board: Leaderboard = {
       const passAt5 = cells[5].toLowerCase() === 'yes' ? 1 : 0;
       const levels = Number.parseFloat(cells[6].split('/')[0]);
       const deaths = cells[7].toLowerCase() === 'n/a' ? undefined : Number.parseFloat(cells[7]);
+      const size = cells[3].match(/^(\d+(?:\.\d+)?)([BM])$/i);
       if (![passAt1, passAt5, levels].every(Number.isFinite)) throw new Error('Invalid Cat-Goric row');
-      rows.push({ model: cells[2], score: passAt1, metrics: { passAt5, levelsCleared: levels, ...(deaths === undefined ? {} : { deaths }) } });
+      rows.push({ model: cells[2], score: passAt1, params: size ? Number(size[1]) / (size[2].toUpperCase() === 'M' ? 1000 : 1) : undefined,
+        metrics: { passAt5, levelsCleared: levels, ...(deaths === undefined ? {} : { deaths }) } });
     }
     if (rows.length < 2) throw new Error('Cat-Goric leaderboard has too few rows');
     return rows;

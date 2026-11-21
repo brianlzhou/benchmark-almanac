@@ -27,9 +27,16 @@ const board: Leaderboard = {
     const rows = await micro1Rows(PAGE, 'Mean', { Median: 'median', 'best@3': 'bestOf3', '95% CI': 'ci' });
     const html = await fetchText(PAGE);
     const all = tables(html).map(t=>t.map(r=>r.map(c=>c.text)));
+    const clean=(s:string)=>s.replace(/\*$/,'').trim();
+    const results = all.find(t => t[0]?.includes('Runs / matters'));
+    if (!results) throw new Error('LegalReasonBench run counts missing');
+    for (const row of rows) {
+      const source = results.find(r => clean(r[0]) === row.model);
+      const runs = source?.at(-1)?.match(/^(\d+)\s*\/\s*\d+$/);
+      if (runs) row.trials = Number(runs[1]);
+    }
     const costs=all.find(t=>t[0]?.includes('Solver cost per matter'));
     const usage=all.find(t=>t[0]?.includes('Output tokens'));
-    const clean=(s:string)=>s.replace(/\*$/,'').trim();
     for (const row of rows) {
       const cost=costs?.find(r=>clean(r[0])===row.model), use=usage?.find(r=>clean(r[0])===row.model);
       if(cost)row.cost=num(cost[1]);

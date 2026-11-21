@@ -16,12 +16,13 @@ const board: Leaderboard = {
     const table = tables.find(t => t[0]?.[1] === 'Benchathon' && t[1]?.join('|') === 'System / Group|n|Raw|Pass|n|Raw|Pass|n|Raw|Pass|Acc.');
     const roster = tables.find(t => t[0]?.slice(0, 3).join('|') === 'Provider|Alias|System');
     if (!table || !roster) throw new Error('Missing BenGER results or model identities');
-    const names = new Map(roster.slice(1).map(row => [row[1], row[2]]));
+    const names = new Map(roster.slice(1).map(row => [row[1], { system: row[2], weights: row[4] }]));
     const rows: LeaderboardRow[] = [];
     for (const row of table.slice(2)) {
       if (['Human (all)', 'traditional', 'co-creation'].includes(row[0])) continue;
-      const model = names.get(row[0]);
-      if (!model) throw new Error('Unknown BenGER system ' + row[0]);
+      const identity = names.get(row[0]);
+      if (!identity) throw new Error('Unknown BenGER system ' + row[0]);
+      const model = identity.system;
       const metrics: Record<string, number> = {};
       const scores: number[] = [];
       Object.keys(parts).forEach((part, index) => {
@@ -37,7 +38,7 @@ const board: Leaderboard = {
       });
       if (!/^\d+%$/.test(row[10])) throw new Error('Missing decision accuracy');
       metrics.doctrinalDecisionAccuracy = parseInt(row[10], 10);
-      rows.push({ model, score: scores.reduce((sum, value) => sum + value, 0) / scores.length, metrics });
+      rows.push({ model, score: scores.reduce((sum, value) => sum + value, 0) / scores.length, open: /^Open/i.test(identity.weights), metrics });
     }
     return checked(rows, 12);
   },

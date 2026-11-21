@@ -12,7 +12,7 @@ const board: Leaderboard = {
   stats: { latency:{name:'Latency',unit:'seconds',better:'lower'} },
   aliases: VALS_ALIASES,
   async fetch() {
-    const rows = await valsRows(SLUG);
+    const rows = await valsRows(SLUG, { cost: 'Cost / Task' });
     if (rows.length < 3) throw new Error(`Autoform-Hard: ${rows.length} models, expected at least 3`);
     return rows;
   },

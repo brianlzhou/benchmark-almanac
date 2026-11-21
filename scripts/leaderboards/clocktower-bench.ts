@@ -44,6 +44,7 @@ const board: Leaderboard = {
         setting: 'high effort',
         score,
         date: '2026-11-05',
+        low: Number(l[iLow]), high: Number(l[iHigh]),
         metrics: { ciLow: Number(l[iLow]), ciHigh: Number(l[iHigh]), detection: Number(l[iDet]), deception: Number(l[iDec]), games: Number(l[iGames]) },
       });
     }

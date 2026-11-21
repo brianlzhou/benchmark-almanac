@@ -9,6 +9,7 @@ const feed = "https://huggingface.co/spaces/zai-org/RPC-Bench/raw/main/data/lead
 const board: Leaderboard = {
   benchmark: 'rpc-bench', url, feed,
   terms: "The Hugging Face Space declares Apache License 2.0. https://huggingface.co/spaces/zai-org/RPC-Bench" ,
+  aliases: { 'Gemini-2.5-Pro': 'gemini-2-5-pro-jun-2025' },
   stats: {
     Conciseness: { name: 'Conciseness score', unit: 'score', better: 'higher' },
     Correctness: { name: 'Correctness score', unit: 'score', better: 'higher' },
@@ -29,7 +30,8 @@ const board: Leaderboard = {
       }
       const score = metrics.Informativeness;
       delete metrics.Informativeness;
-      return { model: link[1], setting: r['Input Config'], link: link[2], score, metrics };
+      const date = r.Date.replace(/^(\d{4})-(\d{1,2})-(\d{1,2})$/, (_, year, month, day) => `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
+      return { model: link[1], setting: r['Input Config'], link: link[2], date, score, metrics };
     });
   },
 };

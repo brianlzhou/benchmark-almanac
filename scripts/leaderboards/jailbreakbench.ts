@@ -27,7 +27,8 @@ const board: Leaderboard = {
         if(model==='Llama-2-7B' && html.includes('llama-2-7b-chat-hf'))model='Llama-2-7B-Chat';
         if(/^(GPT-4|GPT-3.5-Turbo)$/i.test(model))model+=' (snapshot unspecified)';
         const queries=num(c[7]);
-        out.push({model,score,open:i===0,link:r[9]?.html.match(/href="(https?:\/\/[^"]+)"/)?.[1],setting:'Defense: '+c[2]+'; '+c[5],harness:c[4],
+        const parsedDate = new Date(c[0]);
+        out.push({model,score,open:i===0,date:Number.isNaN(parsedDate.getTime()) ? undefined : parsedDate.toISOString().slice(0,10),link:r[9]?.html.match(/href="(https?:\/\/[^"]+)"/)?.[1],setting:'Defense: '+c[2]+'; '+c[5],harness:c[4],
           ...(queries===undefined?{}:{metrics:{averageQueries:queries*(/k/i.test(c[7])?1000:1)}})});
       }
     }

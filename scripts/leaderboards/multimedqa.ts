@@ -26,9 +26,11 @@ const board: Leaderboard = {
       if (!t[2]?.[0].startsWith('MedMCQA') || !t[3]?.[0].startsWith('PubMedQA')) throw new Error('Changed dataset columns');
       for (let col = i ? 2 : 1; col < t[0].length; col++) {
         const [model, mode] = t[0][col].split(' with ');
+        const parameterMatch = model.match(/(?:\(|\s)(\d+(?:\.\d+)?)\s*([BM])\b/i);
+        const params = parameterMatch ? Number(parameterMatch[1]) * (parameterMatch[2].toUpperCase() === 'M' ? 0.001 : 1) : undefined;
         const setting = mode ?? 'few-shot';
         const [medqa, medmcqa, pubmedqa] = t.slice(1).map(r => numberCell(r[col]));
-        rows.push({model, setting, score: medqa, metrics: {medqa, medmcqa, pubmedqa}});
+        rows.push({model, setting, score: medqa, ...(params === undefined ? {} : {params}), metrics: {medqa, medmcqa, pubmedqa}});
       }
     }
     const mmlu = tables.find(t => t[0]?.[0] === 'Topic' && t[1]?.[0] === 'Clinical knowledge');

@@ -9,6 +9,7 @@ const board: Leaderboard = {
   url: "https://dcase.community/challenge2024/task-sound-scene-synthesis-results",
   feed,
   terms: "DCASE robots.txt allows the results page and restricts image and theme paths. The page gives no separate score reuse license.",
+  verified: 'official DCASE challenge ranking',
   parts: {
     '1_0': { name: 'Foreground Fit average score', group: 'Foreground Fit' },
     '2_0': { name: 'Background Fit average score', group: 'Background Fit' },
@@ -49,7 +50,7 @@ const board: Leaderboard = {
       for (let i = 5; i <= 10; i++) {
         if (other[i]?.text && Number.isFinite(Number(other[i].text))) metrics[(i < 8 ? 'evaluation' : 'development') + fad[1][i - 1].text] = Number(other[i].text);
       }
-      rows.push({ model, score, metrics, link: feed + "#collapse-" + cells[2].text });
+      rows.push({ model, score, metrics, link: feed + "#collapse-" + cells[2].text, verified: true });
     }
     if (rows.length < 5) throw new Error('Incomplete DCASE leaderboard');
     return rows;
