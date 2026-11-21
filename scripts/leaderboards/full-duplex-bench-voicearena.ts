@@ -6,7 +6,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://voicearena.com/full-duplex-bench';
 const languages = ['Indian English', 'Hindi', 'Bengali', 'Punjabi', 'Gujarati', 'Marathi', 'Kannada', 'Telugu', 'Tamil', 'Malayalam'];
-const keys = ['pauseSr', 'turnSr', 'turnLatency', 'bcSr', 'bcJsd', 'bcFreq', 'intSr', 'intLatency', 'intRating', 'avgSr', 'rank'];
+const keys = ['pauseSr', 'turnSr', 'turnLatency', 'bcSr', 'bcJsd', 'bcFreq', 'intSr', 'intLatency', 'intRating', 'avgSr'];
 const metricNames: Record<string, { name: string; unit: string; better?: 'higher'|'lower'; note?: string }> = {
   pauseSr: { name: 'Pause success rate', unit: '%', better: 'higher' }, turnSr: { name: 'Turn success rate', unit: '%', better: 'higher' },
   turnLatency: { name: 'Turn latency', unit: 'seconds', better: 'lower' }, bcSr: { name: 'Backchannel success rate', unit: '%', better: 'higher' },
@@ -16,7 +16,7 @@ const metricNames: Record<string, { name: string; unit: string; better?: 'higher
 };
 const stats = Object.fromEntries(languages.flatMap(language => Object.entries(metricNames).map(([key, value]) => [language.replaceAll(' ', '') + '_' + key, { ...value, name: language + ' ' + value.name }])));
 const board: Leaderboard = {
-  benchmark: 'full-duplex-bench-voicearena', url: feed, feed, terms: 'Voice Arena publishes its public leaderboard at https://voicearena.com/full-duplex-bench.',
+  benchmark: 'full-duplex-bench-voicearena', url: 'https://voicearena.com/full-duplex-bench', feed, terms: 'Voice Arena publishes its public leaderboard at https://voicearena.com/full-duplex-bench.',
   parts: Object.fromEntries(languages.map(name => [name.replaceAll(' ', ''), name])),
   stats,
   headline: 'Voice Arena reports no cross-language score, so this is the plain mean of its ten language success rates.',
@@ -26,7 +26,7 @@ const board: Leaderboard = {
     if (!main) throw new Error('Missing application bundle');
     const indexUrl = new URL(main, feed);
     const index = await fetchText(indexUrl.href);
-    const chunk = /import\("\.\/(FullDuplexBench-[^"]+\.js)"\)/.exec(index)?.[1];
+    const chunk = /assets\/(FdbCaseViewer-[^".]+\.js)/.exec(index)?.[1];
     if (!chunk) throw new Error('Missing leaderboard bundle');
     const source = await fetchText(new URL(chunk, indexUrl).href);
     const columns = /language:\w+,model:\w+,([^}]+)\}\)\)/.exec(source)?.[1].split(',').map(field => field.split(':')[0]);
@@ -44,6 +44,13 @@ const board: Leaderboard = {
       metrics[lang] = cells[9]!;
       cells.forEach((value, i) => { if (value !== undefined && i !== 9) metrics[lang + '_' + keys[i]] = value; });
       byModel.set(id, metrics);
+    }
+    for (const language of languages) {
+      const lang = language.replaceAll(' ', '');
+      [...byModel.entries()]
+        .filter(([, metrics]) => Number.isFinite(metrics[lang]))
+        .sort(([, a], [, b]) => b[lang] - a[lang])
+        .forEach(([id], index) => { byModel.get(id)![lang + '_rank'] = index + 1; });
     }
     const rows: LeaderboardRow[] = [];
     for (const [id, metrics] of byModel) {

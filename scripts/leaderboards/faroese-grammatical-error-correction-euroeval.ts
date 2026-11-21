@@ -3,7 +3,7 @@ import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
 
-const FEED = "https://euroeval.com/assets/faroese_generative-B7HPp4JX.js";
+const FEED = "https://euroeval.com/leaderboards/faroese";
 const board: Leaderboard = {
   benchmark: "faroese-grammatical-error-correction-euroeval",
   url: "https://euroeval.com/leaderboards/faroese",
@@ -15,7 +15,14 @@ const board: Leaderboard = {
   },
   aliases: {"mistralai/Mistral-Small-3.2-24B-Instruct-2506": "mistral-small-3-2", "mistralai/Mistral-Small-3.1-24B-Instruct-2503": "mistral-small-3-1"},
   async fetch() {
-    const bundle = await fetchText(FEED);
+    const html = await fetchText(FEED);
+    const main = /<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/.exec(html)?.[1];
+    if (!main) throw new Error('Missing EuroEval application bundle');
+    const indexUrl = new URL(main, FEED);
+    const index = await fetchText(indexUrl.href);
+    const chunk = /(?:assets\/|\.\/)(faroese_generative-[^".]+\.js)/.exec(index)?.[1];
+    if (!chunk) throw new Error('Missing EuroEval Faroese bundle');
+    const bundle = await fetchText(new URL(chunk, indexUrl).href);
     const csv = bundle.match(/\n(Rank,Model,[\s\S]*?)\n`;export/)?.[1];
     if (!csv) throw new Error('Missing EuroEval CSV');
     const records = parseCsv(csv);

@@ -8,7 +8,7 @@ import { num } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/Emanual20/adbench-leaderboard/HEAD/README.md";
 const board: Leaderboard = {
   benchmark: "ad-bench",
-  url: "https://emanual20.github.io/adbench-leaderboard/",
+  url: "https://github.com/Emanual20/adbench-leaderboard",
   feed: FEED,
   terms: "Public maker README, no additional use restriction stated; raw.githubusercontent.com has no robots.txt.",
   stats: { passAt1: { name: 'Pass@1', unit: '%', better: 'higher' } },

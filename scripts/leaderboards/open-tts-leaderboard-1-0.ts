@@ -22,7 +22,7 @@ export function ttsRelease(benchmark:string,version:string,langCount:number,data
      board.parts={};
      for(const clone of [false,true]){
        if(rows.length) await new Promise(resolve=>setTimeout(resolve,1100));
-       const res=await fetch(feed,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({data:[version,'',35.3,50,languages.slice(0,langCount),datasets.slice(0,datasetCount),clone]}),signal:AbortSignal.timeout(60000)});
+       const res=await fetch(feed,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({data:[version,'',35.3,46,languages.slice(0,langCount),datasets.slice(0,datasetCount),clone]}),signal:AbortSignal.timeout(60000)});
        if(!res.ok) throw new Error('TTS table callback failed: '+res.status);
        const {event_id}=await res.json();
        if(!/^[a-f\d]+$/.test(event_id)) throw new Error('Missing TTS event');
@@ -32,7 +32,7 @@ export function ttsRelease(benchmark:string,version:string,langCount:number,data
        const valid=raw.replace(/"(?:\\.|[^"\\])*"|\bNaN\b/g, token=>token==='NaN'?'null':token);
        const t=JSON.parse(valid)[0].value as {headers:string[];data:(number|string|null)[][]};
        const get=(label:string)=>{const i=t.headers.indexOf(label);if(i<0) throw new Error('Missing '+label);return i;};
-       const score=get('Average WER ⬇️'),model=get('Model'),size=get('Size (B)'),license=get('License'),coverage=get('Coverage');
+       const score=t.headers.indexOf('Average WER ⬇️') >= 0 ? get('Average WER ⬇️') : get('Average ER ⬇️'),model=get('Model'),size=get('Size (B)'),license=get('License'),coverage=get('Coverage');
        for(const r of t.data){
          if(typeof r[score]!=='number' || !r[model]) throw new Error('Missing TTS mean or model');
          const metrics:Record<string,number>={};

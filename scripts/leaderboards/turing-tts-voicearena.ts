@@ -4,7 +4,7 @@ import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 
-const FEED = "https://voicearena.com/assets/reportParts-DjlAqoWw.js";
+const FEED = "https://voicearena.com/turing-tts";
 type System = { id: string; model: string; ttfaMs: number | null; medianDecisionSec: number };
 type Group = [string, string, string, string, number, number];
 function rate(groups: Group[]) {
@@ -26,7 +26,14 @@ const board: Leaderboard = {
     ttfaMs: { name: 'Time to first audio', unit: 'ms', better: 'lower' },
   },
   async fetch() {
-    const script = await fetchText(FEED);
+    const html = await fetchText(FEED);
+    const main = /<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/.exec(html)?.[1];
+    if (!main) throw new Error('Missing application bundle');
+    const indexUrl = new URL(main, FEED);
+    const index = await fetchText(indexUrl.href);
+    const chunk = /assets\/(turing-tts-[^".]+\.js)/.exec(index)?.[1];
+    if (!chunk) throw new Error('Missing Turing TTS bundle');
+    const script = await fetchText(new URL(chunk, indexUrl).href);
     const modelStart = script.search(/\[\{id:"[^"]+",model:"/);
     const groupStart = script.search(/\{"[^"]+":\[\["[FM]"/);
     const intervalStart = script.indexOf('{"All|All|All":');

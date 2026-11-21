@@ -14,6 +14,7 @@ const names: Record<string, string> = {
   hishab_conformer_large: 'Conformer Large (hishab)', whisper_medium: 'Whisper Medium',
   fastconformer_ctc: 'ehzawad FastConformer-CTC', wav2vec2: 'Wav2Vec2',
   whistle_bn_bd: 'Whistle bn-BD', whistle_bn_bd_a100: 'Whistle bn-BD',
+  rumble_bn: 'Rumble bn-BD', rumble_bn_rec: 'Rumble bn-BD',
 }; 
 
 const feed = "https://raw.githubusercontent.com/ehzawad/bengali-asr-benchmark/main/outputs_clean/summary_clean.json";
@@ -36,7 +37,7 @@ const board: Leaderboard = {
         metrics: { clips: r.n, characterErrorRate: 100 * r.cer, wordErrors: r.word_errors,
           referenceWords: r.ref_words, fullSetWordErrorRate: 100 * r.wer_full_set } };
     });
-    if (rows.length < 12) throw new Error('Missing BanSpeech decoder configurations');
+    if (rows.length < 14) throw new Error('Missing BanSpeech decoder configurations');
     return rows;
   },
 };

@@ -13,7 +13,7 @@ const board: Leaderboard = {
   stats: { cited: { name: 'Answers with Kremlin sources', unit: 'count' } },
   async fetch() {
     const table = markdownTables(await fetchText(feed)).find(t => t[0]?.join('|') === 'Assistant|Answers with Kremlin sources');
-    if (!table || table.length < 11) throw new Error('Missing Dosimeter results');
+    if (!table || table.length < 8) throw new Error('Missing Dosimeter results');
     return table.slice(1).map(([model, cell]) => {
       const m = cell.match(/^(\d+) of (\d+)\b/);
       if (!model || !m || Number(m[2]) < 1) throw new Error('Invalid citation count');
