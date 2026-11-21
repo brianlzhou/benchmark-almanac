@@ -14,12 +14,19 @@ const board:Leaderboard={benchmark:'tvqa', parts: {
 },url:'https://tvqa.cs.unc.edu/',feed:BASE+'leaderboard_data_without_ts.json',terms:'Public UNC TVQA leaderboard data, subject to the dataset and site terms.',async fetch(){
   const rows:LeaderboardRow[]=[];
   for(const split of ['without_ts','with_ts']) {
-    const {data}=await fetchJson<{data:Array<{model_name:string;test_public_acc:string|number;val_acc:string|number;date?:string;test_public_additional?:Record<string,[number,number]>}>}>(BASE+`leaderboard_data_${split}.json`);
+    const {data}=await fetchJson<{data:Array<{model_name:string;test_public_acc:string|number;val_acc:string|number;date?:string;author?:string;institution?:string;val_additional?:Record<string,[number,number]>;test_public_additional?:Record<string,[number,number]>}>}>(BASE+`leaderboard_data_${split}.json`);
     for(const r of data){if(/^(Human Performance|Random)$/.test(r.model_name))continue;
       const score=num(String(r.test_public_acc));if(score===undefined)continue;
       const val=num(String(r.val_acc));const metrics:Record<string,number>={};if(val!==undefined)metrics.validationAccuracy=val;
-      for(const [key,value] of Object.entries(r.test_public_additional??{}))if(key!=='overall')metrics[key]=value[0];
-      rows.push({model:r.model_name,score,setting:split==='with_ts'?'with timestamp':'without timestamp',date:r.date?.slice(0,10),metrics});
+      for(const [key,value] of Object.entries(r.test_public_additional??{})){
+        if(key!=='overall') metrics[key]=value[0];
+        if(Number.isFinite(value[1])) metrics[key+'TestExamples']=value[1];
+      }
+      for(const [key,value] of Object.entries(r.val_additional??{})) {
+        if(key!=='overall') metrics[key+'ValidationAccuracy']=value[0];
+        if(Number.isFinite(value[1])) metrics[key+'ValidationExamples']=value[1];
+      }
+      rows.push({model:r.model_name,score,setting:split==='with_ts'?'with timestamp':'without timestamp',date:r.date?.slice(0,10),submitter:r.author,agentOrg:r.institution,metrics});
     }
   }
   if(!rows.length)throw new Error('No TVQA results');return rows;

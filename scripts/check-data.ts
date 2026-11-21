@@ -263,6 +263,11 @@ for (const r of boards.rows) {
     for (const k of ['verified', 'open']) if (i[k] !== undefined && typeof i[k] !== 'boolean') fail(`${at}: info.${k} is not true or false`);
     for (const k of ['trials', 'params']) if (i[k] !== undefined && !(typeof i[k] === 'number' && i[k] > 0)) fail(`${at}: info.${k} is not a positive number`);
   }
+  // one name for one measure in metrics: pass@k is passAtK and pass^k is passK (scripts/leaderboards/types.ts)
+  const SYNONYM = /^(pass@\d+|pass_at_\d+|standardError|total_tokens|tokensTotal|input_tokens|output_tokens|reasoning_tokens|cached_input_tokens|inputPricePerMillionTokens|outputPricePerMillionTokens|meanSteps)$/;
+  const odd = new Map<string, Set<string>>();
+  for (const r of all) for (const k of Object.keys((r[8] as Record<string, number>) ?? {})) if (SYNONYM.test(k)) odd.set(String(r[0]), (odd.get(String(r[0])) ?? new Set()).add(k));
+  for (const [b, ks] of odd) warn.push(`board ${b}: metric keys ${[...ks].join(', ')} have a standard name (passAtK, stderr, totalTokens, inputTokens, priceIn, steps)`);
   // data/harnesses.json: names the site uses to tell an agent built around a model from the model on its own
   const harnesses = readJson<{ id: string; name: string; aliases: string[]; maker: string; kind: string }[]>(dataPath('harnesses.json'));
   const seenNames = new Map<string, string>();
@@ -426,6 +431,21 @@ if (existsSync(arenaPath)) {
   for (const v of views.views) {
     if (!/^[a-z0-9-]+$/.test(v.id) || !v.name || !v.note) fail(`views.json: ${v.id} needs an id, a name and a note`);
     checkRule(v.id, v.rule);
+  }
+}
+
+// launch posts (data/traction.json): known benchmarks, an X post address, counts that are whole numbers or null
+{
+  const tr = readJson<{ benchmarks: Record<string, { x?: Record<string, unknown> }> }>(dataPath('traction.json'));
+  const ids = new Set(benchmarks.map((b) => b.id as string));
+  for (const [id, t] of Object.entries(tr.benchmarks)) {
+    if (!ids.has(id)) fail(`traction.json: unknown benchmark ${id}`);
+    const x = t.x;
+    if (!x) continue;
+    if (!/^https:\/\/x\.com\/\w+\/status\/\d+$/.test(String(x.url))) fail(`traction.json: ${id} has no X post address`);
+    for (const k of ['views', 'likes', 'reposts', 'replies', 'quotes', 'bookmarks'])
+      if (x[k] !== null && !(Number.isInteger(x[k]) && (x[k] as number) >= 0)) fail(`traction.json: ${id}.${k} must be a count or null`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(x.read))) fail(`traction.json: ${id} needs the day the counts were read`);
   }
 }
 

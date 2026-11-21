@@ -1,6 +1,7 @@
 // WorldScore's official leaderboard defaults to WorldScore-Static, sorted descending.
 // The source script sets currentSortCol to WorldScore-Static. Dynamic scores remain secondary metrics.
 // Source: https://huggingface.co/spaces/Howieeeee/WorldScore_Leaderboard/raw/main/script.js
+// Read the evaluation date, evaluating team, generation mode and open-source mark.
 // Only models with the default headline score produce rows. Models with only Dynamic scores do not.
 import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
@@ -25,6 +26,10 @@ const board: Leaderboard = {
   async fetch() {
     return parseCsv(await fetchText(FEED)).filter(r=>num(r['WorldScore-Static'])!==undefined).map(r=>({
       model:r['Model Name'].replace(/^\[([^\]]+)\]\(.*\)$/,'$1'),score:num(r['WorldScore-Static'])!,
+      date: /^\d{4}\.\d{2}\.\d{2}$/.test(r.Date) ? r.Date.replaceAll('.', '-') : undefined,
+      submitter: r['Evaluated by'] || undefined,
+      setting: r.Ability || undefined,
+      open: r.Accessibility === 'Open Source' ? true : undefined,
       metrics:Object.fromEntries(['WorldScore-Dynamic','Camera Control','Object Control','Content Alignment','3D Consistency','Photometric Consistency','Style Consistency','Subjective Quality','Motion Accuracy','Motion Magnitude','Motion Smoothness'].filter(k=>num(r[k])!==undefined).map(k=>[k.replace(/[^A-Za-z]/g,''),num(r[k])!]))
     }));
   },

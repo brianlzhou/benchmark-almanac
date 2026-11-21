@@ -8,7 +8,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2407.10362";
 const board: Leaderboard = {
- benchmark: "lab-bench-figqa",
+ benchmark: "lab-bench-figqa", static: 'paper',
  url: "https://arxiv.org/html/2407.10362",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

@@ -8,7 +8,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2512.12772";
 const board: Leaderboard = {
- benchmark: "jointavbench",
+ benchmark: "jointavbench", static: 'paper',
  parts: {
    STL: { name: 'Speech-based timepoint localization', group: 'Task type' },
    SPL: { name: 'Speaker spatial localization', group: 'Task type' },

@@ -12,7 +12,7 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = tables(source).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
-    for(const [i,table] of all.filter(t=>t[0].includes("CIDEr")).entries())for(const r of table.slice(1)){const score=num(r[5]);if(score===undefined)continue;rows.push({model:r[1],score,setting:i===0?"English":"Chinese",metrics:Object.fromEntries(table[0].slice(2,5).flatMap((h,j)=>{const v=num(r[j+2]);return v===undefined?[]:[[h,v]];}))});}
+    for(const [i,table] of all.filter(t=>t[0].includes("CIDEr")).entries())for(const r of table.slice(1)){const score=num(r[5]);if(score===undefined)continue;const team = /baseline/i.test(r[1]) ? undefined : r[1].replace(/\s+\([^()]*\d{4}\)$/, '');rows.push({model:r[1],submitter:team,score,setting:i===0?"English":"Chinese",metrics:Object.fromEntries(table[0].slice(2,5).flatMap((h,j)=>{const v=num(r[j+2]);return v===undefined?[]:[[h,v]];}))});}
     if (!rows.length) throw new Error("No vatex score rows");
     return rows.filter(r=>r.setting==="English");
   },

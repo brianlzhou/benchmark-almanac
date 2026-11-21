@@ -42,7 +42,7 @@ export const BS_ALIASES: Record<string, string> = {
 const usageColumns = {
   response_cost_usd: 'cost', response_completion_tokens: 'tokens', response_latency_ms: 'latency',
   response_prompt_tokens: 'inputTokens', response_total_tokens: 'totalTokens', response_reasoning_tokens: 'reasoningTokens',
-  response_cached_prompt_tokens: 'cachedInputTokens', response_cache_write_tokens: 'cacheWriteTokens',
+  response_cached_prompt_tokens: 'cachedTokens', response_cache_write_tokens: 'cacheWriteTokens',
   response_tokens_per_second: 'tokensPerSecond',
 } as const;
 
@@ -115,7 +115,7 @@ export async function bsRows(dir: string, usage = false, parts: NonNullable<Lead
     const extra = perAnswer?.get(r.model);
     const metrics = { ...extra?.metrics };
     for (const [column, key] of Object.entries({
-      rank: 'rank', avg_score: 'meanJudgeScore', score_2: 'clear', score_1: 'partial', score_0: 'accepted',
+      rank: 'publishedCsvRank', avg_score: 'meanJudgeScore', score_2: 'clear', score_1: 'partial', score_0: 'accepted',
       refusal_count: 'refusals', answered_count: 'answered', nonsense_count: 'questions', error_count: 'errors',
       green_rate: 'greenRate', red_rate: 'redRate', refusal_rate: 'refusalRate',
     })) {

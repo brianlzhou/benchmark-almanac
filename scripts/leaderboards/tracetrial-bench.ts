@@ -1,5 +1,6 @@
 // TraceTrial-Bench: layered is the board’s Overall score and default sort column.
 // It is the published equal-weight mean of Agent Score and Harness Macro. No aggregate is recomputed.
+// The feed also publishes numeric link and abs diagnostics.
 // Resource values are means per selected execution of one task. Output tokens are stored in thousands in the feed.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -17,7 +18,7 @@ const board: Leaderboard = {
   chart:{title:'Cost and overall performance',x:{key:'cost',label:'Cost per task',unit:'$',better:'lower'},y:{key:'score',label:'Overall score',unit:'%',better:'higher'},note:'Costs exclude judge calls and discarded runs.'},
   async fetch() {
     const data=await fetchJson<any[]>(FEED);
-    return data.filter(r=>r.model!=='All models'&&r.harness!=='All Harnesses').map(r=>({model:r.model,score:r.layered,harness:r.harness,cost:r.cost,tokens:r.out_k*1000,metrics:{taskPass:r.pass,agentScore:r.score,harnessMacro:r.macro,harnessMicro:r.micro,clean:r.clean,inputTokens:r.in_k*1000,totalTokens:r.total_k*1000,cost:r.cost}}));
+    return data.filter(r=>r.model!=='All models'&&r.harness!=='All Harnesses').map(r=>({model:r.model,score:r.layered,harness:r.harness,cost:r.cost,tokens:r.out_k*1000,metrics:{taskPass:r.pass,agentScore:r.score,harnessMacro:r.macro,harnessMicro:r.micro,clean:r.clean,link:r.link,abs:r.abs,inputTokens:r.in_k*1000,totalTokens:r.total_k*1000,cost:r.cost}}));
   },
 };
 

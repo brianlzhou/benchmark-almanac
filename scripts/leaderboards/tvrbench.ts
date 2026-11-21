@@ -3,7 +3,7 @@ import type {Leaderboard} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://arxiv.org/html/2606.01247';
-const board:Leaderboard={benchmark:'tvrbench', parts: {
+const board:Leaderboard={benchmark:'tvrbench', static: 'paper', parts: {
   singleEasy: { name: 'Single easy', group: 'Split' },
   singleHard: { name: 'Single hard', group: 'Split' },
   multiEasy: { name: 'Multi easy', group: 'Split' },

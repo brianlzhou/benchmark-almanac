@@ -9,7 +9,7 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 const FEED = 'https://arxiv.org/html/2606.24819';
 const AMBIGUOUS = /^(GPT |Gemini |Qwen 3$|DeepSeek 3\.1$|Grok 4\.20$)/;
 const board: Leaderboard = {
-  benchmark: 'helpbench', url: FEED, feed: FEED, terms: PAPER_TERMS,
+  benchmark: 'helpbench', static: 'paper', url: FEED, feed: FEED, terms: PAPER_TERMS,
   aliases: { 'DeepSeek 3.2': 'deepseek-v3-2' },
   async fetch() {
     const all = await paperTables(FEED);

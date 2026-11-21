@@ -3,7 +3,7 @@ import type {Leaderboard} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://arxiv.org/html/2608.14718';
-const board:Leaderboard={benchmark:'videogaia', parts: {
+const board:Leaderboard={benchmark:'videogaia', static: 'paper', parts: {
   culture: { name: 'Culture', group: 'Domain' },
   geography: { name: 'Geography', group: 'Domain' },
   dailyLife: { name: 'Daily life', group: 'Domain' },

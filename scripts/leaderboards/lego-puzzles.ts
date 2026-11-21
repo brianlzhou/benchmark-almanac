@@ -7,7 +7,7 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 const FEED = 'https://arxiv.org/html/2503.19990';
 const KEYS = ['height', 'adjacency', 'rotation', 'multiview', 'nextStep', 'dependency', 'rotationStat', 'position', 'backwards', 'ordering', 'outlier'];
 const board: Leaderboard = {
-  benchmark: 'lego-puzzles', parts: {
+  benchmark: 'lego-puzzles', static: 'paper', parts: {
   height: { name: 'Height', group: 'Task type' },
   adjacency: { name: 'Adjacency', group: 'Task type' },
   rotation: { name: 'Rotation', group: 'Task type' },

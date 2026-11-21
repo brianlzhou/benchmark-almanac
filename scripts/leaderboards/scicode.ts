@@ -50,7 +50,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (cells[2] && Number.isFinite(subproblem)) metrics.subproblem = subproblem;
       const medal = ['🥇', '🥈', '🥉'].findIndex(symbol => cells[0].startsWith(symbol));
-      if (medal >= 0) metrics.rank = medal + 1;
+      if (medal >= 0) metrics.medalRank = medal + 1;
       rows.push({ model, score, setting: effort?.[1], metrics });
     }
     if (!rows.length) throw new Error('no rows in the SciCode leaderboard table');

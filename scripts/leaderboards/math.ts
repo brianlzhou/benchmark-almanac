@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2103.03874';
 export default {
-  benchmark:'math', parts: {
+  benchmark:'math', static: 'paper', parts: {
   Prealgebra: { name: 'Prealgebra', group: 'Domain' },
   Algebra: { name: 'Algebra', group: 'Domain' },
   'Number Theory': { name: 'Number theory', group: 'Domain' },

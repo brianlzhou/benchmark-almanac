@@ -5,7 +5,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2406.12045';
 const board: Leaderboard = {
-  benchmark: 'tau-bench', parts: {
+  benchmark: 'tau-bench', static: 'paper', parts: {
   retail: { name: 'Retail', group: 'Domain' },
   airline: { name: 'Airline', group: 'Domain' },
 }, url: URL, feed: URL + ' (maker-published avg column)', terms: PAPER_TERMS,

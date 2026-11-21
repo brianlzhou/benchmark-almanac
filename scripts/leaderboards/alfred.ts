@@ -14,7 +14,26 @@ const board: Leaderboard = {
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      const s=await fetchText(FEED);const csv=s.match(/csvData\s*=\s*`([\s\S]*?)`/);if(!csv)throw new Error('ALFRED CSV missing');const latest=new Map<string,LeaderboardRow>();for(const r of parseCsv(csv[1])){const date=new Date(r.Created).toISOString().slice(0,10);const row:LeaderboardRow={model:r.Submission,score:Number(r['Unseen Success Rate'])*100,date,metrics:{seenSuccess:Number(r['Seen Success Rate'])*100,unseenPLWSR:Number(r['Unseen PLWSR'])*100,unseenGoalCondition:Number(r['Unseen GC'])*100}};if(!latest.has(row.model)||date>latest.get(row.model)!.date!)latest.set(row.model,row);}return [...latest.values()];
+      const page = await fetchText(FEED);
+      const csv = page.match(/csvData\s*=\s*\x60([\s\S]*?)\x60/);
+      if (!csv) throw new Error('ALFRED CSV missing');
+      const columns = {
+        seenSuccess: 'Seen Success Rate', seenPLWSR: 'Seen PLWSR', unseenPLWSR: 'Unseen PLWSR',
+        seenGoalCondition: 'Seen GC', unseenGoalCondition: 'Unseen GC',
+        seenPLWGoalCondition: 'Seen PLW GC Success Rate', unseenPLWGoalCondition: 'Unseen PLW GC Success Rate',
+      };
+      const latest = new Map<string, LeaderboardRow>();
+      for (const r of parseCsv(csv[1])) {
+        const date = new Date(r.Created).toISOString().slice(0,10);
+        const metrics: Record<string, number> = {};
+        for (const [key, column] of Object.entries(columns)) {
+          if (r[column]?.trim() && Number.isFinite(Number(r[column]))) metrics[key] = Number(r[column]) * 100;
+        }
+        const row = {model: r.Submission, score: Number(r['Unseen Success Rate']) * 100,
+          date, submitter: r.Affiliation?.trim() || undefined, metrics};
+        if (!latest.has(row.model) || date > latest.get(row.model)!.date!) latest.set(row.model, row);
+      }
+      return [...latest.values()];
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

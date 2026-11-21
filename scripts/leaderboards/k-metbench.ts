@@ -1,4 +1,4 @@
-// Official Table 1 accuracy, in percent. Preserve reasoning configurations and component metrics.
+// Official Table 1 accuracy, in percent. Keep parameter counts, explicit thinking modes and both reasoning score scales.
 import type {Leaderboard} from './types.ts';
 import {fetchJson} from '../lib/util.ts';
 const FEED='https://kmetbench.github.io/data/leaderboard_table_1_source.json';
@@ -16,6 +16,18 @@ const board:Leaderboard={benchmark:'k-metbench', parts: {
  terms:'MIT project; the project site has no robots.txt.',
  async fetch(){
   const d=await fetchJson<{rows:({display_model_name:string;accuracy_pct:number;timestamps:Record<string,string>} & Record<string,unknown>)[]}>(FEED);
-  const rows=d.rows.filter(r=>Number.isFinite(r.accuracy_pct)).map(r=>({model:r.display_model_name,score:r.accuracy_pct,date:r.timestamps?.explicit_advanced?.slice(0,10),metrics:Object.fromEntries(Object.entries(r).filter(([k,v])=>k!=='accuracy_pct'&&k.endsWith('_pct')&&typeof v==='number')) as Record<string,number>}));
+  const rows = d.rows.filter(r => Number.isFinite(r.accuracy_pct)).map(r => {
+    const mode = r.display_model_name.match(/ \((Thinking|Non-Thinking)\)$/);
+    const metrics = Object.fromEntries(Object.entries(r).filter(([key, value]) =>
+      key !== 'accuracy_pct' && key.endsWith('_pct') && typeof value === 'number')) as Record<string, number>;
+    if (typeof r.reasoning_4_20 === 'number') metrics.reasoningRubric = r.reasoning_4_20;
+    return {
+      model: mode ? r.display_model_name.slice(0, mode.index) : r.display_model_name,
+      setting: mode?.[1].toLowerCase(), score: r.accuracy_pct, metrics,
+      date: r.timestamps?.explicit_advanced?.slice(0, 10),
+      params: typeof r.model_size_b === 'number' ? r.model_size_b : undefined,
+      open: r.is_proprietary_model === true ? false : undefined,
+    };
+  });
   if(rows.length<3)throw new Error('No accuracy rows');return rows;
  }};export default board;

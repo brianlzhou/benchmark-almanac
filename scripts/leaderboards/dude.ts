@@ -9,7 +9,7 @@ import { rrcPage } from '../lib/boards/rrc.ts';
 const RRC = 'https://rrc.cvc.uab.es/?ch=23&com=evaluation&task=1';
 const FEED = "https://arxiv.org/html/2305.08455";
 const board: Leaderboard = {
-  benchmark: "dude",
+  benchmark: "dude", static: 'paper',
   url: RRC,
   feed: `${RRC} + ${FEED}`,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

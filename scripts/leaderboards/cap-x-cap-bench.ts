@@ -1,5 +1,5 @@
 // CAP-X / CAP-Bench: the published avgSuccessRate over all six simulation tasks.
-// Task success rates remain metrics. Hardware experiments are not pooled with simulation.
+// Keep the six task scores and the source’s open or closed designation. Hardware experiments are not pooled with simulation.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -19,8 +19,8 @@ const board: Leaderboard = {
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    const d=await fetchJson<{models:{displayName:string,avgSuccessRate:number,taskSuccessRates:Record<string,number>}[]}>(FEED);
-    return d.models.filter(r=>typeof r.avgSuccessRate==='number').map(r=>({model:r.displayName,score:r.avgSuccessRate,metrics:r.taskSuccessRates}));
+    const d=await fetchJson<{models:{displayName:string,isClosed?:boolean,avgSuccessRate:number,taskSuccessRates:Record<string,number>}[]}>(FEED);
+    return d.models.filter(r=>typeof r.avgSuccessRate==='number').map(r=>({model:r.displayName,open:typeof r.isClosed==='boolean'?!r.isClosed:undefined,score:r.avgSuccessRate,metrics:r.taskSuccessRates}));
   },
 };
 

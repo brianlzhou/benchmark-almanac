@@ -8,7 +8,7 @@ import { grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2410.07752";
 const board: Leaderboard = {
- benchmark: "tvbench",
+ benchmark: "tvbench", static: 'paper',
  parts: {
    AC: { name: 'Action count', group: 'Task type' },
    OC: { name: 'Object count', group: 'Task type' },

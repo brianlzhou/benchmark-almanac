@@ -1,22 +1,26 @@
-// Two automatic estimators of the same full biography set, not separate question subsets.
-import type { Leaderboard, LeaderboardRow } from './types.ts';
+// FActScore: the official README reports factual precision, the share of supported atomic facts, as a percentage
+// for 12 language models. Labs' hallucination rates on FActScore prompts are a separate measure (data/benchmarks.json).
+// Use column A, retrieval+ChatGPT, explicitly identified as the default scorer. Column B remains a metric.
+// Response rate and facts per response also remain metrics. Ambiguous model snapshots stay unlisted.
+import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { markdownTables } from '../lib/boards/github-markdown.ts';
-import { uncertain } from '../lib/boards/arxiv-span-tables.ts';
 import { num } from '../lib/html.ts';
-const feed='https://raw.githubusercontent.com/shmsw25/FActScore/HEAD/README.md';
-export default {
-  benchmark:'factscore',url:'https://github.com/shmsw25/FActScore',feed,
-  terms:'The FActScore authors publish this results table in their public repository; robots.txt permits the raw README path.',
-  async fetch():Promise<LeaderboardRow[]> {
-    const t=markdownTables(await fetchText(feed)).find(t=>t[0].some(c=>c==='FActScore from (A)'));
-    if(!t || t[0].length!==5)throw new Error('FActScore columns changed');
-    const rows:LeaderboardRow[]=[];
-    for(const r of t.slice(1))for(const [i,setting] of [[3,'estimator A'],[4,'estimator B']] as const){
-      const score=num(r[i]);if(score===undefined)continue;
-      rows.push({model:uncertain(r[0]),score,setting,metrics:{respondPercent:num(r[1])!,facts:num(r[2])!}});
-    }
-    if(rows.length<6)throw new Error('FActScore model scores missing');
-    return rows;
+import { markdownTables } from '../lib/boards/github-markdown.ts';
+
+const FEED = 'https://raw.githubusercontent.com/shmsw25/FActScore/main/README.md';
+const board: Leaderboard = {
+  benchmark: 'factscore', url: 'https://github.com/shmsw25/FActScore', feed: FEED,
+  terms: 'The FActScore authors publish these results in their public repository, with attribution and repository license requirements retained.',
+  // The README links these exact weight repositories.
+  aliases: { 'Dolly 12B': 'dolly-2-0-12b', 'StableLM tuned 7B': 'stablelm-tuned-alpha-7b' },
+  async fetch() {
+    const table = markdownTables(await fetchText(FEED)).find(t => t[0].includes('FActScore from (A)'));
+    if (!table) throw new Error('FActScore precision table missing');
+    return table.slice(1).filter(r => r[0] && num(r[3]) !== undefined).map(r => ({
+      model: /^(?:GPT-4|ChatGPT|InstructGPT|Vicuna \d+B)$/.test(r[0]) ? `${r[0]} (snapshot unspecified)` : r[0],
+      setting: 'retrieval+ChatGPT', score: num(r[3])!,
+      metrics: { respondPercent: num(r[1])!, facts: num(r[2])!, retrievalLlamaNpm: num(r[4])! },
+    }));
   },
-} satisfies Leaderboard;
+};
+export default board;

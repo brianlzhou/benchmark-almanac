@@ -4,7 +4,7 @@
 // the cost per problem the cost of one task. The model cell holds the developer's logo (its title names
 // the developer), the name with the effort in brackets ("Fable 5 [high]") and a tag, Model or Agent. Agent rows remain unlisted systems. Only models with results in the default window are retained.
 // Historical windows are incompatible task sets and are excluded. SWE-rebench is a rolling board, so the rows follow the window the site shows.
-// Pass@5 is metrics.pass5 and the ± after the rate, its standard error (SEM), metrics.sem. Tokens per
+// Pass@5 is metrics.passAt5 and the ± after the rate, its standard error (SEM), metrics.stderr. Tokens per
 // Problem counts input and cached tokens, not output alone, so it is retained as metrics.totalTokens rather than output tokens.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -49,9 +49,9 @@ const board: Leaderboard = {
       if (totalTokens !== undefined) metrics.totalTokens = totalTokens;
       // "64.5% ± 1.41%": the resolved rate and its standard error over the runs
       const sem = r[iScore]?.text.match(/±\s*([\d.]+)/);
-      if (sem) metrics.stderr = metrics.sem = Number(sem[1]);
+      if (sem) metrics.stderr = Number(sem[1]);
       const pass5 = iPass5 >= 0 ? num(r[iPass5]?.text) : undefined;
-      if (pass5 !== undefined) metrics.pass5 = pass5;
+      if (pass5 !== undefined) metrics.passAt5 = pass5;
       rows.push({
         model,
         score,

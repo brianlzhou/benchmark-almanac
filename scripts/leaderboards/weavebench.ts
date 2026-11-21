@@ -61,6 +61,7 @@ const board: Leaderboard = {
   },
 };
 board.parts = {
+  games: { name: 'Games', group: 'Domain' },
   desktop: { name: 'Desktop', group: 'Domain' },
   documents: { name: 'Documents', group: 'Domain' },
   web: { name: 'Web', group: 'Domain' },

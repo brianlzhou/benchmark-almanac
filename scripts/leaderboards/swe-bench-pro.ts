@@ -1,7 +1,7 @@
 // SWE-Bench Pro: Scale's board, read from the "public" tab (SWE-Bench Pro (Public Dataset)), the tab the page
 // opens on. The "private" tab scores the held-out set. The score is the resolve rate in percent. The page says
 // it ran models with the SWE-agent scaffold and marks runs made with mini-SWE-agent with "*".
-// Keep the published rank and the ± interval around each score.
+// Keep the ± interval around each score.
 import type { Leaderboard } from './types.ts';
 import { SCALE_ALIASES, SCALE_TERMS, fetchScaleEntries, scaleFeed, scaleRows, scaleUrl, type ScaleEntry } from '../lib/scale.ts';
 
@@ -12,7 +12,7 @@ export function scaleRowsWithInterval(...[entries, extra]: Parameters<typeof sca
     const interval = typeof half === 'number' && Number.isFinite(half) && half >= 0
       ? { low: Number(entry.score) - half, high: Number(entry.score) + half } : {};
     const more = extra?.(name, entry);
-    return { ...interval, ...more, metrics: { ...more?.metrics, ...(typeof entry.rank === 'number' ? { rank: entry.rank } : {}) } };
+    return { ...interval, ...more };
   });
 }
 

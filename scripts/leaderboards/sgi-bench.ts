@@ -1,7 +1,7 @@
 // SGI-Bench: the site’s SGI-Score averages five scientific-task scores on its 0–100 scale.
 // This reproduces the page’s published formula from live inline data without executing page scripts.
 // The page defines: "The SGI-Score is the average across these tasks".
-// Only complete overview models get rows. The five task scores remain metrics.
+// Only complete overview models get rows. The task tables provide additional diagnostics and weight access.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
@@ -27,17 +27,23 @@ const board: Leaderboard = {
   const mean=(r:Entry,keys:string[])=>keys.reduce((sum,k)=>sum+Number(r[k]),0)/keys.length;
   const specs:[string,string,(r:Entry)=>number][]=[['DEEP_DATA','Deep Research EM',r=>Number(r.em)],['DEEP_AGENT_DATA','Deep Research EM',r=>Number(r.em)],['IDEA_DATA','Idea Generation',r=>mean(r,['eff','nov','det','feas'])],['DRY_DATA','Dry Experiment PassAll@5',r=>Number(r.p5)],['WET_DATA','Wet Experiment',r=>mean(r,['ss','pa'])],['ER_DATA','Experimental Reasoning',r=>Number(r.mca)]];
   const rows:LeaderboardRow[]=[];const maps:Map<string,number>[]=[];
-  for(const [name,setting,pick] of specs){
+  const diagnostics = new Map<string,Record<string,number>>();
+  const keys:Record<string,string>={sla:'stepLevelAccuracy',eff:'ideaEffectiveness',nov:'ideaNovelty',det:'ideaDetail',feas:'ideaFeasibility',
+    p5:'dryPass5',p3:'dryPass3',p1:'dryPass1',aet:'dryExecutionSeconds',ser:'drySer',ss:'wetSs',pa:'wetPa',rv:'reasoningValidity'};
+  for(const [name,,pick] of specs){
     const entries=read(name);const map=new Map<string,number>();
     for(const r of entries){const score=pick(r);if(!Number.isFinite(score))continue;map.set(r.model,score);
-      const agent=name==='DEEP_AGENT_DATA'?r.model.match(/^(.*?)\((.*?)\)$/):null;
+      if(name==='DEEP_AGENT_DATA') continue;
+      const metrics=diagnostics.get(r.model) ?? {};
+      for(const [column,key] of Object.entries(keys)) if(typeof r[column]==='number') metrics[key]=Number(r[column]);
+      diagnostics.set(r.model,metrics);
     }
     if(name!=='DEEP_AGENT_DATA')maps.push(map);
   }
   for(const r of read('OVERVIEW_DATA')){
     const scores=maps.map((m,i)=>typeof r['task'+(i+1)]==='number'?Number(r['task'+(i+1)]):m.get(r.model));
     if(scores.some(s=>s===undefined))throw new Error('Incomplete SGI overview '+r.model);
-    rows.push({model:r.model,score:(scores as number[]).reduce((a,b)=>a+b,0)/5,metrics:Object.fromEntries(scores.map((s,i)=>['task'+(i+1),s as number]))});
+    rows.push({model:r.model,open:r.type==='Open'?true:r.type==='Closed'?false:undefined,score:(scores as number[]).reduce((a,b)=>a+b,0)/5,metrics:{...diagnostics.get(r.model),...Object.fromEntries(scores.map((s,i)=>['task'+(i+1),s as number]))}});
   }
   return rows;
   })();

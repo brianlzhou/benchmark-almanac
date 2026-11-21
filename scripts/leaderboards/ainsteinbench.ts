@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2512.21373";
 const board: Leaderboard = {
-  benchmark: "ainsteinbench",
+  benchmark: "ainsteinbench", static: 'paper',
   parts: {
     hard: { name: 'Hard', group: 'Difficulty' },
     medium: { name: 'Medium', group: 'Difficulty' },

@@ -11,6 +11,7 @@ const FILE = 'leaderboard-v1-verified.json';
 interface Entry {
   model: string;
   scaffold?: string;
+  organization?: string;
   score?: number;
   date?: string;
 }
@@ -27,7 +28,7 @@ const board: Leaderboard = {
       const ran = e.model.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
       const model = (ran ? ran[2] : e.model).replace(/^OpenAI\s+/, '').trim();
       const harness = ran ? ran[1].trim() : e.scaffold && e.scaffold !== e.model ? e.scaffold : undefined;
-      rows.push({ model, score: e.score, harness, date: e.date });
+      rows.push({ model, score: e.score, harness, agentOrg:e.organization?.trim() || undefined, date: e.date });
     }
     return rows;
   },

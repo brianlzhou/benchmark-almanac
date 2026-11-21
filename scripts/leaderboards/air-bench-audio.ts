@@ -30,7 +30,7 @@ const board: Leaderboard = {
         if (!name || /^(?:human|random|oracle)(?:\b|$)/i.test(name) || score === undefined) continue;
         const metrics: Record<string, number> = {};
         for (let i = 0; i < t.head.length; i++) {
-          if (i === (1) || i === (6)) continue;
+          if (t.head[i] === 'Rank' || i === (1) || i === (6)) continue;
           const value = num(r[i]);
           if (value !== undefined) metrics[t.head[i]] = value;
         }

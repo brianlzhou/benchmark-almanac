@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2409.16191";
-const board:Leaderboard={benchmark:"hellobench", parts: {
+const board:Leaderboard={benchmark:"hellobench", static: 'paper', parts: {
   qa: { name: 'Question answering', group: 'Task type' },
   summarization: { name: 'Summarization', group: 'Task type' },
   chat: { name: 'Chat', group: 'Task type' },

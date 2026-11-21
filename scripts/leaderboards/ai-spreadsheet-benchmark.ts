@@ -1,4 +1,5 @@
 // Whole 53-task benchmark Pass@1. These are products, with no inferred underlying model.
+// The README reports pass@3 across three attempts.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
@@ -18,7 +19,7 @@ const board: Leaderboard = {
       const score = num(cells[1]);
       if (score === undefined || !cells[0]) continue;
       const metrics: Record<string, number> = {};
-      for (const [column, key] of [[2, "pass3"], [3, "dynamic"], [4, "seconds"]] as const) {
+      for (const [column, key] of [[2, "passAt3"], [3, "dynamic"], [4, "seconds"]] as const) {
         const value = num(cells[column]);
         if (value !== undefined) metrics[key] = value;
       }

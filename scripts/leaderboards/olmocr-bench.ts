@@ -1,4 +1,4 @@
-// olmOCR-Bench overall percentage and OCR category breakdowns, including confidence interval width as a metric when provided. Blank separator excluded.
+// olmOCR-Bench overall percentage and OCR category breakdowns, including the lower and upper endpoints of the published interval. Blank separator excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables, text } from '../lib/html.ts';
@@ -37,8 +37,8 @@ const board: Leaderboard = {
           if (i === 0 || i === 9) continue;
           const v = num(r[i]?.text); if (v !== undefined) metrics[head[i]] = v;
         }
-        const ci = r[9]?.text.match(/±\s*([\d.]+)/); if (ci) metrics.confidenceHalfWidth = Number(ci[1]);
-        out.push({ model: identity(name), score: score * 1, setting: undefined, metrics });
+        const ci = r[9]?.text.match(/±\s*([\d.]+)/); const width = ci ? Number(ci[1]) : undefined;
+        out.push({ model: identity(name), score, low: width === undefined ? undefined : score - width, high: width === undefined ? undefined : score + width, metrics });
       }
     }
     if (!out.length) throw new Error("olmocr-bench: expected score table missing");

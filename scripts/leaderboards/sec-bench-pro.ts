@@ -71,9 +71,9 @@ const board: Leaderboard = {
       const score = r.score_modes?.headline?.score ?? r.resolved;
       if (typeof score !== 'number') continue;
       const metrics: Record<string, number> = {};
-      for (const key of ['completed_instances', 'timeouts', 'rank_headline', 'rank_completed'] as const) {
+      for (const key of ['completed_instances', 'timeouts', 'rank_completed'] as const) {
         const value = r[key];
-        if (typeof value === 'number') metrics[key] = value;
+        if (typeof value === 'number') metrics[key === 'rank_completed' ? 'completedRank' : key] = value;
       }
       for (const p of r.projects ?? []) if (typeof p.score === 'number') metrics[p.name] = p.score;
       if (typeof r.score_modes?.completed?.score === 'number') metrics.completed = r.score_modes.completed.score;

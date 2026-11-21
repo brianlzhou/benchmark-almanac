@@ -1,4 +1,4 @@
-// SALAD-Bench base-set safety rate. The published total column is the whole base-set score.
+// SALAD-Bench base-set safety rate and model weight access. The published total column is the whole base-set score.
 // Attack-enhanced, defense-enhanced and multiple-choice views are separate evaluations and are excluded.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
@@ -11,7 +11,8 @@ const board: Leaderboard = {
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      return parseCsv(await fetchText(FEED)).map(r=>({model:/^(gpt4|gpt3.5|claude2)$/.test(r.Model)?r.Model+' (snapshot unspecified)':r.Model,score:Number(r.total)}));
+      return parseCsv(await fetchText(FEED)).map(r=>({model:/^(gpt4|gpt3.5|claude2)$/.test(r.Model)?r.Model+' (snapshot unspecified)':r.Model,score:Number(r.total),open:r['Open or Not']==='1'?true:r['Open or Not']==='0'?false:undefined,
+        params:r.Model.match(/(?:^|[- ])(\d+(?:\.\d+)?)b\b/i)?.[1] ? Number(r.Model.match(/(?:^|[- ])(\d+(?:\.\d+)?)b\b/i)![1]) : undefined}));
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

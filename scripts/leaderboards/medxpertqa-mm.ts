@@ -38,7 +38,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       for (const key of ['Reasoning', 'Understanding', '#']) {
         const value = num(r[head.indexOf(key)]?.text);
-        if (value !== undefined) metrics[key === '#' ? 'rank' : key] = value;
+        if (value !== undefined) metrics[key === '#' ? 'publishedTableRank' : key] = value;
       }
       if (model && score !== undefined) rows.push({ model, score, metrics, setting: r[head.indexOf('Reasoning?')]?.text, open: openness === 'open-source' ? true : openness === 'proprietary' ? false : undefined, date: /^\d{4}-\d\d$/.test(date ?? '') ? `${date}-01` : undefined });
     }

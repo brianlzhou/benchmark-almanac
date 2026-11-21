@@ -132,7 +132,8 @@ function shape(r: ReignRow, until = '9999-12-31', version?: string): Part[] {
     const m = Math.max(1, Math.round(reignDays({ start: x.start, end }) / 30.4));
     // a board a third party runs goes by its runner's name
     const host = top.from === 'leaderboard' ? LEADERBOARDS[r.benchmark]?.host : undefined;
-    const origin = top.from && r.source !== top.from ? ` ${host ? `From ${host}’s leaderboard` : ORIGIN[top.from]}.` : '';
+    const paper = top.from === 'leaderboard' && LEADERBOARDS[r.benchmark]?.static === 'paper';
+    const origin = top.from && r.source !== top.from ? ` ${host ? `From ${host}’s leaderboard` : paper ? 'From the benchmark’s paper' : ORIGIN[top.from]}.` : '';
     return {
       d,
       fill: labColor(x.lab),

@@ -1,3 +1,4 @@
+// Read model sizes, thinking settings and both scores by input modality.
 // Math-VR. math-vr.github.io carries the leaderboard as a static HTML table (GitHub Pages): per model the
 // type, a Thinking mark, and answer correctness (AC) and process score (PS) overall and on the text and
 // multimodal subsets. Overall (AC), answer correctness on all 5,000 questions, is the score; it is the
@@ -11,6 +12,7 @@ const PAGE = 'https://math-vr.github.io/';
 
 const board: Leaderboard = {
   benchmark: 'math-vr',
+  parts: {textAc: {name: 'Text (AC)', group: 'Modality'}, multimodalAc: {name: 'Multimodal (AC)', group: 'Modality'}},
   url: `${PAGE}#leaderboard`,
   feed: `${PAGE} (static HTML table, Overall (AC))`,
   terms: 'Static project page on GitHub Pages (no robots.txt rules); the HKU-MMLab/Math-VR-CodePlot-CoT repository states no license.',
@@ -35,10 +37,22 @@ const board: Leaderboard = {
       const name = r[iModel]?.text;
       const score = num(r[iAc]?.text);
       if (!name || score === undefined) continue;
-      // "Gemini-2.5-Flash-No-Thinking": the same model with thinking off
+      // Read the published thinking flag and the size in billions of parameters.
       const off = /-No-Thinking$/i.test(name);
       const ps = iPs >= 0 ? num(r[iPs]?.text) : undefined;
-      rows.push({ model: off ? name.replace(/-No-Thinking$/i, '') : name, score, setting: off ? 'non-thinking' : undefined, ...(ps === undefined ? {} : { metrics: { ps } }) });
+      const flag = r[head.indexOf('Thinking')]?.text;
+      const size = r[head.indexOf('#Params')]?.text.match(/^([\d.]+)B$/i);
+      const metrics: Record<string, number> = {};
+      if (ps !== undefined) metrics.ps = ps;
+      for (const [key, column] of Object.entries({textAc: 'Text (AC)', textPs: 'Text (PS)', multimodalAc: 'Multimodal (AC)', multimodalPs: 'Multimodal (PS)'})) {
+        const value = num(r[head.indexOf(column)]?.text);
+        if (value !== undefined) metrics[key] = value;
+      }
+      rows.push({
+        model: off ? name.replace(/-No-Thinking$/i, '') : name, score, metrics,
+        setting: off || flag === 'X' ? 'non-thinking' : flag === '✓' ? 'thinking' : undefined,
+        params: size ? Number(size[1]) : undefined,
+      });
     }
     return rows;
   },

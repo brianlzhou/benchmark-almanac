@@ -1,4 +1,4 @@
-// Ko-GDPval: the Solar Pro 4 launch article reports two model pass percentages. Read only the Ko-GDPval row, ignoring repeated responsive copies and token pricing from unrelated tables.
+// Ko-GDPval: the Solar Pro 4 launch article reports two model pass percentages. Read the Ko-GDPval row and the published Solar Pro 4 API prices.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables, num, text } from '../lib/html.ts';
@@ -12,6 +12,17 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     const table=all.find(t=>t[0].includes("Solar Pro 4"));const r=table?.find(r=>r.some(c=>/^Ko-GDPval/.test(c)));if(!r||!table)throw new Error("Missing Ko-GDPval row");
     for(let i=0;i<2;i++){const score=num(r[r.length-3+i]);if(score!==undefined)rows.push({model:table[0][i+2],score});}
+    const pricing = all.find(t => t[0].includes('Per 1M tokens'));
+    const pro = rows.find(r => r.model === 'Solar Pro 4');
+    if (pricing && pro) {
+      const keys: Record<string, string> = { Input: 'priceIn', Output: 'priceOut', 'Cached Input': 'priceCachedIn' };
+      const metrics: Record<string, number> = {};
+      for (const [label, cell] of pricing.slice(1)) {
+        const price = num(cell);
+        if (keys[label] && price !== undefined) metrics[keys[label]] = price;
+      }
+      pro.metrics = metrics;
+    }
     if (!rows.length) throw new Error("No ko-gdpval-upstage score rows");
     return rows;
   },

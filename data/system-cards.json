@@ -25322,6 +25322,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 3.7,
         "unit": "%",
         "as_written": "Average Hallucination Rate (Browsing Disabled), FActScore, gpt-5-thinking-mini (Figure 3)",
@@ -25552,6 +25553,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 7.8,
         "unit": "%",
         "as_written": "Average Hallucination Rate (Browsing Disabled), FActScore, gpt-5-thinking-nano (Figure 3)",
@@ -25670,6 +25672,7 @@
       },
       {
         "benchmark": "factscore",
+        "measure": "hallucination-rate",
         "score": 3.7,
         "unit": "%",
         "as_written": "Average Hallucination Rate (Browsing Disabled), FActScore (Figure 3)",
@@ -39384,7 +39387,7 @@
         "section": "hallucination"
       },
       {
-        "benchmark": "factscore-precision",
+        "benchmark": "factscore",
         "score": 71.2,
         "unit": "%",
         "as_written": "FactScore (Table 3)",
@@ -48048,7 +48051,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 79.0,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 of 200 tasks, one episode of up to 1M tokens, near-final snapshot. Text gives 79 to 88% across 1 to 5 episodes (8.5, Figure 8.5.A)",
@@ -50603,10 +50607,10 @@
       },
       {
         "benchmark": "agents-last-exam",
+        "measure": "score",
         "score": 41.4,
         "unit": "%",
         "as_written": "Agents' Last Exam, Pass@1 19.5, Score 41.4 (Table 1)",
-        "measure": "score",
         "section": "capabilities"
       },
       {
@@ -50757,7 +50761,8 @@
         "section": "cyber"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 50.3,
         "unit": "%",
         "as_written": "ProgramBench, resolved 0 / almost resolved 1 / average pass rate 50.3 (Table 5)",
@@ -52433,7 +52438,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": null,
         "unit": "%",
         "as_written": "ProgramBench, hidden test pass rate on 166 of 200 tasks across 5 episodes, given only as a range 76 to 86%, no single value (8.8)",
@@ -54166,7 +54172,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 57.2,
         "unit": "%",
         "as_written": "ProgramBench, tests-passed rate, high (2.8)",
@@ -55360,7 +55367,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 93.0,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 of 200 tasks after five 1M-token episodes, single agent (83% after the first episode) (8.9.1)",
@@ -58632,7 +58640,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 87.6,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 tasks, single agent, mini-swe-agent harness, no time limit (8.11.1)",
@@ -59612,7 +59621,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 20.3,
         "unit": "%",
         "as_written": "ProgramBench (Almost@1) (Table 3). Figure 10 text: 30.04 multi-agent and 20.39 single-agent at 8h on a 172-task high-confidence subset",
@@ -60617,7 +60627,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 91.2,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 of 200 tasks, single agent, mini-swe-agent harness, no time limit (8.10.1)",
@@ -62383,7 +62394,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 79.7,
         "unit": "%",
         "as_written": "ProgramBench hidden test pass rate on 166 tasks, single agent, mini-swe-agent harness (8.10.1)",
@@ -63539,7 +63551,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 82.0,
         "unit": "%",
         "as_written": "ProgramBench, hidden test pass rate on 166 of 200 tasks, mini-swe-agent without time limit (8.7.1)",
@@ -64188,7 +64201,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 59.0,
         "unit": "%",
         "as_written": "ProgramBench, rollouts passing at least 95% of tests, mini-swe-agent, Muse Wonder Full (max) (capabilities table image, page 3)",
@@ -64433,7 +64447,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-almost",
+        "benchmark": "programbench",
+        "measure": "almost",
         "score": 50.0,
         "unit": "%",
         "as_written": "ProgramBench, rollouts passing at least 95% of tests, mini-swe-agent, Muse Wonder (max) (capabilities table image, page 3)",
@@ -68227,7 +68242,8 @@
         "section": "capabilities"
       },
       {
-        "benchmark": "programbench-tests-passed",
+        "benchmark": "programbench",
+        "measure": "tests-passed",
         "score": 85.6,
         "unit": "%",
         "as_written": "ProgramBench hidden-test pass rate on 166 golden tasks, single agent, mini-swe-agent harness, no time limit, 1M-token window. Showing remaining context raises the score to 91.6% (Section 8.10.1)",
@@ -69651,6 +69667,461 @@
         "unit": "%",
         "as_written": "WebExploitBench v1.2 (51.26% in the text, 51.3% in the table) (results table, p.4)",
         "section": "cyber"
+      }
+    ]
+  },
+  {
+    "id": "thinking-machines-inkling-2-mini-model-card-2026-11-20",
+    "lab": "thinking-machines",
+    "model": "inkling-2-mini",
+    "date": "2026-11-20",
+    "kind": "model-card",
+    "doc": "model card",
+    "title": "Inkling 2 Mini Model Card",
+    "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+    "release": "thinking-machines-inkling-2-mini-2026-11-20",
+    "notes": "Web model card with one evaluation table. It has every launch-post row plus 18 more, and lists 3 passes through the looped layers. GroundingME (55.5%) has no catalog record yet.",
+    "results": [
+      {
+        "benchmark": "artificial-analysis-intelligence-index",
+        "score": 20.1,
+        "unit": "index",
+        "as_written": "AA Index (v5.0)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-index",
+        "score": 46.5,
+        "unit": "%",
+        "as_written": "Vals Index (v2.2)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "frontiercode-2-0",
+        "score": 15.1,
+        "unit": "%",
+        "as_written": "FrontierCode v2.0 (stirrup v0.2.1)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "deepswe",
+        "score": 48.2,
+        "unit": "%",
+        "as_written": "DeepSWE v1.1 (mini-swe-agent v2.4.6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-4-0",
+        "score": 5.6,
+        "unit": "%",
+        "as_written": "Terminal Bench v4.0 (mini-swe-agent v2.4.6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-2-1",
+        "score": 71.6,
+        "unit": "%",
+        "as_written": "Terminal Bench v2.1 (Inkling 2 Mini in pi v0.83.0)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-pro-v2-hard",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "SWEBench Pro v2 (Hard), mini-swe-agent v2.4.6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-multilingual",
+        "score": 73.7,
+        "unit": "%",
+        "as_written": "SWEBench Multilingual, bash only",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "swe-bench-verified",
+        "score": 79.2,
+        "unit": "%",
+        "as_written": "SWEBench Verified, bash only",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vibe-code-bench",
+        "score": 77.9,
+        "unit": "%",
+        "as_written": "Vibe Code Bench v1.1 (openhands, Vals)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "pmpp-hard",
+        "score": 455.82,
+        "unit": "score",
+        "as_written": "PMPP-Hard (AUC, 0 to 10h), pi v0.83.0",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "browsecomp",
+        "score": 79.0,
+        "unit": "%",
+        "as_written": "BrowseComp with compaction",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "deepsearchqa",
+        "score": 85.3,
+        "unit": "%",
+        "as_written": "DeepSearchQA with compaction",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mcp-atlas",
+        "score": 82.7,
+        "unit": "%",
+        "as_written": "MCP Atlas (Public)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aa-briefcase-1-1",
+        "score": 1263,
+        "unit": "elo",
+        "as_written": "AA-Briefcase v1.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gdpval-aa-v2-1",
+        "score": 1319,
+        "unit": "elo",
+        "as_written": "GDPVal-AA v2.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "jobbench",
+        "score": 49.6,
+        "unit": "%",
+        "as_written": "JobBench",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "automationbench",
+        "score": 41.8,
+        "unit": "%",
+        "as_written": "AutomationBench-AA v1.0.6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "enterpriseops-gym",
+        "score": 42.0,
+        "unit": "%",
+        "as_written": "EnterpriseOps-Gym",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-finance-index",
+        "score": 50.1,
+        "unit": "%",
+        "as_written": "Vals Finance Index",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aa-analystagent",
+        "score": 46.3,
+        "unit": "%",
+        "as_written": "AA-AnalystAgent",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "diligencebench",
+        "score": 48.6,
+        "unit": "%",
+        "as_written": "Diligence Bench (best harness)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gdp-pdf",
+        "score": 16.8,
+        "unit": "%",
+        "as_written": "GDP.pdf",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "perceptionbench-moonshot",
+        "score": 57.5,
+        "unit": "%",
+        "as_written": "PerceptionBench",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "mmmu-pro",
+        "score": 74.9,
+        "unit": "%",
+        "as_written": "MMMU Pro (Standard 10)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "omnidocbench-1-6",
+        "score": 92.8,
+        "unit": "score",
+        "as_written": "OmniDocBench v1.6",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "screenspot-pro",
+        "score": 76.5,
+        "unit": "%",
+        "as_written": "ScreenSpot Pro (original, 87.7 with Python)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "chartography",
+        "score": 22.1,
+        "unit": "%",
+        "as_written": "Chartography (original, 72.5 with Python)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "zerobench",
+        "score": 17.0,
+        "unit": "%",
+        "as_written": "ZeroBench (main, original, 34.0 with Python)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "muirbench",
+        "score": 77.5,
+        "unit": "%",
+        "as_written": "MuirBench",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "bvb",
+        "score": 68.4,
+        "unit": "score",
+        "as_written": "BVB",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "hle-diamond",
+        "score": 15.2,
+        "unit": "%",
+        "as_written": "HLE-Diamond",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "critpt-v2",
+        "score": 31.4,
+        "unit": "%",
+        "as_written": "CritPt v2 (Full, 17.0 on Hard)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "matharena-apex-imo-usamo",
+        "score": 34.4,
+        "unit": "%",
+        "as_written": "Apex 2025",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-agi",
+        "score": 84.5,
+        "unit": "%",
+        "as_written": "ARC-AGI v1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "arc-agi-2",
+        "score": 49.3,
+        "unit": "%",
+        "as_written": "ARC-AGI v2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "longbench-v2",
+        "score": 66.9,
+        "unit": "%",
+        "as_written": "LongBench v2",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "graphwalks",
+        "score": 69.7,
+        "unit": "%",
+        "as_written": "GraphWalks BFS 256K",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "openai-mrcr-v2",
+        "score": 46.4,
+        "unit": "%",
+        "as_written": "MRCR v2 8-needle 256K to 512K",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aa-omniscience-1-1",
+        "score": -8.6,
+        "unit": "index",
+        "as_written": "AA-Omniscience v1.1 score (non-hallucination rate 63.4%)",
+        "section": "hallucination"
+      },
+      {
+        "benchmark": "complexconstraints",
+        "score": 33.4,
+        "unit": "%",
+        "as_written": "ComplexConstraints v1.1 (openhands v1.45.0)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "fortress",
+        "score": null,
+        "unit": "%",
+        "as_written": "FORTRESS (adversarial 89.5%, benign 96.4%), Public",
+        "section": "safety"
+      },
+      {
+        "benchmark": "strongreject",
+        "score": 97.8,
+        "unit": "%",
+        "as_written": "StrongREJECT (none)",
+        "section": "safety"
+      },
+      {
+        "benchmark": "misbehavior-thinking-machines",
+        "score": 9.8,
+        "unit": "%",
+        "as_written": "Misbehavior (Internal), lower is better",
+        "section": "safety"
+      },
+      {
+        "benchmark": "covert-misbehavior-thinking-machines",
+        "score": 8.3,
+        "unit": "%",
+        "as_written": "Covert misbehavior (Internal), lower is better",
+        "section": "safety"
+      },
+      {
+        "benchmark": "destructive-actions-thinking-machines",
+        "score": 10.2,
+        "unit": "%",
+        "as_written": "Destructive actions (Internal), lower is better",
+        "section": "safety"
+      },
+      {
+        "benchmark": "swe-bench-multimodal-v2",
+        "score": 37.9,
+        "unit": "%",
+        "as_written": "SWEBench Multimodal v2 (mini-swe-agent, Vals)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-code-migration-1-1",
+        "score": 23.2,
+        "unit": "%",
+        "as_written": "Code Migration v1.1 (pi, Vals)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "terminal-bench-science",
+        "score": 1.4,
+        "unit": "%",
+        "as_written": "Terminal Bench Science v0.1 (mini-swe-agent v2.4.6)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-finance-agent-v2-1",
+        "score": 56.5,
+        "unit": "%",
+        "as_written": "Finance Agent v2.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-excel-modeling-benchmark-1-1",
+        "score": 66.0,
+        "unit": "%",
+        "as_written": "Excel Modeling Benchmark v1.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-tax-agent-bench",
+        "score": 14.1,
+        "unit": "%",
+        "as_written": "Tax Agent Bench",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "babyvision",
+        "score": 53.4,
+        "unit": "%",
+        "as_written": "BabyVision (original, 88.8 with Python)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "charxiv",
+        "score": 80.6,
+        "unit": "%",
+        "as_written": "Charxiv RQ (original, 88.3 with Python)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-sage-1-1",
+        "score": 85.9,
+        "unit": "%",
+        "as_written": "SAGE v1.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "math-vision-mathvision",
+        "score": 89.0,
+        "unit": "%",
+        "as_written": "MathVision",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "code2video-aa",
+        "score": 870,
+        "unit": "elo",
+        "as_written": "Code2Video-AA",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "humanitys-last-exam",
+        "score": 30.7,
+        "unit": "%",
+        "as_written": "HLE (text only)",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "gpqa-diamond",
+        "score": 86.6,
+        "unit": "%",
+        "as_written": "GPQA Diamond",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "vals-mysterymechanism",
+        "score": 23.0,
+        "unit": "%",
+        "as_written": "MysteryMechanism",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "proofbench-1-1",
+        "score": 18.0,
+        "unit": "%",
+        "as_written": "ProofBench v1.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "aa-lcr-1-1",
+        "score": 80.0,
+        "unit": "%",
+        "as_written": "AA-LCR v1.1",
+        "section": "capabilities"
+      },
+      {
+        "benchmark": "honeybench-v0-2-alpha",
+        "score": 56.7,
+        "unit": "score",
+        "as_written": "HoneyBench v0.2, lower is better",
+        "section": "safety"
       }
     ]
   }

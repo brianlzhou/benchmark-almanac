@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1904.09728";
 const board: Leaderboard = {
-  benchmark: "siqa",
+  benchmark: "siqa", static: 'paper',
   parts: {
     test: { name: 'Test', group: 'Split' },
   },

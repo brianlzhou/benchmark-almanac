@@ -5,7 +5,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2503.03750';
 export default {
- benchmark:'mask',url:'https://arxiv.org/abs/2503.03750',feed,terms:PAPER_TERMS,
+ benchmark:'mask', static: 'paper',url:'https://arxiv.org/abs/2503.03750',feed,terms:PAPER_TERMS,
  aliases:{'grok-2-1212':'grok-2-dec-2024'},
  async fetch():Promise<LeaderboardRow[]> {
   const ts=flatPaperTables(await paperHtml(feed)).map(grid);

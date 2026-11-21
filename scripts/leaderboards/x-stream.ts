@@ -3,7 +3,7 @@ import type {Leaderboard} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {flatPaperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://arxiv.org/html/2606.02482';
-const board:Leaderboard={benchmark:'x-stream', parts: {
+const board:Leaderboard={benchmark:'x-stream', static: 'paper', parts: {
   instant: { name: 'Instant', group: 'Task type' },
   backward: { name: 'Backward', group: 'Task type' },
   forward: { name: 'Forward', group: 'Task type' },

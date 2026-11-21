@@ -5,7 +5,7 @@ import { flatPaperTables, grid, checked } from '../lib/boards/arxiv-span-tables.
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2506.21558';
 export default {
- benchmark:'btf-1',url:'https://arxiv.org/abs/2506.21558',feed,terms:PAPER_TERMS,
+ benchmark:'btf-1', static: 'paper',url:'https://arxiv.org/abs/2506.21558',feed,terms:PAPER_TERMS,
  harnesses:'system',
  aliases:{'gemini-2.5-pro-preview-03-25':'gemini-2-5-pro-mar-2025','claude-3-5-sonnet-20241022':'claude-3-5-sonnet-october-2024'},
  async fetch():Promise<LeaderboardRow[]> {

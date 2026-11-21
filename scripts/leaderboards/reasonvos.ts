@@ -7,7 +7,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2407.11325";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "reasonvos",
+  benchmark: "reasonvos", static: 'paper',
   parts: {
     referringJF: { name: 'Referring', group: 'Task type' },
     reasoningJF: { name: 'Reasoning', group: 'Task type' },

@@ -1,0 +1,4 @@
+// Co-Design Bench tests multimodal agents that build and edit web interfaces.
+// The headline is strict completion rate in percent on the combined benchmark track.
+// This importer reads the combined model table in the benchmark paper.
+import type {Leaderboard} from './types.ts';import {paperTables} from '../lib/boards/arxiv-nested-tables.ts';import {checked} from '../lib/boards/arxiv-span-tables.ts';const URL='https://arxiv.org/html/2610.35138';const board:Leaderboard={benchmark:'co-design-bench',static:'paper',url:URL,feed:URL,terms:'The authors publish the paper publicly at https://arxiv.org/abs/2610.35138.',async fetch(){const t=await paperTables(URL).then(x=>x[7]);if(!t)throw new Error('Co-Design Bench combined table missing');const out=t.slice(1).map(r=>({model:r[0].text,score:Number(r[1].text)*100,metrics:{graded:Number(r[2].text)*100,full:Number(r[3].text)}})).filter(r=>r.model&&Number.isFinite(r.score));return checked(out,5)}};export default board;

@@ -45,9 +45,8 @@ const board: Leaderboard = {
       }
       const when = Date.parse(`${r[iDate]?.text ?? ''} UTC`);
       const type = r[iType]?.text;
-      const rank = num(r[col('Rank')]?.text);
       rows.push({ open: type === 'Open' ? true : type === 'Proprietary' ? false : undefined,
-        metrics: rank != null ? { rank } : undefined, model: model.trim(), score, setting, harness, date: Number.isFinite(when) ? new Date(when).toISOString().slice(0, 10) : undefined });
+        model: model.trim(), score, setting, harness, date: Number.isFinite(when) ? new Date(when).toISOString().slice(0, 10) : undefined });
     }
     return rows;
   },

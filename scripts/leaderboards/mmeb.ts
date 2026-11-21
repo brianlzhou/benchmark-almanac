@@ -1,3 +1,4 @@
+// Read published model sizes in billions and accuracy on each dataset.
 // MMEB image leaderboard. Image-Overall is the percentage aggregate; embedding model identities and all category metrics remain intact.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
@@ -26,6 +27,8 @@ const board: Leaderboard = {
    GQA: { name: 'GQA', group: 'Category' },
    TextVQA: { name: 'TextVQA', group: 'Category' },
    VizWiz: { name: 'VizWiz', group: 'Category' },
+   Country211: { name: 'Country211', group: 'Category' },
+   CIRR: { name: 'CIRR', group: 'Category' },
    VisDial: { name: 'VisDial', group: 'Category' },
    NIGHTS: { name: 'NIGHTS', group: 'Category' },
    WebQA: { name: 'WebQA', group: 'Category' },
@@ -52,7 +55,7 @@ const board: Leaderboard = {
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
-return parseCsv(await fetchText(FEED)).filter(r=>r.Models&&num(r['Image-Overall'])!==undefined).map(r=>({model:text(r.Models),score:num(r['Image-Overall'])!,date:r.Date,metrics:Object.fromEntries(Object.entries(r).filter(([k])=>!['Rank','Date','Models','Image-Overall'].includes(k)).map(([k,v])=>[k,num(v)]).filter((p):p is [string,number]=>typeof p[1]==='number'))}));
+return parseCsv(await fetchText(FEED)).filter(r=>r.Models&&num(r['Image-Overall'])!==undefined).map(r=>({model:text(r.Models),score:num(r['Image-Overall'])!,date:r.Date,params:num(r['Model Size(B)']),metrics:Object.fromEntries(Object.entries(r).filter(([k])=>!['Rank','Date','Models','Image-Overall','Model Size(B)'].includes(k)).map(([k,v])=>[k,num(v)]).filter((p):p is [string,number]=>typeof p[1]==='number'))}));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.map(r => ({...r, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));

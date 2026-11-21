@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2507.01001";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "sciarena",
+  benchmark: "sciarena", static: 'paper',
   parts: {
     naturalScience: { name: 'Natural science', group: 'Domain' },
     healthcare: { name: 'Healthcare', group: 'Domain' },
@@ -23,12 +23,24 @@ const board: Leaderboard = {
     'Qwen3-30B-A3B-Instruct-2507': 'qwen3-30b-a3b-instruct-jul-2025',
   },
   async fetch(): Promise<LeaderboardRow[]> {
-    const t=(await paperTables(FEED))[4];
+    const published = await paperTables(FEED);
+    const t = published[4];
+    const normalize = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const weights = new Map<string, boolean>();
+    let open: boolean | undefined;
+    for (const row of published.find(table => table[0]?.[0]?.text === 'Organization') ?? []) {
+      if (row.length === 1) {
+        open = /open.source/i.test(row[0].text) ? true : row[0].text === 'Proprietary Models' ? false : undefined;
+      } else if (open !== undefined && row.length >= 4) {
+        weights.set(normalize(row.at(-4)!.text), open);
+        weights.set(normalize(row.at(-2)!.text), open);
+      }
+    }
     if(!t?.[0]?.some(c=>c.text==='Elo Score'))throw new Error('SciArena table changed');
     const rows:LeaderboardRow[]=[];
     for(const r of t){if(r.length!==9 || num(r[8].text)===undefined)continue;
       const model=paperModel(r[0].text.replace(/\s*\(\s*\)\s*$/,''));
-      rows.push({model,score:num(r[8].text)!,metrics:{naturalScience:num(r[3].text)!,healthcare:num(r[4].text)!,humanities:num(r[5].text)!,engineering:num(r[6].text)!,costPer100Calls:num(r[7].text)!}});
+      rows.push({model,open:weights.get(normalize(r[0].text)),score:num(r[8].text)!,metrics:{battles:num(r[2].text)!,naturalScience:num(r[3].text)!,healthcare:num(r[4].text)!,humanities:num(r[5].text)!,engineering:num(r[6].text)!,costPer100Calls:num(r[7].text)!}});
     }if(rows.length<38)throw new Error('SciArena expected 38 rows');return rows;
   },
 };

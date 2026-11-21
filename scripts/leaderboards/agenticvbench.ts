@@ -1,7 +1,7 @@
-// AgenticVBench: average video-editing task score in percent from the server-rendered leaderboard. Each model/harness pair remains separate. Retain the published uncertainty, task-family percentages, and submission date; exclude the human reference.
+// AgenticVBench: average video-editing task score in percent from the server-rendered leaderboard. Each model/harness pair remains separate. Retain the published uncertainty, task-family percentages, submitter and submission date. Exclude the human reference.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
-import { num, tables, text } from '../lib/html.ts';
+import { num, tables } from '../lib/html.ts';
 
 const FEED = "https://agenticvbench.com/leaderboard";
 // Undated API families do not identify a snapshot. Keep these as unlisted entries.
@@ -23,13 +23,14 @@ const board: Leaderboard = {
     const t = tables(await fetchText(FEED)).find(t => t[0]?.some(c => c.text === 'Harness') && t[0]?.some(c => c.text === 'Repurpose'));
     if (!t) throw new Error('AgenticVBench table missing');
     const rows: LeaderboardRow[] = [];
+    const submitterColumn = t[0].findIndex(c => c.text === "Submitter");
     for (const r of t.slice(1)) {
       const name = r[1]?.text, score = num(r[3]?.text);
       if (!name || /^human/i.test(name) || score === undefined) continue;
       const metrics: Record<string, number> = {};
       for (const [k, i] of [['repurpose', 4], ['sequence', 5], ['repair', 6], ['assembly', 7]] as const) { const v = num(r[i]?.text); if (v !== undefined) metrics[k] = v; }
       const uncertainty = num(r[3]?.text.split('±')[1]); if (uncertainty !== undefined) metrics.reportedUncertainty = uncertainty;
-      rows.push({ model: identity(name), score, harness: r[2]?.text, date: /^\d{4}-\d{2}-\d{2}$/.test(r[9]?.text) ? r[9].text : undefined, metrics });
+      rows.push({ submitter: r[submitterColumn]?.text || undefined, model: identity(name), score, harness: r[2]?.text, date: /^\d{4}-\d{2}-\d{2}$/.test(r[9]?.text) ? r[9].text : undefined, metrics });
     }
     if (!rows.length) throw new Error('AgenticVBench scores missing');
     return rows;

@@ -1,0 +1,6 @@
+// Japanese Nephrology Board Renewal tests medical question answering across 209 questions.
+// The headline is the proportion of correct answers reported in the paper's overall comparison.
+// This importer reads the article's abstract from the Frontiers page.
+import type {Leaderboard,LeaderboardRow} from './types.ts'; import {fetchText} from '../lib/util.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2025.1702668/full';
+const board:Leaderboard={benchmark:'jsn-nephrology-board-renewal-2014-2023',url:FEED,feed:FEED,static:'paper',terms:'Frontiers article access terms. https://creativecommons.org/licenses/by/4.0/',async fetch(){const t=await fetchText(FEED);const m=t.match(/o1 pro scored (\d+\.\d+)% \((\d+\/209)\), significantly higher than GPT-4[’']s (\d+\.\d+)% \((\d+\/209)[^)]*\)/);if(!m)throw new Error('JSN overall scores missing');return checked([{model:'o1 pro',score:Number(m[1]),metrics:{correct:Number(m[2].split('/')[0])}},{model:'GPT-4',score:Number(m[3]),metrics:{correct:Number(m[4].split('/')[0])}}],2);}};export default board;

@@ -1,4 +1,4 @@
-// WildVision-Bench vision_bench_0617: Score is the leaderboard ranking score, distinct from win rate. Preserve average response tokens, reward and preference counts without converting the headline score.
+// WildVision-Bench vision_bench_0617: Score is the leaderboard ranking score, distinct from win rate. Read the 95% interval as signed offsets from the score. Preserve average response tokens, reward and preference counts without converting the headline score.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text } from '../lib/html.ts';
@@ -23,7 +23,11 @@ const board: Leaderboard = {
     const all = markdownTables(source);
     const rows: LeaderboardRow[] = [];
     const table=all.find(t=>t[0].includes("Avg Tokens")&&t[0].includes("Reward"));if(!table)throw new Error("Missing WildVision table");
-    for(const r of table.slice(1)){const score=num(r[1]);if(score===undefined)continue;rows.push({model:r[0],score,setting:"vision_bench_0617",tokens:num(r[10]),metrics:Object.fromEntries(table[0].slice(3,10).flatMap((h,j)=>{const n=num(r[j+3]);return n===undefined?[]:[[h,n]];}))});}
+    for(const r of table.slice(1)){const score=num(r[1]);if(score===undefined)continue;const interval = r[table[0].indexOf('95% CI')]?.match(/^\(\s*([+-]?[\d.]+),\s*([+-]?[\d.]+)\s*\)$/);
+      rows.push({model:r[0],score,
+        low: interval ? Number((score + Number(interval[1])).toFixed(6)) : undefined,
+        high: interval ? Number((score + Number(interval[2])).toFixed(6)) : undefined,
+        setting:"vision_bench_0617",tokens:num(r[10]),metrics:Object.fromEntries(table[0].slice(3,10).flatMap((h,j)=>{const n=num(r[j+3]);return n===undefined?[]:[[h,n]];}))});}
     if (!rows.length) throw new Error("No wildvision-bench score rows");
     return rows;
   },

@@ -4,7 +4,7 @@
 // Physics-IQ score (0 to 100), which is the score. The model is the name before the first "+", the method
 // after it becomes the harness, and the input type ("multiframe (v2v)", "i2v") becomes the setting. Entries
 // arrive as pull requests from model makers, and the date added is the row date. Physics-IQ Verified, the
-// table above it, is its own record.
+// table above it, is its own record. The original table links the source of each reported result.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -20,7 +20,15 @@ const board: Leaderboard = {
   terms: 'README table in the google-deepmind/physics-IQ-benchmark GitHub repository; the code is Apache-2.0 and the scores are cited to the Physics-IQ authors.',
   aliases: {},
   async fetch() {
-    const t = mdTables(await fetchText(FEED)).find((x) => /Physics-IQ Original Leaderboard/.test(x.heading));
+    const md = await fetchText(FEED);
+    const section = md.split(/^### Physics-IQ Original Leaderboard\s*$/m)[1]?.split(/^#/m)[0] ?? '';
+    const links = new Map<string,string>();
+    for (const line of section.split('\n')) {
+      const rank = line.match(/^\|\s*(\d+)\s*\|/);
+      const url = line.match(/reported \[here\]\((https?:\/\/[^)]+)\)/i)?.[1];
+      if (rank && url) links.set(rank[1], url);
+    }
+    const t = mdTables(md).find((x) => /Physics-IQ Original Leaderboard/.test(x.heading));
     if (!t) throw new Error('Physics-IQ Original table not found');
     const rows: LeaderboardRow[] = [];
     for (const r of mdRecords(t)) {
@@ -30,7 +38,7 @@ const board: Leaderboard = {
       const [model, ...method] = entry.split(/\s+\+\s+/);
       const date = r['date added (YYYY-MM-DD)'];
       rows.push({
-        model: model.trim(),
+        model: model.trim(), link: links.get(r['#']), params: num(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B\b/i)?.[1]),
         score,
         harness: method.join(' + ') || undefined,
         setting: r['input type'] || undefined,

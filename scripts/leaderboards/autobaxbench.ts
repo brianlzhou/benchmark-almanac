@@ -10,7 +10,7 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
-    for(const split of ["easy"]){const data=JSON.parse(split==="easy"?source:await fetchText(FEED.replace("_easy.json",`_${split}.json`)));for(const r of data){if(typeof r.sec_pass_1!=="number")continue;rows.push({model:r.model.replace(/\s*\*$/, ""),score:r.sec_pass_1*100,metrics:{usedForTaskGeneration:r.model.includes("*")?1:0,pass1:r.pass_1*100,insecureAmongCorrect:r.insec_pass}});}}
+    for(const split of ["easy"]){const data=JSON.parse(split==="easy"?source:await fetchText(FEED.replace("_easy.json",`_${split}.json`)));for(const r of data){if(typeof r.sec_pass_1!=="number")continue;rows.push({model:r.model.replace(/\s*\*$/, ""),score:r.sec_pass_1*100,metrics:{usedForTaskGeneration:r.model.includes("*")?1:0,passAt1:r.pass_1*100,insecureAmongCorrect:r.insec_pass}});}}
     if (!rows.length) throw new Error("No autobaxbench score rows");
     return rows;
   },

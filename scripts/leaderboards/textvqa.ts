@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1904.08920";
 const board: Leaderboard = {
-  benchmark: "textvqa",
+  benchmark: "textvqa", static: 'paper',
   parts: {
     validation: { name: 'Validation', group: 'Split' },
   },

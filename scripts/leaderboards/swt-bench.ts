@@ -3,6 +3,7 @@
 // is tagged data-mode "unittest" (Unit Test Mode, checked by default) or "reproduction" (Script Mode), and
 // its first cell names the agent with the model in <small>. The importer reads the default view, Lite in
 // both Unit Test and Script modes. Verified is a different task set and is excluded.
+// Organization names come from the logo labels and the last column links trajectories.
 // S (success rate, 0 to 100) is the score, the agent is the harness and the date is kept.
 // ΔC, the mean change coverage of the generated tests (0 to 100), is kept as `coverageDelta`.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -33,10 +34,10 @@ const board: Leaderboard = {
       const score = num(text(cells[2] ?? ''));
       const date = text(cells[4] ?? '');
       const coverage = num(text(cells[3] ?? ''));
-      if (!model || score === undefined) continue;
+      if ((!model && !agent) || score === undefined) continue;
       // "Cl. Sonnet 3.5, CI setup": "Cl." abbreviates Claude, and a setup note follows the comma.
       // "GPT-4 + BM25": the retriever joins the harness.
-      let [name, note] = model.split(/,\s*/, 2);
+      let [name, note] = (model || agent).split(/,\s*/, 2);
       name = name.replace(/^Cl\.\s*/, 'Claude ');
       const plus = name.match(/^(.*?)\s*\+\s*(.+)$/);
       if (plus && /^BM25$/i.test(plus[2])) name = plus[1];
@@ -44,9 +45,11 @@ const board: Leaderboard = {
       const harness = [agent, plus && /^BM25$/i.test(plus[2]) ? plus[2] : undefined, note].filter(Boolean).join(', ');
       rows.push({
         model: name,
+        agentOrg:[...(cells[1] ?? '').matchAll(/\balt="([^"]+)"/g)].map(m=>text(m[1])).join(', ') || text(cells[1] ?? '') || undefined,
+        link:cells[5]?.match(/href="(https?:\/\/[^" ]+)"/)?.[1],
         score,
         setting:tr[1]==='unittest'?'Unit Test Mode':'Script Mode',
-        harness: harness || undefined,
+        harness: model ? harness || undefined : undefined,
         date: /^\d{4}-\d\d-\d\d$/.test(date) ? date : undefined,
         ...(coverage !== undefined ? { metrics: { coverageDelta: coverage } } : {}),
       });

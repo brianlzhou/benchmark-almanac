@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2307.16039';
 export default {
-  benchmark:'okapi-mmlu', parts: {
+  benchmark:'okapi-mmlu', static: 'paper', parts: {
   Russian: { name: 'Russian', group: 'Language' },
   German: { name: 'German', group: 'Language' },
   Chinese: { name: 'Chinese', group: 'Language' },

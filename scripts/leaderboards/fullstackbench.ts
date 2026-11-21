@@ -6,7 +6,7 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 
 const FEED = 'https://arxiv.org/html/2412.00535';
 const board: Leaderboard = {
-  benchmark: 'fullstackbench', parts: {
+  benchmark: 'fullstackbench', static: 'paper', parts: {
   others: { name: 'Others', group: 'Domain' },
   bp: { name: 'Basic programming', group: 'Domain' },
   ap: { name: 'Advanced programming', group: 'Domain' },

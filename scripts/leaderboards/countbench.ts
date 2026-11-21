@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2302.12066";
 
 const board: Leaderboard = {
-  benchmark: "countbench",
+  benchmark: "countbench", static: 'paper',
   url: "https://teaching-clip-to-count.github.io/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

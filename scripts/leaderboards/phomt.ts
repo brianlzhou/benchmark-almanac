@@ -1,0 +1,6 @@
+// PhoMT evaluates Vietnamese to English and English to Vietnamese machine translation.
+// Table 2 reports BLEU and TER for five systems. The headline uses test English-to-Vietnamese BLEU.
+import type {Leaderboard} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://aclanthology.org/2021.emnlp-main.369.pdf';
+const rows=[['Google Translate',39.86,35.76,46.52,45.86],['Bing Translator',40.37,35.74,46.04,46.09],['Transformer-base',42.12,37.19,43.79,44.28],['Transformer-big',42.94,37.83,43.04,44.06],['mBART',43.46,39.78,42.57,42.54]] as const;
+const board:Leaderboard={benchmark:'phomt',static:'paper',url:'https://aclanthology.org/2021.emnlp-main.369/',feed:FEED,terms:'The paper is available from ACL Anthology under its publication terms. https://aclanthology.org/faq/copyright/',parts:{enToViTer:{name:'Test English to Vietnamese TER',better:'lower'},viToEnBleu:{name:'Test Vietnamese to English BLEU'},viToEnTer:{name:'Test Vietnamese to English TER',better:'lower'}},async fetch(){const p=await pdfText(FEED);if(!p.includes('Table 2: Overall results'))throw Error('PhoMT Table 2 missing');return checked(rows.map(r=>({model:r[0],score:r[1],metrics:{viToEnBleu:r[2],enToViTer:r[3],viToEnTer:r[4]}})),5)}}; export default board;

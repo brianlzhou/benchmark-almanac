@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2606.20517";
 const board: Leaderboard = {
-  benchmark: "multi-lcb",
+  benchmark: "multi-lcb", static: 'paper',
   parts: {
     Python: { name: 'Python', group: 'Language' },
     'C++': { name: 'C++', group: 'Language' },

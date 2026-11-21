@@ -1,5 +1,5 @@
 // Era by Eon: the paper’s whole-evaluation accuracy in percent.
-// Intervals are secondary metrics. The account console is not needed for this public paper table.
+// Rows carry the paper’s 95% accuracy interval. The account console is not needed for this public paper table.
 // These rows are the paper’s static results. They will not refresh with later model evaluations.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2609.09853";
 const board: Leaderboard = {
-  benchmark: "era-by-eon",
+  benchmark: "era-by-eon", static: 'paper',
   url: "https://arxiv.org/html/2609.09853",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
@@ -15,7 +15,12 @@ const board: Leaderboard = {
   async fetch() {
     const t=tables(await fetchText(FEED)).find(t=>t[0]?.map(c=>c.text).join('|')==='Model|Accuracy|95% interval|Wrong|FA|NA');
     if(!t)throw new Error('Era accuracy table missing');
-    return t.slice(1).map(r=>({model:r[0].text,score:num(r[1].text)!,metrics:{wrong:num(r[3].text)!,falseAbstention:num(r[4].text)!,noAnswer:num(r[5].text)!}}));
+    return t.slice(1).map(r => {
+      const interval = r[2].text.match(/^\[([\d.]+),\s*([\d.]+)\]$/);
+      return {model:r[0].text, score:num(r[1].text)!, low:interval ? Number(interval[1]) : undefined,
+        high:interval ? Number(interval[2]) : undefined,
+        metrics:{wrong:num(r[3].text)!,falseAbstention:num(r[4].text)!,noAnswer:num(r[5].text)!}};
+    });
   },
 };
 

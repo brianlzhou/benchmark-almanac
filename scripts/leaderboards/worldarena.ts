@@ -28,7 +28,8 @@ const board: Leaderboard = {
     'Motion Smoothness': { name: 'Motion smoothness', group: 'Dimension' },
     Perspectivity: { name: 'Perspectivity', group: 'Dimension' },
     'Photometric Consistency': { name: 'Photometric consistency', group: 'Dimension' },
-    'Subject Consistency': { name: 'Subject consistency', group: 'Dimension' },
+    semanticAlignment: { name: 'Semantic Alignment', group: 'Dimension' },
+    'Subject Consistency':  { name: 'Subject consistency', group: 'Dimension' },
     'Trajectory Accuracy': { name: 'Trajectory accuracy', group: 'Dimension' },
   },
   url: "https://huggingface.co/spaces/WorldArena/WorldArena",
@@ -59,7 +60,7 @@ const board: Leaderboard = {
           for (const r of t.slice(1)) {
             const score = num(r[1]?.text); if (score === undefined) continue;
             const metrics: Record<string, number> = {};
-            for (let i = 3; i < head.length; i++) { const v = num(r[i]?.text); if (v !== undefined) metrics[head[i]] = v; }
+            for (let i = 3; i < head.length; i++) { const v = num(r[i]?.text); if (v !== undefined) metrics[head[i] === 'Semantic Alignment' ? 'semanticAlignment' : head[i]] = v; }
             rows.set(`${dep.api_name}|${r[0].text.toLowerCase()}`, {model: identity(r[0].text), score, metrics});
           }
         }

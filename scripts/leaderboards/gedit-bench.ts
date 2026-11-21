@@ -1,4 +1,4 @@
-// GEdit-Bench: G_O is the overall image-editing quality score, distinct from Kris-Bench. Preserve G_SC semantic consistency and G_PQ perceptual quality, including thinking/reflection variants.
+// GEdit-Bench: G_O is the overall image-editing quality score, distinct from Kris-Bench. Preserve G_SC semantic consistency and G_PQ perceptual quality, including thinking/reflection variants and the second judge’s scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
@@ -6,6 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://raw.githubusercontent.com/stepfun-ai/Step1X-Edit/main/README.md";
 const board: Leaderboard = {
   benchmark: "gedit-bench", parts: {
+  semanticConsistency: { name: 'Semantic consistency', group: 'Dimension' },
   perceptualQuality: { name: 'Perceptual quality', group: 'Dimension' },
 }, url: "https://raw.githubusercontent.com/stepfun-ai/Step1X-Edit/main/README.md", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
@@ -21,7 +22,7 @@ const board: Leaderboard = {
         const score=num(r[3]);if(score===undefined)continue;
         const model=r[0].replace(/Step1X-Edit \(v([\d.]+)\)/i,'Step1X-Edit v$1');
         const same=rows.find(x=>x.model.toLowerCase()===model.toLowerCase()&&Math.abs(x.score-score)<0.001);
-        const metrics={semanticConsistency:num(r[1])!,perceptualQuality:num(r[2])!,qwenOverall:num(r[6])!};
+        const metrics={semanticConsistency:num(r[1])!,perceptualQuality:num(r[2])!,qwenSemanticConsistency:num(r[4])!,qwenPerceptualQuality:num(r[5])!,qwenOverall:num(r[6])!};
         if(same)same.metrics={...same.metrics,...metrics};else rows.push({model,score,metrics});
       }
     }

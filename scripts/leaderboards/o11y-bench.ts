@@ -1,7 +1,7 @@
 // o11y-bench (Grafana observability tasks) on o11ybench.ai. The full board, /leaderboard (the home page shows
 // only the top 10), is static HTML whose first table is: # | Model | Effort | Pass^3 | Pass@3 | Solved | Cost / trial | Tokens / trial | Date. The page ranks by
 // Pass^3 (solved in all three trials, 0 to 100), which is the score. Cost per trial is the cost of one task
-// attempt, and Tokens per trial counts input too, so it is kept as totalTokensPerTrial rather than output tokens. Pass@3 (solved in at least one of the three
+// attempt, and Tokens per trial counts input too, so it is kept as totalTokens rather than output tokens. Pass@3 (solved in at least one of the three
 // trials) is kept as `passAt3`. Open-weight models carry an "Open" badge after the name, which we retain. The
 // reader parses the full ranking table.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -29,7 +29,7 @@ const board: Leaderboard = {
       const model=text(r[1].html.replace(/<span[^>]*title="Open-weight model"[^>]*>[\s\S]*?<\/span>/g,''));
       const score=num(r[3]?.text);if(!model||score===undefined)continue;
       const metrics:Record<string,number>={};const pass=num(r[4]?.text);if(pass!==undefined)metrics.passAt3=pass;
-      const usage=r[7]?.text.match(/^([\d.]+)\s*([kKmM]?)$/);if(usage)metrics.totalTokensPerTrial=Number(usage[1])*({k:1000,m:1000000}[usage[2].toLowerCase()]??1);
+      const usage=r[7]?.text.match(/^([\d.]+)\s*([kKmM]?)$/);if(usage)metrics.totalTokens=Number(usage[1])*({k:1000,m:1000000}[usage[2].toLowerCase()]??1);
       const rank = r[0].text;
       const raw = attrs.get(rank);
       const detail = categories?.find(c => c[0].text === rank && c[1].html.includes('title="' + model + '"'));
@@ -39,7 +39,7 @@ const board: Leaderboard = {
       });
       const counts = r[5]?.text.match(/^(\d+)\/(\d+)$/);
       if (counts) Object.assign(metrics, { solved: Number(counts[1]), tasks: Number(counts[2]) });
-      if (raw?.avg_total_tokens_per_trial) metrics.totalTokensPerTrial = Number(raw.avg_total_tokens_per_trial);
+      if (raw?.avg_total_tokens_per_trial) metrics.totalTokens = Number(raw.avg_total_tokens_per_trial);
       rows.push({model,score, trials: 3, open: raw ? raw['open-weight'] === 'true' : undefined, setting:r[2]?.text||undefined,cost:raw?.avg_cost_per_trial_usd ? Number(raw.avg_cost_per_trial_usd) : num(r[6]?.text),date:r[8]?.text,metrics});
     }return rows;
   },

@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2312.14115';
 export default {
-  benchmark:'lingoqa',url:'https://arxiv.org/abs/2312.14115',feed,terms:PAPER_TERMS,
+  benchmark:'lingoqa', static: 'paper',url:'https://arxiv.org/abs/2312.14115',feed,terms:PAPER_TERMS,
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
     const t=ts.find(t=>t[0]?.includes('No. Frames') && t[0].includes('Lingo-J'));

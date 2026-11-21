@@ -1,6 +1,6 @@
 // MTEB: the original English v1 suite, matching the catalog’s original benchmark.
 // The API publishes meanTask as its headline mean. Fractions become percentages.
-// Task-type aggregates remain metrics, and other MTEB suites are excluded.
+// The API also publishes model metadata, task-type aggregates and individual task scores.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -21,10 +21,27 @@ const board: Leaderboard = {
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    type R={model:{name:string},meanTask:number|null,scoresByTaskType:Record<string,number>,zeroShotPct:number};
+    type R = { model: { name:string, openWeights?:boolean, license?:string, memoryUsageMb?:number },
+      meanTask:number|null, meanTaskType:number|null, scoresByTaskType:Record<string,number>, scoresByTask:Record<string,number>,
+      zeroShotPct:number|null, activeParamsB:number|null, totalParamsB:number|null, embeddingDim:number|null, maxTokens:number|null };
     const d=await fetchJson<{benchmarkName:string,rows:R[]}>(FEED);
     if(d.benchmarkName!=='MTEB(eng, v1)')throw new Error('MTEB suite changed');
-    return d.rows.filter(r=>typeof r.meanTask==='number').map(r=>({model:r.model.name,score:r.meanTask!*100,metrics:Object.fromEntries(Object.entries(r.scoresByTaskType).filter(([,v])=>typeof v==='number').map(([k,v])=>[k,v*100]))}));
+    return d.rows.filter(r=>typeof r.meanTask==='number').map(r => {
+      const metrics = Object.fromEntries(Object.entries(r.scoresByTaskType).filter(([,v])=>typeof v==='number').map(([k,v])=>[k,v*100]));
+      for (const [name,value] of Object.entries(r.scoresByTask)) {
+        if (typeof value !== 'number') continue;
+        const key = 'task' + name;
+        board.parts![key] = { name, group: 'Task' };
+        metrics[key] = value * 100;
+      }
+      for (const key of ['zeroShotPct','activeParamsB','embeddingDim','maxTokens'] as const) {
+        if (typeof r[key] === 'number') metrics[key] = r[key];
+      }
+      if (typeof r.meanTaskType === 'number') metrics.meanTaskType = r.meanTaskType * 100;
+      if (typeof r.model.memoryUsageMb === 'number') metrics.memoryUsageMb = r.model.memoryUsageMb;
+      return {model:r.model.name,score:r.meanTask!*100,metrics,params:r.totalParamsB ?? undefined,
+        open:r.model.openWeights ?? undefined,license:r.model.license ?? undefined};
+    });
   },
 };
 

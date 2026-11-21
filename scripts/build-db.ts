@@ -136,6 +136,8 @@ for (const [id, x] of Object.entries<Json>(lb.boards)) {
     url: x.url,
     feed: x.feed,
     host: x.host,
+    headline: x.headline,
+    paper: x.static === 'paper' ? 1 : 0,
     terms: x.terms,
     license: info.license,
     noncommercial: info.nc ? 1 : 0,

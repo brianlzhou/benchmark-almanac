@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2506.05828";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "financereasoning",
+  benchmark: "financereasoning", static: 'paper',
   parts: {
     hard: { name: 'Hard', group: 'Difficulty' },
     medium: { name: 'Medium', group: 'Difficulty' },

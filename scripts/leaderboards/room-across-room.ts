@@ -8,7 +8,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2010.07954";
 const board: Leaderboard = {
-  benchmark: "room-across-room",
+  benchmark: "room-across-room", static: 'paper',
   url: "https://arxiv.org/html/2010.07954",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

@@ -2,7 +2,7 @@
 // The official leaderboard_utils.py defines it as "df_results[normalized_columns].mean(axis=1).round(2)".
 // data_visualization.py defines each part as "max(0, min(100, (z * 30) + 35))" using
 // the sample standard deviation; absent game scores contribute zero. Reproduce that published
-// definition, including baseline rows in normalization, while keeping raw game scores as metrics.
+// definition, including baseline rows in normalization, while keeping raw game scores, trial counts and individual outcomes as metrics.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -39,9 +39,21 @@ const board: Leaderboard = {
       const name=original.replace(/^🎮\s*/u,'');if(/^random/i.test(name))continue;
       const metrics:Record<string,number>={};let total=0;
       for(const g of games){
-        const score=data[g].results.find(r=>r.model===original)?.score;
+        const entry=data[g].results.find(r=>r.model===original);
+        const score=entry?.score;
         if(!Number.isFinite(score))continue;
         const key=g.toLowerCase().replace(/[^a-z0-9]+/g,'_');metrics[key]=score;
+        const prefix = g.toLowerCase().replace(/ (.)/g, (_, c: string) => c.toUpperCase());
+        const runs = data[g].runs;
+        if (typeof runs === 'number') metrics[prefix + 'Trials'] = runs;
+        if (typeof entry.highest_tail === 'number') metrics.highestTile = entry.highest_tail;
+        for (const [suffix, values] of Object.entries({ Score: entry.details ?? entry.detail_data,
+          BoxesOnTarget: entry.detail_box_on_target, CrackedLevels: entry.cracked_levels })) {
+          if (typeof values !== 'string') continue;
+          values.split(',').forEach((s, i) => {
+            if (s.trim() && Number.isFinite(Number(s))) metrics[prefix + suffix + (i + 1)] = Number(s);
+          });
+        }
         const {mean,std,positive}=stats[g];
         const normalized=!positive?0:std===0?(score>0?50:0):Math.max(0,Math.min(100,(score-mean)/std*30+35));
         metrics['norm_'+key]=normalized;total+=normalized;

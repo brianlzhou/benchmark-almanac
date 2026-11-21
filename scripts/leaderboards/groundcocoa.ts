@@ -1,0 +1,4 @@
+// GroundCocoa evaluates grounded compositional reasoning over travel-time questions.
+// Table 3 reports total accuracy and regular and atypical subset accuracy for model settings.
+import type {Leaderboard,LeaderboardRow} from './types.ts'; import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts'; import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://arxiv.org/html/2404.04237'; const board:Leaderboard={benchmark:'groundcocoa',static:'paper',url:FEED,feed:FEED,terms:PAPER_TERMS,async fetch():Promise<LeaderboardRow[]>{const t=paperTables(await paperHtml(FEED)).map(grid).find(t=>t[0]?.join('|')==='|Regular|Atypical|Total');if(!t)throw new Error('GroundCocoa table missing');const rows=t.slice(2).filter(r=>r[0]&&!/Models$/.test(r[0])).map(r=>({model:r[0],score:Number(r[3]),metrics:{regular:Number(r[1]),atypical:Number(r[2])}}));return checked(rows,20)}};export default board;

@@ -27,11 +27,10 @@ const board: Leaderboard = {
     const snap=model.match(/\s*\((\d\d)(\d\d)\)$/);
     const date=snap?`2024-${snap[1]}-${snap[2]}`:undefined;
     if(snap) model=model.slice(0,snap.index).trim();
-    const rank = num(r[0]?.text);
     const size = model.match(/[- ](\d+(?:\.\d+)?)B\b/i);
     return {model,open:r[2]?.text === 'Yes' ? true : r[2]?.text === 'No' ? false : undefined,
       params:size ? Number(size[1]) : undefined,score:num(r[3].text)!,date,setting:frames?`max_frames=${frames[1]}`:undefined,
-      metrics:{...(rank === undefined ? {} : { rank }), ...(frames ? { maxFrames: Number(frames[1]) } : {}), ...Object.fromEntries([4,5,6,7,8].filter(i=>num(r[i]?.text)!==undefined).map(i=>[t[0][i].text,num(r[i].text)!]))}};
+      metrics:{...(frames ? { maxFrames: Number(frames[1]) } : {}), ...Object.fromEntries([4,5,6,7,8].filter(i=>num(r[i]?.text)!==undefined).map(i=>[t[0][i].text,num(r[i].text)!]))}};
   });
  },
 };

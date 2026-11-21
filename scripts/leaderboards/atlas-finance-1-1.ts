@@ -1,4 +1,5 @@
 // Handshake's current table explicitly identifies ATLAS-Finance v1.1.0.
+// The table labels the three-attempt success rate pass@3.
 // Read unrounded token counts from Sanity's table in __NEXT_DATA__, not the formatted HTML.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -23,9 +24,9 @@ const board: Leaderboard = {
       const labels = blocks(r.cells[0]);
       const values = r.cells.slice(1).map(c => Number(blocks(c)[0]));
       if (values.some(v => !Number.isFinite(v))) throw new Error('Invalid ATLAS-Finance numeric cell');
-      const [score, ciMargin, pass3, rubricScore, cost, minutes, inputTokens, tokens] = values;
+      const [score, ciMargin, passAt3, rubricScore, cost, minutes, inputTokens, tokens] = values;
       return { model: labels[0], setting: labels[1]?.split('·')[1]?.trim().toLowerCase(), harness: 'OpenCode', score, cost, tokens, low: score - ciMargin, high: score + ciMargin,
-        metrics: { ciMargin, pass3, rubricScore, latency: minutes * 60, inputTokens } };
+        metrics: { ciMargin, passAt3, rubricScore, latency: minutes * 60, inputTokens } };
     });
     if (!rows.length) throw new Error('ATLAS-Finance rows missing');
     return rows;

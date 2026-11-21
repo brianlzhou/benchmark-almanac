@@ -17,8 +17,12 @@ const board: Leaderboard = {
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    const d=await fetchJson<{model:string,agent:string,overall:number,scores:Record<string,number>}[]>(FEED);
-    return d.filter(r=>typeof r.overall==='number').map(r=>({model:r.model,score:r.overall,harness:r.agent,metrics:r.scores}));
+    const d=await fetchJson<{model:string,agent:string,date?:string,overall:number,scores:Record<string,number>}[]>(FEED);
+    return d.filter(r=>typeof r.overall==='number').map(r=>{
+      const stamp = Date.parse((r.date ?? '') + ' UTC');
+      return {model:r.model,score:r.overall,harness:r.agent,metrics:r.scores,
+        date:Number.isFinite(stamp) ? new Date(stamp).toISOString().slice(0,10) : undefined};
+    });
   },
 };
 

@@ -4,6 +4,7 @@
 // headline, as on the full board. Step budgets other than the default 500 go into `setting`, and agent
 // rows ("Sai w/ Claude Opus 5") split at " w/ ". The full-set reader is makeOsworld2 in osworld-2-0.ts,
 // which reads only the full set, so this file repeats its loop for the offline scope.
+// Keep each published step budget as a metric.
 // partialScore, the board's partial-credit score (0 to 100), is kept as metrics.partial.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -63,7 +64,10 @@ const board: Leaderboard = {
           link: [r.trajectoryUrl, r.reproductionGuideUrl].find((url) => url?.startsWith('https://')),
         cost: r.costPerTaskUsd ?? (typeof r.estimatedCostUsd === 'number' ? r.estimatedCostUsd / OFFLINE_TASKS : undefined),
         tokens: r.outputTokensPerTask ?? undefined,
-        metrics: typeof r.partialScore === 'number' ? { partial: r.partialScore } : undefined,
+        metrics: {
+          ...(typeof r.partialScore === 'number' ? {partial: r.partialScore} : {}),
+          ...(typeof r.stepBudget === 'number' ? {stepBudget: r.stepBudget} : {}),
+        },
       });
     }
     return rows;

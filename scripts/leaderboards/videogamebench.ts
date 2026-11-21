@@ -12,6 +12,7 @@ const URL = 'https://vgbench.com/';
 const board: Leaderboard = {
   benchmark: 'videogamebench',
   parts: {
+    'Civilization I': { name: 'Civilization I', group: 'Environment' },
     'The Need for Speed': { name: 'The Need for Speed', group: 'Environment' },
     'The Incredible Machine': { name: 'The Incredible Machine', group: 'Environment' },
     'Pokemon Crystal': { name: 'Pokemon Crystal', group: 'Environment' },

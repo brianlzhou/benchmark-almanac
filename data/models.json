@@ -14589,6 +14589,22 @@
     "epoch": "Inkling 2 Small"
   },
   {
+    "id": "inkling-2-mini",
+    "name": "Inkling 2 Mini",
+    "lab": "thinking-machines",
+    "family": "Inkling",
+    "released": "2026-11-20",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://thinkingmachines.ai/news/inkling-2-mini/",
+    "aliases": [
+      "Inkling-2-Mini",
+      "Inkling 2-Mini",
+      "Inkling Mini 2",
+      "thinkingmachines/Inkling-2-Mini"
+    ]
+  },
+  {
     "id": "claude-fable-5-2",
     "name": "Claude Fable 5.2",
     "lab": "anthropic",

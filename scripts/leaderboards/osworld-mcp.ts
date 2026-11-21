@@ -1,3 +1,4 @@
+// Read run counts and step limits from Details and the listed company for agent frameworks.
 // OSWorld-MCP task accuracy percentages by step budget and prompt. Keep tool invocation rate and action compression separately; named agent frameworks remain harnesses.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -24,7 +25,11 @@ const board: Leaderboard = {
       const agent = /Agentic framework/.test(r[2].text);
       const metrics: Record<string, number> = {};
       for (const [k,i] of [['TIR',4],['ACS',5]] as const) { const v = num(r[i]?.text); if (v !== undefined) metrics[k] = v; }
-      out.push({model: identity((version || label).replace(/-thinking$/, '')), score, setting: (/thinking$/.test(version) ? 'thinking; ' : '') + r[2].text.replace(/^Type:.*?(?=Max Steps:)/,''), harness: agent ? label : undefined, metrics});
+      const maxSteps = r[2].text.match(/Max Steps:\s*(\d+)/i);
+      if (maxSteps) metrics.maxSteps = Number(maxSteps[1]);
+      const runs = r[2].text.match(/Runs:\s*(\d+)/i);
+      const company = text(r[1].html.match(/class="model-company"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '');
+      out.push({trials: runs ? Number(runs[1]) : undefined, agentOrg: agent ? company || undefined : undefined, model: identity((version || label).replace(/-thinking$/, '')), score, setting: (/thinking$/.test(version) ? 'thinking; ' : '') + r[2].text.replace(/^Type:.*?(?=Max Steps:)/,''), harness: agent ? label : undefined, metrics});
     }
     if (!out.length) throw new Error('OSWorld-MCP scores missing');
     return out;

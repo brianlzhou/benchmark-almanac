@@ -4,7 +4,7 @@
 // in the registry match. The table's Score (partial-credit task score, 0 to 100) and EE Speed (end-effector
 // speed, cm/s) are kept in metrics as "taskScore" and "eeSpeed". The latency cells do not line up with their
 // headers in some versions; read them only when row/header lengths match.
-// Complexity and instruction-specificity success rates are metrics on the whole-benchmark row.
+// Policy metadata, success intervals and episode counts come from the official JSON. Complexity and instruction-specificity success rates are metrics on the whole-benchmark row.
 import type { Leaderboard } from './types.ts';
 import { fetchText, fetchJson } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
@@ -53,21 +53,29 @@ const board: Leaderboard = {
       }
     }
     // The official JSON also exposes vague/specific instructions, absent from the static default table.
-    interface Result { sr: number; score?: number; ee_speed_cm_s?: number; episodes?: number; sr_ci_cp?: number[]; by_difficulty?: Record<string, Result>; by_axis?: Record<string, Result> }
-    const data = await fetchJson<{entries: {display_name: string; results: Record<string, Result>}[]}>('https://research.nvidia.com/labs/srl/projects/robolab/static/data/leaderboard.json');
+    interface Result { successes?:number; episodes_per_task?:number; ee_speed_sd_cm_s?:number; ee_sparc?:number; sr: number; score?: number; ee_speed_cm_s?: number; episodes?: number; sr_ci_cp?: number[]; by_difficulty?: Record<string, Result>; by_axis?: Record<string, Result> }
+    const data = await fetchJson<{entries: {display_name: string; organization?:string; source?:string; policy?:{size?:string,action_horizon_steps?:string};
+      provenance?:{display_date?:string}; open_sourcing?:{status?:string}; results: Record<string, Result>}[]}>('https://research.nvidia.com/labs/srl/projects/robolab/static/data/leaderboard.json');
     for (const entry of data.entries) {
       const original = rows.find(r => r.model === entry.display_name);
       if (!original) continue;
+      const stamp = Date.parse((entry.provenance?.display_date ?? '').replace(/^(Submitted|Evaluated) /,'') + ' UTC');
+      const size = entry.policy?.size?.match(/^~?([\d.]+)([BM])(?: parameters)?$/i);
+      const status = entry.open_sourcing?.status;
+      const metadata = {agentOrg:entry.organization,submitter:entry.source==='external-submission'?entry.organization:undefined,
+        open:status==='open'?true:status==='closed'?false:undefined,params:size?Number(size[1])/(size[2]==='M'?1000:1):undefined,
+        date:Number.isFinite(stamp)?new Date(stamp).toISOString().slice(0,10):undefined};
       for (const [variant, r] of Object.entries(entry.results)) {
         if (!Number.isFinite(r.sr)) continue;
         const metrics: Record<string, number> = variant === 'default' ? {...original.metrics} : {};
-        for (const [key, n] of Object.entries({taskScore:r.score, eeSpeed:r.ee_speed_cm_s, episodes:r.episodes, ciLow:r.sr_ci_cp?.[0], ciHigh:r.sr_ci_cp?.[1]})) if (Number.isFinite(n)) metrics[key] = n!;
+        for (const [key, n] of Object.entries({taskScore:r.score, eeSpeed:r.ee_speed_cm_s, episodes:r.episodes, successes:r.successes, actionHorizonSteps:num(entry.policy?.action_horizon_steps), eeSpeedSd:r.ee_speed_sd_cm_s, eeSparc:r.ee_sparc})) if (Number.isFinite(n)) metrics[key] = n!;
         for (const [key, value] of Object.entries({...r.by_difficulty, ...r.by_axis})) {
           if (Number.isFinite(value.sr)) metrics[key] = value.sr;
           if (Number.isFinite(value.score)) metrics[key+'_score'] = value.score!;
         }
-        if (variant === 'default') original.metrics = metrics;
-        else rows.push({model: original.model, harness: original.harness, setting: `${variant} instructions`, score:r.sr, metrics});
+        const run = {...metadata,low:r.sr_ci_cp?.[0],high:r.sr_ci_cp?.[1],trials:r.episodes_per_task,metrics};
+        if (variant === 'default') Object.assign(original,run);
+        else rows.push({model: original.model, harness: original.harness, setting: `${variant} instructions`, score:r.sr, ...run});
       }
     }
     return rows;

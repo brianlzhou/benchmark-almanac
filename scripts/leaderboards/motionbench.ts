@@ -1,5 +1,5 @@
 // MotionBench: use Test average accuracy, in percent. Keep Dev accuracy as a secondary metric.
-// Preserve frame budgets as settings and
+// Keep row dates, model sizes, frame budgets and
 // category scores as metrics. Model cells include a separate affiliation, which is not part of the name.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -25,7 +25,11 @@ for(const r of t.slice(1)) {
  if(r.length!==13)continue;
  const model=text(r[1].html.split(/<p\b|<br\s*\/?\s*>/i)[0]);
  const metrics:Record<string,number>={};for(let i=7;i<13;i++){const v=num(r[i].text);if(v!==undefined)metrics[t[0][i].text]=v;}
- for(const [col,label] of [[5,'Dev'],[6,'Test']] as const){const score=num(r[col].text);if(score===undefined)continue;rows.push({model,score,setting:`${label}; frames: ${r[2].text}`,metrics});}
+ const parts = r[4].text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+ const date = parts ? [parts[1],parts[2].padStart(2,'0'),parts[3].padStart(2,'0')].join('-') : undefined;
+ const active = r[3].text.match(/A([\d.]+)B/);
+ if (active) metrics.activeParams = Number(active[1]);
+ for(const [col,label] of [[5,'Dev'],[6,'Test']] as const){const score=num(r[col].text);if(score===undefined)continue;rows.push({model,score,date,params:num(r[3].text),setting:`${label}; frames: ${r[2].text}`,metrics});}
 }
 if(!rows.length)throw new Error('No motion results');
 return rows.filter(r => r.setting!.startsWith('Test; ')).map(r => {

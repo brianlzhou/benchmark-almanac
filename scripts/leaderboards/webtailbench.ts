@@ -1,5 +1,6 @@
 // WebTailBench v1.5: Outcome Success is the headline task-success percentage.
 // The README highlights improvement on outcome success (final task state correct).
+// The size column gives billions of parameters. The caption gives three runs for the Fara models.
 // Process Success measures intermediate steps and remains a secondary metric.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -25,7 +26,9 @@ const board: Leaderboard = {
     const all = markdownTables(source);
     const rows: LeaderboardRow[] = [];
     const table=all.find(t=>t[0].some(h=>h.startsWith("WebTailBench")));if(!table)throw new Error("Missing WebTailBench columns");
-    for(const r of table.slice(1))for(const [i,h] of table[0].entries()){if(!h.startsWith("WebTailBench"))continue;const score=num(r[i]);if(score===undefined)continue;let model=r[0].replace(/†/g,""),harness: string|undefined; if(model.endsWith(" SoM")){harness="SoM";model=model.slice(0,-4);}const m=model.match(/^(.+) Solver \((.+)\)$/);if(m){harness=m[1]+" Solver";model=m[2];}rows.push({model,score,setting:h,harness});}
+    for(const r of table.slice(1))for(const [i,h] of table[0].entries()){if(!h.startsWith("WebTailBench"))continue;const score=num(r[i]);if(score===undefined)continue;let model=r[0].replace(/†/g,""),harness: string|undefined; if(model.endsWith(" SoM")){harness="SoM";model=model.slice(0,-4);}const m=model.match(/^(.+) Solver \((.+)\)$/);if(m){harness=m[1]+" Solver";model=m[2];}const size = r[table[0].indexOf('Size')]?.match(/^(\d+(?:\.\d+)?)B$/);
+      const trials = /^(?:Fara1\.5-|Fara-7B$)/.test(model) && source.includes('All Fara1.5 and Fara-7B numbers are averaged over three independent runs') ? 3 : undefined;
+      rows.push({model,score,setting:h,harness,params:size ? Number(size[1]) : undefined,trials});}
     if (!rows.length) throw new Error("No webtailbench score rows");
     const overall = rows.filter(r => r.setting?.endsWith('(Outcome)'));
     for (const row of overall) {

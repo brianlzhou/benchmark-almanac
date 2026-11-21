@@ -5,7 +5,7 @@
 // are API ids, whose date stamps pick the snapshot. galileo-agent-leaderboard.ts reads the v1 tab.
 // Metrics: "Avg TSQ" (tool selection quality, 0 to 100) as `tsq`, "Avg Session Duration" (seconds per
 // conversation) as `latency` and "Avg Turns" as `turns`. The tab's "Speed vs Accuracy Trade-off" chart plots
-// session duration against Action Completion.
+// session duration against Action Completion. The CSV also breaks out each industry and both token prices.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -58,6 +58,7 @@ const board: Leaderboard = {
   feed: `${galileoFeed('results_v2.csv')} (Avg AC)`,
   terms: GALILEO_TERMS,
   aliases: GALILEO_ALIASES,
+  parts: { banking: 'Banking', healthcare: 'Healthcare', insurance: 'Insurance', investment: 'Investment', telecom: 'Telecom' },
   chart: {
     title: 'Speed vs Accuracy Trade-off',
     note: 'Average session duration of one conversation against Action Completion.',
@@ -78,7 +79,21 @@ const board: Leaderboard = {
       put('tsq', 'Avg TSQ', 100);
       put('latency', 'Avg Session Duration');
       put('turns', 'Avg Turns');
+      put('priceIn', '$/M input token');
+      put('priceOut', '$/M output token');
+      put('inputCost', 'Avg Input Cost ($)');
+      put('outputCost', 'Avg Output Cost ($)');
+      for (const industry of ['Banking', 'Healthcare', 'Insurance', 'Investment', 'Telecom']) {
+        const key = industry.toLowerCase();
+        put(key, industry + ' AC', 100);
+        put(key + 'Tsq', industry + ' TSQ', 100);
+        put(key + 'Cost', industry + ' Cost');
+        put(key + 'Latency', industry + ' Duration');
+        put(key + 'Turns', industry + ' Turns');
+      }
       rows.push({
+        setting: r['Output Type'] || undefined,
+        open: r['Model Type'] === 'Open source' ? true : r['Model Type'] === 'Proprietary' ? false : undefined,
         model: r.Model.trim(),
         score: score * 100,
         cost: Number.isFinite(cost) ? cost : undefined,

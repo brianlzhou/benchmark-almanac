@@ -7,6 +7,8 @@ const FEED = "https://www.youzhexie.me/papers/YoCausal/index.html";
 const board: Leaderboard = {
   benchmark: "yocausal",
   parts: {
+    rsiDc: {name:'Causal', group:'Causality'},
+    rsiDnc: {name:'Non-causal', group:'Causality'},
     general: { name: 'General', group: 'Category' },
     physics: { name: 'Physics', group: 'Category' },
     human: { name: 'Human', group: 'Category' },
@@ -20,7 +22,11 @@ const board: Leaderboard = {
 
 const s=await fetchText(FEED);const a=jsLiteral(s,s.indexOf('[',s.indexOf('const rsiData'))) as any[];
 const c=jsLiteral(s,s.indexOf('[',s.indexOf('const cciData'))) as any[];
-return a.map(r=>({model:r.model,score:r.Average,metrics:{general:r.General,physics:r.Physics,human:r.Human,animal:r.Animal,...(c.find(x=>x.model===r.model)?{cci:c.find(x=>x.model===r.model).CCI}:{})}}));
+return a.map(r => {
+  const detail = c.find(x => x.model === r.model);
+  return {model:r.model, score:r.Average, metrics:{general:r.General,physics:r.Physics,human:r.Human,animal:r.Animal,
+    ...(detail ? {cci:detail.CCI, normalizedCci:detail.Normalize, rsiDc:detail.RSI_Dc, rsiDnc:detail.RSI_Dnc} : {})}};
+});
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

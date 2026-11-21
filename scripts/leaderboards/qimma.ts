@@ -1,4 +1,4 @@
-// QIMMA published average percentage and component scores from the public Space API. Preserve checkpoint and precision, without mapping community fine-tunes to their bases.
+// QIMMA published average percentage and component scores from the public Space API. Keep size and license alongside checkpoint and precision, without mapping community fine-tunes to their bases.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -38,7 +38,7 @@ const board: Leaderboard = {
       const name = r['Model Name']; if (!name || typeof r.Average !== 'number') continue;
       const metrics: Record<string, number> = {};
       for (const [k,v] of Object.entries(r)) if (typeof v === 'number' && !['Rank','Average','Model Size','Hub ❤️'].includes(k)) metrics[k] = v;
-      out.push({model: makers.has(name.split('/')[0]) ? name : name.replace('/', ' '), score: r.Average, setting: [r['Full Type'],r.Precision,`checkpoint ${r.Revision}`].filter(Boolean).join('; '), metrics});
+      out.push({model: makers.has(name.split('/')[0]) ? name : name.replace('/', ' '), score: r.Average, license: r.License || undefined, params: typeof r['Model Size'] === 'number' && r['Model Size'] > 0 ? r['Model Size'] : undefined, setting: [r['Full Type'],r.Precision,`checkpoint ${r.Revision}`].filter(Boolean).join('; '), metrics});
     }
     if (!out.length) throw new Error('QIMMA leaderboard missing');
     return out;

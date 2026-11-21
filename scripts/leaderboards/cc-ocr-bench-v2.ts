@@ -8,7 +8,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2605.03903";
 const board: Leaderboard = {
- benchmark: "cc-ocr-bench-v2",
+ benchmark: "cc-ocr-bench-v2", static: 'paper',
  parts: {
    recognition: { name: 'Recognition', group: 'Task type' },
    parsing: { name: 'Parsing', group: 'Task type' },

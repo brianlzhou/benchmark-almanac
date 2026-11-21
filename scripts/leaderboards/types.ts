@@ -97,6 +97,17 @@ export interface Leaderboard {
    * name it, as "Vals AI's leaderboard", instead of calling it the benchmark's own leaderboard.
    */
   host?: string;
+  /**
+   * One sentence on how the headline score is made, when the source gives no overall score and the importer
+   * computes one (the plain mean of the parts, or one part standing in for the whole). Shows on the benchmark page.
+   */
+  headline?: string;
+  /**
+   * 'paper' when the source is a fixed table that gains no models, such as the results table in the benchmark's
+   * paper or a chart transcribed from it. A full sync then reads it about once a month instead of every run, and the
+   * benchmark page says the scores come from the paper, not a leaderboard.
+   */
+  static?: 'paper';
   /** Names on this board that the shared resolver cannot place: board name -> model id. */
   aliases?: Record<string, string>;
   /** A chart the board draws from more than its headline score. */

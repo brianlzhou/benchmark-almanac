@@ -1,4 +1,4 @@
-// NYU CTF Bench challenge success percentages, computed from the published solved counts and dataset denominator. Preserve agent, pass-at-k, and category solved counts.
+// NYU CTF Bench challenge success percentages, computed from the published solved counts and dataset denominator. Preserve agent, pass-at-k, category solved counts and category success rates.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -15,9 +15,18 @@ const board: Leaderboard = {
   async fetch() {
     const data = await fetchJson<{dataset: Record<string,number>; submissions: any[]}>(FEED);
     if (!data.dataset.total) throw new Error('NYU CTF challenge total missing');
+    board.parts = Object.fromEntries(Object.keys(data.dataset).filter(key => key !== 'total').map(key => [key, {name: key, group: 'Category'}]));
     return data.submissions.flatMap(r => {
       if (typeof r.solved !== 'number') return [];
-      return [{model: identity(r.model), score: 100*r.solved/data.dataset.total, setting: r.comment, harness: r.name, date: r.date?.replaceAll('/','-'), metrics: {solved:r.solved,total:data.dataset.total,...Object.fromEntries(Object.entries(r.per_category ?? {}).filter(([,v]) => typeof v === 'number').map(([k,v]) => [`solved:${k}`,v as number]))}}];
+      const score = 100 * r.solved / data.dataset.total;
+      const metrics: Record<string, number> = {solved: r.solved, total: data.dataset.total};
+      if (r.comment === 'pass@5') metrics.passAt5 = score;
+      for (const [key, count] of Object.entries(r.per_category ?? {})) {
+        if (typeof count !== 'number') continue;
+        metrics['solved:' + key] = count;
+        if (data.dataset[key] > 0) metrics[key] = 100 * count / data.dataset[key];
+      }
+      return [{model: identity(r.model), score, setting: r.comment, harness: r.name, date: r.date?.replaceAll('/','-'), metrics}];
     });
   },
 };

@@ -47,7 +47,7 @@ const board: Leaderboard = {
       if (passAt4 !== undefined) metrics.passAt4 = passAt4;
       if (pass4 !== undefined) metrics.pass4 = pass4;
       const rank = num(r[0]?.text);
-      if (rank !== undefined) metrics.rank = rank;
+      if (rank !== undefined) metrics.reasoningGroupRank = rank;
       for (const [group, task] of ['Delivery', 'In-store', 'OTA'].entries()) {
         for (const [offset, measure] of ['Avg@4', 'Pass@4', 'Pass^4'].entries()) {
           const value = num(r[5 + 3 * group + offset]?.text);

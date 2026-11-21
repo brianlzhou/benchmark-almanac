@@ -1,5 +1,5 @@
 // CG-Bench: long-video MCQ accuracy is the headline percentage, distinct from clue-only accuracy.
-// Grounding, credibility and open-ended scores remain metrics, with both frame budgets retained.
+// Keep rank, language-model size, frame budgets, grounding and open-ended measures.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, text, tables } from '../lib/html.ts';
@@ -17,7 +17,10 @@ const board: Leaderboard = {
   if(!t)throw new Error('CG-Bench leaderboard missing');
   return t.slice(2).filter(r=>num(r[6]?.text)!==undefined).map(r=>({model:r[1].text,score:num(r[6].text)!,
     setting:`long MCQ; params=${r[2].text}; clue frames=${r[3].text}; long frames=${r[4].text}`,
-    metrics:Object.fromEntries(['clueAccuracy','longAccuracy','mIoU','recallAtIoU','accuracyAtIoU','CRR','openEndedAccuracy'].map((h,i)=>[h,num(r[i+5]?.text)]).filter((p):p is [string,number]=>typeof p[1]==='number'))
+    metrics:{publishedTableRank:num(r[0].text)!, ...(/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? {llmParams:parseFloat(r[2].text)} : {}),
+      ...(/^\d+$/.test(r[3].text) ? {clueFrames:Number(r[3].text)} : {}),
+      ...(/^\d+$/.test(r[4].text) ? {longFrames:Number(r[4].text)} : {}),
+      ...Object.fromEntries(['clueAccuracy' ,'longAccuracy','mIoU','recallAtIoU','accuracyAtIoU','CRR','openEndedAccuracy'].map((h,i)=>[h,num(r[i+5]?.text)]).filter((p):p is [string,number]=>typeof p[1]==='number'))}
   }));
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.

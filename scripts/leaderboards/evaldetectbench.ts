@@ -58,7 +58,7 @@ const ROWS: LeaderboardRow[] = [
   }
 ];
 const board: Leaderboard = {
-  benchmark: "evaldetectbench",
+  benchmark: "evaldetectbench", static: 'paper',
   url: "http://evaldetectbench.com/",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

@@ -36,7 +36,7 @@ const board: Leaderboard = {
         ...(output.length ? {tokens:output.reduce((s:number,u:any)=>s+u.outputTokens,0)/output.length} : {}),
         metrics:{...timing,scored:runs.filter((r:any)=>r.score!==null).length, registered:d.registered,
           ...(cost !== undefined ? {cost} : {}),
-          ...(us.length ? {totalTokensPerTask:us.reduce((s:number,u:any)=>s+u.totalTokens,0)/us.length} : {})}};
+          ...(us.length ? {totalTokens:us.reduce((s:number,u:any)=>s+u.totalTokens,0)/us.length} : {})}};
     });
   },
 };

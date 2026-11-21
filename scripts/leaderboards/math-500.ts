@@ -43,12 +43,11 @@ const board: Leaderboard = {
       const run = key ? runs[key]?.[1] : undefined;
       const same = typeof run?.accuracy?.[1] === 'number' && Math.abs(run.accuracy[1] - value) < 0.006;
       const stderr = same ? run?.stderr?.[1] : undefined;
-      const rank = num(r[headers.indexOf('Rank')]?.text);
       const mode = name.match(/\((Thinking|Nonthinking)\)/i)?.[1]?.toLowerCase();
       return [{ model: name, score: value, setting: ['Vals AI harness', mode].filter(Boolean).join(', '),
         cost: same ? run?.cost_per_test?.[1] : undefined, link: href ? new URL(href, FEED).href : undefined,
         low: stderr != null ? value - 1.96 * stderr : undefined, high: stderr != null ? value + 1.96 * stderr : undefined,
-        metrics: { ...metrics, ...(rank !== undefined ? { rank } : {}), ...(stderr != null ? { stderr } : {}) } }];
+        metrics: { ...metrics, ...(stderr != null ? { stderr } : {}) } }];
     });
     if (!rows.length) throw new Error('MATH-500 Vals rows missing');
     return rows;

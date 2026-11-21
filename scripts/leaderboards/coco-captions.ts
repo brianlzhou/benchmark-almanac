@@ -1,4 +1,4 @@
-// COCO defaults to the C5 captioning board, ranked by CIDEr-D. Raw CIDEr-D is multiplied by 100 to match this catalog record and its lab results. Source submission names identify systems and remain unlisted. Empty names are excluded. Repeated names keep their latest submission. C40 and human challenge metrics are different views.
+// COCO defaults to the C5 captioning board, ranked by CIDEr-D. Raw CIDEr-D is multiplied by 100 to match this catalog record and its lab results. Team names identify systems. Keep the submitting team members and the listed submission URL. Empty names are excluded. Repeated names keep their latest submission. C40 and human challenge metrics are different views.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
@@ -13,7 +13,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 
 const d=await fetchJson<any[]>(FEED);const keep=new Map<string,LeaderboardRow>();
-for(const r of [...d].sort((a,b)=>a.date.localeCompare(b.date))){const model=text(text(r.team.name));if(!model)continue;const m=JSON.parse(r.results);if(typeof m.CIDEr!=='number')throw new Error('Missing CIDEr');keep.set(model,{model,score:100*m.CIDEr,date:r.date,metrics:Object.fromEntries(Object.entries(m).filter(([k,v])=>k!=='CIDEr'&&typeof v==='number').map(([k,v])=>[k,100*(v as number)]))});}return [...keep.values()];
+for(const r of [...d].sort((a,b)=>a.date.localeCompare(b.date))){const model=text(text(r.team.name));if(!model)continue;const m=JSON.parse(r.results);if(typeof m.CIDEr!=='number')throw new Error('Missing CIDEr');keep.set(model,{model,submitter:text(text(r.team.members || '')) || model,link:/^https?:\/\//i.test(r.url || '')?r.url:undefined,score:100*m.CIDEr,date:r.date,metrics:Object.fromEntries(Object.entries(m).filter(([k,v])=>k!=='CIDEr'&&typeof v==='number').map(([k,v])=>[k,100*(v as number)]))});}return [...keep.values()];
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

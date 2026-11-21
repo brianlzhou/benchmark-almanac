@@ -16,6 +16,8 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, Resolved, and the chart's results array)`,
   terms: 'Static page with no terms or robots.txt; the ProgramBench repository (facebookresearch/ProgramBench) is MIT.',
+  // the board's other two scores, which labs quote as their own measures (data/benchmarks.json)
+  measures: { almost: 'almost', testsPassed: 'tests-passed' },
   aliases: {
     'GPT 6 Astra': 'gpt-6-astra',
     'GPT 5.5': 'gpt-5-5',

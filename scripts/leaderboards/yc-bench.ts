@@ -30,8 +30,6 @@ const board: Leaderboard = {
       for (const [month, funds] of Object.entries(id ? chart[id] ?? {} : {})) {
         if (/^\d{4}-\d{2}$/.test(month) && Number.isFinite(funds)) metrics['funds:' + month] = funds;
       }
-      const rank = num(r[0]?.text);
-      if (rank !== undefined) metrics.rank = rank;
       rows.push({ model, score, trials: counts ? Number(counts[2]) : undefined, metrics,
         open: weightList && id && id !== 'greedy_bot' ? open.has(id) : undefined });
     }

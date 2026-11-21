@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2408.10943';
 export default {
-  benchmark:'sysbench',url:'https://arxiv.org/abs/2408.10943',feed,terms:PAPER_TERMS,
+  benchmark:'sysbench', static: 'paper',url:'https://arxiv.org/abs/2408.10943',feed,terms:PAPER_TERMS,
   aliases:{"GPT4-Turbo-20240409":"gpt-4-turbo-apr-2024","GPT3.5-Turbo-20231106":"gpt-3-5-turbo-nov-2023"},
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);

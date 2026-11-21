@@ -19,7 +19,7 @@ const board:Leaderboard={benchmark:'secit-bench',url:'https://cribl.io/ai-resear
   for(const key of keys){await new Promise(r=>setTimeout(r,1050));const run=await fetchJson<any>(BASE+'/'+key);
    for(const r of run.rows){if(!Number.isFinite(r.accuracy))continue;
     const setting=run.id.split('__').slice(2).join(' / ');
-    rows.push({model:catalog.models[r.model]?.displayName||r.model,harness:r.harnessType,setting:setting||undefined,score:r.accuracy,cost:r.cost,tokens:r.tokensOut,date:run.publishedAt?.slice(0,10),metrics:{sem:r.sem,stderr:r.sem,inputTokens:r.tokensIn,latency:r.timeMin*60,scenarios:r.nScenarios}});
+    rows.push({model:catalog.models[r.model]?.displayName||r.model,harness:r.harnessType,setting:setting||undefined,score:r.accuracy,cost:r.cost,tokens:r.tokensOut,date:run.publishedAt?.slice(0,10),metrics:{stderr:r.sem,inputTokens:r.tokensIn,latency:r.timeMin*60,scenarios:r.nScenarios}});
    }
   }
   if(!rows.length)throw new Error('No SecIT published runs');return rows;

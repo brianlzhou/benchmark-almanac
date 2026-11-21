@@ -41,8 +41,8 @@ const board: Leaderboard = {
       for (const k of ['gamesPlayed', 'wins', 'losses', 'ties'] as const) if (Number.isFinite(r[k])) metrics[k] = r[k]!;
       if (r.winRate != null && Number.isFinite(Number(r.winRate))) metrics.winRate = Number(r.winRate);
       // API token prices are not measured cost per build.
-      if (Number.isFinite(r.inputCost)) metrics.priceIn = metrics.inputPricePerMillionTokens = r.inputCost!;
-      if (Number.isFinite(r.outputCost)) metrics.priceOut = metrics.outputPricePerMillionTokens = r.outputCost!;
+      if (Number.isFinite(r.inputCost)) metrics.priceIn = r.inputCost!;
+      if (Number.isFinite(r.outputCost)) metrics.priceOut = r.outputCost!;
       rows.push({
         model: m ? m[1] : r.modelName,
         setting: m ? m[2].toLowerCase() : undefined,

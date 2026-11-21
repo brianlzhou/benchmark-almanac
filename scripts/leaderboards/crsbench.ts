@@ -3,7 +3,7 @@
 // compares coding agents with one model each and is sorted by End-to-End by default, so End-to-End is the
 // score: vulnerabilities both found and fixed, as a percent of 51, computed from the printed counts
 // ("(35/51)") because the bar label is rounded. The agent CLI (<strong>) is the harness, the model is the
-// lb__model span, and the E2E $/trial column is the cost.
+// lb__model span, and the E2E $/trial column is the cost. Retain aggregate Find and Fix rates and costs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num, tables, text } from '../lib/html.ts';
@@ -28,7 +28,16 @@ const board: Leaderboard = {
       const model = text(r[0]?.html.match(/class="lb__model">([\s\S]*?)<\/span>/)?.[1] ?? '');
       const counts = r[iE2E]?.text.match(/\(\s*(\d+)\s*\/\s*(\d+)\s*\)/);
       if (!model || !counts) continue;
-      rows.push({ model, harness, score: (Number(counts[1]) / Number(counts[2])) * 100, cost: iCost >= 0 ? num(r[iCost]?.text) : undefined });
+      const metrics:Record<string,number>={cases:Number(counts[2]),endToEndPassed:Number(counts[1])};
+      for (const stage of ['find','fix']) {
+        const i=head.findIndex(h=>h===stage);
+        const fraction=r[i]?.text.match(/\(\s*(\d+)\s*\/\s*(\d+)\s*\)/);
+        if (fraction && Number(fraction[2])>0) metrics[stage+'Rate']=100*Number(fraction[1])/Number(fraction[2]);
+        const j=head.findIndex(h=>h.startsWith(stage) && h.includes('$/trial'));
+        const cost=num(r[j]?.text);
+        if (cost!==undefined) metrics[stage+'Cost']=cost;
+      }
+      rows.push({ model, harness, metrics, score: (Number(counts[1]) / Number(counts[2])) * 100, cost: iCost >= 0 ? num(r[iCost]?.text) : undefined });
     }
     return rows;
   },

@@ -1,4 +1,4 @@
-// Read Harbor's Terminal-Bench rows, including the published rank, agent version and integration method.
+// Read Harbor's Terminal-Bench rows, including pass@k, agent version and integration method.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchText } from '../util.ts';
 
@@ -54,11 +54,11 @@ function extrasOf(m: Row['metrics'], costPerRun = false): Pick<LeaderboardRow, '
     if (num(v)) metrics[`passAt${k}`] = Math.round(v * 1e4) / 100;
   }
   if (num(m.successes)) metrics.successes = m.successes;
-  if (num(m.output_tokens)) metrics.outputTokensTotal = m.output_tokens;
+  if (num(m.output_tokens)) metrics.runOutputTokens = m.output_tokens;
   if (num(m.total_cost_usd)) metrics.runCostUsd = m.total_cost_usd;
-  if (num(m.total_tokens)) metrics.totalTokens = m.total_tokens;
-  if (num(m.cached_input_tokens)) metrics.cachedInputTokens = m.cached_input_tokens;
-  if (num(m.uncached_input_tokens)) metrics.uncachedInputTokens = m.uncached_input_tokens;
+  if (num(m.total_tokens)) metrics.runTotalTokens = m.total_tokens;
+  if (num(m.cached_input_tokens)) metrics.runCachedInputTokens = m.cached_input_tokens;
+  if (num(m.uncached_input_tokens)) metrics.runUncachedInputTokens = m.uncached_input_tokens;
   if (num(m.reward_hacks)) metrics.rewardHacks = m.reward_hacks;
   if (num(m.accuracy_stderr)) metrics.stderr = m.accuracy_stderr;
   if (num(m.accuracy_ci95_half_width)) metrics.ci95 = m.accuracy_ci95_half_width;
@@ -132,7 +132,6 @@ export function makeTerminalBench(opts: {
           const link = typeof r.metadata.pr_url === 'string' ? r.metadata.pr_url : r.metadata.pr_url?.url;
           const extra = opts.extras ? extrasOf(r.metrics, opts.costPer === 'run') : {};
           const metrics = { ...extra.metrics };
-          if (num(r.rank)) metrics.rank = r.rank;
           const version = r.metadata.agent_version;
           const setting = [r.metadata.reasoning_effort?.toLowerCase(), version && version !== 'unknown' ? `agent ${version}` : undefined,
             r.metadata.integration_method].filter(Boolean).join(', ');

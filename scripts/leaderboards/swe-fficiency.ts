@@ -12,6 +12,7 @@ const FEED = 'https://swefficiency.com/assets/leaderboard.json';
 
 interface Entry {
   system?: string;
+  org?: { name?: string };
   speedup_ratio?: number;
   correctness?: number;
 }
@@ -38,6 +39,7 @@ const board: Leaderboard = {
       rows.push({
         model: h ? system.slice(0, h.index).trim() : system,
         harness: h?.[1],
+        submitter: e.org?.name,
         score: Number((e.speedup_ratio * 100).toFixed(2)),
         ...(typeof e.correctness === 'number' ? { metrics: { correctness: e.correctness } } : {}),
       });

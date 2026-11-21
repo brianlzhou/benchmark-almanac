@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2510.06961";
 const board: Leaderboard = {
-  benchmark: "open-asr-leaderboard",
+  benchmark: "open-asr-leaderboard", static: 'paper',
   url: "https://arxiv.org/html/2510.06961",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

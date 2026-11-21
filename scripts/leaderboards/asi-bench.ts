@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2608.17271";
 const board: Leaderboard = {
-  benchmark: "asi-bench",
+  benchmark: "asi-bench", static: 'paper',
   parts: {
     b1: { name: 'B1 full methodological guidance', group: 'Difficulty', note: 'The overall score averages the four information levels.' },
     b2: { name: 'B2 method specified', group: 'Difficulty', note: 'The overall score averages the four information levels.' },

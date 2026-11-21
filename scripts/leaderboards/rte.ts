@@ -3,7 +3,7 @@
 // leaderboard/glue (one row per team, with that team's best submission) and hides rows whose overall score is
 // under 70. This file retains all named RTE submissions, even below that overall-score threshold,
 // while excluding the human reference. Anonymous submissions remain unlisted. It reads the newest snapshot through Firebase REST. The score is the RTE column, accuracy on
-// the GLUE RTE test set. Rows carry the submission date.
+// the GLUE RTE test set. Rows carry the submission date, team, reference and model size.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -11,10 +11,11 @@ const DB = 'https://mtl-sentence-representations.firebaseio.com';
 const FEED = `${DB}/leaderboard/glue.json?orderBy="$key"&limitToLast=1`;
 
 interface Row {
+  displayName?: string;
   maxScore: number | string;
   maxScoreSubmission?: {
     createdOn: number;
-    editable?: { name?: string };
+    editable?: { name?: string; totalParameters?: number; sharedParameters?: number; url?: string };
     tasks?: Record<string, { accuracy?: number; score?: number }>;
   };
 }
@@ -41,7 +42,11 @@ const board: Leaderboard = {
       const acc = s?.tasks?.[rte]?.accuracy;
       const model = s?.editable?.name?.trim();
       if (!s || !model || typeof acc !== 'number' || /^human(?: performance)?$/i.test(model)) continue;
-      rows.push({ model, score: Number((acc * 100).toFixed(2)), date: new Date(s.createdOn).toISOString().slice(0, 10) });
+      const total = s.editable?.totalParameters;
+      const shared = s.editable?.sharedParameters;
+      rows.push({ model, submitter:r.displayName?.trim() || undefined,link:/^https?:\/\//.test(s.editable?.url ?? '') ? s.editable?.url : undefined,
+        params:typeof total === 'number' && total > 0 ? total/1e9 : undefined,
+        metrics:typeof shared === 'number' && shared>=0 ? {sharedParamsB:shared/1e9} : undefined, score: Number((acc * 100).toFixed(2)), date: new Date(s.createdOn).toISOString().slice(0, 10) });
     }
     return rows;
   },

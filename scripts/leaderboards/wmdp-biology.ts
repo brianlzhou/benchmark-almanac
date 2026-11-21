@@ -9,7 +9,7 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 
 const FEED = "https://arxiv.org/html/2403.03218";
 const board: Leaderboard = {
- benchmark: "wmdp-biology",
+ benchmark: "wmdp-biology", static: 'paper',
  url: "https://arxiv.org/html/2403.03218",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

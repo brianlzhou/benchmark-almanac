@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1902.09506";
 const board: Leaderboard = {
-  benchmark: "gqa",
+  benchmark: "gqa", static: 'paper',
   parts: {
     open: { name: 'Open', group: 'Task type' },
     binary: { name: 'Binary', group: 'Task type' },

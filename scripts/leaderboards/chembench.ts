@@ -1,5 +1,5 @@
 // ChemBench: version 2.0.2 whole-benchmark overall_score, converted from a fraction to percent.
-// Verification and tool use describe full runs. Token metadata describes training, not inference usage.
+// Read run verification, effort, temperature, open-weight status and published parameter counts.
 // Page through all records and retain unlisted models and agent names.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -20,6 +20,7 @@ const board: Leaderboard = {
   },
   url: "https://datasets-server.huggingface.co/rows?dataset=jablonkagroup%2FChemBench-Results&config=default&split=2.0.2&offset=0&length=100",
   feed: FEED,
+  verified: 'Marked verified by ChemBench',
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   aliases: {'gemini-2.5-flash-preview-04-17':'gemini-2-5-flash-apr-2025'},
@@ -49,7 +50,10 @@ const board: Leaderboard = {
         if(typeof r.overall_score!=='number')continue;
         const metrics:Record<string,number>={};
         for(const k of ['Analytical Chemistry','Chemical Preference','General Chemistry','Inorganic Chemistry','Materials Science','Organic Chemistry','Physical Chemistry','Technical Chemistry','Toxicity and Safety'])if(typeof r[k]==='number')metrics[k]=Number(r[k])*100;
-        out.push({model:String(r.name),score:r.overall_score*100,setting:`${r.verified?'verified':'self-reported'}, ${r.tool_use?'tools':'no tools'}`,harness:r.uses_harness&&r.harness_description?String(r.harness_description):undefined,metrics});
+        if (typeof r.temperature==='number') metrics.temperature=r.temperature;
+        const params=typeof r.number_params==='number' && r.number_params>=1e6 ? r.number_params/1e9 : undefined;
+        const effort=typeof r.reasoning_type==='string' && /^(low|medium|high|max)$/i.test(r.reasoning_type) ? ', '+r.reasoning_type : '';
+        out.push({verified:typeof r.verified==='boolean'?r.verified:undefined,open:typeof r.is_open_weights==='boolean'?r.is_open_weights:undefined,params,model:String(r.name),score:r.overall_score*100,setting:`${r.verified?'verified':'self-reported'}, ${r.tool_use?'tools':'no tools'}${effort}`,harness:r.uses_harness&&r.harness_description?String(r.harness_description):undefined,metrics});
       }offset+=d.rows.length;
     }return out;
   },

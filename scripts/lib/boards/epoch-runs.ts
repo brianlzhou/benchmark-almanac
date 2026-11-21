@@ -15,8 +15,7 @@ export async function epochRunRows(task: string): Promise<LeaderboardRow[]> {
     for (const key of ['billable_input_tokens','billable_output_tokens','cache_read_tokens','cache_write_tokens']) {
       if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[`run_${key}`] = Number(r[key]);
     }
-    if (r.stderr?.trim() && Number.isFinite(Number(r.stderr))) metrics.standardError = Number(r.stderr) * 100;
-    if (metrics.standardError !== undefined) metrics.stderr = metrics.standardError;
+    if (r.stderr?.trim() && Number.isFinite(Number(r.stderr))) metrics.stderr = Number(r.stderr) * 100;
     if (r.mean_score?.trim() && Number.isFinite(Number(r.mean_score))) metrics.meanScore = Number(r.mean_score) * 100;
     for (const match of (r.Scores ?? '').matchAll(/(?:^|[,;]\s*)([^,:;]+):\s*([\d.]+)(?:±([\d.]+))?/g)) {
       const key = match[1].trim();

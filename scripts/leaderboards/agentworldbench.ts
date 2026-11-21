@@ -1,5 +1,5 @@
 // AgentWorldBench: Overall is the official aggregate score on a 0–100 scale.
-// Seven domain scores remain metrics; downstream application benchmarks are excluded from this importer.
+// Read seven domain scores and model metadata from the open-source release table.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -23,9 +23,19 @@ const board: Leaderboard = {
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
-  const t = markdownTables(await fetchText(FEED)).find(t=>t[0].includes('MCP') && t[0].includes('Overall'));
+  const source = await fetchText(FEED);
+  const tables = markdownTables(source);
+  const releases = new Map(tables.find(t => t[0].join('|') === 'Release|Description')?.slice(1).map(r => [r[0], r[1]]));
+  const license = source.match(/All open-weight models and AgentWorldBench are licensed under ([^\n]+?)\.\s/)?.[1];
+  const t = tables.find(t=>t[0].includes('MCP') && t[0].includes('Overall'));
   if (!t) throw new Error('agentworldbench table missing');
   const rows = t.slice(1).filter(r=>r[0] && !/human|random/i.test(r[0]) && num(r[8])!==undefined).map(r=>({
+    ...(() => {
+      const release = releases.get(r[0]);
+      if (!release || !/model/i.test(release)) return {};
+      const size = release.match(/([\d.]+)B total/i);
+      return {open:true, license, params:size ? Number(size[1]) : undefined};
+    })(),
     model:r[0], score:num(r[8])!*1, 
     metrics:Object.fromEntries(t[0].map((h,i)=>[h, i!==0 && i!==8 ? num(r[i]) : undefined]).filter((p): p is [string,number]=>typeof p[1]==='number')),
   }));

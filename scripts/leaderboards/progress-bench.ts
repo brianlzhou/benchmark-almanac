@@ -9,7 +9,7 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 
 const FEED = "https://arxiv.org/html/2601.15224";
 const board: Leaderboard = {
- benchmark: "progress-bench",
+ benchmark: "progress-bench", static: 'paper',
  parts: {
    visionNse: { name: 'Vision-based demonstration', group: 'Modality', note: 'Normalized score error for visual demonstrations, one component of the macro average.' },
    textNse: { name: 'Text-based demonstration', group: 'Modality', note: 'Normalized score error for text demonstrations, one component of the macro average.' },

@@ -27,12 +27,12 @@ export function benchcadCore(version:'2.0'|'2.1'):Leaderboard {
       const score=num(r[si]);if(score===undefined)continue;
       const effort=r[1].match(/\s*\((max|xhigh|high|medium|low|minimal)\)$/i);
       const model=effort?r[1].slice(0,effort.index).trim():r[1];
-      const metrics:Record<string,number>={rank:Number(r[0])};const ci=header.indexOf('±95%'),costIndex=header.indexOf('Cost / case');
+      const metrics:Record<string,number>={harnessTableRank:Number(r[0])};const ci=header.indexOf('±95%'),costIndex=header.indexOf('Cost / case');
       if(ci>=0){const v=num(r[ci]);if(v!==undefined){metrics.ciLow=(score-v)*100;metrics.ciHigh=(score+v)*100;}}
       const cost=costIndex>=0?num(r[costIndex]):undefined;
       if(cost!==undefined){metrics.cost=cost;metrics.costEstimated=/≈|est\./.test(r[costIndex])?1:0;}
       if(/≈/.test(r[si]))metrics.scoreEstimated=1;
-      const ti=header.indexOf('Tokens / case');if(ti>=0){const v=num(r[ti]);if(v!==undefined)metrics.totalTokensPerCase=v*(/M/i.test(r[ti])?1e6:/k/i.test(r[ti])?1e3:1);}
+      const ti=header.indexOf('Tokens / case');if(ti>=0){const v=num(r[ti]);if(v!==undefined)metrics.totalTokens=v*(/M/i.test(r[ti])?1e6:/k/i.test(r[ti])?1e3:1);}
       const timeIndex=header.indexOf('Time / case');if(timeIndex>=0){const v=num(r[timeIndex]);if(v!==undefined)metrics.latency=v*(/\bh\b/.test(r[timeIndex])?3600:60);}
       const credit = text(tr.match(/<small\b[^>]*>([\s\S]*?)<\/small>/)?.[1] ?? '').match(/credit to ([^·]+)/i)?.[1].trim();
       rows.push({model,submitter:credit,low:metrics.ciLow,high:metrics.ciHigh,score:score*100,setting:effort?.[1],harness:isCustom?r[2]:`BenchCAD ${version}`,cost,metrics});

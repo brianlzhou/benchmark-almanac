@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/1811.00937";
 const board: Leaderboard = {
-  benchmark: "commonsenseqa",
+  benchmark: "commonsenseqa", static: 'paper',
   parts: {
     conceptSplit: { name: 'Concept', group: 'Split' },
   },

@@ -3,7 +3,7 @@
 // leaderboard from docs/static/csv/gta.csv in the repository: the July 2024 board of 16 models with step
 // metrics and AnsAcc, the end-to-end answer accuracy the paper ranks by. AnsAcc is the score. The file was
 // last changed on 2024-07-03, which is passed as the run date so the resolver picks the snapshots then
-// current (for example GPT-4o of May 2024).
+// current (for example GPT-4o of May 2024). The CSV also reports eight step measures and weight access.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -27,7 +27,12 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const r of parseCsv(await fetchText(FEED))) {
       const score = Number(r.AnsAcc);
-      if (r.Model && Number.isFinite(score)) rows.push({ model: r.Model, score, date: DATE });
+      const metrics: Record<string, number> = {};
+      for (const [column, key] of Object.entries({"InstAcc":"instAcc","ToolAcc":"toolAcc","ArgAcc":"argAcc","SummAcc":"summAcc","P_F1":"pF1","O_F1":"oF1","L_F1":"lF1","C_F1":"cF1"})) {
+        if (r[column]?.trim() && Number.isFinite(Number(r[column]))) metrics[key] = Number(r[column]);
+      }
+      const open = r.opensourced === 'TRUE' ? true : r.opensourced === 'FALSE' ? false : undefined;
+      if (r.Model && Number.isFinite(score)) rows.push({ model: r.Model, score, date: DATE, open, metrics });
     }
     if (!rows.length) throw new Error('no AnsAcc rows');
     return rows;

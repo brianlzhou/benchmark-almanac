@@ -1,0 +1,4 @@
+// VLABench evaluates robot manipulation agents on seen and unseen object tasks.
+// The importer uses the plain mean of the reported seen and unseen average accuracies.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2412.18194';const board:Leaderboard={benchmark:'vlabench',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,headline:'The paper reports seen and unseen averages, so this is their plain mean.',async fetch(){const t=grid(paperTables(await paperHtml(URL))[2]);const rows:LeaderboardRow[]=[];for(const r of t.slice(2)){const model=r[0],score=(Number(r[18])+Number(r[19]))/2;if(!model||!Number.isFinite(score))continue;rows.push({model,setting:r[1],score,metrics:{seenAverage:Number(r[18]),unseenAverage:Number(r[19])}});}return checked(rows,6);}};export default board;

@@ -1,6 +1,6 @@
 // LiveSecBench: read the current edition's CSV from the homepage's Dataset distribution metadata.
 // overall_score is the published safety score from 0 to 100, not the original paper's Elo rating.
-// Area scores remain metrics. Provider model ids identify snapshots more precisely than display names.
+// The CSV marks open and reasoning models and gives their rank changes. Area scores remain metrics. Provider model ids identify snapshots more precisely than display names.
 import type { Leaderboard } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -38,10 +38,11 @@ const board: Leaderboard = {
       if (/^(?:Ernie-5\.0-Preview-1022|hunyuan-t1-20250822)$/i.test(model)) model += ' (snapshot not cataloged)';
       if (/^(?:gpt-4o|gpt-4-turbo|gemini-2\.5-(?:pro|flash)|deepseek-(?:r1|v3))$/i.test(model.replace(/^[\w.-]+\//, ''))) model += ' (snapshot unspecified)';
       const dateParts = r.evaluation_date?.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
-      return { model, score: Number(r.overall_score),
+      return { model, open: r.is_open_source === 'True' ? true : r.is_open_source === 'False' ? false : undefined,
+        setting: r.is_reasoning === 'True' ? 'reasoning' : r.is_reasoning === 'False' ? 'non-reasoning' : undefined, score: Number(r.overall_score),
         date: dateParts ? `${dateParts[1]}-${dateParts[2].padStart(2, '0')}-${dateParts[3].padStart(2, '0')}` : undefined,
-        metrics: Object.fromEntries(['ethics', 'legality', 'privacy', 'factuality', 'psychological_health'].flatMap(k =>
-          r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : [])),
+        metrics: { ...(/^[-+]?\d+$/.test(r.rank_change) ? {rankChange: Number(r.rank_change)} : {}), ...Object.fromEntries(['ethics', 'legality', 'privacy', 'factuality', 'psychological_health'].flatMap(k =>
+          r[k]?.trim() && Number.isFinite(Number(r[k])) ? [[k, Number(r[k])]] : [])) },
       };
     });
   },

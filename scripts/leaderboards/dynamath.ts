@@ -9,7 +9,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2411.00836";
 const board: Leaderboard = {
- benchmark: "dynamath",
+ benchmark: "dynamath", static: 'paper',
  parts: {
    PG: { name: 'Plane geometry', group: 'Domain' },
    SG: { name: 'Solid geometry', group: 'Domain' },

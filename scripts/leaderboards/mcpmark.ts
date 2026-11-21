@@ -79,7 +79,6 @@ const board: Leaderboard = {
       // "DeepSeek-V3.2 (Thinking)" as a plain alias, which would swallow the mode)
       const mode = r.name.match(/^(deepseek-.+)-(thinking|chat)$/);
       const metrics: Record<string, number> = details.get(r.name) ?? {};
-      if (r.rank != null) metrics.rank = r.rank;
       if (r.perRunCost != null) metrics.runCostUsd = r.perRunCost;
       for (const [server, result] of Object.entries(r.servicesSuccessRate ?? {})) {
         if (typeof result.avgSuccessRate !== 'number') continue;

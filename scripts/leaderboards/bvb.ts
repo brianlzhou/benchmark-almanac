@@ -55,7 +55,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = { ...r.tasks, dualVqa: r.dualVqa, latentSimilarity: r.latentSim, layout: r.layout, motion: r.motion };
       if (typeof r.runtimeMin === 'number') Object.assign(metrics, { minutes: r.runtimeMin, latency: r.runtimeMin * 60 });
       if (typeof r.costUsd === 'number') metrics.cost = r.costUsd;
-      for (const key of ['rank', 'sceneCount', 'renderedScenes', 'costScenes', 'costEstimate', 'baselineComparable'] as const) {
+      for (const key of ['sceneCount', 'renderedScenes', 'costScenes', 'costEstimate', 'baselineComparable'] as const) {
         if (r[key] != null) metrics[key] = Number(r[key]);
       }
       return { model: identity(r.name), score: r.overall, open: r.openWeight, harness: r.harness, cost: r.costUsd,

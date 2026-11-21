@@ -44,6 +44,7 @@ import ArenaCategories from '../../components/ArenaCategories.astro';
 import { arenaCategories } from '../../lib/arena-categories.ts';
 import { boardParts } from '../../lib/board-parts.ts';
 import FacetList from '../../components/FacetList.astro';
+import { launchOf, compact } from '../../lib/traction.ts';
 import { claimsForBenchmark, claimStats } from '../../lib/claims.ts';
 import type { ChangeKind } from '../../lib/types.ts';
 import { SITE_NAME, CATALOG_ID } from '../../lib/site.ts';
@@ -57,6 +58,7 @@ setAsOf(AS_OF);
 const { id } = Astro.params;
 const s = benchSummary(id!);
 const b = s.b;
+const launch = launchOf(b.id);
 const issues = issuesByBenchmark.get(b.id) ?? [];
 // a chart the official leaderboard draws from more than its headline score (scripts/leaderboards/types.ts)
 const boardChart = LEADERBOARDS[b.id]?.chart;
@@ -140,8 +142,10 @@ const gap = untested(b.id);
 const official = LEADERBOARDS[b.id];
 // a board a third party runs, such as Vals AI's MATH-500 board, goes by its runner's name, not as the benchmark's own
 const boardHost = official?.host;
-const boardIs = boardHost ? `${boardHost}’s leaderboard` : 'the benchmark’s own leaderboard';
-const SRC: Record<string, string> = { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : 'on its own leaderboard', epoch: 'in Epoch AI’s runs', collected: 'on a board Epoch AI copied', card: 'in lab cards', claim: 'in claims Epoch AI collected' };
+// a fixed table from the benchmark's paper, read like a board but never gaining newer models
+const paperBoard = !boardHost && official?.static === 'paper';
+const boardIs = boardHost ? `${boardHost}’s leaderboard` : paperBoard ? 'the benchmark’s paper' : 'the benchmark’s own leaderboard';
+const SRC: Record<string, string> = { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : paperBoard ? 'in its paper' : 'on its own leaderboard', epoch: 'in Epoch AI’s runs', collected: 'on a board Epoch AI copied', card: 'in lab cards', claim: 'in claims Epoch AI collected' };
 const family = b.family ? benchmarks.filter((x) => x.family === b.family).sort((x, y) => (x.released ?? '').localeCompare(y.released ?? '')) : [];
 const SHOW = 4;
 // every run on the official board, by effort level and cost
@@ -157,7 +161,7 @@ const reignRows = (['leaderboard', 'epoch', 'collected', 'card'] as const)
   .filter((r): r is NonNullable<typeof r> => r !== null && r.reigns.some((g) => g.end > reignFrom));
 // lowercase for use inside a sentence. A credit line capitalizes its first item itself, and the row label below does too.
 const viaName = s.viaBoard[0] ? fromName(s.viaBoard[0]) : 'another board';
-const ROW_NAME: Record<string, string> = { leaderboard: boardHost ? `${boardHost} leaderboard` : 'Own leaderboard', epoch: 'Epoch AI runs', collected: `${s.viaBoard[0] ? viaName : 'Another board'}, via Epoch AI`, card: 'Lab claims' };
+const ROW_NAME: Record<string, string> = { leaderboard: boardHost ? `${boardHost} leaderboard` : paperBoard ? 'Benchmark paper' : 'Own leaderboard', epoch: 'Epoch AI runs', collected: `${s.viaBoard[0] ? viaName : 'Another board'}, via Epoch AI`, card: 'Lab claims' };
 const ROW_TEXT: Record<string, string> = {
   leaderboard: boardIs,
   epoch: 'Epoch AI’s runs',
@@ -189,13 +193,13 @@ const carryLine = !carry
     : ` ${carry.labs[0].name} and ${carry.labs[1].name} account for ${carry.labs[0].n + carry.labs[1].n} of the ${carry.releases} releases that named it since 2024.`;
 // where each pool's count of leaders comes from, for the chart's title
 const POOL_WHERE: Record<string, string> = {
-  headline: { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : 'on the official leaderboard', epoch: 'in Epoch AI’s runs', collected: `on ${viaName}`, card: 'in labs’ own numbers', claim: 'in collected claims' }[s.boardSource ?? 'card'] ?? '',
+  headline: { leaderboard: boardHost ? `on ${boardHost}’s leaderboard` : paperBoard ? 'in the benchmark’s paper' : 'on the official leaderboard', epoch: 'in Epoch AI’s runs', collected: `on ${viaName}`, card: 'in labs’ own numbers', claim: 'in collected claims' }[s.boardSource ?? 'card'] ?? '',
   independent: 'across all independent runs',
   all: 'with claims included',
 };
 // who each source's numbers come from, for the credit under each chart and in its downloaded file
 const SRC_CREDIT: Record<string, string> = {
-  leaderboard: boardHost ? `${boardHost}’s leaderboard` : `official ${b.name} leaderboard`,
+  leaderboard: boardHost ? `${boardHost}’s leaderboard` : paperBoard ? `the ${b.name} paper` : `official ${b.name} leaderboard`,
   epoch: EPOCH_RUNS,
   collected: `${viaName}, via ${EPOCH_CREDIT}`,
   card: LAB_CARDS,
@@ -204,7 +208,7 @@ const SRC_CREDIT: Record<string, string> = {
 // what a downloaded chart says about itself: the benchmark, its makers, what it tests and what the score is
 const figDeck = benchDeck(b);
 const figAxis = benchAxis(b);
-const boardName = boardHost ? `${boardHost}’s leaderboard` : `the official ${b.name} leaderboard`;
+const boardName = boardHost ? `${boardHost}’s leaderboard` : paperBoard ? `the ${b.name} paper` : `the official ${b.name} leaderboard`;
 const costNote = (per: 'task' | 'run') => `Cost is US dollars ${per === 'run' ? 'for the full run' : 'per task'}, as ${boardName} prices runs, so it compares only within this board.`;
 const reignCounts = (rows: { source: string }[]) =>
   `One row for each source: ${listText(rows.map((r) => ROW_TEXT[r.source] ?? r.source))}. Each stretch is the model that held the best score at that time, colored by its lab. Lab claims count from the day the card came out, independent runs from the model’s release.`;
@@ -258,7 +262,7 @@ const newer = pools.some((v) => v.pool === 'all') ? newerClaims(b.id) : { models
 const newerNote = (() => {
   const xs = newer.models;
   if (!xs.length || !newer.last) return '';
-  const who = s.boardSource === 'epoch' ? 'Epoch AI' : boardHost ? `${boardHost}’s leaderboard` : 'The official leaderboard';
+  const who = s.boardSource === 'epoch' ? 'Epoch AI' : boardHost ? `${boardHost}’s leaderboard` : paperBoard ? 'The benchmark’s paper' : 'The official leaderboard';
   const lastM = modelById.get(newer.last.model);
   const lastDate = lastM?.released ? longMonthYear(lastM.released) : '';
   const top = xs[0];
@@ -538,6 +542,14 @@ const cite = {
                 <dd>{longMonthYear(b.released)}</dd>
               </div>
             )}
+            {launch && (launch.views ?? launch.likes) !== null && (
+              <div>
+                <dt>Announced on X</dt>
+                <dd>
+                  <a class="mk" href={launch.url} title={`${launch.author} on X, ${humanDate(launch.posted)}. Counts read ${humanDate(launch.read)}.`}>{launch.views !== null ? `${compact(launch.views)} views` : `${compact(launch.likes!)} likes`}</a>{launch.views !== null && launch.likes !== null && <span class="muted">, {compact(launch.likes)} likes</span>}
+                </dd>
+              </div>
+            )}
             {b.subcategory && SUB_BY_ID.get(b.subcategory) && (
               <div>
                 <dt>Kind</dt>
@@ -635,7 +647,7 @@ const cite = {
           {s.shown.length > 0 && (
             <div class="stat">
               <div class="v">{s.shown.length.toLocaleString('en-US')}</div>
-              <div class="l">{shownWhat === 'entries' ? `Entries on ${boardHost ? `${boardHost}’s leaderboard` : 'its own leaderboard'}, ${count(s.board.length, 'model')} we track` : `${s.shown.length === 1 ? 'Model scored' : 'Models scored'} ${SRC[s.shownSource ?? 'card']}`}</div>
+              <div class="l">{shownWhat === 'entries' ? `Entries ${boardHost ? `on ${boardHost}’s leaderboard` : paperBoard ? 'in its paper' : 'on its own leaderboard'}, ${count(s.board.length, 'model')} we track` : `${s.shown.length === 1 ? 'Model scored' : 'Models scored'} ${SRC[s.shownSource ?? 'card']}`}</div>
             </div>
           )}
           {s.cites.length > 0 && (
@@ -689,7 +701,7 @@ const cite = {
                 <p>
                   {s.shownSource === 'leaderboard' ? (
                     <>
-                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}, read on {humanDate(official?.retrieved)}. {s.systems.length ? 'Where a model ran on its own with several settings, we keep its best.' : 'Where a model ran with several settings or harnesses, we keep its best.'}{effort && ' Every run is in the next chart.'}
+                      Best score per {shownWhat === 'entries' ? 'entry' : 'model'} from {boardHost ? <a href={official?.url}>{boardHost}’s leaderboard</a> : paperBoard ? <>the benchmark's <a href={official?.url}>paper</a></> : <>the benchmark's <a href={official?.url}>own leaderboard</a></>}, read on {humanDate(official?.retrieved)}. {paperBoard && 'A paper’s table doesn’t add newer models. '}{official?.headline && `${official.headline} `}{s.systems.length ? 'Where a model ran on its own with several settings, we keep its best.' : 'Where a model ran with several settings or harnesses, we keep its best.'}{effort && ' Every run is in the next chart.'}
                       <span class="ent-every">
                         {shownWhat === 'entries' && (s.systems.length ? ` Agents other companies built around a model get a pale shade of that model's lab color. Gray marks blends and entries not in our model list, such as fine-tunes and older models. None of these count toward leaders.` : ` Names in gray aren't in our model list: fine-tunes, agent systems, products and older models. They don't count toward leaders.`)}
                         {otherAhead && s.best && ` The best ${otherAhead.system ? 'model on its own' : 'model we track'} is ${modelById.get(s.best.model)?.name ?? s.best.model}, at ${fmt(s.best.value, unit)}.`}
@@ -723,7 +735,7 @@ const cite = {
                   <h2>{v.best ? `${modelById.get(v.best.model)?.name ?? v.best.model} leads with ${fmt(v.best.value, unit)}${v.pool === 'all' ? ', claims included' : ' across all independent runs'}` : 'No scores yet'}</h2>
                   <p>
                     {v.pool === 'independent'
-                      ? `Best score per model across ${boardHost ? `${boardHost}’s leaderboard` : 'the official leaderboard'}, Epoch AI’s own runs and any board Epoch AI copied. Dotted bars are reruns by Epoch AI or another board, and each row names its source.`
+                      ? `Best score per model across ${boardHost ? `${boardHost}’s leaderboard` : paperBoard ? 'the benchmark’s paper' : 'the official leaderboard'}, Epoch AI’s own runs and any board Epoch AI copied. Dotted bars are reruns by Epoch AI or another board, and each row names its source.`
                       : 'Best score per model from every source, including labs’ own numbers and claims Epoch AI collected from reports and papers. Labs pick their own settings, so a claim can beat an independent run of the same model. Striped bars are claims, and dotted bars are reruns by Epoch AI or another board.'}
                   </p>
                 </div>
@@ -885,7 +897,7 @@ const cite = {
               <p class="also">
                 {[
                   s.shownSource !== 'leaderboard' && s.leaderboardBoard.length + s.unlisted.length
-                    ? `${boardHost ? `${boardHost}’s leaderboard` : "The benchmark's own leaderboard"} has ${s.unlisted.length ? `${count(s.leaderboardBoard.length + s.unlisted.length, 'entry', 'entries')}, ${s.leaderboardBoard.length} of them models we track` : count(s.leaderboardBoard.length, 'model')}.`
+                    ? `${boardHost ? `${boardHost}’s leaderboard` : paperBoard ? "The benchmark's paper" : "The benchmark's own leaderboard"} has ${s.unlisted.length ? `${count(s.leaderboardBoard.length + s.unlisted.length, 'entry', 'entries')}, ${s.leaderboardBoard.length} of them models we track` : count(s.leaderboardBoard.length, 'model')}.`
                     : '',
                   s.boardSource !== 'epoch' && s.epochBoard.length ? `Epoch AI has run ${count(s.epochBoard.length, 'model')}.` : '',
                   s.boardSource !== 'collected' && s.viaBoard.length ? `Epoch AI copied scores for ${count(s.viaBoard.length, 'model')} from ${viaName}.` : '',
@@ -913,7 +925,7 @@ const cite = {
               <h2>{boardChart.title}</h2>
               <p>
                 {boardChart.note && `${boardChart.note} `}
-                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on {boardHost ? <a href={LEADERBOARDS[b.id].url}>{boardHost}’s leaderboard</a> : <>the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a></>}.
+                The line joins the runs that no other run beats on both measures. We redrew this chart from the numbers on {boardHost ? <a href={LEADERBOARDS[b.id].url}>{boardHost}’s leaderboard</a> : paperBoard ? <>the benchmark’s <a href={LEADERBOARDS[b.id].url}>paper</a></> : <>the <a href={LEADERBOARDS[b.id].url}>official leaderboard</a></>}.
               </p>
             </div>
             <div class="seg" role="radiogroup" aria-label="View">

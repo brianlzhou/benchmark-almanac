@@ -1,0 +1,6 @@
+// MeQSum tests medical question summarization.
+// Table 2 reports ROUGE scores, with ROUGE-1 as the headline and ROUGE-2 and ROUGE-L retained.
+import type {Leaderboard} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://aclanthology.org/P19-1215.pdf';
+const rows=[['Seq2seq #1',24.80,13.84,24.27],['Attentional Model #2',28.97,18.34,28.74],['Attentional Model #3',27.62,15.70,27.11],['Pointer Generator #1',35.80,20.19,34.79],['Pointer Generator #2',42.77,25.00,40.97],['Pointer Generator #3',44.16,27.64,42.78],['PG+Coverage #1',39.57,23.05,38.45],['PG+Coverage #2',40.00,24.13,38.56],['PG+Coverage #3',41.76,24.80,40.50]] as const;
+const board:Leaderboard={benchmark:'meqsum',static:'paper',url:'https://aclanthology.org/P19-1215/',feed:FEED,terms:'The paper is available from ACL Anthology under its publication terms. https://aclanthology.org/faq/copyright/',parts:{rouge2:{name:'ROUGE-2'},rougeL:{name:'ROUGE-L'}},async fetch(){const p=await pdfText(FEED);if(!p.includes('Table 2: Results of the question summarization models'))throw Error('MeQSum Table 2 missing');return checked(rows.map(r=>({model:r[0],score:r[1],metrics:{rouge2:r[2],rougeL:r[3]}})),9)}}; export default board;

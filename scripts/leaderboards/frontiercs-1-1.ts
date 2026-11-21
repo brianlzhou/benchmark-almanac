@@ -1,3 +1,4 @@
+// Version 1.1 publishes the score, agent, reasoning setting and submitter.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { tables,text,num } from '../lib/html.ts';
@@ -7,5 +8,5 @@ const board:Leaderboard={benchmark:'frontiercs-1-1',url:URL,feed:URL,terms:'Publ
  if(!t)throw new Error('FrontierCS 1.1 table missing');
  return t.slice(1).flatMap(r=>{const score=num(r[2]?.text);if(score===undefined)return [];
  const inner=r[1].html.match(/<span>([\s\S]*?)<\/span>\s*<\/span>/)?.[1]??r[1].html;const [model,h]=inner.split(/<small>/);
- return [{model:text(model),score,harness:h?text(h):undefined,setting:r[3]?.text}];});
+ return [{model:text(model),score,harness:h?text(h):undefined,setting:r[3]?.text,submitter:r[4]?.text}];});
  }};export default board;

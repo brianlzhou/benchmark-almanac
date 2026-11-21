@@ -15,7 +15,7 @@ const names: Record<string, string> = {
   'LLaMA 3.1-70B': 'LLaMA-3.1 70B',
 };
 const board: Leaderboard = {
-  benchmark: 'iheval', parts: {
+  benchmark: 'iheval', static: 'paper', parts: {
   ruleSingle: { name: 'Rule single', group: 'Task type' },
   ruleMulti: { name: 'Rule multi', group: 'Task type' },
   extraction: { name: 'Extraction', group: 'Task type' },

@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2412.07755";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "sat-spatial-aptitude",
+  benchmark: "sat-spatial-aptitude", static: 'paper',
   parts: {
     syntheticAccuracy: { name: 'Synthetic', group: 'Split' },
   },

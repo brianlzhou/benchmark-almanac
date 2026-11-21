@@ -6,7 +6,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2604.27865";
 const board: Leaderboard = {
-  benchmark: "kellybench",
+  benchmark: "kellybench", static: 'paper',
   url: "https://arxiv.org/html/2604.27865",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

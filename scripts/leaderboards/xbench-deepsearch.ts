@@ -1,4 +1,4 @@
-// The current default DeepSearch 2510 API publishes exact accuracy scores. Historical 2505 score bands are excluded. Product names without model snapshots remain unlisted. Cost strings mix subscriptions and usage, so no per-task cost is inferred.
+// The current default DeepSearch 2510 API publishes exact accuracy scores. Historical 2505 score bands are excluded. Product names without model snapshots remain unlisted. Keep reported dollar amounts separately and record explicitly free runs at zero cost. Read latency in seconds.
 // The generic Gemini Pro product label does not identify a Gemini generation.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -13,7 +13,23 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 
 const d=await fetchJson<any>(FEED);
-return d.data.Leaderboard.map((r:any)=>{const m=r.product.match(/^(.+?)\s*\(([^)]+)\)$/);return {model:(m?m[1].trim():r.product)==='Gemini Pro'?'Gemini Pro (version unspecified)':(m?m[1].trim():r.product),setting:m?.[2],score:r.score,date:r.evaluationDate,metrics:(()=>{const exact=String(r.timeCost??'').match(/^(\d+(?:\.\d+)?)min$/);const range=String(r.timeCost??'').match(/^(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)min$/);return exact?{minutes:Number(exact[1])}:range?{minutesMin:Number(range[1]),minutesMax:Number(range[2])}:undefined;})()};});
+return d.data.Leaderboard.map((r: {product: string; score: number; evaluationDate?: string; cost?: string; timeCost?: string; company?: {name?: string}}) => {
+  const mode = r.product.match(/^(.+?)\s*\(([^)]+)\)$/);
+  const product = mode ? mode[1].trim() : r.product;
+  const price = r.cost?.trim().match(/^~?\$([\d.]+)$/);
+  const time = r.timeCost?.trim().match(/^(\d+(?:\.\d+)?)(?:-(\d+(?:\.\d+)?))?min$/);
+  const metrics: Record<string, number> = {};
+  if (price) metrics.reportedPriceUSD = Number(price[1]);
+  if (time?.[2]) {
+    metrics.latencyMin = Number(time[1]) * 60;
+    metrics.latencyMax = Number(time[2]) * 60;
+  } else if (time) metrics.latency = Number(time[1]) * 60;
+  return {
+    model: product === 'Gemini Pro' ? 'Gemini Pro (version unspecified)' : product,
+    setting: mode?.[2], score: r.score, date: r.evaluationDate, agentOrg: r.company?.name,
+    cost: r.cost?.trim() === 'Free' ? 0 : undefined, metrics,
+  };
+});
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

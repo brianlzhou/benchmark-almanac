@@ -7,7 +7,7 @@
 // The page node also holds the data of its "Score vs. cost per run" chart: per model mean_cost, the US dollars
 // of one run (the whole simulated year, priced from the run's tokens without caching), and
 // avg_output_tokens for one run. One run is the whole test, so the board sets costPer 'run'; the output tokens
-// are per run too. The table's standard error of the mean balance is kept as metrics.sem.
+// are per run too. The table's standard error of the mean balance is kept as metrics.stderr.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
@@ -86,9 +86,17 @@ async function load(): Promise<{ runs: Record<string, Run>; costs: Map<string, S
       const field = (k: string) => Number(m[2].match(new RegExp(`\\b${k}:(-?[\\d.]+)`))?.[1]);
       const [cost, tokens] = [field('mean_cost'), field('avg_output_tokens')];
       const metrics: Record<string, number> = {};
-      for (const key of ['min_cost','max_cost','avg_input_tokens','price_per_mtok_in','price_per_mtok_out','n']) {
+      const fields = {
+        min_cost: 'min_cost',
+        max_cost: 'max_cost',
+        avg_input_tokens: 'avg_input_tokens',
+        price_per_mtok_in: 'priceIn',
+        price_per_mtok_out: 'priceOut',
+        n: 'pricedRuns',
+      };
+      for (const [key, metric] of Object.entries(fields)) {
         const value = field(key);
-        if (Number.isFinite(value)) metrics[key === 'n' ? 'pricedRuns' : key] = value;
+        if (Number.isFinite(value)) metrics[metric] = value;
       }
       costs.set(m[1], { metrics, cost: cost > 0 ? cost : undefined, tokens: tokens > 0 ? tokens : undefined });
     }
@@ -130,9 +138,9 @@ const board: Leaderboard = {
       // "Gemini 3.1 Pro Custom Tools": the same model with Andon's custom tool set
       if (/ Custom Tools$/.test(model)) [model, harness] = [model.replace(/ Custom Tools$/, ''), 'custom tools'];
       const metrics: Record<string, number> = { ...spend?.metrics };
-      if (typeof r.final_value_sem === 'number') metrics.sem = metrics.stderr = r.final_value_sem;
+      if (typeof r.final_value_sem === 'number') metrics.stderr = r.final_value_sem;
       for (const key of ['final_value_std', 'final_value_geomean', 'final_value_geomean_n'] as const) {
-        if (typeof r[key] === 'number') metrics[key] = r[key];
+        if (typeof r[key] === 'number') metrics[key === 'final_value_std' ? 'std' : key] = r[key];
       }
       rows.push({ trials: r.num_final_values ?? r.num_epochs,
         low: typeof r.final_value_ci95 === 'number' ? r.final_value - r.final_value_ci95 : undefined,

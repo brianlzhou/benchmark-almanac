@@ -1,0 +1,4 @@
+// UMI-Bench evaluates robot manipulation policies on seen and unseen objects and positions.
+// The paper reports task-level progress scores for three named policies, so each policy score is the task mean.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2606.10382';const board:Leaderboard={benchmark:'umi-bench',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,async fetch(){const t=grid(paperTables(await paperHtml(URL))[2]);if(!t)throw Error('UMI-Bench table missing');const sums=[0,0,0],n=[0,0,0];for(const r of t.slice(3)){const vals=String(r[5]).split('/').map(Number);vals.forEach((v,i)=>{sums[i]+=v;n[i]++;});}return checked(sums.map((s,i)=>({model:['pi0','pi0.5','DZ'][i],score:s/n[i]})),3);}};export default board;

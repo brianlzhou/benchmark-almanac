@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2607.01647";
 import { paperTables } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "agenticdatabench",
+  benchmark: "agenticdatabench", static: 'paper',
   url: "https://github.com/AgenticDataBench/AgenticDataBench",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

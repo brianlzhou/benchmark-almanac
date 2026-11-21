@@ -1,6 +1,6 @@
 // Factorio Learning Environment (FLE). The leaderboard page loads processed/combined-results.json next to
 // it: per model the production score of its open-play run, milestones, automation milestones, lab-task
-// success rate, the most complex item made and the submission date. The page ranks by Production Score,
+// success rate, the most complex item made and the submission date and submitter. The page ranks by Production Score,
 // which is the score here (an open-ended count, higher is better). The six rows are the March 2025 paper's
 // runs and carry their submission dates. Milestones, automation milestones and the lab-task success rate
 // (0 to 100) are kept as metrics.milestones, metrics.automation and metrics.labSuccess.
@@ -26,7 +26,7 @@ const board: Leaderboard = {
   },
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<
-      { name: string; productionScore?: number; milestones?: number; automationMilestones?: number; labTasksSuccessRate?: number; submissionDate?: string }[]
+      { name: string; productionScore?: number; milestones?: number; automationMilestones?: number; labTasksSuccessRate?: number; submittedBy?: string; submissionDate?: string }[]
     >(FEED);
     const rows: LeaderboardRow[] = [];
     for (const e of data) {
@@ -35,7 +35,7 @@ const board: Leaderboard = {
       if (typeof e.milestones === 'number') metrics.milestones = e.milestones;
       if (typeof e.automationMilestones === 'number') metrics.automation = e.automationMilestones;
       if (typeof e.labTasksSuccessRate === 'number') metrics.labSuccess = e.labTasksSuccessRate;
-      rows.push({ model: e.name, score: e.productionScore, date: e.submissionDate, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({ model: e.name, score: e.productionScore, date: e.submissionDate, submitter: e.submittedBy, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     if (!rows.length) throw new Error('no FLE rows');
     return rows;

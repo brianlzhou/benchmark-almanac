@@ -18,13 +18,14 @@ const board: Leaderboard = {
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    const d=await fetchJson<{leaderboardData:{info:{name:string,CoT:string,type:string},emma:Record<string,string>}[]}>(FEED);
+    const d=await fetchJson<{leaderboardData:{info:{name:string,CoT:string,type:string,size?:string},emma:Record<string,string>}[]}>(FEED);
     const out:LeaderboardRow[]=[];
     for(const r of d.leaderboardData) {
       if(/random|human/.test(r.info.type))continue;
       const score=num(r.emma.overall);if(score===undefined)continue;
       const metrics=Object.fromEntries(['math','physics','chemistry','coding'].map(k=>[k,num(r.emma[k])]).filter(([,v])=>v!==undefined)) as Record<string,number>;
-      out.push({model:r.info.name,score,setting:r.info.CoT==='true'?'CoT':'no CoT',metrics});
+      out.push({model:r.info.name,score,open:r.info.type==='open_source'?true:r.info.type==='proprietary'?false:undefined,
+        params:/^\d+(?:\.\d+)?B$/i.test(r.info.size ?? '')?parseFloat(r.info.size!):undefined,setting:r.info.CoT==='true'?'CoT':'no CoT',metrics});
     }
     if(!out.length)throw new Error('EMMA scores missing');return out;
   },

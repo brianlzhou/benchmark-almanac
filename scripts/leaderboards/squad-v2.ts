@@ -1,4 +1,4 @@
-// SQuAD 2.0: the first official leaderboard table, ranked by test F1 percentage. Keep EM as a metric.
+// SQuAD 2.0: the first official leaderboard table gives test F1, exact match and published ranks that include ties.
 // The second table is SQuAD 1.1 and is excluded. Keep submission teams, dates and result links alongside submission names
 // and the single-model/ensemble setting; human reference performance is not a model.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -26,7 +26,7 @@ const t=tables(await fetchText(FEED))[0];if(t?.[0]?.map(c=>c.text).join('|')!=='
       const timestamp = day ? Date.parse(day + ' UTC') : NaN;
       rows.push({ model, score, setting: mode?.[1], submitter: submitter || undefined, link,
         date: Number.isFinite(timestamp) ? new Date(timestamp).toISOString().slice(0, 10) : undefined,
-        metrics: { exactMatch: num(r[2].text)!, rank: num(r[0].text)! } });
+        metrics: { exactMatch: num(r[2].text)!, tiedRank: num(r[0].text)! } });
     }
 if(!rows.length)throw new Error('No SQuAD 2.0 submissions');return rows;
  },

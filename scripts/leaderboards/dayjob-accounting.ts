@@ -20,14 +20,14 @@ const board:Leaderboard={benchmark:'dayjob-accounting',url,feed:`${url} (Account
    const score=num(r[3])!;
    const source=raw.find(x=>normalize(x[0])===normalize(r[1])&&x[3]===score);
    const cost=num(r[4]);const metrics:Record<string,number>={};
-   if(source){Object.assign(metrics,{surgeRecordedCost:source[4],inputTokens:source[5],cachedInputTokens:source[6],reasoningTokens:source[8]});}
+   if(source){Object.assign(metrics,{surgeRecordedCost:source[4],inputTokens:source[5],cachedTokens:source[6],reasoningTokens:source[8]});}
    if(cost!==undefined)metrics.cost=cost;
    return {model:r[1],score,setting:source?.[2]??undefined,cost,tokens:source?.[7],metrics};
   });
   // The static table omits an older model still published in the interactive board's source tuples.
   for(const r of raw){
    if(published.some(x=>normalize(x[1])===normalize(r[0])&&num(x[3])===r[3]))continue;
-   out.push({model:r[0],score:r[3],setting:r[2],cost:r[4],tokens:r[7],metrics:{cost:r[4],surgeRecordedCost:r[4],inputTokens:r[5],cachedInputTokens:r[6],reasoningTokens:r[8]}});
+   out.push({model:r[0],score:r[3],setting:r[2],cost:r[4],tokens:r[7],metrics:{cost:r[4],surgeRecordedCost:r[4],inputTokens:r[5],cachedTokens:r[6],reasoningTokens:r[8]}});
   }
   if(!out.length)throw new Error('DAYJOB Accounting rows missing');
   return out;

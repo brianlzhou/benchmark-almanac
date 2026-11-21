@@ -1,0 +1,4 @@
+// ImageNet ReaL reassesses ImageNet validation labels and reports corrected top-1 accuracy.
+// Table 5 lists ReaL accuracy for the published model set.
+import type {Leaderboard,LeaderboardRow} from './types.ts'; import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts'; import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://arxiv.org/html/2006.07159'; const board:Leaderboard={benchmark:'imagenet-real',static:'paper',url:FEED,feed:FEED,terms:PAPER_TERMS,async fetch():Promise<LeaderboardRow[]>{const t=paperTables(await paperHtml(FEED)).map(grid)[6];if(!t||t[0]?.[1]!=='Model')throw new Error('ImageNet ReaL table missing');const rows=t.slice(1).filter(r=>r[1]&&Number.isFinite(Number(r[2]))).map(r=>({model:r[1],score:Number(r[2]),metrics:{originalAccuracy:Number(r[3])}}));return checked(rows,20)}};export default board;

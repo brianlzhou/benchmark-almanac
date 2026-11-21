@@ -1,6 +1,6 @@
 // FaithJudge (University of Waterloo and Vectara). The leaderboard is the markdown table between the
 // TABLE START and TABLE END markers in the vectara/FaithJudge README: per model the Overall Hallucination
-// Rate (0 to 100, lower is better, the ranking) and per-task rates. The overall rate is the score, as the
+// Rate (0 to 100, lower is better, the ranking) and per-task rates, hallucination counts and model sizes. The overall rate is the score, as the
 // board shows it. Model names are API ids: a reasoning effort or "thinking" inside the name becomes the
 // setting, and a trailing date stamp is passed on for snapshot matching.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -9,11 +9,19 @@ import { num, text } from '../lib/html.ts';
 
 const FEED = 'https://raw.githubusercontent.com/vectara/FaithJudge/main/README.md';
 
+const tasks = {
+  faithbenchSummarization: 'Faithbench (Summarization)',
+  ragTruthSummarization: 'RagTruth (Summarization)',
+  ragTruthQuestionAnswering: 'RagTruth (Question-Answering)',
+  ragTruthDataToTextWriting: 'RagTruth (Data-to-Text Writing)',
+};
+
 const board: Leaderboard = {
   benchmark: 'faithjudge',
   url: 'https://github.com/vectara/FaithJudge#leaderboard',
   feed: `${FEED} (leaderboard table, Overall Hallucination Rate)`,
   terms: 'README table in the vectara/FaithJudge repository, which has no license file; scores are cited to the FaithJudge authors.',
+  parts: tasks,
   aliases: {
     'r1-0528': 'deepseek-r1-may-2025',
     'gemini-2.5-pro-exp-03-25': 'gemini-2-5-pro-mar-2025',
@@ -62,7 +70,21 @@ const board: Leaderboard = {
         model = model.replace(/-thinking$/, '');
         settings.push('thinking');
       }
-      rows.push({ model, score, setting: settings.join(', ') || undefined, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined });
+      const size = cells[head!.indexOf('# Parameters')];
+      const params = num(size?.split('/').at(-1));
+      const metrics: Record<string, number> = {};
+      if (size?.includes('active')) metrics.activeParams = num(size)!;
+      for (const [key, label] of Object.entries(tasks)) {
+        const cell = cells[head!.indexOf(label)];
+        const rate = num(cell);
+        if (rate !== undefined) metrics[key] = rate;
+        const counts = cell?.match(/\((\d+)\/(\d+)\)/);
+        if (counts) {
+          metrics[key + 'Hallucinations'] = Number(counts[1]);
+          metrics[key + 'Examples'] = Number(counts[2]);
+        }
+      }
+      rows.push({ model, score, params, metrics, setting: settings.join(', ') || undefined, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined });
     }
     return rows;
   },

@@ -26,7 +26,7 @@ const board: Leaderboard = {
     for (const r of data.models) {
       if (!r.displayName || !Number.isFinite(r.eloRating)) continue;
       const metrics: Record<string, number> = {};
-      for (const [k, v] of Object.entries(r)) if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      for (const [k, v] of Object.entries(r)) if (k !== 'rank' && typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
       if (typeof r.stability === 'string') metrics['stability: ' + r.stability] = 1;
       if (typeof r.hasBaseline24h === 'boolean') metrics.hasBaseline24h = Number(r.hasBaseline24h);
       if (typeof r.movementVisible === 'boolean') metrics.movementVisible = Number(r.movementVisible);

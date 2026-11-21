@@ -14,11 +14,30 @@ const board: Leaderboard = {
   feed: `${FEED} (Overall)`,
   terms: 'JSON file in an MIT-licensed Hugging Face Space, fetched through the Hub file API.',
   async fetch() {
-    const data = await fetchJson<{ model: string; Overall?: number }[]>(FEED);
+    const groups: Record<string, string[]> = {
+      Overall: ['Domain', 'Quality'],
+      Domain: ['Common Sense', 'AV', 'Robot', 'Industry', 'Human', 'Physics'],
+      Quality: ['Subject Consistency', 'Background Consistency', 'Motion Smoothness', 'Aesthetic Quality',
+        'Imaging Quality', 'Overall Consistency', 'I2V Subject', 'I2V Background'],
+    };
+    const parts: Record<string, { name: string; group: string }> = {};
+    for (const [group, names] of Object.entries(groups)) {
+      for (const name of names) {
+        const key = name.split(' ').map((word, i) => i ? word : word.toLowerCase()).join('');
+        parts[key] = {name, group};
+      }
+    }
+    board.parts = parts;
+    const data = await fetchJson<{ [key: string]: unknown; model: string; Overall?: number }[]>(FEED);
     const rows: LeaderboardRow[] = [];
     for (const r of data) {
       if (!r.model || /^source$/i.test(r.model) || typeof r.Overall !== 'number') continue;
-      rows.push({ model: r.model, score: r.Overall });
+      const metrics: Record<string, number> = {};
+      for (const [key, part] of Object.entries(parts)) {
+        const score = r[part.name];
+        if (typeof score === 'number') metrics[key] = score;
+      }
+      rows.push({ model: r.model, score: r.Overall, metrics });
     }
     return rows;
   },

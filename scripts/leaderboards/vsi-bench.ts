@@ -8,7 +8,7 @@ import { paperTables as tables, checked } from '../lib/boards/arxiv-span-tables.
 
 const FEED = "https://arxiv.org/html/2412.14171";
 const board: Leaderboard = {
- benchmark: "vsi-bench",
+ benchmark: "vsi-bench", static: 'paper',
  parts: {
    objectCount: { name: 'Object count', group: 'Task type' },
    absoluteDistance: { name: 'Absolute distance', group: 'Task type' },

@@ -8,7 +8,7 @@ import { rrcPage } from '../lib/boards/rrc.ts';
 const FEED = "https://arxiv.org/html/2007.00398";
 const RRC = 'https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1';
 const board: Leaderboard = {
-  benchmark: "docvqa",
+  benchmark: "docvqa", static: 'paper',
 
   url: RRC,
   feed: `${RRC} + ${FEED}`,

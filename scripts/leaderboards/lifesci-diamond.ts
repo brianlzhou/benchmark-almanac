@@ -3,7 +3,7 @@
 // ("openai/gpt-6-astra") in separate columns. Arca's rows are Arca's own agent built on the model, so they show as
 // their own entries and never count as the model's score. The API rows are the model on its own. "Arca + Auto"
 // lets Arca pick the model, so it has no model to name. Graded-task counts and the mean on graded tasks (partial
-// credit) go in metrics.
+// credit), passes and unavailable tasks go in metrics. Both published pass bounds are retained.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
@@ -27,15 +27,14 @@ const board: Leaderboard = {
       const low = num(r.pass_lower_pct);
       const high = num(r.pass_upper_pct);
       const metrics: Record<string, number> = {};
-      for (const [k, v] of [['graded', r.graded], ['tasks', r.tasks], ['meanGraded', r.mean_on_graded]] as const) if (num(v) !== undefined) metrics[k] = num(v)!;
+      for (const [k, v] of [['graded', r.graded], ['tasks', r.tasks], ['passes', r.passes], ['unavailable', r.unavailable], ['meanGraded', r.mean_on_graded]] as const) if (num(v) !== undefined) metrics[k] = num(v)!;
       rows.push({
         model: r.model === 'auto' ? 'Arca Auto' : r.model,
         score,
         harness: arca ? 'Arca' : 'API',
         ...(arca ? { agentOrg: 'Arca' } : {}),
         cost: num(r.cost_per_task_usd),
-        // the file gives an interval; today its two ends equal the score, so it adds nothing yet
-        ...(low !== undefined && high !== undefined && high > low ? { low, high } : {}),
+        ...(low !== undefined && high !== undefined && high >= low ? { low, high } : {}),
         metrics,
       });
     }

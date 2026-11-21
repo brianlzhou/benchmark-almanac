@@ -1,0 +1,5 @@
+// The Norwegian Parliamentary Speech Corpus benchmark measures Bokmål and Nynorsk speech recognition.
+// Table 2 reports word error rate on the NPSC test set for four acoustic and language-model combinations.
+import type {Leaderboard} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const feed='https://aclanthology.org/2022.lrec-1.106.pdf';
+const board:Leaderboard={benchmark:'norwegian-parliamentary-speech-corpus',url:'https://aclanthology.org/2022.lrec-1.106.pdf',feed,static:'paper',terms:'The LREC paper is available under ACL Anthology terms. https://aclanthology.org/faq/copyright/',async fetch(){const p=await pdfText(feed);if(!p.includes('40.6')||!p.includes('15.9')||!p.includes('17.8')||!p.includes('17.1'))throw new Error('Missing NPSC Table 2');return checked([{model:'M1',score:40.6,metrics:{NSTPrime:2.9,NB:48.4}},{model:'M2',score:15.9,metrics:{NB:39.6}},{model:'M3',score:17.8,metrics:{NB:37.3}},{model:'M4',score:17.1,metrics:{NB:41.5}}],4);}};export default board;

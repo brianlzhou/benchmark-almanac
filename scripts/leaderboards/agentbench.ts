@@ -9,7 +9,7 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 
 const FEED = "https://arxiv.org/html/2308.03688";
 const board: Leaderboard = {
- benchmark: "agentbench",
+ benchmark: "agentbench", static: 'paper',
  parts: {
    os: { name: 'OS', group: 'Environment', unit: '%' },
    database: { name: 'Database', group: 'Environment', unit: '%' },

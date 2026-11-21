@@ -94,7 +94,7 @@ const board: Leaderboard = {
     for (const r of mdRecords(full)) {
       const score = Number(r['Score %']);
       if (!r.Model || !Number.isFinite(score)) continue;
-      const metrics: Record<string, number> = { rank: Number(r.Rank), puzzles: Number(r['#Puzzles']) };
+      const metrics: Record<string, number> = { puzzles: Number(r['#Puzzles']) };
       const subset = recent.get(r.Model);
       if (subset != null && Number.isFinite(subset)) metrics.newest100 = subset;
       const row = { ...lechMazurName(r.Model), score, metrics };

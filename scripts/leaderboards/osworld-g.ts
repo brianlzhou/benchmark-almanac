@@ -6,6 +6,7 @@ import { tables, num } from '../lib/html.ts';
 const URL = 'https://osworld-grounding.github.io/';
 const board: Leaderboard = {
   benchmark: 'osworld-g', parts: {
+  Refusal: { name: 'Refusal', group: 'Task type' },
   'Text Matching': { name: 'Text matching', group: 'Task type' },
   'Element Recognition': { name: 'Element recognition', group: 'Task type' },
   'Layout Understanding': { name: 'Layout understanding', group: 'Task type' },
@@ -30,7 +31,7 @@ const board: Leaderboard = {
       for (let i = 1; i < 6; i++) { const n = num(r[i]?.text); if (n !== undefined) metrics[detail[0][i].text] = n; }
       rows.set(r[0].text, {model: r[0].text, score, metrics});
     }
-    return [...rows.values()].map(r => ({...r, model: r.model === 'Gemini-2.5-Pro' ? 'Gemini 2.5 Pro (snapshot unspecified)' : r.model}));
+    return [...rows.values()].map(r => ({...r, params:num(r.model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B\b/i)?.[1]), model: r.model === 'Gemini-2.5-Pro' ? 'Gemini 2.5 Pro (snapshot unspecified)' : r.model}));
   },
 };
 export default board;

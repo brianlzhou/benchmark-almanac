@@ -81,6 +81,6 @@ const counts = `Every dated score we have, one mark each, from ${kinds.length < 
   refs={refs}
   marks={b.refreshes}
   better={b.better}
-  sourceNote={LEADERBOARDS[b.id]?.host ? { leaderboard: `On ${LEADERBOARDS[b.id].host}’s leaderboard` } : {}}
+  sourceNote={LEADERBOARDS[b.id]?.host ? { leaderboard: `On ${LEADERBOARDS[b.id].host}’s leaderboard` } : LEADERBOARDS[b.id]?.static === 'paper' ? { leaderboard: 'In the benchmark’s paper' } : {}}
 />
 </ChartDownload>

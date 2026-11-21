@@ -26,6 +26,8 @@ interface Entry {
 const board: Leaderboard = {
   benchmark: 'kor-bench',
   parts: {
+    cipher: { name: 'Cipher', group: 'Task type' },
+    counterfactual: { name: 'Counterfactual', group: 'Task type' },
     operation: { name: 'Operation', group: 'Task type' },
     logic: { name: 'Logic', group: 'Task type' },
     puzzle: { name: 'Puzzle', group: 'Task type' },

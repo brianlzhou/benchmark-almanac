@@ -1,5 +1,5 @@
 // DeepSeek-V3 paper: CNMO 2024 pass@1 averaged over 16 samples.
-// DeepSeek prepared this evaluation. These static paper rows will not refresh.
+// The comparison table gives total and active parameters for the disclosed models.
 // Compact source dates identify the exact model snapshots. The reader verifies the header order before assigning scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -7,7 +7,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2412.19437";
 const board: Leaderboard = {
-  benchmark: "cnmo-2024",
+  benchmark: "cnmo-2024", static: 'paper',
   url: "https://arxiv.org/html/2412.19437",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
@@ -21,7 +21,14 @@ const board: Leaderboard = {
       const r=t.find(r=>r[0]?.text==='CNMO 2024 (Pass@1)')!;
       const names=['DeepSeek-V2-0506','DeepSeek-V2.5-0905','Qwen2.5-72B-Instruct','Llama-3.1-405B-Instruct','Claude-3.5-Sonnet-1022','GPT-4o-0513','DeepSeek-V3 (December 2024)'];
       if(r.length!==names.length+1) throw new Error('CNMO columns changed');
-      return names.map((model,i)=>({model,score:num(r[i+1].text)!}));
+      const sizes = (label: string) => t.find(row => row.some(c => c.text === label))?.slice(-names.length);
+      const total = sizes('# Total Params'), active = sizes('# Activated Params');
+      const billions = (s?: string) => s && /^\d+(?:\.\d+)?B$/.test(s) ? parseFloat(s) : undefined;
+      return names.map((model,i) => {
+        const activeParamsB = billions(active?.[i]?.text);
+        return {model, score: num(r[i+1].text)!, params: billions(total?.[i]?.text), trials: 16,
+          metrics: activeParamsB === undefined ? undefined : {activeParamsB}};
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

@@ -4,6 +4,13 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 const FEED='https://sakanaai.github.io/ALE-Bench-Leaderboard/data/results_summary.json';
+const allTaskKeys: Record<string, string> = {
+  all_input_tokens_mean: 'inputTokens',
+  all_output_tokens_mean: 'outputTokens',
+  all_total_tokens_mean: 'totalTokens',
+  all_performance_stdev: 'std',
+};
+
 type Stat = Record<string, Record<string, number>>;
 interface Problem {
   problem_id: string;
@@ -35,11 +42,12 @@ const board:Leaderboard={aliases:{"claude-4-sonnet": "claude-sonnet-4", "claude-
   const cost=r.cost?.[split]?.mean,tokens=r.output_tokens?.[split]?.mean;const metrics:Record<string,number>={};
   if(typeof cost==='number')metrics.cost=cost;
   for(const part of ['short','long']){const value=r.performance?.[part]?.mean;if(typeof value==='number')metrics[part]=value;}
-  for(const [key,value] of Object.entries({inputTokens:r.input_tokens?.[split]?.mean,performanceStdev:r.performance?.[split]?.stdev,meanRank:r.rank?.[split]?.mean}))if(typeof value==='number')metrics[key]=value;
+  for(const [key,value] of Object.entries({inputTokens:r.input_tokens?.[split]?.mean,meanRank:r.rank?.[split]?.mean}))if(typeof value==='number')metrics[key]=value;
   for (const key of ['performance', 'rank', 'cost', 'input_tokens', 'output_tokens', 'total_tokens'] as const) {
     for (const [category, stats] of Object.entries(r[key] ?? {})) {
       for (const [stat, value] of Object.entries(stats)) {
-        if (typeof value === 'number') metrics[[category, key, stat].join('_')] = value;
+        const field = [category, key, stat].join('_');
+        if (typeof value === 'number') metrics[allTaskKeys[field] ?? field] = value;
       }
     }
   }

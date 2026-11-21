@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2501.16566";
-const board:Leaderboard={benchmark:'mer-unibench', parts: {
+const board:Leaderboard={benchmark:'mer-unibench', static: 'paper', parts: {
   MER2023: { name: 'MER2023', group: 'Dataset' },
   MER2024: { name: 'MER2024', group: 'Dataset' },
   MELD: { name: 'MELD', group: 'Dataset' },

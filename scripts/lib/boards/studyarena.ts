@@ -20,10 +20,10 @@ export async function studyRows(kind:'text'|'image'|'audio'):Promise<Leaderboard
     const score=r.score??r.rating;
     if(!r.model||typeof score!=='number'||!Number.isFinite(score)||(r.ballots??r.games??0)<=0)continue;
     const metrics:Record<string,number>={};
-    for(const [k,v] of Object.entries(r))if(typeof v==='number'&&Number.isFinite(v))metrics[k]=v;
+    for(const [k,v] of Object.entries(r))if(k!=='rank'&&typeof v==='number'&&Number.isFinite(v))metrics[k]=v;
     for(const [k,v] of Object.entries(stats[r.model]??{}))if(typeof v==='number'&&Number.isFinite(v))metrics[k]=v;
     for (const [key, value] of Object.entries(prices[r.model] ?? {})) {
-      if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
+      if (typeof value === 'number' && Number.isFinite(value)) metrics[key === 'inputUsdPerMillion' ? 'priceIn' : key === 'outputUsdPerMillion' ? 'priceOut' : key] = value;
     }
     for (const key of ['medianDuration', 'p25Duration', 'p75Duration', 'medianFirstEvent']) {
       if (typeof metrics[key + 'Ms'] === 'number') metrics[key + 'Seconds'] = metrics[key + 'Ms'] / 1000;

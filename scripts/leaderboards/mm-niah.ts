@@ -5,7 +5,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2406.07230";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "mm-niah",
+  benchmark: "mm-niah", static: 'paper',
   parts: {
     context1k: { name: '1k', group: 'Length' },
     context2k: { name: '2k', group: 'Length' },

@@ -4,7 +4,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/2608.21357';
 const magnitude = (s: string) => parseFloat(s) * (/M$/.test(s) ? 1e6 : /k$/.test(s) ? 1e3 : 1);
 const board: Leaderboard = {
-  benchmark: 'vials', parts: {
+  benchmark: 'vials', static: 'paper', parts: {
   Blotting: { name: 'Blotting', group: 'Category' },
   'Flow Cytometry': { name: 'Flow cytometry', group: 'Category' },
   'Molecular Structure': { name: 'Molecular structure', group: 'Category' },
@@ -27,11 +27,11 @@ const board: Leaderboard = {
       if (!rows.some(x => x.model === r[0] && x.setting === 'direct VLM')) {
         const cat = categories.find(c => c[0] === r[0]);
         rows.push({model: r[0], score: Number(r[2]), setting: 'direct VLM', trials: 3,
-          cost: parseFloat(c[2].replace('$', '')), metrics: {totalTokensPerTask: magnitude(r[5]),
+          cost: parseFloat(c[2].replace('$', '')), metrics: {totalTokens: magnitude(r[5]),
             ...Object.fromEntries((cat?.slice(1) ?? []).map((s, i) => [categories[0][i + 1], parseFloat(s)]))}});
       }
       rows.push({model: r[0], score: Number(r[3]), harness: r[1], setting: 'tool-assisted', trials: 3,
-        cost: parseFloat(c[3].replace('$', '')), metrics: {totalTokensPerTask: magnitude(r[6]), gain: parseFloat(r[4].replace(/\s/g, ''))}});
+        cost: parseFloat(c[3].replace('$', '')), metrics: {totalTokens: magnitude(r[6]), gain: parseFloat(r[4].replace(/\s/g, ''))}});
     }
     if (rows.length < 3) throw new Error('VIALS results missing');
     return rows;

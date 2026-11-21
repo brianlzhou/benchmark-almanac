@@ -16,7 +16,7 @@ const board: Leaderboard = {
   if (!t) throw new Error('covebench table missing');
   const rows=t.slice(1).filter(r=>r[1]?.text && !/human|random/i.test(r[1].text) && num(r[3]?.text)!==undefined).map(r=>({
     model:r[1].text,score:num(r[3].text)!,
-    metrics:Object.fromEntries(t[0].map((h,i)=>[h.text,i!==1 && i!==3?num(r[i]?.text):undefined]).filter((p):p is [string,number]=>typeof p[1]==='number'))
+    metrics:Object.fromEntries(t[0].map((h,i)=>[h.text,h.text!=='Rank' && i!==1 && i!==3?num(r[i]?.text):undefined]).filter((p):p is [string,number]=>typeof p[1]==='number'))
   }));
   if(!rows.length) throw new Error('covebench has no scored rows');
   return rows;

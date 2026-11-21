@@ -1,0 +1,6 @@
+// PNCExtract tests extraction of materials science sample lists from papers.
+// Table 4 reports strict and partial precision, recall and F1 for named language models.
+import type {Leaderboard} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://aclanthology.org/2024.findings-acl.779.pdf';
+const rows=[['LLaMA2 C','condensed',3.0,1.2],['Vicuna','condensed',28.1,3.6],['Vicuna-16k','condensed',29.9,8.9],['LongChat','condensed',32.2,4.6],['GPT-4','condensed',54.8,36.9],['Vicuna-16k','full',8.5,2.7],['LongChat','full',32.7,4.7],['GPT-4','full',52.3,36.0],['GPT-4 + SC','full',54.9,38.8]] as const;
+const board:Leaderboard={benchmark:'pncextract',static:'paper',url:'https://aclanthology.org/2024.findings-acl.779/',feed:FEED,terms:'The paper is available from ACL Anthology under its publication terms. https://aclanthology.org/faq/copyright/',parts:{strictF1:{name:'Strict F1'}},async fetch(){const p=await pdfText(FEED);if(!p.includes('Table 4: Precision, Recall, and F1'))throw Error('PNCExtract Table 4 missing');return checked(rows.map(r=>({model:r[0],setting:r[1],score:r[2],metrics:{strictF1:r[3]}})),9)}}; export default board;

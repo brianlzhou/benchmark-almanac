@@ -39,8 +39,6 @@ const board: Leaderboard = {
         const value = num(text(cell[1]));
         if (value !== undefined && dimensions[i]) metrics[dimensions[i]] = value;
       }
-      const rank = m[1].match(/data-rank="(\d+)"/);
-      if (rank) metrics.rank = Number(rank[1]);
       const access = m[1].match(/data-open="([^"]+)"/)?.[1];
       rows.push({ model, metrics, open: access === 'open' ? true : access === 'closed' ? false : undefined, harness: arch === 'cascaded' ? model : undefined, score: Number(m[2]), setting: mode ? (mode === 'Thinking' ? 'thinking' : 'non-thinking') : undefined });
     }

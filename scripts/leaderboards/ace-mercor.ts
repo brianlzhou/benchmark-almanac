@@ -4,7 +4,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2512.04921';
 const board: Leaderboard = {
-  benchmark: 'ace-mercor', url: URL, feed: URL + ' (overall benchmark score table)', terms: PAPER_TERMS,
+  benchmark: 'ace-mercor', static: 'paper', url: URL, feed: URL + ' (overall benchmark score table)', terms: PAPER_TERMS,
   parts: {
     DIY: { name: 'DIY', group: 'Category' },
     Food: { name: 'Food', group: 'Category' },

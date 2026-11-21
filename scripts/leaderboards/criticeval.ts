@@ -12,11 +12,18 @@ const board: Leaderboard = {
   feed: `${FEED} (overall)`,
   terms: 'CSV on the CriticEval GitHub Pages site that the page loads; the CriticEval repository is Apache-2.0.',
   aliases: {'Llama2-70B-Chat': 'llama-2-70b', 'Llama2-13B-Chat': 'llama-2-13b', 'Llama2-7B-Chat': 'llama-2-7b', 'DeepSeek-67B': 'deepseek-llm-67b'},
+  parts: {feedback: 'Feedback', correction: 'Correction', comparison: 'Comparison'},
   async fetch() {
     const rows: LeaderboardRow[] = [];
     for (const r of parseCsv(await fetchText(FEED))) {
       const score = Number(r.overall);
-      if (r.Model && Number.isFinite(score)) rows.push({ model: r.Model.trim(), score, date: '2024-02-21' });
+      const metrics: Record<string, number> = {};
+      for (const key of ['feedback', 'correction', 'comparison']) {
+        if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
+      }
+      const open = r.opensourced?.trim().toLowerCase();
+      if (r.Model && Number.isFinite(score)) rows.push({model: r.Model.trim(), score, date: '2024-02-21',
+        open: open === 'true' ? true : open === 'false' ? false : undefined, metrics});
     }
     return rows;
   },

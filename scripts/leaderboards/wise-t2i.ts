@@ -46,6 +46,8 @@ const board: Leaderboard = {
         const row: LeaderboardRow = { model: identity(model), score: value * 1 };
         row.setting = 'WISE_Verified' + (/w\/ CoT/.test(r[1]) ? '; CoT' : '');
         row.metrics = {};
+        const samples = numeric(r[t[0].indexOf('Samples')]);
+        if (samples !== undefined) row.metrics.samples = samples;
         { const n = numeric(r[3]); if (n !== undefined) row.metrics["culture"] = n; }
         { const n = numeric(r[4]); if (n !== undefined) row.metrics["time"] = n; }
         { const n = numeric(r[5]); if (n !== undefined) row.metrics["space"] = n; }
@@ -61,6 +63,7 @@ const board: Leaderboard = {
 };
 board.parts = {
   culture: { name: 'Culture', group: 'Domain' },
+  time: { name: 'Time', group: 'Domain' },
   space: { name: 'Space', group: 'Domain' },
   biology: { name: 'Biology', group: 'Domain' },
   physics: { name: 'Physics', group: 'Domain' },

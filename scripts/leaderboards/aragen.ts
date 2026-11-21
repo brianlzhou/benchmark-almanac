@@ -1,5 +1,5 @@
 // AraGen: overall 3C3H score from the official results, multiplied by 100.
-// Precision is a whole-benchmark configuration. The six dimensions remain metrics.
+// Precision is a whole-benchmark configuration. Report both task groups, all dimensions, model metadata and the headline interval.
 // The dated Gemini 2.5 Pro preview maps explicitly to the May 2025 snapshot.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
@@ -8,6 +8,9 @@ const FEED = "https://huggingface.co/spaces/inception42/Leaderboards/resolve/mai
 const board: Leaderboard = {
   benchmark: "aragen",
   parts: {
+    qa: {name: 'Question Answering (QA)', group: 'Task'},
+    safety: {name: 'Safety', group: 'Task'},
+    correctness: {name: 'Correctness', group: 'Dimension'},
     completeness: { name: 'Completeness', group: 'Dimension' },
     conciseness: { name: 'Conciseness', group: 'Dimension' },
     helpfulness: { name: 'Helpfulness', group: 'Dimension' },
@@ -21,7 +24,35 @@ const board: Leaderboard = {
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
       const d=await fetchJson<any[]>(FEED);
-      return d.filter(r=>r.Meta&&r['claude-sonnet-4-20250514 Scores']?.['3C3H Scores']?.['3C3H Score']).map(r=>{const s=r['claude-sonnet-4-20250514 Scores']['3C3H Scores'];return {model:r.Meta['Model Name'].replace(/^[^/]+\//,''),score:s['3C3H Score'].value*100,setting:r.Meta.Precision,metrics:{...Object.fromEntries(Object.entries(s).filter(([k])=>k!=='3C3H Score').map(([k,v]:[string,any])=>[k.toLowerCase(),v.value*100])),...(typeof r.Meta.Run_Total_Duration_Seconds==='number'&&Number.isFinite(r.Meta.Run_Total_Duration_Seconds)?{time:r.Meta.Run_Total_Duration_Seconds}:{})}};});
+      return d.flatMap(r => {
+        const meta = r.Meta;
+        const judged = r['claude-sonnet-4-20250514 Scores'];
+        const dimensions = judged?.['3C3H Scores'];
+        const overall = dimensions?.['3C3H Score'];
+        if (!meta || !overall) return [];
+        const metrics: Record<string, number> = {};
+        for (const [name, stat] of Object.entries(dimensions) as [string, {value: number}][]) {
+          if (name !== '3C3H Score' && Number.isFinite(stat.value)) metrics[name.toLowerCase()] = 100 * stat.value;
+        }
+        for (const [key, name] of [['qa', 'Question Answering (QA)'], ['safety', 'Safety']]) {
+          const value = judged['Tasks Scores']?.[name]?.value;
+          if (Number.isFinite(value)) metrics[key] = 100 * value;
+        }
+        for (const [key, column] of Object.entries({
+          time: 'Run_Total_Duration_Seconds', totalEntries: 'Total Entries',
+          successfulEntries: 'Successful Entries', failedEntries: 'Failed Entries',
+        })) {
+          if (Number.isFinite(meta[column])) metrics[key] = meta[column];
+        }
+        return [{
+          model: meta['Model Name'].replace(/^[^/]+\//,''), score: overall.value * 100,
+          setting: meta.Precision, license: meta.License || undefined,
+          params: Number.isFinite(meta.Params) && meta.Params > 0 ? meta.Params : undefined,
+          date: meta.Run_End_Time?.slice(0,10),
+          low: Number.isFinite(overall.lower) ? 100 * overall.lower : undefined,
+          high: Number.isFinite(overall.upper) ? 100 * overall.upper : undefined, metrics,
+        }];
+      });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

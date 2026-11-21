@@ -8,7 +8,7 @@ import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const FEED = "https://arxiv.org/html/2502.13059";
 const board: Leaderboard = {
- benchmark: "simplevqa",
+ benchmark: "simplevqa", static: 'paper',
  parts: { chinese: { name: 'Chinese', group: 'Language' }, english: { name: 'English', group: 'Language' } },
  url: "https://arxiv.org/html/2502.13059",
  feed: FEED,

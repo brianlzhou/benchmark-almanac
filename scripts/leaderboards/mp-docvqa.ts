@@ -1,3 +1,4 @@
+// Read the fine-tuned checkpoint names and parameter counts from the model table.
 // MP-DocVQA publishes ANLS fractions and APPA percentages for six fine-tuned checkpoints. Convert ANLS to the registry percentage unit and preserve checkpoint identity and APPA.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -22,7 +23,19 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = markdownTables(source);
     const rows: LeaderboardRow[] = [];
-    const t=all.find(t=>t[0]?.includes("ANLS"));if(!t)throw new Error("Missing MP-DocVQA leaderboard");for(const r of t.slice(1)){const score=num(r[3]);if(score===undefined)continue;rows.push({model:r[1]||r[0],score:score*100,setting:"MP-DocVQA fine-tuned",metrics:{APPA:num(r[4])!,parametersMillions:num(r[2])!}});}
+    const table = all.find(t => t[0]?.includes('ANLS'));
+    if (!table) throw new Error('Missing MP-DocVQA leaderboard');
+    for (const row of table.slice(1)) {
+      const score = num(row[3]);
+      if (score === undefined) continue;
+      const size = row[2]?.match(/^([\d.]+)\s*([MB])$/i);
+      const params = size ? Number(size[1]) * (size[2].toUpperCase() === 'M' ? 0.001 : 1) : undefined;
+      rows.push({
+        model: row[1] || row[0], score: score * 100, setting: 'MP-DocVQA fine-tuned',
+        params, open: row[1]?.includes('/') ? true : undefined,
+        metrics: { APPA: num(row[4])!, ...(params !== undefined ? {parametersMillions: params * 1000} : {}) },
+      });
+    }
     if (!rows.length) throw new Error("No mp-docvqa score rows");
     return rows;
   },

@@ -1,4 +1,4 @@
-// MathArena's measured competition results, including input tokens, average retries, and rank.
+// MathArena's measured competition results, including input tokens, average retries.
 import type { LeaderboardRow } from '../../leaderboards/types.ts';
 import { fetchJson } from '../util.ts';
 
@@ -64,7 +64,7 @@ export async function matharenaRows(comp: string): Promise<LeaderboardRow[]> {
       const value = column(label);
       return value && /^\d+(?:\.\d+)?$/.test(value) ? Number(value) : undefined;
     };
-    for (const [label, key] of [['Input Tokens', 'inputTokens'], ['Average Retries', 'averageRetries'], ['Rank', 'rank']]) {
+    for (const [label, key] of [['Input Tokens', 'inputTokens'], ['Average Retries', 'averageRetries']]) {
       const value = column(label)?.replace(/,/g, '');
       if (value && /^\d+(?:\.\d+)?$/.test(value)) metrics[key] = Number(value);
     }

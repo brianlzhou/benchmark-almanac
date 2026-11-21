@@ -8,7 +8,7 @@
 // policies (VLAs) share the board; the policies are not in the registry and stay unmatched.
 // The mean of each trial's minutes is metrics.latency (seconds per attempt), the x-axis of the home page's
 // "Robotics Capabilities vs Time" chart. Output tokens (usage.output) are kept only for groups where every
-// trial reports them.
+// trial reports them. Keep the trial count, task scores and token categories with complete coverage.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson, fetchText } from '../lib/util.ts';
 
@@ -23,7 +23,11 @@ interface Trial {
   score?: number;
   cost?: number | null;
   minutes?: number | null;
-  usage?: { output?: number } | null;
+  usage?: Record<string, number> | null;
+  task?: string;
+  date?: string;
+  calls?: number;
+  tokens?: number;
   leaderboard?: string[];
 }
 
@@ -44,39 +48,49 @@ const board: Leaderboard = {
     const file = html.match(/runs\.[0-9a-f]+\.json/)?.[0];
     if (!file) throw new Error('no runs export named on the Robocurve all-runs page');
     const data = await fetchJson<{ models?: Record<string, string>; runs: Trial[] }>(new URL(file, PAGE).href);
-    type Group = { t: Trial; n: number; sum: number; cost: number; costs: number; min: number; mins: number; out: number; outs: number };
-    const groups = new Map<string, Group>();
+    type Scored = Trial & {score: number};
+    const groups = new Map<string, Scored[]>();
     for (const t of data.runs) {
       if (t.benchmark !== BENCHMARK || !t.leaderboard?.some(x => x === 'capability' || x === 'pareto') || typeof t.score !== 'number') continue;
       const key = [t.model, t.effort ?? '', t.mode ?? ''].join('|');
-      const g = groups.get(key) ?? { t, n: 0, sum: 0, cost: 0, costs: 0, min: 0, mins: 0, out: 0, outs: 0 };
-      g.n++;
-      g.sum += t.score;
-      if (typeof t.minutes === 'number') {
-        g.min += t.minutes;
-        g.mins++;
-      }
-      if (typeof t.usage?.output === 'number') {
-        g.out += t.usage.output;
-        g.outs++;
-      }
-      if (typeof t.cost === 'number') {
-        g.cost += t.cost;
-        g.costs++;
-      }
-      groups.set(key, g);
+      const group = groups.get(key) ?? [];
+      group.push({...t, score: t.score});
+      groups.set(key, group);
     }
     const rows: LeaderboardRow[] = [];
-    for (const { t, n, sum, cost, costs, min, mins, out, outs } of groups.values()) {
+    const parts: NonNullable<Leaderboard['parts']> = {};
+    for (const group of groups.values()) {
+      const t = group[0];
+      const mean = (get: (t: Scored) => unknown, complete = false) => {
+        const values = group.map(get).filter((n): n is number => typeof n === 'number' && Number.isFinite(n));
+        if (!values.length || (complete && values.length !== group.length)) return undefined;
+        return values.reduce((a, b) => a + b, 0) / values.length;
+      };
+      const minutes = mean(r => r.minutes), output = mean(r => r.usage?.output, true);
+      const metrics: Record<string, number> = {};
+      if (minutes !== undefined) metrics.latency = Math.round(60 * minutes);
+      for (const [key, value] of Object.entries({
+        inputTokens: mean(r => r.usage?.input, true), cachedTokens: mean(r => r.usage?.cached_input ?? r.usage?.cache_read, true),
+        cacheWriteTokens: mean(r => r.usage?.cache_write, true), reasoningTokens: mean(r => r.usage?.thinking, true),
+        totalTokens: mean(r => r.usage?.total ?? r.tokens, true), calls: mean(r => r.calls, true),
+      })) if (value !== undefined) metrics[key] = value;
+      for (const name of new Set(group.map(r => r.task))) {
+        if (!name) continue;
+        const key = name.toLowerCase().replace(/ (.)/g, (_, c: string) => c.toUpperCase());
+        const subset = group.filter(r => r.task === name);
+        metrics[key] = 100 * subset.reduce((sum, r) => sum + r.score, 0) / subset.length;
+        parts[key] = {name, group: 'Task'};
+      }
+      const dates = new Set(group.map(r => r.date?.slice(0, 10)));
       rows.push({
         model: data.models?.[t.model] ?? t.model,
-        score: (100 * sum) / n,
+        score: 100 * group.reduce((sum, r) => sum + r.score, 0) / group.length,
         setting: [t.effort && t.effort !== 'vla' ? t.effort : undefined, t.mode].filter(Boolean).join('; ') || undefined,
-        cost: costs ? cost / costs : undefined,
-        tokens: outs === n ? Math.round(out / n) : undefined,
-        metrics: mins ? { latency: Math.round((60 * min) / mins) } : undefined,
+        cost: mean(r => r.cost), tokens: output === undefined ? undefined : Math.round(output),
+        trials: group.length, date: dates.size === 1 ? t.date?.slice(0, 10) : undefined, metrics,
       });
     }
+    board.parts = parts;
     return rows;
   },
 };

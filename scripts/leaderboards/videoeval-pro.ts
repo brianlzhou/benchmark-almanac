@@ -17,12 +17,12 @@ const board: Leaderboard = {
     const all = tables(source).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
     const table=all.find(t=>t[0].includes("Overall (%)"));if(!table)throw new Error("Missing VideoEval-Pro table");
-    for(const r of table.slice(2))for(let i=0;i<2;i++){const score=num(r[12+i]);if(score===undefined)continue;const model=r[1].replace(/\s+(Proprietary|Open-source)$/i,"");rows.push({model:model+(r[2]&&r[2]!=="-"?` (${r[2]})`:""),score,setting:`${i===0?"Open":"MCQ"}, ${r[3]} frames`,metrics:Object.fromEntries(["LP","LR","HP","HR"].flatMap((h,j)=>{const n=num(r[4+j*2+i]);return n===undefined?[]:[[h,n]];}))});}
+    for(const r of table.slice(2))for(let i=0;i<2;i++){const score=num(r[12+i]);if(score===undefined)continue;const model=r[1].replace(/\s+(Proprietary|Open-source)$/i,"");rows.push({model:model+(r[2]&&r[2]!=="-"?` (${r[2]})`:""),open:/Open-source$/i.test(r[1]) ? true : /Proprietary$/i.test(r[1]) ? false : undefined,score,setting:`${i===0?"Open":"MCQ"}, ${r[3]} frames`,metrics:Object.fromEntries(["LP","LR","HP","HR"].flatMap((h,j)=>{const n=num(r[4+j*2+i]);return n===undefined?[]:[[h,n]];}))});}
     if (!rows.length) throw new Error("No videoeval-pro score rows");
     return rows.filter(r => r.setting!.startsWith('Open, ')).map(r => {
       const setting = r.setting!.replace('Open, ','');
       const mcq = rows.find(x => x.model===r.model && x.setting===`MCQ, ${setting}`);
-      return {...r,setting,metrics:{...r.metrics,...(mcq ? {mcq:mcq.score} : {})}};
+      return {...r,setting,metrics:{...r.metrics,...(/^\d+(?:\.\d+)?B\)$/i.test(r.model.split('(').at(-1) ?? '') ? {llmParamsB:Number.parseFloat(r.model.split('(').at(-1)!)} : {}), ...(mcq ? {mcq:mcq.score,...Object.fromEntries(Object.entries(mcq.metrics ?? {}).map(([key,v])=>['mcq'+key,v])),mcqGap:mcq.score-r.score} : {})}};
     });
   },
 };

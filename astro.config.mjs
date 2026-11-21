@@ -118,7 +118,7 @@ export default defineConfig({
   compressHTML: true,
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
   // Reporting moved under Insights on 2026-11-17. Vercel sends the same redirect with the query kept (vercel.json).
-  redirects: { '/reporting': '/insights/reporting/' },
+  redirects: { '/benchmarks/factscore-precision/': '/benchmarks/factscore/', '/benchmarks/programbench-almost/': '/benchmarks/programbench/', '/benchmarks/programbench-tests-passed/': '/benchmarks/programbench/', '/reporting': '/insights/reporting/' },
   build: { inlineStylesheets: 'auto' },
   integrations: [sitemap({ serialize: (item) => ({ ...item, lastmod: lastmodOf(item.url) }) }), ogFilm, localJobs],
   fonts: [

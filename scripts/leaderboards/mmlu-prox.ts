@@ -4,7 +4,7 @@ import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 import { paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const URL = 'https://arxiv.org/html/2503.10497';
 const board: Leaderboard = {
-  benchmark: 'mmlu-prox', parts: {
+  benchmark: 'mmlu-prox', static: 'paper', parts: {
   EN: { name: 'English', group: 'Language' },
   FR: { name: 'French', group: 'Language' },
   DE: { name: 'German', group: 'Language' },

@@ -83,7 +83,9 @@ const byId = new Map(all.map((s) => [s.b.id, s]));
 const earlier = (id: string) =>
   familyOf(id)
     .slice(0, -1)
-    .map((v) => byId.get(v)!)
+    .map((v) => byId.get(v))
+    // a family member that is an arena lives on /arenas/, not in this table
+    .filter((s): s is NonNullable<typeof s> => !!s)
     .reverse();
 const vlabel = (v: string) => (/^\d+$/.test(v) ? `v${v}` : v);
 // The longest text of each column that cannot wrap, over every row and earlier version. A hidden row

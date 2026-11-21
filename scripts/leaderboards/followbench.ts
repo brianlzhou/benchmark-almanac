@@ -7,7 +7,7 @@ import { paperTables, numberCell, PAPER_TERMS } from '../lib/boards/arxiv-thrott
 
 const FEED = 'https://arxiv.org/html/2310.20410';
 const board: Leaderboard = {
-  benchmark: 'followbench', parts: {
+  benchmark: 'followbench', static: 'paper', parts: {
   level1: { name: 'Level 1', group: 'Difficulty' },
   level2: { name: 'Level 2', group: 'Difficulty' },
   level3: { name: 'Level 3', group: 'Difficulty' },

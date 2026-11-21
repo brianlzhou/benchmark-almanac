@@ -3,7 +3,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/1704.04683';
 const board: Leaderboard = {
-  benchmark: 'race', parts: {
+  benchmark: 'race', static: 'paper', parts: {
   middleSchool: { name: 'Middle school', group: 'Difficulty' },
   highSchool: { name: 'High school', group: 'Difficulty' },
 }, url: URL, feed: URL + ' (combined RACE accuracy)', terms: PAPER_TERMS,

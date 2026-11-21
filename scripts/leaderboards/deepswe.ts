@@ -31,10 +31,17 @@ interface Row {
 const num = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 const round = (x: number, d: number) => Number(x.toFixed(d));
 
+const meanKeys: Record<string, string> = {
+  mean_input_tokens: 'inputTokens',
+  mean_output_tokens: 'outputTokens',
+  mean_reasoning_tokens: 'reasoningTokens',
+  mean_cache_read_tokens: 'cachedTokens',
+};
+
 function resourceMetrics(row: Row): Record<string, number> {
   const metrics: Record<string, number> = {};
   for (const [key, value] of Object.entries(row)) {
-    if (num(value) && /^(mean_|median_|n_(?:passed|attempted|tasks_)|ci_(?:passed|attempted))/.test(key)) metrics[key] = value;
+    if (key !== 'mean_agent_steps' && num(value) && /^(mean_|median_|n_(?:passed|attempted|tasks_)|ci_(?:passed|attempted))/.test(key)) metrics[meanKeys[key] ?? key] = value;
   }
   row.pass_rate_by_attempt?.forEach((value, i) => {
     if (num(value)) metrics[`attempt${i + 1}PassRate`] = value * 100;

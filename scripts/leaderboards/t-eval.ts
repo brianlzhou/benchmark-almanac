@@ -19,7 +19,7 @@ const board: Leaderboard = {
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    const out=parseCsv(await fetchText(FEED)).map(r=>({model:r.Model,score:Number(r.overall),metrics:Object.fromEntries(['instruct','plan','reason','retrieve','understand','review'].map(k=>[k,Number(r[k])]))}));
+    const out=parseCsv(await fetchText(FEED)).map(r=>({model:r.Model,score:Number(r.overall),open:/^(true|false)$/i.test(r.opensourced?.trim()) ? /^true$/i.test(r.opensourced.trim()) : undefined,metrics:Object.fromEntries(['instruct','plan','reason','retrieve','understand','review'].map(k=>[k,Number(r[k])]))}));
     if(!out.length)throw new Error('T-Eval CSV empty');return out;
   },
 };

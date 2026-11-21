@@ -9,7 +9,7 @@ import { tables, num, text } from '../lib/html.ts';
 
 const FEED = "https://arxiv.org/html/2509.14233";
 const board: Leaderboard = {
-  benchmark: "switzerlandqa-swiss-ai",
+  benchmark: "switzerlandqa-swiss-ai", static: 'paper',
   url: "https://arxiv.org/html/2509.14233",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",

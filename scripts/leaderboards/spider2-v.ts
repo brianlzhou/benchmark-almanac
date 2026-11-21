@@ -27,11 +27,11 @@ const board: Leaderboard = {
     for(const m of html.matchAll(/<div title="([^"]+)"[^>]*id="BoardPanel\d+"[^>]*>([\s\S]*?)(?=<div title=|$)/g)){
       const t=tables(m[2]).find(t=>t[0]?.some(c=>c.text==='Score'));if(!t)continue;
       for(const r of t.slice(1)){const score=num(r[3]?.text);if(score===undefined)continue;let model=text(r[1].html.split(/<p\b/i)[0]);if(model==='Gemini-Pro-1.5')model='Gemini 1.5 Pro';
-        const b=m[1]==='All'?budget?.rows.find(v=>model.startsWith(v[0])):undefined;const metrics:Record<string,number>={};const cost=b?num(b[4]):undefined;const tv=b?num(b[3]):undefined;if(b){const dur=num(b[1]);if(dur!==undefined)metrics.latency=dur*60;}
-        const stamp = r[0].text.match(/([A-Z][a-z]{2}) (\d{1,2}), (\d{4})/);
-        const month = stamp ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(stamp[1]) + 1 : 0;
+        const b=m[1]==='All'?budget?.rows.find(v=>model.startsWith(v[0])):undefined;const metrics:Record<string,number>={};const cost=b?num(b[4]):undefined;const tv=b?num(b[3]):undefined;if(b){const input=num(b[2]);if(input!==undefined)metrics.inputTokens=input*(/M/i.test(b[2])?1e6:/K/i.test(b[2])?1e3:1);const dur=num(b[1]);if(dur!==undefined)metrics.latency=dur*60;}
+        const stamp = r[0].text.match(/([A-Z][a-z]{2,8}) (\d{1,2}), (\d{4})/);
+        const month = stamp ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(stamp[1].slice(0,3)) + 1 : 0;
         const date = stamp && month ? `${stamp[3]}-${String(month).padStart(2,'0')}-${stamp[2].padStart(2,'0')}` : undefined;
-        out.push({model:identity(model),score,date,setting:m[1]+'; '+r[2].text,harness:r[2].html?text(r[2].html.split(/<p\b/i)[0]):undefined,cost,tokens:tv===undefined?undefined:tv*(/K/i.test(b![3])?1000:1),metrics});}
+        out.push({model:identity(model),score,date,setting:m[1]+'; '+r[2].text,harness:text(r[2].html.match(/<p\b[^>]*>(.*?)<\/p>/is)?.[1] ?? '') || undefined,cost,tokens:tv===undefined?undefined:tv*(/K/i.test(b![3])?1000:1),metrics});}
     }if(!out.length)throw new Error('Spider2-V score panels missing');
     const overall = out.filter(r => r.setting?.startsWith('All; '));
     for (const row of overall) {

@@ -50,7 +50,9 @@ export async function pinchRows(version: string, extras = false, details = false
     const metrics: Record<string, number> = {};
     if (extras && positive(e.average_execution_time_seconds)) metrics.time = e.average_execution_time_seconds;
     if (details) {
-      for (const key of ['rank', 'percentage', 'best_execution_time_seconds', 'best_cost_usd', 'value_score', 'cpst'] as const) {
+      // The detailed table ranks the published percentage. The headline averages submissions.
+      if (typeof e.rank === 'number') metrics.percentageRank = e.rank;
+      for (const key of ['percentage', 'best_execution_time_seconds', 'best_cost_usd', 'value_score', 'cpst'] as const) {
         const value = e[key];
         if (typeof value === 'number' && Number.isFinite(value)) metrics[key] = value;
       }

@@ -1,5 +1,6 @@
 // ContextBench: context recall, the board ranking metric, converted from fraction to percent.
-// Pass@1 stays percent; context F1 and efficiency retain their published fractions.
+// The Pass@1 column gives the one-attempt success rate.
+// Keep the submission log link where the board publishes one.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { text, tables } from '../lib/html.ts';
@@ -33,21 +34,25 @@ const board: Leaderboard = {
 ,
   async fetch() {
     const source = await fetchText(FEED);
-    const data = tables(source).map(t => t.map(r => r.map(c => c.text)));
+    const data = tables(source);
     const rows: LeaderboardRow[] = [];
     {
-      const t = data.find(t => new RegExp("Recall.*Pass@1", "i").test(t.slice(0, 1).flat().join(" | ")));
-      if (!t || !new RegExp("Recall.*Pass@1", "i").test(t.slice(0, 1).flat().join(" | "))) throw new Error("Results table changed");
-      for (const r of t.slice(1)) {
+      const t = data.find(table => table[0]?.some(cell => cell.text === 'Recall') && table[0].some(cell => cell.text === 'Pass@1'));
+      if (!t) throw new Error('Results table changed');
+      for (const cells of t.slice(1)) {
+        const r = cells.map(c => c.text);
         const value = numeric(r[2]);
         let model = clean(r[1] ?? "");
         model = model.replace(/ Submission & logs$/, ''); const parts = model.split(' + '); if (parts.length === 2 && !model.startsWith('CodeNib')) model = parts[1]; if (/^Gemini 2\.5 Pro$/i.test(model)) model += ' (snapshot unspecified)';
         if (!model || value === undefined || /^(?:human(?: performance)?|random(?: chance)?|majority|oracle)$/i.test(model)) continue;
         const row: LeaderboardRow = { model: identity(model), score: value * 100 };
         row.harness = r[1].startsWith('CodeNib') ? 'CodeNib' : r[1].split(' + ')[0];
+        const logs = cells[1].html.match(/<a\b[^>]*href="([^"]+)"[^>]*>\s*Submission\s*(?:&amp;|&)\s*logs\s*<\/a>/i);
+        if (logs) row.link = new URL(logs[1], FEED).href;
+        if (r[1].includes('Haiku5.5 search pair + Opus5.5 mini SWE-agent')) row.models = ['Claude Haiku 5.5', 'Claude Opus 5.5'];
         row.cost = numeric(r[6]);
         row.metrics = {};
-        { const n = numeric(r[3]); if (n !== undefined) row.metrics["pass1"] = n; }
+        { const n = numeric(r[3]); if (n !== undefined) row.metrics["passAt1"] = n; }
         { const n = numeric(r[4]); if (n !== undefined) row.metrics["contextF1"] = n; }
         { const n = numeric(r[5]); if (n !== undefined) row.metrics["efficiency"] = n; }
         rows.push(row);

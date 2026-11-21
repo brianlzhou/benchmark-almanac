@@ -5,7 +5,7 @@ import { flatPaperTables, grid, uncertain, checked } from '../lib/boards/arxiv-s
 import { num } from '../lib/html.ts';
 const feed='https://arxiv.org/html/2602.11685';
 export default {
-  benchmark:'draco',url:'https://arxiv.org/abs/2602.11685',feed,terms:PAPER_TERMS,
+  benchmark:'draco', static: 'paper',url:'https://arxiv.org/abs/2602.11685',feed,terms:PAPER_TERMS,
   harnesses:'system', reference:['Anthropic search and code tools'],
   async fetch():Promise<LeaderboardRow[]> {
     const ts=flatPaperTables(await paperHtml(feed)).map(grid);
@@ -17,7 +17,7 @@ export default {
      const u=usage.find(u=>u[0]===r[0]);const p=pass.find(p=>p[0]===r[0]);
      const m=r[0].match(/^(Perplexity|OpenAI) Deep Research \(([^)]+)\)$/);
      const model=m?(m[1]==='Perplexity'?'Claude '+m[2]:m[2]):r[0];
-     return {model,score:num(r[1])!,harness:m?m[1]+' Deep Research':r[0].startsWith('Claude')?'Anthropic search and code tools':'Gemini Deep Research',tokens:num(u?.[2]),metrics:{scoreStddev:num(r[1].split('\\pm')[1])!,passRate:num(p?.[1])!,inputTokens:num(u?.[1])!,latency:num(u?.[3])!}};
+     return {model,score:num(r[1])!,harness:m?m[1]+' Deep Research':r[0].startsWith('Claude')?'Anthropic search and code tools':'Gemini Deep Research',tokens:num(u?.[2]),metrics:{std:num(r[1].split('\\pm')[1])!,passRate:num(p?.[1])!,inputTokens:num(u?.[1])!,latency:num(u?.[3])!}};
     });
     return checked(rows,3);
   },

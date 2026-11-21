@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL="https://arxiv.org/html/2410.10139";
-const board:Leaderboard={benchmark:'mmie', parts: {
+const board:Leaderboard={benchmark:'mmie', static: 'paper', parts: {
   situationalAnalysis: { name: 'Situational analysis', group: 'Task type' },
   projectLearning: { name: 'Project learning', group: 'Task type' },
   multiStepReasoning: { name: 'Multi step reasoning', group: 'Task type' },

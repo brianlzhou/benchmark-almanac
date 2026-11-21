@@ -9,7 +9,7 @@ import { grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 import { flatPaperTables } from '../lib/boards/arxiv-span-tables.ts';
 const FEED = "https://arxiv.org/html/2610.24520";
 const board: Leaderboard = {
- benchmark: "habit-bench",
+ benchmark: "habit-bench", static: 'paper',
  parts: {
    food: { name: 'Food', group: 'Domain' },
    finance: { name: 'Finance', group: 'Domain' },

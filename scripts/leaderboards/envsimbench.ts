@@ -31,7 +31,10 @@ const board: Leaderboard = {
           const value = num(r[i]);
           if (value !== undefined) metrics[t.head[i]] = value;
         }
-        out.push({ model: identity(name), score: score * 1, setting: '400-sample evaluation', metrics });
+        const size = name.match(/(?:^|[- ,(])(\d+(?:\.\d+)?)B\b/i);
+        const active = name.match(/-A(\d+(?:\.\d+)?)B\b/i);
+        if (active) metrics.activeParamsB = Number(active[1]);
+        out.push({ model: identity(name), params: size ? Number(size[1]) : undefined, score: score * 1, setting: '400-sample evaluation', metrics });
       }
     }
     if (!out.length) throw new Error("envsimbench: no score rows in the expected tables");

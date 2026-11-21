@@ -55,12 +55,15 @@ const SCHEMA = {
 // "Bench" with no space, and small labs' posts have few likes, so the floor is 20. A Grok turn takes about 45 s, and
 // one run doing a dozen searches timed out, so three short runs share the work in parallel. A run that finishes
 // keeps its launches when another times out. A test on 2026-11-18 read 4 launches and found 2 new ones.
+// On 2026-11-19 and 2026-11-20 the four-search launches run hit its 540 s limit and returned nothing, which missed
+// KradleBench and MAC Bench (both launched 2026-11-18), so the launch searches run as two parts with a longer limit.
 const ASK = (from: string, to: string) =>
   `Search X for posts from ${from} through ${to} that announce a NEW AI benchmark, eval, or leaderboard for language models or AI agents: a launch by its makers, not commentary on an existing benchmark, and not a model or product launch.`;
 const ANSWER =
   'Check every post with at least 20 likes, from labs, universities and startups alike. Return every launch you find, up to 30. For each launch, give the benchmark name, the organization, the URL of the announcing post, every non-X link in the post or its thread (paper, site, GitHub, Hugging Face), the post date, a one-sentence summary, and the like count. Return only launches you saw in actual posts. Do not guess links.';
 export const X_SEARCHES = {
-  launches: 'Run four searches: "new benchmark", "introducing" with "benchmark", "today we\'re introducing" with "bench", and "we\'re releasing" with "eval".',
+  launches: 'Run two searches: "new benchmark", and "introducing" with "benchmark".',
+  releases: 'Run two searches: "today we\'re introducing" with "bench", and "we\'re releasing" with "eval".',
   names: 'Run four searches: "leaderboard" with "models", "evals" with "frontier models", a new name ending in "Bench" (such as "FrontierEE Bench"), and "best model scored".',
   fields: 'Run two searches, each pairing "benchmark" with a group of fields: "engineering OR hardware OR robotics OR science", and "medicine OR law OR finance OR security".',
 } as const;
@@ -104,7 +107,7 @@ export async function xGrok(r: Reader) {
           '--cwd',
           dir,
         ],
-        { cwd: dir, signal: r.signal, timeout: 540_000, maxBuffer: 32 * 1024 * 1024 },
+        { cwd: dir, signal: r.signal, timeout: 840_000, maxBuffer: 32 * 1024 * 1024 },
       );
       return xLaunches(stdout);
     } finally {

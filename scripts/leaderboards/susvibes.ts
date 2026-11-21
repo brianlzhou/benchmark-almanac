@@ -11,6 +11,7 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
+  verified: 'Marked Official Submission by the benchmark team.',
   aliases: {'Claude 4 Sonnet':'claude-sonnet-4'},
  async fetch() {
     const data=(await fetchJson<any>(FEED)).submissions;const out:LeaderboardRow[]=[];
@@ -18,7 +19,7 @@ const board: Leaderboard = {
       if(r.methodology?.susvibes_version!=='v1.0')continue;
       const a=r.results?.python;if(typeof a?.sec_pass_1!=='number')continue;
       const mode=r.submissionDir.match(/_(default|[a-z-]+)_\d{4}-\d{2}-\d{2}$/)?.[1]??'default';
-      out.push({model:r.model_name,score:a.sec_pass_1,harness:r.methodology.agent_framework,setting:mode,date:r.submission_date,metrics:{functionalPass1:a.func_pass_1},...(typeof a.cost==='number'?{cost:a.cost}:{})});
+      out.push({model:r.model_name,score:a.sec_pass_1,harness:r.methodology.agent_framework,setting:mode,date:r.methodology.evaluation_date ?? r.submission_date,submitter:r.submitting_organization,verified:r.methodology.verification?.details === 'Official Submission' || undefined,link:new URL(encodeURIComponent(r.submissionDir)+'/submission.json',FEED).href,metrics:{functionalPass1:a.func_pass_1},...(typeof a.cost==='number'?{cost:a.cost}:{})});
     }return out;
   },
 };

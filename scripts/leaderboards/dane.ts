@@ -1,0 +1,10 @@
+// DaNE evaluates Danish named entity recognition with entity-level micro F1.
+// This importer reads Table 4, using micro F1 including MISC as the headline and retaining the other columns.
+import type { Leaderboard, LeaderboardRow } from './types.ts';
+import { pdfText } from '../lib/boards/pdf-text.ts';
+import { checked } from '../lib/boards/arxiv-span-tables.ts';
+const FEED='https://aclanthology.org/2020.lrec-1.565.pdf';
+const vals:[string,string,number,number,number,number,number,number][]=[
+['POLYGLOT','-',64.95,64.18,39.3,78.74,NaN,NaN],['DANER','-',58.51,54.57,25.64,68.14,NaN,NaN],['BI LSTM+CRF','DaNE',64.44,67.17,68.28,53.21,47.98,80.82],['BI LSTM+CRF+EM','DaNE',72.68,77.16,78.84,54.12,59.77,89.05],['FLAIR','DaNE',79.70,82.08,84.62,70.73,68.70,90.96],['FLAIR +BPE','DaNE',78.05,80.33,82.66,69.99,67.46,88.59],['DA-BERT','DaNE',83.76,86.61,87.30,74.72,78.27,93.52],['M-BERT','DaNE',81.73,83.93,82.49,73.79,73.27,93.52],['M-BERT','en',76.99,81.31,80.10,57.75,70.62,91.83],['M-BERT','nl',69.60,77.14,78.54,46.13,62.13,87.37],['M-BERT','no',74.77,81.09,78.09,45.99,71.23,90.98],['M-BERT','nn',72.46,78.85,80.08,43.31,65.41,89.73],['M-BERT','sv',59.61,69.08,79.00,9.37,33.98,83.77],['M-BERT','en + DaNE',80.80,82.26,79.04,75.44,71.00,93.45],['M-BERT','nl + DaNE',81.60,83.65,81.56,74.11,74.20,92.76],['M-BERT','no + DaNE',83.29,85.54,84.20,75.11,76.79,93.37],['M-BERT','nn + DaNE',80.70,82.42,82.89,74.43,71.58,87.51]];
+const board:Leaderboard={benchmark:'dane',static:'paper',url:'https://aclanthology.org/2020.lrec-1.565/',feed:FEED,terms:'The paper is publicly available from ACL Anthology. Cite the paper and follow ACL terms.',parts:{withoutMisc:'Micro F1 without MISC',loc:'LOC F1',misc:'MISC F1',org:'ORG F1',per:'PER F1'},async fetch(){const b=await pdfText(FEED);if(!b.includes('Table 4: F1 scores average over five runs'))throw new Error('Table 4 missing');return checked(vals.map(([model,setting,score,withoutMisc,loc,misc,org,per])=>{const metrics=Number.isFinite(withoutMisc)?{withoutMisc,loc,misc,org,per}:undefined;return {model,setting,score,metrics};}),17)}};
+export default board;

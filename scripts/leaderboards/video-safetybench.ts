@@ -9,7 +9,7 @@ import { paperTables as tables, grid, checked } from '../lib/boards/arxiv-span-t
 
 const FEED = "https://arxiv.org/html/2505.11842";
 const board: Leaderboard = {
- benchmark: "video-safetybench",
+ benchmark: "video-safetybench", static: 'paper',
  url: "https://arxiv.org/html/2505.11842",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

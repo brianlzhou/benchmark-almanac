@@ -4,7 +4,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 const FEED = "https://arxiv.org/html/2511.01295";
 import { paperRows } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "unireditbench",
+  benchmark: "unireditbench", static: 'paper',
   parts: {
     realWorld: { name: 'Real world', group: 'Environment' },
     gameWorld: { name: 'Game world', group: 'Environment' },

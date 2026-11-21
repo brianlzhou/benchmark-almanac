@@ -3,7 +3,7 @@
 // and reasoning efforts. The headline is the site's "Average" column: aggregatedScores[agent].avg when the
 // file has one (mean over seeds), otherwise the benchmark-weighted average over the four base models,
 // exactly as data.js computes it. Baselines (base models, official instruct models) are left out. Metrics:
-// the standard deviation of the average over seeds (aggregatedScores[agent].std, `sd`) and the average time
+// the standard deviation of the average over seeds (aggregatedScores[agent].std, `std`) and the average time
 // the agent spent, in hours (timeData[agent].hours, `runHours`), which the site's "Performance vs. runtime"
 // Pareto chart plots against the score.
 //
@@ -139,7 +139,7 @@ export function makeBoard(version: 'v1' | 'v1.1' | 'v1.2', benchmark: string): L
         }
         const sd = data.aggregatedScores?.[key]?.std;
         const hours = data.timeData?.[key]?.hours;
-        if (typeof sd === 'number') { metrics.sd = sd; metrics.std = sd; }
+        if (typeof sd === 'number') metrics.std = sd;
         const time = data.timeData?.[key];
         if (typeof time?.stdHours === 'number') metrics.runHoursStd = time.stdHours;
         if (typeof time?.n === 'number') metrics.runtimeTrials = time.n;

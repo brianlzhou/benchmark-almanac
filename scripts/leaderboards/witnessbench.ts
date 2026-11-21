@@ -2,7 +2,7 @@
 // the reasoning effort, OAE-L20 (optimal action efficiency over 20 levels, 0 to 100, the page's first
 // metric and sort), levels beaten, cost per game and output tokens per game. OAE-L20 is the score and effort
 // the setting. A game is one task, so cost and output tokens per game are kept. Metrics keep the table's
-// OAE-L20 standard deviation ("sd"), LLM calls per game ("llmCalls") and actions per beaten level
+// OAE-L20 standard deviation ("std"), LLM calls per game ("llmCalls") and actions per beaten level
 // ("actions"). The board's chart plots OAE-L20 against a chosen per-game measure; its LLM-calls view is
 // declared here (the cost view is drawn from the cost).
 import type { Leaderboard, LeaderboardRow } from './types.ts';
@@ -34,12 +34,11 @@ const board: Leaderboard = {
       const tokens = Number(r.output_tokens_per_game);
       const metrics: Record<string, number> = {};
       for (const [k, v] of [
-        ['sd', r.oae_l20_std],
+        ['std', r.oae_l20_std],
         ['llmCalls', r.llm_calls_per_game],
         ['actions', r.actions_per_beaten_level],
       ] as const)
         if (v !== undefined && v !== '' && Number.isFinite(Number(v))) metrics[k] = Number(v);
-      if (metrics.sd !== undefined) metrics.std = metrics.sd;
       rows.push({
         model: r.model.trim(),
         score,

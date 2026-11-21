@@ -5,7 +5,7 @@ import { num, text } from '../lib/html.ts';
 const FEED = "https://arxiv.org/html/2602.15763";
 import { paperTables, paperModel } from '../lib/boards/arxiv-nested-tables.ts';
 const board: Leaderboard = {
-  benchmark: "cc-bench-v2-backend-zai",
+  benchmark: "cc-bench-v2-backend-zai", static: 'paper',
   url: "https://raw.githubusercontent.com/zai-org/GLM-5/main/README.md",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

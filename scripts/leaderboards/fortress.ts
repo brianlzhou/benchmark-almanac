@@ -31,7 +31,7 @@ const board: Leaderboard = {
     scaleRows(await fetchScaleEntries(PAGE), (_, e) => {
       const ors = Number(e.contaminationMessage?.match(/ORS score:\s*([\d.]+)/)?.[1]);
       const bounds = ci(e);
-      const metrics = { ...bounds, ...(typeof e.rank === 'number' ? { rank: e.rank } : {}), ...(Number.isFinite(ors) ? { ors } : {}) };
+      const metrics = { ...bounds, ...(Number.isFinite(ors) ? { ors } : {}) };
       return { metrics, low: bounds?.ciLow, high: bounds?.ciHigh, date: e.createdAt?.slice(0, 10) };
     }),
 };

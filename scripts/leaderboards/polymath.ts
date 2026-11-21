@@ -63,8 +63,6 @@ const board: Leaderboard = {
       }
       const range = num(r.at(-1)?.text);
       if (range !== undefined) metrics.languageRange = range;
-      const rank = num(r[0]?.text);
-      if (rank !== undefined) metrics.rank = rank;
       rows.push({ metrics, model, score, setting, date: snapshot });
     }
     return rows;

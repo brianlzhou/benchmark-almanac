@@ -1,0 +1,4 @@
+// DI-Bench tests analytical and tool-using agents on Brazilian and Czech financial tasks.
+// The headline is the source All accuracy percentage across 731 tasks.
+// This importer reads Table 3 of the benchmark paper.
+import type {Leaderboard} from './types.ts';import {paperTables} from '../lib/boards/arxiv-nested-tables.ts';import {checked} from '../lib/boards/arxiv-span-tables.ts';const URL='https://arxiv.org/html/2609.05776';const board:Leaderboard={benchmark:'di-bench',static:'paper',url:URL,feed:URL,terms:'The authors publish the paper publicly at https://arxiv.org/abs/2609.05776.',async fetch(){const t=await paperTables(URL).then(x=>x[2]);if(!t)throw new Error('DI-Bench Table 3 missing');const out=t.slice(1).map(r=>({model:r[0].text,score:Number(r[3].text),metrics:{brazil:Number(r[1].text),czech:Number(r[2].text),avgTurns:Number(r[4].text)}}));return checked(out,4)}};export default board;

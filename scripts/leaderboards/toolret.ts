@@ -3,7 +3,7 @@ import type {Leaderboard,LeaderboardRow} from './types.ts';
 import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';
 import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
 const URL='https://arxiv.org/html/2503.01763';
-const board:Leaderboard={benchmark:'toolret', parts: {
+const board:Leaderboard={benchmark:'toolret', static: 'paper', parts: {
   webNdcg: { name: 'Web', group: 'Category' },
   codeNdcg: { name: 'Code', group: 'Category' },
   customNdcg: { name: 'Custom', group: 'Category' },

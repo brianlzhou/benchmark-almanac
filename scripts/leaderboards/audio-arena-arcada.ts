@@ -1,6 +1,6 @@
 // AudioAgentBench's All view averages per-benchmark pass rates over its six scenarios.
 // The official reader defines each mode's mean as "realRates.reduce((e,l)=>e+l,0)/t.realRates.length".
-// It first averages the newest 20 runs per model, scenario and speech mode.
+// Read the count and latest date of the contributing runs. Pool scored turns for the five skill rates.
 // Source: https://audioarena.ai/_next/static/chunks/842-82297dffd5e613d8.js
 // Human and artificial speech are whole-benchmark configurations. Rehydrated runs are fallback data.
 // GLM Realtime Air is excluded by the maker because its audio backend was unavailable.
@@ -12,6 +12,11 @@ const FEED = "https://audioarena.ai/api/leaderboard/runs?recent_per_group=20";
 const board: Leaderboard = {
   benchmark: "audio-arena-arcada",
   parts: {
+    toolUse: { name: 'Tool Use Accuracy', group: 'Skill' },
+    instructionFollowing: { name: 'Instruction Following', group: 'Skill' },
+    kbGrounding: { name: 'KB Grounding', group: 'Skill' },
+    stateTracking: { name: 'State Tracking', group: 'Skill' },
+    ambiguityHandling: { name: 'Ambiguity Handling', group: 'Skill' },
     appointment_bench: { name: 'Appointment', group: 'Task type' },
     assistant_bench: { name: 'Assistant', group: 'Task type' },
     conversation_bench: { name: 'Conversation', group: 'Task type' },
@@ -33,11 +38,21 @@ const board: Leaderboard = {
     for(const model of models)for(const mode of ['Human speech','Artificial speech','Rehydrated']){
       const all=runs.filter((r:any)=>r.model===model && (mode==='Human speech'?r.isReal:mode==='Rehydrated'?!r.isReal&&r.rehydrated:!r.isReal&&!r.rehydrated));
       if(mode==='Rehydrated' && runs.some((r:any)=>r.model===model&&!r.rehydrated))continue;
-      const rates=scenarios.map(task=>{const rs=all.filter((r:any)=>r.benchmark===task).slice(0,20);return rs.length?rs.reduce((s:number,r:any)=>s+(r.passRate??0),0)/rs.length:undefined;});
-      if(rates.some(x=>x===undefined))continue;
-      const turns=scenarios.map(task=>{const rs=all.filter((r:any)=>r.benchmark===task).slice(0,20);return rs.every((r:any)=>typeof r.turnsScored==='number'&&Number.isFinite(r.turnsScored))?rs.reduce((s:number,r:any)=>s+r.turnsScored,0)/rs.length:undefined;});
-      out.push({model,score:rates.reduce((s:number,x)=>s+x!,0)/6,setting:mode,
-        metrics:{...Object.fromEntries(scenarios.map((k,i)=>[k,rates[i]!])),...(turns.every(x=>x!==undefined)?{turns:turns.reduce((s:number,x)=>s+x!,0)/6}:{})}});
+      const groups=scenarios.map(task=>all.filter((r:any)=>r.benchmark===task).slice(0,20));
+      if (groups.some(group=>!group.length)) continue;
+      const rates=groups.map(rs=>rs.reduce((s:number,r:any)=>s+(r.passRate??0),0)/rs.length);
+      const metrics:Record<string,number>=Object.fromEntries(scenarios.map((k,i)=>[k,rates[i]]));
+      const selected=groups.flat();
+      if (selected.every(r=>Number.isFinite(r.turnsScored))) {
+        metrics.turns=groups.reduce((sum,rs)=>sum+rs.reduce((s:number,r:any)=>s+r.turnsScored,0)/rs.length,0)/6;
+      }
+      for (const [key,denom] of Object.entries({toolUse:'toolUseDenom', instructionFollowing:'turnsScored',
+        kbGrounding:'turnsScored', stateTracking:'stateTrackingDenom', ambiguityHandling:'ambiguityDenom'})) {
+        const total=selected.reduce((s,r)=>s+(denom==='turnsScored' ? r.turnsScored??0 : r.scores?.[denom]??0),0);
+        if (total>0) metrics[key]=100*selected.reduce((s,r)=>s+(r.scores?.[key]??0),0)/total;
+      }
+      const date=selected.map(r=>r.createdAt?.slice(0,10)).filter(Boolean).sort().at(-1);
+      out.push({model,score:rates.reduce((s,x)=>s+x,0)/6,setting:mode,date,trials:selected.length,metrics});
     }
     if(!out.length)throw new Error('No complete six-scenario configuration');return out;
   },

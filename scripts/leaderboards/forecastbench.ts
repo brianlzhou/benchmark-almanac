@@ -101,7 +101,7 @@ export async function fetchForecastRows(feed: string, metric: 'Overall' | 'Brier
       seen.add(key);
       const metrics: Record<string, number> = {};
       const columns = {
-        Rank: 'rank', Overall: 'brierIndex', Dataset: 'datasetIndex', Market: 'marketIndex',
+        Rank: 'brierIndexRank', Overall: 'brierIndex', Dataset: 'datasetIndex', Market: 'marketIndex',
         'Brier Dataset': 'brierDataset', 'Brier Market': 'brierMarket', 'Brier Overall': 'brierOverall',
         N: 'questions', 'N dataset': 'datasetQuestions', 'N market': 'marketQuestions',
         'Pct times № 1': 'pctRankedFirst', 'Pct times top 5%': 'pctRankedTop5', Peer: 'peer', BSS: 'brierSkillScore',

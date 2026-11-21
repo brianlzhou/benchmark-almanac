@@ -3,7 +3,7 @@ import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { inlinePaperTables } from '../lib/boards/arxiv-inline-tables.ts';
 const URL = 'https://arxiv.org/html/2511.07685';
 const board: Leaderboard = {
-  benchmark: 'researchrubrics', url: URL, feed: URL + ' (overall compliance scores)', terms: PAPER_TERMS,
+  benchmark: 'researchrubrics', static: 'paper', url: URL, feed: URL + ' (overall compliance scores)', terms: PAPER_TERMS,
   harnesses: 'system',
   async fetch() {
     const t = inlinePaperTables(await paperHtml(URL)).find(t => t[0]?.join('|') === 'Model|Ternary|Binary');

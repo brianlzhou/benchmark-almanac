@@ -1,0 +1,4 @@
+// VCG+ Diverse evaluates video-language models on diverse video question answering categories.
+// The importer reads the paper's average score across the 20 categories.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {paperHtml,PAPER_TERMS} from '../lib/boards/arxiv-throttled.ts';import {paperTables,grid,checked} from '../lib/boards/arxiv-span-tables.ts';
+const URL='https://arxiv.org/html/2406.09418';const board:Leaderboard={benchmark:'vcg-diverse',static:'paper',url:URL,feed:URL,terms:PAPER_TERMS,async fetch(){const t=grid(paperTables(await paperHtml(URL))[3]);if(!t)throw Error('VCG+ table missing');const rows:LeaderboardRow[]=[];for(const r of t.slice(2)){const model=r[0],score=Number(r[21]);if(!model||model==='Random'||!Number.isFinite(score))continue;rows.push({model,score});}return checked(rows,8);}};export default board;

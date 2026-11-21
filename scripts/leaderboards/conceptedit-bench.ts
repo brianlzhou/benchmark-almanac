@@ -3,7 +3,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { paperHtml, PAPER_TERMS } from '../lib/boards/arxiv-throttled.ts';
 import { paperTables, grid, checked } from '../lib/boards/arxiv-span-tables.ts';
 const URL = "https://arxiv.org/html/2608.16812";
-const board: Leaderboard = {benchmark:"conceptedit-bench",url:URL,feed:URL,terms:PAPER_TERMS,
+const board: Leaderboard = {benchmark:"conceptedit-bench", static: 'paper',url:URL,feed:URL,terms:PAPER_TERMS,
 parts: {
   advanced: { name: 'Advanced', group: 'Category' },
   object: { name: 'Object', group: 'Category' },

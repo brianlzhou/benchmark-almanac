@@ -68,10 +68,10 @@ const board: Leaderboard = {
       const sd=summary.match(/±([\d.]+) pp SD/);
       if (pair[3] === 'Letta Dream') {
         const match = rows.find(r => r.model === pair[1] && r.score === score && r.setting === `memory effort ${pair[2]}; task ${t[1]}`);
-        if (match && sd) (match.metrics ??= {}).standardDeviation = Number(sd[1]);
+        if (match && sd) (match.metrics ??= {}).std = Number(sd[1]);
         if (match) continue;
       }
-      rows.push({model:pair[1],score,setting:`memory effort ${pair[2]}; task ${t[1]}`,harness:`${pair[3]} / ${t[2]}`,metrics:sd?{standardDeviation:Number(sd[1])}:undefined});
+      rows.push({model:pair[1],score,setting:`memory effort ${pair[2]}; task ${t[1]}`,harness:`${pair[3]} / ${t[2]}`,metrics:sd?{std:Number(sd[1])}:undefined});
     }
     if(!rows.length) throw new Error('No FrontierMemory chart results');
     return rows;

@@ -373,7 +373,7 @@ export function auditOf(id: string): BenchAudit {
   const launchScored = s.cites.filter((c) => c.score !== null).length;
   const docScored = s.docCites.filter((c) => c.score !== null).length;
   const sources = [
-    official && `the official leaderboard (${count(official, 'entry', 'entries')})`,
+    official && `${board?.static === 'paper' ? 'the benchmark’s paper' : 'the official leaderboard'} (${count(official, 'entry', 'entries')})`,
     s.epochBoard.length && `Epoch AI’s runs (${count(s.epochBoard.length, 'model')})`,
     s.viaBoard.length && `boards Epoch AI copied (${count(s.viaBoard.length, 'model')})`,
     launchScored && `launch posts (${count(launchScored, 'score')})`,

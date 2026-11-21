@@ -1,0 +1,5 @@
+// NTCIR-18 HIDDEN-RAD tests causal explanation from radiology reports.
+// Table 4 reports the official Task 2 Final Score for three named model submissions.
+import type {Leaderboard} from './types.ts'; import {pdfText} from '../lib/boards/pdf-text.ts'; import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const feed='https://research.nii.ac.jp/ntcir/workshop/OnlineProceedings18/pdf/ntcir/01-NTCIR18-OV-HIDDEN-RAD-ChoiK.pdf';
+const board:Leaderboard={benchmark:'ntcir-18-hidden-rad',url:feed,feed,static:'paper',terms:'NTCIR proceedings are publicly available for research use. https://research.nii.ac.jp/ntcir/workshop/OnlineProceedings18/',async fetch(){const p=await pdfText(feed);if(!p.includes('Teddysum (bllossom)')||!p.includes('Prisma-zero-shot'))throw new Error('Missing Hidden-RAD Table 4');return checked([{model:'bllossom',submitter:'Teddysum',score:0.79},{model:'Prisma-zero-shot',submitter:'Nash',score:0.74},{model:'Joh-3B',submitter:'Nash',score:0.72}],3);}};export default board;

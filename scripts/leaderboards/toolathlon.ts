@@ -4,7 +4,7 @@
 // accordion, the archived snapshot from before Verified. The page says the two score series are not
 // comparable, so the original Toolathlon is this id and Toolathlon-Verified is toolathlon-verified.ts.
 // The headline is Pass@1. With `metrics: true` (this archived table) rows also keep the Pass@1 "± x" spread
-// (`sd`), Pass@3 (`passAt3`), Pass^3 (`pass3`), # Turns (`turns`) and, where the table has it, # Tool Calls
+// (`std`), Pass@3 (`passAt3`), Pass^3 (`pass3`), # Turns (`turns`) and, where the table has it, # Tool Calls
 // (`toolCalls`), all per task. "--" cells are left out.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -40,7 +40,7 @@ function table(md: string): Record<string, string>[] {
 function rowMetrics(r: Record<string, string>): Record<string, number> {
   const m: Record<string, number> = {};
   const sd = r['raw:Pass@1']?.match(/<sub>\s*±\s*([\d.]+)/)?.[1];
-  if (sd) m.sd = Number(sd);
+  if (sd) m.std = Number(sd);
   for (const [k, h] of [['passAt3', 'Pass@3'], ['pass3', 'Pass^3'], ['turns', '# Turns'], ['toolCalls', '# Tool Calls']]) {
     const v = parseFloat(r[h] ?? '');
     if (Number.isFinite(v)) m[k] = v;

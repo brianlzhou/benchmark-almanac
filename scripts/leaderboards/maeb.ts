@@ -1,5 +1,5 @@
 // MAEB v1: default Mean(Task), scaled to the displayed 0-to-100 score.
-// The current API renamed the beta benchmark. Only published whole-benchmark aggregates qualify. Category scores remain metrics.
+// The current API renamed the beta benchmark. Only published whole-benchmark aggregates qualify. Keep model metadata, embedding dimensions, task and group scores.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -20,7 +20,49 @@ const board: Leaderboard = {
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
   async fetch(): Promise<LeaderboardRow[]> {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
-      const d=await fetchJson<any>(FEED);return d.rows.filter((r:any)=>typeof r.meanTask==='number').map((r:any)=>({model:r.model.name.replace(/^[^/]+\//,''),score:r.meanTask*100,metrics:Object.fromEntries(Object.entries(r.scoresByTaskType).filter(([,v])=>typeof v==='number').map(([k,v])=>[k,(v as number)*100]))}));
+      const data = await fetchJson<{
+        rows: {
+          model: {name: string; openWeights?: boolean; license?: string; opennessScore?: number};
+          meanTask: number; meanTaskType?: number; meanPrivate?: number; meanPublic?: number;
+          activeParamsB?: number; totalParamsB?: number; maxTokens?: number; embeddingDim?: number; zeroShotPct?: number;
+          scoresByTaskType: Record<string, number>; scoresByTask?: Record<string, number>;
+          scoresByCustomGroup?: Record<string, Record<string, number>>;
+        }[];
+      }>(FEED);
+      const parts = board.parts ?? {};
+      const keyOf = (label: string) => label.replace(/^[A-Z]/, c => c.toLowerCase())
+        .replace(/[^a-zA-Z0-9]+(.)?/g, (_, c: string | undefined) => c?.toUpperCase() ?? '');
+      const result = data.rows.filter(r => typeof r.meanTask === 'number').map(r => {
+        const metrics: Record<string, number> = {};
+        for (const [key, value] of Object.entries(r.scoresByTaskType)) {
+          if (Number.isFinite(value)) metrics[key] = value * 100;
+        }
+        const addPart = (name: string, value: number, group: string, key: string) => {
+          if (!Number.isFinite(value)) return;
+          metrics[key] = value * 100;
+          parts[key] = {name, group};
+        };
+        for (const [name, value] of Object.entries(r.scoresByTask ?? {})) addPart(name, value, 'Task', keyOf(name));
+        for (const [group, scores] of Object.entries(r.scoresByCustomGroup ?? {})) {
+          for (const [name, value] of Object.entries(scores)) addPart(name, value, group, keyOf(group + ' ' + name));
+        }
+        for (const [key, value] of Object.entries({
+          activeParamsB: r.activeParamsB, maxTokens: r.maxTokens, embeddingDim: r.embeddingDim,
+          zeroShotPct: r.zeroShotPct, opennessScore: r.model.opennessScore,
+        })) {
+          if (typeof value === 'number' && Number.isFinite(value) && value >= 0) metrics[key] = value;
+        }
+        if (typeof r.meanTaskType === 'number') metrics.meanTaskType = r.meanTaskType * 100;
+        if (typeof r.meanPublic === 'number') addPart('Public', r.meanPublic, 'Split', 'meanPublic');
+        if (typeof r.meanPrivate === 'number') addPart('Private', r.meanPrivate, 'Split', 'meanPrivate');
+        return {
+          model: r.model.name.replace(/^[^/]+\//, ''), score: r.meanTask * 100, metrics,
+          params: r.totalParamsB ?? undefined, open: r.model.openWeights ?? undefined,
+          license: r.model.license || undefined,
+        };
+      });
+      board.parts = parts;
+      return result;
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
     const seen = new Set<string>();

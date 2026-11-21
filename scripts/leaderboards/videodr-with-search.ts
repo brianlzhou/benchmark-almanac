@@ -3,7 +3,7 @@
 // (the built bundle embeds the same leaderboardData): one row per model and framework, Workflow or Agentic,
 // with ACC (answer accuracy, %, the score), think calls, search calls and total time. The framework is
 // kept as the harness, and the other three table columns go in metrics: "thinkCalls", "searchCalls" and
-// "totalTime" (the board's "Total Time (s)"). The later 500-question set has its own scores and is not on this board.
+// "latency" (total time per question in seconds). Read model sizes and the board’s open-source labels. The later 500-question set has its own scores and is not on this board.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
@@ -11,6 +11,7 @@ const FEED = 'https://raw.githubusercontent.com/videodr-benchmark/videodr-benchm
 
 interface Config {
   pageMetadata?: { totalTasks?: number };
+  llmMetadata?: Record<string, {type?: string}>;
   leaderboardData: { Framework?: string; LLM: string; ACC?: number; ThinkCount?: number; SearchCount?: number; TotalTime?: number }[];
 }
 
@@ -33,10 +34,13 @@ const board: Leaderboard = {
       for (const [k, v] of [
         ['thinkCalls', r.ThinkCount],
         ['searchCalls', r.SearchCount],
-        ['totalTime', r.TotalTime],
+        ['latency', r.TotalTime],
       ] as const)
         if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
-      rows.push({ model: r.LLM.trim(), harness: r.Framework || undefined, score: r.ACC, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      const type = cfg.llmMetadata?.[r.LLM]?.type;
+      const size = r.LLM.match(/-(\d+(?:\.\d+)?)B\b/i);
+      rows.push({ model: r.LLM.trim(), open: type === 'open-source' ? true : type === 'closed-source' ? false : undefined,
+        params: size ? Number(size[1]) : undefined, harness: r.Framework || undefined, score: r.ACC, ...(Object.keys(metrics).length ? { metrics } : {}) });
     }
     return rows;
   },

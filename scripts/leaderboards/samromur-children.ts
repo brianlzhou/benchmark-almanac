@@ -1,0 +1,5 @@
+// Samrómur Children tests Icelandic automatic speech recognition on children's speech.
+// The headline score is word error rate on the test split, where lower is better.
+// This importer reads Table 6 from the corpus paper.
+import type {Leaderboard,LeaderboardRow} from './types.ts';import {pdfText} from '../lib/boards/pdf-text.ts';import {checked} from '../lib/boards/arxiv-span-tables.ts';
+const feed='https://aclanthology.org/2022.lrec-1.105.pdf';const board:Leaderboard={benchmark:'samromur-children',url:'https://aclanthology.org/2022.lrec-1.105/',feed,terms:'ACL Anthology terms. https://aclanthology.org/faq/copyright/',static:'paper',async fetch(){const p=await pdfText(feed),b=p.slice(p.indexOf('Experiment       (%WER) Dev'),p.indexOf('Table 6: WER results'));const rows:LeaderboardRow[]=[];for(const m of b.matchAll(/Kaldi (HMMs|LSTM)\s+(\d+\.\d+)\s+(\d+\.\d+)/g))rows.push({model:'Kaldi '+m[1],score:Number(m[3]),metrics:{developmentWer:Number(m[2])}});return checked(rows,2)}};export default board;

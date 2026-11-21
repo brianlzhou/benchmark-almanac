@@ -1,4 +1,4 @@
-// Video-Oasis: use Overall accuracy from the main video-native challenge table.
+// Video-Oasis: read model groups, parameter counts and Overall accuracy from the main video-native challenge table.
 // Diagnostic grounding, shortcut, oracle and training studies are not additional leaderboard settings.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -17,7 +17,25 @@ const board: Leaderboard = {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));
     const rows: LeaderboardRow[] = [];
-    for(let ti=0;ti<Math.min(1,all.length);ti++){const t=all[ti],h=t[0];if(!h)continue;let paradigm="";for(const r of t.slice(1)){if(r.length<2)continue;let model=r[0],score:number|undefined,setting="",metrics:Record<string,number>={};if(ti===0){score=num(r[6]);setting="";for(let i=1;i<6;i++)metrics[h[i]]=num(r[i])!;}else if(ti===1){score=num(r[2]);setting=`Grounding ablation; ${r[1]==="&check;"?"grounding":"no grounding"}`;}else if(ti===2){score=num(r[1]);setting="Shortcut ablation";metrics.shortcut=num(r[2])!;}else if(ti===3){score=num(r[1]);setting="Agentic ablation";}else if(ti===4){if(r.length===4)paradigm=r[0];const offset=r.length===4?1:0;model=r[offset];score=num(r[offset+2]);setting=`Training ablation; ${paradigm}; reward ${r[offset+1]}`;}if(score!==undefined)rows.push({model,score,setting,metrics});}}
+    const [header, ...results] = all[0] ?? [];
+    let open: boolean | undefined;
+    for (const r of results) {
+      if (r.length === 1) {
+        open = r[0] === 'Open-Source Video-LLMs' ? true : r[0] === 'Proprietary LLMs' ? false : undefined;
+        continue;
+      }
+      const score = num(r[6]);
+      if (score === undefined) continue;
+      const model = r[0];
+      const size = model.match(/\(([\d.]+)B\)/i);
+      const mode = model.match(/\b(Think|Inst)\./);
+      const metrics: Record<string, number> = {};
+      for (let i = 1; i < 6; i++) {
+        const value = num(r[i]);
+        if (value !== undefined) metrics[header[i]] = value;
+      }
+      rows.push({model, score, metrics, open, params: size ? Number(size[1]) : undefined, setting: mode?.[0]});
+    }
     if (!rows.length) throw new Error("No video-oasis score rows");
     return rows;
   },
