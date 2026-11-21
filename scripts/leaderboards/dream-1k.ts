@@ -27,6 +27,7 @@ const board: Leaderboard = {
   return t.slice(2).filter(r=>num(r[5]?.text)!==undefined && !/human|random/i.test(r[1]?.text??'')).map(r=>({
     model:[text(r[1].html.split(/<p\b/)[0]), /B$/i.test(r[2].text) && !/\d+(?:\.\d+)?B\b/i.test(text(r[1].html.split(/<p\b/)[0])) ? r[2].text : ''].filter(Boolean).join(' '),score:num(r[5].text)!,setting:`frames=${r[3].text}`,
     date:/^\d{4}\/\d\d\/\d\d$/.test(r[4].text)?r[4].text.replaceAll('/','-'):undefined,
+    params:/^\d+(?:\.\d+)?B$/i.test(r[2].text)?parseFloat(r[2].text):undefined,
     metrics:{...(/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? {llmParamsB:parseFloat(r[2].text)} : {}),...Object.fromEntries(['overall','LM','AM','ST','YT','TT'].flatMap((h,i)=>['F1','P','R'].map((m,j)=>[h+m,num(r[5+i*3+j]?.text)])).filter((p):p is [string,number]=>typeof p[1]==='number'))}
   }));
   })();

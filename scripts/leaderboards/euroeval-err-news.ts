@@ -3,7 +3,7 @@ import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { text } from '../lib/html.ts';
 
-const feed = "https://euroeval.com/assets/estonian_generative-kHZgNFix.js";
+const feed = "https://euroeval.com/leaderboards/estonian";
 
 const board: Leaderboard = {
   benchmark: "euroeval-err-news",
@@ -15,7 +15,14 @@ const board: Leaderboard = {
     scored: { name: 'Scored items', unit: 'count' },
   },
   async fetch() {
-    const source = await fetchText(feed);
+    const html = await fetchText(feed);
+    const main = /<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/.exec(html)?.[1];
+    if (!main) throw new Error('Missing EuroEval application bundle');
+    const indexUrl = new URL(main, feed);
+    const index = await fetchText(indexUrl.href);
+    const chunk = /(?:assets\/|\.\/)(estonian_generative-[^".]+\.js)/.exec(index)?.[1];
+    if (!chunk) throw new Error('Missing EuroEval Estonian bundle');
+    const source = await fetchText(new URL(chunk, indexUrl).href);
     const start = source.indexOf('Rank,Model,');
     if (start < 0) throw new Error('Missing embedded leaderboard CSV');
     const records = parseCsv(source.slice(start).split(String.fromCharCode(96))[0]);

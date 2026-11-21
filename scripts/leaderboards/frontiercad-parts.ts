@@ -7,6 +7,8 @@ const board: Leaderboard = { benchmark: "frontiercad-parts", url: sourceBoard.ur
   scheduled: { name: 'Scheduled tasks', unit: 'count' },
   scored: { name: 'Scored tasks', unit: 'count' },
   passRate: { name: 'Pass rate', unit: 'score', better: 'higher', note: 'Fraction of tasks passed, stored from 0 to 1.' },
+  tokenCoverage: { name: 'Token coverage', unit: '%' },
+  turnCoverage: { name: 'Turn coverage', unit: '%' },
  },
  fetch: () => trackRows("^Parts;", "^Parts;\\s*") };
 export default board;

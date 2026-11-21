@@ -15,12 +15,17 @@ const board: Leaderboard = {
   terms: 'Static GitHub Pages site with no robots.txt and no terms; the scores are cited to the LiveClawBench authors.',
   stats:{best:{name:'Best score',unit:'%',better:'higher'}},
   aliases: {},
-  fetch: () =>
-    tableRows(URL, {
+  fetch: async () =>
+    (await tableRows(URL, {
       model: /^Model$/i,
       score: /^Overall Avg Score/i,
-      metrics: { best: /^Best Score/i },
+      // Read Runs through the shared table helper, then promote it to row trials.
+      metrics: { best: /^Best Score/i, runs: /^Runs/i },
       name: (c) => text(c.html.match(/<div[^>]*>([^<]+)<\/div>/)?.[1] ?? c.text),
-    }),
+    })).map((row) => ({
+      ...row,
+      trials: row.metrics?.runs,
+      metrics: Object.fromEntries(Object.entries(row.metrics ?? {}).filter(([key]) => key !== 'runs')),
+    })),
 };
 export default board;

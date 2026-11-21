@@ -21,7 +21,7 @@ export async function lyricsResults(url: string, section: string) {
     const rtf = num(meta[5].text);
     if (rtf != null) metrics.realTimeFactor = rtf;
     const link = meta[1].html.match(/href="([^"]+)"/)?.[1];
-    return { model, harness: model, score: 100 * wer, params: num(meta[3].text), link: link ? new URL(link, url).href : undefined, metrics };
+    return { model, harness: model, submitter: meta[0].text, score: 100 * wer, params: num(meta[3].text), link: link ? new URL(link, url).href : undefined, metrics };
   });
 }
 

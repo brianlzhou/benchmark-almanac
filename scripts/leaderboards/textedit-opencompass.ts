@@ -29,7 +29,7 @@ const board: Leaderboard = {
       const match = run.setting?.match(/^Full; (Real|Virtual); judged average$/);
       if (!match) continue;
       const split = match[1];
-      const row = rows.get(run.model) ?? { model: run.model, score: 0, metrics: {} };
+      const row = rows.get(run.model) ?? { model: run.model, params: run.params, score: 0, metrics: {} };
       if (split in row.metrics!) throw new Error('Duplicate TextEdit split');
       if (!Number.isFinite(run.score)) throw new Error('Missing judged average');
       row.metrics![split] = run.score;

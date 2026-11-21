@@ -20,7 +20,7 @@ export function kilometerBoard(benchmark:string,split:number):Leaderboard {
      const mode=metadata.find((m:any)=>m.name==='evaluation_mode')?.value ?? (typeof r.submission__submission_metadata?.evaluation_mode==='string'?r.submission__submission_metadata.evaluation_mode:undefined);
      const team=r.submission__participant_team__team_name;
      const method=named||r.submission__method_name;
-     rows.push({model:method?`${team} / ${method}`:team,score:score*100,harness:team,setting:[mode,`submission ${r.submission__id}`].filter(Boolean).join('; '),date:r.submission__submitted_at?.slice(0,10),metrics:{hostVerified:r.submission__is_verified_by_host?1:0,baseline:r.submission__is_baseline?1:0}});
+     rows.push({model:method?`${team} / ${method}`:team,score:score*100,harness:team,submitter:team,setting:[mode,`submission ${r.submission__id}`].filter(Boolean).join('; '),date:r.submission__submitted_at?.slice(0,10),metrics:{hostVerified:r.submission__is_verified_by_host?1:0,baseline:r.submission__is_baseline?1:0}});
     }
     next=d.next;if(next)await new Promise(r=>setTimeout(r,1100));
    }

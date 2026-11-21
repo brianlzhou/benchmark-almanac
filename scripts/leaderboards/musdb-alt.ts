@@ -37,7 +37,7 @@ const board: Leaderboard = {
       }
       const factor = num(system?.[5]?.text);
       if (factor !== undefined) metrics.inferenceRealTimeFactor = factor;
-      return { model, score: metrics.WER, metrics, params: num(system?.[3]?.text), link: system?.[1]?.html.match(/href="([^"]+)"/)?.[1] };
+      return { model, submitter: c[0].text, score: metrics.WER, metrics, params: num(system?.[3]?.text), link: system?.[1]?.html.match(/href="([^"]+)"/)?.[1] };
     });
   },
 };

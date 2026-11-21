@@ -14,7 +14,7 @@ const board: Leaderboard = {
     latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
   },
   async fetch() {
-    const rows = await valsRows(SLUG);
+    const rows = await valsRows(SLUG, { cost: 'Cost / run' });
     if (rows.length < 3) throw new Error(`RollerCoasterTycoonBench: ${rows.length} models, expected at least 3`);
     return rows;
   },

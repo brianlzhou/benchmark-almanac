@@ -21,6 +21,6 @@ const board: Leaderboard = {
     // the 2025-10-28 update names the run Qwen3-VL-235B-A22B-Instruct
     'Qwen3-VL-235B': 'qwen3-vl-235b-a22b-instruct',
   },
-  fetch: () => omnidocRows(FEED, ['GPT-4o']),
+  fetch: async () => (await omnidocRows(FEED, ['GPT-4o'], false, true)).map(({model, score, params, open}) => ({ model, score, ...(params === undefined ? {} : {params}), ...(open === undefined ? {} : {open}) })),
 };
 export default board;

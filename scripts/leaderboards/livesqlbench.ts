@@ -20,7 +20,7 @@ const board: Leaderboard = {
     'Mixtral 8x7B Instruct': 'mixtral-8x7b',
   },
   async fetch() {
-    const rows = await tableRows(URL, { model: /^Model$/i, score: /^Success Rate$/i, cost: /^Cost \/ Task$/i });
+    const rows = await tableRows(URL, { model: /^Model$/i, score: /^Success Rate$/i, date: /^Rank \/ Sub Date$/i, cost: /^Cost \/ Task$/i });
     return rows.map((r) => {
       const name = r.model.replace(/\s+Reported\b.*$/i, '').trim();
       const agent = name.match(/\s*\(([^()]*(?:CLI|Claude Code|OpenHands|Codex|Agent)[^()]*)\)$/i);

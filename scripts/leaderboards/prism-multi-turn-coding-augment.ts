@@ -12,7 +12,7 @@ const board: Leaderboard = {
   async fetch() {
     const t = tables(await fetchText(PAGE)).find(x => x[0]?.[0]?.text === 'Model' && x[0]?.[1]?.text.includes('Avg overall score'));
     if (!t || t.length < 8) throw new Error('Augment Prism overall table missing');
-    return t.slice(1).map(r => { const score = num(r[1]?.text?.replace(/[−]/g, '-')); const cost = num(r[2]?.text); if (!r[0]?.text || score === undefined || cost === undefined) throw new Error('Augment Prism row missing score'); return { model: r[0].text, score, cost, metrics: { costPerTask: cost } } satisfies LeaderboardRow; });
+    return t.slice(1).map(r => { const scoreText = r[1]?.text?.replace(/[−]/g, '-'); const score = num(scoreText); const margin = num(scoreText?.match(/±\s*([\d.]+)/)?.[1] ?? ''); const cost = num(r[2]?.text); if (!r[0]?.text || score === undefined || cost === undefined) throw new Error('Augment Prism row missing score'); return { model: r[0].text, score, ...(margin !== undefined ? { low: score - margin, high: score + margin } : {}), cost, metrics: { costPerTask: cost } } satisfies LeaderboardRow; });
   },
 };
 export default board;

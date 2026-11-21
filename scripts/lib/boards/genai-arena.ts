@@ -10,7 +10,7 @@ export async function genaiRows(track:string):Promise<LeaderboardRow[]> {
     const score=num(r['Arena Elo rating (anony)']);
     if(!r.Model||score===undefined)continue;
     const full=num(r['Arena Elo rating (full)']);
-    rows.push({model:r.Model,score,metrics:full===undefined?undefined:{fullVoteElo:full}});
+    rows.push({model:r.Model,score,license:r.License?.trim() || undefined,metrics:full===undefined?undefined:{fullVoteElo:full}});
   }
   if(!rows.length)throw new Error(`GenAI-Arena ${track} empty`);
   return rows;

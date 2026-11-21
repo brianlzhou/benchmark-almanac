@@ -259,5 +259,159 @@
         "quote": "The ‘Standard’ harness substantially under-elicits models."
       }
     ]
+  },
+  {
+    "id": "benchleaking-is-accelerating-2026-11-16",
+    "title": "Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month",
+    "author": "Yiwei Qin and colleagues",
+    "people": [
+      "Yiwei Qin",
+      "Muhang Xie",
+      "Xuefeng Li",
+      "Mohan Jiang",
+      "Dayuan Fu",
+      "Tiantian Mi",
+      "Qipeng Guo",
+      "Pengfei Liu"
+    ],
+    "date": "2026-11-16",
+    "url": "https://arxiv.org/abs/2611.21315",
+    "source": "paper",
+    "findings": [
+      {
+        "benchmark": "humaneval",
+        "problems": [
+          "contamination"
+        ],
+        "summary": "The paper finds that ERNIE-5.5-Flash-Base reproduces 96.3% of HumanEval tasks with reference implementations during few-shot continuation. It also shows that detected leaked examples can inflate benchmark scores.",
+        "numbers": "96.3% of HumanEval tasks leak for ERNIE-5.5-Flash-Base. The Anti-Hack score removes leaked examples from credit.",
+        "status": "open",
+        "fixes": [],
+        "quote": "For the recently released ERNIE-5.5-Flash-Base, 96% of HumanEval problems leak with their reference implementations"
+      },
+      {
+        "benchmark": "openbookqa",
+        "problems": [
+          "contamination"
+        ],
+        "summary": "The paper finds that ERNIE-5.5-Flash-Base reproduces 85.4% of OpenBookQA examples with their answers during few-shot continuation, showing direct test-set exposure.",
+        "numbers": "85.4% of OpenBookQA examples leak for ERNIE-5.5-Flash-Base.",
+        "status": "open",
+        "fixes": [],
+        "quote": "85% of OpenBookQA questions leak with their answers"
+      }
+    ]
+  },
+  {
+    "id": "leakage-label-aware-mimic-cxr-2026-11-05",
+    "title": "Leakage- and Label-Aware Benchmarking of Class-Imbalance Strategies for Multimodal Chest X-Ray and EHR Classification",
+    "author": "Dang-Khoa Bui and colleagues",
+    "people": [
+      "Dang-Khoa Bui",
+      "Quang-Huy Tran",
+      "Minh-Khoi Nguyen-Bui",
+      "Duc-Tuan Ngo",
+      "Thanh-Trong Tran",
+      "Tuan-Khoi Nguyen",
+      "Hoang-Anh Ngo"
+    ],
+    "date": "2026-11-05",
+    "url": "https://arxiv.org/abs/2611.07950",
+    "source": "paper",
+    "findings": [
+      {
+        "benchmark": "mimic-cxr-classification",
+        "problems": [
+          "wrong-labels",
+          "harness-differences"
+        ],
+        "summary": "The paper finds that record-level splits let radiographs from the same patient share labels and EHR vectors across train and test. It also finds that about one third of radiographs have labels that differ from the codes for their own admission, and that patient-separated, admission-aligned evaluation removes the original conclusions.",
+        "numbers": "The audit covers 29,083 radiographs from 10,479 patients. No imbalance strategy improved mean macro F2 over no augmentation by more than 0.01 under the leakage-aware protocol.",
+        "status": "open",
+        "fixes": [],
+        "quote": "the record-split benchmark was misleading: a lookup table that copies the label of a development-set radiograph with the same EHR vector nearly matched the best model"
+      }
+    ]
+  },
+  {
+    "id": "follow-policy-fail-benchmark-2026-11-04",
+    "title": "Follow the Policy, Fail the Benchmark: Auditing and Revising Policy-Based Decision Benchmarks",
+    "author": "Yanru Xiao and Yifei Cai",
+    "people": [
+      "Yanru Xiao",
+      "Yifei Cai"
+    ],
+    "date": "2026-11-04",
+    "url": "https://arxiv.org/abs/2611.07042",
+    "source": "paper",
+    "findings": [
+      {
+        "benchmark": "legalbench",
+        "problems": [
+          "broken-grader",
+          "wrong-labels"
+        ],
+        "summary": "The paper finds that LegalBench SARA's numeric scorer deletes decimal points before parsing and rejects every integer when the reference is zero. Correcting the scorer changes acceptance rates without changing model responses or reference answers.",
+        "numbers": "On 96 LegalBench SARA numeric cases, corrected scoring raises acceptance from 8 to 87-91 out of 96 across three models.",
+        "status": "fixed-in-fork",
+        "fixes": [
+          {
+            "label": "BAR revised scorer",
+            "url": "https://github.com/SugarRuy/BAR-Policy-Decision"
+          }
+        ],
+        "quote": "LegalBench’s SARA numeric task asks for a tax amount, but its published scorer deletes decimal points before extracting an integer"
+      }
+    ]
+  },
+  {
+    "id": "from-small-to-large-medical-reasoning-2026-10-30",
+    "title": "From Small to Large: Assessing Medical Reasoning, Benchmark Contamination, and Model Size in Language Models",
+    "author": "Navapat Nananukul and Mayank Kejriwal",
+    "people": [
+      "Navapat Nananukul",
+      "Mayank Kejriwal"
+    ],
+    "date": "2026-10-30",
+    "url": "https://arxiv.org/abs/2611.00460",
+    "source": "paper",
+    "findings": [
+      {
+        "benchmark": "medqa",
+        "problems": [
+          "contamination",
+          "wrong-labels"
+        ],
+        "summary": "The paper tests reconstruction of hidden medical questions from answer choices and audits answer keys. It reports substantial reconstruction and identifies answer keys judged wrong, outdated or ambiguous.",
+        "numbers": "Across the benchmarks it audited, the strongest models reconstruct about one question in four from the answer choices alone. A language model judged the answer key wrong, outdated or ambiguous for 65 of the 107 questions every model missed. Removing those questions leaves the models in the same order.",
+        "status": "open",
+        "fixes": [],
+        "quote": "On memorization, the strongest models reconstruct one question in four from the answer choices alone"
+      },
+      {
+        "benchmark": "medmcqa",
+        "problems": [
+          "contamination",
+          "wrong-labels"
+        ],
+        "summary": "The paper evaluates MedMCQA under multiple-choice, answer-choice withheld and reconstruction conditions, and reports answer-key uncertainty in its audited question pools.",
+        "numbers": "The study evaluates 1,000 MedMCQA validation questions for comparability and includes the benchmark in its answer-key audit.",
+        "status": "open",
+        "fixes": [],
+        "quote": "It judged the answer key as wrong, outdated, ambiguous for 65 of the 107 questions that every model missed"
+      },
+      {
+        "benchmark": "pubmedqa",
+        "problems": [
+          "contamination",
+          "wrong-labels"
+        ],
+        "summary": "The paper evaluates the full 500-question expert-annotated PubMedQA test split and reports memorization-sensitive reconstruction plus answer-key uncertainty.",
+        "numbers": "The study includes all 500 PubMedQA expert-annotated test questions and the same answer-key audit process.",
+        "status": "open",
+        "fixes": [],
+        "quote": "It judged the answer key as wrong, outdated, ambiguous for 65 of the 107 questions that every model missed"
+      }
+    ]
   }
 ]

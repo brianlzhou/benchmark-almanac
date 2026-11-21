@@ -42,10 +42,12 @@ const board: Leaderboard = {
       model = model.replace(/\s*\(([^)]+)\)$/, ' $1');
       const score = Number(rating[1]);
       const margin = Number(rating[2]);
-      const metrics: Record<string, number> = { ciLow: score - margin, ciHigh: score + margin };
+      const low = score - margin;
+      const high = score + margin;
+      const metrics: Record<string, number> = { ciLow: low, ciHigh: high };
       if (rates.length === 2) [metrics.goodWin, metrics.evilWin] = rates;
       if (verbose) metrics.tokensPerAction = Number(verbose.replace(/,/g, ''));
-      rows.push({ model, setting, score, cost: cost ? Number(cost) : undefined, metrics });
+      rows.push({ model, setting, score, low, high, cost: cost ? Number(cost) : undefined, metrics });
     }
     if (rows.length < 10) throw new Error(`Clocktower Radio: ${rows.length} rows`);
     return rows;

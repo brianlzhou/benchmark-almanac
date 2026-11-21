@@ -22,7 +22,12 @@ const board: Leaderboard = {
     const all=tables(await fetchText(feed)).map(t=>t.map(r=>r.map(c=>c.text)));
     const scores=all.find(t=>t[0].includes('ViGiL3D') && t[1]?.includes('Acc/GT'));
     const parts=all.find(t=>t[1]?.includes('Overall') && t[1].includes('CG') && t[1].includes('NFN'));
-    if(!scores || !parts || scores.length<9) throw new Error('Missing author baseline tables');
+    const methodTable=all.find(t=>t[0]?.includes('# Parameters'));
+    if(!scores || !parts || !methodTable || scores.length<9) throw new Error('Missing author baseline tables');
+    const methodInfo=new Map(methodTable.slice(1).map(r=>{
+      const size=r[1]?.match(/^(\d+(?:\.\d+)?)([MB])$/i);
+      return [r[0], {params:size ? Number(size[1])/(size[2].toUpperCase()==='M'?1000:1) : undefined}];
+    }));
     board.parts=Object.fromEntries(parts[1].slice(2).map(k=>[k,k]));
     return scores.slice(2).map(r=>{
       const model=r[0],score=Number(r[1]);const breakdown=parts.find(p=>p[0]===model);
@@ -31,7 +36,8 @@ const board: Leaderboard = {
       for(let i=2;i<=6;i++) metrics[scores[1][i]]=Number(r[i]);
       for(let i=2;i<parts[1].length;i++) metrics[parts[1][i]]=Number(breakdown[i]);
       if(!Object.values(metrics).every(Number.isFinite)) throw new Error('Invalid ViGiL3D result');
-      return {model,score,metrics};
+      const info=methodInfo.get(model);
+      return {model,score,params:info?.params,metrics};
     });
   },
 };

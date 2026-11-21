@@ -29,7 +29,9 @@ const board: Leaderboard = {
         for (const key of ['Mean best score', 'Tokens/s', 'Median reasoning per reply (characters)']) {
           if (cell(key)) metrics[key] = Number(cell(key).replaceAll(',', ''));
         }
-        rows.push({ model: cell('Model'), score, setting: thinking ? 'Thinking on, 16,384 tokens' : 'Thinking off, 2,048 tokens', trials: samples.length, metrics });
+        const parameterText = cell('Parameters');
+        const parameterMatch = parameterText?.match(/[\d.]+/);
+        rows.push({ model: cell('Model'), score, ...(parameterMatch ? { params: Number(parameterMatch[0]) } : {}), setting: thinking ? 'Thinking on, 16,384 tokens' : 'Thinking off, 2,048 tokens', trials: samples.length, metrics });
       }
     }
     return rows;

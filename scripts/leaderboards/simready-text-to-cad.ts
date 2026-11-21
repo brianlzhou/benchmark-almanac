@@ -9,9 +9,29 @@ const feed = 'https://raw.githubusercontent.com/Sumanthreddy-DE/simready/v0.5.1/
 const board: Leaderboard = {
   benchmark: 'simready-text-to-cad', url, feed,
   terms: 'The SimReady repository publishes this validation report under its repository license. https://github.com/Sumanthreddy-DE/simready/blob/main/LICENSE',
+  verified: 'Marked official in the SimReady validation report.',
   parts: { explicit: { name: 'Explicit', group: 'Prompt phrasing' }, engineer: { name: 'Engineer', group: 'Prompt phrasing' }, intent: { name: 'Intent', group: 'Prompt phrasing' } },
+  stats: {
+    latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Prompt tokens', unit: 'tokens' },
+    outputTokens: { name: 'Completion tokens', unit: 'tokens' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const text = await fetchText(feed);
+    const markdownRows = (header: string) => {
+      const start = text.indexOf(header);
+      if (start < 0) return new Map<string, string[]>();
+      const rows = new Map<string, string[]>();
+      for (const line of text.slice(start + header.length).split('\n').slice(2)) {
+        if (!line.startsWith('|')) break;
+        const cells = line.split('|').map((v) => v.trim()).filter(Boolean);
+        if (cells.length) rows.set(cells[0], cells);
+      }
+      return rows;
+    };
+    const setup = markdownRows('| model | id | base URL | k | temp | prompt sha256 | checker | official | started | incomplete prompts |');
+    const headline = markdownRows('| model | pass@1 | 95% CI | pass@k | 95% CI | concepts | prompts |');
+    const cost = markdownRows('| model | calls | prompt tokens | completion tokens | median latency (s) | excluded (infra/checker) |');
     const section = text.slice(text.indexOf('| model | pass@1 |'));
     const lines = section.split('\n').slice(2);
     const rows: LeaderboardRow[] = [];
@@ -21,7 +41,21 @@ const board: Leaderboard = {
       const pass1 = Number(cells[1].replace('%', ''));
       const passK = Number(cells[3].replace('%', ''));
       if (!Number.isFinite(pass1) || !Number.isFinite(passK)) throw new Error('Invalid SimReady row');
-      rows.push({ model: cells[0], score: pass1, metrics: { passAt5: passK } });
+      const interval = headline.get(cells[0])?.[2].match(/\[([\d.]+)%,\s*([\d.]+)%\]/);
+      const setupRow = setup.get(cells[0]);
+      const costRow = cost.get(cells[0]);
+      const metrics: Record<string, number> = { passAt5: passK };
+      if (costRow) {
+        const latency = Number(costRow[4]);
+        const inputTokens = Number(costRow[2].replace(/,/g, ''));
+        const outputTokens = Number(costRow[3].replace(/,/g, ''));
+        if (Number.isFinite(latency)) metrics.latency = latency;
+        if (Number.isFinite(inputTokens)) metrics.inputTokens = inputTokens;
+        if (Number.isFinite(outputTokens)) metrics.outputTokens = outputTokens;
+      }
+      rows.push({ model: cells[0], score: pass1,
+        ...(interval ? { low: Number(interval[1]), high: Number(interval[2]) } : {}),
+        ...(setupRow?.[7] === 'True' ? { verified: true } : {}), metrics });
     }
     const styleStart = text.indexOf('| model | explicit | engineer | intent |');
     if (styleStart >= 0) {

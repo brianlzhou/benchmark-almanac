@@ -13,7 +13,17 @@ const board: Leaderboard = {
   url: `${URL}#leaderboard`,
   feed: `${URL} (results table, ALL accuracy and CoT-E)`,
   terms: 'Static GitHub Pages project page with no stated terms; the MathVerse repository is MIT-licensed.',
-  stats: { cotE: { name: 'CoT-E score', unit: '%', better: 'higher', note: 'GPT-4 grades the reasoning steps.' } },
+  stats: {
+    cotE: { name: 'CoT-E score', unit: '%', better: 'higher', note: 'GPT-4 grades the reasoning steps.' },
+  },
+  parts: {
+    textDominantWoutCotE: { name: 'Text Dominant answer accuracy', group: 'Modality', unit: '%' },
+    textLiteWoutCotE: { name: 'Text Lite answer accuracy', group: 'Modality', unit: '%' },
+    textOnlyWoutCotE: { name: 'Text Only answer accuracy', group: 'Modality', unit: '%' },
+    visionIntensiveWoutCotE: { name: 'Vision Intensive answer accuracy', group: 'Modality', unit: '%' },
+    visionDominantWoutCotE: { name: 'Vision Dominant answer accuracy', group: 'Modality', unit: '%' },
+    visionOnlyWoutCotE: { name: 'Vision Only answer accuracy', group: 'Modality', unit: '%' },
+  },
   aliases: {},
   async fetch() {
     const t = tables(await fetchText(URL)).find((rows) => rows[0]?.some((c) => c.text === 'ALL'));
@@ -30,7 +40,16 @@ const board: Leaderboard = {
       if (!model || /^(human|random)/i.test(model)) continue;
       const date = /^\d{4}-\d\d-\d\d$/.test(r[4].text) ? r[4].text : undefined;
       const cot = num(r[5]?.text);
-      if (score !== undefined) rows.push({model, score, date, params: model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i) ? Number(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i)![1]) : undefined, metrics:cot===undefined?undefined:{cotE:cot}});
+      const metrics: Record<string, number> = {};
+      if (cot !== undefined) metrics.cotE = cot;
+      for (const [key, index] of [
+        ['textDominantWoutCotE', 8], ['textLiteWoutCotE', 10], ['textOnlyWoutCotE', 12],
+        ['visionIntensiveWoutCotE', 14], ['visionDominantWoutCotE', 16], ['visionOnlyWoutCotE', 18],
+      ] as const) {
+        const value = num(r[index]?.text);
+        if (value !== undefined) metrics[key] = value;
+      }
+      if (score !== undefined) rows.push({model, score, date, params: model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i) ? Number(model.match(/(?:^|[- ])(\d+(?:\.\d+)?)B(?:$|[- ])/i)![1]) : undefined, metrics: Object.keys(metrics).length ? metrics : undefined});
     }
     return rows;
   },

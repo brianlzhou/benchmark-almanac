@@ -1,6 +1,125 @@
 {
   "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
   "boards": {
+    "3dcodearena": {
+      "Time (s)↕": "ignore",
+      "Tokens↕": "ignore",
+      "code-runs": "ignore"
+    },
+    "4dcodebench": {
+      "elo_ci": "ignore",
+      "human_elo_ci": "ignore"
+    },
+    "accelerate-bench": {
+      "verify_minutes": "ignore"
+    },
+    "accord-conceptual-consistency": {
+      "dt_cost": "ignore",
+      "lmca_cost": "ignore"
+    },
+    "ad4edu-bench": {
+      "95% CI": "ignore"
+    },
+    "addis-ai-amharic-tts-benchmark": {
+      "95% CI": "ignore"
+    },
+    "ade-corpus": {
+      "paper_date": "ignore"
+    },
+    "advance-mteb": {
+      "created_at": "ignore",
+      "updated_at": "ignore",
+      "author_association": "ignore"
+    },
+    "advancedif": {
+      "Avg. Turns per Dialog": "ignore",
+      "Multi-turn": "ignore",
+      "Multi-turn Carried Context IF": "ignore"
+    },
+    "aerialsim": {
+      "Turn": "ignore"
+    },
+    "aether-bench-retouch": {
+      "Aether-Bench (Param-Retouching)": "ignore",
+      "Aether-Bench (Param)": "ignore",
+      "params-pred": "ignore"
+    },
+    "aethercode": {
+      "**Date**": "ignore"
+    },
+    "agent-memory-leaderboard": {
+      "submission_id": "ignore"
+    },
+    "agentic-trader-hku": {
+      "avg_entry_price": "ignore",
+      "fill_price": "ignore",
+      "nav_usd": "ignore",
+      "step": "ignore"
+    },
+    "agenticsts": {
+      "License": "ignore"
+    },
+    "agentworldbench": {
+      "SWE-Bench Verified": "ignore"
+    },
+    "agi-eval-community-text-to-image": {
+      "evalTime": "ignore"
+    },
+    "agrobench": {
+      "Open-Source Vision Language Models (VLMs)": "ignore"
+    },
+    "aila-statute-retrieval": {
+      "model.releaseDate": "ignore"
+    },
+    "aishell-1": {
+      "Duration(hrs)": "ignore"
+    },
+    "alce": {
+      "Open-source": "ignore",
+      "ChatGPT (max #tokens=4K)": "ignore",
+      "ChatGPT-16K (max #tokens=16K)": "ignore",
+      "GPT-4 (max #tokens=8K)": "ignore",
+      "Open-source (max #tokens=2K-4K)": "ignore"
+    },
+    "alfred": {
+      "Submission": "ignore"
+    },
+    "alignbench": {
+      "#Samples": "ignore"
+    },
+    "alphaeval": {
+      "Details": "ignore"
+    },
+    "alyah": {
+      "Number of Samples": "ignore"
+    },
+    "amazon-counterfactual-detection": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "amemops": {
+      "updated": "ignore"
+    },
+    "androidarena": {
+      "#Token (Compressed)": "ignore",
+      "#Token (Original)": "ignore"
+    },
+    "androidcontrol": {
+      "steps": "ignore"
+    },
+    "androidworld-knowledge": {
+      "Avg. Time": "ignore",
+      "Step": "ignore"
+    },
+    "anomalyxl": {
+      "LL (samples)": "ignore"
+    },
+    "arabculture": {
+      "#Samples": "ignore"
+    },
+    "arena-t2i-hard": {
+      "Reported steps": "ignore"
+    },
     "artificial-analysis-intelligence-index": {
       "artificial_analysis_intelligence_index_cost.cost_per_task": "ignore",
       "artificial_analysis_intelligence_index_cost.total_cost": "ignore",
@@ -16,6 +135,2840 @@
       "performance.median_output_tokens_per_second": "ignore",
       "performance.median_time_to_first_answer_token_seconds": "ignore",
       "performance.median_time_to_first_token_seconds": "ignore"
+    },
+    "artificial-turf-war": {
+      "Team": "ignore"
+    },
+    "asap-essay-scoring": {
+      "submissionId": "ignore"
+    },
+    "ascend": {
+      "Average duration (minutes)": "ignore",
+      "Duration (hr)": "ignore"
+    },
+    "asgardbench": {
+      "Max tokens": "ignore"
+    },
+    "ask-ubuntu-duplicate-question-retrieval": {
+      "model.releaseDate": "ignore"
+    },
+    "aspi-scale": {
+      "exec_next_turn": "ignore"
+    },
+    "assembly101-o": {
+      "Runtime": "ignore",
+      "Step Antic.": "ignore",
+      "Step Recog.": "ignore"
+    },
+    "assemblyai-speech-benchmarks": {
+      "Price $/1k min": "ignore",
+      "AssemblyAI U3.5 Realtime Pro — min latency": "ignore",
+      "Runs": "ignore",
+      "English / CI": "ignore"
+    },
+    "astroclimb": {
+      "submissionId": "ignore"
+    },
+    "astromlab-1": {
+      "Step-1": "ignore",
+      "Step-2": "ignore",
+      "Step(阶跃星辰) Series": "ignore"
+    },
+    "asynctool": {
+      "Multi Step": "ignore",
+      "#Samples": "ignore",
+      "%Samples": "ignore"
+    },
+    "audio-reasoning-challenge-2026": {
+      "Submission Limit": "ignore"
+    },
+    "baanchmark": {
+      "runtime.en": "ignore",
+      "runtime.sk": "ignore"
+    },
+    "ballotbench": {
+      "Log": "ignore"
+    },
+    "bank-question-corpus": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "banking77": {
+      "model.releaseDate": "ignore"
+    },
+    "barc-bench": {
+      "Artifacts": "ignore"
+    },
+    "bea-2025-pedagogical-ability-assessment": {
+      "Submission": "ignore"
+    },
+    "bedside-bench": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.weights": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore",
+      "confidence_interval_95": "ignore",
+      "metrics.se": "ignore",
+      "raw.ci": "ignore",
+      "raw.ciHalf": "ignore",
+      "raw.hallucCI": "ignore",
+      "raw.mediumCI": "ignore",
+      "raw.se": "ignore"
+    },
+    "behavior2code-turing": {
+      "Date (2026)": "ignore"
+    },
+    "beir-fiqa-2018": {
+      "model.releaseDate": "ignore"
+    },
+    "bench4hls": {
+      "Open-Source": "ignore",
+      "Evaluated Model": "ignore"
+    },
+    "benchcad-2-1": {
+      "Time / case": "ignore",
+      "Tokens / case": "ignore"
+    },
+    "benger": {
+      "Run date": "ignore",
+      "95% CI": "ignore",
+      "SemSim": "ignore"
+    },
+    "big-bench-english-proverbs": {
+      "Last commit date": "ignore"
+    },
+    "big-bench-understanding-fables": {
+      "Last commit date": "ignore"
+    },
+    "bimanual-chore-scheduling": {
+      "Metric (200 instances, seeds 0–199)": "ignore"
+    },
+    "biomaze": {
+      "Agent #Steps": "ignore"
+    },
+    "biopharma-bench": {
+      "Candidate Submission": "ignore"
+    },
+    "biophys-bridge": {
+      "sci_evo_trajectory[]": "ignore"
+    },
+    "bird-sql": {
+      "Empirical Upper Bound": "ignore"
+    },
+    "bizbench-ant": {
+      "Golden traces: per task": "ignore"
+    },
+    "blink": {
+      "submission__id": "ignore",
+      "submission__method_name": "ignore"
+    },
+    "bountybench": {
+      "Report": "ignore",
+      "License": "ignore",
+      "Total Time Taken": "ignore"
+    },
+    "bright-pro": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "browsesafe-adapt": {
+      "adaptive.seed": "ignore"
+    },
+    "builderbench": {
+      "num_seeds": "ignore",
+      "num_trials": "ignore",
+      "std_final_progress": "ignore",
+      "std_final_success_rate": "ignore",
+      "std_num_episodes": "ignore"
+    },
+    "builtbench": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore",
+      "maxTokens": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "butter-bench": {
+      "Timestamp": "ignore"
+    },
+    "c2hlsc": {
+      "adaptive_latency": "ignore",
+      "claude_latency": "ignore",
+      "max_adaptive_latency": "ignore",
+      "max_claude_latency": "ignore",
+      "min_adaptive_latency": "ignore",
+      "min_claude_latency": "ignore"
+    },
+    "cap-x-cap-bench": {
+      "releaseDate": "ignore"
+    },
+    "careqa": {
+      "Avg A tokens": "ignore",
+      "Avg Q tokens": "ignore",
+      "Max A tokens": "ignore",
+      "Max Q tokens": "ignore"
+    },
+    "cefe-2024": {
+      "System report": "ignore"
+    },
+    "ceo-bench": {
+      "Log-normal": "ignore",
+      "Estimated final cash upper bound": "ignore"
+    },
+    "chainworld": {
+      "Runtime": "ignore"
+    },
+    "chcatext": {
+      "Step": "ignore"
+    },
+    "checkerbench": {
+      "Traces": "ignore",
+      "On date": "ignore",
+      "Release date": "ignore",
+      "Interval": "ignore"
+    },
+    "chembench": {
+      "row.date_published": "ignore"
+    },
+    "chessbench": {
+      "log\\log (class.)": "ignore"
+    },
+    "chestx-ray14": {
+      "Report": "ignore"
+    },
+    "childmandarin": {
+      "Duration (hrs)": "ignore"
+    },
+    "chinabench": {
+      "attempt": "ignore"
+    },
+    "cirr": {
+      "model.releaseDate": "ignore"
+    },
+    "civbench-civilization-vi": {
+      "row.lastUpdated": "ignore"
+    },
+    "cl-bench": {
+      "domain_std": "ignore",
+      "overall_std": "ignore",
+      "pattern_std": "ignore",
+      "procedural_std": "ignore",
+      "rule_std": "ignore"
+    },
+    "cl-bench-life": {
+      "behavior_std": "ignore",
+      "interpersonal_std": "ignore",
+      "overall_std": "ignore",
+      "thought_std": "ignore"
+    },
+    "clash-of-ais-season-1": {
+      "pnlUsd": "ignore"
+    },
+    "clawbench": {
+      "avg_cost_per_task_usd": "ignore"
+    },
+    "clbench-v": {
+      "4k–32k tokens": "ignore",
+      "Doubao-Seed-2.0-Lite": "ignore"
+    },
+    "clef-hipe-2026": {
+      "model size": "ignore"
+    },
+    "click-id": {
+      "model.releaseDate": "ignore"
+    },
+    "climate-fever": {
+      "model.releaseDate": "ignore"
+    },
+    "cmi-bench": {
+      "seed": "ignore"
+    },
+    "cnmo-2024": {
+      "in USD": "ignore",
+      "# Training Tokens": "ignore"
+    },
+    "codeipi": {
+      "Samples": "ignore"
+    },
+    "codesearchnet-challenge": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "codetransocean": {
+      "model.releaseDate": "ignore"
+    },
+    "colorbench": {
+      "Number of Samples": "ignore"
+    },
+    "compass-academic-leaderboard": {
+      "release_time": "ignore",
+      "update_time": "ignore"
+    },
+    "compassrank": {
+      "time": "ignore",
+      "update_time": "ignore",
+      "updateTime": "ignore"
+    },
+    "complexfuncbench": {
+      "Multi-Step": "ignore"
+    },
+    "compmat-bench": {
+      "Step": "ignore",
+      "Steps": "ignore"
+    },
+    "constructions-last-exam": {
+      "Date": "ignore"
+    },
+    "constructions-last-exam-2": {
+      "Date": "ignore"
+    },
+    "contextasr-bench": {
+      "Duration (h)": "ignore"
+    },
+    "contractoros-quantity-takeoff": {
+      "Details": "ignore"
+    },
+    "coral": {
+      "# Positive passages/ Turn": "ignore",
+      "# Turns": "ignore",
+      "# Turns / Conversation": "ignore",
+      "# Tokens / Question": "ignore",
+      "# Tokens / Response": "ignore"
+    },
+    "corpbench-work": {
+      "clusteredPassRate95.lower": "ignore",
+      "clusteredPassRate95.upper": "ignore",
+      "difference95.lower": "ignore",
+      "difference95.upper": "ignore",
+      "passRate95.lower": "ignore",
+      "passRate95.upper": "ignore"
+    },
+    "corporatebench": {
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.taskAgent": "ignore",
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.weights": "ignore",
+      "last_updated": "ignore",
+      "raw.evaluated": "ignore",
+      "metrics.avgTokens": "ignore",
+      "metrics.cachedTokens": "ignore",
+      "metrics.inputTokens": "ignore",
+      "metrics.outputTokens": "ignore",
+      "metrics.reasoningTokens": "ignore",
+      "metrics.tokensPerTrial": "ignore",
+      "raw.avgTokens": "ignore",
+      "raw.cachedTokens": "ignore",
+      "raw.inputTokens": "ignore",
+      "raw.outputTokens": "ignore",
+      "raw.outputTokensM": "ignore",
+      "raw.reasoningTokens": "ignore",
+      "raw.tokens": "ignore",
+      "raw.tokensCached": "ignore",
+      "raw.tokensIn": "ignore",
+      "raw.tokensInText": "ignore",
+      "raw.tokensOut": "ignore",
+      "raw.tokensOutText": "ignore",
+      "raw.tokensUncached": "ignore"
+    },
+    "corpus-for-emotion-detection-in-russian": {
+      "model.releaseDate": "ignore"
+    },
+    "cosqa": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "country211": {
+      "Dollar Street": "ignore"
+    },
+    "coverage-cat-fictional-insurance": {
+      "submission_forbidden": "ignore",
+      "submission_required": "ignore",
+      "submitted_when_required": "ignore",
+      "max_output_tokens": "ignore"
+    },
+    "covr-r": {
+      "Avg. Trace Length": "ignore",
+      "Inference Time": "ignore",
+      "15 tokens": "ignore",
+      "186 tokens": "ignore",
+      "45 tokens": "ignore",
+      "89 tokens": "ignore"
+    },
+    "cozzo-ai-receptionist-round-6": {
+      "Price": "ignore"
+    },
+    "crab-benchmark": {
+      "Release Date": "ignore"
+    },
+    "cresta-bench": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore",
+      "confidence_interval_95": "ignore",
+      "metrics.se": "ignore",
+      "raw.ci": "ignore",
+      "raw.ciHalf": "ignore",
+      "raw.hallucCI": "ignore",
+      "raw.mediumCI": "ignore",
+      "raw.se": "ignore"
+    },
+    "crossmodal-3600": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "crosswordbench-leng": {
+      "Avg. Tokens": "ignore",
+      "Max Tokens (14×14)": "ignore",
+      "Max Tokens (7×7)": "ignore"
+    },
+    "crpe": {
+      "#Samples": "ignore",
+      "SEED": "ignore"
+    },
+    "crsbench": {
+      "Time to trigger": "ignore",
+      "LLM $/trial": "ignore",
+      "Time/trial": "ignore",
+      "Trial success": "ignore"
+    },
+    "crust-bench": {
+      "Cost Budget": "ignore"
+    },
+    "cryptanalysisbench": {
+      "Step": "ignore"
+    },
+    "cs-4k": {
+      "Seed": "ignore"
+    },
+    "csl": {
+      "#Samples": "ignore"
+    },
+    "cti-to-mitre": {
+      "Samples": "ignore"
+    },
+    "ctkfacts": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "cure": {
+      "DeepL (SE, 2024)": "ignore"
+    },
+    "cusp-scientific-forecasting": {
+      "n_date": "ignore"
+    },
+    "cyberstrike-turing": {
+      "Date (2026)": "ignore"
+    },
+    "dataprep-bench": {
+      "Time (s)": "ignore"
+    },
+    "dataprep-bench-finance": {
+      "Time (s)": "ignore"
+    },
+    "dataprep-bench-general": {
+      "Time (s)": "ignore"
+    },
+    "dataprep-bench-law": {
+      "Time (s)": "ignore"
+    },
+    "dataprep-bench-math": {
+      "Time (s)": "ignore"
+    },
+    "dataprep-bench-medical": {
+      "Time (s)": "ignore"
+    },
+    "dataprep-bench-science": {
+      "Time (s)": "ignore"
+    },
+    "datbench-vlm": {
+      "Samples": "ignore",
+      "Samples Removed": "ignore",
+      "Total Samples": "ignore"
+    },
+    "dayjob-data-science": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "metrics.duration_per_task": "ignore",
+      "metrics.latencyMax": "ignore",
+      "metrics.latencyP90": "ignore",
+      "raw.latency": "ignore",
+      "raw.latencyMax": "ignore",
+      "raw.latencyMsP50": "ignore",
+      "raw.latencyP90": "ignore",
+      "raw.seconds": "ignore",
+      "raw.steps": "ignore",
+      "raw.timeLimited": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore",
+      "confidence_interval_95": "ignore",
+      "metrics.se": "ignore",
+      "raw.ci": "ignore",
+      "raw.ciHalf": "ignore",
+      "raw.hallucCI": "ignore",
+      "raw.mediumCI": "ignore",
+      "raw.se": "ignore"
+    },
+    "dayjob-law": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "metrics.duration_per_task": "ignore",
+      "metrics.latencyMax": "ignore",
+      "metrics.latencyP90": "ignore",
+      "raw.latency": "ignore",
+      "raw.latencyMax": "ignore",
+      "raw.latencyMsP50": "ignore",
+      "raw.latencyP90": "ignore",
+      "raw.seconds": "ignore",
+      "raw.steps": "ignore",
+      "raw.timeLimited": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore",
+      "confidence_interval_95": "ignore",
+      "metrics.se": "ignore",
+      "raw.ci": "ignore",
+      "raw.ciHalf": "ignore",
+      "raw.hallucCI": "ignore",
+      "raw.mediumCI": "ignore",
+      "raw.se": "ignore"
+    },
+    "dbpedia-14": {
+      "model.releaseDate": "ignore"
+    },
+    "dcase-2024-language-queried-audio-source-separation": {
+      "SubmissionCode": "ignore",
+      "Submission Information": "ignore",
+      "TechnicalReport": "ignore"
+    },
+    "dcase-foley-sound-synthesis-2023": {
+      "SubmissionCode": "ignore",
+      "Submission Information": "ignore",
+      "TechnicalReport": "ignore",
+      "# Categories Rated by Team Members": "ignore"
+    },
+    "debate-lech-mazur": {
+      "Own minus panel margin, 95% CI": "ignore"
+    },
+    "decision-index": {
+      "meta.params_estimated": "ignore",
+      "meta.params_from_name": "ignore"
+    },
+    "delulu": {
+      "Earliest Package Date": "ignore",
+      "Samples": "ignore"
+    },
+    "desed": {
+      "Submission code": "ignore",
+      "Submission name": "ignore",
+      "TechnicalReport": "ignore",
+      "Training time": "ignore"
+    },
+    "design2code": {
+      "std err": "ignore"
+    },
+    "deskcraft": {
+      "TheAgentCo. (Xu et al., 2026a)": "ignore",
+      "Open-source CUA foundation models": "ignore",
+      "Open-source generalist VLMs": "ignore",
+      "Author-designed workflows": "ignore",
+      "Official documentation": "ignore"
+    },
+    "dew-logiq": {
+      "date": "ignore"
+    },
+    "diabla": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "dictatorship-eval": {
+      "judge_usage.cost": "ignore",
+      "judge_usage.cost_details": "ignore",
+      "timestamp": "ignore",
+      "judge_usage.completion_tokens": "ignore",
+      "judge_usage.completion_tokens_details": "ignore",
+      "judge_usage.prompt_tokens": "ignore",
+      "judge_usage.prompt_tokens_details": "ignore",
+      "judge_usage.total_tokens": "ignore"
+    },
+    "displace-m-2026": {
+      "Open-source models": "ignore"
+    },
+    "doc2harness": {
+      "Step 5 Preview": "ignore",
+      "Doubao Seed 2.1 Pro": "ignore"
+    },
+    "dosimeter-german-election-day-2026": {
+      "Most cited official sources": "ignore"
+    },
+    "dpg-bench": {
+      "Tokens": "ignore"
+    },
+    "drop": {
+      "DATE": "ignore"
+    },
+    "dsi-bench": {
+      "Seed-1.6": "ignore",
+      "Seed-1.6-Vision": "ignore"
+    },
+    "dtap-direct-misuse": {
+      "categoryScores.doc-report-gen": "ignore",
+      "categoryScores.download-github-artifacts": "ignore"
+    },
+    "dtap-prompt-injection": {
+      "categoryScores.high-cost-billing": "ignore",
+      "categoryScores.high-cost-test": "ignore",
+      "categoryScores.price-exploitation": "ignore",
+      "categoryScores.doc-report-gen": "ignore",
+      "categoryScores.download-github-artifacts": "ignore"
+    },
+    "duetbench": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "last_updated": "ignore",
+      "raw.evaluated": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore"
+    },
+    "duplexledger": {
+      "Controller parameters": "ignore",
+      "Retriever parameters": "ignore",
+      "Trainable parameters": "ignore",
+      "Session duration, mean / median": "ignore",
+      "Session duration, minimum / maximum": "ignore"
+    },
+    "dycodeeval": {
+      "Token Mutation": "ignore"
+    },
+    "earth-bench-2": {
+      "Release date": "ignore"
+    },
+    "echo-prediction-leaderboard-unipat": {
+      "firstPredictionDate": "ignore"
+    },
+    "edis": {
+      "model.releaseDate": "ignore"
+    },
+    "eduart": {
+      "N Evaluated": "ignore"
+    },
+    "ego4d-goal-step": {
+      "submission__id": "ignore",
+      "submission__submission_metadata": "ignore"
+    },
+    "ego4d-state-change-object-detection": {
+      "submission__id": "ignore"
+    },
+    "egocentric-vqa-encord": {
+      "Release date": "ignore"
+    },
+    "egocross": {
+      "TokenInj-RAA": "ignore"
+    },
+    "egolife-with-memory": {
+      "Duration": "ignore"
+    },
+    "eki-eesti-mang": {
+      "release_date": "ignore"
+    },
+    "eki-malumang": {
+      "details.bib_bench": "ignore",
+      "details.idiom_bench": "ignore",
+      "details.keelenou": "ignore",
+      "details.propaganda_resistance": "ignore",
+      "details.term_bench": "ignore",
+      "details.trivia_et_2": "ignore",
+      "release_date": "ignore"
+    },
+    "eki-propaganda-resistance": {
+      "release_date": "ignore"
+    },
+    "eleusis-nph4rd": {
+      "Estimated cost per episode": "ignore",
+      "Cooperative capped minutes": "ignore",
+      "Independent capped minutes": "ignore",
+      "Mean minutes on the same 14 jointly solved tasks": "ignore",
+      "Minutes saved by cooperation, with 95% interval": "ignore"
+    },
+    "engiworld": {
+      "open": "ignore"
+    },
+    "envsimbench": {
+      "Samples": "ignore"
+    },
+    "epic-tent-o": {
+      "Runtime": "ignore",
+      "Step Antic.": "ignore",
+      "Step Recog.": "ignore"
+    },
+    "esci-shopping-queries-dataset": {
+      "Last Submission": "ignore",
+      "Submission Trend": "ignore"
+    },
+    "estonian-valence-corpus": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "eurosat": {
+      "model.releaseDate": "ignore"
+    },
+    "evf-bench": {
+      "StepVideo [55]": "ignore",
+      "Kling 2.1 Std [49]": "ignore"
+    },
+    "evoarena": {
+      "Step Δ": "ignore"
+    },
+    "evoarena-personamem-evo": {
+      "Step Δ": "ignore"
+    },
+    "evoarena-swe-chain-evo": {
+      "Step Δ": "ignore"
+    },
+    "evoarena-terminal-bench-evo": {
+      "Step Δ": "ignore"
+    },
+    "exams-v": {
+      "Multimodal samples": "ignore",
+      "Samples": "ignore"
+    },
+    "exp-bench": {
+      "Std T": "ignore"
+    },
+    "extract-bench-contextual": {
+      "Tokens": "ignore"
+    },
+    "faroese-semantic-textual-similarity": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "farsick": {
+      "model.releaseDate": "ignore"
+    },
+    "fashion-iq": {
+      "model.releaseDate": "ignore"
+    },
+    "fda-information-extraction-based": {
+      "*Tokens*": "ignore"
+    },
+    "fde-gym": {
+      "Evaluated on": "ignore"
+    },
+    "feabench": {
+      "Artifacts": "ignore"
+    },
+    "feateng": {
+      "max_delta_step": "ignore"
+    },
+    "feedbackqa": {
+      "model.releaseDate": "ignore"
+    },
+    "fgvc-aircraft": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "financial-phrasebank": {
+      "model.releaseDate": "ignore"
+    },
+    "fineval": {
+      "Agent Application": "ignore"
+    },
+    "fineval-6": {
+      "Financial Agent": "ignore"
+    },
+    "fingreat": {
+      "Total assets (USD)": "ignore",
+      "DeepSeek-moe-16b-chat": "ignore",
+      "SE": "ignore"
+    },
+    "finhopper": {
+      "Doubao-seed-1-8-251215": "ignore",
+      "Doubao-seed-1-8-251215-thinking": "ignore"
+    },
+    "finmaster": {
+      "Date↕": "ignore"
+    },
+    "fintoolbench": {
+      "Trace DMR": "ignore",
+      "Trace IMR": "ignore",
+      "Trace TMR": "ignore",
+      "Doubao-Seed-1.6": "ignore"
+    },
+    "fiqa-sa-bloomberggpt": {
+      "Dataset Training samples": "ignore",
+      "Test samples": "ignore",
+      "Total Training samples": "ignore"
+    },
+    "fire360": {
+      "Duration (s)": "ignore"
+    },
+    "firecrawl-legal-retrieval": {
+      "public.repeats": "ignore"
+    },
+    "flames-chinese": {
+      "time": "ignore"
+    },
+    "flashinfer-bench": {
+      "Author": "ignore"
+    },
+    "followir": {
+      "model.releaseDate": "ignore"
+    },
+    "food-101": {
+      "model.releaseDate": "ignore"
+    },
+    "formal-logic-deduction": {
+      "Steps": "ignore",
+      "warmup steps": "ignore"
+    },
+    "fraudbench-goal-lab": {
+      "Coefficient (log-odds)": "ignore",
+      "Log-odds ratio": "ignore",
+      "Random effect (log-odds)": "ignore",
+      "Total Samples": "ignore",
+      "Trial": "ignore"
+    },
+    "freihand": {
+      "ReleaseDate↕": "ignore"
+    },
+    "fretbench": {
+      "Attempts": "ignore"
+    },
+    "frontier-agentic-ml-ds-turing": {
+      "Date (2026)": "ignore"
+    },
+    "frontier-agentic-stem-turing": {
+      "Date (2026)": "ignore"
+    },
+    "frontiercs": {
+      "Submitted by": "ignore"
+    },
+    "frontiercs-1-1": {
+      "Avg steps": "ignore",
+      "Avg tokens": "ignore"
+    },
+    "fsdkaggle2018": {
+      "Submission code": "ignore",
+      "Tech. report": "ignore"
+    },
+    "fsdkaggle2019": {
+      "Report": "ignore",
+      "Submission code": "ignore",
+      "Tech. report": "ignore"
+    },
+    "futureomni": {
+      "Date": "ignore"
+    },
+    "gamehorizon": {
+      "Recording Duration and Share": "ignore"
+    },
+    "gbaeval": {
+      "trajectory": "ignore"
+    },
+    "gecko": {
+      "# Words evaluated": "ignore"
+    },
+    "gen-bench-dynamic-scheduling": {
+      "Parameters and Constants": "ignore",
+      "Processing Time Range": "ignore"
+    },
+    "genomeqa": {
+      "BCQ (33 samples)": "ignore",
+      "MCQ (57 samples)": "ignore"
+    },
+    "genspark-slides-benchmark": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "metrics.duration_per_task": "ignore",
+      "metrics.latencyMax": "ignore",
+      "metrics.latencyP90": "ignore",
+      "raw.latency": "ignore",
+      "raw.latencyMax": "ignore",
+      "raw.latencyMsP50": "ignore",
+      "raw.latencyP90": "ignore",
+      "raw.seconds": "ignore",
+      "raw.steps": "ignore",
+      "raw.timeLimited": "ignore",
+      "metrics.avgTokens": "ignore",
+      "metrics.cachedTokens": "ignore",
+      "metrics.inputTokens": "ignore",
+      "metrics.outputTokens": "ignore",
+      "metrics.reasoningTokens": "ignore",
+      "metrics.tokensPerTrial": "ignore",
+      "raw.avgTokens": "ignore",
+      "raw.cachedTokens": "ignore",
+      "raw.inputTokens": "ignore",
+      "raw.outputTokens": "ignore",
+      "raw.outputTokensM": "ignore",
+      "raw.reasoningTokens": "ignore",
+      "raw.tokens": "ignore",
+      "raw.tokensCached": "ignore",
+      "raw.tokensIn": "ignore",
+      "raw.tokensInText": "ignore",
+      "raw.tokensOut": "ignore",
+      "raw.tokensOutText": "ignore",
+      "raw.tokensUncached": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore",
+      "confidence_interval_95": "ignore",
+      "metrics.se": "ignore",
+      "raw.ci": "ignore",
+      "raw.ciHalf": "ignore",
+      "raw.hallucCI": "ignore",
+      "raw.mediumCI": "ignore",
+      "raw.se": "ignore"
+    },
+    "geobenchx-2": {
+      "Release date": "ignore"
+    },
+    "geode": {
+      "STD": "ignore"
+    },
+    "geoguesser-bench-berkeley": {
+      "steps.competition": "ignore",
+      "steps.navigation": "ignore",
+      "steps.place_naming": "ignore",
+      "steps.synthetic": "ignore"
+    },
+    "geosound": {
+      "time": "ignore"
+    },
+    "glianorex": {
+      "License": "ignore"
+    },
+    "globebench": {
+      "`metadata.source_license`": "ignore"
+    },
+    "google-landmarks-dataset-v2": {
+      "Team Name": "ignore"
+    },
+    "gqa": {
+      "Open": "ignore"
+    },
+    "gray-swan-ipi-arena-benchmark": {
+      "95% CI": "ignore"
+    },
+    "greek-legal-code": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "greekmmlu": {
+      "Avg. Tokens": "ignore"
+    },
+    "groundcocoa": {
+      "Price &lt; $5000": "ignore",
+      "Price &lt; $6000": "ignore",
+      "Test Samples": "ignore",
+      "Val. Samples": "ignore"
+    },
+    "groundui": {
+      "Logs": "ignore"
+    },
+    "gsr-bench": {
+      "StepAudio-R1": "ignore",
+      "StepAudio-R1 (Tian et al. 2025)": "ignore"
+    },
+    "gta-2": {
+      "Cost": "ignore",
+      "Open-source": "ignore",
+      "Total steps / sub-tasks": "ignore"
+    },
+    "gui-odyssey": {
+      "# Avg. Steps": "ignore",
+      "Token Count": "ignore"
+    },
+    "gutbrainie-2025": {
+      "Price": "ignore"
+    },
+    "gutbrainie-2026": {
+      "Price": "ignore"
+    },
+    "hack-verifiable-terminal-bench": {
+      "Cost": "ignore",
+      "Ended on time limit": "ignore"
+    },
+    "hallusionbench": {
+      "Updated on": "ignore"
+    },
+    "halumem": {
+      "Dialogue AdditionTime (min)": "ignore",
+      "Memory RetrievalTime (min)": "ignore",
+      "TotalTime (min)": "ignore"
+    },
+    "harnessdev": {
+      "Official switches": "ignore"
+    },
+    "healthbench-consensus": {
+      "turns": "ignore",
+      "std": "ignore"
+    },
+    "healthbench-meta-openai": {
+      "turns": "ignore",
+      "std": "ignore"
+    },
+    "hearingbench": {
+      "Time": "ignore"
+    },
+    "hedge-bench": {
+      "Price histories": "ignore",
+      "Earnings-call transcripts": "ignore",
+      "Date": "ignore",
+      "95% interval": "ignore",
+      "Paired SE": "ignore",
+      "Official source": "ignore"
+    },
+    "hellaswag": {
+      "release_time": "ignore",
+      "update_time": "ignore"
+    },
+    "hexmachina": {
+      "Artifacts": "ignore"
+    },
+    "hle-verified": {
+      "Revised: HLE-Verified Full": "ignore",
+      "Revised: HLE-Verified Subset": "ignore"
+    },
+    "honor-of-kings-bug-ai-root-cause-tencent": {
+      "createdAt": "ignore",
+      "createdUid": "ignore",
+      "updatedAt": "ignore",
+      "author": "ignore",
+      "displayPublishTime": "ignore"
+    },
+    "hrm8k-ksm": {
+      "Token Consum.": "ignore"
+    },
+    "humanclaw-bench": {
+      "Cost": "ignore"
+    },
+    "hx2dx-arena": {
+      "Parameters": "ignore"
+    },
+    "icelandic-wikiqa": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "iclayout-bench": {
+      "pending_runs": "ignore",
+      "runs": "ignore",
+      "scored_runs": "ignore",
+      "terminal_runs": "ignore",
+      "requirement.lower": "ignore",
+      "requirement.upper": "ignore"
+    },
+    "ifscale": {
+      "10 Instructions std.dev": "ignore",
+      "100 Instructions std.dev": "ignore",
+      "250 Instructions std.dev": "ignore",
+      "50 Instructions std.dev": "ignore",
+      "500 Instructions std.dev": "ignore"
+    },
+    "image-matching-challenge": {
+      "Processing date": "ignore"
+    },
+    "imagejevbench-0-3-0": {
+      "Clef (Cloudflare)Author not reported · Licence not reported": "ignore",
+      "Jev-OmniAuthor not reported · Licence not reported": "ignore",
+      "WIlfLin/JEV-Qwen3.8-Flash-Next-Linear-Runtime": "ignore",
+      "OpenJev 4B NLI v2 (official image-premise path)": "ignore"
+    },
+    "imo-gradingbench": {
+      "Query date": "ignore"
+    },
+    "imo-leanproofbench": {
+      "Query date": "ignore"
+    },
+    "in22-gen": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "inaturalist-sounds": {
+      "Parameters": "ignore"
+    },
+    "incident-arena": {
+      "costN": "ignore",
+      "updated": "ignore"
+    },
+    "incompebench": {
+      "Std": "ignore"
+    },
+    "indicipr-qa": {
+      "Test Samples": "ignore"
+    },
+    "indiclid-benchmark": {
+      "model.releaseDate": "ignore"
+    },
+    "ineqmath": {
+      "Official Model List": "ignore"
+    },
+    "infinitebench-en-mc": {
+      "Avg Input Tokens": "ignore",
+      "Avg Output Tokens": "ignore"
+    },
+    "infinitebench-en-qa": {
+      "Avg Input Tokens": "ignore",
+      "Avg Output Tokens": "ignore"
+    },
+    "infobench": {
+      "Cost($)": "ignore",
+      "Time(min)": "ignore"
+    },
+    "infographicvqa": {
+      "Avg. tokens": "ignore",
+      "tokens": "ignore"
+    },
+    "insar-snow-axis-spatial": {
+      "Release date": "ignore"
+    },
+    "insurance-agent-benchmark-cooper": {
+      "Submission": "ignore"
+    },
+    "insurebench-broader-comparison": {
+      "official_source": "ignore"
+    },
+    "into-the-unknown": {
+      "Mean Somers' D [95% CI]": "ignore"
+    },
+    "intphys2-timing": {
+      "PhysTrace": "ignore",
+      "Params": "ignore"
+    },
+    "inverse-ifeval": {
+      "StepFun-R1-V-Mini": "ignore",
+      "Doubao-Seed-1.6-thinking-0715": "ignore"
+    },
+    "investors-last-exam": {
+      "USD millions": "ignore"
+    },
+    "ipi-bench": {
+      "Agent did": "ignore"
+    },
+    "italian-administrative-casehold": {
+      "model.activeParamsB": "ignore",
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "iuk-1-5": {
+      "run_timestamp": "ignore"
+    },
+    "iuk-1-6": {
+      "T1 95% CI": "ignore",
+      "T3 95% CI": "ignore"
+    },
+    "ivo-micro1-contractbench": {
+      "Attorneys, mean (95% CI)": "ignore",
+      "Models, mean (95% CI)": "ignore"
+    },
+    "jamendolyrics-multilang": {
+      "Token": "ignore"
+    },
+    "jsick": {
+      "model.activeParamsB": "ignore",
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "judgmentbench": {
+      "95% CI for remaining share": "ignore",
+      "Drop [95% CI]": "ignore"
+    },
+    "k-bench-mental-health-safety": {
+      "blended_text_usd_per_1m_tokens": "ignore",
+      "cache_read_usd_per_1m_tokens": "ignore",
+      "completion_usd_per_1m_tokens": "ignore",
+      "pricing_raw_usd_per_token.completion": "ignore",
+      "pricing_raw_usd_per_token.input_cache_read": "ignore",
+      "pricing_raw_usd_per_token.prompt": "ignore",
+      "prompt_usd_per_1m_tokens": "ignore",
+      "details_endpoint_url": "ignore",
+      "date_kind": "ignore",
+      "release_date": "ignore",
+      "release_timestamp": "ignore",
+      "confidence": "ignore"
+    },
+    "k-viscuit": {
+      "# of samples": "ignore"
+    },
+    "k12-bench": {
+      "License": "ignore",
+      "Parameters": "ignore"
+    },
+    "k12-pebench": {
+      "Avg. Student Error Steps": "ignore",
+      "Avg. Student Input Steps": "ignore",
+      "Step-by-Step Score": "ignore",
+      "Step-wise Label": "ignore",
+      "Av g Reference Solution Tokens": "ignore",
+      "Avg. Output Tokens": "ignore",
+      "Avg. Problem Tokens": "ignore",
+      "Avg. Reference Solution Tokens": "ignore",
+      "Avg. Student Input Tokens": "ignore"
+    },
+    "k12vista": {
+      "Avg. Student Error Steps": "ignore",
+      "Avg. Student Input Steps": "ignore",
+      "Step-by-Step Score": "ignore",
+      "Step-wise Label": "ignore",
+      "Av g Reference Solution Tokens": "ignore",
+      "Avg. Output Tokens": "ignore",
+      "Avg. Problem Tokens": "ignore",
+      "Avg. Reference Solution Tokens": "ignore",
+      "Avg. Student Input Tokens": "ignore"
+    },
+    "kernelbench-com": {
+      "trace_url": "ignore",
+      "latency_ms": "ignore"
+    },
+    "kernelquest-turing": {
+      "Date (2026)": "ignore"
+    },
+    "kilometervision": {
+      "submission__id": "ignore",
+      "submission__submission_metadata": "ignore",
+      "submission__participant_team": "ignore"
+    },
+    "kinetics-400": {
+      "model.releaseDate": "ignore"
+    },
+    "kinetics-700-2020": {
+      "model.releaseDate": "ignore"
+    },
+    "kitab": {
+      "Relevant Information(Books from the author)": "ignore"
+    },
+    "kmmlu": {
+      "Gemini-Pro (Team et al., 2023)": "ignore"
+    },
+    "kmmlu-hard": {
+      "License Tests": "ignore",
+      "Gemini-Pro (Team et al., 2023)": "ignore"
+    },
+    "kmmlu-pro": {
+      "Gemma 3 12B IT (Team, 2025a)": "ignore",
+      "Gemma 3 27B IT (Team, 2025a)": "ignore",
+      "QwQ 32B (Team, 2025b)": "ignore",
+      "HyperCLOVAX-SEED-Text-Instruct-1.5B": "ignore"
+    },
+    "kmmlu-pro-2026": {
+      "Gemma 3 12B IT (Team, 2025a)": "ignore",
+      "Gemma 3 27B IT (Team, 2025a)": "ignore",
+      "QwQ 32B (Team, 2025b)": "ignore",
+      "HyperCLOVAX-SEED-Text-Instruct-1.5B": "ignore"
+    },
+    "kmmlu-redux": {
+      "Gemma 3 12B IT (Team, 2025a)": "ignore",
+      "Gemma 3 27B IT (Team, 2025a)": "ignore",
+      "QwQ 32B (Team, 2025b)": "ignore",
+      "HyperCLOVAX-SEED-Text-Instruct-1.5B": "ignore"
+    },
+    "ko-gdpval-upstage": {
+      "Per 1M tokens": "ignore"
+    },
+    "kocommongen-v2": {
+      "Stderr": "ignore"
+    },
+    "korean-sarcasm-dataset": {
+      "model.activeParamsB": "ignore",
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "kuralhub": {
+      "#Samples": "ignore"
+    },
+    "l-eval": {
+      "Tokens": "ignore"
+    },
+    "lahjoita-puhetta-asr": {
+      "# of tokens": "ignore"
+    },
+    "large-vocabulary-video-instance-segmentation": {
+      "Open": "ignore"
+    },
+    "leetcode-weekly-contest": {
+      "Tokens": "ignore"
+    },
+    "legal-consent-sweep": {
+      "Native harness": "ignore"
+    },
+    "legalreasonbench": {
+      "Overhead (mean end-to-end minus agent)": "ignore",
+      "Closed: runs using web": "ignore",
+      "Evaluation and compute, all accepted runs": "ignore",
+      "Matter runs with at least one violation": "ignore",
+      "Open: runs using web": "ignore",
+      "Prohibited assignment runs": "ignore",
+      "Runs on image matters": "ignore",
+      "Solver, all accepted runs": "ignore"
+    },
+    "legalrewardbench": {
+      "Samples": "ignore"
+    },
+    "levelbench-100-4-1": {
+      "license": "ignore",
+      "canary_watermark_token": "ignore"
+    },
+    "levelbench-100-5": {
+      "license": "ignore",
+      "criteria_evaluated": "ignore",
+      "tasks_evaluated": "ignore",
+      "worlds_evaluated": "ignore",
+      "canary_watermark_token": "ignore"
+    },
+    "libero-max": {
+      "95% CI": "ignore"
+    },
+    "libero-pro": {
+      "License": "ignore"
+    },
+    "libricount": {
+      "model.releaseDate": "ignore"
+    },
+    "lingoly": {
+      "Cost": "ignore",
+      "Tokens per Word": "ignore"
+    },
+    "lisanbench": {
+      "coverage.trials": "ignore"
+    },
+    "litsearch": {
+      "Author": "ignore"
+    },
+    "live-gaming-benchmark": {
+      "Token": "ignore",
+      "95% CI (%)": "ignore",
+      "Std (%)": "ignore"
+    },
+    "liveclawbench": {
+      "Deep Research &amp; Report": "ignore"
+    },
+    "livecodebench": {
+      "date": "ignore",
+      "release_date": "ignore"
+    },
+    "livecodebench-v5": {
+      "date": "ignore",
+      "release_date": "ignore"
+    },
+    "livecodebench-v6": {
+      "date": "ignore",
+      "release_date": "ignore"
+    },
+    "livesecbench": {
+      "publish_time": "ignore"
+    },
+    "llm-fantasy-football-arena-classic": {
+      "updated_at_ms": "ignore",
+      "away_team_id": "ignore",
+      "home_team_id": "ignore",
+      "public_team_id": "ignore",
+      "team_display_name": "ignore",
+      "team_id": "ignore",
+      "official_outcome": "ignore",
+      "official_result_version_id": "ignore",
+      "official_team_week_score_version_id": "ignore"
+    },
+    "llm-fantasy-football-arena-guillotine": {
+      "eliminated_team_id": "ignore",
+      "public_team_id": "ignore",
+      "team_display_name": "ignore",
+      "team_id": "ignore",
+      "official_team_week_score_version_id": "ignore"
+    },
+    "llm-game-benchmark": {
+      "DateTime": "ignore"
+    },
+    "llm-physics-plotting-benchmark": {
+      "Details": "ignore",
+      "Further details": "ignore"
+    },
+    "llmzsz": {
+      "Parameters (B)": "ignore",
+      "Date": "ignore"
+    },
+    "lmca": {
+      "release_date": "ignore"
+    },
+    "lmgame-bench": {
+      "details": "ignore"
+    },
+    "logiqa": {
+      "Ave./Max. # Tokens / Candidate Answer": "ignore",
+      "Ave./Max. # Tokens / Paragraph": "ignore",
+      "Ave./Max. # Tokens / Question": "ignore"
+    },
+    "long-context-navigator": {
+      "SFT rows (one per step)": "ignore",
+      "steps / min": "ignore",
+      "doc tokens": "ignore",
+      "attempts": "ignore",
+      "reasons (an attempt may carry several)": "ignore"
+    },
+    "longbench-chinese": {
+      "GovReport": "ignore"
+    },
+    "longbench-english": {
+      "GovReport": "ignore"
+    },
+    "lotte": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "ltzglue": {
+      "DATE": "ignore",
+      "Tokens (M)": "ignore"
+    },
+    "mac-bench": {
+      "Transcript": "ignore"
+    },
+    "maeb": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "mantis-eval": {
+      "# Tokens / I": "ignore"
+    },
+    "marsretrieval": {
+      "Seed": "ignore",
+      "Audit Accept, % (95% CI)": "ignore",
+      "Overall Accept (95% CI)": "ignore"
+    },
+    "masakhaner-2": {
+      "DATE": "ignore",
+      "#Tokens": "ignore",
+      "in Tokens": "ignore",
+      "Tokens": "ignore"
+    },
+    "mastermind-prime": {
+      "rubricInfo.weights": "ignore"
+    },
+    "matter-of-fact": {
+      "Cutoff Date": "ignore",
+      "RAG (SemanticScholar (No Date))": "ignore",
+      "# Samples": "ignore"
+    },
+    "meccano-action-recognition": {
+      "Duration (min)": "ignore"
+    },
+    "medalign": {
+      "95% CI": "ignore"
+    },
+    "medbench-opencompass-5": {
+      "Doubao-Seed-2.0-pro": "ignore"
+    },
+    "medcalc-bench-original": {
+      "Average Token Length": "ignore"
+    },
+    "medical-bench-turing": {
+      "group_verifier_details.answer.md": "ignore",
+      "stats.cached_tokens": "ignore",
+      "stats.input_tokens": "ignore",
+      "stats.output_tokens": "ignore",
+      "stats.total_tokens": "ignore",
+      "passed_trials": "ignore",
+      "total_trials": "ignore",
+      "trials": "ignore"
+    },
+    "medical-chronology-llm-benchmark": {
+      "Step": "ignore",
+      "Tokens": "ignore",
+      "95% CI": "ignore"
+    },
+    "medxpertqa": {
+      "Inference-Time Scaled Large Multimodal Models": "ignore",
+      "Inference-Time Scaled LLMs": "ignore"
+    },
+    "memeye": {
+      "95% CI": "ignore",
+      "CI-L": "ignore",
+      "CI-U": "ignore"
+    },
+    "memoryagentbench": {
+      "Est. Cost (USD)": "ignore"
+    },
+    "mer-unibench": {
+      "# Increased Parameters": "ignore",
+      "# Samples": "ignore"
+    },
+    "metr-time-horizon-2": {
+      "horizon_minutes_from": "ignore",
+      "horizon_minutes_high_80": "ignore",
+      "horizon_minutes_low_80": "ignore",
+      "horizon_minutes_to": "ignore",
+      "longest_task_minutes": "ignore"
+    },
+    "mideind-icelandic-case-government": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "mideind-icelandic-gec": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "mideind-icelandic-generative-quality": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "mideind-icelandic-idioms": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "mideind-icelandic-popular-culture": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "mideind-icelandic-terminology": {
+      "gen_kwargs.max_tokens": "ignore",
+      "output_tokens": "ignore"
+    },
+    "mieb": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "mieb-lite": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "mind2web-2": {
+      "info.details": "ignore"
+    },
+    "mineamongus": {
+      "NV-3 R&amp;E (Report &amp; Em. Call)": "ignore",
+      "TeamCraft (Long et al., 2024)": "ignore",
+      "(sem, meet-rs)": "ignore",
+      "(sem, no-rs)": "ignore"
+    },
+    "minteval": {
+      "Tokens": "ignore",
+      "Tokens (avg)": "ignore",
+      "Tokens (max)": "ignore"
+    },
+    "mirex-2026-music-performance-difficulty-prediction": {
+      "Songs evaluated": "ignore"
+    },
+    "mk-bench-dynamic-scheduling": {
+      "Parameters and Constants": "ignore",
+      "Processing Time Range": "ignore"
+    },
+    "mm-browsecomp": {
+      "Avg Cost Time (min)": "ignore",
+      "Open-Source Agents": "ignore",
+      "#Samples": "ignore"
+    },
+    "mm-fineval": {
+      "Transcript (words)": "ignore"
+    },
+    "mm-niah": {
+      "#Samples": "ignore"
+    },
+    "mmlongbench-doc": {
+      "release_date": "ignore",
+      "moe": "ignore"
+    },
+    "mmlu-prox": {
+      "Agent-based Translation (Ours)": "ignore"
+    },
+    "moi-bench": {
+      "Equal weights": "ignore",
+      "Params.": "ignore",
+      "LongCat-Image Team et al. (2025)": "ignore",
+      "LongCat-Image-Edit Team et al. (2025)": "ignore",
+      "Steps": "ignore",
+      "Time/step": "ignore",
+      "Seedream 5.0 Pro ByteDance Seed (2026)": "ignore"
+    },
+    "moltron-llm-showdown-2": {
+      "Gen time (working)": "ignore"
+    },
+    "monthly-swebench": {
+      "Updated": "ignore"
+    },
+    "mpie-bench": {
+      "Steps": "ignore",
+      "CI": "ignore"
+    },
+    "msd-i-multimodal-genre-classification": {
+      "Params": "ignore",
+      "Time": "ignore"
+    },
+    "mt-aime2024": {
+      "**Samples per Language**": "ignore"
+    },
+    "mteb": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "multieurlex": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "multihop-rag": {
+      "Avg. Tokens": "ignore"
+    },
+    "music-21-instrument-separation": {
+      "Ours, RGB+Trajectory": "ignore"
+    },
+    "musr": {
+      "row.Official Providers": "ignore"
+    },
+    "mvdrivebench": {
+      "Open Source MoE Models": "ignore"
+    },
+    "naijasenti": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "naturalproofs": {
+      "Tokens": "ignore"
+    },
+    "ndm-bench": {
+      "95% CI": "ignore"
+    },
+    "nfcorpus": {
+      "model.activeParamsB": "ignore",
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "nifty-market-movement": {
+      "License": "ignore",
+      "End Date": "ignore",
+      "Start Date": "ignore"
+    },
+    "nimble-web-context": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "metrics.avgTokens": "ignore",
+      "metrics.cachedTokens": "ignore",
+      "metrics.inputTokens": "ignore",
+      "metrics.outputTokens": "ignore",
+      "metrics.reasoningTokens": "ignore",
+      "metrics.tokensPerTrial": "ignore",
+      "raw.avgTokens": "ignore",
+      "raw.cachedTokens": "ignore",
+      "raw.inputTokens": "ignore",
+      "raw.outputTokens": "ignore",
+      "raw.outputTokensM": "ignore",
+      "raw.reasoningTokens": "ignore",
+      "raw.tokens": "ignore",
+      "raw.tokensCached": "ignore",
+      "raw.tokensIn": "ignore",
+      "raw.tokensInText": "ignore",
+      "raw.tokensOut": "ignore",
+      "raw.tokensOutText": "ignore",
+      "raw.tokensUncached": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore"
+    },
+    "nlebench": {
+      "#avg_turns/dialogue": "ignore",
+      "#Steps/s": "ignore",
+      "Time (h)": "ignore",
+      "#avg_tokens": "ignore",
+      "#tokens": "ignore",
+      "#total_tokens": "ignore",
+      "#samples": "ignore",
+      "#Samples/s": "ignore",
+      "Size (#Samples)": "ignore"
+    },
+    "nocaps": {
+      "submission__id": "ignore",
+      "submission__method_name": "ignore"
+    },
+    "nocasa-2025": {
+      "Team 1": "ignore",
+      "Team 2": "ignore"
+    },
+    "norregel": {
+      "Samples": "ignore"
+    },
+    "norwegian-courts-bitext-mining": {
+      "model.releaseDate": "ignore"
+    },
+    "npcbench": {
+      "Difference [95% CI]": "ignore"
+    },
+    "nusax": {
+      "seed": "ignore"
+    },
+    "nwpu-resisc45": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "nyu-ctf-bench": {
+      "logs": "ignore"
+    },
+    "o11y-bench": {
+      "Logs": "ignore",
+      "Traces": "ignore"
+    },
+    "ocbench": {
+      "Gradient steps": "ignore"
+    },
+    "olmocr-bench": {
+      "$/1M Input tokens": "ignore",
+      "$/1M Output tokens": "ignore"
+    },
+    "omni-interactscope-explicit-request": {
+      "Open-source models": "ignore"
+    },
+    "omni-interactscope-proactive": {
+      "Open-source models": "ignore"
+    },
+    "omnidocbench-1-5": {
+      "ResearchReport": "ignore",
+      "Official Website": "ignore"
+    },
+    "omnidocbench-1-6": {
+      "ResearchReport": "ignore",
+      "Official Website": "ignore"
+    },
+    "omnigaia": {
+      "date": "ignore"
+    },
+    "omnilingua-audiomc": {
+      "Reference Transcript": "ignore",
+      "Reference Transcript / speech conditions": "ignore",
+      "User turns": "ignore",
+      "Doubao Seed Lite": "ignore"
+    },
+    "omniphys": {
+      "Open-source MLLMs": "ignore",
+      "Doubao-Seed-1.6": "ignore"
+    },
+    "omniscore-bench": {
+      "95% CI": "ignore",
+      "95% interval": "ignore"
+    },
+    "omnispatial": {
+      "License": "ignore"
+    },
+    "onemillion-bench": {
+      "createdAt": "ignore",
+      "model.createdAt": "ignore",
+      "model.releaseDate": "ignore",
+      "model.updatedAt": "ignore",
+      "updatedAt": "ignore"
+    },
+    "open-japanese-llm-leaderboard": {
+      "row.add_special_tokens": "ignore"
+    },
+    "open-llm-leaderboard-v2": {
+      "row.CO₂ cost (kg)": "ignore",
+      "row.Official Providers": "ignore"
+    },
+    "open-tabletop-gm-narrative-probe-2": {
+      "~20-turn session": "ignore"
+    },
+    "openrsi-index-marin-scaling-ladder": {
+      "Params": "ignore",
+      "Tokens": "ignore"
+    },
+    "openrsi-index-sglang-omni-tts-runtime": {
+      "submission_index": "ignore",
+      "diagnostic_asr.evaluated": "ignore",
+      "measured_throughput_ratio_not_reward": "ignore",
+      "metrics.audio_throughput_s_per_s": "ignore",
+      "metrics.latency_mean_s": "ignore",
+      "metrics.latency_median_s": "ignore",
+      "metrics.latency_p95_s": "ignore",
+      "metrics.latency_p99_s": "ignore",
+      "metrics.throughput_qps": "ignore",
+      "tts.throughput_qps": "ignore",
+      "seed": "ignore"
+    },
+    "openstudio-mcp-1-2-1": {
+      "Avg Cost": "ignore",
+      "Cost": "ignore",
+      "Date": "ignore"
+    },
+    "optimbench-dispatch": {
+      "agent": "ignore",
+      "per-seed spread": "ignore"
+    },
+    "os-kairos": {
+      "Actual Steps": "ignore",
+      "Human Steps": "ignore"
+    },
+    "osworld-g": {
+      "Agent Model": "ignore"
+    },
+    "osworld-mcp": {
+      "Details": "ignore"
+    },
+    "panda-cvl": {
+      "Qwen3.5-397B-A17BQwen Team (2026a)": "ignore",
+      "Qwen3.6-35B-A3BQwen Team (2026b)": "ignore",
+      "Step-3.7-FlashStepFun (2026a)": "ignore",
+      "Step-5-PreviewStepFun (2026b)": "ignore",
+      "Doubao-Seed-2.1-proByteDance Seed (2026)": "ignore"
+    },
+    "paperbench": {
+      "**HF Token Needed?**": "ignore"
+    },
+    "paperbench-code-dev": {
+      "**HF Token Needed?**": "ignore"
+    },
+    "partiprompts": {
+      "createdAt": "ignore",
+      "author": "ignore"
+    },
+    "past-imo-formal-bytedance": {
+      "Seed Prover": "ignore"
+    },
+    "patchcamelyon": {
+      "model.releaseDate": "ignore"
+    },
+    "pcbbench-protoflow": {
+      "costPerSolvedUsd": "ignore",
+      "costPerTaskUsd": "ignore",
+      "costUsd": "ignore",
+      "meanWallSeconds": "ignore"
+    },
+    "pclue": {
+      "param_desc": "ignore"
+    },
+    "pdagent-bench": {
+      "scores.report": "ignore"
+    },
+    "pdeagent-bench": {
+      "date": "ignore"
+    },
+    "periapical-lesions-bench": {
+      "Share of submitted lesions graded 4": "ignore"
+    },
+    "pestclef-2026": {
+      "submissionId": "ignore"
+    },
+    "phail-droid-everyday": {
+      "Episode details": "ignore"
+    },
+    "phyrubric-bench": {
+      "Trajectory &amp; momentum": "ignore",
+      "Open-source": "ignore",
+      "Open-Source Models": "ignore",
+      "Steps": "ignore"
+    },
+    "physics-iq": {
+      "Physics-IQ verified": "ignore"
+    },
+    "physics-yale": {
+      "Reasoning Steps": "ignore"
+    },
+    "physvista": {
+      "Kimi K2.5 Team et al. (2026)": "ignore",
+      "Doubao Seed 2.0 Pro [15]": "ignore",
+      "Doubao Seed 2.0 Pro ByteDance (2026)": "ignore"
+    },
+    "phyx": {
+      "info.date": "ignore"
+    },
+    "pianobench": {
+      "Official Instruct": "ignore",
+      "Official Instruct + COT": "ignore"
+    },
+    "pii-masking": {
+      "rubricInfo.weights": "ignore"
+    },
+    "ping-or-peek-snorkel": {
+      "row.trace": "ignore"
+    },
+    "pixmo-count": {
+      "Steps": "ignore",
+      "steps (ViT / con. / LLM)": "ignore",
+      "time": "ignore",
+      "tokens": "ignore",
+      "95% CI": "ignore"
+    },
+    "plotpoints-round-1": {
+      "costPer1m": "ignore",
+      "ranks.cost": "ignore"
+    },
+    "plotpoints-round-4": {
+      "reduced_seed_set": "ignore"
+    },
+    "pokebench-rvb": {
+      "failed_attempts.completion": "ignore",
+      "failed_attempts.count": "ignore",
+      "failed_attempts.prompt": "ignore",
+      "failed_attempts.seconds": "ignore"
+    },
+    "pokebench-tab": {
+      "failed_attempts.completion": "ignore",
+      "failed_attempts.count": "ignore",
+      "failed_attempts.prompt": "ignore",
+      "failed_attempts.seconds": "ignore"
+    },
+    "pokemon-vgc-bench-ricotoma": {
+      "createdAt": "ignore"
+    },
+    "poker-arena": {
+      "COST_CIRCUIT_BREAKER_USD": "ignore"
+    },
+    "posterbench": {
+      "Date": "ignore"
+    },
+    "powerbench": {
+      "Report": "ignore",
+      "Doubao-Seed-Evolving": "ignore"
+    },
+    "pre-flight": {
+      "version_release_date": "ignore"
+    },
+    "prediction-arena-arcada": {
+      "created_at": "ignore"
+    },
+    "preference-asr": {
+      "Std.": "ignore"
+    },
+    "prmbench": {
+      "Avg. Error Steps": "ignore",
+      "Avg. First Error Step": "ignore",
+      "Avg. Step Num": "ignore",
+      "Avg. Steps": "ignore"
+    },
+    "processbench": {
+      "Open-source language models, prompted as Critic Models": "ignore",
+      "Open-source Process Reward Models (PRMs)": "ignore",
+      "# Steps": "ignore",
+      "% ≥\\geq 10 steps": "ignore",
+      "% ≥\\geq 15 steps": "ignore",
+      "% ≥\\geq 5 steps": "ignore"
+    },
+    "programdistill": {
+      "Sub-agent": "ignore"
+    },
+    "prompt-to-bench-16": {
+      "Cost": "ignore",
+      "Material cost (US$)": "ignore",
+      "Failed file changed after the report": "ignore",
+      "Pass, ≤3 tries (95% CI)": "ignore"
+    },
+    "prompt-to-bench-ho-16": {
+      "Cost": "ignore",
+      "Material cost (US$)": "ignore",
+      "Failed file changed after the report": "ignore",
+      "Median minutes a task": "ignore",
+      "Print time": "ignore",
+      "Thinking off, 2,048 tokens: passed per sample": "ignore",
+      "Thinking on, 16,384 tokens: passed per sample": "ignore",
+      "Tokens/s": "ignore",
+      "Pass, ≤3 tries (95% CI)": "ignore"
+    },
+    "proteinlmbench": {
+      "Tokens statistic of the fine-tuning dataset": "ignore",
+      "Tokens statistic of the self-supervised dataset": "ignore"
+    },
+    "psychosmiley-erp-leaderboard": {
+      "raw_log": "ignore"
+    },
+    "pulsebench-tab": {
+      "Samples": "ignore"
+    },
+    "putnam-axiom": {
+      "-Coherence Step vs Step": "ignore",
+      "-Grammar Step": "ignore",
+      "-Grammar Step Max": "ignore",
+      "-Informativeness Step": "ignore",
+      "-Missing Step": "ignore",
+      "-Perplexity Step": "ignore",
+      "-Perplexity Step Max": "ignore",
+      "-Repetition Step": "ignore",
+      "-Semantic Coverage Step": "ignore",
+      "Average ± 95% CI": "ignore"
+    },
+    "pwnbench-v0-1": {
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.taskAgent": "ignore",
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.weights": "ignore",
+      "metrics.duration_per_task": "ignore",
+      "metrics.latencyMax": "ignore",
+      "metrics.latencyP90": "ignore",
+      "raw.latency": "ignore",
+      "raw.latencyMax": "ignore",
+      "raw.latencyMsP50": "ignore",
+      "raw.latencyP90": "ignore",
+      "raw.seconds": "ignore",
+      "raw.steps": "ignore",
+      "raw.timeLimited": "ignore",
+      "metrics.avgTokens": "ignore",
+      "metrics.cachedTokens": "ignore",
+      "metrics.inputTokens": "ignore",
+      "metrics.outputTokens": "ignore",
+      "metrics.reasoningTokens": "ignore",
+      "metrics.tokensPerTrial": "ignore",
+      "raw.avgTokens": "ignore",
+      "raw.cachedTokens": "ignore",
+      "raw.inputTokens": "ignore",
+      "raw.outputTokens": "ignore",
+      "raw.outputTokensM": "ignore",
+      "raw.reasoningTokens": "ignore",
+      "raw.tokens": "ignore",
+      "raw.tokensCached": "ignore",
+      "raw.tokensIn": "ignore",
+      "raw.tokensInText": "ignore",
+      "raw.tokensOut": "ignore",
+      "raw.tokensOutText": "ignore",
+      "raw.tokensUncached": "ignore",
+      "confidence_interval_95": "ignore",
+      "metrics.se": "ignore",
+      "raw.ci": "ignore",
+      "raw.ciHalf": "ignore",
+      "raw.hallucCI": "ignore",
+      "raw.mediumCI": "ignore",
+      "raw.se": "ignore"
+    },
+    "qampari": {
+      "# steps": "ignore"
+    },
+    "qasper": {
+      "[.4pt/1pt] Human (lower bound)": "ignore"
+    },
+    "qmsum": {
+      "# Turns": "ignore"
+    },
+    "quartets-mirex-2026": {
+      "Number of parameters": "ignore",
+      "Inference real-time factor": "ignore"
+    },
+    "rcm-bench-1": {
+      "cost.currency": "ignore"
+    },
+    "realcompanion": {
+      "trace": "ignore",
+      "1,169 sampled turns": "ignore",
+      "11,369 unsampled turns": "ignore",
+      "Required turn in the top five": "ignore",
+      "Required turn in top five": "ignore",
+      "Misapplication, verified locus none": "ignore"
+    },
+    "reasonseg": {
+      "# data samples": "ignore"
+    },
+    "recode-h": {
+      "Avg. API Cost($)": "ignore",
+      "Avg. Input Tokens": "ignore",
+      "Avg. Output Tokens": "ignore"
+    },
+    "redlinebench": {
+      "Turn 1": "ignore",
+      "Turn 2": "ignore",
+      "Turn 3": "ignore",
+      "Turn 4": "ignore"
+    },
+    "redstonebench": {
+      "log": "ignore"
+    },
+    "refav": {
+      "submission__id": "ignore"
+    },
+    "refspatial-expand-bench": {
+      "Samples": "ignore"
+    },
+    "refspatial-expand-bench-location": {
+      "Step": "ignore",
+      "Samples": "ignore"
+    },
+    "refspatial-expand-bench-placement": {
+      "Step": "ignore",
+      "Samples": "ignore"
+    },
+    "relate-audio-text": {
+      "Audio duration [s]": "ignore"
+    },
+    "research-decision-benchmark": {
+      "95% CI": "ignore"
+    },
+    "research-plan-generation-meta": {
+      "COST AND EFFORT EFFICIENT (Agr/Kappa)": "ignore",
+      "Stopping Step": "ignore",
+      "Total Samples": "ignore"
+    },
+    "retailbench": {
+      "finalFromTrace": "ignore",
+      "date": "ignore",
+      "allRunsFigure": "ignore"
+    },
+    "rexbench": {
+      "Submission": "ignore"
+    },
+    "riskrubric": {
+      "pillar_weights.excessive_agency": "ignore",
+      "pillar_weights.privacy": "ignore",
+      "pillar_weights.reliability": "ignore",
+      "pillar_weights.safety_societal": "ignore",
+      "pillar_weights.security": "ignore",
+      "pillar_weights.transparency": "ignore"
+    },
+    "rivabench": {
+      "Open-source baselines": "ignore",
+      "Gemini-1.5-pro (Team et al., 2024)": "ignore",
+      "GPT-4o (OpenAI Team, 2024)": "ignore",
+      "Duration (s)": "ignore"
+    },
+    "rlbench": {
+      "accessDate": "ignore"
+    },
+    "rmu-echr": {
+      "\\topruleTokens": "ignore",
+      "B-Margin of Appreciation": "ignore",
+      "I-Margin of Appreciation": "ignore"
+    },
+    "rng-bench": {
+      "Default environment seeds": "ignore"
+    },
+    "robochallenge-table30-v2": {
+      "last_running_end_time": "ignore",
+      "last_submit_time": "ignore",
+      "running_end_time": "ignore",
+      "submit_time": "ignore"
+    },
+    "robocoliseum": {
+      "time_cost": "ignore"
+    },
+    "robocurve-simple-tasks-llm-control-of-yam-arms": {
+      "Transcript": "ignore"
+    },
+    "robodojo-rc-tier-1": {
+      "Log": "ignore"
+    },
+    "robodx": {
+      "cost": "ignore"
+    },
+    "robomemarena": {
+      "model_size": "ignore",
+      "run_date": "ignore"
+    },
+    "roboteam": {
+      "RoboTeam (ours)": "ignore",
+      "Runs with entries": "ignore"
+    },
+    "role-play-bench-minimax": {
+      "Seeds": "ignore"
+    },
+    "rsi-arena": {
+      "Weights": "ignore"
+    },
+    "rsi-control-arena": {
+      "Transcript": "ignore",
+      "Hidden reasoning step": "ignore"
+    },
+    "rsi-inference-bench": {
+      "Report": "ignore",
+      "Per attempt (median)": "ignore"
+    },
+    "rsibench-data": {
+      "Official": "ignore",
+      "SWE-bench Verified": "ignore"
+    },
+    "rteb": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "rvg-bench": {
+      "TRACE": "ignore",
+      "Locally evaluated omni models": "ignore",
+      "Locally evaluated VL models": "ignore",
+      "Time-R1-7B": "ignore",
+      "TimeLens-7B": "ignore",
+      "TimeLens-8B": "ignore",
+      "TimeSuite": "ignore",
+      "Human reference on the validated audit subset": "ignore"
+    },
+    "s-ember": {
+      "Location Trace": "ignore",
+      "Time / duration": "ignore",
+      "Time Duration": "ignore",
+      "Interval Prediction": "ignore"
+    },
+    "sac-bench": {
+      "Step-Audio-2-mini": "ignore"
+    },
+    "scadbench": {
+      "createdAt": "ignore",
+      "confidence": "ignore"
+    },
+    "scala": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "scenefun3d": {
+      "submission__id": "ignore",
+      "submission__method_name": "ignore"
+    },
+    "scholarqabench": {
+      "Inf. time (min)": "ignore"
+    },
+    "sciarena": {
+      "Mistral-Small-3.1 Mistral AI Team (2025)": "ignore",
+      "Qwen3-235B-A22B Qwen Team (2025a)": "ignore",
+      "Qwen3-235B-A22B-2507 Qwen Team (2025a)": "ignore",
+      "Qwen3-235B-A22B-Thinking-2507 Qwen Team (2025a)": "ignore",
+      "Qwen3-30B-A3B-Instruct-2507 Qwen Team (2025a)": "ignore",
+      "Qwen3-32B Qwen Team (2025a)": "ignore",
+      "QwQ-32B Qwen Team (2025b)": "ignore"
+    },
+    "scivid": {
+      "% of params": "ignore",
+      "Steps": "ignore",
+      "# Samples test": "ignore",
+      "# Samples train": "ignore",
+      "# Samples val": "ignore"
+    },
+    "screenasr-bench": {
+      "StepAudio-2.5-Chat": "ignore",
+      "Doubao-Seed-2.0-lite": "ignore",
+      "Seed-ASR-2.0": "ignore"
+    },
+    "screenspot-v2": {
+      "Open": "ignore"
+    },
+    "sct-bench": {
+      "4o_score_sem": "ignore",
+      "claude_score_sem": "ignore",
+      "gemini_score_sem": "ignore",
+      "o1_score_sem": "ignore",
+      "resident_score_sem": "ignore",
+      "Staff_score_sem": "ignore",
+      "student_score_sem": "ignore"
+    },
+    "sdr-bench": {
+      "Report supplied": "ignore"
+    },
+    "sec-bench": {
+      "Artifacts": "ignore"
+    },
+    "sec-bench-pro": {
+      "details.slug": "ignore",
+      "details.source_run": "ignore"
+    },
+    "sec-bench-pro-260617": {
+      "details.slug": "ignore",
+      "details.source_run": "ignore"
+    },
+    "semeval-2022-task-8-multilingual-news-article-similarity": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "semeval-2024-task-1-semantic-textual-relatedness": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "seniortalk": {
+      "Duration (hrs)": "ignore"
+    },
+    "settlerbench-season-one": {
+      "Turns": "ignore"
+    },
+    "sheetbench-hud": {
+      "raw.runDetails": "ignore",
+      "raw.submissionId": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.weights": "ignore",
+      "metrics.attemptsExpected": "ignore",
+      "metrics.attemptsScored": "ignore",
+      "metrics.duration_per_trial": "ignore",
+      "metrics.fullRuns": "ignore",
+      "metrics.runsInMean": "ignore",
+      "metrics.stepsPerTrial": "ignore",
+      "raw.attemptsExpected": "ignore",
+      "raw.attemptsScored": "ignore",
+      "raw.flaggedTrials": "ignore",
+      "raw.fullRuns": "ignore",
+      "raw.fullRunsText": "ignore",
+      "raw.hallucRuns": "ignore",
+      "raw.mediumRuns": "ignore",
+      "raw.runs": "ignore",
+      "raw.runsInMean": "ignore",
+      "raw.trials": "ignore"
+    },
+    "short-form-bench": {
+      "Seed 12": "ignore",
+      "Seed 13": "ignore",
+      "Seed 14": "ignore"
+    },
+    "simready-text-to-cad": {
+      "paired 95% CI": "ignore"
+    },
+    "siqa": {
+      "std": "ignore"
+    },
+    "skillsbench": {
+      "recomputed_date": "ignore"
+    },
+    "smartplay": {
+      "Trials": "ignore"
+    },
+    "so-arena": {
+      "order_acc.runs": "ignore",
+      "gap_glide_ci": "ignore",
+      "gap_startlux_ci": "ignore"
+    },
+    "songbench": {
+      "Open-source Models": "ignore",
+      "ACE-Step v1.5": "ignore"
+    },
+    "songeval": {
+      "Utt. Average Duration (min)": "ignore"
+    },
+    "space-10": {
+      "Open Source 2D MLLMs": "ignore",
+      "Gemini-2.0 Team et al. (2023)": "ignore",
+      "Gemini-2.0-Flash-Thinking Team et al. (2023)": "ignore",
+      "Gemma3-12B Team et al. (2025a)": "ignore",
+      "Gemma3-27B Team et al. (2025a)": "ignore",
+      "GLM-4.5V Team et al. (2025b)": "ignore"
+    },
+    "spatialbench-latchbio-original": {
+      "Model / Harness": "ignore",
+      "Params": "ignore"
+    },
+    "spatialeval-maze-nav": {
+      "CogAgent": "ignore",
+      "Avg Acc (step-by-step explanation)": "ignore"
+    },
+    "spatialeval-spatial-map": {
+      "CogAgent": "ignore",
+      "Avg Acc (step-by-step explanation)": "ignore"
+    },
+    "speechio-asr-leaderboard": {
+      "Date 时间": "ignore",
+      "作者 <br> AUTHOR": "ignore",
+      "厂商/作者 <br> PROVIDER/AUTHOR": "ignore",
+      "有效时长 <br> DURATION (HOURS)": "ignore"
+    },
+    "speko-llm-benchmark-v3": {
+      "cells.turns": "ignore",
+      "iToolTurns": "ignore",
+      "iTurns": "ignore",
+      "latencyKey": "ignore",
+      "nToolTurns": "ignore",
+      "nTurns": "ignore"
+    },
+    "speko-s2s-six-scenarios": {
+      "cells.ttft": "ignore",
+      "cells.turns": "ignore",
+      "iToolTurns": "ignore",
+      "iTurns": "ignore",
+      "latencyKey": "ignore",
+      "nToolTurns": "ignore",
+      "nTurns": "ignore"
+    },
+    "spider-2": {
+      "Cost": "ignore"
+    },
+    "spider2-aifunc": {
+      "Framework": "ignore",
+      "Spider-Agent": "ignore",
+      "OPEN-SOURCE": "ignore",
+      "OPEN-SOURCE MODELS": "ignore"
+    },
+    "spider2-v": {
+      "Details": "ignore"
+    },
+    "spm-bench": {
+      "Time": "ignore",
+      "doubao-seed-2-0-pro": "ignore",
+      "Std F1": "ignore"
+    },
+    "stationerybench-robocurve": {
+      "Transcript": "ignore",
+      "Output tokens": "ignore"
+    },
+    "storebench": {
+      "What the agent does": "ignore"
+    },
+    "studentbench": {
+      "worked_example_after_attempt": "ignore",
+      "worked_example_after_attempt_count": "ignore"
+    },
+    "suicide-memory-bench": {
+      "single-chat (multi-turn)": "ignore"
+    },
+    "sumi-ja-pii-corpus": {
+      "Birth date": "ignore"
+    },
+    "summhay": {
+      "Cost ($)": "ignore"
+    },
+    "superb": {
+      "paramDesc": "ignore",
+      "paramShared": "ignore",
+      "aoeTimeUpload": "ignore",
+      "SE_pesq_public": "ignore",
+      "SE_stoi_public": "ignore"
+    },
+    "svg-bench-starvector": {
+      "Token Length": "ignore"
+    },
+    "swe-cowork": {
+      "Seed 2.1 Pro": "ignore",
+      "Seed Evolving": "ignore"
+    },
+    "swe-interact": {
+      "Our trajectory (Baseline Neutral user)": "ignore",
+      "Our trajectory (Expert Nitpicker user)": "ignore",
+      "Trial: deepswe_kcp-go-multiplexed-kcp-s": "ignore"
+    },
+    "swe-lancer": {
+      "Price Range": "ignore",
+      "Cutoff Date": "ignore",
+      "Resolution Time": "ignore"
+    },
+    "swe-lancer-manager": {
+      "Price Range": "ignore",
+      "Cutoff Date": "ignore",
+      "Resolution Time": "ignore"
+    },
+    "swe-smith": {
+      "Number of Runs": "ignore"
+    },
+    "tatoeba-sentence-retrieval": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "taxabench-8k": {
+      "#samples": "ignore"
+    },
+    "tcsexam": {
+      "open": "ignore"
+    },
+    "tcsexam-lite": {
+      "Steps": "ignore",
+      "Time (h)": "ignore",
+      "Full sets / attempts": "ignore",
+      "Successful attempts": "ignore",
+      "Certified (%)": "ignore"
+    },
+    "te-ca": {
+      "Tokens in answers": "ignore",
+      "Tokens in answers/answers": "ignore",
+      "Tokens in answers/tokens in context": "ignore",
+      "Tokens in context": "ignore",
+      "Tokens in questions": "ignore",
+      "Tokens in questions/questions": "ignore",
+      "Tokens in questions/tokens in context": "ignore"
+    },
+    "terminal-bench-2-0": {
+      "n_trials": "ignore"
+    },
+    "terminal-bench-3-0": {
+      "metrics.display_total_tokens": "ignore"
+    },
+    "terminal-bench-data-turing": {
+      "Date (2026)": "ignore"
+    },
+    "terminal-bench-science": {
+      "created_at": "ignore",
+      "metadata.model_release_date": "ignore",
+      "updated_at": "ignore"
+    },
+    "testprism": {
+      "Attempt ceiling": "ignore",
+      "Evaluation attempts": "ignore",
+      "95% CI (pp)": "ignore",
+      "99% CI (pp)": "ignore",
+      "Verified files": "ignore"
+    },
+    "the-aggregate-guesswork": {
+      "release_date": "ignore"
+    },
+    "the-aggregate-lichess-pairwise-strength-25-pairs": {
+      "confidence_valid": "ignore"
+    },
+    "the-met-dataset": {
+      "R50SemArt (author) [13]": "ignore"
+    },
+    "thinkgeo": {
+      "Release date": "ignore"
+    },
+    "thinkingbox-bench": {
+      "Artifact": "ignore"
+    },
+    "thrive-holdings-helpdesk-ticket-resolution-benchmark": {
+      "Tokens per return": "ignore"
+    },
+    "tomato": {
+      "Duration (Seconds, avg/max)": "ignore"
+    },
+    "toolathlon-verified": {
+      "# Turns": "ignore"
+    },
+    "toolbench": {
+      "Reasoning Traces": "ignore"
+    },
+    "topiocqa": {
+      "# Turns": "ignore",
+      "# Turns / conversation": "ignore",
+      "Conversation turn": "ignore",
+      "Multi–turn": "ignore",
+      "Turn type": "ignore",
+      "# Tokens / Answer": "ignore",
+      "# Tokens / Question": "ignore"
+    },
+    "tracespatial-bench": {
+      "Traces": "ignore",
+      "Collection Time (h)": "ignore",
+      "Step Count": "ignore"
+    },
+    "trafficimag": {
+      "95% CI": "ignore"
+    },
+    "triworldbench": {
+      "metrics.trajectory_accuracy": "ignore",
+      "submission.datasetSplit": "ignore",
+      "submission.id": "ignore",
+      "submission.status": "ignore",
+      "submission.versionLabel": "ignore"
+    },
+    "tv-ad": {
+      "std.": "ignore"
+    },
+    "ucf101": {
+      "model.releaseDate": "ignore",
+      "model.maxTokens": "ignore"
+    },
+    "ugmathbench": {
+      "details": "ignore",
+      "evalTime": "ignore"
+    },
+    "ui-genie-rm-evaluation": {
+      "open": "ignore",
+      "Parameters": "ignore"
+    },
+    "unigenbench": {
+      "release_date": "ignore"
+    },
+    "unsatz": {
+      "Fit cost": "ignore",
+      "log(x)": "ignore",
+      "No submission": "ignore",
+      "step(x,th,f,g)": "ignore"
+    },
+    "v": {
+      "SEED-Bench(Img)": "ignore"
+    },
+    "v-jepa-2-zero-shot-robot-manipulation-meta": {
+      "Planning Details": "ignore"
+    },
+    "vaguebench": {
+      "# Samples": "ignore"
+    },
+    "valor-32k": {
+      "Share weights": "ignore",
+      "std": "ignore"
+    },
+    "vals-index-v2": {
+      "Input / Output Tokens": "ignore"
+    },
+    "vals-index-v2-1": {
+      "Input / Output Tokens": "ignore"
+    },
+    "vals-inference-provider-index": {
+      "Work evaluated": "ignore"
+    },
+    "vals-mysterymechanism": {
+      "Successful traces": "ignore"
+    },
+    "vals-time-horizon-index-ksp": {
+      "Duration / Test": "ignore"
+    },
+    "vatex-zh": {
+      "Model / Team": "ignore"
+    },
+    "vcg-diverse": {
+      "Time": "ignore",
+      "CI": "ignore"
+    },
+    "venusbench-mobile": {
+      "cost.pt": "ignore",
+      "cost.tt_k": "ignore"
+    },
+    "verify-gym": {
+      "log.file": "ignore",
+      "log.sha256": "ignore",
+      "date": "ignore",
+      "sampling.max_tokens": "ignore",
+      "verdicts.CERTIFIED": "ignore"
+    },
+    "verilogeval": {
+      "time": "ignore"
+    },
+    "videoace": {
+      "Recorded cost (USD)": "ignore",
+      "Accuracy at turns 1 / 2": "ignore",
+      "Accuracy at turns 3 / 4": "ignore",
+      "Median evidence duration (s)": "ignore"
+    },
+    "vidore-v3": {
+      "dateFrom": "ignore",
+      "dateTo": "ignore",
+      "model.releaseDate": "ignore"
+    },
+    "vigil3d": {
+      "Inference Time": "ignore"
+    },
+    "vimu": {
+      "Date": "ignore"
+    },
+    "vinoground": {
+      "Gemini-1.5-Pro (Gemini Team, 2024) (CoT)": "ignore"
+    },
+    "vision2web": {
+      "params": "ignore"
+    },
+    "vision2web-s1-2026": {
+      "params": "ignore"
+    },
+    "vision2web-s2-2026": {
+      "params": "ignore"
+    },
+    "vision2web-s3-2026": {
+      "params": "ignore"
+    },
+    "visionarena-bench": {
+      "Avg. # Turns": "ignore",
+      "Multi-Turn": "ignore",
+      "# Samples": "ignore"
+    },
+    "visr-rag-fin": {
+      "ColNomic-3B (Team, 2025)": "ignore",
+      "ColNomic-7B (Team, 2025)": "ignore"
+    },
+    "vl-rewardbench": {
+      "Open-Source Models": "ignore"
+    },
+    "vlmsarebiased": {
+      "Viewing time": "ignore"
+    },
+    "vocalgrad": {
+      "Step-Audio 2 mini": "ignore"
+    },
+    "voice-arena-goal-dataset": {
+      "Time field": "ignore"
+    },
+    "voicearena-arabic-msa": {
+      "samples": "ignore"
+    },
+    "voicecodebench": {
+      "date": "ignore",
+      "person or team name": "ignore"
+    },
+    "voxparity": {
+      "transcript_path": "ignore"
+    },
+    "vqav2": {
+      "submission__id": "ignore"
+    },
+    "vsi-bench-debiased": {
+      "Per-type, pilot budgets (seeds 1, 42)": "ignore",
+      "High-variance objects (harder to exploit)": "ignore",
+      "Low-variance objects (easily exploitable)": "ignore"
+    },
+    "vtr-bench": {
+      "Lingbot-Video-MOE": "ignore"
+    },
+    "weavebench": {
+      "Step": "ignore"
+    },
+    "webtailbench": {
+      "Trajectories": "ignore"
+    },
+    "wegeneditbench": {
+      "Report Top-5": "ignore",
+      "Open-source Models": "ignore",
+      "Tokens": "ignore",
+      "95% CI": "ignore"
+    },
+    "weirdml-v3": {
+      "release_date": "ignore"
+    },
+    "wenetspeech-chuan-eval": {
+      "Duration (h)": "ignore",
+      "Step-Audio-TTS [21]": "ignore",
+      "Confidence": "ignore"
+    },
+    "wenetspeech-test-meeting": {
+      "Confidence": "ignore"
+    },
+    "wenetspeech-test-net": {
+      "Confidence": "ignore"
+    },
+    "wikitext-2": {
+      "Parameters": "ignore",
+      "Tokens": "ignore"
+    },
+    "wildawm-validation": {
+      "Agent Judge": "ignore",
+      "Parameters": "ignore"
+    },
+    "wildgraphbench": {
+      "Step": "ignore"
+    },
+    "wildscore": {
+      "seed": "ignore"
+    },
+    "wise-verified": {
+      "Samples": "ignore"
+    },
+    "workbuddy-user-blind-evaluation-tencent": {
+      "createdAt": "ignore",
+      "createdUid": "ignore",
+      "updatedAt": "ignore",
+      "author": "ignore",
+      "displayPublishTime": "ignore"
+    },
+    "worksurface-bench": {
+      "Agent performance": "ignore",
+      "Artifact / check": "ignore"
+    },
+    "worldcoder-bench": {
+      "Cost": "ignore",
+      "Sem.": "ignore"
+    },
+    "wrench-factorio": {
+      "Det. latency (ticks)": "ignore",
+      "Seed": "ignore"
+    },
+    "xbench": {
+      "dimensions.agent": "ignore"
+    },
+    "xybench": {
+      "SE": "ignore"
+    },
+    "xyeval-google": {
+      "Example Compliance quotes from agentic trace": "ignore",
+      "Tasks # (SWE-bench Verified)": "ignore"
+    },
+    "yocausal": {
+      "Release Date": "ignore"
+    },
+    "zeroclue": {
+      "param_desc": "ignore"
     }
   }
 }

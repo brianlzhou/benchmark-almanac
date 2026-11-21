@@ -3,7 +3,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
-const FEED = "https://sites.research.google/xtreme/app.js";
+const FEED = "https://web.archive.org/web/20230525093242id_/https://sites.research.google/xtreme/app.js";
 const board: Leaderboard = {
   benchmark: "xtreme",
   parts: {
@@ -12,7 +12,7 @@ const board: Leaderboard = {
     questionAnswering: { name: 'Question answering', group: 'Task type' },
     sentenceRetrieval: { name: 'Sentence retrieval', group: 'Task type' },
   },
-  url: "https://sites.research.google/xtreme/app.js",
+  url: "https://web.archive.org/web/20261009094815/https://sites.research.google/xtreme/",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   

@@ -16,6 +16,7 @@ interface Entry {
   scaffold?: string;
   score?: number;
   date?: string;
+  verified?: boolean;
 }
 
 /** Rows of one SpreadsheetBench board file. A scaffold that is not the system's own name becomes the harness. */
@@ -25,7 +26,7 @@ export async function spreadsheetRows(file: string): Promise<LeaderboardRow[]> {
     if (!e.model || typeof e.score !== 'number') continue;
     const harness = e.scaffold && e.scaffold !== e.model ? e.scaffold : undefined;
     // "OpenAI o3": the maker's name is not part of the model name
-    rows.push({ model: e.model.replace(/^OpenAI\s+/, '').trim(), score: e.score, harness, date: e.date });
+    rows.push({ model: e.model.replace(/^OpenAI\s+/, '').trim(), score: e.score, harness, date: e.date, verified: e.verified });
   }
   return rows;
 }
@@ -36,6 +37,7 @@ const board: Leaderboard = {
   feed: ssbFeed('leaderboard-v1-full.json'),
   terms: SSB_TERMS,
   aliases: {},
+  verified: 'marked Verified by SpreadsheetBench',
   fetch: () => spreadsheetRows('leaderboard-v1-full.json'),
 };
 export default board;

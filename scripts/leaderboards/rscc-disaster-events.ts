@@ -21,12 +21,17 @@ const board: Leaderboard = {
     const table = tables(await fetchText(feed)).find(t => t[1]?.[4]?.text === 'ST5-SCS(%)↑');
     if (!table || table.length < 32 || !['ROUGE(%)↑', 'METEOR(%)↑', 'BERT(%)↑'].every((h,i) => table[1][i+1].text === h)) throw new Error('Missing RSCC standings');
     let model = '';
+    let params: number | undefined;
     return table.slice(2).map(cells => {
       const label = cells[0].text;
-      if (!label.startsWith('+')) model = label;
+      if (!label.startsWith('+')) {
+        model = label;
+        const match = label.match(/\(([\d.]+)B\)$/);
+        params = match ? Number(match[1]) : undefined;
+      }
       const [rouge, meteor, bert, score, words] = cells.slice(1).map(c => num(c.text));
       if (!model || [rouge, meteor, bert, score, words].some(v => v === undefined)) throw new Error('Incomplete caption score');
-      return { model, setting: label.startsWith('+') ? label.slice(1).trim() : 'Zero-shot', score: score!,
+      return { model, params, setting: label.startsWith('+') ? label.slice(1).trim() : 'Zero-shot', score: score!,
         metrics: { rouge: rouge!, meteor: meteor!, bert: bert!, averageWords: words! } };
     });
   },

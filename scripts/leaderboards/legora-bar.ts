@@ -117,7 +117,9 @@ const board: Leaderboard = {
     let file: string | undefined;
     for (const m of modules) {
       await new Promise(r=>setTimeout(r,1100));
-      file = (await fetchText(m)).match(/dataFile:`(https:\/\/framerusercontent\.com\/assets\/\w+\.json)`/)?.[1];
+      const module = await fetchText(m);
+      file = module.match(/dataFile:`(https:\/\/framerusercontent\.com\/assets\/\w+\.json)`/)?.[1]
+        ?? module.match(/UZaa6fwVf:[^`]+`(https:\/\/framerusercontent\.com\/assets\/\w+\.json)`/)?.[1];
       if (file) break;
     }
     if (!file) throw new Error('dataFile not found in the page modules');

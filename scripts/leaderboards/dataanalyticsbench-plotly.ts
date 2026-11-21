@@ -20,6 +20,7 @@ const seconds = (value: string): number => {
 const totalMinutes = (value: string): number => {
   const h = value.match(/(\d+(?:\.\d+)?)\s*h/i)?.[1];
   const m = value.match(/(\d+(?:\.\d+)?)\s*min/i)?.[1];
+  if (!h && !m) return NaN;
   return Number(h ?? 0) * 60 + Number(m ?? 0);
 };
 
@@ -70,8 +71,11 @@ const board: Leaderboard = {
       const cost = Number(rawCost.match(/\$([\d.]+)/)?.[1]);
       const tokens = Number(rawTokens.match(/([\d.]+)M/i)?.[1]) * 1_000_000;
       const timeParts = rawTime.split('/').map((part) => part.trim());
-      if (!model || !/^\w{3} \d{1,2}, 20\d{2}$/.test(released) || !Number.isFinite(score) || !Number.isFinite(cost) || !Number.isFinite(tokens) || timeParts.length !== 2)
+      if (!model || !/^\w{3} \d{1,2}, 20\d{2}$/.test(released) || !Number.isFinite(score) || !Number.isFinite(cost) || !Number.isFinite(tokens) || (timeParts.length !== 1 && timeParts.length !== 2))
         throw new Error(`DataAnalyticsBench row is incomplete for ${rawModel}`);
+      const medianSeconds = seconds(timeParts[0]);
+      const meanSeconds = timeParts.length < 2 || timeParts[1].toLowerCase() === 'n/a' ? undefined : seconds(timeParts[1]);
+      const total = totalMinutes(rawTotal);
       rows.push({
         model,
         score,
@@ -81,9 +85,9 @@ const board: Leaderboard = {
           accuracyPercent: score / 43 * 100,
           costPerRun: cost,
           tokensExam: tokens,
-          medianSeconds: seconds(timeParts[0]),
-          meanSeconds: seconds(timeParts[1]),
-          totalMinutes: totalMinutes(rawTotal),
+          medianSeconds,
+          ...(meanSeconds === undefined ? {} : { meanSeconds }),
+          ...(Number.isFinite(total) ? { totalMinutes: total } : {}),
         },
       });
     }

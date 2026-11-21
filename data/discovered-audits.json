@@ -1,132 +1,30 @@
 {
   "updated": "2026-11-21",
-  "items": [
-    {
-      "key": "https://arxiv.org/abs/2611.21315",
-      "title": "Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month -- from post-training down to pre-training base models",
-      "url": "https://arxiv.org/abs/2611.21315",
-      "source": "arXiv",
-      "date": "2026-11-16",
-      "first": "2026-11-17",
-      "last": "2026-11-19",
-      "benchmarks": [
-        "humaneval",
-        "openbookqa"
-      ],
-      "problems": [
-        "contamination"
-      ],
-      "score": 5
-    },
+  "items": [],
+  "dismissed": [
     {
       "key": "https://latent.space/p/ainews-perplexity-hits-a-1b-revenue-run-rate-up-4x-in-2026/#claudeappearstohavememorizeddetailsoflinuxarenacontrolevalkarvonen",
       "title": "Benchmark contamination: Claude appears to have memorized details of the LinuxArena control eval ( Karvonen ).",
-      "url": "https://latent.space/p/ainews-perplexity-hits-a-1b-revenue-run-rate-up-4x-in-2026/",
-      "source": "AINews",
-      "date": "2026-11-17",
-      "first": "2026-11-17",
-      "last": "2026-11-20",
-      "benchmarks": [
-        "linuxarena"
-      ],
-      "problems": [
-        "contamination"
-      ],
-      "score": 4
+      "reason": "The newsletter only mentions a claimed LinuxArena contamination finding in one sentence. It gives no audit method, benchmark evidence, or quoted source details.",
+      "date": "2026-11-21"
     },
     {
       "key": "https://arxiv.org/abs/2611.22027",
       "title": "GauntletScore: Auditable Fact-Checking That Matches the Best Published Checkers on LLM-AggreFact",
-      "url": "https://arxiv.org/abs/2611.22027",
-      "source": "arXiv",
-      "date": "2026-11-17",
-      "first": "2026-11-18",
-      "last": "2026-11-20",
-      "benchmarks": [
-        "llm-aggrefact"
-      ],
-      "problems": [
-        "broken-grader"
-      ],
-      "score": 4
+      "reason": "The paper evaluates a new fact-checking engine on LLM-AggreFact. It does not report a concrete defect in the LLM-AggreFact benchmark or its labels or grader.",
+      "date": "2026-11-21"
     },
     {
       "key": "https://arxiv.org/abs/2611.12521",
       "title": "Can the Confidence and Decisions of System 1 Models Be Trusted? An Explainability and Perturbation Audit of Jev-Style Decision Models",
-      "url": "https://arxiv.org/abs/2611.12521",
-      "source": "arXiv",
-      "date": "2026-11-09",
-      "first": "2026-11-12",
-      "last": "2026-11-12",
-      "benchmarks": [
-        "hans"
-      ],
-      "problems": [
-        "reward-hacking"
-      ],
-      "score": 4
-    },
-    {
-      "key": "https://arxiv.org/abs/2611.07950",
-      "title": "Leakage- and Label-Aware Benchmarking of Class-Imbalance Strategies for Multimodal Chest X-Ray and EHR Classification",
-      "url": "https://arxiv.org/abs/2611.07950",
-      "source": "arXiv",
-      "date": "2026-11-05",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "benchmarks": [
-        "mimic-cxr-classification"
-      ],
-      "problems": [],
-      "score": 4
-    },
-    {
-      "key": "https://arxiv.org/abs/2611.07042",
-      "title": "Follow the Policy, Fail the Benchmark: Auditing and Revising Policy-Based Decision Benchmarks",
-      "url": "https://arxiv.org/abs/2611.07042",
-      "source": "arXiv",
-      "date": "2026-11-04",
-      "first": "2026-11-06",
-      "last": "2026-11-06",
-      "benchmarks": [
-        "legalbench",
-        "legora-bar"
-      ],
-      "problems": [],
-      "score": 4
+      "reason": "The paper uses HANS and other datasets to audit System 1 models. It does not report a concrete problem with the cataloged HANS benchmark itself.",
+      "date": "2026-11-21"
     },
     {
       "key": "https://arxiv.org/abs/2611.05665",
       "title": "Construct Validity of Coding Benchmarks for LLM-based Agentic Coding Tools",
-      "url": "https://arxiv.org/abs/2611.05665",
-      "source": "arXiv",
-      "date": "2026-11-03",
-      "first": "2026-11-06",
-      "last": "2026-11-06",
-      "benchmarks": [
-        "internal-agentic-coding-evaluation-anthropic"
-      ],
-      "problems": [],
-      "score": 4
-    },
-    {
-      "key": "https://arxiv.org/abs/2611.00460",
-      "title": "From Small to Large: Assessing Medical Reasoning, Benchmark Contamination, and Model Size in Language Models",
-      "url": "https://arxiv.org/abs/2611.00460",
-      "source": "arXiv",
-      "date": "2026-10-30",
-      "first": "2026-11-04",
-      "last": "2026-11-04",
-      "benchmarks": [
-        "medqa",
-        "medmcqa",
-        "pubmedqa"
-      ],
-      "problems": [
-        "contamination"
-      ],
-      "score": 4
+      "reason": "The paper maps claimed constructs, metrics and possible confounders across nine coding benchmarks. It reports no concrete defect in the cataloged Anthropic internal evaluation.",
+      "date": "2026-11-21"
     }
-  ],
-  "dismissed": []
+  ]
 }

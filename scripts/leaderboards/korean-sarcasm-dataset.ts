@@ -7,7 +7,7 @@ import { fetchJson } from '../lib/util.ts';
 const url = 'https://huggingface.co/datasets/mteb/KorSarcasmClassification';
 const feed = 'https://mteb-leaderboard-backend.hf.space/v1/tasks/KorSarcasmClassification/scores';
 
-type Api = { rows: { model: { name: string }; score: number }[] };
+type Api = { rows: { model: { name: string; totalParamsB?: number; license?: string; openWeights?: boolean }; score: number }[] };
 const board: Leaderboard = {
   benchmark: 'korean-sarcasm-dataset',
   url,
@@ -15,7 +15,13 @@ const board: Leaderboard = {
   terms: 'MTEB publishes this task score API under the CC0 license for its results repository. https://github.com/embeddings-benchmark/results/blob/main/LICENSE',
   async fetch(): Promise<LeaderboardRow[]> {
     const data = await fetchJson<Api>(feed);
-    const rows = data.rows.map((row) => ({ model: row.model.name, score: row.score * 100 }));
+    const rows = data.rows.map((row) => ({
+      model: row.model.name,
+      score: row.score * 100,
+      params: row.model.totalParamsB,
+      license: row.model.license,
+      open: row.model.openWeights,
+    }));
     if (rows.length < 2 || rows.some((row) => !Number.isFinite(row.score))) throw new Error('MTEB KorSarcasmClassification rows missing');
     return rows;
   },

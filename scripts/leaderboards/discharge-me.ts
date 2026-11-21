@@ -21,7 +21,7 @@ const board: Leaderboard = {
       };
       const model = r["Team"];
       if (!model) throw new Error('Missing model name');
-      return { model, score: number("Overall"), metrics: Object.fromEntries(categories.map((key) => [key, number(key)])) };
+      return { model, submitter: model, score: number("Overall"), metrics: Object.fromEntries(categories.map((key) => [key, number(key)])) };
     });
   },
 };

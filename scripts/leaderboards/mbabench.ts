@@ -5,15 +5,17 @@ import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 
-const FEED = "https://mbabench.org/assets/index-BCfvtkED.js";
+const FEED = "https://mbabench.org";
 const board: Leaderboard = {
   benchmark: "mbabench",
-  url: "https://mbabench.org/assets/index-BCfvtkED.js",
+  url: "https://mbabench.org",
   feed: FEED,
   terms: "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
   
   async fetch() {
-    const s=await fetchText(FEED);const m=/\[\{rank:1,model:"Claude \(Web\)"/.exec(s);
+    const html=await fetchText(FEED); const asset=/<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/.exec(html)?.[1];
+    if(!asset)throw new Error('MBABench application bundle missing');
+    const s=await fetchText(new URL(asset,FEED).href);const m=/\[\{rank:1,model:"Claude \(Web\)"/.exec(s);
     if(!m)throw new Error('MBABench v1 results missing');
     const data=jsLiteral<any[]>(s,m.index);
     return data.map(r=>({model:r.model,score:r.score,harness:r.type==='API'?'MBABench API harness':r.model,setting:r.type}));

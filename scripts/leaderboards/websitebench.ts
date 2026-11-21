@@ -3,7 +3,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 const URL = 'https://website-bench.com/';
-interface Model {id: string; name: string; group: string; overall: number; request: number; browser: number; system: number; cost: number; tokens: number; turns: number; score_counts: Record<string, {passed: number; total: number}>}
+interface Model {id: string; name: string; org?: string; group: string; overall: number; request: number; browser: number; system: number; cost: number; tokens: number; turns: number; score_counts: Record<string, {passed: number; total: number}>}
 const board: Leaderboard = {
   benchmark: 'websitebench', parts: {
   request: { name: 'Request', group: 'Task type' },
@@ -39,7 +39,7 @@ const board: Leaderboard = {
       return metrics;
     };
     const rows: LeaderboardRow[] = d.models.map(r => ({
-      model: r.name, score: r.overall, cost: r.cost, open: r.group === 'open',
+      model: r.name, score: r.overall, cost: r.cost, open: r.group === 'open', agentOrg: r.org,
       setting: d.cohort_id, metrics: {request: r.request, browser: r.browser, system: r.system,
         ...siteScores(r.id), totalTokens: r.tokens * 1e6, turns: r.turns, tasks: d.total_tasks,
         ...Object.fromEntries(Object.entries(r.score_counts).flatMap(([k, c]) => [[`${k}_passed`, c.passed], [`${k}_total`, c.total]])),

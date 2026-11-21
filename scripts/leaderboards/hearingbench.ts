@@ -10,6 +10,7 @@ const board: Leaderboard = {
   benchmark: 'hearingbench',
   url: PAGE,
   feed: PAGE,
+  costPer: 'run',
   terms: 'The page links the source datasets and gives no separate benchmark license. Results are credited to Adam Holter and HearingBench.',
   stats: {
     everyday: { name: 'Everyday sounds correct', unit: 'count', better: 'higher' },
@@ -42,6 +43,22 @@ const board: Leaderboard = {
     const html = await fetchText(PAGE);
     const boardHtml = html.match(/<ol class="board">([\s\S]*?)<\/ol>/)?.[1];
     if (!boardHtml) throw new Error('HearingBench: leaderboard rows missing');
+    const numbersHtml = html.match(/<table id="numbers">([\s\S]*?)<\/table>/)?.[1];
+    const numberRows = new Map<string, { tokens?: number; time?: number; cost?: number }>();
+    for (const row of numbersHtml?.matchAll(/<tr>([\s\S]*?)<\/tr>/g) ?? []) {
+      const cells = [...row[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map(m => m[1].replace(/<[^>]+>/g, '').trim());
+      const match = cells[0]?.match(/^(.*) \(([^)]+)\)$/);
+      if (!match) continue;
+      const number = (value: string | undefined, suffix: string) => value?.replace(/[,\s$]/g, '').replace(suffix, '');
+      const tokens = number(cells[12], '');
+      const time = number(cells[13], 's');
+      const cost = number(cells[14], '');
+      numberRows.set(match[1] + '|' + match[2], {
+        tokens: tokens ? Number(tokens) : undefined,
+        time: time ? Number(time) : undefined,
+        cost: cost ? Number(cost) : undefined,
+      });
+    }
     const rows: LeaderboardRow[] = [];
     for (const block of boardHtml.matchAll(/<li class="row(?: [^"]+)?">([\s\S]*?)<\/li>/g)) {
       const body = block[1];
@@ -49,12 +66,13 @@ const board: Leaderboard = {
       const effort = body.match(/class="eff [^"]+">([^<]+)</)?.[1]?.trim();
       const score = body.match(/class="score num">(\d+)</)?.[1];
       if (!name || !effort || score === undefined) continue;
+      const numbers = numberRows.get(name + '|' + effort);
       const metrics: Record<string, number> = {};
       const tierNames = ['everyday', 'instrument', 'vocal', 'words', 'sentences'];
       const tips = [...body.matchAll(/data-tip="<b>([^<]+)<\/b><br>(\d+) of 20 correct, (\d+) near misses/g)];
       tips.slice(0, 5).forEach((m, i) => { metrics[tierNames[i]] = Number(m[2]); metrics[`${tierNames[i]}NearMisses`] = Number(m[3]); });
       const harness = body.match(/<small>([^<]+)<\/small>/)?.[1]?.replace(/Â·/g, '·').split('·').pop()?.trim();
-      rows.push({ model: name, setting: effort, harness, score: Number(score), metrics });
+      rows.push({ model: name, setting: effort, harness, score: Number(score), tokens: numbers?.tokens, cost: numbers?.cost, metrics });
     }
     if (rows.length < 16) throw new Error(`HearingBench: ${rows.length} scored rows, expected at least 16`);
     return rows;

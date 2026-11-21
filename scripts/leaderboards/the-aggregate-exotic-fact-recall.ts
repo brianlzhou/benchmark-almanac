@@ -23,7 +23,8 @@ export async function aggregateRows(url: string, id: string, minimum: number): P
   const date = section.match(/run_end:`([\d-]+)`/)?.[1];
   const rowsAt = section.indexOf('rows:[');
   if (rowsAt < 0) throw new Error('Missing standings for ' + id);
-  const literal = section.slice(rowsAt + 5).replace(/reference:!0/g, 'reference:true').replace(/`([^`\\]*)`/g, (_, v) => JSON.stringify(v))
+  // the minifier writes true as !0 and false as !1, on any field (reference, rt_fixed)
+  const literal = section.slice(rowsAt + 5).replace(/([:,[])!([01])(?=[,}\]])/g, (_, p, d) => p + (d === '0' ? 'true' : 'false')).replace(/`([^`\\]*)`/g, (_, v) => JSON.stringify(v))
     .replace(/("(?:[^"\\]|\\.)*")|([:,])(-?)\.(\d+)/g, (m, quoted, prefix, sign, digits) => quoted ? m : prefix + sign + '0.' + digits);
   type Entry = { reference?: boolean; model: string; score: number; n?: number; setting?: string; reasoning_effort?: string };
   const rows = jsLiteral<Entry[]>(literal, 0).filter(r => !r.reference);

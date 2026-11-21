@@ -9,6 +9,7 @@ interface Config {
   effort?: string;
   pass_rate_pct: number;
   run_ci95_half_pp: number;
+  scheduled_trials?: number;
   resources?: { cost?: number; output_tokens?: number; wall_time?: number };
 }
 interface Data { configs: Config[] }
@@ -38,6 +39,7 @@ const board: Leaderboard = {
         score: c.pass_rate_pct,
         low: c.pass_rate_pct - c.run_ci95_half_pp,
         high: c.pass_rate_pct + c.run_ci95_half_pp,
+        trials: c.scheduled_trials,
         cost: resources.cost,
         tokens: resources.output_tokens,
         metrics: resources.wall_time === undefined ? undefined : { wallTime: resources.wall_time },

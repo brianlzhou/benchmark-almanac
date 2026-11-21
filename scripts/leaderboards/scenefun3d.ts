@@ -11,7 +11,7 @@ const feed = 'https://teal-heliotrope-3b9297.netlify.app/.netlify/functions/lead
 const pdf = 'https://openaccess.thecvf.com/content/CVPR2024/papers/Delitzas_SceneFun3D_Fine-Grained_Functionality_and_Affordance_Understanding_in_3D_Scenes_CVPR_2024_paper.pdf';
 const groups = ['Functionality Segmentation','Task-Driven Affordance Grounding'];
 const headers = [['AP','AP_50','AP_25'],['AP_50','AP_25']];
-type Entry = { submission__method_name:string; submission__participant_team__team_name:string;
+type Entry = { submission__method_name:string; submission__participant_team__team_name:string; submission__submitted_at?:string;
   leaderboard__schema:{labels:string[]}; result:number[] };
 const board: Leaderboard = {
   benchmark: 'scenefun3d', url, feed, static: 'paper',
@@ -25,9 +25,9 @@ const board: Leaderboard = {
     for (const i of [0,1]) {
       const json = await fetchJson<{results:Entry[];next:string|null}>(feed + (i ? '2' : ''));
       if (json.next) throw new Error('Leaderboard now paginates');
-      function add(model:string,submitter:string,values:number[]) {
+      function add(model:string,submitter:string,values:number[],date?:string) {
         const key = submitter + '|' + model;
-        const row = rows.get(key) ?? {model,submitter,score:NaN,metrics:{}};
+        const row = rows.get(key) ?? {model,submitter,score:NaN,metrics:{},...(date ? {date} : {})};
         if (values.length !== headers[i].length || !values.every(Number.isFinite)) throw new Error('Invalid AP for '+model);
         for (const [c,name] of headers[i].entries()) row.metrics!['t'+i+name] = values[c];
         rows.set(key,row);
@@ -38,7 +38,7 @@ const board: Leaderboard = {
         let model = r.submission__method_name.trim();
         if (team === 'pico-mr' && /"pico-mr"\s*:\s*\{[^}]*title:\s*"OpenTrack3D:/.test(site)) model = 'OpenTrack3D';
         if (!model || /^\d+$|^Entry \d+$/i.test(model)) continue;
-        add(model,team,r.result);
+        add(model,team,r.result,r.submission__submitted_at?.slice(0,10));
       }
       const match = i === 0 ? paper.match(/LERF \[\d+\]\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\n/) :
         paper.match(/LERF \[\d+\][ \t]+([\d.]+)[ \t]+([\d.]+)[ \t]*\n/);

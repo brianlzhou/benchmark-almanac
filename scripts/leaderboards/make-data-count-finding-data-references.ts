@@ -12,7 +12,7 @@ const systems = [
   { id: 13957674, models: ['Qwen2.5-7B-Instruct', 'Qwen2.5-32B-Instruct'] },
 ];
 type Result = { teamId: number; displayScore: string };
-type Team = { teamId: number; teamName: string; solutionWriteUpUrl?: string };
+type Team = { teamId: number; teamName: string; solutionWriteUpUrl?: string; lastSubmissionDate?: string };
 const board: Leaderboard = {
   benchmark: 'make-data-count-finding-data-references', feed,
   url: 'https://www.kaggle.com/competitions/make-data-count-finding-data-references/leaderboard',
@@ -29,6 +29,7 @@ const board: Leaderboard = {
       const publicScore = data.publicLeaderboard.find(r => r.teamId === id)?.displayScore;
       if (!team?.teamName || !privateScore || !publicScore || ![privateScore, publicScore].every(v => /^0\.\d+$/.test(v))) throw new Error('Missing Kaggle team scores');
       return { model: models[0], models, harness: team.teamName, submitter: team.teamName, score: Number(privateScore),
+        date: team.lastSubmissionDate?.slice(0, 10),
         metrics: { publicScore: Number(publicScore) }, link: team.solutionWriteUpUrl ? new URL(team.solutionWriteUpUrl, feed).href : undefined };
     }), 3);
   },

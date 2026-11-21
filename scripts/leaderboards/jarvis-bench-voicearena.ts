@@ -3,7 +3,7 @@ import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { jsLiteral } from '../lib/html.ts';
 
-const FEED = "https://voicearena.com/assets/S2SLeaderboard-CHhox-Xq.js";
+const FEED = "https://voicearena.com/jarvis-bench";
 interface Entry { model: string; slug: string; domain: string; naturalnessElo: number; naturalnessCiLow: number; naturalnessCiHigh: number; taskElo: number; taskCiLow: number; taskCiHigh: number; naturalnessWinRate: number; taskWinRate: number; votes: number }
 
 const board: Leaderboard = {
@@ -13,7 +13,14 @@ const board: Leaderboard = {
   feed: FEED,
   terms: "Voice Arena links its site terms. https://voicearena.com/terms Voice Arena permits the public pages in robots.txt.",
   async fetch() {
-    const script = (await fetchText(FEED)).replace(/human:!([01])/g, (_, n) => 'human:' + (n === '0'));
+    const html = await fetchText(FEED);
+    const main = /<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/.exec(html)?.[1];
+    if (!main) throw new Error('Missing application bundle');
+    const indexUrl = new URL(main, FEED);
+    const index = await fetchText(indexUrl.href);
+    const chunk = /assets\/(S2SLeaderboard-[^".]+\.js)/.exec(index)?.[1];
+    if (!chunk) throw new Error('Missing Jarvis bundle');
+    const script = (await fetchText(new URL(chunk, indexUrl).href)).replace(/human:!([01])/g, (_, n) => 'human:' + (n === '0'));
     const start = script.indexOf('[{domain:"Overall",slug:');
     if (start < 0) throw new Error('Missing Jarvis results');
     const entries = jsLiteral<Entry[]>(script, start);

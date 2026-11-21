@@ -2,7 +2,7 @@
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 
-const feed = "https://voicearena.com/assets/DictationBench-KRKI1jcW.js";
+const feed = "https://voicearena.com/dictation-bench";
 
 const board: Leaderboard = {
   stats: { amend: { name: 'Amendments', unit: 'score', better: 'lower' }, cleanDrafts: { name: 'Clean drafts', unit: 'count', better: 'higher' }, clips: { name: 'Clips', unit: 'count' } },
@@ -11,7 +11,14 @@ const board: Leaderboard = {
   feed,
   terms: "Voice Arena links its site terms. https://voicearena.com/terms The site explicitly permits AI crawlers and citation.",
   async fetch() {
-    const source = await fetchText(feed);
+    const html = await fetchText(feed);
+    const main = /<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/.exec(html)?.[1];
+    if (!main) throw new Error('Missing application bundle');
+    const indexUrl = new URL(main, feed);
+    const index = await fetchText(indexUrl.href);
+    const chunk = /assets\/(DictationBench-[^".]+\.js)/.exec(index)?.[1];
+    if (!chunk) throw new Error('Missing dictation bundle');
+    const source = await fetchText(new URL(chunk, indexUrl).href);
     const csv = source.match(/`(split,domain,length,difficulty,n_clips,rank,[^`]+)`/)?.[1];
     if (!csv) throw new Error('Missing dictation run CSV');
     const out = new Map<string,LeaderboardRow>();

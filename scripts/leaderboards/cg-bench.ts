@@ -17,6 +17,7 @@ const board: Leaderboard = {
   const t=tables(await fetchText(FEED)).find(t=>t[1]?.some(c=>c.text==='long-acc.'));
   if(!t)throw new Error('CG-Bench leaderboard missing');
   return t.slice(2).filter(r=>num(r[6]?.text)!==undefined).map(r=>({model:r[1].text,score:num(r[6].text)!,
+    params:/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? parseFloat(r[2].text) : undefined,
     setting:`long MCQ; params=${r[2].text}; clue frames=${r[3].text}; long frames=${r[4].text}`,
     metrics:{publishedTableRank:num(r[0].text)!, ...(/^\d+(?:\.\d+)?B$/i.test(r[2].text) ? {llmParams:parseFloat(r[2].text)} : {}),
       ...(/^\d+$/.test(r[3].text) ? {clueFrames:Number(r[3].text)} : {}),

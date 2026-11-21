@@ -26,7 +26,7 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = { submissions: team.submissionCount };
       const publicWer = pub.get(r.teamId);
       if (publicWer != null) metrics.publicWer = publicWer;
-      return { model: team.teamName, submitter: team.teamName, score, metrics,
+      return { model: team.teamName, submitter: team.teamName, score, date: team.lastSubmissionDate?.slice(0, 10), metrics,
         link: team.solutionWriteUpUrl ? new URL(team.solutionWriteUpUrl, feed).href : undefined };
     });
   },
