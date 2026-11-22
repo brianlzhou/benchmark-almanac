@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-11-21",
+  "retrieved": "2026-11-22",
   "rowsIn": "data/scores/rows/<first character of the board id>.json",
   "boards": {
     "1h-videoqa-google": {
@@ -17192,9 +17192,10 @@
       "feed": "https://arxiv.org/html/2611.14364",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-22",
       "rows": 7,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "csr": {
           "name": "Compound success rate",
@@ -27121,13 +27122,10 @@
       "url": "https://www.braintrust.dev/evals/bash-agent-evals",
       "feed": "https://www.braintrust.dev/evals/bash-agent-evals",
       "terms": "Braintrust publishes this experiment page and its linked repository. https://www.braintrust.dev/evals/bash-agent-evals",
-      "retrieved": "2026-11-20",
-      "rows": 0,
-      "unmatched": [
-        "Bash agent",
-        "Filesystem agent",
-        "SQL agent"
-      ],
+      "retrieved": "2026-11-22",
+      "rows": 3,
+      "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "avgTokens": {
           "name": "Average tokens",
@@ -91774,6 +91772,18 @@
         "Grounding_Documents": {
           "name": "Grounding document count",
           "unit": "count"
+        },
+        "Confidence_Coverage": {
+          "name": "Confidence coverage",
+          "unit": "score",
+          "better": "higher",
+          "note": "Coverage of fields with confidence scores."
+        },
+        "Confidence_AUGRC": {
+          "name": "Confidence AUGRC",
+          "unit": "score",
+          "better": "lower",
+          "note": "Area under the gain risk curve for confidence scoring."
         }
       }
     },
@@ -106472,6 +106482,14 @@
           "name": "Pass rate",
           "unit": "%",
           "better": "higher"
+        },
+        "tokenCoverage": {
+          "name": "Token coverage",
+          "unit": "%"
+        },
+        "turnCoverage": {
+          "name": "Turn coverage",
+          "unit": "%"
         }
       }
     },
@@ -106496,6 +106514,14 @@
           "unit": "score",
           "better": "higher",
           "note": "Fraction of tasks passed, stored from 0 to 1."
+        },
+        "tokenCoverage": {
+          "name": "Token coverage",
+          "unit": "%"
+        },
+        "turnCoverage": {
+          "name": "Turn coverage",
+          "unit": "%"
         }
       }
     },
@@ -116721,12 +116747,11 @@
       "url": "https://huggingface.co/spaces/Salesforce/GIFT-Eval-CTX",
       "feed": "https://salesforce-gift-eval-ctx.hf.space/api/leaderboard",
       "terms": "The Space lists Apache 2.0 for the repository and identifies research as its intended use. https://huggingface.co/spaces/Salesforce/GIFT-Eval-CTX/blob/main/README.md",
-      "retrieved": "2026-11-20",
-      "rows": 5,
+      "retrieved": "2026-11-22",
+      "rows": 7,
       "unmatched": [
         "Chronos-2",
         "Moirai-2",
-        "MoiraiAgent (GPT-5.6 Sol)",
         "Seasonal Naive",
         "TimeBraid-6.7B",
         "TimesFM-3",
@@ -116734,6 +116759,7 @@
         "tabSutra-39M-v1.0",
         "tabSutra-39M-v1.0-rules"
       ],
+      "harnesses": "system",
       "parts": {
         "short": {
           "name": "Short"
@@ -156812,14 +156838,13 @@
       "feed": "https://arxiv.org/html/2404.16054",
       "terms": "Paper and license at https://arxiv.org/abs/2404.16054",
       "static": "paper",
-      "retrieved": "2026-11-20",
-      "rows": 0,
+      "retrieved": "2026-11-22",
+      "rows": 2,
       "unmatched": [
-        "AppAgent",
         "Auto-UI",
-        "AutoDroid",
         "CoCo-Agent"
       ],
+      "harnesses": "system",
       "parts": {
         "AITW": {
           "name": "AITW",
@@ -258435,19 +258460,15 @@
       "terms": "The authors publish the results in the arXiv paper. https://arxiv.org/abs/2410.15164",
       "headline": "The paper reports no combined score, so this is the plain mean of single-app and cross-app overall success rates.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-22",
       "rows": 1,
       "unmatched": [
-        "AppAgent",
         "Auto-UI",
         "DigiRL",
-        "M3A",
-        "MobileAgent",
-        "MobileAgentV2",
-        "OdysseyAgent",
-        "SeeAct",
-        "T3A"
+        "GPT-4o (snapshot unspecified)",
+        "OdysseyAgent"
       ],
+      "harnesses": "system",
       "parts": {
         "singleApp": {
           "name": "Single-App Overall"
@@ -272056,11 +272077,12 @@
       "feed": "https://arxiv.org/html/2611.07962",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-22",
       "rows": 8,
       "unmatched": [
         "DeepSeek V4.1 Flash 0910"
       ],
+      "harnesses": "system",
       "parts": {
         "theorem": {
           "name": "Theorem proving"
