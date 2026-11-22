@@ -92,6 +92,8 @@ type Board = {
   stats?: Record<string, { name: string; unit?: string; better?: 'higher' | 'lower'; note?: string }>;
   /** Columns that hold another of the benchmark's measures: metric key -> measure id (Benchmark.measures). */
   measures?: Record<string, string>;
+  /** true when GitHub's runners can't read the board, so a maintainer's computer reads it (scripts/lib/local-boards.ts). */
+  local?: true;
   failed?: { date: string; error: string };
 };
 /** One part of a benchmark a board scores on its own: a subject, language, difficulty or user group. */
@@ -459,7 +461,8 @@ const cardScoresByBench = groupBy(cardScores, (s) => s.benchmark);
 /**
  * Whether a board's scores still update on their own. The daily sync reads every live board, and a paper's fixed
  * table about once a month. A board whose reads have failed for STOPPED_AFTER days or more has stopped updating: its
- * source moved, closed or blocks our reader, and the page keeps the scores from the last read that worked.
+ * source moved, closed or blocks our reader, and the page keeps the scores from the last read that worked. So has a
+ * board only a maintainer's computer can read (`local`) when that computer hasn't read it for STOPPED_AFTER days.
  */
 export interface BoardUpdates {
   kind: 'daily' | 'paper' | 'stopped';
@@ -467,13 +470,15 @@ export interface BoardUpdates {
   last: string;
   /** Days from the last read that worked to the last sync. */
   days: number;
+  /** For 'stopped': true when reads fail, false when a local board wasn't read. */
+  failing?: boolean;
 }
 export const STOPPED_AFTER = 7;
 export function boardUpdates(id: string): BoardUpdates | undefined {
   const board = LEADERBOARDS[id];
   if (!board?.retrieved || !(lbByBench.get(id)?.length || sysByBench.get(id)?.length || unlistedByBench.get(id)?.length)) return undefined;
   const days = lb.retrieved ? Math.max(0, Math.round((Date.parse(lb.retrieved) - Date.parse(board.retrieved)) / 86_400_000)) : 0;
-  if (board.failed && days >= STOPPED_AFTER) return { kind: 'stopped', last: board.retrieved, days };
+  if ((board.failed || board.local) && days >= STOPPED_AFTER) return { kind: 'stopped', last: board.retrieved, days, failing: !!board.failed };
   return { kind: board.static === 'paper' ? 'paper' : 'daily', last: board.retrieved, days };
 }
 const citesByBench = groupBy(

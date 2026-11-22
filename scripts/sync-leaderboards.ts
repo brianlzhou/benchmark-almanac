@@ -6,7 +6,9 @@
 // in `others`, which have no model record, it is the date the board gives, if any. A board that fails keeps its last rows, so one broken site never empties
 // the data.
 //
-// usage: node scripts/sync-leaderboards.ts [--only id,id] [--dry] [--allow-drop] [--parts-only] [--rematch]
+// usage: node scripts/sync-leaderboards.ts [--only id,id | --local] [--dry] [--allow-drop] [--parts-only] [--rematch]
+// --local reads only the boards GitHub's runners can't reach (scripts/lib/local-boards.ts). On GitHub (GITHUB_ACTIONS
+// set) a full sync skips them and keeps their last rows, and a maintainer's computer reads them with --local.
 // --rematch reads no board either: it matches each board's stored unlisted entries again, so a model or alias added
 // to data/models.json (or to an importer) takes effect without fetching anything.
 // With --dry and SYNC_DUMP=<file>, each board's full rows, others and harness declarations are appended to that
@@ -17,6 +19,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, dataPath, readJson, today, bodyHooks } from './lib/util.ts';
 import { readScores, writeScores } from './lib/scores.ts';
+import { LOCAL_BOARDS } from './lib/local-boards.ts';
 import { makeResolver } from './lib/models.ts';
 import type { BoardPart, Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
 
@@ -58,7 +61,7 @@ const COLUMNS = ['benchmark', 'model', 'setting', 'harness', 'score', 'date', 'c
 const OTHER_COLUMNS = ['benchmark', 'name', 'setting', 'harness', 'score', 'date', 'cost', 'tokens', 'metrics', 'info'];
 interface Store {
   retrieved: string | null;
-  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; stats?: Leaderboard['stats']; measures?: Record<string, string>; failed?: { date: string; error: string } }>;
+  boards: Record<string, { url: string; feed: string; terms: string; host?: string; headline?: string; static?: 'paper'; retrieved: string; rows: number; unmatched: string[]; chart?: Leaderboard['chart']; costPer?: 'run'; reference?: string[]; harnesses?: 'system'; verified?: string; parts?: Record<string, BoardPart>; stats?: Leaderboard['stats']; measures?: Record<string, string>; local?: true; failed?: { date: string; error: string } }>;
   columns: string[];
   rows: Row[];
   otherColumns?: string[];
@@ -73,7 +76,7 @@ const arg = (k: string) => {
 // importer, so a new declaration shows without fetching anything
 const partsOnly = process.argv.includes('--parts-only');
 const rematch = process.argv.includes('--rematch');
-const only = partsOnly || rematch ? [] : arg('--only')?.split(',');
+const only = partsOnly || rematch ? [] : process.argv.includes('--local') ? Object.keys(LOCAL_BOARDS) : arg('--only')?.split(',');
 const dry = process.argv.includes('--dry');
 
 const clean = (s: string | undefined) => s?.replace(/\s+/g, ' ').trim() || undefined;
@@ -233,6 +236,9 @@ for (const f of files) {
     else delete kept.headline;
     if (board.static) kept.static = board.static;
     else delete kept.static;
+    // and whether only a maintainer's computer can read it
+    if (LOCAL_BOARDS[f.replace(/\.ts$/, '')]) kept.local = true;
+    else delete kept.local;
     // so are the parts it declares up front. Parts an importer sets inside fetch() wait for its next read.
     // A refresh only adds or renames: parts an importer sets inside fetch() aren't declared here, so the stored ones
     // stay until its next read rewrites them all.
@@ -254,6 +260,7 @@ for (const f of files) {
   if (rematch && !dry && kept) rematchBoard(board);
   if (only && !only.includes(board.benchmark) && !only.includes(f.replace(/\.ts$/, ''))) continue;
   if (!only && kept && board.static && !readsStaticToday(board.benchmark, kept.retrieved)) continue;
+  if (!only && process.env.GITHUB_ACTIONS && LOCAL_BOARDS[f.replace(/\.ts$/, '')]) continue;
   if (!benchmarks.has(board.benchmark)) {
     console.log(`  ${f}: unknown benchmark ${board.benchmark}`);
     failed++;
@@ -313,7 +320,7 @@ for (const f of files) {
     const parts = partsOf(board, [...rows, ...others]);
     const stats = statsOf(board, [...rows, ...others], parts);
     const measures = measuresOf(board, [...rows, ...others]);
-    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(stats ? { stats } : {}), ...(measures ? { measures } : {}) };
+    store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), ...(LOCAL_BOARDS[f.replace(/\.ts$/, '')] ? { local: true as const } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(stats ? { stats } : {}), ...(measures ? { measures } : {}) };
   } catch (e) {
     failed++;
     const error = (e as Error).message;

@@ -1,6 +1,7 @@
 // Writes the "Data health" report: what the daily jobs found that needs a person. The sync posts it as one rolling
 // GitHub issue, so nothing waits on someone remembering to run a script.
 //   - boards whose importer failed, longest first (a board failing three days or more needs its importer fixed)
+//   - boards only a maintainer's computer reads (scripts/lib/local-boards.ts) that it hasn't read for three days
 //   - fields boards publish that their importers may drop (data/scores/field-review.json, from the field watch)
 //   - benchmarks the discovery job marked ready for the catalog, and possible audits of cataloged benchmarks
 //   - links that stopped working (data/audits/link-health.json, when the link check has run)
@@ -12,12 +13,16 @@ const opt = <T>(path: string, fallback: T): T => (existsSync(path) ? readJson<T>
 const days = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
 const now = today();
 
-type Board = { url?: string; retrieved?: string; failed?: { date: string; error: string } };
+type Board = { url?: string; retrieved?: string; local?: true; failed?: { date: string; error: string } };
 const lb = readJson<{ boards: Record<string, Board> }>(dataPath('scores', 'leaderboards.json'));
 const failing = Object.entries(lb.boards)
   .filter(([, b]) => b.failed)
   .map(([id, b]) => ({ id, since: b.retrieved ?? '', error: b.failed!.error, url: b.url ?? '' }))
   .sort((a, b) => a.since.localeCompare(b.since));
+// the GitHub sync skips these, so a stale one means the maintainer's computer hasn't run its daily read
+const staleLocal = Object.entries(lb.boards)
+  .filter(([, b]) => b.local && !b.failed && b.retrieved && days(b.retrieved, now) >= 3)
+  .sort((a, b) => (a[1].retrieved ?? '').localeCompare(b[1].retrieved ?? ''));
 
 const review = opt<{ boards: Record<string, { field: string; kind: string; why: string }[]> }>(dataPath('scores', 'field-review.json'), { boards: {} }).boards;
 const flagged = Object.entries(review).sort((a, b) => b[1].length - a[1].length);
@@ -46,6 +51,12 @@ else {
   out.push('A board keeps its last rows when its importer fails. One failing for three days or more needs a fix in `scripts/leaderboards/`. After seven days its page says the scores are no longer updated automatically.', '');
   out.push('| Board | Last good read | Days | Error |', '|---|---|---|---|');
   for (const f of failing) out.push(`| [${f.id}](${f.url}) | ${f.since || 'never'} | ${f.since ? days(f.since, now) : ''} | ${f.error.replace(/\|/g, '/').slice(0, 120)} |`);
+  out.push('');
+}
+if (staleLocal.length) {
+  out.push(`## Boards the maintainer's computer hasn't read (${staleLocal.length})`, '');
+  out.push("GitHub's runners can't reach these boards, so a maintainer's computer reads them once a day with `node scripts/sync-leaderboards.ts --local` (`scripts/lib/local-boards.ts`). Start that read again. After seven days their pages say the scores are no longer updated automatically.", '');
+  for (const [id, b] of staleLocal) out.push(`- [${id}](${b.url ?? ''}): last read ${b.retrieved}, ${days(b.retrieved!, now)} days ago`);
   out.push('');
 }
 out.push(`## Fields boards publish that importers may drop (${flagged.length} boards)`, '');
