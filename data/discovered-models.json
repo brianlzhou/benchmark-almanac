@@ -14,7 +14,7 @@
           "url": "https://huggingface.co/tencent/Hy4-flash"
         },
         {
-          "source": "Hugging Face trending (#3)",
+          "source": "Hugging Face trending (#4)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/tencent/Hy4-flash"
         },
@@ -35,7 +35,7 @@
       "params": 220.3,
       "weights": "open",
       "license": "tencent-hy-license",
-      "likes": 556,
+      "likes": 608,
       "lab": "tencent"
     },
     {
@@ -201,6 +201,33 @@
       "lab": "ibm"
     },
     {
+      "key": "lingsante31flash",
+      "name": "LingSante-3.1-flash",
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+      "first": "2026-11-22",
+      "last": "2026-11-22",
+      "sources": [
+        {
+          "source": "Hugging Face (inclusionAI)",
+          "kind": "hf-lab",
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash"
+        },
+        {
+          "source": "Hugging Face trending (#101)",
+          "kind": "hf-trending",
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash"
+        }
+      ],
+      "score": 10,
+      "org": "inclusionAI",
+      "created": "2026-11-19",
+      "params": 572.1,
+      "weights": "open",
+      "license": "mit",
+      "likes": 29,
+      "lab": "ant-group"
+    },
+    {
       "key": "nanbeige4333b",
       "name": "Nanbeige4.3-33B",
       "url": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B",
@@ -239,7 +266,7 @@
           "url": "https://huggingface.co/internlm/Sage-S2.1-Flash"
         },
         {
-          "source": "Hugging Face trending (#37)",
+          "source": "Hugging Face trending (#34)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/internlm/Sage-S2.1-Flash"
         }
@@ -249,7 +276,7 @@
       "created": "2026-11-15",
       "params": 321.3,
       "weights": "open",
-      "likes": 260,
+      "likes": 294,
       "lab": "shanghai-ai-lab"
     },
     {
@@ -373,7 +400,7 @@
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
         },
         {
-          "source": "Hugging Face trending (#49)",
+          "source": "Hugging Face trending (#44)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
         }
@@ -384,7 +411,7 @@
       "params": 2.3,
       "weights": "open",
       "license": "mit",
-      "likes": 192,
+      "likes": 250,
       "lab": "microsoft"
     },
     {
@@ -507,6 +534,28 @@
       ],
       "score": 8,
       "created": "2026-10-15"
+    },
+    {
+      "key": "sensenovaloop9b",
+      "name": "SenseNova-Loop-9B",
+      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
+      "first": "2026-11-17",
+      "last": "2026-11-22",
+      "sources": [
+        {
+          "source": "Hugging Face trending (#10)",
+          "kind": "hf-trending",
+          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
+        }
+      ],
+      "score": 7,
+      "org": "sensenova",
+      "created": "2026-11-17",
+      "params": 9.4,
+      "weights": "open",
+      "license": "apache-2.0",
+      "likes": 503,
+      "lab": "sensetime"
     },
     {
       "key": "lfm3omni2b",
@@ -714,7 +763,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#140)",
+          "source": "Hugging Face trending (#128)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/inclusionAI/invoker-render-1.0"
         }
@@ -725,30 +774,8 @@
       "params": 33.1,
       "weights": "open",
       "license": "apache-2.0-and-cc-by-nc-4.0",
-      "likes": 23,
+      "likes": 25,
       "lab": "ant-group"
-    },
-    {
-      "key": "sensenovaloop9b",
-      "name": "SenseNova-Loop-9B",
-      "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B",
-      "first": "2026-11-17",
-      "last": "2026-11-22",
-      "sources": [
-        {
-          "source": "Hugging Face trending (#9)",
-          "kind": "hf-trending",
-          "url": "https://huggingface.co/sensenova/SenseNova-Loop-9B"
-        }
-      ],
-      "score": 5,
-      "org": "sensenova",
-      "created": "2026-11-17",
-      "params": 9.4,
-      "weights": "open",
-      "license": "apache-2.0",
-      "likes": 468,
-      "lab": "sensetime"
     },
     {
       "key": "tmld24varloopresearch",
@@ -758,7 +785,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#80)",
+          "source": "Hugging Face trending (#65)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/thinkingmachines/TML-d24-varloop-research"
         }
@@ -769,7 +796,7 @@
       "params": 26.4,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 33,
+      "likes": 41,
       "lab": "thinking-machines"
     },
     {
@@ -780,7 +807,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#102)",
+          "source": "Hugging Face trending (#99)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/tencent/WeMM-Video-35BA3B"
         }
@@ -791,7 +818,7 @@
       "params": 36.2,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 27,
+      "likes": 28,
       "lab": "tencent"
     },
     {
@@ -1158,7 +1185,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#7)",
+          "source": "Hugging Face trending (#6)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/higurashi-ai/Haru-4B"
         }
@@ -1179,7 +1206,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#45)",
+          "source": "Hugging Face trending (#52)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/speridlabs/idol"
         }
@@ -1209,7 +1236,7 @@
       "created": "2026-11-13",
       "weights": "open",
       "license": "mit",
-      "likes": 397,
+      "likes": 430,
       "lab": "meituan"
     },
     {
@@ -1220,7 +1247,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#4)",
+          "source": "Hugging Face trending (#3)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/inworld/voice-isolator"
         }
@@ -1230,7 +1257,7 @@
       "created": "2026-11-14",
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 537
+      "likes": 610
     },
     {
       "key": "zonos3mini",
@@ -1240,7 +1267,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#30)",
+          "source": "Hugging Face trending (#35)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/Zyphra/ZONOS3-Mini"
         }
@@ -1250,7 +1277,7 @@
       "created": "2026-11-09",
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 621
+      "likes": 622
     },
     {
       "key": "d12b",
@@ -43908,7 +43935,7 @@
       "last": "2026-11-22",
       "sources": [
         {
-          "source": "Hugging Face trending (#50)",
+          "source": "Hugging Face trending (#46)",
           "kind": "hf-trending",
           "url": "https://huggingface.co/KORMo-VL/KORMo-Web-11B"
         }
@@ -43919,7 +43946,7 @@
       "params": 11.2,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 239
+      "likes": 261
     },
     {
       "key": "kosirowada",
@@ -50780,7 +50807,7 @@
       "params": 36.8,
       "weights": "open",
       "license": "apache-2.0",
-      "likes": 336
+      "likes": 349
     },
     {
       "key": "maxxvitrmlpnanorw256swin1k",
