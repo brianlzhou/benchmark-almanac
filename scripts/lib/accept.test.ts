@@ -270,6 +270,7 @@ test('on the real data, the bot makes changes that pass check-data', () => {
     mkdirSync(join(dir, 'scripts', 'lib'), { recursive: true });
     copyFileSync(join(ROOT, 'scripts', 'check-data.ts'), join(dir, 'scripts', 'check-data.ts'));
     copyFileSync(join(ROOT, 'scripts', 'lib', 'util.ts'), join(dir, 'scripts', 'lib', 'util.ts'));
+    copyFileSync(join(ROOT, 'scripts', 'lib', 'scores.ts'), join(dir, 'scripts', 'lib', 'scores.ts'));
     mkdirSync(join(dir, 'data'));
     for (const f of readdirSync(join(ROOT, 'data'))) symlinkSync(join(ROOT, 'data', f), join(dir, 'data', f));
     for (const o of outcomes)

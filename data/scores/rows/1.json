@@ -1,0 +1,28 @@
+{
+  "rows": [
+    ["1h-videoqa-google","gemini-2-5-pro-jun-2025",null,null,78.95,"2025-06-05",null,null,null,{"run":"2026-06-08"}],
+    ["1h-videoqa-google","gemini-3-flash",null,null,79.21,"2025-12-17",null,null,null,{"run":"2026-05-18"}],
+    ["1h-videoqa-google","claude-sonnet-4-6",null,null,67.33,"2026-02-17",null,null,null,{"run":"2026-05-18"}],
+    ["1h-videoqa-google","gemini-3-1-pro",null,null,78.22,"2026-02-19",null,null,null,{"run":"2026-06-08"}],
+    ["1h-videoqa-google","gemini-3-1-flash-lite",null,null,78.22,"2026-03-03",null,null,null,{"run":"2026-06-08"}],
+    ["1h-videoqa-google","gemini-3-5-flash",null,null,80.2,"2026-05-19",null,null,null,{"run":"2026-06-08"}],
+    ["1h-videoqa-google","claude-opus-4-8",null,null,71.29,"2026-05-28",null,null,null,{"run":"2026-06-08"}],
+    ["1h-videoqa-google","gpt-5-6-sol",null,null,62.38,"2026-07-09",null,null,null,{"run":"2026-07-30"}],
+    ["1h-videoqa-google","gpt-5-6-terra",null,null,67.33,"2026-07-09",null,null,null,{"run":"2026-07-30"}],
+    ["1h-videoqa-google","gemini-3-5-flash-lite",null,null,75.25,"2026-07-21",null,null,null,{"run":"2026-07-30"}],
+    ["1h-videoqa-google","gemini-3-6-flash",null,null,82.18,"2026-07-21",null,null,null,{"run":"2026-07-30"}],
+    ["1h-videoqa-google","grok-4-6",null,null,60,"2026-08-12",null,null,null,{"run":"2026-09-17"}],
+    ["1h-videoqa-google","gemini-3-7-flash",null,null,89.11,"2026-08-13",null,null,null,{"run":"2026-08-27"}],
+    ["1h-videoqa-google","gemini-3-8-flash",null,null,87.13,"2026-09-02",null,null,null,{"run":"2026-09-10"}],
+    ["1h-videoqa-google","gpt-6-astra",null,null,75.25,"2026-09-03",null,null,null,{"run":"2026-09-17"}],
+    ["1h-videoqa-google","grok-4-7",null,null,59.41,"2026-09-21",null,null,null,{"run":"2026-10-22"}],
+    ["1h-videoqa-google","gpt-6-luna",null,null,57.43,"2026-09-22",null,null,null,{"run":"2026-09-26"}],
+    ["1h-videoqa-google","gpt-6-sol",null,null,66.34,"2026-09-22",null,null,null,{"run":"2026-09-26"}],
+    ["1h-videoqa-google","gemini-4-argon",null,null,87,"2026-09-30",null,null,null,{"run":"2026-10-09"}],
+    ["1h-videoqa-google","claude-haiku-5-5",null,null,68.32,"2026-10-07",null,null,null,{"run":"2026-10-09"}]
+  ],
+  "others": [
+    ["1x-world-model-challenge","1x-technologies/GENIE_35M","maskgit_steps 2",null,8.99,null,null,null,{"tokenAccuracy":3.01,"lpips":0.217,"secondsPerFrame":0.03}],
+    ["1x-world-model-challenge","1x-technologies/GENIE_138M","maskgit_steps 2",null,8.79,null,null,null,{"tokenAccuracy":3.2,"lpips":0.207,"secondsPerFrame":0.075}]
+  ]
+}

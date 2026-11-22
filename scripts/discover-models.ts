@@ -11,6 +11,7 @@
 // usage: node scripts/discover-models.ts [--days 3] [--only <reader>] [--dry]
 import { existsSync } from 'node:fs';
 import { readJson, writeJson, dataPath, daysAgo } from './lib/util.ts';
+import { readScores } from './lib/scores.ts';
 import { FROM, TODAY, makeReader } from './lib/discover/core.ts';
 import { HF_ORGS } from './lib/discover/labs.ts';
 import { makeResolver } from './lib/models.ts';
@@ -88,7 +89,7 @@ const READERS: Record<string, { run: (x: ModelReader) => Promise<void> | void; s
   bluesky: { run: blueskyModels, seconds: 90 },
   // last, so a name a board lists can add evidence to a find from the other readers
   boards: {
-    run: (x) => boardNames(x, readJson<{ others: [string, string][] }>(dataPath('scores', 'leaderboards.json')).others),
+    run: (x) => boardNames(x, (readScores().others ?? []) as [string, string][]),
     seconds: 30,
   },
 };

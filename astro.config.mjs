@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { closeSync, existsSync, openSync, readFileSync, statSync } from 'node:fs';
+import { closeSync, existsSync, openSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -87,6 +87,8 @@ function lastmodOf(url) {
   if (!lastmods) {
     const read = (/** @type {string} */ f) => JSON.parse(readFileSync(new URL(`./data/${f}`, import.meta.url), 'utf8'));
     const lb = read('scores/leaderboards.json');
+    // each board's rows live in data/scores/rows/<first character of the board id>.json (scripts/lib/scores.ts)
+    if (!lb.rows) lb.rows = readdirSync(new URL('./data/scores/rows/', import.meta.url)).filter((f) => f.endsWith('.json')).sort().flatMap((f) => read(`scores/rows/${f}`).rows);
     const epoch = read('scores/epoch.json');
     const docs = [...read('cards.json'), ...read('system-cards.json')];
     const asOf = [epoch.retrieved, lb.retrieved, ...docs.map((d) => d.date)].filter(Boolean).sort().at(-1);

@@ -11,6 +11,8 @@ import epochJson from '../../data/scores/epoch.json';
 // Imported as text, not as JSON: the dev server turns a JSON object into a literal module, and past about 30 MB it
 // cannot parse that, so every page fails. One string parses fine, and the dev server still reloads when it changes.
 import leaderboardsText from '../../data/scores/leaderboards.json?raw';
+// the store keeps each board's rows in data/scores/rows/<first character of the board id>.json (scripts/lib/scores.ts)
+const leaderboardRowTexts = import.meta.glob<string>('../../data/scores/rows/*.json', { query: '?raw', import: 'default', eager: true });
 import harnessesJson from '../../data/harnesses.json';
 import intervalsJson from '../../data/intervals.json';
 import type { Benchmark, Card, Harness, Lab, Model, Resource, Score, ScoreInfo } from './types.ts';
@@ -101,6 +103,15 @@ export interface BoardPart {
   better?: 'higher' | 'lower';
 }
 const lb = JSON.parse(leaderboardsText) as { retrieved: string | null; boards: Record<string, Board>; rows: BoardRow[]; others?: BoardRow[] };
+if (!Array.isArray(lb.rows)) {
+  lb.rows = [];
+  lb.others = [];
+  for (const [, text] of Object.entries(leaderboardRowTexts).sort(([a], [b]) => (a < b ? -1 : 1))) {
+    const shard = JSON.parse(text) as { rows?: BoardRow[]; others?: BoardRow[] };
+    for (const r of shard.rows ?? []) lb.rows.push(r);
+    for (const r of shard.others ?? []) lb.others.push(r);
+  }
+}
 /** Official leaderboards: the boards each benchmark's makers publish, read by scripts/sync-leaderboards.ts. */
 export const LEADERBOARDS = lb.boards;
 
@@ -444,6 +455,27 @@ const lbByBench = groupBy(leaderboardScores, (s) => s.benchmark);
 const sysByBench = groupBy(systemScores, (s) => s.benchmark);
 const unlistedByBench = groupBy(unlistedScores, (s) => s.benchmark);
 const cardScoresByBench = groupBy(cardScores, (s) => s.benchmark);
+
+/**
+ * Whether a board's scores still update on their own. The daily sync reads every live board, and a paper's fixed
+ * table about once a month. A board whose reads have failed for STOPPED_AFTER days or more has stopped updating: its
+ * source moved, closed or blocks our reader, and the page keeps the scores from the last read that worked.
+ */
+export interface BoardUpdates {
+  kind: 'daily' | 'paper' | 'stopped';
+  /** The last read that worked. */
+  last: string;
+  /** Days from the last read that worked to the last sync. */
+  days: number;
+}
+export const STOPPED_AFTER = 7;
+export function boardUpdates(id: string): BoardUpdates | undefined {
+  const board = LEADERBOARDS[id];
+  if (!board?.retrieved || !(lbByBench.get(id)?.length || sysByBench.get(id)?.length || unlistedByBench.get(id)?.length)) return undefined;
+  const days = lb.retrieved ? Math.max(0, Math.round((Date.parse(lb.retrieved) - Date.parse(board.retrieved)) / 86_400_000)) : 0;
+  if (board.failed && days >= STOPPED_AFTER) return { kind: 'stopped', last: board.retrieved, days };
+  return { kind: board.static === 'paper' ? 'paper' : 'daily', last: board.retrieved, days };
+}
 const citesByBench = groupBy(
   cards.flatMap((c) => c.results.map((r) => ({ card: c, result: r }))),
   (x) => x.result.benchmark,

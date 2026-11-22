@@ -1,0 +1,20 @@
+{
+  "rows": [
+    ["67ai-l2-report-structuring","qwen3-coder-next",null,null,0.9982,"2026-02-02",0.000015,null,{"validJson":100,"contradictionRecall":0.647,"falseAlarmRate":0.007,"decodeTokensPerSecond":23.6},{"trials":3}],
+    ["67ai-l2-report-structuring","gemma-4-26b-a4b",null,null,1,"2026-04-02",0.000016,null,{"validJson":100,"contradictionRecall":0.882,"falseAlarmRate":0.004,"decodeTokensPerSecond":22.7},{"trials":3}],
+    ["67ai-l2-report-structuring","qwen-3-6-35b-a3b",null,null,0.9972,"2026-04-14",0.000011,null,{"validJson":100,"contradictionRecall":0.824,"falseAlarmRate":0.007,"decodeTokensPerSecond":28.9},{"trials":3}],
+    ["67ai-l2-report-structuring","qwen-3-8-27b",null,null,1,"2026-08-14",0.00002,null,{"validJson":100,"contradictionRecall":0.882,"falseAlarmRate":0,"decodeTokensPerSecond":20.2},{"trials":3}],
+    ["67ai-l2-report-structuring","deepseek-v4-1-flash",null,null,0.9992,"2026-09-09",0.00091,null,{"validJson":100,"contradictionRecall":1,"falseAlarmRate":0.004}],
+    ["67ai-l2-report-structuring","claude-opus-5-5",null,null,1,"2026-09-22",0.01736,null,{"validJson":100,"contradictionRecall":1,"falseAlarmRate":0}],
+    ["67ai-l3-guideline-qa","qwen3-coder-next",null,null,80,"2026-02-02",null,null,{"retrieved":85.5,"abstention":96.7,"worstRunWrongDoses":3,"deltaVsOpus":-10.8},{"trials":3}],
+    ["67ai-l3-guideline-qa","gemma-4-26b-a4b",null,null,79.2,"2026-04-02",null,null,{"retrieved":86.4,"abstention":100,"worstRunWrongDoses":2,"deltaVsOpus":-11.7},{"trials":3}],
+    ["67ai-l3-guideline-qa","qwen-3-6-35b-a3b",null,null,75.8,"2026-04-14",null,null,{"retrieved":81.8,"abstention":100,"worstRunWrongDoses":1,"deltaVsOpus":-15},{"trials":3}],
+    ["67ai-l3-guideline-qa","qwen-3-8-27b",null,null,81.7,"2026-08-14",null,null,{"retrieved":88.2,"abstention":100,"worstRunWrongDoses":0,"deltaVsOpus":-9.2},{"trials":3}],
+    ["67ai-l3-guideline-qa","deepseek-v4-1-flash",null,null,90,"2026-09-09",null,null,{"retrieved":96.4,"abstention":100,"worstRunWrongDoses":0,"deltaVsOpus":-0.8},{"trials":1}],
+    ["67ai-l3-guideline-qa","claude-opus-5-5",null,null,90.8,"2026-09-22",null,null,{"retrieved":98.2,"abstention":100,"worstRunWrongDoses":0},{"trials":1}]
+  ],
+  "others": [
+    ["67ai-l2-report-structuring","Nemotron 3.5 30B-A3B",null,null,0.98,null,0.000013,null,{"validJson":100,"contradictionRecall":0.176,"falseAlarmRate":0.018,"decodeTokensPerSecond":26.7},{"trials":3}],
+    ["67ai-l3-guideline-qa","Nemotron 3.5 30B-A3B",null,null,71.7,null,null,null,{"retrieved":76.4,"abstention":73.3,"worstRunWrongDoses":12,"deltaVsOpus":-19.2},{"trials":3}]
+  ]
+}

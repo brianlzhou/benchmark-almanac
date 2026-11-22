@@ -43,7 +43,7 @@ out.push(`This issue is rewritten by the daily sync. Last update: ${now}.`, '');
 out.push(`## Importers that failed (${failing.length})`, '');
 if (!failing.length) out.push('Every board read cleanly.', '');
 else {
-  out.push('A board keeps its last rows when its importer fails. One failing for three days or more needs a fix in `scripts/leaderboards/`.', '');
+  out.push('A board keeps its last rows when its importer fails. One failing for three days or more needs a fix in `scripts/leaderboards/`. After seven days its page says the scores are no longer updated automatically.', '');
   out.push('| Board | Last good read | Days | Error |', '|---|---|---|---|');
   for (const f of failing) out.push(`| [${f.id}](${f.url}) | ${f.since || 'never'} | ${f.since ? days(f.since, now) : ''} | ${f.error.replace(/\|/g, '/').slice(0, 120)} |`);
   out.push('');
