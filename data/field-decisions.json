@@ -50,11 +50,15 @@
     "agent-memory-leaderboard": {
       "submission_id": "ignore"
     },
+    "agentharm": {
+      "Refusal Rates (Agent Tasks → Chat-only Tasks)": "ignore"
+    },
     "agentic-trader-hku": {
       "avg_entry_price": "ignore",
       "fill_price": "ignore",
       "nav_usd": "ignore",
-      "step": "ignore"
+      "step": "ignore",
+      "agent_name": "wired"
     },
     "agenticsts": {
       "License": "ignore"
@@ -100,6 +104,9 @@
     "amemops": {
       "updated": "ignore"
     },
+    "android-agent-arena": {
+      "Agent": "wired"
+    },
     "androidarena": {
       "#Token (Compressed)": "ignore",
       "#Token (Original)": "ignore"
@@ -112,13 +119,27 @@
       "Step": "ignore"
     },
     "anomalyxl": {
-      "LL (samples)": "ignore"
+      "LL (samples)": "ignore",
+      "TimeRLM-image (GPT 5.5)": "wired",
+      "TimeRLM-text (GPT 5.5)": "wired",
+      "TimeRLM-text (Qwen3.5 4B - RL)": "wired",
+      "TimeRLM-text (Qwen3.5 4B)": "wired"
     },
     "arabculture": {
       "#Samples": "ignore"
     },
+    "are-bench": {
+      "Actor harness": "wired",
+      "Harness version": "ignore",
+      "Time limit": "ignore"
+    },
     "arena-t2i-hard": {
-      "Reported steps": "ignore"
+      "Reported steps": "ignore",
+      "EMA on policy weights": "ignore",
+      "Gradient accumulation steps": "ignore"
+    },
+    "arti4d": {
+      "w/o trajectory smoothing": "ignore"
     },
     "artificial-analysis-intelligence-index": {
       "artificial_analysis_intelligence_index_cost.cost_per_task": "ignore",
@@ -164,7 +185,9 @@
       "Price $/1k min": "ignore",
       "AssemblyAI U3.5 Realtime Pro — min latency": "ignore",
       "Runs": "ignore",
-      "English / CI": "ignore"
+      "English / CI": "ignore",
+      "AssemblyAI AssemblyAI-STT-3.7-Realtime-Agent": "ignore",
+      "AssemblyAI-STT-3.7-Realtime-Agent": "ignore"
     },
     "astroclimb": {
       "submissionId": "ignore"
@@ -182,12 +205,21 @@
     "audio-reasoning-challenge-2026": {
       "Submission Limit": "ignore"
     },
+    "autoresearchexam": {
+      "Terminus 2 · 200 turns": "ignore"
+    },
+    "avps-360": {
+      "W-repeat": "ignore"
+    },
     "baanchmark": {
       "runtime.en": "ignore",
       "runtime.sk": "ignore"
     },
     "ballotbench": {
       "Log": "ignore"
+    },
+    "balrog": {
+      "Agent": "wired"
     },
     "bank-question-corpus": {
       "model.releaseDate": "ignore",
@@ -198,6 +230,9 @@
     },
     "barc-bench": {
       "Artifacts": "ignore"
+    },
+    "bash-agent-evals-braintrust": {
+      "Agent": "wired"
     },
     "bea-2025-pedagogical-ability-assessment": {
       "Submission": "ignore"
@@ -228,7 +263,13 @@
       "raw.ciHalf": "ignore",
       "raw.hallucCI": "ignore",
       "raw.mediumCI": "ignore",
-      "raw.se": "ignore"
+      "raw.se": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.submissionType": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "behavior2code-turing": {
       "Date (2026)": "ignore"
@@ -265,7 +306,8 @@
       "Candidate Submission": "ignore"
     },
     "biophys-bridge": {
-      "sci_evo_trajectory[]": "ignore"
+      "sci_evo_trajectory[]": "ignore",
+      "agent_tasks[]": "ignore"
     },
     "bird-sql": {
       "Empirical Upper Bound": "ignore"
@@ -347,7 +389,8 @@
       "row.date_published": "ignore"
     },
     "chessbench": {
-      "log\\log (class.)": "ignore"
+      "log\\log (class.)": "ignore",
+      "Agent": "wired"
     },
     "chestx-ray14": {
       "Report": "ignore"
@@ -362,7 +405,8 @@
       "model.releaseDate": "ignore"
     },
     "civbench-civilization-vi": {
-      "row.lastUpdated": "ignore"
+      "row.lastUpdated": "ignore",
+      "row.agentModel": "wired"
     },
     "cl-bench": {
       "domain_std": "ignore",
@@ -548,7 +592,12 @@
       "raw.ciHalf": "ignore",
       "raw.hallucCI": "ignore",
       "raw.mediumCI": "ignore",
-      "raw.se": "ignore"
+      "raw.se": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "wired",
+      "raw.taskAgent": "ignore"
     },
     "crossmodal-3600": {
       "model.releaseDate": "ignore",
@@ -593,6 +642,9 @@
     },
     "cusp-scientific-forecasting": {
       "n_date": "ignore"
+    },
+    "cvqa": {
+      "submission__submission_metadata": "wired"
     },
     "cyberstrike-turing": {
       "Date (2026)": "ignore"
@@ -660,7 +712,12 @@
       "raw.ciHalf": "ignore",
       "raw.hallucCI": "ignore",
       "raw.mediumCI": "ignore",
-      "raw.se": "ignore"
+      "raw.se": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "dayjob-law": {
       "raw.runDetails": "ignore",
@@ -699,7 +756,12 @@
       "raw.ciHalf": "ignore",
       "raw.hallucCI": "ignore",
       "raw.mediumCI": "ignore",
-      "raw.se": "ignore"
+      "raw.se": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "dbpedia-14": {
       "model.releaseDate": "ignore"
@@ -740,7 +802,8 @@
       "Open-source CUA foundation models": "ignore",
       "Open-source generalist VLMs": "ignore",
       "Author-designed workflows": "ignore",
-      "Official documentation": "ignore"
+      "Official documentation": "ignore",
+      "Agent": "wired"
     },
     "dew-logiq": {
       "date": "ignore"
@@ -758,6 +821,9 @@
       "judge_usage.prompt_tokens": "ignore",
       "judge_usage.prompt_tokens_details": "ignore",
       "judge_usage.total_tokens": "ignore"
+    },
+    "dirty-integration": {
+      "What the agent sees": "ignore"
     },
     "displace-m-2026": {
       "Open-source models": "ignore"
@@ -812,7 +878,12 @@
       "raw.mediumRuns": "ignore",
       "raw.runs": "ignore",
       "raw.runsInMean": "ignore",
-      "raw.trials": "ignore"
+      "raw.trials": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "duplexledger": {
       "Controller parameters": "ignore",
@@ -830,11 +901,20 @@
     "echo-prediction-leaderboard-unipat": {
       "firstPredictionDate": "ignore"
     },
+    "economics-arena": {
+      "Second price auctions": "ignore"
+    },
+    "edinet-bench": {
+      "Japanese-lm-fin-harness (Hirano, 2024)": "ignore"
+    },
     "edis": {
       "model.releaseDate": "ignore"
     },
     "eduart": {
       "N Evaluated": "ignore"
+    },
+    "ego2flow": {
+      "Framework components": "ignore"
     },
     "ego4d-goal-step": {
       "submission__id": "ignore",
@@ -847,7 +927,8 @@
       "Release date": "ignore"
     },
     "egocross": {
-      "TokenInj-RAA": "ignore"
+      "TokenInj-RAA": "ignore",
+      "Open-Source Track": "wired"
     },
     "egolife-with-memory": {
       "Duration": "ignore"
@@ -874,6 +955,10 @@
       "Mean minutes on the same 14 jointly solved tasks": "ignore",
       "Minutes saved by cooperation, with 95% interval": "ignore"
     },
+    "embodiedlab": {
+      "Left to the agent": "ignore",
+      "The agent receives": "ignore"
+    },
     "engiworld": {
       "open": "ignore"
     },
@@ -893,6 +978,9 @@
       "model.releaseDate": "ignore",
       "model.maxTokens": "ignore"
     },
+    "euchre-bench": {
+      "Agent": "ignore"
+    },
     "eurosat": {
       "model.releaseDate": "ignore"
     },
@@ -901,7 +989,8 @@
       "Kling 2.1 Std [49]": "ignore"
     },
     "evoarena": {
-      "Step Δ": "ignore"
+      "Step Δ": "ignore",
+      "Agent": "ignore"
     },
     "evoarena-personamem-evo": {
       "Step Δ": "ignore"
@@ -1001,6 +1090,9 @@
     "food-101": {
       "model.releaseDate": "ignore"
     },
+    "formal-conjectures": {
+      "DM prover agent (dev)": "wired"
+    },
     "formal-logic-deduction": {
       "Steps": "ignore",
       "warmup steps": "ignore"
@@ -1040,6 +1132,9 @@
       "Submission code": "ignore",
       "Tech. report": "ignore"
     },
+    "fungraph3d": {
+      "w/o confidence-aware edge reasoning*": "ignore"
+    },
     "futureomni": {
       "Date": "ignore"
     },
@@ -1051,6 +1146,10 @@
     },
     "gecko": {
       "# Words evaluated": "ignore"
+    },
+    "gedit-bench": {
+      "28 steps": "ignore",
+      "28 steps w flash-attn(512 / 786 / 1024)": "ignore"
     },
     "gen-bench-dynamic-scheduling": {
       "Parameters and Constants": "ignore",
@@ -1116,7 +1215,12 @@
       "raw.ciHalf": "ignore",
       "raw.hallucCI": "ignore",
       "raw.mediumCI": "ignore",
-      "raw.se": "ignore"
+      "raw.se": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "geobenchx-2": {
       "Release date": "ignore"
@@ -1128,10 +1232,17 @@
       "steps.competition": "ignore",
       "steps.navigation": "ignore",
       "steps.place_naming": "ignore",
-      "steps.synthetic": "ignore"
+      "steps.synthetic": "ignore",
+      "zero.step_limit": "ignore"
     },
     "geosound": {
       "time": "ignore"
+    },
+    "gift-eval-ctx": {
+      "mean_mase.moirai_agent_hist_macro": "ignore",
+      "mean_mase.moirai_agent_hist_macro_micro": "ignore",
+      "relative_mase.moirai_agent_hist_macro": "ignore",
+      "relative_mase.moirai_agent_hist_macro_micro": "ignore"
     },
     "glianorex": {
       "License": "ignore"
@@ -1162,7 +1273,11 @@
       "Val. Samples": "ignore"
     },
     "groundui": {
-      "Logs": "ignore"
+      "Logs": "ignore",
+      "AgentStudio": "ignore"
+    },
+    "group-binary-search-riedl": {
+      "Time-Trend": "ignore"
     },
     "gsr-bench": {
       "StepAudio-R1": "ignore",
@@ -1171,7 +1286,10 @@
     "gta-2": {
       "Cost": "ignore",
       "Open-source": "ignore",
-      "Total steps / sub-tasks": "ignore"
+      "Total steps / sub-tasks": "ignore",
+      "Agent Systems": "ignore",
+      "Harness": "ignore",
+      "Minimax Agent": "ignore"
     },
     "gui-odyssey": {
       "# Avg. Steps": "ignore",
@@ -1187,6 +1305,9 @@
       "Cost": "ignore",
       "Ended on time limit": "ignore"
     },
+    "halludial": {
+      "turn.": "ignore"
+    },
     "hallusionbench": {
       "Updated on": "ignore"
     },
@@ -1196,7 +1317,9 @@
       "TotalTime (min)": "ignore"
     },
     "harnessdev": {
-      "Official switches": "ignore"
+      "Official switches": "ignore",
+      "Human harness + paired model": "ignore",
+      "Human-engineered harness": "ignore"
     },
     "healthbench-consensus": {
       "turns": "ignore",
@@ -1255,6 +1378,12 @@
       "terminal_runs": "ignore",
       "requirement.lower": "ignore",
       "requirement.upper": "ignore"
+    },
+    "ifbench": {
+      "multi-turn": "wired",
+      "single-turn": "wired",
+      "trained on multi-turn": "wired",
+      "trained on single-turn": "wired"
     },
     "ifscale": {
       "10 Instructions std.dev": "ignore",
@@ -1460,6 +1589,9 @@
       "QwQ 32B (Team, 2025b)": "ignore",
       "HyperCLOVAX-SEED-Text-Instruct-1.5B": "ignore"
     },
+    "knowu-bench": {
+      "max_steps": "wired"
+    },
     "ko-gdpval-upstage": {
       "Per 1M tokens": "ignore"
     },
@@ -1480,6 +1612,9 @@
     "lahjoita-puhetta-asr": {
       "# of tokens": "ignore"
     },
+    "large-language-model-football-league": {
+      "Team": "wired"
+    },
     "large-vocabulary-video-instance-segmentation": {
       "Open": "ignore"
     },
@@ -1487,7 +1622,8 @@
       "Tokens": "ignore"
     },
     "legal-consent-sweep": {
-      "Native harness": "ignore"
+      "Native harness": "ignore",
+      "Agent time allowance": "wired"
     },
     "legalreasonbench": {
       "Overhead (mean end-to-end minus agent)": "ignore",
@@ -1552,8 +1688,16 @@
       "date": "ignore",
       "release_date": "ignore"
     },
+    "livesearch": {
+      "Step 5 Preview (High)": "wired"
+    },
     "livesecbench": {
       "publish_time": "ignore"
+    },
+    "llamatouch": {
+      "Agent": "wired",
+      "AppAgent": "wired",
+      "CoCo-Agent": "wired"
     },
     "llm-fantasy-football-arena-classic": {
       "updated_at_ms": "ignore",
@@ -1608,6 +1752,9 @@
     "longbench-english": {
       "GovReport": "ignore"
     },
+    "longmemeval": {
+      "Time-aware": "ignore"
+    },
     "lotte": {
       "model.releaseDate": "ignore",
       "model.maxTokens": "ignore"
@@ -1646,6 +1793,14 @@
       "RAG (SemanticScholar (No Date))": "ignore",
       "# Samples": "ignore"
     },
+    "mattoolbench": {
+      "Code Agent": "ignore",
+      "GUI Agent": "ignore",
+      "Origin Agent": "ignore"
+    },
+    "mcptox": {
+      "LLM Agent": "wired"
+    },
     "meccano-action-recognition": {
       "Duration (min)": "ignore"
     },
@@ -1653,7 +1808,11 @@
       "95% CI": "ignore"
     },
     "medbench-opencompass-5": {
-      "Doubao-Seed-2.0-pro": "ignore"
+      "Doubao-Seed-2.0-pro": "ignore",
+      "AGENT": "ignore",
+      "CCR-Agent": "ignore",
+      "DataAgent": "ignore",
+      "SafetyAgent": "ignore"
     },
     "medcalc-bench-original": {
       "Average Token Length": "ignore"
@@ -1807,6 +1966,13 @@
     "multihop-rag": {
       "Avg. Tokens": "ignore"
     },
+    "multilingual-exams": {
+      "Agent Performance on T-Eval Chinese": "ignore",
+      "Agent Performance on T-Eval English": "ignore"
+    },
+    "musebench-zhao-music-understanding": {
+      "MuseAgent (w/ M-OMR)": "ignore"
+    },
     "music-21-instrument-separation": {
       "Ours, RGB+Trajectory": "ignore"
     },
@@ -1875,7 +2041,12 @@
       "raw.mediumRuns": "ignore",
       "raw.runs": "ignore",
       "raw.runsInMean": "ignore",
-      "raw.trials": "ignore"
+      "raw.trials": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "nlebench": {
       "#avg_turns/dialogue": "ignore",
@@ -2005,7 +2176,8 @@
     },
     "os-kairos": {
       "Actual Steps": "ignore",
-      "Human Steps": "ignore"
+      "Human Steps": "ignore",
+      "CogAgent": "ignore"
     },
     "osworld-g": {
       "Agent Model": "ignore"
@@ -2035,6 +2207,9 @@
     },
     "patchcamelyon": {
       "model.releaseDate": "ignore"
+    },
+    "patientagentbench-amazon": {
+      "Agent": "wired"
     },
     "pcbbench-protoflow": {
       "costPerSolvedUsd": "ignore",
@@ -2088,7 +2263,9 @@
       "rubricInfo.weights": "ignore"
     },
     "ping-or-peek-snorkel": {
-      "row.trace": "ignore"
+      "row.trace": "ignore",
+      "row.agent": "ignore",
+      "row.harness": "ignore"
     },
     "pixmo-count": {
       "Steps": "ignore",
@@ -2108,7 +2285,10 @@
       "failed_attempts.completion": "ignore",
       "failed_attempts.count": "ignore",
       "failed_attempts.prompt": "ignore",
-      "failed_attempts.seconds": "ignore"
+      "failed_attempts.seconds": "ignore",
+      "harness_files_sha": "ignore",
+      "harness_git_sha": "ignore",
+      "harness_version": "wired"
     },
     "pokebench-tab": {
       "failed_attempts.completion": "ignore",
@@ -2133,7 +2313,9 @@
       "version_release_date": "ignore"
     },
     "prediction-arena-arcada": {
-      "created_at": "ignore"
+      "created_at": "ignore",
+      "agent_id": "ignore",
+      "agent_name": "wired"
     },
     "preference-asr": {
       "Std.": "ignore"
@@ -2159,7 +2341,9 @@
       "Cost": "ignore",
       "Material cost (US$)": "ignore",
       "Failed file changed after the report": "ignore",
-      "Pass, ≤3 tries (95% CI)": "ignore"
+      "Pass, ≤3 tries (95% CI)": "ignore",
+      "Harness": "ignore",
+      "Model and harness (same GPU)": "ignore"
     },
     "prompt-to-bench-ho-16": {
       "Cost": "ignore",
@@ -2170,7 +2354,9 @@
       "Thinking off, 2,048 tokens: passed per sample": "ignore",
       "Thinking on, 16,384 tokens: passed per sample": "ignore",
       "Tokens/s": "ignore",
-      "Pass, ≤3 tries (95% CI)": "ignore"
+      "Pass, ≤3 tries (95% CI)": "ignore",
+      "Harness": "ignore",
+      "Model and harness (same GPU)": "ignore"
     },
     "proteinlmbench": {
       "Tokens statistic of the fine-tuning dataset": "ignore",
@@ -2178,6 +2364,9 @@
     },
     "psychosmiley-erp-leaderboard": {
       "raw_log": "ignore"
+    },
+    "ptcg-bench": {
+      "Agent": "wired"
     },
     "pulsebench-tab": {
       "Samples": "ignore"
@@ -2254,6 +2443,11 @@
       "Number of parameters": "ignore",
       "Inference real-time factor": "ignore"
     },
+    "radiobench": {
+      "CLI Agent with MATLAB Agentic Toolkit": "ignore",
+      "Open-Source Multi-Agent Systems": "ignore",
+      "w/o RadioAgent": "ignore"
+    },
     "rcm-bench-1": {
       "cost.currency": "ignore"
     },
@@ -2263,7 +2457,12 @@
       "11,369 unsampled turns": "ignore",
       "Required turn in the top five": "ignore",
       "Required turn in top five": "ignore",
-      "Misapplication, verified locus none": "ignore"
+      "Misapplication, verified locus none": "ignore",
+      "C1 three preceding turns": "ignore",
+      "C2 recorded evidence turns": "ignore",
+      "C3 ten turns from BM25": "ignore",
+      "C4 ten preceding turns": "ignore",
+      "Recency over user turns": "ignore"
     },
     "reasonseg": {
       "# data samples": "ignore"
@@ -2277,13 +2476,15 @@
       "Turn 1": "ignore",
       "Turn 2": "ignore",
       "Turn 3": "ignore",
-      "Turn 4": "ignore"
+      "Turn 4": "ignore",
+      "AgentCo (Side A)": "ignore"
     },
     "redstonebench": {
       "log": "ignore"
     },
     "refav": {
-      "submission__id": "ignore"
+      "submission__id": "ignore",
+      "submission__method_name": "wired"
     },
     "refspatial-expand-bench": {
       "Samples": "ignore"
@@ -2315,6 +2516,14 @@
     "rexbench": {
       "Submission": "ignore"
     },
+    "riosworld": {
+      "Agent Response": "ignore",
+      "Agent-SafetyBench": "ignore",
+      "AgentDojo": "ignore",
+      "AgentHarm": "ignore",
+      "InjecAgent": "ignore",
+      "ST-WebAgentBench": "ignore"
+    },
     "riskrubric": {
       "pillar_weights.excessive_agency": "ignore",
       "pillar_weights.privacy": "ignore",
@@ -2335,7 +2544,10 @@
     "rmu-echr": {
       "\\topruleTokens": "ignore",
       "B-Margin of Appreciation": "ignore",
-      "I-Margin of Appreciation": "ignore"
+      "I-Margin of Appreciation": "ignore",
+      "Agent": "ignore",
+      "\\topruleAgent": "ignore",
+      "\\topruleAgent Type BIO Label": "ignore"
     },
     "rng-bench": {
       "Default environment seeds": "ignore"
@@ -2370,15 +2582,20 @@
       "Seeds": "ignore"
     },
     "rsi-arena": {
-      "Weights": "ignore"
+      "Weights": "ignore",
+      "Agent": "wired"
     },
     "rsi-control-arena": {
       "Transcript": "ignore",
-      "Hidden reasoning step": "ignore"
+      "Hidden reasoning step": "ignore",
+      "Agent": "wired",
+      "Attack agent": "wired"
     },
     "rsi-inference-bench": {
       "Report": "ignore",
-      "Per attempt (median)": "ignore"
+      "Per attempt (median)": "ignore",
+      "Agent": "wired",
+      "Every agent": "ignore"
     },
     "rsibench-data": {
       "Official": "ignore",
@@ -2470,6 +2687,12 @@
       "details.slug": "ignore",
       "details.source_run": "ignore"
     },
+    "semaplc-function-track": {
+      "++Runtime": "ignore"
+    },
+    "semaplc-project-context": {
+      "++Runtime": "ignore"
+    },
     "semeval-2022-task-8-multilingual-news-article-similarity": {
       "model.releaseDate": "ignore",
       "model.maxTokens": "ignore"
@@ -2504,7 +2727,12 @@
       "raw.mediumRuns": "ignore",
       "raw.runs": "ignore",
       "raw.runsInMean": "ignore",
-      "raw.trials": "ignore"
+      "raw.trials": "ignore",
+      "raw.agent": "ignore",
+      "raw.benchmarkHarnessVersion": "ignore",
+      "raw.harness": "ignore",
+      "raw.reasoningParam": "ignore",
+      "raw.taskAgent": "ignore"
     },
     "short-form-bench": {
       "Seed 12": "ignore",
@@ -2516,6 +2744,9 @@
     },
     "siqa": {
       "std": "ignore"
+    },
+    "skill-reward-hacking": {
+      "framework": "ignore"
     },
     "skillsbench": {
       "recomputed_date": "ignore"
@@ -2534,6 +2765,15 @@
     },
     "songeval": {
       "Utt. Average Duration (min)": "ignore"
+    },
+    "spa-bench": {
+      "Agent": "wired",
+      "Agent-as-a-Model": "ignore",
+      "AppAgent": "wired",
+      "CogAgent": "wired",
+      "MobileAgent": "wired",
+      "MobileAgentV2": "wired",
+      "OdysseyAgent": "wired"
     },
     "space-10": {
       "Open Source 2D MLLMs": "ignore",
@@ -2595,6 +2835,10 @@
       "doubao-seed-2-0-pro": "ignore",
       "Std F1": "ignore"
     },
+    "statebench-video-continuation": {
+      "Full StateAgent": "ignore",
+      "StateAgent": "wired"
+    },
     "stationerybench-robocurve": {
       "Transcript": "ignore",
       "Output tokens": "ignore"
@@ -2629,10 +2873,15 @@
       "Seed 2.1 Pro": "ignore",
       "Seed Evolving": "ignore"
     },
+    "swe-game": {
+      "Main agent inputs": "ignore",
+      "Scaffold": "ignore"
+    },
     "swe-interact": {
       "Our trajectory (Baseline Neutral user)": "ignore",
       "Our trajectory (Expert Nitpicker user)": "ignore",
-      "Trial: deepswe_kcp-go-multiplexed-kcp-s": "ignore"
+      "Trial: deepswe_kcp-go-multiplexed-kcp-s": "ignore",
+      "Agent model": "wired"
     },
     "swe-lancer": {
       "Price Range": "ignore",
@@ -2646,6 +2895,10 @@
     },
     "swe-smith": {
       "Number of Runs": "ignore"
+    },
+    "swiss-judgment-prediction": {
+      "long (up to 2048 tokens)": "wired",
+      "standard (up to 512 tokens)": "wired"
     },
     "tatoeba-sentence-retrieval": {
       "model.releaseDate": "ignore",
@@ -2662,7 +2915,9 @@
       "Time (h)": "ignore",
       "Full sets / attempts": "ignore",
       "Successful attempts": "ignore",
-      "Certified (%)": "ignore"
+      "Certified (%)": "ignore",
+      "Agent": "wired",
+      "Harness": "wired"
     },
     "te-ca": {
       "Tokens in answers": "ignore",
@@ -2675,6 +2930,9 @@
     },
     "terminal-bench-2-0": {
       "n_trials": "ignore"
+    },
+    "terminal-bench-2-0-verified-zai": {
+      "Agent": "ignore"
     },
     "terminal-bench-3-0": {
       "metrics.display_total_tokens": "ignore"
@@ -2692,7 +2950,10 @@
       "Evaluation attempts": "ignore",
       "95% CI (pp)": "ignore",
       "99% CI (pp)": "ignore",
-      "Verified files": "ignore"
+      "Verified files": "ignore",
+      "agentSteps; repairSteps": "ignore",
+      "contextTokens": "ignore",
+      "reviewMaxOutputTokens": "ignore"
     },
     "the-aggregate-guesswork": {
       "release_date": "ignore"
@@ -2716,7 +2977,8 @@
       "Duration (Seconds, avg/max)": "ignore"
     },
     "toolathlon-verified": {
-      "# Turns": "ignore"
+      "# Turns": "ignore",
+      "Agent": "ignore"
     },
     "toolbench": {
       "Reasoning Traces": "ignore"
@@ -2738,6 +3000,9 @@
     "trafficimag": {
       "95% CI": "ignore"
     },
+    "travelplanner": {
+      "Agent": "ignore"
+    },
     "triworldbench": {
       "metrics.trajectory_accuracy": "ignore",
       "submission.datasetSplit": "ignore",
@@ -2747,6 +3012,9 @@
     },
     "tv-ad": {
       "std.": "ignore"
+    },
+    "typed-decision-bench-blobfish": {
+      "system.maxInputTokens": "ignore"
     },
     "ucf101": {
       "model.releaseDate": "ignore",
@@ -2758,7 +3026,16 @@
     },
     "ui-genie-rm-evaluation": {
       "open": "ignore",
+      "Parameters": "ignore",
+      "Agent": "ignore",
+      "UI-Genie-Agent (Ours)": "ignore",
+      "UI-Genie-Agent-7B (Ours)": "ignore"
+    },
+    "uit-victsd": {
       "Parameters": "ignore"
+    },
+    "uk-aisi-caisi-enterprise-network-range": {
+      "Token Limit": "wired"
     },
     "unigenbench": {
       "release_date": "ignore"
@@ -2773,7 +3050,18 @@
       "SEED-Bench(Img)": "ignore"
     },
     "v-jepa-2-zero-shot-robot-manipulation-meta": {
-      "Planning Details": "ignore"
+      "Planning Details": "ignore",
+      "#Samples": "ignore",
+      "Common parameters": "ignore",
+      "Early stopping step": "ignore",
+      "Frame Step": "ignore",
+      "Samples": "ignore",
+      "Seed": "ignore",
+      "Steps": "ignore",
+      "Time": "ignore",
+      "Train Anticipation time": "ignore",
+      "Val Anticipation time": "ignore",
+      "Warmup Steps": "ignore"
     },
     "vaguebench": {
       "# Samples": "ignore"
@@ -2797,12 +3085,23 @@
     "vals-time-horizon-index-ksp": {
       "Duration / Test": "ignore"
     },
+    "vals-vibe-code-bench-1-100": {
+      "What the agent must do": "ignore"
+    },
+    "vals-vibe-code-bench-1-100-v1-1": {
+      "What the agent must do": "ignore"
+    },
     "vatex-zh": {
       "Model / Team": "ignore"
     },
     "vcg-diverse": {
       "Time": "ignore",
       "CI": "ignore"
+    },
+    "velociti": {
+      "Agent Binding": "ignore",
+      "Agent Coreference": "ignore",
+      "Agent Random": "ignore"
     },
     "venusbench-mobile": {
       "cost.pt": "ignore",
@@ -2869,7 +3168,8 @@
       "Step-Audio 2 mini": "ignore"
     },
     "voice-arena-goal-dataset": {
-      "Time field": "ignore"
+      "Time field": "ignore",
+      "Agent": "ignore"
     },
     "voicearena-arabic-msa": {
       "samples": "ignore"
@@ -2962,7 +3262,10 @@
     },
     "xyeval-google": {
       "Example Compliance quotes from agentic trace": "ignore",
-      "Tasks # (SWE-bench Verified)": "ignore"
+      "Tasks # (SWE-bench Verified)": "ignore",
+      "Agent": "ignore",
+      "Max steps": "ignore",
+      "Max turns": "ignore"
     },
     "yocausal": {
       "Release Date": "ignore"
