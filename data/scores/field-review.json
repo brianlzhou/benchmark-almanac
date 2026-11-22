@@ -299,7 +299,6 @@
     "ewok": [{"field":"Mean LogProbs Accuracy","kind":"link","why":"not stored","share":1}],
     "exams-v": [{"field":"Multimodal samples","kind":"trials","why":"not stored","share":1},{"field":"Samples","kind":"trials","why":"not stored","share":1}],
     "exp-bench": [{"field":"Std T","kind":"uncertainty","why":"not stored","share":1}],
-    "exploitbench": [{"field":"Seeds","kind":"trials","why":"not stored","share":1},{"field":"Trial reporting","kind":"trials","why":"not stored","share":1}],
     "extract-bench-contextual": [{"field":"Tokens","kind":"tokens","why":"not stored","share":1}],
     "extractbench": [{"field":"Confidence_AUGRC","kind":"uncertainty","why":"not stored","share":1}],
     "extractbench-pro": [{"field":"Confidence_AUGRC","kind":"uncertainty","why":"not stored","share":1},{"field":"Confidence_Coverage","kind":"uncertainty","why":"not stored","share":1}],
