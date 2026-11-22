@@ -1,5 +1,5 @@
-// Reads every official leaderboard importer in scripts/leaderboards/ and writes
-// data/scores/leaderboards.json. Model names map to data/models.json through the shared resolver plus each
+// Reads every official leaderboard importer in scripts/leaderboards/ and writes the leaderboard store:
+// data/scores/leaderboards.json and the rows files in data/scores/rows/ (scripts/lib/scores.ts). Model names map to data/models.json through the shared resolver plus each
 // importer's own aliases. Entries the resolver cannot place (fine-tunes, agent systems, products, older models)
 // go to `others` under the board's own name, so a benchmark page can still show the whole board. Only `rows`
 // count toward leaders and lab credit. In `rows` the date is the model's release (so charts line up with Epoch);
@@ -16,6 +16,7 @@ import { begin, observe, review, type Flag } from './lib/feed-fields.ts';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, dataPath, readJson, today, bodyHooks } from './lib/util.ts';
+import { readScores, writeScores } from './lib/scores.ts';
 import { makeResolver } from './lib/models.ts';
 import type { BoardPart, Leaderboard, LeaderboardRow } from './leaderboards/types.ts';
 
@@ -104,7 +105,7 @@ function infoOf(r: LeaderboardRow, resolve: ReturnType<typeof makeResolver>, run
 
 const outPath = dataPath('scores', 'leaderboards.json');
 const store: Store = existsSync(outPath)
-  ? readJson<Store>(outPath)
+  ? (readScores() as unknown as Store)
   : { retrieved: null, boards: {}, columns: COLUMNS, rows: [] };
 const benchmarks = new Set(readJson<{ id: string }[]>(dataPath('benchmarks.json')).map((b) => b.id));
 // the field watch: every body an importer fetches is noted, and fields of a kind the rows don't store are flagged for
@@ -351,11 +352,7 @@ if (!dry) {
   const flagged = sortKeys(fieldReview);
   writeFileSync(reviewPath, `{\n  "note": "Fields a board publishes that its importer may drop, or that the board added since the last sync. Wire them into the importer, or mark them reviewed in data/field-decisions.json.",\n  "updated": ${JSON.stringify(today())},\n  "boards": {\n${Object.entries(flagged).map(([id, f]) => `    ${JSON.stringify(id)}: ${JSON.stringify(f)}`).join(',\n')}\n  }\n}\n`);
   console.log(`Field watch: ${Object.keys(flagged).length} boards with fields to review (data/scores/field-review.json).`);
-  const lines = (rs: Row[]) => rs.map((r) => `    ${JSON.stringify(r)}`).join(',\n');
-  writeFileSync(
-    outPath,
-    `{\n  "retrieved": ${JSON.stringify(store.retrieved)},\n  "boards": ${JSON.stringify(boards, null, 2).replace(/\n/g, '\n  ')},\n  "columns": ${JSON.stringify(store.columns)},\n  "rows": [\n${lines(store.rows)}\n  ],\n  "otherColumns": ${JSON.stringify(OTHER_COLUMNS)},\n  "others": [\n${lines(others)}\n  ]\n}\n`,
-  );
+  writeScores({ retrieved: store.retrieved, boards, columns: store.columns, rows: store.rows, otherColumns: OTHER_COLUMNS, others });
   if (rematch) console.log(`Rematch: ${rematched} unlisted entries now match a model.`);
   console.log(`Wrote ${store.rows.length} leaderboard scores and ${others.length} unlisted entries from ${Object.keys(store.boards).length} boards.${failed ? ` ${failed} failed.` : ''}`);
 }

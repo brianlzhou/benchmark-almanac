@@ -13,6 +13,7 @@ import { mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } 
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { ROOT, dataPath, readJson } from './lib/util.ts';
+import { readScores } from './lib/scores.ts';
 import { TABLES, VIEWS, EXAMPLES, CREDIT_LINE, HOW_TO_CREDIT, LICENSE_NOTE, DATES_NOTE, SITE_URL, citation } from '../src/lib/db-schema.ts';
 
 const OUT_DIR = join(ROOT, 'public', 'data');
@@ -25,7 +26,7 @@ const benchmarks = readJson<Json[]>(dataPath('benchmarks.json'));
 const launch = readJson<Json[]>(dataPath('cards.json'));
 const docs = readJson<Json[]>(dataPath('system-cards.json'));
 const epoch = readJson<Json>(dataPath('scores', 'epoch.json'));
-const lb = readJson<Json>(dataPath('scores', 'leaderboards.json'));
+const lb = readScores() as Json;
 const abstracts = readJson<Record<string, Json>>(dataPath('abstracts.json'));
 const github = readJson<Record<string, Json>>(dataPath('github.json'));
 

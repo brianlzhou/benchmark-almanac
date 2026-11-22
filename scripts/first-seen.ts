@@ -13,8 +13,8 @@
 // A listed row keeps its first day if it leaves a board and comes back. A row we had on `since` that leaves and
 // comes back counts as new on its return.
 //
-// Run it after the leaderboard sync, before the commit. It compares the working copy of data/scores/leaderboards.json
-// with the last committed one (git HEAD), and stamps today on the rows that are new. With no git history it only
+// Run it after the leaderboard sync, before the commit. It compares the working copy of the leaderboard store
+// (scripts/lib/scores.ts) with the last committed one (git HEAD), and stamps today on the rows that are new. With no git history it only
 // makes sure the file exists.
 //
 // usage: node scripts/first-seen.ts [--backfill] [--dry]
@@ -23,6 +23,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { ROOT, dataPath, readJson, today } from './lib/util.ts';
+import { ROWS_DIR, STORE_FILE, readScores, readScoresAt } from './lib/scores.ts';
 
 type BoardRow = [string, string, string | null, string | null, ...unknown[]];
 interface Scores {
@@ -43,7 +44,6 @@ export interface Ledger {
 }
 
 const OUT = dataPath('scores', 'first-seen.json');
-const FILE = 'data/scores/leaderboards.json';
 const ABOUT =
   'The day we first saw each leaderboard score that a board posted after we started reading it. Written by scripts/first-seen.ts after each sync. Rows we had on the `since` day, rows that came with a board on the day we first read it, and rows of a model on the day it joined the catalog are not listed: they keep their model release date.';
 /** A board whose new keys outnumber half its rows (and at least this many) changed how we read it, not what it says. */
@@ -113,30 +113,31 @@ function add(ledger: Ledger, found: ReturnType<typeof newPosts>, day: string) {
 }
 
 const readCommitted = (rev: string, path: string) => JSON.parse(git('show', `${rev}:${path}`));
+const committedScores = (rev: string) => readScoresAt(rev, git) as unknown as Scores;
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const dry = process.argv.includes('--dry');
-  const working = snapshot(readJson<Scores>(dataPath('scores', 'leaderboards.json')), readJson(dataPath('models.json')));
+  const working = snapshot(readScores() as unknown as Scores, readJson(dataPath('models.json')));
   let ledger: Ledger;
   let head: Snapshot | null = null;
   try {
-    head = snapshot(readCommitted('HEAD', FILE), readCommitted('HEAD', 'data/models.json'));
+    head = snapshot(committedScores('HEAD'), readCommitted('HEAD', 'data/models.json'));
   } catch {
     console.log('No committed scores file to compare with: nothing to stamp.');
   }
 
   if (process.argv.includes('--backfill') || !existsSync(OUT)) {
     // oldest first: each version against the one before it, dated by its commit
-    const commits = git('log', '--reverse', '--format=%H %cd', '--date=short', '--', FILE)
+    const commits = git('log', '--reverse', '--format=%H %cd', '--date=short', '--', STORE_FILE, ROWS_DIR)
       .trim()
       .split('\n')
       .filter(Boolean)
       .map((l) => ({ sha: l.split(' ')[0], date: l.split(' ')[1] }));
-    if (!commits.length) throw new Error(`${FILE} has no git history`);
+    if (!commits.length) throw new Error(`${STORE_FILE} has no git history`);
     ledger = { about: ABOUT, since: commits[0].date, updated: commits[0].date, boards: {}, columns: ['benchmark', 'entry', 'setting', 'harness', 'first'], rows: [] };
-    let prev = snapshot(readCommitted(commits[0].sha, FILE), readCommitted(commits[0].sha, 'data/models.json'));
+    let prev = snapshot(committedScores(commits[0].sha), readCommitted(commits[0].sha, 'data/models.json'));
     for (const c of commits.slice(1)) {
-      const cur = snapshot(readCommitted(c.sha, FILE), readCommitted(c.sha, 'data/models.json'));
+      const cur = snapshot(committedScores(c.sha), readCommitted(c.sha, 'data/models.json'));
       const known = new Set(ledger.rows.map((r) => rowKey(r[0], r[1], r[2], r[3])));
       const found = newPosts(prev, cur, known);
       // the first day counts as `since`: everything seen that day may be older

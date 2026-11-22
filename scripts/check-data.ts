@@ -4,6 +4,7 @@
 // usage: node scripts/check-data.ts
 import { existsSync } from 'node:fs';
 import { dataPath, readJson, key } from './lib/util.ts';
+import { readScores } from './lib/scores.ts';
 
 type Rec = Record<string, unknown> & { id: string; name: string };
 const labs = readJson<Rec[]>(dataPath('labs.json'));
@@ -12,7 +13,7 @@ const benchmarks = readJson<Rec[]>(dataPath('benchmarks.json'));
 const cards = readJson<(Rec & { lab: string; model: string; date: string; results: { benchmark: string }[] })[]>(dataPath('cards.json'));
 const systemCards = readJson<{ id: string; lab: string; model: string; date: string; doc: string; release?: string | null; results: { benchmark: string; section: string }[] }[]>(dataPath('system-cards.json'));
 const epoch = readJson<{ rows: [string, string, ...unknown[]][]; eci: { model: string }[] }>(dataPath('scores', 'epoch.json'));
-const boards = readJson<{ rows: [string, string, ...unknown[]][] }>(dataPath('scores', 'leaderboards.json'));
+const boards = readScores();
 const sources = readJson<Rec[]>(dataPath('sources.json'));
 
 const taxonomy = readJson<{ levels: { id: string }[]; scoring: { id: string }[]; formats: { id: string }[]; subcategories: Record<string, { id: string }[]> }>(dataPath('taxonomy.json'));

@@ -11,6 +11,7 @@
 // Each issue carries a hidden marker with the task id. A rerun finds its issues by that marker: it never opens
 // a second issue for a task, never reopens a closed one, and closes an open one whose gap has been filled.
 import { dataPath, readJson } from './lib/util.ts';
+import { readScores } from './lib/scores.ts';
 import { openTasks, issueOf, type AuditFind, type Find, type Task, type TaskGroup } from '../src/lib/tasks.ts';
 import type { Benchmark, Model } from '../src/lib/types.ts';
 
@@ -26,7 +27,7 @@ const benchmarks = readJson<Benchmark[]>(dataPath('benchmarks.json'));
 const models = readJson<Model[]>(dataPath('models.json'));
 const cards = readJson<Doc[]>(dataPath('cards.json'));
 const docs = [...cards, ...readJson<Doc[]>(dataPath('system-cards.json'))];
-const lb = readJson<Rows & { boards: Record<string, { retrieved?: string; failed?: { date: string; error: string } }> }>(dataPath('scores', 'leaderboards.json'));
+const lb = readScores() as unknown as Rows & { boards: Record<string, { retrieved?: string; failed?: { date: string; error: string } }> };
 const epoch = readJson<Rows & { eci: { model: string; eci: number | null }[] }>(dataPath('scores', 'epoch.json'));
 const discovered = readJson<{ items: Find[] }>(dataPath('discovered.json'));
 const reviewed = readJson<{ rejected: { name: string }[] }>(dataPath('reviewed.json'));

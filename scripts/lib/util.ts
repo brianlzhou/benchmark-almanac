@@ -92,6 +92,17 @@ export async function fetchBytes(url: string, init: RequestInit = {}, tries = 3,
   return fetchBody(url, init, tries, timeoutMs, (res) => res.arrayBuffer());
 }
 
+/**
+ * Why a site refused the request, when its CDN says: Cloudflare and Vercel mark the answers of their bot checks. Sites
+ * behind them often refuse cloud servers, such as GitHub's, and answer a home connection.
+ */
+function blockedBy(res: Response): string {
+  if (res.headers.get('cf-mitigated') === 'challenge') return ' (a Cloudflare bot check)';
+  if (res.headers.get('x-vercel-mitigated')) return ' (a Vercel bot check)';
+  if (res.status === 403 && /cloudflare/i.test(res.headers.get('server') ?? '')) return ' (refused by Cloudflare)';
+  return '';
+}
+
 async function fetchBody<T>(url: string, init: RequestInit, tries: number, timeoutMs: number, read: (res: Response) => Promise<T>): Promise<T> {
   let last: unknown;
   for (let i = 0; i < tries; i++) {
@@ -102,10 +113,18 @@ async function fetchBody<T>(url: string, init: RequestInit, tries: number, timeo
         signal: AbortSignal.timeout(timeoutMs),
       });
       if (res.status === 429 || res.status >= 500) throw new Error(`${res.status} ${url}`);
-      if (!res.ok) throw Object.assign(new Error(`${res.status} ${url}`), { fatal: true });
+      if (!res.ok) throw Object.assign(new Error(`${res.status} ${url}${blockedBy(res)}`), { fatal: true });
       return await read(res);
     } catch (e) {
-      last = e;
+      // Node says only "fetch failed" when no response came, and keeps the reason (a timeout, a refused or reset
+      // connection, a DNS miss) in `cause`
+      const cause = (e as { cause?: { code?: string; name?: string } }).cause;
+      last =
+        e instanceof TypeError && e.message === 'fetch failed' && cause
+          ? new Error(`fetch failed (${cause.code ?? cause.name}) ${url}`)
+          : (e as { name?: string }).name === 'TimeoutError'
+            ? new Error(`no answer in ${timeoutMs / 1000} s from ${url}`)
+            : e;
       if ((e as { fatal?: boolean }).fatal) break;
       await new Promise((r) => setTimeout(r, 2000 * (i + 1)));
     }

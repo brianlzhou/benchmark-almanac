@@ -21,7 +21,7 @@ meaning is opt-in. It needs WebGPU and downloads a model of about 210 MB the fir
 | `data/taxonomy.json` | The allowed values for those four fields: subcategories under each category, six levels from everyday to research frontier, six scoring methods (from checked automatically to arenas and real events), and seven answer formats. |
 | `data/cards.json` | Lab launch posts: the benchmarks in each post's headline table and the score the post reports. |
 | `data/system-cards.json` | System cards, model cards and technical reports: every result each document reports for its model, with the section it sits in. |
-| `data/scores/leaderboards.json` | Scores from each benchmark's own leaderboard, read by the importers in `scripts/leaderboards/`. |
+| `data/scores/leaderboards.json`, `data/scores/rows/` | Scores from each benchmark's own leaderboard, read by the importers in `scripts/leaderboards/`. `leaderboards.json` holds each board's facts, and `rows/<c>.json` the scores of the boards whose id starts with `c`, so no file nears GitHub's 100 MB limit. Read them with `readScores()` in `scripts/lib/scores.ts`. |
 | `data/scores/epoch.json` | Scores and the Epoch Capabilities Index from [Epoch AI](https://epoch.ai/benchmarks), CC BY 4.0. |
 | `data/github.json` | Stars, license, last push and archived state for each benchmark repo. |
 | `data/abstracts.json` | The abstract of each benchmark's own paper, in its authors' words, with the paper's source and license. |
@@ -49,7 +49,7 @@ These TypeScript files run directly with Node 22.23.4 or later. Only `embed.ts` 
 | --- | --- |
 | `node scripts/discover.ts` | Reads every source in `data/sources.json` marked `automated`: paper feeds, newsletters, registries, leaderboards, lab model cards and lists. Scores each find and writes `data/discovered.json`. `--only <id> --dry` tests one reader. |
 | `node scripts/discover-models.ts` | Looks for new models in Epoch AI's data, the lab feeds and the leaderboards, and writes `data/discovered-models.json`. |
-| `node scripts/sync-leaderboards.ts` | Runs every importer in `scripts/leaderboards/` and rewrites `data/scores/leaderboards.json`. A board that fails, or that returns less than half its last rows, keeps its last rows. A full run drops the rows of boards whose importer is gone. `--only <id> --dry` tests one importer. `--allow-drop` accepts a board that really shrank. |
+| `node scripts/sync-leaderboards.ts` | Runs every importer in `scripts/leaderboards/` and rewrites `data/scores/leaderboards.json` and `data/scores/rows/`. A board that fails, or that returns less than half its last rows, keeps its last rows. A full run drops the rows of boards whose importer is gone. `--only <id> --dry` tests one importer. `--allow-drop` accepts a board that really shrank. |
 | `node scripts/sync-epoch.ts` | Downloads Epoch AI's data and rewrites `data/scores/epoch.json`. New models and benchmarks join the registries. It needs the `unzip` program, and it writes nothing if the download gives less than half the last row count (`--allow-drop` overrides). |
 | `node scripts/sync-github.ts` | Refreshes `data/github.json`. Set `GITHUB_TOKEN` first. |
 | `node scripts/abstracts.ts` | Adds abstracts to `data/abstracts.json` for benchmarks that have none. It reads arXiv (CC0), the ACL Anthology (CC BY 4.0 from 2016) and DOIs whose license is CC0 or CC BY, and OpenReview when `OPENREVIEW_USERNAME` and `OPENREVIEW_PASSWORD` are set. `--all` reads every paper again. |
