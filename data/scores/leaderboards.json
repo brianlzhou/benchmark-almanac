@@ -14218,7 +14218,8 @@
       "url": "https://compassionbench.com",
       "feed": "https://compassionbench.com/api/overall-scores",
       "terms": "The benchmark authors publish aggregate results on https://compassionbench.com/ and gate access to the questions.",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 16,
       "unmatched": [],
       "parts": {
@@ -49276,13 +49277,10 @@
       "url": "https://clocktower-radio.com/",
       "feed": "https://clocktower-radio.com/ (static HTML leaderboard table, Rating)",
       "terms": "robots.txt allows all paths to general agents and sets the content signal use=reference, ai-train=no; one request per sync, scores cited to the site.",
-      "retrieved": "2026-11-18",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 28,
       "unmatched": [],
-      "failed": {
-        "date": "2026-11-19",
-        "error": "403 https://clocktower-radio.com/"
-      },
       "stats": {
         "goodWin": {
           "name": "Good-side win rate",
@@ -89767,7 +89765,8 @@
       "url": "https://evalatro.dev/",
       "feed": "https://evalatro.dev/api",
       "terms": "The runner package declares ISC. I found no separate license for submitted scores. The host returned no readable robots.txt rules.",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 29,
       "unmatched": [
         "/data/models/safetensors/MiniMaxAI/MiniMax-M2.7",
@@ -91351,18 +91350,15 @@
       "url": "https://exploitbench.ai/",
       "feed": "https://exploitbench.ai/ (server-rendered \"Full leaderboard\" table, Cap coverage)",
       "terms": "Server-rendered public page; robots.txt allows all paths (content signals: search yes, AI training no, use reference) and the site states no terms.",
-      "retrieved": "2026-11-18",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 20,
       "unmatched": [],
       "reference": [
         "baseline",
         "AutoNudge"
       ],
-      "harnesses": "system",
-      "failed": {
-        "date": "2026-11-19",
-        "error": "403 https://exploitbench.ai/"
-      }
+      "harnesses": "system"
     },
     "exploitgym": {
       "url": "https://www.cybergym.io/exploitgym/",
@@ -102283,7 +102279,8 @@
       "url": "https://competitions.codalab.org/competitions/28485#results",
       "feed": "https://competitions.codalab.org/competitions/28485/results/46733/data",
       "terms": "The competition terms do not give a separate score reuse license. CodaLab returned 404 for robots.txt.",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 0,
       "unmatched": [
         "Rihab",
@@ -104000,7 +103997,8 @@
       "url": "https://foodtruckbench.com",
       "feed": "https://foodtruckbench.com/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 65,
       "unmatched": [
         "Nex N2 Pro"
@@ -117003,7 +117001,8 @@
       "url": "https://glee-competition.com/leaderboard",
       "feed": "https://glee-competition.com/leaderboard-snapshot/overall-all.json",
       "terms": "The competition publishes a final snapshot without specifying a score reuse license on the Space. https://huggingface.co/spaces/EilamSha/glee-competition-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 13,
       "unmatched": [
         "007_casino_royal",
@@ -117502,11 +117501,6 @@
         "gamesPlayed": {
           "name": "Games played",
           "unit": "count"
-        },
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -122989,7 +122983,8 @@
       "url": "https://compassionbench.com/harvestbench",
       "feed": "https://compassionbench.com/harvestbench",
       "terms": "The HarvestBench implementation uses MIT. https://github.com/CompassionML/harvestbench/blob/main/LICENSE",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 9,
       "unmatched": [
         "GPT-4o-mini (snapshot unspecified)"
@@ -239883,7 +239878,8 @@
       "url": "https://competitions.codalab.org/competitions/29139",
       "feed": "https://competitions.codalab.org/competitions/29139/results/47908",
       "terms": "Public official competition results hosted by CodaLab; the almanac credits the Refer-YouTube-VOS organizers and links the source.",
-      "retrieved": "2026-11-18",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 0,
       "unmatched": [
         "CodaLab submission: Merci1",
@@ -262232,7 +262228,8 @@
       "url": "https://competitions.codalab.org/competitions/15333",
       "feed": "https://competitions.codalab.org/competitions/15333/results/26695",
       "terms": "Public CodaLab competition results. The Almanac credits the Story Cloze authors and CodaLab and links the source.",
-      "retrieved": "2026-11-18",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 0,
       "unmatched": [
         "CodaLab submission Hustle",
@@ -262250,17 +262247,14 @@
         "CodaLab submission sjtuadapt",
         "CodaLab submission tbmihaylov",
         "CodaLab submission ukp"
-      ],
-      "failed": {
-        "date": "2026-11-19",
-        "error": "fetch failed"
-      }
+      ]
     },
     "storycloze-2018": {
       "url": "https://competitions.codalab.org/competitions/15333",
       "feed": "https://competitions.codalab.org/competitions/15333/results/26694",
       "terms": "Public CodaLab competition results. The Almanac credits the Story Cloze authors and CodaLab and links the source.",
-      "retrieved": "2026-11-18",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 0,
       "unmatched": [
         "CodaLab submission DecstionBack",
@@ -262274,11 +262268,7 @@
         "CodaLab submission malkin",
         "CodaLab submission verbs_are_all_you_need",
         "CodaLab submission yutongl"
-      ],
-      "failed": {
-        "date": "2026-11-19",
-        "error": "fetch failed"
-      }
+      ]
     },
     "stratabench-land-v1": {
       "url": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2#what-changed-from-v1",
@@ -276268,7 +276258,8 @@
       "url": "https://compassionbench.com/tac",
       "feed": "https://compassionbench.com/api/tac/overview",
       "terms": "The site disallows crawling /api/ in robots.txt and prohibits ingestion into model training corpora.",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 68,
       "unmatched": [
         "Qwen2.5 32B + EM adapter (unpopular aesthetics)",
@@ -294722,7 +294713,8 @@
       "url": "https://wildlifebench.org/wildlife-knowledge/",
       "feed": "https://wildlifebench.org/data/wildlife-knowledge/results.json",
       "terms": "The disclaimer describes research and informational use. I found no explicit redistribution license for the scores or a leaderboard update date. https://wildlifebench.org/disclaimer/ The robots file allows this feed for the importer.",
-      "retrieved": "2026-11-20",
+      "local": true,
+      "retrieved": "2026-11-22",
       "rows": 7,
       "unmatched": [],
       "parts": {
