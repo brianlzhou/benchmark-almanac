@@ -1,27 +1,5 @@
 [
   {
-    "id": "onemillion-bench",
-    "name": "$OneMillion-Bench",
-    "category": "economic-work",
-    "subcategory": "work-occupations",
-    "level": "expert",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "Agent solves 400 expert-curated tasks in law, finance, industry, healthcare and science. Rubric grading of accuracy, logic, feasibility and compliance.",
-    "org": "Humanlaya + BIGAI + xbench",
-    "released": "2026-03",
-    "links": {
-      "repo": "https://github.com/humanlaya/OneMillion-Bench",
-      "dataset": "https://huggingface.co/datasets/humanlaya-data-lab/OneMillion-Bench",
-      "leaderboard": "https://xbench.org/profession/onemillion",
-      "paper": "https://arxiv.org/abs/2603.07980"
-    },
-    "access": "public",
-    "note": "NeurIPS 2026. Qwen reports an expert score judged by gemini-3.1-pro-preview.",
-    "unit": "%",
-    "confidence": "verified"
-  },
-  {
     "id": "ai-forensics-selected-moderation-api",
     "name": "(S)elected Moderation campaign prompts",
     "aliases": [
@@ -55,6 +33,28 @@
       "https://github.com/gizembrasser/ai_forensics/blob/main/output/NL_responses.xlsx"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "onemillion-bench",
+    "name": "$OneMillion-Bench",
+    "category": "economic-work",
+    "subcategory": "work-occupations",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Agent solves 400 expert-curated tasks in law, finance, industry, healthcare and science. Rubric grading of accuracy, logic, feasibility and compliance.",
+    "org": "Humanlaya + BIGAI + xbench",
+    "released": "2026-03",
+    "links": {
+      "repo": "https://github.com/humanlaya/OneMillion-Bench",
+      "dataset": "https://huggingface.co/datasets/humanlaya-data-lab/OneMillion-Bench",
+      "leaderboard": "https://xbench.org/profession/onemillion",
+      "paper": "https://arxiv.org/abs/2603.07980"
+    },
+    "access": "public",
+    "note": "NeurIPS 2026. Qwen reports an expert score judged by gemini-3.1-pro-preview.",
+    "unit": "%",
+    "confidence": "verified"
   },
   {
     "id": "100q-hard-anthropic",
@@ -10452,7 +10452,7 @@
     "note": "Model cards report the rounds R1, R2, and R3 separately or as an average.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 122.05,
+    "edi": 122.03,
     "epoch": {
       "epoch_name": "ANLI",
       "random": 33.33,
@@ -12563,7 +12563,7 @@
     "successor": "arc-agi-2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.52,
+    "edi": 145.5,
     "epoch": {
       "epoch_name": "ARC-AGI",
       "random": 0,
@@ -12620,7 +12620,7 @@
     "successor": "arc-agi-3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.65,
+    "edi": 154.68,
     "epoch": {
       "epoch_name": "ARC-AGI-2",
       "random": 0,
@@ -12698,7 +12698,7 @@
     "note": "Saturated by frontier models, which score above 95%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 94.14,
+    "edi": 94.33,
     "epoch": {
       "epoch_name": "ARC AI2",
       "random": 25,
@@ -20842,7 +20842,7 @@
     "successor": "big-bench-extra-hard",
     "unit": "%",
     "confidence": "verified",
-    "edi": 105.63,
+    "edi": 105.78,
     "epoch": {
       "epoch_name": "BBH",
       "random": 25,
@@ -25039,41 +25039,6 @@
     ]
   },
   {
-    "id": "browsesafe-plus-plus",
-    "name": "BrowseSafe++",
-    "aliases": [
-      "BrowseSafe Plus Plus",
-      "browsesafe-plus-plus"
-    ],
-    "category": "safety-alignment",
-    "subcategory": "safety-jailbreaks",
-    "level": "university",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "family": "browsesafe",
-    "version": "2",
-    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
-    "org": "Perplexity",
-    "released": "2026-10",
-    "links": {
-      "paper": "https://arxiv.org/abs/2610.17457",
-      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
-      "site": "https://browsesafe.perplexity.ai/",
-      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
-      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
-    },
-    "access": "public+private-holdout",
-    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://browsesafe.perplexity.ai/",
-      "https://arxiv.org/abs/2610.17457"
-    ],
-    "added": "2026-11-01"
-  },
-  {
     "id": "browsesafe-adapt",
     "name": "BrowseSafe-Adapt",
     "category": "safety-alignment",
@@ -25133,6 +25098,41 @@
       "https://browsesafe.perplexity.ai/",
       "https://app.primeintellect.ai/dashboard/environments/dmnsh001/BrowseSafe",
       "https://api.primeintellect.ai/api/v1/environmentshub/dmnsh001/BrowseSafe/@latest"
+    ],
+    "added": "2026-11-01"
+  },
+  {
+    "id": "browsesafe-plus-plus",
+    "name": "BrowseSafe++",
+    "aliases": [
+      "BrowseSafe Plus Plus",
+      "browsesafe-plus-plus"
+    ],
+    "category": "safety-alignment",
+    "subcategory": "safety-jailbreaks",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "family": "browsesafe",
+    "version": "2",
+    "description": "Detectors judge 38,675 matched attack and control web pages built from real production prompt injections, in HTML, Markdown, accessibility-tree and screenshot views. Scored by F1.",
+    "org": "Perplexity",
+    "released": "2026-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2610.17457",
+      "repo": "https://github.com/perplexityai/browsesafe-plus-plus",
+      "site": "https://browsesafe.perplexity.ai/",
+      "dataset": "https://huggingface.co/datasets/perplexity-ai/browsesafe-plus-plus",
+      "leaderboard": "https://huggingface.co/spaces/perplexity-ai/browsesafe-plus-plus-leaderboard"
+    },
+    "access": "public+private-holdout",
+    "note": "24 attack types and 80 languages. The 9,175-pair test split is held for the board, which lists 17 text detectors and adaptive attacks on seven browser agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://browsesafe.perplexity.ai/",
+      "https://arxiv.org/abs/2610.17457"
     ],
     "added": "2026-11-01"
   },
@@ -26416,7 +26416,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 139.15,
+    "edi": 139.1,
     "epoch": {
       "epoch_name": "CadEval",
       "random": 0,
@@ -30600,7 +30600,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 161.82,
+    "edi": 161.81,
     "epoch": {
       "epoch_name": "Chess Puzzles",
       "random": 4.96,
@@ -32330,7 +32330,7 @@
     "note": "500 contexts, 1,899 tasks, 31,607 rubrics. Follow-up CL-bench Life (2026-04) covers everyday contexts.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 180.78,
+    "edi": 180.63,
     "epoch": {
       "epoch_name": "CL-bench",
       "random": 0,
@@ -32365,7 +32365,7 @@
     "note": "The best model solved 19.3 percent of tasks at release.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177,
+    "edi": 177.23,
     "epoch": {
       "epoch_name": "CL-bench Life",
       "random": 0,
@@ -42733,6 +42733,37 @@
     "added": "2026-11-19"
   },
   {
+    "id": "csfd-sentiment",
+    "name": "ČSFD Sentiment",
+    "aliases": [
+      "CSFD Sentiment"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reading",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models classify the sentiment of movie reviews from the Czech and Slovak Film Database.",
+    "org": "Tomáš Brychcín and Ivan Habernal",
+    "released": "2013-09",
+    "links": {
+      "paper": "https://aclanthology.org/R13-1016/",
+      "site": "https://euroeval.com/datasets/czech",
+      "dataset": "https://huggingface.co/datasets/EuroEval/csfd-sentiment-mini"
+    },
+    "access": "public",
+    "note": "EuroEval scores sentiment labels with the Matthews correlation coefficient.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://euroeval.com/datasets/czech",
+      "https://aclanthology.org/R13-1016/",
+      "https://euroeval.com/tasks/sentiment-classification"
+    ],
+    "added": "2026-11-19"
+  },
+  {
     "id": "csl",
     "name": "CSL",
     "aliases": [
@@ -44226,7 +44257,7 @@
     "note": "40 professional CTF tasks from four competitions, each split into subtasks for partial credit. Agents work in a Kali Linux environment. The board mixes HAL leaderboard runs with lab system-card scores on 35 to 39 task subsets. Anthropic reports it near saturation. The makers point readers to their later BountyBench.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.13,
+    "edi": 146.12,
     "epoch": {
       "epoch_name": "Cybench",
       "random": 0,
@@ -45660,6 +45691,31 @@
     "added": "2026-11-20"
   },
   {
+    "id": "dans-editorial-checks-every",
+    "name": "Dan’s Editorial Checks",
+    "category": "writing-creative-taste",
+    "subcategory": "writing-taste",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models edit articles and provide literary feedback. Every scores their work against the author’s editorial checks.",
+    "org": "Every",
+    "links": {
+      "site": "https://checks.every.to/p/dans-editorial-checks",
+      "leaderboard": "https://checks.every.to/p/dans-editorial-checks"
+    },
+    "access": "public",
+    "note": "Every’s founder publishes a six-model scoreboard for six editorial tasks. Some models have results for only five tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://checks.every.to/p/dans-editorial-checks",
+      "https://frontier.every.to/experiments/gemini-4-hydrogen-edits-sentences-not-stories"
+    ],
+    "added": "2026-11-20"
+  },
+  {
     "id": "dane",
     "name": "DaNE",
     "category": "multilingual",
@@ -45849,31 +45905,6 @@
       "https://euroeval.com/tasks/knowledge"
     ],
     "added": "2026-11-19"
-  },
-  {
-    "id": "dans-editorial-checks-every",
-    "name": "Dan’s Editorial Checks",
-    "category": "writing-creative-taste",
-    "subcategory": "writing-taste",
-    "level": "university",
-    "scoring": "model-judged",
-    "format": "open-ended",
-    "description": "Models edit articles and provide literary feedback. Every scores their work against the author’s editorial checks.",
-    "org": "Every",
-    "links": {
-      "site": "https://checks.every.to/p/dans-editorial-checks",
-      "leaderboard": "https://checks.every.to/p/dans-editorial-checks"
-    },
-    "access": "public",
-    "note": "Every’s founder publishes a six-model scoreboard for six editorial tasks. Some models have results for only five tasks.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://checks.every.to/p/dans-editorial-checks",
-      "https://frontier.every.to/experiments/gemini-4-hydrogen-edits-sentences-not-stories"
-    ],
-    "added": "2026-11-20"
   },
   {
     "id": "dare-bench",
@@ -46643,6 +46674,32 @@
       "https://arxiv.org/abs/2601.02316",
       "https://huggingface.co/datasets/DatologyAI/DatBench",
       "https://github.com/datologyai/DatBench"
+    ],
+    "added": "2026-11-19"
+  },
+  {
+    "id": "dau-or-die-vietnamese-diacritic-restoration",
+    "name": "Dấu or Die: Vietnamese Diacritic Restoration",
+    "category": "multilingual",
+    "subcategory": "multilingual-reading",
+    "level": "school",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models restore missing diacritics in 37 Vietnamese sentences. A sentence earns credit only when every mark matches the reference.",
+    "org": "tuan nguyen",
+    "released": "2026-10",
+    "links": {
+      "site": "https://www.kaggle.com/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration",
+      "leaderboard": "https://www.kaggle.com/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration"
+    },
+    "access": "public",
+    "note": "Kaggle publishes scores for 7 distinct model versions.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration/versions/1",
+      "https://www.kaggle.com/api/v1/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration/leaderboard"
     ],
     "added": "2026-11-19"
   },
@@ -54192,7 +54249,7 @@
     "note": "Near saturation, with top models at about 98% in August 2026. Random guessing scores 40%.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 135.68,
+    "edi": 135.69,
     "epoch": {
       "epoch_name": "DTBench",
       "random": 40,
@@ -54969,32 +55026,6 @@
     "added": "2026-11-05"
   },
   {
-    "id": "dau-or-die-vietnamese-diacritic-restoration",
-    "name": "Dấu or Die: Vietnamese Diacritic Restoration",
-    "category": "multilingual",
-    "subcategory": "multilingual-reading",
-    "level": "school",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models restore missing diacritics in 37 Vietnamese sentences. A sentence earns credit only when every mark matches the reference.",
-    "org": "tuan nguyen",
-    "released": "2026-10",
-    "links": {
-      "site": "https://www.kaggle.com/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration",
-      "leaderboard": "https://www.kaggle.com/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration"
-    },
-    "access": "public",
-    "note": "Kaggle publishes scores for 7 distinct model versions.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://www.kaggle.com/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration/versions/1",
-      "https://www.kaggle.com/api/v1/benchmarks/tuanfelixnguyen/du-or-die-vietnamese-diacritic-restoration/leaderboard"
-    ],
-    "added": "2026-11-19"
-  },
-  {
     "id": "e-bench-tencent",
     "name": "E-Bench (Tencent)",
     "aliases": [
@@ -55461,7 +55492,7 @@
     "note": "One card was banned in 2026-10 after it broke the game. Epoch expects saturation soon. Game material is not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.95,
+    "edi": 163.82,
     "epoch": {
       "epoch_name": "EBR-bench",
       "random": 0,
@@ -62051,7 +62082,7 @@
     "note": "41 real V8 N-day vulnerabilities with production mitigations on. 16 binary capability flags over five tiers: coverage, bug triggering, V8 internal primitives, general primitives and arbitrary code execution. Flags are checked by oracles compiled into a patched d8 binary. Episodes cap at 300 turns. Saturated by GPT-6 Astra at 100%, and OpenAI built a post-cutoff internal port to check contamination.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 163.24,
+    "edi": 163.34,
     "epoch": {
       "epoch_name": "ExploitBench",
       "random": 0,
@@ -64330,7 +64361,7 @@
     "access": "unknown",
     "unit": "%",
     "confidence": "likely",
-    "edi": 133.43,
+    "edi": 133.41,
     "epoch": {
       "epoch_name": "Fiction.LiveBench",
       "random": 0,
@@ -66586,41 +66617,6 @@
     ]
   },
   {
-    "id": "flores-plus",
-    "name": "FLORES+",
-    "aliases": [
-      "FLORES Plus",
-      "flores_plus",
-      "OLDI FLORES+"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-translation",
-    "level": "university",
-    "scoring": "verified",
-    "format": "open-ended",
-    "family": "flores",
-    "version": "plus",
-    "description": "Models translate English Wikipedia sentences that professionals and community contributors translated into over 200 languages. Outputs are scored with metrics such as chrF against the references.",
-    "org": "Open Language Data Initiative (OLDI)",
-    "released": "2023-10",
-    "links": {
-      "repo": "https://github.com/openlanguagedata/flores",
-      "site": "https://oldi.org/",
-      "dataset": "https://huggingface.co/datasets/openlanguagedata/flores_plus"
-    },
-    "access": "public",
-    "note": "OLDI calls it an extended and improved version of FLORES-200 and keeps adding languages and fixes. The Hugging Face dataset is gated under CC BY-SA 4.0 and had 237 configs on 2026-11-01.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://oldi.org/",
-      "https://github.com/openlanguagedata/flores",
-      "https://huggingface.co/datasets/openlanguagedata/flores_plus"
-    ],
-    "added": "2026-11-01"
-  },
-  {
     "id": "flores-200",
     "name": "FLORES-200",
     "aliases": [
@@ -66657,6 +66653,41 @@
       "https://api.primeintellect.ai/api/v1/environmentshub/ibra-niang/low-resource-translation/@latest",
       "https://app.primeintellect.ai/dashboard/environments/ibra-niang/low-resource-translation/evals"
     ]
+  },
+  {
+    "id": "flores-plus",
+    "name": "FLORES+",
+    "aliases": [
+      "FLORES Plus",
+      "flores_plus",
+      "OLDI FLORES+"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-translation",
+    "level": "university",
+    "scoring": "verified",
+    "format": "open-ended",
+    "family": "flores",
+    "version": "plus",
+    "description": "Models translate English Wikipedia sentences that professionals and community contributors translated into over 200 languages. Outputs are scored with metrics such as chrF against the references.",
+    "org": "Open Language Data Initiative (OLDI)",
+    "released": "2023-10",
+    "links": {
+      "repo": "https://github.com/openlanguagedata/flores",
+      "site": "https://oldi.org/",
+      "dataset": "https://huggingface.co/datasets/openlanguagedata/flores_plus"
+    },
+    "access": "public",
+    "note": "OLDI calls it an extended and improved version of FLORES-200 and keeps adding languages and fixes. The Hugging Face dataset is gated under CC BY-SA 4.0 and had 237 configs on 2026-11-01.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://oldi.org/",
+      "https://github.com/openlanguagedata/flores",
+      "https://huggingface.co/datasets/openlanguagedata/flores_plus"
+    ],
+    "added": "2026-11-01"
   },
   {
     "id": "flow-bench-ibm",
@@ -68254,7 +68285,7 @@
     "successor": "frontiercode-1-1",
     "unit": "%",
     "confidence": "likely",
-    "edi": 163.91,
+    "edi": 163.9,
     "epoch": {
       "epoch_name": "FrontierCode",
       "random": 0,
@@ -68520,7 +68551,7 @@
     "successor": "frontiermath-tiers-1-3-v2",
     "unit": "%",
     "confidence": "likely",
-    "edi": 150.81,
+    "edi": 150.78,
     "epoch": {
       "epoch_name": "FrontierMath-2025-02-28-Private",
       "random": 0,
@@ -68597,7 +68628,7 @@
     "successor": "frontiermath-tier-4-v2",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159,
+    "edi": 159.08,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-2025-07-01-Private",
       "random": 0,
@@ -68637,7 +68668,7 @@
     "note": "Version 2 corrected 12 problems and removed 7 from the original Tier 4 set.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 158.74,
+    "edi": 158.73,
     "epoch": {
       "epoch_name": "FrontierMath-Tier-4-v2-Private",
       "random": 0,
@@ -68974,7 +69005,7 @@
     "note": "This record is FrontierSWE v2 (2026-09-02), the version Epoch AI tracks. It added 21 tasks to reach 34 and runs every model in the proximus harness. v1 (April 2026, 17 tasks) has its own record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 165.53,
+    "edi": 165.54,
     "epoch": {
       "epoch_name": "FrontierSWE",
       "random": 0,
@@ -69442,7 +69473,7 @@
     "note": "LLM grader checks error descriptions. Novice human baseline 63%. Photos and manuals are not distributed.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 166.12,
+    "edi": 166.19,
     "epoch": {
       "epoch_name": "Furniture Assembly",
       "random": 30,
@@ -71635,7 +71666,7 @@
     "note": "Only the 220-task gold set is public, with an automated grading service. OpenAI says its hosted GDPval leaderboard is no longer active and points to the GDPval-AA board instead.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 154.77,
+    "edi": 154.73,
     "epoch": {
       "epoch_name": "GDPval",
       "random": 0,
@@ -72848,7 +72879,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 118.78,
+    "edi": 118.94,
     "epoch": {
       "epoch_name": "GeoBench",
       "random": 0,
@@ -74878,7 +74909,7 @@
     "note": "Saturated (about 94-96%). Several 2026 cards use it only as a substrate for CoT-controllability or monitor-evasion tests.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 133.89,
+    "edi": 133.9,
     "epoch": {
       "epoch_name": "GPQA diamond",
       "random": 25,
@@ -76358,7 +76389,7 @@
     "successor": "math",
     "unit": "%",
     "confidence": "verified",
-    "edi": 93.64,
+    "edi": 93.84,
     "epoch": {
       "epoch_name": "GSM8K",
       "random": 0,
@@ -76525,7 +76556,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.87,
+    "edi": 159.86,
     "epoch": {
       "epoch_name": "GSO-Bench",
       "random": 0,
@@ -80046,7 +80077,7 @@
     "note": "Saturated. GitHub repo rowanz/hellaswag returns HTTP 451 (blocked by a WikiHow DMCA notice dated 2026-09-14), so repo is null.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 61.07,
+    "edi": 61.47,
     "epoch": {
       "epoch_name": "HellaSwag",
       "random": 25,
@@ -82734,68 +82765,6 @@
     ]
   },
   {
-    "id": "humaneval-plus",
-    "name": "HumanEval+",
-    "aliases": [
-      "HumanEvalPlus",
-      "HumanEval Plus",
-      "EvalPlus HumanEval+"
-    ],
-    "category": "coding",
-    "subcategory": "coding-functions",
-    "level": "school",
-    "scoring": "verified",
-    "format": "code",
-    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
-    "org": "UIUC (EvalPlus)",
-    "released": "2023-05",
-    "changes": [
-      {
-        "date": "2023-06-02",
-        "kind": "subset",
-        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
-      },
-      {
-        "date": "2023-11-24",
-        "kind": "questions",
-        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
-      },
-      {
-        "date": "2024-04-02",
-        "kind": "harness",
-        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
-      },
-      {
-        "date": "2024-10-20",
-        "kind": "grader",
-        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
-        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
-      }
-    ],
-    "links": {
-      "paper": "https://arxiv.org/abs/2305.01210",
-      "repo": "https://github.com/evalplus/evalplus",
-      "leaderboard": "https://evalplus.github.io/leaderboard.html"
-    },
-    "access": "public",
-    "note": "Scores are pass@1 and run lower than plain HumanEval.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2305.01210",
-      "https://arxiv.org/abs/2504.21318v1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
-      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1",
-      "https://app.primeintellect.ai/dashboard/environments/pmahdavi/humanevalplus"
-    ]
-  },
-  {
     "id": "humaneval-cobol-cohere",
     "name": "HumanEval-COBOL (Cohere)",
     "aliases": [
@@ -82878,6 +82847,68 @@
       "https://github.com/THUDM/CodeGeeX"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "humaneval-plus",
+    "name": "HumanEval+",
+    "aliases": [
+      "HumanEvalPlus",
+      "HumanEval Plus",
+      "EvalPlus HumanEval+"
+    ],
+    "category": "coding",
+    "subcategory": "coding-functions",
+    "level": "school",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models write Python functions for the 164 HumanEval problems. EvalPlus checks them against about 80 times more tests than the original.",
+    "org": "UIUC (EvalPlus)",
+    "released": "2023-05",
+    "changes": [
+      {
+        "date": "2023-06-02",
+        "kind": "subset",
+        "text": "The maintainers introduced an optional reduced test suite. Mini evaluations use substantially fewer tests, so reported results should identify that setting.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.1.5"
+      },
+      {
+        "date": "2023-11-24",
+        "kind": "questions",
+        "text": "The maintainers corrected test cases, task 114’s prompt, and several input constraints. Results depend on which HumanEval+ dataset revision the evaluator uses.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.0"
+      },
+      {
+        "date": "2024-04-02",
+        "kind": "harness",
+        "text": "The maintainers moved the Docker environment to Python 3.10 and set the default per-test timeout to 0.5 seconds. These changes affect syntax support and timeout outcomes.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.2.1"
+      },
+      {
+        "date": "2024-10-20",
+        "kind": "grader",
+        "text": "The maintainers released further input-constraint and reference-checker corrections. Runs with the updated dataset revision can differ from earlier HumanEval+ evaluations.",
+        "url": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1"
+      }
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2305.01210",
+      "repo": "https://github.com/evalplus/evalplus",
+      "leaderboard": "https://evalplus.github.io/leaderboard.html"
+    },
+    "access": "public",
+    "note": "Scores are pass@1 and run lower than plain HumanEval.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2305.01210",
+      "https://arxiv.org/abs/2504.21318v1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.1.5",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.0",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.2.1",
+      "https://github.com/evalplus/evalplus/releases/tag/v0.3.1",
+      "https://app.primeintellect.ai/dashboard/environments/pmahdavi/humanevalplus"
+    ]
   },
   {
     "id": "humanevalpack",
@@ -97166,7 +97197,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 41.29,
+    "edi": 41.74,
     "epoch": {
       "epoch_name": "LAMBADA",
       "random": 0,
@@ -105169,6 +105200,40 @@
     "added": "2026-11-20"
   },
   {
+    "id": "m3av-speech-recognition",
+    "name": "M³AV Speech Recognition",
+    "aliases": [
+      "M3AV ASR",
+      "M3AV Contextual ASR"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "university",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models transcribe academic lectures. The authors measure word errors across the transcript and separately for rare words. Slide text can provide context.",
+    "org": "Shanghai Jiao Tong University and collaborators",
+    "released": "2024-03",
+    "links": {
+      "paper": "https://aclanthology.org/2024.acl-long.489/",
+      "repo": "https://github.com/Jack-ZC8/M3AV-dataset",
+      "site": "https://jack-zc8.github.io/M3AV-dataset-page/",
+      "dataset": "https://huggingface.co/datasets/CHHHH/M3AV_v1.0"
+    },
+    "access": "public",
+    "note": "Poncelet and Van hamme tested four speech models on 3,914 held-out segments containing named entities. They reported word error rates.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://jack-zc8.github.io/M3AV-dataset-page/",
+      "https://arxiv.org/html/2403.14168",
+      "https://www.isca-archive.org/interspeech_2026/poncelet26b_interspeech.pdf",
+      "https://huggingface.co/datasets/kul-speech-lab/contextual-reasoning-speechllm/raw/main/README.md"
+    ],
+    "added": "2026-11-20"
+  },
+  {
     "id": "m3exam",
     "name": "M3Exam",
     "category": "multilingual",
@@ -106170,6 +106235,40 @@
     "evidence": [
       "https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf"
     ]
+  },
+  {
+    "id": "malromur",
+    "name": "Málrómur",
+    "aliases": [
+      "Málrómur ASR"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models transcribe Icelandic sentences that volunteers recorded on smartphones. Human listeners checked the reference text against the recordings.",
+    "org": "Reykjavík University and the Icelandic Centre for Language Technology",
+    "released": "2014-08",
+    "links": {
+      "paper": "https://ep.liu.se/ecp/131/029/ecp17131029.pdf",
+      "site": "https://clarin.is/en/resources/malromur/",
+      "dataset": "https://huggingface.co/datasets/language-and-voice-lab/malromur_asr"
+    },
+    "access": "public",
+    "note": "The Samrómur Milljón study evaluates Whisper and Wav2Vec2 on the later Málrómur test split. The archive dates the source corpus to August 2014.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://aclanthology.org/2024.lrec-main.1246.pdf",
+      "https://huggingface.co/language-and-voice-lab/whisper-large-icelandic-30k-steps-1000h",
+      "https://hdl.handle.net/20.500.12537/202",
+      "https://ep.liu.se/ecp/131/029/ecp17131029.pdf",
+      "https://clarin.is/en/resources/malromur/",
+      "https://huggingface.co/datasets/language-and-voice-lab/malromur_asr"
+    ],
+    "added": "2026-11-20"
   },
   {
     "id": "malt-freelancer-project-matching",
@@ -107665,7 +107764,7 @@
     "note": "Near saturation, and contamination is likely because the problems have been public since 2021.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 126.01,
+    "edi": 126.04,
     "epoch": {
       "epoch_name": "MATH level 5",
       "random": 0,
@@ -113481,7 +113580,7 @@
     "successor": "metr-time-horizon-1-1",
     "unit": "minutes",
     "confidence": "verified",
-    "edi": 136.01,
+    "edi": 136,
     "epoch": {
       "epoch_name": "METR Time Horizons",
       "runs": "external",
@@ -114084,6 +114183,304 @@
     "added": "2026-11-01"
   },
   {
+    "id": "mideind-icelandic-arc-challenge",
+    "name": "Miðeind Icelandic ARC-Challenge",
+    "aliases": [
+      "ARC-Challenge-IS (Miðeind)"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reasoning",
+    "level": "school",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models answer multiple-choice science questions in an Icelandic translation of ARC-Challenge. Miðeind used Claude 3.5 Sonnet to translate the questions.",
+    "org": "Miðeind",
+    "released": "2024-06",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
+      "dataset": "https://huggingface.co/datasets/mideind/icelandic-arc-challenge",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/#v1"
+    },
+    "access": "public",
+    "note": "Passes test 2. Miðeind reports scores for 92 named models on its archived leaderboard. A human audit found translation errors and distinguished this version from the EuroEval translation.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/v1.json",
+      "https://huggingface.co/datasets/mideind/icelandic-arc-challenge",
+      "https://huggingface.co/api/datasets/mideind/icelandic-arc-challenge/commits/main",
+      "https://arxiv.org/pdf/2603.16406"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-inflection",
+    "name": "Miðeind Icelandic Case Declension",
+    "aliases": [
+      "Icelandic Inflection (Miðeind)",
+      "Icelandic noun phrase inflection"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reasoning",
+    "level": "school",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models decline Icelandic adjective and noun pairs in four cases and two numbers. The public test has 2,400 forms for 300 phrases.",
+    "org": "Miðeind",
+    "released": "2023-11",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
+      "dataset": "https://huggingface.co/datasets/mideind/icelandic-inflection-all-flat",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/#v1"
+    },
+    "access": "public",
+    "note": "Passes test 2. Miðeind reports scores for 93 named models on its archived leaderboard. The archive scores individual forms with one example. The 2023 announcement counted entire declensions.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/v1.json",
+      "https://huggingface.co/datasets/mideind/icelandic-inflection-all-flat",
+      "https://xn--mieind-qwa.is/en/frettir/gpt-4-fra-openai-nu-mun-betra-i-islensku-med-hjalp-mideindar",
+      "https://huggingface.co/api/datasets/mideind/icelandic-inflection-all-flat/commits/main"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-case-government",
+    "name": "Miðeind Icelandic Case Government",
+    "aliases": [
+      "Fallstjórn (Miðeind)",
+      "Icelandic Case Marking"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reasoning",
+    "level": "school",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models inflect a subject or construct a verb and object phrase in Icelandic. The verb determines the grammatical case. The evaluator checks exact agreement.",
+    "org": "Miðeind",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
+    },
+    "access": "private",
+    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
+      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-generative-quality",
+    "name": "Miðeind Icelandic Generative Quality",
+    "aliases": [
+      "Myndunargæði (Miðeind)",
+      "Icelandic Generation Quality"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-chat",
+    "level": "school",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models write paragraphs in Icelandic. Málfríður checks for grammar errors, and a dictionary lookup counts words absent from the Database of Modern Icelandic Inflection.",
+    "org": "Miðeind",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
+    },
+    "access": "private",
+    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The quality score combines grammatical and vocabulary measures.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
+      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-gec",
+    "name": "Miðeind Icelandic Grammar Correction",
+    "aliases": [
+      "Icelandic GEC",
+      "Málfarsleiðrétting (Miðeind)"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-chat",
+    "level": "school",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models correct an Icelandic sentence or return it unchanged. Half the sentences contain one error. The score measures exact agreement with the expected sentence.",
+    "org": "Miðeind",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
+    },
+    "access": "private",
+    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The board reports separate scores for sentences with and without errors.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
+      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-ged",
+    "name": "Miðeind Icelandic Grammatical Error Detection",
+    "aliases": [
+      "Icelandic GED (Miðeind)"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reading",
+    "level": "school",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Models decide whether an Icelandic sentence contains a grammatical error. The test uses 100 correct sentences and 100 incorrect sentences from the Icelandic Error Corpus.",
+    "org": "Miðeind",
+    "released": "2023-12",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
+      "dataset": "https://huggingface.co/datasets/mideind/icelandic-sentences-gec",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/#v1"
+    },
+    "access": "public",
+    "note": "Passes test 2. Miðeind reports scores for 94 named models on its archived leaderboard.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/v1.json",
+      "https://huggingface.co/datasets/mideind/icelandic-sentences-gec",
+      "https://huggingface.co/api/datasets/mideind/icelandic-sentences-gec/commits/main"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-idioms",
+    "name": "Miðeind Icelandic Idioms",
+    "aliases": [
+      "Orðatiltæki (Miðeind)"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reasoning",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "Models supply a missing word in an Icelandic idiom and explain its meaning. A program checks the missing word. A language model grades the explanation.",
+    "org": "Miðeind",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
+    },
+    "access": "private",
+    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The two tasks use the same idioms and count once in the average.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
+      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-popular-culture",
+    "name": "Miðeind Icelandic Popular Culture",
+    "aliases": [
+      "Dægurmenning",
+      "Icelandic Pop Culture (Miðeind)"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models continue Icelandic song lyrics and identify the sources of familiar quotations. The two tasks measure word overlap and exact agreement, respectively.",
+    "org": "Miðeind",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
+    },
+    "access": "private",
+    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. Miðeind counts the two tasks once in its average.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
+      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
+    ],
+    "added": "2026-11-20"
+  },
+  {
+    "id": "mideind-icelandic-terminology",
+    "name": "Miðeind Icelandic Terminology",
+    "aliases": [
+      "Íðorð (Miðeind)"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "university",
+    "scoring": "model-judged",
+    "format": "short-answer",
+    "description": "Models explain Icelandic knitting and crochet terms and name local species from English and Latin names. A model grades definitions. A program checks species names.",
+    "org": "Miðeind",
+    "released": "2026-09",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
+      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
+    },
+    "access": "private",
+    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The board combines its judged definitions and exact species names into one terminology score.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
+      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
+      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
+    ],
+    "added": "2026-11-20"
+  },
+  {
     "id": "mieb",
     "name": "MIEB",
     "aliases": [
@@ -114469,6 +114866,32 @@
       "https://github.com/google/mtg-ad"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "mind2act-world",
+    "name": "Mind2Act World",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Embodied agents perform Mind, Act and closed-loop Mind2Act manipulation tasks in simulated scenes. The benchmark contains 30 tasks with three difficulty levels and two scene settings.",
+    "org": "Mind2Act-World",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2611.26444",
+      "repo": "https://github.com/Mind2Act/Mind2Act_World"
+    },
+    "access": "public",
+    "note": "The paper reports 180 task configurations across five application domains.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.26444",
+      "https://huggingface.co/papers/2611.26444",
+      "https://github.com/Mind2Act/Mind2Act_World"
+    ]
   },
   {
     "id": "mind2web",
@@ -115503,7 +115926,7 @@
     "note": "25 targets, 3 kept private. ~34% of tests held out. Source programs are open source, so memorization cannot be fully ruled out.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 159.82,
+    "edi": 159.91,
     "epoch": {
       "epoch_name": "MirrorCode",
       "random": 0,
@@ -116020,304 +116443,6 @@
       "https://mcinext-mizan-llm-leaderboard.hf.space/",
       "https://huggingface.co/spaces/MCINext/mizan-llm-leaderboard/raw/main/leaderboard/boards_data/all.jsonl",
       "https://huggingface.co/spaces/MCINext/mizan-llm-leaderboard/raw/main/leaderboard/leaderboard_config.yaml"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-arc-challenge",
-    "name": "Miðeind Icelandic ARC-Challenge",
-    "aliases": [
-      "ARC-Challenge-IS (Miðeind)"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reasoning",
-    "level": "school",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "description": "Models answer multiple-choice science questions in an Icelandic translation of ARC-Challenge. Miðeind used Claude 3.5 Sonnet to translate the questions.",
-    "org": "Miðeind",
-    "released": "2024-06",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
-      "dataset": "https://huggingface.co/datasets/mideind/icelandic-arc-challenge",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/#v1"
-    },
-    "access": "public",
-    "note": "Passes test 2. Miðeind reports scores for 92 named models on its archived leaderboard. A human audit found translation errors and distinguished this version from the EuroEval translation.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/v1.json",
-      "https://huggingface.co/datasets/mideind/icelandic-arc-challenge",
-      "https://huggingface.co/api/datasets/mideind/icelandic-arc-challenge/commits/main",
-      "https://arxiv.org/pdf/2603.16406"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-inflection",
-    "name": "Miðeind Icelandic Case Declension",
-    "aliases": [
-      "Icelandic Inflection (Miðeind)",
-      "Icelandic noun phrase inflection"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reasoning",
-    "level": "school",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models decline Icelandic adjective and noun pairs in four cases and two numbers. The public test has 2,400 forms for 300 phrases.",
-    "org": "Miðeind",
-    "released": "2023-11",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
-      "dataset": "https://huggingface.co/datasets/mideind/icelandic-inflection-all-flat",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/#v1"
-    },
-    "access": "public",
-    "note": "Passes test 2. Miðeind reports scores for 93 named models on its archived leaderboard. The archive scores individual forms with one example. The 2023 announcement counted entire declensions.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/v1.json",
-      "https://huggingface.co/datasets/mideind/icelandic-inflection-all-flat",
-      "https://xn--mieind-qwa.is/en/frettir/gpt-4-fra-openai-nu-mun-betra-i-islensku-med-hjalp-mideindar",
-      "https://huggingface.co/api/datasets/mideind/icelandic-inflection-all-flat/commits/main"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-case-government",
-    "name": "Miðeind Icelandic Case Government",
-    "aliases": [
-      "Fallstjórn (Miðeind)",
-      "Icelandic Case Marking"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reasoning",
-    "level": "school",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models inflect a subject or construct a verb and object phrase in Icelandic. The verb determines the grammatical case. The evaluator checks exact agreement.",
-    "org": "Miðeind",
-    "released": "2026-09",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
-    },
-    "access": "private",
-    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
-      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-generative-quality",
-    "name": "Miðeind Icelandic Generative Quality",
-    "aliases": [
-      "Myndunargæði (Miðeind)",
-      "Icelandic Generation Quality"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-chat",
-    "level": "school",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Models write paragraphs in Icelandic. Málfríður checks for grammar errors, and a dictionary lookup counts words absent from the Database of Modern Icelandic Inflection.",
-    "org": "Miðeind",
-    "released": "2026-09",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
-    },
-    "access": "private",
-    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The quality score combines grammatical and vocabulary measures.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
-      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-gec",
-    "name": "Miðeind Icelandic Grammar Correction",
-    "aliases": [
-      "Icelandic GEC",
-      "Málfarsleiðrétting (Miðeind)"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-chat",
-    "level": "school",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Models correct an Icelandic sentence or return it unchanged. Half the sentences contain one error. The score measures exact agreement with the expected sentence.",
-    "org": "Miðeind",
-    "released": "2026-09",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
-    },
-    "access": "private",
-    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The board reports separate scores for sentences with and without errors.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
-      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-ged",
-    "name": "Miðeind Icelandic Grammatical Error Detection",
-    "aliases": [
-      "Icelandic GED (Miðeind)"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reading",
-    "level": "school",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "description": "Models decide whether an Icelandic sentence contains a grammatical error. The test uses 100 correct sentences and 100 incorrect sentences from the Icelandic Error Corpus.",
-    "org": "Miðeind",
-    "released": "2023-12",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
-      "dataset": "https://huggingface.co/datasets/mideind/icelandic-sentences-gec",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/#v1"
-    },
-    "access": "public",
-    "note": "Passes test 2. Miðeind reports scores for 94 named models on its archived leaderboard.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/islensk-stigatafla-risamallikana",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/v1.json",
-      "https://huggingface.co/datasets/mideind/icelandic-sentences-gec",
-      "https://huggingface.co/api/datasets/mideind/icelandic-sentences-gec/commits/main"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-idioms",
-    "name": "Miðeind Icelandic Idioms",
-    "aliases": [
-      "Orðatiltæki (Miðeind)"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reasoning",
-    "level": "everyday",
-    "scoring": "model-judged",
-    "format": "short-answer",
-    "description": "Models supply a missing word in an Icelandic idiom and explain its meaning. A program checks the missing word. A language model grades the explanation.",
-    "org": "Miðeind",
-    "released": "2026-09",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
-    },
-    "access": "private",
-    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The two tasks use the same idioms and count once in the average.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
-      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-popular-culture",
-    "name": "Miðeind Icelandic Popular Culture",
-    "aliases": [
-      "Dægurmenning",
-      "Icelandic Pop Culture (Miðeind)"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-knowledge",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models continue Icelandic song lyrics and identify the sources of familiar quotations. The two tasks measure word overlap and exact agreement, respectively.",
-    "org": "Miðeind",
-    "released": "2026-09",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
-    },
-    "access": "private",
-    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. Miðeind counts the two tasks once in its average.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
-      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "mideind-icelandic-terminology",
-    "name": "Miðeind Icelandic Terminology",
-    "aliases": [
-      "Íðorð (Miðeind)"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-knowledge",
-    "level": "university",
-    "scoring": "model-judged",
-    "format": "short-answer",
-    "description": "Models explain Icelandic knitting and crochet terms and name local species from English and Latin names. A model grades definitions. A program checks species names.",
-    "org": "Miðeind",
-    "released": "2026-09",
-    "links": {
-      "repo": "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/tree/main",
-      "site": "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "leaderboard": "https://mideind-icelandic-llm-leaderboard.static.hf.space/"
-    },
-    "access": "private",
-    "note": "Passes test 2. Miðeind reports scores for 60 named models on its current leaderboard. The board combines its judged definitions and exact species names into one terminology score.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://mideind.is/en/greinar/ny-og-endurbaett-stigatafla",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/raw/main/leaderboard.json",
-      "https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard/blob/main/i18n.js",
-      "https://xn--mieind-qwa.is/is/greinar/betri-og-odyrari-talgreining-i-hreimi"
     ],
     "added": "2026-11-20"
   },
@@ -118163,7 +118288,7 @@
     "successor": "mmlu-pro",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.15,
+    "edi": 102.29,
     "epoch": {
       "epoch_name": "MMLU",
       "random": 25,
@@ -121157,6 +121282,40 @@
     "added": "2026-11-01"
   },
   {
+    "id": "ms2-medical-studies",
+    "name": "MS²",
+    "aliases": [
+      "MS2",
+      "MS^2",
+      "Multi-Document Summarization of Medical Studies"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-medicine",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models synthesize the findings of multiple medical studies into a short answer to the research question of a systematic review.",
+    "org": "Northeastern University and Allen Institute for AI",
+    "released": "2021-04",
+    "links": {
+      "paper": "https://aclanthology.org/2021.emnlp-main.594/",
+      "repo": "https://github.com/allenai/ms2",
+      "dataset": "https://ai2-s2-ms2.s3-us-west-2.amazonaws.com/ms_data_2021-04-12.zip"
+    },
+    "access": "public",
+    "note": "Hewapathirana and colleagues tested four general language models without examples. Llama 3.2 3B scored 18.73 on ROUGE-1.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/allenai/ms2",
+      "https://aclanthology.org/2021.emnlp-main.594.pdf",
+      "https://aclanthology.org/2025.paclic-1.73.pdf",
+      "https://arxiv.org/abs/2104.06486"
+    ],
+    "added": "2026-11-20"
+  },
+  {
     "id": "msd-i-multimodal-genre-classification",
     "name": "MSD-I Multimodal Genre Classification",
     "aliases": [
@@ -121388,40 +121547,6 @@
       "https://aclanthology.org/P11-1020/"
     ],
     "added": "2026-11-19"
-  },
-  {
-    "id": "ms2-medical-studies",
-    "name": "MS²",
-    "aliases": [
-      "MS2",
-      "MS^2",
-      "Multi-Document Summarization of Medical Studies"
-    ],
-    "category": "domain-legal-finance-medical",
-    "subcategory": "domain-medicine",
-    "level": "expert",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Models synthesize the findings of multiple medical studies into a short answer to the research question of a systematic review.",
-    "org": "Northeastern University and Allen Institute for AI",
-    "released": "2021-04",
-    "links": {
-      "paper": "https://aclanthology.org/2021.emnlp-main.594/",
-      "repo": "https://github.com/allenai/ms2",
-      "dataset": "https://ai2-s2-ms2.s3-us-west-2.amazonaws.com/ms_data_2021-04-12.zip"
-    },
-    "access": "public",
-    "note": "Hewapathirana and colleagues tested four general language models without examples. Llama 3.2 3B scored 18.73 on ROUGE-1.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://github.com/allenai/ms2",
-      "https://aclanthology.org/2021.emnlp-main.594.pdf",
-      "https://aclanthology.org/2025.paclic-1.73.pdf",
-      "https://arxiv.org/abs/2104.06486"
-    ],
-    "added": "2026-11-20"
   },
   {
     "id": "mt-aime-cohere-internal",
@@ -124705,7 +124830,7 @@
     "note": "Game identity, prompts and positions are kept secret to prevent targeted preparation. Likely the 'game-puzzles' benchmark in the Epoch post.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 164.37,
+    "edi": 164.28,
     "epoch": {
       "epoch_name": "Mystery Game Puzzles",
       "random": 9.22,
@@ -124775,74 +124900,6 @@
       "https://github.com/Nish-19/Persona-Story-Gen",
       "https://arxiv.org/html/2609.30968",
       "https://arxiv.org/html/2609.31876"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "m3av-speech-recognition",
-    "name": "M³AV Speech Recognition",
-    "aliases": [
-      "M3AV ASR",
-      "M3AV Contextual ASR"
-    ],
-    "category": "audio-video",
-    "subcategory": "audio-speech",
-    "level": "university",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models transcribe academic lectures. The authors measure word errors across the transcript and separately for rare words. Slide text can provide context.",
-    "org": "Shanghai Jiao Tong University and collaborators",
-    "released": "2024-03",
-    "links": {
-      "paper": "https://aclanthology.org/2024.acl-long.489/",
-      "repo": "https://github.com/Jack-ZC8/M3AV-dataset",
-      "site": "https://jack-zc8.github.io/M3AV-dataset-page/",
-      "dataset": "https://huggingface.co/datasets/CHHHH/M3AV_v1.0"
-    },
-    "access": "public",
-    "note": "Poncelet and Van hamme tested four speech models on 3,914 held-out segments containing named entities. They reported word error rates.",
-    "unit": "%",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://jack-zc8.github.io/M3AV-dataset-page/",
-      "https://arxiv.org/html/2403.14168",
-      "https://www.isca-archive.org/interspeech_2026/poncelet26b_interspeech.pdf",
-      "https://huggingface.co/datasets/kul-speech-lab/contextual-reasoning-speechllm/raw/main/README.md"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "malromur",
-    "name": "Málrómur",
-    "aliases": [
-      "Málrómur ASR"
-    ],
-    "category": "audio-video",
-    "subcategory": "audio-speech",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Models transcribe Icelandic sentences that volunteers recorded on smartphones. Human listeners checked the reference text against the recordings.",
-    "org": "Reykjavík University and the Icelandic Centre for Language Technology",
-    "released": "2014-08",
-    "links": {
-      "paper": "https://ep.liu.se/ecp/131/029/ecp17131029.pdf",
-      "site": "https://clarin.is/en/resources/malromur/",
-      "dataset": "https://huggingface.co/datasets/language-and-voice-lab/malromur_asr"
-    },
-    "access": "public",
-    "note": "The Samrómur Milljón study evaluates Whisper and Wav2Vec2 on the later Málrómur test split. The archive dates the source corpus to August 2014.",
-    "unit": "%",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://aclanthology.org/2024.lrec-main.1246.pdf",
-      "https://huggingface.co/language-and-voice-lab/whisper-large-icelandic-30k-steps-1000h",
-      "https://hdl.handle.net/20.500.12537/202",
-      "https://ep.liu.se/ecp/131/029/ecp17131029.pdf",
-      "https://clarin.is/en/resources/malromur/",
-      "https://huggingface.co/datasets/language-and-voice-lab/malromur_asr"
     ],
     "added": "2026-11-20"
   },
@@ -133354,7 +133411,7 @@
     "note": "Saturated by frontier models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 92.72,
+    "edi": 92.92,
     "epoch": {
       "epoch_name": "OpenBookQA",
       "random": 25,
@@ -135254,7 +135311,7 @@
     "successor": "osworld-verified",
     "unit": "%",
     "confidence": "verified",
-    "edi": 146.72,
+    "edi": 146.7,
     "epoch": {
       "epoch_name": "OSWorld",
       "random": 0,
@@ -135299,7 +135356,7 @@
     "successor": "osworld-2-0-2026-08-08",
     "unit": "%",
     "confidence": "verified",
-    "edi": 169.92,
+    "edi": 169.89,
     "epoch": {
       "epoch_name": "OSWorld 2.0",
       "random": 0,
@@ -135957,6 +136014,36 @@
       "https://www.mercor.com/apex/open-world-engineer-leaderboard/"
     ],
     "added": "2026-11-12"
+  },
+  {
+    "id": "owe-voice",
+    "name": "Òwe-Voice",
+    "aliases": [
+      "ÒWE-Voice Yoruba Proverb Speech Dataset"
+    ],
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models transcribe spoken Yorùbá proverbs. The evaluation measures errors in words and tone marks.",
+    "org": "Daud Abolade, University of Lagos",
+    "released": "2026-03",
+    "links": {
+      "paper": "https://aclanthology.org/2026.africanlp-main.8.pdf",
+      "repo": "https://github.com/Holuwasege/OWE-Voice-Evaluation"
+    },
+    "access": "private",
+    "note": "A later Whisper study with a shared author tested 750 recordings from three unseen speakers. The original study sampled across speakers.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/Haramiday/owe-voice-whisper-small-openai-yoruba",
+      "https://aclanthology.org/2026.africanlp-main.8.pdf",
+      "https://github.com/Holuwasege/OWE-Voice-Evaluation"
+    ],
+    "added": "2026-11-20"
   },
   {
     "id": "oxford-flowers-102",
@@ -140773,7 +140860,7 @@
     "access": "public+private-holdout",
     "unit": "%",
     "confidence": "verified",
-    "edi": 59.52,
+    "edi": 59.97,
     "epoch": {
       "epoch_name": "PIQA",
       "random": 50,
@@ -141895,30 +141982,6 @@
     "added": "2026-11-01"
   },
   {
-    "id": "poker-arena",
-    "name": "Poker Arena",
-    "category": "games-long-horizon",
-    "subcategory": "games-multi-agent",
-    "level": "everyday",
-    "scoring": "outcome",
-    "format": "agent-task",
-    "description": "Models play no-limit Texas Hold’em across repeated sessions. The benchmark scores tournament chips and nine strategic dimensions, including memory and bluffing.",
-    "org": "Pratham Singla, Shivank Garg, and Vihan Singh",
-    "released": "2026-06",
-    "links": {
-      "paper": "https://arxiv.org/abs/2606.13815"
-    },
-    "access": "public",
-    "note": "Claude Opus 4.6 won 15,730 chips with 14 first-place finishes among seven models in the June 2026 paper.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2606.13815"
-    ],
-    "added": "2026-11-19"
-  },
-  {
     "id": "pokebench-rvb",
     "name": "PokéBench: Raw Vision + Buttons",
     "aliases": [
@@ -142013,6 +142076,30 @@
       "https://ricotoma.com/pokemon-bench/evidence/index.json"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "poker-arena",
+    "name": "Poker Arena",
+    "category": "games-long-horizon",
+    "subcategory": "games-multi-agent",
+    "level": "everyday",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Models play no-limit Texas Hold’em across repeated sessions. The benchmark scores tournament chips and nine strategic dimensions, including memory and bluffing.",
+    "org": "Pratham Singla, Shivank Garg, and Vihan Singh",
+    "released": "2026-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2606.13815"
+    },
+    "access": "public",
+    "note": "Claude Opus 4.6 won 15,730 chips with 14 first-place finishes among seven models in the June 2026 paper.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2606.13815"
+    ],
+    "added": "2026-11-19"
   },
   {
     "id": "polaris-healthcare-safety-hippocratic",
@@ -142624,7 +142711,7 @@
     "successor": "posttrainbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 174.64,
+    "edi": 174.6,
     "epoch": {
       "epoch_name": "PostTrainBench",
       "random": 0,
@@ -144374,7 +144461,7 @@
     "successor": "proofbench-1-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 156.5,
+    "edi": 156.49,
     "epoch": {
       "epoch_name": "ProofBench",
       "random": 0,
@@ -151417,7 +151504,7 @@
     "note": "The best agent automated only 2.5% of projects at launch. Only a 10 task public set is released.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.13,
+    "edi": 177.11,
     "epoch": {
       "epoch_name": "Remote Labor Index",
       "random": 0,
@@ -157835,6 +157922,35 @@
     "added": "2026-11-19"
   },
   {
+    "id": "scannet-1500",
+    "name": "ScanNet-1500",
+    "category": "multimodal-vision",
+    "subcategory": "vision-spatial",
+    "level": "school",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Models match features between pairs of indoor views and estimate relative camera poses. The evaluation measures pose accuracy on 1,500 image pairs.",
+    "org": "Paul-Edouard Sarlin and colleagues",
+    "released": "2019-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/1911.11763",
+      "repo": "https://github.com/magicleap/SuperGluePretrainedNetwork"
+    },
+    "access": "public",
+    "note": "Meta compares areas under the pose error curve at two angular thresholds.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://github.com/facebookresearch/dinov3",
+      "https://arxiv.org/abs/2508.10104",
+      "https://github.com/magicleap/SuperGluePretrainedNetwork",
+      "https://arxiv.org/abs/1911.11763",
+      "https://ai.meta.com/blog/dinov3-self-supervised-vision-model/"
+    ],
+    "added": "2026-11-19"
+  },
+  {
     "id": "scannet-plus-plus-v2",
     "name": "ScanNet++ v2",
     "aliases": [
@@ -157862,35 +157978,6 @@
       "https://arxiv.org/html/2509.13414",
       "https://kaldir.vc.in.tum.de/scannetpp/",
       "https://kaldir.vc.in.tum.de/scannetpp/benchmark/nvs_iphone"
-    ],
-    "added": "2026-11-19"
-  },
-  {
-    "id": "scannet-1500",
-    "name": "ScanNet-1500",
-    "category": "multimodal-vision",
-    "subcategory": "vision-spatial",
-    "level": "school",
-    "scoring": "verified",
-    "format": "short-answer",
-    "description": "Models match features between pairs of indoor views and estimate relative camera poses. The evaluation measures pose accuracy on 1,500 image pairs.",
-    "org": "Paul-Edouard Sarlin and colleagues",
-    "released": "2019-11",
-    "links": {
-      "paper": "https://arxiv.org/abs/1911.11763",
-      "repo": "https://github.com/magicleap/SuperGluePretrainedNetwork"
-    },
-    "access": "public",
-    "note": "Meta compares areas under the pose error curve at two angular thresholds.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://github.com/facebookresearch/dinov3",
-      "https://arxiv.org/abs/2508.10104",
-      "https://github.com/magicleap/SuperGluePretrainedNetwork",
-      "https://arxiv.org/abs/1911.11763",
-      "https://ai.meta.com/blog/dinov3-self-supervised-vision-model/"
     ],
     "added": "2026-11-19"
   },
@@ -162158,7 +162245,7 @@
     "note": "The human baseline from nine non-expert people is 83.7 percent. A small open-ended variant lists three models.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 152.37,
+    "edi": 152.36,
     "epoch": {
       "epoch_name": "SimpleBench",
       "random": 16.67,
@@ -162257,7 +162344,7 @@
     "note": "Google fixed one dataset error on 2026-03-09 and posted paper v2 on 2026-03-10. Scores stay comparable, so it remains one record.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 157.09,
+    "edi": 157.03,
     "epoch": {
       "epoch_name": "SimpleQA Verified",
       "random": 0,
@@ -163713,6 +163800,42 @@
       "https://huggingface.co/datasets/anonymous-account-submission/SME-Bench/commit/a26b4435f8f2947fa1ac6ecb2fcee676d51a6d45"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "poleval-smigiel",
+    "name": "ŚMIGIEL",
+    "aliases": [
+      "Smigiel",
+      "Spotting Machine-Generated Text from Language Models for Polish",
+      "PolEval 2025 Task 1"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-reading",
+    "level": "university",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models classify Polish texts as human or machine written. The test includes genres and generators absent from training.",
+    "org": "PolEval 2025 organizers",
+    "released": "2025-04",
+    "links": {
+      "paper": "https://aclanthology.org/2025.poleval-main.2/",
+      "repo": "https://github.com/poleval/2025-smigiel",
+      "site": "https://poleval.pl/2025/tasks/smigiel/",
+      "dataset": "https://github.com/poleval/2025-smigiel",
+      "leaderboard": "https://2025.poleval.pl/results/"
+    },
+    "access": "public+private-holdout",
+    "note": "Organizers received seven systems across three tracks and ranked them by accuracy.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://poleval.pl/2025/tasks/smigiel/",
+      "https://2025.poleval.pl/results/",
+      "https://poleval.pl/2025/",
+      "https://aclanthology.org/2025.poleval-main.2/"
+    ],
+    "added": "2026-11-20"
   },
   {
     "id": "smile-video-laugh-reasoning",
@@ -167350,7 +167473,7 @@
     "note": "Top human players win ~85% (StS1) and ~95% (StS2). Seeds are not published.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 177.6,
+    "edi": 176.76,
     "epoch": {
       "epoch_name": "SpireClimb",
       "random": 0,
@@ -170026,35 +170149,6 @@
     "added": "2026-11-01"
   },
   {
-    "id": "sugarcrepe",
-    "name": "SugarCrepe",
-    "category": "multimodal-vision",
-    "subcategory": "vision-general",
-    "level": "school",
-    "scoring": "verified",
-    "format": "prediction",
-    "description": "Models choose between a caption that describes an image and a plausible caption with a changed detail.",
-    "org": "Cheng-Yu Hsieh and colleagues",
-    "released": "2023-06",
-    "links": {
-      "paper": "https://arxiv.org/abs/2306.14610",
-      "repo": "https://github.com/RAIVNLab/sugar-crepe",
-      "dataset": "https://huggingface.co/datasets/mteb/SUGARCREPE_fmt"
-    },
-    "access": "public",
-    "note": "The alternatives can replace, swap, or add content.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/abs/2306.14610",
-      "https://github.com/RAIVNLab/sugar-crepe",
-      "https://proceedings.neurips.cc/paper_files/paper/2023/hash/63461de0b4cb760fc498e85b18a7fe81-Abstract-Datasets_and_Benchmarks.html",
-      "https://github.com/embeddings-benchmark/mteb/blob/6cab5fc195e79b11e32771783bb649bb0cef02dd/mteb/tasks/image_text_pair_classification/eng/sugar_crepe.py"
-    ],
-    "added": "2026-11-19"
-  },
-  {
     "id": "sugars-kitchen-ai-cooking-battle-17",
     "name": "Sugar’s Kitchen AI Cooking Battle 17",
     "aliases": [
@@ -170083,6 +170177,35 @@
       "https://assets.st-note.com/img/1788343264-bpD7ZaRqvFm5e3tCnQHWj6X8.png?width=1200"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "sugarcrepe",
+    "name": "SugarCrepe",
+    "category": "multimodal-vision",
+    "subcategory": "vision-general",
+    "level": "school",
+    "scoring": "verified",
+    "format": "prediction",
+    "description": "Models choose between a caption that describes an image and a plausible caption with a changed detail.",
+    "org": "Cheng-Yu Hsieh and colleagues",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2306.14610",
+      "repo": "https://github.com/RAIVNLab/sugar-crepe",
+      "dataset": "https://huggingface.co/datasets/mteb/SUGARCREPE_fmt"
+    },
+    "access": "public",
+    "note": "The alternatives can replace, swap, or add content.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2306.14610",
+      "https://github.com/RAIVNLab/sugar-crepe",
+      "https://proceedings.neurips.cc/paper_files/paper/2023/hash/63461de0b4cb760fc498e85b18a7fe81-Abstract-Datasets_and_Benchmarks.html",
+      "https://github.com/embeddings-benchmark/mteb/blob/6cab5fc195e79b11e32771783bb649bb0cef02dd/mteb/tasks/image_text_pair_classification/eng/sugar_crepe.py"
+    ],
+    "added": "2026-11-19"
   },
   {
     "id": "suicide-self-harm-eval-google",
@@ -172617,7 +172740,7 @@
     "note": "Only one example task is public, and the scored tasks and grading scripts stay hidden.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 150.75,
+    "edi": 150.73,
     "epoch": {
       "epoch_name": "Surface Evolver Bench",
       "random": 0,
@@ -178019,7 +178142,7 @@
     "successor": "terminal-bench-2-1",
     "unit": "%",
     "confidence": "verified",
-    "edi": 149.45,
+    "edi": 149.44,
     "epoch": {
       "epoch_name": "Terminal Bench",
       "random": 0,
@@ -179840,7 +179963,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.98,
+    "edi": 145.99,
     "epoch": {
       "epoch_name": "The Agent Company",
       "random": 0,
@@ -182640,7 +182763,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 47.76,
+    "edi": 48.11,
     "epoch": {
       "epoch_name": "TriviaQA",
       "random": 0,
@@ -186768,6 +186891,29 @@
     "added": "2026-11-20"
   },
   {
+    "id": "v-jepa-2-zero-shot-robot-manipulation-meta",
+    "name": "V-JEPA 2 zero-shot robot manipulation",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "everyday",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Robots use a goal image to reach, grasp, or place an object. Meta measures task success on physical robot arms in two laboratories.",
+    "org": "Meta",
+    "released": "2025-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2506.09985"
+    },
+    "access": "unknown",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/html/2506.09985"
+    ],
+    "added": "2026-11-19"
+  },
+  {
     "id": "v",
     "name": "V*",
     "aliases": [
@@ -186796,29 +186942,6 @@
       "https://github.com/penghao-wu/vstar",
       "https://huggingface.co/datasets/craigwu/vstar_bench"
     ]
-  },
-  {
-    "id": "v-jepa-2-zero-shot-robot-manipulation-meta",
-    "name": "V-JEPA 2 zero-shot robot manipulation",
-    "category": "robotics-embodied",
-    "subcategory": "robotics-real",
-    "level": "everyday",
-    "scoring": "outcome",
-    "format": "agent-task",
-    "description": "Robots use a goal image to reach, grasp, or place an object. Meta measures task success on physical robot arms in two laboratories.",
-    "org": "Meta",
-    "released": "2025-06",
-    "links": {
-      "paper": "https://arxiv.org/abs/2506.09985"
-    },
-    "access": "unknown",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/html/2506.09985"
-    ],
-    "added": "2026-11-19"
   },
   {
     "id": "vaani-benchmark-v1",
@@ -194561,7 +194684,7 @@
     "access": "public",
     "unit": "%",
     "confidence": "verified",
-    "edi": 153.15,
+    "edi": 153.16,
     "epoch": {
       "epoch_name": "VPCT",
       "random": 33.33,
@@ -196336,7 +196459,7 @@
     "successor": "weirdml-v3",
     "unit": "%",
     "confidence": "verified",
-    "edi": 145.5,
+    "edi": 145.51,
     "epoch": {
       "epoch_name": "WeirdML",
       "random": 0,
@@ -196373,7 +196496,7 @@
     "note": "Scores are not raw accuracy and are not comparable with WeirdML v2.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 168.11,
+    "edi": 168.08,
     "epoch": {
       "epoch_name": "WeirdML v3",
       "random": 0,
@@ -197951,7 +198074,7 @@
     "note": "Saturated base-model metric.",
     "unit": "%",
     "confidence": "verified",
-    "edi": 102.19,
+    "edi": 102.31,
     "epoch": {
       "epoch_name": "Winogrande",
       "random": 50,
@@ -201948,103 +202071,6 @@
     "added": "2026-11-20"
   },
   {
-    "id": "owe-voice",
-    "name": "Òwe-Voice",
-    "aliases": [
-      "ÒWE-Voice Yoruba Proverb Speech Dataset"
-    ],
-    "category": "audio-video",
-    "subcategory": "audio-speech",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "open-ended",
-    "description": "Models transcribe spoken Yorùbá proverbs. The evaluation measures errors in words and tone marks.",
-    "org": "Daud Abolade, University of Lagos",
-    "released": "2026-03",
-    "links": {
-      "paper": "https://aclanthology.org/2026.africanlp-main.8.pdf",
-      "repo": "https://github.com/Holuwasege/OWE-Voice-Evaluation"
-    },
-    "access": "private",
-    "note": "A later Whisper study with a shared author tested 750 recordings from three unseen speakers. The original study sampled across speakers.",
-    "unit": "%",
-    "better": "lower",
-    "confidence": "verified",
-    "evidence": [
-      "https://huggingface.co/Haramiday/owe-voice-whisper-small-openai-yoruba",
-      "https://aclanthology.org/2026.africanlp-main.8.pdf",
-      "https://github.com/Holuwasege/OWE-Voice-Evaluation"
-    ],
-    "added": "2026-11-20"
-  },
-  {
-    "id": "csfd-sentiment",
-    "name": "ČSFD Sentiment",
-    "aliases": [
-      "CSFD Sentiment"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reading",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "multiple-choice",
-    "description": "Models classify the sentiment of movie reviews from the Czech and Slovak Film Database.",
-    "org": "Tomáš Brychcín and Ivan Habernal",
-    "released": "2013-09",
-    "links": {
-      "paper": "https://aclanthology.org/R13-1016/",
-      "site": "https://euroeval.com/datasets/czech",
-      "dataset": "https://huggingface.co/datasets/EuroEval/csfd-sentiment-mini"
-    },
-    "access": "public",
-    "note": "EuroEval scores sentiment labels with the Matthews correlation coefficient.",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://euroeval.com/datasets/czech",
-      "https://aclanthology.org/R13-1016/",
-      "https://euroeval.com/tasks/sentiment-classification"
-    ],
-    "added": "2026-11-19"
-  },
-  {
-    "id": "poleval-smigiel",
-    "name": "ŚMIGIEL",
-    "aliases": [
-      "Smigiel",
-      "Spotting Machine-Generated Text from Language Models for Polish",
-      "PolEval 2025 Task 1"
-    ],
-    "category": "multilingual",
-    "subcategory": "multilingual-reading",
-    "level": "university",
-    "scoring": "verified",
-    "format": "prediction",
-    "description": "Models classify Polish texts as human or machine written. The test includes genres and generators absent from training.",
-    "org": "PolEval 2025 organizers",
-    "released": "2025-04",
-    "links": {
-      "paper": "https://aclanthology.org/2025.poleval-main.2/",
-      "repo": "https://github.com/poleval/2025-smigiel",
-      "site": "https://poleval.pl/2025/tasks/smigiel/",
-      "dataset": "https://github.com/poleval/2025-smigiel",
-      "leaderboard": "https://2025.poleval.pl/results/"
-    },
-    "access": "public+private-holdout",
-    "note": "Organizers received seven systems across three tracks and ranked them by accuracy.",
-    "unit": "score",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://poleval.pl/2025/tasks/smigiel/",
-      "https://2025.poleval.pl/results/",
-      "https://poleval.pl/2025/",
-      "https://aclanthology.org/2025.poleval-main.2/"
-    ],
-    "added": "2026-11-20"
-  },
-  {
     "id": "tau-bench-2-0",
     "name": "τ-bench 2.0",
     "aliases": [
@@ -202168,39 +202194,6 @@
     "confidence": "verified"
   },
   {
-    "id": "tau-c-bench",
-    "name": "τc-Bench",
-    "aliases": [
-      "tau-c-Bench",
-      "TASTE agent benchmark"
-    ],
-    "category": "tool-use",
-    "subcategory": "tools-customer-service",
-    "level": "everyday",
-    "scoring": "verified",
-    "format": "agent-task",
-    "family": "tau-bench",
-    "version": "Contextual",
-    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
-    "org": "Technion and IBM Research",
-    "released": "2026-05",
-    "links": {
-      "paper": "https://arxiv.org/abs/2605.28556",
-      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    },
-    "access": "public",
-    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
-    "successor": "tau-bench-2-0",
-    "unit": "%",
-    "better": "higher",
-    "confidence": "verified",
-    "evidence": [
-      "https://arxiv.org/pdf/2605.28556v2",
-      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
-    ],
-    "added": "2026-11-15"
-  },
-  {
     "id": "tau3-banking",
     "name": "τ³-bench Banking",
     "category": "tool-use",
@@ -202239,29 +202232,36 @@
     ]
   },
   {
-    "id": "mind2act-world",
-    "name": "Mind2Act World",
-    "category": "robotics-embodied",
-    "subcategory": "robotics-simulation",
+    "id": "tau-c-bench",
+    "name": "τc-Bench",
+    "aliases": [
+      "tau-c-Bench",
+      "TASTE agent benchmark"
+    ],
+    "category": "tool-use",
+    "subcategory": "tools-customer-service",
     "level": "everyday",
     "scoring": "verified",
     "format": "agent-task",
-    "description": "Embodied agents perform Mind, Act and closed-loop Mind2Act manipulation tasks in simulated scenes. The benchmark contains 30 tasks with three difficulty levels and two scene settings.",
-    "org": "Mind2Act-World",
-    "released": "2026-11",
+    "family": "tau-bench",
+    "version": "Contextual",
+    "description": "Agents use tools while conversing with simulated customers in airline, retail, and telecom tasks. The evaluator compares the final environment state with the expected state. Generated scenarios add unusual tool combinations, ambiguous requests, and distracting database records.",
+    "org": "Technion and IBM Research",
+    "released": "2026-05",
     "links": {
-      "paper": "https://arxiv.org/abs/2611.26444",
-      "repo": "https://github.com/Mind2Act/Mind2Act_World"
+      "paper": "https://arxiv.org/abs/2605.28556",
+      "repo": "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     },
     "access": "public",
-    "note": "The paper reports 180 task configurations across five application domains.",
+    "note": "This extension changes the tasks from τ²-Bench rather than only fixing them. The TASTE synthesis method is unrelated to Anthropic’s TASTE benchmark.",
+    "successor": "tau-bench-2-0",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://arxiv.org/abs/2611.26444",
-      "https://huggingface.co/papers/2611.26444",
-      "https://github.com/Mind2Act/Mind2Act_World"
-    ]
+      "https://arxiv.org/pdf/2605.28556v2",
+      "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
+    ],
+    "added": "2026-11-15"
   }
 ]
