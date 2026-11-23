@@ -7,6 +7,9 @@ import { tables } from '../lib/html.ts';
 import { numberCell } from '../lib/boards/arxiv-throttled.ts';
 
 const feed = 'https://snu-pi.github.io/HumanoidToolBench/';
+// On 2026-11-23 the authors added zero-shot LLM agents (Claude Opus 5.5, GPT-6.1 Sol, GPT-6 Astra) in their own two
+// pipelines, which run every model the same way, so a row in one is the model's own score with the pipeline as a label.
+const PIPELINES: Record<string, string> = { CAP: 'Code-as-Policies', RUA: 'Robot-Use Agent' };
 const board: Leaderboard = {
   benchmark: 'humanoidtoolbench', url: feed + '#results', feed,
   terms: 'The authors publish these results on their project page at https://snu-pi.github.io/HumanoidToolBench/.',
@@ -28,10 +31,15 @@ const board: Leaderboard = {
       });
       if (columns.filter(Boolean).length !== 9) throw new Error('Missing task columns');
       for (const row of table.slice(2)) {
-        const model = row[0].replace(/ (IL|VLA|WAM)$/, '').replace(/^Ψ 0$/, 'Ψ0 (Psi Zero)');
-        const metrics = models.get(model) ?? {};
+        // a row spanning the table heads a group: "Trained on ToolBook 100 episodes per task" or, since
+        // 2026-11-23, "Zero-shot LLM agents 3 episodes per task"
+        if (row.every(c => c === row[0])) continue;
+        const agent = row[0].match(/^(.+) (CAP|RUA)$/);
+        const model = agent ? agent[1] : row[0].replace(/ (IL|VLA|WAM)$/, '').replace(/^Ψ 0$/, 'Ψ0 (Psi Zero)');
+        const key = JSON.stringify([model, agent ? PIPELINES[agent[2]] : undefined]);
+        const metrics = models.get(key) ?? {};
         columns.forEach((name, i) => { if (name) metrics[name] = numberCell(row[i]); });
-        models.set(model, metrics);
+        models.set(key, metrics);
       }
     }
     board.parts = parts;
@@ -45,10 +53,13 @@ const board: Leaderboard = {
       const model = row[0] === 'π 0.5' ? 'pi0-5' : row[0] === 'Ψ 0' ? 'Ψ0 (Psi Zero)' : row[0] === 'GR00T N1.7' ? 'gr00t-n1-7' : row[0] === 'Cosmos 3 Edge Policy' ? 'cosmos3-edge' : row[0];
       params.set(model, count);
     }
-    const rows = [...models].map(([model, metrics]) => {
+    const rows = [...models].map(([key, metrics]) => {
+      const [model, harness] = JSON.parse(key) as [string, string | undefined];
       const values = Object.values(metrics);
       if (values.length !== 18) throw new Error('Incomplete policy: ' + model);
-      return { model, score: values.reduce((sum, x) => sum + x, 0) / 18, metrics, params: params.get(model), trials: 1800 };
+      const score = values.reduce((sum, x) => sum + x, 0) / 18;
+      // trained policies run 100 episodes per task, the zero-shot agents 3
+      return harness ? { model, harness, score, metrics, trials: 54 } : { model, score, metrics, params: params.get(model), trials: 1800 };
     });
     return checked(rows, 7);
   },

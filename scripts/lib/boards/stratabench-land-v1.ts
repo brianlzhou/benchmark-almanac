@@ -1,34 +1,37 @@
-// StrataBench Land v1 (Collide): Extract accuracy on all ten shared fields of 628 instruments.
-// The live dataset card publishes fractions, converted to percentages here. Natural and schema
-// are prompt protocols on the same complete benchmark, not separate task subsets. Never include
-// the schema-only 14-field diagnostic or average Extract with Classify or Define.
+// StrataBench Land v1 (Collide): Extract accuracy on the ten fields shared by all four prompt conditions, over the
+// same 628 instruments, converted from fractions to percentages. Collide withdrew the v1 dataset card that this
+// board first read (it answers 401 since 2026-11-09). The paper in the v2 repository, which the v2 card names as the
+// source for v1, gives the same experiment in Table 10 with all four conditions: natural, rules only, fields only
+// (the v1 card's "schema" column, with the same values) and full. Its natural values differ from the withdrawn card
+// by up to 6 points, and the paper's are used. The conditions are prompt protocols on the same complete benchmark,
+// not task subsets. Never include the 14-field diagnostic or average Extract with Classify or Define.
 import type { Leaderboard, LeaderboardRow } from '../../leaderboards/types.ts';
-import { fetchText } from '../util.ts';
+import { pdfText } from './pdf-text.ts';
 
-const FEED = 'https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/README.md';
+const DATASET = 'https://huggingface.co/datasets/Collide-ai/stratabench-land-v2';
+const FEED = DATASET + '/resolve/main/oilbench_landscape_1.pdf';
+const CONDITIONS = ['natural', 'rules only', 'fields only', 'full'];
 
 export function strataExtractBoard(): Leaderboard {
   return {
     benchmark: 'stratabench-land-v1-extract',
-    url: 'https://huggingface.co/datasets/Collide-ai/stratabench-land-v1#baseline-results',
-    feed: FEED,
-    terms: 'Source: StrataBench Land v1, Collide (https://collide.io); data are CC BY-NC 4.0 with additional permission to publish attributed benchmark scores.',
+    url: FEED,
+    feed: `${FEED} (Table 10)`,
+    static: 'paper',
+    terms: 'Source: StrataBench, Collide (https://collide.io); Collide publishes the paper in its CC BY-NC 4.0 dataset repository with permission to publish attributed benchmark scores. ' + DATASET,
     async fetch(): Promise<LeaderboardRow[]> {
-      const card = await fetchText(FEED);
-      const section = card.match(/### Extract: accuracy on the ten shared fields, 628 instruments\s+([\s\S]*?)(?=\n### |\n## |$)/)?.[1];
-      if (!section) throw new Error('StrataBench Extract baseline section changed');
-      const table = section.split('\n').filter(line => line.trim().startsWith('|'))
-        .map(line => line.trim().slice(1, -1).split('|').map(cell => cell.trim().replace(/`/g, '')));
-      if (table[0]?.join('|') !== 'Model|natural|schema') throw new Error('StrataBench Extract columns changed');
+      const pdf = await pdfText(FEED);
+      const before = pdf.split('Table 10: Accuracy on the ten fields');
+      if (before.length !== 2) throw new Error('StrataBench Extract Table 10 missing');
+      const block = before[0].split(/Model\s+Natural\s+Rules only\s+Fields only\s+Full/).at(-1)!;
+      if (block === before[0]) throw new Error('StrataBench Extract columns changed');
       const rows: LeaderboardRow[] = [];
-      for (const cells of table.slice(2)) {
-        if (cells.length !== 3 || !cells[0]) throw new Error('StrataBench Extract invalid row');
-        for (const [column, setting] of [[1, 'natural'], [2, 'schema']] as const) {
-          if (!/^(?:0?\.\d+|[01](?:\.0+)?)$/.test(cells[column])) throw new Error('StrataBench Extract invalid fraction');
-          rows.push({ model: cells[0], setting, score: Number(cells[column]) * 100 });
-        }
+      for (const line of block.trim().split('\n')) {
+        const cells = line.trim().split(/\s{2,}/);
+        if (cells.length !== 5 || !cells.slice(1).every(c => /^\.\d{3}$/.test(c))) throw new Error('StrataBench Extract invalid row: ' + line.trim());
+        CONDITIONS.forEach((setting, i) => rows.push({ model: cells[0], setting, score: Number((Number(cells[i + 1]) * 100).toFixed(1)) }));
       }
-      if (!rows.length) throw new Error('StrataBench Extract has no published results');
+      if (rows.length < 20) throw new Error('StrataBench Extract has too few results');
       return rows;
     },
   };

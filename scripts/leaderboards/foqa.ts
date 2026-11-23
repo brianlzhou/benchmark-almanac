@@ -77,6 +77,8 @@ export default {
         score,low:score-margin,high:score+margin,link:r.Model.match(/href='([^']+)'/)?.[1],open:r.Open === '✓',
         metrics:{exactMatch:em,exactMatchLow:em-emMargin,exactMatchHigh:em+emMargin,scored:Number(r.foqa_scored),failures:Number(r.foqa_failures)}};
     });
-    return checked(rows,353);
+    // EuroEval drops a model now and then (TurkuNLP's Finnish ModernBERT on 2026-11-21, leaving 352), so the floor
+    // only catches a broken parse, not a source that removed a row
+    return checked(rows,330);
   },
 } satisfies Leaderboard;
