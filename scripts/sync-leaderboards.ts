@@ -66,6 +66,8 @@ interface Store {
   rows: Row[];
   otherColumns?: string[];
   others?: Row[];
+  // importers that have never read their board, so there are no board facts to carry a `failed` record
+  unread?: Record<string, { since: string; date: string; error: string }>;
 }
 
 const arg = (k: string) => {
@@ -321,12 +323,18 @@ for (const f of files) {
     const stats = statsOf(board, [...rows, ...others], parts);
     const measures = measuresOf(board, [...rows, ...others]);
     store.boards[board.benchmark] = { url: board.url, feed: board.feed, terms: board.terms, ...(board.host ? { host: board.host } : {}), ...(board.headline ? { headline: board.headline } : {}), ...(board.static ? { static: board.static } : {}), ...(LOCAL_BOARDS[f.replace(/\.ts$/, '')] ? { local: true as const } : {}), retrieved: today(), rows: rows.length, unmatched: [...unmatched].sort(), ...(board.chart ? { chart: board.chart } : {}), ...(board.costPer === 'run' ? { costPer: 'run' as const } : {}), ...(board.reference?.length ? { reference: board.reference } : {}), ...(board.harnesses === 'system' ? { harnesses: 'system' as const } : {}), ...(board.verified ? { verified: board.verified } : {}), ...(parts ? { parts } : {}), ...(stats ? { stats } : {}), ...(measures ? { measures } : {}) };
+    if (store.unread) delete store.unread[board.benchmark];
   } catch (e) {
     failed++;
     const error = (e as Error).message;
-    console.log(`  ${board.benchmark}: failed, keeping the last rows (${error})`);
+    console.log(`  ${board.benchmark}: failed, ${store.boards[board.benchmark] ? 'keeping the last rows' : 'and it has never read'} (${error})`);
     // record the failure, so the Contribute page can list the importer. The next good read replaces the record.
-    if (!dry && store.boards[board.benchmark]) store.boards[board.benchmark].failed = { date: today(), error: error.replace(/\s+/g, ' ').slice(0, 200) };
+    const failure = { date: today(), error: error.replace(/\s+/g, ' ').slice(0, 200) };
+    if (!dry && store.boards[board.benchmark]) store.boards[board.benchmark].failed = failure;
+    // A board that never read has no facts to hold the record, so its failure goes in `unread`. Before 2026-11-23
+    // these failures went unrecorded: the health report and the sync's retry never saw them, and nine importers
+    // added on 2026-11-20 failed every day unnoticed.
+    else if (!dry) (store.unread ??= {})[board.benchmark] = { since: store.unread?.[board.benchmark]?.since ?? today(), ...failure };
   }
 }
 
@@ -344,6 +352,7 @@ if (!dry) {
         console.log(`  ${id}: no importer any more, rows removed`);
         delete store.boards[id];
       }
+  if (!only) for (const id of Object.keys(store.unread ?? {})) if (!seen.has(id)) delete store.unread![id];
   store.rows = store.rows.filter((r) => store.boards[r[0]]);
   store.retrieved = today();
   store.columns = COLUMNS;
@@ -359,7 +368,8 @@ if (!dry) {
   const flagged = sortKeys(fieldReview);
   writeFileSync(reviewPath, `{\n  "note": "Fields a board publishes that its importer may drop, or that the board added since the last sync. Wire them into the importer, or mark them reviewed in data/field-decisions.json.",\n  "updated": ${JSON.stringify(today())},\n  "boards": {\n${Object.entries(flagged).map(([id, f]) => `    ${JSON.stringify(id)}: ${JSON.stringify(f)}`).join(',\n')}\n  }\n}\n`);
   console.log(`Field watch: ${Object.keys(flagged).length} boards with fields to review (data/scores/field-review.json).`);
-  writeScores({ retrieved: store.retrieved, boards, columns: store.columns, rows: store.rows, otherColumns: OTHER_COLUMNS, others });
+  const unread = Object.fromEntries(Object.entries(store.unread ?? {}).sort(([a], [b]) => a.localeCompare(b)));
+  writeScores({ retrieved: store.retrieved, boards, unread, columns: store.columns, rows: store.rows, otherColumns: OTHER_COLUMNS, others });
   if (rematch) console.log(`Rematch: ${rematched} unlisted entries now match a model.`);
   console.log(`Wrote ${store.rows.length} leaderboard scores and ${others.length} unlisted entries from ${Object.keys(store.boards).length} boards.${failed ? ` ${failed} failed.` : ''}`);
 }

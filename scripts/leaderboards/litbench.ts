@@ -1,5 +1,5 @@
 // LitBench evaluates creative-writing judges against paired preference labels.
-// Table 1 reports each zero-shot judge's accuracy on the held-out test set.
+// Table 3 (appendix A.2) reports each zero-shot judge's accuracy on the held-out test set.
 // This importer reads the authors' table from the ACL Anthology paper PDF.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { pdfText } from '../lib/boards/pdf-text.ts';
@@ -16,11 +16,15 @@ const board: Leaderboard = {
   terms: 'ACL Anthology terms. https://aclanthology.org/faq/copyright/',
   async fetch(): Promise<LeaderboardRow[]> {
     const paper = await pdfText(feed);
-    const section = paper.split('A.1 LLM-as-judge Raw Results')[1]?.split('A.2 LLM-as-judge Prompt Optimization')[0];
-    if (!section) throw new Error('Missing LitBench Table 1');
+    // The published paper moved the raw results to Table 3 in appendix A.2, which sits in the left column of a
+    // two-column page, so each row ends in text from the right column.
+    const caption = 'Table 3: LLM-as-a-judge evaluation results by model';
+    const before = paper.split(caption)[0];
+    const section = before === paper ? undefined : before.slice(before.lastIndexOf('Avg. Expl. Len.'));
+    if (!section) throw new Error('Missing LitBench Table 3');
     const rows: LeaderboardRow[] = [];
     for (const model of expected) {
-      const match = section.match(new RegExp('(?:^|\\n)\\s*' + model.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + '\\s+(0?\\.\\d+)\\s+([\\d.]+)\\s*(?:\\n|$)'));
+      const match = section.match(new RegExp('(?:^|\\n)\\s*' + model.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s+(0?\\.\\d+)\\s+(\\d+(?:\\.\\d+)?)(?=\\s|$)'));
       if (!match) throw new Error('Missing LitBench row: ' + model);
       rows.push({ model, score: Number(match[1]) * 100, metrics: { averageExplanationLength: Number(match[2]) } });
     }

@@ -13,7 +13,8 @@ const board: Leaderboard = {
   async fetch() {
     const paper = await pdfText(feed);
     const table = paper.split('Table 2: LMs accuracy for (dis)agreement detection')[1]?.split('We evaluate the performance')[0];
-    const normalized = table?.replace(/\s+/g, ' '); const values = normalized?.match(/\d+\.\d+%/g)?.map(Number);
+    // the PDF's text layer prints the first value as "62.4 %", so the percent sign may follow a space
+    const normalized = table?.replace(/\s+/g, ' '); const values = normalized?.match(/(?<![\d.(])\d+\.\d+ ?%/g)?.map(v => parseFloat(v));
     const std = normalized?.match(/\((\d+\.\d+)%\)/g)?.map(v => Number(v.match(/\d+\.\d+/)![0]));
     if (!values || values.length !== 9 || !std || std.length !== 9) throw new Error('Missing DEBAGREEMENT results');
     return checked(models.map((model, i) => ({ model, score: values[i], metrics: { std: std[i] }, trials: 4 })), 9);

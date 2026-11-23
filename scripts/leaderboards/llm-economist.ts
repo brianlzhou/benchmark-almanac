@@ -6,7 +6,8 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 
 const feed = 'https://arxiv.org/pdf/2507.15815';
-const expected: Record<string, number> = { 'GPT-4o': 98.2, 'GPT-3.5 Turbo': 97.84, 'Llama 3.1 8B': 90 };
+// Table 1 ("LLM Performance Comparison") names the models this way, with "% Max SWF" after 5,000 steps
+const expected: Record<string, string> = { 'Llama 3.1:8b': 'Llama 3.1 8B', 'GPT-3.5 Turbo': 'GPT-3.5 Turbo', 'GPT-4o': 'GPT-4o' };
 
 const board: Leaderboard = {
   benchmark: 'llm-economist',
@@ -16,13 +17,14 @@ const board: Leaderboard = {
   terms: 'Paper results read from arXiv. https://arxiv.org/abs/2507.15815',
   async fetch(): Promise<LeaderboardRow[]> {
     const paper = await pdfText(feed);
+    const table = paper.split('Table 1. LLM Performance Comparison')[1]?.split(/\n\s*\n\s*\n/)[0];
+    if (!table || !/% Max SWF/.test(table)) throw new Error('Missing LLM Economist Table 1');
     const rows: LeaderboardRow[] = [];
-    for (const [model, score] of Object.entries(expected)) {
-      const escaped = model.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      if (!new RegExp(escaped + '[\\s\\S]{0,160}' + score.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')).test(paper)) {
-        throw new Error('Missing LLM Economist result: ' + model);
-      }
-      rows.push({ model, score });
+    for (const [name, model] of Object.entries(expected)) {
+      const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const match = table.match(new RegExp('(?:^|\\n)\\s*' + escaped + '\\s+5000\\s+(\\d+(?:\\.\\d+)?)\\s*(?:\\n|$)'));
+      if (!match) throw new Error('Missing LLM Economist result: ' + name);
+      rows.push({ model, score: Number(match[1]) });
     }
     return checked(rows, 3);
   },

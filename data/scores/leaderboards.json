@@ -21906,10 +21906,6 @@
           "unit": "%",
           "better": "higher"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Missing rated ASCII Bench models"
       }
     },
     "asdiv": {
@@ -75605,6 +75601,25 @@
           "better": "higher"
         }
       }
+    },
+    "debagreement": {
+      "url": "https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/file/6f3ef77ac0e3619e98159e9b6febf557-Paper-round2.pdf",
+      "feed": "https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/file/6f3ef77ac0e3619e98159e9b6febf557-Paper-round2.pdf",
+      "terms": "The authors publish the NeurIPS paper. https://datasets-benchmarks-proceedings.neurips.cc/",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 0,
+      "unmatched": [
+        "BERT base cased",
+        "BERT base uncased",
+        "BERT large uncased",
+        "DeBERTa base",
+        "DeBERTa large",
+        "RoBERTa base",
+        "RoBERTa large",
+        "XLNet base",
+        "XLNet large"
+      ]
     },
     "debate-lech-mazur": {
       "url": "https://github.com/lechmazur/debate",
@@ -152688,6 +152703,35 @@
         }
       }
     },
+    "korean-canonical-legal-benchmark": {
+      "url": "https://arxiv.org/html/2512.24572",
+      "feed": "https://arxiv.org/html/2512.24572",
+      "terms": "The authors publish the paper on arXiv. https://arxiv.org/abs/2512.24572",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 20,
+      "unmatched": [
+        "A.X 4.0",
+        "Claude 3.5 Sonnet (snapshot unspecified)",
+        "DeepSeek-R1 (snapshot unspecified)",
+        "DeepSeek-V3 (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)",
+        "GPT-4o-mini (snapshot unspecified)",
+        "Gemini 2.5 Pro (snapshot unspecified)",
+        "HCX SEED Think 14B",
+        "Kanana 1.5 8B",
+        "Qwen3 235B Instruct",
+        "Qwen3 235B Thinking"
+      ],
+      "stats": {
+        "vanilla": {
+          "name": "Score without precedents",
+          "unit": "%",
+          "better": "higher",
+          "note": "The same questions with no supporting precedents in the prompt."
+        }
+      }
+    },
     "korean-contest-prize-reading": {
       "url": "https://www.kaggle.com/benchmarks/ohyoseok/korean-contest-prize-reading",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/ohyoseok/korean-contest-prize-reading/leaderboard",
@@ -155032,6 +155076,26 @@
           "better": "lower"
         }
       }
+    },
+    "lad2000": {
+      "url": "https://arxiv.org/html/2106.08570",
+      "feed": "https://arxiv.org/html/2106.08570",
+      "terms": "The authors publish the results on arXiv. https://arxiv.org/abs/2106.08570",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 0,
+      "unmatched": [
+        "AR-Net",
+        "ConvAE",
+        "DeepMIL",
+        "GMM",
+        "MLEP",
+        "MNAD",
+        "OGNet",
+        "Sparse",
+        "Stacked RNN",
+        "U-Net"
+      ]
     },
     "ladder-robotics": {
       "url": "https://ladderrobotics.ai/",
@@ -160591,6 +160655,18 @@
         }
       }
     },
+    "litbench": {
+      "url": "https://aclanthology.org/2026.eacl-long.362/",
+      "feed": "https://aclanthology.org/2026.eacl-long.362.pdf",
+      "terms": "ACL Anthology terms. https://aclanthology.org/faq/copyright/",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 8,
+      "unmatched": [
+        "deepseek-r1 (snapshot unspecified)",
+        "deepseek-v3 (snapshot unspecified)"
+      ]
+    },
     "litqa-v0-futurehouse": {
       "url": "https://github.com/Future-House/LitQA",
       "feed": "https://raw.githubusercontent.com/Future-House/LitQA/main/README.md",
@@ -162084,6 +162160,18 @@
           "note": "Absolute uncertainty shown after the source value."
         }
       }
+    },
+    "llm-economist": {
+      "url": "https://arxiv.org/abs/2507.15815",
+      "feed": "https://arxiv.org/pdf/2507.15815",
+      "terms": "Paper results read from arXiv. https://arxiv.org/abs/2507.15815",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 1,
+      "unmatched": [
+        "GPT-3.5 Turbo (snapshot unspecified)",
+        "GPT-4o (snapshot unspecified)"
+      ]
     },
     "llm-fantasy-football-arena-classic": {
       "url": "https://arena.wildcardlabs.tech/",
@@ -167215,6 +167303,59 @@
         "Pseudocode to Code: 2K": {
           "name": "Pseudocode to Code: 2K",
           "unit": "score"
+        }
+      }
+    },
+    "longpuzzlebench": {
+      "url": "https://arxiv.org/html/2609.34769",
+      "feed": "https://arxiv.org/html/2609.34769",
+      "terms": "The authors publish the benchmark results on arXiv. https://arxiv.org/abs/2609.34769",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 24,
+      "unmatched": [],
+      "harnesses": "system",
+      "stats": {
+        "lc": {
+          "name": "Level completion",
+          "unit": "%",
+          "better": "higher",
+          "note": "The share of target levels solved."
+        },
+        "fgp": {
+          "name": "Fine-grained progress",
+          "unit": "%",
+          "better": "higher",
+          "note": "Level completion that also credits the largest fraction of the goal reached on the level where an episode stops."
+        },
+        "lpr": {
+          "name": "Level pass rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "The share of reached levels solved."
+        },
+        "h50": {
+          "name": "50% level horizon",
+          "unit": "count",
+          "better": "higher",
+          "note": "Consecutive levels that at least half of the episodes clear on the ten-level objectives. \"10+\" is stored as 10."
+        },
+        "lcHard": {
+          "name": "Level completion on hard tiers",
+          "unit": "%",
+          "better": "higher",
+          "note": "Level completion on the tiers above each game’s easiest."
+        },
+        "per": {
+          "name": "Premature exit rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "The share of episodes the agent abandons."
+        },
+        "ngar": {
+          "name": "Native GUI action ratio",
+          "unit": "%",
+          "note": "Under Code Execution CUA, the share of steps that are only screen observation or native GUI input."
         }
       }
     },
@@ -226397,10 +226538,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-1": {
@@ -226414,7 +226551,7 @@
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
         "IndexTeam/IndexTTS-2.5",
-        "LiquidAI/LFM2.5-Audio-1.5B NEW",
+        "LiquidAI/LFM2.5-Audio-1.5B",
         "OpenMOSS-Team/MOSS-TTS",
         "ResembleAI/chatterbox (ChatterboxMultilingualTTS)",
         "ResembleAI/chatterbox (ChatterboxTTS)",
@@ -226435,7 +226572,7 @@
         "openbmb/VoxCPM2",
         "owensong/Inflect-Micro-v2",
         "owensong/Inflect-Nano-v1",
-        "sahilmahendrakar/Paradee-8M-v1.0 NEW",
+        "sahilmahendrakar/Paradee-8M-v1.0",
         "sesame/csm-1b",
         "tencent/AuK",
         "tencent/AuK-Flash",
@@ -226491,10 +226628,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-2": {
@@ -226502,13 +226635,13 @@
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 5,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
         "IndexTeam/IndexTTS-2.5",
-        "LiquidAI/LFM2.5-Audio-1.5B NEW",
+        "LiquidAI/LFM2.5-Audio-1.5B",
         "OpenMOSS-Team/MOSS-TTS",
         "ResembleAI/chatterbox (ChatterboxMultilingualTTS)",
         "ResembleAI/chatterbox (ChatterboxTTS)",
@@ -226516,7 +226649,6 @@
         "bosonai/higgs-tts-2-3b-base",
         "bosonai/higgs-tts-3-4b",
         "facebook/seamless-m4t-v2-large",
-        "fishaudio/drama-3 NEW",
         "fishaudio/s2-pro",
         "gradium/phonon-31m-en NEW ¹",
         "gradium/phonon-40m-en NEW ²",
@@ -226532,7 +226664,7 @@
         "openbmb/VoxCPM2",
         "owensong/Inflect-Micro-v2",
         "owensong/Inflect-Nano-v1",
-        "sahilmahendrakar/Paradee-8M-v1.0 NEW",
+        "sahilmahendrakar/Paradee-8M-v1.0",
         "sesame/csm-1b",
         "tencent/AuK",
         "tencent/AuK-Flash",
@@ -226593,10 +226725,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-3": {
@@ -226604,7 +226732,7 @@
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 5,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
@@ -226617,7 +226745,6 @@
         "bosonai/higgs-tts-2-3b-base",
         "bosonai/higgs-tts-3-4b",
         "facebook/seamless-m4t-v2-large",
-        "fishaudio/drama-3 NEW",
         "fishaudio/s2-pro",
         "gradium/phonon-31m-en NEW ¹",
         "gradium/phonon-40m-de NEW ³",
@@ -226740,10 +226867,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-4": {
@@ -226751,13 +226874,13 @@
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 7,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
         "IndexTeam/IndexTTS-2.5",
         "LiquidAI/LFM2.5-Audio-1.5B",
-        "LiquidAI/LFM3-Audio-2B NEW",
+        "LiquidAI/LFM3-Audio-2B",
         "OpenMOSS-Team/MOSS-TTS",
         "ResembleAI/chatterbox (ChatterboxMultilingualTTS)",
         "ResembleAI/chatterbox (ChatterboxTTS)",
@@ -226765,7 +226888,6 @@
         "bosonai/higgs-tts-2-3b-base",
         "bosonai/higgs-tts-3-4b",
         "facebook/seamless-m4t-v2-large",
-        "fishaudio/drama-3 NEW",
         "fishaudio/s2-pro",
         "gradium/phonon-31m-en NEW ¹",
         "gradium/phonon-40m-de NEW ⁵",
@@ -226775,10 +226897,9 @@
         "gradium/phonon-40m-fr NEW ⁸",
         "gradium/phonon-40m-pt NEW ³",
         "hexgrad/Kokoro-82M",
-        "inclusionAI/Ming-3.0-tts-0.5B NEW",
         "k2-fsa/OmniVoice",
         "kyutai/pocket-tts",
-        "maya-research/maya2-native NEW",
+        "maya-research/maya2-native",
         "microsoft/VibeVoice-Realtime-0.5B",
         "microsoft/speecht5_tts",
         "mistralai/Voxtral-4B-TTS-2603",
@@ -226796,7 +226917,7 @@
         "tencent/AuK-Flash",
         "vibevoice/VibeVoice-1.5B-hf",
         "vibevoice/VibeVoice-7B-hf",
-        "ydqmkkx/GibbsTTS NEW"
+        "ydqmkkx/GibbsTTS"
       ],
       "parts": {
         "🇬🇧 WER": {
@@ -226889,10 +227010,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-5": {
@@ -226900,22 +227017,21 @@
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
       "retrieved": "2026-11-23",
-      "rows": 3,
+      "rows": 7,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
         "IndexTeam/IndexTTS-2.5",
         "LiquidAI/LFM2.5-Audio-1.5B",
-        "LiquidAI/LFM3-Audio-2B NEW",
+        "LiquidAI/LFM3-Audio-2B",
         "OpenMOSS-Team/MOSS-TTS",
         "ResembleAI/chatterbox (ChatterboxMultilingualTTS)",
         "ResembleAI/chatterbox (ChatterboxTTS)",
         "Supertone/supertonic-3",
         "bosonai/higgs-tts-2-3b-base",
         "bosonai/higgs-tts-3-4b",
-        "contextboxai/Kokoro-Vietnamese NEW",
+        "contextboxai/Kokoro-Vietnamese",
         "facebook/seamless-m4t-v2-large",
-        "fishaudio/drama-3 NEW",
         "fishaudio/s2-pro",
         "gradium/phonon-31m-en NEW ¹",
         "gradium/phonon-40m-de NEW ⁵",
@@ -226925,10 +227041,9 @@
         "gradium/phonon-40m-fr NEW ⁸",
         "gradium/phonon-40m-pt NEW ³",
         "hexgrad/Kokoro-82M",
-        "inclusionAI/Ming-3.0-tts-0.5B NEW",
         "k2-fsa/OmniVoice",
         "kyutai/pocket-tts",
-        "maya-research/maya2-native NEW",
+        "maya-research/maya2-native",
         "microsoft/VibeVoice-Realtime-0.5B",
         "microsoft/speecht5_tts",
         "mistralai/Voxtral-4B-TTS-2603",
@@ -226940,14 +227055,14 @@
         "openbmb/VoxCPM2",
         "owensong/Inflect-Micro-v2",
         "owensong/Inflect-Nano-v1",
-        "pnnbao-ump/VieNeu-TTS-v3-Turbo NEW",
+        "pnnbao-ump/VieNeu-TTS-v3-Turbo",
         "sahilmahendrakar/Paradee-8M-v1.0",
         "sesame/csm-1b",
         "tencent/AuK",
         "tencent/AuK-Flash",
         "vibevoice/VibeVoice-1.5B-hf",
         "vibevoice/VibeVoice-7B-hf",
-        "ydqmkkx/GibbsTTS NEW"
+        "ydqmkkx/GibbsTTS"
       ],
       "parts": {
         "🇬🇧 WER": {
@@ -227040,10 +227155,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-6": {
@@ -227051,26 +227162,26 @@
       "feed": "https://hf-audio-open-tts-leaderboard.hf.space/gradio_api/call/_refresh_leaderboard",
       "terms": "Hugging Face allows crawling. The Space and source datasets retain their respective licenses.",
       "retrieved": "2026-11-23",
-      "rows": 5,
+      "rows": 7,
       "unmatched": [
         "BreezeBlue/Breeze-TTS-2",
-        "ConwayResearch/Underdog-Woof (Mira) NEW ²",
-        "ConwayResearch/Underdog-Woof NEW ⁹",
-        "Edge0/Audio8-TTS-Realistic-0.6b NEW",
+        "ConwayResearch/Underdog-Woof (Mira) ²",
+        "ConwayResearch/Underdog-Woof ⁹",
+        "Edge0/Audio8-TTS-Realistic-0.6b",
         "FunAudioLLM/Fun-CosyVoice3-0.5B-2512 (RL)",
         "IndexTeam/IndexTTS-2.5",
         "LiquidAI/LFM2.5-Audio-1.5B",
-        "LiquidAI/LFM3-Audio-2B NEW",
+        "LiquidAI/LFM3-Audio-2B",
         "OpenMOSS-Team/MOSS-TTS",
         "ResembleAI/chatterbox (ChatterboxMultilingualTTS)",
         "ResembleAI/chatterbox (ChatterboxTTS)",
         "Supertone/supertonic-3",
-        "Zyphra/ZONOS3-Mini NEW",
-        "Zyphra/ZONOS3-Mini NEW ¹",
+        "Zyphra/ZONOS3-Mini",
+        "Zyphra/ZONOS3-Mini ¹",
         "bosonai/higgs-tts-2-3b-base",
         "bosonai/higgs-tts-3-4b",
-        "contextboxai/Kokoro-Vietnamese NEW",
-        "empero-ai/PiVo-1.4M NEW ⁷",
+        "contextboxai/Kokoro-Vietnamese",
+        "empero-ai/PiVo-1.4M ⁷",
         "facebook/seamless-m4t-v2-large",
         "fishaudio/s2-pro",
         "gradium/phonon-31m-en ²",
@@ -227083,15 +227194,14 @@
         "gradium/phonon-40m-es ⁸",
         "gradium/phonon-40m-fr ⁵",
         "gradium/phonon-40m-fr ⁸",
-        "gradium/phonon-40m-pt NEW ⁵",
-        "gradium/phonon-40m-pt NEW ⁶",
+        "gradium/phonon-40m-pt ⁵",
+        "gradium/phonon-40m-pt ⁶",
         "hexgrad/Kokoro-82M",
-        "inclusionAI/Ming-3.0-tts-0.5B NEW",
         "k2-fsa/OmniVoice",
-        "kjanh/KhanhTTS-OmniVoice NEW ³",
-        "kjanh/KhanhTTS-OmniVoice NEW ⁴",
+        "kjanh/KhanhTTS-OmniVoice ³",
+        "kjanh/KhanhTTS-OmniVoice ⁴",
         "kyutai/pocket-tts",
-        "maya-research/maya2-native NEW",
+        "maya-research/maya2-native",
         "microsoft/VibeVoice-Realtime-0.5B",
         "microsoft/speecht5_tts",
         "mistralai/Voxtral-4B-TTS-2603",
@@ -227103,18 +227213,18 @@
         "openbmb/VoxCPM2",
         "owensong/Inflect-Micro-v2",
         "owensong/Inflect-Nano-v1",
-        "pnnbao-ump/VieNeu-TTS-v3-Turbo NEW",
+        "pnnbao-ump/VieNeu-TTS-v3-Turbo",
         "sahilmahendrakar/Paradee-8M-v1.0",
-        "sahilmahendrakar/Paradee-8M-v1.3 NEW",
+        "sahilmahendrakar/Paradee-8M-v1.3",
         "sesame/csm-1b",
-        "splendor1811/omnivoice-vietnamese NEW ²",
-        "splendor1811/omnivoice-vietnamese NEW ¹",
-        "sulabhkatiyar/indic-tiny-tts-hindi NEW",
+        "splendor1811/omnivoice-vietnamese ²",
+        "splendor1811/omnivoice-vietnamese ¹",
+        "sulabhkatiyar/indic-tiny-tts-hindi",
         "tencent/AuK",
         "tencent/AuK-Flash",
         "vibevoice/VibeVoice-1.5B-hf",
         "vibevoice/VibeVoice-7B-hf",
-        "ydqmkkx/GibbsTTS NEW"
+        "ydqmkkx/GibbsTTS"
       ],
       "parts": {
         "🇬🇧 WER": {
@@ -227210,10 +227320,6 @@
           "name": "Languages scored",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Incomplete TTS table callback"
       }
     },
     "openai-mrcr-v2": {
@@ -268269,6 +268375,53 @@
         "chatgpt-4o-latest"
       ]
     },
+    "spirebench": {
+      "url": "https://arxiv.org/html/2610.12596",
+      "feed": "https://arxiv.org/html/2610.12596",
+      "terms": "The authors publish Table 1 on arXiv. https://arxiv.org/abs/2610.12596",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 20,
+      "unmatched": [],
+      "costPer": "run",
+      "stats": {
+        "act1WinRate": {
+          "name": "Act 1 win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "act2WinRate": {
+          "name": "Act 2 win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "act3WinRate": {
+          "name": "Act 3 win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "act4WinRate": {
+          "name": "Act 4 win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "meanFloor": {
+          "name": "Mean final floor",
+          "unit": "count",
+          "better": "higher"
+        },
+        "medianFloor": {
+          "name": "Median final floor",
+          "unit": "count",
+          "better": "higher"
+        },
+        "thinking": {
+          "name": "Thinking per floor",
+          "unit": "thousands",
+          "note": "Thousands of thinking tokens per floor."
+        }
+      }
+    },
     "spirebench-hermesbridge-trial-v0": {
       "url": "https://www.spirebench.com/blog/trial-v0-results",
       "feed": "https://www.spirebench.com/blog/trial-v0-results",
@@ -276356,6 +276509,45 @@
           "unit": "score",
           "better": "higher",
           "note": "Percentage of tasks with functional and secure solutions, from 0 to 1."
+        }
+      }
+    },
+    "svamp": {
+      "url": "https://arxiv.org/html/2103.07191",
+      "feed": "https://arxiv.org/html/2103.07191",
+      "terms": "The authors publish the challenge-set results on arXiv. https://arxiv.org/abs/2103.07191",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 0,
+      "unmatched": [
+        "GTS",
+        "Graph2Tree",
+        "Seq2Seq"
+      ],
+      "parts": {
+        "oneOp": {
+          "name": "One operation",
+          "group": "Operations"
+        },
+        "twoOp": {
+          "name": "Two operations",
+          "group": "Operations"
+        },
+        "add": {
+          "name": "Addition",
+          "group": "Operation"
+        },
+        "sub": {
+          "name": "Subtraction",
+          "group": "Operation"
+        },
+        "mul": {
+          "name": "Multiplication",
+          "group": "Operation"
+        },
+        "div": {
+          "name": "Division",
+          "group": "Operation"
         }
       }
     },
@@ -291149,10 +291341,6 @@
           "unit": "minutes",
           "better": "lower"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Vals Smith systems table missing for apache/spark"
       }
     },
     "vals-smith-arandomhooman-hoomans-morphe-patches": {
@@ -291263,10 +291451,6 @@
           "unit": "minutes",
           "better": "lower"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Vals Smith systems table missing for AumeshMisra/tensorzero"
       }
     },
     "vals-smith-benredmond-apex": {
@@ -291898,6 +292082,40 @@
           "name": "Tests",
           "unit": "count"
         },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "minutes": {
+          "name": "Duration",
+          "unit": "minutes",
+          "better": "lower"
+        }
+      }
+    },
+    "vals-smith-pingdotgg-t3code": {
+      "url": "https://www.vals.ai/vals-smith/pingdotgg/t3code",
+      "feed": "https://www.vals.ai/vals-smith/pingdotgg/t3code",
+      "terms": "Vals AI publishes Vals Smith results on its public benchmark pages, credited to Vals AI. https://www.vals.ai/vals-smith",
+      "host": "Vals AI",
+      "retrieved": "2026-11-23",
+      "rows": 4,
+      "unmatched": [],
+      "parts": {
+        "optimization": {
+          "name": "Optimization",
+          "group": "Task type"
+        },
+        "precision": {
+          "name": "Precision",
+          "group": "Task type"
+        },
+        "refactor": {
+          "name": "Refactor",
+          "group": "Task type"
+        }
+      },
+      "stats": {
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"

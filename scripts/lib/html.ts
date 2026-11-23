@@ -44,9 +44,24 @@ export function num(s: string | undefined): number | undefined {
   return m ? Number(m[0]) : undefined;
 }
 
-/** The text pushed into a Next.js app-router page through self.__next_f, joined in order. */
+/**
+ * The text pushed into a Next.js app-router page through self.__next_f, joined in order.
+ * It scans each string literal by hand. A regular expression over the literal, `"((?:[^"\\]|\\.)*)"`, keeps one
+ * backtracking entry per character, and on pages with one 5 to 7 MB push (SoccerArena, Senior SWE-Bench) it threw
+ * "Maximum call stack size exceeded" in the first pass of every daily sync from 2026-11-22, then read on the retry.
+ */
 export function nextFlight(html: string): string {
-  return [...html.matchAll(/self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)/g)].map((m) => JSON.parse(`"${m[1]}"`) as string).join('');
+  const marker = 'self.__next_f.push([1,"';
+  const out: string[] = [];
+  for (let at = html.indexOf(marker); at >= 0; at = html.indexOf(marker, at)) {
+    const start = at + marker.length;
+    let i = start;
+    while (i < html.length && html[i] !== '"') i += html[i] === '\\' ? 2 : 1;
+    // only a literal that closes the push call counts, as before
+    if (html.startsWith('"])', i)) out.push(JSON.parse(`"${html.slice(start, i)}"`) as string);
+    at = i + 1;
+  }
+  return out.join('');
 }
 
 /** The JSON array or object that starts at `from` in `s`, matched by brackets (strings respected). */

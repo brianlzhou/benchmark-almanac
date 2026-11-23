@@ -1,6 +1,7 @@
 // Writes the "Data health" report: what the daily jobs found that needs a person. The sync posts it as one rolling
 // GitHub issue, so nothing waits on someone remembering to run a script.
 //   - boards whose importer failed, longest first (a board failing three days or more needs its importer fixed)
+//   - importers that have never read their board (the store's `unread` list)
 //   - boards only a maintainer's computer reads (scripts/lib/local-boards.ts) that it hasn't read for three days
 //   - fields boards publish that their importers may drop (data/scores/field-review.json, from the field watch)
 //   - benchmarks the discovery job marked ready for the catalog, and possible audits of cataloged benchmarks
@@ -14,7 +15,9 @@ const days = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)
 const now = today();
 
 type Board = { url?: string; retrieved?: string; local?: true; failed?: { date: string; error: string } };
-const lb = readJson<{ boards: Record<string, Board> }>(dataPath('scores', 'leaderboards.json'));
+const lb = readJson<{ boards: Record<string, Board>; unread?: Record<string, { since: string; date: string; error: string }> }>(dataPath('scores', 'leaderboards.json'));
+// importers that have failed every read, so their boards have no facts and no `failed` record (listed from 2026-11-23)
+const unread = Object.entries(lb.unread ?? {}).sort((a, b) => a[1].since.localeCompare(b[1].since) || a[0].localeCompare(b[0]));
 const failing = Object.entries(lb.boards)
   .filter(([, b]) => b.failed)
   .map(([id, b]) => ({ id, since: b.retrieved ?? '', error: b.failed!.error, url: b.url ?? '' }))
@@ -51,6 +54,13 @@ else {
   out.push('A board keeps its last rows when its importer fails. One failing for three days or more needs a fix in `scripts/leaderboards/`. After seven days its page says the scores are no longer updated automatically.', '');
   out.push('| Board | Last good read | Days | Error |', '|---|---|---|---|');
   for (const f of failing) out.push(`| [${f.id}](${f.url}) | ${f.since || 'never'} | ${f.since ? days(f.since, now) : ''} | ${f.error.replace(/\|/g, '/').slice(0, 120)} |`);
+  out.push('');
+}
+if (unread.length) {
+  out.push(`## Importers that have never read their board (${unread.length})`, '');
+  out.push('These boards have no scores on the site yet, because their importer has failed every read. Fix them in `scripts/leaderboards/`.', '');
+  out.push('| Importer | Failing since | Days | Error |', '|---|---|---|---|');
+  for (const [id, u] of unread) out.push(`| \`${id}\` | ${u.since} | ${days(u.since, now)} | ${u.error.replace(/\|/g, '/').slice(0, 120)} |`);
   out.push('');
 }
 if (staleLocal.length) {

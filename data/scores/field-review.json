@@ -209,6 +209,7 @@
     "llm-chess-arena-louis-guichard": [{"field":"Cost/Game","kind":"cost","why":"not stored","share":1}],
     "logiqa": [{"field":"Ave./Max. # Tokens / Candidate Answer","kind":"tokens","why":"not stored","share":1},{"field":"Ave./Max. # Tokens / Paragraph","kind":"tokens","why":"not stored","share":1},{"field":"Ave./Max. # Tokens / Question","kind":"tokens","why":"not stored","share":1}],
     "longmemeval": [{"field":"Time-aware","kind":"time, latency or steps","why":"not stored","share":1}],
+    "longpuzzlebench": [{"field":"Exit time","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Model / tool time per call, median (s)","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Attempt that clears the level","kind":"trials","why":"not stored","share":1},{"field":"Most boards in one attempt","kind":"trials","why":"not stored","share":1}],
     "ltzglue": [{"field":"DATE","kind":"run date","why":"not stored","share":1},{"field":"Tokens (M)","kind":"tokens","why":"not stored","share":1}],
     "mantis-eval": [{"field":"# Tokens / I","kind":"tokens","why":"not stored","share":1}],
     "marineevt": [{"field":"SemR.","kind":"uncertainty","why":"not stored","share":1}],
