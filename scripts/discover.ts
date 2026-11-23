@@ -19,7 +19,7 @@ import { hfDailyPapers, arxiv, openreview } from './lib/discover/papers.ts';
 import { ainews, zvi, importAi, epochSubstack, interconnects, semianalysis, dwarkesh, primeBlog } from './lib/discover/newsletters.ts';
 import { saveAudits } from './lib/discover/audits.ts';
 import { bluesky } from './lib/discover/social.ts';
-import { xGrok } from './lib/discover/x.ts';
+import { xGrok, X_SECONDS } from './lib/discover/x.ts';
 import { epochHub, inspectEvals, hfOfficial, harbor, harborRegistry, primeHub, everyEvalEver, vlmevalkit, awesomeAiLeaderboard, awesomeCua, benchmarkList, hfBenchmarkResults } from './lib/discover/registries.ts';
 import { vals, arena } from './lib/discover/leaderboards.ts';
 import { labs } from './lib/discover/labs.ts';
@@ -35,7 +35,7 @@ const READERS: Record<string, { run: (r: Reader) => Promise<void>; seconds?: num
   dwarkesh: { run: dwarkesh },
   'prime-intellect-blog': { run: primeBlog },
   bluesky: { run: bluesky, seconds: 120 },
-  x: { run: xGrok, seconds: 900 },
+  x: { run: xGrok, seconds: X_SECONDS },
   'hf-daily-papers': { run: hfDailyPapers },
   arxiv: { run: arxiv, seconds: 150 },
   'openreview-eval-track': { run: openreview, seconds: 120 },
