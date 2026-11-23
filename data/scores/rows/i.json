@@ -1428,6 +1428,7 @@
     ["icelandic-wikiqa","Bielik 11B v3.1 Instruct","high",null,14,"2026-11-16",null,null,null,{"link":"https://huggingface.co/speakleash/Bielik-11B-v3.1-Instruct","license":"apache-2.0","params":11.2}],
     ["icelandic-wikiqa","Bielik 11B v3.1 Instruct","off",null,13.11,"2026-11-16",null,null,null,{"link":"https://huggingface.co/speakleash/Bielik-11B-v3.1-Instruct","license":"apache-2.0","params":11.2}],
     ["icelandic-wikiqa","Llama 3.1 8B Instruct","none",null,7.8158,"2026-10-27",null,null,null,{"link":"https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct","license":"llama3.1","params":8}],
+    ["icelandic-wikiqa","TrustLLM v2 8B midtrain-SFT","none",null,6.6579,"2026-11-20",null,null,null,{"link":"https://huggingface.co/TrustLLMeu/trustllm-v2-8b-midtrain-sft","license":"research-only","params":7.19}],
     ["icelandic-winogrande","cyboghostginx/gemma-4-31B-it-Adetayo","3-shot",null,82.72,null,null,null,null,{"link":"https://huggingface.co/cyboghostginx/gemma-4-31B-it-Adetayo","params":31}],
     ["icelandic-winogrande","cyboghostginx/gemma-3-27b-it-Adetayo","3-shot",null,71.78,null,null,null,null,{"link":"https://huggingface.co/cyboghostginx/gemma-3-27b-it-Adetayo","params":27}],
     ["icelandic-winogrande","NousResearch/Hermes-3-Llama-3.1-405B-FP8","3-shot",null,70.59,null,null,null,null,{"link":"https://huggingface.co/NousResearch/Hermes-3-Llama-3.1-405B-FP8","params":405.9}],
