@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "items": [
     {
       "key": "ifbenchtest",
@@ -29,7 +29,7 @@
       "title": "Copy Bench public subset (13 of 50 tasks): rebuild a moving web component from a screen recording, one-shot, then self-verified in a browser.",
       "url": "https://hub.harborframework.com/datasets/21st/copy-bench",
       "first": "2026-11-22",
-      "last": "2026-11-22",
+      "last": "2026-11-23",
       "feeds": [],
       "curated": [],
       "registries": [
@@ -45,6 +45,29 @@
       "decision": "catalog",
       "org": "21st",
       "repo": "https://hub.harborframework.com/datasets/21st/copy-bench"
+    },
+    {
+      "key": "kitarubenchv0",
+      "name": "Kitaru Bench v0",
+      "title": "Kitaru Bench v0.1: 37 Harbor tasks where coding agents check, diagnose, import, replay and set up agents with real Kitaru 0.27.7; graded on what Kitaru recorded",
+      "url": "https://hub.harborframework.com/datasets/zenml/kitaru-bench",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [],
+      "curated": [],
+      "registries": [
+        {
+          "source": "Harbor Hub",
+          "url": "https://hub.harborframework.com/datasets/zenml/kitaru-bench"
+        }
+      ],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 13,
+      "decision": "catalog",
+      "org": "zenml",
+      "repo": "https://hub.harborframework.com/datasets/zenml/kitaru-bench"
     },
     {
       "key": "safeteenteenmentalhealthandsafety",
@@ -74,7 +97,7 @@
       "title": "Agent Arena Index",
       "url": "https://x.com/arena/status/2123894102496555446",
       "first": "2026-11-21",
-      "last": "2026-11-22",
+      "last": "2026-11-23",
       "feeds": [],
       "curated": [
         {
@@ -132,12 +155,59 @@
       "decision": "catalog"
     },
     {
+      "key": "2611.27963",
+      "name": "NoPeBench",
+      "title": "Non-penetrating World Models",
+      "url": "https://huggingface.co/papers/2611.27963",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "hf",
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": false,
+      "niche": false,
+      "score": 9,
+      "decision": "catalog",
+      "org": "The Hong Kong Polytechnic University",
+      "repo": "https://github.com/yuhangdai427/NoPeWorld",
+      "arxiv": "2611.27963",
+      "upvotes": 38,
+      "stars": 3
+    },
+    {
+      "key": "2611.22343",
+      "name": "PURE",
+      "title": "PURE: A Diagnostic Benchmark for Multi-Granularity Multimodal Identity Matching",
+      "url": "https://huggingface.co/papers/2611.22343",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "hf"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 7,
+      "general": true,
+      "niche": false,
+      "score": 9,
+      "decision": "catalog",
+      "org": "Alibaba multimodal & industrial AI",
+      "repo": "https://github.com/alibaba-multimodal-industrial-ai/PURE",
+      "arxiv": "2611.22343",
+      "upvotes": 3,
+      "stars": 3
+    },
+    {
       "key": "2611.21383",
       "name": "Removal-3D",
       "title": "The Mask Is Not the Object: Volumetric Supervision for 3D Gaussian Segmentation",
       "url": "https://huggingface.co/papers/2611.21383",
       "first": "2026-11-20",
-      "last": "2026-11-22",
+      "last": "2026-11-23",
       "feeds": [
         "hf"
       ],
@@ -151,8 +221,8 @@
       "org": "Yonsei University",
       "repo": "https://github.com/jhxcho/voda",
       "arxiv": "2611.21383",
-      "upvotes": 33,
-      "stars": 25
+      "upvotes": 34,
+      "stars": 26
     },
     {
       "key": "2611.25005",
@@ -160,7 +230,7 @@
       "title": "Inhabitant: An Agent Framework for Long-Horizon Human-Scene Interaction with Spatial Control and Quantitative Feedback",
       "url": "https://huggingface.co/papers/2611.25005",
       "first": "2026-11-20",
-      "last": "2026-11-22",
+      "last": "2026-11-23",
       "feeds": [
         "hf"
       ],
@@ -182,7 +252,7 @@
       "title": "DailySafe: Benchmarking Dynamic Safety Awareness in Everyday Multi-Turn Multimodal Interactions",
       "url": "https://huggingface.co/papers/2611.26298",
       "first": "2026-11-20",
-      "last": "2026-11-22",
+      "last": "2026-11-23",
       "feeds": [
         "hf"
       ],
@@ -204,7 +274,7 @@
       "title": "S1CogBench: What System One Decision Models Can and Cannot Do on Cognitive Experiments",
       "url": "https://huggingface.co/papers/2611.00911",
       "first": "2026-11-20",
-      "last": "2026-11-22",
+      "last": "2026-11-23",
       "feeds": [
         "hf"
       ],
@@ -219,6 +289,130 @@
       "arxiv": "2611.00911",
       "upvotes": 4,
       "stars": 0
+    },
+    {
+      "key": "kitarubench",
+      "name": "kitaru-bench",
+      "title": "Coding agents check, diagnose, import, replay and set up agents with real Kitaru: 37 Harbor tasks graded on what Kitaru recorded, wrapped as a veri...",
+      "url": "https://app.primeintellect.ai/dashboard/environments/zenml/kitaru-bench",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "Prime Intellect hub"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 7,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "zenml",
+      "repo": "https://app.primeintellect.ai/dashboard/environments/zenml/kitaru-bench",
+      "stars": 1
+    },
+    {
+      "key": "2611.27734",
+      "name": "AutoOntologyBench",
+      "title": "AutoOntologyBench: A Task-Grounded Benchmark for Agentic Knowledge Engineering",
+      "url": "https://arxiv.org/abs/2611.27734",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "repo": "https://github.com/VinyehShaw/AutoOntologyBench",
+      "arxiv": "2611.27734",
+      "stars": 0
+    },
+    {
+      "key": "2611.27607",
+      "name": "Tasklets",
+      "title": "Tasklets: A Unit-Test Benchmark for Language Model Architectures",
+      "url": "https://arxiv.org/abs/2611.27607",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 7,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "repo": "https://github.com/zaydzuhri/flame",
+      "arxiv": "2611.27607",
+      "stars": 20
+    },
+    {
+      "key": "2611.27521",
+      "name": "PaMuk-Bench",
+      "title": "PaMuk-Bench: A Parallel Multilingual Multitask Benchmark for Vision-Language Tasks",
+      "url": "https://arxiv.org/abs/2611.27521",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 10,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "repo": "https://github.com/ghesil/pamuk_bench",
+      "arxiv": "2611.27521",
+      "stars": 0
+    },
+    {
+      "key": "2611.27139",
+      "name": "RI-Bench",
+      "title": "Do Senior Agents Do Their Job? Measuring Role Integrity in How LLM Agents Use Subordinate Material",
+      "url": "https://arxiv.org/abs/2611.27139",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "repo": "https://github.com/jxtse/ri-bench",
+      "arxiv": "2611.27139",
+      "stars": 0
+    },
+    {
+      "key": "jubarteonredlinebenchandharveylab",
+      "name": "jubarte on RedlineBench and Harvey LAB",
+      "title": "arthrod/redline-bench-jubarte-six-cohorts",
+      "url": "https://huggingface.co/datasets/arthrod/redline-bench-jubarte-six-cohorts",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "Hugging Face datasets with results"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 6,
+      "general": true,
+      "niche": false,
+      "score": 7,
+      "decision": "watch",
+      "org": "arthrod"
     },
     {
       "key": "2611.17460",
@@ -1239,35 +1433,126 @@
       "decision": "watch"
     },
     {
-      "key": "2611.04634",
-      "name": "VeriSpoof",
-      "title": "VeriSpoof: Beyond Real or Fake with One Audio LLM",
-      "url": "https://huggingface.co/papers/2611.04634",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
+      "key": "optimizationbench",
+      "name": "Optimization-Bench",
+      "title": "Replit finds a 32-agent Claude Opus 5.5 swarm sped NumPy workloads 18.9x versus 3.7x for one agent, releasing Optimization-Bench",
+      "url": "https://bsky.app/profile/druce.ai/post/3n2s7cox6nx27",
+      "first": "2026-11-21",
+      "last": "2026-11-23",
       "feeds": [
-        "hf"
+        "bluesky"
       ],
       "curated": [],
       "registries": [],
       "stageA": 5,
       "general": true,
       "niche": false,
-      "score": 7,
+      "score": 5,
       "decision": "watch",
-      "org": "The University of Melbourne",
-      "repo": "https://github.com/swagshaw/verispoof",
-      "arxiv": "2611.04634",
-      "upvotes": 5,
-      "stars": 8
+      "upvotes": 0
     },
     {
-      "key": "2611.07689",
-      "name": "MCPHallu",
-      "title": "MCPHallu: Benchmarking Reasoning, Execution, and Memory Hallucinations in MCP Agents",
-      "url": "https://arxiv.org/abs/2611.07689",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
+      "key": "2611.27895",
+      "name": "TEA-Bench-BR",
+      "title": "TEA-Bench-BR: Can Coding Agents Turn a Branching Clinical Specification into Correct Code?",
+      "url": "https://arxiv.org/abs/2611.27895",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 7,
+      "general": true,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "arxiv": "2611.27895"
+    },
+    {
+      "key": "2611.27810",
+      "name": "SLP-Bench",
+      "title": "SLP-Bench: Evaluating and Improving Acoustic Claims of Reasoning Audio Language Models on Clinical Speech",
+      "url": "https://arxiv.org/abs/2611.27810",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 7,
+      "general": true,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "arxiv": "2611.27810"
+    },
+    {
+      "key": "2611.27536",
+      "name": "Open CDLM",
+      "title": "Open CDLM: A Benchmark and Library for Continuous Diffusion Language Models",
+      "url": "https://arxiv.org/abs/2611.27536",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "arxiv": "2611.27536"
+    },
+    {
+      "key": "2611.27411",
+      "name": "Neural variational Skyrmions as a topological benchmark: emergent symmetry, precision energies and KAN--MLP comparison",
+      "title": "Neural variational Skyrmions as a topological benchmark: emergent symmetry, precision energies and KAN--MLP comparison",
+      "url": "https://arxiv.org/abs/2611.27411",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 5,
+      "general": true,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "arxiv": "2611.27411"
+    },
+    {
+      "key": "2611.27349",
+      "name": "EcomWriteBench",
+      "title": "EcomWriteBench: A Real-World Benchmark for E-commerce Writing Tasks",
+      "url": "https://arxiv.org/abs/2611.27349",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
+      "feeds": [
+        "arxiv"
+      ],
+      "curated": [],
+      "registries": [],
+      "stageA": 9,
+      "general": true,
+      "niche": false,
+      "score": 5,
+      "decision": "watch",
+      "arxiv": "2611.27349"
+    },
+    {
+      "key": "2611.27116",
+      "name": "CoEvoBench",
+      "title": "CoEvoBench: Can LLMs Drive Recursive Co-Evolution of Agentic Systems?",
+      "url": "https://arxiv.org/abs/2611.27116",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
       "feeds": [
         "arxiv"
       ],
@@ -1276,189 +1561,48 @@
       "stageA": 8,
       "general": true,
       "niche": false,
-      "score": 7,
+      "score": 5,
       "decision": "watch",
-      "repo": "https://github.com/J1zz/mcp_hallu",
-      "arxiv": "2611.07689",
-      "stars": 4
+      "arxiv": "2611.27116"
     },
     {
-      "key": "screenproof",
-      "name": "ScreenProof",
-      "title": "HMSSS55/ScreenProof",
-      "url": "https://huggingface.co/datasets/HMSSS55/ScreenProof",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
+      "key": "2611.27106",
+      "name": "Schema-Validated LLM Workflows",
+      "title": "Schema-Validated LLM Workflows: A Benchmark Protocol and Comparative Evaluation Across Six Python Implementations",
+      "url": "https://arxiv.org/abs/2611.27106",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
       "feeds": [
-        "Hugging Face datasets with results"
+        "arxiv"
       ],
       "curated": [],
       "registries": [],
       "stageA": 6,
       "general": true,
       "niche": false,
-      "score": 7,
+      "score": 5,
       "decision": "watch",
-      "org": "HMSSS55"
+      "arxiv": "2611.27106"
     },
     {
-      "key": "scopedatabase",
-      "name": "Scope database benchmark",
-      "title": "Scope released its first database benchmark, scoring whether coding agents can start from no account, set up one of 18 hosted databases, write a record, and han",
-      "url": "https://www.tryscope.com/leaderboard/databases",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
+      "key": "2611.27044",
+      "name": "PairST",
+      "title": "Action-Conditioned Spatio-Temporal Forecasting",
+      "url": "https://arxiv.org/abs/2611.27044",
+      "first": "2026-11-23",
+      "last": "2026-11-23",
       "feeds": [
-        "X (via Grok)"
+        "arxiv"
       ],
       "curated": [],
       "registries": [],
       "stageA": 5,
-      "general": true,
+      "general": false,
       "niche": false,
-      "score": 7,
+      "score": 5,
       "decision": "watch",
-      "org": "Scope",
-      "upvotes": 173
-    },
-    {
-      "key": "jevclickbench",
-      "name": "jev-click-bench",
-      "title": "jev-click-bench evaluates Jev 1.14 bounding-box grounding on ScreenSpot-v2 and ScreenSpot-Pro with official scoring and per-click logs.",
-      "url": "https://github.com/arthurkatcher/jev-click-bench",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/arthurkatcher/jev-click-bench",
-      "stars": 1
-    },
-    {
-      "key": "decisionlunabrowsecontrol",
-      "name": "decision-luna-browse-control",
-      "title": "Evaluates typed System-One decision models (Luna Decisions and Jev) driving real Chromium browser workflows on synthetic web apps.",
-      "url": "https://github.com/humanity-forever/decision-luna-browse-control",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/humanity-forever/decision-luna-browse-control",
-      "stars": 0
-    },
-    {
-      "key": "captchagym",
-      "name": "CAPTCHA Gym",
-      "title": "CAPTCHA Gym is a self-hosted evaluation platform for browser agents featuring controlled reCAPTCHA-style visual challenges and server scoring.",
-      "url": "https://github.com/mildchef/Muse-Captcha-Gym",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/mildchef/Muse-Captcha-Gym",
-      "stars": 0
-    },
-    {
-      "key": "preflightbench",
-      "name": "Preflight-Bench",
-      "title": "Preflight-Bench evaluates pre-click staleness checks and page-load synchronization for computer-use agents operating under asynchronous UI updates.",
-      "url": "https://github.com/multimodal-ai-engineering/preflight-bench",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/multimodal-ai-engineering/preflight-bench",
-      "stars": 0
-    },
-    {
-      "key": "healthenv",
-      "name": "HealthEnv",
-      "title": "HealthEnv compiles longitudinal clinical question-answering tasks into stateful, verifiable computer-use evaluation environments.",
-      "url": "https://github.com/possibleme2026-lang/healthenv",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/possibleme2026-lang/healthenv",
-      "stars": 0
-    },
-    {
-      "key": "doneornot",
-      "name": "done-or-not",
-      "title": "done-or-not is an offline benchmark of 910 computer-use trajectories across three simulated computers for grading completion verifiers.",
-      "url": "https://github.com/tatra-labs/done-or-not",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/tatra-labs/done-or-not",
-      "stars": 0
-    },
-    {
-      "key": "navibench",
-      "name": "Navi-Bench",
-      "title": "Navi-Bench evaluates web agents on everyday consumer tasks executed directly on live websites with deterministic outcome verifiers.",
-      "url": "https://github.com/yutori-ai/navi-bench",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Awesome-CUA"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 7,
-      "decision": "watch",
-      "repo": "https://github.com/yutori-ai/navi-bench"
+      "repo": "https://github.com/yutong-xia/ActionST",
+      "arxiv": "2611.27044"
     },
     {
       "key": "2611.24669",
@@ -1575,25 +1719,6 @@
       "score": 5,
       "decision": "watch",
       "arxiv": "2611.25408"
-    },
-    {
-      "key": "optimizationbench",
-      "name": "Optimization-Bench",
-      "title": "Replit finds a 32-agent Claude Opus 5.5 swarm sped NumPy workloads 18.9x versus 3.7x for one agent, releasing Optimization-Bench",
-      "url": "https://bsky.app/profile/druce.ai/post/3n2s7cox6nx27",
-      "first": "2026-11-21",
-      "last": "2026-11-22",
-      "feeds": [
-        "bluesky"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "upvotes": 0
     },
     {
       "key": "safeclawarena",
@@ -2915,424 +3040,6 @@
       "niche": false,
       "score": 5,
       "decision": "watch"
-    },
-    {
-      "key": "2611.06042",
-      "name": "UniRestorer++",
-      "title": "UniRestorer++: Scalable Universal Image Restoration with Multi-Granularity Degradation Modeling",
-      "url": "https://huggingface.co/papers/2611.06042",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "hf"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "repo": "https://github.com/mrluin/UniRestorer_plusplus",
-      "arxiv": "2611.06042",
-      "upvotes": 2,
-      "stars": 2
-    },
-    {
-      "key": "2611.08417",
-      "name": "Benchmarks as Software",
-      "title": "Benchmarks as Software: Terminal-Bench and the Case for Continuous Benchmarks",
-      "url": "https://arxiv.org/abs/2611.08417",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 8,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.08417"
-    },
-    {
-      "key": "2611.08315",
-      "name": "Benchmarking Large Language Models on Heterogeneous Cognitive and Biomedical Knowledge Graphs: The Role of Graph Grounding in Multi-Hop Reasoning and Hallucination Mitigation",
-      "title": "Benchmarking Large Language Models on Heterogeneous Cognitive and Biomedical Knowledge Graphs: The Role of Graph Grounding in Multi-Hop Reasoning and Hallucination Mitigation",
-      "url": "https://arxiv.org/abs/2611.08315",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.08315"
-    },
-    {
-      "key": "2611.08281",
-      "name": "Multimodal-SEA",
-      "title": "Multimodal-SEA: Benchmarking AI Agent Security under Multimodal Social Engineering Attacks",
-      "url": "https://arxiv.org/abs/2611.08281",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.08281"
-    },
-    {
-      "key": "2611.08277",
-      "name": "LeanContext",
-      "title": "LeanContext: Disentangling Mathematical Resources from Local Formal Context in Lean Whole-Proof Generation",
-      "url": "https://arxiv.org/abs/2611.08277",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "repo": "https://github.com/haaaardcvZ/LeanContext",
-      "arxiv": "2611.08277",
-      "stars": 1
-    },
-    {
-      "key": "2611.07784",
-      "name": "EnergyBench",
-      "title": "EnergyBench: a live, gate-aligned benchmark of day-ahead forecasts for European power markets",
-      "url": "https://arxiv.org/abs/2611.07784",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.07784"
-    },
-    {
-      "key": "2611.07541",
-      "name": "CST-Bench",
-      "title": "CST-Bench: Benchmarking Counterfactual Spatial Transition Reasoning with Causal Transition On-Policy Self-Distillation",
-      "url": "https://arxiv.org/abs/2611.07541",
-      "first": "2026-11-06",
-      "last": "2026-11-08",
-      "feeds": [
-        "arxiv"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 9,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.07541"
-    },
-    {
-      "key": "fdagym",
-      "name": "FDA-Gym",
-      "title": "Public FDA-Gym: 93 openFDA tool-use tasks (FG-9101–FG-9193), grader v5, freeze 2026-10-15.",
-      "url": "https://app.primeintellect.ai/dashboard/environments/jpzarza/fda-gym",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Prime Intellect hub"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 7,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "org": "jpzarza",
-      "repo": "https://app.primeintellect.ai/dashboard/environments/jpzarza/fda-gym",
-      "stars": 0
-    },
-    {
-      "key": "deckbenchinternal",
-      "name": "DECK-Bench (Internal)",
-      "title": "DECK-Bench (Internal)",
-      "url": "https://www.kimi.com/blog/kimi-k3",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "dsbenchfullstackdeepseekinternal",
-      "name": "DSBench-FullStack (DeepSeek Internal)",
-      "title": "DSBench-FullStack (DeepSeek Internal)",
-      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "dsbenchharddeepseekinternal",
-      "name": "DSBench-Hard (DeepSeek Internal)",
-      "title": "DSBench-Hard (DeepSeek Internal)",
-      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "livebench2",
-      "name": "LiveBench 2.0",
-      "title": "LiveBench 2.0",
-      "url": "https://livebench.ai/#/",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "agenticsafecompletionevaluationsinternal",
-      "name": "Agentic Safe Completion Evaluations (Internal)",
-      "title": "Agentic Safe Completion Evaluations (Internal)",
-      "url": "https://deploymentsafety.openai.com/gpt-6-astra/agentic-safe-completions",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "autoreviewevaluationinternal",
-      "name": "Auto-Review Evaluation (Internal)",
-      "title": "Auto-Review Evaluation (Internal)",
-      "url": "https://deploymentsafety.openai.com/gpt-6-cyber/respecting-restrictions-and-scope",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "warningsevaluationinternal",
-      "name": "Warnings Evaluation (Internal)",
-      "title": "Warnings Evaluation (Internal)",
-      "url": "https://deploymentsafety.openai.com/gpt-6-cyber/respecting-restrictions-and-scope",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "workplacealignmentevaluationinternal",
-      "name": "Workplace Alignment Evaluation (Internal)",
-      "title": "Workplace Alignment Evaluation (Internal)",
-      "url": "https://deploymentsafety.openai.com/gpt-6-cyber/alignment-in-workplace-tasks",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "rampswebench",
-      "name": "Ramp SWE-Bench",
-      "title": "Ramp SWE-Bench",
-      "url": "https://labs.ramp.com/swebench#explore",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "BenchmarkList"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch"
-    },
-    {
-      "key": "brickvision",
-      "name": "BrickVision",
-      "title": "elorian-ai/BrickVision",
-      "url": "https://huggingface.co/datasets/elorian-ai/BrickVision",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "Hugging Face datasets with results"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 6,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "org": "elorian-ai"
-    },
-    {
-      "key": "personacodebench",
-      "name": "PersonaCodeBench",
-      "title": "Introducing PersonaCodeBench: a coding benchmark that turns user persona traits into verifiable constraints, ensuring agents meet user needs in multi-turn sessi",
-      "url": "https://bsky.app/profile/ai-firehose.column.social/post/3mznf5yqdve2b",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "bluesky"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "arxiv": "2611.05739",
-      "upvotes": 0
-    },
-    {
-      "key": "agenticcommerce",
-      "name": "Agentic Commerce Benchmark",
-      "title": "Visa Launches Agentic Commerce Benchmark: AI Shopping Models Fail 42.8% of Test Runs 📅 November 5, 2026 • Visa Visa has launched the Visa Agentic Commerce Benc",
-      "url": "https://bsky.app/profile/delimitter.bsky.social/post/222gd3r3ubate",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "bluesky"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "upvotes": 0
-    },
-    {
-      "key": "visaagenticcommerce",
-      "name": "Visa Agentic Commerce",
-      "title": "Visa Launches Agentic Commerce Benchmark: AI Shopping Models Fail 42.8% of Test Runs 📅 November 5, 2026 • Visa Visa has launched the Visa Agentic Commerce Benc",
-      "url": "https://bsky.app/profile/delimitter.bsky.social/post/222gd3r3ubate",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "bluesky"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": true,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "upvotes": 0
-    },
-    {
-      "key": "speechrecognition",
-      "name": "Speech Recognition Benchmark",
-      "title": "Voice Arena introduced its Speech Recognition Benchmark, with the first public set, the Monsoon Conversational ASR Test Set, made of real two-person phone conve",
-      "url": "https://voicearena.com",
-      "first": "2026-11-08",
-      "last": "2026-11-08",
-      "feeds": [
-        "X (via Grok)"
-      ],
-      "curated": [],
-      "registries": [],
-      "stageA": 5,
-      "general": false,
-      "niche": false,
-      "score": 5,
-      "decision": "watch",
-      "org": "Voice Arena",
-      "upvotes": 434
     }
   ],
   "seen": {
@@ -7514,8 +7221,46 @@
       "zonos2_technical_report"
     ],
     "hfBenchmarkResults": [
+      "tangyinhao/SciExplore",
+      "pratikgx/daisyrose-27b-m5-pro-mac-mini-bench",
+      "sladyn/JEE-Main-2024-Math",
+      "PG23/Graph-Understanding-Multimodal-Benchmark",
+      "CounterCheck-lexsi/aawden-reviewer-flip-bench",
+      "auteo/gpt-image-checklist-benchmark",
+      "gengqiane/MSEBench",
+      "jdorm/forecast-agent-bench-weather",
+      "xinranz3/read-tea-leaves",
+      "C-Tianyu/ImpasseBench",
+      "Kling-Keye/KC-MMbench",
+      "RoboARC/RoboARC-assets",
+      "RoboARC/RoboARC-ikea-assets",
+      "eduzrh/LNPBench",
+      "AtharvaT/DeclineCraft",
+      "wuff-mann/Sub-loop-Heterocoding-VRAM",
+      "wilkertyl/hyperdime-qwen3-benchmarks",
+      "dhruvmali345/bol-bench",
+      "lindaxu525/AxEBench",
+      "siba4442/odia-ocr-benchmark-50",
+      "hiwe0305/MemCert",
+      "BeardedMonster/african-code-switch-benchmark",
+      "agency-fund/gshealth-penda-health",
+      "agency-fund/gshealth-intelehealth",
+      "agency-fund/gshealth-pinky-promise",
+      "agency-fund/gshealth-ehealth-africa",
+      "agency-fund/gshealth-intron-health",
+      "agency-fund/gshealth-samesame",
+      "agency-fund/gshealth-jacaranda-health",
+      "agency-fund/gshealth-myna-mahila",
+      "mrsergazinov/lightgbm-prep-fte-results",
+      "agency-fund/gshealth-armman",
+      "jfelipe6176/xournalpp_htr_benchmark",
+      "Manprot/MPBench0-1126",
+      "LewisAIStudio/cpu-only-ollama-speed",
+      "pgg-engineering/edgechime-bench",
+      "arthrod/redline-bench-jubarte-six-cohorts",
       "veltastech/european-real-estate-ai-benchmark",
       "jck3114/alb-harness-traces",
+      "kurbanintelligencelab/CivicBench",
       "atharvgaur18/actionproof-proc-splits",
       "msaleme/mcp-tool-poisoning-fixtures",
       "mathieu123/SWE-rebench-leaderboard-surgeon",
@@ -7528,10 +7273,12 @@
       "totalhuang/MSBench",
       "matthew-sudo2/filbench-wsp-experiments",
       "gutoportelaa/segjusticidadania-benchmarks",
+      "tailot/geometry-stratum",
       "tailot/lingologos-struc",
       "pramana-research/filing-evidence-sectors",
       "Lily-QAQ/UELVE",
       "PARADOXAIlabs/atlas-benchmark-results",
+      "batistado/MoELeak-Bench",
       "apexinfrastructure369/APEX-FinAudit-Bench",
       "steinwang/gsm8k-harbor",
       "yxjia/latchbio-benchmarks-data",
@@ -7542,12 +7289,14 @@
       "nan/search-swe-trajectories",
       "ma-pmo/jira-sprint-delivery",
       "mondk/Harness-Readiness-Benchmark",
+      "xiaokui17/glycoforge_benchmark_648",
       "KnoltSecurity/lookalike-v1",
       "NovaeonStudio/p2p-payment-block-benchmark",
       "syuekai/islet-panel-qualification-packet",
       "agentfieldai/deepswe-coding-agent-comparison",
       "rubenrekhi/studio3d-bench",
       "LexDye/definition-benchmark",
+      "sjkim1127/freshbench",
       "kenantabak/evren-yolo26-yolo11-83-models-benchmark",
       "pratikgx/bison-1-m5-pro-mac-mini-bench",
       "pratikgx/groundhog-1-m5-pro-mac-mini-bench",
@@ -7633,55 +7382,7 @@
       "narawit16/thai-govern-test-ocr",
       "SaiMahadasa/visa-rules-bench",
       "btobgogo/btob-gogo-freight-sample-10",
-      "sc3484/macbench",
-      "Brownight/StatsInference-Arena-IV",
-      "damiavicens/gapbench-3-capsule-2027",
-      "bootkey-ai/newcalder-bench-2026-11",
-      "cx-cmu/AgentRoboCritic-Bench",
-      "xi-xiaoran/stablekl-benchmark",
-      "sasateguh/mutawwif-bench",
-      "drfurkanbas/icu-safebench",
-      "xxayt/O-IN-Bench",
-      "codesentineldata/betalactam-icu-dosing-cohort",
-      "flagline/general-baseline-moderation-eval",
-      "perpetual-research/shadowbench-harbor",
-      "hep-ex-bench/HiggsWidth",
-      "hep-ex-bench/LepCalib",
-      "hep-ex-bench/HiggsLepMass",
-      "requstory/order-to-cash",
-      "MHkhan50/dialysisflow-agentbench",
-      "meaha0fornaugh/anime-tomt-580-benchmark",
-      "jxtse/RI-Bench",
-      "maref-org/lexsi-redteam-set-v2",
-      "Alikbachan/Alikbachan",
-      "priolseurec/socrate-tutormoments",
-      "Megha133/kriyam-tamperflow",
-      "bijective/parametric-sphere-fields",
-      "hedwigai/citeparse-wild-700",
-      "Gynius84/open-100-code-review-examples-with-labels",
-      "Gynius84/open-50-test-cases-for-code-generation-qu",
-      "wytzzka/StatsInference-Arena-Proximal",
-      "lisuo/StatsInference-Arena-DiD",
-      "zzhtx/TutorBench",
-      "fuyao11/StatsInference-Arena-ATE-CATE",
-      "jby20180901/BenchForge-IE-Track-220",
-      "nuasense/east-africa-benchmark",
-      "jungroo-ai/PolicyMask",
-      "suniltyagi/ssr-sim-betssi-blind-predictions",
-      "pgmharikrishnan/qwen38-27b-harness-adapters-llamacpp",
-      "Sci-Index/Science-Index-Video",
-      "ChartFoundation/BioLoom-EvalSuite",
-      "bytkim/AgentGridWorld-Hard",
-      "Hashir621/parsebench2-viewer",
-      "pratikgx/clairic-flash-m5-pro-mac-mini-bench",
-      "Transluce/PosteriorBench-paper-data",
-      "ActiveToM/ActiveToM",
-      "RoboARC/RoboARC-ablation-outputs",
-      "nsp909/tastemark",
-      "Ortelan-PrausAI/jup-eval",
-      "Huu-ai/metagamebo-benchmarks",
-      "toramon/monju-pii-bench",
-      "SalahALHaismawi/Arabic-OCR-benchmark-predictions"
+      "sc3484/macbench"
     ],
     "harborRegistry": [
       "aider-polyglot",
@@ -7760,5 +7461,16 @@
       "legacy-bench",
       "gso"
     ]
-  }
+  },
+  "papers": [
+    {
+      "benchmark": "martian-code-review-bench",
+      "arxiv": "2611.26942",
+      "title": "CodeReviewBench: An Automated Benchmark for Evaluating the Software Factory",
+      "url": "https://arxiv.org/abs/2611.26942",
+      "source": "arxiv",
+      "first": "2026-11-23",
+      "last": "2026-11-23"
+    }
+  ]
 }
