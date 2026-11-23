@@ -129822,6 +129822,30 @@
         }
       }
     },
+    "hospital-bench": {
+      "url": "https://zavo.ai/research/hospital-bench",
+      "feed": "https://zavo.ai/research/hospital-bench",
+      "terms": "Zavo’s robots.txt allows every crawler on its pages (Content-Signal search=yes, ai-train=no). We read only the published results table.",
+      "retrieved": "2026-11-23",
+      "rows": 23,
+      "unmatched": [],
+      "stats": {
+        "passes": {
+          "name": "Tasks passed",
+          "unit": "count",
+          "better": "higher",
+          "note": "Tasks, of 48, on which every check holds."
+        },
+        "turns": {
+          "name": "Turns per task",
+          "unit": "count"
+        },
+        "toolCalls": {
+          "name": "Tool calls per task",
+          "unit": "count"
+        }
+      }
+    },
     "hotpotqa": {
       "url": "https://hotpotqa.github.io/",
       "feed": "https://hotpotqa.github.io/",
@@ -302828,6 +302852,115 @@
         },
         "multi": {
           "name": "MultiImageEdit"
+        }
+      }
+    },
+    "weightbench-benchflow": {
+      "url": "https://www.benchflow.ai/weightbench",
+      "feed": "https://www.benchflow.ai/weightbench",
+      "terms": "BenchFlow publishes the leaderboard on a public page, and its site has no robots.txt rules. The tasks and graders are Apache-2.0 on GitHub.",
+      "retrieved": "2026-11-23",
+      "rows": 16,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "fashionMnist": {
+          "name": "Fashion-MNIST",
+          "group": "Task"
+        },
+        "quickDraw": {
+          "name": "Quick, Draw! doodles",
+          "group": "Task"
+        },
+        "cifar10": {
+          "name": "CIFAR-10",
+          "group": "Task"
+        },
+        "eurosat": {
+          "name": "EuroSAT satellite images",
+          "group": "Task"
+        },
+        "speechCommands": {
+          "name": "Spoken command words",
+          "group": "Task"
+        },
+        "ecg": {
+          "name": "ECG heartbeats",
+          "group": "Task"
+        },
+        "motionSensors": {
+          "name": "Phone motion sensors",
+          "group": "Task"
+        },
+        "proteinStructure": {
+          "name": "Protein secondary structure",
+          "group": "Task"
+        },
+        "spliceSites": {
+          "name": "Human splice sites",
+          "group": "Task"
+        },
+        "solubility": {
+          "name": "Aqueous solubility",
+          "group": "Task"
+        },
+        "languageId": {
+          "name": "Close-language identification",
+          "group": "Task"
+        },
+        "pythonCode": {
+          "name": "Python source code",
+          "group": "Task"
+        },
+        "bachChorales": {
+          "name": "Bach chorale melodies",
+          "group": "Task"
+        },
+        "chess": {
+          "name": "Chess positions",
+          "group": "Task"
+        },
+        "connectFour": {
+          "name": "Connect Four positions",
+          "group": "Task"
+        },
+        "forestCover": {
+          "name": "Forest cover type",
+          "group": "Task"
+        },
+        "mnist": {
+          "name": "MNIST digits",
+          "group": "Task"
+        },
+        "charEnglish": {
+          "name": "Character-level English",
+          "group": "Task"
+        },
+        "qwen35": {
+          "name": "Qwen3.5-0.8B",
+          "group": "Task"
+        },
+        "bertTinyGlue": {
+          "name": "BERT-Tiny on GLUE",
+          "group": "Task"
+        },
+        "classicControl": {
+          "name": "Classic control",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "beforeRulings": {
+          "name": "Score before rulings",
+          "unit": "%",
+          "better": "higher",
+          "note": "The same mean with every trial at its graded score, before trials ruled rule breaks count 0."
+        },
+        "ruleBreaks": {
+          "name": "Rule breaks",
+          "unit": "count",
+          "better": "lower",
+          "note": "Trials, of 63, that the reviewers ruled broke the rules by training, fitting, running the network or computing statistics from examples."
         }
       }
     },
