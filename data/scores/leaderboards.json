@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-11-22",
+  "retrieved": "2026-11-23",
   "rowsIn": "data/scores/rows/<first character of the board id>.json",
   "boards": {
     "1h-videoqa-google": {
@@ -14219,7 +14219,7 @@
       "feed": "https://compassionbench.com/api/overall-scores",
       "terms": "The benchmark authors publish aggregate results on https://compassionbench.com/ and gate access to the questions.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 16,
       "unmatched": [],
       "parts": {
@@ -49278,7 +49278,7 @@
       "feed": "https://clocktower-radio.com/ (static HTML leaderboard table, Rating)",
       "terms": "robots.txt allows all paths to general agents and sets the content signal use=reference, ai-train=no; one request per sync, scores cited to the site.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 28,
       "unmatched": [],
       "stats": {
@@ -89766,7 +89766,7 @@
       "feed": "https://evalatro.dev/api",
       "terms": "The runner package declares ISC. I found no separate license for submitted scores. The host returned no readable robots.txt rules.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 29,
       "unmatched": [
         "/data/models/safetensors/MiniMaxAI/MiniMax-M2.7",
@@ -91351,7 +91351,7 @@
       "feed": "https://exploitbench.ai/ (server-rendered \"Full leaderboard\" table, Cap coverage)",
       "terms": "Server-rendered public page; robots.txt allows all paths (content signals: search yes, AI training no, use reference) and the site states no terms.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 20,
       "unmatched": [],
       "reference": [
@@ -102280,7 +102280,7 @@
       "feed": "https://competitions.codalab.org/competitions/28485/results/46733/data",
       "terms": "The competition terms do not give a separate score reuse license. CodaLab returned 404 for robots.txt.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 0,
       "unmatched": [
         "Rihab",
@@ -103998,7 +103998,7 @@
       "feed": "https://foodtruckbench.com/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 65,
       "unmatched": [
         "Nex N2 Pro"
@@ -117002,7 +117002,7 @@
       "feed": "https://glee-competition.com/leaderboard-snapshot/overall-all.json",
       "terms": "The competition publishes a final snapshot without specifying a score reuse license on the Space. https://huggingface.co/spaces/EilamSha/glee-competition-leaderboard/blob/main/README.md",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 13,
       "unmatched": [
         "007_casino_royal",
@@ -122984,7 +122984,7 @@
       "feed": "https://compassionbench.com/harvestbench",
       "terms": "The HarvestBench implementation uses MIT. https://github.com/CompassionML/harvestbench/blob/main/LICENSE",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 9,
       "unmatched": [
         "GPT-4o-mini (snapshot unspecified)"
@@ -239879,7 +239879,7 @@
       "feed": "https://competitions.codalab.org/competitions/29139/results/47908",
       "terms": "Public official competition results hosted by CodaLab; the almanac credits the Refer-YouTube-VOS organizers and links the source.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 0,
       "unmatched": [
         "CodaLab submission: Merci1",
@@ -262229,7 +262229,7 @@
       "feed": "https://competitions.codalab.org/competitions/15333/results/26695",
       "terms": "Public CodaLab competition results. The Almanac credits the Story Cloze authors and CodaLab and links the source.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 0,
       "unmatched": [
         "CodaLab submission Hustle",
@@ -262254,7 +262254,7 @@
       "feed": "https://competitions.codalab.org/competitions/15333/results/26694",
       "terms": "Public CodaLab competition results. The Almanac credits the Story Cloze authors and CodaLab and links the source.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 0,
       "unmatched": [
         "CodaLab submission DecstionBack",
@@ -276259,7 +276259,7 @@
       "feed": "https://compassionbench.com/api/tac/overview",
       "terms": "The site disallows crawling /api/ in robots.txt and prohibits ingestion into model training corpora.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 68,
       "unmatched": [
         "Qwen2.5 32B + EM adapter (unpopular aesthetics)",
@@ -294714,7 +294714,7 @@
       "feed": "https://wildlifebench.org/data/wildlife-knowledge/results.json",
       "terms": "The disclaimer describes research and informational use. I found no explicit redistribution license for the scores or a leaderboard update date. https://wildlifebench.org/disclaimer/ The robots file allows this feed for the importer.",
       "local": true,
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-23",
       "rows": 7,
       "unmatched": [],
       "parts": {
