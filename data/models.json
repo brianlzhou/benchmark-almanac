@@ -15317,6 +15317,19 @@
     ]
   },
   {
+    "id": "lingsante-3-1-flash",
+    "name": "LingSante-3.1-flash",
+    "lab": "ant-group",
+    "family": "LingSante",
+    "released": "2026-11-22",
+    "weights": "open",
+    "card": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+    "aliases": [
+      "LingSante 3.1 Flash",
+      "inclusionAI/LingSante-3.1-flash"
+    ]
+  },
+  {
     "id": "glm-5-4",
     "name": "GLM-5.4",
     "lab": "zai",

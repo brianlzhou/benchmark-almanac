@@ -81912,6 +81912,36 @@
     "added": "2026-11-01"
   },
   {
+    "id": "hospital-bench",
+    "name": "Hospital-bench",
+    "aliases": [
+      "Hospital-Bench",
+      "HospitalBench",
+      "Hospital Bench"
+    ],
+    "category": "domain-legal-finance-medical",
+    "subcategory": "domain-medicine",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Agents work as operations coordinators at a simulated health system, checking coverage, getting prior authorizations and fixing denied claims through 131 tools in 13 apps. Deterministic checks grade the final state, and any harm sets a task to zero.",
+    "org": "Zavo",
+    "released": "2026-11",
+    "links": {
+      "site": "https://zavo.ai/research/hospital-bench",
+      "leaderboard": "https://zavo.ai/research/hospital-bench"
+    },
+    "access": "private",
+    "note": "48 tasks with 1,678 checks, 422 of them on what the agent must not do. The hospital, its state, its payers and their manuals are fictional, and 27 rules differ from common practice on purpose, so recalled rules give wrong answers. It tests operations work, not medical knowledge. In the November 12, 2026 results, no model passed more than 17 tasks, and 13 tasks were passed by none.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://zavo.ai/research/hospital-bench"
+    ],
+    "added": "2026-11-23"
+  },
+  {
     "id": "hotpotqa",
     "name": "HotpotQA",
     "aliases": [
@@ -196405,6 +196435,40 @@
       "https://arxiv.org/abs/2610.41210"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "weightbench-benchflow",
+    "name": "WeightBench",
+    "aliases": [
+      "WeightBench 1.0",
+      "BenchFlow WeightBench"
+    ],
+    "category": "ai-rnd-rsi",
+    "subcategory": "rnd-ml-engineering",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Coding agents set every weight of a fixed neural network by hand on 21 tasks, from image classifiers to Qwen3.5-0.8B, without training the network or running it. Held-out data places each network between an uninformative one and the same network trained on the task.",
+    "org": "BenchFlow",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.benchflow.ai/weightbench",
+      "leaderboard": "https://www.benchflow.ai/weightbench",
+      "repo": "https://github.com/benchflow-ai/benchmarks/tree/main/datasets/weightbench",
+      "dataset": "https://huggingface.co/datasets/benchflow/benchmarks"
+    },
+    "access": "public+private-holdout",
+    "note": "Each agent gets an hour in a sandbox with numpy and no data, and tries each task three times. Two reviewer models from different families read every session, and a trial ruled a rule break, such as training or running the network, scores 0. At launch on November 23, 2026, 182 of 1,008 trials broke a rule. Not the WeightBench paper from the University of Southern Mississippi (arXiv 2611.18553), which tests weight-space programming on 42 tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.benchflow.ai/weightbench",
+      "https://www.benchflow.ai/weightbench/docs/",
+      "https://github.com/benchflow-ai/benchmarks/pull/6",
+      "https://x.com/xdotli/status/2124977910058741863"
+    ],
+    "added": "2026-11-23"
   },
   {
     "id": "weirdchat",
