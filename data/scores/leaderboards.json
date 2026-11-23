@@ -21906,6 +21906,10 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Missing rated ASCII Bench models"
       }
     },
     "asdiv": {
@@ -42004,8 +42008,10 @@
         "Google Chirp 3",
         "Gradium",
         "Inworld STT-1",
+        "Mistral Voxtral Mini Transcribe Realtime 3",
         "Murf Finch-Global",
         "NVIDIA Nemotron 3.5 Transcribe",
+        "PolyAI Owl",
         "Reson8 Resonant-1",
         "Reson8 Rumble-2",
         "Smallest Pulse",
@@ -42079,6 +42085,7 @@
         "Inworld TTS-2 Flash",
         "Microsoft MAI-Voice-2.1",
         "Microsoft MAI-Voice-2.1-Flash",
+        "Mistral Voxtral TTS 3 (preview)",
         "Murf Falcon 2.1",
         "Rime Coda",
         "Rime Mist v3",
@@ -67594,7 +67601,7 @@
       "feed": "https://glimmerindex.com/api/bench/chess",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench/chess#method Glimmer Index allows all paths in robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 19,
+      "rows": 20,
       "unmatched": [
         "GPT-OSS 120B (Antigravity)",
         "Ministral 3 8B"
@@ -67977,7 +67984,7 @@
       "feed": "https://glimmerindex.com/api/bench/elementalarmory",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#elementalarmory-method The site allows all paths in robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -68142,7 +68149,7 @@
       "feed": "https://glimmerindex.com/api/bench/freecell",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#freecell-method Glimmer Index allows all paths in robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -68298,7 +68305,7 @@
       "feed": "https://glimmerindex.com/api/bench/hustlesim",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#hustlesim-method The site allows all paths in robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -68445,7 +68452,7 @@
       "feed": "https://glimmerindex.com/api/bench/micromouse",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#micromouse-method Glimmer Index allows all paths in robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
         "GPT-OSS 120B (Antigravity)",
@@ -68628,9 +68635,10 @@
       "feed": "https://glimmerindex.com/api/bench/mines",
       "terms": "Glimmer Index permits use with credit. https://glimmerindex.com/bench#mines-method The site allows all paths in robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
+        "GPT-OSS 120B (Antigravity)",
         "Ministral 3 8B"
       ],
       "parts": {
@@ -68796,6 +68804,7 @@
       "rows": 17,
       "unmatched": [
         "Claude Opus 5.5 (Antigravity)",
+        "GPT-OSS 120B (Antigravity)",
         "Ministral 3 8B"
       ],
       "parts": {
@@ -68951,6 +68960,7 @@
       "retrieved": "2026-11-23",
       "rows": 17,
       "unmatched": [
+        "Claude Opus 5.5 (Antigravity)",
         "Ministral 3 8B"
       ],
       "parts": {
@@ -69104,6 +69114,7 @@
       "retrieved": "2026-11-23",
       "rows": 17,
       "unmatched": [
+        "Claude Opus 5.5 (Antigravity)",
         "Ministral 3 8B"
       ],
       "parts": {
@@ -69267,6 +69278,7 @@
       "retrieved": "2026-11-23",
       "rows": 16,
       "unmatched": [
+        "Claude Opus 5.5 (Antigravity)",
         "Ministral 3 8B"
       ],
       "parts": {
@@ -69551,6 +69563,7 @@
       "retrieved": "2026-11-23",
       "rows": 16,
       "unmatched": [
+        "Claude Opus 5.5 (Antigravity)",
         "Ministral 3 8B"
       ],
       "parts": {
@@ -77944,7 +77957,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=allcategories",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 181,
+      "rows": 182,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -78716,7 +78729,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=image",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 57,
+      "rows": 58,
       "unmatched": [
         "Hy4 Flash",
         "Nex N2 Pro"
@@ -103050,6 +103063,7 @@
         "AutoTheta",
         "CITRAS-FM",
         "CatBoost",
+        "ChakraTS-OS-10M",
         "Chronos-2",
         "Chronos-Bolt",
         "DeepAR",
@@ -109326,7 +109340,7 @@
           "note": "Optimizers, objectives, architectures and training of draft models, scored on held-out loss or latency."
         },
         "area:posttrain": {
-          "name": "Agentic post-train and harness",
+          "name": "Post-train and harness",
           "group": "Research area",
           "note": "Design RL data that teaches a small model multi-step coding, or improve the harness around a fixed worker model."
         },
@@ -109336,7 +109350,7 @@
           "note": "Scheduling, routing, caching and batching for frozen-model serving, with exact greedy outputs."
         },
         "area:kernels": {
-          "name": "GPU kernels",
+          "name": "Kernels",
           "group": "Research area",
           "note": "Fast, numerically correct H100 kernels for attention, matrix products and sampling."
         },
@@ -109901,7 +109915,7 @@
       "feed": "https://epoch.ai/data/benchmarks.csv (FrontierMath-Erdos)",
       "terms": "Epoch AI publishes its benchmark data under CC BY 4.0; the Almanac credits and links Epoch AI.",
       "retrieved": "2026-11-23",
-      "rows": 16,
+      "rows": 17,
       "unmatched": [],
       "stats": {
         "meanScore": {
@@ -111353,7 +111367,7 @@
       "feed": "https://epoch.ai/data/benchmarks.csv",
       "terms": "Epoch AI publishes its benchmark data under CC BY 4.0. The almanac credits and links Epoch AI.",
       "retrieved": "2026-11-23",
-      "rows": 40,
+      "rows": 41,
       "unmatched": [
         "mistral-large-4-0",
         "mistral-large-4-0-oss"
@@ -114273,6 +114287,7 @@
         "GAIA system 4223: Hyperspace Agent",
         "GAIA system 4225: HyperSpace Agent (Flint-40B-MoE + LFM2.5-24B)",
         "GAIA system 4226: abcdagent v26.11.18_3",
+        "GAIA system 4227: abcdagent v26.11.23",
         "GAIA system 422: Xgeno",
         "GAIA system 423: xfls",
         "GAIA system 424: sq626",
@@ -114818,6 +114833,7 @@
         "llama-3.1",
         "makalong",
         "mimo",
+        "mimo v2.6",
         "myagent",
         "nero123",
         "o3dr-0825",
@@ -131595,7 +131611,8 @@
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "Llama 3.1 70B Instruct",
-        "Llama 3.1 8B Instruct"
+        "Llama 3.1 8B Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ]
     },
     "icelandic-winogrande": {
@@ -148082,7 +148099,9 @@
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
       "retrieved": "2026-11-23",
       "rows": 14,
-      "unmatched": []
+      "unmatched": [
+        "Hydrogen"
+      ]
     },
     "kaggle-floorplan-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/floorplan-arena",
@@ -179687,7 +179706,8 @@
       "retrieved": "2026-11-23",
       "rows": 106,
       "unmatched": [
-        "Bielik 11B v3.1 Instruct"
+        "Bielik 11B v3.1 Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ],
       "parts": {
         "subject": {
@@ -179705,7 +179725,8 @@
       "retrieved": "2026-11-23",
       "rows": 106,
       "unmatched": [
-        "Bielik 11B v3.1 Instruct"
+        "Bielik 11B v3.1 Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ],
       "parts": {
         "withError": {
@@ -179747,7 +179768,8 @@
       "unmatched": [
         "Bielik 11B v3.1 Instruct",
         "Llama 3.1 70B Instruct",
-        "Llama 3.1 8B Instruct"
+        "Llama 3.1 8B Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ],
       "parts": {
         "grammar": {
@@ -179765,7 +179787,8 @@
       "retrieved": "2026-11-23",
       "rows": 106,
       "unmatched": [
-        "Bielik 11B v3.1 Instruct"
+        "Bielik 11B v3.1 Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ],
       "parts": {
         "completion": {
@@ -179804,7 +179827,8 @@
       "retrieved": "2026-11-23",
       "rows": 106,
       "unmatched": [
-        "Bielik 11B v3.1 Instruct"
+        "Bielik 11B v3.1 Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ],
       "parts": {
         "Song Lyrics": {
@@ -179864,7 +179888,8 @@
       "retrieved": "2026-11-23",
       "rows": 106,
       "unmatched": [
-        "Bielik 11B v3.1 Instruct"
+        "Bielik 11B v3.1 Instruct",
+        "TrustLLM v2 8B midtrain-SFT"
       ],
       "parts": {
         "Textile Terms": {
@@ -205509,6 +205534,7 @@
         "OpenDoc-0.1B",
         "Ovis2.6-30B-A3B",
         "OvisOCR2",
+        "OvisOCR3",
         "POINTS-Reader",
         "PaddleOCR-VL",
         "PaddleOCR-VL-1.5",
@@ -226005,6 +226031,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-1": {
@@ -226095,6 +226125,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-2": {
@@ -226193,6 +226227,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-3": {
@@ -226336,6 +226374,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-4": {
@@ -226481,6 +226523,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-5": {
@@ -226628,6 +226674,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "open-tts-leaderboard-1-6": {
@@ -226794,6 +226844,10 @@
           "name": "Languages scored",
           "unit": "count"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Incomplete TTS table callback"
       }
     },
     "openai-mrcr-v2": {
@@ -267879,7 +267933,7 @@
       "feed": "https://epoch.ai/data/benchmarks.csv",
       "terms": "Epoch AI benchmark results are published under CC BY 4.0; Benchmark Almanac credits Epoch AI and links the source.",
       "retrieved": "2026-11-23",
-      "rows": 12,
+      "rows": 13,
       "unmatched": [],
       "stats": {
         "meanScore": {
@@ -267903,7 +267957,7 @@
       "feed": "https://epoch.ai/data/benchmarks.csv",
       "terms": "Epoch publishes these benchmark runs; the Almanac credits Epoch and links the source.",
       "retrieved": "2026-11-23",
-      "rows": 12,
+      "rows": 13,
       "unmatched": [],
       "stats": {
         "meanScore": {
@@ -282698,7 +282752,7 @@
       "feed": "https://theaggregate.ai/our-benchmarks/write-like-me",
       "terms": "Credit The Aggregate when quoting scores. Bulk republication requires written permission. https://theaggregate.ai/terms The feed host publishes robots.txt at https://theaggregate.ai/robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 17,
+      "rows": 18,
       "unmatched": [
         "GPT-6.1 Pro Sol"
       ],
@@ -290732,6 +290786,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Vals Smith systems table missing for apache/spark"
       }
     },
     "vals-smith-arandomhooman-hoomans-morphe-patches": {
@@ -290842,6 +290900,10 @@
           "unit": "minutes",
           "better": "lower"
         }
+      },
+      "failed": {
+        "date": "2026-11-23",
+        "error": "Vals Smith systems table missing for AumeshMisra/tensorzero"
       }
     },
     "vals-smith-benredmond-apex": {
