@@ -169461,18 +169461,18 @@
     "org": "Collide AI",
     "released": "2026-11",
     "links": {
-      "repo": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/tree/main/code/",
-      "dataset": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1",
-      "leaderboard": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1#baseline-results"
+      "repo": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2/tree/main/code",
+      "dataset": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2",
+      "paper": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2/resolve/main/oilbench_landscape_1.pdf"
     },
     "access": "public+private-holdout",
-    "note": "One benchmark of StrataBench Land v1. The suite publishes no combined score. Collide reports natural and schema prompts on the same ten fields. Collide keeps the schema protocol’s additional four fields outside the headline score.",
+    "note": "One benchmark of StrataBench Land v1. The suite publishes no combined score. Collide withdrew the v1 dataset in November 2026, and its paper in the v2 repository reports four prompt conditions on the same ten fields: natural, rules only, fields only and full. Fields only and full also score four more fields, which stay outside the headline score.",
     "unit": "%",
     "better": "higher",
     "confidence": "verified",
     "evidence": [
-      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/README.md",
-      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/LICENSE"
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2/resolve/main/oilbench_landscape_1.pdf",
+      "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2/blob/main/LICENSE"
     ],
     "added": "2026-11-08"
   },

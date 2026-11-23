@@ -82072,29 +82072,223 @@
       }
     },
     "docvqa": {
-      "url": "https://arxiv.org/html/2007.00398",
-      "feed": "https://arxiv.org/html/2007.00398",
+      "url": "https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1",
+      "feed": "https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1 + https://arxiv.org/html/2007.00398",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-11",
-      "rows": 0,
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 7,
       "unmatched": [
+        "0713ap +gpt4o(no v)",
+        "1010ap +gpt4o(no v)",
+        "36_nnrc_llama2",
+        "54_nnrc_zephyr",
+        "Alibaba DAMO NLP",
+        "Applica.ai TILT",
+        "BAIDU-DI",
+        "BROS_BASE (WebViCoB 6.4M)",
+        "Bert Large",
+        "BlueLM-V-3B",
+        "CATI-VLM",
+        "CATI-VLM-IoT",
+        "CCK-KVQwen",
+        "CLOVA OCR",
+        "Clova OCR V0",
+        "DIVE-Doc (FRD)",
+        "DOLMA_multifinetuning",
+        "Dessurt",
+        "DocFormerv2 (Single Model with 750M Parameters)",
+        "DocVQA: A Dataset for VQA on Document Images",
+        "Docugami-Layout",
+        "Dolma multifinetuning 7",
+        "ERNIE-Layout 1.0",
+        "ERNIE-Layout 2.0",
+        "Electra Large Squad",
+        "Finetuning LayoutLMv3_Base",
+        "GPT-4 Vision Turbo + Amazon Textract OCR",
+        "GPT3.5",
+        "Gemma 2b + OCR",
+        "HDNet",
+        "HocrEN(Technique 2) - llama",
+        "HocrEN(Technique 2) - mistral",
+        "HocrEN(Technique 2) - qwen14b",
+        "HocrEN(Technique 2) - qwen32b",
+        "HocrEN(Technique 2) - qwen7b",
+        "HyperDQA_V0",
+        "HyperDQA_V1",
+        "HyperDQA_V2",
+        "HyperDQA_V3",
+        "HyperDQA_V4",
+        "InternVL-1.5-Plus (generalist)",
+        "InternVL2-Pro (generalist)",
+        "Ivy-VL",
+        "Ivy-VL-01",
+        "LATIN-Prompt + Claude (Zero shot)",
+        "LATIN-Tuning-Prompt + Alpaca (Zero-shot)",
+        "LLaVA-One-Vision-1.5-8B-Instruct",
+        "LayoutLM 2.0 (single model)",
+        "LayoutLM-base+GNN",
+        "LayoutLMV2-large on Textract",
+        "LayoutLM_Docvqa+Token_v0",
+        "LayoutLMv2, Tesseract OCR eval (Tesseract OCR trained)",
+        "LayoutLMv2, Tesseract OCR eval (dataset OCR trained)",
+        "LayoutLMv2_star_seg",
+        "LayoutLMv2_star_seg_large",
+        "Layoutlm_DocVQA+Token_v2",
         "LoRRA [ 35 ]",
         "M4C [ 16 ]",
+        "MLCD-Embodied-7B: Multi-label Cluster Discrimination for Visual Representation Learning",
+        "MarinVLM-stage2-step-1000",
+        "MarinVLM-stage2-step-1500",
+        "MarinVLM-stage2-step-2000",
+        "MarinVLM-stage2-step-3000",
+        "MarinVLM-stage2-step-4019",
+        "Master Thesis",
+        "Mini-Monkey",
+        "MoVA-8B (generalist)",
+        "Mybank-DocReader",
+        "NEXT-8B",
+        "ORCA",
+        "PP-DocBee-2B",
+        "PaLI-X (Google Research; Single Generative Model)",
+        "PaliGemma-3B (finetune, 224px)",
+        "PaliGemma-3B (finetune, 448px)",
+        "PaliGemma-3B (finetune, 896px)",
+        "PingAn-OneConnect-Gammalab-DQA",
+        "Plain BERT QA",
+        "QA_Base_MRC_1",
+        "QA_Base_MRC_2",
+        "QA_Base_MRC_3",
+        "QA_Base_MRC_4",
+        "QA_Base_MRC_5",
+        "Qwen2.5-3B-lite",
+        "Qwen2.5-VL_DocVQA_2409",
+        "Qwen3.5_0.8B_test",
+        "RRC method 0",
+        "RRC method 1",
+        "RRC method 3",
+        "SMoLA-PaLI-X Generalist Model",
+        "SMoLA-PaLI-X Specialist Model",
+        "ScreenAI 5B",
+        "Seed-VL-1.5",
+        "Snowflake Arctic-Extract 7B",
+        "Snowflake Arctic-TILT 0.8B (fine-tuned)",
+        "Snowflake Arctic-TILT 0.8B (zero-shot)",
+        "Spatial LLM v1.2",
+        "Star_LLM",
+        "Structural LM-v2",
+        "Submission_ErnieLayout_base_finetuned_on_DocVQA_en_train_dev_textract_word_segments_ck-14000",
+        "Tencent Youtu",
+        "Test Submission",
+        "UGLIFT v0.1 (Clova OCR)",
+        "Vary",
+        "Vary (using multi crop)",
+        "ViTLP",
+        "Vis(llama)",
+        "Vis(qwen)",
+        "VisFocus-Base",
+        "Vlm(llama)",
+        "Vlm(qwen)",
+        "YoBerDaV1 Multi-page",
+        "YoBerDaV2 Single-page",
+        "ZAYA1-VL-8B",
+        "Zamba2-VL-1.2B",
+        "Zamba2-VL-2.7B",
+        "Zamba2-VL-7B",
+        "bert",
+        "bert finetuned",
+        "bert fulldata fintuned",
         "bert-base",
         "bert-large-",
-        "bert-large-squad"
+        "bert-large-squad",
+        "claude37",
+        "clipb",
+        "dfnb",
+        "dfnl",
+        "docVQAQV_V0",
+        "docVQAQV_V0.1",
+        "dolma",
+        "donut_base",
+        "donut_half_input_imageSize",
+        "donut_large_encoderSize_finetuned_20_epoch",
+        "donut_small_encoderSize_finetuned_20_epoch",
+        "doubao15",
+        "dsf",
+        "gemma+ocr",
+        "gmini25",
+        "gpt4o (snapshot unspecified)",
+        "instructblip",
+        "lixiang-vlm",
+        "lixiang-vlm handled",
+        "lixiang-vlm-7b",
+        "lixiang-vlm-7b-handled",
+        "llama",
+        "llama3-intern6b",
+        "llama3-qwenvit",
+        "loixc-onestage",
+        "loixc-vqa",
+        "lora",
+        "lora_route",
+        "m-rope2",
+        "minicpm",
+        "neetolab-sota-v1",
+        "nnrc_udop_224_6ds",
+        "pix2struct-base",
+        "pix2struct-large",
+        "qwen2-vl",
+        "qwen3vl",
+        "qwenvl-max (single generalist model)",
+        "qwenvl-plus (single generalist model)",
+        "seq2seq",
+        "sg",
+        "table-r1",
+        "table-r1_qx",
+        "test",
+        "testtest",
+        "tixc-vqa",
+        "v1",
+        "v4",
+        "wenxin45",
+        "zs"
       ],
-      "failed": {
-        "date": "2026-11-18",
-        "error": "Command failed: curl --fail --silent --show-error --max-time 40 --user-agent benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac) https://rrc.cvc.uab.es/?ch=17&com=evaluation&task=1 cu"
-      },
       "parts": {
-        "valAnls": {
-          "name": "Validation",
-          "group": "Split"
+        "Figure/Diagram": {
+          "name": "Figure/Diagram",
+          "group": "Question type"
+        },
+        "Form": {
+          "name": "Form",
+          "group": "Question type"
+        },
+        "Table/List": {
+          "name": "Table/List",
+          "group": "Question type"
+        },
+        "Layout": {
+          "name": "Layout",
+          "group": "Question type"
+        },
+        "Free_text": {
+          "name": "Free text",
+          "group": "Question type"
+        },
+        "Image/Photo": {
+          "name": "Image/Photo",
+          "group": "Question type"
+        },
+        "Handwritten": {
+          "name": "Handwritten",
+          "group": "Question type"
+        },
+        "Yes/No": {
+          "name": "Yes/No",
+          "group": "Question type"
+        },
+        "Others": {
+          "name": "Others",
+          "group": "Question type"
         }
       },
-      "static": "paper",
       "stats": {
         "accuracy": {
           "name": "Accuracy",
@@ -84486,30 +84680,55 @@
       }
     },
     "dude": {
-      "url": "https://arxiv.org/html/2305.08455",
-      "feed": "https://arxiv.org/html/2305.08455",
+      "url": "https://rrc.cvc.uab.es/?ch=23&com=evaluation&task=1",
+      "feed": "https://rrc.cvc.uab.es/?ch=23&com=evaluation&task=1 + https://arxiv.org/html/2305.08455",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-11",
+      "static": "paper",
+      "retrieved": "2026-11-23",
       "rows": 0,
       "unmatched": [
         "BertQA MPDocVQA Concat",
         "BertQA MPDocVQA MaxConf",
         "BigBird MPDocVQA Concat",
         "BigBird MPDocVQA MaxConf",
+        "DocBlipVQA",
+        "DocGptVQA",
+        "GPT-4 Vision Turbo + Azure OCR",
+        "GRAM",
+        "GRAM C-Former",
+        "Hi-VT5-beamsearch",
+        "Hi-VT5-beamsearch with token type embeddings",
         "LayoutLMv3 MPDocVQA Concat",
         "LayoutLMv3 MPDocVQA MaxConf",
         "Longformer MPDocVQA Concat",
         "Longformer MPDocVQA MaxConf",
+        "Multi-Modal T5 VQA",
+        "PeKi_DUDE",
+        "QAP",
+        "Snowflake Arctic-TILT 0.8B",
         "T5 MPDocVQA Concat",
         "T5 MPDocVQA MaxConf",
         "T5-base Concat-0",
-        "T5-base MaxConf-0"
+        "T5-base MaxConf-0",
+        "T5-concat",
+        "acpr_k4",
+        "compressor",
+        "cut4_0.0",
+        "cut4_0.6",
+        "cut4_0.7",
+        "cut4_0.85",
+        "cut4_1.0",
+        "lap_k4",
+        "model_0327",
+        "module2_k4",
+        "pacer0.4",
+        "pacer0.65",
+        "pacer0.8",
+        "qwen",
+        "qwen-retrival",
+        "qwen2.5",
+        "qwen3"
       ],
-      "failed": {
-        "date": "2026-11-19",
-        "error": "Command failed: curl --fail --silent --show-error --max-time 40 --user-agent benchmark-almanac (+https://github.com/brianlzhou/benchmark-almanac) https://rrc.cvc.uab.es/?ch=23&com=evaluation&task=1 cu"
-      },
-      "static": "paper",
       "stats": {
         "ece": {
           "name": "Expected calibration error",
@@ -107147,7 +107366,7 @@
       "terms": "EuroEval code is MIT licensed. https://github.com/EuroEval/EuroEval",
       "host": "EuroEval",
       "headline": "EuroEval reports character-level F1 on the FoQA test split, scaled by 100.",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-23",
       "rows": 103,
       "unmatched": [
         "01-ai/Yi-1.5-9B",
@@ -107239,7 +107458,6 @@
         "TrustLLMeu/trustllm-v2-8b@d8cc924fa550fbf9474f5251e8e2f92d1c1bf894",
         "TurkuNLP/finnish-modernbert-base",
         "TurkuNLP/finnish-modernbert-large",
-        "TurkuNLP/finnish-modernbert-large-seq-len-1024-117300-annealed",
         "TurkuNLP/finnish-modernbert-tiny",
         "ai21labs/Jamba-v0.1",
         "allenai/Llama-3.1-Tulu-3-8B-DPO",
@@ -107406,10 +107624,6 @@
           "name": "Scored examples",
           "unit": "count"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Paper table changed: only 352 rows"
       }
     },
     "forb": {
@@ -130957,8 +131171,8 @@
       "feed": "https://snu-pi.github.io/HumanoidToolBench/",
       "terms": "The authors publish these results on their project page at https://snu-pi.github.io/HumanoidToolBench/.",
       "headline": "The headline is mean success across 18 simulation tasks, with 100 episodes per task.",
-      "retrieved": "2026-11-20",
-      "rows": 3,
+      "retrieved": "2026-11-23",
+      "rows": 9,
       "unmatched": [
         "ACT",
         "DP",
@@ -131020,10 +131234,6 @@
         "decoy, L2 Mobile, Break": {
           "name": "decoy, L2 Mobile, Break"
         }
-      },
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Unexpected paper number: Trained on ToolBook 100 episodes per task"
       }
     },
     "hummusqa": {
@@ -199752,8 +199962,8 @@
       "feed": "https://ltgoslo.github.io/llm-dashboard/noreval/data.json",
       "terms": "The Language Technology Group publishes the dashboard and its data at https://ltgoslo.github.io/llm-dashboard/noreval/.",
       "headline": "The dashboard averages chance-adjusted task scores within categories, then weights each category equally.",
-      "retrieved": "2026-11-20",
-      "rows": 57,
+      "retrieved": "2026-11-23",
+      "rows": 90,
       "unmatched": [
         "AI Sweden Llama3 8B",
         "Apertus 8B (stage 1)",
@@ -199765,13 +199975,12 @@
         "Bielik 11B v3",
         "Bielik 4.5B v3",
         "DFM 7B",
-        "DeepSeek V3 671B (37B active)",
         "EuroLLM 1.5 9B",
         "EuroLLM 1.7B",
         "EuroLLM 22B",
         "EuroLLM 9B",
         "GLM-4 32B",
-        "GLM-4.5 Air (12B active)",
+        "GLM-4.5 Air 106B-A12B",
         "GPT-SW3 1.3B",
         "GPT-SW3 20B",
         "GPT-SW3 40B",
@@ -199781,11 +199990,10 @@
         "Gemma3 27B (pretrained)",
         "Gemma3 4B (pretrained)",
         "Gemma4 12B (pretrained)",
-        "Gemma4 26B (4B active) (pretrained)",
+        "Gemma4 26B-A4B (pretrained)",
         "Gemma4 31B (pretrained)",
         "Gemma4 E2B (5B) (pretrained)",
         "Gemma4 E4B (8B) (pretrained)",
-        "Llama4 Scout 109B (17B active)",
         "Marin 32B",
         "Marin 8B",
         "Ministral3 3B",
@@ -199793,15 +200001,10 @@
         "Mistral 24B",
         "Mistral 24B (v2501)",
         "Mistral Nemo 12B",
-        "Mixtral 8x22B (141B)",
-        "Mixtral 8x7B (47B)",
         "NB-GPT-J 6B",
         "NB-GPT-J 6B v2",
-        "NB-Llama 3.1 8B",
         "NB-Llama 3.2 1B",
         "NB-Llama 3.2 3B",
-        "Nemotron 3 Nano 30B (3B active)",
-        "Nemotron 3 Super 120B (12B active)",
         "Nemotron 4 340B",
         "Nemotron Nano 12B v2",
         "NorBERT4 1B",
@@ -199810,11 +200013,11 @@
         "NorMistral 7B",
         "NorMistral 7B (scratch)",
         "NorOLMo 13B",
+        "NorOLMo 13B (new mix)",
         "NorOLMo 13B (stage 1)",
         "NorOLMo 13B (stage 2)",
-        "NorOLMo 13B (stage 2, new mix)",
         "NorwAI Mistral 7B",
-        "NorwAI Mixtral 8x7B (47B)",
+        "NorwAI Mixtral 8x7B",
         "NorwAI NorGPT 3B",
         "NorwAI NorLlama 3B",
         "OLMo2 13B",
@@ -199824,19 +200027,158 @@
         "OLMo3 7B (stage 1)",
         "Poro 34B",
         "Prelude 9B",
+        "Prelude 9B Long",
         "Qwen3-1.7B-Base",
         "TildeOpen 30B",
         "TildeOpen 30B 64k",
         "Tiny Aya 3B",
-        "Trinity Mini 26B (3B active)",
-        "Trinity Nano 6B (1B active)",
+        "Trinity Mini 26B-A3B",
+        "Trinity Nano 6B-A1B",
         "Viking 13B",
         "Viking 33B",
         "Viking 7B"
       ],
-      "failed": {
-        "date": "2026-11-23",
-        "error": "Cannot convert undefined or null to object"
+      "parts": {
+        "ask_gec": {
+          "name": "ask_gec",
+          "group": "linguistic knowledge"
+        },
+        "ncb": {
+          "name": "ncb",
+          "group": "linguistic knowledge"
+        },
+        "nocola": {
+          "name": "nocola",
+          "group": "linguistic knowledge"
+        },
+        "norbelebele": {
+          "name": "norbelebele",
+          "group": "language understanding"
+        },
+        "norcommonsenseqa_nno": {
+          "name": "norcommonsenseqa_nno",
+          "group": "world knowledge & reasoning"
+        },
+        "norcommonsenseqa_nob": {
+          "name": "norcommonsenseqa_nob",
+          "group": "world knowledge & reasoning"
+        },
+        "norec_document": {
+          "name": "norec_document",
+          "group": "language understanding"
+        },
+        "norec_sentence": {
+          "name": "norec_sentence",
+          "group": "language understanding"
+        },
+        "noreval_multiblimp": {
+          "name": "noreval_multiblimp",
+          "group": "linguistic knowledge"
+        },
+        "noridiom_nno": {
+          "name": "noridiom_nno",
+          "group": "linguistic knowledge"
+        },
+        "noridiom_nob": {
+          "name": "noridiom_nob",
+          "group": "linguistic knowledge"
+        },
+        "noropenbookqa_nno": {
+          "name": "noropenbookqa_nno",
+          "group": "language understanding"
+        },
+        "noropenbookqa_nob": {
+          "name": "noropenbookqa_nob",
+          "group": "language understanding"
+        },
+        "noropenbookqa_no_fact_nno": {
+          "name": "noropenbookqa_no_fact_nno",
+          "group": "world knowledge & reasoning"
+        },
+        "noropenbookqa_no_fact_nob": {
+          "name": "noropenbookqa_no_fact_nob",
+          "group": "world knowledge & reasoning"
+        },
+        "norquad": {
+          "name": "norquad",
+          "group": "language understanding"
+        },
+        "norrewrite_instruct": {
+          "name": "norrewrite_instruct",
+          "group": "generation & summarization"
+        },
+        "norsummarize_instruct": {
+          "name": "norsummarize_instruct",
+          "group": "generation & summarization"
+        },
+        "norsumm_nob": {
+          "name": "norsumm_nob",
+          "group": "generation & summarization"
+        },
+        "norsumm_nno": {
+          "name": "norsumm_nno",
+          "group": "generation & summarization"
+        },
+        "norsumm_nob_nno_translation": {
+          "name": "norsumm_nob_nno_translation",
+          "group": "translation"
+        },
+        "norsumm_nno_nob_translation": {
+          "name": "norsumm_nno_nob_translation",
+          "group": "translation"
+        },
+        "nortruthfulqa_gen_nno": {
+          "name": "nortruthfulqa_gen_nno",
+          "group": "world knowledge & reasoning"
+        },
+        "nortruthfulqa_gen_nob": {
+          "name": "nortruthfulqa_gen_nob",
+          "group": "world knowledge & reasoning"
+        },
+        "nortruthfulqa_mc_nno": {
+          "name": "nortruthfulqa_mc_nno",
+          "group": "world knowledge & reasoning"
+        },
+        "nortruthfulqa_mc_nob": {
+          "name": "nortruthfulqa_mc_nob",
+          "group": "world knowledge & reasoning"
+        },
+        "nrk_quiz_qa_nno": {
+          "name": "nrk_quiz_qa_nno",
+          "group": "world knowledge & reasoning"
+        },
+        "nrk_quiz_qa_nob": {
+          "name": "nrk_quiz_qa_nob",
+          "group": "world knowledge & reasoning"
+        },
+        "slide": {
+          "name": "slide",
+          "group": "linguistic knowledge"
+        },
+        "tatoeba_eng_nno": {
+          "name": "tatoeba_eng_nno",
+          "group": "translation"
+        },
+        "tatoeba_eng_nob": {
+          "name": "tatoeba_eng_nob",
+          "group": "translation"
+        },
+        "tatoeba_nno_eng": {
+          "name": "tatoeba_nno_eng",
+          "group": "translation"
+        },
+        "tatoeba_nob_eng": {
+          "name": "tatoeba_nob_eng",
+          "group": "translation"
+        },
+        "tatoeba_nob_sme": {
+          "name": "tatoeba_nob_sme",
+          "group": "translation"
+        },
+        "tatoeba_sme_nob": {
+          "name": "tatoeba_sme_nob",
+          "group": "translation"
+        }
       }
     },
     "normad-eti": {
@@ -269898,16 +270240,13 @@
       "unmatched": []
     },
     "stratabench-land-v1-extract": {
-      "url": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1#baseline-results",
-      "feed": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/README.md",
-      "terms": "Source: StrataBench Land v1, Collide (https://collide.io); data are CC BY-NC 4.0 with additional permission to publish attributed benchmark scores.",
-      "retrieved": "2026-11-08",
-      "rows": 10,
-      "unmatched": [],
-      "failed": {
-        "date": "2026-11-23",
-        "error": "401 https://huggingface.co/datasets/Collide-ai/stratabench-land-v1/raw/main/README.md"
-      }
+      "url": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2/resolve/main/oilbench_landscape_1.pdf",
+      "feed": "https://huggingface.co/datasets/Collide-ai/stratabench-land-v2/resolve/main/oilbench_landscape_1.pdf (Table 10)",
+      "terms": "Source: StrataBench, Collide (https://collide.io); Collide publishes the paper in its CC BY-NC 4.0 dataset repository with permission to publish attributed benchmark scores. https://huggingface.co/datasets/Collide-ai/stratabench-land-v2",
+      "static": "paper",
+      "retrieved": "2026-11-23",
+      "rows": 20,
+      "unmatched": []
     },
     "strategyqa": {
       "url": "https://github.com/eladsegal/strategyqa",

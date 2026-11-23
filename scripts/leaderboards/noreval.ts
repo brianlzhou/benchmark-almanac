@@ -10,9 +10,25 @@ type Task = {category: string, main_metric: string, random_baseline: number, max
 type Data = {
   metrics_setup: Record<string, Task>, model_display_names: Record<string,string>,
   model_parameters: Record<string,number>, model_info: Record<string,{license?:string}>,
-  models: Record<string,Record<string,Record<string,Record<string,Point>>>>,
+  models?: Record<string,Results>, model_ids?: string[], results_version?: string,
 };
+type Results = Record<string,Record<string,Record<string,Point>>>;
 const feed = 'https://ltgoslo.github.io/llm-dashboard/noreval/data.json';
+
+// Since 2026-11-21 data.json carries only the metadata and `model_ids`. Each model's results sit in
+// models/<id>.json, which the dashboard (shared/comparison.js) loads with ?v=<results_version>.
+async function loadResults(d: Data): Promise<Record<string,Results>> {
+  if (d.models) return d.models;
+  if (!d.model_ids?.length) throw new Error('NorEval data.json has neither models nor model_ids');
+  const version = d.results_version ? '?v=' + d.results_version : '';
+  const out: Record<string,Results> = {};
+  for (let i = 0; i < d.model_ids.length; i += 6) {
+    const batch = d.model_ids.slice(i, i + 6);
+    const files = await Promise.all(batch.map(id => fetchJson<Results>(new URL('models/' + encodeURIComponent(id) + '.json' + version, feed).href)));
+    batch.forEach((id, j) => { out[id] = files[j]; });
+  }
+  return out;
+}
 const board: Leaderboard = {
   benchmark: 'noreval', url: 'https://ltgoslo.github.io/llm-dashboard/noreval/', feed,
   terms: 'The Language Technology Group publishes the dashboard and its data at https://ltgoslo.github.io/llm-dashboard/noreval/.',
@@ -24,7 +40,7 @@ const board: Leaderboard = {
     const tasks = Object.entries(d.metrics_setup);
     if (tasks.length < 35) throw new Error('Missing NorEval tasks');
     const rows: LeaderboardRow[] = [];
-    for (const [id, results] of Object.entries(d.models)) {
+    for (const [id, results] of Object.entries(await loadResults(d))) {
       for (const shot of ['0','1','5']) {
         const groups = new Map<string, {sum: number, n: number, low2: number, high2: number}>();
         const metrics: Record<string, number> = {};
