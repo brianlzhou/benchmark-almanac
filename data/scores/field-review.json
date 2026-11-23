@@ -1,6 +1,6 @@
 {
   "note": "Fields a board publishes that its importer may drop, or that the board added since the last sync. Wire them into the importer, or mark them reviewed in data/field-decisions.json.",
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "boards": {
     "1h-videoqa-google": [{"field":"hasAgentName","kind":"harness or agent","why":"not stored","share":1,"sample":"false"},{"field":"hasAgentSlug","kind":"harness or agent","why":"not stored","share":1,"sample":"false"},{"field":"hasHarnessName","kind":"harness or agent","why":"not stored","share":1,"sample":"false"},{"field":"hasHarnessSlug","kind":"harness or agent","why":"not stored","share":1,"sample":"false"}],
     "3dcodearena": [{"field":"Time (s)↕","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Tokens↕","kind":"tokens","why":"not stored","share":1},{"field":"code-runs","kind":"trials","why":"not stored","share":1}],
