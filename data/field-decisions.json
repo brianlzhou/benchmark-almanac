@@ -58,7 +58,11 @@
       "fill_price": "ignore",
       "nav_usd": "ignore",
       "step": "ignore",
-      "agent_name": "wired"
+      "agent_name": "wired",
+      "capital_usd": "wired",
+      "final_nav_usd": "wired",
+      "realized_pnl_usd": "wired",
+      "unrealized_pnl_usd": "wired"
     },
     "agenticsts": {
       "License": "ignore"
@@ -135,6 +139,10 @@
     "androidworld-knowledge": {
       "Avg. Time": "ignore",
       "Step": "ignore"
+    },
+    "animation-bench-physera": {
+      "Returns on time (f10)": "wired",
+      "Slide on time (f1)": "wired"
     },
     "anomalyxl": {
       "LL (samples)": "ignore",
@@ -314,6 +322,10 @@
     "big-bench-understanding-fables": {
       "Last commit date": "ignore"
     },
+    "bigcode-models-leaderboard": {
+      "Throughput (tokens/s)": "wired",
+      "Throughput (tokens/s) bs=50": "wired"
+    },
     "bimanual-chore-scheduling": {
       "Metric (200 instances, seeds 0–199)": "ignore"
     },
@@ -465,6 +477,9 @@
     "cnmo-2024": {
       "in USD": "ignore",
       "# Training Tokens": "ignore"
+    },
+    "coco-stuff-164k": {
+      "Inf time (fps)": "wired"
     },
     "codeipi": {
       "Samples": "ignore"
@@ -635,7 +650,10 @@
       "Time to trigger": "ignore",
       "LLM $/trial": "ignore",
       "Time/trial": "ignore",
-      "Trial success": "ignore"
+      "Trial success": "ignore",
+      "E2E $/trial↕": "wired",
+      "Find $/trial↕": "wired",
+      "Fix $/trial↕": "wired"
     },
     "crust-bench": {
       "Cost Budget": "ignore"
@@ -851,6 +869,10 @@
       "Step 5 Preview": "ignore",
       "Doubao Seed 2.1 Pro": "ignore"
     },
+    "doe-sample-pack": {
+      "Practitioner time (author estimate)": "ignore",
+      "Valid attempts": "wired"
+    },
     "dosimeter-german-election-day-2026": {
       "Most cited official sources": "ignore"
     },
@@ -913,6 +935,9 @@
     },
     "dycodeeval": {
       "Token Mutation": "ignore"
+    },
+    "e-commerce-bench": {
+      "BadSpend% ↓": "wired"
     },
     "earth-bench-2": {
       "Release date": "ignore",
@@ -1166,6 +1191,10 @@
     "futureomni": {
       "Date": "ignore"
     },
+    "galileo-agent-leaderboard-v2": {
+      "$/M input token": "wired",
+      "$/M output token": "wired"
+    },
     "gamehorizon": {
       "Recording Duration and Share": "ignore"
     },
@@ -1399,6 +1428,13 @@
     "humanclaw-bench": {
       "Cost": "ignore"
     },
+    "humanoidtoolbench": {
+      "API cost": "wired",
+      "Total cost": "wired",
+      "Runtime": "wired",
+      "Zero-shot LLM agents18 episodes per row": "ignore",
+      "Zero-shot LLM agents3 episodes per task": "ignore"
+    },
     "hx2dx-arena": {
       "Parameters": "ignore"
     },
@@ -1435,7 +1471,8 @@
       "Clef (Cloudflare)Author not reported · Licence not reported": "ignore",
       "Jev-OmniAuthor not reported · Licence not reported": "ignore",
       "WIlfLin/JEV-Qwen3.8-Flash-Next-Linear-Runtime": "ignore",
-      "OpenJev 4B NLI v2 (official image-premise path)": "ignore"
+      "OpenJev 4B NLI v2 (official image-premise path)": "ignore",
+      "p50 latency": "wired"
     },
     "imo-gradingbench": {
       "Query date": "ignore"
@@ -1675,6 +1712,9 @@
     "legalrewardbench": {
       "Samples": "ignore"
     },
+    "leipzig-benchmark": {
+      "Tokens": "wired"
+    },
     "levelbench-100-4-1": {
       "license": "ignore",
       "canary_watermark_token": "ignore"
@@ -1735,6 +1775,15 @@
       "Agent": "wired",
       "AppAgent": "wired",
       "CoCo-Agent": "wired"
+    },
+    "llm-agronomy-benchmark-fbn": {
+      "Price ($/Mtok)": "wired"
+    },
+    "llm-agronomy-benchmark-image-identification-four-choice": {
+      "Price ($/Mtok)": "wired"
+    },
+    "llm-chess-arena-louis-guichard": {
+      "Cost/Game": "wired"
     },
     "llm-fantasy-football-arena-classic": {
       "updated_at_ms": "ignore",
@@ -1890,7 +1939,10 @@
       "horizon_minutes_high_80": "ignore",
       "horizon_minutes_low_80": "ignore",
       "horizon_minutes_to": "ignore",
-      "longest_task_minutes": "ignore"
+      "longest_task_minutes": "ignore",
+      "horizon_minutes": "wired",
+      "horizon_minutes_low_95": "wired",
+      "horizon_minutes_high_95": "wired"
     },
     "mideind-icelandic-case-government": {
       "gen_kwargs.max_tokens": "ignore",
@@ -2293,6 +2345,9 @@
       "Open-source": "ignore",
       "Open-Source Models": "ignore",
       "Steps": "ignore"
+    },
+    "physgym-arena-dr-hard": {
+      "metadata.time": "wired"
     },
     "physics-iq": {
       "Physics-IQ verified": "ignore"
@@ -2871,7 +2926,12 @@
       "iTurns": "ignore",
       "latencyKey": "ignore",
       "nToolTurns": "ignore",
-      "nTurns": "ignore"
+      "nTurns": "ignore",
+      "cells.ttft": "wired"
+    },
+    "speko-s2s-10-turn": {
+      "Audio price": "wired",
+      "Conv. latency (p50)": "wired"
     },
     "speko-s2s-six-scenarios": {
       "cells.ttft": "ignore",
@@ -2898,6 +2958,10 @@
       "Time": "ignore",
       "doubao-seed-2-0-pro": "ignore",
       "Std F1": "ignore"
+    },
+    "squadstack-conversational-llm-benchmark": {
+      "TTFT P50 (ms)": "wired",
+      "Turns judged": "wired"
     },
     "statebench-video-continuation": {
       "Full StateAgent": "ignore",
@@ -3310,6 +3374,9 @@
     },
     "wise-verified": {
       "Samples": "ignore"
+    },
+    "wiser-findall": {
+      "Cost (CPM)": "wired"
     },
     "workbuddy-user-blind-evaluation-tencent": {
       "createdAt": "ignore",

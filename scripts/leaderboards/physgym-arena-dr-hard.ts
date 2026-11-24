@@ -10,6 +10,10 @@ const board: Leaderboard = {
   benchmark: 'physgym-arena-dr-hard', url, feed: primeFeed(env),
   terms: 'Prime Intellect hosts the public evaluations under https://www.primeintellect.ai/terms-of-service.',
   headline: 'The original leaderboard runs each scored four examples from the 50-example environment.',
+  stats: {
+    runSeconds: { name: 'Run time', unit: 'seconds', better: 'lower' },
+    inputTokens: { name: 'Input tokens', unit: 'tokens', better: 'lower' },
+  },
   async fetch() { return checked(await primeRows(url, env, 1, 5), 5); },
 };
 export default board;

@@ -15,6 +15,11 @@ const board: Leaderboard = {
   terms: 'The authors publish these results on their project page at https://snu-pi.github.io/HumanoidToolBench/.',
   headline: 'The headline is mean success across 18 simulation tasks, with 100 episodes per task.',
   aliases: { 'π 0.5': 'pi0-5' },
+  stats: {
+    runtimeMinutes: { name: 'Longest episode runtime', unit: 'minutes', better: 'lower' },
+    costPerSuccess: { name: 'Cost per success', unit: 'usd', better: 'lower' },
+    totalCost: { name: 'Total cost', unit: 'usd', better: 'lower' },
+  },
   async fetch() {
     const html = await fetchText(feed);
     const models = new Map<string, Record<string, number>>();
@@ -53,13 +58,39 @@ const board: Leaderboard = {
       const model = row[0] === 'π 0.5' ? 'pi0-5' : row[0] === 'Ψ 0' ? 'Ψ0 (Psi Zero)' : row[0] === 'GR00T N1.7' ? 'gr00t-n1-7' : row[0] === 'Cosmos 3 Edge Policy' ? 'cosmos3-edge' : row[0];
       params.set(model, count);
     }
+    const agentCost = new Map<string, { cost?: number; runtimeMinutes?: number; costPerSuccess?: number; totalCost?: number }>();
+    const costTable = tables(html).map(grid).find(t => t[0]?.join('|') === 'Setup|L0|L1 and L2|Runtime|API cost|Per success|Total cost');
+    if (costTable) {
+      for (const row of costTable.slice(1)) {
+        const [pipe, rawModel] = row[0].split(',').map(s => s.trim());
+        const harness = PIPELINES[pipe];
+        if (!harness || !rawModel) continue;
+        const runtime = row[3]?.match(/([\d.]+)\s*min/i);
+        const apiCost = row[4]?.match(/\$([\d.]+)/);
+        const perSuccess = row[5]?.match(/\$([\d.]+)/);
+        const total = row[6]?.match(/\$([\d.]+)/);
+        agentCost.set(JSON.stringify([rawModel, harness]), {
+          cost: apiCost ? Number(apiCost[1]) : undefined,
+          runtimeMinutes: runtime ? Number(runtime[1]) : undefined,
+          costPerSuccess: perSuccess ? Number(perSuccess[1]) : undefined,
+          totalCost: total ? Number(total[1]) : undefined,
+        });
+      }
+    }
     const rows = [...models].map(([key, metrics]) => {
       const [model, harness] = JSON.parse(key) as [string, string | undefined];
       const values = Object.values(metrics);
       if (values.length !== 18) throw new Error('Incomplete policy: ' + model);
       const score = values.reduce((sum, x) => sum + x, 0) / 18;
       // trained policies run 100 episodes per task, the zero-shot agents 3
-      return harness ? { model, harness, score, metrics, trials: 54 } : { model, score, metrics, params: params.get(model), trials: 1800 };
+      if (harness) {
+        const extra = agentCost.get(key);
+        if (extra?.runtimeMinutes !== undefined) metrics.runtimeMinutes = extra.runtimeMinutes;
+        if (extra?.costPerSuccess !== undefined) metrics.costPerSuccess = extra.costPerSuccess;
+        if (extra?.totalCost !== undefined) metrics.totalCost = extra.totalCost;
+        return { model, harness, score, cost: extra?.cost, metrics, trials: 54 };
+      }
+      return { model, score, metrics, params: params.get(model), trials: 1800 };
     });
     return checked(rows, 7);
   },

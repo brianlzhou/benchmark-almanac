@@ -16,11 +16,17 @@ const board: Leaderboard = {
     deadair: { name: 'Dead-air rate', unit: '%', better: 'lower' }, toolsilence: { name: 'Tool silence rate', unit: '%', better: 'lower' },
     refusal: { name: 'Refusal rate', unit: '%', better: 'lower' }, toolarg: { name: 'Tool argument error rate', unit: '%', better: 'lower' },
     placeholder: { name: 'Placeholder rate', unit: '%', better: 'lower' }, ttft: { name: 'Time to first token', unit: 'ms', better: 'lower' },
-    cost: { name: 'Cost per call', unit: 'usd', better: 'lower' }, consistency: { name: 'Consistency', unit: '%', better: 'higher' },
+    cost: { name: 'Cost per million tokens', unit: 'usd-per-mtok', better: 'lower' }, consistency: { name: 'Consistency', unit: '%', better: 'higher' },
     realcall: { name: 'Real-call success rate', unit: '%', better: 'higher' }, leak: { name: 'Information leak rate', unit: '%', better: 'lower' },
     'realcall:scheduling': { name: 'Scheduling success rate', unit: '%', better: 'higher' }, 'realcall:orders': { name: 'Orders success rate', unit: '%', better: 'higher' },
     'realcall:intake': { name: 'Intake success rate', unit: '%', better: 'higher' }, 'realcall:payments': { name: 'Payments success rate', unit: '%', better: 'higher' },
     'realcall:frontdesk': { name: 'Front-desk success rate', unit: '%', better: 'higher' },
+  },
+  chart: {
+    title: 'Task completion vs time to first token',
+    x: { key: 'ttft', label: 'TTFT p50', unit: 'ms', better: 'lower' },
+    y: { key: 'score', label: 'Task done', unit: '%', better: 'higher' },
+    note: 'Task completion against median time to first token across voice agent calls.',
   },
   async fetch() {
     const data = await fetchJson<{ boards: { id: string; rows: Entry[] }[] }>(feed);

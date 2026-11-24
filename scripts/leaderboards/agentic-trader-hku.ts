@@ -14,8 +14,9 @@ const board: Leaderboard = {
   },
   async fetch() {
     const data = await fetchJson<{ leaderboard_rows: Record<string, unknown>[] }>(feed);
-    if (data.leaderboard_rows?.length < 11) throw new Error('Missing trader standings');
-    return data.leaderboard_rows.map(row => {
+    const scored = (data.leaderboard_rows ?? []).filter(row => typeof row.annualized_return_pct === 'number' && Number.isFinite(row.annualized_return_pct));
+    if (scored.length < 10) throw new Error('Missing trader standings');
+    return scored.map(row => {
       const model = row.agent_name;
       if (typeof model !== 'string' || !model) throw new Error('Missing agent name');
       const metrics: Record<string, number> = {};

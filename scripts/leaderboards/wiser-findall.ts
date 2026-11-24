@@ -10,7 +10,13 @@ const board: Leaderboard = {
   benchmark: 'wiser-findall',
   url: 'https://parallel.ai/products/findall',
   feed: FEED,
-  stats: { cpm: { name: 'Cost per million results', unit: 'usd', better: 'lower' } },
+  stats: { cpm: { name: 'Cost per thousand requests', unit: 'usd', better: 'lower' } },
+  chart: {
+    title: 'Recall vs cost',
+    x: { key: 'cpm', label: 'Cost per 1,000 requests (CPM)', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Recall', unit: '%', better: 'higher' },
+    note: 'Recall against cost per 1,000 requests on a log scale.',
+  },
   terms: 'Parallel publishes this comparison and its WISER-FindAll methodology on the public product page. https://parallel.ai/products/findall',
   async fetch() {
     const text = await fetchText(FEED);
@@ -20,7 +26,8 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = [];
     for (const m of table.matchAll(rowRe)) {
       const [, series, model, cpm, recall] = m;
-      rows.push({ model, harness: series, score: Number(recall), metrics: { cpm: Number(cpm) } });
+      const cpmNum = Number(cpm);
+      rows.push({ model, harness: series, score: Number(recall), cost: cpmNum / 1000, metrics: { cpm: cpmNum } });
     }
     if (rows.length !== 6) throw new Error(`WISER-FindAll: expected 6 rows, found ${rows.length}`);
     return rows;
