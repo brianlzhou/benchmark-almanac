@@ -8,6 +8,7 @@ const board: Leaderboard = {
     Rec: 'Recognition', Ocr: 'OCR', Know: 'Knowledge', Gen: 'Language generation',
     Spat: 'Spatial awareness', Math: 'Math',
   },
+  stats: { 'Overall (official)': { name: 'Overall (official)', unit: '%', better: 'higher' } },
   verified: 'marked verified by OpenCompass',
   host: 'OpenCompass', url: 'https://rank.opencompass.org.cn/leaderboard-multimodal',
   feed: OPENVLM_FEED, terms: OPENVLM_TERMS,

@@ -49,10 +49,10 @@ export async function bigcodebenchRows(hard: boolean): Promise<LeaderboardRow[]>
 
       score: Number(((complete + instruct) / 2).toFixed(1)),
       params: typeof e.size === 'number' && e.size > 0 ? e.size : undefined,
+      link: e.link && /^https?:\/\/\S+$/.test(e.link.trim()) ? e.link.trim() : undefined,
       metrics: { complete, instruct, ...(typeof subset?.[name]?.['pass@1']?.complete === 'number' ? { hardComplete: subset[name]['pass@1']!.complete! } : {}),
         ...(typeof subset?.[name]?.['pass@1']?.instruct === 'number' ? { hardInstruct: subset[name]['pass@1']!.instruct! } : {}),
-        ...(typeof e.moe === 'boolean' ? { mixtureOfExperts: Number(e.moe) } : {}),
-        ...(typeof e.act_param === 'number' && e.act_param > 0 ? { activeParams: e.act_param } : {}) },
+        ...(e.moe === true && typeof e.act_param === 'number' && e.act_param > 0 ? { activeParams: e.act_param } : {}) },
       date: /^\d{4}-\d\d-\d\d$/.test(e.date ?? '') ? e.date : undefined,
     });
   }

@@ -28,6 +28,10 @@ function performance(ratings: number[], solved: number) {
 const feed = "https://dubesor.de/chess/chess-data.json";
 const board: Leaderboard = {
   benchmark: 'dubesor-lichess-puzzle-rating',
+  parts: Object.fromEntries(Array.from({ length: 10 }, (_, i) => [
+    `band${i}`,
+    { name: i === 0 ? 'Decile 1 (easiest)' : i === 9 ? 'Decile 10 (hardest)' : `Decile ${i + 1}`, group: 'Puzzle rating', unit: '%' },
+  ])),
   url: "https://dubesor.de/chess/chess-leaderboard#puzzle-card",
   feed,
   terms: "The site allows this data path and restricts query URLs in robots.txt. The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/",
@@ -60,7 +64,6 @@ const board: Leaderboard = {
       bands.set(id,band);
       (ranges[band] ??= []).push(r);
     });
-    board.parts = Object.fromEntries(ranges.map((v,i) => ['band'+i,{ name: v[0] + ' to ' + v.at(-1), group: 'Puzzle rating', unit: '%' }]));
     const rows: LeaderboardRow[] = [];
     for (const [model, a] of byModel) {
       if (a.length < 100) continue;
