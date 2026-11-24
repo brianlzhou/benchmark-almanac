@@ -12,9 +12,9 @@ function interval(cell: string) {
   return match.slice(1).map(v => v === undefined ? undefined : Number(v.replace(',', '.')));
 }
 const board: Leaderboard = {
-  benchmark: 'norregel', url: repo + '/blob/HEAD/docs/RESULTS_V2.md', feed,
+  benchmark: 'norregel', url: repo + '/blob/HEAD/docs/RESULTS_V2.md', feed, costPer: 'run',
   terms: 'The results document uses CC BY 4.0. ' + repo + '/blob/HEAD/LICENSE-docs',
-  stats: { answers: { name: 'Answers', unit: 'count' }, series: { name: 'Series', unit: 'count' }, outdated: { name: 'Outdated answers', unit: '%', better: 'lower' }, error: { name: 'Incorrect answers', unit: '%', better: 'lower' }, uninterpreted: { name: 'Uninterpreted answers', unit: '%', better: 'lower' }, tokensIn: { name: 'Input tokens', unit: 'tokens' }, tokensOut: { name: 'Output tokens', unit: 'tokens' }, costUsd: { name: 'Cost', unit: 'usd', better: 'lower' } },
+  stats: { outdated: { name: 'Outdated answers', unit: '%', better: 'lower' }, error: { name: 'Incorrect answers', unit: '%', better: 'lower' }, uninterpreted: { name: 'Uninterpreted answers', unit: '%', better: 'lower' }, tokensIn: { name: 'Total input tokens', unit: 'tokens' }, tokensOut: { name: 'Total output tokens', unit: 'tokens' } },
   aliases: { 'claude-haiku-4-5-20251001': 'claude-haiku-4-5', 'claude-opus-4-5-20251101': 'claude-opus-4-5',
     'gemma-4-26b-a4b-it': 'gemma-4-26b-a4b' },
   async fetch() {
@@ -37,9 +37,9 @@ const board: Leaderboard = {
     if (!table?.includes('| Modell | n | Serier | korrekt % [95 %] | utdatert % [95 %] | feil % [95 %] | utolket % [95 %] |')) throw Error('Missing v2 all-answer results');
     const rows: LeaderboardRow[] = [];
     for (const line of table.split('\n').filter(l => l.startsWith('| `'))) {
-      const [name, n, series, correct, ...others] = line.split('|').slice(1,-1).map(s => s.trim());
+      const [name, n, _series, correct, ...others] = line.split('|').slice(1,-1).map(s => s.trim());
       const [score, low, high, exact] = interval(correct);
-      const metrics: Record<string,number> = { answers: Number(n), series: Number(series) };
+      const metrics: Record<string,number> = {};
       if (exact !== undefined) metrics.correctExactUpper = exact;
       if (others.length !== 3) throw Error('Missing error classes');
       for (const [i,key] of ['outdated','error','uninterpreted'].entries()) {
@@ -51,8 +51,15 @@ const board: Leaderboard = {
       }
       const model = name.replaceAll('`', '');
       const modelUsage = usage.get(model);
-      if (modelUsage) Object.assign(metrics, modelUsage);
-      rows.push({ model, setting: 'v2', score: score!, low, high, metrics });
+      let cost: number | undefined;
+      let tokens: number | undefined;
+      if (modelUsage) {
+        metrics.tokensIn = modelUsage.tokensIn;
+        metrics.tokensOut = modelUsage.tokensOut;
+        if (modelUsage.costUsd > 0) cost = modelUsage.costUsd;
+        if (modelUsage.tokensOut > 0 && Number(n) > 0) tokens = Math.round(modelUsage.tokensOut / Number(n));
+      }
+      rows.push({ model, setting: 'v2', score: score!, low, high, cost, tokens, metrics });
     }
     return checked(rows, 8);
   },

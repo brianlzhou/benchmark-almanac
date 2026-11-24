@@ -19,9 +19,7 @@ const board: Leaderboard = {
   stats: {
     reward: { name: 'Mean reward', unit: 'score', better: 'higher' }, reliable: { name: 'Tasks passed in every run', unit: 'count' },
     spreadMin: { name: 'Minimum run pass rate', unit: '%' }, spreadMax: { name: 'Maximum run pass rate', unit: '%' },
-    calls: { name: 'Median tool calls', unit: 'count' }, minutes: { name: 'Median run time', unit: 'minutes' },
-    medianCost: { name: 'Median model cost per run', unit: 'usd' },
-    scored: { name: 'Scored runs', unit: 'count' }, missing: { name: 'Missing runs', unit: 'count' },
+    calls: { name: 'Median tool calls', unit: 'count' }, minutes: { name: 'Median run time', unit: 'minutes', better: 'lower' },
   },
   async fetch() {
     const all = tables(await fetchText(url)).map(t => t.map(r => r.map(c => c.text)));
@@ -40,17 +38,17 @@ const board: Leaderboard = {
       if (!v) throw new Error('Missing workplace value: ' + label);
       return v;
     }
-    const rows: LeaderboardRow[] = main.slice(1).map(([model, harness, setting, pass, reliable, spread, reward, counts], index) => {
+    const rows: LeaderboardRow[] = main.slice(1).map(([model, harness, setting, pass, reliable, spread, reward], index) => {
       const column = index + 1;
       const [min, max] = spread.split(' to ').map(Number);
-      const [scored, missing] = counts.split(' / ').map(Number);
       const metrics: Record<string,number> = { reward: Number(reward), reliable: parseInt(reliable), spreadMin: 100*min, spreadMax: 100*max,
-        scored, missing, calls: Number(cell(resources, 'Tool calls', column)), minutes: Number(cell(resources, 'Minutes', column)) };
-      const cost = cell(resources, 'Model cost', column);
-      if (cost !== 'not metered') metrics.medianCost = Number(cost.replace(/^\$/, ''));
+        calls: Number(cell(resources, 'Tool calls', column)), minutes: Number(cell(resources, 'Minutes', column)) };
+      const costCell = cell(resources, 'Model cost', column);
+      const cost = costCell !== 'not metered' ? Number(costCell.replace(/^\$/, '')) : undefined;
+      if (cost !== undefined && !Number.isFinite(cost)) throw new Error('Invalid workplace cost');
       tasks.forEach(task => { metrics[task] = ratio(cell(breakdown, task, column)); });
       if (!Object.values(metrics).every(Number.isFinite)) throw new Error('Invalid workplace metrics');
-      return { model, harness, setting, score: 100 * Number(pass), trials: 3, link: cell(links, model, 2), metrics };
+      return { model, harness, setting, score: 100 * Number(pass), trials: 3, cost, link: cell(links, model, 2), metrics };
     });
     const second = table('Grok 4.7|Grok Build|terminus-2');
     rows.push({ model: second[0][0], harness: second[0][2], score: ratio(cell(second, 'Runs passed', 2)), trials: 3,

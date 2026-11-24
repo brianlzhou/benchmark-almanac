@@ -11,7 +11,7 @@ const board: Leaderboard = {
   url: "https://build-arena.github.io/ConstructionChallenge/",
   feed: FEED,
   terms: "The public Season 1 results page gives no separate score license. Its robots URL returns HTML.",
-  stats: { blockPoints: { name: 'Block points', unit: 'count' }, cost: { name: 'Cost deduction', unit: 'score', better: 'lower' }, errorDeduction: { name: 'Error deduction', unit: 'score', better: 'lower' }, failed: { name: 'Failed operations', unit: 'count' }, integrity: { name: 'Integrity', unit: 'score', better: 'higher' }, mechanicalDeduction: { name: 'Mechanical deduction', unit: 'score', better: 'lower' }, operations: { name: 'Operations', unit: 'count' }, orbit: { name: 'Orbit score', unit: 'score', better: 'higher' }, performance: { name: 'Performance', unit: 'score', better: 'higher' }, rawFinalScore: { name: 'Raw final score', unit: 'score', better: 'higher' }, speed: { name: 'Speed', unit: 'score', better: 'higher' }, tokenDeduction: { name: 'Token deduction', unit: 'score', better: 'lower' }, tokens: { name: 'Tokens', unit: 'tokens' } },
+  stats: { blockPoints: { name: 'Block points', unit: 'count' }, costDeduction: { name: 'Cost deduction', unit: 'score', better: 'lower' }, errorDeduction: { name: 'Error deduction', unit: 'score', better: 'lower' }, failed: { name: 'Failed operations', unit: 'count' }, integrity: { name: 'Integrity', unit: 'score', better: 'higher' }, mechanicalDeduction: { name: 'Mechanical deduction', unit: 'score', better: 'lower' }, operations: { name: 'Operations', unit: 'count' }, orbit: { name: 'Orbit score', unit: 'score', better: 'higher' }, performance: { name: 'Performance', unit: 'score', better: 'higher' }, rawFinalScore: { name: 'Raw final score', unit: 'score', better: 'higher' }, speed: { name: 'Speed', unit: 'score', better: 'higher' }, tokenDeduction: { name: 'Token deduction', unit: 'score', better: 'lower' }, submissionTokens: { name: 'Submission tokens', unit: 'tokens' } },
   async fetch() {
     const page = await fetchText(FEED);
     const script = page.match(/<script[^>]+src="([^"]*\/assets\/index-[^"]+\.js)"/)?.[1];
@@ -24,7 +24,8 @@ const board: Leaderboard = {
       for (const key of ['rawFinalScore', 'performance', 'cost', 'orbit', 'speed', 'integrity', 'mechanicalDeduction', 'tokenDeduction', 'errorDeduction', 'blockPoints', 'tokens', 'failed', 'operations']) {
         const value = fields[key];
         if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error('Missing BuildArena field ' + key);
-        metrics[key] = value;
+        const metricKey = key === 'cost' ? 'costDeduction' : key === 'tokens' ? 'submissionTokens' : key;
+        metrics[metricKey] = value;
       }
       rows.push({ model: String(fields.title), submitter: String(fields.team), setting: String(fields.mode), link: String(fields.url), score: Number(fields.finalScore), metrics });
     }
