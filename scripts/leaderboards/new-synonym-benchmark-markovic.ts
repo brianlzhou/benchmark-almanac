@@ -21,7 +21,7 @@ export async function swedishTask(url: string, id: string, minimum: number) {
     const quality = max > min ? (raw[i] - min) / (max - min) : 1;
     const speed = slowest > fastest ? (slowest - latency[i]) / (slowest - fastest) : 1;
     return { model: r.model, score: 100 * (weight * quality + (1 - weight) * speed), metrics: {
-      rawTaskScore: raw[i], accuracy: r.accuracy * 100, latency: latency[i], examples: r.examples, correct: r.correct,
+      rawTaskScore: raw[i], accuracy: r.accuracy * 100, latency: latency[i], correct: r.correct,
       validPredictions: r.valid_predictions, validRate: r.valid_rate * 100,
       ...(typeof r.secondary_score === 'number' ? { secondaryScore: r.secondary_score } : {}),
       ...(typeof r.error_metric === 'number' ? { errorMetric: r.error_metric } : {}),
@@ -38,10 +38,15 @@ const board: Leaderboard = {
     rawTaskScore: { name: 'Raw task score', unit: 'score', better: 'higher', note: 'Raw task quality score from 0 to 1 before latency adjustment.' },
     accuracy: { name: 'Accuracy', unit: '%', better: 'higher' },
     latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
-    examples: { name: 'Examples', unit: 'count' },
-    correct: { name: 'Correct predictions', unit: 'count' },
-    validPredictions: { name: 'Valid predictions', unit: 'count' },
+    correct: { name: 'Correct predictions', unit: 'count', better: 'higher' },
+    validPredictions: { name: 'Valid predictions', unit: 'count', better: 'higher' },
     validRate: { name: 'Valid prediction rate', unit: '%', better: 'higher' },
+  },
+  chart: {
+    title: 'Accuracy vs. average latency',
+    x: { key: 'latency', label: 'Average latency', unit: 's', better: 'lower', log: true },
+    y: { key: 'accuracy', label: 'Accuracy', unit: '%', better: 'higher' },
+    note: 'Accuracy against average latency on a log scale, matching the New Synonym Benchmark scatter plot on the Swedish Benchmarks V1.1 dashboard.',
   },
   async fetch() {
     return swedishTask(feed, 'new_synonym_benchmark', 23);

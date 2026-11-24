@@ -13,6 +13,12 @@ const board: Leaderboard = {
 }, url: "https://www.vals.ai/benchmarks/claimbench", feed: FEED,
   terms: "Public official results, subject to the source repository license and host terms.",
   stats: { latency: { name: 'Latency per claim', unit: 'seconds', better: 'lower' }, Overall: { name: 'Overall category accuracy', unit: '%', better: 'higher' } },
+  chart: {
+    title: 'Accuracy vs. cost per claim',
+    x: { key: 'cost', label: 'Cost per claim', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' },
+    note: 'Accuracy against cost per claim on a log scale, matching the scatter chart on Vals ClaimBench.',
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const all = tables(source.replace(/<!--[\s\S]*?-->/g, "")).map(t => t.map(r => r.map(c => c.text)));

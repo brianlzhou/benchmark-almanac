@@ -53,7 +53,13 @@ const board: Leaderboard = {
   stats: {
     medianTurns: { name: 'Median turns', unit: 'count', better: 'lower' },
     medianHours: { name: 'Median hours', unit: 'hours', better: 'lower' },
-    timeLimitHit: { name: 'Time-limit hits', unit: 'count' },
+    timeLimitHit: { name: 'Time-limit hits', unit: 'count', better: 'lower' },
+  },
+  chart: {
+    title: 'Mean reward vs. cost',
+    x: { key: 'cost', label: 'API cost per machine', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Mean reward', unit: 'score', better: 'higher' },
+    note: 'Mean reward against API cost per machine on a log scale, matching the reward against cost chart on SolidWorks Bench.',
   },
   async fetch() {
     const [md, html] = await Promise.all([fetchText(MD), fetchText(PAGE)]);

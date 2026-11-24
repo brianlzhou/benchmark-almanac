@@ -72,6 +72,7 @@ const ROWS: LeaderboardRow[] = [
 ];
 const board: Leaderboard = {
   benchmark: "xdev-bench-hard-moonshot",
+  static: 'paper',
   url: "https://www.kimi.com/blog/kimi-k3-1-pro",
   feed: FEED,
   terms: "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",

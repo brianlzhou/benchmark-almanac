@@ -42,6 +42,12 @@ const board: Leaderboard = {
   feed: `${PAGE} (chart data in the server-rendered Astro island props, tasks.overall)`,
   terms: VALS_TERMS,
   stats: { latency: { name: 'Mean latency per document', unit: 'seconds', better: 'lower' } },
+  chart: {
+    title: 'Balanced accuracy vs. cost',
+    x: { key: 'cost', label: 'Cost per document', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Balanced accuracy', unit: '%', better: 'higher' },
+    note: 'Balanced accuracy against cost per document on a log scale, matching the scatter chart on the Vals AI Detection Benchmark page.',
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const html = await fetchText(PAGE);
     const raw = [...html.matchAll(/props="(\{&quot;benchmarkView&quot;[^"]*)"/g)][0]?.[1];
@@ -56,10 +62,19 @@ const board: Leaderboard = {
       const metrics: Record<string, number> = {};
       if (fin(run.stderr) && run.stderr >= 0) metrics.stderr = run.stderr;
       if (fin(run.latency) && run.latency > 0) metrics.latency = run.latency;
-      if (fin(run.stderr) && run.stderr > 0) Object.assign(metrics, { ciLow: run.accuracy - 1.96 * run.stderr, ciHigh: run.accuracy + 1.96 * run.stderr });
+      const hasCi = fin(run.stderr) && run.stderr > 0;
+      const low = hasCi ? run.accuracy - 1.96 * run.stderr! : undefined;
+      const high = hasCi ? run.accuracy + 1.96 * run.stderr! : undefined;
+      if (hasCi) Object.assign(metrics, { ciLow: low!, ciHigh: high! });
       if (fin(human[id]?.accuracy)) metrics.human = human[id].accuracy!;
       if (fin(ai[id]?.accuracy)) metrics.ai = ai[id].accuracy!;
-      rows.push({ model: id, score: run.accuracy, cost: run.cost_per_test, ...(Object.keys(metrics).length ? { metrics } : {}) });
+      rows.push({
+        model: id,
+        score: run.accuracy,
+        ...(hasCi ? { low, high } : {}),
+        cost: run.cost_per_test,
+        ...(Object.keys(metrics).length ? { metrics } : {}),
+      });
     }
     if (!rows.length) throw new Error('no AI detection rows');
     return rows;

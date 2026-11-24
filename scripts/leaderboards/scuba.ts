@@ -11,6 +11,12 @@ const board: Leaderboard = {
   feed,
   terms: "Salesforce lists nine agent configurations for each of two settings. The site repository uses Apache 2.0. https://github.com/sfrcua/SCUBA/blob/main/LICENSE GitHub Pages returns 404 for robots.txt.",
   stats: { milestoneScore: { name: 'Milestone score', unit: 'score', better: 'higher' }, timeMinutes: { name: 'Time per task', unit: 'minutes', better: 'lower' }, steps: { name: 'Steps per task', unit: 'count' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
+  chart: {
+    title: 'Success rate vs. cost',
+    x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Success rate', unit: '%', better: 'higher' },
+    note: 'Task success rate against cost per task across zero-shot and demonstration settings, matching the Costs vs. Success Rate Pareto chart on SCUBA.',
+  },
   reference: ['browser', 'computer'], harnesses: 'system', aliases: { 'Claude-4-sonnet': 'claude-sonnet-4' },
   async fetch() {
     const source = await fetchText(feed);
