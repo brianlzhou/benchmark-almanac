@@ -897,6 +897,9 @@
       "categoryScores.doc-report-gen": "ignore",
       "categoryScores.download-github-artifacts": "ignore"
     },
+    "dude": {
+      "Lower case": "ignore"
+    },
     "duetbench": {
       "raw.runDetails": "ignore",
       "raw.submissionId": "ignore",
@@ -939,6 +942,9 @@
     "e-commerce-bench": {
       "BadSpend% ↓": "wired"
     },
+    "e2e-swe": {
+      "Kimi K3 (Kimi Team, 2026)": "ignore"
+    },
     "earth-bench-2": {
       "Release date": "ignore",
       "Developer": "ignore"
@@ -957,6 +963,9 @@
     },
     "eduart": {
       "N Evaluated": "ignore"
+    },
+    "educlaw-bench": {
+      "LearnLM (LearnLM Team et al. 2025)": "ignore"
     },
     "ego2flow": {
       "Framework components": "ignore"
@@ -1031,7 +1040,8 @@
     },
     "evf-bench": {
       "StepVideo [55]": "ignore",
-      "Kling 2.1 Std [49]": "ignore"
+      "Kling 2.1 Std [49]": "ignore",
+      "Open-source": "wired"
     },
     "evoarena": {
       "Step Δ": "ignore",
@@ -1053,6 +1063,9 @@
       "Step Δ": "ignore",
       "Step +EvoMem": "wired",
       "Step Base": "wired"
+    },
+    "ewmbench": {
+      "SemS": "ignore"
     },
     "exams-v": {
       "Multimodal samples": "ignore",
@@ -1500,6 +1513,10 @@
     "indiclid-benchmark": {
       "model.releaseDate": "ignore"
     },
+    "industrybench": {
+      "Open-source Dense": "wired",
+      "Open-source MoE": "wired"
+    },
     "ineqmath": {
       "Official Model List": "ignore"
     },
@@ -1528,6 +1545,9 @@
     },
     "insurebench-broader-comparison": {
       "official_source": "ignore"
+    },
+    "internbootcamp": {
+      "SOTA Open Source LLMs": "wired"
     },
     "into-the-unknown": {
       "Mean Somers' D [95% CI]": "ignore"
@@ -1616,6 +1636,12 @@
       "Avg. Problem Tokens": "ignore",
       "Avg. Reference Solution Tokens": "ignore",
       "Avg. Student Input Tokens": "ignore"
+    },
+    "kairosqa": {
+      "Member of sports team": "ignore",
+      "cooldown steps": "ignore",
+      "warmup steps": "ignore",
+      "number of tokens": "ignore"
     },
     "kernelbench-com": {
       "trace_url": "ignore",
@@ -2225,8 +2251,9 @@
       "Doubao Seed Lite": "ignore"
     },
     "omniphys": {
-      "Open-source MLLMs": "ignore",
-      "Doubao-Seed-1.6": "ignore"
+      "Open-source MLLMs": "wired",
+      "Doubao-Seed-1.6": "ignore",
+      "Doubao-seed-1.6": "ignore"
     },
     "omniscore-bench": {
       "95% CI": "ignore",
@@ -2360,6 +2387,17 @@
       "Doubao Seed 2.0 Pro [15]": "ignore",
       "Doubao Seed 2.0 Pro ByteDance (2026)": "ignore"
     },
+    "phyworldbench": {
+      "Gen-3 (Runway Team, 2024)": "ignore",
+      "Luma (Luma AI Team, 2024)": "ignore",
+      "Pika 2.0 (Pika Labs Team, 2024)": "ignore",
+      "Wanx-2.1 (WanTeam et al., 2025)": "ignore",
+      "Duration (s)": "ignore",
+      "Step-video-T2V": "ignore",
+      "Step-Video-T2V": "ignore",
+      "Step-video-T2V (Ma et al., 2025)": "ignore",
+      "Step-Video-T2V (Ma et al., 2025)": "ignore"
+    },
     "phyx": {
       "info.date": "ignore"
     },
@@ -2440,7 +2478,8 @@
       "# Steps": "ignore",
       "% ≥\\geq 10 steps": "ignore",
       "% ≥\\geq 15 steps": "ignore",
-      "% ≥\\geq 5 steps": "ignore"
+      "% ≥\\geq 5 steps": "ignore",
+      "# Samples": "ignore"
     },
     "programdistill": {
       "Sub-agent": "ignore"
@@ -2727,6 +2766,9 @@
       "TimeSuite": "ignore",
       "Human reference on the validated audit subset": "ignore"
     },
+    "rvms-bench": {
+      "Open Source Models": "wired"
+    },
     "s-ember": {
       "Location Trace": "ignore",
       "Time / duration": "ignore",
@@ -2849,6 +2891,9 @@
       "Seed 12": "ignore",
       "Seed 13": "ignore",
       "Seed 14": "ignore"
+    },
+    "simplevqa": {
+      "Open-source Multi-modal Large Language Models": "wired"
     },
     "simready-text-to-cad": {
       "paired 95% CI": "ignore"
@@ -3109,6 +3154,15 @@
     "thrive-holdings-helpdesk-ticket-resolution-benchmark": {
       "Tokens per return": "ignore"
     },
+    "toksuite": {
+      "Gradient accumulation steps": "ignore",
+      "Total steps": "ignore",
+      "TokenMonster": "ignore",
+      "Total tokens (B)": "ignore",
+      "Llama-3.2-1B (model seed=222)": "ignore",
+      "Llama-3.2-1B (model seed=777)": "ignore",
+      "Llama-3.2-1B (model seed=888)": "ignore"
+    },
     "tomato": {
       "Duration (Seconds, avg/max)": "ignore"
     },
@@ -3230,6 +3284,12 @@
     "vatex-zh": {
       "Model / Team": "ignore"
     },
+    "vcb-bench": {
+      "Step-Audio": "ignore",
+      "Step-Audio 2 mini": "ignore",
+      "Step-Audio 2 mini (Wu et al., 2025)": "ignore",
+      "Step-Audio 2 mini-Base": "ignore"
+    },
     "vcg-diverse": {
       "Time": "ignore",
       "CI": "ignore"
@@ -3324,6 +3384,11 @@
     "vqav2": {
       "submission__id": "ignore"
     },
+    "vsas-bench": {
+      "Open-Source Streaming VLMs": "wired",
+      "Open-Source Video VLMs": "wired",
+      "MTQA median. duration between annotations (sec.)": "ignore"
+    },
     "vsi-bench-debiased": {
       "Per-type, pilot budgets (seeds 1, 42)": "ignore",
       "High-variance objects (harder to exploit)": "ignore",
@@ -3414,7 +3479,8 @@
       "Tasks # (SWE-bench Verified)": "ignore",
       "Agent": "ignore",
       "Max steps": "ignore",
-      "Max turns": "ignore"
+      "Max turns": "ignore",
+      "SWE-bench Verified": "wired"
     },
     "yocausal": {
       "Release Date": "ignore"

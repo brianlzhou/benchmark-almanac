@@ -18,13 +18,24 @@ const board: Leaderboard = {
     const details = tables.find(t => t[0]?.[1] === 'Acoustics' && t[0]?.at(-1) === 'Overall');
     if (!summary || !details || details[1].slice(1).some((c,i) =>
       details[0][i+1] + ' ' + c.replace(/[_{}]/g,'') !== labels[i])) throw Error('Missing OmniPhys results columns');
+    const openByModel = new Map<string, boolean>();
+    let isOpen: boolean | undefined;
+    for (const r of details.slice(2)) {
+      if (r.every(c => c === r[0])) {
+        if (/Open-source/i.test(r[0])) isOpen = true;
+        else if (/Proprietary|Closed-source/i.test(r[0])) isOpen = false;
+        continue;
+      }
+      if (isOpen !== undefined && r[0]) openByModel.set(r[0].toLowerCase(), isOpen);
+    }
     const rows: LeaderboardRow[] = [];
     for (const [model, full, mini, drop] of summary.slice(1)) {
       if (model === 'Average') continue;
       const row = details.find(r => r[0].toLowerCase() === model.toLowerCase());
       if (!row || row.length !== labels.length + 1 || !drop.endsWith('%')) throw Error('Missing model scores: ' + model);
       const metrics = Object.fromEntries(labels.map((l,i) => [l.replace(' ',''), numberCell(row[i+1])]));
-      rows.push({ model, score: numberCell(full), metrics: { ...metrics, testMini: numberCell(mini), drop: numberCell(drop.slice(0,-1)) } });
+      const open = openByModel.get(model.toLowerCase());
+      rows.push({ model, score: numberCell(full), ...(open === undefined ? {} : { open }), metrics: { ...metrics, testMini: numberCell(mini), drop: numberCell(drop.slice(0,-1)) } });
     }
     return checked(rows, 5);
   },

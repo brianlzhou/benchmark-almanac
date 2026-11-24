@@ -88727,7 +88727,7 @@
       "feed": "https://rrc.cvc.uab.es/?ch=23&com=evaluation&task=1 + https://arxiv.org/html/2305.08455",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BertQA MPDocVQA Concat",
@@ -98616,7 +98616,7 @@
       "terms": "Paper and license at https://arxiv.org/abs/2611.24116",
       "headline": "The paper reports six separate dimensions. The headline is their plain mean on the published 0 to 100 scale.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Hailuo 02",
@@ -150238,7 +150238,7 @@
       "feed": "https://arxiv.org/html/2605.10267",
       "terms": "The authors publish the results under the terms on the paper record. https://arxiv.org/abs/2605.10267",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [],
       "parts": {
@@ -151444,7 +151444,7 @@
       "feed": "https://arxiv.org/html/2508.08636",
       "terms": "The authors publish this table under the terms linked at https://arxiv.org/abs/2508.08636.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Qwen2.5-32B-Instruct"
@@ -217899,7 +217899,7 @@
       "feed": "https://arxiv.org/html/2608.25398",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -252698,7 +252698,7 @@
       "feed": "https://arxiv.org/html/2412.06559",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "GPT-4o-0806",
@@ -252717,7 +252717,21 @@
         "RLHFlow-PRM-Mistral-8B",
         "Skywork-PRM-1.5B",
         "Skywork-PRM-7B"
-      ]
+      ],
+      "parts": {
+        "gsm8k": {
+          "name": "GSM8K"
+        },
+        "math": {
+          "name": "MATH"
+        },
+        "olympiadBench": {
+          "name": "OlympiadBench"
+        },
+        "omniMath": {
+          "name": "Omni-MATH"
+        }
+      }
     },
     "profbench": {
       "url": "https://huggingface.co/spaces/nvidia/ProfBench",
@@ -276566,7 +276580,8 @@
       "url": "https://arxiv.org/html/2502.13059",
       "feed": "https://arxiv.org/html/2502.13059",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Claude-3.5-Sonnet (snapshot unspecified)",
@@ -276578,7 +276593,16 @@
         "GPT-4o-mini (snapshot unspecified)",
         "Qwen-Max (snapshot unspecified)"
       ],
-      "static": "paper",
+      "parts": {
+        "chinese": {
+          "name": "Chinese",
+          "group": "Language"
+        },
+        "english": {
+          "name": "English",
+          "group": "Language"
+        }
+      },
       "stats": {
         "notAttempted": {
           "name": "Not attempted",
@@ -326879,7 +326903,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt. Results are attributed to the paper authors.",
       "headline": "The paper reports no overall score, so this is the plain mean of its six benchmark scores under the original condition.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "stats": {
