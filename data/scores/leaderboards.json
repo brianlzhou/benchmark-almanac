@@ -182449,28 +182449,23 @@
       "parts": {
         "ffa": {
           "name": "Free-for-all",
-          "unit": "%",
-          "better": "lower"
+          "unit": "%"
         },
         "cornered": {
           "name": "Cornered",
-          "unit": "%",
-          "better": "lower"
+          "unit": "%"
         },
         "hegemon": {
           "name": "Hegemon",
-          "unit": "%",
-          "better": "lower"
+          "unit": "%"
         },
         "laststand": {
           "name": "Last stand",
-          "unit": "%",
-          "better": "lower"
+          "unit": "%"
         },
         "treaty": {
           "name": "Treaty",
-          "unit": "%",
-          "better": "lower"
+          "unit": "%"
         }
       }
     },

@@ -179874,7 +179874,6 @@
     "access": "public",
     "note": "Grok 4.7 recorded the highest listed hub mean reward, 0.7666 on three examples on October 19, 2026. Other runs include Gemini 3.8 Flash and GPT-6 Luna.",
     "unit": "%",
-    "better": "lower",
     "confidence": "verified",
     "evidence": [
       "https://app.primeintellect.ai/dashboard/environments/clouthier-labs/second-strike",

@@ -1,5 +1,6 @@
 // The Midnight Index measures how often a model triggers midnight in a simulated game.
-// The board reports an overall event rate, an interval, and rates for five scenarios.
+// The board reports an overall event rate, an interval, and rates for five scenarios. It says a lower rate is not
+// "better": "the board measures, it does not grade", so neither the record nor the parts name a direction.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
@@ -16,7 +17,7 @@ const board: Leaderboard = {
       const whole = m.cells.overall;
       const metrics: Record<string,number> = {secondsPerMove: whole.secondsPerMove};
       for (const [key, scenario] of Object.entries(data.scenarios)) {
-        board.parts![key] = {name: scenario.title, unit: '%', better: 'lower'};
+        board.parts![key] = {name: scenario.title, unit: '%'};
         const rate = m.cells[key].midnightRate;
         if (!Number.isFinite(rate)) throw new Error('Missing scenario rate');
         metrics[key] = rate * 100;
