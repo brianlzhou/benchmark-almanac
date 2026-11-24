@@ -171563,6 +171563,69 @@
         }
       }
     },
+    "llm-leaderboard-fr": {
+      "url": "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr",
+      "feed": "https://fr-gouv-coordination-ia-llm-leaderboard-fr.hf.space/api/leaderboard/formatted",
+      "terms": "Hugging Face allows crawling. French Government AI Coordination publishes Leaderboard LLM FR results via its public Space API.",
+      "headline": "Mean score across French IFEval, French GPQA, and French Baccalaureate (BAC FR) exams.",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [
+        "AIDC-AI/Marco-LLM-GLO",
+        "AgentPublic/guillaumetell-7b",
+        "EnnoAi/EnnoAi-7B-French-Instruct-202502",
+        "EpistemeAI/ReasoningCore-3B-RE1-V2",
+        "EpistemeAI/ReasoningCore-3B-T1_1",
+        "EpistemeAI/ReasoningCore-Llama-3.2-3B-R01-1.1",
+        "HoangHa/Pensez-Llama3.1-8B",
+        "HoangHa/Pensez-v0.1-e5",
+        "MaziyarPanahi/calme-3.1-baguette-3b",
+        "MaziyarPanahi/calme-3.1-instruct-3b",
+        "MaziyarPanahi/calme-3.1-llamaloi-3b",
+        "MaziyarPanahi/calme-3.1-qwenloi-3b",
+        "MaziyarPanahi/calme-3.2-baguette-3b",
+        "MaziyarPanahi/calme-3.2-instruct-3b",
+        "MaziyarPanahi/calme-3.2-instruct-78b",
+        "MaziyarPanahi/calme-3.2-llamaloi-3b",
+        "MaziyarPanahi/calme-3.2-qwenloi-3b",
+        "MaziyarPanahi/calme-3.3-baguette-3b",
+        "MaziyarPanahi/calme-3.3-instruct-3b",
+        "MaziyarPanahi/calme-3.3-llamaloi-3b",
+        "MaziyarPanahi/calme-3.3-qwenloi-3b",
+        "Qwen/Qwen2.5-14B-Instruct",
+        "Svngoku/French-Aya-Expanse-8B",
+        "arcee-ai/Virtuoso-Lite",
+        "arcee-ai/Virtuoso-Medium-v2",
+        "baconnier/Gaston_dolphin-2.9.1-yi-1.5-9b",
+        "baconnier/Napoleon_24B_V0.0",
+        "baconnier/Napoleon_24B_V0.1",
+        "baconnier/Napoleon_24B_V0.2",
+        "croissantllm/CroissantLLMChat-v0.1",
+        "jpacifico/Chocolatine-2-14B-Instruct-v2.0",
+        "jpacifico/Chocolatine-2-14B-Instruct-v2.0.3",
+        "meta-llama/Llama-3.2-1B-Instruct",
+        "meta-llama/Llama-3.2-3B-Instruct",
+        "microsoft/Phi-3.5-mini-instruct",
+        "mistralai/Mistral-7B-Instruct-v0.3",
+        "mistralai/Mistral-Large-Instruct-2411",
+        "mistralai/Mistral-Small-24B-Instruct-2501",
+        "mistralai/Mixtral-8x22B-Instruct-v0.1",
+        "occiglot/occiglot-7b-eu5-instruct",
+        "speakleash/Bielik-11B-v2.3-Instruct",
+        "utter-project/EuroLLM-9B-Instruct"
+      ],
+      "parts": {
+        "ifevalFr": {
+          "name": "IFEval FR"
+        },
+        "gpqaFr": {
+          "name": "GPQA FR"
+        },
+        "bacFr": {
+          "name": "BAC FR"
+        }
+      }
+    },
     "llm-meta-analysis": {
       "url": "https://67ailab.com/posts/spark-eval-07-l4-trial-extraction/",
       "feed": "https://67ailab.com/posts/spark-eval-07-l4-trial-extraction/",
@@ -209892,6 +209955,69 @@
         }
       }
     },
+    "newtonbench": {
+      "url": "https://arxiv.org/abs/2510.07172",
+      "feed": "https://arxiv.org/html/2510.07172",
+      "terms": "Results are read from the public arXiv HTML paper (arXiv:2510.07172, Table 2).",
+      "headline": "Average symbolic accuracy across 324 scientific law discovery tasks spanning 12 physics domains, three system complexities, and three difficulty levels (mean of four runs).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 20,
+      "unmatched": [
+        "Qwen3-235B"
+      ],
+      "parts": {
+        "vanillaEasy": {
+          "name": "Easy",
+          "group": "Vanilla equation"
+        },
+        "vanillaMedium": {
+          "name": "Medium",
+          "group": "Vanilla equation"
+        },
+        "vanillaHard": {
+          "name": "Hard",
+          "group": "Vanilla equation"
+        },
+        "simpleEasy": {
+          "name": "Easy",
+          "group": "Simple system"
+        },
+        "simpleMedium": {
+          "name": "Medium",
+          "group": "Simple system"
+        },
+        "simpleHard": {
+          "name": "Hard",
+          "group": "Simple system"
+        },
+        "complexEasy": {
+          "name": "Easy",
+          "group": "Complex system"
+        },
+        "complexMedium": {
+          "name": "Medium",
+          "group": "Complex system"
+        },
+        "complexHard": {
+          "name": "Hard",
+          "group": "Complex system"
+        }
+      },
+      "stats": {
+        "rmsle": {
+          "name": "RMSLE",
+          "unit": "score",
+          "better": "lower",
+          "note": "Root mean squared logarithmic error of predicted laws."
+        },
+        "totalTokens": {
+          "name": "Total tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
+    },
     "next-qa": {
       "url": "https://github.com/doc-doc/NExT-QA",
       "feed": "https://raw.githubusercontent.com/doc-doc/NExT-QA/main/README.md",
@@ -222587,6 +222713,187 @@
         },
         "Israeli Trivia": {
           "name": "Israeli Trivia"
+        }
+      }
+    },
+    "open-ita-llm-leaderboard": {
+      "url": "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard",
+      "feed": "https://mii-llm-open-ita-llm-leaderboard.hf.space/config",
+      "terms": "Hugging Face allows crawling. The MII-LLM community publishes the Open Ita LLM Leaderboard publicly in its Space.",
+      "headline": "Average score across Italian MMLU, ARC, and HellaSwag benchmarks.",
+      "retrieved": "2026-11-24",
+      "rows": 43,
+      "unmatched": [
+        "AIDC-AI/Marco-LLM-ES",
+        "Almawave/Velvet-14B",
+        "Almawave/Velvet-2B",
+        "ClaudioItaly/TopEvolutionWiz",
+        "CohereForAI/aya-23-35B",
+        "CohereForAI/aya-23-8B",
+        "CohereForAI/c4ai-command-r-plus",
+        "DeepMount00/Alireo-400m-instruct-v0.1",
+        "DeepMount00/Lexora-Lite-3B_v2",
+        "DeepMount00/Lexora-Medium-7B",
+        "DeepMount00/Llama-3-8b-Ita",
+        "DeepMount00/Llama-3-COT-ITA",
+        "DeepMount00/Llama-3.1-8b-Ita",
+        "DeepMount00/Mistral-Ita-7b",
+        "DeepMount00/Qwen2-1.5B-Ita",
+        "Detsutut/Igea-1B-v0.0.1",
+        "ExperimentLab/Llama-3-8b-Ita-Boost",
+        "ExperimentLab/Mistral-ita-7b-Boost",
+        "FairMind/Llama-3-8B-4bit-UltraChat-Ita",
+        "FairMind/Phi-3-mini-4k-instruct-bnb-4bit-Ita",
+        "Fastweb/FastwebMIIA-7B",
+        "FinancialSupport/hellfire-2b",
+        "FinancialSupport/saiga-7b",
+        "HuggingFaceTB/SmolLM-360M-Instruct",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "LeonardPuettmann/LlaMaestra-3.2-1B-Instruct-v0.1",
+        "LeonardPuettmann/SmolMaestra-1.7b-Instruct-v0.1",
+        "MoxoffSpA/Azzurro",
+        "MoxoffSpA/Moxoff-Phi3Mini-DPO",
+        "MoxoffSpA/Moxoff-Phi3Mini-KTO",
+        "MoxoffSpA/Moxoff-Phi3Mini-ORPO",
+        "MoxoffSpA/Moxoff-Phi3Mini-PPO",
+        "MoxoffSpA/Volare",
+        "NousResearch/Hermes-3-Llama-3.2-3B",
+        "Qwen/Qwen1.5-110B-Chat",
+        "Qwen/Qwen2-57B-A14B",
+        "Qwen/Qwen2.5-0.5B-Instruct",
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-14B-Instruct",
+        "Qwen/Qwen2.5-32B-Instruct",
+        "Qwen/Qwen2.5-3B-Instruct",
+        "Qwen/Qwen2.5-7B-Instruct",
+        "ReDiX/Artemide-3.5",
+        "ReDiX/Qwen2.5-0.5B-Instruct-ITA",
+        "Sakalti/Saka-14B",
+        "SeacomSrl/SeaPhi3-medium",
+        "SeacomSrl/SeaPhi3-mini",
+        "SeacomSrl/SeaQwen2-0.5B",
+        "SeacomSrl/SeaQwen2-1.5B",
+        "Triangle104/DS-R1-Distill-Q2.5-14B-Harmony_V0.1",
+        "UCLA-AGI/Gemma-2-9B-It-SPPO-Iter1",
+        "UCLA-AGI/Gemma-2-9B-It-SPPO-Iter2",
+        "UCLA-AGI/Gemma-2-9B-It-SPPO-Iter3",
+        "VAGOsolutions/Llama-3-SauerkrautLM-8b-Instruct",
+        "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",
+        "VAGOsolutions/SauerkrautLM-Nemo-12b-Instruct",
+        "VAGOsolutions/SauerkrautLM-gemma-2-2b-it",
+        "VAGOsolutions/SauerkrautLM-gemma-2-9b-it",
+        "WasamiKirua/Samantha-NeonGenesis-2.0-Llama3.1-16bit-TEST",
+        "WasamiKirua/Samantha-NeonGenesis-2.0-Phi4-16bit-TEST",
+        "WasamiKirua/Samantha-Neongenesis-Gemma2b-v1.0-TEST",
+        "WasamiKirua/Samantha2.0-Phi-3.5-mini-ITA",
+        "WasamiKirua/Samantha2.0-Phi3-Medium-ita-16bit",
+        "WasamiKirua/Samantha2.0-Phi4-ita-16bit",
+        "WasamiKirua/Samantha2.0-Qwen2.5-14B-ita-v2-16bit",
+        "WasamiKirua/Samantha2.0-Qwen2.5-7B-ita-v2-16bit",
+        "WasamiKirua/Westworld-1.0-Nemo-Base-2407-ita-16bit",
+        "akjindal53244/Llama-3.1-Storm-8B",
+        "anakin87/Llama-3-8b-ita-slerp",
+        "anakin87/Llama-3-8b-ita-ties",
+        "anakin87/Llama-3-8b-ita-ties-pro",
+        "anakin87/Phi-3.5-mini-ITA",
+        "anakin87/gemma-2-2b-neogenesis-ita",
+        "anakin87/gemma-2-9b-neogenesis-ita",
+        "arcee-ai/Llama-3.1-SuperNova-Lite",
+        "arcee-ai/Virtuoso-Small-v2",
+        "cognitivecomputations/dolphin-2.9.1-mixtral-1x22b",
+        "cognitivecomputations/dolphin-2.9.3-mistral-nemo-12b",
+        "cstr/Spaetzle-v60-7b",
+        "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+        "e-palmisano/Phi3-ITA-mini-4K-instruct",
+        "e-palmisano/Qwen2-0.5B-ITA-Instruct",
+        "e-palmisano/Qwen2-1.5B-ITA-Instruct",
+        "galatolo/cerbero-7B",
+        "ghost-x/ghost-8b-beta-1608",
+        "giux78/llama3-8B-usenet-merged",
+        "giux78/zefiro-7b-beta-ITA-v0.1",
+        "giux78/zefiro-7b-dpo-qlora-ITA-v0.7",
+        "giux78/zefiro-7b-sft-qlora-ITA-v0.5",
+        "google/gemma-2-27b-it",
+        "google/gemma-2-9b-it",
+        "google/gemma-2b-it",
+        "google/gemma-7b-it",
+        "google/recurrentgemma-2b-it",
+        "iGeniusAI/Italia-9B-Instruct-v0.1",
+        "ibm-granite/granite-3.2-2b-instruct",
+        "kevinpro/Hydra-LLaMA3-8B-v0.1",
+        "kevinpro/Hydra-LLaMA3-8B-v0.2",
+        "lightblue/suzume-llama-3-8B-multilingual-orpo-borda-top25",
+        "ludocomito/Minerva-MoE-2x3B",
+        "ludocomito/Minerva-MoE-3x3B",
+        "ludocomito/Minerva_3B_Ties_1.0",
+        "meta-llama/Llama-2-70b-chat-hf",
+        "meta-llama/Llama-3.2-1B-Instruct",
+        "meta-llama/Llama-3.2-3B-Instruct",
+        "meta-llama/Meta-Llama-3-70B-Instruct",
+        "meta-llama/Meta-Llama-3-8B-Instruct",
+        "meta-llama/Meta-Llama-3.1-405B-Instruct",
+        "meta-llama/Meta-Llama-3.1-70B-Instruct",
+        "meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "microsoft/Phi-3.5-mini-instruct",
+        "microsoft/Phi-4-mini-instruct",
+        "mii-11m/maestrale-chat-v0.3-alpha",
+        "mii-community/zefiro-7b-dpo-ITA",
+        "mii-llm/maestrale-chat-v0.2-alpha",
+        "mii-llm/maestrale-chat-v0.3-beta",
+        "mii-llm/maestrale-chat-v0.4-alpha-sft",
+        "mii-llm/maestrale-chat-v0.4-beta",
+        "mii-llm/minerva-chat-v0.1-alpha-sft",
+        "mistralai/Ministral-8B-Instruct-2410",
+        "mistralai/Mistral-7B-Instruct-v0.3",
+        "mistralai/Mistral-Large-Instruct-2407",
+        "mistralai/Mistral-Large-Instruct-2411",
+        "mistralai/Mistral-Nemo-Instruct-2407",
+        "mistralai/Mistral-Small-24B-Instruct-2501",
+        "mistralai/Mistral-Small-Instruct-2409",
+        "mistralai/Mixtral-8x22B-Instruct-v0.1",
+        "mistralai/Mixtral-8x7B-Instruct-v0.1",
+        "mlabonne/NeuralDaredevil-8B-abliterated",
+        "mudler/Asinello-Minerva-3B-v0.1",
+        "mudler/Minerva-3B-Llama3-Instruct-v0.1",
+        "nvidia/Llama-3.1-Minitron-4B-Width-Base",
+        "nvidia/Mistral-NeMo-Minitron-8B-Base",
+        "nvidia/Mistral-NeMo-Minitron-8B-Instruct",
+        "occiglot/occiglot-7b-it-en-instruct",
+        "qingy2019/LLaMa_Lorenzo",
+        "qingy2019/Lorenzo-8B-Merge",
+        "raicrits/Hermes7b_ITA",
+        "sapienzanlp/Minerva-1B-base-v1.0",
+        "sapienzanlp/Minerva-350M-base-v1.0",
+        "sapienzanlp/Minerva-3B-base-v1.0",
+        "sapienzanlp/Minerva-7B-base-v1.0",
+        "sapienzanlp/Minerva-7B-instruct-v1.0",
+        "sapienzanlp/modello-italia-9b",
+        "sapienzanlp/modello-italia-9b-bf16",
+        "seeweb/SeewebLLM-it",
+        "sometimesanotion/Lamarck-14B-v0.7",
+        "sometimesanotion/Lamarck-14B-v0.7-Fusion",
+        "suayptalha/Luminis-phi-4",
+        "swap-uniba/LLaMAntino-2-70b-hf-UltraChat-ITA",
+        "swap-uniba/LLaMAntino-2-7b-hf-ITA",
+        "swap-uniba/LLaMAntino-2-chat-13b-hf-UltraChat-ITA",
+        "swap-uniba/LLaMAntino-3-ANITA-8B-Inst-DPO-ITA",
+        "tiiuae/Falcon3-7B-Instruct-1.58bit",
+        "tiiuae/falcon-11B",
+        "unsloth/Phi-3.5-mini-instruct",
+        "utter-project/EuroLLM-1.7B-Instruct",
+        "utter-project/EuroLLM-9B-Instruct",
+        "vicgalle/Configurable-Hermes-2-Pro-Llama-3-8B"
+      ],
+      "parts": {
+        "mmluIt": {
+          "name": "MMLU IT"
+        },
+        "arcIt": {
+          "name": "ARC IT"
+        },
+        "hellaswagIt": {
+          "name": "HellaSwag IT"
         }
       }
     },
@@ -237359,6 +237666,312 @@
         }
       }
     },
+    "open-pl-llm-leaderboard": {
+      "url": "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard",
+      "feed": "https://speakleash-open-pl-llm-leaderboard.hf.space/config",
+      "terms": "Hugging Face allows crawling. SpeakLeash publishes the Open PL LLM Leaderboard table publicly in its Space.",
+      "headline": "Average score across 26 Polish understanding, question answering, RAG, and professional exam tasks at 0-shot and 5-shot.",
+      "retrieved": "2026-11-24",
+      "rows": 260,
+      "unmatched": [
+        "01-ai/Yi-1.5-34B-Chat",
+        "01-ai/Yi-1.5-6B",
+        "01-ai/Yi-1.5-9B",
+        "Azurro/APT3-1B-Base",
+        "Azurro/APT3-275M-Base",
+        "CYFRAGOVPL/PLLuM-12B-chat",
+        "CYFRAGOVPL/PLLuM-12B-nc-chat",
+        "CohereForAI/aya-23-8B",
+        "CohereLabs/aya-101",
+        "HuggingFaceTB/SmolLM-1.7B-Instruct",
+        "HuggingFaceTB/SmolLM-135M-Instruct",
+        "HuggingFaceTB/SmolLM-360M-Instruct",
+        "HuggingFaceTB/SmolLM2-360M-Instruct",
+        "Jakubrd4/Bielik-11B-v2.3-Instruct-QuIP-2bit-decompressed",
+        "Nondzu/zephyr-speakleash-007-pl-8192-32-16-0.05",
+        "Nondzu/zephyr-speakleash-010-pl-3072-32-16-0.01",
+        "NousResearch/Hermes-2-Pro-Llama-3-8B",
+        "NousResearch/Hermes-2-Theta-Llama-3-8B",
+        "NousResearch/Hermes-3-Llama-3.1-8B",
+        "NousResearch/Nous-Hermes-2-SOLAR-10.7B",
+        "OPI-PG/Qra-13b",
+        "OPI-PG/Qra-1b",
+        "OPI-PG/Qra-7b",
+        "OpenMeditron/Meditron3-8B",
+        "Qwen/Qwen1.5-32B-Chat",
+        "Qwen/Qwen2-57B-A14B-Instruct",
+        "Qwen/Qwen2.5-0.5B-Instruct",
+        "Qwen/Qwen2.5-1.5B-Instruct",
+        "Qwen/Qwen2.5-14B-Instruct",
+        "Qwen/Qwen2.5-32B-Instruct",
+        "Qwen/Qwen2.5-3B-Instruct",
+        "Qwen/Qwen2.5-7B-Instruct",
+        "RWKV/HF_v5-Eagle-7B",
+        "RWKV/v5-Eagle-7B-HF",
+        "ServiceNow-AI/Apriel-5B-Instruct",
+        "THUDM/chatglm3-6b-base",
+        "TeeZee/Bielik-SOLAR-LIKE-10.7B-Instruct-v0.1",
+        "TeeZee/Qra-13B-chat",
+        "TildeAI/TildeOpen-30b",
+        "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        "Voicelab/trurl-2-13b-academic",
+        "Voicelab/trurl-2-7b",
+        "allegro/plt5-large",
+        "allenai/Llama-3.1-Tulu-3-8B-DPO",
+        "allenai/Llama-3.1-Tulu-3-8B-SFT",
+        "allenai/OLMo-1B-hf",
+        "allenai/OLMo-2-1124-13B",
+        "allenai/OLMo-2-1124-13B-Instruct",
+        "allenai/OLMo-2-1124-7B",
+        "allenai/OLMo-2-1124-7B-Instruct",
+        "alpindale/Mistral-7B-v0.2-hf",
+        "baidu/ERNIE-4.5-0.3B-Base-PT",
+        "baidu/ERNIE-4.5-0.3B-PT",
+        "baidu/ERNIE-4.5-21B-A3B-PT",
+        "cjvt/GaMS-9B-Instruct",
+        "cjvt/GaMS3-12B-Instruct",
+        "deepcogito/cogito-v1-preview-qwen-14B",
+        "deepseek-ai/DeepSeek-V2-Lite",
+        "deepseek-ai/DeepSeek-V2-Lite-Chat",
+        "dnhkng/RYS-Phi-3-medium-4k-instruct",
+        "dreamgen/WizardLM-2-7B",
+        "eryk-mazus/polka-1.1b-chat",
+        "facebook/MobileLLM-1B",
+        "gguf-iq/Bielik-11B-v2.3-Instruct.IQ1_M.gguf.IQ",
+        "gguf-iq/Bielik-11B-v2.3-Instruct.IQ2_XXS.gguf.IQ",
+        "gguf-iq/Bielik-11B-v2.3-Instruct.IQ3_XXS.gguf.IQ",
+        "gguf-iq/Bielik-11B-v2.3-Instruct.Q4_K_M.gguf.IQ",
+        "gguf/Bielik-11B-v2.3-Instruct-EF16-OF16.Q8_0.gguf",
+        "gguf/Bielik-11B-v2.3-Instruct.Q4_K_M.gguf",
+        "gguf/Bielik-11B-v2.3-Instruct.Q6_K.gguf",
+        "gguf/Bielik-11B-v2.3-Instruct.Q8_0.gguf",
+        "gguf11bv30/Bielik-11B-v3.0-Instruct.Q4_K_M.gguf",
+        "gguf11bv30/Bielik-11B-v3.0-Instruct.Q6_K.gguf",
+        "gguf11bv30/Bielik-11B-v3.0-Instruct.Q8_0.gguf",
+        "google/gemma-2-27b-it",
+        "google/gemma-2-2b",
+        "google/gemma-2-9b-it",
+        "google/gemma-7b-it",
+        "google/mt5-xl",
+        "google/recurrentgemma-9b-it",
+        "h2oai/h2o-danube3-4b-base",
+        "ibm-granite/granite-3.3-2b-instruct",
+        "internlm/internlm2-1_8b",
+        "internlm/internlm2-20b",
+        "internlm/internlm2-7b",
+        "internlm/internlm2-base-7b",
+        "internlm/internlm2-chat-1_8b",
+        "internlm/internlm2-chat-20b",
+        "internlm/internlm2-chat-7b",
+        "internlm/internlm2-chat-7b-sft",
+        "internlm/internlm2_5-7b",
+        "internlm/internlm2_5-7b-chat",
+        "lex-hue/Delexa-7b",
+        "lmsys/vicuna-13b-v1.5",
+        "maciek-pioro/Mixtral-8x7B-v0.1-pl",
+        "meditsolutions/MSH-Lite-7B-v1-Bielik-v2.3-Instruct-Llama-Prune",
+        "meditsolutions/MSH-v1-Bielik-v2.3-Instruct-MedIT-merge",
+        "meta-llama/Llama-2-7b-chat-hf",
+        "meta-llama/Llama-2-7b-hf",
+        "meta-llama/Llama-3.2-1B-Instruct",
+        "meta-llama/Llama-3.2-3B-Instruct",
+        "meta-llama/Llama-4-Scout-17B-16E",
+        "meta-llama/Meta-Llama-3-70B-Instruct",
+        "meta-llama/Meta-Llama-3-8B-Instruct",
+        "meta-llama/Meta-Llama-3.1-405B-Instruct-FP8",
+        "meta-llama/Meta-Llama-3.1-70B-Instruct",
+        "meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "microsoft/Phi-3.5-mini-instruct",
+        "microsoft/Phi-4-mini-instruct",
+        "mistralai/Ministral-8B-Instruct-2410",
+        "mistralai/Mistral-7B-Instruct-v0.3",
+        "mistralai/Mistral-Large-Instruct-2407",
+        "mistralai/Mistral-Large-Instruct-2411",
+        "mistralai/Mistral-Nemo-Instruct-2407",
+        "mistralai/Mistral-Small-24B-Base-2501",
+        "mistralai/Mistral-Small-24B-Instruct-2501",
+        "mistralai/Mistral-Small-Instruct-2409",
+        "mistralai/Mixtral-8x22B-Instruct-v0.1",
+        "mistralai/Mixtral-8x22B-v0.1",
+        "mistralai/Mixtral-8x7B-Instruct-v0.1",
+        "mlabonne/NeuralDaredevil-8B-abliterated",
+        "nvidia/Llama3-ChatQA-1.5-8B",
+        "nvidia/Minitron-4B-Base",
+        "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+        "openGPT-X/Teuken-7B-instruct-commercial-v0.4",
+        "openGPT-X/Teuken-7B-instruct-research-v0.4",
+        "openchat/openchat-3.5-0106",
+        "openchat/openchat-3.5-0106-gemma",
+        "openchat/openchat-3.5-1210",
+        "openchat/openchat-3.6-8b-20240522",
+        "sdadas/polish-gpt2-xl",
+        "speakleash/Bielik-1.5B-v3.0-Instruct",
+        "speakleash/Bielik-11B-v2",
+        "speakleash/Bielik-11B-v2.0-Instruct",
+        "speakleash/Bielik-11B-v2.1-Instruct",
+        "speakleash/Bielik-11B-v2.2-Instruct",
+        "speakleash/Bielik-11B-v2.3-Instruct",
+        "speakleash/Bielik-11B-v2.3-Instruct-AWQ",
+        "speakleash/Bielik-11B-v2.3-Instruct-GPTQ",
+        "speakleash/Bielik-11B-v2.4-Instruct-MS",
+        "speakleash/Bielik-11B-v2.4-Instruct-SL",
+        "speakleash/Bielik-11B-v2.4-Instruct-TI",
+        "speakleash/Bielik-11B-v2.4-Instruct-TI-ALL",
+        "speakleash/Bielik-11B-v2.5-Instruct",
+        "speakleash/Bielik-11B-v2.5-Instruct-D-GRPO_H_070",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_010",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_020",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_030",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_040",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_050",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_060",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_H_010",
+        "speakleash/Bielik-11B-v2.5-Instruct-GRPO_H_030",
+        "speakleash/Bielik-11B-v2.6-Instruct",
+        "speakleash/Bielik-11B-v3-Base-20250730",
+        "speakleash/Bielik-11B-v3.0-Instruct",
+        "speakleash/Bielik-11B-v3.0-Instruct-FP8-Dynamic",
+        "speakleash/Bielik-4.5B-v3.0-Instruct",
+        "speakleash/Bielik-7B-Instruct-v0.1",
+        "speakleash/Bielik-7B-Instruct-v0.1-GPTQ",
+        "speakleash/Bielik-7B-v0.1",
+        "speakleash/Bielik-PL-11B-v3.0-Instruct",
+        "speakleash/Bielik-PL-Minitron-7B-v3.0-Instruct",
+        "ssmits/Falcon2-5.5B-Polish",
+        "szymonrucinski/Curie-7B-v1",
+        "teknium/OpenHermes-13B",
+        "teknium/OpenHermes-2.5-Mistral-7B",
+        "tiiuae/falcon-11B",
+        "upstage/SOLAR-10.7B-v1.0",
+        "upstage/solar-pro-preview-instruct",
+        "utter-project/EuroLLM-1.7B",
+        "utter-project/EuroLLM-1.7B-Instruct",
+        "utter-project/EuroLLM-22B-2512",
+        "utter-project/EuroLLM-22B-Instruct-2512",
+        "utter-project/EuroLLM-22B-Instruct-Preview",
+        "utter-project/EuroLLM-9B",
+        "utter-project/EuroLLM-9B-Instruct",
+        "utter-project/EuroMoE-2.6B-A0.6B-Instruct-Preview"
+      ],
+      "parts": {
+        "avgGenerative": {
+          "name": "Generative average",
+          "group": "Aggregates"
+        },
+        "avgMultipleChoice": {
+          "name": "Multiple-choice average",
+          "group": "Aggregates"
+        },
+        "avgRag": {
+          "name": "RAG average",
+          "group": "Aggregates"
+        },
+        "polemo2InG": {
+          "name": "PolEmo2 in-domain (generative)",
+          "group": "Tasks"
+        },
+        "polemo2InMc": {
+          "name": "PolEmo2 in-domain (multiple choice)",
+          "group": "Tasks"
+        },
+        "polemo2OutG": {
+          "name": "PolEmo2 out-of-domain (generative)",
+          "group": "Tasks"
+        },
+        "polemo2OutMc": {
+          "name": "PolEmo2 out-of-domain (multiple choice)",
+          "group": "Tasks"
+        },
+        "eightTagsMc": {
+          "name": "8Tags (multiple choice)",
+          "group": "Tasks"
+        },
+        "eightTagsG": {
+          "name": "8Tags (generative)",
+          "group": "Tasks"
+        },
+        "belebeleMc": {
+          "name": "Belebele (multiple choice)",
+          "group": "Tasks"
+        },
+        "belebeleG": {
+          "name": "Belebele (generative)",
+          "group": "Tasks"
+        },
+        "dykMc": {
+          "name": "DYK (multiple choice)",
+          "group": "Tasks"
+        },
+        "dykG": {
+          "name": "DYK (generative)",
+          "group": "Tasks"
+        },
+        "ppcMc": {
+          "name": "PPC (multiple choice)",
+          "group": "Tasks"
+        },
+        "ppcG": {
+          "name": "PPC (generative)",
+          "group": "Tasks"
+        },
+        "pscMc": {
+          "name": "PSC (multiple choice)",
+          "group": "Tasks"
+        },
+        "pscG": {
+          "name": "PSC (generative)",
+          "group": "Tasks"
+        },
+        "cbdMc": {
+          "name": "CBD (multiple choice)",
+          "group": "Tasks"
+        },
+        "cbdG": {
+          "name": "CBD (generative)",
+          "group": "Tasks"
+        },
+        "klejNerMc": {
+          "name": "KLEJ NER (multiple choice)",
+          "group": "Tasks"
+        },
+        "klejNerG": {
+          "name": "KLEJ NER (generative)",
+          "group": "Tasks"
+        },
+        "polqaRerankingMc": {
+          "name": "PolQA reranking (multiple choice)",
+          "group": "Tasks"
+        },
+        "polqaOpenBookG": {
+          "name": "PolQA open-book (generative)",
+          "group": "Tasks"
+        },
+        "polqaClosedBookG": {
+          "name": "PolQA closed-book (generative)",
+          "group": "Tasks"
+        },
+        "poquadOpenBook": {
+          "name": "PoQuAD open-book",
+          "group": "Tasks"
+        },
+        "eqBenchFirstTurn": {
+          "name": "Polish EQ-Bench first turn",
+          "group": "Tasks"
+        },
+        "eqBench": {
+          "name": "Polish EQ-Bench",
+          "group": "Tasks"
+        },
+        "poleval2018Task3": {
+          "name": "PolEval 2018 Task 3",
+          "group": "Tasks"
+        },
+        "pes": {
+          "name": "Polish Medical Exam (PES)",
+          "group": "Tasks"
+        }
+      }
+    },
     "open-portuguese-llm-leaderboard": {
       "url": "https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard",
       "feed": "https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard/resolve/main/data/leaderboard.csv.gz",
@@ -248366,6 +248979,46 @@
           "name": "Tasks solved three times with four retries",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "physgym": {
+      "url": "https://arxiv.org/abs/2507.15550",
+      "feed": "https://arxiv.org/html/2507.15550",
+      "terms": "Results are read from the public arXiv HTML paper (arXiv:2507.15550, Table 1).",
+      "headline": "Success rate across 97 interactive physics discovery environments under four controlled prior-knowledge levels (L1 full context through L4 anonymized variables).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 24,
+      "unmatched": [],
+      "stats": {
+        "experiments": {
+          "name": "Average experiments",
+          "unit": "count",
+          "better": "lower",
+          "note": "Mean number of experiments run on successful tasks."
+        },
+        "tests": {
+          "name": "Average tests",
+          "unit": "count",
+          "better": "lower",
+          "note": "Mean number of tests run on successful tasks."
+        },
+        "turns": {
+          "name": "Average turns",
+          "unit": "count",
+          "better": "lower",
+          "note": "Mean number of interaction turns on successful tasks."
+        },
+        "uniqueHypotheses": {
+          "name": "Unique hypotheses",
+          "unit": "count",
+          "note": "Mean unique hypotheses proposed on successful tasks."
+        },
+        "totalHypotheses": {
+          "name": "Total hypotheses",
+          "unit": "count",
+          "note": "Mean total hypotheses proposed on successful tasks."
         }
       }
     },
@@ -262770,6 +263423,57 @@
           "name": "rel-trial: study-outcome",
           "group": "Entity classification task",
           "unit": "%"
+        }
+      }
+    },
+    "rele-chinese-llm-benchmark": {
+      "url": "https://github.com/jeinlee1991/chinese-llm-benchmark/blob/main/leaderboard/alldata.md",
+      "feed": "https://raw.githubusercontent.com/jeinlee1991/chinese-llm-benchmark/main/leaderboard/alldata.md",
+      "terms": "The ReLE benchmark team publishes leaderboard markdown tables publicly in its open-source GitHub repository.",
+      "headline": "Overall ReLE score across eight Chinese and general capability domains.",
+      "retrieved": "2026-11-24",
+      "rows": 69,
+      "unmatched": [
+        "DeepSeek-V3.2-Think",
+        "deepseek-v4-flash-0424",
+        "deepseek-v4-pro-0424",
+        "doubao-seed-2-1-lite-260915",
+        "doubao-seed-2-1-pro-260628",
+        "doubao-seed-2-1-pro-260915",
+        "doubao-seed-2-1-turbo-260628"
+      ],
+      "parts": {
+        "education": {
+          "name": "Education"
+        },
+        "medicineMentalHealth": {
+          "name": "Medicine and mental health"
+        },
+        "finance": {
+          "name": "Finance"
+        },
+        "lawPublicAdmin": {
+          "name": "Law and public administration"
+        },
+        "reasoningMath": {
+          "name": "Reasoning and math"
+        },
+        "languageInstruction": {
+          "name": "Language and instruction following"
+        },
+        "agentToolUse": {
+          "name": "Agents and tool use"
+        },
+        "coding": {
+          "name": "Coding"
+        }
+      },
+      "stats": {
+        "outputPriceCny": {
+          "name": "Output price",
+          "unit": "cny",
+          "better": "lower",
+          "note": "Reported API output price per million tokens in Chinese yuan."
         }
       }
     },

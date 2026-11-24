@@ -13851,6 +13851,11 @@
       "via": "The regional brief named llm-jp-eval as a Japanese evaluation source."
     },
     {
+      "id": "llm-leaderboard-fr",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces leaderboard audit found the French government Leaderboard LLM FR with live JSON API and BAC FR."
+    },
+    {
       "id": "llm-meta-analysis",
       "date": "2026-11-20",
       "via": "A search for reuse of trial annotations led from effect directions to Yun’s numerical extraction dataset and a separate lab’s results."
@@ -17166,6 +17171,11 @@
       "via": "The INQUIRE paper compared its ecological retrieval queries with NeWT, which led to the original labels and an independent model card."
     },
     {
+      "id": "newtonbench",
+      "date": "2026-11-24",
+      "via": "GitHub scientific discovery benchmark audit found NewtonBench (ICLR 2026, 165 stars) with Table 2 results in arXiv HTML."
+    },
+    {
       "id": "next-qa",
       "date": "2026-11-01",
       "via": "LongCat-Flash-Omni model card video table."
@@ -17966,6 +17976,11 @@
       "via": "A Hebrew search found Dicta’s evaluation and led to the original Space, its results table, and its launch announcement."
     },
     {
+      "id": "open-ita-llm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces leaderboard audit found Open Ita LLM Leaderboard scoring over 200 open models in Italian."
+    },
+    {
       "id": "open-japanese-llm-leaderboard",
       "date": "2026-11-20",
       "via": "We checked the publisher’s evaluation sources for this audit."
@@ -17999,6 +18014,11 @@
       "id": "open-persian-llm-leaderboard",
       "date": "2026-11-20",
       "via": "A Persian search named the local university and its industry partner, whose leaderboard code and result file show the scored tasks."
+    },
+    {
+      "id": "open-pl-llm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces leaderboard audit found SpeakLeash Open PL LLM Leaderboard across 26 Polish tasks."
     },
     {
       "id": "open-portuguese-llm-leaderboard",
@@ -18999,6 +19019,11 @@
       "id": "physclosurebench",
       "date": "2026-11-01",
       "via": "Hugging Face daily papers ranked by upvotes."
+    },
+    {
+      "id": "physgym",
+      "date": "2026-11-24",
+      "via": "GitHub scientific discovery benchmark audit found PhysGym (NeurIPS 2025, 103 stars) with Table 1 results in arXiv HTML."
     },
     {
       "id": "physgym-arena-dr-hard",
@@ -20444,6 +20469,11 @@
       "id": "relate-audio-text",
       "date": "2026-11-20",
       "via": "We followed the XACLE baseline citation and checked which paper scored RELATE separately from XACLE."
+    },
+    {
+      "id": "rele-chinese-llm-benchmark",
+      "date": "2026-11-24",
+      "via": "GitHub LLM leaderboard audit found ReLE (formerly CLiB, 6,525 stars) tracking frontier models weekly across eight domains."
     },
     {
       "id": "relytoolbench",

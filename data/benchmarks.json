@@ -202803,5 +202803,165 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "newtonbench",
+    "name": "NewtonBench",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Three hundred twenty-four tasks across 12 physics domains where an LLM agent runs interactive experiments on altered physical laws and must recover the hidden symbolic law.",
+    "org": "HKUST KnowComp",
+    "released": "2025-10",
+    "links": {
+      "paper": "https://arxiv.org/abs/2510.07172",
+      "repo": "https://github.com/HKUST-KnowComp/NewtonBench"
+    },
+    "access": "public",
+    "note": "Altered physical laws prevent models from reciting textbook formulas. Paper Table 2 scores 11 frontier models across vanilla and code-assisted agents.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2510.07172",
+      "https://github.com/HKUST-KnowComp/NewtonBench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "physgym",
+    "name": "PhysGym",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "university",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Ninety-seven interactive physics environments where an LLM agent probes a system and must discover the governing equation under four controlled levels of prior knowledge.",
+    "org": "Principia AI",
+    "released": "2025-07",
+    "links": {
+      "paper": "https://arxiv.org/abs/2507.15550",
+      "repo": "https://github.com/principia-ai/PhysGym"
+    },
+    "access": "public",
+    "note": "Original NeurIPS 2025 benchmark suite behind the Prime Intellect port physgym-arena-dr-hard. Paper Table 1 scores six frontier models across prior levels L1 through L4.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2507.15550",
+      "https://github.com/principia-ai/PhysGym"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "rele-chinese-llm-benchmark",
+    "name": "ReLE",
+    "aliases": [
+      "CLiB",
+      "Chinese LLM Benchmark"
+    ],
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Long-running Chinese LLM evaluation with about 300 fine-grained dimensions across eight domains, updated regularly with commercial and open models.",
+    "org": "NoneLinear (ReLE benchmark team)",
+    "released": "2023-06",
+    "links": {
+      "paper": "https://arxiv.org/abs/2601.17399",
+      "repo": "https://github.com/jeinlee1991/chinese-llm-benchmark",
+      "leaderboard": "https://github.com/jeinlee1991/chinese-llm-benchmark/blob/main/leaderboard/alldata.md"
+    },
+    "access": "private",
+    "note": "Formerly named CLiB. Headline totals evaluate private Chinese items across eight domains alongside reported API output prices.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2601.17399",
+      "https://github.com/jeinlee1991/chinese-llm-benchmark",
+      "https://github.com/jeinlee1991/chinese-llm-benchmark/blob/main/leaderboard/alldata.md"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-pl-llm-leaderboard",
+    "name": "Open PL LLM Leaderboard",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Polish open-model leaderboard run by SpeakLeash over 26 Polish understanding, question answering, RAG, and professional exam tasks at 0-shot and 5-shot.",
+    "org": "SpeakLeash",
+    "released": "2024-02",
+    "links": {
+      "repo": "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard"
+    },
+    "access": "public",
+    "note": "Aggregate of Polish NLP and exam benchmarks including PolEmo2, KLEJ NER, PolQA, PoQuAD, Polish EQ-Bench, and Polish Medical Exam (PES).",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard",
+      "https://huggingface.co/spaces/speakleash/open_pl_llm_leaderboard/tree/main"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "llm-leaderboard-fr",
+    "name": "Leaderboard LLM FR",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "French government leaderboard scoring open language models on French instruction following (IFEval FR), graduate science questions (GPQA FR), and French baccalaureate exams (BAC FR).",
+    "org": "French Government AI Coordination (fr-gouv-coordination-ia)",
+    "released": "2025-01",
+    "links": {
+      "repo": "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr",
+      "https://huggingface.co/spaces/fr-gouv-coordination-ia/llm_leaderboard_fr/tree/main"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "open-ita-llm-leaderboard",
+    "name": "Open Ita LLM Leaderboard",
+    "category": "multilingual",
+    "subcategory": "multilingual-knowledge",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Open Italian language model leaderboard evaluating open models on Italian MMLU, ARC, and HellaSwag reasoning suites.",
+    "org": "MII-LLM community",
+    "released": "2024-06",
+    "links": {
+      "repo": "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard/tree/main",
+      "leaderboard": "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard"
+    },
+    "access": "public",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard",
+      "https://huggingface.co/spaces/mii-llm/open_ita_llm_leaderboard/tree/main"
+    ],
+    "added": "2026-11-24"
   }
 ]
