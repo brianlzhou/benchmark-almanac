@@ -8,6 +8,13 @@ const board: Leaderboard = {
   benchmark: 'prism-multi-turn-coding-augment', url: PAGE, feed: PAGE,
   terms: 'Augment publishes these results in its article. The page does not state separate score reuse terms.',
   static: 'paper', headline: 'Average overall score in Augment Prism multi-turn coding evaluation.',
+  costPer: 'task',
+  chart: {
+    title: 'Quality against cost per task',
+    x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Average overall score', better: 'higher' },
+    note: 'Average overall score against cost per task on Augment multi-turn coding tasks.',
+  },
   stats: { costPerTask: { name: 'Cost per task', unit: 'usd', better: 'lower' } },
   async fetch() {
     const t = tables(await fetchText(PAGE)).find(x => x[0]?.[0]?.text === 'Model' && x[0]?.[1]?.text.includes('Avg overall score'));

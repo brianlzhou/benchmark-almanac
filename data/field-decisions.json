@@ -1,5 +1,8 @@
 {
-  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "androidcontrol": {
+    "Step accuracy": "wired",
+    "steps": "ignore"
+  },
   "boards": {
     "3dcodearena": {
       "Time (s)↕": "ignore",
@@ -3422,5 +3425,102 @@
     "zeroclue": {
       "param_desc": "ignore"
     }
+  },
+  "capquiz": {
+    "Open-source Models": "wired",
+    "Avg. Duration (s)": "ignore",
+    "Human Verified": "ignore"
+  },
+  "cattle-trade": {
+    "Spend Eff.": "wired",
+    "Agent": "wired",
+    "EconomyAgent": "ignore",
+    "SetRaceAgent": "ignore",
+    "Suspicion-Agent": "ignore",
+    "TrackerAgent": "ignore",
+    "Turns": "ignore"
+  },
+  "d2k-bench": {
+    "Cache-read tokens (M)": "wired",
+    "Cache-write tokens (M)": "wired",
+    "Output tokens (M)": "wired",
+    "Uncached input tokens (M)": "wired"
+  },
+  "decepeval": {
+    "License": "ignore",
+    "Steps per Round": "ignore",
+    "Tokens per Step": "ignore"
+  },
+  "deep-memory-retrieval": {
+    "Tokens": "ignore"
+  },
+  "fingreat": {
+    "95% CI": "wired",
+    "Total assets (USD)": "ignore",
+    "DeepSeek-moe-16b-chat": "ignore",
+    "SE": "ignore"
+  },
+  "haluevalaudio-1000": {
+    "Multi-turn v1": "ignore",
+    "Multi-turn v2": "ignore",
+    "Multi-turn v3": "ignore",
+    "Single-turn": "ignore"
+  },
+  "longpuzzlebench": {
+    "Exit time": "ignore",
+    "Model / tool time per call, median (s)": "ignore",
+    "Attempt that clears the level": "ignore",
+    "Most boards in one attempt": "ignore"
+  },
+  "marsretrieval": {
+    "Seed": "ignore",
+    "Audit Accept, % (95% CI)": "ignore",
+    "Mean ±\\pm std": "ignore",
+    "Overall Accept (95% CI)": "ignore"
+  },
+  "masakhaner-2": {
+    "DATE": "ignore",
+    "# Tokens": "ignore",
+    "#Tokens": "ignore",
+    "in Tokens": "ignore",
+    "Tokens": "ignore"
+  },
+  "note": "Fields from data/scores/field-review.json that a person reviewed, per board: \"ignore\" (not a fact we keep, or not trustworthy) or \"wired\" (the importer keeps it now). The field watch skips them.",
+  "prism-multi-turn-coding-augment": {
+    "Avg overall score (80% CI)": "wired"
+  },
+  "reasoning-judge-bench": {
+    "Avg. tokens": "ignore"
+  },
+  "swe-interact": {
+    "Cost/trial": "wired",
+    "Steps/trial": "wired",
+    "Agent model": "ignore",
+    "Our trajectory (Baseline Neutral user)": "ignore",
+    "Our trajectory (Expert Nitpicker user)": "ignore",
+    "Trial: deepswe_kcp-go-multiplexed-kcp-s": "ignore"
+  },
+  "swe-lancer": {
+    "Dollars Earned / Total": "wired",
+    "Price Range": "ignore",
+    "Cutoff Date": "ignore",
+    "Resolution Time": "ignore"
+  },
+  "swe-lancer-manager": {
+    "Dollars Earned / Total": "wired",
+    "Price Range": "ignore",
+    "Cutoff Date": "ignore",
+    "Resolution Time": "ignore"
+  },
+  "tau-rec": {
+    "Turns": "wired"
+  },
+  "unsatz": {
+    "Cost ($)": "wired",
+    "95% CI": "wired",
+    "No submission": "wired",
+    "Fit cost": "ignore",
+    "log(x)": "ignore",
+    "step(x,th,f,g)": "ignore"
   }
 }
