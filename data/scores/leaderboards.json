@@ -602,6 +602,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "parts": {
         "Perceptual": {
           "name": "Perceptual",
@@ -1909,6 +1910,7 @@
       "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "gromacs": {
           "name": "GROMACS",
@@ -13311,6 +13313,7 @@
       "unmatched": [
         "Gemini 3 Pro [snapshot unspecified]"
       ],
+      "harnesses": "system",
       "parts": {
         "hr": {
           "name": "Human Resources",
@@ -13324,7 +13327,7 @@
           "name": "Procurement & Operations",
           "group": "Domain"
         },
-        "se": {
+        "swe": {
           "name": "Software Engineering",
           "group": "Domain"
         },
@@ -15050,246 +15053,247 @@
       "rows": 18,
       "unmatched": [],
       "costPer": "run",
+      "harnesses": "system",
       "parts": {
         "convertFlutterToAndroidHaboAppHabitTracker": {
           "name": "Convert Flutter to Android: Habo app (habit tracker)",
           "group": "App conversion"
         },
+        "convertFlutterToAndroidHaboAppHabitTrackerCompletion": {
+          "name": "Convert Flutter to Android: Habo app (habit tracker) completion",
+          "group": "Task completion"
+        },
         "convertReactNativeToAndroidBluewalletAppBitcoinWallet": {
           "name": "Convert React Native to Android: BlueWallet app (Bitcoin wallet)",
           "group": "App conversion"
+        },
+        "convertReactNativeToAndroidBluewalletAppBitcoinWalletCompletion": {
+          "name": "Convert React Native to Android: BlueWallet app (Bitcoin wallet) completion",
+          "group": "Task completion"
         },
         "newAccessibilitySupportAcrossDroidconConferenceApp": {
           "name": "New accessibility support across Droidcon (conference app)",
           "group": "New feature"
         },
+        "newAccessibilitySupportAcrossDroidconConferenceAppCompletion": {
+          "name": "New accessibility support across Droidcon (conference app) completion",
+          "group": "Task completion"
+        },
         "newMedia3AndExoplayerVideoPlaybackInNowInAndroidNewsApp": {
           "name": "New Media3 and ExoPlayer video playback in Now in Android (news app)",
           "group": "New feature"
+        },
+        "newMedia3AndExoplayerVideoPlaybackInNowInAndroidNewsAppCompletion": {
+          "name": "New Media3 and ExoPlayer video playback in Now in Android (news app) completion",
+          "group": "Task completion"
         },
         "newPictureInPictureVideoModeInNowInAndroidNewsApp": {
           "name": "New picture-in-picture video mode in Now in Android (news app)",
           "group": "New feature"
         },
+        "newPictureInPictureVideoModeInNowInAndroidNewsAppCompletion": {
+          "name": "New picture-in-picture video mode in Now in Android (news app) completion",
+          "group": "Task completion"
+        },
         "newCameraxProfilePictureCaptureInNowInAndroidNewsApp": {
           "name": "New CameraX profile picture capture in Now in Android (news app)",
           "group": "New feature"
         },
+        "newCameraxProfilePictureCaptureInNowInAndroidNewsAppCompletion": {
+          "name": "New CameraX profile picture capture in Now in Android (news app) completion",
+          "group": "Task completion"
+        },
         "newUserAccountSubmoduleInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New user account submodule in Food Vibes (full app creation - food delivery)",
+          "name": "New user account submodule in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newUserAccountSubmoduleInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New user account submodule in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newAuthenticationFlowWithSmsVerificationInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New authentication flow with SMS verification in Food Vibes (full app creation - food delivery)",
+          "name": "New authentication flow with SMS verification in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newAuthenticationFlowWithSmsVerificationInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New authentication flow with SMS verification in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newBottomNavigationAndBrowseSearchScreenInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New bottom navigation and Browse search screen in Food Vibes (full app creation - food delivery)",
+          "name": "New bottom navigation and Browse search screen in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newBottomNavigationAndBrowseSearchScreenInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New bottom navigation and Browse search screen in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newDesignSystemAndReusableUiComponentLibraryInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New design system and reusable UI component library in Food Vibes (full app creation - food delivery)",
+          "name": "New design system and reusable UI component library in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newDesignSystemAndReusableUiComponentLibraryInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New design system and reusable UI component library in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newAllFiltersScreenInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New All Filters screen in Food Vibes (full app creation - food delivery)",
+          "name": "New All Filters screen in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newAllFiltersScreenInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New All Filters screen in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newMapIntegrationAndLocationFeaturesInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New map integration and location features in Food Vibes (full app creation - food delivery)",
+          "name": "New map integration and location features in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newMapIntegrationAndLocationFeaturesInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New map integration and location features in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newRealTimeOrderTrackingInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New real-time order tracking in Food Vibes (full app creation - food delivery)",
+          "name": "New real-time order tracking in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newRealTimeOrderTrackingInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New real-time order tracking in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newPromotionsSubmoduleAndActiveOffersScreenInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New promotions submodule and active offers screen in Food Vibes (full app creation - food delivery)",
+          "name": "New promotions submodule and active offers screen in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
         },
+        "newPromotionsSubmoduleAndActiveOffersScreenInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New promotions submodule and active offers screen in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
+        },
         "newRestaurantListingFeedInFoodVibesFullAppCreationFoodDelivery": {
-          "name": "New restaurant listing feed in Food Vibes (full app creation - food delivery)",
+          "name": "New restaurant listing feed in Food Vibes (full app creation, food delivery)",
           "group": "App creation"
+        },
+        "newRestaurantListingFeedInFoodVibesFullAppCreationFoodDeliveryCompletion": {
+          "name": "New restaurant listing feed in Food Vibes (full app creation, food delivery) completion",
+          "group": "Task completion"
         },
         "newViewmodelLayerInFossifyFileManager": {
           "name": "New ViewModel layer in Fossify File Manager",
           "group": "New feature"
         },
+        "newViewmodelLayerInFossifyFileManagerCompletion": {
+          "name": "New ViewModel layer in Fossify File Manager completion",
+          "group": "Task completion"
+        },
         "nav2ToNav3LibraryMigrationInBitwardenPasswordManager": {
           "name": "Nav 2 to Nav 3 library migration in Bitwarden (password manager)",
           "group": "Migration"
+        },
+        "nav2ToNav3LibraryMigrationInBitwardenPasswordManagerCompletion": {
+          "name": "Nav 2 to Nav 3 library migration in Bitwarden (password manager) completion",
+          "group": "Task completion"
         },
         "dualPaneAdaptiveLayoutMigrationInBitwardenPasswordManagerSettingsScreens": {
           "name": "Dual-pane adaptive layout migration in Bitwarden (password manager): settings screens",
           "group": "Migration"
         },
+        "dualPaneAdaptiveLayoutMigrationInBitwardenPasswordManagerSettingsScreensCompletion": {
+          "name": "Dual-pane adaptive layout migration in Bitwarden (password manager): settings screens completion",
+          "group": "Task completion"
+        },
         "hiltToKoinDependencyInjectionMigrationInBitwardenPasswordManager": {
           "name": "Hilt to Koin dependency injection migration in Bitwarden (password manager)",
           "group": "Migration"
+        },
+        "hiltToKoinDependencyInjectionMigrationInBitwardenPasswordManagerCompletion": {
+          "name": "Hilt to Koin dependency injection migration in Bitwarden (password manager) completion",
+          "group": "Task completion"
         },
         "xmlViewsToComposeMigrationInFossifyFileManagerMainTabsAndSettings": {
           "name": "XML views to Compose migration in Fossify File Manager: main tabs and settings",
           "group": "Migration"
         },
+        "xmlViewsToComposeMigrationInFossifyFileManagerMainTabsAndSettingsCompletion": {
+          "name": "XML views to Compose migration in Fossify File Manager: main tabs and settings completion",
+          "group": "Task completion"
+        },
         "hiltToKoinDependencyInjectionMigrationInNowInAndroidNewsApp": {
           "name": "Hilt to Koin dependency injection migration in Now in Android (news app)",
           "group": "Migration"
+        },
+        "hiltToKoinDependencyInjectionMigrationInNowInAndroidNewsAppCompletion": {
+          "name": "Hilt to Koin dependency injection migration in Now in Android (news app) completion",
+          "group": "Task completion"
         },
         "kotlinMultiplatformMigrationInNowInAndroidNewsAppDatastoreAndDatabase": {
           "name": "Kotlin Multiplatform migration in Now in Android (news app): datastore and database",
           "group": "Migration"
         },
+        "kotlinMultiplatformMigrationInNowInAndroidNewsAppDatastoreAndDatabaseCompletion": {
+          "name": "Kotlin Multiplatform migration in Now in Android (news app): datastore and database completion",
+          "group": "Task completion"
+        },
         "retrofitToKtorMigrationInPocketCastsPodcastPlayer": {
           "name": "Retrofit to Ktor migration in Pocket Casts (podcast player)",
           "group": "Migration"
         },
+        "retrofitToKtorMigrationInPocketCastsPodcastPlayerCompletion": {
+          "name": "Retrofit to Ktor migration in Pocket Casts (podcast player) completion",
+          "group": "Task completion"
+        },
         "xmlViewsToComposeMigrationInSignalMessagingAppCustomChatColourCreator": {
-          "name": "XML views to Compose migration in Signal (messaging app): custom chat colour creator",
+          "name": "XML views to Compose migration in Signal (messaging app): custom chat color creator",
           "group": "Migration"
+        },
+        "xmlViewsToComposeMigrationInSignalMessagingAppCustomChatColourCreatorCompletion": {
+          "name": "XML views to Compose migration in Signal (messaging app): custom chat color creator completion",
+          "group": "Task completion"
         },
         "xmlViewsToComposeMigrationInSignalMessagingAppProfileCreation": {
           "name": "XML views to Compose migration in Signal (messaging app): profile creation",
           "group": "Migration"
         },
+        "xmlViewsToComposeMigrationInSignalMessagingAppProfileCreationCompletion": {
+          "name": "XML views to Compose migration in Signal (messaging app): profile creation completion",
+          "group": "Task completion"
+        },
         "xmlViewsToComposeMigrationInSignalMessagingAppPhoneNumberEntry": {
           "name": "XML views to Compose migration in Signal (messaging app): phone number entry",
           "group": "Migration"
+        },
+        "xmlViewsToComposeMigrationInSignalMessagingAppPhoneNumberEntryCompletion": {
+          "name": "XML views to Compose migration in Signal (messaging app): phone number entry completion",
+          "group": "Task completion"
         },
         "javaToKotlinMigrationInSignalMessagingAppGlideImageLoadingModule": {
           "name": "Java to Kotlin migration in Signal (messaging app): Glide image loading module",
           "group": "Migration"
         },
+        "javaToKotlinMigrationInSignalMessagingAppGlideImageLoadingModuleCompletion": {
+          "name": "Java to Kotlin migration in Signal (messaging app): Glide image loading module completion",
+          "group": "Task completion"
+        },
         "xmlViewsToComposeMigrationInSignalMessagingAppEditProfileScreens": {
           "name": "XML views to Compose migration in Signal (messaging app): edit profile screens",
           "group": "Migration"
+        },
+        "xmlViewsToComposeMigrationInSignalMessagingAppEditProfileScreensCompletion": {
+          "name": "XML views to Compose migration in Signal (messaging app): edit profile screens completion",
+          "group": "Task completion"
         },
         "xmlViewsToComposeMigrationInWordpressPeopleInviteScreen": {
           "name": "XML views to Compose migration in WordPress: people invite screen",
           "group": "Migration"
         },
+        "xmlViewsToComposeMigrationInWordpressPeopleInviteScreenCompletion": {
+          "name": "XML views to Compose migration in WordPress: people invite screen completion",
+          "group": "Task completion"
+        },
         "newBookSearchingAppUsingTheOpenlibraryApi": {
           "name": "New book searching app using the OpenLibrary API",
           "group": "App creation"
         },
-        "convertFlutterToAndroidHaboAppHabitTrackerCompletion": {
-          "name": "Convert Flutter to Android Habo app habit tracker",
-          "group": "Task"
-        },
-        "convertReactNativeToAndroidBluewalletAppBitcoinWalletCompletion": {
-          "name": "Convert React Native to Android BlueWallet app Bitcoin wallet",
-          "group": "Task"
-        },
-        "newAccessibilitySupportAcrossDroidconConferenceAppCompletion": {
-          "name": "New accessibility support across Droidcon conference app",
-          "group": "Task"
-        },
-        "newMedia3AndExoplayerVideoPlaybackInNowInAndroidNewsAppCompletion": {
-          "name": "New Media3 and ExoPlayer video playback in Now in Android news app",
-          "group": "Task"
-        },
-        "newPictureInPictureVideoModeInNowInAndroidNewsAppCompletion": {
-          "name": "New picture-in-picture video mode in Now in Android news app",
-          "group": "Task"
-        },
-        "newCameraxProfilePictureCaptureInNowInAndroidNewsAppCompletion": {
-          "name": "New CameraX profile picture capture in Now in Android news app",
-          "group": "Task"
-        },
-        "newUserAccountSubmoduleInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New user account submodule in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newAuthenticationFlowWithSmsVerificationInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New authentication flow with SMS verification in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newBottomNavigationAndBrowseSearchScreenInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New bottom navigation and browse search screen in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newDesignSystemAndReusableUiComponentLibraryInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New design system and reusable UI component library in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newAllFiltersScreenInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New all filters screen in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newMapIntegrationAndLocationFeaturesInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New map integration and location features in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newRealTimeOrderTrackingInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New real-time order tracking in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newPromotionsSubmoduleAndActiveOffersScreenInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New promotions submodule and active offers screen in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newRestaurantListingFeedInFoodVibesFullAppCreationFoodDeliveryCompletion": {
-          "name": "New restaurant listing feed in Food Vibes full app creation food delivery",
-          "group": "Task"
-        },
-        "newViewmodelLayerInFossifyFileManagerCompletion": {
-          "name": "New ViewModel layer in Fossify file manager",
-          "group": "Task"
-        },
-        "nav2ToNav3LibraryMigrationInBitwardenPasswordManagerCompletion": {
-          "name": "Navigation 2 to Navigation 3 library migration in Bitwarden password manager",
-          "group": "Task"
-        },
-        "dualPaneAdaptiveLayoutMigrationInBitwardenPasswordManagerSettingsScreensCompletion": {
-          "name": "Dual-pane adaptive layout migration in Bitwarden password manager settings screens",
-          "group": "Task"
-        },
-        "hiltToKoinDependencyInjectionMigrationInBitwardenPasswordManagerCompletion": {
-          "name": "Hilt to Koin dependency injection migration in Bitwarden password manager",
-          "group": "Task"
-        },
-        "xmlViewsToComposeMigrationInFossifyFileManagerMainTabsAndSettingsCompletion": {
-          "name": "XML views to Compose migration in Fossify file manager main tabs and settings",
-          "group": "Task"
-        },
-        "hiltToKoinDependencyInjectionMigrationInNowInAndroidNewsAppCompletion": {
-          "name": "Hilt to Koin dependency injection migration in Now in Android news app",
-          "group": "Task"
-        },
-        "kotlinMultiplatformMigrationInNowInAndroidNewsAppDatastoreAndDatabaseCompletion": {
-          "name": "Kotlin Multiplatform migration in Now in Android news app datastore and database",
-          "group": "Task"
-        },
-        "retrofitToKtorMigrationInPocketCastsPodcastPlayerCompletion": {
-          "name": "Retrofit to Ktor migration in Pocket Casts podcast player",
-          "group": "Task"
-        },
-        "xmlViewsToComposeMigrationInSignalMessagingAppCustomChatColourCreatorCompletion": {
-          "name": "XML views to Compose migration in Signal messaging app custom chat colour creator",
-          "group": "Task"
-        },
-        "xmlViewsToComposeMigrationInSignalMessagingAppProfileCreationCompletion": {
-          "name": "XML views to Compose migration in Signal messaging app profile creation",
-          "group": "Task"
-        },
-        "xmlViewsToComposeMigrationInSignalMessagingAppPhoneNumberEntryCompletion": {
-          "name": "XML views to Compose migration in Signal messaging app phone number entry",
-          "group": "Task"
-        },
-        "javaToKotlinMigrationInSignalMessagingAppGlideImageLoadingModuleCompletion": {
-          "name": "Java to Kotlin migration in Signal messaging app Glide image loading module",
-          "group": "Task"
-        },
-        "xmlViewsToComposeMigrationInSignalMessagingAppEditProfileScreensCompletion": {
-          "name": "XML views to Compose migration in Signal messaging app edit profile screens",
-          "group": "Task"
-        },
-        "xmlViewsToComposeMigrationInWordpressPeopleInviteScreenCompletion": {
-          "name": "XML views to Compose migration in WordPress people invite screen",
-          "group": "Task"
-        },
         "newBookSearchingAppUsingTheOpenlibraryApiCompletion": {
-          "name": "New book-searching app using the Open Library API",
-          "group": "Task"
+          "name": "New book searching app using the OpenLibrary API completion",
+          "group": "Task completion"
         }
       },
       "stats": {
@@ -24771,6 +24775,7 @@
       "unmatched": [
         "GPT-4 Turbo (snapshot unspecified)"
       ],
+      "harnesses": "system",
       "stats": {
         "answerRate": {
           "name": "Answer rate",
@@ -29317,11 +29322,8 @@
       "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
-        "called": {
-          "name": "Called races",
-          "unit": "count"
-        },
         "favoriteWon": {
           "name": "Favorite won",
           "unit": "count"
@@ -39404,6 +39406,7 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "easy": {
           "name": "Easy tasks",
@@ -65509,7 +65512,7 @@
       "unmatched": [],
       "chart": {
         "title": "Trial 2 completion against active runtime",
-        "note": "Figure 3 on the page: each point is one harness and model; it plots total runtime, redrawn here per task.",
+        "note": "Figure 3 on the page: each point is one harness and model, plotting total runtime redrawn here per task.",
         "x": {
           "key": "time",
           "label": "Active runtime per task",
@@ -65522,6 +65525,14 @@
           "label": "Trial 2 completion",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "harnesses": "system",
+      "stats": {
+        "time": {
+          "name": "Active runtime per task",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -115079,6 +115090,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "stats": {
         "best": {
           "name": "Best score",
@@ -115088,6 +115100,11 @@
         "latency": {
           "name": "Latency",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Average total tokens",
+          "unit": "tokens",
           "better": "lower"
         }
       }
@@ -115306,6 +115323,10 @@
       "rows": 13,
       "unmatched": [],
       "costPer": "run",
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "area:pretrain": {
           "name": "Pre-training",
@@ -115547,6 +115568,7 @@
       "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "parts": {
           "name": "Parts"
@@ -115560,16 +115582,8 @@
           "name": "Parts passed",
           "unit": "count"
         },
-        "partsScored": {
-          "name": "Parts scored",
-          "unit": "count"
-        },
         "assembliesPassed": {
           "name": "Assemblies passed",
-          "unit": "count"
-        },
-        "assembliesScored": {
-          "name": "Assemblies scored",
           "unit": "count"
         }
       }
@@ -116170,7 +116184,8 @@
           "better": "higher"
         },
         "note": "Costs exclude dreaming and omit trials without usage. Rows distinguish memory models, task models, and effort."
-      }
+      },
+      "harnesses": "system"
     },
     "frontierml-synthetic-sciences": {
       "url": "https://frontierml.ai",
