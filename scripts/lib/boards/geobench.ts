@@ -14,9 +14,8 @@ const PAGE = 'https://geobench.org/';
 const COUNTRIES = ['Argentina', 'Australia', 'Bangladesh', 'Bhutan', 'Brazil', 'Bulgaria', 'Cambodia', 'Canada', 'Colombia', 'Croatia', 'Denmark', 'Ecuador', 'Eswatini', 'Finland', 'France', 'Germany', 'Greece', 'Guatemala', 'Hungary', 'India', 'Indonesia', 'Ireland', 'Israel', 'Italy', 'Japan', 'Kazakhstan', 'Kenya', 'Kyrgyzstan', 'Latvia', 'Lithuania', 'Malaysia', 'Mexico', 'Mongolia', 'Montenegro', 'New Zealand', 'Peru', 'Philippines', 'Puerto Rico', 'Qatar', 'Russia', 'Réunion', 'Senegal', 'Slovakia', 'South Africa', 'Spain', 'Sweden', 'Thailand', 'Tunisia', 'Türkiye', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States'];
 
 const countryParts = Object.fromEntries(COUNTRIES.map((country) => [`country:${country}`, { name: country, group: 'Country' }]));
-const countryStats = Object.fromEntries(COUNTRIES.flatMap((country) => [
-  [`country:${country}:locations`, { name: `${country} locations`, unit: 'count' }],
-  [`country:${country}:points`, { name: `${country} points`, unit: 'score', better: 'higher' }],
+const countryStats = Object.fromEntries(COUNTRIES.map((country) => [
+  `country:${country}:points`, { name: `${country} points`, unit: 'score', better: 'higher' },
 ]));
 
 
@@ -62,8 +61,6 @@ export function geobenchBoard(benchmark: string, test: string): Leaderboard { re
     median_score: { name: 'Median GeoGuessr score', unit: 'score', better: 'higher' },
     runInputTokens: { name: 'Run input tokens', unit: 'tokens' },
     runOutputTokens: { name: 'Run output tokens', unit: 'tokens' },
-    max_tokens: { name: 'Maximum output tokens', unit: 'tokens' },
-    temperature: { name: 'Temperature', unit: 'score', note: 'Sampling temperature reported for the run.' },
     ...countryStats,
   },
   url: PAGE,
@@ -112,7 +109,7 @@ export function geobenchBoard(benchmark: string, test: string): Leaderboard { re
       const model = rawName.replace(/ with Search\)$/i, ')');
       const metrics: Record<string, number> = {};
       if (typeof r.average_score === 'number') metrics.points = r.average_score;
-      for (const key of ['n', 'temperature', 'max_tokens', 'input_tokens', 'output_tokens', 'refusal_rate', 'average_distance_km', 'median_distance_km', 'median_score'] as const) {
+      for (const key of ['n', 'input_tokens', 'output_tokens', 'refusal_rate', 'average_distance_km', 'median_distance_km', 'median_score'] as const) {
         if (typeof r[key] === 'number') {
           const name = key === 'input_tokens' ? 'runInputTokens' : key === 'output_tokens' ? 'runOutputTokens' : key;
           metrics[name] = r[key];
@@ -124,7 +121,6 @@ export function geobenchBoard(benchmark: string, test: string): Leaderboard { re
           metrics[key] = c.country_success_rate * 100;
           this.parts![key] = { name: c.country, group: 'Country' };
         }
-        if (typeof c.n === 'number') metrics[key + ':locations'] = c.n;
         if (typeof c.average_score === 'number') metrics[key + ':points'] = c.average_score;
       }
       rows.push({
