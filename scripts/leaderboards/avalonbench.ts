@@ -7,6 +7,11 @@ const feed = 'https://avalonbench.github.io/';
 const board: Leaderboard = {
   benchmark: 'avalonbench', url: feed, feed,
   terms: 'The AvalonBench authors publish these results on GitHub Pages. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service',
+  stats: {
+    deductionAccuracy: { name: 'Average deduction accuracy', unit: 'score', better: 'higher', note: 'Player 0 average deduction accuracy, from 0 to 1.' },
+    validGames: { name: 'Valid games', unit: 'count', better: 'higher' },
+    secondsPerGame: { name: 'Average time per game', unit: 'seconds', better: 'lower' },
+  },
   async fetch() {
     const section = (await fetchText(feed)).split('Initial Results with New Codebase')[1]?.split('</section>')[0];
     if (!section) throw new Error('Missing v0.2 results');

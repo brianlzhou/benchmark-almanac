@@ -14,12 +14,30 @@
       "url": "https://github.com/1x-technologies/1xgpt#leaderboard",
       "feed": "https://raw.githubusercontent.com/1x-technologies/1xgpt/main/README.md",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "1x-technologies/GENIE_138M",
         "1x-technologies/GENIE_35M"
-      ]
+      ],
+      "stats": {
+        "tokenAccuracy": {
+          "name": "Token accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "lpips": {
+          "name": "LPIPS",
+          "unit": "score",
+          "better": "lower",
+          "note": "Learned perceptual image patch similarity."
+        },
+        "secondsPerFrame": {
+          "name": "Seconds per frame",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "3d-arena": {
       "url": "https://huggingface.co/spaces/3d-arena/3d-arena",
@@ -25651,7 +25669,7 @@
       "url": "https://www.markovstudios.com/research/autocad-bench",
       "feed": "https://www.markovstudios.com/research/autocad-bench.md (Task completion by model, 2D versus 3D, Where capability holds)",
       "terms": "robots.txt allows all pages, and the site publishes a Markdown copy of each page for language models and agents. Markov states no data license. Results are credited to Markov.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Qwen3.7"
@@ -25691,7 +25709,13 @@
       "stats": {
         "completedTasks": {
           "name": "Completed tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "tasksAtLeast50": {
+          "name": "Tasks scoring at least 50",
+          "unit": "count",
+          "better": "higher"
         },
         "mouseShare": {
           "name": "Mouse share",
@@ -26611,12 +26635,30 @@
       "url": "https://avalonbench.github.io/",
       "feed": "https://avalonbench.github.io/",
       "terms": "The AvalonBench authors publish these results on GitHub Pages. https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GPT-3.5-turbo (snapshot unspecified)",
         "GPT-4-turbo (snapshot unspecified)"
-      ]
+      ],
+      "stats": {
+        "deductionAccuracy": {
+          "name": "Average deduction accuracy",
+          "unit": "score",
+          "better": "higher",
+          "note": "Player 0 average deduction accuracy, from 0 to 1."
+        },
+        "validGames": {
+          "name": "Valid games",
+          "unit": "count",
+          "better": "higher"
+        },
+        "secondsPerGame": {
+          "name": "Average time per game",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "avgen-bench": {
       "url": "https://microsoft.github.io/AVGen-Bench/",
@@ -29377,7 +29419,7 @@
       "url": "https://sig-edu.org/sharedtask/2025#results",
       "feed": "https://sig-edu.org/sharedtask/2025",
       "terms": "The organizers release the task under MIT. https://github.com/kaushal0494/UnifyingAITutorEvaluation",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "harnesses": "system",
@@ -29396,6 +29438,73 @@
         },
         "tutorIdentification": {
           "name": "Tutor Identification"
+        }
+      },
+      "stats": {
+        "mistakeIdentificationExactAccuracy": {
+          "name": "Mistake Identification exact accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mistakeIdentificationLenientF1": {
+          "name": "Mistake Identification lenient F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mistakeIdentificationLenientAccuracy": {
+          "name": "Mistake Identification lenient accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mistakeLocationExactAccuracy": {
+          "name": "Mistake Location exact accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mistakeLocationLenientF1": {
+          "name": "Mistake Location lenient F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mistakeLocationLenientAccuracy": {
+          "name": "Mistake Location lenient accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "providingGuidanceExactAccuracy": {
+          "name": "Providing Guidance exact accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "providingGuidanceLenientF1": {
+          "name": "Providing Guidance lenient F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "providingGuidanceLenientAccuracy": {
+          "name": "Providing Guidance lenient accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "actionabilityExactAccuracy": {
+          "name": "Actionability exact accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "actionabilityLenientF1": {
+          "name": "Actionability lenient F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "actionabilityLenientAccuracy": {
+          "name": "Actionability lenient accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tutorIdentificationExactAccuracy": {
+          "name": "Tutor Identification exact accuracy",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -33650,9 +33759,21 @@
       "url": "https://github.com/JWilksBooth/bimanual-chore-scheduling",
       "feed": "https://raw.githubusercontent.com/JWilksBooth/bimanual-chore-scheduling/main/README.md",
       "terms": "The repository is public on GitHub. https://github.com/JWilksBooth/bimanual-chore-scheduling",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "format": {
+          "name": "Format reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "feasibility": {
+          "name": "Feasibility reward",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "binaryaudit": {
       "url": "https://quesma.com/benchmarks/binaryaudit/",
@@ -33820,7 +33941,7 @@
       "url": "https://codalab.lisn.upsaclay.fr/competitions/11351#results",
       "feed": "https://codalab.lisn.upsaclay.fr/competitions/11351/results/18458/data",
       "terms": "The terms authorize organizers to release scores at the workshop and in its proceedings. They do not specify broader score reuse. CodaLab returned 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DUTIR-BioNLP",
@@ -33832,6 +33953,38 @@
         },
         "overlapF1": {
           "name": "Overlap extraction and normalization F1"
+        }
+      },
+      "stats": {
+        "precision": {
+          "name": "Normalized precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "recall": {
+          "name": "Normalized recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "exactPrecision": {
+          "name": "Exact extraction and normalization precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "exactRecall": {
+          "name": "Exact extraction and normalization recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "overlapPrecision": {
+          "name": "Overlap extraction and normalization precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "overlapRecall": {
+          "name": "Overlap extraction and normalization recall",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -52969,65 +53122,57 @@
       "url": "https://crfm.stanford.edu/helm/cleva/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/cleva/benchmark_output/releases/v1.0.0/groups/cleva_scenarios.json",
       "terms": "Stanford licenses the HELM code under Apache 2.0. The results table gives no separate reuse terms. https://github.com/stanford-crfm/helm/blob/63754d05db6f874e41a395880fb573890a13e791/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "parts": {
         "Classical Chinese understanding - EM": {
-          "name": "Classical Chinese understanding - EM"
+          "name": "Classical Chinese understanding (EM)"
         },
         "Commonsense reasoning - EM": {
-          "name": "Commonsense reasoning - EM"
+          "name": "Commonsense reasoning (EM)"
         },
         "Coreference resolution - EM": {
-          "name": "Coreference resolution - EM"
+          "name": "Coreference resolution (EM)"
         },
         "Cultural knowledge - EM": {
-          "name": "Cultural knowledge - EM"
+          "name": "Cultural knowledge (EM)"
         },
         "Mathematical calculation - EM": {
-          "name": "Mathematical calculation - EM"
+          "name": "Mathematical calculation (EM)"
         },
         "Mathematical reasoning - EM (Math)": {
-          "name": "Mathematical reasoning - EM (Math)"
+          "name": "Mathematical reasoning (EM Math)"
         },
         "Paraphrase generation - iBLEU (Chinese)": {
-          "name": "Paraphrase generation - iBLEU (Chinese)"
+          "name": "Paraphrase generation (iBLEU Chinese)"
         },
         "Paraphrase identification - EM": {
-          "name": "Paraphrase identification - EM"
+          "name": "Paraphrase identification (EM)"
         },
         "Pinyin transliteration - BLEU-1 (Chinese)": {
-          "name": "Pinyin transliteration - BLEU-1 (Chinese)"
+          "name": "Pinyin transliteration (BLEU-1 Chinese)"
         },
         "Reading comprehension - EM": {
-          "name": "Reading comprehension - EM"
+          "name": "Reading comprehension (EM)"
         },
         "Sentiment analysis - EM": {
-          "name": "Sentiment analysis - EM"
+          "name": "Sentiment analysis (EM)"
         },
         "Summarization - ROUGE-2 (Chinese)": {
-          "name": "Summarization - ROUGE-2 (Chinese)"
+          "name": "Summarization (ROUGE-2 Chinese)"
         },
         "Text classification - EM": {
-          "name": "Text classification - EM"
+          "name": "Text classification (EM)"
         },
         "Toxicity detection - EM": {
-          "name": "Toxicity detection - EM"
+          "name": "Toxicity detection (EM)"
         },
         "Translation - BLEU": {
-          "name": "Translation - BLEU"
+          "name": "Translation (BLEU)"
         }
       },
       "stats": {
-        "General information: Classical Chinese understanding - # eval": {
-          "name": "Classical Chinese understanding evaluation examples",
-          "unit": "count"
-        },
-        "General information: Classical Chinese understanding - # train": {
-          "name": "Classical Chinese understanding training examples",
-          "unit": "count"
-        },
         "General information: Classical Chinese understanding - # prompt tokens": {
           "name": "Classical Chinese understanding prompt tokens",
           "unit": "tokens"
@@ -53036,37 +53181,13 @@
           "name": "Classical Chinese understanding output tokens",
           "unit": "tokens"
         },
-        "General information: Commonsense reasoning - # eval": {
-          "name": "Commonsense reasoning evaluation examples",
-          "unit": "count"
-        },
-        "General information: Commonsense reasoning - # train": {
-          "name": "Commonsense reasoning training examples",
-          "unit": "count"
-        },
         "General information: Commonsense reasoning - # prompt tokens": {
           "name": "Commonsense reasoning prompt tokens",
           "unit": "tokens"
         },
-        "General information: Coreference resolution - # eval": {
-          "name": "Coreference resolution evaluation examples",
-          "unit": "count"
-        },
-        "General information: Coreference resolution - # train": {
-          "name": "Coreference resolution training examples",
-          "unit": "count"
-        },
         "General information: Coreference resolution - # prompt tokens": {
           "name": "Coreference resolution prompt tokens",
           "unit": "tokens"
-        },
-        "General information: Cultural knowledge - # eval": {
-          "name": "Cultural knowledge evaluation examples",
-          "unit": "count"
-        },
-        "General information: Cultural knowledge - # train": {
-          "name": "Cultural knowledge training examples",
-          "unit": "count"
         },
         "General information: Cultural knowledge - # prompt tokens": {
           "name": "Cultural knowledge prompt tokens",
@@ -53076,14 +53197,6 @@
           "name": "Cultural knowledge output tokens",
           "unit": "tokens"
         },
-        "General information: Mathematical calculation - # eval": {
-          "name": "Mathematical calculation evaluation examples",
-          "unit": "count"
-        },
-        "General information: Mathematical calculation - # train": {
-          "name": "Mathematical calculation training examples",
-          "unit": "count"
-        },
         "General information: Mathematical calculation - # prompt tokens": {
           "name": "Mathematical calculation prompt tokens",
           "unit": "tokens"
@@ -53091,14 +53204,6 @@
         "General information: Mathematical calculation - # output tokens": {
           "name": "Mathematical calculation output tokens",
           "unit": "tokens"
-        },
-        "General information: Mathematical reasoning - # eval": {
-          "name": "Mathematical reasoning evaluation examples",
-          "unit": "count"
-        },
-        "General information: Mathematical reasoning - # train": {
-          "name": "Mathematical reasoning training examples",
-          "unit": "count"
         },
         "General information: Mathematical reasoning - # prompt tokens": {
           "name": "Mathematical reasoning prompt tokens",
@@ -53108,14 +53213,6 @@
           "name": "Mathematical reasoning output tokens",
           "unit": "tokens"
         },
-        "General information: Paraphrase generation - # eval": {
-          "name": "Paraphrase generation evaluation examples",
-          "unit": "count"
-        },
-        "General information: Paraphrase generation - # train": {
-          "name": "Paraphrase generation training examples",
-          "unit": "count"
-        },
         "General information: Paraphrase generation - # prompt tokens": {
           "name": "Paraphrase generation prompt tokens",
           "unit": "tokens"
@@ -53124,25 +53221,9 @@
           "name": "Paraphrase generation output tokens",
           "unit": "tokens"
         },
-        "General information: Paraphrase identification - # eval": {
-          "name": "Paraphrase identification evaluation examples",
-          "unit": "count"
-        },
-        "General information: Paraphrase identification - # train": {
-          "name": "Paraphrase identification training examples",
-          "unit": "count"
-        },
         "General information: Paraphrase identification - # prompt tokens": {
           "name": "Paraphrase identification prompt tokens",
           "unit": "tokens"
-        },
-        "General information: Pinyin transliteration - # eval": {
-          "name": "Pinyin transliteration evaluation examples",
-          "unit": "count"
-        },
-        "General information: Pinyin transliteration - # train": {
-          "name": "Pinyin transliteration training examples",
-          "unit": "count"
         },
         "General information: Pinyin transliteration - # prompt tokens": {
           "name": "Pinyin transliteration prompt tokens",
@@ -53151,14 +53232,6 @@
         "General information: Pinyin transliteration - # output tokens": {
           "name": "Pinyin transliteration output tokens",
           "unit": "tokens"
-        },
-        "General information: Reading comprehension - # eval": {
-          "name": "Reading comprehension evaluation examples",
-          "unit": "count"
-        },
-        "General information: Reading comprehension - # train": {
-          "name": "Reading comprehension training examples",
-          "unit": "count"
         },
         "General information: Reading comprehension - # prompt tokens": {
           "name": "Reading comprehension prompt tokens",
@@ -53174,14 +53247,6 @@
           "better": "lower",
           "note": "Fraction from 0 to 1."
         },
-        "General information: Sentiment analysis - # eval": {
-          "name": "Sentiment analysis evaluation examples",
-          "unit": "count"
-        },
-        "General information: Sentiment analysis - # train": {
-          "name": "Sentiment analysis training examples",
-          "unit": "count"
-        },
         "General information: Sentiment analysis - # prompt tokens": {
           "name": "Sentiment analysis prompt tokens",
           "unit": "tokens"
@@ -53189,14 +53254,6 @@
         "General information: Sentiment analysis - # output tokens": {
           "name": "Sentiment analysis output tokens",
           "unit": "tokens"
-        },
-        "General information: Summarization - # eval": {
-          "name": "Summarization evaluation examples",
-          "unit": "count"
-        },
-        "General information: Summarization - # train": {
-          "name": "Summarization training examples",
-          "unit": "count"
         },
         "General information: Summarization - # prompt tokens": {
           "name": "Summarization prompt tokens",
@@ -53212,37 +53269,13 @@
           "better": "lower",
           "note": "Fraction from 0 to 1."
         },
-        "General information: Text classification - # eval": {
-          "name": "Text classification evaluation examples",
-          "unit": "count"
-        },
-        "General information: Text classification - # train": {
-          "name": "Text classification training examples",
-          "unit": "count"
-        },
         "General information: Text classification - # prompt tokens": {
           "name": "Text classification prompt tokens",
           "unit": "tokens"
         },
-        "General information: Toxicity detection - # eval": {
-          "name": "Toxicity detection evaluation examples",
-          "unit": "count"
-        },
-        "General information: Toxicity detection - # train": {
-          "name": "Toxicity detection training examples",
-          "unit": "count"
-        },
         "General information: Toxicity detection - # prompt tokens": {
           "name": "Toxicity detection prompt tokens",
           "unit": "tokens"
-        },
-        "General information: Translation - # eval": {
-          "name": "Translation evaluation examples",
-          "unit": "count"
-        },
-        "General information: Translation - # train": {
-          "name": "Translation training examples",
-          "unit": "count"
         },
         "General information: Translation - # prompt tokens": {
           "name": "Translation prompt tokens",
@@ -53251,6 +53284,66 @@
         "General information: Translation - # output tokens": {
           "name": "Translation output tokens",
           "unit": "tokens"
+        },
+        "Calibration: Classical Chinese understanding - ECE (10-bin)": {
+          "name": "Classical Chinese understanding calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Commonsense reasoning - ECE (10-bin)": {
+          "name": "Commonsense reasoning calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Coreference resolution - ECE (10-bin)": {
+          "name": "Coreference resolution calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Cultural knowledge - ECE (10-bin)": {
+          "name": "Cultural knowledge calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Mathematical calculation - ECE (10-bin)": {
+          "name": "Mathematical calculation calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Paraphrase identification - ECE (10-bin)": {
+          "name": "Paraphrase identification calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Reading comprehension - ECE (10-bin)": {
+          "name": "Reading comprehension calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Sentiment analysis - ECE (10-bin)": {
+          "name": "Sentiment analysis calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Text classification - ECE (10-bin)": {
+          "name": "Text classification calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
+        },
+        "Calibration: Toxicity detection - ECE (10-bin)": {
+          "name": "Toxicity detection calibration ECE",
+          "unit": "score",
+          "better": "lower",
+          "note": "10-bin expected calibration error."
         }
       }
     },
@@ -85776,7 +85869,7 @@
       "url": "https://arxiv.org/html/2603.02813v3",
       "feed": "https://arxiv.org/html/2603.02813v3/track1_res_with_baselines.svg",
       "terms": "The authors publish Figure 2 and Tables 1 and 2 at https://arxiv.org/abs/2603.02813. Source licensing applies.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "DiariZen",
@@ -85802,6 +85895,23 @@
         },
         "summaryRougeL": {
           "name": "Dialogue summarization (ROUGE-L)",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Character error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "wer": {
+          "name": "Word error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "topicRouge1": {
+          "name": "Topic identification (ROUGE-1)",
           "unit": "score",
           "better": "higher"
         }
@@ -110763,14 +110873,21 @@
       "url": "https://codalab.lisn.upsaclay.fr/competitions/1846",
       "feed": "https://codalab.lisn.upsaclay.fr/competitions/1846",
       "terms": "Public results published by the benchmark authors at codalab.lisn.upsaclay.fr; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "FinQA submission: dlc-lls",
         "FinQA submission: qinhui99",
         "FinQA submission: wbin",
         "FinQANet-Roberta-large"
-      ]
+      ],
+      "stats": {
+        "programAccuracy": {
+          "name": "Program accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "finqa-snorkel-openenv-environment": {
       "url": "https://snorkel.ai/leaderboard/snorkel-finance/",
@@ -112165,7 +112282,7 @@
       "url": "https://mistral.ai/news/leanstral/",
       "feed": "https://mistral.ai/news/leanstral/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [],
       "chart": {
@@ -112185,6 +112302,54 @@
         "note": "Cost covers the whole evaluation run, not one task."
       },
       "costPer": "run",
+      "stats": {
+        "runCost": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower",
+          "note": "Total US dollar cost for the pass@1 evaluation run."
+        },
+        "passAt2": {
+          "name": "Pass@2",
+          "unit": "score",
+          "better": "higher"
+        },
+        "pass@2_cost": {
+          "name": "Pass@2 run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "passAt4": {
+          "name": "Pass@4",
+          "unit": "score",
+          "better": "higher"
+        },
+        "pass@4_cost": {
+          "name": "Pass@4 run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "passAt8": {
+          "name": "Pass@8",
+          "unit": "score",
+          "better": "higher"
+        },
+        "pass@8_cost": {
+          "name": "Pass@8 run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "passAt16": {
+          "name": "Pass@16",
+          "unit": "score",
+          "better": "higher"
+        },
+        "pass@16_cost": {
+          "name": "Pass@16 run cost",
+          "unit": "usd",
+          "better": "lower"
+        }
+      },
       "measures": {
         "passAt2": "pass-2",
         "passAt4": "pass-4",
@@ -120992,12 +121157,19 @@
       "url": "https://xn--7xa.monster/Galahad/",
       "feed": "https://xn--7xa.monster/Galahad/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Galahad base policy (checkpoint undisclosed)",
         "Galahad repaired policy (checkpoint undisclosed)"
-      ]
+      ],
+      "stats": {
+        "successes": {
+          "name": "Successful reaches",
+          "unit": "count",
+          "better": "higher"
+        }
+      }
     },
     "galileo-agent-leaderboard": {
       "url": "https://huggingface.co/spaces/galileo-ai/agent-leaderboard",
@@ -129446,7 +129618,7 @@
       "url": "https://huggingface.co/spaces/Zoe/GS-QA-Leaderboard",
       "feed": "https://huggingface.co/spaces/Zoe/GS-QA-Leaderboard/raw/main/data/results.json",
       "terms": "The authors provide these leaderboard results for reuse. https://huggingface.co/spaces/Zoe/GS-QA-Leaderboard",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Gemini"
@@ -129503,53 +129675,10 @@
         }
       },
       "stats": {
-        "areaQuestions": {
-          "name": "area questions",
-          "unit": "count"
-        },
-        "countQuestions": {
-          "name": "count questions",
-          "unit": "count"
-        },
-        "directionQuestions": {
-          "name": "direction questions",
-          "unit": "count"
-        },
-        "distanceQuestions": {
-          "name": "distance questions",
-          "unit": "count"
-        },
-        "entity_nameQuestions": {
-          "name": "entity name questions",
-          "unit": "count"
-        },
-        "lengthQuestions": {
-          "name": "length questions",
-          "unit": "count"
-        },
-        "locationQuestions": {
-          "name": "location questions",
-          "unit": "count"
-        },
-        "raster_focalQuestions": {
-          "name": "raster focal questions",
-          "unit": "count"
-        },
-        "raster_globalQuestions": {
-          "name": "raster global questions",
-          "unit": "count"
-        },
-        "raster_localQuestions": {
-          "name": "raster local questions",
-          "unit": "count"
-        },
-        "raster_overallQuestions": {
-          "name": "raster overall questions",
-          "unit": "count"
-        },
-        "raster_zonalQuestions": {
-          "name": "raster zonal questions",
-          "unit": "count"
+        "parsedRecall": {
+          "name": "Entity-name parsed recall",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -130635,7 +130764,7 @@
       "url": "https://hereditary.dei.unipd.it/challenges/gutbrainie/2025/#six",
       "feed": "https://hereditary.dei.unipd.it/challenges/gutbrainie/2025/",
       "terms": "The organizers publish these scores on the official challenge site. https://hereditary.dei.unipd.it/challenges/gutbrainie/2025/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
@@ -130654,6 +130783,108 @@
         },
         "tm": {
           "name": "TM-RE"
+        }
+      },
+      "stats": {
+        "nerMacroP": {
+          "name": "Named entity recognition macro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "nerMacroR": {
+          "name": "Named entity recognition macro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "nerMacroF1": {
+          "name": "Named entity recognition macro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "nerMicroP": {
+          "name": "Named entity recognition micro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "nerMicroR": {
+          "name": "Named entity recognition micro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "btMacroP": {
+          "name": "Binary tag-based relation extraction macro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "btMacroR": {
+          "name": "Binary tag-based relation extraction macro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "btMacroF1": {
+          "name": "Binary tag-based relation extraction macro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "btMicroP": {
+          "name": "Binary tag-based relation extraction micro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "btMicroR": {
+          "name": "Binary tag-based relation extraction micro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttMacroP": {
+          "name": "Ternary tag-based relation extraction macro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttMacroR": {
+          "name": "Ternary tag-based relation extraction macro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttMacroF1": {
+          "name": "Ternary tag-based relation extraction macro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttMicroP": {
+          "name": "Ternary tag-based relation extraction micro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ttMicroR": {
+          "name": "Ternary tag-based relation extraction micro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tmMacroP": {
+          "name": "Ternary mention-based relation extraction macro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tmMacroR": {
+          "name": "Ternary mention-based relation extraction macro recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tmMacroF1": {
+          "name": "Ternary mention-based relation extraction macro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tmMicroP": {
+          "name": "Ternary mention-based relation extraction micro precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "tmMicroR": {
+          "name": "Ternary mention-based relation extraction micro recall",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -139524,21 +139755,14 @@
       "url": "https://uche.uuamni.com/ilubench",
       "feed": "https://uuamni-uche-production.up.railway.app/api/public/ilubench-leaderboard",
       "terms": "The dataset card specifies CC BY 4.0. The live feed reports rubric versions and scoring provenance. Current model rows lack paired cultural correctness scores. https://huggingface.co/datasets/UUAMNI/ilubench Neither host publishes crawler restrictions at robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "stats": {
-        "scored": {
-          "name": "Language-scored prompts",
-          "unit": "count"
-        },
-        "humanScored": {
-          "name": "Human-scored prompts",
-          "unit": "count"
-        },
-        "pending": {
-          "name": "Pending cultural scores",
-          "unit": "count"
+        "register_no_switch": {
+          "name": "No register switch share",
+          "unit": "%",
+          "better": "higher"
         },
         "register_switch_partial": {
           "name": "Partial register switch share",
@@ -139549,10 +139773,6 @@
           "name": "Full register switch share",
           "unit": "%",
           "better": "lower"
-        },
-        "registerScored_machine_llm": {
-          "name": "Machine or LLM register-scored prompts",
-          "unit": "count"
         }
       }
     },
@@ -153296,7 +153516,7 @@
       "feed": "https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results#Jam-ALT",
       "terms": "The MIREX wiki lists GNU Free Documentation License 1.2 unless otherwise noted. https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results The robots.txt URL returns 404.",
       "host": "MIREX",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Frangiadaki et al.",
@@ -153322,17 +153542,22 @@
           "better": "lower"
         },
         "F-score (P)": {
-          "name": "F-score, phonetic",
+          "name": "Punctuation F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "F-score (B)": {
+          "name": "Parentheses F-score",
           "unit": "%",
           "better": "higher"
         },
         "F-score (L)": {
-          "name": "F-score, lexical",
+          "name": "Line-break F-score",
           "unit": "%",
           "better": "higher"
         },
         "F-score (S)": {
-          "name": "F-score, syllabic",
+          "name": "Section-break F-score",
           "unit": "%",
           "better": "higher"
         },
@@ -157800,9 +158025,35 @@
       "url": "https://www.kimi.ai/resources/kimi-k2-7-code",
       "feed": "https://www.kimi.ai/resources/kimi-k2-7-code",
       "terms": "Public Moonshot AI release-page results. Benchmark Almanac credits Moonshot AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "priceCachedIn": {
+          "name": "Cached input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceIn": {
+          "name": "Input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceOut": {
+          "name": "Output price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "contextWindow": {
+          "name": "Context window",
+          "unit": "tokens",
+          "better": "higher"
+        },
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
     },
     "kimi-code-bench-3-long-horizon": {
       "url": "https://www.kimi.com/en/blog/kimi-k3-1-pro",
@@ -190817,9 +191068,15 @@
       "url": "https://mimo.xiaomi.com/mimo-v2-5-pro/index.html",
       "feed": "https://mimo.xiaomi.com/mimo-v2-5-pro/index.html",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "activeParamsB": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
     },
     "mimo-cyber-bench": {
       "url": "https://mimo.xiaomi.com/mimo-v2-6/article.html",
@@ -204655,7 +204912,7 @@
       "url": "https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results#MUSDB-ALT",
       "feed": "https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results#MUSDB-ALT",
       "terms": "The MIREX wiki lists GNU Free Documentation License 1.2 unless otherwise noted. https://futuremirex.com/mirex/wiki/2026:Lyrics_Transcription_Results The wiki returns 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Frangiadaki et al.",
@@ -204682,6 +204939,11 @@
         },
         "F-score (P)": {
           "name": "Punctuation F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "F-score (B)": {
+          "name": "Parentheses F-score",
           "unit": "%",
           "better": "higher"
         },

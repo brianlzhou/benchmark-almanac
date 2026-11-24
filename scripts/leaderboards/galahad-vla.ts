@@ -9,10 +9,11 @@ const board: Leaderboard = {
  url: "https://xn--7xa.monster/Galahad/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
+ stats: { successes: { name: 'Successful reaches', unit: 'count', better: 'higher' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
-const s=text(await fetchText(FEED));const base=s.match(/base policy reaches the named object on (\d+) of (\d+) trials/);const repair=s.match(/same policy reaches the named object on ([\d.]+)% of trials across (\w+) seeds/);if(!base||!repair)throw new Error('Galahad current results missing');return [{model:'Galahad base policy (checkpoint undisclosed)',score:Number(base[1])/Number(base[2])*100,setting:'counterfactual battery; named-object reach',metrics:{successes:Number(base[1]),trials:Number(base[2])}},{model:'Galahad repaired policy (checkpoint undisclosed)',score:Number(repair[1]),trials:repair[2]==='three'?3:undefined,setting:'deconfounded demonstrations; rank-32 update; named-object reach'}];
+const s=text(await fetchText(FEED));const base=s.match(/base policy reaches the named object on (\d+) of (\d+) trials/);const repair=s.match(/same policy reaches the named object on ([\d.]+)% of trials across (\w+) seeds/);if(!base||!repair)throw new Error('Galahad current results missing');return [{model:'Galahad base policy (checkpoint undisclosed)',score:Number(base[1])/Number(base[2])*100,trials:Number(base[2]),setting:'counterfactual battery; named-object reach',metrics:{successes:Number(base[1])}},{model:'Galahad repaired policy (checkpoint undisclosed)',score:Number(repair[1]),trials:repair[2]==='three'?3:undefined,setting:'deconfounded demonstrations; rank-32 update; named-object reach'}];
   })();
   // Undated families have multiple snapshots in the registry; keep these entries unlisted.
   return result.map(r => ({...r, model: !r.date && /^(?:gpt[- ]?4o|gpt[- ]?4(?:[- ]turbo)?|gemini[- ]?1[.]5[- ]?(?:pro|flash)|gemini[- ]?2[.]5[- ]?pro|claude[- ]?3[.]5[- ]?sonnet|deepseek[- ]?(?:v3|r1))$/i.test(r.model) ? `${r.model} (snapshot unspecified)` : r.model}));
