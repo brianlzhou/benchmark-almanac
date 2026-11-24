@@ -108472,12 +108472,22 @@
       "url": "https://www.vals.ai/benchmarks/financial-coaching-bench",
       "feed": "https://www.vals.ai/benchmarks/financial-coaching-bench (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [],
+      "parts": {
+        "length_controlled": {
+          "name": "Length-controlled",
+          "group": "Task"
+        },
+        "elicitation": {
+          "name": "Elicitation",
+          "group": "Task"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
           "better": "lower"
         }
@@ -303116,9 +303126,36 @@
       "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
       "feed": "https://www.vals.ai/benchmarks/code-migration-v1-1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 31,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "parts": {
+        "cli": {
+          "name": "CLI",
+          "group": "Task"
+        },
+        "cobol": {
+          "name": "COBOL",
+          "group": "Task"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency per test",
@@ -303129,6 +303166,12 @@
           "name": "Turns per test",
           "unit": "count",
           "better": "lower"
+        },
+        "code_quality": {
+          "name": "Code quality",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge score on a 1 to 5 scale."
         }
       }
     },
@@ -303152,7 +303195,7 @@
       "url": "https://www.vals.ai/benchmarks/cyber-v1",
       "feed": "https://www.vals.ai/benchmarks/cyber-v1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
       "chart": {
@@ -303171,13 +303214,30 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "parts": {
+        "poc": {
+          "name": "PoC",
+          "group": "Task"
+        },
+        "patch": {
+          "name": "Patch",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        }
       }
     },
     "vals-cyberbench-1-1": {
       "url": "https://www.vals.ai/benchmarks/cyber",
       "feed": "https://www.vals.ai/benchmarks/cyber (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 46,
       "unmatched": [
         "Claude Opus 5.5 (CVP)",
@@ -303201,7 +303261,22 @@
           "better": "higher"
         }
       },
+      "parts": {
+        "poc": {
+          "name": "PoC",
+          "group": "Task"
+        },
+        "patch": {
+          "name": "Patch",
+          "group": "Task"
+        }
+      },
       "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        },
         "turns": {
           "name": "Turns per test",
           "unit": "count",
@@ -303495,9 +303570,64 @@
       "url": "https://www.vals.ai/benchmarks/finance_agent_v1",
       "feed": "https://www.vals.ai/benchmarks/finance_agent_v1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 59,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "parts": {
+        "simple_retrieval_quantitative": {
+          "name": "Simple retrieval (quantitative)",
+          "group": "Task"
+        },
+        "simple_retrieval_qualitative": {
+          "name": "Simple retrieval (qualitative)",
+          "group": "Task"
+        },
+        "complex_retrieval": {
+          "name": "Complex retrieval",
+          "group": "Task"
+        },
+        "numerical_reasoning": {
+          "name": "Numerical reasoning",
+          "group": "Task"
+        },
+        "financial_modeling": {
+          "name": "Financial modeling projections",
+          "group": "Task"
+        },
+        "market_analysis": {
+          "name": "Market analysis",
+          "group": "Task"
+        },
+        "beat_or_miss": {
+          "name": "Beat or miss",
+          "group": "Task"
+        },
+        "trends": {
+          "name": "Trends",
+          "group": "Task"
+        },
+        "adjustments": {
+          "name": "Adjustments",
+          "group": "Task"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency per test",
@@ -303589,11 +303719,9 @@
       "url": "https://www.vals.ai/benchmarks/fabv2-1",
       "feed": "https://www.vals.ai/benchmarks/fabv2-1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
-      "rows": 45,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 46,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -303607,6 +303735,56 @@
         "y": {
           "key": "score",
           "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "parts": {
+        "general_qualitative_analysis": {
+          "name": "General qualitative analysis",
+          "group": "Task"
+        },
+        "general_quantitative_analysis": {
+          "name": "General quantitative analysis",
+          "group": "Task"
+        },
+        "market_analysis": {
+          "name": "Market analysis",
+          "group": "Task"
+        },
+        "comparables": {
+          "name": "Comparables",
+          "group": "Task"
+        },
+        "precedents": {
+          "name": "Precedents",
+          "group": "Task"
+        },
+        "adjustments": {
+          "name": "Adjustments",
+          "group": "Task"
+        },
+        "earnings_analysis": {
+          "name": "Earnings analysis",
+          "group": "Task"
+        },
+        "disclosure_analysis": {
+          "name": "Disclosure analysis",
+          "group": "Task"
+        },
+        "financial_modeling": {
+          "name": "Financial modeling",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "all_pass": {
+          "name": "All-pass rate",
           "unit": "%",
           "better": "higher"
         }
@@ -303643,11 +303821,9 @@
       "url": "https://www.vals.ai/benchmarks/vals_index",
       "feed": "https://www.vals.ai/benchmarks/vals_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
-      "rows": 42,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 43,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -303664,13 +303840,54 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "parts": {
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench v1.1.1",
+          "group": "Benchmark"
+        },
+        "finance_agent": {
+          "name": "Finance Agent v2.1",
+          "group": "Benchmark"
+        },
+        "emb": {
+          "name": "EMB v1.1",
+          "group": "Benchmark"
+        },
+        "code_migration": {
+          "name": "Code Migration v1.1",
+          "group": "Benchmark"
+        },
+        "legal_research": {
+          "name": "Legal Research",
+          "group": "Benchmark"
+        },
+        "legal_agent_benchmark": {
+          "name": "HLAB-Vals-1.1",
+          "group": "Benchmark"
+        },
+        "terminal_bench_4": {
+          "name": "Terminal-Bench 4.0",
+          "group": "Benchmark"
+        },
+        "tax_agent_bench": {
+          "name": "Tax Agent",
+          "group": "Benchmark"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        }
       }
     },
     "vals-index-v1": {
       "url": "https://www.vals.ai/benchmarks/vals_index_v1",
       "feed": "https://www.vals.ai/benchmarks/vals_index_v1",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -303689,6 +303906,28 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "parts": {
+        "finance_agent": {
+          "name": "Finance Agent v1.1",
+          "group": "Benchmark"
+        },
+        "corp_fin_v2": {
+          "name": "CorpFin v2",
+          "group": "Benchmark"
+        },
+        "swebench": {
+          "name": "SWE-bench Verified",
+          "group": "Benchmark"
+        },
+        "terminal_bench_2": {
+          "name": "Terminal-Bench 2.0",
+          "group": "Benchmark"
+        },
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench",
+          "group": "Benchmark"
         }
       },
       "stats": {
@@ -303788,7 +304027,7 @@
       "url": "https://www.vals.ai/benchmarks/vals_index_v2_1",
       "feed": "https://www.vals.ai/benchmarks/vals_index_v2_1",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 50,
       "unmatched": [],
       "chart": {
@@ -303805,6 +304044,40 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "parts": {
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench",
+          "group": "Benchmark"
+        },
+        "finance_agent": {
+          "name": "Finance Agent v2",
+          "group": "Benchmark"
+        },
+        "emb": {
+          "name": "EMB",
+          "group": "Benchmark"
+        },
+        "code_migration": {
+          "name": "Code Migration",
+          "group": "Benchmark"
+        },
+        "legal_research": {
+          "name": "Legal Research",
+          "group": "Benchmark"
+        },
+        "legal_agent_benchmark": {
+          "name": "HLAB",
+          "group": "Benchmark"
+        },
+        "terminal_bench_4": {
+          "name": "Terminal-Bench 4.0",
+          "group": "Benchmark"
+        },
+        "tax_agent_bench": {
+          "name": "Tax Agent",
+          "group": "Benchmark"
         }
       },
       "stats": {
@@ -303931,11 +304204,9 @@
       "url": "https://www.vals.ai/benchmarks/legal_index",
       "feed": "https://www.vals.ai/benchmarks/legal_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
-      "rows": 43,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 44,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -303951,6 +304222,51 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "parts": {
+        "business_commercial": {
+          "name": "Business and commercial",
+          "group": "Practice area"
+        },
+        "civil_negligence": {
+          "name": "Civil negligence",
+          "group": "Practice area"
+        },
+        "other_civil": {
+          "name": "Other civil",
+          "group": "Practice area"
+        },
+        "real_estate": {
+          "name": "Real estate",
+          "group": "Practice area"
+        },
+        "labor_employment": {
+          "name": "Labor and employment",
+          "group": "Practice area"
+        },
+        "wills_estates_trusts": {
+          "name": "Wills, estates and trusts",
+          "group": "Practice area"
+        },
+        "family": {
+          "name": "Family",
+          "group": "Practice area"
+        },
+        "criminal": {
+          "name": "Criminal",
+          "group": "Practice area"
+        },
+        "tax_agent_bench": {
+          "name": "Tax Agent",
+          "group": "Practice area"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -304217,7 +304533,7 @@
       "url": "https://www.vals.ai/benchmarks/vals_multimodal_index",
       "feed": "https://www.vals.ai/benchmarks/vals_multimodal_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 33,
       "unmatched": [],
       "chart": {
@@ -304236,15 +304552,99 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "parts": {
+        "finance_agent": {
+          "name": "Finance Agent v2",
+          "group": "Benchmark"
+        },
+        "corp_fin_v2": {
+          "name": "CorpFin v2",
+          "group": "Benchmark"
+        },
+        "swebench": {
+          "name": "SWE-bench",
+          "group": "Benchmark"
+        },
+        "sage": {
+          "name": "SAGE",
+          "group": "Benchmark"
+        },
+        "mortgage_tax": {
+          "name": "Mortgage Tax",
+          "group": "Benchmark"
+        },
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench",
+          "group": "Benchmark"
+        },
+        "terminal_bench_2_1": {
+          "name": "Terminal-Bench 2.1",
+          "group": "Benchmark"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        }
       }
     },
     "vals-multimodal-index-v1": {
       "url": "https://www.vals.ai/benchmarks/vals_multimodal_index_v1",
       "feed": "https://www.vals.ai/benchmarks/vals_multimodal_index_v1 (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "parts": {
+        "finance_agent": {
+          "name": "Finance Agent v1.1",
+          "group": "Benchmark"
+        },
+        "corp_fin_v2": {
+          "name": "CorpFin v2",
+          "group": "Benchmark"
+        },
+        "swebench": {
+          "name": "SWE-bench Verified",
+          "group": "Benchmark"
+        },
+        "terminal_bench_2": {
+          "name": "Terminal-Bench 2.0",
+          "group": "Benchmark"
+        },
+        "sage": {
+          "name": "SAGE",
+          "group": "Benchmark"
+        },
+        "mortgage_tax": {
+          "name": "Mortgage Tax",
+          "group": "Benchmark"
+        },
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench",
+          "group": "Benchmark"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency per test",
@@ -304257,9 +304657,56 @@
       "url": "https://www.vals.ai/benchmarks/vals_multimodal_index_v1_1",
       "feed": "https://www.vals.ai/benchmarks/vals_multimodal_index_v1_1 (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "parts": {
+        "finance_agent": {
+          "name": "Finance Agent v2",
+          "group": "Benchmark"
+        },
+        "corp_fin_v2": {
+          "name": "CorpFin v2",
+          "group": "Benchmark"
+        },
+        "swebench": {
+          "name": "SWE-bench",
+          "group": "Benchmark"
+        },
+        "terminal_bench_2": {
+          "name": "Terminal-Bench 2.0",
+          "group": "Benchmark"
+        },
+        "sage": {
+          "name": "SAGE",
+          "group": "Benchmark"
+        },
+        "mortgage_tax": {
+          "name": "Mortgage Tax",
+          "group": "Benchmark"
+        },
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench",
+          "group": "Benchmark"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency per test",
@@ -304319,7 +304766,7 @@
       "url": "https://www.vals.ai/benchmarks/public-benefits-bench",
       "feed": "https://www.vals.ai/benchmarks/public-benefits-bench (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 50,
       "unmatched": [],
       "chart": {
@@ -304337,6 +304784,31 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "parts": {
+        "neither": {
+          "name": "Neither",
+          "group": "Condition"
+        },
+        "web_search": {
+          "name": "Web search",
+          "group": "Condition"
+        },
+        "multi_turn": {
+          "name": "Multi-turn",
+          "group": "Condition"
+        },
+        "both": {
+          "name": "Both",
+          "group": "Condition"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -304380,7 +304852,7 @@
       "url": "https://www.vals.ai/benchmarks/vals_router_index",
       "feed": "https://www.vals.ai/benchmarks/vals_router_index",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Auto Router",
@@ -304406,12 +304878,49 @@
           "better": "higher"
         }
       },
+      "parts": {
+        "coding": {
+          "name": "Coding",
+          "group": "Benchmark"
+        },
+        "finance_agent": {
+          "name": "Finance Agent",
+          "group": "Benchmark"
+        },
+        "emb": {
+          "name": "EMB",
+          "group": "Benchmark"
+        },
+        "terminal_bench_4": {
+          "name": "Terminal-Bench 4.0",
+          "group": "Benchmark"
+        },
+        "vibe_code_bench": {
+          "name": "Vibe Code Bench",
+          "group": "Benchmark"
+        },
+        "code_migration": {
+          "name": "Code Migration",
+          "group": "Benchmark"
+        },
+        "legal_research": {
+          "name": "Legal Research",
+          "group": "Benchmark"
+        },
+        "legal_agent_benchmark": {
+          "name": "HLAB",
+          "group": "Benchmark"
+        },
+        "tax_agent_bench": {
+          "name": "Tax Agent Bench",
+          "group": "Benchmark"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
-          "better": "lower",
-          "note": "Mean time per test."
+          "better": "lower"
         }
       }
     },
@@ -304559,16 +305068,46 @@
       "url": "https://www.vals.ai/benchmarks/sage",
       "feed": "https://www.vals.ai/benchmarks/sage (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 30,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "costPer": "run",
+      "parts": {
+        "PDEs": {
+          "name": "Partial differential equations",
+          "group": "Subject"
+        },
+        "linear_algebra": {
+          "name": "Linear algebra",
+          "group": "Subject"
+        },
+        "cs": {
+          "name": "Computer science",
+          "group": "Subject"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
-          "better": "lower",
-          "note": "Mean time per test."
+          "better": "lower"
         }
       }
     },
@@ -314468,7 +315007,7 @@
       "feed": "https://www.vals.ai/benchmarks/voice-code-bench (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "host": "Vals AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "AssemblyAI Universal-3.5 Pro",
@@ -314498,6 +315037,24 @@
           "label": "Task success rate (TSR)",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "ctem": {
+          "name": "Canonical token and entity match (CTEM)",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of target entities recovered from the speech transcript."
+        },
+        "wer": {
+          "name": "Word error rate (WER)",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
