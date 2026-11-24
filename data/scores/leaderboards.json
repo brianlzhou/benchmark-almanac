@@ -319432,6 +319432,49 @@
         }
       }
     },
+    "vsec": {
+      "url": "https://arxiv.org/abs/2111.00640",
+      "feed": "https://arxiv.org/html/2111.00640",
+      "terms": "arXiv permits these HTML paths under robots.txt, and the paper tables are attributed to their authors.",
+      "headline": "Headline is Correction F1 (CF) on a 0 to 1 scale from Table 4.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Character-level Transformer",
+        "N-gram",
+        "Seq2seq with attention",
+        "Syllable-level Transformer",
+        "VSEC"
+      ],
+      "stats": {
+        "detectionPrecision": {
+          "name": "Detection precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "detectionRecall": {
+          "name": "Detection recall",
+          "unit": "score",
+          "better": "higher"
+        },
+        "detectionF1": {
+          "name": "Detection F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "correctionPrecision": {
+          "name": "Correction precision",
+          "unit": "score",
+          "better": "higher"
+        },
+        "correctionRecall": {
+          "name": "Correction recall",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "vsi-bench": {
       "url": "https://arxiv.org/html/2412.14171",
       "feed": "https://arxiv.org/html/2412.14171",
@@ -319799,6 +319842,145 @@
         },
         "both": {
           "name": "Both sides"
+        }
+      }
+    },
+    "waxal-asr-test": {
+      "url": "https://arxiv.org/abs/2602.02734",
+      "feed": "https://arxiv.org/html/2602.02734",
+      "terms": "arXiv permits these HTML paths under robots.txt, and the paper tables are attributed to their authors.",
+      "headline": "Headline is macro-average word error rate in percent across the 19 WAXAL ASR test languages from Table 4. Lower is better.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 4,
+      "unmatched": [
+        "MMS-1B-all"
+      ],
+      "parts": {
+        "ach": {
+          "name": "Acholi",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "aka": {
+          "name": "Akan",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "amh": {
+          "name": "Amharic",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "dag": {
+          "name": "Dagbani",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "dga": {
+          "name": "Dagaare",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ewe": {
+          "name": "Ewe",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "ful": {
+          "name": "Fula",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "kpo": {
+          "name": "Ikposo",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "lin": {
+          "name": "Lingala",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "lug": {
+          "name": "Luganda",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mas": {
+          "name": "Masaaba",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "mlg": {
+          "name": "Malagasy",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "nyn": {
+          "name": "Runyankole",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "orm": {
+          "name": "Oromo",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "sna": {
+          "name": "Shona",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "sid": {
+          "name": "Sidama",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "sog": {
+          "name": "Soga",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tir": {
+          "name": "Tigrinya",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        },
+        "wal": {
+          "name": "Wolaytta",
+          "group": "Language",
+          "unit": "%",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Macro-average CER",
+          "unit": "%",
+          "better": "lower"
+        },
+        "runs": {
+          "name": "Fine-tuned runs",
+          "unit": "count"
         }
       }
     },
@@ -322835,6 +323017,45 @@
           "name": "Actions per beaten level",
           "unit": "count",
           "better": "lower"
+        }
+      }
+    },
+    "wl-bisindo": {
+      "url": "https://github.com/AceKinnn/WL-BISINDO#results-summary",
+      "feed": "https://raw.githubusercontent.com/AceKinnn/WL-BISINDO/main/README.md",
+      "terms": "The WL-BISINDO authors publish the baseline results publicly in their GitHub repository.",
+      "headline": "Headline is Signer-Dependent Top-1 accuracy in percent, with Signer-Independent held-out signer accuracies as parts.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "MViTv2",
+        "SPOTER",
+        "Siformer"
+      ],
+      "parts": {
+        "signer1": {
+          "name": "Signer 1 (SI)",
+          "group": "Signer-Independent",
+          "unit": "%",
+          "better": "higher"
+        },
+        "signer2": {
+          "name": "Signer 2 (SI)",
+          "group": "Signer-Independent",
+          "unit": "%",
+          "better": "higher"
+        },
+        "signer3": {
+          "name": "Signer 3 (SI)",
+          "group": "Signer-Independent",
+          "unit": "%",
+          "better": "higher"
+        },
+        "signer4": {
+          "name": "Signer 4 (SI)",
+          "group": "Signer-Independent",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
