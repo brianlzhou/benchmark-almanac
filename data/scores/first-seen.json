@@ -3225,6 +3225,7 @@
     ["wildclawbench","muse-glimmer",null,"OpenClaw","2026-11-10"],
     ["wisesight-sentiment","~**[ULMFit Semi-supervised Repeated One Time](https://github.com/PyThaiNLP/wisesight-sentiment/blob/master/competition.ipynb)**",null,null,"2026-11-23"],
     ["wisesight-sentiment","~USE",null,null,"2026-11-23"],
+    ["word-edit-bench-tencent","tencent-hy4-flash","highest available reasoning",null,"2026-11-24"],
     ["workbuddy-bench-tencent","~Hy4-dev",null,"CodeBuddy Code","2026-11-09"],
     ["workbuddy-bench-tencent","kimi-k3-1-pro",null,"CodeBuddy Code","2026-11-09"],
     ["workbuddy-bench-tencent","mimo-v2-6-pro",null,"CodeBuddy Code","2026-11-09"],

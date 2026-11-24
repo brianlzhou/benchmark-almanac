@@ -9,6 +9,7 @@ import { chartRows } from '../lib/boards/transcribed-chart.ts';
 const FEED = "https://filecdn.minimax.chat/public/4f5db695-e248-481a-9081-311b35ba5a87.jpg (transcribed 2026-11-08)";
 const board: Leaderboard = {
  benchmark: "mm-clawbench",
+ static: 'paper',
  url: "https://filecdn.minimax.chat/public/4f5db695-e248-481a-9081-311b35ba5a87.jpg",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",

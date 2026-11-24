@@ -152359,7 +152359,8 @@
       "url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/ER_metrics_comparison_Chart.width-1200.format-webp.webp",
       "feed": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/ER_metrics_comparison_Chart.width-1200.format-webp.webp (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": []
     },
@@ -159130,7 +159131,8 @@
       "url": "https://www.kimi.com/en/blog/kimi-k3-1-pro",
       "feed": "https://kimi-img.kimi.ai/pub/slides/kimi-fs/managed-assets/43394bf2-0bfe-4f41-8f93-bb7fb3a079c2.webp (transcribed 2026-11-10)",
       "terms": "Moonshot publishes this comparison image publicly; the almanac credits Moonshot AI and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": []
     },
@@ -168242,7 +168244,8 @@
       "url": "https://huggingface.co/datasets/joelniklaus/LEXam-hard",
       "feed": "https://huggingface.co/datasets/joelniklaus/LEXam-hard/resolve/main/figures/lexam_full_vs_hard.png",
       "terms": "Official public dataset-card results. The almanac credits SwissLegalEvals and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4"
@@ -175541,7 +175544,8 @@
       "url": "https://www.loop.com/article/introducing-the-long-horizon-auditbench-for-supply-chain-ai",
       "feed": "https://cdn.prod.website-files.com/668c00971d3dfeff704769f4/6a963f27c8b04196ac9be935_ea04a921.avif",
       "terms": "Loop reserves all rights. Its article reports relative inference costs. https://www.loop.com/article/introducing-the-long-horizon-auditbench-for-supply-chain-ai The robots.txt request returned 403.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Loop"
@@ -176029,7 +176033,8 @@
       "url": "https://raw.githubusercontent.com/THUDM/LongAlign/HEAD/assets/leaderboard.png",
       "feed": "https://raw.githubusercontent.com/THUDM/LongAlign/HEAD/assets/leaderboard.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "ChatGLM3-6B-128k",
@@ -176353,7 +176358,8 @@
       "feed": "https://cdn.openai.com/gpt-5-system-card.pdf",
       "terms": "OpenAI publishes the system card on its CDN. The CDN returned 404 for robots.txt. OpenAI terms apply.",
       "host": "OpenAI",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": []
     },
@@ -184868,7 +184874,8 @@
       "feed": "https://assets.claude.com/bbd8ef16d70b7a1665f14f306ee88b53f686aa75.pdf",
       "terms": "Public Anthropic system card. The asset host returns 404 for robots.txt. Credit Figure 2.21.2.A.",
       "host": "Anthropic",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": []
     },
@@ -194648,7 +194655,8 @@
       "url": "https://filecdn.minimax.chat/public/4f5db695-e248-481a-9081-311b35ba5a87.jpg",
       "feed": "https://filecdn.minimax.chat/public/4f5db695-e248-481a-9081-311b35ba5a87.jpg (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": []
     },
@@ -199574,7 +199582,8 @@
       "url": "https://arxiv.org/abs/2401.06209",
       "feed": "https://raw.githubusercontent.com/tsb0601/MMVP/main/imgs/mllm_results.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Bard",
@@ -216443,7 +216452,8 @@
       "url": "https://github.com/databricks/officeqa",
       "feed": "https://raw.githubusercontent.com/databricks/officeqa/HEAD/figures/officeqa_pro_agent_harness_performance.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": []
     },
@@ -216451,7 +216461,8 @@
       "url": "https://github.com/databricks/officeqa",
       "feed": "https://raw.githubusercontent.com/databricks/officeqa/HEAD/figures/officeqa_pro_v2_agent_harness_performance.png (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": []
     },
@@ -240332,7 +240343,8 @@
       "url": "https://open-eqa.github.io/",
       "feed": "https://open-eqa.github.io/assets/images/multi-modal-llms.svg (transcribed 2026-11-08)",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Claude 3 (variant unspecified)",
@@ -254860,7 +254872,8 @@
       "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/",
       "feed": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Progress_Classification_Comparis.width-1200.format-webp.webp",
       "terms": "Public Google research results. The Almanac credits Google and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": []
     },
@@ -258666,7 +258679,8 @@
       "url": "https://www.qodo.ai/ai-code-review-benchmark/",
       "feed": "https://www.qodo.ai/wp-content/uploads/2026/02/AI-Code-Review-Benchmark-1-1.png (transcribed 2026-11-18)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Augment (code review system, backbone unspecified)",
@@ -260473,7 +260487,8 @@
       "url": "https://reducto.ai/blog/rd-tablebench",
       "feed": "https://reducto.ai/api/media/file/rd-tablebench.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Azure (document parsing system)",
@@ -274905,7 +274920,8 @@
       "url": "https://www.anthropic.com/research/smart-contracts",
       "feed": "https://www-cdn.anthropic.com/images/4zrzovbb/website/2194414dd862192b925ebd0c01c9895cb2454da9-1999x1280.png",
       "terms": "Anthropic terms restrict automated extraction. The almanac credits Anthropic, MATS, and the Anthropic Fellows and links their aggregate research results. Values preserve printed rounding.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "DeepSeek V3 (snapshot unspecified)",
@@ -276756,7 +276772,8 @@
       "url": "https://seed.bytedance.com/en/blog/seed2-1-officially-released-advancing-ai-productivity",
       "feed": "https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/user-upload/4xfa4mqq4ujsp.png (transcribed 2026-11-08)",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": []
     },
@@ -281735,7 +281752,8 @@
       "url": "https://www.snowflake.com/en/blog/engineering/enterprise-text-to-sql-arctic-r2/",
       "feed": "https://www.snowflake.com/adobe/dynamicmedia/deliver/dm-aid--bc7d70f6-ded6-47e6-a98e-b05d2500674c/arctictext2sqlr2fig1.png?quality=100&preferwebp=true&sfver=28672822",
       "terms": "Snowflake publishes the comparison chart publicly. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Arctic Text2SQL R1.5",
@@ -288613,7 +288631,8 @@
       "url": "https://note.com/sugar_arc_works/n/n8eb45d051541",
       "feed": "https://assets.st-note.com/img/1788343264-bpD7ZaRqvFm5e3tCnQHWj6X8.png?width=1200",
       "terms": "The organizer permits use of the recipes. The post gives no separate license for the standings or artwork. https://note.com/sugar_arc_works/n/n8eb45d051541 The note.com robots file restricts API paths and allows this article.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "おジェミ (Gemini)",
@@ -294806,7 +294825,8 @@
       "feed": "https://raw.githubusercontent.com/SKYLENAGE-AI/SWE-CI/HEAD/docs/result.png",
       "terms": "The makers publish the benchmark under Apache 2.0. https://huggingface.co/datasets/skylenage-ai/SWE-CI",
       "headline": "EvoScore at gamma = 1, read from the leaderboard chart to the nearest percentage point.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [
         "doubao-seed-1-8-251228",
@@ -302854,7 +302874,8 @@
       "url": "https://qwen.ai/blog?id=qwen3.6-max-preview",
       "feed": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen3.6/Figures/qwen3.6_max_preview_score.png (transcribed 2026-11-10)",
       "terms": "Qwen publishes this comparison image publicly; the almanac credits Qwen and links the source.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": []
     },
@@ -314509,7 +314530,8 @@
       "url": "https://joinhandshake.com/research/benchmarks/vials/",
       "feed": "https://cdn.sanity.io/images/mz2hls6g/production/9ca45141b58e0da42f3f1e738f04cca4cf4a98af-1800x4100.png",
       "terms": "Handshake terms restrict automated extraction. The almanac credits and links Handshake AI.",
-      "retrieved": "2026-11-23",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": []
     },
@@ -325867,11 +325889,10 @@
       "url": "https://huggingface.co/tencent/Hy4-flash",
       "feed": "https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png (transcribed 2026-11-20)",
       "terms": "Public results in the Tencent Hugging Face model card. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
-      "rows": 6,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": []
     },
     "wordlearenas": {
       "url": "https://drchangliu.github.io/WordleArenas/experiment_results.html",
