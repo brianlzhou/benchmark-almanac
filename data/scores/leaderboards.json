@@ -65805,6 +65805,47 @@
         }
       }
     },
+    "cookie-bench": {
+      "url": "https://github.com/Haoyue-Yang/Cookie-Bench",
+      "feed": "https://arxiv.org/html/2605.30000",
+      "terms": "Public arXiv paper published by the Cookie-Bench authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 26,
+      "unmatched": [],
+      "parts": {
+        "dynamic": {
+          "name": "Dynamic",
+          "group": "App type"
+        },
+        "static": {
+          "name": "Static",
+          "group": "App type"
+        }
+      },
+      "stats": {
+        "dynamicFunc": {
+          "name": "Dynamic functionality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "dynamicAes": {
+          "name": "Dynamic aesthetics",
+          "unit": "%",
+          "better": "higher"
+        },
+        "staticFunc": {
+          "name": "Static functionality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "staticAes": {
+          "name": "Static aesthetics",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "cooperate-to-compete-c2c": {
       "url": "https://arxiv.org/html/2604.25088v1#S1.F1",
       "feed": "https://arxiv.org/html/2604.25088v1/main_c.svg",
@@ -100945,6 +100986,65 @@
           "name": "Lineup efficiency",
           "unit": "%",
           "better": "higher"
+        }
+      }
+    },
+    "fairchem-leaderboard": {
+      "url": "https://huggingface.co/spaces/facebook/fairchem_leaderboard",
+      "feed": "https://facebook-fairchem-leaderboard.hf.space/config",
+      "terms": "Public Hugging Face Gradio Space published by Meta FAIR.",
+      "headline": "Mean energy MAE in meV across the seven OMol25 chemistry tasks (lower is better), computed over complete entries in the FAIR Chemistry Overview table.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AllScAIP-md-cons.",
+        "AllScAIP-md-d.",
+        "AllScAIP-md-ft-cons.",
+        "AllScAIP-sm-ft-cons.",
+        "GemNet-OC-r12",
+        "GemNet-OC-r6",
+        "MACE-POLAR-1-L (FP64)",
+        "Mena-3M",
+        "Mena-LAM-S",
+        "PET-OMOL-L",
+        "UMA-M-1p1",
+        "UMA-S-1.2.1 D4rev",
+        "UMA-S-1p1",
+        "UMA-S-1p2",
+        "eSEN-md-d.",
+        "eSEN-sm-cons.",
+        "mace-omol-L-0",
+        "uma-s-1.2.1-d4rev-c1",
+        "uma-s-1.2.1-d4rev-c2"
+      ],
+      "parts": {
+        "ligandPocket": {
+          "name": "Ligand pocket Ixn Energy MAE",
+          "group": "OMol25 task"
+        },
+        "ligandStrain": {
+          "name": "Ligand strain Energy MAE",
+          "group": "OMol25 task"
+        },
+        "conformers": {
+          "name": "Conformers Energy MAE",
+          "group": "OMol25 task"
+        },
+        "protonation": {
+          "name": "Protonation Energy MAE",
+          "group": "OMol25 task"
+        },
+        "distanceScaling": {
+          "name": "Distance scaling LR Energy MAE",
+          "group": "OMol25 task"
+        },
+        "ieEa": {
+          "name": "IE/EA Energy MAE",
+          "group": "OMol25 task"
+        },
+        "spinGap": {
+          "name": "Spin gap Energy MAE",
+          "group": "OMol25 task"
         }
       }
     },
@@ -259110,6 +259210,27 @@
         }
       }
     },
+    "qwen3guardtest": {
+      "url": "https://huggingface.co/datasets/Qwen/Qwen3GuardTest",
+      "feed": "https://arxiv.org/html/2510.14276",
+      "terms": "Public arXiv technical report published by the Qwen team.",
+      "headline": "F1 score (%) on the Qwen3GuardTest thinking-content moderation split (Think column in Table 3 of the Qwen3Guard technical report).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "LlamaGuard3-8B",
+        "LlamaGuard4-12B",
+        "NemoGuard-8B",
+        "PolyGuard-Qwen-7B",
+        "Qwen3Guard-0.6B-Gen",
+        "Qwen3Guard-4B-Gen",
+        "Qwen3Guard-8B-Gen",
+        "ShieldGemma-27B",
+        "ShieldGemma-9B",
+        "WildGuard-7B"
+      ]
+    },
     "qwenblenderbench": {
       "url": "https://qwen.ai/api/v2/article/?language=en-US&path=qwen3.8&type=qwen_ai",
       "feed": "https://qwen.ai/api/v2/article/?language=en-US&path=qwen3.8&type=qwen_ai",
@@ -267838,6 +267959,38 @@
         "Compatibility (VQA)": {
           "name": "Compatibility",
           "group": "Task type"
+        }
+      }
+    },
+    "robotap": {
+      "url": "https://robotap.github.io/",
+      "feed": "https://arxiv.org/html/2308.15975",
+      "terms": "Public arXiv paper published by Google DeepMind and University College London.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "Online TAPIR",
+        "PIPs",
+        "TAP-Net",
+        "TAPIR"
+      ],
+      "parts": {
+        "staticCamera": {
+          "name": "Static camera",
+          "group": "Camera motion"
+        },
+        "movingCamera": {
+          "name": "Moving camera",
+          "group": "Camera motion"
+        },
+        "staticPoints": {
+          "name": "Static points",
+          "group": "Point motion"
+        },
+        "movingPoints": {
+          "name": "Moving points",
+          "group": "Point motion"
         }
       }
     },

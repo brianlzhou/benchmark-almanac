@@ -2126,6 +2126,11 @@
       "via": "Benchmark Radar. The dedicated benchmark repository had 220 stars in the required first-run snapshot. Its README and paper were opened in this run."
     },
     {
+      "id": "auditbench-anthropic",
+      "date": "2026-11-24",
+      "via": "Anthropic Alignment Science blog sweep found AuditBench with 56 audited model organisms on Hugging Face and arXiv:2602.22755."
+    },
+    {
       "id": "augmented-reality-patent-search",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -5124,6 +5129,11 @@
       "id": "cookbench-cookwing-v1",
       "date": "2026-11-20",
       "via": "A search for blind cooking comparisons surfaced a cook’s ingredient quantity test and its original score chart."
+    },
+    {
+      "id": "cookie-bench",
+      "date": "2026-11-24",
+      "via": "Baidu ERNIE-5.5-Flash-Preview model card sweep led to Cookie-Bench (arXiv:2605.30000) scoring 13 frontier models in Table 1."
     },
     {
       "id": "cooperative-codenames-bittker",
@@ -8594,6 +8604,11 @@
       "id": "faintasy-football",
       "date": "2026-11-20",
       "via": "Searching for fantasy team managers led from Premier League assistants to an NFL league with published results."
+    },
+    {
+      "id": "fairchem-leaderboard",
+      "date": "2026-11-24",
+      "via": "Meta FAIR Hugging Face org sweep found FAIR Chemistry Leaderboard evaluating atomistic foundation models across OMol25 and OC20."
     },
     {
       "id": "fairface",
@@ -19961,6 +19976,11 @@
       "via": "Hugging Face benchmark datasets sorted by likes."
     },
     {
+      "id": "qwen3guardtest",
+      "date": "2026-11-24",
+      "via": "Qwen Hugging Face org sweep found Qwen3GuardTest with 37 HF likes and thinking moderation scores in arXiv:2510.14276 Table 3."
+    },
+    {
       "id": "qwenchinesebench",
       "date": "2026-11-01",
       "via": "Qwen3.6-Max-Preview launch post score image."
@@ -20764,6 +20784,11 @@
       "id": "robospatial-home",
       "date": "2026-11-01",
       "via": "The Qwen3-VL technical report (arXiv 2511.21631) lists its evaluation prompt for this benchmark, and the almanac lacked it."
+    },
+    {
+      "id": "robotap",
+      "date": "2026-11-24",
+      "via": "AllenAI RoboTracker model card sweep led to Google DeepMind RoboTAP benchmark (arXiv:2308.15975) with Tables 4 and 5 scores."
     },
     {
       "id": "roboteam",
@@ -22089,6 +22114,11 @@
       "id": "sldbench",
       "date": "2026-11-19",
       "via": "Harbor lists this evaluation in its official registry."
+    },
+    {
+      "id": "sleight-bench",
+      "date": "2026-11-24",
+      "via": "Anthropic Alignment Science blog sweep found SLEIGHT-Bench with public transcript repository and arXiv:2605.16626."
     },
     {
       "id": "slidevqa",
