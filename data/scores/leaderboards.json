@@ -16576,10 +16576,9 @@
       "feed": "https://www.mercor.com/apex/apex-agents-leaderboard/ (__NEXT_DATA__, mean-score, v1.1)",
       "terms": "Mercor terms prohibit automated scraping; the Almanac credits Mercor and links the original source.",
       "retrieved": "2026-11-23",
-      "rows": 74,
+      "rows": 75,
       "unmatched": [
         "Beam",
-        "Hy4 Flash",
         "Nemotron 3.5 Bolt",
         "Qwen3.5"
       ],
@@ -37401,7 +37400,7 @@
       "feed": "https://huggingface.co/spaces/YLab-Open/BRIDGE-Medical-Leaderboard/raw/main/leaderboards/Zero-Shot_leaderboard.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
       "retrieved": "2026-11-23",
-      "rows": 171,
+      "rows": 174,
       "unmatched": [
         "AntAngelMed",
         "AxonMed-32B-Thinking",
@@ -37456,7 +37455,6 @@
         "gemma-2-27b-it",
         "gemma-2-9b-it",
         "gpt-4o-0806",
-        "medgemma-1.5-4b-it",
         "medgemma-27b-it",
         "medgemma-27b-text-it",
         "medgemma-4b-it",
@@ -38956,14 +38954,13 @@
       "feed": "https://petergpt.github.io/bullshit-benchmark/data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
       "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
       "retrieved": "2026-11-23",
-      "rows": 255,
+      "rows": 257,
       "unmatched": [
         "baidu/ernie-4.5-vl-424b-a47b",
         "deepseek/deepseek-chat",
         "openrouter/healer-alpha",
         "openrouter/hunter-alpha",
-        "stealth/ox-alpha",
-        "tencent/hy4-flash"
+        "stealth/ox-alpha"
       ],
       "parts": {
         "authoritative_framing": {
@@ -54337,10 +54334,9 @@
       "feed": "https://aclanthology.org/2025.sdp-1.24.pdf",
       "terms": "ACL Anthology copyright and licensing terms apply. https://aclanthology.org/faq/copyright/",
       "retrieved": "2026-11-20",
-      "rows": 2,
+      "rows": 3,
       "unmatched": [
-        "Gemini 2.5 Pro (snapshot unspecified)",
-        "Yi-1.5-9B-Chat-16K"
+        "Gemini 2.5 Pro (snapshot unspecified)"
       ],
       "harnesses": "system",
       "parts": {
@@ -82185,7 +82181,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=allcategories",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 182,
+      "rows": 183,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -82197,7 +82193,6 @@
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
         "GPT-5.4 (Design Skill, Medium)",
-        "Hy4 Flash",
         "Kimi K2 Turbo Preview",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
@@ -82245,7 +82240,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=3d",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 171,
+      "rows": 172,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -82254,7 +82249,6 @@
         "Deca 2.6 Mini",
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
-        "Hy4 Flash",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
         "Magistral Small 1.2 (2509)",
@@ -82761,7 +82755,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=gamedev",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 182,
+      "rows": 184,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -82773,7 +82767,6 @@
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
         "ERNIE 5.5 Flash Preview",
-        "Hy4 Flash",
         "Kimi K2 Turbo Preview",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
@@ -83157,9 +83150,8 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=image",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 58,
+      "rows": 59,
       "unmatched": [
-        "Hy4 Flash",
         "Nex N2 Pro"
       ],
       "stats": {
@@ -83788,7 +83780,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=uicomponent",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 175,
+      "rows": 176,
       "unmatched": [
         "AGI-01 Swift",
         "AesCoder-4B",
@@ -83799,7 +83791,6 @@
         "Deca 2.6 Mini",
         "Deca 2.6 Pro",
         "Deca 2.6 Ultra",
-        "Hy4 Flash",
         "Magistral Medium 1.2 (2509)",
         "Magistral Small 1.2 (2509)",
         "Mistral Large 2.1 (2411)",
@@ -84044,7 +84035,7 @@
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=website&inputModality=text",
       "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
       "retrieved": "2026-11-23",
-      "rows": 188,
+      "rows": 189,
       "unmatched": [
         "AesCoder-4B",
         "Codestral 2 (2501)",
@@ -84054,7 +84045,6 @@
         "Deca 2.6 Mini",
         "Deca 2.6 Ultra",
         "GPT-5.4 (Design Skill, Medium)",
-        "Hy4 Flash",
         "Kimi K2 Turbo Preview",
         "Llama 3.1 Nemotron Ultra 253B",
         "Magistral Medium 1.2 (2509)",
@@ -89266,9 +89256,8 @@
       "feed": "https://dubesor.de/chess/chess-data.json",
       "terms": "The site allows this data path and restricts query URLs in robots.txt. The maker marks the game interface code as MIT. The leaderboard gives no separate license for its scores. https://dubesor.de/chess/",
       "retrieved": "2026-11-23",
-      "rows": 230,
+      "rows": 233,
       "unmatched": [
-        "hy4-flash",
         "maia5-1500",
         "ministral-3b-2512",
         "muse-spark-1.3-contributor"
@@ -92557,15 +92546,12 @@
       "terms": "Paper and license at https://arxiv.org/abs/2505.18383",
       "static": "paper",
       "retrieved": "2026-11-20",
-      "rows": 10,
+      "rows": 16,
       "unmatched": [
         "ALLaM-7B-Instruct",
         "AceGPT-13B-chat",
         "AceGPT-7B-chat",
-        "Atlas-Chat-2B",
-        "Atlas-Chat-9B",
         "Llama-3.2-3B-Instruct",
-        "NileChat (3B)",
         "Qwen2.5-3B-Instruct",
         "Qwen2.5-7B-Instruct",
         "ar-stablelm-2-chat",
@@ -99974,10 +99960,8 @@
       "feed": "https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png",
       "terms": "Tencent Hy License. https://huggingface.co/tencent/Hy4-flash/blob/main/LICENSE",
       "retrieved": "2026-11-23",
-      "rows": 6,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "rows": 7,
+      "unmatched": []
     },
     "exfuntube": {
       "url": "https://aclanthology.org/2023.emnlp-main.176/",
@@ -102268,9 +102252,8 @@
       "feed": "https://arxiv.org/html/2511.02872",
       "terms": "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://creativecommons.org/licenses/by/4.0/.",
       "retrieved": "2026-11-20",
-      "rows": 6,
+      "rows": 7,
       "unmatched": [
-        "Goedel-Prover-V2-32B",
         "Kimina-Prover-72B"
       ],
       "static": "paper",
@@ -102324,9 +102307,8 @@
       "feed": "https://arxiv.org/html/2511.02872",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "retrieved": "2026-11-20",
-      "rows": 6,
+      "rows": 7,
       "unmatched": [
-        "Goedel-Prover-V2-32B",
         "Kimina-Prover-72B"
       ],
       "static": "paper"
@@ -133892,10 +133874,8 @@
       "feed": "https://www.vals.ai/benchmarks/hlab (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-23",
-      "rows": 43,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 44,
+      "unmatched": [],
       "stats": {
         "latency": {
           "name": "Mean latency per test",
@@ -162380,7 +162360,7 @@
       "feed": "https://kormedmcqa-v.github.io/results.json",
       "terms": "The leaderboard code uses MIT and the dataset uses CC BY-NC-SA 4.0. https://kormedmcqa-v.github.io/",
       "retrieved": "2026-11-23",
-      "rows": 33,
+      "rows": 34,
       "unmatched": [
         "A.X-4.0-VL-Light",
         "Hulu-Med-14B",
@@ -162393,7 +162373,6 @@
         "Kanana-1.5-V-3B-Instruct",
         "Lingshu-32B",
         "Lingshu-7B",
-        "MedGemma-1.5-4B-IT",
         "MedGemma-27B-IT",
         "MedGemma-4B-IT",
         "Ministral-3-14B-Instruct-2512",
@@ -162433,7 +162412,7 @@
       "feed": "https://kormedmcqa-v.github.io/results.json",
       "terms": "The leaderboard repository uses the MIT license. https://github.com/kormedmcqa-v/kormedmcqa-v.github.io/blob/main/LICENSE The robots URL returns HTML.",
       "retrieved": "2026-11-23",
-      "rows": 33,
+      "rows": 34,
       "unmatched": [
         "A.X-4.0-VL-Light",
         "Hulu-Med-14B",
@@ -162446,7 +162425,6 @@
         "Kanana-1.5-V-3B-Instruct",
         "Lingshu-32B",
         "Lingshu-7B",
-        "MedGemma-1.5-4B-IT",
         "MedGemma-27B-IT",
         "MedGemma-4B-IT",
         "Ministral-3-14B-Instruct-2512",
@@ -179994,10 +179972,9 @@
       "terms": "Paper and license at https://arxiv.org/abs/2509.13414",
       "static": "paper",
       "retrieved": "2026-11-21",
-      "rows": 0,
+      "rows": 1,
       "unmatched": [
         "AnyCalib",
-        "MapAnything",
         "MoGe-2",
         "VGGT"
       ],
@@ -250874,9 +250851,8 @@
       "feed": "https://pokebench.tv/runs.json",
       "terms": "The repository uses the MIT license. It excludes the game ROM. https://raw.githubusercontent.com/VibeCodyH/pokebench/main/LICENSE The host has no published robots directives at /robots.txt.",
       "retrieved": "2026-11-23",
-      "rows": 19,
+      "rows": 20,
       "unmatched": [
-        "Hy4 Flash",
         "Qwen3-VL 30B"
       ],
       "costPer": "run",
@@ -250964,10 +250940,9 @@
       "feed": "https://pokebench.tv/runs.json",
       "terms": "The site's robots file publishes content signals. The repository uses the MIT license. It excludes the game ROM. https://raw.githubusercontent.com/VibeCodyH/pokebench/main/LICENSE",
       "retrieved": "2026-11-23",
-      "rows": 37,
+      "rows": 38,
       "unmatched": [
         "Crouton Alpha",
-        "Hy4 Flash",
         "Qwen3-VL 30B",
         "Space Bunny Alpha"
       ],
@@ -258425,7 +258400,7 @@
       "feed": "https://qimma-leaderboard.hf.space/api/leaderboard",
       "terms": "Public results published by the benchmark authors at qimma-leaderboard.hf.space; retain source attribution and follow the upstream terms.",
       "retrieved": "2026-11-23",
-      "rows": 50,
+      "rows": 54,
       "unmatched": [
         "Applied-Innovation-Center/AIC-1",
         "Applied-Innovation-Center/Karnak-40B-v1.0",
@@ -258441,9 +258416,6 @@
         "LiquidAI LFM2-24B-A2B",
         "LiquidAI LFM2-8B-A1B",
         "LiquidAI LFM2.5-1.2B-Instruct",
-        "MBZUAI-Paris Atlas-Chat-27B",
-        "MBZUAI-Paris Atlas-Chat-2B",
-        "MBZUAI-Paris Atlas-Chat-9B",
         "MBZUAI-Paris Nile-Chat-4B",
         "MiniMaxAI MiniMax-M2",
         "Navid-AI Yehia-7B-preview",
@@ -258455,7 +258427,6 @@
         "Qwen/Qwen2.5-3B-Instruct",
         "Qwen/Qwen2.5-7B-Instruct",
         "Sakalti Ultiima-72B",
-        "UBC-NLP NileChat-3B",
         "UBC-NLP NileChat-3B-Base",
         "airev-ai emirati-14b-v2",
         "hammh0a Hala-9B",
@@ -259416,10 +259387,9 @@
       "feed": "https://crashlab.in/radle/2/leaderboard (static HTML table, RadLE-C score)",
       "terms": "Static CRASH Lab page; crashlab.in robots.txt allows all agents with content signals search yes, AI training no, use reference.",
       "retrieved": "2026-11-23",
-      "rows": 12,
+      "rows": 13,
       "unmatched": [
         "Lingshu 32B",
-        "MedGemma 1.5 4B",
         "Nemotron 3 Omni",
         "OctoMed 7B"
       ]
@@ -299923,10 +299893,8 @@
       "feed": "https://ofhuhcpkvzjlejydnvyd.supabase.co/functions/v1/leaderboard-read (POST {\"package\":\"terminal-bench/terminal-bench\",\"name\":\"4-1-0\"})",
       "terms": "Public, unauthenticated Harbor Hub endpoint that tbench.ai itself calls, under the Harbor Hub Terms of Service; the Terminal-Bench repository is Apache-2.0.",
       "retrieved": "2026-11-23",
-      "rows": 66,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 67,
+      "unmatched": [],
       "chart": {
         "title": "Pareto: accuracy against time",
         "note": "Each point is one agent, model and effort. The board plots total run time; this plots the mean time per trial, the same frontier at a fixed trial count.",
@@ -308851,10 +308819,8 @@
       "feed": "https://www.vals.ai/benchmarks/emb-v1-1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-23",
-      "rows": 47,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 48,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -309180,10 +309146,8 @@
       "feed": "https://www.vals.ai/benchmarks/finance_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
       "retrieved": "2026-11-23",
-      "rows": 45,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "rows": 46,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -325868,10 +325832,8 @@
       "feed": "https://huggingface.co/tencent/Hy4-flash/resolve/main/assets/benchmark.png (transcribed 2026-11-20)",
       "terms": "Public results in the Tencent Hugging Face model card. Attribution and source licensing apply.",
       "retrieved": "2026-11-23",
-      "rows": 6,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "rows": 7,
+      "unmatched": []
     },
     "wordlearenas": {
       "url": "https://drchangliu.github.io/WordleArenas/experiment_results.html",
@@ -326149,10 +326111,8 @@
       "terms": "Tencent Hy public research article. https://hunyuan.tencent.com/",
       "static": "paper",
       "retrieved": "2026-11-21",
-      "rows": 3,
-      "unmatched": [
-        "Hy4 flash"
-      ]
+      "rows": 4,
+      "unmatched": []
     },
     "workflowarena": {
       "url": "https://lab.einsia.ai/workflowarena/home.html#leaderboard",

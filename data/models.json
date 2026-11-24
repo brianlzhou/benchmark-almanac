@@ -7390,6 +7390,84 @@
     ]
   },
   {
+    "id": "cadmium-1-5b",
+    "name": "CADmium-1.5B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-1.5B",
+    "aliases": [
+      "CADmium-1.5B",
+      "chandar-lab/CADmium-1.5B"
+    ]
+  },
+  {
+    "id": "cadmium-3b",
+    "name": "CADmium-3B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-3B",
+    "aliases": [
+      "CADmium-3B",
+      "chandar-lab/CADmium-3B"
+    ]
+  },
+  {
+    "id": "cadmium-7b",
+    "name": "CADmium-7B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-7B",
+    "aliases": [
+      "CADmium-7B",
+      "chandar-lab/CADmium-7B"
+    ]
+  },
+  {
+    "id": "cadmium-14b",
+    "name": "CADmium-14B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-14B",
+    "aliases": [
+      "CADmium-14B",
+      "chandar-lab/CADmium-14B"
+    ]
+  },
+  {
+    "id": "fundusexpert",
+    "name": "FundusExpert",
+    "lab": "shanghai-ai-lab",
+    "family": "FundusExpert",
+    "released": "2025-07-23",
+    "weights": "open",
+    "card": "https://huggingface.co/MeteorElf/FundusExpert",
+    "aliases": [
+      "FundusExpert",
+      "MeteorElf/FundusExpert"
+    ]
+  },
+  {
+    "id": "codev-sva-8b",
+    "name": "CodeV-SVA-8B",
+    "lab": "ict-cas",
+    "family": "CodeV-SVA",
+    "released": "2025-11-22",
+    "weights": "open",
+    "card": "https://huggingface.co/wyt2000/CodeV-SVA-8B",
+    "aliases": [
+      "CodeV-SVA-8B",
+      "wyt2000/CodeV-SVA-8B"
+    ]
+  },
+  {
     "id": "phi-4-mini-reasoning",
     "name": "Phi-4-mini-reasoning",
     "lab": "microsoft",
@@ -8981,6 +9059,19 @@
     "settingAliases": {
       "GPT-OSS 20B (Med)": "medium"
     }
+  },
+  {
+    "id": "openai-privacy-filter",
+    "name": "OpenAI Privacy Filter",
+    "lab": "openai",
+    "family": "Privacy Filter",
+    "released": "2026-04-22",
+    "weights": "open",
+    "card": "https://huggingface.co/openai/privacy-filter",
+    "aliases": [
+      "Privacy Filter",
+      "openai/privacy-filter"
+    ]
   },
   {
     "id": "qwen3-4b-instruct-2507",
@@ -14926,6 +15017,86 @@
     "released": "2026-03-17",
     "aliases": [
       "Omnilingual SONAR"
+    ]
+  },
+  {
+    "id": "sam-3d-body-vit-h",
+    "name": "SAM 3D Body (ViT-H)",
+    "lab": "meta",
+    "family": "SAM 3D",
+    "released": "2025-11-19",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/sam-3d-body-vith",
+    "aliases": [
+      "3DB-H",
+      "SAM 3D Body ViT-H",
+      "facebook/sam-3d-body-vith"
+    ]
+  },
+  {
+    "id": "sam-3d-body-dinov3",
+    "name": "SAM 3D Body (DINOv3)",
+    "lab": "meta",
+    "family": "SAM 3D",
+    "released": "2025-11-19",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/sam-3d-body-dinov3",
+    "aliases": [
+      "3DB-DINOv3",
+      "SAM 3D Body DINOv3",
+      "facebook/sam-3d-body-dinov3"
+    ]
+  },
+  {
+    "id": "sam-3d-objects",
+    "name": "SAM 3D Objects",
+    "lab": "meta",
+    "family": "SAM 3D",
+    "released": "2025-11-19",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/sam-3d-objects",
+    "aliases": [
+      "SAM 3D Objects",
+      "facebook/sam-3d-objects"
+    ]
+  },
+  {
+    "id": "mapanything",
+    "name": "MapAnything",
+    "lab": "meta",
+    "family": "MapAnything",
+    "released": "2025-09-16",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/map-anything",
+    "aliases": [
+      "MapAnything",
+      "facebook/map-anything"
+    ]
+  },
+  {
+    "id": "dinov3-vit-7b",
+    "name": "DINOv3 ViT-7B",
+    "lab": "meta",
+    "family": "DINOv3",
+    "released": "2025-08-13",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/dinov3-vit7b16-pretrain-lvd1689m",
+    "aliases": [
+      "DINOv3 Web ViT-7B",
+      "dinov3-vit7b16-pretrain-lvd1689m"
+    ]
+  },
+  {
+    "id": "dinov3-vit-7b-sat",
+    "name": "DINOv3 ViT-7B (satellite)",
+    "lab": "meta",
+    "family": "DINOv3",
+    "released": "2025-08-13",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/dinov3-vit7b16-pretrain-sat493m",
+    "aliases": [
+      "DINOv3 Sat ViT-7B",
+      "dinov3-vit7b16-pretrain-sat493m"
     ]
   },
   {
