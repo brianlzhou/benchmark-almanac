@@ -7699,7 +7699,7 @@
       "feed": "https://raw.githubusercontent.com/TajaKuzman/AGILE-Automatic-Genre-Identification-Benchmark/main/results/results.json",
       "terms": "The AGILE repository is public. Follow its license and cite the authors. https://github.com/TajaKuzman/AGILE-Automatic-Genre-Identification-Benchmark",
       "headline": "The source reports no overall score, so this is the plain mean of the two Macro F1 test-set scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "COMPLEMENTNB",
@@ -7729,6 +7729,18 @@
           "name": "EN-GINCO Macro F1",
           "group": "Test set",
           "unit": "score"
+        }
+      },
+      "stats": {
+        "xGincoMicro": {
+          "name": "X-GINCO Micro F1",
+          "unit": "score",
+          "better": "higher"
+        },
+        "enGincoMicro": {
+          "name": "EN-GINCO Micro F1",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -32106,7 +32118,7 @@
       "url": "https://arxiv.org/html/2605.28183v4",
       "feed": "https://arxiv.org/html/2605.28183v4",
       "terms": "The BenGER dataset uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
       "parts": {
@@ -34115,7 +34127,7 @@
       "url": "https://eval.raycaster.ai/benchmarks/biopharma-bench/",
       "feed": "https://eval.raycaster.ai/benchmarks/biopharma-bench/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [],
       "chart": {
@@ -34144,9 +34156,10 @@
           "unit": "%",
           "better": "higher"
         },
-        "passAt1Margin": {
-          "name": "Pass@1 margin",
-          "unit": "%"
+        "fullPassCount": {
+          "name": "Full passes",
+          "unit": "count",
+          "better": "higher"
         },
         "steps": {
           "name": "Steps",
@@ -39872,7 +39885,7 @@
       "url": "https://willpatrick.xyz/cadevalresults_20250422_095709/dashboard_data.json",
       "feed": "https://willpatrick.xyz/cadevalresults_20250422_095709/dashboard_data.json",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "gemini-1.5-pro [snapshot unspecified]",
@@ -72892,7 +72905,7 @@
       "url": "https://crm-agent-bench.github.io/#results",
       "feed": "https://crm-agent-bench.github.io/data/results.js",
       "terms": "The repository specifies Apache 2.0. The site does not give separate leaderboard terms. https://github.com/salesforce-misc/crm-agent-bench",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "costPer": "run",
@@ -72940,6 +72953,10 @@
           "name": "Three-round pass rate",
           "unit": "%",
           "better": "higher"
+        },
+        "totalTokens": {
+          "name": "First round total tokens",
+          "unit": "tokens"
         },
         "toolCalls": {
           "name": "First round tool calls",
@@ -75682,9 +75699,36 @@
       "url": "https://cybench.github.io/",
       "feed": "https://cybench.github.io/data/leaderboard.csv (End-to-End % Solved)",
       "terms": "CSV on the Cybench GitHub Pages site, which states no terms; the Cybench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "Flag Success Count": {
+          "name": "Flag successes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "Subtask-Guided # Solved": {
+          "name": "Subtask-guided tasks solved",
+          "unit": "count",
+          "better": "higher"
+        },
+        "Subtask-Guided % Solved": {
+          "name": "Subtask-guided solve rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Sum of Subtask Run Scores": {
+          "name": "Sum of subtask run scores",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Subtasks % Solved": {
+          "name": "Subtasks solve rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "cybergym": {
       "url": "https://www.cybergym.io/cybergym/",
@@ -99482,11 +99526,39 @@
       "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Cost vs score",
+        "note": "Capability coverage against mean cost per episode on a logarithmic scale, matching the source Cost vs score plot.",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per episode",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Capability coverage",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "reference": [
         "baseline",
         "AutoNudge"
       ],
-      "harnesses": "system"
+      "harnesses": "system",
+      "stats": {
+        "episodes": {
+          "name": "Episodes",
+          "unit": "count"
+        },
+        "totalSpend": {
+          "name": "Total spend",
+          "unit": "usd",
+          "better": "lower"
+        }
+      }
     },
     "exploitgym": {
       "url": "https://www.cybergym.io/exploitgym/",
@@ -151357,13 +151429,17 @@
       "url": "https://insurebench.insure-thing.com/#leaderboard",
       "feed": "https://insurebench.insure-thing.com/data/report.json",
       "terms": "InsureThing posts aggregate results. Its launch page carries a copyright notice and gives no reuse license. https://www.insure-thing.com/blog/insurebench-rating-the-model-and-the-harness The host allows crawlers in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
       "stats": {
         "items": {
           "name": "Items",
           "unit": "count"
+        },
+        "totalTokens": {
+          "name": "Total tokens per task",
+          "unit": "tokens"
         },
         "meteredCost": {
           "name": "Metered cost per task",
@@ -162861,9 +162937,16 @@
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/figqa2-pdf/",
       "feed": "https://advances.edisonscientific.com/benchmarks/labbench2/figqa2-pdf/",
       "terms": "The Edison Scientific benchmark page is publicly readable. Link and attribute the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "durationSeconds": {
+          "name": "Duration",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "labbench2-litqa3": {
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/litqa3/",
@@ -175819,7 +175902,7 @@
       "url": "https://www.bevaya.ai/benchmarks",
       "feed": "https://www.bevaya.ai/benchmarks",
       "terms": "Bevaya grants internal business use. Other uses require written authorization. https://www.bevaya.ai/legal/terms-and-conditions robots.txt allows the benchmark.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Our Loss Run Model"
@@ -175883,6 +175966,36 @@
           "unit": "usd",
           "better": "lower"
         },
+        "cost_p25": {
+          "name": "Cost p25",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cost_p75": {
+          "name": "Cost p75",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cost_p25_claims": {
+          "name": "Claims cost p25",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cost_p75_claims": {
+          "name": "Claims cost p75",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cost_p25_policy": {
+          "name": "Policy cost p25",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "cost_p75_policy": {
+          "name": "Policy cost p75",
+          "unit": "usd",
+          "better": "lower"
+        },
         "lat_mean": {
           "name": "Mean latency",
           "unit": "seconds",
@@ -175895,6 +176008,36 @@
         },
         "lat_mean_policy": {
           "name": "Mean policy latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lat_p25": {
+          "name": "Latency p25",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lat_p75": {
+          "name": "Latency p75",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lat_p25_claims": {
+          "name": "Claims latency p25",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lat_p75_claims": {
+          "name": "Claims latency p75",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lat_p25_policy": {
+          "name": "Policy latency p25",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lat_p75_policy": {
+          "name": "Policy latency p75",
           "unit": "seconds",
           "better": "lower"
         },
@@ -257275,7 +257418,23 @@
       "rows": 16,
       "unmatched": [
         "Gemini 3.5 Pro"
-      ]
+      ],
+      "stats": {
+        "weeklyRoi": {
+          "name": "Weekly ROI",
+          "unit": "%",
+          "better": "higher"
+        },
+        "volume": {
+          "name": "Trading volume",
+          "unit": "usd"
+        },
+        "accountValue": {
+          "name": "Account value",
+          "unit": "usd",
+          "better": "higher"
+        }
+      }
     },
     "quran-qa-2023-passage-retrieval": {
       "url": "https://aclanthology.org/2023.arabicnlp-1.76.pdf#page=4",
@@ -258138,21 +258297,13 @@
       "url": "https://labs.ramp.com/accountingbench",
       "feed": "https://labs.ramp.com/accountingbench",
       "terms": "Ramp links its terms at https://ramp.com/legal/ramp-labs-terms. I could not verify a data reuse license. Ramp Labs serves its application HTML at /robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [],
       "reference": [
         "Mercor Archipelago"
       ],
       "stats": {
-        "taskCount": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "episodeCount": {
-          "name": "Episodes",
-          "unit": "count"
-        },
         "passAt1": {
           "name": "Pass@1",
           "unit": "score",
@@ -258164,6 +258315,12 @@
           "unit": "score",
           "better": "higher",
           "note": "Pass rate from 0 to 1."
+        },
+        "pass3": {
+          "name": "Pass^3",
+          "unit": "score",
+          "better": "higher",
+          "note": "Probability that all three attempts pass, from 0 to 1."
         },
         "retryUplift": {
           "name": "Retry uplift",
@@ -258242,12 +258399,24 @@
           "name": "P90 turns",
           "unit": "count"
         },
+        "inputTokens": {
+          "name": "Mean input tokens",
+          "unit": "tokens"
+        },
         "medianInputTokens": {
           "name": "Median input tokens",
           "unit": "tokens"
         },
+        "outputTokens": {
+          "name": "Mean output tokens",
+          "unit": "tokens"
+        },
         "medianOutputTokens": {
           "name": "Median output tokens",
+          "unit": "tokens"
+        },
+        "totalTokens": {
+          "name": "Mean total tokens",
           "unit": "tokens"
         },
         "medianTotalTokens": {
@@ -262692,9 +262861,26 @@
       "url": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard",
       "feed": "https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/resolve/main/results.csv",
       "terms": "The Space lists mit for its repository. https://huggingface.co/spaces/red-hat-emerging-technologies/coding-agent-leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "chart": {
+        "title": "Performance vs. total tokens",
+        "note": "Solved rate against mean total tokens per task on a log scale, matching the Red Hat Coding Agent Leaderboard Efficiency tab.",
+        "x": {
+          "key": "totalTokens",
+          "label": "Mean total tokens per task",
+          "unit": "tokens",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Solved rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "n_tasks": {
           "name": "Tasks",
@@ -262741,6 +262927,22 @@
           "name": "Cost",
           "unit": "usd",
           "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens per task",
+          "unit": "tokens"
+        },
+        "cachedTokens": {
+          "name": "Mean cached tokens per task",
+          "unit": "tokens"
+        },
+        "outputTokens": {
+          "name": "Mean output tokens per task",
+          "unit": "tokens"
+        },
+        "totalTokens": {
+          "name": "Mean total tokens per task",
+          "unit": "tokens"
         },
         "mean_cost_usd_per_task": {
           "name": "Mean cost per task",
@@ -271907,7 +272109,7 @@
       "url": "https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/",
       "feed": "https://skylenage-ai.github.io/Sci-Agent-Exam/leaderboard/",
       "terms": "The repository uses Apache License 2.0. Individual scientific tasks retain their original licenses. https://github.com/SKYLENAGE-AI/Sci-Agent-Exam",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "parts": {
@@ -271974,6 +272176,11 @@
         },
         "llmJudge": {
           "name": "LLM judge score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passRateAt95PercentThreshold": {
+          "name": "Pass rate at 95 percent threshold",
           "unit": "%",
           "better": "higher"
         },
@@ -276800,7 +277007,7 @@
       "url": "https://huggingface.co/datasets/hcltech-robotics/simreadybench#leaderboard",
       "feed": "https://huggingface.co/datasets/hcltech-robotics/simreadybench/raw/main/README.md",
       "terms": "Public result tables on the HCLTech Robotics dataset card. The card links separate NVIDIA asset terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
       "stats": {
@@ -276819,6 +277026,28 @@
           "name": "Kinematic fidelity",
           "unit": "%",
           "better": "higher"
+        },
+        "passAt1": {
+          "name": "pass@1",
+          "unit": "%",
+          "better": "higher",
+          "note": "Percentage of assets passing all mandatory checks in one attempt."
+        },
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "%",
+          "better": "higher",
+          "note": "Probability of at least one pass in three attempts."
+        },
+        "pass3": {
+          "name": "pass^3",
+          "unit": "%",
+          "better": "higher",
+          "note": "Probability that all three sampled attempts pass, averaged per object."
+        },
+        "totalTokens": {
+          "name": "Tokens per asset",
+          "unit": "tokens"
         },
         "Inference $/asset": {
           "name": "Inference cost per asset",
@@ -302691,7 +302920,7 @@
       "url": "https://huggingface.co/datasets/microsoft/Eureka-Bench-Logs",
       "feed": "https://huggingface.co/api/datasets/microsoft/Eureka-Bench-Logs/tree/main/TSP",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "vllm-local-reasoning-phi-rl_checkpoints/phi-15b-rl",
@@ -321751,7 +321980,7 @@
       "url": "https://widesearch-seed.github.io/",
       "feed": "https://widesearch-seed.github.io/ (static HTML table, SR Avg@4)",
       "terms": "Static GitHub Pages site that states no license or terms; the WideSearch repository is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
       "stats": {
@@ -321761,12 +321990,22 @@
           "better": "higher"
         },
         "rowF1": {
-          "name": "Row F1",
+          "name": "Row F1 (Avg@4)",
           "unit": "%",
           "better": "higher"
         },
         "itemF1": {
-          "name": "Item F1",
+          "name": "Item F1 (Avg@4)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "rowF1Max": {
+          "name": "Row F1 (Max@4)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "itemF1Max": {
+          "name": "Item F1 (Max@4)",
           "unit": "%",
           "better": "higher"
         }

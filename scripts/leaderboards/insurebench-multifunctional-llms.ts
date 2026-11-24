@@ -4,7 +4,7 @@ import { fetchText } from "../lib/util.ts";
 
 const board: Leaderboard = {
   benchmark: "insurebench-multifunctional-llms",
-  stats: { items: { name: 'Items', unit: 'count' }, totalTokensPerTask: { name: 'Total tokens per task', unit: 'tokens' }, meteredCost: { name: 'Metered cost per task', unit: 'usd', better: 'lower' }, notionalCost: { name: 'Notional cost per task', unit: 'usd', better: 'lower' } },
+  stats: { items: { name: 'Items', unit: 'count' }, totalTokens: { name: 'Total tokens per task', unit: 'tokens' }, meteredCost: { name: 'Metered cost per task', unit: 'usd', better: 'lower' }, notionalCost: { name: 'Notional cost per task', unit: 'usd', better: 'lower' } },
   url: "https://insurebench.insure-thing.com/#leaderboard",
   feed: "https://insurebench.insure-thing.com/data/report.json",
   terms: "InsureThing posts aggregate results. Its launch page carries a copyright notice and gives no reuse license. https://www.insure-thing.com/blog/insurebench-rating-the-model-and-the-harness The host allows crawlers in robots.txt.",

@@ -19,7 +19,7 @@ const d=await fetchJson<any>(FEED);const rows:LeaderboardRow[]=[];
  for(const [name,settings] of Object.entries(d.meta_statistics))for(const [setting,s] of Object.entries(settings as Record<string,any>)){
  if(typeof s.overall_pass_rate!=='number')continue;
  const model=['gemini-1.5-pro'].includes(name)?name+' [snapshot unspecified]':name;
- rows.push({model,score:s.overall_pass_rate,setting:`run ${d.run_id}; ${setting}; source-reported means; check counts retained`,date:'2025-04-22',cost:s.avg_estimated_cost,tokens:s.avg_completion_tokens,metrics:Object.fromEntries(Object.entries(s).filter(([,v])=>typeof v==='number')) as Record<string,number>});}
+ rows.push({model,score:s.overall_pass_rate,setting:`run ${d.run_id}; ${setting}; source-reported means; check counts retained`,date:'2025-04-22',cost:s.avg_estimated_cost,tokens:s.avg_completion_tokens,metrics:Object.fromEntries(Object.entries(s).filter(([,v])=>typeof v==='number').map(([k,v])=>[k.startsWith('stdev_')?k.slice(6)+'Std':k,v])) as Record<string,number>});}
  if(!rows.length)throw new Error('No run statistics');return rows;
  },
 };

@@ -13,6 +13,13 @@ const board: Leaderboard = {
   url: 'https://cybench.github.io/',
   feed: `${FEED} (End-to-End % Solved)`,
   terms: 'CSV on the Cybench GitHub Pages site, which states no terms; the Cybench repository is Apache-2.0.',
+  stats: {
+    'Flag Success Count': { name: 'Flag successes', unit: 'count', better: 'higher' },
+    'Subtask-Guided # Solved': { name: 'Subtask-guided tasks solved', unit: 'count', better: 'higher' },
+    'Subtask-Guided % Solved': { name: 'Subtask-guided solve rate', unit: '%', better: 'higher' },
+    'Sum of Subtask Run Scores': { name: 'Sum of subtask run scores', unit: 'score', better: 'higher' },
+    'Subtasks % Solved': { name: 'Subtasks solve rate', unit: '%', better: 'higher' },
+  },
   aliases: {
     'OpenAI o3-mini': 'o3-mini',
     'OpenAI o1-mini': 'o1-mini',
@@ -34,8 +41,8 @@ const board: Leaderboard = {
       if (!model || !r['End-to-End % Solved'] || !Number.isFinite(score)) continue;
       const count = Number(r.Count);
       if (count !== 40) continue;
-      const metrics: Record<string, number> = { tasks: count };
-      for (const key of ['Flag Success Count', 'Subtask Challenge Count', 'Subtask-Guided # Solved', 'Subtask-Guided % Solved', 'Sum of Subtask Run Scores', 'Subtasks % Solved']) {
+      const metrics: Record<string, number> = {};
+      for (const key of ['Flag Success Count', 'Subtask-Guided # Solved', 'Subtask-Guided % Solved', 'Sum of Subtask Run Scores', 'Subtasks % Solved']) {
         if (r[key]?.trim() && Number.isFinite(Number(r[key]))) metrics[key] = Number(r[key]);
       }
       rows.push({ model, score, metrics });

@@ -9,6 +9,11 @@ const board: Leaderboard = {
   benchmark: 'questflow-traders-arena', url, feed: url,
   terms: 'Questflow publishes the standings on its public trader leaderboard. https://next.questflow.ai/leaderboard',
   headline: 'Questflow ranks accounts by weekly profit in USDC.',
+  stats: {
+    weeklyRoi: { name: 'Weekly ROI', unit: '%', better: 'higher' },
+    volume: { name: 'Trading volume', unit: 'usd' },
+    accountValue: { name: 'Account value', unit: 'usd', better: 'higher' },
+  },
   async fetch() {
     const html = await fetchText(url);
     const payload = html.match(/<script[^>]*id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/)?.[1];

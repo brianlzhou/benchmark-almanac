@@ -30,8 +30,7 @@ const board: Leaderboard = {
       board.parts[key] = {name:r.metric.replaceAll('–','-'),group:r.domain,unit:r.unit === '%' ? '%' : 'score',
         better:r.better_direction === 'lower' ? 'lower' : 'higher',note:'Reported unit: ' + r.unit + '.'};
       row.metrics![key] = value;
-      row.metrics![key + ' runs'] = runs;
-      if (r.run_sd) row.metrics![key + ' std'] = numberCell(r.run_sd);
+      if (r.run_sd) row.metrics![key + 'Std'] = numberCell(r.run_sd);
     }
     if (Object.keys(board.parts).length !== 8 || main.length !== rows.size * 8) throw new Error('Incomplete domain results');
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -45,8 +44,7 @@ const board: Leaderboard = {
       // source-level accuracy and IoU are higher-better, unlike the rotation-error headline
       board.parts[key] = {name: r.source.replace(/^w[25]_/, '') + ': ' + r.metric.replaceAll('_',' '), group:'Source-level results', unit, better:'higher'};
       row.metrics![key] = numberCell(r.mean);
-      row.metrics![key + ' runs'] = numberCell(r.runs);
-      if (r.run_sd) row.metrics![key + ' std'] = numberCell(r.run_sd);
+      if (r.run_sd) row.metrics![key + 'Std'] = numberCell(r.run_sd);
     }
     return checked([...rows.values()], 10);
   },
