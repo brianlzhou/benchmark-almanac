@@ -6624,9 +6624,10 @@
       "url": "https://agenticvbench.com/leaderboard",
       "feed": "https://agenticvbench.com/leaderboard",
       "terms": "Public results published by the benchmark authors at agenticvbench.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "repurpose": {
           "name": "Repurpose",
@@ -7728,9 +7729,13 @@
       "url": "https://agi-pilled-bench.adamholter.chatgpt.site/",
       "feed": "https://agi-pilled-bench.adamholter.chatgpt.site/data.json",
       "terms": "The site publishes data.json and states no separate reuse license. Results are credited to Adam Holter with a link to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": [],
+      "reference": [
+        "OpenRouter API"
+      ],
+      "harnesses": "system",
       "parts": {
         "doneRate": {
           "name": "Done forecast rate",
@@ -90115,6 +90120,10 @@
       "unmatched": [
         "Nemotron 3.5 Super 120B"
       ],
+      "reference": [
+        "Terminus-2"
+      ],
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Mean time per task",
@@ -115346,9 +115355,10 @@
       "url": "https://frontier-cs.org/v1/",
       "feed": "https://frontier-cs.org/v1/ (static HTML: \"Version 1.0 single attempt\" Score@1 and \"Version 1.0 agents\" Score)",
       "terms": "Static project page; robots.txt allows every path and the FrontierCS site and repository are MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "avg5": {
           "name": "Average score over five attempts",
@@ -124039,6 +124049,10 @@
       "unmatched": [
         "Nemotron 3.5 Super 120B"
       ],
+      "reference": [
+        "Terminus-2"
+      ],
+      "harnesses": "system",
       "parts": {
         "solvable": {
           "name": "Solvable tasks"
@@ -132308,9 +132322,13 @@
       "url": "https://www.tbench.ai/news/harbor-index",
       "feed": "https://www.tbench.ai/news/harbor-index (chart points in the Next.js chunk that defines HarborIndexParetoChart)",
       "terms": "Public launch post on tbench.ai, which serves no robots.txt and states no terms for its posts; the Terminal-Bench repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
-      "unmatched": []
+      "unmatched": [],
+      "reference": [
+        "Terminus 2"
+      ],
+      "harnesses": "system"
     },
     "hard12": {
       "url": "https://ibragim.dev/leaderboard-v2/",
@@ -176178,9 +176196,10 @@
       "url": "https://loopsbench.ai/",
       "feed": "https://loopsbench.ai/assets/index-*.js (result data)",
       "terms": "Public maker results; the site has no robots.txt or additional restriction on reading the published results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "baseResolved": {
           "name": "Base resolved rate",
@@ -203179,6 +203198,7 @@
         "GPT-4o-1120",
         "Gemini-2.5-Pro (snapshot unspecified)"
       ],
+      "harnesses": "system",
       "verified": "Marked verified by Multi-SWE-bench",
       "parts": {
         "easy": {
@@ -207154,13 +207174,14 @@
     },
     "nanogpt-speedrun-frontier-prime-intellect": {
       "url": "https://www.primeintellect.ai/research/nanogpt-speedrun",
-      "feed": "https://www.primeintellect.ai/_next/static/chunks/5603-1d6345060838223f.js?dpl=dpl_F2kJTypVLVWR1hUMegKoLwxv1VLq",
+      "feed": "https://www.primeintellect.ai/research/nanogpt-speedrun (Next.js chunk with embedded runs JSON)",
       "terms": "Prime Intellect publishes these experiment results in the public research page bundle. Separate score reuse terms are not stated.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 109,
       "unmatched": [
         "Kimi K3 · prime-agent"
       ],
+      "harnesses": "system",
       "stats": {
         "calls": {
           "name": "Optimization calls",
@@ -249857,11 +249878,12 @@
       "url": "https://github.com/SinatrasC/pmpp-hard",
       "feed": "https://raw.githubusercontent.com/SinatrasC/pmpp-hard/HEAD/README.md",
       "terms": "The PMPP Hard repository is MIT licensed. The raw README path is permitted by robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Nemotron Ultra"
       ],
+      "harnesses": "system",
       "stats": {
         "passed": {
           "name": "Tests passed",
@@ -259131,9 +259153,10 @@
       "url": "https://bitbin.de/ramen-bench/",
       "feed": "https://ramen-bench-api.stephen-dda.workers.dev/votes",
       "terms": "Public ratings API and per-run manifests linked by the Ramen Bench site.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 92,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "votes": {
           "name": "Votes",
@@ -263607,9 +263630,10 @@
       "url": "https://rexbench.com/",
       "feed": "https://rexbench.com/",
       "terms": "The project page releases the data under MIT and Apache 2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 70,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "executionSuccess": {
           "name": "Execution success",
@@ -271492,11 +271516,15 @@
       "url": "https://unipat.ai/benchmarks/SaaS-Bench",
       "feed": "https://unipat.ai/benchmarks/SaaS-Bench (results table, RS column)",
       "terms": "Server-rendered page on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Pine Computer"
       ],
+      "reference": [
+        "Browser-Use (Open-Source)"
+      ],
+      "harnesses": "system",
       "stats": {
         "steps": {
           "name": "Steps per task",
@@ -293169,12 +293197,16 @@
       "url": "https://leililab.github.io/susvibes-leaderboard/submissions/index.json",
       "feed": "https://leililab.github.io/susvibes-leaderboard/submissions/index.json",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)",
         "MAI Code 1 Flash Internal"
       ],
+      "reference": [
+        "mini-SWE-agent"
+      ],
+      "harnesses": "system",
       "verified": "Marked Official Submission by the benchmark team.",
       "stats": {
         "functionalPass1": {
@@ -294245,9 +294277,13 @@
       "url": "https://swefficiency.com",
       "feed": "https://swefficiency.com/assets/leaderboard.json (speedup_ratio, as a percent of expert speedup)",
       "terms": "Static JSON on the project site (GitHub Pages, no robots.txt rules); the swefficiency repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
+      "reference": [
+        "OpenHands"
+      ],
+      "harnesses": "system",
       "stats": {
         "correctness": {
           "name": "Patch correctness",
@@ -295810,7 +295846,7 @@
       "url": "https://swtbench.com/",
       "feed": "https://swtbench.com/ (default Lite table, Unit Test and Script modes, S)",
       "terms": "Static public page; the site content is CC BY-SA 4.0 and robots.txt is absent.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "AEGIS",
@@ -295819,6 +295855,7 @@
         "GPT-4o [snapshot unspecified]",
         "v20250405-dev"
       ],
+      "harnesses": "system",
       "stats": {
         "coverageDelta": {
           "name": "Coverage delta",
@@ -300783,6 +300820,7 @@
       "retrieved": "2026-11-24",
       "rows": 39,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "uncachedInput": {
           "name": "Uncached input tokens",
@@ -306710,11 +306748,12 @@
       "url": "https://unitybench.github.io/unitybench-mini3d/#results",
       "feed": "https://unitybench.github.io/unitybench-mini3d/assets/results.json",
       "terms": "Unity reports 36 model and harness combinations. The project page and repository do not state score reuse terms. https://github.com/Unity-China/UnityBench-Mini3D The robots URL returns HTML.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 35,
       "unmatched": [
         "Hunyuan 3"
       ],
+      "harnesses": "system",
       "parts": {
         "ui": {
           "name": "User interface"

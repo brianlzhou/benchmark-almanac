@@ -6,7 +6,7 @@ import { tables } from '../lib/html.ts';
 
 const feed = "https://rexbench.com/";
 const board: Leaderboard = {
-  benchmark: "rexbench", url: "https://rexbench.com/", feed,
+  benchmark: "rexbench", harnesses: 'system', url: "https://rexbench.com/", feed,
   terms: "The project page releases the data under MIT and Apache 2.0.",
   stats: {
     executionSuccess: { name: 'Execution success', unit: '%', better: 'higher' },

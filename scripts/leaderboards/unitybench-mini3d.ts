@@ -7,6 +7,7 @@ const FEED = "https://unitybench.github.io/unitybench-mini3d/assets/results.json
 
 const board: Leaderboard = {
   benchmark: "unitybench-mini3d",
+  harnesses: 'system',
   url: "https://unitybench.github.io/unitybench-mini3d/#results",
   feed: FEED,
   terms: "Unity reports 36 model and harness combinations. The project page and repository do not state score reuse terms. https://github.com/Unity-China/UnityBench-Mini3D The robots URL returns HTML.",

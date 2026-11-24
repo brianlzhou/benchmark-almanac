@@ -19,6 +19,8 @@ interface Entry {
 
 const board: Leaderboard = {
   benchmark: 'swe-fficiency',
+  harnesses: 'system',
+  reference: ['OpenHands'],
   url: PAGE,
   feed: `${FEED} (speedup_ratio, as a percent of expert speedup)`,
   terms: 'Static JSON on the project site (GitHub Pages, no robots.txt rules); the swefficiency repository is Apache-2.0.',

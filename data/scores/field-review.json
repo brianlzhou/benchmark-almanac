@@ -238,6 +238,7 @@
     "music-21-instrument-separation": [{"field":"Ours, RGB+Trajectory","kind":"link","why":"not stored","share":1}],
     "musictheorybench": [{"field":"seed","kind":"trials","why":"not stored","share":1,"sample":"42"}],
     "mvdrivebench": [{"field":"Open Source MoE Models","kind":"open weights, license or size","why":"not stored","share":1}],
+    "nanogpt-speedrun-frontier-prime-intellect": [{"field":"Traces","kind":"link","why":"not stored","share":1}],
     "naturalproofs": [{"field":"Tokens","kind":"tokens","why":"not stored","share":1}],
     "ncp-bench": [{"field":"Trajectory (%)","kind":"link","why":"not stored","share":1}],
     "ndm-bench": [{"field":"95% CI","kind":"uncertainty","why":"not stored","share":1}],
