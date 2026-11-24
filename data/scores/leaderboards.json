@@ -1,5 +1,5 @@
 {
-  "retrieved": "2026-11-23",
+  "retrieved": "2026-11-24",
   "rowsIn": "data/scores/rows/<first character of the board id>.json",
   "boards": {
     "1h-videoqa-google": {
@@ -265380,6 +265380,22 @@
         "Arctic Text2SQL R1.5",
         "Arctic Text2SQL R2"
       ]
+    },
+    "snyderbench": {
+      "url": "https://freesystems.substack.com/p/benchmarking-ais-research-taste-in",
+      "feed": "https://substack-post-media.s3.amazonaws.com/public/images/07d1fdf9-0846-46ab-b7f4-f9b5d573809e_1600x1040.png and https://substack-post-media.s3.amazonaws.com/public/images/ab63adc3-e37e-4252-9b9c-5b7ca821ddf4_2048x1332.png (transcribed 2026-11-23)",
+      "terms": "Free Systems publishes the post and its charts publicly on Substack. We read only the two results charts and credit the post.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [],
+      "stats": {
+        "question": {
+          "name": "Research question win rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of blind matchups where graders preferred the model’s research question to a Snyder paper’s."
+        }
+      }
     },
     "so-arena": {
       "url": "https://lichenlillc.github.io/SO-Arena/",
