@@ -7,17 +7,16 @@ import { scaleRowsWithInterval as scaleRows } from './swe-bench-pro.ts';
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { SCALE_ALIASES, SCALE_TERMS, type ScaleEntry, fetchScaleEntries,  scaleUrl } from '../lib/scale.ts';
 
-/** The tab rank and the two ends of the score interval. */
+/** The two ends of the score interval. */
 function tabMetrics(e: ScaleEntry) {
   const half = Number((e as ScaleEntry & { confidenceInterval_upper?: number }).confidenceInterval_upper);
   const score = Number(e.score);
   const metrics: Record<string, number> = {};
-  if (typeof e.rank === 'number') metrics.outputModeRank = e.rank;
   if (half > 0) {
     metrics.ciLow = score - half;
     metrics.ciHigh = score + half;
   }
-  return { metrics };
+  return Object.keys(metrics).length ? { metrics } : {};
 }
 
 const PAGE = scaleUrl('audiomc');
@@ -33,7 +32,6 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (the text and audio variants in the page's Next.js flight data)`,
   terms: `${SCALE_TERMS} The Almanac credits and links the source.`,
-  stats: { outputModeRank:{name:'Output mode rank',unit:'count',better:'lower'} },
   aliases: {
     ...SCALE_ALIASES,
     'Qwen3-Omni-30B-A3B-Instruct': 'qwen3-omni-30b-a3b',

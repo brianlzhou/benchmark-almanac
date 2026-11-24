@@ -1,7 +1,10 @@
 // BALROG. balrogai.com is a static page with two leaderboard tables: the LLM board (language input, with
 // TextWorld) and the VLM board (image input, no TextWorld). Use the default LLM board: % Progress
-// (mean progress over the environments, 0 to 100, with reported spreads retained) is the score and the Date column
-// the row date. The VLM board uses another environment set and is excluded. Names carry medal and status emoji, which are dropped. A "-Max" suffix
+// (mean progress over the environments, 0 to 100) is the score and the Date column is the row date.
+// The ± values are standard errors across replicate seeds ("Standard error is obtained by running multiple
+// replicate seeds, as detailed in the Appendix", arXiv:2411.13543, Section 3.1). Keep the headline standard
+// error in metrics.stderr and drop per-environment standard errors. The VLM board uses another environment
+// set and is excluded. Names carry medal and status emoji, which are dropped. A "-Max" suffix
 // ("Claude-Opus-5-Max") marks the maximum effort setting.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
@@ -24,8 +27,7 @@ const board: Leaderboard = {
   verified: 'The BALROG team accessed the submission and reproduced its generations',
   url: URL,
   feed: `${URL} (default LLM board, % Progress)`,
-  terms: 'Static public page; the site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.',
-  stats: { progressSpread:{name:'Progress spread',unit:'score'}, BabyAISpread:{name:'BabyAI spread',unit:'score'}, CrafterSpread:{name:'Crafter spread',unit:'score'}, TextWorldSpread:{name:'TextWorld spread',unit:'score'}, BabaIsAISpread:{name:'BabaIsAI spread',unit:'score'}, MiniHackSpread:{name:'MiniHack spread',unit:'score'}, NetHackSpread:{name:'NetHack spread',unit:'score'} },
+  terms: 'Static public page. The site publishes no robots.txt and no terms, and the BALROG repository is MIT-licensed.',
   aliases: {
     'Gemini-1.5-Pro-002': 'gemini-1-5-pro-sept-2024',
     'Gemini-1.5-Flash-002': 'gemini-1-5-flash-sep-2024',
@@ -51,11 +53,13 @@ const board: Leaderboard = {
       for (let i=iScore;i<iDate;i++) {
         const [value,spread]=r[i].text.split('±');
         const n=num(value), uncertainty=num(spread);
-        if (i!==iScore && n!==undefined) metrics[head[i]]=n;
-        if (uncertainty!==undefined) metrics[(i===iScore?'progress':head[i])+'Spread']=uncertainty;
+        if (i===iScore) {
+          if (uncertainty!==undefined) metrics.stderr=uncertainty;
+        } else if (n!==undefined) {
+          metrics[head[i]]=n;
+        }
       }
-      if (r[0].text.includes('🕹')) metrics.openCode=1;
-      rows.push({ model: unspecified(name), score, metrics, verified:r[0].text.includes('✔') || undefined, setting: [head.includes('TextWorld') ? 'language input' : 'vision input', max ? 'max' : ''].filter(Boolean).join('; '), date: /^\d{4}-\d\d-\d\d$/.test(date ?? '') ? date : undefined });
+      rows.push({ model: unspecified(name), score, metrics, verified:r[0].text.includes('✔') || undefined, setting: [head.includes('TextWorld') ? 'language input' : 'vision input', max ? 'max' : ''].filter(Boolean).join(', '), date: /^\d{4}-\d\d-\d\d$/.test(date ?? '') ? date : undefined });
     }
     }
     return rows;
