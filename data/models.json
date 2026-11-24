@@ -4067,6 +4067,48 @@
     ]
   },
   {
+    "id": "atlas-chat-27b",
+    "name": "Atlas-Chat-27B",
+    "lab": "mbzuai",
+    "family": "Atlas-Chat",
+    "released": "2024-09-26",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B",
+    "aliases": [
+      "Atlas-Chat-27B",
+      "MBZUAI-Paris/Atlas-Chat-27B"
+    ]
+  },
+  {
+    "id": "atlas-chat-2b",
+    "name": "Atlas-Chat-2B",
+    "lab": "mbzuai",
+    "family": "Atlas-Chat",
+    "released": "2024-09-26",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B",
+    "aliases": [
+      "Atlas-Chat-2B",
+      "MBZUAI-Paris/Atlas-Chat-2B"
+    ]
+  },
+  {
+    "id": "atlas-chat-9b",
+    "name": "Atlas-Chat-9B",
+    "lab": "mbzuai",
+    "family": "Atlas-Chat",
+    "released": "2024-09-26",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B",
+    "aliases": [
+      "Atlas-Chat-9B",
+      "MBZUAI-Paris/Atlas-Chat-9B"
+    ]
+  },
+  {
     "id": "emu3-chat",
     "name": "Emu3-Chat",
     "lab": "baai",
@@ -4146,6 +4188,20 @@
       "palmyra-x-004",
       "Palmyra X 004",
       "palmyra-x4"
+    ]
+  },
+  {
+    "id": "rdt-1b",
+    "name": "RDT-1B",
+    "lab": "tsinghua-university",
+    "family": "RDT",
+    "released": "2024-10-10",
+    "weights": "open",
+    "card": "https://huggingface.co/robotics-diffusion-transformer/rdt-1b",
+    "aliases": [
+      "RDT",
+      "rdt-1b",
+      "robotics-diffusion-transformer/rdt-1b"
     ]
   },
   {
@@ -4665,11 +4721,36 @@
     ]
   },
   {
+    "id": "cogact",
+    "name": "CogACT",
+    "lab": "microsoft",
+    "family": "CogACT",
+    "released": "2024-11-29",
+    "weights": "open",
+    "card": "https://huggingface.co/CogACT/CogACT-Base",
+    "aliases": [
+      "CogACT-Base",
+      "CogACT/CogACT-Base"
+    ]
+  },
+  {
     "id": "intellect-1",
     "name": "INTELLECT-1",
     "lab": "prime-intellect",
     "released": "2024-11-29",
     "epoch": "INTELLECT-1"
+  },
+  {
+    "id": "minivla",
+    "name": "MiniVLA",
+    "lab": "stanford",
+    "family": "OpenVLA",
+    "released": "2024-12",
+    "weights": "open",
+    "card": "https://huggingface.co/Stanford-ILIAD/minivla-libero90-prismatic",
+    "aliases": [
+      "minivla"
+    ]
   },
   {
     "id": "exaone-3-5-2-4b-instruct",
@@ -5636,6 +5717,19 @@
     "card": "https://qwenlm.github.io/blog/qwen2.5-1m/"
   },
   {
+    "id": "spatialvla",
+    "name": "SpatialVLA",
+    "lab": "shanghai-ai-lab",
+    "family": "SpatialVLA",
+    "released": "2025-01-27",
+    "weights": "open",
+    "card": "https://huggingface.co/IPEC-COMMUNITY/spatialvla-4b-224-pt",
+    "aliases": [
+      "SpatialVLA-4B",
+      "spatialvla-4b-224-pt"
+    ]
+  },
+  {
     "id": "qwen2-5-vl-3b",
     "name": "Qwen2.5-VL-3B",
     "lab": "qwen",
@@ -5947,6 +6041,19 @@
     "aliases": [
       "mistral-saba-2502",
       "Mistral Saba 24B"
+    ]
+  },
+  {
+    "id": "magma-8b",
+    "name": "Magma-8B",
+    "lab": "microsoft",
+    "family": "Magma",
+    "released": "2025-02-18",
+    "weights": "open",
+    "card": "https://huggingface.co/microsoft/Magma-8B",
+    "aliases": [
+      "Magma",
+      "microsoft/Magma-8B"
     ]
   },
   {
@@ -6287,20 +6394,6 @@
     ]
   },
   {
-    "id": "medgemma-1-5-4b",
-    "name": "MedGemma 1.5 4B",
-    "lab": "google",
-    "family": "MedGemma",
-    "released": "2026-01-13",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card",
-    "aliases": [
-      "medgemma-1.5-4b-it",
-      "MedGemma 1.5 4B"
-    ]
-  },
-  {
     "id": "gemma-3-4b",
     "name": "Gemma 3 4B",
     "lab": "google",
@@ -6378,6 +6471,20 @@
     "card": "https://huggingface.co/Skywork/Skywork-R1V-38B",
     "aliases": [
       "Skywork-R1V-38B"
+    ]
+  },
+  {
+    "id": "cosmos-reason1-7b",
+    "name": "Cosmos-Reason1-7B",
+    "lab": "nvidia",
+    "family": "Cosmos",
+    "released": "2025-03-18",
+    "weights": "open",
+    "card": "https://huggingface.co/nvidia/Cosmos-Reason1-7B",
+    "aliases": [
+      "Cosmos-Reason-1-7B",
+      "Cosmos Reason1 7B",
+      "nvidia/Cosmos-Reason1-7B"
     ]
   },
   {
@@ -7129,6 +7236,18 @@
     ]
   },
   {
+    "id": "nora",
+    "name": "NORA",
+    "lab": "sutd",
+    "family": "NORA",
+    "released": "2025-04-28",
+    "weights": "open",
+    "card": "https://huggingface.co/declare-lab/nora",
+    "aliases": [
+      "declare-lab/nora"
+    ]
+  },
+  {
     "id": "palmyra-x5",
     "name": "Palmyra X5",
     "lab": "writer",
@@ -7140,19 +7259,6 @@
     "aliases": [
       "palmyra-x5",
       "Palmyra X5"
-    ]
-  },
-  {
-    "id": "palmyra-x6",
-    "name": "Palmyra X6",
-    "lab": "writer",
-    "family": "Palmyra",
-    "released": "2026-08-14",
-    "tier": "flagship",
-    "card": "https://writer.com/blog/palmyra-x6-major-harness-release/",
-    "aliases": [
-      "palmyra-x6",
-      "Palmyra X6"
     ]
   },
   {
@@ -7376,98 +7482,6 @@
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-Prover-V2-671B"
   },
   {
-    "id": "goedel-prover-v2-32b",
-    "name": "Goedel-Prover-V2-32B",
-    "lab": "princeton",
-    "family": "Goedel-Prover",
-    "released": "2025-07-14",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/Goedel-LM/Goedel-Prover-V2-32B",
-    "aliases": [
-      "Goedel-Prover-V2-32B",
-      "Goedel-LM/Goedel-Prover-V2-32B"
-    ]
-  },
-  {
-    "id": "cadmium-1-5b",
-    "name": "CADmium-1.5B",
-    "lab": "chandar-lab",
-    "family": "CADmium",
-    "released": "2025-07-13",
-    "weights": "open",
-    "card": "https://huggingface.co/chandar-lab/CADmium-1.5B",
-    "aliases": [
-      "CADmium-1.5B",
-      "chandar-lab/CADmium-1.5B"
-    ]
-  },
-  {
-    "id": "cadmium-3b",
-    "name": "CADmium-3B",
-    "lab": "chandar-lab",
-    "family": "CADmium",
-    "released": "2025-07-13",
-    "weights": "open",
-    "card": "https://huggingface.co/chandar-lab/CADmium-3B",
-    "aliases": [
-      "CADmium-3B",
-      "chandar-lab/CADmium-3B"
-    ]
-  },
-  {
-    "id": "cadmium-7b",
-    "name": "CADmium-7B",
-    "lab": "chandar-lab",
-    "family": "CADmium",
-    "released": "2025-07-13",
-    "weights": "open",
-    "card": "https://huggingface.co/chandar-lab/CADmium-7B",
-    "aliases": [
-      "CADmium-7B",
-      "chandar-lab/CADmium-7B"
-    ]
-  },
-  {
-    "id": "cadmium-14b",
-    "name": "CADmium-14B",
-    "lab": "chandar-lab",
-    "family": "CADmium",
-    "released": "2025-07-13",
-    "weights": "open",
-    "card": "https://huggingface.co/chandar-lab/CADmium-14B",
-    "aliases": [
-      "CADmium-14B",
-      "chandar-lab/CADmium-14B"
-    ]
-  },
-  {
-    "id": "fundusexpert",
-    "name": "FundusExpert",
-    "lab": "shanghai-ai-lab",
-    "family": "FundusExpert",
-    "released": "2025-07-23",
-    "weights": "open",
-    "card": "https://huggingface.co/MeteorElf/FundusExpert",
-    "aliases": [
-      "FundusExpert",
-      "MeteorElf/FundusExpert"
-    ]
-  },
-  {
-    "id": "codev-sva-8b",
-    "name": "CodeV-SVA-8B",
-    "lab": "ict-cas",
-    "family": "CodeV-SVA",
-    "released": "2025-11-22",
-    "weights": "open",
-    "card": "https://huggingface.co/wyt2000/CodeV-SVA-8B",
-    "aliases": [
-      "CodeV-SVA-8B",
-      "wyt2000/CodeV-SVA-8B"
-    ]
-  },
-  {
     "id": "phi-4-mini-reasoning",
     "name": "Phi-4-mini-reasoning",
     "lab": "microsoft",
@@ -7540,6 +7554,19 @@
     "weights": "open",
     "tier": "small",
     "card": "https://huggingface.co/ByteDance-Seed/Seed-Coder-8B-Instruct"
+  },
+  {
+    "id": "univla",
+    "name": "UniVLA",
+    "lab": "opendrivelab",
+    "family": "UniVLA",
+    "released": "2025-05-09",
+    "weights": "open",
+    "card": "https://huggingface.co/qwbu/univla-7b",
+    "aliases": [
+      "UniVLA-7B",
+      "univla-7b"
+    ]
   },
   {
     "id": "intellect-2",
@@ -7723,6 +7750,21 @@
     }
   },
   {
+    "id": "nilechat-3b",
+    "name": "NileChat 3B",
+    "lab": "ubc",
+    "family": "NileChat",
+    "released": "2025-05-23",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://huggingface.co/UBC-NLP/NileChat-3B",
+    "aliases": [
+      "NileChat (3B)",
+      "NileChat-3B",
+      "UBC-NLP/NileChat-3B"
+    ]
+  },
+  {
     "id": "sarvam-m",
     "name": "Sarvam-M",
     "lab": "sarvam",
@@ -7816,6 +7858,18 @@
     "aliases": [
       "MiMo-VL 7B-SFT",
       "MiMo-VL-7B-SFT"
+    ]
+  },
+  {
+    "id": "vebrain",
+    "name": "VeBrain",
+    "lab": "shanghai-ai-lab",
+    "family": "VeBrain",
+    "released": "2025-05-30",
+    "weights": "open",
+    "card": "https://huggingface.co/OpenGVLab/VeBrain",
+    "aliases": [
+      "OpenGVLab/VeBrain"
     ]
   },
   {
@@ -7914,6 +7968,19 @@
     "aliases": [
       "Llama-3.1-Tulu-3-8B-SFT-RM-RB2",
       "allenai/Llama-3.1-Tulu-3-8B-SFT-RM-RB2"
+    ]
+  },
+  {
+    "id": "smolvla",
+    "name": "SmolVLA",
+    "lab": "hugging-face",
+    "family": "SmolVLA",
+    "released": "2025-06-02",
+    "weights": "open",
+    "card": "https://huggingface.co/lerobot/smolvla_base",
+    "aliases": [
+      "smolvla_base",
+      "lerobot/smolvla_base"
     ]
   },
   {
@@ -8373,6 +8440,15 @@
     ]
   },
   {
+    "id": "worldvla",
+    "name": "WorldVLA",
+    "lab": "alibaba",
+    "family": "WorldVLA",
+    "released": "2025-06-26",
+    "weights": "open",
+    "card": "https://github.com/alibaba-damo-academy/WorldVLA"
+  },
+  {
     "id": "hunyuan-a13b",
     "name": "Hunyuan-A13B-Instruct",
     "lab": "tencent",
@@ -8443,6 +8519,34 @@
     "aliases": [
       "GLM-4.1V",
       "GLM-4.1V (9B)"
+    ]
+  },
+  {
+    "id": "robobrain-2-0-32b",
+    "name": "RoboBrain2.0-32B",
+    "lab": "baai",
+    "family": "RoboBrain",
+    "released": "2025-07-02",
+    "weights": "open",
+    "card": "https://huggingface.co/BAAI/RoboBrain2.0-32B",
+    "aliases": [
+      "RoboBrain 2.0 32B",
+      "RoboBrain-2.0-32B",
+      "BAAI/RoboBrain2.0-32B"
+    ]
+  },
+  {
+    "id": "robobrain-2-0-7b",
+    "name": "RoboBrain2.0-7B",
+    "lab": "baai",
+    "family": "RoboBrain",
+    "released": "2025-07-02",
+    "weights": "open",
+    "card": "https://huggingface.co/BAAI/RoboBrain2.0-7B",
+    "aliases": [
+      "RoboBrain 2.0 7B",
+      "RoboBrain-2.0-7B",
+      "BAAI/RoboBrain2.0-7B"
     ]
   },
   {
@@ -8595,6 +8699,20 @@
     ]
   },
   {
+    "id": "kimi-k2-base",
+    "name": "Kimi K2 Base",
+    "lab": "moonshot",
+    "family": "Kimi K2",
+    "released": "2025-07-12",
+    "weights": "open",
+    "tier": "flagship",
+    "card": "https://huggingface.co/moonshotai/Kimi-K2-Base",
+    "aliases": [
+      "Kimi-K2-Base",
+      "moonshotai/Kimi-K2-Base"
+    ]
+  },
+  {
     "id": "kimi-k2-jul-2025",
     "name": "Kimi K2",
     "version": "Jul 2025",
@@ -8613,17 +8731,69 @@
     "epoch": "Kimi K2 (Jul 2025)"
   },
   {
-    "id": "kimi-k2-base",
-    "name": "Kimi K2 Base",
-    "lab": "moonshot",
-    "family": "Kimi K2",
-    "released": "2025-07-12",
+    "id": "cadmium-1-5b",
+    "name": "CADmium-1.5B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
     "weights": "open",
-    "tier": "flagship",
-    "card": "https://huggingface.co/moonshotai/Kimi-K2-Base",
+    "card": "https://huggingface.co/chandar-lab/CADmium-1.5B",
     "aliases": [
-      "Kimi-K2-Base",
-      "moonshotai/Kimi-K2-Base"
+      "CADmium-1.5B",
+      "chandar-lab/CADmium-1.5B"
+    ]
+  },
+  {
+    "id": "cadmium-14b",
+    "name": "CADmium-14B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-14B",
+    "aliases": [
+      "CADmium-14B",
+      "chandar-lab/CADmium-14B"
+    ]
+  },
+  {
+    "id": "cadmium-3b",
+    "name": "CADmium-3B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-3B",
+    "aliases": [
+      "CADmium-3B",
+      "chandar-lab/CADmium-3B"
+    ]
+  },
+  {
+    "id": "cadmium-7b",
+    "name": "CADmium-7B",
+    "lab": "chandar-lab",
+    "family": "CADmium",
+    "released": "2025-07-13",
+    "weights": "open",
+    "card": "https://huggingface.co/chandar-lab/CADmium-7B",
+    "aliases": [
+      "CADmium-7B",
+      "chandar-lab/CADmium-7B"
+    ]
+  },
+  {
+    "id": "goedel-prover-v2-32b",
+    "name": "Goedel-Prover-V2-32B",
+    "lab": "princeton",
+    "family": "Goedel-Prover",
+    "released": "2025-07-14",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/Goedel-LM/Goedel-Prover-V2-32B",
+    "aliases": [
+      "Goedel-Prover-V2-32B",
+      "Goedel-LM/Goedel-Prover-V2-32B"
     ]
   },
   {
@@ -8684,6 +8854,19 @@
     "released": "2025-07-20",
     "weights": "open",
     "epoch": "GLM-4.5-Air"
+  },
+  {
+    "id": "fundusexpert",
+    "name": "FundusExpert",
+    "lab": "shanghai-ai-lab",
+    "family": "FundusExpert",
+    "released": "2025-07-23",
+    "weights": "open",
+    "card": "https://huggingface.co/MeteorElf/FundusExpert",
+    "aliases": [
+      "FundusExpert",
+      "MeteorElf/FundusExpert"
+    ]
   },
   {
     "id": "intern-s1",
@@ -9061,19 +9244,6 @@
     }
   },
   {
-    "id": "openai-privacy-filter",
-    "name": "OpenAI Privacy Filter",
-    "lab": "openai",
-    "family": "Privacy Filter",
-    "released": "2026-04-22",
-    "weights": "open",
-    "card": "https://huggingface.co/openai/privacy-filter",
-    "aliases": [
-      "Privacy Filter",
-      "openai/privacy-filter"
-    ]
-  },
-  {
     "id": "qwen3-4b-instruct-2507",
     "name": "qwen3-4b-instruct-2507",
     "released": "2025-08-06",
@@ -9225,6 +9395,32 @@
     "released": "2025-08-12",
     "weights": "closed",
     "epoch": "Mistral Medium 3.1"
+  },
+  {
+    "id": "dinov3-vit-7b",
+    "name": "DINOv3 ViT-7B",
+    "lab": "meta",
+    "family": "DINOv3",
+    "released": "2025-08-13",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/dinov3-vit7b16-pretrain-lvd1689m",
+    "aliases": [
+      "DINOv3 Web ViT-7B",
+      "dinov3-vit7b16-pretrain-lvd1689m"
+    ]
+  },
+  {
+    "id": "dinov3-vit-7b-sat",
+    "name": "DINOv3 ViT-7B (satellite)",
+    "lab": "meta",
+    "family": "DINOv3",
+    "released": "2025-08-13",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/dinov3-vit7b16-pretrain-sat493m",
+    "aliases": [
+      "DINOv3 Sat ViT-7B",
+      "dinov3-vit7b16-pretrain-sat493m"
+    ]
   },
   {
     "id": "gemma-3-270m",
@@ -9527,6 +9723,34 @@
     "card": "https://huggingface.co/meituan-longcat/LongCat-Flash-Chat"
   },
   {
+    "id": "internvla-m1",
+    "name": "InternVLA-M1",
+    "lab": "shanghai-ai-lab",
+    "family": "InternVLA",
+    "released": "2025-09",
+    "weights": "open",
+    "card": "https://huggingface.co/InternRobotics/InternVLA-M1",
+    "aliases": [
+      "InternRobotics/InternVLA-M1"
+    ]
+  },
+  {
+    "id": "wall-oss",
+    "name": "WALL-OSS",
+    "lab": "x-square-robot",
+    "family": "WALL-OSS",
+    "released": "2025-09",
+    "weights": "open",
+    "card": "https://huggingface.co/x-square-robot/wall-oss-flow",
+    "aliases": [
+      "wall-oss-fast",
+      "wall-oss-flow",
+      "WALL-OSS-FAST",
+      "WALL-OSS-FLOW",
+      "x-square-robot/wall-oss-flow"
+    ]
+  },
+  {
     "id": "hunyuan-mt-7b",
     "name": "Hunyuan-MT-7B",
     "lab": "tencent",
@@ -9623,63 +9847,6 @@
     ]
   },
   {
-    "id": "atlas-chat-2b",
-    "name": "Atlas-Chat-2B",
-    "lab": "mbzuai",
-    "family": "Atlas-Chat",
-    "released": "2024-09-26",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B",
-    "aliases": [
-      "Atlas-Chat-2B",
-      "MBZUAI-Paris/Atlas-Chat-2B"
-    ]
-  },
-  {
-    "id": "atlas-chat-9b",
-    "name": "Atlas-Chat-9B",
-    "lab": "mbzuai",
-    "family": "Atlas-Chat",
-    "released": "2024-09-26",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B",
-    "aliases": [
-      "Atlas-Chat-9B",
-      "MBZUAI-Paris/Atlas-Chat-9B"
-    ]
-  },
-  {
-    "id": "atlas-chat-27b",
-    "name": "Atlas-Chat-27B",
-    "lab": "mbzuai",
-    "family": "Atlas-Chat",
-    "released": "2024-09-26",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B",
-    "aliases": [
-      "Atlas-Chat-27B",
-      "MBZUAI-Paris/Atlas-Chat-27B"
-    ]
-  },
-  {
-    "id": "nilechat-3b",
-    "name": "NileChat 3B",
-    "lab": "ubc",
-    "family": "NileChat",
-    "released": "2025-05-23",
-    "weights": "open",
-    "tier": "small",
-    "card": "https://huggingface.co/UBC-NLP/NileChat-3B",
-    "aliases": [
-      "NileChat (3B)",
-      "NileChat-3B",
-      "UBC-NLP/NileChat-3B"
-    ]
-  },
-  {
     "id": "ernie-4-5-21b-a3b-thinking",
     "name": "ERNIE-4.5-21B-A3B-Thinking",
     "lab": "baidu",
@@ -9762,6 +9929,19 @@
     "aliases": [
       "Qwen3-Omni-30B-A3B-T",
       "Qwen3-Omni-Thinking (30B-A3B)"
+    ]
+  },
+  {
+    "id": "mapanything",
+    "name": "MapAnything",
+    "lab": "meta",
+    "family": "MapAnything",
+    "released": "2025-09-16",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/map-anything",
+    "aliases": [
+      "MapAnything",
+      "facebook/map-anything"
     ]
   },
   {
@@ -10209,6 +10389,22 @@
     "card": "https://huggingface.co/inclusionAI/Ring-1T"
   },
   {
+    "id": "x-vla",
+    "name": "X-VLA",
+    "lab": "tsinghua-university",
+    "family": "X-VLA",
+    "released": "2025-10-11",
+    "weights": "open",
+    "card": "https://huggingface.co/2toINF/X-VLA-Pt",
+    "aliases": [
+      "XVLA",
+      "x-VLA",
+      "X-VLA-0.9B",
+      "X-VLA-Pt",
+      "2toINF/X-VLA-Pt"
+    ]
+  },
+  {
     "id": "claude-haiku-4-5",
     "name": "Claude Haiku 4.5",
     "lab": "anthropic",
@@ -10632,6 +10828,62 @@
     }
   },
   {
+    "id": "sam-3d-body-dinov3",
+    "name": "SAM 3D Body (DINOv3)",
+    "lab": "meta",
+    "family": "SAM 3D",
+    "released": "2025-11-19",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/sam-3d-body-dinov3",
+    "aliases": [
+      "3DB-DINOv3",
+      "SAM 3D Body DINOv3",
+      "facebook/sam-3d-body-dinov3"
+    ]
+  },
+  {
+    "id": "sam-3d-body-vit-h",
+    "name": "SAM 3D Body (ViT-H)",
+    "lab": "meta",
+    "family": "SAM 3D",
+    "released": "2025-11-19",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/sam-3d-body-vith",
+    "aliases": [
+      "3DB-H",
+      "SAM 3D Body ViT-H",
+      "facebook/sam-3d-body-vith"
+    ]
+  },
+  {
+    "id": "sam-3d-objects",
+    "name": "SAM 3D Objects",
+    "lab": "meta",
+    "family": "SAM 3D",
+    "released": "2025-11-19",
+    "weights": "open",
+    "card": "https://huggingface.co/facebook/sam-3d-objects",
+    "aliases": [
+      "SAM 3D Objects",
+      "facebook/sam-3d-objects"
+    ]
+  },
+  {
+    "id": "mimo-embodied-7b",
+    "name": "MiMo-Embodied-7B",
+    "lab": "xiaomi-corp",
+    "family": "MiMo",
+    "released": "2025-11-20",
+    "weights": "open",
+    "card": "https://huggingface.co/XiaomiMiMo/MiMo-Embodied-7B",
+    "aliases": [
+      "Mimo-Embodied-7B",
+      "MiMoEmbodied-7B",
+      "MiMo-Embodied",
+      "XiaomiMiMo/MiMo-Embodied-7B"
+    ]
+  },
+  {
     "id": "olmo-3-32b-think",
     "name": "Olmo 3 32B Think",
     "lab": "ai2",
@@ -10644,6 +10896,19 @@
       "Olmo-3-32B-Think",
       "Olmo 3 Think 32B",
       "Olmo 3-Think (32B)"
+    ]
+  },
+  {
+    "id": "codev-sva-8b",
+    "name": "CodeV-SVA-8B",
+    "lab": "ict-cas",
+    "family": "CodeV-SVA",
+    "released": "2025-11-22",
+    "weights": "open",
+    "card": "https://huggingface.co/wyt2000/CodeV-SVA-8B",
+    "aliases": [
+      "CodeV-SVA-8B",
+      "wyt2000/CodeV-SVA-8B"
     ]
   },
   {
@@ -10698,6 +10963,34 @@
     "weights": "open",
     "tier": "mid",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-Math-V2"
+  },
+  {
+    "id": "cosmos-reason2-2b",
+    "name": "Cosmos-Reason2-2B",
+    "lab": "nvidia",
+    "family": "Cosmos",
+    "released": "2025-12",
+    "weights": "open",
+    "card": "https://huggingface.co/nvidia/Cosmos-Reason2-2B",
+    "aliases": [
+      "Cosmos Reason2 2B",
+      "Cosmos-Reason-2-2B",
+      "nvidia/Cosmos-Reason2-2B"
+    ]
+  },
+  {
+    "id": "cosmos-reason2-8b",
+    "name": "Cosmos-Reason2-8B",
+    "lab": "nvidia",
+    "family": "Cosmos",
+    "released": "2025-12",
+    "weights": "open",
+    "card": "https://huggingface.co/nvidia/Cosmos-Reason2-8B",
+    "aliases": [
+      "Cosmos Reason2 8B",
+      "Cosmos-Reason-2-8B",
+      "nvidia/Cosmos-Reason2-8B"
+    ]
   },
   {
     "id": "dragon-hd-omni",
@@ -11069,6 +11362,18 @@
     ]
   },
   {
+    "id": "motus",
+    "name": "Motus",
+    "lab": "tsinghua-university",
+    "family": "Motus",
+    "released": "2025-12-15",
+    "weights": "open",
+    "card": "https://huggingface.co/motus-robotics/Motus",
+    "aliases": [
+      "motus-robotics/Motus"
+    ]
+  },
+  {
     "id": "nemotron-3-nano-30b-a3b",
     "name": "Nemotron 3 Nano 30B-A3B",
     "lab": "nvidia",
@@ -11225,6 +11530,19 @@
     ]
   },
   {
+    "id": "internvla-a1",
+    "name": "InternVLA-A1",
+    "lab": "shanghai-ai-lab",
+    "family": "InternVLA",
+    "released": "2026-01-05",
+    "weights": "open",
+    "card": "https://huggingface.co/InternRobotics/InternVLA-A1-3B",
+    "aliases": [
+      "InternVLA-A1-3B",
+      "InternRobotics/InternVLA-A1-3B"
+    ]
+  },
+  {
     "id": "lfm2-5-1-2b-instruct",
     "name": "LFM2.5-1.2B-Instruct",
     "lab": "liquid-ai",
@@ -11291,6 +11609,20 @@
     "aliases": [
       "EvoCUA-8B",
       "EvoCUA-8B-20260105"
+    ]
+  },
+  {
+    "id": "medgemma-1-5-4b",
+    "name": "MedGemma 1.5 4B",
+    "lab": "google",
+    "family": "MedGemma",
+    "released": "2026-01-13",
+    "weights": "open",
+    "tier": "small",
+    "card": "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card",
+    "aliases": [
+      "medgemma-1.5-4b-it",
+      "MedGemma 1.5 4B"
     ]
   },
   {
@@ -11371,6 +11703,20 @@
     "card": "https://www.liquid.ai/blog/lfm2-5-1-2b-thinking-on-device-reasoning-under-1gb"
   },
   {
+    "id": "robobrain-2-5-8b",
+    "name": "RoboBrain2.5-8B",
+    "lab": "baai",
+    "family": "RoboBrain",
+    "released": "2026-01-20",
+    "weights": "open",
+    "card": "https://huggingface.co/BAAI/RoboBrain2.5-8B-NV",
+    "aliases": [
+      "RoboBrain2.5-8B-NV",
+      "RoboBrain 2.5 8B",
+      "BAAI/RoboBrain2.5-8B-NV"
+    ]
+  },
+  {
     "id": "ernie-5-0",
     "name": "ERNIE 5.0",
     "lab": "baidu",
@@ -11439,6 +11785,20 @@
     "card": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
     "aliases": [
       "qwen3-max-2026-01-23-thinking"
+    ]
+  },
+  {
+    "id": "lingbot-vla",
+    "name": "LingBot-VLA",
+    "lab": "ant-group",
+    "family": "LingBot-VLA",
+    "released": "2026-01-26",
+    "weights": "open",
+    "card": "https://huggingface.co/robbyant/lingbot-vla-4b",
+    "aliases": [
+      "LingBot-VLA-4B",
+      "lingbot-vla-4b",
+      "robbyant/lingbot-vla-4b"
     ]
   },
   {
@@ -11541,6 +11901,32 @@
     "weights": "open",
     "tier": "small",
     "card": "https://huggingface.co/zai-org/GLM-OCR"
+  },
+  {
+    "id": "gigabrain-0-1",
+    "name": "GigaBrain-0.1",
+    "lab": "gigaai",
+    "family": "GigaBrain",
+    "released": "2026-02",
+    "weights": "open",
+    "card": "https://huggingface.co/open-gigaai/GigaBrain-0.1-3.5B-Base",
+    "aliases": [
+      "GigaBrain-0.1-3.5B-Base",
+      "open-gigaai/GigaBrain-0.1-3.5B-Base"
+    ]
+  },
+  {
+    "id": "xiaomi-robotics-0",
+    "name": "Xiaomi-Robotics-0",
+    "lab": "xiaomi-corp",
+    "family": "Xiaomi-Robotics",
+    "released": "2026-02",
+    "weights": "open",
+    "card": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-0-Pretrain",
+    "aliases": [
+      "Xiaomi-Robotics-0-Pretrain",
+      "XiaomiRobotics/Xiaomi-Robotics-0-Pretrain"
+    ]
   },
   {
     "id": "intern-s1-pro",
@@ -11749,6 +12135,18 @@
     "epoch": "Qwen3.5 397B-A17B"
   },
   {
+    "id": "rynnbrain-8b",
+    "name": "RynnBrain-8B",
+    "lab": "alibaba",
+    "family": "RynnBrain",
+    "released": "2026-02-13",
+    "weights": "open",
+    "card": "https://huggingface.co/Alibaba-DAMO-Academy/RynnBrain-8B",
+    "aliases": [
+      "Alibaba-DAMO-Academy/RynnBrain-8B"
+    ]
+  },
+  {
     "id": "doubao-seed-2-0-pro",
     "name": "Doubao-Seed-2.0 Pro",
     "lab": "bytedance",
@@ -11839,6 +12237,19 @@
     "settingAliases": {
       "claude-sonnet-4-6-1m": "1M context"
     }
+  },
+  {
+    "id": "dreamzero",
+    "name": "DreamZero",
+    "lab": "nvidia",
+    "family": "DreamZero",
+    "released": "2026-02-17",
+    "weights": "open",
+    "card": "https://huggingface.co/GEAR-Dreams/DreamZero-DROID",
+    "aliases": [
+      "DreamZero-DROID",
+      "GEAR-Dreams/DreamZero-DROID"
+    ]
   },
   {
     "id": "grok-4-20",
@@ -12342,6 +12753,16 @@
     "epoch": "GPT-5.4 Nano"
   },
   {
+    "id": "omnisonar",
+    "name": "OmniSONAR",
+    "lab": "meta",
+    "family": "SONAR",
+    "released": "2026-03-17",
+    "aliases": [
+      "Omnilingual SONAR"
+    ]
+  },
+  {
     "id": "mimo-v2-omni",
     "name": "MiMo-V2-Omni",
     "lab": "xiaomi-corp",
@@ -12676,6 +13097,19 @@
     "epoch": "SWE-1.6"
   },
   {
+    "id": "hy-embodied-0-5",
+    "name": "HY-Embodied-0.5",
+    "lab": "tencent",
+    "family": "HY-Embodied",
+    "released": "2026-04-08",
+    "weights": "open",
+    "card": "https://huggingface.co/tencent/HY-Embodied-0.5",
+    "aliases": [
+      "Hy-Embodied-0.5",
+      "tencent/HY-Embodied-0.5"
+    ]
+  },
+  {
     "id": "muse-spark",
     "name": "Muse Spark",
     "lab": "meta",
@@ -12885,6 +13319,19 @@
     "released": "2026-04-22",
     "weights": "open",
     "card": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Base"
+  },
+  {
+    "id": "openai-privacy-filter",
+    "name": "OpenAI Privacy Filter",
+    "lab": "openai",
+    "family": "Privacy Filter",
+    "released": "2026-04-22",
+    "weights": "open",
+    "card": "https://huggingface.co/openai/privacy-filter",
+    "aliases": [
+      "Privacy Filter",
+      "openai/privacy-filter"
+    ]
   },
   {
     "id": "qwen3-6-27b",
@@ -13140,6 +13587,19 @@
     "card": "https://allenai.org/blog/molmoact2",
     "aliases": [
       "MolmoAct2"
+    ]
+  },
+  {
+    "id": "rldx-1",
+    "name": "RLDX-1",
+    "lab": "rlwrld",
+    "family": "RLDX",
+    "released": "2026-05-05",
+    "weights": "open",
+    "card": "https://huggingface.co/RLWRLD/RLDX-1-PT",
+    "aliases": [
+      "RLDX-1-PT",
+      "RLWRLD/RLDX-1-PT"
     ]
   },
   {
@@ -13598,6 +14058,35 @@
     "epoch": "Claude Sonnet 5"
   },
   {
+    "id": "dm0-5",
+    "name": "DM0.5",
+    "lab": "dexmal",
+    "family": "DM0",
+    "released": "2026-07",
+    "weights": "open",
+    "card": "https://huggingface.co/Dexmal/DM05",
+    "aliases": [
+      "DM05",
+      "Dexmal/DM05"
+    ]
+  },
+  {
+    "id": "lingbot-vla-2",
+    "name": "LingBot-VLA 2.0",
+    "lab": "ant-group",
+    "family": "LingBot-VLA",
+    "released": "2026-07",
+    "weights": "open",
+    "card": "https://huggingface.co/robbyant/lingbot-vla-v2-6b",
+    "aliases": [
+      "LingBot-VLA-2.0",
+      "LingBot-VLA-V2",
+      "LingBot-VLA-V2-6B",
+      "lingbot-vla-v2-6b",
+      "robbyant/lingbot-vla-v2-6b"
+    ]
+  },
+  {
     "id": "laguna-xs-2-1",
     "name": "Laguna XS 2.1",
     "lab": "poolside",
@@ -13667,6 +14156,19 @@
     "card": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
     "aliases": [
       "gpt-realtime-2.1-mini"
+    ]
+  },
+  {
+    "id": "internvla-a1-5",
+    "name": "InternVLA-A1.5",
+    "lab": "shanghai-ai-lab",
+    "family": "InternVLA",
+    "released": "2026-07-06",
+    "weights": "open",
+    "card": "https://huggingface.co/InternRobotics/InternVLA-A1.5-base",
+    "aliases": [
+      "InternVLA-A1.5-base",
+      "InternRobotics/InternVLA-A1.5-base"
     ]
   },
   {
@@ -13823,6 +14325,15 @@
     "epoch": "Kimi K3"
   },
   {
+    "id": "xiaomi-robotics-1",
+    "name": "Xiaomi-Robotics-1",
+    "lab": "xiaomi-corp",
+    "family": "Xiaomi-Robotics",
+    "released": "2026-07-16",
+    "weights": "open",
+    "card": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-1-RoboCasa"
+  },
+  {
     "id": "cosmos3-edge",
     "name": "Cosmos3-Edge",
     "lab": "nvidia",
@@ -13830,6 +14341,20 @@
     "weights": "open",
     "aliases": [
       "Cosmos 3-Edge"
+    ]
+  },
+  {
+    "id": "rynnbrain-1-1-9b",
+    "name": "RynnBrain1.1-9B",
+    "lab": "alibaba",
+    "family": "RynnBrain",
+    "released": "2026-07-20",
+    "weights": "open",
+    "card": "https://huggingface.co/Alibaba-DAMO-Academy/RynnBrain1.1-9B",
+    "aliases": [
+      "RynnBrain 1.1 9B",
+      "RynnBrain-1.1-9B",
+      "Alibaba-DAMO-Academy/RynnBrain1.1-9B"
     ]
   },
   {
@@ -14273,6 +14798,19 @@
     }
   },
   {
+    "id": "palmyra-x6",
+    "name": "Palmyra X6",
+    "lab": "writer",
+    "family": "Palmyra",
+    "released": "2026-08-14",
+    "tier": "flagship",
+    "card": "https://writer.com/blog/palmyra-x6-major-harness-release/",
+    "aliases": [
+      "palmyra-x6",
+      "Palmyra X6"
+    ]
+  },
+  {
     "id": "qwen-3-8-27b",
     "name": "Qwen 3.8 27B",
     "lab": "qwen",
@@ -14283,6 +14821,19 @@
       "Qwen3.8 27B (Chutes TEE)",
       "QWEN3.8-27B-FP16",
       "Qwen3.8-27B-FP8"
+    ]
+  },
+  {
+    "id": "gigabrain-0-7",
+    "name": "GigaBrain-0.7",
+    "lab": "gigaai",
+    "family": "GigaBrain",
+    "released": "2026-08-16",
+    "weights": "open",
+    "card": "https://huggingface.co/open-gigaai/GigaBrain-0.7-3.5B-Base",
+    "aliases": [
+      "GigaBrain-0.7-3.5B-Base",
+      "open-gigaai/GigaBrain-0.7-3.5B-Base"
     ]
   },
   {
@@ -15010,96 +15561,6 @@
     ]
   },
   {
-    "id": "omnisonar",
-    "name": "OmniSONAR",
-    "lab": "meta",
-    "family": "SONAR",
-    "released": "2026-03-17",
-    "aliases": [
-      "Omnilingual SONAR"
-    ]
-  },
-  {
-    "id": "sam-3d-body-vit-h",
-    "name": "SAM 3D Body (ViT-H)",
-    "lab": "meta",
-    "family": "SAM 3D",
-    "released": "2025-11-19",
-    "weights": "open",
-    "card": "https://huggingface.co/facebook/sam-3d-body-vith",
-    "aliases": [
-      "3DB-H",
-      "SAM 3D Body ViT-H",
-      "facebook/sam-3d-body-vith"
-    ]
-  },
-  {
-    "id": "sam-3d-body-dinov3",
-    "name": "SAM 3D Body (DINOv3)",
-    "lab": "meta",
-    "family": "SAM 3D",
-    "released": "2025-11-19",
-    "weights": "open",
-    "card": "https://huggingface.co/facebook/sam-3d-body-dinov3",
-    "aliases": [
-      "3DB-DINOv3",
-      "SAM 3D Body DINOv3",
-      "facebook/sam-3d-body-dinov3"
-    ]
-  },
-  {
-    "id": "sam-3d-objects",
-    "name": "SAM 3D Objects",
-    "lab": "meta",
-    "family": "SAM 3D",
-    "released": "2025-11-19",
-    "weights": "open",
-    "card": "https://huggingface.co/facebook/sam-3d-objects",
-    "aliases": [
-      "SAM 3D Objects",
-      "facebook/sam-3d-objects"
-    ]
-  },
-  {
-    "id": "mapanything",
-    "name": "MapAnything",
-    "lab": "meta",
-    "family": "MapAnything",
-    "released": "2025-09-16",
-    "weights": "open",
-    "card": "https://huggingface.co/facebook/map-anything",
-    "aliases": [
-      "MapAnything",
-      "facebook/map-anything"
-    ]
-  },
-  {
-    "id": "dinov3-vit-7b",
-    "name": "DINOv3 ViT-7B",
-    "lab": "meta",
-    "family": "DINOv3",
-    "released": "2025-08-13",
-    "weights": "open",
-    "card": "https://huggingface.co/facebook/dinov3-vit7b16-pretrain-lvd1689m",
-    "aliases": [
-      "DINOv3 Web ViT-7B",
-      "dinov3-vit7b16-pretrain-lvd1689m"
-    ]
-  },
-  {
-    "id": "dinov3-vit-7b-sat",
-    "name": "DINOv3 ViT-7B (satellite)",
-    "lab": "meta",
-    "family": "DINOv3",
-    "released": "2025-08-13",
-    "weights": "open",
-    "card": "https://huggingface.co/facebook/dinov3-vit7b16-pretrain-sat493m",
-    "aliases": [
-      "DINOv3 Sat ViT-7B",
-      "dinov3-vit7b16-pretrain-sat493m"
-    ]
-  },
-  {
     "id": "nemotron-3-5-bolt-74b-a9b",
     "name": "Nemotron 3.5 Bolt 74B-A9B",
     "lab": "nvidia",
@@ -15426,20 +15887,6 @@
     ]
   },
   {
-    "id": "tencent-hy4-flash",
-    "name": "Tencent Hy4 flash",
-    "lab": "tencent",
-    "family": "Hy4",
-    "released": "2026-11-15",
-    "weights": "open",
-    "tier": "mid",
-    "card": "https://huggingface.co/tencent/Hy4-flash",
-    "aliases": [
-      "Hy4 flash",
-      "Hy4-flash"
-    ]
-  },
-  {
     "id": "gemini-omni-1-2-flash",
     "name": "Gemini Omni 1.2 Flash",
     "lab": "google",
@@ -15472,6 +15919,18 @@
       "Inkling Small 2"
     ],
     "epoch": "Inkling 2 Small"
+  },
+  {
+    "id": "meituan-robotics-0",
+    "name": "Meituan-Robotics-0",
+    "lab": "meituan",
+    "family": "Meituan-Robotics",
+    "released": "2026-11-05",
+    "weights": "open",
+    "card": "https://huggingface.co/MeituanRobotics/Meituan-Robotics-0",
+    "aliases": [
+      "MeituanRobotics/Meituan-Robotics-0"
+    ]
   },
   {
     "id": "claude-fable-5-2",
@@ -15561,6 +16020,20 @@
       "qwen4-max"
     ],
     "epoch": "Qwen4-Max"
+  },
+  {
+    "id": "tencent-hy4-flash",
+    "name": "Tencent Hy4 flash",
+    "lab": "tencent",
+    "family": "Hy4",
+    "released": "2026-11-15",
+    "weights": "open",
+    "tier": "mid",
+    "card": "https://huggingface.co/tencent/Hy4-flash",
+    "aliases": [
+      "Hy4 flash",
+      "Hy4-flash"
+    ]
   },
   {
     "id": "gpt-6-2-astra",
@@ -16990,478 +17463,5 @@
     "name": "Z-Image-Turbo",
     "lab": "alibaba",
     "weights": "open"
-  },
-  {
-    "id": "x-vla",
-    "name": "X-VLA",
-    "lab": "tsinghua-university",
-    "family": "X-VLA",
-    "released": "2025-10-11",
-    "weights": "open",
-    "card": "https://huggingface.co/2toINF/X-VLA-Pt",
-    "aliases": [
-      "XVLA",
-      "x-VLA",
-      "X-VLA-0.9B",
-      "X-VLA-Pt",
-      "2toINF/X-VLA-Pt"
-    ]
-  },
-  {
-    "id": "smolvla",
-    "name": "SmolVLA",
-    "lab": "hugging-face",
-    "family": "SmolVLA",
-    "released": "2025-06-02",
-    "weights": "open",
-    "card": "https://huggingface.co/lerobot/smolvla_base",
-    "aliases": [
-      "smolvla_base",
-      "lerobot/smolvla_base"
-    ]
-  },
-  {
-    "id": "spatialvla",
-    "name": "SpatialVLA",
-    "lab": "shanghai-ai-lab",
-    "family": "SpatialVLA",
-    "released": "2025-01-27",
-    "weights": "open",
-    "card": "https://huggingface.co/IPEC-COMMUNITY/spatialvla-4b-224-pt",
-    "aliases": [
-      "SpatialVLA-4B",
-      "spatialvla-4b-224-pt"
-    ]
-  },
-  {
-    "id": "univla",
-    "name": "UniVLA",
-    "lab": "opendrivelab",
-    "family": "UniVLA",
-    "released": "2025-05-09",
-    "weights": "open",
-    "card": "https://huggingface.co/qwbu/univla-7b",
-    "aliases": [
-      "UniVLA-7B",
-      "univla-7b"
-    ]
-  },
-  {
-    "id": "lingbot-vla",
-    "name": "LingBot-VLA",
-    "lab": "ant-group",
-    "family": "LingBot-VLA",
-    "released": "2026-01-26",
-    "weights": "open",
-    "card": "https://huggingface.co/robbyant/lingbot-vla-4b",
-    "aliases": [
-      "LingBot-VLA-4B",
-      "lingbot-vla-4b",
-      "robbyant/lingbot-vla-4b"
-    ]
-  },
-  {
-    "id": "lingbot-vla-2",
-    "name": "LingBot-VLA 2.0",
-    "lab": "ant-group",
-    "family": "LingBot-VLA",
-    "released": "2026-07",
-    "weights": "open",
-    "card": "https://huggingface.co/robbyant/lingbot-vla-v2-6b",
-    "aliases": [
-      "LingBot-VLA-2.0",
-      "LingBot-VLA-V2",
-      "LingBot-VLA-V2-6B",
-      "lingbot-vla-v2-6b",
-      "robbyant/lingbot-vla-v2-6b"
-    ]
-  },
-  {
-    "id": "internvla-m1",
-    "name": "InternVLA-M1",
-    "lab": "shanghai-ai-lab",
-    "family": "InternVLA",
-    "released": "2025-09",
-    "weights": "open",
-    "card": "https://huggingface.co/InternRobotics/InternVLA-M1",
-    "aliases": [
-      "InternRobotics/InternVLA-M1"
-    ]
-  },
-  {
-    "id": "internvla-a1",
-    "name": "InternVLA-A1",
-    "lab": "shanghai-ai-lab",
-    "family": "InternVLA",
-    "released": "2026-01-05",
-    "weights": "open",
-    "card": "https://huggingface.co/InternRobotics/InternVLA-A1-3B",
-    "aliases": [
-      "InternVLA-A1-3B",
-      "InternRobotics/InternVLA-A1-3B"
-    ]
-  },
-  {
-    "id": "internvla-a1-5",
-    "name": "InternVLA-A1.5",
-    "lab": "shanghai-ai-lab",
-    "family": "InternVLA",
-    "released": "2026-07-06",
-    "weights": "open",
-    "card": "https://huggingface.co/InternRobotics/InternVLA-A1.5-base",
-    "aliases": [
-      "InternVLA-A1.5-base",
-      "InternRobotics/InternVLA-A1.5-base"
-    ]
-  },
-  {
-    "id": "mimo-embodied-7b",
-    "name": "MiMo-Embodied-7B",
-    "lab": "xiaomi-corp",
-    "family": "MiMo",
-    "released": "2025-11-20",
-    "weights": "open",
-    "card": "https://huggingface.co/XiaomiMiMo/MiMo-Embodied-7B",
-    "aliases": [
-      "Mimo-Embodied-7B",
-      "MiMoEmbodied-7B",
-      "MiMo-Embodied",
-      "XiaomiMiMo/MiMo-Embodied-7B"
-    ]
-  },
-  {
-    "id": "rynnbrain-8b",
-    "name": "RynnBrain-8B",
-    "lab": "alibaba",
-    "family": "RynnBrain",
-    "released": "2026-02-13",
-    "weights": "open",
-    "card": "https://huggingface.co/Alibaba-DAMO-Academy/RynnBrain-8B",
-    "aliases": [
-      "Alibaba-DAMO-Academy/RynnBrain-8B"
-    ]
-  },
-  {
-    "id": "rynnbrain-1-1-9b",
-    "name": "RynnBrain1.1-9B",
-    "lab": "alibaba",
-    "family": "RynnBrain",
-    "released": "2026-07-20",
-    "weights": "open",
-    "card": "https://huggingface.co/Alibaba-DAMO-Academy/RynnBrain1.1-9B",
-    "aliases": [
-      "RynnBrain 1.1 9B",
-      "RynnBrain-1.1-9B",
-      "Alibaba-DAMO-Academy/RynnBrain1.1-9B"
-    ]
-  },
-  {
-    "id": "robobrain-2-0-7b",
-    "name": "RoboBrain2.0-7B",
-    "lab": "baai",
-    "family": "RoboBrain",
-    "released": "2025-07-02",
-    "weights": "open",
-    "card": "https://huggingface.co/BAAI/RoboBrain2.0-7B",
-    "aliases": [
-      "RoboBrain 2.0 7B",
-      "RoboBrain-2.0-7B",
-      "BAAI/RoboBrain2.0-7B"
-    ]
-  },
-  {
-    "id": "robobrain-2-0-32b",
-    "name": "RoboBrain2.0-32B",
-    "lab": "baai",
-    "family": "RoboBrain",
-    "released": "2025-07-02",
-    "weights": "open",
-    "card": "https://huggingface.co/BAAI/RoboBrain2.0-32B",
-    "aliases": [
-      "RoboBrain 2.0 32B",
-      "RoboBrain-2.0-32B",
-      "BAAI/RoboBrain2.0-32B"
-    ]
-  },
-  {
-    "id": "robobrain-2-5-8b",
-    "name": "RoboBrain2.5-8B",
-    "lab": "baai",
-    "family": "RoboBrain",
-    "released": "2026-01-20",
-    "weights": "open",
-    "card": "https://huggingface.co/BAAI/RoboBrain2.5-8B-NV",
-    "aliases": [
-      "RoboBrain2.5-8B-NV",
-      "RoboBrain 2.5 8B",
-      "BAAI/RoboBrain2.5-8B-NV"
-    ]
-  },
-  {
-    "id": "vebrain",
-    "name": "VeBrain",
-    "lab": "shanghai-ai-lab",
-    "family": "VeBrain",
-    "released": "2025-05-30",
-    "weights": "open",
-    "card": "https://huggingface.co/OpenGVLab/VeBrain",
-    "aliases": [
-      "OpenGVLab/VeBrain"
-    ]
-  },
-  {
-    "id": "cosmos-reason1-7b",
-    "name": "Cosmos-Reason1-7B",
-    "lab": "nvidia",
-    "family": "Cosmos",
-    "released": "2025-03-18",
-    "weights": "open",
-    "card": "https://huggingface.co/nvidia/Cosmos-Reason1-7B",
-    "aliases": [
-      "Cosmos-Reason-1-7B",
-      "Cosmos Reason1 7B",
-      "nvidia/Cosmos-Reason1-7B"
-    ]
-  },
-  {
-    "id": "cosmos-reason2-8b",
-    "name": "Cosmos-Reason2-8B",
-    "lab": "nvidia",
-    "family": "Cosmos",
-    "released": "2025-12",
-    "weights": "open",
-    "card": "https://huggingface.co/nvidia/Cosmos-Reason2-8B",
-    "aliases": [
-      "Cosmos Reason2 8B",
-      "Cosmos-Reason-2-8B",
-      "nvidia/Cosmos-Reason2-8B"
-    ]
-  },
-  {
-    "id": "cosmos-reason2-2b",
-    "name": "Cosmos-Reason2-2B",
-    "lab": "nvidia",
-    "family": "Cosmos",
-    "released": "2025-12",
-    "weights": "open",
-    "card": "https://huggingface.co/nvidia/Cosmos-Reason2-2B",
-    "aliases": [
-      "Cosmos Reason2 2B",
-      "Cosmos-Reason-2-2B",
-      "nvidia/Cosmos-Reason2-2B"
-    ]
-  },
-  {
-    "id": "magma-8b",
-    "name": "Magma-8B",
-    "lab": "microsoft",
-    "family": "Magma",
-    "released": "2025-02-18",
-    "weights": "open",
-    "card": "https://huggingface.co/microsoft/Magma-8B",
-    "aliases": [
-      "Magma",
-      "microsoft/Magma-8B"
-    ]
-  },
-  {
-    "id": "rdt-1b",
-    "name": "RDT-1B",
-    "lab": "tsinghua-university",
-    "family": "RDT",
-    "released": "2024-10-10",
-    "weights": "open",
-    "card": "https://huggingface.co/robotics-diffusion-transformer/rdt-1b",
-    "aliases": [
-      "RDT",
-      "rdt-1b",
-      "robotics-diffusion-transformer/rdt-1b"
-    ]
-  },
-  {
-    "id": "nora",
-    "name": "NORA",
-    "lab": "sutd",
-    "family": "NORA",
-    "released": "2025-04-28",
-    "weights": "open",
-    "card": "https://huggingface.co/declare-lab/nora",
-    "aliases": [
-      "declare-lab/nora"
-    ]
-  },
-  {
-    "id": "gigabrain-0-1",
-    "name": "GigaBrain-0.1",
-    "lab": "gigaai",
-    "family": "GigaBrain",
-    "released": "2026-02",
-    "weights": "open",
-    "card": "https://huggingface.co/open-gigaai/GigaBrain-0.1-3.5B-Base",
-    "aliases": [
-      "GigaBrain-0.1-3.5B-Base",
-      "open-gigaai/GigaBrain-0.1-3.5B-Base"
-    ]
-  },
-  {
-    "id": "gigabrain-0-7",
-    "name": "GigaBrain-0.7",
-    "lab": "gigaai",
-    "family": "GigaBrain",
-    "released": "2026-08-16",
-    "weights": "open",
-    "card": "https://huggingface.co/open-gigaai/GigaBrain-0.7-3.5B-Base",
-    "aliases": [
-      "GigaBrain-0.7-3.5B-Base",
-      "open-gigaai/GigaBrain-0.7-3.5B-Base"
-    ]
-  },
-  {
-    "id": "dm0-5",
-    "name": "DM0.5",
-    "lab": "dexmal",
-    "family": "DM0",
-    "released": "2026-07",
-    "weights": "open",
-    "card": "https://huggingface.co/Dexmal/DM05",
-    "aliases": [
-      "DM05",
-      "Dexmal/DM05"
-    ]
-  },
-  {
-    "id": "xiaomi-robotics-0",
-    "name": "Xiaomi-Robotics-0",
-    "lab": "xiaomi-corp",
-    "family": "Xiaomi-Robotics",
-    "released": "2026-02",
-    "weights": "open",
-    "card": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-0-Pretrain",
-    "aliases": [
-      "Xiaomi-Robotics-0-Pretrain",
-      "XiaomiRobotics/Xiaomi-Robotics-0-Pretrain"
-    ]
-  },
-  {
-    "id": "xiaomi-robotics-1",
-    "name": "Xiaomi-Robotics-1",
-    "lab": "xiaomi-corp",
-    "family": "Xiaomi-Robotics",
-    "released": "2026-07-16",
-    "weights": "open",
-    "card": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-1-RoboCasa"
-  },
-  {
-    "id": "wall-oss",
-    "name": "WALL-OSS",
-    "lab": "x-square-robot",
-    "family": "WALL-OSS",
-    "released": "2025-09",
-    "weights": "open",
-    "card": "https://huggingface.co/x-square-robot/wall-oss-flow",
-    "aliases": [
-      "wall-oss-fast",
-      "wall-oss-flow",
-      "WALL-OSS-FAST",
-      "WALL-OSS-FLOW",
-      "x-square-robot/wall-oss-flow"
-    ]
-  },
-  {
-    "id": "cogact",
-    "name": "CogACT",
-    "lab": "microsoft",
-    "family": "CogACT",
-    "released": "2024-11-29",
-    "weights": "open",
-    "card": "https://huggingface.co/CogACT/CogACT-Base",
-    "aliases": [
-      "CogACT-Base",
-      "CogACT/CogACT-Base"
-    ]
-  },
-  {
-    "id": "worldvla",
-    "name": "WorldVLA",
-    "lab": "alibaba",
-    "family": "WorldVLA",
-    "released": "2025-06-26",
-    "weights": "open",
-    "card": "https://github.com/alibaba-damo-academy/WorldVLA"
-  },
-  {
-    "id": "minivla",
-    "name": "MiniVLA",
-    "lab": "stanford",
-    "family": "OpenVLA",
-    "released": "2024-12",
-    "weights": "open",
-    "card": "https://huggingface.co/Stanford-ILIAD/minivla-libero90-prismatic",
-    "aliases": [
-      "minivla"
-    ]
-  },
-  {
-    "id": "hy-embodied-0-5",
-    "name": "HY-Embodied-0.5",
-    "lab": "tencent",
-    "family": "HY-Embodied",
-    "released": "2026-04-08",
-    "weights": "open",
-    "card": "https://huggingface.co/tencent/HY-Embodied-0.5",
-    "aliases": [
-      "Hy-Embodied-0.5",
-      "tencent/HY-Embodied-0.5"
-    ]
-  },
-  {
-    "id": "motus",
-    "name": "Motus",
-    "lab": "tsinghua-university",
-    "family": "Motus",
-    "released": "2025-12-15",
-    "weights": "open",
-    "card": "https://huggingface.co/motus-robotics/Motus",
-    "aliases": [
-      "motus-robotics/Motus"
-    ]
-  },
-  {
-    "id": "dreamzero",
-    "name": "DreamZero",
-    "lab": "nvidia",
-    "family": "DreamZero",
-    "released": "2026-02-17",
-    "weights": "open",
-    "card": "https://huggingface.co/GEAR-Dreams/DreamZero-DROID",
-    "aliases": [
-      "DreamZero-DROID",
-      "GEAR-Dreams/DreamZero-DROID"
-    ]
-  },
-  {
-    "id": "meituan-robotics-0",
-    "name": "Meituan-Robotics-0",
-    "lab": "meituan",
-    "family": "Meituan-Robotics",
-    "released": "2026-11-05",
-    "weights": "open",
-    "card": "https://huggingface.co/MeituanRobotics/Meituan-Robotics-0",
-    "aliases": [
-      "MeituanRobotics/Meituan-Robotics-0"
-    ]
-  },
-  {
-    "id": "rldx-1",
-    "name": "RLDX-1",
-    "lab": "rlwrld",
-    "family": "RLDX",
-    "released": "2026-05-05",
-    "weights": "open",
-    "card": "https://huggingface.co/RLWRLD/RLDX-1-PT",
-    "aliases": [
-      "RLDX-1-PT",
-      "RLWRLD/RLDX-1-PT"
-    ]
   }
 ]
