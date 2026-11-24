@@ -15,6 +15,10 @@ const board: Leaderboard = {
     CNTG: { name: 'Counting', group: 'Category' },
     COMP: { name: 'Compositionality', group: 'Category' },
   },
+  stats: {
+    visionParamsB: { name: 'Vision encoder parameters', unit: 'billions' },
+    languageParamsB: { name: 'Language model parameters', unit: 'billions' },
+  },
   url: "https://github.com/princeton-nlp/CharXiv",
   feed: FEED,
   terms: "Public results published by the benchmark authors at charxiv.github.io; retain source attribution and follow the upstream terms.",

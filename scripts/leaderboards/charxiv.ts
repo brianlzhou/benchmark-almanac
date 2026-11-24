@@ -9,7 +9,22 @@ const FEED = 'https://charxiv.github.io/data/val_result.csv';
 
 const board: Leaderboard = {
   benchmark: 'charxiv',
-  parts: Object.fromEntries(['TC', 'TG', 'NC', 'NG'].map(name => [name, { name, group: 'Reasoning question type' }])),
+  parts: {
+    TC: { name: 'Text in chart', group: 'Reasoning question type' },
+    TG: { name: 'Text in general', group: 'Reasoning question type' },
+    NC: { name: 'Number in chart', group: 'Reasoning question type' },
+    NG: { name: 'Number in general', group: 'Reasoning question type' },
+    Descriptive: { name: 'Descriptive overall', group: 'Descriptive' },
+    INEX: { name: 'Information extraction', group: 'Descriptive category' },
+    ENUM: { name: 'Enumeration', group: 'Descriptive category' },
+    PATT: { name: 'Pattern recognition', group: 'Descriptive category' },
+    CNTG: { name: 'Counting', group: 'Descriptive category' },
+    COMP: { name: 'Compositionality', group: 'Descriptive category' },
+  },
+  stats: {
+    visionParamsB: { name: 'Vision encoder parameters', unit: 'billions' },
+    languageParamsB: { name: 'Language model parameters', unit: 'billions' },
+  },
   url: 'https://charxiv.github.io/#leaderboard',
   feed: `${FEED} (Reasoning Overall)`,
   terms: 'Static CSV on the CharXiv GitHub Pages site, which states no terms; the CharXiv code is Apache-2.0 and the dataset CC BY-SA 4.0.',

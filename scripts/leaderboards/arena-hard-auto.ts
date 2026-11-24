@@ -10,6 +10,7 @@ const board: Leaderboard = {
   aliases:{'claude-3-5-sonnet-20240620':'claude-3-5-sonnet','claude-3-5-sonnet-20241022':'claude-3-5-sonnet-october-2024','gemini-1.5-flash-api-0514':'gemini-1-5-flash-may-2024','gemini-1.5-pro-api-0514':'gemini-1-5-pro-may-2024'},
   stats: {
     styleControlledWinRate: { name: 'Style-controlled win rate', unit: '%', better: 'higher' },
+    styleControlledTokens: { name: 'Style-controlled average output tokens', unit: 'tokens' },
   },
   async fetch() {
     const md = await fetchText(FEED);

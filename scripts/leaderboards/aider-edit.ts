@@ -30,6 +30,22 @@ const board: Leaderboard = {
   aliases: {},
   stats: {
     latency: { name: 'Seconds per case', unit: 'seconds', better: 'lower' },
+    pass_rate_1: { name: 'First-attempt pass rate', unit: '%', better: 'higher' },
+    percent_cases_well_formed: { name: 'Well-formed edit rate', unit: '%', better: 'higher' },
+    test_cases: { name: 'Test cases', unit: 'count' },
+    total_tests: { name: 'Total tests', unit: 'count' },
+    pass_num_1: { name: 'First-attempt passes', unit: 'count', better: 'higher' },
+    pass_num_2: { name: 'Second-attempt passes', unit: 'count', better: 'higher' },
+    error_outputs: { name: 'Error outputs', unit: 'count', better: 'lower' },
+    num_malformed_responses: { name: 'Malformed responses', unit: 'count', better: 'lower' },
+    num_with_malformed_responses: { name: 'Exercises with malformed responses', unit: 'count', better: 'lower' },
+    user_asks: { name: 'User prompts', unit: 'count', better: 'lower' },
+    lazy_comments: { name: 'Lazy comments', unit: 'count', better: 'lower' },
+    syntax_errors: { name: 'Syntax errors', unit: 'count', better: 'lower' },
+    indentation_errors: { name: 'Indentation errors', unit: 'count', better: 'lower' },
+    exhausted_context_windows: { name: 'Exhausted context windows', unit: 'count', better: 'lower' },
+    test_timeouts: { name: 'Test timeouts', unit: 'count', better: 'lower' },
+    runCostUsd: { name: 'Total run cost', unit: 'usd', better: 'lower' },
   },
   async fetch() {
     return parse(await fetchText(FEED))

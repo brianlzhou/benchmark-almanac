@@ -9,6 +9,14 @@ const board: Leaderboard = {
   parts: {
     seenSuccess: { name: 'Seen rooms', group: 'Split' },
   },
+  stats: {
+    unseenPLWSR: { name: 'Unseen path-length weighted success rate', unit: '%', better: 'higher' },
+    seenPLWSR: { name: 'Seen path-length weighted success rate', unit: '%', better: 'higher' },
+    unseenGoalCondition: { name: 'Unseen goal-condition success rate', unit: '%', better: 'higher' },
+    seenGoalCondition: { name: 'Seen goal-condition success rate', unit: '%', better: 'higher' },
+    unseenPLWGoalCondition: { name: 'Unseen path-length weighted goal-condition success rate', unit: '%', better: 'higher' },
+    seenPLWGoalCondition: { name: 'Seen path-length weighted goal-condition success rate', unit: '%', better: 'higher' },
+  },
   url: "https://askforalfred.com/leaderboard/leaderboard.html",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",

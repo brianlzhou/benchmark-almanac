@@ -5,7 +5,7 @@ import { fetchText } from '../lib/util.ts';
 const url='https://www.mercor.com/apex/apex-agents-leaderboard/';
 const board:Leaderboard={benchmark:'apex-agents-1-1',url,feed:`${url} (__NEXT_DATA__, mean-score, v1.1)`,
  terms:'Mercor terms prohibit automated scraping; the Almanac credits Mercor and links the original source.',
- stats:{passAt1:{name:'Pass at 1',unit:'%',better:'higher'},samples:{name:'Samples',unit:'count'}},
+ stats:{passAt1:{name:'Pass at 1',unit:'%',better:'higher'},passAt1Error:{name:'Pass at 1 confidence half-width',unit:'%'},samples:{name:'Samples',unit:'count'}},
  aliases:{'Muse Wonder 1.0':'muse-wonder'},
  async fetch():Promise<LeaderboardRow[]> {
   const raw=(await fetchText(url)).match(/<script[^>]*id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/)?.[1];

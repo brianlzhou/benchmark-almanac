@@ -36,13 +36,13 @@ const board:Leaderboard={aliases:{"claude-4-sonnet": "claude-sonnet-4", "claude-
   short: { name: 'Short', group: 'Category' },
   long: { name: 'Long', group: 'Category' },
 },url:'https://sakanaai.github.io/ALE-Bench-Leaderboard/',feed:FEED,terms:'Public Sakana AI ALE-Bench leaderboard results, subject to the repository license and GitHub terms.',stats:{
-  inputTokens:{name:'Input tokens',unit:'tokens'},meanRank:{name:'Mean rank',unit:'rating',better:'lower'},
+  inputTokens:{name:'Input tokens',unit:'tokens'},meanRank:{name:'Mean contest rank',unit:'count',better:'lower'},
   all_performance_mean:{name:'All performance mean',unit:'rating',better:'higher'},all_performance_median:{name:'All performance median',unit:'rating',better:'higher'},
   short_performance_mean:{name:'Short performance mean',unit:'rating',better:'higher'},short_performance_median:{name:'Short performance median',unit:'rating',better:'higher'},
   long_performance_mean:{name:'Long performance mean',unit:'rating',better:'higher'},long_performance_median:{name:'Long performance median',unit:'rating',better:'higher'},
-  all_rank_mean:{name:'All rank mean',unit:'rating',better:'lower'},all_rank_median:{name:'All rank median',unit:'rating',better:'lower'},
-  short_rank_mean:{name:'Short rank mean',unit:'rating',better:'lower'},short_rank_median:{name:'Short rank median',unit:'rating',better:'lower'},
-  long_rank_mean:{name:'Long rank mean',unit:'rating',better:'lower'},long_rank_median:{name:'Long rank median',unit:'rating',better:'lower'},
+  all_rank_mean:{name:'All contest rank mean',unit:'count',better:'lower'},all_rank_median:{name:'All contest rank median',unit:'count',better:'lower'},
+  short_rank_mean:{name:'Short contest rank mean',unit:'count',better:'lower'},short_rank_median:{name:'Short contest rank median',unit:'count',better:'lower'},
+  long_rank_mean:{name:'Long contest rank mean',unit:'count',better:'lower'},long_rank_median:{name:'Long contest rank median',unit:'count',better:'lower'},
   all_cost_mean:{name:'All task cost mean',unit:'usd',better:'lower'},all_cost_median:{name:'All task cost median',unit:'usd',better:'lower'},
   short_cost_mean:{name:'Short task cost mean',unit:'usd',better:'lower'},short_cost_median:{name:'Short task cost median',unit:'usd',better:'lower'},
   long_cost_mean:{name:'Long task cost mean',unit:'usd',better:'lower'},long_cost_median:{name:'Long task cost median',unit:'usd',better:'lower'},
@@ -56,6 +56,21 @@ const board:Leaderboard={aliases:{"claude-4-sonnet": "claude-sonnet-4", "claude-
   long_total_tokens_mean:{name:'Long total tokens mean',unit:'tokens'},long_total_tokens_median:{name:'Long total tokens median',unit:'tokens'},
   maxProgramExecutionSeconds:{name:'Maximum program execution time',unit:'seconds',better:'lower'},
   maxProgramMemoryKiB:{name:'Maximum program memory',unit:'count',note:'Maximum program memory in KiB.'},
+  ...Object.fromEntries((['all','short','long'] as const).flatMap(cat => {
+    const cLabel = cat === 'all' ? 'All' : cat === 'short' ? 'Short' : 'Long';
+    const specs = [
+      ['performance','performance','rating','higher'],
+      ['rank','contest rank','count','lower'],
+      ['cost','task cost','usd','lower'],
+      ['input_tokens','input tokens','tokens',undefined],
+      ['output_tokens','output tokens','tokens',undefined],
+      ['total_tokens','total tokens','tokens',undefined],
+    ] as const;
+    return specs.flatMap(([k, label, unit, better]) =>
+      ([['min','minimum',better],['max','maximum',better]] as const)
+        .map(([s, sLabel, b]) => [`${cat}_${k}_${s}`, { name: `${cLabel} ${label} ${sLabel}`, unit, ...(b ? { better: b } : {}) }])
+    );
+  })),
 },chart:{title:'Performance versus cost',x:{key:'cost',label:'Mean task cost',unit:'$',better:'lower',log:true},y:{key:'score',label:'Mean performance',unit:'rating',better:'higher'}},async fetch(){
  const rows:LeaderboardRow[]=[];
  for(const model of await fetchJson<Entry[]>(FEED))for(const r of model.overall_results)for(const split of ['all']){
@@ -67,15 +82,15 @@ const board:Leaderboard={aliases:{"claude-4-sonnet": "claude-sonnet-4", "claude-
   for (const key of ['performance', 'rank', 'cost', 'input_tokens', 'output_tokens', 'total_tokens'] as const) {
     for (const [category, stats] of Object.entries(r[key] ?? {})) {
       for (const [stat, value] of Object.entries(stats)) {
-        const field = [category, key, stat].join('_');
-        if (typeof value === 'number') metrics[allTaskKeys[field] ?? field] = value;
+        const field = [category, key, stat === 'stdev' ? 'std' : stat].join('_');
+        const mapped = allTaskKeys[[category, key, stat].join('_')] ?? field;
+        if (typeof value === 'number') metrics[mapped] = value;
       }
     }
   }
   for (const task of r.results ?? []) {
     if (task.problem_id && Number.isFinite(task.performance)) {
       metrics[task.problem_id] = task.performance;
-      (board.parts ??= {})[task.problem_id] = { name: task.problem_id, group: 'Problem' };
     }
     if (typeof task.max_execution_time_ms === 'number') {
       metrics.maxProgramExecutionSeconds = Math.max(metrics.maxProgramExecutionSeconds ?? 0, task.max_execution_time_ms / 1000);

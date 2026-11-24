@@ -9406,7 +9406,7 @@
       "url": "https://aider.chat/docs/leaderboards/edit.html",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/edit_leaderboard.yml",
       "terms": "Apache-2.0 repository file on GitHub.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [
         "Codestral 22B (May 2024)",
@@ -9470,6 +9470,84 @@
           "name": "Seconds per case",
           "unit": "seconds",
           "better": "lower"
+        },
+        "pass_rate_1": {
+          "name": "First-attempt pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "percent_cases_well_formed": {
+          "name": "Well-formed edit rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "test_cases": {
+          "name": "Test cases",
+          "unit": "count"
+        },
+        "total_tests": {
+          "name": "Total tests",
+          "unit": "count"
+        },
+        "pass_num_1": {
+          "name": "First-attempt passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "pass_num_2": {
+          "name": "Second-attempt passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "error_outputs": {
+          "name": "Error outputs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "num_malformed_responses": {
+          "name": "Malformed responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "num_with_malformed_responses": {
+          "name": "Exercises with malformed responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "user_asks": {
+          "name": "User prompts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "lazy_comments": {
+          "name": "Lazy comments",
+          "unit": "count",
+          "better": "lower"
+        },
+        "syntax_errors": {
+          "name": "Syntax errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "indentation_errors": {
+          "name": "Indentation errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "exhausted_context_windows": {
+          "name": "Exhausted context windows",
+          "unit": "count",
+          "better": "lower"
+        },
+        "test_timeouts": {
+          "name": "Test timeouts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "runCostUsd": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -9477,7 +9555,7 @@
       "url": "https://aider.chat/docs/leaderboards/",
       "feed": "https://raw.githubusercontent.com/Aider-AI/aider/main/aider/website/_data/polyglot_leaderboard.yml",
       "terms": "Apache-2.0 repository file on GitHub.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 63,
       "unmatched": [
         "DeepSeek Chat V2.5",
@@ -9493,6 +9571,79 @@
           "name": "Seconds per case",
           "unit": "seconds",
           "better": "lower"
+        },
+        "pass_rate_1": {
+          "name": "First-attempt pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "percent_cases_well_formed": {
+          "name": "Well-formed edit rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "test_cases": {
+          "name": "Test cases",
+          "unit": "count"
+        },
+        "pass_num_1": {
+          "name": "First-attempt passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "pass_num_2": {
+          "name": "Second-attempt passes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "error_outputs": {
+          "name": "Error outputs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "num_malformed_responses": {
+          "name": "Malformed responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "num_with_malformed_responses": {
+          "name": "Exercises with malformed responses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "user_asks": {
+          "name": "User prompts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "lazy_comments": {
+          "name": "Lazy comments",
+          "unit": "count",
+          "better": "lower"
+        },
+        "syntax_errors": {
+          "name": "Syntax errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "indentation_errors": {
+          "name": "Indentation errors",
+          "unit": "count",
+          "better": "lower"
+        },
+        "exhausted_context_windows": {
+          "name": "Exhausted context windows",
+          "unit": "count",
+          "better": "lower"
+        },
+        "test_timeouts": {
+          "name": "Test timeouts",
+          "unit": "count",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens per exercise",
+          "unit": "tokens"
         }
       }
     },
@@ -10921,7 +11072,7 @@
       "url": "https://sakanaai.github.io/ALE-Bench-Leaderboard/",
       "feed": "https://sakanaai.github.io/ALE-Bench-Leaderboard/data/results_summary.json",
       "terms": "Public Sakana AI ALE-Bench leaderboard results, subject to the repository license and GitHub terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 740,
       "unmatched": [
         "codestral-2508",
@@ -11124,8 +11275,8 @@
           "unit": "tokens"
         },
         "meanRank": {
-          "name": "Mean rank",
-          "unit": "rating",
+          "name": "Mean contest rank",
+          "unit": "count",
           "better": "lower"
         },
         "all_performance_mean": {
@@ -11159,33 +11310,33 @@
           "better": "higher"
         },
         "all_rank_mean": {
-          "name": "All rank mean",
-          "unit": "rating",
+          "name": "All contest rank mean",
+          "unit": "count",
           "better": "lower"
         },
         "all_rank_median": {
-          "name": "All rank median",
-          "unit": "rating",
+          "name": "All contest rank median",
+          "unit": "count",
           "better": "lower"
         },
         "short_rank_mean": {
-          "name": "Short rank mean",
-          "unit": "rating",
+          "name": "Short contest rank mean",
+          "unit": "count",
           "better": "lower"
         },
         "short_rank_median": {
-          "name": "Short rank median",
-          "unit": "rating",
+          "name": "Short contest rank median",
+          "unit": "count",
           "better": "lower"
         },
         "long_rank_mean": {
-          "name": "Long rank mean",
-          "unit": "rating",
+          "name": "Long contest rank mean",
+          "unit": "count",
           "better": "lower"
         },
         "long_rank_median": {
-          "name": "Long rank median",
-          "unit": "rating",
+          "name": "Long contest rank median",
+          "unit": "count",
           "better": "lower"
         },
         "all_cost_mean": {
@@ -11295,6 +11446,168 @@
           "name": "Maximum program memory",
           "unit": "count",
           "note": "Maximum program memory in KiB."
+        },
+        "all_performance_min": {
+          "name": "All performance minimum",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "all_performance_max": {
+          "name": "All performance maximum",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "all_rank_min": {
+          "name": "All contest rank minimum",
+          "unit": "count",
+          "better": "lower"
+        },
+        "all_rank_max": {
+          "name": "All contest rank maximum",
+          "unit": "count",
+          "better": "lower"
+        },
+        "all_cost_min": {
+          "name": "All task cost minimum",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "all_cost_max": {
+          "name": "All task cost maximum",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "all_input_tokens_min": {
+          "name": "All input tokens minimum",
+          "unit": "tokens"
+        },
+        "all_input_tokens_max": {
+          "name": "All input tokens maximum",
+          "unit": "tokens"
+        },
+        "all_output_tokens_min": {
+          "name": "All output tokens minimum",
+          "unit": "tokens"
+        },
+        "all_output_tokens_max": {
+          "name": "All output tokens maximum",
+          "unit": "tokens"
+        },
+        "all_total_tokens_min": {
+          "name": "All total tokens minimum",
+          "unit": "tokens"
+        },
+        "all_total_tokens_max": {
+          "name": "All total tokens maximum",
+          "unit": "tokens"
+        },
+        "short_performance_min": {
+          "name": "Short performance minimum",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "short_performance_max": {
+          "name": "Short performance maximum",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "short_rank_min": {
+          "name": "Short contest rank minimum",
+          "unit": "count",
+          "better": "lower"
+        },
+        "short_rank_max": {
+          "name": "Short contest rank maximum",
+          "unit": "count",
+          "better": "lower"
+        },
+        "short_cost_min": {
+          "name": "Short task cost minimum",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "short_cost_max": {
+          "name": "Short task cost maximum",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "short_input_tokens_min": {
+          "name": "Short input tokens minimum",
+          "unit": "tokens"
+        },
+        "short_input_tokens_max": {
+          "name": "Short input tokens maximum",
+          "unit": "tokens"
+        },
+        "short_output_tokens_min": {
+          "name": "Short output tokens minimum",
+          "unit": "tokens"
+        },
+        "short_output_tokens_max": {
+          "name": "Short output tokens maximum",
+          "unit": "tokens"
+        },
+        "short_total_tokens_min": {
+          "name": "Short total tokens minimum",
+          "unit": "tokens"
+        },
+        "short_total_tokens_max": {
+          "name": "Short total tokens maximum",
+          "unit": "tokens"
+        },
+        "long_performance_min": {
+          "name": "Long performance minimum",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "long_performance_max": {
+          "name": "Long performance maximum",
+          "unit": "rating",
+          "better": "higher"
+        },
+        "long_rank_min": {
+          "name": "Long contest rank minimum",
+          "unit": "count",
+          "better": "lower"
+        },
+        "long_rank_max": {
+          "name": "Long contest rank maximum",
+          "unit": "count",
+          "better": "lower"
+        },
+        "long_cost_min": {
+          "name": "Long task cost minimum",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "long_cost_max": {
+          "name": "Long task cost maximum",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "long_input_tokens_min": {
+          "name": "Long input tokens minimum",
+          "unit": "tokens"
+        },
+        "long_input_tokens_max": {
+          "name": "Long input tokens maximum",
+          "unit": "tokens"
+        },
+        "long_output_tokens_min": {
+          "name": "Long output tokens minimum",
+          "unit": "tokens"
+        },
+        "long_output_tokens_max": {
+          "name": "Long output tokens maximum",
+          "unit": "tokens"
+        },
+        "long_total_tokens_min": {
+          "name": "Long total tokens minimum",
+          "unit": "tokens"
+        },
+        "long_total_tokens_max": {
+          "name": "Long total tokens maximum",
+          "unit": "tokens"
         }
       }
     },
@@ -11661,7 +11974,7 @@
       "url": "https://askforalfred.com/leaderboard/leaderboard.html",
       "feed": "https://askforalfred.com/leaderboard/leaderboard.html",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "726",
@@ -11758,6 +12071,38 @@
         "seenSuccess": {
           "name": "Seen rooms",
           "group": "Split"
+        }
+      },
+      "stats": {
+        "unseenPLWSR": {
+          "name": "Unseen path-length weighted success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "seenPLWSR": {
+          "name": "Seen path-length weighted success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unseenGoalCondition": {
+          "name": "Unseen goal-condition success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "seenGoalCondition": {
+          "name": "Seen goal-condition success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "unseenPLWGoalCondition": {
+          "name": "Unseen path-length weighted goal-condition success rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "seenPLWGoalCondition": {
+          "name": "Seen path-length weighted goal-condition success rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -16484,8 +16829,8 @@
       "url": "https://www.mercor.com/apex/apex-v1-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-v1-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData)",
       "terms": "Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.",
-      "retrieved": "2026-11-23",
-      "rows": 80,
+      "retrieved": "2026-11-24",
+      "rows": 81,
       "unmatched": [
         "Beam",
         "Nemotron 3.5 Bolt"
@@ -16494,6 +16839,15 @@
         "samples": {
           "name": "Samples",
           "unit": "count"
+        },
+        "passAt1": {
+          "name": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "passAt1Error": {
+          "name": "Pass@1 confidence half-width",
+          "unit": "%"
         }
       }
     },
@@ -16575,11 +16929,10 @@
       "url": "https://www.mercor.com/apex/apex-agents-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-agents-leaderboard/ (__NEXT_DATA__, mean-score, v1.1)",
       "terms": "Mercor terms prohibit automated scraping; the Almanac credits Mercor and links the original source.",
-      "retrieved": "2026-11-23",
-      "rows": 74,
+      "retrieved": "2026-11-24",
+      "rows": 75,
       "unmatched": [
         "Beam",
-        "Hy4 Flash",
         "Nemotron 3.5 Bolt",
         "Qwen3.5"
       ],
@@ -16588,6 +16941,10 @@
           "name": "Pass at 1",
           "unit": "%",
           "better": "higher"
+        },
+        "passAt1Error": {
+          "name": "Pass at 1 confidence half-width",
+          "unit": "%"
         },
         "samples": {
           "name": "Samples",
@@ -16599,7 +16956,7 @@
       "url": "https://www.mercor.com/apex/apex-swe-leaderboard/",
       "feed": "https://www.mercor.com/apex/apex-swe-leaderboard/ (__NEXT_DATA__.props.pageProps.leaderboardData)",
       "terms": "Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 87,
       "unmatched": [
         "Beam",
@@ -16610,6 +16967,15 @@
         "samples": {
           "name": "Samples",
           "unit": "count"
+        },
+        "meanScore": {
+          "name": "Mean score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "meanScoreError": {
+          "name": "Mean score confidence half-width",
+          "unit": "%"
         }
       }
     },
@@ -19219,7 +19585,7 @@
       "url": "https://github.com/Arena-OSS/arena-hard-auto",
       "feed": "https://raw.githubusercontent.com/Arena-OSS/arena-hard-auto/main/misc/past_leaderboards.md",
       "terms": "The official Arena-OSS/arena-hard-auto repository publishes these archived results under its repository license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [
         "Llama-2-70b-chat-hf",
@@ -19256,6 +19622,10 @@
           "name": "Style-controlled win rate",
           "unit": "%",
           "better": "higher"
+        },
+        "styleControlledTokens": {
+          "name": "Style-controlled average output tokens",
+          "unit": "tokens"
         }
       }
     },
@@ -19263,12 +19633,24 @@
       "url": "https://github.com/lmarena/arena-hard-auto#leaderboard",
       "feed": "https://raw.githubusercontent.com/lmarena/arena-hard-auto/main/README.md (first table: hard prompts, style control, Gemini-2.5 judge)",
       "terms": "README of the lmarena/arena-hard-auto repository, which is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [
         "OpenThinker2-32B",
         "s1.1-32B"
-      ]
+      ],
+      "stats": {
+        "gpt41Judge": {
+          "name": "Hard prompts win rate (GPT-4.1 judge)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "creativeWriting": {
+          "name": "Creative writing win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "arena-image-to-webdev": {
       "url": "https://arena.ai/leaderboard/code/image-to-webdev",
@@ -40471,7 +40853,7 @@
       "url": "https://huggingface.co/spaces/HuggingAI4Engineering/cadgenbench-leaderboard",
       "feed": "https://huggingface.co/datasets/HuggingAI4Engineering/cadgenbench-submissions/resolve/main/results.jsonl (aggregate_score, all completed submissions)",
       "terms": "Hugging Face dataset HuggingAI4Engineering/cadgenbench-submissions, licensed CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "CADGenBench submission 119cb699ce2e2635e780d4373d5c959ae49061be_anonymous-agent-setup-claude-fable-5-2_20261114-162222: anonymous-agent-setup + claude-fable-5-2",
@@ -40538,6 +40920,9 @@
         "CADGenBench submission anon-cad-01_rel5-pcc13b-6a341b9-06of81_20261123-001229: rel5-pcc13b-6a341b9-06of81",
         "CADGenBench submission anon-cad-01_rel5-pcc14d-1f2d9a7-06of81_20261123-011049: rel5-pcc14d-1f2d9a7-06of81",
         "CADGenBench submission anon-cad-01_rel5-pcc15b-314c623-06of81_20261123-042923: rel5-pcc15b-314c623-06of81",
+        "CADGenBench submission anon-cad-01_rel5-pcc16d-9fc34fb-06of81_20261123-145134: rel5-pcc16d-9fc34fb-06of81",
+        "CADGenBench submission anon-cad-01_rel5-pcc17b-5105911-06of81_20261123-201540: rel5-pcc17b-5105911-06of81",
+        "CADGenBench submission anon-cad-01_rel5-pcc17c-fb51b19-06of81_20261123-225013: rel5-pcc17c-fb51b19-06of81",
         "CADGenBench submission anon-cad-01_rel5-pcc6c-73a1098-06of81_20261121-135019: rel5-pcc6c-73a1098-06of81",
         "CADGenBench submission anon-cad-01_rel5-pcc7c-d8faeff-06of81_20261121-161022: rel5-pcc7c-d8faeff-06of81",
         "CADGenBench submission anon-cad-01_rel5-pcc9-9237386-06of81_20261121-180330: rel5-pcc9-9237386-06of81",
@@ -40739,6 +41124,7 @@
         "CADGenBench submission anonymous_anon-gen-1789088535-1624c8_20260911-010919: anon-gen-1789088535-1624c8",
         "CADGenBench submission anonymous_anon-modeler-001-r2_20261120-233525: anon-modeler-001-r2",
         "CADGenBench submission anonymous_anon-modeler-002_20261122-215426: anon-modeler-002",
+        "CADGenBench submission anonymous_anon-modeler-004_20261124-002336: anon-modeler-004",
         "CADGenBench submission anonymous_anon-r1_20260914-093726: anon-r1",
         "CADGenBench submission anonymous_anonymous-agent_20260914-095345: Anonymous agent",
         "CADGenBench submission anonymous_anonymous-agent_20260914-123111: Anonymous agent",
@@ -41072,6 +41458,7 @@
         "CADGenBench submission jspark_gpt-5-6-sol-build123d_20260717-074106: gpt-5.6-sol build123d",
         "CADGenBench submission jspark_gpt-5-6-sol-cadquery-max-iter5_20260712-145235: gpt-5.6-sol cadquery max-iter5",
         "CADGenBench submission junde_junde-test_20260716-102222: junde-test",
+        "CADGenBench submission kompas-copilot_kompas-copilot-generation-101-120-previe_20261123-204857: KOMPAS Copilot (generation 101-120 preview)",
         "CADGenBench submission kpham_freecad-mcp-0-1-claude-code-opus55-high_20261117-015603: freecad_mcp_0.1-claude_code-opus55_high",
         "CADGenBench submission lehuili_gpt-5-6-optional-reflect-persistent-visu_20260822-204648: GPT-5.6 Optional Reflect + Persistent Visual Findings + 2D Completion (Case 103)",
         "CADGenBench submission lehuili_gpt-5-6-sol-atomic-geometry-repair-4-cas_20260908-162606: GPT-5.6 Sol Atomic Geometry Repair (4-case, 2026-09-08)",
@@ -41248,6 +41635,7 @@
         "CADGenBench submission numafi-7095_gen2-numafi-7095_20261102-203546: gen2-numafi-7095",
         "CADGenBench submission o-uz_o-uz-chatgpt-build123d-task-109-pilot-v0_20260817-123006: OĞUZ ChatGPT-build123d Task 109 Pilot v0.1",
         "CADGenBench submission oguzhan_iris-astra-high-101-140-repaired-selecte_20261122-220151: IRIS Astra HIGH 101-140 repaired + selected corrections Nov22",
+        "CADGenBench submission oguzhan_iris-astra-high-73-valid-recovery-nov23_20261123-153752: IRIS Astra HIGH 73-valid recovery Nov23",
         "CADGenBench submission oguzhan_iris-astra-high-test1-101-110-externally_20261122-102738: IRIS Astra high Test1 101-110 EXTERNALLY REPAIRED Nov22",
         "CADGenBench submission oguzhan_iris-astra-high-test1-101-130-externally_20261122-150346: IRIS Astra high Test1 101-130 EXTERNALLY REPAIRED Nov22",
         "CADGenBench submission oguzhan_iris-astra-medium-test-1-101-105-externa_20261121-212740: IRIS Astra medium Test 1 101-105 EXTERNALLY REPAIRED Nov21",
@@ -41389,6 +41777,7 @@
         "CADGenBench submission reckless-lampshade-230826_gpt-5-6-combined-best-generation_20260823-174609: gpt 5.6 combined best generation",
         "CADGenBench submission reify-evaluation_reify-0-1-1-gpt-5-6-sol-medium-hardest10_20261012-043910: Reify 0.1.1 gpt-5.6-sol medium hardest10 partial3 20261011",
         "CADGenBench submission reify-evaluation_reify-user-rerun-hardest10-203-20261012_20261012-045422: Reify user rerun hardest10 203 20261012",
+        "CADGenBench submission reify_reify-deepseek-cad-edit-v2-all-edit-32-0_20261124-010458: reify-deepseek-cad-edit-v2-all-edit-32-02",
         "CADGenBench submission reify_reify-deepseek-low-asi-217-238-01_20261023-070657: reify-deepseek-low-asi-217-238-01",
         "CADGenBench submission reify_reify-deepseek-low-asi-all-edit-32-01_20261026-082500: reify-deepseek-low-asi-all-edit-32-01",
         "CADGenBench submission reify_reify-deepseek-low-asi-hard-edit-204-241_20261023-154259: reify-deepseek-low-asi-hard-edit-204-241-243-01",
@@ -41611,6 +42000,46 @@
           "name": "Validity rate",
           "unit": "%",
           "better": "higher"
+        },
+        "generationValidityRate": {
+          "name": "Generation validity rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "generationValid": {
+          "name": "Generation valid outputs",
+          "unit": "count",
+          "better": "higher"
+        },
+        "generationInvalid": {
+          "name": "Generation invalid outputs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "generationMissing": {
+          "name": "Generation missing outputs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "editingValidityRate": {
+          "name": "Editing validity rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "editingValid": {
+          "name": "Editing valid outputs",
+          "unit": "count",
+          "better": "higher"
+        },
+        "editingInvalid": {
+          "name": "Editing invalid outputs",
+          "unit": "count",
+          "better": "lower"
+        },
+        "editingMissing": {
+          "name": "Editing missing outputs",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -45685,7 +46114,7 @@
       "url": "https://charxiv.github.io/#leaderboard",
       "feed": "https://charxiv.github.io/data/val_result.csv (Reasoning Overall)",
       "terms": "Static CSV on the CharXiv GitHub Pages site, which states no terms; the CharXiv code is Apache-2.0 and the dataset CC BY-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 78,
       "unmatched": [
         "ChartAssistant",
@@ -45708,20 +46137,54 @@
       ],
       "parts": {
         "TC": {
-          "name": "TC",
+          "name": "Text in chart",
           "group": "Reasoning question type"
         },
         "TG": {
-          "name": "TG",
+          "name": "Text in general",
           "group": "Reasoning question type"
         },
         "NC": {
-          "name": "NC",
+          "name": "Number in chart",
           "group": "Reasoning question type"
         },
         "NG": {
-          "name": "NG",
+          "name": "Number in general",
           "group": "Reasoning question type"
+        },
+        "Descriptive": {
+          "name": "Descriptive overall",
+          "group": "Descriptive"
+        },
+        "INEX": {
+          "name": "Information extraction",
+          "group": "Descriptive category"
+        },
+        "ENUM": {
+          "name": "Enumeration",
+          "group": "Descriptive category"
+        },
+        "PATT": {
+          "name": "Pattern recognition",
+          "group": "Descriptive category"
+        },
+        "CNTG": {
+          "name": "Counting",
+          "group": "Descriptive category"
+        },
+        "COMP": {
+          "name": "Compositionality",
+          "group": "Descriptive category"
+        }
+      },
+      "stats": {
+        "visionParamsB": {
+          "name": "Vision encoder parameters",
+          "unit": "billions"
+        },
+        "languageParamsB": {
+          "name": "Language model parameters",
+          "unit": "billions"
         }
       }
     },
@@ -45729,7 +46192,7 @@
       "url": "https://github.com/princeton-nlp/CharXiv",
       "feed": "https://charxiv.github.io/data/val_result.csv",
       "terms": "Public results published by the benchmark authors at charxiv.github.io; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 68,
       "unmatched": [
         "ChartAssistant",
@@ -45777,6 +46240,16 @@
         "COMP": {
           "name": "Compositionality",
           "group": "Category"
+        }
+      },
+      "stats": {
+        "visionParamsB": {
+          "name": "Vision encoder parameters",
+          "unit": "billions"
+        },
+        "languageParamsB": {
+          "name": "Language model parameters",
+          "unit": "billions"
         }
       }
     },
@@ -97237,7 +97710,7 @@
       "url": "https://huggingface.co/spaces/evalitahf/evalita_llm_leaderboard",
       "feed": "https://evalitahf-evalita-llm-leaderboard.hf.space/config",
       "terms": "The official leaderboard uses Apache 2.0. https://huggingface.co/spaces/evalitahf/evalita_llm_leaderboard/blob/main/README.md",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 49,
       "unmatched": [
         "ANITA-NEXT-24B-Magistral-2506-ITA",
@@ -97306,6 +97779,10 @@
           "unit": "%",
           "better": "higher"
         },
+        "TE Prompt Std": {
+          "name": "TE prompt standard deviation",
+          "unit": "%"
+        },
         "TE Best Prompt": {
           "name": "TE best prompt",
           "unit": "%",
@@ -97319,6 +97796,10 @@
           "name": "SA prompt average",
           "unit": "%",
           "better": "higher"
+        },
+        "SA Prompt Std": {
+          "name": "SA prompt standard deviation",
+          "unit": "%"
         },
         "SA Best Prompt": {
           "name": "SA best prompt",
@@ -97334,6 +97815,10 @@
           "unit": "%",
           "better": "higher"
         },
+        "HS Prompt Std": {
+          "name": "HS prompt standard deviation",
+          "unit": "%"
+        },
         "HS Best Prompt": {
           "name": "HS best prompt",
           "unit": "%",
@@ -97347,6 +97832,10 @@
           "name": "AT prompt average",
           "unit": "%",
           "better": "higher"
+        },
+        "AT Prompt Std": {
+          "name": "AT prompt standard deviation",
+          "unit": "%"
         },
         "AT Best Prompt": {
           "name": "AT best prompt",
@@ -97362,6 +97851,10 @@
           "unit": "%",
           "better": "higher"
         },
+        "WIC Prompt Std": {
+          "name": "WIC prompt standard deviation",
+          "unit": "%"
+        },
         "WIC Best Prompt": {
           "name": "WIC best prompt",
           "unit": "%",
@@ -97375,6 +97868,10 @@
           "name": "FAQ prompt average",
           "unit": "%",
           "better": "higher"
+        },
+        "FAQ Prompt Std": {
+          "name": "FAQ prompt standard deviation",
+          "unit": "%"
         },
         "FAQ Best Prompt": {
           "name": "FAQ best prompt",
@@ -97390,6 +97887,10 @@
           "unit": "%",
           "better": "higher"
         },
+        "LS Prompt Std": {
+          "name": "LS prompt standard deviation",
+          "unit": "%"
+        },
         "LS Best Prompt": {
           "name": "LS best prompt",
           "unit": "%",
@@ -97403,6 +97904,10 @@
           "name": "SU prompt average",
           "unit": "%",
           "better": "higher"
+        },
+        "SU Prompt Std": {
+          "name": "SU prompt standard deviation",
+          "unit": "%"
         },
         "SU Best Prompt": {
           "name": "SU best prompt",
@@ -97418,6 +97923,10 @@
           "unit": "%",
           "better": "higher"
         },
+        "NER Prompt Std": {
+          "name": "NER prompt standard deviation",
+          "unit": "%"
+        },
         "NER Best Prompt": {
           "name": "NER best prompt",
           "unit": "%",
@@ -97431,6 +97940,10 @@
           "name": "REL prompt average",
           "unit": "%",
           "better": "higher"
+        },
+        "REL Prompt Std": {
+          "name": "REL prompt standard deviation",
+          "unit": "%"
         },
         "REL Best Prompt": {
           "name": "REL best prompt",
@@ -97446,6 +97959,10 @@
           "unit": "%",
           "better": "higher"
         },
+        "MAIA-MC Prompt Std": {
+          "name": "MAIA-MC prompt standard deviation",
+          "unit": "%"
+        },
         "MAIA-MC Best Prompt": {
           "name": "MAIA-MC best prompt",
           "unit": "%",
@@ -97459,6 +97976,10 @@
           "name": "MAIA-GEN prompt average",
           "unit": "%",
           "better": "higher"
+        },
+        "MAIA-GEN Prompt Std": {
+          "name": "MAIA-GEN prompt standard deviation",
+          "unit": "%"
         },
         "MAIA-GEN Best Prompt": {
           "name": "MAIA-GEN best prompt",
@@ -132044,6 +132565,43 @@
           "unit": "index",
           "better": "higher",
           "note": "The board’s default ranking, which combines the resolve rate with cost."
+        },
+        "passAt3": {
+          "name": "pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "pass3": {
+          "name": "pass^3",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of tasks solved in all three attempts."
+        },
+        "totalTokens": {
+          "name": "Total tokens per trial",
+          "unit": "tokens"
+        },
+        "callsPerTrial": {
+          "name": "Model calls per trial",
+          "unit": "count"
+        },
+        "agentSeconds": {
+          "name": "Agent runtime per trial",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "totalTrials": {
+          "name": "Total trials",
+          "unit": "count"
+        },
+        "scoredTrials": {
+          "name": "Scored trials",
+          "unit": "count"
+        },
+        "infrastructureFailures": {
+          "name": "Infrastructure failures",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -153760,7 +154318,7 @@
       "url": "https://benchmarkheaven.com/jev-models",
       "feed": "https://benchmarkheaven.com/api/jevbench/latest",
       "terms": "Public results published by the benchmark authors at benchmarkheaven.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "AJev lm6q (Gemma 4 31B)",
@@ -154123,10 +154681,10 @@
           "unit": "score",
           "better": "higher"
         },
-        "cost": {
-          "name": "Cost per decision",
-          "unit": "usd",
-          "better": "lower"
+        "costScore": {
+          "name": "Cost axis score",
+          "unit": "score",
+          "better": "higher"
         },
         "latency": {
           "name": "Latency per decision",
@@ -154137,6 +154695,41 @@
           "name": "Composite score",
           "unit": "score",
           "better": "higher"
+        },
+        "latency:p50_s_raw": {
+          "name": "Raw median latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latency:p50_s_measured": {
+          "name": "Measured median latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latency:p50_s_adjusted": {
+          "name": "Adjusted median latency",
+          "unit": "seconds",
+          "better": "lower",
+          "note": "Includes self-hosted network adjustment (2 times measured p50 plus 150 ms)."
+        },
+        "latency:p95_s_raw": {
+          "name": "Raw p95 latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latency:p95_s_adjusted": {
+          "name": "Adjusted p95 latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "decision_limit:n_over_limit": {
+          "name": "Decisions over latency limit",
+          "unit": "count",
+          "better": "lower"
+        },
+        "decision_limit:n_over_limit_answered_ok": {
+          "name": "Correct decisions over latency limit",
+          "unit": "count"
         }
       }
     },
@@ -168420,7 +169013,7 @@
       "url": "https://lisanbench.com/",
       "feed": "https://lisanbench.com/data/core.json (aggregated.sum_chain_avg, Path Length)",
       "terms": "Static JSON on lisanbench.com, which has no robots.txt and publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 207,
       "unmatched": [
         "Codestral 2508",
@@ -168430,7 +169023,7 @@
       ],
       "chart": {
         "title": "Reasoning Tokens vs Path Length",
-        "note": "Path Length against the average reasoning tokens per trial, on a log scale; runs without reasoning sit at zero.",
+        "note": "Path Length against the average reasoning tokens per trial, on a log scale. Runs without reasoning sit at zero.",
         "x": {
           "key": "reasoningTokens",
           "label": "Average reasoning tokens per trial",
@@ -168644,6 +169237,59 @@
         "word_not": {
           "name": "not",
           "group": "Starting word"
+        }
+      },
+      "stats": {
+        "sum_chain_max": {
+          "name": "Best path length",
+          "unit": "score",
+          "better": "higher",
+          "note": "Sum of the longest valid chain per starting word across trials."
+        },
+        "sum_sparse_chain_avg": {
+          "name": "Difficulty-weighted path length",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean valid transitions weighted by move difficulty across starting words."
+        },
+        "sum_sparsity_only_avg": {
+          "name": "Sparsity-weighted path length",
+          "unit": "score",
+          "better": "higher"
+        },
+        "avg_hardness": {
+          "name": "Average hardness per move",
+          "unit": "score",
+          "better": "higher",
+          "note": "Difficulty-weighted score divided by path length."
+        },
+        "avg_validity": {
+          "name": "Average validity ratio",
+          "unit": "score",
+          "better": "higher",
+          "note": "Mean fraction of valid transitions per word, from 0 to 1."
+        },
+        "reasoningTokens": {
+          "name": "Average reasoning tokens per trial",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "reasoning_measurements": {
+          "name": "Trials with reasoning token counts",
+          "unit": "count"
+        },
+        "inputTokens": {
+          "name": "Input tokens per trial",
+          "unit": "tokens"
+        },
+        "recordedRunCost": {
+          "name": "Recorded run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "words": {
+          "name": "Starting words evaluated",
+          "unit": "count"
         }
       }
     },
@@ -254056,7 +254702,7 @@
       "url": "https://proteingym.org/",
       "feed": "https://proteingym.org/data/Spearman/aggregate_zero_shot_DMS_substitutions_data.csv",
       "terms": "The ProteinGym project makes its aggregate leaderboard CSV publicly available.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AIDO Protein-RAG (16B)",
@@ -254208,6 +254854,13 @@
         },
         "Depth_5+": {
           "name": "Depth 5+"
+        }
+      },
+      "stats": {
+        "Bootstrap_standard_error_Spearman": {
+          "name": "Bootstrap standard error of difference to best Spearman",
+          "unit": "score",
+          "note": "Bootstrap standard error of the difference in average Spearman correlation to the top model."
         }
       }
     },
@@ -328676,7 +329329,7 @@
       "url": "https://huggingface.co/spaces/allenai/ZebraLogic",
       "feed": "https://huggingface.co/spaces/allenai/ZebraLogic/resolve/main/ZeroEval-main/result_dirs/zebra-grid.summary.json (Puzzle Acc)",
       "terms": "A results file committed in Ai2's public Space, read through Hugging Face's file endpoint; the ZeroEval code that writes it is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 54,
       "unmatched": [
         "chatgpt-4o-latest-24-09-07",
@@ -328715,6 +329368,23 @@
         "xl": {
           "name": "XL",
           "group": "Size"
+        }
+      },
+      "stats": {
+        "cellAccuracy": {
+          "name": "Cell accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "noAnswer": {
+          "name": "No-answer rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "reasonLength": {
+          "name": "Mean reasoning length",
+          "unit": "count",
+          "note": "Average reasoning length in characters."
         }
       }
     },

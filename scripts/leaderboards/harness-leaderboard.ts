@@ -21,6 +21,14 @@ const board: Leaderboard = {
   harnesses: 'system',
   stats: {
     overallIndex: { name: 'Overall index', unit: 'index', better: 'higher', note: 'The board’s default ranking, which combines the resolve rate with cost.' },
+    passAt3: { name: 'pass@3', unit: '%', better: 'higher' },
+    pass3: { name: 'pass^3', unit: '%', better: 'higher', note: 'Share of tasks solved in all three attempts.' },
+    totalTokens: { name: 'Total tokens per trial', unit: 'tokens' },
+    callsPerTrial: { name: 'Model calls per trial', unit: 'count' },
+    agentSeconds: { name: 'Agent runtime per trial', unit: 'seconds', better: 'lower' },
+    totalTrials: { name: 'Total trials', unit: 'count' },
+    scoredTrials: { name: 'Scored trials', unit: 'count' },
+    infrastructureFailures: { name: 'Infrastructure failures', unit: 'count', better: 'lower' },
   },
   async fetch() {
     const { config, leaderboard } = await fetchJson<Index>(feed);

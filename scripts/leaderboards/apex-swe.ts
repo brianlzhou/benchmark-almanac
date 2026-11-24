@@ -15,6 +15,8 @@ const board: Leaderboard = {
   terms: 'Mercor terms forbid scraping; Benchmark Almanac credits and links Mercor as the source of these benchmark results.',
   stats: {
     samples: { name: 'Samples', unit: 'count' },
+    meanScore: { name: 'Mean score', unit: '%', better: 'higher' },
+    meanScoreError: { name: 'Mean score confidence half-width', unit: '%' },
   },
   async fetch() {
     const html = await fetchText(PAGE);

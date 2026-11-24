@@ -16,6 +16,10 @@ const board: Leaderboard = {
   url: 'https://github.com/lmarena/arena-hard-auto#leaderboard',
   feed: `${FEED} (first table: hard prompts, style control, Gemini-2.5 judge)`,
   terms: 'README of the lmarena/arena-hard-auto repository, which is Apache-2.0.',
+  stats: {
+    gpt41Judge: { name: 'Hard prompts win rate (GPT-4.1 judge)', unit: '%', better: 'higher' },
+    creativeWriting: { name: 'Creative writing win rate', unit: '%', better: 'higher' },
+  },
   aliases: {
     // the README lists "gemini-2.5" beside "gemini-2.5-flash", so it is Pro, which on 2025-05-01 was the 03-25 release
     'gemini-2.5': 'gemini-2-5-pro-mar-2025',
