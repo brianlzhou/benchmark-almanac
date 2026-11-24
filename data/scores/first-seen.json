@@ -2080,6 +2080,7 @@
     ["kangaroo-2025-matharena","gemini-3-flash","high",null,"2026-11-12"],
     ["kangaroo-2025-matharena","kimi-k2-5","high",null,"2026-11-12"],
     ["kangaroo-2025-matharena","kimi-k3","max",null,"2026-11-12"],
+    ["kocommongen-v2","~GPT-4 (June 13, 2023)",null,null,"2026-11-24"],
     ["komt-bench","gemma-2-9b",null,null,"2026-11-24"],
     ["komt-bench","llama-3-1-8b",null,null,"2026-11-24"],
     ["komt-bench","qwen2-7b-instruct",null,null,"2026-11-24"],

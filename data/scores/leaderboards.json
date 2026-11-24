@@ -2017,7 +2017,7 @@
       "url": "https://chenchen0103.github.io/ACEBench/",
       "feed": "https://chenchen0103.github.io/ACEBench/script.js (allCombinedModels)",
       "terms": "Static script on a GitHub Pages project site with no robots.txt and no terms; the ACEBench repository is public and the scores are cited to the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [
         "Doubao-Pro-32K",
@@ -2027,7 +2027,41 @@
         "ToolACE-2.5-Llama-3.1-8B",
         "Watt-Tool-8B",
         "xLAM-7b-r"
-      ]
+      ],
+      "parts": {
+        "atom": {
+          "name": "Atom",
+          "group": "Normal"
+        },
+        "single": {
+          "name": "Single-Turn",
+          "group": "Normal"
+        },
+        "multi": {
+          "name": "Multi-Turn",
+          "group": "Normal"
+        },
+        "api": {
+          "name": "Similar API",
+          "group": "Normal"
+        },
+        "pref": {
+          "name": "Preference",
+          "group": "Normal"
+        },
+        "summary": {
+          "name": "Normal summary",
+          "group": "Normal"
+        },
+        "special": {
+          "name": "Special",
+          "group": "Category"
+        },
+        "agent": {
+          "name": "Agent",
+          "group": "Category"
+        }
+      }
     },
     "aclue": {
       "url": "https://github.com/isen-zhang/ACLUE",
@@ -6643,13 +6677,46 @@
       "url": "https://agentif.github.io/",
       "feed": "https://agentif.github.io/ (static HTML, second leaderboard table, CSR)",
       "terms": "Static GitHub Pages site that states no terms; the AgentIF code is Apache-2.0 and the dataset CC BY 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Conifer-DPO-7B",
         "Crab-DPO-7B",
         "GLM-Z1-32B"
-      ]
+      ],
+      "parts": {
+        "vanilla": {
+          "name": "Vanilla",
+          "group": "Presentation Type"
+        },
+        "condition": {
+          "name": "Condition",
+          "group": "Presentation Type"
+        },
+        "example": {
+          "name": "Example",
+          "group": "Presentation Type"
+        },
+        "formatting": {
+          "name": "Formatting",
+          "group": "Constraint Type"
+        },
+        "semantic": {
+          "name": "Semantic",
+          "group": "Constraint Type"
+        },
+        "tool": {
+          "name": "Tool",
+          "group": "Constraint Type"
+        }
+      },
+      "stats": {
+        "isr": {
+          "name": "Instruction success rate (ISR)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "agentif-2026-10": {
       "url": "https://agentif.github.io/",
@@ -35104,9 +35171,78 @@
       "url": "https://blenderworld.github.io/",
       "feed": "https://blenderworld.github.io/data/site-data.js (window.BLENDERWORLD.models, score)",
       "terms": "Data file on GitHub Pages that the public page loads; robots.txt allows it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "text": {
+          "name": "Text-only",
+          "group": "Modality"
+        },
+        "mm": {
+          "name": "Multimodal",
+          "group": "Modality"
+        },
+        "rubric": {
+          "name": "Rubric",
+          "group": "Evaluation"
+        },
+        "dimension": {
+          "name": "Dimension quality",
+          "group": "Evaluation"
+        },
+        "architecture": {
+          "name": "Architecture & Interiors",
+          "group": "Category"
+        },
+        "art": {
+          "name": "Art & Animation",
+          "group": "Category"
+        },
+        "products": {
+          "name": "Products & Manufacturing",
+          "group": "Category"
+        },
+        "characters": {
+          "name": "Characters & Animals",
+          "group": "Category"
+        },
+        "nature": {
+          "name": "Nature & Landscapes",
+          "group": "Category"
+        },
+        "rendering": {
+          "name": "Rendering & Simulation",
+          "group": "Category"
+        },
+        "vehicles": {
+          "name": "Vehicles & Machinery",
+          "group": "Category"
+        },
+        "procedural": {
+          "name": "Procedural & Game Assets",
+          "group": "Category"
+        },
+        "science": {
+          "name": "Science & Visualization",
+          "group": "Category"
+        }
+      },
+      "stats": {
+        "perfect": {
+          "name": "Perfect tasks",
+          "unit": "%",
+          "better": "higher"
+        },
+        "turns": {
+          "name": "Average turns per task",
+          "unit": "count"
+        },
+        "tools": {
+          "name": "Average tool calls per task",
+          "unit": "count"
+        }
+      }
     },
     "blicket-test-causal-reasoning": {
       "url": "https://app.primeintellect.ai/dashboard/environments/irfanjamil/BlicketTest_CausalReasoning",
@@ -63960,7 +64096,7 @@
       "url": "https://moonshotai.github.io/CombiBench/leaderboard.html",
       "feed": "https://moonshotai.github.io/CombiBench/leaderboard.html",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Deepseek-R1 (snapshot unspecified)",
@@ -75014,7 +75150,7 @@
       "url": "https://huggingface.co/spaces/kellycyy/CulturalBench/raw/main/data/CulturalBench_Hard_average.csv",
       "feed": "https://huggingface.co/spaces/kellycyy/CulturalBench/raw/main/data/CulturalBench_Hard_average.csv",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "gemini-1-5-flash (snapshot unspecified)",
@@ -75028,7 +75164,60 @@
         "opus",
         "sonnet3",
         "sonnet35"
-      ]
+      ],
+      "parts": {
+        "northAmerica": {
+          "name": "North America",
+          "group": "Region"
+        },
+        "southAmerica": {
+          "name": "South America",
+          "group": "Region"
+        },
+        "eastEurope": {
+          "name": "East Europe",
+          "group": "Region"
+        },
+        "southEurope": {
+          "name": "South Europe",
+          "group": "Region"
+        },
+        "westEurope": {
+          "name": "West Europe",
+          "group": "Region"
+        },
+        "africa": {
+          "name": "Africa",
+          "group": "Region"
+        },
+        "middleEastWestAsia": {
+          "name": "Middle East and West Asia",
+          "group": "Region"
+        },
+        "southAsia": {
+          "name": "South Asia",
+          "group": "Region"
+        },
+        "southeastAsia": {
+          "name": "Southeast Asia",
+          "group": "Region"
+        },
+        "eastAsia": {
+          "name": "East Asia",
+          "group": "Region"
+        },
+        "oceania": {
+          "name": "Oceania",
+          "group": "Region"
+        }
+      },
+      "stats": {
+        "easy": {
+          "name": "Easy accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "culturalriddles": {
       "url": "https://huggingface.co/spaces/CohereLabsCommunity/CulturalRiddles/raw/main/index.html",
@@ -134660,7 +134849,7 @@
       "feed": "https://opencompass.oss-cn-shanghai.aliyuncs.com/dev-assets/hf-research/hf-academic.json",
       "terms": "The Space declares Apache 2.0. Hugging Face allows the Space in robots.txt. The public score host returns HTTP 403 for robots.txt.",
       "host": "OpenCompass",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [
         "InternLM2.5-Chat-7B"
@@ -161100,12 +161289,13 @@
       "url": "https://huggingface.co/datasets/nlpai-lab/ko_commongen_v2",
       "feed": "https://huggingface.co/datasets/nlpai-lab/ko_commongen_v2/raw/main/README.md",
       "terms": "The dataset README is published under the dataset repository terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Allganize-Alpha-Instruct",
         "Aya-23-8B",
         "EXAONE-3.0-7.8B-Instruct",
+        "GPT-4 (June 13, 2023)",
         "Gemma-2-9b-it",
         "KULLM3",
         "MLP-KTLim-Bllossom-8B",
@@ -170160,7 +170350,7 @@
       "url": "https://livedeepresearch.github.io/",
       "feed": "https://livedeepresearch.github.io/ (server-rendered table, Avg)",
       "terms": "Static GitHub Pages project page (no robots.txt, so nothing is disallowed); it publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Gemini Deep Research",
@@ -170171,7 +170361,25 @@
         "Perplexity Sonar Reasoning",
         "Perplexity Sonar Reasoning Pro",
         "Salesforce AIR Deep Research"
-      ]
+      ],
+      "parts": {
+        "presentation": {
+          "name": "Presentation & Organization",
+          "group": "Criterion"
+        },
+        "factLogic": {
+          "name": "Fact & Logic Consistency",
+          "group": "Criterion"
+        },
+        "coverage": {
+          "name": "Coverage & Comprehensiveness",
+          "group": "Criterion"
+        },
+        "citation": {
+          "name": "Citation Association",
+          "group": "Criterion"
+        }
+      }
     },
     "livesearch": {
       "url": "https://arxiv.org/html/2610.37166",
@@ -176894,9 +177102,26 @@
       "url": "https://last-secure-code-benchmark.github.io",
       "feed": "https://raw.githubusercontent.com/alibaba/last-secure-code-benchmark/main/README.md (Leaderboard table, Func∧Sec)",
       "terms": "README table in the alibaba/last-secure-code-benchmark repository, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "funcPass": {
+          "name": "Functional pass rate (FuncPass)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "secPass": {
+          "name": "Security pass rate (SecPass)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "scenariosFuncSec": {
+          "name": "Scenarios Func and Sec",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "lt-history": {
       "url": "https://aclanthology.org/2025.nbreal-1.1/",
@@ -188925,9 +189150,39 @@
       "url": "https://huggingface.co/spaces/meta-agents-research-environments/leaderboard",
       "feed": "https://meta-agents-research-environments-leaderboard.hf.space/config (Vanilla Gaia2 Leaderboard dataframe, pass@1)",
       "terms": "Public Hugging Face Space; its robots.txt allows every path and the Space states no terms of its own.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "execution": {
+          "name": "Execution",
+          "group": "Capability"
+        },
+        "search": {
+          "name": "Search",
+          "group": "Capability"
+        },
+        "ambiguity": {
+          "name": "Ambiguity",
+          "group": "Capability"
+        },
+        "adaptability": {
+          "name": "Adaptability",
+          "group": "Capability"
+        },
+        "time": {
+          "name": "Time",
+          "group": "Capability"
+        },
+        "noise": {
+          "name": "Noise",
+          "group": "Capability"
+        },
+        "a2a": {
+          "name": "Agent-to-agent (A2A)",
+          "group": "Capability"
+        }
+      }
     },
     "meta-album": {
       "url": "https://arxiv.org/html/2302.08909",
@@ -192459,9 +192714,26 @@
       "url": "https://cmu-l3.github.io/minictx/leaderboard.html",
       "feed": "https://cmu-l3.github.io/minictx/results.json (in-file, best-of-1)",
       "terms": "Static JSON on the project GitHub Pages site (no robots.txt); the page credits EvalPlus for its layout and states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "bestOf2": {
+          "name": "Best-of-2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bestOf4": {
+          "name": "Best-of-4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "bestOf8": {
+          "name": "Best-of-8",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "miniwob-plus-plus": {
       "url": "https://huggingface.co/spaces/ServiceNow/browsergym-leaderboard",
@@ -216594,14 +216866,60 @@
       "url": "https://gair-nlp.github.io/OlympicArena/",
       "feed": "https://gair-nlp.github.io/OlympicArena/ (test set table, id=\"table2\")",
       "terms": "Static GitHub Pages project page with no robots.txt; the site content is CC BY-SA 4.0 (page footer) and the scores are cited to GAIR.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [
         "Doubao-Pro-32k",
         "Internlm-2.5-7B-Chat",
         "Internlm2-Chat-20B",
         "Spark 4.0-2024-10-14"
-      ]
+      ],
+      "parts": {
+        "math": {
+          "name": "Math",
+          "group": "Subject"
+        },
+        "physics": {
+          "name": "Physics",
+          "group": "Subject"
+        },
+        "chemistry": {
+          "name": "Chemistry",
+          "group": "Subject"
+        },
+        "biology": {
+          "name": "Biology",
+          "group": "Subject"
+        },
+        "geography": {
+          "name": "Geography",
+          "group": "Subject"
+        },
+        "astronomy": {
+          "name": "Astronomy",
+          "group": "Subject"
+        },
+        "cs": {
+          "name": "CS",
+          "group": "Subject"
+        },
+        "en": {
+          "name": "English",
+          "group": "Language"
+        },
+        "zh": {
+          "name": "Chinese",
+          "group": "Language"
+        },
+        "textOnly": {
+          "name": "Text-only",
+          "group": "Modality"
+        },
+        "multimodal": {
+          "name": "Multimodal",
+          "group": "Modality"
+        }
+      }
     },
     "omi-medical-speech-benchmark": {
       "url": "https://omi.health/research/stt-benchmark",
@@ -247763,7 +248081,7 @@
       "url": "https://huggingface.co/datasets/yale-nlp/physics-verified",
       "feed": "https://huggingface.co/datasets/yale-nlp/physics-verified/resolve/main/README.md",
       "terms": "Official Yale NLP dataset card results; the dataset license applies and the Almanac credits and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "Intern-S1-mini",
@@ -247772,7 +248090,19 @@
         "Mistral-Small-4-119B-2603",
         "Pixtral-12B-2409",
         "Qwen2-VL-72B-Instruct-AWQ"
-      ]
+      ],
+      "stats": {
+        "valNoFig": {
+          "name": "Validation (no figures)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "testNoFig": {
+          "name": "Test (no figures)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "physiome-ode": {
       "url": "https://kloetergensc.github.io/Physiome-ODE/",
@@ -284660,7 +284990,7 @@
       "url": "https://spreadsheetbench.github.io/",
       "feed": "https://spreadsheetbench.github.io/data/leaderboard-v1-full.json",
       "terms": "JSON files on the SpreadsheetBench GitHub Pages site that the page loads; the dataset is CC BY-SA 4.0 and the page states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Bluebox",
@@ -284695,7 +285025,7 @@
       "url": "https://spreadsheetbench.github.io/",
       "feed": "https://spreadsheetbench.github.io/data/leaderboard-v1-verified.json",
       "terms": "JSON files on the SpreadsheetBench GitHub Pages site that the page loads; the dataset is CC BY-SA 4.0 and the page states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Atoms Agent v0.3",
@@ -298674,7 +299004,7 @@
       "url": "https://huggingface.co/datasets/zai-org/terminal-bench-2-verified",
       "feed": "https://huggingface.co/datasets/zai-org/terminal-bench-2-verified/raw/main/README.md",
       "terms": "Results are published in the Z.ai dataset README under its Apache 2.0 license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": []
     },
@@ -318073,7 +318403,7 @@
       "url": "https://visulogic-benchmark.github.io/VisuLogic/",
       "feed": "https://visulogic-benchmark.github.io/VisuLogic/ (leaderboard table)",
       "terms": "Static GitHub Pages project page with no robots.txt and no terms; the VisuLogic repository is MIT and the scores are cited to the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "ERNIE-4.5-VL28B-A3B",
@@ -318084,7 +318414,33 @@
         "Seed2.0",
         "doubao-1-5-vision-pro-32k-250115",
         "kimi-latest(2025.4)"
-      ]
+      ],
+      "parts": {
+        "qua": {
+          "name": "Quantitative",
+          "group": "Category"
+        },
+        "spa": {
+          "name": "Spatial",
+          "group": "Category"
+        },
+        "pos": {
+          "name": "Positional",
+          "group": "Category"
+        },
+        "att": {
+          "name": "Attribute",
+          "group": "Category"
+        },
+        "sty": {
+          "name": "Stylistic",
+          "group": "Category"
+        },
+        "oth": {
+          "name": "Other",
+          "group": "Category"
+        }
+      }
     },
     "vita-bench": {
       "url": "https://vitabench.github.io/#Leaderboard",

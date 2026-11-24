@@ -11,6 +11,19 @@ const URL = 'https://gair-nlp.github.io/OlympicArena/';
 
 const board: Leaderboard = {
   benchmark: 'olympicarena',
+  parts: {
+    math: { name: 'Math', group: 'Subject' },
+    physics: { name: 'Physics', group: 'Subject' },
+    chemistry: { name: 'Chemistry', group: 'Subject' },
+    biology: { name: 'Biology', group: 'Subject' },
+    geography: { name: 'Geography', group: 'Subject' },
+    astronomy: { name: 'Astronomy', group: 'Subject' },
+    cs: { name: 'CS', group: 'Subject' },
+    en: { name: 'English', group: 'Language' },
+    zh: { name: 'Chinese', group: 'Language' },
+    textOnly: { name: 'Text-only', group: 'Modality' },
+    multimodal: { name: 'Multimodal', group: 'Modality' },
+  },
   url: URL,
   feed: `${URL} (test set table, id="table2")`,
   terms: 'Static GitHub Pages project page with no robots.txt; the site content is CC BY-SA 4.0 (page footer) and the scores are cited to GAIR.',
@@ -27,7 +40,24 @@ const board: Leaderboard = {
     const html = await fetchText(URL);
     const at = html.indexOf('<table id="table2"');
     if (at < 0) throw new Error('OlympicArena test set table not found');
-    const rows: LeaderboardRow[] = readTable(html.slice(at), { model: /^Model$/i, score: /^Overall$/i });
+    const rows: LeaderboardRow[] = readTable(html.slice(at), {
+      model: /^Model$/i,
+      score: /^Overall$/i,
+      setting: /^Setting$/i,
+      metrics: {
+        math: /^Math$/i,
+        physics: /^Physics$/i,
+        chemistry: /^Chemistry$/i,
+        biology: /^Biology$/i,
+        geography: /^Geography$/i,
+        astronomy: /^Astronomy$/i,
+        cs: /^CS$/i,
+        en: /^EN$/i,
+        zh: /^ZH$/i,
+        textOnly: /^Text-only$/i,
+        multimodal: /^Multi-modal$/i,
+      },
+    });
     // the Date cells read "2024-6-12", which readTable does not parse, so they are padded here
     const dates = [...html.slice(at, html.indexOf('</table>', at)).matchAll(/<td>\s*(\d{4})-(\d{1,2})-(\d{1,2})\s*<\/td>/g)];
     if (dates.length === rows.length) {
