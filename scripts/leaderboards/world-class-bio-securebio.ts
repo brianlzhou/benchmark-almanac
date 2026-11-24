@@ -6,7 +6,7 @@ import { num, text } from '../lib/html.ts';
 import { sbFacts, sbCharts, SB_ALIASES } from './hpct-v2-securebio.ts';
 const FEED = "https://securebio.org/benchmarks/details/";
 const board: Leaderboard = {
- stats: { refusals: { name: 'Refusal rate', unit: '%', better: 'lower' }, reasoningBudget: { name: 'Reasoning budget', unit: 'tokens' } },
+ stats: { refusals: { name: 'Refusal rate', unit: '%', better: 'lower' } },
  benchmark: "world-class-bio-securebio",
  url: "https://securebio.org/benchmarks/details/?benchmark=abc-bench",
  feed: FEED,
@@ -21,11 +21,10 @@ const board: Leaderboard = {
     const lines=h.split(/<br>/i).map(text).filter(Boolean);const s=lines.find(l=>l.startsWith('Accuracy:'))?.match(/Accuracy:\s*([\d.]+)%\s*\[([\d.]+)%,\s*([\d.]+)%\]/);
     if(!s||lines.some(l=>/too many refusals/i.test(l)))continue;
     const m=lines[0].match(/^(.*?)\s*(?:\[([^\]]+)\])?$/)!;
-    const budget=num(lines.find(l=>l.startsWith('Reasoning budget:')));
     const refusal=num(lines.find(l=>l.startsWith('Refusals:')));
     rows.set(lines[0],{...sbFacts(lines, "Accuracy"),model:m[1].trim(),setting:m[2]??lines.find(l=>l.startsWith('Reasoning:'))?.slice(10).trim(),
       date:lines.find(l=>l.startsWith('Released:'))?.slice(9).trim(),score:Number(s[1]),
-      metrics:{ciLow:Number(s[2]),ciHigh:Number(s[3]),...(budget!==undefined?{reasoningBudget:budget}:{}),...(refusal!==undefined?{refusals:refusal}:{})}});
+      metrics:{ciLow:Number(s[2]),ciHigh:Number(s[3]),...(refusal!==undefined?{refusals:refusal}:{})}});
   }
   return [...rows.values()];
   })();

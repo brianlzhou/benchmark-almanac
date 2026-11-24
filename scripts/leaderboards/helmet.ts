@@ -1,6 +1,6 @@
-// HELMET: Average is the published aggregate score on a 0–100 scale.
-// Read the five published input lengths, seven task categories, parameter counts and context-window sizes.
-// Context-window capacity is not measured output-token usage and is not imported as tokens.
+// HELMET: Average is the published aggregate score on a 0-100 scale.
+// Read the five published input lengths, seven task categories and parameter counts.
+// Context-window capacity is a model specification, not a benchmark measurement or token count.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText, parseCsv } from '../lib/util.ts';
 import { num } from '../lib/html.ts';
@@ -20,7 +20,6 @@ const board: Leaderboard = {
  url: "https://princeton-nlp.github.io/HELMET/",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
- stats: { contextWindowK: { name: 'Context window', unit: 'thousands' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await (async (): Promise<LeaderboardRow[]> => {
@@ -31,8 +30,7 @@ const board: Leaderboard = {
       const score=num(r.Average);if(!r.Model||score===undefined)continue;
       rows.push({model:r.Model,score,setting:`input=${size}`,
         params:num(r['# Params (B)']),
-        metrics:{...(num(r['Context Window (K)']) !== undefined ? {contextWindowK:num(r['Context Window (K)'])!} : {}),
-          ...Object.fromEntries(['Recall','RAG','ICL','Cite','Re-rank','LongQA','Summ'].filter(k=>num(r[k])!==undefined).map(k=>[k,num(r[k])!]))}});
+        metrics:Object.fromEntries(['Recall','RAG','ICL','Cite','Re-rank','LongQA','Summ'].filter(k=>num(r[k])!==undefined).map(k=>[k,num(r[k])!]))});
     }
   }
   return rows;

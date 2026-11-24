@@ -39572,74 +39572,6 @@
           "name": "Wrong unit of analysis",
           "group": "Technique"
         }
-      }
-    },
-    "bullshitbench-2": {
-      "url": "https://petergpt.github.io/bullshit-benchmark/",
-      "feed": "https://petergpt.github.io/bullshit-benchmark/data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
-      "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
-      "retrieved": "2026-11-24",
-      "rows": 257,
-      "unmatched": [
-        "baidu/ernie-4.5-vl-424b-a47b",
-        "deepseek/deepseek-chat",
-        "openrouter/healer-alpha",
-        "openrouter/hunter-alpha",
-        "stealth/ox-alpha"
-      ],
-      "parts": {
-        "authoritative_framing": {
-          "name": "Authoritative framing",
-          "group": "Technique"
-        },
-        "fabricated_authority": {
-          "name": "Fabricated authority",
-          "group": "Technique"
-        },
-        "false_granularity": {
-          "name": "False granularity",
-          "group": "Technique"
-        },
-        "misapplied_mechanism": {
-          "name": "Misapplied mechanism",
-          "group": "Technique"
-        },
-        "nested_nonsense": {
-          "name": "Nested nonsense",
-          "group": "Technique"
-        },
-        "plausible_nonexistent_framework": {
-          "name": "Plausible nonexistent framework",
-          "group": "Technique"
-        },
-        "reified_metaphor": {
-          "name": "Reified metaphor",
-          "group": "Technique"
-        },
-        "sunk_cost_framing": {
-          "name": "Sunk cost framing",
-          "group": "Technique"
-        },
-        "specificity_trap": {
-          "name": "Specificity trap",
-          "group": "Technique"
-        },
-        "temporal_category_error": {
-          "name": "Temporal category error",
-          "group": "Technique"
-        },
-        "cross_domain_stitching": {
-          "name": "Cross domain stitching",
-          "group": "Technique"
-        },
-        "wrong_unit_of_analysis": {
-          "name": "Wrong unit of analysis",
-          "group": "Technique"
-        },
-        "confident_extrapolation": {
-          "name": "Confident extrapolation",
-          "group": "Technique"
-        }
       },
       "stats": {
         "accepted": {
@@ -39655,8 +39587,8 @@
           "unit": "tokens"
         },
         "clear": {
-          "name": "Clear pushback rate",
-          "unit": "%",
+          "name": "Clear pushback responses",
+          "unit": "count",
           "better": "higher"
         },
         "greenRate": {
@@ -39683,13 +39615,149 @@
           "name": "Partial responses",
           "unit": "count"
         },
-        "publishedCsvRank": {
-          "name": "Published CSV rank",
+        "reasoningTokens": {
+          "name": "Reasoning tokens",
+          "unit": "tokens"
+        },
+        "redRate": {
+          "name": "Red rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Stored as a fraction from 0 to 1."
+        },
+        "refusalRate": {
+          "name": "Refusal rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Stored as a fraction from 0 to 1."
+        },
+        "refusals": {
+          "name": "Refusals",
+          "unit": "count"
+        },
+        "tokensPerSecond": {
+          "name": "Tokens per second",
+          "unit": "tokens/s",
+          "better": "higher"
+        },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens"
+        },
+        "errors": {
+          "name": "Errors",
           "unit": "count",
           "better": "lower"
+        }
+      }
+    },
+    "bullshitbench-2": {
+      "url": "https://petergpt.github.io/bullshit-benchmark/",
+      "feed": "https://petergpt.github.io/bullshit-benchmark/data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)",
+      "terms": "Static data files on GitHub Pages (no robots.txt rules); the petergpt/bullshit-benchmark repository is MIT-licensed.",
+      "retrieved": "2026-11-24",
+      "rows": 257,
+      "unmatched": [
+        "baidu/ernie-4.5-vl-424b-a47b",
+        "deepseek/deepseek-chat",
+        "openrouter/healer-alpha",
+        "openrouter/hunter-alpha",
+        "stealth/ox-alpha"
+      ],
+      "parts": {
+        "authoritative_framing": {
+          "name": "Authoritative framing",
+          "group": "Technique"
         },
-        "questions": {
-          "name": "Questions",
+        "confident_extrapolation": {
+          "name": "Confident extrapolation",
+          "group": "Technique"
+        },
+        "cross_domain_stitching": {
+          "name": "Cross domain stitching",
+          "group": "Technique"
+        },
+        "fabricated_authority": {
+          "name": "Fabricated authority",
+          "group": "Technique"
+        },
+        "false_granularity": {
+          "name": "False granularity",
+          "group": "Technique"
+        },
+        "misapplied_mechanism": {
+          "name": "Misapplied mechanism",
+          "group": "Technique"
+        },
+        "nested_nonsense": {
+          "name": "Nested nonsense",
+          "group": "Technique"
+        },
+        "plausible_nonexistent_framework": {
+          "name": "Plausible nonexistent framework",
+          "group": "Technique"
+        },
+        "reified_metaphor": {
+          "name": "Reified metaphor",
+          "group": "Technique"
+        },
+        "specificity_trap": {
+          "name": "Specificity trap",
+          "group": "Technique"
+        },
+        "sunk_cost_framing": {
+          "name": "Sunk cost framing",
+          "group": "Technique"
+        },
+        "temporal_category_error": {
+          "name": "Temporal category error",
+          "group": "Technique"
+        },
+        "wrong_unit_of_analysis": {
+          "name": "Wrong unit of analysis",
+          "group": "Technique"
+        }
+      },
+      "stats": {
+        "accepted": {
+          "name": "Accepted responses",
+          "unit": "count"
+        },
+        "answered": {
+          "name": "Answered responses",
+          "unit": "count"
+        },
+        "cachedTokens": {
+          "name": "Cached tokens",
+          "unit": "tokens"
+        },
+        "clear": {
+          "name": "Clear pushback responses",
+          "unit": "count",
+          "better": "higher"
+        },
+        "greenRate": {
+          "name": "Green rate",
+          "unit": "score",
+          "better": "higher",
+          "note": "Stored as a fraction from 0 to 1."
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens"
+        },
+        "latency": {
+          "name": "Latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "meanJudgeScore": {
+          "name": "Mean judge score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "partial": {
+          "name": "Partial responses",
           "unit": "count"
         },
         "reasoningTokens": {
@@ -39922,10 +39990,6 @@
           "name": "Prompt adherence",
           "unit": "score",
           "better": "higher"
-        },
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count"
         },
         "unroundedScore": {
           "name": "Unrounded score",
@@ -63858,31 +63922,40 @@
       "unmatched": [],
       "parts": {
         "Reconciliation & Settlement": {
-          "name": "Reconciliation & Settlement"
+          "name": "Reconciliation & Settlement",
+          "group": "Category"
         },
         "Deposits & Funding": {
-          "name": "Deposits & Funding"
+          "name": "Deposits & Funding",
+          "group": "Category"
         },
         "Customer & Account Analytics": {
-          "name": "Customer & Account Analytics"
+          "name": "Customer & Account Analytics",
+          "group": "Category"
         },
         "Revenue & Fees": {
-          "name": "Revenue & Fees"
+          "name": "Revenue & Fees",
+          "group": "Category"
         },
         "Compliance & Regulatory": {
-          "name": "Compliance & Regulatory"
+          "name": "Compliance & Regulatory",
+          "group": "Category"
         },
         "Cards & Interchange": {
-          "name": "Cards & Interchange"
+          "name": "Cards & Interchange",
+          "group": "Category"
         },
         "Payments & Transfers": {
-          "name": "Payments & Transfers"
+          "name": "Payments & Transfers",
+          "group": "Category"
         },
         "Risk & Fraud": {
-          "name": "Risk & Fraud"
+          "name": "Risk & Fraud",
+          "group": "Category"
         },
         "Subscriptions & Billing": {
-          "name": "Subscriptions & Billing"
+          "name": "Subscriptions & Billing",
+          "group": "Category"
         }
       },
       "stats": {
@@ -79816,11 +79889,11 @@
           "group": "Private benchmarks"
         },
         "kIECORDFUNSDPublic": {
-          "name": "KIE (CORD+FUNSD)",
+          "name": "KIE (CORD / FUNSD)",
           "group": "Public benchmarks"
         },
         "kIECORDFUNSDPrivate": {
-          "name": "KIE (CORD+FUNSD)",
+          "name": "KIE (CORD / FUNSD)",
           "group": "Private benchmarks"
         },
         "moderationHatefulMemesPublic": {
@@ -79836,7 +79909,7 @@
           "group": "Public benchmarks"
         },
         "mMMUProVisionPublic": {
-          "name": "MMMU-Pro vision",
+          "name": "MMMU-Pro (Vision)",
           "group": "Public benchmarks"
         }
       },
@@ -79874,10 +79947,6 @@
           "name": "Calibration examples",
           "unit": "count"
         },
-        "calibrationBenchmarks": {
-          "name": "Calibration benchmarks",
-          "unit": "count"
-        },
         "activeParams": {
           "name": "Active parameters",
           "unit": "billions"
@@ -79885,15 +79954,6 @@
         "gpuHours": {
           "name": "GPU hours",
           "unit": "hours",
-          "better": "lower"
-        },
-        "maxPixels": {
-          "name": "Maximum image pixels",
-          "unit": "count"
-        },
-        "publicRank": {
-          "name": "Public rank",
-          "unit": "count",
           "better": "lower"
         },
         "nativePublic": {
@@ -84933,28 +84993,24 @@
           "group": "Domain"
         },
         "Split_public": {
-          "name": "public",
+          "name": "Public",
           "group": "Split"
         },
         "Split_private": {
-          "name": "private",
+          "name": "Private",
           "group": "Split"
         }
       },
       "stats": {
         "amend": {
-          "name": "Amendments",
-          "unit": "score",
+          "name": "Amendment rate",
+          "unit": "%",
           "better": "lower"
         },
         "cleanDrafts": {
           "name": "Clean drafts",
           "unit": "count",
           "better": "higher"
-        },
-        "clips": {
-          "name": "Clips",
-          "unit": "count"
         }
       }
     },
@@ -113771,11 +113827,6 @@
         }
       },
       "stats": {
-        "brierIndexRank": {
-          "name": "Brier index rank",
-          "unit": "count",
-          "better": "lower"
-        },
         "brierIndex": {
           "name": "Brier overall index",
           "unit": "index",
@@ -121957,35 +122008,23 @@
         },
         "onlineShortHorizonPassed": {
           "name": "Short-horizon tasks passed",
-          "unit": "count"
-        },
-        "onlineShortHorizonTotal": {
-          "name": "Short-horizon tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "onlineLongHorizonPassed": {
           "name": "Long-horizon tasks passed",
-          "unit": "count"
-        },
-        "onlineLongHorizonTotal": {
-          "name": "Long-horizon tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "onlineCausalPassed": {
           "name": "Causal tasks passed",
-          "unit": "count"
-        },
-        "onlineCausalTotal": {
-          "name": "Causal tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "onlineThematicPassed": {
           "name": "Thematic tasks passed",
-          "unit": "count"
-        },
-        "onlineThematicTotal": {
-          "name": "Thematic tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -135491,12 +135530,6 @@
         "Summ": {
           "name": "Summarization",
           "group": "Task type"
-        }
-      },
-      "stats": {
-        "contextWindowK": {
-          "name": "Context window",
-          "unit": "thousands"
         }
       }
     },
@@ -192578,29 +192611,15 @@
         "GPT 6.2 Astra Pro"
       ],
       "stats": {
-        "eloRating": {
-          "name": "Elo rating",
-          "unit": "elo",
-          "better": "higher"
-        },
         "ratingDeviation": {
           "name": "Rating deviation",
           "unit": "rating",
           "better": "lower"
         },
-        "rankScore": {
-          "name": "Rank score",
-          "unit": "score",
-          "better": "higher"
-        },
         "confidence": {
           "name": "Confidence",
           "unit": "%",
           "better": "higher"
-        },
-        "rankDelta24h": {
-          "name": "Rank change in 24 hours",
-          "unit": "count"
         },
         "shownCount": {
           "name": "Shown prompts",
@@ -192622,14 +192641,6 @@
           "name": "Both-bad votes",
           "unit": "count"
         },
-        "coveredPrompts": {
-          "name": "Covered prompts",
-          "unit": "count"
-        },
-        "activePrompts": {
-          "name": "Active prompts",
-          "unit": "count"
-        },
         "qualityFloorScore": {
           "name": "Quality floor score",
           "unit": "score",
@@ -192649,46 +192660,18 @@
           "unit": "%",
           "better": "higher"
         },
-        "sampledPrompts": {
-          "name": "Sampled prompts",
-          "unit": "count"
-        },
         "sampledVotes": {
           "name": "Sampled votes",
           "unit": "count"
         },
         "averageBlocks": {
           "name": "Average blocks",
-          "unit": "count",
-          "better": "lower"
-        },
-        "blockSampleCount": {
-          "name": "Block sample count",
           "unit": "count"
-        },
-        "expectedBuildCount": {
-          "name": "Expected builds",
-          "unit": "count"
-        },
-        "averageCostUsd": {
-          "name": "Average cost",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "averageTimeMs": {
-          "name": "Average build time",
-          "unit": "ms",
-          "better": "lower"
         },
         "secondsPerBuild": {
           "name": "Seconds per build",
           "unit": "seconds",
           "better": "lower"
-        },
-        "pairCoverageScore": {
-          "name": "Pair coverage score",
-          "unit": "score",
-          "better": "higher"
         }
       }
     },
@@ -214281,7 +214264,7 @@
       },
       "stats": {
         "passAt3": {
-          "name": "Pass@3",
+          "name": "pass@3",
           "unit": "%",
           "better": "higher"
         },
@@ -214291,10 +214274,6 @@
         },
         "solved": {
           "name": "Solved trials",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -216003,68 +215982,89 @@
       "rows": 4,
       "unmatched": [],
       "parts": {
-        "News & Media Publishers": {
-          "name": "News & Media Publishers"
-        },
-        "Games": {
-          "name": "Games"
-        },
-        "Health": {
-          "name": "Health"
-        },
-        "Heavy Industry and Engineering": {
-          "name": "Heavy Industry and Engineering"
-        },
-        "Sports": {
-          "name": "Sports"
-        },
-        "Food and Drink": {
-          "name": "Food and Drink"
-        },
-        "Jobs and Career": {
-          "name": "Jobs and Career"
-        },
-        "Reference Materials": {
-          "name": "Reference Materials"
-        },
-        "Science and Education": {
-          "name": "Science and Education"
+        "Arts & Entertainment": {
+          "name": "Arts & Entertainment",
+          "group": "Subdomain"
         },
         "Business and Consumer Services": {
-          "name": "Business and Consumer Services"
-        },
-        "Law and Government": {
-          "name": "Law and Government"
-        },
-        "Travel and Tourism": {
-          "name": "Travel and Tourism"
-        },
-        "Finance": {
-          "name": "Finance"
-        },
-        "Home and Garden": {
-          "name": "Home and Garden"
-        },
-        "Computers Electronics and Technology": {
-          "name": "Computers Electronics and Technology"
-        },
-        "Ecommerce & Shopping": {
-          "name": "Ecommerce & Shopping"
-        },
-        "Vehicles": {
-          "name": "Vehicles"
+          "name": "Business and Consumer Services",
+          "group": "Subdomain"
         },
         "Community and Society": {
-          "name": "Community and Society"
+          "name": "Community and Society",
+          "group": "Subdomain"
+        },
+        "Computers Electronics and Technology": {
+          "name": "Computers Electronics and Technology",
+          "group": "Subdomain"
+        },
+        "Ecommerce & Shopping": {
+          "name": "Ecommerce & Shopping",
+          "group": "Subdomain"
+        },
+        "Finance": {
+          "name": "Finance",
+          "group": "Subdomain"
+        },
+        "Food and Drink": {
+          "name": "Food and Drink",
+          "group": "Subdomain"
+        },
+        "Games": {
+          "name": "Games",
+          "group": "Subdomain"
+        },
+        "Health": {
+          "name": "Health",
+          "group": "Subdomain"
+        },
+        "Heavy Industry and Engineering": {
+          "name": "Heavy Industry and Engineering",
+          "group": "Subdomain"
         },
         "Hobbies and Leisure": {
-          "name": "Hobbies and Leisure"
+          "name": "Hobbies and Leisure",
+          "group": "Subdomain"
         },
-        "Arts & Entertainment": {
-          "name": "Arts & Entertainment"
+        "Home and Garden": {
+          "name": "Home and Garden",
+          "group": "Subdomain"
+        },
+        "Jobs and Career": {
+          "name": "Jobs and Career",
+          "group": "Subdomain"
+        },
+        "Law and Government": {
+          "name": "Law and Government",
+          "group": "Subdomain"
         },
         "Lifestyle": {
-          "name": "Lifestyle"
+          "name": "Lifestyle",
+          "group": "Subdomain"
+        },
+        "News & Media Publishers": {
+          "name": "News & Media Publishers",
+          "group": "Subdomain"
+        },
+        "Reference Materials": {
+          "name": "Reference Materials",
+          "group": "Subdomain"
+        },
+        "Science and Education": {
+          "name": "Science and Education",
+          "group": "Subdomain"
+        },
+        "Sports": {
+          "name": "Sports",
+          "group": "Subdomain"
+        },
+        "Travel and Tourism": {
+          "name": "Travel and Tourism",
+          "group": "Subdomain"
+        },
+        "Vehicles": {
+          "name": "Vehicles",
+          "group": "Subdomain"
         }
       },
       "stats": {
@@ -254887,13 +254887,7 @@
       "terms": "Anthropic terms restrict automated extraction. Benchmark Almanac credits Anthropic and links the source.",
       "retrieved": "2026-11-24",
       "rows": 12,
-      "unmatched": [],
-      "stats": {
-        "attackerAttemptsPerEnvironment": {
-          "name": "Attacker attempts per environment",
-          "unit": "count"
-        }
-      }
+      "unmatched": []
     },
     "prompt-to-bench-16": {
       "url": "https://github.com/ATinyGreenCell/prompt-to-bench#65-larger-open-models-on-an-npu-box",
@@ -319822,19 +319816,16 @@
         "Full Context"
       ],
       "stats": {
-        "fullContextRank": {
-          "name": "Full context rank",
-          "unit": "count"
-        },
         "passAt4": {
-          "name": "Full context pass@4",
+          "name": "pass@4",
           "unit": "%",
           "better": "higher"
         },
         "pass4": {
-          "name": "Full context pass^4",
+          "name": "pass^4",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "all four attempts pass"
         }
       }
     },
@@ -324022,71 +324013,71 @@
       },
       "parts": {
         "shapes_easy": {
-          "name": "shapes easy",
+          "name": "Shapes easy",
           "group": "Task"
         },
         "shapes_hard": {
-          "name": "shapes hard",
+          "name": "Shapes hard",
           "group": "Task"
         },
         "digits_unsup": {
-          "name": "digits unsup",
+          "name": "Digits unsup",
           "group": "Task"
         },
         "chess_winners": {
-          "name": "chess winners",
+          "name": "Chess winners",
           "group": "Task"
         },
         "kolmo_shuffle": {
-          "name": "kolmo shuffle",
+          "name": "Kolmo shuffle",
           "group": "Task"
         },
         "classify_sentences": {
-          "name": "classify sentences",
+          "name": "Classify sentences",
           "group": "Task"
         },
         "classify_shuffled": {
-          "name": "classify shuffled",
+          "name": "Classify shuffled",
           "group": "Task"
         },
         "insert_patches": {
-          "name": "insert patches",
+          "name": "Insert patches",
           "group": "Task"
         },
         "blunders_easy": {
-          "name": "blunders easy",
+          "name": "Blunders easy",
           "group": "Task"
         },
         "blunders_hard": {
-          "name": "blunders hard",
+          "name": "Blunders hard",
           "group": "Task"
         },
         "digits_generalize": {
-          "name": "digits generalize",
+          "name": "Digits generalize",
           "group": "Task"
         },
         "shapes_variable": {
-          "name": "shapes variable",
+          "name": "Shapes variable",
           "group": "Task"
         },
         "xor_easy": {
-          "name": "xor easy",
+          "name": "XOR easy",
           "group": "Task"
         },
         "xor_hard": {
-          "name": "xor hard",
+          "name": "XOR hard",
           "group": "Task"
         },
         "splash_easy": {
-          "name": "splash easy",
+          "name": "Splash easy",
           "group": "Task"
         },
         "splash_hard": {
-          "name": "splash hard",
+          "name": "Splash hard",
           "group": "Task"
         },
         "number_patterns": {
-          "name": "number patterns",
+          "name": "Number patterns",
           "group": "Task"
         }
       },
@@ -324109,6 +324100,11 @@
         "time": {
           "name": "Median execution time",
           "unit": "seconds",
+          "better": "lower"
+        },
+        "tokensPerCall": {
+          "name": "Output tokens per response",
+          "unit": "tokens",
           "better": "lower"
         }
       }
@@ -326955,10 +326951,6 @@
           "name": "Refusal rate",
           "unit": "%",
           "better": "lower"
-        },
-        "reasoningBudget": {
-          "name": "Reasoning budget",
-          "unit": "tokens"
         }
       }
     },

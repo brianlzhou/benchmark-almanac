@@ -42,9 +42,27 @@ export const BS_ALIASES: Record<string, string> = {
 const usageColumns = {
   response_cost_usd: 'cost', response_completion_tokens: 'tokens', response_latency_ms: 'latency',
   response_prompt_tokens: 'inputTokens', response_total_tokens: 'totalTokens', response_reasoning_tokens: 'reasoningTokens',
-  response_cached_prompt_tokens: 'cachedTokens', response_cache_write_tokens: 'cacheWriteTokens',
+  response_cached_prompt_tokens: 'cachedTokens',
   response_tokens_per_second: 'tokensPerSecond',
 } as const;
+
+export const BS_STATS: NonNullable<Leaderboard['stats']> = {
+  accepted: { name: 'Accepted responses', unit: 'count' },
+  answered: { name: 'Answered responses', unit: 'count' },
+  cachedTokens: { name: 'Cached tokens', unit: 'tokens' },
+  clear: { name: 'Clear pushback responses', unit: 'count', better: 'higher' },
+  greenRate: { name: 'Green rate', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' },
+  inputTokens: { name: 'Input tokens', unit: 'tokens' },
+  latency: { name: 'Latency', unit: 'seconds', better: 'lower' },
+  meanJudgeScore: { name: 'Mean judge score', unit: 'score', better: 'higher' },
+  partial: { name: 'Partial responses', unit: 'count' },
+  reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' },
+  redRate: { name: 'Red rate', unit: 'score', better: 'lower', note: 'Stored as a fraction from 0 to 1.' },
+  refusalRate: { name: 'Refusal rate', unit: 'score', better: 'lower', note: 'Stored as a fraction from 0 to 1.' },
+  refusals: { name: 'Refusals', unit: 'count' },
+  tokensPerSecond: { name: 'Tokens per second', unit: 'tokens/s', better: 'higher' },
+  totalTokens: { name: 'Total tokens', unit: 'tokens' },
+};
 
 interface ViewerRow extends Partial<Record<keyof typeof usageColumns, number | null>> {
   model: string;
@@ -57,7 +75,7 @@ interface ViewerRow extends Partial<Record<keyof typeof usageColumns, number | n
   finished_at_utc?: string;
 }
 
-async function bsUsage(dir: string, parts: NonNullable<Leaderboard['parts']>) {
+async function bsUsage(dir: string) {
   const manifest = JSON.parse(await fetchText(`${BS_PAGE}${dir}manifest.json`));
   const files = manifest.storage?.assets?.['viewer_rows.json.gz']?.parts;
   if (!files?.length) throw new Error(`no viewer_rows in ${dir}manifest.json`);
@@ -83,8 +101,6 @@ async function bsUsage(dir: string, parts: NonNullable<Leaderboard['parts']>) {
       }
       if (r.technique && !r.is_control) {
         add(r.technique, r.status === 'ok' && typeof r.consensus_score === 'number' && r.consensus_score >= 1.5 ? 100 : 0);
-        const name = r.technique.replace(/_/g, ' ');
-        parts[r.technique] = { name: name[0].toUpperCase() + name.slice(1), group: 'Technique' };
       }
       const date = r.finished_at_utc?.slice(0, 10);
       if (date && (!entry.date || date > entry.date)) entry.date = date;
@@ -102,9 +118,15 @@ async function bsUsage(dir: string, parts: NonNullable<Leaderboard['parts']>) {
  * Rows from one version's leaderboard.csv (`dir` is "data/v2/latest/" or "data/latest/"). `usage` adds the
  * viewer's cost and output tokens per answer.
  */
-export async function bsRows(dir: string, usage = false, parts: NonNullable<Leaderboard['parts']> = {}): Promise<LeaderboardRow[]> {
-  const perAnswer = usage ? await bsUsage(dir, parts) : undefined;
+export async function bsRows(dir: string, usage = false, includeErrors = false): Promise<LeaderboardRow[]> {
+  const perAnswer = usage ? await bsUsage(dir) : undefined;
   const rows: LeaderboardRow[] = [];
+  const csvColumns: Record<string, string> = {
+    avg_score: 'meanJudgeScore', score_2: 'clear', score_1: 'partial', score_0: 'accepted',
+    refusal_count: 'refusals', answered_count: 'answered',
+    ...(includeErrors ? { error_count: 'errors' } : {}),
+    green_rate: 'greenRate', red_rate: 'redRate', refusal_rate: 'refusalRate',
+  };
   for (const r of parseCsv(await fetchText(`${BS_PAGE}${dir}leaderboard.csv`))) {
     // "nvidia/nemotron-nano-9b-v2:free@reasoning=none": drop the variant and OpenRouter's free-tier tag
     const model = r.model.split('@')[0].replace(/:free$/, '');
@@ -114,11 +136,7 @@ export async function bsRows(dir: string, usage = false, parts: NonNullable<Lead
     const reasoning = r.reasoning?.trim().toLowerCase();
     const extra = perAnswer?.get(r.model);
     const metrics = { ...extra?.metrics };
-    for (const [column, key] of Object.entries({
-      rank: 'publishedCsvRank', avg_score: 'meanJudgeScore', score_2: 'clear', score_1: 'partial', score_0: 'accepted',
-      refusal_count: 'refusals', answered_count: 'answered', nonsense_count: 'questions', error_count: 'errors',
-      green_rate: 'greenRate', red_rate: 'redRate', refusal_rate: 'refusalRate',
-    })) {
+    for (const [column, key] of Object.entries(csvColumns)) {
       if (r[column]?.trim() && Number.isFinite(Number(r[column]))) metrics[key] = Number(r[column]);
     }
     rows.push({
@@ -137,13 +155,23 @@ const board: Leaderboard = {
   url: BS_PAGE,
   feed: `${BS_PAGE}data/v2/latest/leaderboard.csv (clear pushback, refusals excluded) and viewer_rows (cost, output tokens)`,
   terms: BS_TERMS,
-  stats: { accepted: { name: 'Accepted responses', unit: 'count' }, answered: { name: 'Answered responses', unit: 'count' }, cachedTokens: { name: 'Cached tokens', unit: 'tokens' }, clear: { name: 'Clear pushback rate', unit: '%', better: 'higher' }, greenRate: { name: 'Green rate', unit: 'score', better: 'higher', note: 'Stored as a fraction from 0 to 1.' }, inputTokens: { name: 'Input tokens', unit: 'tokens' }, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, meanJudgeScore: { name: 'Mean judge score', unit: 'score', better: 'higher' }, partial: { name: 'Partial responses', unit: 'count' }, publishedCsvRank: { name: 'Published CSV rank', unit: 'count', better: 'lower' }, questions: { name: 'Questions', unit: 'count' }, reasoningTokens: { name: 'Reasoning tokens', unit: 'tokens' }, redRate: { name: 'Red rate', unit: 'score', better: 'lower', note: 'Stored as a fraction from 0 to 1.' }, refusalRate: { name: 'Refusal rate', unit: 'score', better: 'lower', note: 'Stored as a fraction from 0 to 1.' }, refusals: { name: 'Refusals', unit: 'count' }, tokensPerSecond: { name: 'Tokens per second', unit: 'tokens/s', better: 'higher' }, totalTokens: { name: 'Total tokens', unit: 'tokens' } },
-  aliases: BS_ALIASES,
-  async fetch() {
-    const parts = {};
-    const rows = await bsRows('data/v2/latest/', true, parts);
-    board.parts = parts;
-    return rows;
+  parts: {
+    authoritative_framing: { name: 'Authoritative framing', group: 'Technique' },
+    confident_extrapolation: { name: 'Confident extrapolation', group: 'Technique' },
+    cross_domain_stitching: { name: 'Cross domain stitching', group: 'Technique' },
+    fabricated_authority: { name: 'Fabricated authority', group: 'Technique' },
+    false_granularity: { name: 'False granularity', group: 'Technique' },
+    misapplied_mechanism: { name: 'Misapplied mechanism', group: 'Technique' },
+    nested_nonsense: { name: 'Nested nonsense', group: 'Technique' },
+    plausible_nonexistent_framework: { name: 'Plausible nonexistent framework', group: 'Technique' },
+    reified_metaphor: { name: 'Reified metaphor', group: 'Technique' },
+    specificity_trap: { name: 'Specificity trap', group: 'Technique' },
+    sunk_cost_framing: { name: 'Sunk cost framing', group: 'Technique' },
+    temporal_category_error: { name: 'Temporal category error', group: 'Technique' },
+    wrong_unit_of_analysis: { name: 'Wrong unit of analysis', group: 'Technique' },
   },
+  stats: BS_STATS,
+  aliases: BS_ALIASES,
+  fetch: () => bsRows('data/v2/latest/', true),
 };
 export default board;

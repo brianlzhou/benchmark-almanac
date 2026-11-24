@@ -22,7 +22,6 @@ const board: Leaderboard = {
     faceCoherence: { name: 'Face coherence', unit: 'score', better: 'higher' },
     aesthetics: { name: 'Aesthetics', unit: 'score', better: 'higher' },
     promptAdherence: { name: 'Prompt adherence', unit: 'score', better: 'higher' },
-    rank: { name: 'Leaderboard rank', unit: 'count' },
     unroundedScore: { name: 'Unrounded score', unit: 'score', better: 'higher' },
     judgeSpread: { name: 'Judge score spread', unit: 'score', better: 'lower' },
     pairwiseRating: { name: 'Pairwise rating', unit: 'rating', better: 'higher' },
@@ -94,7 +93,7 @@ const board: Leaderboard = {
       const { costUsd, totalTokens, latencyMs } = run.metrics;
       return { model: s.model, score: s.displayedScore, setting: s.toolPolicy, harness: s.executionRoute,
         trials: s.completedRuns, link: run.url, date: run.completedAt?.slice(0, 10), cost: costUsd ?? undefined,
-        metrics: { ...fields, rank: s.rank, unroundedScore: s.score, judgeSpread: s.scoreDispersion,
+        metrics: { ...fields, unroundedScore: s.score, judgeSpread: s.scoreDispersion,
           pairwiseRating: s.pairwiseRating, ...s.pairwise, ...(totalTokens == null ? {} : { totalTokens }),
           ...(latencyMs == null ? {} : { latencySeconds: latencyMs / 1000 }) } };
     });
