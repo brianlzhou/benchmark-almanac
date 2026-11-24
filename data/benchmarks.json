@@ -12260,6 +12260,32 @@
     "added": "2026-11-19"
   },
   {
+    "id": "arabic-tts-arena",
+    "name": "Arabic TTS Arena",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Listeners compare blind pairs of Arabic text-to-speech outputs across Modern Standard Arabic, Gulf, Egyptian, Levantine, and Maghrebi dialects, producing Elo ratings and 95% confidence intervals.",
+    "org": "Navid AI",
+    "released": "2026-02",
+    "links": {
+      "site": "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena",
+      "leaderboard": "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena"
+    },
+    "access": "public",
+    "note": "Ranks 31 Arabic text-to-speech models from 8,793 human blind listening votes, reporting overall and per-dialect Elo, win rate, and average synthesis latency.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena",
+      "https://huggingface.co/spaces/Navid-AI/Arabic-TTS-Arena/raw/main/leaderboard.json"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "arabicmmlu",
     "name": "ArabicMMLU",
     "aliases": [
@@ -20259,6 +20285,33 @@
       "https://arxiv.org/abs/2403.05530v3",
       "https://arxiv.org/html/2403.05530v3"
     ]
+  },
+  {
+    "id": "betu-slm-leaderboard",
+    "name": "BETU SLM Leaderboard",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "school",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Evaluates small open-weight language models up to 1B parameters across six commonsense, arithmetic, theory-of-mind, and hand-written base-model benchmarks, combining chance-normalized quality with a peer size-efficiency adjustment.",
+    "org": "BananaMind",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard"
+    },
+    "access": "public",
+    "note": "Scores 182 sub-1B language models on HellaSwag, ARC-Easy, PIQA, ArithMark-3.0, Tiny Theory of Mind, and BananaMind Base Bench 1.1, ranking them by an Overall Index where chance is 0 and perfect is 100 before peer size adjustment.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard",
+      "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard/raw/main/data/models.jsonl",
+      "https://huggingface.co/spaces/BananaMind/BETU-SLM-Leaderboard/raw/main/data/config.json"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "beyond-aime",
@@ -132868,6 +132921,32 @@
     "added": "2026-11-20"
   },
   {
+    "id": "open-slm-leaderboard",
+    "name": "Open SLM Leaderboard",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-commonsense",
+    "level": "school",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Ranks small open-weight language models by parameter count and chance-normalized Intelligence Index across HellaSwag, ARC-Easy, ARC-Challenge, PIQA, and ArithMark arithmetic tests.",
+    "org": "Axiomic Labs",
+    "released": "2026-05",
+    "links": {
+      "site": "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard"
+    },
+    "access": "public",
+    "note": "Tracks 369 small language models using a chance-normalized Intelligence Index where random guessing maps to 0 and perfect accuracy maps to 100.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard",
+      "https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard/raw/main/index.html"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "open-tabletop-gm-narrative-probe",
     "name": "Open Tabletop GM Narrative Quality Probe",
     "category": "writing-creative-taste",
@@ -133166,6 +133245,36 @@
       "https://huggingface.co/spaces/hf-audio/open_tts_leaderboard/blob/main/leaderboard_data.py"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "open-universal-arabic-asr-leaderboard",
+    "name": "Open Universal Arabic ASR Leaderboard",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates open-weight and commercial Arabic speech recognition models on multi-dialect datasets (SADA, Common Voice, MASC clean and noisy, MGB-2, and Casablanca) by average Word Error Rate and Character Error Rate.",
+    "org": "Elm Research Center",
+    "released": "2024-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard",
+      "paper": "https://arxiv.org/abs/2412.13788",
+      "repo": "https://github.com/Natural-Language-Processing-Elm/open_universal_arabic_asr_leaderboard"
+    },
+    "access": "public",
+    "note": "Actively maintained across 39 speech recognition models including Jais-ASR, Cohere Transcribe Arabic, Gemma 4, Qwen3-Omni, and Nemotron 3.5 ASR. Lower average Word Error Rate is better.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard",
+      "https://huggingface.co/spaces/elmresearchcenter/open_universal_arabic_asr_leaderboard/raw/main/app.py",
+      "https://github.com/Natural-Language-Processing-Elm/open_universal_arabic_asr_leaderboard",
+      "https://arxiv.org/abs/2412.13788"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "openai-agentic-alignment-evals",
@@ -134346,6 +134455,32 @@
       "https://huggingface.co/datasets/UCSC-VLAA/MedReason/raw/main/README.md"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "open-nli-leaderboard",
+    "name": "OpenNLI Leaderboard",
+    "category": "knowledge-qa",
+    "subcategory": "knowledge-reasoning",
+    "level": "university",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Evaluates natural language inference and decision models across 44 entailment, logical reasoning, grounding, and domain test sets using a Brier-calibrated Skill Index and standardized GPU throughput timing.",
+    "org": "dleemiller",
+    "released": "2026-10",
+    "links": {
+      "site": "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard"
+    },
+    "access": "public",
+    "note": "Scores 56 models on a Brier-calibrated Skill Index (scaled to 100, where 0 matches uniform guessing) with category accuracies, Expected Calibration Error, contamination handling, and throughput tradeoffs.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard",
+      "https://huggingface.co/spaces/dleemiller/open-nli-leaderboard/raw/main/data/board.json"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "openrca",
@@ -154618,6 +154753,37 @@
     "added": "2026-11-01"
   },
   {
+    "id": "robowild",
+    "name": "RoboWild",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates frontier vision-language models as robot-use agents across 341 diverse Isaac Lab simulation tasks and multiple robot embodiments, tracking weighted task success, actions, output tokens, wall time, and dollar cost.",
+    "org": "XLANG Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://robowild.xlang.ai",
+      "leaderboard": "https://robowild.xlang.ai",
+      "paper": "https://huggingface.co/datasets/xlangai/RoboWild/blob/main/RoboWild.pdf",
+      "repo": "https://github.com/xlang-ai/RoboWild",
+      "dataset": "https://huggingface.co/datasets/xlangai/RoboWild"
+    },
+    "access": "public",
+    "note": "Created by the OSWorld team at XLANG Lab. Scores five frontier models across 21 thinking-effort configurations in a ReAct harness and plots weighted success against output tokens and cost.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robowild.xlang.ai",
+      "https://github.com/xlang-ai/RoboWild",
+      "https://huggingface.co/datasets/xlangai/RoboWild",
+      "https://huggingface.co/datasets/xlangai/RoboWild/blob/main/RoboWild.pdf"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "roboworld",
     "name": "RoboWorld",
     "aliases": [
@@ -156217,6 +156383,34 @@
       "https://huggingface.co/datasets/HPAI-BSC/RuC-datasets/resolve/main/RuC-tt07-32k.jsonl"
     ],
     "added": "2026-11-20"
+  },
+  {
+    "id": "rukopys",
+    "name": "RUKOPYS Leaderboard",
+    "category": "multimodal-vision",
+    "subcategory": "vision-documents",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Benchmarks frontier and open-weight vision-language models on Ukrainian handwritten document OCR across archival, dictation, school, and university pages, scoring composite accuracy, detection F1, character error rates, and cost per 1,000 pages.",
+    "org": "Ukrainian Catholic University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/UkrainianCatholicUniversity/rukopys-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/UkrainianCatholicUniversity/rukopys-leaderboard",
+      "dataset": "https://huggingface.co/datasets/UkrainianCatholicUniversity/rukopys-leaderboard-results"
+    },
+    "access": "public",
+    "note": "Scores 47 models across 102 comparable runs on a 0 to 1 composite OCR score and plots a quality-versus-cost frontier in US dollars per 1,000 pages.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/UkrainianCatholicUniversity/rukopys-leaderboard",
+      "https://huggingface.co/datasets/UkrainianCatholicUniversity/rukopys-leaderboard-results",
+      "https://huggingface.co/datasets/UkrainianCatholicUniversity/rukopys-leaderboard-results/raw/main/leaderboard.csv"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "rule2drc",
@@ -176429,6 +176623,36 @@
     "added": "2026-11-19"
   },
   {
+    "id": "tabarena",
+    "name": "TabArena",
+    "category": "other",
+    "subcategory": "other-misc",
+    "level": "expert",
+    "scoring": "head-to-head",
+    "format": "prediction",
+    "description": "A living Elo-ranked benchmark for tabular machine learning and tabular foundation models across curated classification and regression datasets, reporting Elo with 95% confidence intervals, normalized score, improvability, and train and predict times.",
+    "org": "AutoGluon, University of Freiburg, and AWS",
+    "released": "2025-05",
+    "links": {
+      "site": "https://tabarena.ai",
+      "leaderboard": "https://huggingface.co/spaces/TabArena/leaderboard",
+      "paper": "https://tabarena.ai/paper-tabular-ml-iid-study",
+      "repo": "https://github.com/autogluon/tabarena"
+    },
+    "access": "public",
+    "note": "Tracks 103 entries across tabular foundation models (such as LimiX, Kumo-Tabular, TabPFN, and TabICL), tree ensembles, and neural baselines with Elo-versus-latency Pareto charts.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://tabarena.ai",
+      "https://huggingface.co/spaces/TabArena/leaderboard",
+      "https://github.com/autogluon/tabarena",
+      "https://tabarena.ai/paper-tabular-ml-iid-study"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "tabfact",
     "name": "TabFact",
     "category": "factuality-hallucination",
@@ -180325,6 +180549,36 @@
       "https://huggingface.co/api/datasets/Rapscallion123/midnight-index"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "ml-energy-leaderboard-v3",
+    "name": "The ML.ENERGY Leaderboard v3",
+    "category": "other",
+    "subcategory": "other-misc",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Measures real GPU energy consumption in joules per response alongside inter-token latency and throughput for open-weight language, multimodal, and diffusion models on standardized workloads.",
+    "org": "ML.ENERGY Initiative (University of Michigan)",
+    "released": "2026-02",
+    "links": {
+      "site": "https://ml.energy/leaderboard/",
+      "leaderboard": "https://ml.energy/leaderboard/",
+      "repo": "https://github.com/ml-energy/leaderboard",
+      "dataset": "https://huggingface.co/datasets/ml-energy/benchmark-v3"
+    },
+    "access": "public",
+    "note": "Headline score is GPU energy in joules per response on the Conversational AI Chatbot workload (lm-arena-chat) under the default 500 ms inter-token latency deadline, where lower energy is better.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://ml.energy/leaderboard/",
+      "https://ml.energy/leaderboard/data/tasks/lm-arena-chat.json",
+      "https://github.com/ml-energy/leaderboard",
+      "https://huggingface.co/datasets/ml-energy/benchmark-v3"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "the-pushback-test",
@@ -185155,6 +185409,32 @@
       "https://huggingface.co/api/datasets/CraneAILabs/UCCB"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "ugi-leaderboard",
+    "name": "UGI Leaderboard",
+    "category": "safety-alignment",
+    "subcategory": "safety-misuse",
+    "level": "everyday",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Independent benchmark ranking language models on Uncensored General Intelligence, refusal willingness (W/10), natural intelligence, world-model estimation, creative writing style, and political lean.",
+    "org": "DontPlanToEnd",
+    "released": "2024-03",
+    "links": {
+      "site": "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard"
+    },
+    "access": "public",
+    "note": "Scores over 1,300 open-weight and API language models on a composite UGI score alongside detailed willingness, world-model, writing-style, and political-axis measurements.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard",
+      "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard/raw/main/ugi-leaderboard-data.csv"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "ugmathbench",
@@ -193133,6 +193413,36 @@
       "https://arxiv.org/abs/2610.24822"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "vissearch-bench",
+    "name": "VisSearch-Bench",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates multimodal agents on 204 long-horizon visual search tasks requiring iterative image inspection and web retrieval across seven domains and five visual search patterns, scoring final accuracy and partial-credit process scores.",
+    "org": "Ant Group and Tsinghua University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://dingwu1021.github.io/VisSearch-Bench/",
+      "leaderboard": "https://dingwu1021.github.io/VisSearch-Bench/",
+      "paper": "https://arxiv.org/abs/2611.04894",
+      "repo": "https://github.com/antins-labs/VisSearch-Bench-v1"
+    },
+    "access": "public",
+    "note": "Publishes 26 evaluation runs across 16 models in Direct Answer, ReAct, and DeerFlow settings on 204 visual search tasks.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://dingwu1021.github.io/VisSearch-Bench/",
+      "https://dingwu1021.github.io/VisSearch-Bench/data/results.json",
+      "https://github.com/antins-labs/VisSearch-Bench-v1",
+      "https://arxiv.org/abs/2611.04894"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "vist-toloka",

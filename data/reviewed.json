@@ -1581,6 +1581,11 @@
       "via": "TII Falcon-Arabic post lists Arabic MMLU native and translated."
     },
     {
+      "id": "arabic-tts-arena",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live Arabic TTS Arena with 8,793 blind votes and 31 ranked models."
+    },
+    {
       "id": "arabicmmlu",
       "date": "2026-11-01",
       "via": "TII's Falcon-Arabic launch post (2025-05-21) reports the OALL v2 task scores."
@@ -2629,6 +2634,11 @@
       "id": "bertaqa",
       "date": "2026-11-19",
       "via": "EleutherAI publishes a task configuration for this evaluation."
+    },
+    {
+      "id": "betu-slm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live BETU SLM Leaderboard scoring 182 sub-1B language models."
     },
     {
       "id": "beyond-survival",
@@ -15796,6 +15806,11 @@
       "via": "Harbor lists this evaluation in its official registry."
     },
     {
+      "id": "ml-energy-leaderboard-v3",
+      "date": "2026-11-24",
+      "via": "Hugging Face Datasets and ML.ENERGY discovery: live GPU energy and latency leaderboard across open-weight models."
+    },
+    {
       "id": "mlagentbench",
       "date": "2026-11-01",
       "via": "AI R&D vertical check."
@@ -17996,6 +18011,11 @@
       "via": "The publisher's research and repository indexes led to this release."
     },
     {
+      "id": "open-nli-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live OpenNLI Leaderboard scoring 56 models across 44 NLI test sets."
+    },
+    {
       "id": "open-persian-llm-leaderboard",
       "date": "2026-11-20",
       "via": "A Persian search named the local university and its industry partner, whose leaderboard code and result file show the scored tasks."
@@ -18014,6 +18034,11 @@
       "id": "open-rag-benchmark",
       "date": "2026-11-20",
       "via": "Vectara's authenticated repository and Hugging Face dataset listings exposed Open RAG Benchmark, which was absent from the catalog."
+    },
+    {
+      "id": "open-slm-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live Open SLM Leaderboard tracking 369 small language models."
     },
     {
       "id": "open-tabletop-gm-narrative-probe",
@@ -18064,6 +18089,11 @@
       "id": "open-tts-leaderboard-1-6",
       "date": "2026-11-20",
       "via": "We checked the publisher’s evaluation sources for this audit."
+    },
+    {
+      "id": "open-universal-arabic-asr-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: live Open Universal Arabic ASR Leaderboard scoring 39 speech models."
     },
     {
       "id": "openai-mrcr",
@@ -20796,6 +20826,11 @@
       "via": "HF daily papers 2026-05 to 2026-10 with 30 to 45 upvotes."
     },
     {
+      "id": "robowild",
+      "date": "2026-11-24",
+      "via": "Hugging Face Datasets and X discovery: XLANG Lab RoboWild robotics benchmark with live website and Pareto charts."
+    },
+    {
       "id": "roboworld",
       "date": "2026-11-01",
       "via": "Daily discovery queue watch list, and the gym-anything GitHub org found while checking Gym-Anything-RT."
@@ -21044,6 +21079,11 @@
       "id": "ruc-tt07-32k",
       "date": "2026-11-20",
       "via": "The TuRTLe data loader exposed a separate rule completion table for one Tiny Tapeout collection."
+    },
+    {
+      "id": "rukopys",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: Ukrainian Catholic University RUKOPYS Leaderboard scoring 47 models on handwritten OCR."
     },
     {
       "id": "rule2drc",
@@ -23906,6 +23946,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "tabarena",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: AutoGluon and AWS TabArena Elo leaderboard with 103 tabular models."
+    },
+    {
       "id": "tabfact",
       "date": "2026-11-15",
       "via": "Benchmark Radar. Clear-use test: 417 GitHub stars in the first-run count. Opened maker sources in the second run."
@@ -25109,6 +25154,11 @@
       "id": "uganda-cultural-and-cognitive-benchmark",
       "date": "2026-11-19",
       "via": "The UK AISI Inspect Evals register lists the evaluation."
+    },
+    {
+      "id": "ugi-leaderboard",
+      "date": "2026-11-24",
+      "via": "Hugging Face Spaces discovery: DontPlanToEnd UGI Leaderboard with 2,233 Space likes and 1,331 scored models."
     },
     {
       "id": "ugmathbench",
@@ -26364,6 +26414,11 @@
       "id": "visr-rag-fin",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "vissearch-bench",
+      "date": "2026-11-24",
+      "via": "Hugging Face Daily Papers and GitHub discovery: Ant Group and Tsinghua VisSearch-Bench with live project leaderboard."
     },
     {
       "id": "vist-toloka",
