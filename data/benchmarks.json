@@ -202803,5 +202803,365 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "safeclawarena",
+    "name": "SafeClawArena",
+    "category": "cyber",
+    "subcategory": "cyber-vulnerabilities",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Containerized security benchmark testing OpenClaw-style agents on 406 adversarial tasks across four attack dimensions (SSI, PSE, CDF, and IPI) and 24 sub-categories, scored by attack success rate and security score.",
+    "org": "UC Berkeley, UIUC, NUS, Google DeepMind, NVIDIA, and collaborators",
+    "released": "2026-11",
+    "links": {
+      "site": "https://safeclawarena.github.io/",
+      "leaderboard": "https://safeclawarena.github.io/",
+      "repo": "https://github.com/sunblaze-ucb/SafeClawArena"
+    },
+    "access": "public",
+    "note": "Evaluates 5 frontier models across three agent platforms (OpenClaw, NemoClaw, and SeClaw) for 15 configurations. Headline metric is overall attack success rate (%, lower is better), alongside the 0 to 1 security score.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://safeclawarena.github.io/",
+      "https://safeclawarena.github.io/static/js/leaderboard.js",
+      "https://github.com/sunblaze-ucb/SafeClawArena"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robomme",
+    "name": "RoboMME",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "robomme",
+    "version": "v1",
+    "description": "Manipulation benchmark testing robotic memory across 16 tasks in four memory suites (Counting, Permanence, Reference, and Imitation) that require tracking past events, hidden objects, visual references, and demonstrated procedures.",
+    "org": "University of Michigan and Stanford University",
+    "released": "2026-02",
+    "links": {
+      "site": "https://robomme.github.io/",
+      "leaderboard": "https://robomme.github.io/leaderboard.html",
+      "paper": "https://arxiv.org/abs/2603.04639",
+      "repo": "https://github.com/RoboMME/robomme_benchmark"
+    },
+    "access": "public",
+    "note": "Evaluates 30 robotic policy and agent methods across 16 memory-intensive manipulation tasks, reporting per-suite and per-task success rates alongside parameter counts.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robomme.github.io/",
+      "https://robomme.github.io/leaderboard.html",
+      "https://github.com/RoboMME/robomme_benchmark",
+      "https://arxiv.org/abs/2603.04639"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "robomme-plus",
+    "name": "RoboMME-Plus",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-simulation",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "family": "robomme",
+    "version": "Plus",
+    "description": "Held-out extension of RoboMME evaluating robotic policies and agentic adaptation methods across 800 variation episodes (16 tasks x 50 episodes) spanning temporal, spatial, object, and procedural memory under zero-shot and budgeted few-shot protocols.",
+    "org": "University of Michigan and Stanford University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://robomme.github.io/plus.html",
+      "leaderboard": "https://robomme.github.io/leaderboard.html?benchmark=plus",
+      "repo": "https://github.com/RoboMME/robomme_benchmark"
+    },
+    "access": "public",
+    "note": "Evaluates 16 policy and agentic adaptation configurations across 800 held-out episodes, reporting per-suite and per-task success rates, parameter counts, audit status, and total API development or evaluation costs.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://robomme.github.io/plus.html",
+      "https://robomme.github.io/data/plus.json",
+      "https://github.com/RoboMME/robomme_benchmark"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "motiongraphicsbench",
+    "name": "MotionGraphicsBench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models animate 100 expert-curated static SVG vector graphics into motion graphics graded by deterministic verification programs that check spatial structure, motion trajectories, and timing requirements.",
+    "org": "Figma and Stanford University",
+    "released": "2026-11",
+    "links": {
+      "site": "https://motion-graphics-bench.github.io/",
+      "leaderboard": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "paper": "https://arxiv.org/abs/2611.10592",
+      "repo": "https://huggingface.co/datasets/figma-ai/motion-graphics-bench"
+    },
+    "access": "public",
+    "note": "Reports pass@1 with 95% confidence intervals across 47 model and reasoning-effort configurations (32 proprietary and open-weight LLMs), plus pass@32 for top models.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arxiv.org/abs/2611.10592",
+      "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
+      "https://motion-graphics-bench.github.io/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "bearcubs",
+    "name": "BEARCUBS",
+    "category": "computer-use-browser",
+    "subcategory": "computer-web",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Live web-browsing benchmark testing computer-use and search agents on information-seeking questions across real websites that require multi-step navigation, interaction, and visual or textual synthesis.",
+    "org": "University of Massachusetts Amherst",
+    "released": "2025-03",
+    "links": {
+      "site": "https://bear-cubs.github.io/",
+      "leaderboard": "https://bear-cubs.github.io/",
+      "paper": "https://arxiv.org/abs/2503.07919"
+    },
+    "access": "private",
+    "note": "Evaluates 12 computer-use agents, deep-research agents, and search-augmented LLM baselines across overall, text-only, and multimodal accuracy splits.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://bear-cubs.github.io/",
+      "https://arxiv.org/abs/2503.07919"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "optimization-bench-replit",
+    "name": "Optimization-Bench (Replit)",
+    "category": "coding",
+    "subcategory": "coding-performance",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Single agents and parallel multi-agent swarms (1, 8, 16, and 32 agents) optimize real-world performance bottlenecks across four open-source codebases (NumPy, SQLite, SQLGlot, and Git), scored by verified median runtime speedup.",
+    "org": "Replit",
+    "released": "2026-11",
+    "links": {
+      "site": "https://frontier.replit.com/throwing-headcount-at-the-problem/",
+      "leaderboard": "https://frontier.replit.com/throwing-headcount-at-the-problem/"
+    },
+    "access": "private",
+    "note": "Evaluates 6 frontier models across 1, 8, 16, and 32 parallel agents (24 configurations) on 36 workloads across NumPy, SQLite, SQLGlot, and Git, reporting per-suite median speedup and run cost.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://frontier.replit.com/throwing-headcount-at-the-problem/"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "showdown-clicks",
+    "name": "Showdown Clicks",
+    "category": "computer-use-browser",
+    "subcategory": "computer-grounding",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "short-answer",
+    "description": "Offline desktop UI grounding benchmark measuring single left-click coordinate accuracy against bounding boxes on macOS desktop screenshots across common applications.",
+    "org": "General Agents",
+    "released": "2025-04",
+    "links": {
+      "site": "https://generalagents.com/ace/",
+      "leaderboard": "https://generalagents.com/ace/",
+      "repo": "https://github.com/generalagents/showdown"
+    },
+    "access": "public",
+    "note": "Open dataset in generalagents/showdown scoring 9 computer-use agents and vision-language models on click accuracy with 95% confidence intervals and mean click latency.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://generalagents.com/ace/",
+      "https://github.com/generalagents/showdown"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-bulletbench",
+    "name": "BulletBench (Spring Prompt)",
+    "category": "games-long-horizon",
+    "subcategory": "games-multi-agent",
+    "level": "competition",
+    "scoring": "head-to-head",
+    "format": "agent-task",
+    "description": "Real-time chess benchmark where models play head-to-head under strict wall-clock time controls (Lightning 10+1, Bullet 60s, and Blitz 3+2), ranking models by ladder Elo while measuring move time, timeouts, and cost per game.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/bulletbench",
+      "leaderboard": "https://springprompt.com/benchmarks/bulletbench"
+    },
+    "access": "private",
+    "note": "Scores 45 models on Lightning 10+1 ladder Elo with 95% ranges, Bullet 60s and Blitz 3+2 Elo ratings, latency, timeout rate, and cost per game.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/bulletbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-catalogbench",
+    "name": "CatalogBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-business",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Models write e-commerce product listings from product specs and images across 56 products and three runs each, graded for factual compliance, unsupported claims, and publish-ready consistency.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/catalogbench",
+      "leaderboard": "https://springprompt.com/benchmarks/catalogbench"
+    },
+    "access": "private",
+    "note": "Scores 36 models on reliably publish-ready factual listing rate (%), sales brief publish-ready rate, unsupported claim rate, cost per 10,000 products, and response time.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/catalogbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-deckbench",
+    "name": "DeckBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-office",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models generate business slide presentations from six structured briefs, ranked by a pairwise deck rating from a three-model judging panel alongside presentability, factual accuracy, design quality, and cost per deck.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/deckbench",
+      "leaderboard": "https://springprompt.com/benchmarks/deckbench"
+    },
+    "access": "private",
+    "note": "Scores 37 models on pairwise deck rating with 95% confidence ranges, plus presentable deck rate, accurate deck rate, design quality, and cost per deck.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/deckbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-roasbench",
+    "name": "ROASBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-business",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Models manage a 12-month simulated paid-marketing budget across channels and campaigns, scored from 0 to 100 on overall return on ad spend, simulated profit, budget discipline, and run cost.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/roasbench",
+      "leaderboard": "https://springprompt.com/benchmarks/roasbench",
+      "paper": "https://springprompt.com/blog/how-we-built-roasbench"
+    },
+    "access": "private",
+    "note": "Scores 37 models on overall 0 to 100 marketing performance score, simulated profit, profit per dollar spent, months over budget, months losing money, and run cost.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/roasbench",
+      "https://springprompt.com/blog/how-we-built-roasbench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "springprompt-surveybench",
+    "name": "SurveyBench (Spring Prompt)",
+    "category": "economic-work",
+    "subcategory": "work-business",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "open-ended",
+    "description": "Models design research surveys and draw evidence-grounded conclusions across nine tasks with methodological traps, ranked by pairwise analysis rating from a three-model judging panel alongside research score, trap handling, and cost.",
+    "org": "Spring Prompt",
+    "released": "2026-10",
+    "links": {
+      "site": "https://springprompt.com/benchmarks/surveybench",
+      "leaderboard": "https://springprompt.com/benchmarks/surveybench"
+    },
+    "access": "private",
+    "note": "Scores 28 models on pairwise analysis rating with 95% confidence ranges, research score (0 to 100), sound research rate, traps handled, and cost per task.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://springprompt.com/benchmarks/surveybench",
+      "https://springprompt.com/robots.txt"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "ionwarp-code-review",
+    "name": "IonWarp AI Code Review Benchmark",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "agent-task",
+    "description": "Pinned reproduction of the Martian Core 50-PR code review cohort (158 issues) adding latency and inference cost to a composite Reviewer Score = (3 x F1 + latency + cost) / 5 across IonWarp-hosted models and commercial code review tools.",
+    "org": "Winding Labs",
+    "released": "2026-10",
+    "links": {
+      "site": "https://ionwarp.com/benchmarks",
+      "leaderboard": "https://ionwarp.com/benchmarks",
+      "paper": "https://ionwarp.com/benchmarks/methodology",
+      "repo": "https://github.com/Winding-Labs/ai-code-review-benchmark"
+    },
+    "access": "public",
+    "note": "CC BY 4.0 OpenAPI JSON endpoint scoring 5 frontier models under IonWarp and 4 commercial code review tools (Qodo v2, Greptile v4.1, Cursor Bugbot, and CodeRabbit) on composite Reviewer Score, F1, precision, recall, p50 and p90 latency, and cost per review.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://ionwarp.com/benchmarks",
+      "https://ionwarp.com/benchmarks/v1/reviewers/ionwarp-code-review/metrics",
+      "https://github.com/Winding-Labs/ai-code-review-benchmark"
+    ],
+    "added": "2026-11-24"
   }
 ]

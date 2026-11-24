@@ -220,6 +220,7 @@
     "mm-niah": [{"field":"#Samples","kind":"trials","why":"not stored","share":1}],
     "mmlu-prox": [{"field":"Agent-based Translation (Ours)","kind":"harness or agent","why":"not stored","share":1}],
     "moi-bench": [{"field":"Equal weights","kind":"open weights, license or size","why":"not stored","share":1},{"field":"Params.","kind":"open weights, license or size","why":"not stored","share":1},{"field":"LongCat-Image Team et al. (2025)","kind":"submitter or agent maker","why":"not stored","share":1},{"field":"LongCat-Image-Edit Team et al. (2025)","kind":"submitter or agent maker","why":"not stored","share":1},{"field":"Steps","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Time/step","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Seedream 5.0 Pro ByteDance Seed (2026)","kind":"trials","why":"not stored","share":1}],
+    "motiongraphicsbench": [{"field":"Token cap","kind":"tokens","why":"not stored","share":1}],
     "mpie-bench": [{"field":"Steps","kind":"time, latency or steps","why":"not stored","share":1},{"field":"CI","kind":"uncertainty","why":"not stored","share":1}],
     "msd-i-multimodal-genre-classification": [{"field":"Params","kind":"open weights, license or size","why":"not stored","share":1},{"field":"Time","kind":"time, latency or steps","why":"not stored","share":1}],
     "multihop-rag": [{"field":"Avg. Tokens","kind":"tokens","why":"not stored","share":1}],

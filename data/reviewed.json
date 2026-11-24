@@ -2536,6 +2536,11 @@
       "via": "EleutherAI publishes a task configuration for this evaluation."
     },
     {
+      "id": "bearcubs",
+      "date": "2026-11-24",
+      "via": "UMass Amherst live web-browsing benchmark scoring 12 computer-use agents, deep-research systems, and search baselines."
+    },
+    {
       "id": "bedside-bench",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, healthcare domain."
@@ -12016,6 +12021,11 @@
       "via": "The Prime Intellect Environments Hub lists this evaluation."
     },
     {
+      "id": "ionwarp-code-review",
+      "date": "2026-11-24",
+      "via": "CC BY 4.0 OpenAPI code review leaderboard by Winding Labs reproducing Martian Core 50-PR tasks with composite F1, latency, and cost metrics across 9 reviewers."
+    },
+    {
       "id": "iosworld",
       "date": "2026-11-01",
       "via": "Base environment of the queue item iPrefBench (Apple and Ohio State)."
@@ -16346,6 +16356,11 @@
       "via": "SAM 3 technical report reports results for this evaluation."
     },
     {
+      "id": "motiongraphicsbench",
+      "date": "2026-11-24",
+      "via": "Figma and Stanford benchmark (arXiv:2611.10592) evaluating 32 proprietary and open-weight LLMs across 47 settings with deterministic SVG animation verifiers."
+    },
+    {
       "id": "motoverse",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
@@ -18314,6 +18329,11 @@
       "id": "optimbench-dispatch",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
+    },
+    {
+      "id": "optimization-bench-replit",
+      "date": "2026-11-24",
+      "via": "Replit engineering benchmark scoring 6 frontier models across 1 to 32 parallel agents on NumPy, SQLite, SQLGlot, and Git performance optimization."
     },
     {
       "id": "opus-100",
@@ -20756,6 +20776,16 @@
       "via": "Hugging Face daily papers, benchmark papers with 30+ upvotes or 100+ stars (2026-05 to 2026-10)."
     },
     {
+      "id": "robomme",
+      "date": "2026-11-24",
+      "via": "University of Michigan and Stanford robotics memory benchmark with 201 GitHub stars and 30 evaluated policies across 16 manipulation tasks."
+    },
+    {
+      "id": "robomme-plus",
+      "date": "2026-11-24",
+      "via": "November 2026 RoboMME held-out extension evaluating 16 robotic policy and agentic adaptation methods across 800 variation episodes."
+    },
+    {
       "id": "roborewardbench",
       "date": "2026-11-01",
       "via": "Latent Space AINews issue of 2026-07-11. Hosted on HELM, an established eval group."
@@ -21149,6 +21179,11 @@
       "id": "sac-bench",
       "date": "2026-11-19",
       "via": "An arXiv search led to the authors' paper."
+    },
+    {
+      "id": "safeclawarena",
+      "date": "2026-11-24",
+      "via": "Joint UC Berkeley, UIUC, NUS, Google DeepMind, and NVIDIA security leaderboard scoring 5 frontier models across 3 OpenClaw-family agent platforms."
     },
     {
       "id": "safelibero",
@@ -21884,6 +21919,11 @@
       "id": "short-form-bench",
       "date": "2026-11-01",
       "via": "Fireworks Specialized Intelligence Index, media domain."
+    },
+    {
+      "id": "showdown-clicks",
+      "date": "2026-11-24",
+      "via": "General Agents open desktop UI grounding benchmark (98 GitHub stars) scoring 9 computer-use models with 95% confidence intervals and latency."
     },
     {
       "id": "shrec-2026-human-perceived-visual-complexity",
@@ -22744,6 +22784,31 @@
       "id": "spreadsheetbench-verified",
       "date": "2026-11-01",
       "via": "Baidu ERNIE 5.1 launch post reports SpreadsheetBench-Verified (pass@1)."
+    },
+    {
+      "id": "springprompt-bulletbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 45 models on real-time chess under strict wall-clock time controls with cost and latency scatter plots."
+    },
+    {
+      "id": "springprompt-catalogbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 36 models on factual e-commerce product catalog generation with cost per 10,000 products."
+    },
+    {
+      "id": "springprompt-deckbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 37 models on business presentation generation by pairwise panel rating and cost per deck."
+    },
+    {
+      "id": "springprompt-roasbench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 37 models on a 12-month simulated paid-marketing budget allocation environment."
+    },
+    {
+      "id": "springprompt-surveybench",
+      "date": "2026-11-24",
+      "via": "Independent Spring Prompt leaderboard scoring 28 models on survey design and evidence-grounded analysis with trap handling and cost per task."
     },
     {
       "id": "spy-pii-detection",

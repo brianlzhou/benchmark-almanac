@@ -30317,6 +30317,29 @@
         "xlm-roberta-large"
       ]
     },
+    "bearcubs": {
+      "url": "https://bear-cubs.github.io/",
+      "feed": "https://bear-cubs.github.io/",
+      "terms": "Public leaderboard table published on GitHub Pages by the BEARCUBS authors.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [
+        "Anthropic Computer Use",
+        "Convergence AI Proxy",
+        "Gemini Deep Research",
+        "Grok3 DeepSearch"
+      ],
+      "parts": {
+        "textOnly": {
+          "name": "Text only",
+          "group": "Modality"
+        },
+        "multimodal": {
+          "name": "Multimodal",
+          "group": "Modality"
+        }
+      }
+    },
     "bedside-bench": {
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/healthcare/bedside-bench",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
@@ -153011,6 +153034,99 @@
         }
       }
     },
+    "ionwarp-code-review": {
+      "url": "https://ionwarp.com/benchmarks",
+      "feed": "https://ionwarp.com/benchmarks/v1/reviewers/ionwarp-code-review/metrics",
+      "terms": "Public CC BY 4.0 OpenAPI JSON endpoint published by Winding Labs at ionwarp.com/benchmarks (robots.txt Allow: /).",
+      "retrieved": "2026-11-24",
+      "rows": 5,
+      "unmatched": [
+        "CodeRabbit",
+        "Cursor Bugbot",
+        "Greptile v4.1",
+        "Qodo v2"
+      ],
+      "chart": {
+        "title": "F1 against cost per review",
+        "x": {
+          "key": "cost",
+          "label": "Cost per review",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "f1",
+          "label": "F1 score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Review F1 accuracy across 50 pull requests against US dollar cost per review for all 9 reviewers."
+      },
+      "harnesses": "system",
+      "stats": {
+        "f1": {
+          "name": "F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "f2": {
+          "name": "F2",
+          "unit": "%",
+          "better": "higher"
+        },
+        "precision": {
+          "name": "Precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "recall": {
+          "name": "Recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tp": {
+          "name": "True positives",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fp": {
+          "name": "False positives",
+          "unit": "count",
+          "better": "lower"
+        },
+        "fn": {
+          "name": "False negatives",
+          "unit": "count",
+          "better": "lower"
+        },
+        "latencyP50": {
+          "name": "Median latency (p50)",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latencyP90": {
+          "name": "Tail latency (p90)",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "scoreF1": {
+          "name": "F1 component score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scoreLatency": {
+          "name": "Latency component score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "scoreCost": {
+          "name": "Cost component score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
+    },
     "iosworld": {
       "url": "https://iosworld.io/leaderboard/",
       "feed": "https://iosworld.io/leaderboard/",
@@ -201155,6 +201271,25 @@
         }
       }
     },
+    "motiongraphicsbench": {
+      "url": "https://arxiv.org/abs/2611.10592",
+      "feed": "https://arxiv.org/html/2611.10592",
+      "terms": "Public arXiv HTML paper (arXiv:2611.10592) published by Figma and Stanford University.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 46,
+      "unmatched": [
+        "Qwen 3.8"
+      ],
+      "stats": {
+        "passAt32": {
+          "name": "pass@32",
+          "unit": "%",
+          "better": "higher",
+          "note": "Probability of at least one verified animation across 32 sampled attempts."
+        }
+      }
+    },
     "motoverse": {
       "url": "https://arxiv.org/abs/2611.06007",
       "feed": "https://arxiv.org/pdf/2611.06007",
@@ -241879,6 +242014,76 @@
       "rows": 5,
       "unmatched": []
     },
+    "optimization-bench-replit": {
+      "url": "https://frontier.replit.com/throwing-headcount-at-the-problem/",
+      "feed": "https://frontier.replit.com/throwing-headcount-at-the-problem/",
+      "terms": "Public Replit Frontier engineering report and embedded Astro SpeedupChart data.",
+      "headline": "Geometric mean of median speedup across the four repository suites (NumPy, SQLite, SQLGlot, and Git).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 24,
+      "unmatched": [],
+      "chart": {
+        "title": "Speedup vs parallel agents",
+        "x": {
+          "key": "agents",
+          "label": "Parallel agents",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Geometric mean speedup",
+          "unit": "x",
+          "better": "higher"
+        },
+        "note": "Geometric mean speedup across NumPy, SQLite, SQLGlot, and Git against swarm size (1 to 32 parallel agents)."
+      },
+      "costPer": "run",
+      "parts": {
+        "numpy": {
+          "name": "NumPy",
+          "group": "Repository"
+        },
+        "sqlite": {
+          "name": "SQLite",
+          "group": "Repository"
+        },
+        "sqlglot": {
+          "name": "SQLGlot",
+          "group": "Repository"
+        },
+        "git": {
+          "name": "Git",
+          "group": "Repository"
+        }
+      },
+      "stats": {
+        "agents": {
+          "name": "Parallel agents",
+          "unit": "count"
+        },
+        "numpyCost": {
+          "name": "NumPy cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "sqliteCost": {
+          "name": "SQLite cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "sqlglotCost": {
+          "name": "SQLGlot cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "gitCost": {
+          "name": "Git cost",
+          "unit": "usd",
+          "better": "lower"
+        }
+      }
+    },
     "opus-100": {
       "url": "https://aclanthology.org/2020.acl-main.148/",
       "feed": "https://aclanthology.org/2020.acl-main.148.pdf",
@@ -267702,6 +267907,228 @@
         }
       }
     },
+    "robomme": {
+      "url": "https://robomme.github.io/leaderboard.html",
+      "feed": "https://robomme.github.io/leaderboard.html",
+      "terms": "Public leaderboard published on GitHub Pages by the RoboMME authors.",
+      "retrieved": "2026-11-24",
+      "rows": 1,
+      "unmatched": [
+        "3-tier Astra (Chen et al.)",
+        "Astra-Guide (Chen et al.)",
+        "Code-as-Memory (Ryu et al.)",
+        "DP-Unet (Chi et al.)",
+        "Embodied-Astra (Jedlicki et al.)",
+        "FrameSamp+Context",
+        "FrameSamp+Expert",
+        "FrameSamp+Modul",
+        "GR-SAC (Zoellent)",
+        "GroundSG+Gemini",
+        "GroundSG+QwenVL",
+        "MEMI-Astra-Act (Ryu et al.)",
+        "MemER (Sridhar et al.)",
+        "PonderPounce (Choi et al.)",
+        "RMT+Context",
+        "RMT+Expert",
+        "RMT+Modul",
+        "SAM2Act (Fang et al.)",
+        "SimpleMemVLA (Yin et al.)",
+        "SimpleSG+Gemini",
+        "SimpleSG+QwenVL",
+        "TTT+Context",
+        "TTT+Expert",
+        "TTT+Modul",
+        "TokenDrop+Context",
+        "TokenDrop+Expert",
+        "TokenDrop+Modul",
+        "T²Mem (Liu et al.)",
+        "π0.5 w/ action history"
+      ],
+      "costPer": "run",
+      "parts": {
+        "counting": {
+          "name": "Counting",
+          "group": "Suite"
+        },
+        "permanence": {
+          "name": "Permanence",
+          "group": "Suite"
+        },
+        "reference": {
+          "name": "Reference",
+          "group": "Suite"
+        },
+        "imitation": {
+          "name": "Imitation",
+          "group": "Suite"
+        },
+        "BinFill": {
+          "name": "BinFill",
+          "group": "Task"
+        },
+        "PickXtimes": {
+          "name": "PickXtimes",
+          "group": "Task"
+        },
+        "SwingXtimes": {
+          "name": "SwingXtimes",
+          "group": "Task"
+        },
+        "StopCube": {
+          "name": "StopCube",
+          "group": "Task"
+        },
+        "VideoUnmask": {
+          "name": "VideoUnmask",
+          "group": "Task"
+        },
+        "VideoUnmaskSwap": {
+          "name": "VideoUnmaskSwap",
+          "group": "Task"
+        },
+        "ButtonUnmask": {
+          "name": "ButtonUnmask",
+          "group": "Task"
+        },
+        "ButtonUnmaskSwap": {
+          "name": "ButtonUnmaskSwap",
+          "group": "Task"
+        },
+        "PickHighlight": {
+          "name": "PickHighlight",
+          "group": "Task"
+        },
+        "VideoRepick": {
+          "name": "VideoRepick",
+          "group": "Task"
+        },
+        "VideoPlaceButton": {
+          "name": "VideoPlaceButton",
+          "group": "Task"
+        },
+        "VideoPlaceOrder": {
+          "name": "VideoPlaceOrder",
+          "group": "Task"
+        },
+        "MoveCube": {
+          "name": "MoveCube",
+          "group": "Task"
+        },
+        "InsertPeg": {
+          "name": "InsertPeg",
+          "group": "Task"
+        },
+        "PatternLock": {
+          "name": "PatternLock",
+          "group": "Task"
+        },
+        "RouteStick": {
+          "name": "RouteStick",
+          "group": "Task"
+        }
+      }
+    },
+    "robomme-plus": {
+      "url": "https://robomme.github.io/leaderboard.html?benchmark=plus",
+      "feed": "https://robomme.github.io/data/plus.json",
+      "terms": "Public JSON leaderboard published on GitHub Pages by the RoboMME-Plus authors.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "3-tier Astra (Chen et al.)",
+        "ASPIRE (Lu et al.)",
+        "Embodied-Astra (Jedlicki et al.)",
+        "FrameSamp+Modul (Dai et al.)",
+        "One-shot Embodied-Astra (Jedlicki et al.)",
+        "PonderPounce (Choi et al.)",
+        "RAX (Huang et al.)",
+        "SimpleMemVLA (Yin et al.)"
+      ],
+      "costPer": "run",
+      "verified": "passed RoboMME-Plus development audit",
+      "parts": {
+        "counting": {
+          "name": "Counting",
+          "group": "Suite"
+        },
+        "permanence": {
+          "name": "Permanence",
+          "group": "Suite"
+        },
+        "reference": {
+          "name": "Reference",
+          "group": "Suite"
+        },
+        "imitation": {
+          "name": "Imitation",
+          "group": "Suite"
+        },
+        "BinFill": {
+          "name": "BinFill",
+          "group": "Task"
+        },
+        "PickXtimes": {
+          "name": "PickXtimes",
+          "group": "Task"
+        },
+        "SwingXtimes": {
+          "name": "SwingXtimes",
+          "group": "Task"
+        },
+        "StopCube": {
+          "name": "StopCube",
+          "group": "Task"
+        },
+        "VideoUnmask": {
+          "name": "VideoUnmask",
+          "group": "Task"
+        },
+        "VideoUnmaskSwap": {
+          "name": "VideoUnmaskSwap",
+          "group": "Task"
+        },
+        "ButtonUnmask": {
+          "name": "ButtonUnmask",
+          "group": "Task"
+        },
+        "ButtonUnmaskSwap": {
+          "name": "ButtonUnmaskSwap",
+          "group": "Task"
+        },
+        "PickHighlight": {
+          "name": "PickHighlight",
+          "group": "Task"
+        },
+        "VideoRepick": {
+          "name": "VideoRepick",
+          "group": "Task"
+        },
+        "VideoPlaceButton": {
+          "name": "VideoPlaceButton",
+          "group": "Task"
+        },
+        "VideoPlaceOrder": {
+          "name": "VideoPlaceOrder",
+          "group": "Task"
+        },
+        "MoveCube": {
+          "name": "MoveCube",
+          "group": "Task"
+        },
+        "InsertPeg": {
+          "name": "InsertPeg",
+          "group": "Task"
+        },
+        "PatternLock": {
+          "name": "PatternLock",
+          "group": "Task"
+        },
+        "RouteStick": {
+          "name": "RouteStick",
+          "group": "Task"
+        }
+      }
+    },
     "roborewardbench": {
       "url": "https://crfm.stanford.edu/helm/robo-reward-bench/latest/",
       "feed": "https://storage.googleapis.com/crfm-helm-public/robo-reward-bench/benchmark_output/runs/<newest>/groups/core_scenarios.json (Accuracy: Mean Abs. Error (↓ better))",
@@ -272258,6 +272685,66 @@
         "orderSFR": {
           "name": "Temporal Order speech-following rate",
           "unit": "%"
+        }
+      }
+    },
+    "safeclawarena": {
+      "url": "https://safeclawarena.github.io/",
+      "feed": "https://safeclawarena.github.io/static/js/leaderboard.js",
+      "terms": "Public leaderboard data (Table 5) published on GitHub Pages by the SafeClawArena authors.",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 15,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "ssiAtk": {
+          "name": "SSI attack success",
+          "group": "Attack surface",
+          "better": "lower"
+        },
+        "pseAtk": {
+          "name": "PSE attack success",
+          "group": "Attack surface",
+          "better": "lower"
+        },
+        "cdfAtk": {
+          "name": "CDF attack success",
+          "group": "Attack surface",
+          "better": "lower"
+        },
+        "ipiAtk": {
+          "name": "IPI attack success",
+          "group": "Attack surface",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "securityScore": {
+          "name": "Security score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Overall security score on a 0 to 1 scale (higher is more secure)."
+        },
+        "ssiScore": {
+          "name": "SSI security score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "pseScore": {
+          "name": "PSE security score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "cdfScore": {
+          "name": "CDF security score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ipiScore": {
+          "name": "IPI security score",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -278199,6 +278686,27 @@
       "rows": 9,
       "unmatched": [],
       "costPer": "run"
+    },
+    "showdown-clicks": {
+      "url": "https://generalagents.com/ace/",
+      "feed": "https://generalagents.com/ace/",
+      "terms": "Public benchmark results on generalagents.com/ace/ (open Showdown Clicks dataset at github.com/generalagents/showdown).",
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "UI-TARS-72B-SFT",
+        "ace-control-medium",
+        "ace-control-small"
+      ],
+      "harnesses": "system",
+      "stats": {
+        "latencyMs": {
+          "name": "Mean click latency",
+          "unit": "ms",
+          "better": "lower"
+        }
+      }
     },
     "shroom-cap": {
       "url": "https://aclanthology.org/2025.chomps-main.7/",
@@ -285843,6 +286351,302 @@
         "WPS AI",
         "arito"
       ]
+    },
+    "springprompt-bulletbench": {
+      "url": "https://springprompt.com/benchmarks/bulletbench",
+      "feed": "https://springprompt.com/benchmarks/bulletbench",
+      "terms": "Public server-rendered leaderboard at springprompt.com/benchmarks/bulletbench (robots.txt Allow: /).",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [
+        "Clef",
+        "Clef Flash",
+        "Clef Omni",
+        "Decider Flash v1.2",
+        "Decider V1 27B",
+        "Decider v1.2",
+        "Drex Max",
+        "Drex Max Finance",
+        "Drex v1.5",
+        "Drex v2.0",
+        "Elephant 1",
+        "GPT-6 Luna Decisions",
+        "GPT-6.1 Sol Ultrafast (low reasoning)",
+        "Gemini Decision 1",
+        "Jev 1.13",
+        "Jev 1.14",
+        "Joey 1",
+        "Kev 4B",
+        "Mammoth 1",
+        "Mercury Decide",
+        "Microsoft Decision 1",
+        "Parallel Decisions Fast",
+        "Reflex",
+        "Span-02",
+        "d1",
+        "d1 Ultra",
+        "d1.1"
+      ],
+      "chart": {
+        "title": "Lightning: strength against cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per game",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Lightning 10+1 ladder Elo",
+          "better": "higher"
+        },
+        "note": "Lightning 10+1 ladder Elo against US dollar cost per game across 45 models."
+      },
+      "parts": {
+        "bullet60s": {
+          "name": "Bullet 60s",
+          "group": "Time control"
+        },
+        "blitz3plus2": {
+          "name": "Blitz 3+2",
+          "group": "Time control"
+        }
+      },
+      "stats": {
+        "moveTime": {
+          "name": "Move time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "lostOnTime": {
+          "name": "Lost on time",
+          "unit": "%",
+          "better": "lower"
+        },
+        "slowest10Pct": {
+          "name": "Slowest 10% of moves (p90)",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "games": {
+          "name": "Games at this clock",
+          "unit": "count"
+        }
+      }
+    },
+    "springprompt-catalogbench": {
+      "url": "https://springprompt.com/benchmarks/catalogbench",
+      "feed": "https://springprompt.com/benchmarks/catalogbench",
+      "terms": "Public server-rendered leaderboard at springprompt.com/benchmarks/catalogbench (robots.txt Allow: /).",
+      "retrieved": "2026-11-24",
+      "rows": 35,
+      "unmatched": [
+        "Particle-1"
+      ],
+      "chart": {
+        "title": "Publish-ready rate against cost",
+        "x": {
+          "key": "costPer10k",
+          "label": "Cost per 10,000 products",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Reliably publish-ready",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Share of 56 products reliably publish-ready on the factual brief against US dollar cost per 10,000 products."
+      },
+      "parts": {
+        "salesBrief": {
+          "name": "Publish-ready, sales brief",
+          "group": "Brief"
+        }
+      },
+      "stats": {
+        "costPer10k": {
+          "name": "Cost per 10,000 products",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "costPer1kAccepted": {
+          "name": "Cost per 1,000 accepted listings",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "unsupportedClaims": {
+          "name": "Unsupported claims",
+          "unit": "%",
+          "better": "lower"
+        },
+        "claimsToCheck": {
+          "name": "Claims to check",
+          "unit": "%",
+          "better": "lower"
+        },
+        "failedOutputs": {
+          "name": "Failed outputs",
+          "unit": "%",
+          "better": "lower"
+        },
+        "responseTime": {
+          "name": "Mean response time",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
+    },
+    "springprompt-deckbench": {
+      "url": "https://springprompt.com/benchmarks/deckbench",
+      "feed": "https://springprompt.com/benchmarks/deckbench",
+      "terms": "Public server-rendered leaderboard at springprompt.com/benchmarks/deckbench (robots.txt Allow: /).",
+      "retrieved": "2026-11-24",
+      "rows": 36,
+      "unmatched": [
+        "Particle-1"
+      ],
+      "chart": {
+        "title": "Deck rating against cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per deck",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Deck rating",
+          "better": "higher"
+        },
+        "note": "Pairwise deck rating against US dollar cost per deck across 37 models."
+      },
+      "stats": {
+        "presentableDecks": {
+          "name": "Presentable decks",
+          "unit": "%",
+          "better": "higher"
+        },
+        "accurateDecks": {
+          "name": "Accurate decks",
+          "unit": "%",
+          "better": "higher"
+        },
+        "designQuality": {
+          "name": "Design quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "costPerPresentable": {
+          "name": "Cost per presentable deck",
+          "unit": "usd",
+          "better": "lower"
+        }
+      }
+    },
+    "springprompt-roasbench": {
+      "url": "https://springprompt.com/benchmarks/roasbench",
+      "feed": "https://springprompt.com/benchmarks/roasbench",
+      "terms": "Public server-rendered leaderboard at springprompt.com/benchmarks/roasbench (robots.txt Allow: /).",
+      "retrieved": "2026-11-24",
+      "rows": 36,
+      "unmatched": [
+        "Particle-1"
+      ],
+      "chart": {
+        "title": "Score against the cost of a run",
+        "x": {
+          "key": "cost",
+          "label": "Cost of a run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "better": "higher"
+        },
+        "note": "Marketing performance score out of 100 over a 12-month simulation against API cost per run."
+      },
+      "costPer": "run",
+      "stats": {
+        "profit": {
+          "name": "Simulated profit",
+          "unit": "usd",
+          "better": "higher"
+        },
+        "profitPerDollar": {
+          "name": "Profit per $1 spent",
+          "unit": "usd",
+          "better": "higher"
+        },
+        "monthsOverBudget": {
+          "name": "Months over budget",
+          "unit": "count",
+          "better": "lower",
+          "note": "Months out of 12 exceeding budget."
+        },
+        "monthsLosingMoney": {
+          "name": "Months losing money",
+          "unit": "count",
+          "better": "lower",
+          "note": "Months out of 12 with negative return."
+        }
+      }
+    },
+    "springprompt-surveybench": {
+      "url": "https://springprompt.com/benchmarks/surveybench",
+      "feed": "https://springprompt.com/benchmarks/surveybench",
+      "terms": "Public server-rendered leaderboard at springprompt.com/benchmarks/surveybench (robots.txt Allow: /).",
+      "retrieved": "2026-11-24",
+      "rows": 27,
+      "unmatched": [
+        "Particle-1"
+      ],
+      "chart": {
+        "title": "Analysis rating against cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Analysis rating",
+          "better": "higher"
+        },
+        "note": "Pairwise analysis rating against US dollar cost per task across 28 models."
+      },
+      "stats": {
+        "researchScore": {
+          "name": "Research score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Points out of 100."
+        },
+        "soundResearch": {
+          "name": "Sound research",
+          "unit": "%",
+          "better": "higher"
+        },
+        "trapsHandled": {
+          "name": "Traps handled",
+          "unit": "%",
+          "better": "higher"
+        },
+        "costPerSoundTask": {
+          "name": "Cost per sound task",
+          "unit": "usd",
+          "better": "lower"
+        }
+      }
     },
     "spy-pii-detection": {
       "url": "https://aclanthology.org/2025.naacl-srw.23/",
