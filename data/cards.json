@@ -14121,6 +14121,12 @@
         "score": 7.78,
         "unit": "%",
         "as_written": "ARC-AGI-3"
+      },
+      {
+        "benchmark": "rsi-index-openai",
+        "score": 57.9,
+        "unit": "%",
+        "as_written": "RSI Index, GPT-5.6 Sol (Self-improvement table)"
       }
     ]
   },
@@ -41330,6 +41336,12 @@
         "score": 35.0,
         "unit": "%",
         "as_written": "MedChemBench (Internal)"
+      },
+      {
+        "benchmark": "rsi-index-openai",
+        "score": 56.3,
+        "unit": "%",
+        "as_written": "RSI Index, GPT-5.6 Terra (Self-improvement table)"
       }
     ]
   },
@@ -41517,6 +41529,12 @@
         "score": 30.4,
         "unit": "%",
         "as_written": "MedChemBench (Internal)"
+      },
+      {
+        "benchmark": "rsi-index-openai",
+        "score": 41.9,
+        "unit": "%",
+        "as_written": "RSI Index, GPT-5.6 Luna (Self-improvement table)"
       }
     ]
   },
@@ -47875,7 +47893,7 @@
     "title": "Tencent Launches Hy4, Joining the Ranks of the World's Leading Open-Source AI Models (Tencent press release)",
     "url": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/",
     "tier": "flagship",
-    "notes": "Scores come from the value labels on the 12-panel bar chart in the press release. The release gives no thinking mode, effort, harness or attempt count, and no parameter count or license. Tencent says the weights and system cards will follow in the coming days. Claims made only in the text, such as a WorkBuddy average of 83.18, are not recorded.",
+    "notes": "Scores come from the value labels on the 12-panel bar chart in the press release. The release gives no thinking mode, effort, harness or attempt count, and no parameter count or license. Tencent says the weights and system cards will follow in the coming days. Claims made only in the text, such as a WorkBuddy average of 83.18, are not recorded. One text claim is recorded: the Honor of Kings configuration accuracy, from the Honor of Kings team’s feedback on the Hy4 launch page of Tencent’s Hy research site (https://hunyuan.tencent.com/research/hy4), because the catalog lists that benchmark from it.",
     "results": [
       {
         "benchmark": "programbench",
@@ -47925,6 +47943,12 @@
         "score": 78.9,
         "unit": "%",
         "as_written": "OSWorld 2.1"
+      },
+      {
+        "benchmark": "honor-of-kings-game-configuration-tencent",
+        "score": 97.28,
+        "unit": "%",
+        "as_written": "Honor of Kings game configuration accuracy across 20 configuration types, 99.32% after the agent checks and repairs its work (Hy4 preview: 91.74%)"
       }
     ]
   },
@@ -48954,6 +48978,12 @@
         "score": 1.63,
         "unit": "%",
         "as_written": "Librispeech clean WER, Qwen3-ASR-1.7B"
+      },
+      {
+        "benchmark": "opencpop",
+        "score": 3.08,
+        "unit": "%",
+        "as_written": "Opencpop singing transcription WER, Qwen3-ASR-1.7B (Singing Voice & Song Transcription table)"
       }
     ]
   },
@@ -52725,6 +52755,12 @@
         "score": 80.59,
         "unit": "%",
         "as_written": "Prompt-level, strict"
+      },
+      {
+        "benchmark": "sd-qa",
+        "score": 51.59,
+        "unit": "%",
+        "as_written": "VoiceBench SD-QA, GPT-4o-mini accuracy (%). PEDANT score 42.18"
       }
     ]
   },
@@ -53232,6 +53268,126 @@
         "score": 0.0,
         "unit": "%",
         "as_written": "Gray Swan IPI, attack success rate at k=15 attempts 0.0% (lower is better), chart"
+      }
+    ]
+  },
+  {
+    "id": "google-medgemma-1-5-4b-2026-01-13",
+    "lab": "google",
+    "model": "medgemma-1-5-4b",
+    "date": "2026-01-13",
+    "title": "MedGemma 1.5 model card (Health AI Developer Foundations)",
+    "url": "https://developers.google.com/health-ai-developer-foundations/medgemma/model-card",
+    "tier": "small",
+    "notes": "The model card’s evaluation tables compare MedGemma 1.5 4B with Gemma 3 4B and the earlier MedGemma 1 4B and 27B. Only the MedGemma 1.5 4B column is recorded. CT Dataset 1, MRI Dataset 1, WSI-Path, EyePACS and EHRQA are Google’s internal datasets. The PDF-to-JSON lab report results are omitted because the card reports three datasets with no overall score.",
+    "results": [
+      {
+        "benchmark": "ct-dataset-1-google",
+        "score": 61.1,
+        "unit": "%",
+        "as_written": "CT Dataset 1 (7 conditions or abnormalities), macro accuracy"
+      },
+      {
+        "benchmark": "mri-dataset-1-google",
+        "score": 64.7,
+        "unit": "%",
+        "as_written": "MRI Dataset 1 (10 conditions or abnormalities), macro accuracy"
+      },
+      {
+        "benchmark": "wsi-path-google",
+        "score": 49.4,
+        "unit": "score",
+        "as_written": "WSI-Path (whole-slide histopathology), ROUGE"
+      },
+      {
+        "benchmark": "eyepacs-dr-google",
+        "score": 76.8,
+        "unit": "%",
+        "as_written": "EyePACS (fundus), accuracy"
+      },
+      {
+        "benchmark": "chest-imagenome",
+        "score": 38,
+        "unit": "%",
+        "as_written": "Chest ImaGenome anatomy bounding box detection, intersection over union"
+      },
+      {
+        "benchmark": "ehrqa-google",
+        "score": 89.6,
+        "unit": "%",
+        "as_written": "EHRQA, accuracy"
+      }
+    ]
+  },
+  {
+    "id": "tencent-hy4-flash-2026-11-15",
+    "lab": "tencent",
+    "model": "tencent-hy4-flash",
+    "date": "2026-11-15",
+    "title": "Hy4 flash (Hugging Face model card)",
+    "url": "https://huggingface.co/tencent/Hy4-flash",
+    "tier": "mid",
+    "notes": "The date is the Hy4 flash post on Tencent’s Hy research site. WorkIndex is Tencent’s internal benchmark of 8 WorkBuddy evaluation sets, and its score is in the model card text. The WorkIndex part scores come from the card’s appendix table image (assets/benchmark.png), read twice. Only the Hy4 flash column is recorded, for the parts the catalog lists. WordEditBench and BuddyVQA Atlas are not in the catalog. Costs per task are in yuan and not recorded.",
+    "results": [
+      {
+        "benchmark": "workindex-tencent",
+        "score": 42.1,
+        "unit": "score",
+        "as_written": "WorkIndex (internal), task score"
+      },
+      {
+        "benchmark": "ppt-coedit-bench-tencent",
+        "score": 74,
+        "unit": "score",
+        "as_written": "PPTCoEditBench (WorkIndex), score"
+      },
+      {
+        "benchmark": "ppt-fix-bench-tencent",
+        "score": 23.7,
+        "unit": "score",
+        "as_written": "PPTFixBench (WorkIndex), score"
+      },
+      {
+        "benchmark": "md-coedit-bench-tencent",
+        "score": 56.9,
+        "unit": "score",
+        "as_written": "MdCoEditBench (WorkIndex), score"
+      },
+      {
+        "benchmark": "pptgen-bench-tencent",
+        "score": 54.2,
+        "unit": "score",
+        "as_written": "PPTGenBench (WorkIndex), score"
+      },
+      {
+        "benchmark": "excel-fix-bench-tencent",
+        "score": 15.6,
+        "unit": "score",
+        "as_written": "ExcelFixBench (WorkIndex), score"
+      },
+      {
+        "benchmark": "audio-video-bench-tencent",
+        "score": 17.8,
+        "unit": "score",
+        "as_written": "AudioVideoBench (WorkIndex), score"
+      }
+    ]
+  },
+  {
+    "id": "writer-palmyra-x6-2026-08-14",
+    "lab": "writer",
+    "model": "palmyra-x6",
+    "date": "2026-08-14",
+    "title": "Palmyra X6 and WRITER Agent harness release (WRITER blog)",
+    "url": "https://writer.com/blog/palmyra-x6-major-harness-release/",
+    "tier": "flagship",
+    "notes": "WRITER post-trained Palmyra X6 on GLM 5.2 and ran it inside its own WRITER Agent harness. The post gives the average over nine enterprise evaluations and the scores of rival models, which are not recorded.",
+    "results": [
+      {
+        "benchmark": "palmyra-x6-enterprise-workflows-writer",
+        "score": 0.87,
+        "unit": "score",
+        "as_written": "Average of nine enterprise evaluations inside WRITER Agent, 0.87 out of 1.00"
       }
     ]
   }
