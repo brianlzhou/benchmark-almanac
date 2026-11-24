@@ -8,7 +8,7 @@ const FEED = "https://raw.githubusercontent.com/Bobby-Gray/open-tabletop-gm/main
 
 const board: Leaderboard = {
   benchmark: "open-tabletop-gm-session-probe",
-  stats: { warnings: { name: 'Warnings', unit: 'count', better: 'lower' }, estimatedSessionTokens: { name: 'Estimated session tokens', unit: 'tokens', better: 'lower' } },
+  stats: { warnings: { name: 'Warnings', unit: 'count', better: 'lower' }, failures: { name: 'Failures', unit: 'count', better: 'lower' }, estimatedSessionTokens: { name: 'Estimated session tokens', unit: 'tokens', better: 'lower' } },
   url: "https://github.com/Bobby-Gray/open-tabletop-gm/blob/main/docs/LLM-GUIDE.md#probe-results-april-2026-skill-branchesmd-architecture",
   feed: FEED,
   terms: "The repository uses AGPL-3.0-or-later. The guide gives no separate license for model outputs. https://github.com/Bobby-Gray/open-tabletop-gm#license GitHub requests a one-second crawl delay.",

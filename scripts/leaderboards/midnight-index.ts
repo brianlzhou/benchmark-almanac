@@ -5,9 +5,27 @@ import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://secondstrike.io/midnight/board.json';
-type Cell = {n: number, midnightRate: number, ci: {midnightRate: [number,number]}, secondsPerMove: number, costPerWar: number | null};
+type Cell = {
+  n: number, midnightRate: number, ci: {midnightRate: [number,number]}, secondsPerMove: number, costPerWar: number | null,
+  costTotal?: number | null, survival?: number | null, firstNukeRate?: number | null, nukesLaunched?: number | null,
+  pactsBroken?: number | null, pactsKept?: number | null, promiseBrokenRate?: number | null, twoFacedRate?: number | null,
+  landEnd?: number | null, landPeak?: number | null,
+};
 const board: Leaderboard = {
   benchmark: 'midnight-index', url: 'https://secondstrike.io/midnight', feed, parts: {},
+  stats: {
+    secondsPerMove: { name: 'Seconds per move', unit: 'seconds', better: 'lower' },
+    costTotal: { name: 'Total cost', unit: 'usd', better: 'lower' },
+    survival: { name: 'Survival rate', unit: '%' },
+    firstNukeRate: { name: 'First strike rate', unit: '%' },
+    nukesLaunched: { name: 'Nukes launched per game', unit: 'count' },
+    pactsBroken: { name: 'Pacts broken per game', unit: 'count' },
+    pactsKept: { name: 'Pacts kept per game', unit: 'count' },
+    promiseBrokenRate: { name: 'Promise broken rate', unit: '%' },
+    twoFacedRate: { name: 'Two-faced rate', unit: '%' },
+    landEnd: { name: 'Ending territory', unit: '%' },
+    landPeak: { name: 'Peak territory', unit: '%' },
+  },
   terms: 'The authors license their dataset under CC BY-NC 4.0. https://huggingface.co/datasets/Rapscallion123/midnight-index',
   headline: 'The board reports the percentage of runs in which the model triggered midnight.',
   async fetch() {
@@ -16,6 +34,10 @@ const board: Leaderboard = {
     const rows = data.models.filter(m => m.id !== 'human').map(m => {
       const whole = m.cells.overall;
       const metrics: Record<string,number> = {secondsPerMove: whole.secondsPerMove};
+      for (const [k, scale] of [['costTotal',1],['survival',100],['firstNukeRate',100],['nukesLaunched',1],['pactsBroken',1],['pactsKept',1],['promiseBrokenRate',100],['twoFacedRate',100],['landEnd',1],['landPeak',1]] as const) {
+        const v = whole[k];
+        if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v * scale;
+      }
       for (const [key, scenario] of Object.entries(data.scenarios)) {
         board.parts![key] = {name: scenario.title, unit: '%'};
         const rate = m.cells[key].midnightRate;

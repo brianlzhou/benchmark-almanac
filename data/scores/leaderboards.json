@@ -163367,9 +163367,21 @@
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/tableqa2-pdf/",
       "feed": "https://advances.edisonscientific.com/benchmarks/labbench2/tableqa2-pdf/",
       "terms": "Public Edison Scientific leaderboard. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "averageDuration": {
+          "name": "Average duration",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "averageOutputTokens": {
+          "name": "Average output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "labbench2-trialqa": {
       "url": "https://advances.edisonscientific.com/benchmarks/labbench2/trialqa/",
@@ -170010,7 +170022,7 @@
       "url": "https://livesqlbench.ai/",
       "feed": "https://livesqlbench.ai/ (leaderboard table, Success Rate)",
       "terms": "Server-rendered public page; the site has no robots.txt and no terms, and the scores are cited to the BIRD team.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 44,
       "unmatched": [
         "AntQL 1.1 (Claude Opus 5.5)",
@@ -190424,6 +190436,54 @@
         },
         "treaty": {
           "name": "Treaty",
+          "unit": "%"
+        }
+      },
+      "stats": {
+        "secondsPerMove": {
+          "name": "Seconds per move",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "costTotal": {
+          "name": "Total cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "survival": {
+          "name": "Survival rate",
+          "unit": "%"
+        },
+        "firstNukeRate": {
+          "name": "First strike rate",
+          "unit": "%"
+        },
+        "nukesLaunched": {
+          "name": "Nukes launched per game",
+          "unit": "count"
+        },
+        "pactsBroken": {
+          "name": "Pacts broken per game",
+          "unit": "count"
+        },
+        "pactsKept": {
+          "name": "Pacts kept per game",
+          "unit": "count"
+        },
+        "promiseBrokenRate": {
+          "name": "Promise broken rate",
+          "unit": "%"
+        },
+        "twoFacedRate": {
+          "name": "Two-faced rate",
+          "unit": "%"
+        },
+        "landEnd": {
+          "name": "Ending territory",
+          "unit": "%"
+        },
+        "landPeak": {
+          "name": "Peak territory",
           "unit": "%"
         }
       }
@@ -238326,7 +238386,7 @@
       "url": "https://github.com/Bobby-Gray/open-tabletop-gm/blob/main/docs/LLM-GUIDE.md#probe-results-april-2026-skill-branchesmd-architecture",
       "feed": "https://raw.githubusercontent.com/Bobby-Gray/open-tabletop-gm/main/docs/LLM-GUIDE.md",
       "terms": "The repository uses AGPL-3.0-or-later. The guide gives no separate license for model outputs. https://github.com/Bobby-Gray/open-tabletop-gm#license GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "nousresearch/hermes-3-llama-3.1-405b",
@@ -238335,6 +238395,11 @@
       "stats": {
         "warnings": {
           "name": "Warnings",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failures": {
+          "name": "Failures",
           "unit": "count",
           "better": "lower"
         },
@@ -248246,6 +248311,18 @@
           "better": "lower",
           "unit": "score"
         }
+      },
+      "stats": {
+        "wins": {
+          "name": "Datasets won",
+          "unit": "count",
+          "better": "higher"
+        },
+        "improvability": {
+          "name": "Improvability",
+          "unit": "%",
+          "better": "lower"
+        }
       }
     },
     "physvista": {
@@ -254582,7 +254659,7 @@
       "url": "https://www.prophetarena.co/leaderboard/forecast",
       "feed": "https://www.prophetarena.co/leaderboard/forecast (leaderboard table, Arena score)",
       "terms": "Server-rendered public page; robots.txt allows all paths for generic agents with a search=yes, ai-train=no content signal, and the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 43,
       "unmatched": [
         "Foresight V3"
@@ -254599,6 +254676,10 @@
           "unit": "%",
           "better": "higher",
           "note": "Simulated betting return, with 100 as break-even."
+        },
+        "events": {
+          "name": "Events",
+          "unit": "count"
         }
       }
     },
@@ -260526,9 +260607,47 @@
       "url": "https://www.micro1.ai/benchmark/realm-pathology",
       "feed": "https://www.micro1.ai/benchmark/realm-pathology (static HTML results table, Mean)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
+      "parts": {
+        "extraction": {
+          "name": "Extraction",
+          "group": "Skill"
+        },
+        "classification": {
+          "name": "Classification",
+          "group": "Skill"
+        },
+        "interpretation": {
+          "name": "Interpretation",
+          "group": "Skill"
+        },
+        "management": {
+          "name": "Management",
+          "group": "Skill"
+        },
+        "communication": {
+          "name": "Communication",
+          "group": "Skill"
+        },
+        "inReport": {
+          "name": "In the report",
+          "group": "Criterion type"
+        },
+        "outsideKnowledge": {
+          "name": "Needs outside knowledge",
+          "group": "Criterion type"
+        },
+        "numeric": {
+          "name": "Numeric",
+          "group": "Criterion type"
+        },
+        "textual": {
+          "name": "Textual",
+          "group": "Criterion type"
+        }
+      },
       "stats": {
         "reasoningTokens": {
           "name": "Reasoning tokens",
@@ -260536,6 +260655,10 @@
         },
         "turns": {
           "name": "Turns",
+          "unit": "count"
+        },
+        "toolCalls": {
+          "name": "Tool calls",
           "unit": "count"
         },
         "minutes": {
@@ -260550,6 +260673,16 @@
         },
         "passAt3": {
           "name": "Pass@3",
+          "unit": "%",
+          "better": "higher"
+        },
+        "perfect": {
+          "name": "Perfect runs",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tasksWon": {
+          "name": "Tasks won",
           "unit": "%",
           "better": "higher"
         }
@@ -285141,14 +285274,28 @@
       "url": "https://spreadsheetbench.github.io/",
       "feed": "https://spreadsheetbench.github.io/data/leaderboard-v2-full.json",
       "terms": "JSON files on the SpreadsheetBench GitHub Pages site that the page loads; the dataset is CC BY-SA 4.0 and the page states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Decide Agent 2.0",
         "WPS AI",
         "arito"
       ],
-      "verified": "marked Verified by SpreadsheetBench"
+      "verified": "marked Verified by SpreadsheetBench",
+      "parts": {
+        "Template": {
+          "name": "Template"
+        },
+        "Fin.Model": {
+          "name": "Financial modeling"
+        },
+        "Debug": {
+          "name": "Debug"
+        },
+        "Visualization": {
+          "name": "Visualization"
+        }
+      }
     },
     "spreadsheetbench-verified": {
       "url": "https://spreadsheetbench.github.io/",
@@ -324176,7 +324323,7 @@
       "url": "https://github.com/InternLM/WildClawBench",
       "feed": "https://raw.githubusercontent.com/InternLM/WildClawBench/HEAD/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 45,
       "unmatched": [
         "Intern-S2 Preview 397B"
@@ -324224,6 +324371,21 @@
         "minutesPerTask": {
           "name": "Average minutes per task",
           "unit": "minutes",
+          "better": "lower"
+        },
+        "latency": {
+          "name": "Average time per task",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "mean:steps": {
+          "name": "Mean steps per task",
+          "unit": "count",
+          "better": "lower"
+        },
+        "mean:tool_calls": {
+          "name": "Mean tool calls per task",
+          "unit": "count",
           "better": "lower"
         }
       }
