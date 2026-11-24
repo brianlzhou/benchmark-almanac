@@ -16998,7 +16998,7 @@
       "url": "https://huggingface.co/datasets/mercor/apex-agents#leaderboard-baselines",
       "feed": "https://huggingface.co/datasets/mercor/apex-agents/resolve/main/README.md",
       "terms": "Mercor forbids scraping and training use; Benchmark Almanac credits and links Mercor as the source of these evaluation results.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
       "parts": {
@@ -17017,14 +17017,15 @@
       },
       "stats": {
         "passAt8": {
-          "name": "Pass at 8",
+          "name": "pass@8",
           "unit": "%",
           "better": "higher"
         },
         "pass8": {
-          "name": "Pass^8",
+          "name": "pass^8",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "all eight attempts pass"
         },
         "meanScore": {
           "name": "Mean rubric score",
@@ -75477,12 +75478,88 @@
       "url": "https://cwe-bench.com/v1",
       "feed": "https://cwe-bench.com/v1 (leaderboard table, Programmatic Pass@1)",
       "terms": "Static public page; robots.txt allows every agent and invites crawling, citing and quoting, and the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
+      "parts": {
+        "A01": {
+          "name": "A01 Broken Access Control",
+          "group": "Category"
+        },
+        "A02": {
+          "name": "A02 Security Misconfiguration",
+          "group": "Category"
+        },
+        "A03": {
+          "name": "A03 Software Supply Chain Failures",
+          "group": "Category"
+        },
+        "A04": {
+          "name": "A04 Cryptographic Failures",
+          "group": "Category"
+        },
+        "A05": {
+          "name": "A05 Injection",
+          "group": "Category"
+        },
+        "A06": {
+          "name": "A06 Insecure Design",
+          "group": "Category"
+        },
+        "A07": {
+          "name": "A07 Authentication Failures",
+          "group": "Category"
+        },
+        "A08": {
+          "name": "A08 Software or Data Integrity Failures",
+          "group": "Category"
+        },
+        "A09": {
+          "name": "A09 Security Logging and Alerting Failures",
+          "group": "Category"
+        },
+        "A10": {
+          "name": "A10 Mishandling of Exceptional Conditions",
+          "group": "Category"
+        },
+        "C/C++": {
+          "name": "C/C++",
+          "group": "Language"
+        },
+        "Go": {
+          "name": "Go",
+          "group": "Language"
+        },
+        "Java": {
+          "name": "Java",
+          "group": "Language"
+        },
+        "JS/TS": {
+          "name": "JS/TS",
+          "group": "Language"
+        },
+        "Python": {
+          "name": "Python",
+          "group": "Language"
+        },
+        "Rust": {
+          "name": "Rust",
+          "group": "Language"
+        }
+      },
       "stats": {
         "passAt4": {
           "name": "Programmatic pass@4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "judgePassAt1": {
+          "name": "Judge panel pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "judgePassAt4": {
+          "name": "Judge panel pass@4",
           "unit": "%",
           "better": "higher"
         }
@@ -76427,7 +76504,7 @@
       "url": "https://github.com/Lliar-liar/Daily-Omni",
       "feed": "https://raw.githubusercontent.com/Lliar-liar/Daily-Omni/main/README.md",
       "terms": "Public results published by the benchmark authors at raw.githubusercontent.com; retain source attribution and follow the upstream terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [
         "AGIBOT WITA-Omni 1.0",
@@ -76479,26 +76556,6 @@
         "60s": {
           "name": "60 seconds",
           "group": "Split"
-        },
-        "Comp.": {
-          "name": "Comparison",
-          "group": "Task type"
-        },
-        "Ctx. Und.": {
-          "name": "Context understanding",
-          "group": "Task type"
-        },
-        "Evt. Seq.": {
-          "name": "Event sequence",
-          "group": "Task type"
-        },
-        "Infer.": {
-          "name": "Inference",
-          "group": "Task type"
-        },
-        "Reas.": {
-          "name": "Reasoning",
-          "group": "Task type"
         }
       }
     },
@@ -80304,7 +80361,7 @@
       "url": "https://qwenlm.github.io/Qwen-Agent/en/benchmarks/deepplanning/",
       "feed": "https://qwenlm.github.io/Qwen-Agent/en/benchmarks/deepplanning/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
       "parts": {
@@ -116229,7 +116286,7 @@
       "url": "https://www.frontierswe.com/",
       "feed": "https://www.frontierswe.com/",
       "terms": "Public FrontierSWE root page allowed by robots.txt; results remain credited to FrontierSWE under the site terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 27,
       "unmatched": [],
       "chart": {
@@ -116264,11 +116321,6 @@
         }
       },
       "stats": {
-        "cost": {
-          "name": "Mean cost per trial",
-          "unit": "usd",
-          "better": "lower"
-        },
         "latency": {
           "name": "Mean duration",
           "unit": "seconds",
@@ -117724,7 +117776,7 @@
       "url": "https://huggingface.co/spaces/gaia-benchmark/leaderboard",
       "feed": "https://huggingface.co/datasets/gaia-benchmark/results_public/resolve/main/2023/test-00000-of-00001.parquet",
       "terms": "Public, ungated Hugging Face dataset that the GAIA Space reads to draw its board; the dataset states no license, and Hugging Face terms allow reading it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 440,
       "unmatched": [
         "4o-mini",
@@ -120428,7 +120480,9 @@
         "GAIA system 4225: HyperSpace Agent (Flint-40B-MoE + LFM2.5-24B)",
         "GAIA system 4226: abcdagent v26.11.18_3",
         "GAIA system 4227: abcdagent v26.11.23",
+        "GAIA system 4229: abcdagent v26.11.24",
         "GAIA system 422: Xgeno",
+        "GAIA system 4230: abcdagent v26.11.24_v2",
         "GAIA system 423: xfls",
         "GAIA system 424: sq626",
         "GAIA system 425: t2666",
@@ -129081,7 +129135,7 @@
       "url": "https://www.grayswan.ai/blog/uk-aisi-x-gray-swan-agent-red-teaming-challenge-results-snapshot",
       "feed": "https://www.grayswan.ai/blog/uk-aisi-x-gray-swan-agent-red-teaming-challenge-results-snapshot",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "Model Andromeda",
@@ -129099,7 +129153,8 @@
       "stats": {
         "breaks": {
           "name": "Breaks",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "chats": {
           "name": "Chats",
@@ -195181,7 +195236,7 @@
       "url": "https://rank.opencompass.org.cn/leaderboard-multimodal",
       "feed": "http://opencompass.openxlab.space/assets/OpenVLM.json (MMBench_TEST_EN.Overall)",
       "terms": "OpenCompass's published leaderboard data file, which states no license; the VLMEvalKit and MMBench repositories are Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 160,
       "unmatched": [
         "360VL-70B",
@@ -196555,7 +196610,7 @@
       "url": "https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation",
       "feed": "https://raw.githubusercontent.com/BradyFU/Awesome-Multimodal-Large-Language-Models/Evaluation/README.md (Perception table, Score)",
       "terms": "README tables in the Evaluation branch of the BradyFU/Awesome-Multimodal-Large-Language-Models GitHub repository, which states no license; scores are cited to the MME authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "360VL",
@@ -196607,7 +196662,7 @@
         },
         "Count": {
           "name": "Count",
-          "group": "Task"
+          "group": "Task type"
         },
         "Position": {
           "name": "Position",
@@ -199085,7 +199140,7 @@
       "url": "https://github.com/dingdongwang/MMSU",
       "feed": "https://raw.githubusercontent.com/dingdongwang/MMSU/main/README.md",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "BLSP",
@@ -202059,7 +202114,7 @@
       "url": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MTEB%28eng%2C%20v1%29/scores",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MTEB%28eng%2C%20v1%29/scores",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Alibaba-NLP/gme-Qwen2-VL-2B-Instruct",
@@ -202464,14 +202519,6 @@
           "unit": "%",
           "better": "higher"
         },
-        "embeddingDim": {
-          "name": "Embedding dimensions",
-          "unit": "count"
-        },
-        "maxTokens": {
-          "name": "Maximum tokens",
-          "unit": "tokens"
-        },
         "meanTaskType": {
           "name": "Mean task-type score",
           "unit": "%",
@@ -202480,11 +202527,6 @@
         "activeParamsB": {
           "name": "Active parameters",
           "unit": "billions"
-        },
-        "memoryUsageMb": {
-          "name": "Memory usage",
-          "unit": "count",
-          "note": "Memory usage in megabytes."
         }
       }
     },
@@ -220017,7 +220059,7 @@
       "url": "https://huggingface.co/spaces/osunlp/Online_Mind2Web_Leaderboard",
       "feed": "https://huggingface.co/spaces/osunlp/Online_Mind2Web_Leaderboard/raw/main/human_Mind2Web-Online%20-%20Leaderboard_data.csv",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "Hark Handoff",
@@ -243801,20 +243843,13 @@
       "url": "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md",
       "feed": "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "claude-3.5-sonnet [snapshot unspecified]",
         "gemini-2.0-flash [snapshot unspecified]",
         "gpt-4o [snapshot unspecified]"
-      ],
-      "stats": {
-        "reportedUncertainty": {
-          "name": "Reported uncertainty",
-          "unit": "score",
-          "note": "Reported uncertainty in the PaperBench score, stored from 0 to 1."
-        }
-      }
+      ]
     },
     "paperbench-code-dev": {
       "url": "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md",
@@ -253628,7 +253663,7 @@
       "url": "https://presentbench.github.io/",
       "feed": "https://presentbench.github.io/",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Doubao",
@@ -258553,7 +258588,7 @@
       "url": "https://quac.ai",
       "feed": "https://quac.ai/",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AERmodel (essemble) Protago Labs AI",
@@ -258650,7 +258685,7 @@
       "url": "https://nyu-mll.github.io/quality/",
       "feed": "https://nyu-mll.github.io/quality/ (static HTML table, test-set Accuracy)",
       "terms": "Static GitHub Pages site of the QuALITY authors (no robots.txt, so nothing is disallowed); it publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Clustering and Decomposition using Qwen2.5-7b and chat using DeepSeek",
@@ -285128,7 +285163,7 @@
       "url": "https://yale-lily.github.io/spider",
       "feed": "https://yale-lily.github.io/spider (static HTML, execution table, Test)",
       "terms": "Static page on GitHub Pages; robots.txt allows it and the Spider data is CC BY-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "AuxNet + BART",
@@ -327916,7 +327951,7 @@
       "url": "https://jaaackhongggg.github.io/WorldSense",
       "feed": "https://jaaackhongggg.github.io/WorldSense",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [
         "Claude 3.5 Sonnet [snapshot unspecified]",
@@ -327958,6 +327993,10 @@
           "name": "Performance",
           "group": "Domain"
         },
+        "Games": {
+          "name": "Games",
+          "group": "Domain"
+        },
         "Sports": {
           "name": "Sports",
           "group": "Domain"
@@ -327965,12 +328004,6 @@
         "Music": {
           "name": "Music",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "Games": {
-          "name": "Games played",
-          "unit": "count"
         }
       }
     },

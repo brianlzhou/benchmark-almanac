@@ -22,8 +22,8 @@ const board: Leaderboard = {
       const clean=(s:string)=>s.replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').trim();
       return parseCsv(await fetchText(FEED)).filter(r=>num(r['Average SR'])!==undefined).map(r=>{
         const models = clean(r.Model).split(' and ');
-        const url = r.Agent.match(/\]\((https:\/\/[^)]+)\)/)?.[1];
-        return {model:models[0],models:models.length > 1 ? models : undefined,harness:clean(r.Agent),agentOrg:clean(r.Organization),submitter:clean(r.Source),link:url?.startsWith('https://yutori.com/blog/') ? url : undefined,score:num(r['Average SR'])!,date:r.Date?.split('-').map((p,i)=>i?p.padStart(2,'0'):p).join('-'),metrics:{easy:num(r.Easy)!,medium:num(r.Medium)!,hard:num(r.Hard)!}};
+        const url = r.Agent.match(/\]\((https?:\/\/[^)\s]+)\)/)?.[1];
+        return {model:models[0],models:models.length > 1 ? models : undefined,harness:clean(r.Agent),agentOrg:clean(r.Organization),submitter:clean(r.Source),link:url && /^https?:\/\/\S+$/.test(url) ? url : undefined,score:num(r['Average SR'])!,date:r.Date?.split('-').map((p,i)=>i?p.padStart(2,'0'):p).join('-'),metrics:{easy:num(r.Easy)!,medium:num(r.Medium)!,hard:num(r.Hard)!}};
       });
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');
