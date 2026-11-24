@@ -10,6 +10,12 @@ const board: Leaderboard = {
   url: "https://exa.ai/evals",
   feed,
   terms: "Exa publishes its own evaluation. Its robots.txt allows AI input on public pages. The evaluation page gives no separate results license.",
+  chart: {
+    title: 'Row F1 vs. cost per task',
+    x: { key: 'cost', label: 'Median cost per task', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Row F1', unit: '%', better: 'higher' },
+    note: 'Exa plots ATLAS row F1 against median per-task cost (search plus agent model).',
+  },
   async fetch() {
     const html = await fetchText(feed);
     const chart = html.match(/<section id="atlas"[\s\S]*?<\/section>/)?.[0];

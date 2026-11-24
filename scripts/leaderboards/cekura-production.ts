@@ -19,6 +19,12 @@ const board: Leaderboard = {
     adaptation: { name: 'Conversational adaptation', group: 'Dimension' },
   },
   stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, stopTimeSeconds: { name: 'Stop time', unit: 'seconds', better: 'lower' }, phoneLines: { name: 'Phone lines', unit: 'count' } },
+  chart: {
+    title: 'Quality score vs. mean response time',
+    x: { key: 'latency', label: 'Mean response time', unit: 's', better: 'lower' },
+    y: { key: 'score', label: 'Quality score', better: 'higher' },
+    note: 'Cekura plots overall quality score (out of 100) against mean response time in seconds.',
+  },
   async fetch() {
     const table = tables(await fetchText(PAGE)).find(t => t[0]?.some(c => c.text === 'Quality score / 100'))
     if (!table) throw new Error('Cekura voice quality table missing')

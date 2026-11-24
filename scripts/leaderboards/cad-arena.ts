@@ -35,51 +35,58 @@ const board: Leaderboard = {
     Astra: 'gpt-6-astra',
     'DeepSeek V4': 'deepseek-v4-pro',
   },
+  parts: {
+    geometry: { name: 'Geometry', group: 'Dimension' },
+    editability: { name: 'Editability', group: 'Dimension' },
+    build123d: { name: 'Build123d', group: 'Platform' },
+    nxOpen: { name: 'NX Open', group: 'Platform' },
+    solidworks: { name: 'SolidWorks', group: 'Platform' },
+    featurescript: { name: 'FeatureScript', group: 'Platform' },
+    fusion: { name: 'Fusion', group: 'Platform' },
+  },
   stats: {
     turns: { name: 'Turns', unit: 'count' },
     latency: { name: 'Average latency', unit: 'seconds', better: 'lower' },
     totalTokens: { name: 'Total tokens', unit: 'tokens' },
-    scheduledTrials: { name: 'Scheduled trials', unit: 'count' },
     build123dGeometry: { name: 'Build123d geometry score', unit: 'score', better: 'higher' },
     build123dEditability: { name: 'Build123d editability score', unit: 'score', better: 'higher' },
     build123dCost: { name: 'Build123d cost', unit: 'usd', better: 'lower' },
     build123dTotalTokens: { name: 'Build123d total tokens', unit: 'tokens' },
     build123dScored: { name: 'Build123d scored trials', unit: 'count' },
-    build123dScheduled: { name: 'Build123d scheduled trials', unit: 'count' },
     nxOpenGeometry: { name: 'NX Open geometry score', unit: 'score', better: 'higher' },
     nxOpenEditability: { name: 'NX Open editability score', unit: 'score', better: 'higher' },
     nxOpenCost: { name: 'NX Open cost', unit: 'usd', better: 'lower' },
     nxOpenTotalTokens: { name: 'NX Open total tokens', unit: 'tokens' },
     nxOpenScored: { name: 'NX Open scored trials', unit: 'count' },
-    nxOpenScheduled: { name: 'NX Open scheduled trials', unit: 'count' },
     solidworksGeometry: { name: 'SolidWorks geometry score', unit: 'score', better: 'higher' },
     solidworksEditability: { name: 'SolidWorks editability score', unit: 'score', better: 'higher' },
     solidworksCost: { name: 'SolidWorks cost', unit: 'usd', better: 'lower' },
     solidworksTotalTokens: { name: 'SolidWorks total tokens', unit: 'tokens' },
     solidworksScored: { name: 'SolidWorks scored trials', unit: 'count' },
-    solidworksScheduled: { name: 'SolidWorks scheduled trials', unit: 'count' },
     featurescriptGeometry: { name: 'FeatureScript geometry score', unit: 'score', better: 'higher' },
     featurescriptEditability: { name: 'FeatureScript editability score', unit: 'score', better: 'higher' },
     featurescriptCost: { name: 'FeatureScript cost', unit: 'usd', better: 'lower' },
     featurescriptTotalTokens: { name: 'FeatureScript total tokens', unit: 'tokens' },
     featurescriptScored: { name: 'FeatureScript scored trials', unit: 'count' },
-    featurescriptScheduled: { name: 'FeatureScript scheduled trials', unit: 'count' },
     fusionGeometry: { name: 'Fusion geometry score', unit: 'score', better: 'higher' },
     fusionEditability: { name: 'Fusion editability score', unit: 'score', better: 'higher' },
     fusionCost: { name: 'Fusion cost', unit: 'usd', better: 'lower' },
     fusionTotalTokens: { name: 'Fusion total tokens', unit: 'tokens' },
     fusionScored: { name: 'Fusion scored trials', unit: 'count' },
-    fusionScheduled: { name: 'Fusion scheduled trials', unit: 'count' },
+  },
+  chart: {
+    title: 'Score vs. cost',
+    x: { key: 'cost', label: 'Mean cost per scored trial', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Score', better: 'higher' },
+    note: 'Normal Factory plots CAD Arena score against mean cost per scored trial on a log scale with a Pareto frontier.',
   },
   async fetch() {
     const html = await fetchText(URL);
     const data = details(html);
-    board.parts = {geometry:{name:'Geometry',group:'Dimension'},editability:{name:'Editability',group:'Dimension'}};
     const platformKeys=new Map<string,string>();
     for (const p of data?.platforms ?? []) {
       const key=p.id.replace(/-([a-z])/g,(_,c:string)=>c.toUpperCase());
       platformKeys.set(p.id,key);
-      board.parts[key]={name:p.name,group:'Platform'};
     }
     const t = tables(html).find((rows) => rows[0]?.some((c) => c.text === 'Score'));
     if (!t) throw new Error('CAD Arena table not found');
@@ -103,12 +110,11 @@ const board: Leaderboard = {
         metrics.geometry=m.meanGeometry;
         metrics.editability=m.meanEditability;
         metrics.turns=m.meanTurns;
-        metrics.scheduledTrials=m.scheduled;
         for (const cell of data!.cells.filter(c=>c.modelId===m.id)) {
           const key=platformKeys.get(cell.platformId);
           if (!key) continue;
           for (const [field,suffix] of [['score',''],['meanGeometry','Geometry'],['meanEditability','Editability'],
-            ['meanCostUsd','Cost'],['meanTokens','TotalTokens'],['scored','Scored'],['scheduled','Scheduled']] as const) {
+            ['meanCostUsd','Cost'],['meanTokens','TotalTokens'],['scored','Scored']] as const) {
             const v=cell[field];
             if (v!=null) metrics[key+suffix]=v;
           }

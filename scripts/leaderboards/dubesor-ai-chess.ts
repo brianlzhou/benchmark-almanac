@@ -18,6 +18,12 @@ const board: Leaderboard = {
     legalReasoning: { name: 'Legal reasoning rate', unit: '%', better: 'higher' }, legalContinuation: { name: 'Legal continuation rate', unit: '%', better: 'higher' },
     legal: { name: 'Legal move rate', unit: '%', better: 'higher' },
   },
+  chart: {
+    title: 'Elo vs. cost per game',
+    x: { key: 'cost', label: 'Cost per game', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Elo', unit: 'Elo', better: 'higher' },
+    note: 'Dubesor plots chess Elo rating against average cost per game on a log scale with a Pareto frontier.',
+  },
   async fetch() {
     const source = await fetchText(FEED);
     const rows = [];
