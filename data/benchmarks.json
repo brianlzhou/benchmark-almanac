@@ -3708,6 +3708,7 @@
     },
     "access": "public",
     "note": "Arena says the board measures signals from real sessions rather than preference votes alone. It went live on 2026-06-04, and signal definitions changed on 2026-10-01 and 2026-10-12. Scores can fall below zero, as Mistral Medium 3.5 does at -14.5.",
+    "successor": "agent-arena-index",
     "unit": "%",
     "better": "higher",
     "confidence": "likely",
@@ -3745,6 +3746,33 @@
       "https://gorilla.cs.berkeley.edu/blogs/14_agent_arena.html"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "agent-arena-index",
+    "name": "Agent Arena Index",
+    "category": "tool-use",
+    "subcategory": "tools-assistants",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "agent-task",
+    "description": "Arena composite index of agentic performance across work, coding and chat sessions on an anchored 1000-centered scale, combining task outcome and tool efficiency signals.",
+    "org": "Arena (formerly LMArena)",
+    "released": "2026-11",
+    "links": {
+      "leaderboard": "https://arena.ai/leaderboard/agent",
+      "site": "https://arena.ai/blog/introducing-the-agent-arena-index",
+      "dataset": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    },
+    "access": "public",
+    "note": "Launched on 2026-11-18 across 2.9 million user sessions with 69 models in the agent_capability Hugging Face split. Replaces the earlier net-improvement percentage scale with an anchored index and adds task outcome and tool efficiency sub-indexes.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://arena.ai/blog/introducing-the-agent-arena-index",
+      "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "agent-bazaar",
@@ -81113,6 +81141,35 @@
     ]
   },
   {
+    "id": "kaggle-hindsight-costliest-bugs",
+    "name": "Hindsight: Catching History's Costliest Bugs",
+    "aliases": [
+      "Kaggle Hindsight Costliest Bugs"
+    ],
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "expert",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Models review 26 famous historical software failures rebuilt in historical, disguised and fixed control forms to test real bug detection against memorization.",
+    "org": "fuddle (Kaggle Benchmarks)",
+    "released": "2026-10",
+    "links": {
+      "site": "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs",
+      "leaderboard": "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs"
+    },
+    "access": "public",
+    "note": "Featured on Kaggle Benchmarks with 13 frontier models scored on overall accuracy plus historical, disguised, disguised-with-context and fixed control variants.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs",
+      "https://www.kaggle.com/api/v1/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs/leaderboard"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "hipe-ocrepair-2026",
     "name": "HIPE-OCRepair 2026",
     "aliases": [
@@ -92788,6 +92845,35 @@
     ]
   },
   {
+    "id": "kaggle-animated-story-arena",
+    "name": "Kaggle Animated Story Arena",
+    "aliases": [
+      "Animated Story Arena"
+    ],
+    "category": "audio-video",
+    "subcategory": "video-generation",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models generate short animated explanatory stories rendered in a browser, and human pairwise votes determine the arena rating.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena",
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena"
+    },
+    "access": "public",
+    "note": "Launched on Kaggle Arenas in November 2026 with human preference ratings and confidence intervals.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/animated-story-arena/leaderboard"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "kaggle-ascii-arena",
     "name": "Kaggle ASCII Arena",
     "aliases": [
@@ -92870,6 +92956,35 @@
       "https://www.kaggle.com/api/v1/benchmarks/kaggle/explode-arena/leaderboard"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "kaggle-fps-arena",
+    "name": "Kaggle FPS Arena",
+    "aliases": [
+      "FPS Arena"
+    ],
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models build playable 3D mouse-aimed first-person shooter games in a single self-contained browser page, ranked by human pairwise preference votes.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.kaggle.com/benchmarks/kaggle/fps-arena",
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/fps-arena"
+    },
+    "access": "public",
+    "note": "Launched on Kaggle Arenas in November 2026 with human preference ratings and confidence intervals.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/fps-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/fps-arena/leaderboard"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "kaggle-game-arena",
@@ -92961,6 +93076,35 @@
       "https://www.kaggle.com/api/v1/benchmarks/kaggle/pelican-arena/leaderboard"
     ],
     "added": "2026-11-19"
+  },
+  {
+    "id": "kaggle-racing-arena",
+    "name": "Kaggle Racing Arena",
+    "aliases": [
+      "Racing Arena"
+    ],
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "university",
+    "scoring": "preference",
+    "format": "code",
+    "description": "Models build playable 3D browser racing games in a single self-contained web page, ranked by human pairwise preference votes.",
+    "org": "Kaggle",
+    "released": "2026-11",
+    "links": {
+      "site": "https://www.kaggle.com/benchmarks/kaggle/racing-arena",
+      "leaderboard": "https://www.kaggle.com/benchmarks/kaggle/racing-arena"
+    },
+    "access": "public",
+    "note": "Launched on Kaggle Arenas in November 2026 with human preference ratings and confidence intervals.",
+    "unit": "rating",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.kaggle.com/benchmarks/kaggle/racing-arena",
+      "https://www.kaggle.com/api/v1/benchmarks/kaggle/racing-arena/leaderboard"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "kaggle-sort-viz-arena",
@@ -191147,6 +191291,7 @@
     "format": "code",
     "family": "vibe-code-bench",
     "version": "1.1",
+    "successor": "vals-vibe-code-bench-v1-1-1",
     "description": "End-to-end web application development from natural-language specs. Built apps are tested against functional requirements.",
     "org": "Vals AI",
     "released": "2026-03",
@@ -191255,6 +191400,38 @@
       "https://www.vals.ai/updates"
     ],
     "added": "2026-11-01"
+  },
+  {
+    "id": "vals-vibe-code-bench-v1-1-1",
+    "name": "Vibe Code Bench v1.1.1",
+    "aliases": [
+      "Vibe Code v1.1.1"
+    ],
+    "category": "coding",
+    "subcategory": "coding-projects",
+    "level": "expert",
+    "scoring": "model-judged",
+    "format": "code",
+    "family": "vibe-code-bench",
+    "version": "1.1.1",
+    "description": "Updated version of Vals AI end-to-end web application building benchmark with an upgraded browser-use testing agent, a second verification judge checking screenshots and action logs, and an all-substeps pass rule.",
+    "org": "Vals AI",
+    "released": "2026-11",
+    "links": {
+      "paper": "https://arxiv.org/abs/2603.04601",
+      "repo": "https://github.com/vals-ai/VibeCodeBench-Openhands-Scaffold",
+      "leaderboard": "https://www.vals.ai/benchmarks/vibe-code-v1-1-1"
+    },
+    "access": "private",
+    "note": "Released on 2026-11-20 with changed browser grading and stricter all-substeps verification across frontier models in OpenHands.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://www.vals.ai/benchmarks/vibe-code-v1-1-1",
+      "https://arxiv.org/abs/2603.04601"
+    ],
+    "added": "2026-11-24"
   },
   {
     "id": "vibe-eval",

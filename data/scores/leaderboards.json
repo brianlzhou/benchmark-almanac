@@ -4429,6 +4429,100 @@
         }
       }
     },
+    "agent-arena-index": {
+      "url": "https://arena.ai/leaderboard/agent",
+      "feed": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (subset agent_capability, split latest, every category)",
+      "terms": "Hugging Face dataset lmarena-ai/leaderboard-dataset, CC BY 4.0.",
+      "retrieved": "2026-11-24",
+      "rows": 68,
+      "unmatched": [
+        "Spark-X2.6"
+      ],
+      "chart": {
+        "title": "Agent Arena Index vs. median cost per task",
+        "x": {
+          "key": "costPerTaskMedianUsd",
+          "label": "Median cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Agent Arena Index",
+          "unit": "index",
+          "better": "higher"
+        },
+        "note": "Each cost is the median cost of one task in Agent Mode sessions, as Arena reports it."
+      },
+      "parts": {
+        "chat": {
+          "name": "Chat",
+          "group": "Category"
+        },
+        "code": {
+          "name": "Coding",
+          "group": "Category"
+        },
+        "work": {
+          "name": "Work",
+          "group": "Category"
+        },
+        "taskOutcome": {
+          "name": "Task outcome",
+          "group": "Sub-index"
+        },
+        "taskOutcomeChat": {
+          "name": "Task outcome: Chat",
+          "group": "Sub-index"
+        },
+        "taskOutcomeCode": {
+          "name": "Task outcome: Coding",
+          "group": "Sub-index"
+        },
+        "taskOutcomeWork": {
+          "name": "Task outcome: Work",
+          "group": "Sub-index"
+        },
+        "toolEfficiency": {
+          "name": "Tool efficiency",
+          "group": "Sub-index"
+        },
+        "toolEfficiencyChat": {
+          "name": "Tool efficiency: Chat",
+          "group": "Sub-index"
+        },
+        "toolEfficiencyCode": {
+          "name": "Tool efficiency: Coding",
+          "group": "Sub-index"
+        },
+        "toolEfficiencyWork": {
+          "name": "Tool efficiency: Work",
+          "group": "Sub-index"
+        }
+      },
+      "stats": {
+        "sessions": {
+          "name": "Sessions",
+          "unit": "count"
+        },
+        "toolEfficiencyRate": {
+          "name": "Tool efficiency rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "costPerTaskMedianUsd": {
+          "name": "Median cost per task",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "outputTokensPerTaskMedian": {
+          "name": "Median output tokens per task",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
+    },
     "agent-diff": {
       "url": "https://arxiv.org/html/2602.11224",
       "feed": "https://arxiv.org/html/2602.11224",
@@ -156743,6 +156837,20 @@
         }
       }
     },
+    "kaggle-animated-story-arena": {
+      "url": "https://www.kaggle.com/benchmarks/kaggle/animated-story-arena",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/animated-story-arena/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-24",
+      "rows": 9,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
+    },
     "kaggle-ascii-arena": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/ascii-arena",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/ascii-arena/leaderboard",
@@ -156835,6 +156943,20 @@
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply. The almanac credits and links the source.",
       "retrieved": "2026-11-24",
       "rows": 12,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
+    },
+    "kaggle-fps-arena": {
+      "url": "https://www.kaggle.com/benchmarks/kaggle/fps-arena",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/fps-arena/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-24",
+      "rows": 5,
       "unmatched": [],
       "stats": {
         "votes": {
@@ -157256,6 +157378,32 @@
         }
       }
     },
+    "kaggle-hindsight-costliest-bugs": {
+      "url": "https://www.kaggle.com/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/fuddle/hindsight-catching-historys-costliest-bugs/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-24",
+      "rows": 13,
+      "unmatched": [],
+      "parts": {
+        "historical": {
+          "name": "Historical",
+          "group": "Variant"
+        },
+        "disguised": {
+          "name": "Disguised",
+          "group": "Variant"
+        },
+        "disguisedContext": {
+          "name": "Disguised with context",
+          "group": "Variant"
+        },
+        "fixed": {
+          "name": "Fixed control",
+          "group": "Variant"
+        }
+      }
+    },
     "kaggle-icml-2025-experts": {
       "url": "https://www.kaggle.com/benchmarks/kaggle/icml-2025-experts",
       "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/icml-2025-experts/leaderboard",
@@ -157540,6 +157688,20 @@
       "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
       "retrieved": "2026-11-24",
       "rows": 62,
+      "unmatched": [],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        }
+      }
+    },
+    "kaggle-racing-arena": {
+      "url": "https://www.kaggle.com/benchmarks/kaggle/racing-arena",
+      "feed": "https://www.kaggle.com/api/v1/benchmarks/kaggle/racing-arena/leaderboard",
+      "terms": "Kaggle's documented public leaderboard download endpoint; Kaggle's terms of use apply.",
+      "retrieved": "2026-11-24",
+      "rows": 10,
       "unmatched": [],
       "stats": {
         "votes": {
@@ -312712,6 +312874,90 @@
           "unit": "seconds",
           "better": "lower",
           "note": "Mean time per test."
+        }
+      }
+    },
+    "vals-vibe-code-bench-v1-1-1": {
+      "url": "https://www.vals.ai/benchmarks/vibe-code-v1-1-1",
+      "feed": "https://www.vals.ai/benchmarks/vibe-code-v1-1-1 (server-rendered leaderboard table and chart data)",
+      "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
+      "retrieved": "2026-11-24",
+      "rows": 51,
+      "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "stats": {
+        "token_tasks_measured": {
+          "name": "Tasks with token counts",
+          "unit": "count"
+        },
+        "token_totals:input_tokens": {
+          "name": "Total input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "token_totals:output_tokens": {
+          "name": "Total output tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "token_totals:reasoning_tokens": {
+          "name": "Total reasoning tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "token_totals:cache_read_tokens": {
+          "name": "Total cache read tokens",
+          "unit": "tokens"
+        },
+        "token_totals:cache_write_tokens": {
+          "name": "Total cache write tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "turn_metrics:tasks_measured": {
+          "name": "Tasks with turn counts",
+          "unit": "count"
+        },
+        "turn_metrics:avg_turns": {
+          "name": "Mean turns per test",
+          "unit": "count",
+          "better": "lower"
+        },
+        "turn_metrics:avg_query_seconds": {
+          "name": "Mean query latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "turn_metrics:median_query_seconds": {
+          "name": "Median query latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "turn_metrics:avg_ttft_seconds": {
+          "name": "Mean time to first token",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "turns": {
+          "name": "Turns per test",
+          "unit": "count",
+          "better": "lower"
         }
       }
     },

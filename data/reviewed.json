@@ -536,6 +536,11 @@
       "via": "BenchmarkList (benchmarklist.com), checked at the primary source"
     },
     {
+      "id": "agent-arena-index",
+      "date": "2026-11-24",
+      "via": "Arena launch blog post and Hugging Face lmarena-ai/leaderboard-dataset agent_capability, agent_task_outcome and agent_tool_efficiency splits."
+    },
+    {
       "id": "agent-bazaar",
       "date": "2026-11-19",
       "via": "The Prime Intellect Environments Hub lists this evaluation."
@@ -12516,6 +12521,11 @@
       "via": "Following Animal-Bench comparisons led to the canine video project and its two scoring protocols."
     },
     {
+      "id": "kaggle-animated-story-arena",
+      "date": "2026-11-24",
+      "via": "Kaggle Arenas directory and public Kaggle Benchmarks leaderboard API."
+    },
+    {
       "id": "kaggle-ascii-arena",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
@@ -12549,6 +12559,11 @@
       "id": "kaggle-floorplan-arena",
       "date": "2026-11-10",
       "via": "A final check of Kaggle public listings found this additional independent vote board."
+    },
+    {
+      "id": "kaggle-fps-arena",
+      "date": "2026-11-24",
+      "via": "Kaggle Arenas directory and public Kaggle Benchmarks leaderboard API."
     },
     {
       "id": "kaggle-game-arena",
@@ -12651,6 +12666,11 @@
       "via": "Kaggle Benchmarks list (owner kaggle, type GAME). The almanac catalogs the suite, chess, poker, werewolf and go only."
     },
     {
+      "id": "kaggle-hindsight-costliest-bugs",
+      "date": "2026-11-24",
+      "via": "Kaggle Benchmarks featured directory and public Kaggle Benchmarks leaderboard API."
+    },
+    {
       "id": "kaggle-icml-2025-experts",
       "date": "2026-11-20",
       "via": "Kaggle's benchmark registry lists this suite under the Kaggle organization."
@@ -12689,6 +12709,11 @@
       "id": "kaggle-pelican-arena",
       "date": "2026-11-19",
       "via": "Kaggle Benchmarks lists the published evaluation and its tasks."
+    },
+    {
+      "id": "kaggle-racing-arena",
+      "date": "2026-11-24",
+      "via": "Kaggle Arenas directory and public Kaggle Benchmarks leaderboard API."
     },
     {
       "id": "kaggle-sort-viz-arena",
@@ -25856,6 +25881,11 @@
       "via": "Other versions link on the Vibe Code Bench v1.1 page."
     },
     {
+      "id": "vals-vibe-code-bench-v1-1-1",
+      "date": "2026-11-24",
+      "via": "Vals AI sitemap and live vibe-code-v1-1-1 leaderboard page."
+    },
+    {
       "id": "vals-web-search-index",
       "date": "2026-11-01",
       "via": "Vals benchmarks list. Vals introduced it on 2026-07-23."
@@ -28431,28 +28461,10 @@
       "date": "2026-11-20"
     },
     {
-      "name": "Arena Agent Capability",
-      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_capability",
-      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
-      "date": "2026-11-21"
-    },
-    {
       "name": "Arena agent signal boards (bash reliability, steerability, tool hallucination and others)",
       "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
       "reason": "Metrics of Agent Arena sessions, not separate arenas.",
       "date": "2026-11-01"
-    },
-    {
-      "name": "Arena Agent Task Outcome",
-      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_task_outcome",
-      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
-      "date": "2026-11-21"
-    },
-    {
-      "name": "Arena Agent Tool Efficiency",
-      "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/main/agent_tool_efficiency",
-      "reason": "The existing record already carries this evaluation under benchmark id(s): agent-arena.",
-      "date": "2026-11-21"
     },
     {
       "name": "Arena factuality score and AutoEval",
