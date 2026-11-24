@@ -12,7 +12,7 @@ interface Evaluation {
   statistics: { avgReward: number | null };
   framework?: string;
   detailedMetrics?: { metricsStats?: Record<string,{ mean?: number }> };
-  metadata?: { time_ms?: number, model?: string, num_examples?: number, rollouts_per_example?: number, date?: string, sampling_args?: { reasoning_effort?: string } };
+  metadata?: { time_ms?: number, time?: number, model?: string, num_examples?: number, rollouts_per_example?: number, date?: string, sampling_args?: { reasoning_effort?: string }, usage?: { input_tokens?: number, output_tokens?: number } };
   model_name?: string;
   createdAt?: string;
   semanticVersion?: string;
@@ -37,8 +37,11 @@ export async function primeRows(url: string, environmentId: string, scale: numbe
         if (typeof stats.mean === 'number' && Number.isFinite(stats.mean)) metrics[key] = stats.mean;
       }
       if (m?.time_ms != null) metrics.runSeconds = m.time_ms / 1000;
+      else if (typeof m?.time === 'number' && Number.isFinite(m.time)) metrics.runSeconds = m.time;
+      if (typeof m?.usage?.input_tokens === 'number' && Number.isFinite(m.usage.input_tokens) && m.usage.input_tokens > 0) metrics.inputTokens = m.usage.input_tokens;
+      const tokens = typeof m?.usage?.output_tokens === 'number' && Number.isFinite(m.usage.output_tokens) && m.usage.output_tokens > 0 ? m.usage.output_tokens : undefined;
       rows.push({ model, harness:entry.framework || undefined, metrics, score: reward * scale, setting: settings.join(', ') || undefined, trials: m?.rollouts_per_example,
-        date: (m?.date || entry.createdAt)?.slice(0, 10), submitter: entry.team?.name || entry.team?.slug || entry.user?.name || entry.user?.slug,
+        tokens, date: (m?.date || entry.createdAt)?.slice(0, 10), submitter: entry.team?.name || entry.team?.slug || entry.user?.name || entry.user?.slug,
         link: url + '/' + entry._id });
     }
     skip += evaluations.length;

@@ -12,6 +12,12 @@ const board: Leaderboard = {
   feed,
   terms: "SquadStack encourages publication of results. Its dataset card assigns separate licenses to verdicts and metadata and prohibits redistribution of conversations. Review reuse of the public aggregate table before importing. robots.txt allows the feed path.",
   stats: { mandateMean: { name: 'Mean of four mandates', unit: '%', better: 'higher' }, ttftMedianMs: { name: 'Time to first token', unit: 'ms', better: 'lower' } },
+  chart: {
+    title: 'Latency vs quality',
+    x: { key: 'ttftMedianMs', label: 'TTFT P50', unit: 'ms', better: 'lower' },
+    y: { key: 'score', label: 'Overall pass rate', unit: '%', better: 'higher' },
+    note: 'Median time to first token against overall pass rate per system, with the Pareto frontier.',
+  },
   async fetch() {
     const header = ["#", "System", "Vendor", "Category", "Overall pass-rate", "95% CI", "Mean of 4 mandates", "Tied with #1", "Turns judged", "TTFT P50 (ms)"];
     const table = tables(await fetchText(feed)).map(table => table.map(row => row.map(cell => cell.text))).find(t => header.every((label, i) => t[0]?.[i] === label));
@@ -21,7 +27,7 @@ const board: Leaderboard = {
       const ci = range.match(/^([\d.]+)[–-]([\d.]+)$/);
       if (!ci || !score || !Number.isFinite(Number(score))) throw new Error('Missing conversational benchmark score');
       return { model: name.replace(/\s*★$/, ''), score: Number(score), low: Number(ci[1]), high: Number(ci[2]),
-        trials: Number(count.replaceAll(',', '')), open: category === 'Open weights' ? true : undefined,
+        trials: Number(count.replaceAll(',', '')), open: category === 'Open weights' ? true : category === 'Commercial API' || category === 'In-house' ? false : undefined,
         metrics: { mandateMean: Number(mandates), ttftMedianMs: Number(ttft.replaceAll(',', '')) } };
     });
   },

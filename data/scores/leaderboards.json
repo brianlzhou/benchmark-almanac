@@ -5683,11 +5683,9 @@
       "url": "https://trade-agent-aiel-hku.com/",
       "feed": "https://trade-agent-aiel-hku.com/public/runs/181/data",
       "terms": "HKU displays a copyright notice. I found no data reuse license on the leaderboard. The site returned 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 10,
-      "unmatched": [
-        "MAESTRO Multi Agent"
-      ],
+      "unmatched": [],
       "stats": {
         "capital_usd": {
           "name": "Starting capital",
@@ -15272,7 +15270,7 @@
       "url": "https://www.physera.ai/research/animation#leaderboard",
       "feed": "https://www.physera.ai/research/animation",
       "terms": "Physera allows the research page in robots.txt and gives no score reuse license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "reference": [
@@ -32733,7 +32731,7 @@
       "url": "https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard",
       "feed": "https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard/resolve/main/data/code_eval_board.csv",
       "terms": "Check the publisher’s terms at https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard Hugging Face allows crawling in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Artigenz-Coder-DS-6.7B",
@@ -60945,7 +60943,7 @@
       "feed": "https://raw.githubusercontent.com/open-mmlab/mmsegmentation/main/configs/deeplabv3/README.md",
       "terms": "MMSegmentation uses Apache 2.0. https://github.com/open-mmlab/mmsegmentation/blob/main/LICENSE",
       "host": "MMSegmentation",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BiSeNetV1 R-101-D32",
@@ -72626,7 +72624,7 @@
       "url": "https://oss-crs.openssf.org/crsbench/results",
       "feed": "https://oss-crs.openssf.org/crsbench/results (static HTML, Find / Fix / End-to-End table, End-to-End)",
       "terms": "Static OpenSSF project page; oss-crs.openssf.org has no robots.txt (404) and the OSS-CRS repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "stats": {
@@ -88889,7 +88887,7 @@
       "url": "https://github.com/QwenLM/E-CommerceBench#results",
       "feed": "https://raw.githubusercontent.com/QwenLM/E-CommerceBench/main/README.md (Table 1, mean final assets)",
       "terms": "README table in the QwenLM/E-CommerceBench repository, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [],
       "stats": {
@@ -119500,7 +119498,7 @@
       "url": "https://huggingface.co/spaces/galileo-ai/agent-leaderboard",
       "feed": "https://huggingface.co/spaces/galileo-ai/agent-leaderboard/resolve/main/results_v2.csv (Avg AC)",
       "terms": "CSV in the galileo-ai/agent-leaderboard Hugging Face Space, licensed Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 21,
       "unmatched": [
         "caller"
@@ -126731,7 +126729,7 @@
       "url": "https://app.primeintellect.ai/dashboard/environments/primeintellect/gpu-puzzles/evals",
       "feed": "https://app.primeintellect.ai/api/trpc/environments.getEvaluationsFromMongoDB?input=%7B%22json%22%3A%7B%22environmentId%22%3A%22zhlprpw1otth3d7dbui4dm15%22%2C%22skip%22%3A0%2C%22limit%22%3A100%7D%7D",
       "terms": "Prime Intellect allows environment pages and disallows /api in robots.txt. Its terms apply to the public evaluations.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": []
     },
@@ -136184,7 +136182,7 @@
       "feed": "https://snu-pi.github.io/HumanoidToolBench/",
       "terms": "The authors publish these results on their project page at https://snu-pi.github.io/HumanoidToolBench/.",
       "headline": "The headline is mean success across 18 simulation tasks, with 100 episodes per task.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "ACT",
@@ -136246,6 +136244,23 @@
         },
         "decoy, L2 Mobile, Break": {
           "name": "decoy, L2 Mobile, Break"
+        }
+      },
+      "stats": {
+        "runtimeMinutes": {
+          "name": "Longest episode runtime",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "costPerSuccess": {
+          "name": "Cost per success",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "totalCost": {
+          "name": "Total cost",
+          "unit": "usd",
+          "better": "lower"
         }
       }
     },
@@ -138097,7 +138112,7 @@
       "url": "https://benchmarkheaven.com/image-jev-bench",
       "feed": "https://benchmarkheaven.com/api/decision-results/imagejevbench/v0.3.0/json",
       "terms": "Benchmark Heaven, ImageJevBench v0.3.0, CC BY 4.0. Accessed 2026-11-20. The site allows these paths in robots.txt. Source SHA-256: 373ac5b62a7bc353e9de1a252e94df3a1545bc36e85f3ae23b58105b75dfde11.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "AutoJev-27B",
@@ -164253,9 +164268,34 @@
       "url": "https://math.science-bench.ai/benchmarks",
       "feed": "https://math.sciencebench.ai/benchmarks (Leipzig \"Model scores\" table, Correct Answer)",
       "terms": "Server-rendered public page; the site serves no robots.txt (404) and publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "failures": {
+          "name": "Failures",
+          "unit": "count",
+          "better": "lower",
+          "note": "Runs that returned no answer due to an API error or timeout."
+        },
+        "totalTokens": {
+          "name": "Total tokens per problem",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Average total tokens per problem across the 100 problems."
+        },
+        "inputTokens": {
+          "name": "Input tokens per problem",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Average input tokens per problem across the 100 problems."
+        },
+        "attempts": {
+          "name": "Solver attempts",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "letta-leaderboard": {
       "url": "https://docs.letta.com/leaderboard",
@@ -167344,7 +167384,7 @@
       "url": "https://github.com/gbstox/agronomy_llm_benchmarking#leaderboard",
       "feed": "https://raw.githubusercontent.com/gbstox/agronomy_llm_benchmarking/main/README.md",
       "terms": "The repository metadata lists no license. https://github.com/gbstox/agronomy_llm_benchmarking The raw file host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 97,
       "unmatched": [
         "bytedance-seed/seed-1.6-flash",
@@ -167408,7 +167448,7 @@
       "url": "https://github.com/gbstox/agronomy_llm_benchmarking/blob/14b962a2874d665758d85758b4a0c23a976b4a7b/README.md",
       "feed": "https://raw.githubusercontent.com/gbstox/agronomy_llm_benchmarking/14b962a2874d665758d85758b4a0c23a976b4a7b/README.md",
       "terms": "The repository metadata lists no license. https://github.com/gbstox/agronomy_llm_benchmarking The raw file host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 38,
       "unmatched": [
         "bytedance-seed/seed-1.6-flash"
@@ -167751,7 +167791,7 @@
       "url": "https://chess.louisguichard.fr/leaderboard",
       "feed": "https://chess.louisguichard.fr/leaderboard",
       "terms": "The robots file includes content signals. The repository uses the MIT license. The scoreboard gives no separate terms for its scores. https://github.com/louisguichard/llm-chess-arena/blob/main/LICENSE.txt",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 47,
       "unmatched": [],
       "stats": {
@@ -186623,7 +186663,7 @@
       "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
       "feed": "https://metr.org/assets/images/q4-2026-capability-update/8835b7b420aed38c.json",
       "terms": "METR links this chart JSON from its capability update report. Results are credited to METR.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": []
     },
@@ -187216,49 +187256,49 @@
           "name": "Song Lyrics"
         },
         "Song Lyrics: Barnalög": {
-          "name": "Song Lyrics: Barnalög"
+          "name": "Song Lyrics: Children’s Songs"
         },
         "Song Lyrics: Dægurlög": {
-          "name": "Song Lyrics: Dægurlög"
+          "name": "Song Lyrics: Popular Songs"
         },
         "Song Lyrics: Eurovision": {
           "name": "Song Lyrics: Eurovision"
         },
         "Song Lyrics: Jólalög": {
-          "name": "Song Lyrics: Jólalög"
+          "name": "Song Lyrics: Christmas Songs"
         },
         "Song Lyrics: Leikhús": {
-          "name": "Song Lyrics: Leikhús"
+          "name": "Song Lyrics: Theater"
         },
         "Song Lyrics: Popplög": {
-          "name": "Song Lyrics: Popplög"
+          "name": "Song Lyrics: Pop"
         },
         "Song Lyrics: Rapp": {
-          "name": "Song Lyrics: Rapp"
+          "name": "Song Lyrics: Rap"
         },
         "Song Lyrics: Sjómannalög": {
-          "name": "Song Lyrics: Sjómannalög"
+          "name": "Song Lyrics: Sailor Songs"
         },
         "Song Lyrics: Trúarleg lög": {
-          "name": "Song Lyrics: Trúarleg lög"
+          "name": "Song Lyrics: Religious Songs"
         },
         "Song Lyrics: Ættjarðarlög/þjóðvísur": {
-          "name": "Song Lyrics: Ættjarðarlög/þjóðvísur"
+          "name": "Song Lyrics: National Songs and Ballads"
         },
         "Song Lyrics: Þungarokk": {
-          "name": "Song Lyrics: Þungarokk"
+          "name": "Song Lyrics: Heavy Metal"
         },
         "Famous Phrases": {
           "name": "Famous Phrases"
         },
         "Famous Phrases: Almennt": {
-          "name": "Famous Phrases: Almennt"
+          "name": "Famous Phrases: General"
         },
         "Famous Phrases: Kvikmyndir": {
-          "name": "Famous Phrases: Kvikmyndir"
+          "name": "Famous Phrases: Films"
         },
         "Famous Phrases: Þættir": {
-          "name": "Famous Phrases: Þættir"
+          "name": "Famous Phrases: Television"
         }
       }
     },
@@ -187277,25 +187317,25 @@
           "name": "Textile Terms"
         },
         "Textile Terms: abbreviation": {
-          "name": "Textile Terms: abbreviation"
+          "name": "Textile Terms: Abbreviation"
         },
         "Textile Terms: meaning": {
-          "name": "Textile Terms: meaning"
+          "name": "Textile Terms: Meaning"
         },
         "Flora & Fauna": {
-          "name": "Flora & Fauna"
+          "name": "Flora and Fauna"
         },
         "Flora & Fauna: Fuglar": {
-          "name": "Flora & Fauna: Fuglar"
+          "name": "Flora and Fauna: Birds"
         },
         "Flora & Fauna: Gróður": {
-          "name": "Flora & Fauna: Gróður"
+          "name": "Flora and Fauna: Plants"
         },
         "Flora & Fauna: Sjávardýr": {
-          "name": "Flora & Fauna: Sjávardýr"
+          "name": "Flora and Fauna: Marine Animals"
         },
         "Flora & Fauna: Smádýr": {
-          "name": "Flora & Fauna: Smádýr"
+          "name": "Flora and Fauna: Small Animals"
         }
       }
     },
@@ -243499,7 +243539,19 @@
       "headline": "The original leaderboard runs each scored four examples from the 50-example environment.",
       "retrieved": "2026-11-24",
       "rows": 5,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "runSeconds": {
+          "name": "Run time",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
     },
     "physicalrealismbench-u": {
       "url": "https://reka.ai/labs/research/physicalrealismbench-attributable-physical-realism-evaluation-for-video-world-models",
@@ -278506,11 +278558,27 @@
       "url": "https://speko.com/benchmarks/llm",
       "feed": "https://speko.com/benchmarks/data.json",
       "terms": "Speko publishes its benchmark JSON under CC BY 4.0. Credit Speko and identify changes. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [
         "Mercury Voice"
       ],
+      "chart": {
+        "title": "Task completion vs time to first token",
+        "x": {
+          "key": "ttft",
+          "label": "TTFT p50",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Task done",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Task completion against median time to first token across voice agent calls."
+      },
       "stats": {
         "stall": {
           "name": "Stall rate",
@@ -278553,8 +278621,8 @@
           "better": "lower"
         },
         "cost": {
-          "name": "Cost per call",
-          "unit": "usd",
+          "name": "Cost per million tokens",
+          "unit": "usd-per-mtok",
           "better": "lower"
         },
         "consistency": {
@@ -278603,7 +278671,7 @@
       "url": "https://speko.com/blog/gpt-realtime-2-1-mini-fastest",
       "feed": "https://speko.com/blog/gpt-realtime-2-1-mini-fastest",
       "terms": "The publisher does not specify separate score reuse terms in the supplied source. The feed host publishes robots.txt at https://speko.com/robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Inworld Realtime",
@@ -279826,12 +279894,28 @@
       "url": "https://huggingface.co/datasets/Squadstack/conversational-llm-benchmark#results",
       "feed": "https://huggingface.co/datasets/Squadstack/conversational-llm-benchmark#results",
       "terms": "SquadStack encourages publication of results. Its dataset card assigns separate licenses to verdicts and metadata and prohibits redistribution of conversations. Review reuse of the public aggregate table before importing. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Gnani Evon V3.3 30B A3B",
         "Maya V1"
       ],
+      "chart": {
+        "title": "Latency vs quality",
+        "x": {
+          "key": "ttftMedianMs",
+          "label": "TTFT P50",
+          "unit": "ms",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Median time to first token against overall pass rate per system, with the Pareto frontier."
+      },
       "stats": {
         "mandateMean": {
           "name": "Mean of four mandates",
@@ -288682,27 +288766,27 @@
           "group": "Language"
         },
         "resolvedClassOnly": {
-          "name": "class only",
+          "name": "Single class",
           "group": "Patch complexity"
         },
         "resolvedFuncOnly": {
-          "name": "function only",
+          "name": "Single function",
           "group": "Patch complexity"
         },
         "resolvedMixed": {
-          "name": "mixed",
+          "name": "Mixed class and function",
           "group": "Patch complexity"
         },
         "resolvedNone": {
-          "name": "none",
+          "name": "No class or function",
           "group": "Patch complexity"
         },
         "resolvedSingleClass": {
-          "name": "single class",
+          "name": "Single class",
           "group": "Patch complexity"
         },
         "resolvedSingleFunc": {
-          "name": "single function",
+          "name": "Single function",
           "group": "Patch complexity"
         }
       },
@@ -316826,7 +316910,7 @@
       "url": "https://parallel.ai/products/findall",
       "feed": "https://parallel.ai/products/findall.md",
       "terms": "Parallel publishes this comparison and its WISER-FindAll methodology on the public product page. https://parallel.ai/products/findall",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Exa",
@@ -316834,9 +316918,26 @@
         "FindAll Core",
         "FindAll Pro"
       ],
+      "chart": {
+        "title": "Recall vs cost",
+        "x": {
+          "key": "cpm",
+          "label": "Cost per 1,000 requests (CPM)",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Recall against cost per 1,000 requests on a log scale."
+      },
       "stats": {
         "cpm": {
-          "name": "Cost per million results",
+          "name": "Cost per thousand requests",
           "unit": "usd",
           "better": "lower"
         }
