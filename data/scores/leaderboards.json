@@ -216648,7 +216648,7 @@
       "url": "https://okvqa.allenai.org/leaderboard.html",
       "feed": "https://okvqa.allenai.org/leaderboard.html",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BAN",
@@ -217785,7 +217785,7 @@
       "feed": "https://www.sota2.com/research/sota/action-sequence-generation-on-omniact-test",
       "terms": "SOTA2 credits the underlying sources and lists third-party rights at https://www.sota2.com/mcp-terms.",
       "host": "SOTA2",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GPT-4 (snapshot unspecified)",
@@ -243994,7 +243994,7 @@
       "url": "https://palmx.dlnlp.ai/leaderboard.html",
       "feed": "https://palmx.dlnlp.ai/leaderboard.html",
       "terms": "The host has no robots file. The Islamic Culture table ranks 6 teams. The site states all rights reserved. https://palmx.dlnlp.ai/leaderboard.html",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AYA Team",
@@ -246795,7 +246795,7 @@
       "url": "https://eval.ai/web/challenges/challenge-page/2091/leaderboard",
       "feed": "https://eval.ai/api/jobs/challenge_phase_split/5171/leaderboard/?page_size=500 (Test Phase, Top-1)",
       "terms": "EvalAI's public challenge API needs no login; eval.ai serves no robots.txt rules and the open-source EvalAI platform states no reuse limits for public leaderboards.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "32-token-vllava",
@@ -246839,7 +246839,8 @@
         "vllama2-m+v-o-all",
         "zesen cheng",
         "zyw241"
-      ]
+      ],
+      "verified": "verified by host"
     },
     "perceptionbench-moonshot": {
       "url": "https://github.com/MoonshotAI/PerceptionBench#leaderboard",
@@ -258405,7 +258406,7 @@
       "url": "https://sites.google.com/view/qias2025/leaderboards",
       "feed": "https://sites.google.com/view/qias2025/leaderboards",
       "terms": "Google Sites permits this results path. The knowledge table ranks ten team systems. The organizers reserve all rights on the leaderboard page. https://sites.google.com/view/qias2025/leaderboards",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Athar",
@@ -260638,7 +260639,7 @@
       "url": "https://www.realevals.ai",
       "feed": "https://www.realevals.ai/api/getVerifiedModelData",
       "terms": "Public maker leaderboard API; robots.txt returns 404 and specifies no restrictions. Attribute REAL by AGI, Inc.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Gemini 2.5 pro (snapshot unspecified)",
@@ -260646,7 +260647,42 @@
         "OpenAI CUA (backbone unspecified)",
         "amazon/nova-act-v1.0"
       ],
-      "verified": "marked verified by REAL"
+      "verified": "marked verified by REAL",
+      "parts": {
+        "staynb": {
+          "name": "Staynb"
+        },
+        "omnizon": {
+          "name": "Omnizon"
+        },
+        "dashdish": {
+          "name": "DashDish"
+        },
+        "gocalendar": {
+          "name": "GoCalendar"
+        },
+        "gomail": {
+          "name": "GoMail"
+        },
+        "opendining": {
+          "name": "OpenDining"
+        },
+        "networkin": {
+          "name": "NetworkIn"
+        },
+        "udriver": {
+          "name": "Udriver"
+        },
+        "flyUnified": {
+          "name": "Fly Unified"
+        },
+        "topwork": {
+          "name": "TopWork"
+        },
+        "zilloft": {
+          "name": "Zilloft"
+        }
+      }
     },
     "real-pocqi": {
       "url": "https://arxiv.org/html/2606.28960",
@@ -263499,7 +263535,7 @@
       "url": "https://evalplus.github.io/repoqa.html",
       "feed": "https://evalplus.github.io/results/repoqa/COMBINED-RESULTS.json (all, threshold 0.8)",
       "terms": "Static JSON on the EvalPlus GitHub Pages site; the repoqa repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [
         "CodeLlama-13b-Instruct-hf",
@@ -263512,7 +263548,24 @@
         "codegemma-7b-it",
         "deepseek-coder-33b-instruct",
         "deepseek-coder-6.7b-instruct"
-      ]
+      ],
+      "parts": {
+        "python": {
+          "name": "Python"
+        },
+        "cpp": {
+          "name": "C++"
+        },
+        "java": {
+          "name": "Java"
+        },
+        "typescript": {
+          "name": "TypeScript"
+        },
+        "rust": {
+          "name": "Rust"
+        }
+      }
     },
     "reportbench": {
       "url": "https://github.com/ByteDance-BandAI/ReportBench#evaluation-results",
@@ -274482,9 +274535,38 @@
       "url": "https://unipat.ai/blog/ScienceVision#leaderboard",
       "feed": "https://unipat.ai/static/sciencevision/data/benchmark.js (leaderboard.models, cc-3d mean)",
       "terms": "Static data script on unipat.ai; robots.txt allows all paths and the site publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "architecture": {
+          "name": "Architecture"
+        },
+        "biology": {
+          "name": "Biology"
+        },
+        "chemistry": {
+          "name": "Chemistry"
+        },
+        "mechanicalCad": {
+          "name": "Mechanical CAD"
+        },
+        "medical": {
+          "name": "Medical imaging"
+        }
+      },
+      "stats": {
+        "ccMcp": {
+          "name": "Code and MCP setting",
+          "unit": "score",
+          "better": "higher"
+        },
+        "cc2d6": {
+          "name": "2D multi-view setting",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "scienceworld": {
       "url": "https://aclanthology.org/2022.emnlp-main.775/",
@@ -283198,7 +283280,7 @@
       "feed": "https://www.sota2.com/research/sota/semantic-correspondence-on-spair-71k",
       "terms": "SOTA2 publishes this leaderboard at https://www.sota2.com/research/sota/semantic-correspondence-on-spair-71k.",
       "host": "SOTA2",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "A2Net",
@@ -286628,7 +286710,7 @@
       "url": "https://www.kaggle.com/experimental/sae",
       "feed": "https://www.kaggle.com/api/v1/agentExam/TopAgents",
       "terms": "Kaggle's public leaderboard endpoint. Kaggle's terms of use apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "antigravity-omni-sca",
@@ -299349,12 +299431,34 @@
       "url": "https://teaching.monster/app/leaderboard/competition/6",
       "feed": "https://teaching.monster/competitions/6/leaderboard",
       "terms": "The authors do not specify separate terms for leaderboard scores on https://teaching.monster/app/leaderboard/competition/6",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Abominable Intelligence",
         "tsunumon"
-      ]
+      ],
+      "stats": {
+        "accuracy": {
+          "name": "Accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "logic": {
+          "name": "Logic",
+          "unit": "score",
+          "better": "higher"
+        },
+        "adaptability": {
+          "name": "Adaptability",
+          "unit": "score",
+          "better": "higher"
+        },
+        "engagement": {
+          "name": "Engagement",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "teachobs": {
       "url": "https://arxiv.org/html/2605.30673",
@@ -320953,7 +321057,7 @@
       "feed": "https://scholarcompass.net/en/tasks/spoken-language-identification/benchmarks/voxlingua107",
       "terms": "Scholar Compass credits the linked papers on its public leaderboard. https://scholarcompass.net/",
       "host": "Scholar Compass",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GeoLID (VL107-only)",
@@ -322523,7 +322627,7 @@
       "url": "https://webarena.dev/og/",
       "feed": "https://docs.google.com/spreadsheets/d/1M801lEpBbKSNwP-vDBkC_pF7LdyGU1f_ufZb_NWNBZQ/htmlview/sheet?headers=true&gid=0",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "A3-Qwen3.5-9B",

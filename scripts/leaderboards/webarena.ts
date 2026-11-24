@@ -29,7 +29,7 @@ const board: Leaderboard = {
     const month = cell('a')?.text ?? '';
     const size = cell('Model Size (billion)')?.text ?? '';
     const mark = cell('Open?')?.text;
-    const href = cell('Traj')?.html.match(/href="([^"]+)"/)?.[1];
+    const href = cell('Traj')?.html.match(/href="([^"]+)"/)?.[1] ?? cell('Result Source')?.html.match(/href="([^"]+)"/)?.[1];
     const url = href && /^https?:/.test(href) ? new URL(text(href)) : undefined;
     const link = url?.hostname === 'www.google.com' && url.pathname === '/url' ? url.searchParams.get('q') : url?.href;
     rows.push({

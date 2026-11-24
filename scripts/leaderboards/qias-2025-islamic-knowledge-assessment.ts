@@ -17,7 +17,7 @@ const board: Leaderboard = {
     return table.slice(1).map(c => {
       const model = c[1].text, value = c[2].text;
       if (!model || !value || !Number.isFinite(Number(value))) throw new Error('Invalid knowledge score');
-      return { model, score: Number(value) * 100, submitter: c[3].text };
+      return { model, score: Number(value) * 100, submitter: model, agentOrg: c[3].text || undefined };
     });
   },
 };

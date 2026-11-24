@@ -11,13 +11,19 @@ const board: Leaderboard = {
   url: "https://teaching.monster/app/leaderboard/competition/6",
   feed: FEED,
   terms: "The authors do not specify separate terms for leaderboard scores on https://teaching.monster/app/leaderboard/competition/6",
+  stats: {
+    accuracy: { name: 'Accuracy', unit: 'score', better: 'higher' },
+    logic: { name: 'Logic', unit: 'score', better: 'higher' },
+    adaptability: { name: 'Adaptability', unit: 'score', better: 'higher' },
+    engagement: { name: 'Engagement', unit: 'score', better: 'higher' },
+  },
   async fetch() {
     const data = await fetchJson<{ competition_id: number; primary_metric: string; rankings: Entry[] }>(FEED);
     if (data.competition_id !== 6 || data.primary_metric !== 'ai_total_score' || data.rankings.length < 2)
       throw new Error('Teaching Monster competition or ranking changed');
     return data.rankings.map(r => {
       const metrics = { accuracy: r.ai_accuracy, logic: r.ai_logic, adaptability: r.ai_adaptability,
-        engagement: r.ai_engagement, audited: r.ai_audited_count };
+        engagement: r.ai_engagement };
       if (!r.model_name || ![r.ai_total_score, ...Object.values(metrics)].every(Number.isFinite)) throw new Error('Incomplete AI audit');
       return { model: r.model_name, score: r.ai_total_score, submitter: r.competitor_display, metrics };
     });
