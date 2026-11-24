@@ -51,14 +51,14 @@ export async function lcbRows(start: string, end: string): Promise<LeaderboardRo
     const problems = data.performances.filter((p) => p.model === m.model_repr && p.date >= from && p.date < to);
     const scores = problems.map((p) => p['pass@1']);
     if (!scores.length) continue;
-    const metrics: Record<string, number> = { problems: scores.length };
+    const metrics: Record<string, number> = {};
     for (const key of Object.keys(LCB_PARTS)) {
       const subset = problems.filter((p) => p.difficulty === key || p.platform === key);
       if (subset.length) metrics[key] = subset.reduce((sum, p) => sum + p['pass@1'], 0) / subset.length;
     }
     rows.push({
       metrics,
-
+      link: m.link && /^https?:\/\//.test(m.link.trim()) ? m.link.trim() : undefined,
       model: m.model_repr.replace(/\(Med\)$/, '(Medium)'),
       score: Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1)),
     });
@@ -69,7 +69,7 @@ export async function lcbRows(start: string, end: string): Promise<LeaderboardRo
 
 const board: Leaderboard = {
   benchmark: 'livecodebench-v6',
-  parts: LCB_PARTS,
+  parts: { easy: LCB_PARTS.easy, medium: LCB_PARTS.medium, hard: LCB_PARTS.hard, leetcode: LCB_PARTS.leetcode, atcoder: LCB_PARTS.atcoder },
   url: LCB_PAGE,
   feed: `${LCB_FEED} (problems from 2024-08-01 to 2025-05-01)`,
   terms: LCB_TERMS,

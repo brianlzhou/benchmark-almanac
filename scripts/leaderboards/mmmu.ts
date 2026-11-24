@@ -80,7 +80,7 @@ export async function mmmuRows(column: 'validation' | 'pro'): Promise<Leaderboar
     rows.push({ ...splitMmmuName(r.info.name), score, date: r.info.date || undefined,
       open: r.info.type === 'open_source' ? true : r.info.type === 'proprietary' ? false : undefined,
       params: size && !activeSize ? Number(size[1]) : undefined,
-
+      link: r.info.link && /^https?:\/\//.test(r.info.link.trim()) ? r.info.link.trim() : undefined,
       submitter: r[column]?.source === 'author' ? 'Model authors' : undefined,
       metrics });
   }
@@ -106,7 +106,11 @@ export const MMMU_ALIASES: Record<string, string> = {
 const board: Leaderboard = {
   benchmark: 'mmmu',
   stats: { activeParams: { name: 'Active parameters', unit: 'billions' } },
-  parts: Object.fromEntries(Object.entries(disciplines).map(([key, name]) => [key, { name, group: 'Discipline' }])),
+  parts: {
+    ...Object.fromEntries(Object.entries(disciplines).map(([key, name]) => [key, { name, group: 'Discipline' }])),
+    test_overall: { name: 'Overall', group: 'Test split' },
+    ...Object.fromEntries(Object.entries(disciplines).map(([key, name]) => [`test_${key}`, { name, group: 'Test split' }])),
+  },
   url: 'https://mmmu-benchmark.github.io/#leaderboard',
   feed: `${MMMU_FEED} (validation.overall)`,
   terms: MMMU_TERMS,

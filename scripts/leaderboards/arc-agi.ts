@@ -9,6 +9,7 @@ const V1 = 'v1' as 'v2';
 
 const board: Leaderboard = {
   benchmark: 'arc-agi',
+  harnesses: 'system',
   url: 'https://arcprize.org/leaderboard',
   feed: arcFeed(V1),
   terms: 'Public JSON file the ARC Prize leaderboard page loads; robots.txt allows all paths.',
