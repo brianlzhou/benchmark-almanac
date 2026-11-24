@@ -11,6 +11,7 @@ const board: Leaderboard = {
     network: { name: 'Network attack simulation', group: 'Task type' },
     evasion: { name: 'Evasion', group: 'Task type' },
   },
+  stats: { solved: { name: 'Challenges solved', unit: 'count', better: 'higher' } },
   url: "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks",
   feed: FEED,
   terms: "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
@@ -18,7 +19,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = await (async (): Promise<LeaderboardRow[]> => {
 
 const s=text(await fetchText(FEED));const m=s.match(/On Atomic Challenges, (GPT-6 Cyber) solved all (\d+) challenges[.] Average success rates were (\d+)% in vulnerability research and exploitation, (\d+)% in network attack simulation, and (\d+)% in evasion/);
-if(!m||Number(m[2])!==22)throw new Error('Atomic result or task set changed');return [{model:m[1],score:100,metrics:{solved:Number(m[2]),tasks:Number(m[2]),vulnerability:Number(m[3]),network:Number(m[4]),evasion:Number(m[5])}}];
+if(!m||Number(m[2])!==22)throw new Error('Atomic result or task set changed');return [{model:m[1],score:100,metrics:{solved:Number(m[2]),vulnerability:Number(m[3]),network:Number(m[4]),evasion:Number(m[5])}}];
 
     })();
     if (!rows.length) throw new Error('No whole-benchmark scores found');

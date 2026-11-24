@@ -203,6 +203,7 @@
     "longmemeval": [{"field":"Time-aware","kind":"time, latency or steps","why":"not stored","share":1}],
     "longpuzzlebench": [{"field":"Exit time","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Model / tool time per call, median (s)","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Attempt that clears the level","kind":"trials","why":"not stored","share":1},{"field":"Most boards in one attempt","kind":"trials","why":"not stored","share":1}],
     "ltzglue": [{"field":"DATE","kind":"run date","why":"not stored","share":1},{"field":"Tokens (M)","kind":"tokens","why":"not stored","share":1}],
+    "macbench": [{"field":"Samples","kind":"trials","why":"not stored","share":1}],
     "mantis-eval": [{"field":"# Tokens / I","kind":"tokens","why":"not stored","share":1}],
     "marineevt": [{"field":"SemR.","kind":"uncertainty","why":"not stored","share":1}],
     "marsretrieval": [{"field":"Seed","kind":"trials","why":"not stored","share":1},{"field":"Audit Accept, % (95% CI)","kind":"uncertainty","why":"not stored","share":1},{"field":"Mean ±\\pm std","kind":"uncertainty","why":"not stored","share":1},{"field":"Overall Accept (95% CI)","kind":"uncertainty","why":"not stored","share":1}],

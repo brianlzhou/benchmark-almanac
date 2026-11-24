@@ -12,6 +12,15 @@ const board: Leaderboard = {
   benchmark: 'mimic-cxr-report-generation', url: feed, feed, host: 'SOTA2 Research',
   headline: 'The all-views leaderboard reports RadGraph F1 for the test cohort named in each setting.',
   terms: 'SOTA2 publishes the table and its paper links at https://www.sota2.com/research/sota/medical-report-generation-on-mimic-cxr-all-views-test.',
+  stats: {
+    'BLEU-4': { name: 'BLEU-4', unit: '%', better: 'higher' },
+    'CheXbert mF1-14': { name: 'CheXbert micro F1 (14 labels)', unit: '%', better: 'higher' },
+    'CheXbert mF1-5': { name: 'CheXbert micro F1 (5 labels)', unit: '%', better: 'higher' },
+    'CheXbert eF1-14': { name: 'CheXbert example F1 (14 labels)', unit: '%', better: 'higher' },
+    'Rad-Graph F1': { name: 'RadGraph F1', unit: '%', better: 'higher' },
+    'BLEU-1': { name: 'BLEU-1', unit: '%', better: 'higher' },
+    'ROUGE-L': { name: 'ROUGE-L', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0]?.map(c => c.text).join('|') === ['Method', 'Links', ...measures].join('|'));
     if (!t) throw new Error('Missing MIMIC-CXR all-views metrics');

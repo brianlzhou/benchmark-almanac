@@ -12,6 +12,7 @@ const board: Leaderboard = {
  url: "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/",
  feed: FEED,
  terms: "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
+ stats: { meanAbsoluteDistance: { name: 'Mean absolute distance', unit: 'seconds', better: 'lower' } },
 
  async fetch(): Promise<LeaderboardRow[]> {
 

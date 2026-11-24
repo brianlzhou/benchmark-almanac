@@ -24786,7 +24786,7 @@
       "url": "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks",
       "feed": "https://www.irregular.com/research/assessing-gpt-6-cyber-against-offensive-security-benchmarks",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [],
       "parts": {
@@ -24801,6 +24801,13 @@
         "evasion": {
           "name": "Evasion",
           "group": "Task type"
+        }
+      },
+      "stats": {
+        "solved": {
+          "name": "Challenges solved",
+          "unit": "count",
+          "better": "higher"
         }
       },
       "measures": {
@@ -100447,9 +100454,20 @@
       "url": "https://blobfish.ai/benchmarks/factorybench-100",
       "feed": "https://blobfish.ai/benchmark-reports/first-party-model-runs.json",
       "terms": "Public first-party model run report linked from the Blobfish AI leaderboard.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "averageToolCalls": {
+          "name": "Average tool calls per task",
+          "unit": "count"
+        },
+        "strictPassRate": {
+          "name": "Strict pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "factorybench-forgis": {
       "url": "https://www.forgis.com/papers/factorybench.html",
@@ -131087,9 +131105,16 @@
       "url": "https://github.com/Aarav500/rhob/tree/a2c73417a79be65b802b2fbe62dc6fac03e9c3de#results",
       "feed": "https://raw.githubusercontent.com/Aarav500/rhob/a2c73417a79be65b802b2fbe62dc6fac03e9c3de/README.md",
       "terms": "The implementation uses Apache 2.0 with third-party exceptions. https://github.com/Aarav500/rhob/blob/a2c73417a79be65b802b2fbe62dc6fac03e9c3de/README.md#license",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "hacked": {
+          "name": "Hacked tasks",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "hackbench-meta": {
       "url": "https://arxiv.org/html/2610.38882",
@@ -139160,7 +139185,7 @@
       "url": "https://rrc.cvc.uab.es/?ch=28&com=evaluation",
       "feed": "https://zenodo.org/records/11549943/files/evaluations.tar.bz2?download=1",
       "terms": "The organizers release their evaluation archive under CC BY 4.0. https://zenodo.org/records/11549943",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Baseline TESTR Checkpoint",
@@ -139190,6 +139215,228 @@
         },
         "t4f2": {
           "name": "Phrase Detection and Recognition: IGN (French)"
+        }
+      },
+      "stats": {
+        "t1f1_quality": {
+          "name": "Word Detection (Rumsey (General)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f1_fscore": {
+          "name": "Word Detection (Rumsey (General)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f1_precision": {
+          "name": "Word Detection (Rumsey (General)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f1_recall": {
+          "name": "Word Detection (Rumsey (General)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f1_tightness": {
+          "name": "Word Detection (Rumsey (General)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f2_quality": {
+          "name": "Word Detection (IGN (French)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f2_fscore": {
+          "name": "Word Detection (IGN (French)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f2_precision": {
+          "name": "Word Detection (IGN (French)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f2_recall": {
+          "name": "Word Detection (IGN (French)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t1f2_tightness": {
+          "name": "Word Detection (IGN (French)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f1_quality": {
+          "name": "Phrase Detection (Rumsey (General)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f1_fscore": {
+          "name": "Phrase Detection (Rumsey (General)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f1_precision": {
+          "name": "Phrase Detection (Rumsey (General)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f1_recall": {
+          "name": "Phrase Detection (Rumsey (General)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f1_tightness": {
+          "name": "Phrase Detection (Rumsey (General)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f2_quality": {
+          "name": "Phrase Detection (IGN (French)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f2_fscore": {
+          "name": "Phrase Detection (IGN (French)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f2_precision": {
+          "name": "Phrase Detection (IGN (French)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f2_recall": {
+          "name": "Phrase Detection (IGN (French)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t2f2_tightness": {
+          "name": "Phrase Detection (IGN (French)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f1_quality": {
+          "name": "Word Detection and Recognition (Rumsey (General)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f1_fscore": {
+          "name": "Word Detection and Recognition (Rumsey (General)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f1_precision": {
+          "name": "Word Detection and Recognition (Rumsey (General)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f1_recall": {
+          "name": "Word Detection and Recognition (Rumsey (General)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f1_tightness": {
+          "name": "Word Detection and Recognition (Rumsey (General)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f2_quality": {
+          "name": "Word Detection and Recognition (IGN (French)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f2_fscore": {
+          "name": "Word Detection and Recognition (IGN (French)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f2_precision": {
+          "name": "Word Detection and Recognition (IGN (French)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f2_recall": {
+          "name": "Word Detection and Recognition (IGN (French)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t3f2_tightness": {
+          "name": "Word Detection and Recognition (IGN (French)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_quality": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_fscore": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_precision": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_recall": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_tightness": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_char_accuracy": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) character accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f1_char_quality": {
+          "name": "Phrase Detection and Recognition (Rumsey (General)) character quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_quality": {
+          "name": "Phrase Detection and Recognition (IGN (French)) quality",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_fscore": {
+          "name": "Phrase Detection and Recognition (IGN (French)) F-score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_precision": {
+          "name": "Phrase Detection and Recognition (IGN (French)) precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_recall": {
+          "name": "Phrase Detection and Recognition (IGN (French)) recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_tightness": {
+          "name": "Phrase Detection and Recognition (IGN (French)) tightness",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_char_accuracy": {
+          "name": "Phrase Detection and Recognition (IGN (French)) character accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "t4f2_char_quality": {
+          "name": "Phrase Detection and Recognition (IGN (French)) character quality",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -151964,9 +152211,16 @@
       "url": "https://ukgovernmentbeis.github.io/inspect_evals/evals/gdm_intercode_ctf/index.html",
       "feed": "https://ukgovernmentbeis.github.io/inspect_evals/evals/gdm_intercode_ctf/index.html",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "time": {
+          "name": "Run duration",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "internbootcamp": {
       "url": "https://arxiv.org/html/2508.08636",
@@ -159507,19 +159761,42 @@
       "url": "https://www.upstage.ai/blog/en/solar-pro-3-0323",
       "feed": "https://www.upstage.ai/blog/en/solar-pro-3-0323",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "solar-pro2-251215"
-      ]
+      ],
+      "stats": {
+        "activeParams": {
+          "name": "Active parameters",
+          "unit": "billions"
+        }
+      }
     },
     "ko-gdpval-upstage": {
       "url": "https://www.upstage.ai/blog/en/solar-pro-4",
       "feed": "https://www.upstage.ai/blog/en/solar-pro-4",
       "terms": "Public Upstage launch article, with benchmark results attributed to Upstage and subject to site terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "priceIn": {
+          "name": "Input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceOut": {
+          "name": "Output price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        },
+        "priceCachedIn": {
+          "name": "Cached input price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
+        }
+      }
     },
     "ko-ifeval-upstage": {
       "url": "https://huggingface.co/spaces/upstage/open-ko-llm-leaderboard",
@@ -167860,7 +168137,7 @@
       "url": "https://github.com/CLUEbenchmark/LGEB",
       "feed": "https://raw.githubusercontent.com/CLUEbenchmark/LGEB/HEAD/README.md",
       "terms": "The CLUE team publishes the results with attribution to UniLM. https://github.com/CLUEbenchmark/LGEB",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Transformer",
@@ -167872,6 +168149,28 @@
         },
         "squad": {
           "name": "SQuAD BLEU-4"
+        }
+      },
+      "stats": {
+        "gigawordRouge2": {
+          "name": "Gigaword ROUGE-2",
+          "unit": "score",
+          "better": "higher"
+        },
+        "gigawordRougeL": {
+          "name": "Gigaword ROUGE-L",
+          "unit": "score",
+          "better": "higher"
+        },
+        "squadMeteor": {
+          "name": "SQuAD METEOR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "squadRougeL": {
+          "name": "SQuAD ROUGE-L",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -177431,9 +177730,16 @@
       "url": "https://ukgovernmentbeis.github.io/inspect_evals/evals/macbench/index.html",
       "feed": "https://ukgovernmentbeis.github.io/inspect_evals/evals/macbench/index.html",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "originalAccuracy": {
+          "name": "Original MaCBench accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "machiavelli": {
       "url": "https://aypan17.github.io/machiavelli/",
@@ -189523,7 +189829,7 @@
       "url": "https://raw.githubusercontent.com/henghuiding/MeViS/main/README.md",
       "feed": "https://raw.githubusercontent.com/henghuiding/MeViS/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Swin-Tiny & RoBERTa"
@@ -189536,6 +189842,10 @@
         "F": {
           "name": "Contour accuracy",
           "group": "Dimension"
+        },
+        "val": {
+          "name": "Validation split (J&F)",
+          "group": "Split"
         }
       }
     },
@@ -191341,12 +191651,49 @@
       "terms": "SOTA2 publishes the table and its paper links at https://www.sota2.com/research/sota/medical-report-generation-on-mimic-cxr-all-views-test.",
       "host": "SOTA2 Research",
       "headline": "The all-views leaderboard reports RadGraph F1 for the test cohort named in each setting.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "M4CXR",
         "Med-PaLM M 84B"
-      ]
+      ],
+      "stats": {
+        "BLEU-4": {
+          "name": "BLEU-4",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CheXbert mF1-14": {
+          "name": "CheXbert micro F1 (14 labels)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CheXbert mF1-5": {
+          "name": "CheXbert micro F1 (5 labels)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "CheXbert eF1-14": {
+          "name": "CheXbert example F1 (14 labels)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Rad-Graph F1": {
+          "name": "RadGraph F1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "BLEU-1": {
+          "name": "BLEU-1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ROUGE-L": {
+          "name": "ROUGE-L",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "mimo-code-bench": {
       "url": "https://mimo.xiaomi.com/mimo-v2-6/bench.js",
@@ -199766,9 +200113,16 @@
       "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/",
       "feed": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "meanAbsoluteDistance": {
+          "name": "Mean absolute distance",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "moneda-bench-advicebench": {
       "url": "https://benchmarks.finance/benchmarks/moneda-advicebench/",
@@ -205896,7 +206250,7 @@
       "feed": "https://docs.google.com/spreadsheets/d/17s9hKRwbvDlcGDgJUm5tN6UHX7rqBk2lyv8xFwUsUPg/export?format=csv&gid=0",
       "terms": "The AudioMOS organizers publish these results on Google Sheets under https://policies.google.com/terms.",
       "headline": "The headline averages the system-level Spearman correlations for overall musical quality and textual alignment.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CLAP (AudioMOS Track 1 baseline)",
@@ -205908,6 +206262,88 @@
         },
         "alignmentSystemSRCC": {
           "name": "Textual alignment"
+        }
+      },
+      "stats": {
+        "qualityUtteranceMSE": {
+          "name": "Musical quality utterance-level MSE",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean squared error."
+        },
+        "qualityUtteranceLCC": {
+          "name": "Musical quality utterance-level LCC",
+          "unit": "score",
+          "better": "higher",
+          "note": "Linear correlation coefficient."
+        },
+        "qualityUtteranceSRCC": {
+          "name": "Musical quality utterance-level SRCC",
+          "unit": "score",
+          "better": "higher",
+          "note": "Spearman rank correlation coefficient."
+        },
+        "qualityUtteranceKTAU": {
+          "name": "Musical quality utterance-level Kendall tau",
+          "unit": "score",
+          "better": "higher"
+        },
+        "qualitySystemMSE": {
+          "name": "Musical quality system-level MSE",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean squared error."
+        },
+        "qualitySystemLCC": {
+          "name": "Musical quality system-level LCC",
+          "unit": "score",
+          "better": "higher",
+          "note": "Linear correlation coefficient."
+        },
+        "qualitySystemKTAU": {
+          "name": "Musical quality system-level Kendall tau",
+          "unit": "score",
+          "better": "higher"
+        },
+        "alignmentUtteranceMSE": {
+          "name": "Textual alignment utterance-level MSE",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean squared error."
+        },
+        "alignmentUtteranceLCC": {
+          "name": "Textual alignment utterance-level LCC",
+          "unit": "score",
+          "better": "higher",
+          "note": "Linear correlation coefficient."
+        },
+        "alignmentUtteranceSRCC": {
+          "name": "Textual alignment utterance-level SRCC",
+          "unit": "score",
+          "better": "higher",
+          "note": "Spearman rank correlation coefficient."
+        },
+        "alignmentUtteranceKTAU": {
+          "name": "Textual alignment utterance-level Kendall tau",
+          "unit": "score",
+          "better": "higher"
+        },
+        "alignmentSystemMSE": {
+          "name": "Textual alignment system-level MSE",
+          "unit": "score",
+          "better": "lower",
+          "note": "Mean squared error."
+        },
+        "alignmentSystemLCC": {
+          "name": "Textual alignment system-level LCC",
+          "unit": "score",
+          "better": "higher",
+          "note": "Linear correlation coefficient."
+        },
+        "alignmentSystemKTAU": {
+          "name": "Textual alignment system-level Kendall tau",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },

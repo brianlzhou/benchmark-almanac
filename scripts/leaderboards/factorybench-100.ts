@@ -14,6 +14,10 @@ interface Run {
 const board: Leaderboard = {
   benchmark: 'factorybench-100', url: 'https://blobfish.ai/benchmarks/factorybench-100', feed,
   terms: 'Public first-party model run report linked from the Blobfish AI leaderboard.',
+  stats: {
+    averageToolCalls: { name: 'Average tool calls per task', unit: 'count' },
+    strictPassRate: { name: 'Strict pass rate', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const { runs } = await fetchJson<{ runs: Run[] }>(feed);
     const ranked = runs.filter(r => r.slug === 'factorybench-100' && r.version === '3.3.5');

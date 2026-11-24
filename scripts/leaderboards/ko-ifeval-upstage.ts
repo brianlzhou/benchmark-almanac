@@ -44,13 +44,9 @@ const board: Leaderboard = {
           const score = scores[key + ",none"];
           const error = scores[key + "_stderr,none"];
           if (Number.isFinite(score)) metrics[label + suffix] = 100 * score;
-          if (Number.isFinite(error)) metrics[label + suffix + "StdErr"] = 100 * error;
+          if (Number.isFinite(error)) metrics[label + suffix + "Stderr"] = 100 * error;
         }
       }
-      if (Number.isFinite(config.num_fewshot_seeds)) metrics.fewShotSeeds = config.num_fewshot_seeds;
-      if (Number.isFinite(config.override_batch_size)) metrics.batchSize = config.override_batch_size;
-      if (Number.isFinite(config.max_samples)) metrics.maxSamples = config.max_samples;
-      if (Number.isFinite(result.versions?.ko_ifeval)) metrics.taskVersion = result.versions.ko_ifeval;
       const shots = config.num_few_shot_default;
       const setting = [config.model_dtype, shots == null ? null : shots + "-shot"].filter(Boolean).join(", ");
       const stamp = file.split("/").at(-1)!;
