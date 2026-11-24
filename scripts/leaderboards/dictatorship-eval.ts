@@ -15,7 +15,7 @@ interface Data {
 }
 
 const board: Leaderboard = {
-  stats: { passed: { name: 'Scenarios passed', unit: 'count', better: 'higher' }, scenarios: { name: 'Scenarios', unit: 'count' } },
+  stats: { passed: { name: 'Scenarios passed', unit: 'count', better: 'higher' } },
   benchmark: 'dictatorship-eval',
   url: 'https://www.dictatoreval.org/',
   feed: `${FEED} (resistance_by_level, passed / total)`,
@@ -56,7 +56,7 @@ const board: Leaderboard = {
         const key = name.toLowerCase().replace(/-(.)/g, (_, ch: string) => ch.toUpperCase());
         part(key, name, 'Scenario type', c.passed, c.total);
       }
-      if (total) rows.push({model, score: (passed / total) * 100, metrics: {...metrics, passed, scenarios: total}});
+      if (total) rows.push({model, score: (passed / total) * 100, metrics: {...metrics, passed}});
     }
     return rows;
   },

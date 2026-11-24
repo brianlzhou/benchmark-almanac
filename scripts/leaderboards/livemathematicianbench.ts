@@ -18,7 +18,7 @@ const board: Leaderboard = {
   url: "https://livemathematicianbench.github.io/",
   feed: FEED,
   terms: "Public results published by the benchmark authors at livemathematicianbench.github.io; retain source attribution and follow the upstream terms.",
-  stats:{correct:{name:'Correct answers',unit:'count',better:'higher'},total:{name:'Total questions',unit:'count'}},
+  stats:{correct:{name:'Correct answers',unit:'count',better:'higher'}},
   aliases: {},
   
   async fetch() {
@@ -39,7 +39,7 @@ const board: Leaderboard = {
       if (!g.official || !Number.isFinite(g.official.accuracy)) continue;
       out.push({model:identity(g.row.model), score:100*g.official.accuracy,
         setting:g.row.reasoning_effort ?? 'default',
-        metrics:{correct:g.official.correct,total:g.official.total,...Object.fromEntries(Object.entries(g.metrics).slice(-22))}});
+        metrics:{correct:g.official.correct,...Object.fromEntries(Object.entries(g.metrics).slice(-22))}});
     }
     if (!out.length) throw new Error('LiveMathematicianBench accuracy data missing');
     return out;
