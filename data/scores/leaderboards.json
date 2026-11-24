@@ -5119,7 +5119,7 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1_eUXW_fptAPLL3FkhnW_rua0O1Ji_GIVrpTjY5LaKAhwO-WeARjnY_KNw0SYNJ/pubhtml",
       "feed": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3Wl7wsCgHpwUw1_eUXW_fptAPLL3FkhnW_rua0O1Ji_GIVrpTjY5LaKAhwO-WeARjnY_KNw0SYNJ/pub?output=csv (AVG)",
       "terms": "Published Google Sheet linked from the THUDM/AgentBench README (Apache-2.0); docs.google.com robots.txt allows /spreadsheet paths.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "AgentLM-13B",
@@ -5132,7 +5132,29 @@
         "AgentRL w/ Qwen2.5-7B-Instruct",
         "Hephaestus-8B-Base",
         "Hephaestus-8B-IFT"
-      ]
+      ],
+      "parts": {
+        "alfworld": {
+          "name": "ALFWorld",
+          "group": "Environment"
+        },
+        "db": {
+          "name": "DB",
+          "group": "Environment"
+        },
+        "kg": {
+          "name": "KG",
+          "group": "Environment"
+        },
+        "os": {
+          "name": "OS",
+          "group": "Environment"
+        },
+        "webshop": {
+          "name": "WebShop",
+          "group": "Environment"
+        }
+      }
     },
     "agentboard": {
       "url": "https://hkust-nlp.github.io/agentboard/static/leaderboard.html",
@@ -14954,7 +14976,7 @@
       "url": "https://docs.google.com/spreadsheets/d/1Zv6mBfd4Ibt8mke24K6zAFrXe4AvEFaBLW3hpJqSgjw/edit?gid=0#gid=0",
       "feed": "https://docs.google.com/spreadsheets/d/1Zv6mBfd4Ibt8mke24K6zAFrXe4AvEFaBLW3hpJqSgjw/export?format=csv&gid=0 (Success Rate)",
       "terms": "Public Google Sheet published by the AndroidLab authors; docs.google.com robots.txt allows /spreadsheet paths, and the CSV export is the sheet's own download.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "AutoGLM-2024-10",
@@ -88765,11 +88787,54 @@
     },
     "dual-arm-sim": {
       "url": "https://www.micro1.ai/benchmark/dual-arm-sim",
-      "feed": "https://www.micro1.ai/benchmark/dual-arm-sim (inline leaderboard data \"dual-arm-sim\", Progress score)",
+      "feed": "https://www.micro1.ai/benchmark/dual-arm-sim (inline leaderboard data \"dual-arm-sim\", Progress score, and embedded D.models JSON)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 15,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "instrumentSwap": {
+          "name": "Instrument swap",
+          "group": "Task"
+        },
+        "cartridgeSwap": {
+          "name": "Cartridge swap",
+          "group": "Task"
+        },
+        "sampleTransfer": {
+          "name": "Sample transfer",
+          "group": "Task"
+        },
+        "partsKitting": {
+          "name": "Parts kitting",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "successRate": {
+          "name": "Task completion rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "totalCostUsd": {
+          "name": "Total evaluation cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "decisionLatency": {
+          "name": "Mean decision latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "outputTokensPerDecision": {
+          "name": "Output tokens per decision",
+          "unit": "tokens"
+        },
+        "thinkingTokensPerDecision": {
+          "name": "Thinking tokens per decision",
+          "unit": "tokens"
+        }
+      }
     },
     "dual-exam": {
       "url": "https://arxiv.org/html/2610.31066",
@@ -93750,7 +93815,7 @@
       "url": "https://www.superclueai.com/embodied/VLA_desk2",
       "feed": "https://www.superclueai.com/data/embodied_list/VLA_desk2/2026%E5%B9%B411%E6%9C%88.xlsx",
       "terms": "SuperCLUE publishes the XLSX score table on its public page. The site gives no separate score reuse license. Results are credited to SuperCLUE.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ABot-M0-RoboTwin2",
@@ -133159,7 +133224,7 @@
       "url": "https://xbench.org/agi/harnesseval-w",
       "feed": "https://xbench.org/<build>/index-*.js (array with interface, obsR ... persO, overall)",
       "terms": "Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Cosmos3-Super",
@@ -133168,7 +133233,41 @@
         "LingBot World v2",
         "SANA-WM",
         "Wan 2.7"
-      ]
+      ],
+      "parts": {
+        "obsR": {
+          "name": "Obs-R",
+          "group": "Observation Quality"
+        },
+        "obsP": {
+          "name": "Obs-P",
+          "group": "Observation Quality"
+        },
+        "transE": {
+          "name": "Trans-E",
+          "group": "Transition Correctness"
+        },
+        "transI": {
+          "name": "Trans-I",
+          "group": "Transition Correctness"
+        },
+        "transP": {
+          "name": "Trans-P",
+          "group": "Transition Correctness"
+        },
+        "persD": {
+          "name": "Pers-D",
+          "group": "World Persistence"
+        },
+        "persR": {
+          "name": "Pers-R",
+          "group": "World Persistence"
+        },
+        "persO": {
+          "name": "Pers-O",
+          "group": "World Persistence"
+        }
+      }
     },
     "harnessopt-bench": {
       "url": "https://labs.scale.com/papers/harnessopt-bench",
@@ -175791,16 +175890,63 @@
     },
     "longextract-bench": {
       "url": "https://www.micro1.ai/benchmark/long-extraction",
-      "feed": "https://www.micro1.ai/benchmark/long-extraction (inline leaderboard data \"long-extraction\", Recall)",
+      "feed": "https://www.micro1.ai/benchmark/long-extraction (inline leaderboard data \"long-extraction\", Recall, and static HTML results tables)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "Datalab Extract - Balanced",
         "Extend MAX",
         "LlamaExtract - Agentic",
         "Reducto Deep Extract"
-      ]
+      ],
+      "stats": {
+        "completed": {
+          "name": "Completed documents",
+          "unit": "count",
+          "better": "higher"
+        },
+        "precision": {
+          "name": "Precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "leafAcc": {
+          "name": "Leaf accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "failures": {
+          "name": "Failures",
+          "unit": "count",
+          "better": "lower"
+        },
+        "failureRate": {
+          "name": "Failure rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "latencyMean": {
+          "name": "Mean runtime",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latencyP50": {
+          "name": "Median runtime (p50)",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latencyP90": {
+          "name": "p90 runtime",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "latencyP95": {
+          "name": "p95 runtime",
+          "unit": "seconds",
+          "better": "lower"
+        }
+      }
     },
     "longfact-objects": {
       "url": "https://cdn.openai.com/gpt-5-system-card.pdf",
@@ -191592,12 +191738,13 @@
       "terms": "CodeSOTA publishes the leaderboard publicly and retains copyright. https://www.codesota.com/benchmark/mimic-cxr",
       "host": "CodeSOTA",
       "headline": "CodeSOTA reports AUROC on a 100-point scale and does not specify the test split or label set.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "chexzero",
         "convirt"
-      ]
+      ],
+      "verified": "CodeSOTA marks the result as verified"
     },
     "mimic-cxr-report-generation": {
       "url": "https://www.sota2.com/research/sota/medical-report-generation-on-mimic-cxr-all-views-test",
@@ -192876,11 +193023,82 @@
     },
     "missionreport": {
       "url": "https://www.micro1.ai/benchmark/mission-report",
-      "feed": "https://www.micro1.ai/benchmark/mission-report (inline leaderboard data \"mission-report\", Mean score)",
+      "feed": "https://www.micro1.ai/benchmark/mission-report (inline leaderboard data \"mission-report\", Mean score, Best@3 tab, and embedded report data)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
-      "unmatched": []
+      "unmatched": [],
+      "chart": {
+        "title": "Score against tool calls per report",
+        "x": {
+          "key": "toolCalls",
+          "label": "Median tool calls per report",
+          "unit": "calls",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Each model median tool calls per report plotted against its mean score, matching Figure 12."
+      },
+      "parts": {
+        "war": {
+          "name": "Weekly activity",
+          "group": "Report family"
+        },
+        "aar": {
+          "name": "After-action",
+          "group": "Report family"
+        },
+        "psr": {
+          "name": "Program status",
+          "group": "Report family"
+        },
+        "par": {
+          "name": "Performance and accomplishment",
+          "group": "Report family"
+        }
+      },
+      "stats": {
+        "bestAt3": {
+          "name": "Best of three",
+          "unit": "%",
+          "better": "higher"
+        },
+        "worstAt3": {
+          "name": "Worst of three",
+          "unit": "%",
+          "better": "higher"
+        },
+        "medianScore": {
+          "name": "Median report",
+          "unit": "%",
+          "better": "higher"
+        },
+        "tasksWon": {
+          "name": "Tasks won",
+          "unit": "count",
+          "better": "higher"
+        },
+        "medianMinutes": {
+          "name": "Median working time",
+          "unit": "minutes",
+          "better": "lower"
+        },
+        "toolCalls": {
+          "name": "Median tool calls per report",
+          "unit": "count",
+          "better": "lower"
+        },
+        "penalties": {
+          "name": "Penalties triggered",
+          "unit": "count",
+          "better": "lower"
+        }
+      }
     },
     "mit-adobe-fivek": {
       "url": "https://people.csail.mit.edu/vladb/photoadjust/",
@@ -260820,11 +261038,71 @@
     },
     "redlinebench": {
       "url": "https://www.micro1.ai/benchmark/crosby-micro1-redlinebench",
-      "feed": "https://www.micro1.ai/benchmark/crosby-micro1-redlinebench (inline leaderboard data \"contract\", Mean score)",
+      "feed": "https://www.micro1.ai/benchmark/crosby-micro1-redlinebench (inline leaderboard data \"contract\", Mean score, and static HTML results tables)",
       "terms": "Static report page on micro1.ai; robots.txt allows all paths, and the legal center lists no website terms of use (only privacy, cookie, candidate and referral terms).",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "sideA": {
+          "name": "AgentCo (Side A)",
+          "group": "Side"
+        },
+        "sideB": {
+          "name": "Customer (Side B)",
+          "group": "Side"
+        },
+        "turn1": {
+          "name": "Turn 1",
+          "group": "Turn"
+        },
+        "turn2": {
+          "name": "Turn 2",
+          "group": "Turn"
+        },
+        "turn3": {
+          "name": "Turn 3",
+          "group": "Turn"
+        },
+        "turn4": {
+          "name": "Turn 4",
+          "group": "Turn"
+        },
+        "legal": {
+          "name": "Legal",
+          "group": "Dimension"
+        },
+        "commercial": {
+          "name": "Commercial",
+          "group": "Dimension"
+        },
+        "negotiation": {
+          "name": "Negotiation",
+          "group": "Dimension"
+        },
+        "counterparty": {
+          "name": "Counterparty",
+          "group": "Dimension"
+        },
+        "dealClosing": {
+          "name": "Deal-closing",
+          "group": "Dimension"
+        }
+      },
+      "stats": {
+        "redlinesPerTask": {
+          "name": "Redlines per task",
+          "unit": "count"
+        },
+        "editsPerTouched": {
+          "name": "Edits per touched clause",
+          "unit": "count"
+        },
+        "avgEditLengthChars": {
+          "name": "Average edit length",
+          "unit": "count"
+        }
+      }
     },
     "redlinebench-v2-fa1zvn": {
       "url": "https://github.com/fa1zn/redline-v2",
@@ -287618,13 +287896,35 @@
       "url": "https://www.superclueai.com/generalpage",
       "feed": "https://www.superclueai.com/data/generalboard/<round>.xlsx (总排行榜 sheet, 总分; round from the GeneralBoardPage chunk)",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Darwin-180B-RSI-R3",
         "Doubao-Seed-2.1-Pro-260915",
         "Spark-X2.6"
-      ]
+      ],
+      "parts": {
+        "agenticCoding": {
+          "name": "Agentic coding",
+          "group": "Dimension"
+        },
+        "mathReasoning": {
+          "name": "Math and reasoning",
+          "group": "Dimension"
+        },
+        "hallucinationControl": {
+          "name": "Hallucination control",
+          "group": "Dimension"
+        },
+        "instructionFollowing": {
+          "name": "Precise instruction following",
+          "group": "Dimension"
+        },
+        "longContext": {
+          "name": "Long context",
+          "group": "Dimension"
+        }
+      }
     },
     "superclue-200k": {
       "url": "https://www.superclueai.com/specialized/200K",
@@ -287756,14 +288056,68 @@
       "url": "https://www.superclueai.com/specificpage",
       "feed": "https://www.superclueai.com/data/agent_list/Agent/<round>.xlsx (Agent总榜 sheet, 总分)",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Baichuan-2-13B-Chat-v2",
         "ERNIE-4-8k-latest",
         "TeleChat2",
         "TeleChat2-Large"
-      ]
+      ],
+      "parts": {
+        "taskPlanning": {
+          "name": "Task planning",
+          "group": "Pillar"
+        },
+        "toolUse": {
+          "name": "Tool use",
+          "group": "Pillar"
+        },
+        "memory": {
+          "name": "Short and long term memory",
+          "group": "Pillar"
+        },
+        "taskDecomp": {
+          "name": "Task decomposition",
+          "group": "Capability"
+        },
+        "cot": {
+          "name": "Chain of thought",
+          "group": "Capability"
+        },
+        "selfReflection": {
+          "name": "Self-reflection",
+          "group": "Capability"
+        },
+        "apiRetrieval": {
+          "name": "API retrieval",
+          "group": "Capability"
+        },
+        "apiPlanning": {
+          "name": "API planning",
+          "group": "Capability"
+        },
+        "apiCalling": {
+          "name": "API calling",
+          "group": "Capability"
+        },
+        "generalTools": {
+          "name": "General tool use",
+          "group": "Capability"
+        },
+        "multiDocQa": {
+          "name": "Multi-document QA",
+          "group": "Capability"
+        },
+        "longDialog": {
+          "name": "Long-range dialogue",
+          "group": "Capability"
+        },
+        "fewShot": {
+          "name": "Few-shot learning",
+          "group": "Capability"
+        }
+      }
     },
     "superclue-agent-scenario": {
       "url": "https://www.superclueai.com/agent/AgentScenario",
@@ -290040,7 +290394,7 @@
       "url": "https://www.superclueai.com/specificpage",
       "feed": "https://www.superclueai.com/data/specialized_list/RAG/<round>.xlsx (总榜 sheet, 总分)",
       "terms": "Public Excel files the superclueai.com boards load; the site serves no robots.txt rules (the path returns the app) and publishes no terms of use.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "360智脑",
@@ -290052,7 +290406,25 @@
         "文心一言4-turbo",
         "讯飞星火4.0",
         "通义千问2.5"
-      ]
+      ],
+      "parts": {
+        "refusal": {
+          "name": "Refusal capability",
+          "group": "Task"
+        },
+        "errorCorrection": {
+          "name": "Error detection and correction",
+          "group": "Task"
+        },
+        "infoIntegration": {
+          "name": "Information integration",
+          "group": "Task"
+        },
+        "timeliness": {
+          "name": "Answer timeliness",
+          "group": "Task"
+        }
+      }
     },
     "superclue-role": {
       "url": "https://www.superclueai.com/specialized/Role",
@@ -327204,23 +327576,51 @@
       "url": "https://xbench.org/profession/marketing",
       "feed": "https://xbench.org/<build>/index-*.js (array with average, ecommerce, app, game)",
       "terms": "Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Perplexity-Research",
         "Perplexity-Search"
-      ]
+      ],
+      "parts": {
+        "ecommerce": {
+          "name": "E-commerce",
+          "group": "Task"
+        },
+        "app": {
+          "name": "App",
+          "group": "Task"
+        },
+        "game": {
+          "name": "Game",
+          "group": "Task"
+        }
+      }
     },
     "xbench-profession-recruitment": {
       "url": "https://xbench.org/profession/hr",
       "feed": "https://xbench.org/<build>/index-*.js (array with average, companyMapping, peopleToInfo, infoToPeople)",
       "terms": "Public JSON API and bundle data of the xbench.org app; robots.txt on both hosts allows all paths and the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Perplexity-Research",
         "Perplexity-Search"
-      ]
+      ],
+      "parts": {
+        "companyMapping": {
+          "name": "Company mapping",
+          "group": "Task"
+        },
+        "peopleToInfo": {
+          "name": "People to info",
+          "group": "Task"
+        },
+        "infoToPeople": {
+          "name": "Info to people",
+          "group": "Task"
+        }
+      }
     },
     "xbench-scienceqa": {
       "url": "https://xbench.org/agi/scienceqa",
