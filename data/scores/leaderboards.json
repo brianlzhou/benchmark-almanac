@@ -215937,11 +215937,19 @@
       "url": "https://github.com/OpenBMB/OlympiadBench#leaderboard",
       "feed": "https://raw.githubusercontent.com/OpenBMB/OlympiadBench/main/README.md (full benchmark, Avg.)",
       "terms": "README table in the OpenBMB/OlympiadBench GitHub repository, which is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "GPT-4o [snapshot unspecified]"
-      ]
+      ],
+      "parts": {
+        "math": {
+          "name": "Math"
+        },
+        "physics": {
+          "name": "Physics"
+        }
+      }
     },
     "olympicarena": {
       "url": "https://gair-nlp.github.io/OlympicArena/",
@@ -216225,7 +216233,7 @@
       "url": "https://omni-math.github.io/",
       "feed": "https://omni-math.github.io/ (static HTML table, Overall Acc)",
       "terms": "Static GitHub Pages site; robots.txt only blocks one named crawler, the Omni-MATH repository is Apache-2.0 and the page states no other terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "DeepSeekMATH-7b-RL",
@@ -216234,7 +216242,53 @@
         "Qwen2-MATH-72b-Instruct",
         "Qwen2-MATH-7b-Instruct",
         "Qwen2.5-MATH-7b-Instruct"
-      ]
+      ],
+      "parts": {
+        "algebra": {
+          "name": "Algebra",
+          "group": "Domain"
+        },
+        "precalculus": {
+          "name": "Precalculus",
+          "group": "Domain"
+        },
+        "calculus": {
+          "name": "Calculus",
+          "group": "Domain"
+        },
+        "geometry": {
+          "name": "Geometry",
+          "group": "Domain"
+        },
+        "discreteMath": {
+          "name": "Discrete mathematics",
+          "group": "Domain"
+        },
+        "numberTheory": {
+          "name": "Number theory",
+          "group": "Domain"
+        },
+        "appliedMath": {
+          "name": "Applied mathematics",
+          "group": "Domain"
+        },
+        "diff1to3": {
+          "name": "Difficulty 1 to 3",
+          "group": "Difficulty"
+        },
+        "diff3to5": {
+          "name": "Difficulty 3 to 5",
+          "group": "Difficulty"
+        },
+        "diff5to8": {
+          "name": "Difficulty 5 to 8",
+          "group": "Difficulty"
+        },
+        "diff8to10": {
+          "name": "Difficulty 8 to 10",
+          "group": "Difficulty"
+        }
+      }
     },
     "omniact": {
       "url": "https://www.sota2.com/research/sota/action-sequence-generation-on-omniact-test",
@@ -241504,7 +241558,7 @@
       "url": "https://videochat-online.github.io/#leaderboard",
       "feed": "https://videochat-online.github.io/ (static HTML table, AVG)",
       "terms": "Static GitHub Pages project page (no robots.txt, so nothing is disallowed); it publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Flash-Vstream 7B",
@@ -241515,7 +241569,73 @@
         "VTimeLLM 7B",
         "VideoChat-Online 4B",
         "VideoLLM-Online 7B"
-      ]
+      ],
+      "parts": {
+        "fpAa": {
+          "name": "AA",
+          "group": "FP"
+        },
+        "fpGsp": {
+          "name": "GSP",
+          "group": "FP"
+        },
+        "fpMp": {
+          "name": "MP",
+          "group": "FP"
+        },
+        "thvAp": {
+          "name": "AP",
+          "group": "THV"
+        },
+        "thvSv": {
+          "name": "SV",
+          "group": "THV"
+        },
+        "thvOp": {
+          "name": "OP",
+          "group": "THV"
+        },
+        "pmAr": {
+          "name": "AR",
+          "group": "PM"
+        },
+        "pmPr": {
+          "name": "PR",
+          "group": "PM"
+        },
+        "pmTr": {
+          "name": "TR",
+          "group": "PM"
+        },
+        "spAl": {
+          "name": "AL",
+          "group": "SP"
+        },
+        "spOp": {
+          "name": "OP",
+          "group": "SP"
+        },
+        "stpAt": {
+          "name": "AT",
+          "group": "STP"
+        },
+        "stpOt": {
+          "name": "OT",
+          "group": "STP"
+        },
+        "tpAs": {
+          "name": "AS",
+          "group": "TP"
+        },
+        "tpSl": {
+          "name": "SL",
+          "group": "TP"
+        },
+        "tpOes": {
+          "name": "OES",
+          "group": "TP"
+        }
+      }
     },
     "oven": {
       "url": "https://arxiv.org/html/2302.11154",
@@ -242209,13 +242329,95 @@
       "url": "https://paintbench.github.io/",
       "feed": "https://paintbench.github.io/assets/js/main.js (const MODELS_HM, overall)",
       "terms": "Static script on the PaintBench GitHub Pages site that the page loads (no robots.txt); the page states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "FLUX.1-Kontext",
         "InstructPix2Pix",
         "LongCat-Edit"
-      ]
+      ],
+      "parts": {
+        "translation": {
+          "name": "Translation",
+          "group": "Geometric"
+        },
+        "rotation": {
+          "name": "Rotation",
+          "group": "Geometric"
+        },
+        "reflection": {
+          "name": "Reflection",
+          "group": "Geometric"
+        },
+        "scaling": {
+          "name": "Scaling",
+          "group": "Geometric"
+        },
+        "shearing": {
+          "name": "Shearing",
+          "group": "Geometric"
+        },
+        "construction": {
+          "name": "Construction",
+          "group": "Structural"
+        },
+        "removal": {
+          "name": "Removal",
+          "group": "Structural"
+        },
+        "copying": {
+          "name": "Copying",
+          "group": "Structural"
+        },
+        "border": {
+          "name": "Border",
+          "group": "Structural"
+        },
+        "cropping": {
+          "name": "Cropping",
+          "group": "Structural"
+        },
+        "recolor": {
+          "name": "Recolor",
+          "group": "Color"
+        },
+        "flood_fill": {
+          "name": "Flood fill",
+          "group": "Color"
+        },
+        "blending": {
+          "name": "Blending",
+          "group": "Color"
+        },
+        "gradient": {
+          "name": "Gradient",
+          "group": "Color"
+        },
+        "point_operations": {
+          "name": "Point operations",
+          "group": "Color"
+        },
+        "comparison": {
+          "name": "Comparison",
+          "group": "Symbolic"
+        },
+        "ordering": {
+          "name": "Ordering",
+          "group": "Symbolic"
+        },
+        "pattern": {
+          "name": "Pattern",
+          "group": "Symbolic"
+        },
+        "counting": {
+          "name": "Counting",
+          "group": "Symbolic"
+        },
+        "legend": {
+          "name": "Legend",
+          "group": "Symbolic"
+        }
+      }
     },
     "paintskills": {
       "url": "https://arxiv.org/html/2202.04053#S4.T2",
@@ -248987,9 +249189,26 @@
       "url": "https://pointarena.github.io/",
       "feed": "https://pointarena.github.io/data/point-bench2.csv",
       "terms": "Static CSV on a GitHub Pages project site with no robots.txt and no terms; the scores are cited to the PointArena authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "affordance": {
+          "name": "Affordance"
+        },
+        "spatial": {
+          "name": "Spatial"
+        },
+        "reasoning": {
+          "name": "Reasoning"
+        },
+        "steerability": {
+          "name": "Steerability"
+        },
+        "counting": {
+          "name": "Counting"
+        }
+      }
     },
     "pokeagent-challenge": {
       "url": "https://pokeagent.github.io/leaderboard.html",
@@ -254324,7 +254543,7 @@
       "url": "https://pubmedqa.github.io/",
       "feed": "https://pubmedqa.github.io/ (static HTML table, Accuracy)",
       "terms": "Static GitHub Pages site of the MIT-licensed pubmedqa/pubmedqa project; GitHub Pages serves no robots.txt rules for it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "AntGLM-Med",
@@ -254348,7 +254567,14 @@
         "Palmyra-Med",
         "PubMedBERT",
         "PubMedGPT"
-      ]
+      ],
+      "stats": {
+        "macroF1": {
+          "name": "Macro F1",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "pucrs-inpatient-fall-detection": {
       "url": "https://github.com/nlp-pucrs/fall-detection",
@@ -256618,12 +256844,39 @@
       "url": "https://varworkshop.github.io/challenges/",
       "feed": "https://varworkshop.github.io/challenges/",
       "terms": "The workshop page gives no separate score reuse terms. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ISCT_FitCoach",
         "PKU-FitCoach"
-      ]
+      ],
+      "stats": {
+        "METEOR": {
+          "name": "METEOR",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ROUGE-L": {
+          "name": "ROUGE-L",
+          "unit": "score",
+          "better": "higher"
+        },
+        "BERT": {
+          "name": "BERTScore",
+          "unit": "score",
+          "better": "higher"
+        },
+        "LLM-Acc": {
+          "name": "LLM accuracy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "T-F-Score": {
+          "name": "Temporal F-score",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "qf-bench": {
       "url": "https://qfbench.com/_next/static/chunks/61f73a6a71588000.js",
@@ -260163,9 +260416,26 @@
       "url": "https://github.com/intertwine/security-verifiers/tree/main/environments/sv-env-redteam-defense",
       "feed": "https://raw.githubusercontent.com/intertwine/security-verifiers/main/environments/sv-env-redteam-defense/README.md",
       "terms": "The repository is MIT licensed. https://github.com/intertwine/security-verifiers/blob/main/LICENSE GitHub requests a one-second crawl delay.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
-      "unmatched": []
+      "unmatched": [],
+      "stats": {
+        "defenseRate": {
+          "name": "Defense rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "falsePositiveRate": {
+          "name": "False positive rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "helpfulness": {
+          "name": "Helpfulness",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "reddit-impacts": {
       "url": "https://codalab.lisn.upsaclay.fr/competitions/22203",
@@ -269970,7 +270240,7 @@
       "url": "https://github.com/AGI-Eval-Official/RW-Search#-leaderboard",
       "feed": "https://raw.githubusercontent.com/AGI-Eval-Official/RW-Search/main/README.md (LeaderBoard table, Score)",
       "terms": "README table in the AGI-Eval-Official/RW-Search GitHub repository, which is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": []
     },
@@ -270534,7 +270804,7 @@
       "url": "https://adwardlee.github.io/salad_bench/",
       "feed": "https://adwardlee.github.io/salad_bench/base_order.csv",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "Llama-2-13b-chat-hf",
@@ -272416,7 +272686,7 @@
       "url": "https://scienceqa.github.io/leaderboard.html",
       "feed": "https://scienceqa.github.io/javascript/leaderboard-data.js (Avg over all questions)",
       "terms": "Static file on the project GitHub Pages site (no robots.txt); the ScienceQA repository is MIT-licensed.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "BAN",
@@ -272493,7 +272763,41 @@
         "ViLT",
         "VisualBERT",
         "mPLUG-Owl"
-      ]
+      ],
+      "parts": {
+        "nat": {
+          "name": "Natural science",
+          "group": "Subject"
+        },
+        "soc": {
+          "name": "Social science",
+          "group": "Subject"
+        },
+        "lan": {
+          "name": "Language science",
+          "group": "Subject"
+        },
+        "txt": {
+          "name": "Text context",
+          "group": "Context"
+        },
+        "img": {
+          "name": "Image context",
+          "group": "Context"
+        },
+        "no": {
+          "name": "No context",
+          "group": "Context"
+        },
+        "g1to6": {
+          "name": "Grades 1 to 6",
+          "group": "Grade"
+        },
+        "g7to12": {
+          "name": "Grades 7 to 12",
+          "group": "Grade"
+        }
+      }
     },
     "sciences-last-exam": {
       "url": "https://sciences-last-exam.org/leaderboard",
@@ -284488,7 +284792,7 @@
       "feed": "https://raw.githubusercontent.com/OML-Team/open-metric-learning/main/README.md",
       "terms": "The repository uses Apache 2.0. https://github.com/OML-Team/open-metric-learning/blob/main/LICENSE",
       "host": "Open Metric Learning",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "openai_vitb16_224",
@@ -289230,7 +289534,7 @@
       "url": "https://github.com/CLUEbenchmark/SuperCLUE-Safety",
       "feed": "https://raw.githubusercontent.com/CLUEbenchmark/SuperCLUE-Safety/main/README.md (SC-Safety安全总榜, 总分)",
       "terms": "README table in the CLUEbenchmark/SuperCLUE-Safety GitHub repository, which states no license; scores are cited to SuperCLUE.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "360GPT_S2_V94",
@@ -289245,7 +289549,18 @@
         "文心一言4.0",
         "讯飞星火(v2.0)",
         "讯飞星火(v3.0)"
-      ]
+      ],
+      "parts": {
+        "traditionalSafety": {
+          "name": "Traditional safety"
+        },
+        "responsibleAi": {
+          "name": "Responsible AI"
+        },
+        "instructionAttack": {
+          "name": "Instruction attacks"
+        }
+      }
     },
     "superclue-science": {
       "url": "https://www.superclueai.com/specialized/Science",
@@ -295115,7 +295430,7 @@
       "url": "https://www.handoff.ai/tech/h1-model-release",
       "feed": "https://raw.githubusercontent.com/handoffai/residential-takeoff-benchmark/main/docs/images/leaderboard.svg",
       "terms": "Handoff reserves rights to the technical report. The repository lists no score reuse license. https://www.handoff.ai/tech/h1-model-release Handoff allows crawling. The raw file host returns 404 for robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "Handoff-H1",
@@ -297201,11 +297516,18 @@
       "url": "https://nju-link.github.io/DRIFT/",
       "feed": "https://nju-link.github.io/DRIFT/",
       "terms": "Public maker project page on GitHub Pages; robots.txt has no restriction on this path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "Gemini-2.5-Pro (snapshot unspecified)"
-      ]
+      ],
+      "stats": {
+        "gainOverBare": {
+          "name": "Gain over bare prompting",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "teleqna": {
       "url": "https://huggingface.co/spaces/GSMA/open-telco-leaderboard",
@@ -314407,7 +314729,7 @@
       "url": "https://videophy2.github.io/",
       "feed": "https://videophy2.github.io/ (static HTML tables, All)",
       "terms": "Static project page on GitHub Pages (no robots.txt rules); the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "Co-Director",
@@ -314425,7 +314747,18 @@
         "Sora&dagger;",
         "VideoCrafter-2",
         "Wan2.1-14B"
-      ]
+      ],
+      "parts": {
+        "hard": {
+          "name": "Hard prompts"
+        },
+        "physicalActivity": {
+          "name": "Physical activity"
+        },
+        "objectInteraction": {
+          "name": "Object interaction"
+        }
+      }
     },
     "videoreasonbench": {
       "url": "https://llyx97.github.io/video_reason_bench/",
@@ -317418,7 +317751,7 @@
       "url": "https://github.com/YuanGongND/vocalsound",
       "feed": "https://raw.githubusercontent.com/YuanGongND/vocalsound/master/README.md",
       "terms": "The authors release VocalSound under CC BY-SA 4.0. https://creativecommons.org/licenses/by-sa/4.0/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CLAP",
@@ -320614,9 +320947,16 @@
       "url": "https://github.com/microsoft/fara",
       "feed": "https://raw.githubusercontent.com/microsoft/fara/main/README.md",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "stats": {
+        "processSuccess": {
+          "name": "Process success",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "measures": {
         "processSuccess": "process-success"
       }
@@ -321727,7 +322067,7 @@
       "url": "https://pilehvar.github.io/wic/",
       "feed": "https://pilehvar.github.io/wic/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BERT-large",
@@ -324701,14 +325041,60 @@
       "url": "https://github.com/facebookresearch/worldsense",
       "feed": "https://raw.githubusercontent.com/facebookresearch/worldsense/main/README.md",
       "terms": "Official public repository. The almanac credits Meta and links the original source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GPT3.5 (snapshot unspecified)",
         "GPT4 (snapshot unspecified)",
         "Llama2-FT+1M (size unspecified)",
         "Llama2-chat (size unspecified)"
-      ]
+      ],
+      "parts": {
+        "inferTrivial": {
+          "name": "Inference trivial"
+        },
+        "inferNormal": {
+          "name": "Inference normal"
+        },
+        "consistTrivial": {
+          "name": "Consistency trivial"
+        },
+        "consistNormal": {
+          "name": "Consistency normal"
+        },
+        "complTrivial": {
+          "name": "Completeness trivial"
+        },
+        "complNormal": {
+          "name": "Completeness normal"
+        }
+      },
+      "stats": {
+        "biasInferTrivial": {
+          "name": "Inference trivial bias",
+          "unit": "score"
+        },
+        "biasInferNormal": {
+          "name": "Inference normal bias",
+          "unit": "score"
+        },
+        "biasConsistTrivial": {
+          "name": "Consistency trivial bias",
+          "unit": "score"
+        },
+        "biasConsistNormal": {
+          "name": "Consistency normal bias",
+          "unit": "score"
+        },
+        "biasComplTrivial": {
+          "name": "Completeness trivial bias",
+          "unit": "score"
+        },
+        "biasComplNormal": {
+          "name": "Completeness normal bias",
+          "unit": "score"
+        }
+      }
     },
     "worldsense-omnimodal": {
       "url": "https://jaaackhongggg.github.io/WorldSense",

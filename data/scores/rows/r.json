@@ -2349,13 +2349,13 @@
     ["rwe-bench","claude-fable-5-2","max","Claude Code",62,"2026-11-09",133.7,999000,{"ciLow":55.2,"ciHigh":68.2,"passAt2":73,"passAt3":77,"passAt4":79,"passAt5":80,"latency":19620},{"low":55.2,"high":68.2}],
     ["rwe-bench","gpt-6-2-astra","max","Codex",40,"2026-11-17",13.68,125000,{"ciLow":33.7,"ciHigh":46.6,"passAt2":51,"passAt3":57.5,"passAt4":62,"passAt5":65,"latency":3204},{"low":33.7,"high":46.6}],
     ["rwe-bench","gpt-6-2-sol","max","Codex",30,"2026-11-17",4.07,123000,{"ciLow":23.9,"ciHigh":36.3,"passAt2":40,"passAt3":45,"passAt4":48,"passAt5":50,"latency":2340},{"low":23.9,"high":36.3}],
-    ["rwsearch","kimi-k2-thinking",null,null,63,"2025-11-06",null,null],
-    ["rwsearch","gemini-3-pro",null,null,74.5,"2025-11-18",null,null],
-    ["rwsearch","claude-opus-4-5",null,null,75.5,"2025-11-24",null,null],
-    ["rwsearch","deepseek-v3-2","thinking",null,74,"2025-12-01",null,null],
-    ["rwsearch","gpt-5-2","xhigh",null,82,"2025-12-11",null,null],
-    ["rwsearch","glm-4-7","thinking",null,69,"2025-12-22",null,null],
-    ["rwsearch","longcat-flash-thinking-2601",null,null,79.5,"2026-01-14",null,null]
+    ["rwsearch","kimi-k2-thinking",null,null,63,"2025-11-06",null,null,null,{"open":true}],
+    ["rwsearch","gemini-3-pro",null,null,74.5,"2025-11-18",null,null,null,{"open":false}],
+    ["rwsearch","claude-opus-4-5",null,null,75.5,"2025-11-24",null,null,null,{"open":false}],
+    ["rwsearch","deepseek-v3-2","thinking",null,74,"2025-12-01",null,null,null,{"open":true}],
+    ["rwsearch","gpt-5-2","xhigh",null,82,"2025-12-11",null,null,null,{"open":false}],
+    ["rwsearch","glm-4-7","thinking",null,69,"2025-12-22",null,null,null,{"open":true}],
+    ["rwsearch","longcat-flash-thinking-2601",null,null,79.5,"2026-01-14",null,null,null,{"open":true}]
   ],
   "others": [
     ["r-bench-robustness","GPT4o (snapshot unspecified)",null,null,63.48,null,null,null,{"MCQ low":81.76,"MCQ mid":77.44,"MCQ high":73.91,"VQA low":71.84,"VQA mid":72.91,"VQA high":68.98,"CAP low":42.35,"CAP mid":42,"CAP high":39.97,"relative":49.07}],

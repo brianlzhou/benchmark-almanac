@@ -22,13 +22,40 @@ const board: Leaderboard = {
     // GPT-Image-2 used through the image edit endpoint
     'GPT Image Edit 2': 'gpt-image-2',
   },
+  parts: {
+    translation: { name: 'Translation', group: 'Geometric' },
+    rotation: { name: 'Rotation', group: 'Geometric' },
+    reflection: { name: 'Reflection', group: 'Geometric' },
+    scaling: { name: 'Scaling', group: 'Geometric' },
+    shearing: { name: 'Shearing', group: 'Geometric' },
+    construction: { name: 'Construction', group: 'Structural' },
+    removal: { name: 'Removal', group: 'Structural' },
+    copying: { name: 'Copying', group: 'Structural' },
+    border: { name: 'Border', group: 'Structural' },
+    cropping: { name: 'Cropping', group: 'Structural' },
+    recolor: { name: 'Recolor', group: 'Color' },
+    flood_fill: { name: 'Flood fill', group: 'Color' },
+    blending: { name: 'Blending', group: 'Color' },
+    gradient: { name: 'Gradient', group: 'Color' },
+    point_operations: { name: 'Point operations', group: 'Color' },
+    comparison: { name: 'Comparison', group: 'Symbolic' },
+    ordering: { name: 'Ordering', group: 'Symbolic' },
+    pattern: { name: 'Pattern', group: 'Symbolic' },
+    counting: { name: 'Counting', group: 'Symbolic' },
+    legend: { name: 'Legend', group: 'Symbolic' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const js = await fetchText(FEED);
     const start = js.indexOf('[', js.indexOf('const MODELS_HM'));
     if (start < 0) throw new Error('MODELS_HM not found');
-    const models = jsLiteral<{ name: string; overall?: number }[]>(js, start);
+    const models = jsLiteral<{ name: string; overall?: number; scores?: Record<string, number> }[]>(js, start);
     const rows: LeaderboardRow[] = [];
-    for (const m of models) if (m.name && typeof m.overall === 'number') rows.push({ model: m.name, score: m.overall, date: PAPER_DATE });
+    for (const m of models) {
+      if (!m.name || typeof m.overall !== 'number') continue;
+      const metrics: Record<string, number> = {};
+      for (const [k, v] of Object.entries(m.scores ?? {})) if (typeof v === 'number' && Number.isFinite(v)) metrics[k] = v;
+      rows.push({ model: m.name, score: m.overall, date: PAPER_DATE, ...(Object.keys(metrics).length ? { metrics } : {}) });
+    }
     if (!rows.length) throw new Error('no PaintBench rows');
     return rows;
   },

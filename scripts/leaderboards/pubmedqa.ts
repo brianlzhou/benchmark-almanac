@@ -24,12 +24,18 @@ const board: Leaderboard = {
   url: PAGE,
   feed: `${PAGE} (static HTML table, Accuracy)`,
   terms: 'Static GitHub Pages site of the MIT-licensed pubmedqa/pubmedqa project; GitHub Pages serves no robots.txt rules for it.',
+  stats: {
+    macroF1: { name: 'Macro F1', unit: '%', better: 'higher' },
+  },
   async fetch() {
     const t = tables(await fetchText(PAGE)).find((rows) => rows[0]?.some((c) => /^accuracy/i.test(c.text)));
     if (!t) throw new Error('leaderboard table not found');
     const head = t[0].map((c) => c.text.toLowerCase());
     const iModel = head.indexOf('model');
+    const iCode = head.indexOf('code');
+    const iSize = head.indexOf('size');
     const iAcc = head.findIndex((h) => h.startsWith('accuracy'));
+    const iF1 = head.findIndex((h) => h.startsWith('macro-f'));
     if (iModel < 0 || iAcc < 0) throw new Error(`unexpected columns: ${head.join(', ')}`);
     const rows: LeaderboardRow[] = [];
     for (const r of t.slice(1)) {
@@ -38,7 +44,19 @@ const board: Leaderboard = {
       if (!first || score === undefined || /human performance/i.test(first)) continue;
       const date = isoDate(r[0]?.text ?? '');
       const medprompt = first.match(/^(.*?)\s*\(Medprompt\)$/i);
-      rows.push({ model: medprompt ? medprompt[1] : first, score, harness: medprompt ? 'Medprompt' : undefined, date });
+      const sz = iSize >= 0 ? r[iSize]?.text.trim().match(/^(\d+(?:\.\d+)?)([MB])$/i) : null;
+      const params = sz ? Number(sz[1]) / (sz[2].toUpperCase() === 'M' ? 1000 : 1) : undefined;
+      const link = r[iModel]?.html.match(/href="(https?:\/\/[^"]+)"/i)?.[1] ?? (iCode >= 0 ? r[iCode]?.html.match(/href="(https?:\/\/[^"]+)"/i)?.[1] : undefined);
+      const macroF1 = iF1 >= 0 ? num(r[iF1]?.text) : undefined;
+      rows.push({
+        model: medprompt ? medprompt[1] : first,
+        score,
+        harness: medprompt ? 'Medprompt' : undefined,
+        date,
+        ...(params !== undefined ? { params } : {}),
+        ...(link ? { link } : {}),
+        ...(macroF1 !== undefined ? { metrics: { macroF1 } } : {}),
+      });
     }
     return rows;
   },
