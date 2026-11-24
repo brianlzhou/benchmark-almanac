@@ -19,11 +19,16 @@ const METRICS = {
 type Component = keyof typeof METRICS;
 interface Result {
   benchmark: string; model: string; modelSlug: string; score: number; metric: string;
-  higherIsBetter: boolean; setting: string; source: { date: string | null };
+  higherIsBetter: boolean; setting: string; source: { date: string | null; url?: string | null };
   reportedBy: string; costPerTest: number | null; unranked: boolean;
   ciLow: number | null; ciHigh: number | null;
 }
 interface Feed { licence: { name: string }; attribution: string; results: Result[] }
+
+const MONEDA_STATS: NonNullable<Leaderboard['stats']> = {
+  personalDirectiveRate: { name: 'EU personal directive rate', unit: '%', better: 'lower' },
+  incorrectRate: { name: 'Incorrect rate', unit: '%', better: 'lower' },
+};
 
 export function monedaBoard(component: Component): Leaderboard {
   const metric: readonly string[] = METRICS[component];
@@ -32,6 +37,7 @@ export function monedaBoard(component: Component): Leaderboard {
     url: `https://benchmarks.finance/benchmarks/moneda-${component}/`,
     feed: FEED,
     terms: 'The score API is CC BY 4.0 and requests attribution to benchmarks.finance by Moneda.',
+    stats: MONEDA_STATS,
     async fetch(): Promise<LeaderboardRow[]> {
       const data = await fetchJson<Feed>(FEED);
       if (data.licence?.name !== 'CC BY 4.0' || !Array.isArray(data.results)) throw new Error('Moneda score API schema or license changed');
@@ -59,6 +65,8 @@ export function monedaBoard(component: Component): Leaderboard {
         return {
           model: r.model, score: r.score, setting,
           date: r.source.date && /^\d{4}-\d{2}-\d{2}$/.test(r.source.date) ? r.source.date : undefined,
+          link: r.source.url?.startsWith('https://') ? r.source.url : undefined,
+          ...(r.ciLow != null && r.ciHigh != null && Number.isFinite(r.ciLow) && Number.isFinite(r.ciHigh) && r.ciLow <= r.ciHigh ? { low: r.ciLow, high: r.ciHigh } : {}),
           cost: r.costPerTest ?? undefined, metrics,
         };
       });
