@@ -34891,10 +34891,25 @@
       "terms": "Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.",
       "host": "Vals AI",
       "retrieved": "2026-11-24",
-      "rows": 34,
-      "unmatched": [
-        "Wonder"
-      ],
+      "rows": 35,
+      "unmatched": [],
+      "chart": {
+        "title": "Accuracy against time per test",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "time",
+          "label": "Time per test",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "reference": [
         "Vals AI"
       ],
@@ -34907,6 +34922,26 @@
         "totalTokens": {
           "name": "Total tokens",
           "unit": "tokens"
+        },
+        "turns": {
+          "name": "Mean turns per test",
+          "unit": "count",
+          "better": "lower"
+        },
+        "avgQuerySeconds": {
+          "name": "Mean query latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "medianQuerySeconds": {
+          "name": "Median query latency",
+          "unit": "seconds",
+          "better": "lower"
+        },
+        "avgTtftSeconds": {
+          "name": "Mean time to first token",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -53872,87 +53907,112 @@
       "url": "https://labs.scale.com/papers/clinicare-bench",
       "feed": "https://static.remotasks.com/uploads/6a74bd9cebda5487911dfbc2/scale-clinicare-bench.pdf",
       "terms": "Scale allows the public paper page in robots.txt and restricts use through its terms. Results are credited to the paper authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
       "parts": {
-        "eol-goal-concordance": {
-          "name": "eol-goal-concordance"
-        },
-        "overdose-disposition": {
-          "name": "overdose-disposition"
-        },
-        "renal-trajectory": {
-          "name": "renal-trajectory"
-        },
-        "transfusion-audit": {
-          "name": "transfusion-audit"
-        },
-        "discharge-audit": {
-          "name": "discharge-audit"
-        },
         "advanced-imaging": {
-          "name": "advanced-imaging"
-        },
-        "hfref-gdmt": {
-          "name": "hfref-gdmt"
+          "name": "Advanced imaging",
+          "group": "Scenario"
         },
         "post-ct-aki": {
-          "name": "post-ct-aki"
-        },
-        "sepsis-bundle": {
-          "name": "sepsis-bundle"
-        },
-        "goals-of-care": {
-          "name": "goals-of-care"
-        },
-        "frequent-admitter": {
-          "name": "frequent-admitter"
-        },
-        "readmission-30d": {
-          "name": "readmission-30d"
-        },
-        "icu-delirium": {
-          "name": "icu-delirium"
-        },
-        "sepsis-source-abx": {
-          "name": "sepsis-source-abx"
-        },
-        "med-reconciliation": {
-          "name": "med-reconciliation"
-        },
-        "postop-complications": {
-          "name": "postop-complications"
+          "name": "Post-CT kidney injury",
+          "group": "Scenario"
         },
         "pe-workup": {
-          "name": "pe-workup"
+          "name": "Pulmonary embolism workup",
+          "group": "Scenario"
+        },
+        "discharge-audit": {
+          "name": "Discharge audit",
+          "group": "Scenario"
+        },
+        "renal-trajectory": {
+          "name": "Renal trajectory",
+          "group": "Scenario"
+        },
+        "sepsis-bundle": {
+          "name": "Sepsis bundle",
+          "group": "Scenario"
+        },
+        "readmission-30d": {
+          "name": "30-day readmission",
+          "group": "Scenario"
+        },
+        "eol-goal-concordance": {
+          "name": "End-of-life goal concordance",
+          "group": "Scenario"
+        },
+        "overdose-disposition": {
+          "name": "Overdose disposition",
+          "group": "Scenario"
+        },
+        "transfusion-audit": {
+          "name": "Transfusion audit",
+          "group": "Scenario"
+        },
+        "hfref-gdmt": {
+          "name": "Heart failure guideline therapy",
+          "group": "Scenario"
+        },
+        "goals-of-care": {
+          "name": "Goals of care",
+          "group": "Scenario"
+        },
+        "frequent-admitter": {
+          "name": "Frequent admitter",
+          "group": "Scenario"
+        },
+        "icu-delirium": {
+          "name": "ICU delirium",
+          "group": "Scenario"
+        },
+        "sepsis-source-abx": {
+          "name": "Sepsis source antibiotics",
+          "group": "Scenario"
+        },
+        "med-reconciliation": {
+          "name": "Medication reconciliation",
+          "group": "Scenario"
+        },
+        "postop-complications": {
+          "name": "Postoperative complications",
+          "group": "Scenario"
         },
         "dka-resolution": {
-          "name": "dka-resolution"
+          "name": "DKA resolution",
+          "group": "Scenario"
         },
         "hyperkalemia-management": {
-          "name": "hyperkalemia-management"
+          "name": "Hyperkalemia management",
+          "group": "Scenario"
         },
         "ams-workup": {
-          "name": "ams-workup"
+          "name": "Altered mental status workup",
+          "group": "Scenario"
         },
         "empiric-abx": {
-          "name": "empiric-abx"
+          "name": "Empiric antibiotics",
+          "group": "Scenario"
         },
         "he-precipitant": {
-          "name": "he-precipitant"
+          "name": "Hepatic encephalopathy precipitant",
+          "group": "Scenario"
         },
         "stroke-time-targets": {
-          "name": "stroke-time-targets"
+          "name": "Stroke time targets",
+          "group": "Scenario"
         },
         "anticoag-reversal": {
-          "name": "anticoag-reversal"
+          "name": "Anticoagulation reversal",
+          "group": "Scenario"
         },
         "pneumonia-curb65": {
-          "name": "pneumonia-curb65"
+          "name": "Pneumonia CURB-65",
+          "group": "Scenario"
         }
       },
-      "static": "paper",
       "stats": {
         "macF1": {
           "name": "Macro F1",
@@ -255711,34 +255771,44 @@
       ],
       "parts": {
         "Clause accuracy": {
-          "name": "Clause accuracy"
+          "name": "Clause accuracy",
+          "group": "Measure"
         },
         "Evidence citation F1": {
-          "name": "Evidence citation F1"
+          "name": "Evidence citation F1",
+          "group": "Measure"
         },
         "Boundary hit rate": {
-          "name": "Boundary hit rate"
+          "name": "Boundary hit rate",
+          "group": "Measure"
         },
         "Missing detection F1": {
-          "name": "Missing detection F1"
+          "name": "Missing detection F1",
+          "group": "Measure"
         },
         "Missing slot identification F1": {
-          "name": "Missing slot identification F1"
+          "name": "Missing slot identification F1",
+          "group": "Measure"
         },
         "Uncertain detection F1": {
-          "name": "Uncertain detection F1"
+          "name": "Uncertain detection F1",
+          "group": "Measure"
         },
         "Reportable detection F1": {
-          "name": "Reportable detection F1"
+          "name": "Reportable detection F1",
+          "group": "Measure"
         },
         "Complete": {
-          "name": "Complete"
+          "name": "Complete cases",
+          "group": "Case type"
         },
         "Missing": {
-          "name": "Missing"
+          "name": "Missing cases",
+          "group": "Case type"
         },
         "Uncertain": {
-          "name": "Uncertain"
+          "name": "Uncertain cases",
+          "group": "Case type"
         }
       }
     },

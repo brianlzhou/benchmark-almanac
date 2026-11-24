@@ -369,6 +369,7 @@
     ["biomysterybench","gpt-6-2-astra","Vals AI harness, v11 full set",null,"2026-11-18"],
     ["biomysterybench","gpt-6-2-sol","Vals AI harness, v11 full set",null,"2026-11-18"],
     ["biomysterybench","inkling-2-mini","Vals AI harness, v11 full set","Vals AI","2026-11-23"],
+    ["biomysterybench","muse-wonder","Vals AI harness, v11 full set","Vals AI","2026-11-24"],
     ["biopharma-bench","claude-sonnet-5-5","V0.2; high; 81 tasks","Claude Code","2026-11-10"],
     ["biopharma-bench","gemini-4-argon","V0.2; high; 81 tasks","Gemini CLI","2026-11-10"],
     ["biopharma-bench","kimi-k3-1-pro","V0.2; high; 81 tasks","Pi","2026-11-10"],
