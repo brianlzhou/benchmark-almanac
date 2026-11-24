@@ -14,8 +14,11 @@ const DATE = '2025-10-31';
 const board: Leaderboard = {
   benchmark: 'amo-bench', static: 'paper',
   url: 'https://amo-bench.github.io/',
-  feed: `${PAGE} (main results table, AMO-Bench column)`,
+  feed: `${PAGE} (main results table, AMO-Bench and AMO-Bench-P columns)`,
   terms: 'arXiv robots.txt allows /html (crawl delay 15 s; one request per sync); the AMO-Bench repository is MIT-licensed.',
+  parts: {
+    amoBenchP: { name: 'AMO-Bench-P', note: 'Parser-gradable subset of AMO-Bench.' },
+  },
   aliases: {
     'GPT-5-Thinking (High)': 'gpt-5',
     // the paper lists DeepSeek-R1-0528 separately, so plain DeepSeek-R1 is the January release
@@ -38,7 +41,8 @@ const board: Leaderboard = {
       // "(High)" is the reasoning effort; DeepSeek-V3.1 is one hybrid model listed with and without thinking
       const effort = model.match(/\s*\((High|Medium|Low)\)$/)?.[1].toLowerCase();
       const setting = effort ?? (/^DeepSeek-V3\.1-Thinking$/.test(model) ? 'thinking' : /^DeepSeek-V3\.1$/.test(model) ? 'non-thinking' : undefined);
-      rows.push({ model, score, setting, date: DATE });
+      const amoBenchP = num(r[2]?.text);
+      rows.push({ model, score, setting, trials: 32, date: DATE, ...(amoBenchP !== undefined ? { metrics: { amoBenchP } } : {}) });
     }
     return rows;
   },

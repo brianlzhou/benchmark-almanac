@@ -14314,12 +14314,18 @@
     },
     "amo-bench": {
       "url": "https://amo-bench.github.io/",
-      "feed": "https://arxiv.org/html/2510.26768v1 (main results table, AMO-Bench column)",
+      "feed": "https://arxiv.org/html/2510.26768v1 (main results table, AMO-Bench and AMO-Bench-P columns)",
       "terms": "arXiv robots.txt allows /html (crawl delay 15 s; one request per sync); the AMO-Bench repository is MIT-licensed.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
-      "static": "paper"
+      "parts": {
+        "amoBenchP": {
+          "name": "AMO-Bench-P",
+          "note": "Parser-gradable subset of AMO-Bench."
+        }
+      }
     },
     "among-us-far-ai": {
       "url": "https://github.com/7vik/AmongUs#deception-elo",
@@ -19470,7 +19476,8 @@
       "url": "https://arxiv.org/html/1803.05457",
       "feed": "https://arxiv.org/html/1803.05457",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BiDAF ",
@@ -19480,14 +19487,14 @@
         "IR (using ARC Corpus)",
         "TableILP",
         "TupleInference"
-      ],
-      "static": "paper"
+      ]
     },
     "arc-easy": {
       "url": "https://arxiv.org/html/1803.05457",
       "feed": "https://arxiv.org/html/1803.05457",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "BiDAF ",
@@ -19497,8 +19504,7 @@
         "IR (using ARC Corpus)",
         "TableILP",
         "TupleInference"
-      ],
-      "static": "paper"
+      ]
     },
     "arch-review-v1": {
       "url": "https://app.primeintellect.ai/dashboard/environments/korck/arch-review-v1",
@@ -91865,15 +91871,15 @@
       "url": "https://arxiv.org/html/2308.09126",
       "feed": "https://arxiv.org/html/2308.09126",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "FrozenBiLM",
         "InternVideo",
         "VIOLET",
         "mPLUG-Owl"
-      ],
-      "static": "paper"
+      ]
     },
     "egotempo": {
       "url": "https://arxiv.org/html/2503.13646",
@@ -93679,7 +93685,8 @@
       "url": "https://arxiv.org/html/2406.05756",
       "feed": "https://arxiv.org/html/2406.05756 (generation and likelihood on the complete benchmark)",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "BLIP2 7B",
@@ -93692,7 +93699,92 @@
         "Shikra 7B",
         "mPlugOwl 7B"
       ],
-      "static": "paper"
+      "parts": {
+        "MP3D": {
+          "name": "MP3D",
+          "group": "Dataset"
+        },
+        "AI2-THOR": {
+          "name": "AI2-THOR",
+          "group": "Dataset"
+        },
+        "ScanNet": {
+          "name": "ScanNet",
+          "group": "Dataset"
+        },
+        "MP3D:above": {
+          "group": "MP3D",
+          "name": "Above"
+        },
+        "MP3D:below": {
+          "group": "MP3D",
+          "name": "Below"
+        },
+        "MP3D:left": {
+          "group": "MP3D",
+          "name": "Left"
+        },
+        "MP3D:right": {
+          "group": "MP3D",
+          "name": "Right"
+        },
+        "MP3D:close": {
+          "group": "MP3D",
+          "name": "Close"
+        },
+        "MP3D:far": {
+          "group": "MP3D",
+          "name": "Far"
+        },
+        "AI2-THOR:above": {
+          "group": "AI2-THOR",
+          "name": "Above"
+        },
+        "AI2-THOR:below": {
+          "group": "AI2-THOR",
+          "name": "Below"
+        },
+        "AI2-THOR:left": {
+          "group": "AI2-THOR",
+          "name": "Left"
+        },
+        "AI2-THOR:right": {
+          "group": "AI2-THOR",
+          "name": "Right"
+        },
+        "AI2-THOR:close": {
+          "group": "AI2-THOR",
+          "name": "Close"
+        },
+        "AI2-THOR:far": {
+          "group": "AI2-THOR",
+          "name": "Far"
+        },
+        "ScanNet:above": {
+          "group": "ScanNet",
+          "name": "Above"
+        },
+        "ScanNet:below": {
+          "group": "ScanNet",
+          "name": "Below"
+        },
+        "ScanNet:left": {
+          "group": "ScanNet",
+          "name": "Left"
+        },
+        "ScanNet:right": {
+          "group": "ScanNet",
+          "name": "Right"
+        },
+        "ScanNet:close": {
+          "group": "ScanNet",
+          "name": "Close"
+        },
+        "ScanNet:far": {
+          "group": "ScanNet",
+          "name": "Far"
+        }
+      }
     },
     "emdb": {
       "url": "https://eth-ait.github.io/emdb/",
@@ -101727,12 +101819,20 @@
       "url": "https://arxiv.org/abs/2511.02872",
       "feed": "https://arxiv.org/html/2511.02872",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [
         "Kimina-Prover-72B"
       ],
-      "static": "paper"
+      "stats": {
+        "nlAccuracy": {
+          "name": "Natural language proof accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Pass@1 natural language proof accuracy on FATE-X from Table 2."
+        }
+      }
     },
     "fda-information-extraction-based": {
       "url": "https://github.com/HazyResearch/based#running-evaluations",
@@ -127946,14 +128046,14 @@
       "url": "https://arxiv.org/html/2407.21783v3",
       "feed": "https://arxiv.org/html/2407.21783v3",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
         "GPT-3.5 Turbo (snapshot unspecified)",
         "GPT-4o (snapshot unspecified)"
-      ],
-      "static": "paper"
+      ]
     },
     "gold-commodity-news": {
       "url": "https://arxiv.org/html/2009.04202",
@@ -139785,17 +139885,54 @@
     },
     "ifbench": {
       "url": "https://arxiv.org/html/2507.02833",
-      "feed": "https://arxiv.org/html/2507.02833 (Table 3 IFBench column)",
+      "feed": "https://arxiv.org/html/2507.02833 (Tables 2, 3, 5, 6 and 7)",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
+        "IF training experiment (DPO after DPO)",
+        "IF training experiment (DPO after SFT)",
+        "IF training experiment (GRPO after DPO)",
+        "IF training experiment (GRPO after SFT)",
+        "IF-RLVR (Qwen2.5-7B, trained on a mix)",
+        "IF-RLVR (Qwen2.5-7B, trained on multi-turn)",
+        "IF-RLVR (Qwen2.5-7B, trained on single-turn)",
+        "IF-RLVR (Qwen2.5-7B- Instruct, trained on a mix)",
+        "IF-RLVR (Qwen2.5-7B- Instruct, trained on multi-turn)",
+        "IF-RLVR (Qwen2.5-7B- Instruct, trained on single-turn)",
         "IF-RLVR Tülu -DPO 8b",
         "IF-RLVR qwen2.5 7b",
         "Llama-3.1-Tulu-3-8B-DPO",
-        "Llama-3.1-Tulu-3-8B-SFT"
+        "Llama-3.1-Tulu-3-8B-SFT",
+        "after IF-RLVR (llama3.1, from base)",
+        "after IF-RLVR (olmo2, from base)",
+        "after IF-RLVR (olmo2, instruct)",
+        "after IF-RLVR (qwen2.5, from base)",
+        "after IF-RLVR (qwen2.5, instruct)",
+        "after IF-RLVR (tulu3-dpo, instruct)",
+        "before IF-RLVR (olmo2, instruct)",
+        "before IF-RLVR (qwen2.5, instruct)",
+        "before IF-RLVR (tulu3-dpo, instruct)"
       ],
-      "static": "paper"
+      "parts": {
+        "count": {
+          "name": "Count",
+          "group": "Constraint type"
+        },
+        "format": {
+          "name": "Format",
+          "group": "Constraint type"
+        },
+        "words": {
+          "name": "Words",
+          "group": "Constraint type"
+        },
+        "sent.": {
+          "name": "Sentence",
+          "group": "Constraint type"
+        }
+      }
     },
     "ifc-bench-2": {
       "url": "https://ai.onestruction.com/leaderboard/en/benchmarks/ifc/",
@@ -163441,14 +163578,152 @@
       "url": "https://www.futurehouse.org/research-announcements/lab-bench-measuring-capabilities-of-language-models-for-biology-research",
       "feed": "https://arxiv.org/html/2407.10362",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "Meta-Llama-3-70B-Instruct",
         "gpt-4-turbo (snapshot unspecified)",
         "gpt-4o (snapshot unspecified)"
       ],
-      "static": "paper"
+      "parts": {
+        "LitQA2": {
+          "name": "LitQA2",
+          "group": "Category"
+        },
+        "SuppQA": {
+          "name": "SuppQA",
+          "group": "Category"
+        },
+        "FigQA": {
+          "name": "FigQA",
+          "group": "Category"
+        },
+        "TableQA": {
+          "name": "TableQA",
+          "group": "Category"
+        },
+        "DbQA_dga_task-v1": {
+          "name": "DGA",
+          "group": "DbQA"
+        },
+        "DbQA_gene_location_task-v1": {
+          "name": "Gene location",
+          "group": "DbQA"
+        },
+        "DbQA_mirna_targets_task-v1": {
+          "name": "miRNA targets",
+          "group": "DbQA"
+        },
+        "DbQA_mouse_tumor_gene_sets-v1": {
+          "name": "Mouse tumor gene sets",
+          "group": "DbQA"
+        },
+        "DbQA_oncogenic_signatures_task-v1": {
+          "name": "Oncogenic signatures",
+          "group": "DbQA"
+        },
+        "DbQA_tfbs_GTRD_task-v1": {
+          "name": "TFBS GTRD",
+          "group": "DbQA"
+        },
+        "DbQA_variant_from_sequence_task-v1": {
+          "name": "Variant from sequence",
+          "group": "DbQA"
+        },
+        "DbQA_variant_multi_sequence_task-v1": {
+          "name": "Variant multi sequence",
+          "group": "DbQA"
+        },
+        "DbQA_vax_response_task-v1": {
+          "name": "Vax response",
+          "group": "DbQA"
+        },
+        "DbQA_viral_ppi_task-v1": {
+          "name": "Viral PPI",
+          "group": "DbQA"
+        },
+        "ProtocolQA": {
+          "name": "ProtocolQA",
+          "group": "Category"
+        },
+        "SeqQA_ORF-seq-AAid-v1": {
+          "name": "ORF seq AA ID",
+          "group": "SeqQA"
+        },
+        "SeqQA_ORF-seq-AAseq-v1": {
+          "name": "ORF seq AA seq",
+          "group": "SeqQA"
+        },
+        "SeqQA_ORF-seq-numlen-v1": {
+          "name": "ORF seq num len",
+          "group": "SeqQA"
+        },
+        "SeqQA_ORF-transeff-v1": {
+          "name": "ORF trans eff",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-gene-enzprimers-v1": {
+          "name": "PCR gene enz primers",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-gene-gibshindprimers-v1": {
+          "name": "PCR gene gibs hind primers",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-gene-gibssmaprimers-v1": {
+          "name": "PCR gene gibs sma primers",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-geneprimers-enz-v1": {
+          "name": "PCR gene primers enz",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-len-primers-v1": {
+          "name": "PCR len primers",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-primers-len-v1": {
+          "name": "PCR primers len",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-seq-enzprimers-v1": {
+          "name": "PCR seq enz primers",
+          "group": "SeqQA"
+        },
+        "SeqQA_PCR-seq-primers-v1": {
+          "name": "PCR seq primers",
+          "group": "SeqQA"
+        },
+        "SeqQA_Prop-seq-gcpercent-v1": {
+          "name": "Prop seq GC percent",
+          "group": "SeqQA"
+        },
+        "SeqQA_RE-seq-lenfrags-v1": {
+          "name": "RE seq len frags",
+          "group": "SeqQA"
+        },
+        "SeqQA_RE-seq-numfrags-v1": {
+          "name": "RE seq num frags",
+          "group": "SeqQA"
+        },
+        "CloningScenarios": {
+          "name": "CloningScenarios",
+          "group": "Category"
+        }
+      },
+      "stats": {
+        "precision": {
+          "name": "Mean precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "coverage": {
+          "name": "Mean coverage",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "lab-bench-cloningscenarios": {
       "url": "https://www.futurehouse.org/research-announcements/lab-bench-measuring-capabilities-of-language-models-for-biology-research",
@@ -176127,10 +176402,27 @@
       "url": "https://arxiv.org/abs/2410.10813",
       "feed": "https://arxiv.org/html/2410.10813",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 162,
       "unmatched": [],
-      "static": "paper"
+      "stats": {
+        "dropPercent": {
+          "name": "Accuracy drop from Oracle",
+          "unit": "%",
+          "better": "lower"
+        },
+        "recall": {
+          "name": "Retrieval recall",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ndcg": {
+          "name": "Retrieval NDCG",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "longmemeval-v2": {
       "url": "https://xiaowu0162.github.io/longmemeval-v2/",
@@ -181739,14 +182031,187 @@
       "url": "https://arxiv.org/abs/2503.21699",
       "feed": "https://arxiv.org/html/2503.21699",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 48,
       "unmatched": [
         "EgoGPT-7B",
         "Gemini 2.5-FL",
         "Ola-7B"
       ],
-      "static": "paper"
+      "parts": {
+        "easy": {
+          "name": "Easy",
+          "group": "Difficulty"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Difficulty"
+        },
+        "hard": {
+          "name": "Hard",
+          "group": "Difficulty"
+        },
+        "social": {
+          "name": "Social",
+          "group": "Agentic task"
+        },
+        "sentiment": {
+          "name": "Sentiment",
+          "group": "Agentic task"
+        },
+        "egocentricAgent": {
+          "name": "Egocentric Agent",
+          "group": "Agentic task"
+        },
+        "informationQuerying": {
+          "name": "Information Querying",
+          "group": "Agentic task"
+        },
+        "sports": {
+          "name": "Sports",
+          "group": "Agentic task"
+        },
+        "gaming": {
+          "name": "Gaming",
+          "group": "Agentic task"
+        },
+        "shopping": {
+          "name": "Shopping",
+          "group": "Agentic task"
+        },
+        "naturalSound": {
+          "name": "Natural Sound",
+          "group": "Audio type"
+        },
+        "speech": {
+          "name": "Speech",
+          "group": "Audio type"
+        },
+        "music": {
+          "name": "Music",
+          "group": "Audio type"
+        },
+        "artificialSound": {
+          "name": "Artificial Sound",
+          "group": "Audio type"
+        },
+        "mixedSounds": {
+          "name": "Mixed Sounds",
+          "group": "Audio type"
+        },
+        "humanitiesAndSociety": {
+          "name": "Humanities and Society",
+          "group": "Topic"
+        },
+        "geographyAndTravel": {
+          "name": "Geography and Travel",
+          "group": "Topic"
+        },
+        "technologyAndGaming": {
+          "name": "Technology and Gaming",
+          "group": "Topic"
+        },
+        "scienceAndKnowledge": {
+          "name": "Science and Knowledge",
+          "group": "Topic"
+        },
+        "moviesTvAndAnimations": {
+          "name": "Movies, TV and Animations",
+          "group": "Topic"
+        },
+        "artsAndPerformance": {
+          "name": "Arts and Performance",
+          "group": "Topic"
+        },
+        "petsAndAnimals": {
+          "name": "Pets and Animals",
+          "group": "Topic"
+        },
+        "businessAndCommerce": {
+          "name": "Business and Commerce",
+          "group": "Topic"
+        },
+        "lifeAndPracticalSkills": {
+          "name": "Life and Practical Skills",
+          "group": "Topic"
+        },
+        "sportsAndAdventure": {
+          "name": "Sports and Adventure",
+          "group": "Topic"
+        },
+        "socialTrendsAndReactions": {
+          "name": "Social Trends and Reactions",
+          "group": "Topic"
+        },
+        "vehiclesAndTransportation": {
+          "name": "Vehicles and Transportation",
+          "group": "Topic"
+        },
+        "lowQualityAndExtendedContent": {
+          "name": "Low Quality and Extended Content",
+          "group": "Topic"
+        },
+        "visualReasoning": {
+          "name": "Visual Reasoning",
+          "group": "Multimodal ability"
+        },
+        "emotionalInference": {
+          "name": "Emotional Inference",
+          "group": "Multimodal ability"
+        },
+        "situationalReasoning": {
+          "name": "Situational Reasoning",
+          "group": "Multimodal ability"
+        },
+        "causalReasoning": {
+          "name": "Causal Reasoning",
+          "group": "Multimodal ability"
+        },
+        "factualRecall": {
+          "name": "Factual Recall",
+          "group": "Multimodal ability"
+        },
+        "spatialReasoning": {
+          "name": "Spatial Reasoning",
+          "group": "Multimodal ability"
+        },
+        "relationship": {
+          "name": "Relationship",
+          "group": "Multimodal ability"
+        },
+        "temporalDistance": {
+          "name": "Temporal Distance",
+          "group": "Multimodal ability"
+        }
+      },
+      "stats": {
+        "openEndedScore": {
+          "name": "Open-ended judged score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "temporalConsistency": {
+          "name": "Temporal consistency",
+          "unit": "score",
+          "better": "higher"
+        },
+        "correctness": {
+          "name": "Correctness",
+          "unit": "score",
+          "better": "higher"
+        },
+        "context": {
+          "name": "Context score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "detailOrientation": {
+          "name": "Detail orientation",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "mawarith": {
       "url": "https://sites.google.com/view/qias2026/leaderboards",
@@ -193867,14 +194332,14 @@
       "url": "https://huggingface.co/datasets/Qwen/P-MMEval",
       "feed": "https://arxiv.org/html/2411.09116",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "GPT-4o (snapshot unspecified)",
         "Gemma2-2B",
         "Mistral-Large (snapshot unspecified)"
-      ],
-      "static": "paper"
+      ]
     },
     "mlqa": {
       "url": "https://aclanthology.org/2020.acl-main.653/",
@@ -221819,7 +222284,8 @@
       "url": "https://arxiv.org/html/2510.06961",
       "feed": "https://arxiv.org/html/2510.06961",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-18",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
         "AssemblyAI Universal 3 Pro",
@@ -221856,7 +222322,13 @@
           "better": "lower"
         }
       },
-      "static": "paper"
+      "stats": {
+        "rtfx": {
+          "name": "Real-time factor",
+          "unit": "speedup",
+          "better": "higher"
+        }
+      }
     },
     "open-chinese-llm-leaderboard": {
       "url": "https://huggingface.co/spaces/BAAI/open_cn_llm_leaderboard",
@@ -249703,13 +250175,13 @@
       "url": "https://arxiv.org/abs/2409.17146",
       "feed": "https://arxiv.org/html/2409.17146",
       "terms": "arXiv allows this HTML path in robots.txt. Results are credited to the paper authors. The paper lists http://arxiv.org/licenses/nonexclusive-distrib/1.0/.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 25,
       "unmatched": [
         "PaliGemma-mix-3B",
         "xGen-MM-interleave-4B"
-      ],
-      "static": "paper"
+      ]
     },
     "plaba": {
       "url": "https://www.nature.com/articles/s41597-022-01920-3",
@@ -331087,7 +331559,8 @@
       "url": "https://arxiv.org/html/2305.14196",
       "feed": "https://arxiv.org/html/2305.14196",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "ChatGPT",
@@ -331097,8 +331570,7 @@
         "Flan-UL2",
         "GPT-4 (snapshot unspecified)",
         "T0pp"
-      ],
-      "static": "paper"
+      ]
     },
     "zhoblimp": {
       "url": "https://aclanthology.org/2026.tacl-1.34.pdf",
