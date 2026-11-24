@@ -1509,9 +1509,13 @@
       "url": "https://aarr-bench.com/leaderboard/",
       "feed": "https://aarr-bench.com/leaderboard/",
       "terms": "The authors publish and maintain the public leaderboard at https://aarr-bench.com/leaderboard/.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "reference": [
+        "Mini-SWE-Agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "context": {
           "name": "Context"
@@ -17208,9 +17212,10 @@
       "url": "https://apprenticebench.com/",
       "feed": "https://apprenticebench.com/assets/index-*.js (leaderboard literal, passed / n)",
       "terms": "Public app bundle; apprenticebench.com has no robots.txt rules and states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 38,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "totalTokens": {
           "name": "Total tokens",
@@ -26696,9 +26701,13 @@
       "url": "https://www.autofactorybench.com/leaderboard",
       "feed": "https://www.autofactorybench.com/data/bench.json",
       "terms": "The maker offers research access and licensing for the full data. The public leaderboard does not specify score reuse terms. https://www.autofactorybench.com/ Robots.txt permits the public data path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "easy": {
           "name": "Easy"
@@ -61861,9 +61870,13 @@
       "url": "https://codecap-bench.github.io/",
       "feed": "https://codecap-bench.github.io/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "reference": [
+        "Pi Agent"
+      ],
+      "harnesses": "system",
       "parts": {
         "dynamicRetention": {
           "name": "Dynamic retention",
@@ -65138,12 +65151,16 @@
       "url": "https://contextbench.github.io/",
       "feed": "https://contextbench.github.io/",
       "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "CodeNib (Haiku5.5 search pair + Opus5.5 mini SWE-agent)",
         "Gemini 2.5 Pro (snapshot unspecified)"
       ],
+      "reference": [
+        "mini SWE-agent"
+      ],
+      "harnesses": "system",
       "stats": {
         "passAt1": {
           "name": "Pass@1",
@@ -77068,7 +77085,7 @@
       "url": "https://developers.databricks.com/ai-index",
       "feed": "https://developers.databricks.com/ai-index",
       "terms": "The publisher displays results at https://developers.databricks.com/ai-index. I could not verify reuse terms. The site allows this path in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Beam-501B-A23B"
@@ -77087,6 +77104,7 @@
           "unit": "%"
         }
       },
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Average latency",
@@ -93313,9 +93331,10 @@
       "feed": "https://pku-value-lab.github.io/EmbodiedCLBench-homepage/",
       "terms": "The authors publish the comparison at https://pku-value-lab.github.io/EmbodiedCLBench-homepage/.",
       "headline": "The headline measures success on advanced tasks, where the authors test transfer from basic tasks.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 24,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "basic": {
           "name": "Basic task success (zero-shot)"
@@ -94424,7 +94443,7 @@
       "url": "https://frontisai.github.io/EnterpriseClawBench/",
       "feed": "https://frontisai.github.io/EnterpriseClawBench/ecb-data.js (combos[].primaryScore)",
       "terms": "Static data file on the project site (GitHub Pages, no robots.txt rules); the site states no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 32,
       "unmatched": [],
       "chart": {
@@ -94443,6 +94462,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "stats": {
         "time": {
           "name": "Average time per task",
@@ -96326,9 +96346,10 @@
       "url": "https://eurekabench.github.io/",
       "feed": "https://eurekabench.github.io/",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "predictiveAccuracy": {
           "name": "Predictive accuracy",
@@ -110161,14 +110182,19 @@
       "url": "https://veris.ai/leaderboard/findesk",
       "feed": "https://veris.ai/leaderboard/findesk",
       "terms": "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions The robots.txt rules allow the leaderboard.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 16,
       "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "stats": {
         "pass3": {
-          "name": "Pass@3",
+          "name": "pass^3",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "All three attempts pass."
         }
       }
     },
@@ -133834,11 +133860,12 @@
       "url": "https://microsoft.github.io/HealthAgentBench/v1/#leaderboard",
       "feed": "https://microsoft.github.io/HealthAgentBench/v1/#leaderboard",
       "terms": "MIT repository, no robots.txt on the maker site.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "GPT 5.3"
-      ]
+      ],
+      "harnesses": "system"
     },
     "healthagentbench-2": {
       "url": "https://microsoft.github.io/HealthAgentBench/v2/#leaderboard",
@@ -209843,12 +209870,13 @@
       "url": "https://nextjs.org/evals",
       "feed": "https://nextjs.org/evals (server-rendered table \"Current evals\", Success Rate)",
       "terms": "Server-rendered public page on nextjs.org (Vercel); the site publishes no robots.txt and the Vercel terms do not restrict reading it.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Cursor Composer 2.5",
         "Pixel Canary"
       ],
+      "harnesses": "system",
       "stats": {
         "latency": {
           "name": "Average duration",
@@ -244151,10 +244179,14 @@
       "url": "https://cadbench.ai/",
       "feed": "https://cadbench.ai/ (server-rendered HTML table, V3 Overall)",
       "terms": "Server-rendered public page; the site publishes no robots.txt and no terms, and the submission repository is public.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
-      "costPer": "run"
+      "costPer": "run",
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system"
     },
     "paraphrase-stability-benchmark": {
       "url": "https://www.kaggle.com/benchmarks/chauhanbalaji/paraphrase-stability-benchmark",
@@ -263536,9 +263568,13 @@
       "url": "https://internscience.github.io/ResearchClawBench-Home/",
       "feed": "https://internscience.github.io/ResearchClawBench-Home/data/leaderboard.json (Pass@1)",
       "terms": "Static JSON on the ResearchClawBench GitHub Pages site, which states no separate terms; the repository is MIT.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 37,
       "unmatched": [],
+      "reference": [
+        "ResearchHarness"
+      ],
+      "harnesses": "system",
       "stats": {
         "time": {
           "name": "Time per task",
@@ -299184,9 +299220,10 @@
       "url": "https://sierra-research.github.io/hyper-tau-bench/",
       "feed": "https://sierra-research.github.io/hyper-tau-bench/hyper-submissions/manifest.json",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "airline": {
           "name": "Airline",
@@ -305430,11 +305467,12 @@
       "url": "https://blog.lai.so/ts-bench/",
       "feed": "https://laiso.github.io/ts-bench/",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "gemini-2.5-flash (snapshot unspecified)"
       ],
+      "harnesses": "system",
       "stats": {
         "totalSeconds": {
           "name": "Total runtime",
@@ -314454,9 +314492,13 @@
       "url": "https://veris.ai/leaderboard/arena",
       "feed": "https://veris.ai/leaderboard/arena",
       "terms": "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
+      "reference": [
+        "Pi"
+      ],
+      "harnesses": "system",
       "parts": {
         "aml": {
           "name": "AML Bench"
@@ -326950,11 +326992,12 @@
       "url": "https://workspace-bench.github.io/leaderboard.html",
       "feed": "https://workspace-bench.github.io/data/site-data.js (detailedRubricsResults.rows)",
       "terms": "The official public leaderboard publishes these results; the Almanac credits and links Workspace-Bench and preserves source attribution.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 41,
       "unmatched": [
         "Seed-2.0-Code"
       ],
+      "harnesses": "system",
       "parts": {
         "easy": {
           "name": "Easy",

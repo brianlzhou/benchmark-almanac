@@ -12,6 +12,7 @@ const URL = 'https://nextjs.org/evals';
 
 const board: Leaderboard = {
   benchmark: 'nextjs-agent-evals',
+  harnesses: 'system',
   url: URL,
   feed: `${URL} (server-rendered table "Current evals", Success Rate)`,
   terms: 'Server-rendered public page on nextjs.org (Vercel); the site publishes no robots.txt and the Vercel terms do not restrict reading it.',

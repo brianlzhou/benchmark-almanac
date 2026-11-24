@@ -22,6 +22,7 @@ interface Run {
 
 const board: Leaderboard = {
   benchmark: 'apprenticebench',
+  harnesses: 'system',
   url: PAGE,
   feed: `${PAGE}assets/index-*.js (leaderboard literal, passed / n)`,
   terms: 'Public app bundle; apprenticebench.com has no robots.txt rules and states no terms.',

@@ -4,7 +4,7 @@ import { fetchText } from '../lib/util.ts';
 import { tables, num } from '../lib/html.ts';
 const URL = "https://microsoft.github.io/HealthAgentBench/v1/#leaderboard";
 const board: Leaderboard = {
-  benchmark: "healthagentbench", url: URL, feed: URL,
+  benchmark: "healthagentbench", harnesses: 'system', url: URL, feed: URL,
   terms: "MIT repository, no robots.txt on the maker site.",
   async fetch() {
     const table = tables(await fetchText(URL)).map(t => t.map(r => r.map(c => c.text))).find(t => t[0]?.some(c => c.includes("Agent")));
