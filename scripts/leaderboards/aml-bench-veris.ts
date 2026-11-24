@@ -18,6 +18,12 @@ const board: Leaderboard = {
     askedOnMultiTurn: { name: 'Asked on multi-turn', unit: 'count' },
     latency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
   },
+  chart: {
+    title: 'Pass@1 versus cost',
+    x: { key: 'cost', label: 'Mean agent cost per case', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' },
+    note: 'Veris plots pass@1 against mean agent-side cost per case on a logarithmic dollar scale.',
+  },
   async fetch() {
     const table = tables(await fetchText(feed)).find(t => t[0]?.[0]?.text === 'Agent');
     const labels = ['Agent','pass@1','95% CI','pass³','Single-turn','Multi-turn','Asked on multi-turn','$/task','Harness'];

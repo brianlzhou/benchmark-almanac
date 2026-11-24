@@ -34,6 +34,7 @@
     "astroclimb": [{"field":"submissionCount","kind":"link","why":"not stored","share":1,"sample":"1"}],
     "astromlab-1": [{"field":"Step-1","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Step-2","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Step(阶跃星辰) Series","kind":"time, latency or steps","why":"not stored","share":1}],
     "asynctool": [{"field":"Multi Step","kind":"time, latency or steps","why":"not stored","share":1},{"field":"#Samples","kind":"trials","why":"not stored","share":1},{"field":"%Samples","kind":"trials","why":"not stored","share":1}],
+    "audiojevbench": [{"field":"n_latency","kind":"time, latency or steps","why":"not stored","share":1,"sample":"67"}],
     "autofactory-bench": [{"field":"org","kind":"submitter or agent maker","why":"not stored","share":1,"sample":"OpenAI"}],
     "avps-360": [{"field":"W-repeat","kind":"trials","why":"not stored","share":1}],
     "barc-bench": [{"field":"Artifacts","kind":"link","why":"not stored","share":1}],

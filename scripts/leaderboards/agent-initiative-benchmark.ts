@@ -14,6 +14,12 @@ const board: Leaderboard = {
     secondsPerTask: { name: 'Seconds per task', unit: 'seconds', better: 'lower' },
     toolCallsPerTask: { name: 'Tool calls per task', unit: 'count', better: 'lower' },
   },
+  chart: {
+    title: 'Score versus cost',
+    x: { key: 'cost', label: 'Mean cost per task', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Mean score', unit: 'score', better: 'higher' },
+    note: 'Deepnote plots mean score from 0 to 10 against mean cost per task on a logarithmic dollar scale.',
+  },
   async fetch() {
     const t = tables(await fetchText(URL)).find(t => t[0]?.some(c => c.text === '10 / 10') && t[0]?.some(c => c.text === 'Cost / task'));
     if (!t) throw new Error('Deepnote full leaderboard missing');

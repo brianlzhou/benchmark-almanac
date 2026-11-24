@@ -18,7 +18,7 @@ const board: Leaderboard = {
     matchedGap: { name: 'Matched gap', unit: 'score', better: 'lower' },
     medianLatency: { name: 'Median latency', unit: 'seconds', better: 'lower' },
     p95Latency: { name: '95th percentile latency', unit: 'seconds', better: 'lower' },
-    intelligence: { name: 'Intelligence', unit: 'score', better: 'higher' }, calibration: { name: 'Calibration', unit: 'score', better: 'higher' }, speed: { name: 'Speed', unit: 'score', better: 'higher' }, cost: { name: 'Cost axis', unit: 'score', better: 'lower' },
+    intelligence: { name: 'Intelligence', unit: 'score', better: 'higher' }, calibration: { name: 'Calibration', unit: 'score', better: 'higher' }, speed: { name: 'Speed', unit: 'score', better: 'higher' }, cost: { name: 'Cost axis', unit: 'score', better: 'higher' },
   },
   async fetch() {
     const d = await fetchJson<{ revision: string, n_systems: number, ranking: Result[] }>(feed);

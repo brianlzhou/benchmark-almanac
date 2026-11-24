@@ -3109,11 +3109,27 @@
       "url": "https://www.aecbench.com/leaderboard",
       "feed": "https://www.aecbench.com/leaderboard",
       "terms": "The site serves HTML for robots.txt. The benchmark code uses the MIT license. The results page gives no separate reuse license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "LFM2 24B A2B"
       ],
+      "chart": {
+        "title": "Mean reward versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per completed task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "note": "Interactive Pareto frontier of models and adapters by mean reward against cost per completed task."
+      },
       "parts": {
         "civil": {
           "name": "Civil"
@@ -3156,6 +3172,32 @@
           "name": "95th percentile duration",
           "unit": "seconds",
           "better": "lower"
+        },
+        "inputTokens": {
+          "name": "Mean input tokens",
+          "unit": "tokens",
+          "better": "lower"
+        },
+        "totalCost": {
+          "name": "Total run cost",
+          "unit": "usd",
+          "better": "lower"
+        },
+        "reliabilityAdjustedReward": {
+          "name": "Reliability-adjusted reward",
+          "unit": "score",
+          "better": "higher"
+        },
+        "zeroRewardRate": {
+          "name": "Zero-reward rate",
+          "unit": "score",
+          "better": "lower",
+          "note": "Share of trials scoring zero, from 0 to 1."
+        },
+        "partialCreditRate": {
+          "name": "Partial-credit rate",
+          "unit": "score",
+          "note": "Share of trials receiving partial credit, from 0 to 1."
         }
       }
     },
@@ -3164,9 +3206,25 @@
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/aec/",
       "terms": "ONESTRUCTION reserves copyright and blocks named bots in robots.txt. Its methodology uses external estimates for open model costs, which this reader omits.",
       "host": "ONESTRUCTION",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean task score",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
       "reference": [
         "pi"
       ],
@@ -4301,9 +4359,26 @@
       "url": "https://deepnote.com/research/benchmark",
       "feed": "https://deepnote.com/research/benchmark (50-task leaderboard)",
       "terms": "Deepnote publishes the benchmark documentation under Apache-2.0 and PageMantle under CC BY 4.0. Robots.txt allows the research page. Source: Deepnote.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
+      "chart": {
+        "title": "Score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "note": "Deepnote plots mean score from 0 to 10 against mean cost per task on a logarithmic dollar scale."
+      },
       "stats": {
         "perfectTasks": {
           "name": "Perfect tasks",
@@ -13570,9 +13645,26 @@
       "url": "https://veris.ai/leaderboard/aml-bench",
       "feed": "https://veris.ai/leaderboard/aml-bench",
       "terms": "Veris reserves all rights. Its dataset metadata points to https://veris.ai/terms-and-conditions. I found no public board reuse grant. Robots.txt allows the leaderboard path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [],
+      "chart": {
+        "title": "Pass@1 versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Mean agent cost per case",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Veris plots pass@1 against mean agent-side cost per case on a logarithmic dollar scale."
+      },
       "parts": {
         "singleTurn": {
           "name": "Single-turn"
@@ -16045,12 +16137,30 @@
       "url": "https://www.aox.cz/bench/arkanoid/",
       "feed": "https://www.aox.cz/bench/arkanoid/?view=scoreboard",
       "terms": "The scoreboard does not state a reuse license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "openrouter/google/gemini-3-flash-preview",
         "openrouter/google/gemini-3.5-flash"
       ],
+      "chart": {
+        "title": "Total wall time versus OpenRouter cost",
+        "x": {
+          "key": "cost",
+          "label": "OpenRouter cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "latency",
+          "label": "Total wall time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "note": "AOX plots total wall time against OpenRouter cost on log-log axes for cloud-priced models."
+      },
       "parts": {
         "Loads cleanly": {
           "name": "Loads cleanly",
@@ -16128,11 +16238,29 @@
       "url": "https://www.aox.cz/bench/tetris/",
       "feed": "https://www.aox.cz/bench/tetris/",
       "terms": "The scoreboard does not state a reuse license. https://www.aox.cz/bench/tetris/ The feed host publishes robots.txt at https://www.aox.cz/robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [
         "openrouter/google/gemini-3.5-flash"
       ],
+      "chart": {
+        "title": "Total wall time versus OpenRouter cost",
+        "x": {
+          "key": "cost",
+          "label": "OpenRouter cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "Total",
+          "label": "Total wall time",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "note": "AOX plots total wall time against OpenRouter cost on log-log axes for cloud-priced models."
+      },
       "stats": {
         "P1": {
           "name": "First pass time",
@@ -16455,9 +16583,24 @@
       "feed": "https://appworld.dev/appworld/leaderboard.json",
       "terms": "AppWorld publishes its leaderboard and submission rules at https://github.com/StonyBrookNLP/appworld-leaderboard.",
       "headline": "The board reports no combined score, so this is the plain mean of scenario goal completion on Test-Normal and Test-Challenge.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
+      "chart": {
+        "title": "Test-Challenge score versus interactions",
+        "x": {
+          "key": "test_challengeInteractions",
+          "label": "Average interactions per task",
+          "better": "lower"
+        },
+        "y": {
+          "key": "test_challenge",
+          "label": "Test-Challenge scenario goal completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "The leaderboard plots scenario goal completion against average code execution interactions per task on Test-Challenge."
+      },
       "harnesses": "system",
       "parts": {
         "test_normal": {
@@ -16493,7 +16636,8 @@
         },
         "test_normalInteractions": {
           "name": "Test-Normal interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_normal_level1TGC": {
           "name": "Test-Normal: level 1 task goal completion",
@@ -16502,7 +16646,8 @@
         },
         "test_normal_level1Interactions": {
           "name": "Test-Normal: level 1 interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_normal_level2TGC": {
           "name": "Test-Normal: level 2 task goal completion",
@@ -16511,7 +16656,8 @@
         },
         "test_normal_level2Interactions": {
           "name": "Test-Normal: level 2 interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_normal_level3TGC": {
           "name": "Test-Normal: level 3 task goal completion",
@@ -16520,7 +16666,8 @@
         },
         "test_normal_level3Interactions": {
           "name": "Test-Normal: level 3 interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_challengeTGC": {
           "name": "Test-Challenge task goal completion",
@@ -16529,7 +16676,8 @@
         },
         "test_challengeInteractions": {
           "name": "Test-Challenge interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_challenge_level1TGC": {
           "name": "Test-Challenge: level 1 task goal completion",
@@ -16538,7 +16686,8 @@
         },
         "test_challenge_level1Interactions": {
           "name": "Test-Challenge: level 1 interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_challenge_level2TGC": {
           "name": "Test-Challenge: level 2 task goal completion",
@@ -16547,7 +16696,8 @@
         },
         "test_challenge_level2Interactions": {
           "name": "Test-Challenge: level 2 interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         },
         "test_challenge_level3TGC": {
           "name": "Test-Challenge: level 3 task goal completion",
@@ -16556,7 +16706,8 @@
         },
         "test_challenge_level3Interactions": {
           "name": "Test-Challenge: level 3 interactions",
-          "unit": "count"
+          "unit": "count",
+          "better": "lower"
         }
       }
     },
@@ -16564,7 +16715,7 @@
       "url": "https://appworld.dev/appworld/leaderboard",
       "feed": "https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json",
       "terms": "The authors publish this public results feed; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Qwen-2.5-32B-Instruct",
@@ -16572,6 +16723,21 @@
         "deepseek-ai/deepseek-coder-33b-instruct",
         "meta-llama/Llama-3-70b-chat-hf"
       ],
+      "chart": {
+        "title": "Test-Challenge task goal completion versus interactions",
+        "x": {
+          "key": "interactions",
+          "label": "Average interactions per task",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Task goal completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "The AppWorld leaderboard plots task goal completion against average code execution interactions per task."
+      },
       "parts": {
         "level1": {
           "name": "Level 1",
@@ -16604,7 +16770,7 @@
       "url": "https://appworld.dev/appworld/leaderboard",
       "feed": "https://raw.githubusercontent.com/StonyBrookNLP/appworld-leaderboard/main/experiments/outputs/_leaderboard.json",
       "terms": "The authors publish this public results feed; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [
         "Qwen-2.5-32B-Instruct",
@@ -16612,6 +16778,21 @@
         "deepseek-ai/deepseek-coder-33b-instruct",
         "meta-llama/Llama-3-70b-chat-hf"
       ],
+      "chart": {
+        "title": "Test-Normal task goal completion versus interactions",
+        "x": {
+          "key": "interactions",
+          "label": "Average interactions per task",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Task goal completion",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "The AppWorld leaderboard plots task goal completion against average code execution interactions per task."
+      },
       "parts": {
         "level1": {
           "name": "Level 1",
@@ -25285,7 +25466,7 @@
       "url": "https://benchmarkheaven.com/audio-jev-bench",
       "feed": "https://raw.githubusercontent.com/fstandhartinger/model-market-comparison/main/data/audiojev-preview.json",
       "terms": "Benchmark Heaven allows this path in robots.txt. Its code uses MIT and the page gives no separate audio score license. The raw file host publishes no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AudioJev (mocomoco edge ONNX)",
@@ -25294,6 +25475,23 @@
         "Voxtral Mini 3B (2507)",
         "Whisper large-v3-turbo → Qwen3-4B-Instruct-2507"
       ],
+      "chart": {
+        "title": "Capability versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per decision",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "Capability",
+          "label": "Capability score",
+          "unit": "%",
+          "better": "higher"
+        },
+        "note": "Benchmark Heaven plots AudioJevBench capability score against decision cost on a logarithmic dollar scale."
+      },
       "parts": {
         "clean": {
           "name": "Clean audio",
@@ -25404,14 +25602,6 @@
           "name": "Adjusted 95th percentile latency",
           "unit": "seconds",
           "better": "lower"
-        },
-        "n_latency": {
-          "name": "Latency samples",
-          "unit": "count"
-        },
-        "n_items_scored": {
-          "name": "Items scored",
-          "unit": "count"
         }
       }
     },
@@ -33662,9 +33852,25 @@
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/bim/",
       "terms": "ONESTRUCTION reserves copyright and blocks named bots in robots.txt. Its methodology uses external estimates for open model costs, which this reader omits.",
       "host": "ONESTRUCTION",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean task score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "reference": [
         "pi"
       ],
@@ -44323,9 +44529,25 @@
       "url": "https://ai.onestruction.com/leaderboard/en/benchmarks/ceq/",
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/ceq/",
       "terms": "The independent board gives no explicit score reuse license. Exclude open model cost estimates that use Artificial Analysis pricing. https://ai.onestruction.com/leaderboard/en/methodology/ Robots.txt restricts named crawlers.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "reference": [
         "pi"
       ],
@@ -78330,9 +78552,24 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/legal/dayjob-law",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction; the almanac credits Fireworks AI and benchmark owner Surge AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [],
+      "chart": {
+        "title": "DAYJOB Law score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Model cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1 at 95%",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "reasoningTokens": {
           "name": "Reasoning tokens",
@@ -88873,9 +89110,24 @@
       "url": "https://fireworks.ai/specialized-intelligence-index/benchmarks/customer-support/duetbench-diagnosis",
       "feed": "https://fireworks.ai/specialized-intelligence-index/api/index.json",
       "terms": "Fireworks terms restrict automated extraction. Benchmark Almanac credits Decagon and Fireworks and links the published source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
+      "chart": {
+        "title": "DuetBench Diagnosis Elo versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Model cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Diagnosis Elo",
+          "unit": "elo",
+          "better": "higher"
+        }
+      },
       "parts": {
         "taskOutcome": {
           "name": "Task outcome",
@@ -88895,21 +89147,6 @@
         }
       },
       "stats": {
-        "cost_per_task": {
-          "name": "Cost per task",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "duration_per_task": {
-          "name": "Duration per task",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "elo": {
-          "name": "Elo rating",
-          "unit": "elo",
-          "better": "higher"
-        },
         "completionRate": {
           "name": "Completion rate",
           "unit": "%",
@@ -88923,21 +89160,10 @@
           "name": "Distinct cases",
           "unit": "count"
         },
-        "stalenessDays": {
-          "name": "Staleness days",
-          "unit": "count"
-        },
         "uncachedInput": {
           "name": "Uncached input tokens",
-          "unit": "tokens"
-        },
-        "cachedInput": {
-          "name": "Cached input tokens",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Output tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "latency": {
           "name": "Latency",
@@ -88946,11 +89172,13 @@
         },
         "cachedTokens": {
           "name": "Cached tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         },
         "inputTokens": {
           "name": "Input tokens",
-          "unit": "tokens"
+          "unit": "tokens",
+          "better": "lower"
         }
       }
     },
@@ -139112,9 +139340,25 @@
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/ifc/",
       "terms": "ONESTRUCTION claims copyright and gives no explicit results license. Cloudflare robots.txt restricts named crawlers. The importer excludes open-model pricing from Artificial Analysis.",
       "host": "ONESTRUCTION",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Execution accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Time per task",
@@ -140034,7 +140278,7 @@
       "url": "https://benchmarkheaven.com/image-jev-bench#imagejev-v015-archive",
       "feed": "https://raw.githubusercontent.com/fstandhartinger/model-market-comparison/main/data/raw/benchmarks/jevbench/multimodal-preview/preview.json",
       "terms": "Benchmark Heaven allows the archive page in robots.txt. The raw host gives no robots rules. The CC BY 4.0 export notice does not name this archive.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "AutoJev-27B",
@@ -140134,7 +140378,7 @@
         "cost": {
           "name": "Cost axis",
           "unit": "score",
-          "better": "lower"
+          "better": "higher"
         }
       }
     },
@@ -152710,16 +152954,32 @@
       "feed": "https://ai.onestruction.com/leaderboard/en/benchmarks/ids/",
       "terms": "ONESTRUCTION reserves copyright and blocks named bots in robots.txt. Its methodology uses external estimates for open model costs, which this reader omits.",
       "host": "ONESTRUCTION",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [],
+      "chart": {
+        "title": "Score versus cost",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean task score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "reference": [
         "pi"
       ],
       "stats": {
         "latency": {
-          "name": "Latency per task",
-          "unit": "ms",
+          "name": "Time per task",
+          "unit": "seconds",
           "better": "lower"
         }
       }

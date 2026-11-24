@@ -13,6 +13,7 @@ const board: Leaderboard = {
   terms: "The independent board gives no explicit score reuse license. Exclude open model cost estimates that use Artificial Analysis pricing. https://ai.onestruction.com/leaderboard/en/methodology/ Robots.txt restricts named crawlers.",
   reference: ['pi'],
   stats: { latency: { name: 'Time per task', unit: 'seconds', better: 'lower' }, tokensPerSecond: { name: 'Token throughput', unit: 'tokens/s', better: 'higher' } },
+  chart: { title: 'Score versus cost', x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true }, y: { key: 'score', label: 'Accuracy', unit: '%', better: 'higher' } },
   async fetch() {
     const t = tables(await fetchText(feed)).find(t => t[0].map(c => c.text).join('|') === '#|Model|Score|Overall|Cost per task|Time per task');
     if (!t || t.length < 21) throw new Error('Missing CEQuest rankings');

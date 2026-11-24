@@ -11,12 +11,14 @@ type RecordRow = { llm: { name: string, tooltip: string }, method: {name: string
   test_normal: Record<string, Scores>, test_challenge: Record<string, Scores> };
 const splits = { test_normal: 'Test-Normal', test_challenge: 'Test-Challenge' } as const;
 const stats: Record<string, { name: string, unit: string, better?: 'higher' | 'lower' }> = {};
+const parts: Record<string, string> = {};
 for (const [key, label] of Object.entries(splits)) {
   for (const level of ['all', 'level 1', 'level 2', 'level 3']) {
     const prefix = level === 'all' ? key : key + '_' + level.replaceAll(' ', '');
     const scope = level === 'all' ? label : label + ': ' + level;
+    parts[prefix] = scope;
     stats[prefix + 'TGC'] = { name: scope + ' task goal completion', unit: '%', better: 'higher' };
-    stats[prefix + 'Interactions'] = { name: scope + ' interactions', unit: 'count' };
+    stats[prefix + 'Interactions'] = { name: scope + ' interactions', unit: 'count', better: 'lower' };
   }
 }
 const board: Leaderboard = {
@@ -25,16 +27,21 @@ const board: Leaderboard = {
   headline: 'The board reports no combined score, so this is the plain mean of scenario goal completion on Test-Normal and Test-Challenge.',
   aliases: { 'gpt-4o-2024-05-13': 'gpt-4o-may-2024', 'gpt-4o-2024-08-06': 'gpt-4o-aug-2024',
     'gpt-4-turbo-2024-04-09': 'gpt-4-turbo-apr-2024', DeepSeekCoder: 'deepseek-coder-33b', 'gptoss-20b': 'gpt-oss-20b' },
+  parts,
   stats,
+  chart: {
+    title: 'Test-Challenge score versus interactions',
+    x: { key: 'test_challengeInteractions', label: 'Average interactions per task', better: 'lower' },
+    y: { key: 'test_challenge', label: 'Test-Challenge scenario goal completion', unit: '%', better: 'higher' },
+    note: 'The leaderboard plots scenario goal completion against average code execution interactions per task on Test-Challenge.',
+  },
   async fetch() {
     const data = await fetchJson<RecordRow[]>(feed);
-    const parts: Record<string, string> = {};
     const rows = data.filter(r => Object.keys(splits).every(k => Number.isFinite(r[k as keyof typeof splits]?.all?.scenario_goal_completion))).map(r => {
       const metrics: Record<string, number> = {};
       for (const key of Object.keys(splits) as (keyof typeof splits)[]) {
         for (const [level, score] of Object.entries(r[key])) {
           const prefix = level === 'all' ? key : key + '_' + level.replaceAll(' ', '');
-          parts[prefix] = level === 'all' ? splits[key] : splits[key] + ': ' + level;
           metrics[prefix] = score.scenario_goal_completion;
           metrics[prefix + 'TGC'] = score.task_goal_completion;
           metrics[prefix + 'Interactions'] = score.interactions;
@@ -44,7 +51,6 @@ const board: Leaderboard = {
       const model = /^gpt-4(?:o|-turbo)-\d{4}-\d{2}-\d{2}$/.test(r.llm.tooltip) ? r.llm.tooltip : r.llm.name;
       return { model, harness: r.method.name, date: r.date, link: r.url, score: (metrics.test_normal + metrics.test_challenge) / 2, metrics };
     });
-    board.parts = parts;
     return checked(rows, 26);
   },
 };
