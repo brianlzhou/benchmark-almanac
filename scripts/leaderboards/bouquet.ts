@@ -33,32 +33,37 @@ const board: Leaderboard = {
   "benchmark": "bouquet",
   "url": "https://huggingface.co/spaces/facebook/bouquet",
   "feed": "https://huggingface.co/api/spaces/facebook/bouquet",
-  "terms": "The authors publish this public results feed; no separate score-reuse license is stated, and attribution remains with the authors."
-,
-  stats: { chrfpp: { name: 'chrF++', unit: 'score', better: 'higher' }, glotlid_score: { name: 'GlotLID score', unit: 'score', better: 'higher' }, glotlid_x_metricx: { name: 'GlotLID × MetricX', unit: 'score', better: 'higher' }, metricx: { name: 'MetricX', unit: 'score', better: 'lower' } },
+  "terms": "The authors publish this public results feed. No separate score-reuse license is stated, and attribution remains with the authors.",
+  stats: {
+    glotlidScore: { name: 'GlotLID score', unit: 'score', better: 'higher' },
+    glotlidMetricx: { name: 'GlotLID times MetricX', unit: 'score', better: 'higher', note: 'Product of GlotLID language identification score and MetricX quality score.' },
+    metricx: { name: 'MetricX', unit: 'score', better: 'lower' },
+  },
   async fetch(): Promise<LeaderboardRow[]> {
     const index = await fetchJson<{siblings: {rfilename: string}[]}>(FEED);
     const files = index.siblings.map(f => f.rfilename).filter(f => /^data\/mt_benchmark\/[^/]+\/scores\.csv$/.test(f));
     if (!files.length) throw new Error('No model score files');
     const rows: LeaderboardRow[] = [];
+    const colMap: [string, string][] = [['metricx', 'metricx'], ['glotlid_score', 'glotlidScore'], ['glotlid_x_metricx', 'glotlidMetricx']];
     for (const file of files) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       const data = parseCsv(await fetchText(`https://huggingface.co/spaces/facebook/bouquet/raw/main/${file.split('/').map(encodeURIComponent).join('/')}`));
       const label = file.split('/')[2];
       const [model, effort] = label.split('__reasoning_');
+      const chrfpp: number[] = [];
       const sums: Record<string, number[]> = {};
       for (const r of data) {
-        const metrics: Record<string, number> = {};
-        for (const key of ['chrfpp', 'metricx', 'glotlid_score', 'glotlid_x_metricx']) {
-          const n = r[key]?.trim() ? Number(r[key]) : NaN;
-          if (Number.isFinite(n)) {metrics[key] = n; (sums[key] ??= []).push(n);}
+        const scoreVal = r.chrfpp?.trim() ? Number(r.chrfpp) : NaN;
+        if (!Number.isFinite(scoreVal)) continue;
+        chrfpp.push(scoreVal);
+        for (const [col, key] of colMap) {
+          const n = r[col]?.trim() ? Number(r[col]) : NaN;
+          if (Number.isFinite(n)) (sums[key] ??= []).push(n);
         }
-        if (metrics.chrfpp === undefined) continue;
-
       }
       const metrics: Record<string, number> = {};
       for (const [k, v] of Object.entries(sums)) metrics[k] = v.reduce((a,b)=>a+b,0)/v.length;
-      if (metrics.chrfpp !== undefined) rows.push({model: identity(model), score: metrics.chrfpp, metrics, setting: effort ? `reasoning ${effort}` : undefined});
+      if (chrfpp.length) rows.push({model: identity(model), score: chrfpp.reduce((a,b)=>a+b,0)/chrfpp.length, metrics, setting: effort ? `reasoning ${effort}` : undefined});
     }
     if (!rows.length) throw new Error('No scored translation rows');
     return rows;
