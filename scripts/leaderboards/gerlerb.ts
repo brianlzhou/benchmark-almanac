@@ -12,6 +12,7 @@ interface Result {
 }
 const board: Leaderboard = {
   benchmark: 'gerlerb', url: space, feed,
+  host: 'VAGO Solutions',
   terms: 'Hugging Face allows crawling. Zenodo lists CC BY 4.0 for the dataset. VAGO gives no separate reuse license for the scores.',
   async fetch() {
     const files = await fetchJson<{type: string; path: string}[]>(feed);
@@ -28,6 +29,7 @@ const board: Leaderboard = {
       const settings = result.protocol?.settings;
       const row: LeaderboardRow = { model: result.model_name, score, link: url };
       if (result.model_type === 'open') row.open = true;
+      else if (result.model_type === 'proprietary') row.open = false;
       if (typeof result.parameters === 'number') row.params = result.parameters / 1e9;
       if (settings) row.setting = [settings.format, settings.dtype, settings.max_seq_length && settings.max_seq_length + ' tokens'].filter(Boolean).join(' / ');
       if (result.protocol?.date && /^\d{4}-\d\d-\d\d$/.test(result.protocol.date)) row.date = result.protocol.date;

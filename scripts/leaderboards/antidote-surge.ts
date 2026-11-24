@@ -12,7 +12,7 @@ const board:Leaderboard={benchmark:'antidote-surge',url:PAGE,feed:PAGE,terms:'Su
   const ciLow=num(block.match(/data-leaderboard-ci-lower="([^"]+)/)?.[1]);const ciHigh=num(block.match(/data-leaderboard-ci-upper="([^"]+)/)?.[1]);
   if(!name||score===undefined)continue;
   const full=[brand,name].filter(Boolean).join(' ');const m=full.match(/^(.*?)\s*\(([^)]+)\)$/);
-  const model=m?.[1]??full;rows.push({model,score,setting:m?.[2],metrics:{...(ciLow!==undefined?{ciLow}:{}),...(ciHigh!==undefined?{ciHigh}:{})}});
+  const model=m?.[1]??full;rows.push({model,score,low:ciLow,high:ciHigh,setting:m?.[2],metrics:{...(ciLow!==undefined?{ciLow}:{}),...(ciHigh!==undefined?{ciHigh}:{})}});
  }
  if(!rows.length)throw new Error('Antidote model rows missing');return rows;
 }};export default board;

@@ -16215,7 +16215,7 @@
       "url": "https://surgehq.ai/benchmarks/antidote",
       "feed": "https://surgehq.ai/benchmarks/antidote",
       "terms": "Surge restricts automated site access in its terms. The Almanac credits Surge AI and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 41,
       "unmatched": [
         "Ernie 4.5 300B",
@@ -35633,7 +35633,7 @@
       "feed": "https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard/resolve/main/data/leaderboard.csv.gz",
       "terms": "The Space declares Apache 2.0. https://huggingface.co/spaces/eduagarcia/open_pt_llm_leaderboard/blob/main/README.md",
       "host": "Open Portuguese LLM Leaderboard",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 202,
       "unmatched": [
         "01-ai/Yi-1.5-34B-32K",
@@ -43570,7 +43570,14 @@
         "Vega v2",
         "iPET (ALBERT) - Few-Shot (32 Examples)"
       ],
-      "verified": "approved for publication by SuperGLUE administrators"
+      "verified": "approved for publication by SuperGLUE administrators",
+      "stats": {
+        "macroF1": {
+          "name": "Macro F1",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "cbt-bench-level-2": {
       "url": "https://mheval.slingshotai.com/cbt_bench/",
@@ -84291,14 +84298,28 @@
       "url": "https://github.com/open-compass/DevEval",
       "feed": "https://raw.githubusercontent.com/open-compass/DevEval/main/README.md",
       "terms": "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "CodeLlama-13B-Instruct",
         "CodeLlama-7B-Instruct",
         "DeepSeek-Coder-1.3B-Instruct",
         "DeepSeek-Coder-33B-Instruct"
-      ]
+      ],
+      "stats": {
+        "coverageAll": {
+          "name": "Test coverage (all repos)",
+          "unit": "%",
+          "better": "higher",
+          "note": "Uniformly weighted average across all repositories."
+        },
+        "coverageValid": {
+          "name": "Test coverage (valid repos)",
+          "unit": "%",
+          "better": "higher",
+          "note": "Average across repositories with executable generated tests."
+        }
+      }
     },
     "devops-gym": {
       "url": "https://www.devops-gym.com/",
@@ -88266,11 +88287,61 @@
     },
     "drone-bench": {
       "url": "https://andonlabs.com/evals/drone-bench",
-      "feed": "https://andonlabs.com/_app/immutable/chunks/<hash>.js (chart array with heroScorePct)",
+      "feed": "https://andonlabs.com/_app/immutable/chunks/<hash>.js (chart array with heroScorePct and five task CSVs)",
       "terms": "Public static asset of andonlabs.com; the site publishes no terms of use or robots.txt, so the scores are cited to Andon Labs.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
-      "unmatched": []
+      "unmatched": [],
+      "parts": {
+        "reconstruct": {
+          "name": "Reconstruct",
+          "group": "Task"
+        },
+        "localize": {
+          "name": "Localize",
+          "group": "Task"
+        },
+        "navigate": {
+          "name": "Navigate",
+          "group": "Task"
+        },
+        "detect": {
+          "name": "Detect",
+          "group": "Task"
+        },
+        "follow": {
+          "name": "Follow",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "heroAllRunsPct": {
+          "name": "All-runs progress",
+          "unit": "%",
+          "better": "higher",
+          "note": "Progress toward baseline across all runs including misaligned runs."
+        },
+        "cheatingRate": {
+          "name": "Runs with any cheating",
+          "unit": "%",
+          "better": "lower"
+        },
+        "attemptingRate": {
+          "name": "Attempting cheating (low)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "exploitingRate": {
+          "name": "Exploiting cheating (medium)",
+          "unit": "%",
+          "better": "lower"
+        },
+        "exfiltratingRate": {
+          "name": "Exfiltrating cheating (high)",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
     },
     "drop": {
       "url": "https://arxiv.org/html/1903.00161",
@@ -125348,7 +125419,7 @@
       "feed": "https://huggingface.co/api/spaces/VAGOsolutions/german-legal-embedding-leaderboard/tree/main/results?expand=false",
       "terms": "MTEB lists MIT for this dataset. https://huggingface.co/datasets/mteb/GerDaLIRSmall VAGO gives no separate reuse license for submitted scores. https://github.com/VAGOsolutions/german-legal-embedding-leaderboard Hugging Face allows these paths in robots.txt.",
       "host": "VAGO Solutions",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "BM25",
@@ -125391,7 +125462,7 @@
       "feed": "https://huggingface.co/api/spaces/VAGOsolutions/german-legal-embedding-leaderboard/tree/main/results?expand=false",
       "terms": "The authors restrict the dataset to noncommercial scientific research. https://github.com/trusthlt/eacl24-german-legal-questions VAGO gives no separate reuse license for submitted scores. https://github.com/VAGOsolutions/german-legal-embedding-leaderboard Hugging Face allows crawling.",
       "host": "VAGO Solutions",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "BM25",
@@ -125429,7 +125500,8 @@
       "url": "https://huggingface.co/spaces/VAGOsolutions/german-legal-embedding-leaderboard",
       "feed": "https://huggingface.co/api/spaces/VAGOsolutions/german-legal-embedding-leaderboard/tree/main/results?expand=false",
       "terms": "Hugging Face allows crawling. Zenodo lists CC BY 4.0 for the dataset. VAGO gives no separate reuse license for the scores.",
-      "retrieved": "2026-11-23",
+      "host": "VAGO Solutions",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "BM25",
@@ -149854,7 +149926,7 @@
       "feed": "https://www.sota2.com/research/sota/image-classification-on-inaturalist-2021",
       "terms": "SOTA2 credits the reporting papers at https://www.sota2.com/research/sota/image-classification-on-inaturalist-2021",
       "host": "SOTA2 Research",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Bootleg",
@@ -165477,7 +165549,7 @@
       "feed": "https://huggingface.co/api/spaces/VAGOsolutions/german-legal-embedding-leaderboard/tree/main/results?expand=false",
       "terms": "MTEB lists CC BY 4.0 for its dataset. https://huggingface.co/datasets/mteb/LegalQuAD VAGO gives no separate reuse license for submitted scores. https://github.com/VAGOsolutions/german-legal-embedding-leaderboard Hugging Face allows these paths in robots.txt.",
       "host": "VAGO Solutions",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "BM25",
@@ -183805,23 +183877,53 @@
       }
     },
     "medbench-opencompass": {
-      "url": "https://www.shlab.org.cn/news/5443852",
-      "feed": "https://medbench.opencompass.org.cn/api/v1/base/evaluation/ranking",
+      "url": "https://medbench.opencompass.org.cn/leaderboard",
+      "feed": "https://medbench.opencompass.org.cn/api/v1/base/evaluation/period/list?genre=1 -> https://medbench.opencompass.org.cn/api/v1/base/evaluation/list/<version>",
       "terms": "MedBench public leaderboard. https://medbench.opencompass.org.cn/",
-      "retrieved": "2026-11-23",
-      "rows": 0,
+      "retrieved": "2026-11-24",
+      "rows": 10,
       "unmatched": [
+        "HuatuoGPT",
+        "MedGemma 1.5",
+        "MedReason",
+        "Mystiger-27B",
+        "Mystiger-4B",
         "U2-Med",
         "UII-L1-1.0",
         "WiseDiag-v3",
+        "banqiao-med-V1.0",
+        "jingqin-med-V1.0",
         "京医千询",
+        "医大模型",
         "华数智医-MDAM-Flash",
         "华数智医-MDAM-Pro-2610",
         "惠每医疗大模型",
         "灵医大模型",
         "砭石大模型",
         "素灵智医大模型"
-      ]
+      ],
+      "parts": {
+        "medKnowledge": {
+          "name": "Medical knowledge QA",
+          "group": "Dimension"
+        },
+        "medLangGen": {
+          "name": "Medical language generation",
+          "group": "Dimension"
+        },
+        "medComplexInfer": {
+          "name": "Complex medical reasoning",
+          "group": "Dimension"
+        },
+        "medSee": {
+          "name": "Medical language understanding",
+          "group": "Dimension"
+        },
+        "medSafetyEthics": {
+          "name": "Medical safety and ethics",
+          "group": "Dimension"
+        }
+      }
     },
     "medbench-opencompass-4": {
       "url": "https://medbench.opencompass.org.cn/home",
@@ -291192,7 +291294,58 @@
         "Vega v2",
         "iPET (ALBERT) - Few-Shot (32 Examples)"
       ],
-      "verified": "approved for publication by SuperGLUE administrators"
+      "verified": "approved for publication by SuperGLUE administrators",
+      "parts": {
+        "boolq": {
+          "name": "BoolQ",
+          "group": "Task"
+        },
+        "cb": {
+          "name": "CB",
+          "group": "Task"
+        },
+        "copa": {
+          "name": "COPA",
+          "group": "Task"
+        },
+        "multirc": {
+          "name": "MultiRC",
+          "group": "Task"
+        },
+        "record": {
+          "name": "ReCoRD",
+          "group": "Task"
+        },
+        "rte": {
+          "name": "RTE",
+          "group": "Task"
+        },
+        "wic": {
+          "name": "WiC",
+          "group": "Task"
+        },
+        "wsc": {
+          "name": "WSC",
+          "group": "Task"
+        }
+      },
+      "stats": {
+        "axb": {
+          "name": "AX-b diagnostics (MCC)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "axg": {
+          "name": "AX-g diagnostics",
+          "unit": "%",
+          "better": "higher"
+        },
+        "microScore": {
+          "name": "Micro average",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "supergpqa": {
       "url": "https://supergpqa.github.io/",
@@ -304894,7 +305047,7 @@
       "url": "https://universaldependencies.org/conll18/results-las.html#grc_perseus",
       "feed": "https://universaldependencies.org/conll18/results-las.html",
       "terms": "The organizers publish the scores in HTML and give no separate license for that table. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AntNLP (Shanghai)",
@@ -304923,13 +305076,30 @@
         "UniMelb (Melbourne)",
         "Uppsala (Uppsala)",
         "iParse (Pittsburgh)"
-      ]
+      ],
+      "stats": {
+        "mlas": {
+          "name": "Morphology-aware LAS (MLAS)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "blex": {
+          "name": "Bi-lexical dependency score (BLEX)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "uas": {
+          "name": "Unlabeled attachment score (UAS)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ud-ancient-greek-proiel": {
       "url": "https://universaldependencies.org/conll18/results-las.html#grc_proiel",
       "feed": "https://universaldependencies.org/conll18/results-las.html",
       "terms": "The organizers publish the scores in HTML and give no separate license for that table. https://universaldependencies.org/conll18/results-las.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AntNLP (Shanghai)",
@@ -304958,7 +305128,24 @@
         "UniMelb (Melbourne)",
         "Uppsala (Uppsala)",
         "iParse (Pittsburgh)"
-      ]
+      ],
+      "stats": {
+        "mlas": {
+          "name": "Morphology-aware LAS (MLAS)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "blex": {
+          "name": "Bi-lexical dependency score (BLEX)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "uas": {
+          "name": "Unlabeled attachment score (UAS)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ud-latin-circse": {
       "url": "https://aclanthology.org/2024.nlp4dh-1.21/",
@@ -305008,7 +305195,7 @@
       "url": "https://universaldependencies.org/conll18/results-las.html#la_ittb",
       "feed": "https://universaldependencies.org/conll18/results-las.html",
       "terms": "The organizers publish the scores in HTML and give no separate license for that table. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AntNLP (Shanghai)",
@@ -305037,13 +305224,30 @@
         "UniMelb (Melbourne)",
         "Uppsala (Uppsala)",
         "iParse (Pittsburgh)"
-      ]
+      ],
+      "stats": {
+        "mlas": {
+          "name": "Morphology-aware LAS (MLAS)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "blex": {
+          "name": "Bi-lexical dependency score (BLEX)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "uas": {
+          "name": "Unlabeled attachment score (UAS)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ud-latin-perseus": {
       "url": "https://universaldependencies.org/conll18/results-las.html#la_perseus",
       "feed": "https://universaldependencies.org/conll18/results-las.html",
       "terms": "The organizers publish the scores in HTML and give no separate license for that table. https://universaldependencies.org/conll18/results-las.html The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AntNLP (Shanghai)",
@@ -305072,13 +305276,30 @@
         "UniMelb (Melbourne)",
         "Uppsala (Uppsala)",
         "iParse (Pittsburgh)"
-      ]
+      ],
+      "stats": {
+        "mlas": {
+          "name": "Morphology-aware LAS (MLAS)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "blex": {
+          "name": "Bi-lexical dependency score (BLEX)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "uas": {
+          "name": "Unlabeled attachment score (UAS)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ud-latin-proiel": {
       "url": "https://universaldependencies.org/conll18/results-las.html#la_proiel",
       "feed": "https://universaldependencies.org/conll18/results-las.html",
       "terms": "The organizers publish the scores in HTML and give no separate license for that table. The host has no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AntNLP (Shanghai)",
@@ -305107,7 +305328,24 @@
         "UniMelb (Melbourne)",
         "Uppsala (Uppsala)",
         "iParse (Pittsburgh)"
-      ]
+      ],
+      "stats": {
+        "mlas": {
+          "name": "Morphology-aware LAS (MLAS)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "blex": {
+          "name": "Bi-lexical dependency score (BLEX)",
+          "unit": "%",
+          "better": "higher"
+        },
+        "uas": {
+          "name": "Unlabeled attachment score (UAS)",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "ufo-bench": {
       "url": "https://arxiv.org/html/2609.12397",
@@ -311672,7 +311910,7 @@
       "url": "https://huggingface.co/spaces/opencompass/open_vlm_leaderboard",
       "feed": "http://opencompass.openxlab.space/assets/OpenVLM.json (VCR.Overall-Jaccard)",
       "terms": "OpenCompass's published leaderboard data file, which the Apache-2.0 Space renders; the file states no license.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 42,
       "unmatched": [
         "360VL-70B",
@@ -311682,7 +311920,52 @@
         "Mantis-8B-Idefics2",
         "Mantis-8B-siglip-llama3"
       ],
-      "verified": "marked verified by OpenCompass"
+      "verified": "marked verified by OpenCompass",
+      "parts": {
+        "enEasy": {
+          "name": "English easy",
+          "group": "Track"
+        },
+        "enHard": {
+          "name": "English hard",
+          "group": "Track"
+        },
+        "zhEasy": {
+          "name": "Chinese easy",
+          "group": "Track"
+        },
+        "zhHard": {
+          "name": "Chinese hard",
+          "group": "Track"
+        }
+      },
+      "stats": {
+        "overallEm": {
+          "name": "Overall exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "enEasyEm": {
+          "name": "English easy exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "enHardEm": {
+          "name": "English hard exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "zhEasyEm": {
+          "name": "Chinese easy exact match",
+          "unit": "%",
+          "better": "higher"
+        },
+        "zhHardEm": {
+          "name": "Chinese hard exact match",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
     },
     "vct-v2-securebio": {
       "url": "https://securebio.org/benchmarks/",

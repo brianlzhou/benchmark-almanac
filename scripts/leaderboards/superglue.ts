@@ -32,6 +32,7 @@ interface TaskResult {
 interface Result {
   createdOn: number;
   macroScore?: number;
+  microScore?: number;
   superglueVersion?: number;
   uploaderUid: string;
   editable?: { name?: string; url?: string };
@@ -42,7 +43,10 @@ interface Result {
  * The board's rows: per uploader, the best SuperGLUE 2.0 submission. `pick` returns the number to keep
  * (0 to 1) from the submission and the task id map, or undefined to skip it.
  */
-export async function superglueRows(pick: (r: Result, task: (identifier: string) => TaskResult | undefined) => number | undefined): Promise<LeaderboardRow[]> {
+export async function superglueRows(
+  pick: (r: Result, task: (identifier: string) => TaskResult | undefined) => number | undefined,
+  metricsFn?: (r: Result, task: (identifier: string) => TaskResult | undefined) => Record<string, number> | undefined,
+): Promise<LeaderboardRow[]> {
   const [vis, tasks] = await Promise.all([
     fetchJson<Record<string, { adminApproved?: boolean; public?: boolean }>>(`${DB}/superglue/resultsVisibility.json`),
     fetchJson<Record<string, Task>>(`${DB}/superglue/tasks.json`),
@@ -64,24 +68,77 @@ export async function superglueRows(pick: (r: Result, task: (identifier: string)
   }
   const rows: LeaderboardRow[] = [];
   for (const r of best.values()) {
-    const v = pick(r, (identifier) => {
+    const getTask = (identifier: string) => {
       const id = taskId.get(identifier);
       return id ? r.tasks?.[id] : undefined;
-    });
+    };
+    const v = pick(r, getTask);
     const model = r.editable?.name?.trim();
     if (!model || v === undefined || !Number.isFinite(v)) continue;
-    rows.push({ model, verified: true, link: r.editable?.url?.startsWith('https://github.com/') ? r.editable.url : undefined, score: Number((v * 100).toFixed(2)), date: new Date(r.createdOn).toISOString().slice(0, 10) });
+    const url = r.editable?.url?.trim();
+    const metrics = metricsFn?.(r, getTask);
+    rows.push({
+      model,
+      verified: true,
+      link: url && /^https?:\/\//.test(url) ? url : undefined,
+      score: Number((v * 100).toFixed(2)),
+      date: new Date(r.createdOn).toISOString().slice(0, 10),
+      ...(metrics && Object.keys(metrics).length ? { metrics } : {}),
+    });
   }
   return rows;
 }
 
+const SUPERGLUE_PARTS = [
+  ['boolq', 'BoolQ'],
+  ['cb', 'CB'],
+  ['copa', 'COPA'],
+  ['multirc', 'MultiRC'],
+  ['record', 'ReCoRD'],
+  ['rte', 'RTE'],
+  ['wic', 'WiC'],
+  ['wsc', 'WSC'],
+] as const;
+
 const board: Leaderboard = {
   verified: 'approved for publication by SuperGLUE administrators',
   benchmark: 'superglue',
+  parts: {
+    boolq: { name: 'BoolQ', group: 'Task' },
+    cb: { name: 'CB', group: 'Task' },
+    copa: { name: 'COPA', group: 'Task' },
+    multirc: { name: 'MultiRC', group: 'Task' },
+    record: { name: 'ReCoRD', group: 'Task' },
+    rte: { name: 'RTE', group: 'Task' },
+    wic: { name: 'WiC', group: 'Task' },
+    wsc: { name: 'WSC', group: 'Task' },
+  },
+  stats: {
+    axb: { name: 'AX-b diagnostics (MCC)', unit: 'score', better: 'higher' },
+    axg: { name: 'AX-g diagnostics', unit: '%', better: 'higher' },
+    microScore: { name: 'Micro average', unit: '%', better: 'higher' },
+  },
   url: SUPERGLUE_PAGE,
   feed: `${SUPERGLUE_FEED}, macroScore`,
   terms: SUPERGLUE_TERMS,
   aliases: SUPERGLUE_ALIASES,
-  fetch: () => superglueRows((r) => r.macroScore),
+  fetch: () => superglueRows(
+    (r) => r.macroScore,
+    (r, task) => {
+      const m: Record<string, number> = {};
+      for (const [key, idf] of SUPERGLUE_PARTS) {
+        const s = task(idf)?.score;
+        if (typeof s === 'number' && Number.isFinite(s)) m[key] = Number((s * 100).toFixed(2));
+      }
+      const axb = task('AX-b')?.score;
+      if (typeof axb === 'number' && Number.isFinite(axb)) m.axb = Number((axb * 100).toFixed(2));
+      const axg = task('AX-g')?.score;
+      if (typeof axg === 'number' && Number.isFinite(axg)) m.axg = Number((axg * 100).toFixed(2));
+      if (typeof r.microScore === 'number' && Number.isFinite(r.microScore)) {
+        m.microScore = Number((r.microScore * 100).toFixed(2));
+      }
+      return m;
+    },
+  ),
 };
 export default board;
