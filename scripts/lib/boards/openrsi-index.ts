@@ -21,6 +21,7 @@ const tasks: Record<string,string> = {
 export const sourceBoard: Leaderboard = {
  benchmark:'openrsi-index',url:BASE,feed:BASE+'tasks/<task>.html (printed whole-run results)',
  terms:'The foundation publishes public task results and linked source records; attribution remains with the authors.',
+ stats:{submissions:{name:'Submissions',unit:'count'},latency:{name:'Research runtime',unit:'seconds',better:'lower'},requestsPerSecond:{name:'Best throughput',unit:'count',better:'higher'}},
  chart:{title:'Best task score versus research runtime',x:{key:'latency',label:'Research runtime',unit:'s',better:'lower'},y:{key:'score',label:'Native task score',unit:'score',better:'higher'},note:'Each point is a published whole-run best. Compare only the same task and protocol.'},
  async fetch(){throw new Error('Select an OpenRSI task record');}
 };

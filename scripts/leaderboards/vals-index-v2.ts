@@ -3,14 +3,14 @@
 // The chart reproduces the board’s accuracy-versus-cost comparison.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { VALS_ALIASES } from './vals-index.ts';
-import { valsDetails } from '../lib/boards/vals-details.ts';
+import { VALS_DETAILS_STATS, valsDetails } from '../lib/boards/vals-details.ts';
 const FEED = "https://www.vals.ai/benchmarks/vals_index_v2";
 const board: Leaderboard = {
  benchmark: "vals-index-v2",
  url: "https://www.vals.ai/benchmarks/vals_index_v2",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
- stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+ stats: { ...VALS_DETAILS_STATS, latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
  aliases: Object.fromEntries(Object.entries(VALS_ALIASES).filter(([name])=>name!=='GPT 4o')),
  chart:{title:'Accuracy versus cost',x:{key:'cost',label:'Cost per test',unit:'$',better:'lower',log:true},y:{key:'score',label:'Accuracy',unit:'%',better:'higher'}},
  async fetch(): Promise<LeaderboardRow[]> {

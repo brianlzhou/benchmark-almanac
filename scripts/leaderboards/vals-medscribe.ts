@@ -1,14 +1,15 @@
 // Vals published accuracy and per-test cost from the page’s live chart data. Table token prices are not used as task costs.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
-import { valsDetails } from '../lib/boards/vals-details.ts';
-import { VALS_ALIASES } from './vals-index.ts';
+import { VALS_DETAILS_STATS, valsDetails } from '../lib/boards/vals-details.ts';
+import { VALS_ALIASES, VALS_LATENCY_CHART } from './vals-index.ts';
 const FEED = "https://www.vals.ai/benchmarks/medscribe";
 const board: Leaderboard = {
  benchmark: "vals-medscribe",
  url: "https://www.vals.ai/benchmarks/medscribe",
  feed: FEED,
  terms: "Public source published by the benchmark authors; source licensing and attribution requirements apply.",
- stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' } },
+ chart: VALS_LATENCY_CHART,
+ stats: { ...VALS_DETAILS_STATS, latency: { name: 'Latency', unit: 'seconds', better: 'lower' }, priceIn: { name: 'Input price', unit: 'usd-per-mtok', better: 'lower' }, priceOut: { name: 'Output price', unit: 'usd-per-mtok', better: 'lower' } },
  aliases:Object.fromEntries(Object.entries(VALS_ALIASES).filter(([k])=>k!=='GPT 4o')),
  async fetch(): Promise<LeaderboardRow[]> {
   const result = await valsDetails(board, 'medscribe', { cost: null });
