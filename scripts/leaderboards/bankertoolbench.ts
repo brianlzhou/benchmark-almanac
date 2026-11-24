@@ -12,7 +12,7 @@ const results: [string, number, number][] = [
 ];
 const board: Leaderboard = {
   benchmark: 'bankertoolbench', static: 'paper',
-  stats: { pass3: { name: 'Pass at 3', unit: '%', better: 'higher' } },
+  stats: { passAt3: { name: 'Pass at 3', unit: '%', better: 'higher' } },
   url: 'https://arxiv.org/html/2604.11304v1#S6.F5',
   feed,
   terms: 'Handshake restricts automated extraction and its robots.txt blocks named crawlers. The v1.0 chart is credited to Handshake AI Research through its public paper on arXiv.',

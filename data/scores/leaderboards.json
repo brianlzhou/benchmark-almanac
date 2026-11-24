@@ -29408,15 +29408,15 @@
       "url": "https://arxiv.org/html/2604.11304v1#S6.F5",
       "feed": "https://arxiv.org/html/2604.11304v1/figs/vdr_pass_threshold080_hbar.png",
       "terms": "Handshake restricts automated extraction and its robots.txt blocks named crawlers. The v1.0 chart is credited to Handshake AI Research through its public paper on arXiv.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "reference": [
         "OpenCode"
       ],
-      "static": "paper",
       "stats": {
-        "pass3": {
+        "passAt3": {
           "name": "Pass at 3",
           "unit": "%",
           "better": "higher"
@@ -42048,7 +42048,7 @@
       "feed": "https://arxiv.org/html/2410.05340",
       "terms": "The authors publish their evaluation in the paper. https://arxiv.org/abs/2410.05340",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CodeLlama 70B",
@@ -42086,6 +42086,66 @@
           "unit": "%",
           "better": "higher",
           "note": "Percentage of generated CAD programs that compile successfully."
+        },
+        "SimpleIogt": {
+          "name": "Simple IoGT",
+          "unit": "score",
+          "better": "higher"
+        },
+        "SimpleHausdorff": {
+          "name": "Simple Hausdorff distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "SimpleCompileRate": {
+          "name": "Simple compile rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ModerateComplexIogt": {
+          "name": "Moderate complexity IoGT",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ModerateComplexHausdorff": {
+          "name": "Moderate complexity Hausdorff distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "ModerateComplexCompileRate": {
+          "name": "Moderate complexity compile rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ComplexIogt": {
+          "name": "Complex IoGT",
+          "unit": "score",
+          "better": "higher"
+        },
+        "ComplexHausdorff": {
+          "name": "Complex Hausdorff distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "ComplexCompileRate": {
+          "name": "Complex compile rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "VeryComplexIogt": {
+          "name": "Very complex IoGT",
+          "unit": "score",
+          "better": "higher"
+        },
+        "VeryComplexHausdorff": {
+          "name": "Very complex Hausdorff distance",
+          "unit": "score",
+          "better": "lower"
+        },
+        "VeryComplexCompileRate": {
+          "name": "Very complex compile rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -43518,10 +43578,10 @@
     "careqa": {
       "url": "https://arxiv.org/html/2502.06666",
       "feed": "https://arxiv.org/html/2502.06666",
-      "terms": "Paper and license at https://arxiv.org/abs/2502.06666",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "headline": "The paper reports no overall score, so this is the plain mean of its ten close-ended accuracy parts.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 4,
       "unmatched": [
         "BioMistral-MedMNX",
@@ -43534,66 +43594,35 @@
         "Yi-1.5-34B-Chat"
       ],
       "parts": {
-        "en": {
-          "name": "English accuracy"
+        "medmcqa": {
+          "name": "MedMCQA"
         },
-        "es": {
-          "name": "Spanish accuracy"
+        "medqa": {
+          "name": "MedQA"
         },
-        "BitsperByte": {
-          "name": "Bits per Byte",
-          "unit": "score",
-          "better": "lower"
+        "careqaEn": {
+          "name": "CareQA (English)"
         },
-        "BytePerplexity": {
-          "name": "Byte Perplexity",
-          "unit": "score",
-          "better": "lower"
+        "careqaEs": {
+          "name": "CareQA (Spanish)"
         },
-        "WordPerplexity": {
-          "name": "Word Perplexity",
-          "unit": "score",
-          "better": "lower"
+        "multimedqa": {
+          "name": "MultiMedQA"
         },
-        "Prometheus": {
-          "name": "Prometheus",
-          "unit": "score",
-          "better": "higher"
+        "pubmedqa": {
+          "name": "PubMedQA"
         },
-        "BERTScore": {
-          "name": "BERTScore",
-          "unit": "score",
-          "better": "higher"
+        "medTextClassification": {
+          "name": "Medical text classification"
         },
-        "BLEU": {
-          "name": "BLEU",
-          "unit": "score",
-          "better": "higher"
+        "medTranscriptions": {
+          "name": "Medical transcriptions"
         },
-        "BLEURT": {
-          "name": "BLEURT",
-          "unit": "score",
-          "better": "higher"
+        "biored": {
+          "name": "BioRED"
         },
-        "MoverScore": {
-          "name": "MoverScore",
-          "unit": "score",
-          "better": "higher"
-        },
-        "ROUGE1": {
-          "name": "ROUGE1",
-          "unit": "score",
-          "better": "higher"
-        },
-        "ROUGE2": {
-          "name": "ROUGE2",
-          "unit": "score",
-          "better": "higher"
-        },
-        "ROUGEL": {
-          "name": "ROUGEL",
-          "unit": "score",
-          "better": "higher"
+        "mmlu": {
+          "name": "MMLU"
         }
       }
     },
@@ -46845,7 +46874,7 @@
       "terms": "The authors publish the benchmark results on arXiv. https://arxiv.org/abs/2608.21504",
       "headline": "The paper gives no overall score, so the headline uses its first measure, exact match for IUPAC-to-SMILES translation.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "ChemDFM",
@@ -48520,16 +48549,27 @@
     "chjgbench": {
       "url": "https://arxiv.org/html/2611.15639",
       "feed": "https://arxiv.org/html/2611.15639",
-      "terms": "Paper and license at https://arxiv.org/abs/2611.15639",
+      "terms": "The authors publish the paper publicly at https://arxiv.org/abs/2611.15639.",
       "headline": "The paper reports no overall score, so this is the plain mean of its three case-type macro averages.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 6,
       "unmatched": [
-        "DeepSeek-R1 (snapshot unspecified)",
+        "DS-R1",
         "LegalOne",
-        "WisdomInterrogatory"
+        "WisdomI."
       ],
+      "parts": {
+        "criminal": {
+          "name": "Criminal"
+        },
+        "civil": {
+          "name": "Civil"
+        },
+        "administrative": {
+          "name": "Administrative"
+        }
+      },
       "stats": {
         "CriminalLaw": {
           "name": "Criminal statutory provision application",
@@ -48579,12 +48619,6 @@
           "better": "higher",
           "note": "Score stored from 0 to 1."
         },
-        "CriminalAvg": {
-          "name": "Criminal Avg",
-          "unit": "score",
-          "better": "higher",
-          "note": "Score stored from 0 to 1."
-        },
         "CivilLaw": {
           "name": "Civil statutory provision application",
           "unit": "score",
@@ -48611,12 +48645,6 @@
         },
         "CivilPAYCiv": {
           "name": "Civil payment obligation",
-          "unit": "score",
-          "better": "higher",
-          "note": "Score stored from 0 to 1."
-        },
-        "CivilAvg": {
-          "name": "Civil Avg",
           "unit": "score",
           "better": "higher",
           "note": "Score stored from 0 to 1."
@@ -48653,12 +48681,6 @@
         },
         "AdministrativeDIS": {
           "name": "Administrative administrative disposition",
-          "unit": "score",
-          "better": "higher",
-          "note": "Score stored from 0 to 1."
-        },
-        "AdministrativeAvg": {
-          "name": "Administrative Avg",
           "unit": "score",
           "better": "higher",
           "note": "Score stored from 0 to 1."
@@ -112024,7 +112046,7 @@
       "terms": "The authors publish this paper on arXiv under the terms at https://arxiv.org/abs/2510.10472.",
       "headline": "The paper reports no overall score. The headline shows Generalization, the first task in Table 2.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "parts": {
@@ -112076,12 +112098,12 @@
         },
         "totalTokens": {
           "name": "Total tokens",
-          "unit": "millions",
+          "unit": "tokens",
           "better": "lower"
         },
         "tokensPerStep": {
           "name": "Tokens per step",
-          "unit": "millions",
+          "unit": "tokens",
           "better": "lower"
         },
         "totalHours": {
@@ -175602,7 +175624,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "headline": "The paper reports no overall accuracy, so this is the plain mean of the three task accuracies.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "Mixtral-8x7B-Instruct-v0.1",
@@ -175623,6 +175645,38 @@
         },
         "Task 3": {
           "name": "Task 3: Insufficient information"
+        }
+      },
+      "stats": {
+        "Task 1 minimum": {
+          "name": "Task 1 minimum accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Task 1 maximum": {
+          "name": "Task 1 maximum accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Task 2 minimum": {
+          "name": "Task 2 minimum accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Task 2 maximum": {
+          "name": "Task 2 maximum accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Task 3 minimum": {
+          "name": "Task 3 minimum accuracy",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Task 3 maximum": {
+          "name": "Task 3 maximum accuracy",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -210372,8 +210426,9 @@
       "url": "https://arxiv.org/html/2512.12730",
       "feed": "https://arxiv.org/html/2512.12730 (overall test pass rate)",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-18",
-      "rows": 10,
+      "static": "paper",
+      "retrieved": "2026-11-24",
+      "rows": 11,
       "unmatched": [
         "Qwen3-Instruct",
         "Qwen3-thinking"
@@ -210428,22 +210483,62 @@
           "group": "Domain"
         }
       },
-      "static": "paper",
       "stats": {
         "fullyPassedTasks": {
           "name": "Fully passed tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
+        },
+        "easyFullyPassed": {
+          "name": "Easy fully passed tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "mediumFullyPassed": {
+          "name": "Medium fully passed tasks",
+          "unit": "count",
+          "better": "higher"
+        },
+        "hardFullyPassed": {
+          "name": "Hard fully passed tasks",
+          "unit": "count",
+          "better": "higher"
         },
         "meanTurns": {
           "name": "Mean interaction turns",
           "unit": "count"
         },
-        "stdTurns": {
-          "name": "Standard deviation of turns",
+        "maxTurns": {
+          "name": "Maximum observed turns",
           "unit": "count"
         },
-        "maxTurns": {
-          "name": "Maximum interaction turns",
+        "turnsPerScore": {
+          "name": "Turns per score point",
+          "unit": "score",
+          "better": "lower"
+        },
+        "toolUses:str_replace_editor": {
+          "name": "Editor tool uses",
+          "unit": "count"
+        },
+        "toolUses:execute_bash": {
+          "name": "Bash tool uses",
+          "unit": "count"
+        },
+        "toolUses:task_tracker": {
+          "name": "Task tracker tool uses",
+          "unit": "count"
+        },
+        "toolUses:Other": {
+          "name": "Other tool uses",
+          "unit": "count"
+        },
+        "toolUses:Total": {
+          "name": "Total tool uses",
+          "unit": "count"
+        },
+        "toolUses:Avg/Task": {
+          "name": "Average tool uses per task",
           "unit": "count"
         }
       }
@@ -239894,7 +239989,7 @@
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/abs/2503.19764",
       "headline": "The headline is the plain mean of top-five synonym frequency on Replica, ScanNet++ and HM3D.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "ConceptFusion",
@@ -240042,6 +240137,21 @@
           "unit": "%",
           "better": "higher"
         },
+        "Replica NMS mAP": {
+          "name": "Replica NMS mean average precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Replica NMS AP50": {
+          "name": "Replica NMS average precision at 50% IoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "Replica NMS AP25": {
+          "name": "Replica NMS average precision at 25% IoU",
+          "unit": "%",
+          "better": "higher"
+        },
         "ScanNet++Mean ranking score": {
           "name": "ScanNet++ mean ranking score",
           "unit": "score",
@@ -240089,6 +240199,21 @@
           "unit": "%",
           "better": "higher"
         },
+        "ScanNet++ NMS mAP": {
+          "name": "ScanNet++ NMS mean average precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ScanNet++ NMS AP50": {
+          "name": "ScanNet++ NMS average precision at 50% IoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "ScanNet++ NMS AP25": {
+          "name": "ScanNet++ NMS average precision at 25% IoU",
+          "unit": "%",
+          "better": "higher"
+        },
         "HM3DMean ranking score": {
           "name": "HM3D mean ranking score",
           "unit": "score",
@@ -240133,6 +240258,21 @@
         },
         "HM3D AP25": {
           "name": "HM3D average precision at 25% IoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "HM3D NMS mAP": {
+          "name": "HM3D NMS mean average precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "HM3D NMS AP50": {
+          "name": "HM3D NMS average precision at 50% IoU",
+          "unit": "%",
+          "better": "higher"
+        },
+        "HM3D NMS AP25": {
+          "name": "HM3D NMS average precision at 25% IoU",
           "unit": "%",
           "better": "higher"
         }
@@ -241392,7 +241532,7 @@
       "feed": "https://aclanthology.org/2020.acl-main.148.pdf",
       "terms": "ACL Anthology terms. https://aclanthology.org/faq/copyright/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "2 + MATT",
@@ -241403,6 +241543,10 @@
         "Transformer"
       ],
       "stats": {
+        "layers": {
+          "name": "Layers",
+          "unit": "count"
+        },
         "BLEU4": {
           "name": "Average BLEU over four directions",
           "unit": "score",
@@ -241416,6 +241560,16 @@
         "withROBTBLEU4": {
           "name": "Average BLEU over four directions with backtranslation",
           "unit": "score",
+          "better": "higher"
+        },
+        "WR": {
+          "name": "Win ratio",
+          "unit": "%",
+          "better": "higher"
+        },
+        "withROBTWR": {
+          "name": "Win ratio with backtranslation",
+          "unit": "%",
           "better": "higher"
         }
       }
@@ -250408,13 +250562,14 @@
       "feed": "https://arxiv.org/html/2606.13815",
       "terms": "The authors publish this table under the terms linked at https://arxiv.org/abs/2606.13815.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
       "stats": {
         "handsWon": {
           "name": "Hands won",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "winPercent": {
           "name": "Win rate",
@@ -250423,7 +250578,8 @@
         },
         "firstPlaceFinishes": {
           "name": "First place finishes",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "averagePosition": {
           "name": "Average position",
@@ -253170,7 +253326,8 @@
       "url": "https://arxiv.org/abs/2403.18624",
       "feed": "https://arxiv.org/html/2403.18624",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "CodeBERT",
@@ -253178,7 +253335,6 @@
         "CodeT5",
         "UnixCoder"
       ],
-      "static": "paper",
       "stats": {
         "F1": {
           "name": "F1 score",
@@ -253188,27 +253344,28 @@
         "VD-S": {
           "name": "Vulnerability detection score",
           "unit": "%",
-          "better": "higher"
+          "better": "lower",
+          "note": "False negative rate at a fixed false positive rate threshold."
         },
         "P-C": {
-          "name": "Precision on vulnerable code",
+          "name": "Pair-wise correct prediction",
           "unit": "%",
           "better": "higher"
         },
         "P-V": {
-          "name": "Precision on vulnerable functions",
+          "name": "Pair-wise vulnerable prediction",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "P-B": {
-          "name": "Precision on vulnerable blocks",
+          "name": "Pair-wise benign prediction",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         },
         "P-R": {
-          "name": "Precision on vulnerable repositories",
+          "name": "Pair-wise reversed prediction",
           "unit": "%",
-          "better": "higher"
+          "better": "lower"
         }
       }
     },
@@ -267903,7 +268060,8 @@
       "url": "https://aichallenge.hcmus.edu.vn/shrec-2025/smart3droom#h.a8wvullqsccv_l",
       "feed": "https://arxiv.org/html/2508.08781v1",
       "terms": "The organizers claim copyright on the results page. The paper permits academic access to the dataset. https://aichallenge.hcmus.edu.vn/shrec-2025/smart3droom The competition host returns 404 for robots.txt.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Ai-Yahh",
@@ -267912,13 +268070,24 @@
         "NoResources",
         "Stubborn_Strawberries"
       ],
-      "static": "paper",
       "stats": {
         "recallAt1": {
           "name": "Recall at 1",
           "unit": "score",
           "better": "higher",
           "note": "Fraction of queries whose correct object is ranked first, stored from 0 to 1."
+        },
+        "recallAt5": {
+          "name": "Recall at 5",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of queries whose correct object is ranked in the top 5, stored from 0 to 1."
+        },
+        "recallAt10": {
+          "name": "Recall at 10",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of queries whose correct object is ranked in the top 10, stored from 0 to 1."
         }
       }
     },
@@ -303770,7 +303939,7 @@
       "feed": "https://arxiv.org/pdf/2611.01934",
       "terms": "The paper is published under the arXiv terms. https://arxiv.org/licenses/nonexclusive-distrib/1.0/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [
         "InteractiveOmni-4B"
@@ -303793,9 +303962,49 @@
           "unit": "%",
           "better": "higher"
         },
+        "mprObs": {
+          "name": "Measurement-grounded observation score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mprFormula": {
+          "name": "Measurement-grounded formula score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mprDerive": {
+          "name": "Measurement-grounded derivation score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "mprOgs": {
+          "name": "Measurement-grounded overall score",
+          "unit": "score",
+          "better": "higher"
+        },
         "kprAcc": {
           "name": "Knowledge-grounded answer accuracy",
           "unit": "%",
+          "better": "higher"
+        },
+        "kprObs": {
+          "name": "Knowledge-grounded observation score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "kprFormula": {
+          "name": "Knowledge-grounded formula score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "kprDerive": {
+          "name": "Knowledge-grounded derivation score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "kprOgs": {
+          "name": "Knowledge-grounded overall score",
+          "unit": "score",
           "better": "higher"
         }
       }
@@ -305775,7 +305984,7 @@
       "terms": "ACL Anthology makes this paper available under its publication terms. https://aclanthology.org/faq/copyright/",
       "headline": "The paper reports several measures, so this is the UPOS tagging score, the first scored task column.",
       "static": "paper",
-      "retrieved": "2026-11-21",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Custom Classical",
@@ -305791,6 +306000,11 @@
         "Trankit PROIEL"
       ],
       "stats": {
+        "tokenization": {
+          "name": "Tokenization F1",
+          "unit": "%",
+          "better": "higher"
+        },
         "ufeats": {
           "name": "Universal morphological features",
           "unit": "%",

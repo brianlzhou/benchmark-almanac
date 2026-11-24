@@ -61,9 +61,7 @@ const board: Leaderboard = {
           const group = table[0][i+1].replace(/\s*\( n=.*$/, '').replace('\\rightarrow', 'to');
           const label = table[1][i+1];
           const key = (group + label).replace(/[^a-zA-Z0-9]/g, '');
-          const error = /RMSE|MAE/.test(label);
           const percent = /Accuracy|Exact Match| EM$/.test(label) || group.includes('Accuracy');
-          parts[key] = { name: group + ': ' + label, group, unit: percent ? '%' : 'score', ...(error ? { better: 'lower' } : {}) };
           const [value, sd] = cell.split('\\pm').map(number);
           const scale = percent ? 100 : 1;
           row.metrics![key] = value * scale;
