@@ -6631,6 +6631,11 @@
       "via": "DesignArena's code leaderboards list 19 boards, and the almanac had two DesignArena records."
     },
     {
+      "id": "designarena-human-intelligence-index",
+      "date": "2026-11-24",
+      "via": "Live DesignArena leaderboard audit covering Human Intelligence Index and Office Leaderboards."
+    },
+    {
       "id": "designarena-image",
       "date": "2026-11-01",
       "via": "DesignArena's code leaderboards list 19 boards, and the almanac had two DesignArena records."
@@ -26576,6 +26581,16 @@
       "via": "Coverage audit of independent public speech preference boards."
     },
     {
+      "id": "voicearena-egyptian-arabic",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
+    },
+    {
+      "id": "voicearena-filipino-accented-english",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
+    },
+    {
       "id": "voicearena-french",
       "date": "2026-11-10",
       "via": "Coverage audit of independent public speech preference boards."
@@ -26584,6 +26599,11 @@
       "id": "voicearena-german",
       "date": "2026-11-10",
       "via": "Coverage audit of independent public speech preference boards."
+    },
+    {
+      "id": "voicearena-gujarati",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
     },
     {
       "id": "voicearena-hindi",
@@ -26606,9 +26626,44 @@
       "via": "Coverage audit of independent public speech preference boards."
     },
     {
+      "id": "voicearena-stt-brazilian-portuguese",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-hindi",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-indian-english",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-romanian",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
+      "id": "voicearena-stt-us-english",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena STT V2 sitemap and CSV feed audit covering public speech-to-text leaderboards."
+    },
+    {
       "id": "voicearena-tagalog",
       "date": "2026-11-10",
       "via": "Coverage audit of independent public speech preference boards."
+    },
+    {
+      "id": "voicearena-tamil",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
+    },
+    {
+      "id": "voicearena-telugu",
+      "date": "2026-11-24",
+      "via": "Live Voice Arena TTS sitemap and anonymous Supabase audit covering November 2026 language launches."
     },
     {
       "id": "voicearena-us-english",

@@ -82335,6 +82335,35 @@
         }
       }
     },
+    "designarena-human-intelligence-index": {
+      "url": "https://www.designarena.ai/leaderboard?section=overall&board=human-intelligence-index",
+      "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=human-intelligence-index",
+      "terms": "Design Arena's terms bar automated access and its robots.txt disallows /api/. The almanac reads the JSON its leaderboard pages load, once a day, and credits and links designarena.ai, as its API license asks.",
+      "retrieved": "2026-11-24",
+      "rows": 48,
+      "unmatched": [],
+      "stats": {
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "wins": {
+          "name": "Wins",
+          "unit": "count",
+          "better": "higher"
+        },
+        "losses": {
+          "name": "Losses",
+          "unit": "count",
+          "better": "lower"
+        },
+        "battles": {
+          "name": "Battles",
+          "unit": "count"
+        }
+      }
+    },
     "designarena-image": {
       "url": "https://www.designarena.ai/leaderboard?tab=image&section=image&board=image",
       "feed": "https://www.designarena.ai/api/leaderboard?arenaType=models&category=image",
@@ -320818,6 +320847,52 @@
         }
       }
     },
+    "voicearena-egyptian-arabic": {
+      "url": "https://voicearena.com/tts-leaderboard/egyptian-arabic",
+      "feed": "https://voicearena.com/tts-leaderboard/egyptian-arabic",
+      "terms": "Public Voice Arena leaderboard and anonymous read API. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Cartesia Sonic-3.6",
+        "ElevenLabs Eleven v4",
+        "ElevenLabs Eleven v4 Turbo"
+      ],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
+    "voicearena-filipino-accented-english": {
+      "url": "https://voicearena.com/tts-leaderboard/filipino-accented-english",
+      "feed": "https://voicearena.com/tts-leaderboard/filipino-accented-english",
+      "terms": "Public Voice Arena leaderboard and anonymous read API. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Cartesia Sonic-3.6",
+        "ElevenLabs Eleven v4",
+        "ElevenLabs Eleven v4 Turbo"
+      ],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "voicearena-french": {
       "url": "https://voicearena.com/tts-leaderboard/french",
       "feed": "https://voicearena.com/tts-leaderboard/french",
@@ -320853,6 +320928,30 @@
         "ElevenLabs Eleven v4 Turbo",
         "Gradium-TTS",
         "Inworld Realtime TTS 2"
+      ],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
+    "voicearena-gujarati": {
+      "url": "https://voicearena.com/tts-leaderboard/gujarati",
+      "feed": "https://voicearena.com/tts-leaderboard/gujarati",
+      "terms": "Public Voice Arena leaderboard and anonymous read API. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Cartesia Sonic-3.6",
+        "ElevenLabs Eleven v4",
+        "ElevenLabs Eleven v4 Turbo",
+        "Smallest AI Lightning 3.1 Pro"
       ],
       "stats": {
         "votes": {
@@ -320973,6 +321072,560 @@
         }
       }
     },
+    "voicearena-stt-brazilian-portuguese": {
+      "url": "https://voicearena.com/stt-leaderboard/brazilian-portuguese",
+      "feed": "https://voicearena.com/data/stt-v2/stt_brazilian-portuguese.csv",
+      "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [
+        "Amazon Transcribe (Streaming)",
+        "AssemblyAI Universal-3 Pro",
+        "AssemblyAI Universal-3.6 Pro Realtime",
+        "Canary-1B",
+        "Deepgram Flux Multilingual",
+        "Deepgram Nova-3 (Streaming)",
+        "ElevenLabs Scribe V3 Live",
+        "ElevenLabs Scribe v2",
+        "ElevenLabs Scribe v2 Realtime",
+        "ElevenLabs Scribe v3",
+        "Fish Audio Transcribe 1 Pro",
+        "Fish Audio Transcribe Stream 1",
+        "FluidVoice Fluid Speech Pro",
+        "Gladia Solaria-1",
+        "Gradium Speech-to-Text (Streaming)",
+        "Grok Voice Transcribe 2.0 (Batch)",
+        "Grok Voice Transcribe 2.0 (Streaming)",
+        "Meta omniASR-LLM-7B",
+        "Microsoft MAI-Transcribe-2",
+        "Murf AI finch_global_1.0",
+        "Nemotron 3.5 Streaming",
+        "Omi General STT v1",
+        "Omi Med STT v1",
+        "Parakeet-TDT-0.6B",
+        "Reson8 Resonant-1",
+        "Reson8 Rumble-2",
+        "Smallest AI Pulse",
+        "Speechmatics Enhanced",
+        "Speechmatics Enhanced (Streaming)",
+        "Voxtral Mini Transcribe",
+        "Voxtral Small Transcribe",
+        "inworld-stt-1"
+      ],
+      "parts": {
+        "publicSplit": {
+          "name": "Public split",
+          "group": "Test split"
+        },
+        "clean": {
+          "name": "Clean",
+          "group": "Noise level"
+        },
+        "slightlyNoisy": {
+          "name": "Slightly Noisy",
+          "group": "Noise level"
+        },
+        "moderate": {
+          "name": "Moderate",
+          "group": "Noise level"
+        },
+        "noisy": {
+          "name": "Noisy",
+          "group": "Noise level"
+        },
+        "short": {
+          "name": "Short",
+          "group": "Utterance length"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Utterance length"
+        },
+        "long": {
+          "name": "Long",
+          "group": "Utterance length"
+        },
+        "male": {
+          "name": "Male",
+          "group": "Speaker gender"
+        },
+        "female": {
+          "name": "Female",
+          "group": "Speaker gender"
+        },
+        "age18To24": {
+          "name": "Age 18 to 24",
+          "group": "Speaker age"
+        },
+        "age25To34": {
+          "name": "Age 25 to 34",
+          "group": "Speaker age"
+        },
+        "age35To44": {
+          "name": "Age 35 to 44",
+          "group": "Speaker age"
+        },
+        "age45To54": {
+          "name": "Age 45 to 54",
+          "group": "Speaker age"
+        },
+        "age55Plus": {
+          "name": "Age 55+",
+          "group": "Speaker age"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Character error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hfWer": {
+          "name": "Standard WER",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
+    "voicearena-stt-hindi": {
+      "url": "https://voicearena.com/stt-leaderboard/hindi",
+      "feed": "https://voicearena.com/data/stt-v2/stt_hindi.csv",
+      "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [
+        "Amazon Transcribe",
+        "Amazon Transcribe (Streaming)",
+        "AssemblyAI Universal-3.6 Pro Realtime",
+        "Bodhan AI Indic Transcribe Core",
+        "Bodhan AI Indic Transcribe Flex",
+        "Deepgram Flux Multilingual",
+        "Deepgram Nova-3 (Streaming)",
+        "ElevenLabs Scribe V3 Live",
+        "ElevenLabs Scribe v2",
+        "ElevenLabs Scribe v2 Realtime",
+        "ElevenLabs Scribe v3",
+        "Fish Audio Transcribe Stream 1",
+        "Gnani Prisma v2.5",
+        "Microsoft MAI-Transcribe-2",
+        "Murf AI Finch-1",
+        "Omi General STT v1",
+        "Omi Med STT v1",
+        "Sarvam Saaras v3",
+        "Speechmatics Enhanced (Streaming)",
+        "SraVaani 1.0"
+      ],
+      "parts": {
+        "publicSplit": {
+          "name": "Public split",
+          "group": "Test split"
+        },
+        "clean": {
+          "name": "Clean",
+          "group": "Noise level"
+        },
+        "slightlyNoisy": {
+          "name": "Slightly Noisy",
+          "group": "Noise level"
+        },
+        "moderate": {
+          "name": "Moderate",
+          "group": "Noise level"
+        },
+        "noisy": {
+          "name": "Noisy",
+          "group": "Noise level"
+        },
+        "short": {
+          "name": "Short",
+          "group": "Utterance length"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Utterance length"
+        },
+        "long": {
+          "name": "Long",
+          "group": "Utterance length"
+        },
+        "male": {
+          "name": "Male",
+          "group": "Speaker gender"
+        },
+        "female": {
+          "name": "Female",
+          "group": "Speaker gender"
+        },
+        "age18To22": {
+          "name": "Age 18 to 22",
+          "group": "Speaker age"
+        },
+        "age23To30": {
+          "name": "Age 23 to 30",
+          "group": "Speaker age"
+        },
+        "age31To45": {
+          "name": "Age 31 to 45",
+          "group": "Speaker age"
+        },
+        "age46To65": {
+          "name": "Age 46 to 65",
+          "group": "Speaker age"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Character error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "publicSub": {
+          "name": "Public substitution rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "publicDel": {
+          "name": "Public deletion rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "publicIns": {
+          "name": "Public insertion rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
+    "voicearena-stt-indian-english": {
+      "url": "https://voicearena.com/stt-leaderboard/indian-english",
+      "feed": "https://voicearena.com/data/stt-v2/stt_indian-english.csv",
+      "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [
+        "Amazon Transcribe (Streaming)",
+        "AssemblyAI STT 3.7 Realtime Agent",
+        "AssemblyAI Universal-3 Pro",
+        "AssemblyAI Universal-3.6 Pro Realtime",
+        "Canary-1B",
+        "Cartesia Ink-2",
+        "Deepgram Flux Multilingual",
+        "Deepgram Nova-3 (Streaming)",
+        "ElevenLabs Scribe V3 Live",
+        "ElevenLabs Scribe v2",
+        "ElevenLabs Scribe v2 Realtime",
+        "ElevenLabs Scribe v3",
+        "Fish Audio Transcribe 1 Pro",
+        "Fish Audio Transcribe Stream 1",
+        "FluidVoice Fluid Speech Pro",
+        "Gladia Solaria-1",
+        "Gradium Speech-to-Text (Streaming)",
+        "Grok Voice Transcribe 2.0 (Batch)",
+        "Grok Voice Transcribe 2.0 (Streaming)",
+        "Meta omniASR-LLM-7B",
+        "Microsoft MAI-Transcribe-2",
+        "Murf AI finch_indic_1.0",
+        "Nemotron 3.5 Streaming",
+        "Omi General STT v1",
+        "Omi Med STT v1",
+        "Parakeet-TDT-0.6B",
+        "Reson8 Resonant-1",
+        "Smallest AI Pulse",
+        "Smallest AI Pulse Pro",
+        "Speechmatics Enhanced",
+        "Speechmatics Enhanced (Streaming)",
+        "Voxtral Mini Transcribe",
+        "Voxtral Small Transcribe",
+        "inworld-stt-1"
+      ],
+      "parts": {
+        "publicSplit": {
+          "name": "Public split",
+          "group": "Test split"
+        },
+        "clean": {
+          "name": "Clean",
+          "group": "Noise level"
+        },
+        "slightlyNoisy": {
+          "name": "Slightly Noisy",
+          "group": "Noise level"
+        },
+        "moderate": {
+          "name": "Moderate",
+          "group": "Noise level"
+        },
+        "noisy": {
+          "name": "Noisy",
+          "group": "Noise level"
+        },
+        "short": {
+          "name": "Short",
+          "group": "Utterance length"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Utterance length"
+        },
+        "long": {
+          "name": "Long",
+          "group": "Utterance length"
+        },
+        "male": {
+          "name": "Male",
+          "group": "Speaker gender"
+        },
+        "female": {
+          "name": "Female",
+          "group": "Speaker gender"
+        },
+        "age18To24": {
+          "name": "Age 18 to 24",
+          "group": "Speaker age"
+        },
+        "age25To34": {
+          "name": "Age 25 to 34",
+          "group": "Speaker age"
+        },
+        "age35To44": {
+          "name": "Age 35 to 44",
+          "group": "Speaker age"
+        },
+        "age45To54": {
+          "name": "Age 45 to 54",
+          "group": "Speaker age"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Character error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hfWer": {
+          "name": "Standard WER",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
+    "voicearena-stt-romanian": {
+      "url": "https://voicearena.com/stt-leaderboard/romanian",
+      "feed": "https://voicearena.com/data/stt-v2/stt_romanian.csv",
+      "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "Amazon Transcribe (Streaming)",
+        "AssemblyAI Universal-3.6 Pro Realtime",
+        "Canary-1B",
+        "Deepgram Flux Multilingual",
+        "Deepgram Nova-3 (Streaming)",
+        "ElevenLabs Scribe V3 Live",
+        "ElevenLabs Scribe v2",
+        "ElevenLabs Scribe v2 Realtime",
+        "ElevenLabs Scribe v3",
+        "Fish Audio Transcribe 1 Pro",
+        "Fish Audio Transcribe Stream 1",
+        "FluidVoice Fluid Speech Pro",
+        "Gladia Solaria-1",
+        "Grok Voice Transcribe 2.0 (Batch)",
+        "Grok Voice Transcribe 2.0 (Streaming)",
+        "Meta omniASR-LLM-7B",
+        "Microsoft MAI-Transcribe-2",
+        "Parakeet-TDT-0.6B",
+        "Smallest AI Pulse",
+        "Speechmatics Enhanced",
+        "Speechmatics Enhanced (Streaming)",
+        "Voxtral Mini Transcribe",
+        "Voxtral Small Transcribe",
+        "inworld-stt-1"
+      ],
+      "parts": {
+        "publicSplit": {
+          "name": "Public split",
+          "group": "Test split"
+        },
+        "clean": {
+          "name": "Clean",
+          "group": "Noise level"
+        },
+        "slightlyNoisy": {
+          "name": "Slightly Noisy",
+          "group": "Noise level"
+        },
+        "moderate": {
+          "name": "Moderate",
+          "group": "Noise level"
+        },
+        "noisy": {
+          "name": "Noisy",
+          "group": "Noise level"
+        },
+        "short": {
+          "name": "Short",
+          "group": "Utterance length"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Utterance length"
+        },
+        "long": {
+          "name": "Long",
+          "group": "Utterance length"
+        },
+        "male": {
+          "name": "Male",
+          "group": "Speaker gender"
+        },
+        "female": {
+          "name": "Female",
+          "group": "Speaker gender"
+        },
+        "age18To24": {
+          "name": "Age 18 to 24",
+          "group": "Speaker age"
+        },
+        "age25To34": {
+          "name": "Age 25 to 34",
+          "group": "Speaker age"
+        },
+        "age35To44": {
+          "name": "Age 35 to 44",
+          "group": "Speaker age"
+        },
+        "age45To54": {
+          "name": "Age 45 to 54",
+          "group": "Speaker age"
+        },
+        "age55Plus": {
+          "name": "Age 55+",
+          "group": "Speaker age"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Character error rate",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
+    "voicearena-stt-us-english": {
+      "url": "https://voicearena.com/stt-leaderboard/us-english",
+      "feed": "https://voicearena.com/data/stt-v2/stt_us-english.csv",
+      "terms": "Public Voice Arena STT leaderboard CSV feed. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 8,
+      "unmatched": [
+        "Amazon Transcribe (Streaming)",
+        "AssemblyAI STT 3.7 Realtime Agent",
+        "AssemblyAI Universal-3 Pro",
+        "AssemblyAI Universal-3.6 Pro Realtime",
+        "Canary-1B",
+        "Cartesia Ink-2",
+        "Deepgram Flux Multilingual",
+        "Deepgram Nova-3 (Streaming)",
+        "ElevenLabs Scribe V3 Live",
+        "ElevenLabs Scribe v2",
+        "ElevenLabs Scribe v2 Realtime",
+        "ElevenLabs Scribe v3",
+        "Fish Audio Transcribe 1 Pro",
+        "Fish Audio Transcribe Stream 1",
+        "FluidVoice Fluid Speech Pro",
+        "Gladia Solaria-1",
+        "Gradium Speech-to-Text (Streaming)",
+        "Granite-speech-5.0-2b",
+        "Granite-speech-5.0-470m-turboctc",
+        "Grok Voice Transcribe 2.0 (Batch)",
+        "Grok Voice Transcribe 2.0 (Streaming)",
+        "Meta omniASR-LLM-7B",
+        "Microsoft MAI-Transcribe-2",
+        "Murf AI finch_global_1.0",
+        "Nemotron 3.5 Streaming",
+        "Omi General STT v1",
+        "Omi Med STT v1",
+        "Parakeet-TDT-0.6B",
+        "Reson8 Resonant-1",
+        "Smallest AI Pulse",
+        "Smallest AI Pulse Pro",
+        "Speechmatics Enhanced",
+        "Speechmatics Enhanced (Streaming)",
+        "Voxtral Mini Transcribe",
+        "Voxtral Small Transcribe",
+        "inworld-stt-1"
+      ],
+      "parts": {
+        "publicSplit": {
+          "name": "Public split",
+          "group": "Test split"
+        },
+        "clean": {
+          "name": "Clean",
+          "group": "Noise level"
+        },
+        "slightlyNoisy": {
+          "name": "Slightly Noisy",
+          "group": "Noise level"
+        },
+        "moderate": {
+          "name": "Moderate",
+          "group": "Noise level"
+        },
+        "noisy": {
+          "name": "Noisy",
+          "group": "Noise level"
+        },
+        "short": {
+          "name": "Short",
+          "group": "Utterance length"
+        },
+        "medium": {
+          "name": "Medium",
+          "group": "Utterance length"
+        },
+        "long": {
+          "name": "Long",
+          "group": "Utterance length"
+        },
+        "male": {
+          "name": "Male",
+          "group": "Speaker gender"
+        },
+        "female": {
+          "name": "Female",
+          "group": "Speaker gender"
+        },
+        "age25To34": {
+          "name": "Age 25 to 34",
+          "group": "Speaker age"
+        },
+        "age35To44": {
+          "name": "Age 35 to 44",
+          "group": "Speaker age"
+        },
+        "age45To54": {
+          "name": "Age 45 to 54",
+          "group": "Speaker age"
+        },
+        "age55Plus": {
+          "name": "Age 55+",
+          "group": "Speaker age"
+        }
+      },
+      "stats": {
+        "cer": {
+          "name": "Character error rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "hfWer": {
+          "name": "Standard WER",
+          "unit": "%",
+          "better": "lower"
+        }
+      }
+    },
     "voicearena-tagalog": {
       "url": "https://voicearena.com/tts-leaderboard/tagalog",
       "feed": "https://voicearena.com/tts-leaderboard/tagalog",
@@ -320982,6 +321635,54 @@
       "unmatched": [
         "Cartesia Sonic-3.6",
         "ElevenLabs Eleven v4 Turbo"
+      ],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
+    "voicearena-tamil": {
+      "url": "https://voicearena.com/tts-leaderboard/tamil",
+      "feed": "https://voicearena.com/tts-leaderboard/tamil",
+      "terms": "Public Voice Arena leaderboard and anonymous read API. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Cartesia Sonic-3.6",
+        "ElevenLabs Eleven v4",
+        "ElevenLabs Eleven v4 Turbo",
+        "Smallest AI Lightning 3.1 Pro"
+      ],
+      "stats": {
+        "votes": {
+          "name": "Votes",
+          "unit": "count"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
+    "voicearena-telugu": {
+      "url": "https://voicearena.com/tts-leaderboard/telugu",
+      "feed": "https://voicearena.com/tts-leaderboard/telugu",
+      "terms": "Public Voice Arena leaderboard and anonymous read API. Site terms apply. The almanac credits and links the source.",
+      "retrieved": "2026-11-24",
+      "rows": 3,
+      "unmatched": [
+        "Cartesia Sonic-3.6",
+        "ElevenLabs Eleven v4",
+        "ElevenLabs Eleven v4 Turbo",
+        "Smallest AI Lightning 3.1 Pro"
       ],
       "stats": {
         "votes": {

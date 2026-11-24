@@ -42839,6 +42839,307 @@
     "added": "2026-11-19"
   },
   {
+    "id": "designarena-human-intelligence-index",
+    "name": "DesignArena Human Intelligence Index",
+    "aliases": [
+      "Design Arena Human Intelligence Index",
+      "Human Intelligence Index",
+      "DesignArena HII"
+    ],
+    "category": "other",
+    "subcategory": "other-indices",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "A composite human preference index aggregating blind pairwise votes across DesignArena's creative, coding, office, and multimodal arenas. Scores represent how many times in 100 users would pick a model's work over Claude Opus 5.5, which is anchored at 50.",
+    "org": "DesignArena (Intelligence)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://designarena.ai/blog/human-intelligence-index",
+      "leaderboard": "https://www.designarena.ai/leaderboard?section=overall&board=human-intelligence-index"
+    },
+    "access": "public",
+    "note": "Combines more than two million human pairwise votes across DesignArena categories onto a 0 to 100 index centered on Claude Opus 5.5 at 50.",
+    "unit": "index",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://designarena.ai/blog/human-intelligence-index",
+      "https://www.designarena.ai/leaderboard?section=overall&board=human-intelligence-index"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-egyptian-arabic",
+    "name": "Voice Arena Egyptian Arabic",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Egyptian Arabic. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/egyptian-arabic"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/egyptian-arabic",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-filipino-accented-english",
+    "name": "Voice Arena Filipino-Accented English",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Filipino-accented English. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/filipino-accented-english"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/filipino-accented-english",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-gujarati",
+    "name": "Voice Arena Gujarati",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Gujarati. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/gujarati"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/gujarati",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-brazilian-portuguese",
+    "name": "Voice Arena STT Brazilian Portuguese",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Brazilian Portuguese audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/brazilian-portuguese",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-pt-BR"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, Standard WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/brazilian-portuguese",
+      "https://voicearena.com/data/stt-v2/stt_brazilian-portuguese.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-pt-BR"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-hindi",
+    "name": "Voice Arena STT Hindi",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Hindi audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level orthography-insensitive WER (OI-WER) on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/hindi",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports orthography-insensitive WER (OI-WER), character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices, plus substitution, deletion, and insertion rates on the public split.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/hindi",
+      "https://voicearena.com/data/stt-v2/stt_hindi.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-hi-IN"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-indian-english",
+    "name": "Voice Arena STT Indian English",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Indian English audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/indian-english",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, Standard WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/indian-english",
+      "https://voicearena.com/data/stt-v2/stt_indian-english.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-Open-ASR-leaderboard-en-IN"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-romanian",
+    "name": "Voice Arena STT Romanian",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe Romanian audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/romanian",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-ro-RO"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/romanian",
+      "https://voicearena.com/data/stt-v2/stt_romanian.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-ro-RO"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-stt-us-english",
+    "name": "Voice Arena STT US English",
+    "category": "audio-video",
+    "subcategory": "audio-speech",
+    "level": "everyday",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Speech recognition models transcribe US English audio across quiet and noisy conditions. The leaderboard ranks systems by corpus-level Semantic WER on a held-out private set alongside a public MonsoonASR split.",
+    "org": "Voice Arena",
+    "released": "2026-09",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/stt-leaderboard/us-english",
+      "dataset": "https://huggingface.co/datasets/VoiceArena/MonsoonASR-en-US"
+    },
+    "access": "public+private-holdout",
+    "note": "Reports corpus-level Semantic WER, Standard WER, character error rate, and 95% bootstrap intervals across noise, age, gender, and utterance length slices.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/stt-leaderboard/us-english",
+      "https://voicearena.com/data/stt-v2/stt_us-english.csv",
+      "https://huggingface.co/datasets/VoiceArena/MonsoonASR-en-US"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-tamil",
+    "name": "Voice Arena Tamil",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Tamil. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/tamil"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/tamil",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "voicearena-telugu",
+    "name": "Voice Arena Telugu",
+    "category": "audio-video",
+    "subcategory": "audio-understanding",
+    "level": "everyday",
+    "scoring": "preference",
+    "format": "open-ended",
+    "description": "Models generate speech in Telugu. Listeners compare anonymous clips, and preference votes determine independent language Elo ratings.",
+    "org": "Voice Arena",
+    "released": "2026-11",
+    "links": {
+      "site": "https://voicearena.com",
+      "leaderboard": "https://voicearena.com/tts-leaderboard/telugu"
+    },
+    "access": "public",
+    "note": "Each language has an independent leaderboard. Topic filters stay within its vote pool.",
+    "unit": "elo",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://voicearena.com/tts-leaderboard/telugu",
+      "https://voicearena.com/tts-methodology"
+    ],
+    "added": "2026-11-24"
+  },
+  {
     "id": "csfd-sentiment",
     "name": "ČSFD Sentiment",
     "aliases": [
