@@ -1426,6 +1426,11 @@
       "via": "The NeurIPS 2026 poster linked to a results dashboard where each generated animation can be checked against its source."
     },
     {
+      "id": "animweb-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.09769) with a public results table scoring 14 frontier multimodal models."
+    },
+    {
       "id": "anli-r1",
       "date": "2026-11-08",
       "via": "Held leaderboard tracks get separate records, a rule set on 2026-11-08."
@@ -2301,6 +2306,11 @@
       "via": "GitHub topic scan (141 stars)."
     },
     {
+      "id": "axe-world-models",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.30120) with a live leaderboard at AxEBench.github.io scoring 20 video world models."
+    },
+    {
       "id": "aya-redteaming",
       "date": "2026-11-20",
       "via": "Cohere Labs' Hugging Face dataset sweep found the public eight-language red-teaming evaluation."
@@ -2629,6 +2639,11 @@
       "id": "bertaqa",
       "date": "2026-11-19",
       "via": "EleutherAI publishes a task configuration for this evaluation."
+    },
+    {
+      "id": "beyond-accuracy-exp-planning",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.29467) from EPFL Schwaller Group with a public CSV leaderboard scoring 10 LLM agents."
     },
     {
       "id": "beyond-survival",
@@ -7001,6 +7016,11 @@
       "via": "Following the original DISPLACE organizers led to their medical dialogue challenge and a team that scored speaker-attributed transcripts."
     },
     {
+      "id": "distdebug-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.SE (arXiv:2611.03523) with a live JSON leaderboard at distdebug.com scoring 18 frontier model-harness configurations."
+    },
+    {
       "id": "distemist",
       "date": "2026-11-20",
       "via": "The Spanish clinical trials lead pointed to a disease coding challenge and an independent study using its official test documents."
@@ -7596,6 +7616,11 @@
       "via": "We followed the ENIGMA citation to the industry questions and then checked the EgoCross challenge report."
     },
     {
+      "id": "egodepth-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.30734) with a live leaderboard at egodepth-bench.github.io scoring 19 foundation depth models."
+    },
+    {
       "id": "egohome",
       "date": "2026-11-13",
       "via": "Perceptron released it with Perceptron Egocentric 1.0, with code on GitHub and data on Hugging Face."
@@ -7619,6 +7644,11 @@
       "id": "egotom",
       "date": "2026-11-20",
       "via": "The Meta repository releases the benchmark and evaluation code over Ego4D videos."
+    },
+    {
+      "id": "egowitness",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.25849) with a live leaderboard at egowitness.github.io scoring 16+ vision-language models."
     },
     {
       "id": "egyhellaswag",
@@ -9631,6 +9661,11 @@
       "via": "Latent Space AINews issue of 2026-09-10, where Arena highlighted it."
     },
     {
+      "id": "gamedojo",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.30771) from THUSI-Lab with a structured JSON leaderboard at gamedojo-benchmark.github.io scoring 13 models."
+    },
+    {
       "id": "gameenginebench",
       "date": "2026-11-20",
       "via": "A comparison with CraftBench-UE led to Nitrode’s own Unreal Engine leaderboard and the data behind its chart."
@@ -10824,6 +10859,11 @@
       "id": "hemingway-bench",
       "date": "2026-11-01",
       "via": "Surge AI blog index."
+    },
+    {
+      "id": "hep-ex-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.28194) with a live interactive leaderboard at hep-ex-bench.github.io scoring 11 frontier models across four harnesses."
     },
     {
       "id": "heptoolbench-1-2",
@@ -12779,6 +12819,11 @@
       "id": "kernelquest-turing",
       "date": "2026-11-20",
       "via": "The publisher lists this evaluation in its research publications."
+    },
+    {
+      "id": "kernelshift",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv (arXiv:2611.29590) from CMU L3 with a live leaderboard scoring six frontier models across four agent harnesses."
     },
     {
       "id": "kespeech",
@@ -23026,6 +23071,11 @@
       "via": "An independent EMNLP 2024 retrieval study used StreamingQA to compare how models adapt to newly published documents."
     },
     {
+      "id": "strideworld",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.CV (arXiv:2611.24408) with a Hugging Face Space leaderboard scoring 15 interactive video world models."
+    },
+    {
       "id": "structeval",
       "date": "2026-11-01",
       "via": "The Nemotron 3.5 Bolt E4B model card reports StructEval-T, and the almanac had no record."
@@ -25196,6 +25246,11 @@
       "via": "Table 5 of the codex-1 system card addendum."
     },
     {
+      "id": "unfinished-bench",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.AI (arXiv:2611.17460) from NAVER AI Lab with a public results page scoring 12 current models."
+    },
+    {
       "id": "unhealthy-comments-corpus",
       "date": "2026-11-20",
       "via": "We followed the Bremen feedback study to the comment corpus and matched its released labels to the PaLM paper’s test counts."
@@ -27354,6 +27409,11 @@
       "id": "worldgui",
       "date": "2026-11-01",
       "via": "Awesome-CUA catalog benchmark records."
+    },
+    {
+      "id": "worldleague",
+      "date": "2026-11-24",
+      "via": "Found in Nov 2026 arXiv cs.RO (arXiv:2611.30989) with a live leaderboard at xyangzhou.github.io/WorldLeague scoring 13 embodied AI systems."
     },
     {
       "id": "worldolympiad",

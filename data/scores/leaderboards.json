@@ -16432,6 +16432,49 @@
         }
       }
     },
+    "animweb-bench": {
+      "url": "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "feed": "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "terms": "Published openly on GitHub Pages by the AnimWeb-Bench authors with no robots.txt restrictions.",
+      "headline": "Plain mean of the four Static Appearance Fidelity and four Animation Fidelity metrics (0 to 1), since the leaderboard reports the eight dimensions separately.",
+      "retrieved": "2026-11-24",
+      "rows": 14,
+      "unmatched": [],
+      "parts": {
+        "staticStructure": {
+          "name": "Structure",
+          "group": "Static appearance"
+        },
+        "staticText": {
+          "name": "Text",
+          "group": "Static appearance"
+        },
+        "staticColor": {
+          "name": "Color",
+          "group": "Static appearance"
+        },
+        "staticClip": {
+          "name": "CLIP",
+          "group": "Static appearance"
+        },
+        "animPosition": {
+          "name": "Position",
+          "group": "Animation fidelity"
+        },
+        "animSize": {
+          "name": "Size",
+          "group": "Animation fidelity"
+        },
+        "animVelocity": {
+          "name": "Velocity",
+          "group": "Animation fidelity"
+        },
+        "animClip": {
+          "name": "CLIP",
+          "group": "Animation fidelity"
+        }
+      }
+    },
     "anli-r1": {
       "url": "https://github.com/facebookresearch/anli",
       "feed": "https://raw.githubusercontent.com/facebookresearch/anli/main/README.md",
@@ -27736,6 +27779,55 @@
       },
       "static": "paper"
     },
+    "axe-world-models": {
+      "url": "https://AxEBench.github.io/",
+      "feed": "https://AxEBench.github.io/",
+      "terms": "Published openly on GitHub Pages by the AxE authors with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 6,
+      "unmatched": [
+        "AlayaWorld",
+        "Cosmos-Predict2.5-2B",
+        "Cosmos3-Super",
+        "Evoke",
+        "Evoke-Turbo",
+        "GigaWorld-0",
+        "HappyHorse 1.1",
+        "Kling 4.0",
+        "LTX-2.5-Distilled",
+        "LingBot-World",
+        "Matrix-Game-2.0",
+        "SANA-WM",
+        "VPP2",
+        "Wan2.2-Fun-Camera"
+      ],
+      "stats": {
+        "fidelity": {
+          "name": "Fidelity",
+          "unit": "score",
+          "better": "higher",
+          "note": "Grounded event fidelity across original and variant generations."
+        },
+        "stability": {
+          "name": "Stability",
+          "unit": "score",
+          "better": "higher",
+          "note": "Consistency of event execution across controlled agent and environment variants."
+        },
+        "timing": {
+          "name": "Timing",
+          "unit": "score",
+          "better": "higher",
+          "note": "Temporal alignment of generated physical events."
+        },
+        "content": {
+          "name": "Content",
+          "unit": "score",
+          "better": "higher",
+          "note": "Semantic content accuracy of generated events."
+        }
+      }
+    },
     "ayavisionbench": {
       "url": "https://cohere.com/blog/aya-vision",
       "feed": "https://storage.ghost.io/c/81/47/8147eb50-617d-4929-b563-3922b88421fd/content/images/2025/03/Aya-Vision-8B-Combined-Win-Rates-2.png (transcribed 2026-11-08)",
@@ -33275,6 +33367,14 @@
           "unit": "tokens"
         }
       }
+    },
+    "beyond-accuracy-exp-planning": {
+      "url": "https://schwallergroup.github.io/beyond-accuracy/",
+      "feed": "https://schwallergroup.github.io/beyond-accuracy/data/results.csv",
+      "terms": "Published openly on GitHub Pages by the EPFL Schwaller Group with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 10,
+      "unmatched": []
     },
     "beyond-aime": {
       "url": "https://arxiv.org/abs/2504.13914",
@@ -85771,6 +85871,86 @@
         }
       }
     },
+    "distdebug-bench": {
+      "url": "https://distdebug.com/leaderboard/",
+      "feed": "https://distdebug.com/data/leaderboard.json",
+      "terms": "Published openly on distdebug.com by OrderLab with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 18,
+      "unmatched": [],
+      "harnesses": "system",
+      "parts": {
+        "methodNoStack": {
+          "name": "Method, no stack",
+          "group": "Evidence group"
+        },
+        "opaqueNoStack": {
+          "name": "Opaque, no stack",
+          "group": "Evidence group"
+        },
+        "opaqueCrossComponent": {
+          "name": "Opaque, cross-component",
+          "group": "Evidence group"
+        }
+      },
+      "stats": {
+        "fileCoverage": {
+          "name": "File coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "funcCoverage": {
+          "name": "Function coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "lineCoverage": {
+          "name": "Line coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "filePrecision": {
+          "name": "File precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "funcPrecision": {
+          "name": "Function precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "linePrecision": {
+          "name": "Line precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "blockPrecision": {
+          "name": "Block precision",
+          "unit": "%",
+          "better": "higher"
+        },
+        "flakyRate": {
+          "name": "Flaky bug rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "blocksPerDiagnosis": {
+          "name": "Blocks per diagnosis",
+          "unit": "count",
+          "better": "lower"
+        },
+        "callsPerRun": {
+          "name": "Calls per run",
+          "unit": "count",
+          "better": "lower"
+        },
+        "totalTokens": {
+          "name": "Tokens per run",
+          "unit": "tokens",
+          "better": "lower"
+        }
+      }
+    },
     "distemist": {
       "url": "https://participants-area.bioasq.org/results/DisTEMIST/",
       "feed": "https://participants-area.bioasq.org/results/DisTEMIST/",
@@ -91659,6 +91839,77 @@
       },
       "static": "paper"
     },
+    "egodepth-bench": {
+      "url": "https://egodepth-bench.github.io/",
+      "feed": "https://egodepth-bench.github.io/",
+      "terms": "Published openly on GitHub Pages by the EgoDepth-Bench authors with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 2,
+      "unmatched": [
+        "CUT3R",
+        "DA3 Metric-Large",
+        "DAC",
+        "Depth Anything v2",
+        "Depth Pro",
+        "FoundationStereo",
+        "GeoStereo",
+        "MASt3R",
+        "Marigold",
+        "Metric3D v2",
+        "MoGe",
+        "UniDAC",
+        "UniDepth v2",
+        "UniK3D",
+        "VGGT",
+        "VGGT-Ω",
+        "ZoeDepth"
+      ],
+      "parts": {
+        "handsMae": {
+          "name": "Hands MAE Z (cm)",
+          "group": "Subset",
+          "unit": "score",
+          "better": "lower",
+          "note": "Depth mean absolute error in centimeters on the annotated hands subset."
+        },
+        "objectsMae": {
+          "name": "Objects MAE Z (cm)",
+          "group": "Subset",
+          "unit": "score",
+          "better": "lower",
+          "note": "Depth mean absolute error in centimeters on the annotated objects subset."
+        }
+      },
+      "stats": {
+        "fullMae": {
+          "name": "Full image MAE Z (cm)",
+          "unit": "score",
+          "better": "lower",
+          "note": "Depth mean absolute error in centimeters across the full image."
+        },
+        "delta1": {
+          "name": "Delta 1 accuracy",
+          "unit": "score",
+          "better": "higher",
+          "note": "Fraction of pixels within a 1.25x relative depth threshold."
+        },
+        "coverage": {
+          "name": "Full image coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "handsCoverage": {
+          "name": "Hands coverage",
+          "unit": "%",
+          "better": "higher"
+        },
+        "objectsCoverage": {
+          "name": "Objects coverage",
+          "unit": "%",
+          "better": "higher"
+        }
+      }
+    },
     "egohome": {
       "url": "https://huggingface.co/datasets/PerceptronAI/EgoHome#egohome-results",
       "feed": "https://huggingface.co/datasets/PerceptronAI/EgoHome/raw/main/README.md (results table, Subtask column)",
@@ -91996,6 +92247,47 @@
         }
       },
       "static": "paper"
+    },
+    "egowitness": {
+      "url": "https://egowitness.github.io/",
+      "feed": "https://egowitness.github.io/",
+      "terms": "Published openly on GitHub Pages by the EgoWitness authors with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 14,
+      "unmatched": [
+        "EgoClue + Sol",
+        "EgoClue-SFT",
+        "EgoClue-SFT+GRPO",
+        "InternVideo3-8B",
+        "LongVILA-R1-7B",
+        "VideoChat-Flash-7B"
+      ],
+      "parts": {
+        "q01": {
+          "name": "Q01",
+          "group": "Question family"
+        },
+        "q04": {
+          "name": "Q04",
+          "group": "Question family"
+        },
+        "q06": {
+          "name": "Q06",
+          "group": "Question family"
+        },
+        "q07": {
+          "name": "Q07",
+          "group": "Question family"
+        }
+      },
+      "stats": {
+        "macro": {
+          "name": "Macro accuracy",
+          "unit": "%",
+          "better": "higher",
+          "note": "Unweighted mean accuracy across Q01, Q04, Q06, and Q07."
+        }
+      }
     },
     "egyhellaswag": {
       "url": "https://arxiv.org/html/2505.18383",
@@ -121916,6 +122208,48 @@
       "rows": 21,
       "unmatched": []
     },
+    "gamedojo": {
+      "url": "https://gamedojo-benchmark.github.io/",
+      "feed": "https://gamedojo-benchmark.github.io/assets/js/results.js",
+      "terms": "Published openly on GitHub Pages by THUSI-Lab with no robots.txt restrictions.",
+      "headline": "Time-paused mean progress (%) averaged across semantic and computer-use interfaces at Medium difficulty, matching the default view on the GameDojo leaderboard.",
+      "retrieved": "2026-11-24",
+      "rows": 11,
+      "unmatched": [
+        "GameScaling-9B-S3",
+        "Gamer-35B-A3B"
+      ],
+      "parts": {
+        "pausedSemantic": {
+          "name": "Paused, semantic",
+          "group": "Mode"
+        },
+        "pausedCua": {
+          "name": "Paused, CUA",
+          "group": "Mode"
+        },
+        "realtimeAvg": {
+          "name": "Real-time, average",
+          "group": "Mode"
+        },
+        "realtimeSemantic": {
+          "name": "Real-time, semantic",
+          "group": "Mode"
+        },
+        "realtimeCua": {
+          "name": "Real-time, CUA",
+          "group": "Mode"
+        }
+      },
+      "stats": {
+        "pausedWinRate": {
+          "name": "Paused win rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Boss fight win rate (%) with the game clock paused."
+        }
+      }
+    },
     "gameenginebench": {
       "url": "https://www.nitrode.com/research",
       "feed": "https://www.nitrode.com/js/nitrode-bench-charts.js",
@@ -135554,6 +135888,68 @@
         "Nemotron Lightning 3.5 30B A3B",
         "Nova 2 Pro (No reasoning)"
       ]
+    },
+    "hep-ex-bench": {
+      "url": "https://hep-ex-bench.github.io/",
+      "feed": "https://hep-ex-bench.github.io/",
+      "terms": "Published openly on GitHub Pages by the HEP-Ex-Bench authors with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 14,
+      "unmatched": [],
+      "chart": {
+        "title": "Score vs. session cost",
+        "note": "Pooled score against mean session API cost in USD, matching the default scatter chart on HEP-Ex-Bench.",
+        "x": {
+          "key": "cost",
+          "label": "Session cost",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
+      "harnesses": "system",
+      "parts": {
+        "higgsLepMass": {
+          "name": "HiggsLepMass",
+          "group": "Task",
+          "note": "CMS Higgs boson mass and signal strength in the four-lepton channel."
+        },
+        "higgsWidth": {
+          "name": "HiggsWidth",
+          "group": "Task",
+          "note": "CMS Higgs width ratio and on-shell signal strength."
+        },
+        "lepCalib": {
+          "name": "LepCalib",
+          "group": "Task",
+          "note": "CMS electron and muon scale, resolution, and efficiency corrections."
+        },
+        "jetCalib": {
+          "name": "JetCalib",
+          "group": "Task",
+          "note": "CMS jet energy scale and resolution corrections."
+        }
+      },
+      "stats": {
+        "devTimeHours": {
+          "name": "Development time",
+          "unit": "hours",
+          "better": "lower",
+          "note": "Mean session wall-clock time in hours."
+        },
+        "totalTokens": {
+          "name": "Total tokens",
+          "unit": "tokens",
+          "better": "lower",
+          "note": "Mean total tokens per analysis session."
+        }
+      }
     },
     "heptoolbench-1-2": {
       "url": "https://github.com/AadarshSingh0/HEPToolBench/blob/main/local_llm_benchmark/results/heptoolbench_v1_2_1_correction/paper_a/figure_data/fig1_leaderboard.csv",
@@ -158051,6 +158447,73 @@
           "name": "Mean latency",
           "unit": "seconds",
           "better": "lower"
+        }
+      }
+    },
+    "kernelshift": {
+      "url": "https://cmu-l3.github.io/kernel-shift/",
+      "feed": "https://cmu-l3.github.io/kernel-shift/",
+      "terms": "Published openly on GitHub Pages by CMU L3 with no robots.txt restrictions.",
+      "headline": "Geometric mean of Speedup@40 across the four suites (ncnn, llama.cpp, SIMD Loops, and KleidiAI), since the leaderboard reports each suite individually.",
+      "retrieved": "2026-11-24",
+      "rows": 14,
+      "unmatched": [],
+      "reference": [
+        "Tool-call loop"
+      ],
+      "harnesses": "system",
+      "parts": {
+        "ncnn": {
+          "name": "ncnn",
+          "group": "Suite",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Speedup@40 across 23 ncnn kernels."
+        },
+        "llamaCpp": {
+          "name": "llama.cpp",
+          "group": "Suite",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Speedup@40 across 26 llama.cpp kernels."
+        },
+        "simdLoops": {
+          "name": "SIMD Loops",
+          "group": "Suite",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Speedup@40 across 24 SIMD Loops kernels."
+        },
+        "kleidiAi": {
+          "name": "KleidiAI",
+          "group": "Suite",
+          "unit": "speedup",
+          "better": "higher",
+          "note": "Speedup@40 across 6 KleidiAI kernels."
+        },
+        "ncnnPass": {
+          "name": "ncnn",
+          "group": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "llamaCppPass": {
+          "name": "llama.cpp",
+          "group": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "simdLoopsPass": {
+          "name": "SIMD Loops",
+          "group": "Pass rate",
+          "unit": "%",
+          "better": "higher"
+        },
+        "kleidiAiPass": {
+          "name": "KleidiAI",
+          "group": "Pass rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -288071,6 +288534,86 @@
         }
       }
     },
+    "strideworld": {
+      "url": "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "feed": "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard/raw/main/index.html",
+      "terms": "Published openly on Hugging Face Spaces by the StrideWorld authors.",
+      "headline": "Composition score (0 to 100), combining multi-step route and swap-pair scores across translation and yaw commands.",
+      "retrieved": "2026-11-24",
+      "rows": 0,
+      "unmatched": [
+        "AlayaWorld",
+        "DreamX-World",
+        "EVOKE",
+        "H3-World",
+        "HY-World 1.5",
+        "HY-World 2.0",
+        "HY-WorldPlay",
+        "LingBot-World v2",
+        "Lyra 2.0",
+        "Matrix-Game 2.0",
+        "Matrix-Game 3.0",
+        "Matrix-Game 3.5",
+        "SANA-WM",
+        "SolarWM",
+        "WorldCrafter"
+      ],
+      "stats": {
+        "response": {
+          "name": "Response rate",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of single-action videos in which the camera moves the commanded way."
+        },
+        "rigidityOffset": {
+          "name": "Rigidity offset",
+          "unit": "score",
+          "better": "lower",
+          "note": "Median offset in degrees of held-out anchors from their rigid positions."
+        },
+        "paceRatio": {
+          "name": "Pace ratio",
+          "unit": "score",
+          "note": "Observed over predicted camera motion after 16 steps, where 1.0 is steady."
+        },
+        "paceScore": {
+          "name": "Pace score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Usable control score of a held action."
+        },
+        "nearTarget": {
+          "name": "Near target",
+          "unit": "%",
+          "better": "higher",
+          "note": "Routes ending within one stride of the prediction."
+        },
+        "stallRate": {
+          "name": "Stall rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Routes containing a stalled step."
+        },
+        "endError": {
+          "name": "End error",
+          "unit": "score",
+          "better": "lower",
+          "note": "Median end error of completed routes in strides."
+        },
+        "swapGap": {
+          "name": "Swap gap",
+          "unit": "score",
+          "better": "lower",
+          "note": "Median gap in strides between the ends of a swap pair."
+        },
+        "musiq": {
+          "name": "MUSIQ",
+          "unit": "score",
+          "better": "higher",
+          "note": "MUSIQ no-reference image quality score."
+        }
+      }
+    },
     "structeval": {
       "url": "https://tiger-ai-lab.github.io/StructEval/",
       "feed": "https://tiger-ai-lab.github.io/StructEval/static/data/leaderboard.json (metrics.overall)",
@@ -307533,6 +308076,45 @@
         },
         "wikipedia nonenglish": {
           "name": "wikipedia nonenglish"
+        }
+      }
+    },
+    "unfinished-bench": {
+      "url": "https://francis21c.github.io/unfinished-bench/",
+      "feed": "https://francis21c.github.io/unfinished-bench/",
+      "terms": "Published openly on GitHub Pages by NAVER AI Lab with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 12,
+      "unmatched": [],
+      "parts": {
+        "docNoPersistence": {
+          "name": "Document rule, no persistence",
+          "group": "Condition",
+          "better": "lower"
+        },
+        "userPersistence": {
+          "name": "User rule, persistence",
+          "group": "Condition",
+          "better": "lower"
+        },
+        "userNoPersistence": {
+          "name": "User rule, no persistence",
+          "group": "Condition",
+          "better": "lower"
+        }
+      },
+      "stats": {
+        "docDelta": {
+          "name": "Persistence delta (document rule)",
+          "unit": "%",
+          "better": "lower",
+          "note": "Increase in document-rule violation rate when persistence is added."
+        },
+        "userDelta": {
+          "name": "Persistence delta (user rule)",
+          "unit": "%",
+          "better": "lower",
+          "note": "Increase in user-rule violation rate when persistence is added."
         }
       }
     },
@@ -327799,6 +328381,82 @@
         }
       },
       "static": "paper"
+    },
+    "worldleague": {
+      "url": "https://xyangzhou.github.io/WorldLeague/#results",
+      "feed": "https://xyangzhou.github.io/WorldLeague/ (table #results and assets/site/site.js)",
+      "terms": "Published openly on GitHub Pages by the WorldLeague authors with no robots.txt restrictions.",
+      "retrieved": "2026-11-24",
+      "rows": 7,
+      "unmatched": [
+        "Awomo-0.5I",
+        "Gemini-Decision-1",
+        "Jev-1.14.0",
+        "OpenWAM-Alpha",
+        "Xiaomi XR-1",
+        "π0.5 (R1Pro SFT)"
+      ],
+      "chart": {
+        "title": "Efficiency Pareto frontier",
+        "note": "Interactive Score against evaluation time in minutes, matching the efficiency scatter plot on the WorldLeague leaderboard.",
+        "x": {
+          "key": "wallMinutes",
+          "label": "Evaluation time",
+          "unit": "min",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Interactive Score",
+          "better": "higher"
+        }
+      },
+      "parts": {
+        "navigation": {
+          "name": "Navigation",
+          "group": "Domain"
+        },
+        "grounding": {
+          "name": "Grounding",
+          "group": "Domain"
+        },
+        "geometry": {
+          "name": "Geometry",
+          "group": "Domain"
+        },
+        "physics": {
+          "name": "Physics",
+          "group": "Domain"
+        },
+        "memory": {
+          "name": "Memory",
+          "group": "Domain"
+        },
+        "constraints": {
+          "name": "Constraints",
+          "group": "Domain"
+        }
+      },
+      "stats": {
+        "physicalSuccess": {
+          "name": "Physical success",
+          "unit": "%",
+          "better": "higher",
+          "note": "Share of physical tasks completed successfully."
+        },
+        "wallMinutes": {
+          "name": "Evaluation time",
+          "unit": "minutes",
+          "better": "lower",
+          "note": "Mean elapsed minutes per task."
+        },
+        "tokensMillions": {
+          "name": "Tokens",
+          "unit": "millions",
+          "better": "lower",
+          "note": "Mean millions of tokens per task."
+        }
+      }
     },
     "worldmodelbench": {
       "url": "https://worldmodelbench-team.github.io/leaderboard_data.json",

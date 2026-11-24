@@ -202803,5 +202803,354 @@
       "https://github.com/tomerkeren42/TASTE-task-synthesis-from-tool-sequence-evolution"
     ],
     "added": "2026-11-15"
+  },
+  {
+    "id": "worldleague",
+    "name": "WorldLeague",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-real",
+    "level": "frontier",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Real-world embodied AI benchmark evaluating vision-language models and VLA policies across 60 physical tasks spanning Navigation, Grounding, Geometry, Physics, Memory, and Constraints.",
+    "org": "WorldLeague Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://xyangzhou.github.io/WorldLeague/",
+      "leaderboard": "https://xyangzhou.github.io/WorldLeague/#results",
+      "paper": "https://arxiv.org/abs/2611.30989",
+      "repo": "https://github.com/xyangzhou/WorldLeague"
+    },
+    "access": "public",
+    "note": "Ranks 13 embodied AI systems by Interactive Score alongside physical task success rate, six domain subscores, wall-clock evaluation minutes, and token usage on an efficiency Pareto frontier.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://xyangzhou.github.io/WorldLeague/",
+      "https://arxiv.org/abs/2611.30989",
+      "https://github.com/xyangzhou/WorldLeague"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "hep-ex-bench",
+    "name": "HEP-Ex-Bench",
+    "category": "science-reasoning",
+    "subcategory": "science-research",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates AI coding agents on four end-to-end experimental high-energy physics analyses using CMS open data (Higgs mass, Higgs width, lepton calibration, and jet calibration) across three guidance levels.",
+    "org": "HEP-Ex-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://hep-ex-bench.github.io/",
+      "leaderboard": "https://hep-ex-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.28194"
+    },
+    "access": "public",
+    "note": "Scores 11 frontier models across four coding harnesses as a percentage of the expert reference precision (where 100% matches the reference), with standard error across runs and session API cost.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://hep-ex-bench.github.io/",
+      "https://arxiv.org/abs/2611.28194"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "distdebug-bench",
+    "name": "DistDebug-Bench",
+    "category": "coding",
+    "subcategory": "coding-repositories",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates coding agents on diagnosing root causes across 120 real distributed-system failure incidents from incomplete logs and telemetry without full stack traces.",
+    "org": "OrderLab (University of Michigan)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://distdebug.com/",
+      "leaderboard": "https://distdebug.com/leaderboard/",
+      "paper": "https://arxiv.org/abs/2611.03523",
+      "repo": "https://github.com/OrderLab/distdebug-bench"
+    },
+    "access": "public",
+    "note": "Ranks 18 model-harness configurations by block localization coverage (%) with 95% confidence intervals, alongside file, function, and line coverage, precision, flakiness, and token usage.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://distdebug.com/leaderboard/",
+      "https://arxiv.org/abs/2611.03523",
+      "https://github.com/OrderLab/distdebug-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "unfinished-bench",
+    "name": "Unfinished-Bench",
+    "category": "safety-alignment",
+    "subcategory": "safety-alignment",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Measures whether AI agents violate workplace rules when given realistic assignments that cannot be cleanly finished under persistence instructions.",
+    "org": "NAVER AI Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://francis21c.github.io/unfinished-bench/",
+      "leaderboard": "https://francis21c.github.io/unfinished-bench/",
+      "paper": "https://arxiv.org/abs/2611.17460",
+      "repo": "https://github.com/naver-ai/unfinished-bench"
+    },
+    "access": "public",
+    "note": "Headline score is the document-rule violation rate (%) under persistence (lower is better), alongside no-persistence baselines and user-rule violation rates across 12 frontier models.",
+    "unit": "%",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://francis21c.github.io/unfinished-bench/",
+      "https://arxiv.org/abs/2611.17460",
+      "https://github.com/naver-ai/unfinished-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "beyond-accuracy-exp-planning",
+    "name": "Beyond Accuracy (Experiment Planning)",
+    "category": "science-reasoning",
+    "subcategory": "science-lab",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates LLM agents on experimental planning in chemistry, testing whether models select genuinely informative follow-up experiments beyond static property prediction accuracy.",
+    "org": "EPFL Schwaller Group",
+    "released": "2026-11",
+    "links": {
+      "site": "https://schwallergroup.github.io/beyond-accuracy/",
+      "leaderboard": "https://schwallergroup.github.io/beyond-accuracy/",
+      "paper": "https://arxiv.org/abs/2611.29467",
+      "repo": "https://github.com/schwallergroup/beyond-accuracy-bench"
+    },
+    "access": "public",
+    "note": "Reports experimental planning decision accuracy (%) with 95% confidence intervals across 10 LLM agents from results.csv.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://schwallergroup.github.io/beyond-accuracy/",
+      "https://arxiv.org/abs/2611.29467",
+      "https://github.com/schwallergroup/beyond-accuracy-bench"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "axe-world-models",
+    "name": "AxE",
+    "aliases": [
+      "AxE Bench"
+    ],
+    "category": "world-models",
+    "subcategory": "world-video",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates agent-environment generalization in video world models by pairing original scenarios with controlled agent-side and environment-side variants using the AxE Score (grounded event Fidelity weighted by Stability).",
+    "org": "AxE Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://AxEBench.github.io/",
+      "leaderboard": "https://AxEBench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.30120",
+      "repo": "https://github.com/AxEBench/WM-PerceptHarness"
+    },
+    "access": "public",
+    "note": "Scores 20 text-to-video and camera-conditioned video world models on AxE Score alongside Fidelity, Stability, Timing, and Content metrics.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://AxEBench.github.io/",
+      "https://arxiv.org/abs/2611.30120",
+      "https://github.com/AxEBench/WM-PerceptHarness"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "gamedojo",
+    "name": "GameDojo",
+    "category": "games-long-horizon",
+    "subcategory": "games-video-games",
+    "level": "frontier",
+    "scoring": "outcome",
+    "format": "agent-task",
+    "description": "Real-time and time-paused action-game boss-fight benchmark testing vision-language agents under both semantic and computer-use (CUA) action interfaces.",
+    "org": "THUSI-Lab",
+    "released": "2026-11",
+    "links": {
+      "site": "https://gamedojo-benchmark.github.io/",
+      "leaderboard": "https://gamedojo-benchmark.github.io/",
+      "paper": "https://arxiv.org/abs/2611.30771",
+      "repo": "https://github.com/THUSI-Lab/GameDojo"
+    },
+    "access": "public",
+    "note": "Scores 13 closed, open, and game-specialized models at Medium difficulty on time-paused and real-time progress (%) and win rate (%).",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://gamedojo-benchmark.github.io/",
+      "https://arxiv.org/abs/2611.30771",
+      "https://github.com/THUSI-Lab/GameDojo"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "kernelshift",
+    "name": "KernelShift",
+    "category": "coding",
+    "subcategory": "coding-performance",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "agent-task",
+    "description": "Evaluates AI coding agents on porting and optimizing 79 ARM SVE, SVE2, and SME2 SIMD kernels across four open-source libraries: ncnn (23 tasks), llama.cpp (26), SIMD Loops (24), and KleidiAI (6).",
+    "org": "Carnegie Mellon University (CMU L3)",
+    "released": "2026-11",
+    "links": {
+      "site": "https://cmu-l3.github.io/kernel-shift/",
+      "leaderboard": "https://cmu-l3.github.io/kernel-shift/",
+      "paper": "https://arxiv.org/abs/2611.29590",
+      "repo": "https://github.com/cmu-l3/kernel-shift"
+    },
+    "access": "public",
+    "note": "Reports Speedup@40 and pass rates across four agent harnesses and six frontier models, summarized here by the geometric mean of Speedup@40 across the four suites.",
+    "unit": "speedup",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://cmu-l3.github.io/kernel-shift/",
+      "https://arxiv.org/abs/2611.29590",
+      "https://github.com/cmu-l3/kernel-shift"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "strideworld",
+    "name": "StrideWorld",
+    "category": "world-models",
+    "subcategory": "world-interactive",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates interactive video world models on 3D camera-action controllability across 30 scenes (3,640 generated videos per model), measuring response rate, rigidity offset, pace stability, and multi-step route composition.",
+    "org": "StrideWorld Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "leaderboard": "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "paper": "https://arxiv.org/abs/2611.24408",
+      "repo": "https://github.com/chuangwang123/strideworld"
+    },
+    "access": "public",
+    "note": "Scores 15 interactive video world models on Composition score (0 to 100) alongside response rate, rigidity offset, pace, near-target rate, stall rate, end error, swap gap, and MUSIQ.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard",
+      "https://arxiv.org/abs/2611.24408",
+      "https://github.com/chuangwang123/strideworld"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "egowitness",
+    "name": "EgoWitness",
+    "category": "audio-video",
+    "subcategory": "video-long",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "multiple-choice",
+    "description": "Long-horizon egocentric memory and spatial question-answering benchmark spanning roughly 324 hours of multi-day first-person video with object and room re-identification and scored evidence intervals.",
+    "org": "EgoWitness Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://egowitness.github.io/",
+      "leaderboard": "https://egowitness.github.io/",
+      "paper": "https://arxiv.org/abs/2611.25849",
+      "repo": "https://github.com/egowitness/EgoWitness"
+    },
+    "access": "public",
+    "note": "Scores 20 visual-reasoning models, shared-tool controllers, and week-long-trained systems by Micro accuracy (%) across Q01, Q04, Q06, and Q07 task families.",
+    "unit": "%",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://egowitness.github.io/",
+      "https://arxiv.org/abs/2611.25849",
+      "https://github.com/egowitness/EgoWitness"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "animweb-bench",
+    "name": "AnimWeb-Bench",
+    "category": "coding",
+    "subcategory": "coding-frontend",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "code",
+    "description": "Evaluates multimodal language models on recreating real animated web pages from recorded videos, scoring four Static Appearance Fidelity metrics and four Animation Fidelity metrics.",
+    "org": "AnimWeb-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "leaderboard": "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "paper": "https://arxiv.org/abs/2611.09769",
+      "repo": "https://github.com/starry1001/AnimWeb"
+    },
+    "access": "public",
+    "note": "Scores 14 proprietary and open-weight multimodal models on Static Appearance (Structure, Text, Color, CLIP) and Animation Fidelity (Position, Size, Velocity, CLIP), summarized here by the plain mean across all eight dimensions.",
+    "unit": "score",
+    "better": "higher",
+    "confidence": "verified",
+    "evidence": [
+      "https://starry1001.github.io/AnimWeb-Bench-website/",
+      "https://arxiv.org/abs/2611.09769",
+      "https://github.com/starry1001/AnimWeb"
+    ],
+    "added": "2026-11-24"
+  },
+  {
+    "id": "egodepth-bench",
+    "name": "EgoDepth-Bench",
+    "category": "robotics-embodied",
+    "subcategory": "robotics-reasoning",
+    "level": "frontier",
+    "scoring": "verified",
+    "format": "open-ended",
+    "description": "Evaluates foundation metric-depth and 3D reconstruction models on synchronized multi-camera egocentric manipulation video with laser-scanned ground truth across full-image, hand, and object subsets.",
+    "org": "EgoDepth-Bench Authors",
+    "released": "2026-11",
+    "links": {
+      "site": "https://egodepth-bench.github.io/",
+      "leaderboard": "https://egodepth-bench.github.io/",
+      "paper": "https://arxiv.org/abs/2611.30734",
+      "repo": "https://github.com/Chris004869/EgoDepth-Bench"
+    },
+    "access": "public",
+    "note": "Headline score is full-image AbsRel (absolute relative depth error, lower is better) across 19 metric monocular, stereo, multi-view, and oracle-aligned foundation depth models, alongside MAE Z (cm), delta-1 accuracy, and coverage.",
+    "unit": "score",
+    "better": "lower",
+    "confidence": "verified",
+    "evidence": [
+      "https://egodepth-bench.github.io/",
+      "https://arxiv.org/abs/2611.30734",
+      "https://github.com/Chris004869/EgoDepth-Bench"
+    ],
+    "added": "2026-11-24"
   }
 ]
