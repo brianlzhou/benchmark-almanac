@@ -17,7 +17,7 @@ const board: Leaderboard = {
 
  async fetch() {
 const t=mdTables(await fetchText(FEED)).find(t=>t.head.includes('Success Rate'));if(!t)throw new Error('Missing TUA results');const rows:LeaderboardRow[]=[];
-for(const r of t.rows){const score=num(r[3]);if(score===undefined)continue;const metrics:Record<string,number>={};const spread=num(r[3].split('±')[1]);if(spread!==undefined)metrics['reported spread (%)']=spread*100;for(const [i,k]of [[4,'passAt1'],[5,'passAt5'],[6,'pass5']]as const){const v=num(r[i]);if(v!==undefined)metrics[k]=v;}
+for(const r of t.rows){const score=num(r[3]);if(score===undefined)continue;const metrics:Record<string,number>={};const spread=num(r[3].split('±')[1]);if(spread!==undefined)metrics.std=spread*100;for(const [i,k]of [[4,'passAt1'],[5,'passAt5'],[6,'pass5']]as const){const v=num(r[i]);if(v!==undefined)metrics[k]=v;}
  rows.push({model:r[1],score:score*100,low:spread===undefined?undefined:(score-spread)*100,high:spread===undefined?undefined:(score+spread)*100,harness:r[0],setting:r[2],metrics});}return rows;
  },
 };
