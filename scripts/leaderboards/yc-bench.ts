@@ -10,7 +10,6 @@ const board: Leaderboard = {
  terms: 'The benchmark authors publish this public feed; their source license and site terms apply.',
  stats: {
    bankruptRuns: {name: 'Bankrupt runs', unit: 'count', better: 'lower'},
-   runs: {name: 'Runs', unit: 'count'},
    'funds:2025-01': {name: 'Funds in January 2025', unit: 'usd'},
    'funds:2025-02': {name: 'Funds in February 2025', unit: 'usd'},
    'funds:2025-03': {name: 'Funds in March 2025', unit: 'usd'},
@@ -42,7 +41,7 @@ const board: Leaderboard = {
       const id = ids.get(model);
       const counts = r[3].text.match(/(\d+)\/(\d+)/);
       const metrics: Record<string, number> = {};
-      if (counts) Object.assign(metrics, { bankruptRuns: Number(counts[1]), runs: Number(counts[2]) });
+      if (counts) metrics.bankruptRuns = Number(counts[1]);
       for (const [month, funds] of Object.entries(id ? chart[id] ?? {} : {})) {
         if (/^\d{4}-\d{2}$/.test(month) && Number.isFinite(funds)) metrics['funds:' + month] = funds;
       }

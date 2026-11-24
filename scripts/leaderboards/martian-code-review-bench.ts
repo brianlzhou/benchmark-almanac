@@ -9,9 +9,9 @@ const board: Leaderboard = {
   benchmark: 'martian-code-review-bench', url: URL, feed: `${URL}/benchmark_dashboard.json`,
   terms: 'Public benchmark data from Martian; the repository uses Apache-2.0. The almanac credits Martian and links the source.',
   stats: {
-    strictPrecision: { name: 'Strict precision', unit: '%', better: 'higher' }, strictRecall: { name: 'Strict recall', unit: '%', better: 'higher' }, strictF1: { name: 'Strict F1', unit: '%', better: 'higher' }, strictF2: { name: 'Strict F2', unit: '%', better: 'higher' }, strictTp: { name: 'Strict true positives', unit: 'count' }, strictFp: { name: 'Strict false positives', unit: 'count' }, strictFn: { name: 'Strict false negatives', unit: 'count' }, strictNum_prs: { name: 'Strict pull requests', unit: 'count' },
-    allPrecision: { name: 'All precision', unit: '%', better: 'higher' }, allRecall: { name: 'All recall', unit: '%', better: 'higher' }, allF1: { name: 'All F1', unit: '%', better: 'higher' }, allF2: { name: 'All F2', unit: '%', better: 'higher' }, allTp: { name: 'All true positives', unit: 'count' }, allFp: { name: 'All false positives', unit: 'count' }, allFn: { name: 'All false negatives', unit: 'count' }, allNum_prs: { name: 'All pull requests', unit: 'count' },
-    precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, f1: { name: 'F1', unit: '%', better: 'higher' }, prs: { name: 'Pull requests', unit: 'count' }, tp: { name: 'True positives', unit: 'count' }, fp: { name: 'False positives', unit: 'count' }, fn: { name: 'False negatives', unit: 'count' },
+    strictPrecision: { name: 'Strict precision', unit: '%', better: 'higher' }, strictRecall: { name: 'Strict recall', unit: '%', better: 'higher' }, strictF1: { name: 'Strict F1', unit: '%', better: 'higher' }, strictF2: { name: 'Strict F2', unit: '%', better: 'higher' }, strictTp: { name: 'Strict true positives', unit: 'count' }, strictFp: { name: 'Strict false positives', unit: 'count' }, strictFn: { name: 'Strict false negatives', unit: 'count' },
+    allPrecision: { name: 'All precision', unit: '%', better: 'higher' }, allRecall: { name: 'All recall', unit: '%', better: 'higher' }, allF1: { name: 'All F1', unit: '%', better: 'higher' }, allF2: { name: 'All F2', unit: '%', better: 'higher' }, allTp: { name: 'All true positives', unit: 'count' }, allFp: { name: 'All false positives', unit: 'count' }, allFn: { name: 'All false negatives', unit: 'count' },
+    precision: { name: 'Precision', unit: '%', better: 'higher' }, recall: { name: 'Recall', unit: '%', better: 'higher' }, f1: { name: 'F1', unit: '%', better: 'higher' }, tp: { name: 'True positives', unit: 'count' }, fp: { name: 'False positives', unit: 'count' }, fn: { name: 'False negatives', unit: 'count' },
     latency: { name: 'Median latency', unit: 'seconds', better: 'lower' }, latencyMean: { name: 'Mean latency', unit: 'seconds', better: 'lower' }, timingSamples: { name: 'Timing samples', unit: 'count' }, latencyP25: { name: '25th percentile latency', unit: 'seconds', better: 'lower' }, latencyP75: { name: '75th percentile latency', unit: 'seconds', better: 'lower' }, latencyMin: { name: 'Minimum latency', unit: 'seconds', better: 'lower' }, latencyMax: { name: 'Maximum latency', unit: 'seconds', better: 'lower' }, failedRuns: { name: 'Failed runs', unit: 'count' },
   },
   async fetch(): Promise<LeaderboardRow[]> {
@@ -27,12 +27,12 @@ const board: Leaderboard = {
         const alternatives: Record<string, number> = {};
         for (const profile of ['strict', 'all']) {
           for (const [key, value] of Object.entries(profiles[profile] ?? {})) {
-            if (typeof value === 'number') alternatives[profile + key[0].toUpperCase() + key.slice(1)] = value;
+            if (typeof value === 'number' && key !== 'num_prs') alternatives[profile + key[0].toUpperCase() + key.slice(1)] = value;
           }
         }
         rows.push({ model: `${data.tool_display_names[product] ?? product} (product; model unspecified)`, score: s.f2,
-          setting: `core; F2; judge ${judge}; product ${product}`,
-          metrics: { ...alternatives, precision: s.precision, recall: s.recall, f1: s.f1, prs: s.num_prs, tp: s.tp, fp: s.fp, fn: s.fn,
+          setting: `core, F2, judge ${judge}, product ${product}`,
+          metrics: { ...alternatives, precision: s.precision, recall: s.recall, f1: s.f1, tp: s.tp, fp: s.fp, fn: s.fn,
             ...(speed ? { latency: speed.stats.median_seconds, latencyMean: speed.stats.mean_seconds, timingSamples: speed.stats.count, latencyP25: speed.stats.p25_seconds,
               latencyP75: speed.stats.p75_seconds, latencyMin: speed.stats.min_seconds, latencyMax: speed.stats.max_seconds, failedRuns: speed.failed_count } : {}) } });
       }

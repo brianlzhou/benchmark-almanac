@@ -7,17 +7,16 @@ const feed = 'https://arxiv.org/html/2605.20873';
 const board: Leaderboard = {
   benchmark: 'planningbench-tencent', static: 'paper', url: feed, feed, terms: PAPER_TERMS + ' https://arxiv.org/licenses/',
   parts: { avgPass: 'Avg-pass' },
-  stats: { rank: { name: 'Rank', unit: 'count', note: 'Model rank in the PlanningBench table.' } },
   aliases: { 'Hy3-Preview': 'tencent-hy3-preview', 'Seed-2.0-pro': 'doubao-seed-2-0-pro',
     'Gemini-3-1-pro': 'gemini-3-1-pro', 'Qwen3-30b-moe': 'qwen3-30b-a3b' },
   async fetch() {
     const t = flatPaperTables(await paperHtml(feed)).map(grid).find(t =>
       t[0]?.join('|') === 'Model|Type|Rank|All-pass (%) \\uparrow|Avg-pass (%) \\uparrow');
     if (!t) throw Error('Missing All-pass and Avg-pass results');
-    return checked(t.slice(1).map(([label,type,rank,overall,average]) => {
+    return checked(t.slice(1).map(([label,type,,overall,average]) => {
       const mode = label.match(/^(.+)-(xhigh|high|medium|thinking)$/i);
       return { model: mode?.[1] ?? label, setting: mode?.[2], score: numberCell(overall),
-        open: type === 'Open-source', metrics: { rank: numberCell(rank), avgPass: numberCell(average) } };
+        open: type === 'Open-source', metrics: { avgPass: numberCell(average) } };
     }), 18);
   },
 };

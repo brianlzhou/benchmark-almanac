@@ -52377,7 +52377,8 @@
       "url": "https://www.codabench.org/competitions/16309/",
       "feed": "https://ceur-ws.org/Vol-4283/paper303.pdf",
       "terms": "The authors publish the automatic pun-location ranking in their paper under CC BY 4.0. https://ceur-ws.org/Vol-4283/paper303.pdf CEUR-WS robots.txt permits the paper.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "GROQ_FULL_PARTIAL_5",
@@ -52404,15 +52405,7 @@
         "ensemble_0_0_0_100_gpt_pooled_transl",
         "gpt_5.5_single",
         "identity_run"
-      ],
-      "static": "paper",
-      "stats": {
-        "rank": {
-          "name": "Published rank",
-          "unit": "count",
-          "better": "lower"
-        }
-      }
+      ]
     },
     "clef-simpletext-2025-identify-avoid-hallucination": {
       "url": "https://ceur-ws.org/Vol-4038/paper_345.pdf",
@@ -78095,7 +78088,7 @@
       "url": "https://www.daxbench.com/",
       "feed": "https://www.daxbench.com/",
       "terms": "Public official results, subject to the source repository license and host terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 49,
       "unmatched": [
         "Gemini 2.5 Pro (snapshot unspecified)"
@@ -78113,10 +78106,6 @@
         },
         "completed": {
           "name": "Completed tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         }
       }
@@ -84733,7 +84722,7 @@
       "url": "https://voicearena.com/diarization-bench",
       "feed": "https://voicearena.com/assets/diarization-uRu63AZp.js",
       "terms": "Voice Arena links its site terms. https://voicearena.com/terms The robots file lists crawler-specific rules. The importer reads the public data asset.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
         "Community-1",
@@ -84753,7 +84742,7 @@
       ],
       "stats": {
         "jer": {
-          "name": "Diarization error rate",
+          "name": "Jaccard error rate",
           "unit": "%",
           "better": "lower"
         },
@@ -84776,14 +84765,6 @@
           "name": "Correct speaker count",
           "unit": "%",
           "better": "higher"
-        },
-        "sessions": {
-          "name": "Sessions",
-          "unit": "count"
-        },
-        "minutes": {
-          "name": "Audio minutes",
-          "unit": "minutes"
         }
       }
     },
@@ -100977,7 +100958,7 @@
       "url": "https://github.com/vectara/FaithJudge#leaderboard",
       "feed": "https://raw.githubusercontent.com/vectara/FaithJudge/main/README.md (leaderboard table, Overall Hallucination Rate)",
       "terms": "README table in the vectara/FaithJudge repository, which has no license file; scores are cited to the FaithJudge authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 46,
       "unmatched": [],
       "parts": {
@@ -101000,36 +100981,20 @@
           "unit": "count",
           "better": "lower"
         },
-        "faithbenchSummarizationExamples": {
-          "name": "FaithBench summarization examples",
-          "unit": "count"
-        },
         "ragTruthSummarizationHallucinations": {
           "name": "RAGTruth summarization hallucinations",
           "unit": "count",
           "better": "lower"
-        },
-        "ragTruthSummarizationExamples": {
-          "name": "RAGTruth summarization examples",
-          "unit": "count"
         },
         "ragTruthQuestionAnsweringHallucinations": {
           "name": "RAGTruth question answering hallucinations",
           "unit": "count",
           "better": "lower"
         },
-        "ragTruthQuestionAnsweringExamples": {
-          "name": "RAGTruth question answering examples",
-          "unit": "count"
-        },
         "ragTruthDataToTextWritingHallucinations": {
           "name": "RAGTruth data-to-text hallucinations",
           "unit": "count",
           "better": "lower"
-        },
-        "ragTruthDataToTextWritingExamples": {
-          "name": "RAGTruth data-to-text examples",
-          "unit": "count"
         },
         "activeParams": {
           "name": "Active parameters",
@@ -101096,7 +101061,7 @@
       "url": "https://euroeval.com/leaderboards/faroese",
       "feed": "https://euroeval.com/leaderboards/faroese",
       "terms": "Use the grammatical correction column. It has 248 test runs for 245 models and 183 validation runs. The source corpus restricts redistribution. https://mtd.setur.fo/resource/villugrunnur/ EuroEval robots.txt allows the leaderboard and bundle.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 75,
       "unmatched": [
         "01-ai/Yi-1.5-9B",
@@ -101269,18 +101234,7 @@
         "utter-project/EuroMoE-2.6B-A0.6B-Instruct-Preview",
         "utter-project/EuroVLM-1.7B-Preview",
         "yulan-team/YuLan-Mini-Instruct"
-      ],
-      "stats": {
-        "scored": {
-          "name": "Scored examples",
-          "unit": "count"
-        },
-        "failures": {
-          "name": "Failures",
-          "unit": "count",
-          "better": "lower"
-        }
-      }
+      ]
     },
     "faroese-metaphorical-explanations": {
       "url": "https://aclanthology.org/2026.lrec-main.354.pdf",
@@ -179892,7 +179846,7 @@
       "url": "https://codereview.withmartian.com",
       "feed": "https://codereview.withmartian.com/benchmark_dashboard.json",
       "terms": "Public benchmark data from Martian; the repository uses Apache-2.0. The almanac credits Martian and links the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "Augment (product; model unspecified)",
@@ -179950,10 +179904,6 @@
           "name": "Strict false negatives",
           "unit": "count"
         },
-        "strictNum_prs": {
-          "name": "Strict pull requests",
-          "unit": "count"
-        },
         "allPrecision": {
           "name": "All precision",
           "unit": "%",
@@ -179986,10 +179936,6 @@
           "name": "All false negatives",
           "unit": "count"
         },
-        "allNum_prs": {
-          "name": "All pull requests",
-          "unit": "count"
-        },
         "precision": {
           "name": "Precision",
           "unit": "%",
@@ -180004,10 +179950,6 @@
           "name": "F1",
           "unit": "%",
           "better": "higher"
-        },
-        "prs": {
-          "name": "Pull requests",
-          "unit": "count"
         },
         "tp": {
           "name": "True positives",
@@ -190794,7 +190736,7 @@
       "url": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/MIEB%28Multilingual%29/scores",
       "terms": "The public source permits automated reading under robots.txt, subject to its license and attribution requirements.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CLIP-ViT-B-16-DataComp.XL-s13B-b90K",
@@ -190880,524 +190822,524 @@
           "name": "Visual semantic textual similarity, multilingual",
           "group": "Task type"
         },
-        "sTS14VisualSTS": {
-          "name": "STS14VisualSTS",
-          "group": "Task"
-        },
-        "mNIST": {
-          "name": "MNIST",
-          "group": "Task"
-        },
-        "flickr30kI2TRetrieval": {
-          "name": "Flickr30kI2TRetrieval",
-          "group": "Task"
-        },
-        "visualSTS17Eng": {
-          "name": "VisualSTS17Eng",
-          "group": "Task"
-        },
-        "oVENIT2TRetrieval": {
-          "name": "OVENIT2TRetrieval",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAEnergyRetrieval": {
-          "name": "VidoreSyntheticDocQAEnergyRetrieval",
-          "group": "Task"
-        },
-        "vizWizIT2TRetrieval": {
-          "name": "VizWizIT2TRetrieval",
-          "group": "Task"
-        },
-        "visualSTSBMultilingual": {
-          "name": "VisualSTS-b-Multilingual",
-          "group": "Task"
-        },
-        "cLEVRCountZeroShot": {
-          "name": "CLEVRCountZeroShot",
-          "group": "Task"
-        },
-        "rOxfordMediumI2IRetrieval": {
-          "name": "ROxfordMediumI2IRetrieval",
-          "group": "Task"
-        },
-        "cUB200I2IRetrieval": {
-          "name": "CUB200I2IRetrieval",
-          "group": "Task"
-        },
-        "vidoreDocVQARetrieval": {
-          "name": "VidoreDocVQARetrieval",
-          "group": "Task"
-        },
-        "cIFAR100ZeroShot": {
-          "name": "CIFAR100ZeroShot",
-          "group": "Task"
-        },
-        "rESISC45ZeroShot": {
-          "name": "RESISC45ZeroShot",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAHealthcareIndustryRetrieval": {
-          "name": "VidoreSyntheticDocQAHealthcareIndustryRetrieval",
-          "group": "Task"
-        },
-        "caltech101": {
-          "name": "Caltech101",
-          "group": "Task"
-        },
-        "mETI2IRetrieval": {
-          "name": "METI2IRetrieval",
-          "group": "Task"
-        },
-        "winoground": {
-          "name": "Winoground",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAGovernmentReportsRetrieval": {
-          "name": "VidoreSyntheticDocQAGovernmentReportsRetrieval",
-          "group": "Task"
-        },
-        "cIFAR10Clustering": {
-          "name": "CIFAR10Clustering",
-          "group": "Task"
-        },
-        "vidoreInfoVQARetrieval": {
-          "name": "VidoreInfoVQARetrieval",
-          "group": "Task"
-        },
-        "xFlickr30kCoT2IRetrieval": {
-          "name": "XFlickr30kCoT2IRetrieval",
-          "group": "Task"
-        },
-        "aROVisualRelation": {
-          "name": "AROVisualRelation",
-          "group": "Task"
-        },
-        "vidoreShiftProjectRetrieval": {
-          "name": "VidoreShiftProjectRetrieval",
-          "group": "Task"
-        },
-        "sUN397": {
-          "name": "SUN397",
-          "group": "Task"
-        },
-        "sTL10": {
-          "name": "STL10",
-          "group": "Task"
-        },
-        "stanfordCarsZeroShot": {
-          "name": "StanfordCarsZeroShot",
-          "group": "Task"
-        },
-        "vidoreTatdqaRetrieval": {
-          "name": "VidoreTatdqaRetrieval",
-          "group": "Task"
-        },
-        "country211ZeroShot": {
-          "name": "Country211ZeroShot",
-          "group": "Task"
-        },
-        "sTS15VisualSTS": {
-          "name": "STS15VisualSTS",
-          "group": "Task"
-        },
-        "visualNewsI2TRetrieval": {
-          "name": "VisualNewsI2TRetrieval",
-          "group": "Task"
-        },
-        "birdsnapZeroShot": {
-          "name": "BirdsnapZeroShot",
-          "group": "Task"
-        },
-        "imageCoDe": {
-          "name": "ImageCoDe",
-          "group": "Task"
-        },
-        "memotionI2TRetrieval": {
-          "name": "MemotionI2TRetrieval",
-          "group": "Task"
-        },
-        "birdsnap": {
-          "name": "Birdsnap",
-          "group": "Task"
-        },
-        "visualSTSBEng": {
-          "name": "VisualSTS-b-Eng",
-          "group": "Task"
-        },
-        "gLDv2I2TRetrieval": {
-          "name": "GLDv2I2TRetrieval",
-          "group": "Task"
-        },
-        "flickr30kT2IRetrieval": {
-          "name": "Flickr30kT2IRetrieval",
-          "group": "Task"
-        },
-        "imagenet1kZeroShot": {
-          "name": "Imagenet1kZeroShot",
-          "group": "Task"
-        },
-        "webQAT2ITRetrieval": {
-          "name": "WebQAT2ITRetrieval",
-          "group": "Task"
-        },
-        "renderedSST2": {
-          "name": "RenderedSST2",
-          "group": "Task"
-        },
-        "patchCamelyon": {
-          "name": "PatchCamelyon",
-          "group": "Task"
-        },
-        "gLDv2I2IRetrieval": {
-          "name": "GLDv2I2IRetrieval",
-          "group": "Task"
-        },
-        "caltech101ZeroShot": {
-          "name": "Caltech101ZeroShot",
-          "group": "Task"
-        },
-        "gTSRBZeroShot": {
-          "name": "GTSRBZeroShot",
-          "group": "Task"
-        },
-        "sUN397ZeroShot": {
-          "name": "SUN397ZeroShot",
-          "group": "Task"
-        },
-        "tUBerlinT2IRetrieval": {
-          "name": "TUBerlinT2IRetrieval",
-          "group": "Task"
-        },
-        "cVBenchRelation": {
-          "name": "CVBenchRelation",
-          "group": "Task"
-        },
-        "cVBenchCount": {
-          "name": "CVBenchCount",
-          "group": "Task"
-        },
-        "sTS13VisualSTS": {
-          "name": "STS13VisualSTS",
-          "group": "Task"
-        },
-        "oxfordPetsZeroShot": {
-          "name": "OxfordPetsZeroShot",
-          "group": "Task"
-        },
-        "rOxfordHardI2IRetrieval": {
-          "name": "ROxfordHardI2IRetrieval",
-          "group": "Task"
-        },
-        "aROFlickrOrder": {
-          "name": "AROFlickrOrder",
-          "group": "Task"
-        },
-        "cVBenchDepth": {
-          "name": "CVBenchDepth",
-          "group": "Task"
-        },
-        "hatefulMemesT2IRetrieval": {
-          "name": "HatefulMemesT2IRetrieval",
-          "group": "Task"
-        },
-        "euroSATZeroShot": {
-          "name": "EuroSATZeroShot",
-          "group": "Task"
-        },
-        "food101Classification": {
-          "name": "Food101Classification",
-          "group": "Task"
-        },
-        "food101ZeroShot": {
-          "name": "Food101ZeroShot",
-          "group": "Task"
-        },
-        "visualNewsT2IRetrieval": {
-          "name": "VisualNewsT2IRetrieval",
-          "group": "Task"
-        },
-        "fGVCAircraft": {
-          "name": "FGVCAircraft",
-          "group": "Task"
-        },
-        "bLINKIT2IRetrieval": {
-          "name": "BLINKIT2IRetrieval",
-          "group": "Task"
-        },
-        "sciMMIRI2TRetrieval": {
-          "name": "SciMMIRI2TRetrieval",
-          "group": "Task"
-        },
-        "rParisHardI2IRetrieval": {
-          "name": "RParisHardI2IRetrieval",
-          "group": "Task"
-        },
-        "sugarCrepe": {
-          "name": "SugarCrepe",
-          "group": "Task"
-        },
-        "rParisEasyI2IRetrieval": {
-          "name": "RParisEasyI2IRetrieval",
-          "group": "Task"
-        },
-        "fGVCAircraftZeroShot": {
-          "name": "FGVCAircraftZeroShot",
-          "group": "Task"
-        },
-        "sTS12VisualSTS": {
-          "name": "STS12VisualSTS",
-          "group": "Task"
-        },
-        "dTD": {
-          "name": "DTD",
-          "group": "Task"
-        },
-        "mSCOCOI2TRetrieval": {
-          "name": "MSCOCOI2TRetrieval",
-          "group": "Task"
-        },
-        "vOC2007": {
-          "name": "VOC2007",
-          "group": "Task"
-        },
-        "fORBI2IRetrieval": {
-          "name": "FORBI2IRetrieval",
-          "group": "Task"
-        },
-        "rOxfordEasyI2IRetrieval": {
-          "name": "ROxfordEasyI2IRetrieval",
-          "group": "Task"
-        },
-        "cIFAR10ZeroShot": {
-          "name": "CIFAR10ZeroShot",
-          "group": "Task"
-        },
-        "xM3600T2IRetrieval": {
-          "name": "XM3600T2IRetrieval",
-          "group": "Task"
-        },
-        "vidoreArxivQARetrieval": {
-          "name": "VidoreArxivQARetrieval",
-          "group": "Task"
-        },
-        "wITT2IRetrieval": {
-          "name": "WITT2IRetrieval",
-          "group": "Task"
-        },
-        "mNISTZeroShot": {
-          "name": "MNISTZeroShot",
-          "group": "Task"
-        },
-        "rESISC45": {
-          "name": "RESISC45",
-          "group": "Task"
-        },
-        "sciMMIRT2IRetrieval": {
-          "name": "SciMMIRT2IRetrieval",
-          "group": "Task"
-        },
-        "webQAT2TRetrieval": {
-          "name": "WebQAT2TRetrieval",
+        "uCF101ZeroShot": {
+          "name": "UCF101ZeroShot",
           "group": "Task"
         },
         "fashion200kT2IRetrieval": {
           "name": "Fashion200kT2IRetrieval",
           "group": "Task"
         },
-        "gTSRB": {
-          "name": "GTSRB",
-          "group": "Task"
-        },
-        "aROCocoOrder": {
-          "name": "AROCocoOrder",
-          "group": "Task"
-        },
-        "infoSeekIT2TRetrieval": {
-          "name": "InfoSeekIT2TRetrieval",
-          "group": "Task"
-        },
-        "tinyImageNetClustering": {
-          "name": "TinyImageNetClustering",
-          "group": "Task"
-        },
-        "vidoreTabfquadRetrieval": {
-          "name": "VidoreTabfquadRetrieval",
-          "group": "Task"
-        },
-        "vQA2IT2TRetrieval": {
-          "name": "VQA2IT2TRetrieval",
-          "group": "Task"
-        },
-        "oVENIT2ITRetrieval": {
-          "name": "OVENIT2ITRetrieval",
-          "group": "Task"
-        },
-        "nIGHTSI2IRetrieval": {
-          "name": "NIGHTSI2IRetrieval",
-          "group": "Task"
-        },
-        "bLINKIT2TMultiChoice": {
-          "name": "BLINKIT2TMultiChoice",
-          "group": "Task"
-        },
-        "uCF101ZeroShot": {
-          "name": "UCF101ZeroShot",
-          "group": "Task"
-        },
-        "stanfordCars": {
-          "name": "StanfordCars",
+        "vidoreDocVQARetrieval": {
+          "name": "VidoreDocVQARetrieval",
           "group": "Task"
         },
         "country211": {
           "name": "Country211",
           "group": "Task"
         },
-        "cIRRIT2IRetrieval": {
-          "name": "CIRRIT2IRetrieval",
-          "group": "Task"
-        },
-        "visualSTS17Multilingual": {
-          "name": "VisualSTS17Multilingual",
-          "group": "Task"
-        },
-        "imageNetDog15Clustering": {
-          "name": "ImageNetDog15Clustering",
-          "group": "Task"
-        },
-        "sOPI2IRetrieval": {
-          "name": "SOPI2IRetrieval",
-          "group": "Task"
-        },
-        "fER2013ZeroShot": {
-          "name": "FER2013ZeroShot",
-          "group": "Task"
-        },
-        "stanfordCarsI2IRetrieval": {
-          "name": "StanfordCarsI2IRetrieval",
-          "group": "Task"
-        },
-        "vidoreSyntheticDocQAAIRetrieval": {
-          "name": "VidoreSyntheticDocQAAIRetrieval",
-          "group": "Task"
-        },
-        "hatefulMemesI2TRetrieval": {
-          "name": "HatefulMemesI2TRetrieval",
-          "group": "Task"
-        },
-        "euroSAT": {
-          "name": "EuroSAT",
-          "group": "Task"
-        },
-        "cIFAR10": {
-          "name": "CIFAR10",
-          "group": "Task"
-        },
-        "mSCOCOT2IRetrieval": {
-          "name": "MSCOCOT2IRetrieval",
-          "group": "Task"
-        },
         "eDIST2ITRetrieval": {
           "name": "EDIST2ITRetrieval",
-          "group": "Task"
-        },
-        "sTS16VisualSTS": {
-          "name": "STS16VisualSTS",
-          "group": "Task"
-        },
-        "infoSeekIT2ITRetrieval": {
-          "name": "InfoSeekIT2ITRetrieval",
-          "group": "Task"
-        },
-        "fashionIQIT2IRetrieval": {
-          "name": "FashionIQIT2IRetrieval",
-          "group": "Task"
-        },
-        "oxfordFlowersClassification": {
-          "name": "OxfordFlowersClassification",
-          "group": "Task"
-        },
-        "cIFAR100": {
-          "name": "CIFAR100",
-          "group": "Task"
-        },
-        "rP2kI2IRetrieval": {
-          "name": "RP2kI2IRetrieval",
-          "group": "Task"
-        },
-        "sketchyI2IRetrieval": {
-          "name": "SketchyI2IRetrieval",
-          "group": "Task"
-        },
-        "cIFAR100Clustering": {
-          "name": "CIFAR100Clustering",
-          "group": "Task"
-        },
-        "imageNet10Clustering": {
-          "name": "ImageNet10Clustering",
-          "group": "Task"
-        },
-        "sTL10ZeroShot": {
-          "name": "STL10ZeroShot",
-          "group": "Task"
-        },
-        "imageCoDeT2IRetrieval": {
-          "name": "ImageCoDeT2IRetrieval",
-          "group": "Task"
-        },
-        "dTDZeroShot": {
-          "name": "DTDZeroShot",
-          "group": "Task"
-        },
-        "cLEVRZeroShot": {
-          "name": "CLEVRZeroShot",
-          "group": "Task"
-        },
-        "fER2013": {
-          "name": "FER2013",
-          "group": "Task"
-        },
-        "uCF101": {
-          "name": "UCF101",
-          "group": "Task"
-        },
-        "cVBenchDistance": {
-          "name": "CVBenchDistance",
-          "group": "Task"
-        },
-        "aROVisualAttribution": {
-          "name": "AROVisualAttribution",
           "group": "Task"
         },
         "patchCamelyonZeroShot": {
           "name": "PatchCamelyonZeroShot",
           "group": "Task"
         },
-        "rParisMediumI2IRetrieval": {
-          "name": "RParisMediumI2IRetrieval",
+        "wITT2IRetrieval": {
+          "name": "WITT2IRetrieval",
           "group": "Task"
         },
-        "bLINKIT2TRetrieval": {
-          "name": "BLINKIT2TRetrieval",
+        "aROFlickrOrder": {
+          "name": "AROFlickrOrder",
           "group": "Task"
         },
-        "bLINKIT2IMultiChoice": {
-          "name": "BLINKIT2IMultiChoice",
+        "rOxfordHardI2IRetrieval": {
+          "name": "ROxfordHardI2IRetrieval",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAHealthcareIndustryRetrieval": {
+          "name": "VidoreSyntheticDocQAHealthcareIndustryRetrieval",
+          "group": "Task"
+        },
+        "cIFAR100ZeroShot": {
+          "name": "CIFAR100ZeroShot",
+          "group": "Task"
+        },
+        "sTS14VisualSTS": {
+          "name": "STS14VisualSTS",
+          "group": "Task"
+        },
+        "hatefulMemesI2TRetrieval": {
+          "name": "HatefulMemesI2TRetrieval",
+          "group": "Task"
+        },
+        "mSCOCOT2IRetrieval": {
+          "name": "MSCOCOT2IRetrieval",
+          "group": "Task"
+        },
+        "fashionIQIT2IRetrieval": {
+          "name": "FashionIQIT2IRetrieval",
+          "group": "Task"
+        },
+        "cVBenchRelation": {
+          "name": "CVBenchRelation",
+          "group": "Task"
+        },
+        "cLEVRZeroShot": {
+          "name": "CLEVRZeroShot",
           "group": "Task"
         },
         "fashion200kI2TRetrieval": {
           "name": "Fashion200kI2TRetrieval",
           "group": "Task"
         },
-        "memotionT2IRetrieval": {
-          "name": "MemotionT2IRetrieval",
+        "vidoreArxivQARetrieval": {
+          "name": "VidoreArxivQARetrieval",
+          "group": "Task"
+        },
+        "sOPI2IRetrieval": {
+          "name": "SOPI2IRetrieval",
+          "group": "Task"
+        },
+        "fGVCAircraftZeroShot": {
+          "name": "FGVCAircraftZeroShot",
+          "group": "Task"
+        },
+        "sUN397": {
+          "name": "SUN397",
+          "group": "Task"
+        },
+        "vidoreInfoVQARetrieval": {
+          "name": "VidoreInfoVQARetrieval",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAAIRetrieval": {
+          "name": "VidoreSyntheticDocQAAIRetrieval",
+          "group": "Task"
+        },
+        "caltech101ZeroShot": {
+          "name": "Caltech101ZeroShot",
+          "group": "Task"
+        },
+        "webQAT2ITRetrieval": {
+          "name": "WebQAT2ITRetrieval",
+          "group": "Task"
+        },
+        "imagenet1kZeroShot": {
+          "name": "Imagenet1kZeroShot",
+          "group": "Task"
+        },
+        "rESISC45": {
+          "name": "RESISC45",
+          "group": "Task"
+        },
+        "imageNet10Clustering": {
+          "name": "ImageNet10Clustering",
+          "group": "Task"
+        },
+        "oxfordPets": {
+          "name": "OxfordPets",
+          "group": "Task"
+        },
+        "euroSAT": {
+          "name": "EuroSAT",
+          "group": "Task"
+        },
+        "euroSATZeroShot": {
+          "name": "EuroSATZeroShot",
+          "group": "Task"
+        },
+        "mNIST": {
+          "name": "MNIST",
+          "group": "Task"
+        },
+        "cVBenchDepth": {
+          "name": "CVBenchDepth",
+          "group": "Task"
+        },
+        "visualSTSBMultilingual": {
+          "name": "VisualSTS-b-Multilingual",
           "group": "Task"
         },
         "imagenet1k": {
           "name": "Imagenet1k",
           "group": "Task"
         },
-        "oxfordPets": {
-          "name": "OxfordPets",
+        "fGVCAircraft": {
+          "name": "FGVCAircraft",
+          "group": "Task"
+        },
+        "imageCoDe": {
+          "name": "ImageCoDe",
+          "group": "Task"
+        },
+        "country211ZeroShot": {
+          "name": "Country211ZeroShot",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAGovernmentReportsRetrieval": {
+          "name": "VidoreSyntheticDocQAGovernmentReportsRetrieval",
+          "group": "Task"
+        },
+        "mETI2IRetrieval": {
+          "name": "METI2IRetrieval",
+          "group": "Task"
+        },
+        "nIGHTSI2IRetrieval": {
+          "name": "NIGHTSI2IRetrieval",
+          "group": "Task"
+        },
+        "imageCoDeT2IRetrieval": {
+          "name": "ImageCoDeT2IRetrieval",
+          "group": "Task"
+        },
+        "cIFAR10Clustering": {
+          "name": "CIFAR10Clustering",
+          "group": "Task"
+        },
+        "vizWizIT2TRetrieval": {
+          "name": "VizWizIT2TRetrieval",
+          "group": "Task"
+        },
+        "infoSeekIT2TRetrieval": {
+          "name": "InfoSeekIT2TRetrieval",
+          "group": "Task"
+        },
+        "dTD": {
+          "name": "DTD",
+          "group": "Task"
+        },
+        "cUB200I2IRetrieval": {
+          "name": "CUB200I2IRetrieval",
+          "group": "Task"
+        },
+        "vidoreShiftProjectRetrieval": {
+          "name": "VidoreShiftProjectRetrieval",
+          "group": "Task"
+        },
+        "visualNewsT2IRetrieval": {
+          "name": "VisualNewsT2IRetrieval",
+          "group": "Task"
+        },
+        "cIFAR100Clustering": {
+          "name": "CIFAR100Clustering",
+          "group": "Task"
+        },
+        "food101ZeroShot": {
+          "name": "Food101ZeroShot",
+          "group": "Task"
+        },
+        "fORBI2IRetrieval": {
+          "name": "FORBI2IRetrieval",
+          "group": "Task"
+        },
+        "webQAT2TRetrieval": {
+          "name": "WebQAT2TRetrieval",
+          "group": "Task"
+        },
+        "fER2013": {
+          "name": "FER2013",
+          "group": "Task"
+        },
+        "sTL10ZeroShot": {
+          "name": "STL10ZeroShot",
+          "group": "Task"
+        },
+        "caltech101": {
+          "name": "Caltech101",
+          "group": "Task"
+        },
+        "gLDv2I2TRetrieval": {
+          "name": "GLDv2I2TRetrieval",
+          "group": "Task"
+        },
+        "visualSTS17Multilingual": {
+          "name": "VisualSTS17Multilingual",
+          "group": "Task"
+        },
+        "rOxfordMediumI2IRetrieval": {
+          "name": "ROxfordMediumI2IRetrieval",
+          "group": "Task"
+        },
+        "vidoreTabfquadRetrieval": {
+          "name": "VidoreTabfquadRetrieval",
+          "group": "Task"
+        },
+        "vidoreSyntheticDocQAEnergyRetrieval": {
+          "name": "VidoreSyntheticDocQAEnergyRetrieval",
+          "group": "Task"
+        },
+        "stanfordCarsI2IRetrieval": {
+          "name": "StanfordCarsI2IRetrieval",
+          "group": "Task"
+        },
+        "mNISTZeroShot": {
+          "name": "MNISTZeroShot",
+          "group": "Task"
+        },
+        "mSCOCOI2TRetrieval": {
+          "name": "MSCOCOI2TRetrieval",
+          "group": "Task"
+        },
+        "gTSRBZeroShot": {
+          "name": "GTSRBZeroShot",
+          "group": "Task"
+        },
+        "birdsnap": {
+          "name": "Birdsnap",
+          "group": "Task"
+        },
+        "rP2kI2IRetrieval": {
+          "name": "RP2kI2IRetrieval",
+          "group": "Task"
+        },
+        "cLEVRCountZeroShot": {
+          "name": "CLEVRCountZeroShot",
+          "group": "Task"
+        },
+        "hatefulMemesT2IRetrieval": {
+          "name": "HatefulMemesT2IRetrieval",
+          "group": "Task"
+        },
+        "rParisHardI2IRetrieval": {
+          "name": "RParisHardI2IRetrieval",
+          "group": "Task"
+        },
+        "oVENIT2ITRetrieval": {
+          "name": "OVENIT2ITRetrieval",
+          "group": "Task"
+        },
+        "cVBenchCount": {
+          "name": "CVBenchCount",
+          "group": "Task"
+        },
+        "rOxfordEasyI2IRetrieval": {
+          "name": "ROxfordEasyI2IRetrieval",
+          "group": "Task"
+        },
+        "rESISC45ZeroShot": {
+          "name": "RESISC45ZeroShot",
+          "group": "Task"
+        },
+        "winoground": {
+          "name": "Winoground",
+          "group": "Task"
+        },
+        "sTS15VisualSTS": {
+          "name": "STS15VisualSTS",
+          "group": "Task"
+        },
+        "cIRRIT2IRetrieval": {
+          "name": "CIRRIT2IRetrieval",
+          "group": "Task"
+        },
+        "tinyImageNetClustering": {
+          "name": "TinyImageNetClustering",
+          "group": "Task"
+        },
+        "sketchyI2IRetrieval": {
+          "name": "SketchyI2IRetrieval",
+          "group": "Task"
+        },
+        "patchCamelyon": {
+          "name": "PatchCamelyon",
+          "group": "Task"
+        },
+        "flickr30kI2TRetrieval": {
+          "name": "Flickr30kI2TRetrieval",
+          "group": "Task"
+        },
+        "dTDZeroShot": {
+          "name": "DTDZeroShot",
+          "group": "Task"
+        },
+        "cIFAR10ZeroShot": {
+          "name": "CIFAR10ZeroShot",
+          "group": "Task"
+        },
+        "gTSRB": {
+          "name": "GTSRB",
+          "group": "Task"
+        },
+        "bLINKIT2TMultiChoice": {
+          "name": "BLINKIT2TMultiChoice",
+          "group": "Task"
+        },
+        "gLDv2I2IRetrieval": {
+          "name": "GLDv2I2IRetrieval",
+          "group": "Task"
+        },
+        "cIFAR100": {
+          "name": "CIFAR100",
+          "group": "Task"
+        },
+        "bLINKIT2IRetrieval": {
+          "name": "BLINKIT2IRetrieval",
+          "group": "Task"
+        },
+        "vidoreTatdqaRetrieval": {
+          "name": "VidoreTatdqaRetrieval",
+          "group": "Task"
+        },
+        "uCF101": {
+          "name": "UCF101",
+          "group": "Task"
+        },
+        "fER2013ZeroShot": {
+          "name": "FER2013ZeroShot",
+          "group": "Task"
+        },
+        "sugarCrepe": {
+          "name": "SugarCrepe",
+          "group": "Task"
+        },
+        "memotionT2IRetrieval": {
+          "name": "MemotionT2IRetrieval",
+          "group": "Task"
+        },
+        "flickr30kT2IRetrieval": {
+          "name": "Flickr30kT2IRetrieval",
+          "group": "Task"
+        },
+        "visualSTSBEng": {
+          "name": "VisualSTS-b-Eng",
+          "group": "Task"
+        },
+        "tUBerlinT2IRetrieval": {
+          "name": "TUBerlinT2IRetrieval",
+          "group": "Task"
+        },
+        "imageNetDog15Clustering": {
+          "name": "ImageNetDog15Clustering",
+          "group": "Task"
+        },
+        "rParisMediumI2IRetrieval": {
+          "name": "RParisMediumI2IRetrieval",
+          "group": "Task"
+        },
+        "xFlickr30kCoT2IRetrieval": {
+          "name": "XFlickr30kCoT2IRetrieval",
+          "group": "Task"
+        },
+        "rParisEasyI2IRetrieval": {
+          "name": "RParisEasyI2IRetrieval",
+          "group": "Task"
+        },
+        "stanfordCars": {
+          "name": "StanfordCars",
+          "group": "Task"
+        },
+        "sTS12VisualSTS": {
+          "name": "STS12VisualSTS",
+          "group": "Task"
+        },
+        "infoSeekIT2ITRetrieval": {
+          "name": "InfoSeekIT2ITRetrieval",
+          "group": "Task"
+        },
+        "sciMMIRT2IRetrieval": {
+          "name": "SciMMIRT2IRetrieval",
+          "group": "Task"
+        },
+        "visualNewsI2TRetrieval": {
+          "name": "VisualNewsI2TRetrieval",
+          "group": "Task"
+        },
+        "bLINKIT2IMultiChoice": {
+          "name": "BLINKIT2IMultiChoice",
+          "group": "Task"
+        },
+        "aROCocoOrder": {
+          "name": "AROCocoOrder",
+          "group": "Task"
+        },
+        "vQA2IT2TRetrieval": {
+          "name": "VQA2IT2TRetrieval",
+          "group": "Task"
+        },
+        "cVBenchDistance": {
+          "name": "CVBenchDistance",
+          "group": "Task"
+        },
+        "sUN397ZeroShot": {
+          "name": "SUN397ZeroShot",
+          "group": "Task"
+        },
+        "sciMMIRI2TRetrieval": {
+          "name": "SciMMIRI2TRetrieval",
+          "group": "Task"
+        },
+        "vOC2007": {
+          "name": "VOC2007",
+          "group": "Task"
+        },
+        "food101Classification": {
+          "name": "Food101Classification",
+          "group": "Task"
+        },
+        "oVENIT2TRetrieval": {
+          "name": "OVENIT2TRetrieval",
+          "group": "Task"
+        },
+        "visualSTS17Eng": {
+          "name": "VisualSTS17Eng",
+          "group": "Task"
+        },
+        "sTL10": {
+          "name": "STL10",
+          "group": "Task"
+        },
+        "renderedSST2": {
+          "name": "RenderedSST2",
+          "group": "Task"
+        },
+        "xM3600T2IRetrieval": {
+          "name": "XM3600T2IRetrieval",
+          "group": "Task"
+        },
+        "birdsnapZeroShot": {
+          "name": "BirdsnapZeroShot",
+          "group": "Task"
+        },
+        "bLINKIT2TRetrieval": {
+          "name": "BLINKIT2TRetrieval",
+          "group": "Task"
+        },
+        "sTS13VisualSTS": {
+          "name": "STS13VisualSTS",
+          "group": "Task"
+        },
+        "oxfordFlowersClassification": {
+          "name": "OxfordFlowersClassification",
+          "group": "Task"
+        },
+        "sTS16VisualSTS": {
+          "name": "STS16VisualSTS",
+          "group": "Task"
+        },
+        "aROVisualAttribution": {
+          "name": "AROVisualAttribution",
+          "group": "Task"
+        },
+        "aROVisualRelation": {
+          "name": "AROVisualRelation",
+          "group": "Task"
+        },
+        "cIFAR10": {
+          "name": "CIFAR10",
+          "group": "Task"
+        },
+        "memotionI2TRetrieval": {
+          "name": "MemotionI2TRetrieval",
+          "group": "Task"
+        },
+        "stanfordCarsZeroShot": {
+          "name": "StanfordCarsZeroShot",
+          "group": "Task"
+        },
+        "oxfordPetsZeroShot": {
+          "name": "OxfordPetsZeroShot",
           "group": "Task"
         },
         "mIEBEngTaskMeanTaskMean": {
@@ -191431,10 +191373,6 @@
           "name": "Mean task score",
           "unit": "%",
           "better": "higher"
-        },
-        "zeroShotPct": {
-          "name": "Zero-shot percentage",
-          "unit": "%"
         }
       }
     },
@@ -199385,7 +199323,7 @@
       "url": "https://tongyi-mai.github.io/MobileWorld/#leaderboard",
       "feed": "https://tongyi-mai.github.io/MobileWorld/leaderboard.json (Overall success rate, weighted by published task counts)",
       "terms": "JSON file on the MobileWorld GitHub Pages site that the page loads; the MobileWorld repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 20,
       "unmatched": [
         "Doubao-1.5-UI-TARS",
@@ -199425,16 +199363,6 @@
         "mcp": {
           "name": "MCP",
           "group": "Task type"
-        }
-      },
-      "stats": {
-        "maxSteps": {
-          "name": "Maximum steps",
-          "unit": "count"
-        },
-        "historyImages": {
-          "name": "History images",
-          "unit": "count"
         }
       }
     },
@@ -200429,7 +200357,7 @@
       "url": "https://moment.corestudio.io/",
       "feed": "https://moment.corestudio.io/",
       "terms": "CORE studio gives a copyright notice and no explicit score reuse license. https://moment.corestudio.io/ The robots.txt route returns a 404 page.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 68,
       "unmatched": [],
       "costPer": "run",
@@ -200445,10 +200373,6 @@
         },
         "validTasks": {
           "name": "Valid tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         },
         "toolCalls": {
@@ -249887,7 +249811,7 @@
       "feed": "https://arxiv.org/html/2605.20873",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors. https://arxiv.org/licenses/",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 15,
       "unmatched": [
         "DeepSeek-R1 (snapshot unspecified)",
@@ -249897,13 +249821,6 @@
       "parts": {
         "avgPass": {
           "name": "Avg-pass"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "note": "Model rank in the PlanningBench table."
         }
       }
     },
@@ -263605,7 +263522,7 @@
       "feed": "https://arxiv.org/pdf/2611.21485",
       "terms": "The paper license is linked at https://arxiv.org/abs/2611.21485.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Cambrian-P-7B",
@@ -263660,13 +263577,6 @@
         },
         "reasoning": {
           "name": "Reasoning"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Leaderboard rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -274520,7 +274430,7 @@
       "feed": "https://arxiv.org/html/2406.09098",
       "terms": "The authors publish these tables under the license linked at https://arxiv.org/abs/2406.09098.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [
         "ChemDFM-13B",
@@ -274570,13 +274480,6 @@
         "Physics": {
           "name": "Physics",
           "group": "Domain"
-        }
-      },
-      "stats": {
-        "rank": {
-          "name": "Rank",
-          "unit": "count",
-          "better": "lower"
         }
       }
     },
@@ -279956,7 +279859,7 @@
       "feed": "https://raw.githubusercontent.com/joelbarmettlerUZH/swiss-llm-bias-analysis/HEAD/results/paper/smartvote_agreement_scores.json",
       "terms": "Smartvote and Politools provided the questionnaire and candidate responses. Source terms: https://github.com/joelbarmettlerUZH/swiss-llm-bias-analysis/blob/main/DATA_LICENSE",
       "headline": "The source gives no overall score. This is mean agreement with six parties, with equal weight for each party.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 52,
       "unmatched": [
         "Claude 3.5 Sonnet (snapshot unspecified)",
@@ -280004,32 +279907,6 @@
           "name": "SVP",
           "unit": "%",
           "better": "higher"
-        }
-      },
-      "stats": {
-        "spPoliticians": {
-          "name": "SP politicians",
-          "unit": "count"
-        },
-        "greensPoliticians": {
-          "name": "Grüne politicians",
-          "unit": "count"
-        },
-        "glpPoliticians": {
-          "name": "GLP politicians",
-          "unit": "count"
-        },
-        "centrePoliticians": {
-          "name": "Die Mitte politicians",
-          "unit": "count"
-        },
-        "fdpPoliticians": {
-          "name": "FDP politicians",
-          "unit": "count"
-        },
-        "svpPoliticians": {
-          "name": "SVP politicians",
-          "unit": "count"
         }
       }
     },
@@ -296816,7 +296693,7 @@
       "url": "https://www.synthbench.org/leaderboard/",
       "feed": "https://www.synthbench.org/data/sb-index.json",
       "terms": "The project publishes aggregate scores. Each survey has separate terms for question data. The host permits the public index and excludes separate detail paths in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 43,
       "unmatched": [
         "Ensemble of Haiku 4.5, Gemini 2.5 Flash-Lite, GPT-4o mini (all persona)",
@@ -296826,124 +296703,124 @@
         "Ensemble of Qwen 3.8 Flash, DeepSeek V4.1 Flash, Gemini 3.5 Flash-Lite (all raw)"
       ],
       "parts": {
+        "opinionsqa": {
+          "name": "OpinionsQA"
+        },
+        "opinionsqa_politics": {
+          "name": "Politics",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_economy": {
+          "name": "Economy",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_technology": {
+          "name": "Technology",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_science-health": {
+          "name": "Science and health",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_identity": {
+          "name": "Identity",
+          "group": "OpinionsQA"
+        },
+        "opinionsqa_society": {
+          "name": "Society",
+          "group": "OpinionsQA"
+        },
         "globalopinionqa": {
           "name": "GlobalOpinionQA"
         },
         "globalopinionqa_politics": {
-          "name": "politics",
+          "name": "Politics",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_economy": {
-          "name": "economy",
+          "name": "Economy",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_technology": {
-          "name": "technology",
+          "name": "Technology",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_science-health": {
-          "name": "science-health",
+          "name": "Science and health",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_identity": {
-          "name": "identity",
+          "name": "Identity",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_society": {
-          "name": "society",
+          "name": "Society",
           "group": "GlobalOpinionQA"
         },
         "globalopinionqa_global": {
-          "name": "global",
+          "name": "Global",
           "group": "GlobalOpinionQA"
         },
         "gss": {
           "name": "GSS"
         },
         "gss_politics": {
-          "name": "politics",
+          "name": "Politics",
           "group": "GSS"
         },
         "gss_economy": {
-          "name": "economy",
+          "name": "Economy",
           "group": "GSS"
         },
         "gss_technology": {
-          "name": "technology",
+          "name": "Technology",
           "group": "GSS"
         },
         "gss_science-health": {
-          "name": "science-health",
+          "name": "Science and health",
           "group": "GSS"
         },
         "gss_identity": {
-          "name": "identity",
+          "name": "Identity",
           "group": "GSS"
         },
         "gss_society": {
-          "name": "society",
+          "name": "Society",
           "group": "GSS"
         },
         "gss_global": {
-          "name": "global",
+          "name": "Global",
           "group": "GSS"
-        },
-        "opinionsqa": {
-          "name": "OpinionsQA"
-        },
-        "opinionsqa_politics": {
-          "name": "politics",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_economy": {
-          "name": "economy",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_technology": {
-          "name": "technology",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_science-health": {
-          "name": "science-health",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_identity": {
-          "name": "identity",
-          "group": "OpinionsQA"
-        },
-        "opinionsqa_society": {
-          "name": "society",
-          "group": "OpinionsQA"
         },
         "subpop": {
           "name": "SubPOP"
         },
         "subpop_politics": {
-          "name": "politics",
+          "name": "Politics",
           "group": "SubPOP"
         },
         "subpop_economy": {
-          "name": "economy",
+          "name": "Economy",
           "group": "SubPOP"
         },
         "subpop_technology": {
-          "name": "technology",
+          "name": "Technology",
           "group": "SubPOP"
         },
         "subpop_science-health": {
-          "name": "science-health",
+          "name": "Science and health",
           "group": "SubPOP"
         },
         "subpop_identity": {
-          "name": "identity",
+          "name": "Identity",
           "group": "SubPOP"
         },
         "subpop_society": {
-          "name": "society",
+          "name": "Society",
           "group": "SubPOP"
         },
         "subpop_global": {
-          "name": "global",
+          "name": "Global",
           "group": "SubPOP"
         }
       },
@@ -296961,26 +296838,6 @@
           "name": "Median latency",
           "unit": "ms",
           "better": "lower"
-        },
-        "opinionsqa_questions": {
-          "name": "OpinionsQA questions",
-          "unit": "score",
-          "better": "higher"
-        },
-        "globalopinionqa_questions": {
-          "name": "GlobalOpinionQA questions",
-          "unit": "score",
-          "better": "higher"
-        },
-        "gss_questions": {
-          "name": "General Social Survey questions",
-          "unit": "score",
-          "better": "higher"
-        },
-        "subpop_questions": {
-          "name": "Subpopulation questions",
-          "unit": "score",
-          "better": "higher"
         }
       }
     },
@@ -301923,7 +301780,8 @@
       "url": "https://arxiv.org/html/2608.19741",
       "feed": "https://arxiv.org/html/2608.19741",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 18,
       "unmatched": [],
       "parts": {
@@ -301943,15 +301801,15 @@
           "name": "Consulting"
         }
       },
-      "static": "paper",
       "stats": {
         "pass20": {
-          "name": "Pass success",
+          "name": "pass^20",
           "unit": "%",
-          "better": "higher"
+          "better": "higher",
+          "note": "All twenty attempts pass."
         },
         "passAt20": {
-          "name": "Pass",
+          "name": "pass@20",
           "unit": "%",
           "better": "higher"
         },
@@ -302000,15 +301858,6 @@
         "costPerAll20Task": {
           "name": "Cost per all-20-task run",
           "unit": "usd",
-          "better": "lower"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens",
-          "unit": "tokens"
-        },
-        "timeoutSeconds": {
-          "name": "Timeout",
-          "unit": "seconds",
           "better": "lower"
         },
         "retailTokensPerTurn": {
@@ -302091,7 +301940,7 @@
       "url": "https://evals.thriveholdings.com/?benchmark=it-helpdesk#it-helpdesk",
       "feed": "https://evals.thriveholdings.com/assets/home-<hash>.js (helpdesk results array, score)",
       "terms": "Public site bundle; robots.txt allows all paths and the site publishes no terms.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 57,
       "unmatched": [],
       "chart": {
@@ -302117,10 +301966,6 @@
         },
         "failed": {
           "name": "Failed tickets",
-          "unit": "count"
-        },
-        "graded": {
-          "name": "Graded tickets",
           "unit": "count"
         },
         "latency": {
@@ -317578,7 +317423,7 @@
       "url": "https://mteb-leaderboard.hf.space/benchmark/ViDoRe%28v3%29",
       "feed": "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/ViDoRe%28v3%29/scores",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [
         "ModernVBERT/bimodernvbert",
@@ -317708,11 +317553,6 @@
           "unit": "count",
           "better": "lower",
           "note": "Memory usage in megabytes."
-        },
-        "zeroShotPct": {
-          "name": "Zero-shot score",
-          "unit": "%",
-          "better": "higher"
         }
       }
     },
@@ -326144,7 +325984,8 @@
       "url": "https://aclanthology.org/2023.wmt-1.3.pdf#page=7",
       "feed": "https://aclanthology.org/2023.wmt-1.3.pdf#page=7",
       "terms": "Table 3 ranks primary systems and baselines within separate groups. ACL publishes the paper under CC BY 4.0. https://aclanthology.org/faq/copyright/ The robots URL returns HTML.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "DLUT",
@@ -326157,17 +325998,11 @@
         "NTU",
         "TJUNLP"
       ],
-      "static": "paper",
       "stats": {
         "d-BLEU": {
           "name": "d-BLEU",
           "unit": "score",
           "better": "higher"
-        },
-        "groupRank": {
-          "name": "Group rank",
-          "unit": "count",
-          "better": "lower"
         },
         "BLEU": {
           "name": "BLEU",
@@ -330125,7 +329960,7 @@
       "url": "https://collinear-ai.github.io/yc-bench/",
       "feed": "https://collinear-ai.github.io/yc-bench/",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 67,
       "unmatched": [
         "Greedy Bot",
@@ -330137,10 +329972,6 @@
           "name": "Bankrupt runs",
           "unit": "count",
           "better": "lower"
-        },
-        "runs": {
-          "name": "Runs",
-          "unit": "count"
         },
         "funds:2025-01": {
           "name": "Funds in January 2025",

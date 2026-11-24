@@ -10,11 +10,6 @@ const parties = { sp: {name: 'SP', unit: '%', better: 'higher'}, greens: {name: 
 type Agreement = { agreement: number; ci_lower: number; ci_upper: number; n_politicians: number };
 const board: Leaderboard = {
   benchmark: 'smartvote-2023-model-party-agreement', url: 'https://github.com/joelbarmettlerUZH/swiss-llm-bias-analysis', feed, parts: parties,
-  stats: {
-    spPoliticians: {name: 'SP politicians', unit: 'count'}, greensPoliticians: {name: 'Grüne politicians', unit: 'count'},
-    glpPoliticians: {name: 'GLP politicians', unit: 'count'}, centrePoliticians: {name: 'Die Mitte politicians', unit: 'count'},
-    fdpPoliticians: {name: 'FDP politicians', unit: 'count'}, svpPoliticians: {name: 'SVP politicians', unit: 'count'},
-  },
   aliases: {
     "Mistral 7B v0.1": "mistral-7b-instruct-v0-1",
     "Claude 3 Haiku": "claude-3-haiku",
@@ -57,7 +52,6 @@ const board: Leaderboard = {
         metrics[key] = result.agreement;
         metrics[key + 'Low'] = result.ci_lower;
         metrics[key + 'High'] = result.ci_upper;
-        metrics[key + 'Politicians'] = result.n_politicians;
         total += result.agreement;
       }
       return [{ model: r.display, score: total / 6, metrics }];

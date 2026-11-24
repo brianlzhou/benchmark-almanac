@@ -24,13 +24,9 @@ const board: Leaderboard = {
   parts: tasks,
   stats: {
     faithbenchSummarizationHallucinations: { name: 'FaithBench summarization hallucinations', unit: 'count', better: 'lower' },
-    faithbenchSummarizationExamples: { name: 'FaithBench summarization examples', unit: 'count' },
     ragTruthSummarizationHallucinations: { name: 'RAGTruth summarization hallucinations', unit: 'count', better: 'lower' },
-    ragTruthSummarizationExamples: { name: 'RAGTruth summarization examples', unit: 'count' },
     ragTruthQuestionAnsweringHallucinations: { name: 'RAGTruth question answering hallucinations', unit: 'count', better: 'lower' },
-    ragTruthQuestionAnsweringExamples: { name: 'RAGTruth question answering examples', unit: 'count' },
     ragTruthDataToTextWritingHallucinations: { name: 'RAGTruth data-to-text hallucinations', unit: 'count', better: 'lower' },
-    ragTruthDataToTextWritingExamples: { name: 'RAGTruth data-to-text examples', unit: 'count' },
     activeParams: { name: 'Active parameters', unit: 'billions' },
   },
   aliases: {
@@ -92,7 +88,6 @@ const board: Leaderboard = {
         const counts = cell?.match(/\((\d+)\/(\d+)\)/);
         if (counts) {
           metrics[key + 'Hallucinations'] = Number(counts[1]);
-          metrics[key + 'Examples'] = Number(counts[2]);
         }
       }
       rows.push({ model, score, params, metrics, setting: settings.join(', ') || undefined, date: stamp ? `${stamp[1]}-${stamp[2]}-${stamp[3]}` : undefined });

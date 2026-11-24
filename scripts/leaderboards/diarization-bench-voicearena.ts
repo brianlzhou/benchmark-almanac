@@ -8,7 +8,7 @@ interface System {id:string;name:string;variant:string;type:number}
 interface Summary {der:number[];jer:number[];missed:number;falseAlarm:number;confusion:number}
 
 const board: Leaderboard = {
-  stats: { jer: { name: 'Diarization error rate', unit: '%', better: 'lower' }, missed: { name: 'Missed speech', unit: '%', better: 'lower' }, falseAlarm: { name: 'False alarm speech', unit: '%', better: 'lower' }, confusion: { name: 'Speaker confusion', unit: '%', better: 'lower' }, countCorrect: { name: 'Correct speaker count', unit: '%', better: 'higher' }, sessions: { name: 'Sessions', unit: 'count' }, minutes: { name: 'Audio minutes', unit: 'minutes' } },
+  stats: { jer: { name: 'Jaccard error rate', unit: '%', better: 'lower' }, missed: { name: 'Missed speech', unit: '%', better: 'lower' }, falseAlarm: { name: 'False alarm speech', unit: '%', better: 'lower' }, confusion: { name: 'Speaker confusion', unit: '%', better: 'lower' }, countCorrect: { name: 'Correct speaker count', unit: '%', better: 'higher' } },
   benchmark: "diarization-bench-voicearena",
   url: "https://voicearena.com/diarization-bench",
   feed,
@@ -32,7 +32,7 @@ const board: Leaderboard = {
       const mean=(k:number)=>run.reduce((s,r)=>s+r[k]*sessions[r[0]][1],0)/minutes;
       const corrected=sys.id==='nemotron_offline'?correction:undefined;
       const stats={missed:corrected?.missed??mean(8),falseAlarm:corrected?.falseAlarm??mean(9),confusion:corrected?.confusion??mean(10),
-        countCorrect:100*run.filter(r=>r[1]===sessions[r[0]][2]).length/run.length,sessions:run.length,minutes};
+        countCorrect:100*run.filter(r=>r[1]===sessions[r[0]][2]).length/run.length};
       [0,100,250].forEach((ms,k)=>{
         const score=corrected?.der[k]??mean(2+k),jer=corrected?.jer[k]??mean(5+k);
         if(!sys.name || ![score,jer,...Object.values(stats)].every(Number.isFinite)) throw new Error('Invalid diarization metrics');

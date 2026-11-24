@@ -6,7 +6,7 @@ import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://mteb-leaderboard-backend.hf.space/v1/benchmarks/ViDoRe%28v3%29/scores";
 const board: Leaderboard = {
- stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', better: 'lower', note: 'Memory usage in megabytes.' }, zeroShotPct: { name: 'Zero-shot score', unit: '%', better: 'higher' } },
+ stats: { activeParamsB: { name: 'Active parameters', unit: 'billions' }, maxTokens: { name: 'Maximum tokens', unit: 'tokens' }, embeddingDim: { name: 'Embedding dimensions', unit: 'count' }, opennessScore: { name: 'Openness score', unit: 'score', better: 'higher' }, memoryUsageMb: { name: 'Memory usage', unit: 'count', better: 'lower', note: 'Memory usage in megabytes.' } },
  benchmark: "vidore-v3", parts: {
   Vidore3PharmaceuticalsRetrieval: { name: 'Pharmaceuticals', group: 'Domain' },
   Vidore3EnergyRetrieval: { name: 'Energy', group: 'Domain' },
@@ -28,10 +28,10 @@ type R={model:{name:string;modelType?:string;openWeights?:boolean;license?:strin
 const data=await fetchJson<{rows:R[]}>(FEED);const rows:LeaderboardRow[]=[];
 for(const r of data.rows){if(!r.model?.name||!Number.isFinite(r.meanTask))continue;const metrics:Record<string,number>=Object.fromEntries(Object.entries(r.scoresByTask).filter(([,v])=>Number.isFinite(v)));if(Number.isFinite(r.meanPublic))metrics.public=r.meanPublic!;if(Number.isFinite(r.meanPrivate))metrics.private=r.meanPrivate!;
  for (const [key,value] of Object.entries({activeParamsB:r.activeParamsB, maxTokens:r.maxTokens, embeddingDim:r.embeddingDim,
-   zeroShotPct:r.zeroShotPct, opennessScore:r.model.opennessScore, memoryUsageMb:r.model.memoryUsageMb})) {
+   opennessScore:r.model.opennessScore, memoryUsageMb:r.model.memoryUsageMb})) {
    if (typeof value === 'number' && Number.isFinite(value) && value >= 0) metrics[key] = value;
  }
- rows.push({model:r.model.name,params:r.totalParamsB ?? undefined,open:r.model.openWeights ?? undefined,license:r.model.license || undefined,score:r.meanTask,setting:['NDCG@10',r.model.modelType,r.embeddingDim?'embedding dimensions '+r.embeddingDim:undefined,r.experiments?JSON.stringify(r.experiments):undefined].filter(Boolean).join('; '),metrics});}return rows;
+ rows.push({model:r.model.name,params:r.totalParamsB ?? undefined,open:r.model.openWeights ?? undefined,license:r.model.license || undefined,score:r.meanTask,setting:['NDCG@10',r.model.modelType,r.embeddingDim?'embedding dimensions '+r.embeddingDim:undefined,r.experiments?JSON.stringify(r.experiments):undefined].filter(Boolean).join(', '),metrics});}return rows;
  },
 };
 export default board;
