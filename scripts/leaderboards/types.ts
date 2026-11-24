@@ -118,6 +118,12 @@ export interface Leaderboard {
    */
   reference?: string[];
   /**
+   * Names of rows on this board that are not models and that the shared list in scripts/lib/not-models.ts doesn't
+   * catch: scripted bots, an oracle that sees the answer, a "do nothing" or copy-the-input baseline. The sync leaves
+   * matching rows out, as it does people, random and majority rows on every board. Match whole names.
+   */
+  notModels?: RegExp;
+  /**
    * What any other harness name on this board is. 'system' (an agent or product built around the model, such as
    * "Arca + GPT-6 Astra") shows as its own entry and never counts as the model's score. 'model' (the default)
    * treats the harness as a label on the model's own score, as when it only names the board's tool setup.

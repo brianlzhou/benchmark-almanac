@@ -1,9 +1,11 @@
 // HIPE 2026 ranks historical newspaper systems by the mean Impresso profile score. Join the official TSV to the named HTML ranking by rank and run.
+// The Random Decision Baseline decides at random, so it is not a model and the board leaves it out.
 import type { Leaderboard } from "./types.ts";
 import { fetchText } from "../lib/util.ts";
 import { tables } from "../lib/html.ts";
 const board: Leaderboard = {
   benchmark: "clef-hipe-2026",
+  notModels: /^Random Decision Baseline$/,
   url: "https://hipe-eval.github.io/HIPE-2026/results",
   feed: "https://hipe-eval.github.io/HIPE-2026/assets/results/ternary/results.d/system-rankings/ranking-overall-test-a.tsv",
   terms: "The accuracy table contains submitted runs and baselines. I found no reuse terms for this TSV in the evaluation repository. https://github.com/hipe-eval/HIPE-2026-eval The HIPE results host returned 404 for robots.txt.",

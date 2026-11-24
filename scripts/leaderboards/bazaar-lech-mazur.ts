@@ -1,5 +1,7 @@
 // BAZAAR evaluates agents in a double auction. The README ranks market strategies by median TrueSkill μ.
 // The table also reports rating uncertainty, games played and mean conditional surplus alpha.
+// The rows marked (Baseline) are scripted trading strategies (Momentum, Tit-for-Tat, ZIC+ and others), not models,
+// so the board leaves them out.
 import type { Leaderboard, LeaderboardRow } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 import { markdownTables } from '../lib/boards/github-markdown.ts';
@@ -8,6 +10,7 @@ const feed = "https://raw.githubusercontent.com/lechmazur/bazaar/HEAD/README.md"
 
 const board: Leaderboard = {
   benchmark: "bazaar-lech-mazur",
+  notModels: /\(Baseline\)$/,
   url: "https://github.com/lechmazur/bazaar",
   feed,
   terms: "The publisher displays results at https://github.com/lechmazur/bazaar. I could not verify reuse terms. The raw GitHub host returns 404 for robots.txt.",

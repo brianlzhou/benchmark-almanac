@@ -1,11 +1,13 @@
 // BuildArena publishes the final Season 1 ranking for autonomous and assisted Besiege entries.
 // Read final scores, cost deductions and performance components from the site's application bundle.
+// Random Walk is a random controller, not a model, so the board leaves it out.
 import type { Leaderboard } from './types.ts';
 import { fetchText } from '../lib/util.ts';
 
 const FEED = "https://build-arena.github.io/ConstructionChallenge/";
 const board: Leaderboard = {
   benchmark: "buildarena-2-0",
+  notModels: /^Random Walk$/,
   url: "https://build-arena.github.io/ConstructionChallenge/",
   feed: FEED,
   terms: "The public Season 1 results page gives no separate score license. Its robots URL returns HTML.",
