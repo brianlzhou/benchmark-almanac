@@ -9,7 +9,14 @@ const board: Leaderboard = {
   url: "https://opusmagnumbench.com/",
   feed: FEED,
   terms: "The makers publish the results file. I found no reuse license on the dashboard. https://opusmagnumbench.com/ The host has no published robots directives at /robots.txt.",
-  parts: { average: 'Reward (avg)', solved: 'Solved (pass@k)', steps: 'Avg steps', first: 'Steps to first solve', final: 'Steps to final solve', fail: 'Steps on fail' },
+  stats: {
+    average: { name: 'Mean reward', unit: 'score', better: 'higher' },
+    solved: { name: 'Puzzles solved', unit: 'count', better: 'higher' },
+    steps: { name: 'Average steps', unit: 'count', better: 'lower' },
+    first: { name: 'Steps to first solve', unit: 'count', better: 'lower' },
+    final: { name: 'Steps to final solve', unit: 'count', better: 'lower' },
+    fail: { name: 'Steps on fail', unit: 'count' },
+  },
   async fetch() {
     type Trial = { solved: boolean; reward: number; usage?: { output_tokens?: number; cost_usd?: number; steps?: number }; prog?: { reward: number[][] } };
     type Data = { models: { short: string; key: string; isHumanBest?: boolean; isBaseline?: boolean }[]; puzzles: { id: string }[]; trials: Record<string, Trial> };

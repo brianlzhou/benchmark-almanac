@@ -12,11 +12,17 @@ const board: Leaderboard = {
 }, url: URL, feed: URL + ' (leaderboard-data JSON)',
   terms: 'The WebsiteBench repository is Apache-2.0. The maker publishes score downloads and embedded JSON, and robots.txt permits the page. Source: WebsiteBench authors.',
   stats: {
-    totalTokens: { name: 'Total tokens', unit: 'tokens' }, turns: { name: 'Turns', unit: 'count' }, tasks: { name: 'Tasks', unit: 'count' },
+    totalTokens: { name: 'Total tokens', unit: 'tokens' }, turns: { name: 'Turns', unit: 'count' },
     overall_passed: { name: 'Overall passed tasks', unit: 'count' }, overall_total: { name: 'Overall tasks', unit: 'count' },
     request_passed: { name: 'Request passed tasks', unit: 'count' }, request_total: { name: 'Request tasks', unit: 'count' },
     browser_passed: { name: 'Browser passed tasks', unit: 'count' }, browser_total: { name: 'Browser tasks', unit: 'count' },
     system_passed: { name: 'System passed tasks', unit: 'count' }, system_total: { name: 'System tasks', unit: 'count' },
+  },
+  chart: {
+    title: 'Overall pass rate vs. mean cost per task',
+    note: 'Overall test pass rate against mean cost per task, matching the Pareto view on WebsiteBench.',
+    x: { key: 'cost', label: 'Mean cost per task', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Overall pass rate', unit: '%', better: 'higher' },
   },
   async fetch() {
     const html = await fetchText(URL);
@@ -41,7 +47,7 @@ const board: Leaderboard = {
     const rows: LeaderboardRow[] = d.models.map(r => ({
       model: r.name, score: r.overall, cost: r.cost, open: r.group === 'open', agentOrg: r.org,
       setting: d.cohort_id, metrics: {request: r.request, browser: r.browser, system: r.system,
-        ...siteScores(r.id), totalTokens: r.tokens * 1e6, turns: r.turns, tasks: d.total_tasks,
+        ...siteScores(r.id), totalTokens: r.tokens * 1e6, turns: r.turns,
         ...Object.fromEntries(Object.entries(r.score_counts).flatMap(([k, c]) => [[`${k}_passed`, c.passed], [`${k}_total`, c.total]])),
       },
     }));

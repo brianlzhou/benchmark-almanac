@@ -17,6 +17,12 @@ const board: Leaderboard = {
     turns: { name: 'Turns per call', unit: 'count' },
     bargeInPerCall: { name: 'Barge-ins per call', unit: 'count', better: 'lower' },
   },
+  chart: {
+    title: 'Cost vs. completed tasks',
+    note: 'Task completion rate against mean cost per call, matching the Pareto scatter chart on the Veris VAmoS Pro leaderboard.',
+    x: { key: 'cost', label: 'Mean cost per call', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Task completion', unit: '%', better: 'higher' },
+  },
   async fetch(){
     const t=tables(await fetchText(feed)).find(t=>t[0].map(c=>c.text).join('|')==='Voice agent|Task completion|Latency|Turns|Barge-in/call|Cost|Type|Model');
     if(!t || t.length<21) throw new Error('Incomplete voice agent standings');

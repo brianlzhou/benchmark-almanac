@@ -14,8 +14,14 @@ const board: Leaderboard = {
   terms: "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
   parts: { clear: 'Clear', veryBlurry: 'Very blurry' },
   stats: {
-    pass3: { name: 'Pass@3', unit: '%', better: 'higher', note: 'Percentage of tasks solved on all three repeats.' },
+    pass3: { name: 'Pass^3', unit: '%', better: 'higher', note: 'Percentage of tasks solved on all three repeats.' },
     medianMinutes: { name: 'Median minutes per attempt', unit: 'minutes', better: 'lower' },
+  },
+  chart: {
+    title: 'Cost vs. questions answered correctly',
+    note: 'Pass@1 against agent cost per task, matching the scatter chart on the Veris TreasuryQA leaderboard.',
+    x: { key: 'cost', label: 'Cost per task', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Pass@1', unit: '%', better: 'higher' },
   },
   async fetch() {
     const table = tables(await fetchText(FEED)).find(t => t[0]?.[1]?.text.startsWith('pass@1'));

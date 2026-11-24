@@ -13,6 +13,13 @@ const board: Leaderboard = {
   url: "https://alavico.github.io/sts-bench-results/",
   feed,
   terms: "The runner uses MIT. The separate results repository lists no license. The host has no robots.txt.",
+  costPer: 'run',
+  chart: {
+    title: 'Cost vs. performance',
+    note: 'Mean floor reached against mean estimated cost per attempted run, matching the cost versus performance scatter chart on the Slay the Spire Bench report.',
+    x: { key: 'cost', label: 'Mean cost per run', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Mean floor', unit: 'score', better: 'higher' },
+  },
   stats: {
     wins: { name: 'Wins', unit: 'count', better: 'higher', note: 'Outright wins out of attempted runs.' },
     median_floor: { name: 'Median floor', unit: 'score', better: 'higher' },

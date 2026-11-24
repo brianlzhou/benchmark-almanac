@@ -10,6 +10,12 @@ const board: Leaderboard = {
   terms: "The disclaimer describes research and informational use. I found no explicit redistribution license for the scores or a leaderboard update date. https://wildlifebench.org/disclaimer/ The robots file allows this feed for the importer.",
   aliases: { 'OpenAI GPT-6.1 Sol': 'gpt-6-1-sol' },
   parts: {"task1": "Taxonomy", "task2": "Existence", "task3": "Red List", "task4": "Native range", "task5": "Introduced range", "task6": "Checklists", "task7": "Common names", "task8": "Authority", "task9": "Invasive species", "task10": "Nomenclature", "P2.fictitious_detected": "Invented names rejected", "P2.real_recognised": "Real names accepted", "P2.red_list_balanced": "Mean accuracy across categories", "P7.standard_name": "Standard English name", "P3.recorded_alien": "Recorded as alien, invasive or not"},
+  chart: {
+    title: 'Cost and performance',
+    note: 'Combined score against reported API cost per question, matching the Cost and performance scatter chart on WildlifeBench.',
+    x: { key: 'cost', label: 'Cost per question', unit: '$', better: 'lower' },
+    y: { key: 'score', label: 'Combined score', unit: '%', better: 'higher' },
+  },
   async fetch() {
     type Result = { value: number; low: number; high: number };
     type Entry = { display_name: string; open_weights: boolean; combined: Result; tasks: Record<string,Result>; parts: Record<string,Result>;

@@ -214759,50 +214759,79 @@
       "url": "https://opengastronomy.org/benchmark/leaderboard/",
       "feed": "https://opengastronomy.org/benchmark/leaderboard/",
       "terms": "The leaderboard dataset metadata lists Apache 2.0. The results directory links one JSON document per model. The host permits crawling.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "MiniMax-M2.7-highspeed",
         "grok-4.20-0309-non-reasoning",
         "mistral-small-latest"
       ],
+      "chart": {
+        "title": "Intelligence vs cost",
+        "note": "Aggregate score against blended price per million tokens, matching the Pareto chart on the OGS-Bench leaderboard.",
+        "x": {
+          "key": "blendedPricePerMtok",
+          "label": "Blended price per 1M tokens",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Aggregate score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "costPer": "run",
       "parts": {
         "vocabulary": {
-          "name": "vocabulary"
+          "name": "Vocabulary",
+          "group": "Category"
         },
         "sensory": {
-          "name": "sensory"
+          "name": "Sensory",
+          "group": "Category"
         },
         "composition": {
-          "name": "composition"
+          "name": "Composition",
+          "group": "Category"
         },
         "pairing": {
-          "name": "pairing"
+          "name": "Pairing",
+          "group": "Category"
         },
         "explanation": {
-          "name": "explanation"
+          "name": "Explanation",
+          "group": "Category"
         },
         "risk": {
-          "name": "risk"
+          "name": "Risk",
+          "group": "Category"
         },
         "structured_output": {
-          "name": "structured output"
+          "name": "Structured output",
+          "group": "Category"
         },
         "regional": {
-          "name": "regional"
+          "name": "Regional",
+          "group": "Category"
         },
         "dietary": {
-          "name": "dietary"
+          "name": "Dietary",
+          "group": "Category"
         },
         "safety": {
-          "name": "safety"
+          "name": "Safety",
+          "group": "Category"
         },
         "nutrition": {
-          "name": "nutrition"
+          "name": "Nutrition",
+          "group": "Category"
         },
         "menu_engineering": {
-          "name": "menu engineering"
+          "name": "Menu engineering",
+          "group": "Category"
         }
       },
       "stats": {
@@ -214824,6 +214853,11 @@
           "name": "Format score",
           "unit": "%",
           "better": "higher"
+        },
+        "blendedPricePerMtok": {
+          "name": "Blended price",
+          "unit": "usd-per-mtok",
+          "better": "lower"
         }
       }
     },
@@ -240377,27 +240411,38 @@
       "url": "https://opusmagnumbench.com/",
       "feed": "https://opusmagnumbench.com/data.js?v=b9c4a9c9c58e",
       "terms": "The makers publish the results file. I found no reuse license on the dashboard. https://opusmagnumbench.com/ The host has no published robots directives at /robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
-      "parts": {
+      "stats": {
         "average": {
-          "name": "Reward (avg)"
+          "name": "Mean reward",
+          "unit": "score",
+          "better": "higher"
         },
         "solved": {
-          "name": "Solved (pass@k)"
+          "name": "Puzzles solved",
+          "unit": "count",
+          "better": "higher"
         },
         "steps": {
-          "name": "Avg steps"
+          "name": "Average steps",
+          "unit": "count",
+          "better": "lower"
         },
         "first": {
-          "name": "Steps to first solve"
+          "name": "Steps to first solve",
+          "unit": "count",
+          "better": "lower"
         },
         "final": {
-          "name": "Steps to final solve"
+          "name": "Steps to final solve",
+          "unit": "count",
+          "better": "lower"
         },
         "fail": {
-          "name": "Steps on fail"
+          "name": "Steps on fail",
+          "unit": "count"
         }
       }
     },
@@ -241107,7 +241152,7 @@
       "url": "https://os-world.github.io/",
       "feed": "https://osworld-v1.xlang.ai/static/data/osworld_verified_results.xlsx",
       "terms": "Static file on the OSWorld project site; the OSWorld repository is Apache-2.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 74,
       "unmatched": [
         "Agentic-Lybic-Maestro",
@@ -241163,6 +241208,17 @@
         },
         "vs_code": {
           "name": "VS Code"
+        }
+      },
+      "stats": {
+        "tasks": {
+          "name": "Tasks evaluated",
+          "unit": "count"
+        },
+        "successes": {
+          "name": "Tasks solved",
+          "unit": "count",
+          "better": "higher"
         }
       }
     },
@@ -244088,17 +244144,61 @@
       "url": "https://pcbbench.org/",
       "feed": "https://pcbbench.org/data/pilot.json",
       "terms": "ProtoFlow publishes the PCBBench pilot data on its public benchmark site. https://pcbbench.org/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "parts": {
+        "board": {
+          "name": "Board",
+          "group": "Suite"
+        },
+        "datasheet": {
+          "name": "Datasheet",
+          "group": "Suite"
+        },
+        "debug": {
+          "name": "Debug",
+          "group": "Suite"
+        },
+        "modify": {
+          "name": "Modify",
+          "group": "Suite"
+        },
+        "layout": {
+          "name": "Layout",
+          "group": "Suite"
+        },
+        "library": {
+          "name": "Library",
+          "group": "Suite"
+        },
+        "reason": {
+          "name": "Reason",
+          "group": "Suite"
+        },
+        "review": {
+          "name": "Review",
+          "group": "Suite"
+        },
+        "schematic": {
+          "name": "Schematic",
+          "group": "Suite"
+        },
+        "select": {
+          "name": "Select",
+          "group": "Suite"
+        }
+      },
       "stats": {
         "passedTasks": {
           "name": "Passed tasks",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
-        "validTasks": {
-          "name": "Valid tasks",
-          "unit": "count"
+        "meanWallSeconds": {
+          "name": "Mean wall time per task",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -266604,7 +266704,7 @@
       "url": "https://rotomarena.org/benchmarks/rotom-gen9-bench/",
       "feed": "https://rotomarena.org/benchmarks/rotom-gen9-bench/",
       "terms": "The robots file publishes content signals. RotomArena dedicates its ratings and match data to CC0. Smogon teams and Pokémon assets have separate rights. https://rotomarena.org/credits/",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "Bonsai 2 27B",
@@ -266613,6 +266713,23 @@
         "Ling 3.0 Tiny",
         "Ornith 1.5 35B"
       ],
+      "chart": {
+        "title": "Rating against cost per game",
+        "note": "Anchored Elo rating against cost per game, matching Figure 2 and its Pareto frontier on the Rotom Gen 9 Bench leaderboard.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per game",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Rating",
+          "unit": "elo",
+          "better": "higher"
+        }
+      },
       "stats": {
         "wins": {
           "name": "Wins",
@@ -268524,9 +268641,25 @@
       "url": "https://plex1.github.io/rtlscout-bench/",
       "feed": "https://plex1.github.io/rtlscout-bench/data.js",
       "terms": "Felix Arnold publishes RTL Scout leaderboard data under CC BY 4.0. The GitHub Pages host provides no applicable robots rules.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [],
+      "chart": {
+        "title": "Result vs. cost",
+        "note": "Headroom score across the five circuit designs against mean API cost per design, matching the Result vs. cost Pareto chart on RTLScout.",
+        "x": {
+          "key": "cost",
+          "label": "Mean API cost per design",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "headroom",
+          "label": "Headroom score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "tpu-adp": {
           "name": "logikbench tpu",
@@ -268580,45 +268713,25 @@
           "unit": "%",
           "better": "higher"
         },
-        "tpu-adpTrials": {
-          "name": "TPU trials",
-          "unit": "count"
-        },
         "jpeg-adpReduction": {
           "name": "JPEG cell reduction",
           "unit": "%",
           "better": "higher"
-        },
-        "jpeg-adpTrials": {
-          "name": "JPEG trials",
-          "unit": "count"
         },
         "pdpu-adpReduction": {
           "name": "PDPU cell reduction",
           "unit": "%",
           "better": "higher"
         },
-        "pdpu-adpTrials": {
-          "name": "PDPU trials",
-          "unit": "count"
-        },
         "fpmul-adpReduction": {
           "name": "FPMUL cell reduction",
           "unit": "%",
           "better": "higher"
         },
-        "fpmul-adpTrials": {
-          "name": "FPMUL trials",
-          "unit": "count"
-        },
         "alu-adpReduction": {
           "name": "ALU cell reduction",
           "unit": "%",
           "better": "higher"
-        },
-        "alu-adpTrials": {
-          "name": "ALU trials",
-          "unit": "count"
         }
       }
     },
@@ -275504,9 +275617,25 @@
       "url": "https://senior-swe-bench.snorkel.ai/agents",
       "feed": "https://senior-swe-bench.snorkel.ai/agents (Next.js page payload: leaderboard and agents)",
       "terms": "Data embedded in the public page (robots.txt allows it and disallows only /api/ and /unlock); Snorkel publishes no terms for the site.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "chart": {
+        "title": "Tasteful solve rate vs. cost",
+        "note": "Tasteful solve rate (pass@1) against total token cost per task across reasoning efforts, matching the Pareto frontier chart on Senior SWE-Bench.",
+        "x": {
+          "key": "cost",
+          "label": "Total cost per task",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Tasteful solve rate (pass@1)",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "pass3": {
           "name": "Pass all three",
@@ -285645,7 +285774,7 @@
       "url": "https://tiger-ai-lab.github.io/StructEval/",
       "feed": "https://tiger-ai-lab.github.io/StructEval/static/data/leaderboard.json (metrics.overall)",
       "terms": "JSON file on the StructEval GitHub Pages site that the page loads; the page content is CC BY-SA 4.0.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 28,
       "unmatched": [
         "Gemma 2 9B (Ollama)",
@@ -285654,6 +285783,23 @@
         "Qwen3 8B (Ollama)",
         "Qwen3.5 9B (Ollama)"
       ],
+      "chart": {
+        "title": "Score vs. model size",
+        "note": "Overall score against total parameter count in billions for models with disclosed sizes, matching the model size chart on StructEval.",
+        "x": {
+          "key": "paramsB",
+          "label": "Total parameters",
+          "unit": "B",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "renderable": {
           "name": "Renderable",
@@ -285681,16 +285827,15 @@
         }
       },
       "stats": {
-        "examples": {
-          "name": "Examples",
-          "unit": "count",
-          "note": "Number of evaluation examples in the run."
-        },
         "renderRate": {
           "name": "Render score",
           "unit": "%",
           "better": "higher",
           "note": "Percentage of generated outputs that load or render without syntax errors."
+        },
+        "paramsB": {
+          "name": "Total parameters",
+          "unit": "billions"
         },
         "activeParamsB": {
           "name": "Active parameters",
@@ -285754,6 +285899,24 @@
       "unmatched": [
         "scripted"
       ],
+      "chart": {
+        "title": "Cost vs. performance",
+        "note": "Mean floor reached against mean estimated cost per attempted run, matching the cost versus performance scatter chart on the Slay the Spire Bench report.",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per run",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Mean floor",
+          "unit": "score",
+          "better": "higher"
+        }
+      },
+      "costPer": "run",
       "stats": {
         "wins": {
           "name": "Wins",
@@ -301551,9 +301714,26 @@
       "url": "https://veris.ai/leaderboard/treasuryqa",
       "feed": "https://veris.ai/leaderboard/treasuryqa",
       "terms": "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 12,
       "unmatched": [],
+      "chart": {
+        "title": "Cost vs. questions answered correctly",
+        "note": "Pass@1 against agent cost per task, matching the scatter chart on the Veris TreasuryQA leaderboard.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Pass@1",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "clear": {
           "name": "Clear"
@@ -301564,7 +301744,7 @@
       },
       "stats": {
         "pass3": {
-          "name": "Pass@3",
+          "name": "Pass^3",
           "unit": "%",
           "better": "higher",
           "note": "Percentage of tasks solved on all three repeats."
@@ -309773,13 +309953,29 @@
       "url": "https://veris.ai/leaderboard/vamos",
       "feed": "https://veris.ai/leaderboard/vamos",
       "terms": "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions Veris allows the /leaderboard/ path in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 14,
       "unmatched": [
         "Gemini 2.5 Native Audio",
         "hermes-4-70b",
         "mistral-small"
       ],
+      "chart": {
+        "title": "Cost vs. completed tasks",
+        "note": "Task completion rate against estimated cost per call, matching the scatter chart on the Veris VAmoS leaderboard.",
+        "x": {
+          "key": "cost",
+          "label": "Estimated cost per call",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Task completion",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "harnesses": "system",
       "stats": {
         "connect": {
@@ -309807,7 +310003,7 @@
       "url": "https://veris.ai/leaderboard/vamos-pro",
       "feed": "https://veris.ai/leaderboard/vamos-pro",
       "terms": "Veris reserves all rights. The public terms give no separate permission to reproduce leaderboard tables. https://veris.ai/terms-and-conditions The public leaderboard path is allowed in robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "Dialt Fast",
@@ -309819,6 +310015,23 @@
         "PolyAI Dialog-RSN-1",
         "mistral-medium-2604"
       ],
+      "chart": {
+        "title": "Cost vs. completed tasks",
+        "note": "Task completion rate against mean cost per call, matching the Pareto scatter chart on the Veris VAmoS Pro leaderboard.",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per call",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Task completion",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "harnesses": "system",
       "stats": {
         "latency": {
@@ -320256,9 +320469,26 @@
       "url": "https://website-bench.com/",
       "feed": "https://website-bench.com/ (leaderboard-data JSON)",
       "terms": "The WebsiteBench repository is Apache-2.0. The maker publishes score downloads and embedded JSON, and robots.txt permits the page. Source: WebsiteBench authors.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "chart": {
+        "title": "Overall pass rate vs. mean cost per task",
+        "note": "Overall test pass rate against mean cost per task, matching the Pareto view on WebsiteBench.",
+        "x": {
+          "key": "cost",
+          "label": "Mean cost per task",
+          "unit": "$",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Overall pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "33": {
           "name": "Coursera",
@@ -320560,10 +320790,6 @@
         },
         "turns": {
           "name": "Turns",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         },
         "overall_passed": {
@@ -322291,6 +322517,22 @@
       "retrieved": "2026-11-24",
       "rows": 7,
       "unmatched": [],
+      "chart": {
+        "title": "Cost and performance",
+        "note": "Combined score against reported API cost per question, matching the Cost and performance scatter chart on WildlifeBench.",
+        "x": {
+          "key": "cost",
+          "label": "Cost per question",
+          "unit": "$",
+          "better": "lower"
+        },
+        "y": {
+          "key": "score",
+          "label": "Combined score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "parts": {
         "task1": {
           "name": "Taxonomy"

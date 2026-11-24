@@ -16,6 +16,12 @@ const board: Leaderboard = {
     hallucination: { name: 'Hallucinations', unit: 'count', better: 'lower' },
     tokensPerTurn: { name: 'Tokens per turn', unit: 'tokens' },
   },
+  chart: {
+    title: 'Rating against cost per game',
+    note: 'Anchored Elo rating against cost per game, matching Figure 2 and its Pareto frontier on the Rotom Gen 9 Bench leaderboard.',
+    x: { key: 'cost', label: 'Cost per game', unit: '$', better: 'lower', log: true },
+    y: { key: 'score', label: 'Rating', unit: 'elo', better: 'higher' },
+  },
   async fetch() {
     const page = await fetchText(feed);
     const source = page.match(/<table\b[^>]*>[\s\S]*?Tokens \/ turn[\s\S]*?<\/table>/)?.[0];
