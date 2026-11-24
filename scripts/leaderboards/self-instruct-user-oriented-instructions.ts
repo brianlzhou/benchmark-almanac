@@ -21,6 +21,12 @@ const board: Leaderboard = {
   terms: 'ACL Anthology copyright and licensing terms apply. https://aclanthology.org/info/copyright/',
   aliases: {'Vanilla GPT3': 'gpt-3-175b-davinci', 'InstructGPT 002': 'davinci-002', 'InstructGPT 003': 'davinci-003'},
   headline: 'The score is the percentage of 252 instructions that received an acceptable response (rating A or B).',
+  stats: {
+    ratingA: { name: 'Rating A responses', unit: 'count', better: 'higher', note: 'Valid and satisfying responses out of 252 instructions.' },
+    ratingB: { name: 'Rating B responses', unit: 'count', note: 'Acceptable responses with minor errors or imperfections out of 252 instructions.' },
+    ratingC: { name: 'Rating C responses', unit: 'count', better: 'lower', note: 'Relevant responses with significant errors out of 252 instructions.' },
+    ratingD: { name: 'Rating D responses', unit: 'count', better: 'lower', note: 'Irrelevant or invalid responses out of 252 instructions.' },
+  },
   async fetch() {
     const rows = counts.map(([model, ratingA, ratingB, ratingC, ratingD]) => {
       if (ratingA + ratingB + ratingC + ratingD !== 252) throw new Error('Incomplete ratings for ' + model);

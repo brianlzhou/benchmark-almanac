@@ -43,8 +43,7 @@ const board: Leaderboard = {
           if (!cell) throw new Error('Unexpected score: ' + v);
           const key = prefix + headers[i];
           metrics[key] = Number(cell[1]);
-          if (cell[2]) metrics[key + ' reported uncertainty'] = Number(cell[2]);
-          board.parts![key] = key;
+          if (cell[2]) metrics[key + 'Std'] = Number(cell[2]);
         });
         results.set(model, metrics);
       }

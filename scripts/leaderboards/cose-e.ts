@@ -6,7 +6,18 @@ import { pdfText } from '../lib/boards/pdf-text.ts';
 import { checked } from '../lib/boards/arxiv-span-tables.ts';
 const feed = 'https://aclanthology.org/2026.salma-1.11.pdf';
 const pairs = ['ES/EN','FR/EN','FR-CA/EN','DE/EN','ZH/EN'];
-const parts: Record<string,BoardPart> = {};
+const MEASURE_LABELS: Record<string, string> = {
+  WER: 'word error rate',
+  CER: 'character error rate',
+  SWER: 'semantic word error rate',
+  AER: 'answer error rate',
+};
+const parts: Record<string,BoardPart> = Object.fromEntries(
+  pairs.flatMap(p => (p === 'ZH/EN' ? ['WER','CER','SWER','AER'] : ['WER','SWER','AER']).map(measure => [
+    p.replace(/[^A-Z]/g,'') + measure,
+    { name: p + ' ' + MEASURE_LABELS[measure], group: measure, better: 'lower' as const, unit: '%' as const },
+  ])),
+);
 const board: Leaderboard = {
   benchmark:'cose-e', url:'https://aclanthology.org/2026.salma-1.11/', feed, static:'paper', parts,
   headline:'The paper gives no overall score, so this is the plain mean of answer error rates across five language pairs.',
@@ -32,7 +43,6 @@ const board: Leaderboard = {
           const s = cells[offset++];
           if (!/^\d*\.\d+$/.test(s)) throw new Error('Invalid ' + key);
           metrics[key] = Number(s) * 100;
-          parts[key] = {name:p + ' ' + measure, group:measure, better:'lower', unit:'%'};
           if (measure === 'AER') sum += metrics[key];
         }
       }
