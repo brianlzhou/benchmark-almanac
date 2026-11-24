@@ -303,6 +303,7 @@
     "robodojo-rc-tier-1": [{"field":"log","kind":"link","why":"not stored","share":1,"sample":"https://runs.robocurve.org/roboharm-3fce38b5/logs/omen-2_rig"}],
     "robodx": [{"field":"cost","kind":"cost","why":"not stored","share":1}],
     "roboteam": [{"field":"RoboTeam (ours)","kind":"submitter or agent maker","why":"not stored","share":1},{"field":"Runs with entries","kind":"trials","why":"not stored","share":1}],
+    "rollercoastertycoonbench": [{"field":"Keeps its pick at a higher price","kind":"cost","why":"new"}],
     "rsi-arena": [{"field":"Agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Weights","kind":"open weights, license or size","why":"not stored","share":1}],
     "rsi-control-arena": [{"field":"Agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Attack agent","kind":"harness or agent","why":"not stored","share":1},{"field":"Transcript","kind":"link","why":"not stored","share":1},{"field":"Hidden reasoning step","kind":"time, latency or steps","why":"not stored","share":1}],
     "rvg-bench": [{"field":"M-Step","kind":"time, latency or steps","why":"not stored","share":1},{"field":"S-Step","kind":"time, latency or steps","why":"not stored","share":1}],

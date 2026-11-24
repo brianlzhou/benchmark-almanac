@@ -2,7 +2,7 @@
 // public tasks the authors rebuilt. Vals AI runs the official board. Read with the shared Vals reader: accuracy with
 // its interval, cost per test, latency and output tokens where the page gives them.
 import type { Leaderboard } from './types.ts';
-import { valsRows, valsPage, VALS_TERMS, VALS_ALIASES } from './vals-index.ts';
+import { valsRows, valsPage, VALS_LATENCY_CHART, VALS_STATS, VALS_TERMS, VALS_ALIASES } from './vals-index.ts';
 
 const SLUG = 'swebench-multimodal';
 const board: Leaderboard = {
@@ -10,7 +10,8 @@ const board: Leaderboard = {
   url: valsPage(SLUG),
   feed: `${valsPage(SLUG)} (the page's results table, through the shared Vals reader)`,
   terms: VALS_TERMS,
-  stats: { latency: { name: 'Latency', unit: 'seconds', better: 'lower' } },
+  stats: VALS_STATS,
+  chart: VALS_LATENCY_CHART,
   aliases: VALS_ALIASES,
   async fetch() {
     const rows = await valsRows(SLUG);

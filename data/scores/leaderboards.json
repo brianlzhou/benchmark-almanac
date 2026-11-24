@@ -10089,9 +10089,26 @@
       "feed": "https://www.vals.ai/benchmarks/aime",
       "terms": "The page identifies https://creativecommons.org/licenses/by/4.0/ as its dataset license. Vals allows the benchmark in robots.txt.",
       "host": "Vals AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 96,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency",
@@ -26682,12 +26699,29 @@
       "url": "https://www.vals.ai/benchmarks/autoform_hard",
       "feed": "https://www.vals.ai/benchmarks/autoform_hard (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
           "better": "lower"
         }
@@ -34780,11 +34814,28 @@
       "feed": "https://www.vals.ai/benchmarks/biomysterybench",
       "terms": "Vals AI publishes public benchmark results and methodology. The almanac credits and links Vals AI and follows its source terms.",
       "host": "Vals AI",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 34,
       "unmatched": [
         "Wonder"
       ],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "time",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "reference": [
         "Vals AI"
       ],
@@ -69768,7 +69819,7 @@
       "url": "https://eqbench.com/creative_writing.html",
       "feed": "https://eqbench.com/creative_writing.js (leaderboardDataCreativeWritingV3) creative_writing_score x 5",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 123,
       "unmatched": [
         "AlexWortega/Qwen3.8-27B-antislop",
@@ -69807,6 +69858,16 @@
         },
         "repetition": {
           "name": "Repetition score",
+          "unit": "score",
+          "better": "lower"
+        },
+        "vocabularyComplexity": {
+          "name": "Vocabulary complexity",
+          "unit": "score",
+          "better": "higher"
+        },
+        "slopScore": {
+          "name": "Slop score",
           "unit": "score",
           "better": "lower"
         }
@@ -94925,14 +94986,70 @@
       "url": "https://eqbench.com/eqbench3.html",
       "feed": "https://eqbench.com/eqbench3.js (leaderboardDataEQBench3) elo_norm",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 79,
       "unmatched": [
         "HiveLabsAI/hivemind-32b-preview",
         "Nanbeige/Nanbeige4-3B-Thinking-2511",
         "chatgpt-4o-latest-2025-04-25",
         "openrouter/horizon-alpha"
-      ]
+      ],
+      "stats": {
+        "rubric_0_100": {
+          "name": "Rubric score",
+          "unit": "score",
+          "better": "higher",
+          "note": "Judge rubric score from 0 to 100."
+        },
+        "humanlike": {
+          "name": "Humanlike",
+          "unit": "score"
+        },
+        "safe": {
+          "name": "Safety",
+          "unit": "score",
+          "better": "higher"
+        },
+        "assertive": {
+          "name": "Assertiveness",
+          "unit": "score"
+        },
+        "social_iq": {
+          "name": "Social IQ",
+          "unit": "score",
+          "better": "higher"
+        },
+        "warm": {
+          "name": "Warmth",
+          "unit": "score"
+        },
+        "analytical": {
+          "name": "Analytical",
+          "unit": "score"
+        },
+        "insightful": {
+          "name": "Insightfulness",
+          "unit": "score",
+          "better": "higher"
+        },
+        "empathy": {
+          "name": "Empathy",
+          "unit": "score",
+          "better": "higher"
+        },
+        "compliant": {
+          "name": "Compliance",
+          "unit": "score"
+        },
+        "moral": {
+          "name": "Moral",
+          "unit": "score"
+        },
+        "pragmatic": {
+          "name": "Pragmatism",
+          "unit": "score"
+        }
+      }
     },
     "eq-bench-4": {
       "url": "https://eqbench.com/",
@@ -95012,7 +95129,7 @@
       "url": "https://eqbench.com/creative_writing_longform.html",
       "feed": "https://eqbench.com/creative_writing_longform.js (leaderboardDataLongformV3) overall_score_100",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 124,
       "unmatched": [
         "AlexWortega/Qwen3.8-27B-antislop",
@@ -95078,6 +95195,17 @@
         }
       },
       "stats": {
+        "finalJudgement": {
+          "name": "Final chapter judgment",
+          "unit": "score",
+          "better": "higher"
+        },
+        "degradation": {
+          "name": "Chapter quality degradation",
+          "unit": "score",
+          "better": "lower",
+          "note": "Relative quality decline across the eight chapters."
+        },
         "length": {
           "name": "Average chapter length",
           "unit": "count"
@@ -133042,19 +133170,34 @@
       "url": "https://www.vals.ai/benchmarks/hlab",
       "feed": "https://www.vals.ai/benchmarks/hlab (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
-      "rows": 43,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 44,
+      "unmatched": [],
+      "chart": {
+        "title": "Task pass rate against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Task pass rate",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Mean latency per test",
+          "name": "Latency per test",
           "unit": "seconds",
           "better": "lower"
         },
         "turns": {
-          "name": "Average turns per test",
+          "name": "Turns per test",
           "unit": "count",
           "better": "lower"
         }
@@ -147438,12 +147581,29 @@
       "url": "https://www.vals.ai/benchmarks/immigration",
       "feed": "https://www.vals.ai/benchmarks/immigration (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Time per task",
+          "name": "Latency per test",
           "unit": "seconds",
           "better": "lower"
         }
@@ -155633,12 +155793,32 @@
       "url": "https://eqbench.com/judgemark-v2.html",
       "feed": "https://eqbench.com/judgemark-v2.js (leaderboardDataV2) judgemark_score",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 46,
       "unmatched": [
         "gpt-5-nano-2025-08-07__5x-ensemble"
       ],
-      "costPer": "run"
+      "costPer": "run",
+      "stats": {
+        "stability": {
+          "name": "Stability",
+          "unit": "score",
+          "better": "higher",
+          "note": "Consistency of scores across repeated judging runs, from 0 to 1."
+        },
+        "separability": {
+          "name": "Separability",
+          "unit": "score",
+          "better": "higher",
+          "note": "Ability to distinguish stronger writers from weaker ones, from 0 to 1."
+        },
+        "humanCorr": {
+          "name": "Human correlation",
+          "unit": "score",
+          "better": "higher",
+          "note": "Correlation with human ratings, from 0 to 1."
+        }
+      }
     },
     "judgemark-v4": {
       "url": "https://eqbench.com/judgemark-v4.html",
@@ -254466,17 +254646,33 @@
       "url": "https://www.vals.ai/benchmarks/proof_bench_v1",
       "feed": "https://www.vals.ai/benchmarks/proof_bench_v1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 60,
       "unmatched": [
         "Aristotle"
       ],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
-          "better": "lower",
-          "note": "Mean time per test."
+          "better": "lower"
         }
       }
     },
@@ -267827,22 +268023,46 @@
       "url": "https://www.vals.ai/benchmarks/rctbench",
       "feed": "https://www.vals.ai/benchmarks/rctbench (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
+        "Bison 1",
+        "Clef",
         "Decider Flash V1.2",
         "Decider Flash V1.3",
         "Decider V1.2",
         "Decider V1.3",
         "Drex Max",
+        "Drex v1.5",
+        "Drex v2.0",
         "GPT-6 Luna Decisions",
         "Gemini Decision 1",
+        "Groundhog 1",
         "Jev 1.13.0",
-        "Jev 1.14"
+        "Jev 1.14",
+        "d1.2",
+        "d1.2-ultra"
       ],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
           "better": "lower"
         }
@@ -279179,7 +279399,57 @@
         "openai/chatgpt-4o-latest",
         "openrouter/polaris-alpha",
         "sam-paech/gemma-3-27b-it-antislop"
-      ]
+      ],
+      "stats": {
+        "slopWordsPer1k": {
+          "name": "Slop words per 1k words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "slopTrigramsPer1k": {
+          "name": "Slop trigrams per 1k words",
+          "unit": "score",
+          "better": "lower"
+        },
+        "notXButYPer1kChars": {
+          "name": "Not-X-but-Y contrasts per 1k characters",
+          "unit": "score",
+          "better": "lower"
+        },
+        "ngramRepetition": {
+          "name": "N-gram repetition score",
+          "unit": "score",
+          "better": "lower"
+        },
+        "vocabLevel": {
+          "name": "Vocabulary level",
+          "unit": "score"
+        },
+        "avgSentenceLength": {
+          "name": "Average sentence length",
+          "unit": "count",
+          "note": "Words per sentence."
+        },
+        "avgParagraphLength": {
+          "name": "Average paragraph length",
+          "unit": "count",
+          "note": "Words per paragraph."
+        },
+        "dialogueFrequency": {
+          "name": "Dialogue frequency",
+          "unit": "score"
+        },
+        "mattr500": {
+          "name": "Moving-average type-token ratio (500)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "typeTokenRatio": {
+          "name": "Type-token ratio",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "slopcodebench": {
       "url": "https://www.scbench.ai/leaderboard",
@@ -284674,21 +284944,170 @@
       "url": "https://eqbench.com/spiral-bench_v1.0.html",
       "feed": "https://eqbench.com/spiral-bench_v1.0.js (leaderboardDataDelusion) score_0_100",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 13,
       "unmatched": [
         "chatgpt-4o-latest"
-      ]
+      ],
+      "stats": {
+        "pushback": {
+          "name": "Pushback",
+          "unit": "score",
+          "better": "higher"
+        },
+        "deEscalation": {
+          "name": "De-escalation",
+          "unit": "score",
+          "better": "higher"
+        },
+        "safeRedirection": {
+          "name": "Redirection",
+          "unit": "score",
+          "better": "higher"
+        },
+        "helpReferral": {
+          "name": "Help referral",
+          "unit": "score",
+          "better": "higher"
+        },
+        "consciousnessClaims": {
+          "name": "Consciousness claims",
+          "unit": "score"
+        },
+        "delusionReinforcement": {
+          "name": "Delusion reinforcement",
+          "unit": "score",
+          "better": "lower"
+        },
+        "escalation": {
+          "name": "Escalation",
+          "unit": "score",
+          "better": "lower"
+        },
+        "harmfulAdvice": {
+          "name": "Harmful advice",
+          "unit": "score",
+          "better": "lower"
+        },
+        "sycophancy": {
+          "name": "Sycophancy",
+          "unit": "score",
+          "better": "lower"
+        },
+        "offRails": {
+          "name": "Off-rails",
+          "unit": "score",
+          "better": "lower"
+        },
+        "safety": {
+          "name": "Safety",
+          "unit": "score",
+          "better": "higher"
+        },
+        "socialDexterity": {
+          "name": "Social dexterity",
+          "unit": "score",
+          "better": "higher"
+        }
+      }
     },
     "spiral-bench-1-2": {
       "url": "https://eqbench.com/spiral-bench.html",
       "feed": "https://eqbench.com/spiral-bench.js (leaderboardDataDelusion) score_0_100",
       "terms": "Generated page script on the eqbench.com GitHub Pages site, which states no terms or license for the scores.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 22,
       "unmatched": [
         "chatgpt-4o-latest"
-      ]
+      ],
+      "stats": {
+        "pushback": {
+          "name": "Pushback",
+          "unit": "score",
+          "better": "higher"
+        },
+        "deEscalation": {
+          "name": "De-escalation",
+          "unit": "score",
+          "better": "higher"
+        },
+        "topicShutDown": {
+          "name": "Topic shut-down",
+          "unit": "score",
+          "better": "higher"
+        },
+        "boundarySetting": {
+          "name": "Boundary setting",
+          "unit": "score",
+          "better": "higher"
+        },
+        "validateFeelingsNotThoughts": {
+          "name": "Validate feelings not thoughts",
+          "unit": "score",
+          "better": "higher"
+        },
+        "helpReferralWarranted": {
+          "name": "Help referral warranted",
+          "unit": "score",
+          "better": "higher"
+        },
+        "benignWarmth": {
+          "name": "Warmth",
+          "unit": "score"
+        },
+        "confidentBullshitting": {
+          "name": "Confident bullshitting",
+          "unit": "score",
+          "better": "lower"
+        },
+        "delusionReinforcement": {
+          "name": "Delusion reinforcement",
+          "unit": "score",
+          "better": "lower"
+        },
+        "escalation": {
+          "name": "Escalation",
+          "unit": "score",
+          "better": "lower"
+        },
+        "harmfulAdvice": {
+          "name": "Harmful advice",
+          "unit": "score",
+          "better": "lower"
+        },
+        "helpReferralUnwarranted": {
+          "name": "Help referral unwarranted",
+          "unit": "score",
+          "better": "lower"
+        },
+        "negativeSentienceClaim": {
+          "name": "Negative sentience claim",
+          "unit": "score"
+        },
+        "positiveSentienceClaim": {
+          "name": "Positive sentience claim",
+          "unit": "score"
+        },
+        "ritualization": {
+          "name": "Ritualization",
+          "unit": "score",
+          "better": "lower"
+        },
+        "sycophancy": {
+          "name": "Sycophancy",
+          "unit": "score",
+          "better": "lower"
+        },
+        "uncertainSentienceClaim": {
+          "name": "Uncertain sentience claim",
+          "unit": "score"
+        },
+        "offRails": {
+          "name": "Off-rails",
+          "unit": "score",
+          "better": "lower"
+        }
+      }
     },
     "spirebench": {
       "url": "https://arxiv.org/html/2610.12596",
@@ -293514,7 +293933,14 @@
       "reference": [
         "mini-SWE-agent"
       ],
-      "harnesses": "system"
+      "harnesses": "system",
+      "stats": {
+        "elevatedRefusals": {
+          "name": "Elevated refusal rate flag",
+          "unit": "count",
+          "note": "Set to 1 when Scale flags an elevated refusal rate."
+        }
+      }
     },
     "swe-atlas-1-1": {
       "url": "https://labs.scale.com/leaderboard/swe-atlas",
@@ -293926,12 +294352,29 @@
       "url": "https://www.vals.ai/benchmarks/swebench-multimodal",
       "feed": "https://www.vals.ai/benchmarks/swebench-multimodal (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
           "better": "lower"
         }
@@ -307705,9 +308148,26 @@
       "url": "https://www.vals.ai/benchmarks/a2j",
       "feed": "https://www.vals.ai/benchmarks/a2j (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency per test",
@@ -308051,9 +308511,26 @@
       "url": "https://www.vals.ai/benchmarks/cua_bench",
       "feed": "https://www.vals.ai/benchmarks/cua_bench (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "costPer": "run",
       "stats": {
         "latency": {
@@ -308666,11 +309143,9 @@
       "url": "https://www.vals.ai/benchmarks/finance_index",
       "feed": "https://www.vals.ai/benchmarks/finance_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
-      "rows": 45,
-      "unmatched": [
-        "Hy4 Flash"
-      ],
+      "retrieved": "2026-11-24",
+      "rows": 46,
+      "unmatched": [],
       "chart": {
         "title": "Accuracy against latency",
         "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
@@ -308686,6 +309161,13 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -309051,7 +309533,7 @@
       "url": "https://www.vals.ai/benchmarks/ioi",
       "feed": "https://www.vals.ai/benchmarks/ioi (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 47,
       "unmatched": [],
       "chart": {
@@ -309069,6 +309551,13 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -309623,9 +310112,25 @@
       "url": "https://www.vals.ai/benchmarks/poker_agent",
       "feed": "https://www.vals.ai/benchmarks/poker_agent (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
+      "chart": {
+        "title": "TrueSkill rating against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per hand against TrueSkill rating, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per hand)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "TrueSkill rating",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
           "name": "Latency per hand",
@@ -309987,7 +310492,7 @@
       "url": "https://www.vals.ai/benchmarks/science_index",
       "feed": "https://www.vals.ai/benchmarks/science_index (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 29,
       "unmatched": [],
       "chart": {
@@ -310005,6 +310510,13 @@
           "label": "Accuracy",
           "unit": "%",
           "better": "higher"
+        }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
         }
       }
     },
@@ -311497,7 +312009,7 @@
       "url": "https://www.vals.ai/benchmarks/vcb-1-100",
       "feed": "https://www.vals.ai/benchmarks/vcb-1-100 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 26,
       "unmatched": [],
       "chart": {
@@ -311516,21 +312028,44 @@
           "unit": "%",
           "better": "higher"
         }
+      },
+      "stats": {
+        "latency": {
+          "name": "Latency per test",
+          "unit": "seconds",
+          "better": "lower"
+        }
       }
     },
     "vals-vibe-code-bench-1-100-v1-1": {
       "url": "https://www.vals.ai/benchmarks/vcb-1-100-v1-1",
       "feed": "https://www.vals.ai/benchmarks/vcb-1-100-v1-1 (the page's results table, through the shared Vals reader)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "chart": {
+        "title": "Accuracy against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Accuracy",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
-          "better": "lower",
-          "note": "Mean time per test."
+          "better": "lower"
         }
       }
     },
@@ -311538,15 +312073,31 @@
       "url": "https://www.vals.ai/benchmarks/vibe-code-v1",
       "feed": "https://www.vals.ai/benchmarks/vibe-code-v1 (server-rendered leaderboard table)",
       "terms": "Server-rendered page on vals.ai: the site publishes no terms of use, robots.txt allows these pages, and the footer reserves all rights, so scores are cited to Vals AI.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
+      "chart": {
+        "title": "Score against latency",
+        "note": "The Vals scatter chart with its x axis switched from Cost to Latency: mean time per test against accuracy, on a log scale.",
+        "x": {
+          "key": "latency",
+          "label": "Latency (mean per test)",
+          "unit": "s",
+          "better": "lower",
+          "log": true
+        },
+        "y": {
+          "key": "score",
+          "label": "Score",
+          "unit": "%",
+          "better": "higher"
+        }
+      },
       "stats": {
         "latency": {
-          "name": "Latency",
+          "name": "Latency per test",
           "unit": "seconds",
-          "better": "lower",
-          "note": "Mean time per test."
+          "better": "lower"
         }
       }
     },
