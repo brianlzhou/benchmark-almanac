@@ -294,6 +294,7 @@
     "reasoning-judge-bench": [{"field":"Avg. tokens","kind":"tokens","why":"not stored","share":1}],
     "reasonseg": [{"field":"# data samples","kind":"trials","why":"not stored","share":1}],
     "recode-h": [{"field":"Avg. API Cost($)","kind":"cost","why":"not stored","share":1},{"field":"Avg. Input Tokens","kind":"tokens","why":"not stored","share":1},{"field":"Avg. Output Tokens","kind":"tokens","why":"not stored","share":1}],
+    "recreationbench": [{"field":"max_output_tokens","kind":"tokens","why":"not stored","share":1,"sample":"128k"}],
     "relate-audio-text": [{"field":"Audio duration [s]","kind":"time, latency or steps","why":"not stored","share":1}],
     "research-decision-benchmark": [{"field":"95% CI","kind":"uncertainty","why":"not stored","share":1}],
     "research-plan-generation-meta": [{"field":"COST AND EFFORT EFFICIENT (Agr/Kappa)","kind":"cost","why":"not stored","share":1},{"field":"Stopping Step","kind":"time, latency or steps","why":"not stored","share":1},{"field":"Total Samples","kind":"trials","why":"not stored","share":1}],

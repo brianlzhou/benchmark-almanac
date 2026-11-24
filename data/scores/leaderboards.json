@@ -208545,17 +208545,14 @@
       "url": "https://navitallabs.com/labs/navital-gym/leaderboard",
       "feed": "https://navitallabs.com/labs/navital-gym/leaderboard",
       "terms": "Public leaderboard from Navital Labs with links to each published run.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "stats": {
         "solved": {
           "name": "Solved tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks tried",
-          "unit": "count"
+          "unit": "count",
+          "better": "higher"
         },
         "strictPass1": {
           "name": "Strict pass@1",
@@ -208566,6 +208563,11 @@
           "name": "Pass rate across all tasks",
           "unit": "%",
           "better": "higher"
+        },
+        "errorRate": {
+          "name": "Error rate",
+          "unit": "%",
+          "better": "lower"
         },
         "badFormatRate": {
           "name": "Bad-format rate",
@@ -243740,8 +243742,8 @@
     "pantograph-frontier-llm-robot-benchmark-pandroid": {
       "url": "https://pantograph.com/journal/vlm-harness",
       "feed": "https://pantograph.com/journal/vlm-harness",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
       "rows": 2,
       "unmatched": [],
       "parts": {
@@ -243777,6 +243779,13 @@
           "name": "Stack blocks",
           "group": "Task type"
         }
+      },
+      "stats": {
+        "successes": {
+          "name": "Successful trials",
+          "unit": "count",
+          "better": "higher"
+        }
       }
     },
     "paperbench": {
@@ -243802,7 +243811,7 @@
       "url": "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md",
       "feed": "https://raw.githubusercontent.com/openai/frontier-evals/main/project/paperbench/README.md",
       "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": []
     },
@@ -249707,12 +249716,12 @@
       "url": "https://arxiv.org/html/2606.22388",
       "feed": "https://arxiv.org/html/2606.22388",
       "terms": "Public author results read with the Almanac user agent. Attribution and source licensing apply.",
-      "retrieved": "2026-11-19",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [
         "Llama-3.1-8B-Instruct"
       ],
-      "static": "paper",
       "stats": {
         "egtPrecision": {
           "name": "Executed ground-truth datatype precision",
@@ -249740,6 +249749,12 @@
           "unit": "%",
           "better": "lower",
           "note": "Fraction of structurally or procedurally invalid tool calls."
+        },
+        "uirr": {
+          "name": "Untrusted input rejection rate",
+          "unit": "%",
+          "better": "lower",
+          "note": "Fraction of attempted tool calls rejected because an argument came from a noisy tool response."
         }
       }
     },
@@ -252016,7 +252031,7 @@
       "url": "https://kingstonyip.com/portal2bench",
       "feed": "https://kingstonyip.com/portal2bench",
       "terms": "The maker's results page gives no reuse license. robots.txt allows the feed path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
       "stats": {
@@ -252028,6 +252043,15 @@
           "name": "Tiebreak score",
           "unit": "score",
           "better": "higher"
+        },
+        "fullGameSolved": {
+          "name": "Full-game chambers solved",
+          "unit": "count",
+          "better": "higher"
+        },
+        "fullGameAttempted": {
+          "name": "Full-game chambers attempted",
+          "unit": "count"
         }
       }
     },
@@ -258707,7 +258731,8 @@
       "url": "https://arxiv.org/abs/2107.09609",
       "feed": "https://arxiv.org/html/2107.09609",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "CAL",
@@ -258717,7 +258742,6 @@
         "XML",
         "XML+"
       ],
-      "static": "paper",
       "stats": {
         "r1IoU07": {
           "name": "Recall at one IoU 0.7",
@@ -260493,44 +260517,39 @@
       }
     },
     "realbench-verilog": {
-      "url": "https://arxiv.org/html/2507.16200",
-      "feed": "https://arxiv.org/html/2507.16200",
-      "terms": "The paper uses CC BY-NC-SA 4.0. https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "url": "https://arxiv.org/abs/2507.16200",
+      "feed": "https://arxiv.org/pdf/2507.16200",
+      "terms": "The authors publish the results in the arXiv paper. https://arxiv.org/abs/2507.16200",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 3,
       "unmatched": [
-        "CodeV-QW-7B",
-        "DS-R1-671B",
-        "DS-V3-671B",
+        "DeepSeek-R1-671B",
+        "DeepSeek-V3-671B",
         "GPT-4-Turbo (snapshot unspecified)",
         "GPT-4o (snapshot unspecified)",
+        "GPT-4o-V",
+        "QW-7B",
         "RTLCoder-DS-6.7B"
       ],
       "parts": {
-        "moduleSyntax": {
-          "name": "Module syntax pass@1"
+        "syntaxAt1": {
+          "name": "Syntax pass@1"
         },
-        "moduleSyntaxAt5": {
-          "name": "Module syntax pass@5"
+        "syntaxAt5": {
+          "name": "Syntax pass@5"
         },
-        "moduleFunction": {
-          "name": "Module functional pass@1"
+        "funcAt1": {
+          "name": "Functional pass@1"
         },
-        "moduleFunctionAt5": {
-          "name": "Module functional pass@5"
+        "funcAt5": {
+          "name": "Functional pass@5"
         },
-        "moduleFormal": {
-          "name": "Module formal pass@1"
+        "formalAt1": {
+          "name": "Formal pass@1"
         },
-        "moduleFormalAt5": {
-          "name": "Module formal pass@5"
-        },
-        "systemSyntax": {
-          "name": "System syntax pass@1"
-        },
-        "systemSyntaxAt5": {
-          "name": "System syntax pass@5"
+        "formalAt5": {
+          "name": "Formal pass@5"
         }
       }
     },
@@ -261370,8 +261389,8 @@
     "recreationbench": {
       "url": "https://recreation-bench.cc/#leaderboard",
       "feed": "https://recreation-bench.cc/data/leaderboard.json (overall.average)",
-      "terms": "JSON file the recreation-bench.cc page loads; the site publishes no robots.txt and no terms, and the results come from the RecreationWorld paper repository.",
-      "retrieved": "2026-11-23",
+      "terms": "JSON file the recreation-bench.cc page loads. The site publishes no robots.txt and no terms, and the results come from the RecreationWorld paper repository.",
+      "retrieved": "2026-11-24",
       "rows": 10,
       "unmatched": [],
       "chart": {
@@ -261398,7 +261417,7 @@
           "name": "VLM judge"
         },
         "linux": {
-          "name": "Ubuntu",
+          "name": "Linux",
           "group": "Platform"
         },
         "macos": {
@@ -261524,13 +261543,10 @@
           "unit": "%",
           "better": "higher"
         },
-        "contextWindow": {
-          "name": "Context window",
-          "unit": "tokens"
-        },
-        "maxOutputTokens": {
-          "name": "Maximum output tokens",
-          "unit": "tokens"
+        "webProgEq100": {
+          "name": "Web programmatic score equal to 100",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -276839,7 +276855,7 @@
       "feed": "https://propaganda.math.unipd.it/semeval2023task3/SemEval2023testleaderboard.html",
       "terms": "Official public SemEval standings at https://propaganda.math.unipd.it/semeval2023task3/SemEval2023testleaderboard.html",
       "headline": "The organizers report no overall score. This is the plain mean of the official F1 measures for 27 language and subtask pairs.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "XLM, mBERT and LaBSE ensemble",
@@ -276847,85 +276863,249 @@
       ],
       "parts": {
         "English: Subtask 1": {
-          "name": "English: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "English"
         },
         "English: Subtask 2": {
-          "name": "English: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "English"
         },
         "English: Subtask 3": {
-          "name": "English: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "English"
         },
         "Italian: Subtask 1": {
-          "name": "Italian: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "Italian"
         },
         "Italian: Subtask 2": {
-          "name": "Italian: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "Italian"
         },
         "Italian: Subtask 3": {
-          "name": "Italian: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "Italian"
         },
         "Russian: Subtask 1": {
-          "name": "Russian: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "Russian"
         },
         "Russian: Subtask 2": {
-          "name": "Russian: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "Russian"
         },
         "Russian: Subtask 3": {
-          "name": "Russian: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "Russian"
         },
         "French: Subtask 1": {
-          "name": "French: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "French"
         },
         "French: Subtask 2": {
-          "name": "French: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "French"
         },
         "French: Subtask 3": {
-          "name": "French: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "French"
         },
         "German: Subtask 1": {
-          "name": "German: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "German"
         },
         "German: Subtask 2": {
-          "name": "German: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "German"
         },
         "German: Subtask 3": {
-          "name": "German: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "German"
         },
         "Polish: Subtask 1": {
-          "name": "Polish: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "Polish"
         },
         "Polish: Subtask 2": {
-          "name": "Polish: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "Polish"
         },
         "Polish: Subtask 3": {
-          "name": "Polish: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "Polish"
         },
         "Spanish: Subtask 1": {
-          "name": "Spanish: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "Spanish"
         },
         "Spanish: Subtask 2": {
-          "name": "Spanish: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "Spanish"
         },
         "Spanish: Subtask 3": {
-          "name": "Spanish: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "Spanish"
         },
         "Greek: Subtask 1": {
-          "name": "Greek: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "Greek"
         },
         "Greek: Subtask 2": {
-          "name": "Greek: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "Greek"
         },
         "Greek: Subtask 3": {
-          "name": "Greek: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "Greek"
         },
         "Georgian: Subtask 1": {
-          "name": "Georgian: Subtask 1 (F1 macro)"
+          "name": "Subtask 1 (F1 macro)",
+          "group": "Georgian"
         },
         "Georgian: Subtask 2": {
-          "name": "Georgian: Subtask 2 (F1 micro)"
+          "name": "Subtask 2 (F1 micro)",
+          "group": "Georgian"
         },
         "Georgian: Subtask 3": {
-          "name": "Georgian: Subtask 3 (F1 micro)"
+          "name": "Subtask 3 (F1 micro)",
+          "group": "Georgian"
+        }
+      },
+      "stats": {
+        "English: Subtask 1 (F1 micro)": {
+          "name": "English Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "English: Subtask 2 (F1 macro)": {
+          "name": "English Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "English: Subtask 3 (F1 macro)": {
+          "name": "English Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Italian: Subtask 1 (F1 micro)": {
+          "name": "Italian Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Italian: Subtask 2 (F1 macro)": {
+          "name": "Italian Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Italian: Subtask 3 (F1 macro)": {
+          "name": "Italian Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Russian: Subtask 1 (F1 micro)": {
+          "name": "Russian Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Russian: Subtask 2 (F1 macro)": {
+          "name": "Russian Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Russian: Subtask 3 (F1 macro)": {
+          "name": "Russian Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "French: Subtask 1 (F1 micro)": {
+          "name": "French Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "French: Subtask 2 (F1 macro)": {
+          "name": "French Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "French: Subtask 3 (F1 macro)": {
+          "name": "French Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "German: Subtask 1 (F1 micro)": {
+          "name": "German Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "German: Subtask 2 (F1 macro)": {
+          "name": "German Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "German: Subtask 3 (F1 macro)": {
+          "name": "German Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Polish: Subtask 1 (F1 micro)": {
+          "name": "Polish Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Polish: Subtask 2 (F1 macro)": {
+          "name": "Polish Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Polish: Subtask 3 (F1 macro)": {
+          "name": "Polish Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Spanish: Subtask 1 (F1 micro)": {
+          "name": "Spanish Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Spanish: Subtask 2 (F1 macro)": {
+          "name": "Spanish Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Spanish: Subtask 3 (F1 macro)": {
+          "name": "Spanish Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Greek: Subtask 1 (F1 micro)": {
+          "name": "Greek Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Greek: Subtask 2 (F1 macro)": {
+          "name": "Greek Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Greek: Subtask 3 (F1 macro)": {
+          "name": "Greek Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Georgian: Subtask 1 (F1 micro)": {
+          "name": "Georgian Subtask 1 (F1 micro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Georgian: Subtask 2 (F1 macro)": {
+          "name": "Georgian Subtask 2 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
+        },
+        "Georgian: Subtask 3 (F1 macro)": {
+          "name": "Georgian Subtask 3 (F1 macro)",
+          "unit": "score",
+          "better": "higher"
         }
       }
     },
@@ -283007,7 +283187,7 @@
       "url": "https://sparc.gipplab.org/#leaderboard",
       "feed": "https://raw.githubusercontent.com/lkaesberg/SPaRC/main/leaderboard/results.json",
       "terms": "The project uses MIT. https://github.com/lkaesberg/SPaRC/blob/main/LICENSE",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 23,
       "unmatched": [
         "Magistral Small",
@@ -284970,7 +285150,7 @@
       "url": "https://www.spirebench.com/blog/trial-v0-results",
       "feed": "https://www.spirebench.com/blog/trial-v0-results",
       "terms": "The repository includes an MIT license. https://github.com/hiKareeem/ClaudePlaysTheSpire/blob/main/LICENSE The feed host returns no robots.txt.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 5,
       "unmatched": [],
       "stats": {
@@ -296602,96 +296782,37 @@
     "t2i-nsi": {
       "url": "https://arxiv.org/html/2611.09304",
       "feed": "https://arxiv.org/html/2611.09304",
-      "terms": "The authors publish these tables under the license on the arXiv record. https://arxiv.org/abs/2611.09304",
+      "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-20",
-      "rows": 6,
+      "retrieved": "2026-11-24",
+      "rows": 2,
       "unmatched": [
+        "FLUX.2",
         "SD 3.5"
       ],
-      "parts": {
-        "lex.": {
-          "name": "lex.",
-          "group": "Form"
-        },
-        "morph.": {
-          "name": "morph.",
-          "group": "Form"
-        },
-        "syn.": {
-          "name": "syn.",
-          "group": "Form"
-        },
-        "L0 (obj)": {
-          "name": "L0 (obj)",
-          "group": "Complexity level"
-        },
-        "L1 (attr)": {
-          "name": "L1 (attr)",
-          "group": "Complexity level"
-        },
-        "L2 (rel)": {
-          "name": "L2 (rel)",
-          "group": "Complexity level"
-        },
-        "L3 (comp)": {
-          "name": "L3 (comp)",
-          "group": "Complexity level"
-        },
-        "L4 (nest)": {
-          "name": "L4 (nest)",
-          "group": "Complexity level"
-        }
-      },
       "stats": {
-        "Mean C_{j}": {
+        "meanConsistency": {
           "name": "Mean consistency",
           "unit": "score",
           "better": "higher"
         },
-        "NegAlign": {
+        "negAlign": {
           "name": "Negative alignment",
           "unit": "score",
           "better": "higher"
         },
-        "Weight": {
+        "weight": {
           "name": "Weight",
           "unit": "score"
         },
-        "Similarity": {
+        "similarity": {
           "name": "Similarity",
           "unit": "score",
           "better": "higher"
         },
-        "Uncertainty": {
+        "uncertainty": {
           "name": "Uncertainty",
           "unit": "score",
-          "better": "lower"
-        },
-        "SUCCESS": {
-          "name": "Successful generations",
-          "unit": "%",
-          "better": "higher"
-        },
-        "ALWAYS_PRESENT": {
-          "name": "Always-present failures",
-          "unit": "%",
-          "better": "lower"
-        },
-        "ALWAYS_ABSENT": {
-          "name": "Always-absent failures",
-          "unit": "score",
-          "better": "lower",
-          "note": "Rate from 0 to 1."
-        },
-        "PARTIAL_SUPPR": {
-          "name": "Partial suppression failures",
-          "unit": "%",
-          "better": "lower"
-        },
-        "WEAKLY_REND": {
-          "name": "Weakly rendered failures",
-          "unit": "%",
           "better": "lower"
         }
       }
@@ -298889,7 +299010,7 @@
       "feed": "https://arxiv.org/html/2611.07962",
       "terms": "arXiv permits these HTML paths under robots.txt; the paper tables are attributed to their authors.",
       "static": "paper",
-      "retrieved": "2026-11-22",
+      "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [
         "DeepSeek V4.1 Flash 0910"
@@ -298904,6 +299025,9 @@
         },
         "constructions": {
           "name": "Constructions"
+        },
+        "conjectures": {
+          "name": "Open conjectures"
         }
       }
     },
@@ -303051,7 +303175,7 @@
       "url": "https://www.traderank.ai/ai-trading-leaderboard",
       "feed": "https://www.traderank.ai/data/traderank-facts.json",
       "terms": "The site allows crawling. TradeRank licenses the downloadable dataset under CC BY 4.0 and asks users to credit TradeRank.ai. https://www.traderank.ai/llm-trading-benchmark",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 19,
       "unmatched": [
         "Aion 3.5",
@@ -303072,6 +303196,11 @@
           "name": "Maximum drawdown",
           "unit": "%",
           "better": "lower"
+        },
+        "winRate": {
+          "name": "Win rate",
+          "unit": "%",
+          "better": "higher"
         }
       }
     },
@@ -307398,7 +307527,7 @@
       "url": "https://userbench.vercel.app",
       "feed": "https://raw.githubusercontent.com/cooperbench/user.skill/benchmark-website/web/app/SolHighResults.tsx",
       "terms": "The authors link the public website source. The website has no robots.txt and the raw source permits this path.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
       "stats": {
@@ -307409,6 +307538,11 @@
         },
         "chance": {
           "name": "Chance baseline",
+          "unit": "%",
+          "better": "higher"
+        },
+        "macroF1": {
+          "name": "Macro F1",
           "unit": "%",
           "better": "higher"
         },
@@ -319385,8 +319519,8 @@
     "vlmsarebiased": {
       "url": "https://vlmsarebiased.github.io",
       "feed": "https://vlmsarebiased.github.io",
-      "terms": "The benchmark authors publish this public feed; their source license and site terms apply.",
-      "retrieved": "2026-11-23",
+      "terms": "The benchmark authors publish this public feed. Their source license and site terms apply.",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [
         "Gemini-2.5 Pro [snapshot unspecified]"
@@ -319421,23 +319555,23 @@
           "group": "Category"
         },
         "tokens_0": {
-          "name": "0 (no reasoning)",
+          "name": "0",
           "group": "Reasoning tokens"
         },
         "tokens_1_64": {
-          "name": "1–64",
+          "name": "1 to 64",
           "group": "Reasoning tokens"
         },
         "tokens_65_128": {
-          "name": "65–128",
+          "name": "65 to 128",
           "group": "Reasoning tokens"
         },
         "tokens_129_256": {
-          "name": "129–256",
+          "name": "129 to 256",
           "group": "Reasoning tokens"
         },
         "tokens_257_500": {
-          "name": "257–500",
+          "name": "257 to 500",
           "group": "Reasoning tokens"
         }
       },
@@ -319446,6 +319580,71 @@
           "name": "Original prompt accuracy",
           "unit": "%",
           "better": "higher"
+        },
+        "biasRate": {
+          "name": "Overall bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "animalBiasRate": {
+          "name": "Animal bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "logoBiasRate": {
+          "name": "Logo bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "flagBiasRate": {
+          "name": "Flag bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "chessBiasRate": {
+          "name": "Chess bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "boardBiasRate": {
+          "name": "Board bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "illusionBiasRate": {
+          "name": "Illusion bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "gridBiasRate": {
+          "name": "Grid bias rate",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tokens_0_bias": {
+          "name": "Bias rate at 0 reasoning tokens",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tokens_1_64_bias": {
+          "name": "Bias rate at 1 to 64 reasoning tokens",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tokens_65_128_bias": {
+          "name": "Bias rate at 65 to 128 reasoning tokens",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tokens_129_256_bias": {
+          "name": "Bias rate at 129 to 256 reasoning tokens",
+          "unit": "%",
+          "better": "lower"
+        },
+        "tokens_257_500_bias": {
+          "name": "Bias rate at 257 to 500 reasoning tokens",
+          "unit": "%",
+          "better": "lower"
         }
       }
     },
@@ -326647,7 +326846,8 @@
       "url": "https://github.com/showlab/WorldGUI",
       "feed": "https://arxiv.org/html/2502.08047",
       "terms": "The authors publish this source publicly. Robots rules permit this path. Source attribution and licensing apply.",
-      "retrieved": "2026-11-20",
+      "static": "paper",
+      "retrieved": "2026-11-24",
       "rows": 1,
       "unmatched": [
         "Agent S2 (backbone unspecified)",
@@ -326714,7 +326914,28 @@
           "group": "Augmentation type"
         }
       },
-      "static": "paper"
+      "stats": {
+        "addStepSuccesses": {
+          "name": "Add-step task successes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "trimStepSuccesses": {
+          "name": "Trim-step task successes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "adjustStepSuccesses": {
+          "name": "Adjust-step task successes",
+          "unit": "count",
+          "better": "higher"
+        },
+        "augmentedSuccesses": {
+          "name": "Augmented task successes",
+          "unit": "count",
+          "better": "higher"
+        }
+      }
     },
     "worldmodelbench": {
       "url": "https://worldmodelbench-team.github.io/leaderboard_data.json",
@@ -327860,7 +328081,7 @@
       "terms": "The paper uses CC BY 4.0. https://creativecommons.org/licenses/by/4.0/",
       "headline": "The paper reports no overall score, so this is the plain mean of its four macro-F1 scores.",
       "static": "paper",
-      "retrieved": "2026-11-20",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "M-BERT",
@@ -327878,6 +328099,30 @@
         },
         "crossTopic": {
           "name": "Cross-Topic"
+        },
+        "supervisedDE": {
+          "name": "Supervised German",
+          "group": "Language split"
+        },
+        "supervisedFR": {
+          "name": "Supervised French",
+          "group": "Language split"
+        },
+        "crossQuestionDE": {
+          "name": "Cross-Question German",
+          "group": "Language split"
+        },
+        "crossQuestionFR": {
+          "name": "Cross-Question French",
+          "group": "Language split"
+        },
+        "crossTopicDE": {
+          "name": "Cross-Topic German",
+          "group": "Language split"
+        },
+        "crossTopicFR": {
+          "name": "Cross-Topic French",
+          "group": "Language split"
         }
       }
     },
@@ -328038,44 +328283,44 @@
       "url": "https://offpolicyinc.com/work/xbench/app/",
       "feed": "https://media.offpolicyinc.com/xbench/data/labels-v3/public-summary.json?v=2026-09-28a",
       "terms": "Public maker-published results. Robots rules checked on 2026-11-08. Scores remain credited to the source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 17,
       "unmatched": [],
       "parts": {
         "dimensionIntelligence": {
-          "name": "intelligence",
+          "name": "Intelligence",
           "group": "Dimension"
         },
         "dimensionSpeed": {
-          "name": "speed",
+          "name": "Speed",
           "group": "Dimension"
         },
         "dimensionPrice": {
-          "name": "price",
+          "name": "Price",
           "group": "Dimension"
         },
         "dimensionSteerability": {
-          "name": "steerability",
+          "name": "Steerability",
           "group": "Dimension"
         },
         "dimensionPersonality": {
-          "name": "personality",
+          "name": "Personality",
           "group": "Dimension"
         },
         "dimensionOverall": {
-          "name": "overall",
+          "name": "Overall",
           "group": "Dimension"
         },
         "dimensionOther": {
-          "name": "other",
+          "name": "Other",
           "group": "Dimension"
         },
-        "week2": {
-          "name": "Sep 22 to 27",
+        "week1": {
+          "name": "Week 1",
           "group": "Week"
         },
-        "week1": {
-          "name": "Aug 29 to Sep 5",
+        "week2": {
+          "name": "Week 2",
           "group": "Week"
         }
       },
@@ -328136,146 +328381,6 @@
         },
         "endorsementsMixed": {
           "name": "Endorsement mixed votes",
-          "unit": "count"
-        },
-        "dimensionIntelligenceVotes": {
-          "name": "Intelligence votes",
-          "unit": "count"
-        },
-        "dimensionIntelligencePositive": {
-          "name": "Intelligence positive votes",
-          "unit": "count"
-        },
-        "dimensionIntelligenceNegative": {
-          "name": "Intelligence negative votes",
-          "unit": "count"
-        },
-        "dimensionIntelligenceMixed": {
-          "name": "Intelligence mixed votes",
-          "unit": "count"
-        },
-        "dimensionSpeedVotes": {
-          "name": "Speed votes",
-          "unit": "count"
-        },
-        "dimensionSpeedPositive": {
-          "name": "Speed positive votes",
-          "unit": "count"
-        },
-        "dimensionSpeedNegative": {
-          "name": "Speed negative votes",
-          "unit": "count"
-        },
-        "dimensionSpeedMixed": {
-          "name": "Speed mixed votes",
-          "unit": "count"
-        },
-        "dimensionPriceVotes": {
-          "name": "Price votes",
-          "unit": "count"
-        },
-        "dimensionPricePositive": {
-          "name": "Price positive votes",
-          "unit": "count"
-        },
-        "dimensionPriceNegative": {
-          "name": "Price negative votes",
-          "unit": "count"
-        },
-        "dimensionPriceMixed": {
-          "name": "Price mixed votes",
-          "unit": "count"
-        },
-        "dimensionSteerabilityVotes": {
-          "name": "Steerability votes",
-          "unit": "count"
-        },
-        "dimensionSteerabilityPositive": {
-          "name": "Steerability positive votes",
-          "unit": "count"
-        },
-        "dimensionSteerabilityNegative": {
-          "name": "Steerability negative votes",
-          "unit": "count"
-        },
-        "dimensionSteerabilityMixed": {
-          "name": "Steerability mixed votes",
-          "unit": "count"
-        },
-        "dimensionPersonalityVotes": {
-          "name": "Personality votes",
-          "unit": "count"
-        },
-        "dimensionPersonalityPositive": {
-          "name": "Personality positive votes",
-          "unit": "count"
-        },
-        "dimensionPersonalityNegative": {
-          "name": "Personality negative votes",
-          "unit": "count"
-        },
-        "dimensionPersonalityMixed": {
-          "name": "Personality mixed votes",
-          "unit": "count"
-        },
-        "dimensionOverallVotes": {
-          "name": "Overall votes",
-          "unit": "count"
-        },
-        "dimensionOverallPositive": {
-          "name": "Overall positive votes",
-          "unit": "count"
-        },
-        "dimensionOverallNegative": {
-          "name": "Overall negative votes",
-          "unit": "count"
-        },
-        "dimensionOtherVotes": {
-          "name": "Other votes",
-          "unit": "count"
-        },
-        "dimensionOtherPositive": {
-          "name": "Other positive votes",
-          "unit": "count"
-        },
-        "dimensionOtherNegative": {
-          "name": "Other negative votes",
-          "unit": "count"
-        },
-        "dimensionOtherMixed": {
-          "name": "Other mixed votes",
-          "unit": "count"
-        },
-        "week1Votes": {
-          "name": "Week 1 votes",
-          "unit": "count"
-        },
-        "week1Positive": {
-          "name": "Week 1 positive votes",
-          "unit": "count"
-        },
-        "week1Negative": {
-          "name": "Week 1 negative votes",
-          "unit": "count"
-        },
-        "week1Mixed": {
-          "name": "Week 1 mixed votes",
-          "unit": "count"
-        },
-        "week2Votes": {
-          "name": "Week 2 votes",
-          "unit": "count"
-        },
-        "week2Positive": {
-          "name": "Week 2 positive votes",
-          "unit": "count"
-        },
-        "week2Negative": {
-          "name": "Week 2 negative votes",
-          "unit": "count"
-        },
-        "week2Mixed": {
-          "name": "Week 2 mixed votes",
           "unit": "count"
         },
         "costMentions": {
@@ -329290,7 +329395,7 @@
       "url": "https://github.com/LuoweiZhou/YouCook2-Leaderboard",
       "feed": "https://raw.githubusercontent.com/LuoweiZhou/YouCook2-Leaderboard/master/README.md",
       "terms": "The authors publish these results in their public repository; the Almanac credits and links the original source.",
-      "retrieved": "2026-11-23",
+      "retrieved": "2026-11-24",
       "rows": 0,
       "unmatched": [
         "AT",
@@ -329314,6 +329419,46 @@
           "name": "METEOR score",
           "unit": "score",
           "better": "higher"
+        },
+        "macroBleu3": {
+          "name": "Macro BLEU-3 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "macroBleu4": {
+          "name": "Macro BLEU-4 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "macroMeteor": {
+          "name": "Macro METEOR score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "macroCIDEr": {
+          "name": "Macro CIDEr score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "paragraphBleu4": {
+          "name": "Paragraph BLEU-4 score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "paragraphMeteor": {
+          "name": "Paragraph METEOR score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "paragraphCIDEr": {
+          "name": "Paragraph CIDEr score",
+          "unit": "score",
+          "better": "higher"
+        },
+        "paragraphRepetition4": {
+          "name": "Paragraph 4-gram repetition",
+          "unit": "score",
+          "better": "lower"
         }
       }
     },
