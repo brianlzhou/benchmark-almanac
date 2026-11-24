@@ -11,12 +11,10 @@ const board: Leaderboard = {
   feed,
   terms: "The leaderboard gives no separate license for scores. The host has no robots.txt.",
   stats: {
-    N: { name: 'Items', unit: 'count' },
     accuracy: { name: 'Accuracy', unit: 'score', better: 'higher' },
-    pseudoalpha: { name: 'Pseudo-alpha', unit: 'score', better: 'higher', note: 'Agreement coefficient for the analogy test.' },
   },
   async fetch() {
-    return superlimRows('sweanalogy', 4);
+    return (await superlimRows('sweanalogy', 4)).map(({ metrics: { N: _, pseudoalpha: __, ...metrics } = {}, ...row }) => ({ ...row, metrics }));
   },
 };
 export default board;

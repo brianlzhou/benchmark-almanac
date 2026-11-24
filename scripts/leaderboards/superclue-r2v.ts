@@ -16,10 +16,9 @@ export default workbookBoard({
   minimum: 8,
   parts: ["基础能力", "应用能力"],
   settings: ["使用方式"],
-  metrics: {"completedQuestions": "完成题数", "questions": "总题数"},
+  metrics: {"completedQuestions": "完成题数"},
   stats: {
     completedQuestions: { name: 'Completed questions', unit: 'count' },
-    questions: { name: 'Questions', unit: 'count' },
   },
   details: [{"sheet": "基础能力", "model": "模型名称", "parts": ["物理真实性", "主体一致性", "画面流畅度", "场景一致性", "指令执行度", "运动表现性", "镜头控制能力"]}, {"sheet": "应用能力", "model": "模型名称", "parts": ["影视创作", "商业广告", "电商场景", "泛娱乐", "知识科普与教学", "创意特效制作"]}, {"sheet": "单图专项", "model": "模型名称", "parts": ["人物还原度"]}, {"sheet": "回复率统计", "model": "模型名称", "parts": ["生成视频数", "有效评测数", "评测完成率(%)"]}],
 });

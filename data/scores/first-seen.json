@@ -3254,6 +3254,7 @@
     ["vals-cyberbench-1-1","inkling-2-mini",null,null,"2026-11-23"],
     ["vals-cyberbench-1-1","inkling-2-small",null,null,"2026-11-09"],
     ["vals-cyberoffense","claude-opus-5-5",null,"Pi","2026-11-11"],
+    ["vals-cyberoffense","mistral-large-4",null,"Pi","2026-11-24"],
     ["vals-excel-modeling-benchmark-1-1","~Gemini 4 Hydrogen",null,null,"2026-11-12"],
     ["vals-excel-modeling-benchmark-1-1","~Muse Ember",null,null,"2026-11-10"],
     ["vals-excel-modeling-benchmark-1-1","gemini-4-neon",null,null,"2026-11-19"],

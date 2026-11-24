@@ -9,10 +9,10 @@ const board: Leaderboard = {
   benchmark: "swesat-synonyms-1-1",
   url: "https://lab.kb.se/leaderboard/results",
   feed,
-  stats: { N: { name: 'Items', unit: 'count' }, accuracy: { name: 'Accuracy', unit: 'score', better: 'higher' }, pseudoalpha: { name: 'Pseudo-alpha', unit: 'score', better: 'higher' } },
+  stats: { accuracy: { name: 'Accuracy', unit: 'score', better: 'higher' } },
   terms: "The SuperLim leaderboard lists no separate score reuse terms. The host has no robots.txt.",
   async fetch() {
-    return superlimRows('swesat-synonyms', 4);
+    return (await superlimRows('swesat-synonyms', 4)).map(({ metrics: { N: _, pseudoalpha: __, ...metrics } = {}, ...row }) => ({ ...row, metrics }));
   },
 };
 export default board;

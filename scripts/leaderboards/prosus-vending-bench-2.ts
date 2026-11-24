@@ -8,7 +8,6 @@ const feed = "https://raw.githubusercontent.com/ProsusAI/vending-bench/acb3bade0
 
 const board: Leaderboard = {
   benchmark: "prosus-vending-bench-2",
-  stats: { day: { name: 'Day', unit: 'count' }, finalBankEur: { name: 'Final bank in euros', unit: 'score', better: 'higher' } },
   url: "https://github.com/ProsusAI/vending-bench/blob/main/results/baselines/models-30d/README.md",
   feed,
   terms: "Prosus retains the five v2 scores and API costs under Apache 2.0. Only the historical table and chart remain from this batch. https://github.com/ProsusAI/vending-bench/blob/main/README.md The raw file host serves no robots.txt rules.",
@@ -32,10 +31,6 @@ const board: Leaderboard = {
       const row: LeaderboardRow = { model: r.Model, trials:1, setting:'30 days, seed 1', harness:'In-process MCP client', score: numeric("Score") };
       if (!row.model || !Number.isFinite(row.score)) throw new Error('Missing model or score');
       row.cost = numeric("API cost");
-      row.metrics = {};
-      for (const [key, column] of Object.entries({"day": "Day", "finalBankEur": "Final bank"})) {
-        if (r[column] && !/^(?:-|–|—|N\/A)$/i.test(r[column])) row.metrics[key] = numeric(column);
-      }
       rows.push(row);
     }
     if (rows.length < 5) throw new Error('Incomplete leaderboard');
