@@ -2100,6 +2100,8 @@
     ["hw-bench","claude-fable-5-2",null,null,"2026-11-14"],
     ["hw-bench","gpt-6-2-astra",null,null,"2026-11-18"],
     ["hw-bench","gpt-6-2-sol",null,null,"2026-11-18"],
+    ["hwe-bench-risc-v-2","gpt-6-2-astra",null,"Codex CLI","2026-11-24"],
+    ["hwe-bench-risc-v-2","gpt-6-2-sol",null,"Codex CLI","2026-11-24"],
     ["icelandic-wikiqa","~TrustLLM v2 8B midtrain-SFT","none",null,"2026-11-23"],
     ["icelandic-wikiqa","gemini-4-neon","high",null,"2026-11-23"],
     ["icelandic-wikiqa","gpt-6-2-astra","high",null,"2026-11-23"],

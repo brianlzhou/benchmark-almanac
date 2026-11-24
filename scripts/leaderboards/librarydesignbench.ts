@@ -1,19 +1,20 @@
 // LibraryDesignBench scores pass-rate squared times simplicity, averaged with equal task weights.
 // The source fractions become 0-100 scores. Cost is mean dollars to design one library task;
 // implementation-problem cost remains a separate metric. Production/no-library references are excluded.
+// Headline score interval (score.lo, score.hi) and standard error (score.se) come from site.json design.rows.
 import type { Leaderboard } from './types.ts';
 import { fetchJson } from '../lib/util.ts';
 
 const FEED = "https://ldbench.com/data/site.json";
 const board: Leaderboard = {
- benchmark: "librarydesignbench", parts: {
+ benchmark: "librarydesignbench", harnesses: 'system', reference: ['mini-SWE'], parts: {
   simplicity: { name: 'Simplicity', group: 'Dimension', note: 'Reported on a zero-to-one scale.' },
   passRate: { name: 'Pass rate', group: 'Dimension', unit: '%' },
 }, url: "https://ldbench.com", feed: FEED,
- terms: 'The benchmark authors publish this public feed; their source license and site terms apply.', stats:{problemCost:{name:'Implementation problem cost',unit:'usd',better:'lower'},scoreSE:{name:'Score standard error',unit:'score'},complete:{name:'Complete cells',unit:'count'},total:{name:'Total cells',unit:'count'}},
+ terms: 'The benchmark authors publish this public feed; their source license and site terms apply.', stats:{problemCost:{name:'Implementation problem cost',unit:'usd',better:'lower'},complete:{name:'Complete cells',unit:'count'}},
  chart:{title:'Library quality vs. design cost',x:{key:'cost',label:'Mean design cost per library',unit:'$',better:'lower'},y:{key:'score',label:'Library quality',unit:'score',better:'higher'}},
  async fetch() {
-const d=await fetchJson<any>(FEED);return d.design.rows.map((r:any)=>({model:r.model==='DeepSeek V4 Pro'?r.model+' [snapshot unspecified]':r.model,harness:r.harness,score:r.score.mean*100,cost:r.libraryCost?.mean,setting:'Library design; equal task weights',metrics:{cost:r.libraryCost?.mean,problemCost:r.problemCost?.mean,scoreLow:r.score.lo*100,scoreHigh:r.score.hi*100,scoreSE:r.score.se*100,passRate:r.passRate.mean*100,simplicity:r.simplicity.mean,complete:r.cells.complete,total:r.cells.total}}));
+const d=await fetchJson<any>(FEED);return d.design.rows.map((r:any)=>({model:r.model==='DeepSeek V4 Pro'?r.model+' [snapshot unspecified]':r.model,harness:r.harness,score:r.score.mean*100,low:r.score.lo*100,high:r.score.hi*100,cost:r.libraryCost?.mean,setting:'Library design, equal task weights',metrics:{problemCost:r.problemCost?.mean,stderr:r.score.se*100,passRate:r.passRate.mean*100,simplicity:r.simplicity.mean,complete:r.cells.complete}}));
  },
 };
 export default board;

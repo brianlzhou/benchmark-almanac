@@ -1293,7 +1293,7 @@
     "hungarian-national-high-school-exam": ["Exam Score","GSM8k","MATH","Model"],
     "hw-bench": ["#","Model"],
     "hwe-bench-risc-v": ["#","Area (LUT4)","Best","Fmax (MHz)","Mean ± std","Model","Reps","Δ%"],
-    "hwe-bench-risc-v-2": ["Area (LUT4)","Artix-7 200T","CoreMark iter/s","Fmax (MHz)","Fmax ratio","Gowin GW2A-18","Held-out iter/s","Rank interval","System","System (agent CLI)","V1","V2","geomean","n","rank95","system"],
+    "hwe-bench-risc-v-2": ["Area (LUT4)","Artix-7 200T","CoreMark iter/s","Fmax (MHz)","Fmax ratio","Gowin GW2A-18","Held-out iter/s","Rank interval","System","System (agent CLI)","V1","V2"],
     "hwe-bench-rtl-repair": ["agent","cases","costs","effort","group","id","name","overall","precision","resolved.caliptra","resolved.cva6","resolved.ibex","resolved.opentitan","resolved.rocketchip","resolved.xiangshan","vendor"],
     "hwe-bench-rtl-repair-1-1": ["agent","cases","costs","effort","group","id","name","overall","precision","resolved.caliptra","resolved.cva6","resolved.ibex","resolved.opentitan","resolved.rocketchip","resolved.xiangshan","tokens.cached","tokens.input","tokens.output","vendor"],
     "hx2dx-arena": ["Access","Built-in thinking","Correct","DeepSeek V4.1 Flash","GLM 5.3 Flash","GPT Luna 6","GPT-6 Luna","Gemini 3.5 Flash Lite","Gemma 3 27B IT","Incorrect","Llama 4 Scout","Ministral 8B","Model","Multimodal","Parameters","Partially correct"],

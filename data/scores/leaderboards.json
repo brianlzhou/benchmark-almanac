@@ -122463,6 +122463,7 @@
         "codex-gpt-6-1-sol",
         "codex-gpt-6-astra"
       ],
+      "harnesses": "system",
       "parts": {
         "audio": {
           "name": "Audio",
@@ -122520,18 +122521,14 @@
           "better": "higher"
         },
         "boot": {
-          "name": "boot",
-          "group": "Section"
+          "name": "Boot",
+          "group": "Section",
+          "better": "higher"
         }
       },
       "stats": {
         "latency": {
-          "name": "Latency",
-          "unit": "seconds",
-          "better": "lower"
-        },
-        "time": {
-          "name": "Grading time",
+          "name": "Wall-clock time",
           "unit": "seconds",
           "better": "lower"
         },
@@ -128871,16 +128868,7 @@
       "retrieved": "2026-11-24",
       "rows": 9,
       "unmatched": [],
-      "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
-        "completed": {
-          "name": "Completed tasks",
-          "unit": "count"
-        }
-      }
+      "harnesses": "system"
     },
     "graft": {
       "url": "https://arxiv.org/html/2606.27413",
@@ -139133,12 +139121,13 @@
       }
     },
     "hwe-bench-risc-v-2": {
-      "url": "https://hwebench.com/v2.html",
-      "feed": "https://raw.githubusercontent.com/FeSens/auto-arch-tournament/v2/research/runs/EXP-2026-09-28-v2-main/analysis_final.json",
+      "url": "https://hwebench.com/",
+      "feed": "https://hwebench.com/",
       "terms": "The author repository uses Apache License 2.0. https://raw.githubusercontent.com/FeSens/auto-arch-tournament/main/LICENSE The project site has no robots.txt.",
-      "retrieved": "2026-11-23",
-      "rows": 6,
+      "retrieved": "2026-11-24",
+      "rows": 8,
       "unmatched": [],
+      "harnesses": "system",
       "stats": {
         "coreMark": {
           "name": "CoreMark score",
@@ -139155,10 +139144,6 @@
           "unit": "count",
           "better": "lower"
         }
-      },
-      "failed": {
-        "date": "2026-11-24",
-        "error": "Missing hardware ranking"
       }
     },
     "hwe-bench-rtl-repair": {
@@ -139169,6 +139154,7 @@
       "rows": 15,
       "unmatched": [],
       "costPer": "run",
+      "harnesses": "system",
       "parts": {
         "opentitan": {
           "name": "OpenTitan"
@@ -168784,6 +168770,10 @@
           "better": "higher"
         }
       },
+      "reference": [
+        "mini-SWE"
+      ],
+      "harnesses": "system",
       "parts": {
         "simplicity": {
           "name": "Simplicity",
@@ -168802,16 +168792,8 @@
           "unit": "usd",
           "better": "lower"
         },
-        "scoreSE": {
-          "name": "Score standard error",
-          "unit": "score"
-        },
         "complete": {
           "name": "Complete cells",
-          "unit": "count"
-        },
-        "total": {
-          "name": "Total cells",
           "unit": "count"
         }
       }
@@ -181956,6 +181938,10 @@
         "Qwen 3.8 (variant unspecified)",
         "Sol (variant unspecified)"
       ],
+      "reference": [
+        "In-house harness"
+      ],
+      "harnesses": "system",
       "parts": {
         "numericalAccuracy": {
           "name": "Numerical accuracy",
@@ -181965,10 +181951,6 @@
       "stats": {
         "passed": {
           "name": "Passed tasks",
-          "unit": "count"
-        },
-        "tasks": {
-          "name": "Tasks",
           "unit": "count"
         },
         "accuracyStandardError": {
@@ -260509,15 +260491,11 @@
           "better": "higher"
         }
       },
+      "reference": [
+        "mini-swe-agent"
+      ],
+      "harnesses": "system",
       "stats": {
-        "trials": {
-          "name": "Trials",
-          "unit": "count"
-        },
-        "scored": {
-          "name": "Scored cases",
-          "unit": "count"
-        },
         "testsOnly": {
           "name": "Tests-only pass rate",
           "unit": "%",
@@ -260638,9 +260616,10 @@
       "retrieved": "2026-11-24",
       "rows": 8,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "APIkeysenvironments": {
-          "name": "API keys environments",
+          "name": "API keys & environments",
           "unit": "%"
         },
         "Multiregionsweep": {
@@ -294857,7 +294836,7 @@
       "chart": {
         "title": "Pass@1 versus output tokens",
         "x": {
-          "key": "outputTokens",
+          "key": "tokens",
           "label": "Mean output tokens per task",
           "better": "lower",
           "log": true
@@ -294869,6 +294848,7 @@
           "better": "higher"
         }
       },
+      "harnesses": "system",
       "parts": {
         "public": {
           "name": "Public",
@@ -294885,10 +294865,6 @@
         "pass2Pass": {
           "name": "Pass to pass",
           "group": "Outcome"
-        },
-        "overall": {
-          "name": "Overall",
-          "group": "Split"
         },
         "issue": {
           "name": "Issue driven",
@@ -315322,6 +315298,7 @@
       "retrieved": "2026-11-24",
       "rows": 11,
       "unmatched": [],
+      "harnesses": "system",
       "parts": {
         "text": {
           "name": "Text",
@@ -316081,10 +316058,6 @@
         }
       },
       "stats": {
-        "tasks": {
-          "name": "Tasks",
-          "unit": "count"
-        },
         "fails": {
           "name": "Failed tasks",
           "unit": "count"
@@ -316097,23 +316070,10 @@
           "name": "Average tool calls",
           "unit": "count"
         },
-        "avg_in_tok": {
-          "name": "Average input tokens",
-          "unit": "tokens"
-        },
-        "avg_out_tok": {
-          "name": "Average output tokens",
-          "unit": "tokens"
-        },
         "avg_wall_min": {
           "name": "Average wall time",
           "unit": "minutes",
           "better": "lower"
-        },
-        "total": {
-          "name": "Total score",
-          "unit": "%",
-          "better": "higher"
         },
         "avg_rounds_total": {
           "name": "Average rounds (Total)",
@@ -316125,10 +316085,6 @@
         },
         "inputTokens": {
           "name": "Average input tokens (Total)",
-          "unit": "tokens"
-        },
-        "outputTokens": {
-          "name": "Average output tokens (Total)",
           "unit": "tokens"
         },
         "avg_wall_min_total": {
@@ -316265,21 +316221,6 @@
           "name": "Failed tasks (Continuation)",
           "unit": "count"
         },
-        "rule": {
-          "name": "Rule score",
-          "unit": "%",
-          "better": "higher"
-        },
-        "vlm": {
-          "name": "VLM judge score",
-          "unit": "%",
-          "better": "higher"
-        },
-        "cost_total": {
-          "name": "Average cost per task (reported)",
-          "unit": "usd",
-          "better": "lower"
-        },
         "cost_sum_total": {
           "name": "Total cost",
           "unit": "usd",
@@ -316332,11 +316273,6 @@
         },
         "cost_sum_continuation": {
           "name": "Total cost (Continuation)",
-          "unit": "usd",
-          "better": "lower"
-        },
-        "cost": {
-          "name": "Average cost per task",
           "unit": "usd",
           "better": "lower"
         }
@@ -323136,6 +323072,7 @@
         "GUI-Owl-1.5-32B",
         "Seed 2.1 turbo"
       ],
+      "harnesses": "system",
       "parts": {
         "games": {
           "name": "Games",
